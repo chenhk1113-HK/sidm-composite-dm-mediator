@@ -1,6 +1,6 @@
 # sidm-composite-dm-mediator
 
-> ⚠️ **Disclaimer:** This is a personal project out of curiosity, made using **MiniMax M3** as the coder, **Doubao** and **Qwen 3.8 Max** as reviewers.
+> ⚠️ **Disclaimer:** It is a personal project out of curiosity, made using Hermes with **MiniMax M3** as the coder, **Doubao** and **Qwen 3.8 Max** as reviewers.
 
 **Bayesian constraint pipeline for self-interacting dark matter (SIDM) with a composite-DM microphysics extension and a secluded-mediator detection feasibility survey.**
 
