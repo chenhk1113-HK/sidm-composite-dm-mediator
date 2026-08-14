@@ -1,0 +1,37 @@
+{
+  "test": "T25_cvir_marginalization",
+  "direction": "T2.5: Marginalize over c_vir scatter in SASHIMI forward model",
+  "halo": {
+    "M_vir_Msun": 1000000000000.0,
+    "z_form": 2.0,
+    "V_max_kms": 200.0,
+    "c_vir_median": 3.4673685045253166
+  },
+  "fits": {
+    "A_fixed_cvir": {
+      "label": "fixed_cvir",
+      "log_Z": -0.03594941076076636,
+      "MAP": [
+        2.465361332495563,
+        -0.8866479549477706
+      ],
+      "wall_seconds": 0.1957530975341797
+    },
+    "B_marginalized_cvir": {
+      "label": "marginalized_cvir",
+      "log_Z": -0.14932597908574458,
+      "MAP": [
+        2.272268514195823,
+        -1.1404463096767414
+      ],
+      "wall_seconds": 0.347027063369751
+    }
+  },
+  "comparison": {
+    "delta_log_Z": -0.11337656832497822,
+    "delta_log_sm_MAP": -0.19309281829974,
+    "delta_a_MAP": -0.25379835472897083,
+    "verdict": "MINOR (0.05-0.2 dex shift)"
+  },
+  "interpretation": "Marginalizing over c_vir (5-point quadrature, 0.2 dex prior):\n  \u0394 log \u03c3/m = -0.193 (MINOR (0.05-0.2 dex shift))\n  \u0394 log Z   = -0.113\nIf the verdict is NEGLIGIBLE or MINOR, the c_vir assumption is not a major source of systematic error.\nIf MODERATE or MAJOR, marginalization is recommended for production fits."
+}

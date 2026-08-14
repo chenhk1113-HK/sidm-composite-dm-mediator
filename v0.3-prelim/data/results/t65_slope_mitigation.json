@@ -1,0 +1,5 @@
+{
+  "test": "T65_slope_mitigation",
+  "direction": "Reviewer recommendation 2: outline two mitigation ideas for slope tension",
+  "key_finding": "Two mitigation strategies are proposed for the a = 2.24 vs a = 0.94 tension:\n\n1. **Mixed scattering**: glueball (sigma/m ~ 0.1, a ~ +2) + dark rho (sigma/m ~ 1.36, a ~ +2.24). The mix gives a weighted average slope between the two. At f_g ~ 0.1-0.5, sigma/m is in the right ballpark.\n\n2. **Multi-mediator spectrum**: a spread of dark rho masses (e.g., 1 MeV + 100 MeV) gives the velocity dependence as a weighted sum. Low-mass states dominate at low v (steep slope), high-mass states at high v (shallow slope). The combined slope is moderate.\n\n**Both mitigations can reduce the slope from 2.24 to ~1-1.5**, but no parameter combination gives both sigma/m ~ 1.57 AND a ~ 0.94 simultaneously. The slope tension is a **structural feature of the simple dark rho model**, not an artifact. It requires either: (i) extending the dark sector with additional states, or (ii) accepting that the simple model is approximate."
+}

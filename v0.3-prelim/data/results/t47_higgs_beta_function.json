@@ -1,0 +1,17 @@
+{
+  "m_H_GeV": 125.25,
+  "lambda_H_at_MZ": 0.12938347743146458,
+  "g_1_MZ": 0.4046635010146286,
+  "g_2_MZ": 0.5237548677545416,
+  "y_t_MZ": 0.9918793765177882,
+  "alpha_EM_inv": 127.9,
+  "M_Pl_GeV": 1.2209e+19,
+  "sm_only_at_M_Pl": -0.15100175491284082,
+  "delta_lambda_H_kinetic_mixing": 2.1615670839923506e-134,
+  "delta_lambda_H_higgs_portal": 0.0007684541274910285,
+  "delta_lambda_H_dark_yukawa": 0.012295266039856456,
+  "delta_lambda_H_total": 0.013063720167347484,
+  "sm_lambda_H_at_M_Pl": -0.15100175491284082,
+  "relative_correction": 0.08651369763807015,
+  "verdict": "SIGNIFICANT: mediator could affect SM vacuum stability"
+}

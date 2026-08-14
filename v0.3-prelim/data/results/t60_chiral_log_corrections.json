@@ -1,0 +1,5 @@
+{
+  "test": "T60_chiral_log_corrections",
+  "direction": "User ship direction (a): chiral log corrections to PCAC at low Lambda_dark",
+  "key_finding": "The PCAC relation m_pi^2 = 2 m_q * Lambda_dark / N_dark receives a chiral log correction delta_cl = (1/N_f) * log(Lambda_dark / m_pi). For N_f = 2 and Lambda_dark ~ 100 MeV, the correction is ~ 30-50%, increasing m_pi (and hence m_rho) by 15-25%.\n\nFor T54's best-fit (Lambda_dark = 0.15 MeV, m_q = 21 MeV), the correction is 0 (m_pi is essentially at the LO value, since Lambda_dark << m_pi). **The T54 vs lattice discrepancy is NOT resolved by chiral logs**.\n\nThe real issue is that T54's MAP has Lambda_dark ~ 0.15 MeV, which is an unusual scale (well below QCD). The PCAC formula assumes the chiral log correction is small, which is not the case here. The proper treatment would require a non-perturbative chiral Lagrangian with explicit Lambda_dark."
+}

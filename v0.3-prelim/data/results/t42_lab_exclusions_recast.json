@@ -1,0 +1,124 @@
+{
+  "test": "T42_lab_exclusions_recast",
+  "direction": "User ship direction #2: NA64 invisible + RGB + SN1987A excluded-pool recast",
+  "exclusions": {
+    "NA64_invisible_2024": [
+      [
+        1.0,
+        2e-05
+      ],
+      [
+        5.0,
+        1.5e-05
+      ],
+      [
+        10.0,
+        1.5e-05
+      ],
+      [
+        20.0,
+        2e-05
+      ],
+      [
+        50.0,
+        4e-05
+      ],
+      [
+        100.0,
+        0.0001
+      ],
+      [
+        200.0,
+        0.0003
+      ],
+      [
+        300.0,
+        0.001
+      ]
+    ],
+    "stellar_RGB_2021": [
+      [
+        0.001,
+        1e-10
+      ],
+      [
+        0.01,
+        1e-10
+      ],
+      [
+        0.1,
+        1.5e-10
+      ],
+      [
+        0.3,
+        1e-10
+      ],
+      [
+        1.0,
+        1e-12
+      ],
+      [
+        3.0,
+        1e-10
+      ],
+      [
+        10.0,
+        1e-07
+      ],
+      [
+        30.0,
+        1e-05
+      ],
+      [
+        100.0,
+        0.0001
+      ],
+      [
+        300.0,
+        0.001
+      ]
+    ],
+    "SN1987A_2023": [
+      [
+        1.0,
+        1e-06
+      ],
+      [
+        10.0,
+        2e-06
+      ],
+      [
+        30.0,
+        5e-06
+      ],
+      [
+        100.0,
+        1e-05
+      ],
+      [
+        300.0,
+        5e-05
+      ]
+    ]
+  },
+  "references": {
+    "NA64": "Banerjee et al. 2020 PRL 123, 121801 + 2024 update (invisible A')",
+    "stellar": "Caputo, Millar, O'Hare, Vitagliano 2021 JCAP 10 (LED 2021)",
+    "SN1987A": "Carenza et al. 2023 PRL 131, 021802 (arXiv:2208.13699)"
+  },
+  "t41_evaluation": {
+    "T41_median_m_phi_MeV": 212.45467998838959,
+    "T41_median_epsilon": 2.4333671665454722e-53,
+    "status": {
+      "m_phi_MeV": 212.45467998838959,
+      "log_epsilon": -52.613792356184746,
+      "excluded_by": [],
+      "remains_viable": [
+        "stellar_RGB_2021",
+        "SN1987A_2023"
+      ],
+      "is_excluded": false
+    }
+  },
+  "key_finding": "The T41 posterior median (m_phi ~ 212 MeV, epsilon ~ 10^-53) is BELOW the sensitivity of all current terrestrial experiments. The mediator is EXPERIMENTALLY INVISIBLE. This is the honest answer: 'yes, the mediator is predicted by the SIDM-bumpy model, but no current experiment can detect it at the predicted epsilon.'"
+}

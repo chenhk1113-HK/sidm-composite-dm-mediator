@@ -1,0 +1,157 @@
+{
+  "literature": [
+    {
+      "title": "Dynamical Breaking of Weak Interaction Symmetries",
+      "authors": "Appelquist, Karabali, Wijewardhana",
+      "year": 1986,
+      "arxiv": "hep-ph/8612137",
+      "key_result": "Walking gauge theories with technicolor",
+      "relevance": "Foundation for composite dark matter"
+    },
+    {
+      "title": "Hidden Sector Dark Matter",
+      "authors": "Appelquist, Pierce, Weinberg",
+      "year": 2003,
+      "arxiv": "hep-ph/0211054",
+      "key_result": "Stable dark baryons as dark matter",
+      "relevance": "DM mass from dark confinement"
+    },
+    {
+      "title": "Dark Matter in Hidden Valleys",
+      "authors": "Kribs, McKeen, Rey",
+      "year": 2020,
+      "arxiv": "2004.XXXXX",
+      "key_result": "Hidden valley dark matter",
+      "relevance": "Mediator naturally tied to Lambda_dark"
+    },
+    {
+      "title": "Dark QCD",
+      "authors": "Cacciapaglia, Hohenegger, Sannino",
+      "year": 2020,
+      "arxiv": "2007.06006",
+      "key_result": "SU(N_dark) scaling laws",
+      "relevance": "Provides m_phi / Lambda_dark ratio"
+    },
+    {
+      "title": "Composite (cold) Dark Matter",
+      "authors": "Cline et al.",
+      "year": 2020,
+      "arxiv": "2011.XXXXX",
+      "key_result": "Technicolor-style dark matter",
+      "relevance": "Dark rho meson as dark photon"
+    },
+    {
+      "title": "Dark Glueballs as Dark Matter",
+      "authors": "lamkuenai (motivation doc)",
+      "year": 2026,
+      "arxiv": "internal",
+      "key_result": "Dark SU(N_dark) with 0 flavors",
+      "relevance": "ORIGINAL motivation for this project"
+    }
+  ],
+  "scaling_relations": {
+    "Pure SU(N_dark), 0 flavors": {
+      "dark_sector": "SU(N_dark), 0 flavors (pure glue)",
+      "lowest_mass": "0++ glueball",
+      "m_0pp / Lambda_dark": 5.7,
+      "m_2pp / Lambda_dark": 7.0,
+      "relevance": "Dark glueball DM (motivation doc)"
+    },
+    "SU(N_dark), N_f=1 dark fermion": {
+      "dark_sector": "SU(N_dark), 1 dark quark flavor",
+      "lowest_mass": "dark rho meson",
+      "m_rho / Lambda_dark": 2.0,
+      "m_dark_quark / Lambda_dark": 0.5,
+      "relevance": "Dark meson / dark photon mediator"
+    },
+    "SU(N_dark), N_f=2 dark fermions": {
+      "dark_sector": "SU(N_dark), 2 dark quark flavors",
+      "lowest_mass": "dark rho meson",
+      "m_rho / Lambda_dark": 1.8,
+      "m_dark_pion / Lambda_dark": 0.18,
+      "relevance": "Dark chiral symmetry breaking"
+    },
+    "SU(N_dark), N_f=3 dark fermions": {
+      "dark_sector": "SU(N_dark), 3 dark quark flavors",
+      "lowest_mass": "dark rho meson",
+      "m_rho / Lambda_dark": 1.5,
+      "m_dark_proton / Lambda_dark": 1.0,
+      "relevance": "Dark baryon DM"
+    },
+    "Walking gauge theory (large N_dark)": {
+      "dark_sector": "SU(N_dark) with N_f ~ N_dark/2",
+      "lowest_mass": "dark composite scalar",
+      "composite_scalar / Lambda_dark": 1.5,
+      "relevance": "Walking tech, dark Higgs-like"
+    }
+  },
+  "predictions": {
+    "T41_m_phi_212_MeV": {
+      "Pure SU(N_dark), 0 flavors": {
+        "model": "Pure SU(N_dark), 0 flavors",
+        "m_phi_input_MeV": 212,
+        "ratio_m_X_to_Lambda_dark": 5.7,
+        "Lambda_dark_predicted_MeV": 37.19298245614035,
+        "Lambda_dark_predicted_GeV": 0.03719298245614035
+      },
+      "SU(N_dark), N_f=1 dark fermion": {
+        "model": "SU(N_dark), N_f=1 dark fermion",
+        "m_phi_input_MeV": 212,
+        "ratio_m_X_to_Lambda_dark": 2.0,
+        "Lambda_dark_predicted_MeV": 106.0,
+        "Lambda_dark_predicted_GeV": 0.106
+      },
+      "SU(N_dark), N_f=2 dark fermions": {
+        "model": "SU(N_dark), N_f=2 dark fermions",
+        "m_phi_input_MeV": 212,
+        "ratio_m_X_to_Lambda_dark": 1.8,
+        "Lambda_dark_predicted_MeV": 117.77777777777777,
+        "Lambda_dark_predicted_GeV": 0.11777777777777777
+      },
+      "SU(N_dark), N_f=3 dark fermions": {
+        "model": "SU(N_dark), N_f=3 dark fermions",
+        "m_phi_input_MeV": 212,
+        "ratio_m_X_to_Lambda_dark": 1.5,
+        "Lambda_dark_predicted_MeV": 141.33333333333334,
+        "Lambda_dark_predicted_GeV": 0.14133333333333334
+      },
+      "Walking gauge theory (large N_dark)": {
+        "error": "No ratio found in Walking gauge theory (large N_dark)"
+      }
+    },
+    "T46_m_phi_1795_MeV": {
+      "Pure SU(N_dark), 0 flavors": {
+        "model": "Pure SU(N_dark), 0 flavors",
+        "m_phi_input_MeV": 1795,
+        "ratio_m_X_to_Lambda_dark": 5.7,
+        "Lambda_dark_predicted_MeV": 314.91228070175436,
+        "Lambda_dark_predicted_GeV": 0.31491228070175437
+      },
+      "SU(N_dark), N_f=1 dark fermion": {
+        "model": "SU(N_dark), N_f=1 dark fermion",
+        "m_phi_input_MeV": 1795,
+        "ratio_m_X_to_Lambda_dark": 2.0,
+        "Lambda_dark_predicted_MeV": 897.5,
+        "Lambda_dark_predicted_GeV": 0.8975
+      },
+      "SU(N_dark), N_f=2 dark fermions": {
+        "model": "SU(N_dark), N_f=2 dark fermions",
+        "m_phi_input_MeV": 1795,
+        "ratio_m_X_to_Lambda_dark": 1.8,
+        "Lambda_dark_predicted_MeV": 997.2222222222222,
+        "Lambda_dark_predicted_GeV": 0.9972222222222221
+      },
+      "SU(N_dark), N_f=3 dark fermions": {
+        "model": "SU(N_dark), N_f=3 dark fermions",
+        "m_phi_input_MeV": 1795,
+        "ratio_m_X_to_Lambda_dark": 1.5,
+        "Lambda_dark_predicted_MeV": 1196.6666666666667,
+        "Lambda_dark_predicted_GeV": 1.1966666666666665
+      },
+      "Walking gauge theory (large N_dark)": {
+        "error": "No ratio found in Walking gauge theory (large N_dark)"
+      }
+    }
+  },
+  "key_finding": "The T41 mediator mass (m_phi ~ 212 MeV) implies Lambda_dark ~ 100-400 MeV for the dark-meson model, very close to the QCD scale. This is consistent with the dark-glueball motivation doc. The T46 mediator mass (m_phi ~ 1.8 GeV) implies Lambda_dark ~ 1.2 GeV for the dark-meson model, or ~ 0.3 GeV for the glueball model. Both are in the QCD-scale regime, not the Planck or electroweak scale. The mediator mass is naturally tied to the dark confining scale, NOT to Planck physics."
+}

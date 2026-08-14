@@ -1,0 +1,29 @@
+{
+  "test": "T28_published_style_dsph",
+  "direction": "Tier 3 of D7 plan: Replace Gaussian dSph placeholder with published-style non-Gaussian",
+  "fits": {
+    "A_original_gaussian": {
+      "label": "A_original_gaussian",
+      "log_Z": 0.9109244075175318,
+      "MAP": [
+        0.6757241232624214,
+        0.9394298396837928
+      ],
+      "wall_seconds": 0.6604588031768799
+    },
+    "B_published_style": {
+      "label": "B_published_style",
+      "log_Z": 1.6089707966797675,
+      "MAP": [
+        0.6770007180845199,
+        1.4215869410699384
+      ],
+      "wall_seconds": 0.6345598697662354
+    }
+  },
+  "comparison": {
+    "delta_log_Z": 0.6980463891622357,
+    "delta_log_sm_MAP": 0.0012765948220985202,
+    "interpretation": "B - A shows how much the headline shifts when the dSph channel uses a more realistic non-Gaussian posterior shape. If delta_log_sm is small (<0.3 dex), the Gaussian proxy was adequate. If large (>0.5 dex), the published-shape posterior matters and full posterior-chain ingestion is needed for publication."
+  }
+}

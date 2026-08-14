@@ -1,0 +1,23 @@
+{
+  "galaxy": "KK98-251",
+  "profile": "NFW",
+  "n_pts": 15,
+  "log_Z": -11.563435155098373,
+  "log_Z_err": 0.18078109065062467,
+  "chi2_at_MAP": 14.470111167208067,
+  "chi2_reduced_at_MAP": 1.1130854744006204,
+  "theta_MAP": {
+    "log_param1": 4.761847447047118,
+    "log_param2": 1.9373982464106412
+  },
+  "posterior_summary": {
+    "log_param1_median": 4.645138145188551,
+    "log_param2_median": 1.7551599100055424,
+    "log_param1_std": 1.2961106636397044,
+    "log_param2_std": 0.9131163712175968
+  },
+  "n_samples": 1741,
+  "wall_seconds": 0.9779233932495117,
+  "nlive": 200,
+  "dlogz_target": 0.1
+}

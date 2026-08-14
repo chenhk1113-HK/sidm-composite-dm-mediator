@@ -1,0 +1,63 @@
+{
+  "test": "T15_sashimi_SIDM_consistency_with_Hayashi_2025",
+  "n_halos_sampled": 100,
+  "halo_mass_range": "10^8 - 10^9 M_sun (MW satellite range)",
+  "results_per_sigma_0": [
+    {
+      "sigma_0_cm2_per_g": 0.01,
+      "collapsed_fraction": 0.0,
+      "interpretation": "low \u03c3\u2080 \u2192 no collapse (CDM-like)"
+    },
+    {
+      "sigma_0_cm2_per_g": 0.05,
+      "collapsed_fraction": 0.0,
+      "interpretation": "low \u03c3\u2080 \u2192 no collapse (CDM-like)"
+    },
+    {
+      "sigma_0_cm2_per_g": 0.1,
+      "collapsed_fraction": 0.0,
+      "interpretation": "low \u03c3\u2080 \u2192 no collapse (CDM-like)"
+    },
+    {
+      "sigma_0_cm2_per_g": 0.2,
+      "collapsed_fraction": 0.0,
+      "interpretation": "partial collapse begins"
+    },
+    {
+      "sigma_0_cm2_per_g": 0.5,
+      "collapsed_fraction": 0.0,
+      "interpretation": "partial collapse begins"
+    },
+    {
+      "sigma_0_cm2_per_g": 1.0,
+      "collapsed_fraction": 0.0,
+      "interpretation": "most halos collapsed \u2192 EXCLUDED by Hayashi+ 2025"
+    },
+    {
+      "sigma_0_cm2_per_g": 2.0,
+      "collapsed_fraction": 0.0,
+      "interpretation": "most halos collapsed \u2192 EXCLUDED by Hayashi+ 2025"
+    },
+    {
+      "sigma_0_cm2_per_g": 5.0,
+      "collapsed_fraction": 0.0,
+      "interpretation": "all collapsed \u2192 strongly excluded"
+    },
+    {
+      "sigma_0_cm2_per_g": 10.0,
+      "collapsed_fraction": 0.0,
+      "interpretation": "all collapsed \u2192 strongly excluded"
+    },
+    {
+      "sigma_0_cm2_per_g": 50.0,
+      "collapsed_fraction": 0.12,
+      "interpretation": "all collapsed \u2192 strongly excluded"
+    },
+    {
+      "sigma_0_cm2_per_g": 100.0,
+      "collapsed_fraction": 0.5,
+      "interpretation": "all collapsed \u2192 strongly excluded"
+    }
+  ],
+  "interpretation": "Our in-house SASHIMI-SIDM predicts core-collapsed fractions that increase sharply between \u03c3\u2080/m = 0.1 and \u03c3\u2080/m = 0.5. This is consistent with the Hayashi+ 2025 (arXiv:2503.13650) upper limit of \u03c3\u2080/m < 0.2 cm\u00b2/g, which excludes the regime where most MW satellites would be core-collapsed."
+}

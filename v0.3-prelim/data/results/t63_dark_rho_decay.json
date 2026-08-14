@@ -1,0 +1,5 @@
+{
+  "test": "T63_dark_rho_decay",
+  "direction": "User ship direction (d): dark rho decay modes (visible vs invisible)",
+  "key_finding": "The dark rho decay modes depend on the kinetic mixing epsilon:\n\n1. **At T54 posterior epsilon ~ 1e-57**: the rho is essentially stable to SM decays (visible BR ~ 0). The dark rho is metastable on cosmological timescales (tau >> age of universe).\n\n2. **At epsilon ~ 1e-5** (typical lab search): the rho decays primarily to invisible (dark pions) if m_pi < m_rho/2. Visible BR is suppressed.\n\n3. **Threshold effects**: if m_rho > 2m_e, the visible decay opens up. For m_rho < 1 MeV (T54 MAP), the decay to e+e- is forbidden by kinematics.\n\n**Implication**: the dark rho at T54 parameters is INVISIBLE in the sense that it cannot decay to SM particles. It only decays within the dark sector. This makes it effectively a dark matter particle itself, not a decay mediator."
+}

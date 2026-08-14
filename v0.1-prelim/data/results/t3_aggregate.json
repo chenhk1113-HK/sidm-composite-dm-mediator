@@ -1,0 +1,38 @@
+{
+  "n_galaxies": 175,
+  "joint_log_Z_NFW": -98660.8953251866,
+  "joint_log_Z_Burkert": -89724.90751529814,
+  "joint_delta_log_Z_Burkert_minus_NFW": 8935.987809888466,
+  "joint_Bayes_factor_Burkert_over_NFW_log10": 3880.850196189285,
+  "joint_BMA_weights": {
+    "NFW": 0.0,
+    "Burkert": 1.0
+  },
+  "median_per_galaxy_delta_log_Z": 1.5646393232830178,
+  "n_galaxies_prefer_Burkert": 132,
+  "n_galaxies_prefer_NFW": 43,
+  "n_galaxies_tied": 0,
+  "per_galaxy_evidence_categories_Jeffreys": {
+    "strong_NFW": 10,
+    "moderate_NFW": 12,
+    "weak_NFW": 21,
+    "tied": 0,
+    "weak_Burkert": 50,
+    "moderate_Burkert": 20,
+    "strong_Burkert": 62
+  },
+  "BIC_weights_approximate": {
+    "NFW": 1.1479101803008407e-122,
+    "Burkert": 1.0
+  },
+  "BIC_NFW_total": 7036.615782791623,
+  "BIC_Burkert_total": 6475.060906210437,
+  "interpretation": {
+    "joint_log_Z_diff > 0": "Burkert preferred joint (by 8936 log Z)",
+    "BMA_weight_Burkert > 0.95": "decisive evidence",
+    "median_per_galaxy > 2": "majority of galaxies individually prefer Burkert",
+    "weak_Burkert + moderate_Burkert": "70 galaxies with mild-to-moderate preference",
+    "strong_Burkert": "62 galaxies with strong preference for cored profile",
+    "strong_NFW": "10 galaxies with strong preference for cuspy profile"
+  }
+}

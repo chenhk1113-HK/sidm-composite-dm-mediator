@@ -1,0 +1,68 @@
+# --- OS / editor junk ---
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+*~
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+*.egg
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# --- Build / dist ---
+build/
+dist/
+*.whl
+
+# --- Project-specific: outputs/ is shipping-only noise ---
+# outputs/ contains one-shot Telegram-shipped PDFs/ZIPs from each release
+# round (D2 through D15-CORRECTED3). These are reproducible from the
+# code in v0.*-prelim/code/, so they don't belong in version control.
+# The build_*.py / append_*.py / apply_*.py scaffolding scripts that
+# generated them are also regenerated on demand, so ignore them too.
+# If you actually want to ship the latest PDFs, regenerate via the
+# build_<round>_pdf.py scripts (they live in the same dir, gitignored).
+outputs/
+
+# --- WSL / sync artefacts ---
+/home/lamkuenai/dm-sidm-pipeline/    # legacy WSL mirror (renamed)
+
+# --- Large data files (not source) ---
+*.h5
+*.hdf5
+*.fits
+*.npz
+*.npy
+# Keep .json (used for results) but exclude raw data dumps:
+data/raw/
+v0.*-prelim/data/raw/
+v0.*-prelim/data/external_data/lz_2024/raw/
+
+# --- Logs ---
+*.log
+logs/
+v0.*-prelim/logs/
+
+# --- Backups (lock skill discipline) ---
+*.bak
+*.bak.*
+*_backup.*
+*_v0.*_backup.*
+
+# --- IDE / tool configs (per-project, not source) ---
+.idea/
+.vscode/
+*.iml

@@ -1,0 +1,5 @@
+{
+  "test": "T69_velocity_scaling_cross_check",
+  "direction": "Reviewer recommendation 1: cross-check Drobczyk velocity scaling vs data",
+  "key_finding": "Both Drobczyk's benchmark (m_chi=600 GeV, m_phi=15 MeV, y_chi=0.30) and our T54 (m_chi=34 GeV, m_rho=3.55 MeV, g_chi=1.51) are in the CLASSICAL regime (beta >> 1). Both predict sigma ~ 1/v^2 with a ~ +2.\n\n**Conclusion**: the slope tension (model a ~ +2 vs data a ~ +0.94) is a UNIVERSAL limitation of MeV-mediator SIDM, not specific to our dark rho construction. **Both models face the same multi-channel data challenge**.\n\n**Implication for the paper**: frame this as an OPEN PROBLEM for all MeV-mediator SIDM frameworks. The velocity scaling is a structural feature of classical Yukawa scattering, not a model bug."
+}

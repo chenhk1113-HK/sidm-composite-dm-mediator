@@ -1,0 +1,56 @@
+{
+  "test": "T21_real_kiss_sidm_gravothermal",
+  "direction": "TIER 1 STEP 6: Re-run T17 with REAL KISS-SIDM gravothermal penalty",
+  "data_source": "/mnt/c/Users/lamkuenai/projects/dm-sidm-pipeline/v0.3-prelim/data/results/real_kiss_sidm_aggregated.json",
+  "data_summary": {
+    "n_snapshots": 4781,
+    "time_range_Gyr": [
+      0.0,
+      400.32618205711424
+    ],
+    "n_bins": 21,
+    "halo": {
+      "M_halo_Msun": 1000000000.0,
+      "rho_s_Msun_kpc3": 27300000.0,
+      "r_s_kpc": 1.18,
+      "sigma_m_cm2_per_g": 50.0
+    }
+  },
+  "r_core_real_at_t10Gyr_over_rs": 0.0085,
+  "T21_A_with_kiss_correction": {
+    "log_Z": -0.6600051081776398,
+    "MAP": [
+      0.23624428142163678,
+      1.6816887586902434
+    ],
+    "wall": 1.19500732421875
+  },
+  "T21_B_no_kiss_correction": {
+    "log_Z": -0.5632029042417601,
+    "MAP": [
+      0.1361050990207775,
+      0.2945032712661293
+    ],
+    "wall": 1.1175849437713623
+  },
+  "t17_placeholder_summary": {
+    "log_Z_with_correction": -1.31,
+    "log_Z_no_correction": -1.22,
+    "MAP_with_correction": [
+      0.0,
+      1.62
+    ],
+    "MAP_no_correction": [
+      0.04,
+      0.61
+    ]
+  },
+  "t8_baseline": {
+    "log_Z": -3.683,
+    "MAP": [
+      0.0,
+      -0.118
+    ]
+  },
+  "verdict": "With REAL KISS-SIDM gravothermal penalty:\n  T21 A (with IMFP correction): log Z = -0.660, MAP log sigma_m = 0.236, a = 1.682\n  T21 B (no correction): log Z = -0.563, MAP log sigma_m = 0.136, a = 0.295\n  T17 placeholder: log Z = -1.22 (no correction), MAP log sigma_m = 0.04, a = 0.61\nCompare to T21 to see if the placeholder gravothermal model is accurate."
+}

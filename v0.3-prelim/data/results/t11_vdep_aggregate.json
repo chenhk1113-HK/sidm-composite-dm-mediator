@@ -1,0 +1,12 @@
+{
+  "test": "T11_aggregate_vdep",
+  "n_galaxies_fitted": 60,
+  "n_galaxies_filtered_n_pts": 115,
+  "sigma_m_MAP_median": 95.23271080067867,
+  "sigma_m_MAP_25": 11.836279428927536,
+  "sigma_m_MAP_75": 216.39683462197257,
+  "sigma_m_MAP_fraction_below_1": 0.1,
+  "sigma_m_MAP_fraction_above_10": 0.75,
+  "a_MAP_median": -0.6482319324669336,
+  "a_MAP_fraction_positive": 0.3
+}

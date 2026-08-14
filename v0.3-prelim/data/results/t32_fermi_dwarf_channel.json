@@ -1,0 +1,31 @@
+{
+  "test": "T32_fermi_dwarf_channel",
+  "direction": "T3.3 of R2 review: Fermi gamma-ray dwarf galaxy channel",
+  "data_source": "4FGL-DR4 14-year data (Abdollahi+ 2020, 2024) + Hooper & Linden 2024 limits",
+  "n_dwarf_galaxies": 21,
+  "fits": {
+    "A_no_fermi": {
+      "label": "A_no_fermi",
+      "log_Z": 0.9927533903604645,
+      "MAP": [
+        0.05276344710695735,
+        0.7369884119675643
+      ],
+      "wall_seconds": 0.6383922100067139
+    },
+    "B_with_fermi": {
+      "label": "B_with_fermi",
+      "log_Z": -1577.2149262880368,
+      "MAP": [
+        -2.9979651185572473,
+        1.826027852831198
+      ],
+      "wall_seconds": 1.7775471210479736
+    }
+  },
+  "comparison": {
+    "delta_log_Z": -1578.2076796783974,
+    "delta_log_sm_MAP": -3.0507285656642047
+  },
+  "interpretation": "Adding the Fermi dwarf channel (orthogonal physics to direct detection) tests whether the headline \u03c3/m is robust. If \u0394 log \u03c3/m is small (<0.3 dex), the headline is robust to this new constraint. If large, the Fermi channel is providing substantial new information."
+}

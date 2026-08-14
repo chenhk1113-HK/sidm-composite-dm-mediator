@@ -1,0 +1,22 @@
+{
+  "galaxy": "DDO170",
+  "profile": "NFW_core",
+  "n_params": 3,
+  "log_Z": -15.975177026962402,
+  "log_Z_err": 0.2414772581272938,
+  "chi2_reduced_at_MAP": 3.368281294643265,
+  "theta_MAP": {
+    "log_rho_s": 5.869386307687221,
+    "log_r_s": 1.2971007068416518,
+    "log_r_core": -0.0318502765627211
+  },
+  "r_core_at_MAP_kpc": 0.9292867040403777,
+  "posterior_summary": {
+    "log_r_core_median": -0.10648330900006542,
+    "log_r_core_std": 0.704728894273425
+  },
+  "wall_seconds": 2.3888397216796875,
+  "nlive": 200,
+  "dlogz_target": 0.1,
+  "test": "T6_NFW_core"
+}

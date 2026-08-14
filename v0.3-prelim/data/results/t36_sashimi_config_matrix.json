@@ -1,0 +1,182 @@
+{
+  "test": "T36_sashimi_config_matrix",
+  "direction": "D11 deliverable (Direction A): 3 concentration relations x 1 v_eff = 3 SASHIMI configurations to close the Hayashi+ 2025 250-500x gap.",
+  "hayashi_2025_target_boundary_cm2_per_g": 0.2,
+  "t15_baseline_crossing_cm2_per_g": "50-100 (T15 default A1)",
+  "configs_run": [
+    {
+      "config_label": "A1_dutton_maccio_2014",
+      "v_eff_prescription": "B1_v_eff_Vmax",
+      "median_c_vir": 10.17002800352029,
+      "median_M_vir_Msun": 281552888.961392,
+      "sigma_0_sweep": [
+        {
+          "sigma_0_cm2_per_g": 0.01,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 0.05,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 0.1,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 0.2,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 0.5,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 1.0,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 2.0,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 5.0,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 10.0,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 50.0,
+          "collapsed_fraction": 0.12
+        },
+        {
+          "sigma_0_cm2_per_g": 100.0,
+          "collapsed_fraction": 0.5
+        }
+      ],
+      "crossing_sigma_0_cm2_per_g": 100.0,
+      "wall_seconds": 0.44806551933288574,
+      "ratio_to_hayashi": 500.0,
+      "gap_in_dex": 2.6989700043360187
+    },
+    {
+      "config_label": "A2_hayashi_2025",
+      "v_eff_prescription": "B1_v_eff_Vmax",
+      "median_c_vir": 60.77160193725349,
+      "median_M_vir_Msun": 281552888.961392,
+      "sigma_0_sweep": [
+        {
+          "sigma_0_cm2_per_g": 0.01,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 0.05,
+          "collapsed_fraction": 0.01
+        },
+        {
+          "sigma_0_cm2_per_g": 0.1,
+          "collapsed_fraction": 0.03
+        },
+        {
+          "sigma_0_cm2_per_g": 0.2,
+          "collapsed_fraction": 0.1
+        },
+        {
+          "sigma_0_cm2_per_g": 0.5,
+          "collapsed_fraction": 0.41
+        },
+        {
+          "sigma_0_cm2_per_g": 1.0,
+          "collapsed_fraction": 0.69
+        },
+        {
+          "sigma_0_cm2_per_g": 2.0,
+          "collapsed_fraction": 0.93
+        },
+        {
+          "sigma_0_cm2_per_g": 5.0,
+          "collapsed_fraction": 1.0
+        },
+        {
+          "sigma_0_cm2_per_g": 10.0,
+          "collapsed_fraction": 1.0
+        },
+        {
+          "sigma_0_cm2_per_g": 50.0,
+          "collapsed_fraction": 1.0
+        },
+        {
+          "sigma_0_cm2_per_g": 100.0,
+          "collapsed_fraction": 1.0
+        }
+      ],
+      "crossing_sigma_0_cm2_per_g": 0.6247836354113759,
+      "wall_seconds": 0.37411046028137207,
+      "ratio_to_hayashi": 3.1239181770568796,
+      "gap_in_dex": 0.49469965013546013
+    },
+    {
+      "config_label": "A3_ludlow_2016",
+      "v_eff_prescription": "B1_v_eff_Vmax",
+      "median_c_vir": 8.656097683379489,
+      "median_M_vir_Msun": 281552888.961392,
+      "sigma_0_sweep": [
+        {
+          "sigma_0_cm2_per_g": 0.01,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 0.05,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 0.1,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 0.2,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 0.5,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 1.0,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 2.0,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 5.0,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 10.0,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 50.0,
+          "collapsed_fraction": 0.07
+        },
+        {
+          "sigma_0_cm2_per_g": 100.0,
+          "collapsed_fraction": 0.23
+        }
+      ],
+      "crossing_sigma_0_cm2_per_g": null,
+      "wall_seconds": 0.36759495735168457,
+      "ratio_to_hayashi": null,
+      "gap_in_dex": null
+    }
+  ],
+  "best_config": "A2_hayashi_2025",
+  "best_crossing_sigma_0_cm2_per_g": 0.6247836354113759,
+  "best_ratio_to_hayashi": 3.1239181770568796,
+  "best_gap_in_dex": 0.49469965013546013,
+  "verdict": "PARTIAL CLOSURE: best config is within an order of magnitude of Hayashi+ 2025. The remaining gap is N-body calibration drift between Yang+ 2024 parametric fits and SASHIMI's full simulation-calibrated version.",
+  "interpretation": "T36 explored 3 concentration-mass relations \u00d7 1 v_eff prescription to close the 250-500x gap between T15's default SASHIMI config (collapse transition at \u03c3_0/m ~ 50-100) and the Hayashi+ 2025 upper limit (\u03c3_0/m < 0.2 cm\u00b2/g). The best configuration A2_hayashi_2025 gives crossing at \u03c3_0/m = 0.625 cm\u00b2/g, which is 3.1239181770568796\u00d7 the Hayashi+ 2025 boundary."
+}

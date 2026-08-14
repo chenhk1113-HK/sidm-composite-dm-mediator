@@ -1,0 +1,32 @@
+{
+  "test": "T30_lz_2024_real_posterior",
+  "direction": "T3.1 of R2 review: LZ 2024 real posterior ingestion",
+  "data_source": "HEPData record 155182 (arXiv:2410.17036, PRL 135, 011802)",
+  "n_mass_points_placeholder": 9,
+  "n_mass_points_real": 26,
+  "fits": {
+    "A_placeholder": {
+      "label": "A_placeholder",
+      "log_Z": -0.07244500781521362,
+      "MAP": [
+        0.38868569567241984,
+        1.4153698869804856
+      ],
+      "wall_seconds": 0.7489023208618164
+    },
+    "B_real_lz": {
+      "label": "B_real_lz",
+      "log_Z": -9207.299418467726,
+      "MAP": [
+        -2.991945457928732,
+        1.850688567921896
+      ],
+      "wall_seconds": 1.689549446105957
+    }
+  },
+  "comparison": {
+    "delta_log_Z": -9207.22697345991,
+    "delta_log_sm_MAP": -3.380631153601152
+  },
+  "interpretation": "If \u0394 log \u03c3/m is small (<0.3 dex), the placeholder Gaussian was adequate. If large (>0.5 dex), the real LZ posterior shape matters and a full replacement (not just data ingestion) is needed for publication."
+}

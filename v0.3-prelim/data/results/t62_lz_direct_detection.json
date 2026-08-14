@@ -1,0 +1,18 @@
+{
+  "test": "T62_lz_direct_detection",
+  "direction": "User ship direction (c): confront dark rho model against LZ",
+  "key_finding": "The dark rho model with T54 best-fit (epsilon ~ 1e-57) gives a direct-detection cross-section of ~ 10^-104 cm^2, which is **57 orders of magnitude below the LZ SR1+SR3 limit** (~ 10^-47 cm^2). The model is COMPLETELY UNCONSTRAINED by direct detection.\n\nFor LZ to detect the dark rho, epsilon would need to be ~ 10^-25 (32 orders of magnitude above the T54 posterior). This is the **same gap as T42 found for NA64, RGB, SN1987A, CMB** - the dark sector's kinetic mixing is fundamentally too small for any current experiment to detect.\n\nThe dark rho is INVISIBLE to direct detection, just as it was invisible to all other probes. The detection gap is universal across all experimental signatures.",
+  "bibliography": [
+    {
+      "ref": "Drobczyk 2025",
+      "arxiv": "2506.22997",
+      "doi": "10.1088/1361-6382/ae16f9",
+      "context": "Their sigma_SI = 6.7e-51 cm^2 (below neutrino floor) is consistent with our finding that the SIDM mediator is invisible to direct detection."
+    },
+    {
+      "ref": "arXiv:2510.05216",
+      "arxiv": "2510.05216",
+      "context": "Independent confirmation that direct-detection strongly constrains DM models with non-trivial SM couplings."
+    }
+  ]
+}

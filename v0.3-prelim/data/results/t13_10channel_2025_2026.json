@@ -1,0 +1,69 @@
+{
+  "test": "T13_10channel_with_2025_2026_constraints",
+  "res_5channel": {
+    "label": "5-channel",
+    "log_Z": -3.071639307301564,
+    "median_log_sigma_m_0": -0.1313968720130989,
+    "median_sigma_m_0": 0.7389297091240323,
+    "p16_sigma_m_0": 0.032640235199055775,
+    "p84_sigma_m_0": 2.7506866479018512,
+    "median_a": 0.9771005049460568,
+    "p16_a": -0.05814089625545575,
+    "p84_a": 1.630235621705965,
+    "wall_seconds": 1.1679766178131104
+  },
+  "res_6channel": {
+    "label": "6-channel (with lens subhalo)",
+    "log_Z": -4.683465414514921,
+    "median_log_sigma_m_0": -0.015751986624710668,
+    "median_sigma_m_0": 0.9643795964899256,
+    "p16_sigma_m_0": 0.3383102697058238,
+    "p84_sigma_m_0": 5.602933576277828,
+    "median_a": 1.4059907719416627,
+    "p16_a": 0.34336664292678815,
+    "p84_a": 1.8381654377571246,
+    "wall_seconds": 1.628368616104126
+  },
+  "res_8channel": {
+    "label": "8-channel (+MW sat + cluster)",
+    "log_Z": -5.7714637307974135,
+    "median_log_sigma_m_0": -0.06015701231066428,
+    "median_sigma_m_0": 0.8706487637398249,
+    "p16_sigma_m_0": 0.2591195946486519,
+    "p84_sigma_m_0": 4.739232539522526,
+    "median_a": 1.4262987163405094,
+    "p16_a": 0.3829108267126183,
+    "p84_a": 1.8433517427768908,
+    "wall_seconds": 1.7711560726165771
+  },
+  "res_9channel": {
+    "label": "9-channel (+Draco dSph)",
+    "log_Z": -7.183806740948584,
+    "median_log_sigma_m_0": -0.1408637985431116,
+    "median_sigma_m_0": 0.7229965109228361,
+    "p16_sigma_m_0": 0.2428164326606701,
+    "p84_sigma_m_0": 4.791931349508753,
+    "median_a": 1.4520748743333152,
+    "p16_a": 0.3564049287885015,
+    "p84_a": 1.8537953833646625,
+    "wall_seconds": 1.8859198093414307
+  },
+  "res_10channel": {
+    "label": "10-channel (+radio relic)",
+    "log_Z": -7.252440604449199,
+    "median_log_sigma_m_0": -0.1189314466648379,
+    "median_sigma_m_0": 0.7604463038304171,
+    "p16_sigma_m_0": 0.25882128758917045,
+    "p84_sigma_m_0": 4.607192334491335,
+    "median_a": 1.4454782061931994,
+    "p16_a": 0.40840048835880377,
+    "p84_a": 1.8568279134867562,
+    "wall_seconds": 1.8634123802185059
+  },
+  "channel_6_citation": "arXiv:2510.11006 (Yang, Yang, Yu et al. 2026, PRL)",
+  "channel_7_citation": "arXiv:2503.13650 (Hayashi et al. 2025)",
+  "channel_8_citation": "arXiv:2508.20179 (O'Donnell et al. 2026, PRD 113, 063531)",
+  "channel_9_citation": "Read+ 2018 (Draco dSph, 99% CL upper limit)",
+  "channel_10_citation": "arXiv:2605.00093 (Lee et al. 2026, 11-cluster radio relic, 68% upper limit)",
+  "interpretation": "10-channel fit combines 5 original channels + 5 new peer-reviewed constraints from 2018-2026 literature. Channels 6+7+8+9+10 bracket \u03c3/m across 5 orders of magnitude in velocity scale (10-2000 km/s). Channel 6 (lens subhalo) gives \u03c3/m_eff ~ 30-100 cm\u00b2/g at v=10 km/s (lower bound on \u03c3/m at subhalo scale). Channels 7+9 give upper bounds at MW satellite scale (Hayashi+ 2025 + Read+ 2018 Draco). Channels 8+10 give upper bounds at cluster scale from two independent methods (O'Donnell+ 2026 PRD + Lee+ 2026 arXiv)."
+}

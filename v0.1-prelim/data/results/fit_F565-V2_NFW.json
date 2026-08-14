@@ -1,0 +1,23 @@
+{
+  "galaxy": "F565-V2",
+  "profile": "NFW",
+  "n_pts": 7,
+  "log_Z": -6.137401292844761,
+  "log_Z_err": 0.18168527228009718,
+  "chi2_at_MAP": 3.554449542379345,
+  "chi2_reduced_at_MAP": 0.710889908475869,
+  "theta_MAP": {
+    "log_param1": 6.121300972666174,
+    "log_param2": 1.3576866558072922
+  },
+  "posterior_summary": {
+    "log_param1_median": 5.509285045082468,
+    "log_param2_median": 1.6982476414561454,
+    "log_param1_std": 1.377603342110695,
+    "log_param2_std": 0.8911007270002232
+  },
+  "n_samples": 1719,
+  "wall_seconds": 1.0070064067840576,
+  "nlive": 200,
+  "dlogz_target": 0.1
+}

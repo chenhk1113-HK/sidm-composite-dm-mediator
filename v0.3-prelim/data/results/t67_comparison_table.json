@@ -1,0 +1,38 @@
+{
+  "test": "T67_comparison_table",
+  "direction": "Reviewer recommendation 4: comparison table T39 vs composite model",
+  "table": {
+    "T39 MAP (data anchor)": {
+      "sigma/m_cm2_per_g": 1.57,
+      "a": 0.94,
+      "epsilon": "~10^-50 (theoretical floor)",
+      "sigma_DM_n_cm2": "<~10^-46 (LZ SR1+SR3)",
+      "m_DM_GeV": "not determined by T39",
+      "notes": "Multi-channel joint fit (dSph, UFD, Bullet, LZ, Fermi, SPARC)"
+    },
+    "T39 posterior MAP": {
+      "sigma/m_cm2_per_g": "~1.57",
+      "a": "+0.94",
+      "epsilon": 7.706480696755564e-57,
+      "sigma_DM_n_cm2": "<~10^-46 (LZ SR1+SR3)",
+      "m_DM_GeV": 20.343536758057034,
+      "notes": "T39 MAP physical: m_phi ~ 720 MeV, m_chi ~ 20 GeV, eps ~ 10^-56"
+    },
+    "T54 MAP (composite model)": {
+      "sigma/m_cm2_per_g": 1.3562402153946698,
+      "a": 2.235453847540698,
+      "epsilon": 2.3193028526736171e-57,
+      "sigma_DM_n_cm2": "~10^-104 (T62)",
+      "m_DM_GeV": 34.162280701588195,
+      "notes": "PCAC-derived m_rho = 3.55 MeV"
+    },
+    "tension": {
+      "sigma/m": "0.86x (within 13%)",
+      "a": "2.38x (TOO STEEP)",
+      "epsilon": "0.30x (lower than T39 by ~1 dex)",
+      "sigma_DM_n": "2.00e-85x (far below LZ)",
+      "notes": "Tension in velocity slope a (model a=2.24 vs data a=0.94). Magnitude match within 13%."
+    }
+  },
+  "formatted_table_markdown": "\n| Quantity | T39 (data anchor) | T54 (composite) | Ratio | Status |\n|---|---|---|---|---|\n| sigma/m (cm^2/g) | 1.57 | 1.36 | 0.87 | \u2713 within 13% |\n| a (velocity slope) | 0.94 | 2.24 | 2.38 | \u26a0\ufe0f too steep |\n| log10(epsilon) | -56 | -57 | -1 | \u2713 similar |\n| m_DM (GeV) | 20 | 34 | 1.7 | \u2713 similar |\n| m_phi (MeV) | 720 | 3.55 | 0.005 | \u26a0\ufe0f very different |\n| sigma_DM_n (cm^2) | <10^-46 | ~10^-104 | 10^-58 | \u2713 invisible |\n\n## Status legend\n\n- \u2713 matches within uncertainty\n- \u26a0\ufe0f measurable tension\n\n## What the comparison reveals\n\n1. **Magnitude match (sigma/m)**: T54's sigma/m = 1.36 is within 13% of T39's\n   1.57 \u2014 the strongest agreement between model and data.\n\n2. **Slope tension (a)**: T54's a = 2.24 is too steep compared to T39's\n   a = 0.94. This is the **fundamental velocity-dependence tension**.\n\n3. **Coupling match (epsilon)**: Both T39 and T54 prefer epsilon ~ 10^-50.\n   The model is consistent with the SM decoupling finding.\n\n4. **Mass scale (m_DM)**: T54's m_DM = 34 GeV is in the right ballpark\n   vs T39's 20 GeV.\n\n5. **Mediator mass (m_phi)**: T54's m_rho = 3.55 MeV is much lighter than\n   T39's m_phi = 720 MeV. This reflects the **PCAC vs free-mass assumption**:\n   T54 ties the mediator mass to dark confinement, T39 leaves it free.\n\n6. **Direct detection (sigma_DM_n)**: Both are invisible, T54 by 58 orders\n   of magnitude more (because epsilon is smaller).\n"
+}

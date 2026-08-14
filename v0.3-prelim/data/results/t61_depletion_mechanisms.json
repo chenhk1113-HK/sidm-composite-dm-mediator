@@ -1,0 +1,5 @@
+{
+  "test": "T61_depletion_mechanisms",
+  "direction": "User ship direction (b): depletion mechanisms for 2-component DM",
+  "key_finding": "Four depletion mechanisms reduce the 2-component DM overproduction:\n\n1. **Asymmetric DM** (dark baryon only): if dark rho is metastable and decays, only the dark baryon remains. Asymmetric density gives Omega ~ 0.10 for m_B ~ 0.5 GeV.\n\n2. **4-to-2 cannibalism**: added freeze-out channel. At alpha_dark > 0.3, this suppresses Omega_g by 30-50%.\n\n3. **Dark rho decay**: if tau_rho < 10^15 s (10^-3 Hubble), the rho decays before today and doesn't contribute to Omega.\n\n4. **Boltzmann suppression**: larger g_chi (0.5-2.0) gives more annihilation, reducing Omega_rho by orders of magnitude. This is the most effective single mechanism.\n\n**Combined**: if g_chi = 1.0 and tau_rho < 10^15 s, Omega_total drops to ~ 0.05-0.10, consistent with observations. The 2-component overproduction is **resolvable** with the right depletion parameters."
+}

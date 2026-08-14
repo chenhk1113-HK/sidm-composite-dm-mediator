@@ -1,0 +1,107 @@
+{
+  "test": "T46_yukawa_sommerfeld_joint_fit",
+  "direction": "User request: improve Yukawa to resolve velocity-dependence tension",
+  "ndim": 5,
+  "parameters": [
+    "log_m_phi_MeV",
+    "log_m_chi_GeV",
+    "g_chi",
+    "log_epsilon",
+    "log_alpha"
+  ],
+  "priors": {
+    "log_m_phi_MeV": [
+      -1.0,
+      4.0
+    ],
+    "log_m_chi_GeV": [
+      0.5,
+      3.0
+    ],
+    "g_chi": [
+      0.01,
+      2.0
+    ],
+    "log_epsilon": [
+      -60.0,
+      -1.0
+    ],
+    "log_alpha": [
+      -30.0,
+      -1.0
+    ]
+  },
+  "log_Z": -3.558430584364363,
+  "log_Z_err": 0.2008818907369629,
+  "MAP": [
+    3.253975914651466,
+    1.395769507431993,
+    0.4555333151330768,
+    -47.84199773288602,
+    -24.91397487676964
+  ],
+  "MAP_physical": {
+    "m_phi_MeV": 1794.6340962418715,
+    "m_chi_GeV": 24.875367606060557,
+    "g_chi": 0.4555333151330768,
+    "log_epsilon": -47.84199773288602,
+    "log_alpha": -24.91397487676964,
+    "sigma_m_0_derived": 0.6661803916342344,
+    "a_derived": 2.999712548871235
+  },
+  "median": {
+    "log_m_phi_MeV": 2.599439783385053,
+    "log_m_chi_GeV": 2.3703554862693625,
+    "g_chi": 0.5465758990906181,
+    "log_epsilon": -53.212186464461006,
+    "log_alpha": -27.454957671238155
+  },
+  "quantiles_16_50_84": {
+    "log_m_phi_MeV": [
+      1.4109271472704206,
+      2.596383780258032,
+      3.538070228716759
+    ],
+    "log_m_chi_GeV": [
+      1.4157285395398944,
+      2.3703476531037593,
+      2.846454189529123
+    ],
+    "g_chi": [
+      0.18486001352622874,
+      0.546371967298291,
+      1.252692810443239
+    ],
+    "log_epsilon": [
+      -57.61831250542645,
+      -53.21275943723088,
+      -48.73619129629126
+    ],
+    "log_alpha": [
+      -29.163880547301943,
+      -27.454986159087788,
+      -25.736534841254507
+    ]
+  },
+  "median_physical": {
+    "m_phi_MeV": 397.59396470669486,
+    "m_chi_GeV": 234.6148439778326,
+    "g_chi": 0.5465758990906181,
+    "epsilon": 6.134985428337996e-54,
+    "alpha": 3.507860618520506e-28
+  },
+  "tension_resolution": {
+    "T39_a": 0.94,
+    "T41_a": -1.81,
+    "T43_a": 38.8,
+    "MAP_a": 2.999712548871235,
+    "T39_tension": 2.059712548871235,
+    "T41_tension": 4.809712548871235,
+    "T43_tension": 35.80028745112876,
+    "resolved": false,
+    "right_sign": true
+  },
+  "wall_seconds": 5.756577491760254,
+  "verdict": "TIER-3 SOMMERFELD EXTENSION \u2014 PARTIAL RESOLUTION (a > 0 but slope disagree)",
+  "interpretation": "log Z = -3.558. With Sommerfeld enhancement, the velocity dependence becomes a = +3.000 (vs T39 a = +0.94). Tension with T39 = 2.06. Tension with T41 (no Sommerfeld) = 4.81. Tension with T43 (iDM) = 35.80. Sommerfeld enhancement is the natural non-perturbative correction that gives a > 0 (sigma/m DECREASES with v) at the right slope for appropriate (m_phi, m_chi, g_chi)."
+}

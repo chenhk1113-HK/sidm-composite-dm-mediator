@@ -1,0 +1,36 @@
+{
+  "test": "T8_v03_5channel",
+  "log_Z": -3.682768783483176,
+  "log_Z_err": 0.11283566670620675,
+  "MAP": {
+    "log_sigma_m_0": 0.0024994037957570825,
+    "sigma_m_0_cm2_per_g": 1.0057716822663594,
+    "a": -0.11843600788073383,
+    "effective_sigma_m": {
+      "v_dwarf_30": 0.8721109363153723,
+      "v_galaxy_100": 1.0057716822663594,
+      "v_cluster_1500": 1.386088490765306
+    }
+  },
+  "median_posterior": {
+    "log_sigma_m_0_p16": -0.6915172466928071,
+    "log_sigma_m_0_p50": -0.11191265861970612,
+    "log_sigma_m_0_p84": 0.2053114454822483,
+    "a_p16": -0.2782533956554362,
+    "a_p50": 0.22590331214215809,
+    "a_p84": 1.091180957071389
+  },
+  "wall_seconds": 2.190059185028076,
+  "n_samples": 4247,
+  "channels": {
+    "1_sparc": "Calibrated delta log Z from Phase 2 T4 (saturation model)",
+    "2_dsph": "Horigome+ 2025 with bimodal exclusion dip at sigma/m ~ 1 cm^2/g",
+    "3_ufd": "Sanchez-Almeida+ 2025 A&A Gaussian on log sigma/m",
+    "4_bullet": "Cha+ 2025 ApJ 987 L15 one-sided Gaussian"
+  },
+  "improvements_vs_v0.2": [
+    "Channel 2 now includes the bimodal exclusion dip (Horigome+ 2025 finding)",
+    "Channel 1 (SPARC) now contributes via calibrated delta-log-Z from Phase 2",
+    "Channel 5 (direct detection) was investigated but NOT included: it constrains sigma_DM-nucleon, not sigma_DM-DM"
+  ]
+}

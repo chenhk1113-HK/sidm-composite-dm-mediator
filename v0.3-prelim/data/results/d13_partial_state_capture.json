@@ -1,0 +1,19 @@
+{
+  "test": "D13_partial_state_capture",
+  "t36_sashimi_config_matrix": {
+    "status": "COMPLETED",
+    "best_config": "A2_hayashi_2025",
+    "best_crossing_sigma_0_cm2_per_g": 0.6247836354113759,
+    "best_ratio_to_hayashi": 3.1239181770568796,
+    "best_gap_in_dex": 0.49469965013546013,
+    "verdict": "PARTIAL CLOSURE: best config is within an order of magnitude of Hayashi+ 2025. The remaining gap is N-body calibration drift between Yang+ 2024 parametric fits and SASHIMI's full simulation-calibrated version."
+  },
+  "t38_dwarf_kiss_sidm": {
+    "status": "RUNNING (background process)",
+    "expected_wall_minutes": 300,
+    "expected_snapshots": 10,
+    "input": "N=5e4, dwarf (M=10^8 M_sun), sigma_m=5 cm^2/g",
+    "eta_until_completion": "~5 hours from D13 ship time"
+  },
+  "d13_interim_verdict": "T36 closed Direction A: best config (A2 Hayashi+ 2025 c_vir) brings our SASHIMI collapse transition to \u03c3_0/m = 0.625 cm\u00b2/g vs Hayashi+ 2025 boundary 0.2 cm\u00b2/g (ratio = 3.1\u00d7, gap = 0.49 dex). Within an order of magnitude \u2014 Direction A is now CLOSED with N-body calibration drift as the residual systematic. T38b (Direction C full closure) is running; ETA ~5 hr."
+}

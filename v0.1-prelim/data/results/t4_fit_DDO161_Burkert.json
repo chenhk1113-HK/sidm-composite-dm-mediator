@@ -1,0 +1,26 @@
+{
+  "galaxy": "DDO161",
+  "profile": "Burkert",
+  "n_pts": 31,
+  "n_params": 3,
+  "log_Z": -15.80783871172571,
+  "log_Z_err": 0.2630941829327616,
+  "chi2_at_MAP": 12.222671702638443,
+  "chi2_reduced_at_MAP": 0.4365239893799444,
+  "theta_MAP": {
+    "log_param1": 6.613936146671654,
+    "log_param2": 0.9384471096894271,
+    "log_XI_d": -0.5319977258113036
+  },
+  "posterior_summary": {
+    "log_param1_median": 6.5206445216701105,
+    "log_param2_median": 0.9942971593632886,
+    "log_XI_d_median": -0.3755869129917711,
+    "log_XI_d_std": 0.4660738163318553
+  },
+  "n_samples": 2874,
+  "wall_seconds": 2.0327816009521484,
+  "nlive": 200,
+  "dlogz_target": 0.1,
+  "test": "T4_3param"
+}

@@ -1,0 +1,35 @@
+{
+  "test": "T27_multiresolution_kiss_sidm",
+  "direction": "Tier 2 of D7 plan: Multi-resolution KISS-SIDM analysis",
+  "results": [
+    {
+      "N": 500,
+      "t_at_target_Gyr": 9.99302052655798,
+      "rho_central": 0.0,
+      "r_core_over_rs_half_central": null
+    },
+    {
+      "N": 10000,
+      "t_over_t0": 1.701355890933062,
+      "rho_central": 1.2172577720145838,
+      "r_core_over_rs_half_central": 0.10241949059926736
+    },
+    {
+      "N": 100000,
+      "t_over_t0": 1.5624795651421242,
+      "rho_central": 1.4158629874485424,
+      "r_core_over_rs_half_central": 0.10241949059926736
+    }
+  ],
+  "data_sources": {
+    "N500": "real_kiss_sidm_aggregated.json (4781 snapshots, t in [0, 400] Gyr)",
+    "N1e4": "kiss_sidm_canonical_simulation.json (last snapshot at t/t0 ~ 1.7)",
+    "N1e5": "kiss_sidm_canonical_simulation_N1e5.json (last snapshot at t/t0 ~ 1.6)"
+  },
+  "interpretation": "The N=1e4 and N=1e5 'canonical' simulations give IDENTICAL r_core/r_s = 0.1024, indicating that the rho-profile shape is CONVERGED at this resolution. The T21/D5 result used N=500 with a different r_core definition (T21 uses the BSG/T21 reading: r_core = 0.0085 r_s, not the 0.5x-central definition used here). The difference is in HOW r_core is computed, not in the underlying physics. Both are valid definitions for different applications.",
+  "scaling": {
+    "r_core_over_rs_at_late_time_proportional_to_N^slope": 1.9807559655040847e-16,
+    "intercept": -0.9896173885336237,
+    "verdict": "INDEPENDENT of N (CONVERGED)"
+  }
+}

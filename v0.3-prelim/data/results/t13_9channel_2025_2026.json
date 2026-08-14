@@ -1,0 +1,56 @@
+{
+  "test": "T13_9channel_with_2025_2026_constraints",
+  "res_5channel": {
+    "label": "5-channel",
+    "log_Z": -2.9606692862652366,
+    "median_log_sigma_m_0": -0.17772656833129274,
+    "median_sigma_m_0": 0.664161094409585,
+    "p16_sigma_m_0": 0.03216311730134358,
+    "p84_sigma_m_0": 2.5598857108835413,
+    "median_a": 0.9911521790501248,
+    "p16_a": -0.06303112837796437,
+    "p84_a": 1.64349447097152,
+    "wall_seconds": 1.2516541481018066
+  },
+  "res_6channel": {
+    "label": "6-channel (with lens subhalo)",
+    "log_Z": -4.7005807469543335,
+    "median_log_sigma_m_0": -0.04222069364970871,
+    "median_sigma_m_0": 0.9073593239287944,
+    "p16_sigma_m_0": 0.25766837061694464,
+    "p84_sigma_m_0": 5.542469497513924,
+    "median_a": 1.4330176643015782,
+    "p16_a": 0.3358240953335746,
+    "p84_a": 1.8349402047280283,
+    "wall_seconds": 1.616891860961914
+  },
+  "res_8channel": {
+    "label": "8-channel (with all 2025-2026 constraints)",
+    "log_Z": -5.7788233708846635,
+    "median_log_sigma_m_0": -0.08426584561198358,
+    "median_sigma_m_0": 0.8236337879555229,
+    "p16_sigma_m_0": 0.2682973106995362,
+    "p84_sigma_m_0": 4.703991437018513,
+    "median_a": 1.437198969909307,
+    "p16_a": 0.322443612219152,
+    "p84_a": 1.8444138035364708,
+    "wall_seconds": 1.763380527496338
+  },
+  "res_9channel": {
+    "label": "9-channel (+Draco dSph)",
+    "log_Z": -7.010645017073684,
+    "median_log_sigma_m_0": -0.1326069461370114,
+    "median_sigma_m_0": 0.7368736959445906,
+    "p16_sigma_m_0": 0.2720309668001209,
+    "p84_sigma_m_0": 4.570802532876147,
+    "median_a": 1.4648974179209642,
+    "p16_a": 0.39363985135818425,
+    "p84_a": 1.853418485894647,
+    "wall_seconds": 1.7793469429016113
+  },
+  "channel_6_citation": "arXiv:2510.11006 (Yang, Yang, Yu et al. 2026, PRL)",
+  "channel_7_citation": "arXiv:2503.13650 (Hayashi et al. 2025)",
+  "channel_8_citation": "arXiv:2508.20179 (O'Donnell et al. 2026, PRD 113, 063531)",
+  "channel_9_citation": "Read+ 2018 (Draco dSph, 99% CL upper limit)",
+  "interpretation": "9-channel fit combines 5 original channels + 4 new peer-reviewed constraints from 2018-2026 literature. Channels 6+7+8+9 bracket \u03c3/m across 5 orders of magnitude in velocity scale (10-2000 km/s). Channel 6 (lens subhalo) gives \u03c3/m_eff ~ 30-100 cm\u00b2/g at v=10 km/s (lower bound on \u03c3/m at subhalo scale), Channels 7+9 give upper bounds at MW satellite scale (Hayashi+ 2025 + Read+ 2018 Draco), Channel 8 gives upper bound at cluster scale (O'Donnell+ 2026 PRD)."
+}

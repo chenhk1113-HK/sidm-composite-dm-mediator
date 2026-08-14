@@ -1,0 +1,120 @@
+{
+  "test": "T43_inelastic_dm_joint_fit",
+  "direction": "User ship direction (a): inelastic DM (chi_1 + chi_2) extension",
+  "ndim": 6,
+  "parameters": [
+    "log_m_phi_MeV",
+    "log_m_chi_GeV",
+    "g_chi",
+    "log_delta_MeV",
+    "log_epsilon",
+    "log_alpha"
+  ],
+  "priors": {
+    "log_m_phi_MeV": [
+      -1.0,
+      4.0
+    ],
+    "log_m_chi_GeV": [
+      0.5,
+      3.0
+    ],
+    "g_chi": [
+      0.01,
+      2.0
+    ],
+    "log_delta_MeV": [
+      -3.0,
+      1.0
+    ],
+    "log_epsilon": [
+      -60.0,
+      -1.0
+    ],
+    "log_alpha": [
+      -30.0,
+      -1.0
+    ]
+  },
+  "log_Z": -4.153902645153279,
+  "log_Z_err": 0.21756600345278745,
+  "MAP": [
+    0.30943257431133575,
+    0.6793254270220812,
+    1.0323355265234881,
+    -2.3991505270038163,
+    -52.864239800915,
+    -25.266770786403274
+  ],
+  "MAP_physical": {
+    "m_phi_MeV": 2.039072062191696,
+    "m_chi_GeV": 4.778872316177465,
+    "g_chi": 1.0323355265234881,
+    "delta_MeV": 0.003988866238032995,
+    "log_epsilon": -52.864239800915,
+    "log_alpha": -25.266770786403274,
+    "sigma_m_0_derived": 1.6694761723555749,
+    "a_derived": 38.81440995958078,
+    "v_threshold_km_s": 387.3447943739064
+  },
+  "median": {
+    "log_m_phi_MeV": 1.8304999681376373,
+    "log_m_chi_GeV": 1.9874003801367184,
+    "g_chi": 0.989572806931633,
+    "log_delta_MeV": -1.8230258399984502,
+    "log_epsilon": -52.864239800915,
+    "log_alpha": -27.274895474625616
+  },
+  "quantiles_16_50_84": {
+    "log_m_phi_MeV": [
+      0.32306257615979084,
+      1.8290582479201867,
+      2.805587421439023
+    ],
+    "log_m_chi_GeV": [
+      1.084841224701686,
+      1.9873839517178662,
+      2.709973677786224
+    ],
+    "g_chi": [
+      0.41733832261457565,
+      0.9895434003954008,
+      1.685113403537828
+    ],
+    "log_delta_MeV": [
+      -2.554332724519403,
+      -1.8230587489634695,
+      -1.0116163384306018
+    ],
+    "log_epsilon": [
+      -57.59408454422939,
+      -52.86699420403117,
+      -48.53553955951584
+    ],
+    "log_alpha": [
+      -29.05011590203319,
+      -27.275509989453706,
+      -25.513037795810963
+    ]
+  },
+  "median_physical": {
+    "m_phi_MeV": 67.68617432612402,
+    "m_chi_GeV": 97.14051019965041,
+    "g_chi": 0.989572806931633,
+    "delta_MeV": 0.015030525336145621,
+    "epsilon": 1.3669738261555944e-53,
+    "alpha": 5.31012232116561e-28,
+    "v_threshold_km_s": 166.77179020217167
+  },
+  "tension_resolution": {
+    "T39_a": 0.94,
+    "T41_a": -1.81,
+    "MAP_a": 38.81440995958078,
+    "T39_tension": 37.87440995958078,
+    "T41_tension": 40.62440995958078,
+    "resolved": false
+  },
+  "wall_seconds": 8.190917015075684,
+  "verdict": "TIER-3 iDM EXTENSION \u2014 TENSION NOT RESOLVED",
+  "interpretation": "log Z = -4.154. Posterior medians: m_phi = 67.69 MeV, m_chi = 97.14 GeV, g_chi = 0.9896, delta = 0.015 MeV, eps = 1.37e-53, alpha = 5.31e-28. The data now supports a > 0 if delta is in the correct range, dissolving the Yukawa tension. a_resolved = +38.814 vs T39 a = +0.940: NOT RESOLVED."
+}

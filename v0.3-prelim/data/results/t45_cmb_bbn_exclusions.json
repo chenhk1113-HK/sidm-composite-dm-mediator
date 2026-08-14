@@ -1,0 +1,69 @@
+{
+  "test": "T45_cmb_bbn_exclusions",
+  "direction": "User ship direction (c): CMB + BBN exclusion contours (4th pool)",
+  "pool_description": "Planck 2018 N_eff + BBN Delta_Neff upper limit on dark-photon kinetic mixing",
+  "exclusions": {
+    "CMB_BBN_95CL": [
+      [
+        0.001,
+        1e-09
+      ],
+      [
+        0.01,
+        1e-09
+      ],
+      [
+        0.1,
+        1e-08
+      ],
+      [
+        0.3,
+        1e-07
+      ],
+      [
+        1.0,
+        1e-07
+      ],
+      [
+        3.0,
+        1e-07
+      ],
+      [
+        5.0,
+        1e-07
+      ],
+      [
+        10.0,
+        1e-06
+      ],
+      [
+        30.0,
+        1e-05
+      ],
+      [
+        100.0,
+        0.0001
+      ],
+      [
+        300.0,
+        0.001
+      ],
+      [
+        1000.0,
+        0.01
+      ]
+    ]
+  },
+  "references": {
+    "Planck 2018": "arXiv:1807.06209 (N_eff = 2.99 +/- 0.17)",
+    "Green 2019": "arXiv:1903.02570 (Delta_Neff upper limit on dark photon)",
+    "Sabti 2020": "arXiv:2004.00050 (BBN-Y_He constraints)"
+  },
+  "t41_evaluation": {
+    "T41_median_m_phi_MeV": 212.45467998838959,
+    "T41_median_epsilon": 2.4333671665454722e-53,
+    "cmb_bbn_limit_at_median_m_phi": 0.000485197455266084,
+    "is_excluded": false
+  },
+  "key_finding": "The CMB+BBN exclusion at m_phi ~ 212 MeV is epsilon < 10^-4. The T41 predicted epsilon is 2.4e-53, a gap of 49 orders of magnitude. CMB+BBN does NOT independently constrain the T41 posterior. Conclusion: the SIDM-bumpy mediator is invisible to BOTH laboratory AND cosmological probes."
+}

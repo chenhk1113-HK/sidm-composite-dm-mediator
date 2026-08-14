@@ -1,0 +1,10 @@
+{
+  "test": "T72_cross_validation_plot",
+  "direction": "Reviewer recommendation 4: supplementary figure for cross-validation",
+  "panels": [
+    "(a) sigma/m vs mediator mass - T54 and Drobczyk both lie in SIDM sweet spot",
+    "(b) sigma_SI vs m_chi - both models invisible to direct detection, below neutrino floor",
+    "(c) Omega h^2 vs coupling - both reach 0.12 via different mechanisms"
+  ],
+  "key_finding": "The supplementary figure (Cross_Validation_T54_vs_Drobczyk_2026-08-13.png) visually shows the convergence of T54 and Drobczyk's benchmark in three panels:\n\n(a) Both give sigma/m ~ 1 cm^2/g at m_phi ~ 3-15 MeV\n(b) Both invisible to direct detection (sigma_SI << neutrino floor)\n(c) Both reach Omega h^2 = 0.12 with different coupling mechanisms\n\nThis figure is recommended for the supplementary material."
+}

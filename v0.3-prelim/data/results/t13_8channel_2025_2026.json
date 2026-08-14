@@ -1,0 +1,43 @@
+{
+  "test": "T13_8channel_with_2025_2026_constraints",
+  "res_5channel": {
+    "label": "5-channel",
+    "log_Z": -2.941068262752823,
+    "median_log_sigma_m_0": -0.16768638459150176,
+    "median_sigma_m_0": 0.6796942804648517,
+    "p16_sigma_m_0": 0.030888498231129106,
+    "p84_sigma_m_0": 2.716498233102496,
+    "median_a": 0.9946167745303129,
+    "p16_a": -0.025531417655633323,
+    "p84_a": 1.680624327443787,
+    "wall_seconds": 1.1280176639556885
+  },
+  "res_6channel": {
+    "label": "6-channel (with lens subhalo)",
+    "log_Z": -4.663836202966891,
+    "median_log_sigma_m_0": -0.013412147900986326,
+    "median_sigma_m_0": 0.9695893847272581,
+    "p16_sigma_m_0": 0.3354450440712303,
+    "p84_sigma_m_0": 6.094063057465485,
+    "median_a": 1.409762259960634,
+    "p16_a": 0.30475804765928133,
+    "p84_a": 1.8440670142000848,
+    "wall_seconds": 1.7083933353424072
+  },
+  "res_8channel": {
+    "label": "8-channel (with all 2025-2026 constraints)",
+    "log_Z": -5.776959540035273,
+    "median_log_sigma_m_0": -0.061661943747792325,
+    "median_sigma_m_0": 0.8676369844512719,
+    "p16_sigma_m_0": 0.3055444795043998,
+    "p84_sigma_m_0": 5.300633480464871,
+    "median_a": 1.4282184133694766,
+    "p16_a": 0.32319773057975665,
+    "p84_a": 1.84720104562961,
+    "wall_seconds": 1.7320523262023926
+  },
+  "channel_6_citation": "arXiv:2510.11006 (Yang, Yang, Yu et al. 2026, PRL)",
+  "channel_7_citation": "arXiv:2503.13650 (Hayashi et al. 2025)",
+  "channel_8_citation": "arXiv:2508.20179 (O'Donnell et al. 2026, PRD 113, 063531)",
+  "interpretation": "8-channel fit combines 5 original channels + 3 new peer-reviewed constraints from 2025-2026 literature. Channels 6+7+8 bracket the \u03c3/m position: Channel 6 (lens subhalo) gives \u03c3_m_eff ~ 30-100 cm\u00b2/g at v=10 km/s (lower bound on \u03c3/m at subhalo scale), Channels 7+8 give upper bounds at MW satellite scale (\u03c3/m_0 < 1 cm\u00b2/g, Hayashi+ 2025) and cluster scale (\u03c3/m < 0.613 cm\u00b2/g, O'Donnell+ 2026 PRD)."
+}

@@ -1,0 +1,129 @@
+{
+  "test": "T22_real_kiss_sidm_two_comp",
+  "direction": "TIER 2 STEP 1: Re-run T19 with REAL KISS-SIDM gravothermal penalty",
+  "kiss_data_source": "/mnt/c/Users/lamkuenai/projects/dm-sidm-pipeline/v0.3-prelim/data/results/real_kiss_sidm_aggregated.json",
+  "kiss_r_core_real_at_t10Gyr_over_rs": 0.0085,
+  "fits": {
+    "A_two_comp_with_imfp": {
+      "label": "two_comp_real_kiss_with_imfp",
+      "log_Z": -7.99129648427678,
+      "log_Z_err": 0.14164882226621792,
+      "MAP": [
+        1.1709300401339444,
+        -2.4945628609679136,
+        0.03119605961314883,
+        0.8627791252972599
+      ],
+      "median": [
+        -0.054743022465372215,
+        -0.4875523640130952,
+        0.4683165085592412,
+        1.2948268708997688
+      ],
+      "p16": [
+        -1.0535787008691955,
+        -2.1417818218828186,
+        0.1639158578620829,
+        1.0058720442793545
+      ],
+      "p84": [
+        0.37587833029032724,
+        0.24984170448470833,
+        0.8175196661309991,
+        1.602207406391333
+      ],
+      "wall_seconds": 2.9913063049316406,
+      "n_samples": 1390
+    },
+    "B_two_comp_no_imfp": {
+      "label": "two_comp_real_kiss_no_imfp",
+      "log_Z": -8.160500578036446,
+      "log_Z_err": 0.1455174196129695,
+      "MAP": [
+        0.6714559754566021,
+        -1.4956082007033227,
+        0.2646675652058444,
+        0.9889289264332
+      ],
+      "median": [
+        -0.11056052678123818,
+        -0.41470046916824144,
+        0.4886980371988713,
+        1.2976002221954297
+      ],
+      "p16": [
+        -1.0962793951044973,
+        -2.1317235068510376,
+        0.15433902269694227,
+        1.011450531768951
+      ],
+      "p84": [
+        0.4055715817092911,
+        0.1932327594209564,
+        0.8189023582662469,
+        1.6086051162343122
+      ],
+      "wall_seconds": 2.980698585510254,
+      "n_samples": 1423
+    },
+    "C_one_comp_nested_with_imfp": {
+      "label": "one_comp_real_kiss_nested",
+      "log_Z": -8.377395360064106,
+      "log_Z_err": 0.1507679831341142,
+      "MAP": [
+        -0.27500754426591034,
+        1.6092443519387163
+      ],
+      "median": [
+        -0.13337293571453945,
+        1.3338453684714051
+      ],
+      "p16": [
+        -0.3155867184799601,
+        1.0628437942051336
+      ],
+      "p84": [
+        0.04147535440793915,
+        1.6230370365554498
+      ],
+      "wall_seconds": 1.6776769161224365,
+      "n_samples": 1462
+    },
+    "D_one_comp_2ch_with_imfp": {
+      "label": "one_comp_real_kiss_2ch",
+      "log_Z": -6.653139357264314,
+      "log_Z_err": 0.12066398517353374,
+      "MAP": [
+        0.10213698753591638,
+        1.275960510591291
+      ],
+      "median": [
+        0.12923954788236092,
+        0.5385969462888656
+      ],
+      "p16": [
+        -0.1427441420992306,
+        -0.24471747073880623
+      ],
+      "p84": [
+        0.40727165205623805,
+        1.2191144543041537
+      ],
+      "wall_seconds": 1.3014569282531738,
+      "n_samples": 1209
+    }
+  },
+  "bayes_factors": {
+    "delta_A_C_2comp_vs_1comp_3ch": 0.3860988757873267,
+    "delta_A_D_2comp_vs_1comp_2ch": -1.3381571270124661,
+    "delta_B_C_2comp_no_imfp_vs_1comp": 0.21689478202766033,
+    "delta_B_D_2comp_no_imfp_vs_1comp_2ch": -1.5073612207721325
+  },
+  "t19_placeholder_summary": {
+    "log_Z_2comp_with_imfp": -4.01,
+    "log_Z_2comp_no_imfp": -3.45,
+    "delta_2comp_vs_1comp_3ch_placeholder": 0.57,
+    "delta_2comp_vs_1comp_3ch_no_imfp": -1.25
+  },
+  "verdict": "With REAL KISS-SIDM gravothermal penalty:\n  T22 A (2-comp, with IMFP) vs C (1-comp, with IMFP): +0.386\n  T22 B (2-comp, no IMFP)   vs D (1-comp, no IMFP):   -1.507\nCompare to T19 placeholder:\n  T19 A (2-comp, with IMFP) vs C (1-comp, with IMFP): +0.57 (equivalent)\n  T19 B (2-comp, no IMFP)   vs D (1-comp, no IMFP):   -1.25 (mildly disfavored)\nIf T22's Bayes factors are similar to T19's, the placeholder was fine.\nIf T22 is very different, the placeholder was misleading."
+}

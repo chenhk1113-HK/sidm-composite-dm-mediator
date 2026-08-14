@@ -1,0 +1,22 @@
+{
+  "galaxy": "UGC08699",
+  "profile": "NFW_core",
+  "n_params": 3,
+  "log_Z": -238.61167078579822,
+  "log_Z_err": 0.2469683100570675,
+  "chi2_reduced_at_MAP": 12.122912927063012,
+  "theta_MAP": {
+    "log_rho_s": 6.491816098322651,
+    "log_r_s": 1.4304222486788047,
+    "log_r_core": 0.8243342313093391
+  },
+  "r_core_at_MAP_kpc": 6.673201385744899,
+  "posterior_summary": {
+    "log_r_core_median": 0.7736132404992322,
+    "log_r_core_std": 0.6799844893490014
+  },
+  "wall_seconds": 1.681013584136963,
+  "nlive": 200,
+  "dlogz_target": 0.1,
+  "test": "T6_NFW_core"
+}

@@ -1,0 +1,30 @@
+{
+  "test": "T12_6channel_with_lens_subhalo",
+  "res_5channel": {
+    "label": "5-channel (no lens)",
+    "log_Z": -2.910625696054825,
+    "median_log_sigma_m_0": -0.16843863253778935,
+    "median_sigma_m_0": 0.6785179908976546,
+    "p16_sigma_m_0": 0.030636056004687065,
+    "p84_sigma_m_0": 2.5321176640754226,
+    "median_a": 1.028094978898082,
+    "p16_a": 0.02120781778212128,
+    "p84_a": 1.6952967159292103,
+    "wall_seconds": 1.1235125064849854
+  },
+  "res_6channel": {
+    "label": "6-channel (with lens subhalo)",
+    "log_Z": -4.600527644602176,
+    "median_log_sigma_m_0": -0.02803924715488071,
+    "median_sigma_m_0": 0.9374772833564481,
+    "p16_sigma_m_0": 0.30967804832819085,
+    "p84_sigma_m_0": 4.910367596369571,
+    "median_a": 1.427039269378667,
+    "p16_a": 0.34162560275540926,
+    "p84_a": 1.847453061041123,
+    "wall_seconds": 1.6126716136932373
+  },
+  "channel_6_citation": "arXiv:2510.11006 (Yang, Yang, Yu et al. 2026, PRL)",
+  "channel_6_constraint": "log10(\u03c3/m_eff at v=10 km/s) ~ 1.7 \u00b1 0.3 dex",
+  "interpretation": "Adding Channel 6 (lens substructure) tests whether the gravothermal collapse regime is consistent with the new PRL 2026 observations."
+}

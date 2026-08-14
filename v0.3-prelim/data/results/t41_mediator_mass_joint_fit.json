@@ -1,0 +1,103 @@
+{
+  "test": "T41_mediator_mass_joint_fit",
+  "direction": "User ship direction #1: add m_phi to posterior",
+  "ndim": 5,
+  "parameters": [
+    "log_m_phi_MeV",
+    "log_m_chi_GeV",
+    "g_chi",
+    "log_epsilon",
+    "log_alpha"
+  ],
+  "priors": {
+    "log_m_phi_MeV": [
+      -1.0,
+      4.0
+    ],
+    "log_m_chi_GeV": [
+      0.5,
+      3.0
+    ],
+    "g_chi": [
+      0.01,
+      2.0
+    ],
+    "log_epsilon": [
+      -60.0,
+      -1.0
+    ],
+    "log_alpha": [
+      -30.0,
+      -1.0
+    ]
+  },
+  "log_Z": -29.453083507297787,
+  "log_Z_err": 0.2379280416091763,
+  "MAP": [
+    2.6393637226301028,
+    2.8512993650488228,
+    0.5747900022379508,
+    -53.60404436731604,
+    -28.73933430282123
+  ],
+  "MAP_physical": {
+    "m_phi_MeV": 435.8767686629605,
+    "m_chi_GeV": 710.0670581150613,
+    "g_chi": 0.5747900022379508,
+    "log_epsilon": -53.60404436731604,
+    "log_alpha": -28.73933430282123,
+    "sigma_m_0_derived": 0.0712175282733748,
+    "a_derived": -1.8103089411088444
+  },
+  "median": {
+    "log_m_phi_MeV": 2.3272663022447695,
+    "log_m_chi_GeV": 2.664948328863905,
+    "g_chi": 0.37043619471829137,
+    "log_epsilon": -52.613792356184746,
+    "log_alpha": -26.608663302901782
+  },
+  "quantiles_16_50_84": {
+    "log_m_phi_MeV": [
+      1.789901476116271,
+      2.32661035611694,
+      2.610139675879908
+    ],
+    "log_m_chi_GeV": [
+      2.1097912166358523,
+      2.6636937310649347,
+      2.913371246144232
+    ],
+    "g_chi": [
+      0.1510230527216055,
+      0.3703999582609413,
+      0.6098523980642239
+    ],
+    "log_epsilon": [
+      -57.64023335315374,
+      -52.61883804336963,
+      -48.07019853353884
+    ],
+    "log_alpha": [
+      -28.860678115254427,
+      -26.61121649806699,
+      -24.179811772288573
+    ]
+  },
+  "median_physical": {
+    "m_phi_MeV": 212.45467998838959,
+    "m_chi_GeV": 462.32601187818733,
+    "g_chi": 0.37043619471829137,
+    "epsilon": 2.4333671665454722e-53,
+    "alpha": 2.4622758020830007e-27
+  },
+  "yukawa_tension": {
+    "T39_sigma_m_0": 1.57,
+    "T39_a": 0.94,
+    "Yukawa_a_at_MAP": -1.8103089411088444,
+    "a_difference": 2.7503089411088446,
+    "significant": true
+  },
+  "wall_seconds": 2.9755587577819824,
+  "verdict": "TIER-3 EXTENSION: m_phi parameterized posterior \u2014 YUKAWA TENSION (T39 a > 0 vs Yukawa a < 0)",
+  "interpretation": "log Z = -29.453, posterior medians: m_phi = 212.45 MeV, m_chi = 462.33 GeV, g_chi = 0.3704, eps = 2.43e-53, alpha = 2.46e-27. Derived sigma/m_0 = 0.071 cm^2/g, a = -1.810. The T39 a = +0.94 (sigma/m DECREASES with v) is incompatible with the Yukawa prediction (a < 0, sigma/m INCREASES with v). This means the simple Yukawa model is RULED OUT by the velocity dependence. Future work: inelastic SIDM (chi_1, chi_2) or velocity-dependent g_chi."
+}

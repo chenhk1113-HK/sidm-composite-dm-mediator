@@ -1,0 +1,23 @@
+{
+  "galaxy": "UGC09037",
+  "profile": "Burkert",
+  "n_pts": 22,
+  "log_Z": -413.5066574079623,
+  "log_Z_err": 0.06644128304856196,
+  "chi2_at_MAP": 825.9055960631085,
+  "chi2_reduced_at_MAP": 41.295279803155424,
+  "theta_MAP": {
+    "log_param1": 4.1661631367492635,
+    "log_param2": 2.12514970596587
+  },
+  "posterior_summary": {
+    "log_param1_median": 3.4887613435351104,
+    "log_param2_median": -0.1541399527226327,
+    "log_param1_std": 1.9019157141914673,
+    "log_param2_std": 0.9979130366171959
+  },
+  "n_samples": 818,
+  "wall_seconds": 0.3650810718536377,
+  "nlive": 200,
+  "dlogz_target": 0.1
+}

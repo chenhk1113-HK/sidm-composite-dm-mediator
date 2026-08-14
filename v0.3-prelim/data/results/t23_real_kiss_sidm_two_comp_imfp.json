@@ -1,0 +1,88 @@
+{
+  "test": "T23_real_kiss_sidm_two_comp_imfp",
+  "direction": "TIER 2 STEP 2: Re-run T20 (combined) with REAL KISS-SIDM gravothermal penalty",
+  "kiss_data_source": "/mnt/c/Users/lamkuenai/projects/dm-sidm-pipeline/v0.3-prelim/data/results/real_kiss_sidm_aggregated.json",
+  "kiss_r_core_real_at_t10Gyr_over_rs": 0.0085,
+  "fits": {
+    "A_two_comp_with_imfp": {
+      "label": "two_comp_real_kiss_with_imfp",
+      "log_Z": -8.21121032248609,
+      "log_Z_err": 0.14700823197618312,
+      "MAP": [
+        -0.15193904214395015,
+        -2.434460084120447,
+        0.9132346188800685,
+        1.612845427754849
+      ],
+      "median": [
+        -0.07717934210610067,
+        -0.46822750256604095,
+        0.5084032196107034,
+        1.2996632087627047
+      ],
+      "p16": [
+        -1.0209365242052324,
+        -2.170352696545093,
+        0.14358070026586467,
+        1.0287565144078217
+      ],
+      "p84": [
+        0.4345542372345714,
+        0.175887021018847,
+        0.8211108638774791,
+        1.6023035290969085
+      ],
+      "wall_seconds": 4.076934337615967,
+      "n_samples": 1433
+    },
+    "B_two_comp_no_imfp": {
+      "label": "two_comp_real_kiss_no_imfp",
+      "log_Z": -8.173103337168232,
+      "log_Z_err": 0.1453703156602682,
+      "MAP": [
+        -0.03643520508731113,
+        -1.4469206837377686,
+        0.5848611206630285,
+        0.8204302558916301
+      ],
+      "median": [
+        -0.08112173667857592,
+        -0.446938910362511,
+        0.5036424981288553,
+        1.2651286954725802
+      ],
+      "p16": [
+        -1.0462467820972403,
+        -2.1363037827555416,
+        0.15403076086135664,
+        1.0093327548513642
+      ],
+      "p84": [
+        0.466877408999808,
+        0.20424831093997708,
+        0.8246024642589156,
+        1.57848569334092
+      ],
+      "wall_seconds": 3.330512762069702,
+      "n_samples": 1426
+    }
+  },
+  "t22_comparison": {
+    "T22_A_REAL_with_IMFP": -7.82,
+    "T22_B_REAL_no_IMFP": -7.95
+  },
+  "t20_placeholder_summary": {
+    "log_Z": -5.47,
+    "MAP": [
+      0.0,
+      -0.5,
+      0.5,
+      0.5
+    ]
+  },
+  "imfp_correction_effect": {
+    "delta_log_Z_A_minus_B": -0.03810698531785839,
+    "verdict": "IMFP correction does NOT improve fit (penalty was already weak)"
+  },
+  "verdict": "With REAL KISS-SIDM gravothermal penalty + IMFP correction:\n  T23 A (with IMFP): log Z = -8.211\n  T23 B (no IMFP):   log Z = -8.173\n  IMFP correction effect: -0.038\n  Verdict: IMFP correction does NOT improve fit (penalty was already weak)\nCompare to T20 placeholder log Z = -5.47 and T22 (no sigma_at_v) values."
+}

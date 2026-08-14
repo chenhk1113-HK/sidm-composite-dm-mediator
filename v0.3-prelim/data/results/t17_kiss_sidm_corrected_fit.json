@@ -1,0 +1,84 @@
+{
+  "test": "T17_kiss_sidm_corrected_fit",
+  "direction": "Direction 1 -- KISS-SIDM IMFP correction",
+  "halo_reference": {
+    "rho_s_Msun_per_kpc3": 10000000.0,
+    "r_s_kpc": 10.0,
+    "v_max_km_s": 100.0,
+    "t_Gyr": 10.0,
+    "note": "Single reference halo for the gravothermal prior; v0.3 uses a representative MW-like halo."
+  },
+  "prior_weight": 1.0,
+  "sampler": {
+    "engine": "dynesty.NestedSampler",
+    "NLIVE": 500,
+    "DLOGZ": 0.1
+  },
+  "fluid": {
+    "label": "fluid",
+    "log_Z": -1.2215035861717176,
+    "log_Z_err": 0.08325188837339713,
+    "MAP": {
+      "log_sigma_m_0": 0.039583768813231224,
+      "sigma_m_0_cm2_per_g": 1.0954278263903723,
+      "a": 0.6126421108775211,
+      "effective_sigma_m": {
+        "v_dwarf_30": 2.2904525915626253,
+        "v_galaxy_100": 1.0954278263903723,
+        "v_cluster_1500": 0.20847824252807884
+      }
+    },
+    "median_posterior": {
+      "log_sigma_m_0_p16": -0.9412569315126353,
+      "log_sigma_m_0_p50": 0.271210146053398,
+      "log_sigma_m_0_p84": 0.5729865113661053,
+      "a_p16": 0.23637996934758648,
+      "a_p50": 0.8028589734580942,
+      "a_p84": 1.4071273661037738
+    },
+    "wall_seconds": 2.0855798721313477
+  },
+  "kiss_sidm": {
+    "label": "kiss_sidm",
+    "log_Z": -1.3057356969524874,
+    "log_Z_err": 0.08460299066520144,
+    "MAP": {
+      "log_sigma_m_0": -0.019647498239006467,
+      "sigma_m_0_cm2_per_g": 0.9557680350253315,
+      "a": 1.6180533875318912,
+      "effective_sigma_m": {
+        "v_dwarf_30": 6.704991425936088,
+        "v_galaxy_100": 0.9557680350253315,
+        "v_cluster_1500": 0.011950169243611258
+      }
+    },
+    "median_posterior": {
+      "log_sigma_m_0_p16": -0.9828511380405439,
+      "log_sigma_m_0_p50": 0.25626923312036975,
+      "log_sigma_m_0_p84": 0.5472688731339937,
+      "a_p16": 0.14104747131819817,
+      "a_p50": 0.7959535012432957,
+      "a_p84": 1.3867538841809208
+    },
+    "wall_seconds": 2.08097243309021
+  },
+  "comparison": {
+    "delta_log_Z": -0.08423211078076975,
+    "delta_MAP_log_sm_dex": -0.05923126705223769,
+    "delta_CI_p16": -0.04159420652790857,
+    "delta_CI_p84": -0.025717638232111595,
+    "delta_CI_width_dex": 0.015876568295796867,
+    "verdict": "The KISS-SIDM correction shifts the MAP by ~ 0.06 dex -- a small but non-zero shift. The headline result is robust, but the KISS-SIDM correction is a marginal re-weighting at the IMFP regime."
+  },
+  "constants": {
+    "D_LOG_M_KN1_FLUID": -0.27,
+    "D_LOG_M_KN1_DSMC": -0.21,
+    "imfp_correction_factor_Kn1": 0.7777777777777777
+  },
+  "improvements_vs_T8": [
+    "T8 used a fixed 5-channel likelihood only.",
+    "T17 ADDS a per-halo gravothermal prior term to that likelihood.",
+    "T17 applies the KISS-SIDM IMFP correction (factor 0.778) to that prior in the KISS run.",
+    "Comparison quantifies the posterior SHIFT from the KISS-SIDM correction."
+  ]
+}

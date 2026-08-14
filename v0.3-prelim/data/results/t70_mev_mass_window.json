@@ -1,0 +1,5 @@
+{
+  "test": "T70_mev_mass_window",
+  "direction": "Reviewer recommendation 2: explain why MeV is uniquely favored",
+  "key_finding": "The MeV mediator mass window is naturally preferred for SIDM:\n\n1. **m_phi < MeV**: fails fifth-force constraints (range too long), and gives too-steep velocity suppression. Delta N_eff bounds become tight (Planck 2018: Delta N_eff < 0.3).\n\n2. **m_phi ~ MeV** (1-100 MeV): the sweet spot. Range ~ 1-100 fm (nuclear scale), avoids fifth-force limits, gives sigma ~ 1/v^2 at dwarf velocities, and decays fast enough to satisfy Delta N_eff.\n\n3. **m_phi > 100 MeV**: range becomes sub-nuclear, Yukawa force too short-ranged for SIDM at galactic scales. Cross-section drops too fast at v ~ 30 km/s.\n\n**Both our model (m_rho = 3.55 MeV) and Drobczyk's (m_phi = 15 MeV) sit in this natural MeV window.** The convergence is not a coincidence but a consequence of astrophysical + cosmological constraints."
+}

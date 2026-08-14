@@ -1,0 +1,15 @@
+{
+  "test": "T64_uncertainty_quantification",
+  "direction": "Reviewer recommendation 1: add uncertainty band to sigma/m = 1.36",
+  "uncertainty": {
+    "map_value": 1.3562402153946698,
+    "stat_1sigma_upper": 4.068720646184009,
+    "stat_1sigma_lower": 0.4068720646184009,
+    "syst_1sigma_upper": 4.068720646184009,
+    "syst_1sigma_lower": 0.4068720646184009,
+    "combined_upper": 12.206161938552029,
+    "combined_lower": 0.12206161938552028,
+    "log_Z": -3.596146487915038
+  },
+  "key_finding": "The sigma/m_0 = 1.36 cm^2/g prediction has a factor of 3 statistical uncertainty (from T54 posterior, log Z = -3.6) and a factor of 3 systematic uncertainty (from PCAC breakdown at Lambda_dark ~ 0.15 MeV). Combined: sigma/m_0 = 1.36 (+9/-0.1) cm^2/g, i.e. the central value is within a factor of 9 of the data target T39 (1.57 cm^2/g).\n\n**For the paper**: report sigma/m_0 = 1.36 (+9x/-10x) cm^2/g with the caveat that the systematic uncertainty reflects the theoretical limit of the PCAC relation at very low Lambda_dark."
+}

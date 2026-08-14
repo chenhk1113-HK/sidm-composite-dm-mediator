@@ -1,0 +1,87 @@
+cff-version: 1.2.0
+message: >
+  If you use this code or its results in published work, please cite the
+  relevant version below. See CHANGELOG.md for the per-version result
+  summaries; v0.3-prelim-D15-CORRECTED3 and Mediator_Detection_v12 are the
+  most recent closed rounds at the time of publication.
+title: "sidm-composite-dm-mediator"
+type: software
+version: 0.3-prelim-D15-CORRECTED3
+date-released: 2026-08-13
+authors:
+  - family-names: Lam
+    given-names: K.
+    alias: lamkuenai
+license: MIT
+repository-code: https://github.com/lamkuenai/sidm-composite-dm-mediator
+keywords:
+  - dark-matter
+  - sidm
+  - self-interacting-dark-matter
+  - secluded-wimp
+  - composite-dark-matter
+  - dark-glueball
+  - dark-rho
+  - mediator-detection
+  - bayesian-inference
+  - dynesty
+  - direct-detection
+  - lz
+  - fermi-lat
+  - dwarf-galaxies
+abstract: >
+  Bayesian constraint pipeline for self-interacting dark matter (SIDM)
+  cross-sections, with a feasibility survey of mediator detection.
+  Combines WIMpy-style nested sampling (dynesty) with KiSS-SIDM
+  gravothermal penalties, real LZ WS2024 + Fermi dwarf gamma-ray
+  channels, and a composite-DM microphysics extension (dark glueballs,
+  dark rho, dark baryons). Headline result: σ/m ~ 1-3 cm²/g at the
+  MeV-mediator scale, with the mediator invisible to all direct-detection
+  experiments (a ~10⁵⁰× margin below LZ) and decoupled from thermal-WIMP
+  coupling by ~10⁰×. See docs/MATHEMATICS.md and the per-version
+  synthesis docs in v0.3-prelim/docs/ for full derivation.
+references:
+  - type: article
+    title: "Secluded WIMP Dark Matter"
+    authors:
+      - family-names: Pospelov
+        given-names: Maxim
+      - family-names: Ritz
+        given-names: Adam
+      - family-names: Voloshin
+        given-names: Mikhail
+    year: 2008
+    journal: "Physics Letters B"
+    volume: "662"
+    start: 53
+    end: 61
+    identifiers:
+      - type: arxiv
+        value: "0711.4866"
+  - type: article
+    title: "Direct detection portals for self-interacting dark matter"
+    authors:
+      - family-names: Kaplinghat
+        given-names: Manoj
+      - family-names: Tulin
+        given-names: Sean
+      - family-names: Yu
+        given-names: Hai-Bo
+    year: 2014
+    journal: "Physical Review D"
+    volume: "89"
+    identifiers:
+      - type: arxiv
+        value: "1310.7945"
+  - type: article
+    title: "WIMP Shadows: Phenomenology of Secluded Dark Matter"
+    year: 2025
+    identifiers:
+      - type: arxiv
+        value: "2510.23771"
+  - type: article
+    title: "Probing the Phenomenology of Dark Matter from Decoupled Freeze-Out"
+    year: 2025
+    identifiers:
+      - type: arxiv
+        value: "2511.14635"

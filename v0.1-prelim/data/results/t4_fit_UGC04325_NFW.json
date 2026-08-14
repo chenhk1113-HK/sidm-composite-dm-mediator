@@ -1,0 +1,26 @@
+{
+  "galaxy": "UGC04325",
+  "profile": "NFW",
+  "n_pts": 8,
+  "n_params": 3,
+  "log_Z": -13.631960119375346,
+  "log_Z_err": 0.21094964154672705,
+  "chi2_at_MAP": 14.985953502375995,
+  "chi2_reduced_at_MAP": 2.997190700475199,
+  "theta_MAP": {
+    "log_param1": 8.461460665260606,
+    "log_param2": -0.30685467832914326,
+    "log_XI_d": 0.47953031594509343
+  },
+  "posterior_summary": {
+    "log_param1_median": 7.477984545036821,
+    "log_param2_median": 0.28485723904490623,
+    "log_XI_d_median": 0.41622185049362526,
+    "log_XI_d_std": 0.3095880934767924
+  },
+  "n_samples": 2263,
+  "wall_seconds": 1.8102881908416748,
+  "nlive": 200,
+  "dlogz_target": 0.1,
+  "test": "T4_3param"
+}

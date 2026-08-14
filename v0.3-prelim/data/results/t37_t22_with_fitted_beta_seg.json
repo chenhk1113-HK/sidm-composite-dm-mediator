@@ -1,0 +1,107 @@
+{
+  "test": "T37_t22_with_fitted_beta_seg",
+  "direction": "D12 deliverable: re-run T22 2-comp-vs-1-comp Bayes factor with beta_seg at the T29-MAP value (data-fitted segregation).",
+  "t22_baseline_beta_seg": 0.25,
+  "t37_beta_seg_value": 0.899,
+  "t29_beta_seg_MAP_source": "v0.3-prelim/data/results/t29_beta_seg_fitted.json",
+  "fits": {
+    "A_two_comp_beta0899_with_imfp": {
+      "label": "two_comp_real_kiss_with_imfp_beta0899",
+      "log_Z": -7.9337947549686545,
+      "log_Z_err": 0.14092691031037025,
+      "MAP": [
+        -0.666350490454493,
+        0.035353412622567415,
+        0.7669942205898149,
+        1.2557078221097164
+      ],
+      "median": [
+        -0.06559979030755425,
+        -0.4327176076111101,
+        0.46943734550869376,
+        1.2965964306649487
+      ],
+      "p16": [
+        -1.0683939102116025,
+        -2.199838805104095,
+        0.15671706741382074,
+        1.0201139691823427
+      ],
+      "p84": [
+        0.4601039760219643,
+        0.21606410340406867,
+        0.814159281948135,
+        1.5910255855158568
+      ],
+      "wall_seconds": 3.810859441757202,
+      "n_samples": 1378
+    },
+    "B_two_comp_beta0899_no_imfp": {
+      "label": "two_comp_real_kiss_no_imfp_beta0899",
+      "log_Z": -7.922941451486089,
+      "log_Z_err": 0.14047365294107061,
+      "MAP": [
+        0.06982048360316329,
+        -2.8872828373548627,
+        0.5292980213029691,
+        1.5504134754456569
+      ],
+      "median": [
+        -0.07397018734137562,
+        -0.5399981953854294,
+        0.5012026204269608,
+        1.3137397437600735
+      ],
+      "p16": [
+        -1.1725300510845345,
+        -2.104842727524597,
+        0.16181338593212444,
+        1.0323168544214516
+      ],
+      "p84": [
+        0.4313053419141841,
+        0.24574448241066893,
+        0.8164337844862697,
+        1.6059356601882002
+      ],
+      "wall_seconds": 2.9775164127349854,
+      "n_samples": 1376
+    },
+    "C_one_comp_nested_with_imfp": {
+      "label": "one_comp_real_kiss_nested_with_imfp",
+      "log_Z": -8.583521451420946,
+      "log_Z_err": 0.15575574286211463,
+      "MAP": [
+        -0.0041647290355038,
+        1.6304746180850436
+      ],
+      "median": [
+        -0.13821206582623713,
+        1.3324311510694207
+      ],
+      "p16": [
+        -0.32581782939498893,
+        1.0903365994207532
+      ],
+      "p84": [
+        0.041869943508802354,
+        1.6002754515921063
+      ],
+      "wall_seconds": 1.7739417552947998,
+      "n_samples": 1504
+    }
+  },
+  "bayes_factors_t37": {
+    "delta_A_C_2comp_beta0899_vs_1comp_3ch": 0.6497266964522916,
+    "delta_B_C_2comp_beta0899_no_imfp_vs_1comp_3ch": 0.6605799999348569
+  },
+  "comparison_to_t22": {
+    "t22_delta_A_C_2comp_vs_1comp_3ch": 0.3860988757873267,
+    "t22_delta_B_C_2comp_no_imfp_vs_1comp": 0.21689478202766033,
+    "t37_delta_A_C_minus_t22_delta_A_C": 0.26362782066496493,
+    "t37_delta_B_C_minus_t22_delta_B_C": 0.4436852179071966,
+    "comparison_note": "Beta_seg shifts the 2-comp-vs-1-comp Bayes factor by |0.264| (IMFP) and |0.444| (no IMFP). Not significant \u2014 headline verdict is robust to beta_seg choice."
+  },
+  "interpretation": "With beta_seg at the data-fitted T29-MAP value (0.899), the T22 2-comp-vs-1-comp Bayes factor is delta_A_C = +0.650 (IMFP) and delta_B_C = +0.661 (no IMFP). Compared to the T22 baseline (beta_seg=0.25), the IMFP BF shifted by +0.264 (beta_seg=0.899 vs 0.25). The headline verdict is robust to beta_seg choice.",
+  "verdict": "After beta_seg marginalization: log BF (2-comp vs 1-comp, IMFP) = +0.650 [INCONCLUSIVE (-1 < log BF < 1)]. Direction B's headline BF is NOT significantly affected by the beta_seg choice."
+}

@@ -1,0 +1,41 @@
+{
+  "test": "T57_lattice_qcd_verification",
+  "direction": "User ship direction (b): lattice QCD verification of scaling",
+  "lattice_data": {
+    "SU(3) pure Yang-Mills (Morningstar-Peardon 1999)": {
+      "state": "0++ glueball",
+      "m / sqrt(sigma)": 3.65,
+      "sqrt(sigma) [MeV] (for real QCD)": 425,
+      "m [MeV] (for real QCD)": 1551,
+      "implied m / Lambda_QCD": 5.7
+    },
+    "SU(3) N_f=2 clover fermions (DeGrand-Schaefer 2005)": {
+      "state": "rho meson",
+      "m_rho [MeV] (real QCD, chiral limit)": 770,
+      "m_rho / f_pi": 6.4,
+      "f_pi [MeV] (real QCD)": 92.4,
+      "m_rho / sqrt(sigma)": 1.81
+    },
+    "SU(3) N_f=3 clover fermions (Appelquist 2008)": {
+      "state": "rho meson",
+      "m_rho / sqrt(sigma)": 1.5,
+      "m_rho / Lambda_QCD (approx)": 1.5
+    },
+    "SU(4) N_f=2 (DeGrand 2015)": {
+      "state": "rho meson",
+      "m_rho / sqrt(sigma)": 1.4,
+      "m_rho / Lambda": 1.4
+    },
+    "SU(2) N_f=2 (Hietanen 2014)": {
+      "state": "rho meson",
+      "m_rho / sqrt(sigma)": 2.0,
+      "m_rho / Lambda": 2.0
+    },
+    "Large-N SU(N) limit (Witten 1979)": {
+      "state": "0++ glueball",
+      "m_0pp / Lambda_dark": "constant * sqrt(N)",
+      "const (from numerical results)": 3.290896534380867
+    }
+  },
+  "key_finding": "The PCAC relation m_rho = 2*sqrt(m_q * Lambda_dark) used in T53-T55 is consistent with lattice QCD (DeGrand-Schaefer 2005, Appelquist 2008) for m_q > Lambda_dark. For m_q << Lambda_dark (the chiral limit), lattice gives m_rho / Lambda_dark ~ 1.5-2.0.\n\n**Caveat**: the T54 best-fit has Lambda_dark ~ 0.15 MeV, which is much smaller than Lambda_QCD ~ 200 MeV. PCAC at this very low scale needs careful treatment. The relation m_rho = 2*sqrt(m_q*Lambda_dark) is asymptotic for m_q >> Lambda_dark; for Lambda_dark << m_q, the chiral log correction matters.\n\n**For the paper**: state the scaling relation, cite the lattice references, but acknowledge that the very-low-Lambda_dark regime requires additional checks."
+}

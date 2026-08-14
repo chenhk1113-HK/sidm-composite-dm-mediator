@@ -1,0 +1,172 @@
+{
+  "test": "T18_v03_two_component_direction_B",
+  "PLACEHOLDER_WARNING": "The three channel likelihoods (dSph-effective, Cluster-effective, Mass-segregation) are SIMPLIFIED GAUSSIAN PROXIES, not real published posteriors. All log Z values and Bayes factors below are a pipeline feasibility check for Direction B, NOT a publication-quality result and NOT evidence for or against two-component SIDM.",
+  "model": {
+    "name": "two-component mass-segregated SIDM (minimal viable)",
+    "reference": "Yang, Fan, Hou, Tsai, Science Bulletin (2026), DOI 10.1016/j.scib.2026.01.077, arXiv:2504.02303",
+    "n_params": 4,
+    "params": [
+      "log_sigma1",
+      "log_sigma2",
+      "f1",
+      "a"
+    ],
+    "priors": {
+      "log_sigma1": [
+        -2.0,
+        2.0
+      ],
+      "log_sigma2": [
+        -3.0,
+        1.0
+      ],
+      "f1": [
+        0.01,
+        0.99
+      ],
+      "a": [
+        -2.0,
+        2.0
+      ]
+    },
+    "fixed": {
+      "beta_seg": 0.25,
+      "v_ref_km_s": 100.0
+    },
+    "velocity_scales_km_s": {
+      "dwarf": 30.0,
+      "galaxy": 100.0,
+      "cluster": 1500.0
+    }
+  },
+  "channels": {
+    "1_dSph_effective": "PLACEHOLDER Gaussian on log10 sigma_eff(30 km/s), peak 10^0.5 cm^2/g, width 0.6 dex, walls outside [0.3, 30] cm^2/g",
+    "2_cluster_effective": "PLACEHOLDER one-sided Gaussian, sigma_eff(1500 km/s) < 0.5 cm^2/g, 0.30 dex",
+    "3_mass_segregation": "PLACEHOLDER one-sided Gaussian on log10(sigma1/sigma2) >= 1 (Yang+ 2026 requirement), 0.30 dex"
+  },
+  "fit_2component": {
+    "log_Z": -2.216333517862594,
+    "log_Z_err": NaN,
+    "loglike_max": -9.918834525734784e-10,
+    "sampler": "grid_quadrature_21^4",
+    "wall_seconds": 0.0,
+    "n_samples": 194481,
+    "MAP": {
+      "log_sigma1": 1.1428571428571428,
+      "log_sigma2": -1.7619047619047619,
+      "f1": 0.03333333333333333,
+      "a": 1.3333333333333333
+    },
+    "percentiles": {
+      "log_sigma1": {
+        "p16": -0.19047619047619058,
+        "p50": 0.38095238095238093,
+        "p84": 0.9523809523809521
+      },
+      "log_sigma2": {
+        "p16": -2.5238095238095237,
+        "p50": -1.7619047619047619,
+        "p84": -0.8095238095238098
+      },
+      "f1": {
+        "p16": 0.12666666666666668,
+        "p50": 0.45333333333333337,
+        "p84": 0.78
+      },
+      "a": {
+        "p16": 0.38095238095238093,
+        "p50": 0.9523809523809521,
+        "p84": 1.714285714285714
+      }
+    },
+    "MAP_derived": {
+      "sigma1_cm2_per_g": 13.894954943731374,
+      "sigma2_cm2_per_g": 0.017301957388458945,
+      "sigma1_over_sigma2": 803.0857221391511,
+      "sigma_eff_dwarf_30": 3.1624722524549753,
+      "sigma_eff_galaxy_100": 0.4798903902665561,
+      "sigma_eff_cluster_1500": 0.006927666260285192,
+      "dwarf_to_cluster_contrast": 456.4989324882382,
+      "single_component_contrast_at_same_a": 184.20157493201927
+    }
+  },
+  "fit_1component_nested_same_channels": {
+    "log_Z": -7.401338856458279,
+    "log_Z_err": NaN,
+    "loglike_max": -5.55556122413906,
+    "sampler": "grid_quadrature_21^2",
+    "MAP": {
+      "log_sigma": -2.220446049250313e-16,
+      "a": 0.9523809523809521
+    },
+    "percentiles": {
+      "log_sigma": {
+        "p16": -0.761904761904762,
+        "p50": -0.19047619047619058,
+        "p84": 0.38095238095238093
+      },
+      "a": {
+        "p16": 0.5714285714285714,
+        "p50": 1.1428571428571428,
+        "p84": 1.714285714285714
+      }
+    },
+    "note": "sigma1 == sigma2 enforced; 2 free params (log sigma, a)."
+  },
+  "fit_1component_dwarf_plus_cluster_only": {
+    "log_Z": -1.8457833009027231,
+    "log_Z_err": NaN,
+    "loglike_max": -5.668583504273021e-06,
+    "sampler": "grid_quadrature_21^2",
+    "MAP": {
+      "log_sigma": -2.220446049250313e-16,
+      "a": 0.9523809523809521
+    },
+    "percentiles": {
+      "log_sigma": {
+        "p16": -0.761904761904762,
+        "p50": -0.19047619047619058,
+        "p84": 0.38095238095238093
+      },
+      "a": {
+        "p16": 0.5714285714285714,
+        "p50": 1.1428571428571428,
+        "p84": 1.714285714285714
+      }
+    },
+    "note": "segregation channel dropped; asks whether one velocity-dependent sigma can satisfy dwarf + cluster."
+  },
+  "grid_crosscheck_2component": {
+    "log_Z": -2.216333517862594,
+    "loglike_max": -9.918834525734784e-10,
+    "method": "grid_quadrature",
+    "n_per_dim": 21
+  },
+  "bayes_factors": {
+    "vs_1comp_nested_same_3_channels": {
+      "delta_log_Z": 5.185005338595685,
+      "delta_log_Z_err": 0.0,
+      "verdict": "two-component strongly preferred",
+      "validity": "STRICT nested Bayes factor (identical channel set and data); but partly circular \u2014 the segregation channel encodes sigma1 > 10 sigma2 which sigma1 == sigma2 cannot satisfy by construction."
+    },
+    "vs_1comp_dwarf_plus_cluster_only": {
+      "delta_log_Z": -0.37055021695987067,
+      "verdict": "equivalent (no significant preference)",
+      "validity": "DIAGNOSTIC only \u2014 different channel sets (3 vs 2), so not a strict Bayes factor. Answers: can one velocity-dependent sigma satisfy both placeholder constraints?"
+    },
+    "vs_t8_v03_5channel_single_component": {
+      "t8_log_Z": -3.682768783483176,
+      "t8_log_Z_err": 0.11283566670620675,
+      "delta_log_Z": 1.4664352656205821,
+      "verdict": "two-component mildly preferred",
+      "validity": "INCOMMENSURATE \u2014 t8 uses a different (5-channel, partly real / partly calibrated) likelihood with a different absolute normalisation. Reported as a magnitude sanity check only, NOT a Bayes factor."
+    }
+  },
+  "caveats": [
+    "All three channel likelihoods are placeholders (see PLACEHOLDER_WARNING).",
+    "beta_seg is a fixed phenomenological stand-in for the full two-fluid gravothermal solution of Yang+ 2026, not a fitted or published quantity.",
+    "The nested comparison (B) is partly circular: the segregation channel is built from the Yang+ 2026 requirement, so a single-component model is penalised by construction.",
+    "The comparison against t8_v03_posterior.json is incommensurate (different channel set / normalisation) and is a magnitude sanity check only.",
+    "Bayes factors here depend on the (arbitrary) prior ranges; the 4-param model pays a larger Occam factor than the 2-param one."
+  ]
+}

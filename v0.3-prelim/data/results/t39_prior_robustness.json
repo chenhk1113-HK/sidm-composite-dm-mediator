@@ -1,0 +1,56 @@
+{
+  "test": "T39_prior_robustness",
+  "direction": "FIX-3 (review4.docx \u00a73.5): test prior robustness of T39",
+  "fits": {
+    "WIDE (current)": {
+      "label": "WIDE (current)",
+      "priors": {
+        "log_epsilon": [
+          -60.0,
+          -1.0
+        ],
+        "log_alpha": [
+          -30.0,
+          -1.0
+        ]
+      },
+      "log_Z": -2.653315046938632,
+      "MAP": [
+        -0.11267039502034848,
+        1.7068679409787535,
+        -57.27433106616431,
+        -29.651809007598654
+      ],
+      "median_log_sigma_m": 0.2232606613760275,
+      "median_log_epsilon": -53.52062892623786,
+      "median_log_alpha": -27.87137867146973,
+      "wall_seconds": 1.4137465953826904
+    },
+    "NARROW (no SM-decoupling)": {
+      "label": "NARROW (no SM-decoupling)",
+      "priors": {
+        "log_epsilon": [
+          -6.0,
+          -1.0
+        ],
+        "log_alpha": [
+          -6.0,
+          -1.0
+        ]
+      },
+      "log_Z": -9387.60466066409,
+      "MAP": [
+        -2.9972028907468826,
+        1.7443313038276504,
+        -5.99959052538081,
+        -5.998106009426952
+      ],
+      "median_log_sigma_m": -2.998972381022509,
+      "median_log_epsilon": -5.99829315682956,
+      "median_log_alpha": -5.994889982363639,
+      "wall_seconds": 4.556967735290527
+    }
+  },
+  "robustness_verdict": "PRIOR-DEPENDENT: Tier-3 resolution DEPENDS on the prior choice. WIDE prior (allows SM-decoupling) gives log Z = -2.65 (resolved). NARROW prior (no SM-decoupling) gives log Z = -9387.60 (NOT resolved). Honest finding: 'Tier-3 resolution requires a prior that includes the SM-decoupled regime. The Roberts et al. 2024 default epsilon ~ 10^-4 falls in the narrow regime and is incompatible with LZ data.'",
+  "interpretation": "WIDE prior log_Z = -2.653, NARROW prior log_Z = -9387.605. PRIOR-DEPENDENT: Tier-3 resolution DEPENDS on the prior choice. WIDE prior (allows SM-decoupling) gives log Z = -2.65 (resolved). NARROW prior (no SM-decoupling) gives log Z = -9387.60 (NOT resolved). Honest finding: 'Tier-3 resolution requires a prior that includes the SM-decoupled regime. The Roberts et al. 2024 default epsilon ~ 10^-4 falls in the narrow regime and is incompatible with LZ data.'"
+}

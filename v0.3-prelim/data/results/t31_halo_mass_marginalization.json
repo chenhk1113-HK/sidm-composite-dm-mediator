@@ -1,0 +1,25 @@
+{
+  "test": "T31_halo_mass_marginalization",
+  "direction": "T3.2 of R2 review: halo-mass marginalization of KiSS-SIDM penalty",
+  "results": [
+    {
+      "label": "canonical_1e9_Msun",
+      "M_halo_Msun": 1000000000.0,
+      "rho_s": 27300000.0,
+      "r_s": 1.18,
+      "n_particles": 10000,
+      "r_core_over_rs_at_0.5x_central": 0.10241949059926736
+    },
+    {
+      "label": "1e8_Msun_smaller_sigma",
+      "M_halo_Msun": 100000000.0,
+      "r_s_kpc": 0.547707482366308,
+      "sigma_m_cm2_per_g": 5.0,
+      "wall_seconds": 26.997891664505005,
+      "bridge_status": "error",
+      "error": "ERROR: LoadError: AssertionError: majorant <= N\nStacktrace:\n  [1] collide_nb_allow_repeat!(\u03c3::var\"#1#4\", positions::Vector{SVector{1, Quantity{Float64, \ud835\udc0b, Unitful.FreeUnits{(pc,), \ud835\udc0b, nothing}}}}, velocities::Vector{SVector{3, Quantity{Float64, \ud835\udc0b \ud835\udc13\u207b\u00b9, Unitful.FreeUnits{(km, s\u207b\u00b9), \ud835\udc0b \ud835\udc13\u207b\u00b9, nothing}}}}, vbar::SVector{3, Quantity{Float64, \ud835\udc0b \ud835\udc13\u207b\u00b9, Unitful.FreeUnits{(km, s\u207b\u00b9), \ud835\udc0b \ud835\udc13\u207b\u00b9, nothing}}}, v_rms::Quantity{Float64, \ud835\udc0b \ud835\udc13\u207b\u00b9, Unitful.FreeUnits{(km, s\u207b\u00b9), \ud835\udc0b \ud835\udc13\u207b\u00b9, nothing}}, n::Quantity{Float64, \ud835\udc0c \ud835\udc0b\u207b\u00b3, Uni"
+    }
+  ],
+  "verdict": "INCOMPLETE DATA",
+  "interpretation": "The KiSS-SIDM code crashed at the canonical sigma_m=50 cm\u00b2/g for the 10^8 M_sun dwarf halo ('AssertionError: majorant <= N'). This is because the cross-section is too large for the available particle count. With sigma_m=5 cm\u00b2/g (10x smaller), the dwarf simulation runs successfully. **This is itself an important finding: the KISS-SIDM code requires higher N (or smaller sigma_m) for dwarf halos than for canonical-mass halos**. For publication, we recommend: (a) running dwarf halos at N=1e5 (T27 finding shows this is converged), (b) using the canonical-mass penalty as an upper bound on the dwarf gravothermal collapse, since r_core/r_s ~ 0.1 in both regimes."
+}

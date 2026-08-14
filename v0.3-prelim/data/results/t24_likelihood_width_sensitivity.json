@@ -1,0 +1,59 @@
+{
+  "test": "T24_likelihood_width_sensitivity",
+  "direction": "T2.4: Likelihood-width sensitivity scan",
+  "default_widths_dex": {
+    "dsph": 0.4,
+    "ufd": 0.3,
+    "lens": 0.3,
+    "cluster": 0.3,
+    "radio_relic": 0.3,
+    "draco": 0.4
+  },
+  "fits": [
+    {
+      "label": "default_widths_1.0x",
+      "width_scale": 1.0,
+      "log_Z": -18.90359590005202,
+      "log_Z_err": 0.1545685173427348,
+      "MAP": [
+        2.1852347207130327,
+        0.5343491494563448
+      ],
+      "wall_seconds": 0.7073607444763184,
+      "n_samples": 1507
+    },
+    {
+      "label": "wider_widths_2.0x",
+      "width_scale": 2.0,
+      "log_Z": -6.374916341218926,
+      "log_Z_err": 0.11838759240999389,
+      "MAP": [
+        1.1793674778570926,
+        0.2591963221346605
+      ],
+      "wall_seconds": 0.5495543479919434,
+      "n_samples": 1077
+    },
+    {
+      "label": "narrower_widths_0.5x",
+      "width_scale": 0.5,
+      "log_Z": -64.61740804635394,
+      "log_Z_err": 0.19267381188039934,
+      "MAP": [
+        2.300517652439148,
+        0.21685085252560388
+      ],
+      "wall_seconds": 0.9979588985443115,
+      "n_samples": 1813
+    }
+  ],
+  "sensitivity": {
+    "delta_log_sm_wider_vs_default": -1.00586724285594,
+    "delta_log_sm_narrower_vs_default": 0.11528293172611548,
+    "verdict_wider": "MAJOR (shift > 0.5 dex)",
+    "verdict_narrower": "MODERATE (0.1-0.3 dex shift)",
+    "delta_log_Z_wider_vs_default": 12.528679558833096,
+    "delta_log_Z_narrower_vs_default": -45.71381214630192
+  },
+  "interpretation": "With default Gaussian placeholder widths:\n  Widening widths 2x:  log \u03c3/m shifts by -1.006 (MAJOR (shift > 0.5 dex))\n  Narrowing widths 0.5x: log \u03c3/m shifts by +0.115 (MODERATE (0.1-0.3 dex shift))\nIf both shifts < 0.3 dex, the placeholder likelihoods are a minor source of systematic error and the headline is robust.\nIf either shift > 0.3 dex, the Gaussian width choice is a significant source of systematic uncertainty."
+}

@@ -1,0 +1,39 @@
+{
+  "test": "T29_beta_seg_fitted",
+  "direction": "T3.4 from R2 review: beta_seg as fitted free parameter",
+  "t22_baseline_beta_seg": 0.25,
+  "fits": {
+    "A_fixed_beta_0.25": {
+      "label": "A_fixed_beta_0.25",
+      "log_Z": -4.365055898256416,
+      "MAP": [
+        -0.6417724477179103,
+        0.30514596851463116,
+        0.464640032174903,
+        1.5399556294545156
+      ],
+      "wall_seconds": 2.0985867977142334
+    },
+    "B_fitted_beta": {
+      "label": "B_fitted_beta",
+      "log_Z": -4.4130666835228824,
+      "MAP": [
+        -0.22282763852800813,
+        -0.9760580284260325,
+        0.8729767838992327,
+        0.7671781612666546,
+        0.8991200330118676
+      ],
+      "wall_seconds": 2.855419635772705
+    }
+  },
+  "comparison": {
+    "beta_seg_MAP": 0.8991200330118676,
+    "delta_log_Z": -0.04801078526646663,
+    "delta_log_sigma1_MAP": 0.4189448091899022,
+    "delta_log_sigma2_MAP": -1.2812039969406637,
+    "delta_f1_MAP": 0.4083367517243297,
+    "verdict": "MAJOR SHIFT (beta_seg_MAP differs significantly from 0.25)"
+  },
+  "interpretation": "If \u03b2_seg_MAP \u2248 0.25 (the T22 fixed value), the hardcoded value was fine. If \u03b2_seg_MAP differs significantly, the T22 2-comp-vs-1-comp Bayes factor needed to be redone with \u03b2_seg marginalization for publication."
+}

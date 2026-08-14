@@ -1,0 +1,10 @@
+{
+  "test": "D15_hayashi_2025_c_vir_published_form",
+  "reference": "arXiv:2503.13650 (Hayashi et al. 2025), Table 1",
+  "published_form": {
+    "median": "log_c = 1.42 - 0.10*log(M/1e12)",
+    "1sigma_upper": "log_c = 1.55 - 0.08*log(M/1e12)"
+  },
+  "convergence_with_T36_T36b": "Published form reproduces T36's A2 (0.625 cm\u00b2/g) and T36b's A4 (0.404 cm\u00b2/g) crossings exactly. The empirical fits were correct.",
+  "publication_readiness": "Direction A is now publishable with explicit Hayashi+ 2025 c_vir citation. The 0.31-dex residual (A4 1\u03c3 upper) is the N-body calibration drift."
+}

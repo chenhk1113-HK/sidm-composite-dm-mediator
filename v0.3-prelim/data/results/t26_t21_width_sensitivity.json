@@ -1,0 +1,58 @@
+{
+  "test": "T26_t21_width_sensitivity",
+  "direction": "Tier 1 of D7 plan: T21 sensitivity to Gaussian width choice",
+  "t21_default_headline": {
+    "MAP_log_sigma_m": 0.236,
+    "sigma_m_cm2_per_g": 1.72,
+    "log_Z": -0.66
+  },
+  "fits": [
+    {
+      "label": "default_1.0x",
+      "width_scale": 1.0,
+      "log_Z": -0.9074917778732977,
+      "MAP": [
+        -0.058088406230492495,
+        1.281578689850365
+      ],
+      "wall_seconds": 1.2565653324127197,
+      "sigma_m_MAP_cm2_per_g": 0.8748056791477844
+    },
+    {
+      "label": "wider_2.0x",
+      "width_scale": 2.0,
+      "log_Z": -0.7611919406655673,
+      "MAP": [
+        0.139848023652275,
+        0.48408721831054846
+      ],
+      "wall_seconds": 1.215451717376709,
+      "sigma_m_MAP_cm2_per_g": 1.3799012995504638
+    },
+    {
+      "label": "narrower_0.5x",
+      "width_scale": 0.5,
+      "log_Z": -0.8268462472207788,
+      "MAP": [
+        0.4491648712401428,
+        1.359860572828663
+      ],
+      "wall_seconds": 1.224440097808838,
+      "sigma_m_MAP_cm2_per_g": 2.8129685151291683
+    }
+  ],
+  "sensitivity": {
+    "delta_log_sm_wider_vs_default": 0.1979364298827675,
+    "delta_log_sm_narrower_vs_default": 0.5072532774706353,
+    "delta_log_Z_wider_vs_default": 0.14629983720773043,
+    "delta_log_Z_narrower_vs_default": 0.0806455306525189,
+    "verdict_wider": "MODERATE (0.1-0.3 dex shift)",
+    "verdict_narrower": "MAJOR (shift > 0.5 dex)"
+  },
+  "comparison_to_t24": {
+    "t24_delta_log_sm_wider_vs_default": -1.006,
+    "t26_delta_log_sm_wider_vs_default": 0.1979364298827675,
+    "kiss_penalty_dampens_width_sensitivity": true
+  },
+  "interpretation": "T21 (with real KISS-SIDM penalty) sensitivity to Gaussian widths:\n  Default (1.0x): MAP log \u03c3/m = -0.058 (\u03c3/m = 0.87 cm\u00b2/g)\n  2x wider:        MAP log \u03c3/m = 0.140 (\u03c3/m = 1.38 cm\u00b2/g) [MODERATE (0.1-0.3 dex shift)]\n  0.5x narrower:   MAP log \u03c3/m = 0.449 (\u03c3/m = 2.81 cm\u00b2/g) [MAJOR (shift > 0.5 dex)]\n\nCompare to T24 (no KISS penalty): wider case shifted by -1.006 dex (factor of 10).\nIf T26 shift is much smaller, the KISS-SIDM gravothermal penalty is acting as\na regularizer that anchors the headline against width-choice sensitivity."
+}

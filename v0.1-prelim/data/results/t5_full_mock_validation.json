@@ -1,0 +1,39 @@
+{
+  "n_galaxies": 175,
+  "sigma_over_m_values": [
+    0.0,
+    0.5,
+    2.0
+  ],
+  "noise_sigma_kms": 5.0,
+  "seed": 20260810,
+  "results_per_sigma": {
+    "sigma_m=0.0": {
+      "true_sigma_m": 0.0,
+      "true_r_core_kpc": 0.0,
+      "n_galaxies": 175,
+      "median_delta_log_Z_B_minus_N": -3.5366539723450945,
+      "fraction_Burkert_preferred": 0.05142857142857143,
+      "median_recovered_sigma_m": 9.010208281794696,
+      "fraction_recovered_in_factor_3": null
+    },
+    "sigma_m=0.5": {
+      "true_sigma_m": 0.5,
+      "true_r_core_kpc": 0.7071067811865476,
+      "n_galaxies": 175,
+      "median_delta_log_Z_B_minus_N": 0.048460881561823044,
+      "fraction_Burkert_preferred": 0.6342857142857142,
+      "median_recovered_sigma_m": 4.085484696393943,
+      "fraction_recovered_in_factor_3": 0.32
+    },
+    "sigma_m=2.0": {
+      "true_sigma_m": 2.0,
+      "true_r_core_kpc": 1.4142135623730951,
+      "n_galaxies": 175,
+      "median_delta_log_Z_B_minus_N": -0.07410773668100568,
+      "fraction_Burkert_preferred": 0.4057142857142857,
+      "median_recovered_sigma_m": 4.09485935546666,
+      "fraction_recovered_in_factor_3": 0.5085714285714286
+    }
+  }
+}

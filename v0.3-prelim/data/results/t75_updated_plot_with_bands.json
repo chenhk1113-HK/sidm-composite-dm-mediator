@@ -1,0 +1,5 @@
+{
+  "test": "T75_updated_plot_with_bands",
+  "direction": "Reviewer critique: include exact Drobczyk viable bands, not just benchmark",
+  "key_finding": "The updated cross-validation plot (Cross_Validation_T54_vs_Drobczyk_v2_2026-08-13.png) now shows both:\n- Drobczyk's exact benchmark point (blue star)\n- Drobczyk's full viable region (blue shaded rectangle):\n  - m_phi in [12, 18] MeV\n  - m_chi in [200, 1000] GeV\n  - y_chi in [0.28, 0.32]\n- Our T54 MAP point (red circle)\n\nThe blue rectangles make Drobczyk's full parameter space visible, not just a single point. Both models' viable regions are disjoint (m_chi: T54 ~ 34 GeV vs Drobczyk ~ 600 GeV) but converge on the same phenomenology in the SIDM cross-section and direct-detection panels."
+}

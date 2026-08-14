@@ -1,0 +1,21 @@
+{
+  "test": "T7b_vindep_4channel",
+  "log_Z": -2.3846824836319476,
+  "log_Z_err": 0.05932508140478323,
+  "MAP": {
+    "log_sigma_m": -0.20853881585630996,
+    "sigma_m_cm2_per_g": 0.6186730300589487
+  },
+  "median_posterior": {
+    "log_sigma_m_p16": -1.2680999680764387,
+    "log_sigma_m_p50": -0.7571042374318875,
+    "log_sigma_m_p84": -0.05966919973927186
+  },
+  "wall_seconds": 0.9905157089233398,
+  "n_samples": 2438,
+  "channels": [
+    "Horigome+2025 dSph",
+    "Sanchez-Almeida+2025 UFD",
+    "Cha+2025 Bullet Cluster"
+  ]
+}

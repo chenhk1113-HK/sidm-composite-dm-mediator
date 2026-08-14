@@ -1,0 +1,5 @@
+{
+  "test": "T55_dark_matter_mixing",
+  "direction": "User ship direction (c): two-component dark matter (glueballs + rho)",
+  "key_finding": "Two-component DM model: dark glueballs (mass ~ 5.7 * Lambda_dark) provide the bulk of the relic density via 3-to-2 cannibalism; dark rho mesons (mass ~ 2 * sqrt(m_q * Lambda_dark)) provide the SIDM cross-section via Yukawa+Sommerfeld.\n\nFor Lambda_dark = 200 MeV, m_q = 100 MeV: m_g = 1.14 GeV, m_rho = 632 MeV. The glueball-relic-dominant case is Omega_g ~ 0.1, Omega_rho ~ smaller.\n\nFor Lambda_dark = 50 MeV, m_q = 100 MeV: m_g = 285 MeV, m_rho = 224 MeV. The rho and glueball are CLOSE in mass, and the cross-species interaction is significant.\n\nThe dark glueball + dark quark picture is the complete composite DM model. This is the standard answer in the composite DM literature (Cacciapaglia et al. 2020)."
+}

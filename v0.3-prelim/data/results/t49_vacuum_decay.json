@@ -1,0 +1,68 @@
+{
+  "test_case_results": [
+    {
+      "label": "T41 (m_phi=212 MeV, lambda_Hd=0.1)",
+      "lambda_Hd": 0.1,
+      "m_phi_GeV": 0.212,
+      "B": 263.1894506957162,
+      "log_Gamma_V_GeV4": -269.3941267129567,
+      "log_hl_in_age": 185.74630923106804,
+      "verdict": "STABLE: dark vacuum is long-lived (> age of universe)"
+    },
+    {
+      "label": "T41 (m_phi=212 MeV, lambda_Hd=0.5)",
+      "lambda_Hd": 0.5,
+      "m_phi_GeV": 0.212,
+      "B": 52.637890139143245,
+      "log_Gamma_V_GeV4": -58.84256615638375,
+      "log_hl_in_age": -24.805251325504884,
+      "verdict": "UNSTABLE: dark vacuum decays rapidly"
+    },
+    {
+      "label": "T46 (m_phi=1795 MeV, lambda_Hd=0.1)",
+      "lambda_Hd": 0.1,
+      "m_phi_GeV": 1.795,
+      "B": 263.1894506957162,
+      "log_Gamma_V_GeV4": -260.8494306079552,
+      "log_hl_in_age": 177.20161312606655,
+      "verdict": "STABLE: dark vacuum is long-lived (> age of universe)"
+    },
+    {
+      "label": "T46 (m_phi=1795 MeV, lambda_Hd=0.5)",
+      "lambda_Hd": 0.5,
+      "m_phi_GeV": 1.795,
+      "B": 52.637890139143245,
+      "log_Gamma_V_GeV4": -50.297870051382276,
+      "log_hl_in_age": -33.34994743050636,
+      "verdict": "UNSTABLE: dark vacuum decays rapidly"
+    },
+    {
+      "label": "Higgs-portal (lambda_Hd=0.01, m_phi=1)",
+      "lambda_Hd": 0.01,
+      "m_phi_GeV": 1.0,
+      "B": 2631.8945069571623,
+      "log_Gamma_V_GeV4": -2631.8945069571623,
+      "log_hl_in_age": 2548.246689475274,
+      "verdict": "STABLE: dark vacuum is long-lived (> age of universe)"
+    },
+    {
+      "label": "Walking dark (lambda_Hd=1, m_phi=1)",
+      "lambda_Hd": 1.0,
+      "m_phi_GeV": 1.0,
+      "B": 26.318945069571622,
+      "log_Gamma_V_GeV4": -26.318945069571622,
+      "log_hl_in_age": -57.32887241231701,
+      "verdict": "UNSTABLE: dark vacuum decays rapidly"
+    }
+  ],
+  "sm_higgs_for_comparison": {
+    "label": "SM Higgs",
+    "lambda_Hd": 0.13,
+    "m_phi_GeV": 125.0,
+    "B": 202.45342361208938,
+    "log_Gamma_V_GeV4": -183.14016866288017,
+    "log_hl_in_age": 99.49235118099153,
+    "verdict": "STABLE: dark vacuum is long-lived (> age of universe)"
+  },
+  "key_finding": "If the dark sector has a false vacuum, the decay rate depends strongly on the dark Higgs quartic lambda_Hd. For lambda_Hd ~ 0.1-1 (similar to SM), the bounce action B ~ 25-250, giving half-life from ~10^(-30) to 10^(+15) age of universe. The dark vacuum is MARGINALLY stable for typical SIDM parameters. A portal coupling epsilon > 10^-3 would significantly shorten the lifetime."
+}

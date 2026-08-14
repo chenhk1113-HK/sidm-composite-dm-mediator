@@ -1,0 +1,23 @@
+{
+  "galaxy": "ESO116-G012",
+  "profile": "Burkert",
+  "n_pts": 15,
+  "log_Z": -15.747744227476025,
+  "log_Z_err": 0.2363406166598166,
+  "chi2_at_MAP": 16.704232865598453,
+  "chi2_reduced_at_MAP": 1.2849409896614195,
+  "theta_MAP": {
+    "log_param1": 7.428842945576646,
+    "log_param2": 0.7303598016520612
+  },
+  "posterior_summary": {
+    "log_param1_median": 7.40543155175323,
+    "log_param2_median": 0.7515168807665651,
+    "log_param1_std": 1.078045648464333,
+    "log_param2_std": 0.5982278923711565
+  },
+  "n_samples": 2412,
+  "wall_seconds": 1.4841737747192383,
+  "nlive": 200,
+  "dlogz_target": 0.1
+}

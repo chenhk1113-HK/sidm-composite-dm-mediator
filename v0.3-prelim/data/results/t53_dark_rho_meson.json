@@ -1,0 +1,5 @@
+{
+  "test": "T53_dark_rho_meson",
+  "direction": "User ship direction (a): dark rho meson (vector mediator) with dark quarks",
+  "key_finding": "Adding dark quarks to the dark sector gives the dark rho meson (vector mediator) with mass m_rho ~ 2 * sqrt(m_q * Lambda_dark) by PCAC. The dark rho + dark Yukawa gives the T40/T46 Yukawa+Sommerfeld cross-section with the right velocity dependence (a > 0 in some regime). This is the natural generalization of the T46 model with the dark rho mass set by dark confinement rather than free.\n\nKEY: dark rho mass is naturally ~100 MeV to 1 GeV, consistent with T41/T46 best-fit. The model is now a complete composite dark matter picture: dark confinement provides the mass scale, dark rho provides the vector mediator, dark Yukawa provides the coupling."
+}

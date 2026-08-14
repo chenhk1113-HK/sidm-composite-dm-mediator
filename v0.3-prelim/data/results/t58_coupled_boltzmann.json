@@ -1,0 +1,5 @@
+{
+  "test": "T58_coupled_boltzmann",
+  "direction": "User ship direction (c): self-consistent 2-component Boltzmann",
+  "key_finding": "The 2-component Boltzmann with dark glueballs (3-to-2 cannibalism) and dark rho (WIMP freeze-out) is self-consistent for Lambda_dark > 100 MeV. For Lambda_dark = 50 MeV, the glueball is too light and the cannibalism doesn't fully populate the dark matter (Omega_g too small).\n\n**Self-consistency condition**: Omega_g + Omega_rho <= 0.5 * Omega_observed (no overclosure). For Lambda_dark ~ 100 MeV, both species contribute roughly equally to Omega ~ 0.05, giving Omega_total ~ 0.10. This is self-consistent.\n\n**Caveat**: this is a simplified treatment. A full Boltzmann code (e.g., DarkSUSY or micrOMEGAs) would refine the cross-species interactions."
+}

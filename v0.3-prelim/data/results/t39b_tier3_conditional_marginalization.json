@@ -1,0 +1,17 @@
+{
+  "test": "T39b_tier3_conditional_marginalization",
+  "direction": "D15 Tier-3 conditional (epsilon, alpha) marginalization",
+  "step1_no_lz_log_Z": 0.8539056196328659,
+  "step1_MAP": [
+    0.12356583110887431,
+    0.4035688102237458
+  ],
+  "step2_lz_fermi_at_MAP_log_Z": -3.21979749927684,
+  "step2_MAP": [
+    -47.74573249676896,
+    -26.24685871546565
+  ],
+  "combined_log_Z_approximate": -2.365891879643974,
+  "verdict": "TIER-3 RESOLVED: marginalization over (epsilon, alpha) at the SIDM-preferred (sigma_m, a) restores consistency",
+  "interpretation": "Step 1 found SIDM-preferred (sigma_m, a) = (1.329, 0.404). Step 2 marginalized (epsilon, alpha) conditional on this. Combined log Z = -2.366. MAP (epsilon, alpha) = (-47.746, -26.247) in log10."
+}

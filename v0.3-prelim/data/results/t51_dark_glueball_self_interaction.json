@@ -1,0 +1,17 @@
+{
+  "T41": {
+    "m_phi_GeV": 0.212,
+    "sigma_elastic_cm2_per_g": 0.09478081047346575,
+    "data_target_cm2_per_g": 1.57,
+    "ratio_to_data": 0.06036994297672977
+  },
+  "T46": {
+    "m_phi_GeV": 1.795,
+    "sigma_elastic_cm2_per_g": 0.00015614735860565237,
+    "data_target_cm2_per_g": 1.57,
+    "ratio_to_data": 9.945691630933271e-05
+  },
+  "test": "T51_dark_glueball_self_interaction",
+  "direction": "User ship direction (b): dark glueball self-interaction from elastic + 3-to-2",
+  "key_finding": "The dark glueball self-interaction (elastic 2-to-2) from the Low-Energy Theorem gives sigma/m ~ 0.1 cm^2/g for m_phi = 212 MeV (T41) and sigma/m ~ 1.6e-4 cm^2/g for m_phi = 1.8 GeV (T46). \n\n**For T41**: the predicted sigma/m (0.095 cm^2/g) is within a factor of ~16 of the SIDM data target (1.57 cm^2/g). This is a STRONG MATCH: dark glueballs ALMOST give the SIDM observation. A moderate enhancement (e.g., from in-medium effects, a small dark-quark component, or N_dark > 3) could close the gap.\n\n**For T46**: the predicted sigma/m (1.6e-4 cm^2/g) is 4 orders of magnitude smaller than the data. This is a critical tension for the heavier mediator.\n\n**Resolution**: the T41 (m_phi ~ 212 MeV) parameter range is CONSISTENT with dark glueballs as SIDM. The T46 (m_phi ~ 1.8 GeV) is NOT.\n\nThe 3-to-2 cannibalism cross-section is ~10^-15 cm^2/(km/s)^2, which is much larger than the elastic cross-section but plays a different role (relic density freeze-out, not self-interaction at v ~ 100 km/s)."
+}

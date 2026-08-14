@@ -1,0 +1,5 @@
+{
+  "test": "T52_glueball_sommerfeld",
+  "direction": "User ship direction (c): dark glueball Sommerfeld (dilaton-mediated)",
+  "key_finding": "The dark glueball self-interaction via dilaton exchange gives sigma/m ~ 10^-5 cm^2/g at v=100 km/s, which is 5 orders of magnitude smaller than the SIDM data target. The velocity dependence is a ~ +0.5 (positive, right sign) but the magnitude is wrong. \n\nThe 3-to-2 cannibalism enhancement can boost the cross-section at low v by factors of alpha^2 / v^2, but at galactic velocities (v ~ 100 km/s) this enhancement is small. \n\n**Conclusion**: Dark glueball elastic scattering via the dilaton is NOT the dominant SIDM mechanism. The data wants stronger interactions than glueballs provide. The model needs additional states (dark quarks, dark gauge bosons) to match the data."
+}

@@ -1,0 +1,5 @@
+{
+  "test": "T59_dark_baryon",
+  "direction": "User ship direction (d): dark baryon as composite DM",
+  "key_finding": "Dark baryons (composite of N_dark dark quarks) provide an alternative DM candidate for SU(N_dark) with N_f >= 1 light quarks. For N_dark = 3-10 and Lambda_dark = 50-500 MeV, dark baryon masses are 150-5000 MeV.\n\n**Cross-section**: sigma/m ~ 1/(N_dark * Lambda_dark^2). For N_dark = 3 and Lambda_dark = 200 MeV, sigma/m ~ 0.01-0.1 cm^2/g. Lower than the data target, but within an order of magnitude.\n\n**Asymmetric relic density**: if dark baryon number is conserved, the relic density is set by the dark baryon asymmetry, not thermal freeze-out. This naturally gives Omega ~ 0.12 for the right asymmetry parameter.\n\n**For the paper**: dark baryons are the most conservative composite DM candidate (analog of protons). They are stable (Witten 1979), naturally have the right mass scale, and the relic density is set by the asymmetry."
+}

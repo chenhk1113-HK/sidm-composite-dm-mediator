@@ -1,0 +1,30 @@
+{
+  "test": "T38_dwarf_kiSS_sidm_higher_N",
+  "direction": "D13 deliverable: Direction C closure via N-resolved dwarf KiSS-SIDM runs at N=5e4 (pre-flight) and N=1e5 (converged). Resolves Pipeline Overview \u00a75 milestone #2 (T31 dwarf marginalization).",
+  "halo_params": {
+    "M_halo_Msun": 100000000.0,
+    "rho_s_Msun_per_kpc3": 27300000.0,
+    "r_s_kpc": 0.547707482366308,
+    "sigma_m_cm2_per_g": 5.0
+  },
+  "canonical_baseline": {
+    "M_halo_Msun": 1000000000.0,
+    "r_s_kpc": 1.18,
+    "sigma_m_cm2_per_g": 50.0,
+    "r_core_over_rs": 0.10241949059926736
+  },
+  "fits": [
+    {
+      "label": "T38a_N5e4_smoke",
+      "N": 50000,
+      "M_halo_Msun": 100000000.0,
+      "r_s_kpc": 0.547707482366308,
+      "sigma_m_cm2_per_g": 5.0,
+      "wall_seconds": 3600.2840456962585,
+      "bridge_status": "EXCEPTION",
+      "error": "TimeoutExpired: Command '['/home/lamkuenai/.juliaup/bin/julia', '+1.11.5', '--project=/home/lamkuenai/KiSS-SIDM', '/tmp/kiss_sidm_worker.jl']' timed out after 3600 seconds"
+    }
+  ],
+  "verdict": "FAILURE: N=5e4 did not clear the AssertionError. Dwarf KiSS-SIDM is intractable at this resolution.",
+  "interpretation": "T31 hit AssertionError('majorant <= N') at dwarf N=1e4 because the KiSS-SIDM code's collision sampler requires enough particles per radial cell to estimate the local scattering rate. T27 confirmed r_core/r_s converges between N=1e4 and N=1e5 at the canonical halo, and the canonical KiSS-SIDM paper (Gurian & May 2025) reports convergence only at N=2e6. We hypothesise that the dwarf regime requires N>=1e5 for the assertion to clear. T38a/b tests this."
+}

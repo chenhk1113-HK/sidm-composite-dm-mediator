@@ -1,0 +1,286 @@
+{
+  "test": "T36b_sashimi_5config_c_vir_sweep",
+  "direction": "D15 follow-on to T36: 5 c_vir relations (3 from T36 + 2 new)",
+  "configs_run": [
+    {
+      "config_label": "A1_dutton_maccio_2014",
+      "median_c_vir": 10.17002800352029,
+      "median_M_vir_Msun": 281552888.961392,
+      "sigma_0_sweep": [
+        {
+          "sigma_0_cm2_per_g": 0.01,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 0.05,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 0.1,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 0.2,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 0.5,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 1.0,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 2.0,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 5.0,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 10.0,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 50.0,
+          "collapsed_fraction": 0.12
+        },
+        {
+          "sigma_0_cm2_per_g": 100.0,
+          "collapsed_fraction": 0.5
+        }
+      ],
+      "crossing_sigma_0_cm2_per_g": 100.0,
+      "wall_seconds": 0.40605831146240234,
+      "ratio_to_hayashi": 500.0,
+      "gap_in_dex": 2.6989700043360187
+    },
+    {
+      "config_label": "A2_hayashi_2025",
+      "median_c_vir": 60.77160193725349,
+      "median_M_vir_Msun": 281552888.961392,
+      "sigma_0_sweep": [
+        {
+          "sigma_0_cm2_per_g": 0.01,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 0.05,
+          "collapsed_fraction": 0.01
+        },
+        {
+          "sigma_0_cm2_per_g": 0.1,
+          "collapsed_fraction": 0.03
+        },
+        {
+          "sigma_0_cm2_per_g": 0.2,
+          "collapsed_fraction": 0.1
+        },
+        {
+          "sigma_0_cm2_per_g": 0.5,
+          "collapsed_fraction": 0.41
+        },
+        {
+          "sigma_0_cm2_per_g": 1.0,
+          "collapsed_fraction": 0.69
+        },
+        {
+          "sigma_0_cm2_per_g": 2.0,
+          "collapsed_fraction": 0.93
+        },
+        {
+          "sigma_0_cm2_per_g": 5.0,
+          "collapsed_fraction": 1.0
+        },
+        {
+          "sigma_0_cm2_per_g": 10.0,
+          "collapsed_fraction": 1.0
+        },
+        {
+          "sigma_0_cm2_per_g": 50.0,
+          "collapsed_fraction": 1.0
+        },
+        {
+          "sigma_0_cm2_per_g": 100.0,
+          "collapsed_fraction": 1.0
+        }
+      ],
+      "crossing_sigma_0_cm2_per_g": 0.6247836354113759,
+      "wall_seconds": 0.3682365417480469,
+      "ratio_to_hayashi": 3.1239181770568796,
+      "gap_in_dex": 0.49469965013546013
+    },
+    {
+      "config_label": "A3_ludlow_2016",
+      "median_c_vir": 8.656097683379489,
+      "median_M_vir_Msun": 281552888.961392,
+      "sigma_0_sweep": [
+        {
+          "sigma_0_cm2_per_g": 0.01,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 0.05,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 0.1,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 0.2,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 0.5,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 1.0,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 2.0,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 5.0,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 10.0,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 50.0,
+          "collapsed_fraction": 0.07
+        },
+        {
+          "sigma_0_cm2_per_g": 100.0,
+          "collapsed_fraction": 0.23
+        }
+      ],
+      "crossing_sigma_0_cm2_per_g": null,
+      "wall_seconds": 0.3642914295196533,
+      "ratio_to_hayashi": null,
+      "gap_in_dex": null
+    },
+    {
+      "config_label": "A4_hayashi_2025_high",
+      "median_c_vir": 69.67180446617795,
+      "median_M_vir_Msun": 281552888.961392,
+      "sigma_0_sweep": [
+        {
+          "sigma_0_cm2_per_g": 0.01,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 0.05,
+          "collapsed_fraction": 0.02
+        },
+        {
+          "sigma_0_cm2_per_g": 0.1,
+          "collapsed_fraction": 0.06
+        },
+        {
+          "sigma_0_cm2_per_g": 0.2,
+          "collapsed_fraction": 0.17
+        },
+        {
+          "sigma_0_cm2_per_g": 0.5,
+          "collapsed_fraction": 0.6
+        },
+        {
+          "sigma_0_cm2_per_g": 1.0,
+          "collapsed_fraction": 0.83
+        },
+        {
+          "sigma_0_cm2_per_g": 2.0,
+          "collapsed_fraction": 0.99
+        },
+        {
+          "sigma_0_cm2_per_g": 5.0,
+          "collapsed_fraction": 1.0
+        },
+        {
+          "sigma_0_cm2_per_g": 10.0,
+          "collapsed_fraction": 1.0
+        },
+        {
+          "sigma_0_cm2_per_g": 50.0,
+          "collapsed_fraction": 1.0
+        },
+        {
+          "sigma_0_cm2_per_g": 100.0,
+          "collapsed_fraction": 1.0
+        }
+      ],
+      "crossing_sigma_0_cm2_per_g": 0.40404135255990037,
+      "wall_seconds": 0.3606581687927246,
+      "ratio_to_hayashi": 2.0202067627995017,
+      "gap_in_dex": 0.305395820608773
+    },
+    {
+      "config_label": "A5_dutton_hayashi_mix",
+      "median_c_vir": 14.238039204928404,
+      "median_M_vir_Msun": 281552888.961392,
+      "sigma_0_sweep": [
+        {
+          "sigma_0_cm2_per_g": 0.01,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 0.05,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 0.1,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 0.2,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 0.5,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 1.0,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 2.0,
+          "collapsed_fraction": 0.0
+        },
+        {
+          "sigma_0_cm2_per_g": 5.0,
+          "collapsed_fraction": 0.02
+        },
+        {
+          "sigma_0_cm2_per_g": 10.0,
+          "collapsed_fraction": 0.06
+        },
+        {
+          "sigma_0_cm2_per_g": 50.0,
+          "collapsed_fraction": 0.62
+        },
+        {
+          "sigma_0_cm2_per_g": 100.0,
+          "collapsed_fraction": 0.85
+        }
+      ],
+      "crossing_sigma_0_cm2_per_g": 35.41528309299192,
+      "wall_seconds": 0.3579061031341553,
+      "ratio_to_hayashi": 177.07641546495958,
+      "gap_in_dex": 2.248160722028605
+    }
+  ],
+  "best_config": "A4_hayashi_2025_high",
+  "best_crossing_sigma_0_cm2_per_g": 0.40404135255990037,
+  "best_gap_in_dex": 0.305395820608773,
+  "verdict": "T36b 5-config sweep found best fit at A4_hayashi_2025_high, gap 0.305395820608773 dex from Hayashi+ 2025 boundary.",
+  "interpretation": "T36 (D13) found A2 Hayashi+ 2025 with 0.49 dex gap. T36b tests whether a finer grid closes the gap further (A4 Hayashi high-tail, A5 1.4x bump). If A4 or A5 closes to <0.3 dex, the gap is configurable; if A2 remains best, the residual is N-body calibration drift, not configuration choice."
+}

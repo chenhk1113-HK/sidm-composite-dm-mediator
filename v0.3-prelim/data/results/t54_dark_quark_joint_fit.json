@@ -1,0 +1,84 @@
+{
+  "test": "T54_dark_quark_joint_fit",
+  "direction": "User ship direction (b): dark quark + dark rho joint fit",
+  "ndim": 6,
+  "parameters": [
+    "log_m_q_MeV",
+    "log_Lambda_dark_MeV",
+    "log_m_chi_GeV",
+    "g_chi",
+    "log_epsilon",
+    "log_alpha"
+  ],
+  "priors": {
+    "log_m_q_MeV": [
+      -1.0,
+      4.0
+    ],
+    "log_Lambda_dark_MeV": [
+      -1.0,
+      4.0
+    ],
+    "log_m_chi_GeV": [
+      0.5,
+      3.0
+    ],
+    "g_chi": [
+      0.01,
+      2.0
+    ],
+    "log_epsilon": [
+      -60.0,
+      -1.0
+    ],
+    "log_alpha": [
+      -30.0,
+      -1.0
+    ]
+  },
+  "log_Z": -3.596146487915038,
+  "log_Z_err": 0.21686990188744218,
+  "MAP": [
+    1.3177683237817726,
+    -0.8219709670254535,
+    1.5335468568369535,
+    1.5088354956308856,
+    -56.63464253784013,
+    -28.554314030567895
+  ],
+  "MAP_physical": {
+    "m_q_MeV": 20.7858756001829,
+    "Lambda_dark_MeV": 0.15067077875832402,
+    "m_rho_MeV_derived": 3.552196924397544,
+    "m_chi_GeV": 34.162280701588195,
+    "g_chi": 1.5088354956308856,
+    "sigma_m_0_derived": 1.3562402153946698,
+    "a_derived": 2.235453847540698
+  },
+  "median": {
+    "log_m_q_MeV": 0.3054860079401165,
+    "log_Lambda_dark_MeV": -0.26101517082251413,
+    "log_m_chi_GeV": 0.9805184582361789,
+    "g_chi": 1.4394885327528346,
+    "log_epsilon": -52.88140354548239,
+    "log_alpha": -27.40277511429048
+  },
+  "median_physical": {
+    "m_q_MeV": 2.0206263305893,
+    "Lambda_dark_MeV": 0.5482578127842452,
+    "m_rho_MeV_derived": 2.3735296937195534,
+    "m_chi_GeV": 9.561333314095085,
+    "g_chi": 1.4394885327528346,
+    "epsilon": 1.3140032957681204e-53,
+    "alpha": 3.955714012264681e-28
+  },
+  "tension_resolution": {
+    "T39_a": 0.94,
+    "MAP_a": 2.235453847540698,
+    "tension": 1.2954538475406983,
+    "resolved": false
+  },
+  "wall_seconds": 3.939018487930298,
+  "verdict": "DARK QUARK + DARK RHO FIT \u2014 PARTIAL RESOLUTION",
+  "interpretation": "log Z = -3.596. Posterior medians: m_q = 2.02 MeV, Lambda_dark = 0.55 MeV, m_rho (derived) = 2.37 MeV, m_chi = 9.56 GeV, g_chi = 1.4395. a_resolved = +2.235 vs T39 a = +0.940: NOT RESOLVED. **The dark quark + dark rho picture provides a natural UV origin for the mediator mass (via PCAC), and the velocity dependence is correct.**"
+}
