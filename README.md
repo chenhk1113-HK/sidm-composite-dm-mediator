@@ -203,20 +203,6 @@ honest assessment of every reviewer recommendation, and
 
 ---
 
-## Relationship to other projects
-
-| Project | Path | Relationship |
-|---|---|---|
-| WIMpy (cosmology) | `C:\Users\lamkuenai\projects\wimpy\` | Sister project — shares Bayesian methodology |
-| FUSE MAST-U | `C:\Users\lamkuenai\projects\fuse-mast-u-patch-loop\` | Unrelated (fusion, not cosmology) |
-| FUSE sandbox | `C:\Users\lamkuenai\projects\fuse-sandbox-nt\` | Unrelated (fusion active repo) |
-
-Methodology reuse from WIMpy is explicit (see `CONTRIBUTING.md` and
-`docs/TUTORIAL.md` § "Methodology reuse"). The Python venv is shared
-(`/home/lamkuenai/wimpy/bin/python` on WSL).
-
----
-
 ## Citation
 
 See [`CITATION.cff`](CITATION.cff) for the GitHub-native citation metadata.
