@@ -82,6 +82,13 @@ publication page for the canonical DOI/HEPData link.
 placeholder with the real LZ WS2024 posterior. Combined with the KiSS-SIDM
 penalty, the result is a **strongly constraining** σ/m limit at m_χ ≈ 40 GeV.
 
+**Note on historical vs current limits**: earlier synthesis versions
+(MEDIATOR_DETECTION_SYNTHESIS_v8 and earlier) cited a LZ limit of 1.1×10⁻³³ cm²
+and a resulting "85 orders of magnitude" evasion margin. That limit was
+from the LUX 2017-era result, NOT LZ WS2024. The current v12 doc uses the
+correct LZ WS2024 limit (1.07×10⁻⁴⁷ at 34 GeV, ν floor 5×10⁻⁴⁶), giving a
+72-dex margin. **Corrected 2026-08-14 per Full Review 9 audit.**
+
 ### `Fermi-dSph-14yr` — McDaniel et al. (2024)
 
 **Reference**: McDaniel, A. et al. (2024), "Legacy Analysis of Dark Matter

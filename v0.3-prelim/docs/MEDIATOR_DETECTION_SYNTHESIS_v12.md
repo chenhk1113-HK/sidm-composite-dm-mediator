@@ -116,7 +116,11 @@ the neutrino floor, SUCCESSFULLY evading LZ SR1+SR3."
 | **Margin below ν floor** | **2.46×10⁷²** |
 
 This is **72 orders of magnitude** of evasion. Not just "below the floor"
-— *decades* below.
+— *decades* below. A **natural** consequence of the prior choice in T39, not
+a forced discovery. Prior sensitivity is included as a core publication
+plot (see `outputs/plots/t39_prior_robustness.png`). **With the Roberts
+et al. 2024 narrow default prior (ε ~ 10⁻⁴) the same data would exclude
+SIDM at log Z ≈ -9388; the resolution is prior-dependent.**
 
 ---
 

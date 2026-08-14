@@ -52,12 +52,9 @@ for Yukawa-like mediators at MeV scale).
 | LZ σ_SI | ~2×10⁻¹¹⁸ cm² (below neutrino floor by 10⁴⁶) | T62 LZ direct-detection |
 | Composite dark-ρ σ/m | 1.36 cm²/g (within 13% of joint posterior) | T54 PCAC + KSFR |
 | 6-channel systematic budget | 0.4–0.5 dex (publication-grade) | FINDINGS.md §S.7 |
+| Cross-validation vs Drobczyk 2025 | σ/m within 30%; both predict mediator invisible to direct detection | T68 + [plot](v0.3-prelim/plots/Cross_Validation_T54_vs_Drobczyk_v2_2026-08-13.png) |
 
-The mediator is **invisible to every direct-detection experiment** by
-construction: ε ~ 10⁻⁵⁰ is 30+ orders of magnitude below stellar cooling
-bounds and 10⁷² times below LZ's most sensitive limit. This is not a
-failure of detection — it is a publishable prediction of the secluded-WIMP
-framework (Pospelov, Ritz, Voloshin 2008).
+The mediator is **naturally below all direct-detection bounds** by construction: ε ~ 10⁻⁵⁰ is 30+ orders of magnitude below stellar cooling bounds and ~10⁷² times below the LZ WS2024 limit (2.2×10⁻⁴⁸ cm² at 43 GeV). The published LZ result was used for the comparison. This is not a failure of detection — it is a **prediction** of the secluded-WIMP framework (Pospelov, Ritz, Voloshin 2008) that the data supports: SIDM cross-section is consistent with multi-channel observational constraints, **conditional on a prior that includes the SM-decoupled regime**. With the Roberts et al. 2024 narrow default prior (ε ~ 10⁻⁴), the same data would exclude SIDM; the resolution is therefore prior-dependent, as documented in T39.
 
 The composite-DM extension (T56–T63) shows that the dark-ρ meson mass
 from PCAC + KSFR gives a σ/m within 13% of the joint posterior — the
