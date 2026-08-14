@@ -154,7 +154,12 @@ def loglike_fermi_sidm(theta, m_chi_GeV: float = 50.0):
 
 
 def loglike_5channel_with_fermi(theta):
-    """5-channel joint fit with REAL Fermi dwarf + dSph + UFD + Bullet + SPARC."""
+    """5-channel joint fit with REAL Fermi dwarf + dSph + UFD + Bullet + SPARC.
+
+    Per R11 G12 closure: SPARC now uses loglike_sparc_hierarchical() (real
+    per-galaxy likelihood marginalized over ρ_c with Dutton-Maccio 2014
+    concentration-mass prior) instead of the legacy saturation score.
+    """
     if not (config.LOG_SIGMA_M_RANGE[0] <= theta[0] <= config.LOG_SIGMA_M_RANGE[1]):
         return -np.inf
     if not (config.A_RANGE[0] <= theta[1] <= config.A_RANGE[1]):
@@ -166,12 +171,15 @@ def loglike_5channel_with_fermi(theta):
     ll_ufd = ch_v03.loglike_ufd_v03(sigma_m_0, a)
     ll_bullet = ch_v03.loglike_bullet_v03(sigma_m_0, a)
     import t8_v03_joint_fit as t8
-    ll_sparc = t8.delta_log_sparc(sigma_m_0, a) / 1000
+    ll_sparc = t8.loglike_sparc_hierarchical(sigma_m_0, a)
     return ll_fermi + ll_dsph + ll_ufd + ll_bullet + ll_sparc
 
 
 def loglike_5channel_without_fermi(theta):
-    """5-channel joint fit WITHOUT Fermi (the previous behavior)."""
+    """5-channel joint fit WITHOUT Fermi (the previous behavior).
+
+    Per R11 G12 closure: SPARC now uses loglike_sparc_hierarchical().
+    """
     if not (config.LOG_SIGMA_M_RANGE[0] <= theta[0] <= config.LOG_SIGMA_M_RANGE[1]):
         return -np.inf
     if not (config.A_RANGE[0] <= theta[1] <= config.A_RANGE[1]):
@@ -182,7 +190,7 @@ def loglike_5channel_without_fermi(theta):
     ll_ufd = ch_v03.loglike_ufd_v03(sigma_m_0, a)
     ll_bullet = ch_v03.loglike_bullet_v03(sigma_m_0, a)
     import t8_v03_joint_fit as t8
-    ll_sparc = t8.delta_log_sparc(sigma_m_0, a) / 1000
+    ll_sparc = t8.loglike_sparc_hierarchical(sigma_m_0, a)
     return ll_dsph + ll_ufd + ll_bullet + ll_sparc
 
 
