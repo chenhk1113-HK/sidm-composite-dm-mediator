@@ -85,7 +85,9 @@ sidm-composite-dm-mediator/
 │   ├── TUTORIAL.md                         ← end-to-end tutorial (fresh-checkout → reproduce T21)
 │   ├── FINDINGS.md (→ v0.3-prelim/docs/)   ← full results synthesis
 │   ├── REVIEWER_AUDIT_R2.md                ← audit trail from the R2 external review
+│   ├── REVIEWER_AUDIT_R9.md                ← audit trail from the Full Review 9 review (2026-08-14)
 │   └── findings_2026_SIDM_papers.md        ← 2026 SIDM literature context (Yang+ 2024, Yang+ 2026)
+├── EXTRACT.md                              ← 1,000-word rationale + key findings + limitations
 │
 ├── tests/                                 ← top-level test files
 ├── v0.1-prelim/                           ← v0.1 work (SPARC single-galaxy + joint fits)
