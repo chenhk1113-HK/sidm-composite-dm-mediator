@@ -30,7 +30,11 @@ A self-contained Bayesian analysis pipeline that:
 
 3. **Extends to composite DM** (dark glueballs, dark rho, dark baryons
    in SU(N_dark)) and computes σ/m, relic density, and direct-detection
-   cross-sections from first-principles PCAC + chiral perturbation theory.
+   cross-sections from a phenomenological composite-DM parametrization
+   (PCAC for the pseudoscalar pion sector; smooth interpolation between
+   the heavy-quark and chiral-symmetry-broken limits for the vector-rho
+   mass). **Toy model, not first-principles.** A proper calculation
+   requires lattice input or a calibrated effective theory.
 
 4. **Surveys mediator detection feasibility** for a secluded MeV-scale
    mediator: cross-section magnitude AND velocity slope against
@@ -167,7 +171,7 @@ dark-energy model comparison to dark-matter microphysics. Key pieces:
 - **Real published likelihoods** for LZ WS2024 (arXiv:2410.17036) and Fermi-LAT
   14-year dSph stacking (McDaniel et al. 2024) — replaces Gaussian proxies
 - **Welch t-test** for null-result verification across rounds
-- **PCAC + KSFR** for first-principles composite-DM mass predictions
+- **Phenomenological composite parametrization** (PCAC for the pseudoscalar pion sector; smooth interpolation for the vector-rho mass) for dark-sector composite-DM mass formulas — a toy model, not a first-principles lattice calculation
 - **Conventional Bayesian model comparison** for one-component vs two-component
   vs composite-DM evidence weights
 

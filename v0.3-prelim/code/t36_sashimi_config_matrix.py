@@ -248,10 +248,10 @@ def main():
         ),
     }
 
-    out_path = Path("/home/lamkuenai/dm-sidm-pipeline/v0.3-prelim/data/results/t36_sashimi_config_matrix.json")
+    out_path = Path("/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/data/results/t36_sashimi_config_matrix.json")
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(out, indent=2, default=str))
-    win_path = Path("/mnt/c/Users/lamkuenai/projects/dm-sidm-pipeline/v0.3-prelim/data/results/t36_sashimi_config_matrix.json")
+    win_path = Path("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/data/results/t36_sashimi_config_matrix.json")
     win_path.write_text(json.dumps(out, indent=2, default=str))
     print()
     print(f"output -> {out_path}")

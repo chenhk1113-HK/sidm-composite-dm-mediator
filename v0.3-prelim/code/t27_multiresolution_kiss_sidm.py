@@ -16,7 +16,7 @@ from pathlib import Path
 
 import numpy as np
 
-RESULTS_DIR = Path("/mnt/c/Users/lamkuenai/projects/dm-sidm-pipeline/v0.3-prelim/data/results")
+RESULTS_DIR = Path("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/data/results")
 
 
 def parse_array_string(s):
@@ -176,10 +176,10 @@ def main():
                 else "STRONG N dependence (NOT converged)"
             ),
         }
-    out_path = Path("/mnt/c/Users/lamkuenai/projects/dm-sidm-pipeline/v0.3-prelim/data/results/t27_multiresolution_kiss_sidm.json")
+    out_path = Path("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/data/results/t27_multiresolution_kiss_sidm.json")
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(out, indent=2, default=str))
-    wsl_out_path = Path("/home/lamkuenai/dm-sidm-pipeline/v0.3-prelim/data/results/t27_multiresolution_kiss_sidm.json")
+    wsl_out_path = Path("/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/data/results/t27_multiresolution_kiss_sidm.json")
     wsl_out_path.parent.mkdir(parents=True, exist_ok=True)
     wsl_out_path.write_text(json.dumps(out, indent=2, default=str))
     print(f"\noutput -> {out_path}")

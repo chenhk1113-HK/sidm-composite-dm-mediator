@@ -54,7 +54,7 @@ CANONICAL_RHO_S = 2.73e7
 CANONICAL_R_S = 1.18
 CANONICAL_SIGMA_M = 50.0
 
-RESULTS_DIR = Path("/home/lamkuenai/dm-sidm-pipeline/v0.3-prelim/data/results")
+RESULTS_DIR = Path("/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/data/results")
 
 
 def run_dwarf(N: int, sigma_m: float, label: str, t_end_Gyr: float = 10.0):
@@ -93,7 +93,7 @@ def run_dwarf(N: int, sigma_m: float, label: str, t_end_Gyr: float = 10.0):
     # Read the canonical-aggregated result the bridge always writes
     agg_path = RESULTS_DIR / "kiss_sidm_canonical_simulation.json"
     if not agg_path.exists():
-        win_agg = Path("/mnt/c/Users/lamkuenai/projects/dm-sidm-pipeline/v0.3-prelim/data/results/kiss_sidm_canonical_simulation.json")
+        win_agg = Path("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/data/results/kiss_sidm_canonical_simulation.json")
         if win_agg.exists():
             agg_path = win_agg
     if agg_path.exists():
@@ -176,7 +176,7 @@ def main():
     print("\n--- T31 canonical baseline (for context) ---")
     canonical_path = RESULTS_DIR / "kiss_sidm_canonical_simulation.json"
     if not canonical_path.exists():
-        canonical_path = Path("/mnt/c/Users/lamkuenai/projects/dm-sidm-pipeline/v0.3-prelim/data/results/kiss_sidm_canonical_simulation.json")
+        canonical_path = Path("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/data/results/kiss_sidm_canonical_simulation.json")
     if canonical_path.exists():
         can = json.load(open(canonical_path))
         snaps = can.get("snapshots", [])
@@ -261,7 +261,7 @@ def main():
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(out, indent=2, default=str))
     # Mirror to Windows-side for tests
-    win_path = Path("/mnt/c/Users/lamkuenai/projects/dm-sidm-pipeline/v0.3-prelim/data/results/t38_dwarf_kiss_sidm_higher_N.json")
+    win_path = Path("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/data/results/t38_dwarf_kiss_sidm_higher_N.json")
     win_path.write_text(json.dumps(out, indent=2, default=str))
     print(f"\noutput -> {out_path}")
     print(f"        -> {win_path}")

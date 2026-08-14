@@ -151,7 +151,7 @@ def main():
         ),
     }
 
-    out_path = Path("/home/lamkuenai/dm-sidm-pipeline/v0.3-prelim/data/results/tier3_epsilon_alpha_sketch.json")
+    out_path = Path("/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/data/results/tier3_epsilon_alpha_sketch.json")
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(out, indent=2, default=str))
     print(f"output -> {out_path}")

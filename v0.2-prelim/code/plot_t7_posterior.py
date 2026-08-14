@@ -22,8 +22,8 @@ try:
 except ImportError:
     HAS_MPL = False
 
-RESULTS_DIR = Path("/home/lamkuenai/dm-sidm-pipeline/v0.2-prelim/data/results")
-PLOTS_DIR = Path("/home/lamkuenai/dm-sidm-pipeline/v0.2-prelim/plots")
+RESULTS_DIR = Path("/home/lamkuenai/sidm-composite-dm-mediator/v0.2-prelim/data/results")
+PLOTS_DIR = Path("/home/lamkuenai/sidm-composite-dm-mediator/v0.2-prelim/plots")
 PLOTS_DIR.mkdir(parents=True, exist_ok=True)
 
 # Load T7 posterior samples

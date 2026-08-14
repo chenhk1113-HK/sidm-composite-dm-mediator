@@ -304,7 +304,7 @@ def main():
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(out, indent=2, default=str))
     # Also copy to Windows-side for tests (use bash cp)
-    win_path = Path("/mnt/c/Users/lamkuenai/projects/dm-sidm-pipeline/v0.3-prelim/data/results/t22_real_kiss_sidm_two_comp.json")
+    win_path = Path("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/data/results/t22_real_kiss_sidm_two_comp.json")
     win_path.write_text(json.dumps(out, indent=2, default=str))
     print(f"\noutput -> {out_path}")
     print(f"        -> {win_path}")

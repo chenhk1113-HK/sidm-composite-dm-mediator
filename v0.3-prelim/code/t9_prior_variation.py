@@ -38,7 +38,7 @@ from channels_v03 import (
 )
 
 
-RESULTS_DIR = Path("/home/lamkuenai/dm-sidm-pipeline/v0.3-prelim/data/results")
+RESULTS_DIR = Path("/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/data/results")
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
 

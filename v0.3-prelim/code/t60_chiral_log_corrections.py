@@ -32,7 +32,7 @@ import numpy as np
 from pathlib import Path
 
 
-RESULTS_DIR = Path("/home/lamkuenai/projects/dm-sidm-pipeline/v0.3-prelim/data/results")
+RESULTS_DIR = Path("/home/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/data/results")
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
 
@@ -124,7 +124,7 @@ def main():
 
     out_path = RESULTS_DIR / "t60_chiral_log_corrections.json"
     out_path.write_text(json.dumps(out, indent=2, default=str))
-    win_path = Path("/mnt/c/Users/lamkuenai/projects/dm-sidm-pipeline/v0.3-prelim/data/results/t60_chiral_log_corrections.json")
+    win_path = Path("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/data/results/t60_chiral_log_corrections.json")
     win_path.write_text(json.dumps(out, indent=2, default=str))
     print(f"\noutput -> {out_path}")
 

@@ -31,7 +31,7 @@ from sidm_velocity_dependent import sigma_m_effective
 from channels_extended import loglike_lens_subhalo
 
 
-RESULTS_DIR = Path("/home/lamkuenai/dm-sidm-pipeline/v0.3-prelim/data/results")
+RESULTS_DIR = Path("/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/data/results")
 
 
 def loglike_5channel(sigma_m_0, a):

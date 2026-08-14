@@ -51,7 +51,7 @@ DWARF_SIGMA_M = 5.0  # cm²/g (10x smaller than canonical)
 
 import kiss_sidm_julia_bridge as bridge
 
-RESULTS_DIR = Path("/mnt/c/Users/lamkuenai/projects/dm-sidm-pipeline/v0.3-prelim/data/results")
+RESULTS_DIR = Path("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/data/results")
 
 
 def run_one(M_halo, rho_s, r_s, sigma_m, label):

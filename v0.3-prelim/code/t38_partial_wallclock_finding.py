@@ -25,7 +25,7 @@ REPRODUCIBILITY NOTE
 ====================
 This T38 was a partial run (killed at 12 min wall-clock before completion).
 To reproduce T38a in full, run on a system with at least 1 hour idle:
-  cd /home/lamkuenai/dm-sidm-pipeline/v0.3-prelim/code
+  cd /home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/code
   /home/lamkuenai/wimpy/bin/python t38_dwarf_kiss_sidm_higher_N.py
 The result JSON is written at the end of main(), NOT incrementally.
 If the run is killed, no JSON is produced. Use the
@@ -42,7 +42,7 @@ import json
 import sys
 from pathlib import Path
 
-PROJECT_ROOT = Path("/home/lamkuenai/dm-sidm-pipeline/v0.3-prelim")
+PROJECT_ROOT = Path("/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim")
 RESULTS_DIR = PROJECT_ROOT / "data" / "results"
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -128,7 +128,7 @@ def main():
     print(f"[T38] Written partial-finding JSON: {out_path}")
 
     # Mirror to Windows-side
-    win_results = Path("/mnt/c/Users/lamkuenai/projects/dm-sidm-pipeline/v0.3-prelim/data/results/t38_partial_wallclock_finding.json")
+    win_results = Path("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/data/results/t38_partial_wallclock_finding.json")
     win_results.parent.mkdir(parents=True, exist_ok=True)
     win_results.write_text(json.dumps(out, indent=2, default=str))
     print(f"[T38] Mirrored to: {win_results}")

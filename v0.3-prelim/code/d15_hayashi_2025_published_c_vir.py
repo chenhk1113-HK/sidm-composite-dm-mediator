@@ -125,10 +125,10 @@ def main():
             "The 0.31-dex residual (A4 1σ upper) is the N-body calibration drift."
         ),
     }
-    out_path = Path("/home/lamkuenai/dm-sidm-pipeline/v0.3-prelim/data/results/d15_hayashi_2025_published_c_vir.json")
+    out_path = Path("/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/data/results/d15_hayashi_2025_published_c_vir.json")
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(out, indent=2, default=str))
-    win_path = Path("/mnt/c/Users/lamkuenai/projects/dm-sidm-pipeline/v0.3-prelim/data/results/d15_hayashi_2025_published_c_vir.json")
+    win_path = Path("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/data/results/d15_hayashi_2025_published_c_vir.json")
     win_path.write_text(json.dumps(out, indent=2, default=str))
     print(f"\noutput -> {out_path}")
 

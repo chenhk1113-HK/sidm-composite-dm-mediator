@@ -202,7 +202,7 @@ def loglike_joint_v03(sigma_m_0: float, a: float,
 if __name__ == "__main__":
     # Smoke test: scan over (sigma_m_0, a) grid and report max for 5-channel fit
     import time
-    DATA_DIR = Path("/mnt/c/Users/lamkuenai/projects/dm-sidm-pipeline/v0.1-prelim/data")
+    DATA_DIR = Path("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.1-prelim/data")
 
     print("Scanning 4-channel (no SPARC) grid for joint posterior...")
     log_sm_grid = np.linspace(-3, 2.5, 30)

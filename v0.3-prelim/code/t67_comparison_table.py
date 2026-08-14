@@ -12,7 +12,7 @@ import json
 from pathlib import Path
 
 
-RESULTS_DIR = Path("/home/lamkuenai/projects/dm-sidm-pipeline/v0.3-prelim/data/results")
+RESULTS_DIR = Path("/home/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/data/results")
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
 
@@ -22,9 +22,9 @@ def main():
     print("=" * 80)
 
     # Read the actual data
-    t54_path = Path("/mnt/c/Users/lamkuenai/projects/dm-sidm-pipeline/v0.3-prelim/data/results/t54_dark_quark_joint_fit.json")
-    t39_path = Path("/mnt/c/Users/lamkuenai/projects/dm-sidm-pipeline/v0.3-prelim/data/results/t39_tier3_epsilon_alpha_joint_fit.json")
-    t62_path = Path("/mnt/c/Users/lamkuenai/projects/dm-sidm-pipeline/v0.3-prelim/data/results/t62_lz_direct_detection.json")
+    t54_path = Path("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/data/results/t54_dark_quark_joint_fit.json")
+    t39_path = Path("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/data/results/t39_tier3_epsilon_alpha_joint_fit.json")
+    t62_path = Path("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/data/results/t62_lz_direct_detection.json")
 
     with open(t54_path) as f:
         t54 = json.load(f)
@@ -132,7 +132,7 @@ def main():
 
     out_path = RESULTS_DIR / "t67_comparison_table.json"
     out_path.write_text(json.dumps(out, indent=2, default=str))
-    win_path = Path("/mnt/c/Users/lamkuenai/projects/dm-sidm-pipeline/v0.3-prelim/data/results/t67_comparison_table.json")
+    win_path = Path("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/data/results/t67_comparison_table.json")
     win_path.write_text(json.dumps(out, indent=2, default=str))
     print(f"\noutput -> {out_path}")
 

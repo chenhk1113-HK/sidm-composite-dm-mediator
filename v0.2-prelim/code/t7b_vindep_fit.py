@@ -22,7 +22,7 @@ from sidm_velocity_dependent import (
     V_REF, V_UFD, V_CLUSTER,
 )
 
-RESULTS_DIR = Path("/home/lamkuenai/dm-sidm-pipeline/v0.2-prelim/data/results")
+RESULTS_DIR = Path("/home/lamkuenai/sidm-composite-dm-mediator/v0.2-prelim/data/results")
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
 LOG_SIGMA_M_RANGE = (-3.0, 2.5)

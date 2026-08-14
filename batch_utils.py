@@ -1,5 +1,5 @@
 """
-Structured logging + checkpoint/resume utilities for dm-sidm-pipeline.
+Structured logging + checkpoint/resume utilities for sidm-composite-dm-mediator.
 
 Per peer review (2026-08-10, Short-Term #2):
     "Implement structured file logging + batch checkpoint/resume for all
