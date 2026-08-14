@@ -74,9 +74,14 @@ FERMI_DWARFS = [
 ]
 
 
-# 95% CL upper limits on <sigma*v> for bb-bar annihilation channel
-# From McDaniel et al. 2024 (4FGL-DR4, 14-year data)
-# Format: (m_chi_GeV, sigma_v_limit_cm3_per_s)
+# ---------------------------------------------------------------------------
+# Backward-compat stub: FERMI_95CL_LIMITS used by the legacy Gaussian-proxy
+# loglike_fermi_dwarf() function. Retained ONLY so external imports don't
+# break; the joint fits (loglike_fermi_sidm, loglike_5channel_with_fermi)
+# no longer call loglike_fermi_dwarf. Per R11 audit (2026-08-14): the real
+# Fermi likelihood is loglike_fermi_real() in t32_real_likelihood.py,
+# backed by the McDaniel et al. 2024 (arXiv:2311.04982) 2D TS profiles.
+# ---------------------------------------------------------------------------
 FERMI_95CL_LIMITS = [
     (5.0,    5.5e-25),
     (10.0,   1.3e-25),
@@ -92,11 +97,12 @@ FERMI_95CL_LIMITS = [
 
 
 def loglike_fermi_dwarf(m_chi_GeV: float, sigma_v_cm3_per_s: float) -> float:
-    """Fermi dwarf galaxy likelihood: half-Gaussian upper limit on <sigma*v>.
+    """LEGACY Gaussian-proxy Fermi dSph likelihood — DEPRECATED.
 
-    The 4FGL-DR4 stacking analysis gives 95% CL upper limits on the
-    DM-DM annihilation cross-section. We interpolate in log-log space
-    and apply a half-Gaussian likelihood for sigma_v < limit.
+    Replaced by t32_real_likelihood.loglike_fermi_real() per R11 audit
+    (2026-08-14). Kept as a thin wrapper for backward compatibility with
+    external callers; the joint fits in this module now use the real
+    McDaniel+ 2024 TS-profile likelihood. See loglike_fermi_sidm().
     """
     if sigma_v_cm3_per_s <= 0:
         return -np.inf
@@ -112,36 +118,39 @@ def loglike_fermi_dwarf(m_chi_GeV: float, sigma_v_cm3_per_s: float) -> float:
         log_lim_at_m = float(np.interp(np.log10(m_chi_GeV), log_m, log_lim))
     lim_at_m = 10 ** log_lim_at_m
     if sigma_v_cm3_per_s <= lim_at_m:
-        return 0.0  # Allowed
-    # Width 0.3 dex for the upper-limit smoothing
+        return 0.0
     log_diff = np.log10(sigma_v_cm3_per_s / lim_at_m)
     return -0.5 * (log_diff / 0.3) ** 2
 
 
 def loglike_fermi_sidm(theta, m_chi_GeV: float = 50.0):
-    """Fermi dwarf likelihood for SIDM.
+    """Fermi dwarf likelihood for SIDM using the REAL McDaniel+ 2024 TS profiles.
 
-    Maps SIDM sigma/m to DM-DM annihilation cross-section <sigma*v>.
-    For thermal relic WIMPs, <sigma*v> ~ 3e-26 cm^3/s (canonical value).
-    For SIDM, the relation between sigma/m and <sigma*v> is model-dependent.
+    Per R11 audit (2026-08-14): replaced the Gaussian proxy + 0.3-dex half-
+    Gaussian upper-limit surrogate with the actual 2D TS profiles from
+    arXiv:2311.04982 (figshare DOI 10.6084/m9.figshare.24058650.v2,
+    CC BY 4.0).
 
-    We use a simple scaling: <sigma*v>_SIDM ~ alpha * (sigma/m)^2
+    Maps SIDM sigma/m to DM-DM annihilation cross-section <sigma*v>:
+      <sigma*v>_SIDM ~ alpha * (sigma/m_at_v)^2
     where alpha is a model-dependent parameter (Roberts et al. 2024 give
     alpha ~ 1e-3 for typical mediators at m_chi ~ 50 GeV).
+
+    Returns the REAL log-likelihood (in natural log units) from the
+    McDaniel+ 2024 combined TS profile, NOT a Gaussian surrogate.
     """
+    from t32_real_likelihood import loglike_fermi_real
+
     log_sigma_m_0, a = theta
     sigma_m_0 = 10 ** log_sigma_m_0
     if sigma_m_0 <= 0:
         return -np.inf
-    # Effective cross-section at galactic scale
     sigma_m_at_v = sigma_m_effective(sigma_m_0, a, 100.0)
     if sigma_m_at_v <= 0:
         return -np.inf
-    # Simple scaling: <sigma*v> ~ alpha * (sigma_m_at_v)^2
-    # alpha = 1e-3 cm^3/s per (cm^2/g)^2 = 1e-3 cm^3/g^2
     alpha = 1.0e-3
     sigma_v = alpha * sigma_m_at_v ** 2  # cm^3/s
-    return loglike_fermi_dwarf(m_chi_GeV, sigma_v)
+    return loglike_fermi_real(m_chi_GeV, sigma_v, channel="bb", use_J_prior=True)
 
 
 def loglike_5channel_with_fermi(theta):

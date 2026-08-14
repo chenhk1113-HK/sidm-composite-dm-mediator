@@ -50,6 +50,10 @@ outputs/
 data/raw/
 v0.*-prelim/data/raw/
 v0.*-prelim/data/external_data/lz_2024/raw/
+v0.*-prelim/data/external/
+
+# External data products (e.g. McDaniel+ 2024 Fermi dSph TS profiles).
+# Re-download via outputs/fetch_external_data.sh
 
 # --- Logs ---
 *.log

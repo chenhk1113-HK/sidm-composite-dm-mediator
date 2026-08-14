@@ -101,13 +101,32 @@ dSph stacking analysis is McDaniel et al. 2024 (above). For shorter-stacked
 versions see also [Hooper & Linden 2015](https://arxiv.org/abs/1503.06209)
 (9 dSphs, Reticulum II hint) and the [11-year 27-dSph analysis](https://inspirehep.net/literature/1709795).
 
-**Data location**: 21 dSph sources with J-factors, ingested as posterior
-chains at `v0.3-prelim/data/external_data/fermi_dwarf_14yr/`.
+**Data location**: 55 dSph sources with J-factors (Table 1) + 2D TS
+profiles (40 mass × 60 σv per dSph, 4 channel/prior combinations =
+220 .npy files). Downloaded from figshare DOI
+[10.6084/m9.figshare.24058650.v2](https://doi.org/10.6084/m9.figshare.24058650.v2)
+(CC BY 4.0). Stored at
+`v0.3-prelim/data/external/fermi_mcdaniel2024/`. Auto-fetched via
+`outputs/fetch_external_data.sh` (idempotent, md5-verified).
 
-**Used by**: T32 (Tier-3.3) in v0.3-prelim — combined with LZ WS2024, gives
-a strongly constraining σ/m limit. Key physics result (T32): under
-standard WIMP coupling, the SIDM mediator would be excluded at m_χ = 40–50
-GeV; **mediator must decouple from thermal-WIMP expectations by ~10⁰×.**
+**Used by**: T32 (Tier-3.3) in v0.3-prelim — replaces the previous
+Gaussian-proxy + 0.3-dex half-Gaussian surrogate (added per R11 audit
+G11, 2026-08-14). The new `t32_real_likelihood.loglike_fermi_real()`
+ingests the actual 2D TS profiles and returns the log-likelihood ratio
+TS(m_χ, σv)/2 using the profile likelihood ratio convention with the
+signal hypothesis as reference. The combined TS profile peaks at
+TS = 13.78 at m_χ = 41.25 GeV, σv = 1.37×10⁻²⁶ cm³/s (the
+~3.7σ tantalizing signal reported in McDaniel+ 2024, preserved here
+as observed by the data). 95% CL σv upper limit at peak mass is
+~2.76×10⁻²⁶ cm³/s — about the thermal relic scale (~3×10⁻²⁶ cm³/s).
+Key physics result (T32): under standard WIMP coupling, the SIDM
+mediator would be excluded at m_χ = 40-50 GeV; **mediator must
+decouple from thermal-WIMP expectations by ~10⁰×.**
+
+**Reproducibility**: `outputs/fetch_external_data.sh` downloads
+`dSphs.csv` (3.9 KB), `dSphs.tar.gz` (4.3 MB → 220 .npy files), and
+`basic_data_usage.html` (961 KB example notebook). Total ~5.2 MB.
+Verified md5 against figshare computed hashes.
 
 ### `Yang+2026-SIDM2v` — Yang, Fan, Hou, Tsai (2026)
 

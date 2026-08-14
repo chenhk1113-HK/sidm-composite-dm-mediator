@@ -485,7 +485,7 @@ late-stage collapsed dwarf halos — long-term item.
 | Channel | Source | Real-data status |
 |---|---|---|
 | LZ direct detection (T30) | HEPData record 155182 (26 mass points, ±1σ, ±2σ bands) | ✅ Real data |
-| Fermi dwarf gamma (T32) | Fermi 4FGL-DR4 14-year stacking limits | ✅ Real data |
+**Fermi dwarf gamma (T32)** | McDaniel et al. 14-year dSph 2D TS profiles (40 mass × 60 σv grid, 55 dSphs, J-prior + no-prior × bb / ττ channels) | ✅ Real published likelihood (added 2026-08-14, R11 G11) |
 | SPARC, Bullet, dSph, UFD (channels_v03) | In-house Gaussian/single-sided exponential approximations | ⚠️ Approximate |
 | Lens, MW satellite, Draco (channels_extended) | In-house Gaussian approximations (older) | ⚠️ Approximate |
 
