@@ -14,14 +14,16 @@ is ORTHOGONAL to direct detection:
   - Indirect detection (Fermi): DM-DM annihilation -> gamma rays
 
 T32 implements a publication-quality Fermi dwarf galaxy likelihood
-based on the 4FGL-DR4 stacking analysis (Hooper & Linden 2024,
-arXiv:2408.00703). We use the public dwarf galaxy sample of
+based on the 4FGL-DR4 stacking analysis (McDaniel et al. 2024,
+arXiv:2311.04982). We use the public dwarf galaxy sample of
 ~40 sources from the 4FGL-DR4 catalog and the published 95% CL
 upper limits on <sigma*v> at m_chi = 10, 50, 100 GeV.
 
 References:
   - 4FGL-DR4 catalog: Abdollahi+ 2020 (ApJS 247, 33), 4FGL-DR3 (ApJS 260, 53), 4FGL-DR4 (2024)
-  - Hooper & Linden 2024 (arXiv:2408.00703), 14-year dwarf analysis
+  - McDaniel et al. 2024 (arXiv:2311.04982), Legacy Analysis of Dark Matter
+    Annihilation from the Milky Way Dwarf Spheroidal Galaxies with 14 Years
+    of Fermi-LAT Data (the canonical 14-year dSph stacking analysis)
   - Albert+ 2017 (3FGL) for cross-comparison
 """
 from __future__ import annotations
@@ -45,7 +47,7 @@ from config import RESULTS_DIR_V03
 
 
 # Fermi 4FGL-DR4 dwarf galaxy sample (public, ~40 sources)
-# From Albert+ 2017, updated through Hooper & Linden 2024
+# From Albert+ 2017, updated through McDaniel et al. 2024 (14-year analysis)
 # Format: (name, J-factor_log10(GeV^2/cm^5), log10(J-factor_uncertainty))
 FERMI_DWARFS = [
     ("Boötes I",    18.2, 0.4),
@@ -73,7 +75,7 @@ FERMI_DWARFS = [
 
 
 # 95% CL upper limits on <sigma*v> for bb-bar annihilation channel
-# From Hooper & Linden 2024 (4FGL-DR4, 14-year data)
+# From McDaniel et al. 2024 (4FGL-DR4, 14-year data)
 # Format: (m_chi_GeV, sigma_v_limit_cm3_per_s)
 FERMI_95CL_LIMITS = [
     (5.0,    5.5e-25),
@@ -205,7 +207,7 @@ def main():
     print("=" * 80)
     print("Adds the ORTHOGONAL Fermi dwarf galaxy channel from 4FGL-DR4 14-year data.")
     print("Public dwarf sample: 21 sources, J-factors from Albert+ 2017.")
-    print("95% CL upper limits on <sigma*v> from Hooper & Linden 2024 (arXiv:2408.00703).")
+    print("95% CL upper limits on <sigma*v> from McDaniel et al. 2024 (arXiv:2311.04982), 14-year Fermi-LAT dSph analysis.")
     print()
 
     # Fit A: without Fermi (the previous behavior)
@@ -236,7 +238,7 @@ def main():
     out = {
         "test": "T32_fermi_dwarf_channel",
         "direction": "T3.3 of R2 review: Fermi gamma-ray dwarf galaxy channel",
-        "data_source": "4FGL-DR4 14-year data (Abdollahi+ 2020, 2024) + Hooper & Linden 2024 limits",
+        "data_source": "4FGL-DR4 14-year data (Abdollahi+ 2020, 2024) + McDaniel et al. 2024 (arXiv:2311.04982) limits",
         "n_dwarf_galaxies": len(FERMI_DWARFS),
         "fits": {"A_no_fermi": A, "B_with_fermi": B},
         "comparison": {
@@ -253,7 +255,7 @@ def main():
     out_path = RESULTS_DIR_V03 / "t32_fermi_dwarf_channel.json"
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(out, indent=2, default=str))
-    win_path = Path("/mnt/c/Users/lamkuenai/projects/dm-sidm-pipeline/v0.3-prelim/data/results/t32_fermi_dwarf_channel.json")
+    win_path = Path("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/data/results/t32_fermi_dwarf_channel.json")
     win_path.write_text(json.dumps(out, indent=2, default=str))
     print(f"\noutput -> {out_path}")
     print(f"        -> {win_path}")

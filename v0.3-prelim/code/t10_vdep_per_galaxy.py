@@ -43,7 +43,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from sidm_velocity_dependent import sigma_m_effective as sigma_m_at_v
 
 
-RESULTS_DIR = Path("/home/lamkuenai/dm-sidm-pipeline/v0.3-prelim/data/results")
+RESULTS_DIR = Path("/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/data/results")
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
 
@@ -118,7 +118,7 @@ def main(batch_name: str = "t10_vdep"):
     cp = CheckpointState(paths["checkpoint"])
     logger = BatchLogger(paths["log"], batch_name=batch_name)
 
-    data_dir = Path("/home/lamkuenai/dm-sidm-pipeline/v0.1-prelim/data/Rotmod_LTG")
+    data_dir = Path("/home/lamkuenai/sidm-composite-dm-mediator/v0.1-prelim/data/Rotmod_LTG")
     galaxies = load_all_sparc(data_dir)
     logger.info("batch_start", n_galaxies=len(galaxies), version="v0.3-prelim")
 

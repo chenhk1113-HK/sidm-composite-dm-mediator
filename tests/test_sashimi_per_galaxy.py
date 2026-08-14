@@ -95,9 +95,9 @@ class TestChi2PerGalaxy:
         import os
         # Try Windows path first, then WSL path
         candidates = [
-            r"C:\Users\lamkuenai\projects\dm-sidm-pipeline\v0.1-prelim\data\Rotmod_LTG\NGC2403_rotmod.dat",
-            "/mnt/c/Users/lamkuenai/projects/dm-sidm-pipeline/v0.1-prelim/data/Rotmod_LTG/NGC2403_rotmod.dat",
-            "/home/lamkuenai/dm-sidm-pipeline/v0.1-prelim/data/Rotmod_LTG/NGC2403_rotmod.dat",
+            r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.1-prelim\data\Rotmod_LTG\NGC2403_rotmod.dat",
+            "/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.1-prelim/data/Rotmod_LTG/NGC2403_rotmod.dat",
+            "/home/lamkuenai/sidm-composite-dm-mediator/v0.1-prelim/data/Rotmod_LTG/NGC2403_rotmod.dat",
         ]
         rotmod_path = None
         for p in candidates:

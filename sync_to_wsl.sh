@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# sync_to_wsl.sh — Copy Windows-side dm-sidm-pipeline to WSL mirror.
+# sync_to_wsl.sh — Copy Windows-side sidm-composite-dm-mediator to WSL mirror.
 #
-# Direction: C:/Users/lamkuenai/projects/dm-sidm-pipeline
-#      --> /home/lamkuenai/dm-sidm-pipeline
+# Direction: C:/Users/lamkuenai/projects/sidm-composite-dm-mediator
+#      --> /home/lamkuenai/sidm-composite-dm-mediator
 #
 # Pattern: per-file `wsl -- cp` so each file lands at the right path on
 # the WSL side (rsync across the WSL boundary is unreliable because
@@ -15,14 +15,14 @@
 #   bash sync_to_wsl.sh tests v0.3-prelim   # sync specific subdirs
 #
 # Why this exists: The D11 env recovery revealed the WSL mirror of
-# dm-sidm-pipeline/v0.3-prelim/code/ had drifted to ~20 files while
+# sidm-composite-dm-mediator/v0.3-prelim/code/ had drifted to ~20 files while
 # the Windows-side had 41 files. Half the project was orphaned on
 # the WSL side. This script prevents future drift by syncing per-file
 # after every code change.
 set -euo pipefail
 
-WIN_ROOT="C:/Users/lamkuenai/projects/dm-sidm-pipeline"
-WSL_ROOT="/home/lamkuenai/dm-sidm-pipeline"
+WIN_ROOT="C:/Users/lamkuenai/projects/sidm-composite-dm-mediator"
+WSL_ROOT="/home/lamkuenai/sidm-composite-dm-mediator"
 SUBDIRS_DEFAULT=(
     "."
     "tests"

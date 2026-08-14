@@ -33,9 +33,9 @@ from config import LOG_SIGMA_M_RANGE, A_RANGE
 
 # SPARC rotmod directory
 SPARC_DIR_CANDIDATES = [
-    Path("/home/lamkuenai/dm-sidm-pipeline/v0.1-prelim/data/Rotmod_LTG"),
-    Path("/mnt/c/Users/lamkuenai/projects/dm-sidm-pipeline/v0.1-prelim/data/Rotmod_LTG"),
-    Path(r"C:\Users\lamkuenai\projects\dm-sidm-pipeline\v0.1-prelim\data\Rotmod_LTG"),
+    Path("/home/lamkuenai/sidm-composite-dm-mediator/v0.1-prelim/data/Rotmod_LTG"),
+    Path("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.1-prelim/data/Rotmod_LTG"),
+    Path(r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.1-prelim\data\Rotmod_LTG"),
 ]
 
 
@@ -210,7 +210,7 @@ def main():
         print(f"  Median per-galaxy MAP σ/m = {np.median([r['sigma_0_map'] for r in results]):.3f} cm²/g")
 
     # Save results
-    RESULTS_DIR = Path("/home/lamkuenai/dm-sidm-pipeline/v0.3-prelim/data/results")
+    RESULTS_DIR = Path("/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/data/results")
     out_path = RESULTS_DIR / "t14_sashimi_per_galaxy.json"
     out = {
         "test": "T14_sashimi_SIDM_per_galaxy",

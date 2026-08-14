@@ -33,8 +33,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from sparc_loader import load_one_sparc
 from halo_profiles import V_NFW, V_Burkert, chi2_sparc
 
-DATA_DIR = Path("/mnt/c/Users/lamkuenai/projects/dm-sidm-pipeline/v0.1-prelim/data")
-RESULTS_DIR = Path("/home/lamkuenai/dm-sidm-pipeline/v0.1-prelim/data/results")
+DATA_DIR = Path("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.1-prelim/data")
+RESULTS_DIR = Path("/home/lamkuenai/sidm-composite-dm-mediator/v0.1-prelim/data/results")
 
 # Same ranges as T1/T2
 NFW_LOG_RHO_S_RANGE = (2.0, 10.0)

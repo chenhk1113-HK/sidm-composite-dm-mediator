@@ -27,7 +27,7 @@ from sidm_velocity_dependent import (
     sigma_m_effective, r_core_from_sigma_m, V_REF,
 )
 
-RESULTS_DIR = Path("/home/lamkuenai/dm-sidm-pipeline/v0.2-prelim/data/results")
+RESULTS_DIR = Path("/home/lamkuenai/sidm-composite-dm-mediator/v0.2-prelim/data/results")
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
 # Priors (broad, weakly informative)

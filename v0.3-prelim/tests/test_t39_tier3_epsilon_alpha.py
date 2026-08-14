@@ -40,10 +40,14 @@ class TestT39Module:
     def test_t39_likelihood_accepts_4d_theta(self):
         """loglike_joint should accept (log_sigma_m, a, log_epsilon, log_alpha)."""
         t39 = pytest.importorskip("t39_tier3_epsilon_alpha_joint_fit")
-        # Default: log_sigma_m=-2 (1 cm²/g), a=20 km/s, log_epsilon=-4, log_alpha=-3
-        ll = t39.loglike_joint((-2.0, 20.0, -4.0, -3.0))
+        # Default: log_sigma_m=-2 (1 cm²/g), a=1.5 (dimensionless velocity
+        # power-law index — NOT km/s), log_epsilon=-4, log_alpha=-3.
+        # Note: a is dimensionless; A_RANGE=(-2,2); values outside this
+        # range return -inf. Previously this test passed a=20, which is
+        # outside range AND unit-confused. Fixed per R11 audit.
+        ll = t39.loglike_joint((-2.0, 1.5, -4.0, -3.0))
         assert isinstance(ll, (float, int))
-        # Should NOT return -inf for these reasonable values
+        # Should NOT return -inf for these in-range values
         assert ll > -1e10
 
 

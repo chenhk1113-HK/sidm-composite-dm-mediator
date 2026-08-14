@@ -115,7 +115,7 @@ if __name__ == "__main__":
     import sys
     sys.path.insert(0, str(__file__).rsplit("/", 1)[0])
     from sparc_loader import load_one_sparc
-    g = load_one_sparc("/mnt/c/Users/lamkuenai/projects/dm-sidm-pipeline/v0.1-prelim/data", "CamB")
+    g = load_one_sparc("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.1-prelim/data", "CamB")
     # Test NFW at a reasonable point: log_rho_s=7, log_r_s=0.5
     theta_nfw = np.array([7.0, 0.5])
     ll = loglike_profile(g, theta_nfw, V_NFW, log_prior_NFW)

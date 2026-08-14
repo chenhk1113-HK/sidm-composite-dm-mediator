@@ -21,7 +21,7 @@ import json
 from pathlib import Path
 import numpy as np
 
-RESULTS_DIR = Path("/home/lamkuenai/dm-sidm-pipeline/v0.1-prelim/data/results")
+RESULTS_DIR = Path("/home/lamkuenai/sidm-composite-dm-mediator/v0.1-prelim/data/results")
 
 # WIMpy uses Bayesian evidence directly for BMA weights; BIC for model selection.
 # For 2-profile case with same n_params, BIC reduces to:  BIC = chi^2 - n_pts * log(n_pts)

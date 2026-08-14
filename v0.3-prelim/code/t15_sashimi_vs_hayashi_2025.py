@@ -127,7 +127,7 @@ def main():
         print("  in the parametric model calibration.")
 
     # Save results
-    RESULTS_DIR = Path("/home/lamkuenai/dm-sidm-pipeline/v0.3-prelim/data/results")
+    RESULTS_DIR = Path("/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/data/results")
     out_path = RESULTS_DIR / "t15_sashimi_vs_hayashi_2025.json"
     out = {
         "test": "T15_sashimi_SIDM_consistency_with_Hayashi_2025",

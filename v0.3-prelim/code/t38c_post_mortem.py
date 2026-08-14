@@ -40,7 +40,7 @@ import json
 import time
 from pathlib import Path
 
-PROJECT_ROOT = Path("/home/lamkuenai/dm-sidm-pipeline/v0.3-prelim")
+PROJECT_ROOT = Path("/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim")
 RESULTS_DIR = PROJECT_ROOT / "data" / "results"
 
 

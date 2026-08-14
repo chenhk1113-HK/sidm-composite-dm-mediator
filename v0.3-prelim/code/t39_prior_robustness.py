@@ -47,7 +47,7 @@ from sidm_velocity_dependent import sigma_m_effective
 from t30_lz_real_posterior import loglike_lz_real
 from t32_fermi_dwarf_channel import loglike_fermi_dwarf
 
-RESULTS_DIR = Path("/home/lamkuenai/dm-sidm-pipeline/v0.3-prelim/data/results")
+RESULTS_DIR = Path("/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/data/results")
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
 M_CHI_GEV_LZ = 40.0
@@ -192,7 +192,7 @@ def main():
     }
     out_path = RESULTS_DIR / "t39_prior_robustness.json"
     out_path.write_text(json.dumps(out, indent=2, default=str))
-    win_path = Path("/mnt/c/Users/lamkuenai/projects/dm-sidm-pipeline/v0.3-prelim/data/results/t39_prior_robustness.json")
+    win_path = Path("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/data/results/t39_prior_robustness.json")
     win_path.write_text(json.dumps(out, indent=2, default=str))
     print(f"\noutput -> {out_path}")
 

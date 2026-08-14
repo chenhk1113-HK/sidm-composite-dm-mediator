@@ -29,9 +29,9 @@ try:
 except ImportError:
     MATPLOTLIB_AVAILABLE = False
 
-PROJECT_ROOT = Path("/home/lamkuenai/dm-sidm-pipeline/v0.3-prelim")
+PROJECT_ROOT = Path("/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim")
 RESULTS_DIR = PROJECT_ROOT / "data" / "results"
-OUTPUT_DIR = Path("/home/lamkuenai/dm-sidm-pipeline/outputs/plots")
+OUTPUT_DIR = Path("/home/lamkuenai/sidm-composite-dm-mediator/outputs/plots")
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 

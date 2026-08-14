@@ -2,8 +2,8 @@
 Regression tests for config.py cross-location availability.
 
 History: 2026-08-11 (Full Codebase R2 review audit) — discovered that
-config.py was ONLY at /home/lamkuenai/dm-sidm-pipeline/v0.3-prelim/code/
-(WSL-side), NOT at /mnt/c/Users/lamkuenai/projects/dm-sidm-pipeline/v0.3-prelim/code/
+config.py was ONLY at /home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/code/
+(WSL-side), NOT at /mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/code/
 (Windows-side). The T-series scripts (T21, T22, T23) did `from config import
 RESULTS_DIR_V03`, but on Windows-side Python, the import would fail.
 
@@ -62,7 +62,7 @@ class TestConfigCrossLocation:
 
     def test_config_file_exists_in_both_locations(self):
         """config.py must exist at both WSL-side and Windows-side paths."""
-        wsl_path_str = "/home/lamkuenai/dm-sidm-pipeline/v0.3-prelim/code/config.py"
+        wsl_path_str = "/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/code/config.py"
         wsl_path = Path(wsl_path_str)
         win_path = PROJECT_ROOT / "v0.3-prelim" / "code" / "config.py"
         # WSL-side: shell out to wsl since Windows Python can't see POSIX mounts
@@ -76,7 +76,7 @@ class TestConfigCrossLocation:
 
     def test_config_files_are_identical(self):
         """Both copies of config.py must have the same content (no drift)."""
-        wsl_path_str = "/home/lamkuenai/dm-sidm-pipeline/v0.3-prelim/code/config.py"
+        wsl_path_str = "/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/code/config.py"
         win_path = PROJECT_ROOT / "v0.3-prelim" / "code" / "config.py"
         if sys.platform == "win32":
             if not (win_path.exists() and _wsl_path_exists(wsl_path_str)):

@@ -2,21 +2,27 @@
 """
 v0.3 T8 — proper 5-channel joint fit with calibrated SPARC log L.
 
-Key insight: SPARC's absolute log L depends on noise model choices (chi^2,
-errV values, etc.) that are different from the published channels 2-4
-likelihoods (Gaussian on log sigma/m). Mixing them naively gives wrong
-weights.
+IMPORTANT (per R11 audit, 2026-08-14): The SPARC contribution to the
+joint fit is **NOT a per-galaxy observational likelihood**. It is a
+**calibrated saturation score** that captures the Phase 2 T4 finding
+that Burkert (cored) profiles win by ~5000 log Z over NFW (cuspy)
+profiles for sigma/m > ~1 cm²/g. The relative likelihood is
+approximated as a smooth saturation function:
 
-Solution: use the SPARC T4 log Z difference (NFW vs Burkert with XI_d
-marginalization) as the SPARC contribution. This is a *relative* log L
-that doesn't depend on absolute normalization.
+    delta_log_Z(sigma/m) = Dsat * (1 - exp(-sigma/m / sigma_transition))
+    Dsat = 5000, sigma_transition = 0.5 cm^2/g
 
-Then the joint log L = loglike_dsph + loglike_ufd + loglike_bullet + delta_log_sparc(sigma/m, a)
-where delta_log_sparc = log Z_burkert(sigma/m, a) - log Z_nfw(sigma/m, a)
-                        ~ f(sigma/m, a) such that delta -> positive for SIDM-favored sigma/m
+The actual SPARC per-galaxy chi² fits (T14) do not drive the joint
+sampling; the saturation score is a *proxy*. For a true joint fit
+that re-derives the SPARC contribution from 175 per-galaxy forward
+fits within the joint sampling loop, see v0.4-prelim roadmap item
+G12 (out of v0.4 scope per the R11 audit).
 
-For our v0.3 we approximate this with a Gaussian peaked at the Phase 2
-Burkert-preferred sigma/m range, scaled to give realistic weight.
+**Downstream interpretation caveat**: log Z and Bayes factors from
+this fit are conditional on this proxy choice. The "5× Bayes factor"
+and "publication-grade 0.4-0.5 dex systematic" claims do not follow
+from this calibration. See the reviewer's R11 audit Section 1 for
+the methodological concerns.
 """
 from __future__ import annotations
 import sys
@@ -32,7 +38,7 @@ from channels_v03 import (
     sigma_m_at_v, V_REF, V_DSPH, V_GALAXY,
 )
 
-RESULTS_DIR = Path("/home/lamkuenai/dm-sidm-pipeline/v0.3-prelim/data/results")
+RESULTS_DIR = Path("/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/data/results")
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
 LOG_SIGMA_M_RANGE = (-3.0, 2.5)
@@ -59,15 +65,18 @@ DLOGZ = 0.10
 #   - At sigma/m < 0.1: log Z_Burkert ~ log Z_NFW (no preference)
 #   - At sigma/m > 1: log Z_Burkert > log Z_NFW by ~ Dsat
 def delta_log_sparc(sigma_m_0: float, a: float) -> float:
-    """Calibrated SPARC contribution (relative log Z).).
+    """Calibrated SPARC saturation SCORE (not a per-galaxy likelihood).
 
     Saturation is computed at the galaxy velocity scale (v ~ 100 km/s).
+    This is a *relative* log Z approximation, not a per-galaxy
+    observational likelihood. See the module docstring for caveats
+    and the R11 audit (Section 1) for the methodological concerns.
     """
     sigma_m_v = sigma_m_at_v(sigma_m_0, a, V_GALAXY)
     if sigma_m_v <= 0:
         return 0.0
-    Dsat = 5000.0  # from Phase 2 T4 result
-    sigma_transition = 0.5  # cm^2/g
+    Dsat = 5000.0  # from Phase 2 T4 result (saturation at large sigma/m)
+    sigma_transition = 0.5  # cm^2/g (transition scale)
     return float(Dsat * (1.0 - np.exp(-sigma_m_v / sigma_transition)))
 
 

@@ -66,7 +66,7 @@ class TestT72Plot:
         assert hasattr(t72, "main")
 
     def test_t72_plot_generated(self):
-        plot_path = Path("/mnt/c/Users/lamkuenai/projects/dm-sidm-pipeline/outputs/Cross_Validation_T54_vs_Drobczyk_2026-08-13.png")
+        plot_path = Path("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/outputs/Cross_Validation_T54_vs_Drobczyk_2026-08-13.png")
         if not plot_path.exists():
             pytest.skip("Plot not yet generated")
         assert plot_path.stat().st_size > 1000, "Plot should be > 1 KB"

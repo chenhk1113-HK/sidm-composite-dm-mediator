@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# sync_to_win.sh — Copy WSL-side dm-sidm-pipeline to Windows mirror.
+# sync_to_win.sh — Copy WSL-side sidm-composite-dm-mediator to Windows mirror.
 #
-# Direction: /home/lamkuenai/dm-sidm-pipeline
-#      --> C:/Users/lamkuenai/projects/dm-sidm-pipeline
+# Direction: /home/lamkuenai/sidm-composite-dm-mediator
+#      --> C:/Users/lamkuenai/projects/sidm-composite-dm-mediator
 #
 # Pattern: per-file `wsl -- cat src > dst` so each file lands at the right
 # path on the Windows side (rsync across the WSL boundary is unreliable
@@ -21,8 +21,8 @@
 # `write_file` to merge cleanly.
 set -euo pipefail
 
-WIN_ROOT="C:/Users/lamkuenai/projects/dm-sidm-pipeline"
-WSL_ROOT="/home/lamkuenai/dm-sidm-pipeline"
+WIN_ROOT="C:/Users/lamkuenai/projects/sidm-composite-dm-mediator"
+WSL_ROOT="/home/lamkuenai/sidm-composite-dm-mediator"
 SUBDIRS_DEFAULT=(
     "."
     "tests"

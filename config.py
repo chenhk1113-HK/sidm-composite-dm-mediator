@@ -1,5 +1,5 @@
 """
-Central configuration for dm-sidm-pipeline.
+Central configuration for sidm-composite-dm-mediator.
 
 All paths, constants, prior ranges, sampler hyperparameters, and
 observational velocity scales live here. Other modules import from
@@ -21,19 +21,38 @@ import os
 # ---------------------------------------------------------------------------
 
 def _detect_root() -> Path:
-    """Find the project root on this host."""
+    """Find the project root on this host.
+
+    Detection order:
+      1. If env var DM_SIDM_PROJECT_ROOT is set, use it (no detection).
+      2. Otherwise try the canonical Windows path (where Telegram delivery
+         / file management happens).
+      3. Otherwise try the WSL path (where the heavy compute runs).
+      4. Otherwise raise FileNotFoundError.
+    """
+    # Honor env var first — this lets a clean clone set DM_SIDM_PROJECT_ROOT
+    # and have config work without filesystem-dependent hardcoding.
+    env = os.environ.get("DM_SIDM_PROJECT_ROOT")
+    if env:
+        return Path(env)
+
     # Windows path (canonical for Telegram MEDIA: + Windows tools)
-    win = Path(r"C:\Users\lamkuenai\projects\dm-sidm-pipeline")
+    win = Path(r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator")
     if win.exists():
         return win
+
     # WSL path (where dynesty runs)
-    wsl = Path("/home/lamkuenai/dm-sidm-pipeline")
+    wsl = Path("/home/lamkuenai/sidm-composite-dm-mediator")
     if wsl.exists():
         return wsl
-    raise FileNotFoundError("dm-sidm-pipeline project root not found")
+
+    raise FileNotFoundError(
+        "sidm-composite-dm-mediator project root not found. "
+        "Set DM_SIDM_PROJECT_ROOT or clone the repo to one of the canonical paths above."
+    )
 
 
-PROJECT_ROOT = Path(os.environ.get("DM_SIDM_PROJECT_ROOT", _detect_root()))
+PROJECT_ROOT = _detect_root()
 
 # Subdirectories
 V01 = PROJECT_ROOT / "v0.1-prelim"

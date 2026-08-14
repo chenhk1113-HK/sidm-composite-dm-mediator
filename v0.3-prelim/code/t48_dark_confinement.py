@@ -43,7 +43,7 @@ import numpy as np
 from pathlib import Path
 
 
-RESULTS_DIR = Path("/home/lamkuenai/dm-sidm-pipeline/v0.3-prelim/data/results")
+RESULTS_DIR = Path("/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/data/results")
 
 
 # Literature reviews and references
@@ -223,7 +223,7 @@ if __name__ == "__main__":
     out = survey()
     out_path = RESULTS_DIR / "t48_dark_confinement_survey.json"
     out_path.write_text(json.dumps(out, indent=2, default=str))
-    win_path = Path("/mnt/c/Users/lamkuenai/projects/dm-sidm-pipeline/v0.3-prelim/data/results/t48_dark_confinement_survey.json")
+    win_path = Path("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/data/results/t48_dark_confinement_survey.json")
     win_path.write_text(json.dumps(out, indent=2, default=str))
     print(f"\noutput -> {out_path}")
     print(f"        -> {win_path}")

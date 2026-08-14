@@ -17,8 +17,8 @@ try:
 except ImportError:
     HAS_MPL = False
 
-RESULTS_DIR = Path("/home/lamkuenai/dm-sidm-pipeline/v0.3-prelim/data/results")
-PLOTS_DIR = Path("/home/lamkuenai/dm-sidm-pipeline/v0.3-prelim/plots")
+RESULTS_DIR = Path("/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/data/results")
+PLOTS_DIR = Path("/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/plots")
 PLOTS_DIR.mkdir(parents=True, exist_ok=True)
 
 samples_path = RESULTS_DIR / "t8_v03_posterior_samples.npz"
@@ -108,7 +108,7 @@ print(f"[plot] saved {out_path2}")
 # Copy to Windows side
 import shutil
 for src in PLOTS_DIR.glob("*.png"):
-    dst = Path("/mnt/c/Users/lamkuenai/projects/dm-sidm-pipeline/v0.3-prelim/plots") / src.name
+    dst = Path("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/plots") / src.name
     dst.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy(src, dst)
     print(f"[plot] copied to {dst}")

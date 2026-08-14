@@ -60,7 +60,7 @@ from t30_lz_real_posterior import loglike_lz_real
 from t32_fermi_dwarf_channel import loglike_fermi_dwarf
 
 
-RESULTS_DIR = Path("/home/lamkuenai/dm-sidm-pipeline/v0.3-prelim/data/results")
+RESULTS_DIR = Path("/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/data/results")
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
 # T46 priors (same as T41 for direct comparison)
@@ -333,7 +333,7 @@ def main():
 
     out_path = RESULTS_DIR / "t46_yukawa_sommerfeld_joint_fit.json"
     out_path.write_text(json.dumps(out, indent=2, default=str))
-    win_path = Path("/mnt/c/Users/lamkuenai/projects/dm-sidm-pipeline/v0.3-prelim/data/results/t46_yukawa_sommerfeld_joint_fit.json")
+    win_path = Path("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/data/results/t46_yukawa_sommerfeld_joint_fit.json")
     win_path.write_text(json.dumps(out, indent=2, default=str))
     print(f"\noutput -> {out_path}")
     print(f"        -> {win_path}")

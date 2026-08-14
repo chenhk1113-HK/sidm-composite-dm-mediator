@@ -2,7 +2,7 @@
 import sys
 import time
 import numpy as np
-sys.path.insert(0, '/home/lamkuenai/dm-sidm-pipeline/v0.1-prelim/code')
+sys.path.insert(0, '/home/lamkuenai/sidm-composite-dm-mediator/v0.1-prelim/code')
 from halo_profiles import V_NFW, V_Burkert
 
 r = np.linspace(0.1, 60, 115)

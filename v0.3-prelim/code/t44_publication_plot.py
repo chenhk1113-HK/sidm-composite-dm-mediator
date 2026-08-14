@@ -29,7 +29,7 @@ import matplotlib.patches as mpatches
 from matplotlib.colors import LinearSegmentedColormap
 
 # Load the data
-RESULTS_DIR = Path("/home/lamkuenai/dm-sidm-pipeline/v0.3-prelim/data/results")
+RESULTS_DIR = Path("/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/data/results")
 T41_PATH = RESULTS_DIR / "t41_mediator_mass_joint_fit.json"
 T43_PATH = RESULTS_DIR / "t43_inelastic_dm_joint_fit.json"
 
@@ -187,7 +187,7 @@ def make_plot():
              ha='center', fontsize=9, style='italic', color='#444444')
 
     plt.tight_layout()
-    out_path = Path("/mnt/c/Users/lamkuenai/projects/dm-sidm-pipeline/outputs/Mediator_detection_publication_plot_2026-08-13.png")
+    out_path = Path("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/outputs/Mediator_detection_publication_plot_2026-08-13.png")
     plt.savefig(out_path, dpi=150, bbox_inches='tight')
     print(f"Plot -> {out_path}")
     print(f"  size: {out_path.stat().st_size} bytes")

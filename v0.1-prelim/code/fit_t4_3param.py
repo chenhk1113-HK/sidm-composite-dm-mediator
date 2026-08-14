@@ -40,8 +40,8 @@ from halo_profiles import (
     chi2_sparc,
 )
 
-DATA_DIR = Path("/mnt/c/Users/lamkuenai/projects/dm-sidm-pipeline/v0.1-prelim/data")
-RESULTS_DIR = Path("/home/lamkuenai/dm-sidm-pipeline/v0.1-prelim/data/results")
+DATA_DIR = Path("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.1-prelim/data")
+RESULTS_DIR = Path("/home/lamkuenai/sidm-composite-dm-mediator/v0.1-prelim/data/results")
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
 # Standard values

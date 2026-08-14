@@ -11,7 +11,7 @@ import json
 import sys
 from pathlib import Path
 
-PROJECT_ROOT = Path("/home/lamkuenai/dm-sidm-pipeline/v0.3-prelim")
+PROJECT_ROOT = Path("/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim")
 RESULTS_DIR = PROJECT_ROOT / "data" / "results"
 
 
@@ -28,7 +28,7 @@ t21 = load("t21_real_kiss_sidm_gravothermal.json")
 audit = {
     "audit_metadata": {
         "review_file": "doc_3478616ed936_Full Review 5.docx",
-        "review_target": "dm-sidm-pipeline v0.3-D15-CORRECTED2",
+        "review_target": "sidm-composite-dm-mediator v0.3-D15-CORRECTED2",
         "audit_date": "2026-08-12",
         "verification_method": "tier-ranked per reviewer-audit skill; all numerical claims cross-checked against on-disk JSON",
     },
@@ -140,6 +140,6 @@ audit = {
 
 out_path = RESULTS_DIR / "review5_audit.json"
 out_path.write_text(json.dumps(audit, indent=2, default=str))
-win_path = Path("/mnt/c/Users/lamkuenai/projects/dm-sidm-pipeline/v0.3-prelim/data/results/review5_audit.json")
+win_path = Path("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/data/results/review5_audit.json")
 win_path.write_text(json.dumps(audit, indent=2, default=str))
 print(out_path)

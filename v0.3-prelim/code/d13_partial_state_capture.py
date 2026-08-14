@@ -12,7 +12,7 @@ import json
 import time
 from pathlib import Path
 
-PROJECT_ROOT = Path("/home/lamkuenai/dm-sidm-pipeline/v0.3-prelim")
+PROJECT_ROOT = Path("/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim")
 RESULTS_DIR = PROJECT_ROOT / "data" / "results"
 
 
@@ -20,7 +20,7 @@ def main():
     t36_path = RESULTS_DIR / "t36_sashimi_config_matrix.json"
     if not t36_path.exists():
         # Try Windows-side mirror
-        t36_path = Path("/mnt/c/Users/lamkuenai/projects/dm-sidm-pipeline/v0.3-prelim/data/results/t36_sashimi_config_matrix.json")
+        t36_path = Path("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/data/results/t36_sashimi_config_matrix.json")
 
     if t36_path.exists():
         t36 = json.load(open(t36_path))
@@ -60,7 +60,7 @@ def main():
     out_path = RESULTS_DIR / "d13_partial_state_capture.json"
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(out, indent=2, default=str))
-    win_path = Path("/mnt/c/Users/lamkuenai/projects/dm-sidm-pipeline/v0.3-prelim/data/results/d13_partial_state_capture.json")
+    win_path = Path("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/data/results/d13_partial_state_capture.json")
     win_path.write_text(json.dumps(out, indent=2, default=str))
     print(f"output -> {out_path}")
     print(f"        -> {win_path}")

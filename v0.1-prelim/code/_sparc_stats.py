@@ -1,8 +1,8 @@
 """Quick stats on SPARC galaxies by point count."""
 import sys
-sys.path.insert(0, '/home/lamkuenai/dm-sidm-pipeline/v0.1-prelim/code')
+sys.path.insert(0, '/home/lamkuenai/sidm-composite-dm-mediator/v0.1-prelim/code')
 from sparc_loader import load_all_sparc
-gs = load_all_sparc('/mnt/c/Users/lamkuenai/projects/dm-sidm-pipeline/v0.1-prelim/data')
+gs = load_all_sparc('/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.1-prelim/data')
 print(f'Total galaxies: {len(gs)}')
 print()
 print('Top 10 by data-point count:')

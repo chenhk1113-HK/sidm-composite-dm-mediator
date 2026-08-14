@@ -203,10 +203,18 @@ framework is right rather than lucky.
 For honesty, items we did **not** use and explicitly did not cite, even
 though they are sometimes confused with our work:
 
-- **No HEPData 155182.** The LZ WS2024 record is HEPData record
-  [ins2726677](https://www.hepdata.net/record/ins2726677) (linked from the
-  arXiv:2410.17036 page). Earlier drafts of our README referenced "HEPData
-  155182" — that number doesn't refer to the LZ WS2024 result. Corrected here.
+- **No reliance on HEPData ins2726677.** HEPData record
+  [ins2726677](https://www.hepdata.net/record/ins2726677) is the
+  INSPIRE-TEI namespace, not the HEPData record ID. The actual HEPData
+  record for arXiv:2410.17036 (LZ WS2024) is record
+  [155182](https://www.hepdata.net/record/155182) (DOI
+  10.17182/hepdata.155182, 2025). T30 ingests the published 90% CL SI
+  cross-section limits from HEPData record 155182 — the canonical,
+  DOI-bearing record for the LZ 4.2 tonne-year result. The
+  `ins2726677` ID does not exist as a HEPData record and should not be
+  cited as one. (Corrected 2026-08-14 per Full Review 11 audit, which
+  flagged that the LZ arXiv page, downstream citations, and the LZ-
+  boosted-DM PRL 134, 241801 (2025) all point at HEPData 155182.)
 - **No "Hooper & Linden 2024" 14-year Fermi-dSph paper.** No such paper
   exists. The canonical 14-year analysis is McDaniel et al. 2024
   (arXiv:2311.04982). Earlier drafts referenced "Hooper & Linden 2024" in

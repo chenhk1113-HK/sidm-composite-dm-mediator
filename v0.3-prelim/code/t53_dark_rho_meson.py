@@ -6,12 +6,21 @@ quarks (N_f > 0). The dark rho meson (rho_dark) is the lightest
 vector bound state, analogous to the rho meson in real QCD.
 
 Dark quark masses (m_q) and the dark confining scale (Lambda_dark) set
-the dark rho mass via the PCAC relation:
-  m_rho^2 = 2 m_q Lambda_dark   (approximate, for SU(N_dark), N_f flavors)
+the dark rho mass via a phenomenological interpolation between two
+limiting regimes:
+  - m_q >> Lambda_dark: m_rho ~ 2 m_q (heavy-quark limit)
+  - m_q << Lambda_dark: m_rho ~ 2 Lambda_dark (chiral-symmetry-broken limit)
 
-For dark quarks heavier than Lambda_dark:
-  m_q >> Lambda_dark --> m_rho ~ 2 m_q, dark quarks are heavy
-  m_q << Lambda_dark --> m_rho ~ 2 Lambda_dark, chiral symmetry broken
+NOTE (per R11 audit, 2026-08-14): this is a **phenomenological
+interpolation**, not a first-principles PCAC/GMOR prediction. PCAC
+(Partially Conserved Axial Current) and the Gell-Mann–Oakes–Renner
+relation govern the **pseudoscalar pion mass**, not the vector rho
+mass. The vector meson mass in a composite gauge theory depends on
+non-perturbative dynamics (vector meson dominance, gauge coupling,
+N_dark, N_f) and generally requires lattice input or a calibrated
+effective theory to compute. The same file's `dark_pion_mass()`
+function uses the correct GMOR relation for the pion. Treat T53/T54
+σ/m as a toy parametrization, not a first-principles prediction.
 
 The dark rho DECAYS to two dark pions (or dark glueballs, depending on
 the spectrum), giving a vector-mediated cross-section.
@@ -41,7 +50,7 @@ import numpy as np
 from pathlib import Path
 
 
-RESULTS_DIR = Path("/home/lamkuenai/dm-sidm-pipeline/v0.3-prelim/data/results")
+RESULTS_DIR = Path("/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/data/results")
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
 
@@ -52,16 +61,21 @@ C_KMS = 299792.458
 
 
 def dark_rho_mass(m_q_GeV: float, Lambda_dark_GeV: float, N_dark: float = 3.0) -> float:
-    """Dark rho (vector) meson mass.
+    """Dark rho (vector) meson mass — phenomenological interpolation.
 
-    For m_q >> Lambda_dark: m_rho ~ 2 m_q (heavy quark)
-    For m_q << Lambda_dark: m_rho ~ 2 Lambda_dark (chiral symmetry broken)
-
-    PCAC-corrected formula (from real QCD):
-      m_rho^2 = 2 m_q Lambda_dark * (1 + corrections)
-
-    For our case, we use a smooth interpolation:
+    This is NOT a PCAC / GMOR prediction (those govern the pion mass).
+    This is a smooth interpolation between the heavy-quark limit
+    (m_rho ~ 2 m_q) and the chiral-symmetry-broken limit
+    (m_rho ~ 2 Lambda_dark), modeled as:
       m_rho = 2 * sqrt(m_q * Lambda_dark + Lambda_dark^2)
+
+    A proper vector meson mass in a composite gauge theory requires
+    non-perturbative input (lattice, vector meson dominance, calibrated
+    effective theory). For our purposes this interpolation captures
+    the qualitative behavior across regimes.
+
+    The N_dark parameter is accepted for API symmetry with
+    dark_pion_mass() but is not used in this phenomenological fit.
     """
     return 2.0 * np.sqrt(m_q_GeV * Lambda_dark_GeV + Lambda_dark_GeV ** 2)
 
@@ -202,7 +216,7 @@ if __name__ == "__main__":
 
     out_path = RESULTS_DIR / "t53_dark_rho_meson.json"
     out_path.write_text(json.dumps(out, indent=2, default=str))
-    win_path = Path("/mnt/c/Users/lamkuenai/projects/dm-sidm-pipeline/v0.3-prelim/data/results/t53_dark_rho_meson.json")
+    win_path = Path("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/data/results/t53_dark_rho_meson.json")
     win_path.write_text(json.dumps(out, indent=2, default=str))
     print(f"\noutput -> {out_path}")
     print(f"        -> {win_path}")

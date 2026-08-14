@@ -1,5 +1,5 @@
 """
-Central configuration for dm-sidm-pipeline.
+Central configuration for sidm-composite-dm-mediator.
 
 All paths, constants, prior ranges, sampler hyperparameters, and
 observational velocity scales live here. Other modules import from
@@ -23,14 +23,14 @@ import os
 def _detect_root() -> Path:
     """Find the project root on this host."""
     # Windows path (canonical for Telegram MEDIA: + Windows tools)
-    win = Path(r"C:\Users\lamkuenai\projects\dm-sidm-pipeline")
+    win = Path(r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator")
     if win.exists():
         return win
     # WSL path (where dynesty runs)
-    wsl = Path("/home/lamkuenai/dm-sidm-pipeline")
+    wsl = Path("/home/lamkuenai/sidm-composite-dm-mediator")
     if wsl.exists():
         return wsl
-    raise FileNotFoundError("dm-sidm-pipeline project root not found")
+    raise FileNotFoundError("sidm-composite-dm-mediator project root not found")
 
 
 PROJECT_ROOT = Path(os.environ.get("DM_SIDM_PROJECT_ROOT", _detect_root()))

@@ -509,9 +509,28 @@ chains from original published papers — medium-term item for v0.4.
 T39 resolution is prior-dependent.** The Roberts et al. 2024 default
 ε ~ 10⁻⁴ falls in the NARROW regime and is incompatible with LZ data.
 
+**Dimensional caveat (added 2026-08-14 per R11 audit)**: The current
+implementation maps
+`sigma_DM_nucleon_cm2 = epsilon * sigma_m_0`
+where σ/m is in cm²/g and ε is treated as dimensionless. This is
+dimensionally inconsistent. If ε is a dimensionless portal coupling,
+the output is in cm²/g, not cm². If it's a conversion coefficient, it
+must absorb the g↔cm² unit transformation and is not interpretable as
+a direct SM coupling. Similarly, the annihilation mapping
+`<σv> = α * (σ/m)²` requires α to have explicit units and full
+microphysical parameter dependence; treating α as a dimensionless
+"annihilation coupling" is also dimensionally sloppy. **The T39 MAP
+values (log_ε ≈ −56, log_α ≈ −28) are phenomenological conversion-
+parameter preferences, not direct measurements of physical SM-sector
+couplings.** A proper remap requires specifying a portal Lagrangian
+(kinetic mixing, dark photon, leptophilic scalar, etc.) and computing
+σ_{χN} from the coupling, mediator mass, momentum transfer, and
+nuclear form factor — not from ε × σ/m.
+
 **Remediation**: hierarchical or log-normal priors for (ε, α)
 that give finite probability density across the SM-decoupling
-regime — medium-term item for v0.4.
+regime — medium-term item for v0.4. Dimensional remap via explicit
+portal Lagrangian — longer-term item.
 
 ### S.6 Per-galaxy SPARC fits
 

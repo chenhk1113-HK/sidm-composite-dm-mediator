@@ -1,5 +1,5 @@
 """
-Test suite for dm-sidm-pipeline.
+Test suite for sidm-composite-dm-mediator.
 
 Per peer review (2026-08-10, Section 2.2.4):
     "No automated unit/integration test suite"
