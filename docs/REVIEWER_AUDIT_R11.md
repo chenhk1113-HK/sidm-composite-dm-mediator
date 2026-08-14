@@ -424,10 +424,22 @@ following fixes have been APPLIED in commit [next]:
 10. **G10** (ε dimensional issue): Documented in FINDINGS.md. Fix
     deferred to dedicated microphysics audit.
 
+**G11. Ingest McDaniel et al. 14-year Fermi data products (2D TS profiles,
+    J-factor treatments) instead of Gaussian proxies.** ✅ Applied
+    2026-08-14. New module `v0.3-prelim/code/t32_real_likelihood.py`
+    loads `dSphs.csv` + 220 .npy TS profiles (40 mass × 60 σv per dSph,
+    bb/ττ × Jprior/noprior). Returns log L = TS(m_χ, σv)/2 with the
+    profile-likelihood-ratio convention. T32's `loglike_fermi_sidm()`
+    now calls the real likelihood. Data downloaded via
+    `outputs/fetch_external_data.sh` (idempotent, md5-verified against
+    figshare). Data gitignored per existing `external_data/` policy.
+    Test: 7/7 pass. Combined TS peak = 13.78 at m_χ=41.25 GeV,
+    σv=1.37e-26; 95% CL σv upper limit at peak = 2.76e-26 cm³/s
+    (matches McDaniel+ 2024 paper).
+
 NOT applied (medium-large / out of scope):
 
-- G11 (Fermi data ingestion)
 - G12 (SPARC hierarchical forward model)
-- G13-G16 (large science items)
+- G13-G16 (large science items: full Lagrangian, lattice input, Boltzmann relic, halo-mass-specific KiSS)
 
 These belong in v0.4-prelim roadmap or later.
