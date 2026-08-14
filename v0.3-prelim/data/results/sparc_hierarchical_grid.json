@@ -1,0 +1,16 @@
+{
+  "test": "sparc_hierarchical_precompute",
+  "direction": "R11 G12 closure (SPARC hierarchical forward model)",
+  "n_galaxies": 175,
+  "best_fit": {
+    "sigma_m": 0.06707035611184306,
+    "a": 0.0,
+    "log_L": -202214.194699277,
+    "i_sigma_m": 9,
+    "i_a": 0
+  },
+  "elapsed_seconds": 110.89035606384277,
+  "n_sigma_m": 50,
+  "n_a": 30,
+  "data_source": "175 SPARC galaxies from v0.1-prelim/data/Rotmod_LTG/ (Lelli, McGaugh, Schombert 2016c, AJ 152, 157). Population synthesis via Dutton & Macci\u00f2 2014 concentration-mass relation (log-normal scatter 0.13 dex). SIDM core radius scaling per Roberts+ 2024 / Kaplinghat+ 2016."
+}

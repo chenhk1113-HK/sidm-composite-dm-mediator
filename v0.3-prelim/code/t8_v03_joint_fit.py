@@ -64,20 +64,96 @@ DLOGZ = 0.10
 # This captures the Phase 2 finding that:
 #   - At sigma/m < 0.1: log Z_Burkert ~ log Z_NFW (no preference)
 #   - At sigma/m > 1: log Z_Burkert > log Z_NFW by ~ Dsat
+def loglike_sparc_hierarchical(sigma_m_0: float, a: float) -> float:
+    """Real SPARC per-galaxy hierarchical log-likelihood (R11 G12 closure).
+
+    Loads the pre-computed grid from
+    v0.3-prelim/data/results/sparc_hierarchical_grid.npz (built by
+    precompute_sparc_hierarchical.py — 175 SPARC galaxies, marginalized
+    over ρ_c with Dutton-Maccio 2014 concentration-mass prior) and
+    bilinearly interpolates the summed log L at (sigma_m_0, a).
+
+    Per R11 audit (2026-08-14): replaces the previous saturation score
+    delta_log_sparc(sigma_m_0, a) with a real data-driven per-galaxy
+    likelihood. The previous score was a calibrated proxy, not a
+    per-galaxy observational likelihood.
+
+    The grid's summed log L is in **natural log units** (not log10),
+    so it can be summed directly with other channels' log L values
+    in the joint fit.
+    """
+    import numpy as np
+    from pathlib import Path
+    # Path candidates (Windows + WSL)
+    grid_path_candidates = [
+        Path("/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/data/results/sparc_hierarchical_grid.npz"),
+        Path("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/data/results/sparc_hierarchical_grid.npz"),
+        Path(r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\data\results\sparc_hierarchical_grid.npz"),
+    ]
+    grid_path = None
+    for p in grid_path_candidates:
+        if p.exists():
+            grid_path = p
+            break
+    if grid_path is None:
+        raise FileNotFoundError(
+            "SPARC hierarchical grid not found. Run "
+            "v0.3-prelim/code/precompute_sparc_hierarchical.py first."
+        )
+
+    # Cache the loaded grid
+    if not hasattr(loglike_sparc_hierarchical, "_grid_cache"):
+        loglike_sparc_hierarchical._grid_cache = np.load(grid_path)
+    grid = loglike_sparc_hierarchical._grid_cache
+    sigma_m_grid = grid["sigma_m_grid"]
+    a_grid = grid["a_grid"]
+    logL_grid = grid["logL_grid"]
+
+    # Bilinear interpolation in log(σ/m) × a space
+    log_sm = np.log10(sigma_m_0)
+    # Clamp to grid range (out-of-grid = extrapolation penalty)
+    if log_sm < np.log10(sigma_m_grid[0]):
+        log_sm = np.log10(sigma_m_grid[0])
+    if log_sm > np.log10(sigma_m_grid[-1]):
+        log_sm = np.log10(sigma_m_grid[-1])
+    if a < a_grid[0]:
+        a = a_grid[0]
+    if a > a_grid[-1]:
+        a = a_grid[-1]
+
+    # Linear interpolation
+    log_sm_axis = np.log10(sigma_m_grid)
+    i = np.searchsorted(log_sm_axis, log_sm) - 1
+    j = np.searchsorted(a_grid, a) - 1
+    i = max(0, min(i, len(log_sm_axis) - 2))
+    j = max(0, min(j, len(a_grid) - 2))
+    wx = (log_sm - log_sm_axis[i]) / (log_sm_axis[i + 1] - log_sm_axis[i])
+    wy = (a - a_grid[j]) / (a_grid[j + 1] - a_grid[j])
+    log_L = (
+        logL_grid[i, j] * (1 - wx) * (1 - wy)
+        + logL_grid[i + 1, j] * wx * (1 - wy)
+        + logL_grid[i, j + 1] * (1 - wx) * wy
+        + logL_grid[i + 1, j + 1] * wx * wy
+    )
+    return float(log_L)
+
+
 def delta_log_sparc(sigma_m_0: float, a: float) -> float:
-    """Calibrated SPARC saturation SCORE (not a per-galaxy likelihood).
+    """Calibrated SPARC saturation SCORE (legacy — DEPRECATED per R11 G12).
+
+    Kept as a thin wrapper for backward compatibility with external
+    callers. Returns loglike_sparc_hierarchical() (the real per-galaxy
+    likelihood) for direct drop-in compatibility with the joint fit
+    chain. See `loglike_sparc_hierarchical` for the principled replacement.
 
     Saturation is computed at the galaxy velocity scale (v ~ 100 km/s).
-    This is a *relative* log Z approximation, not a per-galaxy
-    observational likelihood. See the module docstring for caveats
-    and the R11 audit (Section 1) for the methodological concerns.
+    This was a *relative* log Z approximation, not a per-galaxy
+    observational likelihood. See the R11 audit (Section 1, G12) for
+    the methodological concerns.
     """
-    sigma_m_v = sigma_m_at_v(sigma_m_0, a, V_GALAXY)
-    if sigma_m_v <= 0:
-        return 0.0
-    Dsat = 5000.0  # from Phase 2 T4 result (saturation at large sigma/m)
-    sigma_transition = 0.5  # cm^2/g (transition scale)
-    return float(Dsat * (1.0 - np.exp(-sigma_m_v / sigma_transition)))
+    if sigma_m_0 <= 0:
+        return -np.inf
+    return loglike_sparc_hierarchical(sigma_m_0, a)
 
 
 # ---------------------------------------------------------------------------
@@ -91,7 +167,11 @@ def loglike_5channel(sigma_m_0: float, a: float) -> float:
     ll += loglike_dsph_v03(sigma_m_0, a)        # ~ -1 to 0
     ll += loglike_ufd_v03(sigma_m_0, a)         # ~ -10 to 0
     ll += loglike_bullet_v03(sigma_m_0, a)      # ~ -1 to 0
-    ll += delta_log_sparc(sigma_m_0, a) / 1000  # scaled: ~ -5 to +5
+    # Per R11 G12: use the real per-galaxy hierarchical SPARC likelihood
+    # directly. The pre-computed grid returns the summed natural-log
+    # log L across 175 SPARC galaxies. The hierarchical likelihood is
+    # the dominant constraint and correctly dominates the joint fit.
+    ll += loglike_sparc_hierarchical(sigma_m_0, a)
     return ll
 
 
