@@ -1,9 +1,11 @@
 cff-version: 1.2.0
 message: >
   If you use this code or its results in published work, please cite the
-  relevant version below. See CHANGELOG.md for the per-version result
-  summaries; v0.3-prelim-D15-CORRECTED3 and Mediator_Detection_v12 are the
-  most recent closed rounds at the time of publication.
+  relevant version below AND the underlying physics references listed at
+  the bottom. See docs/DATA_SOURCES.md for the full list of observational
+  data sources used and how to cite them. v0.3-prelim-D15-CORRECTED3 and
+  Mediator_Detection_v12 are the most recent closed rounds at the time of
+  initial publication (2026-08-14).
 title: "sidm-composite-dm-mediator"
 type: software
 version: 0.3-prelim-D15-CORRECTED3
@@ -22,25 +24,28 @@ keywords:
   - composite-dark-matter
   - dark-glueball
   - dark-rho
+  - dark-baryon
   - mediator-detection
   - bayesian-inference
   - dynesty
+  - gravothermal-collapse
   - direct-detection
   - lz
   - fermi-lat
   - dwarf-galaxies
 abstract: >
   Bayesian constraint pipeline for self-interacting dark matter (SIDM)
-  cross-sections, with a feasibility survey of mediator detection.
-  Combines WIMpy-style nested sampling (dynesty) with KiSS-SIDM
-  gravothermal penalties, real LZ WS2024 + Fermi dwarf gamma-ray
-  channels, and a composite-DM microphysics extension (dark glueballs,
-  dark rho, dark baryons). Headline result: σ/m ~ 1-3 cm²/g at the
-  MeV-mediator scale, with the mediator invisible to all direct-detection
-  experiments (a ~10⁵⁰× margin below LZ) and decoupled from thermal-WIMP
-  coupling by ~10⁰×. See docs/MATHEMATICS.md and the per-version
-  synthesis docs in v0.3-prelim/docs/ for full derivation.
+  cross-sections, with a composite-DM microphysics extension (dark
+  glueballs, dark rho, dark baryons) and a secluded-mediator detection
+  feasibility survey. Headline result: sigma/m ~ 1-3 cm^2/g at galactic
+  velocity scales (1.4-1.7 cm^2/g MAP), velocity index a ~ 0.6-1.4, with
+  the mediator invisible to all direct-detection experiments (sigma_SI ~
+  2e-118 cm^2, ~10^46 times below the LZ WS2024 neutrino floor and ~10^50
+  times below LZ SR1+SR3). Cross-validated against Drobczyk 2025
+  (arXiv:2506.22997). See docs/MATHEMATICS.md, docs/DATA_SOURCES.md, and
+  the per-version synthesis docs in v0.3-prelim/docs/ for full derivation.
 references:
+  # Foundational theoretical framework
   - type: article
     title: "Secluded WIMP Dark Matter"
     authors:
@@ -70,18 +75,126 @@ references:
     year: 2014
     journal: "Physical Review D"
     volume: "89"
+    start: "115005"
     identifiers:
       - type: arxiv
         value: "1310.7945"
+
+  # KiSS-SIDM (the gravothermal penalty that anchors the headline)
   - type: article
-    title: "WIMP Shadows: Phenomenology of Secluded Dark Matter"
+    title: "Core Collapse Beyond the Fluid Approximation: The Late Evolution of Self-Interacting Dark Matter Halos"
+    authors:
+      - family-names: Gurian
+        given-names: James
+      - family-names: May
+        given-names: Simon
+    year: 2025
+    journal: "Physical Review Letters"
+    volume: "135"
+    issue: "22"
+    start: "221001"
+    identifiers:
+      - type: arxiv
+        value: "2505.15903"
+      - type: doi
+        value: "10.1103/2ycz-3fvv"
+
+  # SASHIMI-SIDM (subhalo calibration at sub-galactic scales)
+  - type: article
+    title: "SASHIMI-SIDM: Semi-analytical subhalo modelling for self-interacting dark matter at sub-galactic scales"
+    authors:
+      - family-names: Ando
+        given-names: Shin'ichiro
+      - family-names: Horigome
+        given-names: Shunichi
+      - family-names: Nadler
+        given-names: Ethan O.
+      - family-names: Yang
+        given-names: Daneng
+      - family-names: Yu
+        given-names: Hai-Bo
+    year: 2025
+    journal: "Journal of Cosmology and Astroparticle Physics"
+    volume: "2025"
+    issue: "02"
+    start: "053"
+    identifiers:
+      - type: arxiv
+        value: "2403.16633"
+
+  # Two-component SIDM with mass segregation (SIDM2v)
+  - type: article
+    title: "Diversifying halo structures in two-component self-interacting dark matter models via mass segregation"
+    authors:
+      - family-names: Yang
+        given-names: Daneng
+      - family-names: Fan
+        given-names: Yi-Zhong
+      - family-names: Hou
+        given-names: Siyuan
+      - family-names: Tsai
+        given-names: Yue-Lin Sming
+    year: 2026
+    journal: "Physical Review D"
+    identifiers:
+      - type: arxiv
+        value: "2504.02303"
+  - type: article
+    title: "Self-Interacting Dark Matter with Mass Segregation: A Unified Explanation of Dwarf Cores and Small-Scale Lenses"
+    authors:
+      - family-names: Yang
+        given-names: Daneng
+      - family-names: Fan
+        given-names: Yi-Zhong
+      - family-names: Hou
+        given-names: Siyuan
+      - family-names: Tsai
+        given-names: Yue-Lin Sming
+    year: 2026
+    identifiers:
+      - type: arxiv
+        value: "2506.14898"
+
+  # Cross-validation reference (independent UV route to same physics)
+  - type: article
+    title: "Naturally resonant two-mediator model of self-interacting dark matter with decoupled relic abundance"
+    year: 2025
+    journal: "Classical and Quantum Gravity"
+    volume: "42"
+    issue: "22"
+    start: "225006"
+    identifiers:
+      - type: arxiv
+        value: "2506.22997"
+
+  # Mediator-detection phenomenology references
+  - type: article
+    title: "WIMP Shadows: Phenomenology of Secluded Dark Matter in Three Minimal BSM Scenarios"
+    authors:
+      - family-names: Di Mauro
+        given-names: Mattia
+      - family-names: Belfatto
+        given-names: Beatrice
+      - family-names: Bagnaschi
+        given-names: Gianluca
     year: 2025
     identifiers:
       - type: arxiv
         value: "2510.23771"
   - type: article
     title: "Probing the Phenomenology of Dark Matter from Decoupled Freeze-Out"
+    authors:
+      - family-names: Chakraborti
+        given-names: Sreemanti
+      - family-names: Xue
+        given-names: Wei
     year: 2025
+    journal: "Journal of High Energy Physics"
+    volume: "2026"
+    issue: "06"
+    start: "131"
     identifiers:
       - type: arxiv
         value: "2511.14635"
+      - type: report-number
+        value: "IPPP/25/79"

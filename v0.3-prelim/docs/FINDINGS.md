@@ -1,4 +1,4 @@
-# v0.3-prelim FINDINGS — dm-sidm-pipeline
+# v0.3-prelim FINDINGS — sidm-composite-dm-mediator
 
 **Date:** 2026-08-10 (v0.3-prelim), 2026-08-11 (v0.3-prelim-D: Direction C KISS-SIDM),
          2026-08-11 (v0.3-prelim-D2: Directions 1+2+3, full 3-direction sweep),
@@ -10,6 +10,7 @@
          2026-08-11 (v0.3-prelim-D8: Tier-3 publication work — β_seg fitted, MATHEMATICS.md, TUTORIAL.md).
 **Status:** v0.3-prelim-D8 — Tier 3 publication work: β_seg fitted (data prefers 0.9, not 0.25), MATHEMATICS.md appendix (250+ lines), TUTORIAL.md (300+ lines).
 **Test count: 246/247 pass** (was 240; +6 from D8: 6 T29 tests).
+**Note (2026-08-14):** Project renamed from `dm-sidm-pipeline`.
 
 ## TIER 1+2+3 — Full systematic-uncertainty cascade (D7)
 

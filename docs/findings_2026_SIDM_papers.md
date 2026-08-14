@@ -1,8 +1,10 @@
-# 2026 SIDM literature context — arXiv:2504.02303 and arXiv:2510.11006
+# 2026 SIDM literature context — Yang+ 2026 (arXiv:2504.02303) and Yang, Yang, Yu+ 2026 (arXiv:2510.11006)
 
 **Date**: 2026-08-10
 **Context**: User uploaded "Dark matter latest.docx" pointing to recent SIDM literature.
-**Decision**: Two of the cited papers are directly relevant to dm-sidm-pipeline.
+**Decision**: Two of the cited papers are directly relevant to this project.
+
+**Note (2026-08-14):** Project renamed from `dm-sidm-pipeline`.
 
 ---
 
@@ -18,7 +20,7 @@
 - Low central dark matter densities in dwarf galaxies (the same dSph puzzle that Channel 2 currently uses)
 - Unexpectedly dense subhalos inferred from strong gravitational lensing
 
-**Relevance to dm-sidm-pipeline**:
+**Relevance to sidm-composite-dm-mediator**:
 
 | Aspect | Pipeline current state | What this paper adds |
 |---|---|---|
@@ -53,7 +55,7 @@
 
 **The KEY RESULT**: σ/m ~ **30-100 cm²/g** in the regime relevant for these subhalos (V_max ~ 10 km/s). Specifically, the paper uses σ/m = 0 (CDM), 30, 50, and 100 cm²/g as the reference values. This is the "effective" σ/m evaluated at V_max ~ 10 km/s.
 
-**Relevance to dm-sidm-pipeline**:
+**Relevance to sidm-composite-dm-mediator**:
 
 | Aspect | Pipeline current state | What this paper adds |
 |---|---|---|

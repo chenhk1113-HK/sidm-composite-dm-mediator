@@ -1,4 +1,4 @@
-# Tutorial — dm-sidm-pipeline v0.3-prelim
+# Tutorial — sidm-composite-dm-mediator v0.3-prelim
 
 **Purpose:** End-to-end guide for running the SIDM cross-section constraint
 pipeline from a fresh checkout. This is the T3.6 deliverable from the
@@ -7,7 +7,10 @@ Full Codebase R2 review.
 **Audience:** A new developer or collaborator who needs to reproduce the
 D5/D6/D7 results or run new fits.
 
-**Last updated:** 2026-08-11 (v0.3-prelim-D7)
+**Last updated:** 2026-08-11 (v0.3-prelim-D7); renamed 2026-08-14.
+
+**Data sources:** see [`DATA_SOURCES.md`](DATA_SOURCES.md) for the full
+list of external observational data + citations used in this pipeline.
 
 ---
 
@@ -15,12 +18,12 @@ D5/D6/D7 results or run new fits.
 
 ```bash
 # 1. Clone the repository
-git clone <repo_url> dm-sidm-pipeline
-cd dm-sidm-pipeline
+git clone https://github.com/lamkuenai/sidm-composite-dm-mediator
+cd sidm-composite-dm-mediator
 
 # 2. Set up the Python environment (pinned to numpy 2.4.6 etc.)
-python -m venv wimpy
-source wimpy/bin/activate
+python -m venv .venv
+source .venv/bin/activate          # bash/zsh; .venv\Scripts\activate on Windows
 pip install -r requirements.txt
 
 # 3. Run the test suite (should show 240+ tests passing)
@@ -39,12 +42,13 @@ python t21_real_kiss_sidm_gravothermal.py
 ## What's Where
 
 ```
-dm-sidm-pipeline/
+sidm-composite-dm-mediator/
 ├── README.md                        # Project status + headline
 ├── CHANGELOG.md                     # Version history (D, D2, D3, ...)
 ├── requirements.txt                 # Pinned Python deps (numpy 2.4.6, ...)
 ├── docs/
-│   ├── FINDINGS.md                  # Scientific findings (D5, D6, D7)
+│   ├── DATA_SOURCES.md              # Single authoritative source list + citations (NEW 2026-08-14)
+│   ├── FINDINGS.md → v0.3-prelim/docs/FINDINGS.md  # Scientific findings (D5, D6, D7)
 │   ├── MATHEMATICS.md               # Math appendix (D8)
 │   ├── REVIEWER_AUDIT_R2.md         # Audit of R2 review
 │   └── TUTORIAL.md                  # This file
@@ -55,9 +59,9 @@ dm-sidm-pipeline/
 │   ├── tests/                       # Tests for v0.3 code
 │   └── data/results/                # Output JSON files
 ├── tests/                           # Cross-version tests
-└── outputs/                         # PDF + ZIP delivery artifacts
-    ├── dm-sidm-pipeline_v0.3-D7_CODEBASE_WITH_README.pdf
-    └── dm-sidm-pipeline_v0.3-D7_SOURCE_BUNDLE.zip
+└── outputs/                         # PDF + ZIP delivery artifacts (gitignored)
+    ├── sidm-composite-dm-mediator_v0.3-D7_CODEBASE_WITH_README.pdf
+    └── sidm-composite-dm-mediator_v0.3-D7_SOURCE_BUNDLE.zip
 ```
 
 ---
@@ -228,7 +232,7 @@ Then re-run T21 with the new data (edit `t21_real_kiss_sidm_gravothermal.py:_REA
 
 All T-series scripts use absolute paths via `config.RESULTS_DIR_V03`. If you cd into `v0.3-prelim/code/` directly, it should work. If you run from elsewhere, set:
 ```bash
-export DM_SIDM_PROJECT_ROOT=/c/Users/lamkuenai/projects/dm-sidm-pipeline
+export DM_SIDM_PROJECT_ROOT=/c/Users/lamkuenai/projects/sidm-composite-dm-mediator
 ```
 
 ### 2. config.py not found
