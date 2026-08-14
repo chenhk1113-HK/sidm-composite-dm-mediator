@@ -14,9 +14,11 @@ This project uses the `wip/vX.Y.Z` branching model:
 **The rule: every commit goes to a `wip/vX.Y.Z` branch, never to `master` directly.** When vX.Y.Z is ready to ship:
 1. Make sure the wip branch builds and tests pass
 2. `git checkout master && git merge wip/vX.Y.Z --no-ff`
-3. `git tag vX.Y.Z` (annotated tag with release notes)
+3. `git tag -a vX.Y.Z -m "vX.Y.Z release: <one-line summary>"` (annotated tag, see below)
 4. `git branch -d wip/vX.Y.Z` (after the merge)
 5. Push `master` + the tag
+
+For this project, the framework convention is enforced as the **initial state**: when this repo was first published, the `master` branch held the initial commit (the entire v0.1 → D15-CORRECTED3 + Mediator v12 history as a single capture point). All **subsequent** work goes on `wip/vX.Y.Z` branches per the rule above.
 
 ## Tag scheme
 
@@ -111,19 +113,22 @@ for f in .gitignore .gitattributes .githooks/pre-commit CONTRIBUTING.md VERSION;
 done
 ```
 
-**After any sync, verify the destination matches the source (per AGENTS.md rule 19):**
+**After any sync, verify the destination matches the source:**
 
 ```bash
 wsl -e bash -c "diff -rq /mnt/c/Users/lamkuenai/<project>/ /home/lamkuenai/<project>/ --exclude=__pycache__ --exclude=.git"
 ```
 
-**9P cache gotcha:** the 9P filesystem driver that bridges `/mnt/c/...` from WSL has a metadata cache with a 1-30s TTL. After a Windows-side `write_file`, wait 2 seconds OR `ls -la` the parent dir OR `cp` to force a fresh read before expecting the WSL side to see the new file. Full details in the `windows-host-wsl-orchestration` skill.
+**9P cache gotcha:** the 9P filesystem driver that bridges `/mnt/c/...` from WSL has a metadata cache with a 1-30s TTL. After a Windows-side file write, wait ~2 seconds (or `ls -la` the parent dir, or `cp` to force a fresh read) before expecting the WSL side to see the new file. This bit-trap is documented across many projects on this host.
 
-**Background processes from WSL:** when launching a long-running process that needs to survive the Hermes terminal, use the `_run_in_wsl.sh` wrapper pattern (full details in the `fuse-wsl-sweep-daemonization` skill). The wrapper:
-- Uses `setsid + nohup + disown` to fully detach
-- Writes a PID file at `<project>/_<script>.pid` for watchdog monitoring
-- Logs to `<project>/_<script>_run.log` (in the WSL copy, mirror to Windows as needed)
-- Sleeps 2s after launch to fail-fast on import errors
+**9P symlink gotcha:** git cannot follow symlinks through `/mnt/c/...` because of 9P filesystem limitations. The `.gitignore` symlink (and other framework symlinks) silently fail to be respected by git, leading to spurious file staging. If your project is on WSL (or accessed via `/mnt/c/...`), use **real copies** of the framework files, not symlinks. This project does so (see the `--no-symlink` flag of `vc_init.sh`).
+
+**Background processes from WSL:** when launching a long-running process that needs to survive the Hermes terminal (e.g. a dynesty run, a KiSS-SIDM Julia worker), use the **setsid + nohup + wrapper-script pattern**:
+- `setsid` detaches the process from the controlling terminal
+- `nohup` makes it ignore SIGHUP
+- Wrap the command in a small shell script that writes a PID file and a log file, so a watchdog can monitor progress
+
+The KiSS-SIDM Julia worker in this project follows this pattern: see `v0.3-prelim/code/kiss_sidm_julia_bridge.py` and the worker script at `/tmp/kiss_sidm_worker.jl` on the WSL side.
 
 ## Code review
 
@@ -145,17 +150,18 @@ Use the `requesting-code-review` skill for the full workflow. The short version:
 7. `git push origin master --tags`
 8. If shipping a release artifact (PDF, ZIP, etc.), generate it AFTER the tag is created, not before. The artifact's filename should include the tag: `<project>_vX.Y.Z_<artifact-type>.<ext>`.
 
-## When to ask the user vs when to use judgment
+## When to ask the user (the project owner) vs when to use judgment
 
 | Decision | Authority |
 |---|---|
-| New dependency (`pip install X`, `npm install Y`) | **User approval required** (AGENTS.md rule 17) |
-| New MCP server or skill | **User approval required** (AGENTS.md rule 24) |
-| Bumping version (patch / minor / major) | **User approval required** |
+| New dependency (`pip install X`, `npm install Y`) | **Owner approval required.** The owner maintains the wimpy shared venv; new deps can clash with WIMpy's pinned stack. Justify in the PR description. |
+| New MCP server, skill, or CLI tool | **Owner approval required.** Tools become permanent context-window footprint for every contributor. |
+| Bumping version (patch / minor / major) | **Owner approval required.** Project uses `vX.Y.Z` tags; bumping = publishing to users. |
 | Branching off a new `wip/vX.Y.Z` | Agent judgment |
 | Commit message wording | Agent judgment |
-| Refactor / rename / reformat | Agent judgment (within scope) |
-| Deleting a file | **User approval required** if it's user-facing |
-| Deleting a tag | **User approval required** |
-| Force-push to `master` | **NEVER** (without explicit user direction) |
+| Refactor / rename / reformat within a wip branch | Agent judgment |
+| Deleting a file | **Owner approval required** if it's user-facing (in `docs/`, root, or `README.md`-referenced) |
+| Deleting a tag | **Owner approval required.** Tags are releases; deleting = un-publishing. |
+| Force-push to `master` | **NEVER** (without explicit owner direction). Use `git revert` or fix-up commits instead. |
 | Force-push to `wip/vX.Y.Z` | Agent judgment (only your own wip branch, never someone else's) |
+| Adding new external data to `v0.*-prelim/data/` | **Owner approval required.** External data needs a `DATA_SOURCES.md` entry. |

@@ -1,7 +1,11 @@
-# Mathematical Appendix — dm-sidm-pipeline v0.3-prelim
+# Mathematical Appendix — sidm-composite-dm-mediator v0.3-prelim
 
 **Purpose:** Consolidate the analytic formulas used throughout the pipeline
 in one place. This is the "T3.5" deliverable from the Full Codebase R2 review.
+
+**Note (2026-08-14):** Project renamed from `dm-sidm-pipeline`. The content
+below is preserved verbatim — all references to the old name in inline
+docstrings and earlier commit messages remain unchanged.
 
 **Audience:** A physicist or graduate student who wants to understand the
 derivations underlying the T-series fits without reading every module.
