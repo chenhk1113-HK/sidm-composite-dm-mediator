@@ -113,7 +113,7 @@ reproducible from `v0.*-prelim/code/` on demand.
 
 ```bash
 # 1. Clone
-git clone https://github.com/lamkuenai/sidm-composite-dm-mediator
+git clone https://github.com/chenhk1113-HK/sidm-composite-dm-mediator
 cd sidm-composite-dm-mediator
 
 # 2. Set up the Python environment (matches the v0.3-prelim pinned versions)
@@ -228,7 +228,7 @@ Quick bibtex for citing this repo:
   version = {0.3-prelim-D15-CORRECTED3},
   year = {2026},
   month = {8},
-  url = {https://github.com/lamkuenai/sidm-composite-dm-mediator},
+  url = {https://github.com/chenhk1113-HK/sidm-composite-dm-mediator},
   license = {MIT}
 }
 ```

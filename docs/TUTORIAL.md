@@ -18,7 +18,7 @@ list of external observational data + citations used in this pipeline.
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/lamkuenai/sidm-composite-dm-mediator
+git clone https://github.com/chenhk1113-HK/sidm-composite-dm-mediator
 cd sidm-composite-dm-mediator
 
 # 2. Set up the Python environment (pinned to numpy 2.4.6 etc.)

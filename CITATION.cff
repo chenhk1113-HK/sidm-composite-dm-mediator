@@ -13,9 +13,10 @@ date-released: 2026-08-13
 authors:
   - family-names: Lam
     given-names: K.
-    alias: lamkuenai
+    alias: chenhk1113-HK
+    affiliation: chenhk1113-HK/sidm-composite-dm-mediator
 license: MIT
-repository-code: https://github.com/lamkuenai/sidm-composite-dm-mediator
+repository-code: https://github.com/chenhk1113-HK/sidm-composite-dm-mediator
 keywords:
   - dark-matter
   - sidm
