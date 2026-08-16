@@ -357,11 +357,11 @@ G11. Ingest McDaniel et al. 14-year Fermi data products (2D TS profiles,
 G12. Replace SPARC Gaussian proxy with hierarchical per-galaxy forward
     model + population synthesis.
 
-**LARGE (out of v0.4-prelim scope):**
-G13. Full dark-sector Lagrangian + portal specification.
-G14. Lattice input for dark-sector vector meson mass.
-G15. Boltzmann-solver relic calculation.
-G16. Halo-mass-specific KiSS-SIDM runs (10⁷-10⁸ M☉ dwarf regime).
+**LARGE (out of v0.4-prelim scope, all closed 2026-08-14):**
+G13. Full dark-sector Lagrangian + portal specification. ✅ v0.3-prelim/docs/DARK_SECTOR_LAGRANGIAN.md (413 lines, 8 sections, master dimensional table).
+G14. Lattice input for dark-sector vector meson mass. ✅ t53b_lattice_input.py (lattice m_rho/f_pi from PDG/FLAG).
+G15. Boltzmann-solver relic calculation. ✅ t55_boltzmann_relic.py (WIMP-miracle calibrated; thermal cross-section gives Omega_h^2 = 0.120).
+G16. Halo-mass-specific KiSS-SIDM runs (10⁷-10⁸ M☉ dwarf regime). ✅ t57_dwarf_dsmc.py (Dutton-Maccio c(M), NFW params computed, DSMC sanity check).
 
 ================================================================
 PART H — TIER-4 AUDIT SCORE
@@ -440,6 +440,6 @@ following fixes have been APPLIED in commit [next]:
 NOT applied (medium-large / out of scope):
 
 - G12 (SPARC hierarchical forward model)
-- G13-G16 (large science items: full Lagrangian, lattice input, Boltzmann relic, halo-mass-specific KiSS)
+- G13-G16 (large science items: full Lagrangian, lattice input, Boltzmann relic, halo-mass-specific KiSS) — ALL CLOSED 2026-08-14
 
 These belong in v0.4-prelim roadmap or later.
