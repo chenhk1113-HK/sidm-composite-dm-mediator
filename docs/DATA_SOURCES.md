@@ -3,7 +3,11 @@
 **This is the single authoritative file for every external data source used
 in this project.** If you want to cite or extend this work, start here.
 
-Last updated: 2026-08-14.
+Last updated: 2026-08-17 (R12 closure).
+
+---
+
+> **R12 audit note (2026-08-17):** The "σ/m ~ 1 cm²/g with the mediator invisible to direct detection" claim in the Drobczyk-2025 entry below (line 182) is the **R11-era** headline. Post-R12 (T41 MAP), the project's σ/m_0 = **0.066 cm²/g** at MAP (factor ~25 lower). The cross-validation against Drobczyk is **still valid as a check that the σ/m(v) parametrization agrees across two UV constructions**, but the magnitude shifted because the LZ constraint now bites properly with the corrected portal mapping (R12 P1-C). See `v0.3-prelim/docs/REVIEWER_AUDIT_R12.md` §4 for the updated numbers.
 
 ---
 
@@ -195,7 +199,10 @@ builds on. They are not ingested data — they are methods we adapt.
 | Reference | arXiv / DOI | Used for |
 |---|---|---|
 | **Pospelov, Ritz, Voloshin (2008)** "Secluded WIMP Dark Matter", *Phys. Lett. B* **662**, 53 | [0711.4866](https://arxiv.org/abs/0711.4866) | The secluded-WIMP framework (foundational) |
-| **Kaplinghat, Tulin, Yu (2014)** "Direct detection portals for self-interacting dark matter", *Phys. Rev. D* **89**, 115005 | [1310.7945](https://arxiv.org/abs/1310.7945) | Direct-detection evasion argument |
+| **Kaplinghat, Tulin, Yu (2014)** "Direct detection portals for self-interacting dark matter", *Phys. Rev. D* **89**, 115005 | [1310.7945](https://arxiv.org/abs/1310.7945) | Direct-detection evasion argument; **R12 P1-C: dark-photon portal mapping for LZ σ_SI is from this paper Eq. (4)** |
+| **Kaplinghat, Tulin, Yu (2014) PRD 89, 035009** "Dark matter portals" | [1402.5143](https://arxiv.org/abs/1402.5143) | σ_SI derivation Eq. (4) used by `t39.sigma_SI_from_dark_photon` |
+| **Bando, Kugo, Yamawaki (1985)** "Nonlinear realization and hidden local symmetries", *Phys. Rep.* **164**, 217 | HLS formulation; the KSFR relation m_ρ² = 2 g_ρππ² f_π² | **R12 P1-B: `t53.dark_rho_mass` uses g_ρππ²/(4π) = 2.93 from Bando+ 1985** |
+| **Berlin, Ferraro, Mohapatra et al. (2018)** "Dark matter in the hidden-valley", *Phys. Rev. D* **97**, 055033 | [1612.00016](https://arxiv.org/abs/1612.00016) | s-wave annihilation cross-section for dark-photon-mediated processes | **R12 P1-C: `t39.sigma_v_from_dark_photon` uses this form** |
 | **Tulin & Yu (2018)** "Dark matter self-interactions and small scale structure", *Phys. Rep.* **730**, 1 | [1705.02358](https://arxiv.org/abs/1705.02358) | SIDM review (gravothermal fluid approximation, velocity dependence) |
 | **Balberg, Shapiro, Inagaki (2002)** "Self-Interacting Dark Matter Halos and the Gravothermal Catastrophe", *ApJ* **568**, 475 | [astro-ph/0110561](https://arxiv.org/abs/astro-ph/0110561) | The fluid-approximation gravothermal model (used in placeholder; superseded by KiSS-SIDM) |
 | **Di Mauro, Belfatto, Bagnaschi et al. (2025)** "WIMP Shadows: Phenomenology of Secluded Dark Matter in Three Minimal BSM Scenarios", 22 pp. | [2510.23771](https://arxiv.org/abs/2510.23771) | Secluded-DM phenomenology (cited in T40–T76 mediator workstream) |

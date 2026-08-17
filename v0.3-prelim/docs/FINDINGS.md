@@ -561,3 +561,54 @@ docstrings. No code change required.
 **The total systematic budget is ~0.4-0.5 dex at the headline σ/m
 ~1.67 cm²/g**. This is within publication-grade tolerance and is
 explicitly enumerated in this appendix for peer-review transparency.
+---
+
+## R12 audit-closure addendum (2026-08-17)
+
+**This section supersedes earlier R11-era findings wherever they conflict.**
+
+### What changed
+
+Six external reviewers (`six reviews.docx`) sent an audit; all 7 of Reviewer 6's specific findings were verified at the cited line numbers and fixed:
+
+| Fix | File | What changed |
+|-----|------|--------------|
+| **P0-A** | `t40_yukawa_sigma_m.py` | Removed bogus `(1 + 1/(2s))` factor. σ/m at v=0.1 km/s went from **1.95×10⁶ cm²/g → 3.48 cm²/g**. |
+| **P0-B** | `t41_mediator_mass_joint_fit.py` | Added missing minus sign in `derived_a`. The "1.3σ Yukawa tension" claim was a sign-flip artifact. Post-fix: tension = 0.75σ (below 1.0 threshold = no significant tension). |
+| **P0-C** | `t55_boltzmann_relic.py` → `t55_wimp_relic_calibration.py` | Renamed to honestly describe the function (calibrated mapping, not a Boltzmann solver); removed dead `odeint` import. |
+| **P0-D** | `channels_v03.py`, `t28_published_style_dsph.py`, `sidm_velocity_dependent.py` | Replaced bimodal-dip dSph surrogate with Horigome+ 2025 published 0.2 cm²/g upper limit. dSph log L at σ/m=10 cm²/g: **0 (favored) → −4.53 (strongly disfavored)**. This **inverts the bimodal structure** documented in §S.2 above (the line that previously said "bimodal dSph posterior structure is reproduced" is wrong — that structure came from a code surrogate, not the paper). |
+| **P1-A** | `DARK_SECTOR_LAGRANGIAN.md` §9 | Declared Benchmark A (composite matter + elementary A') canonical; deferred other benchmarks. |
+| **P1-B** | `t53_dark_rho_meson.py` | Replaced legacy `m_ρ = 2√(m_q Λ + Λ²)` with KSFR (Bando+ 1985). At Λ=0.2 GeV, m_ρ = 0.79 GeV ≈ QCD 770 MeV. Also wired `t53b_lattice_input` as the lattice-informed path. |
+| **P1-C** | `t39_tier3_epsilon_alpha_joint_fit.py`, `t41_mediator_mass_joint_fit.py` | Fixed two dimensionally-inconsistent mappings: `σ_SI = ε·σ/m` (cm²/g, not cm²) → proper dark-photon portal form (Kaplinghat, Tulin, Yu 2014); `σ_v = α·σ/m²` (cm⁴/g², not cm³/s) → proper form (Berlin+ 2018). At the canonical point σ_SI = **1.2×10⁻³² cm²** (proper units), not the legacy 2×10⁻¹¹⁸ cm² (which was actually cm²/g and meaningless). |
+
+### Re-run of T41 with P0/P1 applied
+
+T41 was re-run on 2026-08-17 with all P0 and P1 fixes baked in:
+
+- **log Z = −213.7 ± 0.24** (was −29.45 pre-fix; LZ constraint now bites properly)
+- **MAP**: m_A' = 336 MeV, m_χ = 398 GeV, g_chi = 0.72, ε = 10⁻³⁵, α = 10⁻¹⁶
+- **Derived at MAP**: σ/m_0 = **0.066 cm²/g**, a = **+0.186**
+- **Tension vs. data-preferred a = +0.94**: |Δ| = **0.75** (below 1.0 threshold)
+- **Verdict**: "NO TENSION (post-P0-B)"
+
+### What this means for the R11-era findings above
+
+The R11-era headline numbers in this doc are **superseded**:
+
+- Line 79 says σ/m ~1.4–1.7 cm²/g from T21 → now **0.066 cm²/g** at T41 MAP (factor of ~25 lower, due to LZ now biting properly with the proper portal mapping).
+- The "bimodal dSph posterior structure" claim (line 199) was an artifact of the surrogate in `channels_v03.loglike_dsph_v03`, not of the published Horigome+ 2025 paper. The actual paper says σ/m < 0.2 cm²/g at 95% CL — a single-sided upper limit. See R12 P0-D.
+- The "1.3σ Yukawa tension" claim was a sign-flip artifact in `t41.derived_a`. See R12 P0-B.
+- The σ/m = 2.0×10⁻¹¹⁸ cm² claim (referenced in MEDIATOR_DETECTION_SYNTHESIS_v12.md) was a units bug (returned cm²/g, not cm²). The proper-units value is σ_SI = 1.2×10⁻³² cm² at the canonical point.
+
+### What did NOT change
+
+- The T21 single-channel fit (σ/m ~ 1.4-1.7 cm²/g) is a real measurement against real KiSS-SIDM gravothermal data. It is not invalidated by R12; only the LZ/Fermi joint mappings were wrong.
+- The T8 hierarchical SPARC fit is real.
+- The 22 new regression tests added in R12 confirm the fixes and lock them in.
+
+### See also
+
+- `v0.3-prelim/docs/REVIEWER_AUDIT_R12.md` — full R12 audit with all 7 findings at cited line numbers.
+- `v0.3-prelim/docs/LAYMAN_SUMMARY_R12.md` — 1-paragraph grant-abstract version.
+- `docs/REVIEWER_AUDIT_R11.md` — R11 audit (still useful as a historical record of what was being claimed before R12).
+- `README.md` (top-level) — updated headline table.

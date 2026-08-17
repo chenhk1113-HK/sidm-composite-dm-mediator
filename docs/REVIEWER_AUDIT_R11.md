@@ -1,5 +1,23 @@
 REVIEWER AUDIT — Review 11 (sidm-composite-dm-mediator 科學可信度審閱)
 
+> **Historical record:** This is the R11 audit (2026-08-14, bilingual
+> reviewer pool including Traditional Chinese). For the **R12 audit
+> closure** (2026-08-17), see `v0.3-prelim/docs/REVIEWER_AUDIT_R12.md`.
+> R12 P0-A through P0-D + P1-A through P1-C supersede R11-era
+> headline numbers wherever they conflict:
+>
+> | Quantity | R11 verdict | R12 verdict |
+> |----------|-------------|-------------|
+> | σ/m_0 at galactic scale | 1.4–1.7 cm²/g | 0.066 cm²/g (T41 MAP) |
+> | velocity index a (Yukawa-derived) | −1.08 (sign-flipped) | +0.186 (correct sign) |
+> | "1.3σ Yukawa tension" | significant | 0.75σ, not significant |
+> | dSph log L at σ/m=10 | 0 (favored) | −4.53 (disfavored) |
+> | σ_SI (T39) | 2.0×10⁻¹¹⁸ cm² (wrong units) | 1.2×10⁻³² cm² (proper units) |
+> | dark-ρ mass formula | legacy interpolation | KSFR (QCD-calibrated) |
+>
+> The R11 G13–G16 closure (lattice, Boltzmann, dwarf-dSMC) remains
+> valid; R12 added the regression tests + audit closure on top.
+
 This is an audit of the REVIEW itself, not of the underlying project.
 Reviewed: 2026-08-14, against on-disk ground truth in
 `C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\` (HEAD = master

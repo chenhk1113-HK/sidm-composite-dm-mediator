@@ -1,5 +1,11 @@
 REVIEWER AUDIT — Full Review 9.docx (sidm-composite-dm-mediator)
 
+> **Historical record:** This is the R9 audit (2026-08-14). For the
+> **R12 audit closure** (2026-08-17, six reviewers, four P0 + three P1
+> fixes), see `v0.3-prelim/docs/REVIEWER_AUDIT_R12.md` and the README
+> headline table. R12 supersedes R11-era headline numbers wherever they
+> conflict.
+
 This is an audit of the REVIEW ITSELF, not of the underlying project.
 Audited: 2026-08-14, against on-disk ground truth in
 `C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\` (HEAD = wip/v0.4-prelim

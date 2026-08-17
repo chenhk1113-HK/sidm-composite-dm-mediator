@@ -1,5 +1,10 @@
 REVIEWER AUDIT — Review 10 (Project Rationale & Key Findings Extract)
 
+> **Historical record:** This is the R10 audit (2026-08-14). For the
+> **R12 audit closure** (2026-08-17, six reviewers), see
+> `v0.3-prelim/docs/REVIEWER_AUDIT_R12.md`. R12 supersedes R11-era
+> headline numbers wherever they conflict.
+
 This is an audit of the REVIEW itself, not of the underlying project.
 Reviewed: 2026-08-14, against on-disk ground truth in
 `C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\` (HEAD = wip/v0.4-prelim

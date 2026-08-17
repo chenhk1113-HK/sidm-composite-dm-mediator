@@ -1,5 +1,11 @@
 # Audit of "Full Codebase R2" review (uploaded 2026-08-11)
 
+> **Historical record:** This is the R2 audit (2026-08-11). For the
+> **R12 audit closure** (2026-08-17, six reviewers), see
+> `v0.3-prelim/docs/REVIEWER_AUDIT_R12.md` and the README headline
+> table. R12 supersedes the R11-era headline numbers referenced in
+> this audit wherever they conflict.
+
 **Audit subject:** `Full Codebase Review & Critical Commentary: dm-sidm-pipeline v0.3-prelim-D5.docx` (295 lines, ~19 KB)
 **Audited by:** Hermes, against on-disk ground truth in `C:\Users\lamkuenai\projects\dm-sidm-pipeline\`
 **Methodology:** AGENTS.md rule 21 — enumerate every concrete reviewer claim, mark verifiable, cross-check against source.

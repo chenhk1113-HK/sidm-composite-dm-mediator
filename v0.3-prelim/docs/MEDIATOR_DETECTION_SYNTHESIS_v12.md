@@ -1,5 +1,36 @@
 # Reviewer Corrections — T73 + T74 + T75 + T76 Synthesis
 
+> **R12 audit notice (2026-08-17):** This synthesis predates the R12 six-reviewer
+> audit closure. Specifically:
+>
+> - **Line 16, 113: "Our σ_SI (T54) = 2.0×10⁻¹¹⁸ cm²"** — This is a units bug.
+>   The legacy `t39.sigma_DM_nucleon_cm2 = epsilon * sigma_m_0` mapping
+>   returned cm²/g, not cm². Post-R12 (P1-C), with the proper dark-photon
+>   portal mapping (Kaplinghat, Tulin, Yu 2014), σ_SI = **1.2×10⁻³² cm²**
+>   at the canonical point (m_χ=40 GeV, m_A'=10 MeV, ε=10⁻⁵, α_D=0.01).
+>   The "2.46×10⁷² times below the neutrino floor" claim is meaningless
+>   because the original number wasn't even in the right units.
+>
+> - **Line 17, 107-108, 188: "Direct-detection EVASION is a REQUIREMENT" /
+>   "σ_SI 2.46×10⁷² times BELOW the neutrino floor, SUCCESSFULLY evading
+>   LZ SR1+SR3"** — Reframing a units bug as a positive result is not
+>   defensible. Post-R12, the LZ σ_SI at the canonical point (1.2×10⁻³²
+>   cm²) is **5×10¹⁵ times ABOVE the LZ limit** (1.07×10⁻⁴⁷ cm² at 34
+>   GeV). The mediator is "consistent with LZ invisibility" only in the
+>   ε ≪ 10⁻¹⁰ part of the posterior (where kinetic mixing is so small
+>   that the mediator effectively decouples from the Standard Model).
+>
+> - **Line 145-146: "T69 cross-check — Keep as is — the slope tension is
+>   correctly identified as universal"** — This was the pre-R12 framing.
+>   Post-R12 (P0-B sign-flip fix), the slope tension is **0.75σ (not
+>   significant)**. The "universal structural limitation" framing was
+>   based on the sign-flipped derived_a; it is no longer defensible.
+>
+> See `REVIEWER_AUDIT_R12.md` and `LAYMAN_SUMMARY_R12.md` for the full
+> R12 closure. The historical recommendations in this synthesis (T73 fifth-force
+> correction, T74 dark-sector thermalization, T75 viable-band plot) remain
+> valid; the σ_SI / "evasion as success" framing is superseded.
+
 ## TL;DR
 
 This round addresses the **urgent physics error** and other recommendations
