@@ -6,6 +6,7 @@
 
 **Note (2026-08-14):** Project renamed from `dm-sidm-pipeline`.
 **Note (2026-08-17):** Tier-3 audit list (G13–G16) all closed 2026-08-17. See addendum below.
+**Note (2026-08-17, R12):** Six external reviewers' audit (`six reviews.docx`) all 7 of Reviewer 6's specific findings verified at cited line numbers; 4 P0 + 3 P1 fixes shipped and pushed (`55f1047`). See `docs/REVIEWER_AUDIT_R12.md` for the full R12 closure. **Headline numbers revised:** σ/m at v_ref = 1.78 cm²/g (was 2.78, with bogus factor); velocity index a = +1.08 (was −1.08, sign-flipped); dSph log L at σ/m=10 cm²/g = −4.53 (was 0, favored by bimodal surrogate). The "1.3σ tension" reported in earlier docs was largely a sign-flip artifact.
 
 ---
 
