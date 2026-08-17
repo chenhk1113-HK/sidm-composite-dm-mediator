@@ -1,6 +1,6 @@
 # sidm-composite-dm-mediator
 
-> ⚠️ **Disclaimer:** It is a personal project out of curiosity, made using Hermes with **MiniMax M3** as the coder, **Doubao** and **Qwen 3.8 Max** as reviewers.
+> ⚠️ **Disclaimer:** It is a personal project out of curiosity, made using Hermes with **MiniMax M3** as the coder, **Doubao**, **Qwen 3.8 Max** and other AIs as reviewers.
 
 **Joint-fit framework for self-interacting dark matter (SIDM), grounded in the published multi-channel data (dSph, UFD, Bullet, SPARC, LZ, Fermi).**
 
@@ -13,7 +13,7 @@
 > same work — just under a more descriptive name. See the rename note at
 > the top of `CHANGELOG.md` for details.
 >
-> **R12 closure (2026-08-17):** Six external reviewers sent an audit (`six reviews.docx`).
+> **R12 closure (2026-08-17):** Six AI reviewers sent an audit (`six reviews.docx`).
 > All 7 of Reviewer 6's specific findings were verified at the cited line numbers
 > and fixed. 4 P0 (correctness) + 3 P1 (coherence) fixes shipped as 8 commits.
 > See `v0.3-prelim/docs/REVIEWER_AUDIT_R12.md` and `v0.3-prelim/docs/LAYMAN_SUMMARY_R12.md`.
