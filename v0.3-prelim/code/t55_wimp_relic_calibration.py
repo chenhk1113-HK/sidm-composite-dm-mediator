@@ -1,48 +1,47 @@
 """
-T55 — Dark-sector Boltzmann-solver relic abundance calculation (R11 G15).
+T55 — WIMP-miracle relic abundance calibration (renamed from
+`boltzmann_relic` 2026-08-17 in R12 P0-C).
 
-Per R11 audit (2026-08-14): replaces the simple scaling
-  Omega_DM ~ 1 / <sigma*v>
-with a numerical solution of the Boltzmann equation for the dark-pion
-yield Y = n/s in the expanding universe.
+WHAT THIS MODULE DOES
 
-The Boltzmann equation (standard form, e.g. Kolb & Turner 1990):
-  dY/dx = - (s <sigma*v> / H(x)) * (Y^2 - Y_eq^2)
+Given a model input (m_chi, <sigma*v>), the function `freeze_out_Y`
+returns a calibrated scalar map:
 
-with:
-  x = m_chi / T                              (dimensionless time)
-  s = (2 pi^2 / 45) g_*s T^3                (entropy density)
-  H = sqrt(8 pi G_N rho / 3) = (1.66) sqrt(g_*) T^2 / M_Pl
-  Y_eq = n_eq / s                            (equilibrium yield)
-  n_eq = g (m_chi T / (2 pi))^(3/2) exp(-m_chi/T)   (non-rel)
+    Omega_h^2 = Omega_h^2_obs * sigma_v_thermal / <sigma*v>
 
-Inputs:
-  - m_chi_GeV: dark pion mass (DM mass)
-  - sigma_v_cm3_per_s: thermally-averaged annihilation cross-section
-                       (from T32 / T59 portal mapping)
-  - g_chi: internal degrees of freedom of the dark pion
-  - g_star_s: effective entropy DOF (SM = 86.25 at T ~ m_chi)
-  - dof_dark: dark-sector entropy DOF contribution (often ~ 0
-             for a sector that has already frozen out)
-  - x_init, x_final, n_steps: integration range and step count
+This is the **WIMP-miracle inverse-proportionality** (Steigman+ 2012
+Eq. 12): Omega_h^2 ~ 1 / <sigma*v>, calibrated to give Omega_h^2 ~ 0.12
+for <sigma*v> = 3 x 10^-26 cm^3/s.
 
-Outputs:
-  - Y0 (asymptotic Y after freeze-out): comoving yield of dark pions
-  - Omega_h^2: relic abundance (Planck 2018: Omega_h^2 = 0.120)
+WHAT THIS MODULE DOES NOT DO
 
-References:
-  - Kolb & Turner, "The Early Universe" (1990), Chapter 5.
-  - Planck 2018: Omega_h^2 = 0.120 ± 0.001 (1807.06209).
+Despite the original filename (`t55_boltzmann_relic.py`), this module
+does **not** solve the Boltzmann equation numerically. The legacy
+implementation claimed to integrate `dY/dx = -s<sigma*v>/H (Y^2 - Y_eq^2)`
+with scipy.integrate.odeint, but the code body returns a hardcoded
+calibration. The `from scipy.integrate import odeint` import is
+UNUSED and was removed in R12 P0-C.
 
-The thermal relic cross-section for Omega_h^2 = 0.120 is
-  <sigma*v>_thermal ~ 3 x 10^-26 cm^3/s
-(matches SM-WIMP canonical value).
+A genuine Boltzmann solver (DarkSUSY-style or micrOMEGAs-style) would:
+  (a) numerically integrate dY/dx from x_init ~ 1 to x_final ~ 1000,
+  (b) use temperature-dependent g_*s,
+  (c) include threshold and co-annihilation channels, and
+  (d) yield m_chi-*dependent* Omega_h^2 (not just 1/<sigma*v>).
+
+For the v0.3-prelim pipeline, the simpler calibration suffices because
+we don't constrain (m_chi, <sigma*v>) jointly with relic data; we use
+the cosmological measurement Omega_h^2 = 0.120 only as a *prior* on
+<sigma*v>, not as a Boltzmann-derived prediction.
+
+REFERENCES
+- Kolb & Turner, "The Early Universe" (1990), Chapter 5.
+- Steigman, Dasgupta & Beacom 2012, PRD 86, 023506 (Eq. 12).
+- Planck 2018: Omega_h^2 = 0.120 ± 0.001 (1807.06209).
 """
 from __future__ import annotations
 import json
 from pathlib import Path
 import numpy as np
-from scipy.integrate import odeint
 
 # Constants
 M_PLANCK_GEV = 1.2209e19  # reduced Planck mass in GeV

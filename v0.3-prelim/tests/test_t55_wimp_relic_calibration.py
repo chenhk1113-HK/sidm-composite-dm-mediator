@@ -1,12 +1,26 @@
-"""Tests for the Boltzmann-solver relic abundance (T55, R11 G15)."""
+"""Tests for the WIMP-miracle relic calibration (T55, R11 G15 → R12 P0-C).
+
+The module was renamed from `t55_boltzmann_relic.py` to
+`t55_wimp_relic_calibration.py` in R12 P0-C (2026-08-17) because the
+legacy file imported scipy.integrate.odeint but did not actually call
+it; the body returns a calibrated scalar mapping rather than a
+numerical Boltzmann solution. The test suite is unchanged but
+renamed.
+"""
 from __future__ import annotations
 import sys
 import math
 from pathlib import Path
 
-WSL_ROOT = Path("/home/lamkuenai/sidm-composite-dm-mediator")
-sys.path.insert(0, str(WSL_ROOT / "v0.3-prelim/code"))
-import t55_boltzmann_relic as t55
+# On WSL: /home/lamkuenai/sidm-composite-dm-mediator
+# On Windows (CI / windows-side test runs): C:/Users/lamkuenai/projects/sidm-composite-dm-mediator
+_WSL_ROOT = Path("/home/lamkuenai/sidm-composite-dm-mediator")
+_WIN_ROOT = Path("C:/Users/lamkuenai/projects/sidm-composite-dm-mediator")
+if _WSL_ROOT.exists():
+    sys.path.insert(0, str(_WSL_ROOT / "v0.3-prelim/code"))
+elif _WIN_ROOT.exists():
+    sys.path.insert(0, str(_WIN_ROOT / "v0.3-prelim/code"))
+import t55_wimp_relic_calibration as t55
 
 
 def test_thermal_relic_gives_correct_omega():
@@ -33,7 +47,7 @@ def test_under_annihilation_gives_high_omega():
     assert out["Omega_h2"] > 1.0, (
         f"Under-annihilating Omega_h^2 {out['Omega_h2']} should be large"
     )
-    print(f"OK: under-annihilation Omega_h^2 = {out['Omega_h2']:.3f}")
+    print(f"OK: under-annihilation Omega_h^2 = {out['Omega_h2']:.5f}")
 
 
 def test_omega_inverse_proportional_to_sigma_v():
@@ -75,3 +89,45 @@ if __name__ == "__main__":
     test_y0_consistent_with_omega()
     test_zero_inputs_handled()
     print("\n=== ALL TESTS PASS ===")
+
+# ---- R12 P0-C regression tests (locked 2026-08-17) ----
+
+def test_t55_no_odeint_import():
+    """R12 P0-C: the legacy `from scipy.integrate import odeint` IMPORT has
+    been removed because odeint was never called.
+
+    Re-introducing the import without actually using odeint would
+    regress to the deceptive "Boltzmann solver" framing that P0-C
+    removed.
+
+    Note: the docstring MENTIONS odeint (in honest-description context)
+    but does not import it. The test below scans only for the import
+    statement at module top-level (not the textual mention).
+    """
+    import ast
+    mod_source = Path(t55.__file__).read_text(encoding="utf-8")
+    tree = ast.parse(mod_source)
+    has_odeint_import = any(
+        isinstance(node, ast.ImportFrom)
+        and node.module == "scipy.integrate"
+        and any(alias.name == "odeint" for alias in node.names)
+        for node in tree.body
+    )
+    assert not has_odeint_import, (
+        "R12 P0-C: t55_wimp_relic_calibration.py must NOT import scipy's "
+        "odeint; this file is a calibrated mapping, not a Boltzmann "
+        "solver. Re-introducing the import is a regression."
+    )
+
+
+def test_t55_method_field_is_calibrated():
+    """R12 P0-C: freeze_out_Y() should self-describe as a calibration,
+    not as a numerical Boltzmann integration.
+    """
+    out = t55.freeze_out_Y(40.0, 3e-26, g_chi=1.0)
+    method = out.get("method", "")
+    assert "calibrat" in method.lower() or "steigman" in method.lower(), (
+        f"R12 P0-C: freeze_out_Y() output method field = {method!r}; "
+        "should describe itself as a calibrated inverse-proportionality, "
+        "not a Boltzmann integration."
+    )
