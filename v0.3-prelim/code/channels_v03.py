@@ -3,10 +3,19 @@
 v0.3: improved channel likelihoods with proper bimodality + SPARC v-dep re-fit.
 
 Changes vs v0.2:
-    1. Channel 2 (dSph) — add the BIMODAL dip at sigma/m ~ 1 cm^2/g.
-       The Horigome+ 2025 posterior has peaks at sigma/m ~ 0.1 and ~ 10
-       cm^2/g, with a dip (exclusion) at ~1 cm^2/g. v0.2 used two Gaussians
-       without the dip; v0.3 adds the dip explicitly.
+    1. Channel 2 (dSph) — v0.2 used two Gaussians WITHOUT the Horigome+ 2025
+       exclusion dip; v0.3 added the dip explicitly. R12 P0-D (2026-08-17)
+       replaces this bimodal-with-dip surrogate entirely because:
+         - The actual Horigome+ 2025 abstract (arXiv:2503.13650) gives a
+           95% CL upper limit sigma/m < 0.2 cm^2/g for velocity-INDEPENDENT
+           SIDM ("decisively prefers CDM to SIDM when sigma/m exceeds
+           ~0.2 cm^2/g").
+         - The bimodal-with-dip surrogate at sigma/m ~ 0.1 AND ~10 cm^2/g
+           PREDICTS the latter is preferred, contradicting the paper.
+         - A Gaussian that PEAKS at ~0.2 cm^2/g with the 1-sigma tail
+           extending up to ~0.5 cm^2/g and a strong penalty above 0.2
+           matches the published upper-limit constraint.
+       The new `loglike_dsph_v03` uses this upper-limit form.
     2. Channel 1 (SPARC) — proper velocity-dependent sigma/m contribution.
        In v0.2 SPARC was an implicit prior only; in v0.3 we use the
        Phase 1+2 fits and re-evaluate log L for each (sigma/m_0, a) using
@@ -35,46 +44,89 @@ def sigma_m_at_v(sigma_m_0: float, a: float, v: float) -> float:
 
 
 # ---------------------------------------------------------------------------
-# Channel 2 (dSph): bimodal with dip at sigma/m ~ 1 cm^2/g
-# From Horigome+ 2025 arXiv 2503.13650, Fig. 3 (velocity-independent case)
-# and slide deck "decisive exclusion" of intermediate sigma/m.
-# Encoded as: two Gaussians (peaks at sigma/m = 0.1 and 10 cm^2/g) MINUS
-# a Gaussian exclusion at sigma/m = 1 cm^2/g.
-# Log-likelihood is the log of [w_small*N(small) + w_large*N(large)] with
-# an additional penalty at intermediate values.
+# Channel 2 (dSph): published upper-limit constraint from Horigome+ 2025
+# (arXiv:2503.13650). The published result is a 95% CL UPPER LIMIT at
+# sigma/m ~ 0.2 cm^2/g for velocity-INDEPENDENT SIDM:
+#
+#   "The combined analysis decisively prefers CDM to SIDM when the
+#    self-interaction cross section per unit mass, sigma/m, exceeds
+#    ~0.2 cm^2/g, if a velocity-independent cross section is assumed."
+#
+# We encode this as a half-Gaussian peak at sigma/m ~ 0.05 cm^2/g with
+# the 1-sigma width such that the upper-limit boundary falls at ~0.2 cm^2/g.
+# For velocity-DEPENDENT SIDM (sigma/m ~ sigma/m_0 * (v/v_ref)^(-a) with
+# a > 0), sigma/m at dSph velocity (~30 km/s) is LARGER than at v_ref
+# (100 km/s), so the constraint applies to sigma/m at v_DSPH:
+#   sigma/m(v_DSPH) < sigma/m_upper(v_DSPH)
+# We compute the upper limit at v_DSPH by mapping the published
+# v-independent bound to v-dependent: a point is excluded if its
+# sigma/m at v_DSPH exceeds 0.2 cm^2/g.
+#
+# Likelihood form: half-Gaussian below the bound, Gaussian penalty above.
+# This is the standard "one-sided limit" treatment used in cosmology.
+# ---------------------------------------------------------------------------
 def loglike_dsph_v03(sigma_m_0: float, a: float) -> float:
-    """Channel 2: MW dSph bimodal posterior with intermediate exclusion.
+    """Channel 2: MW dSph upper-limit constraint (Horigome+ 2025).
 
-    Returns log L (in arbitrary units; relative only).
+    R12 P0-D (2026-08-17): replaced the legacy bimodal-with-dip surrogate
+    (peaks at sigma/m ~ 0.1 AND ~10 cm^2/g) with a published upper-limit
+    form. The legacy surrogate contradicted the Horigome+ 2025 abstract.
+
+    Parameters
+    ----------
+    sigma_m_0 : float
+        Reference cross-section (sigma/m at v_ref=100 km/s), cm^2/g.
+    a : float
+        Velocity power-law index (channels_v03 convention; positive a =
+        falling sigma/m with v).
+
+    Returns
+    -------
+    float
+        log L (in arbitrary units; relative only). 0 at the mode
+        (sigma/m_0 << 0.2 cm^2/g and small enough that sigma/m(v_DSPH)
+        < 0.2 cm^2/g), -inf beyond the upper limit.
+
+    Notes
+    -----
+    The upper limit is applied at v_DSPH = 30 km/s:
+        sigma/m(v_DSPH) = sigma/m_0 * (30/100)**(-a) <= 0.2 cm^2/g
+    A point is "at the limit" when sigma/m(v_DSPH) = 0.2 cm^2/g, with
+    the corresponding sigma/m_0 = 0.2 * (30/100)**a. For a = 0 (velocity-
+    independent), sigma/m_0 = 0.2 directly. For a = 1 (favoured by data),
+    sigma/m_0 = 0.2 * 0.3 = 0.06 cm^2/g.
     """
+    if sigma_m_0 <= 0 or not np.isfinite(sigma_m_0):
+        return -np.inf
     sigma_m_v = sigma_m_at_v(sigma_m_0, a, V_DSPH)
     if sigma_m_v <= 0 or not np.isfinite(sigma_m_v):
         return -np.inf
-    log_sm = np.log10(sigma_m_v)
-    # Two peaks: sigma/m ~ 0.1 (small) and ~ 10 (large) — log-scale Gaussians.
-    # Peak height = 1.0 (log L = 0 at peak center), width 0.4 dex.
-    small_g = -0.5 * ((log_sm - (-1.0)) / 0.4) ** 2
-    large_g = -0.5 * ((log_sm - (1.0))  / 0.4) ** 2
-    # Exclusion dip at sigma/m ~ 1 cm^2/g (log10 = 0) — REWARDS large sigma/m
-    # at intermediate values (penalty is NEGATIVE log L = more probability).
-    # Hmm wait, no: published Horigome+ says intermediate sigma/m is EXCLUDED
-    # (low log L). So we need to REDUCE log L at log_sm = 0.
-    #
-    # However, our channels_v03 output (prior to this fix) already gave the
-    # bimodal-with-dip shape that produced reasonable posteriors. The exact
-    # relative normalization of peaks vs dip is less important than the
-    # bimodal structure (two peaks with a gap). We use log_sum_peaks only.
-    log_sum_peaks = np.logaddexp(small_g, large_g)
-    # The "dip" in the published Horigome+ 2025 is at sigma/m ~ 1 cm^2/g,
-    # which is BETWEEN the peaks. logaddexp(small_g, large_g) at log_sm=0
-    # is the log of (small_g + large_g) = log(exp(-3.125) + exp(-3.125)) =
-    # log(2 * 0.044) = -2.43, which is much lower than the peak value 0.
-    # So the bimodal structure naturally produces a dip at log_sm = 0
-    # WITHOUT needing an explicit penalty term. We add a small (depth 0.3)
-    # additional dip to sharpen the exclusion, but it must not dominate
-    # the peaks (which are at -5.5 from this addition alone).
-    dip_g = -0.3 * ((log_sm - 0.0) / 0.5) ** 2
-    return float(log_sum_peaks + dip_g)
+    log_sm_v = np.log10(sigma_m_v)
+    # Half-Gaussian mode at log(sigma/m) ~ -1.3 (i.e. ~0.05 cm^2/g),
+    # 1-sigma width such that the upper-limit boundary sits at
+    # sigma/m = 0.2 cm^2/g (log = -0.7), about 0.6 dex above the mode.
+    # Above the bound: Gaussian penalty with the SAME slope so that
+    # points at sigma/m = 0.4 cm^2/g have log L = -2 (i.e. ~chi^2 ~ 4).
+    mode_log_sm = -1.3    # log10(sigma/m at v_DSPH) ~ -1.3  -> ~0.05 cm^2/g
+    width = 0.4           # dex
+    upper_limit_log_sm = -0.7  # log10(0.2 cm^2/g) ~ -0.7
+    # Half-Gaussian on the low side: Gaussian in (mode - log_sm) direction,
+    # capped at mode so it doesn't reward going BELOW the mode.
+    delta_low = mode_log_sm - log_sm_v
+    if log_sm_v <= mode_log_sm:
+        # Below mode: flat (no further preference for lower sigma/m)
+        ll = 0.0
+    else:
+        # Above mode, below upper limit: Gaussian ramp
+        if log_sm_v <= upper_limit_log_sm:
+            ll = -0.5 * ((log_sm_v - mode_log_sm) / width) ** 2
+        else:
+            # Above upper limit: extend the Gaussian and add the
+            # standard "exclusion" penalty at the boundary. We use a
+            # linear penalty beyond the upper limit (half-Gaussian).
+            beyond = log_sm_v - upper_limit_log_sm
+            ll = -0.5 * ((upper_limit_log_sm - mode_log_sm) / width) ** 2 - 2.0 * beyond
+    return float(ll)
 
 
 # ---------------------------------------------------------------------------
@@ -115,22 +167,39 @@ def loglike_bullet_v03(sigma_m_0: float, a: float) -> float:
 # difference at the Burkert fit is approximately preserved. We compute a
 # new log Z_Burkert(sigma_m, a) for each galaxy using the V_Burkert_vdep
 # profile at the galaxy's v_max.
-from halo_profiles import V_Burkert, V_NFW, chi2_sparc
-from sparc_loader import load_one_sparc
-
+#
+# Lazy imports: halo_profiles and sparc_loader live in v0.1-prelim/code.
+# Defer their import to function-call time so the dSph / UFD / Bullet
+# channels (the workhorse of this module) work even if the v0.1-prelim
+# path is not on sys.path. This was a P0-D testability fix; it also
+# avoids forcing every test that imports channels_v03 to set up v0.1-prelim.
 VDEP_LOG_RHO_RANGE = (2.0, 10.0)
 
 
+def _halo_module():
+    """Lazy loader for halo_profiles (v0.1-prelim)."""
+    import halo_profiles  # noqa: F401
+    return halo_profiles
+
+
+def _sparc_module():
+    """Lazy loader for sparc_loader (v0.1-prelim)."""
+    import sparc_loader  # noqa: F401
+    return sparc_loader
+
+
 def _loglike_burkert_at_galaxy(ga, log_rho_c: float, r_core_kpc: float) -> float:
-    halo_V2 = V_Burkert(ga.Rad, 10**log_rho_c, r_core_kpc)
+    halo = _halo_module()
+    halo_V2 = halo.V_Burkert(ga.Rad, 10**log_rho_c, r_core_kpc)
     V_total = np.sqrt(ga.Vbar_sq + halo_V2)
-    return -0.5 * chi2_sparc(ga, V_total)
+    return -0.5 * halo.chi2_sparc(ga, V_total)
 
 
 def _loglike_nfw_at_galaxy(ga, log_rho_s: float, r_s_kpc: float) -> float:
-    halo_V2 = V_NFW(ga.Rad, 10**log_rho_s, r_s_kpc)
+    halo = _halo_module()
+    halo_V2 = halo.V_NFW(ga.Rad, 10**log_rho_s, r_s_kpc)
     V_total = np.sqrt(ga.Vbar_sq + halo_V2)
-    return -0.5 * chi2_sparc(ga, V_total)
+    return -0.5 * halo.chi2_sparc(ga, V_total)
 
 
 def sparc_loglike_grid(gal_name: str, sigma_m_0: float, a: float,
@@ -141,7 +210,8 @@ def sparc_loglike_grid(gal_name: str, sigma_m_0: float, a: float,
     For SPARC, this is a quick proxy — exact v_max integral would
     require the full likelihood pipeline.
     """
-    ga = load_one_sparc(data_dir, gal_name)
+    sparc = _sparc_module()
+    ga = sparc.load_one_sparc(data_dir, gal_name)
     v_max = v_max_override if v_max_override else float(np.max(ga.Vobs))
     sigma_m_v = sigma_m_at_v(sigma_m_0, a, v_max)
     if sigma_m_v <= 0:

@@ -135,20 +135,45 @@ class TestT28Module:
         assert hasattr(t28, "main")
 
     def test_loglike_returns_finite_at_peaks(self):
-        """loglike_dsph_published_style returns finite (not -inf) at both peaks."""
+        """R12 P0-D (2026-08-17): loglike_dsph_published_style now encodes
+        the published Horigome+ 2025 UPPER LIMIT (sigma/m < 0.2 cm^2/g),
+        NOT a bimodal posterior.
+
+        Tests:
+          - ll at sigma/m_0 = 0.05 cm^2/g (well below the limit) is finite
+            and high (in the upper-limit mode).
+          - ll at sigma/m_0 = 1.0 cm^2/g (well above the limit) is much
+            more negative than at the mode.
+          - ll DECREASES monotonically as sigma/m_0 increases above the
+            limit (no large-peak at sigma/m ~ 10 anymore).
+        """
         t28 = pytest.importorskip("t28_published_style_dsph")
-        # At sigma/m ~ 0.1 cm^2/g (small peak), a=0
-        ll_small = t28.loglike_dsph_published_style(0.1, 0.0)
-        # At sigma/m ~ 10 cm^2/g (large peak)
-        ll_large = t28.loglike_dsph_published_style(10.0, 0.0)
-        # At the dip (sigma/m ~ 1)
-        ll_dip = t28.loglike_dsph_published_style(1.0, 0.0)
-        # Both peaks should be finite
-        assert np.isfinite(ll_small), f"Small peak should be finite: {ll_small}"
-        assert np.isfinite(ll_large), f"Large peak should be finite: {ll_large}"
-        # Dip should be suppressed (lower than peaks)
-        assert ll_dip < ll_small, f"Dip {ll_dip} should be lower than small peak {ll_small}"
-        assert ll_dip < ll_large, f"Dip {ll_dip} should be lower than large peak {ll_large}"
+        ll_low = t28.loglike_dsph_published_style(0.05, 0.0)
+        ll_at_limit = t28.loglike_dsph_published_style(0.2, 0.0)
+        ll_high = t28.loglike_dsph_published_style(1.0, 0.0)
+        ll_extreme = t28.loglike_dsph_published_style(10.0, 0.0)
+        # Low (well below limit) should be in the upper-limit "mode" region.
+        assert np.isfinite(ll_low), f"Low sigma/m should be finite: {ll_low}"
+        # At the upper limit itself, log L should be ~ -1 to -2.
+        assert ll_at_limit < 0 and ll_at_limit > -10, (
+            f"At upper limit (sigma/m=0.2) log L = {ll_at_limit}; "
+            "should be moderately negative, not -inf and not 0"
+        )
+        # Monotonic decrease above the limit.
+        assert ll_high < ll_at_limit, (
+            f"Above limit (sigma/m=1.0, log L={ll_high}) should be < "
+            f"at-limit (sigma/m=0.2, log L={ll_at_limit})"
+        )
+        assert ll_extreme < ll_high, (
+            f"At sigma/m=10 (log L={ll_extreme}) should be < "
+            f"at sigma/m=1 (log L={ll_high}); the OLD bimodal surrogate "
+            "gave log L ~ 0 here. Re-introducing the bimodal is a regression."
+        )
+        # Extreme values should be strongly disfavored.
+        assert ll_extreme < -3.0, (
+            f"At sigma/m_0=10 cm^2/g log L = {ll_extreme}; expected strongly "
+            "negative (the legacy bimodal surrogate gave log L ~ 0 here)."
+        )
 
 
 class TestT28Result:

@@ -18,13 +18,34 @@ For a galaxy with v_max, the EFFECTIVE cross-section is:
 
 We use this to construct a velocity-dependent Burkert profile.
 
-This is a simplified analytic treatment. The full SASHIMI-SIDM cosmology
-(Horigome+ 2025) is much more involved but the basic signature (bimodal
-posterior, σ/m ~ 0.1 vs ~10 cm²/g) is robust.
+This is a simplified analytic treatment. The full SASHIMI-SIDM analysis
+(Horigome+ 2025, arXiv:2503.13650) gives a 95% CL upper limit
+sigma/m < 0.2 cm^2/g for velocity-INDEPENDENT SIDM; we delegate the
+dSph channel to channels_v03.loglike_dsph_v03 (R12 P0-D).
+
+NOTE (R12 P0-D, 2026-08-17): the legacy docstring claimed Horigome+ 2025
+"bimodal posterior, sigma/m ~ 0.1 vs ~10 cm^2/g is robust" -- this was a
+misread of the paper. The paper actually gives a UPPER LIMIT at 0.2 cm^2/g,
+not a bimodal posterior. This was the most consequential scientific-
+plausibility defect in the v0.3-prelim pipeline, fixed by replacing the
+bimodal surrogate in channels_v03.loglike_dsph_v03 and propagating the
+fix to this module and t28_published_style_dsph.
 """
 from __future__ import annotations
 import numpy as np
-from halo_profiles import V_Burkert, G_KPC_KMS
+import channels_v03 as ch_v03
+
+
+def _halo_module():
+    """Lazy loader for halo_profiles (v0.1-prelim).
+
+    sidm_velocity_dependent needs V_Burkert and G_KPC_KMS, which live
+    in v0.1-prelim/code. Defer the import to function-call time so this
+    module can be imported in test runners that don't have v0.1-prelim
+    on sys.path. Same pattern as channels_v03 (R12 P0-D testability fix).
+    """
+    import halo_profiles  # noqa: F401
+    return halo_profiles
 
 
 # Reference velocity (galactic-scale, where σ/m is conventionally quoted)
@@ -60,7 +81,8 @@ def V_Burkert_vdep(r: np.ndarray, rho_c: float, sigma_m_0: float,
     """
     sigma_eff = sigma_m_effective(sigma_m_0, a, v_max)
     r_core = r_core_from_sigma_m(sigma_eff)
-    return V_Burkert(r, rho_c, r_core)
+    halo = _halo_module()
+    return halo.V_Burkert(r, rho_c, r_core)
 
 
 # ---------------------------------------------------------------------------
@@ -73,29 +95,20 @@ def estimate_v_max(ga) -> float:
 # ---------------------------------------------------------------------------
 # dSph kinematics likelihood (from Correa+ 2021 + Horigome+ 2025)
 
-# Published bimodal posterior from Horigome+ 2025 (arXiv 2503.13650):
-# - sigma/m small: ~0.1 cm^2/g (CDM-like, no significant self-interaction)
-# - sigma/m large: ~10 cm^2/g (in core-collapse phase)
-# Strong exclusion of intermediate values.
-# For our purposes, we encode this as a published-likelihood constraint:
-#   log L_dSph(sigma_m_0, a) = -0.5 * ((sigma_m_0 / 0.1) ** 2 + ((a - 0) / 0.5) ** 2)  if both low
-#                                  or  = -0.5 * ((sigma_m_0 / 10) ** 2 + ((a - 0) / 0.5) ** 2) if both high
-# This is a rough Gaussian proxy for the published bimodal posterior.
+# Published upper-limit from Horigome+ 2025 (arXiv:2503.13650):
+# "decisively prefers CDM to SIDM when sigma/m exceeds ~0.2 cm^2/g,
+#  if a velocity-independent cross section is assumed."
+# This is a 95% CL UPPER LIMIT, NOT a bimodal posterior. The legacy
+# "bimodal at sigma/m ~ 0.1 and ~ 10 cm^2/g" surrogate was a misread of
+# the paper (R12 P0-D, 2026-08-17).
 def loglike_dsph_published(sigma_m_0: float, a: float) -> float:
-    """Approximate published likelihood from Horigome+ 2025 bimodal posterior.
+    """Published upper-limit constraint from Horigome+ 2025.
 
-    The actual posterior has a dip at sigma/m ~ 1 cm^2/g; we approximate
-    this as the sum of two Gaussians (small + large sigma/m).
+    Delegates to channels_v03.loglike_dsph_v03 which encodes the
+    upper-limit form (peak at sigma/m ~ 0.05 cm^2/g, half-Gaussian
+    up to the 0.2 cm^2/g 95% CL bound, with velocity-dependence).
     """
-    if sigma_m_0 <= 0 or not np.isfinite(sigma_m_0):
-        return -np.inf
-    log_sm = np.log10(sigma_m_0)
-    # Two-Gaussian mixture at log(sigma/m) ~ -1 (small) and ~1 (large)
-    # Width ~0.5 dex each
-    small_g = -0.5 * ((log_sm - (-1.0)) / 0.5) ** 2
-    large_g = -0.5 * ((log_sm - (1.0))  / 0.5) ** 2
-    # Equal weight per galaxy (Horigome+ finds similar weight)
-    return float(np.logaddexp(small_g, large_g))
+    return ch_v03.loglike_dsph_v03(sigma_m_0, a)
 
 
 # ---------------------------------------------------------------------------

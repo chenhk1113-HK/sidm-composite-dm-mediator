@@ -49,42 +49,19 @@ from config import RESULTS_DIR_V03
 
 
 def loglike_dsph_published_style(sigma_m_0: float, a: float) -> float:
-    """dSph channel with published-style shifted lognormal mixture.
+    """dSph channel using published Horigome+ 2025 upper-limit constraint.
 
-    Two peaks at sigma/m ~ 0.1 (small) and ~ 10 (large), with a dip
-    at sigma/m ~ 1 cm^2/g. Each peak uses a shifted lognormal (not
-    Gaussian) so the tails are heavier.
+    R12 P0-D (2026-08-17): replaced the legacy bimodal-with-dip surrogate
+    (peaks at sigma/m ~ 0.1 AND ~ 10 cm^2/g) with the actual published
+    upper limit (sigma/m < 0.2 cm^2/g for v-independent SIDM).
+
+    The legacy surrogate was a misread of Horigome+ 2025 (arXiv:2503.13650):
+    the actual abstract gives a 95% CL UPPER LIMIT, not a bimodal posterior.
+
+    Delegates to channels_v03.loglike_dsph_v03 which encodes the upper-
+    limit form with velocity-dependence handled via sigma_m_at_v.
     """
-    sigma_m_v = sigma_m_effective(sigma_m_0, a, ch_v03.V_DSPH)
-    if sigma_m_v <= 0 or not np.isfinite(sigma_m_v):
-        return -np.inf
-    log_sm = np.log10(sigma_m_v)
-
-    # Peak 1: small sigma/m ~ 0.1 cm^2/g
-    # Shifted lognormal: peak at log_sm = -1, asymmetric width
-    # Using log-skew-normal-like shape: tighter above peak, broader below
-    # Approximation: -|log_sm - peak|^p / scale^p  with p=1.5 (heavier than Gaussian)
-    small_peak_log = -1.0
-    small_delta = log_sm - small_peak_log
-    small_log_L = -(abs(small_delta) ** 1.5) / (0.3 ** 1.5)
-
-    # Peak 2: large sigma/m ~ 10 cm^2/g
-    large_peak_log = 1.0
-    large_delta = log_sm - large_peak_log
-    large_log_L = -(abs(large_delta) ** 1.5) / (0.5 ** 1.5)
-
-    # Combine peaks: equal weight (50/50)
-    log_sum_peaks = np.logaddexp(small_log_L, large_log_L)
-
-    # Dip suppression at log_sm = 0 (sigma/m ~ 1 cm^2/g)
-    # Use exponential suppression: log L *= (1 - 0.95 * exp(-((x/0.3)^2)))
-    # This gives multiplicative penalty at the dip
-    dip_factor = 1.0 - 0.95 * np.exp(-((log_sm / 0.3) ** 2))
-    # Apply dip multiplicatively: log L = log_sum_peaks + log(dip_factor)
-    if dip_factor > 0:
-        return float(log_sum_peaks + np.log(dip_factor))
-    else:
-        return float(log_sum_peaks - 50.0)  # numerical floor
+    return ch_v03.loglike_dsph_v03(sigma_m_0, a)
 
 
 def loglike_5channel_published(sigma_m_0: float, a: float) -> float:
