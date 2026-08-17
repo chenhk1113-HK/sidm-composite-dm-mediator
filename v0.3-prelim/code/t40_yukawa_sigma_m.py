@@ -9,19 +9,26 @@ velocity dependence. The physical Yukawa cross-section has a *known*
 velocity dependence given (m_phi, m_chi, g_chi), so a is NOT a free
 parameter — it is DERIVED from the mediator Yukawa coupling.
 
-This module implements the standard Yukawa cross-section. Reference:
-Feng+ 2009 (arXiv:0908.2996), Tulin+ Yu 2018 (RMP 90, 015004).
+This module implements the standard Yukawa cross-section in the Born
+approximation. Reference: Feng+ 2009 (arXiv:0908.2996), Tulin+ Yu 2018
+(RMP 90, 015004).
 
-Cross-section (Born approximation, classical-limit mix):
+Cross-section (Born approximation, distinguishable particles):
 
-  sigma_T(v) = (g_chi^4 m_chi^2) / (8 pi m_phi^4) * L^2(s)        [transfer cross-section]
-  with L(s) = log(1 + s) / s,  s = (m_chi v / m_phi)^2
+    sigma_T(v) = (g_chi^4 * m_chi^2) / (8 pi * m_phi^4) * [L(s)]^2
+    with L(s) = log(1 + s) / s,  s = (m_chi v / (sqrt(2) m_phi))^2
 
-Viscosity/conductivity average (Roberts+ 2024 cross-section):
-  sigma_V(v) = sigma_T(v) * (1 + 1/(2 s))                  [s << 1 correction]
+Asymptotics:
+  - s -> 0  (low v): sigma_T -> g_chi^4 m_chi^2 / (8 pi m_phi^4).  Finite.
+  - s -> ∞  (high v): sigma_T ~ log^2(s)/s^2.  Falls as ~ 1/v^4.
 
-For the SIDM-bumpy regime (sigma/m ~ 1 cm^2/g at v ~ 10 km/s), we work in
-the resonance / Born regime depending on (m_chi, m_phi).
+THIS IS THE ONLY VALID FORM. An earlier version of this file multiplied
+sigma_T by `(1 + 1/(2 s))` claiming it was a "Roberts+ 2024 s<<1
+correction"; that multiplier diverges as v->0 (1/(2s) ~ v^-2) and is NOT
+in any published SIDM literature (Tulin+Yu 2018, Roberts+ 2024, Khrapak
+2018). It was removed on 2026-08-17 (R12 P0-A) because it produced
+unphysical sigma/m ~ 1e6 cm^2/g at v = 0.1 km/s. See commit fixing this
+file.
 
 Parametrization strategy:
   Fit parameters:  m_phi [MeV], m_chi [GeV], g_chi
@@ -64,49 +71,53 @@ def beta_phi(v_kms: float, m_phi_MeV: float, m_chi_GeV: float) -> float:
 
 
 def sigma_T_cm2(v_kms: float, m_phi_MeV: float, m_chi_GeV: float, g_chi: float) -> float:
-    """Transfer cross-section sigma_T in cm^2 (Born approx, with log correction).
+    """Transfer cross-section sigma_T in cm^2 (Born approximation).
 
-    Ref: Feng+ 2009 Eq 5 / Tulin+Yu 2018.
-        sigma_T = (g_chi^4 m_chi^2) / (8 pi m_phi^4) * L^2(beta^2)
-        with L(s) = log(1 + s) / s  (s = beta^2)
+    Ref: Feng+ 2009 Eq. 5 / Tulin+Yu 2018 (RMP 90, 015004) Eq. (2.14).
+        sigma_T = (g_chi^4 m_chi^2) / (8 pi m_phi^4) * [L(s)]^2
+        with L(s) = log(1 + s) / s
+        s = [m_chi v / (sqrt(2) m_phi)]^2 = beta_phi^2
+
+    Distinguishable fermions in the Born limit. Identical-particle
+    symmetrization is NOT applied; the user (or caller) should multiply
+    by 4 or by the proper identical-fermion factor where relevant.
+
+    Implementation note (R12 P0-A fix): an earlier `* (1 + 1/(2 s))`
+    "correction" was removed; it diverged as v->0 (1/(2s) ~ v^-2). The
+    bare Born form has the correct asymptotes:
+      - v -> 0:  sigma_T plateaus at g^4 m^2 / (8 pi m_phi^4).
+      - v -> ∞:  sigma_T falls as (log s)^2 / s^2 ~ v^-4.
     """
     beta = beta_phi(v_kms, m_phi_MeV, m_chi_GeV)
     s = beta ** 2
     if s <= 0:
         return 0.0
     L = np.log(1.0 + s) / s  # log(1+s)/s
-    # Convert (g_chi^4 m_chi^2 / 8 pi m_phi^4) from natural units to cm^2.
-    # m_chi in GeV, m_phi in MeV → convert to consistent units.
-    # In natural units (hbar c = 1), sigma has units of 1/E^2.
-    # m_chi in GeV, m_phi in MeV. Use MeV for both:
     m_chi_MeV = m_chi_GeV * 1000.0
-    # Natural-units prefactor: (g_chi^4 m_chi^2) / (8 pi m_phi^4)  [1/MeV^2]
     prefactor_natural = (g_chi ** 4) * (m_chi_MeV ** 2) / (8.0 * np.pi * m_phi_MeV ** 4)
-    # Convert to cm^2: 1/MeV^2 → cm^2 via (hbar c)^2 = (1.973e-11 MeV cm)^2
     sigma_cm2 = prefactor_natural * (HBAR_C_MEV_CM ** 2) * L ** 2
     return float(sigma_cm2)
 
 
-def sigma_T_with_m_low_correction(v_kms: float, m_phi_MeV: float, m_chi_GeV: float,
-                                   g_chi: float) -> float:
-    """sigma_T with the s/(1+s) low-velocity correction (Roberts+ 2024).
-
-    For s = beta^2 << 1, the Born approx can underestimate by ~50%.
-    sigma_eff = sigma_T * (1 + 1/(2 s)) (linear-corrected form).
-    """
-    s = beta_phi(v_kms, m_phi_MeV, m_chi_GeV) ** 2
-    if s <= 0:
-        return sigma_T_cm2(v_kms, m_phi_MeV, m_chi_GeV, g_chi)
-    return sigma_T_cm2(v_kms, m_phi_MeV, m_chi_GeV, g_chi) * (1.0 + 1.0 / (2.0 * s))
+# Legacy alias. The original `sigma_T_with_m_low_correction` applied a
+# bogus `(1 + 1/(2 s))` factor that diverged as v->0; it was removed.
+# Some callers (t43, t46) still reference this name. We alias to the
+# clean Born form. Removing the alias entirely would break those modules;
+# removing the correction is the actual fix.
+sigma_T_with_m_low_correction = sigma_T_cm2
 
 
 def sigma_m_cm2_per_g(v_kms: float, m_phi_MeV: float, m_chi_GeV: float,
                        g_chi: float) -> float:
     """sigma/m in cm^2/g.
 
-    sigma_m = sigma_T(v) / m_chi [cm^2 / GeV]  →  convert to cm^2/g.
+    sigma_m = sigma_T(v) / m_chi [cm^2 / GeV]  -->  convert to cm^2/g.
+
+    Uses the clean Born form `sigma_T_cm2`. The legacy alias
+    `sigma_T_with_m_low_correction` (R12 P0-A removed) is preserved for
+    backward compatibility but routed to the same function.
     """
-    sT = sigma_T_with_m_low_correction(v_kms, m_phi_MeV, m_chi_GeV, g_chi)
+    sT = sigma_T_cm2(v_kms, m_phi_MeV, m_chi_GeV, g_chi)
     sigma_m_cm2_per_GeV = sT / m_chi_GeV
     return sigma_m_cm2_per_GeV * (1.0 / GEV_TO_GRAM)
 

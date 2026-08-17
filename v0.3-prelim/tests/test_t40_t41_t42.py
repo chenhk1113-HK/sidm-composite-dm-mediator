@@ -57,6 +57,81 @@ class TestT40Yukawa:
         # Within 1%
         assert abs(sm - target) / target < 0.01, f"sigma_m = {sm}, target = {target}"
 
+    # ---- R12 P0-A regression tests (locked 2026-08-17) ----
+
+    def test_t40_sigma_T_finite_as_v_zero(self):
+        """R12 P0-A: sigma_T must remain finite as v -> 0 (Born plateau).
+
+        Previously, `sigma_T_with_m_low_correction` multiplied by
+        (1 + 1/(2 s)) which diverged as 1/v^2. Now sigma_T_cm2 is
+        the only definition; sigma_T should plateau at the Born limit
+        g^4 m^2 / (8 pi m_phi^4) for s -> 0.
+        """
+        t40 = pytest.importorskip("t40_yukawa_sigma_m")
+        sT_low_v = t40.sigma_T_cm2(0.01, 10.0, 40.0, 0.1)
+        sT_born = t40.sigma_T_cm2(100.0, 10.0, 40.0, 0.1)
+        # Both should be in same order of magnitude (Born plateau).
+        # In the Born regime (small s), L(s) ~ 1, so sigma_T is constant.
+        assert sT_low_v > 0, f"sigma_T(0.01 km/s) = {sT_low_v}, must be > 0"
+        # Ratio should be O(1), not 1e10
+        ratio = sT_low_v / sT_born
+        assert 0.5 < ratio < 2.0, (
+            f"sigma_T plateau broken: sigma_T(0.01)/sigma_T(100) = {ratio:.3e}; "
+            "expected Born plateau with ratio O(1)"
+        )
+
+    def test_t40_sigma_m_finite_as_v_zero(self):
+        """R12 P0-A: sigma/m must remain finite as v -> 0.
+
+        Previously, sigma_m_cm2_per_g(0.1 km/s) returned ~1.95e6 cm^2/g
+        (the bogus 1/(2s) blowup). It should now plateau at ~3.5 cm^2/g
+        for (m_chi=40 GeV, m_phi=10 MeV, g=0.1).
+        """
+        t40 = pytest.importorskip("t40_yukawa_sigma_m")
+        sm_low = t40.sigma_m_cm2_per_g(0.1, 10.0, 40.0, 0.1)
+        sm_born = t40.sigma_m_cm2_per_g(100.0, 10.0, 40.0, 0.1)
+        # Must be in physically reasonable range (< 1000 cm^2/g).
+        # Anything above 1000 means the old bug returned.
+        assert sm_low < 1000.0, (
+            f"REGRESSION: sigma_m_cm2_per_g(0.1) = {sm_low:.3e} cm^2/g. "
+            "v^{-2} blowup returned. Was the bogus (1+1/(2s)) factor "
+            "re-introduced?"
+        )
+        # Should be within factor 2 of Born plateau value.
+        ratio = sm_low / sm_born
+        assert 0.5 < ratio < 2.0, (
+            f"Born plateau broken: sigma/m(0.1)/sigma/m(100) = {ratio:.3e}"
+        )
+
+    def test_t40_alias_matches_clean_form(self):
+        """R12 P0-A: legacy `sigma_T_with_m_low_correction` must equal
+        `sigma_T_cm2` (the bogus factor has been removed; the legacy
+        name now points to the same function).
+        """
+        t40 = pytest.importorskip("t40_yukawa_sigma_m")
+        for v in [1000.0, 100.0, 10.0, 1.0, 0.1]:
+            a = t40.sigma_T_cm2(v, 10.0, 40.0, 0.1)
+            b = t40.sigma_T_with_m_low_correction(v, 10.0, 40.0, 0.1)
+            assert a == b, (
+                f"legacy alias diverged from clean form at v={v}: "
+                f"sigma_T_cm2={a}, sigma_T_with_m_low_correction={b}"
+            )
+
+    def test_t40_born_limit_at_low_v(self):
+        """R12 P0-A: Born limit g^4 m^2/(8 pi m_phi^4) is reached at
+        vanishing v. Test by computing sigma_T(1000 km/s) < sigma_T(0.1 km/s)
+        for small mediator (m_phi=10 MeV) where s is O(1) at v=1000.
+        """
+        t40 = pytest.importorskip("t40_yukawa_sigma_m")
+        sm_low = t40.sigma_m_cm2_per_g(0.1, 10.0, 40.0, 0.1)
+        sm_high = t40.sigma_m_cm2_per_g(1000.0, 10.0, 40.0, 0.1)
+        # For small m_phi, sigma drops significantly from low to high v.
+        # The drop is (ln s/s)^2 at high s.
+        assert sm_low / sm_high > 10.0, (
+            f"sigma/m should fall from v=0.1 to v=1000 by >10x for "
+            f"m_phi=10 MeV; got sm_low/sm_high = {sm_low/sm_high:.2e}"
+        )
+
 
 class TestT41Module:
     """T41 — m_phi + m_chi joint fit."""
@@ -94,6 +169,48 @@ class TestT41Module:
             f"Yukawa tension NOT flagged. a_T39 = {data['yukawa_tension']['T39_a']}, "
             f"a_Yukawa = {data['yukawa_tension']['Yukawa_a_at_MAP']}, "
             f"diff = {data['yukawa_tension']['a_difference']}. Check the prior range."
+        )
+
+    # ---- R12 P0-B regression tests (locked 2026-08-17) ----
+
+    def test_t41_derived_a_sign_convention(self):
+        """R12 P0-B: derived_a must match channels_v03 convention
+        (positive a means FALLING sigma/m with v).
+
+        Previously the minus sign was missing. The bug returned
+        NEGATIVE a (claiming rising sigma/m) when the Yukawa form
+        actually produces falling sigma/m. This regression test
+        asserts:
+            a > 0  for cases where sigma/m at v=50 > sigma/m at v=200.
+        """
+        t41 = pytest.importorskip("t41_mediator_mass_joint_fit")
+        # Small m_phi = strongly falling sigma/m in Born regime.
+        # For m_phi=10 MeV, m_chi=40 GeV, g_chi=0.1:
+        #   sigma/m(50) ~ 2.83 cm^2/g
+        #   sigma/m(200) ~ 0.63 cm^2/g  --> ratio > 1, so a > 0 in channels_v03 sense.
+        a = t41.derived_a(10.0, 40.0, 0.1)
+        assert a > 0.5, (
+            f"REGRESSION: derived_a(10, 40, 0.1) = {a:.3f}, expected > +0.5. "
+            "Sign convention broken; t41 returns the OPPOSITE of channels_v03."
+        )
+
+    def test_t41_derived_a_matches_t54_sign(self):
+        """R12 P0-B: t41 and t54 must return the SAME-SIGN number for
+        physically equivalent setups.
+        """
+        t41 = pytest.importorskip("t41_mediator_mass_joint_fit")
+        t54 = pytest.importorskip("t54_dark_quark_joint_fit")
+        import numpy as np
+        # Both modules should be running with their own private Yukawa;
+        # the sign of `a` should agree for the same physical input.
+        # We use m_phi=10 MeV, m_chi=40 GeV, g_chi=0.1.
+        a41 = t41.derived_a(10.0, 40.0, 0.1)
+        a54 = t54.derived_a(np.log10(0.010), np.log10(1.0), np.log10(40.0), 0.1)
+        # Both should be POSITIVE in channels_v03 convention.
+        # (Magnitudes differ because the two Yukawa implementations differ.)
+        assert a41 > 0 and a54 > 0, (
+            f"REGRESSION: a41={a41:.3f}, a54={a54:.3f}; both should be "
+            f"> 0 in channels_v03 convention"
         )
 
 
