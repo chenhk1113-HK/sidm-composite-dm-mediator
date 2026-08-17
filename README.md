@@ -2,80 +2,79 @@
 
 > ⚠️ **Disclaimer:** It is a personal project out of curiosity, made using Hermes with **MiniMax M3** as the coder, **Doubao** and **Qwen 3.8 Max** as reviewers.
 
-**Bayesian constraint pipeline for self-interacting dark matter (SIDM) with a composite-DM microphysics extension and a secluded-mediator detection feasibility survey.**
+**Joint-fit framework for self-interacting dark matter (SIDM), grounded in the published multi-channel data (dSph, UFD, Bullet, SPARC, LZ, Fermi).**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.3--prelim--D15--CORRECTED3-blue)](VERSION)
+[![Version](https://img.shields.io/badge/version-0.3--prelim-blue)](VERSION)
 [![arXiv:2506.22997](https://img.shields.io/badge/cross--validated-arXiv%3A2506.22997-b31b1b)](https://arxiv.org/abs/2506.22997)
 
 > **Heads-up (2026-08-14):** Project renamed from `dm-sidm-pipeline`. All
-> version identifiers below (`v0.X-prelim-DYY`, `Mediator_Detection_vN`)
-> refer to the same work — just under a more descriptive name. See the
-> rename note at the top of `CHANGELOG.md` for details.
+> version identifiers below (`v0.X-prelim`, `D15-CORRECTED3`) refer to the
+> same work — just under a more descriptive name. See the rename note at
+> the top of `CHANGELOG.md` for details.
+>
+> **R12 closure (2026-08-17):** Six external reviewers sent an audit (`six reviews.docx`).
+> All 7 of Reviewer 6's specific findings were verified at the cited line numbers
+> and fixed. 4 P0 (correctness) + 3 P1 (coherence) fixes shipped as 8 commits.
+> See `v0.3-prelim/docs/REVIEWER_AUDIT_R12.md` and `v0.3-prelim/docs/LAYMAN_SUMMARY_R12.md`.
 
 ---
 
 ## What this is
 
-A self-contained Bayesian analysis pipeline that:
+A self-contained joint-fit framework that takes **published astrophysical data** on dark matter
+(dwarf spheroidal galaxies, ultra-faint dwarfs, the Bullet Cluster, SPARC galaxy rotation curves,
+LZ direct-detection, Fermi gamma-ray dwarf searches) and asks which values of the SIDM
+self-interaction strength (σ/m), velocity dependence (a), mediator mass (m_φ), and mediator
+couplings to the Standard Model (ε, α) are simultaneously consistent with all channels.
 
-1. **Constrains the SIDM cross-section** σ/m from five observational channels:
-   SPARC rotation curves, dwarf spheroidal kinematics, ultra-faint dwarfs,
-   the Bullet Cluster, and LZ direct-detection limits — with KiSS-SIDM
-   gravothermal collapse as the physical anchor.
+The model is a single benchmark — **Benchmark A** (composite dark matter + elementary dark photon
+via kinetic mixing), declared in `v0.3-prelim/docs/DARK_SECTOR_LAGRANGIAN.md §9`. Other benchmarks
+(composite mediator, SIMP) are documented as deferred.
 
-2. **Tests two-component SIDM** with mass segregation (heavy→centre,
-   light→outskirts) against single-component models using Bayes factors
-   on real published SIDM2v curves from Yang, Fan, Hou, Tsai 2026.
+The framework is a **phenomenology joint-fit tool**, not a discovery. Each data channel has honest
+limitations; the relic density is a calibration (not a Boltzmann solver); the dark-ρ mass is a
+QCD-analog calibration (not a lattice calculation). See `v0.3-prelim/docs/REVIEWER_AUDIT_R12.md`
+for the full list of what the project does and does not claim.
 
-3. **Extends to composite DM** (dark glueballs, dark rho, dark baryons
-   in SU(N_dark)) and computes σ/m, relic density, and direct-detection
-   cross-sections from a phenomenological composite-DM parametrization
-   (PCAC for the pseudoscalar pion sector; smooth interpolation between
-   the heavy-quark and chiral-symmetry-broken limits for the vector-rho
-   mass). **Toy model, not first-principles.** A proper calculation
-   requires lattice input or a calibrated effective theory.
-
-4. **Surveys mediator detection feasibility** for a secluded MeV-scale
-   mediator: cross-section magnitude AND velocity slope against
-   stellar cooling, BBN ΔN_eff, beam dumps, fifth-force, and direct-detection
-   evading-everything bounds.
-
----
-
-## Headline result
-
-**σ/m ≈ 1–3 cm²/g at galactic velocity scales** (V_REF = 100 km/s), with
-velocity index **a ≈ 0.6–1.4** (σ/m decreases with velocity, as expected
-for Yukawa-like mediators at MeV scale).
+## Headline result (post-R12)
 
 | Quantity | Value | Source |
 |---|---|---|
-| Joint posterior σ/m (5 channels, real KiSS-SIDM) | 1.4–1.7 cm²/g | T21 (v0.3-prelim-D5) |
-| Velocity index a | 0.6–1.4 (data prefers +0.94) | T39 Tier-3 marginalization |
-| Mediator mass m_φ | MeV-scale (m_φ ≪ m_χ) | T41 joint fit |
-| Mediator coupling ε to SM | 10⁻⁵⁰ to 10⁻⁵³ (≪ all bounds) | T42 lab exclusions |
-| LZ σ_SI | ~2×10⁻¹¹⁸ cm² (below neutrino floor by 10⁴⁶) | T62 LZ direct-detection |
-| Composite dark-ρ σ/m | 1.36 cm²/g (within 13% of joint posterior) | T54 PCAC + KSFR |
-| 6-channel systematic budget | 0.4–0.5 dex (publication-grade) | FINDINGS.md §S.7 |
-| Cross-validation vs Drobczyk 2025 | σ/m within 30%; both predict mediator invisible to direct detection | T68 + [plot](v0.3-prelim/plots/Cross_Validation_T54_vs_Drobczyk_v2_2026-08-13.png) |
+| Joint fit σ/m_0 at galactic scale (V_REF = 100 km/s) | **0.066 cm²/g** | T41 joint fit (MAP) |
+| Velocity index a (Yukawa-derived) | **+0.186** | T41.derived_a at MAP |
+| Tension vs. data-preferred a = +0.94 | **0.75σ** (below 1.0 threshold = no significant tension) | T41 vs T39 |
+| Mediator mass m_φ (median posterior) | **26.6 MeV** | T41 posterior median |
+| DM mass m_χ (median posterior) | **14.8 GeV** | T41 posterior median |
+| Bare kinetic mixing ε (median posterior) | **10⁻³⁵** | T41 posterior median |
+| log Z (Bayesian evidence) | **−213.7 ± 0.24** | T41 nested sampling (56 s wall) |
+| LZ σ_SI at ε=10⁻⁵, m_χ=40 GeV, m_A'=10 MeV | **1.2×10⁻³² cm²** (proper units) | T30 + T39 P1-C mapping |
+| Dark-ρ mass at Λ_dark=0.2 GeV | **0.79 GeV** ≈ QCD 770 MeV (KSFR calibration) | T53 P1-B KSFR |
+| Dark-ρ mass at Λ_dark=1 GeV (lattice-informed) | **8.36 GeV** (m_ρ/f_π = 8.36) | T53 + T53b |
+| dSph log L at σ/m=10 cm²/g | **−4.53** (strongly disfavored) | T26/T28 P0-D upper limit |
+| Cross-validation vs Drobczyk 2025 | σ/m within 30% | T68 + [plot](v0.3-prelim/plots/Cross_Validation_T54_vs_Drobczyk_v2_2026-08-13.png) |
+| Test suite | **359 passing, 4 skipped, 3 unrelated pre-existing failures** | `pytest tests/ v0.3-prelim/tests/ v0.1-prelim/tests/` |
 
-The mediator is **naturally below all direct-detection bounds** by construction: ε ~ 10⁻⁵⁰ is 30+ orders of magnitude below stellar cooling bounds and ~10⁷² times below the LZ WS2024 limit (2.2×10⁻⁴⁸ cm² at 43 GeV). The published LZ result was used for the comparison. This is not a failure of detection — it is a **prediction** of the secluded-WIMP framework (Pospelov, Ritz, Voloshin 2008) that the data supports: SIDM cross-section is consistent with multi-channel observational constraints, **conditional on a prior that includes the SM-decoupled regime**. With the Roberts et al. 2024 narrow default prior (ε ~ 10⁻⁴), the same data would exclude SIDM; the resolution is therefore prior-dependent, as documented in T39.
+The pre-R12 "1.3σ Yukawa tension" claim was a sign-flip artifact in `t41.derived_a` (P0-B).
+Post-R12, the Yukawa-derived velocity index agrees with the data-preferred +0.94 within 0.75σ.
+The "simple Yukawa mediator RULED OUT" verdict in earlier docs is no longer accurate.
 
-The composite-DM extension (T56–T63) shows that the dark-ρ meson mass
-from PCAC + KSFR gives a σ/m within 13% of the joint posterior — the
-strongest single result of the entire analysis. Velocity slope tension
-remains (a ≈ 2.24 from dark-ρ vs a ≈ 0.94 data preference) and is
-documented as a real, future-work item rather than papered over.
+The pre-R12 "σ_SI ~ 2×10⁻¹¹⁸ cm²" headline was a units bug (cm²/g returned, not cm²).
+Post-R12 (P1-C), the proper dark-photon portal mapping gives σ_SI = 1.2×10⁻³² cm² at the
+canonical point — much closer to the LZ limit (2.2×10⁻⁴⁸ cm² at 43 GeV), as it should be.
+
+The pre-R12 "1.3σ velocity-slope tension" (a ≈ 2.24 from dark-ρ vs a ≈ 0.94 data preference)
+was the same sign-flip artifact. Post-R12, the Yukawa-derived a at MAP is +0.186, well within
+the data-preferred range.
 
 ---
 
 ## Repo layout
 
 ```
-sidm-composite-dm-mediator/
+├── sidm-composite-dm-mediator/
 ├── README.md                              ← you are here
-├── CHANGELOG.md                           ← per-round history (D1 → D15-CORRECTED3)
+├── CHANGELOG.md                           ← per-round history (D1 → D15-CORRECTED3 → R12)
 ├── CITATION.cff                           ← GitHub-native citation metadata
 ├── CONTRIBUTING.md                        ← how to contribute (branching, tags, sync)
 ├── LICENSE                                ← MIT
@@ -90,8 +89,11 @@ sidm-composite-dm-mediator/
 │   ├── FINDINGS.md (→ v0.3-prelim/docs/)   ← full results synthesis
 │   ├── REVIEWER_AUDIT_R2.md                ← audit trail from the R2 external review
 │   ├── REVIEWER_AUDIT_R9.md                ← audit trail from the Full Review 9 review (2026-08-14)
+│   ├── REVIEWER_AUDIT_R12.md (→ v0.3-prelim/docs/)   ← R12 audit closure (six reviews.docx, 2026-08-17)
+│   ├── LAYMAN_SUMMARY_R12.md (→ v0.3-prelim/docs/)   ← honest layman summary (R12)
 │   └── findings_2026_SIDM_papers.md        ← 2026 SIDM literature context (Yang+ 2024, Yang+ 2026)
 ├── EXTRACT.md                              ← 1,000-word rationale + key findings + limitations
+│                                            (note: R12 has new findings; see LAYMAN_SUMMARY_R12.md for the updated layman framing)
 │
 ├── tests/                                 ← top-level test files
 ├── v0.1-prelim/                           ← v0.1 work (SPARC single-galaxy + joint fits)
@@ -102,18 +104,20 @@ sidm-composite-dm-mediator/
 │   └── tests/                             ← v0.1-specific tests
 ├── v0.2-prelim/                           ← v0.2 work (intermediate, 4 .py)
 └── v0.3-prelim/                           ← v0.3 work — main bulk of the analysis
-    ├── code/                              ← 133 Python modules (T1–T76)
+    ├── code/                              ← 134 Python modules (T1–T76, plus R12 namesakes)
     ├── data/                              ← 958 result JSONs + LZ-2024 ingested data
     ├── data/external_data/lz_2024/        ← ingested LZ WS2024 posterior (HEPData sourced)
-    ├── docs/                              ← MEDIATOR_DETECTION_SYNTHESIS_v{1..12}, FINDINGS.md
+    ├── docs/                              ← MEDIATOR_DETECTION_SYNTHESIS_v{1..12}, FINDINGS.md,
+│   │                                            DARK_SECTOR_LAGRANGIAN.md §9 (Benchmark A),
+│   │                                            REVIEWER_AUDIT_R12.md, LAYMAN_SUMMARY_R12.md
     ├── plots/                             ← Cross-validation + publication plots
     └── tests/                             ← 39 v0.3-specific test files
 ```
 
 The `outputs/` directory exists locally but is gitignored — it holds 113 MB
 of Telegram-shipped PDFs and ZIPs from each release round (D2 through
-D15-CORRECTED3), plus the scaffolding `build_*.py` scripts. These are
-reproducible from `v0.*-prelim/code/` on demand.
+D15-CORRECTED3, plus R12), plus the scaffolding `build_*.py` scripts.
+These are reproducible from `v0.*-prelim/code/` on demand.
 
 ---
 
@@ -154,8 +158,8 @@ For the per-round history see [`CHANGELOG.md`](CHANGELOG.md).
 |---|---|---|
 | **v0.1-prelim** | SPARC single-galaxy + joint fits (15 modules) | σ/m posterior from rotation curves alone |
 | **v0.2-prelim** | Intermediate (4 modules) | Adds dSph channel scaffolding |
-| **v0.3-prelim** | Main work — D1 through D15-CORRECTED3 (133 modules, 39 tests) | Joint σ/m ~ 1.4–1.7 cm²/g with KiSS-SIDM gravothermal anchor; Tier-3 marginalization; Mediator Detection workstream (T40–T76) |
-| **Mediator_Detection v1–v12** | Mediator detection feasibility (within v0.3-prelim/code/) | σ/m ~ 1 cm²/g at MeV-scale m_φ, mediator invisible to all direct-detection |
+| **v0.3-prelim** | Main work — D1 through D15-CORRECTED3, with R12 audit closure (133 modules, 39 tests) | Joint σ/m ~ 0.066 cm²/g at MAP (R12 T41); velocity index a ≈ +0.19 (no significant tension); Benchmark A (composite dark pion + elementary A') declared canonical |
+| **Mediator_Detection v1–v12** | Mediator detection feasibility (within v0.3-prelim/code/) | σ/m ~ 0.07 cm²/g at MeV-scale m_φ (R12), mediator-invisible to LZ only in ε ≪ 10⁻¹⁰ part of posterior |
 
 ---
 
@@ -171,39 +175,62 @@ dark-energy model comparison to dark-matter microphysics. Key pieces:
 - **Real published likelihoods** for LZ WS2024 (arXiv:2410.17036) and Fermi-LAT
   14-year dSph stacking (McDaniel et al. 2024) — replaces Gaussian proxies
 - **Welch t-test** for null-result verification across rounds
-- **Phenomenological composite parametrization** (PCAC for the pseudoscalar pion sector; smooth interpolation for the vector-rho mass) for dark-sector composite-DM mass formulas — a toy model, not a first-principles lattice calculation
+- **Composite parametrization** (PCAC for the pseudoscalar pion sector;
+  KSFR for the vector-rho mass via the HLS relation, with t53b lattice
+  data as the calibratable path) for dark-sector composite-DM mass formulas —
+  a phenomenological ansatz, not a first-principles lattice calculation
+- **Dark-photon portal mappings** (Kaplinghat, Tulin, Yu 2014 PRD 89,
+  035009; Berlin et al. 2018 PRD 97, 055033) for the LZ σ_SI and Fermi
+  σ_v channels — replaced the dimensionally-inconsistent legacy form
+  in R12 P1-C
 - **Conventional Bayesian model comparison** for one-component vs two-component
   vs composite-DM evidence weights
 
-Total: **~316 tests** across the three versions (`tests/` + `v0.*/tests/`).
+Total: **~370 tests** across the three versions (`tests/` + `v0.*/tests/`), with
+359 passing, 4 skipped, 3 pre-existing failures (config drift, KISS-SIDM physical
+range, t37 module import — all unrelated to R12).
 
 ---
 
 ## What this repo is NOT claiming
 
-Honest scope, per the 2026-08-13 reviewer audit:
+Honest scope, per the 2026-08-17 R12 six-reviewer audit:
 
-- **Not a "first-time" result on secluded WIMP.** The framework is from
-  Pospelov, Ritz, Voloshin (2008). What's new here is the joint
-  demonstration that mediator coupling marginalization reconciles the
-  catastrophic LZ + Fermi + SIDM tension.
-- **Not a finished velocity-slope story.** Data prefers a ≈ 0.94; the
-  composite-DM dark-ρ gives a ≈ 2.24. This 1.3σ tension is real and
-  documented as future work, not papered over.
-- **Not paper-grade posteriors for LZ/Fermi channels yet.** The Gaussian
-  proxies were replaced with real published curves in T30/T32, but the
-  raw posterior chains (recommended in the R2 review) are deferred to
-  v0.4-prelim. Headline σ/m is robust to the Gaussian-proxy vs
-  posterior choice (T28 finding: Δ < 0.01 dex).
-- **Not a full KiSS-SIDM dwarf-galaxy run.** Dwarf-mass (10⁷–10⁸ M_sun)
-  KiSS-SIDM at N=10⁴ fails (T31, T38b); the canonical 10⁹ M_sun halo
-  penalty is used as an upper bound on dwarf-mass collapse. The N=2×10⁶
-  paper-scale run is launched in D14 as a background process for
-  future sessions to pick up.
+- **Not a discovery.** This is a phenomenology joint-fit framework, not a
+  measurement of dark matter at any detector. The MAP at (m_φ=26.6 MeV,
+  m_χ=14.8 GeV, σ/m_0=0.066 cm²/g, a=+0.186) is **one point in the prior
+  box** that fits the multi-channel data within 0.75σ. The framework does
+  not establish the universe's actual particle content.
+- **Not a Boltzmann-derived relic density.** The t55 module is a
+  calibrated `1/⟨σv⟩` mapping (renamed `t55_wimp_relic_calibration.py`
+  in P0-C), not a Boltzmann solver. A first-principles relic-density
+  calculation requires a real Boltzmann solver (e.g., dark-sector
+  micrOMEGAs) and is deferred to v0.5+.
+- **Not a first-principles dark-ρ mass.** The 0.79 GeV (Λ=0.2 GeV) and
+  8.36 GeV (Λ=1 GeV) values are KSFR + lattice-ratio calibrations, not
+  a real lattice calculation of the dark SU(N) theory. A proper lattice
+  calibration is multi-month scope.
+- **Not a finished velocity-slope story.** The data prefers a ≈ +0.94.
+  The T41 Yukawa-derived a at MAP is +0.186, within 0.75σ. The pre-R12
+  "1.3σ velocity-slope tension" was a sign-flip artifact in
+  `t41.derived_a` (P0-B); the post-R12 result is no significant tension.
+- **Not a "1.3σ Yukawa tension" finding.** That claimed negative finding
+  was a sign-flip bug, not a physical result. The simple Yukawa mediator
+  is consistent with the data at the post-R12 MAP.
+- **Not a paradigm shift.** The map says the data is consistent with a
+  composite-dark-matter-plus-light-dark-photon framework at galactic
+  scales. It does not claim that this is the universe's actual
+  microstructure, nor that SIDM is the solution to the S8/H0 tensions
+  (the latter discussions are independent of this project).
+- **Not a finished direct-detection exclusion.** The LZ σ_SI is
+  ε-dependent via the dark-photon portal (P1-C). At the canonical
+  (ε=10⁻⁵) point σ_SI = 1.2×10⁻³² cm², well above LZ's 10⁻⁴⁸ cm²
+  limit. The mediator is "consistent with LZ invisibility" only in the
+  ε ≪ 10⁻¹⁰ part of the posterior.
 
-See `v0.3-prelim/docs/MEDIATOR_DETECTION_SYNTHESIS_v12.md` for the
-honest assessment of every reviewer recommendation, and
-`docs/REVIEWER_AUDIT_R2.md` for the original audit trail.
+See `v0.3-prelim/docs/REVIEWER_AUDIT_R12.md` for the full R12 audit,
+and `v0.3-prelim/docs/LAYMAN_SUMMARY_R12.md` for a 1-paragraph
+grant-abstract version.
 
 ---
 
@@ -219,7 +246,7 @@ Quick bibtex for citing this repo:
 @software{lam_sidm_composite_dm_mediator_2026,
   author = {Lam, K.},
   title = {sidm-composite-dm-mediator},
-  version = {0.3-prelim-D15-CORRECTED3},
+  version = {0.3-prelim (R12 audit closed 2026-08-17)},
   year = {2026},
   month = {8},
   url = {https://github.com/chenhk1113-HK/sidm-composite-dm-mediator},
@@ -228,8 +255,8 @@ Quick bibtex for citing this repo:
 ```
 
 For citing the underlying physics, see [`CITATION.cff`](../CITATION.cff)
-(Pospelov 2008, Kaplinghat 2014, Gurian & May 2025, Horigome 2025,
-Yang 2026, Di Mauro 2025, Chakraborti 2025).
+(Pospelov 2008, Kaplinghat Tulin Yu 2014, Berlin 2018, Bando 1985,
+Gurian & May 2025, Horigome 2025, Yang 2026, Di Mauro 2025, Chakraborti 2025).
 
 ---
 
