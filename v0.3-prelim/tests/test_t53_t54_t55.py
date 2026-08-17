@@ -16,7 +16,16 @@ T55_RESULT = PROJECT_ROOT / "v0.3-prelim" / "data" / "results" / "t55_dark_matte
 
 
 class TestT53DarkRho:
-    """T53 — Dark rho meson."""
+    """T53 — Dark rho meson.
+
+    R12 P1-B (2026-08-17): replaced legacy interpolation
+        m_rho = 2 * sqrt(m_q * Lambda_dark + Lambda_dark^2)
+    with the KSFR relation:
+        m_rho^2 = 2 * g_rhopipi^2 * f_pi^2,
+    where f_pi = 0.46 * Lambda_dark (QCD-like) and
+    g_rhopipi^2 / (4 pi) = 2.93 (Bando+ 1985). The new formula
+    reproduces the QCD rho mass m_rho ~ 770 MeV at Lambda_dark ~ 200 MeV.
+    """
 
     def test_t53_importable(self):
         t53 = pytest.importorskip("t53_dark_rho_meson")
@@ -24,11 +33,26 @@ class TestT53DarkRho:
         assert hasattr(t53, "dark_pion_mass")
         assert hasattr(t53, "sigma_m_full")
 
-    def test_t53_pcac_quantitative(self):
-        """For m_q = 100 MeV, Lambda_dark = 200 MeV, m_rho should be ~ 500 MeV."""
+    def test_t53_ksfr_qcd_calibration(self):
+        """KSFR relation should reproduce m_rho ~ 770 MeV at Lambda_dark ~ 200 MeV.
+
+        This is the regression test for the legacy interpolation failure
+        (Reviewer 6 finding #4). The OLD formula returned:
+          m_rho_OLD = 2 * sqrt(m_q * Lambda_dark + Lambda_dark^2)
+        which for (m_q=0.1, Lambda=0.2) gave m_rho ~ 0.65 GeV (wrong;
+        claimed the heavy-quark limit was m_rho ~ 2 m_q but actually gave
+        m_rho ~ 2 sqrt(m_q Lambda)).
+
+        The KSFR formula gives m_rho ~ 0.79 GeV for Lambda_dark = 0.2 GeV,
+        matching the physical QCD rho mass (~ 770 MeV).
+        """
         t53 = pytest.importorskip("t53_dark_rho_meson")
-        m_rho = t53.dark_rho_mass(0.1, 0.2)
-        assert 0.4 < m_rho < 0.6, f"m_rho = {m_rho} GeV, expected ~0.49"
+        # At Lambda_dark = 0.2 GeV (QCD), KSFR predicts m_rho ~ 770 MeV
+        m_rho = t53.dark_rho_mass(0.5, 0.2)  # m_q=0.5 is arbitrary; KSFR independent of m_q
+        assert 0.7 < m_rho < 0.9, (
+            f"m_rho at Lambda_dark=0.2 GeV = {m_rho*1000:.0f} MeV; "
+            f"expected ~770 MeV (QCD-like calibration). KSFR relation broken."
+        )
 
     def test_t53_dark_pion_lighter_than_rho(self):
         """Dark pion should be lighter than dark rho (PCAC)."""
@@ -38,6 +62,23 @@ class TestT53DarkRho:
         m_rho = t53.dark_rho_mass(m_q, Lambda_dark)
         m_pi = t53.dark_pion_mass(m_q, Lambda_dark)
         assert m_pi < m_rho, f"m_pi = {m_pi} should be < m_rho = {m_rho}"
+
+    def test_t53_lattice_path_available(self):
+        """R12 P1-B: t53 should expose a lattice-informed dark_rho_mass_lattice
+        function that delegates to t53b_lattice_input when available.
+        """
+        t53 = pytest.importorskip("t53_dark_rho_meson")
+        assert hasattr(t53, "dark_rho_mass_lattice"), (
+            "t53 must expose dark_rho_mass_lattice for the R12 P1-B "
+            "lattice-informed KSFR path"
+        )
+        # Lattice path at (m_q=0.1, Lambda_dark=0.2, SU(3) N_f=3): use QCD
+        # fallback ratio 8.36 + f_pi ~ Lambda_dark => m_rho ~ 1.67 GeV.
+        m_rho_lat = t53.dark_rho_mass_lattice(0.1, 0.2, N_dc=3, N_f=3)
+        assert 1.0 < m_rho_lat < 2.5, (
+            f"m_rho_lattice at (Lambda=0.2, N_f=3) = {m_rho_lat:.3f} GeV; "
+            "expected ~1.67 GeV (8.36 * Lambda_dark, QCD fallback ratio)"
+        )
 
 
 class TestT54DarkQuarkFit:
