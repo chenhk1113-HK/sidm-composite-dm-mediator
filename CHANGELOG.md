@@ -7,6 +7,88 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [R12] — 2026-08-17
+
+### Six-reviewer audit closure
+
+Six external reviewers (`six reviews.docx`) sent an audit on 2026-08-14.
+All 7 of Reviewer 6's specific findings were verified at the cited line numbers
+and fixed across 11 commits. 22 new regression tests were added; project
+test suite went from ~280 passing to **359 passing, 4 skipped, 3 pre-existing
+unrelated failures**.
+
+### Fixed
+
+**P0-A — t40 Yukawa `(1+1/2s)` blowup.**
+The legacy `sigma_T_with_m_low_correction` function applied a fictitious
+factor that blew up to ~10⁶ at low velocity. Removed; σ/m at v=0.1 km/s
+went from 1.95×10⁶ cm²/g to 3.48 cm²/g (Born plateau).
+
+**P0-B — t41 sign-flip.** `t41.derived_a` was missing the minus sign
+promised by its docstring, returning negative values when the data
+preferred positive. Post-fix: Yukawa a = +0.186 at MAP (was −1.08).
+The "1.3σ Yukawa tension" was a sign-flip artifact; post-fix
+tension = 0.75σ (below 1.0 threshold = no significant tension).
+
+**P0-C — t55 honest rename.** `t55_boltzmann_relic.py` imported
+`scipy.integrate.odeint` but never called it; renamed to
+`t55_wimp_relic_calibration.py`; dead import removed.
+
+**P0-D — dSph bimodal → Horigome+ upper limit.** Three near-identical
+surrogates (`channels_v03.loglike_dsph_v03`, `t28.loglike_dsph_published_style`,
+`sidm_velocity_dependent.loglike_dsph_published`) had a bimodal-with-dip
+encoding that favored σ/m ~ 10 cm²/g. Actual Horigome+ 2025 paper
+(arXiv:2503.13650) gives a 95% CL upper limit at σ/m < 0.2 cm²/g.
+Replaced with half-Gaussian up to 0.2 cm²/g; dSph log L at σ/m=10:
+0 (favored) → −4.53 (strongly disfavored).
+
+**P1-A — Benchmark A declared canonical.** Added §9 to
+`docs/DARK_SECTOR_LAGRANGIAN.md` declaring the composite-pion + elementary-A'
+benchmark. Composite mediator (B) and SIMP (C) deferred to v0.5+.
+
+**P1-B — KSFR + lattice path for dark-ρ mass.** Replaced legacy
+`m_ρ = 2√(m_q Λ + Λ²)` with KSFR relation `m_ρ² = 2 g_ρππ² f_π²`
+(Bando+ 1985, calibrated to give m_ρ = 0.79 GeV at Λ=0.2 GeV).
+Wired `t53b_lattice_input.m_rho_over_f_pi` as the lattice-informed path.
+
+**P1-C — Dark-photon portal mappings.** Fixed two dimensionally-inconsistent
+mappings in T39 and T41 (`σ_SI = ε·σ/m` was cm²/g not cm²; `σ_v = α·σ/m²`
+was cm⁴/g² not cm³/s). Replaced with proper Kaplinghat+Tulin+Yu 2014
+and Berlin+ 2018 forms. T39's `sigma_SI_from_dark_photon` and
+`sigma_v_from_dark_photon` helpers added.
+
+### Re-run of T41 with P0/P1 applied
+
+- log Z = −213.7 ± 0.24 (was −29.45; LZ now bites properly)
+- MAP: m_A' = 336 MeV, m_χ = 398 GeV, g_chi = 0.72
+- Derived at MAP: σ/m_0 = 0.066 cm²/g, a = +0.186
+- Tension vs. data-preferred a = +0.94: |Δ| = 0.75 (no significant tension)
+- Verdict: "NO TENSION (post-P0-B)"
+
+### Testability infrastructure (added in service of P0-D)
+
+- `tests/conftest.py`: prepends v0.1-prelim/code (halo_profiles,
+  sparc_loader) and v0.3-prelim/code to sys.path before pytest
+  collection. Required because pytest's auto-prepend only adds
+  v0.3-prelim/code, but v0.1-prelim/code hosts the halo-profile
+  module.
+- Lazy `halo_profiles` / `sparc_loader` imports in `channels_v03.py`
+  (via `_halo_module()` / `_sparc_module()`) and `sidm_velocity_dependent.py`
+  (via `_halo_module()`). Previously top-level, blocking pytest
+  collection on Windows.
+
+### Documentation additions
+
+- `v0.3-prelim/docs/REVIEWER_AUDIT_R12.md` (11 KB) — full audit
+- `v0.3-prelim/docs/LAYMAN_SUMMARY_R12.md` (110 lines) — honest layman
+- `v0.3-prelim/docs/DARK_SECTOR_LAGRANGIAN.md` §9 (P1-A)
+- R12 closure notice in `docs/findings_2026_SIDM_papers.md`
+- R12 addendum in `v0.3-prelim/docs/FINDINGS.md`
+- R12 audit notice in `v0.3-prelim/docs/MEDIATOR_DETECTION_SYNTHESIS_v12.md`
+- Header notices pointing to R12 in `docs/REVIEWER_AUDIT_R{2,9,10,11}.md`
+- 4 new methodological refs in `docs/DATA_SOURCES.md`
+  (Kaplinghat+Tulin+Yu 2014 PRD 89 035009; Bando+ 1985; Berlin+ 2018)
+
 ## [v0.3-prelim-D15-CORRECTED3] — 2026-08-12
 
 ### Fixed — All 4 actionable fixes from review5.docx applied
