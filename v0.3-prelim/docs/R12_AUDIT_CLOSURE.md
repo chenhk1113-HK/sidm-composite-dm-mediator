@@ -282,6 +282,184 @@ of magnitude smaller** than naive dimensional-analysis expectations for
 a sub-MeV dark photon (~10⁻³ to 10⁻⁵). Any UV completion of this
 benchmark must explain that suppression.
 
+## 7.6 Layman's complete walk-through
+
+This section is for readers who want a single coherent narrative of the
+whole project without having to assemble it from the technical sections
+above. **If you read only one section of this document, read this one.**
+
+### What's in this repo, in plain English
+
+This is a personal research project that asks one question: **"What if
+dark matter is made of composite particles that bump into each other
+through a 'dark force' — and can we squeeze that idea through every
+observation we have at once?"**
+
+It's a fitting pipeline (a statistical tool, not a detector). It takes
+published data from six different kinds of dark-matter observations and
+tries to find one set of numbers that fits all of them without
+contradiction. Think of it as six witnesses describing the same suspect
+from six angles — the project is asking whether the suspect's profile
+is consistent across all six stories.
+
+### What the project actually does
+
+It looks at a specific theory called "Benchmark A": dark matter is made
+of composite particles (think "dark protons and dark pions," analogous
+to ordinary matter) that talk to each other by exchanging a dark photon
+(a photon that only exists in the dark sector). The dark photon is
+"secluded" — it almost never talks to ordinary light or matter, which is
+why dark matter has been so hard to detect.
+
+The pipeline feeds in real data from:
+
+- **Dwarf galaxies (dSph)** — small galaxies whose dark-matter halos
+  constrain how strongly it self-interacts
+- **Ultra-faint dwarfs (UFD)** — even smaller systems
+- **The Bullet Cluster** — a famous galaxy-cluster collision that
+  constrains dark-matter self-interaction
+- **SPARC galaxy rotation curves** — how fast stars orbit in ~175
+  spiral galaxies
+- **LZ direct detection** — the LUX-ZEPLIN underground experiment,
+  which has not (yet) seen dark-matter hits
+- **Fermi gamma-ray dwarf searches** — looking for dark-matter particles
+  annihilating into gamma rays
+
+It then uses Bayesian nested sampling (a fancy statistical technique)
+to find the values of five physical knobs — σ/m (how strongly dark
+matter scatters itself), a (how that scattering fades with velocity),
+m_φ (the dark photon's mass), m_χ (the dark-matter particle's mass),
+and ε (the dark photon's tiny coupling to ordinary light) — that best
+fit everything simultaneously.
+
+### The major findings, in plain language
+
+**Finding 1 — The "boring" reading: composite SIDM is actually
+consistent with everything, if the dark force is incredibly feeble.**
+
+After all the dust settles, the joint fit says there is a sweet spot
+where all six observations roughly agree. The numbers that come out are
+roughly:
+
+- Dark-matter mass: **~15 GeV** (about 15 times heavier than a proton —
+  heavy but not absurdly so)
+- Dark photon (mediator) mass: **~27 MeV** (very light, about 27 times
+  heavier than an electron)
+- Self-scattering strength (σ/m): **about 0.07 cm²/g** at galactic scales
+- Velocity slope (a): small and positive (**~+0.2**), meaning the
+  scattering gets mildly weaker as the particles move faster
+- Coupling to ordinary matter (ε): **about 10⁻³⁵** — absurdly, ridiculously
+  small
+
+In ordinary physics language: dark matter would be made of "dark pions"
+and "dark baryons" that bounce off each other via a very light "dark
+photon," and that dark photon has essentially zero coupling to the
+regular photon. That's a viable-sounding picture. **It is not a
+discovery** — it's one corner of the theory space that survives all
+the tests.
+
+**Finding 2 — The actually interesting finding: the kinetic mixing ε
+has to be 30+ orders of magnitude smaller than people naively expect.**
+
+This is the most striking quantitative result. Naive dimensional
+analysis says a sub-MeV dark photon that kinetically mixes with the
+regular photon should have ε somewhere in the range 10⁻³ to 10⁻⁵. The
+pipeline says that, to fit all the data simultaneously (especially LZ's
+null result), ε has to be closer to 10⁻³⁵ — about 10³⁰ times smaller
+than the naive expectation.
+
+Why this matters: Any future theoretical model that tries to build
+composite dark matter with a light dark photon has to explain **why** the
+mixing is so incredibly tiny. This is a real bottleneck, and the
+project quantifies it precisely for the first time for this specific
+construction.
+
+**Finding 3 — The velocity-slope "tension" was a bug, not a real result.**
+
+Earlier versions of this same project reported a "1.3σ tension" — a
+small statistical mismatch between two different ways of measuring how
+the dark-matter self-scattering depends on velocity. The project then
+self-audited (the R12 audit, completed 2026-08-17) and found that the
+"tension" was caused by a sign error in the velocity-index formula.
+Once the sign is fixed, the same data says the two methods agree within
+0.75σ — which is "no real disagreement" in statistics. So one of the
+project's own earlier "negative findings" is no longer true.
+
+**Finding 4 — The dSph upper limit kills high cross-section values.**
+
+A separate, smaller bug: the pipeline had been using a "bimodal" fake
+likelihood for dwarf-galaxy constraints that effectively allowed high
+σ/m values. The real Horigome+ 2025 paper actually publishes a strict
+95% upper limit of σ/m < 0.2 cm²/g from dwarf galaxies. Once the real
+limit is used, the high-σ/m region is strongly disfavored (dSph
+log-likelihood drops by 4.5, which is a lot). This sharpens the
+picture: in the realistic data, dark matter can't self-scatter *too*
+strongly, or dwarf galaxies wouldn't look the way they do.
+
+**Finding 5 — Methodological lesson: three independent bugs all produced
+wrong physics.**
+
+The audit found three separate bugs:
+
+1. A sign error in the velocity-slope calculation
+2. A units mistake that reported cm²/g when it should have been cm²
+   (off by ~10⁷² in the direct-detection cross-section)
+3. A "surrogate likelihood" that didn't match the paper it claimed to
+   represent
+
+Each one individually would have led to a wrong scientific conclusion.
+None were caught by the project's own 280 internal tests. They were only
+caught by external reviewers reading the code line by line. The lesson:
+internal tests aren't enough for joint-fit pipelines that touch this
+many separate physics assumptions. The 22 new regression tests added
+in R12 lock in the fixes and the project explicitly publishes the code
+so other groups can check it.
+
+### What the project is honest about not claiming
+
+This is unusually self-aware for a personal project. The README, the
+closure document, and the EXTRACT all say clearly:
+
+- This is not a measurement of dark matter at any detector.
+- The dark-matter mass and dark-photon mass come from a statistical
+  fit to one benchmark parametrization — they are not "discovered" values.
+- The relic density calculation is a calibration, not a full Boltzmann
+  solver (so it does not derive the dark-matter abundance from first
+  principles).
+- The dark-rho meson mass formula uses KSFR + lattice ratios as QCD
+  analogs, not a real lattice calculation of the actual dark sector.
+- The SPARC channel uses a saturation score rather than a per-galaxy
+  likelihood.
+- It does not resolve the S8 / H0 cosmological tensions.
+- The pre-R12 "1.3σ tension" was a bug; the pre-R12 σ_SI = 10⁻¹¹⁸ cm²
+  was wrong units.
+
+### The version timeline
+
+- **v0.1-prelim** — SPARC rotation-curve fits alone
+- **v0.2-prelim** — adds dwarf-galaxy channel scaffolding
+- **v0.3-prelim** — the main body of work; includes everything and the
+  R12 audit closure (2026-08-17)
+- **Mediator_Detection v1–v12** — the iterative reports of the
+  mediator-detection feasibility, embedded in v0.3-prelim
+
+The R12 audit (closed three days ago, on 2026-08-17) is the most recent
+update. It is essentially the project correcting its own earlier mistakes
+after a six-reviewer external audit.
+
+### Net read
+
+If you want a one-sentence summary: **this project shows that a "dark
+matter = composite particles, connected by a very light dark photon that
+barely talks to ordinary matter" picture can survive all the
+astrophysical and direct-detection data we have, but only if the dark
+photon's coupling to ordinary matter is ~30 orders of magnitude smaller
+than people usually expect — and the project spent the last few days of
+its own audit cleaning up three of its own bugs to make sure that
+conclusion is actually right rather than an artifact.** The headline
+number is real but conditional; the bottleneck (the 10⁻³⁵ ε) is the part
+future theory has to grapple with.
+
 ## 8. Bottom line for the field
 
 This work does not rewrite textbooks. It:
