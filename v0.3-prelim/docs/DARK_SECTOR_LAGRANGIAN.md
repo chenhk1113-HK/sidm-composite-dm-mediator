@@ -412,3 +412,50 @@ This Lagrangian is implemented across the following files:
 - SIDM literature: Tulin+ Yu 2018 (RMP 90, 015004), Kaplinghat+ 2016 (RMP), Roberts+ 2024.
 - Dark-rho phenomenology: the HLS formulation is from Bando+ 1985; the HLS-as-SIDM-mediator picture is a recent development (e.g., Fujita+ 2024, Cline+ 2024).
 - Lagrangian review: this document was prepared with reviewer-audit assistance (Hermes M3 + Doubao + Qwen 3.8 Max). Numerical values are from the project codebase; theoretical content is from the cited literature.
+---
+
+## §9 Benchmark choice (R12 P1-A, 2026-08-17)
+
+The dark-sector code in this repo is being run with **multiple possible microscopic interpretations** of the mediator. Reviewer 6 (six reviews.docx, 2026-08-17) flagged this as ambiguous and recommended choosing ONE benchmark per fit. This section declares the canonical choice for v0.3-prelim.
+
+### 9.1 The three benchmarks (after Reviewer 6)
+
+| Benchmark | Matter candidate | Light mediator | Portal | Status |
+|-----------|------------------|----------------|--------|--------|
+| **A** (canonical for v0.3-prelim) | Stable dark pion, $\pi_d$, with exact $SU(N_{\rm df})_V$ unbroken | Elementary dark photon $A'$ via kinetic mixing $-\varepsilon F^{\mu\nu}_D B_{\mu\nu}/2$ | Elementary $\varepsilon$ | **Chosen for v0.3-prelim** |
+| B (deferred) | SIMP dark pion | None (3→2 cosmology) | Higgs portal | Not implemented |
+| C (deferred) | Composite dark pion | Composite $\rho_d$ resonance | HLS $\rho$–$\gamma$ mixing | Not implemented (requires lattice calibration) |
+
+### 9.2 Why Benchmark A
+
+1. **Clean velocity-dependent SIDM.** A composite dark baryon (or symmetry-protected pion) + an elementary $A'$ mediator gives a well-defined transfer cross section $\sigma_T(v)$ via the standard Yukawa form (Tulin+Yu 2018), which the project already implements in `t40_yukawa_sigma_m.py`.
+
+2. **Recastable detection signals.** The kinetic-mixing parameter $\varepsilon$ is the canonical portal operator studied by dark-photon experiments (NA64, LZ recast, beam dumps, BBN $\Delta N_{\rm eff}$, supernova cooling). The mapping $\varepsilon \to \sigma_{\rm SI}$ is documented in `t30_lz_real_posterior.py`.
+
+3. **No lattice requirement at this stage.** Benchmark B's 3→2 cosmology and Benchmark C's composite-rho resonance both require external non-perturbative input. Benchmark A's elementary mediator is fully defined by $(\varepsilon, m_{A'})$ plus the dark Yukawa coupling $g_\chi$.
+
+### 9.3 What Benchmark A explicitly removes
+
+- The claim that the dark $\rho_d$ (composite) is the mediator. In Benchmark A the **mediator is the elementary $A'$**, and the dark $\rho_d$ only appears in the dark-sector mass spectrum (if it is in scope at all). The joint fit's $m_\phi$ parameter refers to $m_{A'}$, NOT to the dark-$\rho_d$ mass.
+
+- The "composite mediator as elementary portal" conflation that Reviewer 6 caught at $t39:\loglike\_dsph\_v03$ and $t41:\sigma\_m\_at\_v\_yukawa$. Under Benchmark A these are unambiguous: the dSph constraint applies to the Yukawa transfer cross section at $m_{A'}$ (NOT to $m_{\rho_d}$); the joint fit's $m_\phi$ is $m_{A'}$.
+
+### 9.4 What this changes downstream
+
+For the v0.3-prelim pipeline:
+
+- `t40_yukawa_sigma_m.py` (P0-A already fixed): the $m_\phi$ in this file is $m_{A'}$ — no change needed.
+- `t41_mediator_mass_joint_fit.py` (P0-B already fixed): $m_\phi$ is $m_{A'}$ — no change needed.
+- `t53_dark_rho_meson.py` (P1-B will fix): the dark-$\rho_d$ is **NOT a mediator in Benchmark A**; it is at most a separate sector mass. The legacy code uses $m_{\rho_d} \approx m_\phi$ as a phenomenological short-cut, which is inappropriate under Benchmark A.
+- `t54_dark_quark_joint_fit.py`: $\log m_q$, $\log \Lambda_d$, $\log m_\chi$ are still well-defined as parameters describing the composite matter candidate — they just don't determine the mediator.
+
+The D15-CORRECTED3 results in `data/results/*.json` will be re-run with the Benchmark A interpretation after P1-B lands.
+
+### 9.5 Switching benchmarks
+
+Switching to Benchmark C requires:
+1. Lattice calibration of $m_{\rho_d}/\Lambda_d$, $f_\pi/\Lambda_d$, $g_{\rho\pi\pi}$ as functions of $(N_c, N_f)$ — multi-month project.
+2. Replacing the elementary $A'$ portal with an HLS-mixing operator: $-\xi \rho_{\mu\nu} F^{\mu\nu}_{\rm SM}/2$.
+3. Re-deriving $\sigma_T(v)$ for the composite $\rho_d$ mediator with form-factor suppression.
+
+This is deferred to v0.5+ and should not be attempted in v0.3-prelim.
