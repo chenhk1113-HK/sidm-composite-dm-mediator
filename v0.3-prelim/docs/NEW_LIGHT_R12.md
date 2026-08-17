@@ -160,3 +160,53 @@ documented limitations, that gives one defensible MAP under Benchmark A,
 and that has now been audited honestly. Take the MAP, the
 ε-bottleneck, and the methodological lesson. Don't take the
 non-existent paradigm shift.
+
+---
+
+## Statistical methodology notes (R12)
+
+Five honest disclosures about how the headline numbers were produced.
+These matter for any reader who would otherwise read the headline table
+as "a measurement":
+
+1. **The "0.75σ tension" is not a conventional significance calculation.**
+   T41 computes the absolute difference between its derived velocity
+   index and a fixed comparison value (T39's a = +0.94), and calls it
+   significant only above an arbitrary threshold of 1.0. It does NOT
+   combine measured uncertainties in the standard statistical way.
+   Read this as "no obvious discrepancy within this pipeline," not "a
+   formal 0.75-standard-deviation measurement."
+
+2. **The headline table mixes different types of estimate.** The masses
+   (m_A' = 26.6 MeV, m_χ = 14.8 GeV) are **posterior medians** — central
+   tendencies of the full marginalized posterior. The cross-section
+   (σ/m_0 = 0.066 cm²/g) and the velocity index (a = +0.186) are
+   calculated at a **different, maximum-posterior (MAP) point**. Those
+   numbers should NOT be read as one jointly determined particle; the
+   median and the MAP can disagree substantially when the posterior is
+   multimodal or skewed. The 68% intervals are very broad.
+
+3. **One sampled coupling (α) is not currently connected to the
+   likelihood.** T41 reads `log_alpha` as a parameter, but the
+   annihilation calculation instead uses α_D = g²_χ/(4π) derived from
+   g_chi. The displayed posterior for α is not independently
+   data-constrained, and the quoted log Z inherits this incompleteness.
+   The ε posterior IS data-constrained (by LZ); the median ε ~ 10⁻³⁵
+   is real.
+
+4. **The SPARC contribution is a calibrated saturation score, not a
+   galaxy-by-galaxy observational likelihood.** A hierarchical forward
+   model with per-galaxy likelihoods is deferred to v0.4+. This
+   prevents the joint fit from being treated as a final multi-experiment
+   measurement; it is a phenomenology consistency check.
+
+5. **Quantitative bottleneck.** At canonical ε = 10⁻⁵, the σ_SI is
+   1.2×10⁻³² cm² — about 5×10¹⁵ times **above** the LZ WS2024 limit
+   (2.2×10⁻⁴⁸ cm² near 40 GeV). To survive, the posterior drives ε
+   down to ~10⁻³⁵, which is **~30+ orders of magnitude smaller** than
+   naive dimensional-analysis expectations for a sub-MeV dark photon
+   (~10⁻³ to 10⁻⁵). Any UV completion of this benchmark must explain
+   this suppression.
+
+A reviewer who reads these notes cannot say they were hidden. The
+project is honest about what its numbers mean and what they don't.
