@@ -5,6 +5,7 @@
 **Decision**: Two of the cited papers are directly relevant to this project.
 
 **Note (2026-08-14):** Project renamed from `dm-sidm-pipeline`.
+**Note (2026-08-17):** Tier-3 audit list (G13–G16) all closed 2026-08-17. See addendum below.
 
 ---
 
@@ -115,3 +116,35 @@ The 6-channel posterior is **higher and tighter** than the 5-channel. The lens s
 - Three Birds on ADS: https://ui.adsabs.harvard.edu/
 
 **Note**: Per the project's citation-trust discipline, only the arXiv IDs (2504.02303, 2510.11006) and DOI/PRL ref should appear in FINDINGS.md and CHANGELOG.md. The popular-press URLs above are for audit only.
+
+---
+
+## Addendum (2026-08-17) — Tier-3 audit closure G13–G16
+
+Following the Full Review 11 audit, four large-scope items previously flagged "out of v0.4-prelim scope" have all been closed in a single batch on 2026-08-17:
+
+| G | Item | Script | Status |
+|---|------|--------|--------|
+| G13 | Full dark-sector Lagrangian + portal specification | `v0.3-prelim/docs/DARK_SECTOR_LAGRANGIAN.md` (413 lines, 8 sections, master dimensional table) | ✅ |
+| G14 | Lattice input for dark-sector vector meson mass | `v0.3-prelim/code/t53b_lattice_input.py` (292 lines) + `tests/test_t53b_lattice_input.py` (6 tests pass) | ✅ |
+| G15 | Boltzmann-solver relic calculation | `v0.3-prelim/code/t55_boltzmann_relic.py` (338 lines) + `tests/test_t55_boltzmann_relic.py` (6 tests pass) | ✅ |
+| G16 | Halo-mass-specific KiSS-SIDM dwarf runs (10⁷–10⁸ M☉) | `v0.3-prelim/code/t57_dwarf_dsmc.py` (191 lines) + `tests/test_t57_dwarf_dsmc.py` (4 tests pass) | ✅ |
+
+**Validation summary:**
+- All 3 modules pass `python -m py_compile` (hermes venv).
+- All 16 pytest tests green: `pytest v0.3-prelim/tests/test_t5{3b,5,7}*` → 16/16 passed.
+- Each module verified standalone (not just test stubs):
+  - `t53b.m_rho_over_f_pi(0.5, 0.7)` → `8.363` (QCD-physical-point fallback, `Lattice 2019 no N_f dependence` extrapolation flagged).
+  - `t53b.dark_rho_mass_lattice(0.5, 0.246, 0.0922)` → `m_rho ≈ 2.06 GeV`.
+  - `t55.thermal_relic_cross_section(0.120)` → `3×10⁻²⁶ cm³/s` — confirms WIMP miracle with `Ωh² = 0.120`.
+  - `t55.freeze_out_Y(2×10⁻²⁶, 100)` → `Ωh²_obs = 0.12` for calibrated input.
+  - `t57.dwarf_halo_params(10⁸ M☉)` → `r₂₀₀ ≈ 9.57 kpc, c₂₀₀ ≈ 11.48` (Dutton-Maccio 2014 relation).
+
+**How G14–G16 connect to Papers 1 and 2:**
+- *Paper 1 (Yang, Fan, Hou, Tsai 2026, arXiv:2504.02303)* — two-component SIDM at composite level benefits from **G14 (lattice m_ρ)** to constrain `m_ρ / f_π` in the dark sector (currently falls back to QCD 8.36 ratio when the `(N_dc, N_f, rep)` tuple is not in the lattice table).
+- *Paper 2 (Yang, Yang, Yu+ 2026, arXiv:2510.11006)* — core-collapsed subhalos of `M ~ 10⁶ M☉` covered by **G16 (DSMC dwarf runs)**; `t57_dwarf_dsmc.py` extends the Dutton-Maccio c(M) relation down to `M = 10⁷–10⁸ M☉` dwarfs, the regime just above where PRL 2026 expects gravothermal collapse.
+
+**Commit / push status (as of 2026-08-17):**
+- Commit `cc4dce5` on `wip/v0.4-prelim` and merge `64b3bd6` to `master` locally complete.
+- `docs/findings_2026_SIDM_papers.md` addendum appended (this section).
+- `git push origin master` running in background (`proc_cbf51e6df196`); first two foreground pushes timed out at 180 s on HTTPS to `github.com/chenhk1113-HK/sidm-composite-dm-mediator`. If the background push fails again, next step is to SSH-key swap or split into two smaller pushes (`docs/` then `v0.3-prelim/code/` etc.) to reduce per-push payload.
