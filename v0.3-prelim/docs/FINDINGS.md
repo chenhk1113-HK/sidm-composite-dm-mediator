@@ -608,7 +608,10 @@ The R11-era headline numbers in this doc are **superseded**:
 
 ### See also
 
+- `v0.3-prelim/docs/R12_AUDIT_CLOSURE.md` — **the consolidated R12 summary
+  doc** (combines the R12 addendum in this file with `LAYMAN_SUMMARY_R12.md`
+  and `NEW_LIGHT_R12.md` into one structured document). Use this as the
+  canonical post-R12 reference.
 - `v0.3-prelim/docs/REVIEWER_AUDIT_R12.md` — full R12 audit with all 7 findings at cited line numbers.
-- `v0.3-prelim/docs/LAYMAN_SUMMARY_R12.md` — 1-paragraph grant-abstract version.
 - `docs/REVIEWER_AUDIT_R11.md` — R11 audit (still useful as a historical record of what was being claimed before R12).
 - `README.md` (top-level) — updated headline table.

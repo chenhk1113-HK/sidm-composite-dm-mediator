@@ -1,5 +1,12 @@
 # Does this project shed new light on existing dark-matter research?
 
+> **⚠️ SUPERSEDED (2026-08-17):** This document is preserved for archival
+> purposes. The **consolidated** post-R12 summary is at
+> `R12_AUDIT_CLOSURE.md` in this directory. The consolidated doc combines
+> the content of this file, `LAYMAN_SUMMARY_R12.md`, and the R12
+> addendum in `FINDINGS.md` into a single structured document. The
+> original three docs are kept in git history for reference.
+
 **Short answer:** It does not deliver brand-new physical evidence for dark
 matter, but it adds meaningful, actionable clarity to an existing crowded
 field — mostly by correcting its own earlier mistaken conclusions and

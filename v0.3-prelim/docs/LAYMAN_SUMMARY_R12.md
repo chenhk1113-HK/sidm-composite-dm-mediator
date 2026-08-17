@@ -1,5 +1,12 @@
 # Layman summary — what this project actually does (R12)
 
+> **⚠️ SUPERSEDED (2026-08-17):** This document is preserved for archival
+> purposes. The **consolidated** post-R12 summary is at
+> `R12_AUDIT_CLOSURE.md` in this directory. The consolidated doc combines
+> the content of this file, `NEW_LIGHT_R12.md`, and the R12 addendum in
+> `FINDINGS.md` into a single structured document. The original three
+> docs are kept in git history for reference.
+
 **Repo:** `sidm-composite-dm-mediator` @ GitHub `25a062d` (master)
 **Date:** 2026-08-17
 **Status:** v0.3-prelim, post-R12 honest-claim audit closed

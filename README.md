@@ -16,7 +16,8 @@
 > **R12 closure (2026-08-17):** Six AI reviewers sent an audit (`six reviews.docx`).
 > All 7 of Reviewer 6's specific findings were verified at the cited line numbers
 > and fixed. 4 P0 (correctness) + 3 P1 (coherence) fixes shipped as 8 commits.
-> See `v0.3-prelim/docs/REVIEWER_AUDIT_R12.md` and `v0.3-prelim/docs/LAYMAN_SUMMARY_R12.md`.
+> See `v0.3-prelim/docs/R12_AUDIT_CLOSURE.md` (consolidated) and
+> `v0.3-prelim/docs/REVIEWER_AUDIT_R12.md`.
 
 ---
 
@@ -120,14 +121,14 @@ Five honest takeaways a reader should leave with:
 │   ├── DATA_SOURCES.md                     ← single authoritative list of all data + citations
 │   ├── MATHEMATICS.md                      ← mathematical appendix (formulas, derivations)
 │   ├── TUTORIAL.md                         ← end-to-end tutorial (fresh-checkout → reproduce T21)
-│   ├── FINDINGS.md (→ v0.3-prelim/docs/)   ← full results synthesis
+│   ├── FINDINGS.md (→ v0.3-prelim/docs/)   ← full results synthesis (R12 addendum superseded by R12_AUDIT_CLOSURE.md)
 │   ├── REVIEWER_AUDIT_R2.md                ← audit trail from the R2 external review
 │   ├── REVIEWER_AUDIT_R9.md                ← audit trail from the Full Review 9 review (2026-08-14)
 │   ├── REVIEWER_AUDIT_R12.md (→ v0.3-prelim/docs/)   ← R12 audit closure (six reviews.docx, 2026-08-17)
-│   ├── LAYMAN_SUMMARY_R12.md (→ v0.3-prelim/docs/)   ← honest layman summary (R12)
+│   ├── R12_AUDIT_CLOSURE.md (→ v0.3-prelim/docs/)    ← consolidated R12 summary (supersedes LAYMAN_SUMMARY_R12.md and NEW_LIGHT_R12.md)
 │   └── findings_2026_SIDM_papers.md        ← 2026 SIDM literature context (Yang+ 2024, Yang+ 2026)
 ├── EXTRACT.md                              ← 1,000-word rationale + key findings + limitations
-│                                            (note: R12 has new findings; see LAYMAN_SUMMARY_R12.md for the updated layman framing)
+│                                            (note: R12 has new findings; see R12_AUDIT_CLOSURE.md for the consolidated summary)
 │
 ├── tests/                                 ← top-level test files
 ├── v0.1-prelim/                           ← v0.1 work (SPARC single-galaxy + joint fits)
@@ -143,7 +144,7 @@ Five honest takeaways a reader should leave with:
     ├── data/external_data/lz_2024/        ← ingested LZ WS2024 posterior (HEPData sourced)
     ├── docs/                              ← MEDIATOR_DETECTION_SYNTHESIS_v{1..12}, FINDINGS.md,
 │   │                                            DARK_SECTOR_LAGRANGIAN.md §9 (Benchmark A),
-│   │                                            REVIEWER_AUDIT_R12.md, LAYMAN_SUMMARY_R12.md
+│   │                                            REVIEWER_AUDIT_R12.md, R12_AUDIT_CLOSURE.md
     ├── plots/                             ← Cross-validation + publication plots
     └── tests/                             ← 39 v0.3-specific test files
 ```
@@ -263,8 +264,8 @@ Honest scope, per the 2026-08-17 R12 six-reviewer audit:
   ε ≪ 10⁻¹⁰ part of the posterior.
 
 See `v0.3-prelim/docs/REVIEWER_AUDIT_R12.md` for the full R12 audit,
-and `v0.3-prelim/docs/LAYMAN_SUMMARY_R12.md` for a 1-paragraph
-grant-abstract version.
+and `v0.3-prelim/docs/R12_AUDIT_CLOSURE.md` for the consolidated
+R12 summary (the canonical post-R12 reference).
 
 ## Statistical methodology notes (R12)
 

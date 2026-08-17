@@ -81,13 +81,24 @@ and Berlin+ 2018 forms. T39's `sigma_SI_from_dark_photon` and
 
 - `v0.3-prelim/docs/REVIEWER_AUDIT_R12.md` (11 KB) — full audit
 - `v0.3-prelim/docs/LAYMAN_SUMMARY_R12.md` (110 lines) — honest layman
+  (**superseded by R12_AUDIT_CLOSURE.md** on 2026-08-17; preserved for archival)
+- `v0.3-prelim/docs/NEW_LIGHT_R12.md` (211 lines) — new-light framing
+  (**superseded by R12_AUDIT_CLOSURE.md** on 2026-08-17; preserved for archival)
+- `v0.3-prelim/docs/R12_AUDIT_CLOSURE.md` (~22 KB) — **the consolidated
+  R12 summary doc** (combines the three prior docs above plus the R12
+  addendum in FINDINGS.md into one structured document). The canonical
+  post-R12 reference as of 2026-08-17.
 - `v0.3-prelim/docs/DARK_SECTOR_LAGRANGIAN.md` §9 (P1-A)
 - R12 closure notice in `docs/findings_2026_SIDM_papers.md`
-- R12 addendum in `v0.3-prelim/docs/FINDINGS.md`
+- R12 addendum in `v0.3-prelim/docs/FINDINGS.md` (kept for historical record;
+  pointer added at top pointing to R12_AUDIT_CLOSURE.md)
 - R12 audit notice in `v0.3-prelim/docs/MEDIATOR_DETECTION_SYNTHESIS_v12.md`
 - Header notices pointing to R12 in `docs/REVIEWER_AUDIT_R{2,9,10,11}.md`
 - 4 new methodological refs in `docs/DATA_SOURCES.md`
   (Kaplinghat+Tulin+Yu 2014 PRD 89 035009; Bando+ 1985; Berlin+ 2018)
+- Statistical methodology notes (5-point disclosure section) added to
+  README, LAYMAN_SUMMARY_R12, and NEW_LIGHT_R12 — all three now point to
+  R12_AUDIT_CLOSURE.md as the canonical reference
 
 ## [v0.3-prelim-D15-CORRECTED3] — 2026-08-12
 
