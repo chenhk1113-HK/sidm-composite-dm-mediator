@@ -95,12 +95,29 @@ def sigma_m_at_v_yukawa(v_kms: float, m_phi_MeV: float, m_chi_GeV: float,
 
 
 def derived_a(m_phi_MeV: float, m_chi_GeV: float, g_chi: float) -> float:
-    """a = -d log(sigma/m) / d log(v) at v_ref."""
+    """Velocity power-law index a (channels_v03 convention).
+
+    CONVENTION (channels_v03.py:34): sigma/m(v) = sigma_m_0 (v / V_REF)**(-a),
+    so positive a means FALLING sigma/m with velocity. Numerically:
+
+        a = -d log(sigma/m) / d log(v) |_(v_ref)
+
+    computed as a centred finite-difference in log space at v=50, 200 km/s:
+
+        a = -(log sigma(50) - log sigma(200)) / (log 50 - log 200)
+
+    NOTE (R12 P0-B): the previous line-103 implementation was MISSING the
+    leading minus sign and produced numbers OPPOSITE in sign to the
+    channels_v03 convention. For (m_phi=10 MeV, m_chi=40 GeV, g_chi=0.1),
+    the old code returned a ~ -1.08 (claiming RISING sigma/m) when the
+    physical Yukawa form actually gives FALLING sigma/m; the corrected
+    code returns a ~ +1.08, matching channels_v03 and t54 conventions.
+    """
     s1 = sigma_m_at_v_yukawa(50.0, m_phi_MeV, m_chi_GeV, g_chi)
     s2 = sigma_m_at_v_yukawa(200.0, m_phi_MeV, m_chi_GeV, g_chi)
     if s1 <= 0 or s2 <= 0:
-        return -2.0  # fallback
-    a = (np.log10(s1) - np.log10(s2)) / (np.log10(50.0) - np.log10(200.0))
+        return -2.0  # fallback (channels_v03 sense: negative a = rising sigma/m)
+    a = -((np.log10(s1) - np.log10(s2)) / (np.log10(50.0) - np.log10(200.0)))
     return float(a)
 
 
