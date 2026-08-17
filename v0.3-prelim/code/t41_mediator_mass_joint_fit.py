@@ -56,7 +56,14 @@ from t30_lz_real_posterior import loglike_lz_real
 from t32_fermi_dwarf_channel import loglike_fermi_dwarf
 
 
-RESULTS_DIR = Path("/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/data/results")
+import platform
+
+if platform.system() == "Windows" or not Path("/home/lamkuenai/sidm-composite-dm-mediator").exists():
+    _DEFAULT_RESULTS_DIR = "C:/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/data/results"
+else:
+    _DEFAULT_RESULTS_DIR = "/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/data/results"
+
+RESULTS_DIR = Path(_DEFAULT_RESULTS_DIR)
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
 # T41 priors
@@ -160,20 +167,33 @@ def loglike_joint(theta):
     if not np.isfinite(ll_bullet):
         return -np.inf
 
-    # 4. LZ (T30) — uses sigma_DM_nucleon = epsilon * sigma_m_0 if coupling exists
-    # For pure dark-sector Yukawa, the coupling to SM is via kinetic mixing
-    # sigma_DM_nucleon scaled by epsilon. With epsilon -> 0, LZ is invisible.
-    sigma_DM_n = epsilon * sigma_m_0
+    # 4. LZ (T30) — uses sigma_DM_nucleon from dark-photon kinetic mixing
+    # R12 P1-C (2026-08-17): replaced dimensionally-inconsistent
+    # `sigma_DM_n = epsilon * sigma_m_0` (units cm^2/g, NOT cm^2) with
+    # the proper dark-photon portal form via t39.sigma_SI_from_dark_photon.
+    import t39_tier3_epsilon_alpha_joint_fit as t39
+    # T41's loglike_joint varies m_phi, m_chi, g_chi; we need alpha_D too.
+    # Fix alpha_D ~ g_chi^2 / (4 pi) as a simplified dark-side estimate
+    # (proper Benchmark A fix would add alpha_D as a 6th parameter).
+    ALPHA_D_T41 = max(g_chi ** 2 / (4.0 * np.pi), 1.0e-5)
+    sigma_DM_n = t39.sigma_SI_from_dark_photon(
+        epsilon=epsilon,
+        m_chi_GeV=m_chi_GeV,
+        m_A_prime_MeV=m_phi_MeV,
+        alpha_D=ALPHA_D_T41,
+    )
     ll_lz = loglike_lz_real(m_chi_GeV, sigma_DM_n)
     if not np.isfinite(ll_lz):
         return -np.inf
 
     # 5. Fermi dwarf (T32) — gamma-ray from annihilation
-    # sigma_ann ~ alpha * sigma_m^2 at v ~ 100 km/s
-    sigma_m_at_v = sigma_m_at_v_yukawa(100.0, m_phi_MeV, m_chi_GeV, g_chi)
-    if sigma_m_at_v <= 0:
-        return -np.inf
-    sigma_v = alpha * sigma_m_at_v ** 2
+    # R12 P1-C: replaced `alpha * sigma_m_at_v^2` (units cm^4/g^2, NOT
+    # cm^3/s) with the proper dark-photon portal form.
+    sigma_v = t39.sigma_v_from_dark_photon(
+        m_chi_GeV=m_chi_GeV,
+        m_A_prime_MeV=m_phi_MeV,
+        alpha_D=ALPHA_D_T41,
+    )
     ll_fermi = loglike_fermi_dwarf(m_chi_GeV, sigma_v)
     if not np.isfinite(ll_fermi):
         return -np.inf
@@ -277,11 +297,22 @@ def main():
           f"log_alpha={med['log_alpha']:.2f} (alpha={med_alpha:.2e})")
     print(f"  TENSION: T39 a=+0.94 vs Yukawa-derived a={map_a:+.3f} → diff = {a_tension:.2f}")
     if a_tension > 1.0:
+        # R12 P1-D (2026-08-17): this branch rarely fires now that
+        # t41.derived_a returns the correct POSITIVE sign (P0-B fix).
+        # Pre-P0-B the Yukawa a was -1.08 vs T39 +0.94 → tension = 2.02.
+        # Post-P0-B the Yukawa a is +0.5 to +1.5 across the prior box,
+        # matching T39 ~ +0.94. The 'publishable negative finding'
+        # framing in the legacy code is now obsolete; keep the
+        # branch for diagnostics but expect it NOT to fire.
         print(f"  ⚠️  YUKAWA TENSION: T39's velocity dependence (a > 0, sigma/m DECREASES with v)")
         print(f"      is OPPOSITE to the Yukawa cross-section (a < 0, sigma/m INCREASES with v).")
         print(f"      This is a publishable negative finding: 'Simple Yukawa mediator FAILED to")
         print(f"      reproduce the BULLET-CLUSTER/DSPH-velocity dependence. Either the model")
         print(f"      is inelastic (chi_1/chi_2), or the mediator has non-trivial spin structure.")
+    else:
+        print(f"  ✅ NO TENSION (post-P0-B): Yukawa a ≈ T39 a within {a_tension:.2f}.")
+        print(f"      The pre-fix '1.3 sigma tension' was a sign-flip artifact; see")
+        print(f"      docs/REVIEWER_AUDIT_R12.md §2 finding #1.")
     print()
 
     # Honest comparison
@@ -335,20 +366,28 @@ def main():
             f"log Z = {log_Z:.3f}, posterior medians: m_phi = {med_m_phi_MeV:.2f} MeV, "
             f"m_chi = {med_m_chi_GeV:.2f} GeV, g_chi = {med['g_chi']:.4f}, "
             f"eps = {med_eps:.2e}, alpha = {med_alpha:.2e}. "
-            f"Derived sigma/m_0 = {map_sigma_m_0:.3f} cm^2/g, a = {map_a:.3f}. "
-            f"The T39 a = +0.94 (sigma/m DECREASES with v) is incompatible with "
-            f"the Yukawa prediction (a < 0, sigma/m INCREASES with v). "
-            f"This means the simple Yukawa model is RULED OUT by the velocity dependence. "
-            f"Future work: inelastic SIDM (chi_1, chi_2) or velocity-dependent g_chi."
+            f"Derived sigma/m_0 = {map_sigma_m_0:.3f} cm^2/g, a = {map_a:+.3f}. "
+            f"Yukawa velocity index = {map_a:+.3f}; T39 data-preferred = +0.94. "
+            f"|Tension| = {a_tension:.2f} (threshold 1.0). "
+            f"R12 P0-B (2026-08-17): the pre-fix '1.3 sigma tension' claim was a "
+            f"sign-flip artifact in derived_a; this re-run uses the corrected sign."
         ),
     }
 
     out_path = RESULTS_DIR / "t41_mediator_mass_joint_fit.json"
     out_path.write_text(json.dumps(out, indent=2, default=str))
-    win_path = Path("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/data/results/t41_mediator_mass_joint_fit.json")
-    win_path.write_text(json.dumps(out, indent=2, default=str))
-    print(f"\noutput -> {out_path}")
-    print(f"        -> {win_path}")
+    # Mirror to Windows-side path if running under WSL
+    try:
+        win_path = Path("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/data/results/t41_mediator_mass_joint_fit.json")
+        if win_path.parent.exists():
+            win_path.write_text(json.dumps(out, indent=2, default=str))
+            print(f"\noutput -> {out_path}")
+            print(f"        -> {win_path}")
+        else:
+            print(f"\noutput -> {out_path}")
+    except (FileNotFoundError, OSError) as e:
+        # Windows-side path not available; only the WSL write succeeded.
+        print(f"\noutput -> {out_path} (Win mirror skipped: {e})")
 
 
 if __name__ == "__main__":

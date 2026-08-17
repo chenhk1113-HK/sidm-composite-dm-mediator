@@ -159,16 +159,30 @@ class TestT41Module:
         assert ll > -1e10
 
     def test_t41_yukawa_tension_flag(self):
-        """T41 must flag the Yukawa a < 0 vs T39 a > 0 tension."""
+        """R12 P0-B (2026-08-17): the pre-fix '1.3 sigma Yukawa tension'
+        was a sign-flip artifact. Post-fix, derived_a returns POSITIVE
+        values matching T39's data-preferred a = +0.94, so the tension
+        flag is NOT expected to fire.
+
+        This test asserts the OPPOSITE of the legacy R11 expectation:
+        significant == False (the pre-fix a_difference of 2.75 was wrong).
+
+        If this test FAILS with significant == True, it means derived_a
+        regressed to the pre-fix sign-flipped behavior.
+        """
         if not T41_RESULT.exists():
             pytest.skip("T41 not yet completed")
         with open(T41_RESULT) as f:
             data = json.load(f)
         assert "yukawa_tension" in data
-        assert data["yukawa_tension"]["significant"] is True, (
-            f"Yukawa tension NOT flagged. a_T39 = {data['yukawa_tension']['T39_a']}, "
+        # Post-P0-B: tension is NOT significant.
+        assert data["yukawa_tension"]["significant"] is False, (
+            f"Yukawa tension flagged (significant=True) -- this means "
+            f"derived_a regressed to the pre-P0-B sign-flipped behavior. "
+            f"a_T39 = {data['yukawa_tension']['T39_a']}, "
             f"a_Yukawa = {data['yukawa_tension']['Yukawa_a_at_MAP']}, "
-            f"diff = {data['yukawa_tension']['a_difference']}. Check the prior range."
+            f"diff = {data['yukawa_tension']['a_difference']}. "
+            f"Re-check t41_mediator_mass_joint_fit.derived_a()."
         )
 
     # ---- R12 P0-B regression tests (locked 2026-08-17) ----

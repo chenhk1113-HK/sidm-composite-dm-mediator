@@ -31,73 +31,73 @@
       -1.0
     ]
   },
-  "log_Z": -29.453083507297787,
-  "log_Z_err": 0.2379280416091763,
+  "log_Z": -213.6851540224717,
+  "log_Z_err": 0.24158798454424724,
   "MAP": [
-    2.6393637226301028,
-    2.8512993650488228,
-    0.5747900022379508,
-    -53.60404436731604,
-    -28.73933430282123
+    2.5269158673918968,
+    2.5998150314689803,
+    0.7177753178929337,
+    -34.952555505149455,
+    -12.055454052881107
   ],
   "MAP_physical": {
-    "m_phi_MeV": 435.8767686629605,
-    "m_chi_GeV": 710.0670581150613,
-    "g_chi": 0.5747900022379508,
-    "log_epsilon": -53.60404436731604,
-    "log_alpha": -28.73933430282123,
-    "sigma_m_0_derived": 0.0712175282733748,
-    "a_derived": -1.8103089411088444
+    "m_phi_MeV": 336.44638583057196,
+    "m_chi_GeV": 397.93765050996956,
+    "g_chi": 0.7177753178929337,
+    "log_epsilon": -34.952555505149455,
+    "log_alpha": -12.055454052881107,
+    "sigma_m_0_derived": 0.0664381679009897,
+    "a_derived": 0.18599223231459713
   },
   "median": {
-    "log_m_phi_MeV": 2.3272663022447695,
-    "log_m_chi_GeV": 2.664948328863905,
-    "g_chi": 0.37043619471829137,
-    "log_epsilon": -52.613792356184746,
-    "log_alpha": -26.608663302901782
+    "log_m_phi_MeV": 1.4248897015700113,
+    "log_m_chi_GeV": 1.1970974509553762,
+    "g_chi": 0.13309662065815492,
+    "log_epsilon": -34.952555505149455,
+    "log_alpha": -15.886644215866605
   },
   "quantiles_16_50_84": {
     "log_m_phi_MeV": [
-      1.789901476116271,
-      2.32661035611694,
-      2.610139675879908
+      1.130560730154565,
+      1.4238605945719842,
+      2.538845902157441
     ],
     "log_m_chi_GeV": [
-      2.1097912166358523,
-      2.6636937310649347,
-      2.913371246144232
+      0.6992645178708743,
+      1.1968467401611054,
+      2.665395304126482
     ],
     "g_chi": [
-      0.1510230527216055,
-      0.3703999582609413,
-      0.6098523980642239
+      0.07930184513885714,
+      0.13308133138784,
+      0.7004050879096989
     ],
     "log_epsilon": [
-      -57.64023335315374,
-      -52.61883804336963,
-      -48.07019853353884
+      -52.08245971821906,
+      -34.994456954126804,
+      -17.325637971959054
     ],
     "log_alpha": [
-      -28.860678115254427,
-      -26.61121649806699,
-      -24.179811772288573
+      -25.702693394085806,
+      -15.894079387411429,
+      -5.559662168639557
     ]
   },
   "median_physical": {
-    "m_phi_MeV": 212.45467998838959,
-    "m_chi_GeV": 462.32601187818733,
-    "g_chi": 0.37043619471829137,
-    "epsilon": 2.4333671665454722e-53,
-    "alpha": 2.4622758020830007e-27
+    "m_phi_MeV": 26.600493972124397,
+    "m_chi_GeV": 15.743360887199392,
+    "g_chi": 0.13309662065815492,
+    "epsilon": 1.1154355836280426e-35,
+    "alpha": 1.2982423857963541e-16
   },
   "yukawa_tension": {
     "T39_sigma_m_0": 1.57,
     "T39_a": 0.94,
-    "Yukawa_a_at_MAP": -1.8103089411088444,
-    "a_difference": 2.7503089411088446,
-    "significant": true
+    "Yukawa_a_at_MAP": 0.18599223231459713,
+    "a_difference": 0.7540077676854028,
+    "significant": false
   },
-  "wall_seconds": 2.9755587577819824,
-  "verdict": "TIER-3 EXTENSION: m_phi parameterized posterior \u2014 YUKAWA TENSION (T39 a > 0 vs Yukawa a < 0)",
-  "interpretation": "log Z = -29.453, posterior medians: m_phi = 212.45 MeV, m_chi = 462.33 GeV, g_chi = 0.3704, eps = 2.43e-53, alpha = 2.46e-27. Derived sigma/m_0 = 0.071 cm^2/g, a = -1.810. The T39 a = +0.94 (sigma/m DECREASES with v) is incompatible with the Yukawa prediction (a < 0, sigma/m INCREASES with v). This means the simple Yukawa model is RULED OUT by the velocity dependence. Future work: inelastic SIDM (chi_1, chi_2) or velocity-dependent g_chi."
+  "wall_seconds": 56.41633200645447,
+  "verdict": "TIER-3 EXTENSION: m_phi parameterized posterior",
+  "interpretation": "log Z = -213.685, posterior medians: m_phi = 26.60 MeV, m_chi = 15.74 GeV, g_chi = 0.1331, eps = 1.12e-35, alpha = 1.30e-16. Derived sigma/m_0 = 0.066 cm^2/g, a = +0.186. Yukawa velocity index = +0.186; T39 data-preferred = +0.94. |Tension| = 0.75 (threshold 1.0). R12 P0-B (2026-08-17): the pre-fix '1.3 sigma tension' claim was a sign-flip artifact in derived_a; this re-run uses the corrected sign."
 }
