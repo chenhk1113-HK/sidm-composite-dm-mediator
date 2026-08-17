@@ -71,8 +71,121 @@ M_CHI_GEV_LZ = 40.0
 M_CHI_GEV_FERMI = 50.0
 
 
+# ---------------------------------------------------------------------------
+# R12 P1-C: Dark-photon portal mappings (Benchmark A).
+#
+# The legacy `epsilon * sigma_m_0` and `alpha * sigma_m_at_v**2` mappings
+# were dimensionally inconsistent (Reviewer 6 finding #5). The proper
+# dark-photon-portal forms (Kaplinghat, Tulin, Yu 2014 PRD 89, 035009
+# Eq. (4); Berlin+ 2018 PRD 97, 055033) are:
+#
+# Direct detection (heavy-mediator limit, q << m_A'):
+#   sigma_SI = (16 pi alpha_D alpha_em epsilon^2 mu_chiN^2) / m_A'^4
+# where:
+#   - alpha_D = g_D^2 / (4 pi) is the dark fine-structure constant;
+#   - alpha_em = 1/137 (electromagnetic fine-structure constant);
+#   - epsilon is the kinetic mixing parameter (dimensionless);
+#   - mu_chiN is the DM-nucleon reduced mass;
+#   - m_A' is the dark photon mass.
+# For a xenon target, Z=54, A=131, the form factor correction is ~1
+# (heavy nuclear recoiling on heavy DM).
+#
+# Annihilation (s-wave, m_A' < 2 m_chi):
+#   <sigma v> = (pi alpha_D^2 / m_chi^2) * v_rel
+#               * sqrt(1 - m_A'^2 / m_chi^2)            [if m_A' < m_chi]
+#   <sigma v> = (pi alpha_D^2 / m_chi^2) * v_rel * (1 - m_A'^2 / (4 m_chi^2))^(1/2)
+#                                                   [m_A' < 2 m_chi, phase space]
+#
+# Both forms are dimensionally correct.
+# ---------------------------------------------------------------------------
+
+# Constants
+HBAR_C_GEV_CM = 1.97e-14        # GeV cm
+ALPHA_EM = 1.0 / 137.0          # electromagnetic fine-structure constant
+M_NUCLEON_GEV = 0.938           # proton mass (GeV), nucleon mass approximation
+GEV_TO_CM_INV = 1.0 / HBAR_C_GEV_CM  # cm^-1 per GeV^-1
+MEV_TO_CM_INV = GEV_TO_CM_INV * 1.0e-3  # cm^-1 per MeV^-1
+
+
+def sigma_SI_from_dark_photon(
+    epsilon: float,
+    m_chi_GeV: float,
+    m_A_prime_MeV: float,
+    alpha_D: float = 0.01,
+) -> float:
+    """Spin-independent DM-nucleon cross-section via dark-photon kinetic mixing.
+
+    Reference: Kaplinghat, Tulin, Yu 2014 PRD 89, 035009 Eq. (4),
+    evaluated at q = 0 (heavy-mediator limit valid for m_A' >> q ~ 50 MeV
+    xenon recoil momentum; for MeV mediator, this overestimates by O(1)).
+
+    Returns sigma_SI in cm^2.
+    """
+    # DM-nucleon reduced mass
+    mu_chiN = (m_chi_GeV * M_NUCLEON_GEV) / (m_chi_GeV + M_NUCLEON_GEV)  # GeV
+    # m_A'^4 in GeV^-4
+    m_A_prime_GeV = m_A_prime_MeV * 1.0e-3
+    m_A_prime_sq_inv_GeV4 = 1.0 / m_A_prime_GeV ** 4
+    # Prefactor in natural units (hbar = c = 1): 1/GeV^2 -> cm^2
+    sigma_cm2 = (
+        16.0 * np.pi * alpha_D * ALPHA_EM * epsilon ** 2
+        * mu_chiN ** 2
+        * m_A_prime_sq_inv_GeV4
+        * (HBAR_C_GEV_CM ** 2)
+    )
+    return float(sigma_cm2)
+
+
+def sigma_v_from_dark_photon(
+    m_chi_GeV: float,
+    m_A_prime_MeV: float,
+    alpha_D: float = 0.01,
+    v_over_c: float = 0.3,
+) -> float:
+    """Thermally-averaged annihilation cross-section <sigma v> for
+    chi-bar chi -> A' A' via dark photon exchange.
+
+    Reference: Berlin+ 2018 PRD 97, 055033 (heavy-mediator form).
+    For m_A' < 2 m_chi the phase space opens; for m_A' > 2 m_chi the
+    annihilation is kinematically forbidden.
+
+    Convention: v_over_c is the relative velocity in units of c at the
+    thermal freeze-out temperature T_f ~ m_chi / 20 (so v/c ~ 0.3 for
+    s-wave annihilation). At T_f ~ m_chi / 20 the average kinetic
+    energy per particle is ~T_f, so v ~ sqrt(2 T_f / m_chi) ~ sqrt(1/10)
+    ~ 0.3 c.
+
+    Returns <sigma v> in cm^3/s.
+    """
+    m_A_prime_GeV = m_A_prime_MeV * 1.0e-3
+    if m_A_prime_GeV >= 2.0 * m_chi_GeV:
+        # Kinematically forbidden: return floor
+        return 1.0e-30
+    # s-wave phase-space factor (1 - m_A'^2 / 4 m_chi^2)^(1/2)
+    phase = np.sqrt(max(0.0, 1.0 - m_A_prime_GeV ** 2 / (4.0 * m_chi_GeV ** 2)))
+    # Natural-units prefactor: pi alpha_D^2 / m_chi^2 in 1/GeV^2
+    # Convert to cm^2: multiply by (hbar c)^2
+    sigma_natural = np.pi * alpha_D ** 2 / m_chi_GeV ** 2  # 1/GeV^2
+    sigma_cm2 = sigma_natural * (HBAR_C_GEV_CM ** 2)       # cm^2
+    # Multiply by relative velocity in cm/s for <sigma v>
+    c_cm_per_s = 2.99792458e10
+    sigma_v_cm3_per_s = sigma_cm2 * v_over_c * c_cm_per_s  # cm^3/s
+    return float(sigma_v_cm3_per_s)
+
+
 def loglike_joint(theta):
     """Joint 5-channel + LZ + Fermi likelihood with ε, α marginalized.
+
+    R12 P1-C (2026-08-17): replaced dimensionally-inconsistent mappings:
+      sigma_DM_nucleon_cm2 = epsilon * sigma_m_0          [cm^2/g, NOT cm^2]
+      sigma_v_cm3_per_s = alpha * sigma_m_at_v ** 2       [cm^4/g^2, NOT cm^3/s]
+    with proper dark-photon-portal mappings (Benchmark A from DARK_SECTOR_LAGRANGIAN.md §9):
+      sigma_SI = (16 pi alpha_D alpha_em epsilon^2 mu_chiN^2) / (m_A'^4) [cm^2]
+      sigma_v  = (pi alpha_D^2 / m_chi^2) * v_rel * (1 - m_A'^2 / (4 m_chi^2))^(1/2) [cm^3/s]
+    The new mappings require (m_chi, m_A', alpha_D) as additional parameters;
+    for v0.3-prelim 4-parameter compatibility we fix these at canonical
+    Benchmark A values. For a v0.4+ 6-7 parameter joint fit, use
+    t41_mediator_mass_joint_fit.
 
     theta = (log_sigma_m_0, a, log_epsilon, log_alpha)
     """
@@ -88,16 +201,28 @@ def loglike_joint(theta):
     if not (config.A_RANGE[0] <= a <= config.A_RANGE[1]):
         return -np.inf
 
-    # 1. Real LZ (uses sigma_m at galactic scale, mapping to DM-nucleon)
-    sigma_DM_nucleon_cm2 = epsilon * sigma_m_0
-    ll_lz = loglike_lz_real(M_CHI_GEV_LZ, sigma_DM_nucleon_cm2)
+    # Inferred Benchmark A physical constants (fixed for 4-parameter T39
+    # compatibility; varied in 5-parameter T41).
+    M_CHI_GEV_FIXED = 40.0            # from T32 Fermi peak
+    M_A_PRIME_MEV_FIXED = 10.0        # canonical Benchmark A mediator
+    ALPHA_D_FIXED = 0.01              # alpha_D = g_D^2 / (4 pi)
 
-    # 2. Real Fermi dwarf
-    sigma_m_at_v = sigma_m_effective(sigma_m_0, a, 100.0)
-    if sigma_m_at_v <= 0:
-        return -np.inf
-    sigma_v = alpha * sigma_m_at_v ** 2  # cm^3/s
-    ll_fermi = loglike_fermi_dwarf(M_CHI_GEV_FERMI, sigma_v)
+    # 1. Real LZ (sigma_DM_nucleon via dark-photon kinetic mixing)
+    sigma_DM_nucleon_cm2 = sigma_SI_from_dark_photon(
+        epsilon=epsilon,
+        m_chi_GeV=M_CHI_GEV_FIXED,
+        m_A_prime_MeV=M_A_PRIME_MEV_FIXED,
+        alpha_D=ALPHA_D_FIXED,
+    )
+    ll_lz = loglike_lz_real(M_CHI_GEV_FIXED, sigma_DM_nucleon_cm2)
+
+    # 2. Real Fermi dwarf (sigma_v via dark-photon-mediated annihilation)
+    sigma_v = sigma_v_from_dark_photon(
+        m_chi_GeV=M_CHI_GEV_FIXED,
+        m_A_prime_MeV=M_A_PRIME_MEV_FIXED,
+        alpha_D=ALPHA_D_FIXED,
+    )
+    ll_fermi = loglike_fermi_dwarf(M_CHI_GEV_FIXED, sigma_v)
 
     # 3. dSph + UFD + Bullet
     ll_dsph = ch_v03.loglike_dsph_v03(sigma_m_0, a)

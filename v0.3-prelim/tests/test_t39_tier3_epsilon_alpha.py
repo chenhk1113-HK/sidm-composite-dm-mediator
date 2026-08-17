@@ -50,6 +50,72 @@ class TestT39Module:
         # Should NOT return -inf for these in-range values
         assert ll > -1e10
 
+    # ---- R12 P1-C regression tests (2026-08-17) ----
+
+    def test_t39_sigma_SI_dimensions(self):
+        """R12 P1-C: sigma_SI_from_dark_photon must return a value with
+        units of cm^2 (NOT cm^2/g like the legacy epsilon*sigma_m_0).
+
+        Sanity check: for epsilon=1e-5, m_chi=40 GeV, m_A'=10 MeV, alpha_D=0.01:
+          sigma_SI = 16 pi alpha_D alpha_em epsilon^2 mu^2 / m_A'^4 in cm^2.
+        Expected magnitude: ~10^-32 cm^2 (well above the LZ limit ~10^-46,
+        so the model is in tension with LZ at this epsilon — exactly the
+        point of the test).
+        """
+        t39 = pytest.importorskip("t39_tier3_epsilon_alpha_joint_fit")
+        sigma = t39.sigma_SI_from_dark_photon(
+            epsilon=1e-5, m_chi_GeV=40.0, m_A_prime_MeV=10.0, alpha_D=0.01
+        )
+        # Must be in cm^2 range: ~1e-32 to 1e-30 for these inputs.
+        assert 1e-34 < sigma < 1e-29, (
+            f"sigma_SI = {sigma:.3e}; expected ~1e-32 cm^2 (NOT cm^2/g). "
+            "If sigma ~ 1e-25 it might be the legacy epsilon*sigma_m_0 mapping."
+        )
+
+    def test_t39_sigma_SI_eps_scaling(self):
+        """R12 P1-C: sigma_SI must scale as epsilon^2 (NOT epsilon)."""
+        t39 = pytest.importorskip("t39_tier3_epsilon_alpha_joint_fit")
+        s1 = t39.sigma_SI_from_dark_photon(epsilon=1e-5, m_chi_GeV=40.0, m_A_prime_MeV=10.0)
+        s2 = t39.sigma_SI_from_dark_photon(epsilon=1e-6, m_chi_GeV=40.0, m_A_prime_MeV=10.0)
+        # Ratio should be (1e-5 / 1e-6)^2 = 100.
+        ratio = s1 / s2
+        assert 90 < ratio < 110, (
+            f"sigma_SI ratio at epsilon 1e-5 vs 1e-6 = {ratio:.2f}; "
+            "expected ~100 (epsilon^2 scaling). Linear scaling (legacy "
+            "bug) would give ratio = 10."
+        )
+
+    def test_t39_sigma_v_dimensions(self):
+        """R12 P1-C: sigma_v_from_dark_photon must return cm^3/s.
+
+        Sanity check: at alpha_D=0.01, m_chi=40 GeV, m_A'=10 MeV, the
+        natural-units prefactor pi alpha_D^2 / m_chi^2 gives
+        sigma_v ~ 7e-25 cm^3/s (well above WIMP miracle 3e-26, indicating
+        the model would over-annihilate and under-produce DM at this
+        alpha_D — exactly the point).
+        """
+        t39 = pytest.importorskip("t39_tier3_epsilon_alpha_joint_fit")
+        sigma_v = t39.sigma_v_from_dark_photon(
+            m_chi_GeV=40.0, m_A_prime_MeV=10.0, alpha_D=0.01
+        )
+        assert 1e-27 < sigma_v < 1e-20, (
+            f"sigma_v = {sigma_v:.3e}; expected ~7e-25 cm^3/s. "
+            "If sigma_v ~ 5e3 cm^3/s the legacy alpha*sigma_m^2 was returned."
+        )
+
+    def test_t39_sigma_v_forbidden_channel(self):
+        """R12 P1-C: when m_A' >= 2 m_chi, annihilation is kinematically
+        forbidden; return the floor (1e-30 cm^3/s).
+        """
+        t39 = pytest.importorskip("t39_tier3_epsilon_alpha_joint_fit")
+        # m_A' = 100 GeV with m_chi = 40 GeV: 2 m_chi = 80 GeV, so forbidden.
+        sigma_v = t39.sigma_v_from_dark_photon(
+            m_chi_GeV=40.0, m_A_prime_MeV=100000.0, alpha_D=0.01
+        )
+        assert sigma_v <= 1e-25, (
+            f"sigma_v at forbidden kinematics = {sigma_v:.3e}; expected floor ~1e-30"
+        )
+
 
 class TestT39Result:
     """If T39 result JSON exists, validate it."""
