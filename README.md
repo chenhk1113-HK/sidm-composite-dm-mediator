@@ -67,7 +67,41 @@ The pre-R12 "1.3σ velocity-slope tension" (a ≈ 2.24 from dark-ρ vs a ≈ 0.9
 was the same sign-flip artifact. Post-R12, the Yukawa-derived a at MAP is +0.186, well within
 the data-preferred range.
 
----
+## Key findings (post-R12)
+
+Five honest takeaways a reader should leave with:
+
+1. **Rehabilitated this project's earlier pessimistic result on light-Yukawa composite SIDM.**
+   The pre-R12 "1.3σ Yukawa tension" was caused by three independent bugs
+   (sign-flip in `t41.derived_a`, units mismatch in `sigma_SI`, bimodal-surrogate dSph
+   likelihood that misread the Horigome+ 2025 paper). All three fixed in R12 P0-A/B/D.
+   The same benchmark is now consistent with multi-messenger data at 0.75σ.
+   **Caveat:** This project is rehabilitating its OWN earlier result, not auditing other
+   groups' results.
+
+2. **A self-consistent multi-probe benchmark point under Benchmark A.**
+   MAP at (m_A' = 26.6 MeV, m_χ = 14.8 GeV, g_χ = 0.13, σ/m_0 = 0.066 cm²/g, a = +0.186).
+   Five channels (dSph, UFD, Bullet, SPARC, LZ + Fermi) put in one statistical pipeline.
+   **Caveat:** This MAP is dominated by the prior suppression on ε (kinetic mixing
+   ~10⁻³⁵), not by all five channels independently converging on the same point.
+
+3. **A sharp, quantitative theory-experiment bottleneck.**
+   Astrophysics "likes" this benchmark but LZ's null results force ε to ~10⁻³⁵ at the
+   MAP — much smaller than naive dimensional analysis (10⁻³ to 10⁻⁵) expects. Any future
+   dark-photon SIDM construction must explain why ε is so small.
+
+4. **A methodological lesson for SIDM fitting pipelines.**
+   Three bugs (sign, units, surrogate-vs-paper) all produced dramatically wrong physical
+   conclusions. None were caught by the internal test suite — only by external reviewers
+   reading the code line-by-line. The full code + 359-test pytest suite is published
+   so other groups can reuse or cross-check.
+
+5. **What this project does NOT do** (see "What this repo is NOT claiming" below):
+   it does not resolve the S8/H0 tensions, does not give observational proof of composite
+   DM, does not derive masses from first-principles lattice, and does not rule out ΛCDM.
+   The dark-ρ mass is KSFR-calibrated (not lattice), the relic density is 1/⟨σv⟩
+   calibrated (not a Boltzmann solver), and the multi-probe MAP is one Benchmark A
+   parametrization fit — not a measurement of dark matter.
 
 ## Repo layout
 
