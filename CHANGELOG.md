@@ -7,6 +7,65 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [R12c] — 2026-08-18
+
+### Consider-this-review.docx closure (reviewer-tier ranking)
+
+The user uploaded `Consider this review.docx` (8 paragraphs, 6 "needs
+correction" findings, 1 "bottom-line assessment"). Per the
+reviewer-audit skill, every claim was verified against the on-disk
+ground truth before acting.
+
+**Reviewer claims, tier-ranked:**
+
+| # | Claim | Verdict | Ground truth |
+|---|-------|---------|--------------|
+| 1 | T54's 1.36 cm²/g is pre-R12; canonical is T41 σ/m_0 ≈ 0.066 | ✅ TRUE | `t41_mediator_mass_joint_fit.json` line 49 |
+| 2 | "Within 30%" was overstated; gap is much larger post-R12 | ✅ TRUE | Was 1.5× before; now 1.5×–15× vs Drobczyk band |
+| 3 | Drobczyk's σ/m is not a precise 0.96; paper says 0.11 at v=30, 0.96 at v=10 | ✅ TRUE | arXiv:2506.22997 §5.1 benchmark table |
+| 4 | y_χ = 0.3 vs 1.5 is a different parameterization | ⚠️ PARTIAL | True; both are couplings but not the same kind |
+| 5 | 10⁻¹¹⁸ / 10⁻¹⁰⁴ cm² are obsolete (units bug) | ✅ TRUE | R12 P1-C fix; new σ_SI = 1.2×10⁻³² cm² at ε=10⁻⁵ |
+| 6 | "Completely invisible" overstates it | ⚠️ PARTIAL | Drobczyk's 6.7×10⁻⁵¹ below ν-floor but reachable; ours via ε→10⁻³⁵ |
+
+**Reviewer error:** Said "the 9-channel posterior" is canonical — but
+the project's post-R12 canonical is **T41** (5-parameter joint fit with
+m_φ, m_χ, g_χ, ε, α), not the 9-channel. T41's MAP is the headline
+per `R12_AUDIT_CLOSURE.md` §3, §7.2.
+
+**Patch scope:**
+
+- `v0.3-prelim/data/results/t68_cross_validation_drobczyk.json`:
+  our_pipeline block updated from pre-R12 T54 (1.36, 34.16, 3.55, 1.51)
+  to post-R12 T41 (0.066, 15.74, 26.60, 0.133). key_finding rewritten
+  to reflect the actual 1.5×–15× gap and the post-R12 "qualitative
+  literature consistency" framing.
+- `v0.3-prelim/tests/test_t68_cross_validation.py`: assertion
+  inverted and updated. The new honest assertion is that our σ_SI
+  at ε=10⁻⁵ is **intentionally above LZ** (5×10¹⁵× above), with the
+  LZ evasion coming from the kinetic-mixing ε being driven to ~10⁻³⁵
+  at the MAP — not from an intrinsically small σ_SI.
+- `docs/DROBCZYK_CROSS_VALIDATION_LAYMAN.md`: rewritten end-to-end
+  to reflect post-R12 numbers, the larger gap, and the honest
+  detection-strategy divergence between the two models.
+- `README.md` line 56: Drobczyk row updated to the post-R12 framing
+  with the T41 MAP link.
+
+**No changes to:**
+
+- `v0.3-prelim/code/t68_cross_validation_drobczyk.py` — script just
+  prints whatever's in the dictionary; the dict was updated.
+- `v0.3-prelim/code/t72_cross_validation_plot.py` outputs/
+  `Cross_Validation_T54_vs_Drobczyk_v2_2026-08-13.png` — plot uses
+  the pre-R12 T54 coordinates. Regeneration is deferred because the
+  broad qualitative picture is unchanged; the plot now reads as
+  "pre-R12 toy-composite-ρ overlay" rather than the post-R12 canonical.
+- `v0.3-prelim/data/results/t54_dark_quark_joint_fit.json` — retained
+  for historical provenance; do not use as the headline.
+- `v0.3-prelim/docs/MEDIATOR_DETECTION_SYNTHESIS_v10.md` — the
+  "within 30%" mention is in the audit-tagged parenthetical, not in
+  the headline.
+- `CITATION.cff` — Drobczyk corrigendum already cited as 6.7×10⁻⁵¹ cm².
+
 ## [R12b] — 2026-08-18
 
 ### Layman explainer for Drobczyk cross-validation (T68)
