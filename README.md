@@ -53,7 +53,7 @@ for the full list of what the project does and does not claim.
 | Dark-ρ mass at Λ_dark=0.2 GeV | **0.79 GeV** ≈ QCD 770 MeV (KSFR calibration) | T53 P1-B KSFR |
 | Dark-ρ mass at Λ_dark=1 GeV (lattice-informed) | **8.36 GeV** (m_ρ/f_π = 8.36) | T53 + T53b |
 | dSph log L at σ/m=10 cm²/g | **−4.53** (strongly disfavored) | T26/T28 P0-D upper limit |
-| Cross-validation vs Drobczyk 2025 | σ/m ~1 vs ~1.4 cm²/g at v=30 km/s (factor ~1.5); qualitative literature consistency | T68 + [plot](v0.3-prelim/plots/Cross_Validation_T54_vs_Drobczyk_v2_2026-08-13.png) |
+| Cross-validation vs Drobczyk 2025 | σ/m ~1 vs ~1.4 cm²/g at v=30 km/s (factor ~1.5); qualitative literature consistency | T68 + [plot](v0.3-prelim/plots/Cross_Validation_T54_vs_Drobczyk_v2_2026-08-13.png) + [layman explainer](docs/DROBCZYK_CROSS_VALIDATION_LAYMAN.md) |
 | Test suite | **359 passing, 4 skipped, 3 unrelated pre-existing failures** | `pytest tests/ v0.3-prelim/tests/ v0.1-prelim/tests/` |
 
 The pre-R12 "1.3σ Yukawa tension" claim was a sign-flip artifact in `t41.derived_a` (P0-B).

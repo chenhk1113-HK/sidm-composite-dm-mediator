@@ -7,6 +7,39 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [R12b] — 2026-08-18
+
+### Layman explainer for Drobczyk cross-validation (T68)
+
+Added a plain-language companion to the T68 technical synthesis, in
+response to the user finding the layman write-up in chat useful and
+asking for it to live on GitHub as a doc.
+
+**New file:**
+
+- `docs/DROBCZYK_CROSS_VALIDATION_LAYMAN.md` — Standalone plain-English
+  walk-through of the Drobczyk cross-validation. Covers: what σ/m means,
+  the small-scale "marshmallow" puzzle, how Drobczyk and our T54 reach
+  the same answer from different ingredients, the honest factor-1.5 gap
+  (not "within 30%"), why direct-detection invisibility is the more
+  important point, and a "where this lives in the project" pointer
+  block at the bottom linking to the JSON, the plot, the code, the
+  tests, the synthesis, the CITATION.cff entry, and the R11 A13/G7
+  reframing.
+
+**README link:**
+
+- `README.md` line 56: extended the Drobczyk row to link the new
+  layman doc alongside the T72 plot.
+
+**No changes to:**
+
+- T68 numbers, tests, plot, CITATION.cff, or the v10/v11/v12
+  syntheses. The layman doc is purely additive — it surfaces the
+  qualitative narrative for non-specialist readers without
+  re-asserting any number that the R12a correction already
+  retracted.
+
 ## [R12a] — 2026-08-18
 
 ### Drobczyk cross-validation framing fix (T68)
