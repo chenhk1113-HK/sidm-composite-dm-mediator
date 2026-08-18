@@ -7,6 +7,50 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [R12a] — 2026-08-18
+
+### Drobczyk cross-validation framing fix (T68)
+
+Re-verify of T68 against `v0.3-prelim/data/results/t68_cross_validation_drobczyk.json`
+and the T72 cross-validation plot
+(`outputs/Cross_Validation_T54_vs_Drobczyk_v2_2026-08-13.png`) shows the
+v10 synthesis overstated the on-disk agreement.
+
+**Numbers (per `t68_cross_validation_drobczyk.json`):**
+
+- Drobczyk σ/m at v=30 km/s = 0.96 cm²/g; T54 σ/m at v=30 km/s = 1.36 cm²/g
+  → |Δ|/ref = 41.7% (not 30%)
+- DM mass ratio: Drobczyk 600 GeV vs T54 34.16 GeV → 17.6×
+- Mediator mass ratio: Drobczyk 15 MeV vs T54 3.55 MeV → 4.2×
+
+**Patch scope:**
+
+- `README.md` line 56: "σ/m within 30%" → "σ/m ~1 vs ~1.4 cm²/g at v=30 km/s
+  (factor ~1.5); qualitative literature consistency"
+- `v0.3-prelim/docs/MEDIATOR_DETECTION_SYNTHESIS_v10.md` line 33: table cell
+  softened to "factor ~1.4 (same SIDM band)"
+- `v0.3-prelim/docs/MEDIATOR_DETECTION_SYNTHESIS_v10.md` line 177: summary
+  sentence re-cast as "qualitative literature consistency" (per R11 audit
+  A13/G7 already-accepted framing); the original "within 30%" claim is
+  preserved as a parenthetical citing the actual 41.7% gap and the R11
+  audit reason for the correction.
+
+**No changes to:**
+
+- `t68_cross_validation_drobczyk.json` (already correct: 0.96 vs 1.36)
+- `t72_cross_validation_plot.py` (panel (a) plots both points at v=30 km/s
+  honouring the on-disk JSON)
+- `CITATION.cff` (Drobczyk corrigendum already cited as 6.7×10⁻⁵¹ cm²)
+- v11/v12 syntheses (do not carry the "30%" forward)
+
+**Status:**
+
+- The qualitative convergence — both models predict a MeV-scale decoupled
+  mediator in the SIDM dwarf band (σ/m ~ 1 cm²/g), both invisible to
+  direct detection — is preserved.
+- The quantitative framing is now honest: factor ~1.5 on σ/m, not
+  "within 30%".
+
 ## [R12] — 2026-08-17
 
 ### Six-reviewer audit closure

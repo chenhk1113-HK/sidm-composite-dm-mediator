@@ -30,7 +30,7 @@ freeze-out. Their framework:
 | Field | Drobczyk | Our T54 | Match? |
 |---|---|---|---|
 | Light mediator (MeV) | 15 (PNGB) | 3.55 (dark rho) | **same scale** |
-| σ/m at v=10 km/s (cm²/g) | 0.96 | ~1.36 (interpolated) | **within 30%** |
+| σ/m at v=10 km/s (cm²/g) | 0.96 | ~1.36 (interpolated) | **factor ~1.4 (same SIDM band)** |
 | σ/m at v=30 km/s (cm²/g) | 0.11 | n/a | **same order** |
 | σ/m at v=1000 km/s (cm²/g) | 9.5×10⁻⁵ | ~10⁻⁴ | **same order** |
 | σ_DM_n (cm²) | **6.7×10⁻⁵¹** | **2×10⁻¹⁰⁴** | **both invisible** |
@@ -174,4 +174,4 @@ For the paper, I recommend:
 
 ## Summary in one sentence
 
-> The **Drobczyk 2025 paper (arXiv:2506.22997, CQG 42 225006)** provides **independent external validation** of our SIDM findings — their two-mediator benchmark point (m_χ=600 GeV, m_φ=15 MeV, σ/m~1 cm²/g, σ_SI=6.7×10⁻⁵¹ cm²) is consistent with our T54/T62 (m_χ=34 GeV, m_ρ=3.55 MeV, σ/m=1.36 cm²/g, σ_DM_n=2×10⁻¹⁰⁴ cm²) within30% on cross-section and within the same order of magnitude on direct detection, both finding a **decoupled MeV-scale mediator** that is **invisible to direct detection but visible to SIDM**; the arXiv:2510.05216 (DAMA/COSINE/ANAIS) paper provides brief contextual support for the T39 decoupling finding but is **not directly relevant** to our composite dark matter model.
+> The **Drobczyk 2025 paper (arXiv:2506.22997, CQG 42 225006)** provides **qualitative literature consistency** for our SIDM findings — their two-mediator benchmark point (m_χ=600 GeV, m_φ=15 MeV, σ/m~1 cm²/g, σ_SI=6.7×10⁻⁵¹ cm²) sits in the same SIDM dwarf band as our T54/T62 (m_χ=34 GeV, m_ρ=3.55 MeV, σ/m=1.36 cm²/g, σ_DM_n=2×10⁻¹⁰⁴ cm²) to within a factor of ~1.5 on cross-section and far below the neutrino floor on direct detection, both finding a **decoupled MeV-scale mediator** that is **invisible to direct detection but visible to SIDM**; the arXiv:2510.05216 (DAMA/COSINE/ANAIS) paper provides brief contextual support for the T39 decoupling finding but is **not directly relevant** to our composite dark matter model. (Per R11 audit A13, the original v10 framing of "within 30% on cross-section" was overstated; the on-disk numbers are 0.96 vs 1.36 cm²/g at v=30 km/s, i.e. 41.7% off, with the two benchmarks at 17.6× different DM mass.)
