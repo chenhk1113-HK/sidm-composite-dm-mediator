@@ -57,32 +57,59 @@ if [ ${#py_changed[@]} -gt 0 ]; then
     # Find a python that has the project's deps. The venv at ~/wimpy is the
     # canonical WIMpy venv. For non-WIMpy projects, this is a no-op if no venv
     # is on PATH.
-    PY="${PY:-python3}"
-    for venv_path in "$HOME/wimpy/bin/python" "$HOME/.venv/bin/python" "venv/bin/python" ".venv/bin/python"; do
-        if [ -x "$venv_path" ]; then
-            PY="$venv_path"
-            break
-        fi
-    done
-
-    echo "🐍 pre-commit: py_compile check on ${#py_changed[@]} Python file(s)..."
-    py_errors=()
-    for py in "${py_changed[@]}"; do
-        if ! "$PY" -m py_compile "$py" 2>/dev/null; then
-            py_errors+=("$py")
-        fi
-    done
-
-    if [ ${#py_errors[@]} -gt 0 ]; then
-        echo "❌ pre-commit: SyntaxError in:"
-        for f in "${py_errors[@]}"; do
-            echo "  - $f"
+    #
+    # Resolution order:
+    #   1. $PY env var (explicit override; preserves the existing behavior).
+    #   2. Linux/WSL venv search: ~/wimpy/bin/python, ~/.venv/bin/python, venv/bin/python, .venv/bin/python.
+    #   3. Windows MSYS: `python` resolves to /c/Python314/python.exe (numpy 2.4.6,
+    #      scipy 1.18.0, dynesty 3.0.0 — full deps), then Hermes venv, then system Python.
+    #   4. Last resort: `python3` (on Windows MSYS, this is the Microsoft Store stub
+    #      that returns "Python was not found" and exit 49 — useless for py_compile.
+    #      The Linux venv search above catches real python3 on Linux/WSL.)
+    PY="${PY:-}"
+    if [ -z "$PY" ]; then
+        for venv_path in "$HOME/wimpy/bin/python" "$HOME/.venv/bin/python" "venv/bin/python" ".venv/bin/python"; do
+            if [ -x "$venv_path" ]; then
+                PY="$venv_path"
+                break
+            fi
         done
-        echo "Run:  $PY -m py_compile <file>"
-        echo "Then re-stage and commit. Or use --no-verify if you know what you're doing."
-        exit 1
+        # Windows MSYS fallback: prefer `python` (resolves to /c/Python314/python.exe
+        # which has numpy + scipy + dynesty) over the Microsoft Store `python3` stub.
+        if [ -z "$PY" ]; then
+            for win_py in "python" "python.exe" "/c/Python314/python.exe" \
+                          "/c/Users/lamkuenai/AppData/Local/hermes/hermes-agent/venv/Scripts/python.exe"; do
+                if command -v "$win_py" >/dev/null 2>&1; then
+                    PY="$win_py"
+                    break
+                fi
+            done
+        fi
     fi
-    echo "  ✅ Python files compile OK"
+
+    if [ -z "$PY" ]; then
+        echo "⚠️  pre-commit: no python found on PATH or in known venvs; skipping py_compile check."
+        echo "    Set \$PY to override. Linux/WSL: try 'which python3'. Windows MSYS: try 'which python'."
+    else
+        echo "🐍 pre-commit: py_compile check on ${#py_changed[@]} Python file(s) using $PY..."
+        py_errors=()
+        for py in "${py_changed[@]}"; do
+            if ! "$PY" -m py_compile "$py" 2>/dev/null; then
+                py_errors+=("$py")
+            fi
+        done
+
+        if [ ${#py_errors[@]} -gt 0 ]; then
+            echo "❌ pre-commit: SyntaxError in:"
+            for f in "${py_errors[@]}"; do
+                echo "  - $f"
+            done
+            echo "Run:  $PY -m py_compile <file>"
+            echo "Then re-stage and commit. Or use --no-verify if you know what you're doing."
+            exit 1
+        fi
+        echo "  ✅ Python files compile OK"
+    fi
 fi
 
 # 3. Julia smoke test (only if julia is on PATH)
