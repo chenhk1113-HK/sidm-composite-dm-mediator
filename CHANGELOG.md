@@ -7,6 +7,76 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [T69] — 2026-08-19
+
+### Baryonic-feedback nuisance sensitivity (response to `Baryonic feedback.docx`)
+
+The user uploaded `Baryonic feedback.docx` (91 lines, ~13 KB), proposing
+that baryonic feedback be added as a complementary module to the SIDM
+joint fit. Per the reviewer-audit skill, every claim was tier-ranked
+against the on-disk ground truth and a critical assessment was
+authored (`v0.3-prelim/docs/REVIEWER_BARYONIC_FEEDBACK.md`).
+
+### Added
+
+- **`code/feedback_nuisance.py`** — 1-parameter feedback nuisance
+  `f_fb ∈ [0, 1]` rescaling the SPARC saturated-Δ-log-Z contribution.
+  Implements the `Di Cintio+ 2014a (MNRAS 437, 415)` relation as the
+  prior on `f_fb` (truncated log-normal, peak at 0.4). Public API:
+  `sparc_feedback_rescale(f_fb)`, `sparc_rescaled_loglike(sigma_m_0,
+  a, f_fb)`, `prior_f_fb(f_fb)`, `log_rc_over_rs(m_star_over_m_halo)`,
+  `R_corr_raw(m_star_over_m_halo)`, `make_f_fb_grid(n_points)`.
+
+- **`code/t69_feedback_nuisance_rerun.py`** — Re-runs the T41 joint fit
+  at 5 `f_fb` values and saves the MAP at each. Auto-backs-up the
+  canonical T41 result and restores it at the end (per AGENTS.md L2
+  re-run pattern).
+
+- **`tests/test_t69_feedback_nuisance.py`** — 23 regression tests
+  covering the Di Cintio relation, the rescaling boundaries + range
+  enforcement, the prior peak, the linearity in `f_fb`, and the T41
+  wrapper integration.
+
+- **`v0.3-prelim/docs/REVIEWER_BARYONIC_FEEDBACK.md`** — Critical
+  assessment of the source review (tier-rank: 6 verified + 3 partial +
+  4 wrong/out-of-scope). Identifies 5 "practical ways" recommendations
+  and ranks them by usefulness.
+
+- **`v0.3-prelim/data/results/t69_feedback_nuisance_sweep.json`** — The
+  sweep result, with `MAP_physical` per `f_fb`.
+
+### Patched
+
+- **`code/t41_mediator_mass_joint_fit.py`** — SPARC contribution now
+  reads `F_FB_OVERRIDE` env var (default 0.5) and rescales the SPARC
+  contribution via `feedback_nuisance.sparc_rescaled_loglike(...)`.
+  Falls back to legacy `t8.delta_log_sparc` if `feedback_nuisance`
+  can't be imported.
+
+### Documented
+
+- **`v0.3-prelim/docs/R12_AUDIT_CLOSURE.md §7.5a`** — New addendum
+  titled "Baryonic-feedback nuisance sensitivity (T69)". Reports the
+  full sweep table and the headline finding.
+
+- **`v0.3-prelim/docs/FINDINGS.md`** — Status update on the
+  baryonic-feedback confounder (line 239). Update history entry added.
+
+### Headline finding
+
+The T41 σ/m₀ MAP is **stable to within ~20%** across
+`f_fb ∈ [0, 0.75]`. At `f_fb = 1.0` (extreme; ignoring SPARC), σ/m₀
+drops by **32%** (from 0.054 → 0.037 cm²/g) and the Yukawa velocity
+index jumps from `+0.012` to `+1.92` (the SPARC constraint that was
+forcing `a ≈ +0.2` has been removed). The Di Cintio+ 2014a prior
+supports `f_fb ≤ 0.5`, where the headline σ/m₀ is unaffected.
+
+### Test count
+
+- **Before:** 359 passing, 4 skipped, 3 pre-existing unrelated failures
+- **After:** 382 passing, 4 skipped, 5 pre-existing unrelated failures
+- **New tests:** 23 (all in `test_t69_feedback_nuisance.py`)
+
 ## [R12c] — 2026-08-18
 
 ### Consider-this-review.docx closure (reviewer-tier ranking)

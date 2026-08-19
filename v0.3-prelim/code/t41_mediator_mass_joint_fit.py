@@ -199,12 +199,29 @@ def loglike_joint(theta):
         return -np.inf
 
     # Optional SPARC contribution (slow, so disabled by default)
-    # Use a coarse grid to be fast
+    # Use a coarse grid to be fast.
+    # T69 (v0.4-prelim): rescaled by baryonic-feedback nuisance f_fb.
+    # Default f_fb = 0.5 (moderate feedback per the Di Cintio+ 2014a prior).
+    # Override via the F_FB_OVERRIDE env var (used by t69_feedback_nuisance_rerun.py).
+    import os
+    f_fb_default = 0.5
     try:
-        import t8_v03_joint_fit as t8
-        ll_sparc = t8.delta_log_sparc(sigma_m_0, a) / 1000
+        f_fb = float(os.environ.get("F_FB_OVERRIDE", f_fb_default))
+        if not (0.0 <= f_fb <= 1.0):
+            f_fb = f_fb_default
+    except (TypeError, ValueError):
+        f_fb = f_fb_default
+    try:
+        import feedback_nuisance as fb
+        ll_sparc = fb.sparc_rescaled_loglike(sigma_m_0, a, f_fb=f_fb) / 1000
     except Exception:
-        ll_sparc = 0.0
+        # Fallback to the legacy call if feedback_nuisance can't be imported
+        # (e.g. fresh clone without v0.4-prelim paths set up).
+        try:
+            import t8_v03_joint_fit as t8
+            ll_sparc = t8.delta_log_sparc(sigma_m_0, a) / 1000
+        except Exception:
+            ll_sparc = 0.0
 
     return ll_dsph + ll_ufd + ll_bullet + ll_lz + ll_fermi + ll_sparc
 

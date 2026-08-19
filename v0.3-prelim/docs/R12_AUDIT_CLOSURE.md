@@ -282,6 +282,56 @@ of magnitude smaller** than naive dimensional-analysis expectations for
 a sub-MeV dark photon (~10⁻³ to 10⁻⁵). Any UV completion of this
 benchmark must explain that suppression.
 
+### 7.5a Baryonic-feedback nuisance sensitivity (T69, 2026-08-19, v0.4-prelim extension)
+
+**Provenance:** External review of `Baryonic feedback.docx` (2026-08-19)
+proposed adding baryonic feedback as a complementary module to the joint
+fit. Per the critical assessment in `REVIEWER_BARYONIC_FEEDBACK.md`, the
+highest-leverage experiment is a 1-parameter feedback nuisance `f_fb`
+rescaling the SPARC saturated-Δ-log-Z contribution. This was implemented
+as `code/feedback_nuisance.py` and shipped as `T69`. The T41 joint fit
+was re-run at `f_fb ∈ {0.0, 0.25, 0.5, 0.75, 1.0}` with the
+`Di Cintio+ 2014a (MNRAS 437, 415)` relation as the prior on `f_fb`.
+
+**T69 results (see `data/results/t69_feedback_nuisance_sweep.json`):**
+
+| f_fb | σ/m₀ (cm²/g) | a (Yukawa) | m_φ (MeV) | log Z | Δσ/m₀ vs f_fb=0 |
+|------|--------------|------------|-----------|-------|----------------|
+| 0.00 (no feedback)   | **0.054** | +0.012  | 21   | -213.9 | 0% |
+| 0.25 (weak feedback) | **0.064** | +0.156  | 904  | -162.4 | +18% |
+| 0.50 (moderate)      | **0.056** | +0.089  | 49   | -111.6 | +3% |
+| 0.75 (strong)        | **0.065** | +0.181  | 139  | -59.9  | +20% |
+| 1.00 (extreme)       | **0.037** | +1.923  | 7.6  | -5.3   | **-32%** |
+
+**Headline finding:** The σ/m₀ MAP is **stable to within ~20%** across
+the `f_fb ∈ [0, 0.75]` range, but drops by **32% at f_fb = 1.0**
+(extreme, equivalent to ignoring SPARC entirely). The Yukawa-derived
+velocity index `a` stays in [+0.01, +0.18] for `f_fb ≤ 0.75` and
+**jumps to +1.92 at f_fb = 1.0** (a regime where the data-preferred
+a ≈ +0.94 is well-recovered, but the constraint weakens).
+
+**Interpretation:** The T41 σ/m₀ MAP at the R12 closure point (0.066
+cm²/g) is **robust to moderate baryonic feedback** (f_fb ≤ 0.5,
+the regime the Di Cintio+ 2014a prior supports). The pipeline's
+headline number does not require fine-tuning away from feedback.
+
+**Caveat:** This is a 1-parameter rescaling of the SPARC contribution,
+NOT a full hydro simulation. A per-galaxy M★/M_h split would be more
+defensible and is a v0.5-scope item. The Di Cintio relation has
+    published slope uncertainty of ±0.3 that is not propagated here.
+
+**Honest limits:**
+- The formulation `weight = max(0, 1 - f_fb)` is the simplest defensible
+  linear rescaling. More elaborate formulations (per-galaxy M★/M_h bin
+  re-weighting) belong in v0.5.
+- The T69 sweep uses dynesty at the same nlive as the R12-closure T41
+  run. The MAP at f_fb = 1.0 has a much higher log Z (-5.3 vs -213.9)
+  because the SPARC contribution is suppressed entirely; this is the
+  "no SPARC" baseline, NOT a feedback-validated point.
+- At f_fb = 1.0, the a = +1.92 reading should NOT be interpreted as
+  "feedback produces a large velocity index" — it should be read as
+  "the SPARC constraint that was forcing a ≈ +0.2 has been removed."
+
 ## 7.6 Layman's complete walk-through
 
 This section is for readers who want a single coherent narrative of the

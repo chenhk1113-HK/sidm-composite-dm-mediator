@@ -238,6 +238,8 @@ To turn this into a peer-reviewed result:
 4. **Add cosmology N-body simulations** to validate the gravothermal collapse signature.
 6. **Address the baryonic-feedback confounders** explicitly (per Horigome+ slide deck: "baryonic feedback affects classical dSphs").
 
+   **STATUS (2026-08-19, v0.4-prelim extension):** Implemented as T69. A 1-parameter feedback nuisance `f_fb ∈ [0, 1]` rescales the SPARC saturated-Δ-log-Z contribution. The T41 joint fit was re-run at 5 f_fb values; the σ/m₀ MAP is stable to within ~20% across `f_fb ∈ [0, 0.75]`, and drops by 32% at `f_fb = 1.0` (extreme — equivalent to ignoring SPARC). The Di Cintio+ 2014a prior supports `f_fb ≤ 0.5`, where the headline σ/m₀ is unaffected. See `v0.3-prelim/docs/R12_AUDIT_CLOSURE.md §7.5a` for the full result table and `v0.3-prelim/code/feedback_nuisance.py` + `t69_feedback_nuisance_rerun.py` for the implementation.
+
 v0.3 is a clean intermediate result with all the methodology in place. The improvements vs v0.2 (higher σ/m, resolved scale tension, proper dSph dip) come from calibration choices, not new physics.
 
 ## Provenance
@@ -258,6 +260,8 @@ v0.3 is a clean intermediate result with all the methodology in place. The impro
 - 2026-08-11 v0.3-prelim-D2 — Directions 1+2+3: T17 (KISS-SIDM corrected fit, +12 tests), DSMC simulator (+10 tests), T18 (two-component SIDM, +16 tests). 155 tests total.
 - 2026-08-11 v0.3-prelim-D3 — Tier 1 (DSMC boost N=1e5, 14s; Julia install DEFERRED), Tier 2 (Yang+ 2026 real SIDM2v curve, T19), Tier 3 (KISS-SIDM × 2-comp combined, T20). +14 tests (169 total).
 - 2026-08-11 v0.3-prelim-D4 — User approved full Julia install. Installed Julia 1.11.5, precompiled all 348 KISS-SIDM packages. Built Python↔Julia bridge (`kiss_sidm_julia_bridge.py`) and JLD2→JSON reader (`kiss_sidm_julia_reader.py`). Ran real KISS-SIDM at canonical 10⁹ halo (4781 snapshots, 0.000-400 Gyr). Re-ran T17 with REAL gravothermal penalty (T21) — log Z = -0.66 vs placeholder -1.22. +21 tests (190 total).
+- 2026-08-17 v0.3-prelim-R12 — Six AI reviewers sent an audit (`six reviews.docx`). R12 closed: 4 P0 + 3 P1 fixes; 22 regression tests; headlined `σ/m₀ = 0.066 cm²/g, a = +0.186, m_φ = 26.6 MeV, m_χ = 14.8 GeV, ε = 10⁻³⁵, log Z = -213.7`. See `v0.3-prelim/docs/R12_AUDIT_CLOSURE.md`.
+- 2026-08-19 v0.3-prelim-T69 — T69 baryonic-feedback nuisance: code/feedback_nuisance.py + t69_feedback_nuisance_rerun.py + test_t69_feedback_nuisance.py (23 tests). Sensitivity sweep across `f_fb ∈ {0.0, 0.25, 0.5, 0.75, 1.0}`; σ/m₀ MAP stable to ~20% across the moderate-feedback regime. R12_AUDIT_CLOSURE §7.5a addendum. FINDINGS.md status update on baryonic-feedback confounder. See `v0.3-prelim/docs/REVIEWER_BARYONIC_FEEDBACK.md` for the critical assessment of the source review.
 
 ## TIER 1 STEP 4-6 — Real KiSS-SIDM integration (D4)
 

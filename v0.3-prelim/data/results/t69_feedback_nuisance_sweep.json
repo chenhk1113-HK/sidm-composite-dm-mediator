@@ -1,0 +1,113 @@
+{
+  "sweep_results": [
+    {
+      "f_fb": 0.0,
+      "wall_seconds": 48.141754388809204,
+      "map_params": {
+        "log_m_phi_MeV": 1.3302118465677366,
+        "log_m_chi_GeV": 0.7785260618832374,
+        "g_chi": 0.12143290434619498,
+        "log_epsilon": -18.598849682929618,
+        "log_alpha": -26.193869289831113,
+        "m_phi_MeV": 21.390052305814656,
+        "m_chi_GeV": 6.005180447362995,
+        "sigma_m_0_derived": 0.05397435298214805,
+        "a_derived": 0.011770174403971647
+      },
+      "log_z": -213.91741789767482,
+      "log_z_err": 0.247991442789805,
+      "interpretation": "log Z = -213.917, posterior medians: m_phi = 25.24 MeV, m_chi = 14.37 GeV, g_chi = 0.1302, eps = 1.94e-35, alpha = 6.16e-16. Derived sigma/m_0 = 0.054 cm^2/g, a = +0.012. Yukawa velocity index = +0.012; T39 data-preferred = +0.94. |Tension| = 0.93 (threshold 1.0). R12 P0-B (2026-08-17): the pre-fix '1.3 sigma tension' claim was a sign-flip artifact in derived_a; this re-run uses the corrected sign."
+    },
+    {
+      "f_fb": 0.25,
+      "wall_seconds": 50.99174165725708,
+      "map_params": {
+        "log_m_phi_MeV": 2.9562835108409273,
+        "log_m_chi_GeV": 2.986919418038637,
+        "g_chi": 1.5250676450309142,
+        "log_epsilon": -28.22880771696438,
+        "log_alpha": -14.721503685830864,
+        "m_phi_MeV": 904.2395757704282,
+        "m_chi_GeV": 970.3299089095212,
+        "sigma_m_0_derived": 0.06410611178081235,
+        "a_derived": 0.15621131524281673
+      },
+      "log_z": -162.44645720710807,
+      "log_z_err": 0.23579003236784382,
+      "interpretation": "log Z = -162.446, posterior medians: m_phi = 37.67 MeV, m_chi = 31.37 GeV, g_chi = 0.1543, eps = 2.42e-35, alpha = 2.06e-17. Derived sigma/m_0 = 0.064 cm^2/g, a = +0.156. Yukawa velocity index = +0.156; T39 data-preferred = +0.94. |Tension| = 0.78 (threshold 1.0). R12 P0-B (2026-08-17): the pre-fix '1.3 sigma tension' claim was a sign-flip artifact in derived_a; this re-run uses the corrected sign."
+    },
+    {
+      "f_fb": 0.5,
+      "wall_seconds": 46.995347023010254,
+      "map_params": {
+        "log_m_phi_MeV": 1.6887598159820048,
+        "log_m_chi_GeV": 1.5865617951380562,
+        "g_chi": 0.17690560413686024,
+        "log_epsilon": -12.292914428106975,
+        "log_alpha": -17.50288569480732,
+        "m_phi_MeV": 48.8382187734588,
+        "m_chi_GeV": 38.597732784726226,
+        "sigma_m_0_derived": 0.05580538092579186,
+        "a_derived": 0.08865355466985032
+      },
+      "log_z": -111.56728655978331,
+      "log_z_err": 0.2326445971407506,
+      "interpretation": "log Z = -111.567, posterior medians: m_phi = 61.66 MeV, m_chi = 80.91 GeV, g_chi = 0.1979, eps = 2.98e-35, alpha = 2.29e-16. Derived sigma/m_0 = 0.056 cm^2/g, a = +0.089. Yukawa velocity index = +0.089; T39 data-preferred = +0.94. |Tension| = 0.85 (threshold 1.0). R12 P0-B (2026-08-17): the pre-fix '1.3 sigma tension' claim was a sign-flip artifact in derived_a; this re-run uses the corrected sign."
+    },
+    {
+      "f_fb": 0.75,
+      "wall_seconds": 59.53239607810974,
+      "map_params": {
+        "log_m_phi_MeV": 2.142565367265129,
+        "log_m_chi_GeV": 2.208265444653625,
+        "g_chi": 0.3687795767000089,
+        "log_epsilon": -16.9447544723468,
+        "log_alpha": -21.075062488885223,
+        "m_phi_MeV": 138.85622918360255,
+        "m_chi_GeV": 161.5345568752679,
+        "sigma_m_0_derived": 0.06492617528629659,
+        "a_derived": 0.18058736497428532
+      },
+      "log_z": -59.93159983744188,
+      "log_z_err": 0.22154269393256867,
+      "interpretation": "log Z = -59.932, posterior medians: m_phi = 116.88 MeV, m_chi = 169.92 GeV, g_chi = 0.2991, eps = 1.15e-35, alpha = 6.71e-16. Derived sigma/m_0 = 0.065 cm^2/g, a = +0.181. Yukawa velocity index = +0.181; T39 data-preferred = +0.94. |Tension| = 0.76 (threshold 1.0). R12 P0-B (2026-08-17): the pre-fix '1.3 sigma tension' claim was a sign-flip artifact in derived_a; this re-run uses the corrected sign."
+    },
+    {
+      "f_fb": 1.0,
+      "wall_seconds": 12.044973373413086,
+      "map_params": {
+        "log_m_phi_MeV": 0.881450776435549,
+        "log_m_chi_GeV": 1.7921311300969864,
+        "g_chi": 0.03382376678123934,
+        "log_epsilon": -29.43966114854946,
+        "log_alpha": -18.970519415003608,
+        "m_phi_MeV": 7.611158681439161,
+        "m_chi_GeV": 61.962813624309746,
+        "sigma_m_0_derived": 0.03686873929862329,
+        "a_derived": 1.922748630004167
+      },
+      "log_z": -5.252589153076138,
+      "log_z_err": 0.16981285885577602,
+      "interpretation": "log Z = -5.253, posterior medians: m_phi = 57.69 MeV, m_chi = 385.40 GeV, g_chi = 0.1281, eps = 4.24e-36, alpha = 1.22e-15. Derived sigma/m_0 = 0.037 cm^2/g, a = +1.923. Yukawa velocity index = +1.923; T39 data-preferred = +0.94. |Tension| = 0.98 (threshold 1.0). R12 P0-B (2026-08-17): the pre-fix '1.3 sigma tension' claim was a sign-flip artifact in derived_a; this re-run uses the corrected sign."
+    }
+  ],
+  "metadata": {
+    "n_points": 5,
+    "f_fb_grid": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "formulation": "weight = max(0, 1 - f_fb)",
+    "di_cintio_2014a_slope": 1.34,
+    "di_cintio_2014a_intercept": 0.34,
+    "sparc_pop_mean_mstar_over_mhalo": 0.03
+  },
+  "review_provenance": {
+    "docx": "Baryonic feedback.docx, 2026-08-19",
+    "critique": "v0.3-prelim/docs/REVIEWER_BARYONIC_FEEDBACK.md",
+    "audit": "v0.3-prelim/docs/R12_AUDIT_CLOSURE.md"
+  }
+}
