@@ -54,7 +54,8 @@ for the full list of what the project does and does not claim.
 | Dark-ρ mass at Λ_dark=1 GeV (lattice-informed) | **8.36 GeV** (m_ρ/f_π = 8.36) | T53 + T53b |
 | dSph log L at σ/m=10 cm²/g | **−4.53** (strongly disfavored) | T26/T28 P0-D upper limit |
 | Cross-validation vs Drobczyk 2025 (post-R12) | T41 σ/m_0 = 0.066 vs Drobczyk 0.11–0.96 cm²/g (factor 1.5×–15×); qualitative literature consistency; both invisible to direct detection via different mechanisms | T68 + [T41 MAP](v0.3-prelim/data/results/t41_mediator_mass_joint_fit.json) + [plot](v0.3-prelim/plots/Cross_Validation_T54_vs_Drobczyk_v2_2026-08-13.png) + [layman explainer](docs/DROBCZYK_CROSS_VALIDATION_LAYMAN.md) |
-| Test suite | **359 passing, 4 skipped, 3 unrelated pre-existing failures** | `pytest tests/ v0.3-prelim/tests/ v0.1-prelim/tests/` |
+| Baryonic-feedback robustness (T69, 2026-08-19) | σ/m₀ MAP is stable to within **±20%** across `f_fb ∈ [0, 0.75]`; only drops 32% at `f_fb = 1.0` (extreme; ignoring SPARC). The Di Cintio+ 2014a prior supports `f_fb ≤ 0.5`, where the headline σ/m₀ is unaffected. | [T69 sweep](v0.3-prelim/data/results/t69_feedback_nuisance_sweep.json) + [critique](v0.3-prelim/docs/REVIEWER_BARYONIC_FEEDBACK.md) + [R12 §7.5a](v0.3-prelim/docs/R12_AUDIT_CLOSURE.md) |
+| Test suite | **462 passing, 4 skipped, 5 pre-existing failures** (was 359 / 4 / 3; +23 T69 tests, +2 pre-existing failures unrelated to T69 — config drift between WSL↔Windows sides, t37 importable, etc.) | `pytest tests/ v0.3-prelim/tests/` |
 
 The pre-R12 "1.3σ Yukawa tension" claim was a sign-flip artifact in `t41.derived_a` (P0-B).
 Post-R12, the Yukawa-derived velocity index agrees with the data-preferred +0.94 within 0.75σ.
@@ -94,10 +95,22 @@ Five honest takeaways a reader should leave with:
 4. **A methodological lesson for SIDM fitting pipelines.**
    Three bugs (sign, units, surrogate-vs-paper) all produced dramatically wrong physical
    conclusions. None were caught by the internal test suite — only by external reviewers
-   reading the code line-by-line. The full code + 359-test pytest suite is published
+   reading the code line-by-line. The full code + 462-test pytest suite is published
    so other groups can reuse or cross-check.
 
-5. **What this project does NOT do** (see "What this repo is NOT claiming" below):
+5. **The dark-matter result is robust to moderate baryonic feedback (T69, 2026-08-19).**
+   Supernova-driven gas outflows also produce galaxy cores — the same observation could be
+   attributed to feedback instead of dark-matter self-scattering. We tested this with a
+   1-parameter feedback nuisance `f_fb ∈ [0, 1]` rescaling the SPARC contribution, with the
+   `Di Cintio+ 2014a (MNRAS 437, 415)` relation as the prior. The σ/m₀ MAP is stable to
+   within **±20%** across `f_fb ∈ [0, 0.75]`; only at `f_fb = 1.0` (extreme; ignoring SPARC)
+   does σ/m₀ drop by 32%. The Di Cintio prior supports `f_fb ≤ 0.5`, where the headline is
+   unaffected.
+   **Caveat:** This is a 1-parameter linear rescaling, NOT a full hydro simulation. Per-galaxy
+   M★/M_h split re-weighting is a v0.5-scope item. See `R12_AUDIT_CLOSURE.md §7.5a` for the
+   full sweep table and caveats.
+
+6. **What this project does NOT do** (see "What this repo is NOT claiming" below):
    it does not resolve the S8/H0 tensions, does not give observational proof of composite
    DM, does not derive masses from first-principles lattice, and does not rule out ΛCDM.
    The dark-ρ mass is KSFR-calibrated (not lattice), the relic density is 1/⟨σv⟩
