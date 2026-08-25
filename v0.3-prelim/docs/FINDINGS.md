@@ -757,3 +757,64 @@ mechanics applies to SIDM but does not cite the bounds.
 - `CHANGELOG.md [T70.1]` entry — full change log with verification details
 - `docs/DATA_SOURCES.md §5` — 3 new source entries (Tremaine-Gunn 1979,
   Boyarsky-MV 2023, Rogers-Peiris 2021), all HTTP-200 verified
+
+---
+
+### Mediator quantum regime — the other side of the question (Q&A 2026-08-25)
+
+**Per user follow-up**: *"then what about the mediator, it is also very small"*.
+
+The T41 posterior gives the secluded dark photon mediator mass **m_A' = 26.6 MeV**
+at MAP. Three distinct length scales matter for the mediator, and each lands
+in a different physical regime:
+
+| Length scale | Formula | Value at m_A'=26.6 MeV | Regime |
+|---|---|---|---|
+| **Yukawa force range** (= Compton wavelength) | λ_C = ℏ/(m_A' c) | **~7.4 fm** | Force-mediated (Yukawa suppression at r > λ_C) |
+| **de Broglie wavelength at SIDM velocity** | λ_dB = h/(m_A' · v) at v=10 km/s | **~10⁻³¹ pc** | Far below any astrophysical scale → classical |
+| **de Broglie wavelength at ultra-relativistic v~c** | λ_dB = h/(m_A' · c) | **~10⁻¹⁸ pc** | Still microscopic → classical |
+
+**Why the mediator is NOT in the FDM regime** (m_χ ~ 10⁻²² eV):
+
+- FDM at m_χ ~ 10⁻²² eV has λ_dB ~ 1 kpc — comparable to galaxy scales,
+  so its quantum wave nature dominates its phenomenology (soliton
+  formation, interference patterns).
+- Mediator at m_A' ~ 26.6 MeV has λ_dB ~ 10⁻³¹ pc (at SIDM velocity) — 31
+  orders of magnitude shorter. **The mediator is to FDM as a baseball is
+  to an ocean wave.**
+- The mediator is 27 orders of magnitude heavier than FDM and 3 orders
+  lighter than the SIDM itself (m_χ = 14.8 GeV). It sits comfortably in
+  the WIMP-like force-mediator regime, where quantum effects matter for
+  the *coupling* (annihilation cross-section, decay rate, kinetic mixing)
+  but NOT for the *spatial distribution* at galactic scales.
+
+**The mediator's quantum behavior IS already in the project** — via three
+existing post-processors:
+
+| Existing channel/post-processor | Mediator quantum effect handled |
+|---|---|
+| **T30 (LZ σ_SI mapping)** | Maps ε (kinetic mixing) → σ_SI via dark-photon portal (Kaplinghat-Tulin-Yu 2014 PRD 89, 035009; Berlin+ 2018 PRD 97, 055033). Captures how the mediator couples to SM nuclei. |
+| **T39 (ε wide-prior marginalization)** | Joint posterior on log₁₀(ε) with log₁₀(m_A'). Captures how the mediator mass affects the LZ σ_SI constraint (heavier mediator → shorter Yukawa range → less direct-detection visibility). |
+| **T55 (Boltzmann-relic calibration)** | σ_v for χχ̄ → A'A' → sets the relic density. Captures the mediator's annihilation cross-section (quantum-field-theory computation). |
+
+**No new channel is needed for the mediator's quantum regime** — the
+existing pipeline correctly handles the relevant quantum-field-theory
+effects at the mediator's mass scale. The mediator is treated as a
+**WIMP-like force carrier** (heavy vector boson with kinetic mixing to
+SM), not as a fuzzy/ultralight field.
+
+**Honest gap (not a bug)**: The project does NOT separately bound the
+mediator's m_A' from quantum-statistical considerations the way
+Channel 13 bounds the SIDM m_χ. For the mediator, such a bound would
+have to come from constraints on BSM physics (e.g., beam-dump
+experiments, astrophysical cooling arguments) — not from phase-space
+density arguments. The existing constraints on m_A' come from the
+T39 wide-prior joint posterior with ε, which already pushes m_A' into
+the MeV–GeV range (the canonical "secluded WIMP" window). No additional
+defensive channel needed.
+
+### See also (this section)
+
+- T70 + T70.1 addenda above — SIDM-side quantum regime analysis
+- T30, T39, T55 references in `v0.3-prelim/docs/DARK_SECTOR_LAGRANGIAN.md` §9 (Benchmark A)
+- `CHANGELOG.md [T70]` and `[T70.1]` entries

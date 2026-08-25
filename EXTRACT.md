@@ -14,6 +14,17 @@
   assumption with literature citations. No new physics constraint on the project
   (T41 posterior median m_χ = 14.8 GeV is ~10⁸ above the bound). See `CHANGELOG.md`
   [T70.1] entry for details.
+- **Mediator quantum regime (Q&A 2026-08-25):** Per follow-up user question
+  *"then what about the mediator, it is also very small"* — confirmed via the
+  T41 posterior that the secluded dark photon mediator has m_A' = 26.6 MeV at
+  MAP, which gives a Yukawa force range (Compton wavelength) of ~7.4 fm and a
+  de Broglie wavelength of ~10⁻³¹ pc at SIDM-velocity scales. Both are
+  **classical regimes** (force-mediated, not wave-mediated). The mediator's
+  quantum-field-theory effects (annihilation cross-section, decay rate, kinetic
+  mixing ε) are already handled by the existing T30 (LZ σ_SI mapping), T39 (ε
+  marginalization), and T55 (Boltzmann-relic calibration). **No new channel
+  needed** — the project already captures the mediator's quantum behavior
+  correctly. See `v0.3-prelim/docs/FINDINGS.md` for the full sub-section.
 - Out-of-scope literature flagged but not implemented: FDM/ψDM wholesale, DM→graviton Gertsenshtein
   decay, bimetric gravity. Different physics frameworks; would need separate repos.
 
