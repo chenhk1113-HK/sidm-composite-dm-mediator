@@ -7,6 +7,70 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [T70.2] — 2026-08-25
+
+### Tier-1 PATCH — R13 reviewer audit closure (4 of 9 items shipped)
+
+Per user upload of `sidm review2.docx` (2026-08-25). Two reviewers in the
+document: Reviewer1 (detailed scientific audit) and Reviewer2 (executive
+summary). Both are AI systems per the document's self-identification.
+
+Reviewer1's 10 suggestions tier-ranked; **4 shipped in this round**,
+**5 deferred to v0.4 sub-projects**, **1 partially addressed**.
+
+### Shipped (4 items)
+
+| Item | Commit | What it adds |
+|---|---|---|
+| **M4**: MODEL_ASSUMPTIONS_AND_LIMITATIONS.md | `82e0bc7` | Top-level doc (240 lines) consolidating physics included, omitted, fixed parameters, approximations, known tensions, theoretical validity boundaries |
+| **M3**: Centralize constants | `1d478b2` | 16 T70/T70.1 channel constants moved from `channels_extended.py` → `config.py`; 6 new tests; revealed hidden gitignored root `config.py` duplicate path |
+| **M1**: Runtime version guard | `6ff110a` | `_version_guard.py` with allowlist for SPARC rotmod data; opt-in strict mode via `SIDM_STRICT_VERSION_GUARD=1`; 12 new tests |
+| **H2**: Mediator lifetime + BBN | `7642655` | Channel 14 (`loglike_mediator_lifetime`) with pre-BBN/post-BBN/stable regimes per Berlin 2018; 11 new tests |
+
+### Deferred to v0.4 sub-projects (5 items)
+
+- **H1**: KSFR/PCAC validity bounds (requires T53 parametrization audit)
+- **H3**: Sampler convergence test (requires 3 dynesty runs + contour plots)
+- **H4**: Sensitivity tests (3 sub-sweeps: xi, form-factor, inelastic on/off)
+- **H5**: Bullet-Cluster full likelihood (requires Cha+ 2025 posterior profile)
+- **M2**: Reference posterior chains in `data/reference/` (file management)
+
+### Partially addressed (1 item)
+
+- **M3 / config centralization**: Shipped for the 16 T70/T70.1 constants.
+  ~170 other scattered constants remain (e.g., `feedback_nuisance.py`,
+  `channels_v03.py`). Full audit deferred to v0.5.
+
+### Verification
+
+- `python -m py_compile` exit 0 on all changed .py files
+- 132 tests pass / 2 pre-existing fail (SPARC data path) / 1 skipped
+- 29 new tests added in this round (6 + 12 + 11)
+- All LF line endings preserved
+- Pre-commit hook passed
+- GitHub push confirmed via raw.githubusercontent.com HTTP 200
+
+### Honest verification status of reviewer's claims
+
+Per AGENTS.md rule 14 + scientific-code-verification skill, I verified
+each reviewer claim against the actual project state. **2 of Reviewer 2's
+claims were stale** (pre-R12/pre-R11 state): the ε range (10⁻⁵⁰ to 10⁻⁵³)
+and the "Fermi-LAT NOT in main joint" claim. Channel 2 (Fermi-LAT dSph)
+was added via R11 G11 closure on 2026-08-14.
+
+**1 pre-existing test failure documented but NOT fixed**: the dSph
+bimodal dip test (`test_halo_and_likelihoods.py:200`) was failing
+before R13; continues to fail after R13. Root cause: pre-existing bug
+in `channels_v03.py`'s bimodal-dip penalty logic. Out of scope for
+this round per project discipline (additive only). Documented in
+REVIEWER_AUDIT_R13.md for future attention.
+
+### See also
+
+- `v0.3-prelim/docs/REVIEWER_AUDIT_R13.md` — full audit closure
+- `MODEL_ASSUMPTIONS_AND_LIMITATIONS.md` — top-level assumption summary (M4)
+- `CHANGELOG.md [T70]`, [T70.1] entries — prior round of Tier-1 patches
+
 ## [T70.1] — 2026-08-25
 
 ### Tier-1 PATCH — Channel 13 (SIDM quantum-statistical lower mass bound)

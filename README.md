@@ -37,6 +37,15 @@
 > physics constraint on the project (T41 posterior median m_χ = 14.8 GeV is
 > ~10⁸ above the bound). See `CHANGELOG.md [T70.1]`.
 > **Channel count: 12 → 13.**
+>
+> **T70.2 R13 reviewer audit closure (2026-08-25):** Per `sidm review2.docx`,
+> 4 of 9 reviewer items shipped (M4 doc, M3 constants, M1 runtime guard,
+> H2 BBN check) + 5 deferred to v0.4 sub-projects (H1 KSFR bounds,
+> H3 convergence test, H4 sensitivity sweeps, H5 Bullet likelihood, M2
+> reference chains). New top-level doc `MODEL_ASSUMPTIONS_AND_LIMITATIONS.md`
+> + new audit closure `v0.3-prelim/docs/REVIEWER_AUDIT_R13.md`. Channel count
+> **13 → 14** (Channel 14 = loglike_mediator_lifetime per H2).
+> Test count: **103 → 132 pass** (+29 new tests).
 
 ---
 
