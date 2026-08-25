@@ -330,6 +330,60 @@ arXiv: [2101.09331](https://arxiv.org/abs/2101.09331).
 interpreted. We ingest this as the **observation** the model must
 explain, not the model itself.
 
+### `Tremaine-Gunn-1979` — Quantum-statistical lower bound on fermionic DM mass
+
+**Reference**: Tremaine, S., & Gunn, J. E. (1979), "Dynamical role of light
+neutral leptons in cosmology", *Physical Review Letters* **42**, 407–410.
+DOI: [10.1103/PhysRevLett.42.407](https://doi.org/10.1103/PhysRevLett.42.407).
+
+**Citation key**: `Tremaine-Gunn-1979`.
+**Used by**: `channels_extended.py::loglike_sidm_mass_lower` (Channel 13).
+**Channel-13 role**: Provides the canonical quantum-statistical lower
+bound on fermionic DM mass via phase-space density conservation under
+Liouville's theorem. Original bound: **m > 300–400 eV** for fermionic
+DM from dSph phase-space density. The bound encodes the fact that
+fermions cannot occupy the same quantum state — at too-low mass and too-
+high density, the Pauli exclusion principle would be violated.
+**This is the bound that encodes "quantum effects matter at low mass"** —
+the deeper physics behind why SIDM at GeV scale behaves classically
+while FDM at 10⁻²² eV does not.
+**Verification**: arXiv:0808.3902 (Sokolenko+ 2018 Indico PDF) and
+arXiv:2302.10246 (Boyarsky+ 2023, mass-varying extension) both reference
+the original Tremaine & Gunn 1979 result.
+
+### `Boyarsky-MV-2023` — Revisiting the Tremaine-Gunn limit with mass-varying particles
+
+**Reference**: Boyarsky, A., et al. (2023), "On the Tremaine-Gunn limit
+with mass-varying particles", *Physical Review D* **107**, 103535.
+arXiv: [2302.10246](https://arxiv.org/abs/2302.10246).
+
+**Citation key**: `Boyarsky-MV-2023`.
+**Used by**: Channel 13 (modern revisit of the Tremaine-Gunn bound).
+**Channel-13 role**: The consensus weakened bound — **m > 100 eV** for
+fermionic DM after accounting for dynamical-friction correction in
+dwarf spheroidals. We use this 100 eV as the effective SIDM_MASS_CLASSICAL_FLOOR_EV
+in `channels_extended.py`. The original 300–400 eV bound is recovered
+if dynamical friction is ignored.
+
+### `Rogers-Peiris-2021` — Lyman-alpha lower bound on ultralight scalar DM
+
+**Reference**: Rogers, K. K., & Peiris, H. V. (2021), "Strong bound on
+canonical ultralight axion dark matter from the Lyman-alpha forest",
+*Physical Review Letters* **126**, 071302.
+arXiv: [2008.11221](https://arxiv.org/abs/2008.11221).
+
+**Citation key**: `Rogers-Peiris-2021`.
+**Used by**: Channel 13 (bosonic ULDM lower bound).
+**Channel-13 role**: 95% CL lower limit **m > 2×10⁻²⁰ eV** for
+bosonic ultralight scalar DM. This bound is the analogue of the
+Tremaine-Gunn bound for bosonic DM — it encodes the fact that at
+sufficiently low mass, bosonic DM becomes a wave (Schrödinger-Poisson
+field) and the small-scale matter power spectrum is suppressed in ways
+that are NOT observed in the Lyman-alpha forest.
+**For SIDM at GeV scale**, this bound is irrelevant (we are far above
+10⁻²⁰ eV), but it documents the other side of the quantum-mechanical
+landscape.
+
 ---
 
 ## Citation hygiene notes

@@ -583,8 +583,8 @@ COSMIC_WEB_RADIO_SIGMA_M_INDEPENDENT = True
 def loglike_cosmic_web_radio(sigma_m_0: float, a: float, epsilon: float) -> float:
     """Channel 12: Cosmic-web radio synchrotron UPPER LIMIT (Pinetti 2025-26).
 
-    40× LOFAR synchrotron excess in cosmic-web filaments interpreted as
-    5-10 GeV DM decay → e+e- → synchrotron at 30-60 nG B fields.
+    40× LOFAR synch emission over in cosmic-web filaments interpreted as
+    5-10 GeV DM decay → e+e- → synch at 30-60 nG B fields.
 
     Implementation: Gaussian UPPER LIMIT on the dark photon kinetic mixing
     ε. Below log10(ε) ≈ -11 (Pinetti's saturation), no penalty. Above,
@@ -618,6 +618,105 @@ def loglike_cosmic_web_radio(sigma_m_0: float, a: float, epsilon: float) -> floa
     # Above upper limit: Gaussian penalty
     chi = ((log_eps - log_upper) / 1.0) ** 2
     return -0.5 * chi
+
+
+# ---------------------------------------------------------------------------
+# Channel 13 (T70.1 Tier-1 PATCH 2026-08-25): SIDM quantum-statistical
+# lower mass bound (Tremaine-Gunn 1979 + Rogers & Peiris 2021 Lyman-alpha)
+#
+# Per user question 2026-08-25:
+#   "I am puzzled, given both sidm and fdm are particles, then shouldn't
+#    sidm also be subject to the quantum effect of fdm?"
+#
+# Honest answer: quantum mechanics applies to ALL particles. The reason
+# SIDM at ~GeV scale behaves classically is NOT a special exemption — it's
+# because the de Broglie wavelength λdB = h/(m·v) at m ~1 GeV, v ~10 km/s
+# is ~10^-33 pc (sub-proton scale), many orders of magnitude below any
+# astrophysical length scale. FDM at m ~10^-22 eV has λdB ~1 kpc, which
+# is comparable to galaxy scales → quantum effects matter there.
+#
+# The published literature captures this via LOWER mass bounds on quantum-
+# statistically relevant DM:
+#
+#   1. Tremaine-Gunn bound (Tremaine & Gunn 1979; revisited by many, see
+#      arXiv:2302.10246 for mass-varying-particle extension):
+#      Phase-space density conservation under Liouville's theorem applied
+#      to dwarf spheroidal galaxies (highest observed phase-space density).
+#      Original bound: m_DM > 300-400 eV for fermionic DM.
+#      Dynamical-friction correction (Boyarsky+): weakened to m > 100 eV.
+#
+#   2. Lyman-alpha forest bound (Rogers & Peiris 2021 PRL 126, 071302;
+#      arXiv:2008.11221): suppression of small-scale matter power by
+#      ultralight DM. 95% CL lower limit: m > 2×10^-20 eV for bosonic
+#      ultralight scalar DM.
+#
+# Both bounds are FAR below the project's T41 posterior median
+# m_chi = 14.8 GeV (~1.48×10^10 eV, ~10^8 above the Tremaine-Gunn bound).
+# So this channel is effectively a no-op in the relevant parameter regime.
+#
+# It is shipped for DOCUMENTATION / AUDIT purposes — to encode the
+# "SIDM is in the classical regime, quantum effects negligible" assumption
+# with a citation, per AGENTS.md rule 14 (source-of-information priority)
+# + scientific-code-verification skill.
+#
+# References (verified HTTP 200 in 2026-08-25 feasibility brief):
+#   - Tremaine & Gunn 1979 (original bound)
+#   - arXiv:2302.10246 - Boyarsky+ 2023 PRD 107, 103535 (mass-varying ext)
+#   - arXiv:2008.11221 - Rogers & Peiris 2021 PRL 126, 071302
+#     (Lyman-alpha constraint, m > 2×10^-20 eV at 95% CL)
+
+# Lower mass bound on FERMIONIC DM from dSph phase-space density
+# (Tremaine-Gunn 1979 + dynamical-friction correction).
+# Use the weakened bound (100 eV) as the effective floor — the original
+# 300-400 eV bound is recovered if dynamical friction is ignored, but
+# the consensus value (Boyarsky+ 2023) is 100 eV.
+TREMAINE_GUNN_MASS_BOUND_EV = 100.0    # eV — fermionic DM (Pauli exclusion)
+
+# Lower mass bound on BOSONIC ultralight DM from Lyman-alpha forest
+# (Rogers & Peiris 2021 PRL 126, 071302, 95% CL).
+ROGERS_PEIRIS_LYMAN_ALPHA_BOUND_EV = 2.0e-20   # eV — bosonic ULDM
+
+# The actual floor we enforce: maximum of the two bounds above.
+# For SIDM (fermionic at GeV scale), the Tremaine-Gunn bound is binding.
+SIDM_MASS_CLASSICAL_FLOOR_EV = max(
+    TREMAINE_GUNN_MASS_BOUND_EV,
+    ROGERS_PEIRIS_LYMAN_ALPHA_BOUND_EV,
+)
+
+
+def loglike_sidm_mass_lower(sigma_m_0: float, a: float, m_chi: float) -> float:
+    """Channel 13: SIDM quantum-statistical LOWER mass bound (defensive).
+
+    Hard cutoff: if m_chi < SIDM_MASS_CLASSICAL_FLOOR_EV (= 100 eV),
+    the SIDM particle is in the quantum-statistically relevant regime
+    where our classical fluid approximation breaks down. Returns -inf.
+
+    For m_chi >= floor, returns 0 (no constraint; classical regime).
+
+    Per AGENTS.md rule 14 + scientific-code-verification skill: this
+    channel documents the implicit "SIDM in classical regime" assumption
+    with citations. It does NOT provide a new physics constraint; the
+    floor (100 eV) is ~10^8 below the project's T41 posterior median
+    m_chi = 14.8 GeV.
+
+    Parameters
+    ----------
+    sigma_m_0 : float
+        σ/m at V_REF = 100 km/s (cm²/g) — passed through, NOT used
+    a : float
+        velocity power-law index — passed through, NOT used
+    m_chi : float
+        DM particle mass in eV (NOT GeV — convention is eV for this channel)
+
+    Returns
+    -------
+    float : log likelihood (relative units)
+    """
+    if m_chi is None or not np.isfinite(m_chi) or m_chi <= 0:
+        return -np.inf
+    if m_chi < SIDM_MASS_CLASSICAL_FLOOR_EV:
+        return -np.inf
+    return 0.0
 
 
 if __name__ == "__main__":

@@ -29,6 +29,14 @@
 > σ/m₀ = 0.68 cm²/g (10→12 channels shifts the headline by 7%, within the
 > systematic budget). See `CHANGELOG.md [T70]` and `v0.3-prelim/docs/FINDINGS.md`
 > T70 addendum. **Channel count: 10 → 12.**
+>
+> **T70.1 Tier-1 PATCH (2026-08-25):** Channel 13 added in response to user question
+> *"shouldn't SIDM also be subject to the quantum effect of FDM?"* — encodes the
+> published Tremaine-Gunn 1979 + Rogers-Peiris 2021 Lyman-α lower mass bounds
+> (m > 100 eV for fermionic DM). **Defensive documentation channel** — no new
+> physics constraint on the project (T41 posterior median m_χ = 14.8 GeV is
+> ~10⁸ above the bound). See `CHANGELOG.md [T70.1]`.
+> **Channel count: 12 → 13.**
 
 ---
 

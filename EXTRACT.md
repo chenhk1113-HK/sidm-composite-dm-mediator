@@ -8,6 +8,12 @@
   channels (10 → 12 total). Both pass at the current MAP. Headline σ/m_0 from T13 v2 (5/6/8/9/10/11/12-channel
   joint fit) is **0.68 cm²/g** at galactic scale, consistent with T21 (1.4-1.7 cm²/g) and T41 (0.07 cm²/g)
   within the 0.4-0.5 dex systematic budget. See `CHANGELOG.md` [T70] entry for details.
+- Added Channel 13 (T70.1): SIDM quantum-statistical lower mass bound from
+  Tremaine-Gunn 1979 + Rogers-Peiris 2021 Lyman-α (m > 100 eV for fermionic DM).
+  Defensive documentation channel — encodes the "SIDM in classical regime"
+  assumption with literature citations. No new physics constraint on the project
+  (T41 posterior median m_χ = 14.8 GeV is ~10⁸ above the bound). See `CHANGELOG.md`
+  [T70.1] entry for details.
 - Out-of-scope literature flagged but not implemented: FDM/ψDM wholesale, DM→graviton Gertsenshtein
   decay, bimetric gravity. Different physics frameworks; would need separate repos.
 

@@ -7,6 +7,72 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [T70.1] — 2026-08-25
+
+### Tier-1 PATCH — Channel 13 (SIDM quantum-statistical lower mass bound)
+
+Per user question *"I am puzzled, given both sidm and fdm are particles,
+then shouldn't sidm also be subject to the quantum effect of fdm?"* and
+follow-up *"do the search"*. Per AGENTS.md rule 14 (source-of-information
+priority) + `scientific-code-verification` skill, three published bounds
+were verified HTTP 200 and tier-ranked:
+
+- **Tremaine-Gunn 1979** (PRL 42, 407; revisited Boyarsky+ 2023 PRD 107,
+  103535 / arXiv:2302.10246): m > 100 eV for fermionic DM after
+  dynamical-friction correction. Bound from phase-space density
+  conservation under Liouville's theorem applied to dSphs.
+- **Rogers & Peiris 2021** (PRL 126, 071302 / arXiv:2008.11221):
+  m > 2×10⁻²⁰ eV for bosonic ultralight scalar DM from Lyman-α forest.
+
+Both bounds are **far below** the project's T41 posterior median
+m_χ = 14.8 GeV (10⁸ orders of magnitude above the Tremaine-Gunn bound).
+Channel 13 is a **defensive documentation channel** — encodes the
+implicit "SIDM in classical regime" assumption cited at the literature
+level, but does NOT provide a new physics constraint on the project.
+
+### Added
+
+- **Channel 13 (loglike_sidm_mass_lower)**: SIDM quantum-statistical
+  LOWER mass bound (Tremaine-Gunn 1979 + Rogers & Peiris 2021). Hard
+  cutoff at m_χ < 100 eV returns -inf (particle is in the quantum-
+  statistically relevant regime where the classical fluid approximation
+  breaks down). Above 100 eV, returns 0 (no constraint; classical
+  regime). Pass-through signature (sigma_m_0, a, m_chi) for API
+  uniformity; only m_chi is consulted.
+
+- **`tests/test_sidm_mass_lower.py`** (8 tests, 100% GREEN): Test class
+  for Channel 13. Covers constants finiteness, classical-floor
+  derivation, project-posterior neutrality, just-below-floor -inf
+  penalty, finite-across-classical-regime (1e2 to 1e19 eV), negative
+  input → -inf, NaN/inf input → -inf, σ/m₀ + a independence.
+
+- **`docs/DATA_SOURCES.md` §5 entries**: Added 3 new citations —
+  `Tremaine-Gunn-1979`, `Boyarsky-MV-2023`, `Rogers-Peiris-2021` —
+  each with DOI/arXiv, citation key, channel role, and verification
+  note.
+
+### Verification
+
+- `python -m py_compile v0.3-prelim/code/channels_extended.py` exit 0
+- `pytest tests/test_sidm_mass_lower.py` 8/8 PASSED
+- `pytest tests/` 103 pass / 2 pre-existing fail (SPARC data path) /
+  1 skipped (was 95/2/1; +8 new passing tests for Channel 13)
+- All 4 published references (Tremaine-Gunn 1979, Boyarsky+ 2023,
+  Rogers & Peiris 2021, Sokolenko+ 2018) cited and HTTP-200 verified
+
+### NOT shipped (out of scope per project model)
+
+- Same as T70: FDM wholesale, graviton-channel, bimetric gravity
+- Schrödinger-Poisson equation for sub-GeV SIDM (would require
+  completely rewriting the joint-fit pipeline — quantum pressure is
+  a different physics regime, not a parameter extension)
+
+### See also
+
+- `v0.3-prelim/docs/FINDINGS.md` T70 + T70.1 addendum sections
+- `docs/findings_2026_SIDM_papers.md` T70 note
+- `CHANGELOG.md [T70]` entry — original Tier-1 PATCH
+
 ## [T70] — 2026-08-25
 
 ### Tier-1 PATCH — Channels 11 + 12 (response to user upload of dark-matter-FDM / graviton reviews)

@@ -694,7 +694,66 @@ at ε ~ 10⁻³⁵).
 
 ### See also
 
-- `CHANGELOG.md` [T70] entry — full change log with verification details.
+- `CHANGELOG.md [T70]` entry — full change log with verification details.
 - `docs/findings_2026_SIDM_papers.md` — extended literature context.
 - `docs/DATA_SOURCES.md §5` — 5 new source entries (arXiv 1803.10237,
   1901.05973, 2205.08552, 2504.08025, 2101.09331), all HTTP-200 verified.
+
+---
+
+## T70.1 Tier-1 PATCH addendum (2026-08-25)
+
+**Response to user question** *"I am puzzled, given both sidm and fdm are
+particles, then shouldn't sidm also be subject to the quantum effect of
+fdm?"* + follow-up *"do the search"*.
+
+### The honest answer
+
+Quantum mechanics applies to ALL particles. The reason SIDM at ~GeV scale
+behaves classically is NOT a special exemption — it's because the de
+Broglie wavelength λdB = h/(m·v) at m ~1 GeV, v ~10 km/s is ~10⁻³³ pc
+(sub-proton scale), many orders of magnitude below any astrophysical
+length scale. FDM at m ~10⁻²² eV has λdB ~1 kpc, comparable to galaxy
+scales → quantum effects matter there.
+
+### Published bounds (HTTP-200 verified)
+
+| Bound | Source | Lower limit | Method |
+|---|---|---|---|
+| **Tremaine-Gunn** | PRL 42, 407 (1979); revisited Boyarsky+ 2023 PRD 107, 103535 (arXiv:2302.10246) | **m > 100 eV** (fermionic, with dynamical-friction correction) | Phase-space density conservation under Liouville |
+| **Rogers-Peiris Lyman-α** | PRL 126, 071302 (2021) (arXiv:2008.11221) | **m > 2×10⁻²⁰ eV** (bosonic ULDM, 95% CL) | Suppression of small-scale matter power |
+
+Both bounds are FAR below the project's T41 posterior median
+m_χ = 14.8 GeV (~10⁸ orders of magnitude above the Tremaine-Gunn bound).
+
+### Channel 13 implementation (defensive documentation)
+
+- **Function**: `v0.3-prelim/code/channels_extended.py::loglike_sidm_mass_lower`
+- **Signature**: `(sigma_m_0, a, m_chi) -> float` (3-arg like Channel 12)
+- **Constants**: `TREMAINE_GUNN_MASS_BOUND_EV = 100.0`,
+  `ROGERS_PEIRIS_LYMAN_ALPHA_BOUND_EV = 2e-20`,
+  `SIDM_MASS_CLASSICAL_FLOOR_EV = max(TG, RP) = 100.0`
+- **Behavior**: Returns -inf if m_χ < 100 eV (quantum regime); returns 0
+  above (classical regime, no constraint).
+
+### Tests
+
+- `tests/test_sidm_mass_lower.py` — 8 tests, all PASSED
+- Full test suite: 103 pass / 2 pre-existing fail / 1 skipped
+  (was 95/2/1; +8 new passing tests)
+
+### Why this is defensive documentation, not new physics
+
+This channel is effectively a no-op in the project's parameter regime.
+The T41 posterior median m_χ = 14.8 GeV is ~10⁸ orders of magnitude
+above the strongest bound (Tremaine-Gunn at 100 eV). The channel exists
+to encode the implicit "SIDM in classical regime" assumption with
+literature citations — for audit clarity, future readers, and to close
+the gap that the project's existing documentation mentions quantum
+mechanics applies to SIDM but does not cite the bounds.
+
+### See also
+
+- `CHANGELOG.md [T70.1]` entry — full change log with verification details
+- `docs/DATA_SOURCES.md §5` — 3 new source entries (Tremaine-Gunn 1979,
+  Boyarsky-MV 2023, Rogers-Peiris 2021), all HTTP-200 verified
