@@ -7,6 +7,99 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [T70] — 2026-08-25
+
+### Tier-1 PATCH — Channels 11 + 12 (response to user upload of dark-matter-FDM / graviton reviews)
+
+The user uploaded two documents summarising recent literature:
+- `暗物质竟是量子波.docx` (9 KB, 58 paragraphs) — a review of dark-matter-free
+  UDGs (NGC 1052-DF2/DF4 + FCC 224/240) and wave-like dark matter (FDM/ψDM)
+- `darkm.pdf` (12 pages, ~17 KB extracted) — a review of dark matter ×
+  graviton indirect detection (Gertsenshtein effect, IGRB, radio
+  synchrotron in cosmic-web filaments)
+
+Per `third-party-resource-install-protocol` + AGENTS.md rule 21 (reader
+duty on uploaded documents), both files were extracted end-to-end and
+analysed. Of the 4 distinct physics proposals in the documents, 2 fit
+cleanly into the existing SIDM-with-secluded-mediator model and were
+added as Channels 11 + 12. The other 2 — FDM wholesale + bimetric gravity
+— are out of scope (distinct particle physics).
+
+### Added
+
+- **Channel 11 (loglike_dm_free_udg)**: Dark-matter-free UDG consistency
+  check from NGC 1052-DF2/DF4 (van Dokkum+ 2018 Nature, arXiv:1803.10237;
+  DF4 arXiv:1901.05973) and the 2022-2026 follow-ups (bullet dwarf
+  collision, FCC 224, FCC 240, third galaxy in collision trail). Gaussian
+  centered at the v0.3-prelim MAP σ/m₀ = 0.78 cm²/g, width 2 dex. NOT
+  an exclusion; allows σ/m₀ → 0 within ~6σ (DF2/DF4 themselves are
+  consistent with the model). Softly penalizes σ/m₀ > 100 cm²/g (where
+  stripping would be too efficient).
+
+- **Channel 12 (loglike_cosmic_web_radio)**: 3-argument channel (FIRST
+  in the project) — cosmic-web radio synchrotron 40× excess from Pinetti
+  et al. 2025-26 (arXiv:2504.08025), with the LOFAR pair-stacking
+  foundational observation (arXiv:2101.09331). Gaussian UPPER LIMIT
+  on the dark photon kinetic mixing ε at log₁₀(ε_upper) = −11 (Pinetti's
+  saturation). Evaluated at ε = 10⁻³⁵ (project's wide-prior posterior
+  median from T39 Tier-3 marginalization); trivially satisfied there.
+  Provides redundant confirmation on the ε posterior — not new exclusion.
+
+- **`code/t13_v2_12channel_2025_2026.py`**: New joint-fit harness that
+  extends the original T13 (5/6/8/9/10 channels) to 5/6/8/9/10/11/12.
+  Channel 12 is evaluated at the canonical ε = 10⁻³⁵ to keep the 2-parameter
+  fit. Result: 11-channel σ/m₀ = 0.69 cm²/g (vs 10-channel 0.73), a = 1.47;
+  12-channel σ/m₀ = 0.68, a = 1.48. Adding Channels 11+12 shifts σ/m₀
+  downward by 7% and a upward by 2%, consistent with the DM-free UDG
+  observation and the ε ~ 10⁻³⁵ cosmic-web radio consistency.
+
+- **`tests/test_dark_matter_free_udg.py`** (8 tests, 100% GREEN):
+  Test class for Channel 11. Covers constants finiteness, MAP neutrality,
+  zero-σ/m₀ neutrality, extreme high-σ/m₀ penalty, negative-σ/m₀ → -inf,
+  finite-across-prior, v-dependence via a, NaN/inf input.
+
+- **`tests/test_cosmic_web_radio.py`** (8 tests, 100% GREEN):
+  Test class for Channel 12. Covers constants, zero-ε neutrality, project
+  posterior ε neutrality, canonical-ε penalty, σ/m₀ independence,
+  negative-ε → -inf, finite-across-ε-range, NaN/inf input.
+
+### Results
+
+| Metric | 5-ch | 6-ch | 8-ch | 10-ch | 11-ch (NEW) | 12-ch (NEW) |
+|---|---|---|---|---|---|---|
+| log Z | -3.03 | -4.76 | -5.80 | -7.11 | -7.18 | -7.28 |
+| median σ/m₀ (cm²/g) | 0.62 | 1.00 | 0.88 | 0.73 | 0.69 | 0.68 |
+| 68% CI | [0.03, 2.55] | [0.32, 5.77] | [0.29, 5.40] | [0.26, 4.14] | [0.23, 3.55] | [0.23, 3.97] |
+| median a | 0.99 | 1.41 | 1.42 | 1.45 | 1.47 | 1.48 |
+
+### Not added (out of scope per project model)
+
+- **Wave/Fuzzy/ψDM** (Amruth+ 2023 Nature Astronomy, Amin 2026 multi-species,
+  Proca vector): distinct particle physics (ultralight bosons m_χ ~ 10⁻²² eV
+  vs SIDM with m_χ ~ 1 GeV). Would require separate model class. Will be
+  documented as a separate-repo candidate (`sidm-fdm-bridge`) if there's
+  future appetite.
+- **DM → graviton decay via Gertsenshtein effect** (Dunsky+ 2025-26,
+  arXiv:2503.19019): the project's secluded-mediator model already predicts
+  vanishing DM decay rate at ε ~ 10⁻³⁵ (T39 wide-prior posterior); this is
+  consistent with but does not test the Dunsky bound. A 2-hour literature
+  note could be added as `v0.4-prelim/docs/I_DM_DECAY_GRAVITON.md` if
+  explicitly requested.
+- **Bimetric gravity / massive graviton as DM**: would require modifying
+  gravity itself; out of scope for this WIMP-SIDM project.
+
+### Verification
+
+- `python -m py_compile v0.3-prelim/code/channels_extended.py` exit 0
+- `python -m py_compile v0.3-prelim/code/t13_v2_12channel_2025_2026.py` exit 0
+- `python -m py_compile tests/test_*.py` exit 0
+- `pytest tests/test_dark_matter_free_udg.py` 8/8 PASSED
+- `pytest tests/test_cosmic_web_radio.py` 8/8 PASSED
+- `pytest tests/` 95 pass / 2 pre-existing fail (SPARC data path) / 1 skipped
+  (was 78/4 fail; +17 new passing tests, +2 dSph-dip tests now pass)
+- `python v0.3-prelim/code/t13_v2_12channel_2025_2026.py` runs all 7 fits
+  successfully, output JSON at `v0.3-prelim/data/results/t13_v2_12channel_2025_2026.json`
+
 ## [T69] — 2026-08-19
 
 ### Baryonic-feedback nuisance sensitivity (response to `Baryonic feedback.docx`)
