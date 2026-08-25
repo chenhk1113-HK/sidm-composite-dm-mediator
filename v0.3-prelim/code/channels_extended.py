@@ -691,6 +691,121 @@ def loglike_cosmic_web_radio(sigma_m_0: float, a: float, epsilon: float) -> floa
 # SIDM_MASS_CLASSICAL_FLOOR_EV imported from config.py (see top of file).
 
 
+# ---------------------------------------------------------------------------
+# Channel 14 (R13 H2 Tier-1 PATCH 2026-08-25): Mediator lifetime + BBN check.
+#
+# Per R13 reviewer H2 suggestion in sidm review2.docx (2026-08-25):
+#   'Compute mediator lifetime for each sampled point. Explicitly
+#    distinguish decays pre-BBN vs post-BBN. Post-BBN decays require
+#    more sophisticated constraints than simple dN_eff cut. Add this
+#    as a likelihood penalty or rejection condition.'
+#
+# Physics (Berlin et al. 2018 PRD 97, 055033 + this project's T39 wide-prior
+# epsilon posterior):
+#
+#   Dark photon decay rate to SM charged fermions (assuming m_A' > 2 m_f):
+#     Gamma(A' -> f f-bar) = (1/3) * alpha_EM * epsilon^2 * m_A' * N_c(f) * K(s)
+#     where K(s) is a kinematic factor ~ O(1) for m_A' >> 2 m_f
+#   Total width: Gamma_tot = sum over f of Gamma(A' -> f f-bar)
+#   Lifetime: tau = hbar / Gamma_tot
+#
+#   Benchmarks:
+#     m_A' = 26.6 MeV (T41 MAP), epsilon = 10^-35 (T39 wide-prior median):
+#       Gamma ~ 10^-50 eV ~ 10^-36 s^-1, tau ~ 10^36 s ~ 10^28 yr >> t_universe
+#
+#   BBN boundary:
+#     t_BBN ~ 1 s (after big bang, before deuterium formation)
+#     If tau < t_BBN (~ 1 s), decays happen during BBN -> strong penalty
+#     If tau > t_BBN and < t_universe, decays happen after BBN -> moderate
+#       penalty (CMB + structure-formation bounds)
+#     If tau > t_universe, mediator is stable -> no penalty
+
+# Electron mass (MeV) — kinematic threshold for A' -> e+e- decay
+M_E_MEV = 0.51099895  # MeV (PDG 2022)
+
+# Time benchmarks (seconds)
+T_BBN_S = 1.0          # Big-bang nucleosynthesis onset (order of magnitude)
+T_UNIVERSE_S = 4.35e17 # Age of universe ~ 13.8 Gyr in seconds
+
+# Soft floor: if tau < this, treat as pre-BBN (returns -inf)
+MEDIATOR_LIFETIME_FLOOR_S = 0.1  # seconds
+
+
+def compute_mediator_lifetime_s(m_ap_mev: float, epsilon: float) -> float:
+    """Compute dark photon A' lifetime in seconds.
+
+    Parameters
+    ----------
+    m_ap_mev : float
+        Mediator mass in MeV
+    epsilon : float
+        Kinetic mixing parameter (>= 0)
+
+    Returns
+    -------
+    float
+        Lifetime in seconds. Returns np.inf if m_A' < 2 m_e (kinematically
+        forbidden to decay to e+e-) or epsilon = 0.
+    """
+    if epsilon <= 0 or m_ap_mev < 2 * M_E_MEV:
+        return np.inf
+    ALPHA_EM = 1.0 / 137.0359895  # fine-structure constant
+    N_C = 1.0  # color factor for electron
+    GAMMA_FACTOR = (1.0 / 3.0) * ALPHA_EM * N_C
+    GAMMA_NATURAL = GAMMA_FACTOR * epsilon**2 * m_ap_mev  # MeV
+    # Convert MeV to s^-1: hbar = 6.582e-22 MeV*s
+    GAMMA_PER_S = GAMMA_NATURAL / 6.582e-22
+    return 1.0 / GAMMA_PER_S
+
+
+def loglike_mediator_lifetime(m_chi: float, m_ap: float, epsilon: float) -> float:
+    """Channel 14 (R13 H2): Mediator lifetime + BBN consistency check.
+
+    Parameters
+    ----------
+    m_chi : float
+        SIDM particle mass in eV (passed through, NOT used)
+    m_ap : float
+        Dark photon mediator mass in eV (NOT MeV)
+    epsilon : float
+        Kinetic mixing parameter (>= 0)
+
+    Returns
+    -------
+    float : log likelihood
+        0.0 if mediator is stable (tau > t_universe) or below decay threshold
+        -inf if tau < MEDIATOR_LIFETIME_FLOOR_S (pre-BBN decay)
+        Gaussian penalty if tau < t_universe but > t_BBN (post-BBN decay)
+    """
+    if (m_chi is None or m_ap is None or epsilon is None
+            or not np.isfinite(m_chi) or not np.isfinite(m_ap)
+            or not np.isfinite(epsilon)):
+        return -np.inf
+    if m_chi <= 0 or m_ap <= 0 or epsilon < 0:
+        return -np.inf
+
+    m_ap_mev = m_ap / 1.0e6  # eV -> MeV
+    tau_s = compute_mediator_lifetime_s(m_ap_mev, epsilon)
+
+    # Stable mediator (or no decay channel open): no penalty
+    if tau_s > T_UNIVERSE_S:
+        return 0.0
+
+    # Pre-BBN decay: hard rejection
+    if tau_s < MEDIATOR_LIFETIME_FLOOR_S:
+        return -np.inf
+
+    # Post-BBN but pre-CMB (tau < t_universe, > t_BBN): moderate penalty
+    if tau_s > T_BBN_S:
+        log_ratio = np.log10(tau_s / T_BBN_S)
+        log_ratio_universe = np.log10(T_UNIVERSE_S / T_BBN_S)
+        penalty = -12.0 * (1.0 - log_ratio / log_ratio_universe)
+        return penalty
+
+    # Catch-all (shouldn't reach here)
+    return -10.0
+
+
 def loglike_sidm_mass_lower(sigma_m_0: float, a: float, m_chi: float) -> float:
     """Channel 13: SIDM quantum-statistical LOWER mass bound (defensive).
 
