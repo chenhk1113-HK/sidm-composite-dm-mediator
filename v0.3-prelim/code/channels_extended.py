@@ -56,8 +56,35 @@ is implemented in gravothermal.py and provides per-halo priors.
       substructure constraint). Currently a placeholder below.
 """
 from __future__ import annotations
+import math
+import sys
+from pathlib import Path
+
 import numpy as np
 from typing import Tuple
+
+# Import centralized constants from config.py (per R13 reviewer M3)
+_PROJECT_ROOT = Path(__file__).resolve().parents[3]
+if str(_PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(_PROJECT_ROOT))
+from config import (
+    LENS_SIGMA_M_LOG_PEAK,
+    LENS_SIGMA_M_LOG_WIDTH,
+    DSPH_SIGMA_M_UPPER_LIMIT,
+    DSPH_VMAX_KMS,
+    CLUSTER_VMAX_KMS,
+    CLUSTER_SIGMA_M_UPPER_LIMIT,
+    DRACO_SIGMA_M_UPPER_LIMIT,
+    DRACO_VMAX_KMS,
+    RADIO_RELIC_SIGMA_M_UPPER_LIMIT,
+    RADIO_RELIC_VMAX_KMS,
+    DM_FREE_UDG_RATE_PEAK,
+    DM_FREE_UDG_RATE_WIDTH,
+    COSMIC_WEB_RADIO_LOG_EPSILON_UPPER,
+    TREMAINE_GUNN_MASS_BOUND_EV,
+    ROGERS_PEIRIS_LYMAN_ALPHA_BOUND_EV,
+    SIDM_MASS_CLASSICAL_FLOOR_EV,
+)
 from sidm_velocity_dependent import sigma_m_effective
 
 # LZ 2024 results (arXiv 2410.17034 / WS2024 dataset, 220 days + 60 days)
@@ -207,8 +234,7 @@ def gravothermal_collapse_prior(halo_mass_Msun: float,
 #  GD-1 perturber are remarkably similar. All three are systematically denser
 #  and more compact in their inner regions than expected in the CDM framework,
 #  but they align closely with the profiles of core-collapsed SIDM halos."
-LENS_SIGMA_M_LOG_PEAK = 1.7   # log10(50 cm²/g) — middle of 30-100 range
-LENS_SIGMA_M_LOG_WIDTH = 0.3  # dex — covers the 30-100 range
+# Channel 6 constants imported from config.py (LENS_SIGMA_M_LOG_PEAK, LENS_SIGMA_M_LOG_WIDTH)
 
 
 def loglike_lens_subhalo(sigma_m_0: float, a: float) -> float:
@@ -276,13 +302,12 @@ def loglike_lens_subhalo_placeholder(sigma_m: float) -> float:
 # limit is most stringent in literature), with a soft penalty that allows
 # a > 0 to relax it.
 
-DSPH_SIGMA_M_UPPER_LIMIT = 0.2  # cm²/g — Hayashi+ 2025 95% upper limit
-DSPH_VMAX_KMS = 18.0           # characteristic UFD velocity in the paper
-CLUSTER_VMAX_KMS = 2090.0      # MACS J0138-2155 interaction velocity
+# Channel 7 constants imported from config.py (DSPH_SIGMA_M_UPPER_LIMIT, DSPH_VMAX_KMS)
+# CLUSTER_VMAX_KMS imported from config.py
 
 # Cluster upper limit from arXiv:2508.20179 (O'Donnell et al. 2026, PRD):
 # 95% CL upper limit σ/m < 0.613 cm²/g at <v_pair> = 2090 km/s
-CLUSTER_SIGMA_M_UPPER_LIMIT = 0.613  # cm²/g — O'Donnell+ 2026 PRD 95% CL
+# Channel 8: CLUSTER_SIGMA_M_UPPER_LIMIT imported from config.py
 
 
 def loglike_mw_satellite(sigma_m_0: float, a: float) -> float:
@@ -361,8 +386,7 @@ def loglike_cluster_upper(sigma_m_0: float, a: float) -> float:
 # We implement this as Channel 9 for completeness — it provides an
 # independent Draco-specific confirmation at slightly relaxed limits.
 
-DRACO_SIGMA_M_UPPER_LIMIT = 0.57  # cm²/g — Read+ 2018 99% CL upper limit
-DRACO_VMAX_KMS = 20.0           # Draco internal velocity scale
+# Channel 9 constants imported from config.py (DRACO_SIGMA_M_UPPER_LIMIT, DRACO_VMAX_KMS)
 
 
 def loglike_draco(sigma_m_0: float, a: float) -> float:
@@ -407,8 +431,7 @@ def loglike_draco(sigma_m_0: float, a: float) -> float:
 # PRD: 0.613 cm²/g from single cluster MACS J0138-2155). Together they
 # bracket σ/m at cluster scales from two independent methods.
 
-RADIO_RELIC_SIGMA_M_UPPER_LIMIT = 0.22  # cm²/g — Lee+ 2026 68% upper limit
-RADIO_RELIC_VMAX_KMS = 1000.0          # characteristic cluster merger velocity
+# Channel 10 constants imported from config.py (RADIO_RELIC_SIGMA_M_UPPER_LIMIT, RADIO_RELIC_VMAX_KMS)
 
 
 def loglike_radio_relic(sigma_m_0: float, a: float) -> float:
@@ -483,8 +506,7 @@ NGC1052_DF2_VMAX_KMS = 30.0        # UDG internal velocity scale (typical)
 # 2 dex width means σ/m_0 from ~0.008 to ~80 cm²/g is within 1σ of the peak,
 # which allows the σ/m_0 → 0 case (DF2/DF4 themselves) to be within ~3σ
 # (log L ≈ -2) rather than catastrophically disfavored.
-DM_FREE_UDG_RATE_PEAK = 0.0        # log-likelihood peak (centered at MAP)
-DM_FREE_UDG_RATE_WIDTH = 2.0       # dex — 2 order of magnitude Gaussian width
+# Channel 11: DM_FREE_UDG_RATE_PEAK, DM_FREE_UDG_RATE_WIDTH imported from config.py
 
 
 def loglike_dm_free_udg(sigma_m_0: float, a: float) -> float:
@@ -574,7 +596,7 @@ def loglike_dm_free_udg_placeholder(sigma_m: float) -> float:
 # B fields saturates the observed 40× LOFAR excess (Pinetti 2025-26).
 # Below this ε, decay rate is too small to explain the excess (channel = 0).
 # Above this ε, the model would over-predict the excess (penalty).
-COSMIC_WEB_RADIO_LOG_EPSILON_UPPER = -11.0   # log10(ε_upper) where over-prediction begins
+# Channel 12: COSMIC_WEB_RADIO_LOG_EPSILON_UPPER imported from config.py
 # Marker constant: this channel is mostly ε-driven, not σ/m_0-driven.
 # Used in tests + downstream code to check the σ/m_0 independence property.
 COSMIC_WEB_RADIO_SIGMA_M_INDEPENDENT = True
@@ -665,23 +687,8 @@ def loglike_cosmic_web_radio(sigma_m_0: float, a: float, epsilon: float) -> floa
 #   - arXiv:2008.11221 - Rogers & Peiris 2021 PRL 126, 071302
 #     (Lyman-alpha constraint, m > 2×10^-20 eV at 95% CL)
 
-# Lower mass bound on FERMIONIC DM from dSph phase-space density
-# (Tremaine-Gunn 1979 + dynamical-friction correction).
-# Use the weakened bound (100 eV) as the effective floor — the original
-# 300-400 eV bound is recovered if dynamical friction is ignored, but
-# the consensus value (Boyarsky+ 2023) is 100 eV.
-TREMAINE_GUNN_MASS_BOUND_EV = 100.0    # eV — fermionic DM (Pauli exclusion)
-
-# Lower mass bound on BOSONIC ultralight DM from Lyman-alpha forest
-# (Rogers & Peiris 2021 PRL 126, 071302, 95% CL).
-ROGERS_PEIRIS_LYMAN_ALPHA_BOUND_EV = 2.0e-20   # eV — bosonic ULDM
-
-# The actual floor we enforce: maximum of the two bounds above.
-# For SIDM (fermionic at GeV scale), the Tremaine-Gunn bound is binding.
-SIDM_MASS_CLASSICAL_FLOOR_EV = max(
-    TREMAINE_GUNN_MASS_BOUND_EV,
-    ROGERS_PEIRIS_LYMAN_ALPHA_BOUND_EV,
-)
+# Constants TREMAINE_GUNN_MASS_BOUND_EV, ROGERS_PEIRIS_LYMAN_ALPHA_BOUND_EV,
+# SIDM_MASS_CLASSICAL_FLOOR_EV imported from config.py (see top of file).
 
 
 def loglike_sidm_mass_lower(sigma_m_0: float, a: float, m_chi: float) -> float:

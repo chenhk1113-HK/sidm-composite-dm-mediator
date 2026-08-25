@@ -84,7 +84,7 @@ LOG_SIGMA_M_RANGE = (-3.0, 2.5)  # log10(cm^2/g) at v_ref = 100 km/s
 A_RANGE = (-2.0, 2.0)            # velocity power-law index
 
 # ---------------------------------------------------------------------------
-# Gaussian proxy likelihood widths (per peer review note 2026-08-10:
+# Channel-specific Gaussian proxy widths (per peer review note 2026-08-10:
 # "crude Gaussian approximations" — these are placeholders until
 # published posterior chains are obtained).
 # ---------------------------------------------------------------------------
@@ -103,6 +103,47 @@ UFD_LOG_SM_SIGMA = 1.37           # 1-sigma width in dex
 # Bullet Cluster (Cha+ 2025)
 BULLET_LOG_SM_LIMIT = -0.30103    # log10(0.5) = upper limit at 95% CL
 BULLET_TAIL_WIDTH = 0.30          # one-sided Gaussian tail width
+
+# Gravitational lensing substructure (Yang+ 2026 PRL — Channel 6)
+# Channel 6: σ/m peak at log10(50) cm^2/g = 1.7, 0.3 dex width
+LENS_SIGMA_M_LOG_PEAK = 1.7       # log10(cm^2/g) — middle of 30-100 range
+LENS_SIGMA_M_LOG_WIDTH = 0.3      # dex — covers the 30-100 range
+
+# MW satellite upper limit (Hayashi+ 2025 — Channel 7)
+DSPH_SIGMA_M_UPPER_LIMIT = 0.2    # cm^2/g — Hayashi+ 2025 95% upper limit
+DSPH_VMAX_KMS = 18.0              # characteristic UFD velocity in the paper
+
+# Cluster upper limit (O'Donnell+ 2026 PRD — Channel 8)
+CLUSTER_VMAX_KMS = 2090.0         # MACS J0138-2155 interaction velocity
+CLUSTER_SIGMA_M_UPPER_LIMIT = 0.613  # cm^2/g — O'Donnell+ 2026 PRD 95% CL
+
+# Draco dSph upper limit (Read+ 2018 — Channel 9)
+DRACO_SIGMA_M_UPPER_LIMIT = 0.57  # cm^2/g — Read+ 2018 99% CL upper limit
+DRACO_VMAX_KMS = 20.0             # Draco internal velocity scale
+
+# 11-cluster double radio relic (Lee+ 2026 — Channel 10)
+RADIO_RELIC_SIGMA_M_UPPER_LIMIT = 0.22   # cm^2/g — Lee+ 2026 68% upper limit
+RADIO_RELIC_VMAX_KMS = 1000.0            # characteristic cluster merger velocity
+
+# NGC 1052-DF2/DF4 + FCC 224/240 dark-matter-free UDG (van Dokkum+ 2018-2026 — Channel 11)
+# T70: Gaussian consistency check centered at v0.3-prelim MAP, 2 dex width
+DM_FREE_UDG_RATE_PEAK = 0.0       # log-likelihood peak (centered at MAP)
+DM_FREE_UDG_RATE_WIDTH = 2.0      # dex — 2 order of magnitude Gaussian width
+
+# Cosmic-web radio synchrotron 40x excess (Pinetti+ 2025-26 — Channel 12)
+# T70: Gaussian UPPER LIMIT on dark photon kinetic mixing at log10(eps_upper) = -11
+COSMIC_WEB_RADIO_LOG_EPSILON_UPPER = -11.0   # log10(eps_upper) where over-prediction begins
+
+# SIDM quantum-statistical lower mass bound (T70.1 — Channel 13)
+# Lower bound on fermionic DM mass (Tremaine-Gunn 1979 + dynamical friction)
+TREMAINE_GUNN_MASS_BOUND_EV = 100.0    # eV — fermionic DM (Pauli exclusion)
+# Lower bound on bosonic ULDM mass (Rogers & Peiris 2021 Lyman-alpha)
+ROGERS_PEIRIS_LYMAN_ALPHA_BOUND_EV = 2.0e-20   # eV — bosonic ULDM (95% CL)
+# Actual floor enforced: max of the two bounds (Tremaine-Gunn is binding for SIDM)
+SIDM_MASS_CLASSICAL_FLOOR_EV = max(
+    TREMAINE_GUNN_MASS_BOUND_EV,
+    ROGERS_PEIRIS_LYMAN_ALPHA_BOUND_EV,
+)
 
 # ---------------------------------------------------------------------------
 # Mock-data validation (T5 full)
@@ -167,6 +208,16 @@ __all__ = [
     "DSPH_DIP_CENTER", "DSPH_DIP_WIDTH", "DSPH_DIP_STRENGTH",
     "UFD_LOG_SM_MEAN", "UFD_LOG_SM_SIGMA",
     "BULLET_LOG_SM_LIMIT", "BULLET_TAIL_WIDTH",
+    "LENS_SIGMA_M_LOG_PEAK", "LENS_SIGMA_M_LOG_WIDTH",
+    "DSPH_SIGMA_M_UPPER_LIMIT", "DSPH_VMAX_KMS",
+    "CLUSTER_VMAX_KMS", "CLUSTER_SIGMA_M_UPPER_LIMIT",
+    "DRACO_SIGMA_M_UPPER_LIMIT", "DRACO_VMAX_KMS",
+    "RADIO_RELIC_SIGMA_M_UPPER_LIMIT", "RADIO_RELIC_VMAX_KMS",
+    "DM_FREE_UDG_RATE_PEAK", "DM_FREE_UDG_RATE_WIDTH",
+    "COSMIC_WEB_RADIO_LOG_EPSILON_UPPER",
+    "TREMAINE_GUNN_MASS_BOUND_EV",
+    "ROGERS_PEIRIS_LYMAN_ALPHA_BOUND_EV",
+    "SIDM_MASS_CLASSICAL_FLOOR_EV",
     "T5_NOISE_KMS", "T5_RHO_C_BURKERT", "T5_RHO_S_NFW", "T5_R_S_NFW", "T5_SEED_BASE",
     "SPARC_N_PTS_MIN",
     "get_version_paths",
