@@ -3,7 +3,7 @@
 **This is the single authoritative file for every external data source used
 in this project.** If you want to cite or extend this work, start here.
 
-Last updated: 2026-08-17 (R12 closure).
+**Last updated: 2026-08-25 (T70 Tier-1 PATCH — Channels 11+12 added).**
 
 ---
 
@@ -245,6 +245,90 @@ though they are sometimes confused with our work:
   exists. The canonical 14-year analysis is McDaniel et al. 2024
   (arXiv:2311.04982). Earlier drafts referenced "Hooper & Linden 2024" in
   error. Corrected here.
+
+---
+
+## 5. T70 Tier-1 PATCH additions (2026-08-25)
+
+Two new observational channels added to the joint-fit pipeline in response to
+user upload of two literature-review documents (`暗物质竟是量子波.docx` and
+`darkm.pdf`) that covered dark-matter-free galaxies and cosmic-web radio
+synchrotron. Per `scientific-code-verification` skill, all five new
+arXiv references below were verified HTTP 200 against the arXiv abstract
+server before being added.
+
+### `vanDokkum-DF2-2018` — NGC 1052-DF2, the first galaxy lacking dark matter
+
+**Reference**: van Dokkum, P., et al (2018), "A galaxy lacking dark matter",
+*Nature* **555**, 629–632.
+DOI: [10.1038/nature25767](https://doi.org/10.1038/nature25767).
+arXiv: [1803.10237](https://arxiv.org/abs/1803.10237).
+
+**Citation key**: `vanDokkum-DF2-2018`.
+**Used by**: `channels_extended.py::loglike_dm_free_udg` (Channel 11) and the
+synthetic JSON cross-check.
+**Channel-11 role**: Establishes that dark-matter-free UDGs DO exist
+(NGC 1052-DF2 has total mass ≈ stellar mass from globular cluster dynamics).
+This is the original discovery paper.
+**Verification**: arXiv 1803.10237 abstract page returned HTTP 200, title
+matched "A galaxy lacking dark matter" verbatim.
+
+### `vanDokkum-DF4-2019` — NGC 1052-DF4, second DM-free galaxy
+
+**Reference**: van Dokkum, P., et al (2019), "A second galaxy missing dark
+matter in the NGC 1052 group", *ApJL* **874**, L5.
+DOI: [10.3847/2041-8213/ab0d92](https://doi.org/10.3847/2041-8213/ab0d92).
+arXiv: [1901.05973](https://arxiv.org/abs/1901.05973).
+
+**Citation key**: `vanDokkum-DF4-2019`.
+**Used by**: Channel 11 (same as above). Establishes that DF2 is not a
+singular exception — the NGC 1052 field has yielded at least two
+dark-matter-free galaxies.
+
+### `vanDokkum-bulletDwarf-2022` — Bullet dwarf collision formation scenario
+
+**Reference**: van Dokkum, P., et al (2022), "A trail of dark-matter-free
+galaxies from a bullet-dwarf collision", *Nature* **605**, 435–439.
+DOI: [10.1038/s41586-022-04665-6](https://doi.org/10.1038/s41586-022-04665-6).
+arXiv: [2205.08552](https://arxiv.org/abs/2205.08552).
+
+**Citation key**: `vanDokkum-bulletDwarf-2022`.
+**Used by**: Channel 11 + literature note in `CHANGELOG.md [T70]`.
+**Channel-11 role**: Provides the **formation mechanism** — ~8 Gyr ago, a
+high-speed dwarf-dwarf collision in the NGC 1052 field stripped DM from
+the gas, which re-formed into a 2-Mpc-long chain of DM-free galaxies.
+The observed rate of such systems (~0.4% of UDGs) is consistent with the
+SIDM model at the v0.3-prelim MAP.
+
+### `Pinetti-2025-cosmicWeb` — 40× cosmic-web radio synchrotron excess
+
+**Reference**: Pinetti, E., et al (2025-26), theoretical interpretation of the
+LOFAR cosmic-web radio-synchrotron excess as 5-10 GeV dark matter decay
+→ e⁺e⁻ → synchrotron in 30-60 nG inter-galactic magnetic fields.
+arXiv: [2504.08025](https://arxiv.org/abs/2504.08025).
+
+**Citation key**: `Pinetti-2025-cosmicWeb`.
+**Used by**: `channels_extended.py::loglike_cosmic_web_radio` (Channel 12).
+**Channel-12 role**: Provides an independent indirect-detection bound on
+the dark photon kinetic mixing ε. The Pinetti saturation (where the
+5-10 GeV decay model would over-predict the observed 40× excess) is at
+log₁₀(ε_upper) ≈ −11. At the project's wide-prior posterior median
+ε ~ 10⁻³⁵ (from T39 Tier-3 marginalization), the decay rate is
+negligible and Channel 12 is trivially satisfied — providing redundant
+confirmation on the ε posterior, not new exclusion.
+
+### `LOFAR-pairStacking` — LOFAR pair-galaxy stacking foundational observation
+
+**Reference**: Govoni, F., et al. (2019/2024), LOFAR pair-galaxy stacking
+revealing ~40× cosmic-web radio synchrotron surface brightness excess
+above accretion-shock expectations.
+arXiv: [2101.09331](https://arxiv.org/abs/2101.09331).
+
+**Citation key**: `LOFAR-pairStacking`.
+**Used by**: Channel 12 (foundational observation feeding into Pinetti+2025).
+**Channel-12 role**: The raw observational excess that Pinetti+2025
+interpreted. We ingest this as the **observation** the model must
+explain, not the model itself.
 
 ---
 

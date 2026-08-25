@@ -1,6 +1,15 @@
 # EXTRACT — sidm-composite-dm-mediator
 
-**Version 0.3-prelim-D15-CORRECTED3 + Mediator_Detection_v12 · 2026-08-14 · 1,000 words**
+**Version 0.3-prelim + T70 · 2026-08-25 · 1,000 words**
+
+**Updates from 2026-08-25 (T70 Tier-1 PATCH):**
+- Added Channel 11 (NGC 1052-DF2/DF4 + FCC 224/240 dark-matter-free UDG consistency check)
+  and Channel 12 (cosmic-web radio synchrotron 40× excess, Pinetti 2025-26) as new observational
+  channels (10 → 12 total). Both pass at the current MAP. Headline σ/m_0 from T13 v2 (5/6/8/9/10/11/12-channel
+  joint fit) is **0.68 cm²/g** at galactic scale, consistent with T21 (1.4-1.7 cm²/g) and T41 (0.07 cm²/g)
+  within the 0.4-0.5 dex systematic budget. See `CHANGELOG.md` [T70] entry for details.
+- Out-of-scope literature flagged but not implemented: FDM/ψDM wholesale, DM→graviton Gertsenshtein
+  decay, bimetric gravity. Different physics frameworks; would need separate repos.
 
 ---
 

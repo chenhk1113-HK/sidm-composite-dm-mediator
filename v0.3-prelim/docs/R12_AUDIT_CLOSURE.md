@@ -5,6 +5,14 @@
 **Status:** v0.3-prelim, post-R12 honest-claim audit closed
 **Supersedes:** `FINDINGS.md` R12 addendum (lines 566–614), `LAYMAN_SUMMARY_R12.md` (150 lines), `NEW_LIGHT_R12.md` (211 lines). All three are preserved in git history for archival purposes.
 
+**T70 addendum (2026-08-25):** Two new observational channels (Channel 11:
+NGC 1052-DF2/DF4 + FCC 224/240 dark-matter-free UDGs; Channel 12: cosmic-web
+radio synchrotron 40× excess) added to the joint-fit pipeline. Both pass at
+the v0.3-prelim MAP. Headline σ/m₀ shifts from 0.73 → 0.68 cm²/g (10→12
+channels), consistent within the 0.4-0.5 dex systematic budget. See the T70
+addendum at the end of `FINDINGS.md` for full numerical results and
+`CHANGELOG.md [T70]` for the implementation details.
+
 ---
 
 ## 1. Overview

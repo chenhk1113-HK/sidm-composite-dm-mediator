@@ -3,13 +3,15 @@ message: >
   If you use this code or its results in published work, please cite the
   relevant version below AND the underlying physics references listed at
   the bottom. See docs/DATA_SOURCES.md for the full list of observational
-  data sources used and how to cite them. v0.3-prelim-D15-CORRECTED3 and
-  Mediator_Detection_v12 are the most recent closed rounds at the time of
-  initial publication (2026-08-14).
+  data sources used and how to cite them. v0.3-prelim+T70 (T70 Tier-1 PATCH
+  2026-08-25: Channels 11+12 added; dark-matter-free UDG consistency check
+  + cosmic-web radio synchrotron 40× excess upper limit) and
+  Mediator_Detection_v12 are the most recent closed rounds at the time
+  of the most recent public release.
 title: "sidm-composite-dm-mediator"
 type: software
-version: 0.3-prelim-D15-CORRECTED3
-date-released: 2026-08-13
+version: 0.3-prelim+T70
+date-released: 2026-08-25
 authors:
   - family-names: Lam
     given-names: K.

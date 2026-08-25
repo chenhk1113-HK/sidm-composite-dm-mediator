@@ -18,6 +18,17 @@
 > and fixed. 4 P0 (correctness) + 3 P1 (coherence) fixes shipped as 8 commits.
 > See `v0.3-prelim/docs/R12_AUDIT_CLOSURE.md` (consolidated) and
 > `v0.3-prelim/docs/REVIEWER_AUDIT_R12.md`.
+>
+> **T70 Tier-1 PATCH (2026-08-25):** Two new channels added in response to user upload
+> of `暗物质竟是量子波.docx` + `darkm.pdf` (literature reviews on dark-matter-free
+> galaxies and cosmic-web radio synchrotron):
+> - **Channel 11** — NGC 1052-DF2/DF4 + FCC 224/240 dark-matter-free UDGs (van Dokkum+ 2018–2026)
+> - **Channel 12** — cosmic-web radio synchrotron 40× excess (Pinetti+ 2025-26)
+>
+> Both pass at the v0.3-prelim MAP. T13 v2 12-channel joint fit gives
+> σ/m₀ = 0.68 cm²/g (10→12 channels shifts the headline by 7%, within the
+> systematic budget). See `CHANGELOG.md [T70]` and `v0.3-prelim/docs/FINDINGS.md`
+> T70 addendum. **Channel count: 10 → 12.**
 
 ---
 

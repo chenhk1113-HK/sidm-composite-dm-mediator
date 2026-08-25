@@ -6,6 +6,13 @@
 > the content of this file, `NEW_LIGHT_R12.md`, and the R12 addendum in
 > `FINDINGS.md` into a single structured document. The original three
 > docs are kept in git history for reference.
+>
+> **T70 addendum (2026-08-25):** Two new observational channels (NGC 1052-DF2/DF4
+> + FCC 224/240 dark-matter-free UDGs; cosmic-web radio synchrotron 40× excess)
+> added to the joint-fit pipeline. Both pass at the v0.3-prelim MAP. Headline
+> σ/m₀ shifts from 0.73 → 0.68 cm²/g (10→12 channels), consistent within the
+> 0.4-0.5 dex systematic budget. Full details in `CHANGELOG.md [T70]` and
+> the T70 addendum at the end of `FINDINGS.md`.
 
 **Repo:** `sidm-composite-dm-mediator` @ GitHub `25a062d` (master)
 **Date:** 2026-08-17

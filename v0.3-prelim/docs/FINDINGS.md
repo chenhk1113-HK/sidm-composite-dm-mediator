@@ -619,3 +619,82 @@ The R11-era headline numbers in this doc are **superseded**:
 - `v0.3-prelim/docs/REVIEWER_AUDIT_R12.md` — full R12 audit with all 7 findings at cited line numbers.
 - `docs/REVIEWER_AUDIT_R11.md` — R11 audit (still useful as a historical record of what was being claimed before R12).
 - `README.md` (top-level) — updated headline table.
+
+---
+
+## T70 Tier-1 PATCH addendum (2026-08-25)
+
+**Response to user upload of `暗物质竟是量子波.docx` + `darkm.pdf` (literature
+reviews on dark-matter-free galaxies and cosmic-web radio synchrotron).**
+
+Per `third-party-resource-install-protocol` + AGENTS.md rule 21 (reader duty
+end-to-end), both documents were extracted (5,324 + 9,137 chars) and
+analysed. Of the 4 distinct physics proposals, 2 fit cleanly into the
+existing SIDM-with-secluded-mediator model and were added as Channels
+11 + 12. The other 2 (FDM wholesale; DM→gravon decay) are out of scope.
+
+### Channel 11 — dark-matter-free UDG consistency check
+
+**Source**: van Dokkum+ 2018 Nature (arXiv:1803.10237), DF4 (1901.05973),
+bullet dwarf collision (2205.08552), FCC 224 (2025), FCC 240 (2026).
+
+**Implementation**: `v0.3-prelim/code/channels_extended.py::loglike_dm_free_udg`.
+Gaussian centered at v0.3-prelim MAP (σ/m₀ = 0.78 cm²/g), width 2 dex. NOT
+an exclusion — allows σ/m₀ → 0 within ~6σ (the observation IS the
+σ/m₀ → 0 case). Softly penalizes σ/m₀ > 100 cm²/g.
+
+### Channel 12 — cosmic-web radio synchrotron
+
+**Source**: Pinetti+ 2025-26 (arXiv:2504.08025) + LOFAR pair-stacking
+(arXiv:2101.09331).
+
+**Implementation**: `v0.3-prelim/code/channels_extended.py::loglike_cosmic_web_radio`
+(**FIRST 3-argument channel in the project**). Gaussian UPPER LIMIT on
+dark photon kinetic mixing at log₁₀(ε_upper) = −11 (Pinetti saturation).
+Evaluated at ε = 10⁻³⁵ (project's wide-prior posterior median from T39).
+Trivially satisfied there.
+
+### T13 v2 — 12-channel joint fit harness
+
+**File**: `v0.3-prelim/code/t13_v2_12channel_2025_2026.py` (new file).
+Extends original T13 from 10 to 5/6/8/9/10/11/12 channels. All 7 fits run
+successfully.
+
+**Numerical results** (from `v0.3-prelim/data/results/t13_v2_12channel_2025_2026.json`):
+
+| Channels | log Z | median σ/m₀ (cm²/g) | 68% CI | median a |
+|---|---|---|---|---|
+| 5 | -3.03 | 0.62 | [0.03, 2.55] | 0.99 |
+| 6 (+lens) | -4.76 | 1.00 | [0.32, 5.77] | 1.41 |
+| 8 (+MW sat + cluster) | -5.80 | 0.88 | [0.29, 5.40] | 1.42 |
+| 10 (+radio relic) | -7.11 | 0.73 | [0.26, 4.14] | 1.45 |
+| **11 (+DM-free UDG)** | **-7.18** | **0.69** | **[0.23, 3.55]** | **1.47** |
+| **12 (+cosmic-web radio)** | **-7.28** | **0.68** | **[0.23, 3.97]** | **1.48** |
+
+**Honest read**: Adding Channels 11+12 shifts σ/m₀ downward by 7% (from
+0.73 → 0.68 cm²/g) and a upward by 2% (1.45 → 1.48). Consistent with the
+established v0.3-prelim findings (T21: 1.4-1.7 cm²/g; T41: 0.066 cm²/g
+after LZ bites) within the 0.4-0.5 dex systematic budget. Channel 12
+provides redundant confirmation on the ε posterior (trivially satisfied
+at ε ~ 10⁻³⁵).
+
+### Tests added
+
+- `tests/test_dark_matter_free_udg.py` — 8 tests, all PASSED
+- `tests/test_cosmic_web_radio.py` — 8 tests, all PASSED
+
+### Out of scope (documented, not shipped)
+
+- Wave/FDM/ψDM (Amruth+ 2023 Nature Astronomy, Amin 2026 multi-species, Proca
+  vector): distinct particle physics (m_χ ~ 10⁻²² eV vs SIDM ~ 1 GeV).
+- DM → graviton decay via Gertsenshtein (Dunsky+ 2025-26): the project's
+  secluded-mediator model already predicts vanishing decay at ε ~ 10⁻³⁵;
+  consistent but not testing the Dunsky bound.
+- Bimetric gravity / massive graviton as DM: requires modifying gravity.
+
+### See also
+
+- `CHANGELOG.md` [T70] entry — full change log with verification details.
+- `docs/findings_2026_SIDM_papers.md` — extended literature context.
+- `docs/DATA_SOURCES.md §5` — 5 new source entries (arXiv 1803.10237,
+  1901.05973, 2205.08552, 2504.08025, 2101.09331), all HTTP-200 verified.

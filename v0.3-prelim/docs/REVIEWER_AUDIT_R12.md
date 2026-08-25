@@ -6,6 +6,12 @@
 **Cycle date:** 2026-08-17
 **Status:** Closed (all P0 + P1 fixes shipped, committed, pushed)
 
+**T70 follow-up (2026-08-25):** Two new channels added post-R12 (Channel 11:
+DM-free UDGs from van Dokkum+ 2018-2026; Channel 12: cosmic-web radio from
+Pinetti+ 2025-26). Both pass the v0.3-prelim standing model. See the T70
+addendum at the end of `FINDINGS.md` and `CHANGELOG.md [T70]` for the
+implementation details.
+
 ---
 
 ## 1. Tier rank of the 6 reviewers
