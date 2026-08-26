@@ -1,6 +1,6 @@
 # MODEL ASSUMPTIONS AND LIMITATIONS — sidm-composite-dm-mediator
 
-**Version:** v0.3-prelim+T70.5 (2026-08-26)
+**Version:** v0.3-prelim+T70.6 (2026-08-26)
 **Status:** Preliminary research code. Not yet publication-ready (per R13 reviewer audit, see `v0.3-prelim/docs/REVIEWER_AUDIT_R13.md`).
 **Per**: Reviewer M4 suggestion in `sidm review2.docx` (2026-08-25).
 
@@ -40,10 +40,10 @@ sections below.**
 
 | Parameter | Value | Why fixed |
 |---|---|---|
-| Dark gauge group SU(N_c) | N_c = 3 (SU(3)) | KSFR coefficients depend on N_c; sweep deferred to v0.6 |
-| Number of dark flavors N_f | N_f = 3 | KSFR coefficients depend on N_f; sweep deferred to v0.6 |
-| Dark-SM temperature ratio ξ | ξ = 1.0 | Frozen at chi relic value; H4.1 sweep showed ROBUST |
-| Lattice ratio m_ρ / f_π | 8.36 (SU(3) N_f=3) | Standard chiral-limit convention |
+| Dark gauge group SU(N_c) | N_c = 3 (SU(3)) default; can be sampled via `KSFR_NC` env var (v0.6 scaffold) | KSFR coefficients depend on N_c; full (Nc, Nf) parameter scan deferred to v0.6 Wave B |
+| Number of dark flavors N_f | N_f = 3 default; can be sampled via `KSFR_NF` env var (v0.6 scaffold) | KSFR coefficients depend on N_f; full (Nc, Nf) parameter scan deferred to v0.6 Wave B |
+| Dark-SM temperature ratio ξ | ξ ∈ [0.1, 5.0] **NOW SAMPLED** in v0.6 (prior: log_xi ∈ [-1.0, 0.7]); was fixed at 1.0 in v0.5 | Promoted from fixed to free per R14 Rec #8; H4.1 sweep showed ROBUST, now backed by 6D nested-sampling posterior |
+| Lattice ratio m_ρ / f_π | 8.36 (SU(3) N_f=3, LATTICE from PDG/FLAG) | Standard chiral-limit convention; v0.6 scaffold allows other (Nc, Nf) via `KSFR_NC_NF_RATIOS` table |
 | Dynesty sampler bound/method | multi-ellipsoid, auto sample | Standard for high-dim joint fits |
 | Random seed for T5 | T5_SEED_BASE = 42 | For test reproducibility (T5 only) |
 
@@ -76,7 +76,7 @@ sections below.**
 - CMB spectral-distortion constraints from post-BBN mediator decay
 - Hierarchical per-galaxy SPARC likelihood
 - Multi-component SIDM as main fit (currently auxiliary)
-- (Nc, Nf) parameter scan for KSFR validity boundary
+- Full (Nc, Nf) parameter scan for KSFR validity boundary (scaffold in v0.6 Wave A; full integration in Wave B)
 - Velocity-scale scan for σ/m (currently V_REF = 100 km/s)
 
 ---

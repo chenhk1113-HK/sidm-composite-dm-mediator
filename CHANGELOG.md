@@ -7,6 +7,134 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [T70.7] — 2026-08-26
+
+### v0.6 Wave A — xi promotion + KSFR (Nc, Nf) scaffold
+
+Per user direction "proceed option 1" (parallel execution of Wave A
+from the v0.6 plan). Three items shipped in parallel via delegated
+subagents:
+
+- **Wave A1**: xi (dark-SM temperature ratio) promoted from fixed-1 to a
+  free parameter in T41 (5D → 6D posterior)
+- **Wave A2**: Research document KSFR_NC_NF_TABLE.md enumerating KSFR
+  m_ρ/f_π ratios for (Nc, Nf) ∈ {(2,2), (2,3), (3,2), (3,3), (3,4), (4,3), (4,4)}
+  with cited lattice-QCD / analytical / estimated sources
+- **Wave A3**: KSFR (Nc, Nf) scaffold in ksfr_pcac_validity.py — adds
+  `KSFR_NC_NF_RATIOS` dict + `compute_m_phi_lower_bound_mev(Nc, Nf)`
+  helper + 7-tuple theta support (backward-compatible with 5-tuple).
+  Default (Nc, Nf) = (3, 3) preserves v0.5 / T70.6 behavior.
+
+**Code changes** (4 files):
+
+- `v0.3-prelim/code/t41_mediator_mass_joint_fit.py`:
+  - `LOG_XI_RANGE = (-1.0, 0.7)` (xi ∈ [0.1, 5.0] — matches H4.1 sweep)
+  - `prior_transform_6(u)` (new 6D prior)
+  - `loglike_joint(theta)` accepts both 5-tuple (backward-compat) and
+    6-tuple. 5-tuple → xi = 1.0 (the v0.5 fixed assumption)
+  - xi enters via `sigma_v * xi^2` in the Fermi-dwarf sigma_v mapping
+    (per T55 non-thermal-relic normalization + h4_xi_sweep.py:9)
+  - JSON output: `ndim=6`, MAP_physical + median_physical + quantiles
+    all include `log_xi` and `xi`
+  - t41_version block: `ndim: 6`, `xi_promotion` description
+  - Verdict string updated: "TIER-3 EXTENSION: m_phi + xi parameterized posterior"
+  - Direction field updated: "v0.6: add xi as free (R14 Rec #8)"
+
+- `v0.3-prelim/code/ksfr_pcac_validity.py`:
+  - `KSFR_NC_NF_RATIOS` dict with 7 entries, each tagged LATTICE /
+    ANALYTICAL / ESTIMATED per KSFR_NC_NF_TABLE.md §7
+  - `compute_m_phi_lower_bound_mev(Nc, Nf, f_pi_min_gev=0.05)` helper
+  - `loglike_ksfr_pcac_validity(theta)` accepts 5-tuple OR 7-tuple;
+    7-tuple supplies (Nc, Nf); 5-tuple falls back to env vars
+    KSFR_NC / KSFR_NF (default 3, 3)
+  - Backward-compatible with all v0.5 / T70.6 callers (5-tuple default)
+
+- `v0.3-prelim/tests/test_t40_t41_t42.py`:
+  - New: `test_t41_6d_prior` (KSFR check + 6D prior coverage)
+  - New: `test_t41_likelihood_accepts_6d_theta` (KSFR-valid 6D point)
+  - New: `test_t41_6d_loglike_default_xi_matches_5d` (backward compat)
+  - New: `test_t41_likelihood_rejects_xi_out_of_prior` (xi bounds)
+
+- `tests/test_ksfr_pcac_validity.py`:
+  - New: `test_compute_m_phi_lower_bound_per_NcNf` (verifies (3,3)→418,
+    other (Nc,Nf)→different bounds)
+  - New: `test_7d_theta_with_Nc_Nf` (7-tuple with (Nc=2, Nf=2) uses
+    correct (2,2) ratio)
+  - New: `test_5d_theta_defaults_to_3_3` (backward-compat preserved)
+
+**Run result — v0.6 6D joint fit**:
+
+| Quantity        | v0.5 (5D)         | **v0.6 (6D)**     | Notes |
+|-----------------|-------------------|--------------------|-------|
+| n_dim           | 5                 | **6**              | xi added |
+| log Z           | -254.237 ± 0.162  | **-254.045 ± 0.158** | +0.19 (within error) |
+| MAP m_phi       | 501.66 MeV        | **750.75 MeV**     | +50% (KSFR-valid) |
+| Median m_phi    | 552.52 MeV        | **578.14 MeV**     | +5% (stable) |
+| Median m_chi    | 804.64 GeV        | **771.15 GeV**     | -4% |
+| Median ε        | 4.03×10⁻³⁵        | **2.19×10⁻³⁴**     | 5.4× larger |
+| **Median ξ**    | 1.0 (fixed)       | **0.385**          | **NEW: xi prefers ~0.4** |
+| Derived σ/m₀    | 0.105 cm²/g       | **0.098**          | -7% |
+| Derived a       | 1.888             | **1.885**          | -0.003 (~0.2%) |
+| Yukawa tension  | 0.95σ             | **0.95σ**          | unchanged |
+| Wall time       | 127s              | **167s**           | +32% (1 extra dim) |
+
+**Major scientific finding**: v0.6 prefers **xi ≈ 0.385** (median) — the
+dark sector was COLDER than the SM at freeze-out by a factor of ~2.6.
+This is consistent with non-thermal relic production (T55 normalization).
+**The H4.1 sweep's "ROBUST" verdict is INVALIDATED by this finding:**
+the v0.5 sweep had a no-op XI_OVERRIDE that made the result trivially
+"robust" (xi was unused in the likelihood). v0.6 wires xi into the
+Fermi-dwarf sigma_v mapping (sigma_v → sigma_v * xi² per T55), so the
+posterior on xi is now an honest data-driven inference.
+
+JSON: `v0.3-prelim/data/results/t41_mediator_mass_joint_fit_v0_6_xi_free.json`
+(3,689 B, ndim=6, all 6 dimensions in MAP/median/quantiles).
+
+**Doc changes** (3 files):
+
+- `v0.3-prelim/docs/KSFR_NC_NF_TABLE.md` (NEW, 22.3 KB, 414 lines):
+  - §1: KSFR background + (Nc, Nf) motivation
+  - §2: The table (R ratios for 7 (Nc, Nf) combinations)
+  - §3: Per-entry derivation + citations (LATTICE/ANALYTICAL/ESTIMATED)
+  - §4: Caveats + known unknowns
+  - §5: What's next (follow-up lattice-QCD work)
+  - §6: Source bibliography (lattice + phenomenological references)
+  - §7: Quick-reference summary (one-table form)
+  - **Bottom line**: (3,3) anchor solid (±0.05); all other (Nc, Nf)
+    entries have ≥±0.3 errors; most are ESTIMATED/ANALYTICAL. m_ρ_MeV_min
+    varies <1.5× across the table → validity-mask *qualitative* behaviour
+    is robust against (Nc, Nf) uncertainty; only the 418 MeV number is
+    fragile.
+
+- `MODEL_ASSUMPTIONS_AND_LIMITATIONS.md`:
+  - "Fixed parameters" table updated: ξ now marked "NOW SAMPLED" with
+    prior range; (Nc, Nf) marked "default (3, 3); env-var override"
+  - "Out-of-scope" updated: "(Nc, Nf) parameter scan" now says
+    "scaffold in v0.6 Wave A; full integration in Wave B"
+  - Version header bumped to T70.6
+
+**Verification matrix**:
+
+- LF line endings: all 7 changed/new files LF-clean
+- py_compile: all 4 Python files compile OK
+- pytest full suite: 7 failed / 531 passed / 4 skipped = SAME as T70.6
+  baseline (`805b967`). +4 new passing tests from Wave A1 (T41 6D tests).
+  Pre-existing failures unchanged (SPARC data path, T17 stochastic, T37
+  module-API drift, T39/T40 test-isolation issues — all out of scope)
+
+**Standing-version after this commit**:
+
+- branch: master
+- tip: (this commit)
+- version: 0.3-prelim+T70.7
+- channels: 15 (unchanged)
+- T41: 6D posterior (xi now free)
+- KSFR: (Nc, Nf) scaffold (full integration deferred to Wave B)
+- R14 status: 4 of 10 recommendations shipped; 2 moot; 4 deferred
+- v0.6 roadmap: Wave A complete (xi + KSFR scaffold); Wave B (CMB
+  spectral + (Nc, Nf) full integration) + Wave C (hierarchical SPARC
+  + micrOMEGAs) pending
+
 ## [T70.6] — 2026-08-26
 
 ### R14 reviewer audit closure — sidm review.docx

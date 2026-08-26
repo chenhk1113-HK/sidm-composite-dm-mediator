@@ -143,15 +143,45 @@ class TestT41Module:
     def test_t41_importable(self):
         t41 = pytest.importorskip("t41_mediator_mass_joint_fit")
         assert hasattr(t41, "loglike_joint")
-        assert hasattr(t41, "prior_transform_5")
+        # v0.6: prior_transform_6 is the canonical 6D prior; prior_transform_5
+        # is kept as a backward-compat alias for v0.5 callers (h3, h4 sweeps).
+        assert hasattr(t41, "prior_transform_5"), (
+            "prior_transform_5 must remain as a backward-compat alias for "
+            "the H3/H4 sweeps (h3_convergence_runner, h4_form_factor_sweep, "
+            "h4_xi_sweep, h4_inelastic_sweep)."
+        )
+        assert hasattr(t41, "prior_transform_6"), (
+            "prior_transform_6 is the canonical v0.6 6D prior."
+        )
         assert hasattr(t41, "main")
 
     def test_t41_5d_prior(self):
-        """T41 uses 5D priors covering (m_phi, m_chi, g_chi, epsilon, alpha)."""
+        """T41 5D priors cover (m_phi, m_chi, g_chi, epsilon, alpha)."""
         t41 = pytest.importorskip("t41_mediator_mass_joint_fit")
         assert (t41.LOG_M_PHI_MEV_RANGE[0] <= -1.0 and
                 t41.LOG_M_PHI_MEV_RANGE[1] >= 3.0), (
             "log_m_phi_MeV prior must cover at least 10 keV to 1 TeV"
+        )
+
+    def test_t41_6d_prior(self):
+        """v0.6: T41 6D priors cover (m_phi, m_chi, g_chi, epsilon, alpha, xi)."""
+        t41 = pytest.importorskip("t41_mediator_mass_joint_fit")
+        # Xi must be in the H4.1 sweep range [0.1, 5.0] (log_xi in [-1.0, 0.7]).
+        assert hasattr(t41, "LOG_XI_RANGE"), "T41 v0.6 must expose LOG_XI_RANGE"
+        assert t41.LOG_XI_RANGE == (-1.0, 0.7), (
+            f"LOG_XI_RANGE must be (-1.0, 0.7) (xi in [0.1, 5.0] per H4.1); "
+            f"got {t41.LOG_XI_RANGE}"
+        )
+        # Sanity: prior_transform_6 returns 6 elements.
+        u = [0.5] * 6
+        theta = t41.prior_transform_6(u)
+        assert len(theta) == 6, (
+            f"prior_transform_6 must return a 6-tuple, got {len(theta)} elements"
+        )
+        # log_xi should be at the midpoint of [-1.0, 0.7] for u[5]=0.5
+        assert abs(theta[5] - (-0.15)) < 1e-9, (
+            f"prior_transform_6 at u=[.5]*6: log_xi should be midpoint "
+            f"of [-1.0, 0.7] = -0.15, got {theta[5]}"
         )
 
     def test_t41_likelihood_accepts_5d_theta(self):
@@ -161,9 +191,53 @@ class TestT41Module:
         # (not -inf) and the underlying likelihood is exercised.
         # log_m_phi=2.7 (~501 MeV — matches the v0.5 MAP), log_m_chi=2.7
         # (~500 GeV), g_chi=0.64, log_eps=-30, log_alpha=-10.
+        # v0.6 back-compat: 5-tuple is treated as xi=1.0.
         ll = t41.loglike_joint((2.7, 2.7, 0.64, -30.0, -10.0))
         assert isinstance(ll, (float, int))
         assert ll > -1e10
+
+    def test_t41_likelihood_accepts_6d_theta(self):
+        """v0.6 (R14 Rec #8): loglikelihood accepts a 6D theta."""
+        t41 = pytest.importorskip("t41_mediator_mass_joint_fit")
+        # KSFR-VALID 6D point matching the v0.5 MAP with added log_xi=0.
+        # log_m_phi=2.7 (~501 MeV), log_m_chi=2.7 (~500 GeV), g_chi=0.64,
+        # log_eps=-30, log_alpha=-10, log_xi=0.0 (xi=1.0 by default).
+        ll = t41.loglike_joint((2.7, 2.7, 0.64, -30.0, -10.0, 0.0))
+        assert isinstance(ll, (float, int))
+        assert ll > -1e10, (
+            f"Expected ll > -1e10 for a KSFR-valid 6D point at xi=1; got {ll}"
+        )
+
+    def test_t41_6d_loglike_default_xi_matches_5d(self):
+        """v0.6 (R14 Rec #8): loglike_joint with log_xi=0 (xi=1) at the same
+        5-tuple must equal the 6-tuple with xi defaulted to 1.0, EXCEPT for
+        the multiplicative sigma_v * xi^2 correction. Since xi=1 -> factor 1,
+        both should return IDENTICAL values for an in-prior 5D point."""
+        t41 = pytest.importorskip("t41_mediator_mass_joint_fit")
+        theta5 = (2.7, 2.7, 0.64, -30.0, -10.0)
+        theta6 = (2.7, 2.7, 0.64, -30.0, -10.0, 0.0)
+        ll5 = t41.loglike_joint(theta5)
+        ll6 = t41.loglike_joint(theta6)
+        assert abs(ll5 - ll6) < 1e-9, (
+            f"loglike_joint back-compat: ll(5-tuple)={ll5} should equal "
+            f"ll(6-tuple with log_xi=0)={ll6} since sigma_v scales as xi^2 "
+            f"and xi=1.0 is the identity"
+        )
+
+    def test_t41_likelihood_rejects_xi_out_of_prior(self):
+        """v0.6: loglike_joint hard-rejects log_xi outside [-1.0, 0.7]."""
+        t41 = pytest.importorskip("t41_mediator_mass_joint_fit")
+        import numpy as np
+        # log_xi=2.0 -> xi=100, outside the prior.
+        ll_out = t41.loglike_joint((2.7, 2.7, 0.64, -30.0, -10.0, 2.0))
+        assert not np.isfinite(ll_out), (
+            f"log_xi=2.0 (xi=100) is outside prior [-1, 0.7]; got ll={ll_out}"
+        )
+        # log_xi=-2.0 -> xi=0.01, outside the prior.
+        ll_out2 = t41.loglike_joint((2.7, 2.7, 0.64, -30.0, -10.0, -2.0))
+        assert not np.isfinite(ll_out2), (
+            f"log_xi=-2.0 (xi=0.01) is outside prior [-1, 0.7]; got ll={ll_out2}"
+        )
 
     def test_t41_yukawa_tension_flag(self):
         """R12 P0-B (2026-08-17): the pre-fix '1.3 sigma Yukawa tension'

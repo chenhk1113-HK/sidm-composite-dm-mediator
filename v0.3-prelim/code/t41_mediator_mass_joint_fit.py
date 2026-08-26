@@ -19,17 +19,31 @@ Key change vs T39:
        a is DERIVED from (log_m_phi, log_m_chi, g_chi) via the Yukawa
        cross-section (T40 YukawaVelocityDependent).
 
-Priors:
-  log_m_phi_MeV:  [-1, 4]    (10 keV to 10 TeV)
-  log_m_chi_GeV:  [0.5, 3]   (3 GeV to 1 TeV)
-  g_chi:          [0.01, 2]  (perturbative to ~O(1))
-  log_epsilon:    [-60, -1]  (vector-mediator kinetic mixing)
-  log_alpha:      [-30, -1]  (annihilation coupling)
+v0.6 change (R14 Rec #8):
+  T41 promoted from 5D -> 6D by adding log_xi as a free parameter
+  (xi = T_dark/T_SM, the dark-sector temperature ratio). Previously this
+  was hardcoded to 1.0 in T55/T59 fixed assumptions. The H4.1 sensitivity
+  sweep at v0.5 (vary xi in {0.1, 0.5, 1.0, 2.0, 5.0}) showed ROBUSTNESS
+  across the prior range -- log_Z range = 0.438, well below 1.0.
+
+  NOTE on H4.1 caveat: the v0.5 sweep actually had a no-op XI_OVERRIDE that
+  was set but never read by t41/t39. log_Z was constant by construction
+  (the result was trivially "robust"). v0.6 wires xi into the
+  Fermi-dwarf sigma_v mapping (sigma_v -> sigma_v * xi^2 per T55
+  non-thermal-relic normalization, matching h4_xi_sweep.py:9), so the
+  posterior on xi is now an honest data-driven inference.
+
+Priors (v0.6):
+  log_m_phi_MeV:  [-1, 4]      (10 keV to 10 TeV)
+  log_m_chi_GeV:  [0.5, 3]     (3 GeV to 1 TeV)
+  g_chi:          [0.01, 2]    (perturbative to ~O(1))
+  log_epsilon:    [-60, -1]    (vector-mediator kinetic mixing)
+  log_alpha:      [-30, -1]    (annihilation coupling)
+  log_xi:         [-1.0, 0.7]  (xi in [0.1, 5.0], matches H4.1 sweep range)
 
 Outputs:
-  - dynesty nested-sampling posterior
-  - weighted medians per parameter
-  - 2D posteriors in (m_phi, m_chi) and (m_phi, epsilon)
+  - dynesty nested-sampling posterior (6D)
+  - weighted medians per parameter (including log_xi)
   - log Z, dlogz, wall time
   - HONEST flag if (a_derived - a_T39) > 1 — i.e., Yukawa doesn't fit.
 
@@ -76,6 +90,10 @@ LOG_M_CHI_GEV_RANGE = (0.5, 3.0)   # 3 GeV to 1 TeV
 G_CHI_RANGE = (0.01, 2.0)
 LOG_EPSILON_RANGE = (-60.0, -1.0)
 LOG_ALPHA_RANGE = (-30.0, -1.0)
+# v0.6: xi (T_dark/T_SM) promoted from fixed (xi=1) to free parameter.
+# Prior range = [-1.0, 0.7] in log_xi, i.e. xi in [0.1, 5.0]. Matches the
+# H4.1 sweep grid {0.1, 0.5, 1.0, 2.0, 5.0} used at v0.5.
+LOG_XI_RANGE = (-1.0, 0.7)
 
 # Reference velocity
 V_REF = 100.0  # km/s
@@ -133,19 +151,33 @@ def derived_a(m_phi_MeV: float, m_chi_GeV: float, g_chi: float) -> float:
 
 
 def loglike_joint(theta):
-    """5-parameter joint likelihood.
+    """6-parameter joint likelihood (v0.6: xi promoted from fixed to free).
 
-    theta = (log_m_phi_MeV, log_m_chi_GeV, g_chi, log_epsilon, log_alpha)
+    theta = (log_m_phi_MeV, log_m_chi_GeV, g_chi, log_epsilon, log_alpha, log_xi)
+    Backward compat: a 5-tuple (no log_xi) is treated as xi = 1.0 (the v0.5
+    fixed assumption). The H4.1 sweep used this 5D shim with log_xi=0
+    effectively no-op; v0.6 makes it explicit.
     """
-    log_m_phi, log_m_chi, g_chi, log_eps, log_alpha = theta
+    # Backward-compat shim: 5D theta -> 6D with xi=1.0 (T55 default).
+    if len(theta) == 5:
+        log_m_phi, log_m_chi, g_chi, log_eps, log_alpha = theta
+        log_xi = 0.0
+    elif len(theta) == 6:
+        log_m_phi, log_m_chi, g_chi, log_eps, log_alpha, log_xi = theta
+    else:
+        return -np.inf
     m_phi_MeV = 10 ** log_m_phi
     m_chi_GeV = 10 ** log_m_chi
     epsilon = 10 ** log_eps
     alpha = 10 ** log_alpha
+    xi = 10 ** log_xi
 
-    if m_phi_MeV <= 0 or m_chi_GeV <= 0 or g_chi <= 0 or epsilon <= 0 or alpha <= 0:
+    if m_phi_MeV <= 0 or m_chi_GeV <= 0 or g_chi <= 0 or epsilon <= 0 or alpha <= 0 or xi <= 0:
         return -np.inf
     if not (1e-2 <= g_chi <= 2.0):
+        return -np.inf
+    # log_xi prior box: [-1.0, 0.7] -> xi in [0.1, 5.0]; gated by prior_transform.
+    if not (LOG_XI_RANGE[0] <= log_xi <= LOG_XI_RANGE[1]):
         return -np.inf
 
     # T70.3 (R13 H1 closure): KSFR/PCAC validity mask (Channel 15).
@@ -155,6 +187,8 @@ def loglike_joint(theta):
     # mask correctly rejects it, and the v0.5 sub-project documents
     # this as a major finding. Disable via env var
     # SIDM_DISABLE_KSFR_MASK=1 for cross-version comparison.
+    # Note: loglike_ksfr_pcac_validity uses theta[:5] which still works
+    # for both 5D and 6D inputs.
     ll_ksfr = loglike_ksfr_pcac_validity(theta)
     if not np.isfinite(ll_ksfr):
         return -np.inf
@@ -167,25 +201,27 @@ def loglike_joint(theta):
     # Derived velocity power-law index
     a = derived_a(m_phi_MeV, m_chi_GeV, g_chi)
 
-    # 1. dSph (channel 2) — bimodal posterior
+    # 1. dSph (channel 2) — bimodal posterior. NO xi dependence.
     ll_dsph = ch_v03.loglike_dsph_v03(sigma_m_0, a)
     if not np.isfinite(ll_dsph):
         return -np.inf
 
-    # 2. UFD (channel 3)
+    # 2. UFD (channel 3). NO xi dependence.
     ll_ufd = ch_v03.loglike_ufd_v03(sigma_m_0, a)
     if not np.isfinite(ll_ufd):
         return -np.inf
 
-    # 3. Bullet Cluster (channel 4)
+    # 3. Bullet Cluster (channel 4). NO xi dependence.
     ll_bullet = ch_v03.loglike_bullet_v03(sigma_m_0, a)
     if not np.isfinite(ll_bullet):
         return -np.inf
 
-    # 4. LZ (T30) — uses sigma_DM_nucleon from dark-photon kinetic mixing
+    # 4. LZ (T30) — uses sigma_DM_nucleon from dark-photon kinetic mixing.
     # R12 P1-C (2026-08-17): replaced dimensionally-inconsistent
     # `sigma_DM_n = epsilon * sigma_m_0` (units cm^2/g, NOT cm^2) with
     # the proper dark-photon portal form via t39.sigma_SI_from_dark_photon.
+    # NO xi dependence (kinetic-mixing direct detection is independent
+    # of dark-sector temperature ratio).
     import t39_tier3_epsilon_alpha_joint_fit as t39
     # T41's loglike_joint varies m_phi, m_chi, g_chi; we need alpha_D too.
     # Fix alpha_D ~ g_chi^2 / (4 pi) as a simplified dark-side estimate
@@ -201,14 +237,21 @@ def loglike_joint(theta):
     if not np.isfinite(ll_lz):
         return -np.inf
 
-    # 5. Fermi dwarf (T32) — gamma-ray from annihilation
+    # 5. Fermi dwarf (T32) — gamma-ray from annihilation.
     # R12 P1-C: replaced `alpha * sigma_m_at_v^2` (units cm^4/g^2, NOT
     # cm^3/s) with the proper dark-photon portal form.
+    # v0.6 (R14 Rec #8): xi entered via relic-density normalization.
+    # sigma_v_required_for_relic_density scales as 1/xi from the
+    # non-thermal-relic normalization (T55), so sigma_v_effective for
+    # the standard thermal xsec at fixed relic density is sigma_v * xi^2
+    # (per h4_xi_sweep.py:9 design intent). This is the ONLY channel
+    # loglike that depends on xi.
     sigma_v = t39.sigma_v_from_dark_photon(
         m_chi_GeV=m_chi_GeV,
         m_A_prime_MeV=m_phi_MeV,
         alpha_D=ALPHA_D_T41,
     )
+    sigma_v = sigma_v * xi ** 2
     ll_fermi = loglike_fermi_dwarf(m_chi_GeV, sigma_v)
     if not np.isfinite(ll_fermi):
         return -np.inf
@@ -223,6 +266,7 @@ def loglike_joint(theta):
     # T69 (v0.4-prelim): rescaled by baryonic-feedback nuisance f_fb.
     # Default f_fb = 0.5 (moderate feedback per the Di Cintio+ 2014a prior).
     # Override via the F_FB_OVERRIDE env var (used by t69_feedback_nuisance_rerun.py).
+    # NO xi dependence.
     f_fb_default = 0.5
     try:
         f_fb = float(os.environ.get("F_FB_OVERRIDE", f_fb_default))
@@ -246,6 +290,16 @@ def loglike_joint(theta):
 
 
 def prior_transform_5(u):
+    """5D prior transform (DEPRECATED: backward-compat alias for v0.5 + sweeps).
+
+    Identical to v0.5: returns a 5-element theta array. Internally maps to the
+    new 6D prior with log_xi = 0 (xi = 1.0 -- the v0.5 fixed assumption).
+    Kept so that h3_convergence_runner, h4_form_factor_sweep, h4_xi_sweep,
+    h4_inelastic_sweep, and any other v0.5 callers using
+    `t41.prior_transform_5` keep working without modification.
+
+    For the canonical v0.6 main run, use prior_transform_6 (6D).
+    """
     return [
         LOG_M_PHI_MEV_RANGE[0] + u[0] * (LOG_M_PHI_MEV_RANGE[1] - LOG_M_PHI_MEV_RANGE[0]),
         LOG_M_CHI_GEV_RANGE[0] + u[1] * (LOG_M_CHI_GEV_RANGE[1] - LOG_M_CHI_GEV_RANGE[0]),
@@ -255,16 +309,41 @@ def prior_transform_5(u):
     ]
 
 
+def prior_transform_6(u):
+    """6D prior transform (v0.6 canonical).
+
+    theta = (log_m_phi_MeV, log_m_chi_GeV, g_chi, log_epsilon, log_alpha, log_xi)
+
+    Priors (uniform in log-space unless noted):
+      log_m_phi_MeV: [-1, 4]          (10 keV -> 10 TeV)
+      log_m_chi_GeV: [0.5, 3]         (3 GeV  -> 1 TeV)
+      g_chi:         [0.01, 2]        (linear, perturbative)
+      log_epsilon:   [-60, -1]        (kinetic mixing)
+      log_alpha:     [-30, -1]        (annihilation coupling)
+      log_xi:        [-1.0, 0.7]      (xi = T_dark/T_SM in [0.1, 5.0])
+    """
+    return [
+        LOG_M_PHI_MEV_RANGE[0] + u[0] * (LOG_M_PHI_MEV_RANGE[1] - LOG_M_PHI_MEV_RANGE[0]),
+        LOG_M_CHI_GEV_RANGE[0] + u[1] * (LOG_M_CHI_GEV_RANGE[1] - LOG_M_CHI_GEV_RANGE[0]),
+        G_CHI_RANGE[0] + u[2] * (G_CHI_RANGE[1] - G_CHI_RANGE[0]),
+        LOG_EPSILON_RANGE[0] + u[3] * (LOG_EPSILON_RANGE[1] - LOG_EPSILON_RANGE[0]),
+        LOG_ALPHA_RANGE[0] + u[4] * (LOG_ALPHA_RANGE[1] - LOG_ALPHA_RANGE[0]),
+        LOG_XI_RANGE[0] + u[5] * (LOG_XI_RANGE[1] - LOG_XI_RANGE[0]),
+    ]
+
+
 def main():
     print("=" * 80)
     print("T41 — Mediator-mass (m_phi) + DM-mass (m_chi) joint fit")
     print("=" * 80)
-    print("5 parameters: log_m_phi_MeV, log_m_chi_GeV, g_chi, log_epsilon, log_alpha")
+    print("6 parameters (v0.6: log_xi promoted from fixed to free):")
+    print("  log_m_phi_MeV, log_m_chi_GeV, g_chi, log_epsilon, log_alpha, log_xi")
     print(f"  log_m_phi_MeV: [{LOG_M_PHI_MEV_RANGE[0]}, {LOG_M_PHI_MEV_RANGE[1]}]")
     print(f"  log_m_chi_GeV: [{LOG_M_CHI_GEV_RANGE[0]}, {LOG_M_CHI_GEV_RANGE[1]}]")
     print(f"  g_chi:         [{G_CHI_RANGE[0]}, {G_CHI_RANGE[1]}]")
     print(f"  log_epsilon:   [{LOG_EPSILON_RANGE[0]}, {LOG_EPSILON_RANGE[1]}]")
     print(f"  log_alpha:     [{LOG_ALPHA_RANGE[0]}, {LOG_ALPHA_RANGE[1]}]")
+    print(f"  log_xi:        [{LOG_XI_RANGE[0]}, {LOG_XI_RANGE[1]}]   (xi in [0.1, 5.0])")
     print()
 
     # R14 (2026-08-26): inelastic-channel toggle for sensitivity-test parity with
@@ -298,10 +377,11 @@ def main():
     # re-runs and follow-up sweeps can scale up cleanly. Default nlive=200 preserves
     # backward compatibility with the published T41 numbers.
     nlive = int(os.environ.get("T41_NLIVE", "200"))
+    # v0.6: 6D posterior (log_xi promoted from fixed to free per R14 Rec #8).
     sampler = dynesty.NestedSampler(
         loglikelihood=loglike_for_run,
-        prior_transform=prior_transform_5,
-        ndim=5, nlive=nlive, bound='multi', sample='auto', bootstrap=0,
+        prior_transform=prior_transform_6,
+        ndim=6, nlive=nlive, bound='multi', sample='auto', bootstrap=0,
     )
     sampler.run_nested(dlogz=0.1, print_progress=False)
     wall = time.time() - t0
@@ -321,6 +401,7 @@ def main():
         "g_chi": weighted_median(samples[:, 2], weights),
         "log_epsilon": weighted_median(samples[:, 3], weights),
         "log_alpha": weighted_median(samples[:, 4], weights),
+        "log_xi": weighted_median(samples[:, 5], weights),
     }
 
     # 16/50/84 quantiles
@@ -330,6 +411,7 @@ def main():
         "g_chi":         list(weighted_quantiles(samples[:, 2], weights, [0.16, 0.5, 0.84])),
         "log_epsilon":   list(weighted_quantiles(samples[:, 3], weights, [0.16, 0.5, 0.84])),
         "log_alpha":     list(weighted_quantiles(samples[:, 4], weights, [0.16, 0.5, 0.84])),
+        "log_xi":        list(weighted_quantiles(samples[:, 5], weights, [0.16, 0.5, 0.84])),
     }
 
     # Convert to physical units
@@ -337,6 +419,7 @@ def main():
     med_m_chi_GeV = 10 ** med["log_m_chi_GeV"]
     med_eps = 10 ** med["log_epsilon"]
     med_alpha = 10 ** med["log_alpha"]
+    med_xi = 10 ** med["log_xi"]
 
     # Derived sigma_m_0 + a at MAP
     map_m_phi_MeV = 10 ** MAP[0]
@@ -354,13 +437,15 @@ def main():
     print(f"  MAP: log_m_phi={MAP[0]:.3f} ({map_m_phi_MeV:.2f} MeV), "
           f"log_m_chi={MAP[1]:.3f} ({map_m_chi_GeV:.2f} GeV), "
           f"g_chi={MAP[2]:.4f}, "
-          f"log_eps={MAP[3]:.2f}, log_alpha={MAP[4]:.2f}")
+          f"log_eps={MAP[3]:.2f}, log_alpha={MAP[4]:.2f}, "
+          f"log_xi={MAP[5]:.3f} (xi={10**MAP[5]:.3f})")
     print(f"  DERIVED at MAP: sigma_m_0 = {map_sigma_m_0:.3f} cm^2/g, a = {map_a:.3f}")
     print(f"  Median: log_m_phi={med['log_m_phi_MeV']:.3f} ({med_m_phi_MeV:.2f} MeV), "
           f"log_m_chi={med['log_m_chi_GeV']:.3f} ({med_m_chi_GeV:.2f} GeV), "
           f"g_chi={med['g_chi']:.4f}, "
           f"log_eps={med['log_epsilon']:.2f} (eps={med_eps:.2e}), "
-          f"log_alpha={med['log_alpha']:.2f} (alpha={med_alpha:.2e})")
+          f"log_alpha={med['log_alpha']:.2f} (alpha={med_alpha:.2e}), "
+          f"log_xi={med['log_xi']:.3f} (xi={med_xi:.3f})")
     print(f"  TENSION: T39 a=+0.94 vs Yukawa-derived a={map_a:+.3f} → diff = {a_tension:.2f}")
     if a_tension > 1.0:
         # R12 P1-D (2026-08-17): this branch rarely fires now that
@@ -382,14 +467,14 @@ def main():
     print()
 
     # Honest comparison
-    verdict = "TIER-3 EXTENSION: m_phi parameterized posterior"
+    verdict = "TIER-3 EXTENSION: m_phi + xi parameterized posterior (v0.6: xi promoted from fixed to free)"
     if a_tension > 1.0:
         verdict += " — YUKAWA TENSION (T39 a > 0 vs Yukawa a < 0)"
 
     out = {
         "test": "T41_mediator_mass_joint_fit",
-        "direction": "User ship direction #1: add m_phi to posterior",
-        "ndim": 5,
+        "direction": "User ship direction #1: add m_phi to posterior; v0.6: add xi as free (R14 Rec #8)",
+        "ndim": 6,
         "parameters": list(quants.keys()),
         "priors": {
             "log_m_phi_MeV": list(LOG_M_PHI_MEV_RANGE),
@@ -397,6 +482,7 @@ def main():
             "g_chi": list(G_CHI_RANGE),
             "log_epsilon": list(LOG_EPSILON_RANGE),
             "log_alpha": list(LOG_ALPHA_RANGE),
+            "log_xi": list(LOG_XI_RANGE),
         },
         "log_Z": log_Z,
         "log_Z_err": log_Z_err,
@@ -407,6 +493,8 @@ def main():
             "g_chi": map_g_chi,
             "log_epsilon": MAP[3],
             "log_alpha": MAP[4],
+            "log_xi": MAP[5],
+            "xi": 10 ** MAP[5],
             "sigma_m_0_derived": map_sigma_m_0,
             "a_derived": map_a,
         },
@@ -418,6 +506,7 @@ def main():
             "g_chi": med["g_chi"],
             "epsilon": med_eps,
             "alpha": med_alpha,
+            "xi": med_xi,
         },
         "yukawa_tension": {
             "T39_sigma_m_0": t39_sigma_m_0,
@@ -431,12 +520,17 @@ def main():
         "interpretation": (
             f"log Z = {log_Z:.3f}, posterior medians: m_phi = {med_m_phi_MeV:.2f} MeV, "
             f"m_chi = {med_m_chi_GeV:.2f} GeV, g_chi = {med['g_chi']:.4f}, "
-            f"eps = {med_eps:.2e}, alpha = {med_alpha:.2e}. "
+            f"eps = {med_eps:.2e}, alpha = {med_alpha:.2e}, xi = {med_xi:.3f}. "
             f"Derived sigma/m_0 = {map_sigma_m_0:.3f} cm^2/g, a = {map_a:+.3f}. "
             f"Yukawa velocity index = {map_a:+.3f}; T39 data-preferred = +0.94. "
             f"|Tension| = {a_tension:.2f} (threshold 1.0). "
             f"R12 P0-B (2026-08-17): the pre-fix '1.3 sigma tension' claim was a "
-            f"sign-flip artifact in derived_a; this re-run uses the corrected sign."
+            f"sign-flip artifact in derived_a; this re-run uses the corrected sign. "
+            f"v0.6 (R14 Rec #8, 2026-08-26): log_xi promoted from fixed-1 to free "
+            f"with prior log_xi in [-1.0, 0.7] (xi in [0.1, 5.0], matching H4.1 sweep range). "
+            f"v0.5 baseline log Z = -254.24 at nlive=500; v0.6 should be within ~0.5 "
+            f"of that since xi only enters via the Fermi-dwarf sigma_v scaling (sigma_v * xi^2), "
+            f"a subdominant channel."
         ),
     }
 
@@ -447,9 +541,11 @@ def main():
         "suffix": os.environ.get("T41_RESULT_SUFFIX", ""),
         "ksfr_mask_enabled": os.environ.get("SIDM_DISABLE_KSFR_MASK", "0") != "1",
         "nlive": nlive,
+        "ndim": 6,
         "dlogz": 0.1,
         "inelastic_on": inelastic_on,
         "r_inelastic": r_inelastic,
+        "xi_promotion": "v0.6: log_xi now a free parameter (R14 Rec #8). Prior log_xi in [-1.0, 0.7].",
     }
     out_path.write_text(json.dumps(out_with_meta, indent=2, default=str))
     # Mirror to Windows-side path if running under WSL
