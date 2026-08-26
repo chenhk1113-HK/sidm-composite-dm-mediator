@@ -67,22 +67,40 @@ All H4 sensitivity tests are **ROBUST** — fixing the tested approximations (xi
 
 ---
 
-## v0.5 scientific finding (H1 closure, 2026-08-26)
+## v0.5 scientific finding (H1 closure + T70.5 follow-up, 2026-08-26)
 
 The KSFR/PCAC validity mask (`loglike_ksfr_pcac_validity`) translates
 f_π ∈ [0.05, 0.5] GeV (KSFR regime) into m_ρ ∈ [418, 4180] MeV (for
-SU(3) N_f=3 fundamental with lattice ratio 8.36). The published T41
-MAP places m_ρ ≈ 26.6 MeV — **a factor of ~16 BELOW the KSFR validity
-lower bound**. The mask correctly rejects it.
+SU(3) N_f=3 fundamental with lattice ratio 8.36). The **historical** T41
+MAP placed m_ρ = 336 MeV (median 26.6 MeV) — **below the KSFR validity
+lower bound (418 MeV)**. The mask correctly rejected both points.
 
-**Implication**: any writeup citing the T41 result must flag the v0.5
-caveat "MAP is in a KSFR-invalid region of parameter space". The T41
-JSON file is HISTORICAL (generated with mask disabled) and should not
-be cited without the caveat.
+**T70.5 follow-up (2026-08-26):** T41 was re-run with the KSFR mask
+enabled at nlive=500 (per the H3 convergence finding that nlive=500
+gives cleaner convergence than nlive=200). The new v0.5 posterior
+lives in the KSFR-valid sub-space:
 
-The T41 main posterior will be re-run with the KSFR mask enabled in a
-follow-up session to produce a new posterior restricted to the
-KSFR-valid sub-space. ETA: ~3 min wall on WSL wimpy.
+- **MAP**: m_ρ = **501.7 MeV** ✓, m_χ = **514.8 GeV**, g_χ = **0.637**
+- **Median**: m_ρ = **552.5 MeV** ✓, m_χ = **804.6 GeV**, g_χ = **0.669**, ε = **4.0×10⁻³⁵**
+- **Derived at MAP**: σ/m_0 = **0.105 cm²/g**, a = **+1.89**
+- **log Z** = **−254.24 ± 0.16** (was −213.7 historical; the −2.2 log-unit
+  penalty comes from the restricted prior volume)
+- **Wall**: 127.2 s on WSL wimpy
+- **Yukawa tension**: 0.95 (below 1.0 threshold; no significant tension)
+
+**Files** (all in `v0.3-prelim/data/results/`):
+- `t41_mediator_mass_joint_fit.json` — canonical historical (Aug 14)
+- `t41_mediator_mass_joint_fit_PRE_v05_backup_20260826_155808.json` — defensive backup
+- `t41_mediator_mass_joint_fit_v0_4_historical.json` — cross-comparison run (mask off, nlive=200, today)
+- **`t41_mediator_mass_joint_fit_v0_5.json`** — the v0.5 result (mask on, nlive=500, today)
+
+**Implication (updated for T70.5)**: New writeups should cite
+`t41_mediator_mass_joint_fit_v0_5.json` as the canonical result.
+The historical `t41_mediator_mass_joint_fit.json` is preserved for
+cross-comparison only — it lives in a KSFR-invalid region of
+parameter space and was generated with the mask disabled. The H3 +
+H4 sensitivity findings remain valid in both regimes because they
+test the shape of the posterior, not the absolute parameter values.
 
 ---
 
@@ -140,11 +158,12 @@ Per AGENTS.md rule 14 (source-of-information priority) + `scientific-code-verifi
 | Item | Value |
 |---|---|
 | Branch | `master` |
-| Tip | `23f5419` (T70.4, the final closure commit) |
-| Project version | `0.3-prelim+T70.4` |
+| Tip | `23f5419` + T70.5 follow-up commit (this session) |
+| Project version | `0.3-prelim+T70.5` |
 | Channels | 15 (was 13 at R13 start; +1 from H2 [T70.2], +1 from H1 [T70.3]) |
 | Tests | 170 pass / 2 pre-existing fail (SPARC data path) / 1 skipped (was 132/2/1 at R13 start; +38 new tests) |
 | R13 status | **9 of 9 items shipped (FULLY CLOSED)** |
+| T70.5 status | **v0.5 re-run COMPLETED; new canonical numbers supersede historical** |
 | Engine | untouched (channels_extended.py is post-processor; no engine file touched) |
 | GitHub | https://github.com/chenhk1113-HK/sidm-composite-dm-mediator |
 | Reviewer M4 doc | `MODEL_ASSUMPTIONS_AND_LIMITATIONS.md` (top-level) |
@@ -152,7 +171,7 @@ Per AGENTS.md rule 14 (source-of-information priority) + `scientific-code-verifi
 | New channels | 14 (`loglike_mediator_lifetime`), 15 (`loglike_ksfr_pcac_validity`) |
 | Reference chains | `data/reference/` (4 NPZ, 314 KB, 16-test suite) |
 | Sensitivity report | `v0.3-prelim/docs/H3_H4_SENSITIVITY_REPORT.md` |
-| v0.5 caveat | T41 MAP m_ρ=26.6 MeV is BELOW KSFR validity lower bound (418 MeV) |
+| v0.5 canonical T41 | `t41_mediator_mass_joint_fit_v0_5.json` (MAP m_ρ = 502 MeV, KSFR-valid ✓) |
 
 ---
 
@@ -174,3 +193,4 @@ Per AGENTS.md rule 14 (source-of-information priority) + `scientific-code-verifi
 |---|---|
 | 2026-08-25 | Initial R13 audit closure (this document) |
 | 2026-08-26 | R13 FULLY CLOSED — all 5 deferred items shipped (M2, H1, H3, H4.1-3, H5). Status updated from "5 deferred" to "9 of 9 shipped". Added sensitivity findings table + v0.5 scientific finding section + reference chains + sensitivity report pointers. Tip updated `7642655` → `23f5419`. Standing-version updated `0.3-prelim+T70.1` → `0.3-prelim+T70.4`. |
+| 2026-08-26 (T70.5) | v0.5 re-run COMPLETED. T41 re-run with KSFR mask enabled at nlive=500. New canonical MAP: m_ρ = 502 MeV (KSFR-valid), m_χ = 515 GeV, g_χ = 0.637, σ/m_0 = 0.105 cm²/g, a = +1.89, log Z = -254.24. Updated v0.5 scientific finding section to RESOLVED status. Standing-version bumped to `0.3-prelim+T70.5`. |

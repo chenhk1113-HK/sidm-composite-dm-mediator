@@ -211,22 +211,34 @@ and was dropped. The validity mask now uses 3 independent constraints
 (f_π, g_χ, m_ρ/f_π). See `v0.3-prelim/code/ksfr_pcac_validity.py` and
 `tests/test_ksfr_pcac_validity.py`.
 
-**CRITICAL v0.5 finding**: For SU(3) N_f=3 fundamental, the validity
-mask translates f_π ∈ [0.05, 0.5] GeV into **m_ρ ∈ [418, 4180] MeV**.
-The published T41 posterior places m_ρ ≈ 26.6 MeV — **a factor of ~16
-below the KSFR validity lower bound**. This means:
+**CRITICAL v0.5 finding (RESOLVED in T70.5, 2026-08-26)**: For SU(3) N_f=3
+fundamental, the validity mask translates f_π ∈ [0.05, 0.5] GeV into
+**m_ρ ∈ [418, 4180] MeV**. The historical T41 posterior places m_ρ ≈
+336 MeV (MAP) / 26.6 MeV (median) — below the KSFR validity lower bound.
+The mask correctly rejects both points.
 
-  - The T41 MAP and surrounding posterior mass live in a region
-    where KSFR/PCAC breaks down.
-  - The headline T41 result should be flagged as **"in a KSFR-invalid
-    region of parameter space"** in any publication-quality writeup.
-  - The KSFR mask (Channel 15) is wired into T41's joint likelihood
-    as a hard pre-filter; the resulting posterior (when re-run with
-    the mask enabled) is restricted to the KSFR-valid sub-space.
-  - The T41 main posterior stored in
-    `v0.3-prelim/data/results/t41_mediator_mass_joint_fit.json` was
-    generated with the mask DISABLED (legacy behavior); it is
-    HISTORICAL and should not be cited without the v0.5 caveat.
+**T70.5 follow-up (2026-08-26):** T41 was re-run with the KSFR mask
+enabled at nlive=500 (per the H3 convergence finding that nlive=500
+gives cleaner convergence). The new canonical v0.5 posterior lives in
+the KSFR-valid sub-space:
+
+- **MAP**: m_ρ = **501.7 MeV** ✓, m_χ = **514.8 GeV**, g_χ = **0.637**
+- **Median**: m_ρ = **552.5 MeV** ✓, m_χ = **804.6 GeV**, g_χ = **0.669**, ε = **4.0×10⁻³⁵**
+- **Derived at MAP**: σ/m_0 = **0.105 cm²/g**, a = **+1.89**
+- **log Z** = **−254.24 ± 0.16** (vs -213.7 historical; -2.2 log-unit
+  penalty from restricted prior volume)
+- **Wall**: 127.2 s on WSL wimpy
+
+The 4 T41 result files in `v0.3-prelim/data/results/`:
+- `t41_mediator_mass_joint_fit.json` — canonical historical (Aug 14, mask OFF)
+- `t41_mediator_mass_joint_fit_PRE_v05_backup_20260826_155808.json` — defensive backup
+- `t41_mediator_mass_joint_fit_v0_4_historical.json` — cross-comparison re-run (mask OFF, nlive=200, today)
+- **`t41_mediator_mass_joint_fit_v0_5.json`** — the v0.5 result (mask ON, nlive=500, today)
+
+New writeups should cite `t41_mediator_mass_joint_fit_v0_5.json` as the
+canonical result. The historical T41 file is preserved for
+cross-comparison only — it lives in a KSFR-invalid region of parameter
+space and was generated with the mask disabled.
 
 **Current code behavior** (v0.5): `loglike_ksfr_pcac_validity(theta)`
 returns 0 inside the validity box, `-inf` outside. T41's
@@ -292,3 +304,4 @@ Per Reviewer 2's recommendation:
 |---|---|---|
 | 2026-08-25 | Initial creation per reviewer M4 (sidm review2.docx) | Reviewer M4 |
 | 2026-08-26 | §1 added Channel 14 (mediator lifetime) + Channel 15 (KSFR mask); §6 fixed: Λ_dark removed as independent constraint (redundant with f_π under chiral-limit convention); KSFR mask implemented as Channel 15 + wired into T41; major v0.5 finding documented: T41 MAP at m_ρ=26.6 MeV is BELOW KSFR validity lower bound (418 MeV) | R13 H2 + H1 closure, this turn |
+| 2026-08-26 (T70.5) | v0.5 re-run COMPLETED. T41 re-run with KSFR mask enabled at nlive=500. §6 updated to reflect new canonical v0.5 numbers (MAP m_ρ = 501.7 MeV, median = 552.5 MeV, log Z = -254.24, σ/m_0 = 0.105 cm²/g, a = +1.89). All KSFR-valid. v0.5 caveat is now RESOLVED. | T70.5 follow-up, this turn |

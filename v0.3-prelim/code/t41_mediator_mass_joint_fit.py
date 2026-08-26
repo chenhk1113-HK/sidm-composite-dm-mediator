@@ -38,6 +38,7 @@ find the mediator by experiment?" — the posterior p(m_phi) is the answer.
 """
 from __future__ import annotations
 import json
+import os
 import sys
 import time
 from pathlib import Path
@@ -222,7 +223,6 @@ def loglike_joint(theta):
     # T69 (v0.4-prelim): rescaled by baryonic-feedback nuisance f_fb.
     # Default f_fb = 0.5 (moderate feedback per the Di Cintio+ 2014a prior).
     # Override via the F_FB_OVERRIDE env var (used by t69_feedback_nuisance_rerun.py).
-    import os
     f_fb_default = 0.5
     try:
         f_fb = float(os.environ.get("F_FB_OVERRIDE", f_fb_default))
@@ -268,10 +268,15 @@ def main():
     print()
 
     t0 = time.time()
+    # T70.4 (R13 H3 follow-up): nlive=200 gives borderline-stable results; nlive=500
+    # gives cleaner convergence per H3 sweep. Allow override via env var so v0.5
+    # re-runs and follow-up sweeps can scale up cleanly. Default nlive=200 preserves
+    # backward compatibility with the published T41 numbers.
+    nlive = int(os.environ.get("T41_NLIVE", "200"))
     sampler = dynesty.NestedSampler(
         loglikelihood=loglike_joint,
         prior_transform=prior_transform_5,
-        ndim=5, nlive=200, bound='multi', sample='auto', bootstrap=0,
+        ndim=5, nlive=nlive, bound='multi', sample='auto', bootstrap=0,
     )
     sampler.run_nested(dlogz=0.1, print_progress=False)
     wall = time.time() - t0
@@ -410,13 +415,21 @@ def main():
         ),
     }
 
-    out_path = RESULTS_DIR / "t41_mediator_mass_joint_fit.json"
-    out_path.write_text(json.dumps(out, indent=2, default=str))
+    out_path = RESULTS_DIR / ("t41_mediator_mass_joint_fit" + os.environ.get("T41_RESULT_SUFFIX", "") + ".json")
+    # Add the version metadata to the JSON itself so the file is self-identifying
+    out_with_meta = dict(out)
+    out_with_meta["t41_version"] = {
+        "suffix": os.environ.get("T41_RESULT_SUFFIX", ""),
+        "ksfr_mask_enabled": os.environ.get("SIDM_DISABLE_KSFR_MASK", "0") != "1",
+        "nlive": nlive,
+        "dlogz": 0.1,
+    }
+    out_path.write_text(json.dumps(out_with_meta, indent=2, default=str))
     # Mirror to Windows-side path if running under WSL
     try:
-        win_path = Path("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/data/results/t41_mediator_mass_joint_fit.json")
+        win_path = Path("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/data/results/" + out_path.name)
         if win_path.parent.exists():
-            win_path.write_text(json.dumps(out, indent=2, default=str))
+            win_path.write_text(json.dumps(out_with_meta, indent=2, default=str))
             print(f"\noutput -> {out_path}")
             print(f"        -> {win_path}")
         else:

@@ -1,19 +1,21 @@
 cff-version: 1.2.0
-message: >
+message: >-
   If you use this code or its results in published work, please cite the
   relevant version below AND the underlying physics references listed at
   the bottom. See docs/DATA_SOURCES.md for the full list of observational
-  data sources used and how to cite them. v0.3-prelim+T70.4 (T70.2-T70.4
-  Tier-1 PATCHES 2026-08-25/26: R13 reviewer audit FULLY CLOSED, all 9
-  of 9 items shipped including KSFR/PCAC validity mask as Channel 15,
-  sensitivity sweeps for nlive convergence + xi + form-factor + inelastic,
+  data sources used and how to cite them. v0.3-prelim+T70.5 (T70.5
+  Tier-1 PATCH 2026-08-26: T41 v0.5 re-run COMPLETED with KSFR/PCAC
+  validity mask enabled at nlive=500; new canonical MAP m_ρ = 502 MeV
+  in KSFR-valid sub-space; T70.4 R13 audit FULLY CLOSED with 9 of 9
+  items shipped including KSFR mask as Channel 15, H3 nlive sensitivity
+  sweep, H4.1/H4.2/H4.3 sweeps for xi/form-factor/inelastic channels,
   downsampled reference posterior chains, and Bullet Cluster doc
   correction) and the H3+H4 sensitivity report at
   v0.3-prelim/docs/H3_H4_SENSITIVITY_REPORT.md are the most recent
   closed rounds at the time of the most recent public release.
 title: "sidm-composite-dm-mediator"
 type: software
-version: 0.3-prelim+T70.4
+version: 0.3-prelim+T70.5
 date-released: 2026-08-26
 authors:
   - family-names: Lam

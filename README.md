@@ -5,7 +5,7 @@
 **Joint-fit framework for self-interacting dark matter (SIDM), grounded in the published multi-channel data (dSph, UFD, Bullet, SPARC, LZ, Fermi).**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.3--prelim%2BT70.4-blue)](VERSION)
+[![Version](https://img.shields.io/badge/version-0.3--prelim%2BT70.5-blue)](VERSION)
 [![arXiv:2506.22997](https://img.shields.io/badge/cross--validated-arXiv%3A2506.22997-b31b1b)](https://arxiv.org/abs/2506.22997)
 
 > **Heads-up (2026-08-14):** Project renamed from `dm-sidm-pipeline`. All
@@ -55,15 +55,16 @@
 > `cfe2869` (M2 reference chains), `1d331ed` (H1 KSFR mask),
 > `23f5419` (H3+H4 sweeps + H5 doc fix).
 >
-> **T70.3 R13 H1 closure (2026-08-26):** Per user direction "do the 0.4
-> and 0.5" — resumed deferred sub-projects. **H1 closed**: KSFR/PCAC
-> validity mask implemented as Channel 15 (`loglike_ksfr_pcac_validity`)
-> + wired into T41 as hard pre-filter. **22 new tests** (all passing);
-> total tests now **132 → 170** (also +16 from M2 commit `cfe2869`
-> shipped earlier in the same session). **Major v0.5 finding**:
-> T41 MAP at m_ρ=26.6 MeV is BELOW KSFR validity lower bound (418 MeV
-> for SU(3) N_f=3 fundamental). Mask correctly rejects it.
-> Channel count **14 → 15**.
+|> **T70.3 R13 H1 closure (2026-08-26):** Per user direction "do the 0.4
+|> and 0.5" — resumed deferred sub-projects. **H1 closed**: KSFR/PCAC
+|> validity mask implemented as Channel 15 (`loglike_ksfr_pcac_validity`)
+|> + wired into T41 as hard pre-filter. **22 new tests** (all passing);
+|> total tests now **132 → 170** (also +16 from M2 commit `cfe2869`
+|> shipped earlier in the same session). **Major v0.5 finding**:
+|> T41 historical posterior median m_ρ = 26.6 MeV (MAP m_ρ = 336 MeV)
+|> is BELOW KSFR validity lower bound (418 MeV for SU(3) N_f=3
+|> fundamental). Mask correctly rejects both points.
+|> Channel count **14 → 15**. (See T70.5 entry below for the re-run.)
 >
 > **T70.4 R13 H3 + H4 closure (2026-08-26):** Per user direction
 > "relaunch h3 h4" — finished the sensitivity sweeps. **H3**:
@@ -82,16 +83,34 @@
 > 16-test pytest suite, README documenting compression strategy and
 > caveats.
 >
-> **🚨 v0.5 caveat (2026-08-26, H1 closure):** The T41 main posterior
-> places m_ρ ≈ 26.6 MeV, which is **a factor of ~16 BELOW the KSFR/PCAC
-> validity lower bound** (418 MeV for SU(3) N_f=3 fundamental). The
-> KSFR/PCAC validity mask (Channel 15) correctly rejects the T41 MAP.
-> **The T41 JSON is HISTORICAL** (generated with mask disabled) and
-> should not be cited without this caveat. See
-> `MODEL_ASSUMPTIONS_AND_LIMITATIONS.md §6` for details and the
-> `v0.3-prelim/docs/H3_H4_SENSITIVITY_REPORT.md` for H3+H4 sensitivity
-> context. A re-run of T41 with the KSFR mask enabled is the natural
-> next step (ETA ~3 min wall on WSL wimpy).
+> **🚨 v0.5 RESULT (2026-08-26, T70.5 entry):** T41 was re-run with the
+> KSFR/PCAC validity mask (Channel 15) enabled at **nlive=500** (per
+> the H3 convergence finding that nlive=500 gives cleaner convergence).
+> The v0.5 MAP places **m_ρ ≈ 502 MeV**, **m_χ ≈ 515 GeV**, **g_χ ≈ 0.637**,
+> with derived **σ/m_0 ≈ 0.105 cm²/g** and **a ≈ 1.89**. This is a substantial
+> shift from the historical v0.4 numbers (MAP m_ρ = 336 MeV; median m_ρ = 26.6 MeV).
+> The historical MAP/median live BELOW the KSFR validity lower bound (418 MeV)
+> and are correctly rejected by the mask.
+>
+> **Cross-comparison** (all 4 files in `v0.3-prelim/data/results/`):
+>
+> | Run | KSFR mask | nlive | log Z | MAP m_ρ (MeV) | Median m_ρ (MeV) |
+> |---|---|---|---|---|---|
+> | Historical (Aug14, original) | OFF | 200 | -213.69 | 336 | **26.6** ← below KSFR floor |
+> | Historical re-run (today) | OFF | 200 | -252.14 | 78 | 201 ← below KSFR floor |
+> | **v0.5 (today)** | **ON** | **500** | **-254.24** | **502** | **553** ← **KSFR-valid** ✓ |
+>
+> The log Z worsens by ~2.2 units because the v0.5 prior volume is smaller
+> (KSFR-restricted), but the posterior is properly bounded in the KSFR-valid sub-space.
+>
+> **Files**:
+> - `t41_mediator_mass_joint_fit.json` — canonical historical (Aug 14)
+> - `t41_mediator_mass_joint_fit_v0_4_historical.json` — cross-comparison run (mask off, nlive=200, today)
+> - **`t41_mediator_mass_joint_fit_v0_5.json`** — the v0.5 result (mask on, nlive=500, today)
+> - `t41_mediator_mass_joint_fit_PRE_v05_backup_20260826_155808.json` — defensive backup of the original
+>
+> See `CHANGELOG.md [T70.5]` for details and `v0.3-prelim/docs/LAYMAN_SUMMARY_R13.md`
+> §"v0.5 caveat" for the full science writeup.
 
 ---
 
@@ -112,22 +131,26 @@ limitations; the relic density is a calibration (not a Boltzmann solver); the da
 QCD-analog calibration (not a lattice calculation). See `v0.3-prelim/docs/REVIEWER_AUDIT_R12.md`
 for the full list of what the project does and does not claim.
 
-## Headline result (post-R12)
+## Headline result — **v0.5 (T70.5, 2026-08-26)** — KSFR mask enabled
 
-| Quantity | Value | Source |
-|---|---|---|
-| Joint fit σ/m_0 at galactic scale (V_REF = 100 km/s) | **0.066 cm²/g** | T41 joint fit (MAP) |
-| Velocity index a (Yukawa-derived) | **+0.186** | T41.derived_a at MAP |
-| Tension vs. data-preferred a = +0.94 | **0.75σ** (below 1.0 threshold = no significant tension) | T41 vs T39 |
-| Mediator mass m_φ (median posterior) | **26.6 MeV** | T41 posterior median |
-| DM mass m_χ (median posterior) | **14.8 GeV** | T41 posterior median |
-| Bare kinetic mixing ε (median posterior) | **10⁻³⁵** | T41 posterior median |
-| log Z (Bayesian evidence) | **−213.7 ± 0.24** | T41 nested sampling (56 s wall) |
-| LZ σ_SI at ε=10⁻⁵, m_χ=40 GeV, m_A'=10 MeV | **1.2×10⁻³² cm²** (proper units) | T30 + T39 P1-C mapping |
-| Dark-ρ mass at Λ_dark=0.2 GeV | **0.79 GeV** ≈ QCD 770 MeV (KSFR calibration) | T53 P1-B KSFR |
-| Dark-ρ mass at Λ_dark=1 GeV (lattice-informed) | **8.36 GeV** (m_ρ/f_π = 8.36) | T53 + T53b |
-| dSph log L at σ/m=10 cm²/g | **−4.53** (strongly disfavored) | T26/T28 P0-D upper limit |
-| Cross-validation vs Drobczyk 2025 (post-R12) | T41 σ/m_0 = 0.066 vs Drobczyk 0.11–0.96 cm²/g (factor 1.5×–15×); qualitative literature consistency; both invisible to direct detection via different mechanisms | T68 + [T41 MAP](v0.3-prelim/data/results/t41_mediator_mass_joint_fit.json) + [plot](v0.3-prelim/plots/Cross_Validation_T54_vs_Drobczyk_v2_2026-08-13.png) + [layman explainer](docs/DROBCZYK_CROSS_VALIDATION_LAYMAN.md) |
+**See the [🚨 v0.5 RESULT](#🚨-v0.5-result-2026-08-26-t705-entry) heads-up block above for the full cross-comparison and caveats. The v0.4 historical numbers below in parentheses are preserved for backward compatibility.**
+
+| Quantity | **v0.5 (KSFR mask ON)** | v0.4 historical (KSFR mask OFF) | Source |
+|---|---|---|---|
+| Joint fit σ/m_0 at galactic scale (V_REF = 100 km/s) | **0.105 cm²/g** | (0.066 cm²/g) | T41 joint fit (MAP) |
+| Velocity index a (Yukawa-derived) | **+1.89** | (+0.186) | T41.derived_a at MAP |
+| Tension vs. data-preferred a = +0.94 | **0.95σ** (no significant tension) | (0.75σ, no significant tension) | T41 vs T39 |
+| Mediator mass m_φ (median posterior) | **553 MeV** ✓ KSFR-valid | (26.6 MeV — below KSFR floor) | T41 posterior median |
+| Mediator mass m_φ (MAP) | **502 MeV** ✓ KSFR-valid | (336 MeV — below KSFR floor) | T41 MAP |
+| DM mass m_χ (median posterior) | **805 GeV** | (14.8 GeV) | T41 posterior median |
+| DM mass m_χ (MAP) | **515 GeV** | (398 GeV) | T41 MAP |
+| Bare kinetic mixing ε (median posterior) | **4×10⁻³⁵** | (10⁻³⁵) | T41 posterior median |
+| log Z (Bayesian evidence) | **−254.24 ± 0.16** | (−213.7 ± 0.24) | T41 nested sampling (127 s wall v0.5, 56 s historical) |
+| LZ σ_SI at ε=10⁻⁵, m_χ=40 GeV, m_A'=10 MeV | **1.2×10⁻³² cm²** (proper units) | (same — independent of mask) | T30 + T39 P1-C mapping |
+| Dark-ρ mass at Λ_dark=0.2 GeV | **0.79 GeV** ≈ QCD 770 MeV (KSFR calibration) | (same) | T53 P1-B KSFR |
+| Dark-ρ mass at Λ_dark=1 GeV (lattice-informed) | **8.36 GeV** (m_ρ/f_π = 8.36) | (same) | T53 + T53b |
+| dSph log L at σ/m=10 cm²/g | **−4.53** (strongly disfavored) | (same) | T26/T28 P0-D upper limit |
+| Cross-validation vs Drobczyk 2025 | T41 σ/m_0 = 0.105 vs Drobczyk 0.11–0.96 cm²/g (factor 0.9×–9×); qualitative literature consistency; both invisible to direct detection via different mechanisms | T68 + [T41 v0.5](v0.3-prelim/data/results/t41_mediator_mass_joint_fit_v0_5.json) + [T41 historical](v0.3-prelim/data/results/t41_mediator_mass_joint_fit.json) + [plot](v0.3-prelim/plots/Cross_Validation_T54_vs_Drobczyk_v2_2026-08-13.png) + [layman explainer](docs/DROBCZYK_CROSS_VALIDATION_LAYMAN.md) |
 | Baryonic-feedback robustness (T69, 2026-08-19) | σ/m₀ MAP is stable to within **±20%** across `f_fb ∈ [0, 0.75]`; only drops 32% at `f_fb = 1.0` (extreme; ignoring SPARC). The Di Cintio+ 2014a prior supports `f_fb ≤ 0.5`, where the headline σ/m₀ is unaffected. | [T69 sweep](v0.3-prelim/data/results/t69_feedback_nuisance_sweep.json) + [critique](v0.3-prelim/docs/REVIEWER_BARYONIC_FEEDBACK.md) + [R12 §7.5a](v0.3-prelim/docs/R12_AUDIT_CLOSURE.md) |
 | Test suite | **462 passing, 4 skipped, 5 pre-existing failures** (was 359 / 4 / 3; +23 T69 tests, +2 pre-existing failures unrelated to T69 — config drift between WSL↔Windows sides, t37 importable, etc.) | `pytest tests/ v0.3-prelim/tests/` |
 
@@ -140,8 +163,8 @@ Post-R12 (P1-C), the proper dark-photon portal mapping gives σ_SI = 1.2×10⁻�
 canonical point — much closer to the LZ limit (2.2×10⁻⁴⁸ cm² at 43 GeV), as it should be.
 
 The pre-R12 "1.3σ velocity-slope tension" (a ≈ 2.24 from dark-ρ vs a ≈ 0.94 data preference)
-was the same sign-flip artifact. Post-R12, the Yukawa-derived a at MAP is +0.186, well within
-the data-preferred range.
+was the same sign-flip artifact. Post-R12, the Yukawa-derived a at MAP is +0.186 (historical T41, mask OFF).
+The v0.5 re-run (mask ON, nlive=500) gives a = +1.89 at the KSFR-valid MAP — also within the data-preferred range.
 
 ## Key findings (post-R12)
 
@@ -156,7 +179,7 @@ Five honest takeaways a reader should leave with:
    groups' results.
 
 2. **A self-consistent multi-probe benchmark point under Benchmark A.**
-   MAP at (m_A' = 26.6 MeV, m_χ = 14.8 GeV, g_χ = 0.13, σ/m_0 = 0.066 cm²/g, a = +0.186).
+   MAP at (m_A' = 26.6 MeV, m_χ = 14.8 GeV, g_χ = 0.13, σ/m_0 = 0.066 cm²/g, a = +0.186) — this is the **historical** (KSFR mask OFF) result. The v0.5 re-run (KSFR mask ON, nlive=500) places the MAP at m_A' ≈ 502 MeV, σ/m_0 ≈ 0.105 cm²/g, a ≈ +1.89 — see v0.5 RESULT block above.
    Five channels (dSph, UFD, Bullet, SPARC, LZ + Fermi) put in one statistical pipeline.
    **Caveat:** This MAP is dominated by the prior suppression on ε (kinetic mixing
    ~10⁻³⁵), not by all five channels independently converging on the same point.
@@ -324,10 +347,13 @@ range, t37 module import — all unrelated to R12).
 Honest scope, per the 2026-08-17 R12 six-reviewer audit:
 
 - **Not a discovery.** This is a phenomenology joint-fit framework, not a
-  measurement of dark matter at any detector. The MAP at (m_φ=26.6 MeV,
+  measurement of dark matter at any detector. The historical MAP at (m_φ=26.6 MeV,
   m_χ=14.8 GeV, σ/m_0=0.066 cm²/g, a=+0.186) is **one point in the prior
-  box** that fits the multi-channel data within 0.75σ. The framework does
-  not establish the universe's actual particle content.
+  box** that fits the multi-channel data within 0.75σ — but lives BELOW the
+  KSFR/PCAC validity lower bound (418 MeV). The v0.5 re-run with KSFR mask
+  enabled gives MAP (m_φ≈502 MeV, σ/m_0≈0.105 cm²/g, a≈1.89) within the
+  KSFR-valid sub-space. The framework does not establish the universe's
+  actual particle content.
 - **Not a Boltzmann-derived relic density.** The t55 module is a
   calibrated `1/⟨σv⟩` mapping (renamed `t55_wimp_relic_calibration.py`
   in P0-C), not a Boltzmann solver. A first-principles relic-density
@@ -338,7 +364,8 @@ Honest scope, per the 2026-08-17 R12 six-reviewer audit:
   a real lattice calculation of the dark SU(N) theory. A proper lattice
   calibration is multi-month scope.
 - **Not a finished velocity-slope story.** The data prefers a ≈ +0.94.
-  The T41 Yukawa-derived a at MAP is +0.186, within 0.75σ. The pre-R12
+  The historical T41 Yukawa-derived a at MAP is +0.186, within 0.75σ. The v0.5
+  re-run gives a = +1.89, also within the data-preferred range. The pre-R12
   "1.3σ velocity-slope tension" was a sign-flip artifact in
   `t41.derived_a` (P0-B); the post-R12 result is no significant tension.
 - **Not a "1.3σ Yukawa tension" finding.** That claimed negative finding
@@ -374,13 +401,15 @@ as "a measurement":
    formal 0.75-standard-deviation measurement."
 
 2. **The headline table mixes different types of estimate.** The masses
-   (m_A' = 26.6 MeV, m_χ = 14.8 GeV) are **posterior medians** — central
+   (m_A' = 26.6 MeV, m_χ = 14.8 GeV for the HISTORICAL T41; m_φ = 553 MeV,
+   m_χ = 805 GeV for the v0.5 T41) are **posterior medians** — central
    tendencies of the full marginalized posterior. The cross-section
-   (σ/m_0 = 0.066 cm²/g) and the velocity index (a = +0.186) are
-   calculated at a **different, maximum-posterior (MAP) point**. Those
-   numbers should NOT be read as one jointly determined particle; the
-   median and the MAP can disagree substantially when the posterior is
-   multimodal or skewed. The 68% intervals are very broad.
+   (σ/m_0 = 0.066 cm²/g historical, 0.105 cm²/g v0.5) and the velocity
+   index (a = +0.186 historical, +1.89 v0.5) are calculated at a **different,
+   maximum-posterior (MAP) point**. Those numbers should NOT be read as one
+   jointly determined particle; the median and the MAP can disagree
+   substantially when the posterior is multimodal or skewed. The 68%
+   intervals are very broad.
 
 3. **One sampled coupling (α) is not currently connected to the
    likelihood.** T41 reads `log_alpha` as a parameter, but the

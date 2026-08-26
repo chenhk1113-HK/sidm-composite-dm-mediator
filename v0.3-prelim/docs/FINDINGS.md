@@ -869,12 +869,15 @@ follow-up round with the KSFR mask enabled is the natural next step.
 ### What this means for the v0.3-prelim headline result
 
 The v0.3-prelim T41 main posterior (m_phi ~ 26.6 MeV, sigma/m_0 ~ 0.07
-cm^2/g, etc.) is **HISTORICAL** as of v0.5. The v0.5 caveat applies:
-the MAP is in a KSFR-invalid region of parameter space. A re-run with
-the KSFR mask enabled will produce a new posterior restricted to the
-KSFR-valid sub-space, which may shift the headline parameters
-substantially. The re-run is queued for the next session; until then,
-cite the v0.5 caveat in any external writeup.
+cm^2/g, etc.) is **HISTORICAL** as of v0.5. **T70.5 follow-up
+(2026-08-26): the v0.5 re-run was COMPLETED**. The new canonical v0.5
+posterior places m_phi = 501.7 MeV (MAP) / 552.5 MeV (median), sigma/m_0
+= 0.105 cm^2/g, a = +1.89, log Z = -254.24. These numbers live in the
+KSFR-valid sub-space (m_phi in [418, 4180] MeV) and are now the
+default-citation for downstream writeups. Cite
+`v0.3-prelim/data/results/t41_mediator_mass_joint_fit_v0_5.json` as
+the canonical v0.5 result; the historical T41 numbers are preserved
+only for cross-comparison.
 
 The H3+H4 sensitivity findings remain valid in both the historical
 and v0.5-posterior regimes because they test the shape of the

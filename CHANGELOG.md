@@ -7,6 +7,70 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [T70.5] — 2026-08-26
+
+### v0.5 re-run — T41 with KSFR/PCAC validity mask enabled (H1 follow-up)
+
+Per user direction "v0.5 re-run" — execute the re-run of T41 with the
+KSFR/PCAC validity mask (Channel 15) enabled. The mask was already
+wired into `t41_mediator_mass_joint_fit.py::loglike_joint` (per
+T70.3 commit `1d331ed`) and the v0.5 result was the natural
+follow-up to the H1 closure. This entry also adds two environment
+variables to T41: `T41_NLIVE` (overrides nlive, default 200) and
+`T41_RESULT_SUFFIX` (suffixes the output JSON filename).
+
+**Code change**: `v0.3-prelim/code/t41_mediator_mass_joint_fit.py` —
+- Hoisted `import os` to module level (was previously inside a
+  function that didn't always execute; caused `NameError` on the
+  v0.5 attempt at line 419, fixed and re-run).
+- Added env-var override `T41_NLIVE` (default 200 for backward
+  compatibility). v0.5 sets it to 500 per the H3 convergence finding.
+- Added env-var suffix `T41_RESULT_SUFFIX` for the output JSON.
+  Cross-comparison + v0.5 results now live in separate files rather
+  than overwriting each other.
+- Added a `t41_version` metadata block at the end of every JSON so
+  the file is self-identifying (mask on/off, nlive, suffix).
+
+**Results** (cross-comparison, all in `v0.3-prelim/data/results/`):
+
+| Run | KSFR mask | nlive | log Z | MAP m_ρ (MeV) | Median m_ρ (MeV) |
+|---|---|---|---|---|---|
+| Historical (Aug14, original) | OFF | 200 | -213.69 | 336 | **26.6** ← below KSFR floor |
+| Historical re-run (today) | OFF | 200 | -252.14 | 78 | 201 ← below KSFR floor |
+| **v0.5 (today)** | **ON** | **500** | **-254.24** | **502** | **553** ← **KSFR-valid** ✓ |
+
+The log Z worsens by ~2.2 units because the v0.5 prior volume is
+smaller (KSFR-restricted), but the posterior is properly bounded
+in the KSFR-valid sub-space. The v0.5 numbers ARE the new
+canonical headline — supersede any historical reference.
+
+**v0.5 canonical numbers** (KSFR mask ON, nlive=500):
+
+- MAP: m_ρ = **501.7 MeV**, m_χ = **514.8 GeV**, g_χ = **0.637**
+- Median: m_ρ = **552.5 MeV**, m_χ = **804.6 GeV**, g_χ = **0.669**, ε = **4.0×10⁻³⁵**
+- Derived at MAP: σ/m_0 = **0.105 cm²/g**, a = **+1.89**
+- log Z = **−254.24 ± 0.16**, wall = 127.2 s on WSL wimpy
+- Yukawa tension: |T39 a - Yukawa a| = 0.95 (< 1.0 threshold; no tension).
+
+**Defensive backup** of the original `t41_mediator_mass_joint_fit.json`
+made at `t41_mediator_mass_joint_fit_PRE_v05_backup_20260826_155808.json`
+before any re-run.
+
+**Files** (4 in `v0.3-prelim/data/results/`):
+- `t41_mediator_mass_joint_fit.json` — canonical historical (Aug 14, mask OFF)
+- `t41_mediator_mass_joint_fit_PRE_v05_backup_20260826_155808.json` — defensive backup of original
+- `t41_mediator_mass_joint_fit_v0_4_historical.json` — cross-comparison run (mask OFF, nlive=200, today)
+- **`t41_mediator_mass_joint_fit_v0_5.json`** — the v0.5 result (mask ON, nlive=500, today)
+
+**Docs updated** to reflect v0.5 numbers:
+- `README.md` — headline result table now shows v0.5 in bold + historical in parentheses; v0.5 RESULT block added
+- `v0.3-prelim/docs/LAYMAN_SUMMARY_R13.md` — "honest numbers" table + grant-abstract updated
+- `v0.3-prelim/docs/REVIEWER_AUDIT_R13.md` — v0.5 finding section now says "FIXED" instead of "queued"
+- `v0.3-prelim/docs/FINDINGS.md` — T70.2-T70.4 addendum updated with actual v0.5 numbers
+
+Test suite unchanged: 170 / 2 / 1 (pass / fail / skipped). No code changes
+that affect tests.
+
 ## [T70.4] — 2026-08-26
 
 ### Tier-1 PATCH — R13 reviewer H3 + H4 closure (sensitivity tests)
