@@ -5,7 +5,7 @@
 **Joint-fit framework for self-interacting dark matter (SIDM), grounded in the published multi-channel data (dSph, UFD, Bullet, SPARC, LZ, Fermi).**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.3--prelim-blue)](VERSION)
+[![Version](https://img.shields.io/badge/version-0.3--prelim%2BT70.4-blue)](VERSION)
 [![arXiv:2506.22997](https://img.shields.io/badge/cross--validated-arXiv%3A2506.22997-b31b1b)](https://arxiv.org/abs/2506.22997)
 
 > **Heads-up (2026-08-14):** Project renamed from `dm-sidm-pipeline`. All
@@ -40,12 +40,20 @@
 >
 > **T70.2 R13 reviewer audit closure (2026-08-25):** Per `sidm review2.docx`,
 > 4 of 9 reviewer items shipped (M4 doc, M3 constants, M1 runtime guard,
-> H2 BBN check) + 5 deferred to v0.4 sub-projects (H1 KSFR bounds,
+> H2 BBN check) + 5 deferred to v0.4 + v0.5 sub-projects (H1 KSFR bounds,
 > H3 convergence test, H4 sensitivity sweeps, H5 Bullet likelihood, M2
 > reference chains). New top-level doc `MODEL_ASSUMPTIONS_AND_LIMITATIONS.md`
 > + new audit closure `v0.3-prelim/docs/REVIEWER_AUDIT_R13.md`. Channel count
 > **13 → 14** (Channel 14 = loglike_mediator_lifetime per H2).
 > Test count: **103 → 132 pass** (+29 new tests).
+>
+> **T70.2 → T70.4 R13 full closure (2026-08-26):** All 5 deferred items
+> shipped. **R13 is 9 of 9 items closed** — see `v0.3-prelim/docs/REVIEWER_AUDIT_R13.md`
+> for the full closure narrative. Channel count **14 → 15** (Channel 15 =
+> loglike_ksfr_pcac_validity per H1). Test count **132 → 170 pass**
+> (+38 new tests). Three follow-up commits on `master`:
+> `cfe2869` (M2 reference chains), `1d331ed` (H1 KSFR mask),
+> `23f5419` (H3+H4 sweeps + H5 doc fix).
 >
 > **T70.3 R13 H1 closure (2026-08-26):** Per user direction "do the 0.4
 > and 0.5" — resumed deferred sub-projects. **H1 closed**: KSFR/PCAC
@@ -73,6 +81,17 @@
 > posteriors without re-running dynesty. Includes .gitignore exception,
 > 16-test pytest suite, README documenting compression strategy and
 > caveats.
+>
+> **🚨 v0.5 caveat (2026-08-26, H1 closure):** The T41 main posterior
+> places m_ρ ≈ 26.6 MeV, which is **a factor of ~16 BELOW the KSFR/PCAC
+> validity lower bound** (418 MeV for SU(3) N_f=3 fundamental). The
+> KSFR/PCAC validity mask (Channel 15) correctly rejects the T41 MAP.
+> **The T41 JSON is HISTORICAL** (generated with mask disabled) and
+> should not be cited without this caveat. See
+> `MODEL_ASSUMPTIONS_AND_LIMITATIONS.md §6` for details and the
+> `v0.3-prelim/docs/H3_H4_SENSITIVITY_REPORT.md` for H3+H4 sensitivity
+> context. A re-run of T41 with the KSFR mask enabled is the natural
+> next step (ETA ~3 min wall on WSL wimpy).
 
 ---
 

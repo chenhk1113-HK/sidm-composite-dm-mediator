@@ -3,15 +3,18 @@ message: >
   If you use this code or its results in published work, please cite the
   relevant version below AND the underlying physics references listed at
   the bottom. See docs/DATA_SOURCES.md for the full list of observational
-  data sources used and how to cite them. v0.3-prelim+T70 (T70 Tier-1 PATCH
-  2026-08-25: Channels 11+12 added; dark-matter-free UDG consistency check
-  + cosmic-web radio synchrotron 40× excess upper limit) and
-  Mediator_Detection_v12 are the most recent closed rounds at the time
-  of the most recent public release.
+  data sources used and how to cite them. v0.3-prelim+T70.4 (T70.2-T70.4
+  Tier-1 PATCHES 2026-08-25/26: R13 reviewer audit FULLY CLOSED, all 9
+  of 9 items shipped including KSFR/PCAC validity mask as Channel 15,
+  sensitivity sweeps for nlive convergence + xi + form-factor + inelastic,
+  downsampled reference posterior chains, and Bullet Cluster doc
+  correction) and the H3+H4 sensitivity report at
+  v0.3-prelim/docs/H3_H4_SENSITIVITY_REPORT.md are the most recent
+  closed rounds at the time of the most recent public release.
 title: "sidm-composite-dm-mediator"
 type: software
-version: 0.3-prelim+T70
-date-released: 2026-08-25
+version: 0.3-prelim+T70.4
+date-released: 2026-08-26
 authors:
   - family-names: Lam
     given-names: K.

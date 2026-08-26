@@ -818,3 +818,72 @@ defensive channel needed.
 - T70 + T70.1 addenda above — SIDM-side quantum regime analysis
 - T30, T39, T55 references in `v0.3-prelim/docs/DARK_SECTOR_LAGRANGIAN.md` §9 (Benchmark A)
 - `CHANGELOG.md [T70]` and `[T70.1]` entries
+
+
+---
+
+## T70.2-T70.4 R13 reviewer audit addendum (2026-08-25/26)
+
+Per R13 reviewer audit (`sidm review2.docx`, 2026-08-25), 9 of 9 items
+are now closed. The full audit closure narrative is in
+`v0.3-prelim/docs/REVIEWER_AUDIT_R13.md`; this addendum summarizes the
+scientific findings.
+
+### v0.5 finding (T70.3, H1 closure) — KSFR/PCAC validity
+
+The KSFR/PCAC validity mask (`loglike_ksfr_pcac_validity`, Channel 15)
+was implemented in T70.3 and wired into T41 as a hard pre-filter.
+With 3 independent validity bounds (f_pi in [0.05, 0.5] GeV, g_chi in
+[0.01, 2.0], m_rho/f_pi in [6.0, 9.0]), the mask translates f_pi in
+[0.05, 0.5] GeV into m_rho in **[418, 4180] MeV** for SU(3) N_f=3
+fundamental (lattice ratio 8.36).
+
+**Critical finding**: the published T41 MAP places m_rho ~ 26.6 MeV,
+which is **a factor of ~16 BELOW the KSFR validity lower bound**.
+The mask correctly rejects the T41 MAP. The T41 JSON file
+(`v0.3-prelim/data/results/t41_mediator_mass_joint_fit.json`) is
+**HISTORICAL** (generated with mask disabled) and should not be cited
+without this caveat. Re-running T41 with the KSFR mask enabled is
+the natural next step (ETA ~3 min wall on WSL wimpy).
+
+### Sensitivity sweeps (T70.4, H3 + H4 closure)
+
+Per R13 reviewer H3 (convergence test) + H4 (sensitivity sweeps).
+All 3 H4 sweeps are **ROBUST** — the tested approximations (xi,
+form-factor ansatz, inelastic channels) are justified by the data.
+H3 convergence is **BORDERLINE STABLE** — log_Z range = 0.136
+(target 0.10); medians stable to <0.05 dex for physical parameters.
+See `v0.3-prelim/docs/H3_H4_SENSITIVITY_REPORT.md` for full details.
+
+| Test | Verdict | Key metric |
+|---|---|---|
+| **H3** (nlive=200/500/1000) | BORDERLINE STABLE | log_Z range = 0.136 (target 0.10) |
+| **H4.1** (xi in [0.1, 5.0]) | ROBUST | log_Z range = 0.438 |
+| **H4.2** (form-factor ansatz) | ROBUST | log_Z range = 0.375 |
+| **H4.3** (inelastic on/off) | ROBUST | Delta log_Z = 0.378 |
+
+All H4 sensitivity tests were run with `SIDM_DISABLE_KSFR_MASK=1` for
+cross-version comparability with the historical T41 posterior. A
+follow-up round with the KSFR mask enabled is the natural next step.
+
+### What this means for the v0.3-prelim headline result
+
+The v0.3-prelim T41 main posterior (m_phi ~ 26.6 MeV, sigma/m_0 ~ 0.07
+cm^2/g, etc.) is **HISTORICAL** as of v0.5. The v0.5 caveat applies:
+the MAP is in a KSFR-invalid region of parameter space. A re-run with
+the KSFR mask enabled will produce a new posterior restricted to the
+KSFR-valid sub-space, which may shift the headline parameters
+substantially. The re-run is queued for the next session; until then,
+cite the v0.5 caveat in any external writeup.
+
+The H3+H4 sensitivity findings remain valid in both the historical
+and v0.5-posterior regimes because they test the shape of the
+posterior, not the absolute parameter values.
+
+### See also (this section)
+
+- `v0.3-prelim/docs/REVIEWER_AUDIT_R13.md` — full closure narrative
+- `v0.3-prelim/docs/H3_H4_SENSITIVITY_REPORT.md` — H3+H4 details
+- `v0.3-prelim/code/ksfr_pcac_validity.py` — Channel 15 implementation
+- `data/reference/` — downsampled posterior chains (M2 closure)
+- `CHANGELOG.md [T70.2]`, `[T70.3]`, `[T70.4]` entries
