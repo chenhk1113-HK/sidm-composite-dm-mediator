@@ -213,6 +213,9 @@ Five honest takeaways a reader should leave with:
 │   ├── REVIEWER_AUDIT_R9.md                ← audit trail from the Full Review 9 review (2026-08-14)
 │   ├── REVIEWER_AUDIT_R12.md (→ v0.3-prelim/docs/)   ← R12 audit closure (six reviews.docx, 2026-08-17)
 │   ├── R12_AUDIT_CLOSURE.md (→ v0.3-prelim/docs/)    ← consolidated R12 summary (supersedes LAYMAN_SUMMARY_R12.md and NEW_LIGHT_R12.md)
+│   ├── REVIEWER_AUDIT_R13.md (→ v0.3-prelim/docs/)   ← R13 audit closure (sidm review2.docx, 9 of 9 items closed, 2026-08-26)
+│   ├── H3_H4_SENSITIVITY_REPORT.md (→ v0.3-prelim/docs/)   ← H3 convergence + H4 sensitivity sweeps (2026-08-26)
+│   ├── LAYMAN_SUMMARY_R13.md (→ v0.3-prelim/docs/)   ← current layman summary (R13 closure + v0.5 KSFR caveat)
 │   └── findings_2026_SIDM_papers.md        ← 2026 SIDM literature context (Yang+ 2024, Yang+ 2026)
 ├── EXTRACT.md                              ← 1,000-word rationale + key findings + limitations
 │                                            (note: R12 has new findings; see R12_AUDIT_CLOSURE.md for the consolidated summary)
@@ -231,7 +234,9 @@ Five honest takeaways a reader should leave with:
     ├── data/external_data/lz_2024/        ← ingested LZ WS2024 posterior (HEPData sourced)
     ├── docs/                              ← MEDIATOR_DETECTION_SYNTHESIS_v{1..12}, FINDINGS.md,
 │   │                                            DARK_SECTOR_LAGRANGIAN.md §9 (Benchmark A),
-│   │                                            REVIEWER_AUDIT_R12.md, R12_AUDIT_CLOSURE.md
+│   │                                            REVIEWER_AUDIT_R12.md, R12_AUDIT_CLOSURE.md,
+│   │                                            REVIEWER_AUDIT_R13.md, H3_H4_SENSITIVITY_REPORT.md,
+│   │                                            LAYMAN_SUMMARY_R12.md, LAYMAN_SUMMARY_R13.md
     ├── plots/                             ← Cross-validation + publication plots
     └── tests/                             ← 39 v0.3-specific test files
 ```

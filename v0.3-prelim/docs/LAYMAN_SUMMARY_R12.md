@@ -1,18 +1,25 @@
-# Layman summary — what this project actually does (R12)
+# Layman summary — what this project actually does (R12, 2026-08-17)
 
-> **⚠️ SUPERSEDED (2026-08-17):** This document is preserved for archival
-> purposes. The **consolidated** post-R12 summary is at
-> `R12_AUDIT_CLOSURE.md` in this directory. The consolidated doc combines
-> the content of this file, `NEW_LIGHT_R12.md`, and the R12 addendum in
-> `FINDINGS.md` into a single structured document. The original three
-> docs are kept in git history for reference.
->
+> **⚠️ SUPERSEDED (2026-08-26):** This document is preserved for archival
+> purposes. The **current** layman summary is
+> `LAYMAN_SUMMARY_R13.md` in this directory (covers R13 full closure
+> + v0.5 KSFR caveat + H3+H4 sensitivity findings, 2026-08-26).
+> Historical per-round layman summaries:
+> - `LAYMAN_SUMMARY_R12.md` (this file) — R12 closure + 4 P0 + 3 P1 fixes
+> - `LAYMAN_SUMMARY_R13.md` — R13 closure + v0.5 KSFR caveat + H3+H4 sensitivity
+
 > **T70 addendum (2026-08-25):** Two new observational channels (NGC 1052-DF2/DF4
 > + FCC 224/240 dark-matter-free UDGs; cosmic-web radio synchrotron 40× excess)
 > added to the joint-fit pipeline. Both pass at the v0.3-prelim MAP. Headline
 > σ/m₀ shifts from 0.73 → 0.68 cm²/g (10→12 channels), consistent within the
 > 0.4-0.5 dex systematic budget. Full details in `CHANGELOG.md [T70]` and
 > the T70 addendum at the end of `FINDINGS.md`.
+>
+> **R13 update (2026-08-26):** R13 reviewer audit (`sidm review2.docx`)
+> FULLY CLOSED (9 of 9 items). New `LAYMAN_SUMMARY_R13.md` covers
+> T70.2-T70.4 + v0.5 KSFR caveat + H3+H4 sensitivity findings. **The T41
+> numbers in this R12 file are HISTORICAL as of v0.5** — see the R13
+> summary for the v0.5 caveat.
 
 **Repo:** `sidm-composite-dm-mediator` @ GitHub `25a062d` (master)
 **Date:** 2026-08-17

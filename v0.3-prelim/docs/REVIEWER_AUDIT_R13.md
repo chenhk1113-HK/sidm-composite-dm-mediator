@@ -161,6 +161,8 @@ Per AGENTS.md rule 14 (source-of-information priority) + `scientific-code-verifi
 - `MODEL_ASSUMPTIONS_AND_LIMITATIONS.md` — top-level assumption summary (Reviewer M4 fix); §6 corrected for v0.5 KSFR findings; §4.3 corrected for H5 (was already soft Gaussian, not hard cut)
 - `CHANGELOG.md` [T70], [T70.1], [T70.2], [T70.3], [T70.4] entries
 - `v0.3-prelim/docs/H3_H4_SENSITIVITY_REPORT.md` — H3+H4 sensitivity sweeps (2026-08-26)
+- `v0.3-prelim/docs/LAYMAN_SUMMARY_R13.md` — current layman summary (R13 closure + v0.5 KSFR caveat)
+- `v0.3-prelim/docs/LAYMAN_SUMMARY_R12.md` — prior layman summary (R12 closure, 4 P0 + 3 P1 fixes; superseded by R13)
 - `v0.3-prelim/docs/R12_AUDIT_CLOSURE.md` — the prior audit closure (2026-08-17)
 - `v0.3-prelim/docs/REVIEWER_AUDIT_R12.md` — the R12 audit summary
 - `v0.3-prelim/docs/REVIEWER_BARYONIC_FEEDBACK.md` — the baryonic-feedback review (different reviewer, orthogonal topic)
