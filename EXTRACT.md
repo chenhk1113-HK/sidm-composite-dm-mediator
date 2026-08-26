@@ -1,24 +1,27 @@
 # EXTRACT — sidm-composite-dm-mediator
 
-**Version 0.3-prelim + T70 · 2026-08-25 · 1,000 words**
+**Version 0.3-prelim + T70.5 · 2026-08-26 · 1,000 words**
 
 **Updates from 2026-08-25 (T70 Tier-1 PATCH):**
 - Added Channel 11 (NGC 1052-DF2/DF4 + FCC 224/240 dark-matter-free UDG consistency check)
   and Channel 12 (cosmic-web radio synchrotron 40× excess, Pinetti 2025-26) as new observational
   channels (10 → 12 total). Both pass at the current MAP. Headline σ/m_0 from T13 v2 (5/6/8/9/10/11/12-channel
-  joint fit) is **0.68 cm²/g** at galactic scale, consistent with T21 (1.4-1.7 cm²/g) and T41 (0.07 cm²/g)
+  joint fit) is **0.68 cm²/g** at galactic scale, consistent with T21 (1.4-1.7 cm²/g) and T41 historical (0.066 cm²/g)
   within the 0.4-0.5 dex systematic budget. See `CHANGELOG.md` [T70] entry for details.
 - Added Channel 13 (T70.1): SIDM quantum-statistical lower mass bound from
   Tremaine-Gunn 1979 + Rogers-Peiris 2021 Lyman-α (m > 100 eV for fermionic DM).
   Defensive documentation channel — encodes the "SIDM in classical regime"
   assumption with literature citations. No new physics constraint on the project
-  (T41 posterior median m_χ = 14.8 GeV is ~10⁸ above the bound). See `CHANGELOG.md`
+  (T41 v0.5 posterior median m_χ = 805 GeV is ~10⁹ above the bound). See `CHANGELOG.md`
   [T70.1] entry for details.
 - **Mediator quantum regime (Q&A 2026-08-25):** Per follow-up user question
   *"then what about the mediator, it is also very small"* — confirmed via the
-  T41 posterior that the secluded dark photon mediator has m_A' = 26.6 MeV at
-  MAP, which gives a Yukawa force range (Compton wavelength) of ~7.4 fm and a
-  de Broglie wavelength of ~10⁻³¹ pc at SIDM-velocity scales. Both are
+  T41 posterior that the secluded dark photon mediator has m_A' ≈ 553 MeV at the
+  **v0.5 median** (MAP ≈ 502 MeV). The historical T41 numbers (median 26.6 MeV,
+  MAP 336 MeV) live BELOW the KSFR/PCAC validity lower bound (418 MeV) and
+  were correctly rejected by the v0.5 re-run (T70.5, 2026-08-26). The v0.5
+  mediator gives a Yukawa force range (Compton wavelength) of ~0.36 fm and a
+  de Broglie wavelength of ~10⁻³² pc at SIDM-velocity scales. Both are
   **classical regimes** (force-mediated, not wave-mediated). The mediator's
   quantum-field-theory effects (annihilation cross-section, decay rate, kinetic
   mixing ε) are already handled by the existing T30 (LZ σ_SI mapping), T39 (ε

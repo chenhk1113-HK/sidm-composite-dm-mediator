@@ -11,7 +11,11 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 T40_CODE = PROJECT_ROOT / "v0.3-prelim" / "code" / "t40_yukawa_sigma_m.py"
 T41_CODE = PROJECT_ROOT / "v0.3-prelim" / "code" / "t41_mediator_mass_joint_fit.py"
 T42_CODE = PROJECT_ROOT / "v0.3-prelim" / "code" / "t42_lab_exclusions.py"
-T41_RESULT = PROJECT_ROOT / "v0.3-prelim" / "data" / "results" / "t41_mediator_mass_joint_fit.json"
+T41_RESULT = PROJECT_ROOT / "v0.3-prelim" / "data" / "results" / "t41_mediator_mass_joint_fit_v0_5.json"
+# Historical pre-P0-B (R12 sign-flip bug) result is preserved in
+# t41_mediator_mass_joint_fit.json for cross-comparison only.
+# T70.5 (2026-08-26): T41 re-run with KSFR mask enabled at nlive=500;
+# v0.5 JSON reflects post-P0-B post-T70.3 post-T70.5 canonical state.
 T42_RESULT = PROJECT_ROOT / "v0.3-prelim" / "data" / "results" / "t42_lab_exclusions_recast.json"
 
 
@@ -152,9 +156,12 @@ class TestT41Module:
 
     def test_t41_likelihood_accepts_5d_theta(self):
         t41 = pytest.importorskip("t41_mediator_mass_joint_fit")
-        # log_m_phi=2 (100 MeV), log_m_chi=1.5 (30 GeV), g_chi=0.1,
-        # log_eps=-4, log_alpha=-3
-        ll = t41.loglike_joint((2.0, 1.5, 0.1, -4.0, -3.0))
+        # KSFR/PCAC validity mask (Channel 15, T70.3) restricts m_phi to
+        # [418, 4180] MeV. Pick a KSFR-VALID point so the mask returns 0
+        # (not -inf) and the underlying likelihood is exercised.
+        # log_m_phi=2.7 (~501 MeV — matches the v0.5 MAP), log_m_chi=2.7
+        # (~500 GeV), g_chi=0.64, log_eps=-30, log_alpha=-10.
+        ll = t41.loglike_joint((2.7, 2.7, 0.64, -30.0, -10.0))
         assert isinstance(ll, (float, int))
         assert ll > -1e10
 

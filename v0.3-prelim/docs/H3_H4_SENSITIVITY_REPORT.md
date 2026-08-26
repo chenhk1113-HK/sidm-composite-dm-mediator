@@ -155,11 +155,13 @@ iteration could include inelastic channels as a 6th parameter
 
 1. **KSFR mask disabled** for all sweeps (`SIDM_DISABLE_KSFR_MASK=1`).
    The historical T41 posterior was generated with the mask off, and
-   we wanted to test the sensitivity of the historical result. **A
-   follow-up round with the KSFR mask enabled is the natural next
-   step.** The T41 MAP at m_phi = 26.6 MeV is below the KSFR validity
-   lower bound (418 MeV), so enabling the mask will produce a
-   substantially different posterior.
+   we wanted to test the sensitivity of the historical result.
+   **T70.5 follow-up (2026-08-26): the v0.5 re-run was COMPLETED.**
+   The new canonical posterior has MAP m_phi = 502 MeV (KSFR-valid),
+   median m_phi = 553 MeV, log Z = -254.24. The v0.5 H3+H4 sensitivity
+   sweeps are NOT included in this report — the historical numbers above
+   describe the mask-OFF regime; a v0.5 H3+H4 follow-up is queued for a
+   future round.
 
 2. **nlive=200 for H4 sweeps** — exploratory sensitivity test, not
    publication-quality. nlive=1000+ recommended for any follow-up.

@@ -764,26 +764,33 @@ mechanics applies to SIDM but does not cite the bounds.
 
 **Per user follow-up**: *"then what about the mediator, it is also very small"*.
 
-The T41 posterior gives the secluded dark photon mediator mass **m_A' = 26.6 MeV**
-at MAP. Three distinct length scales matter for the mediator, and each lands
+**Updated for T70.5 (2026-08-26):** The T41 **v0.5** posterior (KSFR mask ON,
+nlive=500) gives the secluded dark photon mediator mass **m_A' ≈ 553 MeV**
+at median (MAP ≈ 502 MeV). The historical T41 numbers (median 26.6 MeV,
+MAP 336 MeV) live BELOW the KSFR/PCAC validity lower bound (418 MeV)
+and were correctly rejected by the v0.5 re-run. The discussion below
+uses the v0.5 canonical numbers; the historical numbers are preserved
+in `t41_mediator_mass_joint_fit.json` for cross-comparison only.
+
+Three distinct length scales matter for the mediator, and each lands
 in a different physical regime:
 
-| Length scale | Formula | Value at m_A'=26.6 MeV | Regime |
+| Length scale | Formula | Value at m_A'=553 MeV (v0.5) | Regime |
 |---|---|---|---|
-| **Yukawa force range** (= Compton wavelength) | λ_C = ℏ/(m_A' c) | **~7.4 fm** | Force-mediated (Yukawa suppression at r > λ_C) |
-| **de Broglie wavelength at SIDM velocity** | λ_dB = h/(m_A' · v) at v=10 km/s | **~10⁻³¹ pc** | Far below any astrophysical scale → classical |
-| **de Broglie wavelength at ultra-relativistic v~c** | λ_dB = h/(m_A' · c) | **~10⁻¹⁸ pc** | Still microscopic → classical |
+| **Yukawa force range** (= Compton wavelength) | λ_C = ℏ/(m_A' c) | **~0.36 fm** | Force-mediated (Yukawa suppression at r > λ_C) |
+| **de Broglie wavelength at SIDM velocity** | λ_dB = h/(m_A' · v) at v=10 km/s | **~10⁻³² pc** | Far below any astrophysical scale → classical |
+| **de Broglie wavelength at ultra-relativistic v~c** | λ_dB = h/(m_A' · c) | **~10⁻¹⁹ pc** | Still microscopic → classical |
 
 **Why the mediator is NOT in the FDM regime** (m_χ ~ 10⁻²² eV):
 
 - FDM at m_χ ~ 10⁻²² eV has λ_dB ~ 1 kpc — comparable to galaxy scales,
   so its quantum wave nature dominates its phenomenology (soliton
   formation, interference patterns).
-- Mediator at m_A' ~ 26.6 MeV has λ_dB ~ 10⁻³¹ pc (at SIDM velocity) — 31
-  orders of magnitude shorter. **The mediator is to FDM as a baseball is
-  to an ocean wave.**
-- The mediator is 27 orders of magnitude heavier than FDM and 3 orders
-  lighter than the SIDM itself (m_χ = 14.8 GeV). It sits comfortably in
+- Mediator at m_A' ~ 553 MeV (v0.5) has λ_dB ~ 10⁻³² pc (at SIDM velocity) —
+  ~33 orders of magnitude shorter. **The mediator is to FDM as a baseball
+  is to an ocean wave.**
+- The v0.5 mediator is 16 orders of magnitude heavier than FDM and ~5× lighter
+  than the v0.5 SIDM itself (m_χ = 805 GeV at median). It sits comfortably in
   the WIMP-like force-mediator regime, where quantum effects matter for
   the *coupling* (annihilation cross-section, decay rate, kinetic mixing)
   but NOT for the *spatial distribution* at galactic scales.

@@ -32,12 +32,15 @@ from ksfr_pcac_validity import (
 
 
 # T41 theta vector: (log_m_phi_MeV, log_m_chi_GeV, g_chi, log_epsilon, log_alpha)
-# T41 MAP (per the canonical fit): m_phi ~ 26.6 MeV, m_chi ~ 14.8 GeV
-# Both are outside the KSFR validity box (m_phi way too small) — by design.
-# So T41's main posterior is rejected by this mask; that's the documented
-# v0.5 finding.
+# T41 HISTORICAL MAP (pre-v0.5, KSFR mask OFF): m_phi ~ 26.6 MeV, m_chi ~ 14.8 GeV
+# This point is outside the KSFR validity box (m_phi way too small) — by design.
+# So the HISTORICAL T41 posterior is rejected by this mask; that's the documented
+# v0.5 finding (RESOLVED in T70.5, 2026-08-26). The v0.5 canonical MAP is now
+# m_phi = 502 MeV (well inside the KSFR validity box [418, 4180] MeV). This test
+# asserts that the HISTORICAL point is correctly rejected — preserving the test
+# behavior even though the v0.5 re-run moved the canonical MAP away from here.
 T41_MAP_THETA = (
-    np.log10(26.6),   # log_m_phi_MeV ≈ 1.42 (26.6 MeV)
+    np.log10(26.6),   # log_m_phi_MeV ≈ 1.42 (26.6 MeV) — HISTORICAL (superseded by v0.5)
     np.log10(14.8),   # log_m_chi_GeV ≈ 1.17 (14.8 GeV)
     0.5,              # g_chi
     -35.0,            # log_epsilon
@@ -163,19 +166,24 @@ class TestEnvironmentEscape:
 
 
 class TestImplicationForT41:
-    """Document what the mask does to T41's posterior.
+    """Document what the mask does to T41's historical posterior.
 
-    The T41 fit places m_phi ≈ 26.6 MeV (way below the KSFR validity
-    lower bound of 418 MeV). This means T41's MAP is REJECTED by the
-    mask. This is the documented v0.5 finding: the published T41
-    posterior is in a region where KSFR/PCAC break down.
+    The HISTORICAL T41 fit (pre-v0.5, KSFR mask OFF) placed
+    m_phi ≈ 26.6 MeV (way below the KSFR validity lower bound of
+    418 MeV). The mask correctly REJECTED this point. This was the
+    v0.5 finding (closed in T70.5, 2026-08-26): the v0.5 re-run with
+    the mask enabled gives MAP m_phi = 502 MeV (KSFR-valid). These
+    tests still assert that the HISTORICAL point is rejected — that
+    behavior is unchanged by the v0.5 re-run.
     """
 
     def test_t41_map_rejected_by_mask(self):
         result = loglike_ksfr_pcac_validity(T41_MAP_THETA)
         assert result == -np.inf, (
-            "T41 MAP at m_phi=26.6 MeV is outside KSFR validity "
-            "(needs 418-4180 MeV). The mask correctly rejects it."
+            "Historical T41 MAP at m_phi=26.6 MeV is outside KSFR validity "
+            "(needs 418-4180 MeV). The mask correctly rejects it. "
+            "(Note: v0.5 T70.5 re-run moved the canonical MAP to 502 MeV; "
+            "this test still verifies the mask rejects the HISTORICAL point.)"
         )
 
     def test_ksfr_valid_m_phi_range_for_qcd(self):
