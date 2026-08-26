@@ -1,0 +1,18 @@
+{
+  "test": "H4.2_form_factor_sweep",
+  "form_factors": [
+    "dipole",
+    "gaussian",
+    "monopole",
+    "exponential"
+  ],
+  "log_Z_values": [
+    -252.56801612283718,
+    -252.83741213410738,
+    -252.46209944173197,
+    -252.49356423161785
+  ],
+  "log_Z_max_minus_min": 0.37531269237541665,
+  "verdict": "ROBUST",
+  "interpretation": "log_Z across form factors ['dipole', 'gaussian', 'monopole', 'exponential']: [-252.56801612283718, -252.83741213410738, -252.46209944173197, -252.49356423161785]. Range = 0.375. If range < 1, result is robust to form-factor choice."
+}

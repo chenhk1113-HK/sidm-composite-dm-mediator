@@ -1,0 +1,8 @@
+{
+  "test": "H4.3_inelastic_on_off",
+  "log_Z_off": -252.46687294442373,
+  "log_Z_on": -252.08846059017014,
+  "delta_log_Z": 0.37841235425358377,
+  "verdict": "ROBUST",
+  "interpretation": "log_Z off=-252.467, on=-252.088, delta=0.378. If |delta| < 1, the result is robust to inelastic-channel on/off."
+}

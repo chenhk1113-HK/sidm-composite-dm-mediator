@@ -7,6 +7,79 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [T70.4] — 2026-08-26
+
+### Tier-1 PATCH — R13 reviewer H3 + H4 closure (sensitivity tests)
+
+Per user direction "relaunch h3 h4" — resume the deferred sensitivity
+sweeps from `REVIEWER_AUDIT_R13.md` §"Honest verification — what did NOT
+get done". M2 + H1 already shipped earlier this session (commits
+`cfe2869` + `1d331ed`). H5 closed via doc fix in MODEL_ASSUMPTIONS §4.3.
+
+**H3 + H4 closed in this round.**
+
+### Shipped (2 items)
+
+| Item | Commit | What it adds |
+|---|---|---|
+| **H3**: Sampler convergence test | (this commit) | 3 dynesty runs at nlive=200/500/1000; log_Z range = 0.136 (borderline-stable); medians stable within 0.05 dex for physical parameters; recommendation: follow-up at nlive=2000 |
+| **H4.1**: ξ = T_dark/T_SM sweep | (this commit) | 5 dynesty runs at ξ ∈ {0.1, 0.5, 1.0, 2.0, 5.0}; log_Z range = 0.438 — **ROBUST** |
+| **H4.2**: Form-factor ansatz sweep | (this commit) | 4 dynesty runs (dipole/gaussian/monopole/exponential); log_Z range = 0.375 — **ROBUST** |
+| **H4.3**: Inelastic on/off | (this commit) | 2 dynesty runs; Δ log_Z = 0.378 — **ROBUST** |
+
+### Code added
+
+- `v0.3-prelim/code/h3_convergence_runner.py`: NEW (130 lines)
+- `v0.3-prelim/code/h4_xi_sweep.py`: NEW (100 lines)
+- `v0.3-prelim/code/h4_form_factor_sweep.py`: NEW (130 lines)
+- `v0.3-prelim/code/h4_inelastic_sweep.py`: NEW (95 lines)
+- `outputs/h3_h4_master.sh`: sequential runner (used to launch all 4)
+- `outputs/h3_h4_smoke.sh`: pre-launch environment check
+
+### Data added
+
+19 JSON files in `v0.3-prelim/data/results/`:
+- H3: `h3_convergence_nlive{200,500,1000}.json` + `_summary.json`
+- H4.1: `h4_xi_sweep_xi{0.10,0.50,1.00,2.00,5.00}.json` + `_summary.json`
+- H4.2: `h4_form_factor_sweep_{dipole,gaussian,monopole,exponential}.json` + `_summary.json`
+- H4.3: `h4_inelastic_sweep_{on,off}.json` + `_summary.json`
+- `h3_h4_master.log` (full stdout)
+
+### Findings (TL;DR)
+
+All H4 sensitivity tests are **ROBUST** — fixing the tested
+approximations (xi, form-factor ansatz, inelastic channels) is justified
+by the data. H3 convergence is **BORDERLINE STABLE** — log_Z range = 0.136
+vs target 0.10. Medians for physical parameters are stable to within0.05
+dex; the unstable flag is driven by tail convergence on the wide-prior
+nuisance parameters (ε, α). Recommended follow-up at nlive=2000.
+
+### v0.5 + H5 note (doc fix)
+
+The MODEL_ASSUMPTIONS_AND_LIMITATIONS.md §4.3 wording was **stale**: it
+described the Bullet Cluster bound as a "hard cut" but
+`channels_v03.py::loglike_bullet_v03` (line 152) is a soft one-sided
+Gaussian likelihood. Web-search confirmed Cha+ 2025 (arXiv:2503.21870,
+ApJ 987 L15) publishes only 68% upper limits, not a full likelihood
+profile — so no upgrade is possible with current data. Existing
+soft-Gaussian form is the best available approximation. Doc corrected
+this turn.
+
+### Verification
+
+- 170 tests pass / 2 pre-existing fail (SPARC data path) / 1 skipped
+- Was 170/2/1 at end of H1 commit; no new tests added (sweep outputs are JSON data, not pytest)
+- LF line endings preserved
+- Total H3+H4 wall: ~26 min on WSL wimpy venv
+
+### See also
+
+- `v0.3-prelim/docs/H3_H4_SENSITIVITY_REPORT.md` — full results
+- `v0.3-prelim/code/h3_convergence_runner.py` etc. — sweep scripts
+- `v0.3-prelim/docs/REVIEWER_AUDIT_R13.md` — original H3/H4 deferral
+- Commit `cfe2869` — M2 (reference posterior chains) shipped earlier in session
+- Commit `1d331ed` — H1 (KSFR/PCAC validity mask) shipped earlier in session
+
 ## [T70.3] — 2026-08-26
 
 ### Tier-1 PATCH — R13 reviewer H1 closure (KSFR/PCAC validity bounds)

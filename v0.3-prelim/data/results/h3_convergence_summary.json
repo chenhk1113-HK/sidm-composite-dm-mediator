@@ -1,0 +1,31 @@
+{
+  "test": "H3_convergence_test",
+  "nlive_values": [
+    200,
+    500,
+    1000
+  ],
+  "dlogz_target": 0.1,
+  "log_Z_values": [
+    -252.0882561274832,
+    -252.17428040278597,
+    -252.22394855781636
+  ],
+  "log_Z_max_minus_min": 0.13569243033316525,
+  "log_Z_stable_to_dlogz": false,
+  "median_max_drift": {
+    "log_m_phi_MeV": 0.05283885750449713,
+    "log_m_chi_GeV": 0.047215449223450445,
+    "g_chi": 0.02590038067706557,
+    "log_epsilon": 0.47144306724710106,
+    "log_alpha": 0.3649414809498026
+  },
+  "n_iterations": [
+    2427,
+    6102,
+    12249
+  ],
+  "n_iterations_scale": 5.046971569839307,
+  "verdict": "UNSTABLE",
+  "interpretation": "log_Z across nlive=[200, 500, 1000]: [-252.0882561274832, -252.17428040278597, -252.22394855781636]. Range = 0.136, target = 0.1. UNSTABLE: posterior evidence did NOT converge."
+}

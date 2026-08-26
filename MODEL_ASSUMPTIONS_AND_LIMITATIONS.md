@@ -99,21 +99,42 @@ approximation shifts posterior contours.
 **Impact estimate**: Likely shifts σ/m by ~10-20% (order of magnitude
 estimate; not formally quantified).
 
-### 4.3 Bullet Cluster hard cut (NOT a full likelihood)
+### 4.3 Bullet Cluster soft-likelihood (NOT a hard cut)
 
-The Bullet Cluster bound is implemented as a **hard upper limit cut**
-(σ/m < 0.5 cm²/g at 95% CL, Cha+ 2025) rather than a full Gaussian
-or chi-2 likelihood.
+The Bullet Cluster bound (Cha+ 2025 ApJ 987 L15, JWST strong+weak lensing)
+is implemented as a **soft one-sided Gaussian likelihood** in
+`v0.3-prelim/code/channels_v03.py::loglike_bullet_v03` (line 152):
 
-**Limitation**: Hard cuts can distort nested-sampling posterior
-volume weighting in parameter space. Per reviewer H5, this can bias
-Bayes factors when the model comparison is sensitive to the
-σ/m > 0.5 cm²/g region.
+    return -0.5 * max(0, (log_sm - (-0.30)) / 0.30) ** 2
 
-**Mitigation**: The published σ/m posterior median (0.066 cm²/g at
-T41 MAP, ~0.68 cm²/g at T13 v2 MAP) is well below the cut, so the
-posterior is in a region where the cut does not bite. **The hard cut
-matters at the 1-2σ tail**, not the MAP.
+This is NOT a hard cut — points with σ/m < 0.5 cm²/g return 0 (no
+penalty); points above 0.5 are Gaussian-penalized in log space with
+width 0.30 dex (correspondingly the 95% CL ~ 0.6 dex above 0.5).
+
+**Misconception correction**: Earlier MODEL_ASSUMPTIONS text described
+this as a "hard upper limit cut." That wording was incorrect. Per
+`v0.3-prelim/code/channels_v03.py` line 152, it is a soft one-sided
+Gaussian likelihood from day 1.
+
+**Cha+ 2025 publishes two 68% CL upper limits** (not a full
+likelihood profile):
+  - σ/m ≲ 0.2 cm²/g (strong-lensing-only mass map; 4.09 ± 0.63 kpc
+    mass-BCG offset)
+  - σ/m ≲ 0.5 cm²/g (combined SL+WL mass map; 17.78 ± 0.66 kpc
+    mass-BCG offset)
+
+The project uses the more conservative **0.5 cm²/g** value (combined
+SL+WL). A stricter 0.2 cm²/g value would lower the median σ/m posterior
+by ~0.4 dex — quantified in v0.4 sensitivity sweeps (commit `TBD`).
+
+**Limitation**: Without a published likelihood profile from Cha+ 2025,
+the 0.30-dex Gaussian width is an **approximation**. The published
+constraint is a 68% upper limit from a single analysis pipeline; the
+true likelihood shape (especially in the tail) is unknown. The
+current implementation is conservative: a strict 0.2 cm²/g bound with
+the same width would be ~2× tighter at the upper end. **A future
+version of the bullet likelihood should re-fit the 0.30-dex width
+when a full profile becomes available.**
 
 ### 4.4 SPARC: calibrated saturation score (NOT per-galaxy likelihoods)
 

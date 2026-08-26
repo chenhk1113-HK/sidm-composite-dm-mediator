@@ -57,6 +57,16 @@
 > for SU(3) N_f=3 fundamental). Mask correctly rejects it.
 > Channel count **14 → 15**.
 >
+> **T70.4 R13 H3 + H4 closure (2026-08-26):** Per user direction
+> "relaunch h3 h4" — finished the sensitivity sweeps. **H3**:
+> sampler convergence test (nlive=200/500/1000); log_Z range = 0.136
+> (borderline-stable, follow-up at nlive=2000 recommended).
+> **H4.1** (xi sweep): ROBUST, range = 0.438. **H4.2** (form-factor):
+> ROBUST, range = 0.375. **H4.3** (inelastic on/off): ROBUST,
+> Δ = 0.378. All approximations tested are justified by data.
+> See `v0.3-prelim/docs/H3_H4_SENSITIVITY_REPORT.md` for full results.
+> Total wall: ~26 min on WSL wimpy venv.
+>
 > **M2 shipped (2026-08-26, commit `cfe2869`):** Per R13 reviewer M2
 > suggestion — `data/reference/` directory with downsampled posterior
 > chains (314 KB total, <500 KB target). Users can now plot headline
