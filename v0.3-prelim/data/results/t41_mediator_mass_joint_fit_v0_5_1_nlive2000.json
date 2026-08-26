@@ -1,0 +1,109 @@
+{
+  "test": "T41_mediator_mass_joint_fit",
+  "direction": "User ship direction #1: add m_phi to posterior",
+  "ndim": 5,
+  "parameters": [
+    "log_m_phi_MeV",
+    "log_m_chi_GeV",
+    "g_chi",
+    "log_epsilon",
+    "log_alpha"
+  ],
+  "priors": {
+    "log_m_phi_MeV": [
+      -1.0,
+      4.0
+    ],
+    "log_m_chi_GeV": [
+      0.5,
+      3.0
+    ],
+    "g_chi": [
+      0.01,
+      2.0
+    ],
+    "log_epsilon": [
+      -60.0,
+      -1.0
+    ],
+    "log_alpha": [
+      -30.0,
+      -1.0
+    ]
+  },
+  "log_Z": -254.0322192830384,
+  "log_Z_err": 0.08423070254248827,
+  "MAP": [
+    2.69750535559974,
+    2.643232825644297,
+    0.6106735375342882,
+    -10.147834965532269,
+    -16.411246202131643
+  ],
+  "MAP_physical": {
+    "m_phi_MeV": 498.31660103549075,
+    "m_chi_GeV": 439.77731724923717,
+    "g_chi": 0.6106735375342882,
+    "log_epsilon": -10.147834965532269,
+    "log_alpha": -16.411246202131643,
+    "sigma_m_0_derived": 0.10358694946363625,
+    "a_derived": 1.909834544818463
+  },
+  "median": {
+    "log_m_phi_MeV": 2.742944379438349,
+    "log_m_chi_GeV": 2.9089486515874943,
+    "g_chi": 0.6688543336384077,
+    "log_epsilon": -34.59583423069435,
+    "log_alpha": -15.529626579356218
+  },
+  "quantiles_16_50_84": {
+    "log_m_phi_MeV": [
+      2.653760731085172,
+      2.742943730551266,
+      2.912181109698166
+    ],
+    "log_m_chi_GeV": [
+      2.7822571924957424,
+      2.9089451381601568,
+      2.9756426132893843
+    ],
+    "g_chi": [
+      0.5131438187369879,
+      0.6688151078375199,
+      0.8935035902894682
+    ],
+    "log_epsilon": [
+      -51.8445200389883,
+      -34.59594455444062,
+      -17.294317445489856
+    ],
+    "log_alpha": [
+      -25.349579124967818,
+      -15.530474160681285,
+      -5.8723037806568295
+    ]
+  },
+  "median_physical": {
+    "m_phi_MeV": 553.2792456096632,
+    "m_chi_GeV": 810.8651802799118,
+    "g_chi": 0.6688543336384077,
+    "epsilon": 2.5360964685528264e-35,
+    "alpha": 2.9537478644277323e-16
+  },
+  "yukawa_tension": {
+    "T39_sigma_m_0": 1.57,
+    "T39_a": 0.94,
+    "Yukawa_a_at_MAP": 1.909834544818463,
+    "a_difference": 0.9698345448184631,
+    "significant": false
+  },
+  "wall_seconds": 509.14271354675293,
+  "verdict": "TIER-3 EXTENSION: m_phi parameterized posterior",
+  "interpretation": "log Z = -254.032, posterior medians: m_phi = 553.28 MeV, m_chi = 810.87 GeV, g_chi = 0.6689, eps = 2.54e-35, alpha = 2.95e-16. Derived sigma/m_0 = 0.104 cm^2/g, a = +1.910. Yukawa velocity index = +1.910; T39 data-preferred = +0.94. |Tension| = 0.97 (threshold 1.0). R12 P0-B (2026-08-17): the pre-fix '1.3 sigma tension' claim was a sign-flip artifact in derived_a; this re-run uses the corrected sign.",
+  "t41_version": {
+    "suffix": "_v0_5_1_nlive2000",
+    "ksfr_mask_enabled": true,
+    "nlive": 2000,
+    "dlogz": 0.1
+  }
+}

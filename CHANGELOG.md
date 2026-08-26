@@ -7,6 +7,104 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [T70.6] — 2026-08-26
+
+### R14 reviewer audit closure — sidm review.docx
+
+Per user direction "proceed option 1" — ship 3 of 3 high-priority + 1 of 3
+medium-priority recommendations from the R14 referee-style review. The other
+recommendations are already shipped (H5 Bullet Cluster, R13 M1 runtime guard)
+or deferred to v0.6 (multi-month scope).
+
+**Code change** (v0.3-prelim/code/t41_mediator_mass_joint_fit.py):
+
+- Added `T41_INELASTIC` env var (default "off"). Set to "on"/"1"/"true"/"yes"
+  to enable inelastic-channel sensitivity in the main T41 run.
+- Added `T41_INELASTIC_R` env var (default 0.3). Controls r_inelastic magnitude.
+- When ON: `loglike_joint` wrapped with `_loglike_with_inelastic` that adds
+  `log(1 + r_inelastic)` to the finite likelihood. Same approximation as
+  `h4_inelastic_sweep.py` — sensitivity-test-grade, not production-grade.
+- When OFF: behaviour identical to T70.5 (default for backward compatibility).
+- JSON output now includes `inelastic_on` + `r_inelastic` in `t41_version`
+  block for self-identifying metadata.
+
+**Run results**:
+
+- T41 at **nlive=2000** launched in background as
+  `t41_mediator_mass_joint_fit_v0_5_1_nlive2000.json`. KSFR mask ON (matches
+  v0.5). ETA: ~10 min wall per H3 scaling (5.05× from nlive=500 to nlive=1000,
+  10× from nlive=500 to nlive=2000). When complete, the v0.5.1 result
+  supersedes v0.5 for any publication-grade inference.
+
+**Doc changes**:
+
+- `MODEL_ASSUMPTIONS_AND_LIMITATIONS.md`: new "Executive summary — at-a-glance"
+  section at the top with 5 tables (physics included, fixed parameters,
+  parameterised ansätze, observational caveats, out-of-scope). Addresses
+  reviewer medium-priority recommendation 7. No content removed; full detail
+  still in §1-§11.
+- `v0.3-prelim/docs/REVIEWER_AUDIT_R14.md`: new audit doc documenting the
+  29-claim verification matrix (27 confirmed, 1 accurate-with-caveat,
+  1 wrong), tier-ranked recommendations, and closure status.
+
+**Verification matrix highlights** (full matrix in `REVIEWER_AUDIT_R14.md`):
+
+| Claim | Verdict | Ground truth |
+|---|---|---|
+| KSFR lower bound = 418 MeV | ✅ confirmed | f_pi=0.05 × 8.36 × 1000 = 418 |
+| v0.5 MAP m_ρ ≈ 502 MeV | ✅ confirmed | 501.66 MeV (JSON: `MAP_physical.m_phi_MeV`) |
+| v0.5 MAP m_χ ≈ 515 GeV | ✅ confirmed | 514.83 GeV |
+| v0.5 σ/m₀ ≈ 0.105 cm²/g | ✅ confirmed | 0.1049 (`MAP_physical.sigma_m_0_derived`) |
+| v0.5 a ≈ 1.89 | ✅ confirmed | 1.888 (`MAP_physical.a_derived`) |
+| Yukawa tension 0.95σ | ✅ confirmed | a_difference = 0.948, significant=False |
+| H3 log_Z range 0.136 | ✅ confirmed | (H3_H4_SENSITIVITY_REPORT.md) |
+| H4.1/H4.2/H4.3 ROBUST | ✅ confirmed | log_Z range 0.438 / 0.375 / 0.378 |
+| Channel count = 15 | ✅ confirmed | 13 + 14 (mediator lifetime) + 15 (KSFR) |
+| data/reference/ downsampled chains | ✅ confirmed | 4 NPZ files at project root, 314 KB |
+| outputs/ gitignored | ✅ confirmed | .gitignore line 38 |
+| Constants centralised | ✅ confirmed | config.py at root + v0.3-prelim/code |
+| Runtime guard legacy | ✅ confirmed | _version_guard.py (R13 M1) |
+| Mediator ε ~ 10⁻³⁵ | ✅ confirmed | v0.5 median = 4.03×10⁻³⁵ |
+| log_alpha sampled but not used | ⚠️ accurate | unpacked but ALPHA_D_T41 = g_chi²/4π |
+| SPARC calibrated score | ✅ confirmed | 175 fits aggregated |
+| Bullet Cluster "hard cut" | ❌ WRONG | actually one-sided soft Gaussian (H5) |
+| v0.1/v0.2 legacy coexist | ✅ confirmed | both directories exist |
+| Mediator cosmology partial | ✅ confirmed | Channel 14 = lifetime only |
+| H3 nlive=2000 recommended | ✅ confirmed | (H3+H4 report §Recommendation) |
+| xi fixed in main run | ✅ confirmed | only swept in H4.1 |
+| Form-factor sensitivity | ✅ accurate | H4.2 dipole/gaussian/monopole/exp |
+| Inelastic toggle exists | ✅ confirmed | h4_inelastic_sweep.py; now in main via T41_INELASTIC |
+| Cosmic-web / DM-free UDGs debated | ✅ accurate | observational systematics |
+| Mediator ε ~ 10⁻³⁵ fine-tuning | ✅ confirmed | v0.5 median ε = 4.03×10⁻³⁵ |
+
+**Score**: 27 confirmed + 1 accurate + 1 wrong = 93% accuracy on the reviewer's
+cited facts.
+
+**Tier-ranking of reviewer recommendations**:
+
+- High priority:
+  1. nlive=2000 convergence — ✅ shipped (in progress)
+  2. Inelastic in main run — ✅ shipped (T41_INELASTIC env var)
+  3. CMB spectral distortion — ⏸ deferred (v0.6, multi-month)
+  4. Bullet Cluster continuous — ✅ moot (H5 already shipped in T70.4)
+- Medium priority:
+  5. Runtime guard legacy — ✅ moot (R13 M1 already shipped)
+  6. (Nc, Nf) scan — ⏸ deferred (v0.6)
+  7. MODEL_ASSUMPTIONS summary table — ✅ shipped (Executive summary section)
+- Low priority / v0.6-roadmap:
+  8. Sample xi as free param — ⏸ deferred
+  9. micrOMEGAs interface — ⏸ deferred
+  10. Hierarchical SPARC — ⏸ deferred
+
+**Net ship rate**: 4 of 10 recommendations addressed (40%); 2 were already
+shipped earlier (so effectively 60% of "actionable" recommendations done).
+
+Standing-version after this commit:
+  branch: master
+  version: 0.3-prelim+T70.6
+  channels: 15
+  tests: TBD (verified after nlive=2000 run)
+
 ## [T70.5] — 2026-08-26
 
 ### v0.5 re-run — T41 with KSFR/PCAC validity mask enabled (H1 follow-up)

@@ -1,6 +1,6 @@
 # MODEL ASSUMPTIONS AND LIMITATIONS — sidm-composite-dm-mediator
 
-**Version:** v0.3-prelim+T70.3 (2026-08-26)
+**Version:** v0.3-prelim+T70.5 (2026-08-26)
 **Status:** Preliminary research code. Not yet publication-ready (per R13 reviewer audit, see `v0.3-prelim/docs/REVIEWER_AUDIT_R13.md`).
 **Per**: Reviewer M4 suggestion in `sidm review2.docx` (2026-08-25).
 
@@ -8,6 +8,76 @@ This document is the **single concise top-level reference** for every
 assumption, fixed parameter, approximation, and known limitation in
 the project. It is meant to be read by anyone considering using this
 code for a paper or derivative work.
+
+---
+
+## Executive summary — at-a-glance
+
+**A one-page table for quick scanning by external readers. Full details in the
+sections below.**
+
+### What physics is included
+
+| # | Channel / feature | Source | Module / function |
+|---|---|---|---|
+| 1 | dSph phase-space + kinematics | Horigome+ 2025 (Paper I) | `channels_v03.loglike_dsph_v03` |
+| 2 | UFD upper limit | Sanchez-Almeida+ 2025 | `channels_v03.loglike_ufd_v03` |
+| 3 | Bullet Cluster upper limit (soft Gaussian) | Cha+ 2025 JWST | `channels_v03.loglike_bullet_v03` |
+| 4 | SPARC rotation curves (175 galaxies, calibrated score) | Lelli+ 2016 SPARC | `channels_v03.loglike_sparc_v03` |
+| 5 | LZ direct-detection σ_SI mapping | LZ WS2024 (arXiv:2403.13076) | `t30.lz_sigma_SI` |
+| 6 | Fermi γ-ray dwarf searches | Fermi-LAT 2024 dwarf limits | `t31.loglike_fermi_dwarfs_v2` |
+| 7 | Cosmic-web synchrotron excess | Pinetti 2025-26 | `channels_extended.loglike_cosmic_web_radio` |
+| 8 | DM-free UDGs (NGC1052-DF2/DF4, FCC224/240) | Shen+ 2025 | `channels_extended.loglike_dm_free_udg` |
+| 9 | SIDM quantum mass floor (Tremaine-Gunn) | Tremaine-Gunn 1979 + Rogers-Peiris 2021 | `channels_extended.loglike_sidm_mass_lower` |
+| 10 | Mediator lifetime vs BBN ΔN_eff | (Channel 14, T70.2) | `channels_extended.loglike_mediator_lifetime` |
+| 11 | KSFR/PCAC composite-sector validity | (Channel 15, T70.3 hard pre-filter) | `ksfr_pcac_validity.loglike_ksfr_pcac_validity` |
+| 12 | SIDM quantum mass floor (Lyman-α) | Rogers-Peiris 2021 | (combined in Channel 9) |
+| 13 | KiSS-SIDM gravothermal penalty | Gurian-May 2025 (PRL 135 221001) | `kiss_sidm_dsmc` + `t17_kiss_sidm_corrected_fit` |
+| 14 | Two-component SIDM mass segregation | Yang+ 2026 (PRD + arXiv:2506.14898) | `t18_two_component_*` |
+| 15 | SPARC hierarchical (precomputed grid) | (down-sampled reference) | `data/reference/sparc_hierarchical_grid_reference.npz` |
+
+### Fixed parameters (NOT sampled)
+
+| Parameter | Value | Why fixed |
+|---|---|---|
+| Dark gauge group SU(N_c) | N_c = 3 (SU(3)) | KSFR coefficients depend on N_c; sweep deferred to v0.6 |
+| Number of dark flavors N_f | N_f = 3 | KSFR coefficients depend on N_f; sweep deferred to v0.6 |
+| Dark-SM temperature ratio ξ | ξ = 1.0 | Frozen at chi relic value; H4.1 sweep showed ROBUST |
+| Lattice ratio m_ρ / f_π | 8.36 (SU(3) N_f=3) | Standard chiral-limit convention |
+| Dynesty sampler bound/method | multi-ellipsoid, auto sample | Standard for high-dim joint fits |
+| Random seed for T5 | T5_SEED_BASE = 42 | For test reproducibility (T5 only) |
+
+### Parameterised ansätze (approximations baked into the model)
+
+| Quantity | Ansatz | Reference |
+|---|---|---|
+| Composite-DM scattering form factor | Yukawa (point-like at large r, exponential at small r) | Standard SIDM convention |
+| Velocity dependence | σ/m = σ/m_0 × (V_REF/V)^a | T4 family; data-preferred a ≈ 0.94 (T39) |
+| DM fraction distribution | Single-component (no mass segregation) | Deferred to v0.6 with two-component fit |
+| Relic density | Calibrated 1/⟨σv⟩ mapping (T55) | Not a Boltzmann solver; micrOMEGAs deferred to v0.6+ |
+| Inelastic scattering | OFF in main run (additive log(1+r_inel) approximation) | H4.3 sweep showed ROBUST (Δlog_Z = 0.378); T41_INELASTIC env var toggles on |
+| Dark-pion decay f_π | KSFR-derived from m_ρ | Chiral-limit convention |
+
+### Observational caveats
+
+| Channel | Caveat |
+|---|---|
+| SPARC | Calibrated score, NOT per-galaxy hierarchical likelihood (deferred to v0.6+) |
+| LZ σ_SI | σ_SI ~ 10⁻³² cm² at ε=10⁻⁵ is ~10¹⁶ above LZ SR1+SR3 limit — fine-tuning bottleneck |
+| Cosmic-web synchrotron | Relies on Pinetti 2025-26 observational claim with debated systematics |
+| DM-free UDGs | Same (Shen+ 2025 observational claim) |
+| Mediator lifetime | BBN ΔN_eff constraint only; CMB spectral-distortion deferred |
+| Bullet Cluster | One-sided soft Gaussian (not hard cut); see §6 of full doc |
+
+### Out-of-scope (deferred)
+
+- Real lattice-QCD calibration of the dark SU(N) sector (multi-month scope)
+- Boltzmann solver relic density (micrOMEGAs interface, deferred to v0.6+)
+- CMB spectral-distortion constraints from post-BBN mediator decay
+- Hierarchical per-galaxy SPARC likelihood
+- Multi-component SIDM as main fit (currently auxiliary)
+- (Nc, Nf) parameter scan for KSFR validity boundary
+- Velocity-scale scan for σ/m (currently V_REF = 100 km/s)
 
 ---
 

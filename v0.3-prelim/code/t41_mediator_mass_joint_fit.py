@@ -267,6 +267,31 @@ def main():
     print(f"  log_alpha:     [{LOG_ALPHA_RANGE[0]}, {LOG_ALPHA_RANGE[1]}]")
     print()
 
+    # R14 (2026-08-26): inelastic-channel toggle for sensitivity-test parity with
+    # h4_inelastic_sweep.py. When T41_INELASTIC=on, the joint likelihood gets
+    # a constant additive shift of log(1 + r_inelastic) where r_inelastic
+    # represents a representative dark-sector mass-splitting contribution
+    # (h4.3 default = 0.3). This is a sensitivity-test approximation; a full
+    # implementation would add delta_m_split as a 6th fit parameter.
+    inelastic_on = os.environ.get("T41_INELASTIC", "off").strip().lower() in ("on", "1", "true", "yes")
+    r_inelastic = float(os.environ.get("T41_INELASTIC_R", "0.3"))
+    if inelastic_on:
+        # Wrap loglike_joint with the same approach as h4_inelastic_sweep.py
+        _base_loglike = loglike_joint
+
+        def _loglike_with_inelastic(theta):
+            ll = _base_loglike(theta)
+            if not np.isfinite(ll):
+                return ll
+            return ll + float(np.log(1.0 + r_inelastic))
+
+        loglike_for_run = _loglike_with_inelastic
+        print(f"  INELASTIC: ON (r_inelastic={r_inelastic}) — wrapper adds log(1+r) to ll")
+    else:
+        loglike_for_run = loglike_joint
+        print(f"  INELASTIC: OFF (default) — use T41_INELASTIC=on to enable")
+    print()
+
     t0 = time.time()
     # T70.4 (R13 H3 follow-up): nlive=200 gives borderline-stable results; nlive=500
     # gives cleaner convergence per H3 sweep. Allow override via env var so v0.5
@@ -274,7 +299,7 @@ def main():
     # backward compatibility with the published T41 numbers.
     nlive = int(os.environ.get("T41_NLIVE", "200"))
     sampler = dynesty.NestedSampler(
-        loglikelihood=loglike_joint,
+        loglikelihood=loglike_for_run,
         prior_transform=prior_transform_5,
         ndim=5, nlive=nlive, bound='multi', sample='auto', bootstrap=0,
     )
@@ -423,6 +448,8 @@ def main():
         "ksfr_mask_enabled": os.environ.get("SIDM_DISABLE_KSFR_MASK", "0") != "1",
         "nlive": nlive,
         "dlogz": 0.1,
+        "inelastic_on": inelastic_on,
+        "r_inelastic": r_inelastic,
     }
     out_path.write_text(json.dumps(out_with_meta, indent=2, default=str))
     # Mirror to Windows-side path if running under WSL
