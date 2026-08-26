@@ -1,6 +1,6 @@
 # MODEL ASSUMPTIONS AND LIMITATIONS — sidm-composite-dm-mediator
 
-**Version:** v0.3-prelim+T70.1 (2026-08-25)
+**Version:** v0.3-prelim+T70.3 (2026-08-26)
 **Status:** Preliminary research code. Not yet publication-ready (per R13 reviewer audit, see `v0.3-prelim/docs/REVIEWER_AUDIT_R13.md`).
 **Per**: Reviewer M4 suggestion in `sidm review2.docx` (2026-08-25).
 
@@ -29,8 +29,10 @@ code for a paper or derivative work.
 | Dark-matter-free UDG consistency | van Dokkum+ 2018-2026 | `channels_extended.loglike_dm_free_udg` (Channel 11, T70) |
 | Cosmic-web radio synchrotron upper limit | Pinetti+ 2025-26 + LOFAR | `channels_extended.loglike_cosmic_web_radio` (Channel 12, T70) |
 | SIDM quantum-statistical mass floor | Tremaine-Gunn 1979 + Rogers-Peiris 2021 | `channels_extended.loglike_sidm_mass_lower` (Channel 13, T70.1) |
+| Mediator lifetime + BBN consistency | Berlin 2018 PRD 97, 055033 | `channels_extended.loglike_mediator_lifetime` (Channel 14, T70.2) |
+| KSFR/PCAC validity mask (hard pre-filter) | KSFR + PCAC, chiral-limit convention | `ksfr_pcac_validity.loglike_ksfr_pcac_validity` (Channel 15, T70.3) |
 
-**Total: 14 observational constraints** (12 channels + SPARC + LZ).
+**Total: 15 observational constraints** (13 channels + SPARC + LZ). Channel 14 is the mediator lifetime pre-filter (T70.2, R13 H2 closure); Channel 15 is the KSFR/PCAC validity mask (T70.3, R13 H1 closure).
 
 ## 2. What physics is OMITTED (deferred)
 
@@ -168,18 +170,48 @@ channels — they emerge from the joint posterior under the wide prior.
 ## 6. Known theoretical validity boundaries
 
 Per reviewer C1: KSFR / PCAC relations are valid for specific dark-QCD
-parameter windows. The current code does NOT enforce these. Approximate
-bounds (from Laha 2020 + the project's own T53 / T53b):
+parameter windows. Approximate bounds (from Laha 2020 + the project's
+own T53 / T53b):
 
 | Parameter | Valid range | What happens outside |
 |---|---|---|
 | Dark pion decay constant f_π | 0.05 - 0.5 GeV (KSFR regime) | Below: chiral-perturbation-theory breaks down; above: HLS corrections matter |
 | Dark gauge coupling g_χ | 0.01 - 2.0 (T41 prior range) | Below: perturbation theory questionable; above: non-perturbative regime |
-| Dark confinement scale Λ_dark | 0.1 - 1.0 GeV (T53 explored range) | Below: composite-DM may not form; above: glueball mass >> pion mass |
+| Dark confinement scale Λ_dark | (derived: Λ_dark = m_ρ / 8.36 = f_π in chiral limit) | **Not an independent constraint**; see v0.5 note below |
 | m_ρ / f_π (KSFR ratio) | 6.0 - 9.0 (T53 explored) | Below: PCAC fails; above: lattice regime |
 
-**Current code behavior**: returns values outside these ranges with
-no warning. **T70.2** (per R13) will add a validity-mask prior.
+**v0.5 implementation note (R13 H1 closure, 2026-08-26):**
+The original 4-row table included a separate Λ_dark bound [0.1, 1.0] GeV.
+This was **redundant with the f_π bound** under the chiral-limit
+convention `f_π = Λ_dark` enforced by the lattice ratio (8.36 for
+SU(3) N_f=3 fundamental). Keeping it as an independent constraint was
+**incompatible with the QCD physical point** (f_π = 92 MeV < 100 MeV)
+and was dropped. The validity mask now uses 3 independent constraints
+(f_π, g_χ, m_ρ/f_π). See `v0.3-prelim/code/ksfr_pcac_validity.py` and
+`tests/test_ksfr_pcac_validity.py`.
+
+**CRITICAL v0.5 finding**: For SU(3) N_f=3 fundamental, the validity
+mask translates f_π ∈ [0.05, 0.5] GeV into **m_ρ ∈ [418, 4180] MeV**.
+The published T41 posterior places m_ρ ≈ 26.6 MeV — **a factor of ~16
+below the KSFR validity lower bound**. This means:
+
+  - The T41 MAP and surrounding posterior mass live in a region
+    where KSFR/PCAC breaks down.
+  - The headline T41 result should be flagged as **"in a KSFR-invalid
+    region of parameter space"** in any publication-quality writeup.
+  - The KSFR mask (Channel 15) is wired into T41's joint likelihood
+    as a hard pre-filter; the resulting posterior (when re-run with
+    the mask enabled) is restricted to the KSFR-valid sub-space.
+  - The T41 main posterior stored in
+    `v0.3-prelim/data/results/t41_mediator_mass_joint_fit.json` was
+    generated with the mask DISABLED (legacy behavior); it is
+    HISTORICAL and should not be cited without the v0.5 caveat.
+
+**Current code behavior** (v0.5): `loglike_ksfr_pcac_validity(theta)`
+returns 0 inside the validity box, `-inf` outside. T41's
+`loglike_joint` applies it as a hard pre-filter (line ~151). Can be
+disabled via env var `SIDM_DISABLE_KSFR_MASK=1` for cross-version
+comparison.
 
 ## 7. Sampler configuration
 
@@ -237,4 +269,5 @@ Per Reviewer 2's recommendation:
 
 | Date | Change | Source |
 |---|---|---|
-| 2026-08-25 | Initial creation per reviewer M4 (sidm review2.docx) | Reviewer M4, this turn |
+| 2026-08-25 | Initial creation per reviewer M4 (sidm review2.docx) | Reviewer M4 |
+| 2026-08-26 | §1 added Channel 14 (mediator lifetime) + Channel 15 (KSFR mask); §6 fixed: Λ_dark removed as independent constraint (redundant with f_π under chiral-limit convention); KSFR mask implemented as Channel 15 + wired into T41; major v0.5 finding documented: T41 MAP at m_ρ=26.6 MeV is BELOW KSFR validity lower bound (418 MeV) | R13 H2 + H1 closure, this turn |

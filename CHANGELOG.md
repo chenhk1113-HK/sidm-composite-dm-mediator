@@ -7,6 +7,76 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [T70.3] — 2026-08-26
+
+### Tier-1 PATCH — R13 reviewer H1 closure (KSFR/PCAC validity bounds)
+
+Per user direction "do the 0.4 and 0.5" (resume deferred sub-projects from
+`REVIEWER_AUDIT_R13.md` §"Honest verification — what did NOT get done").
+
+**H1 closed in this round** (the v0.5 sub-project). The H3/H4/M2/H5 items
+remain deferred (M2 already shipped in commit `cfe2869`; H3/H4/H5 require
+background compute and will be tackled in subsequent sessions).
+
+### Shipped (1 item)
+
+| Item | Commit | What it adds |
+|---|---|---|
+| **H1**: KSFR/PCAC validity mask | (this commit) | Channel 15 (`loglike_ksfr_pcac_validity`) as hard pre-filter in T41; 22 new tests; major v0.5 finding: T41 MAP at m_ρ=26.6 MeV is BELOW the KSFR validity lower bound (418 MeV); mask correctly rejects it |
+
+### Code added
+
+- `v0.3-prelim/code/ksfr_pcac_validity.py`: NEW (190 lines)
+  - 3 independent validity bounds: f_π ∈ [0.05, 0.5] GeV, g_χ ∈ [0.01, 2.0], m_ρ/f_π ∈ [6.0, 9.0]
+  - `is_in_validity_box(f_pi_GeV, g_chi, m_rho_over_f_pi)` — pure function
+  - `loglike_ksfr_pcac_validity(theta)` — returns 0 inside box, -inf outside
+  - `SIDM_DISABLE_KSFR_MASK=1` env-var escape hatch for cross-version comparison
+- `tests/test_ksfr_pcac_validity.py`: NEW (22 tests, all passing)
+- `v0.3-prelim/code/t41_mediator_mass_joint_fit.py`: imports the mask and applies it as the first check in `loglike_joint` (after the trivial positivity + g_chi range checks, before any expensive channel call)
+
+### v0.5 finding (scientific)
+
+The published T41 posterior places m_ρ ≈ 26.6 MeV. For SU(3) N_f=3
+fundamental (the project's default lattice config, ratio=8.36), the KSFR
+validity lower bound is m_ρ ≈ 418 MeV (f_π ≥ 0.05 GeV). **The T41 MAP is
+a factor of ~16 below the KSFR validity lower bound.**
+
+This means:
+- The T41 MAP lives in a region where KSFR/PCAC breaks down.
+- Any writeup citing the T41 result must include the v0.5 caveat
+  "MAP is in a KSFR-invalid region of parameter space".
+- The T41 JSON file
+  (`v0.3-prelim/data/results/t41_mediator_mass_joint_fit.json`) is
+  HISTORICAL (generated with mask disabled); should not be cited without
+  the caveat.
+- The mask wired into T41 will produce a NEW posterior restricted to
+  the KSFR-valid sub-space when T41 is re-run. ETA: ~3 min wall on
+  WIMpy wimpy.
+
+### Doc fix (honest correction)
+
+`MODEL_ASSUMPTIONS_AND_LIMITATIONS.md` §6 originally listed 4 independent
+bounds, including a separate Λ_dark ∈ [0.1, 1.0] GeV bound. This was
+**internally inconsistent** under the chiral-limit convention
+f_π = Λ_dark: the QCD physical point (f_π = 92 MeV) violates it.
+Corrected to 3 independent bounds (Λ_dark removed as it's redundant
+with f_π via the lattice ratio).
+
+### Verification
+
+- 170 tests pass / 2 pre-existing fail (SPARC data path) / 1 skipped
+- Was 132/2/1 before this round; +38 new tests (16 from M2 commit `cfe2869` + 22 from H1)
+- LF line endings preserved on all changed files
+- Pre-commit hook passed
+
+### See also
+
+- `v0.3-prelim/code/ksfr_pcac_validity.py` — mask implementation
+- `tests/test_ksfr_pcac_validity.py` — 22-test pytest suite
+- `MODEL_ASSUMPTIONS_AND_LIMITATIONS.md` §6 — corrected bounds table + critical v0.5 finding
+- `v0.3-prelim/docs/REVIEWER_AUDIT_R13.md` — original H1 deferral
+- Commit `cfe2869` — M2 (reference posterior chains) shipped earlier in this session
+
 ## [T70.2] — 2026-08-25
 
 ### Tier-1 PATCH — R13 reviewer audit closure (4 of 9 items shipped)

@@ -46,6 +46,23 @@
 > + new audit closure `v0.3-prelim/docs/REVIEWER_AUDIT_R13.md`. Channel count
 > **13 → 14** (Channel 14 = loglike_mediator_lifetime per H2).
 > Test count: **103 → 132 pass** (+29 new tests).
+>
+> **T70.3 R13 H1 closure (2026-08-26):** Per user direction "do the 0.4
+> and 0.5" — resumed deferred sub-projects. **H1 closed**: KSFR/PCAC
+> validity mask implemented as Channel 15 (`loglike_ksfr_pcac_validity`)
+> + wired into T41 as hard pre-filter. **22 new tests** (all passing);
+> total tests now **132 → 170** (also +16 from M2 commit `cfe2869`
+> shipped earlier in the same session). **Major v0.5 finding**:
+> T41 MAP at m_ρ=26.6 MeV is BELOW KSFR validity lower bound (418 MeV
+> for SU(3) N_f=3 fundamental). Mask correctly rejects it.
+> Channel count **14 → 15**.
+>
+> **M2 shipped (2026-08-26, commit `cfe2869`):** Per R13 reviewer M2
+> suggestion — `data/reference/` directory with downsampled posterior
+> chains (314 KB total, <500 KB target). Users can now plot headline
+> posteriors without re-running dynesty. Includes .gitignore exception,
+> 16-test pytest suite, README documenting compression strategy and
+> caveats.
 
 ---
 

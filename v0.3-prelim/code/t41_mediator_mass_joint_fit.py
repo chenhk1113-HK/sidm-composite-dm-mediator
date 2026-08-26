@@ -54,6 +54,9 @@ import channels_v03 as ch_v03
 import t40_yukawa_sigma_m as yukawa
 from t30_lz_real_posterior import loglike_lz_real
 from t32_fermi_dwarf_channel import loglike_fermi_dwarf
+# T70.3 (R13 H1 closure): KSFR/PCAC validity mask — Channel 15
+# Per MODEL_ASSUMPTIONS_AND_LIMITATIONS.md §6 + REVIEWER_AUDIT_R13.md H1
+from ksfr_pcac_validity import loglike_ksfr_pcac_validity
 
 
 import platform
@@ -144,6 +147,17 @@ def loglike_joint(theta):
     if not (1e-2 <= g_chi <= 2.0):
         return -np.inf
 
+    # T70.3 (R13 H1 closure): KSFR/PCAC validity mask (Channel 15).
+    # Per MODEL_ASSUMPTIONS_AND_LIMITATIONS.md §6: hard reject if
+    # (f_pi, g_chi, m_rho/f_pi) outside the validity box. The T41 MAP
+    # (m_phi = 26.6 MeV) is BELOW the f_pi lower bound (418 MeV); the
+    # mask correctly rejects it, and the v0.5 sub-project documents
+    # this as a major finding. Disable via env var
+    # SIDM_DISABLE_KSFR_MASK=1 for cross-version comparison.
+    ll_ksfr = loglike_ksfr_pcac_validity(theta)
+    if not np.isfinite(ll_ksfr):
+        return -np.inf
+
     # Derived: sigma_m_0 at v_ref = 100 km/s
     sigma_m_0 = sigma_m_at_v_yukawa(V_REF, m_phi_MeV, m_chi_GeV, g_chi)
     if sigma_m_0 <= 0 or not np.isfinite(sigma_m_0):
@@ -197,6 +211,11 @@ def loglike_joint(theta):
     ll_fermi = loglike_fermi_dwarf(m_chi_GeV, sigma_v)
     if not np.isfinite(ll_fermi):
         return -np.inf
+
+    # KSFR/PCAC validity mask (T70.3 / Channel 15) is applied earlier
+    # in this function (before any of the expensive likelihood calls);
+    # if it fired we'd already have returned -inf above. So we don't
+    # add it again here — it's a hard pre-filter, not a soft penalty.
 
     # Optional SPARC contribution (slow, so disabled by default)
     # Use a coarse grid to be fast.
