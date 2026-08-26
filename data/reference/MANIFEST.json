@@ -1,0 +1,149 @@
+{
+  "files": [
+    {
+      "source": "v0.3-prelim/data/results/t8_v03_posterior_samples.npz",
+      "reference": "data/reference/t8_v03_posterior_samples_reference.npz",
+      "source_bytes": 102688,
+      "reference_bytes": 6225,
+      "compression_ratio": 0.061,
+      "schema": {
+        "log_sigma_m_0": [
+          [
+            500,
+            1
+          ],
+          "float32"
+        ],
+        "a": [
+          [
+            500,
+            1
+          ],
+          "float32"
+        ],
+        "weights": [
+          [
+            500
+          ],
+          "float32"
+        ]
+      }
+    },
+    {
+      "source": "v0.3-prelim/data/results/t17_kiss_sidm_corrected_samples.npz",
+      "reference": "data/reference/t17_kiss_sidm_corrected_samples_reference.npz",
+      "source_bytes": 392330,
+      "reference_bytes": 6652,
+      "compression_ratio": 0.017,
+      "schema": {
+        "log_sigma_m_0": [
+          [
+            500,
+            1
+          ],
+          "float32"
+        ],
+        "a": [
+          [
+            500,
+            1
+          ],
+          "float32"
+        ],
+        "weights": [
+          [
+            500
+          ],
+          "float32"
+        ],
+        "treatment": [
+          [
+            500,
+            1
+          ],
+          "<U9"
+        ]
+      }
+    },
+    {
+      "source": "v0.3-prelim/data/results/t18_two_component_samples.npz",
+      "reference": "data/reference/t18_two_component_samples_reference.npz",
+      "source_bytes": 44114,
+      "reference_bytes": 9644,
+      "compression_ratio": 0.219,
+      "schema": {
+        "samples": [
+          [
+            500,
+            4
+          ],
+          "float32"
+        ],
+        "weights": [
+          [
+            500
+          ],
+          "float32"
+        ]
+      }
+    },
+    {
+      "source": "v0.3-prelim/data/results/sparc_hierarchical_grid.npz",
+      "reference": "data/reference/sparc_hierarchical_grid_reference.npz",
+      "source_bytes": 893403,
+      "reference_bytes": 299228,
+      "compression_ratio": 0.335,
+      "schema": {
+        "sigma_m_grid": [
+          [
+            50
+          ],
+          "float32"
+        ],
+        "a_grid": [
+          [
+            30
+          ],
+          "float32"
+        ],
+        "logL_grid": [
+          [
+            50,
+            30
+          ],
+          "float32"
+        ],
+        "logL_per_galaxy": [
+          [
+            175,
+            50,
+            30
+          ],
+          "float16"
+        ],
+        "galaxy_names": [
+          [
+            175
+          ],
+          "<U11"
+        ],
+        "V_max_kms": [
+          [
+            175
+          ],
+          "float32"
+        ],
+        "M_vir_Msun": [
+          [
+            175
+          ],
+          "float32"
+        ]
+      }
+    }
+  ],
+  "total_bytes": 321749,
+  "total_kb": 314.2,
+  "target_total_kb": 500,
+  "under_target": true
+}

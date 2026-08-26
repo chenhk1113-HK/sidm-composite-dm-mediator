@@ -52,6 +52,14 @@ v0.*-prelim/data/raw/
 v0.*-prelim/data/external_data/lz_2024/raw/
 v0.*-prelim/data/external/
 
+# --- Reference posterior samples (R13 M2 fix) ---
+# data/reference/ contains downsampled posterior chains (~314 KB total)
+# committed so users can plot headline posteriors without re-running
+# dynesty (~3 min wall on WIMpy wimpy per the T41 fit). Source samples
+# stay gitignored.
+!data/reference/
+!data/reference/*.npz
+
 # External data products (e.g. McDaniel+ 2024 Fermi dSph TS profiles).
 # Re-download via outputs/fetch_external_data.sh
 
