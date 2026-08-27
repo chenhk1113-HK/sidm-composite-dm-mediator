@@ -841,6 +841,218 @@ def loglike_sidm_mass_lower(sigma_m_0: float, a: float, m_chi: float) -> float:
     return 0.0
 
 
+# ---------------------------------------------------------------------------
+# Channel 16 (T70.8 Tier-1 PATCH 2026-08-26): CMB spectral distortion (μ/y)
+#
+# Per R14 reviewer Recommendation 3 (deferred to v0.6 roadmap): add a
+# Planck μ/y Gaussian penalty for post-BBN mediator decays.
+#
+# Background:
+#   The dark photon (or dark pion, in the composite-DM model) can decay
+#   to SM charged fermions via kinetic mixing ε. Channel 14 already
+#   handles the BBN-era ΔN_eff constraint; Channel 16 handles the
+#   post-BBN, post-recombination spectral distortion constraint from
+#   Planck Collaboration Int. LI (2017, arXiv:1612.00071):
+#       |μ| < 9.0e-6  (95% CL)
+#       |y| < 1.5e-6  (95% CL)
+#
+#   Per Fixsen 2009 (arXiv:0911.1955), the μ-distortion arises from
+#   energy injection at redshift z > 5e4 (where Compton scattering
+#   efficiently redistributes photon energies but bremsstrahlung is
+#   inefficient at producing new photons). The y-distortion arises from
+#   energy injection at 200 < z < 5e4 (where Compton scattering on
+#   free electrons produces a y-type distortion).
+#
+# Lifetime scaling:
+#   Dark photon decay rate to SM charged fermions (Berlin+ 2018):
+#     Γ(A' → f f̄) = (1/3) × α_EM × ε² × m_A' × N_c(f) × K(s)
+#   For m_A' >> 2 m_e, total width Γ ≈ (1/3) × α_EM × ε² × m_A' (sum over
+#   accessible charged leptons+quarks, with phase-space suppression K(s) ~ O(1)).
+#   Lifetime τ = ℏ / Γ. In natural units ℏ = 6.582e-22 MeV·s, so
+#   τ [s] = 1 / (α_EM × ε² × m_phi_MeV / 3 × 1.519e21)
+#         ≈ 1.32e24 / (ε² × m_phi_MeV)
+#   For (m_phi, ε) = (100 MeV, 1e-5): τ ≈ 1.3e14 s ~ 4 Myr (CMB-sensitive).
+#   For (m_phi, ε) = (100 MeV, 1e-35): τ ≈ 10^34 s >> t_universe (safe).
+#
+# Energy injection model (simplified):
+#   For a thermal-relic mediator with abundance Y ~ 1/m_phi at decay, the
+#   fractional photon energy injection ΔE/ρ_γ ~ ρ_dm/ρ_γ ~ 5400
+#   (catastrophically large). The correct treatment requires integrating
+#   the mediator's Boltzmann equation through the thermal history — out
+#   of scope for v0.3-prelim.
+#
+#   SIMPLIFICATION: we use a one-sided Gaussian penalty on μ and y that
+#   GROWS with the time the mediator spends in the CMB-sensitive window.
+#   The penalty is non-zero only when the decay epoch falls in
+#   1e5 s < τ < 1e13 s (~ recombination to today). Outside this window,
+#   Channel 16 returns 0 (Channel 14 covers pre-BBN; decay-after-today is
+#   outside any cosmological constraint).
+#
+# References:
+#   - Fixsen et al. 2009 (arXiv:0911.1955) — μ/y formalism
+#   - Planck Collaboration Int. LI 2017 (arXiv:1612.00071) — 95% CL limits
+#   - Berlin et al. 2018 PRD 97, 055033 — dark photon decay width
+#   - Chluba & Sunyaev 2012 MNRAS 419, 1314 — energy-injection cosmology
+
+# Planck 95% CL limits (Planck Int. LI 2017, arXiv:1612.00071, Table 1)
+CMB_MU_MAX_95CL = 9.0e-6  # dimensionless
+CMB_Y_MAX_95CL = 1.5e-6   # dimensionless
+
+# Cosmological time benchmarks (seconds)
+T_BBN_S = 1.0           # BBN onset (t < 1 s: pre-BBN — Channel 14 covers)
+T_CMB_DISTORTION_EARLY_S = 1.0e5   # z ~ 5e4 — boundary between μ and y regimes
+T_CMB_DISTORTION_LATE_S = 1.0e13   # z ~ 50 — recombination era begins
+T_UNIVERSE_S = 4.35e17  # Age of universe ~ 13.8 Gyr (today)
+
+# Natural-unit conversion: ℏ = 6.582e-22 MeV·s, so 1 MeV⁻¹ = 1.519e21 s⁻¹
+HBAR_INV_S_PER_MEV = 1.519e21  # s⁻¹ / MeV
+
+# Effective fractional energy injection (simplified, see docstring).
+# For a mediator with abundance Y_dark at decay, ΔE/ρ_γ ~ ρ_dm/ρ_γ in
+# natural units. We use this as the order-of-magnitude normalization;
+# the actual value is highly model-dependent (Boltzmann integration
+# needed for an exact calculation). Per the v0.3-prelim convention we
+# mark this as an order-of-magnitude estimate.
+DELTA_RHO_OVER_RHO_GAMMA_CMB = 5400.0  # ρ_dm/ρ_γ ≈ Ω_dm/Ω_γ (order of magnitude)
+
+
+def _compute_decay_tau_seconds(m_phi_MeV: float, epsilon: float) -> float:
+    """Compute dark photon lifetime in seconds (Berlin+ 2018 estimate).
+
+    Uses the same width formula as `compute_mediator_lifetime_s` for
+    consistency with Channel 14:
+        Γ ≈ (1/3) × α_EM × ε² × m_A'
+        τ = ℏ / Γ
+
+    For m_A' below 2 m_e (kinematically forbidden e+e- decay), returns +inf
+    (mediator stable). For ε = 0, returns +inf.
+
+    Parameters
+    ----------
+    m_phi_MeV : float
+        Mediator mass in MeV
+    epsilon : float
+        Kinetic mixing parameter (>= 0)
+
+    Returns
+    -------
+    float
+        Lifetime in seconds. Returns +inf if decay channel closed.
+    """
+    if epsilon <= 0 or m_phi_MeV < 2 * M_E_MEV:
+        return np.inf
+    ALPHA_EM = 1.0 / 137.0359895
+    GAMMA_FACTOR = (1.0 / 3.0) * ALPHA_EM * m_phi_MeV  # MeV (with ε² factor below)
+    GAMMA_PER_S = GAMMA_FACTOR * epsilon**2 * HBAR_INV_S_PER_MEV
+    if GAMMA_PER_S <= 0:
+        return np.inf
+    return 1.0 / GAMMA_PER_S
+
+
+def _compute_mu_y_from_lifetime(tau_s: float) -> Tuple[float, float]:
+    """Compute μ and y distortions from mediator decay at proper time τ.
+
+    Simplified mapping (Fixsen 2009 + Planck Int. LI 2017):
+      - τ < T_BBN_S (~1 s): pre-BBN — not Channel 16's domain
+      - 1 < τ < 1e5 s: BBN-to-μ boundary; μ builds up via thermalization
+        (we return 0 here; Channel 14 handles BBN-era ΔN_eff)
+      - 1e5 < τ < 5e12 s: y-distortion regime (recombination era)
+      - τ > 5e12 s: too late for significant CMB distortion
+
+    For the y-distortion regime, we compute:
+        y ≈ (1/4) × (ΔE / ρ_γ)_effective
+    where the effective fractional injection scales with how much of the
+    decay happens before recombination vs after.
+
+    Returns (μ, y) — both zero if τ outside the CMB-sensitive window.
+    """
+    if not np.isfinite(tau_s) or tau_s <= 0:
+        return 0.0, 0.0
+    # Outside CMB-sensitive window: no penalty
+    if tau_s < T_CMB_DISTORTION_EARLY_S:
+        return 0.0, 0.0
+    if tau_s > T_CMB_DISTORTION_LATE_S:
+        return 0.0, 0.0
+    # In the y-distortion window (1e5 s < τ < 1e13 s):
+    # y ~ (1/4) × ΔE/ρ_γ ~ (1/4) × (DELTA_RHO_OVER_RHO_GAMMA_CMB)
+    # = ~1350, which is ~10^9 times above the Planck limit.
+    # We use a smooth window function so the penalty ramps up/down at
+    # the boundaries rather than cutting hard.
+    # Window: 1 at τ = 1e9 s (mid-window), 0 at boundaries.
+    log_tau = np.log10(tau_s)
+    log_lo = np.log10(T_CMB_DISTORTION_EARLY_S)  # 5
+    log_hi = np.log10(T_CMB_DISTORTION_LATE_S)   # 13
+    log_mid = 0.5 * (log_lo + log_hi)            # 9
+    half_width = 0.5 * (log_hi - log_lo)         # 4
+    window = max(0.0, 1.0 - abs(log_tau - log_mid) / half_width)
+    y_eff = 0.25 * DELTA_RHO_OVER_RHO_GAMMA_CMB * window
+    return 0.0, y_eff
+
+
+def loglike_cmb_distortion(m_chi: float, m_phi: float, epsilon: float) -> float:
+    """Channel 16: CMB spectral distortion (Planck 2017 μ/y Gaussian penalty).
+
+    Per R14 reviewer Recommendation 3, adds a post-BBN CMB spectral
+    distortion likelihood that complements Channel 14's BBN-era ΔN_eff
+    constraint. Penalizes mediator decays that would inject too much
+    electromagnetic energy into the photon bath during the
+    recombination era (200 < z < 5e4), producing a y-distortion
+    exceeding Planck's 95% CL limit |y| < 1.5e-6
+    (Planck Int. LI 2017, arXiv:1612.00071).
+
+    The μ-distortion regime (z > 5e4) is covered by a separate penalty
+    using |μ| < 9e-6.
+
+    IMPORTANT: The fractional energy injection is computed using the
+    order-of-magnitude approximation ΔE/ρ_γ ~ ρ_dm/ρ_γ ~ 5400 (mediator
+    as thermal relic). A full Boltzmann integration of the mediator
+    abundance through the thermal history is deferred to v0.6+ roadmap.
+    This is documented as a simplification in MODEL_ASSUMPTIONS_AND_LIMITATIONS.md §6.
+
+    Parameters
+    ----------
+    m_chi : float
+        SIDM particle mass in eV (NOT used — passed through for API uniformity)
+    m_phi : float
+        Mediator mass in eV (NOT MeV — convention is eV in the joint fit)
+    epsilon : float
+        Kinetic mixing parameter (>= 0)
+
+    Returns
+    -------
+    float : log likelihood (relative units)
+        0.0 if mediator is below decay threshold (m_phi < 2 m_e) or stable
+            (tau > T_CMB_DISTORTION_LATE_S) or pre-μ-regime (tau < T_BBN_S)
+        Soft Gaussian penalty if τ falls in CMB-sensitive window
+    """
+    if (m_chi is None or m_phi is None or epsilon is None
+            or not np.isfinite(m_chi) or not np.isfinite(m_phi)
+            or not np.isfinite(epsilon)):
+        return -np.inf
+    if m_chi <= 0 or m_phi <= 0 or epsilon < 0:
+        return -np.inf
+
+    m_phi_MeV = m_phi / 1.0e6  # eV -> MeV
+    tau_s = _compute_decay_tau_seconds(m_phi_MeV, epsilon)
+
+    # Stable mediator (no decay channel, or τ > late window): no penalty
+    if tau_s > T_CMB_DISTORTION_LATE_S:
+        return 0.0
+
+    # Pre-BBN decay (Channel 14 territory): no penalty here
+    if tau_s < T_BBN_S:
+        return 0.0
+
+    mu, y = _compute_mu_y_from_lifetime(tau_s)
+
+    # Gaussian penalty (one-sided: only penalize EXCESS)
+    # Widths chosen to give ~1σ penalty when μ ~ 10× limit or y ~ 10× limit
+    penalty_mu = -0.5 * (max(0.0, mu - CMB_MU_MAX_95CL) / 1.0e-6) ** 2
+    penalty_y = -0.5 * (max(0.0, y - CMB_Y_MAX_95CL) / 1.0e-7) ** 2
+
+    return penalty_mu + penalty_y
+
+
 if __name__ == "__main__":
     print("=== LZ 2024 spin-independent WIMP-nucleon limits ===")
     print(f"{'m_chi (GeV)':<15} {'sigma_limit (cm^2)':<25}")

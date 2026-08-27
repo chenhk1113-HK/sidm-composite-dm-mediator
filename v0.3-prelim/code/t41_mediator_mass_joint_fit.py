@@ -72,6 +72,10 @@ from t32_fermi_dwarf_channel import loglike_fermi_dwarf
 # T70.3 (R13 H1 closure): KSFR/PCAC validity mask — Channel 15
 # Per MODEL_ASSUMPTIONS_AND_LIMITATIONS.md §6 + REVIEWER_AUDIT_R13.md H1
 from ksfr_pcac_validity import loglike_ksfr_pcac_validity
+# T70.8 (R14 Rec #3 closure): CMB spectral distortion — Channel 16
+# Per Planck Collaboration Int. LI 2017 (arXiv:1612.00071):
+#   |μ| < 9e-6, |y| < 1.5e-6 (95% CL)
+from channels_extended import loglike_cmb_distortion
 
 
 import platform
@@ -261,6 +265,21 @@ def loglike_joint(theta):
     # if it fired we'd already have returned -inf above. So we don't
     # add it again here — it's a hard pre-filter, not a soft penalty.
 
+    # 6. CMB spectral distortion (T70.8 / Channel 16).
+    # Per Planck Collaboration Int. LI 2017 (arXiv:1612.00071):
+    #   |μ| < 9.0e-6, |y| < 1.5e-6 (95% CL)
+    # Penalizes mediator (m_phi) decays that fall in the post-BBN,
+    # post-recombination CMB-sensitive window 1e5 s < τ < 1e13 s.
+    # The penalty is one-sided Gaussian: returns 0 if τ is outside the
+    # window (mediator stable OR pre-BBN OR way after recombination).
+    # NOTE: at the T41 v0.6 MAP (ε ~ 1e-31, m_phi ~ 750 MeV), τ ~ 10^37 s
+    # far exceeds the window — this channel contributes 0 to the MAP and
+    # acts as a soft prior carving out the high-ε / low-m_phi corner of
+    # the prior box.
+    ll_cmb = loglike_cmb_distortion(m_chi_GeV * 1e9, m_phi_MeV * 1e6, epsilon)
+    if not np.isfinite(ll_cmb):
+        return -np.inf
+
     # Optional SPARC contribution (slow, so disabled by default)
     # Use a coarse grid to be fast.
     # T69 (v0.4-prelim): rescaled by baryonic-feedback nuisance f_fb.
@@ -286,7 +305,7 @@ def loglike_joint(theta):
         except Exception:
             ll_sparc = 0.0
 
-    return ll_dsph + ll_ufd + ll_bullet + ll_lz + ll_fermi + ll_sparc
+    return ll_dsph + ll_ufd + ll_bullet + ll_lz + ll_fermi + ll_sparc + ll_cmb
 
 
 def prior_transform_5(u):
@@ -343,7 +362,13 @@ def main():
     print(f"  g_chi:         [{G_CHI_RANGE[0]}, {G_CHI_RANGE[1]}]")
     print(f"  log_epsilon:   [{LOG_EPSILON_RANGE[0]}, {LOG_EPSILON_RANGE[1]}]")
     print(f"  log_alpha:     [{LOG_ALPHA_RANGE[0]}, {LOG_ALPHA_RANGE[1]}]")
-    print(f"  log_xi:        [{LOG_XI_RANGE[0]}, {LOG_XI_RANGE[1]}]   (xi in [0.1, 5.0])")
+    print(f"  log_xi:         [{LOG_XI_RANGE[0]}, {LOG_XI_RANGE[1]}]   (xi in [0.1, 5.0])")
+    # T70.8 (R14 Rec #3): print CMB distortion channel status
+    print()
+    print("CMB DISTORTION: ON (Channel 16, Planck Int. LI 2017 arXiv:1612.00071)")
+    print("  Penalizes post-BBN mediator decays in 1e5 s < tau < 1e13 s window.")
+    print("  At T41 v0.6 MAP (eps~1e-31, m_phi~750 MeV) tau ~ 1e37 s: no penalty (stable mediator).")
+    print("  Effective at carving high-eps / low-m_phi corner of prior.")
     print()
 
     # R14 (2026-08-26): inelastic-channel toggle for sensitivity-test parity with

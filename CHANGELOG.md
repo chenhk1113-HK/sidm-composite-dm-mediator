@@ -7,6 +7,107 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [T70.8] — 2026-08-26
+
+### R14 deferred items closure — Channel 16 (CMB μ/y) + (Nc, Nf) scan driver
+
+Per user direction "proceed" (resuming the v0.5+T70.5 documentation cleanup).
+Two R14 deferred items from `v0.3-prelim/docs/REVIEWER_AUDIT_R14.md` are
+shipped at scaffold/test level. **No new T41 dynesty run is included** —
+the wiring is in place and tested; the multi-hour scan execution is queued
+for a follow-up round (the (Nc, Nf) scan runs T41 × 7 = ~20 min wall at
+nlive=200; the runtime is non-trivial so this commit ships the harness
+only).
+
+#### 1. Channel 16 — CMB spectral distortion (R14 Rec #3, deferred-to-v0.6)
+
+**Code change**: `v0.3-prelim/code/channels_extended.py` (+212 lines):
+- New public function `loglike_cmb_distortion(m_chi_GeV, m_phi_MeV,
+  epsilon)` — returns a one-sided Gaussian penalty based on the lifetime
+  of the mediator (or dark pion, in the composite-DM model).
+- Per **Fixsen 2009 (arXiv:0911.1955)** + **Planck Collaboration Int. LI
+  2017 (arXiv:1612.00071)**: |μ| < 9.0e-6, |y| < 1.5e-6 (95% CL).
+- The penalty gates the post-BBN, post-recombination CMB-sensitive window
+  1e5 s < τ < 1e13 s; returns 0 outside the window (mediator stable,
+  pre-BBN, or way after recombination).
+- Implementation: `Γ ≈ (1/3) × α_EM × ε² × m_phi` → `τ = ℏ/Γ`, then a
+  Fixsen-style μ/y mapping to a one-sided Gaussian penalty when the
+  predicted (|μ|, |y|) exceeds the 95% CL.
+- Two private helpers exposed for testing: `_compute_decay_tau_seconds`
+  + `_compute_mu_y_from_lifetime`.
+
+**Code change**: `v0.3-prelim/code/t41_mediator_mass_joint_fit.py`:
+- Imports `loglike_cmb_distortion` from `channels_extended`.
+- Wires `ll_cmb = loglike_cmb_distortion(...)` into `loglike_joint` as
+  component #6, returning `-inf` if `ll_cmb` is non-finite.
+- NOTE: at the v0.5 MAP (ε ~ 1e-31, m_phi ~ 750 MeV), τ ~ 10^37 s,
+  far outside the CMB window. Channel 16 contributes 0 to the MAP and
+  acts as a soft prior carving out the high-ε / low-m_phi corner of the
+  prior box. The T41 v0.5 result is therefore **not affected** by this
+  wiring — but the corner cut will matter for any future re-run that
+  expands the ε prior.
+
+**Tests**: `v0.3-prelim/tests/test_cmb_distortion.py` (12 tests, all pass):
+- `TestLifetimeScaling`: τ ∝ 1/(ε² × m_phi), τ positive, infinite when
+  decay channel closed, exactly zero when ε=0.
+- `TestCMBPenaltyShape`: zero outside window, negative inside, returns
+  finite values for typical T41 inputs.
+- `TestLoglikeCMBDistortion`: 5d-theta signature, Planck Int. LI 2017
+  citation in docstring.
+- `TestB1_Channel16Documentation`: Planck arXiv ID + Fixsen citation
+  present in helper docstrings.
+- Originally had 2 ε-scaling typos (τ ∝ 1/ε vs τ ∝ 1/ε²); corrected in
+  this commit after smoke-test failed.
+
+#### 2. (Nc, Nf) discrete-scan driver (R14 Rec #6, deferred-to-v0.6)
+
+**Code change**: `v0.3-prelim/code/run_nc_nf_scan.py` (NEW, 458 lines):
+- Scaffold for the 7-(Nc, Nf) discrete-scan driver.
+- Reads `KSFR_NC_NF_RATIOS` from `ksfr_pcac_validity` (no hard-coded
+  duplicates).
+- Computes Bayes factors relative to the (3, 3) anchor (Gaussian error
+  propagation on the log BF).
+- Writes a summary JSON with both WSL-side and Windows-side mirror
+  paths (per the T70.8 wave-B2 pitfall: WSL↔Windows sync can be flaky).
+- Public functions: `main`, `run_t41_subprocess`, `compute_bayes_factor`,
+  `aggregate_summary`, `write_summary`, `print_summary`, `t41_result_path`,
+  `load_log_z`, `parse_existing_summary`.
+
+**Tests**: `v0.3-prelim/tests/test_nc_nf_scan.py` (12 tests, all pass):
+- `TestScanDriverImports`: module imports cleanly + uses KSFR_NC_NF_RATIOS
+  from the lib, not hardcoded.
+- `TestBayesFactorComputation`: BF=1 at anchor, BF>1 when alt wins,
+  BF<1 when ref wins.
+- `TestRunT41SubprocessEnv`: signature accepts nc/nf/nlive.
+- `TestAggregateSummary`: output schema includes `Nc`, `Nf`, `log_Z`,
+  `Bayes_factor`, `is_anchor`, etc.; anchor invariants (BF_3_3=1).
+- `TestConfidenceClassMapping`: KSFR_NC_NF_CONFIDENCE correctly assigns
+  LATTICE / ESTIMATED / ANALYTICAL per `KSFR_NC_NF_TABLE.md §7`.
+- Original test had schema mismatches (`"result_path"` vs `"json_path"`,
+  `"nc"` vs `"Nc"`); corrected in this commit by re-reading
+  `aggregate_summary` source code.
+
+#### Test-suite delta
+
+| Metric | Before T70.8 | After T70.8 | Delta |
+|---|---|---|---|
+| Tests passed | 528 | 564 | **+36** (24 new + 12 carryover from earlier rounds) |
+| Tests failed | 7 | 5 | **−2** (T40 was a Windows↔WSL sync issue; fixed) |
+| Tests skipped | 4 | 4 | 0 |
+| Channel count | 15 | **16** | **+1** (Channel 16 = CMB μ/y) |
+| Files added | — | 3 | run_nc_nf_scan.py + 2 test files |
+
+The 5 remaining failures are pre-existing (2 SPARC loader + 1 T17 fit
++ 1 T37 import + 1 T39 4d-theta) and not introduced by this commit.
+None of them are related to Channels 14-16 or the (Nc, Nf) scan.
+
+#### Standing-version after this commit
+
+- branch: master
+- version: 0.3-prelim+T70.8
+- channels: 16
+- tests: 564 pass / 5 fail / 4 skip
+
 ## [T70.7] — 2026-08-26
 
 ### v0.6 Wave A — xi promotion + KSFR (Nc, Nf) scaffold

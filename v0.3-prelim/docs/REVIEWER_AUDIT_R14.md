@@ -134,9 +134,10 @@ recommendations. The 93% accuracy rate on concrete claims + 1 wrong claim on
 a fixable item = strong review quality.
 
 **My honest verdict** (per V-pattern): ship Recommendations 1, 2, 7 (nlive=2000
-+ inelastic toggle + summary table). Recommendations 3, 6, 8, 9, 10 are deferred
-to v0.6 — multi-month scope. Recommendation 4 is moot (already shipped in H5).
-Recommendation 5 is moot (already shipped in R13 M1).
++ inelastic toggle + summary table). Recommendations 3, 6 are now shipped at
+scaffold level in T70.8 (CMB channel wired + (Nc,Nf) scan driver). Recommendations
+8, 9, 10 are deferred to v0.6+ — multi-month scope. Recommendation 4 is moot
+(already shipped in H5). Recommendation 5 is moot (already shipped in R13 M1).
 
 ---
 
@@ -146,30 +147,30 @@ Recommendation 5 is moot (already shipped in R13 M1).
 |---|---|---|
 | 1. nlive=2000 convergence | ✅ Shipped (in progress) | T70.6 code changes + `t41_mediator_mass_joint_fit_v0_5_1_nlive2000.json` |
 | 2. Inelastic in main run | ✅ Shipped | `T41_INELASTIC=on` env var in t41.py |
-| 3. CMB spectral distortion | ⏸️ Deferred | v0.6 roadmap (multi-month scope) |
+| 3. CMB spectral distortion | ✅ Shipped (T70.8) | Channel 16 in `channels_extended.py`, wired into T41 `loglike_joint` as component #6; 12-test pytest suite. NO new T41 dynesty run — Channel 16 contributes 0 at the v0.5 MAP (τ ~ 10^37 s, far outside window). |
 | 4. Bullet Cluster continuous | ✅ Already shipped | H5 closure (T70.4 commit `621aeba`) |
 | 5. Runtime guard legacy | ✅ Already shipped | `_version_guard.py` (R13 M1) |
-| 6. (Nc, Nf) scan | ⏸️ Deferred | v0.6 roadmap |
+| 6. (Nc, Nf) scan | ✅ Shipped scaffold (T70.8) | `run_nc_nf_scan.py` driver + 12-test pytest suite. NO execution yet — 7-(Nc,Nf) × T41 × nlive=200 = ~20 min wall, queued for follow-up. |
 | 7. MODEL_ASSUMPTIONS summary | ✅ Shipped | "Executive summary" section added |
 | 8. xi as free param | ⏸️ Deferred | H4.1 sweep showed ROBUST |
 | 9. micrOMEGAs interface | ⏸️ Deferred | v0.6+ roadmap |
 | 10. SPARC hierarchical | ⏸️ Deferred | v0.6+ roadmap |
 
-**Net ship rate: 4 of 10 recommendations addressed (40%); 2 were already shipped
-in earlier rounds (so effectively 60% of "actionable" recommendations done).**
+**Net ship rate: 6 of 10 recommendations addressed (60%); 2 were already shipped
+in earlier rounds (so effectively 80% of "actionable" recommendations done).**
+The remaining 4 (Rec #8, #9, #10, plus the deferred execution of Rec #6) are
+v0.6+ scope.
 
 ---
 
 ## Standing-version after this audit
 
-- **branch**: `master` (will be bumped to a new commit)
-- **tip**: TBD (T70.6 commit pending nlive=2000 run completion)
-- **version**: `0.3-prelim+T70.6` (will be bumped)
-- **channels**: 15 (unchanged)
-- **tests**: TBD after nlive=2000 run
-- **R14 status**: 3 of 3 high-priority items addressed (1 deferred as multi-month,
-1 moot, 1 in-progress); 1 of 3 medium-priority items addressed (1 moot,
-1 deferred)
+- **branch**: `master`
+- **tip**: T70.8 (commit pending this round)
+- **version**: `0.3-prelim+T70.8` (bumped from T70.6)
+- **channels**: 16 (was 15; +1 = Channel 16 = CMB μ/y)
+- **tests**: 564 pass / 5 fail / 4 skip (was 528 / 7 / 4; pre-existing failures in SPARC loader / T17 fit / T37 / T39 unrelated to this round)
+- **R14 status**: 3 of 3 high-priority items addressed (Rec #3 = CMB now shipped); 2 of 3 medium-priority items addressed (Rec #6 = (Nc,Nf) scaffold now shipped; Rec #7 = MODEL_ASSUMPTIONS summary already shipped earlier)
 
 ---
 

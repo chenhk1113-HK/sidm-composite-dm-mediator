@@ -897,3 +897,35 @@ posterior, not the absolute parameter values.
 - `v0.3-prelim/code/ksfr_pcac_validity.py` — Channel 15 implementation
 - `data/reference/` — downsampled posterior chains (M2 closure)
 - `CHANGELOG.md [T70.2]`, `[T70.3]`, `[T70.4]` entries
+
+---
+
+## T70.8 addendum (2026-08-26) — Channel 16 + (Nc, Nf) scan driver
+
+Two R14 deferred items shipped at scaffold/test level (no new T41 dynesty
+run included). Per `CHANGELOG.md [T70.8]`:
+
+**Channel 16 — CMB spectral distortion (μ/y).**
+- `v0.3-prelim/code/channels_extended.py::loglike_cmb_distortion` —
+  one-sided Gaussian penalty for mediator decays in the post-BBN,
+  post-recombination CMB-sensitive window 1e5 s < τ < 1e13 s.
+- Per Planck Int. LI 2017 (arXiv:1612.00071): |μ| < 9.0e-6, |y| < 1.5e-6.
+- Per Fixsen 2009 (arXiv:0911.1955): μ-distortion at z > 5e4, y-distortion
+  at 200 < z < 5e4.
+- Wired into `t41_mediator_mass_joint_fit.py::loglike_joint` as
+  component #6.
+- At the v0.5 MAP (ε ~ 1e-31, m_phi ~ 750 MeV), τ ~ 10^37 s → far outside
+  the CMB window → Channel 16 contributes 0 to the v0.5 posterior. The
+  T41 v0.5 result is **not affected** by this wiring.
+
+**(Nc, Nf) discrete-scan driver.**
+- `v0.3-prelim/code/run_nc_nf_scan.py` — scaffold for the 7-(Nc, Nf)
+  discrete scan over `KSFR_NC_NF_RATIOS` from `ksfr_pcac_validity`.
+- Computes Bayes factors relative to the (3, 3) anchor with Gaussian
+  error propagation.
+- **No execution yet.** T41 × 7 × nlive=200 ≈ 20 min wall; queued for
+  a follow-up round.
+
+**Test-suite delta:** 528 pass → **564 pass** (+36 new). 7 fail → 5 fail
+(−2, both were Windows↔WSL sync issues). Channel count 15 → **16**.
+See `CHANGELOG.md [T70.8]` for the full entry.

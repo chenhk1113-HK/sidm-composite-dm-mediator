@@ -5,7 +5,7 @@
 **Joint-fit framework for self-interacting dark matter (SIDM), grounded in the published multi-channel data (dSph, UFD, Bullet, SPARC, LZ, Fermi).**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.3--prelim%2BT70.5-blue)](VERSION)
+[![Version](https://img.shields.io/badge/version-0.3--prelim%2BT70.8-blue)](VERSION)
 [![arXiv:2506.22997](https://img.shields.io/badge/cross--validated-arXiv%3A2506.22997-b31b1b)](https://arxiv.org/abs/2506.22997)
 
 > **Heads-up (2026-08-14):** Project renamed from `dm-sidm-pipeline`. All
@@ -75,6 +75,18 @@
 > Δ = 0.378. All approximations tested are justified by data.
 > See `v0.3-prelim/docs/H3_H4_SENSITIVITY_REPORT.md` for full results.
 > Total wall: ~26 min on WSL wimpy venv.
+>
+> **T70.8 R14 deferred-items closure (2026-08-26):** Per R14 reviewer
+> recommendations deferred to v0.6 (rec #3 + #6), two items shipped at
+> scaffold/test level. **Channel 16** = CMB spectral distortion (μ/y
+> Gaussian penalty per Planck Int. LI 2017 + Fixsen 2009), wired into
+> T41 `loglike_joint` as component #6. **No new T41 dynesty run** is
+> included — Channel 16 contributes 0 at the v0.5 MAP (ε ~ 1e-31, τ ~
+> 10^37 s, far outside the CMB window). **(Nc, Nf) scan driver**
+> (`run_nc_nf_scan.py`) shipped — scaffold + 12 tests, no execution yet.
+> Test suite: **564 pass / 5 fail / 4 skip** (was 528 / 7 / 4).
+> Channel count **15 → 16**. See `CHANGELOG.md [T70.8]` for the full
+> entry.
 >
 > **M2 shipped (2026-08-26, commit `cfe2869`):** Per R13 reviewer M2
 > suggestion — `data/reference/` directory with downsampled posterior
