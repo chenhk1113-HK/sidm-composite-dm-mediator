@@ -162,3 +162,26 @@ class TestConfidenceClassMapping:
                 assert conf.upper() == "ANALYTICAL", (
                     f"expected ANALYTICAL for {nc_nf}, got {conf}"
                 )
+
+    def test_4_combos_admitted_by_extended_ksfr_mask(self):
+        """T71.0 (2026-08-26): KSFR_M_RHO_OVER_F_PI_MAX extended from
+        9.0 to 9.5 to admit (4, *) ANALYTICAL combos. Both (4, 3) at
+        ratio=9.5 (exactly at MAX) and (4, 4) at ratio=9.2 should
+        now pass the validity box at f_pi=0.1, g_chi=0.5.
+        """
+        from ksfr_pcac_validity import (
+            KSFR_M_RHO_OVER_F_PI_MAX,
+            is_in_validity_box,
+            KSFR_NC_NF_RATIOS,
+        )
+        assert KSFR_M_RHO_OVER_F_PI_MAX >= 9.5, (
+            f"KSFR mask MAX must be >= 9.5 to admit (4, 3); "
+            f"got {KSFR_M_RHO_OVER_F_PI_MAX}"
+        )
+        for nc_nf in [(4, 3), (4, 4)]:
+            ratio = KSFR_NC_NF_RATIOS[nc_nf]
+            admitted = is_in_validity_box(0.1, 0.5, ratio)
+            assert admitted is True, (
+                f"({nc_nf[0]}, {nc_nf[1]}) ratio={ratio} must be admitted "
+                f"by the extended mask (MAX={KSFR_M_RHO_OVER_F_PI_MAX})"
+            )

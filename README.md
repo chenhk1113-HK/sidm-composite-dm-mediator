@@ -5,7 +5,7 @@
 **Joint-fit framework for self-interacting dark matter (SIDM), grounded in the published multi-channel data (dSph, UFD, Bullet, SPARC, LZ, Fermi).**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.3--prelim%2BT70.9-blue)](VERSION)
+[![Version](https://img.shields.io/badge/version-0.3--prelim%2BT71.0-blue)](VERSION)
 [![arXiv:2506.22997](https://img.shields.io/badge/cross--validated-arXiv%3A2506.22997-b31b1b)](https://arxiv.org/abs/2506.22997)
 
 > **Heads-up (2026-08-14):** Project renamed from `dm-sidm-pipeline`. All
@@ -99,6 +99,18 @@
 > still adequate.** Test suite: **573 pass / 0 fail / 4 skip** (was
 > 564/5/4). Summary JSON: `v0.3-prelim/data/results/nc_nf_scan_v0_6_summary.json`.
 > See `CHANGELOG.md [T70.9]` + `LAYMAN_SUMMARY_R14.md`.
+>
+> **T71.0 KSFR mask extension + nlive=1000 scan + v0.6 roadmap (2026-08-26):**
+> Per the T70.9 (4, *) failure root cause analysis, the project's KSFR
+> mask `KSFR_M_RHO_OVER_F_PI_MAX = 9.0` was excluding the (4, *)
+> ANALYTICAL ratios (4,3)=9.5 and (4,4)=9.2. Extended to **9.5** with
+> explicit citation of the ±0.5 uncertainty bars. Re-ran the scan at
+> **nlive=1000** (vs 200) to tighten BF errors by ~2.2×. Wrote
+> `v0.3-prelim/docs/V0_6_ROADMAP.md` documenting the 2 remaining R14
+> deferred items (micrOMEGAs interface = multi-month; hierarchical
+> SPARC = multi-week). Test suite: **574 pass / 0 fail / 4 skip**
+> (+1 from new test_4_combos_admitted_by_extended_ksfr_mask). See
+> `CHANGELOG.md [T71.0]`.
 >
 > **M2 shipped (2026-08-26, commit `cfe2869`):** Per R13 reviewer M2
 > suggestion — `data/reference/` directory with downsampled posterior

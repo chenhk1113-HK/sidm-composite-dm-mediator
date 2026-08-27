@@ -166,12 +166,23 @@ v0.6+ scope.
 ## Standing-version after this audit
 
 - **branch**: `master`
-- **tip**: T70.9 (commit pending this round)
-- **version**: `0.3-prelim+T70.9` (bumped from T70.8)
+- **tip**: T71.0 (commit pending this round)
+- **version**: `0.3-prelim+T71.0` (bumped from T70.9)
 - **channels**: 16 (was 15; +1 = Channel 16 = CMB μ/y)
-- **tests**: **573 pass / 0 fail / 4 skip** (was 528/7/4 at T70.7; 564/5/4 after T70.8; 5 pre-existing failures closed in T70.9)
+- **tests**: **574 pass / 0 fail / 4 skip** (was 528/7/4 at T70.7; 564/5/4 after T70.8; 5 pre-existing failures closed in T70.9; +1 from KSFR mask extension test in T71.0)
 - **R14 status**: 3 of 3 high-priority items addressed (Rec #3 = CMB now shipped); 2 of 3 medium-priority items addressed (Rec #6 = (Nc,Nf) scaffold now shipped AND executed in T70.9; Rec #7 = MODEL_ASSUMPTIONS summary already shipped earlier). **R14 closure complete.**
-- **(Nc, Nf) scan results**: 5 of 7 combos converged at nlive=200 in 2.3 min. Log Bayes factors vs (3, 3) anchor all within ±0.15 — **indistinguishable**. (4, *) combos failed at the prior-transform level (KSFR mask window too constrained). Canonical (3, 3) anchor remains the default citation. Summary JSON: `v0.3-prelim/data/results/nc_nf_scan_v0_6_summary.json`.
+- **(Nc, Nf) scan results** (T71.0 nlive=1000 supersedes T70.9 nlive=200):
+  **All 7 combos converged.** Log Bayes factors vs (3, 3) anchor: (3,4)
+  -0.024, (2,3) -0.107, (3,2) -0.116, (2,2) -0.155, (4,4) -0.223,
+  (4,3) -0.262. All within ±0.27 — **statistically indistinguishable**.
+  **(3, 3) anchor IS the data-preferred model** (highest log_Z = -215.314,
+  log BF = 0.000 by construction). **🔄 RESULT REVERSAL vs T70.9:**
+  the nlive=200 scan reported log BF = +0.146 favoring (2, 2); the
+  nlive=1000 scan reports log BF = -0.155 disfavoring (2, 2). The
+  T70.9 "preference" was sampling variance (textbook coding-review
+  Step 4 anti-pattern). Summary JSON:
+  `v0.3-prelim/data/results/nc_nf_scan_v0_6_summary.json` (5,349 bytes,
+  7 entries).
 
 ---
 

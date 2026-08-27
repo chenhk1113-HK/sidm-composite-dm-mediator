@@ -1,0 +1,128 @@
+{
+  "test": "T41_mediator_mass_joint_fit",
+  "direction": "User ship direction #1: add m_phi to posterior; v0.6: add xi as free (R14 Rec #8)",
+  "ndim": 6,
+  "parameters": [
+    "log_m_phi_MeV",
+    "log_m_chi_GeV",
+    "g_chi",
+    "log_epsilon",
+    "log_alpha",
+    "log_xi"
+  ],
+  "priors": {
+    "log_m_phi_MeV": [
+      -1.0,
+      4.0
+    ],
+    "log_m_chi_GeV": [
+      0.5,
+      3.0
+    ],
+    "g_chi": [
+      0.01,
+      2.0
+    ],
+    "log_epsilon": [
+      -60.0,
+      -1.0
+    ],
+    "log_alpha": [
+      -30.0,
+      -1.0
+    ],
+    "log_xi": [
+      -1.0,
+      0.7
+    ]
+  },
+  "log_Z": -215.5759748187323,
+  "log_Z_err": 0.11839784772549855,
+  "MAP": [
+    2.72964394868059,
+    2.403822789900226,
+    1.248310724569601,
+    -17.690885691181265,
+    -9.082672090136356,
+    -0.7338707962728643
+  ],
+  "MAP_physical": {
+    "m_phi_MeV": 536.5916974787722,
+    "m_chi_GeV": 253.40944042473654,
+    "g_chi": 1.248310724569601,
+    "log_epsilon": -17.690885691181265,
+    "log_alpha": -9.082672090136356,
+    "log_xi": -0.7338707962728643,
+    "xi": 0.1845564397676763,
+    "sigma_m_0_derived": 0.06371490158389669,
+    "a_derived": 0.03284696802387804
+  },
+  "median": {
+    "log_m_phi_MeV": 2.872454127115146,
+    "log_m_chi_GeV": 2.7650743614640727,
+    "g_chi": 1.439342972173191,
+    "log_epsilon": -36.340033638104856,
+    "log_alpha": -15.817279068793576,
+    "log_xi": -0.7234335249800408
+  },
+  "quantiles_16_50_84": {
+    "log_m_phi_MeV": [
+      2.747557222621105,
+      2.872453971554007,
+      2.9888262079753876
+    ],
+    "log_m_chi_GeV": [
+      2.568358972010596,
+      2.7650545871939545,
+      2.9174279410536954
+    ],
+    "g_chi": [
+      1.1350348029677122,
+      1.4393129620166407,
+      1.8013463706507014
+    ],
+    "log_epsilon": [
+      -52.762671173058315,
+      -36.34066785150536,
+      -21.060953620195573
+    ],
+    "log_alpha": [
+      -25.380416750519377,
+      -15.81835114473468,
+      -5.998078784861139
+    ],
+    "log_xi": [
+      -0.9234821420837981,
+      -0.7234655513886176,
+      -0.42389528938086757
+    ]
+  },
+  "median_physical": {
+    "m_phi_MeV": 745.511122346393,
+    "m_chi_GeV": 582.2028961120124,
+    "g_chi": 1.439342972173191,
+    "epsilon": 4.570527874035827e-37,
+    "alpha": 1.5230737431011652e-16,
+    "xi": 0.18904555704713083
+  },
+  "yukawa_tension": {
+    "T39_sigma_m_0": 1.57,
+    "T39_a": 0.94,
+    "Yukawa_a_at_MAP": 0.03284696802387804,
+    "a_difference": 0.9071530319761218,
+    "significant": false
+  },
+  "wall_seconds": 142.4997923374176,
+  "verdict": "TIER-3 EXTENSION: m_phi + xi parameterized posterior (v0.6: xi promoted from fixed to free)",
+  "interpretation": "log Z = -215.576, posterior medians: m_phi = 745.51 MeV, m_chi = 582.20 GeV, g_chi = 1.4393, eps = 4.57e-37, alpha = 1.52e-16, xi = 0.189. Derived sigma/m_0 = 0.064 cm^2/g, a = +0.033. Yukawa velocity index = +0.033; T39 data-preferred = +0.94. |Tension| = 0.91 (threshold 1.0). R12 P0-B (2026-08-17): the pre-fix '1.3 sigma tension' claim was a sign-flip artifact in derived_a; this re-run uses the corrected sign. v0.6 (R14 Rec #8, 2026-08-26): log_xi promoted from fixed-1 to free with prior log_xi in [-1.0, 0.7] (xi in [0.1, 5.0], matching H4.1 sweep range). v0.5 baseline log Z = -254.24 at nlive=500; v0.6 should be within ~0.5 of that since xi only enters via the Fermi-dwarf sigma_v scaling (sigma_v * xi^2), a subdominant channel.",
+  "t41_version": {
+    "suffix": "_v0_6_nc4_nf3",
+    "ksfr_mask_enabled": true,
+    "nlive": 1000,
+    "ndim": 6,
+    "dlogz": 0.1,
+    "inelastic_on": false,
+    "r_inelastic": 0.3,
+    "xi_promotion": "v0.6: log_xi now a free parameter (R14 Rec #8). Prior log_xi in [-1.0, 0.7]."
+  }
+}

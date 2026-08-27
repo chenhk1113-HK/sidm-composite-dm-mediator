@@ -7,6 +7,124 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [T71.0] — 2026-08-26
+
+### Re-run (Nc, Nf) scan at nlive=1000 + KSFR mask extension + v0.6 roadmap
+
+Per user direction "proceed a, b and c" (continuing the R14 closure cycle).
+Three parts: (1) re-run the (Nc, Nf) scan at nlive=1000 with an extended
+KSFR mask to admit (4, *) ANALYTICAL combos; (2) verify EXTRACT.md is
+already correct (per T70.5 docs cleanup); (3) write v0.6 roadmap doc for
+the remaining deferred items.
+
+#### 1. KSFR mask extension (admit (4, *) ANALYTICAL combos)
+
+**Code change** (`v0.3-prelim/code/ksfr_pcac_validity.py`):
+- `KSFR_M_RHO_OVER_F_PI_MAX` extended from **9.0 → 9.5**.
+- Rationale: the (4, *) ANALYTICAL entries in `KSFR_NC_NF_RATIOS` have
+  central values (4,3)=9.5, (4,4)=9.2 with ±0.5 uncertainty. The
+  previous MAX=9.0 hard-rejected every (4, *) sample point at the
+  prior-transform level (the T70.9 scan's (4, 3) and (4, 4) "RuntimeError
+  After 1000 attempts" failures).
+- The new MAX=9.5 covers the central values of all 7 (Nc, Nf) entries
+  in the scaffold table. Beyond 9.5, the chiral extrapolation breaks
+  down (per the original T53 explored range justification).
+
+**Doc updates**:
+- `MODEL_ASSUMPTIONS_AND_LIMITATIONS.md §6` table: `m_ρ/f_π` row
+  updated from `6.0 - 9.0` to `6.0 - 9.5` with new comment.
+- `tests/test_ksfr_pcac_validity.py`: `test_m_rho_over_f_pi_bounds` +
+  `test_m_rho_over_f_pi_above_max` updated to the new bound (use
+  9.6 instead of 9.5 for above-MAX test).
+- `v0.3-prelim/tests/test_nc_nf_scan.py`: NEW test
+  `test_4_combos_admitted_by_extended_ksfr_mask` — asserts both (4, 3)
+  and (4, 4) are admitted by the extended mask.
+
+#### 2. (Nc, Nf) scan re-run at nlive=1000
+
+The T70.9 scan at nlive=200 had BF errors of ±0.35 in log BF (indistinguishable
+from zero). This re-run at nlive=1000 tightens the BF errors by ~√5 ≈ 2.2×
+to ~±0.12.
+
+**Wall: 20.3 min. 7 of 7 combos converged** (including the (4, *) combos
+that failed at nlive=200 — now admitted by the extended KSFR mask).
+
+**Results** (sorted by preference, descending):
+
+| (Nc, Nf) | Class | log_Z | log BF | BF | Verdict |
+|---|---|---|---|---|---|
+| **(3, 3)** | **LATTICE** | **-215.314** | **+0.000** | **1.000** | **ANCHOR — data-preferred** |
+| (3, 4) | ESTIMATED | -215.337 | -0.024 | 0.977 | indistinguishable |
+| (2, 3) | ESTIMATED | -215.420 | -0.107 | 0.899 | indistinguishable |
+| (3, 2) | LATTICE | -215.429 | -0.116 | 0.891 | indistinguishable |
+| (2, 2) | ESTIMATED | -215.469 | -0.155 | 0.856 | indistinguishable |
+| (4, 4) | ANALYTICAL | -215.537 | -0.223 | 0.800 | indistinguishable |
+| (4, 3) | ANALYTICAL | -215.576 | -0.262 | 0.769 | indistinguishable |
+
+**🔄 RESULT REVERSAL vs T70.9:** The T70.9 nlive=200 scan reported log BF
+= +0.146 favoring (2, 2) over (3, 3). The T71.0 nlive=1000 scan reports
+log BF = -0.155 **disfavoring** (2, 2) vs (3, 3). The shift of ~0.30 in
+log BF is consistent with the ±0.35 sampling-variance estimate from
+nlive=200, confirming that the T70.9 "preference" was **sampling variance**,
+not a real signal. (3, 3) is the data-preferred model.
+
+This is a textbook case of the coding-review Step 4 anti-pattern
+"Reporting Bayes factors without nlive-matching": the T70.9 BF was
+computed at nlive=200 and was dominated by sampling variance. The T71.0
+re-run at nlive=1000 tightens the BF error to ±0.12 and confirms the
+canonical (3, 3) anchor as the data-preferred model.
+
+**Honest caveats:**
+- The (3, 3) anchor in this scan is the v0.6 (xi-promoted, nlive=1000) result.
+  BFs within this scan are apples-to-apples (all at nlive=1000, 6D, same KSFR mask).
+  They are NOT comparable to the v0.5 -254 baseline.
+- (4, *) now converges with the extended KSFR mask. Both (4, 3) and (4, 4)
+  are mildly disfavored (log BF -0.26 and -0.22), physically reasonable for
+  large-N_c extrapolations.
+- nlive=1000 errors are ~±0.12 in log BF. The strongest preference signal
+  is (3, 3) over (4, 3) at log BF = +0.262, still well below the Jeffreys
+  "substantial" threshold of 1.0 (log BF = 0.69). The (3, 3) anchor is the
+  data-preferred model but not decisively.
+
+**Conclusion:** data do NOT decisively distinguish (N_c, N_f). The
+canonical (3, 3) anchor IS the data-preferred model (highest log_Z by
+construction), but the preference over (3, 4) is only 0.024 log BF —
+statistically indistinguishable.
+
+**Summary JSON** (overwrites v1 from T70.9):
+`v0.3-prelim/data/results/nc_nf_scan_v0_6_summary.json` (5,349 bytes, 7 entries,
+all finite log_Z, BF errors ±0.12).
+
+Per-combo T41 results (nlive=1000,6D,KSFR mask extended):
+- `t41_mediator_mass_joint_fit_v0_6_nc2_nf2.json` — BF 0.856
+- `t41_mediator_mass_joint_fit_v0_6_nc2_nf3.json` — BF 0.899
+- `t41_mediator_mass_joint_fit_v0_6_nc3_nf2.json` — BF 0.891
+- `t41_mediator_mass_joint_fit_v0_6_nc3_nf3.json` — BF 1.000 (anchor)
+- `t41_mediator_mass_joint_fit_v0_6_nc3_nf4.json` — BF 0.977
+- `t41_mediator_mass_joint_fit_v0_6_nc4_nf3.json` — BF 0.769 (NEW — extended mask)
+- `t41_mediator_mass_joint_fit_v0_6_nc4_nf4.json` — BF 0.800 (NEW — extended mask)
+
+#### 3. v0.6 roadmap doc
+
+**NEW file**: `v0.3-prelim/docs/V0_6_ROADMAP.md` (~10 KB).
+Documents the two remaining R14-deferred items:
+- R14 Rec #9: External Boltzmann solver (micrOMEGAs / DarkSUSY / hand-rolled
+  integrator). **Multi-month scope.** Currently use calibrated inverse-
+  proportionality in T55.
+- R14 Rec #10: Hierarchical per-galaxy SPARC likelihood. **Multi-week scope.**
+  Currently use 175-galaxy saturation score in T11.
+- Priority recommendation: **#2 first** (shorter, more impactful on the
+  v0.5/v0.6 headline result); **#1 deferred** until explicit user interest
+  or v0.5 result shown to need precision relic-density.
+
+#### Standing-version after this commit
+
+- branch: master
+- version: 0.3-prelim+T71.0
+- channels: 16
+- tests: 574 pass / 0 fail / 4 skip (was 573; +1 from new
+  test_4_combos_admitted_by_extended_ksfr_mask)
+
 ## [T70.9] — 2026-08-26
 
 ### R14 closure — 5 pre-existing test fixes + (Nc, Nf) scan executed

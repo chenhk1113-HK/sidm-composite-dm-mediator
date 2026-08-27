@@ -269,7 +269,7 @@ own T53 / T53b):
 | Dark pion decay constant f_π | 0.05 - 0.5 GeV (KSFR regime) | Below: chiral-perturbation-theory breaks down; above: HLS corrections matter |
 | Dark gauge coupling g_χ | 0.01 - 2.0 (T41 prior range) | Below: perturbation theory questionable; above: non-perturbative regime |
 | Dark confinement scale Λ_dark | (derived: Λ_dark = m_ρ / 8.36 = f_π in chiral limit) | **Not an independent constraint**; see v0.5 note below |
-| m_ρ / f_π (KSFR ratio) | 6.0 - 9.0 (T53 explored) | Below: PCAC fails; above: lattice regime |
+| m_ρ / f_π (KSFR ratio) | 6.0 - 9.5 (T53 + large-Nc extension, T71.0) | Below: PCAC fails; above: chiral extrapolation breaks down |
 
 **v0.5 implementation note (R13 H1 closure, 2026-08-26):**
 The original 4-row table included a separate Λ_dark bound [0.1, 1.0] GeV.

@@ -8,7 +8,7 @@ Per MODEL_ASSUMPTIONS_AND_LIMITATIONS.md §6:
   f_pi in [0.05, 0.5] GeV
   g_chi in [0.01, 2.0]
   Lambda_dark in [0.1, 1.0] GeV
-  m_rho/f_pi in [6.0, 9.0]
+  m_rho/f_pi in [6.0, 9.5]  # T71.0: extended from 9.0 to admit (4, *) ANALYTICAL
 """
 import math
 import os
@@ -63,7 +63,7 @@ class TestValidityBounds:
 
     def test_m_rho_over_f_pi_bounds(self):
         assert KSFR_M_RHO_OVER_F_PI_MIN == 6.0
-        assert KSFR_M_RHO_OVER_F_PI_MAX == 9.0
+        assert KSFR_M_RHO_OVER_F_PI_MAX == 9.5  # T71.0: extended from 9.0
 
 
 class TestIsInValidityBox:
@@ -88,7 +88,8 @@ class TestIsInValidityBox:
         assert is_in_validity_box(0.1, 0.5, 5.5) is False
 
     def test_m_rho_over_f_pi_above_max(self):
-        assert is_in_validity_box(0.1, 0.5, 9.5) is False
+        # T71.0: MAX extended to 9.5; above_max test must use > 9.5
+        assert is_in_validity_box(0.1, 0.5, 9.6) is False
 
     def test_boundary_values_inclusive(self):
         # All at exact boundaries should be IN the box

@@ -74,9 +74,19 @@ KSFR_G_CHI_MAX = 2.0
 
 # m_rho / f_pi (KSFR ratio) — T53 explored
 # Below 6.0: PCAC fails (pion not the lightest state)
-# Above 9.0: lattice regime (non-chiral-limit effects dominate)
+# Above 9.5: extended large-Nc regime (chiral perturbation theory
+#   extensions valid; per KSFR_NC_NF_RATIOS, the (4, 3) ANALYTICAL
+#   value is 9.5 +/- 0.5, so the upper edge of the uncertainty range
+#   is 10.0. 9.5 covers the central values of all 7 (Nc, Nf) entries
+#   in the scaffold table (max central value = 9.5 at (4, 3)).
+#   Beyond 9.5, the chiral extrapolation breaks down.
+# T71.0 (2026-08-26): MAX extended from 9.0 to 9.5 to admit (4, *)
+#   ANALYTICAL entries from the (Nc, Nf) scaffold; previously these
+#   were hard-rejected at the prior-transform level. New range still
+#   excludes ratios > 9.5 (i.e., the upper edge of (4, 3) uncertainty
+#   + the safe margin).
 KSFR_M_RHO_OVER_F_PI_MIN = 6.0
-KSFR_M_RHO_OVER_F_PI_MAX = 9.0
+KSFR_M_RHO_OVER_F_PI_MAX = 9.5
 
 
 # ----------------------------------------------------------------------

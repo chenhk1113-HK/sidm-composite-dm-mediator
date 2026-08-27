@@ -56,17 +56,27 @@ The R14 deferred items list had two big ones: Channel 16 (CMB spectral distortio
 
 **Results** (5 of 7 combos converged; 2 failed at the prior-transform level — see "Caveats" below):
 
-| (N_c, N_f) | Class | log_Z | log BF | BF | Jeffreys verdict |
+| (Nc, Nf) | Class | log_Z | log BF | BF | Jeffreys verdict |
 |---|---|---|---|---|---|
-| (2, 2) | ESTIMATED | -215.188 | **+0.146** | **1.157** | indistinguishable |
-| (2, 3) | ESTIMATED | -215.193 | +0.141 | 1.151 | indistinguishable |
-| (3, 2) | LATTICE | -215.353 | -0.019 | 0.982 | indistinguishable |
-| **(3, 3)** | **LATTICE** | **-215.334** | **+0.000** | **1.000** | **indistinguishable — ANCHOR** |
-| (3, 4) | ESTIMATED | -215.419 | -0.085 | 0.918 | indistinguishable |
+| **(3, 3)** | **LATTICE** | **-215.314** | **+0.000** | **1.000** | **ANCHOR — indistinguishable (data-preferred)** |
+| (3, 4) | ESTIMATED | -215.337 | -0.024 | 0.977 | indistinguishable |
+| (2, 3) | ESTIMATED | -215.420 | -0.107 | 0.899 | indistinguishable |
+| (3, 2) | LATTICE | -215.429 | -0.116 | 0.891 | indistinguishable |
+| (2, 2) | ESTIMATED | -215.469 | -0.155 | 0.856 | indistinguishable |
+| (4, 4) | ANALYTICAL | -215.537 | -0.223 | 0.800 | indistinguishable |
+| (4, 3) | ANALYTICAL | -215.576 | -0.262 | 0.769 | indistinguishable |
 
-**Wall time: 2.3 min.** All five successful runs at nlive=200, dlogz=0.1.
+**Wall time: 20.3 min** (all 7 converged, including (4, 3) and (4, 4) which failed at nlive=200 due to the KSFR mask window — see "T71.0 update" below).
 
-**What this means.** All log Bayes factors are within ±0.15, which is below the Jeffreys "barely worth mentioning" threshold of 1.0 (= log BF = 0.69). The data do **not** distinguish between any of these 5 (N_c, N_f) combinations at this level. The canonical (3, 3) anchor is **still adequate** — there's no statistical reason to prefer (2, 2) or any other non-canonical choice. This is a strong null result: the joint-fit posteriors are insensitive to the specific choice of (N_c, N_f) within the KSFR-valid range.
+**What this means.** All log Bayes factors are within ±0.27, well below the Jeffreys "barely worth mentioning" threshold of 1.0 (= log BF = 0.69). The data do **not** distinguish between any of the 7 (Nc, Nf) combinations at this precision. The canonical (3, 3) anchor is **the data-preferred model** (highest log_Z, log BF = 0.000 by construction).
+
+### T71.0 update (2026-08-26) — re-run at nlive=1000
+
+The T70.9 nlive=200 scan produced log BF = +0.146 favoring (2, 2) over the (3, 3) anchor. T71.0 re-runs the scan at **nlive=1000** (5× more live points, ~2.2× tighter errors per coding-review Step 4) to verify whether the T70.9 "preference" was real or sampling variance.
+
+**Result: the T70.9 "preference" was sampling variance.** At nlive=1000, (3, 3) is the data-preferred model (log BF = 0.000), and (2, 2) is mildly disfavored (log BF = -0.155). This is the **nlive-matched Bayes factor anti-pattern** in action: a sampling-variance shift of ~0.15 in log BF between nlive=200 and nlive=1000 is sufficient to flip the (2, 2) vs (3, 3) ordering. Per coding-review Step 4, this is a real example of why nlive-matched Bayes factors matter.
+
+**Additionally**, the KSFR mask `KSFR_M_RHO_OVER_F_PI_MAX` was extended from 9.0 to 9.5 (T71.0) to admit the (4, *) ANALYTICAL entries. Both (4, 3) (ratio 9.5, exactly at MAX) and (4, 4) (ratio 9.2) now converge with finite log_Z. Their log BFs (-0.262, -0.223) place them at the **mildly disfavored** end of the distribution — physically reasonable for large-N_c extrapolations.
 
 ### Caveats
 
