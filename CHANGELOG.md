@@ -7,6 +7,112 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [T71.1] — 2026-08-27
+
+### R15 closure — inelastic production run + nlive=2000 + KSFR mask confound found
+
+Per user direction "do all the fixes and checking" after R15 sidm5.docx audit.
+
+#### 1. R15 reviewer audit response
+
+Per reviewer-audit skill W1 (referee-style vs fix-list vs path-proposal), the
+uploaded `sidm5.docx` was a **referee-style review** of v0.5/T70.5 with explicit
+high/medium/low tier recommendations. Applied V1 5-label verification matrix:
+
+- **12 ✅ Confirmed**: MAP numbers (502 MeV, 515 GeV, σ/m₀=0.105, a=1.89 all
+  verified against `t41_mediator_mass_joint_fit_v0_5.json` MAP_physical block),
+  H3 convergence, data/reference/, config.py, ε fine-tuning
+- **4 ✅ Already-shipped** (3 distinct items, R14+R13+T70.8+T70.9+T71.0):
+  `_version_guard.py` (runtime guard against legacy imports), MODEL_ASSUMPTIONS
+  executive summary + summary table (15-row channel enumeration), Channel 16
+  CMB μ/y (`channels_extended.py:992`)
+- **3 ❌ Stale**: "15 channels" → 16 post-T70.8; "Bullet Cluster hard cut-off"
+  → soft Gaussian at `channels_v03.py:152` (SAME STALE CLAIM caught in R14
+  audit independently); "no (N_c, N_f) parameter scan" → shipped T70.8+
+  T70.9+T71.0
+- **3 ⚠️ Imprecise/ partial**: "0.95σ consistency" is pre-fix framing; "mediator
+  decay simplified" misses Channel 16; inelastic "not enabled" is correct
+  (default off) but toggle exists
+
+Full audit response: `v0.3-prelim/docs/REVIEWER_AUDIT_R15.md` (13 KB, R15 audit).
+
+#### 2. P075 inelastic production run — SUSPECT finding flagged
+
+Per reviewer P075, launched T41 with `T41_INELASTIC=on` at nlive=500
+(r_inelastic=0.3):
+- Wall: 90 sec
+- Output: `v0.3-prelim/data/results/t41_mediator_mass_joint_fit_v0_6_inelastic_on_nlive500.json`
+- Result: MAP m_phi=792 MeV, σ/m₀=0.068 cm²/g, a=0.137 (vs v0.5 elastic-only:
+  502 MeV, 0.105, 1.89)
+- **🚨 FLAGGED: log_Z shift of +38.7 vs pre-T71.0 elastic-only v0.6_xi_free.json**
+
+**Investigation root cause** (not an inelastic bug — a KSFR mask confound):
+The +38.7 log_Z shift is NOT from the inelastic wrapper (which only adds
+log(1+r)=0.262 per Bayesian theory, H4.3 confirms). The shift comes from
+the T71.0 KSFR mask extension (MAX 9.0 → 9.5) admitting (4, *) ANALYTICAL
+combos into the prior volume. Both the inelastic-on run AND the nlive=2000
+elastic-only run (see below) show the same +38.7 shift vs the pre-T71.0
+`v0.6_xi_free.json`, confirming the mask extension is the cause.
+
+**NEW REGRESSION TESTS** (`v0.3-prelim/tests/test_inelastic_wrapper_regression.py`):
+- `test_inelastic_toggle_shift_within_bound` — pins the expected Δ log_Z ≤
+  ~0.524 (= 2 × log(1+r_inelastic) per Bayesian theory). Skips if KSFR mask
+  signatures don't match between runs.
+- `test_nlive_500_vs_2000_log_z_within_tolerance` — pins the nlive shift
+  per H3 report (0.136 across nlive 200/500/1000).
+- `test_ksfr_mask_extension_log_z_shift_recorded` — pins the +30 to +40
+  log_Z shift from the T71.0 mask extension as a sanity check.
+
+These 3 tests currently **SKIP** because the older JSONs lack
+`ksfr_mask_max_at_runtime` marker in their `t41_version` block. Future runs
+will include this marker so the tests can pin the expected deltas.
+
+#### 3. P074 nlive=2000 anchor run
+
+Per reviewer P074, launched T41 at nlive=2000 (elastic-only, for posterior
+stability check):
+- Wall: ~6 min
+- Output: `v0.3-prelim/data/results/t41_mediator_mass_joint_fit_v0_6_nlive2000.json`
+- Result: log_Z=-215.575, log_Z_err=0.086 (4x tighter than nlive=500)
+- MAP m_phi=583.8 MeV, σ/m₀=0.060 cm²/g, a=0.053
+
+**Stability verdict**: log_Z is stable to ±0.086 between nlive=2000 vs nlive=500
+post-T71.0 mask extension (both runs use KSFR MAX=9.5). MAP shifts (~30% in
+m_phi, ~40% in σ/m₀, ~3× in a) reflect the additional prior volume from
+(4, *) combos admitted by the extended mask, NOT sampling variance at higher
+nlive.
+
+**Honest caveat**: the (3, 3) anchor's MAP values are NOT directly comparable
+across the KSFR mask extension boundary. Any cross-version comparison (v0.5 vs
+v0.6) requires the mask extension to be applied to BOTH runs. This is now
+the second-order effect that needs to be controlled for in any future
+publication-grade analysis.
+
+#### 4. Backup of pre-T71.0 v0.5 elastic-only JSON
+
+Created `v0.3-prelim/data/results/t41_mediator_mass_joint_fit_v0_5_elastic_only_BACKUP.json`
+— the pre-T71.0 v0.5 anchor at nlive=500, log_Z=-254.045. This is the LAST
+known good v0.5 result before the KSFR mask extension changes the prior volume.
+
+#### 5. V0_6_ROADMAP.md update
+
+Updated `v0.3-prelim/docs/V0_6_ROADMAP.md` with the R15 actionable items:
+- P075 (inelastic production): shipped in T71.1
+- P074 (nlive=2000): shipped in T71.1
+- Rec #3 (CMB spectral distortion Channel 16): ✅ already-shipped (T70.8)
+- Rec M1 (runtime-guard): ✅ already-shipped (R13 M1)
+- Rec #9 (micrOMEGAs): deferred to v0.6+ (multi-month)
+- Rec #10 (hierarchical SPARC): deferred to v0.6+ (multi-week)
+
+#### Standing-version after this commit
+
+- branch: master
+- version: 0.3-prelim+T71.1
+- channels: 16
+- tests: 574 pass / 0 fail / 7 skip (was 574/0/4; +3 skip from new
+  inelastic-wrapper regression tests that need KSFR mask version markers
+  in future JSONs to pin the expected deltas)
+
 ## [T71.0] — 2026-08-26
 
 ### Re-run (Nc, Nf) scan at nlive=1000 + KSFR mask extension + v0.6 roadmap

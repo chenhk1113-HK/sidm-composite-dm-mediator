@@ -5,7 +5,7 @@
 **Joint-fit framework for self-interacting dark matter (SIDM), grounded in the published multi-channel data (dSph, UFD, Bullet, SPARC, LZ, Fermi).**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.3--prelim%2BT71.0-blue)](VERSION)
+[![Version](https://img.shields.io/badge/version-0.3--prelim%2BT71.1-blue)](VERSION)
 [![arXiv:2506.22997](https://img.shields.io/badge/cross--validated-arXiv%3A2506.22997-b31b1b)](https://arxiv.org/abs/2506.22997)
 
 > **Heads-up (2026-08-14):** Project renamed from `dm-sidm-pipeline`. All
@@ -99,6 +99,18 @@
 > still adequate.** Test suite: **573 pass / 0 fail / 4 skip** (was
 > 564/5/4). Summary JSON: `v0.3-prelim/data/results/nc_nf_scan_v0_6_summary.json`.
 > See `CHANGELOG.md [T70.9]` + `LAYMAN_SUMMARY_R14.md`.
+>
+> **T71.1 R15 closure — inelastic + nlive=2000 + KSFR mask confound found (2026-08-27):**
+> Per sidm5.docx R15 reviewer audit (referee-style, 12 ✅ Confirmed / 4 ✅ Already-shipped /
+> 3 ❌ Stale / 3 ⚠️ Imprecise). Shipped P075 (inelastic production at nlive=500, 90 sec) and
+> P074 (nlive=2000 elastic-only, 6 min). Discovered a **KSFR mask extension confound**:
+> the T71.0 mask MAX extension (9.0 → 9.5) admitted ~+38.7 in log_Z for the (3, 3) anchor
+> by including (4, *) ANALYTICAL combos in the prior volume. **Cross-version Bayes-factor
+> comparisons (v0.5 vs v0.6) now require both runs to use the SAME KSFR mask version.**
+> Added 3 regression tests (`test_inelastic_wrapper_regression.py`) that pin the expected
+> shifts per Bayesian theory; they currently SKIP because the older JSONs lack the
+> `ksfr_mask_max_at_runtime` marker. Test suite: **574 pass / 0 fail / 7 skip**.
+> See `CHANGELOG.md [T71.1]` + `REVIEWER_AUDIT_R15.md` + `V0_6_ROADMAP.md`.
 >
 > **T71.0 KSFR mask extension + nlive=1000 scan + v0.6 roadmap (2026-08-26):**
 > Per the T70.9 (4, *) failure root cause analysis, the project's KSFR

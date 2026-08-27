@@ -14,6 +14,10 @@
 |---|---|---|---|---|
 | 1 | **micrOMEGAs interface** for coupled Boltzmann solver | R14 Rec #9 | Multi-month | Deferred |
 | 2 | **Hierarchical per-galaxy SPARC likelihood** | R14 Rec #10 | Multi-week | Deferred |
+| 3 | **Inelastic scattering in primary production run** | R15 P075 | ~30 min wall | Ship this round (T71.1) |
+| 4 | **T41 at nlive=2000** for publication-grade BFs | R15 P074 | ~50-100 min wall | Ship this round (T71.1) |
+| 5 | **CMB spectral-distortion Channel 16** | R14 Rec #3 | (already shipped in T70.8) | ✅ Shipped |
+| 6 | **runtime-guard against legacy v0.1/v0.2 imports** | R13 M1 | (already shipped in T70.4) | ✅ Shipped |
 
 ### Current stand-ins (good enough for v0.5/T70.x results)
 
