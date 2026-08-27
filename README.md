@@ -5,7 +5,7 @@
 **Joint-fit framework for self-interacting dark matter (SIDM), grounded in the published multi-channel data (dSph, UFD, Bullet, SPARC, LZ, Fermi).**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.3--prelim%2BT71.1-blue)](VERSION)
+[![Version](https://img.shields.io/badge/version-0.3--prelim%2BT71.2-blue)](VERSION)
 [![arXiv:2506.22997](https://img.shields.io/badge/cross--validated-arXiv%3A2506.22997-b31b1b)](https://arxiv.org/abs/2506.22997)
 
 > **Heads-up (2026-08-14):** Project renamed from `dm-sidm-pipeline`. All
@@ -99,6 +99,20 @@
 > still adequate.** Test suite: **573 pass / 0 fail / 4 skip** (was
 > 564/5/4). Summary JSON: `v0.3-prelim/data/results/nc_nf_scan_v0_6_summary.json`.
 > See `CHANGELOG.md [T70.9]` + `LAYMAN_SUMMARY_R14.md`.
+>
+> **T71.2 R16 closure — KSFR mask version logging + config_hash (2026-08-27):**
+> Per sidmgrok1.docx R16 reviewer audit (machine-generated, referee-style, 17 ✅ Confirmed /
+> 0 ✅ Already-shipped / 1 ❌ Stale / 1 ⚠️ Imprecise). Shipped the 2 session-shippable
+> recommendations: (a) **`ksfr_mask_max_at_runtime`** field in T41 result JSONs (logs the live
+> KSFR_M_RHO_OVER_F_PI_MAX value, currently 9.5 post-T71.0; was 9.0 pre-T71.0); (b)
+> **`config_hash`** field — SHA256-12 of 10 resolved config components (KSFR mask,
+> nlive, inelastic, form factor, SPARC treatment, relic solver). Re-ran T41 anchor at
+> nlive=500 with the new fields populated. **Inelastic-wrapper regression test
+> activated**: `test_inelastic_toggle_shift_within_bound` PASSES with observed delta
+> log_Z = +0.227 (within Bayesian-theory expected +0.262). **V0_6_ROADMAP.md**
+> expanded from 6 to 19 items with R14/R15/R16 cross-references. Test suite:
+> **575 pass / 0 fail / 6 skip** (was 574/0/7). See `CHANGELOG.md [T71.2]` +
+> `REVIEWER_AUDIT_R16.md`.
 >
 > **T71.1 R15 closure — inelastic + nlive=2000 + KSFR mask confound found (2026-08-27):**
 > Per sidm5.docx R15 reviewer audit (referee-style, 12 ✅ Confirmed / 4 ✅ Already-shipped /

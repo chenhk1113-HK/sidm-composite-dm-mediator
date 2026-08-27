@@ -14,10 +14,23 @@
 |---|---|---|---|---|
 | 1 | **micrOMEGAs interface** for coupled Boltzmann solver | R14 Rec #9 | Multi-month | Deferred |
 | 2 | **Hierarchical per-galaxy SPARC likelihood** | R14 Rec #10 | Multi-week | Deferred |
-| 3 | **Inelastic scattering in primary production run** | R15 P075 | ~30 min wall | Ship this round (T71.1) |
-| 4 | **T41 at nlive=2000** for publication-grade BFs | R15 P074 | ~50-100 min wall | Ship this round (T71.1) |
+| 3 | **Inelastic scattering in primary production run** | R15 P075 | ~30 min wall | ✅ Shipped T71.1 |
+| 4 | **T41 at nlive=2000** for publication-grade BFs | R15 P074 | ~50-100 min wall | ✅ Shipped T71.1 |
 | 5 | **CMB spectral-distortion Channel 16** | R14 Rec #3 | (already shipped in T70.8) | ✅ Shipped |
 | 6 | **runtime-guard against legacy v0.1/v0.2 imports** | R13 M1 | (already shipped in T70.4) | ✅ Shipped |
+| 7 | **KSFR mask version logging** (`ksfr_mask_max_at_runtime` field) | R16 #5 | ~1 day | ✅ Shipped T71.2 |
+| 8 | **config_hash field** for cross-version audit | R16 #11 | ~1 day | ✅ Shipped T71.2 |
+| 9 | **Hierarchical per-galaxy SPARC likelihood** | R14 Rec #10, R16 #1 | Multi-week | Deferred (Priority #1 for v0.6) |
+| 10 | **Proper Boltzmann relic-density calculation** | R14 Rec #9, R16 #4 | Multi-month | Deferred |
+| 11 | **External domain-expert review** | R16 #10 | Out-of-band | User action required |
+| 12 | **Drobczyk 2025 quantitative cross-validation** | R16 #8 | ~1 week | Deferred |
+| 13 | **Bullet Cluster likelihood upgrade** | R15 P077, R16 #2 | 1 day (sensitivity case) | ⚠️ Reject for full profile (Cha+ 2025 doesn't publish); sensitivity case deferred |
+| 14 | **Reduce reliance on contested channels** (UDG, cosmic-web radio) | R16 #12 | ~1 day (tag-only) | Deferred |
+| 15 | **Higher-nlive (N_c, N_f) scan at nlive=2000** | R16 #5(b) | ~40 min wall | Deferred for v0.6 |
+| 16 | **LZ WS2024 / Fermi-LAT full posterior shapes** | R16 #3 | ~2 weeks | Deferred |
+| 17 | **KiSS-SIDM UFD fidelity** | R16 #9 | Multi-week | Deferred |
+| 18 | **Form-factor ansatz uncertainty sampling** | R16 #5(c) | Multi-week | Deferred |
+| 19 | **Lattice-informed KSFR ratios** | R16 #5(d) | Out-of-band | External data required |
 
 ### Current stand-ins (good enough for v0.5/T70.x results)
 

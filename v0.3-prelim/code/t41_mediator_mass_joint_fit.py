@@ -562,15 +562,37 @@ def main():
     out_path = RESULTS_DIR / ("t41_mediator_mass_joint_fit" + os.environ.get("T41_RESULT_SUFFIX", "") + ".json")
     # Add the version metadata to the JSON itself so the file is self-identifying
     out_with_meta = dict(out)
+    # T71.2 (R16 closure): log the actual KSFR mask MAX bound + a SHA256
+    # of the resolved config. This un-skips the 3 previously-skipping
+    # regression tests in test_inelastic_wrapper_regression.py and gives
+    # every result JSON a stable cross-version audit identifier.
+    import hashlib
+    from ksfr_pcac_validity import KSFR_M_RHO_OVER_F_PI_MAX
+    _config_components = [
+        f"ksfr_mask_enabled={os.environ.get('SIDM_DISABLE_KSFR_MASK', '0') != '1'}",
+        f"ksfr_mask_max={KSFR_M_RHO_OVER_F_PI_MAX}",
+        f"nlive={nlive}",
+        f"ndim=6",
+        f"dlogz=0.1",
+        f"inelastic_on={inelastic_on}",
+        f"r_inelastic={r_inelastic}",
+        "form_factor=default_dipole",  # see MODEL_ASSUMPTIONS §6.2
+        "sparc_treatment=calibrated_score",  # v0.5; hierarchical deferred to v0.6
+        "relic_solver=calibrated_inv_proportional",  # T55; Boltzmann deferred to v0.6
+    ]
+    _config_hash = hashlib.sha256("|".join(_config_components).encode("utf-8")).hexdigest()[:12]
     out_with_meta["t41_version"] = {
         "suffix": os.environ.get("T41_RESULT_SUFFIX", ""),
         "ksfr_mask_enabled": os.environ.get("SIDM_DISABLE_KSFR_MASK", "0") != "1",
+        "ksfr_mask_max_at_runtime": KSFR_M_RHO_OVER_F_PI_MAX,  # T71.2 (R16 #5)
         "nlive": nlive,
         "ndim": 6,
         "dlogz": 0.1,
         "inelastic_on": inelastic_on,
         "r_inelastic": r_inelastic,
         "xi_promotion": "v0.6: log_xi now a free parameter (R14 Rec #8). Prior log_xi in [-1.0, 0.7].",
+        "config_hash": _config_hash,  # T71.2 (R16 #11): stable cross-version audit ID
+        "config_hash_components": _config_components,  # for debugging only
     }
     out_path.write_text(json.dumps(out_with_meta, indent=2, default=str))
     # Mirror to Windows-side path if running under WSL

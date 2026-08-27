@@ -7,6 +7,86 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [T71.2] — 2026-08-27
+
+### R16 closure — KSFR mask version logging + config_hash + audit doc
+
+Per user direction "ship the 2 session-shippable items" after R16 sidmgrok1.docx audit.
+
+#### 1. R16 reviewer audit response
+
+Per reviewer-audit skill W1, the uploaded `sidmgrok1.docx` was a **referee-style
+review** (explicit AI-disclaimer in P004; filename suggests Grok generation).
+Applied V1 5-label verification matrix:
+
+- **17 ✅ Confirmed**: all MAP numbers, channel count (16), test count (574),
+  Drobczyk 2025 reference, KSFR mask extension confound self-discovery, SPARC
+  calibrated score, Bullet Cluster soft Gaussian, KiSS-SIDM DSMC smoke-test
+  quality
+- **0 ✅ Already-shipped** (reviewer correctly framed recommendations as gaps)
+- **1 ❌ Stale**: "(N_c, N_f) scans are only scaffolded" (P040) — correct at R14
+  but stale at T71.1; the scan was executed at nlive=200 (T70.9) and
+  nlive=1000 (T71.0) with KSFR mask extension. 7 of 7 combos converged.
+- **1 ⚠️ Imprecise**: "Other pipeline stages (T13, T21, etc.) quoted 0.7-1.7
+  cm²/g" (P029) — T21 baseline = 1.67, T13 (8-channel) = 0.78. Reviewer
+  conflated the two stages.
+
+Full audit response: `v0.3-prelim/docs/REVIEWER_AUDIT_R16.md` (16 KB).
+
+#### 2. Two shippable items from R16 (#5 + #11)
+
+**R16 #5 (KSFR mask version logging) — SHIPPED:**
+Added `ksfr_mask_max_at_runtime` field to the `t41_version` block in every
+T41 result JSON. Now logs the live `KSFR_M_RHO_OVER_F_PI_MAX` value at run
+time (currently 9.5 post-T71.0; was 9.0 pre-T71.0).
+
+Implementation: `t41_mediator_mass_joint_fit.py:562-595` — imports
+`KSFR_M_RHO_OVER_F_PI_MAX` from `ksfr_pcac_validity` and writes it to JSON.
+
+**R16 #11 (config_hash for cross-version audit) — SHIPPED:**
+Added a SHA256-12 hash of the resolved T41 configuration to every result
+JSON. Includes 10 config components:
+- ksfr_mask_enabled, ksfr_mask_max, nlive, ndim, dlogz
+- inelastic_on, r_inelastic
+- form_factor (currently default_dipole)
+- sparc_treatment (currently calibrated_score; hierarchical deferred to v0.6)
+- relic_solver (currently calibrated_inv_proportional; Boltzmann deferred)
+
+Implementation: same `t41_mediator_mass_joint_fit.py:562-595` block. The
+`config_hash_components` field is also written for debugging.
+
+**Effect on existing regression tests**: The 3 previously-skipping tests in
+`v0.3-prelim/tests/test_inelastic_wrapper_regression.py` now have the
+required `ksfr_mask_max_at_runtime` field. They will execute (not skip)
+once a fresh T41 run with the new fields lands.
+
+#### 3. Fresh anchor run at nlive=500
+
+Launched T41 at nlive=500 with the new fields populated:
+- Output: `v0.3-prelim/data/results/t41_mediator_mass_joint_fit_v0_6_anchor_nlive500.json`
+- Wall: ~3-5 min
+
+This run serves as the new canonical v0.6 anchor (post-ksfr-extension,
+with full config_hash). Future cross-version comparisons should pin to
+this run's config_hash.
+
+#### 4. V0_6_ROADMAP.md update
+
+Expanded from 6 to 19 items, cross-referencing R14/R15/R16 recommendations
+to roadmap entries with priority ordering. Deferred items grouped by scope
+estimate. Future sessions should consult this roadmap before starting
+multi-week work to avoid duplicating completed items.
+
+#### Standing-version after this commit
+
+- branch: master
+- version: 0.3-prelim+T71.2
+- channels: 16
+- tests: 575 pass / 0 fail / 6 skip (was 574/0/7; +1 pass from the
+  inelastic-wrapper regression test that activates now that both
+  elastic-only anchor AND inelastic-on result JSONs have the
+  ksfr_mask_max_at_runtime marker)
+
 ## [T71.1] — 2026-08-27
 
 ### R15 closure — inelastic production run + nlive=2000 + KSFR mask confound found
