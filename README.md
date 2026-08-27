@@ -5,7 +5,7 @@
 **Joint-fit framework for self-interacting dark matter (SIDM), grounded in the published multi-channel data (dSph, UFD, Bullet, SPARC, LZ, Fermi).**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.3--prelim%2BT70.8-blue)](VERSION)
+[![Version](https://img.shields.io/badge/version-0.3--prelim%2BT70.9-blue)](VERSION)
 [![arXiv:2506.22997](https://img.shields.io/badge/cross--validated-arXiv%3A2506.22997-b31b1b)](https://arxiv.org/abs/2506.22997)
 
 > **Heads-up (2026-08-14):** Project renamed from `dm-sidm-pipeline`. All
@@ -87,6 +87,18 @@
 > Test suite: **564 pass / 5 fail / 4 skip** (was 528 / 7 / 4).
 > Channel count **15 → 16**. See `CHANGELOG.md [T70.8]` for the full
 > entry.
+>
+> **T70.9 R14 closure — test fixes + (Nc, Nf) scan executed (2026-08-26):**
+> Closed all 5 pre-existing test failures (2 SPARC loader, 1 T17 fit,
+> 1 T37 import, 1 T39 4d-theta). Ran the (Nc, Nf) scan at nlive=200 in
+> 2.3 min: **5 of 7 combos converged; log Bayes factors vs (3, 3) anchor
+> all within ±0.15** (indistinguishable). (4, *) failed at the
+> prior-transform level — KSFR mask window at large N_c is too
+> constrained for nlive=200 seeding. **Conclusion: data do NOT
+> distinguish (N_c, N_f) at this precision; canonical (3, 3) anchor is
+> still adequate.** Test suite: **573 pass / 0 fail / 4 skip** (was
+> 564/5/4). Summary JSON: `v0.3-prelim/data/results/nc_nf_scan_v0_6_summary.json`.
+> See `CHANGELOG.md [T70.9]` + `LAYMAN_SUMMARY_R14.md`.
 >
 > **M2 shipped (2026-08-26, commit `cfe2869`):** Per R13 reviewer M2
 > suggestion — `data/reference/` directory with downsampled posterior

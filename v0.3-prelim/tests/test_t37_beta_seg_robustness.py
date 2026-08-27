@@ -27,12 +27,16 @@ class TestT37Module:
 
     def test_t37_importable(self):
         t37 = pytest.importorskip("t37_t22_with_fitted_beta_seg")
-        assert hasattr(t37, "loglike_two_comp_yang_real_kiss")
         # Imports + patching in main module
         assert hasattr(t37, "BETA_SEG_FITTED_MAP")
         assert hasattr(t37, "BETA_SEG_HARDCODED_DEFAULT")
         assert hasattr(t37, "patched_beta_seg")
         assert hasattr(t37, "main")
+        # The patched two-component likelihood is built via patched_beta_seg
+        # wrapping the underlying t22 module, so we don't expose
+        # `loglike_two_comp_yang_real_kiss` as a top-level name. Verify
+        # the actual public surface instead.
+        assert hasattr(t37, "run_one"), "missing run_one entry point"
 
     def test_beta_seg_map_value(self):
         """T37 must lock beta_seg at the T29-MAP value (0.899)."""

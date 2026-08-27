@@ -166,11 +166,12 @@ v0.6+ scope.
 ## Standing-version after this audit
 
 - **branch**: `master`
-- **tip**: T70.8 (commit pending this round)
-- **version**: `0.3-prelim+T70.8` (bumped from T70.6)
+- **tip**: T70.9 (commit pending this round)
+- **version**: `0.3-prelim+T70.9` (bumped from T70.8)
 - **channels**: 16 (was 15; +1 = Channel 16 = CMB μ/y)
-- **tests**: 564 pass / 5 fail / 4 skip (was 528 / 7 / 4; pre-existing failures in SPARC loader / T17 fit / T37 / T39 unrelated to this round)
-- **R14 status**: 3 of 3 high-priority items addressed (Rec #3 = CMB now shipped); 2 of 3 medium-priority items addressed (Rec #6 = (Nc,Nf) scaffold now shipped; Rec #7 = MODEL_ASSUMPTIONS summary already shipped earlier)
+- **tests**: **573 pass / 0 fail / 4 skip** (was 528/7/4 at T70.7; 564/5/4 after T70.8; 5 pre-existing failures closed in T70.9)
+- **R14 status**: 3 of 3 high-priority items addressed (Rec #3 = CMB now shipped); 2 of 3 medium-priority items addressed (Rec #6 = (Nc,Nf) scaffold now shipped AND executed in T70.9; Rec #7 = MODEL_ASSUMPTIONS summary already shipped earlier). **R14 closure complete.**
+- **(Nc, Nf) scan results**: 5 of 7 combos converged at nlive=200 in 2.3 min. Log Bayes factors vs (3, 3) anchor all within ±0.15 — **indistinguishable**. (4, *) combos failed at the prior-transform level (KSFR mask window too constrained). Canonical (3, 3) anchor remains the default citation. Summary JSON: `v0.3-prelim/data/results/nc_nf_scan_v0_6_summary.json`.
 
 ---
 

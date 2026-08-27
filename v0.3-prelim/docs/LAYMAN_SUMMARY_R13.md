@@ -1,5 +1,8 @@
 # Layman summary — what this project actually does (R13, 2026-08-26)
 
+> **⚠ SUPERSEDED (2026-08-26)** by [LAYMAN_SUMMARY_R14.md](./LAYMAN_SUMMARY_R14.md).
+> R14 closes the v0.5/T70.8 cycle: 5 pre-existing test failures fixed, (N_c, N_f) scan executed, 573 pass / 0 fail. This R13 doc is preserved as a historical record.
+
 **Repo:** `sidm-composite-dm-mediator` @ GitHub, `master` @ `621aeba`
 **Date:** 2026-08-26
 **Status:** v0.3-prelim+T70.4 — **R13 reviewer audit FULLY CLOSED** (9 of 9 items shipped)

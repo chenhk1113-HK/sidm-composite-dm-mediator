@@ -1,0 +1,96 @@
+{
+  "per_pair": [
+    {
+      "Nc": 2,
+      "Nf": 2,
+      "ratio_m_rho_over_f_pi": 8.0,
+      "ratio_uncertainty": 1.0,
+      "confidence_class": "ESTIMATED",
+      "log_Z": -215.1882324003894,
+      "log_Z_err": 0.2436323892574405,
+      "log_Z_relative_to_3_3": 0.14598924152892323,
+      "Bayes_factor": 1.1571837384560464,
+      "log_Bayes_factor": 0.14598924152892323,
+      "log_Bayes_factor_err": 0.34621078018136053,
+      "is_anchor": false,
+      "result_json": "/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/data/results/t41_mediator_mass_joint_fit_v0_6_nc2_nf2.json"
+    },
+    {
+      "Nc": 2,
+      "Nf": 3,
+      "ratio_m_rho_over_f_pi": 7.5,
+      "ratio_uncertainty": 1.0,
+      "confidence_class": "ESTIMATED",
+      "log_Z": -215.19340144868013,
+      "log_Z_err": 0.24261763025057975,
+      "log_Z_relative_to_3_3": 0.1408201932381985,
+      "Bayes_factor": 1.151217632659267,
+      "log_Bayes_factor": 0.1408201932381985,
+      "log_Bayes_factor_err": 0.34549743519584103,
+      "is_anchor": false,
+      "result_json": "/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/data/results/t41_mediator_mass_joint_fit_v0_6_nc2_nf3.json"
+    },
+    {
+      "Nc": 3,
+      "Nf": 2,
+      "ratio_m_rho_over_f_pi": 8.4,
+      "ratio_uncertainty": 0.3,
+      "confidence_class": "LATTICE",
+      "log_Z": -215.35292237898287,
+      "log_Z_err": 0.24654383828864154,
+      "log_Z_relative_to_3_3": -0.018700737064534678,
+      "Bayes_factor": 0.981473036799732,
+      "log_Bayes_factor": -0.018700737064534678,
+      "log_Bayes_factor_err": 0.3482657425251487,
+      "is_anchor": false,
+      "result_json": "/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/data/results/t41_mediator_mass_joint_fit_v0_6_nc3_nf2.json"
+    },
+    {
+      "Nc": 3,
+      "Nf": 3,
+      "ratio_m_rho_over_f_pi": 8.36,
+      "ratio_uncertainty": 0.05,
+      "confidence_class": "LATTICE",
+      "log_Z": -215.33422164191833,
+      "log_Z_err": 0.24597797303518326,
+      "log_Z_relative_to_3_3": 0.0,
+      "Bayes_factor": 1.0,
+      "log_Bayes_factor": 0.0,
+      "log_Bayes_factor_err": 0.3478653855113996,
+      "is_anchor": true,
+      "result_json": "/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/data/results/t41_mediator_mass_joint_fit_v0_6_nc3_nf3.json"
+    },
+    {
+      "Nc": 3,
+      "Nf": 4,
+      "ratio_m_rho_over_f_pi": 8.0,
+      "ratio_uncertainty": 0.4,
+      "confidence_class": "ESTIMATED",
+      "log_Z": -215.41934562724146,
+      "log_Z_err": 0.247752605723103,
+      "log_Z_relative_to_3_3": -0.08512398532312204,
+      "Bayes_factor": 0.9183984094186434,
+      "log_Bayes_factor": -0.08512398532312204,
+      "log_Bayes_factor_err": 0.3491224954956135,
+      "is_anchor": false,
+      "result_json": "/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/data/results/t41_mediator_mass_joint_fit_v0_6_nc3_nf4.json"
+    }
+  ],
+  "log_Z_anchor": -215.33422164191833,
+  "wall_seconds_total": 135.41729044914246,
+  "t41_nlive": 200,
+  "t41_dlogz": 0.1,
+  "scan_version": "T70.8 Wave B2",
+  "anchor": [
+    3,
+    3
+  ],
+  "anchor_log_Z": -215.33422164191833,
+  "caveats": [
+    "Per-pair log_Z_uncertainty comes from dynesty's dlogz criterion (target dlogz=0.1); log_BF_err = sqrt(sigma_log_Z^2 + sigma_log_Z_anchor^2) \u2014 Gaussian propagation of independent errors.",
+    "Ratio-uncertainty propagation (KSFR_NC_NF_TABLE.md \u00a77): LATTICE (3,3) \u00b10.05, LATTICE (3,2) \u00b10.3, ANALYTICAL (4,3) (4,4) \u00b10.5, ESTIMATED (2,2) (2,3) (3,4) \u00b11.0. These affect the m_phi validity window position but the BAYES FACTOR over log_Z marginalises them.",
+    "Caveat on (2, 3): the dark sector may be CONFORMAL (no KSFR regime). The ratio=7.5 here is a placeholder; the BF for (2, 3) should be read with caution.",
+    "All 7 (Nc, Nf) combos share the same T41 prior box for (log_m_phi, log_m_chi, g_chi, log_eps, log_alpha, log_xi); only the KSFR/PCAC validity mask window shifts with (Nc, Nf).",
+    "Normalization sanity: sum(exp(log_Z - max_log_Z)) = number of configs only if all log_Zs are equal; otherwise < number. Reported per-pair weights are PROPORTIONAL to the posterior under a flat prior over the 7 (Nc, Nf) models."
+  ]
+}
