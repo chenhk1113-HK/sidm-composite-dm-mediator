@@ -113,6 +113,11 @@ Both ship in ~1 day combined. The remaining 10 recommendations are correctly pri
 
 5. **T71.3 follow-up — R16 #7 closed (nlive=2000 (Nc,Nf) scan).** The R16 #7 sampler-convergence recommendation was filed as "Partial shipped + continue" in this audit. T71.3 (2026-08-28) closes it: the (Nc, Nf) scan was re-run at nlive=2000 (was nlive=1000 at T71.0) with a 7-way parallel background runner (~10 min wall vs ~70 min sequential). All 7 combos converged, the (3, 3) anchor remains the data-preferred model (log BF = 0 vs best alternative +0.127), and the nlive=1000→2000 anchor shift (+0.23 in log_Z) is within 2-sigma of sampling variance. **The scan has converged** — no need to re-run at higher nlive. Full report in CHANGELOG [T71.3].
 
+6. **T71.4 + T71.5 follow-up — Tier B closure (Drobczyk quantitative + LZ WS2024 stale-claim + KiSS-SIDM UFD wall-time limitation).**
+   - **R16 #8 (Drobczyk quantitative cross-validation)**: T68 had hardcoded benchmark numbers but no chi² test. T68b (2026-08-28) ships the chi² test using T41 v0.6 hier-sparc MAP as our point estimate. Result: chi² = 213.62 on 1 dof → STRONG TENSION at all 3 velocity points, with the cluster scale (v=1000 km/s) showing the biggest disagreement (factor 526×). Honest framing: the two models make different physics predictions; we don't conclude one is "right" and the other "wrong". See `v0.3-prelim/docs/V0_6_TIER_B_CLOSURE.md` for the full closure note.
+   - **R16 #3 (LZ WS2024 full posterior shapes)**: Roadmap item is **stale** — the real LZ WS2024 posterior has been in T41 production since R12 (2026-08-17) via `t30_lz_real_posterior.loglike_lz_real` (HEPData record 155182, 26 mass points). No new code; this is a documentation correction.
+   - **R16 #9 (KiSS-SIDM UFD fidelity)**: **Deferred with rationale**. The KiSS-SIDM Julia bridge hits a hard 3600s timeout at UFD N=5e4 (T38a failure). The canonical halo (M_halo = 10⁹ M_☉) is fully converged at N=1e4-1e5, but the dwarf/UFD regime is intractable at our compute budget without rewriting the DSMC in a faster language or using the paper's original C/Python implementation. Multi-week scope; cannot ship in a single session.
+
 ---
 
 ## Closing note

@@ -1,0 +1,88 @@
+{
+  "test": "T68b_quantitative_cross_validation",
+  "direction": "R16 #8 quantitative closure: chi^2 test of our sigma/m(v) curve vs Drobczyk 2025 published sigma/m(v) at 3 velocity points",
+  "our_pipeline": {
+    "sigma_m_0_median": 0.0650618584545559,
+    "a_median": 0.11444396888069275,
+    "m_phi_MeV_MAP": 790.5089430108862,
+    "m_chi_GeV_MAP": 715.967397876651,
+    "xi_MAP": 0.6720811232580746,
+    "source": "t41_mediator_mass_joint_fit_v0_6_hier_sparc.json"
+  },
+  "drobczyk_2025": {
+    "v_km_s": [
+      10.0,
+      30.0,
+      1000.0
+    ],
+    "sigma_cm2_g": [
+      0.96,
+      0.11,
+      9.5e-05
+    ],
+    "label": [
+      "dwarf (v=10)",
+      "MW satellite (v=30)",
+      "cluster (v=1000)"
+    ],
+    "ref": "arXiv:2506.22997 (Class. Quantum Grav. 42 225006), Tab. 1"
+  },
+  "chi2_test": {
+    "chi2_total": 213.62443992322318,
+    "dof": 1,
+    "sigma_err_log10_per_point": 0.2,
+    "per_point": [
+      {
+        "v_km_s": 10.0,
+        "label": "dwarf (v=10)",
+        "sigma_drob_log10": -0.017728766960431602,
+        "sigma_our_log10": -1.072229566624272,
+        "delta_log10": -1.0545007996638405,
+        "delta_factor": 0.08820621779993477,
+        "chi2_contribution": 27.79929841229197
+      },
+      {
+        "v_km_s": 30.0,
+        "label": "MW satellite (v=30)",
+        "sigma_drob_log10": -0.958607314841775,
+        "sigma_our_log10": -1.1268332166517263,
+        "delta_log10": -0.16822590180995134,
+        "delta_factor": 0.6788504311871739,
+        "chi2_contribution": 0.7074988509942848
+      },
+      {
+        "v_km_s": 1000.0,
+        "label": "cluster (v=1000)",
+        "sigma_drob_log10": -4.022276394711152,
+        "sigma_our_log10": -1.3011175043856578,
+        "delta_log10": 2.7211588903254946,
+        "delta_factor": 526.2097494847222,
+        "chi2_contribution": 185.11764265993693
+      }
+    ],
+    "interpretation": "chi^2 = 213.62 on 1 dof (sigma_err_log10 = 0.2). Closest published threshold: chi^2 ~ 16.30 \u2248 p = 0.001. STRONG TENSION \u2014 our curve does NOT match Drobczyk's within error bars."
+  },
+  "what_would_need_to_change": {
+    "required_sigma_m_0_at_v100_to_match_dwarf": 0.737610795217704,
+    "current_sigma_m_0_MAP": 0.0650618584545559,
+    "factor_short": 11.337069255912924
+  },
+  "honest_framing": [
+    "Our T41 MAP sigma/m_0 = 0.065 cm^2/g is significantly LOWER than Drobczyk's dwarf prediction (0.96).",
+    "The ~1.2 dex gap at the dwarf scale reflects a real quantitative disagreement between the two models:",
+    "  - Drobczyk's two-mediator model with resonant freeze-out naturally produces HIGHER sigma/m at low v.",
+    "  - Our single-mediator dark-rho model produces LOWER sigma/m at low v (consistent with our v0.6 calibration_score \u2192 hier_sparc shift of +0.10 log Z at nlive=2000).",
+    "Both models are valid frameworks with different physics; we do NOT conclude one is 'right' and the other 'wrong'.",
+    "A future hierarchical model comparison would need both models fit to the SAME data with the SAME likelihood machinery.",
+    "The chi^2 test is sensitive to the assumed sigma_err_log10 per point (0.2 dex here); with a wider error bar the tension could disappear."
+  ],
+  "caveats": [
+    "Drobczyk does NOT publish per-point error bars on their sigma/m(v) curve; the 0.2 dex sigma_err_log10 is a conservative choice.",
+    "Our MAP is from a single T41 joint fit; the posterior uncertainty on sigma/m_0 and a would give a wider range than the point estimate.",
+    "The two models use different coupling parameterizations (y_chi Yukawa vs g_chi gauge coupling); a direct chi^2 comparison is approximate."
+  ],
+  "t68_history": [
+    "T68 (2026-08-18): qualitative comparison with hardcoded Drobczyk numbers (R11 A13, G7 closure).",
+    "T68b (2026-08-28): quantitative chi^2 test using T41 v0.6 hier-sparc MAP as our point estimate (this commit)."
+  ]
+}

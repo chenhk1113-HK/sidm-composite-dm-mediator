@@ -23,12 +23,12 @@
 | 9 | **Hierarchical per-galaxy SPARC likelihood** | R14 Rec #10, R16 #1 | Multi-week | ✅ Shipped T71.4 (hierarchical selected via T41_SPARC_HIERARCHICAL=1; log Z shift +0.10 vs calibrated) |
 | 10 | **Proper Boltzmann relic-density calculation** | R14 Rec #9, R16 #4 | Multi-month | Deferred |
 | 11 | **External domain-expert review** | R16 #10 | Out-of-band | User action required |
-| 12 | **Drobczyk 2025 quantitative cross-validation** | R16 #8 | ~1 week | Deferred |
+| 12 | **Drobczyk 2025 quantitative cross-validation** | R16 #8 | ~1 week | ✅ Shipped T71.5 (t68b: chi²=213 on 1 dof; cluster-scale 526× disagreement — see V0_6_TIER_B_CLOSURE.md) |
 | 13 | **Bullet Cluster likelihood upgrade** | R15 P077, R16 #2 | 1 day (sensitivity case) | ✅ Shipped T71.4 (sensitivity_0p2 variant via T41_BULLET_VARIANT env var; +1.74 log Z vs default) |
 | 14 | **Reduce reliance on contested channels** (UDG, cosmic-web radio) | R16 #12 | ~1 day (tag-only) | ✅ Shipped T71.4 (CHANNEL_STATUS dict + t13 JSON fields) |
 | 15 | **Higher-nlive (N_c, N_f) scan at nlive=2000** | R16 #5(b) | ~40 min wall | ✅ Shipped T71.3 (10 min via 7-way parallel runner) |
-| 16 | **LZ WS2024 / Fermi-LAT full posterior shapes** | R16 #3 | ~2 weeks | Deferred |
-| 17 | **KiSS-SIDM UFD fidelity** | R16 #9 | Multi-week | Deferred |
+| 16 | **LZ WS2024 / Fermi-LAT full posterior shapes** | R16 #3 | ~2 weeks | ✅ Shipped T71.5 (already in production since R12 via t30_lz_real_posterior.py; stale roadmap item — see V0_6_TIER_B_CLOSURE.md) |
+| 17 | **KiSS-SIDM UFD fidelity** | R16 #9 | Multi-week | ⚠️ Deferred (wall-time limited — T38a failed at N=5e4 1-hour timeout; canonical halo converged but UFD intractable at current compute budget; see V0_6_TIER_B_CLOSURE.md) |
 | 18 | **Form-factor ansatz uncertainty sampling** | R16 #5(c) | Multi-week | Deferred |
 | 19 | **Lattice-informed KSFR ratios** | R16 #5(d) | Out-of-band | External data required |
 

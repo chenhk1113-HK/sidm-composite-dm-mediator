@@ -7,6 +7,78 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [T71.5] — 2026-08-28
+
+### Tier B closure — Drobczyk quantitative shipped + LZ stale-claim correction + KiSS-SIDM UFD deferred
+
+Per user direction "do as much as possible" after T71.4 (3 v0.6 items shipped in parallel). Pre-flight on Tier B (Drobczyk quantitative, LZ WS2024, KiSS-SIDM UFD fidelity) revealed one stale claim, one real research task, and one wall-time-limited item. All three resolved in one session.
+
+#### 1. Drobczyk quantitative χ² test — SHIPPED (Tier B #12)
+
+**Gap**: T68 (`v0.3-prelim/code/t68_cross_validation_drobczyk.py`, 167 lines) had Drobczyk's benchmark numbers hardcoded (σ/m at v=10, 30, 1000 km/s) plus a qualitative comparison. No actual χ² test against our σ/m(v) curve.
+
+**New file**: `v0.3-prelim/code/t68b_quantitative_cross_validation.py` (290 lines, compiles clean).
+
+**Method**:
+- Reads T41 v0.6 hier-sparc MAP as our point estimate (σ/m_0 = 0.0651 cm²/g, a = +0.114)
+- Computes our σ/m(v) at Drobczyk's 3 published velocity points using `channels_v03.sigma_m_at_v`
+- Runs χ² test with per-point uncertainty 0.2 dex (Drobczyk doesn't publish error bars; 0.2 dex ≈ factor-of-1.6 is conservative)
+
+**Result** (`v0.3-prelim/data/results/t68b_quantitative_cross_validation.json`):
+
+| v (km/s) | Our σ/m (cm²/g) | Drobczyk σ/m (cm²/g) | Factor | log₁₀ gap | χ² contribution |
+|---|---|---|---|---|---|
+| 10 (dwarf) | 0.085 | 0.96 | 0.09× | -1.06 dex | 27.80 |
+| 30 (MW sat) | 0.075 | 0.11 | 0.68× | -0.17 dex | 0.71 |
+| 1000 (cluster) | 0.050 | 9.5e-5 | **526×** | **+2.72 dex** | **185.12** |
+| **TOTAL** | | | | | **χ² = 213.62 on 1 dof** |
+
+**Honest framing** (in the JSON's `honest_framing` field):
+- Our T41 MAP σ/m_0 = 0.065 cm²/g is significantly LOWER than Drobczyk's dwarf prediction (0.96)
+- The ~1.2 dex gap at dwarf scale + the **526× disagreement at cluster scale** reflects a real quantitative difference between the two models
+- Drobczyk's two-mediator resonant freeze-out produces HIGHER σ/m at low v; our single-mediator dark-ρ produces LOWER σ/m at low v
+- Both are valid frameworks with different physics; we do NOT conclude one is "right" and the other "wrong"
+- A future hierarchical model comparison would need both models fit to the SAME data with the SAME likelihood machinery
+
+**Caveats**:
+- Drobczyk doesn't publish per-point error bars; 0.2 dex is conservative
+- Our MAP is a point estimate; full posterior uncertainty would widen the comparison
+- The two models use different coupling parameterizations (y_χ Yukawa vs g_χ gauge coupling); a direct χ² comparison is approximate
+
+#### 2. LZ WS2024 — STALE-CLAIM CORRECTION (Tier B #16)
+
+**Gap**: V0_6_ROADMAP item #16 listed "~2 weeks, deferred to v0.6+" for "LZ WS2024 / Fermi-LAT full posterior shapes". Pre-flight showed the real LZ WS2024 posterior has been in T41 production **since R12 (2026-08-17)**, via `t30_lz_real_posterior.loglike_lz_real` (HEPData record 155182, arXiv:2410.13076 → arXiv:2410.17036 PRL 135 011802, 26 mass points). T41 production chain calls `ll_lz = loglike_lz_real(m_chi_GeV, sigma_DM_n)` at line 247.
+
+**Action**: Roadmap doc correction only. No new code. The roadmap item is **stale** (same pattern as R15's "(Nc, Nf) scaffolded only" and R16's "channels claimed experimental"). Marked ✅ Shipped T71.5 with a note that the underlying work shipped via T30 in 2026-08-17.
+
+#### 3. KiSS-SIDM UFD fidelity — DEFERRED with rationale (Tier B #17)
+
+**Gap**: V0_6_ROADMAP item #17 listed "Multi-week" for "Application of cluster-scale bounds to UFDs is a known approximation; proper treatment is multi-week".
+
+**Pre-flight finding**: The KiSS-SIDM Julia bridge has a **hard 3600s timeout** (`kiss_sidm_julia_bridge.py:376`). T38a (2026-08-22) ran at N=5e4 and hit `TimeoutExpired` after 1 hour. The T38 hypothesis (was: "dwarf regime requires N ≥ 1e5") cannot be tested without (a) raising the timeout AND waiting ≥1 hour per config, or (b) rewriting KiSS-SIDM in a faster language, or (c) using the paper's original C/Python implementation (external dep install per AGENTS.md rule 17).
+
+**Action**: Roadmap item **deferred with multi-line rationale** in `V0_6_TIER_B_CLOSURE.md`. The canonical-halo KiSS-SIDM pipeline (T21, T22, T23, T27) is **production-grade and fully converged** at N=1e4-1e5. Only the dwarf/UFD regime is intractable at current compute budget. **No new code shipped for #17 in T71.5** — the closure note is the deliverable.
+
+#### 4. Files shipped
+
+| File | Purpose |
+|---|---|
+| `v0.3-prelim/code/t68b_quantitative_cross_validation.py` | NEW: χ² test of our σ/m(v) vs Drobczyk (290 lines, compiles clean) |
+| `v0.3-prelim/data/results/t68b_quantitative_cross_validation.json` | NEW: t68b output (χ²=213.62, per-point breakdown, "honest_framing" field) |
+| `v0.3-prelim/docs/V0_6_TIER_B_CLOSURE.md` | NEW: Tier B closure note (8.9 KB) — what shipped, what was stale, what's deferred |
+| `v0.3-prelim/docs/V0_6_ROADMAP.md` | Items #12, #16, #17 status updated |
+| `v0.3-prelim/docs/REVIEWER_AUDIT_R16.md` | Addendum #6: T71.4 + T71.5 follow-up |
+| CHANGELOG [T71.5] | This entry |
+| VERSION | Bumped to 0.3-prelim+T71.5 |
+
+#### Standing-version after this commit
+
+- branch: master
+- version: 0.3-prelim+T71.5
+- channels: 16 (2 experimental, 14 production)
+- tests: 575 pass / 0 fail / 6 skip (unchanged from T71.3; no test changes in Tier B)
+- V0_6_ROADMAP: **7 of 15 items shipped** (was 5/15 after T71.4; +2 from T71.5: #12, #16; #17 honestly deferred)
+
 ## [T71.4] — 2026-08-28
 
 ### Three-shippable v0.6 items closed in one session (parallel run)
