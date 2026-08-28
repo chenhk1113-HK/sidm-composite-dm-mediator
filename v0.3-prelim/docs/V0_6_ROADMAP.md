@@ -26,7 +26,7 @@
 | 12 | **Drobczyk 2025 quantitative cross-validation** | R16 #8 | ~1 week | Deferred |
 | 13 | **Bullet Cluster likelihood upgrade** | R15 P077, R16 #2 | 1 day (sensitivity case) | ⚠️ Reject for full profile (Cha+ 2025 doesn't publish); sensitivity case deferred |
 | 14 | **Reduce reliance on contested channels** (UDG, cosmic-web radio) | R16 #12 | ~1 day (tag-only) | Deferred |
-| 15 | **Higher-nlive (N_c, N_f) scan at nlive=2000** | R16 #5(b) | ~40 min wall | Deferred for v0.6 |
+| 15 | **Higher-nlive (N_c, N_f) scan at nlive=2000** | R16 #5(b) | ~40 min wall | ✅ Shipped T71.3 (10 min via 7-way parallel runner) |
 | 16 | **LZ WS2024 / Fermi-LAT full posterior shapes** | R16 #3 | ~2 weeks | Deferred |
 | 17 | **KiSS-SIDM UFD fidelity** | R16 #9 | Multi-week | Deferred |
 | 18 | **Form-factor ansatz uncertainty sampling** | R16 #5(c) | Multi-week | Deferred |

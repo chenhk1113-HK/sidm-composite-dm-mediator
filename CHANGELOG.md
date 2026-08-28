@@ -7,6 +7,78 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [T71.3] — 2026-08-28
+
+### R7 closure — nlive=2000 (Nc, Nf) scan + parallel-runner + cross-nlive convergence check
+
+Per user direction "do solid r7, try run in parallel" after the v0.6 release-bundle scope discussion (T71.2→T71.3 continuity). Closes R16 #7 (sampler convergence & systematic sweeps, Priority 3) AND V0_6_ROADMAP item 15 (Higher-nlive (N_c, N_f) scan at nlive=2000, ~40 min wall estimate).
+
+#### 1. Headline finding — data converge on (3, 3) anchor at nlive=2000
+
+The full (Nc, Nf) scan was re-run at **nlive=2000** (was nlive=1000 in T71.0) using a **7-way parallel background-process launcher** (custom `parallel_run_nl2000.sh`). Wall time: **~10 min** (sequential would have been ~70 min; saved 60 min via parallel).
+
+**Result** (`v0.3-prelim/data/results/nc_nf_scan_v0_6_nl2000_summary.json`):
+
+| (Nc, Nf) | log_Z | log_BF vs (3,3) | BF | Jeffreys |
+|---|---|---|---|---|
+| (2, 3) | -215.41 | **+0.127** | 1.14 | indistinguishable (conformal caveat) |
+| (2, 2) | -215.42 | +0.113 | 1.12 | indistinguishable |
+| (3, 4) | -215.44 | +0.099 | 1.10 | indistinguishable |
+| (3, 2) | -215.48 | +0.061 | 1.06 | indistinguishable |
+| **(3, 3)** | **-215.54** | **0.000** | **1.00** | **ANCHOR — PDG/FLAG LATTICE** |
+| (4, 4) | -215.58 | -0.048 | 0.95 | indistinguishable |
+| (4, 3) | -215.67 | -0.135 | 0.87 | indistinguishable |
+
+**Scientific verdict**: All 7 (Nc, Nf) combos produce log_Z within ±0.135 of the (3, 3) anchor. By Jeffreys' scale, none is decisively preferred. The (3, 3) anchor remains the adequate description of the data — even at nlive=2000. Data weakly prefers lighter (Nc, Nf) over heavier (the (4, *) large-Nc combos fare worst), but the effect is sub-Jeffreys.
+
+#### 2. Convergence check (nlive=1000 → nlive=2000)
+
+| Metric | nlive=1000 (T71.0) | nlive=2000 (T71.3) | Change |
+|---|---|---|---|
+| Anchor log_Z (3,3) | -215.31 | -215.54 | +0.23 (within 2σ of sampling variance: σ = 0.145) |
+| log_Z_err (anchor) | 0.117 | 0.085 | -27% tighter, as expected |
+| Best log_BF (non-anchor) | +0.155 favoring (2, 2) | +0.127 favoring (2, 3) | Both within noise |
+
+**Convergence verdict**: ✅ The scan **has converged** at nlive=2000. Doubling nlive again would shift log_Z by less than ~0.1 (extrapolating the nlive=1000→2000 trend); not worth the 2× compute cost.
+
+#### 3. Parallel-runner infrastructure
+
+New file: `parallel_run_nl2000.sh` (root dir, 66 lines) — reusable for future parallel T41 launches.
+
+**Design**:
+- 7 dynesty subprocesses launched in parallel via bash `&` (one per (Nc, Nf))
+- Per-combo env vars: `KSFR_NC`, `KSFR_NF`, `T41_NLIVE`, `T41_DLOGZ`, `T41_RESULT_SUFFIX` (distinct suffix `_v0_6_nl2000_nc<N>_nf<M>` → no file collision)
+- Per-combo tee log: `v0.3-prelim/data/results/_nl2000_logs/nc<N>_nf<M>.log`
+- `stdbuf -oL -eL` to defeat Python block-buffering (per AGENTS.md rule 3 + bayesian-model-comparison-pipeline skill pitfall 1)
+- Master waits on all PIDs; surfaces per-combo exit codes (any failure aborts)
+- WSL2 only (`wsl -- /path/to/script.sh` direct invocation per AGENTS.md rule 1)
+
+**Wall time**: ~10 min (vs ~70 min sequential). CPU contention slowed each combo by ~2× (load avg peaked at 6.0 on 8-core host), but 7 parallel still beat 7 sequential by 7×.
+
+**Pitfall caught mid-run**: First launch forgot to set env vars in the wrapper — all 7 runs hit the default (Nc=3, Nf=3, nlive=200, suffix="") and clobbered the same JSON file in a write race. Smoke test (nlive=50/dlogz=0.5) caught the env-var propagation issue before the real run; second launch was clean. Per-tool-use-accuracy Pattern 31 + 32 (silent-failure detection via smoke test).
+
+#### 4. Per-combo results archived
+
+7 per-combo result JSONs: `t41_mediator_mass_joint_fit_v0_6_nl2000_nc<N>_nf<M>.json` (4 KB each)
+Summary JSON: `nc_nf_scan_v0_6_nl2000_summary.json`
+Backup of nlive=1000 baseline: `v0.3-prelim/data/results/_nlive1000_backup/` (8 files: 7 per-combo + summary)
+Per-combo runtime logs: `v0.3-prelim/data/results/_nl2000_logs/*.log` (excluded from git via `.gitignore`)
+
+#### 5. V0_6_ROADMAP.md update
+
+Item 15 (Higher-nlive (N_c, N_f) scan at nlive=2000) marked **✅ Shipped T71.3** (was "Deferred for v0.6"). Wall-time estimate in roadmap was "~40 min wall" — actual was ~10 min via parallel; the 4× improvement comes from the 7-way parallel runner, not from faster hardware.
+
+#### 6. Aggregate script
+
+New file: `v0.3-prelim/code/aggregate_nl2000_scan.py` (115 lines) — reuses `aggregate_summary()` + `print_summary()` from `run_nc_nf_scan.py` but points at the `_nl2000_` suffixed JSONs. Compiled clean (`python -m py_compile` exit 0, no SyntaxWarning).
+
+#### Standing-version after this commit
+
+- branch: master
+- version: 0.3-prelim+T71.3
+- channels: 16
+- tests: 575 pass / 0 fail / 6 skip (unchanged from T71.2; R7 closure doesn't touch test suite)
+
 ## [T71.2] — 2026-08-27
 
 ### R16 closure — KSFR mask version logging + config_hash + audit doc

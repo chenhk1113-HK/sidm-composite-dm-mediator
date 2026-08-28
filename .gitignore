@@ -74,6 +74,14 @@ v0.*-prelim/logs/
 *_backup.*
 *_v0.*_backup.*
 
+# --- Backup directories (R7 closure convention 2026-08-28) ---
+**/_nlive*_backup/
+**/_nl*_logs/
+
+# --- Smoke-test artifacts (R7 closure convention 2026-08-28) ---
+**/t41_mediator_mass_joint_fit_smoke*.json
+**/*_smoketest*.json
+
 # --- IDE / tool configs (per-project, not source) ---
 .idea/
 .vscode/
