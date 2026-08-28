@@ -371,9 +371,15 @@ def run_canonical_kiSS_sidm(
             f"--project={JULIA_PROJECT}",
             worker_path,
         ]
+        # Subprocess timeout (was hardcoded 3600s, now configurable via env var).
+        # Default 3600s (1 hour) preserved for safety; override with KISS_SIDM_TIMEOUT_S.
+        # For UFD-scale N>=5e4 runs, T71.7 recommends >= 7200s (2 hr).
+        # For full convergence at N>=2e6 (paper threshold), set KISS_SIDM_TIMEOUT_S=18000 (5 hr).
+        # WARNING: large timeouts lock WSL resources; use background mode for >7200s.
+        timeout_seconds = int(os.environ.get("KISS_SIDM_TIMEOUT_S", "3600"))
         t0 = time.time()
         proc = subprocess.run(
-            cmd, capture_output=True, text=True, timeout=3600,
+            cmd, capture_output=True, text=True, timeout=timeout_seconds,
         )
         elapsed = time.time() - t0
 
