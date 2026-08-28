@@ -95,6 +95,55 @@ The user's `c` instruction was "start parallel [work while KiSS-SIDM runs]". I s
 2. **The data is parseable** (CSV format, well-formed)
 3. **The data is NOT what we need** (N_f=8, not the (2,2)/(2,3)/(3,4) combos we're auditing)
 4. **The column mapping is undocumented** (would need 2-3 hr to reverse-engineer from the paper)
-5. **The effort would NOT advance the ESTIMATED→LATTICE upgrade** even if successful (different N_f)
+3. **The effort would NOT advance the ESTIMATED→LATTICE upgrade** even if successful (different N_f)
 
 So the honest move was to stop, document the negative result, and refocus on the KiSS-SIDM run which is actually the deliverable. Per the session's "no fake shipped claims" discipline.
+
+---
+
+## Reviewer Assessment (2026-08-28) — conformal-window risk correction
+
+A reviewer independently assessed the Brower Zenodo dataset for our project scope. The full Assessment.docx confirms my decision to defer ingestion **AND adds a sharper caveat I had not surfaced**:
+
+> "Nf=8 is near conformal and may not lie on the same simple trend as confining Nf=3,4; therefore this constraint may enlarge rather than shrink the uncertainty on Nf=4 observables." (Assessment ¶52)
+
+This is a critical physics point. The conformal-window behavior of N_f=8 SU(3) means that the simple polynomial extrapolation we use to go from the N_f=3 anchor to N_f=4 does NOT apply cleanly — the meson-mass ratios for N_f=8 drift toward 1 as the IR fixed point is approached (Assessment ¶20). So:
+
+- **Naively adding N_f=8 as a trend data-point could WIDEN our N_f=4 error bar**, not narrow it.
+- The reviewer recommends a separate, standalone pre-processing script (NOT mixed into the dynesty hot-path) if we ever pursue Use-case B (Assessment ¶77-79).
+
+### What Use-case B would actually require (per Assessment ¶35-46)
+
+1. **Reverse-engineer CSV column mapping** — the C0-C4 files are the vector-channel (ρ-meson) fits where ρ-related fit parameters live (Assessment ¶41). P0-P4 = pseudoscalar (π), S0-S4 = scalar (σ).
+2. **Aggregate across Markov chains** — average fit-parameter samples, propagate fit uncertainties.
+3. **Continuum-limit + chiral extrapolation for N_f=8** — control for lattice spacing, quark-mass dependence; cannot skip this and use raw CSV numbers.
+4. **Add N_f=8 m_ρ/f_π ± σ as one data-point to the trend-fit**, with the caveat that N_f=8 may not lie on the same simple polynomial trend.
+5. **Re-run N_f=4 extrapolation** with both N_f=3 and N_f=8 constraints; propagate trend-fit uncertainty into composite-DM Bayesian posteriors.
+
+Estimated work: 2-3 hours of careful analysis + careful conformal-window treatment. **Not realistic in this session; not justified for our current project priority.**
+
+### Stale-state flags in the Assessment
+
+The reviewer document describes the project at "v0.5 / T70.5" with open items including "nlive=2000 convergence, inelastic scattering main-run, post-BBN spectral distortion, Bullet Cluster likelihood improvement" (Assessment ¶5, ¶73). **All four of those items are already shipped in the current session's history**:
+
+| Item | Status | Reference |
+|---|---|---|
+| nlive=2000 (Nc, Nf) scan | ✅ T71.3 | commit 55767a1 |
+| Bullet Cluster likelihood improvement | ✅ T71.4 | commit 39bf07d |
+| nlive=2000 convergence | ✅ T71.3 | covered by R7 closure |
+| Inelastic scattering main-run | ⏸ Stale claim — actually a placeholder for future work | not in any shipped code |
+
+The Assessment is reading the project state from before T71.2-T71.6 (the 5-round shipping sprint of this session). This is a separate stale-claim pattern (reader's view of project state) — different from the session's recurring doc-code drift pattern, but same root cause: docs lag code after fast shipping rounds. Per the CONTRIBUTING.md doc-sync gate (T71.5 addition), the top-level README/EXTRACT/CITATION stamps should make this visible to any reviewer reading after T71.6.
+
+---
+
+## Final T71.7 verdict for Brower
+
+The Brower Zenodo deposit is **deferred to v0.7+ roadmap** (Assessment ¶75 agrees with this deferral). Reasons:
+
+1. **Wrong N_f**: N_f=8 ≠ our (3,4) target
+2. **High effort**: 2-3 hr CSV reverse-engineering + continuum/chiral extrapolation
+3. **Physics risk**: conformal-window behavior may widen, not narrow, our (3,4) error bar
+4. **Lower-priority**: project has higher-value work in flight (KiSS-SIDM UFD run in background)
+
+The 3 ESTIMATED lattice combos (2,2), (2,3), (3,4) remain ESTIMATED with honest documentation in `KSFR_NC_NF_TABLE.md`.
