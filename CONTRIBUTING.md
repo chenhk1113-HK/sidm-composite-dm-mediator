@@ -144,11 +144,42 @@ Use the `requesting-code-review` skill for the full workflow. The short version:
 1. Make sure `wip/vX.Y.Z` builds and tests pass
 2. Update `CHANGELOG.md` (move the [Unreleased] section to a new `## [vX.Y.Z] - YYYY-MM-DD` section)
 3. Bump `VERSION` to `vX.Y.Z`
+3a. **Doc-sync gate (mandatory)**: Audit the following top-level docs against the
+    just-shipped code + the new `VERSION` stamp. Patch any drift. Pre-flight
+    check before tagging — same rigor as code review.
+    - `README.md` — version badge + version callouts (T7x.x blocks) + bibtex
+    - `EXTRACT.md` — version stamp at top + standing-version header
+    - `MODEL_ASSUMPTIONS_AND_LIMITATIONS.md` — version stamp + any new
+      assumptions/limitations introduced this round
+    - `CITATION.cff` — `version` + `date-released` + cff-message field
+    - `CHANGELOG.md` — confirm new entry matches the actual code (no orphan
+      references, no missing items)
+    - `REVIEWER_AUDIT_R*.md` — if a round closed (R1* or T71.*),
+      bump the "standing-version NOW" header line to current VERSION
+    - `v0.3-prelim/docs/V0_6_ROADMAP.md` — if roadmap items moved, update
+      the status column
+    - `v0.3-prelim/docs/V0_*_TIER_*_CLOSURE.md` — verify cross-references
+      to CHANGELOG entries are valid (no `CHANGELOG.md [T-non-existent]`)
 4. `git checkout master && git merge wip/vX.Y.Z --no-ff`
 5. `git tag -a vX.Y.Z -m "..."` (with the changelog bullet as the tag message)
 6. `git branch -d wip/vX.Y.Z`
 7. `git push origin master --tags`
 8. If shipping a release artifact (PDF, ZIP, etc.), generate it AFTER the tag is created, not before. The artifact's filename should include the tag: `<project>_vX.Y.Z_<artifact-type>.<ext>`.
+
+### Why this rule exists (R13 / R15 / R16 / T71.5 lesson)
+
+The doc-sync gate is **the third defensive line** against the stale-claim pattern that hit this project four times in 2026-08-27/28:
+
+| Round | Stale claim | Root cause |
+|---|---|---|
+| R15 | "(Nc, Nf) scaffolded only" | roadmap deferred after T71.0 execution |
+| R16 | "channels claimed experimental" | no manifest declared per-channel status |
+| T71.5 | "LZ WS2024 ~2 weeks deferred" | roadmap written before T30 production wiring |
+| T71.5 | README/CITATION/EXTRACT at T71.2 stamp | docs not synced after 3 fast T71 commits in 1 day |
+
+**Pattern**: docs get out of sync with code after fast shipping rounds. The first three hit because roadmap/audit docs weren't re-read after the implementation caught up. The fourth hit because top-level docs (README, CITATION) lagged 3 T7x commits.
+
+The doc-sync gate inserts a **mandatory pre-tag audit** between version bump and merge. Cost: 1 commit per release (typically 5-10 minutes of pre-flight scanning). Benefit: catches drift at the version boundary instead of discovering it at the next reviewer audit.
 
 ## When to ask the user (the project owner) vs when to use judgment
 
@@ -165,3 +196,4 @@ Use the `requesting-code-review` skill for the full workflow. The short version:
 | Force-push to `master` | **NEVER** (without explicit owner direction). Use `git revert` or fix-up commits instead. |
 | Force-push to `wip/vX.Y.Z` | Agent judgment (only your own wip branch, never someone else's) |
 | Adding new external data to `v0.*-prelim/data/` | **Owner approval required.** External data needs a `DATA_SOURCES.md` entry. |
+| Doc-sync gate audit (Release process step 3a) | Agent judgment (mandatory per the rule above; surface findings to owner before tagging) |
