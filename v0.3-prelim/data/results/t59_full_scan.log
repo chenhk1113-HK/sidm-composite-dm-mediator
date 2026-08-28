@@ -1,0 +1,58 @@
+================================================================================
+T59 — Production-grade Boltzmann relic-density solver
+================================================================================
+
+Lee-Weinberg x-parameterization with temperature-dependent g_*s
+Replaces calibrated t55 (NOT a Boltzmann solver) + simplified t58 (no ODE)
+
+Grid scan: m_chi in {10, 50, 100, 500, 1000} GeV × g_chi in {0.05, 0.1, 0.3}
+Note: g_chi range chosen so <sigma*v> spans sub-thermal to super-thermal
+      (g=0.05 → ~5e-29 cm^3/s, g=0.1 → ~1e-27, g=0.3 → ~2e-25).
+
+
+--- m10_g0p1 (m_chi=10.0 GeV, g_chi=0.05) ---
+  Omega_h^2 = 0.02375, Omega_h2/obs = 0.1980, x_fo = 26.7, wall = 0.28s
+
+--- m10_g0p1 (m_chi=10.0 GeV, g_chi=0.1) ---
+  Omega_h^2 = 0.001626, Omega_h2/obs = 0.0136, x_fo = 29.4, wall = 0.28s
+
+--- m10_g0p3 (m_chi=10.0 GeV, g_chi=0.3) ---
+  Omega_h^2 = 2.316e-05, Omega_h2/obs = 0.0002, x_fo = 33.7, wall = 0.29s
+
+--- m50_g0p1 (m_chi=50.0 GeV, g_chi=0.05) ---
+  Omega_h^2 = 0.1909, Omega_h2/obs = 1.5909, x_fo = 27.7, wall = 0.30s
+
+--- m50_g0p1 (m_chi=50.0 GeV, g_chi=0.1) ---
+  Omega_h^2 = 0.01318, Omega_h2/obs = 0.1098, x_fo = 30.4, wall = 0.28s
+
+--- m50_g0p3 (m_chi=50.0 GeV, g_chi=0.3) ---
+  Omega_h^2 = 0.0001864, Omega_h2/obs = 0.0016, x_fo = 34.6, wall = 0.29s
+
+--- m100_g0p1 (m_chi=100.0 GeV, g_chi=0.05) ---
+  Omega_h^2 = 0.4304, Omega_h2/obs = 3.5871, x_fo = 27.6, wall = 0.26s
+
+--- m100_g0p1 (m_chi=100.0 GeV, g_chi=0.1) ---
+  Omega_h^2 = 0.03002, Omega_h2/obs = 0.2501, x_fo = 30.1, wall = 0.28s
+
+--- m100_g0p3 (m_chi=100.0 GeV, g_chi=0.3) ---
+  Omega_h^2 = 0.0004313, Omega_h2/obs = 0.0036, x_fo = 34.6, wall = 0.29s
+
+--- m500_g0p1 (m_chi=500.0 GeV, g_chi=0.05) ---
+  Omega_h^2 = 2.41, Omega_h2/obs = 20.0797, x_fo = 27.3, wall = 0.29s
+
+--- m500_g0p1 (m_chi=500.0 GeV, g_chi=0.1) ---
+  Omega_h^2 = 0.1693, Omega_h2/obs = 1.4111, x_fo = 30.0, wall = 0.28s
+
+--- m500_g0p3 (m_chi=500.0 GeV, g_chi=0.3) ---
+  Omega_h^2 = 0.002462, Omega_h2/obs = 0.0205, x_fo = 35.0, wall = 0.29s
+
+--- m1000_g0p1 (m_chi=1000.0 GeV, g_chi=0.05) ---
+  Omega_h^2 = 4.869, Omega_h2/obs = 40.5735, x_fo = 27.3, wall = 0.29s
+
+--- m1000_g0p1 (m_chi=1000.0 GeV, g_chi=0.1) ---
+  Omega_h^2 = 0.3426, Omega_h2/obs = 2.8550, x_fo = 30.0, wall = 0.28s
+
+--- m1000_g0p3 (m_chi=1000.0 GeV, g_chi=0.3) ---
+  Omega_h^2 = 0.004991, Omega_h2/obs = 0.0416, x_fo = 35.0, wall = 0.29s
+
+Summary saved: /home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/data/results/t59_production_boltzmann_summary.json

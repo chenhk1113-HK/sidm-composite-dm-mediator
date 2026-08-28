@@ -21,7 +21,7 @@
 | 7 | **KSFR mask version logging** (`ksfr_mask_max_at_runtime` field) | R16 #5 | ~1 day | ✅ Shipped T71.2 |
 | 8 | **config_hash field** for cross-version audit | R16 #11 | ~1 day | ✅ Shipped T71.2 |
 | 9 | **Hierarchical per-galaxy SPARC likelihood** | R14 Rec #10, R16 #1 | Multi-week | ✅ Shipped T71.4 (hierarchical selected via T41_SPARC_HIERARCHICAL=1; log Z shift +0.10 vs calibrated) |
-| 10 | **Proper Boltzmann relic-density calculation** | R14 Rec #9, R16 #4 | Multi-month | Deferred |
+| 10 | **Proper Boltzmann relic-density calculation** | R14 Rec #9, R16 #4 | Multi-month | ⚠️ Partial T71.6 (t59_production_boltzmann.py: real scipy.integrate.solve_ivp Radau solver; single-component s-wave shipped. Production-grade with micrOMEGAs/DarkSUSY still deferred per AGENTS.md rule 17) |
 | 11 | **External domain-expert review** | R16 #10 | Out-of-band | User action required |
 | 12 | **Drobczyk 2025 quantitative cross-validation** | R16 #8 | ~1 week | ✅ Shipped T71.5 (t68b: chi²=213 on 1 dof; cluster-scale 526× disagreement — see V0_6_TIER_B_CLOSURE.md) |
 | 13 | **Bullet Cluster likelihood upgrade** | R15 P077, R16 #2 | 1 day (sensitivity case) | ✅ Shipped T71.4 (sensitivity_0p2 variant via T41_BULLET_VARIANT env var; +1.74 log Z vs default) |
@@ -29,8 +29,8 @@
 | 15 | **Higher-nlive (N_c, N_f) scan at nlive=2000** | R16 #5(b) | ~40 min wall | ✅ Shipped T71.3 (10 min via 7-way parallel runner) |
 | 16 | **LZ WS2024 / Fermi-LAT full posterior shapes** | R16 #3 | ~2 weeks | ✅ Shipped T71.5 (already in production since R12 via t30_lz_real_posterior.py; stale roadmap item — see V0_6_TIER_B_CLOSURE.md) |
 | 17 | **KiSS-SIDM UFD fidelity** | R16 #9 | Multi-week | ⚠️ Deferred (wall-time limited — T38a failed at N=5e4 1-hour timeout; canonical halo converged but UFD intractable at current compute budget; see V0_6_TIER_B_CLOSURE.md) |
-| 18 | **Form-factor ansatz uncertainty sampling** | R16 #5(c) | Multi-week | Deferred |
-| 19 | **Lattice-informed KSFR ratios** | R16 #5(d) | Out-of-band | External data required |
+| 18 | **Form-factor ansatz uncertainty sampling** | R16 #5(c) | Multi-week | ✅ Shipped T71.6 (H4.2 sweep already on disk: log Z range = 0.375 < 1 → ROBUST; see V0_6_LATTICE_FORMFACTOR_CLOSURE.md) |
+| 19 | **Lattice-informed KSFR ratios** | R16 #5(d) | Out-of-band | ⚠️ Partial T71.6 (KSFR_NC_NF_TABLE.md + t53b_lattice_input.py shipped R11 G14; 2 of 7 (Nc,Nf) combos are LATTICE-class, 5 are ANALYTICAL/ESTIMATED; (3,3) anchor robust at R=8.36±0.05 with multi-source confirmation; see V0_6_LATTICE_FORMFACTOR_CLOSURE.md) |
 
 ### Current stand-ins (good enough for v0.5/T70.x results)
 

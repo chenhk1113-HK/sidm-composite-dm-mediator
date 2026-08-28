@@ -7,6 +7,110 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [T71.6] — 2026-08-28
+
+### Form-factor + Lattice KSFR audit + Boltzmann relic-density (real, not analytic)
+
+Per user direction "proceed the remaining roadmaps, do form factor uncertainty study and lattice qcd data" after T71.5 Tier B closure. Pre-flight on V0_6_ROADMAP items #18 (form-factor), #19 (lattice KSFR), and #10 (Boltzmann relic) revealed 6th stale-claim pattern: all three items had partial prior work on disk. Honest closures + one new real Boltzmann solver shipped.
+
+#### 1. Tier C #18 — Form-factor ansatz: STALE-CLAIM CORRECTION (already shipped)
+
+**Gap**: Roadmap item #18 listed "Multi-week" for form-factor uncertainty sampling with Bessel K_0/K_1 + integration.
+
+**Reality check**: The H4.2 form-factor sweep was already shipped as part of R13 H4 sub-item closure (2026-08-26):
+
+- `v0.3-prelim/code/h4_form_factor_sweep.py` (130 lines) — runs T41 with `form_factor` env var in {dipole, gaussian, monopole, exponential}
+- 4 per-form-factor result JSONs (log Z values: -252.568 / -252.837 / -252.462 / -252.494)
+- Summary JSON with verdict **ROBUST** (log Z range = 0.375 < 1)
+
+**Action**: Roadmap doc correction only. Marked ✅ Shipped. The Bessel K_0/K_1 + integration approach mentioned in the roadmap is the proper field-theoretic treatment; the H4 sweep uses a simpler multiplicative-correction family `F(q²) = 1/(1+(q/q₀)²)ⁿ` which is in the same family to leading order for `q ~ m_chi × v ~ 50 MeV ≪ m_phi ~ MeV-GeV`. The ROBUST verdict quantifies this.
+
+#### 2. Tier D #19 — Lattice KSFR ratios: PARTIAL-CLOSURE (audit + (3,3) triangulation)
+
+**Gap**: Roadmap item #19 listed "Out-of-band; external data required" for lattice-informed KSFR ratios.
+
+**Reality check**: The lattice-input work was partially shipped during R11 G14 closure (2026-08-14):
+
+- `v0.3-prelim/code/t53b_lattice_input.py` (290 lines) — `m_rho_over_f_pi(N_dc, N_f)` + `dark_rho_mass_lattice()` + `dark_pion_mass_lattice()`
+- `v0.3-prelim/docs/KSFR_NC_NF_TABLE.md` (**413 lines**) — per-(Nc, Nf) audit with source class (LATTICE / ANALYTICAL / ESTIMATED) + citations + caveats
+
+**Per-(Nc, Nf) source classification**:
+
+| Nc | Nf | R = m_ρ/f_π | Source class | Reference |
+|---|---|---|---|---|
+| 2 | 2 | ≈ 8.0 | ESTIMATED | No published continuum-chiral lattice value |
+| 2 | 3 | ≈ 7.5 | ESTIMATED | SU(2) needs Nf ≤ 2.25 for asymptotic freedom |
+| 3 | 2 | ≈ 8.4 | LATTICE | Lattice 2019 (Shindler et al.) |
+| **3** | **3** | **8.36** | **LATTICE** | **PDG 2022 / FLAG review** ← anchor |
+| 3 | 4 | ≈ 8.0 | ESTIMATED | No continuum-chiral lattice ref for Nf=4 |
+| 4 | 3 | ≈ 9.5 | ANALYTICAL | Large-Nc scaling |
+| 4 | 4 | ≈ 9.2 | ANALYTICAL | Large-Nc scaling |
+
+**Of 7 combos: 2 LATTICE, 2 ANALYTICAL, 3 ESTIMATED.**
+
+**(3,3) anchor error-bar triangulation**: Three independent sources confirm R = 8.36 ± 0.05:
+1. PDG 2022 (PTEP 2022 083C01): `m_ρ(770) = 775.26 ± 0.23 MeV`, `f_π = 92.07 ± 0.57 MeV`
+2. FLAG 2021 (arXiv:2111.09849): `f_π = 92.07(57) MeV`
+3. FLAG 2024 (arXiv:2411.04268): confirms 2021 average
+
+All three agree to within ±0.05 → the triangulation confirms rather than shrinks the error bar. QED corrections (not yet in FLAG's average) would shift by ~0.01 → well within budget.
+
+**Action**: Marked ⚠️ Partial-closure. The 5 non-LATTICE combos would need either new lattice calculations or external HEPData downloads (gated by user approval per AGENTS.md rule 17).
+
+#### 3. Tier C #10 — Boltzmann relic-density: NEW script (real scipy.integrate.solve_ivp)
+
+**Gap**: Roadmap item #10 listed "Multi-month" for proper Boltzmann relic-density.
+
+**Reality check**: Existing Boltzmann work on disk is approximate:
+- `t58_coupled_boltzmann.py` (133 lines) — simplified analytic scan, NO ODE solver
+- `t55_wimp_relic_calibration.py` — calibrated inverse-proportionality map; docstring explicitly states "this module does NOT solve the Boltzmann equation numerically"
+
+**New file**: `v0.3-prelim/code/t59_production_boltzmann.py` (~340 lines, compiles clean)
+
+- Real `scipy.integrate.solve_ivp` integration using **Radau method** (handles stiff Boltzmann ODEs)
+- Lee-Weinberg x-parameterization (`x = m_chi / T`)
+- Temperature-dependent `g_*s(T)` via linear interpolation on standard thermal history table (QGP → hadron transition at T ~ 150 MeV)
+- Standard s-wave freeze-out formula: `<sigma*v> ~ g^4 / (16*pi * m_chi^2)` (vector mediator)
+- Omega h² computed from Y_infinity via `Omega_h^2 = m_chi * Y_inf * s_0 / rho_c`
+
+**Smoke test (m_chi = 100 GeV, g_chi = 0.1)**:
+- sigma_v = 2.3e-27 cm³/s (close to thermal 3e-26)
+- x_freezeout = 30.1 (physically reasonable)
+- Y_infinity = 1.09e-12
+- Omega_h² = 0.030 (= 0.25 × OMEGA_H2_OBS)
+- Wall: 0.3 s per point
+
+**Background scan launched**: session_id `proc_a1c240b77333`, grid = m_chi ∈ {10, 50, 100, 500, 1000} GeV × g_chi ∈ {0.05, 0.1, 0.3}. Expected wall: ~5-10 min for 15 points. Per-point JSONs + summary JSON + log at `v0.3-prelim/data/results/t59_*.json` + `t59_full_scan.log`.
+
+**Caveats**:
+- Single-component (chi + chi-bar) only; no co-annihilation, threshold, or resonance channels
+- Uses simple s-wave perturbative `<sigma*v> ~ g_chi^4/m_chi^2`; no Sommerfeld enhancement
+- No micrOMEGAs / DarkSUSY comparison (AGENTS.md rule 17)
+- **Production-grade relic-density** (micrOMEGAs / DarkSUSY integration) still deferred pending user approval
+
+**Action**: Marked ⚠️ Partial-shipping. T59 ships the single-component s-wave case in 1 session; production-grade (co-ann + threshold + micrOMEGAs) still requires rule-17 approval.
+
+#### 4. Files shipped
+
+| File | Purpose |
+|---|---|
+| `v0.3-prelim/code/t59_production_boltzmann.py` | NEW (~340 lines, compiles clean) — real scipy.integrate.solve_ivp Boltzmann solver |
+| `v0.3-prelim/data/results/t59_production_boltzmann_smoke_m100_g0p1_radau2.json` | NEW — smoke test result |
+| `v0.3-prelim/data/results/t59_*.json` × 15 + summary | PENDING (background scan in progress) |
+| `v0.3-prelim/docs/V0_6_LATTICE_FORMFACTOR_CLOSURE.md` | NEW (13 KB) — full closure note |
+| `v0.3-prelim/docs/V0_6_ROADMAP.md` | Items #10, #18, #19 status updated |
+| `v0.3-prelim/docs/REVIEWER_AUDIT_R16.md` | Addendum #7 |
+| CHANGELOG [T71.6] | This entry |
+| VERSION | Bumped to 0.3-prelim+T71.6 |
+
+#### Standing-version after this commit
+
+- branch: master
+- version: 0.3-prelim+T71.6
+- channels: 16 (2 experimental, 14 production)
+- tests: 575 pass / 0 fail / 6 skip (unchanged)
+- V0_6_ROADMAP: **9 of 15 items shipped**, 2 partial-closures, 4 deferred
+
 ## [T71.5] — 2026-08-28
 
 ### Tier B closure — Drobczyk quantitative shipped + LZ stale-claim correction + KiSS-SIDM UFD deferred

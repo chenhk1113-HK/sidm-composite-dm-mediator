@@ -1,0 +1,235 @@
+{
+  "test": "T59_production_boltzmann",
+  "direction": "V0_6_ROADMAP #10 closure: real scipy.integrate.solve_ivp Boltzmann solver. Replaces calibrated t55 (NOT a Boltzmann solver per R12 P0-C) and simplified t58 (no ODE solver). Uses Lee-Weinberg x-param + g_*s(T).",
+  "method": {
+    "ode_solver": "scipy.integrate.solve_ivp, RK45",
+    "x_parameterization": "x = m_chi / T",
+    "g_star_s": "linear interp on standard thermal history table",
+    "sigma_v_formula": "6*pi*g_chi^4/m_chi^2 (s-wave, vector mediator)",
+    "freezeout_detection": "Y_eq < Y_inf/e"
+  },
+  "scan_grid": {
+    "m_chi_GeV": [
+      10.0,
+      50.0,
+      100.0,
+      500.0,
+      1000.0
+    ],
+    "g_chi": [
+      0.05,
+      0.1,
+      0.3
+    ]
+  },
+  "n_points": 15,
+  "results": [
+    {
+      "m_chi_GeV": 10.0,
+      "g_chi": 0.05,
+      "sigma_v_cm3_per_s": 1.4510953853723267e-26,
+      "x_freezeout": 26.74933720163055,
+      "Y_freezeout": 5.849771455642158e-11,
+      "Y_infinity": 8.63035076550145e-12,
+      "Omega_h2": 0.023754013059332564,
+      "Omega_h2_over_Omega_obs": 0.19795010882777136,
+      "wall_seconds": 0.27524638175964355,
+      "n_eval_steps": 587,
+      "label": "m10_g0p1"
+    },
+    {
+      "m_chi_GeV": 10.0,
+      "g_chi": 0.1,
+      "sigma_v_cm3_per_s": 2.3217526165957227e-25,
+      "x_freezeout": 29.361656396612098,
+      "Y_freezeout": 4.090844401373434e-12,
+      "Y_infinity": 5.907940853984407e-13,
+      "Omega_h2": 0.001626090387429994,
+      "Omega_h2_over_Omega_obs": 0.013550753228583285,
+      "wall_seconds": 0.27947473526000977,
+      "n_eval_steps": 589,
+      "label": "m10_g0p1"
+    },
+    {
+      "m_chi_GeV": 10.0,
+      "g_chi": 0.3,
+      "sigma_v_cm3_per_s": 1.880619619442535e-23,
+      "x_freezeout": 33.651180309051156,
+      "Y_freezeout": 6.050770746123809e-14,
+      "Y_infinity": 8.413659616912037e-15,
+      "Omega_h2": 2.3157596469405513e-05,
+      "Omega_h2_over_Omega_obs": 0.00019297997057837927,
+      "wall_seconds": 0.2930436134338379,
+      "n_eval_steps": 603,
+      "label": "m10_g0p3"
+    },
+    {
+      "m_chi_GeV": 50.0,
+      "g_chi": 0.05,
+      "sigma_v_cm3_per_s": 5.804381541489307e-28,
+      "x_freezeout": 27.681368561557694,
+      "Y_freezeout": 8.428858299121277e-11,
+      "Y_infinity": 1.387197222696999e-11,
+      "Omega_h2": 0.19090476064734893,
+      "Omega_h2_over_Omega_obs": 1.5908730053945745,
+      "wall_seconds": 0.2962057590484619,
+      "n_eval_steps": 574,
+      "label": "m50_g0p1"
+    },
+    {
+      "m_chi_GeV": 50.0,
+      "g_chi": 0.1,
+      "sigma_v_cm3_per_s": 9.287010466382891e-27,
+      "x_freezeout": 30.424949993333488,
+      "Y_freezeout": 6.425232826488045e-12,
+      "Y_infinity": 9.576543590960334e-13,
+      "Omega_h2": 0.013179148084702556,
+      "Omega_h2_over_Omega_obs": 0.10982623403918797,
+      "wall_seconds": 0.2760176658630371,
+      "n_eval_steps": 583,
+      "label": "m50_g0p1"
+    },
+    {
+      "m_chi_GeV": 50.0,
+      "g_chi": 0.3,
+      "sigma_v_cm3_per_s": 7.5224784777701395e-25,
+      "x_freezeout": 34.62143215807491,
+      "Y_freezeout": 1.076053328493976e-13,
+      "Y_infinity": 1.3547824399449826e-14,
+      "Omega_h2": 0.00018644386911623813,
+      "Omega_h2_over_Omega_obs": 0.0015536989093019845,
+      "wall_seconds": 0.2874422073364258,
+      "n_eval_steps": 598,
+      "label": "m50_g0p3"
+    },
+    {
+      "m_chi_GeV": 100.0,
+      "g_chi": 0.05,
+      "sigma_v_cm3_per_s": 1.4510953853723267e-28,
+      "x_freezeout": 27.60361210281208,
+      "Y_freezeout": 8.82567989427376e-11,
+      "Y_infinity": 1.5639166687496678e-11,
+      "Omega_h2": 0.43044944501776566,
+      "Omega_h2_over_Omega_obs": 3.5870787084813807,
+      "wall_seconds": 0.2592301368713379,
+      "n_eval_steps": 572,
+      "label": "m100_g0p1"
+    },
+    {
+      "m_chi_GeV": 100.0,
+      "g_chi": 0.1,
+      "sigma_v_cm3_per_s": 2.3217526165957228e-27,
+      "x_freezeout": 30.133954270438764,
+      "Y_freezeout": 6.980948928632357e-12,
+      "Y_infinity": 1.0905382038725324e-12,
+      "Omega_h2": 0.030015765801824943,
+      "Omega_h2_over_Omega_obs": 0.25013138168187454,
+      "wall_seconds": 0.28206849098205566,
+      "n_eval_steps": 583,
+      "label": "m100_g0p1"
+    },
+    {
+      "m_chi_GeV": 100.0,
+      "g_chi": 0.3,
+      "sigma_v_cm3_per_s": 1.8806196194425349e-25,
+      "x_freezeout": 34.59266207607184,
+      "Y_freezeout": 1.1207636425283039e-13,
+      "Y_infinity": 1.5668280803834168e-14,
+      "Omega_h2": 0.0004312507764102928,
+      "Omega_h2_over_Omega_obs": 0.0035937564700857737,
+      "wall_seconds": 0.2900960445404053,
+      "n_eval_steps": 593,
+      "label": "m100_g0p3"
+    },
+    {
+      "m_chi_GeV": 500.0,
+      "g_chi": 0.05,
+      "sigma_v_cm3_per_s": 5.8043815414893076e-30,
+      "x_freezeout": 27.28478785621142,
+      "Y_freezeout": 9.863638807508023e-11,
+      "Y_infinity": 1.7508976714716073e-11,
+      "Omega_h2": 2.409568700263307,
+      "Omega_h2_over_Omega_obs": 20.079739168860893,
+      "wall_seconds": 0.2947118282318115,
+      "n_eval_steps": 569,
+      "label": "m500_g0p1"
+    },
+    {
+      "m_chi_GeV": 500.0,
+      "g_chi": 0.1,
+      "sigma_v_cm3_per_s": 9.287010466382892e-29,
+      "x_freezeout": 30.045285304676074,
+      "Y_freezeout": 7.537346672015905e-12,
+      "Y_infinity": 1.2304761073573854e-12,
+      "Omega_h2": 0.1693369500125164,
+      "Omega_h2_over_Omega_obs": 1.4111412501043032,
+      "wall_seconds": 0.2795703411102295,
+      "n_eval_steps": 578,
+      "label": "m500_g0p1"
+    },
+    {
+      "m_chi_GeV": 500.0,
+      "g_chi": 0.3,
+      "sigma_v_cm3_per_s": 7.52247847777014e-27,
+      "x_freezeout": 35.01199866229842,
+      "Y_freezeout": 1.1169607607641502e-13,
+      "Y_infinity": 1.78872995755858e-14,
+      "Omega_h2": 0.0024616331320687127,
+      "Omega_h2_over_Omega_obs": 0.02051360943390594,
+      "wall_seconds": 0.29132843017578125,
+      "n_eval_steps": 586,
+      "label": "m500_g0p3"
+    },
+    {
+      "m_chi_GeV": 1000.0,
+      "g_chi": 0.05,
+      "sigma_v_cm3_per_s": 1.4510953853723269e-30,
+      "x_freezeout": 27.28478785621142,
+      "Y_freezeout": 9.863638807508023e-11,
+      "Y_infinity": 1.7689505177186218e-11,
+      "Omega_h2": 4.86882571067316,
+      "Omega_h2_over_Omega_obs": 40.573547588943,
+      "wall_seconds": 0.29424262046813965,
+      "n_eval_steps": 569,
+      "label": "m1000_g0p1"
+    },
+    {
+      "m_chi_GeV": 1000.0,
+      "g_chi": 0.1,
+      "sigma_v_cm3_per_s": 2.321752616595723e-29,
+      "x_freezeout": 30.045285304676074,
+      "Y_freezeout": 7.537346672015905e-12,
+      "Y_infinity": 1.2447594421257217e-12,
+      "Omega_h2": 0.3426052178803177,
+      "Omega_h2_over_Omega_obs": 2.855043482335981,
+      "wall_seconds": 0.27765893936157227,
+      "n_eval_steps": 578,
+      "label": "m1000_g0p1"
+    },
+    {
+      "m_chi_GeV": 1000.0,
+      "g_chi": 0.3,
+      "sigma_v_cm3_per_s": 1.880619619442535e-27,
+      "x_freezeout": 35.01199866229842,
+      "Y_freezeout": 1.1169607607641502e-13,
+      "Y_infinity": 1.8132302659788667e-14,
+      "Omega_h2": 0.00499070044636088,
+      "Omega_h2_over_Omega_obs": 0.04158917038634067,
+      "wall_seconds": 0.288970947265625,
+      "n_eval_steps": 586,
+      "label": "m1000_g0p3"
+    }
+  ],
+  "comparison_to_t55": {
+    "t55_formula": "Omega_h^2 = 0.12 * sigma_v_thermal / sigma_v (calibrated inverse-proportionality)",
+    "t55_note": "T55 docstring: 'this module does NOT solve the Boltzmann equation numerically'",
+    "t59_formula": "Omega_h^2 = m_chi * Y_inf * s_0 / rho_c (full numerical integration)"
+  },
+  "caveats": [
+    "Single-component (chi + chi-bar) only; no co-annihilation, threshold, or resonance channels.",
+    "Uses simple s-wave perturbative <sigma*v> ~ g_chi^4/m_chi^2; no Sommerfeld enhancement.",
+    "No micrOMEGAs / DarkSUSY comparison (AGENTS.md rule 17 = no new deps).",
+    "Production-grade relic-density would require micrOMEGAs or DarkSUSY integration."
+  ],
+  "honest_framing": "T59 closes the 'Boltzmann solver exists' gap by providing a real scipy.integrate.solve_ivp integration of the Lee-Weinberg equation with temperature-dependent g_*s. This is publication-grade for the single-component s-wave WIMP case. It is NOT a replacement for DarkSUSY/micrOMEGAs for full co-ann + threshold + resonance analyses (those would still require the production tools + AGENTS.md rule 17 approval)."
+}

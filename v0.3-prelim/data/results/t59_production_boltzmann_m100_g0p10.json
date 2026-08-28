@@ -1,0 +1,13 @@
+{
+  "m_chi_GeV": 100.0,
+  "g_chi": 0.1,
+  "sigma_v_cm3_per_s": 2.3217526165957228e-27,
+  "x_freezeout": 30.133954270438764,
+  "Y_freezeout": 6.980948928632357e-12,
+  "Y_infinity": 1.0905382038725324e-12,
+  "Omega_h2": 0.030015765801824943,
+  "Omega_h2_over_Omega_obs": 0.25013138168187454,
+  "wall_seconds": 0.28206849098205566,
+  "n_eval_steps": 583,
+  "label": "m100_g0p1"
+}

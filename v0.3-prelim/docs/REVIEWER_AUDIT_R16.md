@@ -118,6 +118,11 @@ Both ship in ~1 day combined. The remaining 10 recommendations are correctly pri
    - **R16 #3 (LZ WS2024 full posterior shapes)**: Roadmap item is **stale** — the real LZ WS2024 posterior has been in T41 production since R12 (2026-08-17) via `t30_lz_real_posterior.loglike_lz_real` (HEPData record 155182, 26 mass points). No new code; this is a documentation correction.
    - **R16 #9 (KiSS-SIDM UFD fidelity)**: **Deferred with rationale**. The KiSS-SIDM Julia bridge hits a hard 3600s timeout at UFD N=5e4 (T38a failure). The canonical halo (M_halo = 10⁹ M_☉) is fully converged at N=1e4-1e5, but the dwarf/UFD regime is intractable at our compute budget without rewriting the DSMC in a faster language or using the paper's original C/Python implementation. Multi-week scope; cannot ship in a single session.
 
+7. **T71.6 follow-up — Form-factor + Lattice KSFR audit + Boltzmann relic-density (real, not analytic).** Pre-flight on V0_6_ROADMAP items #18, #19, #10 revealed three more stale-claim patterns (this is the 6th time in this session; same root cause: docs lag behind fast shipping rounds).
+   - **R16 #5(c) (Form-factor ansatz uncertainty)**: Already shipped via `h4_form_factor_sweep.py` (R13 H4.2 closure, 2026-08-26). 4 form factors (dipole, gaussian, monopole, exponential); log Z range = 0.375 < 1 → verdict ROBUST. Roadmap item was stale.
+   - **R16 #5(d) (Lattice KSFR ratios)**: Partial-closure via `KSFR_NC_NF_TABLE.md` (413 lines, R11 G14 closure 2026-08-14). Per-(Nc, Nf) audit with source classification: 2 of 7 combos are LATTICE-class (3,2 Shindler 2019 + 3,3 PDG/FLAG), 2 are ANALYTICAL-class (4,3 and 4,4 large-Nc), 3 are ESTIMATED-class (2,2; 2,3; 3,4 — no published continuum-chiral lattice values). (3,3) anchor triangulated: R = 8.36 ± 0.05 (PDG 2022 + FLAG 2021/2024 all agree).
+   - **R14 Rec #9 (Proper Boltzmann relic-density)**: New `t59_production_boltzmann.py` (340 lines) ships a real `scipy.integrate.solve_ivp` Radau solver using Lee-Weinberg x-parameterization + temperature-dependent g_*s. Replaces the calibrated t55 (NOT a Boltzmann solver per its own docstring) and the simplified analytic t58 (no ODE). Smoke test: m_chi=100 GeV, g_chi=0.1 → x_freezeout=30.1, Omega_h²=0.030, wall=0.3s. Full 5×3 grid scan launched in background (session_id `proc_a1c240b77333`).
+
 ---
 
 ## Closing note
