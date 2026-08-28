@@ -28,7 +28,7 @@
 | 14 | **Reduce reliance on contested channels** (UDG, cosmic-web radio) | R16 #12 | ~1 day (tag-only) | ✅ Shipped T71.4 (CHANNEL_STATUS dict + t13 JSON fields) |
 | 15 | **Higher-nlive (N_c, N_f) scan at nlive=2000** | R16 #5(b) | ~40 min wall | ✅ Shipped T71.3 (10 min via 7-way parallel runner) |
 | 16 | **LZ WS2024 / Fermi-LAT full posterior shapes** | R16 #3 | ~2 weeks | ✅ Shipped T71.5 (already in production since R12 via t30_lz_real_posterior.py; stale roadmap item — see V0_6_TIER_B_CLOSURE.md) |
-| 17 | **KiSS-SIDM UFD fidelity** | R16 #9 | Multi-week | ⚠️ Deferred (wall-time limited — T38a failed at N=5e4 1-hour timeout; canonical halo converged but UFD intractable at current compute budget; see V0_6_TIER_B_CLOSURE.md) |
+| 17 | **KiSS-SIDM UFD fidelity** | R16 #9 | Multi-week | ⚠️ Partial-closure T71.7: wrapper patch (KISS_SIDM_TIMEOUT_S env var) shipped; T38a N=5e4 dwarf re-run TIMED OUT at 7200s with only 2/10 snapshots. Honest verdict: UFD KiSS-SIDM is structurally compute-prohibitive at single-session budget. Defer to v0.7+ requires architectural change (smaller N or fewer snapshots). See V0_6_KISS_SIDM_TIMEOUT_VERDICT.md |
 | 18 | **Form-factor ansatz uncertainty sampling** | R16 #5(c) | Multi-week | ✅ Shipped T71.6 (H4.2 sweep already on disk: log Z range = 0.375 < 1 → ROBUST; see V0_6_LATTICE_FORMFACTOR_CLOSURE.md) |
 | 19 | **Lattice-informed KSFR ratios** | R16 #5(d) | Out-of-band | ⚠️ Partial T71.6 (KSFR_NC_NF_TABLE.md + t53b_lattice_input.py shipped R11 G14; 2 of 7 (Nc,Nf) combos are LATTICE-class, 5 are ANALYTICAL/ESTIMATED; (3,3) anchor robust at R=8.36±0.05 with multi-source confirmation; see V0_6_LATTICE_FORMFACTOR_CLOSURE.md) |
 

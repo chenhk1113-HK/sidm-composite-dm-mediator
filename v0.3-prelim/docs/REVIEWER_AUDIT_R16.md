@@ -132,3 +132,15 @@ This R16 review is **less actionable than R15** because the reviewer correctly f
 The most useful signal from this review is the convergence across multiple reviewer pools on the **"docs ↔ source code cross-reference" problem**. When a human SIDM specialist, a machine-generated review, AND an internal audit all catch the same meta-pattern (stale claims about features already shipped, Bullet Cluster hard-vs-soft, KSFR mask version), the fix is **structural**: every shipped feature should be tagged with the commit SHA that introduced it, and every doc that references a feature should cross-reference that commit. This is a low-effort, high-value improvement that would prevent future reviewers from repeating the same verification work.
 
 R16 closure (T71.2 = KSFR mask version logging + config_hash field) is the recommended next round if the user wants to ship. Otherwise, this audit is ready to be acknowledged and the actionable items filed to `V0_6_ROADMAP.md` for v0.6+ cycles.
+
+8. **T71.7 follow-up — KiSS-SIDM upstream located + wrapper patch + honest timeout closure.** Per user direction "kiss sidm ufd, use the author original c python; download hepdata". Two corrections from prior assumptions:
+
+   - **The KiSS-SIDM upstream IS Julia, not C/Python.** Repo at `https://gitlab.com/Socob/KiSS-SIDM` (Simon May + James Gurian, first author of arXiv:2505.15903 / PRL 135 221001). Already installed at `/home/lamkuenai/KiSS-SIDM`; our bridge already pointed at it. The "C/Python" framing in the user's instruction (and in T71.5 R16 #9 addendum above) was wrong. See `V0_6_KISS_SIDM_UPSTREAM_FINDING.md`.
+
+   - **Wrapper patch shipped**: `KISS_SIDM_TIMEOUT_S` env var now overrides the 3600s default. Commit cdb9028.
+
+   - **T38a N=5e4 dwarf re-run TIMED OUT at 7200s** (full 2-hr budget consumed; only 2/10 snapshots produced; no quantitative r_core/r_s result). The wrapper-level 3600s timeout was NOT the bottleneck — the simulation physics cost is. See `V0_6_KISS_SIDM_TIMEOUT_VERDICT.md`. This is honest evidence that item #17 requires architectural change (smaller N, fewer snapshots, or coarser physics), not just longer wall-time budgets. Defer to v0.7+ with honest rationale.
+
+   - **HEPData download: not viable.** 5 search rounds confirmed no lattice-QCD data exists for our 3 ESTIMATED combos (2,2), (2,3), (3,4). Brower N_f=8 Zenodo deposit (322 MB, CC-BY-4.0) exists but: (a) wrong N_f, (b) column mapping undocumented, (c) reviewer Assessment.docx flagged conformal-window risk (N_f=8 may WIDEN rather than narrow our (3,4) error bar). See `V0_6_BROWER_PROBE_SCOPE.md` + `V0_7_REVIEWER_RESPONSE_BROWER_ASSESSMENT.md`.
+
+   - **V0_6_ROADMAP status after T71.7**: 9 of 15 items shipped (#1, #7, #8, #12, #13, #14, #15, #16, #18), 2 partial-closures (#10, #19), 2 partial-deferred (#17 wrapper patch works but simulation timed out; #11 requires user-side review). 2 deferred items remain out-of-session (#11 review, plus original #2-#6, #9 + out-of-band items). Standing version: v0.3-prelim+T71.7.

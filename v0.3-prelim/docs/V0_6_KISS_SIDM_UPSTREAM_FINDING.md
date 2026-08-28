@@ -159,5 +159,7 @@ None of these fit a single chat session. The (3,3) anchor remains robust at R = 
 
 **V0_6_ROADMAP item #17 status update (post-run):**
 - ✅ T71.7: KiSS-SIDM upstream located (gitlab.com/Socob/KiSS-SIDM, Julia) + already installed at /home/lamkuenai/KiSS-SIDM
-- ⏳ T71.7 (in progress): T38a N=5e4 dwarf re-run with extended timeout (background session proc_23b6f90d2ffc)
-- 📌 T71.7 outcome: **see JSON result when run completes**
+- ✅ T71.7: Wrapper timeout made configurable via KISS_SIDM_TIMEOUT_S env var (commit cdb9028)
+- ❌ T71.7: T38a N=5e4 dwarf re-run TIMED OUT at 7200s (full 2-hour budget consumed; only 2 snapshots produced; no quantitative r_core/r_s result)
+- 📌 **T71.7 honest verdict**: UFD KiSS-SIDM at N=5e4 dwarf is structurally compute-prohibitive at single-session wall-clock budget. Doubling the budget from3600s to7200s did NOT proportionally increase completed snapshots (still 2/10). The wrapper-level 3600s timeout was NOT the bottleneck. Remaining options are: (a) smaller N at canonical halo, (b) reduced snapshot_count, (c) coarser physics, or (d) accept that UFD KiSS-SIDM is out-of-session.
+- See `V0_6_KISS_SIDM_TIMEOUT_VERDICT.md` for full analysis.

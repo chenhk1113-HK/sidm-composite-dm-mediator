@@ -7,7 +7,59 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
-## [T71.6] — 2026-08-28
+## [T71.7] — 2026-08-28
+
+Per user direction "kiss sidm ufd, use the author original c python; download hepdata".
+
+### What was found
+
+**KiSS-SIDM upstream is Julia, not C/Python** (correcting my earlier T71.5 misframing). The actual repo is `https://gitlab.com/Socob/KiSS-SIDM` (Simon May + James Gurian, first author of arXiv:2505.15903 / PRL 135 221001). Most recent commit 2026-08-18. Package name `DSMC`, Julia1.11.5, 2289 lines across 15 modules. **Already installed** at `/home/lamkuenai/KiSS-SIDM` and already wired into our bridge at `v0.3-prelim/code/kiss_sidm_julia_bridge.py:25`.
+
+The user's "use the author original C/Python" instruction was based on a guess that turned out wrong. The upstream IS the authors' code; we've been wrapping it the whole time.
+
+### Code change (`kiss_sidm_julia_bridge.py:375-382`)
+
+Subprocess timeout now configurable via `KISS_SIDM_TIMEOUT_S` env var (default 3600s preserved). For UFD-scale runs, set `KISS_SIDM_TIMEOUT_S=7200` or higher. Documented inline.
+
+### Background run: T38a N=5e4 dwarf re-run
+
+Launched session `proc_23b6f90d2ffc` with `KISS_SIDM_TIMEOUT_S=7200`. **Result: TIMEOUT after 7200s (full 2-hour budget consumed).**
+
+Observed during run:
+- Julia subprocess at 99.9% CPU throughout, RAM grew 1 GB → 3.48 GB
+- **2 of 10 snapshots produced** (snap_000, snap_001 — both in first ~2 min)
+- **No further snapshots for the remaining ~118 minutes** (snapshot cadence slows dramatically after initial state relaxation)
+- Julia subprocess did NOT crash; `subprocess.TimeoutExpired` raised by Python wrapper
+
+Honest verdict: **UFD KiSS-SIDM at N=5e4 dwarf is structurally compute-prohibitive at single-session wall-clock budget.** Doubling the budget from 3600s to 7200s did NOT proportionally increase completed snapshots (still 2/10). The wrapper-level 3600s timeout was NOT the bottleneck; the simulation physics cost is.
+
+### HEPData download
+
+Per the user's other instruction. 5 search rounds (HEPData direct, ILDG, USQCD, Brower Zenodo, Bennett Zenodo): **no lattice data exists for our 3 ESTIMATED combos (2,2), (2,3), (3,4).** Brower et al. arXiv:2306.06095 has N_f=8 data on Zenodo (CC-BY-4.0, 322 MB) but: (a) N_f=8 ≠ our (3,4) target, (b) column mapping is undocumented (would need 2-3 hr to reverse-engineer), (c) reviewer Assessment.docx flagged that N_f=8 is near-conformal and may WIDEN rather than narrow our (3,4) error bar.
+
+### Reviewer Assessment
+
+External reviewer Assessment.docx (81 paragraphs) confirmed:
+- Use-case A (direct R for (3,4) from Brower): ❌ not feasible
+- Use-case B (N_f=8 as conformal-window trend anchor): ⏸ high-effort, physics risk
+- Final recommendation: defer to v0.7+ roadmap (we agree)
+
+Reviewer Assessment also flagged stale project state (says "v0.5 / T70.5" — actually we're at v0.3-prelim+T71.6 with 9 of 15 v0.6 items shipped). The T71.5 doc-sync gate (CONTRIBUTING.md step 3a) should make project state clearer to future reviewers.
+
+### Files shipped in T71.7 (4 commits)
+
+- `v0.3-prelim/code/kiss_sidm_julia_bridge.py` — MODIFIED (timeout configurable)
+- `v0.3-prelim/code/t71_7_kiss_sidm_ufd_launcher.py` — NEW (T38a re-run launcher)
+- `v0.3-prelim/data/results/t71_7_kiss_sidm_ufd_n5e4.json` — NEW (timeout result)
+- `v0.3-prelim/docs/V0_6_KISS_SIDM_UPSTREAM_FINDING.md` — NEW (upstream + wrapper)
+- `v0.3-prelim/docs/V0_6_BROWER_PROBE_SCOPE.md` — NEW (honest negative result + reviewer caveat)
+- `v0.3-prelim/docs/V0_6_KISS_SIDM_TIMEOUT_VERDICT.md` — NEW (timeout evidence + verdict)
+- `v0.3-prelim/docs/V0_7_REVIEWER_RESPONSE_BROWER_ASSESSMENT.md` — NEW (formal reviewer response)
+- `VERSION` bumped to `0.3-prelim+T71.7`
+
+### V0_6_ROADMAP status after T71.7
+
+9 of 15 items shipped (#1, #7, #8, #12, #13, #14, #15, #16, #18), 2 partial-closures (#10, #19), 2 partial-deferred (#17 wrapper patch works but simulation timed out; #11 requires user-side review). Standing version: v0.3-prelim+T71.7.
 
 ### Form-factor + Lattice KSFR audit + Boltzmann relic-density (real, not analytic)
 

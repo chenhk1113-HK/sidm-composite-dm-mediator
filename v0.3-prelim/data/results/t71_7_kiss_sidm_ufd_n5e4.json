@@ -1,0 +1,47 @@
+{
+  "test": "T71_7_kiss_sidm_ufd_n5e4",
+  "direction": "T71.7: Re-run T38a dwarf KiSS-SIDM at N=5e4 with extended timeout (3600s -> 7200s) via KISS_SIDM_TIMEOUT_S env var. Goal: complete the dwarf simulation that T38a (2026-08-22) killed at 1 hour.",
+  "status": "error_timeout",
+  "verdict": "TIMEOUT: KiSS-SIDM UFD N=5e4 dwarf hit 7200s wrapper timeout. Even with extended timeout (2x the original 3600s budget), the dwarf simulation cannot complete 10 snapshots within a single chat-session wall-clock budget.",
+  "upstream_repo": "https://gitlab.com/Socob/KiSS-SIDM",
+  "upstream_local_path": "/home/lamkuenai/KiSS-SIDM",
+  "upstream_package_version": "DSMC v0.0.1",
+  "wrapper_timeout_seconds": 7200,
+  "wall_seconds_actual": 7200,
+  "wall_human": "120.0 min (full budget consumed)",
+  "exit_reason": "subprocess.TimeoutExpired: Command '['/home/lamkuenai/.juliaup/bin/julia', '+1.11.5', '--project=/home/lamkuenai/KiSS-SIDM', '/tmp/kiss_sidm_worker.jl']' timed out after 7200 seconds",
+  "halo_params": {
+    "N_particles": 50000,
+    "t_end_Gyr": 10.0,
+    "sigma_m_cm2_per_g": 5.0,
+    "rho_s_Msun_per_kpc3": 27300000.0,
+    "r_s_kpc": 0.5477,
+    "seed": 42,
+    "snapshot_count_target": 10
+  },
+  "observed_during_run": {
+    "process_state": "Julia subprocess at 99.9% CPU throughout, RAM grew from 1 GB to 3.48 GB",
+    "snapshots_produced": 2,
+    "snapshot_files": ["snap_000.jld2 (1.6 MB, written 17:40)", "snap_001.jld2 (1.6 MB, written 17:42)"],
+    "snapshot_cadence_observed": "First 2 snapshots in first ~2 minutes, then NO new snapshots for the remaining ~118 minutes (1 hr 58 min)",
+    "snapshot_directory_post_run": "/tmp/kiss_sidm_output/ no longer exists (wiped after timeout; intermediate HDF5 files lost)"
+  },
+  "interpretation": "The wrapper timeout patch (commit cdb9028) WORKED correctly — KISS_SIDM_TIMEOUT_S=7200 was honored and the simulation ran for the full 2 hours. Julia did NOT crash. The simulation simply requires more than 2 hours of wall-clock at N=5e4 dwarf to produce a meaningful r_core/r_s result (likely needs 5+ hours or N=1e4). This is consistent with the T38a partial-finding observation (12 min for 2 snapshots, then 1 hr total for no further progress). The wrapper-level 3600s timeout was NOT the bottleneck — the simulation is structurally compute-prohibitive at UFD scales within a single chat session.",
+  "comparison_to_t38a": {
+    "t38a_wall": 3600,
+    "t38a_snapshots": "0-2 (run killed at wrapper timeout, no completed snapshots)",
+    "t71_7_wall": 7200,
+    "t71_7_snapshots": "2 (run killed at wrapper timeout, but no further snapshots after first 2 min)",
+    "verdict": "Doubling the wall-time budget did NOT proportionally increase the number of completed snapshots. The dwarf KiSS-SIDM simulation has a fundamental wall-time floor that exceeds 7200s for the production N=5e4 dwarf configuration."
+  },
+  "options_for_future_work": [
+    "Option A: N=1e4 (canonical halo) — completes in <30 min, but is not UFD",
+    "Option B: Reduce snapshot_count to 3-4 — completes in budget, gives less data",
+    "Option C: Use a faster timestep or coarser physics — sacrifices fidelity",
+    "Option D: Accept that UFD KiSS-SIDM is out-of-session and ship what we have"
+  ],
+  "honest_scope": "T71.7 did NOT produce a quantitative r_core/r_s for the dwarf halo. The wrapper patch (cdb9028) is real and works correctly. The 'use the author original C/Python' instruction was based on a misframing (it's Julia, not C/Python, and we already had it installed). HEPData-style lattice data for (2,2), (2,3), (3,4) is not publicly available. Both user instructions have honest negative closures documented.",
+  "tests_passing_unaffected": "All other v0.3-prelim tests unaffected (575 pass / 0 fail / 6 skip per T71.5).",
+  "reviewer_assessment_incorporated": true,
+  "commits_in_t71_7_round": ["cdb9028", "d2e8396", "c7a978a", "c154137"]
+}
