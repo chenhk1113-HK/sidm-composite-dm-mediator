@@ -170,6 +170,123 @@ approximation shifts posterior contours.
 **Impact estimate**: Likely shifts σ/m by ~10-20% (order of magnitude
 estimate; not formally quantified).
 
+**Per T71.7 KiSS-SIDM UFD re-run** (`v0.3-prelim/data/results/t71_7_kiss_sidm_ufd_n5e4.json`):
+T38a N=5e4 dwarf halo simulation re-run with extended wrapper timeout
+(`KISS_SIDM_TIMEOUT_S=7200`) TIMED OUT after the full 2-hour budget was
+consumed with only 2 of 10 snapshots produced. **Honest verdict**: UFD
+KiSS-SIDM at N=5e4 dwarf is structurally compute-prohibitive at
+single-session wall-clock budget. The wrapper-level 3600s timeout was NOT
+the bottleneck — the simulation physics cost is (per-snapshot Monte
+Carlo work grows dramatically after initial state relaxation; snapshot
+trigger cadence slows in UFD regime). Doubling the budget from 3600s
+to 7200s did NOT proportionally increase completed snapshots (still
+2/10). Item #17 (KiSS-SIDM UFD fidelity) deferred to v0.7+ with
+architectural-change-required framing (smaller N or fewer snapshots,
+not wall-time budget). Wrapper patch (KISS_SIDM_TIMEOUT_S env var,
+default 3600s preserved) shipped in commit cdb9028.
+
+### 4.7 Lattice-QCD calibration for dark SU(N) sector
+
+The dark SU(N) gauge sector's KSFR ratio R = m_ρ / f_π is taken from
+**lattice-QCD simulations** where available, and from **phenomenological
+extrapolation** where lattice data does not exist. The status is
+per-combo:
+
+| (N_c, N_f) | R = m_ρ/f_π | Source class | Reference |
+|---|---|---|---|
+| (3, 3) | **8.36 ± 0.05** | **LATTICE** (anchor) | PDG 2022 + FLAG 2021/2024 (all agree) |
+| (3, 2) | ≈ 8.4 ± 0.3 | LATTICE | Lattice 2019 (Shindler et al.) |
+| (4, 3) | ≈ 9.5 ± 0.5 | ANALYTICAL | Large-N_c scaling estimate |
+| (4, 4) | ≈ 9.2 ± 0.5 | ANALYTICAL | Large-N_c scaling estimate |
+| (2, 2) | ≈ 8.0 ± 1.0 | **ESTIMATED** | No published continuum-chiral lattice |
+| (2, 3) | ≈ 7.5 ± 1.0 | **ESTIMATED** | SU(2) needs N_f ≤ 2.25 for asymptotic freedom |
+| (3, 4) | ≈ 8.0 ± 0.4 | **ESTIMATED** | No continuum-chiral lattice for N_f=4 |
+
+Full audit at `v0.3-prelim/docs/KSFR_NC_NF_TABLE.md` (413 lines, R11 G14).
+
+#### 4.7.1 Brower et al. N_f=8 lattice data — explicitly NOT used as direct input
+
+**Per user direction** "download hepdata" (T71.7, 2026-08-28) and
+**per reviewer Assessment.docx** (2026-08-28), the project investigated
+whether the Brower et al. LSD-Collaboration lattice dataset
+(arXiv:2306.06095, DOI `10.5281/zenodo.8007955`, CC-BY-4.0, 322 MB of
+CSV files) could directly upgrade the (3, 4) ESTIMATED combo to
+LATTICE-class.
+
+**Why it cannot directly give us R = m_ρ/f_π for our SU(3) N_f=4 target:**
+
+1. **Wrong N_f**: Brower 2023 studies SU(3) with **N_f=8** dynamical
+   Dirac fermions (near the conformal window), not N_f=4. A direct
+   re-application of N_f=8 data to N_f=4 would be a physical
+   mis-application — confining N_f=4 SU(3) is qualitatively different
+   from near-conformal N_f=8 SU(3).
+
+2. **Column mapping undocumented**: Each CSV row contains 41 fit-output
+   parameters (model A, Eq. 8 of the paper) but no README maps columns
+   to physical observables. Reverse-engineering the column mapping
+   from the paper alone would take 2-3 hours and would still produce
+   only N_f=8 observables.
+
+3. **Continuum + chiral extrapolation required**: CSV values are bare
+   lattice fit parameters at finite lattice spacing and finite quark
+   mass. They are NOT directly physical meson masses or decay
+   constants. Continuum-limit and chiral-limit extrapolation are
+   required before any observable can be extracted. This is
+   **non-trivial physics analysis**, not a CSV-lookup.
+
+#### 4.7.2 Conformal-window extrapolation risk (the sharper caveat)
+
+**Per reviewer Assessment.docx ¶52**: even with full column mapping
+and continuum+chiral extrapolation, **adding N_f=8 to our N_f=3 → N_f=4
+trend extrapolation may WIDEN rather than NARROW the (3, 4) error bar**:
+
+> "N_f=8 is near conformal and may not lie on the same simple trend
+> as confining N_f=3, 4; therefore this constraint may enlarge rather
+> than shrink the uncertainty on N_f=4 observables."
+
+Meson-mass ratios for N_f=8 SU(3) **drift toward 1 as the IR fixed point
+is approached** — qualitatively different behavior from confining
+N_f=3, 4. A simple polynomial extrapolation from N_f=3 → N_f=4 → N_f=8
+will likely **increase** uncertainty on the (3, 4) estimate rather
+than decrease it. This is a serious physics point that would require
+careful treatment (e.g., separate trend fits for confining vs conformal
+regimes), not naive use.
+
+#### 4.7.3 Brower ingestion decision (T71.7 verdict)
+
+**Defer Brower N_f=8 ingestion to v0.7+ roadmap.** Reasons:
+
+1. Wrong N_f (8 ≠ 4)
+2. High effort (2-3 hr CSV reverse-engineering + continuum+chiral extrapolation)
+3. Physics risk (conformal-window extrapolation may WIDEN error bar)
+4. Lower priority (project has higher-value work in flight)
+
+The 3 ESTIMATED lattice combos (2, 2), (2, 3), (3, 4) remain
+ESTIMATED with honest documentation. Direct-download lattice data for
+these specific combos does not exist publicly — HEPData, ILDG, USQCD,
+and GitHub phenomenology DBs were all searched (5 rounds in T71.7)
+without finding relevant records.
+
+#### 4.7.4 Citation pointers for future Brower follow-up
+
+If v0.7+ (or later) pursues Brower ingestion, the path is:
+
+- **Paper**: `https://arxiv.org/abs/2306.06095` (Brower et al., LSD
+  Collaboration, arXiv:2306.06095v1, 2023; PRD 110, 054501, 2024)
+- **Zenodo dataset**: `https://zenodo.org/records/8007955` (DOI
+  `10.5281/zenodo.8007955`, 321.9 MB, CC-BY-4.0)
+- **File naming convention**: `f{n_f}l{Ls}t{Lt}b{b}m{m}_{type}.csv`
+  where types are C0-C4 (vector-channel ρ fits), P0-P4 (pseudoscalar
+  π fits), S0-S4 (scalar σ fits) — per Assessment.docx ¶41
+- **Required pre-processing pipeline**: column mapping (reverse-engineer
+  from paper's Eq. 8), ensemble averaging, continuum+chiral
+  extrapolation. Per Assessment.docx ¶35-46.
+
+This pre-processing should be done in a **separate standalone script
+outside the dynesty likelihood hot-path** (per Assessment.docx ¶77-79)
+to avoid contaminating production fits with unvalidated lattice
+numbers during pipeline development.
+
 ### 4.3 Bullet Cluster soft-likelihood (NOT a hard cut)
 
 The Bullet Cluster bound (Cha+ 2025 ApJ 987 L15, JWST strong+weak lensing)
@@ -376,3 +493,4 @@ Per Reviewer 2's recommendation:
 | 2026-08-25 | Initial creation per reviewer M4 (sidm review2.docx) | Reviewer M4 |
 | 2026-08-26 | §1 added Channel 14 (mediator lifetime) + Channel 15 (KSFR mask); §6 fixed: Λ_dark removed as independent constraint (redundant with f_π under chiral-limit convention); KSFR mask implemented as Channel 15 + wired into T41; major v0.5 finding documented: T41 MAP at m_ρ=26.6 MeV is BELOW KSFR validity lower bound (418 MeV) | R13 H2 + H1 closure, this turn |
 | 2026-08-26 (T70.5) | v0.5 re-run COMPLETED. T41 re-run with KSFR mask enabled at nlive=500. §6 updated to reflect new canonical v0.5 numbers (MAP m_ρ = 501.7 MeV, median = 552.5 MeV, log Z = -254.24, σ/m_0 = 0.105 cm²/g, a = +1.89). All KSFR-valid. v0.5 caveat is now RESOLVED. | T70.5 follow-up, this turn |
+| 2026-08-28 (T71.7) | §4.2 extended with T71.7 KiSS-SIDM UFD re-run honest timeout verdict. §4.7 NEW: Lattice-QCD calibration for dark SU(N) sector — full per-(Nc,Nf) audit table, Brower N_f=8 caveat block (per reviewer Assessment.docx ¶52 + Review12 ¶97), citation pointers for future follow-up. Brower ingestion deferred to v0.7+ (conformal-window risk). | T71.7, this turn |
