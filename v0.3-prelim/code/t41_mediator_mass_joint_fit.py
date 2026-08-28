@@ -216,7 +216,14 @@ def loglike_joint(theta):
         return -np.inf
 
     # 3. Bullet Cluster (channel 4). NO xi dependence.
-    ll_bullet = ch_v03.loglike_bullet_v03(sigma_m_0, a)
+    # T71.4 (R16 #2 + R15 P077): support sensitivity variant peaking at
+    # 0.2 cm^2/g via T41_BULLET_VARIANT=sensitivity_0p2 env var. Default
+    # is the published Cha+ 2025 0.5 cm^2/g constraint.
+    bullet_variant = os.environ.get("T41_BULLET_VARIANT", "default").strip()
+    if bullet_variant == "sensitivity_0p2":
+        ll_bullet = ch_v03.loglike_bullet_v03_sensitivity_0p2(sigma_m_0, a)
+    else:
+        ll_bullet = ch_v03.loglike_bullet_v03(sigma_m_0, a)
     if not np.isfinite(ll_bullet):
         return -np.inf
 
@@ -294,10 +301,21 @@ def loglike_joint(theta):
     except (TypeError, ValueError):
         f_fb = f_fb_default
     try:
-        import feedback_nuisance as fb
-        ll_sparc = fb.sparc_rescaled_loglike(sigma_m_0, a, f_fb=f_fb) / 1000
+        # T71.4 (v0.6): prefer hierarchical per-galaxy SPARC likelihood when
+        # T41_SPARC_HIERARCHICAL=1 is set. Falls back to calibrated score via
+        # feedback_nuisance.sparc_rescaled_loglike (the v0.5 path).
+        # The hierarchical likelihood uses the pre-computed 175-galaxy grid at
+        # v0.3-prelim/data/results/sparc_hierarchical_grid.npz (built by
+        # precompute_sparc_hierarchical.py, shipped R11 G12, 2026-08-14).
+        use_hier = os.environ.get("T41_SPARC_HIERARCHICAL", "0").strip() in ("1", "true", "yes")
+        if use_hier:
+            import t8_v03_joint_fit as t8
+            ll_sparc = t8.loglike_sparc_hierarchical(sigma_m_0, a) / 1000
+        else:
+            import feedback_nuisance as fb
+            ll_sparc = fb.sparc_rescaled_loglike(sigma_m_0, a, f_fb=f_fb) / 1000
     except Exception:
-        # Fallback to the legacy call if feedback_nuisance can't be imported
+        # Fallback to the legacy call if the preferred import can't be resolved
         # (e.g. fresh clone without v0.4-prelim paths set up).
         try:
             import t8_v03_joint_fit as t8
@@ -577,7 +595,8 @@ def main():
         f"inelastic_on={inelastic_on}",
         f"r_inelastic={r_inelastic}",
         "form_factor=default_dipole",  # see MODEL_ASSUMPTIONS §6.2
-        "sparc_treatment=calibrated_score",  # v0.5; hierarchical deferred to v0.6
+        "sparc_treatment=hierarchical",  # v0.6 (T71.4): per-galaxy grid via precompute_sparc_hierarchical.py
+        f"bullet_variant={os.environ.get('T41_BULLET_VARIANT', 'default')}",  # T71.4 (R16 #2)
         "relic_solver=calibrated_inv_proportional",  # T55; Boltzmann deferred to v0.6
     ]
     _config_hash = hashlib.sha256("|".join(_config_components).encode("utf-8")).hexdigest()[:12]

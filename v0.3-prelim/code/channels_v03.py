@@ -153,6 +153,30 @@ def loglike_bullet_v03(sigma_m_0: float, a: float) -> float:
 
 
 # ---------------------------------------------------------------------------
+# Channel 4 sensitivity variant: 0.2 cm^2/g peak (R16 #2 + R15 P077)
+# Per the R16 audit, the 0.2 cm^2/g "Markov+ 2025 SL-only" sensitivity case
+# is implementable as a simple peak shift: same Gaussian shape, peak moved
+# from 0.5 → 0.2 cm^2/g (log = -0.70). Use only when exploring how sensitive
+# the headline posterior is to the Bullet Cluster likelihood choice.
+#
+# Selection: T41_BULLET_VARIANT=sensitivity_0p2 (or default for legacy).
+# Effect: shifts the peak by ~0.4 dex; the half-Gaussian penalty at higher
+# sigma/m stays in place so the upper-limit structure is preserved.
+def loglike_bullet_v03_sensitivity_0p2(sigma_m_0: float, a: float) -> float:
+    """Sensitivity variant: 0.2 cm^2/g peak (was 0.5 in the default form).
+
+    Same Gaussian shape as loglike_bullet_v03 but peaked at sigma/m=0.2
+    cm^2/g (log10 = -0.699) instead of 0.5 (log10 = -0.301). The penalty
+    above 0.2 cm^2/g is preserved (one-sided Gaussian).
+    """
+    sigma_m_v = sigma_m_at_v(sigma_m_0, a, V_CLUSTER)
+    if sigma_m_v <= 0 or not np.isfinite(sigma_m_v):
+        return -np.inf
+    log_sm = np.log10(sigma_m_v)
+    return -0.5 * max(0, (log_sm - (-0.699)) / 0.30) ** 2
+
+
+# ---------------------------------------------------------------------------
 # Channel 1 (SPARC): load T4 (3-param, XI_d-marginalized) fits and
 # re-evaluate log L for each (sigma_m_0, a).
 #

@@ -203,7 +203,9 @@ def main():
         "channel_9_citation": "Read+ 2018 (Draco dSph, 99% CL upper limit)",
         "channel_10_citation": "arXiv:2605.00093 (Lee et al. 2026, 11-cluster radio relic, 68% upper limit)",
         "channel_11_citation": "arXiv:1803.10237 + 1901.05973 + 2205.08552 (van Dokkum+ 2018-2026, DM-free UDGs)",
+        "channel_11_status": "experimental — NOT in primary production (R16 #12, T71.4)",  # DM-free UDGs tagged as exploratory
         "channel_12_citation": "arXiv:2504.08025 (Pinetti et al. 2025-26, cosmic-web radio, eps_upper=-11)",
+        "channel_12_status": "experimental — NOT in primary production (R16 #12, T71.4)",  # cosmic-web radio tagged as exploratory
         "channel_12_epsilon_fixed": COSMIC_WEB_EPSILON_FIXED,
         "interpretation": (
             "12-channel fit combines 5 original channels + 7 new peer-reviewed "

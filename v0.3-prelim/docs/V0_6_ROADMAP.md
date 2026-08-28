@@ -20,12 +20,12 @@
 | 6 | **runtime-guard against legacy v0.1/v0.2 imports** | R13 M1 | (already shipped in T70.4) | ✅ Shipped |
 | 7 | **KSFR mask version logging** (`ksfr_mask_max_at_runtime` field) | R16 #5 | ~1 day | ✅ Shipped T71.2 |
 | 8 | **config_hash field** for cross-version audit | R16 #11 | ~1 day | ✅ Shipped T71.2 |
-| 9 | **Hierarchical per-galaxy SPARC likelihood** | R14 Rec #10, R16 #1 | Multi-week | Deferred (Priority #1 for v0.6) |
+| 9 | **Hierarchical per-galaxy SPARC likelihood** | R14 Rec #10, R16 #1 | Multi-week | ✅ Shipped T71.4 (hierarchical selected via T41_SPARC_HIERARCHICAL=1; log Z shift +0.10 vs calibrated) |
 | 10 | **Proper Boltzmann relic-density calculation** | R14 Rec #9, R16 #4 | Multi-month | Deferred |
 | 11 | **External domain-expert review** | R16 #10 | Out-of-band | User action required |
 | 12 | **Drobczyk 2025 quantitative cross-validation** | R16 #8 | ~1 week | Deferred |
-| 13 | **Bullet Cluster likelihood upgrade** | R15 P077, R16 #2 | 1 day (sensitivity case) | ⚠️ Reject for full profile (Cha+ 2025 doesn't publish); sensitivity case deferred |
-| 14 | **Reduce reliance on contested channels** (UDG, cosmic-web radio) | R16 #12 | ~1 day (tag-only) | Deferred |
+| 13 | **Bullet Cluster likelihood upgrade** | R15 P077, R16 #2 | 1 day (sensitivity case) | ✅ Shipped T71.4 (sensitivity_0p2 variant via T41_BULLET_VARIANT env var; +1.74 log Z vs default) |
+| 14 | **Reduce reliance on contested channels** (UDG, cosmic-web radio) | R16 #12 | ~1 day (tag-only) | ✅ Shipped T71.4 (CHANNEL_STATUS dict + t13 JSON fields) |
 | 15 | **Higher-nlive (N_c, N_f) scan at nlive=2000** | R16 #5(b) | ~40 min wall | ✅ Shipped T71.3 (10 min via 7-way parallel runner) |
 | 16 | **LZ WS2024 / Fermi-LAT full posterior shapes** | R16 #3 | ~2 weeks | Deferred |
 | 17 | **KiSS-SIDM UFD fidelity** | R16 #9 | Multi-week | Deferred |

@@ -106,6 +106,33 @@ LZ_2024_LIMITS = np.array([
 ])
 
 
+# T71.4 (R16 #12): per-channel production-vs-experimental status.
+# Channels 11 (DM-free UDGs) and 12 (cosmic-web radio) are marked
+# "experimental — NOT in primary production" because they are recent
+# (post-2024) observational channels with limited robustness; they are
+# wired into the t13_v2_12channel exploration pipeline but NOT into the
+# T41 production joint fit. See MODEL_ASSUMPTIONS_AND_LIMITATIONS.md §7
+# and V0_6_ROADMAP item 14 for the rationale.
+CHANNEL_STATUS = {
+    1:  "production",                       # SPARC (calibrated score; hierarchical per T71.4)
+    2:  "production",                       # dSph upper-limit (Horigome+ 2025)
+    3:  "production",                       # UFD constraints
+    4:  "production",                       # Bullet Cluster (Cha+ 2025, default 0.5 cm²/g)
+    5:  "production",                       # LZ WS2024 direct detection
+    6:  "production",                       # Fermi-LAT dwarf limits
+    7:  "production",                       # CMB spectral distortion (T70.8)
+    8:  "production",                       # Gravothermal core collapse (T70.x)
+    9:  "production",                       # Lens subhalo
+    10: "production",                       # MW satellite
+    11: "experimental — NOT in primary production",  # DM-free UDGs (van Dokkum+ 2018-2026)
+    12: "experimental — NOT in primary production",  # Cosmic-web radio (Pinetti+ 2025-26)
+    13: "production",                       # Quantum-statistical mass floor (T70.1)
+    14: "production",                       # Mediator lifetime / BBN (T70.x)
+    15: "production",                       # KSFR/PCAC validity (H1, T70.3)
+    16: "production",                       # CMB μ/y spectral distortion (T70.8)
+}
+
+
 def sigma_LZ_limit(m_chi_GeV: float) -> float:
     """Interpolated LZ 2024 90% CL upper limit on sigma_DM-nucleon [cm^2]."""
     m_arr = LZ_2024_LIMITS[:, 0]

@@ -111,6 +111,8 @@ Both ship in ~1 day combined. The remaining 10 recommendations are correctly pri
 
 4. **Honest framing of the v0.5 → v0.6 transition.** The reviewer correctly identifies the v0.5 vs historical T41 number shifts as evidence of "headline numbers have shifted substantially and remain preliminary." This is **accurate and important** — per T71.1, the KSFR mask extension confound adds another ~+38.7 in log_Z to the v0.6 anchor, further widening the gap from the historical 26.6 MeV number. The project's own MODEL_ASSUMPTIONS_AND_LIMITATIONS.md + V0_6_ROADMAP.md are honest about this; reviewer correctly credits that.
 
+5. **T71.3 follow-up — R16 #7 closed (nlive=2000 (Nc,Nf) scan).** The R16 #7 sampler-convergence recommendation was filed as "Partial shipped + continue" in this audit. T71.3 (2026-08-28) closes it: the (Nc, Nf) scan was re-run at nlive=2000 (was nlive=1000 at T71.0) with a 7-way parallel background runner (~10 min wall vs ~70 min sequential). All 7 combos converged, the (3, 3) anchor remains the data-preferred model (log BF = 0 vs best alternative +0.127), and the nlive=1000→2000 anchor shift (+0.23 in log_Z) is within 2-sigma of sampling variance. **The scan has converged** — no need to re-run at higher nlive. Full report in CHANGELOG [T71.3].
+
 ---
 
 ## Closing note

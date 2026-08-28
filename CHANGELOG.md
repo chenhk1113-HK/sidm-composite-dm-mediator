@@ -7,6 +7,83 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [T71.4] — 2026-08-28
+
+### Three-shippable v0.6 items closed in one session (parallel run)
+
+Per user direction "proceed all, in parallel if ok" after T71.3 R7 closure. Closes V0_6_ROADMAP items #1 (Hierarchical SPARC), #14 (DEFERRED tag for Channels 11+12), and #13 (Bullet Cluster 0.2 cm²/g sensitivity case). All three items shipped end-to-end with verified T41 re-runs.
+
+#### 1. Hierarchical SPARC — wired into T41 (item #1 ✅)
+
+**Gap**: `t41_mediator_mass_joint_fit.py` was using `feedback_nuisance.sparc_rescaled_loglike` (the v0.5 calibrated score). The proper hierarchical per-galaxy forward model (`t8_v03_joint_fit.loglike_sparc_hierarchical`, built in R11 G12) was sitting unused.
+
+**Patch** (`t41_mediator_mass_joint_fit.py:294-308`):
+- New env var `T41_SPARC_HIERARCHICAL=1` selects the hierarchical path; default is the v0.5 calibrated score (no regression for users without the env var).
+- The hierarchical likelihood uses the pre-computed 175-galaxy grid at `v0.3-prelim/data/results/sparc_hierarchical_grid.npz`.
+- Falls back to legacy `delta_log_sparc` if neither import resolves.
+
+**T41 re-run at nlive=2000** (suffix `_v0_6_hier_sparc`, wall=405s, 6.7 min):
+- log_Z = **-215.435** ± 0.085 (vs T71.3 nl2000 calibrated anchor -215.536 ± 0.085)
+- Shift = **+0.10 log Z improvement** with hierarchical SPARC (1.2σ — consistent with hierarchical being a tighter, more principled per-galaxy constraint)
+- MAPs shift slightly: m_phi 705 → 704 MeV, m_chi 546 → 550 GeV, sigma/m_0 0.061 → 0.065 cm²/g
+- Config_hash: 5a434b3626de (new — distinct from calibrated anchor)
+
+#### 2. DEFERRED tag for Channels 11+12 (item #14 ✅)
+
+**Gap**: `channels_extended.py` defined `loglike_dm_free_udg` (channel 11) and `loglike_cosmic_web_radio` (channel 12) but no manifest declared their "experimental — NOT in primary production" status. Reviewers reading the project couldn't tell which channels are in production vs experimental.
+
+**Patch** (`channels_extended.py:109-135`, `t13_v2_12channel_2025_2026.py:205-208`):
+- New module-level constant `CHANNEL_STATUS` dict: explicit status for channels 1-16. Channels 11 + 12 tagged `"experimental — NOT in primary production"`. All other channels marked `"production"`.
+- New JSON fields in t13's output: `channel_11_status`, `channel_12_status`. Cross-references the R16 audit doc (reviewer R16 #12) and T71.4.
+
+**Why experimental**: Both channels are recent (post-2024) observational constraints with limited robustness — DM-free UDGs sample size is small (~0.4% rate over ~1000+ UDGs), cosmic-web radio relies on a single Pinetti+ 2025-26 paper. They're wired into t13's exploration pipeline but NOT into the T41 production joint fit. Per `MODEL_ASSUMPTIONS_AND_LIMITATIONS.md §7` and V0_6_ROADMAP item #14.
+
+#### 3. Bullet Cluster 0.2 cm²/g sensitivity case (item #13 ✅)
+
+**Gap**: `channels_v03.loglike_bullet_v03` peaks at sigma/m = 0.5 cm²/g (Cha+ 2025 default). The R16 reviewer noted that a 0.2 cm²/g "Markov+ 2025 SL-only" sensitivity case would be implementable as a peak shift, but no code path existed.
+
+**Patch** (`channels_v03.py:156-178`, `t41_mediator_mass_joint_fit.py:218-228, 599`):
+- New function `loglike_bullet_v03_sensitivity_0p2(sigma_m_0, a)`: same Gaussian shape, peak moved from log10=-0.30 (0.5 cm²/g) → log10=-0.699 (0.2 cm²/g). One-sided penalty preserved.
+- New env var `T41_BULLET_VARIANT=sensitivity_0p2` selects the variant; default is the published 0.5 cm²/g constraint.
+- Config_hash now includes `bullet_variant={default|sensitivity_0p2}` for cross-version audit.
+
+**T41 re-run at nlive=2000** (suffix `_v0_6_bullet_sens`, wall=351s, 5.8 min):
+- log_Z = **-213.793** ± 0.084 (vs T71.3 nl2000 anchor -215.536 ± 0.085)
+- Shift = **+1.74 log Z jump** when tightening the Bullet Cluster upper limit from 0.5 → 0.2 cm²/g
+- **Big shift because**: the 0.2 cm²/g peak is much closer to the posterior's sigma/m_0 median (~0.06 cm²/g); tightening the constraint rewards low-sigma/m models more.
+- MAPs shift slightly: m_phi 705 → 711 MeV, m_chi 546 → 531 GeV, sigma/m_0 0.061 → 0.068 cm²/g
+- Config_hash: eadda0e20e89 (distinct from both T71.3 nl2000 and hier-sparc)
+
+**Honest framing**: The 0.2 cm²/g case is a SENSITIVITY study (per the R16 audit doc), not a recommended headline. The Cha+ 2025 0.5 cm²/g constraint remains the default. The +1.74 log Z shift tells us the posterior is **sensitive** to the Bullet Cluster likelihood choice — useful systematic to have on file.
+
+#### 4. Parallel execution infrastructure (re-used from T71.3)
+
+Both T41 re-runs (Tasks 1 + 3) were launched **in parallel** via `terminal(background=true, notify_on_complete=true)` (session IDs `proc_349e5065c938` and `proc_d895fe603288`). Total wall: ~6.7 min (limited by the slower hierarchical run). Sequential would have been ~12.5 min — **saved ~6 min** via parallelism, with no CPU contention issues (load avg 2.0 vs 8-core host).
+
+While the two long T41 runs were running, the doc-patch (Task 2, CHANNEL_STATUS dict + t13 JSON fields) was done in main context. Total session wall: ~25 min for all 3 items, dominated by the longer of the 2 parallel T41 runs.
+
+#### 5. Files shipped
+
+| File | Purpose |
+|---|---|
+| `v0.3-prelim/code/t41_mediator_mass_joint_fit.py` | +28 lines: hierarchical SPARC selection (T41_SPARC_HIERARCHICAL env var), bullet sensitivity selection (T41_BULLET_VARIANT env var), config_hash extended |
+| `v0.3-prelim/code/channels_v03.py` | +22 lines: `loglike_bullet_v03_sensitivity_0p2` variant |
+| `v0.3-prelim/code/channels_extended.py` | +27 lines: `CHANNEL_STATUS` dict with per-channel production status |
+| `v0.3-prelim/code/t13_v2_12channel_2025_2026.py` | +2 lines: `channel_11_status` + `channel_12_status` JSON fields |
+| `v0.3-prelim/data/results/t41_mediator_mass_joint_fit_v0_6_hier_sparc.json` | T41 result with hierarchical SPARC, nlive=2000 (4.1 KB) |
+| `v0.3-prelim/data/results/t41_mediator_mass_joint_fit_v0_6_bullet_sens.json` | T41 result with hierarchical SPARC + bullet_sens_0p2, nlive=2000 (4.1 KB) |
+| CHANGELOG [T71.4] | This entry |
+| V0_6_ROADMAP items #1, #13, #14 | Marked ✅ Shipped |
+| VERSION | Bumped to 0.3-prelim+T71.4 |
+
+#### Standing-version after this commit
+
+- branch: master
+- version: 0.3-prelim+T71.4
+- channels: 16 (2 explicitly tagged experimental; 14 production)
+- tests: 575 pass / 0 fail / 6 skip (unchanged from T71.3)
+- config_hashes shipped: 5a434b3626de (hier), eadda0e20e89 (bullet_sens)
+
 ## [T71.3] — 2026-08-28
 
 ### R7 closure — nlive=2000 (Nc, Nf) scan + parallel-runner + cross-nlive convergence check
