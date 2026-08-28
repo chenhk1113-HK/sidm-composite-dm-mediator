@@ -3,20 +3,26 @@ message: >-
   If you use this code or its results in published work, please cite the
   relevant version below AND the underlying physics references listed at
   the bottom. See docs/DATA_SOURCES.md for the full list of observational
-  data sources used and how to cite them. v0.3-prelim+T70.5 (T70.5
-  Tier-1 PATCH 2026-08-26: T41 v0.5 re-run COMPLETED with KSFR/PCAC
-  validity mask enabled at nlive=500; new canonical MAP m_ρ = 502 MeV
-  in KSFR-valid sub-space; T70.4 R13 audit FULLY CLOSED with 9 of 9
-  items shipped including KSFR mask as Channel 15, H3 nlive sensitivity
-  sweep, H4.1/H4.2/H4.3 sweeps for xi/form-factor/inelastic channels,
-  downsampled reference posterior chains, and Bullet Cluster doc
-  correction) and the H3+H4 sensitivity report at
+  data sources used and how to cite them. v0.3-prelim+T71.5 (T71.5
+  Tier B closure 2026-08-28: Drobczyk quantitative χ² test added
+  (t68b, χ²=213.62, strong tension vs arXiv:2506.22997); LZ WS2024
+  stale-claim correction (already in production since R12 via
+  t30_lz_real_posterior.loglike_lz_real, HEPData 155182, 26 mass points);
+  KiSS-SIDM UFD fidelity deferred with rationale (T38a hit 1-hour Julia
+  timeout at N=5e4; canonical halo converged at N=1e4-1e5). V0_6_ROADMAP:
+  7 of 15 items shipped across T71.2 → T71.5. Earlier closed rounds:
+  T71.4 (3 v0.6 items in parallel: hier-sparc +0.10 log Z, bullet_sens
+  +1.74 log Z, CHANNEL_STATUS dict); T71.3 (R7 closure: nlive=2000
+  (Nc,Nf) scan via 7-way parallel background runner, scan converged);
+  T71.2 (R16 closure: ksfr_mask_max_at_runtime field + config_hash field,
+  575/0/6 tests); T71.1 (R15 closure: inelastic + nlive=2000 + KSFR mask
+  extension confound found) and the H3+H4 sensitivity report at
   v0.3-prelim/docs/H3_H4_SENSITIVITY_REPORT.md are the most recent
   closed rounds at the time of the most recent public release.
 title: "sidm-composite-dm-mediator"
 type: software
-version: 0.3-prelim+T70.5
-date-released: 2026-08-26
+version: 0.3-prelim+T71.5
+date-released: 2026-08-28
 authors:
   - family-names: Lam
     given-names: K.
@@ -28,181 +34,16 @@ keywords:
   - dark-matter
   - sidm
   - self-interacting-dark-matter
-  - secluded-wimp
   - composite-dark-matter
-  - dark-glueball
   - dark-rho
-  - dark-baryon
-  - mediator-detection
-  - bayesian-inference
-  - dynesty
-  - gravothermal-collapse
-  - direct-detection
-  - lz
+  - bayesian-joint-fit
+  - dynesty-nested-sampling
+  - sparc-galaxies
+  - bullet-cluster
+  - lz-dark-matter
   - fermi-lat
-  - dwarf-galaxies
-abstract: >
-  Bayesian constraint pipeline for self-interacting dark matter (SIDM)
-  cross-sections, with a composite-DM microphysics extension (dark
-  glueballs, dark rho, dark baryons) and a secluded-mediator detection
-  feasibility survey. Headline result: sigma/m ~ 1-3 cm^2/g at galactic
-  velocity scales (1.4-1.7 cm^2/g MAP), velocity index a ~ 0.6-1.4, with
-  the mediator invisible to all direct-detection experiments (sigma_SI ~
-  2e-118 cm^2, ~10^46 times below the LZ WS2024 neutrino floor and ~10^50
-  times below LZ SR1+SR3). Cross-validated against Drobczyk 2025
-  (arXiv:2506.22997). See docs/MATHEMATICS.md, docs/DATA_SOURCES.md, and
-  the per-version synthesis docs in v0.3-prelim/docs/ for full derivation.
-references:
-  # Foundational theoretical framework
-  - type: article
-    title: "Secluded WIMP Dark Matter"
-    authors:
-      - family-names: Pospelov
-        given-names: Maxim
-      - family-names: Ritz
-        given-names: Adam
-      - family-names: Voloshin
-        given-names: Mikhail
-    year: 2008
-    journal: "Physics Letters B"
-    volume: "662"
-    start: 53
-    end: 61
-    identifiers:
-      - type: arxiv
-        value: "0711.4866"
-  - type: article
-    title: "Direct detection portals for self-interacting dark matter"
-    authors:
-      - family-names: Kaplinghat
-        given-names: Manoj
-      - family-names: Tulin
-        given-names: Sean
-      - family-names: Yu
-        given-names: Hai-Bo
-    year: 2014
-    journal: "Physical Review D"
-    volume: "89"
-    start: "115005"
-    identifiers:
-      - type: arxiv
-        value: "1310.7945"
-
-  # KiSS-SIDM (the gravothermal penalty that anchors the headline)
-  - type: article
-    title: "Core Collapse Beyond the Fluid Approximation: The Late Evolution of Self-Interacting Dark Matter Halos"
-    authors:
-      - family-names: Gurian
-        given-names: James
-      - family-names: May
-        given-names: Simon
-    year: 2025
-    journal: "Physical Review Letters"
-    volume: "135"
-    issue: "22"
-    start: "221001"
-    identifiers:
-      - type: arxiv
-        value: "2505.15903"
-      - type: doi
-        value: "10.1103/2ycz-3fvv"
-
-  # SASHIMI-SIDM (subhalo calibration at sub-galactic scales)
-  - type: article
-    title: "SASHIMI-SIDM: Semi-analytical subhalo modelling for self-interacting dark matter at sub-galactic scales"
-    authors:
-      - family-names: Ando
-        given-names: Shin'ichiro
-      - family-names: Horigome
-        given-names: Shunichi
-      - family-names: Nadler
-        given-names: Ethan O.
-      - family-names: Yang
-        given-names: Daneng
-      - family-names: Yu
-        given-names: Hai-Bo
-    year: 2025
-    journal: "Journal of Cosmology and Astroparticle Physics"
-    volume: "2025"
-    issue: "02"
-    start: "053"
-    identifiers:
-      - type: arxiv
-        value: "2403.16633"
-
-  # Two-component SIDM with mass segregation (SIDM2v)
-  - type: article
-    title: "Diversifying halo structures in two-component self-interacting dark matter models via mass segregation"
-    authors:
-      - family-names: Yang
-        given-names: Daneng
-      - family-names: Fan
-        given-names: Yi-Zhong
-      - family-names: Hou
-        given-names: Siyuan
-      - family-names: Tsai
-        given-names: Yue-Lin Sming
-    year: 2026
-    journal: "Physical Review D"
-    identifiers:
-      - type: arxiv
-        value: "2504.02303"
-  - type: article
-    title: "Self-Interacting Dark Matter with Mass Segregation: A Unified Explanation of Dwarf Cores and Small-Scale Lenses"
-    authors:
-      - family-names: Yang
-        given-names: Daneng
-      - family-names: Fan
-        given-names: Yi-Zhong
-      - family-names: Hou
-        given-names: Siyuan
-      - family-names: Tsai
-        given-names: Yue-Lin Sming
-    year: 2026
-    identifiers:
-      - type: arxiv
-        value: "2506.14898"
-
-  # Cross-validation reference (independent UV route to same physics)
-  - type: article
-    title: "Naturally resonant two-mediator model of self-interacting dark matter with decoupled relic abundance"
-    year: 2025
-    journal: "Classical and Quantum Gravity"
-    volume: "42"
-    issue: "22"
-    start: "225006"
-    identifiers:
-      - type: arxiv
-        value: "2506.22997"
-
-  # Mediator-detection phenomenology references
-  - type: article
-    title: "WIMP Shadows: Phenomenology of Secluded Dark Matter in Three Minimal BSM Scenarios"
-    authors:
-      - family-names: Di Mauro
-        given-names: Mattia
-      - family-names: Belfatto
-        given-names: Beatrice
-      - family-names: Bagnaschi
-        given-names: Gianluca
-    year: 2025
-    identifiers:
-      - type: arxiv
-        value: "2510.23771"
-  - type: article
-    title: "Probing the Phenomenology of Dark Matter from Decoupled Freeze-Out"
-    authors:
-      - family-names: Chakraborti
-        given-names: Sreemanti
-      - family-names: Xue
-        given-names: Wei
-    year: 2025
-    journal: "Journal of High Energy Physics"
-    volume: "2026"
-    issue: "06"
-    start: "131"
-    identifiers:
-      - type: arxiv
-        value: "2511.14635"
-      - type: report-number
-        value: "IPPP/25/79"
+  - dSph
+  - ultra-faint-dwarf
+  - ksfr-pcac
+  - changelog-driven
+  - reviewer-audit-closed

@@ -4,7 +4,7 @@
 > **Audit date**: 2026-08-27 (round 6 / R16 audit cycle)
 > **Reviewer identity**: Per the explicit AI-disclaimer in P004 ("coding was done primarily by Hermes/MiniMax-M3 with Doubao, Qwen, and other models as reviewers"), this is most likely a **machine-generated review** (the filename `sidmgrok1.docx` is consistent with Grok as the source model). Per reviewer-audit skill W1 + W3, **reviewer identity does not affect verification rigor** — every claim is verified against on-disk state regardless of who wrote it.
 > **Review target stated by reviewer**: sidm-composite-dm-mediator (general)
-> **Project standing-version NOW**: v0.3-prelim+T71.1 (after T70.9 + T71.0 + T71.1 closures)
+> **Project standing-version NOW**: v0.3-prelim+T71.5 (after T71.2 + T71.3 + T71.4 + T71.5 closures)
 > **Pattern**: Per reviewer-audit skill W1 — **referee-style review** with explicit "Strengths / Major Concerns / Technical / Overall Assessment / Necessary actions" structure. **Distinct from sidm5.docx (R15)** in that it includes an **explicit AI-disclaimer** and adds a **"Necessary actions to improve scientific plausibility"** section with **12 specific recommendations** organized as Priority 1/2/3/4.
 > **Closest prior patterns**: W-series from sidm-review-v05-referee-style-w.md (sidm review.docx) and the R15 sidm5.docx audit (this round). All three are referee-style reviews of the same project with overlapping content.
 

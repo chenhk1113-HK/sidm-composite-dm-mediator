@@ -1,6 +1,8 @@
 # EXTRACT — sidm-composite-dm-mediator
 
-**Version 0.3-prelim + T70.5 · 2026-08-26 · 1,000 words**
+**Version 0.3-prelim + T71.5 · 2026-08-28 · 1,000 words**
+
+**Standing version: v0.3-prelim+T71.5** (Tier B closure). Channels: 16 (2 experimental, 14 production). Tests: 575 pass / 0 fail / 6 skip. V0_6_ROADMAP: 7 of 15 items shipped.
 
 **Updates from 2026-08-25 (T70 Tier-1 PATCH):**
 - Added Channel 11 (NGC 1052-DF2/DF4 + FCC 224/240 dark-matter-free UDG consistency check)

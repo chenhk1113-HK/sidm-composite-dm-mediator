@@ -1,8 +1,8 @@
 # MODEL ASSUMPTIONS AND LIMITATIONS — sidm-composite-dm-mediator
 
-**Version:** v0.3-prelim+T70.6 (2026-08-26)
+**Version:** v0.3-prelim+T71.5 (2026-08-28)
 **Status:** Preliminary research code. Not yet publication-ready (per R13 reviewer audit, see `v0.3-prelim/docs/REVIEWER_AUDIT_R13.md`).
-**Per**: Reviewer M4 suggestion in `sidm review2.docx` (2026-08-25).
+**Per**: Reviewer M4 suggestion in `sidm review2.docx` (2026-08-25). Updated through T71.5 closure round.
 
 This document is the **single concise top-level reference** for every
 assumption, fixed parameter, approximation, and known limitation in

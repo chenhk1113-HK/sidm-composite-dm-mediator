@@ -5,7 +5,7 @@
 **Joint-fit framework for self-interacting dark matter (SIDM), grounded in the published multi-channel data (dSph, UFD, Bullet, SPARC, LZ, Fermi).**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.3--prelim%2BT71.2-blue)](VERSION)
+[![Version](https://img.shields.io/badge/version-0.3--prelim%2BT71.5-blue)](VERSION)
 [![arXiv:2506.22997](https://img.shields.io/badge/cross--validated-arXiv%3A2506.22997-b31b1b)](https://arxiv.org/abs/2506.22997)
 
 > **Heads-up (2026-08-14):** Project renamed from `dm-sidm-pipeline`. All
@@ -113,6 +113,43 @@
 > expanded from 6 to 19 items with R14/R15/R16 cross-references. Test suite:
 > **575 pass / 0 fail / 6 skip** (was 574/0/7). See `CHANGELOG.md [T71.2]` +
 > `REVIEWER_AUDIT_R16.md`.
+>
+> **T71.5 Tier B closure — Drobczyk χ² + LZ stale-claim + KiSS-SIDM UFD deferred (2026-08-28):**
+> Per user direction "do as much as possible" after T71.4. Pre-flight on Tier B revealed
+> 1 stale claim, 1 real research task, 1 wall-time-limited item. Shipped **t68b_quantitative_cross_validation.py**
+> (290 lines) — χ² = 213.62 on 1 dof comparing our σ/m(v) curve vs Drobczyk 2025 (arXiv:2506.22997);
+> verdict STRONG TENSION (cluster scale factor 526× disagreement). **LZ WS2024** roadmap item
+> is stale (already in production since R12 via `t30_lz_real_posterior.loglike_lz_real`,
+> HEPData 155182, 26 mass points, wired into T41 line 247). **KiSS-SIDM UFD fidelity** deferred
+> with multi-line rationale (T38a failed at N=5e4 with 1-hour Julia timeout; canonical halo
+> converged but UFD regime intractable at current compute budget). New docs:
+> `v0.3-prelim/docs/V0_6_TIER_B_CLOSURE.md` (8.9 KB). V0_6_ROADMAP: **7 of 15 items shipped**.
+> Test suite: **575 pass / 0 fail / 6 skip** (unchanged). See `CHANGELOG.md [T71.5]` +
+> `V0_6_TIER_B_CLOSURE.md`.
+>
+> **T71.4 Three v0.6 items shipped in parallel (2026-08-28):**
+> Per user direction "proceed all, in parallel if ok". Shipped end-to-end with verified
+> T41 re-runs in parallel (~6.7 min wall via 2× terminal(background=true, notify_on_complete=true)).
+> - **(1) Hierarchical SPARC** wired into T41 (`T41_SPARC_HIERARCHICAL=1` env var). log Z
+>   shift = **+0.10 (1.2σ)** vs calibrated score; MAPs stable within 1σ. config_hash 5a434b3626de.
+> - **(2) Bullet Cluster 0.2 cm²/g sensitivity case** (`T41_BULLET_VARIANT=sensitivity_0p2`).
+>   log Z shift = **+1.74 (20σ)** vs default 0.5; this is a SENSITIVITY study, NOT a recommended
+>   headline. config_hash eadda0e20e89.
+> - **(3) DEFERRED tag for Channels 11+12**. New `CHANNEL_STATUS` dict in `channels_extended.py`
+>   marking channels 11 (DM-free UDGs) + 12 (cosmic-web radio) as `"experimental — NOT in
+>   primary production"`. All other 14 channels marked `"production"`. t13 JSON output
+>   gets `channel_11_status` + `channel_12_status` fields. See `CHANGELOG.md [T71.4]`.
+>
+> **T71.3 R7 closure — nlive=2000 (Nc, Nf) scan (2026-08-28):**
+> Per user direction "do solid r7, try run in parallel" after the v0.6 release-bundle scope
+> discussion. Closed **R16 #7 (Priority 3 sampler convergence)** + **V0_6_ROADMAP item #15**.
+> All 7 (Nc, Nf) combos ran at nlive=2000 (was nlive=1000) via a 7-way parallel background
+> runner — wall time **~10 min** (vs ~70 min sequential). Data converge on the (3, 3) anchor;
+> best alternative log BF = +0.127 (sub-Jeffreys). nlive=1000 → nlive=2000 anchor shift
+> = +0.23 in log_Z, within 2σ of sampling variance — **the scan has converged**, no need
+> to re-run at higher nlive. New code: `parallel_run_nl2000.sh` (66 lines) +
+> `v0.3-prelim/code/aggregate_nl2000_scan.py` (115 lines). 7 per-combo JSONs +
+> 1 summary JSON. See `CHANGELOG.md [T71.3]` + `V0_6_ROADMAP.md` item #15.
 >
 > **T71.1 R15 closure — inelastic + nlive=2000 + KSFR mask confound found (2026-08-27):**
 > Per sidm5.docx R15 reviewer audit (referee-style, 12 ✅ Confirmed / 4 ✅ Already-shipped /
@@ -514,7 +551,7 @@ Quick bibtex for citing this repo:
 @software{lam_sidm_composite_dm_mediator_2026,
   author = {Lam, K.},
   title = {sidm-composite-dm-mediator},
-  version = {0.3-prelim (R12 audit closed 2026-08-17)},
+  version = {0.3-prelim+T71.5 (Tier B closure 2026-08-28: 7 of 15 v0.6 roadmap items shipped; Drobczyk χ² test added)},
   year = {2026},
   month = {8},
   url = {https://github.com/chenhk1113-HK/sidm-composite-dm-mediator},
