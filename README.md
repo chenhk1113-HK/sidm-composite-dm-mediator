@@ -5,7 +5,7 @@
 **Joint-fit framework for self-interacting dark matter (SIDM), grounded in the published multi-channel data (dSph, UFD, Bullet, SPARC, LZ, Fermi).**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.3--prelim%2BT71.5-blue)](VERSION)
+[![Version](https://img.shields.io/badge/version-0.3--prelim%2BT71.7-blue)](VERSION)
 [![arXiv:2506.22997](https://img.shields.io/badge/cross--validated-arXiv%3A2506.22997-b31b1b)](https://arxiv.org/abs/2506.22997)
 
 > **Heads-up (2026-08-14):** Project renamed from `dm-sidm-pipeline`. All
@@ -119,14 +119,38 @@
 > 1 stale claim, 1 real research task, 1 wall-time-limited item. Shipped **t68b_quantitative_cross_validation.py**
 > (290 lines) — χ² = 213.62 on 1 dof comparing our σ/m(v) curve vs Drobczyk 2025 (arXiv:2506.22997);
 > verdict STRONG TENSION (cluster scale factor 526× disagreement). **LZ WS2024** roadmap item
-> is stale (already in production since R12 via `t30_lz_real_posterior.loglike_lz_real`,
-> HEPData 155182, 26 mass points, wired into T41 line 247). **KiSS-SIDM UFD fidelity** deferred
-> with multi-line rationale (T38a failed at N=5e4 with 1-hour Julia timeout; canonical halo
-> converged but UFD regime intractable at current compute budget). New docs:
-> `v0.3-prelim/docs/V0_6_TIER_B_CLOSURE.md` (8.9 KB). V0_6_ROADMAP: **7 of 15 items shipped**.
-> Test suite: **575 pass / 0 fail / 6 skip** (unchanged). See `CHANGELOG.md [T71.5]` +
-> `V0_6_TIER_B_CLOSURE.md`.
->
+> corrected as stale claim (real posterior in production since R12 via `t30_lz_real_posterior.loglike_lz_real`,
+> HEPData record 155182). **KiSS-SIDM UFD fidelity** honestly deferred (wall-time limited). See
+> `CHANGELOG.md [T71.5]` + `REVIEWER_AUDIT_R16.md`. Test suite: **575 pass / 0 fail / 6 skip** (unchanged).
+
+> **T71.6 Three v0.6 roadmap items closed — form-factor + lattice KSFR audit + real Boltzmann solver (2026-08-28):**
+> Per user direction "proceed the remaining roadmaps, do form factor uncertainty study and lattice qcd data".
+> Pre-flight on items #18, #19, #10 revealed 6th stale-claim pattern; honest closures + one new real
+> Boltzmann solver shipped. **#18 Form-factor**: H4.2 sweep already on disk (log Z range = 0.375 < 1 → ROBUST).
+> **#19 Lattice KSFR**: KSFR_NC_NF_TABLE.md (413 lines) + t53b_lattice_input.py shipped R11 G14;
+> 2 of 7 combos are LATTICE-class, 2 ANALYTICAL, 3 ESTIMATED; (3,3) anchor R=8.36±0.05 triangulated
+> across PDG 2022 + FLAG 2021/2024. **#10 Boltzmann**: NEW `t59_production_boltzmann.py` (~340 lines,
+> real scipy.integrate.solve_ivp Radau solver); 5×3 grid scan; **WIMP-miracle crossing FOUND at
+> m_chi=50 GeV, g_chi=0.05** (Ω_h²=0.19, 1.59× observed). See `CHANGELOG.md [T71.6]` +
+> `V0_6_LATTICE_FORMFACTOR_CLOSURE.md`. Test suite: **575 pass / 0 fail / 6 skip** (unchanged).
+
+> **T71.7 KiSS-SIDM honest timeout closure + Brower Assessment response (2026-08-28):**
+> Per user direction "kiss sidm ufd, use the author original c python; download hepdata".
+> Two corrections from prior assumptions: (1) the KiSS-SIDM upstream IS Julia (not C/Python),
+> repo at `https://gitlab.com/Socob/KiSS-SIDM` (Gurian + May, first author of arXiv:2505.15903),
+> already installed at `/home/lamkuenai/KiSS-SIDM` — we were wrapping the real upstream
+> the whole time; (2) T38a N=5e4 dwarf re-run with `KISS_SIDM_TIMEOUT_S=7200` TIMED OUT
+> at 7200s with only 2/10 snapshots produced. Honest verdict: UFD KiSS-SIDM is structurally
+> compute-prohibitive at single-session budget (doubling wall-time from 3600s → 7200s did
+> NOT proportionally increase completed snapshots). Wrapper patch shipped
+> (`KISS_SIDM_TIMEOUT_S` env var, commit `cdb9028`); upstream location confirmed; item #17
+> partial-closure with architectural-change-required framing for v0.7+. HEPData download:
+> 5 search rounds confirmed no lattice data exists for (2,2), (2,3), (3,4); Brower N_f=8
+> deferred (wrong N_f + undocumented columns + conformal-window risk per reviewer
+> Assessment.docx ¶52). See `CHANGELOG.md [T71.7]` + `V0_6_KISS_SIDM_UPSTREAM_FINDING.md` +
+> `V0_6_KISS_SIDM_TIMEOUT_VERDICT.md` + `V0_6_BROWER_PROBE_SCOPE.md` +
+> `V0_7_REVIEWER_RESPONSE_BROWER_ASSESSMENT.md`.
+
 > **T71.4 Three v0.6 items shipped in parallel (2026-08-28):**
 > Per user direction "proceed all, in parallel if ok". Shipped end-to-end with verified
 > T41 re-runs in parallel (~6.7 min wall via 2× terminal(background=true, notify_on_complete=true)).

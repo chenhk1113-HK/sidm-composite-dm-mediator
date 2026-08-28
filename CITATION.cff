@@ -21,7 +21,7 @@ message: >-
   closed rounds at the time of the most recent public release.
 title: "sidm-composite-dm-mediator"
 type: software
-version: 0.3-prelim+T71.5
+version: 0.3-prelim+T71.7
 date-released: 2026-08-28
 authors:
   - family-names: Lam
