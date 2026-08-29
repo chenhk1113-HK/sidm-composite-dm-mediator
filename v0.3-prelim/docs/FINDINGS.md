@@ -12,6 +12,22 @@
 **Test count: 246/247 pass** (was 240; +6 from D8: 6 T29 tests).
 **Note (2026-08-14):** Project renamed from `dm-sidm-pipeline`.
 
+---
+
+## ⚠️ Known caveats (added T71.7 + T71.8.1)
+
+These caveats apply to **every joint-fit number quoted in this document**. They are also documented in `MODEL_ASSUMPTIONS_AND_LIMITATIONS.md` and reproduced here so any reader who arrives at FINDINGS.md first sees them.
+
+1. **KiSS-SIDM N=5e4 UFD constraint is NOT quantitative.** The T71.7 background run (commit `2581429`, JSON `v0.3-prelim/data/results/t71_7_kiss_sidm_ufd_n5e4.json`) hit the 7200s wrapper timeout with only 2 of 10 snapshots completed; Julia ran cleanly at ~100% CPU the entire time, so the bottleneck is the physics-driven snapshot cadence, not the wrapper. **Do NOT quote UFD gravothermal-collapse bounds from N=5e4 KiSS-SIDM runs** — they are not validated to completion. For MW- and cluster-scale bounds, the N≈1×10⁴ canonical halo (`config.KISS_SIDM_CANONICAL_N = 10000`, ~5-15 min wall) is the production path and IS validated. Full timing evidence: `v0.3-prelim/docs/V0_6_KISS_SIDM_TIMEOUT_VERDICT.md`. Standing verdict: `MODEL_ASSUMPTIONS_AND_LIMITATIONS.md §4.2`.
+
+2. **Lattice-QCD calibration is LATTICE for only 3 of 7 (N_c, N_f) combos** as of T71.8. The (3, 3) anchor R = 8.36 ± 0.05 (PDG + FLAG triangulation) is LATTICE-class. The (3, 2) and (2, 2) entries are now also LATTICE-class (Arthur et al. 2016 / Shindler et al. 2019). The (4, *), (3, 4), and (2, 3) entries remain ANALYTICAL or ESTIMATED. Full per-combo audit: `v0.3-prelim/docs/KSFR_NC_NF_TABLE.md` and `MODEL_ASSUMPTIONS_AND_LIMITATIONS.md §4.7`.
+
+3. **Relic density uses a real Boltzmann solver (T71.6, `t59_production_boltzmann.py`)** — single-component s-wave, 5×3 grid scan, WIMP-miracle crossing found at (m_χ=50 GeV, g_χ=0.05). Out-of-scope for this project: composite-DM Boltzmann / micrOMEGAs-dark interface (multi-month).
+
+4. **Drobczyk 2025 cross-validation shows strong tension at cluster scales** (χ² = 213.62 on 1 dof, factor 526× disagreement; T71.5). This is a real result, not a bug — see `v0.3-prelim/docs/V0_6_TIER_B_CLOSURE.md` for the honest scope.
+
+---
+
 ## TIER 1+2+3 — Full systematic-uncertainty cascade (D7)
 
 **Tier 1: T26 — T21 sensitivity to Gaussian width choice (with KISS-SIDM penalty)**

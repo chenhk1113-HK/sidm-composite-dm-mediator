@@ -7,6 +7,71 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [T71.8] — 2026-08-28
+Per `Updated review15.docx` (read end-to-end, 223 paragraphs, per AGENTS.md
+rule 21). Reviewer's Sp(4) section (paragraphs 155-223) surfaced a real
+upgrade path for our (2, 2) ESTIMATED entry.
+### What shipped
+- **(2, 2) ESTIMATED → LATTICE upgrade.** Arthur et al. 2016 (arXiv:1602.06559)
+  provides SU(2) N_f=2 fundamental continuum-chiral R = 8.1 ± 1.2, cross-cited
+  in Bennett Sp(4) 2019 (arXiv:1909.12662) Figure 17. Previous 'no published
+  continuum limit for SU(2) fund N_f=2 found' was based on a partial reading.
+  Numerical agreement: 8.0 ± 1.0 (old ESTIMATED) vs 8.1 ± 1.2 (new LATTICE) — overlap
+  within 1σ. m_rho_MeV_min shifts 400 → 405 MeV (no downstream impact).
+- **Sp(4) explicitly distinguished from SU(2).** Sp(4) gives R ≈ 5.72, not R ≈ 8.0.
+  Sp(2) coincides with SU(2). Lattice upgrade comes from correctly reading
+  Bennett 2019's Figure 17, not from substituting Sp(4) for SU(2).
+### Standing state
+- **No version bump.** Doc-only audit upgrade. LATTICE / ANALYTICAL / ESTIMATED
+  count shifts 2/2/3 → 3/2/2 (one combo upgraded).
+- Files: `v0.3-prelim/docs/KSFR_NC_NF_TABLE.md` (modified), `v0.3-prelim/docs/V0_7_RESPONSE_UPDATED_REVIEW15.md` (new).
+### Honest scope (NOT done)
+- Not ship Sp(4) as direct SU(2) substitute (would be fabrication).
+- Not claim new lattice data.
+- Not ship systematic budget or reviewer kit (out-of-scope for single audit upgrade).
+
+## [T71.8.1] — 2026-08-29
+Per user direction "proceed (e)" on the advisory `Update check.docx` (2026-08-29).
+Pre-flight on the 5 advisory-doc recommendations revealed that 4 were already
+shipped in T71.7 (lattice caveats in MODEL_ASSUMPTIONS §4.7, KiSS-SIDM UFD
+timeout verdict in §4.2, standalone `V0_6_KISS_SIDM_TIMEOUT_VERDICT.md`,
+formal response in `V0_7_REVIEWER_RESPONSE_BROWER_ASSESSMENT.md`). This
+round lifts the 4 actually-missing items into standing docs.
+### What shipped
+- **`config.py`**: new `KISS_SIDM_CANONICAL_N = 10000`,
+  `KISS_SIDM_DEFAULT_TIMEOUT_S = 3600`, `KISS_SIDM_DEFAULT_T_END_GYR = 10.0`,
+  `KISS_SIDM_DEFAULT_SIGMA_M_CM2_PER_G = 50.0` (all exported in `__all__`).
+  Removes the implicit "read the bridge source to find the canonical
+  values" requirement.
+- **`v0.3-prelim/code/kiss_sidm_julia_bridge.py:374-389`**: default
+  `KISS_SIDM_TIMEOUT_S` fallback now reads from `config.KISS_SIDM_DEFAULT_TIMEOUT_S`
+  (env var still wins, hardcoded 3600s preserved as final safety).
+- **`README.md`**: new "Running the KiSS-SIDM gravothermal penalty" section
+  in the Quick Start area, documenting `KISS_SIDM_TIMEOUT_S`, the
+  N≈1×10⁴ canonical halo as the production path, and the explicit
+  "do NOT attempt another 2-hour UFD timeout" warning.
+- **`v0.3-prelim/docs/FINDINGS.md`**: new "⚠️ Known caveats (T71.7 + T71.8.1)"
+  block at top of document, covering (1) KiSS-SIDM UFD N=5e4 is NOT
+  quantitative, (2) 3-of-7 LATTICE/ANALYTICAL/ESTIMATED split, (3) Boltzmann
+  solver is real (T71.6 `t59_production_boltzmann.py`), (4) Drobczyk 2025
+  cluster-scale strong tension is real. So any reader who arrives at
+  FINDINGS.md first sees the caveats before reading the headline numbers.
+### Standing state
+- **No version bump.** Doc-only tightening. Version stamp remains
+  `v0.3-prelim+T71.7` in VERSION, README, and MODEL_ASSUMPTIONS_AND_LIMITATIONS.md.
+- Audit-time check: at next T# commit, run `grep -n "T71.7\|T71.8\|T71.8.1" MODEL_ASSUMPTIONS_AND_LIMITATIONS.md`
+  to confirm the standing-doc stamps are still consistent with CHANGELOG.
+### What this round does NOT do
+- Not bump VERSION.md (per CONTRIBUTING.md step 3a — pure doc edits).
+- Not alter any joint-fit numbers, priors, or fit results.
+- Not introduce a new test (no code path changed; only doc + config defaults).
+- Not follow the recommended UFD N=5e4 architecture changes — those are
+  deferred to v0.7+ per the T71.7 verdict.
+### Verification
+- `python -m py_compile config.py` → exit 0, no warnings.
+- `python -m py_compile v0.3-prelim/code/kiss_sidm_julia_bridge.py` → exit 0,
+  no warnings.
+
 ## [T71.7] — 2026-08-28
 
 Per user direction "kiss sidm ufd, use the author original c python; download hepdata".

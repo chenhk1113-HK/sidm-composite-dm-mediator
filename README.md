@@ -425,6 +425,39 @@ For the per-round history see [`CHANGELOG.md`](CHANGELOG.md).
 
 ---
 
+## Running the KiSS-SIDM gravothermal penalty
+
+The joint fit calls KiSS-SIDM (Gurian & May 2025, PRL 135 221001) via
+`v0.3-prelim/code/kiss_sidm_julia_bridge.py`. The **canonical** halo
+(N≈1×10⁴ MW-scale, σ/m=50 cm²/g, t_end=10 Gyr) finishes in ~5-15 min
+on the WSL host and is the path recommended for single-session work.
+
+```bash
+# 1. Canonical halo run (≈ 5-15 min wall on WSL)
+cd v0.3-prelim/code
+python t21_real_kiss_sidm_5channel_joint_fit.py
+# Expect: σ/m ≈ 1.4-1.7 cm²/g at MAP (with KiSS-SIDM penalty)
+
+# 2. Override the wrapper timeout (default 3600s = 1 h)
+#    Only useful for N >= 2e6 paper-scale runs (set 18000 = 5 h)
+KISS_SIDM_TIMEOUT_S=18000 python t38_dwarf_kiss_sidm_higher_N.py
+
+# 3. The N=5e4 ultra-faint dwarf (UFD) configuration
+#    IS NOT a single-session deliverable. T71.7 measured 2/10 snapshots
+#    after a full 7200s budget (Julia ran cleanly at ~100% CPU; the cost
+#    is physics-driven snapshot cadence, not a software bug).
+#    See MODEL_ASSUMPTIONS_AND_LIMITATIONS.md §4.2 for the full verdict
+#    and v0.3-prelim/docs/V0_6_KISS_SIDM_TIMEOUT_VERDICT.md for the
+#    raw timing evidence.
+#    Do NOT attempt another 2-hour timeout. Defer to v0.7+ roadmap.
+```
+
+The KiSS-SIDM canonical constants live in `config.py`
+(`KISS_SIDM_CANONICAL_N`, `KISS_SIDM_DEFAULT_TIMEOUT_S`,
+`KISS_SIDM_DEFAULT_T_END_GYR`, `KISS_SIDM_DEFAULT_SIGMA_M_CM2_PER_G`).
+
+---
+
 ## What's in each version
 
 | Version | Scope | Headline |

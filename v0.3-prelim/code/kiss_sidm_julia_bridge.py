@@ -376,7 +376,17 @@ def run_canonical_kiSS_sidm(
         # For UFD-scale N>=5e4 runs, T71.7 recommends >= 7200s (2 hr).
         # For full convergence at N>=2e6 (paper threshold), set KISS_SIDM_TIMEOUT_S=18000 (5 hr).
         # WARNING: large timeouts lock WSL resources; use background mode for >7200s.
-        timeout_seconds = int(os.environ.get("KISS_SIDM_TIMEOUT_S", "3600"))
+        # Per T71.7 honest timeout verdict
+        # (`v0.3-prelim/docs/V0_6_KISS_SIDM_TIMEOUT_VERDICT.md`), the N=5e4 UFD
+        # case does NOT benefit from increasing this timeout — the wall-time
+        # bottleneck is the snapshot-cadence physics, not the wrapper.
+        # Default falls back to config.KISS_SIDM_DEFAULT_TIMEOUT_S (3600s),
+        # which itself falls back to 3600s if config is not on sys.path.
+        try:
+            from config import KISS_SIDM_DEFAULT_TIMEOUT_S as _DEFAULT_TIMEOUT_S
+        except ImportError:
+            _DEFAULT_TIMEOUT_S = 3600
+        timeout_seconds = int(os.environ.get("KISS_SIDM_TIMEOUT_S", str(_DEFAULT_TIMEOUT_S)))
         t0 = time.time()
         proc = subprocess.run(
             cmd, capture_output=True, text=True, timeout=timeout_seconds,

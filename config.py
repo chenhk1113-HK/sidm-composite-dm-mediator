@@ -174,6 +174,27 @@ T5_SEED_BASE = 42         # base RNG seed for reproducibility
 
 SPARC_N_PTS_MIN = 20      # minimum data points per galaxy for inclusion
 
+# ---------------------------------------------------------------------------
+# KiSS-SIDM gravothermal penalty (Channel 13, Gurian & May 2025 PRL 135 221001)
+#
+# Per T71.7 honest timeout verdict
+# (`v0.3-prelim/docs/V0_6_KISS_SIDM_TIMEOUT_VERDICT.md`), the N=5e4 UFD dwarf
+# configuration is structurally compute-prohibitive at single-session
+# wall-clock budget. We therefore ship a single canonical-halo path for
+# interactive / single-session work; UFD N=5e4 stays as a documented
+# out-of-session item (see MODEL_ASSUMPTIONS_AND_LIMITATIONS.md §4.2).
+#
+# Override at call time via `KISS_SIDM_TIMEOUT_S` env var
+# (see `v0.3-prelim/code/kiss_sidm_julia_bridge.py:375-382`); for the
+# full N>=2e6 paper-scale run, set `KISS_SIDM_TIMEOUT_S=18000` (5 h).
+# ---------------------------------------------------------------------------
+
+KISS_SIDM_CANONICAL_N = 10000          # particles in the canonical MW-scale halo
+                                        # (matches the bridge default; 5-15 min wall)
+KISS_SIDM_DEFAULT_TIMEOUT_S = 3600     # wrapper timeout, seconds (1 h)
+KISS_SIDM_DEFAULT_T_END_GYR = 10.0     # end-time for the canonical run, Gyr
+KISS_SIDM_DEFAULT_SIGMA_M_CM2_PER_G = 50.0  # σ/m for the canonical run, cm²/g
+
 
 def get_version_paths(version: str) -> dict:
     """Return dict of paths for a given version ('v01', 'v02', 'v03')."""
@@ -233,5 +254,9 @@ __all__ = [
     "TREMAINE_GUNN_MASS_BOUND_EV",
     "ROGERS_PEIRIS_LYMAN_ALPHA_BOUND_EV",
     "SIDM_MASS_CLASSICAL_FLOOR_EV",
+    "KISS_SIDM_CANONICAL_N",
+    "KISS_SIDM_DEFAULT_TIMEOUT_S",
+    "KISS_SIDM_DEFAULT_T_END_GYR",
+    "KISS_SIDM_DEFAULT_SIGMA_M_CM2_PER_G",
     "get_version_paths",
 ]
