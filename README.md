@@ -166,6 +166,8 @@
 > ~5-15 min wall) is now the explicitly-documented production path; the N=5e4
 > UFD configuration stays as a documented out-of-session item. **No version bump**
 > (doc-only; per CONTRIBUTING.md step 3a). See `CHANGELOG.md [T71.8]` + `[T71.8.1]`.
+> Companion layman explanation (no jargon, 5-element format) at
+> `v0.3-prelim/docs/LAYMAN_SUMMARY_T71_8.md`.
 
 > **T71.4 Three v0.6 items shipped in parallel (2026-08-28):**
 > Per user direction "proceed all, in parallel if ok". Shipped end-to-end with verified

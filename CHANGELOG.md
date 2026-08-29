@@ -56,6 +56,15 @@ round lifts the 4 actually-missing items into standing docs.
   solver is real (T71.6 `t59_production_boltzmann.py`), (4) Drobczyk 2025
   cluster-scale strong tension is real. So any reader who arrives at
   FINDINGS.md first sees the caveats before reading the headline numbers.
+- **`v0.3-prelim/docs/LAYMAN_SUMMARY_T71_8.md`** (NEW, this round): 5-element
+  layman explanation synthesising (a) the user-uploaded "Condensed Executive
+  Summary" docx (verified against on-disk state), (b) the v0.5 canonical
+  T41 result, (c) the nlive=2000 (N_c, N_f) scan, (d) the R12/R13/R14 layman
+  summaries for tone. Grounded in actual numbers from
+  `t41_mediator_mass_joint_fit_v0_5.json` (MAP m_φ=502 MeV, σ/m₀=0.105,
+  a=+1.89, ε=4×10⁻³⁵, log Z=-254.24) and `nc_nf_scan_v0_6_nl2000_summary.json`
+  (all 7 combos within ±0.135±0.120 log BF — indistinguishable from sampling
+  noise). Cross-referenced from `README.md` T71.8/T71.8.1 heads-up block.
 ### Standing state
 - **No version bump.** Doc-only tightening. Version stamp remains
   `v0.3-prelim+T71.7` in VERSION, README, and MODEL_ASSUMPTIONS_AND_LIMITATIONS.md.
