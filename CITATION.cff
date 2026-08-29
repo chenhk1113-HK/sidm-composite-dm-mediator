@@ -3,22 +3,34 @@ message: >-
   If you use this code or its results in published work, please cite the
   relevant version below AND the underlying physics references listed at
   the bottom. See docs/DATA_SOURCES.md for the full list of observational
-  data sources used and how to cite them. v0.3-prelim+T71.5 (T71.5
-  Tier B closure 2026-08-28: Drobczyk quantitative χ² test added
-  (t68b, χ²=213.62, strong tension vs arXiv:2506.22997); LZ WS2024
-  stale-claim correction (already in production since R12 via
-  t30_lz_real_posterior.loglike_lz_real, HEPData 155182, 26 mass points);
-  KiSS-SIDM UFD fidelity deferred with rationale (T38a hit 1-hour Julia
-  timeout at N=5e4; canonical halo converged at N=1e4-1e5). V0_6_ROADMAP:
-  7 of 15 items shipped across T71.2 → T71.5. Earlier closed rounds:
-  T71.4 (3 v0.6 items in parallel: hier-sparc +0.10 log Z, bullet_sens
-  +1.74 log Z, CHANNEL_STATUS dict); T71.3 (R7 closure: nlive=2000
-  (Nc,Nf) scan via 7-way parallel background runner, scan converged);
-  T71.2 (R16 closure: ksfr_mask_max_at_runtime field + config_hash field,
-  575/0/6 tests); T71.1 (R15 closure: inelastic + nlive=2000 + KSFR mask
-  extension confound found) and the H3+H4 sensitivity report at
+  data sources used and how to cite them. v0.3-prelim+T71.7 (T71.7
+  KiSS-SIDM timeout closure 2026-08-28: T38a N=5e4 dwarf re-run with
+  KISS_SIDM_TIMEOUT_S=7200 hit 2/10 snapshots in 7200s — UFD KiSS-SIDM
+  declared structurally out-of-session; wrapper-level timeout env var
+  shipped (commit cdb9028); Brower N_f=8 lattice deferred per
+  reviewer Assessment.docx ¶52 (wrong N_f + undocumented columns +
+  conformal-window risk). T71.5 Tier B closure 2026-08-28: Drobczyk
+  quantitative χ² test added (t68b, χ²=213.62, strong tension vs
+  arXiv:2506.22997); LZ WS2024 stale-claim correction (already in
+  production since R12 via t30_lz_real_posterior.loglike_lz_real, HEPData
+  155182, 26 mass points); KiSS-SIDM UFD fidelity deferred with rationale
+  (canonical halo converged at N=1e4-1e5). V0_6_ROADMAP: 9 of 15 items
+  shipped across T71.2 → T71.7. Earlier closed rounds: T71.4 (3 v0.6
+  items in parallel: hier-sparc +0.10 log Z, bullet_sens +1.74 log Z,
+  CHANNEL_STATUS dict); T71.3 (R7 closure: nlive=2000 (Nc,Nf) scan via
+  7-way parallel background runner, scan converged); T71.2 (R16 closure:
+  ksfr_mask_max_at_runtime field + config_hash field, 575/0/6 tests);
+  T71.1 (R15 closure: inelastic + nlive=2000 + KSFR mask extension
+  confound found) and the H3+H4 sensitivity report at
   v0.3-prelim/docs/H3_H4_SENSITIVITY_REPORT.md are the most recent
-  closed rounds at the time of the most recent public release.
+  closed rounds at the time of the most recent public release. T71.8
+  doc-only audit upgrade (2026-08-28): (2,2) KSFR ESTIMATED → LATTICE
+  after re-reading Arthur 1602.06559 via Bennett Sp(4) Fig 17 (count
+  shifts 2/2/3 → 3/2/2); Sp(4) explicitly distinguished from SU(2).
+  T71.8.1 (2026-08-29): lifted KiSS-SIDM UFD timeout verdict into
+  standing docs — KISS_SIDM_CANONICAL_N, KISS_SIDM_DEFAULT_TIMEOUT_S in
+  config.py; KiSS-SIDM Quick Start section in README; "⚠️ Known caveats"
+  block at top of FINDINGS.md. No version bump (doc-only).
 title: "sidm-composite-dm-mediator"
 type: software
 version: 0.3-prelim+T71.7

@@ -151,6 +151,22 @@
 > `V0_6_KISS_SIDM_TIMEOUT_VERDICT.md` + `V0_6_BROWER_PROBE_SCOPE.md` +
 > `V0_7_REVIEWER_RESPONSE_BROWER_ASSESSMENT.md`.
 
+> **T71.8 (2,2) KSFR upgrade + T71.8.1 standing-doc tightening (2026-08-29):**
+> Per `Updated review15.docx` §Sp(4): Arthur et al. 2016 (arXiv:1602.06559) gives
+> SU(2) N_f=2 fundamental continuum-chiral R = 8.1 ± 1.2 (cross-cited in Bennett Sp(4)
+> 2019 Fig 17). Previous 'no continuum limit for SU(2) N_f=2' was a partial reading.
+> Numerical agreement: 8.0 ± 1.0 (old ESTIMATED) vs 8.1 ± 1.2 (new LATTICE) — overlap
+> within 1σ. **LATTICE / ANALYTICAL / ESTIMATED count: 2/2/3 → 3/2/2.**
+> Sp(4) explicitly distinguished from SU(2) (Sp(4) gives R ≈ 5.72, not 8.0).
+> **T71.8.1** lifted the KiSS-SIDM UFD honest-timeout verdict into standing
+> docs: new `KISS_SIDM_CANONICAL_N=10000` + `KISS_SIDM_DEFAULT_TIMEOUT_S=3600`
+> in `config.py`; new "Running the KiSS-SIDM gravothermal penalty" Quick Start
+> section in `README.md`; new "⚠️ Known caveats" block at top of
+> `v0.3-prelim/docs/FINDINGS.md`. The KiSS-SIDM canonical halo (N≈1×10⁴ MW-scale,
+> ~5-15 min wall) is now the explicitly-documented production path; the N=5e4
+> UFD configuration stays as a documented out-of-session item. **No version bump**
+> (doc-only; per CONTRIBUTING.md step 3a). See `CHANGELOG.md [T71.8]` + `[T71.8.1]`.
+
 > **T71.4 Three v0.6 items shipped in parallel (2026-08-28):**
 > Per user direction "proceed all, in parallel if ok". Shipped end-to-end with verified
 > T41 re-runs in parallel (~6.7 min wall via 2× terminal(background=true, notify_on_complete=true)).
