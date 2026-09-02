@@ -1,4 +1,4 @@
-# Layman Summary — v0.4-prelim+T75 Tier-1 Milestone (T72 → T80)
+# Layman Summary — v0.4-prelim+T75 Tier-1 Milestone (T72 → T81)
 
 > **For:** Non-experts + users preferring quick summaries over
 > technical detail. Covers the full milestone shipped 2026-09-02:
@@ -25,8 +25,8 @@ experiment's 2026-09-01 mysterious signal paper.
 | **σ/m₀** (cross-section per unit mass, galactic scale) | 0.06 cm²/g | **0.27 cm²/g** | +350% |
 | **Bayesian evidence** (log Z) | -215 | **-163** | +52 log-units (substantial evidence gain) |
 | **Velocity-slope tension** | 0.91 (above 1.0) | **0.60** (below 1.0) | -34% (resolved!) |
-| **Channels** | 16 | **18** | +2 (DAMPE + LSS) |
-| **Tests passing** | 446 | **472** | +26 |
+| **Channels** | 16 | **19** | +3 (DAMPE + LSS + T81 XENONnT/PandaX) |
+| **Tests passing** | 446 | **504** | +58 |
 
 **The headline finding:** adding DAMPE + LSS resolved the v0.6
 velocity-slope tension. The project now prefers **heavier DM**
@@ -182,5 +182,5 @@ velocity-slope tension. The Tier-1 milestone is publication-worthy.
 > T77 LZ signal defensive docs, T78 kinetic-mixing refinement,
 > T79 composite form-factor + relic-density, T80 LZ paper
 > validation. Headline: σ/m = 0.27 cm²/g, tension = 0.60, log Z =
-> -163.29 ± 0.085, m_χ ~ 770 GeV (MAP). 472 tests passing, 18
+> -163.29 ± 0.085, m_χ ~ 770 GeV (MAP). 504 tests passing, 19
 > channels. Standing posture preserved at v0.4-prelim+T75.

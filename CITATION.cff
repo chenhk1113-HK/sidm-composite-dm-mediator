@@ -20,8 +20,21 @@ message: >-
   (2026-09-02): composite form-factor F^2(q) correction (Gaussian + dipole)
   + relic-density consistency check (epsilon falls in freeze-in regime,
   consistent with T_RH > 10^15 GeV); uncertainty band updated to 50-80
-  orders. Standing posture: LZ used as Channel 5 sanity check, NOT as
-  sigma/m constraint. V0_6_ROADMAP: 9 of 15 items shipped across
+  orders. T80 (2026-09-02): LZ paper preprint appeared (much earlier
+  than the KIV cron's expected 2026-11-01 fire date); 25-page full
+  author-list paper with 3.4sigma local / 2.6sigma global significance,
+  best-fit Ls_10 WIMP at 1000 GeV/c^2; first compatibility check (NOT
+  validation) of v0.7 posterior; project m_chi ~ 770 GeV in same
+  ballpark as LZ best-fit. T81 (2026-09-02): defensive doc-update +
+  Channel 19 added in response to LZ1.docx technical review of T80;
+  reviewer's 5 recommendations all addressed: (1) cross-validation ->
+  compatibility, (2) sigma/m survives all -> unchanged at current LZ
+  precision, (3) T79 already executed (F^2(q) values documented), (4)
+  LSS phenomenological status flagged prominently, (5) XENONnT
+  (arXiv:2502.18005) + PandaX-4T (arXiv:2408.00664) watch registered
+  as Channel 19 (experimental, not in primary production); 504 tests
+  passing (was 472); 19 channels (was 18). Standing posture: LZ used
+  as Channel 5 sanity check, NOT as sigma/m constraint. V0_6_ROADMAP: 9 of 15 items shipped across
   T71.2 -> T71.7 + 2 v0.4-prelim Tier-1 extensions (DAMPE, LSS). Earlier
   closed rounds: T71.4 (3 v0.6 items in parallel: hier-sparc +0.10 log Z,
   bullet_sens +1.74 log Z, CHANNEL_STATUS dict); T71.3 (R7 closure:

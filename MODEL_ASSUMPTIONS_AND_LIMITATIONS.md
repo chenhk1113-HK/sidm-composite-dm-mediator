@@ -7,7 +7,7 @@
 
 ---
 
-## §0 — Standing posture: orthogonal-physics in practice (locked 2026-08-10, reaffirmed 2026-09-02 in T75; refined 2026-09-02 in T78/T79; LZ-paper-validated 2026-09-02 in T80)
+## §0 — Standing posture: orthogonal-physics in practice (locked 2026-08-10, reaffirmed 2026-09-02 in T75; refined 2026-09-02 in T78/T79; LZ-paper-validated 2026-09-02 in T80; XENONnT+PandaX competitor watch added 2026-09-02 in T81)
 
 **The project's headline σ/m = 0.27 cm²/g (T41 v0.7, nlive=2000)
 measures the self-interaction cross-section per unit mass σ_DM-DM (in

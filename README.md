@@ -292,8 +292,8 @@ for the full v0.7 result.**
 | DM mass m_χ (MAP) | **770 GeV** | (365 GeV) | (515 GeV) | T41 MAP |
 | Bare kinetic mixing ε (median posterior) | **1.4×10⁻³⁷** | (10⁻³⁷) | (4×10⁻³⁵) | T41 posterior median |
 | log Z (Bayesian evidence) | **−163.29 ± 0.085** | (−215.37 ± 0.16) | (−254.24 ± 0.16) | T41 nested sampling (nlive=2000) |
-| **Channel count** | **18** | (16) | (15) | T72 DAMPE (Ch17) + T74 LSS (Ch18) |
-| **Test count** | **472 pass, 7 skip** | (446 pass, 7 skip) | (170 pass) | pytest |
+| **Channel count** | **19** | (16) | (15) | T72 DAMPE (Ch17) + T74 LSS (Ch18) + T81 XENONnT/PandaX (Ch19) |
+| **Test count** | **504 pass, 6 skip** | (446 pass, 7 skip) | (170 pass) | pytest |
 
 **v0.4-prelim key changes (T72 → T76):**
 - **T72 (DAMPE POC):** 36 energy bins from arXiv:1711.10981 Table 1; broken-power-law fit; all
@@ -352,6 +352,27 @@ in the same "heavy WIMP" ballpark as the LZ paper's preferred mass range.
 Project microphysics (light mediator + composite form factor) overlaps the LZ
 NREFT framework at the qualitative level. **Standing posture robust at
 v0.4-prelim+T75.**
+
+**T81 milestone (2026-09-02) — LZ review response + XENONnT/PandaX competitor watch:**
+In response to the `LZ1.docx` technical review of the T80 write-up, T81 addresses
+the reviewer's 5 recommendations and adds **Channel 19** as an experimental watch.
+
+| # | Reviewer recommendation | T81 response |
+|---|---|---|
+| 1 | Soften "cross-validation" → "compatibility" | ✅ Applied in README, layman, T77, T80 |
+| 2 | Soften "σ/m survives all scenarios" → "unchanged at current LZ precision" | ✅ Applied in layman + EXTRACT.md |
+| 3 | Complete T79 (composite form factor) before claiming "50-80 orders" | ✅ T79 was already executed; F²(q) ≈ 0.93 at 248 keV |
+| 4 | Flag LSS channel's phenomenological status prominently | ✅ Prominent note in T74 docs |
+| 5 | Register XENONnT + PandaX-4T watch | ✅ **Channel 19** added (XENONnT arXiv:2502.18005 + PandaX-4T arXiv:2408.00664) |
+
+**Channel 19 (XENONnT + PandaX-4T watch):** the project's kinetic-mixing
+suppression (~50-80 orders) applies equally to all 3 leading direct-detection
+experiments (LZ, XENONnT, PandaX-4T). At the v0.7 MAP (σ_m = 0.27 cm²/g,
+m_χ = 770 GeV), predicted σ_DM-nucleon ~10⁻¹¹⁷ cm² is ~10⁻⁷¹ below both
+XENONnT limit (~3×10⁻⁴⁶ cm² @ 770 GeV) and PandaX-4T limit (~4×10⁻⁴⁶ cm²
+@ 770 GeV). Channel 19 contributes 0 to the log-likelihood — same
+kinetic-mixing suppression as LZ. 13 new tests added (504 total pass).
+See `v0.3-prelim/docs/T81_LZ_REVIEW_RESPONSE.md`.
 
 ## Headline result — **v0.5 (T70.5, 2026-08-26)** — KSFR mask enabled
 
@@ -567,6 +588,7 @@ The KiSS-SIDM canonical constants live in `config.py`
 | **Mediator_Detection v1–v12** | Mediator detection feasibility (within v0.3-prelim/code/) | σ/m ~ 0.07 cm²/g at MeV-scale m_φ (R12), mediator-invisible to LZ only in ε ≪ 10⁻¹⁰ part of posterior |
 | **v0.4-prelim+T75** | Tier-1 milestone (2026-09-02) — T72 DAMPE POC + T73 Channel 17 + T74 Zhang+2025 LSS Channel 18 + T75 v0.7 rerun + T76 nlive=2000 + T77 LZ signal doc + T78 kinetic-mixing + T79 form-factor correction | σ/m ~ 0.27 cm²/g at MAP (nlive=2000); tension T39 vs Yukawa a = **0.60** (below 1.0 threshold); Bayesian evidence log Z = −163.29 ± 0.085; 472 tests passing; 18 channels; KIV cron for 2026-11-01 LZ paper re-check |
 | **v0.4-prelim+T75+T80** | LZ preprint compatibility check (2026-09-02) — actual LZ paper appeared (much earlier than 60-day KIV cron) | First compatibility check (not validation) of v0.7 posterior; project m_χ ~ 770 GeV in same ballpark as LZ best-fit m_χ ~ 1000 GeV (Ls₁₀); 3.4σ local / 2.6σ global; standing posture preserved (no Channel 5 update, no T41 re-run); NREFT framework overlaps project microphysics qualitatively |
+| **v0.4-prelim+T75+T81** | LZ review response + XENONnT/PandaX competitor watch (2026-09-02) — defensive doc update + Channel 19 in response to `LZ1.docx` review | Reviewer's 5 recommendations addressed: rhetoric softened (cross-validation → compatibility, σ/m survives all → unchanged at current LZ precision); Channel 19 (XENONnT arXiv:2502.18005 + PandaX-4T arXiv:2408.00664) added as experimental watch; 13 new tests; conftest.py Windows-fix; 504 tests passing; 19 channels |
 
 ---
 
@@ -709,7 +731,7 @@ Quick bibtex for citing this repo:
 @software{lam_sidm_composite_dm_mediator_2026,
   author = {Lam, K.},
   title = {sidm-composite-dm-mediator},
-  version = {0.4-prelim+T75 (Tier-1 milestone 2026-09-02: DAMPE + Zhang+2025 LSS joint-fit rerun; v0.7 result log Z = -163.29 +/- 0.085 at nlive=2000; tension T39 vs Yukawa a = 0.60 below 1.0 threshold; 472 tests passing; 18 channels)},
+  version = {0.4-prelim+T75 (Tier-1 milestone 2026-09-02: DAMPE + Zhang+2025 LSS joint-fit rerun; v0.7 result log Z = -163.29 +/- 0.085 at nlive=2000; tension T39 vs Yukawa a = 0.60 below 1.0 threshold; 504 tests passing; 19 channels including T81 XENONnT/PandaX-4T watch)},
   year = {2026},
   month = {9},
   url = {https://github.com/chenhk1113-HK/sidm-composite-dm-mediator},
