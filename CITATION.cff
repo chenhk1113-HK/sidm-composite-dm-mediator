@@ -33,7 +33,7 @@ message: >-
   block at top of FINDINGS.md. No version bump (doc-only).
 title: "sidm-composite-dm-mediator"
 type: software
-version: 0.3-prelim+T71.7
+version: 0.4-prelim+T75
 date-released: 2026-08-28
 authors:
   - family-names: Lam

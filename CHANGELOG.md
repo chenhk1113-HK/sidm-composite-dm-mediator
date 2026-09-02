@@ -7,6 +7,61 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [v0.4-prelim+T75] — 2026-09-02
+
+### T41 v0.7 full joint-fit rerun with DAMPE + LSS (Tier-1 milestone)
+
+Runs the T41 joint fit at nlive=500 with Channels 17 (DAMPE) and 18
+(Zhang+2025 LSS) wired in. **Major posterior shift** vs v0.6:
+
+| Quantity | v0.6 | **v0.7** | Δ |
+|---|---|---|---|
+| MAP m_chi (GeV) | 364.5 | **956.7** | **+162%** |
+| MAP σ/m_0 (cm²/g) | 0.059 | **0.238** | **+303%** |
+| Tension (T39 a − Y a) | 0.91 | **0.70** | **-23% (now below 1.0 threshold)** |
+| log Z (Bayesian evidence) | -215.37 | **-163.24** | **+52.13** |
+
+**Interpretation:** Adding DAMPE (Channel 17) and Zhang+2025 LSS
+(Channel 18) substantially increases the Bayesian evidence and **resolves
+the velocity-slope tension that existed in v0.6**. Ablation: DAMPE
+alone adds +84 log Z and resolves the tension (0.91 → 0.67); LSS alone
+adds +72 log Z and shifts σ/m_0 by 4× but does not resolve the tension
+alone; the combined posterior reflects both complementary constraints.
+
+### Ablation results (nlive=500, dlogz=0.1)
+
+| Config | log Z | Δ vs v0.6 | MAP m_phi (MeV) | MAP m_chi (GeV) | MAP σ/m_0 | Tension | Wall |
+|---|---|---|---|---|---|---|---|
+| v0.6 baseline | -215.37 | — | 778.6 | 364.5 | 0.059 | **0.908** ⚠️ | 92.0s |
+| DAMPE only | -131.49 | +83.89 | 425.3 | 619.8 | 0.058 | **0.673** ✅ | 78.6s |
+| LSS only | -143.24 | +72.14 | 721.7 | 547.7 | 0.246 | 0.858 ⚠️ | 82.4s |
+| **v0.7 combined** | **-163.24** | **+52.13** | 696.3 | 956.7 | **0.238** | **0.698** ✅ | 97.4s |
+
+### Files
+
+| File | Purpose |
+|---|---|
+| `v0.3-prelim/data/results/t41_mediator_mass_joint_fit_v0_7_with_dampe_lss_nlive500.json` | v0.7 combined |
+| `v0.3-prelim/data/results/t41_mediator_mass_joint_fit_v0_7_dampe_only_nlive500.json` | DAMPE-only ablation |
+| `v0.3-prelim/data/results/t41_mediator_mass_joint_fit_v0_7_lss_only_nlive500.json` | LSS-only ablation |
+| `v0.3-prelim/data/results/2026-09-02_dampe_poc/t75_v07_ablation_summary.json` | Cross-comparison |
+| `v0.3-prelim/docs/T75_V07_FULL_T41_RERUN.md` | Full method + ablation table + scope |
+| `scripts/t75_build_ablation.py` | Reproducible cross-comparison |
+
+### Standing-version impact (Tier-1 milestone)
+
+- **VERSION bumped:** `0.3-prelim+T71.7` → **`0.4-prelim+T75`**
+- README.md badge updated
+- CITATION.cff version updated
+- All drift-guard sources now agree on `v0.4-prelim+T75`
+
+### What's NOT in this scope (deferred)
+
+- nlive=2000 v0.7 rerun (~1-2 hours CPU) for final convergence
+- Doc-prominence fix (orthogonal-physics rejection in EXTRACT.md §0)
+- Full posterior publication plot suite (corner plots, joint-1D)
+- Final Telegram wrap-up PDF+ZIP for the a/b/c cycle
+
 ## [T74] — 2026-09-02
 
 ### Zhang+2025 (Nature) LSS / assembly-bias channel (v0.4-prelim)

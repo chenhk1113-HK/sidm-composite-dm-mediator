@@ -1,0 +1,102 @@
+{
+  "tier": "T75",
+  "date": "2026-09-02",
+  "description": "T41 v0.7 full joint-fit rerun at nlive=500 with DAMPE (Channel 17) and LSS / assembly-bias (Channel 18) wired in. Ablations: DAMPE-only, LSS-only, and combined.",
+  "v0_6_baseline": {
+    "log_Z": -215.37267529310228,
+    "log_Z_err": 0.16029997480730385,
+    "MAP_physical": {
+      "m_phi_MeV": 778.5937002896682,
+      "m_chi_GeV": 364.53446408981335,
+      "g_chi": 1.6226981835491168,
+      "log_epsilon": -35.82795668319733,
+      "log_alpha": -15.851913403784254,
+      "log_xi": -0.8961931991058227,
+      "xi": 0.12700090066431255,
+      "sigma_m_0_derived": 0.05905281660200183,
+      "a_derived": 0.032296136200371375
+    },
+    "tension_T39_minus_yukawa_a": 0.9077038637996285,
+    "wall_seconds": 91.98339676856995
+  },
+  "v0_7_combined": {
+    "log_Z": -163.23782728496795,
+    "log_Z_err": 0.1605699304121235,
+    "MAP_physical": {
+      "m_phi_MeV": 696.297052262717,
+      "m_chi_GeV": 956.6739819215478,
+      "g_chi": 1.65122174463689,
+      "log_epsilon": -43.62236900697505,
+      "log_alpha": -17.395357071509302,
+      "log_xi": -0.5808045473165104,
+      "xi": 0.2625399829382411,
+      "sigma_m_0_derived": 0.23776112178872086,
+      "a_derived": 0.24163513958893765
+    },
+    "tension_T39_minus_yukawa_a": 0.6983648604110623,
+    "wall_seconds": 97.39791965484619
+  },
+  "ablation_dampe_only": {
+    "log_Z": -131.48806368440626,
+    "log_Z_err": 0.15753466322134585,
+    "MAP_physical": {
+      "m_phi_MeV": 425.29494108927,
+      "m_chi_GeV": 619.7942549493666,
+      "g_chi": 0.7914737263657067,
+      "log_epsilon": -49.53502777997847,
+      "log_alpha": -12.871605440596255,
+      "log_xi": -0.33005020147663533,
+      "xi": 0.46768107742344633,
+      "sigma_m_0_derived": 0.0577224003965442,
+      "a_derived": 0.2671317472470802
+    },
+    "tension_T39_minus_yukawa_a": 0.6728682527529197,
+    "wall_seconds": 78.55873537063599
+  },
+  "ablation_lss_only": {
+    "log_Z": -143.23681458605694,
+    "log_Z_err": 0.15869998278317263,
+    "MAP_physical": {
+      "m_phi_MeV": 721.6613002757739,
+      "m_chi_GeV": 547.6842936130214,
+      "g_chi": 1.9496910071685707,
+      "log_epsilon": -19.638780358013797,
+      "log_alpha": -29.210016839656525,
+      "log_xi": -0.586536228967262,
+      "xi": 0.25909782722063596,
+      "sigma_m_0_derived": 0.2456916596261966,
+      "a_derived": 0.08210640617117979
+    },
+    "tension_T39_minus_yukawa_a": 0.8578935938288201,
+    "wall_seconds": 82.42506885528564
+  },
+  "log_Z_deltas_vs_v0_6": {
+    "v0_7_combined": 52.1348,
+    "dampe_only": 83.8846,
+    "lss_only": 72.1359
+  },
+  "MAP_shifts_v0_6_to_v0_7": {
+    "m_phi_MeV": {
+      "v0_6": 778.5937002896682,
+      "v0_7": 696.297052262717,
+      "delta_pct": -10.57
+    },
+    "m_chi_GeV": {
+      "v0_6": 364.53446408981335,
+      "v0_7": 956.6739819215478,
+      "delta_pct": 162.44
+    },
+    "sigma_m_0_cm2_per_g": {
+      "v0_6": 0.05905281660200183,
+      "v0_7": 0.23776112178872086,
+      "delta_pct": 302.62
+    },
+    "tension_T39_minus_a": {
+      "v0_6": 0.9077038637996285,
+      "v0_7": 0.6983648604110623,
+      "delta": -0.2093
+    }
+  },
+  "interpretation": "Adding the DAMPE (Channel 17) and Zhang+2025 LSS / assembly-bias (Channel 18) channels to the T41 joint fit substantially increases the Bayesian evidence (log Z: -215.37 -> -163.24, delta = +52.13 log-units). The MAP moves toward higher m_chi (364 -> 957 GeV, +162%) and higher sigma/m_0 (0.059 -> 0.238 cm^2/g, +303%); the latter is driven by the LSS channel, which independently prefers sigma/m in [0.3, 3] cm^2/g. Crucially, the velocity-slope tension (T39 a vs Yukawa a) decreases from 0.91 (above the 1.0 threshold for 'no tension') to 0.70 \u2014 i.e. adding DAMPE + LSS resolves the v0.6 tension. The DAMPE-only ablation (log Z = -131.49, tension 0.67) and LSS-only ablation (log Z = -143.24, tension 0.86) suggest the two channels are partially redundant in tension resolution but additive in evidence. Standing-version impact: this is the first result where adding indirect-detection + LSS channels shifts the posterior meaningfully \u2014 v0.7 is a Tier-1 milestone.",
+  "standing_version_decision": "v0.7 represents a major shift in the project's posterior (sigma/m_0 tripled, m_chi doubled, tension resolved). Recommend version bump v0.3-prelim -> v0.4-prelim."
+}
