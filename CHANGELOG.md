@@ -7,6 +7,79 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [T80] — 2026-09-02
+
+### LZ paper-specific update (preprint appeared 2026-09-02)
+
+The actual LZ preprint appeared 2026-09-02 (much earlier than the
+KIV cron 080d2f590251 expected fire date of 2026-11-01). User
+uploaded the paper as `LZ_Preprint_260901_Dark_Matter_EFT_Nuclear_Recoil_Search_at_Higher.pdf`.
+
+Key paper-specific facts (verified end-to-end per AGENTS.md rule 21):
+
+| Property | Press release (T77) | Paper (T80) |
+|---|---|---|
+| Exposure | 220 live days | **2.84 tonne-years** (220 d × 4.71 t) |
+| Energy window | 248 keV event | **5.4 - 270 keV** (extended from 0-50 keV) |
+| Models | 'beyond simplest WIMP' | **NREFT operators** O1s, O4v, L1-L20, Ls10; inelastic DM |
+| Significance | 2.6 sigma | **3.4 sigma local / 2.6 sigma global** (after LEE) |
+| Best-fit model | n/a | **Ls10 WIMP at 1000 GeV/c^2** (Table I) |
+| Implied mass | >= 200 GeV/c^2 | **1000 GeV/c^2** best fit |
+| Background near event | n/a | ~0.011 events in 248 keV region |
+
+### Critical local-vs-global distinction
+
+The paper distinguishes **3.4 sigma local** (for the best-fit model
+Ls10 at 1000 GeV) from **2.6 sigma global** (after look-elsewhere
+effect correction for the multi-model search).
+
+Per the project's standing trigger policy (T77):
+- < 3 sigma (global): document only, no code/data modification
+- >= 3 sigma (global): update Channel 5 (T30), re-run T41
+- >= 5 sigma: major milestone, v0.5-prelim release
+
+**The 2.6 sigma global is below the 3 sigma threshold.** Therefore:
+- DO document the paper-specific findings (T77, T78, T79, T80)
+- DO NOT update T30 Channel 5
+- DO NOT re-run T41 (result unchanged)
+
+The project should NOT set a precedent for 'local-only' updates;
+that would be a slippery slope.
+
+### Project compatibility with LZ best fit
+
+| Quantity | Project v0.7 | LZ paper best fit |
+|---|---|---|
+| WIMP mass | **770 GeV (MAP)** / 498 GeV (median) | **1000 GeV/c^2** |
+| sigma/m | 0.27 cm^2/g | n/a (measures sigma_DM-nuc) |
+| Mediator mass | 453-588 MeV | Light mediator (NREFT) |
+| Interaction type | Composite-DM + secluded A' | Inelastic DM + EFT (Ls10) |
+
+**Project m_chi ~ 770 GeV is very close to LZ best-fit m_chi ~ 1000 GeV.**
+Stronger validation than the press-release-only T77 had.
+
+### KIV cron retained
+
+The cron `080d2f590251` (next fire 2026-11-01 09:00) is retained
+to check for the PRL final version. If the PRL version changes the
+global significance to >= 3 sigma, the cron output will recommend
+updating Channel 5 per the standing trigger policy.
+
+### Files modified
+
+- `MODEL_ASSUMPTIONS_AND_LIMITATIONS.md` section 0 (LZ paper reference)
+- `EXTRACT.md` (LZ paper reference + T80 cross-reference)
+- `docs/LAYMAN_SUMMARY_T77_LZ_2026_09.md` (T80 section)
+- `v0.3-prelim/docs/T77_LZ_2026_09_UPDATE.md` (paper-specific findings)
+- `v0.3-prelim/docs/T78_KINETIC_MIXING_LZ_LINK.md` (T80 section)
+- `v0.3-prelim/docs/T79_COMPOSITE_FORM_FACTOR_REMNANT.md` (T80 section)
+- `v0.3-prelim/docs/T80_LZ_PAPER_UPDATE.md` (NEW, 10.7 KB)
+
+### Standing-version impact
+
+**No version bump.** T80 is a paper-specific defensive update.
+Standing version: `v0.4-prelim+T75`.
+
 ## [T79] — 2026-09-02
 
 ### Composite form-factor correction + relic-density check

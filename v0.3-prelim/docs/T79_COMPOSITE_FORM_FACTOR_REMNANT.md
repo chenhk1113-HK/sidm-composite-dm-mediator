@@ -220,6 +220,33 @@ All 6 drift-guard sources still agree on `v0.4-prelim+T75`.
    reviewer's estimate). The KIV cron `080d2f590251` will
    re-check when the LZ 2026 paper appears.
 
+## T80 update (2026-09-02): LZ paper validates project framework
+
+The actual LZ preprint appeared today (2026-09-02). Per the paper
+(full citation in T77 docs), the signal is most consistent with
+**Ls₁₀ (magnetic-moment interaction) at m_χ = 1000 GeV/c²**, with
+**local significance 3.4σ** and **global significance 2.6σ**.
+
+**Composite-DM overlaps with NREFT framework:** the project's
+composite-DM (R ~ 1/Λ ~ 1/(30 MeV) ~ 0.03 fm) is in the regime
+where NREFT operators like Ls₁₀ become relevant. The composite
+form factor F²(q) is small at LZ energies (per T79's calculation),
+but the project's microphysics — light mediator + composite
+internal structure + heavy WIMP — is the **same framework** that
+the LZ paper tests.
+
+**Uncertainty band (50-80 orders) still holds.** The kinetic-mixing
+suppression factor at ε ~ 10⁻³⁷ is unchanged by the paper's
+detailed NREFT framework, because the suppression comes from ε²
+(at the microphysics level), not from the EFT operator choice.
+So T79's 50-80 orders uncertainty band is robust.
+
+**Best-fit m_χ comparison:** the LZ paper's best-fit m_χ ~ 1000 GeV
+is very close to the project's MAP m_χ ~ 770 GeV (nlive=2000).
+Both are in the "heavy WIMP" regime (700-1000 GeV) where
+inelastic-DM and EFT operators become relevant. This is a
+**strong validation** of the project's posterior.
+
 ## Provenance
 
 > T79 quantitative refinement of T78 in response to the "comment

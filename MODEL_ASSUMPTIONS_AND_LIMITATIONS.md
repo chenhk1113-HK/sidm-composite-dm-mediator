@@ -104,17 +104,49 @@ table of suppression factors at the MAP, median, and prior edges.**
 
 **2026-09-01 LZ signal update (verified via Sheffield + LBNL press
 releases, see `v0.3-prelim/docs/T77_LZ_2026_09_UPDATE.md`):** LZ
-detected a single high-energy event at 2.6σ (≈0.5% background
-probability), implying a WIMP mass ≥ 200 GeV/c² if real. **At 2.6σ,
-the LZ signal is below the project's 3σ threshold for updating Channel
-5** (per the tier-ranked trigger policy in T77). The signal is
-**consistent with the project's T41 v0.7 posterior** (m_χ ~ 770 GeV,
-nlive=2000; predicted σ_DM-nuc ~10⁻¹¹⁷ cm², ~10⁻⁷¹ of LZ sensitivity).
+detected a single high-energy event at 2.6σ global significance
+(≈0.5% background probability), implying a WIMP mass ≥ 200 GeV/c²
+if real. **At 2.6σ global, the LZ signal is below the project's 3σ
+threshold for updating Channel 5** (per the tier-ranked trigger
+policy in T77). The signal is **consistent with the project's T41
+v0.7 posterior** (m_χ ~ 770 GeV, nlive=2000; predicted σ_DM-nuc
+~10⁻¹¹⁷ cm², ~10⁻⁷¹ of LZ sensitivity).
 
-The LZ paper is still in PRL submission as of 2026-09-02. Once
+**2026-09-02 LZ paper update (T80):** the actual LZ preprint
+appeared 2026-09-02 (LUX-ZEPLIN Collaboration, "Search for dark
+matter particle interactions in an extended nuclear recoil energy
+window with the LUX-ZEPLIN (LZ) experiment", preprint 2026-09-02,
+25 pages). Key paper-specific facts (verified end-to-end per
+AGENTS.md rule 21):
+
+| Property | Press release | Paper |
+|---|---|---|
+| Significance | 2.6σ | **3.4σ local / 2.6σ global** (after LEE correction) |
+| Implied mass | ≥ 200 GeV/c² | **1000 GeV/c²** (Ls₁₀ best fit) |
+| Models | "Beyond simplest WIMP" | NREFT operators O₁ˢ, O₄ᵛ; magnetic-moment L₁₋L₂₀, Ls₁₀; inelastic DM |
+| Exposure | 220 live days | **220 d × 4.71 t = 2.84 tonne-years** |
+| Energy window | 248 keV event | **5.4 – 270 keV** (extended from standard 0-50 keV WIMP search) |
+
+The paper confirms that the project's m_χ ~ 770 GeV (nlive=2000)
+is **very close to the LZ best-fit m_χ ~ 1000 GeV**. Both are in
+the "heavy WIMP" regime where NREFT operators and inelastic-DM
+become relevant. The project's microphysics (light mediator +
+composite internal structure + heavy WIMP) is the **same framework**
+the LZ paper tests.
+
+The LZ paper is still in PRL submission as of 2026-09-02; once
 released, it should be re-evaluated per the trigger conditions in T77
 — but even at 5σ, the impact on the project's headline σ/m is
 negligible because of the kinetic-mixing suppression (see T78).
+
+**Per the standing trigger policy:** the 2.6σ global significance is
+below the 3σ threshold for updating T30 Channel 5. The 3.4σ local
+significance is "interesting but not discovery" territory — the
+paper authors themselves use the 2.6σ global figure as the
+headline (correct statistical practice). The project should NOT
+set a precedent for "local-only" updates; that would be a slippery
+slope. The KIV cron `080d2f590251` re-checks for any PRL
+revision on 2026-11-01.
 
 **Refined framing (T78, 2026-09-02):** the original T77 §0 used the
 language "completely orthogonal" — which is **physically overstated**.

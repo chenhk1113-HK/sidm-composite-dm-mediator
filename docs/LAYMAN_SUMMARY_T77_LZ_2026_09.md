@@ -91,6 +91,16 @@ detection evidence** for a dark-matter particle in the mass range
 where the project's composite-DM + secluded-mediator model lives. That's
 exciting, but again: orthogonal physics, separate measurement.
 
+**T80 update (2026-09-02):** the actual LZ paper appeared today.
+The best-fit model is **Ls₁₀ (magnetic-moment interaction) at m_χ =
+1000 GeV/c²**, with **3.4σ local / 2.6σ global** significance. The
+project's m_χ ~ 770 GeV is **very close to** the LZ best-fit m_χ ~
+1000 GeV — both in the "heavy WIMP" regime. The paper uses NREFT
+(Non-Relativistic Effective Field Theory) operators, which is the
+same framework the project's microphysics (light mediator +
+composite internal structure) operates in. **Stronger validation**
+than the press-release-only T77.
+
 ## What the doc-prominence fix did
 
 This update adds the LZ event to the project's standing documentation

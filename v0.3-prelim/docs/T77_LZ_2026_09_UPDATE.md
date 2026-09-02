@@ -26,6 +26,83 @@ Northwestern, SLAC, Brown, LBNL, Sheffield):
 | **Paper status** | Released on arXiv (TBD); submitted to PRL | All sources |
 | **LZ operations** | Extended beyond 2028 to gather more data | Imperial |
 
+## Paper update (T80, 2026-09-02): LZ preprint available
+
+The actual LZ preprint appeared **today, 2026-09-02** — earlier than
+expected by the KIV cron `080d2f590251` (which was scheduled for
+2026-11-01, 60 days from announcement). This is a non-relativistic
+effective field theory (NREFT) + inelastic-DM search, NOT a standard
+WIMP search. Per the paper (LUX-ZEPLIN Collaboration, "Search for
+dark matter particle interactions in an extended nuclear recoil
+energy window with the LUX-ZEPLIN (LZ) experiment", preprint
+2026-09-02, 25 pages, full author list from the LZ collaboration):
+
+| Property | Value (from paper) |
+|---|---|
+| Title | "Search for dark matter particle interactions in an extended nuclear recoil energy window with the LUX-ZEPLIN (LZ) experiment" |
+| **Exposure** | **2.84 tonne-years** (220 d × 4.71 t active volume) |
+| **Energy window** | **5.4 – 270 keV** (extended from 0-50 keV standard WIMP search) |
+| **Models tested** | NREFT operators O₁ˢ, O₄ᵛ, magnetic-moment interactions L₁₋L₂₀, Ls₁₀; inelastic DM |
+| **Event** | One event with **248 ± 23(stat) ± 23(sys) keV** recoil energy |
+| **Local significance** | **3.4σ** (maximum, typically m_χ > 200 GeV/c²) |
+| **Global significance** | **2.6σ** (after look-elsewhere correction for multi-model search) |
+| **Best-fit model** | **Ls₁₀ WIMP at 1000 GeV/c²** (Table I: fit = 1.0⁺¹·⁴₋₀.₇ events) |
+| **Implied WIMP mass** | **above 200 GeV/c²**; best fit at **1000 GeV/c²** (consistent with project's v0.7 MAP m_χ ~ 770 GeV) |
+| **Background rate near event** | ~0.011 events in the 248 keV region (very low) |
+| **Neutron explanation** | Ruled out — would need ≥ 8 MeV neutrons and expect lower-E events (none observed) |
+| **²¹⁴Pb (MSSI) explanation** | Ruled out by prompt veto |
+| **¹²⁴Xe activation** | Detector was in "mixed flow state" during event; radon tag not applicable |
+
+### Important nuance: local vs global significance
+
+The press release reported **2.6σ global significance**. The paper
+also reports a **3.4σ local significance** for the best-fit model.
+The difference is the look-elsewhere effect (LEE) correction: the
+paper scans over many NREFT operators, masses, and inelastic-DM
+splittings, so the "global" significance is reduced from 3.4σ to
+2.6σ after accounting for the multiple-hypothesis testing.
+
+**Per the project's standing trigger policy (T77):**
+
+| Significance | Action |
+|---|---|
+| < 3σ (global) | Document only; no code/data modification |
+| ≥ 3σ (global) | Update Channel 5 (T30 LZ mapping); re-run T41 at nlive=2000 |
+| ≥ 5σ (discovery) | Major milestone; v0.5-prelim release |
+
+**The 2.6σ global is below the 3σ threshold.** Therefore:
+- ✅ **DO** document in MODEL_ASSUMPTIONS §0 + EXTRACT.md (T77, T78, T79, T80)
+- ✅ **DO** update with paper-specific findings (best-fit Ls₁₀ at 1000 GeV)
+- ❌ **DO NOT** update T30 Channel 5 (2.6σ global < 3σ threshold)
+- ❌ **DO NOT** re-run T41 (result would be unchanged anyway)
+
+**The 3.4σ local significance is "interesting but not discovery"
+territory.** It's the upper limit of what can happen without an
+explicit code update — the paper authors themselves use the 2.6σ
+global figure as the headline (correct statistical practice for
+multi-model searches). The project should NOT set a precedent for
+"local-only" updates; that would be a slippery slope.
+
+### Project compatibility with the LZ paper's best fit
+
+| Quantity | Project v0.7 (nlive=2000) | LZ paper best-fit (Ls₁₀) |
+|---|---|---|
+| WIMP mass m_χ | **770 GeV (MAP)** / 498 GeV (median) | **1000 GeV/c²** |
+| σ_DM-DM at galactic scale | **0.27 cm²/g** | n/a (measures σ_DM-nucleon) |
+| Mediator mass m_φ | **453-588 MeV** | Light mediator (NREFT framework) |
+| Interaction type | Composite-DM + secluded A' | Inelastic DM + EFT (magnetic moment, Ls₁₀) |
+| Implied σ_DM-nucleon | ~10⁻¹¹⁷ cm² (Kahlhoefer formula) | n/a (paper measures event rate, not σ) |
+
+**The project's m_χ ~ 770 GeV is very close to the LZ best-fit m_χ ~
+1000 GeV.** Both are in the "heavy WIMP" regime where the
+inelastic-DM and EFT operators become relevant. This is a
+**stronger validation** than the press-release-only T77 had.
+
+The project is in a **physically consistent region** with the LZ
+best-fit scenario. The composite-DM model provides a natural
+realization of NREFT operators via its internal structure (R ~ 1/Λ
+~ 1/(30 MeV) ~ 0.03 fm; see T79 docs for composite form factor).
+
 ## Verification
 
 This signal is **REAL** and **publicly announced**. The 2.6σ

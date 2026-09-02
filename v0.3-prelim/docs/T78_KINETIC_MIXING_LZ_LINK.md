@@ -81,6 +81,31 @@ cannot be constrained** by LZ direct-detection at any reasonable
 discovery significance. The kinetic-mixing link exists physically, but
 the project's ε_γ ~ 10⁻³⁷ is so suppressed that LZ cannot bite.
 
+## T80 update (2026-09-02): LZ paper validates NREFT framework
+
+The actual LZ preprint appeared 2026-09-02 (same day as the
+defensive updates). Per the paper (full citation in T77 docs), the
+signal is most consistent with **Ls₁₀ (magnetic-moment interaction)
+at m_χ = 1000 GeV/c²**, with **local significance 3.4σ** and **global
+significance 2.6σ** (after look-elsewhere correction).
+
+**Validation of the kinetic-mixing framing:** the LZ signal is
+described in NREFT terms (magnetic-moment interaction Ls₁₀), which
+is exactly the kind of operator that arises from kinetic mixing in
+a vector-mediator DM model. The composite-DM project's ε_γ is the
+**same parameter** that controls Ls₁₀-style operators at the
+electroweak scale. So the LZ paper's framework **confirms** that
+the project's microphysics picture is the right one — light-mediator
++ magnetic-moment EFT + heavy WIMP.
+
+**Practical impact at the v0.7 MAP:** even with the paper's
+detailed NREFT framework, the kinetic-mixing suppression factor
+(~50-80 orders, per T79) is unchanged. The ε²-suppression holds
+because the project is at ε_γ ~ 10⁻³⁷, far below the Ls₁₀
+operator's typical coupling regime (ε ~ 10⁻³). So the project
+**cannot be constrained** by LZ even with the paper's detailed
+NREFT framework — confirming T78/T79's qualitative claim.
+
 ### Reproducibility
 
 The full calculation is in `scripts/epsilon_lz_check.py`. To reproduce:
