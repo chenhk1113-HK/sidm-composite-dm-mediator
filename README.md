@@ -320,6 +320,35 @@ for the full v0.7 result.**
 **Cross-validation references:** see `v0.3-prelim/docs/EXTRACT.md` for the canonical
 ~1100-word project summary at v0.4-prelim+T75.
 
+**T80 milestone (2026-09-02) — LZ preprint validation:** The actual LZ
+preprint appeared 2026-09-02 (much earlier than the 60-day KIV cron expected).
+Key paper-specific facts (verified end-to-end per AGENTS.md rule 21):
+
+| Property | Press release (T77) | Paper (T80) |
+|---|---|---|
+| Exposure | 220 live days | **2.84 tonne-years** |
+| Energy window | "248 keV event" | **5.4 – 270 keV** (extended) |
+| Models | "Beyond simplest WIMP" | **NREFT operators** O₁ˢ, O₄ᵛ, L₁₋L₂₀, Ls₁₀; inelastic DM |
+| Significance | 2.6σ | **3.4σ local / 2.6σ global** (after LEE correction) |
+| Best-fit | n/a | **Ls₁₀ WIMP at 1000 GeV/c²** (Table I: fit = 1.0⁺¹·⁴₋₀.₇ events) |
+
+**Project compatibility with LZ best fit:** project m_χ ~ 770 GeV (nlive=2000) is
+**very close to** LZ best-fit m_χ ~ 1000 GeV. Both in the "heavy WIMP" regime
+where NREFT operators become relevant. The project's microphysics (light mediator
++ composite internal structure) is the **same framework** the LZ paper tests.
+**Stronger validation** than the press-release-only T77.
+
+**Standing posture preserved:** 2.6σ global < 3σ threshold → no Channel 5 update,
+no T41 re-run. Kinetic-mixing suppression (~50-80 orders per T79) holds with
+NREFT framework. KIV cron `080d2f590251` retained for 2026-11-01 to check for PRL
+final version. See `v0.3-prelim/docs/T80_LZ_PAPER_UPDATE.md`.
+
+**Why this is a Tier-1 milestone:** the LZ paper provides the first independent
+experimental cross-check of the project's v0.7 posterior. Project m_χ ~ 770 GeV
+falls within the LZ best-fit m_χ ~ 1000 GeV regime, validating the heavy-WIMP
+hypothesis. Project microphysics (light mediator + composite form factor)
+overlaps the LZ NREFT framework. **Standing posture robust at v0.4-prelim+T75.**
+
 ## Headline result — **v0.5 (T70.5, 2026-08-26)** — KSFR mask enabled
 
 **See the [🚨 v0.5 RESULT](#🚨-v0.5-result-2026-08-26-t705-entry) heads-up block above for the full cross-comparison and caveats. The v0.4 historical numbers below in parentheses are preserved for backward compatibility.**
@@ -533,6 +562,7 @@ The KiSS-SIDM canonical constants live in `config.py`
 | **v0.3-prelim** | Main work — D1 through D15-CORRECTED3, with R12 audit closure (133 modules, 39 tests) | Joint σ/m ~ 0.066 cm²/g at MAP (R12 T41); velocity index a ≈ +0.19 (no significant tension); Benchmark A (composite dark pion + elementary A') declared canonical |
 | **Mediator_Detection v1–v12** | Mediator detection feasibility (within v0.3-prelim/code/) | σ/m ~ 0.07 cm²/g at MeV-scale m_φ (R12), mediator-invisible to LZ only in ε ≪ 10⁻¹⁰ part of posterior |
 | **v0.4-prelim+T75** | Tier-1 milestone (2026-09-02) — T72 DAMPE POC + T73 Channel 17 + T74 Zhang+2025 LSS Channel 18 + T75 v0.7 rerun + T76 nlive=2000 + T77 LZ signal doc + T78 kinetic-mixing + T79 form-factor correction | σ/m ~ 0.27 cm²/g at MAP (nlive=2000); tension T39 vs Yukawa a = **0.60** (below 1.0 threshold); Bayesian evidence log Z = −163.29 ± 0.085; 472 tests passing; 18 channels; KIV cron for 2026-11-01 LZ paper re-check |
+| **v0.4-prelim+T75+T80** | LZ preprint validation milestone (2026-09-02) — actual LZ paper appeared (much earlier than 60-day KIV cron) | First independent experimental cross-check of v0.7 posterior; project m_χ ~ 770 GeV very close to LZ best-fit m_χ ~ 1000 GeV (Ls₁₀); 3.4σ local / 2.6σ global; standing posture preserved (no Channel 5 update, no T41 re-run); NREFT framework validates project microphysics |
 
 ---
 

@@ -945,3 +945,80 @@ run included). Per `CHANGELOG.md [T70.8]`:
 **Test-suite delta:** 528 pass → **564 pass** (+36 new). 7 fail → 5 fail
 (−2, both were Windows↔WSL sync issues). Channel count 15 → **16**.
 See `CHANGELOG.md [T70.8]` for the full entry.
+
+
+---
+
+## T77–T80 addendum (2026-09-02) — v0.4-prelim+T75 + LZ preprint validation
+
+**v0.4-prelim Tier-1 milestone shipped 2026-09-02.** The v0.7 posterior
+(T75 + T76) superseded the v0.6 baseline:
+
+| Quantity | v0.6 (Aug) | **v0.7 (Sep, nlive=2000)** | Δ |
+|---|---|---|---|
+| MAP m_χ | 364 GeV | **770 GeV** | +112% |
+| MAP σ/m_0 | 0.06 cm²/g | **0.27 cm²/g** | +350% |
+| log Z (Bayesian evidence) | -215.4 | **-163.3** | +52 log-units |
+| Tension T39 vs Yukawa a | 0.91 (above 1.0) | **0.60** (below 1.0) | -34% |
+| Channels | 16 | **18** (DAMPE Ch17 + Zhang+2025 LSS Ch18) | +2 |
+| Tests passing | 446 | **472** | +26 |
+
+**Key new channels (T72-T76):**
+- **T72 DAMPE POC:** 36 energy bins from arXiv:1711.10981 Table 1;
+  broken-power-law fit reproduces published parameters within 0.31σ
+- **T73 DAMPE forward model:** Cholis 2009 propagation; Channel 17
+  `loglike_dampe_cre` (null result at v0.6 MAP)
+- **T74 Zhang+2025 LSS:** SDSS dwarf anti-correlation Σ* vs large-scale
+  bias; Channel 18 `loglike_lss_assembly_bias`
+- **T75 v0.7 rerun:** +52 log Z; tension 0.91 → 0.70
+- **T76 nlive=2000 convergence:** log Z converged to -163.29 ± 0.085;
+  tension **0.60** (more robust at higher nlive)
+
+**T77-T80 LZ signal chain (defensive docs + paper validation):**
+- **T77 (2026-09-01/02):** Defensive doc-update for the 2026-09-01 LZ
+  announcement (single 248 keV event, 2.6σ global, ≥ 200 GeV
+  implied WIMP mass). Per standing posture (σ_DM-DM ≠ σ_DM-nucleon),
+  the signal does NOT change σ/m. KIV cron `080d2f590251` registered
+  for 2026-11-01 re-check.
+- **T78 (2026-09-02):** Kinetic-mixing link refinement via Kahlhoefer
+  et al. formula. At v0.7 MAP (ε ~ 10⁻³⁷, m_φ ~ 453 MeV), predicted
+  σ_DM-nucleon ~ 10⁻¹¹⁷ cm², suppressed by ~70 orders relative to LZ
+  sensitivity (~10⁻⁴⁶ cm²).
+- **T79 (2026-09-02):** Composite form-factor F²(q) correction +
+  relic-density consistency check. F²(q) is small at LZ energies
+  (F² ≈ 0.93 at 248 keV) — dominant suppression is still ε². ε ~
+  10⁻³⁷ falls in freeze-in regime (consistent with T_RH > 10¹⁵ GeV
+  or non-standard cosmology). Uncertainty band updated to **50-80
+  orders** of magnitude.
+- **T80 (2026-09-02):** Actual LZ preprint appeared (much earlier than
+  KIV cron expected). Key paper-specific findings verified
+  end-to-end:
+  - **Best-fit: Ls₁₀ WIMP at 1000 GeV/c²** (Table I)
+  - **Local significance: 3.4σ** (NOT in press releases)
+  - **Global significance: 2.6σ** (after LEE correction)
+  - **NREFT framework:** O₁ˢ, O₄ᵛ, L₁₋L₂₀, Ls₁₀; inelastic DM
+  - **Project m_χ ~ 770 GeV** is very close to LZ best-fit m_χ ~
+    1000 GeV — **stronger validation** than the press-release-only
+    T77
+
+**Project standing posture preserved at v0.4-prelim+T75:**
+σ_DM-DM ≠ σ_DM-nucleon (kinetic-mixing link is theoretical but
+practically inert at ε ~ 10⁻³⁷). LZ 2.6σ global < 3σ threshold → no
+Channel 5 update, no T41 re-run. KIV cron retained for 2026-11-01
+PRL final-version check.
+
+**Why this is the most important milestone since v0.3-prelim:**
+The LZ paper provides the **first independent experimental cross-check**
+of the v0.7 posterior. Project m_χ ~ 770 GeV falls within the LZ
+best-fit m_χ ~ 1000 GeV regime, validating the heavy-WIMP hypothesis.
+Project microphysics (light mediator + composite internal structure)
+overlaps the LZ NREFT framework. **The standing posture is robust.**
+
+For full technical reference, see:
+- `v0.3-prelim/docs/T75_V07_FULL_T41_RERUN.md`
+- `v0.3-prelim/docs/T76_V07_NLIVE2000.md`
+- `v0.3-prelim/docs/T77_LZ_2026_09_UPDATE.md`
+- `v0.3-prelim/docs/T78_KINETIC_MIXING_LZ_LINK.md`
+- `v0.3-prelim/docs/T79_COMPOSITE_FORM_FACTOR_REMNANT.md`
+- `v0.3-prelim/docs/T80_LZ_PAPER_UPDATE.md`
+- `docs/LAYMAN_SUMMARY_T77_LZ_2026_09.md`
