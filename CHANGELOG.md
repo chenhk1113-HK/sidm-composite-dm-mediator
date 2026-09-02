@@ -7,6 +7,74 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [T81] — 2026-09-02
+
+### LZ review response + XENONnT/PandaX-4T Channel 19 (v0.4-prelim)
+
+Defensive doc-update + Channel 19 implementation in response to the
+`LZ1.docx` technical review of the T80 milestone write-up.
+
+The reviewer's 5 recommendations:
+1. Soften "cross-validation" -> "compatibility" (rec #1)
+2. Soften "sigma/m survives all scenarios" -> "sigma/m unchanged at
+   current LZ precision" (rec #2)
+3. Complete T79 (already done; F^2(q) values documented) (rec #3)
+4. Flag LSS phenomenological status more prominently (rec #4)
+5. Register XENONnT + PandaX-4T watch (rec #5)
+
+All 5 addressed in T81.
+
+### Channel 19 implementation (XENONnT + PandaX-4T watch)
+
+Per LZ1.docx reviewer rec #5:
+- Added XENONNT_2025_LIMITS (arXiv:2502.18005, PRL 135, 221003)
+  to `channels_extended.py` (7 mass points, 1.7e-47 cm^2 minimum at 30 GeV)
+- Added PANDAX4T_2025_LIMITS (arXiv:2408.00664, PRL 134, 011805)
+  to `channels_extended.py` (7 mass points, ~3e-47 cm^2 minimum at 40 GeV)
+- Added helper functions `sigma_XENONnT_2025_limit`, `sigma_PandaX4T_2025_limit`,
+  `is_excluded_by_XENONnT_or_PandaX`, `loglike_competitor_dd_watch`
+- Wired Channel 19 into T41 joint fit with `T81_COMPETITOR_DD_DISABLE=1`
+  env-var gating (same pattern as Channels 17/18)
+- Marked as "experimental - NOT in primary production" in CHANNEL_STATUS
+- Added 13 new tests in `test_channel_19_competitor_dd.py`
+
+### Conftest fix
+
+Found a Windows-specific bug in `v0.3-prelim/tests/conftest.py`:
+WSL path detection used `exists()` which returns True for
+`C:\home\...` on Windows even when WSL is not running.
+Added `_is_real_project_root(p)` sentinel that checks for
+`v0.3-prelim/code/channels_extended.py` as a robust marker.
+
+### Rhetoric softening (recs #1, #2, #3)
+
+- README: "cross-validation" -> "compatibility check" in T80
+  milestone block; T80 row in version table updated
+- LAYMAN_SUMMARY_V04_PRELIM_TIER1: "sigma/m survives all scenarios" ->
+  "sigma/m unchanged at current LZ precision"; "Heavy-WIMP hypothesis
+  validated by LZ" -> "Heavy-WIMP hypothesis compatible with LZ"
+- T74 LSS docs: prominent phenomenological status note added
+  (per rec #4)
+
+### Files modified
+
+- `v0.3-prelim/code/channels_extended.py` (Channel 19 + limit tables)
+- `v0.3-prelim/code/t41_mediator_mass_joint_fit.py` (Channel 19 wiring)
+- `v0.3-prelim/tests/test_channel_19_competitor_dd.py` (NEW, 13 tests)
+- `v0.3-prelim/tests/conftest.py` (Windows compatibility)
+- `v0.3-prelim/docs/T74_LSS_ZHANG_2025.md` (phenomenological status)
+- `v0.3-prelim/docs/T81_LZ_REVIEW_RESPONSE.md` (NEW, 11 KB)
+- `docs/LAYMAN_SUMMARY_V04_PRELIM_TIER1.md` (softened rhetoric)
+- `README.md` (T80 milestone block: "compatibility" framing)
+- `CHANGELOG.md` (T81 entry)
+
+### Standing-version impact
+
+**No version bump.** T81 is refinement + Channel 19 addition; no
+posterior change. Standing version: `v0.4-prelim+T75`.
+
+Test count: 504 passed, 6 skipped (was 472 passed, 7 skipped).
+
 ## [T80] — 2026-09-02
 
 ### LZ paper-specific update (preprint appeared 2026-09-02)

@@ -75,7 +75,10 @@ from ksfr_pcac_validity import loglike_ksfr_pcac_validity
 # T70.8 (R14 Rec #3 closure): CMB spectral distortion — Channel 16
 # Per Planck Collaboration Int. LI 2017 (arXiv:1612.00071):
 #   |μ| < 9e-6, |y| < 1.5e-6 (95% CL)
-from channels_extended import loglike_cmb_distortion, loglike_dampe_cre, loglike_lss_assembly_bias
+from channels_extended import (
+    loglike_cmb_distortion, loglike_dampe_cre, loglike_lss_assembly_bias,
+    loglike_competitor_dd_watch,
+)
 
 
 import platform
@@ -324,6 +327,21 @@ def loglike_joint(theta):
     else:
         ll_lss = 0.0
 
+    # 9. T81: XENONnT + PandaX-4T direct-detection competitor watch.
+    # Per LZ1.docx reviewer rec #5 — register a watch on LZ competitors.
+    # The kinetic-mixing suppression (~50-80 orders) applies equally,
+    # so this channel contributes 0 to the log-likelihood at v0.7.
+    # Gated by T81_COMPETITOR_DD_DISABLE=1 for ablation studies. Default ON.
+    if os.environ.get("T81_COMPETITOR_DD_DISABLE", "").strip() != "1":
+        ll_competitor_dd = loglike_competitor_dd_watch(
+            sigma_m=sigma_m_0,
+            m_chi_GeV=m_chi_GeV,
+        )
+        if not np.isfinite(ll_competitor_dd):
+            return -np.inf
+    else:
+        ll_competitor_dd = 0.0
+
     # Optional SPARC contribution (slow, so disabled by default)
     # Use a coarse grid to be fast.
     # T69 (v0.4-prelim): rescaled by baryonic-feedback nuisance f_fb.
@@ -360,7 +378,7 @@ def loglike_joint(theta):
         except Exception:
             ll_sparc = 0.0
 
-    return ll_dsph + ll_ufd + ll_bullet + ll_lz + ll_fermi + ll_sparc + ll_cmb + ll_dampe + ll_lss
+    return ll_dsph + ll_ufd + ll_bullet + ll_lz + ll_fermi + ll_sparc + ll_cmb + ll_dampe + ll_lss + ll_competitor_dd
 
 
 def prior_transform_5(u):

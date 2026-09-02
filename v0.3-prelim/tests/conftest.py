@@ -13,7 +13,17 @@ from pathlib import Path
 
 WSL = Path("/home/lamkuenai/sidm-composite-dm-mediator")
 WIN = Path("C:/Users/lamkuenai/projects/sidm-composite-dm-mediator")
-PROJ = WSL if WSL.exists() else WIN
+# On Windows, Path("/home/...") resolves to C:\home\... and returns exists()=True
+# even if it's not a real WSL path. Use is_dir() + a code sentinel to break ties.
+def _is_real_project_root(p):
+    if not p.is_dir():
+        return False
+    return (p / "v0.3-prelim" / "code" / "channels_extended.py").is_file()
+
+PROJ = WSL if _is_real_project_root(WSL) else WIN
+if not _is_real_project_root(PROJ):
+    # Last-resort fallback: detect from this conftest's own location.
+    PROJ = Path(__file__).resolve().parents[2]
 
 if PROJ.exists():
     v01 = str(PROJ / "v0.1-prelim/code")

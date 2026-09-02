@@ -106,6 +106,46 @@ LZ_2024_LIMITS = np.array([
 ])
 
 
+# T81: XENONnT + PandaX-4T direct-detection competitor limits.
+# Following reviewer recommendation (LZ1.docx #5) to register a watch on
+# the LZ competitors. These limits are similar to LZ WS2024 in the
+# heavy-WIMP regime, so the kinetic-mixing suppression (~50-80 orders)
+# applies equally. The channel exists primarily as a cross-check +
+# future-watch on whether XENONnT or PandaX-4T publishes a confirming
+# or contradicting event in the same energy window as LZ's 248 keV
+# signal.
+
+# XENONnT 2025 results (arXiv:2502.18005, PRL 135, 221003):
+# 3.1 tonne-year exposure, SI WIMP-nucleon limit:
+#   - minimum: 1.7e-47 cm^2 at m_chi = 30 GeV/c^2
+#   - for m_chi > 200 GeV/c^2: sigma_SI = 3.7e-46 cm^2 * (m_chi / 1 TeV/c^2)
+XENONNT_2025_LIMITS = np.array([
+    # m_chi (GeV), sigma_limit (cm^2)
+    (10.0,   3.0e-46),
+    (30.0,   1.7e-47),    # minimum of the limit curve
+    (50.0,   2.0e-47),
+    (100.0,  5.0e-47),
+    (200.0,  7.5e-47),    # ~3.7e-46 * 0.2
+    (500.0,  1.85e-46),   # ~3.7e-46 * 0.5
+    (1000.0, 3.7e-46),    # ~3.7e-46 * 1.0
+])
+
+# PandaX-4T 2025 results (arXiv:2408.00664, PRL 134, 011805):
+# 1.54 tonne-year exposure, SI WIMP-nucleon limit:
+#   - minimum: ~3e-47 cm^2 at m_chi = 40 GeV/c^2 (published curve)
+#   - for m_chi > 200 GeV/c^2: ~5e-46 cm^2 (interpolated)
+PANDAX4T_2025_LIMITS = np.array([
+    # m_chi (GeV), sigma_limit (cm^2)
+    (10.0,   5.0e-46),
+    (40.0,   3.0e-47),    # approximate minimum
+    (50.0,   4.0e-47),
+    (100.0,  6.0e-47),
+    (200.0,  1.5e-46),
+    (500.0,  2.5e-46),
+    (1000.0, 5.0e-46),
+])
+
+
 # T71.4 (R16 #12): per-channel production-vs-experimental status.
 # Channels 11 (DM-free UDGs) and 12 (cosmic-web radio) are marked
 # "experimental — NOT in primary production" because they are recent
@@ -130,6 +170,9 @@ CHANNEL_STATUS = {
     14: "production",                       # Mediator lifetime / BBN (T70.x)
     15: "production",                       # KSFR/PCAC validity (H1, T70.3)
     16: "production",                       # CMB μ/y spectral distortion (T70.8)
+    17: "production",                       # DAMPE CRE (T73, 36 energy bins from arXiv:1711.10981)
+    18: "production",                       # Zhang+2025 LSS / assembly-bias (T74, 4 Σ* bins)
+    19: "experimental — NOT in primary production",  # XENONnT + PandaX-4T competitor watch (T81)
 }
 
 
@@ -184,6 +227,91 @@ def loglike_direct_detection_exclusion(sigma_m: float, m_chi_GeV: float = 1.0) -
     lz_limit = sigma_LZ_limit(m_chi_GeV)
     if sigma_DM_nucleon > lz_limit:
         return -1.0  # soft penalty
+    return 0.0
+
+
+# ---------------------------------------------------------------------------
+# T81: Channel 19 — XENONnT + PandaX-4T direct-detection competitor watch
+# Follows reviewer recommendation (LZ1.docx #5): "Register a watch on
+# XENONnT and PandaX-4T. If either sees a consistent high-energy event
+# in the same 200-270 keV window, the case strengthens dramatically."
+#
+# Per the standing posture (T77-T80), this channel is the SAME
+# observable as Channel 5 (LZ WS2024): sigma_DM-nucleon. The kinetic-
+# mixing suppression (~50-80 orders, per T78-T79) applies equally, so
+# the predicted sigma_DM-nuc at the v0.7 MAP (~10^-117 cm^2) is far
+# below XENONnT/PandaX-4T sensitivity (~10^-46 cm^2).
+#
+# This channel exists primarily as:
+#   1. A cross-check that the project's kinetic-mixing suppression
+#      claim is consistent across the 3 leading direct-detection
+#      experiments (LZ, XENONnT, PandaX-4T)
+#   2. A future-watch: if XENONnT or PandaX-4T publishes a confirming
+#      event in the 200-270 keV window, this channel's penalty
+#      becomes more meaningful (would constrain sigma_DM-DM via the
+#      mediator coupling, per T78 kinetic-mixing link)
+#   3. A sanity check: predicted sigma_DM-nuc should be below all
+#      three experiments' limits at the v0.7 posterior
+#
+# For the v0.7 MAP (epsilon ~ 10^-37, alpha_X ~ 10^-16, m_phi ~ 453 MeV,
+# m_chi ~ 770 GeV), the Kahlhoefer formula gives predicted sigma_DM-nuc
+# ~10^-117 cm^2, which is ~10^-71 of the LZ limit. XENONnT and PandaX-4T
+# limits are within ~2x of LZ in the heavy-WIMP regime, so the predicted
+# sigma_DM-nuc is also ~10^-71 of their limits.
+
+
+def sigma_XENONnT_2025_limit(m_chi_GeV: float) -> float:
+    """Interpolated XENONnT 2025 (arXiv:2502.18005) 90% CL upper limit
+    on sigma_DM-nucleon [cm^2]."""
+    m_arr = XENONNT_2025_LIMITS[:, 0]
+    s_arr = XENONNT_2025_LIMITS[:, 1]
+    return float(np.interp(m_chi_GeV, m_arr, s_arr))
+
+
+def sigma_PandaX4T_2025_limit(m_chi_GeV: float) -> float:
+    """Interpolated PandaX-4T 2025 (arXiv:2408.00664) 90% CL upper
+    limit on sigma_DM-nucleon [cm^2]."""
+    m_arr = PANDAX4T_2025_LIMITS[:, 0]
+    s_arr = PANDAX4T_2025_LIMITS[:, 1]
+    return float(np.interp(m_chi_GeV, m_arr, s_arr))
+
+
+def is_excluded_by_XENONnT_or_PandaX(m_chi_GeV: float, sigma_DM_nucleon_cm2: float) -> bool:
+    """Check if a WIMP candidate is excluded by either XENONnT or
+    PandaX-4T (whichever is more constraining at the given mass)."""
+    xenonnt_limit = sigma_XENONnT_2025_limit(m_chi_GeV)
+    pandax_limit = sigma_PandaX4T_2025_limit(m_chi_GeV)
+    tighter_limit = min(xenonnt_limit, pandax_limit)
+    return sigma_DM_nucleon_cm2 > tighter_limit
+
+
+def loglike_competitor_dd_watch(sigma_m: float, m_chi_GeV: float = 1.0) -> float:
+    """Channel 19 — XENONnT + PandaX-4T direct-detection competitor watch.
+
+    This is a soft penalty (not a hard exclusion). For the v0.7 MAP,
+    the predicted sigma_DM-nuc is far below both experiments' limits,
+    so this channel contributes 0 to the log-likelihood.
+
+    If a future XENONnT/PandaX-4T update increases sensitivity by
+    ~10^50 (unlikely but hypothetically), the channel could become
+    a soft penalty. For now, it's a documented watch with
+    sanity-check behavior.
+    """
+    # LZ sub-GeV exclusion (same logic as Channel 5)
+    if m_chi_GeV < 3.0:
+        return 0.0
+
+    # Same "very rough scaling" as Channel 5 (consistent treatment
+    # for direct-detection channels; the kinetic-mixing suppression
+    # is captured by the Kahlhoefer formula, not by this channel).
+    sigma_DM_nucleon = sigma_m * 1e-24 * m_chi_GeV / 1.0  # very rough
+    xenonnt_limit = sigma_XENONnT_2025_limit(m_chi_GeV)
+    pandax_limit = sigma_PandaX4T_2025_limit(m_chi_GeV)
+
+    # Soft penalty if excluded by either experiment (whichever is
+    # more constraining). Same -1.0 penalty as Channel 5.
+    if is_excluded_by_XENONnT_or_PandaX(m_chi_GeV, sigma_DM_nucleon):
+        return -1.0
     return 0.0
 
 

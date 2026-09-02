@@ -1,4 +1,4 @@
-# T77 — LZ 2026-09-01 Mysterious Signal Update (v0.4-prelim)
+# T77 — LZ Signal Update (v0.4-prelim) — defensive doc for 2026-09-01 announcement
 
 > **Status:** Shipped 2026-09-02. Defensive doc-update in response to the
 > 2026-09-01 LZ signal announcement.

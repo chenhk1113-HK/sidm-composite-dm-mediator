@@ -6,6 +6,17 @@
 > **Companion:** [T72 DAMPE POC](T72_DAMPE_POC.md),
 > [T73 DAMPE integration](T73_DAMPE_V04_INTEGRATION.md).
 
+> **⚠ Phenomenological status note (T81, 2026-09-02, per LZ1.docx
+> reviewer rec #4):** the Zhang+2025 LSS channel uses a **phenomenological**
+> isothermal-Jeans forward model, **not** a full cosmological simulation
+> (e.g., hydrodynamical SIDM simulation of assembly bias). The shift in
+> σ/m from 0.06 → 0.27 cm²/g is **entirely driven** by this one new
+> channel. If a future hydrodynamical SIDM simulation revises the
+> Σ*-bias anti-correlation model, σ/m could shift back. The "publication-
+> worthy" claim for this milestone is conditional on external validation
+> of the LSS channel. Full limitations listed in section "Honest
+> limitations (from the forward model)" below.
+
 ## What this ships
 
 The Zhang+2025 (Nature) **dwarf-galaxy large-scale-structure / assembly-bias

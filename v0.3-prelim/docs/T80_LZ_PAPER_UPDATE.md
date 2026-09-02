@@ -1,4 +1,4 @@
-# T80 — LZ Paper Update (v0.4-prelim)
+# T80 — LZ Paper Update (v0.4-prelim) — compatibility check
 
 > **Status:** Shipped 2026-09-02. Defensive doc-update in response to
 > the LZ preprint appearing (much earlier than the KIV cron's
@@ -9,6 +9,12 @@
 > **Companion:** [T77 LZ signal update](T77_LZ_2026_09_UPDATE.md),
 > [T78 kinetic-mixing](T78_KINETIC_MIXING_LZ_LINK.md),
 > [T79 composite form factor](T79_COMPOSITE_FORM_FACTOR_REMNANT.md).
+> **Framing note (T81, per LZ1.docx reviewer rec #1):** the LZ paper
+> is model-agnostic at 2.6σ global — it does **not** validate
+> composite DM, does **not** confirm a secluded A' mediator, and
+> does **not** cross-check σ/m = 0.27 cm²/g. The correct framing
+> is **compatibility** (LZ's preferred mass range is consistent with
+> the project's v0.7 MAP), not **cross-validation**.
 
 ## What this ships
 

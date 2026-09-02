@@ -99,19 +99,32 @@ project acknowledges the theoretical link via the kinetic mixing,
 but the magnitude is so suppressed that LZ cannot bite at any
 reasonable discovery significance.
 
-## Standing posture: σ/m unchanged under all scenarios
+## Standing posture: σ/m unchanged at current LZ precision
+
+The kinetic-mixing suppression (~50-80 orders) means the project
+**cannot be constrained** by LZ at the **current** LZ precision
+(2.6σ global / 3.4σ local). ε_γ ~ 10⁻³⁷ at the v0.7 MAP puts predicted
+σ_DM-nucleon at ~10⁻¹¹⁷ cm², vs LZ sensitivity of ~10⁻⁴⁶ cm².
+
+**The headline σ/m = 0.27 cm²/g is unchanged at current LZ precision.**
+(Per LZ1.docx reviewer rec #2: this is "practical decoupling, not
+absolute orthogonality." The pre-registered T78 protocol acknowledges
+that at ≥3σ with a published cross-section, the kinetic-mixing parameter
+ε_γ would need re-evaluation, which could shift the σ/m posterior.)
 
 | If this happens | What the project does |
 |---|---|
 | LZ paper final (PRL version) at same numbers | No change — same posture |
 | LZ significance reaches ≥ 3σ global | Re-evaluate per pre-registered T78 protocol |
 | LZ significance reaches ≥ 5σ (discovery) | Major milestone; v0.5-prelim release |
-| XENONnT/PandaX confirms or contradicts | Watch + treat as joint constraint |
+| XENONnT/PandaX confirms or contradicts | Watch + treat as joint constraint (Channel 19) |
 | Statistical fluctuation (background) | Document + remove T77 from §0 |
 
-**The project's headline σ/m = 0.27 cm²/g survives all scenarios.**
-The DAMPE + LSS channels that determine σ/m are independent of any
-direct-detection event.
+**The project's headline σ/m = 0.27 cm²/g is unchanged at current
+LZ precision.** The DAMPE + LSS channels that determine σ/m are
+**practically independent** of any direct-detection event at the
+v0.7 posterior's ε² suppression level — but the link is theoretical,
+not absolute.
 
 ## Honest caveats
 
@@ -155,10 +168,10 @@ velocity-slope tension. The Tier-1 milestone is publication-worthy.
 
 1. **Two new channels** (DAMPE + Zhang+2025 LSS) with provenance
 2. **Velocity-slope tension resolved** (0.91 → 0.60, below 1.0)
-3. **Heavy-WIMP hypothesis validated** by LZ (m_χ ~ 770 vs LZ ~ 1000 GeV)
+3. **Heavy-WIMP hypothesis compatible with LZ** (m_χ ~ 770 vs LZ ~ 1000 GeV — not validation; see LZ1.docx reviewer rec #1)
 4. **Standing posture preserved** despite LZ news cycle
 5. **KIV cron registered** for 2026-11-01 PRL final-version re-check
-6. **Reproducible scripts** (`scripts/epsilon_lz_check.py`, `scripts/t79_composite_form_factor.py`)
+6. **Reproducible scripts** (`scripts/epsilon_lz_check.py`, `scripts/t79_composite_form_factor.py` — T79 was already executed and shows composite form factor F²(q) is small at LZ energies, F² ≈ 0.93 at 248 keV; the dominant suppression is still ε², giving 50-80 orders confidence band)
 7. **Comprehensive docs** (T72-T80, all 6 drift-guard sources updated)
 
 ## Provenance
