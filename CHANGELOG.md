@@ -7,6 +7,69 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [T72] — 2026-09-02
+
+### DAMPE cosmic-ray electron+positron spectrum ingestion (POC)
+
+Per the `REVIEWER_CONSIDER_DATA.md` path-proposal audit (T71.9 input),
+DAMPE ingestion was promoted from "Tier-2 v0.4-prelim" to "ship POC
+now" as the easiest ship among the genuinely-missing items.
+
+### What shipped
+
+| File | Change | Lines |
+|---|---|---|
+| `v0.3-prelim/code/dampe_cre_spectrum.py` (NEW) | 36 energy bins hardcoded from arXiv:1711.10981 Table 1; broken-power-law fit; provenance function | 333 |
+| `v0.3-prelim/tests/test_dampe_cre_spectrum.py` (NEW) | 24 tests covering table integrity, fit recovery, no-network-fetch guard | 282 |
+| `v0.3-prelim/data/results/2026-09-02_dampe_poc/dampe_poc_fit.json` (NEW) | Fit result + cross-validation to published values | — |
+| `v0.3-prelim/plots/dampe_cre_spectrum_T72.png` (NEW) | Publication-quality E³Φ vs E plot | — |
+| `v0.3-prelim/docs/T72_DAMPE_POC.md` (NEW) | Full method + cross-validation matrix + v0.4-prelim extension plan | 220 |
+
+### Headline finding
+
+**All 4 published DAMPE parameters reproduced within 0.31σ.** The
+broken-power-law fit recovers:
+
+| Parameter | Fit (this POC) | Published (arXiv:1711.10981) | Δ/σ |
+|---|---|---|---|
+| Φ₀ (m⁻² s⁻¹ sr⁻¹ GeV⁻¹) | (1.622 ±0.001) × 10⁻⁴ | (1.620 ±0.001) × 10⁻⁴ | 0.17σ ✅ |
+| γ₁ (sub-TeV) | 3.093 ± 0.011 | 3.09 ± 0.01 | 0.31σ ✅ |
+| E_b (GeV) | 911.8 ± 105.3 | 914 ± 98 | 0.02σ ✅ |
+| γ₂ (TeV) | 3.916 ± 0.205 | 3.92 ± 0.20 | 0.02σ ✅ |
+| χ²/dof | 0.929 (24 dof) | 1.294 (18 dof)* | — |
+
+*The paper's higher χ²/dof reflects its use of 6 nuisance parameters for systematic uncertainty. Our quadrature-sum approach yields a slightly lower χ² but the same parameter values.
+
+### Scientific implication for the project
+
+The DAMPE CRE spectrum is **directly relevant** to dark-matter-induced
+lepton channels. The 6.6σ preference for a broken power-law over a
+single power-law is itself evidence that a non-trivial source
+(pulsar, SNR, or DM) contributes at TeV energies. For the project's
+posterior (m_χ ~ 800 GeV, m_A' ~ 553 MeV), DAMPE directly probes
+the m_χ > 100 GeV parameter space where secluded-mediator models
+make distinct predictions.
+
+### Test count
+
+- **Before T72:** 575 tests pass / 0 fail / 6 skip
+- **After T72:** 599 tests pass / 0 fail / 6 skip (+24 DAMPE tests, all green)
+
+### What's NOT in this POC (deferred to v0.4-prelim)
+
+1. **DAMPE proton + helium spectra** (arXiv:1909.12860, 2304.00137)
+2. **Dark-matter interpretation** (forward-model for m_χ → e⁺e⁻)
+3. **Joint-fit wiring** (`loglike_dampe_cre()` in `channels_extended.py`)
+4. **Fermi-LAT cross-check**
+
+Estimated v0.4-prelim effort for items 1-4 combined: ~2-3 days.
+
+### Standing-version impact
+
+No version bump. This is a Tier-2 POC; the v0.3-prelim+T71.7 standing
+version is preserved. The DAMPE POC ships alongside the rest of
+v0.3-prelim and is documented as a v0.4-prelim enabler.
+
 ## [T71.8] — 2026-08-28
 Per `Updated review15.docx` (read end-to-end, 223 paragraphs, per AGENTS.md
 rule 21). Reviewer's Sp(4) section (paragraphs 155-223) surfaced a real

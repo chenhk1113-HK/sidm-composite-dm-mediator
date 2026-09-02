@@ -1,0 +1,69 @@
+{
+  "tier": "T72_POC",
+  "date": "2026-09-02",
+  "data_source": "arXiv:1711.10981, Nature 552, 63-66 (2017), DAMPE CRE Table 1",
+  "provenance": "DAMPE CRE spectrum from Table 1 of arXiv:1711.10981 (Nature 552, 63-66, 2017); values transcribed by hand from HTML on 2026-09-02; no network fetch performed.",
+  "spectrum": {
+    "n_bins": 36,
+    "E_min_GeV": 24.0,
+    "E_max_GeV": 4570.9,
+    "E_unit": "GeV",
+    "flux_unit": "m^-2 s^-1 sr^-1 GeV^-1"
+  },
+  "fit_method": "scipy.optimize.curve_fit (Levenberg-Marquardt) on broken power-law with smoothness \u0394=0.1",
+  "fit_range_GeV": [
+    55.0,
+    2630.3
+  ],
+  "n_fit_points": 28,
+  "fit_results": {
+    "Phi0": {
+      "value": 0.000162231028674229,
+      "err": 1.328418505826546e-06
+    },
+    "gamma1": {
+      "value": 3.0933286271557385,
+      "err": 0.010682333671517148
+    },
+    "Eb_GeV": {
+      "value": 911.794493986386,
+      "err": 105.2539855123309
+    },
+    "gamma2": {
+      "value": 3.9157350108079276,
+      "err": 0.20481396563671642
+    },
+    "chi2": 22.30540880985502,
+    "dof": 24,
+    "chi2_per_dof": 0.9293920337439592
+  },
+  "published_reference": {
+    "gamma1": [
+      3.09,
+      0.01
+    ],
+    "gamma2": [
+      3.92,
+      0.2
+    ],
+    "Eb_GeV": [
+      914.0,
+      98.0
+    ],
+    "Phi0": [
+      0.000162,
+      1e-06
+    ],
+    "chi2": 23.3,
+    "dof": 18,
+    "significance_vs_single_power_law_sigma": 6.6,
+    "source": "DAMPE Collaboration, Nature 552, 63-66 (2017), arXiv:1711.10981"
+  },
+  "match_with_published": {
+    "Phi0_sigma": 0.17391256837786828,
+    "gamma1_sigma": 0.3116011218235919,
+    "Eb_GeV_sigma": 0.020954133022883296,
+    "gamma2_sigma": 0.02082372253675912
+  },
+  "tests_passed": 24
+}
