@@ -7,6 +7,53 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [T77] — 2026-09-02
+
+### LZ 2026-09-01 mysterious signal update (defensive doc-update)
+
+In response to the 2026-09-01 LUX-ZEPLIN announcement of a single
+high-energy particle interaction event at **2.6σ** significance
+(implied WIMP mass ≥ 200 GeV/c² if real), the project updates
+`MODEL_ASSUMPTIONS_AND_LIMITATIONS.md §0` and `EXTRACT.md` to
+document the event.
+
+**Decision: NO project update at 2.6σ.** The LZ signal is below the
+3σ threshold for updating T30 Channel 5, and per the project's
+standing posture (σ_DM-DM ≠ σ_DM-nucleon), it doesn't affect σ/m
+anyway. The signal is **consistent** with the T41 v0.7 posterior
+(m_χ ~ 770 GeV, nlive=2000).
+
+### What shipped
+
+- `MODEL_ASSUMPTIONS_AND_LIMITATIONS.md §0` updated with 2026-09-01
+  LZ signal paragraph
+- `EXTRACT.md` top-of-doc LZ signal callout added
+- `v0.3-prelim/docs/T77_LZ_2026_09_UPDATE.md` (NEW) — full verification
+  + decision matrix + trigger conditions for re-evaluation
+
+### Verified facts (from press releases)
+
+| Property | Value |
+|---|---|
+| Date | 2026-09-01 |
+| Significance | 2.6σ (≈0.5% background) |
+| Implied WIMP mass | ≥ 200 GeV/c² |
+| Type | "Beyond the simplest model" |
+| Conference | TeV Particle Astrophysics 2026 (Japan) |
+| Paper status | Submitted to PRL; arXiv pending |
+| LZ operations | Extended beyond 2028 |
+
+### Standing-version impact
+
+**No version bump.** T77 is a defensive doc-update, not a code change.
+Standing version: `v0.4-prelim+T75`.
+
+### Trigger conditions for re-evaluation
+
+- LZ arXiv paper appears → read for precise σ_DM-nucleon limit
+- Significance ≥ 3σ → update T30 + re-run T41 at nlive=2000
+- Significance ≥ 5σ → major milestone; v0.5-prelim release
+
 ## [T76] — 2026-09-02
 
 ### v0.7 nlive=2000 convergence check + doc-prominence fix

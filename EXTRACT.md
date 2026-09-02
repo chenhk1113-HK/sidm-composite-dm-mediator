@@ -6,6 +6,8 @@
 
 **⚠ Orthogonal-physics posture (locked 2026-08-10, reaffirmed 2026-09-02 in T75):** The project's headline σ/m = 0.68-1.7 cm²/g measures **σ_DM-DM** (self-scattering cross-section per unit mass, the SIDM observable). Direct-detection experiments (LZ, XENONnT, PandaX) measure **σ_DM-nucleon** — a fundamentally different cross-section (factor ~10²³ difference). Per standing decision, direct-detection constraints are **rejected** as σ/m measurements; LZ is used only as a sanity check. See `MODEL_ASSUMPTIONS_AND_LIMITATIONS.md §0` for full reasoning. This stance is **non-negotiable** unless user explicitly overrides.
 
+**📡 2026-09-01 LZ signal update (T77):** LZ announced a single high-energy event at **2.6σ** significance (≈0.5% background probability), implying a WIMP mass ≥ 200 GeV/c² if real. **This does NOT change σ/m** (per the orthogonal-physics posture above). The signal is consistent with the project's T41 v0.7 posterior (m_χ ~ 770 GeV, nlive=2000). No project update at 2.6σ (below the 3σ threshold). LZ paper pending PRL; re-evaluate when released. See `v0.3-prelim/docs/T77_LZ_2026_09_UPDATE.md`.
+
 **Updates from 2026-08-25 (T70 Tier-1 PATCH):**
 - Added Channel 11 (NGC 1052-DF2/DF4 + FCC 224/240 dark-matter-free UDG consistency check)
   and Channel 12 (cosmic-web radio synchrotron 40× excess, Pinetti 2025-26) as new observational

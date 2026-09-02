@@ -29,6 +29,19 @@ compared directly. The project therefore:
 - **Documents** the orthogonal-physics reasoning explicitly in
   `v0.3-prelim/code/channels_extended.py` (file header, lines 1-35)
 
+**2026-09-01 LZ signal update (verified via Sheffield + LBNL press
+releases, see `v0.3-prelim/docs/T77_LZ_2026_09_UPDATE.md`):** LZ
+detected a single high-energy event at 2.6σ (≈0.5% background
+probability), implying a WIMP mass ≥ 200 GeV/c² if real. **Per the
+project's standing posture, this signal — even if confirmed — does
+NOT constrain σ_DM-DM.** It constrains σ_DM-nucleon, which is the
+orthogonal observable. The signal is **consistent with the project's
+T41 v0.7 posterior** (m_χ ~ 770 GeV, nlive=2000). **No project update
+is warranted at 2.6σ** (below the 3σ threshold for updating T30).
+The LZ paper is still in PRL submission as of 2026-09-02; once
+released, it should be re-evaluated for σ_DM-nucleon limits at the
+T30 Channel 5 level (NOT at the σ_DM-DM level).
+
 Per peer review (2026-08-10, Long-Term #3), this stance is locked.
 Per v0.4-prelim path-proposal audit (T74 input), XENONnT/PandaX as
 σ/m constraints are explicitly rejected.
