@@ -75,7 +75,7 @@ from ksfr_pcac_validity import loglike_ksfr_pcac_validity
 # T70.8 (R14 Rec #3 closure): CMB spectral distortion — Channel 16
 # Per Planck Collaboration Int. LI 2017 (arXiv:1612.00071):
 #   |μ| < 9e-6, |y| < 1.5e-6 (95% CL)
-from channels_extended import loglike_cmb_distortion, loglike_dampe_cre
+from channels_extended import loglike_cmb_distortion, loglike_dampe_cre, loglike_lss_assembly_bias
 
 
 import platform
@@ -309,6 +309,21 @@ def loglike_joint(theta):
     else:
         ll_dampe = 0.0
 
+    # 8. Zhang+2025 LSS / assembly-bias (T74, v0.4-prelim)
+    # Direct observational constraint on sigma/m (not sigma_v).
+    # Note: this is a different observable from the indirect-detection
+    # channels above (which constrain sigma_v). sigma/m is read from
+    # the project parameter (sigma_over_m at v=100 km/s).
+    # Gated by env var T74_LSS_DISABLE=1 for ablation studies.
+    if os.environ.get("T74_LSS_DISABLE", "").strip() != "1":
+        ll_lss = loglike_lss_assembly_bias(
+            sigma_over_m_cm2_per_g=sigma_m_0,
+        )
+        if not np.isfinite(ll_lss):
+            return -np.inf
+    else:
+        ll_lss = 0.0
+
     # Optional SPARC contribution (slow, so disabled by default)
     # Use a coarse grid to be fast.
     # T69 (v0.4-prelim): rescaled by baryonic-feedback nuisance f_fb.
@@ -345,7 +360,7 @@ def loglike_joint(theta):
         except Exception:
             ll_sparc = 0.0
 
-    return ll_dsph + ll_ufd + ll_bullet + ll_lz + ll_fermi + ll_sparc + ll_cmb + ll_dampe
+    return ll_dsph + ll_ufd + ll_bullet + ll_lz + ll_fermi + ll_sparc + ll_cmb + ll_dampe + ll_lss
 
 
 def prior_transform_5(u):

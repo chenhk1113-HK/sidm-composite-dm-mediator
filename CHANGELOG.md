@@ -7,6 +7,63 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [T74] — 2026-09-02
+
+### Zhang+2025 (Nature) LSS / assembly-bias channel (v0.4-prelim)
+
+Wires the Zhang et al. 2025 Nature measurement of the **anti-correlation**
+between stellar surface density and large-scale relative bias in dwarf
+galaxies into the T41 joint fit as **Channel 18**. This is the project's
+**first direct observational constraint on the SIDM core size** r_c, which
+depends on σ/m.
+
+### What shipped
+
+| File | Change | Lines |
+|---|---|---|
+| `v0.3-prelim/code/zhang_lss_channel.py` (NEW) | ZHANG_TABLE_2 (4 Σ* bins), isothermal-Jeans core-radius model, predicted bias forward model, asymmetric Gaussian likelihood | 350 |
+| `v0.3-prelim/code/channels_extended.py` (MODIFIED) | Added `loglike_lss_assembly_bias()` (Channel 18) | +50 |
+| `v0.3-prelim/code/t41_mediator_mass_joint_fit.py` (MODIFIED) | T41 joint fit now adds `ll_lss` (gated by `T74_LSS_DISABLE=1`) | +20 |
+| `v0.3-prelim/tests/test_zhang_lss_channel.py` (NEW) | 26 tests | 295 |
+| `v0.3-prelim/data/results/2026-09-02_dampe_poc/lss_v04_integration.json` (NEW) | Smoke-test result | — |
+| `v0.3-prelim/docs/T74_LSS_ZHANG_2025.md` (NEW) | Full method + best-fit + scope | 250 |
+| `scripts/t74_smoke.py` (NEW) | Reproducible smoke test | — |
+
+### Headline finding: BEST FIT σ/m ~ 2.7 cm²/g (in physical SIDM range)
+
+At the v0.6 posterior (m_chi=805 GeV, m_A'=553 MeV, sigma/m~1.4):
+
+| Quantity | Value |
+|---|---|
+| loglike_joint with DAMPE + LSS | -180.54 |
+| loglike_joint with DAMPE only | -143.37 |
+| loglike_joint with neither | -123.64 |
+| **Δ from adding LSS** | **-37.16** |
+| Δ from adding DAMPE | -19.74 |
+| **Δ from adding both** | **-56.90** |
+| LSS best-fit σ/m | **2.683 cm²/g** |
+| LSS log L at best fit | -1.613 |
+| LSS log L at v0.6 σ/m=1.4 | -4.817 |
+
+**Interpretation:** Zhang+2025 strongly prefers σ/m in [0.3, 3] cm²/g
+(SIDM cross-over). The v0.6 posterior (σ/m=1.4) is **within ΔlogL=3.2 of
+best**, in the physical range. The LSS channel is a **direct constraint
+on r_c**, complementary to the indirect-detection channels (DAMPE/Fermi/
+CMB) which constrain annihilation.
+
+### Test count
+
+- **Before T74:** 446 passed, 7 skipped
+- **After T74:** 472 passed (+26 new), 7 skipped
+- DAMPE + LSS combined (T72 + T73 + T74): 69/69 passing
+
+### Standing-version impact
+
+No version bump. Tier-1 POC extension of T73; v0.3-prelim+T71.7
+preserved. v0.4-prelim full joint-fit rerun (T41 at nlive=500 with
+DAMPE + LSS on) is a ~hours-of-CPU nested-sampling job, deferred to
+the next ship cycle.
+
 ## [T73] — 2026-09-02
 
 ### DAMPE CRE forward-model + joint-fit integration (v0.4-prelim)

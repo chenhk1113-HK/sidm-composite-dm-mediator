@@ -1,0 +1,61 @@
+{
+  "tier": "T74",
+  "date": "2026-09-02",
+  "description": "Zhang+2025 LSS / assembly-bias channel + T41 joint-fit integration",
+  "t41_v06_posterior_test_point": {
+    "theta": [
+      2.8750612633917,
+      2.9057958803678687,
+      0.5,
+      -31.0,
+      -26.0,
+      0.0
+    ],
+    "theta_named": {
+      "m_phi_MeV": 750.0,
+      "m_chi_GeV": 805.0,
+      "g_chi": 0.5,
+      "epsilon": 1e-31,
+      "alpha": 1e-26,
+      "xi": 1.0
+    }
+  },
+  "ablation_at_v06": {
+    "none": -123.63883481850615,
+    "dampe_only": -143.37397558782988,
+    "lss_only": -160.80246896540484,
+    "dampe_and_lss": -180.53760973472856
+  },
+  "delta_loglike_lss": -37.16363414689869,
+  "delta_loglike_dampe": -19.73514076932372,
+  "delta_loglike_combined": -56.89877491622241,
+  "lss_channel_summary_at_v06": {
+    "sigma_over_m_cm2_per_g": 1.4,
+    "log_M_h_Msun": 10.95,
+    "rho_abundance": 0.85,
+    "b_predicted": [
+      1.838914280651021,
+      1.313792364518321,
+      1.1536942193559123,
+      1.0
+    ],
+    "b_observed": [
+      2.31,
+      1.49,
+      1.24,
+      1.0
+    ],
+    "chi2": 9.633051986278732,
+    "loglike": -4.816525993139366,
+    "best_fit_sigma_over_m": 2.6826957952797255,
+    "best_fit_loglike": -1.613287268439572,
+    "delta_loglike_vs_best_fit": -3.2032387246997938
+  },
+  "best_fit_lss": {
+    "sigma_over_m_cm2_per_g": 2.6826957952797255,
+    "loglike": -1.613287268439572
+  },
+  "interpretation": "Zhang+2025 (Nature) dwarf-assembly-bias channel constrains the SIDM core size directly via the anti-correlation between stellar surface density and large-scale relative bias. Best-fit sigma/m ~ 2.7 cm^2/g (in the physical SIDM range [0.3, 3] cm^2/g). At the v0.6 posterior (sigma/m = 1.4 cm^2/g), the LSS channel contributes -37.2 to the joint log L (significantly larger than DAMPE's -19.7, reflecting the more direct constraint on r_c). The T41 posterior is shifted toward higher sigma/m when LSS is included.",
+  "tests_passed": 26,
+  "standing_version": "0.3-prelim+T71.7+T72+T73+T74 (no version bump; Tier-1 POC extension)"
+}

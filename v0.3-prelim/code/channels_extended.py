@@ -1147,6 +1147,59 @@ def loglike_dampe_cre(m_chi_GeV: float, sigma_v_cm3_per_s: float,
         return 0.0
 
 
+# ============================================================================
+# Channel 18 — Zhang+2025 (Nature) LSS / assembly-bias
+# ============================================================================
+# See v0.3-prelim/code/zhang_lss_channel.py for full implementation + provenance.
+# The function takes (sigma_over_m_cm2_per_g,) directly because the Zhang 2025
+# constraint is on the SIDM cross-section per unit mass (velocity-averaged over
+# the dwarf-halo relative-velocity range). This is a DIFFERENT channel from
+# the indirect-detection channels above (DAMPE, Fermi, CMB) which constrain
+# sigma_v (annihilation cross-section) rather than sigma/m (self-scattering).
+#
+# Key signature differences vs other channels:
+# - Takes sigma_over_m directly (not m_chi_GeV + sigma_v)
+# - Constrains the CORE-SIZE r_c, not the annihilation rate
+# - Best-fit sigma_over_m ~ 2.7 cm^2/g (in the physical SIDM range)
+# - At v0.6 posterior sigma/m ~ 1.4 cm^2/g, the channel contributes ~-3 to log L
+#   (within ~3 log-units of the best fit; very weak overall constraint)
+#
+# Gated by env var T74_LSS_DISABLE=1 for ablation studies.
+
+
+def loglike_lss_assembly_bias(
+    sigma_over_m_cm2_per_g: float,
+    log_M_h_Msun: float = 10.95,
+    rho_abundance: float = 0.85,
+    include_in_fit: bool = True,
+) -> float:
+    """Log-likelihood of the Zhang+2025 dwarf-assembly-bias observation (Channel 18).
+
+    Thin wrapper over zhang_lss_channel.loglike_lss_assembly_bias.
+    Direct observational constraint on the SIDM self-interaction cross-section
+    per unit mass, derived from the anti-correlation between stellar surface
+    density and large-scale relative bias in SDSS dwarf galaxies.
+
+    Reference: Zhang et al. 2025, Nature, DOI 10.1038/s41586-025-08965-5,
+    arXiv:2504.03305v1.
+    """
+    # Lazy import to avoid breaking v0.1-prelim test imports
+    try:
+        from zhang_lss_channel import loglike_lss_assembly_bias as _impl
+    except ImportError:
+        return 0.0
+    if not include_in_fit:
+        return 0.0
+    try:
+        return _impl(
+            sigma_over_m_cm2_per_g=sigma_over_m_cm2_per_g,
+            log_M_h_Msun=log_M_h_Msun,
+            rho_abundance=rho_abundance,
+        )
+    except Exception:
+        return 0.0
+
+
 if __name__ == "__main__":
     print("=== LZ 2024 spin-independent WIMP-nucleon limits ===")
     print(f"{'m_chi (GeV)':<15} {'sigma_limit (cm^2)':<25}")
