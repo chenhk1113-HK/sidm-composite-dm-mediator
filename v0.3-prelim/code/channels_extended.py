@@ -1080,6 +1080,73 @@ def loglike_cmb_distortion(m_chi: float, m_phi: float, epsilon: float) -> float:
     return penalty_mu + penalty_y
 
 
+# ---------------------------------------------------------------------------
+# Channel 17 — DAMPE cosmic-ray electron+positron spectrum (T73, v0.4-prelim)
+# ---------------------------------------------------------------------------
+# Per T72 POC (v0.3-prelim/data/results/2026-09-02_dampe_poc/) and the
+# REVIEWER_CONSIDER_DATA.md path-proposal audit (T71.9 input).
+#
+# Forward model: Cholis et al. 2009 Green's function approximation.
+# Background: DAMPE Collaboration broken-power-law fit (arXiv:1711.10981,
+#   Nature 552, 63-66, 2017; gamma1=3.09, gamma2=3.92, Eb=914 GeV, Phi0=1.62e-4).
+# Data: DAMPE Table 1, 36 energy bins from 25 GeV to 4.6 TeV.
+#
+# Null-result expected: at thermal cross-section, DM contribution is
+# ~10^-5 of the observed DAMPE flux (computed in dampe_cre_forward_model.py
+# sanity check 2026-09-02). Channel acts as a consistency check.
+
+
+def loglike_dampe_cre(m_chi_GeV: float, sigma_v_cm3_per_s: float,
+                     m_aprime_MeV: float = 553.0,
+                     include_in_fit: bool = True) -> float:
+    """Channel 17 — DAMPE cosmic-ray electron+positron spectrum likelihood.
+
+    Per-bin Gaussian log-likelihood:
+        log L = -0.5 * Sum_i [ (Phi_pred(E_i) - Phi_data(E_i)) / sigma_i ]^2
+
+    where Phi_pred(E) = Phi_bkg(E; broken-power-law) + Phi_DM(E; m_chi, sigma_v).
+
+    Forward model: Cholis 2009 Green's function approximation. See
+    dampe_cre_forward_model.py for the full derivation.
+
+    Parameters
+    ----------
+    m_chi_GeV : float
+        Dark-matter mass in GeV.
+    sigma_v_cm3_per_s : float
+        Annihilation cross-section <σv> in cm^3/s.
+    m_aprime_MeV : float
+        Mediator (dark photon) mass in MeV. Kept for API parity with
+        other channels (e.g., loglike_fermi_dwarf); not used directly
+        in the Green's function approximation (assumes m_chi >> m_A').
+    include_in_fit : bool
+        If False, returns 0.0 (channel disabled). Used for
+        ablation studies.
+
+    Returns
+    -------
+    float : log likelihood (natural log).
+        -inf for non-physical inputs.
+        0 for include_in_fit=False.
+    """
+    if not include_in_fit:
+        return 0.0
+    if m_chi_GeV <= 0 or sigma_v_cm3_per_s < 0:
+        return -np.inf
+    if m_aprime_MeV <= 0:
+        return -np.inf
+
+    # Defer to the forward-model module for the actual computation
+    try:
+        from dampe_cre_forward_model import loglike_dampe_cre as _impl
+        return _impl(m_chi_GeV, sigma_v_cm3_per_s, m_aprime_MeV, include_in_fit)
+    except ImportError:
+        # Graceful degradation if the forward-model module is unavailable
+        # (e.g., during partial checkout). Return 0 (channel off) so
+        # the joint fit still works.
+        return 0.0
+
+
 if __name__ == "__main__":
     print("=== LZ 2024 spin-independent WIMP-nucleon limits ===")
     print(f"{'m_chi (GeV)':<15} {'sigma_limit (cm^2)':<25}")

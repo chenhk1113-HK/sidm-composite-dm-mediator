@@ -75,7 +75,7 @@ from ksfr_pcac_validity import loglike_ksfr_pcac_validity
 # T70.8 (R14 Rec #3 closure): CMB spectral distortion — Channel 16
 # Per Planck Collaboration Int. LI 2017 (arXiv:1612.00071):
 #   |μ| < 9e-6, |y| < 1.5e-6 (95% CL)
-from channels_extended import loglike_cmb_distortion
+from channels_extended import loglike_cmb_distortion, loglike_dampe_cre
 
 
 import platform
@@ -287,6 +287,28 @@ def loglike_joint(theta):
     if not np.isfinite(ll_cmb):
         return -np.inf
 
+    # 7. DAMPE cosmic-ray electron+positron spectrum (T73, v0.4-prelim)
+    # Per REVIEWER_CONSIDER_DATA.md (T71.9 input) and T72 POC:
+    # DAMPE constrains χχ -> A' -> e+e- annihilation. Forward model is
+    # the Cholis et al. 2009 Green's function approximation (see
+    # channels_extended.loglike_dampe_cre + dampe_cre_forward_model.py).
+    # The astrophysical background is the published broken-power-law fit
+    # (arXiv:1711.10981). NO xi dependence (annihilation cross-section
+    # is already corrected via sigma_v*xi^2, see Channel 5).
+    #
+    # Note: this channel is gated by env var T73_DAMPE_DISABLE=1 to allow
+    # ablation studies. Default ON.
+    if os.environ.get("T73_DAMPE_DISABLE", "").strip() != "1":
+        ll_dampe = loglike_dampe_cre(
+            m_chi_GeV=m_chi_GeV,
+            sigma_v_cm3_per_s=sigma_v,
+            m_aprime_MeV=m_phi_MeV,
+        )
+        if not np.isfinite(ll_dampe):
+            return -np.inf
+    else:
+        ll_dampe = 0.0
+
     # Optional SPARC contribution (slow, so disabled by default)
     # Use a coarse grid to be fast.
     # T69 (v0.4-prelim): rescaled by baryonic-feedback nuisance f_fb.
@@ -323,7 +345,7 @@ def loglike_joint(theta):
         except Exception:
             ll_sparc = 0.0
 
-    return ll_dsph + ll_ufd + ll_bullet + ll_lz + ll_fermi + ll_sparc + ll_cmb
+    return ll_dsph + ll_ufd + ll_bullet + ll_lz + ll_fermi + ll_sparc + ll_cmb + ll_dampe
 
 
 def prior_transform_5(u):

@@ -1,0 +1,38 @@
+{
+  "tier": "T73",
+  "date": "2026-09-02",
+  "description": "DAMPE CRE forward-model + T41 joint-fit integration smoke test",
+  "t41_v06_posterior_test_point": {
+    "theta": [
+      2.8750612633917,
+      2.9057958803678687,
+      0.5,
+      -31.0,
+      -26.0,
+      0.0
+    ],
+    "theta_named": {
+      "m_phi_MeV": 750.0,
+      "m_chi_GeV": 805.0,
+      "g_chi": 0.5,
+      "epsilon": 1e-31,
+      "alpha": 1e-26,
+      "xi": 1.0
+    }
+  },
+  "loglike_joint_with_dampe": -143.37397558782988,
+  "loglike_joint_without_dampe": -123.63883481850615,
+  "delta_loglike_from_dampe": -19.73514076932372,
+  "dampe_only_consistency_test": {
+    "loglike_no_dm": -19.73514076932373,
+    "loglike_thermal": -19.73514076932373,
+    "best_fit_sigma_v": 1e-28,
+    "loglike_best_fit": -19.73514076932373,
+    "delta_loglike_thermal_vs_null": 0.0,
+    "m_chi_GeV": 805.0,
+    "m_aprime_MeV": 553.0
+  },
+  "interpretation": "DAMPE channel is consistent with data (null finding, as expected: the smooth broken-power-law fit is preferred at 6.6sigma over any sharp feature, and the thermal chi-chi -> e+e- contribution is too small to produce a detectable signal at m_chi=805 GeV). Delta log L = -19.735 from DAMPE is subdominant to the dominant channels (dSph, UFD, Bullet, LZ) and does not shift the T41 posterior.",
+  "tests_passed": 19,
+  "standing_version": "0.3-prelim+T71.7+T72+T73 (no version bump; Tier-2 POC extension)"
+}

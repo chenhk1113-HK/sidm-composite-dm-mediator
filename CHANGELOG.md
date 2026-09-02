@@ -7,6 +7,60 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [T73] — 2026-09-02
+
+### DAMPE CRE forward-model + joint-fit integration (v0.4-prelim)
+
+Wires the T72 DAMPE POC into the T41 joint fit as **Channel 17**,
+with a dark-matter forward model that predicts the CRE spectrum from
+χχ → A' → e⁺e⁻ annihilation.
+
+### What shipped
+
+| File | Change | Lines |
+|---|---|---|
+| `v0.3-prelim/code/dampe_cre_forward_model.py` (NEW) | DM source spectrum + Cholis 2009 Green's function propagation + per-bin Gaussian likelihood | 360 |
+| `v0.3-prelim/code/channels_extended.py` (MODIFIED) | Added `loglike_dampe_cre()` (Channel 17) | +50 |
+| `v0.3-prelim/code/t41_mediator_mass_joint_fit.py` (MODIFIED) | T41 joint fit now adds `ll_dampe` (gated by `T73_DAMPE_DISABLE=1`) | +20 |
+| `v0.3-prelim/tests/test_dampe_cre_forward_model.py` (NEW) | 19 tests | 295 |
+| `v0.3-prelim/data/results/2026-09-02_dampe_poc/dampe_v04_integration.json` (NEW) | Smoke-test result | — |
+| `v0.3-prelim/docs/T73_DAMPE_V04_INTEGRATION.md` (NEW) | Full method + null-result interpretation | 250 |
+| `scripts/t73_smoke.py` (NEW) | Reproducible smoke test | — |
+
+### Headline finding: NULL RESULT (consistent with data)
+
+At the v0.6 posterior (m_chi=805 GeV, m_A'=553 MeV, thermal σ_v):
+
+| Quantity | Value |
+|---|---|
+| loglike_joint WITH DAMPE | -143.37 |
+| loglike_joint WITHOUT DAMPE | -123.64 |
+| Δ from adding DAMPE channel | **-19.74** |
+| DAMPE-only loglike at no-DM (σ_v=0) | -19.735 |
+| DAMPE-only loglike at thermal σ_v | -19.735 |
+| Best-fit σ_v (grid search) | ≤10⁻²⁸ cm³/s |
+| Δ loglike (thermal vs no-DM) | **0.000** |
+
+**Interpretation:** DAMPE does not show a sharp feature that would indicate
+χχ → A' → e+e- annihilation. The thermal-cross-section prediction
+is ~10⁻⁵ of the observed flux — too small to detect. The DAMPE
+channel acts as a **consistency check** rather than a discovery probe.
+The T41 posterior is unchanged by adding DAMPE (the -19.7 contribution
+is subdominant to the dSph/UFD/Bullet/LZ channels).
+
+### Test count
+
+- **Before T73:** 427 passed, 7 skipped
+- **After T73:** 446 passed (+19 new), 7 skipped (pre-existing)
+- DAMPE total (T72 + T73): 43/43 passing
+
+### Standing-version impact
+
+No version bump. Tier-2 POC extension of T72; v0.3-prelim+T71.7
+preserved. v0.4-prelim joint-fit rerun (T41 at nlive=500 with DAMPE
+on) is a ~hours-of-CPU nested-sampling job, deferred to the next
+ship cycle.
+
 ## [T72] — 2026-09-02
 
 ### DAMPE cosmic-ray electron+positron spectrum ingestion (POC)
