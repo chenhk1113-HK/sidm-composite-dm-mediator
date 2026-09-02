@@ -40,17 +40,41 @@ matter forms smooth galaxy cores (SIDM-like) or sharp cusps (CDM-like).
 LZ measures **σ_DM-nucleon** — how strongly dark-matter particles
 collide with *ordinary atomic nuclei* (xenon, in LZ's case).
 
-These are **completely different cross-sections**. The ratio is
-roughly **10²³** — for a 1 GeV dark-matter particle, the self-
-scattering cross-section is 10²³ times larger than the nucleon
-cross-section. They're like measuring how fast you walk versus how
-hard you push on a wall — both real, but neither tells you the other.
+These are **two different cross-sections**, but in a light-mediator
+SIDM model — which is exactly what this project studies — they're
+**theoretically linked through the same mediator**. The dark photon
+that mediates DM-DM self-scattering also couples to ordinary matter
+through a small "kinetic mixing" parameter ε_γ. So in principle, a
+constraining direct-detection limit would constrain the mediator
+coupling, which would in turn affect σ_DM-DM.
 
-The project's headline σ/m = 0.27 cm²/g (T41 v0.7, nlive=2000) measures
-the first. LZ measures the second. **Even if the LZ signal is real
-and confirmed at 5σ tomorrow, it wouldn't change σ/m.** It would
-update a separate Channel 5 in the project (a sanity check), but not
-the headline result.
+**However**, at the project's v0.7 posterior, the kinetic mixing
+parameter ε_γ ~ 10⁻³⁷ — extraordinarily small. This puts the predicted
+σ_DM-nucleon at roughly **10⁻¹¹⁷ cm²**, which is **70 orders of
+magnitude below LZ sensitivity** (~10⁻⁴⁶ cm²). So even if LZ confirms
+the 2026-09-01 signal at 5σ tomorrow and publishes a precise
+σ_DM-nucleon limit, **the project cannot be constrained by LZ**. The
+link is theoretically real but practically inert.
+
+(For context: the "10²³ ratio" claim in earlier layman summaries was
+a misleading hand-wave from generic SIDM literature. The actual ratio
+depends on ε², and at this project's posterior ε is so suppressed
+that the ratio is closer to 10⁷¹. See
+`v0.3-prelim/docs/T78_KINETIC_MIXING_LZ_LINK.md` for the full model-
+specific calculation.)
+
+The project therefore:
+- **Rejects** direct-detection constraints as σ/m measurements (they
+  measure a different observable).
+- **Uses** LZ only as a sanity check (Channel 5) — and the project's
+  posterior is wildly inside the LZ-allowed region.
+- **Acknowledges the theoretical link** but treats it as practically
+  inert at the current posterior.
+
+This is **practical decoupling**, not complete orthogonality. The
+right framing: **σ_DM-DM and σ_DM-nucleon are theoretically linked,
+but practically decoupled at current LZ precision AND at the project's
+v0.7 posterior.**
 
 ## What's actually consistent
 
@@ -138,11 +162,14 @@ headline result is unchanged. That's by design.
 ## What this is NOT
 
 - ❌ NOT a confirmation of dark matter. (2.6σ is not 5σ.)
-- ❌ NOT a constraint on σ/m. (LZ measures σ_DM-nucleon, not σ_DM-DM.)
+- ❌ NOT a constraint on σ/m in practice. (LZ measures σ_DM-nucleon, not σ_DM-DM; and even with the kinetic-mixing link, the project's ε is too small for LZ to bite.)
 - ❌ NOT a project update at the headline-result level. (Standing
   version remains v0.4-prelim+T75; no code change; no T30 update.)
 - ❌ NOT a tension with the project's posterior. (Compatible: m_χ ~ 770
   GeV, LZ ≥ 200 GeV.)
+- ❌ NOT "completely orthogonal" — σ_DM-DM and σ_DM-nucleon are
+  theoretically linked through kinetic mixing. The decoupling is
+  **practical** (model-specific, ε²-suppressed), not absolute.
 
 ## Provenance
 

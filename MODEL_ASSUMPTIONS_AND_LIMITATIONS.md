@@ -7,40 +7,92 @@
 
 ---
 
-## §0 — Standing posture: orthogonal-physics rejection (locked 2026-08-10, reaffirmed 2026-09-02 in T75)
+## §0 — Standing posture: orthogonal-physics in practice (locked 2026-08-10, reaffirmed 2026-09-02 in T75; refined 2026-09-02 in T78)
 
-**The project's headline σ/m = 0.68-1.7 cm²/g measurement is the
-self-interaction cross-section per unit mass σ_DM-DM (in cm² of cross-
-section per gram of dark matter).** This is a fundamentally different
-observable from σ_DM-nucleon (the dark-matter-nucleon scattering cross-
-section measured by direct-detection experiments).
+**The project's headline σ/m = 0.27 cm²/g (T41 v0.7, nlive=2000)
+measures the self-interaction cross-section per unit mass σ_DM-DM (in
+cm² of cross-section per gram of dark matter).** This is a **practically
+independent** observable from σ_DM-nucleon (the dark-matter-nucleon
+scattering cross-section measured by direct-detection experiments like
+LZ, XENONnT, PandaX).
 
 | Observable | Measured by | Order of magnitude | Project status |
 |---|---|---|---|
-| **σ_DM-DM** (self-scattering, SIDM observable) | dSph/UFD/Bullet Cluster/SPARC/LZ indirect constraints | ~1 cm²/g | **HEADLINE RESULT** |
-| σ_DM-nucleon (direct-detection) | LZ, XENONnT, PandaX | ~10⁻⁴⁷ cm² | Orthogonal physics; **NOT** used as σ/m constraint |
+| **σ_DM-DM** (self-scattering, SIDM observable) | dSph/UFD/Bullet Cluster/SPARC | ~1 cm²/g | **HEADLINE RESULT** |
+| σ_DM-nucleon (direct-detection) | LZ, XENONnT, PandaX | ~10⁻⁴⁷ cm² | **Sanity check only** (Channel 5) |
 
-For a 1 GeV DM particle, σ_DM-DM / σ_DM-nucleon ~ 10²³ — they are
-**completely different physical cross-sections** and cannot be
-compared directly. The project therefore:
+**Why "practically independent" rather than "completely orthogonal":**
+in a light-mediator SIDM model — which is exactly what this project
+studies — the mediator (A') that produces DM-DM self-scattering also
+couples to ordinary matter through **kinetic mixing with the photon**
+(ε_γ) or **mass mixing with the Z boson** (ε_Z). This creates a
+**theoretical link** between σ_DM-DM and σ_DM-nucleon: a more constraining
+direct-detection limit would, in principle, constrain the mediator
+coupling strength, which in turn affects σ_DM-DM.
+
+The link is **real** but **practically negligible** at the project's
+v0.7 posterior. The Kahlhoefer et al. (arXiv:2011.03079) formula for
+kinetic-mixing SIDM gives:
+
+```
+σ_SI_Xp = 1.5×10⁻²⁴ cm² × ε²_γ × (α_X/10⁻²) × (m_φ/30 MeV)⁻⁴
+```
+
+At the v0.7 MAP (log_epsilon = -36.95, log_alpha = -16.17, m_φ = 453
+MeV):
+
+| Quantity | Value |
+|---|---|
+| ε_γ (kinetic mixing) | 1.12 × 10⁻³⁷ |
+| α_X (dark-sector coupling) | 6.84 × 10⁻¹⁷ |
+| m_φ (mediator mass) | 453 MeV |
+| **Predicted σ_DM-nucleon** | **~10⁻¹¹⁷ cm²** |
+| LZ 2024 limit at 770 GeV | ~10⁻⁴⁶ cm² |
+| **Suppression factor** | **~10⁻⁷¹ (70 orders of magnitude!)** |
+
+**This means:** even if LZ confirms the 2026-09-01 signal at 5σ and
+publishes a precise σ_DM-nucleon limit, the project's v0.7 posterior
+**cannot be constrained** by LZ direct-detection at any reasonable
+discovery significance. The kinetic-mixing link exists physically, but
+the project's ε_γ ~ 10⁻³⁷ is so suppressed that LZ cannot bite.
+
+Therefore the project:
+
 - **Rejects** direct-detection constraints as σ/m measurements
+  (theoretical posture: different observable).
 - **Uses** LZ WS2024 only as a sanity check (Channel 5) on whether the
-  composite-DM model is in the LZ-allowed region
+  composite-DM model is in the LZ-allowed region — and the v0.7 MAP
+  is **wildly inside** that region (predicted σ_DM-nuc is ~10⁻⁷¹ of
+  the LZ limit).
 - **Documents** the orthogonal-physics reasoning explicitly in
-  `v0.3-prelim/code/channels_extended.py` (file header, lines 1-35)
+  `v0.3-prelim/code/channels_extended.py` (file header, lines 1-35).
+- **Acknowledges the kinetic-mixing link** in the model, but treats
+  it as a theoretical possibility, not a practical constraint.
+
+**See `v0.3-prelim/docs/T78_KINETIC_MIXING_LZ_LINK.md` for the full
+calculation, including the model-specific ε_lz_check.py script and the
+table of suppression factors at the MAP, median, and prior edges.**
 
 **2026-09-01 LZ signal update (verified via Sheffield + LBNL press
 releases, see `v0.3-prelim/docs/T77_LZ_2026_09_UPDATE.md`):** LZ
 detected a single high-energy event at 2.6σ (≈0.5% background
-probability), implying a WIMP mass ≥ 200 GeV/c² if real. **Per the
-project's standing posture, this signal — even if confirmed — does
-NOT constrain σ_DM-DM.** It constrains σ_DM-nucleon, which is the
-orthogonal observable. The signal is **consistent with the project's
-T41 v0.7 posterior** (m_χ ~ 770 GeV, nlive=2000). **No project update
-is warranted at 2.6σ** (below the 3σ threshold for updating T30).
-The LZ paper is still in PRL submission as of 2026-09-02; once
-released, it should be re-evaluated for σ_DM-nucleon limits at the
-T30 Channel 5 level (NOT at the σ_DM-DM level).
+probability), implying a WIMP mass ≥ 200 GeV/c² if real. **At 2.6σ,
+the LZ signal is below the project's 3σ threshold for updating Channel
+5** (per the tier-ranked trigger policy in T77). The signal is
+**consistent with the project's T41 v0.7 posterior** (m_χ ~ 770 GeV,
+nlive=2000; predicted σ_DM-nuc ~10⁻¹¹⁷ cm², ~10⁻⁷¹ of LZ sensitivity).
+
+The LZ paper is still in PRL submission as of 2026-09-02. Once
+released, it should be re-evaluated per the trigger conditions in T77
+— but even at 5σ, the impact on the project's headline σ/m is
+negligible because of the kinetic-mixing suppression (see T78).
+
+**Refined framing (T78, 2026-09-02):** the original T77 §0 used the
+language "completely orthogonal" — which is **physically overstated**.
+The correct framing is: **σ_DM-DM and σ_DM-nucleon are theoretically
+linked through kinetic mixing, but practically decoupled at current
+LZ precision AND at the project's v0.7 posterior (where ε ~ 10⁻³⁷
+puts σ_DM-nuc ~70 orders of magnitude below LZ sensitivity).**
 
 Per peer review (2026-08-10, Long-Term #3), this stance is locked.
 Per v0.4-prelim path-proposal audit (T74 input), XENONnT/PandaX as

@@ -7,6 +7,78 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [T78] — 2026-09-02
+
+### Kinetic-mixing link refinement + model-specific σ_DM-nucleon calculation
+
+Defensive doc-update + model-specific calculation in response to the
+Consider2.docx technical review of the T77 update. The reviewer's
+4 main points:
+
+1. "σ_DM-DM ≠ σ_DM-nucleon → completely orthogonal" is overstated
+2. The 10²³ ratio claim is model-dependent hand-waving
+3. Pre-register what "re-run T41 at nlive=2000" means at ≥3σ
+4. Watch XENONnT/PandaX-4T cross-checks (already in T77)
+
+All four addressed in T78.
+
+### Key calculation
+
+Kahlhoefer et al. (arXiv:2011.03079) kinetic-mixing formula:
+
+    σ_SI_Xp = 1.5×10⁻²⁴ cm² × ε²_γ × (α_X/10⁻²) × (m_φ/30 MeV)⁻⁴
+
+At the v0.7 MAP (log_eps=-36.95, log_alpha=-16.17, m_φ=453 MeV):
+
+| Quantity | Value |
+|---|---|
+| ε_γ | 1.12 × 10⁻³⁷ |
+| α_X | 6.84 × 10⁻¹⁷ |
+| m_φ | 453 MeV |
+| Predicted σ_DM-nuc | **~10⁻¹¹⁷ cm²** |
+| LZ 2024 limit @ 770 GeV | ~10⁻⁴⁶ cm² |
+| **Suppression factor** | **~10⁻⁷¹ (70 orders of magnitude)** |
+
+**Verdict:** even at LZ's hypothetical 5σ confirmation, the project
+cannot be constrained — the link is theoretically real but
+practically inert.
+
+### Refined framing
+
+Old (T77): "σ_DM-DM and σ_DM-nucleon are completely orthogonal."
+New (T78): "σ_DM-DM and σ_DM-nucleon are theoretically linked
+through kinetic mixing, but practically decoupled at current LZ
+precision AND at the project's v0.7 posterior (ε ~ 10⁻³⁷)."
+
+### Pre-registered ≥3σ re-run protocol
+
+When LZ signal reaches ≥3σ and the paper is published, fold the new
+σ_DM-nucleon limit into the **existing Channel 5** (T30 LZ mapping),
+NOT as a new channel:
+
+1. Update `LZ_2024_LIMITS` array in `channels_extended.py`
+2. Recompute `loglike_direct_detection_exclusion` Channel 5
+3. Re-run T41 at nlive=2000
+
+### Files modified
+
+- `MODEL_ASSUMPTIONS_AND_LIMITATIONS.md §0` — rewritten with
+  kinetic-mixing link + model-specific calculation
+- `EXTRACT.md` — top-of-doc callout softened
+- `docs/LAYMAN_SUMMARY_T77_LZ_2026_09.md` — 10²³ hand-wave removed;
+  kinetic-mixing section added
+- `v0.3-prelim/docs/T77_LZ_2026_09_UPDATE.md` — pre-registered ≥3σ
+  re-run protocol added
+- `v0.3-prelim/docs/T78_KINETIC_MIXING_LZ_LINK.md` (NEW, 9.2 KB)
+- `scripts/epsilon_lz_check.py` (NEW) — reproducible calculation
+- `v0.3-prelim/data/results/2026-09-02_t78_epsilon_lz_check.json`
+  (NEW, 1.7 KB)
+
+### Standing-version impact
+
+**No version bump.** T78 is a refinement of T77's framing, not a
+posterior change. Standing version: `v0.4-prelim+T75`.
+
 ## [T77] — 2026-09-02
 
 ### LZ 2026-09-01 mysterious signal update (defensive doc-update)

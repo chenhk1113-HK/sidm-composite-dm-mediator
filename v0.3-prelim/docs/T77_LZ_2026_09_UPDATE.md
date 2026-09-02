@@ -135,10 +135,38 @@ The project should **re-evaluate** when **any** of the following occur:
 | Trigger | New action |
 |---|---|
 | LZ arXiv paper appears | Read paper; extract precise σ_DM-nucleon limit |
-| Significance reaches ≥ 3σ | Update T30 Channel 5; re-run T41 at nlive=2000 |
+| Significance reaches ≥ 3σ | Update Channel 5 (T30 LZ mapping) with new LZ limit; re-run T41 at nlive=2000 |
 | Significance reaches ≥ 5σ | Major milestone; v0.5-prelim release |
 | XENONnT or PandaX publishes a confirming event | Re-evaluate as joint constraint |
 | A competing experiment (DarkSide, DEAP) publishes a contradicting limit | Re-evaluate the whole LZ picture |
+
+### Pre-registered ≥3σ re-run protocol (added in T78)
+
+**Question:** When the LZ signal reaches ≥3σ and the paper is
+published, what specifically does "re-run T41 at nlive=2000" mean?
+
+**Answer (pre-registered, T78 2026-09-02):** Fold the new LZ
+σ_DM-nucleon limit into the existing **Channel 5** (T30 LZ mapping),
+NOT as a new channel. Specifically:
+
+1. **Update `LZ_2024_LIMITS` array** in `channels_extended.py` with
+   the new LZ limit at the relevant m_χ values.
+2. **Recompute** the `loglike_direct_detection_exclusion` Channel 5
+   using the new LZ limit at the v0.7 MAP m_χ (~ 770 GeV).
+3. **Re-run T41** at nlive=2000 with the updated Channel 5.
+
+**Why this protocol:** The new LZ limit constrains the same
+observable (σ_DM-nucleon) as the existing Channel 5 — it's a
+**limit update**, not a new physics observable. Adding it as a new
+channel would double-count the same observable.
+
+**Practical impact at the project's v0.7 posterior:** Even at LZ's
+hypothetical 5σ confirmation, the new σ_DM-nucleon limit would not
+change σ/m because the project's predicted σ_DM-nuc is suppressed by
+~70 orders of magnitude relative to LZ sensitivity (see
+[T78_KINETIC_MIXING_LZ_LINK.md](T78_KINETIC_MIXING_LZ_LINK.md)). So the
+"re-run T41" is a defensive integrity check, not a headline-result
+update.
 
 ## KIV (Keep-In-View) cron job
 
