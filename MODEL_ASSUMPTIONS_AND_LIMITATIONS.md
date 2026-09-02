@@ -1,9 +1,44 @@
 # MODEL ASSUMPTIONS AND LIMITATIONS — sidm-composite-dm-mediator
 
-**Version:** v0.3-prelim+T71.7 (2026-08-28)
+**Version:** v0.4-prelim+T75 (2026-09-02)
 **Status:** Preliminary research code. Not yet publication-ready (per R13 reviewer audit, see `v0.3-prelim/docs/REVIEWER_AUDIT_R13.md`).
 
-**Per**: Reviewer M4 suggestion in `sidm review2.docx` (2026-08-25). Updated through T71.7 closure round.
+**Per**: Reviewer M4 suggestion in `sidm review2.docx` (2026-08-25). Updated through T75 (DAMPE + Zhang+2025 LSS joint-fit rerun).
+
+---
+
+## §0 — Standing posture: orthogonal-physics rejection (locked 2026-08-10, reaffirmed 2026-09-02 in T75)
+
+**The project's headline σ/m = 0.68-1.7 cm²/g measurement is the
+self-interaction cross-section per unit mass σ_DM-DM (in cm² of cross-
+section per gram of dark matter).** This is a fundamentally different
+observable from σ_DM-nucleon (the dark-matter-nucleon scattering cross-
+section measured by direct-detection experiments).
+
+| Observable | Measured by | Order of magnitude | Project status |
+|---|---|---|---|
+| **σ_DM-DM** (self-scattering, SIDM observable) | dSph/UFD/Bullet Cluster/SPARC/LZ indirect constraints | ~1 cm²/g | **HEADLINE RESULT** |
+| σ_DM-nucleon (direct-detection) | LZ, XENONnT, PandaX | ~10⁻⁴⁷ cm² | Orthogonal physics; **NOT** used as σ/m constraint |
+
+For a 1 GeV DM particle, σ_DM-DM / σ_DM-nucleon ~ 10²³ — they are
+**completely different physical cross-sections** and cannot be
+compared directly. The project therefore:
+- **Rejects** direct-detection constraints as σ/m measurements
+- **Uses** LZ WS2024 only as a sanity check (Channel 5) on whether the
+  composite-DM model is in the LZ-allowed region
+- **Documents** the orthogonal-physics reasoning explicitly in
+  `v0.3-prelim/code/channels_extended.py` (file header, lines 1-35)
+
+Per peer review (2026-08-10, Long-Term #3), this stance is locked.
+Per v0.4-prelim path-proposal audit (T74 input), XENONnT/PandaX as
+σ/m constraints are explicitly rejected.
+
+This posture is **non-negotiable** unless the user explicitly
+overrides it. Any future "Consider.docx" or reviewer document that
+proposes using direct-detection experiments as σ/m constraints is
+pre-classified as **out-of-scope** per this standing decision.
+
+---
 
 This document is the **single concise top-level reference** for every
 assumption, fixed parameter, approximation, and known limitation in

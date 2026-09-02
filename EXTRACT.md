@@ -1,8 +1,10 @@
 # EXTRACT — sidm-composite-dm-mediator
 
-**Version 0.3-prelim + T71.7 · 2026-08-28 · 1,000 words**
+**Version 0.4-prelim + T75 · 2026-09-02 · ~1,100 words**
 
-**Standing version: v0.3-prelim+T71.7** (KiSS-SIDM timeout closure). Channels: 16 (2 experimental, 14 production). Tests: 575 pass / 0 fail / 6 skip. V0_6_ROADMAP: 9 of 15 items shipped (3 partial-closure: #10, #17, #19).
+**Standing version: v0.4-prelim+T75** (DAMPE + Zhang+2025 LSS joint-fit rerun; v0.7 result). Channels: **18** (was 16). Tests: 472 pass / 0 fail / 7 skip. V0_6_ROADMAP: 9 of 15 items shipped (3 partial-closure: #10, #17, #19) + 2 v0.4-prelim Tier-1 extensions (DAMPE, LSS).
+
+**⚠ Orthogonal-physics posture (locked 2026-08-10, reaffirmed 2026-09-02 in T75):** The project's headline σ/m = 0.68-1.7 cm²/g measures **σ_DM-DM** (self-scattering cross-section per unit mass, the SIDM observable). Direct-detection experiments (LZ, XENONnT, PandaX) measure **σ_DM-nucleon** — a fundamentally different cross-section (factor ~10²³ difference). Per standing decision, direct-detection constraints are **rejected** as σ/m measurements; LZ is used only as a sanity check. See `MODEL_ASSUMPTIONS_AND_LIMITATIONS.md §0` for full reasoning. This stance is **non-negotiable** unless user explicitly overrides.
 
 **Updates from 2026-08-25 (T70 Tier-1 PATCH):**
 - Added Channel 11 (NGC 1052-DF2/DF4 + FCC 224/240 dark-matter-free UDG consistency check)

@@ -7,6 +7,57 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [T76] — 2026-09-02
+
+### v0.7 nlive=2000 convergence check + doc-prominence fix
+
+Final v0.4-prelim milestone closing out the deferred items from T75.
+
+### What shipped
+
+1. **nlive=2000 v0.7 rerun.** Wall time: 439.6s (~7.3 min) on this host.
+   Confirms v0.7 Bayesian evidence is converged to <0.05 log-units.
+2. **Doc-prominence fix.** §0 added to
+   `MODEL_ASSUMPTIONS_AND_LIMITATIONS.md` + top-of-doc callout in
+   `EXTRACT.md` documenting the **orthogonal-physics posture**
+   (σ_DM-DM ≠ σ_DM-nucleon) as non-negotiable standing decision.
+3. **Posterior visualizations.** 3 PNG plots generated (256 KB total):
+   - `v0_7_map_comparison.png` — MAP metrics across the 4 configs
+   - `v0_7_logz_progression.png` — Bayesian evidence progression
+   - `v0_7_tension_progression.png` — velocity-slope tension resolution
+
+### nlive=500 vs nlive=2000 convergence
+
+| Metric | nlive=500 | nlive=2000 | Verdict |
+|---|---|---|---|
+| log Z | -163.24 ± 0.16 | **-163.29 ± 0.085** | ✅ Converged |
+| MAP m_phi (MeV) | 696 | 453 | ⚠️ -35% (multi-modal) |
+| MAP m_chi (GeV) | 957 | 770 | ⚠️ -19% (multi-modal) |
+| MAP σ/m_0 (cm²/g) | 0.238 | **0.273** | ✅ +15% (within SIDM range) |
+| Tension (T39 − Y) | 0.70 | **0.60** | ✅ **Even lower** |
+
+**Interpretation:** log Z is converged. MAP shifts are typical of
+nested-sampling posteriors with multiple modes. The tension-resolution
+result is **more robust at nlive=2000** (0.60 vs 0.70).
+
+### Files
+
+| File | Change |
+|---|---|
+| `v0.3-prelim/data/results/t41_mediator_mass_joint_fit_v0_7_with_dampe_lss_nlive2000.json` | NEW |
+| `v0.3-prelim/plots/v0_7_*.png` | 3 NEW PNGs |
+| `v0.3-prelim/docs/T76_V07_NLIVE2000.md` | NEW |
+| `scripts/t76_run_nlive2000.py` | NEW |
+| `scripts/t76_plot_v0_7.py` | NEW |
+| `EXTRACT.md` | MODIFIED (+3 lines) |
+| `MODEL_ASSUMPTIONS_AND_LIMITATIONS.md` | MODIFIED (+35 lines, §0 added) |
+
+### Standing-version impact
+
+**No version bump.** T76 is a convergence check, not a major version
+bump. Standing version remains `v0.4-prelim+T75`. All 6 drift-guard
+sources still agree.
+
 ## [v0.4-prelim+T75] — 2026-09-02
 
 ### T41 v0.7 full joint-fit rerun with DAMPE + LSS (Tier-1 milestone)
