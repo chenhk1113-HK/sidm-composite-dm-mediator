@@ -140,6 +140,21 @@ The project should **re-evaluate** when **any** of the following occur:
 | XENONnT or PandaX publishes a confirming event | Re-evaluate as joint constraint |
 | A competing experiment (DarkSide, DEAP) publishes a contradicting limit | Re-evaluate the whole LZ picture |
 
+## KIV (Keep-In-View) cron job
+
+**Cron job ID:** `080d2f590251`
+**Schedule:** `0 9 1 11 *` (every year, November 1st at 09:00)
+**Next run:** **2026-11-01 09:00** (60 days from today)
+**Action:** Run `scripts/lz_kiv_check.py` to query arXiv for the LZ
+paper; if found, re-evaluate per trigger conditions; if not, consider
+extending the KIV by another 60 days.
+**Delivery:** Telegram home channel (8676870325)
+
+The cron job is registered with `hermes cron create`. To inspect:
+`hermes cron list`. To cancel: `hermes cron remove 080d2f590251`.
+The first KIV check will run on 2026-11-01 — approximately 60 days
+after the 2026-09-01 announcement.
+
 ## Standing-version impact
 
 **No version bump.** T77 is a defensive doc-update, not a code change.
