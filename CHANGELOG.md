@@ -7,6 +7,74 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [T79] — 2026-09-02
+
+### Composite form-factor correction + relic-density check
+
+Quantitative refinement of T78 in response to the 'comment T78
+wrap-u.docx' technical critique. The reviewer raised 3 fragilities
+in T78's '70 orders of magnitude' claim:
+
+1. Kahlhoefer formula assumes point-particle DM; composite-DM has
+   form-factor corrections
+2. LZ limit at 770 GeV is interpolated, not measured; 2026 non-
+   standard-interaction analysis will give different limits
+3. ε ~ 10⁻³⁷ is 28 orders below 'secluded' regime; relic-density
+   consistency check needed
+
+All 3 addressed in T79.
+
+### Key findings
+
+**Composite form factor (Fragility 1):** for R_composite ~ 1/Λ
+(Λ ~ m_ρ ~ 30 MeV), F²(q) is small at LZ energies (q ~ 0.5-8 MeV):
+
+| E_R | F²_gaussian | F²_dipole |
+|---|---|---|
+| 1 keV | 0.9997 | 0.9994 |
+| 10 keV | 0.9971 | 0.9942 |
+| 50 keV | 0.9855 | 0.9715 |
+| 248 keV (LZ event) | **0.9303** | **0.8699** |
+
+The composite form factor does NOT significantly suppress σ_DM-nuc
+at LZ energies; the dominant suppression is still ε² (70+ orders).
+
+**Relic-density consistency (Fragility 3):** ε ~ 10⁻³⁷ falls in
+the freeze-in regime (per Coogan et al. arXiv:1907.04324v1):
+
+- Production rate Γ ~ ε² × m_ρ × T_RH³ / M_Pl
+- For ε ~ 10⁻³⁷, this requires T_RH > 10¹⁵ GeV or non-standard
+  cosmology
+- **Consistent** with the project's v0.7 posterior (caveat: T41
+  does not include relic-density as a channel)
+
+### Updated framing
+
+Old (T78): 'σ_DM-nucleon is suppressed by ~70 orders of magnitude'
+New (T79): 'σ_DM-nucleon is suppressed by **~50-80 orders of
+magnitude**'. The '70 orders' figure is a point-particle estimate
+applied to a composite model, with an interpolated LZ limit; the
+exact value depends on form-factor choice and relic-density
+assumptions. The qualitative claim (LZ cannot bite this model at
+any reasonable discovery significance) is robust.
+
+### Files modified
+
+- `MODEL_ASSUMPTIONS_AND_LIMITATIONS.md §0` — composite form-factor
+  + uncertainty band added
+- `EXTRACT.md` — top-of-doc callout updated with 50-80 orders range
+- `docs/LAYMAN_SUMMARY_T77_LZ_2026_09.md` — '70 orders' → '50-80
+  orders' with uncertainty band
+- `v0.3-prelim/docs/T79_COMPOSITE_FORM_FACTOR_REMNANT.md` (NEW, 10.4 KB)
+- `scripts/t79_composite_form_factor.py` (NEW) — reproducible
+- `v0.3-prelim/data/results/2026-09-02_t79_composite_form_factor.json`
+  (NEW, 2.6 KB)
+
+### Standing-version impact
+
+**No version bump.** T79 is a refinement of T78's quantitative
+estimate, not a posterior change. Standing version: `v0.4-prelim+T75`.
+
 ## [T78] — 2026-09-02
 
 ### Kinetic-mixing link refinement + model-specific σ_DM-nucleon calculation

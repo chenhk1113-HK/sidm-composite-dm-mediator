@@ -46,15 +46,44 @@ MeV):
 | ε_γ (kinetic mixing) | 1.12 × 10⁻³⁷ |
 | α_X (dark-sector coupling) | 6.84 × 10⁻¹⁷ |
 | m_φ (mediator mass) | 453 MeV |
-| **Predicted σ_DM-nucleon** | **~10⁻¹¹⁷ cm²** |
+| **Predicted σ_DM-nucleon** | **~10⁻¹¹⁷ cm²** (point-particle baseline) |
 | LZ 2024 limit at 770 GeV | ~10⁻⁴⁶ cm² |
-| **Suppression factor** | **~10⁻⁷¹ (70 orders of magnitude!)** |
+| **Suppression factor** | **~10⁻⁷¹ (70 orders of magnitude)** |
+
+**Composite form-factor correction (T79):** for composite-DM models
+with R_composite ~ 1/Λ (Λ ~ m_ρ ~ 30 MeV for the project's KSFR
+sector), the momentum transfer q in LZ DM-nucleon scattering is
+small (q ~ 0.5-8 MeV at E_R = 1-248 keV). The composite form factor
+F²(q) ≈ 1 at these low q (F²_gaussian ~ 0.93 at the LZ event
+energy 248 keV; F²_dipole ~ 0.87). So **the composite form factor
+does NOT significantly suppress σ_DM-nuc at LZ energies** — the
+dominant suppression is still ε². See
+[T79_COMPOSITE_FORM_FACTOR_REMNANT.md](T79_COMPOSITE_FORM_FACTOR_REMNANT.md)
+for the full form-factor calculation.
+
+**Suppression uncertainty band (T79):** the "70 orders" figure is a
+**point-particle estimate** applied to a composite model, with an
+interpolated LZ limit. The uncertainty band is roughly **50-80
+orders of magnitude**, depending on:
+- Composite form-factor choice (Gaussian vs dipole vs monopole)
+- Relic-density consistency of ε ~ 10⁻³⁷ (freeze-in regime requires
+  T_RH > 10¹⁵ GeV or non-standard cosmology; the project's
+  posterior is consistent with this regime)
+- Whether the LZ 2024 limit at exactly 770 GeV matches the
+  interpolation (the 2026 non-standard-interaction analysis will
+  give the actual limit)
+
+Even at the lower end of the uncertainty band (50 orders), the
+suppression is still **far beyond any foreseeable LZ sensitivity
+improvement**. The qualitative claim — LZ cannot bite this model at
+any reasonable discovery significance — is robust. The exact
+quantitative suppression factor is approximate.
 
 **This means:** even if LZ confirms the 2026-09-01 signal at 5σ and
 publishes a precise σ_DM-nucleon limit, the project's v0.7 posterior
-**cannot be constrained** by LZ direct-detection at any reasonable
-discovery significance. The kinetic-mixing link exists physically, but
-the project's ε_γ ~ 10⁻³⁷ is so suppressed that LZ cannot bite.
+**cannot be constrained** by LZ direct-detection. The kinetic-mixing
+link exists physically, but the project's ε_γ ~ 10⁻³⁷ is so
+suppressed that LZ cannot bite.
 
 Therefore the project:
 

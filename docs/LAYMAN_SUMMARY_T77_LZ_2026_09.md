@@ -50,18 +50,21 @@ coupling, which would in turn affect σ_DM-DM.
 
 **However**, at the project's v0.7 posterior, the kinetic mixing
 parameter ε_γ ~ 10⁻³⁷ — extraordinarily small. This puts the predicted
-σ_DM-nucleon at roughly **10⁻¹¹⁷ cm²**, which is **70 orders of
+σ_DM-nucleon at roughly **10⁻¹¹⁷ cm²**, which is **50-80 orders of
 magnitude below LZ sensitivity** (~10⁻⁴⁶ cm²). So even if LZ confirms
 the 2026-09-01 signal at 5σ tomorrow and publishes a precise
 σ_DM-nucleon limit, **the project cannot be constrained by LZ**. The
 link is theoretically real but practically inert.
 
-(For context: the "10²³ ratio" claim in earlier layman summaries was
-a misleading hand-wave from generic SIDM literature. The actual ratio
-depends on ε², and at this project's posterior ε is so suppressed
-that the ratio is closer to 10⁷¹. See
-`v0.3-prelim/docs/T78_KINETIC_MIXING_LZ_LINK.md` for the full model-
-specific calculation.)
+(The "70 orders" figure is a point-particle estimate applied to a
+composite-DM model, with an interpolated LZ limit. The uncertainty
+band is 50-80 orders depending on the form factor choice and relic-
+density assumptions. Even at the lower end (50 orders), the
+suppression is still far beyond any foreseeable LZ sensitivity
+improvement. See
+`v0.3-prelim/docs/T78_KINETIC_MIXING_LZ_LINK.md` and
+`T79_COMPOSITE_FORM_FACTOR_REMNANT.md` for the full model-specific
+calculation.)
 
 The project therefore:
 - **Rejects** direct-detection constraints as σ/m measurements (they

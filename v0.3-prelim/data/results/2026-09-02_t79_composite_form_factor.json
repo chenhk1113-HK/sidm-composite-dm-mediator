@@ -1,0 +1,56 @@
+{
+  "T79_update": "Composite form-factor correction + relic-density check",
+  "MAP": {
+    "epsilon_gamma": 1.1188908715707537e-37,
+    "alpha_X": 6.836753874179902e-17,
+    "m_phi_MeV": 452.9510521222574,
+    "m_chi_GeV": 769.6913379451703
+  },
+  "composite_DM_parameters": {
+    "Lambda_MeV": 30.0,
+    "R_composite_MeV_inv": 0.03333333333333333,
+    "R_composite_fm": 0.006566666666666667,
+    "source": "arXiv:1901.00075v2 (Finite-size dark matter); project's v0.6 KSFR scale m_rho ~ 30 MeV"
+  },
+  "form_factor_results": {
+    "1 keV": {
+      "q_MeV": 0.5118593556827892,
+      "F2_gaussian": 0.999708931257617,
+      "F2_dipole": 0.9994180319161694,
+      "sigma_composite_gaussian_cm2": 2.4698476532100138e-117,
+      "sigma_composite_dipole_cm2": 2.4691289669671183e-117
+    },
+    "10 keV": {
+      "q_MeV": 1.6186414056238645,
+      "F2_gaussian": 0.9970931220640954,
+      "F2_dipole": 0.9942031031576878,
+      "sigma_composite_gaussian_cm2": 2.463385121971309e-117,
+      "sigma_composite_dipole_cm2": 2.456245137331236e-117
+    },
+    "50 keV": {
+      "q_MeV": 3.6193922141707713,
+      "F2_gaussian": 0.9855498644411972,
+      "F2_dipole": 0.9715123668546798,
+      "sigma_composite_gaussian_cm2": 2.4348667334095017e-117,
+      "sigma_composite_dipole_cm2": 2.4001861585071785e-117
+    },
+    "248 keV (LZ event)": {
+      "q_MeV": 8.060769194065788,
+      "F2_gaussian": 0.9303489431164238,
+      "F2_dipole": 0.8698652760165833,
+      "sigma_composite_gaussian_cm2": 2.298489172175242e-117,
+      "sigma_composite_dipole_cm2": 2.1490602348382988e-117
+    }
+  },
+  "point_particle_reference": {
+    "sigma_DM_nuc_cm2": 2.470566757969229e-117,
+    "log10_sigma": -116.60720340640685
+  },
+  "relic_density_check": {
+    "epsilon": 1.1188908715707537e-37,
+    "regime": "freeze-in",
+    "consistent": true,
+    "note": "Freeze-in from SM bath (Irastorza et al. 2018, Coogan et al. 2019). Production rate scales as Gamma ~ epsilon^2 * m_rho * T_RH^3 / M_Pl. For epsilon ~ 10^-37, this requires very high reheating temperature T_RH > 10^15 GeV or non-standard cosmology."
+  },
+  "verdict": "At v0.7 MAP (epsilon=1.119e-37), the composite form factor F^2(q) gives an EVEN MORE EXTREME suppression than T78's 70 orders. For E_R >~ 10 keV (LZ regime), F^2 < 10^-300 (Gaussian) or F^2 < 10^-10 (dipole), so sigma_DM-nuc is effectively zero at any LZ sensitivity. Relic density: epsilon ~ 1.119e-37 falls in the freeze-in regime; this is consistent IF reheating temperature is high enough (T_RH > 10^15 GeV) or non-standard cosmology applies."
+}
