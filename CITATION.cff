@@ -3,34 +3,34 @@ message: >-
   If you use this code or its results in published work, please cite the
   relevant version below AND the underlying physics references listed at
   the bottom. See docs/DATA_SOURCES.md for the full list of observational
-  data sources used and how to cite them. v0.3-prelim+T71.7 (T71.7
-  KiSS-SIDM timeout closure 2026-08-28: T38a N=5e4 dwarf re-run with
-  KISS_SIDM_TIMEOUT_S=7200 hit 2/10 snapshots in 7200s — UFD KiSS-SIDM
-  declared structurally out-of-session; wrapper-level timeout env var
-  shipped (commit cdb9028); Brower N_f=8 lattice deferred per
-  reviewer Assessment.docx ¶52 (wrong N_f + undocumented columns +
-  conformal-window risk). T71.5 Tier B closure 2026-08-28: Drobczyk
-  quantitative χ² test added (t68b, χ²=213.62, strong tension vs
-  arXiv:2506.22997); LZ WS2024 stale-claim correction (already in
-  production since R12 via t30_lz_real_posterior.loglike_lz_real, HEPData
-  155182, 26 mass points); KiSS-SIDM UFD fidelity deferred with rationale
-  (canonical halo converged at N=1e4-1e5). V0_6_ROADMAP: 9 of 15 items
-  shipped across T71.2 → T71.7. Earlier closed rounds: T71.4 (3 v0.6
-  items in parallel: hier-sparc +0.10 log Z, bullet_sens +1.74 log Z,
-  CHANNEL_STATUS dict); T71.3 (R7 closure: nlive=2000 (Nc,Nf) scan via
-  7-way parallel background runner, scan converged); T71.2 (R16 closure:
-  ksfr_mask_max_at_runtime field + config_hash field, 575/0/6 tests);
-  T71.1 (R15 closure: inelastic + nlive=2000 + KSFR mask extension
-  confound found) and the H3+H4 sensitivity report at
-  v0.3-prelim/docs/H3_H4_SENSITIVITY_REPORT.md are the most recent
-  closed rounds at the time of the most recent public release. T71.8
-  doc-only audit upgrade (2026-08-28): (2,2) KSFR ESTIMATED → LATTICE
-  after re-reading Arthur 1602.06559 via Bennett Sp(4) Fig 17 (count
-  shifts 2/2/3 → 3/2/2); Sp(4) explicitly distinguished from SU(2).
-  T71.8.1 (2026-08-29): lifted KiSS-SIDM UFD timeout verdict into
-  standing docs — KISS_SIDM_CANONICAL_N, KISS_SIDM_DEFAULT_TIMEOUT_S in
-  config.py; KiSS-SIDM Quick Start section in README; "⚠️ Known caveats"
-  block at top of FINDINGS.md. No version bump (doc-only).
+  data sources used and how to cite them. v0.4-prelim+T75 (Tier-1
+  milestone 2026-09-02: T72 DAMPE POC, T73 DAMPE CRE forward-model +
+  joint-fit integration as Channel 17, T74 Zhang+2025 LSS / assembly-bias
+  as Channel 18, T75 v0.7 full T41 rerun at nlive=500, T76 nlive=2000
+  convergence check + doc-prominence fix; v0.7 result: log Z = -163.29
+  +/- 0.085 (nlive=2000), tension T39 vs Yukawa a = 0.60 (below 1.0
+  threshold), MAP m_chi = 770 GeV, sigma/m_0 = 0.27 cm^2/g; 472 tests
+  passing). T77 (2026-09-02): defensive doc-update for the 2026-09-01 LZ
+  mysterious signal (2.6sigma single event, implied WIMP mass >= 200
+  GeV/c^2); per standing posture, sigma_DM-DM != sigma_DM-nucleon so LZ
+  does not constrain sigma/m. T78 (2026-09-02): kinetic-mixing link
+  refinement via Kahlhoefer et al. formula; at v0.7 MAP (epsilon ~ 10^-37,
+  m_phi ~ 453 MeV) predicted sigma_DM-nuc ~ 10^-117 cm^2, suppressed by
+  ~70 orders relative to LZ sensitivity (~10^-46 cm^2). T79
+  (2026-09-02): composite form-factor F^2(q) correction (Gaussian + dipole)
+  + relic-density consistency check (epsilon falls in freeze-in regime,
+  consistent with T_RH > 10^15 GeV); uncertainty band updated to 50-80
+  orders. Standing posture: LZ used as Channel 5 sanity check, NOT as
+  sigma/m constraint. V0_6_ROADMAP: 9 of 15 items shipped across
+  T71.2 -> T71.7 + 2 v0.4-prelim Tier-1 extensions (DAMPE, LSS). Earlier
+  closed rounds: T71.4 (3 v0.6 items in parallel: hier-sparc +0.10 log Z,
+  bullet_sens +1.74 log Z, CHANNEL_STATUS dict); T71.3 (R7 closure:
+  nlive=2000 (Nc,Nf) scan via 7-way parallel background runner, scan
+  converged); T71.2 (R16 closure: ksfr_mask_max_at_runtime field +
+  config_hash field, 575/0/6 tests); T71.1 (R15 closure: inelastic +
+  nlive=2000 + KSFR mask extension confound found). The KIV cron
+  080d2f590251 (registered 2026-09-02) re-checks the LZ paper on
+  2026-11-01 (60 days after the LZ announcement).
 title: "sidm-composite-dm-mediator"
 type: software
 version: 0.4-prelim+T75

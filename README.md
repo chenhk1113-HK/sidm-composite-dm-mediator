@@ -272,6 +272,54 @@ limitations; the relic density is a calibration (not a Boltzmann solver); the da
 QCD-analog calibration (not a lattice calculation). See `v0.3-prelim/docs/REVIEWER_AUDIT_R12.md`
 for the full list of what the project does and does not claim.
 
+## Headline result — **v0.4-prelim+T75 (2026-09-02)** — Tier-1 milestone
+
+**The most recent result is v0.7 (full T41 rerun with DAMPE + Zhang+2025 LSS channels). The
+v0.5 row below is preserved for backward compatibility — it's the published baseline, and
+v0.7 supersedes it in the project's standing posture. See
+[`v0.3-prelim/docs/T75_V07_FULL_T41_RERUN.md`](v0.3-prelim/docs/T75_V07_FULL_T41_RERUN.md)
+and [`v0.3-prelim/docs/T76_V07_NLIVE2000.md`](v0.3-prelim/docs/T76_V07_NLIVE2000.md)
+for the full v0.7 result.**
+
+| Quantity | **v0.7 (DAMPE + LSS)** | v0.6 historical | v0.5 (KSFR mask ON) | Source |
+|---|---|---|---|---|
+| Joint fit σ/m_0 at galactic scale (V_REF = 100 km/s) | **0.27 cm²/g** | (0.06 cm²/g) | (0.105 cm²/g) | T41 joint fit (MAP, nlive=2000) |
+| Velocity index a (Yukawa-derived) | **+0.34** | (+0.03) | (+1.89) | T41.derived_a at MAP |
+| Tension vs. data-preferred a = +0.94 | **0.60σ** (no significant tension) | (0.91σ) | (0.95σ, no significant tension) | T41 vs T39 |
+| Mediator mass m_φ (median posterior) | **588 MeV** ✓ KSFR-valid | (779 MeV) | (553 MeV) | T41 posterior median |
+| Mediator mass m_φ (MAP) | **453 MeV** ✓ KSFR-valid | (779 MeV) | (502 MeV) | T41 MAP |
+| DM mass m_χ (median posterior) | **498 GeV** | (365 GeV) | (805 GeV) | T41 posterior median |
+| DM mass m_χ (MAP) | **770 GeV** | (365 GeV) | (515 GeV) | T41 MAP |
+| Bare kinetic mixing ε (median posterior) | **1.4×10⁻³⁷** | (10⁻³⁷) | (4×10⁻³⁵) | T41 posterior median |
+| log Z (Bayesian evidence) | **−163.29 ± 0.085** | (−215.37 ± 0.16) | (−254.24 ± 0.16) | T41 nested sampling (nlive=2000) |
+| **Channel count** | **18** | (16) | (15) | T72 DAMPE (Ch17) + T74 LSS (Ch18) |
+| **Test count** | **472 pass, 7 skip** | (446 pass, 7 skip) | (170 pass) | pytest |
+
+**v0.4-prelim key changes (T72 → T76):**
+- **T72 (DAMPE POC):** 36 energy bins from arXiv:1711.10981 Table 1; broken-power-law fit; all
+  4 published DAMPE parameters reproduced within 0.31σ
+- **T73 (DAMPE forward model + joint-fit integration):** Cholis 2009 propagation;
+  Channel 17 `loglike_dampe_cre` wired into T41 (gated by `T73_DAMPE_DISABLE=1`)
+- **T74 (Zhang+2025 LSS / assembly-bias):** SDSS dwarf galaxy anti-correlation between Σ*
+  and large-scale bias; Channel 18 `loglike_lss_assembly_bias`
+- **T75 (v0.7 full T41 rerun):** Bayesian evidence +52 log Z; tension 0.91 → 0.70
+  (below 1.0 threshold); MAP m_chi shifts 364 → 957 GeV (nlive=500)
+- **T76 (nlive=2000 convergence):** log Z converged to −163.29 ± 0.085 (vs nlive=500:
+  −163.24 ± 0.16); tension 0.70 → **0.60** (more robust at higher nlive); wall 440s
+- **T77 (2026-09-01 LZ signal defensive doc):** added §0 to MODEL_ASSUMPTIONS.md
+  documenting the 2.6σ single-event signal; per standing posture (σ_DM-DM ≠ σ_DM-nucleon),
+  this signal does NOT change σ/m
+- **T78 (kinetic-mixing link refinement):** Kahlhoefer et al. formula applied at v0.7 MAP;
+  predicted σ_DM-nucleon ~10⁻¹¹⁷ cm², suppressed by ~70 orders relative to LZ sensitivity
+- **T79 (composite form-factor correction):** F²(q) at LZ energies (negligible, F² ≈ 0.93
+  at 248 keV); relic-density consistency (freeze-in regime, ε ~ 10⁻³⁷ consistent with
+  T_RH > 10¹⁵ GeV); uncertainty band: 50-80 orders
+- **KIV cron `080d2f590251`:** re-checks the LZ paper on **2026-11-01** (60 days from
+  announcement); auto-fires to assess whether T30 Channel 5 limit should be updated
+
+**Cross-validation references:** see `v0.3-prelim/docs/EXTRACT.md` for the canonical
+~1100-word project summary at v0.4-prelim+T75.
+
 ## Headline result — **v0.5 (T70.5, 2026-08-26)** — KSFR mask enabled
 
 **See the [🚨 v0.5 RESULT](#🚨-v0.5-result-2026-08-26-t705-entry) heads-up block above for the full cross-comparison and caveats. The v0.4 historical numbers below in parentheses are preserved for backward compatibility.**
@@ -484,6 +532,7 @@ The KiSS-SIDM canonical constants live in `config.py`
 | **v0.2-prelim** | Intermediate (4 modules) | Adds dSph channel scaffolding |
 | **v0.3-prelim** | Main work — D1 through D15-CORRECTED3, with R12 audit closure (133 modules, 39 tests) | Joint σ/m ~ 0.066 cm²/g at MAP (R12 T41); velocity index a ≈ +0.19 (no significant tension); Benchmark A (composite dark pion + elementary A') declared canonical |
 | **Mediator_Detection v1–v12** | Mediator detection feasibility (within v0.3-prelim/code/) | σ/m ~ 0.07 cm²/g at MeV-scale m_φ (R12), mediator-invisible to LZ only in ε ≪ 10⁻¹⁰ part of posterior |
+| **v0.4-prelim+T75** | Tier-1 milestone (2026-09-02) — T72 DAMPE POC + T73 Channel 17 + T74 Zhang+2025 LSS Channel 18 + T75 v0.7 rerun + T76 nlive=2000 + T77 LZ signal doc + T78 kinetic-mixing + T79 form-factor correction | σ/m ~ 0.27 cm²/g at MAP (nlive=2000); tension T39 vs Yukawa a = **0.60** (below 1.0 threshold); Bayesian evidence log Z = −163.29 ± 0.085; 472 tests passing; 18 channels; KIV cron for 2026-11-01 LZ paper re-check |
 
 ---
 
@@ -626,9 +675,9 @@ Quick bibtex for citing this repo:
 @software{lam_sidm_composite_dm_mediator_2026,
   author = {Lam, K.},
   title = {sidm-composite-dm-mediator},
-  version = {0.3-prelim+T71.5 (Tier B closure 2026-08-28: 7 of 15 v0.6 roadmap items shipped; Drobczyk χ² test added)},
+  version = {0.4-prelim+T75 (Tier-1 milestone 2026-09-02: DAMPE + Zhang+2025 LSS joint-fit rerun; v0.7 result log Z = -163.29 +/- 0.085 at nlive=2000; tension T39 vs Yukawa a = 0.60 below 1.0 threshold; 472 tests passing; 18 channels)},
   year = {2026},
-  month = {8},
+  month = {9},
   url = {https://github.com/chenhk1113-HK/sidm-composite-dm-mediator},
   license = {MIT}
 }
