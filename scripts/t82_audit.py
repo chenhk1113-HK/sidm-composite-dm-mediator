@@ -69,7 +69,7 @@ CHECKS_PER_DOC: dict[str, list[tuple[str, str]]] = {
     ],
     "EXTRACT.md": [
         ("Channels 19", "Channels: **19**"),
-        ("Tests 504", "504 pass"),
+        ("Tests 542", "542 pass"),
         ("σ/m headline", "σ/m = 0.27 cm²/g"),
     ],
     "docs/LAYMAN_SUMMARY_V04_PRELIM_TIER1.md": [
@@ -78,7 +78,7 @@ CHECKS_PER_DOC: dict[str, list[tuple[str, str]]] = {
         ("log Z", "**-163**"),
         ("tension 0.60", "0.60** (below 1.0)"),
         ("channels 19", "**19**"),
-        ("tests 504", "504**"),
+        ("tests 542", "**542**"),
     ],
     "CHANGELOG.md": [
         ("T75 entry", "v0.4-prelim+T75"),

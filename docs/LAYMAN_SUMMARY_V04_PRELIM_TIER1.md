@@ -1,13 +1,20 @@
-# Layman Summary — v0.4-prelim+T75 Tier-1 Milestone (T72 → T81)
+# Layman Summary — v0.4-prelim+T75 Tier-1 Milestone (T72 → T84)
 
 > **For:** Non-experts + users preferring quick summaries over
-> technical detail. Covers the full milestone shipped 2026-09-02:
-> DAMPE + Zhang+2025 LSS joint-fit rerun (T72-T76) + LZ signal
-> defensive docs (T77-T79) + LZ paper validation (T80).
+> technical detail. Covers the full milestone shipped 2026-09-02
+> through 2026-09-03: DAMPE + Zhang+2025 LSS joint-fit rerun
+> (T72-T76) + LZ signal defensive docs (T77-T79) + LZ paper
+> validation (T80) + XENONnT/PandaX competitor watch (T81) +
+> stale-claim audit (T82) + KSFR LATTICE promotion (T83) +
+> Channel 18 ρ sensitivity sweep (T84).
 > **Companion:** [T75 full docs](v0.3-prelim/docs/T75_V07_FULL_T41_RERUN.md),
 > [T76 nlive=2000](v0.3-prelim/docs/T76_V07_NLIVE2000.md),
 > [T77 LZ signal](v0.3-prelim/docs/T77_LZ_2026_09_UPDATE.md),
-> [T80 LZ paper](v0.3-prelim/docs/T80_LZ_PAPER_UPDATE.md).
+> [T80 LZ paper](v0.3-prelim/docs/T80_LZ_PAPER_UPDATE.md),
+> [T81 review response](v0.3-prelim/docs/T81_LZ_REVIEW_RESPONSE.md),
+> [T82 stale-claim audit](v0.3-prelim/docs/T82_STALE_CLAIM_AUDIT.md),
+> [T83 KSFR LATTICE promotion](v0.3-prelim/docs/T83_KSFR_LATTICE_PROMOTION.md),
+> [T84 Channel 18 sensitivity sweep](v0.3-prelim/docs/T84_LSS_RHO_SENSITIVITY.md).
 
 ## What this milestone is, in one sentence
 
@@ -26,7 +33,7 @@ experiment's 2026-09-01 mysterious signal paper.
 | **Bayesian evidence** (log Z) | -215 | **-163** | +52 log-units (substantial evidence gain) |
 | **Velocity-slope tension** | 0.91 (above 1.0) | **0.60** (below 1.0) | -34% (resolved!) |
 | **Channels** | 16 | **19** | +3 (DAMPE + LSS + T81 XENONnT/PandaX) |
-| **Tests passing** | 446 | **504** | +58 |
+| **Tests passing** | 446 | **542** | +96 (T74: +26, T81: +32, T83: +19, T84: +14, intermediate commits: +5) |
 
 **The headline finding:** adding DAMPE + LSS resolved the v0.6
 velocity-slope tension. The project now prefers **heavier DM**
@@ -172,15 +179,18 @@ velocity-slope tension. The Tier-1 milestone is publication-worthy.
 4. **Standing posture preserved** despite LZ news cycle
 5. **KIV cron registered** for 2026-11-01 PRL final-version re-check
 6. **Reproducible scripts** (`scripts/epsilon_lz_check.py`, `scripts/t79_composite_form_factor.py` — T79 was already executed and shows composite form factor F²(q) is small at LZ energies, F² ≈ 0.93 at 248 keV; the dominant suppression is still ε², giving 50-80 orders confidence band)
-7. **Comprehensive docs** (T72-T80, all 6 drift-guard sources updated)
+7. **Comprehensive docs** (T72-T84, all 5 drift-guard sources + T82 stale-claim audit + T83 KSFR LATTICE promotion + T84 Channel 18 sensitivity sweep)
 
 ## Provenance
 
-> v0.4-prelim Tier-1 milestone shipped 2026-09-02. Stand: T72 DAMPE
-> POC, T73 DAMPE joint-fit (Channel 17), T74 Zhang+2025 LSS
-> (Channel 18), T75 v0.7 full rerun, T76 nlive=2000 convergence,
+> v0.4-prelim Tier-1 milestone shipped 2026-09-02 through 2026-09-03.
+> Stand: T72 DAMPE POC, T73 DAMPE joint-fit (Channel 17), T74 Zhang+2025
+> LSS (Channel 18), T75 v0.7 full rerun, T76 nlive=2000 convergence,
 > T77 LZ signal defensive docs, T78 kinetic-mixing refinement,
 > T79 composite form-factor + relic-density, T80 LZ paper
-> validation. Headline: σ/m = 0.27 cm²/g, tension = 0.60, log Z =
-> -163.29 ± 0.085, m_χ ~ 770 GeV (MAP). 504 tests passing, 19
-> channels. Standing posture preserved at v0.4-prelim+T75.
+> validation, T81 LZ1.docx review response + Channel 19 (XENONnT/PandaX),
+> T82 stale-claim audit (32/32 doc-presence + 1 VERSION drift-guard checks pass),
+> T83 KSFR (3,2) fundamental LATTICE promotion, T84 Channel 18 ρ sensitivity sweep.
+> Headline: σ/m = 0.27 cm²/g, tension = 0.60, log Z =
+> -163.29 ± 0.085, m_χ ~ 770 GeV (MAP). **542 tests passing, 19
+> channels.** Standing posture preserved at v0.4-prelim+T75.

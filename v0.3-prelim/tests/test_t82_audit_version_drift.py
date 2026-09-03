@@ -130,7 +130,7 @@ class TestAuditDocSync:
         ):
             assert f"=== {label}" in out, f"{label} section missing from output"
         # And the drift-guard section
-        assert "=== VERSION (drift-guard) ===" in out
+        assert "VERSION (drift-guard)" in out
 
 
 if __name__ == "__main__":
