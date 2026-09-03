@@ -200,7 +200,7 @@ velocity dependence (a), mediator mass (m_φ), and mediator couplings to the Sta
 (ε, α) are simultaneously consistent with all channels.
 
 The model is a single benchmark — **Benchmark A** (composite dark matter + elementary dark photon
-via kinetic mixing), declared in `v0.3-prelim/docs/DARK_SECTOR_LAGRANGIAN.md §9`. Other benchmarks
+via kinetic mixing), declared in `docs/DARK_SECTOR_LAGRANGIAN.md §9`. Other benchmarks
 (composite mediator, SIMP) are documented as deferred.
 
 The framework is a **phenomenology joint-fit tool**, not a discovery. Each data channel has honest

@@ -643,7 +643,7 @@ will add this.
 Per Reviewer 2's recommendation:
 1. **README.md** (top-level) — current headline numbers + caveats
 2. **`v0.3-prelim/docs/R12_AUDIT_CLOSURE.md`** — consolidated post-R12 summary
-3. **`v0.3-prelim/docs/DARK_SECTOR_LAGRANGIAN.md` §9** — Benchmark A canonical definition
+3. **`docs/DARK_SECTOR_LAGRANGIAN.md` §9** — Benchmark A canonical definition
 4. **`v0.3-prelim/docs/REVIEWER_AUDIT_R13.md`** — most recent audit (2026-08-25)
 5. **This document** (`MODEL_ASSUMPTIONS_AND_LIMITATIONS.md`) — single-page assumption summary
 
