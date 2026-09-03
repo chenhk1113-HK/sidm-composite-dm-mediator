@@ -69,11 +69,15 @@ Older audit cycles and superseded docs are preserved **in git history only**:
 - MEDIATOR_DETECTION_SYNTHESIS_v2.md → v11.md — superseded by v12
 - V0_6_BROWER_PROBE_SCOPE, V0_6_TIER_B_CLOSURE, etc. — closure narratives
 
-To access any of these:
+To access any of these (preserved in git history):
 ```bash
 git log --all -- <path>
 git show <commit>:<path>
 ```
+
+R12/R13/R14/T71_8 layman summaries are bundled (collapsed) into
+[`v0.3-prelim/docs/LAYMAN_SUMMARIES_HISTORICAL.md`](v0.3-prelim/docs/LAYMAN_SUMMARIES_HISTORICAL.md)
+for at-a-glance reference.
 
 ## How to get oriented quickly
 
