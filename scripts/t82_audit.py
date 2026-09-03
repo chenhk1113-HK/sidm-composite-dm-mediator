@@ -91,6 +91,20 @@ CHECKS_PER_DOC: dict[str, list[tuple[str, str]]] = {
 }
 
 
+# ---------------------------------------------------------------------------
+# T83.6 (post-review) — VERSION drift-guard.
+# Per Updated review1.docx §1 (received 2026-09-03): the raw VERSION file
+# once lagged behind the badge/CITATION/CHANGELOG. Add an explicit check so
+# any future VERSION-vs-doc drift fails CI rather than slipping past
+# human reviewers. The canonical standing-version string for the
+# current Tier-1 milestone is "0.4-prelim+T75" — bump this constant when
+# the next standing version is published.
+# ---------------------------------------------------------------------------
+
+CANONICAL_STANDING_VERSION = "0.4-prelim+T75"
+VERSION_LABEL = "VERSION"
+
+
 def main() -> int:
     if not GROUND_TRUTH_JSON.exists():
         print(f"ERROR: ground truth JSON not found: {GROUND_TRUTH_JSON}", file=sys.stderr)
@@ -114,25 +128,45 @@ def main() -> int:
     total = 0
     passes = 0
 
-    for fpath_label in (label for _path, label in DOCS):
-        path = REPO / fpath_label
+    for _fpath, label in DOCS:
+        path = REPO / label
         if not path.exists():
-            print(f"=== {fpath_label}: NOT FOUND ===")
+            print(f"=== {label}: NOT FOUND ===")
             any_drift = True
             continue
-        checks = CHECKS_PER_DOC.get(fpath_label, [])
+        checks = CHECKS_PER_DOC.get(label, [])
         if not checks:
             continue
         text = path.read_text(encoding="utf-8")
-        print(f"=== {fpath_label} ===")
-        for label, needle in checks:
+        print(f"=== {label} ===")
+        for chk_label, needle in checks:
             total += 1
             if needle in text:
                 passes += 1
-                print(f"  ✓ {label}: '{needle}' found")
+                print(f"  ✓ {chk_label}: '{needle}' found")
             else:
                 any_drift = True
-                print(f"  ✗ {label}: '{needle}' MISSING")
+                print(f"  ✗ {chk_label}: '{needle}' MISSING")
+
+    # ------------------------------------------------------------------
+    # VERSION drift-guard (T83.6, post-review Updated review1.docx §1).
+    # Confirms the raw VERSION file exactly equals the canonical standing
+    # version string. A diff means the VERSION file hasn't been bumped in
+    # the latest docs-bake commit.
+    # ------------------------------------------------------------------
+    version_path = REPO / VERSION_LABEL
+    if version_path.exists():
+        raw_version = version_path.read_text(encoding="utf-8").strip()
+        total += 1
+        if raw_version == CANONICAL_STANDING_VERSION:
+            passes += 1
+            print(f"=== {VERSION_LABEL} (drift-guard) ===")
+            print(f"  ✓ VERSION = '{raw_version}' matches canonical '{CANONICAL_STANDING_VERSION}'")
+        else:
+            any_drift = True
+            print(f"=== {VERSION_LABEL} (drift-guard) ===")
+            print(f"  ✗ VERSION = '{raw_version}' does NOT match canonical "
+                  f"'{CANONICAL_STANDING_VERSION}' — drift!")
 
     print()
     print("=" * 70)
