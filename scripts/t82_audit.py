@@ -38,7 +38,7 @@ DOCS = [
     ("EXTRACT.md", "EXTRACT.md"),
     ("MODEL_ASSUMPTIONS_AND_LIMITATIONS.md", "MODEL_ASSUMPTIONS_AND_LIMITATIONS.md"),
     ("CHANGELOG.md", "CHANGELOG.md"),
-    ("docs/LAYMAN_SUMMARY_V04_PRELIM_TIER1.md", "docs/LAYMAN_SUMMARY_V04_PRELIM_TIER1.md"),
+    ("docs/LAYMAN_SUMMARY.md", "docs/LAYMAN_SUMMARY.md"),
 ]
 
 CHECKS_PER_DOC: dict[str, list[tuple[str, str]]] = {
@@ -72,7 +72,7 @@ CHECKS_PER_DOC: dict[str, list[tuple[str, str]]] = {
         ("Tests 542", "542 pass"),
         ("σ/m headline", "σ/m = 0.27 cm²/g"),
     ],
-    "docs/LAYMAN_SUMMARY_V04_PRELIM_TIER1.md": [
+    "docs/LAYMAN_SUMMARY.md": [
         ("m_χ MAP", "770 GeV"),
         ("σ/m₀", "0.27 cm²/g"),
         ("log Z", "**-163**"),

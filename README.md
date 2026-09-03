@@ -102,7 +102,7 @@ sidm-composite-dm-mediator/
 │   ├── MATHEMATICS.md                      ← mathematical appendix
 │   ├── TUTORIAL.md                         ← end-to-end tutorial
 │   ├── DARK_SECTOR_LAGRANGIAN.md           ← Benchmark A specification
-│   ├── LAYMAN_SUMMARY_V04_PRELIM_TIER1.md  ← current Tier-1 layman brief
+│   ├── LAYMAN_SUMMARY.md                  ← current Tier-1 layman brief
 │   ├── FINDINGS.md (→ v0.3-prelim/docs/)
 │   ├── REVIEWER_AUDIT_R*.md                ← historical reviewer audits
 │   └── findings_2026_SIDM_papers.md        ← 2026 SIDM literature context
@@ -118,7 +118,7 @@ sidm-composite-dm-mediator/
     └── tests/                             ← 542 pytest tests
 ```
 
-> Most README references in `v0.3-prelim/docs/` use relative paths starting from `v0.3-prelim/`. When in doubt, the canonical reference doc for the current standing version is `v0.3-prelim/docs/LAYMAN_SUMMARY_V04_PRELIM_TIER1.md`.
+> Most README references in `v0.3-prelim/docs/` use relative paths starting from `v0.3-prelim/`. When in doubt, the canonical reference doc for the current standing version is `docs/LAYMAN_SUMMARY.md`.
 
 ---
 

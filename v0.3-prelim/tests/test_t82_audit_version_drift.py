@@ -124,7 +124,7 @@ class TestAuditDocSync:
             "CITATION.cff",
             "MODEL_ASSUMPTIONS_AND_LIMITATIONS.md",
             "EXTRACT.md",
-            "docs/LAYMAN_SUMMARY_V04_PRELIM_TIER1.md",
+            "docs/LAYMAN_SUMMARY.md",
             "CHANGELOG.md",
             "VERSION",
         ):
