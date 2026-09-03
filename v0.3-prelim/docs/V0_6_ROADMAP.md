@@ -10,6 +10,10 @@
 
 ## Items on this roadmap
 
+1. **Item 1 — External Boltzmann solver (micrOMEGAs)** (R14 Rec #1, Tier-2, ~2-4 weeks)
+2. **Item 2 — Hierarchical per-galaxy SPARC likelihood** (R14 Rec #2, Tier-2, ~2-4 weeks)
+3. **Item 3 — Composite-DM direct-detection forward prediction (T87)** (T86.7k+C, Tier-2, ~5-6 hours; registered 2026-09-03 after `consider4.docx` review)
+
 | # | Item | R14 rec | Scope estimate | Status |
 |---|---|---|---|---|
 | 1 | **micrOMEGAs interface** for coupled Boltzmann solver | R14 Rec #9 | Multi-month | Deferred |
@@ -31,6 +35,7 @@
 | 17 | **KiSS-SIDM UFD fidelity** | R16 #9 | Multi-week | ⚠️ Partial-closure T71.7: wrapper patch (KISS_SIDM_TIMEOUT_S env var) shipped; T38a N=5e4 dwarf re-run TIMED OUT at 7200s with only 2/10 snapshots. Honest verdict: UFD KiSS-SIDM is structurally compute-prohibitive at single-session budget. Defer to v0.7+ requires architectural change (smaller N or fewer snapshots). See V0_6_KISS_SIDM_TIMEOUT_VERDICT.md |
 | 18 | **Form-factor ansatz uncertainty sampling** | R16 #5(c) | Multi-week | ✅ Shipped T71.6 (H4.2 sweep already on disk: log Z range = 0.375 < 1 → ROBUST; see V0_6_LATTICE_FORMFACTOR_CLOSURE.md) |
 | 19 | **Lattice-informed KSFR ratios** | R16 #5(d) | Out-of-band | ⚠️ Partial T83 (2026-09-03): (3, 2) fundamental promoted to LATTICE per Shindler 2019; (2, 3) fundamental demoted to AF_EXCLUDED (asymptotic-freedom violation: SU(2) Nf=3 is IR conformal, KSFR undefined); 5/7 combos now have a defensible class (3 LATTICE, 2 ANALYTICAL, 0 ESTIMATED for the row reach-arounds, 1 N/A); (3, 4) ESTIMATED remains until a continuum-chiral reference for SU(3) Nf=4 appears. See V0_6_LATTICE_FORMFACTOR_CLOSURE.md → T83_KSFR_LATTICE_PROMOTION.md |
+| 20 | **Composite-DM direct-detection forward prediction (T87)** | T86.7k+C, post-Consider4 | ~5-6 hrs wall | ⏸️ Deferred — see Item 3 below. Premature at LZ 2.6σ but allowed if user has bandwidth and wants the publishable claim. |
 
 ### Current stand-ins (good enough for v0.5/T70.x results)
 
@@ -117,11 +122,112 @@ This is **the more impactful of the two deferred items**. The current v0.5 resul
 
 ---
 
+## Item 3 — Composite-DM direct-detection forward prediction (T87)
+
+Added 2026-09-03 in response to user review (`consider4.docx`) and the LZ
+2026-09-02 preprint's 2.6σ single-event observation at 248 keV.
+
+### Motivation
+
+The project's v0.7 MAP (log Z = −163.29 ± 0.085; m_χ = 770 GeV; σ/m = 0.27
+cm²/g; m_φ = 453 MeV; ε ~ 10⁻³⁷) sits in the same mass window as the LZ
+paper's best-fit (1000 GeV/c² Ls₁₀ EFT operator). The 248 keV single-event
+observation has 2.6σ global / 3.4σ local significance, and the LZ paper
+itself flags the event as requiring non-standard (inelastic or SD) interactions
+to explain.
+
+**The project's elastic-SI σ_DM-nucleon ~ 10⁻¹¹¹ cm² is 66 orders of magnitude
+below LZ's sensitivity**, which means the model is "evading" LZ in the
+elastic-SI channel (T62/T76 framing). But LZ is *actually* probing inelastic and
+SD channels (NREFT operators O₁ˢ, O₄ᵛ, Ls₁₀; inelastic DM with mass
+splitting δ ≈ 200-300 keV). The project has inelastic σ_DM-DM (T43,
+T41_INELASTIC toggle) but has **not computed inelastic σ_DM-nucleon** — the
+quantity that determines whether composite DM can produce the observed 248
+keV recoil at the observed rate.
+
+### What T87 will compute
+
+1. **Inelastic σ_DM-nucleon** with composite-mediator coupling
+   (Tucker-Smith & Weiner 2001 PRD 64, 043502 formalism + composite-DM
+   mediator from KSFR sector). Standard NREFT O₁ˢ operator selection (no
+   custom SD decomposition — uses established NREFT literature).
+   Returns σ_inel_nuc(m_χ, m_φ, α_χ, δ, E_R) at the LZ event energy
+   E_R = 248 keV.
+
+2. **Forward-predicted LZ event count** at v0.7 MAP. Inputs:
+   σ_inel_nuc, LZ detector parameters (2.84 tonne-years, 5.5 tonne active
+   xenon mass), χ₂ threshold kinematics. Output: expected N_events with
+   Poisson uncertainty.
+
+3. **Verdict** based on data-driven comparison:
+   - If predicted N_events = 1 ± Poisson_uncertainty → "predicts LZ event"
+   - If predicted N_events >> 1 → "constrains composite-DM parameter space"
+   - If predicted N_events << 1 → "LZ event not explained by composite DM
+     at v0.7 MAP; revisit microphysics"
+
+### Scope estimate (single-session)
+
+| Phase | Task | Wall | Risk |
+|---|---|---|---|
+| **3.1** | Audit existing inelastic-DM modules: `t43_inelastic_dm.py`, `t43_inelastic_joint_fit.py`, `h4_inelastic_sweep.py`. Confirm what's reusable | 30 min | Low |
+| **3.2** | Implement `t87_composite_inelastic_nucleon.py`: T&S+W inelastic formula + composite-mediator coupling + O₁ˢ NREFT operator + form-factor F²(q) at E_R = 248 keV | 1.5-2 hrs | Medium (operator selection) |
+| **3.3** | Implement `t87_lz_event_rate.py`: differential rate dR/dE_R with χ₂ threshold, integrate to expected N_events in 2.84 tonne-years | 1-1.5 hrs | Low |
+| **3.4** | Tests: `test_t87_inelastic_nucleon.py` — elastic-limit recovery, kinematic threshold, event-rate smoke test | 1 hr | Low |
+| **3.5** | Smoke test at v0.7 MAP (m_χ = 770 GeV, m_φ = 453 MeV, g_χ = 1.19, ε ~ 10⁻³⁷, α_χ ~ 0.11). Sweep δ ∈ [50, 500] keV (matches LZ paper's 200-300 keV). | 30 min | Low |
+| **3.6** | Write `T87_LZ_FORWARD_PREDICTION.md` with verdict + quantitative basis | 30 min | Low |
+
+**Total: ~5-6 hours wall** (single-session effort, but multi-hour).
+
+### Dependencies to add (per AGENTS.md rule 17)
+
+**None.** Uses only existing project deps (T43, T79, T62/T76) + stdlib
+(numpy, scipy.stats for Poisson). No new pip installs.
+
+### Why this matters (the upside)
+
+The project currently claims "compatible with LZ" (T77-T80 + T86.7j). T87
+elevates this to one of three outcomes:
+
+| Outcome | Scientific claim |
+|---|---|
+| **Predicts N_events ≈ 1** | **Composite DM explains the LZ event.** Transformative upgrade from "compatible" to "predicts." Publishable in PRL/PRD. |
+| **Predicts N_events >> 1** | **Composite DM is constrained.** The model's inelastic channel is too strong at v0.7 MAP — falsification signal for the (m_χ, m_φ, δ) combination. |
+| **Predicts N_events << 1** | **Composite DM does not explain the LZ event at v0.7 MAP.** The model remains a valid SIDM candidate but cannot claim the LZ event. |
+
+Each outcome is a *positive scientific result* (prediction, constraint, or
+null result) rather than an evasion. This is the Tier-2 effort that closes
+the "10⁷¹× below LZ is a red herring" critique raised in `consider4.docx`.
+
+### Why this can wait (the downside)
+
+- LZ 2.6σ is **below the project's pre-registered ≥3σ trigger** (T78).
+- The event may be statistical fluke or background (LZ paper itself
+  expresses internal tension: "very unlikely to observe a single recoil
+  at this energy without also observing several more events at lower
+  energies").
+- LZ has ≥3× more unanalyzed data already on disk; XENONnT and PandaX-4T
+  are re-examining archives. A definitive answer may emerge from the
+  collaboration within 6-12 months, independent of this project's effort.
+
+### Recommendation
+
+**Run T87 in a follow-up round** (not in the current T86.7k+C round, which
+is docs-only). This matches the project's pre-registered T78 trigger
+discipline: <3σ → doc-only (current); ≥3σ → run the analysis. T87 is the
+analysis that would run at ≥3σ; running it now is *premature* but
+*allowed* if the user has the bandwidth and wants the publishable claim.
+
+---
+
 ## Priority ordering (recommendation)
 
-If both items are picked up, **do #2 first** because (a) the wall-time is shorter, (b) the impact on the headline v0.5/v0.6 result is larger, and (c) the per-galaxy fit infrastructure already partially exists.
+If multiple items are picked up:
 
-If only one is picked up, **#2** is the right choice.
+- **#2 first** (hierarchical SPARC) — wall-time shortest, headline-impact largest.
+- **#3 second** (composite-DM direct-detection forward prediction) — single-session scope (~5-6 hrs); would elevate "compatible with LZ" to "predicts LZ event" if successful. Premature at LZ 2.6σ but allowed if user has bandwidth.
+- **#1 last** (micrOMEGAs) — multi-month scope, awaits explicit user interest or v0.5 falsification of calibrated inverse-proportionality.
+
+If only one is picked up: **#2** (still the right choice for v0.5/v0.6 headline update).
 
 **#1 (micrOMEGAs) should wait** until either (a) the user has explicit interest in relic-density precision, or (b) the v0.5 result is shown to be in a freeze-out regime where the calibrated inverse-proportionality is provably wrong (factor of >2 shift in σ/m_0 or ε when the new solver is applied).
 
@@ -134,8 +240,13 @@ If only one is picked up, **#2** is the right choice.
 - `v0.3-prelim/code/t55_wimp_relic_calibration.py` — the calibrated inverse-proportionality used in place of micrOMEGAs
 - `v0.3-prelim/code/t10_vdep_per_galaxy.py` — per-galaxy SIDM fit, scoped out of v0.3
 - `v0.3-prelim/code/t11_vdep_aggregate.py` — the saturation-score aggregator
+- `v0.3-prelim/docs/T86_PLAUSIBILITY_AUDIT.md` — LZ + Planck-scale plausibility audit (T86.7j)
+- `v0.3-prelim/docs/consider4_review/` — the `consider4.docx` review that motivated Item #3
+- `v0.3-prelim/code/t43_inelastic_dm.py` — inelastic σ_DM-DM (reusable for T87)
+- `v0.3-prelim/code/t62_lz_direct_detection.py` + `t76_reframe_direct_detection.py` — direct-detection evasion framing
+- `v0.3-prelim/code/t79_*` — composite form-factor F²(q) at LZ energies
 
 ---
 
-**Last updated:** 2026-08-26 (T70.9 + T71.0 cycle)
-**Next action:** none scheduled — await user direction or reviewer escalation.
+**Last updated:** 2026-09-03 (T86.7k+C — added Item 3, registered T87 forward-prediction as Tier-2)
+**Next action:** none scheduled — await user direction. T87 is registered but not initiated.

@@ -296,6 +296,86 @@ stance. **The real caveat is the reheating-temperature requirement
 
 ---
 
+## Composite-channel gap analysis (T86.7k+C, 2026-09-03 — post-Consider4)
+
+After T86.7j shipped, the user uploaded `consider4.docx` (third-party review,
+109 paragraphs, ~13 KB). The reviewer correctly identifies one substantive
+gap that T86.7j did **not** address: **the LZ paper is testing inelastic-DM
+and SD operators, not elastic SI.** The project's "10⁻¹¹¹ cm² elastic SI"
+number is answering a question LZ isn't actually asking.
+
+### What the reviewer got right
+
+| Reviewer claim | Verified |
+|---|---|
+| LZ paper tests inelastic-DM + NREFT operators (O₁ˢ, O₄ᵛ, Ls₁₀; inelastic DM with δ ≈ 200-300 keV) | ✅ Verified by reading the LZ paper directly |
+| Elastic SI is a poor fit to the observed event spectrum | ✅ Confirmed by LZ paper's own analysis |
+| Composite DM naturally has SD + inelastic channels | ✅ Composite pion = constituent quark spins → SD operators; mass-splitting → inelastic transitions |
+| The "10⁷¹× below LZ" claim is a red herring for what LZ is probing | ✅ Directionally right — LZ is in the inelastic/SD regime |
+| The project needs composite-DM inelastic σ_DM-nucleon + LZ-event forward prediction | ✅ **Genuine substantive gap** |
+
+### What the reviewer got wrong (stale premises)
+
+| Reviewer claim | Project state |
+|---|---|
+| "T79 composite form-factor ⏳ Pending" | ❌ T79 already shipped (commit `6b83904`); F²_gaussian ≈ 0.93, F²_dipole ≈ 0.87 at 4 LZ energies |
+| "Relic-density + BBN/CMB consistency pending" | ❌ T79 §"Relic-density consistency check" verifies freeze-in regime; T_RH > 10¹⁵ GeV now surfaced in CURRENT.md |
+| "Inelastic/SD cross-section ⏳ Not started" | ⚠️ **Partially right** — inelastic σ_DM-DM exists (T43, T41_INELASTIC toggle, h4_inelastic_sweep, test_inelastic_wrapper_regression). Inelastic σ_DM-nucleon + composite-SD operator decomposition is genuinely missing |
+
+### The genuine gap
+
+**Composite-DM inelastic σ_DM-nucleon** at v0.7 MAP, with the standard NREFT
+operator selection (O₁ˢ, no custom SD decomposition). This is the quantity
+that determines whether composite DM can produce the observed 248 keV recoil
+at the observed rate.
+
+**Forward-prediction LZ event count** — given σ_inel_nuc, LZ detector
+parameters (2.84 tonne-years, 5.5 tonne active xenon), and χ₂ threshold
+kinematics, what is the expected N_events vs 1 observed?
+
+### Verdict options
+
+| Predicted N_events | Scientific claim |
+|---|---|
+| ≈ 1 (Poisson-consistent) | **Composite DM predicts the LZ event.** Elevates from "compatible" to "predicts." Publishable. |
+| >> 1 | **Composite DM at v0.7 MAP is constrained** — the inelastic channel is too strong. Falsification signal. |
+| << 1 | **Composite DM does not explain the LZ event at v0.7 MAP.** Model remains a valid SIDM candidate but cannot claim the event. |
+
+Each outcome is a **positive scientific result** (prediction, constraint,
+or null result) rather than an evasion.
+
+### Status
+
+Registered as Tier-2 roadmap Item #3 in `V0_6_ROADMAP.md`. **Not initiated**
+in this round (T86.7k+C is docs-only). Per the project's pre-registered T78
+trigger discipline: <3σ → doc-only (current); ≥3σ → run the analysis. T87
+is the analysis that would run at ≥3σ; running it now is *premature* but
+*allowed* if user has bandwidth.
+
+### Existing modules T87 will reuse
+
+- `t43_inelastic_dm.py` — inelastic σ_DM-DM (Tucker-Smith & Weiner 2001
+  formalism + kinematic suppression F_inel)
+- `t43_inelastic_joint_fit.py` — 6D posterior with δ as free parameter
+- `h4_inelastic_sweep.py` — sensitivity sweep
+- `t62_lz_direct_detection.py` + `t76_reframe_direct_detection.py` — direct-detection evasion
+- `t79_*` — composite form factor F²(q) at LZ energies (F²_gaussian ≈ 0.93 at 248 keV)
+- `test_inelastic_wrapper_regression.py` — passes 1/3 (2 env-skipped)
+- `t41_INELASTIC=on` env-var toggle — wires inelastic channel into T41
+
+### Existing modules T87 will add
+
+- `t87_composite_inelastic_nucleon.py` — NREFT O₁ˢ operator + composite
+  form factor + inelastic kinematics, returns σ_inel_nuc(E_R)
+- `t87_lz_event_rate.py` — differential rate dR/dE_R with χ₂ threshold,
+  integrate to expected N_events in 2.84 tonne-years
+- `test_t87_inelastic_nucleon.py` — regression tests
+- `T87_LZ_FORWARD_PREDICTION.md` — verdict + quantitative basis
+
+**No new dependencies.** All stdlib + numpy + scipy.stats (Poisson).
+
+---
+
 ## Combined plausibility verdict
 
 | Aspect | Status |

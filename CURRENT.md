@@ -122,6 +122,39 @@ substantive hidden assumption and is now surfaced.
 **No posterior re-run.** No new physics. No new channels. The standing
 posture is preserved; the audit + tests confirm clean.
 
+### Composite-channel gap (T86.7k+C, post-Consider4 review)
+
+User uploaded `consider4.docx` (109-paragraph third-party review) after T86.7j
+shipped. The reviewer correctly identifies that the LZ paper is testing
+**inelastic-DM and SD operators**, not elastic SI — the project's "10⁻¹¹¹
+cm² elastic SI" number is answering a question LZ isn't actually asking.
+
+**Genuine gap:** composite-DM inelastic σ_DM-nucleon + LZ-event forward
+prediction. The reviewer is right that this is the missing piece that would
+elevate the project from "compatible with LZ" to "predicts LZ event."
+
+**Status:** Registered as Tier-2 roadmap Item #3 in
+[`v0.3-prelim/docs/V0_6_ROADMAP.md`](v0.3-prelim/docs/V0_6_ROADMAP.md). **Not
+initiated** in this round (T86.7k+C is docs-only). Per the project's
+pre-registered T78 trigger discipline: <3σ → doc-only (current); ≥3σ →
+run the analysis. T87 is the analysis that would run at ≥3σ; running it
+now is premature but allowed.
+
+**Three reviewer claims corrected as stale premises** (full analysis in
+[`v0.3-prelim/docs/T86_PLAUSIBILITY_AUDIT.md`](v0.3-prelim/docs/T86_PLAUSIBILITY_AUDIT.md)
+§"Composite-channel gap analysis"):
+
+1. "T79 composite form-factor ⏳ Pending" — T79 already shipped at commit
+   `6b83904` (2026-09-02). F²_gaussian ≈ 0.93, F²_dipole ≈ 0.87 at 4 LZ
+   energies.
+2. "Relic-density + BBN/CMB consistency pending" — T79 §"Relic-density
+   consistency check" verifies freeze-in regime at ε ~ 10⁻³⁷; T_RH > 10¹⁵
+   GeV now surfaced in CURRENT.md.
+3. "Inelastic/SD cross-section ⏳ Not started" — partially right.
+   Inelastic σ_DM-DM exists (T43, T41_INELASTIC, h4_inelastic_sweep).
+   Inelastic σ_DM-nucleon + composite-SD operator decomposition is
+   genuinely missing.
+
 ## Where to read deeper
 
 - README.md — full project description + quick-start (440 lines)

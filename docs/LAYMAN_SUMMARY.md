@@ -218,6 +218,30 @@ worth flagging.
 - Drift-guard audit: 40/40 ALL CLEAR
 - **No posterior re-run**; **no new physics**; **no new channels**
 
+### Honest caveats — T86.7k+C composite-channel gap (post-Consider4 review)
+
+After T86.7j, a third-party reviewer (`consider4.docx`, 109 paragraphs)
+correctly identified that the LZ paper is testing **inelastic-DM and SD
+operators**, not elastic SI. The project's "10⁻¹¹¹ cm² elastic SI" number
+is correct for the elastic-SI channel — but LZ is actually probing
+inelastic and SD channels, which our composite model naturally exhibits
+but which we have not yet quantified.
+
+**Genuine gap:** composite-DM inelastic σ_DM-nucleon + LZ-event forward
+prediction. Registered as Tier-2 roadmap Item #3 (see `V0_6_ROADMAP.md`).
+**Not initiated** in this round (T86.7k+C is docs-only). Per the project's
+pre-registered T78 trigger discipline: <3σ → doc-only (current); ≥3σ →
+run the analysis. T87 is the analysis that would run at ≥3σ; running it
+now is premature but allowed.
+
+Three reviewer claims were stale premises:
+1. "T79 form-factor calc pending" — T79 already shipped at commit `6b83904`
+2. "Relic-density check pending" — T79 §"Relic-density consistency check"
+   verifies freeze-in regime; T_RH > 10¹⁵ GeV now surfaced in CURRENT.md
+3. "Inelastic/SD cross-section not started" — partially right. Inelastic
+   σ_DM-DM exists (T43, T41_INELASTIC). Inelastic σ_DM-nucleon + composite-SD
+   operator decomposition is genuinely missing.
+
 ## Why this is the most important milestone since v0.3-prelim
 
 The LZ paper is the **first independent experimental cross-check** of

@@ -134,6 +134,75 @@ worth flagging.
 
 ---
 
+## [T86.7k+C] — 2026-09-03
+
+**Composite-channel gap analysis** addressing the substantive point in
+`consider4.docx` (third-party review, 109 paragraphs) that arrived after
+T86.7j shipped. **Docs-only round** — no new code, no posterior re-run.
+
+**Trigger:** User message 2026-09-03 — "I want to really close the gap."
+
+**What shipped (5 doc updates, no code):**
+
+1. **`v0.3-prelim/docs/V0_6_ROADMAP.md`** (modified): Added Tier-2 Item 3
+   — "Composite-DM direct-detection forward prediction (T87)". Scope:
+   ~5-6 hrs wall. Estimated effort: 1.5-2 hrs for inelastic σ_DM-nucleon
+   module + 1-1.5 hrs for LZ event-rate module + 1 hr for tests + 30 min
+   for smoke test at v0.7 MAP + 30 min for verdict writeup. No new deps.
+2. **`v0.3-prelim/docs/T86_PLAUSIBILITY_AUDIT.md`** (modified): Added
+   "Composite-channel gap analysis" section with reviewer claim-by-claim
+   verification, status of existing inelastic-DM modules (T43,
+   T41_INELASTIC, h4_inelastic_sweep, test_inelastic_wrapper_regression),
+   and the genuine-gap itemization.
+3. **`CURRENT.md`** (modified): Added "Composite-channel gap
+   (T86.7k+C, post-Consider4 review)" subsection under "Plausibility audit".
+4. **`docs/LAYMAN_SUMMARY.md`** (modified): Added "Honest caveats —
+   T86.7k+C composite-channel gap" subsection.
+5. **`v0.3-prelim/docs/consider4_review/`** (NEW): Created folder with
+   `consider4_source.docx` (13 KB) + `README.md` (3.5 KB) for reviewer-input
+   traceability per AGENTS.md rule 21.
+
+**The genuine gap (reviewer was right):**
+
+- The LZ paper tests **inelastic-DM and SD operators** (NREFT O₁ˢ, O₄ᵛ,
+  Ls₁₀; inelastic DM with δ ≈ 200-300 keV), not elastic SI.
+- The project's "10⁻¹¹¹ cm² elastic SI" number is correct for the
+  elastic-SI channel, but LZ is actually probing inelastic/SD channels.
+- Composite DM naturally has SD + inelastic channels (constituent spins,
+  mass splitting), but the project has NOT computed inelastic σ_DM-nucleon
+  or composite-DM SD operator decomposition.
+- This is the missing piece that elevates "compatible with LZ" to
+  "predicts LZ event" (if successful) or to "constrained/falsified" (if
+  the predicted event rate doesn't match).
+
+**Three reviewer claims that were stale premises:**
+
+1. "T79 form-factor calc pending" — T79 already shipped at commit `6b83904`.
+2. "Relic-density check pending" — T79 §"Relic-density consistency check"
+   verifies freeze-in regime; T_RH > 10¹⁵ GeV now surfaced in CURRENT.md.
+3. "Inelastic/SD cross-section not started" — partially right. Inelastic
+   σ_DM-DM exists (T43, T41_INELASTIC, h4_inelastic_sweep). Inelastic
+   σ_DM-nucleon + composite-SD operator decomposition is genuinely missing.
+
+**Standing posture preserved:** log Z = −163.29 ± 0.085, m_χ = 770 GeV,
+σ/m = 0.27 cm²/g, 19 channels. No posterior re-run. No new physics.
+
+**T87 (the code work) is registered but NOT initiated** in this round.
+Per the project's pre-registered T78 trigger discipline: <3σ → doc-only
+(current); ≥3σ → run the analysis. T87 is the analysis that would run at
+≥3σ; running it now is premature but allowed per user direction.
+
+**Verification:**
+- Drift-guard audit: 40/40 ALL CLEAR
+- Drift-guard tests: 5/5
+- Test suite: 540 pass / 8 skip (env-conditional; canonical WSL count is
+  542 pass / 6 skip per standing posture)
+
+**Next round:** T87 (full forward-prediction code + tests + verdict doc)
+initiated if user gives the green light.
+
+---
+
 ## [T85] — 2026-09-03
 
 **README.md streamline** (Option C precursor to T86). Standing
