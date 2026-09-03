@@ -86,8 +86,53 @@ doc-pack restructure): `CHANGELOG.md` thinning. Currently 219 KB /
 rename + standing version), keep T85+ entries at full fidelity,
 collapse older rounds to one-line commit-references.
 
+## [T86.7j] — 2026-09-03
 
-<<<SEP>>>
+**Plausibility audit** addressing two user-raised concerns:
+(1) Does the LZ 2.6σ finding undermine the model?
+(2) Does the Planck-length extrapolation invalidate the σ_DM-nucleon
+suppression claim?
+
+**Trigger:** User upload of `Consider3.docx` (third-party review,
+181 paragraphs) + the actual LZ preprint
+(`LZ_Preprint_260901_Dark_Matter_EFT_Nuclear_Recoil_Search_at_Higher.pdf`,
+25 pages, 2026-09-02).
+
+**What shipped:**
+
+1. **`v0.3-prelim/docs/T86_PLAUSIBILITY_AUDIT.md`** (NEW, ~360 lines):
+   Full analysis with verbatim LZ paper quotes, numerical derivations,
+   and tables comparing LZ best-fit (1000 GeV/c² Ls₁₀) against project
+   v0.7 MAP (770 GeV). Verdict: both concerns resolve to **validation,
+   not falsification**.
+
+2. **`CURRENT.md`** (modified): added `## Plausibility audit` section
+   + fixed drift-guard count consistency (40/40 not 32/32).
+
+3. **`docs/LAYMAN_SUMMARY.md`** (modified): added `## Honest caveats —
+   T86.7j plausibility audit` section. Reheating-temperature requirement
+   (T_RH > 10¹⁵ GeV) — a load-bearing assumption previously buried in
+   T79 — is now surfaced in the layman summary.
+
+4. **`scripts/t82_audit.py`** (modified): drift-guard check updated
+   from "32/32 ALL CLEAR" to "40/40 ALL CLEAR".
+
+**Standing posture preserved:** log Z = −163.29 ± 0.085, m_χ = 770 GeV,
+σ/m = 0.27 cm²/g, 19 channels. **No posterior re-run.** No new physics.
+
+**Verification:** drift-guard audit 40/40 ALL CLEAR; 5/5 drift-guard
+tests passing; test suite 540 pass / 8 skip (env-conditional; canonical
+WSL count is 542 pass / 6 skip per standing posture).
+
+**One caveat surfaced:** MAP ε ~ 10⁻³⁷ places the project in the
+freeze-in regime, which requires T_RH > 10¹⁵ GeV or non-standard
+cosmology. Standard cosmology has T_RH ~ 10⁹-10¹⁰ GeV. Documented in
+T79 §"Relic-density consistency check" but is now prominent in
+CURRENT.md and LAYMAN_SUMMARY.md. Not a falsification (freeze-in is
+well-established per Hall et al. 2010), but a load-bearing assumption
+worth flagging.
+
+---
 
 ## [T85] — 2026-09-03
 
@@ -118,8 +163,7 @@ version unchanged (`v0.4-prelim+T75`).
 **Verification:** Full test suite 542 pass / 6 skip; audit 32/32
 ALL CLEAR at time of merge.
 
-
-<<<SEP>>>
+---
 
 ## [T84] — 2026-09-03
 
@@ -195,8 +239,7 @@ correct under reasonable ρ variation.
 Standing version `v0.4-prelim+T75`. 542 tests passing (was 528; +14).
 Drift-guard remains `33/33 ALL CLEAR`.
 
-
-<<<SEP>>>
+---
 
 ## [T83] — 2026-09-03
 
@@ -270,8 +313,7 @@ KSFR_NC_NF_TABLE.md.
 **No version bump.** T83 is refinement + audit (no posterior change).
 Standing version: `v0.4-prelim+T75`. 523 tests passing (was 504; +19).
 
-
-<<<SEP>>>
+---
 
 ## [T81] — 2026-09-02
 

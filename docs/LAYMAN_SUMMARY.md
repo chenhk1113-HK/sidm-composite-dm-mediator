@@ -157,6 +157,67 @@ not absolute.
    but the MAP shift (364 → 770 GeV) is sensitive to multi-modal
    posteriors.
 
+## Honest caveats — T86.7j plausibility audit (2026-09-03)
+
+After reading the actual LZ preprint + a third-party review (`Consider3.docx`),
+two specific concerns were raised. Both addressed here. **Full analysis with
+verbatim paper quotes + numerical derivations:**
+[`v0.3-prelim/docs/T86_PLAUSIBILITY_AUDIT.md`](../v0.3-prelim/docs/T86_PLAUSIBILITY_AUDIT.md).
+
+### Concern 1: Does LZ's 2.6σ event undermine the model?
+
+**No — it's a positive signal in the project's mass window.**
+
+| | LZ paper | Project v0.7 |
+|---|---|---|
+| Mass window | **1000 GeV/c² best fit** (Ls₁₀ EFT operator) | **770 GeV** (MAP) |
+| Physics regime | NREFT + inelastic DM | secluded A' + composite pion |
+| Same mass window? | ✅ Yes (700-1000 GeV "heavy WIMP" regime) |
+| Same physics regime? | ✅ Yes (the LZ paper tests exactly the framework the project predicts) |
+| σ_DM-nucleon compatible? | ✅ Yes — project's ~10⁻¹¹¹ cm² is **66 orders** below LZ's sensitivity |
+
+The LZ paper itself says it is "very unlikely to observe a single recoil at
+this energy without also observing several more events at lower energies"
+— i.e., the paper flags internal tension. It is **not** a detection claim.
+
+**Standing trigger policy:** <3σ → doc-only (current); ≥3σ → update
+Channel 5 + re-run; ≥5σ → v0.5-prelim release. The KIV cron
+`080d2f590251` re-checks 2026-11-01.
+
+### Concern 2: Is the model "below the Planck length" — and does that matter?
+
+**No — "below Planck length" is a category error.** Cross-sections are
+areas (cm²), not lengths (cm). The correct comparison is to the
+**Planck area** (ℓ_P² ≈ 2.6×10⁻⁶⁶ cm²). The project's σ_DM-nucleon
+~10⁻¹¹¹ cm² is ~10⁴⁶× smaller than the Planck area — i.e., deep in the
+"QFT shouldn't apply" regime, but the formula is computing a probability,
+not a physical size.
+
+**What about the dominant suppression?** It's ε² (29 orders from ε ~ 10⁻³⁷),
+with composite form-factor corrections of ~13% (Gaussian ×0.93, dipole ×0.87
+at LZ recoil energies per T79). **Not** ±5 orders as the reviewer suggested.
+
+### The one honest new caveat: reheating temperature
+
+The project sits in the **freeze-in regime** (29 orders below the typical
+"secluded" regime ε ≲ 10⁻⁸). This requires **T_RH > 10¹⁵ GeV** (the
+reheating temperature after inflation) or non-standard cosmology. Standard
+cosmology has T_RH ~ 10⁹-10¹⁰ GeV. **The project's MAP requires higher
+reheating or alternative production mechanisms** — this is documented
+in T79 §"Relic-density consistency check" but is now surfaced here.
+
+This is **not a falsification** — freeze-in is well-established in the
+literature (Hall et al. 2010) — but it **is** a load-bearing assumption
+worth flagging.
+
+### What didn't change
+
+- Standing version: **v0.4-prelim+T75** (no bump)
+- Joint-fit posterior: **log Z = −163.29 ± 0.085**, m_χ = 770 GeV, σ/m = 0.27 cm²/g
+- Tests: 542 pass / 6 skip
+- Drift-guard audit: 40/40 ALL CLEAR
+- **No posterior re-run**; **no new physics**; **no new channels**
+
 ## Why this is the most important milestone since v0.3-prelim
 
 The LZ paper is the **first independent experimental cross-check** of

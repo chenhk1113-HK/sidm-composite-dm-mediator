@@ -96,7 +96,7 @@ CHECKS_PER_DOC: dict[str, list[tuple[str, str]]] = {
         ("Tension", "0.60σ"),
         ("Channels", "19 channels"),
         ("542 tests", "542 pass"),
-        ("Drift-guard", "32/32 ALL CLEAR"),
+        ("Drift-guard", "40/40 ALL CLEAR"),
     ],
 }
 

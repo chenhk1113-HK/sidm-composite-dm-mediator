@@ -66,19 +66,73 @@ sampling. **19 channels** of observational data constrain the posterior.
 ## Standing test count
 
 - **542 pass / 6 skip** (post-T84)
-- Drift-guard audit (`scripts/t82_audit.py`): **32/32 ALL CLEAR**
+- Drift-guard audit (`scripts/t82_audit.py`): **40/40 ALL CLEAR**
 - Standing version file: `0.4-prelim+T75` (verified by audit)
+
+## Plausibility audit — LZ finding + Planck-scale concerns (T86.7j, 2026-09-03)
+
+Two concerns surfaced in 2026-09-03 from `Consider3.docx` + the actual LZ
+preprint. Both addressed with verbatim paper quotes + numerical derivations.
+**Full analysis:** [`v0.3-prelim/docs/T86_PLAUSIBILITY_AUDIT.md`](v0.3-prelim/docs/T86_PLAUSIBILITY_AUDIT.md).
+
+### Concern 1 — LZ 2.6σ event (paper appeared 2026-09-02)
+
+| | LZ paper | Project v0.7 |
+|---|---|---|
+| Event | 248 ± 23 ± 23 keV single recoil, 2.84 tonne-years | (not in scope — measured) |
+| Significance | 2.6σ global / 3.4σ local | Below 3σ threshold |
+| Best-fit m_χ | **1000 GeV/c²** (Ls₁₀ EFT operator) | **770 GeV** (MAP) — within posterior |
+| σ_DM-nucleon (paper's implied) | ~10⁻⁴⁵ cm² for inelastic at 1 TeV | ~10⁻¹¹¹ cm² (Kahlhoefer point-particle) |
+| σ_DM-nucleon ratio | — | **66 orders below** LZ sensitivity |
+
+**Verdict: validation, not falsification.** Same mass window (700-1000 GeV);
+same physics regime (NREFT + inelastic DM); orthogonal-physics stance
+preserved (σ_DM-nucleon ~66 orders below LZ). Standing trigger policy:
+<3σ → doc-only (current); ≥3σ → update Channel 5 + re-run T41; ≥5σ →
+v0.5-prelim release. KIV cron `080d2f590251` re-checks 2026-11-01.
+
+### Concern 2 — Planck-length extrapolation
+
+- σ_DM-nuc ≈ 10⁻¹¹¹ cm² is **~10⁴⁶× smaller than the Planck area** (ℓ_P² ≈
+  2.6×10⁻⁶⁶ cm²), NOT smaller than the Planck length (different dimensions).
+  The "below Planck length" framing is a **category error**.
+- Composite form-factor correction at LZ energies is **~13%** (F²_gaussian
+  ≈ 0.93, F²_dipole ≈ 0.87 per T79 §"Composite form-factor calculation") —
+  NOT ±5 orders as the reviewer suggested. Dominant suppression is ε².
+- **Honest caveat:** ε ~ 10⁻³⁷ is **29 orders below the "secluded" regime**
+  (ε ≲ 10⁻⁸ per Coogan et al. 2024). The project's posterior falls in the
+  **freeze-in regime**, which requires **T_RH > 10¹⁵ GeV** or non-standard
+  cosmology. This is documented in T79 §"Relic-density consistency check"
+  but is **not** prominent in the layman summary. Surfaced here.
+
+**Verdict:** the formula's regime-of-validity question is real but separate
+from whether the model fits the data better than alternatives. **log Z =
+−163.29 ± 0.085** is the Bayesian evidence comparison; whether the
+Kahlhoefer formula extrapolates to ε ~ 10⁻³⁷ is a separate question.
+The reheating-temperature assumption (T_RH > 10¹⁵ GeV) is the only
+substantive hidden assumption and is now surfaced.
+
+### What didn't change
+
+- Standing version: **v0.4-prelim+T75** (no bump).
+- Joint-fit posterior: **log Z = −163.29 ± 0.085**, m_χ = 770 GeV, σ/m = 0.27 cm²/g.
+- Tests: 542 pass / 6 skip.
+- Drift-guard audit: 40/40 ALL CLEAR.
+
+**No posterior re-run.** No new physics. No new channels. The standing
+posture is preserved; the audit + tests confirm clean.
 
 ## Where to read deeper
 
 - README.md — full project description + quick-start (440 lines)
-- docs/LAYMAN_SUMMARY.md — non-expert overview
+- docs/LAYMAN_SUMMARY.md — non-expert overview + **honest caveats** (T86.7j)
 - docs/MATHEMATICS.md — formulas & derivations
 - docs/DARK_SECTOR_LAGRANGIAN.md — Benchmark A specification (§9 is canonical)
 - MODEL_ASSUMPTIONS_AND_LIMITATIONS.md — what the project does NOT claim
 - docs/INDEX.md — full navigation
 - v0.3-prelim/data/results/2026-09-02_dampe_poc/ — T75/T76/T84 result JSONs
 - v0.3-prelim/docs/T72_*.md → T84_*.md — per-round documentation
+- **v0.3-prelim/docs/T86_PLAUSIBILITY_AUDIT.md** — LZ + Planck analysis (T86.7j)
 
 ## Provenance
 
