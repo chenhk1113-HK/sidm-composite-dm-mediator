@@ -82,8 +82,8 @@ CHECKS_PER_DOC: dict[str, list[tuple[str, str]]] = {
         ("tests 542", "**542**"),
     ],
     "CHANGELOG.md": [
-        ("T75 entry", "v0.4-prelim+T75"),
-        ("log Z", "-163.29"),
+        ("v0.4-prelim+T75", "v0.4-prelim+T75"),
+        ("log Z", "−163.29"),
     ],
     "VERSION": [
         ("standing version", "0.4-prelim+T75"),
