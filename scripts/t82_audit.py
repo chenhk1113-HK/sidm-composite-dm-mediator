@@ -10,7 +10,7 @@ SOURCE OF TRUTH:
 CHECKED SOURCES (each gets PASS or DRIFT_FOUND):
     VERSION, README.md, CITATION.cff, EXTRACT.md,
     MODEL_ASSUMPTIONS_AND_LIMITATIONS.md, CHANGELOG.md,
-    docs/LAYMAN_SUMMARY_V04_PRELIM_TIER1.md
+    docs/LAYMAN_SUMMARY.md, CURRENT.md
 
 Each check returns MATCH (the expected string is present) or DRIFT
 (missing or mismatched). Exit code 0 = clean, 1 = drift detected.
@@ -51,7 +51,7 @@ CHECKS_PER_DOC: dict[str, list[tuple[str, str]]] = {
         ("m_χ MAP", "770 GeV"),
         ("log Z", "−163.29 ± 0.085"),
         ("channels", "**19**"),
-        ("tests", "542 pass, 6 skip"),
+        ("tests", "549 pass, 8 skip"),
         ("headline row present", "**σ/m₀**"),
         ("ε posterior reference", "10⁻³⁷"),
     ],
@@ -70,7 +70,7 @@ CHECKS_PER_DOC: dict[str, list[tuple[str, str]]] = {
     ],
     "EXTRACT.md": [
         ("Channels 19", "Channels: **19**"),
-        ("Tests 542", "542 pass"),
+        ("Tests 549", "549 pass"),
         ("σ/m headline", "σ/m = 0.27 cm²/g"),
     ],
     "docs/LAYMAN_SUMMARY.md": [
@@ -79,7 +79,7 @@ CHECKS_PER_DOC: dict[str, list[tuple[str, str]]] = {
         ("log Z", "**-163**"),
         ("tension 0.60", "0.60** (below 1.0)"),
         ("channels 19", "**19**"),
-        ("tests 542", "**542**"),
+        ("tests 549", "**549**"),
     ],
     "CHANGELOG.md": [
         ("v0.4-prelim+T75", "v0.4-prelim+T75"),
@@ -95,7 +95,7 @@ CHECKS_PER_DOC: dict[str, list[tuple[str, str]]] = {
         ("σ/m₀", "0.27 cm²/g"),
         ("Tension", "0.60σ"),
         ("Channels", "19 channels"),
-        ("542 tests", "542 pass"),
+        ("549 tests", "549 pass"),
         ("Drift-guard", "40/40 ALL CLEAR"),
     ],
 }

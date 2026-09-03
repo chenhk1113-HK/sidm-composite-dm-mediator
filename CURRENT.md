@@ -116,11 +116,43 @@ substantive hidden assumption and is now surfaced.
 
 - Standing version: **v0.4-prelim+T75** (no bump).
 - Joint-fit posterior: **log Z = −163.29 ± 0.085**, m_χ = 770 GeV, σ/m = 0.27 cm²/g.
-- Tests: 542 pass / 6 skip.
+- Tests: 549 pass / 8 skip.
 - Drift-guard audit: 40/40 ALL CLEAR.
 
 **No posterior re-run.** No new physics. No new channels. The standing
 posture is preserved; the audit + tests confirm clean.
+
+### T87 (2026-09-03): Composite-DM direct-detection forward prediction
+
+Verdict: **composite-DM cannot claim the LZ event at v0.7 MAP.**
+
+| Quantity | Value |
+|---|---|
+| σ_inel_nuc(248 keV, gaussian F²) | **1.15 × 10⁻¹¹⁷ cm²** |
+| σ_inel_nuc(248 keV, dipole F²) | **1.07 × 10⁻¹¹⁷ cm²** |
+| Predicted N_events in 2.84 tonne-years | **4.81 × 10⁻⁷³** |
+| LZ observed | 1 |
+| Gap | **71 orders of magnitude below LZ sensitivity** |
+
+**Why so suppressed?** The dominant suppression is **ε²** (kinetic mixing ε
+~ 10⁻³⁷ at v0.7 MAP). The composite F²(q) factor (F²_gaussian ≈ 0.93 at 248
+keV) and the inelastic kinematic factor F_inel ≈ 0.5 are sub-dominant.
+The freeze-in regime forces ε into the deep-decoupled part of parameter
+space, which is what makes the model essentially invisible to LZ.
+
+**Scientific interpretation:**
+- **The model remains a valid SIDM candidate** for dSph/UFD/Bullet/SPARC/DAMPE/LSS. log Z = −163.29 ± 0.085 is unchanged. All T72-T84 channels still work.
+- **The model does NOT explain the LZ event** if it's real. The event (if real) points to a different microphysics — Higgsino, pseudo-Dirac, or some other inelastic-DM scenario with different (m_χ, δ, ε) than v0.7 MAP predicts.
+- **The mass-window match is genuine but not sufficient.** LZ best-fit m_χ = 1000 GeV is within 30% of the project's 770 GeV MAP and within the heavy-WIMP regime (700-1000 GeV). What breaks is the cross-section: σ_inel_nuc is 71 orders of magnitude below LZ's effective event-rate sensitivity.
+
+**Three new code modules + 9 new tests:**
+- `v0.3-prelim/code/t87_composite_inelastic_nucleon.py` (~430 lines): Kahlhoefer point-particle elastic + T&S&W inelastic kinematics + composite F²(q) calibrated to T79.
+- `v0.3-prelim/code/t87_lz_event_rate.py` (~470 lines): SHM Maxwell-Boltzmann + Lewin-Smith event-rate integration + verdict classification.
+- `v0.3-prelim/tests/test_t87_inelastic_nucleon.py` (9 tests, all pass).
+- `v0.3-prelim/data/results/2026-09-03_t87_lz_forward_prediction.json` (results JSON).
+- `v0.3-prelim/docs/T87_LZ_FORWARD_PREDICTION.md` (verdict doc).
+
+**Standing posture preserved** (no posterior re-run, no new physics, no new channels).
 
 ### Composite-channel gap (T86.7k+C, post-Consider4 review)
 

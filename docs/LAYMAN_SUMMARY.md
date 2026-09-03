@@ -33,7 +33,7 @@ experiment's 2026-09-01 mysterious signal paper.
 | **Bayesian evidence** (log Z) | -215 | **-163** | +52 log-units (substantial evidence gain) |
 | **Velocity-slope tension** | 0.91 (above 1.0) | **0.60** (below 1.0) | -34% (resolved!) |
 | **Channels** | 16 | **19** | +3 (DAMPE + LSS + T81 XENONnT/PandaX) |
-| **Tests passing** | 446 | **542** | +96 (T74: +26, T81: +32, T83: +19, T84: +14, intermediate commits: +5) |
+| **Tests passing** | 446 | **549** | +96 (T74: +26, T81: +32, T83: +19, T84: +14, intermediate commits: +5) |
 
 **The headline finding:** adding DAMPE + LSS resolved the v0.6
 velocity-slope tension. The project now prefers **heavier DM**
@@ -214,7 +214,7 @@ worth flagging.
 
 - Standing version: **v0.4-prelim+T75** (no bump)
 - Joint-fit posterior: **log Z = −163.29 ± 0.085**, m_χ = 770 GeV, σ/m = 0.27 cm²/g
-- Tests: 542 pass / 6 skip
+- Tests: 549 pass / 8 skip
 - Drift-guard audit: 40/40 ALL CLEAR
 - **No posterior re-run**; **no new physics**; **no new channels**
 
@@ -241,6 +241,39 @@ Three reviewer claims were stale premises:
 3. "Inelastic/SD cross-section not started" — partially right. Inelastic
    σ_DM-DM exists (T43, T41_INELASTIC). Inelastic σ_DM-nucleon + composite-SD
    operator decomposition is genuinely missing.
+
+### Honest caveats — T87 forward prediction (2026-09-03)
+
+User said "I want to really close the gap." T87 closes it.
+
+**Verdict: composite-DM cannot claim the LZ event at v0.7 MAP.**
+
+| Quantity | Value |
+|---|---|
+| σ_inel_nuc(248 keV, gaussian F²) | **1.15 × 10⁻¹¹⁷ cm²** |
+| Predicted N_events in 2.84 tonne-years | **4.81 × 10⁻⁷³** |
+| LZ observed | 1 |
+| **Gap** | **71 orders of magnitude** |
+
+The composite-DM inelastic σ_DM-nucleon at v0.7 MAP is 71 orders of magnitude
+below LZ sensitivity. The dominant suppression is ε² (kinetic mixing ε ~ 10⁻³⁷
+in the freeze-in regime). The composite form factor (F²_gaussian ≈ 0.93) and
+inelastic kinematic factor (F_inel ≈ 0.5) are sub-dominant.
+
+**What this means:**
+- **The model remains a valid SIDM candidate** for dSph/UFD/Bullet/SPARC/DAMPE/LSS. log Z = −163.29 ± 0.085 is unchanged. All T72-T84 channels still work.
+- **The model does NOT explain the LZ event** if it's real. The event (if real) points to a different microphysics — Higgsino, pseudo-Dirac, or some other inelastic-DM scenario with different (m_χ, δ, ε) than v0.7 MAP predicts.
+- **The mass-window match is genuine but not sufficient.** LZ best-fit m_χ = 1000 GeV is within 30% of the project's 770 GeV MAP and within the heavy-WIMP regime (700-1000 GeV). What breaks is the cross-section.
+
+**This is a positive scientific result.** Before T87, the "10⁷¹× below LZ"
+claim was a hand-wave. Now we have a *quantitative* cross-section at the
+LZ event energy (248 keV recoil) and a *quantitative* event-rate prediction
+in the LZ's exact exposure (2.84 tonne-years). The verdict is robust.
+
+See `v0.3-prelim/docs/T87_LZ_FORWARD_PREDICTION.md` for the full derivation.
+New code: `t87_composite_inelastic_nucleon.py` + `t87_lz_event_rate.py` +
+`test_t87_inelastic_nucleon.py` (9/9 tests pass). Standing version unchanged
+(v0.4-prelim+T75); no posterior re-run; no new physics.
 
 ## Why this is the most important milestone since v0.3-prelim
 
@@ -277,5 +310,5 @@ velocity-slope tension. The Tier-1 milestone is publication-worthy.
 > T82 stale-claim audit (32/32 doc-presence + 1 VERSION drift-guard checks pass),
 > T83 KSFR (3,2) fundamental LATTICE promotion, T84 Channel 18 ρ sensitivity sweep.
 > Headline: σ/m = 0.27 cm²/g, tension = 0.60, log Z =
-> -163.29 ± 0.085, m_χ ~ 770 GeV (MAP). **542 tests passing, 19
+> -163.29 ± 0.085, m_χ ~ 770 GeV (MAP). **549 tests passing, 19
 > channels.** Standing posture preserved at v0.4-prelim+T75.

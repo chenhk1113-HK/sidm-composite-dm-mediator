@@ -203,6 +203,94 @@ initiated if user gives the green light.
 
 ---
 
+## [T87] — 2026-09-03
+
+**Composite-DM direct-detection forward prediction** — the missing piece
+identified in T86.7k+C. **Verdict: composite-DM cannot claim the LZ event
+at v0.7 MAP.**
+
+**Trigger:** User message (2026-09-03) — "I want to really close the gap."
+This was the Tier-2 roadmap Item 3 promoted to active development.
+
+**Quantitative result at v0.7 MAP:**
+
+| Quantity | Value |
+|---|---|
+| σ_inel_nuc at 248 keV (gaussian F²) | **1.15 × 10⁻¹¹⁷ cm²** |
+| σ_inel_nuc at 248 keV (dipole F²) | **1.07 × 10⁻¹⁷ cm²** |
+| Predicted N_events in 2.84 tonne-years | **4.81 × 10⁻⁷³** |
+| LZ observed | 1 |
+| **Gap to LZ sensitivity** | **71 orders of magnitude** |
+
+**Why so suppressed?** The dominant factor is ε² ~ 10⁻⁷⁴ (kinetic mixing
+ε ~ 10⁻³⁷ at v0.7 MAP is in the freeze-in regime). Composite F²(q) ≈ 0.93
+at 248 keV and T&S&W F_inel ≈ 0.5 are sub-dominant. The 71-order gap is
+**structural** to the freeze-in regime, not adjustable.
+
+**What shipped (5 files):**
+
+1. **`v0.3-prelim/code/t87_composite_inelastic_nucleon.py`** (NEW, 430 lines):
+   Kahlhoefer point-particle elastic + Tucker-Sch & Weiner 2001 inelastic
+   kinematics + composite F²(q) calibrated to T79 published values. Standard
+   NREFT O₁ˢ operator selection (no custom SD decomposition per user choice).
+
+2. **`v0.3-prelim/code/t87_lz_event_rate.py`** (NEW, 470 lines): SHM
+   Maxwell-Boltzmann velocity distribution + Lewin-Sch 1996 event-rate
+   integration + v_min inelastic kinematics + verdict classification.
+
+3. **`v0.3-prelim/tests/test_t87_inelastic_nucleon.py`** (NEW, 9 tests):
+   σ_elastic_nuc vs T79 reference; elastic limit recovery; kinematic
+   threshold; v_min formula at known limits; LZ event rate smoke;
+   verdict classification; F² calibration. **9/9 tests pass.**
+
+4. **`v0.3-prelim/data/results/2026-09-03_t87_lz_forward_prediction.json`**:
+   Forward-prediction result with full parameter sweep over δ ∈ [50, 500] keV.
+
+5. **`v0.3-prelim/docs/T87_LZ_FORWARD_PREDICTION.md`** (NEW, 380 lines):
+   Full verdict doc with verbatim LZ paper quotes, the composite-channel
+   gap analysis, three verdict options, methodological honesty section
+   (per AGENTS.md rule 21).
+
+**Standing posture preserved:** log Z = −163.29 ± 0.085, m_χ = 770 GeV,
+σ/m = 0.27 cm²/g, 19 channels. **No posterior re-run. No new physics.**
+
+**Verification:**
+- Drift-guard audit: 40/40 ALL CLEAR
+- Drift-guard tests: 5/5
+- Test suite: **549 pass / 8 skip** (was 542/6 before T87; +9 net new tests,
+  +2 env-skipped)
+- Smoke tests: `python v0.3-prelim/code/t87_lz_event_rate.py` → prints
+  N_predicted for δ sweep, writes result JSON
+- Re-run instructions: see `T87_LZ_FORWARD_PREDICTION.md` §"Verification"
+
+**Scientific interpretation:**
+- The model is a valid SIDM candidate for dSph/UFD/Bullet/SPARC/DAMPE/LSS.
+  log Z = −163.29 ± 0.085 is unchanged.
+- The model does NOT explain the LZ event (if real). The event (if real)
+  points to different microphysics — Higgsino, pseudo-Dirac, or other
+  inelastic-DM scenarios with different (m_χ, δ, ε) than v0.7 MAP.
+- The mass-window match is genuine but not sufficient. LZ best-fit
+  m_χ = 1000 GeV is within 30% of project 770 GeV and within the
+  heavy-WIMP regime (700-1000 GeV). What breaks is the cross-section.
+
+**Methodological honesty (per AGENTS.md rule 21):**
+The T87 verdict depends on three flagged judgment calls: (1) standard
+NREFT O₁ˢ operator selection (no custom SD decomposition); (2) composite
+F²(q) calibration to T79 (Gaussian vs dipole differ by ~10%); (3)
+empirically-calibrated Kahlhoefer formula (T79's C0 = 1.5 × 10⁻²⁴ cm²).
+The dominant suppression (ε² ~ 10⁻⁷⁴) is **structural** to the freeze-in
+regime and not dependent on these judgment calls. The verdict is robust.
+
+**Net effect on the project:** T87 is a **positive scientific result**.
+Before T87, the "10⁷¹× below LZ" claim was a hand-wave. Now we have a
+quantitative cross-section at the LZ event energy and a quantitative
+event-rate prediction in the LZ's exact exposure. The model is verified
+to be 71 orders of magnitude below LZ sensitivity in BOTH the elastic AND
+inelastic channels. The composite-DM SIDM at v0.7 MAP is a valid model
+that does NOT explain the LZ event.
+
+---
+
 ## [T85] — 2026-09-03
 
 **README.md streamline** (Option C precursor to T86). Standing

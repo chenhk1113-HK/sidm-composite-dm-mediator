@@ -12,7 +12,7 @@
 
 1. **Item 1 — External Boltzmann solver (micrOMEGAs)** (R14 Rec #1, Tier-2, ~2-4 weeks)
 2. **Item 2 — Hierarchical per-galaxy SPARC likelihood** (R14 Rec #2, Tier-2, ~2-4 weeks)
-3. **Item 3 — Composite-DM direct-detection forward prediction (T87)** (T86.7k+C, Tier-2, ~5-6 hours; registered 2026-09-03 after `consider4.docx` review)
+3. ✅ **Item 3 — Composite-DM direct-detection forward prediction (T87)** (T86.7k+C + T87, Tier-2; **SHIPPED 2026-09-03** — verdict: composite-DM cannot claim LZ event at v0.7 MAP; σ_inel_nuc = 1.15 × 10⁻¹¹⁷ cm²; N_events = 4.81 × 10⁻⁷³ ≪ 1)
 
 | # | Item | R14 rec | Scope estimate | Status |
 |---|---|---|---|---|
@@ -35,7 +35,7 @@
 | 17 | **KiSS-SIDM UFD fidelity** | R16 #9 | Multi-week | ⚠️ Partial-closure T71.7: wrapper patch (KISS_SIDM_TIMEOUT_S env var) shipped; T38a N=5e4 dwarf re-run TIMED OUT at 7200s with only 2/10 snapshots. Honest verdict: UFD KiSS-SIDM is structurally compute-prohibitive at single-session budget. Defer to v0.7+ requires architectural change (smaller N or fewer snapshots). See V0_6_KISS_SIDM_TIMEOUT_VERDICT.md |
 | 18 | **Form-factor ansatz uncertainty sampling** | R16 #5(c) | Multi-week | ✅ Shipped T71.6 (H4.2 sweep already on disk: log Z range = 0.375 < 1 → ROBUST; see V0_6_LATTICE_FORMFACTOR_CLOSURE.md) |
 | 19 | **Lattice-informed KSFR ratios** | R16 #5(d) | Out-of-band | ⚠️ Partial T83 (2026-09-03): (3, 2) fundamental promoted to LATTICE per Shindler 2019; (2, 3) fundamental demoted to AF_EXCLUDED (asymptotic-freedom violation: SU(2) Nf=3 is IR conformal, KSFR undefined); 5/7 combos now have a defensible class (3 LATTICE, 2 ANALYTICAL, 0 ESTIMATED for the row reach-arounds, 1 N/A); (3, 4) ESTIMATED remains until a continuum-chiral reference for SU(3) Nf=4 appears. See V0_6_LATTICE_FORMFACTOR_CLOSURE.md → T83_KSFR_LATTICE_PROMOTION.md |
-| 20 | **Composite-DM direct-detection forward prediction (T87)** | T86.7k+C, post-Consider4 | ~5-6 hrs wall | ⏸️ Deferred — see Item 3 below. Premature at LZ 2.6σ but allowed if user has bandwidth and wants the publishable claim. |
+| 20 | **Composite-DM direct-detection forward prediction (T87)** | T86.7k+C, post-Consider4 | ~5-6 hrs wall | ✅ **Shipped 2026-09-03** — see Item 3 below + `v0.3-prelim/docs/T87_LZ_FORWARD_PREDICTION.md`. Verdict: composite-DM cannot claim LZ event at v0.7 MAP. |
 
 ### Current stand-ins (good enough for v0.5/T70.x results)
 
@@ -122,7 +122,7 @@ This is **the more impactful of the two deferred items**. The current v0.5 resul
 
 ---
 
-## Item 3 — Composite-DM direct-detection forward prediction (T87)
+## Item 3 — Composite-DM direct-detection forward prediction (T87) ✅ SHIPPED 2026-09-03
 
 Added 2026-09-03 in response to user review (`consider4.docx`) and the LZ
 2026-09-02 preprint's 2.6σ single-event observation at 248 keV.
@@ -224,7 +224,7 @@ analysis that would run at ≥3σ; running it now is *premature* but
 If multiple items are picked up:
 
 - **#2 first** (hierarchical SPARC) — wall-time shortest, headline-impact largest.
-- **#3 second** (composite-DM direct-detection forward prediction) — single-session scope (~5-6 hrs); would elevate "compatible with LZ" to "predicts LZ event" if successful. Premature at LZ 2.6σ but allowed if user has bandwidth.
+- ✅ #3 (composite-DM direct-detection forward prediction) — **SHIPPED 2026-09-03**. See Item 3 below + `T87_LZ_FORWARD_PREDICTION.md`.
 - **#1 last** (micrOMEGAs) — multi-month scope, awaits explicit user interest or v0.5 falsification of calibrated inverse-proportionality.
 
 If only one is picked up: **#2** (still the right choice for v0.5/v0.6 headline update).
@@ -248,5 +248,5 @@ If only one is picked up: **#2** (still the right choice for v0.5/v0.6 headline 
 
 ---
 
-**Last updated:** 2026-09-03 (T86.7k+C — added Item 3, registered T87 forward-prediction as Tier-2)
+**Last updated:** 2026-09-03 (T86.7k+C + T87 — registered Item 3 + shipped T87 forward prediction as Tier-2)
 **Next action:** none scheduled — await user direction. T87 is registered but not initiated.

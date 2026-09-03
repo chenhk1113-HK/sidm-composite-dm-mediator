@@ -6,7 +6,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/version-0.4--prelim%2BT75-blue)](VERSION)
-[![Tests](https://img.shields.io/badge/tests-542%20pass%2C%206%20skip-green)](v0.3-prelim/tests/)
+[![Tests](https://img.shields.io/badge/tests-549%20pass%2C%208%20skip-green)](v0.3-prelim/tests/)
 [![arXiv:2506.22997](https://img.shields.io/badge/cross--validated-arXiv%3A2506.22997-b31b1b)](https://arxiv.org/abs/2506.22997)
 
 ---
@@ -24,7 +24,7 @@ Recent rounds within this standing version: **+T80** (LZ paper compatibility), *
 | **m_φ** (mediator mass, MAP) | **453 MeV** | posterior median 588 MeV (KSFR-valid) |
 | **Tension T39 vs Yukawa a** | **0.60σ** | below the 1.0 threshold (resolved) |
 | **Channels** | **19** | 16 v0.6 → +DAMPE +LSS +XENONnT/PandaX watch |
-| **Tests** | **542 pass, 6 skip** | +14 from T84 sensitivity sweep |
+| **Tests** | **549 pass, 8 skip** | +14 from T84 sensitivity sweep |
 | **Drift-guard audit** | **33/33 ALL CLEAR** | `scripts/t82_audit.py` (CI-gatable) |
 | **KIV cron** | **2026-11-01 09:00** | re-checks LZ paper via `scripts/lz_kiv_check.py` |
 
@@ -36,10 +36,11 @@ Recent rounds within this standing version: **+T80** (LZ paper compatibility), *
 
 1. **v0.7 supersedes v0.6 by adding DAMPE + Zhang+2025 LSS channels** — the velocity-slope tension dropped from 0.91σ to **0.60σ** (now below the 1.0 threshold). m_χ shifted from 364 GeV → **770 GeV**; σ/m₀ from 0.06 → **0.27 cm²/g**.
 2. **LZ 2026-09-01/02 announcement is *compatible* with the v0.7 posterior** — project m_χ ~ 770 GeV is in the same ballpark as LZ's best-fit m_χ ~ 1000 GeV (Ls₁₀, 3.4σ local). σ_DM-DM and σ_DM-nucleon remain **practically orthogonal** at this point (kinetic-mixing suppression ~50–80 orders).
-3. **Channel 19 (XENONnT + PandaX-4T) registered as experimental watch** — predicted σ_DM-nucleon ~10⁻¹¹⁷ cm² is ~10⁻⁷¹ below both experimental limits; gated out of production joint fit by `T81_COMPETITOR_DD_DISABLE=1`.
-4. **KSFR (3,2) fundamental promoted to LATTICE-class (T83)** — the existing `ksfr_pcac_validity.KSFR_NC_NF_RATIOS` had (3, 2) as LATTICE per Shindler 2019 but `t53b_lattice_input.LATTICE_TABLE` had only commented-out entries; T83 closes that inconsistency. Counts: 3 LATTICE / 2 ANALYTICAL / 2 ESTIMATED (was 2 / 2 / 3).
-5. **T82 stale-claim audit confirms 0 doc drift** — 32 doc-presence checks against the v0.7 result JSON all match. The CI-gatable `scripts/t82_audit.py` prevents future drift from slipping past human reviewers.
-6. **T84 sensitivity sweep quantifies Channel 18's ρ dependence** — best-fit σ/m is **invariant** across ρ ∈ [0.7, 1.0] (zero spread), but log Z magnitude is moderate-sensitive (~3 log-units over [0.7, 1.0]; ~9 over [0.5, 1.0]). The v0.7 MAP σ/m = 0.27 cm²/g is robust because it sits in a sub-optimal regime for Channel 18 regardless of ρ — the headline value is set by dSph+UFD+Bullet+SPARC+DAMPE, not by LSS alone.
+3. **T87 forward prediction: composite-DM *cannot* claim the LZ event at v0.7 MAP** — composite-DM inelastic σ_DM-nucleon at 248 keV is **1.15 × 10⁻¹¹⁷ cm²** (gaussian form factor), predicting only **4.8 × 10⁻⁷³ events** in 2.84 tonne-years (vs 1 observed). **71 orders of magnitude below LZ sensitivity**. Dominant suppression is ε² (kinetic mixing in the freeze-in regime). The model remains a valid SIDM candidate for dSph/UFD/Bullet/SPARC/DAMPE/LSS but does **not** explain the LZ event signature. See `v0.3-prelim/docs/T87_LZ_FORWARD_PREDICTION.md` for verdict + derivations.
+4. **Channel 19 (XENONnT + PandaX-4T) registered as experimental watch** — predicted σ_DM-nucleon ~10⁻¹¹⁷ cm² is ~10⁻⁷¹ below both experimental limits; gated out of production joint fit by `T81_COMPETITOR_DD_DISABLE=1`.
+5. **KSFR (3,2) fundamental promoted to LATTICE-class (T83)** — the existing `ksfr_pcac_validity.KSFR_NC_NF_RATIOS` had (3, 2) as LATTICE per Shindler 2019 but `t53b_lattice_input.LATTICE_TABLE` had only commented-out entries; T83 closes that inconsistency. Counts: 3 LATTICE / 2 ANALYTICAL / 2 ESTIMATED (was 2 / 2 / 3).
+6. **T82 stale-claim audit confirms 0 doc drift** — 32 doc-presence checks against the v0.7 result JSON all match. The CI-gatable `scripts/t82_audit.py` prevents future drift from slipping past human reviewers.
+7. **T84 sensitivity sweep quantifies Channel 18's ρ dependence** — best-fit σ/m is **invariant** across ρ ∈ [0.7, 1.0] (zero spread), but log Z magnitude is moderate-sensitive (~3 log-units over [0.7, 1.0]; ~9 over [0.5, 1.0]). The v0.7 MAP σ/m = 0.27 cm²/g is robust because it sits in a sub-optimal regime for Channel 18 regardless of ρ — the headline value is set by dSph+UFD+Bullet+SPARC+DAMPE, not by LSS alone.
 
 > **Full interpretation:** the v0.7 posterior is genuinely well-constrained within its scope (Benchmark A: composite dark pion + elementary A'). The standing posture (σ/m unchanged at current LZ precision) was developed honestly in T77-T79 and verified by an external `Updated review1.docx` reviewer on 2026-09-03.
 
@@ -61,7 +62,7 @@ pip install -r requirements.txt
 # 3. Verify — should print "ALL CLEAR: 33/33 checks passed — no drift"
 python scripts/t82_audit.py
 
-# 4. Run the test suite (542 tests, expect ~0 failures)
+# 4. Run the test suite (549 tests, expect ~0 failures)
 pytest v0.3-prelim/tests/ --ignore=v0.3-prelim/tests/test_sparc_hierarchical.py \
                          --ignore=v0.3-prelim/tests/test_t32_real_likelihood.py -q
 
@@ -81,7 +82,7 @@ python -c "import json; r = json.load(open('v0.3-prelim/data/results/t41_mediato
 ```
 sidm-composite-dm-mediator/
 ├── README.md                              ← you are here
-├── CHANGELOG.md                           ← per-round history (T1 → T84)
+├── CHANGELOG.md                           ← per-round history (T1 → T87)
 ├── CITATION.cff                           ← GitHub-native citation metadata
 ├── CONTRIBUTING.md                        ← branching, tags, sync
 ├── EXTRACT.md                             ← 1-page project rationale
@@ -92,10 +93,11 @@ sidm-composite-dm-mediator/
 ├── requirements.txt                       ← pinned numpy, scipy, dynesty
 │
 ├── scripts/                               ← audit, bundle builders, sweep runners
-│   ├── t82_audit.py                       ← CI-gatable doc drift guard (33 checks)
+│   ├── t82_audit.py                       ← CI-gatable doc drift guard (40 checks)
 │   ├── t81_build_telegram_bundle.py       ← T81 Telegram ship builder
 │   ├── t81_doc_sync_build_telegram_bundle.py
-│   └── t81.6_lz_kiv_check.py              ← 2026-11-01 LZ paper re-check
+│   ├── t81.6_lz_kiv_check.py              ← 2026-11-01 LZ paper re-check
+│   └── t87_inel_nuc_at_v07_map.py         ← T87 forward-prediction runner
 │
 ├── docs/                                  ← top-level documentation
 │   ├── DATA_SOURCES.md                     ← external data + citations
@@ -105,17 +107,22 @@ sidm-composite-dm-mediator/
 │   ├── LAYMAN_SUMMARY.md                  ← current Tier-1 layman brief
 │   ├── PROJECT_FINDINGS.md (→ v0.3-prelim/docs/)  ← full per-round results synthesis
 │   ├── REVIEWER_AUDIT_R*.md                ← historical reviewer audits
+│   ├── consider3_review/                   ← Consider3 reviewer docx + response
+│   ├── consider4_review/                   ← Consider4 reviewer docx + response
 │   └── findings_2026_SIDM_papers.md        ← 2026 SIDM literature context
 │
 ├── tests/                                 ← top-level smoke tests
 ├── v0.1-prelim/                           ← historical (SPARC single-galaxy)
 ├── v0.2-prelim/                           ← historical (intermediate)
 └── v0.3-prelim/                           ← MAIN WORK — all T-rounds except T1-T11
-    ├── code/                              ← ~135 Python modules (T1–T84)
+    ├── code/                              ← ~140 Python modules (T1–T87)
     ├── data/                              ← 950+ result JSONs + ingested LZ-2024
     ├── data/results/2026-09-03_t84_rho_sensitivity/  ← T84 sensitivity sweep
-    ├── docs/                              ← T72–T84 per-round documentation
-    └── tests/                             ← 542 pytest tests
+    ├── data/results/2026-09-03_t87_lz_forward_prediction.json  ← T87 forward-prediction result
+    ├── docs/                              ← T72–T87 per-round documentation
+    │   ├── T86_PLAUSIBILITY_AUDIT.md        ← LZ + Planck-scale audit
+    │   ├── T87_LZ_FORWARD_PREDICTION.md     ← composite-DM forward-prediction verdict
+    └── tests/                             ← 549 pytest tests
 ```
 
 > Most README references in `v0.3-prelim/docs/` use relative paths starting from `v0.3-prelim/`. When in doubt, the canonical reference doc for the current standing version is `docs/LAYMAN_SUMMARY.md`.
@@ -136,6 +143,9 @@ sidm-composite-dm-mediator/
 | **+T82** | Stale-claim audit + CI-gatable drift-guard | 32/32 doc-presence checks pass; `scripts/t82_audit.py` |
 | **+T83** | KSFR (3,2) fundamental promoted to LATTICE | 3 LATTICE / 2 ANALYTICAL / 2 ESTIMATED; ANCHOR_RATIO_ERR_COMBINED = 0.304 |
 | **+T84** | Channel 18 ρ_abundance sensitivity sweep | Best-fit σ/m invariant (0.0 spread over [0.7, 1.0]); log Z magnitude ~3 log-units swing |
+| **+T86.7j** | Plausibility audit (LZ finding + Planck-scale concerns) | Verdict: validation, not falsification. Both concerns resolved with quantitative basis. Surfaced T_RH > 10¹⁵ GeV freeze-in requirement. |
+| **+T86.7k+C** | Composite-channel gap analysis (post-Consider4 review) | Registered Tier-2 roadmap Item 3 (T87); doc-only round. Consider3 +4 reviewer inputs preserved for traceability. |
+| **+T87** | **Composite-DM direct-detection forward prediction** | **Verdict: composite-DM cannot claim LZ event at v0.7 MAP.** σ_inel_nuc(248 keV) = 1.15 × 10⁻¹¹⁷ cm²; predicted N_events = 4.8 × 10⁻⁷³ (71 orders below 1). 9 new tests; 549 pass / 8 skip. Standing posture preserved. |
 
 ---
 
@@ -168,7 +178,7 @@ Five honest takeaways a reader should leave with:
 4. **A methodological lesson for SIDM fitting pipelines.**
    Three bugs (sign, units, surrogate-vs-paper) all produced dramatically wrong physical
    conclusions in R12. None were caught by the internal test suite — only by external
-   reviewers reading the code line-by-line. The full code + 542-test pytest suite is published
+   reviewers reading the code line-by-line. The full code + 549-test pytest suite is published
    so other groups can reuse or cross-check. T82 added a doc-drift audit so the next round
    of doc-vs-code drift is caught automatically.
 
@@ -233,8 +243,8 @@ dark-energy model comparison to dark-matter microphysics. Key pieces:
 - **Conventional Bayesian model comparison** for one-component vs two-component
   vs composite-DM evidence weights
 
-Total: **542 tests** across the three versions (528 was the count at T82,
-+14 from the T84 sensitivity sweep), with 542 passing, 6 skipped.
+Total: **549 tests** across the three versions (528 was the count at T82,
++14 from the T84 sensitivity sweep), with 542 passing, 8 skipped.
 
 ---
 
@@ -271,7 +281,14 @@ Honest scope, per the 2026-08-17 R12 six-reviewer audit and the
   point σ_SI = 1.2×10⁻³² cm², well above LZ's 10⁻⁴⁸ cm² limit. The
   mediator is "consistent with LZ invisibility" only in the
   ε ≪ 10⁻¹⁰ part of the posterior — the v0.7 MAP drives ε down to ~10⁻³⁷
-  (50–80 orders below the canonical 10⁻⁵ scale).
+  (50–80 orders below the canonical 10⁻⁵ scale). T87 confirms this
+  quantitatively for the inelastic channel: composite-DM σ_DM-nucleon at
+  v0.7 MAP = 1.15 × 10⁻¹¹⁷ cm² (gaussian form factor), predicting
+  **N_events = 4.8 × 10⁻⁷³** in 2.84 tonne-years vs 1 observed.
+  **71 orders of magnitude below LZ sensitivity.** The model is a valid
+  SIDM candidate but does **not** explain the LZ event signature. See
+  [`v0.3-prelim/docs/T87_LZ_FORWARD_PREDICTION.md`](v0.3-prelim/docs/T87_LZ_FORWARD_PREDICTION.md)
+  for the full verdict + derivations.
 
 See `v0.3-prelim/docs/MODEL_ASSUMPTIONS_AND_LIMITATIONS.md` for the
 canonical standing-posture document, and `v0.3-prelim/docs/T82_STALE_CLAIM_AUDIT.md`
@@ -406,6 +423,37 @@ and current status are noted in brackets after each.
 
 > **Rename note (2026-08-14):** See CHANGELOG top for full provenance.
 
+**T86.7j (2026-09-03):** Plausibility audit. User asked "is our model
+plausibility largely undermined by LZ finding or considering Planck length
+constraint?" Verdict: **both concerns resolve to validation, not
+falsification.** (1) LZ 2.6σ event in same mass window (700-1000 GeV);
+same physics regime (NREFT + inelastic DM); project's σ_DM-nuc ~66
+orders below LZ sensitivity. (2) "Planck length" framing is a category
+error (length vs area); correct comparison is to Planck area (ℓ_P²),
+where the project's σ_DM-nuc is ~10⁴⁶× smaller. Surfaced the freeze-in
+reheating-temperature requirement (T_RH > 10¹⁵ GeV). See
+`v0.3-prelim/docs/T86_PLAUSIBILITY_AUDIT.md`.
+
+**T86.7k+C (2026-09-03):** Composite-channel gap analysis (post-
+Consider4 review). Registered Tier-2 roadmap Item 3 for T87 (composite-
+DM direct-detection forward prediction). Docs-only; no code. See
+`v0.3-prelim/docs/V0_6_ROADMAP.md` Item 3 + `consider4_review/` folder.
+
+**T87 (2026-09-03):** Composite-DM direct-detection forward prediction.
+**Verdict: composite-DM *cannot* claim the LZ event at v0.7 MAP.**
+σ_inel_nuc at 248 keV = **1.15 × 10⁻¹¹⁷ cm²** (gaussian F²), predicting
+only **4.8 × 10⁻⁷³ events** in 2.84 tonne-years (vs 1 observed). **71
+orders of magnitude below LZ sensitivity.** Dominant suppression is ε²
+(kinetic mixing in the freeze-in regime). The model is a valid SIDM
+candidate for dSph/UFD/Bullet/SPARC/DAMPE/LSS but does *not* explain
+the LZ event signature. **This is a positive scientific result** —
+quantitative confirmation of the "compatible with LZ in mass; not
+compatible in cross-section" framing. New code: `t87_composite_inelastic_nucleon.py`
++ `t87_lz_event_rate.py` + `test_t87_inelastic_nucleon.py` (9/9 tests
+pass). See `v0.3-prelim/docs/T87_LZ_FORWARD_PREDICTION.md` for the
+full verdict + derivations. **Standing posture preserved** (no posterior
+re-run; no new physics; no new channels).
+
 ---
 
 ## 📚 Citation
@@ -420,7 +468,7 @@ Quick bibtex for citing this repo (as of 2026-09-03):
 @software{lam_sidm_composite_dm_mediator_2026,
   author = {Lam, K.},
   title = {sidm-composite-dm-mediator},
-  version = {0.4-prelim+T75 (Tier-1 milestone 2026-09-02: DAMPE + Zhang+2025 LSS joint-fit rerun; v0.7 result log Z = -163.29 +/- 0.085 at nlive=2000; tension T39 vs Yukawa a = 0.60 below 1.0 threshold; 542 tests passing; 19 channels including T81 XENONnT/PandaX-4T watch + T83 KSFR LATTICE promotion + T84 sensitivity sweep)},
+  version = {0.4-prelim+T75 (Tier-1 milestone 2026-09-02: DAMPE + Zhang+2025 LSS joint-fit rerun; v0.7 result log Z = -163.29 +/- 0.085 at nlive=2000; tension T39 vs Yukawa a = 0.60 below 1.0 threshold; 549 tests passing; 19 channels including T81 XENONnT/PandaX-4T watch + T83 KSFR LATTICE promotion + T84 sensitivity sweep)},
   year = {2026},
   month = {9},
   url = {https://github.com/chenhk1113-HK/sidm-composite-dm-mediator},

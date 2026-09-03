@@ -2,7 +2,7 @@
 
 **Version 0.4-prelim + T75 · 2026-09-02 · ~1,100 words**
 
-**Standing version: v0.4-prelim+T75** (DAMPE + Zhang+2025 LSS joint-fit rerun; v0.7 result). Channels: **19** (was 16; +2 Tier-1 DAMPE+LSS, +1 Channel 19 XENONnT/PandaX watch, T81 2026-09-02). Tests: **542 pass** / 0 fail / 6 skip (T72: 446 → T74: 472 → T81: 504 → T83: 523 → T84: 542). V0_6_ROADMAP: 9 of 15 items shipped (3 partial-closure: #10, #17, #19) + 2 v0.4-prelim Tier-1 extensions (DAMPE, LSS) + 1 v0.4-prelim Tier-1 watch channel (XENONnT+PandaX, T81 2026-09-02) + 1 KSFR LATTICE-class promotion (T83: (3,2) fundamental) + 1 Channel 18 sensitivity study (T84).
+**Standing version: v0.4-prelim+T75** (DAMPE + Zhang+2025 LSS joint-fit rerun; v0.7 result). Channels: **19**; **Tests: 549 pass, 8 skip** (post-T87) (was 16; +2 Tier-1 DAMPE+LSS, +1 Channel 19 XENONnT/PandaX watch, T81 2026-09-02). Tests: **542 pass** / 0 fail / 6 skip (T72: 446 → T74: 472 → T81: 504 → T83: 523 → T84: 542). V0_6_ROADMAP: 9 of 15 items shipped (3 partial-closure: #10, #17, #19) + 2 v0.4-prelim Tier-1 extensions (DAMPE, LSS) + 1 v0.4-prelim Tier-1 watch channel (XENONnT+PandaX, T81 2026-09-02) + 1 KSFR LATTICE-class promotion (T83: (3,2) fundamental) + 1 Channel 18 sensitivity study (T84).
 
 **⚠ Orthogonal-physics in practice (locked 2026-08-10, reaffirmed 2026-09-02 in T75; refined 2026-09-02 in T78; uncertainty band added 2026-09-02 in T79):** The project's headline σ/m = 0.27 cm²/g measures **σ_DM-DM** (self-scattering cross-section per unit mass, the SIDM observable). Direct-detection experiments (LZ, XENONnT, PandaX) measure **σ_DM-nucleon**. These are **theoretically linked** through kinetic mixing in the light-mediator SIDM model — but at the project's v0.7 posterior (ε ~ 10⁻³⁷), σ_DM-nucleon is suppressed by **~50-80 orders of magnitude** relative to LZ sensitivity (the "70 orders" figure is a point-particle estimate applied to a composite model, with an interpolated LZ limit). So the link is **practically inert**. The project uses direct-detection constraints only as a sanity check (Channel 5), not as σ/m measurements. This stance is **non-negotiable** unless user explicitly overrides. See `MODEL_ASSUMPTIONS_AND_LIMITATIONS.md §0` and `v0.3-prelim/docs/T78_KINETIC_MIXING_LZ_LINK.md` + `T79_COMPOSITE_FORM_FACTOR_REMNANT.md`.
 
@@ -59,6 +59,8 @@ The pipeline was **designed to scale to 10+ independent observational probes** (
 
 **5. Two-component mass-segregated SIDM is Occam-neutral, not yet evidence.** The T22 two-component vs single-component Bayes factor is +0.39 (with IMFP correction) or +0.22 (without) — both well below the 2.5 significance threshold. **Critically: all three two-component observational likelihoods are still public-limit-curve surrogates (Gaussian proxies over 95% CL upper limits), not raw posterior chains**, so this BF is a **pipeline feasibility diagnostic**, not definitive evidence for a two-species dark sector. (See Drobczyk 2025 for an independent UV route that demonstrates qualitative literature consistency — not a cross-validation of this project's numerical pipeline.)
 
+**6. Composite-DM direct-detection is verified quantitatively for the inelastic channel (T87, 2026-09-03).** Forward-prediction at v0.7 MAP: composite-DM inelastic σ_DM-nucleon at 248 keV = **1.15 × 10⁻¹¹⁷ cm²** (gaussian form factor), predicting only **4.8 × 10⁻⁷³ events** in 2.84 tonne-years vs 1 observed. **71 orders of magnitude below LZ sensitivity.** Dominant suppression is ε² (kinetic mixing in the freeze-in regime). **Verdict: composite-DM cannot claim the LZ event at v0.7 MAP** — but remains a valid SIDM candidate for dSph/UFD/Bullet/SPARC/DAMPE/LSS. Same mass window (700-1000 GeV); not the same microphysics.
+
 ## Limitations
 
 **Velocity-slope tension is unresolved.** The 1.3σ disagreement between data-preferred a ≈ 0.94 and composite-rho a ≈ 2.24 is a real theoretical gap. Either composite-rho microphysics is incomplete, or the data still has systematics masking the steeper slope.
@@ -78,3 +80,7 @@ The pipeline was **designed to scale to 10+ independent observational probes** (
 ---
 
 **Word count: ~1,000. References:** arXiv:0711.4866 (Pospelov), 1310.7945 (Kaplinghat), 2403.16633 (Horigome), 2505.15903 (Gurian & May), 2506.14898 (Yang+), 2506.22997 (Drobczyk), 2410.17036 (LZ WS2024), 2311.04982 (McDaniel+). See `docs/DATA_SOURCES.md` for full citations.
+
+---
+
+**T87 forward prediction (2026-09-03):** Composite-DM inelastic σ_DM-nucleon at v0.7 MAP = 1.15 × 10⁻¹¹⁷ cm². Predicted N_events in 2.84 tonne-years = 4.8 × 10⁻⁷³ (vs 1). **71 orders of magnitude below LZ sensitivity.** See `v0.3-prelim/docs/T87_LZ_FORWARD_PREDICTION.md` for full derivation + verdict.

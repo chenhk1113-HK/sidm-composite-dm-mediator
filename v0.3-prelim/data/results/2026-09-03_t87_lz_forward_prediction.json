@@ -1,0 +1,136 @@
+{
+  "T87_summary": "Composite-DM LZ forward prediction at v0.7 MAP (2026-09-03)",
+  "v07_MAP": {
+    "m_phi_MeV": 452.951,
+    "m_chi_GeV": 769.69,
+    "g_chi": 1.189,
+    "log_epsilon": -36.951,
+    "log_alpha": -16.165,
+    "sigma_m_0_derived": 0.273,
+    "log_Z": -163.29,
+    "epsilon": 1.1194378834671502e-37,
+    "alpha_chi": 6.839116472814306e-17
+  },
+  "composite_DM_parameters": {
+    "Lambda_MeV": 30.0,
+    "R_composite_MeV_inv": 0.03333333333333333,
+    "R_composite_fm": 0.00657
+  },
+  "LZ_2026_09_02_paper_parameters": {
+    "exposure_tonne_years": 2.84,
+    "active_xenon_mass_tonnes": 5.5,
+    "fiducial_mass_tonnes": 7.0,
+    "recoil_min_keV": 5.4,
+    "recoil_max_keV": 270.0,
+    "observed_recoil_keV": 248.0,
+    "observed_recoil_err_keV": 32.526911934581186,
+    "observed_events": 1,
+    "global_significance": 2.6,
+    "local_significance": 3.4,
+    "best_fit_m_chi_GeV": 1000,
+    "mass_splitting_keV_paper": [
+      200,
+      300
+    ],
+    "implied_sigma_DM_nucleon_cm2": 1e-45
+  },
+  "delta_sweep": [
+    {
+      "delta_keV": 50,
+      "gaussian": {
+        "N_predicted": 3.634152728434788e-73,
+        "log10_ratio": -72.43959682504045,
+        "sigma_inel_at_target_cm2": 1.1506226997954334e-117,
+        "v_min_at_target_kms": 108.10505840801207,
+        "verdict": "DOES NOT EXPLAIN LZ EVENT (predicted \u226a observed)"
+      },
+      "dipole": {
+        "N_predicted": 3.3916655661303437e-73,
+        "log10_ratio": -72.46958697774336,
+        "sigma_inel_at_target_cm2": 1.0756848146445862e-117,
+        "v_min_at_target_kms": 108.10505840801207,
+        "verdict": "DOES NOT EXPLAIN LZ EVENT (predicted \u226a observed)"
+      }
+    },
+    {
+      "delta_keV": 100,
+      "gaussian": {
+        "N_predicted": 3.8837736077218095e-73,
+        "log10_ratio": -72.41074609384714,
+        "sigma_inel_at_target_cm2": 1.1500597619792404e-117,
+        "v_min_at_target_kms": 152.85139809556617,
+        "verdict": "DOES NOT EXPLAIN LZ EVENT (predicted \u226a observed)"
+      },
+      "dipole": {
+        "N_predicted": 3.624631274026823e-73,
+        "log10_ratio": -72.44073616669309,
+        "sigma_inel_at_target_cm2": 1.075158539906068e-117,
+        "v_min_at_target_kms": 152.85139809556617,
+        "verdict": "DOES NOT EXPLAIN LZ EVENT (predicted \u226a observed)"
+      }
+    },
+    {
+      "delta_keV": 200,
+      "gaussian": {
+        "N_predicted": 4.37481598438543e-73,
+        "log10_ratio": -72.35904020976092,
+        "sigma_inel_at_target_cm2": 1.14893429957075e-117,
+        "v_min_at_target_kms": 216.1417183065507,
+        "verdict": "DOES NOT EXPLAIN LZ EVENT (predicted \u226a observed)"
+      },
+      "dipole": {
+        "N_predicted": 4.0829106521926565e-73,
+        "log10_ratio": -72.3890301237959,
+        "sigma_inel_at_target_cm2": 1.0741063767404345e-117,
+        "v_min_at_target_kms": 216.1417183065507,
+        "verdict": "DOES NOT EXPLAIN LZ EVENT (predicted \u226a observed)"
+      }
+    },
+    {
+      "delta_keV": 297,
+      "gaussian": {
+        "N_predicted": 4.813468223400326e-73,
+        "log10_ratio": -72.31754189087852,
+        "sigma_inel_at_target_cm2": 1.1478431274542086e-117,
+        "v_min_at_target_kms": 263.38246735586876,
+        "verdict": "DOES NOT EXPLAIN LZ EVENT (predicted \u226a observed)"
+      },
+      "dipole": {
+        "N_predicted": 4.4922958452002576e-73,
+        "log10_ratio": -72.34753165051673,
+        "sigma_inel_at_target_cm2": 1.073086270604743e-117,
+        "v_min_at_target_kms": 263.38246735586876,
+        "verdict": "DOES NOT EXPLAIN LZ EVENT (predicted \u226a observed)"
+      }
+    },
+    {
+      "delta_keV": 500,
+      "gaussian": {
+        "N_predicted": 5.614023279212191e-73,
+        "log10_ratio": -72.25072579084436,
+        "sigma_inel_at_target_cm2": 1.1455612181364418e-117,
+        "v_min_at_target_kms": 341.7284300006741,
+        "verdict": "DOES NOT EXPLAIN LZ EVENT (predicted \u226a observed)"
+      },
+      "dipole": {
+        "N_predicted": 5.23943882473648e-73,
+        "log10_ratio": -72.28071522606427,
+        "sigma_inel_at_target_cm2": 1.070952977734757e-117,
+        "v_min_at_target_kms": 341.7284300006741,
+        "verdict": "DOES NOT EXPLAIN LZ EVENT (predicted \u226a observed)"
+      }
+    }
+  ],
+  "best_fit_verdict_di_mauro_delta297_keV_gaussian": {
+    "N_predicted": 4.813468223400326e-73,
+    "N_observed": 1,
+    "ratio_pred_over_observed": 4.813468223400326e-73,
+    "log10_ratio": -72.31754189087852,
+    "sigma_inel_nuc_cm2": 1.1478431274542086e-117,
+    "v_min_at_target_kms": 263.38246735586876,
+    "verdict": "DOES NOT EXPLAIN LZ EVENT (predicted \u226a observed)",
+    "poisson_p_value": 0.0
+  },
+  "verdict": "DOES NOT EXPLAIN LZ EVENT",
+  "explanation": "At v0.7 MAP (m_chi=770 GeV, m_phi=453 MeV, epsilon~1.12e-37, alpha_X~6.84e-17), the composite-DM inelastic sigma_DM-nucleon at 248 keV is ~1.15e-117 cm^2 (gaussian F^2). The predicted event rate at LZ is ~4.8e-73 in 2.84 tonne-years, 71+ orders of magnitude below the 1 event observed. The dominant suppression is epsilon^2 (kinetic mixing in the freeze-in regime). The model is a valid SIDM candidate but cannot claim the LZ event."
+}
