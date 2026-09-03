@@ -75,9 +75,16 @@ git log --all -- <path>
 git show <commit>:<path>
 ```
 
-R12/R13/R14/T71_8 layman summaries are bundled (collapsed) into
-[`v0.3-prelim/docs/LAYMAN_SUMMARIES_HISTORICAL.md`](v0.3-prelim/docs/LAYMAN_SUMMARIES_HISTORICAL.md)
-for at-a-glance reference.
+Bundled archives (in-tree, collapsed `<details>` view):
+- R12/R13/R14/T71.8 layman summaries →
+  [`v0.3-prelim/docs/LAYMAN_SUMMARIES_HISTORICAL.md`](v0.3-prelim/docs/LAYMAN_SUMMARIES_HISTORICAL.md)
+- V0_6 closures (TIER_B, BROWER, KISS_SIDM, LATTICE) →
+  [`v0.3-prelim/docs/V0_6_CLOSURES_HISTORICAL.md`](v0.3-prelim/docs/V0_6_CLOSURES_HISTORICAL.md)
+- Mediator Detection Synthesis v2-v11 →
+  [`v0.3-prelim/docs/MEDIATOR_SYNTHESES_HISTORICAL.md`](v0.3-prelim/docs/MEDIATOR_SYNTHESES_HISTORICAL.md)
+
+`FINDINGS.md` was renamed to `PROJECT_FINDINGS.md` in T86.7f to break
+a basename collision with `docs/findings_2026_SIDM_papers.md`.
 
 ## How to get oriented quickly
 

@@ -103,7 +103,7 @@ sidm-composite-dm-mediator/
 │   ├── TUTORIAL.md                         ← end-to-end tutorial
 │   ├── DARK_SECTOR_LAGRANGIAN.md           ← Benchmark A specification
 │   ├── LAYMAN_SUMMARY.md                  ← current Tier-1 layman brief
-│   ├── FINDINGS.md (→ v0.3-prelim/docs/)
+│   ├── PROJECT_FINDINGS.md (→ v0.3-prelim/docs/)  ← full per-round results synthesis
 │   ├── REVIEWER_AUDIT_R*.md                ← historical reviewer audits
 │   └── findings_2026_SIDM_papers.md        ← 2026 SIDM literature context
 │
