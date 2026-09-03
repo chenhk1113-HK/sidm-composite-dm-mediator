@@ -63,21 +63,18 @@ class TestNoDriftState:
         # Specifically check VERSION drift-guard passed
         assert "VERSION = '0.4-prelim+T75' matches canonical" in out
 
-    def test_total_check_count_at_least_32(self):
-        # Was >= 33 (with the original 11 README checks).
-        # After README streamlining (T85, 2026-09-03): 10 README checks +
-        # 4 CITATION + 5 MODEL_ASSUMPTIONS + 3 EXTRACT + 6 LAYMAN +
-        # 2 CHANGELOG + 1 VERSION = 31 doc-presence + 1 VERSION drift-guard
-        # = 32 total.
+    def test_total_check_count_at_least_40(self):
+        # Was >= 32 (with the original 10 README checks; pre-T86.7).
+        # Post-T86.7: 10 README + 4 CITATION + 5 MODEL_ASSUMPTIONS +
+        # 8 CURRENT.md + 3 EXTRACT + 6 LAYMAN + 2 CHANGELOG + 1 VERSION
+        # = 39 doc-presence + 1 VERSION drift-guard = 40 total.
         rc, out = _capture_main()
         assert rc == 0
-        # Grep the final summary line
         for line in out.splitlines():
             if line.startswith("ALL CLEAR"):
-                # "ALL CLEAR: N/N checks passed — no drift"
                 n_str = line.split("ALL CLEAR: ")[1].split("/")[0]
-                assert int(n_str) >= 32, (
-                    f"Expected ≥32 total checks, got {n_str}"
+                assert int(n_str) >= 40, (
+                    f"Expected ≥40 total checks, got {n_str}"
                 )
 
 
@@ -123,6 +120,7 @@ class TestAuditDocSync:
             "README.md",
             "CITATION.cff",
             "MODEL_ASSUMPTIONS_AND_LIMITATIONS.md",
+            "CURRENT.md",
             "EXTRACT.md",
             "docs/LAYMAN_SUMMARY.md",
             "CHANGELOG.md",

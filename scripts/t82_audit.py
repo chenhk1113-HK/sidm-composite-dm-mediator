@@ -37,6 +37,7 @@ DOCS = [
     ("CITATION.cff", "CITATION.cff"),
     ("EXTRACT.md", "EXTRACT.md"),
     ("MODEL_ASSUMPTIONS_AND_LIMITATIONS.md", "MODEL_ASSUMPTIONS_AND_LIMITATIONS.md"),
+    ("CURRENT.md", "CURRENT.md"),
     ("CHANGELOG.md", "CHANGELOG.md"),
     ("docs/LAYMAN_SUMMARY.md", "docs/LAYMAN_SUMMARY.md"),
 ]
@@ -86,6 +87,16 @@ CHECKS_PER_DOC: dict[str, list[tuple[str, str]]] = {
     ],
     "VERSION": [
         ("standing version", "0.4-prelim+T75"),
+    ],
+    "CURRENT.md": [
+        ("Bayesian evidence log Z", "−163.29 ± 0.085"),
+        ("m_χ (MAP)", "770 GeV"),
+        ("m_φ (MAP)", "453 MeV"),
+        ("σ/m₀", "0.27 cm²/g"),
+        ("Tension", "0.60σ"),
+        ("Channels", "19 channels"),
+        ("542 tests", "542 pass"),
+        ("Drift-guard", "32/32 ALL CLEAR"),
     ],
 }
 
