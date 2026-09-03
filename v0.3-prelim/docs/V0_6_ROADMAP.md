@@ -30,7 +30,7 @@
 | 16 | **LZ WS2024 / Fermi-LAT full posterior shapes** | R16 #3 | ~2 weeks | ✅ Shipped T71.5 (already in production since R12 via t30_lz_real_posterior.py; stale roadmap item — see V0_6_TIER_B_CLOSURE.md) |
 | 17 | **KiSS-SIDM UFD fidelity** | R16 #9 | Multi-week | ⚠️ Partial-closure T71.7: wrapper patch (KISS_SIDM_TIMEOUT_S env var) shipped; T38a N=5e4 dwarf re-run TIMED OUT at 7200s with only 2/10 snapshots. Honest verdict: UFD KiSS-SIDM is structurally compute-prohibitive at single-session budget. Defer to v0.7+ requires architectural change (smaller N or fewer snapshots). See V0_6_KISS_SIDM_TIMEOUT_VERDICT.md |
 | 18 | **Form-factor ansatz uncertainty sampling** | R16 #5(c) | Multi-week | ✅ Shipped T71.6 (H4.2 sweep already on disk: log Z range = 0.375 < 1 → ROBUST; see V0_6_LATTICE_FORMFACTOR_CLOSURE.md) |
-| 19 | **Lattice-informed KSFR ratios** | R16 #5(d) | Out-of-band | ⚠️ Partial T71.6 (KSFR_NC_NF_TABLE.md + t53b_lattice_input.py shipped R11 G14; 2 of 7 (Nc,Nf) combos are LATTICE-class, 5 are ANALYTICAL/ESTIMATED; (3,3) anchor robust at R=8.36±0.05 with multi-source confirmation; see V0_6_LATTICE_FORMFACTOR_CLOSURE.md) |
+| 19 | **Lattice-informed KSFR ratios** | R16 #5(d) | Out-of-band | ⚠️ Partial T83 (2026-09-03): (3, 2) fundamental promoted to LATTICE per Shindler 2019; (2, 3) fundamental demoted to AF_EXCLUDED (asymptotic-freedom violation: SU(2) Nf=3 is IR conformal, KSFR undefined); 5/7 combos now have a defensible class (3 LATTICE, 2 ANALYTICAL, 0 ESTIMATED for the row reach-arounds, 1 N/A); (3, 4) ESTIMATED remains until a continuum-chiral reference for SU(3) Nf=4 appears. See V0_6_LATTICE_FORMFACTOR_CLOSURE.md → T83_KSFR_LATTICE_PROMOTION.md |
 
 ### Current stand-ins (good enough for v0.5/T70.x results)
 

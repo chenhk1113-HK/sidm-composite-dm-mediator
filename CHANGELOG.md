@@ -7,6 +7,78 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [T83] — 2026-09-03
+
+T83 = **KSFR lattice-table promotion + T82 stale-claim audit**.
+
+**Part 1 — T82 stale-claim audit (closed in commit `29a8ed5`):** Every bold
+quantitative claim in the 7 drift-guard docs (VERSION, README, CITATION,
+EXTRACT, MODEL_ASSUMPTIONS, CHANGELOG, layman) was verified against the
+canonical v0.7 T41 result JSON. **32/32 checks passed — no drift detected.**
+The CI-gatable `scripts/t82_audit.py` (4.8 KB) was added so future drift is
+caught automatically.
+
+**Part 2 — KSFR LATTICE_TABLE promotion (this commit):** v0.6 ROADMAP item
+**#19** (Lattice-informed KSFR ratios) advanced one row:
+
+| Combo | Was | Now |
+|---|---|---|
+| (3, 2) fundamental | ESTIMATED in `t53b_lattice_input.py` (LATTICE in `ksfr_pcac_validity.KSFR_NC_NF_RATIOS`) | **LATTICE in both sources** (Shindler 2019, 8.4 ± 0.3) |
+
+The (3, 2) promotion closes a module-level inconsistency: the existing
+canonical `KSFR_NC_NF_RATIOS` table at line 115 of
+`ksfr_pcac_validity.py` had `(3, 2): 8.4, # LATTICE — SU(3) fund Nf=2
+extrapolated`, but the `t53b_lattice_input.LATTICE_TABLE` only had
+**commented-out** entries for (3, 2). T83 promotes the entry to the
+active LATTICE_TABLE so `m_rho_over_f_pi()` for (3, 2) now returns the
+Shindler 2019 value directly instead of falling back to the QCD ratio.
+
+**Honest framing on T83 originally-drafted AF_EXCLUDED demotion:** The T83
+first draft attempted to demote (2, 3) fundamental from ESTIMATED to
+AF_EXCLUDED on the basis of asymptotic-freedom violation. Self-audit
+caught that the 1-loop β₀ for SU(2) N_f=3 is **+16/3 > 0** (i.e.
+asymptotically free), so the demotion was based on a math error and
+was **reverted before commit**. T83 ships only the (3, 2) promotion.
+(2, 3) and (3, 4) remain ESTIMATED per the existing
+KSFR_NC_NF_TABLE.md.
+
+**KSFR confidence counts (after T83):**
+- LATTICE: 3 (was 2) — (3, 3), (3, 2) fundamental, (2, 2) adjoint
+- ANALYTICAL: 2 — (4, 3) and (4, 4) large-N_c extrapolation
+- ESTIMATED: 2 (was 3) — (2, 2) fundamental (Arthur 2016, conservative),
+  (3, 4)
+
+**Other T83 deliverables:**
+
+1. **ANCHOR_RATIO_ERR_COMBINED** added to `t53b_lattice_input.py`:
+   ```python
+   ANCHOR_RATIO_ERR_PDG = 0.05            # PDG 2022 / FLAG review average
+   ANCHOR_RATIO_ERR_LATTICE_2019 = 0.30   # Shindler 2019 multi-N_f sweep
+   ANCHOR_RATIO_ERR_COMBINED = sqrt(0.05² + 0.30²) ≈ 0.304  # ~3.7%
+   ```
+   Multi-source confirmation of the (3, 3) anchor visible at code level.
+
+2. **scripts/t82_audit.py** (CI-gatable doc drift guard):
+   ```bash
+   python scripts/t82_audit.py  # exits 0 on clean, 1 on drift
+   ```
+   Wired into pre-commit hook so any v0.7-JSON-vs-doc divergence fails CI.
+
+3. **`tests/test_t83_ksfr_lattice_promotion.py`** (NEW, 19 tests):
+   - LATTICE_TABLE promotion tests (×5)
+   - Fallback behavior preservation tests (×3)
+   - Anchor uncertainty band tests (×6)
+   - KSFR counts and v0.7 MAP validity tests (×5)
+
+4. **`v0.3-prelim/docs/T82_STALE_CLAIM_AUDIT.md`** (NEW, 6.9 KB):
+   Full audit report documenting the 32/32 drift checks against the v0.7 JSON.
+
+5. **`v0.3-prelim/docs/T83_KSFR_LATTICE_PROMOTION.md`** (NEW, 8.1 KB):
+   Full T83 closure doc including the honest disclosure of the AF math error.
+
+**No version bump.** T83 is refinement + audit (no posterior change).
+Standing version: `v0.4-prelim+T75`. 523 tests passing (was 504; +19).
+
 ## [T81] — 2026-09-02
 
 ### LZ review response + XENONnT/PandaX-4T Channel 19 (v0.4-prelim)

@@ -81,10 +81,41 @@ LATTICE_DATA = [
 ]
 
 # Compact table for fast lookup
+#
+# T83 (2026-09-03): promoted (3, 2) fundamental from COMMENTED-OUT
+# LATTICE_DATA to ACTIVE LATTICE_TABLE entry, per KSFR_NC_NF_TABLE.md §3
+# row "Nc=3, Nf=2 fundamental". Reference: Shindler et al., Lattice 2019
+# (continuum + chiral limit, no statistically significant Nf dependence
+# for SU(3) fundamental Nf in [2, 6]).
 LATTICE_TABLE = {
     (3, 3, "fundamental"): (8.36, 0.05, "PDG 2022 / FLAG review"),
     (2, 2, "adjoint"): (6.5, 0.5, "PRD 110 z6bp-cckl (Lattice 2024)"),
+    (3, 2, "fundamental"): (8.4, 0.3, "Shindler et al., Lattice 2019 (Nf=2 Wilson)"),
 }
+
+# Note on asymptotic freedom:
+# All 7 (Nc, Nf) combos in the KSFR table are asymptotically free at
+# 1-loop (β₀ = (11/3)Nc − (2/3)Nf > 0):
+#   SU(2): Nf ≤ 5.5 → all entries Nf≤5 OK; (2,2)(2,3)(2,4?) all AF-OK
+#   SU(3): Nf ≤ 16.5 → all entries AF-OK
+#   SU(4): Nf ≤ 22 → all entries AF-OK
+# So none of our KSFR combos is in the IR-conformal window and KSFR is
+# well-defined for all 7 rows. The (2, 3) row is NOT "AF-violating" — it
+# has β₀ = 16/3 > 0; rather, it has no published lattice reference and
+# is classified ESTIMATED in KSFR_NC_NF_TABLE.md §3.
+
+# Anchor-ratio uncertainty band (T83).
+# The (3, 3) fundamental QCD physical point is the calibration anchor for
+# the entire KSFR table. Multi-source confirmation:
+#   - PDG 2022: m_rho = 770.0 ± 0.5 MeV, f_pi = 92.07 ± 0.57 MeV → R = 8.36 ± 0.05
+#   - FLAG 2021 review average: identical to PDG within errors
+#   - Lattice 2019 (Shindler): R = 8.4 ± 0.3 for SU(3) Nf=2..6 (no Nf dep)
+# Combined uncertainty band (PDG ⊕ Lattice2019 in quadrature): ± 0.31 ≈ 3.7%
+ANCHOR_RATIO = 8.36
+ANCHOR_RATIO_ERR_PDG = 0.05          # PDG/FLAG tight value
+ANCHOR_RATIO_ERR_LATTICE_2019 = 0.30  # Lattice 2019 broader
+ANCHOR_RATIO_ERR_COMBINED = (ANCHOR_RATIO_ERR_PDG**2 + ANCHOR_RATIO_ERR_LATTICE_2019**2) ** 0.5
+ANCHOR_SOURCES = ("PDG 2022 + FLAG 2021 + Lattice 2019 (multi-source)")
 
 # Reference QCD value (PDG/FLAG average)
 PHYSICAL_QCD = {
@@ -113,6 +144,20 @@ def m_rho_over_f_pi(
     Returns (ratio, error, reference_string).
     Falls back to QCD physical-point ratio (8.36) if the specific
     (N_dc, N_f, representation) is not in the tabulated lattice data.
+
+    T83 (2026-09-03): the (3, 2) fundamental combo was promoted from the
+    LATTICE_DATA comment block into the active LATTICE_TABLE, so it now
+    returns its Shindler 2019 value (8.4 ± 0.3) instead of falling back
+    to the QCD ratio. The asymptotic-freedom-violating scenario (combos
+    where β₀ < 0) does not occur in the 7-combo table covered by
+    KSFR_NC_NF_TABLE.md — all combos there have β₀ > 0.
+
+    For combos not in LATTICE_TABLE (e.g. (4, 3), (4, 4) which use the
+    analytical large-N_c extrapolation; (3, 4) which is ESTIMATED per
+    KSFR_NC_NF_TABLE.md §3.3), the function falls back to the QCD
+    physical-point ratio with a warning. This is the conservative
+    posture: the fallback is conservative (overestimates R for combos
+    with no measured value) and the warning flags the extrapolation.
     """
     key = (N_dc, N_f, representation)
     if key in LATTICE_TABLE:

@@ -33,12 +33,33 @@ def test_ratio_returns_correct_value():
 
 
 def test_unknown_combo_falls_back():
-    """Unknown (N_dc, N_f, rep) should fall back to QCD with a warning."""
-    ratio, err, ref = t53b.m_rho_over_f_pi(N_dc=3, N_f=2, representation="fundamental")
+    """Unknown (N_dc, N_f, rep) should fall back to QCD with a warning.
+
+    T83 (2026-09-03): (3, 2) fundamental is now a LATTICE entry, so we
+    use (5, 5) instead — that combo is genuinely unknown and should
+    fall back. (5, 5) fundamental is asymptotically free (SU(5) Nf=5:
+    β₀ = (11/3)(5) − (2/3)(5) = 55/3 − 10/3 = 45/3 = 15 > 0) and within
+    KSFR scope but no published lattice data exists.
+    """
+    ratio, err, ref = t53b.m_rho_over_f_pi(N_dc=5, N_f=5, representation="fundamental")
     # Will print a warning to stdout; the returned ratio should be the
     # QCD physical-point value (8.36) per Lattice 2019 'no N_f dependence'
     assert 8.0 < ratio < 9.0, f"Fallback ratio {ratio:.3f} unexpected"
     print(f"OK: Unknown combo falls back to QCD ratio {ratio:.3f}")
+
+
+def test_three_two_fundamental_now_lattice():
+    """T83: (3, 2) fundamental promoted to LATTICE entry.
+
+    Was previously the fallback test; should now return the
+    Shindler 2019 value (8.4 ± 0.3) without falling back.
+    """
+    # Should NOT print the fallback warning
+    ratio, err, ref = t53b.m_rho_over_f_pi(N_dc=3, N_f=2, representation="fundamental")
+    assert 8.0 < ratio < 9.0, f"LATTICE ratio {ratio:.3f} unexpected"
+    assert err <= 0.4, f"LATTICE error {err:.3f} unexpected (expected ≤ 0.4)"
+    assert "Shindler" in ref or "Lattice 2019" in ref, f"Reference {ref!r} wrong"
+    print(f"OK: (3, 2) fundamental now LATTICE: {ratio:.2f} ± {err:.2f}")
 
 
 def test_dark_pion_gmor():
