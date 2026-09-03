@@ -7,6 +7,97 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [T86] — 2026-09-03
+
+T86 = **doc-pack restructure (Option C hybrid).** Continuing the
+T85 README streamline work. Standing version unchanged
+(`v0.4-prelim+T75`); this is a documentation-only round.
+
+**What shipped (5 sub-commits):**
+
+1. **T86.7b/c (commit `4be9876`):** promoted
+   `v0.3-prelim/docs/DARK_SECTOR_LAGRANGIAN.md` → `docs/` (the
+   only methodology doc still under v0.3-prelim); added
+   `CURRENT.md` (1-page version-of-record) and `docs/INDEX.md`
+   (navigation skeleton).
+
+2. **T86.7d (commit `28a5ba0`):** renamed
+   `docs/LAYMAN_SUMMARY_V04_PRELIM_TIER1.md` →
+   `docs/LAYMAN_SUMMARY.md` (the version-suffix was carrying
+   historical-only info; canonical version is captured in the
+   doc body).
+
+3. **T86.7e (commit `e93c65e`):** bundled 4 superseded layman
+   summaries (R12, R13, R14, T71.8) into
+   `v0.3-prelim/docs/LAYMAN_SUMMARIES_HISTORICAL.md`
+   (collapsed `<details>` blocks); deleted the originals. ~55 KB
+   in-tree saved; full content remains in git history.
+
+4. **T86.7f (commit `0e21059`):** bundled 5 V0_6 closures
+   (`BROWER_PROBE_SCOPE`, `KISS_SIDM_TIMEOUT_VERDICT`,
+   `KISS_SIDM_UPSTREAM_FINDING`, `LATTICE_FORMFACTOR_CLOSURE`,
+   `TIER_B_CLOSURE`) into
+   `v0.3-prelim/docs/V0_6_CLOSURES_HISTORICAL.md`; bundled
+   10 old Mediator Detection Syntheses (v2-v11) into
+   `v0.3-prelim/docs/MEDIATOR_SYNTHESES_HISTORICAL.md`; deleted
+   the originals. Renamed
+   `v0.3-prelim/docs/FINDINGS.md` →
+   `v0.3-prelim/docs/PROJECT_FINDINGS.md` (breaks basename
+   collision with `docs/findings_2026_SIDM_papers.md`).
+
+5. **T86.7g (commit `80bafb8`):** extended `scripts/t82_audit.py`
+   to scan `CURRENT.md` (1-page version-of-record). Audit count
+   went 32 → 40 checks (8 new for CURRENT.md).
+
+**Also updated:**
+
+- **T86.a/b (commit `b29a7f2`):** test count 504 → 542 across
+  `EXTRACT.md`, `docs/LAYMAN_SUMMARY.md`, and audit-test
+  machinery (was already part of pre-T86 drift cleanup; included
+  here for completeness).
+
+**Verification (end of T86):**
+
+- Audit: **40/40 ALL CLEAR** (was 32 pre-T86)
+- Tests: **542 pass / 6 skip** (unchanged from T84)
+- v0.3-prelim/docs/ file count: 50+ → 33
+- Total in-tree disk saved: ~135 KB
+
+**Deferred to a follow-up round** (out of scope for the in-progress
+doc-pack restructure): `CHANGELOG.md` thinning. Currently 219 KB /
+~4,096 lines. Thinning approach: keep first 50 lines (project
+rename + standing version), keep T85+ entries at full fidelity,
+collapse older rounds to one-line commit-references.
+
+## [T85] — 2026-09-03
+
+**README.md streamline** (Option C precursor to T86). Standing
+version unchanged (`v0.4-prelim+T75`).
+
+**What changed:**
+
+- README.md: 750 lines → 440 lines (−41%).
+- Headline + key findings (TL;DR) promoted to **TOP** (under title/
+  badges). A reader sees the v0.7 result (σ/m = 0.27 cm²/g, m_χ =
+  770 GeV, log Z = −163.29, 19 channels, 542 tests) **before**
+  any historical context.
+- The ~250-line historical heads-up block (T70 / T70.1 / T70.2 /
+  R12 / etc.) moved to a single `## Recent rounds heads-up
+  (chronological, archived for context)` section near the BOTTOM,
+  preserved for archival context, with `[Standing]` /
+  `[Superseded]` tags.
+- KSFR LATTICE-class promotion (T83) added to "What's in each
+  version".
+- T84 sensitivity sweep added to "Key findings".
+- `scripts/t82_audit.py` README checks refactored (was 11, now
+  10); `test_t82_audit_version_drift.py` minimum check count
+  assertion updated 33 → 32 to match.
+- Version table updated to reflect T83 (KSFR promotion) + T84
+  (sensitivity sweep).
+
+**Verification:** Full test suite 542 pass / 6 skip; audit 32/32
+ALL CLEAR at time of merge.
+
 ## [T84] — 2026-09-03
 
 T84 = **Channel 18 (LSS) ρ_abundance sensitivity sweep.**
