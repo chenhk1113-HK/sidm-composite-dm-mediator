@@ -1,0 +1,339 @@
+{
+  "rho_grid": [
+    0.5,
+    0.55,
+    0.6,
+    0.65,
+    0.7,
+    0.75,
+    0.8,
+    0.85,
+    0.9,
+    0.95,
+    1.0
+  ],
+  "rho_fiducial": 0.85,
+  "per_rho": [
+    {
+      "rho_abundance": 0.5,
+      "best_fit_sigma_over_m_cm2_per_g": 2.6826957952797255,
+      "best_fit_loglike": -10.628377398636244,
+      "in_physical_range": true
+    },
+    {
+      "rho_abundance": 0.55,
+      "best_fit_sigma_over_m_cm2_per_g": 2.6826957952797255,
+      "best_fit_loglike": -8.855613369383603,
+      "in_physical_range": true
+    },
+    {
+      "rho_abundance": 0.6,
+      "best_fit_sigma_over_m_cm2_per_g": 2.6826957952797255,
+      "best_fit_loglike": -7.244480677015334,
+      "in_physical_range": true
+    },
+    {
+      "rho_abundance": 0.65,
+      "best_fit_sigma_over_m_cm2_per_g": 2.6826957952797255,
+      "best_fit_loglike": -5.7949793215314305,
+      "in_physical_range": true
+    },
+    {
+      "rho_abundance": 0.7,
+      "best_fit_sigma_over_m_cm2_per_g": 2.6826957952797255,
+      "best_fit_loglike": -4.507109302931913,
+      "in_physical_range": true
+    },
+    {
+      "rho_abundance": 0.75,
+      "best_fit_sigma_over_m_cm2_per_g": 2.6826957952797255,
+      "best_fit_loglike": -3.380870621216755,
+      "in_physical_range": true
+    },
+    {
+      "rho_abundance": 0.8,
+      "best_fit_sigma_over_m_cm2_per_g": 2.6826957952797255,
+      "best_fit_loglike": -2.416263276385979,
+      "in_physical_range": true
+    },
+    {
+      "rho_abundance": 0.85,
+      "best_fit_sigma_over_m_cm2_per_g": 2.6826957952797255,
+      "best_fit_loglike": -1.613287268439572,
+      "in_physical_range": true
+    },
+    {
+      "rho_abundance": 0.9,
+      "best_fit_sigma_over_m_cm2_per_g": 2.6826957952797255,
+      "best_fit_loglike": -0.9719425973775375,
+      "in_physical_range": true
+    },
+    {
+      "rho_abundance": 0.95,
+      "best_fit_sigma_over_m_cm2_per_g": 2.6826957952797255,
+      "best_fit_loglike": -0.49222926319987603,
+      "in_physical_range": true
+    },
+    {
+      "rho_abundance": 1.0,
+      "best_fit_sigma_over_m_cm2_per_g": 2.6826957952797255,
+      "best_fit_loglike": -0.17414726590658608,
+      "in_physical_range": true
+    }
+  ],
+  "delta_loglike_vs_fiducial": [
+    {
+      "rho_abundance": 0.5,
+      "best_sigma_at_rho": 2.6826957952797255,
+      "best_sigma_at_fiducial": 2.6826957952797255,
+      "delta_loglike": -9.015090130196672
+    },
+    {
+      "rho_abundance": 0.55,
+      "best_sigma_at_rho": 2.6826957952797255,
+      "best_sigma_at_fiducial": 2.6826957952797255,
+      "delta_loglike": -7.24232610094403
+    },
+    {
+      "rho_abundance": 0.6,
+      "best_sigma_at_rho": 2.6826957952797255,
+      "best_sigma_at_fiducial": 2.6826957952797255,
+      "delta_loglike": -5.631193408575761
+    },
+    {
+      "rho_abundance": 0.65,
+      "best_sigma_at_rho": 2.6826957952797255,
+      "best_sigma_at_fiducial": 2.6826957952797255,
+      "delta_loglike": -4.181692053091858
+    },
+    {
+      "rho_abundance": 0.7,
+      "best_sigma_at_rho": 2.6826957952797255,
+      "best_sigma_at_fiducial": 2.6826957952797255,
+      "delta_loglike": -2.893822034492341
+    },
+    {
+      "rho_abundance": 0.75,
+      "best_sigma_at_rho": 2.6826957952797255,
+      "best_sigma_at_fiducial": 2.6826957952797255,
+      "delta_loglike": -1.7675833527771831
+    },
+    {
+      "rho_abundance": 0.8,
+      "best_sigma_at_rho": 2.6826957952797255,
+      "best_sigma_at_fiducial": 2.6826957952797255,
+      "delta_loglike": -0.8029760079464068
+    },
+    {
+      "rho_abundance": 0.85,
+      "best_sigma_at_rho": 2.6826957952797255,
+      "best_sigma_at_fiducial": 2.6826957952797255,
+      "delta_loglike": 0.0
+    },
+    {
+      "rho_abundance": 0.9,
+      "best_sigma_at_rho": 2.6826957952797255,
+      "best_sigma_at_fiducial": 2.6826957952797255,
+      "delta_loglike": 0.6413446710620345
+    },
+    {
+      "rho_abundance": 0.95,
+      "best_sigma_at_rho": 2.6826957952797255,
+      "best_sigma_at_fiducial": 2.6826957952797255,
+      "delta_loglike": 1.121058005239696
+    },
+    {
+      "rho_abundance": 1.0,
+      "best_sigma_at_rho": 2.6826957952797255,
+      "best_sigma_at_fiducial": 2.6826957952797255,
+      "delta_loglike": 1.439140002532986
+    }
+  ],
+  "bias_at_v07_map": [
+    {
+      "rho_abundance": 0.5,
+      "b_pred_at_v07_map": [
+        1.1549864312093612,
+        1.057972023887471,
+        1.0283944606795776,
+        1.0
+      ],
+      "b_observed": [
+        2.31,
+        1.49,
+        1.24,
+        1.0
+      ]
+    },
+    {
+      "rho_abundance": 0.55,
+      "b_pred_at_v07_map": [
+        1.1704850743302972,
+        1.0637692262762182,
+        1.0312339067475353,
+        1.0
+      ],
+      "b_observed": [
+        2.31,
+        1.49,
+        1.24,
+        1.0
+      ]
+    },
+    {
+      "rho_abundance": 0.6,
+      "b_pred_at_v07_map": [
+        1.1859837174512333,
+        1.069566428664965,
+        1.034073352815493,
+        1.0
+      ],
+      "b_observed": [
+        2.31,
+        1.49,
+        1.24,
+        1.0
+      ]
+    },
+    {
+      "rho_abundance": 0.65,
+      "b_pred_at_v07_map": [
+        1.2014823605721696,
+        1.0753636310537122,
+        1.036912798883451,
+        1.0
+      ],
+      "b_observed": [
+        2.31,
+        1.49,
+        1.24,
+        1.0
+      ]
+    },
+    {
+      "rho_abundance": 0.7,
+      "b_pred_at_v07_map": [
+        1.2169810036931057,
+        1.0811608334424594,
+        1.0397522449514087,
+        1.0
+      ],
+      "b_observed": [
+        2.31,
+        1.49,
+        1.24,
+        1.0
+      ]
+    },
+    {
+      "rho_abundance": 0.75,
+      "b_pred_at_v07_map": [
+        1.2324796468140418,
+        1.0869580358312065,
+        1.0425916910193664,
+        1.0
+      ],
+      "b_observed": [
+        2.31,
+        1.49,
+        1.24,
+        1.0
+      ]
+    },
+    {
+      "rho_abundance": 0.8,
+      "b_pred_at_v07_map": [
+        1.2479782899349778,
+        1.0927552382199535,
+        1.0454311370873242,
+        1.0
+      ],
+      "b_observed": [
+        2.31,
+        1.49,
+        1.24,
+        1.0
+      ]
+    },
+    {
+      "rho_abundance": 0.85,
+      "b_pred_at_v07_map": [
+        1.2634769330559141,
+        1.0985524406087006,
+        1.0482705831552819,
+        1.0
+      ],
+      "b_observed": [
+        2.31,
+        1.49,
+        1.24,
+        1.0
+      ]
+    },
+    {
+      "rho_abundance": 0.9,
+      "b_pred_at_v07_map": [
+        1.2789755761768502,
+        1.1043496429974478,
+        1.0511100292232398,
+        1.0
+      ],
+      "b_observed": [
+        2.31,
+        1.49,
+        1.24,
+        1.0
+      ]
+    },
+    {
+      "rho_abundance": 0.95,
+      "b_pred_at_v07_map": [
+        1.2944742192977863,
+        1.110146845386195,
+        1.0539494752911975,
+        1.0
+      ],
+      "b_observed": [
+        2.31,
+        1.49,
+        1.24,
+        1.0
+      ]
+    },
+    {
+      "rho_abundance": 1.0,
+      "b_pred_at_v07_map": [
+        1.3099728624187224,
+        1.115944047774942,
+        1.0567889213591553,
+        1.0
+      ],
+      "b_observed": [
+        2.31,
+        1.49,
+        1.24,
+        1.0
+      ]
+    }
+  ],
+  "summary": {
+    "best_fit_sigma_min_cm2_per_g": 2.6826957952797255,
+    "best_fit_sigma_max_cm2_per_g": 2.6826957952797255,
+    "best_fit_sigma_spread_full_cm2_per_g": 0.0,
+    "best_fit_sigma_at_hp_min_cm2_per_g": 2.6826957952797255,
+    "best_fit_sigma_at_hp_max_cm2_per_g": 2.6826957952797255,
+    "best_fit_sigma_spread_hp_cm2_per_g": 0.0,
+    "max_abs_delta_loglike_vs_fiducial": 9.015090130196672,
+    "sensitivity_claim_verified": false
+  },
+  "sweep_metadata": {
+    "n_rho_points": 11,
+    "n_sigma_grid_points": 45,
+    "rho_range": [
+      0.5,
+      1.0
+    ],
+    "t74_claim_checked": "ρ ∈ [0.7, 1.0] should be insensitive (best-fit σ/m shift < 0.5 cm²/g)",
+    "timestamp_utc": "2026-09-03T01:12:01+00:00"
+  }
+}

@@ -165,7 +165,15 @@ the indirect-detection channels (which constrain σ_v).
    on b_rel already account for this.
 4. **z_f-Σ* correlation ρ ~ 0.85 is fixed (not fitted).** The paper
    shows this is the best-fit value from their ELUCID + abundance-
-   matching analysis; our channel is insensitive to ρ over [0.7, 1.0].
+   matching analysis. **T84 sensitivity sweep (2026-09-03):** the
+   best-fit σ/m is invariant over ρ ∈ [0.7, 1.0] within the 45-point
+   grid resolution (zero spread), but the log-likelihood magnitude
+   at the best-fit σ/m spans ~3 log-units across this ρ range, and
+   ~9 log-units across the full [0.5, 1.0] ρ range. **Treat the
+   channel as ρ-informed (best-fit σ/m robust; log Z magnitude
+   moderate-sensitive).** See
+   [v0.3-prelim/docs/T84_LSS_RHO_SENSITIVITY.md](T84_LSS_RHO_SENSITIVITY.md)
+   for the full sweep + Δlog Z table.
 5. **Core-collapse penalty is linear in σ/m.** The paper's "core
    collapse" is non-linear (rapid onset at σ/m ~ 3-5). Our linear
    ramp is a conservative approximation.

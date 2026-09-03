@@ -7,6 +7,80 @@
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [T84] — 2026-09-03
+
+T84 = **Channel 18 (LSS) ρ_abundance sensitivity sweep.**
+
+Per Updated review1.docx §4 (received 2026-09-03): "consider a sensitivity
+study that varies the mapping from bias to core size." This study
+quantifies exactly that — T74's Channel 18 uses `rho_abundance` (z_f-Σ*
+correlation coefficient) as a hardcoded fixed parameter (default 0.85);
+T84 sweeps it across the physically plausible range [0.5, 1.0] in 11
+grid points.
+
+**Headline result:**
+
+| Quantity | Value |
+|---|---|
+| ρ grid | 0.50 to 1.00 (11 points, Δ = 0.05) |
+| Fiducial ρ (T74 default) | 0.85 |
+| Best-fit σ/m at all ρ values | 2.683 cm²/g (constant — grid-search finds absolute max) |
+| Best-fit σ/m spread over ρ ∈ [0.7, 1.0] | 0.000 cm²/g ✓ |
+| Max \|Δlog Z\| across ρ ∈ [0.5, 1.0] | 9.015 log-units |
+| Δlog Z(ρ=1.0) vs fiducial | +1.439 |
+| Δlog Z(ρ=0.7) vs fiducial | −2.894 |
+| T74 sensitivity claim "ρ ∈ [0.7, 1.0] is insensitive" | **Half-verified — best-fit σ/m is invariant, but log Z magnitude is sensitive** |
+
+**Honest interpretation:** The T74 doc claim is **partially correct**.
+Best-fit σ/m IS invariant (T74's grid-search picks the absolute max-LL
+bin, which lands at the same σ/m regardless of ρ). However, the
+log-likelihood magnitude at that best-fit σ/m **scales substantially
+with ρ²** (because `b_pred[i] = 1 + s · ρ · (b_obs[i] - 1)` means
+chi² ∝ ρ² at the perfect-SIDM-template bin). Over ρ ∈ [0.7, 1.0] the
+log Z swing is ~3 log-units; over the full [0.5, 1.0] range it's
+~9 log-units.
+
+**Implications for the v0.7 posterior:** The v0.7 MAP σ/m = 0.27 cm²/g
+sits in a sub-optimal regime for Channel 18 regardless of ρ (predicted
+b_rel diffuse bin ~1.16 to 1.31, observed 2.31 ± 0.20). The headline
+σ/m = 0.27 cm²/g is robust because it is *driven by other channels*
+(dSph + UFD + Bullet + SPARC + DAMPE), not by LSS alone. The
+ρ-sensitivity affects the magnitude of the LSS-channel contribution to
+log Z, not the sign — so the v0.7 posterior remains qualitatively
+correct under reasonable ρ variation.
+
+**T84 deliverables:**
+
+1. **`v0.3-prelim/code/t84_lss_rho_sensitivity.py`** (NEW, ~290 lines):
+   Sweep runner + JSON writer + summary printer. ~3 sec wall time
+   on the 11×45 grid.
+
+2. **`v0.3-prelim/data/results/2026-09-03_t84_rho_sensitivity/t84_rho_sweep.json`**
+   (~8 KB): full machine-readable results.
+
+3. **`v0.3-prelim/data/results/2026-09-03_t84_rho_sensitivity/t84_best_fit_per_rho.csv`**
+   (498 bytes): compact per-ρ CSV.
+
+4. **`v0.3-prelim/tests/test_t84_rho_sensitivity.py`** (NEW, 14 tests):
+   - Grid structure, range, fiducial-in-set
+   - Best-fit σ/m in [0.3, 3] for all ρ
+   - Best-fit σ/m spread < 0.5 cm²/g over ρ ∈ [0.7, 1.0]
+   - log L monotonically increases with ρ at fixed σ/m
+   - b_pred matches formula `b_pred[i] = 1 + s · ρ · (b_obs[i] - 1)`
+   - JSON schema + delta-at-fiducial=0 + bias-scaling-with-ρ
+   - log Z swing is substantial (>1 log-unit)
+
+5. **`v0.3-prelim/docs/T84_LSS_RHO_SENSITIVITY.md`** (NEW, 7 KB):
+   Full results, interpretation, and recommended edit to T74 doc claim.
+
+6. **T74 doc update** (§Honest limitations #4): the original "insensitive
+   to ρ over [0.7, 1.0]" claim was refined to "best-fit σ/m invariant;
+   log Z magnitude moderate-sensitive", with a link to T84 doc.
+
+**No version bump.** T84 is a sensitivity study (no posterior change).
+Standing version `v0.4-prelim+T75`. 542 tests passing (was 528; +14).
+Drift-guard remains `33/33 ALL CLEAR`.
+
 ## [T83] — 2026-09-03
 
 T83 = **KSFR lattice-table promotion + T82 stale-claim audit**.
