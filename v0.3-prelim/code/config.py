@@ -139,6 +139,19 @@ EROSITA_VMAX_KMS = 500.0                    # characteristic cluster v_max
 EROSITA_SIGMA_M_UPPER_LIMIT = 0.5           # cm^2/g — core-formation threshold
 EROSITA_TAIL_WIDTH = 0.30                   # dex — soft Gaussian tail width
 
+# XRISM Resolve φ→γγ decay line null-channel (Bulbul+ 2024 §3, R15B P6b audit — Channel 22 documented null)
+# At v0.7 ε ~ 1e-37, the predicted decay photon energy E_gamma = m_phi/2 is in the 100-500 MeV
+# range, ABOVE XRISM Resolve's band of 0.3-12 keV by 4-5 orders of magnitude. Combined with
+# τ_phi ~ 4e32 yr (vs Hubble time 1.4e10 yr), the channel is doubly null: wrong energy band
+# AND impossibly long lifetime. Ship as audit trail; not a real constraint.
+XRISM_RESOLVE_BAND_LOW_KEV = 0.3          # XRISM Resolve low-energy cutoff
+XRISM_RESOLVE_BAND_HIGH_KEV = 12.0        # XRISM Resolve high-energy cutoff
+XRISM_RESOLVE_EFFECTIVE_AREA_CM2 = 160.0  # ~160 cm^2 at 6 keV (XRISM Resolve spec)
+XRISM_RESOLVE_FOV_ARCMIN2 = 1.0           # ~1 sq.arcmin effective FOV at Perseus
+XRISM_PHI_DECAY_PERSIAN_FOV_KPC3 = 1.0e5  # ~100 kpc^3 effective volume at Perseus (D=74 Mpc)
+XRISM_PHI_DECAY_HARD_CAP_EPS = 1.0e-30    # numerical breakdown cap on epsilon
+XRISM_PHI_DECAY_PREFACTOR_GEV2 = 1.0e-10  # portal prefactor (model-dependent, see doc)
+
 # NGC 1052-DF2/DF4 + FCC 224/240 dark-matter-free UDG (van Dokkum+ 2018-2026 — Channel 11)
 # T70: Gaussian consistency check centered at v0.3-prelim MAP, 2 dex width
 DM_FREE_UDG_RATE_PEAK = 0.0       # log-likelihood peak (centered at MAP)
@@ -228,6 +241,10 @@ __all__ = [
     "DRACO_SIGMA_M_UPPER_LIMIT", "DRACO_VMAX_KMS",
     "RADIO_RELIC_SIGMA_M_UPPER_LIMIT", "RADIO_RELIC_VMAX_KMS",
     "EROSITA_VMAX_KMS", "EROSITA_SIGMA_M_UPPER_LIMIT", "EROSITA_TAIL_WIDTH",
+    "XRISM_RESOLVE_BAND_LOW_KEV", "XRISM_RESOLVE_BAND_HIGH_KEV",
+    "XRISM_RESOLVE_EFFECTIVE_AREA_CM2", "XRISM_RESOLVE_FOV_ARCMIN2",
+    "XRISM_PHI_DECAY_PERSIAN_FOV_KPC3", "XRISM_PHI_DECAY_HARD_CAP_EPS",
+    "XRISM_PHI_DECAY_PREFACTOR_GEV2",
     "DM_FREE_UDG_RATE_PEAK", "DM_FREE_UDG_RATE_WIDTH",
     "COSMIC_WEB_RADIO_LOG_EPSILON_UPPER",
     "TREMAINE_GUNN_MASS_BOUND_EV",

@@ -116,7 +116,7 @@ substantive hidden assumption and is now surfaced.
 
 - Standing version: **v0.4-prelim+T75** (no bump).
 - Joint-fit posterior: **log Z = −163.29 ± 0.085**, m_χ = 770 GeV, σ/m = 0.27 cm²/g.
-- Tests: 612 pass / 8 skip.
+- Tests: 626 pass / 8 skip.
 - Drift-guard audit: 40/40 ALL CLEAR.
 
 **No posterior re-run.** No new physics. No new channels. The standing

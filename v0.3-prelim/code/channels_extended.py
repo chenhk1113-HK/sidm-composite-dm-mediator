@@ -1426,6 +1426,34 @@ def loglike_erosita_erass1(
         return 0.0
 
 
+def loglike_phi_to_gamgam_xrism(theta, include_in_fit: bool = True) -> float:
+    """T41-compatible wrapper for the XRISM phi -> gamma gamma decay null-channel.
+
+    Channel 22 (T88.D): documented null per R15B reassessment (P6b entry, lines
+    168-174). The predicted photon energy E_gamma = m_phi/2 is 4-5 orders of
+    magnitude above XRISM Resolve's 0.3-12 keV band, and the lifetime tau_phi
+    exceeds Hubble time by 1e42. Returns log L = 0 for all physically-relevant
+    posterior inputs.
+
+    Args:
+        theta: tuple (log_eps, log_alpha, m_phi_MeV, m_chi_GeV, g_chi, log_xi)
+        include_in_fit: if False, returns 0 (do not include in fit sum)
+
+    Returns:
+        0.0 (silent cross-check).
+    """
+    try:
+        from xrism_phi_decay_forward_model import loglike_phi_to_gamgam_xrism as _impl
+    except ImportError:
+        return 0.0
+    if not include_in_fit:
+        return 0.0
+    try:
+        return _impl(theta)
+    except Exception:
+        return 0.0
+
+
 if __name__ == "__main__":
     print("=== LZ 2024 spin-independent WIMP-nucleon limits ===")
     print(f"{'m_chi (GeV)':<15} {'sigma_limit (cm^2)':<25}")

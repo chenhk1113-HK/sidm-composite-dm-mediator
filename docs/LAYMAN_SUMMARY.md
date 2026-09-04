@@ -214,7 +214,7 @@ worth flagging.
 
 - Standing version: **v0.4-prelim+T75** (no bump)
 - Joint-fit posterior: **log Z = −163.29 ± 0.085**, m_χ = 770 GeV, σ/m = 0.27 cm²/g
-- Tests: 612 pass / 8 skip
+- Tests: 626 pass / 8 skip
 - Drift-guard audit: 40/40 ALL CLEAR
 - **No posterior re-run**; **no new physics**; **no new channels**
 
@@ -310,5 +310,5 @@ velocity-slope tension. The Tier-1 milestone is publication-worthy.
 > T82 stale-claim audit (32/32 doc-presence + 1 VERSION drift-guard checks pass),
 > T83 KSFR (3,2) fundamental LATTICE promotion, T84 Channel 18 ρ sensitivity sweep.
 > Headline: σ/m = 0.27 cm²/g, tension = 0.60, log Z =
-> -163.29 ± 0.085, m_χ ~ 770 GeV (MAP). **612** tests passing, 21
+> -163.29 ± 0.085, m_χ ~ 770 GeV (MAP). **626** tests passing, 21
 > channels.** Standing posture preserved at v0.4-prelim+T75.

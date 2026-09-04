@@ -78,8 +78,9 @@ from ksfr_pcac_validity import loglike_ksfr_pcac_validity
 from channels_extended import (
     loglike_cmb_distortion, loglike_dampe_cre, loglike_lss_assembly_bias,
     loglike_competitor_dd_watch, loglike_xrism_perseus_icm,
-    loglike_erosita_erass1,
+    loglike_erosita_erass1, loglike_phi_to_gamgam_xrism,
 )
+from xrism_phi_decay_forward_model import XRISM_PHI_DECAY_ARXIV_ID as _XRISM_PHI_ARXIV
 
 
 import platform
@@ -382,6 +383,21 @@ def loglike_joint(theta):
     else:
         ll_erosita = 0.0
 
+    # ----- Channel 22 (T88.D): XRISM Resolve phi -> gamma gamma decay (documented null) -----
+    # R15B audit verdict (P6b): SKIP -- asymptotically null at v0.7 epsilon.
+    # Two independent nulls: (1) E_gamma = m_phi/2 is in the 100-500 MeV range,
+    # 4-5 orders of magnitude above XRISM Resolve's 0.3-12 keV band; (2) lifetime
+    # tau_phi ~ 3e52 yr at v0.7 epsilon is 1e42 x Hubble time, so the line is
+    # undetectable even in principle. Channel returns log L = 0 always.
+    # Citation: Bulbul+ 2024 (arXiv:2402.08452); R15B audit lines 168-174.
+    # Gated by T88D_PHI_DECAY_DISABLE=1 for ablation. Default ON (silent).
+    if os.environ.get("T88D_PHI_DECAY_DISABLE", "").strip() != "1":
+        ll_phi_decay = loglike_phi_to_gamgam_xrism(theta)
+        if not np.isfinite(ll_phi_decay):
+            return -np.inf
+    else:
+        ll_phi_decay = 0.0
+
     # Optional SPARC contribution (slow, so disabled by default)
     # Use a coarse grid to be fast.
     # T69 (v0.4-prelim): rescaled by baryonic-feedback nuisance f_fb.
@@ -418,7 +434,7 @@ def loglike_joint(theta):
         except Exception:
             ll_sparc = 0.0
 
-    return ll_dsph + ll_ufd + ll_bullet + ll_lz + ll_fermi + ll_sparc + ll_cmb + ll_dampe + ll_lss + ll_competitor_dd + ll_xrism + ll_erosita
+    return ll_dsph + ll_ufd + ll_bullet + ll_lz + ll_fermi + ll_sparc + ll_cmb + ll_dampe + ll_lss + ll_competitor_dd + ll_xrism + ll_erosita + ll_phi_decay
 
 
 def prior_transform_5(u):

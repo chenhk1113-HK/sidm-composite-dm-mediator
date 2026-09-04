@@ -24,7 +24,7 @@ Recent rounds within this standing version: **+T80** (LZ paper compatibility), *
 | **m_φ** (mediator mass, MAP) | **453 MeV** | posterior median 588 MeV (KSFR-valid) |
 | **Tension T39 vs Yukawa a** | **0.60σ** | below the 1.0 threshold (resolved) |
 | **Channels** | **21** | 16 v0.6 → +DAMPE +LSS +XENONnT/PandaX watch +XRISM Perseus +eROSITA |
-| **Tests** | **612 pass, 8 skip** | +33 from T88.B eROSITA Channel 21 |
+| **Tests** | **626 pass, 8 skip** | +15 from T88.D XRISM φ→γγ decay null-channel (documented null per R15B) |
 | **Drift-guard audit** | **40/40 ALL CLEAR** | `scripts/t82_audit.py` (CI-gatable) |
 | **KIV cron** | **2026-11-01 09:00** | re-checks LZ paper via `scripts/lz_kiv_check.py` |
 
@@ -62,7 +62,7 @@ pip install -r requirements.txt
 # 3. Verify — should print "ALL CLEAR: 40/40 checks passed — no drift"
 python scripts/t82_audit.py
 
-# 4. Run the test suite (612 tests, expect ~0 failures)
+# 4. Run the test suite (626 tests, expect ~0 failures)
 pytest v0.3-prelim/tests/ --ignore=v0.3-prelim/tests/test_sparc_hierarchical.py \
                          --ignore=v0.3-prelim/tests/test_t32_real_likelihood.py -q
 

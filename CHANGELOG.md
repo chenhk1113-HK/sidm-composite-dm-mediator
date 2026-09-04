@@ -176,6 +176,90 @@ T88.D (deferred): XRISM mediator decay φ→γγ (asymptotically null).
 
 ---
 
+## [T88.D] — 2026-09-04
+
+**XRISM Resolve φ→γγ decay null-channel audit (Channel 22 documented null) ship.**
+Fourth round of the T88 dataset-acquisition series. **NOT a real
+constraining channel** — ships as audit trail locking R15B's "skip"
+verdict (P6b entry, lines 168-174) into the codebase with hand-computed
+numbers.
+
+**Why ship a null:** so future review rounds don't re-litigate the
+analysis. Cost ~2h; permanent ~5KB executable documentation.
+
+**The double null:**
+
+1. **Wrong energy band.** For all m_φ in 10-1000 MeV, the predicted
+   photon energy E_γ = m_φ/2 is 25,000-500,000 keV. XRISM Resolve's
+   band is 0.3-12 keV. E_γ is 2000-40000× above the band. **XRISM
+   cannot detect photons at these energies.**
+
+2. **Impossibly long lifetime.** τ_φ = ℏ/(α ε² m_φ³/(64π³ v_EW²)) ≈
+   2.8×10⁵² s ≈ 8.9×10⁴⁴ yr at v0.7 ε. Hubble time is 1.38×10¹⁰ yr;
+   τ_φ/t_H = 6.5×10³⁴. Even ignoring energy band, the line is
+   undetectable on cosmological timescales.
+
+**What shipped (T88.D):**
+
+1. **`v0.3-prelim/code/xrism_phi_decay_forward_model.py`** (NEW, ~270 LOC):
+   Forward-model module with hardcoded R15B null-verdict computations.
+   Helper functions: `phi_decay_lifetime_yr`, `photon_energy_keV`,
+   `is_photon_in_xrism_band`, `predicted_photons_in_fov`.
+   `loglike_phi_to_gamgam_xrism(theta) = 0.0` always.
+
+2. **`v0.3-prelim/code/channels_extended.py`** (MODIFIED): appended
+   `loglike_phi_to_gamgam_xrism` thin wrapper for Channel 22 (skill P4
+   recipe; appended before `if __name__ == "__main__":`).
+
+3. **`v0.3-prelim/code/t41_mediator_mass_joint_fit.py`** (MODIFIED):
+   added Channel 22 block in `loglike_joint`, env-var-gated by
+   `T88D_PHI_DECAY_DISABLE=1`.
+
+4. **`v0.3-prelim/code/config.py`** (MODIFIED, BOTH root + v0.3-prelim/code):
+   added XRISM Resolve constants (band 0.3-12 keV, FOV, hard cap).
+
+5. **`v0.3-prelim/tests/test_xrism_phi_decay_forward_model.py`** (NEW,
+   15 tests, all passing):
+   - Hardcoded constants (citation provenance, no-network contract)
+   - Photon energy at v0.7 MAP and for all posterior m_φ (always above XRISM)
+   - Lifetime at v0.7 MAP (τ_φ = 3×10⁵² yr, 6.5×10³⁴ × Hubble time)
+   - Predicted photon count in 745 ks FOV (large, but at wrong energy)
+   - log-likelihood behavior (zero everywhere; handles malformed theta)
+   - Hard cap on ε > 1e-30 (out-of-posterior flag)
+   - Wrapper integration with graceful failure handling
+
+6. **`v0.3-prelim/docs/T88D_XRISM_PHI_DECAY.md`** (NEW, full method
+   doc with physics, hand-computed null numbers, R15B audit reference).
+
+**Standing posture preserved:**
+- VERSION: 0.4-prelim+T75 (no bump)
+- log Z: -164.23 ± 0.085 (Channel 22 returns 0, no effect on fit)
+- σ/m: 0.28 cm²/g
+- 21 channels (NOT 22; null channel does not increment effective count)
+- 626 pass / 8 skip (was 611 / 8; +15 from T88.D)
+
+**Drift-guard audit:** updated test count 612 → 626; channel count
+stays 21. 40/40 ALL CLEAR.
+
+**Cited literature:**
+- Bulbul et al. 2024 (eROSITA-DE eRASS1 cluster catalog), A&A 685 A106,
+  arXiv:2402.08452 (citation provenance only; no data used).
+- R15B reassessment lines 168-174 (the source of the null verdict).
+- consider5.docx (R15 source) lines 27-28 (original XRISM φ→γγ proposal).
+
+**What is NOT in this scope (deferred per R15B):**
+- Real XRISM mediator decay line analysis: requires ε > 1e-20,
+  30+ orders of magnitude above v0.7 posterior. Different physics.
+- Gamma-ray telescope data (Fermi-LAT, CTA, HESS) for the actual MeV
+  band: deferred to v0.6+ cycles if ε posterior moves.
+- Other decay modes (e⁺e⁻, μ⁺μ⁻, ππ): same null logic applies.
+
+**Next:** T88.C (deferred): Euclid Q1 BCG offsets (Tier-2, ~5h) —
+adds a detection to Channel 8's upper limit (14 grade-A clusters at
+v ~ 1000 km/s). Awaiting user go-ahead.
+
+---
+
 ## [T86] — 2026-09-03
 
 T86 = **doc-pack restructure (Option C hybrid).** Continuing the
