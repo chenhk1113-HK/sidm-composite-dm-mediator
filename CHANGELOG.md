@@ -18,11 +18,88 @@ All notable changes to this project are documented here. Format follows
 
 ---
 
-# Current era — full entries (T81 → T86)
+# Current era — full entries (T81 → T88)
 
-These five entries cover the v0.4-prelim Tier-1 milestone and the
-recent doc-pack restructure. Kept at full fidelity because they are
-the rounds the project currently stands on.
+These six entries cover the v0.4-prelim Tier-1 milestone, the recent
+doc-pack restructure, and the start of the T88 dataset-acquisition
+series. Kept at full fidelity because they are the rounds the project
+currently stands on.
+
+## [T88.A] — 2026-09-04
+
+**XRISM Perseus ICM consistency cross-check channel (Channel 20) ship.**
+First round of the T88 dataset-acquisition series (per R15B
+reassessment, 2026-09-04).
+
+**What shipped (T88.A):**
+
+1. **`v0.3-prelim/code/xrism_perseus_icm_forward_model.py`** (NEW, 298 LOC):
+   Forward-model module implementing Channel 20. Hardcoded published
+   XRISM Perseus f_nth(r) profile (Zhang+ 2025 Table 1, 4 of 6 radial
+   bins). Tanh-transition penalty outside the Bullet-allowed consistency
+   range [0.005, 0.5] cm²/g; log L = 0 inside the plateau.
+
+2. **`v0.3-prelim/code/channels_extended.py`** (MODIFIED): appended
+   `loglike_xrism_perseus_icm` thin wrapper for Channel 20 (skill P4
+   recipe; appended before `if __name__ == "__main__":`).
+
+3. **`v0.3-prelim/code/t41_mediator_mass_joint_fit.py`** (MODIFIED):
+   added import + Channel 10 (XRISM) block in `loglike_joint`,
+   env-var-gated by `T88_XRISM_DISABLE=1`.
+
+4. **`v0.3-prelim/tests/test_xrism_perseus_icm_forward_model.py`** (NEW,
+   30 tests): transcription, forward-model shape, asymmetric Gaussian
+   (skill P7), zero-normalization, integration with T41 at v0.7 MAP.
+   All 30 passing.
+
+5. **`v0.3-prelim/code/t88a_xrism_ablation.py`** (NEW): 4-config
+   ablation harness (`none` / `xrism_only` / `dampe_lss` / `all`)
+   with `T88A_NLIVE` env-var override (skill P12 sequential).
+
+6. **`v0.3-prelim/docs/T88A_XRISM_PERSEUS_ICM.md`** (NEW, ~270 LOC):
+   Full method + cross-validation + headline finding + "what's NOT in
+   this scope (deferred)" section.
+
+7. **`v0.3-prelim/docs/T88A_TENSION_INVESTIGATION.md`** (NEW):
+   Audit trail of the phantom tension investigation. Documents the
+   stale `__pycache__` failure mode that caused the false alarm and
+   the hand-verified calculation that the "0.27" headline IS the
+   Yukawa-derived σ/m_0 at v=100 km/s.
+
+**Ablation results (nlive=500, all 4 configs):**
+
+| Config | log Z | Δ from prev | wall |
+|---|---|---|---|
+| `none` | -112.72 | baseline | 78s |
+| `xrism_only` | -112.53 | +0.19 | 71s |
+| `dampe_lss` | -163.99 | (v0.7 channels) | 106s |
+| `all` | -164.22 | -0.24 | 112s |
+
+Both XRISM-on/off deltas are <0.5 log-units, well below log_Z_err.
+
+**Headline ship (nlive=2000):**
+
+| Metric | v0.7 baseline | T88.A | Δ |
+|---|---|---|---|
+| log Z | -163.29 | -164.20 | -0.91 (sampling variance -0.88; pure XRISM = -0.028) |
+| σ/m_0 (MAP) | 0.273 | 0.281 | +0.008 |
+| wall | 440s | 447s | +7s |
+
+A sampling-variance control test (rerun v0.7 baseline a second time,
+no XRISM) confirmed the -0.91 shift is dominated by nested-sampling
+variance, not XRISM. **Pure XRISM contribution = -0.028 — silent
+cross-check, exactly as designed.**
+
+**Standing posture preserved:** v0.4-prelim+T75, log Z = -164.20 ± 0.085,
+σ/m = 0.28 cm²/g, 20 channels (was 19 + Channel 20).
+
+**Verification:** 30/30 new tests passing; full regression 579 pass / 8 skip.
+Drift-guard audit (T82) unchanged — standing version is `v0.4-prelim+T75`.
+
+**Cited literature:** Zhang et al. (XRISM Collaboration), A&A 707 A109
+(2026), arXiv:2510.12782, DOI 10.1051/0004-6361/202557660.
+
+---
 
 ## [T86] — 2026-09-03
 

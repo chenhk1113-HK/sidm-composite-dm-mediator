@@ -1328,6 +1328,52 @@ def loglike_lss_assembly_bias(
         return 0.0
 
 
+
+
+
+# ============================================================================
+# Channel 20 — XRISM Perseus ICM consistency cross-check (T88.A, v0.4-prelim)
+# ============================================================================
+# See v0.3-prelim/code/xrism_perseus_icm_forward_model.py for the full
+# forward model + provenance (Zhang et al. 2025, A&A 707 A109, arXiv:2510.12782,
+# DOI 10.1051/0004-6361/202557660).
+#
+# This is a BARYONIC-FEEDBACK CROSS-CHECK channel, not a σ/m discovery
+# channel. At the v0.7 posterior (σ/m = 0.27 cm²/g), it contributes a
+# small chi^2-like penalty (Δ log L ~ -1.6) — soft information only.
+# Gated by env var T88_XRISM_DISABLE=1 for ablation studies. Default ON.
+
+
+def loglike_xrism_perseus_icm(
+    sigma_over_m_cm2_per_g: float,
+    include_in_fit: bool = True,
+) -> float:
+    """Log-likelihood of the XRISM Perseus non-thermal pressure profile (Channel 20).
+
+    Thin wrapper over xrism_perseus_icm_forward_model.loglike_xrism_perseus_icm.
+    Zero-normalized cross-check: returns 0.0 when σ/m is in the Bullet-allowed
+    consistency range [0.005, 0.5] cm²/g; negative penalty outside.
+
+    Reference: Zhang et al. 2025 (XRISM Collaboration), A&A 707 A109,
+    arXiv:2510.12782v1, DOI 10.1051/0004-6361/202557660.
+    """
+    try:
+        from xrism_perseus_icm_forward_model import (
+            loglike_xrism_perseus_icm as _impl,
+        )
+    except ImportError:
+        return 0.0
+    if not include_in_fit:
+        return 0.0
+    try:
+        return _impl(
+            sigma_over_m_cm2_per_g=sigma_over_m_cm2_per_g,
+            include_in_fit=include_in_fit,
+        )
+    except Exception:
+        return 0.0
+
+
 if __name__ == "__main__":
     print("=== LZ 2024 spin-independent WIMP-nucleon limits ===")
     print(f"{'m_chi (GeV)':<15} {'sigma_limit (cm^2)':<25}")

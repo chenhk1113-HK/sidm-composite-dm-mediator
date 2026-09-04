@@ -1,0 +1,51 @@
+{
+  "t88_round": "T88.A",
+  "channel": "XRISM Perseus ICM (Channel 20)",
+  "date": "2026-09-04T08:45:42",
+  "nlive": 500,
+  "runs": [
+    {
+      "config": "none",
+      "ok": true,
+      "log_Z": -112.71928858184155,
+      "log_Z_err": 0.15711823293458155,
+      "config_hash": "e6ffd9ef711b",
+      "wall_seconds": 78.19333958625793,
+      "out_path": "C:\\Users\\lamkuenai\\projects\\sidm-composite-dm-mediator\\v0.3-prelim\\data\\results\\t41_mediator_mass_joint_fit_t88a_none.json",
+      "interpretation": "log Z = -112.719, posterior medians: m_phi = 677.61 MeV, m_chi = 580.38 GeV, g_chi = 1.3083, eps = 4.48e-37, alpha = 2.93e-16, xi = 0.203. Derived sigma/m_0 = 0.055 cm^2/g, a = +0.140. Yukawa velocity index = +0.140; T39 data-preferred = +0.94. |Tension| = 0.80 (threshold 1.0). R12 P0-B (2026-08-17): the pre-fix '1.3 sigma tension' claim was a sign-flip artifact in derived_a; this re-run uses the corrected sign. v0.6 (R14 Rec #8, 2026-08-26): log_xi promoted from fixed-1 to free with prior log_x"
+    },
+    {
+      "config": "xrism_only",
+      "ok": true,
+      "log_Z": -112.52784436298951,
+      "log_Z_err": 0.15494182493775296,
+      "config_hash": "e6ffd9ef711b",
+      "wall_seconds": 70.60289430618286,
+      "out_path": "C:\\Users\\lamkuenai\\projects\\sidm-composite-dm-mediator\\v0.3-prelim\\data\\results\\t41_mediator_mass_joint_fit_t88a_xrism_only.json",
+      "interpretation": "log Z = -112.528, posterior medians: m_phi = 684.68 MeV, m_chi = 590.29 GeV, g_chi = 1.3197, eps = 5.13e-37, alpha = 3.59e-16, xi = 0.193. Derived sigma/m_0 = 0.060 cm^2/g, a = +0.113. Yukawa velocity index = +0.113; T39 data-preferred = +0.94. |Tension| = 0.83 (threshold 1.0). R12 P0-B (2026-08-17): the pre-fix '1.3 sigma tension' claim was a sign-flip artifact in derived_a; this re-run uses the corrected sign. v0.6 (R14 Rec #8, 2026-08-26): log_xi promoted from fixed-1 to free with prior log_x"
+    },
+    {
+      "config": "dampe_lss",
+      "ok": true,
+      "log_Z": -163.98570867521815,
+      "log_Z_err": 0.1593347253450205,
+      "config_hash": "e6ffd9ef711b",
+      "wall_seconds": 105.77091145515442,
+      "out_path": "C:\\Users\\lamkuenai\\projects\\sidm-composite-dm-mediator\\v0.3-prelim\\data\\results\\t41_mediator_mass_joint_fit_t88a_dampe_lss.json",
+      "interpretation": "log Z = -163.986, posterior medians: m_phi = 586.88 MeV, m_chi = 490.58 GeV, g_chi = 1.5704, eps = 3.10e-37, alpha = 2.47e-16, xi = 0.153. Derived sigma/m_0 = 0.254 cm^2/g, a = +0.107. Yukawa velocity index = +0.107; T39 data-preferred = +0.94. |Tension| = 0.83 (threshold 1.0). R12 P0-B (2026-08-17): the pre-fix '1.3 sigma tension' claim was a sign-flip artifact in derived_a; this re-run uses the corrected sign. v0.6 (R14 Rec #8, 2026-08-26): log_xi promoted from fixed-1 to free with prior log_x"
+    },
+    {
+      "config": "all",
+      "ok": true,
+      "log_Z": -164.22350434758707,
+      "log_Z_err": 0.160509793097121,
+      "config_hash": "e6ffd9ef711b",
+      "wall_seconds": 111.5105938911438,
+      "out_path": "C:\\Users\\lamkuenai\\projects\\sidm-composite-dm-mediator\\v0.3-prelim\\data\\results\\t41_mediator_mass_joint_fit_t88a_all.json",
+      "interpretation": "log Z = -164.224, posterior medians: m_phi = 585.09 MeV, m_chi = 502.43 GeV, g_chi = 1.5645, eps = 1.71e-37, alpha = 1.65e-16, xi = 0.161. Derived sigma/m_0 = 0.068 cm^2/g, a = +0.047. Yukawa velocity index = +0.047; T39 data-preferred = +0.94. |Tension| = 0.89 (threshold 1.0). R12 P0-B (2026-08-17): the pre-fix '1.3 sigma tension' claim was a sign-flip artifact in derived_a; this re-run uses the corrected sign. v0.6 (R14 Rec #8, 2026-08-26): log_xi promoted from fixed-1 to free with prior log_x"
+    }
+  ],
+  "delta_log_Z_xrism_at_v07_channels": -0.23779567236891808,
+  "delta_log_Z_xrism_at_baseline": 0.1914442188520411,
+  "verdict": "XRISM Channel 20 is silent at the v0.7 posterior (consistency plateau); deltas should be ~0 if (a) v0.7 channels are in their consistency range and (b) XRISM sits in its plateau. Large negative deltas would indicate a tension discovered."
+}

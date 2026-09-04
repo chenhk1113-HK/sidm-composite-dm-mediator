@@ -23,9 +23,9 @@ Recent rounds within this standing version: **+T80** (LZ paper compatibility), *
 | **m_χ** (DM mass, MAP) | **770 GeV** | posterior median 498 GeV |
 | **m_φ** (mediator mass, MAP) | **453 MeV** | posterior median 588 MeV (KSFR-valid) |
 | **Tension T39 vs Yukawa a** | **0.60σ** | below the 1.0 threshold (resolved) |
-| **Channels** | **19** | 16 v0.6 → +DAMPE +LSS +XENONnT/PandaX watch |
-| **Tests** | **549 pass, 8 skip** | +14 from T84 sensitivity sweep |
-| **Drift-guard audit** | **33/33 ALL CLEAR** | `scripts/t82_audit.py` (CI-gatable) |
+| **Channels** | **20** | 16 v0.6 → +DAMPE +LSS +XENONnT/PandaX watch +XRISM Perseus |
+| **Tests** | **579 pass, 8 skip** | +30 from T88.A XRISM Channel 20 |
+| **Drift-guard audit** | **40/40 ALL CLEAR** | `scripts/t82_audit.py` (CI-gatable) |
 | **KIV cron** | **2026-11-01 09:00** | re-checks LZ paper via `scripts/lz_kiv_check.py` |
 
 > All headline numbers are spot-checked against `v0.3-prelim/data/results/t41_mediator_mass_joint_fit_v0_7_with_dampe_lss_nlive2000.json` and verified by `scripts/t82_audit.py` (32 doc-presence + 1 VERSION-drift checks, all passing).
@@ -59,10 +59,10 @@ pip install -r requirements.txt
 # or use the WSL wimpy venv that includes Julia + KiSS-SIDM:
 #   /home/lamkuenai/wimpy/bin/python
 
-# 3. Verify — should print "ALL CLEAR: 33/33 checks passed — no drift"
+# 3. Verify — should print "ALL CLEAR: 40/40 checks passed — no drift"
 python scripts/t82_audit.py
 
-# 4. Run the test suite (549 tests, expect ~0 failures)
+# 4. Run the test suite (579 tests, expect ~0 failures)
 pytest v0.3-prelim/tests/ --ignore=v0.3-prelim/tests/test_sparc_hierarchical.py \
                          --ignore=v0.3-prelim/tests/test_t32_real_likelihood.py -q
 

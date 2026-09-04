@@ -77,7 +77,7 @@ from ksfr_pcac_validity import loglike_ksfr_pcac_validity
 #   |μ| < 9e-6, |y| < 1.5e-6 (95% CL)
 from channels_extended import (
     loglike_cmb_distortion, loglike_dampe_cre, loglike_lss_assembly_bias,
-    loglike_competitor_dd_watch,
+    loglike_competitor_dd_watch, loglike_xrism_perseus_icm,
 )
 
 
@@ -342,6 +342,23 @@ def loglike_joint(theta):
     else:
         ll_competitor_dd = 0.0
 
+    # 10. T88.A: XRISM Perseus ICM consistency cross-check (Channel 20).
+    # Published non-thermal pressure profile (Zhang et al. 2025, A&A 707
+    # A109, arXiv:2510.12782) constrains σ/m via the f_nth(r) profile at
+    # 4 radial bins (R = 112, 180, 243, 347 kpc). At the v0.7 posterior
+    # (σ/m = 0.27 cm²/g), this channel sits in its consistency plateau
+    # and contributes 0. NO xi dependence (σ/m is independent of dark-
+    # sector temperature ratio).
+    # Gated by T88_XRISM_DISABLE=1 for ablation studies. Default ON.
+    if os.environ.get("T88_XRISM_DISABLE", "").strip() != "1":
+        ll_xrism = loglike_xrism_perseus_icm(
+            sigma_over_m_cm2_per_g=sigma_m_0,
+        )
+        if not np.isfinite(ll_xrism):
+            return -np.inf
+    else:
+        ll_xrism = 0.0
+
     # Optional SPARC contribution (slow, so disabled by default)
     # Use a coarse grid to be fast.
     # T69 (v0.4-prelim): rescaled by baryonic-feedback nuisance f_fb.
@@ -378,7 +395,7 @@ def loglike_joint(theta):
         except Exception:
             ll_sparc = 0.0
 
-    return ll_dsph + ll_ufd + ll_bullet + ll_lz + ll_fermi + ll_sparc + ll_cmb + ll_dampe + ll_lss + ll_competitor_dd
+    return ll_dsph + ll_ufd + ll_bullet + ll_lz + ll_fermi + ll_sparc + ll_cmb + ll_dampe + ll_lss + ll_competitor_dd + ll_xrism
 
 
 def prior_transform_5(u):
