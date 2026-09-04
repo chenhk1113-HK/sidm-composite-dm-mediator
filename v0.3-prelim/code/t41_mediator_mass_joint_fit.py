@@ -78,6 +78,7 @@ from ksfr_pcac_validity import loglike_ksfr_pcac_validity
 from channels_extended import (
     loglike_cmb_distortion, loglike_dampe_cre, loglike_lss_assembly_bias,
     loglike_competitor_dd_watch, loglike_xrism_perseus_icm,
+    loglike_erosita_erass1,
 )
 
 
@@ -359,6 +360,28 @@ def loglike_joint(theta):
     else:
         ll_xrism = 0.0
 
+    # 11. T88.B: eROSITA eRASS1 cluster density profile catalog
+    # (Channel 21). Bulbul+ 2024 (arXiv:2402.08452, A&A 685 A106, 5259
+    # clusters, M = 5e12 to 2e15 M_sun, v ~ 500 km/s). Soft one-sided
+    # Gaussian UPPER LIMIT on sigma/m(v=500) at 0.5 cm^2/g, the
+    # core-formation threshold for SIDM profiles (Brinckmann+ 2018,
+    # Robertson+ 2018, Mastromarino 2024). Below the threshold, SIDM
+    # profiles look like CDM cusps and eRASS1 cannot tell them apart
+    # (channel returns 0 = silent cross-check). Above the threshold,
+    # soft Gaussian penalty in dex. At v0.7 MAP (sigma_m_0=0.28, a=0.16),
+    # sigma/m(v=500)=0.22 cm^2/g, BELOW threshold, channel silent.
+    # Velocity-gap filler per R15B Tier-1 audit (300-800 km/s gap).
+    # Gated by T88B_EROSITA_DISABLE=1 for ablation. Default ON.
+    if os.environ.get("T88B_EROSITA_DISABLE", "").strip() != "1":
+        ll_erosita = loglike_erosita_erass1(
+            sigma_m_0=sigma_m_0,
+            a=a,
+        )
+        if not np.isfinite(ll_erosita):
+            return -np.inf
+    else:
+        ll_erosita = 0.0
+
     # Optional SPARC contribution (slow, so disabled by default)
     # Use a coarse grid to be fast.
     # T69 (v0.4-prelim): rescaled by baryonic-feedback nuisance f_fb.
@@ -395,7 +418,7 @@ def loglike_joint(theta):
         except Exception:
             ll_sparc = 0.0
 
-    return ll_dsph + ll_ufd + ll_bullet + ll_lz + ll_fermi + ll_sparc + ll_cmb + ll_dampe + ll_lss + ll_competitor_dd + ll_xrism
+    return ll_dsph + ll_ufd + ll_bullet + ll_lz + ll_fermi + ll_sparc + ll_cmb + ll_dampe + ll_lss + ll_competitor_dd + ll_xrism + ll_erosita
 
 
 def prior_transform_5(u):

@@ -125,6 +125,20 @@ DRACO_VMAX_KMS = 20.0             # Draco internal velocity scale
 RADIO_RELIC_SIGMA_M_UPPER_LIMIT = 0.22   # cm^2/g — Lee+ 2026 68% upper limit
 RADIO_RELIC_VMAX_KMS = 1000.0            # characteristic cluster merger velocity
 
+# eROSITA eRASS1 cluster density profile catalog (T88.B — Channel 21)
+# Bulbul et al. 2024 (eROSITA-DE eRASS1 cluster cosmology catalog, A&A 685 A106,
+# arXiv:2402.08452, 5259 clusters, M = 5e12 to 2e15 Msun, Western Galactic
+# hemisphere). Velocity scale = 500 km/s (intermediate-mass groups/clusters).
+# Core-formation threshold for SIDM profiles (Brinckmann+ 2018, Robertson+ 2018,
+# Mastromarino 2024 thesis): if sigma/m(v=500) > ~0.5 cm^2/g, eRASS1 clusters
+# should show a population of CORED density profiles (vs CDM cusps). Below this
+# threshold, profiles look indistinguishable from CDM within eRASS1 measurement
+# errors. Implemented as a SOFT one-sided Gaussian upper limit, matching the
+# pattern of Channel 8 (radio relic) and Channel 10 (double radio relic).
+EROSITA_VMAX_KMS = 500.0                    # characteristic cluster v_max
+EROSITA_SIGMA_M_UPPER_LIMIT = 0.5           # cm^2/g — core-formation threshold
+EROSITA_TAIL_WIDTH = 0.30                   # dex — soft Gaussian tail width
+
 # NGC 1052-DF2/DF4 + FCC 224/240 dark-matter-free UDG (van Dokkum+ 2018-2026 — Channel 11)
 # T70: Gaussian consistency check centered at v0.3-prelim MAP, 2 dex width
 DM_FREE_UDG_RATE_PEAK = 0.0       # log-likelihood peak (centered at MAP)
@@ -213,6 +227,7 @@ __all__ = [
     "CLUSTER_VMAX_KMS", "CLUSTER_SIGMA_M_UPPER_LIMIT",
     "DRACO_SIGMA_M_UPPER_LIMIT", "DRACO_VMAX_KMS",
     "RADIO_RELIC_SIGMA_M_UPPER_LIMIT", "RADIO_RELIC_VMAX_KMS",
+    "EROSITA_VMAX_KMS", "EROSITA_SIGMA_M_UPPER_LIMIT", "EROSITA_TAIL_WIDTH",
     "DM_FREE_UDG_RATE_PEAK", "DM_FREE_UDG_RATE_WIDTH",
     "COSMIC_WEB_RADIO_LOG_EPSILON_UPPER",
     "TREMAINE_GUNN_MASS_BOUND_EV",

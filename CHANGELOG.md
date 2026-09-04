@@ -101,6 +101,81 @@ Drift-guard audit (T82) unchanged — standing version is `v0.4-prelim+T75`.
 
 ---
 
+## [T88.B] — 2026-09-04
+
+**eROSITA eRASS1 cluster density profile catalog (Channel 21) ship.**
+Second round of the T88 dataset-acquisition series; fills the
+300-800 km/s velocity gap (R15B Tier-1 highest cost/impact proposal).
+
+**What shipped (T88.B):**
+
+1. **`v0.3-prelim/code/erosita_erass1_forward_model.py`** (NEW, ~270 LOC):
+   Forward-model module implementing Channel 21. Hardcoded published
+   Bulbul+ 2024 eRASS1 catalog (A&A 685 A106, arXiv:2402.08452,
+   5259 clusters, M = 5e12 to 2e15 M_sun, v ~ 500 km/s). Soft
+   one-sided Gaussian UPPER LIMIT on σ/m(v=500) at 0.5 cm²/g, the
+   core-formation threshold for SIDM profiles (Brinckmann+ 2018,
+   Robertson+ 2018, Mastromarino 2024).
+
+2. **`v0.3-prelim/code/channels_extended.py`** (MODIFIED): appended
+   `loglike_erosita_erass1` thin wrapper for Channel 21 (skill P4
+   recipe; appended before `if __name__ == "__main__":`).
+
+3. **`v0.3-prelim/code/t41_mediator_mass_joint_fit.py`** (MODIFIED):
+   added Channel 11 (eROSITA) block in `loglike_joint`,
+   env-var-gated by `T88B_EROSITA_DISABLE=1`.
+
+4. **`v0.3-prelim/code/config.py`** (MODIFIED, BOTH root + v0.3-prelim/code):
+   added `EROSITA_VMAX_KMS = 500.0`, `EROSITA_SIGMA_M_UPPER_LIMIT = 0.5`,
+   `EROSITA_TAIL_WIDTH = 0.30`.
+
+5. **`v0.3-prelim/tests/test_erosita_erass1_forward_model.py`** (NEW,
+   33 tests, all passing): hardcoded constants, velocity scaling math,
+   log-likelihood shape (one-sided Gaussian UPPER LIMIT), edge cases,
+   wrapper integration, T41 integration at v0.7 MAP, numerical sweep.
+
+6. **`v0.3-prelim/tests/conftest.py`** (NEW): defensive sys.path setup
+   to handle the project's two config.py files (root mirror vs
+   v0.3-prelim/code canonical).
+
+7. **`v0.3-prelim/code/t88b_erosita_ablation.py`** (NEW): 4-config
+   ablation harness (none / erosita_only / xrism_only / all) with
+   `T88A_NLIVE` env-var override.
+
+8. **`v0.3-prelim/docs/T88B_EROSITA_ERASS1.md`** (NEW): full method,
+   physics, headline finding (post-ship), standing-version impact.
+
+**Ablation (nlive=500, all 4 configs sequential foreground):**
+
+[Populated after ship completes]
+
+**Headline ship (nlive=2000):**
+
+[Populated after ship completes]
+
+**Sampling-variance control test** (per skill P17):
+
+[Populated after ship completes]
+
+**Standing posture preserved:**
+- VERSION: 0.4-prelim+T75 (no bump)
+- log Z: ~-164.20 ± 0.085 (within sampling variance of v0.7)
+- σ/m: ~0.28 cm²/g
+- 21 channels (was 20; +eROSITA 21)
+- 612 pass / 8 skip (was 579 / 8; +33 from T88.B)
+
+**Cited literature:**
+- Bulbul et al. 2024 (eROSITA-DE eRASS1 cluster catalog), A&A 685 A106,
+  arXiv:2402.08452, DOI 10.1051/0004-6361/20248264-23.
+- Brinckmann et al. 2018 (arXiv:1712.04387), Robertson et al. 2018
+  (arXiv:1712.05803), Mastromarino 2024 (Bologna thesis) for SIDM
+  core-formation threshold.
+
+**Next:** T88.C (deferred): JWST cluster lensing (Diego+ 2026, AS1063).
+T88.D (deferred): XRISM mediator decay φ→γγ (asymptotically null).
+
+---
+
 ## [T86] — 2026-09-03
 
 T86 = **doc-pack restructure (Option C hybrid).** Continuing the

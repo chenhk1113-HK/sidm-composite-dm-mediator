@@ -32,7 +32,7 @@ experiment's 2026-09-01 mysterious signal paper.
 | **σ/m₀** (cross-section per unit mass, galactic scale) | 0.06 cm²/g | **0.27 cm²/g** | +350% |
 | **Bayesian evidence** (log Z) | -215 | **-163** | +52 log-units (substantial evidence gain) |
 | **Velocity-slope tension** | 0.91 (above 1.0) | **0.60** (below 1.0) | -34% (resolved!) |
-| **Channels** | 17 | **20** | +3 (DAMPE + LSS + T81 XENONnT/PandaX + T88.A XRISM Perseus) |
+| **Channels** | 17 | **21** | +4 (DAMPE + LSS + T81 XENONnT/PandaX + T88.A XRISM Perseus + T88.B eROSITA) |
 | **Tests passing** | 446 | **549** | +96 (T74: +26, T81: +32, T83: +19, T84: +14, intermediate commits: +5) |
 
 **The headline finding:** adding DAMPE + LSS resolved the v0.6
@@ -214,7 +214,7 @@ worth flagging.
 
 - Standing version: **v0.4-prelim+T75** (no bump)
 - Joint-fit posterior: **log Z = −163.29 ± 0.085**, m_χ = 770 GeV, σ/m = 0.27 cm²/g
-- Tests: 579 pass / 8 skip
+- Tests: 612 pass / 8 skip
 - Drift-guard audit: 40/40 ALL CLEAR
 - **No posterior re-run**; **no new physics**; **no new channels**
 
@@ -310,5 +310,5 @@ velocity-slope tension. The Tier-1 milestone is publication-worthy.
 > T82 stale-claim audit (32/32 doc-presence + 1 VERSION drift-guard checks pass),
 > T83 KSFR (3,2) fundamental LATTICE promotion, T84 Channel 18 ρ sensitivity sweep.
 > Headline: σ/m = 0.27 cm²/g, tension = 0.60, log Z =
-> -163.29 ± 0.085, m_χ ~ 770 GeV (MAP). **579** tests passing, 20
+> -163.29 ± 0.085, m_χ ~ 770 GeV (MAP). **612** tests passing, 21
 > channels.** Standing posture preserved at v0.4-prelim+T75.

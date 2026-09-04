@@ -21,7 +21,7 @@ joint fit after T75.
 
 A 6-dimensional Bayesian posterior over Benchmark A parameters:
 `(log_ε, log_α, m_φ, m_χ, g_χ, log_ξ)`, sampling via dynesty nested
-sampling. **20 channels** of observational data constrain the posterior.
+sampling. **21 channels** of observational data constrain the posterior.
 
 ## v0.7 posterior headline (nlive=2000, ~7 min wall)
 
@@ -116,7 +116,7 @@ substantive hidden assumption and is now surfaced.
 
 - Standing version: **v0.4-prelim+T75** (no bump).
 - Joint-fit posterior: **log Z = −163.29 ± 0.085**, m_χ = 770 GeV, σ/m = 0.27 cm²/g.
-- Tests: 579 pass / 8 skip.
+- Tests: 612 pass / 8 skip.
 - Drift-guard audit: 40/40 ALL CLEAR.
 
 **No posterior re-run.** No new physics. No new channels. The standing

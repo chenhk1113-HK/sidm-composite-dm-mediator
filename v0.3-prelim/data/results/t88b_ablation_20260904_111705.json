@@ -1,0 +1,45 @@
+{
+  "t88_b": "eROSITA eRASS1 Channel 21 ablation",
+  "nlive": 500,
+  "configs": [
+    {
+      "config": "none",
+      "log_Z": -164.27191434017112,
+      "log_Z_err": 0.1619872531857452,
+      "wall_seconds": 99.71282649040222,
+      "config_hash": "e6ffd9ef711b",
+      "sigma_m_0_MAP": 0.21355920094929653,
+      "json_path": "C:\\Users\\lamkuenai\\projects\\sidm-composite-dm-mediator\\v0.3-prelim\\data\\results\\t41_mediator_mass_joint_fit_t88b_none.json"
+    },
+    {
+      "config": "erosita_only",
+      "log_Z": -164.16762969924838,
+      "log_Z_err": 0.16034132312712235,
+      "wall_seconds": 93.19705319404602,
+      "config_hash": "e6ffd9ef711b",
+      "sigma_m_0_MAP": 0.2259414997172978,
+      "json_path": "C:\\Users\\lamkuenai\\projects\\sidm-composite-dm-mediator\\v0.3-prelim\\data\\results\\t41_mediator_mass_joint_fit_t88b_erosita_only.json"
+    },
+    {
+      "config": "xrism_only",
+      "log_Z": -164.1310962689427,
+      "log_Z_err": 0.16078738321322755,
+      "wall_seconds": 101.32219409942627,
+      "config_hash": "e6ffd9ef711b",
+      "sigma_m_0_MAP": 0.217041055112755,
+      "json_path": "C:\\Users\\lamkuenai\\projects\\sidm-composite-dm-mediator\\v0.3-prelim\\data\\results\\t41_mediator_mass_joint_fit_t88b_xrism_only.json"
+    },
+    {
+      "config": "all",
+      "log_Z": -164.2609111219326,
+      "log_Z_err": 0.16097361960422452,
+      "wall_seconds": 109.26393485069275,
+      "config_hash": "e6ffd9ef711b",
+      "sigma_m_0_MAP": 0.22129674326428814,
+      "json_path": "C:\\Users\\lamkuenai\\projects\\sidm-composite-dm-mediator\\v0.3-prelim\\data\\results\\t41_mediator_mass_joint_fit_t88b_all.json"
+    }
+  ],
+  "pure_erosita_contribution": 0.10428464092274226,
+  "pure_xrism_contribution": 0.14081807122840928,
+  "combined_contribution": 0.011003218238528234
+}

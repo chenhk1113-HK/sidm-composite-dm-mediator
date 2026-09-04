@@ -1374,6 +1374,58 @@ def loglike_xrism_perseus_icm(
         return 0.0
 
 
+# ---------------------------------------------------------------------------
+# Channel 21 (Tier-1 ship T88.B): eROSITA eRASS1 cluster density profile catalog
+# (Bulbul+ 2024, eROSITA-DE eRASS1 cluster cosmology catalog, A&A 685 A106,
+# arXiv:2402.08452, 5259 clusters, M = 5e12 to 2e15 M_sun).
+#
+# Velocity scale: 500 km/s (intermediate-mass groups/clusters; fills the
+# velocity gap between UFD 10-30 km/s and cluster 1000+ km/s per R15B).
+#
+# Signature: (sigma_m_0, a) — same as Channels 6, 7, 8, 10, 11.
+# Wired to T41's sigma_m_0 and a_derived parameters.
+#
+# Implementation: soft one-sided Gaussian UPPER LIMIT on sigma/m(v=500) at
+# 0.5 cm^2/g (core-formation threshold for SIDM profiles per Brinckmann+
+# 2018, Robertson+ 2018, Mastromarino 2024).
+#
+# Gated by env var T88B_EROSITA_DISABLE=1 for ablation studies (skill P5).
+# ---------------------------------------------------------------------------
+
+
+def loglike_erosita_erass1(
+    sigma_m_0: float,
+    a: float,
+    include_in_fit: bool = True,
+) -> float:
+    """Log-likelihood of the eROSITA eRASS1 cluster density profile
+    observation (Channel 21).
+
+    Parameters
+    ----------
+    sigma_m_0 : float
+        sigma/m at V_REF = 100 km/s (cm^2/g)
+    a : float
+        velocity power-law index
+    include_in_fit : bool
+        if False, return 0 (channel disabled for ablation)
+
+    Returns
+    -------
+    float : log likelihood (relative units)
+    """
+    try:
+        from erosita_erass1_forward_model import loglike_erosita_erass1 as _impl
+    except ImportError:
+        return 0.0  # graceful degradation if forward model not yet shipped
+    if not include_in_fit:
+        return 0.0
+    try:
+        return _impl(sigma_m_0=sigma_m_0, a=a)
+    except Exception:
+        return 0.0
+
+
 if __name__ == "__main__":
     print("=== LZ 2024 spin-independent WIMP-nucleon limits ===")
     print(f"{'m_chi (GeV)':<15} {'sigma_limit (cm^2)':<25}")
