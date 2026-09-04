@@ -51,7 +51,7 @@ CHECKS_PER_DOC: dict[str, list[tuple[str, str]]] = {
         ("m_χ MAP", "770 GeV"),
         ("log Z", "−163.29 ± 0.085"),
         ("channels", "**21**"),
-        ("tests", "626 pass, 8 skip"),
+        ("tests", "662 pass, 8 skip"),
         ("headline row present", "**σ/m₀**"),
         ("ε posterior reference", "10⁻³⁷"),
     ],
@@ -70,7 +70,7 @@ CHECKS_PER_DOC: dict[str, list[tuple[str, str]]] = {
     ],
     "EXTRACT.md": [
         ("Channels 21", "Channels: **21**"),
-        ("Tests 626", "626 pass"),
+        ("Tests 662", "662 pass"),
         ("σ/m headline", "σ/m = 0.27 cm²/g"),
     ],
     "docs/LAYMAN_SUMMARY.md": [
@@ -79,7 +79,7 @@ CHECKS_PER_DOC: dict[str, list[tuple[str, str]]] = {
         ("log Z", "**-163**"),
         ("tension 0.60", "0.60** (below 1.0)"),
         ("channels 21", "**21**"),
-        ("tests 626", "**626**"),
+        ("tests 662", "**662**"),
     ],
     "CHANGELOG.md": [
         ("v0.4-prelim+T75", "v0.4-prelim+T75"),
@@ -95,7 +95,7 @@ CHECKS_PER_DOC: dict[str, list[tuple[str, str]]] = {
         ("σ/m₀", "0.27 cm²/g"),
         ("Tension", "0.60σ"),
         ("Channels", "21 channels"),
-        ("626 tests", "626 pass"),
+        ("662 tests", "662 pass"),
         ("Drift-guard", "40/40 ALL CLEAR"),
     ],
 }

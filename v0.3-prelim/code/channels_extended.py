@@ -1452,6 +1452,71 @@ def loglike_phi_to_gamgam_xrism(theta, include_in_fit: bool = True) -> float:
         return _impl(theta)
     except Exception:
         return 0.0
+        return _impl(theta)
+    except Exception:
+        return 0.0
+
+def loglike_euclid_q1_lensing(sigma_m_0: float, a: float, include_in_fit: bool = True) -> float:
+    """T41-compatible wrapper for Euclid Q1 strong-lensing cluster catalog (Channel 23).
+
+    Source: Bergamini+ 2026 (Euclid Q1 - XXXIII), A&A 711 A33,
+    arXiv:2503.15330, DOI 10.1051/0004-6361/202554577.
+
+    14 grade-A strong-lensing clusters (P_lens=1) from 63.1 deg^2
+    Euclid Q1 field. Lensing-derived mass profiles provide constraints
+    on sigma/m at v ~ 1000 km/s. Soft one-sided UPPER LIMIT at
+    sigma/m(v=1000) = 0.5 cm^2/g (core-formation threshold).
+
+    Args:
+        sigma_m_0: cross-section per unit mass at V_REF=100 km/s (cm^2/g)
+        a: velocity-slope parameter
+        include_in_fit: if False, returns 0 (do not include in fit sum)
+
+    Returns:
+        Log-likelihood (non-positive). 0 if sigma/m(v=1000) below threshold.
+    """
+    try:
+        from euclid_q1_lensing_forward_model import loglike_euclid_q1_lensing as _impl
+    except ImportError:
+        return 0.0
+    if not include_in_fit:
+        return 0.0
+    try:
+        return _impl(sigma_m_0=sigma_m_0, a=a)
+    except Exception:
+        return 0.0
+
+def loglike_euclid_q1_subhalo_forecast(sigma_m_0: float, a: float, include_in_fit: bool = True) -> float:
+    """T41-compatible wrapper for Euclid Q1 subhalo dN/dM forecast (Channel 24).
+
+    **FORECAST, not measurement.** Uses LensPop pipeline to predict
+    subhalo survival rates under SIDM tidal evaporation. Real measurement
+    expected with Euclid DR1 at end of 2026.
+
+    Velocity regime: v ~ 150 km/s (intermediate between UFD and cluster).
+    Soft two-sided Gaussian CONSTRAINT (not upper limit):
+        sigma/m(v=150) < 0.05: too little evaporation (CDM-like)
+        0.05 <= sigma/m(v=150) <= 0.10: in-band, log L = 0
+        sigma/m(v=150) > 0.10: too much evaporation (no subhalos)
+
+    Args:
+        sigma_m_0: cross-section per unit mass at V_REF=100 km/s (cm^2/g)
+        a: velocity-slope parameter
+        include_in_fit: if False, returns 0 (do not include in fit sum)
+
+    Returns:
+        Log-likelihood (non-positive). 0 if sigma/m(v=150) in in-band.
+    """
+    try:
+        from euclid_q1_subhalo_forecast_forward_model import loglike_euclid_q1_subhalo_forecast as _impl
+    except ImportError:
+        return 0.0
+    if not include_in_fit:
+        return 0.0
+    try:
+        return _impl(sigma_m_0=sigma_m_0, a=a)
+    except Exception:
+        return 0.0
 
 
 if __name__ == "__main__":

@@ -78,7 +78,7 @@ from ksfr_pcac_validity import loglike_ksfr_pcac_validity
 from channels_extended import (
     loglike_cmb_distortion, loglike_dampe_cre, loglike_lss_assembly_bias,
     loglike_competitor_dd_watch, loglike_xrism_perseus_icm,
-    loglike_erosita_erass1, loglike_phi_to_gamgam_xrism,
+    loglike_erosita_erass1, loglike_phi_to_gamgam_xrism, loglike_euclid_q1_lensing, loglike_euclid_q1_subhalo_forecast,
 )
 from xrism_phi_decay_forward_model import XRISM_PHI_DECAY_ARXIV_ID as _XRISM_PHI_ARXIV
 
@@ -398,6 +398,46 @@ def loglike_joint(theta):
     else:
         ll_phi_decay = 0.0
 
+    # ----- Channel 23 (T88.C): Euclid Q1 strong-lensing cluster catalog (Bergamini+ 2026) -----
+    # Source: Euclid Q1 - XXXIII, A&A 711 A33, arXiv:2503.15330.
+    # 14 grade-A strong-lensing clusters (P_lens=1) from 63.1 deg^2 field.
+    # Soft one-sided UPPER LIMIT at sigma/m(v=1000) = 0.5 cm^2/g
+    # (core-formation threshold). At v0.7 MAP (sigma_m_0=0.28, a=0.16):
+    #   sigma/m(v=1000) = 0.28 * 10^(-0.16) = 0.194 cm^2/g
+    # which is BELOW threshold -> channel silent (cross-check).
+    # Gated by T88C_EUCLID_LENSING_DISABLE=1 for ablation. Default ON.
+    if os.environ.get("T88C_EUCLID_LENSING_DISABLE", "").strip() != "1":
+        ll_euclid_q1 = loglike_euclid_q1_lensing(
+            sigma_m_0=sigma_m_0,
+            a=a,
+        )
+        if not np.isfinite(ll_euclid_q1):
+            return -np.inf
+    else:
+        ll_euclid_q1 = 0.0
+
+    # ----- Channel 24 (T88.E): Euclid Q1 subhalo dN/dM FORECAST (LensPop) -----
+    # **FORECAST, not measurement.** Real measurement expected with DR1
+    # at end of 2026. Label honestly as forecast.
+    # Soft two-sided Gaussian CONSTRAINT on sigma/m(v=150) at v ~ 150 km/s
+    # (intermediate between UFD and cluster scales).
+    # In-band: 0.05 <= sigma/m(v=150) <= 0.10 cm^2/g.
+    # At v0.7 MAP (sigma_m_0=0.28, a=0.16):
+    #   sigma/m(v=150) = 0.28 * 0.667^0.16 = 0.265 cm^2/g
+    # which is ABOVE 0.10 -> penalty (too much evaporation).
+    # Penalty = -0.5 * (log10(0.265/0.10)/0.30)^2 ~ -0.99.
+    # This is the FIRST NON-SILENT channel of the T88 series.
+    # Gated by T88E_EUCLID_SUBHALO_DISABLE=1 for ablation. Default ON.
+    if os.environ.get("T88E_EUCLID_SUBHALO_DISABLE", "").strip() != "1":
+        ll_euclid_subhalo = loglike_euclid_q1_subhalo_forecast(
+            sigma_m_0=sigma_m_0,
+            a=a,
+        )
+        if not np.isfinite(ll_euclid_subhalo):
+            return -np.inf
+    else:
+        ll_euclid_subhalo = 0.0
+
     # Optional SPARC contribution (slow, so disabled by default)
     # Use a coarse grid to be fast.
     # T69 (v0.4-prelim): rescaled by baryonic-feedback nuisance f_fb.
@@ -434,7 +474,7 @@ def loglike_joint(theta):
         except Exception:
             ll_sparc = 0.0
 
-    return ll_dsph + ll_ufd + ll_bullet + ll_lz + ll_fermi + ll_sparc + ll_cmb + ll_dampe + ll_lss + ll_competitor_dd + ll_xrism + ll_erosita + ll_phi_decay
+    return ll_dsph + ll_ufd + ll_bullet + ll_lz + ll_fermi + ll_sparc + ll_cmb + ll_dampe + ll_lss + ll_competitor_dd + ll_xrism + ll_erosita + ll_phi_decay + ll_euclid_q1 + ll_euclid_subhalo
 
 
 def prior_transform_5(u):

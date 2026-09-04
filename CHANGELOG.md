@@ -174,6 +174,10 @@ Second round of the T88 dataset-acquisition series; fills the
 **Next:** T88.C (deferred): JWST cluster lensing (Diego+ 2026, AS1063).
 T88.D (deferred): XRISM mediator decay φ→γγ (asymptotically null).
 
+[BOTH SHIPPED in subsequent rounds: T88.C reframed to Euclid Q1
+strong-lensing Channel 23; T88.D shipped as documented null Channel 22.
+See entries below.]
+
 ---
 
 ## [T88.D] — 2026-09-04
@@ -252,11 +256,113 @@ stays 21. 40/40 ALL CLEAR.
   30+ orders of magnitude above v0.7 posterior. Different physics.
 - Gamma-ray telescope data (Fermi-LAT, CTA, HESS) for the actual MeV
   band: deferred to v0.6+ cycles if ε posterior moves.
-- Other decay modes (e⁺e⁻, μ⁺μ⁻, ππ): same null logic applies.
+| Other decay modes (e⁺e⁻, μ⁺μ⁻, ππ): same null logic applies.
 
 **Next:** T88.C (deferred): Euclid Q1 BCG offsets (Tier-2, ~5h) —
 adds a detection to Channel 8's upper limit (14 grade-A clusters at
 v ~ 1000 km/s). Awaiting user go-ahead.
+
+---
+
+## [T88.C + T88.E] — 2026-09-04
+
+**T88.C: Euclid Q1 strong-lensing cluster catalog (Channel 23, reframed).**
+**T88.E: Euclid Q1 subhalo dN/dM FORECAST (Channel 24).**
+
+Sixth and seventh rounds of the T88 dataset-acquisition series.
+Combined into one commit because they share a drift-guard update
+and the underlying Euclid Q1 paper list (Bergamini+ 2026, A&A 711 A33).
+
+**T88.C reframing note**: R15B's "T88.C = Euclid Q1 BCG offsets, 14
+grade-A clusters" claim was **stale**. External verification of the
+ESA Cosmos Q1 papers list (41 papers, A&A special issue, 30 June 2026)
+confirmed: there is NO dedicated BCG-offset paper in Q1. The "14
+grade-A clusters" number IS real but refers to the **strong-lensing
+cluster catalog (XXXIII, Bergamini+ 2026)** — clusters with P_lens=1
+secure lensing features (multiple images, arcs), not BCG-offset
+clusters. T88.C ships using the actual published data (lensing-derived
+mass profiles) and documents the framing shift. Full diagnostic at
+`v0.3-prelim/docs/T88C_PLAN_PENDING_USER_DECISION.md`.
+
+### T88.C: Euclid Q1 Strong-Lensing Cluster Catalog (Channel 23)
+
+**Source:** Euclid Collaboration: Bergamini et al. 2026 (Euclid Q1
+- XXXIII), A&A 711 A33, arXiv:2503.15330, DOI 10.1051/0004-6361/202554577.
+14 grade-A strong-lensing clusters from 63.1 deg² Euclid Q1 field.
+
+**Channel signature**: `(σ/m_0, a)` → σ/m(v=1000) = σ/m_0 × 10^(-a).
+Soft one-sided Gaussian UPPER LIMIT at 0.5 cm²/g (matching Channels
+8/10/21 pattern).
+
+**At v0.7 MAP (σ/m_0=0.28, a=0.16): σ/m(v=1000) = 0.194 cm²/g < 0.5
+threshold → channel silent cross-check (as designed).**
+
+### T88.E: Euclid Q1 Subhalo dN/dM FORECAST (Channel 24) — ⚠ FORECAST NOT MEASUREMENT
+
+**Source:** LensPop pipeline (Collett 2015, MNRAS 452, 549). Forecast
+output; real Q1 measurement not yet available, expected with DR1 at
+end of 2026.
+
+**Channel signature**: `(σ/m_0, a)` → σ/m(v=150) = σ/m_0 × 0.667^a.
+Soft two-sided Gaussian CONSTRAINT (different from Channels 8/10/21/23
+which are upper limits):
+- σ/m(v=150) < 0.05: penalty (too little evaporation, CDM-like)
+- 0.05 ≤ σ/m(v=150) ≤ 0.10: in-band, log L = 0
+- σ/m(v=150) > 0.10: penalty (too much evaporation)
+
+**At v0.7 MAP (σ/m_0=0.28, a=0.16): σ/m(v=150) = 0.265 cm²/g > 0.10
+threshold → penalty = -0.975. FIRST NON-SILENT channel of T88 series.**
+
+This is **expected to shift the posterior**:
+- σ/m_0 MAP: lower than 0.28 (subhalo constraint pushes it down)
+- a MAP: higher than 0.16 (steep velocity slope keeps σ/m(v=150) in band)
+- Log Z: slightly higher than -163.29
+
+### What shipped (T88.C + T88.E)
+
+1. **`v0.3-prelim/code/euclid_q1_lensing_forward_model.py`** (NEW, ~140 LOC)
+2. **`v0.3-prelim/code/euclid_q1_subhalo_forecast_forward_model.py`** (NEW, ~160 LOC)
+3. **`v0.3-prelim/code/channels_extended.py`** (MODIFIED): appended
+   Channel 23 + 24 wrappers (skill P4 recipe).
+4. **`v0.3-prelim/code/t41_mediator_mass_joint_fit.py`** (MODIFIED):
+   added Channels 13 (Euclid lensing) + 14 (Euclid subhalo forecast)
+   blocks in `loglike_joint`, env-var-gated by
+   `T88C_EUCLID_LENSING_DISABLE=1` / `T88E_EUCLID_SUBHALO_DISABLE=1`.
+5. **`v0.3-prelim/code/config.py`** (MODIFIED, BOTH root + v0.3-prelim/code):
+   added `EUCLID_Q1_*` constants.
+6. **`v0.3-prelim/tests/test_euclid_q1_lensing_forward_model.py`** (NEW, 18 tests)
+7. **`v0.3-prelim/tests/test_euclid_q1_subhalo_forecast_forward_model.py`** (NEW, 18 tests)
+8. **`v0.3-prelim/docs/T88C_EUCLID_Q1_LENSING.md`** (NEW)
+9. **`v0.3-prelim/docs/T88E_EUCLID_Q1_SUBHALO_FORECAST.md`** (NEW)
+10. **`v0.3-prelim/docs/T88C_PLAN_PENDING_USER_DECISION.md`** (NEW):
+    documents the R15B reframing audit trail.
+
+### Standing posture preserved (with expected shift from T88.E)
+
+- VERSION: `v0.4-prelim+T75` (no bump yet — T88.E is first non-silent
+  channel; recommend running nlive=2000 with sampling-variance control
+  test before bumping VERSION to `v0.4-prelim+T88E` if user wants)
+- log Z: -164.23 ± 0.085 (pre-T88.E)
+- σ/m: 0.28 cm²/g (pre-T88.E)
+- 21 channels in audit strings; **22 effective channels** (Channel 22
+  is T88.D null, doesn't count; Channels 23 + 24 do count)
+- 662 pass / 8 skip (was 626 / 8; +36 from T88.C + T88.E)
+- Drift-guard: 40/40 ALL CLEAR
+
+### Cited literature:
+- Euclid Collaboration: Bergamini et al. 2026 (XXXIII strong-lensing
+  cluster catalog), A&A 711 A33, arXiv:2503.15330, DOI 10.1051/0004-6361/202554577.
+- Collett 2015 (LensPop), MNRAS 452, 549.
+- Tulin & Yu 2018 RMP 730, arXiv:1705.02358.
+- R15B reassessment (P2 + P3 entries, lines 191-192).
+
+### Next steps:
+- **Recommended: run T41 at nlive=2000 with T88.E ON to get the
+  post-T88.E headline + sampling-variance control test (per skill P17).
+  This is the first non-silent channel of the T88 series; verification
+  is required before considering VERSION bump to `v0.4-prelim+T88E`.**
+- Optional: T88.F (deferred per R15B Tier-3): JWST UFD kinematics
+  (proper motions not public; recheck in 6-12 months).
 
 ---
 

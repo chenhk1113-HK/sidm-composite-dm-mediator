@@ -152,6 +152,25 @@ XRISM_PHI_DECAY_PERSIAN_FOV_KPC3 = 1.0e5  # ~100 kpc^3 effective volume at Perse
 XRISM_PHI_DECAY_HARD_CAP_EPS = 1.0e-30    # numerical breakdown cap on epsilon
 XRISM_PHI_DECAY_PREFACTOR_GEV2 = 1.0e-10  # portal prefactor (model-dependent, see doc)
 
+# Euclid Q1 strong-lensing cluster catalog (Bergamini+ 2026 - XXXIII, Channel 23)
+# Source: A&A 711 A33, arXiv:2503.15330, DOI 10.1051/0004-6361/202554577
+# 14 grade-A strong-lensing clusters (P_lens=1) from 63.1 deg^2 Euclid Q1 field
+# Mass profiles derived from gravitational lensing arcs and multiple images.
+EUCLID_Q1_VMAX_KMS = 1000.0                   # characteristic cluster v_max
+EUCLID_Q1_N_GRADE_A_CLUSTERS = 14            # P_lens=1 grade-A clusters
+EUCLID_Q1_SIGMA_M_UPPER_LIMIT = 0.5          # cm^2/g - same core-formation threshold as eROSITA
+EUCLID_Q1_TAIL_WIDTH = 0.30                  # dex - matches Channels 8/10/21
+
+# Euclid Q1 subhalo dN/dM FORECAST channel (T88.E, Channel 24)
+# **FORECAST** via LensPop pipeline. Euclid Q1 measurement not yet available;
+# expected with DR1 at end of 2026. Label honestly as forecast.
+# Velocity regime: v ~ 150 km/s (intermediate between UFD and cluster scales).
+EUCLID_Q1_SUBHALO_VMAX_KMS = 150.0                  # characteristic subhalo v_max
+EUCLID_Q1_SUBHALO_SIGMA_M_LOWER = 0.05             # cm^2/g - too little evaporation (CDM-like)
+EUCLID_Q1_SUBHALO_SIGMA_M_UPPER = 0.10             # cm^2/g - too much evaporation (no subhalos)
+EUCLID_Q1_SUBHALO_TAIL_WIDTH = 0.30                # dex - matches Channels 8/10/21/23
+EUCLID_Q1_SUBHALO_FORECAST_LABEL = "FORECAST_via_LensPop"
+
 # NGC 1052-DF2/DF4 + FCC 224/240 dark-matter-free UDG (van Dokkum+ 2018-2026 — Channel 11)
 # T70: Gaussian consistency check centered at v0.3-prelim MAP, 2 dex width
 DM_FREE_UDG_RATE_PEAK = 0.0       # log-likelihood peak (centered at MAP)
@@ -245,6 +264,11 @@ __all__ = [
     "XRISM_RESOLVE_EFFECTIVE_AREA_CM2", "XRISM_RESOLVE_FOV_ARCMIN2",
     "XRISM_PHI_DECAY_PERSIAN_FOV_KPC3", "XRISM_PHI_DECAY_HARD_CAP_EPS",
     "XRISM_PHI_DECAY_PREFACTOR_GEV2",
+    "EUCLID_Q1_VMAX_KMS", "EUCLID_Q1_N_GRADE_A_CLUSTERS",
+    "EUCLID_Q1_SIGMA_M_UPPER_LIMIT", "EUCLID_Q1_TAIL_WIDTH",
+    "EUCLID_Q1_SUBHALO_VMAX_KMS", "EUCLID_Q1_SUBHALO_SIGMA_M_LOWER",
+    "EUCLID_Q1_SUBHALO_SIGMA_M_UPPER", "EUCLID_Q1_SUBHALO_TAIL_WIDTH",
+    "EUCLID_Q1_SUBHALO_FORECAST_LABEL",
     "DM_FREE_UDG_RATE_PEAK", "DM_FREE_UDG_RATE_WIDTH",
     "COSMIC_WEB_RADIO_LOG_EPSILON_UPPER",
     "TREMAINE_GUNN_MASS_BOUND_EV",
