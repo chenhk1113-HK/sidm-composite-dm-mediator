@@ -236,10 +236,15 @@ P18 failure mode the T88.E round (commit `12d0a58`) corrected.
 
 ## [T90] — 2026-09-06
 
-**Tier-3 branch experiment: LZ 248 keV magnetic-moment EFT Ls₁₀
+**🎯 YES — the project model can reproduce the LZ 248 keV event.
+Magnetic-moment Ls₁₀ added to Benchmark A at μ_x ≈ 3×10⁻⁸ μ_N
+gives ~1 event at 248 keV. Tier-3 branch experiment; σ/m₀ = 0.06
+cm²/g unchanged. Master posture preserved.**
+
+Tier-3 branch experiment: LZ 248 keV magnetic-moment EFT Ls₁₀
 channel (Channel 26) added to Benchmark A as a hybrid
 interpretation. Tests ship, posterior shift is small, headline
-σ/m₀ unchanged. Branch only — master posture preserved.**
+σ/m₀ unchanged. Branch only — master posture preserved.
 
 This is the **Tier-3 branch experiment** the user requested
 ("I want to explore tier 3, as a branch to our model"). All T90

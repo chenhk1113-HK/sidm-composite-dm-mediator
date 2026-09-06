@@ -1,9 +1,39 @@
 # T90 — LZ 248 keV Magnetic-Moment Forward Prediction
 
-> **Branch only:** `wip/tier3-magnetic-moment-LZ` @ `0c905f5`
+> **Branch only:** `wip/tier3-magnetic-moment-LZ` @ `54a8339`
 > **Master unchanged:** `7fb9cdd` (v0.4-prelim+T88E)
 > **Round:** T90 (Tier-3 branch experiment, 2026-09-06)
 > **Predecessor plan:** [`T90_MAGNETIC_MOMENT_PLAN.md`](./T90_MAGNETIC_MOMENT_PLAN.md)
+
+---
+
+## 🎯 Headline finding (TL;DR)
+
+**Yes — the project's Benchmark A model can reproduce the LZ 248 keV
+event** by adding a magnetic-moment Ls₁₀ operator at μ_x ≈ 3×10⁻⁸ μ_N
+(= 1.6×10⁻¹¹ μ_B). The hybrid interpretation predicts ~1 event at
+248 keV in 2.84 tonne-years, matching LZ's observed single event.
+
+**Three big caveats:**
+
+1. **The coupling is fixed by us, not fitted by the data.** It is a
+   tunable knob that reproduces the event, not a discovered value.
+2. **Δlog Z = -1.5 vs v0.8 master** — the data do not require this
+   knob. The evidence is "anecdotal" against (Jeffreys scale: not
+   significant). It is a **compatible, not preferred** result.
+3. **The coupling value is on the upper end** of theoretical
+   proposals (~5 orders above current direct-detection bounds).
+   Physically allowed but not free — requires a specific BSM
+   model to justify.
+
+**What does NOT change:** σ/m₀ = 0.06 cm²/g, m_χ, m_φ, all
+astronomical observables (DAMPE, LSS, Euclid, XRISM, CMB, BBN).
+The magnetic-moment knob only touches direct detection.
+
+**Verdict:** **A demonstrated capability, not a standing claim.**
+Branch lives at `origin/wip/tier3-magnetic-moment-LZ` for review.
+Merge into master awaits DARWIN/XLZD confirmation or fitted 7D
+posterior.
 
 ---
 
