@@ -356,9 +356,30 @@ exists, is tested, can be enabled — but does not constitute a
 4. The energy-binned likelihood is not implemented (total
    event count only).
 
-Merge decision pending: requires either (a) DARWIN/XLZD
-confirmation, (b) independent paper motivation, or (c) a
-fitted 7D posterior. None of these are present today.
+### Merge decision rule (user-stated, 2026-09-06)
+
+**The magnetic-moment knob will be merged into master if and only
+if the broader physics community establishes that the LZ 248 keV
+event is real.**
+
+The merge is gated by any one of:
+
+1. **Independent confirmation** of the LZ 248 keV event
+   (cross-detector: XENONnT / PandaX / DARWIN; or peer-reviewed
+   publication; or community consensus)
+2. **Independent motivation** for Ls₁₀ from a published BSM model
+3. **A fitted 7D posterior** showing Δlog Z ≥ +2 (preferred, not
+   merely compatible)
+
+**None of these are present today.** Until then, master stays at
+`v0.4-prelim+T88E` with σ/m₀ = 0.06 cm²/g, and the T87 verdict
+("composite-DM alone cannot explain LZ at v0.7 MAP, 71 orders
+short") remains the standing answer. T90 is the **hybrid** answer:
+composite-DM + magnetic-moment Ls₁₀ *can* explain LZ, but the data
+don't require it.
+
+This rule is **locked for the lifetime of the branch**. Any
+override requires explicit user direction.
 
 ### See also
 

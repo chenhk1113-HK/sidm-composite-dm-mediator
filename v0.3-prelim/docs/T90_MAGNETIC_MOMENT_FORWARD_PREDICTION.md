@@ -268,21 +268,58 @@ thermal history (ε_THERM << 1), so:
 **Tier-3 branch experiment, NOT a standing change.**
 
 - Master remains at `7fb9cdd` (v0.4-prelim+T88E)
-- T90 lives on `wip/tier3-magnetic-moment-LZ` @ `0c905f5`
+- T90 lives on `wip/tier3-magnetic-moment-LZ` @ `f5aa66d`
 - Channel 26 is **default-off** (master-compatible)
 - 19 tests added in branch only
 - Drift-guard audit at master: still 677 pass / 44/44 ALL CLEAR
 
-**Decision pending:** Whether to merge Tier-3 results into master.
-Recommendation: **NO** until the magnetic-moment interpretation is
-either:
-(a) Required by additional data (e.g. DARWIN sees events),
-(b) Independently motivated from another paper, or
-(d) At least confirmed by a fitted 7D posterior (not fixed μ_x).
+### Merge decision rule (user-stated, 2026-09-06)
 
-Until then, this branch is **a demonstrated capability** that
-Channel 26 exists, is tested, and can be enabled via env var.
-Not a standing scientific claim.
+**The magnetic-moment knob will be merged into master if and only
+if the broader physics community establishes that the LZ 248 keV
+event is real.**
+
+Specifically, the merge is gated by:
+
+1. **Independent confirmation** that the LZ 248 keV event is a
+   genuine signal (not background fluctuation, not instrumental
+   artifact, not a re-analysis error). This must come from sources
+   beyond the original LZ announcement — e.g. cross-detector
+   confirmation (XENONnT, PandaX, DARWIN), a peer-reviewed
+   publication, or a community consensus statement.
+2. **Independent motivation** for the magnetic-moment Ls₁₀
+   operator from a published BSM model (so the coupling is not
+   "free" — it has a theoretical origin).
+3. **A fitted 7D posterior** (μ_x free parameter, not fixed by us)
+   that confirms the channel is **preferred**, not merely
+   **compatible** (Δlog Z ≥ +2 on the Jeffreys scale).
+
+Any one of (1), (2), (3) is sufficient to re-open the merge
+decision; **none of these are present today.** Until then:
+
+- T90 ships a **demonstrated capability** (Channel 26 exists,
+  is tested, can be enabled via env var)
+- Master stays at v0.4-prelim+T88E, σ/m₀ = 0.06 cm²/g
+- The T87 verdict ("composite-DM alone cannot explain LZ at v0.7
+  MAP, 71 orders short") remains the standing answer
+- T90 is the **hybrid** answer: composite-DM + magnetic-moment
+  Ls₁₀ *can* explain LZ, but the data don't require it
+
+### Re-opening the merge
+
+To re-evaluate when new evidence arrives:
+
+1. Check whether (1)/(2)/(3) above has been satisfied
+2. Re-run T41 with `T90_MAGNETIC_MOMENT_MU_X` replaced by a
+   7th fitted dimension `log_mu_x` in the prior
+3. Verify Δlog Z ≥ +2 vs v0.8 master
+4. Update standing docs (README, EXTRACT, CURRENT, LAYMAN) to
+   mention the magnetic-moment channel
+5. Bump VERSION to `v0.4-prelim+T90` and update drift-guard
+   audit literals
+
+This rule is **locked for the lifetime of this branch**. Any
+override requires explicit user direction.
 
 ---
 
