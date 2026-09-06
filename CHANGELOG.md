@@ -93,6 +93,25 @@ suggestions could not be verified via arXiv search and were NOT
 added. Per AGENTS.md rule 25 (avoid hallucination), only verified
 citations ship.
 
+**User correction (2026-09-06, post-commit):** The user pointed out
+that "Co, Pierce, Zurek 2019" — which I had originally included then
+removed because I could not verify arXiv:1809.03972 — is actually
+**Co, Pierce, *Zhang*** 2019 (not Zurek), and the correct arXiv ID
+is **1810.07196** (not 1809.03972). The paper is "Dark Photon Dark
+Matter Produced by Axion Oscillations", PRD 99, 075002 (2019). This
+was a real paper that I should have cited; my arXiv search returned
+the wrong ID. Both Co/Pierce/Zhang 2019 and Escudero Abenza 2020
+(which the user pointed out is the real "Escudero et al." paper, not
+2018) have now been added to the code citation block (5 verified refs
+total).
+
+The user also suggested exploring arXiv:1910.02699 ("Scalar-field dark
+energy nonminimally and kinetically coupled to dark matter", PRD 101,
+063511). **Verified:** this paper exists, but is about scalar-field
+dark energy coupling, **not dark-photon thermalization via kinetic
+mixing**. It is not directly applicable to the ε_THERM = 1e-5
+threshold; not added as a citation.
+
 ### Issue 3 (🟡 MEDIUM, human part) — APS paper verification
 
 **Reviewer's concern:** Goldstein & Hill 2026 (Phys. Rev. D 114,

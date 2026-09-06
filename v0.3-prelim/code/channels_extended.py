@@ -1573,7 +1573,8 @@ GOLDSTEIN_HILL_2026_DELTA_N_EFF_MAX_95CL = 0.107  # dimensionless
 # the mediator mass and the Hubble rate at decoupling. ε ~ 10⁻⁵ is the
 # canonical thermalization threshold for sub-MeV to GeV-scale secluded
 # dark photons in the early universe. References (verified 2026-09-06
-# via arXiv search):
+# via arXiv search, with user correction 2026-09-06 on the Co/Pierce/Zhang
+# paper):
 #   - Redondo & Postma 2009, "Massive hidden photons as lukewarm dark
 #     matter", JCAP 02 (2009) 005, arXiv:0811.0326. Foundational work
 #     on secluded U(1) kinetic mixing in cosmology.
@@ -1583,6 +1584,15 @@ GOLDSTEIN_HILL_2026_DELTA_N_EFF_MAX_95CL = 0.107  # dimensionless
 #   - McDermott & Witte 2020, "The Cosmological Evolution of Light
 #     Dark Photon Dark Matter", PRD 101, 063030, arXiv:1911.05086.
 #     Modern treatment of dark-photon decoupling temperature.
+#   - Co, Pierce, Zhang 2019, "Dark Photon Dark Matter Produced by
+#     Axion Oscillations", PRD 99, 075002, arXiv:1810.07196. Modern
+#     treatment of dark-photon production mechanisms relevant to
+#     thermalization threshold.
+#   - Escudero Abenza 2020, "Precision Early Universe Thermodynamics
+#     made simple: Neff and Neutrino Decoupling in the Standard Model
+#     and beyond", JCAP 05 (2020) 048, arXiv:2001.04466. Precision
+#     treatment of Neff and neutrino decoupling (relevant to the
+#     ΔN_eff = 0.027 per thermalized boson number).
 # The 10⁻⁵ number is order-of-magnitude correct for a ~100 MeV-scale
 # dark photon at recombination; ±0.5 dex is reasonable for other masses.
 DARK_PHOTON_THERMALIZATION_EPSILON_THRESHOLD = 1.0e-5  # dimensionless
