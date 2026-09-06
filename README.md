@@ -28,7 +28,7 @@ Recent rounds within this standing version: **+T80** (LZ paper compatibility), *
 | **Drift-guard audit** | **44/44 ALL CLEAR** | `scripts/t82_audit.py` (CI-gatable) |
 | **KIV cron** | **2026-11-01 09:00** | re-checks LZ paper via `scripts/lz_kiv_check.py` |
 
-> All headline numbers are spot-checked against `v0.3-prelim/data/results/t41_mediator_mass_joint_fit_t88ce_v0_8_nlive2000.json` and verified by `scripts/t82_audit.py` (43 doc-presence + 1 VERSION-drift checks, all passing).
+> All headline numbers are spot-checked against `v0.3-prelim/data/results/t41_mediator_mass_joint_fit_t88ce_v08_with_euclid_lensing_and_subhalo_forecast_nlive2000.json` and verified by `scripts/t82_audit.py` (43 doc-presence + 1 VERSION-drift checks, all passing).
 
 ---
 
@@ -294,7 +294,7 @@ Honest scope, per the 2026-08-17 R12 six-reviewer audit and the
   [`v0.3-prelim/docs/T87_LZ_FORWARD_PREDICTION.md`](v0.3-prelim/docs/T87_LZ_FORWARD_PREDICTION.md)
   for the full verdict + derivations.
 
-See `v0.3-prelim/docs/MODEL_ASSUMPTIONS_AND_LIMITATIONS.md` for the
+See [`MODEL_ASSUMPTIONS_AND_LIMITATIONS.md`](MODEL_ASSUMPTIONS_AND_LIMITATIONS.md) for the
 canonical standing-posture document, and `v0.3-prelim/docs/T82_STALE_CLAIM_AUDIT.md`
 for the doc-vs-code drift verification that the T81 audit + T82 tools
 performed.

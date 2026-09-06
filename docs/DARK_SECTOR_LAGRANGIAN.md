@@ -4,7 +4,7 @@
 **Author:** K. Lam (project owner), with composite-DM inputs from Hermes (M3 model) and reviewer audits (Doubao, Qwen 3.8 Max).
 **Status:** v0.4-prelim draft (R11 audit recommendation G13 closure).
 **Created:** 2026-08-14.
-**Companion docs:** `v0.3-prelim/docs/FINDINGS.md` (numerical results), `docs/DATA_SOURCES.md` (data provenance), `docs/REVIEWER_AUDIT_R11.md` (R11 audit).
+**Companion docs:** `v0.3-prelim/docs/PROJECT_FINDINGS.md` (numerical results), `docs/DATA_SOURCES.md` (data provenance), `docs/REVIEWER_AUDIT_R11.md` (R11 audit).
 
 ---
 

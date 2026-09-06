@@ -218,9 +218,9 @@ framework is right rather than lucky.
 
 | Reference | What it cross-validates | Where in repo |
 |---|---|---|
-| **Drobczyk (2025)** arXiv:2506.22997 | Same secluded-mediator physics via PNGB + heavy resonance construction | T68 (`v0.3-prelim/code/t68_cross_validation.py`) + plot `Cross_Validation_T54_vs_Drobczyk_v2` |
+| **Drobczyk (2025)** arXiv:2506.22997 | Same secluded-mediator physics via PNGB + heavy resonance construction | T68 (`v0.3-prelim/code/t68_cross_validation_drobczyk.py`) + plot `Cross_Validation_T54_vs_Drobczyk_v2` |
 | **Yang, Yang, Yu+ (2026)** arXiv:2510.11006 | Gravothermal collapse at 10⁶ M_sun subhalo masses (independent observational validation) | `docs/findings_2026_SIDM_papers.md` |
-| **Di Mauro et al. (2025)** arXiv:2510.23771 | Secluded-DM phenomenology at colliders (orthogonal constraint direction) | `v0.3-prelim/docs/MEDIATOR_DETECTION_SYNTHESIS_v10-v12.md` |
+| **Di Mauro et al. (2025)** arXiv:2510.23771 | Secluded-DM phenomenology at colliders (orthogonal constraint direction) | `v0.3-prelim/docs/MEDIATOR_DETECTION_SYNTHESIS_v12.md` (only v12 ships; v10/v11 collapsed in pre-T86) |
 
 ---
 

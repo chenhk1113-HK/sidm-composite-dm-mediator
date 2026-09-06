@@ -692,7 +692,7 @@ will add this.
   nested-sampling run and the key unit/sign tests if you plan to
   build on it."
 - **Not a substitute for independent verification.** Per
-  `DISCLAIMER.md`: "Every line of code, every comment, every value in
+  [`DISCLAIMER.md`](DISCLAIMER.md): "Every line of code, every comment, every value in
   every test, and every word in every doc in this repo was generated,
   reviewed, and iterated by AI systems, not by a human domain expert."
 
