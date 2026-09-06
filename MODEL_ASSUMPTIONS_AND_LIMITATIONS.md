@@ -9,7 +9,8 @@
 
 ## §0 — Standing posture: orthogonal-physics in practice (locked 2026-08-10, reaffirmed 2026-09-02 in T75; refined 2026-09-02 in T78/T79; LZ-paper-validated 2026-09-02 in T80; XENONnT+PandaX competitor watch added 2026-09-02 in T81; T86.7j plausibility audit 2026-09-03; **T87 forward prediction 2026-09-03: composite-DM *cannot* claim LZ event**)
 
-**The project's headline σ/m = 0.27 cm²/g (T41 v0.7, nlive=2000)
+**The project's headline σ/m = 0.06 cm²/g (T41 v0.8, nlive=2000;
+post-T88.E, was 0.27 cm²/g at v0.7)
 measures the self-interaction cross-section per unit mass σ_DM-DM (in
 cm² of cross-section per gram of dark matter).** This is a **practically
 independent** observable from σ_DM-nucleon (the dark-matter-nucleon
@@ -204,7 +205,7 @@ the gap").
 - Combined: ~10⁻⁷⁴ from ε² dominates everything else.
 
 **What this means for the project:**
-1. **The model remains a valid SIDM candidate** for dSph/UFD/Bullet/SPARC/DAMPE/LSS. log Z = −163.29 ± 0.085 is unchanged. All T72-T84 channels still work.
+1. **The model remains a valid SIDM candidate** for dSph/UFD/Bullet/SPARC/DAMPE/LSS. log Z = −164.87 ± 0.084 (post-T88.E; pre-T88.E was −163.29 ± 0.085) is the v0.8 standing posterior. All T72-T88 channels still work.
 2. **The LZ event (if real) is *not* explained by this model's inelastic channel.** This is a **positive scientific result** — quantitative confirmation of "compatible with LZ in mass; not compatible in cross-section." The event (if real) points to different microphysics.
 3. **The mass-window match is genuine but not sufficient.** LZ best-fit m_χ = 1000 GeV is within 30% of the project's 770 GeV MAP and within the heavy-WIMP regime (700-1000 GeV). What breaks is the cross-section: σ_inel_nuc is 71 orders below LZ sensitivity.
 
@@ -712,7 +713,7 @@ Per Reviewer 2's recommendation:
 | 2026-08-26 | §1 added Channel 14 (mediator lifetime) + Channel 15 (KSFR mask); §6 fixed: Λ_dark removed as independent constraint (redundant with f_π under chiral-limit convention); KSFR mask implemented as Channel 15 + wired into T41; major v0.5 finding documented: T41 MAP at m_ρ=26.6 MeV is BELOW KSFR validity lower bound (418 MeV) | R13 H2 + H1 closure, this turn |
 | 2026-08-26 (T70.5) | v0.5 re-run COMPLETED. T41 re-run with KSFR mask enabled at nlive=500. §6 updated to reflect new canonical v0.5 numbers (MAP m_ρ = 501.7 MeV, median = 552.5 MeV, log Z = -254.24, σ/m_0 = 0.105 cm²/g, a = +1.89). All KSFR-valid. v0.5 caveat is now RESOLVED. | T70.5 follow-up, this turn |
 | 2026-08-28 (T71.7) | §4.2 extended with T71.7 KiSS-SIDM UFD re-run honest timeout verdict. §4.7 NEW: Lattice-QCD calibration for dark SU(N) sector — full per-(Nc,Nf) audit table, Brower N_f=8 caveat block (per reviewer Assessment.docx ¶52 + Review12 ¶97), citation pointers for future follow-up. Brower ingestion deferred to v0.7+ (conformal-window risk). | T71.7, this turn |
-| 2026-09-02 (T75-T80) | v0.7 release: §0 standing posture updated with T75 (DAMPE+LSS joint-fit), T78/T79 (kinetic-mixing LZ link, composite form-factor correction), T80 (LZ paper validated). Headline: σ/m = 0.27 cm²/g at MAP, log Z = -163.29 ± 0.085, m_χ = 770 GeV. §0 includes LZ paper facts (3.4σ local / 2.6σ global, 1000 GeV/c² best fit, 248 keV recoil). | T75-T80, this turn |
+| 2026-09-04 (T88.E) | v0.8 release: T88.E Euclid Q1 subhalo FORECAST Channel 24 added (first non-silent of T88 series). v0.7→v0.8 joint-fit rerun at nlive=2000 with sampling-variance control test (skill P17). Headline: σ/m = 0.06 cm²/g at MAP (was 0.27), a = +0.13 (was +0.34), log Z = -164.87 ± 0.084 (was -163.29 ± 0.085), m_χ = 770 GeV. Pure T88.E contribution: Δ log Z = -0.85 (10× noise floor). 22 effective channels. | T88.A-E, this turn |
 | 2026-09-02 (T81) | XENONnT + PandaX-4T added as Channel 19 (experimental watch). §0 orthogonal-physics stance reaffirmed: σ_DM-nuc ~10⁻¹¹⁷ cm² is ~10⁻⁷¹ below both experimental limits. | T81, this turn |
 | 2026-09-03 (T86.7j) | Plausibility audit: User question "is our model plausibility largely undermined by LZ finding or considering Planck length constraint?" Both concerns addressed with verbatim LZ paper quotes + numerical derivations. Verdict: validation, not falsification. Surfaced T_RH > 10¹⁵ GeV freeze-in requirement. | T86.7j, this turn |
 | 2026-09-03 (T86.7k+C) | Composite-channel gap analysis (post-Consider4 review): Registered Tier-2 roadmap Item 3 (T87 forward prediction). Doc-only round; no code. Consider3 +4 reviewer inputs preserved for traceability. | T86.7k+C, this turn |

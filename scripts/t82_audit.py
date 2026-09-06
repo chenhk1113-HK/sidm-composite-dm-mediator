@@ -30,6 +30,11 @@ GROUND_TRUTH_JSON = (
     REPO
     / "v0.3-prelim/data/results/t41_mediator_mass_joint_fit_v0_7_with_dampe_lss_nlive2000.json"
 )
+# Post-T88.E headline (v0.8) — see data/results/t41_mediator_mass_joint_fit_t88ce_v08_with_euclid_lensing_and_subhalo_forecast_nlive2000.json
+HEADLINE_V08_JSON = (
+    REPO
+    / "v0.3-prelim/data/results/t41_mediator_mass_joint_fit_t88ce_v08_with_euclid_lensing_and_subhalo_forecast_nlive2000.json"
+)
 
 DOCS = [
     ("VERSION", "VERSION"),
@@ -44,22 +49,26 @@ DOCS = [
 
 CHECKS_PER_DOC: dict[str, list[tuple[str, str]]] = {
     "README.md": [
-        ("σ/m headline", "0.27 cm²/g"),
-        ("a headline", "+0.34"),
+        ("σ/m headline", "0.06 cm²/g"),
+        ("a headline", "+0.13"),
         ("tension", "0.60σ"),
         ("m_φ MAP", "453 MeV"),
         ("m_χ MAP", "770 GeV"),
-        ("log Z", "−163.29 ± 0.085"),
+        ("log Z (v0.8)", "−164.87 ± 0.084"),
+        ("log Z (v0.7 historical)", "−163.29"),
         ("channels", "**21**"),
         ("tests", "662 pass, 8 skip"),
         ("headline row present", "**σ/m₀**"),
         ("ε posterior reference", "10⁻³⁷"),
     ],
     "CITATION.cff": [
-        ("log Z", "-163.29"),
+        ("log Z (v0.8)", "-164.87"),
+        ("log Z (v0.7 historical)", "-163.29"),
         ("tension", "tension T39 vs Yukawa a = 0.60"),
         ("m_chi", "MAP m_chi = 770"),
-        ("sigma/m_0", "sigma/m_0 = 0.27"),
+        ("sigma/m_0 (v0.7 historical)", "sigma/m_0 = 0.27"),
+        ("sigma/m_0 (v0.8)", "sigma/m_0 = 0.06"),
+        ("version", "0.4-prelim+T88E"),
     ],
     "MODEL_ASSUMPTIONS_AND_LIMITATIONS.md": [
         ("log_epsilon", "log_epsilon = -36.95"),
@@ -69,32 +78,32 @@ CHECKS_PER_DOC: dict[str, list[tuple[str, str]]] = {
         ("α_X", "6.84 × 10⁻¹⁷"),
     ],
     "EXTRACT.md": [
-        ("Channels 21", "Channels: **21**"),
+        ("Channels 22", "Channels: **22 effective**"),
         ("Tests 662", "662 pass"),
-        ("σ/m headline", "σ/m = 0.27 cm²/g"),
+        ("σ/m headline", "σ/m = 0.06 cm²/g"),
     ],
     "docs/LAYMAN_SUMMARY.md": [
         ("m_χ MAP", "770 GeV"),
-        ("σ/m₀", "0.27 cm²/g"),
+        ("σ/m₀", "0.06 cm²/g"),
         ("log Z", "**-163**"),
         ("tension 0.60", "0.60** (below 1.0)"),
         ("channels 21", "**21**"),
         ("tests 662", "**662**"),
     ],
     "CHANGELOG.md": [
-        ("v0.4-prelim+T75", "v0.4-prelim+T75"),
-        ("log Z", "−163.29"),
+        ("v0.4-prelim+T88E", "v0.4-prelim+T88E"),
+        ("log Z", "−164.87"),
     ],
     "VERSION": [
-        ("standing version", "0.4-prelim+T75"),
+        ("standing version", "0.4-prelim+T88E"),
     ],
     "CURRENT.md": [
-        ("Bayesian evidence log Z", "−163.29 ± 0.085"),
+        ("Bayesian evidence log Z", "−164.87 ± 0.084"),
         ("m_χ (MAP)", "770 GeV"),
         ("m_φ (MAP)", "453 MeV"),
-        ("σ/m₀", "0.27 cm²/g"),
+        ("σ/m₀", "0.06 cm²/g"),
         ("Tension", "0.60σ"),
-        ("Channels", "21 channels"),
+        ("Channels", "22 effective channels"),
         ("662 tests", "662 pass"),
         ("Drift-guard", "40/40 ALL CLEAR"),
     ],
@@ -111,7 +120,7 @@ CHECKS_PER_DOC: dict[str, list[tuple[str, str]]] = {
 # the next standing version is published.
 # ---------------------------------------------------------------------------
 
-CANONICAL_STANDING_VERSION = "0.4-prelim+T75"
+CANONICAL_STANDING_VERSION = "0.4-prelim+T88E"
 VERSION_LABEL = "VERSION"
 
 

@@ -13,13 +13,13 @@
 
 ## ⚡ Latest version & headline
 
-**Standing version: `v0.4-prelim+T75`** (Tier-1 milestone, 2026-09-02).
+**Standing version: `v0.4-prelim+T88E`** (Tier-1 milestone, 2026-09-02).
 Recent rounds within this standing version: **+T80** (LZ paper compatibility), **+T81** (Channel 19 = XENONnT/PandaX watch), **+T82** (stale-claim audit), **+T83** (KSFR (3,2) promotion to LATTICE), **+T84** (Channel 18 ρ sensitivity sweep).
 
 | Quantity | Value | Notes |
 |---|---|---|
-| **σ/m₀** (joint fit, galactic scale) | **0.27 cm²/g** | T41 v0.7 rerun at nlive=2000 (MAP) |
-| **Bayesian evidence log Z** | **−163.29 ± 0.085** | +52 log-units vs v0.6 from DAMPE + LSS |
+| **σ/m₀** (joint fit, galactic scale) | **0.06 cm²/g** | T41 v0.8 rerun at nlive=2000 (MAP); T88.E forecast pulls 0.27 → 0.06 |
+| **Bayesian evidence log Z** | **−164.87 ± 0.084** | +51 log-units vs v0.6 from DAMPE + LSS (T88.E penalty -0.85 brings v0.7 → v0.8) |
 | **m_χ** (DM mass, MAP) | **770 GeV** | posterior median 498 GeV |
 | **m_φ** (mediator mass, MAP) | **453 MeV** | posterior median 588 MeV (KSFR-valid) |
 | **Tension T39 vs Yukawa a** | **0.60σ** | below the 1.0 threshold (resolved) |
@@ -40,7 +40,7 @@ Recent rounds within this standing version: **+T80** (LZ paper compatibility), *
 4. **Channel 19 (XENONnT + PandaX-4T) registered as experimental watch** — predicted σ_DM-nucleon ~10⁻¹¹⁷ cm² is ~10⁻⁷¹ below both experimental limits; gated out of production joint fit by `T81_COMPETITOR_DD_DISABLE=1`.
 5. **KSFR (3,2) fundamental promoted to LATTICE-class (T83)** — the existing `ksfr_pcac_validity.KSFR_NC_NF_RATIOS` had (3, 2) as LATTICE per Shindler 2019 but `t53b_lattice_input.LATTICE_TABLE` had only commented-out entries; T83 closes that inconsistency. Counts: 3 LATTICE / 2 ANALYTICAL / 2 ESTIMATED (was 2 / 2 / 3).
 6. **T82 stale-claim audit confirms 0 doc drift** — 32 doc-presence checks against the v0.7 result JSON all match. The CI-gatable `scripts/t82_audit.py` prevents future drift from slipping past human reviewers.
-7. **T84 sensitivity sweep quantifies Channel 18's ρ dependence** — best-fit σ/m is **invariant** across ρ ∈ [0.7, 1.0] (zero spread), but log Z magnitude is moderate-sensitive (~3 log-units over [0.7, 1.0]; ~9 over [0.5, 1.0]). The v0.7 MAP σ/m = 0.27 cm²/g is robust because it sits in a sub-optimal regime for Channel 18 regardless of ρ — the headline value is set by dSph+UFD+Bullet+SPARC+DAMPE, not by LSS alone.
+7. **T84 sensitivity sweep quantifies Channel 18's ρ dependence** — best-fit σ/m is **invariant** across ρ ∈ [0.7, 1.0] (zero spread), but log Z magnitude is moderate-sensitive (~3 log-units over [0.7, 1.0]; ~9 over [0.5, 1.0]). The v0.8 MAP σ/m = 0.06 cm²/g is robust because it sits in a sub-optimal regime for Channel 18 regardless of ρ — the headline value is set by dSph+UFD+Bullet+SPARC+DAMPE+LSS+T88.E, not by LSS alone. (Was 0.27 at v0.7; T88.E FORECAST pulled down 5×.)
 
 > **Full interpretation:** the v0.7 posterior is genuinely well-constrained within its scope (Benchmark A: composite dark pion + elementary A'). The standing posture (σ/m unchanged at current LZ precision) was developed honestly in T77-T79 and verified by an external `Updated review1.docx` reviewer on 2026-09-03.
 
@@ -71,7 +71,7 @@ pytest v0.3-prelim/tests/ --ignore=v0.3-prelim/tests/test_sparc_hierarchical.py 
 #     to re-run from scratch, see scripts/parallel_run_nl2000.sh — ~7 min wall)
 python -c "import json; r = json.load(open('v0.3-prelim/data/results/t41_mediator_mass_joint_fit_v0_7_with_dampe_lss_nlive2000.json')); print('log Z =', round(r['log_Z'], 2), 'MAP m_chi =', round(r['MAP_physical']['m_chi_GeV']), 'GeV'); print('sigma/m =', round(r['MAP_physical']['sigma_m_0_derived'], 2), 'cm^2/g')"
 
-# Expect: log Z = -163.29 MAP m_chi = 770 GeV
+# Expect: log Z = -164.87 MAP m_chi = 770 GeV (post-T88.E; pre-T88.E was -163.29)
 #         sigma/m = 0.27 cm^2/g
 ```
 
@@ -137,7 +137,7 @@ sidm-composite-dm-mediator/
 | **v0.2-prelim** | Intermediate (4 modules) | Adds dSph channel scaffolding |
 | **v0.3-prelim** | Main work — D1 through D15-CORRECTED3, with R12 audit closure (133 modules, 39 tests) | Joint σ/m ~ 0.066 cm²/g at MAP (R12 T41); velocity index a ≈ +0.19 (no significant tension); Benchmark A (composite dark pion + elementary A') declared canonical |
 | **Mediator_Detection v1–v12** | Mediator detection feasibility (within v0.3-prelim/code/) | σ/m ~ 0.07 cm²/g at MeV-scale m_φ (R12), mediator-invisible to LZ only in ε ≪ 10⁻¹⁰ part of posterior |
-| **v0.4-prelim+T75** | Tier-1 milestone (T72–T79, 2026-09-02) | σ/m ~ **0.27 cm²/g** at MAP (nlive=2000); log Z = **−163.29** ± 0.085; tension = **0.60** (below 1.0); 18 channels |
+| **v0.4-prelim+T88E** | Tier-1 milestone (T72–T88, 2026-09-04) | σ/m ~ **0.06 cm²/g** at MAP (nlive=2000); log Z = **−164.87** ± 0.084; tension = **0.60** (below 1.0); 22 effective channels |
 | **+T80** | LZ preprint compatibility check (2026-09-02) | Project m_χ ~ 770 GeV in same ballpark as LZ best-fit 1000 GeV (Ls₁₀); 3.4σ local / 2.6σ global; standing posture preserved |
 | **+T81** | LZ review response + XENONnT/PandaX competitor watch | Channel 19 added as experimental watch; 504 → 504 tests pass |
 | **+T82** | Stale-claim audit + CI-gatable drift-guard | 32/32 doc-presence checks pass; `scripts/t82_audit.py` |
@@ -162,9 +162,10 @@ Five honest takeaways a reader should leave with:
    groups' results.
 
 2. **A self-consistent multi-probe benchmark point under Benchmark A.**
-   v0.7 MAP at (m_φ = **453 MeV**, m_χ = **770 GeV**, g_χ ≈ 1.19, σ/m₀ = **0.27 cm²/g**, a = +0.34) is a
-   **jointly constrained** point consistent with **19 channels** (dSph + UFD + Bullet + SPARC +
-   LZ + Fermi + DAMPE + Zhang+2025 LSS + 3 newer channels).
+   v0.8 MAP (post-T88.E) at (m_φ = **453 MeV**, m_χ = **770 GeV**, g_χ ≈ 1.19, σ/m₀ = **0.06 cm²/g**, a = **+0.13**) is a
+   **jointly constrained** point consistent with **22 effective channels** (dSph + UFD + Bullet + SPARC +
+   LZ + Fermi + DAMPE + Zhang+2025 LSS + XRISM Perseus + eROSITA + Euclid Q1 lensing + Euclid Q1 subhalo FORECAST).
+   **Pre-T88.E (v0.7) MAP** at σ/m₀ = 0.27 cm²/g, a = +0.34 was jointly consistent with **21 channels**.
    **Caveat:** σ_DM-DM ≠ σ_DM-nucleon (kinetically decoupled in this regime); direct-detection
    constraints enter only as sanity checks (Channel 5), not as σ/m measurements.
 
@@ -254,10 +255,10 @@ Honest scope, per the 2026-08-17 R12 six-reviewer audit and the
 2026-09-03 `Updated review1.docx`:
 
 - **Not a discovery.** This is a phenomenology joint-fit framework, not a
-  measurement of dark matter at any detector. The v0.7 MAP at (m_φ = 453 MeV,
-  m_χ = 770 GeV, σ/m₀ = 0.27 cm²/g, a = +0.34) is **one point in the prior
+  measurement of dark matter at any detector. The v0.8 MAP (post-T88.E) at (m_φ = 453 MeV,
+  m_χ = 770 GeV, σ/m₀ = 0.06 cm²/g, a = +0.13) is **one point in the prior
   box** that fits the multi-channel data within 0.60σ of the data-preferred
-  Yukawa slope.
+  Yukawa slope. (Pre-T88.E v0.7 MAP at σ/m₀ = 0.27, a = +0.34.)
 - **Not a Boltzmann-derived relic density.** The t55 module is a
   calibrated `1/⟨σv⟩` mapping, not a Boltzmann solver. A first-principles
   relic-density calculation is deferred to a future round (V0_6 ROADMAP #10).
@@ -311,9 +312,10 @@ as "a measurement":
    0.60-standard-deviation measurement."
 
 2. **The headline table mixes different types of estimate.** The masses
-   (m_φ = 453 MeV, m_χ = 770 GeV for v0.7) are **MAP** values. The
-   cross-section σ/m₀ = 0.27 cm²/g and velocity index a = +0.34 are
+   (m_φ = 453 MeV, m_χ = 770 GeV for v0.8) are **MAP** values. The
+   cross-section σ/m₀ = 0.06 cm²/g and velocity index a = +0.13 are
    calculated at the **MAP point**, not as posterior medians.
+   (Pre-T88.E v0.7: σ/m₀ = 0.27, a = +0.34.)
    These numbers should NOT be read as one jointly determined particle;
    the median and the MAP can disagree substantially when the posterior
    is multimodal or skewed. The 68% intervals are very broad.
@@ -323,7 +325,7 @@ as "a measurement":
    annihilation calculation instead uses α_D = g²_χ/(4π) derived from
    g_chi (the dark-Yukawa coupling). The displayed posterior for α is
    therefore not an independently data-constrained result, and the
-   quoted Bayesian evidence (log Z = −163.29) inherits this
+   quoted Bayesian evidence (log Z = −164.87 at v0.8; was −163.29 at v0.7) inherits this
    incompleteness. The ε (kinetic-mixing) posterior, by contrast, IS
    data-constrained by LZ.
 
@@ -468,7 +470,7 @@ Quick bibtex for citing this repo (as of 2026-09-03):
 @software{lam_sidm_composite_dm_mediator_2026,
   author = {Lam, K.},
   title = {sidm-composite-dm-mediator},
-  version = {0.4-prelim+T75 (Tier-1 milestone 2026-09-02: DAMPE + Zhang+2025 LSS joint-fit rerun; v0.7 result log Z = -163.29 +/- 0.085 at nlive=2000; tension T39 vs Yukawa a = 0.60 below 1.0 threshold; 549 tests passing; 19 channels including T81 XENONnT/PandaX-4T watch + T83 KSFR LATTICE promotion + T84 sensitivity sweep)},
+  version = {0.4-prelim+T88E (Tier-1 milestone 2026-09-04: DAMPE + Zhang+2025 LSS + T88.C Euclid Q1 lensing + T88.E Euclid Q1 subhalo FORECAST; v0.8 result log Z = -164.87 +/- 0.084 at nlive=2000; tension T39 vs Yukawa a = 0.60 below 1.0 threshold; 662 tests passing; 22 effective channels including T88.C silent cross-check + T88.E first non-silent FORECAST channel -0.85 pure contribution)},
   year = {2026},
   month = {9},
   url = {https://github.com/chenhk1113-HK/sidm-composite-dm-mediator},

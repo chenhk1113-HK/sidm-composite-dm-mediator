@@ -1,4 +1,4 @@
-# Layman Summary — v0.4-prelim+T75 Tier-1 Milestone (T72 → T84)
+# Layman Summary — v0.4-prelim+T88E Tier-1 Milestone (T72 → T84)
 
 > **For:** Non-experts + users preferring quick summaries over
 > technical detail. Covers the full milestone shipped 2026-09-02
@@ -113,7 +113,7 @@ The kinetic-mixing suppression (~50-80 orders) means the project
 (2.6σ global / 3.4σ local). ε_γ ~ 10⁻³⁷ at the v0.7 MAP puts predicted
 σ_DM-nucleon at ~10⁻¹¹⁷ cm², vs LZ sensitivity of ~10⁻⁴⁶ cm².
 
-**The headline σ/m = 0.27 cm²/g is unchanged at current LZ precision.**
+**The headline σ/m = 0.06 cm²/g is unchanged at current LZ precision.**
 (Per LZ1.docx reviewer rec #2: this is "practical decoupling, not
 absolute orthogonality." The pre-registered T78 protocol acknowledges
 that at ≥3σ with a published cross-section, the kinetic-mixing parameter
@@ -127,7 +127,7 @@ that at ≥3σ with a published cross-section, the kinetic-mixing parameter
 | XENONnT/PandaX confirms or contradicts | Watch + treat as joint constraint (Channel 19) |
 | Statistical fluctuation (background) | Document + remove T77 from §0 |
 
-**The project's headline σ/m = 0.27 cm²/g is unchanged at current
+**The project's headline σ/m = 0.06 cm²/g is unchanged at current
 LZ precision.** The DAMPE + LSS channels that determine σ/m are
 **practically independent** of any direct-detection event at the
 v0.7 posterior's ε² suppression level — but the link is theoretical,
@@ -142,8 +142,9 @@ not absolute.
 
 2. **The Zhang+2025 LSS channel uses a phenomenological model** of
    the Σ*-bias anti-correlation, not a full cosmological simulation.
-   The σ/m shift from 0.06 to 0.27 cm²/g could shift back if the
-   channel's assumptions are revised.
+   The σ/m shift from 0.27 (v0.7) to 0.06 (v0.8) cm²/g could shift back
+   if the channel's assumptions are revised (or if the T88.E
+   FORECAST's actual measurement arrives at DR1).
 
 3. **The composite form factor at LZ energies is small** but the
    "70 orders" claim was originally framed as "exact" — we've
@@ -212,8 +213,8 @@ worth flagging.
 
 ### What didn't change
 
-- Standing version: **v0.4-prelim+T75** (no bump)
-- Joint-fit posterior: **log Z = −163.29 ± 0.085**, m_χ = 770 GeV, σ/m = 0.27 cm²/g
+- Standing version: **v0.4-prelim+T88E** (no bump)
+- Joint-fit posterior: **log Z = −164.87 ± 0.084**, m_χ = 770 GeV, σ/m = 0.06 cm²/g
 - Tests: 662 pass / 8 skip
 - Drift-guard audit: 40/40 ALL CLEAR
 - **No posterior re-run**; **no new physics**; **no new channels**
@@ -261,7 +262,7 @@ in the freeze-in regime). The composite form factor (F²_gaussian ≈ 0.93) and
 inelastic kinematic factor (F_inel ≈ 0.5) are sub-dominant.
 
 **What this means:**
-- **The model remains a valid SIDM candidate** for dSph/UFD/Bullet/SPARC/DAMPE/LSS. log Z = −163.29 ± 0.085 is unchanged. All T72-T84 channels still work.
+- **The model remains a valid SIDM candidate** for dSph/UFD/Bullet/SPARC/DAMPE/LSS. log Z = −164.87 ± 0.084 is unchanged. All T72-T88 channels still work.
 - **The model does NOT explain the LZ event** if it's real. The event (if real) points to a different microphysics — Higgsino, pseudo-Dirac, or some other inelastic-DM scenario with different (m_χ, δ, ε) than v0.7 MAP predicts.
 - **The mass-window match is genuine but not sufficient.** LZ best-fit m_χ = 1000 GeV is within 30% of the project's 770 GeV MAP and within the heavy-WIMP regime (700-1000 GeV). What breaks is the cross-section.
 
@@ -273,7 +274,7 @@ in the LZ's exact exposure (2.84 tonne-years). The verdict is robust.
 See `v0.3-prelim/docs/T87_LZ_FORWARD_PREDICTION.md` for the full derivation.
 New code: `t87_composite_inelastic_nucleon.py` + `t87_lz_event_rate.py` +
 `test_t87_inelastic_nucleon.py` (9/9 tests pass). Standing version unchanged
-(v0.4-prelim+T75); no posterior re-run; no new physics.
+(v0.4-prelim+T88E); no posterior re-run; no new physics.
 
 ## Why this is the most important milestone since v0.3-prelim
 
@@ -284,7 +285,7 @@ magnetic-moment EFT operator). The project's microphysics (light
 mediator + composite internal structure) is the **same framework**
 the LZ paper tests.
 
-**Standing posture robust at v0.4-prelim+T75.** The headline σ/m
+**Standing posture robust at v0.4-prelim+T88E.** The headline σ/m
 survives the LZ news cycle. The DAMPE + LSS channels add
 substantial new evidence (+52 log Z) and resolve a longstanding
 velocity-slope tension. The Tier-1 milestone is publication-worthy.
@@ -309,6 +310,6 @@ velocity-slope tension. The Tier-1 milestone is publication-worthy.
 > validation, T81 LZ1.docx review response + Channel 19 (XENONnT/PandaX),
 > T82 stale-claim audit (32/32 doc-presence + 1 VERSION drift-guard checks pass),
 > T83 KSFR (3,2) fundamental LATTICE promotion, T84 Channel 18 ρ sensitivity sweep.
-> Headline: σ/m = 0.27 cm²/g, tension = 0.60, log Z =
-> -163.29 ± 0.085, m_χ ~ 770 GeV (MAP). **662** tests passing, 21
-> channels.** Standing posture preserved at v0.4-prelim+T75.
+> Headline: σ/m = 0.06 cm²/g, tension = 0.60, log Z =
+> -164.87 ± 0.084, m_χ ~ 770 GeV (MAP). **662** tests passing, 22
+> effective channels.** Standing posture preserved at v0.4-prelim+T88E.

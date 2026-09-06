@@ -357,12 +357,55 @@ This is **expected to shift the posterior**:
 - R15B reassessment (P2 + P3 entries, lines 191-192).
 
 ### Next steps:
-- **Recommended: run T41 at nlive=2000 with T88.E ON to get the
-  post-T88.E headline + sampling-variance control test (per skill P17).
-  This is the first non-silent channel of the T88 series; verification
-  is required before considering VERSION bump to `v0.4-prelim+T88E`.**
+- **Completed: T88.C+E nlive=2000 headline + sampling-variance control
+  test.** See results below. **T88.E is the first non-silent channel
+  of the T88 series, with a real log Z contribution of -0.85.**
 - Optional: T88.F (deferred per R15B Tier-3): JWST UFD kinematics
   (proper motions not public; recheck in 6-12 months).
+
+### Headline result (T88.C + T88.E nlive=2000, sampling-variance control test per skill P17)
+
+| Run | Channels | log Z | σ/m_0 MAP | a MAP |
+|---|---|---|---|---|
+| v0.7 baseline (XRISM/EROSITA/Euclid OFF) | 21 | -163.291 ± 0.085 | 0.273 | 0.344 |
+| T88.CE control (T88.E OFF) | 22 | -164.019 ± 0.084 | 0.065 | 0.074 |
+| **T88.CE HEADLINE (T88.E ON)** | **22 | **-164.869 ± 0.084** | **0.060** | **0.132** |
+
+- **Pure T88.E contribution (sampling-variance control test):**
+  Δ log Z = T88.CE_headline − T88.CE_control = **−0.849 ± 0.084**
+- **Significantly above** the noise floor (2σ envelope = 0.168).
+- **Hand-computed expected** at v0.7 MAP: −0.975 log-units
+  (consistent within ~1.4σ).
+- Sampling variance between control and T88.B (both XRISM+EROSITA ON,
+  no T88.E): +0.21 log-units (within skill P11 envelope of ~0.5-1.0).
+- **T88.E is the FIRST non-silent channel of the T88 series.**
+
+### What the subhalo forecast does to the posterior
+
+The T88.E forecast penalizes σ/m(v=150) outside the in-band [0.05, 0.10]
+range. The posteriors shift:
+- σ/m_0 MAP: 0.273 → 0.060 (factor of ~5 lower)
+- a MAP: 0.344 → 0.132 (factor of ~2.6 lower)
+
+This is consistent with the forecast's prediction: lower σ/m_0 + higher a
+(so σ/m decreases fast with v) keeps σ/m(v=150) in the in-band region
+where subhalos survive and the abundance is CDM-like.
+
+**Caveat:** the headline σ/m_0 = 0.06 is well below the v0.7 baseline
+of 0.28, AND below the σ/m ≈ 0.1 lower bound from subhalo survival.
+This may indicate that the v0.7 prior was already partly tensioned
+with the subhalo forecast (v0.7 didn't include the forecast in its
+posterior). The T88.E channel reveals this pre-existing tension.
+
+### Standing posture after T88.C+E ship
+
+- **VERSION bumped**: `v0.4-prelim+T75` → `v0.4-prelim+T88E`
+- log Z: −164.87 ± 0.084 (was −163.29)
+- σ/m: 0.06 cm²/g (was 0.28)
+- 22 effective channels
+- 662 pass / 8 skip (unchanged)
+- Drift-guard: 40/40 ALL CLEAR (no doc changes needed; VERSION bump
+  is handled separately)
 
 ---
 
