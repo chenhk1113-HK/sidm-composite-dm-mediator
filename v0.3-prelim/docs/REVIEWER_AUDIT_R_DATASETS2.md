@@ -83,30 +83,53 @@ SIDM Concerto. 5-min audit, no code change.
 
 | Aspect | Verdict |
 |---|---|
-| "Public partial-wave, Hulthén, Born, and velocity-averaging implementations" | ⚠️ **unverifiable** — web search for `sidmkit` and `sidm-vdsigmas` returns **no Python package or GitHub project matching these names**. Search results returned generic Schrödinger-solver packages (qmsolve, Kratzer/Mie/Hulthén research papers) but no specific `sidmkit` or `sidm-vdsigmas` Python project with the described feature set. **Possible fabricated names** (no GitHub mirror, no PyPI entry, no arXiv mention). |
-| "Excellent unit-test and regression suite for the project's custom radial Schrödinger solver" | ✅ **valid-deferred** — the project's microphysics pipeline uses `sigma_m_at_v_yukawa(...)` (Yukawa analytic formula, see `v0.3-prelim/code/yukawa.py`), **not a custom radial Schrödinger solver**. There is no `schrödinger.py` in `v0.3-prelim/code/`. The reviewer assumes a solver exists that doesn't. |
-| "Once composite form factors F(q²) are included" | ✅ **valid-deferred** — T79 already added Gaussian + dipole composite form factors, but the solver abstraction is still the Yukawa analytic formula |
-| "Reduces the risk of numerical artefacts in the microphysics → σ/m(v) mapping" | ✅ **valid-idea** — if such a benchmark suite exists, it would be useful. But absent verified existence, **AGENTS.md rule 24 (Tier-ranked tool adoption)** prohibits auto-install. |
+| `sidmkit` package | ✅ **confirmed (post-user-provenance)** — `nalin-dhiman/sidmkit` on GitHub (MIT, 7 commits, 0 stars, 1 watcher). Companion paper: Dhiman, N. 2026, **arXiv:2601.04735**, "sidmkit: A Reproducible Toolkit for SIDM Phenomenology and Galaxy Rotation-Curve Modeling". README explicitly states: "Yukawa / dark-photon style self-interaction cross sections (**Born / classical / Hulthén / partial-wave**)" + "**Velocity averaging** (Maxwellian relative-speed baseline) for ⟨σ/m⟩ and ⟨σ v⟩/m" — **matches the reviewer's description exactly**. CLI: `sidmkit sigma`, `sidmkit avg`, `sidmkit constraints`, `sidmkit halo`, `sidmkit likelihood`, `sidmkit infer`, `sidmkit benchmark`, `sidmkit validate`. |
+| `sidmkit` ships a **SPARC rotation-curve batch fitter** | ✅ **confirmed** — `sidmkit.sparc_batch` module provides NFW + Burkert halo profile fits on the SPARC `*_rotmod.dat` files. **Direct overlap with the project's existing Channel 1 (SPARC hierarchical, `v0.3-prelim/code/precompute_sparc_hierarchical.py`).** This makes sidmkit a **drop-in benchmark candidate**, not just a unit-test target. |
+| `sidm-vdsigmas` package | ✅ **confirmed (post-user-provenance)** — `mtryan83/sidm-vdsigmas` on GitHub (MIT, requires-python ≥3.12, deps `numpy ≥2 + scipy ≥1.4 + unyt ≥3`, 0 stars). Depends on `CLASSICS` (Kahlhoefer) for partial-wave cross sections. Modules: `sigmas/`, `interaction.py`, `sidm.py`. Smaller scope than sidmkit; focuses on velocity-dependent cross-section computations. |
+| "Public partial-wave, Hulthén, Born, and velocity-averaging implementations" | ✅ **confirmed for both** — sidmkit explicitly lists all four. sidm-vdsigmas depends on CLASSICS (Kahlhoefer) for partial-wave. |
+| "Excellent unit-test and regression suite for the project's custom radial Schrödinger solver" | ⚠️ **valid-idea + scoping-clarify** — the project's microphysics pipeline uses `sigma_m_at_v_yukawa(...)` (Yukawa analytic formula, see `v0.3-prelim/code/yukawa.py`), **not a custom radial Schrödinger solver**. There is no `schrödinger.py` in `v0.3-prelim/code/`. A solver benchmark suite would compare sidmkit's Born / Hulthén / partial-wave outputs against `sigma_m_at_v_yukawa` to **detect numerical drift in the Yukawa approximation**, which is the actual point of the reviewer's recommendation. |
+| "Reduces the risk of numerical artefacts in the microphysics → σ/m(v) mapping" | ✅ **valid-idea** — sidmkit is well-positioned to act as a regression suite that catches future drift in `sigma_m_at_v_yukawa` (e.g. if someone refactors the analytic Yukawa formula). |
 
-**Scope decision: ❌ REJECT (with citation provenance request).**
-The reviewer names two specific Python packages whose existence could
-not be verified. Per **AGENTS.md rule 24** (the doc that locked the
-"never auto-install Tier-3/4 tools" posture from the
-`thinking-on-improvement.docx` incident), I cannot recommend installing
-`sidmkit` or `sidm-vdsigmas` without:
-1. The package's GitHub URL or PyPI listing
-2. The README + last-commit-date
-3. A smoke-test dry-run showing the package runs at all
+**CORRECTION TO PREVIOUS VERDICT (2026-09-04):** the original audit
+(commit `967ed0c`) marked this item **❌ REJECT** because the
+agent's first web search did not surface `sidmkit` or
+`sidm-vdsigmas` as real Python packages. After the user pointed to
+the `sidm-vdsigmas` URL, both packages were verified:
+- `sidmkit` is at `nalin-dhiman/sidmkit` (MIT, 7 commits, paper
+  arXiv:2601.04735)
+- `sidm-vdsigmas` is at `mtryan83/sidm-vdsigmas` (MIT, requires-py ≥3.12)
 
-**Action requested:** if the reviewer has a working URL for `sidmkit`
-or `sidm-vdsigmas`, please provide it. Without that, this item cannot
-be adopted or even deferred responsibly.
+**Lesson captured (add to reviewer-audit skill):** when a web search
+returns no match for a named package, retry with broader keywords
+("SIDM toolkit", "velocity-dependent cross section python", "SIDM
+phenomenology github") before declaring it unverifiable. The first
+search miss was a recall failure, not a missing package.
 
-**Side-note:** the project's σ/m(v) mapping is via the Yukawa analytic
-formula (Fujii-Yukawa / Kahlhoefer formulas), **not a custom radial
-Schrödinger solver**. A solver benchmark suite would need to be wired
-into `t41_mediator_mass_joint_fit.py` via a new `sigma_m_solver.py`
-abstraction layer — out-of-scope for a single round.
+**Scope decision: ⚠️ DEFER (Tier-3 evaluation, ~3-5 days).**
+Both packages are real and match the reviewer's description. The
+sidmkit SPARC batch fitter is particularly attractive as a
+**regression-suite + benchmark drop-in** for Channel 1. Adoption plan
+(pending user approval per AGENTS.md rule 17):
+
+1. Install sidmkit in a venv (per AGENTS.md rule 24/17, requires
+   explicit user approval — this audit does NOT auto-install).
+2. Run `sidmkit sigma` for a (m_χ, m_φ, α) point at v_ref = 100 km/s
+   and compare to the project's `sigma_m_at_v_yukawa` at the same
+   point. Verify agreement to ≤ 10% across v = 1-3000 km/s.
+3. Run `sidmkit avg` for ⟨σ v⟩/m at Maxwellian σ_1D = 50, 200, 1000
+   km/s; compare against the project's existing Maxwellian
+   integrator (if any).
+4. Run `sidmkit validate --target fig13` for the standard
+   Kaplinghat+ 2016 Fig 13 curve.
+5. If all three pass, wire `sidmkit sigma` calls as a regression
+   test in `tests/test_microphysics_regression.py` (new file) that
+   asserts sidmkit's σ/m matches `sigma_m_at_v_yukawa` within
+   tolerance.
+
+**Out-of-scope for this round:** replacing `sigma_m_at_v_yukawa`
+with sidmkit's partial-wave solver would require architectural
+changes to T41's parameterization (currently a 2D v-dep Yukawa).
+That's a Tier-2 multi-week effort, not a Tier-3 add-on.
 
 ---
 
@@ -185,20 +208,23 @@ entry. No code change.
 |---|---|---|---|---|
 | 1 | GD-1 / Zhang 2025 / DESI DR2 | High | ✅ already-shipped (Channel 6) | ✅ no-op |
 | 2 | SIDM Concerto + "Fischer 2026" | High | ⚠️ citation wrong (Nadler+ 2025); KiSS-SIDM gap already deferred (V0_6 Item 17) | ⚠️ defer + cite-fix |
-| 3 | sidmkit + sidm-vdsigmas | High | ⚠️ unverifiable packages | ❌ reject (provenance request) |
+| 3 | sidmkit + sidm-vdsigmas | High | ✅ both confirmed (post-user-provenance): `nalin-dhiman/sidmkit` (MIT, arXiv:2601.04735) + `mtryan83/sidm-vdsigmas` (MIT, requires-py ≥3.12) | ⚠️ defer + Tier-3 evaluation (~3-5 days, requires user approval for install) |
 | 4 | Andrade 2021 + Adhikari 2025 RMP | Medium | ✅ already-shipped (Channels 8, 10, 21, 23) | ✅ no-op + cite-add |
 | 5 | Goldstein & Hill 2026 ΔN_eff | Medium | ⚠️ valid prior-update (~30 min Tier-3); Channels 14/16 already cover the same physics | ⚠️ defer + adopt-prior |
 | 6 | SPARC + Jia 2026 isothermal Jeans | Medium | ⚠️ first-author wrong (Jia, not Zhu); existing SPARC Channel 1 already at v ~ 100-200 km/s | ⚠️ defer + cite-add |
 
 **Summary verdict:** 2 of 6 items are **already-shipped** (no action);
-2 items are **valid-deferred** with cite-fixes (no new code this round);
-1 item is a **30-min prior-update** (defer to Tier-3); 1 item is
-**unverifiable** (reject pending provenance).
+3 items are **valid-deferred** with cite-fixes (no new code this round);
+1 item is **unverifiable → corrected to Tier-3 evaluation** (the
+sidmkit / sidm-vdsigmas packages were verified after user pointed to
+the `sidm-vdsigmas` URL).
 
 **Net new channel count from this docx: 0.**
 **Net doc/citation updates from this docx: 3-4 one-liners.**
 **Net code changes from this docx: 0** (Item 5 is a config-prior
-update, not a new channel; Items 2 + 6 are deferred).
+update, not a new channel; Items 2 + 6 are deferred; Item 3 is a
+Tier-3 evaluation that requires explicit user approval per AGENTS.md
+rule 17 to install).
 
 ---
 
@@ -225,8 +251,10 @@ posture. None change any headline numbers; they fix provenance.
 
 - **Would not auto-install `sidmkit` or `sidm-vdsigmas`** — per
   AGENTS.md rule 24 (Tier-ranked tool adoption, locked from the
-  2026-08-19 `thinking-on-improvement.docx` incident). Unverified
-  Python packages must have provenance verified before installation.
+  2026-08-19 `thinking-on-improvement.docx` incident) AND rule 17
+  (no new dependencies without explicit user approval). Even though
+  both packages are now verified as real (post-user-provenance), the
+  install + benchmark evaluation requires explicit user go-ahead.
 - **Would not add a GD-1 channel** — Channel 6 already covers GD-1
   with the σ/m ~ 30-100 cm²/g constraint the reviewer proposes.
 - **Would not add a "SIDM Concerto" channel** — there is no real-time
@@ -252,11 +280,41 @@ posture. None change any headline numbers; they fix provenance.
   project's microphysics pipeline. The Yukawa analytic formula is
   fast and accurate for separable Yukawa potentials but doesn't
   exercise the partial-wave / Hulthén / Born regime that matters for
-  velocity-dependent cross-sections at low v. A future Tier-2
-  round could address this, **but only with verified package
-  provenance**.
+  velocity-dependent cross-sections at low v. **After user
+  provenance correction, both `sidmkit` and `sidm-vdsigmas` are
+  verified as real packages** that cover this gap. The
+  `sidmkit.sparc_batch` module is particularly attractive as a
+  regression suite for the project's Channel 1 (SPARC hierarchical).
+  Adoption is a Tier-3 evaluation (~3-5 days) requiring explicit
+  user approval per AGENTS.md rule 17.
 - The **Adhikari 2025 RMP** is a useful canonical citation to add to
   the project's references section. This is a 5-min doc-only patch.
+
+---
+
+## 6a. Methodological correction (audit-self-criticism)
+
+The first pass of this audit (commit `967ed0c`, 2026-09-04) marked
+Item 3 as **❌ REJECT** because a web search for `sidmkit` and
+`sidm-vdsigmas` returned no matches. **The agent's first search
+missed both packages.** This was a recall failure, not a missing
+package — `sidmkit` was published in arXiv:2601.04735 (Jan 2026)
+and `sidm-vdsigmas` has a public GitHub repo. The audit should
+have retried with broader keywords ("SIDM toolkit", "velocity-
+dependent cross section python", "SIDM phenomenology github")
+before declaring the items unverifiable.
+
+**Standing rule for future audits:** if a web search returns zero
+matches for a specifically-named tool or package, retry with:
+1. The package name as a bare GitHub URL (`github.com/<name>`)
+2. Broader domain keywords + author last names if known
+3. The package's likely citation (arXiv search if a paper is referenced)
+
+Only after at least 3 distinct search strategies fail should the
+audit declare a package "unverifiable" or "fabricated".
+
+**This correction is logged here** so future agents don't replicate
+the same recall failure on similarly-named niche tools.
 
 ---
 
@@ -281,4 +339,10 @@ posture. None change any headline numbers; they fix provenance.
 - **External verification sources:** arXiv:2409.19493 (Zhang+ 2025),
   arXiv:2503.10748 (Nadler+ 2025), arXiv:2207.10638 (Adhikari+ 2025 RMP),
   arXiv:2012.06611 (Andrade & Fuson 2021), arXiv:2601.17118 (Jia+ 2026),
-  Goldstein & Hill Phys. Rev. D 114, L021305 (2026-07-17)
+  arXiv:2601.04735 (Dhiman+ 2026 sidmkit), Goldstein & Hill Phys. Rev. D
+  114, L021305 (2026-07-17)
+- **User-provided provenance (2026-09-04):** `https://github.com/mtryan83/sidm-vdsigmas`
+  — corrected Item 3 from ❌ REJECT to ⚠️ DEFER + Tier-3 evaluation.
+  Subsequent web search surfaced `https://github.com/nalin-dhiman/sidmkit`
+  and arXiv:2601.04735 — both packages are real and match the
+  reviewer's description.
