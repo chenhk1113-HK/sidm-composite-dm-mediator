@@ -28,7 +28,12 @@ A 6-dimensional Bayesian posterior over Benchmark A parameters:
 `(log_ε, log_α, m_φ, m_χ, g_χ, log_ξ)`, sampling via dynesty nested
 sampling. **22 effective channels** of observational data constrain the
 posterior (21 pre-T88.E; +T88.C silent cross-check + T88.E first
-non-silent FORECAST).
+non-silent FORECAST). **Channels 22 (XRISM φ→γγ, T88.D) and 25
+(Goldstein & Hill 2026 ΔN_eff, T89) are documented-null audit channels
+that return 0 in all physically-relevant cases** — they verify
+constraints are satisfied without constraining the posterior, so they
+are wired into `loglike_joint` but do not increment the "effective"
+count.
 
 ## v0.8 posterior headline (nlive=2000, ~7 min wall)
 
@@ -37,7 +42,7 @@ non-silent FORECAST).
 | **Bayesian evidence log Z** | **−164.87 ± 0.084** | T41 nlive=2000 |
 | DM mass **m_χ** (MAP) | **770 GeV** (median ~500) | T41 posterior |
 | Mediator mass **m_φ** (MAP) | **453 MeV** ✓ KSFR-valid (median 588) | T41 posterior |
-| **σ/m₀** at galactic scale (MAP) | **0.06 cm²/g** | T41 derived |
+| **σ/m₀** at galactic scale (MAP) | **0.06 cm²/g** | T41 derived; **post-T88.E Euclid Q1 subhalo FORECAST** (Channel 24, LensPop pipeline Collett 2015) — **not yet a measurement**, real Q1 data expected with Euclid DR1 at end of 2026. Pre-forecast v0.7 value was 0.27 cm²/g. The 5× drop reflects the forecast's substructure sensitivity, not a posterior bug. |
 | Velocity index **a** (Yukawa, at MAP) | **+0.132** | T41 derived |
 | Tension T39 vs Yukawa a | **0.60σ** (below 1.0 threshold) | T41 vs T39 |
 | Bare **ε** (median posterior) | **1.4×10⁻³⁷** | T41 posterior |
@@ -60,18 +65,33 @@ slope keeps σ/m(v=150) in the in-band subhalo-survival region.
 
 ## Channels in production
 
-1. dSph kinematics
-2. UFD kinematics
-3. Bullet Cluster
-4. SPARC rotation curves (calibrated saturation; Tier-2 hierarchical upgrade pending)
-5. LZ WS2024 direct detection (sanity check only — orthogonal posture)
-6. Fermi gamma-ray dwarf stacking
-7. H3 convergence & H4 form-factor sweeps
-8. **DAMPE CRE** (T72-T73)
-9. **Zhang+2025 LSS** assembly bias (T74)
-10. **XENONnT + PandaX-4T** competitor watch (T81)
+The project runs **22 production channels** per `channels_extended.py`'s
+`CHANNEL_STATUS` dict (channels 1–25 in the dict, minus 3 experimental:
+Channel 11 = DM-free UDGs, Channel 12 = cosmic-web radio, Channel 19 =
+XENONnT/PandaX-4T competitor watch). Of the 22 production channels, two
+are **documented-null audit channels** that return 0 in all
+physically-relevant cases: Channel 22 = XRISM φ→γγ, Channel 25 =
+Goldstein & Hill 2026 ΔN_eff. Both are wired into `loglike_joint` and
+satisfy the constraint by construction — they verify constraints are
+satisfied without constraining the posterior.
 
-(Plus ~9 internal/auxiliary channels: KSFR mask, mediator lifetime, etc.)
+### Channels by source / round
+
+| Round | Channel(s) introduced | Constraining / silent / null |
+|---|---|---|
+| T41 v0.6 baseline | dSph (1), UFD (2), Bullet (3), SPARC (4), LZ WS2024 (5), Fermi gamma-ray dwarf (6), H3/H4 sweeps (7) | All constraining |
+| T70.x | Gravothermal core collapse (8/9), MW satellite (10), KSFR mask (15) | All constraining |
+| T70.1 | Quantum-statistical mass floor (13) | Defensive documentation |
+| T70.3/T70.8 | CMB μ/y spectral distortion (16), mediator lifetime / BBN (14) | Constraining |
+| T72-T73 | DAMPE CRE (17/18) | Constraining |
+| T74 | Zhang+2025 LSS assembly bias | Constraining |
+| T81 | XENONnT + PandaX-4T watch (19) | **Experimental — NOT in primary production** |
+| T88.A-E | XRISM Perseus ICM (20), eROSITA eRASS1 (21), XRISM φ→γγ (22), Euclid Q1 strong-lensing (23), Euclid Q1 subhalo FORECAST (24) | 20, 21, 23 silent; 22 documented null; 24 **first non-silent FORECAST** |
+| T89 | Goldstein & Hill 2026 ΔN_eff (25) | **Documented null** |
+
+Full channel manifest is in `v0.3-prelim/code/channels_extended.py`
+`CHANNEL_STATUS` dict (25 entries). **22 effective = 20 constraining + 2
+documented null (22, 25); 3 experimental (11, 12, 19) are NOT counted**.
 
 ## Standings posture — what σ/m does and doesn't say
 

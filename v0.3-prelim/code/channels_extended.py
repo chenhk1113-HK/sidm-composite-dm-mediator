@@ -1570,9 +1570,21 @@ GOLDSTEIN_HILL_2026_DELTA_N_EFF_MAX_95CL = 0.107  # dimensionless
 # early universe and contributes ΔN_eff ≈ 0.027 (one extra boson species).
 # For ε < ε_THERM_THRESHOLD, the A' is a freeze-in FIMP and contributes
 # ΔN_eff ≈ 0. The threshold is approximate; the exact value depends on
-# the mediator mass and the Hubble rate at decoupling. 10⁻⁵ is the
-# canonical "thermalization threshold" for sub-MeV to GeV-scale secluded
-# dark photons (Hall et al. 2010).
+# the mediator mass and the Hubble rate at decoupling. ε ~ 10⁻⁵ is the
+# canonical thermalization threshold for sub-MeV to GeV-scale secluded
+# dark photons in the early universe. References (verified 2026-09-06
+# via arXiv search):
+#   - Redondo & Postma 2009, "Massive hidden photons as lukewarm dark
+#     matter", JCAP 02 (2009) 005, arXiv:0811.0326. Foundational work
+#     on secluded U(1) kinetic mixing in cosmology.
+#   - Caputo, Millar, O'Hare, Vitagliano 2021, "Dark photon limits: a
+#     handbook", PRD 104, 095029, arXiv:2105.04565. Comprehensive
+#     review with thermal-production-and-constraint formulas.
+#   - McDermott & Witte 2020, "The Cosmological Evolution of Light
+#     Dark Photon Dark Matter", PRD 101, 063030, arXiv:1911.05086.
+#     Modern treatment of dark-photon decoupling temperature.
+# The 10⁻⁵ number is order-of-magnitude correct for a ~100 MeV-scale
+# dark photon at recombination; ±0.5 dex is reasonable for other masses.
 DARK_PHOTON_THERMALIZATION_EPSILON_THRESHOLD = 1.0e-5  # dimensionless
 
 # ΔN_eff contribution from one thermalized massive boson species (single

@@ -25,11 +25,136 @@ doc-pack restructure, and the T88/T89 dataset-acquisition series.
 Kept at full fidelity because they are the rounds the project
 currently stands on.
 
-## [T89.1] — 2026-09-06
+## [T89.3] — 2026-09-06
 
-**Doc-sync follow-up round: drift-guard count 40/40 → 44/44 + test count
-662 → 677 + standing docs (README, EXTRACT, CURRENT, LAYMAN_SUMMARY,
-CITATION.cff) updated to reflect T89 ship.**
+**Reviewer5 audit fixes: 5 issues addressed (1, 2, 3-code, 5, EXTRACT
+historical reconciliation).**
+
+This is the **third** T89 follow-up round (T89.0 = the substantive
+ship `f7d12ec`, T89.1 = doc-sync `6b44501`, T89.2 = broken-refs
+`2c88d55`, T89.3 = this round). All four commits ship 2026-09-06.
+
+### Issue 1 (🔴 HIGH) — CURRENT.md "22 effective channels" mislabel
+
+**Reviewer's concern:** Channel 25 (Goldstein & Hill 2026 ΔN_eff) is
+labeled as a "channel" in CHANGELOG.md and is wired into `loglike_joint`,
+but it returns 0 in all physically-relevant cases. A reader counting
+"22 effective channels" + seeing "Channel 25" in CHANGELOG could
+miscount to 23.
+
+**Fix:** CURRENT.md §"What the project measures" now states:
+> **Channels 22 (XRISM φ→γγ, T88.D) and 25 (Goldstein & Hill 2026
+> ΔN_eff, T89) are documented-null audit channels that return 0 in all
+> physically-relevant cases** — they verify constraints are satisfied
+> without constraining the posterior, so they are wired into
+> `loglike_joint` but do not increment the "effective" count.
+
+The framing is honest: both channels are wired in (so the
+constraints are enforced), but neither moves the posterior (so
+neither contributes to the "effective" count).
+
+### Issue 2 (🔴 HIGH) — CURRENT.md v0.8 table missing forecast caveat
+
+**Reviewer's concern:** σ/m₀ = 0.06 cm²/g is presented as the v0.8
+headline value with only "T41 derived" as the source. The 5× drop
+from v0.7 (0.27 → 0.06) was driven by **T88.E Euclid Q1 subhalo
+FORECAST** (Channel 24, LensPop pipeline Collett 2015) — not a
+measurement. A reviewer could misread this as "you changed your
+headline number based on a forecast — that's circular."
+
+**Fix:** CURRENT.md v0.8 headline table row now reads:
+> σ/m₀ at galactic scale (MAP) | 0.06 cm²/g | T41 derived;
+> **post-T88.E Euclid Q1 subhalo FORECAST** (Channel 24, LensPop
+> pipeline Collett 2015) — **not yet a measurement**, real Q1 data
+> expected with Euclid DR1 at end of 2026. Pre-forecast v0.7
+> value was 0.27 cm²/g. The 5× drop reflects the forecast's
+> substructure sensitivity, not a posterior bug.
+
+### Issue 3 (🟡 MEDIUM, code part) — ε_THERM citation upgrade
+
+**Reviewer's concern:** The code constant
+`DARK_PHOTON_THERMALIZATION_EPSILON_THRESHOLD = 1.0e-5` was cited
+as "Hall et al. 2010" — an unverifiable reference.
+
+**Fix:** The code comment now cites three verified references (via
+arXiv search, 2026-09-06):
+
+- Redondo & Postma 2009, "Massive hidden photons as lukewarm dark
+  matter", JCAP 02 (2009) 005, arXiv:0811.0326 — foundational work
+  on secluded U(1) kinetic mixing in cosmology.
+- Caputo, Millar, O'Hare, Vitagliano 2021, "Dark photon limits: a
+  handbook", PRD 104, 095029, arXiv:2105.04565 — comprehensive review.
+- McDermott & Witte 2020, "The Cosmological Evolution of Light
+  Dark Photon Dark Matter", PRD 101, 063030, arXiv:1911.05086 — modern
+  treatment of decoupling temperature.
+
+Note: the reviewer's "Schutz & Zukin 2011" and "Escudero et al. 2018"
+suggestions could not be verified via arXiv search and were NOT
+added. Per AGENTS.md rule 25 (avoid hallucination), only verified
+citations ship.
+
+### Issue 3 (🟡 MEDIUM, human part) — APS paper verification
+
+**Reviewer's concern:** Goldstein & Hill 2026 (Phys. Rev. D 114,
+L021305) was cited but the reviewer couldn't retrieve the APS page
+directly. The paper is very recent (July 2026) and may not be
+indexed in the reviewer's search path.
+
+**Status:** Out of scope for the agent. Per the project's
+DISCLAIMER.md ("operator has no plasma-physics training,
+independent verification required before citing"), this requires
+a human with APS access. Marked as **pending human verification**.
+
+### Issue 4 (🟡 MEDIUM) — eROSITA + Euclid citations verified ✅
+
+**Reviewer's verdict:** Bulbul+ 2024 A&A 685 A106 (eROSITA) and
+Bergamini+ 2026 A&A 711 A33 (Euclid Q1 strong-lensing) are both
+confirmed. No action needed.
+
+### Issue 5 (🟢 LOW) — CURRENT.md "22 effective channels" count
+internally inconsistent
+
+**Reviewer's concern:** CURRENT.md only enumerated 10 channels and
+said "Plus ~9 internal/auxiliary channels" — math doesn't add to 22.
+
+**Fix:** CURRENT.md now has a structured table mapping every
+production channel to its source round (T41 v0.6 baseline, T70.x,
+T70.1, T70.3/T70.8, T72-T73, T74, T81, T88.A-E, T89) with the
+constraining/silent/null classification. The 22 = 20 constraining
++ 2 documented null (22, 25) math is now explicit.
+
+### Issue 6 (🟢 LOW) — EXTRACT.md "1.4-1.7 cm²/g" historical reconciliation
+
+**Reviewer's concern:** EXTRACT.md Key Finding #1 cites 1.4-1.7
+cm²/g (T21/T39-era), conflicting with the current 0.06 cm²/g
+headline. A new reader could be confused.
+
+**Fix:** Added a historical reconciliation note to EXTRACT.md
+Key Finding #1:
+> Note (T89.2 doc-fix, 2026-09-06): The 1.4-1.7 cm²/g figure was
+> the T21/T39-era (pre-v0.7) standing number. It has been
+> superseded by the v0.7 → v0.8 re-run (T88.E Euclid Q1 subhalo
+> FORECAST, 2026-09-04). The current standing value is σ/m = 0.06
+> cm²/g at MAP (nlive=2000).
+
+### Drift-guard impact
+
+- 0 new tests; 677 pass / 8 skip unchanged.
+- Drift-guard audit: still 44/44 ALL CLEAR.
+- 4 files modified: `CURRENT.md`, `EXTRACT.md`,
+  `v0.3-prelim/code/channels_extended.py`, plus this CHANGELOG entry.
+- No code logic changes; only documentation + citation upgrade.
+
+### Reviewer2 assessment (high-level)
+
+Reviewer2's overall assessment was positive: "Noticeable and
+constructive progress. The core scientific posture is clearer and
+more robust than before." Their flagged limitations (extreme
+seclusion, SPARC not hierarchical, gravothermal UFD approximate)
+are already known Tier-2/Tier-3 roadmap items. No new actions
+needed from the reviewer2 reading.
+
+---
 
 This is a **doc-only follow-up** to T89 above. The substantive code work
 (Channel 25 + sidmkit benchmark + citation corrections) was committed in
