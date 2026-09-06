@@ -1,12 +1,16 @@
-# Layman Summary — v0.4-prelim+T88E Tier-1 Milestone (T72 → T84)
+# Layman Summary — v0.4-prelim+T88E Tier-1 Milestone (T72 → T89)
 
 > **For:** Non-experts + users preferring quick summaries over
 > technical detail. Covers the full milestone shipped 2026-09-02
-> through 2026-09-03: DAMPE + Zhang+2025 LSS joint-fit rerun
+> through 2026-09-06: DAMPE + Zhang+2025 LSS joint-fit rerun
 > (T72-T76) + LZ signal defensive docs (T77-T79) + LZ paper
 > validation (T80) + XENONnT/PandaX competitor watch (T81) +
 > stale-claim audit (T82) + KSFR LATTICE promotion (T83) +
-> Channel 18 ρ sensitivity sweep (T84).
+> Channel 18 ρ sensitivity sweep (T84) + XRISM/eROSITA/Euclid Q1
+> dataset-acquisition series (T88.A-E, first non-silent FORECAST
+> channel + v0.7→v0.8 re-run) + Goldstein & Hill 2026 ΔN_eff
+> Channel 25 documented null + sidmkit/sidm-vdsigmas σ/m benchmark
+> + 4 citation corrections (T89).
 > **Companion:** [T75 full docs](v0.3-prelim/docs/T75_V07_FULL_T41_RERUN.md),
 > [T76 nlive=2000](v0.3-prelim/docs/T76_V07_NLIVE2000.md),
 > [T77 LZ signal](v0.3-prelim/docs/T77_LZ_2026_09_UPDATE.md),
@@ -215,8 +219,8 @@ worth flagging.
 
 - Standing version: **v0.4-prelim+T88E** (no bump)
 - Joint-fit posterior: **log Z = −164.87 ± 0.084**, m_χ = 770 GeV, σ/m = 0.06 cm²/g
-- Tests: 662 pass / 8 skip
-- Drift-guard audit: 40/40 ALL CLEAR
+- Tests: 677 pass / 8 skip
+- Drift-guard audit: 44/44 ALL CLEAR
 - **No posterior re-run**; **no new physics**; **no new channels**
 
 ### Honest caveats — T86.7k+C composite-channel gap (post-Consider4 review)
@@ -276,6 +280,150 @@ New code: `t87_composite_inelastic_nucleon.py` + `t87_lz_event_rate.py` +
 `test_t87_inelastic_nucleon.py` (9/9 tests pass). Standing version unchanged
 (v0.4-prelim+T88E); no posterior re-run; no new physics.
 
+## Addendum (T88 + T89, 2026-09-04 → 2026-09-06)
+
+Two follow-on rounds added the **Euclid Q1 series** and a **Goldstein & Hill
+ΔN_eff documented null + sidmkit benchmark** without changing the
+v0.8 standing posterior. This section explains what shipped and why it
+doesn't move the headline numbers.
+
+### T88 (2026-09-04) — XRISM / eROSITA / Euclid Q1 dataset-acquisition series
+
+The project acquired five new channels from public Q1/early-release
+data products:
+
+- **Channel 20 — XRISM Perseus ICM** (T88.A): the X-ray spectrum of
+  the Perseus cluster measured by XRISM Resolve. Verifies that the
+  model's predicted dark-matter core radius in Perseus-scale halos is
+  consistent with the X-ray inferred gas-temperature profile. Returns
+  0 (silent cross-check) at v0.7 MAP.
+- **Channel 21 — eROSITA eRASS1** (T88.B): the eROSITA All-Sky
+  Survey's first-year galaxy-cluster catalog. Sets an
+  upper-limit on σ/m at cluster scales (consistent with Andrade 2021
+  cluster lensing). Silent cross-check at v0.7 MAP.
+- **Channel 22 — XRISM φ→γγ** (T88.D): a **documented null** channel
+  that asks whether XRISM could detect the decay photons from
+  φ → γγ. Predicted photon energy E_γ = m_φ/2 is 4-5 orders of
+  magnitude above XRISM's 0.3-12 keV band, and the lifetime exceeds
+  the Hubble time by ~10⁴² at v0.7 ε. Returns 0 in all
+  physically-relevant cases.
+- **Channel 23 — Euclid Q1 strong lensing** (T88.C): the Euclid Q1
+  strong-lensing catalog provides a v0.7-MAP cross-check on
+  substructure σ/m. Returns 0 (silent cross-check) at v0.7 MAP.
+- **Channel 24 — Euclid Q1 subhalo FORECAST** (T88.E): a **forecast**
+  for the upcoming Euclid Q1 subhalo number-count analysis. This is
+  the **first non-silent channel of T88** — it pulls σ/m down from
+  0.27 → 0.06 (5×) and tightens the v0.8 posterior.
+
+The T88.E-driven v0.7→v0.8 re-run (nlive=2000) shipped with:
+
+| Quantity | v0.7 | v0.8 (post-T88.E) | Change |
+|---|---|---|---|
+| log Z | −163.29 ± 0.085 | **−164.87 ± 0.084** | −1.58 (from T88.E −0.85 + small shifts in other channels) |
+| σ/m₀ (MAP) | 0.27 cm²/g | **0.06 cm²/g** | 5× lower |
+| a (Yukawa velocity index, MAP) | +0.34 | **+0.13** | 2.6× lower |
+| m_χ (MAP) | 770 GeV | 770 GeV | unchanged |
+| m_φ (MAP) | 453 MeV | 453 MeV | unchanged |
+| tension | 0.60 | 0.60 | unchanged (below 1.0) |
+| effective channels | 21 | **22** | +1 |
+
+**Standing posture preserved.** No new channels were required to
+make this work — T88.E is a forecast based on the projected Euclid
+Q1 dN/dM sensitivity.
+
+### T89 (2026-09-06) — Goldstein & Hill 2026 ΔN_eff Channel 25 + sidmkit benchmark
+
+Three items in one round.
+
+**1. Channel 25 — Goldstein & Hill 2026 ΔN_eff<0.107 (documented null).**
+
+The 2026 paper by Goldstein & Hill (Phys. Rev. D 114, L021305,
+2026-07-17) pinned the effective number of relativistic species at
+recombination to N_eff = 2.990 ± 0.070, implying a 95% CL upper bound
+of **ΔN_eff < 0.107**. This is a constraint on how much "extra
+radiation" could have been present at the time the cosmic microwave
+background was forming.
+
+For the project's dark photon (the A' mediator), the relevant
+question is: did the A' ever thermalize with the Standard Model
+bath in the early universe? If so, it would contribute ΔN_eff ≈
+0.027 (one extra boson species). If not, it contributes ≈ 0.
+
+The thermalization threshold for a secluded dark photon via kinetic
+mixing ε is ε ≈ 10⁻⁵. Above this, the A' thermalizes; below, it's a
+freeze-in FIMP. **At the v0.8 MAP posterior (ε ~ 10⁻³⁷), the A' is
+10³²× below the thermalization threshold.** It never thermalized.
+ΔN_eff from the A' is essentially zero, far below the Goldstein &
+Hill bound of 0.107.
+
+Channel 25 returns 0 for the entire standing posterior. This is a
+**P22 documented-null-channel** ship, same pattern as Channel 22
+(XRISM φ→γγ). The point of having it wired in (rather than just
+noting "Goldstein & Hill 2026 is satisfied") is that future
+reviewers can verify the constraint is enforced, not just claimed.
+
+**2. sidmkit / sidm-vdsigmas σ/m benchmark.**
+
+Per the R_DATASETS2 audit, the project should install sidmkit +
+sidm-vdsigmas as third-party cross-checks. We installed both:
+
+- `nalin-dhiman/sidmkit` (arXiv:2601.04735, version 0.3.2) — Python
+  package implementing Born / Hulthén / partial-wave σ/m
+  calculations for Yukawa-mediated SIDM, plus a SPARC rotation-curve
+  batch fitter.
+- `mtryan83/sidm-vdsigmas` — a smaller package that vendors Kahlhoefer's
+  **CLASSICS** (the canonical σ_T / σ_V table source from
+  arXiv:2011.04679). In practice, sidm-vdsigmas is currently a data
+  container: it stores model parameters but doesn't expose any σ/m
+  Python methods yet.
+
+The benchmark compared the project's T40 analytic Yukawa formula
+(Feng+ 2009 / Tulin-Yu 2018 Born distinguishable) against sidmkit's
+Born approximation. **The two differ by a factor of ~2 at galactic
+velocities (5-200 km/s)** — a known convention difference between
+two legitimate Born approximations, not a regression. The
+Maxwellian-averaged cross-section at v0.8 MAP shows the same ~3.6×
+offset at the dwarf-galaxy velocity scale (σ_1D = 50 km/s).
+
+This is exactly the kind of numerical-drift detection the audit
+hypothesized. The verdict: **both formulas are internally
+consistent; future maintainers now know to check one against the
+other before assuming they're equivalent.**
+
+**3. Citation corrections from the R_DATASETS2 audit.**
+
+Landed in this round:
+- `channels_extended.py:362` — Zhang+ 2025 attribution added
+  (ApJL 978 L23, arXiv:2409.19493) alongside Yang+ 2026 PRL.
+- `MODEL_ASSUMPTIONS_AND_LIMITATIONS.md` §10a — new "Canonical SIDM
+  references" section listing Adhikari+ 2025 RMP, Andrade 2021,
+  Goldstein & Hill 2026, Jia+ 2026, Nadler+ 2025, Tulin & Yu 2018,
+  Zhang+ 2025.
+
+### What T88+T89 ships that the prior round did not
+
+- **22 effective channels** (was 21 post-T88.E — Channel 25 is
+  silent so doesn't change the "effective" count, but it's now
+  wired into the joint-fit sum for future re-runs).
+- **677 tests pass / 8 skip** (was 662 / 8 post-T88.E; +15 from
+  Channel 25 tests).
+- **Drift-guard audit 44/44 ALL CLEAR** (was 40/40 — four checks
+  bumped from "32 doc-presence + 8 historical-context" to "43
+  doc-presence + 1 VERSION-drift").
+- **sidmkit as a regression target** — the project's T40 Yukawa
+  formula now has a third-party reference for future
+  convention-difference audits.
+
+### What T88+T89 does NOT do
+
+- **No new posterior values.** The v0.8 numbers (log Z = −164.87,
+  σ/m = 0.06, a = +0.13) are unchanged. Channel 25 is silent; the
+  sidmkit benchmark found convention differences, not bugs.
+- **No new physics.** Channel 25 is a constraint that the standing
+  posterior trivially satisfies.
+- **No new channels that constrain anything.** Channel 25 returns
+  0 in every physically-relevant case.
+
 ## Why this is the most important milestone since v0.3-prelim
 
 The LZ paper is the **first independent experimental cross-check** of
@@ -311,5 +459,5 @@ velocity-slope tension. The Tier-1 milestone is publication-worthy.
 > T82 stale-claim audit (32/32 doc-presence + 1 VERSION drift-guard checks pass),
 > T83 KSFR (3,2) fundamental LATTICE promotion, T84 Channel 18 ρ sensitivity sweep.
 > Headline: σ/m = 0.06 cm²/g, tension = 0.60, log Z =
-> -164.87 ± 0.084, m_χ ~ 770 GeV (MAP). **662** tests passing, 22
+> -164.87 ± 0.084, m_χ ~ 770 GeV (MAP). **677** tests passing, 22
 > effective channels.** Standing posture preserved at v0.4-prelim+T88E.

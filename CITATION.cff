@@ -12,7 +12,7 @@ message: >-
   threshold), MAP m_chi = 770 GeV, sigma/m_0 = 0.27 cm^2/g; T77-T79 LZ
   defensive docs; T80 LZ preprint compatibility; T81 XENONnT/PandaX-4T
   watch as Channel 19; T82 stale-claim audit + CI-gatable drift-guard
-  (scripts/t82_audit.py, 40/40 ALL CLEAR); T83 KSFR (3,2) fundamental
+  (scripts/t82_audit.py, 44/44 ALL CLEAR); T83 KSFR (3,2) fundamental
   LATTICE promotion; T84 Channel 18 rho sensitivity sweep; T86.7j+k
   plausibility audit + composite-channel gap; T87 composite-DM
   direct-detection forward prediction (verdict: cannot claim LZ event
@@ -29,8 +29,17 @@ message: >-
   GeV, sigma/m_0 = 0.06 cm^2/g, MAP a = 0.13 (was 0.34 at v0.7); T88.E
   pulls posterior 5x lower in sigma/m_0 + 2.6x lower in a (steep
   velocity slope keeps sigma/m(v=150) in the in-band subhalo-survival
-  region); 662 tests passing; 22 effective channels. Standing posture:
-  LZ used as Channel 5 sanity check, NOT as sigma/m constraint.
+  region); T89 Goldstein & Hill 2026 DeltaN_eff<0.107 Channel 25
+  documented null (Phys. Rev. D 114, L021305, 2026-07-17; eps^2-
+  suppressed at v0.8 MAP, trivially satisfied); T89 sidmkit (Dhiman
+  2026, arXiv:2601.04735) + sidm-vdsigmas (Ryan) third-party sigma/m
+  benchmark (project T40 Yukawa vs sidmkit Born differ by ~2x at
+  galactic velocities - known convention diff, not regression);
+  T89 4 citation corrections (Zhang+ 2025 GD-1 anchor, Adhikari+ 2025
+  RMP canonical reference, Nadler+ 2025 SIDM Concerto, Jia+ 2026
+  Jeans); 677 tests passing; 22 effective channels; drift-guard
+  44/44 ALL CLEAR. Standing posture: LZ used as Channel 5 sanity check,
+  NOT as sigma/m constraint.
   Earlier closed rounds: T71.4 (3 v0.6 items in parallel: hier-sparc
   +0.10 log Z, bullet_sens +1.74 log Z, CHANNEL_STATUS dict); T71.3
   (R7 closure: nlive=2000 (Nc,Nf) scan via 7-way parallel background

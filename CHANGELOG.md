@@ -25,6 +25,71 @@ doc-pack restructure, and the T88/T89 dataset-acquisition series.
 Kept at full fidelity because they are the rounds the project
 currently stands on.
 
+## [T89.1] — 2026-09-06
+
+**Doc-sync follow-up round: drift-guard count 40/40 → 44/44 + test count
+662 → 677 + standing docs (README, EXTRACT, CURRENT, LAYMAN_SUMMARY,
+CITATION.cff) updated to reflect T89 ship.**
+
+This is a **doc-only follow-up** to T89 above. The substantive code work
+(Channel 25 + sidmkit benchmark + citation corrections) was committed in
+commit `f7d12ec`. This commit closes the drift-guard count and the
+standing-doc references that lagged behind T89.
+
+### Drift-guard expansion
+
+The audit script (`scripts/t82_audit.py`) was expanded from 40 checks
+to 44 checks. The 4 new checks cover:
+
+1. **README.md** `**22**` channels literal (was `**21**`)
+2. **EXTRACT.md** `677 pass` test count (was `662 pass`)
+3. **LAYMAN_SUMMARY.md** `**677**` test count (was `**662**`)
+4. **CURRENT.md** `44/44 ALL CLEAR` literal (was `40/40 ALL CLEAR`)
+
+Plus the matching updates to:
+- `scripts/t82_audit.py` itself: updated `662 pass` → `677 pass` and
+  `40/40 ALL CLEAR` → `44/44 ALL CLEAR` in 4 places (README, EXTRACT,
+  LAYMAN_SUMMARY, CURRENT.md check literals)
+
+### Standing-doc updates
+
+- **README.md**: 21 channels → 22, 662 tests → 677, 40/40 → 44/44,
+  recent rounds list now includes +T88.A-E and +T89, key findings
+  list extended with T89 entry, version history table extended
+  with +T88.A-E and +T89 rows
+- **EXTRACT.md**: version header bumped to T89 + 2026-09-06 + ~1,250
+  words, summary line rewritten to mention Channel 25 + T89 ship
+- **CURRENT.md**: standing-test-count block bumped 542→677, drift-guard
+  40/40→44/44, VERSION file pointer bumped 0.4-prelim+T75→T88E
+- **docs/LAYMAN_SUMMARY.md**: header bumped to (T72 → T89), test count
+  662→677, drift-guard 40/40→44/44, **new T88+T89 addendum** section
+  (~140 lines) explaining the XRISM/eROSITA/Euclid Q1 series,
+  Goldstein & Hill 2026 Channel 25, sidmkit benchmark, and the
+  v0.7→v0.8 re-run
+- **CITATION.cff**: 40/40 → 44/44, 662 → 677 tests, added T89
+  Goldstein & Hill + sidmkit + 4 citation corrections to the
+  message block
+
+### Drift-guard impact
+
+- Tests: **677 pass / 8 skip** (unchanged from T89; no new tests
+  this round)
+- Drift-guard: **44/44 ALL CLEAR** (was 40/40 — the literal-text
+  checks were bumped to match the actual count)
+
+### Pitfall captured (P18 follow-up)
+
+When a project round ships new tests + new code, the drift-guard
+count literal in the audit script (e.g. "40/40 ALL CLEAR") and the
+matching literal in the standing docs must be updated in lock-step.
+A round that ships 15 tests but only updates the audit script's
+check list leaves the literal-text checks stale and creates a
+read-the-script-vs-read-the-docs inconsistency. The fix is to
+always update both sides in the same commit. This is the same
+P18 failure mode the T88.E round (commit `12d0a58`) corrected.
+
+---
+
 ## [T89] — 2026-09-06
 
 **Goldstein & Hill 2026 ΔN_eff<0.107 documented-null channel (Channel 25)

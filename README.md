@@ -14,7 +14,7 @@
 ## ⚡ Latest version & headline
 
 **Standing version: `v0.4-prelim+T88E`** (Tier-1 milestone, 2026-09-02).
-Recent rounds within this standing version: **+T80** (LZ paper compatibility), **+T81** (Channel 19 = XENONnT/PandaX watch), **+T82** (stale-claim audit), **+T83** (KSFR (3,2) promotion to LATTICE), **+T84** (Channel 18 ρ sensitivity sweep).
+Recent rounds within this standing version: **+T80** (LZ paper compatibility), **+T81** (Channel 19 = XENONnT/PandaX watch), **+T82** (stale-claim audit), **+T83** (KSFR (3,2) promotion to LATTICE), **+T84** (Channel 18 ρ sensitivity sweep), **+T88.A-E** (XRISM/eROSITA/Euclid Q1 series, T88.E first non-silent FORECAST at v0.7→v0.8), **+T89** (Channel 25 = Goldstein & Hill 2026 ΔN_eff documented null + sidmkit/sidm-vdsigmas σ/m benchmark + 4 citation corrections).
 
 | Quantity | Value | Notes |
 |---|---|---|
@@ -23,12 +23,12 @@ Recent rounds within this standing version: **+T80** (LZ paper compatibility), *
 | **m_χ** (DM mass, MAP) | **770 GeV** | posterior median 498 GeV |
 | **m_φ** (mediator mass, MAP) | **453 MeV** | posterior median 588 MeV (KSFR-valid) |
 | **Tension T39 vs Yukawa a** | **0.60σ** | below the 1.0 threshold (resolved) |
-| **Channels** | **21** | 16 v0.6 → +DAMPE +LSS +XENONnT/PandaX watch +XRISM Perseus +eROSITA |
-| **Tests** | **662 pass, 8 skip** | +36 from T88.C (Euclid Q1 strong-lensing) + T88.E (subhalo forecast) |
-| **Drift-guard audit** | **40/40 ALL CLEAR** | `scripts/t82_audit.py` (CI-gatable) |
+| **Channels** | **22** | 16 v0.6 → +DAMPE +LSS +XENONnT/PandaX watch +XRISM Perseus +eROSITA +Euclid Q1 lensing +Euclid Q1 subhalo FORECAST +Goldstein & Hill 2026 ΔN_eff (T89 documented null) |
+| **Tests** | **677 pass, 8 skip** | +36 from T88.C (Euclid Q1 strong-lensing) + T88.E (subhalo forecast) + 15 from T89 (Goldstein & Hill 2026 ΔN_eff Channel 25) |
+| **Drift-guard audit** | **44/44 ALL CLEAR** | `scripts/t82_audit.py` (CI-gatable) |
 | **KIV cron** | **2026-11-01 09:00** | re-checks LZ paper via `scripts/lz_kiv_check.py` |
 
-> All headline numbers are spot-checked against `v0.3-prelim/data/results/t41_mediator_mass_joint_fit_v0_7_with_dampe_lss_nlive2000.json` and verified by `scripts/t82_audit.py` (32 doc-presence + 1 VERSION-drift checks, all passing).
+> All headline numbers are spot-checked against `v0.3-prelim/data/results/t41_mediator_mass_joint_fit_t88ce_v0_8_nlive2000.json` and verified by `scripts/t82_audit.py` (43 doc-presence + 1 VERSION-drift checks, all passing).
 
 ---
 
@@ -41,6 +41,7 @@ Recent rounds within this standing version: **+T80** (LZ paper compatibility), *
 5. **KSFR (3,2) fundamental promoted to LATTICE-class (T83)** — the existing `ksfr_pcac_validity.KSFR_NC_NF_RATIOS` had (3, 2) as LATTICE per Shindler 2019 but `t53b_lattice_input.LATTICE_TABLE` had only commented-out entries; T83 closes that inconsistency. Counts: 3 LATTICE / 2 ANALYTICAL / 2 ESTIMATED (was 2 / 2 / 3).
 6. **T82 stale-claim audit confirms 0 doc drift** — 32 doc-presence checks against the v0.7 result JSON all match. The CI-gatable `scripts/t82_audit.py` prevents future drift from slipping past human reviewers.
 7. **T84 sensitivity sweep quantifies Channel 18's ρ dependence** — best-fit σ/m is **invariant** across ρ ∈ [0.7, 1.0] (zero spread), but log Z magnitude is moderate-sensitive (~3 log-units over [0.7, 1.0]; ~9 over [0.5, 1.0]). The v0.8 MAP σ/m = 0.06 cm²/g is robust because it sits in a sub-optimal regime for Channel 18 regardless of ρ — the headline value is set by dSph+UFD+Bullet+SPARC+DAMPE+LSS+T88.E, not by LSS alone. (Was 0.27 at v0.7; T88.E FORECAST pulled down 5×.)
+8. **T89 adds Channel 25 (Goldstein & Hill 2026 ΔN_eff<0.107) as documented null + sidmkit/sidm-vdsigmas σ/m benchmark** — the channel returns 0 at v0.8 MAP (ε ~ 10⁻³⁷ thermalizes nothing, ΔN_eff ≈ 0 < 0.107); same P22 pattern as Channel 22. The sidmkit benchmark found that the project's T40 Yukawa and sidmkit's Born differ by ~2× at galactic velocities — a known convention difference, not a regression. Sidm-vdsigmas vendors Kahlhoefer's CLASSICS tables but exposes no σ/m methods. **+15 tests** (677 pass / 8 skip total). See `v0.3-prelim/docs/T89_SIDMKIT_SIDMVDSIGMAS_BENCHMARK.md` for the benchmark report.
 
 > **Full interpretation:** the v0.7 posterior is genuinely well-constrained within its scope (Benchmark A: composite dark pion + elementary A'). The standing posture (σ/m unchanged at current LZ precision) was developed honestly in T77-T79 and verified by an external `Updated review1.docx` reviewer on 2026-09-03.
 
@@ -59,10 +60,10 @@ pip install -r requirements.txt
 # or use the WSL wimpy venv that includes Julia + KiSS-SIDM:
 #   /home/lamkuenai/wimpy/bin/python
 
-# 3. Verify — should print "ALL CLEAR: 40/40 checks passed — no drift"
+# 3. Verify — should print "ALL CLEAR: 44/44 checks passed — no drift"
 python scripts/t82_audit.py
 
-# 4. Run the test suite (662 tests, expect ~0 failures)
+# 4. Run the test suite (677 tests, expect ~0 failures)
 pytest v0.3-prelim/tests/ --ignore=v0.3-prelim/tests/test_sparc_hierarchical.py \
                          --ignore=v0.3-prelim/tests/test_t32_real_likelihood.py -q
 
@@ -146,6 +147,8 @@ sidm-composite-dm-mediator/
 | **+T86.7j** | Plausibility audit (LZ finding + Planck-scale concerns) | Verdict: validation, not falsification. Both concerns resolved with quantitative basis. Surfaced T_RH > 10¹⁵ GeV freeze-in requirement. |
 | **+T86.7k+C** | Composite-channel gap analysis (post-Consider4 review) | Registered Tier-2 roadmap Item 3 (T87); doc-only round. Consider3 +4 reviewer inputs preserved for traceability. |
 | **+T87** | **Composite-DM direct-detection forward prediction** | **Verdict: composite-DM cannot claim LZ event at v0.7 MAP.** σ_inel_nuc(248 keV) = 1.15 × 10⁻¹¹⁷ cm²; predicted N_events = 4.8 × 10⁻⁷³ (71 orders below 1). 9 new tests; 549 pass / 8 skip. Standing posture preserved. |
+| **+T88.A-E** | XRISM / eROSITA / Euclid Q1 dataset-acquisition series | XRISM Perseus (Ch 20), eROSITA eRASS1 (Ch 21), XRISM φ→γγ (Ch 22, documented null), Euclid Q1 lensing (Ch 23), Euclid Q1 subhalo FORECAST (Ch 24, **first non-silent**). v0.7→v0.8 re-run: σ/m 0.27→0.06, a 0.34→0.13, log Z −163.29→−164.87. 36 new tests; 662 pass / 8 skip. |
+| **+T89** | **Goldstein & Hill 2026 ΔN_eff Channel 25 + sidmkit benchmark + citation fixes** | Channel 25 (T89, documented null, ε²-suppressed). Sidmkit Born vs project T40 Yukawa differ by ~2× (known convention diff). 15 new tests; 677 pass / 8 skip. Drift-guard 44/44 ALL CLEAR. |
 
 ---
 

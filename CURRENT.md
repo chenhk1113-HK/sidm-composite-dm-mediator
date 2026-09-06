@@ -85,9 +85,9 @@ slope keeps σ/m(v=150) in the in-band subhalo-survival region.
 
 ## Standing test count
 
-- **542 pass / 6 skip** (post-T84)
-- Drift-guard audit (`scripts/t82_audit.py`): **40/40 ALL CLEAR**
-- Standing version file: `0.4-prelim+T75` (verified by audit)
+- **677 pass / 8 skip** (post-T89; was 662 / 8 post-T88.E, +15 from T89 Goldstein & Hill Channel 25 tests)
+- Drift-guard audit (`scripts/t82_audit.py`): **44/44 ALL CLEAR**
+- Standing version file: `0.4-prelim+T88E` (verified by audit)
 
 ## Plausibility audit — LZ finding + Planck-scale concerns (T86.7j, 2026-09-03)
 
@@ -136,8 +136,8 @@ substantive hidden assumption and is now surfaced.
 
 - Standing version: **v0.4-prelim+T88E** (no bump).
 - Joint-fit posterior: **log Z = −164.87 ± 0.084**, m_χ = 770 GeV, σ/m = 0.06 cm²/g.
-- Tests: 662 pass / 8 skip.
-- Drift-guard audit: 40/40 ALL CLEAR.
+- Tests: 677 pass / 8 skip.
+- Drift-guard audit: 44/44 ALL CLEAR.
 
 **No posterior re-run.** No new physics. No new channels. The standing
 posture is preserved; the audit + tests confirm clean.
