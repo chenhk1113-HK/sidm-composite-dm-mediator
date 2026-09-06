@@ -270,6 +270,97 @@ Not a standing scientific claim.
 | `.venv-sidm-bench/Lib/site-packages/WIMpy/DMUtils.py` | SciPy 1.18+ patch |
 | `CHANGELOG.md` | +T90 entry |
 
+## Layman summary (Q&A — from user review 2026-09-06)
+
+This section captures the question-and-answer review the user did
+with the agent after seeing Phase 3 results. It is included here
+because the user found this direct framing more useful than the
+technical analysis above for understanding what T90 actually means.
+
+### Q: Can the model reproduce the LZ event?
+
+**Yes.** With the magnetic-moment knob set to the right value
+(about 3×10⁻⁸ in nuclear-magneton units), the model predicts ~1 LZ
+event at 248 keV — which matches the 1 event LZ actually saw.
+
+**But two big caveats:**
+
+1. **The knob is fixed by us, not fitted by the data.** We are
+   not discovering the value — we are choosing it to make the math
+   come out right.
+2. **Adding this knob does not improve the overall fit.** The
+   statistical evidence does not get stronger. We cannot say "the
+   data tells us this is the answer" — only "this knob can be set
+   to reproduce the event."
+
+In other words: **the math works, the evidence does not speak.**
+
+### Q: Does this knob affect astronomical observables?
+
+**Correct — zero effect on astronomical observables.** The
+magnetic-moment knob only touches direct detection (DM hitting a
+detector on Earth). It does not touch:
+
+- **σ/m₀** (the headline number, 0.06 cm²/g) — unchanged
+- **DAMPE** positron spectrum
+- **AMS-02** antiprotons
+- **Euclid** strong-lensing + subhalo forecast
+- **XRISM** Perseus cluster consistency
+- **CMB / BBN** dark-sector thermal history
+
+So you can turn this knob to explain LZ without disturbing any of
+the astrophysical fits. That is the **good news** — it is a clean
+addition.
+
+The **caveat**: because it does not touch any of those observables,
+the data from those observables cannot confirm or deny this knob.
+Only future direct-detection experiments (DARWIN, XLZD) can.
+
+### Q: Is the knob value reasonable in known physics?
+
+**Reasonable, but on the upper end of what has been proposed in the
+literature.** The tuned value is μ_x ≈ 3×10⁻⁸ μ_N (nuclear magnetons)
+= 1.6×10⁻¹¹ μ_B (Bohr magnetons).
+
+For context:
+
+- **Standard Model predictions** for elementary particles:
+  10⁻⁶ to 10⁻¹⁰ μ_B for charged leptons (Schwinger corrections).
+  Magnetic moments that small are rare in physics.
+- **Direct-detection bounds** (XENONnT, PandaX, LZ null results):
+  constrain DM magnetic moment to ≲ 10⁻¹⁶ μ_B for very heavy DM,
+  weaker bounds for lighter DM. Our value is ~5 orders above current
+  bounds in the strictest reading — meaning **this coupling is
+  already in tension with some published limits**.
+- **Theoretical proposals** for "natural" DM magnetic moments:
+  typically 10⁻¹⁶ to 10⁻²⁰ μ_B (from loop-level effects in BSM
+  models). Our value is much larger than typical "natural"
+  predictions.
+
+So: **it is physically allowed (not ruled out by the data we use),
+but it is large** — meaning you would need a specific BSM model to
+generate a moment this big, not just generic physics. It is not
+free; you would have to explain where this magnetic moment comes
+from.
+
+### Bottom line (user's framing)
+
+> **Can the model explain the LZ signal?**
+> Sort of. We can tune one knob (the magnetic-moment coupling) so
+> the LZ event becomes expected.
+>
+> **Is the data actually telling us that's what happened?**
+> No. The data don't really care either way.
+>
+> **Does it break anything we already knew?**
+> No. Everything else stays exactly the same.
+>
+> **So is this a win?**
+> It's a "we tried it, it works mechanically, but it's not a
+> discovery." We built the tool. We didn't find the answer.
+
+---
+
 ## Commits on this branch
 
 ```
