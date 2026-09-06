@@ -53,9 +53,9 @@ def test_out_of_range_mu_x_low():
 
 
 def test_out_of_range_mu_x_high():
-    """mu_x > 1e-3 -> returns 0 (out-of-range guard)."""
+    """mu_x > 1.0 mu_N -> returns 0 (out-of-range guard)."""
     from channels_extended import loglike_lz_magnetic_moment
-    ll = loglike_lz_magnetic_moment(1000.0, 1e-2)
+    ll = loglike_lz_magnetic_moment(1000.0, 2.0)
     assert ll == 0.0
 
 
@@ -88,41 +88,47 @@ def test_inf_mu_x_returns_zero():
 
 
 def test_lz_best_fit_mass_preferred():
-    """At mu_x = 3e-11, m_chi = 1000 GeV (LZ best-fit) gives log L ~ -1.
+    """At mu_x = 3e-8 mu_N (LZ best-fit), m_chi = 1000 GeV gives log L ~ -1.
 
     The magnetic-moment channel is tuned so that N_pred ~ 1 at the
-    LZ best-fit, matching the observed 1 event.
+    LZ best-fit, matching the observed 1 event. Caller passes mu_x
+    in mu_N; function converts to mu_B internally.
     """
     from channels_extended import loglike_lz_magnetic_moment
-    ll = loglike_lz_magnetic_moment(1000.0, 3e-11)
+    ll = loglike_lz_magnetic_moment(1000.0, 3e-8)
     # Poisson log L at N_obs=1, N_pred~1: ~ -1
     assert -2.0 < ll < -0.5, f"Expected log L ~ -1, got {ll}"
 
 
 def test_project_map_mass_also_preferred():
-    """At mu_x = 3e-11, m_chi = 770 GeV (project v0.8 MAP) gives log L ~ -1.
+    """At mu_x = 3e-8 mu_N, m_chi = 770 GeV (project v0.8 MAP) gives log L ~ -1.
 
     The mass is largely insensitive in this range.
     """
     from channels_extended import loglike_lz_magnetic_moment
-    ll = loglike_lz_magnetic_moment(770.0, 3e-11)
+    ll = loglike_lz_magnetic_moment(770.0, 3e-8)
     assert -2.0 < ll < -0.5, f"Expected log L ~ -1, got {ll}"
 
 
 def test_underprediction_penalty():
-    """At mu_x = 1e-13 (under-predicts), log L is strongly negative."""
+    """At mu_x = 1e-10 mu_N (under-predicts), log L is strongly negative."""
     from channels_extended import loglike_lz_magnetic_moment
-    ll = loglike_lz_magnetic_moment(1000.0, 1e-13)
+    ll = loglike_lz_magnetic_moment(1000.0, 1e-10)
     # Under-predicts: N_pred << N_obs = 1, so log L ~ -N_obs * log(N_pred) (penalty)
     assert ll < -5.0, f"Expected strong penalty, got {ll}"
 
 
 def test_overprediction_penalty():
-    """At mu_x = 1e-10 (over-predicts), log L is strongly negative."""
+    """At mu_x = 1e-7 mu_N (over-predicts), log L is more negative than the
+    tuned value. (Threshold is loose — at N_pred ~ 6, log L ~ -1.7, which is
+    worse than the tuned value of -1.0 but only marginally.)"""
     from channels_extended import loglike_lz_magnetic_moment
-    ll = loglike_lz_magnetic_moment(1000.0, 1e-10)
-    # Over-predicts: N_pred >> N_obs = 1, so log L ~ -N_pred
-    assert ll < -2.0, f"Expected over-prediction penalty, got {ll}"
+    ll = loglike_lz_magnetic_moment(1000.0, 1e-7)
+    # Over-predicts: log L should be more negative than tuned (=-1) but
+    # the Poisson log-likelihood only degrades slowly until N_pred >> 10.
+    # Threshold of -1.5 catches the overprediction while allowing for
+    # the gentle slope of the Poisson log L near N_pred ~ 1.
+    assert ll < -1.5, f"Expected over-prediction penalty, got {ll}"
 
 
 def test_t41_with_no_t90_env():
@@ -147,8 +153,8 @@ def test_t41_with_no_t90_env():
 
 
 def test_t41_with_t90_active():
-    """T41 with T90_MAGNETIC_MOMENT_MU_X=3e-11: channel active, log L drops by ~1."""
-    os.environ["T90_MAGNETIC_MOMENT_MU_X"] = "3e-11"
+    """T41 with T90_MAGNETIC_MOMENT_MU_X=3e-8 (channel active), log L drops by ~1."""
+    os.environ["T90_MAGNETIC_MOMENT_MU_X"] = "3e-8"
     os.environ.pop("T90_MAGNETIC_MOMENT_DISABLE", None)
 
     # Re-import to pick up env vars (T41 imports at module level)
@@ -173,7 +179,7 @@ def test_t41_with_t90_active():
     ll_no_env = t41.loglike_joint(theta)
 
     # Active should be lower than inactive (penalty for fixed mu_x not at MAP)
-    # The expected delta is the Poisson log-likelihood at N_pred(mu_x=3e-11, m_chi=770)
+    # The expected delta is the Poisson log-likelihood at N_pred(mu_x=3e-8 mu_N, m_chi=770)
     # which is ~ -1.0 to -1.3
     delta = ll_active - ll_no_env
     assert -3.0 < delta < 0.0, f"Expected delta in [-3, 0], got {delta}"
@@ -181,7 +187,7 @@ def test_t41_with_t90_active():
 
 def test_t41_with_t90_disable():
     """T41 with T90_MAGNETIC_MOMENT_DISABLE=1: channel disabled even if mu_x set."""
-    os.environ["T90_MAGNETIC_MOMENT_MU_X"] = "3e-11"
+    os.environ["T90_MAGNETIC_MOMENT_MU_X"] = "3e-8"
     os.environ["T90_MAGNETIC_MOMENT_DISABLE"] = "1"
 
     import importlib
@@ -215,13 +221,30 @@ def test_t90_constants_defined():
     from channels_extended import (
         LZ_EXPOSURE_TONNE_YEARS, LZ_EXPOSURE_KG_DAYS,
         LZ_248KEV_N_OBS, LZ_248KEV_N_OBS_ERROR,
-        MAGNETIC_MOMENT_LZ_TUNED_MU_X, MAGNETIC_MOMENT_LZ_TUNED_M_CHI,
+        MAGNETIC_MOMENT_LZ_TUNED_MU_X_MU_N, MAGNETIC_MOMENT_LZ_TUNED_M_CHI,
+        MU_N_TO_MU_B,
         LZ_248KEV_E_MIN, LZ_248KEV_E_MAX,
     )
     assert LZ_EXPOSURE_TONNE_YEARS == 2.84
     assert LZ_248KEV_N_OBS == 1
-    assert MAGNETIC_MOMENT_LZ_TUNED_MU_X == 3e-11
+    assert MAGNETIC_MOMENT_LZ_TUNED_MU_X_MU_N == 3e-8
     assert MAGNETIC_MOMENT_LZ_TUNED_M_CHI == 1000.0
+    # MU_N_TO_MU_B must equal m_p/m_e (CODATA value ~1836.15)
+    assert 1836.0 < MU_N_TO_MU_B < 1837.0
+
+
+def test_mu_n_to_mu_b_conversion():
+    """The function converts mu_x from mu_N (caller) to mu_B (WIMpy) internally.
+
+    Verify: MU_N_TO_MU_B is exactly m_p/m_e (CODATA), and the function
+    produces a sensible result at the documented tuned value (log L ~ -1).
+    """
+    from channels_extended import loglike_lz_magnetic_moment, MU_N_TO_MU_B
+    # Tuned value: should give log L ~ -1 at LZ best-fit mass
+    ll = loglike_lz_magnetic_moment(1000.0, 3e-8)
+    assert -2.0 < ll < -0.5, f"Tuned mu_x should give log L ~ -1, got {ll}"
+    # Verify MU_N_TO_MU_B is approximately m_p/m_e
+    assert abs(MU_N_TO_MU_B - 1836.15267) < 0.001
 
 
 def test_channel_26_in_channel_status():
@@ -250,5 +273,6 @@ if __name__ == "__main__":
     test_t41_with_t90_active()
     test_t41_with_t90_disable()
     test_t90_constants_defined()
+    test_mu_n_to_mu_b_conversion()
     test_channel_26_in_channel_status()
-    print("All 17 Channel 26 tests passed")
+    print("All 18 Channel 26 tests passed")

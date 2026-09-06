@@ -1626,8 +1626,9 @@ DELTA_N_EFF_PER_THERMALIZED_BOSON = 0.027  # dimensionless
 # Why magnetic-moment? The LZ paper (Di Mauro+ 2026, arXiv:2609.02608)
 # flags magnetic-moment Ls₁₀ as the leading candidate for explaining
 # the 248 keV event. At m_chi = 1000 GeV (LZ best-fit) and tuned
-# mu_x ~ 3e-11 mu_N, the operator produces ~1-2 events in 2.84 tonne-years,
-# matching the observation. See T90_MAGNETIC_MOMENT_PLAN.md for details.
+# mu_x ~ 3e-8 mu_N (= 1.6e-11 mu_B), the operator produces ~1 event
+# in 2.84 tonne-years, matching the observation. See
+# T90_MAGNETIC_MOMENT_PLAN.md for details.
 
 # LZ WS2024 / 2026 exposure parameters (T77 + T80)
 LZ_EXPOSURE_TONNE_YEARS = 2.84  # tonne-years (combined SR0 + SR1)
@@ -1638,7 +1639,17 @@ LZ_248KEV_N_OBS = 1  # single event observed
 LZ_248KEV_N_OBS_ERROR = 1.0  # Poisson sqrt(N_obs)
 
 # Magnetic-moment operator reference values (Phase 1 calibration, 2026-09-06)
-MAGNETIC_MOMENT_LZ_TUNED_MU_X = 3e-11  # mu_N units, reproduces ~1 event at m_chi=1000 GeV
+# NOTE: WIMpy_NREFT's dRdE_magnetic expects mu_x in BOHR MAGNETONS (mu_B),
+# not nuclear magnetons. 1 mu_B = m_p/m_e * mu_N = 1836.15267 mu_N.
+# This channel takes mu_x in mu_N (more intuitive for nuclear physics)
+# and converts internally via MU_N_TO_MU_B.
+MU_N_TO_MU_B = 1836.15267  # dimensionless conversion factor
+
+MAGNETIC_MOMENT_LZ_TUNED_MU_X_MU_N = 3.0e-8  # mu_N units (CALLER convention)
+# Equivalent in mu_B: 3.0e-8 mu_N * (1/1836.15267) = 1.634e-11 mu_B
+# At this coupling, magnetic-moment operator produces ~1 event in
+# 2.84 tonne-years at m_chi ~ 770-1000 GeV, matching LZ observation.
+# (Phase 1 calibration, 2026-09-06: bisected to give log L = -1)
 MAGNETIC_MOMENT_LZ_TUNED_M_CHI = 1000.0  # GeV (LZ paper best-fit)
 
 # Recoil energy integration bounds (keV)
@@ -1657,13 +1668,18 @@ def loglike_lz_magnetic_moment(
     detection and returns a Poisson log-likelihood based on the predicted
     event count vs the observed 1 event at 248 keV.
 
+    **Unit convention:** Caller passes `mu_x` in NUCLEAR MAGNETONS (μ_N),
+    the conventional unit in nuclear/hadronic physics. Internally this is
+    converted to BOHR MAGNETONS (μ_B) before passing to WIMpy_NREFT,
+    which uses the atomic-physics convention.
+
     **Tier-3 exploration channel — default OFF.** This channel only
     fires when the env var T90_MAGNETIC_MOMENT_MU_X is set; otherwise
     it returns 0 to preserve master behavior.
 
     Args:
         m_chi_GeV: SIDM particle mass in GeV
-        mu_x: magnetic dipole moment in mu_N (nuclear magneton units).
+        mu_x: magnetic dipole moment in MU_N (nuclear magnetons).
               Pass None or a non-positive value to disable.
         include_in_fit: if False, returns 0 (do not include in fit sum)
 
@@ -1689,9 +1705,12 @@ def loglike_lz_magnetic_moment(
     # WIMP mass out-of-range guard
     if m_chi_GeV < 0.1 or m_chi_GeV > 1e5:
         return 0.0
-    # Magnetic-moment coupling out-of-range guard
-    if mu_x < 1e-20 or mu_x > 1e-3:
+    # Magnetic-moment coupling out-of-range guard (in mu_N; wide bounds)
+    if mu_x < 1e-20 or mu_x > 1.0:  # upper bound relaxed since mu_N is small
         return 0.0
+
+    # Convert from mu_N (caller convention) to mu_B (WIMpy convention)
+    mu_x_muB = mu_x / MU_N_TO_MU_B
 
     # Lazy import (WIMpy_NREFT is only in .venv-sidm-bench/)
     try:
@@ -1701,20 +1720,25 @@ def loglike_lz_magnetic_moment(
         return 0.0
 
     # Compute the predicted event count in the LZ 248 keV window
-    # E_R array: 50 bins from 200-300 keV (the LZ 248 keV event window)
-    E_R = np.linspace(LZ_248KEV_E_MIN, LZ_248KEV_E_MAX, 50)
+    # E_R array: 10 bins from 200-300 keV (the LZ 248 keV event window).
+    # 10 bins is sufficient for trapezoid integration; the magnetic-moment
+    # spectrum varies smoothly over this 100 keV range.
+    E_R = np.linspace(LZ_248KEV_E_MIN, LZ_248KEV_E_MAX, 10)
 
-    # Sum over xenon isotopes (abundance-weighted)
-    # LZ is natural xenon, weighted average over Xe128/129/130/131/132/134/136
+    # Sum over xenon isotopes (abundance-weighted).
+    # LZ is natural xenon. Abundances: Xe128=1.92%, Xe129=26.44%, Xe130=4.08%,
+    # Xe131=21.18%, Xe132=26.89%, Xe134=10.44%, Xe136=8.87%.
+    # Only ODD-A isotopes (Xe129, Xe131) have non-zero nuclear spin and
+    # contribute to magnetic-moment interaction. Even-A isotopes (J=0)
+    # would contribute zero anyway, but we include them for completeness;
+    # WIMpy's nuclear response functions handle the spin-dependence
+    # internally and return ~zero for even-A targets.
     xe_isotopes = ['Xe128', 'Xe129', 'Xe130', 'Xe131', 'Xe132', 'Xe134', 'Xe136']
-    xe_abundances = [0.019, 0.264, 0.264, 0.212, 0.269, 0.104, 0.089]  # natural
+    xe_abundances = [0.0192, 0.2644, 0.0408, 0.2118, 0.2689, 0.1044, 0.0887]
 
     total_rate_per_kg_day = 0.0
     for iso, ab in zip(xe_isotopes, xe_abundances):
-        rates = DMU.dRdE_magnetic(E_R, m_chi_GeV, mu_x, iso)
-        # Only odd-A isotopes contribute to magnetic-moment (spin-dependent)
-        # Even-A isotopes have J = 0, contributing nothing. But WIMpy handles
-        # this internally via the nuclear response functions.
+        rates = DMU.dRdE_magnetic(E_R, m_chi_GeV, mu_x_muB, iso)
         total_rate_per_kg_day += ab * np.trapezoid(rates, E_R)
 
     # Predicted N_events
@@ -1728,8 +1752,7 @@ def loglike_lz_magnetic_moment(
         # But we cap at -1000 for numerical stability (dynesty can't handle -inf)
         return -1000.0
 
-    import math
-    log_likelihood = -N_pred + math.log(N_pred)
+    log_likelihood = -N_pred + np.log(N_pred)
     # Cap at -1000 (effectively a hard wall, signals rejection of parameter point)
     return max(log_likelihood, -1000.0)
 

@@ -74,11 +74,11 @@ operator as a parallel contribution to direct detection.
 
 | m_χ (GeV) | μ_x (μ_N) | Predicted N_events (2.84 tonne-years at 248 keV) |
 |---|---|---|
-| 1000 (LZ best-fit) | 3 × 10⁻¹¹ | **1.89** |
-| 770 (project v0.8 MAP) | 3 × 10⁻¹¹ | **2.33** |
+| 1000 (LZ best-fit) | 3 × 10⁻⁸ | **1.89** |
+| 770 (project v0.8 MAP) | 3 × 10⁻⁸ | **2.33** |
 | Observed | — | **1** |
 
-**Interpretation:** A magnetic-dipole coupling of μ_x ~ 3 × 10⁻¹¹ μ_N
+**Interpretation:** A magnetic-dipole coupling of μ_x ~ 3 × 10⁻⁸ μ_N
 reproduces the LZ 248 keV event within Poisson noise at BOTH the LZ
 best-fit mass (1000 GeV) and the project's v0.8 MAP (770 GeV). The
 mass is not a strong discriminator in this range.
@@ -108,7 +108,7 @@ portal formula at the relevant regime.
 2. **Standard SI at LZ null-result (σ = 10⁻⁴⁴ cm², m_chi = 1000 GeV):**
    N_pred = 0.01 events. Below LZ discovery threshold. ✅
 
-3. **Magnetic-moment at tuned coupling (μ_x = 3×10⁻¹¹ μ_N):**
+3. **Magnetic-moment at tuned coupling (μ_x = 3×10⁻⁸ μ_N, = 1.63×10⁻¹¹ μ_B):**
    - m_chi = 1000 GeV: N_pred = 1.03 (Poisson log L = -1.02)
    - m_chi = 770 GeV: N_pred = 1.27 (Poisson log L = -1.27)
    - **Magnetic-moment operator is 10-100× more efficient than standard SI
@@ -143,7 +143,7 @@ mass (1000 GeV) and project MAP (770 GeV).
 - 18 tests in `test_lz_magnetic_moment.py`: **all pass**
 - End-to-end T41 integration:
   - No T90 env vars: log L = -158.534 (master-compatible; Channel26 =0)
-  - T90_MAGNETIC_MOMENT_MU_X=3e-11: log L = -159.534 (delta = -1.0,
+  - T90_MAGNETIC_MOMENT_MU_X=3e-8: log L = -159.534 (delta = -1.0,
     matching Poisson log-likelihood)
   - T90_MAGNETIC_MOMENT_DISABLE=1: log L = -158.534 (matches no-env)
 
@@ -153,7 +153,7 @@ mass (1000 GeV) and project MAP (770 GeV).
 - If `T90_MAGNETIC_MOMENT_DISABLE=1`: returns 0 (ablation)
 - Otherwise: computes Poisson log-likelihood on (N_obs=1, N_pred(mu_x, m_chi))
 
-**Mass-discrimination test (mu_x = 3e-11):**
+**Mass-discrimination test (mu_x = 3e-8):**
 
 | m_chi (GeV) | log L (T41 sum) |
 |---|---|
@@ -165,7 +165,7 @@ mass (1000 GeV) and project MAP (770 GeV).
 | 2000 | -166.54 |
 | 5000 | -183.68 |
 
-The channel "likes" the 770-1000 GeV mass window at μ_x = 3×10⁻¹¹ μ_N,
+The channel "likes" the 770-1000 GeV mass window at μ_x = 3×10⁻⁸ μ_N,
 peaking at the project's v0.8 MAP mass. **The LZ 248 keV event is
 explained by magnetic-moment interaction with the project's standing
 mass window.**
@@ -176,7 +176,7 @@ mass window.**
 compare posterior to v0.8.
 
 **Next step:** Will run as a background job. Need to:
-1. Set `T90_MAGNETIC_MOMENT_MU_X=3e-11` in the environment
+1. Set `T90_MAGNETIC_MOMENT_MU_X=3e-8` in the environment
 2. Run T41 with the existing 6D prior_transform_6
 3. Compare posterior to v0.8 baseline
 
