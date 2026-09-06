@@ -705,6 +705,46 @@ Per Reviewer 2's recommendation:
 4. **`v0.3-prelim/docs/REVIEWER_AUDIT_R13.md`** — most recent audit (2026-08-25)
 5. **This document** (`MODEL_ASSUMPTIONS_AND_LIMITATIONS.md`) — single-page assumption summary
 
+## 10a. Canonical SIDM references (added 2026-09-06, T89)
+
+The project's σ/m physics draws on the following canonical references
+(alphabetical by lead author):
+
+- **Adhikari, Banerjee et al. 2025** — "Astrophysical Tests of Dark
+  Matter Self-Interactions", **Rev. Mod. Phys. 97, 045004** (2025-12-08),
+  arXiv:2207.10638. 78 pages, 20 figures, 12+ authors. The
+  modern canonical review of SIDM phenomenology.
+- **Andrade & Fuson 2021** — "A stringent upper limit on dark matter
+  self-interaction cross-section from cluster strong lensing",
+  MNRAS 510, 54 (arXiv:2012.06611). Cluster-scale σ/m < 0.1 cm²/g
+  upper bound from Abell 611 core-size.
+- **Colquhoun, Heeba, Kahlhoefer, Sagunski, Tulin 2021** —
+  "Semi-classical regime for dark matter self-interactions"
+  (arXiv:2011.04679). The σ_T and σ_V table reference implemented
+  in CLASSICS (vendored into `sidm-vdsigmas`).
+- **Goldstein & Hill 2026** — "N_eff = 2.990 ± 0.070", Phys. Rev. D
+  114, L021305 (2026-07-17). ΔN_eff < 0.107 (95% CL). Adopted as
+  Channel 25 documented null (T89).
+- **Jia et al. 2026** — "An Enhanced Isothermal Jeans Approach to
+  Constraining Self-interacting Dark Matter Density Profiles",
+  MNRAS 549, stag969 (arXiv:2601.17118). To-be-evaluated for v0.7+
+  adoption (deferred; project uses existing Jeans modeling in
+  Channel 2).
+- **Kahlhoefer et al. 2019** — Standard parameterisation for
+  kinetic-mixing ε in SIDM models (used in T79 form-factor
+  uncertainty band, see §4).
+- **Nadler et al. 2025** — "SIDM Concerto: Compilation and Data
+  Release of Self-interacting Dark Matter Halo Zoom-ins",
+  arXiv:2503.10748. 14 cosmological zoom-in simulations at 2×10⁷
+  particles per host. Deferred for v0.7+ calibration (Item 17).
+- **Tulin & Yu 2018** — "Self-interacting dark matter: Progress,
+  problems and prospects", RMP 90, 015004 (arXiv:1705.02358). The
+  project's σ/m(v) convention follows Tulin-Yu Eq. 2.14.
+- **Zhang et al. 2025** — "The GD-1 Stellar Stream Perturber as a
+  Core-collapsed Self-interacting Dark Matter Halo", ApJL 978,
+  L23 (arXiv:2409.19493). The GD-1 perturber is the primary
+  low-velocity anchor for Channel 6.
+
 ## 11. Change history
 
 | Date | Change | Source |

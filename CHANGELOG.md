@@ -18,12 +18,98 @@ All notable changes to this project are documented here. Format follows
 
 ---
 
-# Current era — full entries (T81 → T88)
+# Current era — full entries (T81 → T89)
 
-These six entries cover the v0.4-prelim Tier-1 milestone, the recent
-doc-pack restructure, and the start of the T88 dataset-acquisition
-series. Kept at full fidelity because they are the rounds the project
+These seven entries cover the v0.4-prelim Tier-1 milestone, the recent
+doc-pack restructure, and the T88/T89 dataset-acquisition series.
+Kept at full fidelity because they are the rounds the project
 currently stands on.
+
+## [T89] — 2026-09-06
+
+**Goldstein & Hill 2026 ΔN_eff<0.107 documented-null channel (Channel 25)
++ sidmkit/sidm-vdsigmas σ/m benchmark + 4 citation corrections.**
+
+Three items in one round (combined commit, per audit recommendation).
+
+### 1. Channel 25 — Goldstein & Hill 2026 ΔN_eff<0.107 (documented null, P22 pattern)
+
+**Source:** Goldstein & Hill, Phys. Rev. D 114, L021305 (2026-07-17).
+N_eff = 2.990 ± 0.070 (68% CL) → ΔN_eff < 0.107 (95% CL upper bound).
+
+**What shipped:**
+- `v0.3-prelim/code/channels_extended.py`:
+  - Added `loglike_delta_n_eff_goldstein_hill_2026(m_chi, m_ap, epsilon)`
+    (returns 0 — documented null)
+  - Added `delta_N_eff_from_thermalized_aprime(epsilon)` helper
+    (returns 0.027 if ε > ε_THERM = 1e-5, else 0)
+  - Added constants: `GOLDSTEIN_HILL_2026_DELTA_N_EFF_MAX_95CL = 0.107`,
+    `DARK_PHOTON_THERMALIZATION_EPSILON_THRESHOLD = 1.0e-5`,
+    `DELTA_N_EFF_PER_THERMALIZED_BOSON = 0.027`
+  - Updated `CHANNEL_STATUS` dict to include Channels 20-25 (T88.A through T89)
+- `v0.3-prelim/code/t41_mediator_mass_joint_fit.py`:
+  - Imported `loglike_delta_n_eff_goldstein_hill_2026`
+  - Added gated Channel 25 wire-in block (after T88.E)
+  - Added `+ ll_goldstein_hill` to `loglike_joint` return sum
+  - Gated by `T89_DELTA_N_EFF_DISABLE=1` for ablation
+- `v0.3-prelim/tests/test_delta_n_eff_goldstein_hill_2026.py` (NEW, 15 tests)
+- `MODEL_ASSUMPTIONS_AND_LIMITATIONS.md`:
+  - Added §10a "Canonical SIDM references" listing Adhikari+ 2025 RMP,
+    Andrade 2021, Goldstein & Hill 2026, Jia+ 2026, Nadler+ 2025,
+    Tulin & Yu 2018, Zhang+ 2025
+
+**Verdict at v0.8 MAP** (m_φ = 488 MeV, ε ~ 10⁻³⁷): the dark photon's
+ε ~ 10⁻³⁷ is far below the thermalization threshold (1e-5), so the A'
+is a freeze-in FIMP with ΔN_eff ≈ 0. The constraint is **satisfied by
+the standing posterior**. Channel returns 0 in all physically-relevant
+cases — same pattern as Channel 22 = XRISM φ→γγ. No posterior re-run.
+
+### 2. sidmkit / sidm-vdsigmas σ/m benchmark
+
+Per `REVIEWER_AUDIT_R_DATASETS2.md` §3 Item 3, the audit recommended
+installing sidmkit + sidm-vdsigmas as third-party σ/m cross-checks.
+
+**What shipped:**
+- Created `.venv-sidm-bench/` (uv-managed venv, Python 3.12.13)
+- Installed `sidm-vdsigmas` from `git+https://github.com/mtryan83/sidm-vdsigmas.git` (commit bd4733f0)
+- Installed `sidmkit` from `git+https://github.com/nalin-dhiman/sidmkit.git` (commit 8b8017f7, version 0.3.2)
+- Wrote `.venv-sidm-bench/test_sigma_m_regression.py`
+- Wrote `v0.3-prelim/docs/T89_SIDMKIT_SIDMVDSIGMAS_BENCHMARK.md`
+
+**Key benchmark finding:** the project's T40 analytic Yukawa
+(Feng+ 2009 / Tulin+Yu 2018 Born distinguishable) and sidmkit's Born
+differ by **a factor of ~2 at low v (5-200 km/s)** — a real, physics-
+meaningful convention difference between two legitimate Born
+approximations. sidm-vdsigmas turned out to be a data container (no
+σ/m methods exposed) but **vendors CLASSICS** (Kahlhoefer's canonical
+σ_T/σ_V tables) as a sub-package.
+
+### 3. Citation corrections from `REVIEWER_AUDIT_R_DATASETS2.md` §4
+
+Landed in this commit:
+1. `channels_extended.py:362` — Zhang+ 2025 attribution added
+   (ApJL 978 L23, arXiv:2409.19493) alongside Yang+ 2026 PRL
+2. `MODEL_ASSUMPTIONS_AND_LIMITATIONS.md` §10a — Adhikari+ 2025 RMP,
+   Jia+ 2026, Nadler+ 2025, Goldstein & Hill 2026 all added
+
+### Drift-guard impact
+
+- New tests: **15 added** (15/15 passing) → total **677 pass / 8 skip**
+- Drift-guard audit: still **44/44 ALL CLEAR**
+- Standing version: unchanged at `v0.4-prelim+T88E`
+
+### Pitfall captured
+
+The original T88.E audit (commit `967ed0c`) marked sidmkit +
+sidm-vdsigmas as **❌ REJECT (unverifiable packages)** because the
+agent's first web search returned no matches. After the user pointed
+to the `sidm-vdsigmas` URL, both packages were verified as real.
+Standing rule for future audits (logged in
+`REVIEWER_AUDIT_R_DATASETS2.md` §6a): if a web search returns zero
+matches for a specifically-named tool, retry with at least 3
+distinct strategies (bare GitHub URL, broader domain keywords +
+author last names, arXiv search if a paper is referenced). Only
+after all three fail should the verdict be "unverifiable".
 
 ## [T88.A] — 2026-09-04
 

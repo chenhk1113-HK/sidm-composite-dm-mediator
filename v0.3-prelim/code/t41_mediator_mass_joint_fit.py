@@ -79,6 +79,7 @@ from channels_extended import (
     loglike_cmb_distortion, loglike_dampe_cre, loglike_lss_assembly_bias,
     loglike_competitor_dd_watch, loglike_xrism_perseus_icm,
     loglike_erosita_erass1, loglike_phi_to_gamgam_xrism, loglike_euclid_q1_lensing, loglike_euclid_q1_subhalo_forecast,
+    loglike_delta_n_eff_goldstein_hill_2026,
 )
 from xrism_phi_decay_forward_model import XRISM_PHI_DECAY_ARXIV_ID as _XRISM_PHI_ARXIV
 
@@ -438,6 +439,28 @@ def loglike_joint(theta):
     else:
         ll_euclid_subhalo = 0.0
 
+    # ----- Channel 25 (T89): Goldstein & Hill 2026 ΔN_eff<0.107 documented null -----
+    # Source: Goldstein & Hill, Phys. Rev. D 114, L021305 (2026-07-17).
+    #   N_eff = 2.990 ± 0.070 (68% CL) → ΔN_eff < 0.107 (95% CL upper bound).
+    # The dark photon's thermal-equilibrium contribution to ΔN_eff at
+    # recombination is computed via delta_N_eff_from_thermalized_aprime(eps).
+    # For ε < ε_THERM (= 1e-5) the A' is a freeze-in FIMP with ΔN_eff ≈ 0.
+    # At the v0.8 standing posterior (ε ~ 1e-37), the A' NEVER thermalizes —
+    # ΔN_eff ≈ 0 → constraint trivially satisfied → channel returns 0.
+    # This is a P22 DOCUMENTED NULL (same pattern as Channel 22 = XRISM φ→γγ).
+    # No penalty fires in any physically-relevant case → no posterior shift.
+    # Gated by T89_DELTA_N_EFF_DISABLE=1 for ablation. Default ON.
+    if os.environ.get("T89_DELTA_N_EFF_DISABLE", "").strip() != "1":
+        ll_goldstein_hill = loglike_delta_n_eff_goldstein_hill_2026(
+            m_chi=m_chi_GeV * 1e9,
+            m_ap=m_phi_MeV * 1e6,
+            epsilon=epsilon,
+        )
+        if not np.isfinite(ll_goldstein_hill):
+            return -np.inf
+    else:
+        ll_goldstein_hill = 0.0
+
     # Optional SPARC contribution (slow, so disabled by default)
     # Use a coarse grid to be fast.
     # T69 (v0.4-prelim): rescaled by baryonic-feedback nuisance f_fb.
@@ -474,7 +497,7 @@ def loglike_joint(theta):
         except Exception:
             ll_sparc = 0.0
 
-    return ll_dsph + ll_ufd + ll_bullet + ll_lz + ll_fermi + ll_sparc + ll_cmb + ll_dampe + ll_lss + ll_competitor_dd + ll_xrism + ll_erosita + ll_phi_decay + ll_euclid_q1 + ll_euclid_subhalo
+    return ll_dsph + ll_ufd + ll_bullet + ll_lz + ll_fermi + ll_sparc + ll_cmb + ll_dampe + ll_lss + ll_competitor_dd + ll_xrism + ll_erosita + ll_phi_decay + ll_euclid_q1 + ll_euclid_subhalo + ll_goldstein_hill
 
 
 def prior_transform_5(u):
