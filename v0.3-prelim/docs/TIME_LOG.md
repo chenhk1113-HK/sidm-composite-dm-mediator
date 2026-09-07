@@ -3,6 +3,15 @@
 **Purpose**: Log every time estimate I make + the actual time spent,
 to build a calibration over time. Started 2026-09-07 per user directive.
 
+**SCOPE (updated 2026-09-07)**: This is the per-project time log.
+The **GLOBAL** time-log rule lives in `~/.hermes/time-log.md`
+(a project-agnostic aggregator). This file is the project-specific
+entry point for the sidm-composite-dm-mediator project.
+
+Per-user directive 2026-09-07: "keep the log on for all tasks,
+not just this project." Logging now applies to ALL projects,
+ALL sessions, ALL tasks where I say "X minutes/hours/days/weeks".
+
 **Format**:
 ```
 [YYYY-MM-DD] [path/task]
