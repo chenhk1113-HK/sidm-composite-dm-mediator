@@ -7,9 +7,9 @@ VERSION-drift behavior so any future VERSION-mismatch is caught
 automatically.
 
 Test strategy:
-1. The audit script exposes `CANONICAL_STANDING_VERSION = "0.4-prelim+T75"`.
+1. The audit script exposes `CANONICAL_STANDING_VERSION = "0.4-prelim+T88E"`.
 2. The actual VERSION file in the project root currently equals
-   "0.4-prelim+T75" (matching the canonical).
+   "0.4-prelim+T88E" (matching the canonical).
 3. If anyone bumps the canonical without bumping VERSION, or vice versa,
    the audit script must exit 1.
 
@@ -45,8 +45,8 @@ def _capture_main(monkey_standing_version: str | None = None):
     buf = io.StringIO()
     with contextlib.redirect_stdout(buf):
         rc = t82_audit.main()
-    # Restore
-    t82_audit.CANONICAL_STANDING_VERSION = "0.4-prelim+T75"
+    # Restore (current canonical = "0.4-prelim+T88E")
+    t82_audit.CANONICAL_STANDING_VERSION = "0.4-prelim+T88E"
     return rc, buf.getvalue()
 
 
@@ -60,8 +60,8 @@ class TestNoDriftState:
             f"Script output:\n{out}"
         )
         assert "ALL CLEAR" in out
-        # Specifically check VERSION drift-guard passed
-        assert "VERSION = '0.4-prelim+T75' matches canonical" in out
+        # Specifically check VERSION drift-guard passed (current canonical = "0.4-prelim+T88E")
+        assert "VERSION = '0.4-prelim+T88E' matches canonical" in out
 
     def test_total_check_count_at_least_40(self):
         # Was >= 32 (with the original 10 README checks; pre-T86.7).
