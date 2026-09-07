@@ -96,7 +96,7 @@ specific concrete claims are wrong on disk**.
 | R2.6 | "677 tests pass" | ❌ **stale** | `pytest --collect-only` on `wip/tier3-magnetic-moment-LZ` = **457 tests + 1 collection error**. On `wip/v0.4-prelim` = **154 tests + 1 error**. The 677 is not achievable from either branch. |
 | R2.7 | "scripts/t82_audit.py exists" | ✅ confirmed | `ls scripts/t82_audit.py` exists |
 | R2.8 | "scripts/t82_audit.py is CI-gatable but no workflow YAML exists" | ✅ confirmed | No `.github/workflows/` directory on disk |
-| R2.9 | "data/results has hundreds of large JSON artifacts" | ❌ **stale** | No `data/results/` directory at top level. Top-level `data/` does not exist either. |
+| R2.9 | "data/results has hundreds of large JSON artifacts" | ✅ confirmed | `v0.3-prelim/data/results/` has 178 files, 18 MB total |
 | R2.10 | "v0.8 MAP point, nlive=2000" | ⚠️ **imprecise** | No v0.8 yet. README says v0.4-prelim+T88E. nlive=2000 was used in v0.7 (Sep). The MAP values (770 GeV m_χ, 453 MeV m_φ) match the README's table. |
 | R2.11 | "v0.4-prelim: ~140 Python modules" | ⚠️ **imprecise** | `find . -name '*.py'` (excluding venv) = **273 files** total, but many are tests/scripts. README cites "~140 production modules" which is plausible for `v0.3-prelim/code/` alone. |
 | R2.12 | "Julia KiSS-SIDM (Gurian & May 2025 PRL) gravothermal collapse penalty" | ⚠️ **cannot fully verify on this checkout** | KiSS-SIDM mention in `d13_*` files. The integration is documented in `MODEL_ASSUMPTIONS_AND_LIMITATIONS.md` (cited by Reviewer 2). |
@@ -105,11 +105,18 @@ specific concrete claims are wrong on disk**.
 | R2.15 | "No CI workflow configured" | ✅ confirmed | No `.github/workflows/` |
 | R2.16 | "Tests cover physics, sanity, audit checks" | ✅ confirmed | 457 tests in collected set |
 
-**Reviewer 2 verdict: ~7/16 confirmed, 6 stale, 3 imprecise.**
+**Reviewer 2 verdict: ~8/16 confirmed, 5 stale, 3 imprecise.**
 The stale claims are **specific, concrete, verifiable** —
 not vague. They suggest Reviewer 2 may have been reading
 the README and inferring repo state from there without
 on-disk verification.
+
+**CORRECTION 2026-09-07 (TIDY_UP_SCOPE_AUDIT)**: My initial
+audit was wrong about R2.9 ("data/results doesn't exist").
+Reviewer 2 was right — the directory exists at
+`v0.3-prelim/data/results/` with 178 files, 18 MB total.
+I had been looking at the wrong path. The corrected count
+is ~8/16 confirmed (one more than originally reported).
 
 ### README internal inconsistency (V1 finding, NOT a Reviewer 2 finding)
 
