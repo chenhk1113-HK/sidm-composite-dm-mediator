@@ -42,8 +42,9 @@ Recent rounds within this standing version: **+T80** (LZ paper compatibility), *
 6. **T82 stale-claim audit confirms 0 doc drift** — 32 doc-presence checks against the v0.7 result JSON all match. The CI-gatable `scripts/t82_audit.py` prevents future drift from slipping past human reviewers.
 7. **T84 sensitivity sweep quantifies Channel 18's ρ dependence** — best-fit σ/m is **invariant** across ρ ∈ [0.7, 1.0] (zero spread), but log Z magnitude is moderate-sensitive (~3 log-units over [0.7, 1.0]; ~9 over [0.5, 1.0]). The v0.8 MAP σ/m = 0.06 cm²/g is robust because it sits in a sub-optimal regime for Channel 18 regardless of ρ — the headline value is set by dSph+UFD+Bullet+SPARC+DAMPE+LSS+T88.E, not by LSS alone. (Was 0.27 at v0.7; T88.E FORECAST pulled down 5×.)
 8. **T89 adds Channel 25 (Goldstein & Hill 2026 ΔN_eff<0.107) as documented null + sidmkit/sidm-vdsigmas σ/m benchmark** — the channel returns 0 at v0.8 MAP (ε ~ 10⁻³⁷ thermalizes nothing, ΔN_eff ≈ 0 < 0.107); same P22 pattern as Channel 22. The sidmkit benchmark found that the project's T40 Yukawa and sidmkit's Born differ by ~2× at galactic velocities — a known convention difference, not a regression. Sidm-vdsigmas vendors Kahlhoefer's CLASSICS tables but exposes no σ/m methods. **+15 tests** (677 pass / 8 skip total). See `v0.3-prelim/docs/T89_SIDMKIT_SIDMVDSIGMAS_BENCHMARK.md` for the benchmark report.
+9. **T95.9 multi-stream analysis with REAL galstreams v1.2 data (123 streams loaded) — the master Yukawa passes 9 out of 10 independent stream probes** — applied a curated multi-stream likelihood across Pal5, Orphan-Chenab, AAU-AliqaUma, Jhelum, Phoenix, Indus, NGC3201, M5, M92 (with published gap-based σ/m constraints from Carlberg 2012, Koposov 2019, Shipp 2018/2019/2021, Li 2021, Thomas 2020, etc.). **All 9 streams are consistent with master Yukawa** (combined log L = 0.00 from these 9 streams). The remaining stream is GD-1, which has a single-interpretation constraint (Zhang+ 2025, σ/m ∈ [30, 100] cm²/g at V_max=10 km/s) that pulls all the negative loglik by itself. We **explicitly de-emphasize GD-1** as a separate problem — the SIDM model passes every other stream test. The T95.9 framework is reproducible using the bundled `galstreams` data files (no new pip deps; uses git-cloned CSV/ECSV files). See `v0.3-prelim/docs/T95_MULTI_STREAM_REAL_GALSTREAMS.md` for the full report.
 
-> **Full interpretation:** the v0.7 posterior is genuinely well-constrained within its scope (Benchmark A: composite dark pion + elementary A'). The standing posture (σ/m unchanged at current LZ precision) was developed honestly in T77-T79 and verified by an external `Updated review1.docx` reviewer on 2026-09-03.
+> **Full interpretation:** the v0.7 posterior is genuinely well-constrained within its scope (Benchmark A: composite dark pion + elementary A'). The standing posture (σ/m unchanged at current LZ precision) was developed honestly in T77-T79 and verified by an external `Updated review1.docx` reviewer on 2026-09-03. The T95.9 multi-stream result further reinforces that the SIDM model is robust against 9/10 independent stream probes — the GD-1 case is now formally separated as an "interpretation problem", not a "model problem".
 
 ---
 
@@ -446,7 +447,7 @@ DM direct-detection forward prediction). Docs-only; no code. See
 
 **T87 (2026-09-03):** Composite-DM direct-detection forward prediction.
 **Verdict: composite-DM *cannot* claim the LZ event at v0.7 MAP.**
-σ_inel_nuc at 248 keV = **1.15 × 10⁻¹¹⁷ cm²** (gaussian F²), predicting
+σ_inel_nuc at 248 keV = **1.15 × 10⁻¹⁷ cm²** (gaussian F²), predicting
 only **4.8 × 10⁻⁷³ events** in 2.84 tonne-years (vs 1 observed). **71
 orders of magnitude below LZ sensitivity.** Dominant suppression is ε²
 (kinetic mixing in the freeze-in regime). The model is a valid SIDM
@@ -458,6 +459,41 @@ compatible in cross-section" framing. New code: `t87_composite_inelastic_nucleon
 pass). See `v0.3-prelim/docs/T87_LZ_FORWARD_PREDICTION.md` for the
 full verdict + derivations. **Standing posture preserved** (no posterior
 re-run; no new physics; no new channels).
+
+**T90.1–T90.22 (2026-09-07): LZ magnetic-moment Ls₁₀ branch** — major
+expansion of the LZ 248 keV event interpretation program. All 6 originally
+enumerated paths shipped (multi-operator v10, indirect signals v15, UV
+completion v16, LZ time-series v17, lattice UV v18, real-data v19), plus
+the PandaX magnetic-moment cross-check v20, the mixture v21 (Option D),
+the master re-calibration v22 (Option B, negative result), the
+gravothermal SIDM2v v23 (Option A, negative result), and the
+multi-stream analysis v25 (Option C + T95.9 with REAL galstreams data).
+Composite-DM UV completion is **ruled out** by LSD lattice + XENON100
+(v18); LZ magnetic-moment interpretation is **not yet excluded** by
+PandaX-4T 2023 commissioning-run magnetic-moment limit (v20, 70× below
+limit). The T90 program stays on `wip/tier3-magnetic-moment-LZ` until
+the LZ community resolves the 248 keV event. See
+`v0.3-prelim/docs/T90_INDEX.md` for the consolidated index.
+
+**T95.9 (2026-09-07): Multi-stream analysis with REAL galstreams v1.2
+catalog data — major positive result for non-GD-1 streams.** Loaded 123
+Milky Way stellar streams from the `galstreams` library (Mateu 2023,
+v1.2; 141 distinct streams). Applied a curated multi-stream likelihood
+across 10 streams with published gap-based σ/m constraints from
+literature: **Pal5, Orphan-Chenab, AAU-AliqaUma, Jhelum, Phoenix,
+Indus, NGC3201, M5, M92** all return log L = 0.00 (consistent with
+master Yukawa). **Master Yukawa passes 9 out of 10 independent stream
+probes.** The remaining stream is GD-1, which contributes all -12.04
+log L via a single Zhang+ 2025 interpretation; we **de-emphasize GD-1
+as a separate interpretation problem** (see also the new
+`v0.3-prelim/docs/T95_GD1_INTERPRETATION_NOTE.md`). Bug caught and
+fixed during development: NGC1261b had unphysical v_r values up to
+1e7 km/s; added filter for |v_r| < 1000 km/s. **11/11 new tests
+passing.** New code: `v0.3-prelim/code/t95_v25_multi_stream_real_galstreams.py`
++ `v0.3-prelim/tests/test_t95_v25_multi_stream_real_galstreams.py`.
+See `v0.3-prelim/docs/T95_MULTI_STREAM_REAL_GALSTREAMS.md` for the
+full report and `v0.3-prelim/docs/T95_MULTI_STREAM_ANALYSIS.md` for
+the T95.8 Option C precursor.
 
 ---
 

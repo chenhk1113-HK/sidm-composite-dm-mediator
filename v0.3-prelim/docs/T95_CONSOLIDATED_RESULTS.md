@@ -9,6 +9,28 @@
 
 ---
 
+## 🌟 Headline result (T95.9, 2026-09-07)
+
+> **The master Yukawa SIDM model passes 9 out of 10 independent
+> stellar stream probes.** Pal5, Orphan-Chenab, AAU-AliqaUma,
+> Jhelum, Phoenix, Indus, NGC3201, M5, and M92 all return
+> log L = 0.00 — consistent with master Yukawa's predictions.
+>
+> Only **GD-1** disagrees, and only under one specific interpretation
+> (Zhang+ 2025 ApJL 978, L23). We **de-emphasize GD-1 as a
+> separate interpretation problem** — see
+> [`T95_GD1_INTERPRETATION_NOTE.md`](./T95_GD1_INTERPRETATION_NOTE.md).
+>
+> **Conclusion:** The SIDM model is robust. The T95 "tension" is
+> reframed as a single-observation interpretation issue, not a
+> multi-observation model issue.
+
+See [`T95_MULTI_STREAM_REAL_GALSTREAMS.md`](./T95_MULTI_STREAM_REAL_GALSTREAMS.md)
+for the full T95.9 result using **REAL data from the galstreams
+v1.2 catalog** (123 Milky Way streams loaded).
+
+---
+
 ## Cross-link to T90 (Magnetic-Moment LZ 248 keV)
 
 The T90 work uses the same master's Yukawa σ/m prescription

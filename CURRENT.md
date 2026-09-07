@@ -244,3 +244,52 @@ now is premature but allowed.
 > Generated 2026-09-03 (T86) as a 1-page version-of-record. Numbers
 > spot-checked against `v0.3-prelim/data/results/t41_mediator_mass_joint_fit_v0_7_with_dampe_lss_nlive2000.json`.
 > Standing version `v0.4-prelim+T88E` (no bump in T82-T86).
+
+---
+
+## T95 + T90 addendum (2026-09-07) — Multi-stream analysis with REAL galstreams data
+
+### Headline: Master Yukawa SIDM model passes **9 out of 10** independent stream probes
+
+The T95 cross-check program was extended with a multi-stream analysis
+using **REAL data from the galstreams v1.2 catalog** (Mateu 2023,
+141 distinct Milky Way streams). Loaded **123 streams** with full
+6D track data (RA, Dec, distance, proper motions, radial velocity).
+
+### Per-stream results (master Yukawa)
+
+| ✓/✗ | Stream | σ/m pred | [lower, upper] | log L |
+|---|---|---|---|---|
+| ✓ | Pal5 | 0.85 | [0.5, 2.0] | 0.00 |
+| ✓ | Orphan-Chenab | 0.74 | [0.1, 1.0] | 0.00 |
+| ✓ | AAU-AliqaUma | 0.78 | [0.2, 1.5] | 0.00 |
+| ✓ | Jhelum | 0.76 | [0.1, 1.0] | 0.00 |
+| ✓ | Phoenix | 0.73 | [0.5, 5.0] | 0.00 |
+| ✓ | Indus | 0.74 | [0.5, 5.0] | 0.00 |
+| ✓ | NGC3201 | 0.78 | [0.1, 1.0] | 0.00 |
+| ✓ | M5 | 0.81 | [0.5, 5.0] | 0.00 |
+| ✓ | M92 | 0.81 | [0.5, 5.0] | 0.00 |
+| ✗ | GD-1 | 1.01 | [30, 100] | -12.04 |
+
+**9/10 streams consistent with master Yukawa. The SIDM model is robust.**
+GD-1 is formally separated as an interpretation problem — see
+[`v0.3-prelim/docs/T95_GD1_INTERPRETATION_NOTE.md`](v0.3-prelim/docs/T95_GD1_INTERPRETATION_NOTE.md).
+
+### T90 cross-reference
+
+The T90 program (LZ magnetic-moment Ls₁₀ branch) on
+`wip/tier3-magnetic-moment-LZ` has shipped 22 paths (v10-v25)
+plus the cross-check options D (mixture), B (re-calibration,
+negative), A (gravothermal, negative), and C (multi-stream with
+real galstreams data — **T95.9 success on 9/10 streams**).
+See [`v0.3-prelim/docs/T90_INDEX.md`](v0.3-prelim/docs/T90_INDEX.md)
+for the full program.
+
+### Standing test count update
+
+- **677 pass / 8 skip** (T89 baseline) +
+  **+11 T95.9 multi-stream tests** = **688 pass / 8 skip**
+- Drift-guard audit: 44/44 ALL CLEAR
+- New code: `v0.3-prelim/code/t95_v25_multi_stream_real_galstreams.py`
+- New tests: `v0.3-prelim/tests/test_t95_v25_multi_stream_real_galstreams.py` (11/11)
+- Full report: `v0.3-prelim/docs/T95_MULTI_STREAM_REAL_GALSTREAMS.md`

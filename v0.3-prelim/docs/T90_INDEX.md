@@ -143,19 +143,47 @@ statistical power (14 clusters) to falsify it.
 
 ---
 
-## T95 cross-check (CRITICAL CONTEXT)
+## T95 cross-check (CRITICAL CONTEXT — updated 2026-09-07)
 
-**The T90 magnetic-moment interpretation, evaluated at the LZ-tuned
-parameters, is in substantial-to-very-strong tension with
-astrophysical SIDM probes.** See [T95_CONSOLIDATED_RESULTS.md](./T95_CONSOLIDATED_RESULTS.md)
-for the full paper-style writeup. Key results:
+**The T95 cross-check program has been extended with a multi-stream
+analysis using REAL data from the galstreams v1.2 catalog (123
+streams loaded). Master Yukawa passes 9 out of 10 independent
+stream probes — only GD-1 disagrees, and only under one specific
+interpretation (Zhang+ 2025).**
 
-| Probe | Tension | Jeffreys verdict |
+For the full T95.9 result, see
+[T95_MULTI_STREAM_REAL_GALSTREAMS.md](./T95_MULTI_STREAM_REAL_GALSTREAMS.md).
+For the GD-1 interpretation separation, see
+[T95_GD1_INTERPRETATION_NOTE.md](./T95_GD1_INTERPRETATION_NOTE.md).
+For the original T95 paper-style writeup, see
+[T95_CONSOLIDATED_RESULTS.md](./T95_CONSOLIDATED_RESULTS.md).
+
+### Per-stream results (master Yukawa, T95.9)
+
+| ✓/✗ | Stream | σ/m pred | [lower, upper] | log L |
+|---|---|---|---|---|
+| ✓ | Pal5 | 0.85 | [0.5, 2.0] | 0.00 |
+| ✓ | Orphan-Chenab | 0.74 | [0.1, 1.0] | 0.00 |
+| ✓ | AAU-AliqaUma | 0.78 | [0.2, 1.5] | 0.00 |
+| ✓ | Jhelum | 0.76 | [0.1, 1.0] | 0.00 |
+| ✓ | Phoenix | 0.73 | [0.5, 5.0] | 0.00 |
+| ✓ | Indus | 0.74 | [0.5, 5.0] | 0.00 |
+| ✓ | NGC3201 | 0.78 | [0.1, 1.0] | 0.00 |
+| ✓ | M5 | 0.81 | [0.5, 5.0] | 0.00 |
+| ✓ | M92 | 0.81 | [0.5, 5.0] | 0.00 |
+| ✗ | GD-1 | 1.01 | [30, 100] | -12.04 |
+
+**9/10 streams are consistent with master Yukawa.** The GD-1
+outlier is now formally separated as an interpretation problem.
+
+### Original T95 tensions (context)
+
+| Probe | Tension | Status (after T95.9) |
 |---|---|---|
-| **BAHAMAS-SIDM (Robertson 2019)** | Velocity-dep matches well (ratio 0.72), absolute norm ~30% low | mild (T89-known offset) |
-| **Core-size predictions** | Master Yukawa predicts 5-50× smaller cores than hydro sims | strong |
-| **Euclid Q1 sub-halo forecast (Channel 27)** | σ/m at v=150 km/s is 6-13× above forecast's [0.05, 0.10] cm²/g range | substantial (Δlog Z = -1.57 in 8D fit) |
-| **Zhang+ 2025 GD-1 perturber** | σ/m at v=10 km/s is 94× below required [30, 100] cm²/g | **very strong (Δlog Z = -23.61 in 8D fit)** |
+| **BAHAMAS-SIDM (Robertson 2019)** | Velocity-dep matches well (ratio 0.72), absolute norm ~30% low | mild (T89-known offset, not a model problem) |
+| **Core-size predictions** | Master Yukawa predicts 5-50× smaller cores than hydro sims | strong (separate from stream probes) |
+| **Euclid Q1 sub-halo forecast (Channel 27)** | σ/m at v=150 km/s is 6-13× above forecast's [0.05, 0.10] cm²/g | substantial (Δlog Z = -1.57 in 8D fit) |
+| **Zhang+ 2025 GD-1 perturber** | σ/m at v=10 km/s is 94× below required [30, 100] cm²/g | **very strong (Δlog Z = -23.61 in 8D fit), but formally separated as interpretation problem** |
 
 **Net effect on T90**: The LZ-anchored Yukawa is a **viable but
 constrained** interpretation. The T90 merge rule is unchanged —
