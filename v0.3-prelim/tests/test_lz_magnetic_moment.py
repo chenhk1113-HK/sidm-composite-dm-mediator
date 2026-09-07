@@ -227,7 +227,12 @@ def test_t90_constants_defined():
     )
     assert LZ_EXPOSURE_TONNE_YEARS == 2.84
     assert LZ_248KEV_N_OBS == 1
-    assert MAGNETIC_MOMENT_LZ_TUNED_MU_X_MU_N == 3e-8
+    # T90.1 Phase 8 corrected tuned value: was 3e-8 before the unit-fix
+    # commit (a4e80e3); the pre-fix code passed 3e-8 directly to WIMpy
+    # which interprets mu_x in mu_B, effectively using 5.5e-6 mu_N. The
+    # corrected value (post-fix) that gives N_pred = 1 at m_chi = 1000
+    # GeV is 6.10e-8 mu_N (bisected in t41_v08_phase8_d10_mapping.py).
+    assert 6.0e-8 < MAGNETIC_MOMENT_LZ_TUNED_MU_X_MU_N < 6.2e-8
     assert MAGNETIC_MOMENT_LZ_TUNED_M_CHI == 1000.0
     # MU_N_TO_MU_B must equal m_p/m_e (CODATA value ~1836.15)
     assert 1836.0 < MU_N_TO_MU_B < 1837.0

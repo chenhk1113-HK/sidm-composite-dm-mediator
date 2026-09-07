@@ -10,9 +10,18 @@
 ## 🎯 Headline finding (TL;DR)
 
 **Yes — the project's Benchmark A model can reproduce the LZ 248 keV
-event** by adding a magnetic-moment Ls₁₀ operator at μ_x ≈ 3×10⁻⁸ μ_N
-(= 1.6×10⁻¹¹ μ_B). The hybrid interpretation predicts ~1 event at
-248 keV in 2.84 tonne-years, matching LZ's observed single event.
+event** by adding a magnetic-moment Ls₁₀ operator at μ_x ≈ **6.10×10⁻⁸ μ_N**
+(= 3.32×10⁻¹¹ μ_B) — see T90.1 Phase 8 corrected calibration below.
+The hybrid interpretation predicts ~1 event at 248 keV in
+2.84 tonne-years, matching LZ's observed single event.
+
+> ⚠️ **STALE-DOC-N CORRECTION (T90.1 Phase 8):** The original
+> headline said "μ_x ≈ 3×10⁻⁸ μ_N" — this was the pre unit-conversion-fix
+> (commit a4e80e3) value, when the code was passing "3e-8" as 3e-8 μ_B
+> ≈ 5.5×10⁻⁶ μ_N. After the fix (μ_N → μ_B correctly divided by
+> 1836.15), the correct tuned value is μ_x ≈ 6.10×10⁻⁸ μ_N
+> (~2× the original doc claim). See Phase 8 below and
+> `t41_v08_phase8_d10_mapping.py` for the full reproduction.
 
 **Three big caveats:**
 
@@ -324,6 +333,122 @@ two portals see different DM-SM vertices and therefore produce
 independent recoil channels. Adding Channel 26 does not relax
 the constraint on ε, and adding ε does not produce magnetic-moment
 events. They are **independent portals**.
+
+---
+
+## Phase 8 — Precise d_10 ↔ μ_x mapping and corrected calibration (T90.1)
+
+**This section closes the TODO flagged in T90 plan §UV-matching
+roadmap:** "precise d_10 → μ_x mapping using WIMpy_NREFT's Ls_10
+spectrum and the LZ data release numerical d_10 values."
+
+### Why Phase 8 was needed
+
+Phase 7 (T90.1) gave an **order-of-magnitude** estimate of the
+branch's bound vs LZ 2026 90% CL — using a back-of-envelope formula
+μ_χ [μ_B] ≈ d_10 × (m_p/m_χ) × (m_χ/m_v)² which ignored that the
+Catena L_10 covariant reduction (Di Mauro Eq. 128) has explicit
+q²(E_R)/m_M² dependence on the O_4 coefficient. The order-of-magnitude
+estimate gave "branch is ~28,000× below LZ 2026 90% CL upper limit",
+which was correct in sign but ~4× too large in magnitude.
+
+Phase 8 implements the precise mapping by:
+
+1. Computing dR/dE at (m_χ, E_R) using the **Catena L_10 covariant
+   reduction** (Di Mauro Eq. 128): c_p[3] = c_n[3] = 4 d_10 q²/m_M²
+   (O_4), c_p[5] = c_n[5] = -4 d_10 (O_6), via WIMpy_NREFT.
+2. Computing dR/dE at the same (m_χ, E_R) using WIMpy's
+   dRdE_magnetic shortcut with various μ_x [μ_B].
+3. **Bisecting for the μ_x [μ_B] that matches the L_10 rate** at
+   each kinematic point.
+4. Mapping μ_x [μ_B] → μ_x [μ_N] via division by 1836.15.
+
+The ratio μ_x [μ_N] / d_10 at the relevant kinematic point is the
+**precise conversion factor** between LZ's published bound and the
+branch's coupling convention.
+
+### Empirical d_10 ↔ μ_x mapping at (m_χ, E_R = 248 keV)
+
+| m_χ (GeV) | d_10 | equivalent μ_x [μ_B] | equivalent μ_x [μ_N] |
+|---|---|---|---|
+| 770 | 0.1 | 2.435×10⁻⁷ | 4.47×10⁻⁴ |
+| 1000 | 0.1 | 2.488×10⁻⁷ | 4.57×10⁻⁴ |
+| 1500 | 0.1 | 2.548×10⁻⁷ | 4.68×10⁻⁴ |
+
+**Reference point for the LZ 2026 90% CL bound** (m_χ = 1000 GeV,
+d_10 = 0.1):
+- d_10 = 0.1 ↔ **μ_x ≤ 4.57×10⁻⁴ μ_N** (LZ 2026 90% CL upper limit)
+
+This is the precise value replacing the order-of-magnitude estimate
+of 0.84 μ_N in Phase 7. The precise value is ~1800× **lower** than
+the order-of-magnitude estimate — because the q²(E_R)/m_M²
+suppression at E_R = 248 keV is much stronger than the back-of-envelope
+formula assumed.
+
+### Stale calibration bug (Phase 0 → Phase 8)
+
+The T90 plan §Phase 0 doc (commit d637f81) listed:
+- μ_x = 3×10⁻⁸ μ_N → N_pred = 1.89 (m_χ = 1000 GeV)
+- μ_x = 3×10⁻⁸ μ_N → N_pred = 2.33 (m_χ = 770 GeV)
+
+These numbers were computed BEFORE the unit-conversion fix (commit
+a4e80e3, 2026-09-06 23:20). The pre-fix code was passing "3e-8"
+directly to WIMpy, which interprets μ_x in **μ_B** (per WIMpy's
+docstring: "Dark Matter magnetic dipole (in units of the Bohr
+Magneton)"). So "3e-8" was being read as 3×10⁻⁸ μ_B = 5.5×10⁻⁶ μ_N
+(NOT 3×10⁻⁸ μ_N as the doc claimed). The post-fix code correctly
+divides by 1836.15.
+
+**Phase 8 corrected calibration** (post-fix):
+- μ_x = 3×10⁻⁸ μ_N → N_pred = 0.30 (m_χ = 770 GeV)
+- μ_x = 3×10⁻⁸ μ_N → N_pred = 0.24 (m_χ = 1000 GeV)
+- **Bisecting for N_pred = 1**: μ_x ≈ 5.48×10⁻⁸ μ_N (m_χ = 770 GeV)
+- **Bisecting for N_pred = 1**: μ_x ≈ 6.10×10⁻⁸ μ_N (m_χ = 1000 GeV)
+
+The corrected tuned value is ~2× the original doc claim. The
+production code constant `MAGNETIC_MOMENT_LZ_TUNED_MU_X_MU_N` was
+updated from 3.0e-8 to 6.10e-8 in this commit. The doc table in
+`T90_MAGNETIC_MOMENT_PLAN.md` §Phase 0 was updated with a STALE-DOC-N
+warning block.
+
+### Updated branch verdict (Phase 8 corrected)
+
+| Quantity | Value | Below LZ 2026 90% CL? |
+|---|---|---|
+| Branch tuned μ_x (corrected, N_pred=1) | 6.10×10⁻⁸ μ_N | **7,488× below** ✅ |
+| Branch tuned μ_x (doc claim, stale) | 3.00×10⁻⁸ μ_N | **15,228× below** ✅ |
+| 7D posterior median μ_x (T90.1 Phase C) | 3.39×10⁻¹⁰ μ_N | **1,347,641× below** ✅ |
+
+**Branch verdict (Phase 8):** Branch is **consistent with LZ 2026
+observation** (sits at lower-limit end of LZ's 90% CL interval, where
+the lower limit is non-zero due to the observed 1 event). Branch is
+**NOT excluded** by any published bound, and the precise "below
+limit" factor is 7,488× at the corrected tuned coupling, or ~10⁶× at
+the 7D posterior median.
+
+### Files
+
+- `v0.3-prelim/code/t41_v08_phase8_d10_mapping.py` — Phase 8
+  reproduction script
+- `v0.3-prelim/outputs/t90/t90_phase8_d10_mapping.json` — numerical
+  results (mapping table, corrected tuned values, branch verdict)
+
+### Honest caveats
+
+1. The d_10 = 0.1 at m_χ = 1000 GeV is **read from Fig. 6** (which
+   spans 10⁻⁴ to 10 on the y-axis with curves in the 10⁻² to 10⁻¹
+   region at the relevant masses). The LZ data release (linked from
+   the preprint) has the exact numerical values; this branch did
+   not download them.
+2. The mapping depends on which NREFT basis WIMpy uses (Fitzpatrick+
+   1203.3542 / Catena 1907.02910). Different bases differ by
+   factors of 2-4 in normalization. The mapping above uses WIMpy's
+   specific basis, which matches the LZ paper's basis (per the
+   LZ preprint's reference to WimPyDD).
+3. The Phase 8 mapping uses Xe129 (spin-1/2 isotope, dominates
+   the magnetic-moment response). The full xenon integration in the
+   branch's N_pred formula uses all 7 natural xenon isotopes
+   weighted by abundance.
 
 ---
 

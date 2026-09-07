@@ -71,11 +71,24 @@ operator as a parallel contribution to direct detection.
 ## Phase 0 smoke-test results — KEY FINDING
 
 **Bisection result for μ_x that reproduces LZ event rate:**
+(CORRECTED in T90.1 Phase 8 — see v0.3-prelim/code/t41_v08_phase8_d10_mapping.py)
 
-| m_χ (GeV) | μ_x (μ_N) | Predicted N_events (2.84 tonne-years at 248 keV) |
+| m_χ (GeV) | μ_x (μ_N, corrected) | Predicted N_events (2.84 tonne-years at 248 keV) |
 |---|---|---|
-| 1000 (LZ best-fit) | 3 × 10⁻⁸ | **1.89** |
-| 770 (project v0.8 MAP) | 3 × 10⁻⁸ | **2.33** |
+| 1000 (LZ best-fit) | 6.10 × 10⁻⁸ | **1.00** |
+| 770 (project v0.8 MAP) | 5.48 × 10⁻⁸ | **1.00** |
+
+> ⚠️ **STALE-DOC-N CORRECTION (T90.1 Phase 8):** The original Phase 0
+> doc table (pre-Phase 8) listed μ_x = 3×10⁻⁸ μ_N with N_pred = 1.89
+> at m_χ = 1000 GeV and N_pred = 2.33 at m_χ = 770 GeV. These numbers
+> are STALE — they were computed BEFORE the unit-conversion fix
+> (commit a4e80e3, 2026-09-06 23:20). The pre-fix code was passing
+> "3e-8" directly to WIMpy as 3×10⁻⁸ μ_B ≈ 5.5×10⁻⁶ μ_N (NOT 3×10⁻⁸ μ_N
+> as the doc claimed). Post-fix: μ_x = 3×10⁻⁸ μ_N gives N_pred ≈
+> 0.24 at m_χ = 1000 GeV. Bisecting for N_pred = 1 gives the
+> corrected values above. The doc table was not updated after the
+> fix; Phase 8 fixes it. See `t41_v08_phase8_d10_mapping.py` for
+> the full reproduction.
 | Observed | — | **1** |
 
 **Interpretation:** A magnetic-dipole coupling of μ_x ~ 3 × 10⁻⁸ μ_N

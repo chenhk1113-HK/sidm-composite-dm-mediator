@@ -1645,11 +1645,16 @@ LZ_248KEV_N_OBS_ERROR = 1.0  # Poisson sqrt(N_obs)
 # and converts internally via MU_N_TO_MU_B.
 MU_N_TO_MU_B = 1836.15267  # dimensionless conversion factor
 
-MAGNETIC_MOMENT_LZ_TUNED_MU_X_MU_N = 3.0e-8  # mu_N units (CALLER convention)
-# Equivalent in mu_B: 3.0e-8 mu_N * (1/1836.15267) = 1.634e-11 mu_B
-# At this coupling, magnetic-moment operator produces ~1 event in
+MAGNETIC_MOMENT_LZ_TUNED_MU_X_MU_N = 6.10e-8  # mu_N units (CALLER convention)
+# T90.1 Phase 8 correction: Phase 0 smoke test claimed this was 3e-8 mu_N
+# giving N_pred=1.89, but that was BEFORE the unit-conversion fix (a4e80e3).
+# The pre-fix code was treating "3e-8" as 3e-8 mu_B = 5.5e-6 mu_N, NOT 3e-8 mu_N.
+# Post-fix: μ_x = 3e-8 mu_N gives N_pred ≈ 0.24. Bisecting for N_pred=1 gives
+# μ_x ≈ 6.10e-8 mu_N (m_chi=1000) and 5.48e-8 mu_N (m_chi=770). See
+# t41_v08_phase8_d10_mapping.py for the corrected calibration.
+# Equivalent in mu_B: 6.10e-8 mu_N * (1/1836.15267) = 3.32e-11 mu_B
+# At this coupling, the magnetic-moment operator produces ~1 event in
 # 2.84 tonne-years at m_chi ~ 770-1000 GeV, matching LZ observation.
-# (Phase 1 calibration, 2026-09-06: bisected to give log L = -1)
 MAGNETIC_MOMENT_LZ_TUNED_M_CHI = 1000.0  # GeV (LZ paper best-fit)
 
 # Recoil energy integration bounds (keV)
