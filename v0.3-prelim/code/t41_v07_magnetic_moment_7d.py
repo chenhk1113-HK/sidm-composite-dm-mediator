@@ -188,18 +188,19 @@ def main():
         json.dump(summary, f, indent=2)
     print(f"Wrote: {out_json}")
 
-    # Save posterior samples
+    # Save posterior samples (NumPy .npz — no h5py dependency)
     try:
-        import h5py
-        out_h5 = out_dir / "t41_v07_7d_posterior.h5"
-        with h5py.File(out_h5, "w") as f:
-            f.create_dataset("samples", data=samples_equal)
-            f.create_dataset("log_weights", data=res.logwt)
-            f.create_dataset("log_evidence_per_iter", data=res.logz)
-            f.attrs["labels"] = labels
-        print(f"Wrote: {out_h5}")
-    except ImportError:
-        print("h5py not available; skipping posterior .h5 save.")
+        out_npz = out_dir / "t41_v07_7d_posterior.npz"
+        np.savez(
+            out_npz,
+            samples=samples_equal,
+            log_weights=res.logwt,
+            log_evidence_per_iter=res.logz,
+            labels=np.array(labels, dtype=object),
+        )
+        print(f"Wrote: {out_npz}")
+    except Exception as e:
+        print(f"Posterior save failed: {e}")
 
     return summary
 
