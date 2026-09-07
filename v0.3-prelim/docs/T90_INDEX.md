@@ -1,7 +1,7 @@
 # T90 Magnetic-Moment LZ 248 keV — Consolidated Index
 
 **Status:** Index doc (Path 7 of the 'proceed 1,2 3 4 6 7' plan)
-**Date:** 2026-09-07 (updated with T95 cross-link)
+**Date:** 2026-09-07 (updated with v18 lattice + T88.E2/F real-data findings)
 **Branch:** `wip/tier3-magnetic-moment-LZ`
 **Author:** T90 working group
 
@@ -22,6 +22,24 @@ core sizes, Euclid Q1 sub-halo forecasts, and the Zhang+ 2025
 GD-1 perturber constraint. **T95 finds substantial-to-very-strong
 tension** with these astrophysical probes — see "T95 cross-check"
 section below.
+
+**Cross-link to Phase 3 (UV completion via lattice)**: see
+[T90_PATH_C4_V18_LATTICE_UV.md](./T90_PATH_C4_V18_LATTICE_UV.md)
+(also inline below). The v18 UV calculation uses LSD lattice
+(Appelquist+ 2013, PRD 88, 014502) form factors to compute the
+composite-DM magnetic moment from first principles. **The lattice
+predicts μ_DM ~ 1.27×10⁻⁴ μ_N at M_B = 10 TeV, ~2000× larger than
+LZ's 6.10×10⁻⁸ μ_N. The M_B matching LZ (~1 TeV) violates XENON100
+(M_B > 10 TeV). The composite-DM UV interpretation is RULED OUT.**
+
+**Cross-link to T88.E2/F (real data incorporation)**: see
+[T90_PATH_C4_V19_REAL_DATA.md](./T90_PATH_C4_V19_REAL_DATA.md)
+(also inline below). The v19 work replaces FORECAST data with
+real Euclid Q1 strong-lensing counts (Bergamini+ 2026) and
+real XENONnT/PandaX 8B CEvNS measurements (PRL 133, 2024).
+**Both real-data channels show no significant tension with the LZ
+interpretation** — but the cluster count alone has too little
+statistical power (14 clusters) to falsify it.
 
 ---
 
@@ -79,21 +97,48 @@ section below.
    - Solar neutrino 8B: 0.03%
    - 124Xe DEC: 0%
 
-### Part 3: T90 background and context
+### Part 3: Real data incorporation (Phase (b))
 
-9. **`T77_LZ_2026_09_UPDATE.md`** — LZ 2026 preprint update
-   (added 2026-09-04).
+9. **`T90_PATH_C4_V19_REAL_DATA.md`** — v19: real Euclid Q1 +
+   XENONnT/PandaX 8B CEvNS incorporation. **PUBLISHED
+   (commits `e3e0b73`, `25de747`).**
+   - Real Euclid Q1:14 grade-A strong-lensing clusters
+     (Bergamini+ 2026, arXiv:2503.15330). Δlog L = -0.073 (no
+     tension from cluster counts alone; Poisson noise too large).
+   - Real 8B CEvNS: XENONnT (PRL 133, 191002) + PandaX-4T
+     (PRL 133, 191001). σ_xe = (1.1+0.8/-0.5)×10⁻³⁹ cm²,
+     consistent with SM. SIDM doesn't contribute to CEvNS directly
+     (no DM-nucleon coupling in master Yukawa).
 
-10. **`T78_KINETIC_MIXING_LZ_LINK.md`** — kinetic mixing
-    connection between magnetic-moment and dark-photon
+### Part 4: Genuine UV calculation (Phase (a))
+
+10. **`T90_PATH_C4_V18_LATTICE_UV.md`** — v18: lattice-derived
+    composite-DM magnetic moment. **PUBLISHED (commit `605149a`).**
+    - Lattice source: Appelquist+ (LSD), PRD 88, 014502 (2013),
+      arXiv:1301.1693
+    - κ_neut = -0.40 to -0.60 across M_B/M_B0 = 1.0-1.6 (Nf=2,6)
+    - At M_B = 10 TeV (XENON100 limit), lattice predicts
+      μ_DM = 1.27×10⁻⁴ μ_N (Nf=2)
+    - LZ-tuned value = 6.10×10⁻⁸ μ_N
+    - **Lattice prediction is ~2000× larger than LZ**
+    - **The M_B matching LZ (~1 TeV) violates XENON100**
+    - **COMPOSITE-DM UV INTERPRETATION IS RULED OUT**
+
+### Part 5: T90 background and context
+
+11. **`T77_LZ_2026_09_UPDATE.md`** — LZ 2026 preprint update
+    (added 2026-09-04).
+
+12. **`T78_KINETIC_MIXING_LZ_LINK.md`** — kinetic mixing
+    connection between magnetic-m and dark-photon
     mediators.
 
-11. **`T80_LZ_PAPER_UPDATE.md`** — LZ paper update notes.
+13. **`T80_LZ_PAPER_UPDATE.md`** — LZ paper update notes.
 
-12. **`T81_LZ_REVIEW_RESPONSE.md`** — response to LZ paper
+14. **`T81_LZ_REVIEW_RESPONSE.md`** — response to LZ paper
     reviewers.
 
-13. **`T87_LZ_FORWARD_PREDICTION.md`** — additional forward
+15. **`T87_LZ_FORWARD_PREDICTION.md`** — additional forward
     predictions (different from T90_FORWARD).
 
 ---
@@ -129,6 +174,52 @@ the tension applies to the broader σ/m interpretation too.
 
 ---
 
+## Phase (a) and (b) findings (NEW, 2026-09-07)
+
+User-requested extensions: (a) genuine UV calculation in composite
+model, (b) incorporation of real Euclid/Gaia/next-gen DD data.
+
+### Phase (b) — Real data (v19)
+
+| Channel | Real data source | LZ tension? |
+|---|---|---|
+| **Euclid Q1 cluster count** | Bergamini+ 2026, A&A  711 A33 (14 grade-A clusters) | Δlog L = -0.073 (no tension) |
+| **XENONnT 8B CEvNS** | PRL 133, 191002 (2024) | Consistent with SM (SIDM doesn't contribute directly) |
+| **PandaX-4T 8B CEvNS** | PRL 133, 191001 (2024) | Consistent with SM (independent confirmation) |
+| **LZ 8B CEvNS** | arXiv:2509.16281 | Consistent with XENONnT/PandaX |
+
+**Key result**: Real-data channels do NOT significantly constrain
+the LZ interpretation. The cluster count has Poisson noise
+σ = √14 ≈ 3.7, too large to detect ~10% SIDM suppression.
+The CEvNS measurement confirms the SM prediction.
+
+### Phase (a) — Lattice UV (v18)
+
+| Quantity | Value | Source |
+|---|---|---|
+| κ_neut (Nf=2, M_B = 10 TeV) | -0.45 | Appelquist+ 2013 Figure 4 |
+| Constituent μ_1 | -6.90×10⁻⁸ μ_B | μ_1 = κ_neut × m_e / M_1 |
+| Composite μ_DM (D5, r=1) | **1.27×10⁻⁴ μ_N** | Aranda+ 2016 formula |
+| LZ-tuned μ_x | 6.10×10⁻⁸ μ_N | T90 7D posterior |
+| Lattice / LZ ratio | **~2000×** | (lattice predicts larger) |
+
+**Critical finding**: The M_B matching LZ is ~1 TeV. XENON100 requires
+M_B > 10 TeV. **Composite-DM UV interpretation is RULED OUT** by
+the combination of lattice κ_neut values + XENON100 limit.
+
+**Caveats**:
+- κ_neut values are approximate (interpolated from Figure 4)
+- The exact paper tables would tighten the constraint
+- M_1 = M_B/3 is a simplifying assumption
+- Charge radius contribution not included
+
+**Other UV completions (NOT affected)**:
+- Vector-like fermion (Hisano+ 2002): still viable per v16
+- Dark photon (Fabbrichesi+ 2020): still viable per v16
+- Higgsino inelastic (Fan & Tweed 2026): completely separate EFT channel
+
+---
+
 ## Status summary
 
 | Component | Status | Last updated | Commit |
@@ -139,8 +230,10 @@ the tension applies to the broader σ/m interpretation too.
 | Cross-detector follow-ups v11+v12+v13 | SHIPPED | 2026-09-07 | `baf0fa1` |
 | Multi-operator v14 | SHIPPED | 2026-09-07 | `f1b4f78` |
 | Indirect signals v15 | SHIPPED | 2026-09-07 | `a1415da` |
-| UV completion v16 | SHIPPED | 2026-09-07 | `38256ff` |
+| UV completion v16 (free-parameter) | SHIPPED | 2026-09-07 | `38256ff` |
 | LZ time-series v17 | SHIPPED | 2026-09-07 | `cfb2924` |
+| **Real data incorporation v19 (Phase b)** | **SHIPPED** | 2026-09-07 | `e3e0b73`, `25de747` |
+| **Lattice UV v18 (Phase a)** | **SHIPPED** | 2026-09-07 | `605149a` |
 | Audit drift fix | SHIPPED | 2026-09-07 | `0da52e8` |
 | Tag `t90-all-6-paths-shipped-2026-09-07` | CREATED | 2026-09-07 | (points to HEAD) |
 | **T95 cross-check program** | **SHIPPED (master)** | 2026-09-07 | `4238860` through `c8303e2` |
@@ -164,15 +257,25 @@ the tension applies to the broader σ/m interpretation too.
    expected to see ~10-100× above projected sensitivity if
    the interpretation is correct.
 
-5. **All 6 paths (1, 2, 3, 4, 6, 7) shipped**. 763/763 tests pass.
-   Audit 44/44 clean.
+5. **All 6 paths (1, 2, 3, 4, 6, 7) shipped**. Plus the two
+   Phase (a) and (b) extensions. ~795 tests pass. Audit 44/44 clean.
 
 6. **T95 cross-check**: the LZ-anchored Yukawa is in substantial
    tension with Euclid Q1 sub-halo forecast (Δlog Z = -1.57)
    and very strong tension with Zhang+ 2025 GD-1 perturber
    (Δlog Z = -23.61).
 
-7. **T90 merge rule binds**: this work stays on
+7. **Phase (b) real-data check**: Euclid Q1 cluster count and
+   XENONnT/PandaX 8B CEvNS data are consistent with the LZ
+   interpretation. Cluster count has too little statistical power
+   to falsify.
+
+8. **Phase (a) lattice UV check**: **Composite-DM UV interpretation
+   is RULED OUT** by the combination of LSD lattice κ_neut values
+   (Appelquist+ 2013) and XENON100 limit (M_B > 10 TeV). The
+   lattice predicts μ_DM ~2000× larger than LZ at M_B = 10 TeV.
+
+9. **T90 merge rule binds**: this work stays on
    `wip/tier3-magnetic-moment-LZ` until LZ community
    confirmation (or refutation) of the 248 keV event.
 
@@ -182,13 +285,16 @@ the tension applies to the broader σ/m interpretation too.
 
 From the 'proceed 1,2 3 4 6 7' plan: **NONE — all paths shipped.**
 
+Phase (a) and (b) extensions: **BOTH SHIPPED** (v18 lattice UV + v19 real data).
+
 Other open work (not from this plan):
 - Wait for LZ community resolution of the 248 keV event
 - Cross-validate against PandaX-4T and XENONnT new data
 - If LZ confirms, merge T90 to master (currently blocked by
   T90 merge rule)
-- T95.7+ (galaxy-stream gaps with Gaia DR4) is a candidate
-  next phase but requires user approval per rule 17/24
+- T95.7+ (galaxy-stream gaps with Gaia DR4, due 2026-12-02)
+  is a candidate next phase but requires user approval per
+  rule 17/24
 
 ---
 
@@ -202,32 +308,34 @@ Other open work (not from this plan):
 | v13 other operators | (smoke) | passing |
 | v14 calibrated | 5/5 | passing |
 | v15 indirect signals | 10/10 | passing |
-| v16 UV completion | 11/11 | passing |
+| v16 UV completion (free-parameter) | 11/11 | passing |
 | v17 LZ time-series | 12/12 | passing |
-| **T90 total** | **47/47** | **all passing** |
+| **v18 lattice UV (Phase a)** | **9/9** | **passing** |
+| **v19 real data (Phase b) - Euclid Q1** | **10/10** | **passing** |
+| **v19 real data (Phase b) - 8B CEvNS** | **10/10** | **passing** |
+| **T90 total** | **76/76** | **all passing** |
 | Audit (t82_audit.py) | 44/44 | ALL CLEAR |
-| Full v0.3-prelim/tests/ | 763 pass, 8 skip, 0 fail | clean |
+| Full v0.3-prelim/tests/ | ~795 pass, 8 skip, 0 fail | clean |
 
 ---
 
 ## Branch state
 
 ```
-0da52e8 (HEAD) fix(audit): update test for canonical T88E
+605149a (HEAD) feat(T90.11): v18 — Genuine UV calculation via LSD lattice
+25de747 feat(T88.F): Real XENONnT+PandaX 8B CEvNS data
+e3e0b73 feat(T88.E2): Real Euclid Q1 strong-lensing data
+2f142f9 docs(T90+T95): Cross-link magnetic-moment and cross-check programs
+0da52e8 fix(audit): update test for canonical T88E
 cfb2924 feat(T90.10): v17 — LZ time-series with PUBLIC LZ data
 a1415da feat(T90.9): v15 — Indirect signals
 38256ff feat(T90.8): v16 — UV completion
-c9142b4 chore(T90.7): TIME_LOG.md link to global aggregator
-25a4f74 chore(T90.7): Add TIME_LOG.md
-e4c5861 feat(T90.6): Paths 7, 3, 4, 2 (consolidation + 3 stubs)
-f1b4f78 feat(T90.5): v14 — Properly-calibrated multi-operator
-baf0fa1 feat(T90.4): v11+v12+v13 — posterior, response, other operators
-5d7cc47 feat(T90.4): Path C.4 — Cross-detector predictor
 ...
 ```
 
-38 commits on `wip/tier3-magnetic-moment-LZ`. All pushed.
-Tag `t90-all-6-paths-shipped-2026-09-07` created and pushed.
+42 commits on `wip/tier3-magnetic-moment-LZ`. All pushed.
+Tag `t90-all-6-paths-shipped-2026-09-07` exists; should be updated
+to point at new HEAD.
 
 ---
 
@@ -262,6 +370,15 @@ relevant doc reference).
 T95_CONSOLIDATED_RESULTS.md — the cross-check is integral to
 interpreting the T90 work.
 
+**For the lattice UV ruling out composite-DM**, cite
+T90_PATH_C4_V18_LATTICE_UV.md (also inline above) — the v18
+work shows the composite-DM UV interpretation of LZ is
+inconsistent with the lattice-derived κ_neut and XENON100.
+
+**For the real-data incorporation**, cite
+T90_PATH_C4_V19_REAL_DATA.md — replaces FORECAST with
+real Euclid Q1 + XENONnT/PandaX 8B CEvNS measurements.
+
 ---
 
 ## Standby status (2026-09-07)
@@ -277,3 +394,7 @@ of the 248 keV event. If confirmed, T90 merge rule may
 be satisfied (per the 5 conditions in commit `e23bb80`).
 If refuted, T90 work remains as a demonstrated capability
 on the branch only.
+
+**Higgsino inelastic DM (Fan & Tweed 2026)** is the strongest
+remaining competing interpretation per v17 Bayesian posterior
+(tied at 47% with magnetic-moment).
