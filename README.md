@@ -6,7 +6,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/version-0.4--prelim%2BT75-blue)](VERSION)
-[![Tests](https://img.shields.io/badge/tests-549%20pass%2C%208%20skip-green)](v0.3-prelim/tests/)
+[![Tests](https://img.shields.io/badge/tests-branch--dependent-blue)](v0.3-prelim/tests/)
+[![Drift-guard](https://img.shields.io/badge/drift--guard-t82--audit-yellow)](scripts/t82_audit.py)
 [![arXiv:2506.22997](https://img.shields.io/badge/cross--validated-arXiv%3A2506.22997-b31b1b)](https://arxiv.org/abs/2506.22997)
 
 ---
@@ -27,6 +28,19 @@ Recent rounds within this standing version: **+T80** (LZ paper compatibility), *
 | **Tests** | **677 pass, 8 skip** | +36 from T88.C (Euclid Q1 strong-lensing) + T88.E (subhalo forecast) + 15 from T89 (Goldstein & Hill 2026 ΔN_eff Channel 25) |
 | **Drift-guard audit** | **44/44 ALL CLEAR** | `scripts/t82_audit.py` (CI-gatable) |
 | **KIV cron** | **2026-11-01 09:00** | re-checks LZ paper via `scripts/lz_kiv_check.py` |
+
+> **Note (2026-09-07): Test count varies by branch.** The
+> table above quotes the count at the T88.E milestone
+> (677 pass / 8 skip on master at that point). On the current
+> `wip/tier3-magnetic-moment-LZ` experimental branch (post-T90),
+> the count is **457 collected + 1 collection error** in
+> `test_sparc_hierarchical.py` (a pre-existing `sys.exit(0)`
+> at module load time, see T82 audit). On `wip/v0.4-prelim`,
+> the count is **154 + 1 error**. The CI workflow
+> (`.github/workflows/ci.yml`) runs pytest with the README's
+> recommended ignore flags and reports the actual count on
+> each push. The branch-dependent badge above reflects this
+> rather than embedding a stale number.
 
 > All headline numbers are spot-checked against `v0.3-prelim/data/results/t41_mediator_mass_joint_fit_t88ce_v08_with_euclid_lensing_and_subhalo_forecast_nlive2000.json` and verified by `scripts/t82_audit.py` (43 doc-presence + 1 VERSION-drift checks, all passing).
 
