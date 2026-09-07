@@ -200,8 +200,12 @@ compare posterior to v0.8.
 1. **σ/m_0 is unchanged** at 0.0599 cm²/g — the magnetic-moment
    channel does NOT disturb the headline astrophysical result
 2. **Δlog Z = -1.5** — the data prefer μ_x = 0 (no magnetic-moment)
-   over μ_x = 3×10⁻⁸ μ_N by ~1.5 log units (Jeffreys scale: barely
-   worth mentioning; this is a neutral result, not a strong rejection)
+   over μ_x = 3×10⁻⁸ μ_N by ~1.5 log units
+   (Jeffreys scale footnote: −1.5 sits on the boundary between
+   "not worth more than a bare mention" (|Δlog Z| < 1) and
+   "anecdotal evidence" (|Δlog Z| ∈ [1, 2]). Per Kass & Raftery
+   1995 (JASA 90, 773), strong evidence starts at |Δlog Z| > 5.
+   This is therefore a **neutral result**, not a rejection.)
 3. **MAP shifts toward higher-rate region**: m_chi drops from
    478→421 GeV (lower m_chi → lower recoil threshold → higher
    magnetic-moment rate at given μ_x)
@@ -266,6 +270,79 @@ Channel 26.
 - ❌ Does NOT change v0.8 standing posterior on master
 - ❌ Does NOT modify drift-guard audit script (branch is experimental)
 - ❌ Does NOT add Channel 26 to master CHANNEL_STATUS (only on this branch)
+
+## Open issues + UV-matching roadmap
+
+(T90.1 additions — addresses Reviewer 1 caveats C1–C4.)
+
+### Open issues on this branch
+
+| ID | Issue | Status | Resolution path |
+|---|---|---|---|
+| OI-1 | μ_x is **fixed** at 3×10⁻⁸ μ_N, not a free fit parameter | acknowledged | Float μ_x as 8th dimension; re-run dynesty; see §"Phase 5 — free μ_x" below |
+| OI-2 | Likelihood is total-event-count Poisson, not energy-binned | acknowledged | Replace `loglike_lz_magnetic_moment` with binned version using LZ published binned spectra; see §"Phase 6 — binned likelihood" below |
+| OI-3 | No UV completion / composite-model derivation of μ_x | future work | See roadmap below |
+| OI-4 | Magnetic-moment is decoupled from kinetic-mixing portal (ε ~ 10⁻³⁷) — physically sensible but undocumented | documented | Callout added in §"Decoupling from kinetic mixing" of T90_FORWARD_PREDICTION |
+
+### UV-matching roadmap (OI-3)
+
+The branch currently treats μ_x as a free knob (a standard NREFT practice). To
+turn this into a microphysical prediction, the project's composite-DM
+Lagrangian (see `v0.3-prelim/docs/DARK_SECTOR_LAGRANGIAN.md`) needs to be
+matched onto the magnetic-dipole operator at the confinement scale.
+
+**Step-by-step plan (NOT yet executed on this branch):**
+
+1. **Define the dark-sector gauge theory.** The project already specifies
+   a confined SU(N_dark) sector with charged dark fermions. Identify
+   which constituents carry the dark U(1) charge that produces the
+   magnetic moment after confinement.
+
+2. **Compute the bound-state form factor.** Following Aranda, Barajas &
+   Cembranos (JCAP 03 (2016) 034, "Magnetic dipole moments for composite
+   dark matter"), the magnetic moment of a composite DM particle scales as
+
+   \[
+   \mu_\chi \sim \frac{e_d \, Q_d}{m_{\text{constituent}}} \cdot f(R\Lambda_{\rm dark})
+   \]
+
+   where R ~ 1/Λ_dark is the bound-state radius, Q_d is the constituent
+   dark charge, and f is a form-factor function. Plug in the project's
+   values (Λ_dark ~ m_phi ~ hundreds of MeV).
+
+3. **Renormalization-group evolution.** Run the magnetic-moment operator
+   from the confinement scale down to the nuclear scale (~GeV) and
+   match onto the dimension-5 NREFT operator (the same one WIMpy uses).
+
+4. **Consistency checks.** Verify the predicted μ_x satisfies:
+   - Existing magnetic-moment limits from XENONnT / PandaX / LZ
+     (see §"Phase 7 — existing limits" of T90_FORWARD_PREDICTION)
+   - Relic density (μ_x shouldn't disturb freeze-out)
+   - Self-interaction cross-section (should remain consistent with
+     dwarf-galaxy σ/m = 0.06 cm²/g)
+
+**Literature pointers:**
+- Aranda, Barajas, Cembranos — JCAP 03 (2016) 034 — magnetic dipole
+  moments for composite DM, full calculation.
+- Cline, Moore, Frey — Phys. Rev. D 86, 115013 (2012) — composite
+  magnetic DM used to explain a gamma-ray line (different application,
+  same operator).
+- Barger, Keung, Marfatia — PLB 696 (2011) 74 — elementary-DM
+  magnetic-moment one-loop generation.
+
+### Future phases (T90.1+ roadmap)
+
+- **Phase 5** — free μ_x (8D nested sampling). Expected wall: 5-30 min
+  at nlive=200.
+- **Phase 6** — binned likelihood. Expected wall: 1-2 days (need to
+  pull LZ binned spectra, write binned loglike, re-test).
+- **Phase 7** — existing-limits comparison table. Expected wall: 1-2
+  hours.
+- **Phase 8** — UV matching (OI-3). Expected wall: 1-2 weeks if a
+  dedicated calculation is run.
+
+None of Phases 5-8 are required for the T90 merge rule (which is
+gated on community confirmation, not on internal completeness).
 
 ---
 

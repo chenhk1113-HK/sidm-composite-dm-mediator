@@ -175,6 +175,61 @@ T90_MAGNETIC_MOMENT_MU_X=3e-8 T41_NLIVE=200 .venv-sidm-bench/Scripts/python.exe 
    full DAMPE + LSS + Euclid Q1 subhalo + XRISM + ... ensemble)
    doesn't demand it.
 
+### Phase 7 — Existing magnetic-moment limits comparison (T90.1 addendum — DRAFT, NEEDS VERIFICATION)
+
+Reviewer 1 explicitly flagged that the branch's μ_x ≈ 3×10⁻⁸ μ_N
+(= 1.6×10⁻¹¹ μ_B) sits near or above published direct-detection
+limits. Here is the comparison:
+
+| Experiment | Mass range | μ_x bound (μ_B) | μ_x bound (μ_N) | Branch μ_x (μ_N) | Status |
+|---|---|---|---|---|---|
+| XENONnT | ~30-1000 GeV | TBD (unverified — see below) | TBD | 3×10⁻⁸ | **NEEDS RE-DERIVATION** ⚠️ |
+| LUX | ~10-1000 GeV | TBD | TBD | 3×10⁻⁸ | **NEEDS RE-DERIVATION** ⚠️ |
+| PandaX-4T | ~40-1000 GeV | TBD | TBD | 3×10⁻⁸ | **NEEDS RE-DERIVATION** ⚠️ |
+| LZ 2024 first results | ~9-1000 GeV | TBD | TBD | 3×10⁻⁸ | **NEEDS RE-DERIVATION** ⚠️ |
+| LZ 248 keV candidate (this paper) | ~700-1000 GeV | n/a (signal, not bound) | n/a | 3×10⁻⁸ | signal interpretation |
+
+**STATUS: This table is a placeholder.** The exact μ_B values
+from XENONnT/PandaX/LUX are **not yet extracted** from the
+published papers on this branch. The T90.1 commit chain flags
+this as Phase 7 work-in-progress.
+
+**What is known from literature conventions:**
+- The classical magnetic-moment bounds from XENON1T / XENONnT /
+  PandaX / LUX are typically quoted in μ_B (Bohr magnetons),
+  not μ_N (nuclear magnetons). To convert:
+  μ_N = μ_B / (m_p/m_e) = μ_B / 1836.15267.
+- The published bounds assume standard nuclear-recoil operators,
+  not the full Ls₁₀ magnetic-moment operator (which has a
+  different recoil-energy dependence). A proper re-derivation
+  requires using the Ls₁₀ spectrum from WIMpy_NREFT and
+  re-fitting the experimental data — this is **Phase 8** future work.
+- Order-of-magnitude expectation from the LZ 2024 first-results
+  era (arXiv:2307.15431) is μ_x ≲ 10⁻¹⁰ μ_B at m_χ ~ 1 TeV
+  for dipole interpretations, which converts to μ_x ≲ 5×10⁻⁵ μ_N.
+  The branch's μ_x = 3×10⁻⁸ μ_N sits **below** this expectation
+  by ~3 orders of magnitude — but **this number is not verified
+  on this branch and should be re-derived before quoting**.
+
+**Action item for Phase 7 closure:**
+1. Pull published μ_B bounds from XENONnT (2022), PandaX-4T
+   (2021-2023), and LZ (2024 first results + the 248 keV paper).
+2. Convert each to μ_N.
+3. Re-derive using WIMpy_NREFT's Ls₁₀ spectrum at the published
+   reference mass points (not just standard SI bounds).
+4. Update this table with verified numbers.
+
+**Decoupling from kinetic mixing** (independent physics result):
+
+The branch's magnetic-moment channel is **decoupled** from the
+project's kinetic-mixing portal (ε ~ 10⁻³⁷). This is physically
+sensible: ε arises from photon-dark-photon mixing and couples to
+electric charge, while μ_x couples to magnetic dipole moment. The
+two portals see different DM-SM vertices and therefore produce
+independent recoil channels. Adding Channel 26 does not relax
+the constraint on ε, and adding ε does not produce magnetic-moment
+events. They are **independent portals**.
+
 ---
 
 ## Caveats and limitations
