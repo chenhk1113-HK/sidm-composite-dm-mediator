@@ -9,6 +9,21 @@
 
 ---
 
+## Cross-link to T90 (Magnetic-Moment LZ 248 keV)
+
+The T90 work uses the same master's Yukawa σ/m prescription
+that T95 cross-checks. The T90 cross-detector predictions
+(Path C.4 v10-v14) and indirect-detection predictions (v15)
+are consistent with the T95 tension findings: the LZ-anchored
+σ/m at v=150 km/s is ~0.7 cm²/g, which is 6-13× above the
+Euclid Q1 sub-halo forecast range (see Option 3.5 below).
+
+For the full T90 program, see [T90_INDEX.md](./T90_INDEX.md).
+The T90 merge rule binds: T90 stays on `wip/tier3-magnetic-moment-LZ`
+until LZ community resolution of the 248 keV event.
+
+---
+
 ## Abstract
 
 We tested the consistency of the project's analytic Yukawa
