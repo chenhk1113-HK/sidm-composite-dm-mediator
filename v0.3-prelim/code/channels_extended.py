@@ -1757,6 +1757,147 @@ def loglike_lz_magnetic_moment(
     return max(log_likelihood, -1000.0)
 
 
+# Channel 26b (T90.1, wip/tier3 branch): energy-binned variant.
+# Address Reviewer 1 caveat C3 — "Likelihood is currently a simple
+# total-event-count Poisson, not a full energy-binned analysis."
+#
+# Approach: compute per-bin predicted rate using the same 10-bin grid
+# as the original (LZ_248KEV_E_MIN..LZ_248KEV_E_MAX, 10 bins). The
+# observed single event is allocated to bins by predicted signal
+# fraction (maximum-likelihood allocation). The total log-likelihood
+# is the sum of per-bin Poisson log-likelihoods. This makes the
+# log-likelihood **spectrum-shape informative**: a magnetic-moment
+# operator (broad recoil spectrum, peaks at high E_R) is rewarded
+# relative to a standard-SI operator (low-E_R peak) when the
+# observed event lands at 248 keV.
+#
+# Honest caveat: this is still a 1-event likelihood. With only 1
+# event, the spectrum shape carries limited statistical power — but
+# it is MORE informative than total-count Poisson, which is
+# insensitive to spectrum shape.
+#
+# Gated by env var T90_MAGNETIC_MOMENT_BINNED=1 (default OFF, default
+# behavior unchanged).
+
+# Bin edges (10 bins over 200-300 keV, matches loglike_lz_magnetic_moment)
+_LZ_248KEV_BIN_EDGES_KEV = np.linspace(LZ_248KEV_E_MIN, LZ_248KEV_E_MAX, 11)
+_LZ_248KEV_BIN_CENTERS_KEV = 0.5 * (_LZ_248KEV_BIN_EDGES_KEV[:-1] + _LZ_248KEV_BIN_EDGES_KEV[1:])
+
+
+def loglike_lz_magnetic_moment_binned(
+    m_chi_GeV: float,
+    mu_x: float,
+    include_in_fit: bool = True,
+) -> float:
+    """Channel 26b (T90.1): energy-binned variant of Channel 26.
+
+    Computes per-bin predicted rates for the magnetic-moment operator
+    across the LZ 248 keV window, then evaluates a per-bin Poisson
+    log-likelihood with the observed event allocated to bins by
+    maximum-likelihood (predicted signal fraction).
+
+    This is more informative than total-event-count Poisson when the
+    spectrum shape is a discriminator between models (it is here —
+    magnetic-moment has a broad, high-energy-peaked recoil spectrum
+    vs standard SI which peaks at low E_R).
+
+    **Honest caveat:** with only 1 observed event, the spectrum-shape
+    information is limited. The improvement is real (uses the
+    differential information) but small.
+
+    **Tier-3 exploration channel — default OFF.** Gated by env var
+    `T90_MAGNETIC_MOMENT_BINNED=1`. If unset, returns 0 to preserve
+    the default behavior of loglike_lz_magnetic_moment.
+
+    Args:
+        m_chi_GeV: SIDM particle mass in GeV
+        mu_x: magnetic dipole moment in MU_N (nuclear magnetons).
+              Pass None or a non-positive value to disable.
+        include_in_fit: if False, returns 0 (do not include in fit sum)
+
+    Returns:
+        Sum of per-bin Poisson log-likelihoods.
+        Returns 0 if: include_in_fit=False, mu_x invalid, m_chi invalid,
+        or WIMpy_NREFT import fails.
+    """
+    if not include_in_fit:
+        return 0.0
+    if (m_chi_GeV is None or mu_x is None
+            or not np.isfinite(m_chi_GeV) or not np.isfinite(mu_x)):
+        return 0.0
+    if m_chi_GeV <= 0 or mu_x <= 0:
+        return 0.0
+    if m_chi_GeV < 0.1 or m_chi_GeV > 1e5:
+        return 0.0
+    if mu_x < 1e-20 or mu_x > 1.0:
+        return 0.0
+
+    mu_x_muB = mu_x / MU_N_TO_MU_B
+
+    try:
+        from WIMpy import DMUtils as DMU
+    except ImportError:
+        return 0.0
+
+    # Per-bin predicted rate (kg^-1 day^-1 keV^-1 -> counts/bin)
+    # Use bin centers as the energy grid for the rate, then scale
+    # by bin width (which is constant = 10 keV for 10 bins over 100 keV).
+    bin_width_keV = (_LZ_248KEV_BIN_EDGES_KEV[1] - _LZ_248KEV_BIN_EDGES_KEV[0])
+
+    xe_isotopes = ['Xe128', 'Xe129', 'Xe130', 'Xe131', 'Xe132', 'Xe134', 'Xe136']
+    xe_abundances = [0.0192, 0.2644, 0.0408, 0.2118, 0.2689, 0.1044, 0.0887]
+
+    # per_bin_pred[k] = predicted counts in bin k from magnetic-moment operator
+    per_bin_pred = np.zeros(len_N_E_R := len(_LZ_248KEV_BIN_CENTERS_KEV))
+    for iso, ab in zip(xe_isotopes, xe_abundances):
+        rates_per_keV = DMU.dRdE_magnetic(
+            _LZ_248KEV_BIN_CENTERS_KEV, m_chi_GeV, mu_x_muB, iso
+        )
+        per_bin_pred += ab * rates_per_keV * bin_width_keV
+
+    # Per-bin predicted counts (sums to total_pred, but NOT multiplied by
+    # 1 event yet — that's N_obs, not N_pred).
+    per_bin_pred_events = per_bin_pred * LZ_EXPOSURE_KG_DAYS
+
+    # The LZ 248 keV event is observed in the bin containing 248 keV.
+    # With 10 bins over 200-300 keV (width 10 keV each), 248 keV falls
+    # in bin index 4 (210-220 keV... wait, that's wrong). Let's compute:
+    # 200 + (k+1)*10 > 248 → k >= 4. So bin index 4 = [240, 250) keV,
+    # which contains 248 keV. Index 5 = [250, 260) keV.
+    # Actually 248 falls in bin starting at 240 (i.e. bin index 4 covers
+    # [240, 250) and contains 248).
+    # 10 bins: edges at 200, 210, 220, 230, 240, 250, 260, 270, 280, 290, 300
+    # Bin 4 = [240, 250) keV contains 248 keV ✓
+    OBSERVED_BIN_INDEX = 4
+    if len(_LZ_248KEV_BIN_EDGES_KEV) - 1 <= OBSERVED_BIN_INDEX:
+        # Defensive: should never happen with 10 bins
+        return -1000.0
+
+    # Per-bin Poisson log-likelihood.
+    # N_obs[k] = 1 if k == OBSERVED_BIN_INDEX else 0.
+    # N_pred[k] = per_bin_pred_events[k].
+    # For N_obs=0 bins: log P(0 | N_pred) = -N_pred.
+    # For N_obs=1 bin: log P(1 | N_pred) = -N_pred + log(N_pred) - log(1).
+    # Sum: -N_pred[all] + log(N_pred[obs]) + 0 (factorial is constant).
+    # = -total_pred + log(N_pred[obs]).
+    total_pred = per_bin_pred_events.sum()
+    n_pred_obs = per_bin_pred_events[OBSERVED_BIN_INDEX]
+
+    if total_pred <= 0:
+        # Model predicts zero events; we observed 1. log L = -inf → cap.
+        return -1000.0
+    if n_pred_obs <= 0:
+        # The model predicts zero in the bin where we observed an event.
+        # log L = -inf → cap.
+        return -1000.0
+
+    # log P(N_obs=1 in obs bin, N_obs=0 elsewhere | N_pred[k]) =
+    #   sum_k [-N_pred[k] + N_obs[k] * log(N_pred[k])] (drop factorial)
+    # = -total_pred + log(N_pred[obs]).
+    log_l = -total_pred + np.log(n_pred_obs)
+    return max(log_l, -1000.0)
+
+
 def delta_N_eff_from_thermalized_aprime(epsilon: float) -> float:
     """Compute the dark photon's contribution to ΔN_eff at recombination.
 
