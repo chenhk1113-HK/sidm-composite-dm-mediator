@@ -4,12 +4,14 @@ This project follows the [Version Control Framework](../version-control-framewor
 
 ## Branching model
 
-This project uses the `wip/vX.Y.Z` branching model:
+This project uses the `wip/vX.Y.Z` branching model, with an
+`archived/` prefix for abandoned wip branches:
 
 | Branch | Purpose | Lifetime |
 |---|---|---|
 | `master` (or `main`) | Released, tagged versions. Always in a state that compiles + tests pass. | Permanent |
 | `wip/vX.Y.Z` | Active work on version vX.Y.Z. May have broken tests, WIP commits, etc. | Deleted after vX.Y.Z ships and a tag is made |
+| `archived/vX.Y.Z` | Abandoned wip branch. Preserved for provenance but no longer active. | Permanent (do not delete) |
 
 **The rule: every commit goes to a `wip/vX.Y.Z` branch, never to `master` directly.** When vX.Y.Z is ready to ship:
 1. Make sure the wip branch builds and tests pass
@@ -17,6 +19,22 @@ This project uses the `wip/vX.Y.Z` branching model:
 3. `git tag -a vX.Y.Z -m "vX.Y.Z release: <one-line summary>"` (annotated tag, see below)
 4. `git branch -d wip/vX.Y.Z` (after the merge)
 5. Push `master` + the tag
+
+**Archiving a wip branch** (use when a wip branch has been
+abandoned but its commits should be preserved for provenance):
+1. Verify no commits on the wip branch are missing from master:
+   `git log --oneline origin/master..origin/wip/vX.Y.Z`
+   If this prints nothing, master subsumes the wip branch —
+   safe to archive.
+2. Rename local: `git branch -m wip/vX.Y.Z archived/vX.Y.Z`
+3. Delete remote old name: `git push origin --delete wip/vX.Y.Z`
+4. Push archived name: `git push origin archived/vX.Y.Z`
+5. Update CURRENT.md and CHANGELOG.md to note the archive.
+
+**Worked example** (2026-09-07): `wip/v0.4-prelim` was
+abandoned since 2026-08-17 with 0 unique commits vs master
+and 116 master commits not on the wip branch. Renamed to
+`archived/v0.4-prelim` per the rule above.
 
 For this project, the framework convention is enforced as the **initial state**: when this repo was first published, the `master` branch held the initial commit (the entire v0.1 → D15-CORRECTED3 + Mediator v12 history as a single capture point). All **subsequent** work goes on `wip/vX.Y.Z` branches per the rule above.
 
