@@ -1,10 +1,28 @@
 # T95 Option 3.6 v3 — Real 8D Fit Result + Survey of Alternative GD-1 Interpretations
 
-**Status:** Documented finding
+**Status:** ⚠️ **SUPERSEDED by T95_OPTION3_6_V4_RECONCILIATION.md (2026-09-07)**
+
+The conclusion in this v3 doc (that the v2 fit is "the honest
+answer" and the estimator "overestimated by 16×") is **wrong**.
+The v1 fit (which I had given up as timed out) actually completed
+in the background and gave Δlog Z = -23.6 (Jeffreys "very strong"),
+in agreement with the estimator. The v2 fit's "substantial" verdict
+was an artifact of using a wider soft edge (1.0 dex vs 0.3 dex
+in v1) to make the run finish quickly.
+
+**For the honest result, see `T95_OPTION3_6_V4_RECONCILIATION.md`.**
+
+The v3 doc is preserved below for historical reference and the
+alternative-interpretations survey content (§Survey of
+alternative GD-1 perturber interpretations) which is still valid.
+
+---
+
+**Status (original):** Documented finding
 **Date:** 2026-09-07
 **Branch:** `wip/tier3-magnetic-moment-LZ`
 **Companion files:**
-- `t41_v09_v2_magnetic_moment_zhang_gd1.py` — real 8D fit (v2)
+- `t41_v09_v2_magnetic_moment_zhang_gd1.py` — real 8D fit (v2, misleading)
 - `T95_OPTION3_6_ZHANG_GD1.md` — the v1 estimator finding
 - `T95_OPTION3_6B_SURVEY.md` — alternative interpretations survey
 

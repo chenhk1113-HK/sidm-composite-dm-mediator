@@ -13,12 +13,13 @@
 
 We tested the consistency of the project's analytic Yukawa
 SIDM model — the same one tuned to match the LZ 248 keV
-event — against four independent probes: (1) the BAHAMAS-SIDM
+event — against five independent probes: (1) the BAHAMAS-SIDM
 hydro-simulation prescription (Robertson 2019), (2) the SIDM
 core-size prediction for dwarf, dwarf-spheroidal, and cluster
 halos, (3) the existing project's Euclid Q1 sub-halo forecast
-likelihood, and (4) a proper 8D nested-sampling fit combining
-LZ and sub-halo data. We find:
+likelihood, (4) a proper 8D nested-sampling fit combining
+LZ and sub-halo data, and (5) the Zhang+ 2025 GD-1 perturber
+constraint. We find:
 
 1. **Velocity-dependence agreement is good** (master vs.
    Robertson vdSIDM ratio 0.52-0.87 across v=100-1500 km/s,
@@ -44,12 +45,19 @@ LZ and sub-halo data. We find:
    strong" — a real Euclid Q1 measurement (replacing the
    forecast) would be needed for a cleaner verdict.
 
+5. **A proper 8D fit with the Zhang+ 2025 GD-1 perturber
+   constraint gives Δlog Z = -23.61 (Jeffreys "very
+   strong" evidence against 8D).** The master Yukawa at
+   LZ gives σ/m at v=10 km/s of 0.32 cm²/g, which is 94×
+   below Zhang+ 2025's required [30, 100] cm²/g range.
+
 **The LZ-anchored Yukawa is a viable but constrained
 interpretation.** If the LZ 248 keV event is real, the
-model predicts a σ/m that is in significant tension with
-existing sub-halo forecasts but not yet excluded. The
-T90 merge rule (community confirmation of the 248 keV
-event) is unchanged.
+model predicts a σ/m that is in **substantial tension**
+(Channel 27, Δlog Z = -1.57) and **very strong tension**
+(Zhang+ 2025, Δlog Z = -23.61) with existing sub-halo and
+GD-1 perturber constraints. The T90 merge rule (community
+confirmation of the 248 keV event) is unchanged.
 
 ---
 
@@ -218,6 +226,35 @@ tension by 2.4× (it gave -3.81; the proper fit gives
 -1.57). The estimator didn't account for posterior
 re-weighting by Channel 27.
 
+### 3.6. Option 3.6 v1: GD-1 perturber (Zhang+ 2025)
+
+**File:** `v0.3-prelim/code/t41_v09_magnetic_moment_zhang_gd1.py`
+**Doc:** `T95_OPTION3_6_ZHANG_GD1.md`, `T95_OPTION3_6B_SURVEY.md`,
+`T95_OPTION3_6_V4_RECONCILIATION.md`
+
+Compare master's `sigma_m_cm2_per_g(v=10 km/s)` per 7D
+posterior sample to Zhang+ 2025's required range
+[30, 100] cm²/g for the GD-1 perturber (Zhang, Yu, Yang,
+Nadler 2025, ApJL 978, L23). Soft-box likelihood with
+soft edge 0.3 dex.
+
+| Quantity | Value |
+|---|---|
+| 7D log Z (T90.1) | -164.96 ± 0.25 |
+| 8D log Z | **-188.57 ± 0.38** |
+| **Δlog Z (8D - 7D)** | **-23.61** |
+| **Jeffreys verdict** | **FAVORS 7D (very strong)** |
+| Wall time | 1652 sec |
+| σ/m at v=10 km/s (8D median) | 0.32 cm²/g |
+| Zhang+ 2025 required | [30, 100] cm²/g |
+| **Ratio (Master / Zhang)** | **94× below** |
+
+**Interpretation:** The master Yukawa at LZ posterior gives
+σ/m at v=10 km/s that is **94× below** Zhang+ 2025's
+required range. The Bayes factor is "very strong" against
+the 8D model. **This is 15× more constraining than the
+Channel 27 forecast.**
+
 ---
 
 ## 4. Discussion
@@ -231,6 +268,7 @@ re-weighting by Channel 27.
 | Core-size (gravothermal) | Option 2.5 | 5-50× too small | better, still small |
 | Sub-halo (estimator) | Option 3 | 6-13× too high | tension |
 | Sub-halo (real fit) | Option 3.5 | Δlog Z = -1.57 | substantial tension |
+| **GD-1 perturber (Zhang+ 2025)** | **Option 3.6 v1** | **Δlog Z = -23.61** | **very strong tension** |
 
 ### 4.2. What the model is good for
 
@@ -249,6 +287,10 @@ The master's Yukawa at LZ-anchored parameters is:
   limitation, not a new finding.
 - **Being consistent with sub-halo forecasts.** The
   Δlog Z = -1.57 tension is real and quantified.
+- **Being consistent with the Zhang+ 2025 GD-1 perturber
+  interpretation.** The Δlog Z = -23.61 tension is much
+  stronger than the Channel 27 forecast and represents
+  the dominant sub-halo-scale constraint on the model.
 - **A clean publishable core-size prediction.** Both the
   simplified and gravothermal formulas give results
   smaller than published hydro sims.
@@ -306,18 +348,29 @@ interpretation of the LZ 248 keV event:
 - **PASS** the velocity-dependence sanity check (Phase 0)
 - **WARN** on quantitative core-size predictions (Options 2, 2.5)
 - **WARN** on sub-halo abundance predictions (Options 3, 3.5)
+- **FAIL** the Zhang+ 2025 GD-1 perturber constraint
+  (Option 3.6, Δlog Z = -23.61)
 
-The warnings are not exclusions. The model is allowed by
-all current data, but it is in **substantial tension**
-(Jeffreys |Δlog Z| = 1.57) with the existing sub-halo
-forecast. A real Euclid Q1 measurement in late 2026 will
-provide a cleaner verdict.
+The warnings and FAIL are not immediate exclusions. The model
+is **allowed by all current data**, but it is in:
+
+- **Substantial tension** with the existing Channel 27
+  sub-halo forecast (Jeffreys |Δlog Z| = 1.57)
+- **Very strong tension** with the Zhang+ 2025 GD-1
+  perturber interpretation (Jeffreys |Δlog Z| = 23.61)
+
+A real Euclid Q1 measurement in late 2026 will provide a
+cleaner verdict on the Channel 27 forecast. For the
+Zhang+ 2025 GD-1 constraint, the dominant variable is
+whether the GD-1 perturber is truly a core-collapsed
+SIDM halo — if it is, the LZ-anchored Yukawa cannot
+simultaneously explain both.
 
 **The T90 merge rule is unchanged**: the magnetic-moment
 branch stays off master until LZ community confirms the
 248 keV event. If confirmed, the T95 work provides a
 ready framework for adding a Channel 27 sub-halo channel
-to the master joint fit.
+and a Zhang+ 2025 GD-1 channel to the master joint fit.
 
 ---
 
@@ -342,6 +395,9 @@ to the master joint fit.
 - `T95_OPTION2_5_GRAVOTHERMAL.md` — Option 2.5
 - `T95_OPTION3_SUBHALO_FORECAST.md` — Option 3
 - `T95_OPTION3_5_8D_FIT.md` — Option 3.5
+- `T95_OPTION3_6_ZHANG_GD1.md` — Option 3.6 v1 (estimator + finished real fit)
+- `T95_OPTION3_6B_SURVEY.md` — alternative GD-1 interpretations survey
+- `T95_OPTION3_6_V4_RECONCILIATION.md` — v1/v2/estimator reconciliation
 - `T95_BRANCH_FINDINGS_LAYMAN.md` — earlier one-pager
 
 ### Outputs (gitignored, regenerated by scripts)
@@ -373,7 +429,14 @@ to the master joint fit.
 - Kass & Raftery 1995, JASA 90, 773 (Jeffreys scale)
 - LZ Collaboration 2026, arXiv:2609.02823 (LZ 248 keV
   preprint)
-- Euclid Q1 sub-halo forecast, arXiv:2503.15330
+- Zhang, X., Yu, H.-B., Yang, D., Nadler, E. 2025, ApJL 978,
+  L23 (GD-1 perturber as core-collapsed SIDM halo)
+- Bonaca, A. et al. 2019, ApJ 880, 38 (original GD-1
+  substructure finding)
+- Erkal, D. et al. 2019, MNRAS 487, 2685 (LMC impact on
+  streams)
+- Amorisco, N. C. et al. 2016, MNRAS 463, L17 (GMCs vs
+  GD-1 perturber)
 - Project T89 benchmark
 - Project T90.1 doc chain (commits 32574d6 through
   ff775bf)
@@ -383,8 +446,9 @@ to the master joint fit.
 ## 8. Statement of work
 
 This paper-style writeup was produced as part of T95
-Option 4. It consolidates the 4 citable findings (Phase
-0, Options 2/2.5, Options 3/3.5) into a single
-self-contained document. The T95 work was conducted on
-the existing `wip/tier3-magnetic-moment-LZ` branch, with
-no new dependencies and no changes to master or T90.
+Option 4. It consolidates the **5 citable findings**
+(Phase 0, Options 2/2.5, Options 3/3.5, Option 3.6 v1)
+into a single self-contained document. The T95 work was
+conducted on the existing `wip/tier3-magnetic-moment-LZ`
+branch, with no new dependencies and no changes to master
+or T90.
