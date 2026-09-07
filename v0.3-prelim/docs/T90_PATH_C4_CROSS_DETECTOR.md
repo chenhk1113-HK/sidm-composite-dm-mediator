@@ -231,11 +231,14 @@ incomplete (additional coupling to even-even nuclei needed).
    central tuned value. This would give a posterior
    predictive distribution with credible intervals for each
    detector, not just a point estimate. Effort: 2-4 hours.
+   **STATUS: SHIPPED in v11.**
 2. **Add proper detector response functions** (energy
    smearing, selection efficiencies). Effort: 1 day.
+   **STATUS: SHIPPED in v12.**
 3. **Extend to other operators** (charge radius, anapole,
    millicharge). The WIMpy_NREFT framework supports all of
    these. Effort: 1 day.
+   **STATUS: SHIPPED in v13 (rough calibration only).**
 
 ---
 
