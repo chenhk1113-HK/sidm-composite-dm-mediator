@@ -84,9 +84,9 @@ For Parallel and Perpendicular (the only 2 streams with DESI coverage):
 |---|---|---|---|
 | T95.9 baseline | 10 | 0 | -12.038 |
 | + T95.11 (Gaia cross-match) | 10 | +6 | 0.000 |
-| **+ T95.14 (chemodynamic)** | **10** | **+7** | **0.000** |
+| **+ T95.14 (chemodynamic)** | **10** | **+8** | **0.000** |
 
-**Δ = +1 rescued stream** (6 → 7). The T95 finding is **unchanged** at 9/10 (GD-1 still separates). But the data set grew: 16 → 17 streams with real kinematic constraints.
+**Δ = +2 rescued streams** (6 → 8). The T95 finding is **unchanged** at 9/10 (GD-1 still separates). The data set grew: 16 → 18 streams with real kinematic constraints. (After the T104 audit fix, both Parallel and Perpendicular are properly counted in `n_rescued_total`; previously only Parallel was counted.)
 
 ## Honest limitations
 

@@ -29,12 +29,14 @@ The branch is **mostly ready for PR**, with **one real bug** and
    correct (T95.10 = T95 version 26), but the file naming is internally
    inconsistent with the docstring naming pattern.
 
-4. ⚠️ **DOC DRIFT (T95.13):** T95.13 DESI cross-match output JSON has
+4. ⚠️ **DOC DRIFT (T95.13) — RESOLVED in T104.1:** T95.13 DESI cross-match output JSON has
    Parallel = 486 stars, median v_r = 21.5 km/s, [Fe/H] = -0.58 (per
    T95.13 addendum in CURRENT.md). But T95.14 chemodynamic apply
    shows Parallel = v_r 37.9 km/s, [Fe/H] = -1.13. The values are
-   different — this is likely intentional (T95.13 is raw DESI median,
-   T95.14 is GMM-membership-weighted), but should be explained.
+   different — this is intentional (T95.13 is raw cone-average over
+   all 486 stars, T95.14 is GMM-membership-weighted median over 75
+   stream members). CURRENT.md now has a dedicated section explaining
+   this.
 
 ---
 

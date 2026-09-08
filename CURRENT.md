@@ -298,13 +298,13 @@ for the full program.
 
 ## T95.14 addendum (2026-09-08) — Chemodynamic GMM with DESI [Fe/H] prior: PARALLEL + PERPENDICULAR RESCUED
 
-### Headline: 1 additional outlier rescued (6 → 7), all 7 master-Yukawa-consistent
+### Headline: 2 additional outliers rescued (6 → 8), all 8 master-Yukawa-consistent
 
 T95.13 pulled DESI DR1 MWS data for 2 of 7 T95.11 outliers (Parallel, Perpendicular).
 T95.14 added the DESI [Fe/H] column as a chemodynamic prior to the GMM membership
 selection. Both streams now have kinematics consistent with halo-stream physics:
 
-| Stream | T95.11 (median pm) | T95.14 (chemodynamic) | Δ | [Fe/H] |
+| Stream | T95.11 (median pm) | T95.14 (chemodynamic GMM) | Δ | [Fe/H] (members) |
 |---|---|---|---|---|
 | Parallel | 776 km/s (outlier) | **394 km/s** ✓ | -49% | -1.13 |
 | Perpendicular | 876 km/s (outlier) | **329 km/s** ✓ | -62% | -1.72 |
@@ -318,10 +318,11 @@ DESI footprint — survey limitation, not a query bug.
 |---|---|---|---|
 | T95.9 baseline | 10 | 0 | -12.038 |
 | + T95.11 | 10 | 6 | 0.000 |
-| **+ T95.14** | **10** | **7** | **0.000** |
+| **+ T95.14** | **10** | **8** | **0.000** |
 
-Δ = +1 rescued stream (6 → 7). T95 finding unchanged at 9/10 (GD-1 still separates).
-17 streams now have real kinematic constraints.
+Δ = +2 rescued streams (6 → 8). T95 finding unchanged at 9/10 (GD-1 still separates).
+18 streams now have real kinematic constraints. (After the T104 audit fix, both
+Parallel and Perpendicular are counted; previously only Parallel was counted.)
 
 ### Validation_table update
 
@@ -357,7 +358,7 @@ Drift-guard audit: 44/44 ALL CLEAR.
 T95.13 queried DESI DR1 MWS via the NOIRLab TAP service
 (`https://datalab.noirlab.edu/tap/sync`) at the 7 T95.11 outlier positions:
 
-| Stream | DESI hits | v_r median | [Fe/H] |
+| Stream | DESI hits (cone) | v_r median | [Fe/H] |
 |---|---|---|---|
 | Parallel | **486** | 21.5 km/s | -0.58 |
 | Perpendicular | **19** | -0.4 km/s | -1.55 |
@@ -366,6 +367,29 @@ T95.13 queried DESI DR1 MWS via the NOIRLab TAP service
 
 The 2 covered streams have chemodynamic [Fe/H] tags — enabling T95.14's
 improved GMM. The 5 uncovered streams will need DESI DR2 or another survey.
+
+### T95.13 vs T95.14 [Fe/H] discrepancy (T104 audit finding, resolved)
+
+The T95.13 raw DESI median ([Fe/H]=-0.58 for Parallel) and the T95.14
+GMM-membership-weighted median ([Fe/H]=-1.13 for Parallel) are different
+because they measure **different populations of stars**:
+
+- **T95.13 raw median:** All 486 stars in the 0.5° cone (cone-averaged, no membership filter)
+- **T95.14 GMM-weighted median:** Only 75 stars identified as stream members
+  by the GMM (after [Fe/H] < -0.5 cut + Gaia cross-match + GMM clustering)
+
+The T95.14 value is the **physically meaningful one for halo streams** —
+it's the metal-poor population ([Fe/H] ≈ -1.13, consistent with halo
+streams like GD-1 at [Fe/H] ≈ -2.2 and Sagittarius at [Fe/H] ≈ -1.0).
+The T95.13 cone-average is contaminated by disk/thick-disk stars which
+have higher metallicity ([Fe/H] ≈ -0.5).
+
+**Both values are correct at their respective sample definitions:**
+- T95.13: "what's the average metallicity in this sky region?"
+- T95.14: "what's the metallicity of the stream members?"
+
+See T95_EXTENDED_113STREAMS_CHEMODYNAMIC.md for the full chemodynamic
+pipeline (5-step membership selection + 4-feature GMM).
 
 See T95.14 above for what was done with this data.
 
