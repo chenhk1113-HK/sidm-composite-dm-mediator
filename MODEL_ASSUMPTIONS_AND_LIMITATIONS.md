@@ -222,11 +222,70 @@ The T87 result depends on three judgment calls, all flagged in
 The dominant suppression (ε² ~ 10⁻⁷⁴) is **structural** to the freeze-in
 regime and not dependent on these judgment calls. The verdict is robust.
 
+### Magnetic-moment Ls₁₀ channel (T90 work, 2026-09-08) — the "second door"
+
+In addition to the kinetic-mixing (kinetic-portal / "Door A") channel
+that T87 just analyzed, the project has a separate
+**magnetic-moment Ls₁₀ channel** ("Door B") developed on
+`wip/tier3-magnetic-moment-LZ` (NOT yet merged to master).
+This is documented in `v0.3-prelim/docs/T90_MAGNETIC_MOMENT_PLAN.md`,
+`T90_MAGNETIC_MOMENT_FORWARD_PREDICTION.md`, and `T90_INDEX.md`.
+
+**Status (as of 2026-09-08):**
+- WIP branch (off master), 27 commits since T90.1.
+- 959 tests pass, 8 skipped, 3 warnings.
+- T90 merge rule: **2 of 5 criteria satisfied** (cross-detector via T106/DIAMX, BSM motivation via Di Mauro 2026).
+- T90 merge requires ≥1 of: peer review, community consensus, 7D posterior Δlog Z ≥ +2, or additional cross-detector.
+
+**Physics ingredients (Door B):**
+- Composite dark-pion can acquire a magnetic dipole moment μ_χ from
+  dark-sector charged constituents (analogous to the neutron EDM in
+  QCD but for dark-sector magnetic moment).
+- Direct-detection signature: μ_χ couples to nucleon spin, gives
+  NREFT Ls₁₀ operator contribution to σ_DM-nucleon.
+- Astrophysical σ_DM-DM (σ/m) is **unchanged** because μ_χ is
+  DM-nucleon, not DM-DM.
+
+**Relation to T87's "composite-DM cannot claim LZ event" verdict:**
+- T87 used the kinetic-mixing ("Door A") only. The 71-OOM gap is
+  structural to ε² ~ 10⁻⁷⁴ in the freeze-in regime.
+- The magnetic-moment channel ("Door B") is a separate scattering
+  portal that could, in principle, explain direct-detection events
+  with a different magnitude.
+- T98 (Di Mauro 2026 cross-check, arXiv:2609.02608) compares the
+  project's composite-DM inelastic cross-section to Di Mauro's
+  interpretation: **74.8 OOM gap remains**, and the magnetic-moment
+  channel does not close it.
+- T105 (UV consistency check, Alves-Wacker 2010 framework) shows
+  that both kinetic-mixing and hyperfine-splitting portals can be
+  produced from the same composite-DM UV structure, but only in
+  ~0.08% of parameter space (TIGHT verdict).
+
+**Current numerical status (T108 8D dynesty, 2026-09-08):**
+- v0.7 6D log Z = -163.29
+- T108 8D log Z = -162.78 ± 0.20 (with v0.7 + LZ + DIAMX, nlive=500)
+- **Δlog Z = +0.51** (positive, 2.5σ above v0.7, but BELOW the
+  T90 merge rule threshold of +2)
+- 8D MAP: m_φ=479 MeV, m_χ=138 GeV, δ=98 keV, σ_PortalB=1.4×10⁻⁴² cm²
+
+**Standing posture (consistent with §0):**
+- T90 work remains WIP; not ready for merge to master.
+- σ_DM-DM (headline σ/m) is **unchanged** by adding the magnetic-moment channel.
+- σ_DM-nucleon (Door B) does not change σ/m and is a separate observable.
+- The LZ 248 keV event, if real, would require either a larger magnetic-moment
+  than v0.7's natural value, or a separate inelastic channel (T99 two-portal
+  framing).
+
+**What this section is NOT:**
+- A claim that Door B explains LZ data (T87 + T98: it does not, at v0.7 MAP).
+- A redefinition of σ/m or σ_DM-DM (unchanged).
+- A replacement for the kinetic-mixing channel (additive only).
+
 ---
 
 This document is the **single concise top-level reference** for every
-assumption, fixed parameter, approximation, and known limitation in
-the project. It is meant to be read by anyone considering using this
+assumption, fixed parameter, approximation, and known limitation in the
+project. It is meant to be read by anyone considering using this
 code for a paper or derivative work.
 
 ---
@@ -758,3 +817,4 @@ The project's σ/m physics draws on the following canonical references
 | 2026-09-03 (T86.7j) | Plausibility audit: User question "is our model plausibility largely undermined by LZ finding or considering Planck length constraint?" Both concerns addressed with verbatim LZ paper quotes + numerical derivations. Verdict: validation, not falsification. Surfaced T_RH > 10¹⁵ GeV freeze-in requirement. | T86.7j, this turn |
 | 2026-09-03 (T86.7k+C) | Composite-channel gap analysis (post-Consider4 review): Registered Tier-2 roadmap Item 3 (T87 forward prediction). Doc-only round; no code. Consider3 +4 reviewer inputs preserved for traceability. | T86.7k+C, this turn |
 | 2026-09-03 (T87) | Composite-DM direct-detection forward prediction. **Verdict: composite-DM cannot claim LZ event at v0.7 MAP.** σ_inel_nuc(248 keV) = 1.15 × 10⁻¹¹⁷ cm² (gaussian F²), predicting N_events = 4.81 × 10⁻⁷³ in 2.84 tonne-years (vs 1 observed). 71 orders of magnitude below LZ sensitivity. Dominant suppression is ε² (kinetic mixing in freeze-in regime). Standing posture preserved (no posterior re-run). 9 new tests; 549 pass / 8 skip. | T87, this turn |
+| 2026-09-08 (T90) | Magnetic-moment Ls₁₀ "Door B" channel documented. T90 work on `wip/tier3-magnetic-moment-LZ` (WIP, not yet merged). T99 two-portal framing, T98 Di Mauro cross-check, T101-T103 LZ 248 keV Tier-2 fit, T105 UV consistency, T106 multi-experiment (DIAMX), T107/T108 8D joint fit. **8D log Z = -162.78 ± 0.20 (Δlog Z = +0.51 vs v0.7 6D)**, MAP m_χ=138 GeV, δ=98 keV. T90 merge rule: 2/5 criteria satisfied. 959 tests pass / 8 skip. §0+ sub-section added. | T90, this turn |

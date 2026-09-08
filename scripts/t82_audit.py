@@ -76,6 +76,13 @@ CHECKS_PER_DOC: dict[str, list[tuple[str, str]]] = {
         ("m_φ claim", "m_φ = 453"),
         ("ε_γ", "1.12 × 10⁻³⁷"),
         ("α_X", "6.84 × 10⁻¹⁷"),
+        # T90 (2026-09-08) magnetic-moment "Door B" section cross-checks
+        ("T90 Door B section heading", "Magnetic-moment Ls₁₀ channel"),
+        ("T90 8D log Z", "-162.78"),
+        ("T90 8D delta log Z", "+0.51"),
+        ("T90 8D MAP m_chi", "138 GeV"),
+        ("T90 8D MAP delta", "98 keV"),
+        ("T90 8D MAP sigma_PortalB", "1.4×10⁻⁴²"),
     ],
     "EXTRACT.md": [
         ("Channels 22", "Channels: **22 effective**"),
