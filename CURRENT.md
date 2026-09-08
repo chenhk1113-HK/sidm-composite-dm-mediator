@@ -293,3 +293,91 @@ for the full program.
 - New code: `v0.3-prelim/code/t95_v25_multi_stream_real_galstreams.py`
 - New tests: `v0.3-prelim/tests/test_t95_v25_multi_stream_real_galstreams.py` (11/11)
 - Full report: `v0.3-prelim/docs/T95_MULTI_STREAM_REAL_GALSTREAMS.md`
+
+---
+
+## T95.10 addendum (2026-09-08) — 113-stream residual run + literature search
+
+### Headline: T95.10 scales to 113 streams; lit search confirms the 9/10 finding is data-limited, not analysis-limited
+
+The T95.9 analysis covers **10 curated streams** (those with published σ/m
+constraints). The galstreams v1.2 catalog contains **127 streams** with
+summary files and **123 streams** with full track+velocity data; the
+residual after excluding the 10 curated = **113 streams** (verified
+by `build_stream_catalog()` filtering on track+velocity).
+
+T95.10 ran the full 113-stream pipeline + a targeted literature search.
+
+### Pipeline result (113 streams)
+
+| Outcome | Count | Notes |
+|---|---|---|
+| ✓ Pipeline OK | 95 | Real σ/m predictions |
+| ⚠ Outliers (v_3d > 700 km/s) | 5 | Gaia-2, NGC2298, New-13, New-19, New-21 — manual review |
+| ✗ Degenerate kinematics | 13 | Alpheus, Eridanus, Hermus, Hyllus, Molonglo, Murrumbidgee, NGC6362, Orinoco, Pal15, Parallel, Pegasus, Perpendicular, Tri-Pis — need pm/rv cross-match |
+| Total | **113** | |
+
+### Wall time
+- Catalog build: 1.83s
+- Residual processing: 2.09s
+- Per-stream avg: 0.018s
+- Per-stream max: 0.09s
+
+### Literature search result (95 OK streams)
+
+| Status | Count | Streams |
+|---|---|---|
+| constraint_added (real published σ/m) | 1 | Sagittarius ([0.1, 5.0]) |
+| searched_no_constraint | 93 | Mostly Gaia-N + Ibata+ 2024 catalog |
+| synthesized_only (default) | 1 | — |
+
+### Joint loglik (with literature applied)
+
+| Configuration | Joint loglik | Comment |
+|---|---|---|
+| T95.9 baseline (curated 10) | -12.038 | GD-1 dominates |
+| T95.10 full + synthesized (95) | -12.038 | No change (wide placeholders) |
+| T95.10 + lit-search (1 real + 94 synth) | **-12.038** | Sagittarius fits master Yukawa |
+
+**Sagittarius is consistent with master Yukawa** (σ/m_pred = 0.585 inside
+the [0.1, 5.0] box → loglik = 0). The T95 finding does NOT change:
+9/11 streams consistent (1 negative = GD-1, formally separated).
+
+### Key finding: literature search cannot move the T95 finding
+
+The 93 `searched_no_constraint` streams are dominated by **recently-discovered
+Gaia streams** (Malhan+ 2018-2021) and the **Ibata+ 2024 catalog** (arXiv:2406.11596).
+These have track data but no individual gap-count papers. To add real σ/m
+constraints requires photometric follow-up campaigns (Gaia DR4 due Dec 2026,
+4MOST, DESI), which is months-to-years of work.
+
+### Data-quality fixes in T95.10
+
+1. **galstreams v_r = 1000 km/s placeholder** stripped (was leaking through
+   T95.9's `v_r < 1000` filter, giving 5 streams unphysical v_3d ≈ 1000).
+2. **Outlier filter** added: v_3d > 700 km/s flagged for manual review.
+3. **Degenerate-kinematics flag** retained from pilot.
+
+### Files
+
+- New code: `v0.3-prelim/code/t95_v26_pilot_113_streams.py` (pilot + full runners)
+- New code: `v0.3-prelim/code/t95_v26_lit_search.py` (search scaffold)
+- New code: `v0.3-prelim/code/t95_v26_lit_search_populate.py` (results populator)
+- New code: `v0.3-prelim/code/t95_v26_lit_apply.py` (apply constraints to fit)
+- New tests: `v0.3-prelim/tests/test_t95_v26_pilot_113_streams.py` (15/15 pass)
+- New outputs:
+  - `v0.3-prelim/outputs/t95/t95_v26_full_results.json`
+  - `v0.3-prelim/outputs/t95/t95_v26_lit_search_queries.txt` (380 queries)
+  - `v0.3-prelim/outputs/t95/t95_v26_lit_search_results.json`
+  - `v0.3-prelim/outputs/t95/t95_v26_lit_applied.json`
+- New docs:
+  - `v0.3-prelim/docs/T95_EXTENDED_113STREAMS_PILOT.md`
+  - `v0.3-prelim/docs/T95_EXTENDED_113STREAMS_FULL.md`
+  - `v0.3-prelim/docs/T95_EXTENDED_113STREAMS_LITSEARCH.md` (scaffold doc)
+  - `v0.3-prelim/docs/T95_EXTENDED_113STREAMS_LITSEARCH_FINDINGS.md` (results)
+
+### Standing test count update
+
+- **876 pass / 8 skip** (post-T95.9 baseline, prior to this pilot) +
+  **+15 T95.10 tests** = **891 pass / 8 skip** (verified 2026-09-08)
+- Drift-guard audit: 44/44 ALL CLEAR
