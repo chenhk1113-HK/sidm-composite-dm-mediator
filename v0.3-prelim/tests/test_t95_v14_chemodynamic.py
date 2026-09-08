@@ -5,6 +5,11 @@ T95.14 adds a [Fe/H] prior from DESI to the GMM stream-member selection.
 For Parallel and Perpendicular (the only 2 streams with DESI coverage),
 this reduces the v_3d estimates from >700 km/s (outlier) to <500 km/s
 (rescued), and folds them into the joint fit.
+
+T104 AUDIT FIX (regression test): the apply script used to filter out
+streams not in the T95.11 rescued list, so Perpendicular (which was a
+T95.11 outlier) was never counted. After the fix, both Parallel AND
+Perpendicular are in the n_rescued_total count.
 """
 from __future__ import annotations
 
@@ -87,6 +92,44 @@ def test_apply_results_present():
     assert out["n_overrides"] == 2
     assert out["t95_14_joint_loglik"] == 0.0
     assert abs(out["delta_loglik"] - 12.038) < 0.001
+
+
+def test_apply_perpendicular_counted_in_rescued_total():
+    """T104 regression test: Perpendicular must be counted in n_rescued_total.
+
+    Before the T104 audit fix, the apply script filtered out streams not in
+    the T95.11 rescued list, so Perpendicular (which was a T95.11 outlier)
+    was never counted. After the fix, both Parallel AND Perpendicular are
+    in the n_rescued_total count.
+    """
+    if not _APPLY_PATH.exists():
+        pytest.skip("No apply results JSON; run t95_v14_chemodynamic_apply.py")
+    with _APPLY_PATH.open() as f:
+        out = json.load(f)
+    # After the T104 fix: 6 (T95.11) + 2 (T95.14: Parallel + Perpendicular) = 8
+    assert out["n_rescued_total"] == 8, (
+        f"T104 audit fix: expected n_rescued_total=8, got {out['n_rescued_total']}. "
+        "Perpendicular must be counted in the joint fit (it was a T95.11 outlier "
+        "but the T95.14 GMM fit it successfully)."
+    )
+
+
+def test_apply_perpendicular_in_newly_rescued_per_stream():
+    """T104 regression test: Perpendicular must appear in newly_rescued_per_stream.
+
+    Both Parallel AND Perpendicular are reported as newly-rescued with
+    full kinematic data (v_3d, vrad, [Fe/H]).
+    """
+    if not _APPLY_PATH.exists():
+        pytest.skip("No apply results JSON; run t95_v14_chemodynamic_apply.py")
+    with _APPLY_PATH.open() as f:
+        out = json.load(f)
+    per_stream_names = [r["stream"] for r in out["newly_rescued_per_stream"]]
+    assert "Parallel" in per_stream_names, "Parallel missing from newly_rescued_per_stream"
+    assert "Perpendicular" in per_stream_names, (
+        "T104 audit fix: Perpendicular missing from newly_rescued_per_stream. "
+        "The apply script must report Perpendicular's kinematic data."
+    )
 
 
 def test_pmgm_module_importable():

@@ -604,8 +604,12 @@ The T95 work:
 - T95.11: Gaia DR3 cross-match → 6 streams rescued (Alpheus, NGC6362,
   Pegasus, Hermus, Hyllus, Tri-Pis)
 - T95.12: GMM attempt → HONEST FAILURE (documented, not used)
-- T95.13/T95.14: DESI [Fe/H] chemodynamic GMM → 2 more rescued
-  (Parallel, Perpendicular)
+- T95.13/T95.14: DESI [Fe/H] chemodynamic GMM. Both Parallel AND
+  Perpendicular fit successfully (v_3d 394 and 329 km/s respectively).
+  After the T104 audit fix, both are counted in the joint fit, bringing
+  rescued count from 6 (T95.11) to 8 (T95.14). T95 finding unchanged
+  at 9/10 (GD-1 still separates). 17 streams now have real kinematic
+  constraints.
 
 **Total: 8 of 13 originally degenerate streams now have kinematic
 constraints.** Headline T95 finding unchanged: 9/10 streams consistent
