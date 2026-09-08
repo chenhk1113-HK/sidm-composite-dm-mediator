@@ -123,7 +123,7 @@ def gaia_cone_search(ra_deg: float, dec_deg: float, radius_deg: float,
     SELECT TOP {max_rows}
         source_id, ra, dec, parallax, parallax_error,
         pmra, pmdec, radial_velocity,
-        ruwe, visibility_periods_used, phot_g_mean_mag
+        ruwe, visibility_periods_used, phot_g_mean_mag, bp_rp
     FROM gaiadr3.gaia_source
     WHERE 1 = CONTAINS(
         POINT('ICRS', ra, dec),
