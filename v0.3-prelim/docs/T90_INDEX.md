@@ -79,6 +79,18 @@ lighter-mass region. B1-lite (emcee, not full dynesty). 5.1s wall
 time. **T90 merge rule: 2 of 5 criteria satisfied** (same as T106;
 T107 strengthens but doesn't add a new criterion).
 
+**Cross-link to T108 (full 8D dynesty, 2026-09-08)**: see
+[T108_FULL_8D_DYNESTY.md](./T108_FULL_8D_DYNESTY.md). **First proper
+8D nested sampling** run (not B1-lite emcee). 7.3 min wall time at
+nlive=500, dlogz=0.1. **log Z = -162.78 ± 0.20** (v0.7 6D = -163.29,
+**Δlog Z = +0.51**). MAP: m_φ=479 MeV, m_χ=138 GeV, δ=98 keV,
+σ_PortalB=1.4×10⁻⁴² cm². **Confirms T107's lighter-mass region**
+(m_χ ≈ 130-140 GeV vs v0.7's 498 GeV). **T90 merge rule criterion
+#5 (Δlog Z ≥ +2) is NOT YET satisfied** (Δlog Z = +0.51, 2.5σ
+positive but below +2 threshold). **2 of 5 criteria satisfied**
+(same as T106/T107; T108 is the strongest evidence yet that the
+8D extension is consistent with v0.7).
+
 **Cross-link to Phase 3 (UV completion via lattice)**: see
 [T90_PATH_C4_V18_LATTICE_UV.md](./T90_PATH_C4_V18_LATTICE_UV.md)
 (also inline below). The v18 UV calculation uses LSD lattice
