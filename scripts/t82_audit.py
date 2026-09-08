@@ -93,6 +93,10 @@ CHECKS_PER_DOC: dict[str, list[tuple[str, str]]] = {
         ("Tier A Door B status text", "Door B (Portal B inelastic, T108) is the"),
         ("Tier A Door B Delta log Z", "+0.51"),
         ("Tier A Door C closed marker", "Door C CLOSED"),
+        # Tier B + D (2026-09-08) Multi-component DM (T111) and closure
+        ("Tier B Door D delta log Z", "-5.72"),
+        ("Tier D all doors closed heading", "All remaining doors closed for this model"),
+        ("Tier D Door D closed marker", "Door D CLOSED"),
     ],
     "EXTRACT.md": [
         ("Channels 22", "Channels: **22 effective**"),
