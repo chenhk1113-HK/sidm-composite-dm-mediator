@@ -63,7 +63,7 @@ class TestNoDriftState:
         # Specifically check VERSION drift-guard passed (current canonical = "0.4-prelim+T88E")
         assert "VERSION = '0.4-prelim+T88E' matches canonical" in out
 
-    def test_total_check_count_at_least_61(self):
+    def test_total_check_count_at_least_67(self):
         # Was >= 32 (with the original 10 README checks; pre-T86.7).
         # Post-T86.7: 10 README + 4 CITATION + 5 MODEL_ASSUMPTIONS +
         # 8 CURRENT.md + 3 EXTRACT + 6 LAYMAN + 2 CHANGELOG + 1 VERSION
@@ -73,13 +73,14 @@ class TestNoDriftState:
         # Post-Tier A (2026-09-08): +4 Door B status needles = 58 total.
         # Post-Tier B + D (2026-09-08): +3 Tier B + D needles = 61 total
         # (Tier B Door D log Z needle dropped; delta only is sufficient).
+        # Post-Door B refs (2026-09-08): +6 Door B paper/data needles = 67 total.
         rc, out = _capture_main()
         assert rc == 0
         for line in out.splitlines():
             if line.startswith("ALL CLEAR"):
                 n_str = line.split("ALL CLEAR: ")[1].split("/")[0]
-                assert int(n_str) >= 61, (
-                    f"Expected ≥61 total checks, got {n_str}"
+                assert int(n_str) >= 67, (
+                    f"Expected ≥67 total checks, got {n_str}"
                 )
 
     def test_t90_door_b_section_in_model_assumptions(self):
@@ -108,6 +109,13 @@ class TestNoDriftState:
         assert "Tier B Door D delta log Z" in out
         assert "Tier D all doors closed heading" in out
         assert "Tier D Door D closed marker" in out
+        # Door B references (2026-09-08) - 5 papers + future data
+        assert "Door B Di Mauro 2026 ref" in out
+        assert "Door B Berlin Ferraro 2025 ref" in out
+        assert "Door B Cline 2024 ref" in out
+        assert "Door B DIAMX 2026 ref" in out
+        assert "Door B XENONnT 2025 ref" in out
+        assert "Door B LZ Run 4 future data" in out
 
 
 class TestDriftDetection:

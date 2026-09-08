@@ -97,6 +97,13 @@ CHECKS_PER_DOC: dict[str, list[tuple[str, str]]] = {
         ("Tier B Door D delta log Z", "-5.72"),
         ("Tier D all doors closed heading", "All remaining doors closed for this model"),
         ("Tier D Door D closed marker", "Door D CLOSED"),
+        # Door B references (2026-09-08) - 5 papers + future data
+        ("Door B Di Mauro 2026 ref", "Di Mauro et al. (2026)"),
+        ("Door B Berlin Ferraro 2025 ref", "Berlin & Ferraro (2025)"),
+        ("Door B Cline 2024 ref", "Cline et al. (2024)"),
+        ("Door B DIAMX 2026 ref", "DIAMX Collaboration (2026)"),
+        ("Door B XENONnT 2025 ref", "XENONnT (2025)"),
+        ("Door B LZ Run 4 future data", "LZ Run 4 (2027-2028)"),
     ],
     "EXTRACT.md": [
         ("Channels 22", "Channels: **22 effective**"),

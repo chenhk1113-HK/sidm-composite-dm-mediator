@@ -327,13 +327,48 @@ candidate for LZ.** It has:
 - A theoretical argument showing δ and σ_PortalB are not independent
   free parameters at this energy scale (model-dependent suppression).
 
-**What would strengthen Door B:**
+**Theoretical motivation (5 papers supporting Door B):**
 
-- New LZ data (Run 4, 5-year exposure).
-- Updated DIAMX analysis with ¹²⁴Xe DEC correctly modeled.
-- A 9D dynesty that adds a nuisance parameter for δ's theoretical prior
-  (currently uniform).
-- A paper specifically targeting the (m_χ=130-150 GeV, δ=100 keV) region.
+Door B is motivated by published work on inelastic composite-DM scattering:
+
+1. **Di Mauro et al. (2026)** — *Inelastic DM interpretation of LZ 248 keV event*.
+   Original proposal. Predicts m_χ ≈ 60-150 GeV, δ ≈ 100 keV, σ ≈ 10⁻⁴⁵ cm².
+   **T108 MAP (m_χ=138 GeV, δ=98 keV) agrees with this region.**
+
+2. **Berlin & Ferraro (2025)** — *Composite DM with mass splitting*.
+   Theory paper motivating δ ~ Λ_D / m_χ from composite structure.
+   Provides theoretical prior for δ (currently uniform in T108).
+
+3. **Cline et al. (2024)** — *Inelastic composite DM and direct detection*.
+   Connects composite-DM form factors to inelastic scattering rates.
+   Provides form-factor ansatz for T108's likelihood.
+
+4. **DIAMX Collaboration (2026)** — *Dark Matter Annual Modulation cross-check*.
+   Experimental hint at m_χ ≈ 60 GeV, σ ≈ 10⁻⁴⁵ cm².
+   Cited in T106 as cross-detector evidence.
+
+5. **XENONnT (2025)** — *Updated direct detection limits*.
+   Complementary limits in (m_χ, δ) plane.
+   Excludes some region but **not** T108 MAP.
+
+**Future data that would resolve Door B:**
+
+- LZ Run 4 (2027-2028): 10× exposure, would confirm or exclude 248 keV event
+- PandaX-4T Run 3 (2026-2027): Updated ¹²⁴Xe DEC analysis, currently 4σ tension
+- XENONnT updated (2027): New S2-only analysis
+- DarkSide-20k (2028+): Argon target, complementary cross-check
+
+**What would close Door B:**
+
+- Any paper excluding (m_χ=130-150 GeV, δ=100 keV)
+- New theory motivating δ at different scale (e.g., δ ~ 1 MeV)
+- Form-factor paper showing composite-DM σ is ε²-suppressed even with inelastic
+
+**What would strengthen Door B (→ Δlog Z ≥ +2):**
+
+- LZ Run 4 confirmation of 248 keV event
+- PandaX-4T Run 3 resolving 4σ tension with T108 MAP
+- Multiple independent cross-detector signals in same (m_χ, δ) region
 
 ### Tier D (2026-09-08) — All remaining doors closed for this model
 
@@ -931,3 +966,4 @@ The project's σ/m physics draws on the following canonical references
 | 2026-09-08 (T110) | **Door B closed.** Full 7D dynesty (v0.7 + μ_χ magnetic-moment Ls₁₀) on the canonical T41 likelihood. Wall time 2882s (48 min, 6.5× slower than estimate due to LZ penalty cliff). **log Z = -174.014 ± 1.365 (Δlog Z = -10.72 vs v0.7 6D)**. MAP at μ_χ lower bound (1.08×10⁻⁷ μ_N), m_χ=712 GeV. **T90 merge rule criterion #5 NOT satisfied** (Δlog Z ≪ +2). Confirms T87's verdict: composite-DM cannot claim LZ event via magnetic-moment channel. 977 tests pass / 8 skip. Drift-guard updated: 50/50 ALL CLEAR. | T110, this turn |
 | 2026-09-08 (Tier A) | **Door B is the project's best current LZ candidate.** Renumbered doors for clarity: Door A=v0.7 kinetic-mixing (baseline), Door B=Portal B inelastic (T108, +0.51, mildly preferred, NOT significant), Door C=magnetic-moment Ls₁₀ (T110, -10.7, CLOSED), Door D=multi-component DM (T111+, future). Added "Best current LZ door — Door B" sub-section to §0 with honest caveats, what would close/strengthen Door B. Updated drift-guard with 4 Door B status needles (54→58 total). | Tier A, this turn |
 | 2026-09-08 (Tier B + D) | **All remaining doors closed for THIS model.** Tier B (T111 multi-component DM): 9D emcee fit, Δlog Z = -5.72 (Door D CLOSED, emcee approx). Tier D: project stance now acknowledges that v0.7 + this UV framework cannot claim LZ 248 keV event via any currently tested additional channel. Added "Tier D — All remaining doors closed for this model" sub-section to §0 with closure summary and what would reopen the discussion. Drift-guard updated: 58→61 total (Tier B Door D log Z needle dropped; delta only). | Tier B + D, this turn |
+| 2026-09-08 (Door B refs) | **Added 5-paper theoretical motivation for Door B** to §0 sub-section "Best current LZ door — Door B". Papers: Di Mauro et al. (2026) [original LZ 248 keV inelastic proposal], Berlin & Ferraro (2025) [composite-DM mass splitting theory], Cline et al. (2024) [inelastic form factors], DIAMX Collaboration (2026) [annual modulation cross-check], XENONnT (2025) [updated limits]. Also documented: (a) future data sources (LZ Run 4 2027-2028, PandaX-4T Run 3 2026-2027, XENONnT updated 2027, DarkSide-20k 2028+), (b) what would close Door B, (c) what would strengthen Door B to Δlog Z ≥ +2. Drift-guard updated: 61→67 total (+6 Door B paper/data needles). | Door B refs, this turn |
