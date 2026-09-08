@@ -303,6 +303,11 @@ User has not yet approved a merge; awaiting direction.
 - T90 work is WIP until user explicitly approves merge.
 - **As of 2026-09-08 (post-T112):** T90 branch is ELIGIBLE for merge to master
   (3 of 5 criteria satisfied; criterion #5 was the last to flip).
+- **As of 2026-09-08 (post-T115):** T112's +2.13 is real but its interpretation
+  is now "data compatible with Portal B" rather than "data strongly prefer Portal B
+  for LZ explanation." The user's methodological point (sequential is the essence)
+  is validated: T115 sequential check reveals σ_PortalB at T112 MAP is too small to
+  match LZ observation.
 - σ_DM-DM (headline σ/m) is **unchanged** by adding the magnetic-moment channel.
 - σ_DM-nucleon (Door C) does not change σ/m and is a separate observable.
 - The LZ 248 keV event, if real, would require either a larger magnetic-moment
@@ -465,6 +470,28 @@ to master, subject to user approval.
 4. **DIAMX's ~60 GeV preference is NOT resolved** — T112 MAP at m_χ = 144 GeV
    is closer to T108 MAP (138 GeV) than to DIAMX (60 GeV). The 4σ tension
    between T108 and DIAMX persists in T112.
+
+### T115 Sequential Confirmation (2026-09-08) — HONEST FAILURE
+
+User raised methodological point: sequential approach is "the essence."
+T115 did the sequential confirmation of T112 MAP. **Both sequential
+checks failed:**
+
+- **v0.7 6D fit alone** (no LZ/DIAMX terms): log Z = -164.78 (drift = 1.49
+  from published -163.29, above 1.0 threshold). m_φ, m_χ preserved within
+  factor 2.
+- **LZ event prediction at T112 MAP**: N_pred = 0.0086 events in [200, 300]
+  keV (way below 1 expected from LZ observation).
+
+**Interpretation update:** T112's +2.13 is real but means "data are
+COMPATIBLE with Portal B" rather than "data STRONGLY PREFER Portal B for
+LZ." σ_PortalB at T112 MAP (8.7×10⁻⁴⁷) is BELOW LZ exclusion limit; the
+fit found that adding (δ, σ_PortalB) doesn't hurt the likelihood but
+doesn't strongly explain LZ either.
+
+**User's methodological point is validated:** the sequential check is
+needed for full validation. T112 global + sequential together give:
+"compatible, not strongly preferred."
 
 ### Tier D (2026-09-08) — All remaining doors closed for this model
 
@@ -1065,3 +1092,4 @@ The project's σ/m physics draws on the following canonical references
 | 2026-09-08 (Door B refs) | **Added 5-paper theoretical motivation for Door B** to §0 sub-section "Best current LZ door — Door B". Papers: Di Mauro et al. (2026) [original LZ 248 keV inelastic proposal], Berlin & Ferraro (2025) [composite-DM mass splitting theory], Cline et al. (2024) [inelastic form factors], DIAMX Collaboration (2026) [annual modulation cross-check], XENONnT (2025) [updated limits]. Also documented: (a) future data sources (LZ Run 4 2027-2028, PandaX-4T Run 3 2026-2027, XENONnT updated 2027, DarkSide-20k 2028+), (b) what would close Door B, (c) what would strengthen Door B to Δlog Z ≥ +2. Drift-guard updated: 61→67 total (+6 Door B paper/data needles). | Door B refs, this turn |
 | 2026-09-08 (T112/T113/T114) | **Reviewer-driven actions on Door B** ("Suggestions for taking Door B further", 2026-09-08). Implemented top 3 reviewer suggestions: (1) **T112** — high-resolution 8D dynesty (nlive=2000 vs T108's 500, dlogz=0.05 target) with tight delta prior ([50, 200] keV per Berlin & Ferraro 2025) — addresses §1(a) and §1(c); running in background proc_f136bac59d7e, ETA ~30 min. (2) **T113** — event-rate forecasts at T108 MAP for LZ Run 4 (1036 events), PandaX-4T Run 3 (192 events), XENONnT S2-only (414 events), DarkSide-20k (1554 events, argon form factor 0.3) — addresses §3(a) and §3(c). (3) **T114** — ¹²⁴Xe DEC charge-yield systematic study, showing ~0.6 sigma drop if charge-yield is treated as free — addresses §4(b). Deferred per user: §2 (UV completion), §3(b) (annual modulation forecast), §4(a) (DIAMX ~60 GeV vs 19-channel likelihood) — out of project scope or would need new theory work. | T112/T113/T114, this turn |
 | 2026-09-08 (T112 result) | **T112 BREAKTHROUGH — T90 merge criterion #5 SATISFIED.** T112 completed in 1474s (24.6 min, 3.4× slower than T108's 438s). **log Z = -161.16 ± 0.09 (Δlog Z = +2.13 vs v0.7 6D).** log Z uncertainty (±0.09) is BELOW Δlog Z (+2.13), so result is robust within the prior assumptions. MAP at m_φ=446 MeV, m_χ=144 GeV, δ=116 keV (DIAMX best-fit: 130 keV — agreement within uncertainties), σ_PortalB=8.7×10⁻⁴⁷ cm². **T90 merge rule: 3/5 criteria satisfied.** Branch is now eligible for merge to master, subject to user approval. Honest caveats: TIGHT PRIOR on δ reduces parameter volume (Δlog Z is NOT apples-to-apples with T108's wide prior), but the prior is theoretically motivated by Berlin & Ferraro (2025). Updated §0 standing posture from "WIP, not ready" to "WIP until user approves merge; ELIGIBLE for merge as of 2026-09-08". Drift-guard updated with T112 breakthrough needles. | T112 result, this turn |
+| 2026-09-08 (T115) | **Sequential confirmation of T112 MAP — HONEST FAILURE finding.** User raised methodological point that sequential approach is "the essence" (find a workable solution first, then test against other data, rather than letting new params flow freely in global fit). T115 does sequential confirmation: (1) **v0.7 6D fit alone** (no LZ/DIAMX terms) at T112 MAP → log Z = -164.78 (drift = 1.49 from published -163.29, above 1.0 threshold). m_φ, m_χ preserved within factor 2. (2) **LZ event prediction at T112 MAP** → N_pred = 0.0086 events in [200, 300] keV (way below 1 expected). BOTH sequential checks FAIL. **T112's +2.13 is real but its interpretation changes**: the data are COMPATIBLE with Portal B (don't reject it) but DON'T strongly prefer it for LZ explanation (σ_PortalB at MAP is too small). The user's methodological point is validated: sequential check is needed for full validation. Updated standing posture: T90 branch still eligible (criterion #5 satisfied) but interpretation is now "compatible, not strongly preferred". Drift-guard updated with T115 needles. | T115, this turn |

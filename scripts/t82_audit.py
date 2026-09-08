@@ -117,6 +117,11 @@ CHECKS_PER_DOC: dict[str, list[tuple[str, str]]] = {
         ("T112 breakthrough criterion 5 status", "T90 merge rule criterion #5: SATISFIED"),
         ("T112 breakthrough 3 of 5 status", "3 of 5 T90 criteria satisfied"),
         ("T112 breakthrough merge eligible", "ELIGIBLE for merge to master"),
+        # T115 sequential confirmation (2026-09-08) - HONEST FAILURE finding
+        ("T115 sequential v07 log Z drift", "1.49"),
+        ("T115 sequential LZ N_pred at MAP", "0.0086"),
+        ("T115 sequential verdict", "Both sequential"),
+        ("T115 interpretation update", "data compatible with Portal B"),
     ],
     "EXTRACT.md": [
         ("Channels 22", "Channels: **22 effective**"),
