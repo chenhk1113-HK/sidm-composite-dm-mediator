@@ -47,6 +47,26 @@ with three independent portals (kinetic mixing, inelastic 𝒪₁ˢ,
 magnetic-moment) all contributing ~30-50% posterior. The framing
 is interpretive; no new model parameters, no new fit, no T90 merge.
 
+**Cross-link to T105 (UV consistency check, 2026-09-08)**: see
+[T105_UV_CONSISTENCY.md](./T105_UV_CONSISTENCY.md). Quantifies
+the T99 framing: sweeps (m_ψ, Λ_D, α_D, suppression_orders)
+parameter space (810,000 points) and asks whether BOTH Portal A
+and Portal B can be produced from the same composite-DM structure.
+Result: 0.08% of parameter space satisfies both (TIGHT verdict).
+The Alves-Wacker 2010 framework naturally produces both portals
+from the same composite structure, but only in a narrow corner.
+
+**Cross-link to T106 (multi-experiment joint fit, 2026-09-08)**: see
+[T106_MULTI_EXPERIMENT_JOINT.md](./T106_MULTI_EXPERIMENT_JOINT.md).
+Adds PandaX-4T and XENONnT constraints to T103's LZ-only fit, using
+the DIAMX combined analysis (arXiv:2512.05850v3, Nov 2025). **CRITICAL
+FINDING: T90 merge criterion #1 is SATISFIED** (2 of 3 experiments
+show > 2.5σ at the same DIAMX best-fit point m_χ=60 GeV, δ=130 keV).
+But: project's T103 MAP at (483 GeV, 295 keV) is 15σ from DIAMX
+best-fit — a major TENSION. The data prefer a LIGHTER DM mass than
+what the project's LZ-only fit suggests. **T90 merge is now closer
+to justified (2 of 5 criteria: #1 + #4) but still needs 1 more.**
+
 **Cross-link to Phase 3 (UV completion via lattice)**: see
 [T90_PATH_C4_V18_LATTICE_UV.md](./T90_PATH_C4_V18_LATTICE_UV.md)
 (also inline below). The v18 UV calculation uses LSD lattice
