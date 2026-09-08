@@ -67,6 +67,18 @@ best-fit — a major TENSION. The data prefer a LIGHTER DM mass than
 what the project's LZ-only fit suggests. **T90 merge is now closer
 to justified (2 of 5 criteria: #1 + #4) but still needs 1 more.**
 
+**Cross-link to T107 (full 8D joint fit, 2026-09-08)**: see
+[T107_FULL_8D_JOINT.md](./T107_FULL_8D_JOINT.md). **MAJOR REVISION
+to the project's LZ-only best-fit.** 8D emcee MCMC with 6 v0.7
+parameters + (log δ, log σ_PortalB) finds MAP at m_χ=131 GeV,
+δ=145 keV, σ_PortalB=2.9×10⁻⁴¹ cm². This is **closer to DIAMX
+endothermic best-fit (60 GeV, 130 keV) than to T103 (483 GeV, 295
+keV)** — distance 0.34 vs 0.65 in (m_χ, δ) log space. The 8D fit
+RESOLVES the T103↔DIAMX tension by settling on an intermediate
+lighter-mass region. B1-lite (emcee, not full dynesty). 5.1s wall
+time. **T90 merge rule: 2 of 5 criteria satisfied** (same as T106;
+T107 strengthens but doesn't add a new criterion).
+
 **Cross-link to Phase 3 (UV completion via lattice)**: see
 [T90_PATH_C4_V18_LATTICE_UV.md](./T90_PATH_C4_V18_LATTICE_UV.md)
 (also inline below). The v18 UV calculation uses LSD lattice
