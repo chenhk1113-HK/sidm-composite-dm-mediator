@@ -579,3 +579,85 @@ constraints requires photometric follow-up campaigns (Gaia DR4 due Dec 2026,
 - **876 pass / 8 skip** (post-T95.9 baseline, prior to this pilot) +
   **+15 T95.10 tests** = **891 pass / 8 skip** (verified 2026-09-08)
 - Drift-guard audit: 44/44 ALL CLEAR
+
+---
+
+## Branch topology — 2026-09-08 split
+
+The `wip/tier3-magnetic-moment-LZ` branch (formerly containing both
+T95 stream cross-match AND T90 LZ 248 keV interpretation) has been
+**split into two branches** to reflect the divergent maturity of
+the two storylines:
+
+### `wip/t95-stream-cross-match` — MERGEABLE TO v0.5-PRELIM
+
+| Property | Value |
+|---|---|
+| Last commit | `4dc2bcc` (T95.13+T95.14 docs) |
+| Contents | T95.10–T95.14 (Gaia + DESI cross-match, 7 streams rescued) |
+| Status | **Mergeable to v0.5-prelim** on master — does not violate T90 rule |
+| Tests | 15 T95 tests pass (T95.11 gaia + T95.14 chemodynamic) |
+| Risk | Low — work is documented and self-contained |
+
+The T95 work:
+- T95.10: 113-stream residual pipeline (literature search scaffold)
+- T95.11: Gaia DR3 cross-match → 6 streams rescued (Alpheus, NGC6362,
+  Pegasus, Hermus, Hyllus, Tri-Pis)
+- T95.12: GMM attempt → HONEST FAILURE (documented, not used)
+- T95.13/T95.14: DESI [Fe/H] chemodynamic GMM → 2 more rescued
+  (Parallel, Perpendicular)
+
+**Total: 8 of 13 originally degenerate streams now have kinematic
+constraints.** Headline T95 finding unchanged: 9/10 streams consistent
+with master Yukawa, GD-1 separated.
+
+### `wip/tier3-magnetic-moment-LZ` — STAYS WIP (T90 rule active)
+
+| Property | Value |
+|---|---|
+| Last commit | `01a8dee` (T103 joint 4D fit) |
+| Contents | T90 v10–v22 + T87 §13 + T98 + T99 + T100 + T101 + T102 + T103 |
+| Status | **Stays WIP** per T90 merge rule (1 of 5 criteria met) |
+| Tests | 15 T101/T102/T103 tests pass |
+| Risk | T90 merge rule unchanged; cannot promote to master |
+
+The T90/LZ work:
+- T90 v10–v22: 13 paths on the magnetic-moment Ls₁₀ branch
+- T87 §13: Di Mauro 2026 cross-link
+- T98: numerical cross-check (74.8 OOM gap)
+- T99: two-portal framing
+- T100: research findings
+- T101/T102: LZ 248 keV data extraction + 2D Bayesian scan
+- T103: joint 4D fit (Portal A + Portal B) → recovers Di Mauro
+  (m_χ=1 TeV, δ=297 keV) and Fan-Tweed Higgsino (1.1 TeV, 350 keV)
+  within 1σ credible intervals
+
+**Two-portal framing (T99) is now quantitatively supported.**
+v0.7 MAP (Portal A) and LZ 248 keV (Portal B) coexist as
+independent EFT channels in the same composite-DM UV completion.
+
+### Archived branches (tagged)
+
+| Tag | Last commit | Reason |
+|---|---|---|
+| `archive/cleanup-2026-09-07` | `ce3323c` (Dockerfile) | Already merged to master at `a42f254` |
+| `archive/t95-chemodynamic-rescue` | `67dd88d` | Superseded by `wip/t95-stream-cross-match` |
+
+### Branch state summary (after 2026-09-08 split)
+
+| Branch | Status | Purpose |
+|---|---|---|
+| `master` | live | `a42f254` (v0.4-prelim+T88E) |
+| `archived/v0.4-prelim` | archived | historical |
+| `wip/tier3-magnetic-moment-LZ` | WIP @ `01a8dee` | LZ 248 keV interpretation |
+| `wip/t95-stream-cross-match` | ready @ `4dc2bcc` | T95 Gaia+DESI cross-match |
+| `experimental/t95-chemodynamic-rescue` | superseded | now archived as tag |
+| `wip/cleanup-2026-09-07` | merged to master | now archived as tag |
+
+### Test count after split (verified 2026-09-08)
+
+- **`wip/tier3-magnetic-moment-LZ`:** 924 pass / 8 skip
+  (T101+T102+T103 tests added today)
+- **`wip/t95-stream-cross-match`:** T95.11 + T95.14 tests pass (15+)
+- Both branches pass their respective test suites
+- Master unchanged at v0.4-prelim+T88E
