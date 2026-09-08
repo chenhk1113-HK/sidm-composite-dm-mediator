@@ -23,6 +23,20 @@ GD-1 perturber constraint. **T95 finds substantial-to-very-strong
 tension** with these astrophysical probes — see "T95 cross-check"
 section below.
 
+**Cross-link to Di Mauro 2026 (arXiv:2609.02608)**: see
+[T87_LZ_FORWARD_PREDICTION.md](./T87_LZ_FORWARD_PREDICTION.md)
+§13 "Cross-link: Di Mauro 2026". The paper interprets the LZ
+248 keV event as inelastic scattering via the 𝒪₁ˢ (L10s) operator
+with mass splitting δ ≈ 297-371 keV. **The kinematic part of the
+paper's prediction is consistent with the T87 δ-sweep, but the
+required σ_DM-nuc (~10⁻⁴³ cm²) is 74 orders of magnitude above
+v0.7 MAP (~10⁻¹¹⁷ cm²). The v0.7 MAP cannot produce the LZ event
+under the Di Mauro interpretation, and the T90 magnetic-moment
+branch is a separate elastic EFT channel that does not depend
+on δ.** This paper is the first published BSM-model motivation
+for the Ls₁₀ operator specifically (one of the 5 T90 merge
+criteria), but does not by itself satisfy the T90 merge rule.
+
 **Cross-link to Phase 3 (UV completion via lattice)**: see
 [T90_PATH_C4_V18_LATTICE_UV.md](./T90_PATH_C4_V18_LATTICE_UV.md)
 (also inline below). The v18 UV calculation uses LSD lattice

@@ -121,7 +121,7 @@ Pulled from `t41_mediator_mass_joint_fit_v0_7_with_dampe_lss_nlive2000.json`:
 | 50 | 0.500 | 0.930 | 0.870 | 1.15e-117 | 1.08e-117 |
 | 100 | 0.500 | 0.930 | 0.870 | 1.15e-117 | 1.07e-117 |
 | 200 | 0.499 | 0.930 | 0.870 | 1.15e-117 | 1.07e-117 |
-| 297 (Di Mauro) | 0.499 | 0.930 | 0.870 | 1.15e-117 | 1.07e-117 |
+| 297 ([Di Mauro 2026, arXiv:2609.02608](https://arxiv.org/abs/2609.02608)) | 0.499 | 0.930 | 0.870 | 1.15e-117 | 1.07e-117 |
 | 500 | 0.498 | 0.930 | 0.870 | 1.15e-117 | 1.07e-117 |
 
 **σ_inel_nuc is dominated by ε² × F²_composite** (the kinematic F_inel is near
@@ -348,5 +348,73 @@ model at v0.7 MAP cannot produce the LZ event at the observed rate.**
 >
 > Audit: 40/40 ALL CLEAR. Tests: 549 pass / 8 skip (was 540/8 before T87).
 > Drift-guard tests: 5/5. No posterior re-run. No new physics.
+
+---
+
+## 13. Cross-link: Di Mauro 2026 (arXiv:2609.02608)
+
+**Date added:** 2026-09-08
+**Reference:** Di Mauro, M., "Dark Matter at the Kinematic Edge: Interpreting
+the 248 keV LZ Nuclear-Recoil Candidate", arXiv:2609.02608v1 (2 Sep 2026).
+https://arxiv.org/abs/2609.02608
+
+### What the paper says
+
+Di Mauro interprets the LZ 248 keV event as inelastic scattering
+χ₁N → χ₂N with mass splitting δ. Two concrete particle models fit:
+
+| Model | m_χ | δ | σ_DM-nuc | Channel |
+|---|---|---|---|---|
+| Thermal pseudo-Dirac fermion | ~1 TeV | **297 keV** | 6.5×10⁻⁴³ cm² | Inelastic 𝒪₁ˢ (L10s) |
+| Thermal Higgsino | ~1.1 TeV | **371 keV** | (electroweak) | Inelastic 𝒪₁ˢ (L10s) |
+
+The paper explicitly states that the 𝒪₁₀ˢ operator reaches 3.4σ local
+significance at the LZ event. This is the same Ls₁₀ / L10s operator
+the project's magnetic-moment channel (T90) is built on.
+
+### What T87 says
+
+At v0.7 MAP (m_χ = 770 GeV, m_φ = 453 MeV, ε ~ 1.1×10⁻³⁷, α_χ ~ 6.8×10⁻¹⁷):
+
+| Quantity | v0.7 MAP (T87) | Di Mauro 2026 | Ratio |
+|---|---|---|---|
+| m_χ | 770 GeV | 1000-1100 GeV | comparable |
+| δ | 297 keV (tested, not MAP) | 297-371 keV | matches |
+| σ_DM-nuc at 248 keV | 1.15×10⁻¹¹⁷ cm² | 6.5×10⁻⁴³ cm² | **74 orders short** |
+| N_events at LZ (2.84 t-yr) | 4.8×10⁻⁷³ | ~1 (1 event observed) | 72 orders short |
+
+### What the gap means
+
+The **kinematic** part of the Di Mauro interpretation (δ ≈ 300 keV) is
+already consistent with the project's T87 sweep — δ = 297 keV was one
+of the 5 test values. The disagreement is at the **σ_DM-nuc** level:
+the paper's required cross-section (~10⁻⁴³ cm²) is 74 orders of
+magnitude above the v0.7 MAP prediction.
+
+The dominant suppression in T87 is **ε² × F²_composite** (kinetic
+mixing squared times the composite form factor). At ε ~ 10⁻³⁷, the
+project's freeze-in regime naturally produces a 70+ order deficit
+relative to secluded-WIMP σ_DM-nuc values.
+
+**This is consistent with the T90 magnetic-moment branch being a
+separate EFT channel** (the magnetic-moment operator is elastic, not
+inelastic, and the v17 Bayesian time-series analysis already showed
+magnetic-moment and Higgsino-inelastic as TIED interpretations at
+47% posterior mass each, with the magnetic-moment channel being
+specifically magnetic-dipole not generic EFT).
+
+### What this does NOT change
+
+- **T90 merge rule is unchanged.** The Di Mauro paper is one
+  published BSM-model motivation for the Ls₁₀ operator (one of the
+  5 merge criteria), but the other criteria (independent cross-detector
+  confirmation, peer-reviewed publication of the magnetic-moment
+  branch specifically, community consensus, fitted 7D posterior
+  Δ log Z ≥ +2) are still unmet.
+- **T87 verdict is unchanged.** v0.7 MAP cannot produce the LZ event
+  at the observed rate, and Di Mauro's interpretation does not
+  rescue it.
+- **No new physics.** This cross-link is documentation, not a model
+  change.
 
 — Hermes Agent (MiniMax-M3)
