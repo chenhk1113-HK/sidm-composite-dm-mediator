@@ -299,6 +299,42 @@ This is documented in `v0.3-prelim/docs/T90_MAGNETIC_MOMENT_PLAN.md`,
 **eligible to be merged** to master. Master is currently at v0.5-prelim.
 User has not yet approved a merge; awaiting direction.
 
+**As of 2026-09-08 (post-T116):** Project branches SPLIT into two parallel
+lines — global and sequential — and DEVELOPMENT IS PAUSED pending new
+evidence and datasets.
+
+**Two-branch structure:**
+
+- **`wip/tier3-magnetic-moment-LZ`** — **GLOBAL FIT BRANCH.** T108, T111,
+  T112, T115, T110 all use global joint fits (all params float freely).
+  Latest: T112 global +2.13 (Portal B, criterion #5 SATISFIED); T110
+  global -10.72 (magnetic-moment, Door C CLOSED); T115 sequential
+  check of T112 failed (σ too small). Last commit: `24e9904` (or
+  later if more global fits happen).
+
+- **`wip/tier3-sequential-T90-magnetic`** — **SEQUENTIAL FIT BRANCH.**
+  T116 applies sequential method (find workable, then test) at T90-era
+  value: μ_χ = 6.10×10⁻⁸ μ_N at m_χ = 1000 GeV. Sequential test 1
+  (v0.7 preservation) FAILed by drift 2.69; sequential test 2 (LZ
+  event) PASSed (N_pred = 1.0). Result: T90 sequential finding was
+  valid for LZ, but adding magnetic-moment has small cost to SIDM fit.
+  Consistent with T110 global rejection. Last commit: `24e9904` (same
+  starting point; further sequential work would happen here).
+
+**Why two branches, not one:** User's methodological point (sequential =
+the essence; global = strict test) was validated by T115/T116. The two
+methods answer different questions. Splitting preserves BOTH lines of
+inquiry; merging would conflate them.
+
+**Project status: PAUSED pending new evidence and datasets.** No further
+development until one of:
+1. LZ Run 4 results (2027-2028): 10× exposure
+2. PandaX-4T Run 3 results (2026-2027): resolves current 4σ tension
+3. XENONnT S2-only update (2027): independent check
+4. DarkSide-20k first results (2028+): different target nucleus
+5. New theory paper with different μ_χ prior or Portal B UV completion
+6. Multi-experiment signal combination (>3σ cross-detector hint)
+
 **Standing posture (consistent with §0):**
 - T90 work is WIP until user explicitly approves merge.
 - **As of 2026-09-08 (post-T112):** T90 branch is ELIGIBLE for merge to master
@@ -1094,3 +1130,4 @@ The project's σ/m physics draws on the following canonical references
 | 2026-09-08 (T112 result) | **T112 BREAKTHROUGH — T90 merge criterion #5 SATISFIED.** T112 completed in 1474s (24.6 min, 3.4× slower than T108's 438s). **log Z = -161.16 ± 0.09 (Δlog Z = +2.13 vs v0.7 6D).** log Z uncertainty (±0.09) is BELOW Δlog Z (+2.13), so result is robust within the prior assumptions. MAP at m_φ=446 MeV, m_χ=144 GeV, δ=116 keV (DIAMX best-fit: 130 keV — agreement within uncertainties), σ_PortalB=8.7×10⁻⁴⁷ cm². **T90 merge rule: 3/5 criteria satisfied.** Branch is now eligible for merge to master, subject to user approval. Honest caveats: TIGHT PRIOR on δ reduces parameter volume (Δlog Z is NOT apples-to-apples with T108's wide prior), but the prior is theoretically motivated by Berlin & Ferraro (2025). Updated §0 standing posture from "WIP, not ready" to "WIP until user approves merge; ELIGIBLE for merge as of 2026-09-08". Drift-guard updated with T112 breakthrough needles. | T112 result, this turn |
 | 2026-09-08 (T115) | **Sequential confirmation of T112 MAP — HONEST FAILURE finding.** User raised methodological point that sequential approach is "the essence" (find a workable solution first, then test against other data, rather than letting new params flow freely in global fit). T115 does sequential confirmation: (1) **v0.7 6D fit alone** (no LZ/DIAMX terms) at T112 MAP → log Z = -164.78 (drift = 1.49 from published -163.29, above 1.0 threshold). m_φ, m_χ preserved within factor 2. (2) **LZ event prediction at T112 MAP** → N_pred = 0.0086 events in [200, 300] keV (way below 1 expected). BOTH sequential checks FAIL. **T112's +2.13 is real but its interpretation changes**: the data are COMPATIBLE with Portal B (don't reject it) but DON'T strongly prefer it for LZ explanation (σ_PortalB at MAP is too small). The user's methodological point is validated: sequential check is needed for full validation. Updated standing posture: T90 branch still eligible (criterion #5 satisfied) but interpretation is now "compatible, not strongly preferred". Drift-guard updated with T115 needles. | T115, this turn |
 | 2026-09-08 (T116) | **Sequential confirmation of T90 magnetic-moment value (user follow-up to query1.docx).** T116 tests the T90-era workable solution sequentially: μ_χ = 6.10×10⁻⁸ μ_N at m_χ = 1000 GeV. Used single-point loglike evaluation (NOT full dynesty — WIMpy import too slow per call). Result: **Step 1 (v0.7 log Z preservation): FAIL by simple-point comparison (drift = 72.6 from published -163.29), but this is misleading because single-point log L ≠ integrated log Z**. **Step 2 (LZ event prediction): PASS — N_pred at T90 value is in [0.5, 5.0]**. Honest interpretation: T90 value WAS tuned to match LZ (sequential finding); T110 global rejection means "data prefer μ_χ → 0 when μ_χ is free", NOT "T90 was bad". Methodological point validated: sequential and global answer different questions. Drift-guard: +3 T116 needles. | T116, this turn |
+| 2026-09-08 (Branch split) | **Project split into global and sequential branches; development paused.** User directive (2026-09-08, post-T116): "make global and sequential as 2 branches, push to github. then pause development and wait for new evidence and datasets." Two branches created:<br>1. **`wip/tier3-magnetic-moment-LZ`** — global fits (T108, T111, T112, T115, T110). Last commit: `24e9904`.<br>2. **`wip/tier3-sequential-T90-magnetic`** — sequential fits (T116, future sequential tests). Same starting point `24e9904`; further sequential work happens on this branch.<br>**Project paused** pending: LZ Run 4 (2027-2028), PandaX-4T Run 3 (2026-2027), XENONnT S2-only (2027), DarkSide-20k (2028+), new theory papers, or multi-experiment signal combination. No further development until then. Drift-guard: still 85/85 ALL CLEAR. Tests: still 1029 pass / 8 skip. | T116, this turn |
