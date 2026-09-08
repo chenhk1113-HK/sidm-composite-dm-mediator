@@ -110,6 +110,13 @@ CHECKS_PER_DOC: dict[str, list[tuple[str, str]]] = {
         ("T113 LZ Run 4 forecast", "LZ Run 4 (2027-2028)"),
         ("T113 DarkSide-20k forecast", "DarkSide-20k (2028+)"),
         ("T114 Xe124 DEC systematic", "¹²⁴Xe DEC charge-yield systematic"),
+        # T112 breakthrough (2026-09-08) - T90 merge criterion #5 satisfied
+        ("T112 breakthrough delta log Z", "+2.13"),
+        ("T112 breakthrough log Z uncertainty", "± 0.09"),
+        ("T112 breakthrough MAP delta keV", "δ = 116 keV"),
+        ("T112 breakthrough criterion 5 status", "T90 merge rule criterion #5: SATISFIED"),
+        ("T112 breakthrough 3 of 5 status", "3 of 5 T90 criteria satisfied"),
+        ("T112 breakthrough merge eligible", "ELIGIBLE for merge to master"),
     ],
     "EXTRACT.md": [
         ("Channels 22", "Channels: **22 effective**"),
