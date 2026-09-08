@@ -104,6 +104,12 @@ CHECKS_PER_DOC: dict[str, list[tuple[str, str]]] = {
         ("Door B DIAMX 2026 ref", "DIAMX Collaboration (2026)"),
         ("Door B XENONnT 2025 ref", "XENONnT (2025)"),
         ("Door B LZ Run 4 future data", "LZ Run 4 (2027-2028)"),
+        # T112/T113/T114 reviewer-driven actions (2026-09-08)
+        ("T112 high-res dynesty nlive", "nlive=2000"),
+        ("T112 tight delta prior", "[50, 200] keV"),
+        ("T113 LZ Run 4 forecast", "LZ Run 4 (2027-2028)"),
+        ("T113 DarkSide-20k forecast", "DarkSide-20k (2028+)"),
+        ("T114 Xe124 DEC systematic", "¹²⁴Xe DEC charge-yield systematic"),
     ],
     "EXTRACT.md": [
         ("Channels 22", "Channels: **22 effective**"),
