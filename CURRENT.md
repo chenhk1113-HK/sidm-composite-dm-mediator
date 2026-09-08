@@ -6,6 +6,15 @@
 
 ---
 
+> ⚠️ **EXPERIMENTAL WORK IN SEPARATE BRANCH:** T95.13/T95.14 chemodynamic
+> stream-kinematics rescue is on branch `experimental/t95-chemodynamic-rescue`,
+> NOT master. See `EXPERIMENTAL_BRANCH_README.md` for the WIP status and
+> `v0.3-prelim/docs/T95_EXTENDED_113STREAMS_CHEMODYNAMIC.md` for full details.
+> Master remains `v0.4-prelim+T88E` per T90 merge rule (unvalidated branches
+> do not promote).
+
+---
+
 ## Standing: v0.4-prelim+T88E (Tier-1 milestone)
 
 The project is a joint-fit framework for self-interacting dark matter

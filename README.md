@@ -2,6 +2,8 @@
 
 > ⚠️ **Disclaimer:** It is a personal project out of curiosity, made using Hermes with **MiniMax M3** as the coder, **Doubao**, **Qwen 3.8 Max** and other AIs as reviewers.
 
+> ⚠️ **EXPERIMENTAL BRANCH NOTICE:** T95.13/T95.14 chemodynamic stream-kinematics rescue lives on branch `experimental/t95-chemodynamic-rescue`, NOT master. Master remains `v0.4-prelim+T88E` per the T90 merge rule (unvalidated branches do not promote to master). For the canonical T95 finding, see entries #9–#13 below. For the WIP chemodynamic work, see branch `experimental/t95-chemodynamic-rescue` and `EXPERIMENTAL_BRANCH_README.md` at the project root.
+
 **Joint-fit framework for self-interacting dark matter (SIDM), grounded in published multi-channel data (dSph, UFD, Bullet, SPARC, LZ, Fermi, DAMPE, Zhang+2025 LSS).**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)

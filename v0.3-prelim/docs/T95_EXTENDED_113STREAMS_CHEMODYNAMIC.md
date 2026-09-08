@@ -1,8 +1,14 @@
 # T95.13 — DESI DR1 Cross-Match of T95.11 Outliers
 
 **Date:** 2026-09-08
-**Branch:** `wip/tier3-magnetic-moment-LZ`
+**Branch:** `wip/tier3-magnetic-moment-LZ` (parent); `experimental/t95-chemodynamic-rescue` (this work is WIP)
 **Outcome:** 2 of 7 outliers got DESI coverage; 5 had no DESI footprint
+
+> ⚠️ **EXPERIMENTAL BRANCH:** The T95.14 chemodynamic results from this
+> document live on branch `experimental/t95-chemodynamic-rescue` (created
+> 2026-09-08) with an explicit WIP banner. They are NOT on master. See
+> `EXPERIMENTAL_BRANCH_README.md` at the project root for the validation
+> status and merge criteria.
 
 ---
 
