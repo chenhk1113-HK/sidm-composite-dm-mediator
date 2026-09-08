@@ -122,6 +122,10 @@ CHECKS_PER_DOC: dict[str, list[tuple[str, str]]] = {
         ("T115 sequential LZ N_pred at MAP", "0.0086"),
         ("T115 sequential verdict", "Both sequential"),
         ("T115 interpretation update", "data compatible with Portal B"),
+        # T116 sequential confirmation of T90 value (2026-09-08)
+        ("T116 T90 value mu_chi", "6.10"),
+        ("T116 T90 value m_chi", "1000"),
+        ("T116 sequential LZ event at T90", "in [0.5, 5.0]"),
     ],
     "EXTRACT.md": [
         ("Channels 22", "Channels: **22 effective**"),

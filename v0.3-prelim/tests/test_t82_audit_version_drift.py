@@ -63,7 +63,7 @@ class TestNoDriftState:
         # Specifically check VERSION drift-guard passed (current canonical = "0.4-prelim+T88E")
         assert "VERSION = '0.4-prelim+T88E' matches canonical" in out
 
-    def test_total_check_count_at_least_82(self):
+    def test_total_check_count_at_least_85(self):
         # Was >= 32 (with the original 10 README checks; pre-T86.7).
         # Post-T86.7: 10 README + 4 CITATION + 5 MODEL_ASSUMPTIONS +
         # 8 CURRENT.md + 3 EXTRACT + 6 LAYMAN + 2 CHANGELOG + 1 VERSION
@@ -71,19 +71,19 @@ class TestNoDriftState:
         # Post-T90 (2026-09-08): +6 T90 needles = 46 + 1 + 3 README = 50.
         # Post-T110 (2026-09-08): +4 T110 needles = 54 total.
         # Post-Tier A (2026-09-08): +4 Door B status needles = 58 total.
-        # Post-Tier B + D (2026-09-08): +3 Tier B + D needles = 61 total
-        # (Tier B Door D log Z needle dropped; delta only is sufficient).
+        # Post-Tier B + D (2026-09-08): +3 Tier B + D needles = 61 total.
         # Post-Door B refs (2026-09-08): +6 Door B paper/data needles = 67 total.
         # Post-T112/T113/T114 (2026-09-08): +5 reviewer-driven needles = 72 total.
         # Post-T112 breakthrough (2026-09-08): +6 T112 breakthrough needles = 78 total.
         # Post-T115 (2026-09-08): +4 T115 sequential needles = 82 total.
+        # Post-T116 (2026-09-08): +3 T116 sequential T90 value needles = 85 total.
         rc, out = _capture_main()
         assert rc == 0
         for line in out.splitlines():
             if line.startswith("ALL CLEAR"):
                 n_str = line.split("ALL CLEAR: ")[1].split("/")[0]
-                assert int(n_str) >= 82, (
-                    f"Expected ≥82 total checks, got {n_str}"
+                assert int(n_str) >= 85, (
+                    f"Expected ≥85 total checks, got {n_str}"
                 )
 
     def test_t90_door_b_section_in_model_assumptions(self):
@@ -137,6 +137,10 @@ class TestNoDriftState:
         assert "T115 sequential LZ N_pred at MAP" in out
         assert "T115 sequential verdict" in out
         assert "T115 interpretation update" in out
+        # T116 sequential confirmation of T90 value (2026-09-08)
+        assert "T116 T90 value mu_chi" in out
+        assert "T116 T90 value m_chi" in out
+        assert "T116 sequential LZ event at T90" in out
 
 
 class TestDriftDetection:
