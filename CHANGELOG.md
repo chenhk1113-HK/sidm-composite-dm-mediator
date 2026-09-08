@@ -25,6 +25,61 @@ doc-pack restructure, the T88/T89 dataset-acquisition series, and
 the T90 Tier-3 branch experiment. Kept at full fidelity because they
 are the rounds the project currently stands on.
 
+## [v0.5-prelim] — 2026-09-08
+
+**T95 stream cross-match (8 of 13 originally degenerate streams rescued)**
+
+### Added
+- **T95.10** — 113-stream residual pipeline + literature search scaffold
+  (380 queries, 1 real constraint: Sagittarius)
+- **T95.11** — Gaia DR3 cross-match via astroquery: 6 streams rescued
+  (Alpheus 70, NGC6362 260, Pegasus 448, Hermus 544, Hyllus 522,
+  Tri-Pis 649 km/s)
+- **T95.13** — DESI DR1 cross-match via NOIRLab TAP: 2 of 7 outliers
+  have DESI coverage (Parallel, Perpendicular)
+- **T95.14** — Chemodynamic GMM with DESI [Fe/H] prior: 2 more streams
+  rescued (Parallel 394, Perpendicular 329 km/s; [Fe/H] = -1.13, -1.72)
+- **T104 audit** — V1 5-label verification matrix; P0 bug fix
+  (Perpendicular now counted in n_rescued_total); P2 [Fe/H] discrepancy
+  resolved with dedicated section in CURRENT.md
+
+### Changed
+- 9 of 10 streams consistent with master Yukawa (GD-1 still separates
+  as interpretation problem)
+- 18 streams now have real kinematic constraints (was 16 in v0.4-prelim)
+
+### Honest failures (documented, not used in joint fit)
+- **T95.12** — 2-component Gaussian Mixture Model for stream-member
+  selection. NGC6362 smoke test gave biased v_3d (217 vs 260 km/s T95.11).
+  Full run yielded NaNs. Reverted to T95.11's median-pm heuristic.
+
+### Not in v0.5-prelim (stays WIP on `wip/tier3-magnetic-moment-LZ`)
+- T90 magnetic-moment Ls₁₀ branch (T90 v10-v22)
+- T87 §13 Di Mauro 2026 cross-link
+- T98 numerical cross-check (74.8 OOM gap)
+- T99 two-portal framing
+- T100 research findings for Tier-2 fit
+- T101 LZ 248 keV data extraction
+- T102 2D Bayesian scan
+- T103 joint 4D fit (Portal A + Portal B)
+
+### Tests
+- **38 T95 tests pass** (verified 2026-09-08)
+- Drift-guard audit: 44/44 ALL CLEAR
+- 2 regression tests added for T104 audit bug fix
+
+### Standing posture
+- **T90 merge rule** still active (1 of 5 criteria met: Di Mauro 2026
+  is published BSM-model motivation). Master stays at v0.5-prelim until
+  T90 work meets ≥1 additional criterion.
+- **v0.7 MAP** unchanged (σ/m = 0.27 cm²/g, log Z = -163.29)
+- **T95 finding** unchanged: 9/10 streams consistent with master Yukawa
+
+### Provenance
+- Tag: `v0.5-prelim` @ `6ce85c0`
+- Commit: `6ce85c0` (Merge wip/t95-stream-cross-match)
+- Branch: `master`
+
 ## [T89.3] — 2026-09-06
 
 **Reviewer5 audit fixes: 5 issues addressed (1, 2, 3-code, 5, EXTRACT
