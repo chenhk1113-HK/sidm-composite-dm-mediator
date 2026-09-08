@@ -64,13 +64,26 @@ def main() -> int:
     multi = multi_stream_loglik(sigma_m_master_yukawa, constraints)
     multi_baseline = multi_stream_loglik(sigma_m_master_yukawa, CURATED_STREAMS)
 
-    # Per-stream contributions for the 2 newly-rescued streams
+    # Per-stream contributions for the 2 newly-rescued streams.
+    # Note: Perpendicular is NOT in t95_11 (it was a T95.11 outlier),
+    # so we need to construct its entry from t95_14 + override info
+    # rather than filtering out non-existent entries.
+    t95_11_streams = {r["stream"] for r in t95_11}
     per_stream = []
     for s in ("Parallel", "Perpendicular"):
-        if s not in [r["stream"] for r in t95_11]:
-            continue
-        r = next(x for x in t95_11 if x["stream"] == s)
-        v = r["v_3d_rescued_kms"]
+        if s in t95_11_streams:
+            r = next(x for x in t95_11 if x["stream"] == s)
+            v = r["v_3d_rescued_kms"]
+            feh = next((o.get("new_feh") for o in overrides if o["stream"] == s), None)
+            vrad = r.get("rv_median_kms")
+        else:
+            # Perpendicular case: not in t95_11, get values from t95_14
+            t95_14_s = t95_14.get(s, {})
+            v = t95_14_s.get("v_3d_rescued_kms")
+            feh = t95_14_s.get("feh_median")
+            vrad = t95_14_s.get("vrad_median_kms")
+            if v is None:
+                continue  # no data for this stream
         sigma_m_pred = sigma_m_master_yukawa(v)
         per_stream.append({
             "stream": s,
@@ -80,8 +93,24 @@ def main() -> int:
             "box_high": sigma_m_pred * 3,
             "in_box": True,
             "loglik": 0.0,
-            "vrad_km_s": r.get("rv_median_kms"),
-            "feh": next((o.get("new_feh") for o in overrides if o["stream"] == s), None),
+            "vrad_km_s": vrad,
+            "feh": feh,
+        })
+
+    # Also add Perpendicular to the rescued list if it was newly classified
+    if "Perpendicular" not in [r["stream"] for r in rescued] and \
+       "Perpendicular" in t95_14 and \
+       t95_14["Perpendicular"].get("v_3d_rescued_kms", 1e9) < 700:
+        t95_14_p = t95_14["Perpendicular"]
+        rescued.append({
+            "stream": "Perpendicular",
+            "v_3d_rescued_kms": t95_14_p["v_3d_rescued_kms"],
+            "pmra_median_mas_yr": t95_14_p["pmra_median_mas_yr"],
+            "pmdec_median_mas_yr": t95_14_p["pmdec_median_mas_yr"],
+            "rv_median_kms": t95_14_p["vrad_median_kms"],
+            "feh_median": t95_14_p["feh_median"],
+            "n_members": t95_14_p.get("n_members", 0),
+            "rescue_method": "T95.14 chemodynamic GMM + DESI [Fe/H] prior (new stream)",
         })
 
     # Persist
