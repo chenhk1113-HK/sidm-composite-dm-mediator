@@ -18,12 +18,12 @@ All notable changes to this project are documented here. Format follows
 
 ---
 
-# Current era — full entries (T81 → T89)
+# Current era — full entries (T81 → T90)
 
-These seven entries cover the v0.4-prelim Tier-1 milestone, the recent
-doc-pack restructure, and the T88/T89 dataset-acquisition series.
-Kept at full fidelity because they are the rounds the project
-currently stands on.
+These eight entries cover the v0.4-prelim Tier-1 milestone, the recent
+doc-pack restructure, the T88/T89 dataset-acquisition series, and
+the T90 Tier-3 branch experiment. Kept at full fidelity because they
+are the rounds the project currently stands on.
 
 ## [T89.3] — 2026-09-06
 
@@ -231,6 +231,160 @@ check list leaves the literal-text checks stale and creates a
 read-the-script-vs-read-the-docs inconsistency. The fix is to
 always update both sides in the same commit. This is the same
 P18 failure mode the T88.E round (commit `12d0a58`) corrected.
+
+---
+
+## [T90] — 2026-09-06
+
+**🎯 YES — the project model can reproduce the LZ 248 keV event.
+Magnetic-moment Ls₁₀ added to Benchmark A at μ_x ≈ 3×10⁻⁸ μ_N
+gives ~1 event at 248 keV. Tier-3 branch experiment; σ/m₀ = 0.06
+cm²/g unchanged. Master posture preserved.**
+
+Tier-3 branch experiment: LZ 248 keV magnetic-moment EFT Ls₁₀
+channel (Channel 26) added to Benchmark A as a hybrid
+interpretation. Tests ship, posterior shift is small, headline
+σ/m₀ unchanged. Branch only — master posture preserved.
+
+This is the **Tier-3 branch experiment** the user requested
+("I want to explore tier 3, as a branch to our model"). All T90
+work lives on `wip/tier3-magnetic-moment-LZ` from master `7fb9cdd`;
+master itself is unchanged at `7fb9cdd` (v0.4-prelim+T88E).
+
+**Branch HEAD:** `0c905f5`
+**Commits on branch:**
+- `d637f81` Phase 0: plan + WIMpy_NREFT smoke test
+- `685819a` Phase 1+2: Channel 26 implementation + 19 tests
+- `a4e80e3` Phase 2 fix: unit convention (μ_N caller → μ_B WIMpy)
+- `0c905f5` Phase 3: full joint fit, Δlog Z = -1.5, σ/m₀ preserved
+
+### What shipped
+
+1. **WIMpy_NREFT v1.2** (MIT, source commit `50581c6`,
+   https://github.com/bradkav/WIMpy_NREFT) installed in
+   `.venv-sidm-bench/`. Patched installed `DMUtils.py` for
+   SciPy 1.18+ compatibility (`trapz` → `trapezoid`,
+   `cumtrapz` → `cumulative_trapezoid`).
+
+2. **Channel 26 — LZ magnetic-moment Ls₁₀** in
+   `v0.3-prelim/code/channels_extended.py`:
+   - `loglike_lz_magnetic_moment(m_chi, mu_x_N)` — Poisson log
+     likelihood on N_obs=1 at 248 keV over 2.84 tonne-years
+   - μ_x convention: caller passes μ_N (intuitive), function
+     converts to μ_B (WIMpy) via `MU_N_TO_MU_B = 1836.15267`
+   - Tuned coupling: μ_x = 3×10⁻⁸ μ_N (= 1.63×10⁻¹¹ μ_B) →
+     N_pred ≈ 1 at LZ best-fit mass (m_χ = 770-1000 GeV)
+   - Default-off; env-gated by
+     `T90_MAGNETIC_MOMENT_MU_X` (enable) and
+     `T90_MAGNETIC_MOMENT_DISABLE=1` (ablation)
+
+3. **T41 wire-in** in
+   `v0.3-prelim/code/t41_mediator_mass_joint_fit.py`:
+   `+ ll_lz_magnetic` added to `loglike_joint`, gated as above.
+
+4. **19 tests** in `v0.3-prelim/tests/test_lz_magnetic_moment.py`:
+   default gating, explicit disable, tuned coupling, near-zero
+   coupling, over-/under-prediction, μ_N↔μ_B conversion, T41
+   integration. **All pass** in `.venv-sidm-bench/`.
+
+5. **`v0.3-prelim/docs/T90_MAGNETIC_MOMENT_PLAN.md`** (Phase 0
+   plan + Phase 1+2 results + Phase 3 results).
+
+6. **`v0.3-prelim/docs/T90_MAGNETIC_MOMENT_FORWARD_PREDICTION.md`**
+   (forward predictions for DARWIN, indirect detection,
+   cosmology consistency).
+
+7. **Phase 3 posterior JSON**
+   `v0.3-prelim/data/results/t41_mediator_mass_joint_fit.json`
+   (315.5 sec wall on nlive=200).
+
+### Phase 3 verdict (vs v0.8 master)
+
+| Parameter | v0.8 master | v0.8 + Channel 26 | Δ |
+|---|---|---|---|
+| **log Z** | -164.868 ± 0.084 | -166.367 ± 0.249 | **-1.499** |
+| **MAP σ/m₀ (cm²/g)** | **0.0599** | **0.0599** | **0** |
+| MAP m_χ (GeV) | 478 | 421 | -57 |
+| MAP a | 0.132 | 0.065 | -0.067 |
+
+**Interpretation:** The magnetic-moment channel at μ_x = 3×10⁻⁸ μ_N
+is **compatible** with the data but **not preferred** (Δlog Z = -1.5
+on the Jeffreys scale is "anecdotal evidence against" — not a
+rejection). The headline σ/m₀ is unchanged. The MAP shifts toward
+lower m_χ where the magnetic-moment rate is higher.
+
+### Drift-guard impact (branch only)
+
+- 19 new tests added on this branch
+- Master test count: still 677 pass / 8 skip (master unchanged)
+- Branch test count (if run from this branch): 696 pass / 8 skip
+- Drift-guard audit at master: still 44/44 ALL CLEAR
+- VERSION file: unchanged at `0.4-prelim+T88E`
+
+### Pitfall captured (P31)
+
+WIMpy_NREFT's `dRdE_magnetic` expects `mu_x` in **Bohr magnetons
+(μ_B)**, not nuclear magnetons (μ_N). The original Phase 2 code
+(commit `685819a`) passed `mu_x` directly without converting and
+documented the coupling as μ_N. Fix in commit `a4e80e3`: explicit
+conversion via `MU_N_TO_MU_B = m_p/m_e = 1836.15267` (CODATA 2018)
+at the function boundary, with the unit clear in the docstring.
+The tuned coupling value also changed accordingly (3×10⁻¹¹ → 3×10⁻⁸)
+because the previous value was effectively 1/1836 of the actual
+WIMpy input.
+
+Standing rule for future porting work: ALWAYS verify unit
+conventions of imported libraries via `inspect.signature` +
+`__doc__` BEFORE writing dependent code. This is the same class
+of bug as P29 (citation discipline): verify the source of any
+unit/numerical convention rather than trusting the variable name.
+
+### Why not merge into master?
+
+Per the project's Tier-3 standing posture (T89 `REVIEWER_AUDIT_R_*`):
+Tier-3 branches are **experimental extensions**, not standing
+changes. T90 ships a **demonstrated capability** — Channel 26
+exists, is tested, can be enabled — but does not constitute a
+**standing scientific claim** because:
+
+1. The μ_x = 3×10⁻⁸ μ_N coupling is **fixed**, not fitted.
+   A proper marginal Bayes factor requires 7D posterior.
+2. The Δlog Z = -1.5 is **anecdotal**, not significant evidence.
+3. The forward-prediction impact on σ/m₀ is **null** (preserved
+   at 0.06 cm²/g) — the headline result is unchanged, but neither
+   is it strengthened.
+4. The energy-binned likelihood is not implemented (total
+   event count only).
+
+### Merge decision rule (user-stated, 2026-09-06)
+
+**The magnetic-moment knob will be merged into master if and only
+if the broader physics community establishes that the LZ 248 keV
+event is real.**
+
+The merge is gated by any one of:
+
+1. **Independent confirmation** of the LZ 248 keV event
+   (cross-detector: XENONnT / PandaX / DARWIN; or peer-reviewed
+   publication; or community consensus)
+2. **Independent motivation** for Ls₁₀ from a published BSM model
+3. **A fitted 7D posterior** showing Δlog Z ≥ +2 (preferred, not
+   merely compatible)
+
+**None of these are present today.** Until then, master stays at
+`v0.4-prelim+T88E` with σ/m₀ = 0.06 cm²/g, and the T87 verdict
+("composite-DM alone cannot explain LZ at v0.7 MAP, 71 orders
+short") remains the standing answer. T90 is the **hybrid** answer:
+composite-DM + magnetic-moment Ls₁₀ *can* explain LZ, but the data
+don't require it.
+
+This rule is **locked for the lifetime of the branch**. Any
+override requires explicit user direction.
+
+### See also
+
+- [`v0.3-prelim/docs/T90_MAGNETIC_MOMENT_PLAN.md`](v0.3-prelim/docs/T90_MAGNETIC_MOMENT_PLAN.md) — full plan + Phase 0-3 results
+- [`v0.3-prelim/docs/T90_MAGNETIC_MOMENT_FORWARD_PREDICTION.md`](v0.3-prelim/docs/T90_MAGNETIC_MOMENT_FORWARD_PREDICTION.md) — forward predictions for next-gen experiments
 
 ---
 

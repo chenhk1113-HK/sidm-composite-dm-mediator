@@ -179,6 +179,7 @@ CHANNEL_STATUS = {
     23: "production",                       # Euclid Q1 strong-lensing (T88.C) — silent cross-check at v0.7
     24: "production",                       # Euclid Q1 subhalo FORECAST (T88.E) — first non-silent, ε²-suppressed at v0.8
     25: "production",                       # Goldstein & Hill 2026 ΔN_eff<0.107 (T89) — documented null, ε²-suppressed
+    26: "production",                       # LZ magnetic-moment EFT Ls₁₀ (T90, wip/tier3 branch) — gated by env var, default OFF
 }
 
 
@@ -1601,6 +1602,305 @@ DARK_PHOTON_THERMALIZATION_EPSILON_THRESHOLD = 1.0e-5  # dimensionless
 # degree of freedom contributing at recombination). Formula from
 # standard cosmology: ΔN_eff = (8/7) × (11/4)^(4/3) × (1 bosonic DOF) ≈ 0.027
 DELTA_N_EFF_PER_THERMALIZED_BOSON = 0.027  # dimensionless
+
+
+# =======================================================================
+# Channel 26 (T90, wip/tier3 branch): LZ magnetic-moment EFT Ls₁₀
+# =======================================================================
+# This channel computes the magnetic-moment interaction contribution to
+# LZ direct detection and returns a Poisson log-likelihood based on the
+# predicted event count vs the observed 1 event at 248 keV.
+#
+# Design choice (Tier-3 exploration, default OFF):
+#   - The channel is GATED by env var T90_MAGNETIC_MOMENT_MU_X
+#   - If env var is unset, channel returns 0 (no effect on posterior)
+#   - If T90_MAGNETIC_MOMENT_DISABLE=1 is set, channel returns 0
+#   - Otherwise: compute predicted N_events at the tuned mu_x and return
+#     Poisson log-likelihood on (N_obs=1, N_pred)
+#
+# This design ensures:
+#   1. Master branch is unaffected (channel returns 0 by default)
+#   2. Tier-3 branch can activate the channel by setting T90_MAGNETIC_MOMENT_MU_X
+#   3. Easy ablation testing via T90_MAGNETIC_MOMENT_DISABLE=1
+#
+# Why magnetic-moment? The LZ paper (Di Mauro+ 2026, arXiv:2609.02608)
+# flags magnetic-moment Ls₁₀ as the leading candidate for explaining
+# the 248 keV event. At m_chi = 1000 GeV (LZ best-fit) and tuned
+# mu_x ~ 3e-8 mu_N (= 1.6e-11 mu_B), the operator produces ~1 event
+# in 2.84 tonne-years, matching the observation. See
+# T90_MAGNETIC_MOMENT_PLAN.md for details.
+
+# LZ WS2024 / 2026 exposure parameters (T77 + T80)
+LZ_EXPOSURE_TONNE_YEARS = 2.84  # tonne-years (combined SR0 + SR1)
+LZ_EXPOSURE_KG_DAYS = LZ_EXPOSURE_TONNE_YEARS * 1000.0 * 365.25  # kg-days
+
+# LZ 248 keV event properties (from arXiv:2609.02608)
+LZ_248KEV_N_OBS = 1  # single event observed
+LZ_248KEV_N_OBS_ERROR = 1.0  # Poisson sqrt(N_obs)
+
+# Magnetic-moment operator reference values (Phase 1 calibration, 2026-09-06)
+# NOTE: WIMpy_NREFT's dRdE_magnetic expects mu_x in BOHR MAGNETONS (mu_B),
+# not nuclear magnetons. 1 mu_B = m_p/m_e * mu_N = 1836.15267 mu_N.
+# This channel takes mu_x in mu_N (more intuitive for nuclear physics)
+# and converts internally via MU_N_TO_MU_B.
+MU_N_TO_MU_B = 1836.15267  # dimensionless conversion factor
+
+MAGNETIC_MOMENT_LZ_TUNED_MU_X_MU_N = 6.10e-8  # mu_N units (CALLER convention)
+# T90.1 Phase 8 correction: Phase 0 smoke test claimed this was 3e-8 mu_N
+# giving N_pred=1.89, but that was BEFORE the unit-conversion fix (a4e80e3).
+# The pre-fix code was treating "3e-8" as 3e-8 mu_B = 5.5e-6 mu_N, NOT 3e-8 mu_N.
+# Post-fix: μ_x = 3e-8 mu_N gives N_pred ≈ 0.24. Bisecting for N_pred=1 gives
+# μ_x ≈ 6.10e-8 mu_N (m_chi=1000) and 5.48e-8 mu_N (m_chi=770). See
+# t41_v08_phase8_d10_mapping.py for the corrected calibration.
+# Equivalent in mu_B: 6.10e-8 mu_N * (1/1836.15267) = 3.32e-11 mu_B
+# At this coupling, the magnetic-moment operator produces ~1 event in
+# 2.84 tonne-years at m_chi ~ 770-1000 GeV, matching LZ observation.
+MAGNETIC_MOMENT_LZ_TUNED_M_CHI = 1000.0  # GeV (LZ paper best-fit)
+
+# Recoil energy integration bounds (keV)
+LZ_248KEV_E_MIN = 200.0  # keV
+LZ_248KEV_E_MAX = 300.0  # keV
+
+
+def loglike_lz_magnetic_moment(
+    m_chi_GeV: float,
+    mu_x: float,
+    include_in_fit: bool = True,
+) -> float:
+    """Channel 26 (T90, wip/tier3 branch): LZ magnetic-moment EFT Ls₁₀.
+
+    Computes the magnetic-moment interaction contribution to LZ direct
+    detection and returns a Poisson log-likelihood based on the predicted
+    event count vs the observed 1 event at 248 keV.
+
+    **Unit convention:** Caller passes `mu_x` in NUCLEAR MAGNETONS (μ_N),
+    the conventional unit in nuclear/hadronic physics. Internally this is
+    converted to BOHR MAGNETONS (μ_B) before passing to WIMpy_NREFT,
+    which uses the atomic-physics convention.
+
+    **Tier-3 exploration channel — default OFF.** This channel only
+    fires when the env var T90_MAGNETIC_MOMENT_MU_X is set; otherwise
+    it returns 0 to preserve master behavior.
+
+    Args:
+        m_chi_GeV: SIDM particle mass in GeV
+        mu_x: magnetic dipole moment in MU_N (nuclear magnetons).
+              Pass None or a non-positive value to disable.
+        include_in_fit: if False, returns 0 (do not include in fit sum)
+
+    Returns:
+        Log-likelihood based on Poisson(N_obs=1, N_pred(mu_x, m_chi_GeV)).
+        Returns 0 if:
+          - include_in_fit is False
+          - mu_x is None, non-positive, or non-finite
+          - m_chi_GeV is None or non-positive
+          - WIMpy_NREFT import fails (returns 0 + warning)
+        The log-likelihood is bounded:
+          - At N_pred = N_obs = 1: log L = -1 (Poisson best)
+          - At N_pred >> N_obs: log L ~ -N_pred (over-prediction penalty)
+          - At N_pred << N_obs: log L ~ -N_obs * log(N_pred) (under-prediction penalty)
+    """
+    if not include_in_fit:
+        return 0.0
+    if (m_chi_GeV is None or mu_x is None
+            or not np.isfinite(m_chi_GeV) or not np.isfinite(mu_x)):
+        return 0.0
+    if m_chi_GeV <= 0 or mu_x <= 0:
+        return 0.0
+    # WIMP mass out-of-range guard
+    if m_chi_GeV < 0.1 or m_chi_GeV > 1e5:
+        return 0.0
+    # Magnetic-moment coupling out-of-range guard (in mu_N; wide bounds)
+    if mu_x < 1e-20 or mu_x > 1.0:  # upper bound relaxed since mu_N is small
+        return 0.0
+
+    # Convert from mu_N (caller convention) to mu_B (WIMpy convention)
+    mu_x_muB = mu_x / MU_N_TO_MU_B
+
+    # Lazy import (WIMpy_NREFT is only in .venv-sidm-bench/)
+    try:
+        from WIMpy import DMUtils as DMU
+    except ImportError:
+        # WIMpy_NREFT not available; channel returns 0
+        return 0.0
+
+    # Compute the predicted event count in the LZ 248 keV window
+    # E_R array: 10 bins from 200-300 keV (the LZ 248 keV event window).
+    # 10 bins is sufficient for trapezoid integration; the magnetic-moment
+    # spectrum varies smoothly over this 100 keV range.
+    E_R = np.linspace(LZ_248KEV_E_MIN, LZ_248KEV_E_MAX, 10)
+
+    # Sum over xenon isotopes (abundance-weighted).
+    # LZ is natural xenon. Abundances: Xe128=1.92%, Xe129=26.44%, Xe130=4.08%,
+    # Xe131=21.18%, Xe132=26.89%, Xe134=10.44%, Xe136=8.87%.
+    # Only ODD-A isotopes (Xe129, Xe131) have non-zero nuclear spin and
+    # contribute to magnetic-moment interaction. Even-A isotopes (J=0)
+    # would contribute zero anyway, but we include them for completeness;
+    # WIMpy's nuclear response functions handle the spin-dependence
+    # internally and return ~zero for even-A targets.
+    xe_isotopes = ['Xe128', 'Xe129', 'Xe130', 'Xe131', 'Xe132', 'Xe134', 'Xe136']
+    xe_abundances = [0.0192, 0.2644, 0.0408, 0.2118, 0.2689, 0.1044, 0.0887]
+
+    total_rate_per_kg_day = 0.0
+    for iso, ab in zip(xe_isotopes, xe_abundances):
+        rates = DMU.dRdE_magnetic(E_R, m_chi_GeV, mu_x_muB, iso)
+        total_rate_per_kg_day += ab * np.trapezoid(rates, E_R)
+
+    # Predicted N_events
+    N_pred = total_rate_per_kg_day * LZ_EXPOSURE_KG_DAYS
+
+    # Poisson log-likelihood on (N_obs=1, N_pred)
+    # log P(N_obs | N_pred) = -N_pred + N_obs * log(N_pred) - log(N_obs!)
+    # For N_obs = 1: log P = -N_pred + log(N_pred) - log(1) = -N_pred + log(N_pred)
+    if N_pred <= 0:
+        # Predicted 0 events but observed 1: log L = -inf
+        # But we cap at -1000 for numerical stability (dynesty can't handle -inf)
+        return -1000.0
+
+    log_likelihood = -N_pred + np.log(N_pred)
+    # Cap at -1000 (effectively a hard wall, signals rejection of parameter point)
+    return max(log_likelihood, -1000.0)
+
+
+# Channel 26b (T90.1, wip/tier3 branch): energy-binned variant.
+# Address Reviewer 1 caveat C3 — "Likelihood is currently a simple
+# total-event-count Poisson, not a full energy-binned analysis."
+#
+# Approach: compute per-bin predicted rate using the same 10-bin grid
+# as the original (LZ_248KEV_E_MIN..LZ_248KEV_E_MAX, 10 bins). The
+# observed single event is allocated to bins by predicted signal
+# fraction (maximum-likelihood allocation). The total log-likelihood
+# is the sum of per-bin Poisson log-likelihoods. This makes the
+# log-likelihood **spectrum-shape informative**: a magnetic-moment
+# operator (broad recoil spectrum, peaks at high E_R) is rewarded
+# relative to a standard-SI operator (low-E_R peak) when the
+# observed event lands at 248 keV.
+#
+# Honest caveat: this is still a 1-event likelihood. With only 1
+# event, the spectrum shape carries limited statistical power — but
+# it is MORE informative than total-count Poisson, which is
+# insensitive to spectrum shape.
+#
+# Gated by env var T90_MAGNETIC_MOMENT_BINNED=1 (default OFF, default
+# behavior unchanged).
+
+# Bin edges (10 bins over 200-300 keV, matches loglike_lz_magnetic_moment)
+_LZ_248KEV_BIN_EDGES_KEV = np.linspace(LZ_248KEV_E_MIN, LZ_248KEV_E_MAX, 11)
+_LZ_248KEV_BIN_CENTERS_KEV = 0.5 * (_LZ_248KEV_BIN_EDGES_KEV[:-1] + _LZ_248KEV_BIN_EDGES_KEV[1:])
+
+
+def loglike_lz_magnetic_moment_binned(
+    m_chi_GeV: float,
+    mu_x: float,
+    include_in_fit: bool = True,
+) -> float:
+    """Channel 26b (T90.1): energy-binned variant of Channel 26.
+
+    Computes per-bin predicted rates for the magnetic-moment operator
+    across the LZ 248 keV window, then evaluates a per-bin Poisson
+    log-likelihood with the observed event allocated to bins by
+    maximum-likelihood (predicted signal fraction).
+
+    This is more informative than total-event-count Poisson when the
+    spectrum shape is a discriminator between models (it is here —
+    magnetic-moment has a broad, high-energy-peaked recoil spectrum
+    vs standard SI which peaks at low E_R).
+
+    **Honest caveat:** with only 1 observed event, the spectrum-shape
+    information is limited. The improvement is real (uses the
+    differential information) but small.
+
+    **Tier-3 exploration channel — default OFF.** Gated by env var
+    `T90_MAGNETIC_MOMENT_BINNED=1`. If unset, returns 0 to preserve
+    the default behavior of loglike_lz_magnetic_moment.
+
+    Args:
+        m_chi_GeV: SIDM particle mass in GeV
+        mu_x: magnetic dipole moment in MU_N (nuclear magnetons).
+              Pass None or a non-positive value to disable.
+        include_in_fit: if False, returns 0 (do not include in fit sum)
+
+    Returns:
+        Sum of per-bin Poisson log-likelihoods.
+        Returns 0 if: include_in_fit=False, mu_x invalid, m_chi invalid,
+        or WIMpy_NREFT import fails.
+    """
+    if not include_in_fit:
+        return 0.0
+    if (m_chi_GeV is None or mu_x is None
+            or not np.isfinite(m_chi_GeV) or not np.isfinite(mu_x)):
+        return 0.0
+    if m_chi_GeV <= 0 or mu_x <= 0:
+        return 0.0
+    if m_chi_GeV < 0.1 or m_chi_GeV > 1e5:
+        return 0.0
+    if mu_x < 1e-20 or mu_x > 1.0:
+        return 0.0
+
+    mu_x_muB = mu_x / MU_N_TO_MU_B
+
+    try:
+        from WIMpy import DMUtils as DMU
+    except ImportError:
+        return 0.0
+
+    # Per-bin predicted rate (kg^-1 day^-1 keV^-1 -> counts/bin)
+    # Use bin centers as the energy grid for the rate, then scale
+    # by bin width (which is constant = 10 keV for 10 bins over 100 keV).
+    bin_width_keV = (_LZ_248KEV_BIN_EDGES_KEV[1] - _LZ_248KEV_BIN_EDGES_KEV[0])
+
+    xe_isotopes = ['Xe128', 'Xe129', 'Xe130', 'Xe131', 'Xe132', 'Xe134', 'Xe136']
+    xe_abundances = [0.0192, 0.2644, 0.0408, 0.2118, 0.2689, 0.1044, 0.0887]
+
+    # per_bin_pred[k] = predicted counts in bin k from magnetic-moment operator
+    per_bin_pred = np.zeros(len_N_E_R := len(_LZ_248KEV_BIN_CENTERS_KEV))
+    for iso, ab in zip(xe_isotopes, xe_abundances):
+        rates_per_keV = DMU.dRdE_magnetic(
+            _LZ_248KEV_BIN_CENTERS_KEV, m_chi_GeV, mu_x_muB, iso
+        )
+        per_bin_pred += ab * rates_per_keV * bin_width_keV
+
+    # Per-bin predicted counts (sums to total_pred, but NOT multiplied by
+    # 1 event yet — that's N_obs, not N_pred).
+    per_bin_pred_events = per_bin_pred * LZ_EXPOSURE_KG_DAYS
+
+    # The LZ 248 keV event is observed in the bin containing 248 keV.
+    # With 10 bins over 200-300 keV (width 10 keV each), 248 keV falls
+    # in bin index 4 (210-220 keV... wait, that's wrong). Let's compute:
+    # 200 + (k+1)*10 > 248 → k >= 4. So bin index 4 = [240, 250) keV,
+    # which contains 248 keV. Index 5 = [250, 260) keV.
+    # Actually 248 falls in bin starting at 240 (i.e. bin index 4 covers
+    # [240, 250) and contains 248).
+    # 10 bins: edges at 200, 210, 220, 230, 240, 250, 260, 270, 280, 290, 300
+    # Bin 4 = [240, 250) keV contains 248 keV ✓
+    OBSERVED_BIN_INDEX = 4
+    if len(_LZ_248KEV_BIN_EDGES_KEV) - 1 <= OBSERVED_BIN_INDEX:
+        # Defensive: should never happen with 10 bins
+        return -1000.0
+
+    # Per-bin Poisson log-likelihood.
+    # N_obs[k] = 1 if k == OBSERVED_BIN_INDEX else 0.
+    # N_pred[k] = per_bin_pred_events[k].
+    # For N_obs=0 bins: log P(0 | N_pred) = -N_pred.
+    # For N_obs=1 bin: log P(1 | N_pred) = -N_pred + log(N_pred) - log(1).
+    # Sum: -N_pred[all] + log(N_pred[obs]) + 0 (factorial is constant).
+    # = -total_pred + log(N_pred[obs]).
+    total_pred = per_bin_pred_events.sum()
+    n_pred_obs = per_bin_pred_events[OBSERVED_BIN_INDEX]
+
+    if total_pred <= 0:
+        # Model predicts zero events; we observed 1. log L = -inf → cap.
+        return -1000.0
+    if n_pred_obs <= 0:
+        # The model predicts zero in the bin where we observed an event.
+        # log L = -inf → cap.
+        return -1000.0
+
+    # log P(N_obs=1 in obs bin, N_obs=0 elsewhere | N_pred[k]) =
+    #   sum_k [-N_pred[k] + N_obs[k] * log(N_pred[k])] (drop factorial)
+    # = -total_pred + log(N_pred[obs]).
+    log_l = -total_pred + np.log(n_pred_obs)
+    return max(log_l, -1000.0)
 
 
 def delta_N_eff_from_thermalized_aprime(epsilon: float) -> float:

@@ -80,6 +80,8 @@ from channels_extended import (
     loglike_competitor_dd_watch, loglike_xrism_perseus_icm,
     loglike_erosita_erass1, loglike_phi_to_gamgam_xrism, loglike_euclid_q1_lensing, loglike_euclid_q1_subhalo_forecast,
     loglike_delta_n_eff_goldstein_hill_2026,
+    loglike_lz_magnetic_moment,
+    loglike_lz_magnetic_moment_binned,
 )
 from xrism_phi_decay_forward_model import XRISM_PHI_DECAY_ARXIV_ID as _XRISM_PHI_ARXIV
 
@@ -497,7 +499,44 @@ def loglike_joint(theta):
         except Exception:
             ll_sparc = 0.0
 
-    return ll_dsph + ll_ufd + ll_bullet + ll_lz + ll_fermi + ll_sparc + ll_cmb + ll_dampe + ll_lss + ll_competitor_dd + ll_xrism + ll_erosita + ll_phi_decay + ll_euclid_q1 + ll_euclid_subhalo + ll_goldstein_hill
+    # Channel 26 (T90, wip/tier3-magnetic-moment-LZ branch): LZ magnetic-moment EFT Ls_1_0.
+    # Gated by env var T90_MAGNETIC_MOMENT_MU_X — if unset, channel returns 0
+    # (no effect on master posterior). If set, computes Poisson log-likelihood
+    # on (N_obs=1, N_pred(mu_x, m_chi)) for the magnetic-moment contribution
+    # to LZ at 248 keV. Also gated by T90_MAGNETIC_MOMENT_DISABLE=1 for ablation.
+    #
+    # T90.1 addendum — Channel 26b (energy-binned variant):
+    # If env var T90_MAGNETIC_MOMENT_BINNED=1 is set, use the binned variant
+    # (loglike_lz_magnetic_moment_binned) instead of the total-count Poisson.
+    # Both default to OFF on master; only this branch activates them.
+    if os.environ.get("T90_MAGNETIC_MOMENT_DISABLE", "").strip() != "1":
+        mu_x_env = os.environ.get("T90_MAGNETIC_MOMENT_MU_X", "").strip()
+        if mu_x_env:
+            try:
+                mu_x_val = float(mu_x_env)
+                use_binned = os.environ.get(
+                    "T90_MAGNETIC_MOMENT_BINNED", ""
+                ).strip() == "1"
+                if use_binned:
+                    ll_magnetic_moment = loglike_lz_magnetic_moment_binned(
+                        m_chi_GeV=m_chi_GeV,
+                        mu_x=mu_x_val,
+                    )
+                else:
+                    ll_magnetic_moment = loglike_lz_magnetic_moment(
+                        m_chi_GeV=m_chi_GeV,
+                        mu_x=mu_x_val,
+                    )
+                if not np.isfinite(ll_magnetic_moment):
+                    ll_magnetic_moment = -1000.0
+            except (ValueError, TypeError):
+                ll_magnetic_moment = 0.0
+        else:
+            ll_magnetic_moment = 0.0
+    else:
+        ll_magnetic_moment = 0.0
+
+    return ll_dsph + ll_ufd + ll_bullet + ll_lz + ll_fermi + ll_sparc + ll_cmb + ll_dampe + ll_lss + ll_competitor_dd + ll_xrism + ll_erosita + ll_phi_decay + ll_euclid_q1 + ll_euclid_subhalo + ll_goldstein_hill + ll_magnetic_moment
 
 
 def prior_transform_5(u):
