@@ -37,6 +37,16 @@ on δ.** This paper is the first published BSM-model motivation
 for the Ls₁₀ operator specifically (one of the 5 T90 merge
 criteria), but does not by itself satisfy the T90 merge rule.
 
+**Cross-link to T99 (two-portal framing, 2026-09-08)**: see
+[T99_TWO_PORTAL_COMPOSITE_DM.md](./T99_TWO_PORTAL_COMPOSITE_DM.md).
+Frames the v0.7 MAP (kinetic-mixing ε ~ 10⁻³⁷) and the Di Mauro
+2026 prediction (inelastic 𝒪₁ˢ, δ ~ 297 keV) as **two independent
+dark-sector portals** that can coexist in the same composite-DM
+UV completion. The T17 v17 47/47/6 posterior split is consistent
+with three independent portals (kinetic mixing, inelastic 𝒪₁ˢ,
+magnetic-moment) all contributing ~30-50% posterior. The framing
+is interpretive; no new model parameters, no new fit, no T90 merge.
+
 **Cross-link to Phase 3 (UV completion via lattice)**: see
 [T90_PATH_C4_V18_LATTICE_UV.md](./T90_PATH_C4_V18_LATTICE_UV.md)
 (also inline below). The v18 UV calculation uses LSD lattice
