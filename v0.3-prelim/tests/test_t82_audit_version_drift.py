@@ -63,20 +63,21 @@ class TestNoDriftState:
         # Specifically check VERSION drift-guard passed (current canonical = "0.4-prelim+T88E")
         assert "VERSION = '0.4-prelim+T88E' matches canonical" in out
 
-    def test_total_check_count_at_least_54(self):
+    def test_total_check_count_at_least_58(self):
         # Was >= 32 (with the original 10 README checks; pre-T86.7).
         # Post-T86.7: 10 README + 4 CITATION + 5 MODEL_ASSUMPTIONS +
         # 8 CURRENT.md + 3 EXTRACT + 6 LAYMAN + 2 CHANGELOG + 1 VERSION
         # = 39 doc-presence + 1 VERSION drift-guard = 40 total.
         # Post-T90 (2026-09-08): +6 T90 needles = 46 + 1 + 3 README = 50.
         # Post-T110 (2026-09-08): +4 T110 needles = 54 total.
+        # Post-Tier A (2026-09-08): +4 Door B status needles = 58 total.
         rc, out = _capture_main()
         assert rc == 0
         for line in out.splitlines():
             if line.startswith("ALL CLEAR"):
                 n_str = line.split("ALL CLEAR: ")[1].split("/")[0]
-                assert int(n_str) >= 54, (
-                    f"Expected ≥54 total checks, got {n_str}"
+                assert int(n_str) >= 58, (
+                    f"Expected ≥58 total checks, got {n_str}"
                 )
 
     def test_t90_door_b_section_in_model_assumptions(self):
@@ -96,6 +97,11 @@ class TestNoDriftState:
         assert "T110 7D delta log Z" in out
         assert "T110 7D MAP m_chi" in out
         assert "T110 7D MAP mu_x" in out
+        # Tier A (2026-09-08) Door B best LZ candidate
+        assert "Tier A Door B best door heading" in out
+        assert "Tier A Door B status text" in out
+        assert "Tier A Door B Delta log Z" in out
+        assert "Tier A Door C closed marker" in out
 
 
 class TestDriftDetection:

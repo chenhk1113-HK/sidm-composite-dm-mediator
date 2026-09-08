@@ -88,6 +88,11 @@ CHECKS_PER_DOC: dict[str, list[tuple[str, str]]] = {
         ("T110 7D delta log Z", "-10.72"),
         ("T110 7D MAP m_chi", "712.6 GeV"),
         ("T110 7D MAP mu_x", "1.08×10⁻⁷"),
+        # Tier A (2026-09-08) Door B as best current LZ candidate
+        ("Tier A Door B best door heading", "Best current LZ door — Door B"),
+        ("Tier A Door B status text", "Door B (Portal B inelastic, T108) is the"),
+        ("Tier A Door B Delta log Z", "+0.51"),
+        ("Tier A Door C closed marker", "Door C CLOSED"),
     ],
     "EXTRACT.md": [
         ("Channels 22", "Channels: **22 effective**"),

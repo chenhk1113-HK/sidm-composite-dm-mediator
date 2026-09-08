@@ -7,7 +7,7 @@
 
 ---
 
-## §0 — Standing posture: orthogonal-physics in practice (locked 2026-08-10, reaffirmed 2026-09-02 in T75; refined 2026-09-02 in T78/T79; LZ-paper-validated 2026-09-02 in T80; XENONnT+PandaX competitor watch added 2026-09-02 in T81; T86.7j plausibility audit 2026-09-03; **T87 forward prediction 2026-09-03: composite-DM *cannot* claim LZ event**)
+## §0 — Standing posture: orthogonal-physics in practice (locked 2026-08-10, reaffirmed 2026-09-02 in T75; refined 2026-09-02 in T78/T79; LZ-paper-validated 2026-09-02 in T80; XENONnT+PandaX competitor watch added 2026-09-02 in T81; T86.7j plausibility audit 2026-09-03; **T87 forward prediction 2026-09-03: composite-DM *cannot* claim LZ event**; T108 Portal B inelastic 2026-09-08: Δlog Z=+0.51 (best available door, not significant); T110 magnetic-moment Ls₁₀ 2026-09-08: Δlog Z=-10.72 (Door C CLOSED))
 
 **The project's headline σ/m = 0.06 cm²/g (T41 v0.8, nlive=2000;
 post-T88.E, was 0.27 cm²/g at v0.7)
@@ -281,15 +281,68 @@ This is documented in `v0.3-prelim/docs/T90_MAGNETIC_MOMENT_PLAN.md`,
 **Standing posture (consistent with §0):**
 - T90 work remains WIP; not ready for merge to master.
 - σ_DM-DM (headline σ/m) is **unchanged** by adding the magnetic-moment channel.
-- σ_DM-nucleon (Door B) does not change σ/m and is a separate observable.
+- σ_DM-nucleon (Door C) does not change σ/m and is a separate observable.
 - The LZ 248 keV event, if real, would require either a larger magnetic-moment
-  than v0.7's natural value, or a separate inelastic channel (T99 two-portal
+  than v0.7's natural value, or a separate inelastic channel (Door B, T99 two-portal
   framing).
 
+### Best current LZ door — Door B (Portal B inelastic, T108)
+
+**As of 2026-09-08, after T110 closed the magnetic-moment channel (Door C),
+the project's best remaining candidate for explaining the LZ 248 keV event
+is the Portal B inelastic-scattering channel (T108, 8D dynesty).**
+
+| Door | Description | Δlog Z vs v0.7 6D | Status |
+|---|---|---|---|
+| Door A | v0.7 kinetic-mixing baseline | n/a (this IS v0.7) | Baseline; LZ NOT in fit |
+| **Door B** | **Portal B inelastic (T108)** | **+0.51** | **Best current door; mildly preferred** |
+| Door C | Magnetic-moment Ls₁₀ (T110) | -10.72 | CLOSED |
+| Door D | Multi-component DM (T111+) | TBD | Future work |
+
+**Door B (Portal B inelastic, T108) is the project's current best
+candidate for LZ.** It has:
+
+- **Mild Bayesian preference** over v0.7 6D (Δlog Z = +0.51, positive direction).
+- **Cross-detector hint** from DIAMX (T106): combined LZ + PandaX-4T + XENONnT
+  Case I endothermic best fit near m_χ=60 GeV, δ=130 keV (cites arXiv:2512.05850v3).
+- **Published BSM motivation** (Di Mauro 2026): inelastic-DM interpretation of LZ.
+- **MAP at m_χ=138 GeV, δ=98 keV** — between Di Mauro's 60 GeV and T103's
+  483 GeV LZ-only best fit.
+
+**Honest caveats** — Door B is NOT statistically significant:
+
+- Δlog Z = +0.51 is below the T90 merge rule threshold of +2.
+- The +0.51 evidence comes from the 8D fit; if a 9D or 10D fit is run with
+  more nuisance parameters, the marginal preference for δ could decrease.
+- DIAMX best-fit (m_χ=60 GeV) is 4σ from T108 MAP (m_χ=138 GeV); the project
+  has not yet run a combined LZ+DIAMX Bayesian model comparison.
+- ¹²⁴Xe DEC charge-yield modeling affects the DIAMX 3.5σ XENONnT significance.
+
+**What would close Door B:**
+
+- A new high-statistics LZ analysis that shows the 248 keV excess is a
+  statistical fluctuation (sensitivity floor drop below current LZ exposure).
+- A new XENONnT or PandaX-4T analysis that excludes the (m_χ=130-150 GeV,
+  δ=100 keV) region at >3σ.
+- A theoretical argument showing δ and σ_PortalB are not independent
+  free parameters at this energy scale (model-dependent suppression).
+
+**What would strengthen Door B:**
+
+- New LZ data (Run 4, 5-year exposure).
+- Updated DIAMX analysis with ¹²⁴Xe DEC correctly modeled.
+- A 9D dynesty that adds a nuisance parameter for δ's theoretical prior
+  (currently uniform).
+- A paper specifically targeting the (m_χ=130-150 GeV, δ=100 keV) region.
+
 **What this section is NOT:**
-- A claim that Door B explains LZ data (T87 + T98: it does not, at v0.7 MAP).
+- A claim that Door B explains LZ data (T108: it is mildly preferred but
+  not statistically significant).
 - A redefinition of σ/m or σ_DM-DM (unchanged).
-- A replacement for the kinetic-mixing channel (additive only).
+- A replacement for the kinetic-mixing channel (Door A; additive only).
+- A claim that the magnetic-moment channel (Door C) is closed for ALL
+  composite-DM models (T110 only closes it for THIS project's v0.7 + UV
+  framework).
 
 ---
 
@@ -829,3 +882,4 @@ The project's σ/m physics draws on the following canonical references
 | 2026-09-03 (T87) | Composite-DM direct-detection forward prediction. **Verdict: composite-DM cannot claim LZ event at v0.7 MAP.** σ_inel_nuc(248 keV) = 1.15 × 10⁻¹¹⁷ cm² (gaussian F²), predicting N_events = 4.81 × 10⁻⁷³ in 2.84 tonne-years (vs 1 observed). 71 orders of magnitude below LZ sensitivity. Dominant suppression is ε² (kinetic mixing in freeze-in regime). Standing posture preserved (no posterior re-run). 9 new tests; 549 pass / 8 skip. | T87, this turn |
 | 2026-09-08 (T90) | Magnetic-moment Ls₁₀ "Door B" channel documented. T90 work on `wip/tier3-magnetic-moment-LZ` (WIP, not yet merged). T99 two-portal framing, T98 Di Mauro cross-check, T101-T103 LZ 248 keV Tier-2 fit, T105 UV consistency, T106 multi-experiment (DIAMX), T107/T108 8D joint fit. **8D log Z = -162.78 ± 0.20 (Δlog Z = +0.51 vs v0.7 6D)**, MAP m_χ=138 GeV, δ=98 keV. T90 merge rule: 2/5 criteria satisfied. 959 tests pass / 8 skip. §0+ sub-section added. | T90, this turn |
 | 2026-09-08 (T110) | **Door B closed.** Full 7D dynesty (v0.7 + μ_χ magnetic-moment Ls₁₀) on the canonical T41 likelihood. Wall time 2882s (48 min, 6.5× slower than estimate due to LZ penalty cliff). **log Z = -174.014 ± 1.365 (Δlog Z = -10.72 vs v0.7 6D)**. MAP at μ_χ lower bound (1.08×10⁻⁷ μ_N), m_χ=712 GeV. **T90 merge rule criterion #5 NOT satisfied** (Δlog Z ≪ +2). Confirms T87's verdict: composite-DM cannot claim LZ event via magnetic-moment channel. 977 tests pass / 8 skip. Drift-guard updated: 50/50 ALL CLEAR. | T110, this turn |
+| 2026-09-08 (Tier A) | **Door B is the project's best current LZ candidate.** Renumbered doors for clarity: Door A=v0.7 kinetic-mixing (baseline), Door B=Portal B inelastic (T108, +0.51, mildly preferred, NOT significant), Door C=magnetic-moment Ls₁₀ (T110, -10.7, CLOSED), Door D=multi-component DM (T111+, future). Added "Best current LZ door — Door B" sub-section to §0 with honest caveats, what would close/strengthen Door B. Updated drift-guard with 4 Door B status needles (54→58 total). | Tier A, this turn |
