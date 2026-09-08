@@ -261,12 +261,22 @@ This is documented in `v0.3-prelim/docs/T90_MAGNETIC_MOMENT_PLAN.md`,
   produced from the same composite-DM UV structure, but only in
   ~0.08% of parameter space (TIGHT verdict).
 
-**Current numerical status (T108 8D dynesty, 2026-09-08):**
+**Current numerical status (T108 8D + T110 7D, 2026-09-08):**
+
+**T108 8D (Portal B / inelastic scattering):**
 - v0.7 6D log Z = -163.29
 - T108 8D log Z = -162.78 ± 0.20 (with v0.7 + LZ + DIAMX, nlive=500)
-- **Δlog Z = +0.51** (positive, 2.5σ above v0.7, but BELOW the
-  T90 merge rule threshold of +2)
+- **Δlog Z = +0.51** (positive, but BELOW the T90 merge rule threshold of +2)
 - 8D MAP: m_φ=479 MeV, m_χ=138 GeV, δ=98 keV, σ_PortalB=1.4×10⁻⁴² cm²
+
+**T110 7D (magnetic-moment Ls₁₀ channel):**
+- T110 7D log Z = -174.014 ± 1.365 (with v0.7 + μ_χ, nlive=30, dlogz=2.0)
+- **Δlog Z = -10.72** (NEGATIVE; FAR BELOW the +2 threshold)
+- 7D MAP: m_φ=772 MeV, m_χ=712.6 GeV, log_μ_χ=-6.97 (μ_χ=1.08×10⁻⁷ μ_N, at lower bound)
+- **Door B is CLOSED** for the magnetic-moment channel. The posterior
+  prefers μ_χ → 0 (no magnetic-moment contribution).
+
+**T90 merge rule criterion #5: NOT YET** (Δlog Z = -10.7 for T110, +0.51 for T108).
 
 **Standing posture (consistent with §0):**
 - T90 work remains WIP; not ready for merge to master.
@@ -818,3 +828,4 @@ The project's σ/m physics draws on the following canonical references
 | 2026-09-03 (T86.7k+C) | Composite-channel gap analysis (post-Consider4 review): Registered Tier-2 roadmap Item 3 (T87 forward prediction). Doc-only round; no code. Consider3 +4 reviewer inputs preserved for traceability. | T86.7k+C, this turn |
 | 2026-09-03 (T87) | Composite-DM direct-detection forward prediction. **Verdict: composite-DM cannot claim LZ event at v0.7 MAP.** σ_inel_nuc(248 keV) = 1.15 × 10⁻¹¹⁷ cm² (gaussian F²), predicting N_events = 4.81 × 10⁻⁷³ in 2.84 tonne-years (vs 1 observed). 71 orders of magnitude below LZ sensitivity. Dominant suppression is ε² (kinetic mixing in freeze-in regime). Standing posture preserved (no posterior re-run). 9 new tests; 549 pass / 8 skip. | T87, this turn |
 | 2026-09-08 (T90) | Magnetic-moment Ls₁₀ "Door B" channel documented. T90 work on `wip/tier3-magnetic-moment-LZ` (WIP, not yet merged). T99 two-portal framing, T98 Di Mauro cross-check, T101-T103 LZ 248 keV Tier-2 fit, T105 UV consistency, T106 multi-experiment (DIAMX), T107/T108 8D joint fit. **8D log Z = -162.78 ± 0.20 (Δlog Z = +0.51 vs v0.7 6D)**, MAP m_χ=138 GeV, δ=98 keV. T90 merge rule: 2/5 criteria satisfied. 959 tests pass / 8 skip. §0+ sub-section added. | T90, this turn |
+| 2026-09-08 (T110) | **Door B closed.** Full 7D dynesty (v0.7 + μ_χ magnetic-moment Ls₁₀) on the canonical T41 likelihood. Wall time 2882s (48 min, 6.5× slower than estimate due to LZ penalty cliff). **log Z = -174.014 ± 1.365 (Δlog Z = -10.72 vs v0.7 6D)**. MAP at μ_χ lower bound (1.08×10⁻⁷ μ_N), m_χ=712 GeV. **T90 merge rule criterion #5 NOT satisfied** (Δlog Z ≪ +2). Confirms T87's verdict: composite-DM cannot claim LZ event via magnetic-moment channel. 977 tests pass / 8 skip. Drift-guard updated: 50/50 ALL CLEAR. | T110, this turn |

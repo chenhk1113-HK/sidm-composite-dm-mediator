@@ -83,6 +83,11 @@ CHECKS_PER_DOC: dict[str, list[tuple[str, str]]] = {
         ("T90 8D MAP m_chi", "138 GeV"),
         ("T90 8D MAP delta", "98 keV"),
         ("T90 8D MAP sigma_PortalB", "1.4×10⁻⁴²"),
+        # T110 (2026-09-08) 7D dynesty magnetic-moment fit
+        ("T110 7D log Z", "-174.014"),
+        ("T110 7D delta log Z", "-10.72"),
+        ("T110 7D MAP m_chi", "712.6 GeV"),
+        ("T110 7D MAP mu_x", "1.08×10⁻⁷"),
     ],
     "EXTRACT.md": [
         ("Channels 22", "Channels: **22 effective**"),
