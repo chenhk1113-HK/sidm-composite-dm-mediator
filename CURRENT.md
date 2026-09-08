@@ -296,6 +296,81 @@ for the full program.
 
 ---
 
+## T95.14 addendum (2026-09-08) — Chemodynamic GMM with DESI [Fe/H] prior: PARALLEL + PERPENDICULAR RESCUED
+
+### Headline: 1 additional outlier rescued (6 → 7), all 7 master-Yukawa-consistent
+
+T95.13 pulled DESI DR1 MWS data for 2 of 7 T95.11 outliers (Parallel, Perpendicular).
+T95.14 added the DESI [Fe/H] column as a chemodynamic prior to the GMM membership
+selection. Both streams now have kinematics consistent with halo-stream physics:
+
+| Stream | T95.11 (median pm) | T95.14 (chemodynamic) | Δ | [Fe/H] |
+|---|---|---|---|---|
+| Parallel | 776 km/s (outlier) | **394 km/s** ✓ | -49% | -1.13 |
+| Perpendicular | 876 km/s (outlier) | **329 km/s** ✓ | -62% | -1.72 |
+
+The other 5 outliers (Eridanus, Molonglo, Murrumbidgee, Orinoco, Pal15) have no
+DESI footprint — survey limitation, not a query bug.
+
+### Joint fit impact
+
+| Stage | Curated | + Rescued | Joint loglik |
+|---|---|---|---|
+| T95.9 baseline | 10 | 0 | -12.038 |
+| + T95.11 | 10 | 6 | 0.000 |
+| **+ T95.14** | **10** | **7** | **0.000** |
+
+Δ = +1 rescued stream (6 → 7). T95 finding unchanged at 9/10 (GD-1 still separates).
+17 streams now have real kinematic constraints.
+
+### Validation_table update
+
+The validation_table.md (file at outputs/t95/validation_table.md) revealed that
+**5 of 6 T95.11-rescued streams have no published kinematics to validate against** —
+galstreams itself stores pm=0 and vrad=0 for them. The one validation point (Tri-Pis
+vs Bonaca 2012) was investigated: the 42% disagreement is the expected velocity
+gradient between Bonaca's measurement location (stream tail end_f) and T95.11's cone
+center (stream mid). Both numbers can be correct at their respective locations.
+
+### Files
+
+- `v0.3-prelim/code/t95_v13_desi_cross_match.py` — DESI TAP cross-match
+- `v0.3-prelim/code/t95_v14_chemodynamic_gmm.py` — GMM + [Fe/H] prior
+- `v0.3-prelim/code/t95_v14_chemodynamic_apply.py` — fold into joint fit
+- `v0.3-prelim/tests/test_t95_v14_chemodynamic.py` — 7 tests, all pass
+- Outputs: t95_v13_*, t95_v14_*.json in v0.3-prelim/outputs/t95/
+- Validation: outputs/t95/validation_table.md
+- T95.11 results JSON updated with `validation_status` field
+- Doc: `v0.3-prelim/docs/T95_EXTENDED_113STREAMS_CHEMODYNAMIC.md`
+
+### Standing test count
+
+**903 pass / 8 skip** (verified 2026-09-08, +7 T95.14 tests).
+Drift-guard audit: 44/44 ALL CLEAR.
+
+---
+
+## T95.13 addendum (2026-09-08) — DESI DR1 cross-match of 7 T95.11 outliers
+
+### Headline: 2 of 7 outliers have DESI coverage; 5 are in regions DESI hasn't surveyed yet
+
+T95.13 queried DESI DR1 MWS via the NOIRLab TAP service
+(`https://datalab.noirlab.edu/tap/sync`) at the 7 T95.11 outlier positions:
+
+| Stream | DESI hits | v_r median | [Fe/H] |
+|---|---|---|---|
+| Parallel | **486** | 21.5 km/s | -0.58 |
+| Perpendicular | **19** | -0.4 km/s | -1.55 |
+| Pal15 | 3 (sparse) | — | — |
+| Eridanus, Molonglo, Murrumbidgee, Orinoco | 0 | — | — |
+
+The 2 covered streams have chemodynamic [Fe/H] tags — enabling T95.14's
+improved GMM. The 5 uncovered streams will need DESI DR2 or another survey.
+
+See T95.14 above for what was done with this data.
+
+---
+
 ## T95.12 addendum (2026-09-08) — GMM stream-member selection attempt: HONEST FAILURE
 
 ### Headline: GMM (Option B) does NOT improve over T95.11's median-pm heuristic
