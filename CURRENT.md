@@ -296,6 +296,57 @@ for the full program.
 
 ---
 
+## T95.12 addendum (2026-09-08) — GMM stream-member selection attempt: HONEST FAILURE
+
+### Headline: GMM (Option B) does NOT improve over T95.11's median-pm heuristic
+
+Per Option B from the T95.11 wrap-up, I implemented a 2-component Gaussian
+Mixture Model for stream-vs-field separation. **The GMM results are
+demonstrably worse than T95.11** for every successfully-rescued stream:
+
+| Stream | T95.11 | T95.12 (GMM) | Δ |
+|---|---|---|---|
+| NGC6362 | 260 km/s | 217 km/s | -17% |
+| Pegasus | 448 km/s | 397 km/s | -11% |
+| Hermus | 544 km/s | 524 km/s | -4% |
+| Hyllus | 522 km/s | 506 km/s | -3% |
+| Tri-Pis | 649 km/s | 430 km/s | -34% |
+
+Plus 4 streams (Alpheus, Molonglo, Orinoco, Parallel) return NaN from GMM.
+
+**The T95.9 / T95.10 / T95.11 pipeline remains authoritative.** T95.12 code
+is shipped for future work but its results are NOT used in the joint fit.
+
+### Why GMM failed
+
+- 2-component Gaussian too simple — cone contains disk + halo + possibly LMC
+  debris + the stream itself. GMM separates "low pm" from "high pm", not
+  "stream" from "field".
+- GMM assigns 62% of cone stars to "stream" for NGC6362 (clearly wrong)
+- Without ground-truth kinematics, no way to validate during development
+- Need either proper STREAMFINDER (track-following) or chemodynamic tagging
+
+### Files (code shipped, results NOT used)
+
+- New code: `v0.3-prelim/code/t95_v12_gmm_cross_match.py`
+- New tests: `v0.3-prelim/tests/test_t95_v12_gmm_cross_match.py` (6/6 pass)
+- New outputs: `v0.3-prelim/outputs/t95/t95_v12_gmm_cross_match_results.json`
+  (recorded for posterity)
+- New docs: `v0.3-prelim/docs/T95_EXTENDED_113STREAMS_GMM.md` (honest failure report)
+
+### Dependencies added
+
+- `scikit-learn==1.9.0` (~30 MB, installed per user approval 2026-09-08)
+- Required `t95_v11_gaia_cross_match.py` query to also fetch `bp_rp` color
+
+### Standing test count update
+
+- **890 pass / 8 skip** (post-T95.11 baseline) +
+  **+6 T95.12 tests** = **896 pass / 8 skip** (verified 2026-09-08)
+- Drift-guard audit: 44/44 ALL CLEAR
+
+---
+
 ## T95.11 addendum (2026-09-08) — Gaia DR3 cross-match of 13 degenerate streams
 
 ### Headline: 6 of 13 degenerate streams rescued from Gaia DR3; all consistent with master Yukawa
