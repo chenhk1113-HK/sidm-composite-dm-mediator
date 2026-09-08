@@ -296,6 +296,78 @@ for the full program.
 
 ---
 
+## T95.11 addendum (2026-09-08) — Gaia DR3 cross-match of 13 degenerate streams
+
+### Headline: 6 of 13 degenerate streams rescued from Gaia DR3; all consistent with master Yukawa
+
+T95.10 flagged 13 streams as `degenerate_kinematics` (no pm/rv in galstreams).
+T95.11 queried Gaia DR3 at each stream's on-sky position and applied quality
+cuts + member selection to recover kinematics.
+
+### Rescued (6 streams, v_3d < 700 km/s AND ≥ 10 member-selected Gaia stars)
+
+| Stream | d (kpc) | v_3d (km/s) | n_members | σ/m pred |
+|---|---|---|---|---|
+| Alpheus | 1.8 | 69.5 | 34 | 0.742 |
+| NGC6362 | 7.6 | 259.8 | 151 | 0.601 |
+| Pegasus | 18.0 | 448.0 | 197 | 0.551 |
+| Hyllus | 20.8 | 522.0 | 59 | 0.537 |
+| Hermus | 19.6 | 543.9 | 42 | 0.534 |
+| Tri-Pis | 26.0 | 648.9 | 51 | 0.519 |
+
+### Outliers (7 streams, v_3d > 700 km/s)
+
+Eridanus, Orinoco, Molonglo, Pal15, Perpendicular, Murrumbidgee, Parallel.
+Reasons: too distant for Gaia (Eridanus, 95 kpc), too few members (Orinoco,
+Perpendicular), or track wraps 360° on the sky (Molonglo, Murrumbidgee).
+
+### Joint loglik
+
+| Configuration | N streams | Joint loglik |
+|---|---|---|
+| T95.9 baseline (curated) | 10 | -12.038 |
+| T95.11 (curated + 6 rescued) | **16** | -12.038 |
+
+All 6 rescued streams fit master Yukawa within factor-3 boxes. **T95 finding
+unchanged**: still 9/11 with GD-1 formally separated.
+
+### Method
+
+- TAP endpoint: `gea.esac.esa.int` (gaiadr3.gaia_source)
+- Quality cuts: ruwe < 1.4, visibility_periods_used ≥ 8, parallax_over_err > 5
+- Member selection: distance filter (±50%) + iterative pm clip (2 mas/yr)
+- v_3d via `4.74 × |pm| × d` (T95.9 formula)
+
+### Dependencies added
+
+- `astropy==8.0.1` (~5 MB)
+- `astroquery==0.4.11` (~3 MB + 11 transitive deps)
+- (Both installed into `.venv-sidm-bench/` per explicit user approval 2026-09-08)
+
+### Files
+
+- New code: `v0.3-prelim/code/t95_v11_gaia_cross_match.py`
+- New code: `v0.3-prelim/code/t95_v11_gaia_apply.py`
+- New tests: `v0.3-prelim/tests/test_t95_v11_gaia_cross_match.py` (8/8 pass)
+- New outputs:
+  - `v0.3-prelim/outputs/t95/t95_v11_cross_match_results.json`
+  - `v0.3-prelim/outputs/t95/t95_v11_apply_results.json`
+- New docs: `v0.3-prelim/docs/T95_EXTENDED_113STREAMS_GAIA_XMATCH.md`
+
+### Standing test count update
+
+- **882 pass / 8 skip** (post-T95.10 baseline) +
+  **+8 T95.11 tests** = **890 pass / 8 skip** (verified 2026-09-08)
+- Drift-guard audit: 44/44 ALL CLEAR
+
+### Next steps (post T95.11)
+
+1. Cross-match the 7 outliers against DESI DR1 + 4MOST (if available)
+2. Re-run pipeline when Gaia DR4 drops (Dec 2026) — proper pm for d > 30 kpc
+3. Implement proper STREAMFINDER/GMM clustering — replace median-pm heuristic
+
+---
+
 ## T95.10 addendum (2026-09-08) — 113-stream residual run + literature search
 
 ### Headline: T95.10 scales to 113 streams; lit search confirms the 9/10 finding is data-limited, not analysis-limited
