@@ -59,7 +59,16 @@ contradicted — because v12 says ~500× more events live at low E_R than at
 
 URL: `https://www.hepdata.net/download/table/ins2841863/Data/2/csv`
 
-**Download size:** ~5-30 MB total.
+**Live-mode result (2026-09-10):** Path 1 was run against the actual HEPData 155182 YAML (`WS2024_science_data.yaml`). Key findings:
+
+- **1221 events loaded** with (S1c, log_10S2c) coordinates
+- NEST-mapped E_R range [288, 500] keVnr — confirming that the published data sits ABOVE the [5, 50] keVnr magnetic-m signal region (LZ's standard 3 phd S1c cut removes all sub-300 keVnr NR events)
+- **4 events** in [200, 300] keVnr — consistent with the original LZ paper's reported 1 event at 248 keVnr (in 2.84 t·y) given the larger 4.2 t·y exposure
+- **0 events** in [5, 50] keVnr — but this is structural (S1c cut), not a contradiction of magnetic-m
+- **2D signal-region test (option B):** 287 events in the magnetic-m high-E_R signal region (NR band, S1c < 20, log_10S2c 3-4.2) vs ~9 predicted from magnetic-m alone in [50, 200] keVnr — consistent with magnetic-m contributing a small fraction to the standard NR background population
+- **Bottom line:** Path 1 cannot directly test the magnetic-m [5, 50] keVnr smoking-gun prediction because the events needed for that test were cut upstream by LZ. The 248 keV paper's HEPData release (expected Oct-Nov 2026) is required for the definitive test.
+
+**Download size:** ~5-30 MB total (CSV-only) or ~80 KB (just the YAML resource file, which is what we actually used).
 
 ### Path 2: PandaX-4T high-E_R count
 **Script:** `v0.3-prelim/code/t90_v23_pandax_highE_count.py`
