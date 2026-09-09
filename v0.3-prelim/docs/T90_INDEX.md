@@ -413,6 +413,22 @@ the combination of lattice κ_neut values + XENON100 limit.
     is NOT contradicted by PandaX. **T90.23 path 1 is now substantively
     tested via path 2** (the [5, 50] keVnr smoking-gun window).
 
+13. **T90.23 path 2B — PandaX NR-band smoke test (2026-09-10, NEW):**
+    Used PandaX's PUBLISHED NR-band observation: 24 events below the
+    NR median in [5, 270] keVnr (12 in Run 0, 12 in Run 1). Expected
+    SM background: 20.5 ± 2.5 events (summed from PandaX Table I,
+    dominated by tritium and radon ER leakage into NR band).
+    **Magnetic-m at LZ-tuned coupling predicts ~720 events.**
+    Result: ratio obs/magnetic-m = 0.033, Δlog L = +614 in favor
+    of background. **MAGNETIC-M IS DECISIVELY OVER-PREDICTED.** The
+    PandaX data rules out the magnetic-m interpretation of the LZ
+    248 keV event at μ_x = 6.10×10⁻⁸ μ_N. Factor-30 over-prediction
+    is too large to attribute to systematic differences between
+    PandaX and LZ analyses. Possible resolutions: (1) the LZ
+    248 keV event is not magnetic-m, (2) magnetic-m requires
+    much lower coupling (which then cannot explain LZ), or
+    (3) major systematic differences (unlikely).
+
 ---
 
 ## What's still TODO
