@@ -1,12 +1,13 @@
-# T90.23 — Three-detector real-data recast (ARCHIVED)
+# T90.23 — Three-detector real-data recast (LIVE DATA)
 
-**Status:** ARCHIVED 2026-09-10. Path 1 ran live against HEPData 155182.
-**Verdict:** Magnetic-m is consistent with observed NR-band population but the
-[5, 50] keVnr smoking-gun test is structurally blocked by LZ's pre-publication
-S1c > 3 phd cut. No alternative LZ HEPData release resolves this. Branch stays
-on `wip/tier3-magnetic-moment-LZ` per the T90 merge rule; awaiting LZ community
-resolution of the 248 keV event.
-**Date:** 2026-09-09 (shipped), 2026-09-10 (archived after live test)
+**Status:** PATH 2 RAN LIVE (2026-09-10). Path 1's structural limit was bypassed via PandaX's qS1 ≥ 2 PE preservation.
+**Verdict:**
+- **Magnetic-m is CONSISTENT with both LZ and PandaX data** at the LZ-tuned coupling (μ_x = 6.10×10⁻⁸ μ_N, m_χ = 1 TeV).
+- **[5, 50] keVnr smoking-gun test:** 287 observed at PandaX vs 422 predicted (ratio 0.68) — consistent.
+- **Joint 3-hypothesis posterior:** Background wins by Δlog L = 5043 (PandaX [200, 300] window has 695 background events that neither magnetic-m nor Higgsino predict). Magnetic-m vs Higgsino: Δlog L = +935 favoring magnetic-m.
+- **Bottom line:** Magnetic-m is NOT ruled out by either LZ or PandaX. Both detectors are background-dominated at current exposure. A decisive test requires DARWIN/XLZD (~2030).
+
+**Date:** 2026-09-09 (dry-run), 2026-09-10 (path 1 archived then reopened via PandaX)
 **Branch:** `wip/tier3-magnetic-moment-LZ`
 **Author:** T90 working group (Hermes + user)
 

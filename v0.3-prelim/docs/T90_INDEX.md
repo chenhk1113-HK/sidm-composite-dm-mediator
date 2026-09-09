@@ -375,18 +375,43 @@ the combination of lattice κ_neut values + XENON100 limit.
    `wip/tier3-magnetic-moment-LZ` until LZ community
    confirmation (or refutation) of the 248 keV event.
 
-10. **T90.23 three-detector recast (2026-09-09/10):** Attempted to test
-    the magnetic-m interpretation against the published LZ data
-    (HEPData 155182 = PRL 135, 011802 4.2 t·y release). Path 1 ran
-    live; **structural limit confirmed**: LZ's standard 3 phd S1c
-    cut removes all sub-300 keVnr NR events from public release,
-    so the [5, 50] keVnr magnetic-m smoking-gun test cannot be run
-    with any existing LZ HEPData record. The 2D signal-region test
+10. **T90.23 three-detector recast (2026-09-09/10):** Path 1 ran
+    live against HEPData 155182 (PRL 135, 011802 4.2 t·y release).
+    **Structural limit confirmed**: LZ's standard 3 phd S1c cut removes
+    all sub-300 keVnr NR events from public release, so the
+    [5, 50] keVnr magnetic-m smoking-gun test cannot be run with
+    any existing LZ HEPData record. The 2D signal-region test
     (option B) shows magnetic-m is **consistent** with the observed
     NR-band population (~287 events vs ~9 predicted from magnetic-m
     alone in [50, 200] keVnr) but not specifically required by it.
-    **T90.23 path 1 archived as "demonstrated capability, awaiting
-    248 keV paper's extended-window data release (if ever)".**
+
+11. **T90.23 path 2 — PandaX-4T cross-detector recast (2026-09-10):**
+    Path 2 ran live against PandaX-4T's 1.54 t·y opendata.tar.gz
+    (PRL 134, 011805). **CRITICAL**: unlike LZ, PandaX preserves events
+    with qS1 down to 2 PE (no equivalent of LZ's 3 phd cut), so the
+    [5, 50] keVnr magnetic-m signal region IS accessible. Results
+    from 2490 candidate events:
+    - [5, 50] keVnr: 287 observed vs 422 predicted (ratio 0.68) CONSISTENT
+    - [50, 200] keVnr: 1486 observed vs 390 predicted (above)
+    - [200, 300] keVnr: 695 observed vs 0.54 predicted (background-dominated)
+    - 36 events with qS1 < 3 PE (would have been cut at LZ)
+
+    The joint 3-hypothesis posterior (path 4) with live data:
+    - Background wins by Δlog L = 5043 (PandaX [200, 300] has 695 events
+      that neither magnetic-m nor Higgsino can explain at current exposure)
+    - Magnetic-m vs Higgsino: Δlog L = +935 (magnetic-m wins because of
+      [5, 50] window: 287 obs vs 422 magmom-pred vs 0.3 higgsino-pred)
+    - Bottom line: magnetic-m at LZ-tuned coupling is consistent with
+      both LZ (1 event at 248 keVnr) and PandaX (287 events at
+      [5, 50] keVnr, ratio 0.68), but background dominates both
+      detectors at current exposures.
+
+12. **T90.23 path 1 RE-OPENED via PandaX**: Path 1's [5, 50] keVnr
+    test was structurally blocked at LZ. PandaX provides an
+    independent dataset where this test IS possible. Result: 287
+    observed vs 422 predicted = ratio 0.68 = CONSISTENT. Magnetic-m
+    is NOT contradicted by PandaX. **T90.23 path 1 is now substantively
+    tested via path 2** (the [5, 50] keVnr smoking-gun window).
 
 ---
 

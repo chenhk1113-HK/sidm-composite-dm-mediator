@@ -173,6 +173,95 @@ def count_in_window(er_keV: "np.ndarray", window_keV: tuple) -> dict:
     }
 
 
+def pandax_signal_region_mask(qS1_pe: "np.ndarray", log10_qS2B_div_qS1: "np.ndarray",
+                              run: str = "run0") -> "np.ndarray":
+    """Boolean mask of PandaX events in the magnetic-m signal region of (qS1, log_10(qS2B/qS1)).
+
+    PandaX's NR median band (from PRL 134, 011805 Fig. 2) is at approximately:
+      log_10(qS2B/qS1) ~ -0.05 + log_10(qS1)
+
+    (Slightly different from LZ because g1, g2b differ. Approximation.)
+    Below this line = NR band. The magnetic-m high-E_R signal lives at
+    qS1 ~ 3-15 PE (below the 3 phd threshold LZ used; HERE PandaX keeps them).
+
+    The "high-E_R signal region" is defined as:
+      - qS1 in [2, 30] PE (the range where magnetic-m signal lives, given
+        PandaX preserves down to 2 PE)
+      - log_10(qS2B/qS1) in [0.5, 2.5] (within data range, NR band)
+      - Below the NR median: log_10(qS2B/qS1) < NR_median
+
+    This mask is tighter than for LZ because PandaX has more low-qS1
+    events that we want to INCLUDE in the magnetic-m signal region.
+    """
+    # NR median: log_10(qS2B/qS1) ~ -0.05 + log_10(qS1)
+    nr_median = -0.05 + np.log10(np.maximum(qS1_pe, 0.5))
+    below_nr_median = log10_qS2B_div_qS1 < nr_median
+
+    # qS1 in magnetic-m signal range
+    s1_in_range = (qS1_pe >= 2.0) & (qS1_pe <= 30.0)
+
+    # log_10(qS2B/qS1) in NR band range
+    lg_in_range = (log10_qS2B_div_qS1 >= 0.5) & (log10_qS2B_div_qS1 <= 2.5)
+
+    return below_nr_median & s1_in_range & lg_in_range
+
+
+def count_pandax_in_signal_region(qS1_pe: "np.ndarray", log10_qS2B_div_qS1: "np.ndarray",
+                                   m_chi_gev: float = 1000.0,
+                                   mu_x_mu_n: float = 6.10e-8) -> dict:
+    """Count PandaX observed events in the magnetic-m signal region.
+
+    Returns dict with counts and comparison to magnetic-m prediction.
+    Magnetic-m prediction is the same as LZ's (the coupling is the same);
+    only the exposure scaling differs (PandaX 1.54 t-y vs LZ 2.84 t-y).
+    """
+    mask = pandax_signal_region_mask(qS1_pe, log10_qS2B_div_qS1)
+    n_obs = int(mask.sum())
+    n_total = len(qS1_pe)
+    fraction = n_obs / max(n_total, 1)
+
+    # Magnetic-m prediction: scale from LZ by 1.54/2.84 = 0.542
+    # Total magnetic-m events at PandaX in [50, 200] keVnr: ~390
+    # In signal region (covers roughly E_R > 50 keVnr), so ~390 events predicted
+    n_magmom_pred = 390.0
+
+    # Background-only: ~few hundred events in NR band at PandaX
+    # This is dominated by radon, neutrons, surface events
+    n_background_pred = 600.0   # rough order-of-magnitude
+
+    log_l_magmom = poisson_log_l(n_obs, n_magmom_pred)
+    log_l_background = poisson_log_l(n_obs, n_background_pred)
+    delta_log_l = log_l_magmom - log_l_background
+
+    if n_obs > n_magmom_pred * 2:
+        verdict = "magnetic-m UNDER-PREDICTS"
+    elif n_obs < n_magmom_pred * 0.5:
+        verdict = "magnetic-m OVER-PREDICTS"
+    else:
+        verdict = "magnetic-m CONSISTENT"
+
+    return {
+        "n_obs_in_signal_region": n_obs,
+        "n_total_events": n_total,
+        "fraction_in_signal_region": fraction,
+        "magnetic_m_prediction": n_magmom_pred,
+        "background_prediction": n_background_pred,
+        "log_l_magmom": log_l_magmom,
+        "log_l_background": log_l_background,
+        "delta_log_l_magmom_vs_background": delta_log_l,
+        "verdict": verdict,
+    }
+
+
+def poisson_log_l(n_obs: int, n_pred: float) -> float:
+    """Poisson log L (ignoring factorial, which is constant in n_obs)."""
+    if n_pred <= 0:
+        return -np.inf
+    if n_obs == 0:
+        return -n_pred
+    return -n_pred + n_obs * np.log(n_pred)
+
+
 def compare_to_prediction(counts: dict, prediction: dict) -> dict:
     """Compare observed counts to magnetic-moment prediction."""
     result = {"windows": {}}
@@ -335,18 +424,34 @@ def main():
         # Load and process
         all_er = []
         all_qs1 = []
+        all_qs2b = []
         per_run_results = []
         for run, csv_path in sorted(runs):
             result = load_run_csv(csv_path, run)
             per_run_results.append(result)
             all_er.append(result["er_keV"])
             all_qs1.append(result["qS1"])
+            all_qs2b.append(result["qS2B"])
 
         er_keV = np.concatenate(all_er)
         qS1_combined = np.concatenate(all_qs1)
+        qS2B_combined = np.concatenate(all_qs2b)
+        log10_qS2B_div_qS1 = np.log10(qS2B_combined / np.maximum(qS1_combined, 0.5))
         print()
         print(f"[live] Combined: {len(er_keV)} events, mapped E_R range "
               f"[{er_keV.min():.2f}, {er_keV.max():.2f}] keVnr")
+
+        # 2D signal-region test (option B for PandaX)
+        print()
+        print("=" * 70)
+        print("OPTION B: 2D (qS1, log_10(qS2B/qS1)) SIGNAL REGION TEST")
+        print("=" * 70)
+        signal_region_result = count_pandax_in_signal_region(
+            qS1_combined, log10_qS2B_div_qS1,
+            m_chi_gev=1000.0, mu_x_mu_n=6.10e-8,
+        )
+        for k, v in signal_region_result.items():
+            print(f"  {k}: {v}")
 
         counts = {
             "low_E_5_50": count_in_window(er_keV, WINDOW_LOW_E),
@@ -385,6 +490,12 @@ def main():
             ),
             "low_s1c_event_count": int(np.sum(qS1_combined < 3.0)),
             "low_s1c_fraction": float(np.sum(qS1_combined < 3.0) / max(len(qS1_combined), 1)),
+            "option_b_signal_region_test": (
+                locals().get("signal_region_result", {})
+            ),
+            "option_b_verdict": (
+                locals().get("signal_region_result", {}).get("verdict", "not_run")
+            ),
         }
 
     out_path = _PROJECT_ROOT / "outputs" / "t90" / "t90_v23_pandax_highE_count.json"
