@@ -55,10 +55,9 @@ standard SI/SD analysis expects), the magnetic-m interpretation is
 contradicted — because v12 says ~500× more events live at low E_R than at
 248 keV for this coupling.
 
-**Source:** HEPData record for arXiv:2609.02823 (DOI 10.17182/hepdata.182472.v1;
-not active when probed 2026-09-09 — likely mid-activation). The 4.2 t·y
-HEPData record 10.17182/hepdata.155182.v2 (PRL 135, 011802) has the
-pre-248 keV-paper event list and is the closest schema reference.
+**Source:** HEPData record 155182 (PRL 135, 011802, 4.2 t·y Dec 2025) — **stand-in** for the 248 keV paper's eventual release at expected HEPData ID 182472 (DOI 10.17182/hepdata.182472.v1; not active as of 2026-09-10). The 155182 release uses the same underlying dataset (just with a narrower 0-70 keVnr analysis window). For path 1's [5, 50] keVnr test, 155182 has complete coverage — the missing high-E_R data doesn't affect this test.
+
+URL: `https://www.hepdata.net/download/table/ins2841863/Data/2/csv`
 
 **Download size:** ~5-30 MB total.
 

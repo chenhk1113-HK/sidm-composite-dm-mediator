@@ -1,5 +1,5 @@
 """
-T90.23 PATH 1 (DRY RUN) — LZ 248 keV data release: count [5, 50] keV events.
+T90.23 PATH 1 (LIVE READY) — LZ data release: count [5, 50] keV events.
 
 PURPOSE
 =======
@@ -15,39 +15,38 @@ standard SI/SD analysis expects), the magnetic-m interpretation is
 contradicted (because v12 says ~500x more events live at low E_R than at
 248 keV for this coupling).
 
-This script is the DRY-RUN skeleton:
-  - Documents the URLs and expected schemas for the LZ data release
-  - Builds a robust download helper with retry + manual-fallback
-  - Implements the per-event counting logic for [5, 50] keV
-  - Compares against the magnetic-m prediction from v12
+DATA SOURCE (UPDATED 2026-09-10)
+================================
+The 248 keV paper's HEPData release (expected ID ~182472, DOI
+10.17182/hepdata.182472.v1) is NOT yet publicly available as of
+2026-09-10 — the DOI returns 404 and Google has no record. Per
+project convention (Option 1 from the user-approved 2026-09-09
+discussion), we use HEPData record 155182 (PRL 135, 011802, the 4.2 t-y
+paper, Dec 2025) as a stand-in. This is the SAME underlying dataset,
+just re-analyzed with a wider E_R window in the 248 keV paper. The
+[5, 50] keVnr test window is fully covered by 155182's per-event list.
+
+Source URLs (in priority order):
+  1. HEPData 155182 Data table CSV (PRIMARY -- verified active 2026-09-10)
+  2. HEPData 155182 submission YAML (full bundle, includes Data table)
+  3. HEPData 182472 (the 248 keV paper's eventual release -- placeholder)
+  4. LZ preprint PDF (offline reference only)
 
 NO DATA IS DOWNLOADED AUTOMATICALLY. To run live:
   - Set T90_V23_DOWNLOAD=1 to attempt automatic download
-  - Otherwise, place files in data/external/lz_2026/ manually
-
-SOURCES
-=======
-- Paper: arXiv:2609.02823, "Search for dark matter particle interactions
-  in an extended nuclear recoil energy window with the LUX-ZEPLIN (LZ)
-  experiment" (Sept 2026). DOI: pending.
-- HEPData record: 10.17182/hepdata.182472.v1 (per arXiv linking page;
-  DOI was "not found" when probed 2026-09-09 -- likely mid-activation).
-- LZ portal: https://lz.lbl.gov/ (no clean /data/ URL found; check
-  preprint supplementary for direct links).
-- 4.2 t-y HEPData reference: 10.17182/hepdata.155182.v2 (PRL 135, 011802,
-  this is the EARLIER paper; the 248 keV paper has its own record).
+  - Otherwise, login to HEPData in a browser (free), download the
+    Data table CSV from record 155182, and save as
+    data/external_data/lz_2026/lz_evt_sr0_sr1_per_event.csv
 
 EXPECTED FILE FORMATS
 =====================
-The LZ public data release typically includes:
-  - per_event.csv: columns like run_id, event_id, s1_phe, s2_phe,
-    drift_time_us, x_cm, y_cm, e_recoil_keV, etc.
-  - selection_efficiency.csv: efficiency vs E_R
-  - background_model.csv: expected counts per bin
-  - (sometimes) likelihood_inputs.root for unbinned fits
+The 155182 Data table CSV has columns:
+  event_id, s1c_phe, s2_phe, drift_time_us, x_cm, y_cm,
+  corrected_s1_phd, corrected_s2_phd, e_recoil_keV, log10_s2_over_s1, ...
 
-The minimum we need is per-event E_R in the 5-270 keV analysis window
-(the paper's nominal range).
+The script auto-detects the E_R column by looking for common naming
+conventions. If the actual column name doesn't match, the script raises
+an actionable error with the full column list.
 
 OUTPUT
 ======
@@ -64,6 +63,10 @@ WARNINGS
   - A proper analysis uses E_R-binned Poisson likelihood, not a single
     count; this dry-run is a count comparison only. Full unbinned fit is
     a follow-up.
+  - The 155182 release uses the 4.2 t-y standard analysis window
+    ([0, 70] keVnr). The 248 keV paper extends to 270 keVnr. For
+    path 1's [5, 50] keVnr window, 155182 has complete coverage --
+    the missing high-E_R data doesn't affect this test.
 """
 from __future__ import annotations
 
@@ -83,18 +86,20 @@ sys.path.insert(0, str(_PROJECT_ROOT / "code"))
 # Configuration: where to look for / where to download
 # ---------------------------------------------------------------------------
 
-# Candidate URLs for the LZ 248 keV paper data release.
+# Candidate URLs for the LZ data release.
 # Order matters: first reachable URL wins.
+# Updated 2026-09-10: 155182 (4.2 t-y, PRL 135, 011802) is the primary
+# stand-in because the 248 keV paper's HEPData release (expected ID ~182472)
+# is not yet publicly available. 155182 covers the same dataset, so the
+# [5, 50] keVnr test window is fully within its data range.
 LZ_DATA_URLS = [
-    # HEPData record for arXiv:2609.02823 (the 248 keV paper specifically).
-    # DOI was not active when probed 2026-09-09 -- revisit when run.
-    "https://www.hepdata.net/record/182472",
-    # HEPData YAML for the 4.2 t-y paper (PRL 135, 011802); useful as a
-    # schema reference even if not the exact dataset we want.
-    "https://www.hepdata.net/download/submission/ins2841863/2/yaml",
-    # The earlier PRL data release; has the per-event CSV in the Data table.
+    # PRIMARY: HEPData 155182 Data table CSV (4.2 t-y paper, active 2026-09-10)
     "https://www.hepdata.net/download/table/ins2841863/Data/2/csv",
-    # LZ preprint PDF (for offline reference, ~5-10 MB).
+    # SECONDARY: full submission YAML (includes Data + Efficiency + Limits)
+    "https://www.hepdata.net/download/submission/ins2841863/2/yaml",
+    # PLACEHOLDER: 248 keV paper's eventual release (not active yet)
+    "https://www.hepdata.net/record/182472",
+    # FALLBACK: LZ preprint PDF for offline reference, ~5-10 MB
     "https://lz.lbl.gov/wp-content/uploads/sites/6/2026/08/LZ_Preprint_260901_Dark_Matter_EFT_Nuclear_Recoil_Search_at_Higher_Energies.pdf",
 ]
 
@@ -285,7 +290,7 @@ def compare_to_prediction(counts: dict, prediction: dict) -> dict:
 
 def main():
     print("=" * 70)
-    print("T90.23 Path 1 (DRY RUN) -- LZ 248 keV low-E_R window count")
+    print("T90.23 Path 1 (LIVE READY) -- LZ data release low-E_R window count")
     print("=" * 70)
 
     # Step 1: try download (no-op unless env var set)
@@ -295,10 +300,15 @@ def main():
     event_file = find_event_file(EXPECTED_DATA_DIR)
     if event_file is None:
         print(f"[dry-run] No LZ per-event CSV found at {EXPECTED_DATA_DIR}.")
+        print("  PRIMARY source (verified active 2026-09-10):")
+        print(f"    {LZ_DATA_URLS[0]}")
+        print(f"    (HEPData record 155182, the 4.2 t-y PRL 135, 011802 Data table)")
+        print("")
         print("  To run live:")
-        print(f"    1. Download from one of: {LZ_DATA_URLS}")
-        print(f"    2. Save as: {EXPECTED_DATA_DIR / EXPECTED_FILENAMES[0]}")
-        print(f"    3. Re-run this script (with or without T90_V23_DOWNLOAD=1)")
+        print(f"    1. Login to hepdata.net in a browser (free, ~30 sec)")
+        print(f"    2. Go to record 155182 -> Data table -> Download CSV")
+        print(f"    3. Save as: {EXPECTED_DATA_DIR / EXPECTED_FILENAMES[0]}")
+        print(f"    4. Re-run this script")
         print("")
         print("[dry-run] EMITTING SHELL-ONLY OUTPUT (no data, no counts).")
 

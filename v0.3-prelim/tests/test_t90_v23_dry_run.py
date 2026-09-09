@@ -80,6 +80,22 @@ def test_path1_magnetic_moment_prediction_keys():
     assert pred["N_pred_window_5_50_keV"] == 778.0    # the smoking gun
 
 
+def test_path1_url_list_prioritizes_155182_standin():
+    """Per 2026-09-10 Option-1 decision: 155182 is the PRIMARY source
+    because 182472 (248 keV paper's eventual HEPData release) is not
+    yet active. This test documents the URL priority choice."""
+    import t90_v23_lz_evt_in_lowE_window as p1
+    urls = p1.LZ_DATA_URLS
+    # PRIMARY must be the 155182 Data table CSV (ins2841863/Data/2/csv)
+    assert "ins2841863/Data/2/csv" in urls[0], (
+        f"PRIMARY URL must be 155182 Data table; got {urls[0]}"
+    )
+    # 182472 should still be in the list as a placeholder for the future
+    assert any("182472" in u for u in urls), (
+        "Expected 182472 placeholder to remain in fallback list"
+    )
+
+
 # --- Path 2 ---
 
 def test_path2_imports():
