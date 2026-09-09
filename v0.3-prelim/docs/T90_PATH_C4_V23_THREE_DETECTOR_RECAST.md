@@ -1,7 +1,12 @@
-# T90.23 — Three-detector real-data recast (DRY RUN)
+# T90.23 — Three-detector real-data recast (ARCHIVED)
 
-**Status:** DRY RUN shipped (paths 1-4 scripts + tests + joint-likelihood skeleton). NO data downloaded.
-**Date:** 2026-09-09
+**Status:** ARCHIVED 2026-09-10. Path 1 ran live against HEPData 155182.
+**Verdict:** Magnetic-m is consistent with observed NR-band population but the
+[5, 50] keVnr smoking-gun test is structurally blocked by LZ's pre-publication
+S1c > 3 phd cut. No alternative LZ HEPData release resolves this. Branch stays
+on `wip/tier3-magnetic-moment-LZ` per the T90 merge rule; awaiting LZ community
+resolution of the 248 keV event.
+**Date:** 2026-09-09 (shipped), 2026-09-10 (archived after live test)
 **Branch:** `wip/tier3-magnetic-moment-LZ`
 **Author:** T90 working group (Hermes + user)
 

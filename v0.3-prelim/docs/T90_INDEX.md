@@ -375,6 +375,19 @@ the combination of lattice κ_neut values + XENON100 limit.
    `wip/tier3-magnetic-moment-LZ` until LZ community
    confirmation (or refutation) of the 248 keV event.
 
+10. **T90.23 three-detector recast (2026-09-09/10):** Attempted to test
+    the magnetic-m interpretation against the published LZ data
+    (HEPData 155182 = PRL 135, 011802 4.2 t·y release). Path 1 ran
+    live; **structural limit confirmed**: LZ's standard 3 phd S1c
+    cut removes all sub-300 keVnr NR events from public release,
+    so the [5, 50] keVnr magnetic-m smoking-gun test cannot be run
+    with any existing LZ HEPData record. The 2D signal-region test
+    (option B) shows magnetic-m is **consistent** with the observed
+    NR-band population (~287 events vs ~9 predicted from magnetic-m
+    alone in [50, 200] keVnr) but not specifically required by it.
+    **T90.23 path 1 archived as "demonstrated capability, awaiting
+    248 keV paper's extended-window data release (if ever)".**
+
 ---
 
 ## What's still TODO
