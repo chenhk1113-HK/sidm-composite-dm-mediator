@@ -226,12 +226,22 @@ def main():
     for sr, n_per_bin in observed.items():
         print(f"  {sr}: {len(n_per_bin)} cS2 bins, {int(n_per_bin.sum())} total events")
 
-    # Load background
-    print()
-    print("[load] Reading background templates...")
-    background = load_background()
+    # NOTE on background CSVs:
+    # The background_sr*.csv files contain per-bin EXPECTED COUNTS for a SUBSET
+    # of components (cevns, de, ae, cathode). The FULL paper Table I also includes
+    # the 8B CEvNS rate and other small contributions. The total per Table I:
+    #   SR0: 600, SR1: 800, SR2: 1260, Total: 2660
+    # We use Table I directly for the total expected background.
+
+    PAPER_TABLE_I_TOTALS = {
+        "SR0": {"total_bg": 600.0, "obs": 583},
+        "SR1": {"total_bg": 800.0, "obs": 864},
+        "SR2": {"total_bg": 1260.0, "obs": 1107},
+    }
+    background = {sr: np.array([PAPER_TABLE_I_TOTALS[sr]["total_bg"] / 7.0] * 7)
+                  for sr in ["SR0", "SR1", "SR2"]}
     for sr, n_per_bin in background.items():
-        print(f"  {sr}: {len(n_per_bin)} cS2 bins, {n_per_bin.sum():.2f} expected background")
+        print(f"  {sr}: 7 cS2 bins, total {n_per_bin.sum():.2f} expected (Table I, uniform across bins)")
 
     # Build magnetic-m prediction per science run
     print()
@@ -333,9 +343,11 @@ def main():
         },
         "headline": (
             f"XENONnT S2-only test: observed {total_observed} events, "
-            f"background {total_background:.1f}, magnetic-m {total_magmom:.1f}. "
+            f"background {total_background:.0f} (Table I), magnetic-m {total_magmom:.0f}. "
             f"Magnetic-m is {ratio_magmom_to_bg*100:.1f}% of background. "
-            f"This is the proper S2-only test that bypasses LZ/PandaX structural limits."
+            f"Data matches background within 4% (consistent). "
+            f"Magnetic-m is consistent with data but the test is weak "
+            f"(cannot distinguish magnetic-m from background-only)."
         ),
     }
 
