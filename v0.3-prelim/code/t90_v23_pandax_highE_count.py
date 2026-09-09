@@ -1,73 +1,58 @@
 """
-T90.23 PATH 2 (DRY RUN) — PandaX-4T run0/run1 high-E_R count.
+T90.23 PATH 2 (LIVE) — PandaX-4T 1.54 t-y DM candidate events: high-E_R count.
 
 PURPOSE
 =======
-The PandaX-4T light-DM 259-day release exposes binned spectral CSVs:
-run0_data.csv and run1_data.csv, each with columns
-E_low_keV, E_high_keV, E_center_keV, run0, run1.
+The PandaX-4T 1.54 t·y paper (PRL 134, 011805) releases 2490 DM candidate
+events with (qS1, qS2, x, y, z, t) — Run 0 + Run 1 combined. Unlike LZ's
+HEPData 155182, PandaX does NOT apply a strict S1c > 3 phd cut, so events
+in the [5, 50] keVnr magnetic-m signal region are preserved.
 
-The T90 magnetic-moment interpretation (m_chi ~ 1 TeV, mu_x = 6.10e-8 mu_N)
-predicts ~0.6 events in the [200, 300] keV window at PandaX-4T exposure
-(1.54 tonne-years) -- ~half of LZ's rate at ~half the exposure. The
-existing PandaX light-DM CSV is normalized to unit integral; we instead
-need the background-and-signal ROI from the main 1.54 t-y DM paper
-(opendata.tar.gz).
+This script:
+  1. Loads Run0 + Run1 candidate CSVs
+  2. Maps (qS1, qS2b) -> E_R via PandaX NEST parametrization (g1, g2b
+     per-run, E-field per-run)
+  3. Counts events in [5, 50], [50, 200], [200, 300] keVnr windows
+  4. Compares to magnetic-m prediction (mu_x = 6.10e-8 mu_N, m_chi = 1 TeV)
+  5. Verdict: magnetic-m CONSISTENT / UNDER-PREDICTS / OVER-PREDICTS
 
-This script is the DRY-RUN skeleton:
-  - Documents PandaX URLs and schemas
-  - Builds a manual-download helper (auto-download requires env var,
-    and PandaX CDN was unreachable from this Windows host when probed)
-  - Implements high-E_R ([200, 300] keV) and mid-E_R ([50, 200] keV)
-    count comparison
-  - Compares observed to magnetic-m and background-only predictions
+KEY RESULT (2026-09-10)
+=======================
+PandaX preserves events below LZ's 3 phd S1c cut:
+  - Run 0: 1117 events, qS1 range [2.02, 134.32] PE, 20 events with qS1 < 3 PE
+  - Run 1: 1373 events, qS1 range [2.09, 134.96] PE, 16 events with qS1 < 3 PE
+  - Combined: 2490 events, 36 events with qS1 < 3 PE (these are below LZ's cut)
 
-NO DATA IS DOWNLOADED AUTOMATICALLY. To run live, set T90_V23_DOWNLOAD=1
-(or use the browser to manually fetch, then drop into the expected dir).
-
-SOURCES
-=======
-- PandaX Data Release portal: https://pandax.sjtu.edu.cn/public/data_release
-- Light-DM paper: 10.1103/rtnh-jn8s (PRL 134, 011805)
-- Main DM paper: 10.1103/PhysRevLett.134.011805 (1.54 t-y, Run0+Run1)
-- Files: run0_data.csv, run1_data.csv (light-DM, normalized PDFs);
-  opendata.tar.gz (main DM, includes per-energy-bin signal efficiency)
-- PandaX-4T exposure: 1.54 tonne-years (Run0 0.63 + Run1 0.91)
-
-EXPECTED FILE FORMATS
-=====================
-Light-DM (light-dark-matter, PRL 134, 011805):
-  Schema (columns, ASCII, comma-separated):
-    E_low_keV, E_high_keV, E_center_keV, run0, run1
-  Energy range: 0.04 - 2.8 keVee (electronic-equivalent). NO [200, 300]
-  keVee nuclear-recoil window. So this CSV is NOT directly useful for
-  our [200, 300] keV nuclear-recoil count; we need the 1.54 t-y paper
-  release instead.
-
-Main DM (opendata.tar.gz, PRL 134, 011805):
-  The opendata.tar.gz contains CSVs at higher energy range. The exact
-  schema is TBD -- needs to be inspected when the tarball is downloaded.
-  Likely includes per-event CSV (E_R, S1, S2, x, y) plus efficiency
-  curves plus binned background.
+This is CRITICAL: the PandaX data CAN directly test the [5, 50] keVnr
+magnetic-m signal region that LZ structurally blocks.
 
 OUTPUT
 ======
   - outputs/t90/t90_v23_pandax_highE_count.json
-      Per-window count + ratio-to-prediction + verdict
+      Per-window counts + ratio-to-prediction + verdict
 
-CAVEATS
-=======
-  - PandaX data is binned; need to know bin edges to count [200, 300]
-    keV nuclear recoils. If bins are 4 keV wide (per the light-DM
-    description), 25 bins span the window; if wider, fewer.
-  - The Run0/Run1 CSV is electronic-equivalent (keVee); to compare to
-    a nuclear-recoil [200, 300] keV window we need the quenching factor
-    (Lindhard ~0.15-0.20 for Xe around 100 keVnr).
-  - The 2023 PandaX magnetic-moment limit (Nature 618, 47) was set on
-    Run0 only (0.63 t-y); Run0+Run1 (1.54 t-y) tightens this by ~1.5x.
+MAGNETIC-M PREDICTION (at LZ-tuned coupling, scaled to PandaX exposure)
+========================================================================
+LZ predicts:
+  - 1 event at [200, 300] keVnr in 2.84 t-y
+  - 778 events at [5, 50] keVnr in 2.84 t-y
+
+PandaX exposure = 1.54 t-y = 0.542x LZ exposure.
+Scaling: N_pred_PandaX = N_pred_LZ * 0.542
+
+So at the same coupling:
+  - 0.54 events at [200, 300] keVnr in 1.54 t-y at PandaX
+  - 422 events at [5, 50] keVnr in 1.54 t-y at PandaX
+  - 815 events at [5, 270] keVnr in 1.54 t-y at PandaX
+  - 390 events at [50, 200] keVnr in 1.54 t-y at PandaX
+
+PandaX has NOT reported a 248 keV candidate. With 2490 events published,
+the expected ~0.5 events at [200, 300] keVnr from magnetic-m is BELOW
+the natural background fluctuation of ~few events in this window.
 """
 from __future__ import annotations
 
+import csv
 import json
 import os
 import sys
@@ -84,19 +69,26 @@ sys.path.insert(0, str(_PROJECT_ROOT / "code"))
 # Configuration
 # ---------------------------------------------------------------------------
 
-PANDAX_URLS = {
-    "light_dm_run0": "https://static.pandax.sjtu.edu.cn/download/data-share/p4-light-dark-matter/run0_data.csv",
-    "light_dm_run1": "https://static.pandax.sjtu.edu.cn/download/data-share/p4-light-dark-matter/run1_data.csv",
-    "main_dm_opendata_tar": "https://static.pandax.sjtu.edu.cn/download/data-share/p4-DM/opendata.tar.gz",
-    "nudm_open_data_tar": "https://static.pandax.sjtu.edu.cn/download/data-share/p4-nuDM/open-data.tar.gz",
-    "s2only_zip": "https://static.pandax.sjtu.edu.cn/download/data-share/p4-first-analysis/s2only_data_release.zip",
-}
-
+# Where the user places the extracted opendata bundle.
 PANDAX_EXPECT_DIR = _PROJECT_ROOT / "data" / "external_data" / "pandax_4t"
-EXPECTED_FILENAMES = {
-    "light_dm_run0": "run0_data.csv",
-    "light_dm_run1": "run1_data.csv",
-    "main_dm_opendata_tar": "opendata.tar.gz",
+EXPECTED_FILE_PATTERNS = [
+    "Run0_DM_candidates.csv",
+    "Run1_DM_candidates.csv",
+]
+GLOB_PATTERN = "*_DM_candidates.csv"  # fallback glob
+
+# PandaX detector parameters (from plot.py in the opendata bundle)
+PANDAX_PARAMS = {
+    "run0": {
+        "g1": 0.0997,    # PE/keV
+        "g2b": 4.12,     # PE/electron (bottom array only)
+        "elec_field": 92.8,  # V/cm
+    },
+    "run1": {
+        "g1": 0.0907,
+        "g2b": 5.029,
+        "elec_field": 84.4,
+    },
 }
 
 # Analysis windows (keV nuclear-recoil energy)
@@ -105,156 +97,166 @@ WINDOW_LOW_E = (5.0, 50.0)
 WINDOW_FULL = (5.0, 270.0)
 WINDOW_SIDEBAND = (50.0, 200.0)
 
-# Magnetic-moment predictions at PandaX exposure (1.54 t-y) and
-# m_chi = 1000 GeV, mu_x = 6.10e-8 mu_N (from v12 dry-run, scaled from
-# LZ's 2.84 t-y: PandaX exposure / LZ exposure = 1.54/2.84 = 0.542).
+# Magnetic-moment prediction at LZ-tuned coupling, scaled to PandaX exposure.
+# LZ predictions at 2.84 t-y from v12 dry-run:
+#   N_pred(200-300 keVnr) = 1.0
+#   N_pred(5-50 keVnr) = 778.0
+#   N_pred(5-270 keVnr) = 1500.0
+#   N_pred(50-200 keVnr) = 720.0
+# PandaX exposure = 1.54 t-y = 0.542x LZ exposure.
 MAG_MOMENT_PREDICTION_PANDAX = {
     "mu_x_mu_N": 6.10e-8,
     "m_chi_GeV": 1000.0,
     "exposure_tonne_years": 1.54,
-    "N_pred_window_200_300_keV": 0.54,   # ~half LZ rate at half exposure
-    "N_pred_window_5_50_keV": 422.0,    # ~half LZ low-E prediction
-    "N_pred_window_5_270_keV": 815.0,
-    "N_pred_window_50_200_keV": 390.0,
-    "source": "t90_v12_detector_response.py, scaled by 1.54/2.84 from LZ",
+    "exposure_ratio_to_LZ": 0.542,    # 1.54 / 2.84
+    "N_pred_window_200_300_keVnr": 0.54,   # 1.0 * 0.542
+    "N_pred_window_5_50_keVnr": 422.0,     # 778 * 0.542
+    "N_pred_window_5_270_keVnr": 815.0,    # 1500 * 0.542
+    "N_pred_window_50_200_keVnr": 390.0,    # 720 * 0.542
+    "source": "t90_v12 dry-run, scaled by 1.54/2.84 = 0.542 from LZ 2.84 t-y",
 }
 
 
 # ---------------------------------------------------------------------------
-# Download helper (NEVER auto-runs unless T90_V23_DOWNLOAD=1)
+# NEST mapping for PandaX
 # ---------------------------------------------------------------------------
 
-def try_download(out_dir: Path, timeout_s: int = 60) -> dict:
-    """Attempt to download PandaX data. Returns dict of name -> path or None.
+def nest_map_pandax_s1_to_er(qS1_pe: "np.ndarray", qS2B_pe: "np.ndarray",
+                              run: str = "run0") -> "np.ndarray":
+    """Reverse-map (qS1, qS2B) to nuclear-recoil energy E_R for PandaX.
 
-    CRITICAL NOTE: when probed 2026-09-09, all of static.pandax.sjtu.edu.cn
-    returned curl exit 6 ("Could not resolve host") and curl exit 28
-    ("timeout"). The PandaX CDN may block scripted HTTP from this network.
-    If auto-download fails, use a browser to fetch and place files
-    manually at the expected paths.
+    Uses PandaX NEST parametrization from the plot.py script:
+      E_ee = 0.0137 * (1/g1 + S2b/S1/g2b) * S1
+
+    Then Lindhard quenching to convert E_ee -> E_R for NR events.
+
+    Note: This is a simplified mapping. PandaX's actual NEST uses a more
+    complex E_ee(E_R, field) inversion. For an order-of-magnitude
+    count this is sufficient.
     """
-    if os.environ.get("T90_V23_DOWNLOAD", "0") != "1":
-        print("[dry-run] T90_V23_DOWNLOAD not set; skipping auto-download.")
-        print(f"  Expected target dir: {out_dir}")
-        return {k: None for k in PANDAX_URLS}
+    g1 = PANDAX_PARAMS[run]["g1"]
+    g2b = PANDAX_PARAMS[run]["g2b"]
 
-    out_dir.mkdir(parents=True, exist_ok=True)
-    import urllib.request
-    import urllib.error
+    # First convert to electronic-equivalent energy
+    # E_ee [keVee] = 0.0137 * (1/g1 + S2b/S1/g2b) * S1
+    e_ee = 0.0137 * (1.0 / g1 + qS2B_pe / qS1_pe / g2b) * qS1_pe
 
-    results = {}
-    for name, url in PANDAX_URLS.items():
-        try:
-            print(f"[download] Trying {url}")
-            target = out_dir / EXPECTED_FILENAMES.get(name, url.rsplit("/", 1)[-1])
-            req = urllib.request.Request(url, headers={"User-Agent": "sidm-t90/0.4"})
-            with urllib.request.urlopen(req, timeout=timeout_s) as resp:
-                target.write_bytes(resp.read())
-            print(f"[download] OK: {target} ({target.stat().st_size:,} bytes)")
-            results[name] = str(target)
-        except (urllib.error.URLError, TimeoutError, OSError) as exc:
-            print(f"[download] FAIL: {url} -> {type(exc).__name__}: {exc}")
-            results[name] = None
-    return results
+    # Lindhard quenching for NR: E_R = E_ee / L_eff(E_R)
+    # Iteratively solve E_R = E_ee / L_eff(E_R)
+    # L_eff(E_R) ~ 0.05 * (E_R / 10) ** 0.18 for low-E NR (PandaX tuned)
+    # For now, use simple approximation: E_R = E_ee / 0.10 (rough Lindhard at moderate E_R)
+    # Better: solve iteratively
 
+    def l_eff_nr(E_R):
+        """NEST Lindhard-based NR light yield, PandaX-tuned."""
+        return 0.05 * np.power(np.maximum(E_R, 0.5) / 10.0, 0.18)
 
-# ---------------------------------------------------------------------------
-# Load + count
-# ---------------------------------------------------------------------------
-
-def load_lightdm_csv(csv_path: Path) -> dict:
-    """Load the PandaX light-DM CSV (E_low, E_high, E_center, run0, run1).
-
-    Returns dict with bin edges and per-run count arrays. The light-DM
-    release is normalized to unit integral (PDF), so we cannot directly
-    use it for an absolute count -- this function returns the PDF as-is
-    so we can at least inspect bin coverage.
-    """
-    arr = np.genfromtxt(csv_path, delimiter=",", names=True, encoding="utf-8")
-    print(f"[load] Columns: {arr.dtype.names}")
-    print(f"[load] Energy range: [{arr['E_low_keV'][0]:.4f}, {arr['E_high_keV'][-1]:.4f}] keVee")
-    print(f"[load] Total bins: {len(arr)}")
-    return {
-        "E_low_keV": arr["E_low_keV"].tolist(),
-        "E_high_keV": arr["E_high_keV"].tolist(),
-        "E_center_keV": arr["E_center_keV"].tolist(),
-        "run0_pdf": arr["run0"].tolist(),
-        "run1_pdf": arr["run1"].tolist(),
-        "energy_range_keVee": [float(arr["E_low_keV"][0]), float(arr["E_high_keV"][-1])],
-        "caveat": "PDF normalized to unit integral; absolute counts not recoverable",
-    }
+    # Iterative solution: start with E_R = E_ee, refine
+    e_r = e_ee.copy()
+    for _ in range(20):
+        e_r_new = e_ee / np.maximum(l_eff_nr(e_r), 0.01)
+        if np.max(np.abs(e_r_new - e_r)) < 0.01:
+            break
+        e_r = e_r_new
+    return e_r
 
 
-def count_binned_in_window(arr_pdf: "np.ndarray", E_low: "np.ndarray",
-                            E_high: "np.ndarray", window_keV: tuple,
-                            exposure_t_y: float, eff_per_bin: Optional["np.ndarray"] = None
-                            ) -> dict:
-    """Count events in window using a binned PDF * total expected events.
-
-    The light-DM CSV is a PDF, not counts. To convert to expected counts,
-    we need:
-        N_pred(window) = total_expected_events * sum_{bin in window} PDF * width
-    where total_expected_events comes from the paper (not in the CSV).
-    For dry-run purposes, we report N_pred for the magnetic-m interpretation
-    and leave the absolute count comparison to the LIVE step (which needs
-    the opendata.tar.gz, with raw per-event data).
-    """
+def count_in_window(er_keV: "np.ndarray", window_keV: tuple) -> dict:
+    """Count events in a recoil-energy window."""
     lo, hi = window_keV
-    mask = (E_low >= lo) & (E_high <= hi)
-    n_bins = int(mask.sum())
-    integrated_pdf = float(np.sum(arr_pdf[mask] * (E_high[mask] - E_low[mask])))
-    eff = eff_per_bin if eff_per_bin is not None else np.ones_like(E_low)
-    integrated_eff = float(np.sum(arr_pdf[mask] * (E_high[mask] - E_low[mask]) * eff[mask]))
+    mask = (er_keV >= lo) & (er_keV <= hi)
+    n = int(mask.sum())
     return {
         "window_keV": list(window_keV),
-        "n_bins_in_window": n_bins,
-        "integrated_pdf_in_window": integrated_pdf,
-        "integrated_eff_pdf_in_window": integrated_eff,
+        "n_events": n,
+        "fraction_of_total": float(n / max(len(er_keV), 1)),
     }
 
 
-def compare_to_prediction_magmom(loaded: dict, prediction: dict) -> dict:
-    """Compare observed to magnetic-moment predictions (path 2 expected).
-
-    The light-DM CSV is PDF-normalized, so this is mostly a SCHEMA / bin
-    coverage check, not a count. We report:
-      - Is the window [200, 300] keVee covered by the CSV? (likely NO,
-        because light-DM energy range is 0.04-2.8 keVee)
-      - The relative weight of each window in the binned distribution
-    """
-    elow = np.asarray(loaded["E_low_keV"])
-    ehigh = np.asarray(loaded["E_high_keV"])
-    r0 = np.asarray(loaded["run0_pdf"])
-    r1 = np.asarray(loaded["run1_pdf"])
-
-    e_low_max = float(ehigh.max())
-    e_high_min = float(elow.min())
-
-    windows = {
-        "low_E_5_50": WINDOW_LOW_E,
-        "248_keV_200_300": WINDOW_248KEV,
-        "sideband_50_200": WINDOW_SIDEBAND,
-        "full_5_270": WINDOW_FULL,
-    }
-
-    out = {}
-    for label, w in windows.items():
-        in_range = (w[1] <= e_low_max) and (w[0] >= e_high_min)
-        # light-DM is keVee; target is keVnr. Quenching ~0.15-0.20.
-        # So [200, 300] keVnr maps to [30, 60] keVee.
-        # The light-DM range tops out at 2.8 keVee, which means even the
-        # quenched mapping is OUT OF RANGE.
-        ee_mapped = [w[0] * 0.15, w[1] * 0.20]   # very rough
-        in_range_ee = (ee_mapped[1] <= e_low_max) and (ee_mapped[0] >= e_high_min)
-
-        out[label] = {
-            "window_keV_nr": list(w),
-            "quenched_approx_keVee": ee_mapped,
-            "covers_in_keVee": in_range_ee,
-            "use_main_dm_tarball": not in_range_ee,
+def compare_to_prediction(counts: dict, prediction: dict) -> dict:
+    """Compare observed counts to magnetic-moment prediction."""
+    result = {"windows": {}}
+    for label, window in [
+        ("low_E_5_50", WINDOW_LOW_E),
+        ("248_keV_200_300", WINDOW_248KEV),
+        ("sideband_50_200", WINDOW_SIDEBAND),
+        ("full_5_270", WINDOW_FULL),
+    ]:
+        c = counts[label]
+        # Try a few key format variants
+        for key_format in [
+            f"N_pred_window_{window[0]:.0f}_{window[1]:.0f}_keVnr",
+            f"N_pred_window_{window[0]:.0f}_{window[1]:.0f}keVnr",
+            f"N_pred_window_{window[0]:.0f}_{window[1]:.0f}_keV",
+            f"N_pred_window_{window[0]:.0f}_{window[1]:.0f}",
+        ]:
+            if key_format in prediction:
+                n_pred = prediction[key_format]
+                break
+        else:
+            raise KeyError(
+                f"No matching prediction key for window {window}; "
+                f"available keys: {list(prediction.keys())}"
+            )
+        ratio = c["n_events"] / max(n_pred, 1e-9)
+        if ratio < 0.3:
+            verdict = "below_prediction (magnetic-m contradicted)"
+        elif ratio < 3.0:
+            verdict = "consistent_with_magnetic_m"
+        else:
+            verdict = "above_prediction (magnetic-m under-predicts)"
+        result["windows"][label] = {
+            **c,
+            "n_predicted": n_pred,
+            "ratio_obs_to_pred": ratio,
+            "verdict": verdict,
         }
+    return result
 
-    return out
+
+# ---------------------------------------------------------------------------
+# Load
+# ---------------------------------------------------------------------------
+
+def load_run_csv(csv_path: Path, run: str) -> dict:
+    """Load a single PandaX run CSV."""
+    rows = []
+    with csv_path.open("r", encoding="utf-8") as f:
+        rdr = csv.DictReader(f)
+        for r in rdr:
+            rows.append(r)
+    qS1 = np.array([float(r["qS1"]) for r in rows])
+    qS2B = np.array([float(r["qS2B"]) for r in rows])
+    qS2 = np.array([float(r["qS2"]) for r in rows])
+    x = np.array([float(r["x"]) for r in rows])
+    y = np.array([float(r["y"]) for r in rows])
+    z = np.array([float(r["z"]) for r in rows])
+    print(f"[load] {run}: {len(rows)} events from {csv_path.name}")
+    print(f"[load]   qS1 range: [{qS1.min():.2f}, {qS1.max():.2f}] PE")
+    print(f"[load]   qS2B range: [{qS2B.min():.1f}, {qS2B.max():.1f}] PE")
+    print(f"[load]   log10(qS2B/qS1) range: "
+          f"[{np.log10(qS2B/qS1).min():.3f}, {np.log10(qS2B/qS1).max():.3f}]")
+    print(f"[load]   events with qS1 < 3 PE: {int(np.sum(qS1 < 3))}")
+    er_keV = nest_map_pandax_s1_to_er(qS1, qS2B, run=run)
+    print(f"[load]   NEST-mapped E_R range: [{er_keV.min():.2f}, {er_keV.max():.2f}] keVnr")
+    return {
+        "run": run,
+        "n_events": len(rows),
+        "qS1": qS1, "qS2B": qS2B, "qS2": qS2,
+        "x": x, "y": y, "z": z,
+        "er_keV": er_keV,
+    }
+
+
+def find_candidate_files(search_dir: Path) -> list:
+    """Find PandaX Run0 and Run1 CSVs in search_dir."""
+    found = []
+    if not search_dir.exists():
+        return found
+    # Walk subdirectories too, since the bundle puts them in open_csv/
+    for path in search_dir.rglob("*_DM_candidates.csv"):
+        found.append(path)
+    return sorted(found)
 
 
 # ---------------------------------------------------------------------------
@@ -263,23 +265,25 @@ def compare_to_prediction_magmom(loaded: dict, prediction: dict) -> dict:
 
 def main():
     print("=" * 70)
-    print("T90.23 Path 2 (DRY RUN) -- PandaX-4T high-E_R count")
+    print("T90.23 Path 2 (LIVE) -- PandaX-4T 1.54 t-y high-E_R count")
     print("=" * 70)
 
-    downloaded = try_download(PANDAX_EXPECT_DIR)
+    candidates = find_candidate_files(PANDAX_EXPECT_DIR)
+    if not candidates:
+        # Try the immediate parent too
+        candidates = find_candidate_files(PANDAX_EXPECT_DIR.parent)
 
-    light_dm_run0 = PANDAX_EXPECT_DIR / EXPECTED_FILENAMES["light_dm_run0"]
-    light_dm_run1 = PANDAX_EXPECT_DIR / EXPECTED_FILENAMES["light_dm_run1"]
-    opendata_tar = PANDAX_EXPECT_DIR / EXPECTED_FILENAMES["main_dm_opendata_tar"]
-
-    have_light_dm = light_dm_run0.exists() and light_dm_run1.exists()
-    have_opendata = opendata_tar.exists()
-
-    if not have_light_dm and not have_opendata:
-        print(f"[dry-run] No PandaX data found at {PANDAX_EXPECT_DIR}.")
-        print("  Expected files:")
-        for name, fname in EXPECTED_FILENAMES.items():
-            print(f"    {PANDAX_EXPECT_DIR / fname}    ({name})")
+    if not candidates:
+        print(f"[dry-run] No PandaX Run*_DM_candidates.csv found at:")
+        print(f"  {PANDAX_EXPECT_DIR}")
+        print(f"  {PANDAX_EXPECT_DIR.parent}")
+        print("")
+        print("  To run live: download opendata.tar.gz from")
+        print("  https://pandax.sjtu.edu.cn/public/data_release")
+        print("  (the 'Dark Matter Search Results from 1.54 Tonne-Year Exposure'")
+        print("  section), extract, and place the two CSVs in:")
+        print(f"  {PANDAX_EXPECT_DIR}/Run0_DM_candidates.csv")
+        print(f"  {PANDAX_EXPECT_DIR}/Run1_DM_candidates.csv")
         print("")
         print("[dry-run] EMITTING SHELL-ONLY OUTPUT (no data, no counts).")
 
@@ -287,61 +291,101 @@ def main():
             "mode": "dry_run",
             "status": "awaiting_data",
             "expected_data_dir": str(PANDAX_EXPECT_DIR),
-            "candidate_urls": PANDAX_URLS,
-            "expected_filenames": EXPECTED_FILENAMES,
+            "expected_filenames": EXPECTED_FILE_PATTERNS,
             "magnetic_moment_prediction_pandax": MAG_MOMENT_PREDICTION_PANDAX,
-            "important_caveat": (
-                "PandaX CDN (static.pandax.sjtu.edu.cn) was unreachable from "
-                "this host when probed 2026-09-09. Manual download via browser "
-                "may be required. See URL list above."
+            "important_caveat_pandax_no_s1c_cut": (
+                "Unlike LZ's HEPData 155182 (which cuts all S1c < 3 phd events "
+                "before publication), PandaX's opendata.tar.gz publishes events "
+                "with qS1 down to 2 PE. This means PandaX's data CAN directly "
+                "test the [5, 50] keVnr magnetic-m signal region that LZ "
+                "structurally blocks. Per the README, the opendata CSV has columns "
+                "qS1, qS2B, qS2, x, y, z, t, set_label -- full per-event data."
             ),
             "schema_note": (
-                "The light-DM run0/run1 CSVs are PDFs normalized to unit "
-                "integral in the 0.04-2.8 keVee range. The [200, 300] keVnr "
-                "target window maps to [30, 60] keVee (quenching ~0.15-0.20), "
-                "which is OUT OF RANGE for the light-DM CSV. The opendata.tar.gz "
-                "(1.54 t-y main DM release) is required for the [200, 300] keVnr "
-                "count."
+                "PandaX detector parameters (from README): "
+                "Run 0 g1=0.0997 PE/keV, g2b=4.12 PE/electron, E=92.8 V/cm; "
+                "Run 1 g1=0.0907, g2b=5.029, E=84.4 V/cm. "
+                "iso-energy contours drawn at E_R = [5, 10, 20, 40, 80] keVnr."
             ),
             "verdict_rule": (
-                "If N_obs in [200, 300] keVnr at PandaX is ~0 with 1.54 t-y "
-                "exposure, magnetic-m is consistent (predicts 0.54 events). "
-                "If N_obs ~1+, magnetic-m is consistent with independent "
-                "cross-detector confirmation; Higgsino inelastic's prediction "
-                "is similar (both ~0.5 events), so this won't distinguish."
-            ),
-            "next_step_when_live": (
-                f"Drop the PandaX files into {PANDAX_EXPECT_DIR} and re-run."
+                "If N_obs in [5, 50] keVnr at PandaX is ~422 (predicted), "
+                "magnetic-m is consistent. If ~0, magnetic-m is contradicted. "
+                "If ~0 in [200, 300] keVnr, this is also consistent (predicts 0.54 "
+                "events; PandaX has not reported a 248 keV candidate in this dataset)."
             ),
         }
     else:
-        # LIVE mode
-        if have_light_dm:
-            r0 = load_lightdm_csv(light_dm_run0)
-            r1 = load_lightdm_csv(light_dm_run1)
-            window_coverage = compare_to_prediction_magmom(r0, MAG_MOMENT_PREDICTION_PANDAX)
-            output = {
-                "mode": "live",
-                "files_loaded": {
-                    "run0_data_csv": str(light_dm_run0),
-                    "run1_data_csv": str(light_dm_run1),
-                },
-                "opendata_tarball_present": have_opendata,
-                "window_coverage": window_coverage,
-                "magnetic_moment_prediction_pandax": MAG_MOMENT_PREDICTION_PANDAX,
-                "headline": (
-                    "Light-DM CSVs are PDF-normalized in 0.04-2.8 keVee; "
-                    "out of range for [200, 300] keVnr target. Use opendata.tar.gz "
-                    "for the main count."
-                ) if not have_opendata else
-                "Both light-DM and main DM tarball present -- full analysis possible.",
-            }
+        # LIVE mode: data is present, run the analysis
+        print(f"[live] Found {len(candidates)} candidate CSV(s):")
+        for c in candidates:
+            print(f"  {c}")
+
+        # Determine which run each CSV is
+        runs = []
+        for csv_path in candidates:
+            name = csv_path.name
+            if "Run0" in name:
+                run = "run0"
+            elif "Run1" in name:
+                run = "run1"
+            else:
+                run = "run0"  # default
+            runs.append((run, csv_path))
+
+        # Load and process
+        all_er = []
+        all_qs1 = []
+        per_run_results = []
+        for run, csv_path in sorted(runs):
+            result = load_run_csv(csv_path, run)
+            per_run_results.append(result)
+            all_er.append(result["er_keV"])
+            all_qs1.append(result["qS1"])
+
+        er_keV = np.concatenate(all_er)
+        qS1_combined = np.concatenate(all_qs1)
+        print()
+        print(f"[live] Combined: {len(er_keV)} events, mapped E_R range "
+              f"[{er_keV.min():.2f}, {er_keV.max():.2f}] keVnr")
+
+        counts = {
+            "low_E_5_50": count_in_window(er_keV, WINDOW_LOW_E),
+            "248_keV_200_300": count_in_window(er_keV, WINDOW_248KEV),
+            "sideband_50_200": count_in_window(er_keV, WINDOW_SIDEBAND),
+            "full_5_270": count_in_window(er_keV, WINDOW_FULL),
+        }
+        for label, c in counts.items():
+            print(f"  {label}: {c['n_events']} events in "
+                  f"[{c['window_keV'][0]}, {c['window_keV'][1]}] keVnr")
+
+        comparison = compare_to_prediction(counts, MAG_MOMENT_PREDICTION_PANDAX)
+
+        # Determine verdict
+        low_E_ratio = comparison["windows"]["low_E_5_50"]["ratio_obs_to_pred"]
+        if low_E_ratio < 0.01:
+            verdict = ("magnetic-m CONTRADICTED: [5, 50] keVnr is empty at PandaX")
+        elif low_E_ratio < 0.3:
+            verdict = "magnetic-m below prediction: weak constraint"
+        elif low_E_ratio < 3.0:
+            verdict = "magnetic-m CONSISTENT with low-E_R observation"
         else:
-            output = {
-                "mode": "live",
-                "files_loaded": {"opendata_tarball": str(opendata_tar)},
-                "headline": "Only opendata.tar.gz present; light-DM CSVs missing.",
-            }
+            verdict = "magnetic-m UNDER-PREDICTS: too many low-E_R events"
+
+        output = {
+            "mode": "live",
+            "n_events_total": int(len(er_keV)),
+            "data_source": [str(c) for _, c in sorted(runs)],
+            "magnetic_moment_prediction_pandax": MAG_MOMENT_PREDICTION_PANDAX,
+            "counts": comparison["windows"],
+            "headline_verdict": verdict,
+            "important_caveat": (
+                "PandaX preserves events below the LZ 3 phd S1c cut (down to "
+                "qS1 = 2 PE), so this test directly probes the [5, 50] keVnr "
+                "magnetic-m signal region that LZ structurally blocks."
+            ),
+            "low_s1c_event_count": int(np.sum(qS1_combined < 3.0)),
+            "low_s1c_fraction": float(np.sum(qS1_combined < 3.0) / max(len(qS1_combined), 1)),
+        }
 
     out_path = _PROJECT_ROOT / "outputs" / "t90" / "t90_v23_pandax_highE_count.json"
     out_path.parent.mkdir(parents=True, exist_ok=True)
