@@ -352,6 +352,11 @@ def loglike_joint(theta):
     if not np.isfinite(ll_lz):
         return -np.inf
 
+    # T90.42 (revised): leave-one-out profiling. When T41_LEAVE_OUT_LZ=1,
+    # disable LZ direct-detection channel (set ll_lz = 0).
+    if os.environ.get("T41_LEAVE_OUT_LZ", "0").strip() == "1":
+        ll_lz = 0.0
+
     # 5. Fermi dwarf (T32) — gamma-ray from annihilation.
     # R12 P1-C: replaced `alpha * sigma_m_at_v^2` (units cm^4/g^2, NOT
     # cm^3/s) with the proper dark-photon portal form.
@@ -370,6 +375,10 @@ def loglike_joint(theta):
     ll_fermi = loglike_fermi_dwarf(m_chi_GeV, sigma_v)
     if not np.isfinite(ll_fermi):
         return -np.inf
+
+    # T90.42: FERMI LOO
+    if os.environ.get("T41_LEAVE_OUT_FERMI", "0").strip() == "1":
+        ll_fermi = 0.0
 
     # KSFR/PCAC validity mask (T70.3 / Channel 15) is applied earlier
     # in this function (before any of the expensive likelihood calls);
@@ -390,6 +399,10 @@ def loglike_joint(theta):
     ll_cmb = loglike_cmb_distortion(m_chi_GeV * 1e9, m_phi_MeV * 1e6, epsilon)
     if not np.isfinite(ll_cmb):
         return -np.inf
+
+    # T90.42: CMB LOO
+    if os.environ.get("T41_LEAVE_OUT_CMB", "0").strip() == "1":
+        ll_cmb = 0.0
 
     # 7. DAMPE cosmic-ray electron+positron spectrum (T73, v0.4-prelim)
     # Per REVIEWER_CONSIDER_DATA.md (T71.9 input) and T72 POC:
@@ -413,6 +426,10 @@ def loglike_joint(theta):
     else:
         ll_dampe = 0.0
 
+    # T90.42: DAMPE LOO
+    if os.environ.get("T41_LEAVE_OUT_DAMPE", "0").strip() == "1":
+        ll_dampe = 0.0
+
     # 8. Zhang+2025 LSS / assembly-bias (T74, v0.4-prelim)
     # Direct observational constraint on sigma/m (not sigma_v).
     # Note: this is a different observable from the indirect-detection
@@ -426,6 +443,10 @@ def loglike_joint(theta):
         if not np.isfinite(ll_lss):
             return -np.inf
     else:
+        ll_lss = 0.0
+
+    # T90.42: LSS LOO
+    if os.environ.get("T41_LEAVE_OUT_LSS", "0").strip() == "1":
         ll_lss = 0.0
 
     # 9. T81: XENONnT + PandaX-4T direct-detection competitor watch.
@@ -630,6 +651,10 @@ def loglike_joint(theta):
         else:
             ll_magnetic_moment = 0.0
     else:
+        ll_magnetic_moment = 0.0
+
+    # T90.42: LZ magnetic-moment LOO
+    if os.environ.get("T41_LEAVE_OUT_LZ_MAGNETIC", "0").strip() == "1":
         ll_magnetic_moment = 0.0
 
     # Channel 27 (T90.29, wip/tier3-magnetic-moment-LZ branch): RELHIC joint likelihood
