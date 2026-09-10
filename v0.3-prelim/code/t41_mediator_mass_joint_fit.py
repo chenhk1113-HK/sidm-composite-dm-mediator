@@ -584,6 +584,58 @@ def loglike_joint(theta):
     else:
         ll_relhic_pop = 0.0
 
+    # T90.35: Yang+ 2024 parametric SIDM Cloud-9 likelihood. Activated by
+    # T90_YANG_CLOUD9=1. This is the canonical cosmological-simulation-
+    # calibrated velocity-dependent SIDM form (Eq. 2.24 of arXiv:2403.16633,
+    # used in Zhou+ 2026 Cloud-9 paper and Ms.Marvel DMO 2026).
+    # Penalizes sigma_eff(28) far from the Cloud-9 target (50 cm^2/g,
+    # Zhou+ 2026 lower bound). Uses the T90.29 v3 physical Yukawa form
+    # as the "sigma_eff(v)" — Yang+ 2024 is empirically fitting this
+    # physical form.
+    if os.environ.get("T90_YANG_CLOUD9", "").strip() == "1":
+        try:
+            from t90_v35_yang2024_cloud9 import loglike_yang2024_t90v35
+            ll_yang_cloud9 = loglike_yang2024_t90v35(theta)
+            if not np.isfinite(ll_yang_cloud9):
+                return -np.inf
+        except ImportError:
+            ll_yang_cloud9 = 0.0
+    else:
+        ll_yang_cloud9 = 0.0
+
+    # T90.36: Tuned Yukawa parameterization with sigma/m(28) ~ 100+ cm^2/g.
+    # Activated by T90_YUKAWA_TUNED=1. Pushes g_chi into the perturbative
+    # high end (~1.3) which gives sigma/m(28) ~ 100+ cm^2/g — comfortably
+    # in Cloud-9's range (50-500 cm^2/g) without KSFR violation in the
+    # sense that g_chi stays perturbative (g_chi < 4*pi).
+    # This is a "Cloud-9-aggressive" variant of T90.29 v3.
+    if os.environ.get("T90_YUKAWA_TUNED", "").strip() == "1":
+        try:
+            from t90_v36_yukawa_tuned import loglike_yukawa_tuned_t90v36_wrapper
+            ll_yukawa_tuned = loglike_yukawa_tuned_t90v36_wrapper(theta)
+            if not np.isfinite(ll_yukawa_tuned):
+                return -np.inf
+        except ImportError:
+            ll_yukawa_tuned = 0.0
+    else:
+        ll_yukawa_tuned = 0.0
+
+    # T90.37: Anand+ 2025 stellar mass upper limit cross-validation.
+    # Activated by T90_ANAND_MSTAR=1. Adds a Gaussian penalty that
+    # disfavors Cloud-9 models requiring significant baryonic
+    # contamination (i.e., extreme low-sigma/m regions that would
+    # imply Cloud-9's gas couldn't be supported by pure DM gravity).
+    if os.environ.get("T90_ANAND_MSTAR", "").strip() == "1":
+        try:
+            from t90_v37_anand_mstar import loglike_anand_mstar_t90v37_wrapper
+            ll_anand_mstar = loglike_anand_mstar_t90v37_wrapper(theta)
+            if not np.isfinite(ll_anand_mstar):
+                return -np.inf
+        except ImportError:
+            ll_anand_mstar = 0.0
+    else:
+        ll_anand_mstar = 0.0
+
     # T90.31: Cloud-9-dominated fit. Downweight all non-RELHIC channels by a
     # factor (env var T41_CHANNEL_WEIGHT_NONRELHIC). This lets the MCMC see
     # what the model says if Cloud-9 is treated as a primary discovery rather
@@ -605,7 +657,10 @@ def loglike_joint(theta):
         + ll_magnetic_moment
     )
 
-    return ll_relhic + ll_relhic_pop + channel_weight_nonrelhic * nonrelhic
+    return (
+        ll_relhic + ll_relhic_pop + ll_yang_cloud9 + ll_yukawa_tuned
+        + ll_anand_mstar + channel_weight_nonrelhic * nonrelhic
+    )
 
 
 def prior_transform_5(u):
