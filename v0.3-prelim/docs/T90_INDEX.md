@@ -195,6 +195,29 @@ T90.31/32/33 are non-merge-blocking additions that ship a
 re-runnable driver, a population-level RELHIC likelihood, and a
 Cloud-9-dominated-fit mode.
 
+**Cross-link to T90.35/36/37 (Yang+ 2024 + tuned Yukawa + Anand+ 2025, 2026-09-10)**:
+see [`T90_PATH_C4_V35_V36_V37_CLOUD9_CROSSVAL.md`](./T90_PATH_C4_V35_V36_V37_CLOUD9_CROSSVAL.md).
+Three channels based on T90.34 literature review (Yang+ 2024, Anand+ 2025,
+Ms.Marvel DMO 2026):
+  - T90.35: Yang+ 2024 parametric SIDM form (canonical, cosmological-simulation-calibrated)
+  - T90.36: Tuned Yukawa aggressive (g_chi ~ 1.5, perturbative)
+  - T90.37: Anand+ 2025 stellar mass cross-validation (M_star < 10^3.5 M_Sun)
+**Headline finding:** combined with Options 1+3 (Cloud-9-dominated),
+**median σ/m(28) = 55 cm²/g** — IN Cloud-9's 50-500 cm²/g range.
+**100/100 tests passing** total (16 T90.27 + 12 T90.28 + 13 T90.29
++ 10 T90.32 + 20 T90.35/36/37 + 29 LZ).
+T90.35/36/37 are non-merge-blocking additions.
+
+**Branch summary (Cloud-9 branch, 2026-09-10)**:
+see [`T90_PATH_C4_CLOUD9_BRANCH_README.md`](./T90_PATH_C4_CLOUD9_BRANCH_README.md).
+The T90.27-37 Cloud-9 work has been captured in a new branch
+`wip/cloud-9-relhic` (branched from `wip/tier3-magnetic-moment-LZ` at
+commit `cee378a`). 17 commits, 100 tests, full file index, reproducibility
+instructions, honest caveats, and future work. The unified model that
+reaches Cloud-9's regime is (g_chi ~ 1.5, m_phi ~ 100 MeV, m_chi ~ 30 GeV)
+with all Cloud-9 channels active and 17 other channels silenced.
+**The branch is the canonical record of the T90 Cloud-9 investigation.**
+
 ---
 
 ## Reading order
