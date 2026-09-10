@@ -265,6 +265,25 @@ def loglike_joint(theta):
     # for each channel that has a known characteristic velocity.
     # Channel velocities per channels_v03.py: V_DSPH=30, V_UFD=10,
     # V_CLUSTER=1500. We use these for the per-channel override.
+    # T90.41: When T41_VDEP_CHANNELS=1, use the velocity-dependent (vdep)
+    # channel variants from channels_vdep_t90v41.py instead of channels_v03.
+    # The vdep variants evaluate sigma/m(v_channel) DIRECTLY from the Yukawa
+    # form, bypassing the power-law approximation in channels_v03.
+    # This is the proper implementation of reviewer Point 2 (T90.38).
+    #
+    # Default: T41_VDEP_CHANNELS=0 (use channels_v03 power-law channels,
+    # the original T41 behavior). Set T41_VDEP_CHANNELS=1 for the
+    # T90.41 "honest unification" mode where channels see the full
+    # Yukawa velocity dependence.
+    use_vdep_channels = os.environ.get("T41_VDEP_CHANNELS", "0").strip() == "1"
+    if use_vdep_channels:
+        from channels_vdep_t90v41 import (
+            loglike_dsph_vdep,
+            loglike_ufd_vdep,
+            loglike_bullet_vdep,
+            loglike_bullet_vdep_sensitivity_0p2,
+        )
+
     if vdep_correction:
         sigma_m_0_dsph = sigma_m_at_v_channel(30.0)
         a_dsph = a_at_v_channel(30.0)
@@ -277,12 +296,20 @@ def loglike_joint(theta):
         a_dsph = a_ufd = a_bullet = a
 
     # 1. dSph (channel 2) — bimodal posterior. NO xi dependence.
-    ll_dsph = ch_v03.loglike_dsph_v03(sigma_m_0_dsph, a_dsph)
+    # T90.41: when use_vdep_channels, use channels_vdep_t90v41 (direct Yukawa).
+    if use_vdep_channels:
+        ll_dsph = loglike_dsph_vdep(m_phi_MeV, m_chi_GeV, g_chi)
+    else:
+        ll_dsph = ch_v03.loglike_dsph_v03(sigma_m_0_dsph, a_dsph)
     if not np.isfinite(ll_dsph):
         return -np.inf
 
     # 2. UFD (channel 3). NO xi dependence.
-    ll_ufd = ch_v03.loglike_ufd_v03(sigma_m_0_ufd, a_ufd)
+    # T90.41: vdep variant when enabled.
+    if use_vdep_channels:
+        ll_ufd = loglike_ufd_vdep(m_phi_MeV, m_chi_GeV, g_chi)
+    else:
+        ll_ufd = ch_v03.loglike_ufd_v03(sigma_m_0_ufd, a_ufd)
     if not np.isfinite(ll_ufd):
         return -np.inf
 
@@ -292,9 +319,15 @@ def loglike_joint(theta):
     # is the published Cha+ 2025 0.5 cm^2/g constraint.
     bullet_variant = os.environ.get("T41_BULLET_VARIANT", "default").strip()
     if bullet_variant == "sensitivity_0p2":
-        ll_bullet = ch_v03.loglike_bullet_v03_sensitivity_0p2(sigma_m_0_bullet, a_bullet)
+        if use_vdep_channels:
+            ll_bullet = loglike_bullet_vdep_sensitivity_0p2(m_phi_MeV, m_chi_GeV, g_chi)
+        else:
+            ll_bullet = ch_v03.loglike_bullet_v03_sensitivity_0p2(sigma_m_0_bullet, a_bullet)
     else:
-        ll_bullet = ch_v03.loglike_bullet_v03(sigma_m_0_bullet, a_bullet)
+        if use_vdep_channels:
+            ll_bullet = loglike_bullet_vdep(m_phi_MeV, m_chi_GeV, g_chi)
+        else:
+            ll_bullet = ch_v03.loglike_bullet_v03(sigma_m_0_bullet, a_bullet)
     if not np.isfinite(ll_bullet):
         return -np.inf
 
