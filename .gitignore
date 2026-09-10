@@ -51,6 +51,17 @@ data/raw/
 v0.*-prelim/data/raw/
 v0.*-prelim/data/external_data/lz_2024/raw/
 v0.*-prelim/data/external/
+# T90.25 PandaX public response bundle: keep the small ROOT + xlsx inputs
+# (~113 KB total) so the fold is reproducible without re-downloading.
+!v0.*-prelim/data/external_data/pandax_4t/
+!v0.*-prelim/data/external_data/pandax_4t/response/
+!v0.*-prelim/data/external_data/pandax_4t/response/eff_RDQ_graph.root
+!v0.*-prelim/data/external_data/pandax_4t/response/PandaX4T_Data_ne.xlsx
+# Keep the unzipped public candidate CSVs (small, versionable); the source
+# opendata.tar.gz / open-data.tar.gz are redundant archives and are excluded.
+v0.*-prelim/data/external_data/*/opendata.tar.gz
+v0.*-prelim/data/external_data/*/open-data.tar.gz
+v0.*-prelim/data/external_data/*/s2only_data_release.zip
 
 # --- Reference posterior samples (R13 M2 fix) ---
 # data/reference/ contains downsampled posterior chains (~314 KB total)
