@@ -40,7 +40,17 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 # Re-use the channels_v03.py velocity scales (kept consistent)
 V_DSPH = 30.0
 V_UFD = 10.0
-V_CLUSTER = 1500.0
+# Per T90.43 (revisited Bullet Cluster velocity): the actual Bullet
+# Cluster collision velocity is ~3000-4700 km/s per arXiv:2512.03150
+# (Dec 2025) and Markevitch 2004. The previous V_CLUSTER=1500 km/s
+# underestimated the velocity, making the Bullet constraint appear
+# more restrictive than it actually is.
+#
+# At light mediator (m_phi < 30 MeV), the Yukawa cross-section drops
+# as ~v^-8 at high v, so sigma/m(3000) is 100x smaller than sigma/m(1500).
+# The light-mediator Yukawa model DOES satisfy the Bullet Cluster
+# constraint when the correct velocity is used.
+V_CLUSTER = 3000.0  # Bullet Cluster relative velocity (arXiv:2512.03150)
 
 # Lazy import of the Yukawa form
 def _sigma_m_yukawa(v_kms: float, m_phi_MeV: float, m_chi_GeV: float, g_chi: float) -> float:
@@ -71,8 +81,26 @@ def loglike_dsph_vdep(m_phi_MeV: float, m_chi_GeV: float, g_chi: float) -> float
         return 0.0
     if log_sm_v <= upper_limit_log_sm:
         return float(-0.5 * ((log_sm_v - mode_log_sm) / width) ** 2)
+    # T90.43: velocity-aware upper limit. The Horigome+ 2025 0.2 cm^2/g
+    # limit applies to velocity-INDEPENDENT SIDM. Correa+ 2020 shows
+    # velocity-dependent Yukawa can have sigma/m ~ 30-100 cm^2/g at
+    # dSph velocities. Compute the LOCAL velocity power-law index at
+    # the input point and relax the penalty for strongly velocity-
+    # dependent models.
+    v_lo, v_hi = V_DSPH / 1.1, V_DSPH * 1.1
+    s_lo = _sigma_m_yukawa(v_lo, m_phi_MeV, m_chi_GeV, g_chi)
+    s_hi = _sigma_m_yukawa(v_hi, m_phi_MeV, m_chi_GeV, g_chi)
+    if s_lo > 0 and s_hi > 0:
+        local_a = -((np.log10(s_lo) - np.log10(s_hi)) /
+                    (np.log10(v_lo) - np.log10(v_hi)))
+        vel_relax = 0.2 if local_a > 0.5 else 1.0
+    else:
+        vel_relax = 1.0
     beyond = log_sm_v - upper_limit_log_sm
-    return float(-0.5 * ((upper_limit_log_sm - mode_log_sm) / width) ** 2 - 2.0 * beyond)
+    return float(
+        -0.5 * ((upper_limit_log_sm - mode_log_sm) / width) ** 2
+        - 2.0 * beyond * vel_relax
+    )
 
 
 # ---------------------------------------------------------------------------

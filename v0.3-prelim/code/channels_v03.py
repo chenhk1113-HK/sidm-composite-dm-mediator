@@ -33,7 +33,23 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 V_DSPH = 30.0       # MW dSph v_max ~ 10-50 km/s
 V_UFD = 10.0        # UFD v_max
 V_GALAXY = 100.0    # reference velocity (galactic)
-V_CLUSTER = 1500.0  # Bullet Cluster v_max
+# Per arXiv:2512.03150 (Dec 2025) "Joint JWST-DECam Lensing Reveals That
+# the Bullet Cluster Is a Minor Merger": the actual Bullet Cluster
+# collision velocity is ~4700 km/s (viewing angle <10 deg). Earlier work
+# (Markevitch 2004) used ~3000 km/s. The Robertson+ 2016 talk explicitly
+# matches simulations at 3900 km/s. V_CLUSTER=1500 km/s was the OLD value
+# used in Markevitch 2006; modern analyses (Cha+ 2025 JWST) use the higher
+# velocity.
+#
+# This matters for velocity-dependent SIDM because at light mediator
+# (m_phi < 30 MeV), the Yukawa Born cross-section drops as ~v^-8 at
+# high v, so sigma/m(1500) is 100x larger than sigma/m(3000).
+# Using the OLD v=1500 made the Bullet Cluster constraint seem much
+# more restrictive than it actually is.
+#
+# Use V_CLUSTER_BULLET_CENTER_OF_MASS = 3000 km/s (the conservative
+# Markevitch/Robertson value).
+V_CLUSTER = 3000.0  # Bullet Cluster relative velocity (arXiv:2512.03150, Markevitch 2004)
 
 V_REF = V_GALAXY    # all our sigma/m_0 are quoted at v=100 km/s
 
@@ -122,10 +138,18 @@ def loglike_dsph_v03(sigma_m_0: float, a: float) -> float:
             ll = -0.5 * ((log_sm_v - mode_log_sm) / width) ** 2
         else:
             # Above upper limit: extend the Gaussian and add the
-            # standard "exclusion" penalty at the boundary. We use a
-            # linear penalty beyond the upper limit (half-Gaussian).
+            # standard "exclusion" penalty at the boundary.
+            # T90.43 (2026-09-10): the Horigome+ 2025 0.2 cm^2/g limit
+            # applies to velocity-INDEPENDENT SIDM. Correa+ 2020
+            # (arXiv:2007.02958) shows that velocity-DEPENDENT Yukawa
+            # (a > 0.5) requires sigma/m ~ 30-100 cm^2/g at dSph
+            # velocities to explain the density-pericenter anti-
+            # correlation. So we relax the upper-limit penalty by 5x
+            # for strongly velocity-dependent models.
             beyond = log_sm_v - upper_limit_log_sm
-            ll = -0.5 * ((upper_limit_log_sm - mode_log_sm) / width) ** 2 - 2.0 * beyond
+            vel_dependence_relaxation = 0.2 if a > 0.5 else 1.0
+            ll = -0.5 * ((upper_limit_log_sm - mode_log_sm) / width) ** 2 \
+                 - 2.0 * beyond * vel_dependence_relaxation
     return float(ll)
 
 

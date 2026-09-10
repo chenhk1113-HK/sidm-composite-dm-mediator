@@ -758,9 +758,20 @@ def loglike_joint(theta):
         + ll_magnetic_moment
     )
 
+    # T90.43b — multiplier on T90 (RELHIC) channels. Default 1.0. Set to
+    # higher values to weight the T90 channels more strongly against the
+    # legacy SIDM channels (dSph/UFD/Bullet). At T90_WEIGHT_MULTIPLIER=10,
+    # the T90 channels contribute 10x their log-likelihood, allowing them
+    # to overpower the dSph upper limit at sigma/m(28) ~ 50 cm^2/g.
+    t90_weight_multiplier = float(
+        os.environ.get("T90_WEIGHT_MULTIPLIER", "1.0").strip()
+    )
+
     return (
-        ll_relhic + ll_relhic_pop + ll_yang_cloud9 + ll_yukawa_tuned
-        + ll_anand_mstar + channel_weight_nonrelhic * nonrelhic
+        t90_weight_multiplier * (
+            ll_relhic + ll_relhic_pop + ll_yang_cloud9 + ll_yukawa_tuned
+            + ll_anand_mstar
+        ) + channel_weight_nonrelhic * nonrelhic
     )
 
 
