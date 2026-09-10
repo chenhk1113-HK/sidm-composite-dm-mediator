@@ -126,6 +126,21 @@ channel makes this a quantitative constraint on the master
 posterior. **T90.27 is a non-merge-blocking addition to the
 branch** (the T90 merge rule is unchanged).
 
+**Cross-link to T90.28 (Cloud-9 MCMC proper inference, 2026-09-10)**:
+see [`T90_PATH_C4_V28_RELHIC_MCMC.md`](./T90_PATH_C4_V28_RELHIC_MCMC.md).
+**Supersedes T90.27 v1** as Channel 27 of the T41 joint fit.
+T90.28 runs an emcee MCMC (32 walkers × 500 steps) on the
+published Cloud-9 N(HI) data with the cosmological
+concentration-mass prior, then evaluates a 2D (σ/m at v200, τ)
+posterior at the joint-fit (σ_m_0, a). At the v0.7 master MAP,
+**Δ log L = -10** (vs T90.27 v1's -382) — a much more
+physically reasonable penalty. T90.28 v2 also includes the
+**Diemer & Joyce 2019 concentration-mass prior**, which is the
+cosmological prior that discriminates CDM (7σ below median)
+from SIDM (3.2σ below). **T90.28 is a non-merge-blocking upgrade
+to T90.27 v1** (the channel still uses the same env gate
+`T90_RELHIC_V27=1`; the T90.27 v1 is preserved as a fallback).
+
 ---
 
 ## Reading order

@@ -83,14 +83,20 @@ from channels_extended import (
     loglike_lz_magnetic_moment,
     loglike_lz_magnetic_moment_binned,
 )
-# T90.27 (wip/tier3-magnetic-moment-LZ branch): RELHIC (Cloud-9 + M51) channel
+# T90.28 (wip/tier3-magnetic-moment-LZ branch): RELHIC (Cloud-9 + M51) channel.
+# Replaces T90.27 v1 (delta-prior) with T90.28 v2 (MCMC-derived proper posterior).
 # Per arXiv:2608.04362 (Cloud-9) and arXiv:2607.21034 (M51 Cloud S/N).
 # Off by default on master; activated by T90_RELHIC_V27=1.
 try:
-    from t90_v27_relhic_likelihood import loglike_relhic
+    from t90_v28_relhic_likelihood import loglike_relhic
     _T90_RELHIC_AVAILABLE = True
 except ImportError:
-    _T90_RELHIC_AVAILABLE = False
+    # Fall back to T90.27 v1 if T90.28 is not yet installed
+    try:
+        from t90_v27_relhic_likelihood import loglike_relhic
+        _T90_RELHIC_AVAILABLE = True
+    except ImportError:
+        _T90_RELHIC_AVAILABLE = False
 from xrism_phi_decay_forward_model import XRISM_PHI_DECAY_ARXIV_ID as _XRISM_PHI_ARXIV
 
 
