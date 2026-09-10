@@ -158,6 +158,25 @@ T41 with the m_phi prior extended to [1, 10] MeV so the master
 posterior can actually move into the Cloud-9-favorable regime
 (σ/m ~ 50-500 cm²/g at v=28 km/s).
 
+**Cross-link to T90.30 (T41 re-run with T90.29 v3, 2026-09-10)**:
+see [`T90_PATH_C4_V30_T41_RERUN.md`](./T90_PATH_C4_V30_T41_RERUN.md).
+Three T41 runs (A: baseline, B: T90.29+KSFR ON, C: T90.29+KSFR
+OFF) at nlive=200 show that **a single RELHIC candidate cannot
+overpower the cumulative weight of the project's 20+ other
+data channels.** All three runs converge to σ/m(28) ~ 0.3
+cm²/g, which is 2-3 orders of magnitude below Cloud-9's
+required 50-500 cm²/g. Run C moved m_phi from ~700 MeV to
+~170 MeV (factor 3-5x lighter) but did not reach the
+Cloud-9-favorable m_phi = 1-10 MeV regime. The honest finding:
+**moving the master posterior into the Cloud-9-favorable
+regime requires either more RELHIC candidates (the 70-candidate
+Monaci+ 2026 catalog), an informative Jeffreys prior on m_phi,
+or a dedicated Cloud-9-dominated fit.** T90.30 also fixed a
+real IndexError bug in the T90.29 v3 histogram interpolation
+(with regression test). **T90.30 is a non-merge-blocking
+addition** that ships a re-runnable driver, the bug fix, and
+the documentation.
+
 ---
 
 ## Reading order

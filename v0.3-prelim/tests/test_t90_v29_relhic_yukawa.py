@@ -126,6 +126,58 @@ def test_module_imports_without_error():
     assert hasattr(t90_v29_relhic_yukawa, "loglike_relhic_t90v29")
 
 
+def test_loglike_relhic_v29_yukawa_no_indexerror_at_grid_edge():
+    """Regression test: T90.29 v3 must not IndexError when (log10_sm, tau)
+    lands exactly on the last grid bin.
+
+    The original bug was np.clip(i_sm, 0, H.shape[0] - 1) which left
+    H[i_sm + 1] out of bounds when i_sm was the last index. The fix
+    is np.clip(..., 0, H.shape[0] - 2) so that i_sm + 1 is always
+    a valid index.
+    """
+    # Force-load the T90.28 v2 posterior (lazy)
+    import t90_v28_relhic_likelihood as v28
+    v28._ensure_posterior_loaded()
+    H = v28._POSTERIOR_CACHE
+    log10_sm_bins = v28._LOG10_SM_BINS_CACHE
+    tau_bins = v28._TAU_BINS_CACHE
+
+    # Test 1: log10_sm exactly at the last bin edge
+    log10_sm_max = log10_sm_bins[-1]
+    # Find a tau inside the grid
+    tau_in = 0.3
+    # Find the corresponding (m_phi, m_chi, g_chi) that produces
+    # log10_sm exactly at the last bin edge
+    from t90_v29_relhic_yukawa import (
+        sigma_m_cloud9_v200_yukawa, tau_at_sigma_m_yukawa,
+    )
+    # Sweep g_chi to find one that gives log10_sm at the grid edge
+    for g_chi_test in [0.5, 0.7, 1.0, 1.5, 2.0]:
+        sm = sigma_m_cloud9_v200_yukawa(10.0, 500.0, g_chi_test)
+        if sm > 0 and np.log10(sm) >= log10_sm_max - 0.1:
+            break
+    # Call the likelihood — should not IndexError
+    try:
+        ll = loglike_relhic_v29_yukawa(10.0, 500.0, g_chi_test)
+        assert np.isfinite(ll) or ll == -10.0, f"unexpected loglike: {ll}"
+    except IndexError as e:
+        raise AssertionError(f"IndexError at grid edge: {e}")
+
+    # Test 2: tau exactly at the last bin edge
+    tau_max = tau_bins[-1]
+    for g_chi_test in [0.1, 0.5, 1.0]:
+        sm = sigma_m_cloud9_v200_yukawa(100.0, 500.0, g_chi_test)
+        if sm > 0:
+            tau_test = tau_at_sigma_m_yukawa(sm)
+            if tau_test >= tau_max - 0.05:
+                try:
+                    ll = loglike_relhic_v29_yukawa(100.0, 500.0, g_chi_test)
+                    assert np.isfinite(ll) or ll == -10.0
+                except IndexError as e:
+                    raise AssertionError(f"IndexError at tau edge: {e}")
+                break
+
+
 def test_g_chi_to_match_cloud9_is_perturbative():
     """The g_chi needed to match Cloud-9's σ/m at m_phi=10 MeV is perturbative.
 

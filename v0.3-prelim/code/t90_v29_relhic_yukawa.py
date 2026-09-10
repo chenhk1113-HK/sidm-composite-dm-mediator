@@ -228,8 +228,11 @@ def loglike_relhic_v29_yukawa(
 
     i_sm = np.searchsorted(log10_sm_bins, log10_sm) - 1
     j_tau = np.searchsorted(tau_bins, tau) - 1
-    i_sm = np.clip(i_sm, 0, H.shape[0] - 1)
-    j_tau = np.clip(j_tau, 0, H.shape[1] - 1)
+    # Clip so that i_sm+1 and j_tau+1 are valid indices. H has
+    # shape (n_sm, n_tau); the last valid index is shape-1, and
+    # we need shape-2 for the "i+1" access below.
+    i_sm = np.clip(i_sm, 0, H.shape[0] - 2)
+    j_tau = np.clip(j_tau, 0, H.shape[1] - 2)
 
     sm_lo = log10_sm_bins[i_sm]
     sm_hi = log10_sm_bins[i_sm + 1]
