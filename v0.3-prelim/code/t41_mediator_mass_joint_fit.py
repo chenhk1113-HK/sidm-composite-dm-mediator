@@ -225,21 +225,64 @@ def loglike_joint(theta):
     if not np.isfinite(ll_ksfr):
         return -np.inf
 
-    # Derived: sigma_m_0 at v_ref = 100 km/s
+    # T90.38: Per-channel velocity-corrected sigma_m_0 (reviewer Point 2).
+    # When env var T41_VDEP_CORRECTION=1, the channels receive sigma_m_0
+    # evaluated DIRECTLY at their characteristic velocity (not at V_REF=100),
+    # and a is the LOCAL derivative at that velocity (not the global
+    # power-law fit). This makes the velocity dependence of the Yukawa
+    # form (T90.29 v3) propagate correctly through each channel.
+    #
+    # Default: T41_VDEP_CORRECTION=0 (use V_REF=100 + global a, the original
+    # behavior). Set T41_VDEP_CORRECTION=1 for the "honest unification"
+    # test where the velocity dependence does the work automatically.
+    vdep_correction = os.environ.get("T41_VDEP_CORRECTION", "0").strip() == "1"
+
+    def sigma_m_at_v_channel(v_channel: float) -> float:
+        """sigma/m at the channel's characteristic velocity."""
+        return sigma_m_at_v_yukawa(v_channel, m_phi_MeV, m_chi_GeV, g_chi)
+
+    def a_at_v_channel(v_channel: float) -> float:
+        """Local velocity power-law index at v_channel."""
+        v_lo = v_channel / 1.1
+        v_hi = v_channel * 1.1
+        s_lo = sigma_m_at_v_yukawa(v_lo, m_phi_MeV, m_chi_GeV, g_chi)
+        s_hi = sigma_m_at_v_yukawa(v_hi, m_phi_MeV, m_chi_GeV, g_chi)
+        if s_lo <= 0 or s_hi <= 0:
+            return -2.0
+        return -((np.log10(s_lo) - np.log10(s_hi)) /
+                 (np.log10(v_lo) - np.log10(v_hi)))
+
+    # Derived: sigma_m_0 at v_ref = 100 km/s (default behavior)
     sigma_m_0 = sigma_m_at_v_yukawa(V_REF, m_phi_MeV, m_chi_GeV, g_chi)
     if sigma_m_0 <= 0 or not np.isfinite(sigma_m_0):
         return -np.inf
 
-    # Derived velocity power-law index
+    # Derived velocity power-law index (global, for default behavior)
     a = derived_a(m_phi_MeV, m_chi_GeV, g_chi)
 
+    # T90.38: per-channel velocity-corrected sigma_m_0 + a.
+    # When T41_VDEP_CORRECTION=1, these OVERRIDE the global sigma_m_0, a
+    # for each channel that has a known characteristic velocity.
+    # Channel velocities per channels_v03.py: V_DSPH=30, V_UFD=10,
+    # V_CLUSTER=1500. We use these for the per-channel override.
+    if vdep_correction:
+        sigma_m_0_dsph = sigma_m_at_v_channel(30.0)
+        a_dsph = a_at_v_channel(30.0)
+        sigma_m_0_ufd = sigma_m_at_v_channel(10.0)
+        a_ufd = a_at_v_channel(10.0)
+        sigma_m_0_bullet = sigma_m_at_v_channel(1500.0)
+        a_bullet = a_at_v_channel(1500.0)
+    else:
+        sigma_m_0_dsph = sigma_m_0_ufd = sigma_m_0_bullet = sigma_m_0
+        a_dsph = a_ufd = a_bullet = a
+
     # 1. dSph (channel 2) — bimodal posterior. NO xi dependence.
-    ll_dsph = ch_v03.loglike_dsph_v03(sigma_m_0, a)
+    ll_dsph = ch_v03.loglike_dsph_v03(sigma_m_0_dsph, a_dsph)
     if not np.isfinite(ll_dsph):
         return -np.inf
 
     # 2. UFD (channel 3). NO xi dependence.
-    ll_ufd = ch_v03.loglike_ufd_v03(sigma_m_0, a)
+    ll_ufd = ch_v03.loglike_ufd_v03(sigma_m_0_ufd, a_ufd)
     if not np.isfinite(ll_ufd):
         return -np.inf
 
@@ -249,9 +292,9 @@ def loglike_joint(theta):
     # is the published Cha+ 2025 0.5 cm^2/g constraint.
     bullet_variant = os.environ.get("T41_BULLET_VARIANT", "default").strip()
     if bullet_variant == "sensitivity_0p2":
-        ll_bullet = ch_v03.loglike_bullet_v03_sensitivity_0p2(sigma_m_0, a)
+        ll_bullet = ch_v03.loglike_bullet_v03_sensitivity_0p2(sigma_m_0_bullet, a_bullet)
     else:
-        ll_bullet = ch_v03.loglike_bullet_v03(sigma_m_0, a)
+        ll_bullet = ch_v03.loglike_bullet_v03(sigma_m_0_bullet, a_bullet)
     if not np.isfinite(ll_bullet):
         return -np.inf
 

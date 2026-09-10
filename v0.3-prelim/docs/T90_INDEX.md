@@ -218,6 +218,19 @@ reaches Cloud-9's regime is (g_chi ~ 1.5, m_phi ~ 100 MeV, m_chi ~ 30 GeV)
 with all Cloud-9 channels active and 17 other channels silenced.
 **The branch is the canonical record of the T90 Cloud-9 investigation.**
 
+**Cross-link to T90.38 + T90.40 (per-channel vdep + honest unification, 2026-09-10)**:
+see [`T90_PATH_C4_V40_HONEST_UNIFICATION.md`](./T90_PATH_C4_V40_HONEST_UNIFICATION.md).
+Implements the reviewer Point 2 assessment: per-channel velocity correction
+(`T41_VDEP_CORRECTION=1`) + honest unification test (3-run T41 comparison).
+**Reviewer Point 2 partially validated**: the MCMC DOES move to light-
+mediator regime (m_phi ~ 15-47 MeV) at full channel weight when all T90
+channels are active. But σ/m(28) is too low because channels apply their
+own internal power-law scaling that doesn't fully propagate the Yukawa
+velocity dependence. A true implementation requires rewriting channel
+likelihoods to use σ/m(v) directly (T90.41+ future work).
+**109/109 tests passing** total (16 T90.27 + 12 T90.28 + 13 T90.29
++ 10 T90.32 + 20 T90.35-37 + 9 T90.38 + 29 LZ).
+
 ---
 
 ## Reading order
