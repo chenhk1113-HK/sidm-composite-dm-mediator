@@ -83,6 +83,14 @@ from channels_extended import (
     loglike_lz_magnetic_moment,
     loglike_lz_magnetic_moment_binned,
 )
+# T90.27 (wip/tier3-magnetic-moment-LZ branch): RELHIC (Cloud-9 + M51) channel
+# Per arXiv:2608.04362 (Cloud-9) and arXiv:2607.21034 (M51 Cloud S/N).
+# Off by default on master; activated by T90_RELHIC_V27=1.
+try:
+    from t90_v27_relhic_likelihood import loglike_relhic
+    _T90_RELHIC_AVAILABLE = True
+except ImportError:
+    _T90_RELHIC_AVAILABLE = False
 from xrism_phi_decay_forward_model import XRISM_PHI_DECAY_ARXIV_ID as _XRISM_PHI_ARXIV
 
 
@@ -536,7 +544,20 @@ def loglike_joint(theta):
     else:
         ll_magnetic_moment = 0.0
 
-    return ll_dsph + ll_ufd + ll_bullet + ll_lz + ll_fermi + ll_sparc + ll_cmb + ll_dampe + ll_lss + ll_competitor_dd + ll_xrism + ll_erosita + ll_phi_decay + ll_euclid_q1 + ll_euclid_subhalo + ll_goldstein_hill + ll_magnetic_moment
+    # Channel 27 (T90.27, wip/tier3-magnetic-moment-LZ branch): RELHIC joint likelihood
+    # (Cloud-9 + M51 Cloud S/N). Off by default; activated by T90_RELHIC_V27=1.
+    # Per arXiv:2608.04362 (Cloud-9) and arXiv:2607.21034 (M51).
+    # Tests whether the joint-fit (σ_m_0, a) is consistent with the
+    # published Cloud-9 SIDM best-fit at σ/m ~ 50-500 cm²/g at the
+    # dwarf-halo v200 = 28 km/s.
+    if _T90_RELHIC_AVAILABLE and os.environ.get("T90_RELHIC_V27", "").strip() == "1":
+        ll_relhic = loglike_relhic(sigma_m_0, a)
+        if not np.isfinite(ll_relhic):
+            return -np.inf
+    else:
+        ll_relhic = 0.0
+
+    return ll_dsph + ll_ufd + ll_bullet + ll_lz + ll_fermi + ll_sparc + ll_cmb + ll_dampe + ll_lss + ll_competitor_dd + ll_xrism + ll_erosita + ll_phi_decay + ll_euclid_q1 + ll_euclid_subhalo + ll_goldstein_hill + ll_magnetic_moment + ll_relhic
 
 
 def prior_transform_5(u):

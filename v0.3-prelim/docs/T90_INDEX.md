@@ -101,13 +101,30 @@ LZ's 6.10×10⁻⁸ μ_N. The M_B matching LZ (~1 TeV) violates XENON100
 (M_B > 10 TeV). The composite-DM UV interpretation is RULED OUT.**
 
 **Cross-link to T88.E2/F (real data incorporation)**: see
-[T90_PATH_C4_V19_REAL_DATA.md](./T90_PATH_C4_V19_REAL_DATA.md)
+[`T90_PATH_C4_V19_REAL_DATA.md`](./T90_PATH_C4_V19_REAL_DATA.md)
 (also inline below). The v19 work replaces FORECAST data with
 real Euclid Q1 strong-lensing counts (Bergamini+ 2026) and
 real XENONnT/PandaX 8B CEvNS measurements (PRL 133, 2024).
 **Both real-data channels show no significant tension with the LZ
 interpretation** — but the cluster count alone has too little
 statistical power (14 clusters) to falsify it.
+
+**Cross-link to T90.27 (RELHIC / Cloud-9, 2026-09-10)**: see
+[`T90_PATH_C4_V27_RELHIC_CLOUD9.md`](./T90_PATH_C4_V27_RELHIC_CLOUD9.md).
+Adds the Yang+2024/2025 parametric SIDM halo model + Cloud-9
+(arXiv:2608.04362) + M51 Cloud S/N (arXiv:2607.21034) as
+Channel 27 of the T41 joint fit, env-gated by `T90_RELHIC_V27=1`.
+This is the FIRST non-silent channel at the dwarf-halo mass scale
+(M_halo ~ 3-5×10⁹ M_sun, v200 ~ 28 km/s). At the v0.7 master MAP,
+the channel contributes **Δ log L = -382** because the master
+predicts σ/m ~ 0.34 cm²/g at v200, which is 3 orders of magnitude
+below Cloud-9's published SIDM best-fit of σ/m ~ 483 cm²/g.
+This is the **expected result** — it confirms the published
+Cloud-9 paper's conclusion that σ/m must be ≳ 50 cm²/g at the
+dwarf-halo v200 to produce the observed cores. The T90.27
+channel makes this a quantitative constraint on the master
+posterior. **T90.27 is a non-merge-blocking addition to the
+branch** (the T90 merge rule is unchanged).
 
 ---
 
