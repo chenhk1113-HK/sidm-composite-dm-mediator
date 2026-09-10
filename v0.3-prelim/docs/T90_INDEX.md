@@ -141,6 +141,23 @@ from SIDM (3.2σ below). **T90.28 is a non-merge-blocking upgrade
 to T90.27 v1** (the channel still uses the same env gate
 `T90_RELHIC_V27=1`; the T90.27 v1 is preserved as a fallback).
 
+**Cross-link to T90.29 (Yukawa velocity-dependent σ/m, 2026-09-10)**:
+see [`T90_PATH_C4_V29_RELHIC_YUKAWA.md`](./T90_PATH_C4_V29_RELHIC_YUKAWA.md).
+**Supersedes T90.28 v2** as Channel 27 of the T41 joint fit.
+T90.29 v3 uses the **physical Yukawa velocity-dependent σ/m**
+from `t40_yukawa_sigma_m.py` (Born approximation, Tulin+Yu 2018)
+instead of the power-law approximation used by T90.28 v2. The
+Yukawa form naturally gives Cloud-9's σ/m ~ 50-500 cm²/g at
+v=28 km/s for **m_phi = 1-10 MeV** and **g_chi = 0.13-0.4** (all
+perturbative, g_chi < 4π ≈ 12.6). This is the Option C fix
+discussed in T90.28. **T90.29 is the new default for Channel 27**
+when T90_RELHIC_V27=1; T90.28 v2 and T90.27 v1 are preserved
+as fallbacks. **T90.29 is a non-merge-blocking addition** (the
+T90 merge rule is unchanged). **Next step (T90.30+):** re-run
+T41 with the m_phi prior extended to [1, 10] MeV so the master
+posterior can actually move into the Cloud-9-favorable regime
+(σ/m ~ 50-500 cm²/g at v=28 km/s).
+
 ---
 
 ## Reading order

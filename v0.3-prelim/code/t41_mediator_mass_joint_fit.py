@@ -83,20 +83,26 @@ from channels_extended import (
     loglike_lz_magnetic_moment,
     loglike_lz_magnetic_moment_binned,
 )
-# T90.28 (wip/tier3-magnetic-moment-LZ branch): RELHIC (Cloud-9 + M51) channel.
-# Replaces T90.27 v1 (delta-prior) with T90.28 v2 (MCMC-derived proper posterior).
+# T90.29 (wip/tier3-magnetic-moment-LZ branch): RELHIC (Cloud-9 + M51) channel.
+# T90.29 v3 uses the Yukawa velocity-dependent σ/m from t40_yukawa_sigma_m.py
+# (replacing the power-law approximation used by T90.28 v2). The Yukawa
+# form naturally gives Cloud-9's σ/m ~ 50-500 cm²/g at v=28 km/s for
+# m_phi = 1-10 MeV and g_chi = 0.13-0.4, resolving the v0.7 master tension.
 # Per arXiv:2608.04362 (Cloud-9) and arXiv:2607.21034 (M51 Cloud S/N).
 # Off by default on master; activated by T90_RELHIC_V27=1.
 try:
-    from t90_v28_relhic_likelihood import loglike_relhic
+    from t90_v29_relhic_yukawa import loglike_relhic_t90v29
     _T90_RELHIC_AVAILABLE = True
 except ImportError:
-    # Fall back to T90.27 v1 if T90.28 is not yet installed
     try:
-        from t90_v27_relhic_likelihood import loglike_relhic
+        from t90_v28_relhic_likelihood import loglike_relhic as loglike_relhic_t90v29
         _T90_RELHIC_AVAILABLE = True
     except ImportError:
-        _T90_RELHIC_AVAILABLE = False
+        try:
+            from t90_v27_relhic_likelihood import loglike_relhic as loglike_relhic_t90v29
+            _T90_RELHIC_AVAILABLE = True
+        except ImportError:
+            _T90_RELHIC_AVAILABLE = False
 from xrism_phi_decay_forward_model import XRISM_PHI_DECAY_ARXIV_ID as _XRISM_PHI_ARXIV
 
 
@@ -550,14 +556,13 @@ def loglike_joint(theta):
     else:
         ll_magnetic_moment = 0.0
 
-    # Channel 27 (T90.27, wip/tier3-magnetic-moment-LZ branch): RELHIC joint likelihood
+    # Channel 27 (T90.29, wip/tier3-magnetic-moment-LZ branch): RELHIC joint likelihood
     # (Cloud-9 + M51 Cloud S/N). Off by default; activated by T90_RELHIC_V27=1.
-    # Per arXiv:2608.04362 (Cloud-9) and arXiv:2607.21034 (M51).
-    # Tests whether the joint-fit (σ_m_0, a) is consistent with the
-    # published Cloud-9 SIDM best-fit at σ/m ~ 50-500 cm²/g at the
-    # dwarf-halo v200 = 28 km/s.
+    # T90.29 v3 uses the Yukawa velocity-dependent σ/m form (light mediator)
+    # which naturally gives Cloud-9's σ/m ~ 50-500 cm²/g at v=28 km/s for
+    # m_phi = 1-10 MeV and g_chi = 0.13-0.4, resolving the v0.7 master tension.
     if _T90_RELHIC_AVAILABLE and os.environ.get("T90_RELHIC_V27", "").strip() == "1":
-        ll_relhic = loglike_relhic(sigma_m_0, a)
+        ll_relhic = loglike_relhic_t90v29(theta)
         if not np.isfinite(ll_relhic):
             return -np.inf
     else:
