@@ -568,7 +568,44 @@ def loglike_joint(theta):
     else:
         ll_relhic = 0.0
 
-    return ll_dsph + ll_ufd + ll_bullet + ll_lz + ll_fermi + ll_sparc + ll_cmb + ll_dampe + ll_lss + ll_competitor_dd + ll_xrism + ll_erosita + ll_phi_decay + ll_euclid_q1 + ll_euclid_subhalo + ll_goldstein_hill + ll_magnetic_moment + ll_relhic
+    # T90.32: Population-level RELHIC survival likelihood using Monaci+ 2026
+    # 70-candidate catalog (arXiv:2604.14699). Activated by T90_RELHIC_POP=1.
+    # Penalizes sigma_m above the RELHIC survival bound (~100 cm^2/g).
+    # This is a SIMPLIFIED back-of-envelope likelihood; a production version
+    # would use the full APOSTLE simulation stack and per-candidate likelihood.
+    if os.environ.get("T90_RELHIC_POP", "").strip() == "1":
+        try:
+            from t90_v32_relhic_population import loglike_relhic_population_t90v32
+            ll_relhic_pop = loglike_relhic_population_t90v32(theta)
+            if not np.isfinite(ll_relhic_pop):
+                return -np.inf
+        except ImportError:
+            ll_relhic_pop = 0.0
+    else:
+        ll_relhic_pop = 0.0
+
+    # T90.31: Cloud-9-dominated fit. Downweight all non-RELHIC channels by a
+    # factor (env var T41_CHANNEL_WEIGHT_NONRELHIC). This lets the MCMC see
+    # what the model says if Cloud-9 is treated as a primary discovery rather
+    # than a marginal cross-check. The default value (1.0 = no downweight)
+    # gives the standard master fit. Set to 0.01 for a Cloud-9-dominated
+    # fit (the other channels contribute ~1/100 of their usual weight).
+    # Rationale: the master posterior at nlive=200 with the standard channel
+    # weights converges to heavy-mediator MAPs because the cumulative weight
+    # of 20+ channels outweighs a single RELHIC candidate. A Cloud-9-dominated
+    # fit asks: "if we treat RELHIC as the primary signal, what does the
+    # model prefer?"
+    channel_weight_nonrelhic = float(
+        os.environ.get("T41_CHANNEL_WEIGHT_NONRELHIC", "1.0")
+    )
+    nonrelhic = (
+        ll_dsph + ll_ufd + ll_bullet + ll_lz + ll_fermi + ll_sparc + ll_cmb
+        + ll_dampe + ll_lss + ll_competitor_dd + ll_xrism + ll_erosita
+        + ll_phi_decay + ll_euclid_q1 + ll_euclid_subhalo + ll_goldstein_hill
+        + ll_magnetic_moment
+    )
+
+    return ll_relhic + ll_relhic_pop + channel_weight_nonrelhic * nonrelhic
 
 
 def prior_transform_5(u):

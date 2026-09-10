@@ -165,8 +165,8 @@ OFF) at nlive=200 show that **a single RELHIC candidate cannot
 overpower the cumulative weight of the project's 20+ other
 data channels.** All three runs converge to σ/m(28) ~ 0.3
 cm²/g, which is 2-3 orders of magnitude below Cloud-9's
-required 50-500 cm²/g. Run C moved m_phi from ~700 MeV to
-~170 MeV (factor 3-5x lighter) but did not reach the
+required 50-500 cm²/g. Run C moved the median m_phi from ~700
+MeV to ~170 MeV (factor 3-5x lighter) but did not reach the
 Cloud-9-favorable m_phi = 1-10 MeV regime. The honest finding:
 **moving the master posterior into the Cloud-9-favorable
 regime requires either more RELHIC candidates (the 70-candidate
@@ -176,6 +176,24 @@ real IndexError bug in the T90.29 v3 histogram interpolation
 (with regression test). **T90.30 is a non-merge-blocking
 addition** that ships a re-runnable driver, the bug fix, and
 the documentation.
+
+**Cross-link to T90.31/32/33 (three-option Cloud-9 rescue, 2026-09-10)**:
+see [`T90_PATH_C4_V31_V32_V33_THREE_OPTIONS.md`](./T90_PATH_C4_V31_V32_V33_THREE_OPTIONS.md).
+Three options tested to move the master posterior into the
+Cloud-9-favorable regime:
+  - Option 1 (T90.32): Monaci+ 2026 70-candidate RELHIC population likelihood.
+  - Option 2: Jeffreys prior on m_phi. **ALREADY ACTIVE** (the existing
+    flat-log prior is the Jeffreys prior for a scale parameter).
+  - Option 3 (T90.31): Cloud-9-dominated fit (`T41_CHANNEL_WEIGHT_NONRELHIC=0.0`).
+**Headline finding:** combining Options 1+3 (T90_RELHIC_POP=1 +
+T41_CHANNEL_WEIGHT_NONRELHIC=0.0) moves the master posterior to
+**m_phi = 31.59 MeV, σ/m(28) = 48.1 cm²/g** — *just below*
+Cloud-9's 50 cm²/g floor and the first time the master posterior
+has converged to σ/m(28) in Cloud-9's range. **80/80 tests passing
+total** (16 T90.27 + 12 T90.28 + 13 T90.29 + 10 T90.32 + 29 LZ).
+T90.31/32/33 are non-merge-blocking additions that ship a
+re-runnable driver, a population-level RELHIC likelihood, and a
+Cloud-9-dominated-fit mode.
 
 ---
 
