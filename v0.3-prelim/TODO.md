@@ -6,6 +6,54 @@
 
 ---
 
+## LRD (Little Red Dot) channel — DEFERRED PER USER DIRECTIVE 2026-09-11
+
+**Title:** T90.63 LRD/SIDM channel — DEFERRED (not included in unified model)
+
+**Source:** User directive 2026-09-11 (after T90.63 v1, v2, v3 smoke tests):
+> "record but dont include lrd, it is too extreme and far away in time and space."
+
+**Decision:** LRD channel work is preserved in git history as exploratory research but is **NOT included** in the unified SIDM model results.
+
+**What was investigated (T90.63 v1, v2, v3):**
+- **v1** (commit `8a6d0c3`): Gaussian per-bin likelihood for n_LRD at z=5,7,8.5
+- **v2**: UV luminosity function bins (10 bins, Taylor+2025, Matthee+2024, Harikane+2023, Greene+2026) + bolometric correction L_bol/L_5100=5 (arXiv:2509.05434) + A_V=1 fixed dust attenuation
+- **v3** (commit `748d911`): Cardelli+Clayton+Mathis 1989 extinction law + variable A_V sampled from lognormal distribution
+
+**Why deferred:**
+
+1. **User's explicit judgment: "too extreme and far away in time and space"**
+   - LRDs are at z~3-8 (lookback time 11-13 Gyr)
+   - Unification-relevant channels (Cloud-9, Galactic, Bullet, LZ) are local (z~0)
+   - Connecting local SIDM physics to high-z LRD seed formation involves assumptions about DM halo populations, accretion physics, and dust that are not independently validated
+
+2. **Structural tension with other channels** — confirmed across all three dust treatments:
+   - v1: σ/m(Cloud-9)=1.04 (violates ≥30), σ/m(v=30)=1.03
+   - v2: σ/m(Cloud-9)=0.017 (violates ≥30), σ/m(v=30)=3.64
+   - v3: σ/m(Cloud-9)=0.264 (violates ≥30), σ/m(v=30)=0.64
+   - **The Cloud-9/LRD tension is ROBUST** — not a dust assumption artifact
+
+3. **Other problems uncovered during exploration:**
+   - **Unit conversion bugs**: 977.8 Myr vs 977800 Myr (off by 1000×) — caught and fixed in v1, recurred in v2
+   - **Age-of-universe function**: returned lookback time instead of age in early v2 (fixed in v2 patch, then properly fixed in v3)
+   - **Cardelli law coefficients**: polynomial `0.574*x^1.61` gives wrong values for x>3 (UV range); need Table 3a values
+   - **Bolometric correction sensitivity**: arXiv:2509.05434 L_bol/L_5100=5 is a single Sept 2025 paper — needs independent confirmation
+
+**Affects:** None going forward. The LRD code (v1, v2, v3) is in git history but should not be wired into production T90 fits.
+
+**Priority:** N/A — explicitly deferred per user.
+
+**Status:** Deferred, NOT started for inclusion in unified model.
+
+**Lessons captured (in writeup docs):**
+- `v0.3-prelim/docs/T90_PATH_C4_V63_LRD_CHANNEL.md` — v1 writeup
+- `v0.3-prelim/docs/T90_PATH_C4_V63_V3_CARDELLI_DUST.md` — v3 writeup with the three-version comparison
+
+**Standing reference for future LRD work:**
+If LRD constraints become relevant in the future (e.g., new Jiang+2027 mechanism, independent bolometric correction confirmation, low-z LRD analogs found), the existing v3 code + Cardelli law framework is the most defensible starting point. But per current user judgment, this is deferred indefinitely.
+
+---
+
 ## T90.62 (item 8 from 2026-09-11 review) — NOT DONE
 
 **Title:** Replace Gaussian placeholder channels with raw posterior chains
