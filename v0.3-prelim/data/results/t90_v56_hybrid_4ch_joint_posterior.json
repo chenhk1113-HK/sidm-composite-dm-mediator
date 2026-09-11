@@ -1,0 +1,77 @@
+{
+  "framework": "T90.56 hybrid 10D (multi-portal + resonance + Sommerfeld + LZ magnetic moment)",
+  "log_Z": -2.9015093549998707,
+  "log_Z_err": 0.3259014401994818,
+  "wall_seconds": 3.010406255722046,
+  "nlive": 50,
+  "dlogz_target": 0.5,
+  "ndim": 10,
+  "n_samples": 242,
+  "posterior_medians": {
+    "log_m_chi_GeV": {
+      "median": 2.523726297108367,
+      "p16": 1.1706652372518607,
+      "p84": 2.9050406026827305
+    },
+    "log_m_phi_A_MeV": {
+      "median": 2.9527637984324056,
+      "p16": 2.228075935109072,
+      "p84": 3.5935713039055184
+    },
+    "g_chi_A": {
+      "median": 0.7650368012752717,
+      "p16": 0.21632058014972824,
+      "p84": 1.5867745503791897
+    },
+    "log_m_phi_B_MeV": {
+      "median": 0.7303349204534652,
+      "p16": -0.004768278364738015,
+      "p84": 1.6095611385871178
+    },
+    "g_chi_B": {
+      "median": 0.17815894167222412,
+      "p16": 0.044515424018078134,
+      "p84": 0.3022082836179264
+    },
+    "log_E_R_eV": {
+      "median": 2.6002095106217062,
+      "p16": 1.0607176131145608,
+      "p84": 4.07223095508518
+    },
+    "log_Gamma_R_eV": {
+      "median": 0.6208625687671365,
+      "p16": -1.0679289186823757,
+      "p84": 2.26805331952856
+    },
+    "log_sigma_0": {
+      "median": -2.9792284648770737,
+      "p16": -4.394796293498094,
+      "p84": -1.3976197630001506
+    },
+    "log_alpha_Y": {
+      "median": -3.0808543711261334,
+      "p16": -4.244188165541507,
+      "p84": -1.209317752580355
+    },
+    "log_mu_x": {
+      "median": -9.085017246051818,
+      "p16": -13.49140669636395,
+      "p84": -5.922977570797644
+    }
+  },
+  "posterior_median_predictions": {
+    "sigma_m_Cloud9_cm2_per_g": 102.62028010722001,
+    "sigma_m_Galaxy_cm2_per_g": 2.203234372104996,
+    "sigma_m_Bullet_cm2_per_g": 0.0014731447391862138,
+    "mu_x_at_median": 8.222099989271155e-10,
+    "loglike_LZ_at_median": 0.0
+  },
+  "channel_satisfaction_at_median": {
+    "Cloud9": true,
+    "Galaxy": false,
+    "Bullet": true,
+    "n_satisfied_3ch": 2
+  },
+  "channel_likelihood_match": "T90.51 (Cloud-9 + Galactic + Bullet) + LZ magnetic moment (Channel 26)",
+  "wimpy_available": false
+}
