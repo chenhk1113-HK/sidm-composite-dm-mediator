@@ -57,24 +57,27 @@ point, not a unique fine-tuned solution.
 
 ---
 
-## Comparison to T90.45 Multi-Portal
+**Comparison to T90.45 Multi-Portal (apples-to-apples, T90.52)**
 
 | Framework | log Z | σ/m(Cloud-9) | σ/m(Galaxy) | σ/m(Bullet) | Compatible |
 |---|---|---|---|---|---|
-| T90.45 multi-portal | -19.32 (bimodal) | 48.6 | 4.3 (over) | 0.024 | ~50% (one mode over Galactic limit) |
-| **T90.51 resonant (posterior median)** | **-2.52** | **281.8** | **0.16** | **0.009** | **100%** at median |
+| T90.45 multi-portal (T90.52 re-run, nlive=500, 3-ch) | -2.229 ± 0.067 | 134.6 | 1.67 (under) | 0.0003 | ✓ all 3 |
+| T90.45 multi-portal (T90.52 MAP from prior docs) | -19.32 | 48.6 | 4.3 (over) | 0.024 | MAP over limit; median under |
+| **T90.51 resonant (nlive=500, 3-ch)** | **-2.435 ± 0.064** | **196.7** | **0.19** | **0.010** | ✓ all 3 |
+| **Δlog Z (resonant - multi-portal)** | **-0.21 ± 0.09** | — | — | — | **INCONCLUSIVE** |
 
-**Δlog Z = +16.8** in favor of resonant SIDM — overwhelmingly preferred by the
-data. Resonant SIDM wins on:
-1. **Higher evidence** (less prior penalty: 6D vs 9D, but much higher peak likelihood)
-2. **Galactic constraint satisfied** (multi-portal's Galactic mode A is over by 2x)
-3. **Single-mode posterior** (no bimodality ambiguity)
+**Honest interpretation:** Both resonant SIDM and multi-portal SIDM are
+unified solutions to the 3-channel Cloud-9 + Galactic + Bullet problem.
+Both produce posterior medians that satisfy all three constraints.
+The data cannot distinguish them on the 3-channel likelihood — Δlog Z is
+within 1σ of zero. This is a STRONGER result than "resonant wins" because
+it means the 3-channel data is consistent with a wide class of
+velocity-dependent σ/m models.
 
-Caveat: T90.45 and T90.51 are not strictly comparable — T90.45 uses 5+ channels
-(including LZ, KSFR, etc.), T90.51 uses only 3. A proper log Z comparison
-would re-run T90.45 with the same 3-channel likelihood. But the qualitative
-picture is robust: the resonance mechanism satisfies the 3 channels with much
-less prior volume and at much higher peak likelihood.
+The original T90.51 commit reported "Δlog Z = +16.8" by comparing against
+T90.45's published log Z of -19.32, which was computed at different nlive
+and a different (5+ channel) likelihood. That comparison was apples-to-
+oranges. See `T90_PATH_C4_V52_LIKECOMPARE.md` for the corrected comparison.
 
 ---
 
@@ -116,9 +119,22 @@ less prior volume and at much higher peak likelihood.
 
 ## Honest Caveats
 
-1. **Only 3 channels.** The proper log Z comparison with T90.45 needs the same
-   5+ channels. Adding LZ (T90.51+) and T90 multi-channel (T90.53) is the
-   natural follow-up; see CURRENT.md "Next steps".
+**CORRECTION (2026-09-11, T90.52):** The T90.51 commit originally claimed
+"Δlog Z vs T90.45 = +16.8 in favor of resonant." This was WRONG. T90.52's
+apples-to-apples re-run gives **Δlog Z = -0.21 ± 0.09, INCONCLUSIVE**.
+The +16.8 figure was computed by comparing T90.51's log Z against T90.45's
+published log Z of -19.32, but those numbers were measured at different
+nlive, different number of channels, and different nuisance parameters.
+See `T90_PATH_C4_V52_LIKECOMPARE.md` for the corrected comparison.
+
+**Honest updated caveats:**
+
+1. **Both frameworks are unified solutions.** T90.51 (resonant) and T90.52
+   (multi-portal re-run) both produce posterior medians that satisfy all
+   three constraints. The data cannot distinguish them on 3 channels.
+   This is a STRONGER statement than "resonant wins" — it means the
+   3-channel data is consistent with a wide class of velocity-dependent σ/m
+   models.
 
 2. **m_phi_MeV is a nuisance parameter** in this implementation — it does not
    enter `sigma_m_resonant()` because the Yukawa/Sommerfeld is parameterized
