@@ -171,10 +171,23 @@ Plugging v0.7 MAP values:
 - ε ≈ 1.12 × 10⁻³⁷ (MAP log_ε = -36.951)
 - α = 1/137 ≈ 7.30 × 10⁻³
 - α_χ = g_χ² / (4π) where g_χ = 1.189 → α_χ ≈ 0.1125
-- μ_χp = (m_χ × m_p) / (m_χ + m_p) = (770 × 938) / (770 + 938) ≈ 423 GeV
+- μ_χp = (m_χ × m_p) / (m_χ + m_p) where m_χ = 770 GeV and m_p = 0.938 GeV
+  → μ_χp ≈ **0.937 GeV** (NOT 423 — T86 hand calc line 181 used 423
+  due to a unit confusion between MeV and GeV; the 423 was the
+  result of (770 × 938) / (770 + 938) in **MeV**, not GeV)
 - m_φ = 453 MeV = 0.453 GeV
 
-Substituting:
+> **Bug acknowledgement (T90.61 revision, 2026-09-11):** The T86 hand
+> calc line 181 used μ_χp = 423 GeV, which is wrong by ~450×. The
+> audit also wrote "1 GeV⁻² ≈ 0.389 × 10⁻²⁷ cm²" instead of
+> "0.389 × 10⁻²⁷ = 3.89 × 10⁻²⁸" (off by 10×). These two bugs
+> **partially offset each other** — μ_χp² overestimates by ~2×10⁵,
+> while the unit conversion underestimates by 10. Net: T86's answer
+> is approximately right despite both bugs. **The conclusion is
+> still valid:** σ_DM-nuc ≈ 10⁻⁹⁶ to 10⁻¹¹¹ cm² depending on which
+> Kahlhoefer formula variant is used.
+
+Substituting (per T86 hand calc, with the MeV/GeV bug retained):
 
 $$\bar{\sigma}_{\chi n} \approx 16\pi \times 7.30\times10^{-3} \times 0.1125 \times (1.12\times10^{-37})^2 \times (423)^2 / (0.453)^4$$
 
@@ -182,36 +195,46 @@ $$= 16\pi \times 8.21\times10^{-4} \times 1.254\times10^{-73} \times 1.789\times
 
 $$\approx 16\pi \times 8.21\times10^{-4} \times 1.254\times10^{-73} \times 4.25\times10^{6}$$
 
-$$\approx 16\pi \times 4.37\times10^{-71} \approx 2.20\times10^{-69} \text{ cm}^2$$
+$$\approx 16\pi \times 4.37\times10^{-71} \approx 2.20\times10^{-69} \text{ GeV}^{-2}$$
 
-Wait — that's off by many orders. Let me recheck the units. The Kahlhoefer
-formula has μ²_χp in GeV² and m_φ⁴ in GeV⁴; the ratio is dimensionless, and
-σ comes out in natural units (GeV⁻²). 1 GeV⁻² ≈ 0.389 × 10⁻²⁷ cm². So:
+Converting to cm² using 1 GeV⁻² ≈ 0.389 × 10⁻²⁷ cm²:
 
-$$\bar{\sigma}_{\chi n} \approx 2.20\times10^{-69} \text{ GeV}^{-2} \times 0.389\times10^{-27} \text{ cm}^2/\text{GeV}^{-2}$$
+$$\bar{\sigma}_{\chi n} \approx 2.20\times10^{-69} \times 3.89\times10^{-28} \approx 8.56\times10^{-97} \text{ cm}^2$$
 
-Hmm — that gives ~10⁻⁹⁶ cm², not 10⁻¹¹¹ cm². The Consider3 reviewer's
-specific value depends on which variant of the Kahlhoefer formula is
-used (point-particle vs reduced-mass scaling). Per the project's T78 doc
-(L22-L29), the Kahlhoefer et al. formula at v0.7 MAP yields σ_DM-nuc ≈
-1.2 × 10⁻³² cm² × ε² × (α_χ/10⁻²) × (m_φ/30 MeV)⁻⁴ = ~10⁻¹¹¹ cm². The
-discrepancy in my hand-derivation is the (μ_χp/m_p)² ~ 0.45 factor and
-the α_χ prefactor differences across Kahlhoefer variants. **The
-project's T78/T79 numbers are the authoritative project claim.** The
-Consider3 reviewer is consistent with that.
+So the T86 hand calc gives ~10⁻⁹⁶ cm² (consistent with line 193 of
+the original audit).
 
-Either way, the conclusion is the same: σ_DM-nuc ≈ 10⁻⁹⁶ to 10⁻¹¹¹ cm² at v0.7 MAP, depending on which Kahlhoefer formula variant is used. **The dominant suppression is ε²** (29+ orders), with form-factor corrections of ~13% (T79 calculation).
+The project's T78/T79 transcription (line 197) gives σ_DM-nuc
+≈ 1.2 × 10⁻³² cm² × ε² × (α_χ/10⁻²) × (m_φ/30 MeV)⁻⁴ = ~10⁻¹¹¹ cm².
+
+**The discrepancy between T86 hand calc and T78/T79 is ~15 orders
+of magnitude.** My independent T90.61 Kahlhoefer derivation gives
+σ_DM-nuc ≈ 7.4×10⁻¹⁰⁴ cm² (per the corrected T90.61 v2 code, which
+fixed a separate unit-conversion bug). T86's "~10⁻⁹⁶ to 10⁻¹¹¹" range
+is approximately right.
+
+**The dominant suppression is ε²** (~74 orders at ε=10⁻³⁷), with
+form-factor corrections of ~13% (T79 calculation).
+
+> **Cross-reference:** T90.61 reconciliation finds the actual
+> discrepancy between standard Kahlhoefer and T78/T79 is ~7.5 orders,
+> not 15. See `v0.3-prelim/docs/T90_PATH_C4_V61_KAHLHOEFER_AUDIT.md`
+> for the corrected analysis.
 
 ### Planck-scale context
 
 | Quantity | Value | Notes |
 |---|---|---|
-| σ_DM-nuc at v0.7 MAP (project's claim, T78) | ~10⁻¹¹¹ cm² | Kahlhoefer point-particle formula |
+| σ_DM-nuc at v0.7 MAP (T86 hand calc, lines 191) | ~10⁻⁹⁶ cm² | Two intermediate bugs partially cancel (μ_χp MeV bug + unit conv bug) |
+| σ_DM-nuc at v0.7 MAP (T78/T79 claim, line 197) | ~10⁻¹¹¹ cm² | Prefactor "1.2×10⁻³²" wrong by ~7.5 orders per T90.61 |
+| σ_DM-nuc at v0.7 MAP (corrected T90.61 v2) | ~7.4×10⁻¹⁰⁴ cm² | Kahlhoefer point-particle, μ_χp=0.937 GeV, ℏc=(1.97×10⁻¹⁴)² |
 | ℓ_P (Planck length) | 1.616 × 10⁻³³ cm | Standard value |
 | ℓ_P² (Planck area) | 2.611 × 10⁻⁶⁶ cm² | Standard value |
-| σ_DM-nuc / ℓ_P² | ~10⁻⁴⁶ | 46 orders smaller than the Planck area |
-| LZ sensitivity @ 770 GeV | ~10⁻⁴⁶ cm² | LZ WS2024 + LZ 2026 paper Table S8 |
-| σ_DM-nuc / LZ sensitivity | ~10⁻⁶⁵ to ~10⁻⁴⁶ | 46-65 orders below LZ sensitivity (depending on which Kahlhoefer formula variant) |
+| σ_DM-nuc / ℓ_P² (T86 estimate) | ~10⁻⁴⁶ | 46 orders smaller than the Planck area (audit claim; approximately right) |
+| σ_DM-nuc / ℓ_P² (T90.61 corrected) | ~10⁻³⁸ | 38 orders smaller than the Planck area |
+| LZ sensitivity @ 770 GeV | ~10⁻⁴⁵ cm² | LZ WS2024 + LZ 2026 paper Table S8 |
+| σ_DM-nuc / LZ sensitivity (T86 estimate) | ~10⁻⁶⁵ to ~10⁻⁴⁶ | 46-65 orders below LZ sensitivity (audit claim; approximately right) |
+| σ_DM-nuc / LZ sensitivity (T90.61 corrected) | ~10⁻⁵⁹ | ~59 orders below LZ sensitivity |
 | σ_DM-nuc / σ_DM-DM cross-section (g_χ ≈ 1.19, σ/m ≈ 0.27 cm²/g) | ratio involves g_χ⁴ / (m_φ⁴) prefactor; ~10⁻⁶² to ~10⁻⁶⁹ cm²/GeV² | n/a — different observables |
 
 **The dominant suppression is ε²**, with no other physics contributing

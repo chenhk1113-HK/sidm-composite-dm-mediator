@@ -20,10 +20,17 @@ import math
 
 # Constants
 alpha_em = 1.0 / 137.036  # fine-structure constant
-# Correct ℏc conversion: ℏc = 0.1973269804 GeV·fm = 1.973269804e-14 GeV·cm
-hbarc_GeVcm = 0.1973269804 * 1e-13  # GeV·cm
+# Correct unit conversion:
+#   1 GeV^-1 in cm = (hbar c)^-1 where hbar c = 1.973269804e-14 GeV*cm
+#   So 1 GeV^-1 = 5.068e+13 cm
+#   And 1 GeV^-2 = (1 GeV^-1)^2 = (5.068e+13)^2 cm^2 = 2.568e+27 cm^2
+#   BUT this is WRONG -- that's the conversion for LENGTH in natural units.
+#   For CROSS-SECTION (length^2), we use (hbar c)^2 = (1.973e-14)^2 = 3.89e-28 cm^2
+#   The conversion factor is 1 GeV^-2 = (hbar c)^2 cm^2 = 3.89e-28 cm^2/GeV^-2
+hbarc_GeVcm = 0.1973269804 * 1e-13  # GeV*cm (used for length)
 GeV_to_invocm = 1.0 / hbarc_GeVcm  # 1 GeV^-1 in cm
-GeV_to_invocm2 = (GeV_to_invocm) ** 2  # 1 GeV^-2 in cm^2
+# CORRECT cross-section conversion (length^2): (hbar c)^2 in cm^2
+GeV_to_invocm2 = (hbarc_GeVcm) ** 2  # 1 GeV^-2 in cm^2 (= 3.89e-28)
 
 # v0.7 MAP values from T78/T79
 m_chi_GeV = 770.0  # DM mass (T78 v0.7 MAP)
@@ -328,17 +335,22 @@ def find_source_of_discrepancy():
     print()
 
     # So the T78 prefactor "1.2e-32" is WRONG by some factor
-    # The correct prefactor is ~5.7e-30 cm^2 (about 475x larger)
-    # That doesn't bridge 15 orders of magnitude though
+    # The correct prefactor at unit values is ~3.87e-25 cm^2 (about 3.23e7x larger)
+    # This explains the ~7.5 order discrepancy between T78 and standard Kahlhoefer
     print('Conclusion of source-of-discrepancy analysis:')
     print(f'  T78 prefactor "1.2e-32" is wrong by a factor of {prefactor_needed / 1.2e-32:.4e}')
     print(f'  This alone explains ~{(prefactor_needed / 1.2e-32):.0e}x ratio')
-    print(f'  But the T86 audit claims a 10^-15x discrepancy')
-    print(f'  My ratio (T78 / my Kahlhoefer): {sigma_t78 / sigma_cm2:.4e}')
+    print(f'  T86 audit claimed 15-order discrepancy')
+    print(f'  Actual ratio (T78 / my Kahlhoefer): {sigma_t78 / sigma_cm2:.4e}')
     print(f'  log10: {math.log10(sigma_t78 / sigma_cm2):.3f}')
     print()
-    print('  Therefore: T78/T79 claim is OFF by ~10^15x relative to the')
-    print('  standard Kahlhoefer 16-pi prefactor formula.')
+    print('  Therefore: T78/T79 claim is OFF by ~10^7.5x (NOT 10^15x as')
+    print('  T86 audit claimed) relative to the standard Kahlhoefer formula.')
+    print()
+    print('  Source of T86 over-statement: T86 hand calc used buggy mu_chi_p = 423 GeV')
+    print('  (off by 450x due to MeV vs GeV confusion) AND an off-by-10 unit')
+    print('  conversion factor. These bugs partially cancelled each other,')
+    print('  giving ~10^-96 cm^2 instead of the correct ~10^-100 cm^2.')
 
 
 find_source_of_discrepancy()

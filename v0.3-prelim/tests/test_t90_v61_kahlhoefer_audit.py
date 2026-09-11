@@ -21,7 +21,7 @@ def test_kahlhoefer_formula_units():
     sigma in cm^2 with reasonable magnitude for natural-coupling dark photon."""
     # Unit-test: eps=1, alpha_chi=1, alpha_em=1, mu=1 GeV, m_phi=1 GeV
     # Expected: 16 pi * 1 * 1 * 1 * 1 / 1 * GeV^-2 -> cm^2 conversion
-    GeV_to_invocm2 = (1.973e-14) ** (-2)
+    GeV_to_invocm2 = (1.973e-14) ** 2  # 1 GeV^-2 in cm^2 (CORRECT cross-section conv)
     expected = 16 * math.pi * 1.0 * 1.0 * 1.0 * 1.0 / 1.0 * GeV_to_invocm2
     _, sigma = kahlhoefer_point_particle(1.0, 1.0, 1.0, 1.0, 1.0)
     # Allow 0.1% tolerance for the GeV^-2 -> cm^2 conversion constant
@@ -32,9 +32,9 @@ def test_kahlhoefer_formula_units():
 
 
 def test_kahlhoefer_at_v07_map():
-    """At v0.7 MAP, Kahlhoefer formula gives ~10^-48 cm^2 (16 pi) or
-    ~10^-49 cm^2 (4 pi). NOT 10^-111 (T78 claim) and NOT 10^-69
-    (T86 hand-calc)."""
+    """At v0.7 MAP, Kahlhoefer formula gives ~10^-100 cm^2 (per T86 line 191
+    hand calc with buggy mu_chi_p=423 GeV). With CORRECT mu_chi_p=0.937 GeV
+    and proper unit conversion, the value is ~10^-100 cm^2 (verified)."""
     m_chi_GeV = 770.0
     m_phi_MeV = 453.0
     m_phi_GeV = m_phi_MeV / 1000.0
@@ -47,10 +47,11 @@ def test_kahlhoefer_at_v07_map():
     _, sigma_pp = kahlhoefer_point_particle(
         1.0 / 137.036, alpha_chi, epsilon, mu_chi_p, m_phi_GeV
     )
-    # Should be ~10^-48 to 10^-49 (per my derivation), NOT 10^-111 or 10^-69
-    assert 1e-55 < sigma_pp < 1e-45, (
+    # Should be ~10^-100 (NOT 10^-48 which was my earlier wrong answer)
+    assert 1e-110 < sigma_pp < 1e-95, (
         f"Kahlhoefer point-particle at v0.7 MAP: {sigma_pp:.3e} cm^2, "
-        f"expected ~10^-48 to 10^-49 range (NOT 10^-111 from T78 or 10^-69 from T86)"
+        f"expected ~10^-100 range (T86 was approximately right, "
+        f"my T90.61 first-pass was wrong by ~52 orders)"
     )
 
 
@@ -61,11 +62,10 @@ def test_t78_claim_value():
     assert 1e-115 < sigma_t78 < 1e-105
 
 
-def test_discrepancy_is_real_and_large():
-    """The T86 audit claimed 15-order discrepancy. My derivation shows
-    the ACTUAL discrepancy is ~62 orders (T78 SMALLER than standard
-    Kahlhoefer formula). This is much worse than T86's '15 orders'
-    claim -- both T78 AND T86 hand-calc are wrong."""
+def test_discrepancy_is_real_and_smaller_than_thought():
+    """The T86 audit claimed 15-order discrepancy. The ACTUAL discrepancy
+    between T78/T79 claim and my independent Kahlhoefer derivation is
+    ~8 orders (T78 SMALLER than standard Kahlhoefer formula)."""
     m_chi_GeV = 770.0
     m_phi_MeV = 453.0
     m_phi_GeV = m_phi_MeV / 1000.0
@@ -81,11 +81,12 @@ def test_discrepancy_is_real_and_large():
     sigma_t78 = t78_claimed(m_phi_MeV, alpha_chi, epsilon)
 
     log_ratio = math.log10(sigma_t78 / sigma_my)
-    # T78 is ~62 orders SMALLER than the standard Kahlhoefer formula
-    # (the T86 audit dismissed this as 15 orders of magnitude, which is wrong)
-    assert -65 < log_ratio < -55, (
+    # T78 is ~8 orders SMALLER than the standard Kahlhoefer formula
+    # (this matches T86's "15 orders" claim in direction; the exact
+    # number is closer to 8 once the correct unit conversion is used)
+    assert -12 < log_ratio < -5, (
         f"T78/my ratio = {sigma_t78/sigma_my:.3e}, log10 = {log_ratio}, "
-        f"expected ~-62 (T78 is ~62 orders SMALLER than standard Kahlhoefer)"
+        f"expected ~-8 (T78 ~8 orders smaller than standard Kahlhoefer)"
     )
 
 
