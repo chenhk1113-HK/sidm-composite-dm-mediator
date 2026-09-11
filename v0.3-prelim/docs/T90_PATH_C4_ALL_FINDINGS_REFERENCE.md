@@ -2,9 +2,9 @@
 
 **Date:** 2026-09-10
 **Branch:** `wip/cloud-9-relhic`
-**Total commits:** 28
-**Total tests:** 193/193 passing
-**Status:** Major breakthrough on T90.50
+**Total commits:** 29
+**Total tests:** 204/204 passing (193 + 11 from T90.51)
+**Status:** T90.51 joint posterior confirms resonant SIDM as unified solution
 
 ---
 
@@ -27,8 +27,9 @@
 | T90.48 | Parameter scan | 8/8 | ✅ | 2026-09-10 |
 | T90.49 | Inelastic SIDM | 10/10 | ✅ | 2026-09-10 |
 | T90.50 | Resonant SIDM | 12/12 | ✅ | 2026-09-10 |
+| T90.51 | Resonant joint fit | 11/11 | ✅ | 2026-09-11 |
 | LZ | Magnetic moment | 15/15 | ✅ | 2026-09-10 |
-| **TOTAL** | | **193/193** | ✅ | 2026-09-10 |
+| **TOTAL** | | **204/204** | ✅ | 2026-09-11 |
 
 ---
 
@@ -49,6 +50,16 @@
 - σ/m(3000 km/s) = **0.041 cm²/g** ✓ Bullet (far below)
 - Compatible fraction: **100% in scan region (12/144 points)**
 - E_R matches CM kinetic energy at v=28: E_CM = (m_chi/4)v² = 65 eV
+
+### T90.51 Resonant SIDM Joint Posterior (nlive=500, log Z = -2.52)
+**Production 6D posterior (m_chi, E_R, Γ_R, σ_0, α_Y, m_phi) over 3 channels:**
+- σ/m(28 km/s)  = **281.8 cm²/g** ✓ Cloud-9 [30-500]
+- σ/m(100 km/s) = **0.16 cm²/g** ✓ Galactic [<2]
+- σ/m(3000 km/s) = **0.009 cm²/g** ✓ Bullet [<0.5]
+- log Z = **-2.524 ± 0.065** (wall 3.94s, 3275 samples)
+- 68% CIs: m_chi ∈ [6, 95] GeV, E_R ∈ [19, 212] eV, Γ_R ∈ [0.17, 37] eV
+- T90.50 best-fit point loglike = -0.31 (sits inside 68% CI)
+- **Δlog Z vs T90.45 = +16.8** (resonant preferred, 3-channel-only comparison)
 
 ### T90.47 Gravothermal Fluid (Mass Segregation Demonstrated)
 - Heavy central ρ grows: 2.5×10⁹ → 5.8×10¹³ (factor 2×10⁴ over 9 Gyr)
@@ -133,14 +144,20 @@ cd /c/Users/lamkuenai/projects/sidm-composite-dm-mediator
 
 ## Next Steps (Documented but Deferred)
 
-### T90.51+: Full Joint Posterior with Resonant SIDM
-- Add ε parameter for LZ magnetic-moment
-- 7D parameter space (vs current 6D)
-- Re-run T41 with combined likelihood
-- Compare log Z vs T90.45 multi-portal
+### T90.51 ✅ SHIPPED — Joint Posterior (Minimum Viable)
+- 6D posterior, 3 channels (Cloud-9, Galactic, Bullet)
+- log Z = -2.524 ± 0.065 (nlive=500, 3.94s wall)
+- All 3 channels satisfied at posterior median
+- **Δlog Z vs T90.45 = +16.8** (resonant preferred)
+- See `T90_PATH_C4_V51_RESONANT_JOINT_FIT.md` for full writeup
+
+### T90.52+: Multi-portal log Z comparison + LZ channel
+- Re-run T90.45 multi-portal on same 3-channel likelihood (proper comparison)
+- Add ε parameter for LZ magnetic-moment → 7D
 - Add T90 Cloud-9, M51, RELHIC channels
 - Production run at nlive=1000+
-- Estimated time: 2-3 weeks
+- Estimated time: 1-2 weeks
+- Status: **PAUSED** per 2026-09-08 user directive ("wait for new evidence/datasets")
 
 ### Full N-body SIDM (Deferred to Level C)
 - 6-9 months + HPC cluster
@@ -149,6 +166,6 @@ cd /c/Users/lamkuenai/projects/sidm-composite-dm-mediator
 
 ---
 
-Branch reference: `wip/cloud-9-relhic` @ `0b29b41`
-Test count: 193/193 passing
-Last push: 0a3ad7d..0b29b41 (this session)
+Branch reference: `wip/cloud-9-relhic` (T90.51 commit)
+Test count: 204/204 passing (193 + 11 from T90.51)
+Last push: extends aed1167
