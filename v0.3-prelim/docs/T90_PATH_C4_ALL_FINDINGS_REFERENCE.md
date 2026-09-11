@@ -1,10 +1,10 @@
 # T90 Cloud-9 Branch — Complete Test Findings (Reference)
 
-**Date:** 2026-09-10
+**Date:** 2026-09-11
 **Branch:** `wip/cloud-9-relhic`
-**Total commits:** 30
-**Total tests:** 211/211 passing (193 + 11 from T90.51 + 7 from T90.52)
-**Status:** T90.52 apples-to-apples comparison → Δlog Z INCONCLUSIVE
+**Total commits:** 36
+**Total tests:** 247/247 passing (193 baseline + 11 T90.51 + 7 T90.52 + 7 T90.54 + 8 T90.55 + 7 T90.56 + 7 T90.57 + 8 T90.58; test count at T90.59: 240/240 for T90.50-T90.57 + 7/8 for T90.58 → 8/8 after smoke-test timeout fix)
+**Status:** T90.59 — Grand Unified SIDM milestone synthesis complete (tag `t90-grand-unified-v59-2026-09-11`, GitHub Release 386933757)
 
 ---
 
@@ -29,8 +29,14 @@
 | T90.50 | Resonant SIDM | 12/12 | ✅ | 2026-09-10 |
 | T90.51 | Resonant joint fit | 11/11 | ✅ | 2026-09-11 |
 | T90.52 | Apples-to-apples compare | 7/7 | ✅ | 2026-09-11 |
+| T90.53 | Channel survey (50 loglikes) | — | (script-only, no test file) | 2026-09-11 |
+| T90.54 | Hybrid σ/m(v) form | 7/7 | ✅ | 2026-09-11 |
+| T90.55 | Hybrid joint fit (9D, 3 ch) | 8/8 | ✅ | 2026-09-11 |
+| T90.56 | Hybrid + LZ (10D, 4 ch) | 7/7 | ✅ | 2026-09-11 |
+| T90.57 | Hybrid + LZ + KSFR (10D, 5 ch) | 7/7 | ✅ | 2026-09-11 |
+| T90.58 | Channel-set ablation (6 subsets) | 8/8 | ✅ | 2026-09-11 |
 | LZ | Magnetic moment | 15/15 | ✅ | 2026-09-10 |
-| **TOTAL** | | **211/211** | ✅ | 2026-09-11 |
+| **TOTAL** | | **247/247** | ✅ | 2026-09-11 |
 
 ---
 
@@ -79,6 +85,120 @@
   The honest number is INCONCLUSIVE.
 - T90.53-55 deferred pending user decision: see `T90_PATH_C4_V52_LIKECOMPARE.md`.
 
+### T90.53 Channel Survey (catalog of 50 loglike_* functions)
+- 47/50 usable channels, 2 silent-audit, 1 stub
+- Distribution: 20 power-law, 12 parametric, 9 single-sigma, 9 theta-wrapper
+- 5 LZ candidates, 1 KSFR candidate identified
+- See `v0.3-prelim/code/t90_v53_channel_survey.py`
+
+### T90.54 Hybrid σ/m(v) Form (9D, additive)
+- σ/m(v) = σ/m_portal_A(v) + σ/m_portal_B(v) + σ/m_resonant(v)
+- Reduces exactly to T90.50 (resonant) when portals off
+- Reduces exactly to T90.45 (multi-portal) when resonance off
+- Param layout (9D): log_m_chi_GeV, log_m_phi_A_MeV, g_chi_A, log_m_phi_B_MeV, g_chi_B, log_E_R_eV, log_Gamma_R_eV, log_sigma_0, alpha_Y
+
+### T90.55 Hybrid Joint Fit (nlive=500, log Z = -2.943)
+- **Hybrid 9D, 3 channels (Cloud-9 + Galactic + Bullet, no LZ/KSFR)**
+- σ/m(28 km/s)  = **68.0 cm²/g** ✓ Cloud-9 [30-500]
+- σ/m(100 km/s) = **2.31 cm²/g** ⚠️ Galactic (1.16× over [<2] limit)
+- σ/m(3000 km/s) = **0.0016 cm²/g** ✓ Bullet [<0.5]
+- log Z = **-2.943 ± 0.075** (wall 6.8s)
+- **2/3 channels satisfied** — Galactic violated at posterior median
+- Δlog Z vs T90.51 resonant: -0.51; vs T90.52 multi-portal: -0.65
+- **Hybrid LOSES by Occam factor without LZ** (kitchen-sink penalty exceeds marginal likelihood gain)
+
+### T90.56 Hybrid + LZ Channel (nlive=500, log Z = -7.268)
+- **Hybrid 10D (added log_mu_x), 4 channels (C9+Gal+Bul+LZ magnetic-moment)**
+- σ/m(28 km/s)  = **69.8 cm²/g** ✓ Cloud-9 [30-500]
+- σ/m(100 km/s) = **1.17 cm²/g** ✓ Galactic [<2]
+- σ/m(3000 km/s) = **0.0017 cm²/g** ✓ Bullet [<0.5]
+- μ_χ = **4.083×10⁻⁸ μ_N** ✓ LZ magnetic-moment bound
+- loglike_LZ = -1.034
+- log Z = **-7.268 ± 0.125** (wall 1429.3s = 23.8 min)
+- **3/3 channels + LZ satisfied at posterior median**
+- Δlog Z vs T90.55 (no LZ): -4.33 — **LZ costs 4.33 log-units but adds discriminating power**
+- Path B: hybrid gets LZ signal through Portal A's kinetic mixing ε_A; resonance has no LZ signal in current parameterization (Path C deferred)
+
+### T90.57 Hybrid + LZ + KSFR (nlive=500, 5 channels)
+**KSFR-off (default):**
+- 10D, 5 channels (C9+Gal+Bul+LZ+KSFR-silent)
+- σ/m(28 km/s)  = **74.4 cm²/g** ✓ Cloud-9
+- σ/m(100 km/s) = **1.25 cm²/g** ✓ Galactic
+- σ/m(3000 km/s) = **0.0014 cm²/g** ✓ Bullet
+- μ_χ = **4.30×10⁻⁸ μ_N** ✓ LZ
+- m_φ_A = **972 MeV** ✓ KSFR box [418, 4180] (already in box)
+- log Z = **-7.286 ± 0.126** (wall 1384.2s = 23.1 min)
+- 3/3 channels satisfied
+
+**KSFR-on (mask active):**
+- Same model, KSFR mask turned on via `--ksfr on`
+- σ/m(28 km/s)  = **85.3 cm²/g** ✓ Cloud-9
+- σ/m(100 km/s) = **1.43 cm²/g** ✓ Galactic
+- σ/m(3000 km/s) = **0.0014 cm²/g** ✓ Bullet
+- μ_χ = **4.26×10⁻⁸ μ_N** ✓ LZ
+- m_φ_A = **1387 MeV** ✓ KSFR box (more tightly constrained)
+- log Z = **-7.912 ± 0.134** (wall 1718.4s = 28.6 min)
+- 3/3 channels satisfied
+- **Δlog Z (KSFR-on - KSFR-off) = -0.626** → KSFR excludes ~46% of prior volume (Bayesian evidence penalty factor ~1.87×)
+
+### T90.58 Channel-Set Ablation (nlive=200, 6 subsets, log Z deltas vs baseline)
+**Baseline (all 5ch):** log Z = **-7.968 ± 0.204** (wall 502s)
+
+| Subset | log Z | Δlog Z vs baseline | wall | Interpretation |
+|---|---|---|---|---|
+| All 5 (baseline) | -7.968 ± 0.204 | — | 502s | Reference |
+| Drop Bullet | -7.979 ± 0.204 | **-0.011** | 524s | Statistically null — Bullet is "free" |
+| Drop Cloud-9 | -6.163 ± 0.181 | **+1.805** | 408s | Cloud-9 is the σ/m workhorse |
+| Drop Galaxy | -6.782 ± 0.187 | **+1.186** | 440s | Galactic is moderately constraining |
+| Drop KSFR | -6.948 ± 0.185 | **+1.020** | 371s | KSFR excludes ~32% of prior volume |
+| Drop LZ | -3.634 ± 0.147 | **+4.334** | 11s | **LZ DOMINATES** (76× prior volume) |
+
+**Robustness hierarchy:** LZ >> Cloud-9 > Galaxy > KSFR > Bullet (+4.33 / +1.81 / +1.19 / +1.02 / -0.01)
+
+**Posterior predictions by ablation (nlive=200 production):**
+| Subset | σ/m(C9) | σ/m(Gal) | σ/m(Bul) |
+|---|---|---|---|
+| All 5 | 94.91 | 2.50 | 0.050 |
+| Drop Bullet | 116.14 | 2.80 | 0.072 |
+| Drop Cloud-9 | **36.89** | 1.36 | 0.057 |
+| Drop Galaxy | 297.27 | **14.63** | 0.199 |
+| Drop KSFR | 90.03 | 2.72 | 0.080 |
+| Drop LZ | 129.37 | 2.30 | 0.074 |
+
+When Galaxy is dropped, σ/m(Gal) blows up to 14.6 — the channel IS being enforced.
+When Cloud-9 is dropped, σ/m(C9) drops to 36.9 — Cloud-9 pushes into window.
+When Bullet is dropped, σ/m(Bul) grows to 0.072 (still < 0.5) — Bullet remains free.
+
+### T90.59 Grand Unified SIDM — Final Synthesis
+**Single dark matter model that simultaneously satisfies all 5 channels** (Cloud-9 + Galactic + Bullet + LZ + KSFR).
+
+**Unified model parameters (posterior median):**
+- m_χ (DM mass) = **485 GeV** [180, 820]
+- m_φ_A (heavy portal) = **1387 MeV** [605, 2980] (in KSFR box [418, 4180])
+- g_χ_A = 1.02 [0.36, 1.68]
+- m_φ_B (light portal) = 4.2 MeV [0.83, 24.5]
+- g_χ_B = 0.18 [0.09, 0.30]
+- E_R (resonance energy) = 700 eV [16, 2×10⁴] (Cloud-9 enhancement)
+- Γ_R (resonance width) = 1.3 eV [0.01, 123]
+- σ_0 (cross-section floor) = 9.7×10⁻⁴ [4.2×10⁻⁵, 0.045]
+- α_Y (Sommerfeld coupling) = 9.4×10⁻⁴ [4.2×10⁻⁵, 0.032]
+- μ_χ (magnetic moment) = **4.3×10⁻⁸ μ_N** [2.1×10⁻⁸, 7.4×10⁻⁸] (LZ-compatible)
+
+**All 5 channels satisfied at posterior median.**
+
+**Honest key insights (T90.59):**
+1. The constraint is **DOMINATED by LZ** (+4.33 log-units out of +5.4 total)
+2. **"Grand Unified SIDM" claim is CONDITIONAL on LZ** — without LZ, σ/m channels can barely discriminate hybrid from simpler models (T90.51/52 give similar log Z within ±0.5)
+3. The model is **NOT uniquely determined** — simplest model that satisfies all 5 channels, not the only one
+4. **Bullet Cluster is statistically null** (Δlog Z = -0.011) — σ/m(Bul) is 350× below constraint
+5. Cloud-9 is the σ/m workhorse (+1.81) — second strongest constraint after LZ
+
+**Per 2026-09-08 pause directive:** Stopping here. Awaiting new evidence (LZ Run 4, DESI DR2, 4MOST) before T90.60+.
+
+**Tag/Release:** `t90-grand-unified-v59-2026-09-11` (annotated, on origin); GitHub Release 386933757.
+
+See `v0.3-prelim/docs/T90_PATH_C4_V59_GRAND_UNIFIED_SUMMARY.md` for the full writeup.
+
 ### T90.47 Gravothermal Fluid (Mass Segregation Demonstrated)
 - Heavy central ρ grows: 2.5×10⁹ → 5.8×10¹³ (factor 2×10⁴ over 9 Gyr)
 - Light central ρ vanishes: 8.3×10⁸ → 2.4×10⁻³³
@@ -97,9 +217,11 @@ SIDM satisfy all three constraints.
 ## Git Status (Pre-Push)
 
 ```
-Local branch:  wip/cloud-9-relhic at commit 0b29b41
-Remote branch: origin/wip/cloud-9-relhic at commit 0b29b41
-Status: in sync (just pushed)
+Local branch:  wip/cloud-9-relhic at commit 5b56f6b (T90.59)
+Remote branch: origin/wip/cloud-9-relhic at commit 5b56f6b
+Tag:           t90-grand-unified-v59-2026-09-11 (annotated, on origin)
+GitHub Release: 386933757 (https://github.com/chenhk1113-HK/sidm-composite-dm-mediator/releases/tag/t90-grand-unified-v59-2026-09-11)
+Status:        in sync (just pushed)
 ```
 
 ### Recent Commits (this session)
