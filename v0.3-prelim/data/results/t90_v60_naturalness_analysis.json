@@ -1,0 +1,323 @@
+{
+  "t90_57_naturalness": {
+    "framework": "T90.57 hybrid (KSFR-on, nlive=500)",
+    "log_Z": -7.912246087422036,
+    "log_Z_err": 0.13429657997824326,
+    "n_samples": 4959,
+    "naturalness_results": [
+      {
+        "parameter": "log_m_chi_GeV",
+        "prior_range_log10": [
+          0.5,
+          3.0
+        ],
+        "posterior_16_50_84_log": [
+          2.209895969360725,
+          2.6466956340391024,
+          2.895283181896342
+        ],
+        "posterior_16_50_84_linear": [
+          162.14216564678833,
+          443.29785925620797,
+          785.747814795522
+        ],
+        "naturalness_N": 3.6475731590485196,
+        "fine_tuning_level": "severe"
+      },
+      {
+        "parameter": "log_m_phi_A_MeV",
+        "prior_range_log10": [
+          -0.5,
+          2.0
+        ],
+        "posterior_16_50_84_log": [
+          2.7830678356098892,
+          3.1420027815972302,
+          3.4753027242901475
+        ],
+        "posterior_16_50_84_linear": [
+          606.8311075450564,
+          1386.7647108832573,
+          2987.4643006408646
+        ],
+        "naturalness_N": 3.6114908983657776,
+        "fine_tuning_level": "severe"
+      },
+      {
+        "parameter": "g_chi_A",
+        "prior_range_log10": [
+          0.0,
+          2.0
+        ],
+        "posterior_16_50_84_log": [
+          0.35511777982670034,
+          1.0157703550675241,
+          1.6822636684020882
+        ],
+        "posterior_16_50_84_linear": [
+          2.2652585580538034,
+          10.369799396803112,
+          48.11313637565321
+        ],
+        "naturalness_N": 1.5069933284779122,
+        "fine_tuning_level": "moderate"
+      },
+      {
+        "parameter": "log_m_phi_B_MeV",
+        "prior_range_log10": [
+          -0.5,
+          2.0
+        ],
+        "posterior_16_50_84_log": [
+          -0.1461039434483662,
+          0.6204298491120812,
+          1.299074480002057
+        ],
+        "posterior_16_50_84_linear": [
+          0.7143253399629238,
+          4.172821901014469,
+          19.9101476185758
+        ],
+        "naturalness_N": 1.7298902055506382,
+        "fine_tuning_level": "moderate"
+      },
+      {
+        "parameter": "g_chi_B",
+        "prior_range_log10": [
+          0.0,
+          2.0
+        ],
+        "posterior_16_50_84_log": [
+          0.09244550664938414,
+          0.18041905379115644,
+          0.301495078356834
+        ],
+        "posterior_16_50_84_linear": [
+          1.2372159398118385,
+          1.5150223991228497,
+          2.002142932171319
+        ],
+        "naturalness_N": 9.567108813783456,
+        "fine_tuning_level": "extreme"
+      },
+      {
+        "parameter": "log_E_R_eV",
+        "prior_range_log10": [
+          0.5,
+          5.0
+        ],
+        "posterior_16_50_84_log": [
+          1.2294000751503091,
+          2.6993812798561923,
+          4.2646889868579025
+        ],
+        "posterior_16_50_84_linear": [
+          16.95899355567616,
+          500.4737227124952,
+          18394.54233544473
+        ],
+        "naturalness_N": 1.4825606823267408,
+        "fine_tuning_level": "mild"
+      },
+      {
+        "parameter": "log_Gamma_R_eV",
+        "prior_range_log10": [
+          -0.5,
+          3.0
+        ],
+        "posterior_16_50_84_log": [
+          -1.99792409392316,
+          0.11569581157073941,
+          2.2037751682776654
+        ],
+        "posterior_16_50_84_linear": [
+          0.010047913925736025,
+          1.3052563405754551,
+          159.87301610546268
+        ],
+        "naturalness_N": 0.8329963144879438,
+        "fine_tuning_level": "mild"
+      },
+      {
+        "parameter": "log_sigma_0",
+        "prior_range_log10": [
+          -9.5,
+          -4.5
+        ],
+        "posterior_16_50_84_log": [
+          -4.357335133660104,
+          -2.9944221647357288,
+          -1.2797950392180697
+        ],
+        "posterior_16_50_84_linear": [
+          4.392025635379581e-05,
+          0.001012926271543168,
+          0.05250551961478178
+        ],
+        "naturalness_N": 1.6246742029551078,
+        "fine_tuning_level": "moderate"
+      },
+      {
+        "parameter": "log_alpha_Y",
+        "prior_range_log10": [
+          -9.5,
+          -4.5
+        ],
+        "posterior_16_50_84_log": [
+          -4.376669784614682,
+          -3.1252021688579257,
+          -1.495459569614059
+        ],
+        "posterior_16_50_84_linear": [
+          4.20078268693202e-05,
+          0.0007495452065688945,
+          0.03195511835231276
+        ],
+        "naturalness_N": 1.7353818801447358,
+        "fine_tuning_level": "moderate"
+      },
+      {
+        "parameter": "log_mu_x",
+        "prior_range_log10": [
+          -15.0,
+          -4.0
+        ],
+        "posterior_16_50_84_log": [
+          -7.684619642710912,
+          -7.370931424294639,
+          -7.126917627705089
+        ],
+        "posterior_16_50_84_linear": [
+          2.0671898184673325e-08,
+          4.256656210236679e-08,
+          7.465903501899793e-08
+        ],
+        "naturalness_N": 19.723794614378725,
+        "fine_tuning_level": "extreme"
+      }
+    ],
+    "method": "coarse proxy: log10(prior_width) / log10(posterior_p84/p16). Proportional to Barbieri-Giudice within O(1) for log-flat priors. Cannot distinguish \"well-measured\" from \"fine-tuned\" without raw chains."
+  },
+  "t41_v08_naturalness": {
+    "framework": "T41 v0.8 (with Euclid, nlive=2000)",
+    "log_Z": -164.8684904202744,
+    "n_parameters": 6,
+    "naturalness_results": [
+      {
+        "parameter": "log_m_phi_MeV",
+        "prior_range_log10": [
+          -1.0,
+          4.0
+        ],
+        "posterior_16_50_84_log": [
+          2.673803864213575,
+          2.776952929030217,
+          2.880422756655986
+        ],
+        "posterior_16_50_84_linear": [
+          471.84989659913776,
+          598.3467397861803,
+          759.3163591259347
+        ],
+        "naturalness_N": 24.199142396398226,
+        "fine_tuning_level": "extreme"
+      },
+      {
+        "parameter": "log_m_chi_GeV",
+        "prior_range_log10": [
+          0.5,
+          3.0
+        ],
+        "posterior_16_50_84_log": [
+          2.5286928103582933,
+          2.7014174554605552,
+          2.886402412245892
+        ],
+        "posterior_16_50_84_linear": [
+          337.82579725715595,
+          502.8256867880662,
+          769.8434379370539
+        ],
+        "naturalness_N": 6.988909402509028,
+        "fine_tuning_level": "extreme"
+      },
+      {
+        "parameter": "g_chi",
+        "prior_range_log10": [
+          0.01,
+          2.0
+        ],
+        "posterior_16_50_84_log": [
+          1.2544933637554214,
+          1.5492080154072327,
+          1.8487487415463328
+        ],
+        "posterior_16_50_84_linear": [
+          17.96773624332304,
+          35.41669369268082,
+          70.5909036685192
+        ],
+        "naturalness_N": 3.348728634812929,
+        "fine_tuning_level": "severe"
+      },
+      {
+        "parameter": "log_epsilon",
+        "prior_range_log10": [
+          -60.0,
+          -1.0
+        ],
+        "posterior_16_50_84_log": [
+          -52.59722644180649,
+          -36.97184420102898,
+          -20.94950341629647
+        ],
+        "posterior_16_50_84_linear": [
+          2.5279795603530523e-53,
+          1.066978820977639e-37,
+          1.1233021333930317e-21
+        ],
+        "naturalness_N": 1.8642731406756294,
+        "fine_tuning_level": "moderate"
+      },
+      {
+        "parameter": "log_alpha",
+        "prior_range_log10": [
+          -30.0,
+          -1.0
+        ],
+        "posterior_16_50_84_log": [
+          -25.301148024097834,
+          -15.470518074552377,
+          -5.694399339401598
+        ],
+        "posterior_16_50_84_linear": [
+          4.998641332069604e-26,
+          3.384401863035795e-16,
+          2.0211598413123783e-06
+        ],
+        "naturalness_N": 1.479082558070198,
+        "fine_tuning_level": "mild"
+      },
+      {
+        "parameter": "log_xi",
+        "prior_range_log10": [
+          -1.0,
+          0.7
+        ],
+        "posterior_16_50_84_log": [
+          -0.9422390176848519,
+          -0.7925321889523469,
+          -0.5143264769124206
+        ],
+        "posterior_16_50_84_linear": [
+          0.11422495149714074,
+          0.1612381516735128,
+          0.30596624955927426
+        ],
+        "naturalness_N": 3.9727744293992995,
+        "fine_tuning_level": "severe"
+      }
+    ],
+    "method": "coarse proxy as above"
+  }
+}
