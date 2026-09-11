@@ -1,0 +1,668 @@
+{
+  "summary": {
+    "total_functions": 50,
+    "by_category": {
+      "power_law": 20,
+      "parametric": 12,
+      "single_sigma": 9,
+      "theta_wrapper": 9
+    },
+    "by_status": {
+      "usable": 47,
+      "silent": 2,
+      "stub": 1
+    },
+    "canonical_3_channels": [
+      "loglike_bullet",
+      "loglike_cloud9",
+      "loglike_galaxy"
+    ],
+    "lz_candidates": [
+      "loglike_lz_magnetic_moment",
+      "loglike_lz_magnetic_moment_binned",
+      "loglike_5channel_with_real_lz",
+      "loglike_lz_real",
+      "loglike_lz_real_full"
+    ],
+    "ksfr_candidates": [
+      "loglike_ksfr_pcac_validity"
+    ],
+    "note": "T95 streams deliberately excluded: they provide sigma/m predictions under a master-Yukawa parametric form, NOT published observational constraints. Cannot be used as a Bayesian channel until external sigma/m observations are available (Gaia DR4 Dec 2026). Per user directive 2026-09-11 'drop t95, focus on building unified t90 first'."
+  },
+  "channels": [
+    {
+      "module": "channels_v03",
+      "function": "loglike_bullet_v03",
+      "required_params": [
+        "sigma_m_0",
+        "a"
+      ],
+      "default_params": [],
+      "docstring_first_line": "",
+      "category": "power_law",
+      "status": "usable"
+    },
+    {
+      "module": "channels_v03",
+      "function": "loglike_bullet_v03_sensitivity_0p2",
+      "required_params": [
+        "sigma_m_0",
+        "a"
+      ],
+      "default_params": [],
+      "docstring_first_line": "Sensitivity variant: 0.2 cm^2/g peak (was 0.5 in the default form).",
+      "category": "power_law",
+      "status": "usable"
+    },
+    {
+      "module": "channels_v03",
+      "function": "loglike_dsph_v03",
+      "required_params": [
+        "sigma_m_0",
+        "a"
+      ],
+      "default_params": [],
+      "docstring_first_line": "Channel 2: MW dSph upper-limit constraint (Horigome+ 2025).",
+      "category": "power_law",
+      "status": "usable"
+    },
+    {
+      "module": "channels_v03",
+      "function": "loglike_joint_v03",
+      "required_params": [
+        "sigma_m_0",
+        "a"
+      ],
+      "default_params": [
+        "data_dir",
+        "include_sparc",
+        "sparc_subset"
+      ],
+      "docstring_first_line": "Joint log L from all channels.",
+      "category": "power_law",
+      "status": "usable"
+    },
+    {
+      "module": "channels_v03",
+      "function": "loglike_ufd_v03",
+      "required_params": [
+        "sigma_m_0",
+        "a"
+      ],
+      "default_params": [],
+      "docstring_first_line": "",
+      "category": "power_law",
+      "status": "usable"
+    },
+    {
+      "module": "channels_extended",
+      "function": "loglike_cluster_upper",
+      "required_params": [
+        "sigma_m_0",
+        "a"
+      ],
+      "default_params": [],
+      "docstring_first_line": "Channel 8: galaxy cluster UPPER LIMIT (O'Donnell+ 2026 PRD).",
+      "category": "power_law",
+      "status": "usable"
+    },
+    {
+      "module": "channels_extended",
+      "function": "loglike_cmb_distortion",
+      "required_params": [
+        "m_chi",
+        "m_phi",
+        "epsilon"
+      ],
+      "default_params": [],
+      "docstring_first_line": "Channel 16: CMB spectral distortion (Planck 2017 \u03bc/y Gaussian penalty).",
+      "category": "parametric",
+      "status": "usable"
+    },
+    {
+      "module": "channels_extended",
+      "function": "loglike_competitor_dd_watch",
+      "required_params": [
+        "sigma_m"
+      ],
+      "default_params": [
+        "m_chi_GeV"
+      ],
+      "docstring_first_line": "Channel 19 \u2014 XENONnT + PandaX-4T direct-detection competitor watch.",
+      "category": "single_sigma",
+      "status": "usable"
+    },
+    {
+      "module": "channels_extended",
+      "function": "loglike_cosmic_web_radio",
+      "required_params": [
+        "sigma_m_0",
+        "a",
+        "epsilon"
+      ],
+      "default_params": [],
+      "docstring_first_line": "Channel 12: Cosmic-web radio synchrotron UPPER LIMIT (Pinetti 2025-26).",
+      "category": "power_law",
+      "status": "usable"
+    },
+    {
+      "module": "channels_extended",
+      "function": "loglike_dampe_cre",
+      "required_params": [
+        "m_chi_GeV",
+        "sigma_v_cm3_per_s"
+      ],
+      "default_params": [
+        "m_aprime_MeV",
+        "include_in_fit"
+      ],
+      "docstring_first_line": "Channel 17 \u2014 DAMPE cosmic-ray electron+positron spectrum likelihood.",
+      "category": "parametric",
+      "status": "usable"
+    },
+    {
+      "module": "channels_extended",
+      "function": "loglike_delta_n_eff_goldstein_hill_2026",
+      "required_params": [
+        "m_chi",
+        "m_ap",
+        "epsilon"
+      ],
+      "default_params": [
+        "include_in_fit"
+      ],
+      "docstring_first_line": "Channel 25 (T89, 2026-09-06): Goldstein & Hill 2026 \u0394N_eff<0.107 documented null.",
+      "category": "parametric",
+      "status": "silent"
+    },
+    {
+      "module": "channels_extended",
+      "function": "loglike_direct_detection_exclusion",
+      "required_params": [
+        "sigma_m"
+      ],
+      "default_params": [
+        "m_chi_GeV"
+      ],
+      "docstring_first_line": "Channel 5 \u2014 penalizes SIDM candidates that are LZ-excluded.",
+      "category": "single_sigma",
+      "status": "usable"
+    },
+    {
+      "module": "channels_extended",
+      "function": "loglike_dm_free_udg",
+      "required_params": [
+        "sigma_m_0",
+        "a"
+      ],
+      "default_params": [],
+      "docstring_first_line": "Channel 11: Dark-matter-free UDG existence constraint (van Dokkum+ 2018-2026).",
+      "category": "power_law",
+      "status": "usable"
+    },
+    {
+      "module": "channels_extended",
+      "function": "loglike_dm_free_udg_placeholder",
+      "required_params": [
+        "sigma_m"
+      ],
+      "default_params": [],
+      "docstring_first_line": "Backward-compatible alias. New code should use loglike_dm_free_udg().",
+      "category": "single_sigma",
+      "status": "usable"
+    },
+    {
+      "module": "channels_extended",
+      "function": "loglike_draco",
+      "required_params": [
+        "sigma_m_0",
+        "a"
+      ],
+      "default_params": [],
+      "docstring_first_line": "Channel 9: Draco dSph UPPER LIMIT (Read+ 2018).",
+      "category": "power_law",
+      "status": "usable"
+    },
+    {
+      "module": "channels_extended",
+      "function": "loglike_erosita_erass1",
+      "required_params": [
+        "sigma_m_0",
+        "a"
+      ],
+      "default_params": [
+        "include_in_fit"
+      ],
+      "docstring_first_line": "Log-likelihood of the eROSITA eRASS1 cluster density profile",
+      "category": "power_law",
+      "status": "usable"
+    },
+    {
+      "module": "channels_extended",
+      "function": "loglike_euclid_q1_lensing",
+      "required_params": [
+        "sigma_m_0",
+        "a"
+      ],
+      "default_params": [
+        "include_in_fit"
+      ],
+      "docstring_first_line": "T41-compatible wrapper for Euclid Q1 strong-lensing cluster catalog (Channel 23).",
+      "category": "power_law",
+      "status": "usable"
+    },
+    {
+      "module": "channels_extended",
+      "function": "loglike_euclid_q1_subhalo_forecast",
+      "required_params": [
+        "sigma_m_0",
+        "a"
+      ],
+      "default_params": [
+        "include_in_fit"
+      ],
+      "docstring_first_line": "T41-compatible wrapper for Euclid Q1 subhalo dN/dM forecast (Channel 24).",
+      "category": "power_law",
+      "status": "usable"
+    },
+    {
+      "module": "channels_extended",
+      "function": "loglike_lens_subhalo",
+      "required_params": [
+        "sigma_m_0",
+        "a"
+      ],
+      "default_params": [],
+      "docstring_first_line": "Channel 6: gravitational-lensing substructure (PRL 2026).",
+      "category": "power_law",
+      "status": "usable"
+    },
+    {
+      "module": "channels_extended",
+      "function": "loglike_lens_subhalo_placeholder",
+      "required_params": [
+        "sigma_m"
+      ],
+      "default_params": [],
+      "docstring_first_line": "Backward-compatible alias. New code should use loglike_lens_subhalo().",
+      "category": "single_sigma",
+      "status": "usable"
+    },
+    {
+      "module": "channels_extended",
+      "function": "loglike_lss_assembly_bias",
+      "required_params": [
+        "sigma_over_m_cm2_per_g"
+      ],
+      "default_params": [
+        "log_M_h_Msun",
+        "rho_abundance",
+        "include_in_fit"
+      ],
+      "docstring_first_line": "Log-likelihood of the Zhang+2025 dwarf-assembly-bias observation (Channel 18).",
+      "category": "single_sigma",
+      "status": "usable"
+    },
+    {
+      "module": "channels_extended",
+      "function": "loglike_lz_magnetic_moment",
+      "required_params": [
+        "m_chi_GeV",
+        "mu_x"
+      ],
+      "default_params": [
+        "include_in_fit"
+      ],
+      "docstring_first_line": "Channel 26 (T90, wip/tier3 branch): LZ magnetic-moment EFT Ls\u2081\u2080.",
+      "category": "parametric",
+      "status": "usable"
+    },
+    {
+      "module": "channels_extended",
+      "function": "loglike_lz_magnetic_moment_binned",
+      "required_params": [
+        "m_chi_GeV",
+        "mu_x"
+      ],
+      "default_params": [
+        "include_in_fit"
+      ],
+      "docstring_first_line": "Channel 26b (T90.1): energy-binned variant of Channel 26.",
+      "category": "parametric",
+      "status": "usable"
+    },
+    {
+      "module": "channels_extended",
+      "function": "loglike_mediator_lifetime",
+      "required_params": [
+        "m_chi",
+        "m_ap",
+        "epsilon"
+      ],
+      "default_params": [],
+      "docstring_first_line": "Channel 14 (R13 H2): Mediator lifetime + BBN consistency check.",
+      "category": "parametric",
+      "status": "usable"
+    },
+    {
+      "module": "channels_extended",
+      "function": "loglike_mw_satellite",
+      "required_params": [
+        "sigma_m_0",
+        "a"
+      ],
+      "default_params": [],
+      "docstring_first_line": "Channel 7: MW satellite galaxies UPPER LIMIT (Hayashi+ 2025).",
+      "category": "power_law",
+      "status": "usable"
+    },
+    {
+      "module": "channels_extended",
+      "function": "loglike_phi_to_gamgam_xrism",
+      "required_params": [
+        "theta"
+      ],
+      "default_params": [
+        "include_in_fit"
+      ],
+      "docstring_first_line": "T41-compatible wrapper for the XRISM phi -> gamma gamma decay null-channel.",
+      "category": "theta_wrapper",
+      "status": "silent"
+    },
+    {
+      "module": "channels_extended",
+      "function": "loglike_radio_relic",
+      "required_params": [
+        "sigma_m_0",
+        "a"
+      ],
+      "default_params": [],
+      "docstring_first_line": "Channel 10: 11-cluster double radio relic UPPER LIMIT (Lee+ 2026).",
+      "category": "power_law",
+      "status": "usable"
+    },
+    {
+      "module": "channels_extended",
+      "function": "loglike_sidm_mass_lower",
+      "required_params": [
+        "sigma_m_0",
+        "a",
+        "m_chi"
+      ],
+      "default_params": [],
+      "docstring_first_line": "Channel 13: SIDM quantum-statistical LOWER mass bound (defensive).",
+      "category": "power_law",
+      "status": "usable"
+    },
+    {
+      "module": "channels_extended",
+      "function": "loglike_xrism_perseus_icm",
+      "required_params": [
+        "sigma_over_m_cm2_per_g"
+      ],
+      "default_params": [
+        "include_in_fit"
+      ],
+      "docstring_first_line": "Log-likelihood of the XRISM Perseus non-thermal pressure profile (Channel 20).",
+      "category": "single_sigma",
+      "status": "usable"
+    },
+    {
+      "module": "channels_vdep_t90v41",
+      "function": "loglike_bullet_vdep",
+      "required_params": [
+        "m_phi_MeV",
+        "m_chi_GeV",
+        "g_chi"
+      ],
+      "default_params": [],
+      "docstring_first_line": "Channel 4 (Bullet) vdep: Cha+ 2025 at v_CLUSTER = 1500 km/s.",
+      "category": "parametric",
+      "status": "usable"
+    },
+    {
+      "module": "channels_vdep_t90v41",
+      "function": "loglike_bullet_vdep_sensitivity_0p2",
+      "required_params": [
+        "m_phi_MeV",
+        "m_chi_GeV",
+        "g_chi"
+      ],
+      "default_params": [],
+      "docstring_first_line": "Bullet vdep sensitivity variant: 0.2 cm^2/g peak.",
+      "category": "parametric",
+      "status": "usable"
+    },
+    {
+      "module": "channels_vdep_t90v41",
+      "function": "loglike_dsph_vdep",
+      "required_params": [
+        "m_phi_MeV",
+        "m_chi_GeV",
+        "g_chi"
+      ],
+      "default_params": [],
+      "docstring_first_line": "Channel 2 (dSph) vdep: Horigome+ 2025 upper-limit at v_DSPH = 30 km/s.",
+      "category": "parametric",
+      "status": "usable"
+    },
+    {
+      "module": "channels_vdep_t90v41",
+      "function": "loglike_ufd_vdep",
+      "required_params": [
+        "m_phi_MeV",
+        "m_chi_GeV",
+        "g_chi"
+      ],
+      "default_params": [],
+      "docstring_first_line": "Channel 3 (UFD) vdep: Sanchez-Almeida+ 2025 at v_UFD = 10 km/s.",
+      "category": "parametric",
+      "status": "usable"
+    },
+    {
+      "module": "sidm_velocity_dependent",
+      "function": "loglike_bullet_cluster_published",
+      "required_params": [
+        "sigma_m_0",
+        "a"
+      ],
+      "default_params": [],
+      "docstring_first_line": "Approximate one-sided upper limit from Cha+ 2025 JWST Bullet Cluster.",
+      "category": "power_law",
+      "status": "usable"
+    },
+    {
+      "module": "sidm_velocity_dependent",
+      "function": "loglike_dsph_published",
+      "required_params": [
+        "sigma_m_0",
+        "a"
+      ],
+      "default_params": [],
+      "docstring_first_line": "Published upper-limit constraint from Horigome+ 2025.",
+      "category": "power_law",
+      "status": "usable"
+    },
+    {
+      "module": "sidm_velocity_dependent",
+      "function": "loglike_joint_4channel",
+      "required_params": [
+        "sigma_m_0",
+        "a"
+      ],
+      "default_params": [
+        "sparc_total_log_Z"
+      ],
+      "docstring_first_line": "Combined likelihood from channels 2-4 plus an optional SPARC prior.",
+      "category": "power_law",
+      "status": "usable"
+    },
+    {
+      "module": "sidm_velocity_dependent",
+      "function": "loglike_ufd_published",
+      "required_params": [
+        "sigma_m_0",
+        "a"
+      ],
+      "default_params": [],
+      "docstring_first_line": "Approximate likelihood from S\u00e1nchez-Almeida+ 2025 A&A.",
+      "category": "power_law",
+      "status": "usable"
+    },
+    {
+      "module": "t32_fermi_dwarf_channel",
+      "function": "loglike_5channel_with_fermi",
+      "required_params": [
+        "theta"
+      ],
+      "default_params": [],
+      "docstring_first_line": "5-channel joint fit with REAL Fermi dwarf + dSph + UFD + Bullet + SPARC.",
+      "category": "theta_wrapper",
+      "status": "usable"
+    },
+    {
+      "module": "t32_fermi_dwarf_channel",
+      "function": "loglike_5channel_without_fermi",
+      "required_params": [
+        "theta"
+      ],
+      "default_params": [],
+      "docstring_first_line": "5-channel joint fit WITHOUT Fermi (the previous behavior).",
+      "category": "theta_wrapper",
+      "status": "usable"
+    },
+    {
+      "module": "t32_fermi_dwarf_channel",
+      "function": "loglike_fermi_dwarf",
+      "required_params": [
+        "m_chi_GeV",
+        "sigma_v_cm3_per_s"
+      ],
+      "default_params": [],
+      "docstring_first_line": "LEGACY Gaussian-proxy Fermi dSph likelihood \u2014 DEPRECATED.",
+      "category": "parametric",
+      "status": "usable"
+    },
+    {
+      "module": "t32_fermi_dwarf_channel",
+      "function": "loglike_fermi_sidm",
+      "required_params": [
+        "theta"
+      ],
+      "default_params": [
+        "m_chi_GeV"
+      ],
+      "docstring_first_line": "Fermi dwarf likelihood for SIDM using the REAL McDaniel+ 2024 TS profiles.",
+      "category": "theta_wrapper",
+      "status": "usable"
+    },
+    {
+      "module": "t30_lz_real_posterior",
+      "function": "loglike_5channel_with_placeholder_lz",
+      "required_params": [
+        "theta"
+      ],
+      "default_params": [],
+      "docstring_first_line": "5-channel joint fit with PLACEHOLDER LZ (the previous behavior).",
+      "category": "theta_wrapper",
+      "status": "stub"
+    },
+    {
+      "module": "t30_lz_real_posterior",
+      "function": "loglike_5channel_with_real_lz",
+      "required_params": [
+        "theta"
+      ],
+      "default_params": [],
+      "docstring_first_line": "5-channel joint fit with REAL LZ + dSph + UFD + Bullet + SPARC.",
+      "category": "theta_wrapper",
+      "status": "usable"
+    },
+    {
+      "module": "t30_lz_real_posterior",
+      "function": "loglike_lz_real",
+      "required_params": [
+        "m_chi_GeV",
+        "sigma_DM_nucleon_cm2"
+      ],
+      "default_params": [],
+      "docstring_first_line": "Real LZ WS2024 likelihood using interpolated limit curve.",
+      "category": "parametric",
+      "status": "usable"
+    },
+    {
+      "module": "t30_lz_real_posterior",
+      "function": "loglike_lz_real_full",
+      "required_params": [
+        "theta"
+      ],
+      "default_params": [
+        "m_chi_GeV",
+        "epsilon"
+      ],
+      "docstring_first_line": "Full LZ likelihood with model coupling.",
+      "category": "theta_wrapper",
+      "status": "usable"
+    },
+    {
+      "module": "ksfr_pcac_validity",
+      "function": "loglike_ksfr_pcac_validity",
+      "required_params": [
+        "theta"
+      ],
+      "default_params": [
+        "N_dc",
+        "N_f",
+        "representation",
+        "m_q_GeV"
+      ],
+      "docstring_first_line": "Channel 15: KSFR/PCAC validity hard mask.",
+      "category": "theta_wrapper",
+      "status": "usable"
+    },
+    {
+      "module": "t90_v51_resonant_joint_fit",
+      "function": "loglike_bullet",
+      "required_params": [
+        "sigma_m_bul"
+      ],
+      "default_params": [],
+      "docstring_first_line": "Bullet Cluster log-likelihood: sigma/m(3000) < 0.5 cm^2/g (1-sided).",
+      "category": "single_sigma",
+      "status": "usable"
+    },
+    {
+      "module": "t90_v51_resonant_joint_fit",
+      "function": "loglike_cloud9",
+      "required_params": [
+        "sigma_m_c9"
+      ],
+      "default_params": [],
+      "docstring_first_line": "Cloud-9 (RELHIC) log-likelihood: sigma/m(28) in [30, 500] cm^2/g.",
+      "category": "single_sigma",
+      "status": "usable"
+    },
+    {
+      "module": "t90_v51_resonant_joint_fit",
+      "function": "loglike_galaxy",
+      "required_params": [
+        "sigma_m_gal"
+      ],
+      "default_params": [],
+      "docstring_first_line": "Galactic dSph/UFD log-likelihood: sigma/m(100) < 2 cm^2/g (1-sided).",
+      "category": "single_sigma",
+      "status": "usable"
+    },
+    {
+      "module": "t90_v51_resonant_joint_fit",
+      "function": "loglike_resonant_3ch",
+      "required_params": [
+        "theta"
+      ],
+      "default_params": [],
+      "docstring_first_line": "Joint log-likelihood for resonant SIDM at the 3 characteristic velocities.",
+      "category": "theta_wrapper",
+      "status": "usable"
+    }
+  ]
+}
