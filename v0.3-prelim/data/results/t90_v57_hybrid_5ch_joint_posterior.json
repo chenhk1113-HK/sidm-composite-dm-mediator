@@ -1,0 +1,79 @@
+{
+  "framework": "T90.57 hybrid 10D (multi-portal + resonance + Sommerfeld + LZ + KSFR/PCAC)",
+  "log_Z": -7.286336120916938,
+  "log_Z_err": 0.12607561237851397,
+  "wall_seconds": 1384.164316892624,
+  "nlive": 500,
+  "dlogz_target": 0.1,
+  "ndim": 10,
+  "n_samples": 4820,
+  "posterior_medians": {
+    "log_m_chi_GeV": {
+      "median": 2.6857632132408193,
+      "p16": 2.2593402806380203,
+      "p84": 2.9136856487924807
+    },
+    "log_m_phi_A_MeV": {
+      "median": 2.9877312447985664,
+      "p16": 2.301127034063939,
+      "p84": 3.640877928063174
+    },
+    "g_chi_A": {
+      "median": 0.7870827993229059,
+      "p16": 0.23604667263441187,
+      "p84": 1.596958973129346
+    },
+    "log_m_phi_B_MeV": {
+      "median": 0.6585640817072265,
+      "p16": -0.07852110094524904,
+      "p84": 1.3898749681433813
+    },
+    "g_chi_B": {
+      "median": 0.18641355445813448,
+      "p16": 0.09313715284832749,
+      "p84": 0.3176130344806516
+    },
+    "log_E_R_eV": {
+      "median": 2.834838900310726,
+      "p16": 1.2868430190720006,
+      "p84": 4.307458508620475
+    },
+    "log_Gamma_R_eV": {
+      "median": 0.10121606122144249,
+      "p16": -2.0087583409158363,
+      "p84": 2.086731514921116
+    },
+    "log_sigma_0": {
+      "median": -3.0073820011992494,
+      "p16": -4.378714950123678,
+      "p84": -1.352716575669135
+    },
+    "log_alpha_Y": {
+      "median": -3.031666987939371,
+      "p16": -4.409779214013613,
+      "p84": -1.2947077138282252
+    },
+    "log_mu_x": {
+      "median": -7.366136930473382,
+      "p16": -7.677075533191559,
+      "p84": -7.12782306409364
+    }
+  },
+  "posterior_median_predictions": {
+    "sigma_m_Cloud9_cm2_per_g": 74.35556153852129,
+    "sigma_m_Galaxy_cm2_per_g": 1.2460676451352546,
+    "sigma_m_Bullet_cm2_per_g": 0.0013553622977554869,
+    "mu_x_at_median": 4.303908894029806e-08,
+    "m_phi_A_MeV_at_median": 972.1454431585498,
+    "in_KSFR_box": true
+  },
+  "channel_satisfaction_at_median": {
+    "Cloud9": true,
+    "Galaxy": true,
+    "Bullet": true,
+    "n_satisfied_3ch": 3
+  },
+  "channel_likelihood_match": "T90.56 (C9 + Gal + Bul + LZ) + KSFR/PCAC (Channel 15)",
+  "wimpy_available": true,
+  "ksfr_enabled": false
+}
