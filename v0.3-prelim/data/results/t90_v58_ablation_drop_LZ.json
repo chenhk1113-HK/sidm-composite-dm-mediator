@@ -6,14 +6,14 @@
     "Galaxy",
     "KSFR"
   ],
-  "log_Z": -3.6896211365533627,
-  "log_Z_err": 0.3749142516201721,
-  "wall_seconds": 1.733250617980957,
-  "n_samples": 244,
+  "log_Z": -3.6343991604499197,
+  "log_Z_err": 0.14668075439888698,
+  "wall_seconds": 11.300131797790527,
+  "n_samples": 1255,
   "posterior_median_sigma_m": {
-    "Cloud9_cm2_per_g": 99.10524920808358,
-    "Galaxy_cm2_per_g": 2.7101908715537832,
-    "Bullet_cm2_per_g": 0.06362379008962255
+    "Cloud9_cm2_per_g": 129.3659172043836,
+    "Galaxy_cm2_per_g": 2.2967502430025726,
+    "Bullet_cm2_per_g": 0.07361897968695541
   },
   "wimpy_available": true,
   "ksfr_enabled": true

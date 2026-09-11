@@ -6,14 +6,14 @@
     "KSFR",
     "LZ"
   ],
-  "log_Z": -6.604308244497501,
-  "log_Z_err": 0.4739798204836449,
-  "wall_seconds": 77.51875829696655,
-  "n_samples": 339,
+  "log_Z": -6.1627818192155654,
+  "log_Z_err": 0.18081211987786366,
+  "wall_seconds": 408.2775673866272,
+  "n_samples": 1566,
   "posterior_median_sigma_m": {
-    "Cloud9_cm2_per_g": 48.93475953276647,
-    "Galaxy_cm2_per_g": 1.2672371801143691,
-    "Bullet_cm2_per_g": 0.05900457621415869
+    "Cloud9_cm2_per_g": 36.89473603293119,
+    "Galaxy_cm2_per_g": 1.3644947772290226,
+    "Bullet_cm2_per_g": 0.0566730749694128
   },
   "wimpy_available": true,
   "ksfr_enabled": true

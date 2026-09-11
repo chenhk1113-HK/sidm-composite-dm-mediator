@@ -6,14 +6,14 @@
     "Galaxy",
     "LZ"
   ],
-  "log_Z": -6.560974283978678,
-  "log_Z_err": 0.46103981243976766,
-  "wall_seconds": 59.17083740234375,
-  "n_samples": 373,
+  "log_Z": -6.948373436856627,
+  "log_Z_err": 0.18493851781620066,
+  "wall_seconds": 370.8135280609131,
+  "n_samples": 1862,
   "posterior_median_sigma_m": {
-    "Cloud9_cm2_per_g": 88.31308570229965,
-    "Galaxy_cm2_per_g": 2.220158461759804,
-    "Bullet_cm2_per_g": 0.04987268690569313
+    "Cloud9_cm2_per_g": 90.03416168908807,
+    "Galaxy_cm2_per_g": 2.7158994900921645,
+    "Bullet_cm2_per_g": 0.08013432738064513
   },
   "wimpy_available": true,
   "ksfr_enabled": false
