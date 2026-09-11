@@ -61,6 +61,82 @@ appropriate to defer until either:
 
 ---
 
+## Options A and B (from 2026-09-11 user prompt)
+
+Per user "record option a and b as to do items":
+
+### Option A — Fix downstream v0.8 docs
+
+**Title:** Propagate T90.61 v2 findings to standing v0.8 docs
+
+**Source:** 2026-09-11 user prompt, after Option D + C completed.
+
+**What needs to happen:**
+- Update `T86_PLAUSIBILITY_AUDIT.md` to incorporate T90.61 v2 cross-
+  reference (currently partially done — see T86 lines 167-219)
+- Update `T87_FORWARD_PREDICTION.md` forward prediction verdict
+  (margin is ~59 orders, not 70)
+- Update `README.md` project summary (~3 orders below LZ → ~59 orders)
+- Update `CURRENT.md` version-of-record
+- Verify internal consistency across all four
+
+**Estimated time:** 30-60 minutes for doc updates + verification.
+
+**Affects:** Standing v0.8 docs (not just wip branch). The T86 audit
+patch is partially done in `55761d7`; the rest is deferred.
+
+**Priority:** Medium. The T86 audit patch (T90.61 v2 cross-reference)
+is in place but T87, README, CURRENT.md still need propagation.
+
+**Why deferred:**
+1. **Touches standing v0.8 docs** — per AGENTS.md rule 5, requires
+   explicit user approval before state-changing actions on standing
+   docs
+2. **Multiple files** — risk of one drift while fixing another
+3. **Low urgency** — T90 wip branch is correct; v0.8 just has the
+   same approximate answer (T86 was approximately right)
+
+**Status as of 2026-09-11:** Recorded, NOT started (partial T86
+patch in place from `55761d7`).
+
+---
+
+### Option B — Continue T90 series (T90.62+)
+
+**Title:** Ship additional T90 increments
+
+**Source:** 2026-09-11 user prompt, after Option D + C completed.
+
+**What needs to happen:**
+- T90.62 (item 8): Gaussian → real posterior chains. Estimated 1h-2d.
+- T90.63: MCMC convergence improvement (nlive=200 → nlive=1000).
+  Wall time 4-8 hours per production run.
+- T90.64: Posterior predictive checks. Mock-data validation.
+  Estimated 2-3 hours.
+- T90.65: Channel sensitivity sweep. Vary each channel's error bar
+  by 2×, measure fit robustness. Estimated 1-2 hours.
+
+**Estimated time:** Variable. Each T90.x is a fresh production run.
+
+**Affects:** T90 wip branch only (no standing-doc edits).
+
+**Priority:** Low. Per 2026-09-08 pause directive, T90 was explicitly
+exempted but each new T90.x is a fresh production run that extends
+scope.
+
+**Why deferred:**
+1. **Per pause directive** — "wait for new evidence and datasets"
+2. **Each T90.x is a fresh production run** — wall time on order
+   of 30-90 minutes per run
+3. **Low marginal value** — T90.58 ablation already established
+   the robustness hierarchy; T90.59 established the synthesis
+4. **Open questions remain unresolved** — what to do with the
+   fine-tuning penalty findings?
+
+**Status as of 2026-09-11:** Recorded, NOT started.
+
+---
+
 ## Earlier deferred items (from 2026-09-08 pause directive)
 
 These remain deferred per the standing pause. Listed for reference.
