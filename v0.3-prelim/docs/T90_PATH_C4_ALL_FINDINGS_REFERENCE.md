@@ -169,8 +169,17 @@ When Galaxy is dropped, σ/m(Gal) blows up to 14.6 — the channel IS being enfo
 When Cloud-9 is dropped, σ/m(C9) drops to 36.9 — Cloud-9 pushes into window.
 When Bullet is dropped, σ/m(Bul) grows to 0.072 (still < 0.5) — Bullet remains free.
 
-### T90.59 Grand Unified SIDM — Final Synthesis
+### T90.59 Multi-channel SIDM Synthesis — Final Report (post-review revision)
 **Single dark matter model that simultaneously satisfies all 5 channels** (Cloud-9 + Galactic + Bullet + LZ + KSFR).
+
+> **Post-review title change (2026-09-11).** Originally titled "Grand
+> Unified SIDM"; renamed to "Multi-channel SIDM Synthesis (with honest
+> LZ framing)" after external review surfaced that the original title
+> overclaimed and that the LZ channel reads as positive validation
+> when it is actually a fine-tuning penalty. See
+> `T90_PATH_C4_V59_BRANCH_CONTEXT.md` for the full cross-reference of
+> README/CURRENT.md/MATHEMATICS.md/T90 doc drift (different evolution
+> lines, not a T82 audit failure).
 
 **Unified model parameters (posterior median):**
 - m_χ (DM mass) = **485 GeV** [180, 820]

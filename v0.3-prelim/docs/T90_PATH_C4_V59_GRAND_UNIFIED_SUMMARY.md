@@ -1,9 +1,33 @@
-# T90.59 — Grand Unified SIDM: Final Report
+# T90.59 — Multi-channel SIDM Synthesis (with honest LZ framing)
 
 **Status:** ✅ Synthesis of T90.45 → T90.58 into a single defensible claim.
 **Date:** 2026-09-11
 **Branch:** `wip/cloud-9-relhic`
 **Trigger:** User: "proceed t90.59"
+
+> **External review note (2026-09-11, post-release).** Two reviewers
+> flagged that the original title "Grand Unified SIDM" overclaims and
+> that the LZ channel reads as "positive validation" when it is actually
+> a **fine-tuning penalty** — the model's predicted σ_DM-nucleon is ~46-71
+> orders of magnitude below LZ sensitivity, so a constraint the model
+> misses by 46+ orders provides essentially zero positive discriminating
+> power. The +4.33 Δlog Z from dropping LZ is the **prior-volume
+> fine-tuning cost** of forcing the kinetic mixing ε (v0.8 line) or
+> magnetic moment μ_χ (T90 line) to evade LZ, not positive support for
+> the model. The title and framing have been adjusted accordingly.
+
+> **Branch-line context (resolves doc drift surfaced in review).** This
+> writeup documents work on the `wip/cloud-9-relhic` T90 evolution line
+> (Cloud-9 dwarf galaxy σ/m fitting, two-portal+resonance hybrid, magnetic
+> moment sampled). The repo-root `README.md` and `CURRENT.md` document
+> the standing v0.4-prelim+T88E line (T41 joint fit, single-mediator
+> Yukawa, DM-nucleon σ_DM-nuc from Kahlhoefer formula). **The two
+> lines describe different parameterizations of different observables** —
+> v0.8 measures σ_DM-DM and constrains ε; T90 measures σ/m(v) at
+> multiple velocities and constrains μ_χ. The "doc drift" between
+> README and T90 is intentional (different evolution lines, different
+> claims), not a T82 audit failure. See `T90_PATH_C4_V59_BRANCH_CONTEXT.md`
+> for the full cross-reference table.
 
 ---
 
@@ -19,6 +43,18 @@ channels). The σ/m channels (Cloud-9, Galaxy, Bullet) collectively add
 σ/m models (T90.51 resonant, T90.52 multi-portal) also satisfy all five
 channels within Bayesian evidence noise.
 
+**Honest framing of the LZ constraint.** The +4.33 Δlog Z from dropping
+LZ is the prior-volume fine-tuning penalty on the magnetic moment μ_χ (T90
+parameterization) or kinetic mixing ε (v0.8 parameterization), not a
+positive validation of the model. The model's predicted σ_DM-nucleon is
+46-71 orders of magnitude below LZ sensitivity (see
+`T86_PLAUSIBILITY_AUDIT.md` lines 195-215), so the LZ constraint operates
+by **excluding parameter regions where μ_χ or ε would produce a
+detectable signal** rather than by **supporting** the model when it does.
+This is the correct reading: "the model survives LZ because the relevant
+direct-detection coupling is engineered to be unobservable," not "LZ
+confirms the model."
+
 **The unified model:**
 
 | Parameter | Median | Range (68% CI) | Role |
@@ -32,7 +68,7 @@ channels within Bayesian evidence noise.
 | Γ_R (resonance width) | 1.3 eV | [0.01, 123] | Broad resonance |
 | σ_0 (cross-section floor) | 9.7×10⁻⁴ | [4.2×10⁻⁵, 0.045] | Background |
 | α_Y (Sommerfeld coupling) | 9.4×10⁻⁴ | [4.2×10⁻⁵, 0.032] | Long-range force |
-| μ_χ (magnetic moment) | **4.3×10⁻⁸ μ_N** | [2.1×10⁻⁸, 7.4×10⁻⁸] | LZ-compatible |
+| μ_χ (magnetic moment) | **4.3×10⁻⁸ μ_N** | [2.1×10⁻⁸, 7.4×10⁻⁸] | LZ-fine-tuned (not validated) |
 
 **All 5 channels satisfied at posterior median.**
 
@@ -58,16 +94,22 @@ ablation (T90.58), we find:
 
 | Dropped channel | Δlog Z | Interpretation |
 |---|---|---|
-| **LZ** | **+4.33** | **Dominant. Without LZ, ~76× more models survive.** |
+| **LZ** | **+4.33** | **Dominant — but this is a fine-tuning penalty, not positive validation.** See honest framing above. |
 | Cloud-9 | +1.81 | Genuinely constraining — pushes model into resonance region |
 | Galaxy | +1.19 | Moderately constraining — enforces < 2 cm²/g on σ/m(100) |
 | KSFR | +1.02 | Mild constraint — restricts m_φ_A to validity box |
 | Bullet | -0.01 | **Statistically null** — σ/m(Bul) is 350× below the constraint |
 
-**The "Grand Unified SIDM" claim is conditional on LZ.** Without LZ,
+**The "Multi-channel SIDM" claim is conditional on LZ.** Without LZ,
 the σ/m channels can barely discriminate between this model and simpler
 alternatives (T90.51 resonant, T90.52 multi-portal, T90.55 hybrid-without-LZ
 all give similar log Z within ±0.5).
+
+**Honest re-read:** "Multi-channel" means the hybrid satisfies every
+constraint simultaneously *given the parameterization*. It does not
+mean the model is uniquely determined by the data, validated by LZ, or
+the only possible solution. See Section 6 (What this DOES and DOES NOT
+prove) and Section 8 (Honest caveats).
 
 ---
 
@@ -168,6 +210,23 @@ ELDERFIELD-style high-velocity model.
 
 **Why it matters (T90.58):** Δlog Z = **+4.33** when removed — **the
 dominant constraint**. Without LZ, ~76× more models survive.
+
+**⚠️ HONEST FRAMING (post-review).** The +4.33 Δlog Z is the
+**prior-volume fine-tuning penalty** on μ_χ (T90 parameterization), not
+a positive validation of the model. The model's predicted σ_DM-nucleon
+is ~46-71 orders of magnitude below LZ sensitivity (see
+`T86_PLAUSIBILITY_AUDIT.md` lines 195-215), so the LZ constraint operates
+by **excluding parameter regions where μ_χ would produce a detectable
+signal** rather than by **supporting** the model. The model's μ_χ =
+4.3×10⁻⁸ μ_N is **engineered to be unobservable** in the LZ channel.
+This is a fine-tuning cost, not a discovery.
+
+**Note on kinetic mixing ε.** In the T90 hybrid, ε is **not sampled** —
+it is pinned at log_ε = -50 (`t90_v57_hybrid_ksfr.py:16`: `log_epsilon =
+-50.0 # nuisance, way below LZ detection`). The LZ constraint operates
+through μ_χ, not ε. This is **different from the v0.8 line** (T41/T87)
+where ε ~ 10⁻³⁷ is sampled and constrained. Reviewers flagged ε ~ 10⁻³⁷
+as a serious fine-tuning concern — that critique applies to v0.8, not T90.
 
 **Path B implementation (T90.56):** The hybrid gets LZ signal through
 Portal A's kinetic mixing ε_A. Resonance has no LZ signal in current
@@ -526,3 +585,105 @@ spot; nlive=500 always hits the plateau hard.
 - T90.45 → T90.58 production JSONs in `v0.3-prelim/data/results/`
 - 38 writeups in `v0.3-prelim/docs/T90_PATH_C4_*.md`
 - 109 tests passing across the T90 series (66 baseline + 43 from T90.51-T90.58)
+
+---
+
+## 12. Post-review revisions (2026-09-11)
+
+Two external reviewers (Review 1, Review 2) flagged several issues in the
+original T90.59 writeup. This section documents what was changed in this
+revision and what was deferred for future work.
+
+### 12.1 What was changed in this revision
+
+1. **Title change**: "Grand Unified SIDM" → "Multi-channel SIDM Synthesis
+   (with honest LZ framing)". The original title overclaimed per both
+   reviewers.
+
+2. **TL;DR honest framing of LZ**: explicit statement that "+4.33 Δlog Z
+   from dropping LZ is the prior-volume fine-tuning penalty on μ_χ, not
+   positive validation of the model." The original TL;DR said "conditional
+   on LZ" which was too soft.
+
+3. **Section 3.4 (LZ) honest framing**: added paragraph explaining that
+   the LZ channel excludes parameter regions where μ_χ would produce a
+   detectable signal, rather than supporting the model. Also notes that
+   ε is pinned at log_ε = -50 in T90 (not sampled, not at 10⁻³⁷ as
+   reviewers suggested).
+
+4. **Section 1 honest re-read**: added paragraph clarifying that
+   "multi-channel" means the hybrid satisfies every constraint
+   simultaneously *given the parameterization*, not that it's uniquely
+   determined or validated by LZ.
+
+5. **New sibling doc**: `T90_PATH_C4_V59_BRANCH_CONTEXT.md` —
+   cross-references the README/CURRENT.md/MATHEMATICS.md/T90_PATH_C4_*
+   doc drift. Explains that the three descriptions are different
+   evolution lines (v0.4-prelim+T88E standing vs wip/cloud-9-relhic T90),
+   not a T82 audit failure.
+
+### 12.2 What was NOT changed (deferred for future work)
+
+6. **Resolve the T86 σ_DM-nuc 15-order discrepancy** (`T86_PLAUSIBILITY_AUDIT.md`
+   lines 195-215). This applies to the v0.8 line, not T90. T90 doesn't
+   compute σ_DM-nuc — it uses μ_χ instead. The discrepancy is in the
+   Kahlhoefer formula derivation. Reviewer 2 suggested picking one
+   variant and documenting the choice. **Requires user input** on which
+   Kahlhoefer reference to trust.
+
+7. **Quantify fine-tuning on μ_χ (T90) and ε (v0.8) with a naturalness
+   measure**. Reviewer 2 recommendation #6. Could implement a Barbieri-Giudice
+   or类似的 naturalness measure on the relevant couplings. **Deferred** —
+   requires new analysis, not just doc changes.
+
+8. **Replace Gaussian placeholder channels with raw posterior chains**
+   before any publication claim. Reviewer 2 recommendation #4. **Deferred**
+   — affects both lines, requires chain extraction from existing MCMC
+   outputs.
+
+9. **Add 1-line cross-reference notes to README.md, CURRENT.md, and
+   MATHEMATICS.md** pointing to T90.59 for the wip branch and
+   T90_PATH_C4_V59_BRANCH_CONTEXT.md for the cross-line explanation.
+   **Deferred** — touching the standing docs is a higher-blast-radius
+   change than touching the wip-branch docs. **Requires user approval**
+   before editing the standing README.
+
+### 12.3 Reviewer claims that were correct
+
+- Doc drift between README/T90/MATHEMATICS is real (Section 12.1 item 5
+  addresses this)
+- "Grand Unified" branding overclaims (title change addresses this)
+- LZ is a fine-tuning penalty, not positive validation (Section 12.1 items
+  2-4 address this)
+- R12 episode (3 bugs caught only by external review) is a legitimate
+  warning about internal test suite discriminating power
+- T90.59 should not be cited as a "validated constrained model" without
+  external peer review (project's own disclaimer still applies)
+
+### 12.4 Reviewer claims that were misattributed
+
+- **ε ~ 10⁻³⁷ fine-tuning critique** applies to the **v0.8 line** (T41/T87),
+  not T90.59. In T90.59, ε is **pinned at log_ε = -50**
+  (`t90_v57_hybrid_ksfr.py:16`) and the LZ constraint operates through
+  μ_χ instead. The fine-tuning cost is on μ_χ, not ε. The T90 model is
+  **a different parameterization** that handles LZ differently.
+
+- **v0.8 evidence log Z = −164.87** — both reviewers cited this as the
+  T90.59 headline number. It is the v0.8 (T41) number. T90.59's number
+  is log Z = -7.97 (different likelihoods, different dimensionality,
+  different observable). The two are not directly comparable.
+
+- **"Three documents describe three different models"** — this is
+  technically true (README=v0.8, MATHEMATICS=v0.7, T90=T90.59 hybrid)
+  but the reviewer framing implied it was a bug; it's actually the
+  natural consequence of having parallel evolution lines (see
+  `T90_PATH_C4_V59_BRANCH_CONTEXT.md`).
+
+### 12.5 Per the2026-09-08 pause directive
+
+This revision is **doc-only** (no code changes, no new science runs). It
+addresses reviewers' specific framing criticisms without changing the
+underlying analysis. The original T90.59 results (log Z, posterior
+medians, Δlog Z values) are unchanged.
+
+Items 6-9 above are **deferred** pending the user's go-ahead.
