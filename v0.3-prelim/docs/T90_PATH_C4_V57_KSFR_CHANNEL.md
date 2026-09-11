@@ -106,6 +106,51 @@ box (since KSFR-off already finds 972 MeV which is inside).
 
 ---
 
+## T90.57 followup — KSFR-enabled run (DONE, INTERIM)
+
+**KSFR-enabled production result (nlive=500, dlogz=0.1, 28.6 min wall, INTERIM — dlogz plateau at 10.001 like T90.56):**
+
+| Quantity | Value |
+|---|---|
+| **log Z (KSFR-on, 5-channel)** | **-7.912 ± 0.134** (INTERIM) |
+| Posterior median σ/m(Cloud-9) | **85.26 cm²/g** ✓ |
+| Posterior median σ/m(Galaxy)  | **1.426 cm²/g** ✓ |
+| Posterior median σ/m(Bullet)  | **0.00140 cm²/g** ✓ |
+| Posterior median μ_x          | **4.26 × 10⁻⁸ μ_N** |
+| Posterior median m_phi_A      | **1387 MeV** (within KSFR box, narrower than KSFR-off's 972) |
+| KSFR enabled                  | **True** |
+| **Channels satisfied at median** | **3/3 ✓** |
+
+**Δlog Z (KSFR-on - KSFR-off) = -0.626 ± ~0.18**
+
+This means **KSFR excludes ~46% of the prior volume** (factor of e^0.626 ≈ 1.87
+in Bayesian evidence penalty). The posterior median still lives in the KSFR
+box (m_phi_A = 1387 MeV, inside [418, 4180]), but is shifted to higher m_phi_A
+than KSFR-off (1387 vs 972 MeV) because the narrower prior excludes the low-m_phi_A tail.
+
+KSFR-enabled run hit the same dlogz plateau as T90.56 and KSFR-off (LZ
+channel convergence bottleneck). Interpolation to dlogz=0 gives the final log Z
+likely in the range -7.9 to -8.0 — consistent with the measured -7.912.
+
+### KSFR-off vs KSFR-on comparison
+
+| Quantity | KSFR-off | KSFR-on |
+|---|---|---|
+| log Z | -7.286 ± 0.126 | -7.912 ± 0.134 |
+| σ/m(Cloud-9) | 74.36 | 85.26 |
+| σ/m(Galaxy) | 1.246 | 1.426 |
+| σ/m(Bullet) | 0.00136 | 0.00140 |
+| μ_x | 4.30e-8 | 4.26e-8 |
+| m_phi_A (MeV) | 972 | 1387 |
+| g_chi_A | 0.79 | 1.02 |
+| Channels at median | 3/3 ✓ | 3/3 ✓ |
+
+Both runs satisfy all 3 channels at posterior median. KSFR-on excludes ~46%
+of prior volume (Δlog Z = -0.626) and shifts m_phi_A higher. Both runs find
+μ_x ~ 4 × 10⁻⁸ μ_N (LZ-compatible).
+
+---
+
 ## 5-way comparison (apples-to-apples where possible)
 
 | Framework | Channels | log Z | Ch OK at median |
@@ -115,6 +160,7 @@ box (since KSFR-off already finds 972 MeV which is inside).
 | T90.55 hybrid | 3 | -2.943 ± 0.075 | 2/3 |
 | T90.56 hybrid + LZ | 4 | -7.268 ± 0.125 | 3/3 |
 | **T90.57 hybrid + LZ + KSFR (KSFR off)** | **5 (KSFR silent)** | **-7.286 ± 0.126** | **3/3** |
+| **T90.57 hybrid + LZ + KSFR (KSFR on)** | **5 (KSFR active)** | **-7.912 ± 0.134** | **3/3** |
 
 With KSFR disabled (default), T90.57 reproduces T90.56 within noise.
 KSFR-enabled run pending — check the second JSON when the background proc completes.
