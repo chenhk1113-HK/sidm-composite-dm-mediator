@@ -182,12 +182,21 @@ IS_LOG = [True, True, False, True, False, True, True, True, True]
 
 
 def prior_transform_9(u):
-    """9D unit cube -> physical parameter vector for hybrid."""
+    """9D unit cube -> mixed log/linear parameter vector.
+
+    Convention: theta output is in the same units as the LOG_RANGES bounds.
+    For IS_LOG=True params, theta[i] is log10(x). For IS_LOG=False params,
+    theta[i] is x directly.
+
+    Layout (matches T90.54):
+      [log_m_chi, log_m_phi_A, g_A (linear),
+       log_m_phi_B, g_B (linear),
+       log_E_R, log_Gamma, log_sigma_0, log_alpha_Y]
+    """
     theta = np.zeros(9)
     for i in range(9):
         lo, hi = LOG_RANGES[i]
-        val = lo + u[i] * (hi - lo)
-        theta[i] = val if IS_LOG[i] else 10.0 ** val
+        theta[i] = lo + u[i] * (hi - lo)  # direct mapping, units match LOG_RANGES
     return theta
 
 

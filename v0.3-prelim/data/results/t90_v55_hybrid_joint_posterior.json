@@ -1,0 +1,75 @@
+{
+  "framework": "T90.54 hybrid (multi-portal + resonance + Sommerfeld)",
+  "log_Z": -2.6328169787743154,
+  "log_Z_err": 0.3090711813331413,
+  "wall_seconds": 0.17846131324768066,
+  "nlive": 50,
+  "dlogz_target": 0.5,
+  "ndim": 9,
+  "n_samples": 228,
+  "posterior_medians": {
+    "log_m_chi_GeV": {
+      "median": 2.4643971863956287,
+      "p16": 1.289812714685646,
+      "p84": 2.836724353695946
+    },
+    "log_m_phi_A_MeV": {
+      "median": 3.18954811635241,
+      "p16": 2.4713227908243316,
+      "p84": 3.6932579304742115
+    },
+    "g_chi_A": {
+      "median": 0.9875993365343607,
+      "p16": 0.3168451047724854,
+      "p84": 1.660403005211199
+    },
+    "log_m_phi_B_MeV": {
+      "median": 0.9248798120205034,
+      "p16": 0.291936643384793,
+      "p84": 1.5600646846811412
+    },
+    "g_chi_B": {
+      "median": 0.16653873961042606,
+      "p16": 0.06457532326678782,
+      "p84": 0.2976690824318448
+    },
+    "log_E_R_eV": {
+      "median": 2.4705009409509024,
+      "p16": 1.2012336548534723,
+      "p84": 4.224996577274117
+    },
+    "log_Gamma_R_eV": {
+      "median": 0.23234711973923258,
+      "p16": -2.0211808183795084,
+      "p84": 2.2542920417196703
+    },
+    "log_sigma_0": {
+      "median": -3.08671683499549,
+      "p16": -4.450763172504817,
+      "p84": -1.4122969059800605
+    },
+    "log_alpha_Y": {
+      "median": -3.1217175842418463,
+      "p16": -4.518806665992741,
+      "p84": -1.389295083486598
+    }
+  },
+  "posterior_median_predictions": {
+    "sigma_m_Cloud9_cm2_per_g": 47.600058267988054,
+    "sigma_m_Galaxy_cm2_per_g": 1.5586362297635101,
+    "sigma_m_Bullet_cm2_per_g": 0.0011652962779763274,
+    "portal_Cloud9_cm2_per_g": 47.57922425931597,
+    "portal_Galaxy_cm2_per_g": 1.552807859980549,
+    "portal_Bullet_cm2_per_g": 0.00015201868174012404,
+    "resonant_Cloud9_cm2_per_g": 0.020834008672083838,
+    "resonant_Galaxy_cm2_per_g": 0.005828369782961033,
+    "resonant_Bullet_cm2_per_g": 0.0010132775962362033
+  },
+  "channel_satisfaction_at_median": {
+    "Cloud9": true,
+    "Galaxy": true,
+    "Bullet": true,
+    "n_satisfied": 3
+  },
+  "channel_likelihood_match": "T90.51 (Cloud-9 Gaussian + Galactic 1-sided + Bullet 1-sided)"
+}
