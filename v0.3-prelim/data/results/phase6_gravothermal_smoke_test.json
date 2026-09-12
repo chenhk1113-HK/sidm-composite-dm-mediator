@@ -1,0 +1,116 @@
+{
+  "phase": 6,
+  "date": "2026-09-12",
+  "v03_map": {
+    "sigma_m_0": 0.72,
+    "a": 1.31
+  },
+  "results_per_regime": {
+    "dwarf": {
+      "v_test_km_s": 30.0,
+      "sigma_m_v_cm2_per_g": 3.485809528759289,
+      "r_s_kpc": 1.0,
+      "v_max_km_s": 30.0,
+      "rho_s_MSun_per_kpc3": 10000000.0,
+      "t_core_Gyr": 0.11865153940693912,
+      "r_core_at_13p8_Gyr_kpc": 0.05,
+      "r_core_max_change_kpc": 0.0050000000000000044,
+      "r_core_t_Gyr": [
+        0.0,
+        0.5,
+        1.0,
+        2.0,
+        5.0,
+        10.0,
+        13.8
+      ],
+      "r_core_t_kpc": [
+        0.045,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05
+      ],
+      "r_core_empirical_kpc": 1.8670322784460072
+    },
+    "lsb": {
+      "v_test_km_s": 80.0,
+      "sigma_m_v_cm2_per_g": 0.9644608728476441,
+      "r_s_kpc": 3.0,
+      "v_max_km_s": 80.0,
+      "rho_s_MSun_per_kpc3": 5000000.0,
+      "t_core_Gyr": 0.9648836217195152,
+      "r_core_at_13p8_Gyr_kpc": 0.05,
+      "r_core_max_change_kpc": 0.085,
+      "r_core_t_Gyr": [
+        0.0,
+        0.5,
+        1.0,
+        2.0,
+        5.0,
+        10.0,
+        13.8
+      ],
+      "r_core_t_kpc": [
+        0.135,
+        0.11401301302646992,
+        0.09381554750967042,
+        0.05,
+        0.05,
+        0.05,
+        0.05
+      ],
+      "r_core_empirical_kpc": 0.9820696883865443
+    },
+    "cluster": {
+      "v_test_km_s": 300.0,
+      "sigma_m_v_cm2_per_g": 0.17072756755390042,
+      "r_s_kpc": 20.0,
+      "v_max_km_s": 300.0,
+      "rho_s_MSun_per_kpc3": 1000000.0,
+      "t_core_Gyr": 48.45107004011991,
+      "r_core_at_13p8_Gyr_kpc": 0.8230976736547885,
+      "r_core_max_change_kpc": 0.07690232634521144,
+      "r_core_t_Gyr": [
+        0.0,
+        0.5,
+        1.0,
+        2.0,
+        5.0,
+        10.0,
+        13.8
+      ],
+      "r_core_t_kpc": [
+        0.8999999999999999,
+        0.897213683828072,
+        0.8944273676561441,
+        0.8888547353122881,
+        0.8721368382807204,
+        0.8442736765614409,
+        0.8230976736547885
+      ],
+      "r_core_empirical_kpc": 0.41319192580918185
+    }
+  },
+  "phases_at_13p8_Gyr": [
+    "COLLAPSED",
+    "COLLAPSED",
+    "EXPANDED"
+  ],
+  "n_distinct_phases": 2,
+  "empirical_vs_gravothermal": {
+    "dwarf": 0.026780468970582907,
+    "lsb": 0.050912883872982255,
+    "cluster": 1.9920468485507319
+  },
+  "decision": "PROCEED",
+  "decision_reason": "Gravothermal evolution produces qualitatively different r_core across halo regimes AND deviates from empirical rule.",
+  "kill_criterion": {
+    "triggered": false,
+    "n_distinct_phases": 2,
+    "max_empirical_ratio": 1.9920468485507319,
+    "min_empirical_ratio": 0.026780468970582907
+  }
+}
