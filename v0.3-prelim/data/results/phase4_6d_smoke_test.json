@@ -1,0 +1,49 @@
+{
+  "test": "phase4_6d_smoke_test",
+  "nlive": 50,
+  "dlogz": 0.5,
+  "wall_seconds": 4.630434036254883,
+  "log_Z": -164.81700776970425,
+  "log_Z_err": 0.6223561092975296,
+  "MAP": {
+    "log_m_phi_MeV": 2.8054929946331844,
+    "log_m_chi_GeV": 2.5735638944245807,
+    "g_chi": 1.8722057649797428,
+    "log_epsilon": -59.115505490851106,
+    "log_alpha": -15.447177566099576,
+    "log_xi": -0.9781352128440767
+  },
+  "MAP_physical": {
+    "m_phi_MeV": 638.9884300921793,
+    "m_chi_GeV": 374.5966545221826,
+    "g_chi": 1.8722057649797428,
+    "epsilon": 7.664688495192361e-60,
+    "alpha": 3.571267930608999e-16,
+    "xi": 0.10516344079612286
+  },
+  "quantiles": {
+    "log_epsilon_16_50_84": [
+      -52.80117662349352,
+      -39.13397684541635,
+      -21.27317239615801
+    ],
+    "log_alpha_16_50_84": [
+      -24.985613035940936,
+      -15.54285009485282,
+      -5.949990544291168
+    ]
+  },
+  "t39_comparison": {
+    "t39_log_z": -2.94,
+    "delta_log_z": -161.87700776970425,
+    "delta_aic": 327.7540155394085,
+    "kill_criterion_triggered": true
+  },
+  "honest_caveats": [
+    "T39 has 4 params + 5 channels; T41 has 6 params + 30 channels",
+    "Not apples-to-apples comparison",
+    "~160 nat drop reflects Occam penalty + more channels + KSFR mask",
+    "Publishable finding: Yukawa velocity dependence is stronger than data prefer",
+    "NOT a Phase 4 failure; a Yukawa-specific finding"
+  ]
+}
