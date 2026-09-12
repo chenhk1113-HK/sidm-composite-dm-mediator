@@ -1,0 +1,101 @@
+{
+  "simulation_input": "data\\results\\amuse_bullet_dwarf_calibration_2026_09_12.json",
+  "time_fraction_used": 0.15,
+  "end_time_Myr": 2000.0,
+  "target_t_Myr": 300.0,
+  "surviving_data": {
+    "sigma_m_cm2_per_g": [
+      0.1,
+      0.5,
+      1.0,
+      2.0,
+      5.0,
+      10.0
+    ],
+    "t_Myr": [
+      300.0,
+      300.0,
+      300.0,
+      300.0,
+      300.0,
+      300.0
+    ],
+    "n_bound_a": [
+      988,
+      948,
+      867,
+      711,
+      288,
+      67
+    ],
+    "n_bound_b": [
+      999,
+      960,
+      894,
+      718,
+      343,
+      97
+    ],
+    "surviving_fraction_a": [
+      0.96484375,
+      0.92578125,
+      0.8466796875,
+      0.6943359375,
+      0.28125,
+      0.0654296875
+    ],
+    "surviving_fraction_b": [
+      0.9755859375,
+      0.9375,
+      0.873046875,
+      0.701171875,
+      0.3349609375,
+      0.0947265625
+    ],
+    "surviving_fraction_avg": [
+      0.97021484375,
+      0.931640625,
+      0.85986328125,
+      0.69775390625,
+      0.30810546875,
+      0.080078125
+    ]
+  },
+  "fit": {
+    "fit_success": true,
+    "sigma_m_peak_cm2_per_g": 3.0673685054247652,
+    "sigma_m_peak_1sigma": 0.14889735634264287,
+    "k": 1.756213369892915,
+    "k_1sigma": 0.12597658994383942,
+    "covariance": [
+      [
+        0.022170422725827973,
+        -0.0007168486161523018
+      ],
+      [
+        -0.0007168486161523018,
+        0.015870101213878267
+      ]
+    ]
+  },
+  "comparison_to_placeholder": {
+    "placeholder_sigma_m_cm2_per_g": 0.5,
+    "placeholder_log10": -0.3,
+    "simulation_derived_sigma_m_cm2_per_g": 3.0673685054247652,
+    "simulation_derived_1sigma": 0.14889735634264287,
+    "delta_percent": 513.4737010849531
+  },
+  "honest_caveats": [
+    "N=1024 is ~100x below publication-grade",
+    "SIDM kernel is uniform Gaussian perturbation, not Rutherford-like pairwise scattering",
+    "No baryonic physics (gas stripping post-hoc)",
+    "Head-on collision (b=0) only",
+    "Time slice at t=600 Myr is a heuristic; no formal time-since-collision match to NGC 1052",
+    "Sigmoid fit uses 6 data points; uncertainty from covariance may be underestimated"
+  ],
+  "next_steps": [
+    "Plug the simulation-derived peak into Channel 27 (currently uses placeholder)",
+    "Re-run t13_v2_trail_ablation.py with the new peak to measure posterior shift",
+    "If improvement is significant, mark simulation peak as PRIMARY anchor and placeholder as backup"
+  ]
+}
