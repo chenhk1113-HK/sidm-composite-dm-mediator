@@ -40,6 +40,19 @@ sys.path.insert(0, "/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v
 
 import numpy as np
 
+
+def _json_default(obj):
+    """JSON serializer fallback for numpy types (bool_, float64, int64, etc.)."""
+    if isinstance(obj, (np.bool_,)):
+        return bool(obj)
+    if isinstance(obj, (np.integer,)):
+        return int(obj)
+    if isinstance(obj, (np.floating,)):
+        return float(obj)
+    if isinstance(obj, np.ndarray):
+        return obj.tolist()
+    raise TypeError(f"Object of type {obj.__class__.__name__} is not JSON serializable")
+
 # Import the existing bullet-dwarf code
 import amuse_bullet_dwarf as ab
 
@@ -268,7 +281,7 @@ def main():
     }
     out_path = Path("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/data/results/amuse_rerun_with_sashimi_2026_09_12.json")
     with open(out_path, "w") as f:
-        json.dump(out, f, indent=2)
+        json.dump(out, f, indent=2, default=_json_default)
     print(f"\nSaved: {out_path}")
 
 
