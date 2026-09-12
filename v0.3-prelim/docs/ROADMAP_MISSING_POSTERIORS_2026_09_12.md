@@ -442,9 +442,48 @@ The verdict should be **"WEAKLY CONSISTENT (log_Z = -2.94)"** not **"RESOLVED."*
 
 **Why lower priority**: Mostly evolutionary predictions, not headline.
 
-### Phase 7 (LOW priority, defer indefinitely per R1): alternative DM classes
+### Phase 7 (NEW per user 2026-09-12): LZ event interpretation (2-4 weeks)
 
-**Per R1 (paragraph 78): "Phases 6–7 (time-dependence, cosmological ICs): Defer indefinitely. These are low-priority refinements to a model that may not survive Phase 0."**
+**Status:** NEW phase added 2026-09-12 in response to user question. This phase addresses the structural gap between the roadmap's current LZ-as-constraint framing (Ch14 in Phase 4) and the T90/T95 branch's LZ-as-signal framing.
+
+**Context (per AGENTS.md rule 11 — honest framing):**
+
+The T90 branch (`wip/tier3-magnetic-moment-LZ`) and T95 branch (`wip/t95-stream-cross-match`) have done extensive work on LZ event interpretation that is **NOT integrated** into the current roadmap. Specifically:
+
+- **T90 magnetic-moment branch**: tested whether σ_DM-nuc ~10^-43 cm^2 (the LZ event) can be produced by magnetic-moment coupling. **Result: ruled out at UV level** (M_B < 10 TeV violates XENON100). But T90 was tested at σ/m_0 = 0.06 cm^2/g, NOT the v0.3-prelim MAP at σ/m_0 = 0.72 cm^2/g.
+- **T95 stream cross-match**: substantial-to-very-strong tension between LZ-anchored SIDM and BAHAMAS-SIDM, dwarf cores, Euclid Q1, GD-1 perturber. **The T95 tension was found at σ/m_0 = 0.06, not 0.72.** May be different at v0.3-prelim MAP.
+- **T17 v17 47/47/6 posterior split**: three-portal UV completion (kinetic mixing + inelastic + magnetic-moment at 30-50% each). **Not yet tested at v0.3-prelim MAP.**
+
+**Tasks:**
+1. **Re-test T90 magnetic-moment branch at v0.3-prelim MAP (σ/m_0 = 0.72, a = 1.31)**
+ - The earlier "ruled out" verdict was at σ/m_0 = 0.06. The v0.3-prelim MAP is 12× higher.
+ - Re-evaluate μ_x prediction at σ/m_0 = 0.72.
+2. **Test three-portal UV completion at v0.3-prelim MAP**
+ - T17 v17 framework: 47% kinetic mixing, 47% magnetic-moment, 6% inelastic
+ - Does the portal mix predict a different σ_DM-nuc than single-portal?
+3. **Re-evaluate T95 stream cross-match tension at v0.3-prelim MAP**
+ - σ/m_0 = 0.72 is closer to T95 tension regime than σ/m_0 = 0.06
+ - May resolve or worsen the tension
+4. **Di Mauro inelastic interpretation at v0.3-prelim MAP**
+ - δ mass splitting test (currently at 297-371 keV)
+ - σ_DM-nuc ~10^-43 cm^2 constraint re-evaluation
+
+**Kill criterion:**
+> No mediator class (vector/scalar/composite/three-portal) can produce the LZ event at σ_DM-nuc ~10^-43 cm^2 while fitting the multi-channel data at v0.3-prelim MAP.
+
+**Action if triggered:** Abandon LZ event interpretation; treat LZ as a constraint (Ch14 in Phase 4).
+
+**Cost:** 2-4 weeks. Builds on existing T90/T95 infrastructure (NEST mapping, event scorecards, recasts).
+
+**Risk:** If Phase 4 finding (Yukawa over-strong) means the LZ event cannot be explained by any SIDM model, this phase becomes a null result: "the LZ event is NOT produced by SIDM, regardless of mediator class."
+
+**Why this matters (per user directive):** "Does the roadmap include using the model to simulate the LZ event, like t95?" The honest answer is **no, but it should** — the T90/T95 branch work is the most publishable particle-physics artifact in the project and should be brought back into the main roadmap.
+
+---
+
+### Phase 8 (was Phase 7, renumbered): alternative DM classes (defer indefinitely)
+
+**Per R1 (paragraph 78): "Phases 6–8 (time-dependence, cosmological ICs, alternative DM): Defer indefinitely. These are low-priority refinements to a model that may not survive Phase 0."**
 
 **Add primordial BH / axion / mixed models** (posterior #5).
 - Each is a separate project
@@ -465,7 +504,8 @@ The verdict should be **"WEAKLY CONSISTENT (log_Z = -2.94)"** not **"RESOLVED."*
 | **Phase 4** (m_χ + m_A') | 6D log Z worse than 4D log Z (after ΔAIC adjustment) | Extra parameters not justified; stop adding dimensions |
 | **Phase 5** (mediator class) | Bayes factors between classes indistinguishable (|Δlog Z| < 1) | Mediator class not constrained by data; report and stop |
 | **Phase 6** (time-dep) | AMUSE N≥10^4 simulations show no qualitative change | Time-dep corrections negligible; drop from model |
-| **Phase 7** (alternative DM) | If we got this far, model survived all earlier phases | Pursue as new project |
+| **Phase 7** (LZ event) | No mediator class can produce LZ event at σ_DM-nuc ~10^-43 cm^2 | Abandon LZ event interpretation; treat LZ as constraint (Ch14) |
+| **Phase 8** (alternative DM) | If we got this far, model survived all earlier phases | Pursue as new project |
 
 **Why this matters**: Without explicit thresholds, the roadmap is "a plan to keep fitting, not a plan to find out whether the model is right" (R1 paragraph 82).
 
@@ -493,8 +533,9 @@ The verdict should be **"WEAKLY CONSISTENT (log_Z = -2.94)"** not **"RESOLVED."*
 | 3 | #6 (cross-channel correlations) — **was LOW** | 1–2 weeks | **MEDIUM ↑** |
 | 5 | #4 (baryonic feedback) — **was MEDIUM** | 4–8 weeks | **HIGH ↑** |
 | 4 | #3 (mediator class) | 2–4 weeks | MEDIUM |
+| 7 | **NEW: LZ event interpretation** | **2–4 weeks** | **MEDIUM-HIGH (NEW)** |
 | 6 | #7 (time evolution) | 2–4 weeks | LOW |
-| 7 | #5 (alternative DM) | 3–6 months | LOW |
+| 8 | #5 (alternative DM) — was Phase 7 | 3–6 months | LOW (deferred indefinitely) |
 
 **Total:** ~3–6 months of focused work to reach a particle-physics-grade model.
 
@@ -502,11 +543,14 @@ The verdict should be **"WEAKLY CONSISTENT (log_Z = -2.94)"** not **"RESOLVED."*
 
 **Highest risk**: Phase 5 (baryonic feedback could invalidate SIDM interpretation) — now HIGH priority per R1.
 
-**Recommended sequence** (per R2):
+**Recommended sequence** (per R2 + Phase 7 added 2026-09-12):
 1. Phase 3 (cross-channel correlations, 1-2 weeks) — first, because adding parameters to a statistically-invalid baseline compounds the problem
 2. Phase 2 (m_χ + m_A', 1-2 weeks) — particle-physics upgrade
 3. Phase 5 (baryonic feedback, 4-8 weeks) — run in parallel with Phase 2 if resources allow
 4. Phase 4 (mediator class, 2-4 weeks) — last, depends on Phase 2 results
+5. Phase 7 (LZ event interpretation, 2-4 weeks) — NEW per user 2026-09-12, can run in parallel with Phase 4/5
+6. Phase 6 (gravothermal, 2-4 weeks) — only if model survives earlier phases
+7. Phase 8 (alternative DM) — defer indefinitely per R1
 
 ---
 
@@ -590,6 +634,7 @@ If you want to commit to that, the next step would be to:
 
 - **Roadmap written:** 2026-09-12 (this doc, initial version)
 - **Roadmap updated:** 2026-09-12 (this version, per R1+R2 review in roadmap1.docx)
+- **Roadmap updated (v3):** 2026-09-12 (Phase 7 added, Phase 8 renumbered, LZ event interpretation integrated)
 - **Code changes:** none
 - **Test changes:** none
 - **Channel additions:** none
@@ -597,9 +642,14 @@ If you want to commit to that, the next step would be to:
  - Baryonic feedback: MEDIUM → **HIGH** (R1: "fundamental degeneracy")
  - Cross-channel correlations: LOW → **MEDIUM** (R1: "statistically invalid")
  - m_χ + m_A': unchanged at HIGH
-- **New sections:** Null result as legitimate outcome, STOP RULE for new channels, strategic decision framing
+- **New sections:**
+ - Null result as legitimate outcome
+ - STOP RULE for new channels
+ - Strategic decision framing
+ - **Phase 7 (NEW): LZ event interpretation** — per user 2026-09-12 question
+- **Phase renumbering:** Phase 7 (alternative DM) → Phase 8 (deferred indefinitely per R1)
 - **Verdict softening:** "Tier-3 RESOLVED" → "Tier-3 WEAKLY CONSISTENT (log_Z = -2.94)" per R1's Jeffreys-scale analysis
-- **Priority list:** Phase 2 (m_χ + m_A') is highest-impact
+- **Priority list:** Phase 2 (m_χ + m_A') is highest-impact, Phase 7 (LZ event) is new MEDIUM-HIGH
 
 Reference: T39 Tier-3 fit at `v0.3-prelim/data/results/t39_tier3_epsilon_alpha_joint_fit.json`
 Reference: T90.63 LRD-Cloud-9 doc at `v0.3-prelim/docs/T9063_LRD_CLOUD9_RECONCILIATION_2026_09_12.md`
