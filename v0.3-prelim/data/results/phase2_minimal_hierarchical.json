@@ -1,0 +1,71 @@
+{
+  "phase": 2,
+  "shared_nuisance": "eta_udg",
+  "prior_width_dex": 0.5,
+  "rationale": "UDG photometric calibration (Dragonfly + optical spectroscopy)",
+  "channels_affected": [
+    "ch09_dm_free_udg",
+    "ch10_dm_dom_udg"
+  ],
+  "test_points": [
+    {
+      "label": "v0.3-prelim MAP (T39)",
+      "sigma_m_0": 0.72443596007499,
+      "a": 1.31,
+      "ll_independent": -1.6761450898328532,
+      "ll_marginalized": -1.3195048212524805,
+      "delta_nats": 0.3566402685803727
+    },
+    {
+      "label": "Ch9 anchor (sigma/m_0=0.78, a=0)",
+      "sigma_m_0": 0.78,
+      "a": 0.0,
+      "ll_independent": -0.004417353806760428,
+      "ll_marginalized": -0.3621581734748167,
+      "delta_nats": -0.35774081966805626
+    },
+    {
+      "label": "Ch10 anchor (sigma/m_0=0.7, a=0)",
+      "sigma_m_0": 0.7,
+      "a": 0.0,
+      "ll_independent": -0.00027608461292252676,
+      "ll_marginalized": -0.3601498588638328,
+      "delta_nats": -0.35987377425091027
+    },
+    {
+      "label": "MAP 6D (sigma/m_0=1.57, a=0.94)",
+      "sigma_m_0": 1.57,
+      "a": 0.94,
+      "ll_independent": -0.26667602617186703,
+      "ll_marginalized": -0.5627526171624022,
+      "delta_nats": -0.2960765909905352
+    },
+    {
+      "label": "sigma/m_0=0.1, a=0.5",
+      "sigma_m_0": 0.1,
+      "a": 0.5,
+      "ll_independent": -2.9038351485296037,
+      "ll_marginalized": -1.7905146801547738,
+      "delta_nats": 1.11332046837483
+    },
+    {
+      "label": "sigma/m_0=5.0, a=0.5",
+      "sigma_m_0": 5.0,
+      "a": 0.5,
+      "ll_independent": -0.651460406642744,
+      "ll_marginalized": -0.6951539071115751,
+      "delta_nats": -0.04369350046883114
+    }
+  ],
+  "t39_kill_criterion": {
+    "current_log_z": -2.94,
+    "kill_threshold": -13.0,
+    "marginalization_penalty_upper_bound_nats": 0.4125760515768695
+  },
+  "honest_framing": [
+    "Reviewer 1 said 'NGC 1052-DF2 in Ch9 and Ch13' -- Ch13 doesn't exist (it's Ch10 = LSB-6).",
+    "The structural point (shared survey systematics) is still valid.",
+    "This is a 1-parameter nuisance, not a full hierarchical framework.",
+    "Width 0.5 dex is conservative (UDG photometric + distance uncertainty)."
+  ]
+}
