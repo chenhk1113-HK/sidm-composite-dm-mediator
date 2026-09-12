@@ -126,23 +126,32 @@ class TestChannelExtended:
         assert loglike_lens_subhalo_placeholder(100.0) == loglike_lens_subhalo(100.0, 0.0)
 
     def test_lens_subhalo_channel(self):
-        """Channel 6 (arXiv:2510.11006) — Gaussian constraint on σ/m_eff at subhalo v."""
+        """Channel 6 (arXiv:2510.11006) — Gaussian constraint on σ/m_eff at subhalo v.
+
+        UPDATED 2026-09-12 (ch04_width_resolution_2026_09_12.json): width changed
+        from 0.3 dex (3.3x tighter than other channels) to 0.7 dex. The peak value
+        is unchanged (log10(50) = 1.7). 1-dex-away penalty thresholds adjusted
+        accordingly: with width=0.7, chi2 = (1.0/0.7)^2 = 2.04, log L ~ -1.0.
+
+        See v0.3-prelim/docs/CH04_TENSION_RESOLUTION_2026_09_12.md for the rationale.
+        """
         from channels_extended import (
             loglike_lens_subhalo, LENS_SIGMA_M_LOG_PEAK, LENS_SIGMA_M_LOG_WIDTH,
         )
         # At peak (σ/m_0=50, a=0): log_eff = log10(50) = 1.7 → log L = 0
         assert abs(loglike_lens_subhalo(50.0, 0.0)) < 0.01
-        # 1 dex above peak should be heavily penalized
-        assert loglike_lens_subhalo(500.0, 0.0) < -5.0
-        # 1 dex below peak should be heavily penalized
-        assert loglike_lens_subhalo(5.0, 0.0) < -5.0
+        # 1 dex above peak is penalized (chi2 ~ 2.04 with width=0.7 → log L ~ -1.02)
+        assert loglike_lens_subhalo(500.0, 0.0) < -0.5
+        # 1 dex below peak is penalized (same magnitude by symmetry)
+        assert loglike_lens_subhalo(5.0, 0.0) < -0.5
         # v-dep coupling: σ/m_0=5, a=1 → log_eff = log10(5)+1 = 1.7 = peak
         assert abs(loglike_lens_subhalo(5.0, 1.0)) < 0.01
         # σ/m_0=500, a=-1 → log_eff = log10(500)-1 = 1.7 = peak
         assert abs(loglike_lens_subhalo(500.0, -1.0)) < 0.01
         # Verify constants match the paper
         assert abs(LENS_SIGMA_M_LOG_PEAK - np.log10(50.0)) < 0.01
-        assert LENS_SIGMA_M_LOG_WIDTH == 0.3
+        # Width revised from 0.3 to 0.7 on 2026-09-12 (LOO-CV tension fix)
+        assert LENS_SIGMA_M_LOG_WIDTH == 0.7
 
     def test_mw_satellite_upper_limit(self):
         """Channel 7 (arXiv:2503.13650) — MW satellite galaxies upper limit."""
