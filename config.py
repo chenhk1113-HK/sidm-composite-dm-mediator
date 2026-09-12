@@ -1,3 +1,24 @@
+# =============================================================================
+# THIS IS THE CANONICAL (LIVE) CONFIG FILE (2026-09-12).
+#
+# All edits to config constants should be made HERE. The Python import system
+# uses sys.path priority, and this file (at the project root) is found first
+# by every import.
+#
+# NOTE: There is a SECONDARY SNAPSHOT of this file at:
+#     v0.3-prelim/code/config.py
+# It exists only because some scripts in v0.3-prelim/code explicitly do
+#     sys.path.insert(0, ".../v0.3-prelim/code")
+#     import config
+# and would break if the snapshot were deleted. The snapshot is frozen —
+# any edits you make here should also be propagated there, but ONLY as a
+# tracked, intentional change.
+#
+# See:
+#     - v0.3-prelim/docs/CONFIG_DUPLICATION_2026_09_12.md (design note)
+#     - tests/test_config_snapshot_consistency.py (consistency check)
+# =============================================================================
+
 """
 Central configuration for sidm-composite-dm-mediator.
 
