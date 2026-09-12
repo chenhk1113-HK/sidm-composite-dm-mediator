@@ -62,6 +62,7 @@ CHANNELS = [
     ("ch07_draco",        "loglike_draco",           "channels_extended"),
     ("ch08_radio_relic",  "loglike_radio_relic",     "channels_extended"),
     ("ch09_dm_free_udg",  "loglike_dm_free_udg",     "channels_extended"),
+    ("ch10_dm_dom_udg",   "loglike_dm_dominated_udg","channels_extended"),
 ]
 
 # Import all channels once
@@ -72,6 +73,7 @@ def import_all():
     from channels_extended import (
         loglike_lens_subhalo, loglike_mw_satellite, loglike_cluster_upper,
         loglike_draco, loglike_radio_relic, loglike_dm_free_udg,
+        loglike_dm_dominated_udg,
     )
     return {
         "ch01_dsph": loglike_dsph_v03,
@@ -83,6 +85,7 @@ def import_all():
         "ch07_draco": loglike_draco,
         "ch08_radio_relic": loglike_radio_relic,
         "ch09_dm_free_udg": loglike_dm_free_udg,
+        "ch10_dm_dom_udg": loglike_dm_dominated_udg,
     }
 
 

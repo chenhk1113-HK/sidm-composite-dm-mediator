@@ -218,6 +218,15 @@ EUCLID_Q1_SUBHALO_FORECAST_LABEL = "FORECAST_via_LensPop"
 DM_FREE_UDG_RATE_PEAK = 0.0       # log-likelihood peak (centered at MAP)
 DM_FREE_UDG_RATE_WIDTH = 2.0      # dex — 2 order of magnitude Gaussian width
 
+# LSB-6 gas-rich DM-dominated UDG (arXiv:2609.10700 — Channel 13, NEW 2026-09-12)
+# Channel 13 — counterpart to Channel 11. Tests BOTH UDG extremes per LRD2.docx
+# review recommendation. Single-object constraint, not a population rate.
+# σ/m_eff at LSB-6 velocity (~15 km/s) ~14.3 cm²/g (value from arXiv:2609.10700
+# abstract; full text not yet retrieved, magnitude flagged as plausible-imprecise).
+DM_DOM_UDG_SIGMA_M_PEAK = 14.3    # cm²/g — sigma/m_eff at v_LSB6 ~15 km/s
+DM_DOM_UDG_SIGMA_M_WIDTH = 1.0    # dex — single-object constraint, ~1 dex
+LSB6_VMAX_KMS = 15.0              # UDG internal velocity scale (gas-rich, low-vdisp)
+
 # Cosmic-web radio synchrotron 40x excess (Pinetti+ 2025-26 — Channel 12)
 # T70: Gaussian UPPER LIMIT on dark photon kinetic mixing at log10(eps_upper) = -11
 COSMIC_WEB_RADIO_LOG_EPSILON_UPPER = -11.0   # log10(eps_upper) where over-prediction begins
@@ -312,6 +321,7 @@ __all__ = [
     "EUCLID_Q1_SUBHALO_SIGMA_M_UPPER", "EUCLID_Q1_SUBHALO_TAIL_WIDTH",
     "EUCLID_Q1_SUBHALO_FORECAST_LABEL",
     "DM_FREE_UDG_RATE_PEAK", "DM_FREE_UDG_RATE_WIDTH",
+    "DM_DOM_UDG_SIGMA_M_PEAK", "DM_DOM_UDG_SIGMA_M_WIDTH", "LSB6_VMAX_KMS",
     "COSMIC_WEB_RADIO_LOG_EPSILON_UPPER",
     "TREMAINE_GUNN_MASS_BOUND_EV",
     "ROGERS_PEIRIS_LYMAN_ALPHA_BOUND_EV",

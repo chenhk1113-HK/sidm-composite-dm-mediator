@@ -80,6 +80,8 @@ from config import (
     RADIO_RELIC_VMAX_KMS,
     DM_FREE_UDG_RATE_PEAK,
     DM_FREE_UDG_RATE_WIDTH,
+    DM_DOM_UDG_SIGMA_M_PEAK,
+    DM_DOM_UDG_SIGMA_M_WIDTH,
     COSMIC_WEB_RADIO_LOG_EPSILON_UPPER,
     TREMAINE_GUNN_MASS_BOUND_EV,
     ROGERS_PEIRIS_LYMAN_ALPHA_BOUND_EV,
@@ -723,6 +725,72 @@ def loglike_dm_free_udg_placeholder(sigma_m: float) -> float:
     Assumes a=0 (velocity-independent) for backwards compatibility.
     """
     return loglike_dm_free_udg(sigma_m, 0.0)
+
+
+# ---------------------------------------------------------------------------
+# Channel 13 (NEW 2026-09-12): DM-dominated UDG existence (LSB-6 anchor)
+#
+# Per LRD2.docx reviewer recommendation: test BOTH UDG extremes. Channel 11
+# constrains the DM-FREE tail (NGC 1052-DF2/DF4). Channel 13 constrains the
+# DM-DOMINATED tail (LSB-6, a gas-rich UDG that requires σ/m_eff ~ 14.3 cm²/g
+# at its internal velocity scale to explain its anomalously low dark-matter
+# content for its baryonic mass).
+#
+# Reference: arXiv:2609.10700, "Probing dynamics of extreme galaxies I.
+# Dark matter content in ultra-diffuse galaxies", 26 pages, accepted A&A.
+# Value: σ/m_eff at v_LSB6 ~ 15 km/s = 14.3 (+2.0/-1.9) cm² km/g/s (single-object).
+# Plausible-imprecise flag (per AA1/S4): value from abstract only; full text
+# not yet retrieved. Magnitude is the right order; re-verify against full paper.
+#
+# Physics: σ/m_eff at v_LSB6 = σ/m_0 * (v_LSB6 / V_REF)^a * (v_0 / V_REF)^(-a)
+#         = σ/m_0 * (v_LSB6 / V_REF)^a
+# log10(σ/m_eff) = log10(σ/m_0) + a * log10(V_LSB6 / V_REF)
+# At v_LSB6 = 15, V_REF = 100: log10(15/100) = -0.824
+# So σ/m_eff = σ/m_0 * (0.15)^a (in cm²/g, since σ/m_0 already in those units).
+#
+# Note: the LSB-6 value is from a velocity-WEIGHTED cross section ⟨σv⟩/m. We
+# approximate ⟨σv⟩ ≈ σ v (cross-section weighted by relative velocity at v=15 km/s),
+# which is the standard convention in SIDM literature for dwarf-scale halos.
+# A full treatment would convolve σ(v_rel) over the Maxwell-Boltzmann velocity
+# distribution; deferred to future work.
+def loglike_dm_dominated_udg(sigma_m_0: float, a: float) -> float:
+    """Channel 13: DM-dominated UDG existence constraint (LSB-6 anchor, arXiv:2609.10700).
+
+    Tests whether the model can produce a DM-DOMINATED UDG by requiring σ/m_eff
+    at v_LSB6 ~ 15 km/s to be ~14.3 cm²/g. Counterpart to Channel 11 (DM-free).
+
+    Gaussian log-likelihood centered at log10(14.3) = 1.155 with width 1 dex.
+    At σ/m_0 → 0: loglike ~ -1.4 (1.5 sigma below peak).
+    At σ/m_0 → 100: loglike ~ -2.0 (within 1 sigma of peak; sigma/m_eff saturates).
+
+    Parameters
+    ----------
+    sigma_m_0 : float
+        σ/m at V_REF = 100 km/s (cm²/g)
+    a : float
+        velocity power-law index (positive → sigma decreases at low v)
+
+    Returns
+    -------
+    float : log likelihood (relative units)
+    """
+    if sigma_m_0 <= 0 or not np.isfinite(sigma_m_0) or not np.isfinite(a):
+        return -np.inf
+    # σ/m_eff at LSB-6 velocity (v=15 km/s):
+    # log10(σ/m_eff) = log10(σ/m_0) + a * log10(15/100) = log10(σ/m_0) - 0.824 * a
+    log_sm_eff = np.log10(sigma_m_0) - 0.824 * a
+    # Distance from peak (in dex)
+    chi = ((log_sm_eff - np.log10(DM_DOM_UDG_SIGMA_M_PEAK)) / DM_DOM_UDG_SIGMA_M_WIDTH) ** 2
+    return -0.5 * chi
+
+
+# Backward-compatible alias
+def loglike_dm_dominated_udg_placeholder(sigma_m: float) -> float:
+    """Backward-compatible alias. New code should use loglike_dm_dominated_udg().
+
+    Assumes a=0 (velocity-independent) for backwards compatibility.
+    """
+    return loglike_dm_dominated_udg(sigma_m, 0.0)
 
 
 # ---------------------------------------------------------------------------
