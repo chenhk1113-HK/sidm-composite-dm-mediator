@@ -1,0 +1,121 @@
+{
+  "validation_id": "LOO_CV_11ch_2026_09_12",
+  "date": "2026-09-12",
+  "method": "Leave-One-Out Cross-Validation",
+  "n_channels": 9,
+  "nlive": 500,
+  "dlogz_target": 0.1,
+  "rstate_seed": 20260912,
+  "full_11ch_fit": {
+    "log_Z": -7.878469912827151,
+    "median_sigma_m_0": 0.5902184726073559,
+    "median_a": 1.494095443988787,
+    "wall_seconds": 3.043560743331909
+  },
+  "loo_results": [
+    {
+      "channel": "ch01_dsph",
+      "log_Z_minus_held": -6.224723935794586,
+      "log_l_predictive": -1.715743181663008,
+      "mean_log_l_held": -1.715743181663008,
+      "var_log_l_held": 0.04614476470141239,
+      "p_value": 0.8324743392554117,
+      "wall_seconds": 1.8712964057922363
+    },
+    {
+      "channel": "ch02_ufd",
+      "log_Z_minus_held": -7.879314806081365,
+      "log_l_predictive": -0.09425363413270274,
+      "mean_log_l_held": -0.09425363413270274,
+      "var_log_l_held": 0.008363165073269445,
+      "p_value": 0.8352470818718394,
+      "wall_seconds": 1.9487698078155518
+    },
+    {
+      "channel": "ch03_bullet",
+      "log_Z_minus_held": -7.88704868811157,
+      "log_l_predictive": -0.01849767235058636,
+      "mean_log_l_held": -0.01849767235058636,
+      "var_log_l_held": 0.07320902936603899,
+      "p_value": 0.0,
+      "wall_seconds": 1.939490795135498
+    },
+    {
+      "channel": "ch04_lens_subhalo",
+      "log_Z_minus_held": -2.755325562249969,
+      "log_l_predictive": -32.76899691432829,
+      "mean_log_l_held": -32.76899691432829,
+      "var_log_l_held": 418.3317992065975,
+      "p_value": 0.00033938735927923437,
+      "wall_seconds": 1.4277818202972412
+    },
+    {
+      "channel": "ch05_mw_satellite",
+      "log_Z_minus_held": -6.823887093090199,
+      "log_l_predictive": -1.124412655568082,
+      "mean_log_l_held": -1.124412655568082,
+      "var_log_l_held": 0.08827242697334618,
+      "p_value": 0.8031105461491603,
+      "wall_seconds": 2.022765636444092
+    },
+    {
+      "channel": "ch06_cluster_upper",
+      "log_Z_minus_held": -7.847457663404956,
+      "log_l_predictive": -0.0042252338388742375,
+      "mean_log_l_held": -0.0042252338388742375,
+      "var_log_l_held": 0.0011272581431719933,
+      "p_value": 0.0,
+      "wall_seconds": 1.9252030849456787
+    },
+    {
+      "channel": "ch07_draco",
+      "log_Z_minus_held": -6.647592399081315,
+      "log_l_predictive": -1.3040413549141439,
+      "mean_log_l_held": -1.3040413549141439,
+      "var_log_l_held": 0.08975314927876833,
+      "p_value": 0.796037781179431,
+      "wall_seconds": 1.950387954711914
+    },
+    {
+      "channel": "ch08_radio_relic",
+      "log_Z_minus_held": -7.826150280147675,
+      "log_l_predictive": -0.09144768380038878,
+      "mean_log_l_held": -0.09144768380038878,
+      "var_log_l_held": 0.04747965392136934,
+      "p_value": 0.0,
+      "wall_seconds": 1.9412691593170166
+    },
+    {
+      "channel": "ch09_dm_free_udg",
+      "log_Z_minus_held": -7.80322876991568,
+      "log_l_predictive": -0.10215794318492427,
+      "mean_log_l_held": -0.10215794318492427,
+      "var_log_l_held": 0.005123781810468641,
+      "p_value": 0.8430566578954177,
+      "wall_seconds": 2.079293966293335
+    }
+  ],
+  "in_sample_contributions": {
+    "ch01_dsph": -1.6917042012813241,
+    "ch02_ufd": -0.08893811213140304,
+    "ch03_bullet": -0.0038362322094443718,
+    "ch04_lens_subhalo": -0.9648883865597798,
+    "ch05_mw_satellite": -1.0393950273639894,
+    "ch06_cluster_upper": -0.0031251144485483994,
+    "ch07_draco": -1.2161591445891786,
+    "ch08_radio_relic": -0.05628003014953842,
+    "ch09_dm_free_udg": -0.0982050855993046
+  },
+  "aggregate_metrics": {
+    "mean_p_value": 0.456696199301171,
+    "median_log_l_predictive": -0.10215794318492427,
+    "mean_log_z_minus_held": -6.854969910875257,
+    "mean_in_sample_minus_predictive": 3.5623605488276104,
+    "std_in_sample_minus_predictive": 9.98501450002771
+  },
+  "honest_caveats": [
+    "LOO-CV is computationally expensive: 10 nested sampling fits per validation",
+    "Bayesian p-value calculation is approximate (uses MAP estimate of 'observed' log L)",
+    "Validation only tests predictive validity at the model class level, not parameter values"
+  ]
+}
