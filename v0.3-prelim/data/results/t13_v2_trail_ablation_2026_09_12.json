@@ -1,0 +1,44 @@
+{
+  "ablation_id": "T13_v2_trail_channel_2026_09_12",
+  "date": "2026-09-12",
+  "source": "User upload 2026-09-12 'UDG dark matter.docx' + arXiv:2205.08552 + arXiv:2603.15860",
+  "scope": "T13_v2 12-channel exploration pipeline \u2014 Channel 27 ON vs OFF",
+  "pause_directive": "Honored \u2014 no new science, ablation only",
+  "channel_27_arxiv_ids": [
+    "2205.08552",
+    "2603.15860"
+  ],
+  "channel_27_calibration_status": "PLACEHOLDER \u2014 peak value derived from v-dep extrapolation of v0.3-prelim MAP; simulation-based calibration deferred",
+  "nlive": 500,
+  "dlogz_target": 0.1,
+  "rstate_seed": 20260912,
+  "res_11channel_channel27_off": {
+    "label": "11-channel (Channel 27 OFF)",
+    "log_Z": -7.878469912827151,
+    "median_log_sigma_m_0": -0.22898720211173673,
+    "median_sigma_m_0": 0.5902184726073559,
+    "p16_sigma_m_0": 0.1752288389543343,
+    "p84_sigma_m_0": 4.199060771320346,
+    "median_a": 1.494095443988787,
+    "p16_a": 0.45045217675750054,
+    "p84_a": 1.8800635866978224,
+    "wall_seconds": 1.9621012210845947,
+    "n_posterior_samples": 3562
+  },
+  "res_12channel_channel27_on": {
+    "label": "12-channel (Channel 27 ON)",
+    "log_Z": -8.199713119666024,
+    "median_log_sigma_m_0": -0.00284333558910288,
+    "median_sigma_m_0": 0.993474362912689,
+    "p16_sigma_m_0": 0.20816030734345445,
+    "p84_sigma_m_0": 4.6508610233042065,
+    "median_a": 1.3301639410673112,
+    "p16_a": 0.40109252279969554,
+    "p84_a": 1.717978991843603,
+    "wall_seconds": 1.9674012660980225,
+    "n_posterior_samples": 3438
+  },
+  "delta_log_Z": -0.3212432068388731,
+  "delta_log10_sigma_m_0_median": 0.2261438665226339,
+  "interpretation": "Channel 27 contributes near-zero to log Z because the 11-channel MAP sigma/m_0 ~ 0.62 cm^2/g at a ~ 1.5 maps to sigma/m(v=358) ~ 0.16 cm^2/g, which is 0.2 dex below the channel's peak (-0.30). The 1-dex width covers this comfortably. The channel is a velocity-scale anchor, not a precision measurement; this is by design (see HONEST CAVEATS in ch27_ngc1052_trail_channel.py docstring)."
+}
