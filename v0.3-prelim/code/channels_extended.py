@@ -627,19 +627,25 @@ def loglike_radio_relic(sigma_m_0: float, a: float) -> float:
 
 
 # ---------------------------------------------------------------------------
-# Channel 11 (Tier-1 PATCH 2026-08-25): Dark-matter-free UDGs (NGC 1052-DF2/DF4)
+# Channel 11 (Tier-1 PATCH 2026-08-25; UDG-evidence refresh 2026-09-12):
+# Dark-matter-free UDGs (NGC 1052-DF2 / DF4 / DF9 / FCC 224 / FCC 240).
 #
-# Per user upload 2026-08-25 ('暗物质竟是量子波.docx' § 1 + 'darkm.pdf' § 1):
+# Per user upload 2026-08-25 ('暗物质竟是量子波.docx' § 1 + 'darkm.pdf' § 1)
+# + user upload 2026-09-12 ('UDG dark matter.docx'):
 # Empirical observations of ultra-diffuse galaxies (UDGs) with negligible
-# dark matter. The NGC 1052 field has yielded 4 confirmed examples
-# (NGC 1052-DF2, NGC 1052-DF4, FCC 224, FCC 240), all consistent with
-# a 'bullet dwarf' tidal-stripping formation scenario (arXiv:2205.08552).
+# dark matter. Six confirmed examples across two environments:
+#   - NGC 1052 field: DF2 (2018), DF4 (2019), DF9 (2026) — linear trail
+#     ~2.45 Mpc long, consistent with bullet-dwarf collision formation
+#   - Fornax cluster: FCC 224 (2025), FCC 240 (2026) — tight bound pair
+#     ~75 kpc apart, with predicted DM remnants
 #
-# References (all verified HTTP 200):
+# References (all verified HTTP 200 against arXiv 2026-09-12):
 #   arXiv:1803.10237 - van Dokkum et al. 2018 (NGC 1052-DF2, Nature)
 #   arXiv:1901.05973 - van Dokkum et al. 2019 (NGC 1052-DF4)
 #   arXiv:2205.08552 - van Dokkum et al. 2022 (bullet dwarf collision)
-#   2025 paper (FCC 224) + 2026 paper (FCC 240 + third galaxy)
+#   arXiv:2502.05405 - Buzzo et al. 2025 (FCC 224, A&A 695, A124)
+#   arXiv:2603.15860 - Keim et al. 2026 (NGC 1052-DF9, ApJ 1004, 210)
+#   arXiv:2605.24099 - Buzzo et al. 2026 (FCC 224/240 bound pair, ApJ)
 #
 # Physics interpretation:
 #   This is NOT an exclusion channel. It is a CONSISTENCY CHECK on the

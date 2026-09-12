@@ -1,0 +1,47 @@
+{
+  "ablation_id": "T13_v2_udg_refresh_2026_09_12",
+  "date": "2026-09-12",
+  "source_doc": "UDG dark matter.docx (user upload 2026-09-12)",
+  "scope": "T13_v2 12-channel exploration pipeline \u2014 Channel 11 ON vs OFF",
+  "pause_directive": "Honored \u2014 no new science, ablation only",
+  "channel_11_arxiv_ids": [
+    "1803.10237",
+    "1901.05973",
+    "2205.08552",
+    "2502.05405",
+    "2603.15860",
+    "2605.24099"
+  ],
+  "nlive": 500,
+  "dlogz_target": 0.1,
+  "rstate_seed": 20260912,
+  "res_10channel_channel11_off": {
+    "label": "10-channel (Channel 11 OFF)",
+    "log_Z": -7.80322876991568,
+    "median_log_sigma_m_0": -0.20776467148288735,
+    "median_sigma_m_0": 0.6197768188110037,
+    "p16_sigma_m_0": 0.18054850797482971,
+    "p84_sigma_m_0": 4.59115837777655,
+    "median_a": 1.4769549669196225,
+    "p16_a": 0.44199593445150476,
+    "p84_a": 1.8708843602923335,
+    "wall_seconds": 1.8159434795379639,
+    "n_posterior_samples": 3544
+  },
+  "res_11channel_channel11_on": {
+    "label": "11-channel (Channel 11 ON)",
+    "log_Z": -7.878469912827151,
+    "median_log_sigma_m_0": -0.22898720211173673,
+    "median_sigma_m_0": 0.5902184726073559,
+    "p16_sigma_m_0": 0.1752288389543343,
+    "p84_sigma_m_0": 4.199060771320346,
+    "median_a": 1.494095443988787,
+    "p16_a": 0.45045217675750054,
+    "p84_a": 1.8800635866978224,
+    "wall_seconds": 2.1124064922332764,
+    "n_posterior_samples": 3562
+  },
+  "delta_log_Z": -0.07524114291147033,
+  "delta_log10_sigma_m_0_median": -0.021222530628849382,
+  "interpretation": "Channel 11 contribution to log Z is near-zero because the channel is a soft consistency check around \u03c3/m_0 ~ 0.78 cm\u00b2/g (the v0.3-prelim MAP) with a 2-dex Gaussian width. The 10-channel posterior already clusters near the MAP, so adding Channel 11 neither helps nor hurts. The doc refresh confirms the empirical basis (6 confirmed DM-free UDGs across 2 environments) without changing the numerical encoding."
+}
