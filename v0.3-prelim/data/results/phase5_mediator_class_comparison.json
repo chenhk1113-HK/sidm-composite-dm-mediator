@@ -1,0 +1,31 @@
+{
+  "phase": 5,
+  "date": "2026-09-12",
+  "v03_map": {
+    "sigma_m_0": 0.72,
+    "a": 1.31,
+    "log_epsilon": -56.1,
+    "log_alpha": -28.0
+  },
+  "log_Z_per_class": {
+    "power_law": -279558.89172015083,
+    "yukawa": -279558.89172015083,
+    "scalar_portal": -279558.89172015083,
+    "composite": -279559.3719201508
+  },
+  "log_Z_power_law_reference": -279558.89172015083,
+  "delta_log_Z_vs_power_law": {
+    "power_law": 0.0,
+    "yukawa": 0.0,
+    "scalar_portal": 0.0,
+    "composite": -0.48019999999087304
+  },
+  "spread": 0.48019999999087304,
+  "decision": "KILL",
+  "decision_reason": "STRUCTURAL: Existing likelihoods are baked into power-law form; cannot discriminate mediator classes without likelihood rewrite.",
+  "kill_criterion": {
+    "threshold": 1.0,
+    "spread": 0.48019999999087304,
+    "triggered": true
+  }
+}
