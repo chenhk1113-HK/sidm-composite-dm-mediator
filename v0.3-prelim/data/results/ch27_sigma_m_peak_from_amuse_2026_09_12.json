@@ -78,6 +78,66 @@
       ]
     ]
   },
+  "time_slice_sensitivity": {
+    "200_Myr": {
+      "t_actual_Myr": 200.0,
+      "f_bound_range": [
+        0.30615234375,
+        0.998046875
+      ],
+      "sigma_m_peak_cm2_per_g": null,
+      "reason": "Sigmoid fit degenerate (k=-0.0018240190589095082, peak=5.603724086175341e-308)."
+    },
+    "250_Myr": {
+      "t_actual_Myr": 250.0,
+      "f_bound_range": [
+        0.189453125,
+        0.99462890625
+      ],
+      "sigma_m_peak_cm2_per_g": 4.547580588732215,
+      "sigma_m_peak_1sigma": 0.08731866023799902,
+      "k": 1.733158196346576
+    },
+    "300_Myr": {
+      "t_actual_Myr": 300.0,
+      "f_bound_range": [
+        0.080078125,
+        0.97021484375
+      ],
+      "sigma_m_peak_cm2_per_g": 3.0673685054247652,
+      "sigma_m_peak_1sigma": 0.14889735634264287,
+      "k": 1.756213369892915
+    },
+    "320_Myr": {
+      "t_actual_Myr": 320.0,
+      "f_bound_range": [
+        0.02392578125,
+        0.7646484375
+      ],
+      "sigma_m_peak_cm2_per_g": 1.2196826096874005,
+      "sigma_m_peak_1sigma": 0.2950380174763917,
+      "k": 0.9683461997027597
+    },
+    "340_Myr": {
+      "t_actual_Myr": 340.0,
+      "f_bound_range": [
+        0.00537109375,
+        0.04443359375
+      ],
+      "sigma_m_peak_cm2_per_g": null,
+      "reason": "All sigma/m saturate at same surviving fraction (no signal)."
+    }
+  },
+  "sashimi_resolution_check": {
+    "sigma_m_peak": 3.0673685054247652,
+    "sigma_m_peak_within_resolution_threshold": false,
+    "warning": "sigma/m_peak = 3.067 cm^2/g gives SASHIMI r_core = 0.4008 kpc = 8.0x AMUSE softening. Above resolution threshold; measurement is not resolution-limited.",
+    "sashimi_available": true,
+    "sashimi_r_core_kpc": 0.400774729415645,
+    "sashimi_r_core_pc": 400.774729415645,
+    "amuse_softening_pc": 50.0,
+    "r_core_over_softening": 8.015494588312901
+  },
   "comparison_to_placeholder": {
     "placeholder_sigma_m_cm2_per_g": 0.5,
     "placeholder_log10": -0.3,
@@ -86,16 +146,19 @@
     "delta_percent": 513.4737010849531
   },
   "honest_caveats": [
-    "N=1024 is ~100x below publication-grade",
+    "N=1024 is ~100x below publication-grade (Yang+ 2024 SASHIMI requires N>=10^5)",
     "SIDM kernel is uniform Gaussian perturbation, not Rutherford-like pairwise scattering",
     "No baryonic physics (gas stripping post-hoc)",
     "Head-on collision (b=0) only",
-    "Time slice at t=600 Myr is a heuristic; no formal time-since-collision match to NGC 1052",
-    "Sigmoid fit uses 6 data points; uncertainty from covariance may be underestimated"
+    "Time slice at t=300 Myr is a heuristic; no formal time-since-collision match to NGC 1052",
+    "Sigmoid fit uses 6 data points; uncertainty from covariance may be underestimated",
+    "sigma/m_peak captures the TRANSIENT pre-disruption window, NOT asymptotic disruption. By t > 350 Myr, all halos fully disrupt regardless of sigma/m (N=1024 is too low for realistic gravothermal evolution).",
+    "sigma/m_peak coincides with the SASHIMI-predicted sigma/m value at which AMUSE first sees a SIDM core (r_core > 5x softening = 250 pc). The fit value should be interpreted as a SOFTENING-RESOLUTION THRESHOLD, not a physics measurement.",
+    "See docs/AMUSE_FRESH_RUN_WITH_SASHIMI_2026_09_12.md for full SASHIMI benchmark."
   ],
   "next_steps": [
-    "Plug the simulation-derived peak into Channel 27 (currently uses placeholder)",
-    "Re-run t13_v2_trail_ablation.py with the new peak to measure posterior shift",
-    "If improvement is significant, mark simulation peak as PRIMARY anchor and placeholder as backup"
+    "Do NOT plug the simulation-derived peak into Channel 27 \u2014 it is a resolution threshold.",
+    "Placeholder (sigma/m = 0.5 cm^2/g at v=358 km/s) STAYS as the Channel 27 anchor.",
+    "Future work to genuinely constrain sigma/m(v=358) would require: N>=10^5 particles, pairwise Rutherford-like SIDM kernel, and time slices matched to NGC 1052 trail age."
   ]
 }
