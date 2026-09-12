@@ -63,6 +63,20 @@ Per AGENTS.md rule 11 (honesty over fluency), T39 demonstrates:
 - **The particle-physics story does NOT work** — ε ~ 10⁻⁵⁴ is unnatural and needs a symmetry-based explanation (not yet provided).
 - **The decoupling interpretation** is the project's standing posture, not a bug. It says: "this model is a phenomenology tool, not a particle-physics candidate, until ε naturalness is resolved."
 
+## Verdict softened per R1 (Jeffreys scale)
+
+Per Reviewer 1 (roadmap1.docx, paragraph 11): log_Z = -2.94 is **"weak evidence at best (Jeffreys scale: 'not worth more than a bare mention')"** when interpreted in absolute terms. The earlier verdict "TIER-3 RESOLVED" (in the JSON output) is overclaiming.
+
+**Revised verdict (this doc):** **TIER-3 WEAKLY CONSISTENT** with multi-channel data. The marginalization succeeds (log_Z = -2.94 vs catastrophic T30/T32), but the absolute evidence is weak per Jeffreys scale. The "~600× improvement" framing is comparing to catastrophically-excluded baselines, not a positive result.
+
+**Three honest framings of the same posterior:**
+
+1. **Strongest claim:** "Tier-3 marginalization restores consistency with multi-channel data."
+2. **Weakest claim:** "Tier-3 marginalization succeeds only if the mediator is decoupled from the Standard Model at the 10⁻⁵⁴ level — a naturalness catastrophe."
+3. **Most honest claim:** "Both. The model is consistent with data ONLY if the SIDM mediator is invisible to the Standard Model. That conditional is the entire result, not a caveat."
+
+The published paper would need to foreground framing #3, not #1.
+
 ## What T39 does NOT address
 
 - **Why ε ~ 10⁻⁵⁴** — no symmetry mechanism proposed (e.g., technical naturalness from a discrete symmetry, accidental cancellation in UV completion, etc.)

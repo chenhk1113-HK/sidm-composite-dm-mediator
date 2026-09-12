@@ -14,11 +14,11 @@
 |---|---|---|---|---|---|---|
 | 1 | **DM mass (m_χ)** | +1 (5D total) | **HIGH** | 1–2 weeks | High — direct-detection prediction | Not started |
 | 2 | **Mediator mass (m_A')** | +1 (5D total) | **HIGH** | 1–2 weeks | High — distinguishes mediator models | Not started |
+| 4 | **Baryonic feedback** | structural | **HIGH** ↑ | 4–8 weeks (sims) | **High — R1: "fundamental degeneracy, affects every channel"** | Not started |
+| 6 | **Cross-channel correlations** | structural | **MEDIUM** ↑ | 1–2 weeks | **Medium — R1: "statistically invalid to treat as independent"** | Not started |
 | 3 | Particle-physics model class | structural | MEDIUM | 2–4 weeks | Medium — vector vs scalar vs composite | Not started |
-| 4 | Baryonic feedback | structural | MEDIUM | 4–8 weeks (sims) | Medium — addresses core-formation degeneracy | Not started |
-| 5 | Cosmological initial conditions | structural | LOW | 3–6 months | Low — alternative DM models | Not started |
-| 6 | Cross-channel correlations | structural | LOW | 1–2 weeks | Low — hierarchical model | Not started |
 | 7 | Time-dependence (gravothermal) | +1 (5D total) | LOW | 2–4 weeks (sims) | Low — core-collapse timeline | Not started |
+| 5 | Cosmological initial conditions | structural | LOW | 3–6 months | Low — alternative DM models | Not started |
 
 ---
 
@@ -171,7 +171,17 @@ Medium. Baryonic feedback modeling has large systematic uncertainties — could 
 
 ### Particle physics payoff
 
-Medium. If SIDM is preferred over CDM+baryonic, that's strong evidence. If CDM+baryonic is comparable, SIDM loses some of its support.
+**High.** If SIDM is preferred over CDM+baryonic, that's strong evidence. If CDM+baryonic is comparable, SIDM loses some of its support.
+
+### Reviewer 1 escalation (2026-09-12, roadmap1.docx)
+
+Reviewer 1 (paragraph 52) flagged this as **fundamental, not minor**:
+
+> "The baryonic feedback degeneracy: The document correctly notes that SIDM cores can be mimicked by CDM + baryonic feedback. This is not a minor caveat—it is a fundamental degeneracy that affects every channel. The roadmap should prioritize a hydrodynamic simulation comparison (EAGLE, IllustrisTNG, FIRE) as the single most important validation step."
+
+**Priority bumped: MEDIUM → HIGH** (per roadmap table above).
+
+**Implication**: This should be done in parallel with Phase 2 (m_χ + m_A'). The m_χ + m_A' extension gives the model particle-physics credibility; the baryonic feedback test gives it scientific credibility. Both are needed before publishing.
 
 ---
 
@@ -280,9 +290,47 @@ Medium. The AMUSE pipeline is incomplete (placeholder σ/m_peak from earlier wor
 
 Low. Mostly affects evolutionary predictions, not the headline σ/m vs velocity.
 
+### Reviewer 1 escalation (2026-09-12, roadmap1.docx)
+
+Reviewer 1 (paragraph 53) flagged this as **statistically invalid**:
+
+> "The channel cross-correlation problem: NGC 1052-DF2 appears in both Ch9 and Ch13. Treating channels as independent is statistically invalid. A hierarchical model with shared nuisance parameters is required for a credible joint fit."
+
+**Priority bumped: LOW → MEDIUM** (per roadmap table above).
+
+**Implication**: This should be done before Phase 2 (m_χ + m_A'), because adding more parameters to a statistically-invalid baseline would compound the problem. Cost is small (1-2 weeks of bookkeeping) but the credibility cost is high.
+
 ---
 
-## High-level ballpark plan
+## Null result as legitimate outcome (added 2026-09-12 per R1)
+
+**Reviewer 1 (paragraphs 64–70, roadmap1.docx)** raised the option that the Tier-3 posterior is "a null result dressed up as a consistency check." The reviewer proposed three legitimate outcomes for the project:
+
+1. **Publish the null result**: "We find that a composite SIDM model with a secluded mediator can fit multi-channel astrophysical data only if the mediator is decoupled from the Standard Model at the 10⁻⁵⁴ level, which we interpret as a naturalness catastrophe."
+
+2. **Pivot to a different question**: If the mediator is decoupled, what does that imply for the dark sector? Is there a symmetry that enforces this? Or is the model simply wrong?
+
+3. **Collaborate with particle physicists**: The ε problem is not something the current project can solve alone. It requires input from model-builders who understand symmetry-based suppression mechanisms.
+
+**Status**: All three are legitimate outcomes. The current roadmap assumes the model is worth pursuing (Phase 2: add m_χ + m_A'). **A future strategic decision** should explicitly address whether the project should:
+- (A) Continue with Phase 2+ (assume the model is worth pursuing)
+- (B) Pivot to publishing the null result
+- (C) Pivot to the symmetry question
+- (D) Defer to particle-physics collaboration
+
+This decision should be made BEFORE Phase 2 begins, not after.
+
+### Jeffreys-scale framing (added per R1)
+
+Reviewer 1 noted that log_Z = -2.94 corresponds to "substantial" evidence on the Jeffreys scale, not "strong." The project's T39 docs currently say "RESOLVED" but the honest framing is:
+
+- **log_Z = -2.94 vs catastrophic T30 (-9207) and T32 (-1578)**: 600× improvement, but escaping a catastrophic exclusion ≠ positive evidence
+- **log_Z = -2.94 vs marginalization baseline**: substantial evidence that decoupling works
+- **log_Z = -2.94 in absolute terms**: not decisive by Jeffreys scale
+
+The verdict should be **"WEAKLY CONSISTENT (log_Z = -2.94)"** not **"RESOLVED."** This update applies to `T39_EPSILON_TIER3_VERIFICATION_2026_09_12.md` (see that doc for the softened verdict).
+
+---
 
 ### Phase 1 (current, completed 2026-09-12)
 
@@ -348,9 +396,9 @@ Low. Mostly affects evolutionary predictions, not the headline σ/m vs velocity.
 | Phase | Posterior | Cost | Priority |
 |---|---|---|---|
 | 2 | #1 + #2 (DM + mediator mass) | 1–2 weeks | HIGH |
-| 3 | #6 (cross-channel correlations) | 1–2 weeks | LOW |
+| 3 | #6 (cross-channel correlations) — **was LOW** | 1–2 weeks | **MEDIUM ↑** |
+| 5 | #4 (baryonic feedback) — **was MEDIUM** | 4–8 weeks | **HIGH ↑** |
 | 4 | #3 (mediator class) | 2–4 weeks | MEDIUM |
-| 5 | #4 (baryonic feedback) | 4–8 weeks | MEDIUM |
 | 6 | #7 (time evolution) | 2–4 weeks | LOW |
 | 7 | #5 (alternative DM) | 3–6 months | LOW |
 
@@ -358,7 +406,32 @@ Low. Mostly affects evolutionary predictions, not the headline σ/m vs velocity.
 
 **Quickest impact**: Phase 2 (1–2 weeks for m_χ + m_A').
 
-**Highest risk**: Phase 5 (baryonic feedback could invalidate SIDM interpretation).
+**Highest risk**: Phase 5 (baryonic feedback could invalidate SIDM interpretation) — now HIGH priority per R1.
+
+**Recommended sequence** (per R2):
+1. Phase 3 (cross-channel correlations, 1-2 weeks) — first, because adding parameters to a statistically-invalid baseline compounds the problem
+2. Phase 2 (m_χ + m_A', 1-2 weeks) — particle-physics upgrade
+3. Phase 5 (baryonic feedback, 4-8 weeks) — run in parallel with Phase 2 if resources allow
+4. Phase 4 (mediator class, 2-4 weeks) — last, depends on Phase 2 results
+
+---
+
+## ⚠️ STOP RULE — Do not add more channels (per R2, paragraph 32)
+
+Reviewer 2 (roadmap1.docx, paragraph 32) flagged a critical warning:
+
+> "Do not expand the number of exotic channels (extra LRD variants, more UDG subtypes, etc.) until the naturalness issue is under better control. Adding more astrophysical likelihoods while the mediator remains invisible simply amplifies the fine-tuning."
+
+**Implication**: Channel 13 (DM-dominated UDG, added this session in response to LRD2 cherry-picking concern) was **borderline-justified** but may have been premature. Per R2's rule:
+
+- **Channel 11** (DM-free UDG): pre-existing, keep
+- **Channel 13** (DM-dominated UDG): added this session, justified by LRD2 cherry-picking concern — KEEP
+- **Any further channels (Ch14+)** should be DEFERRED until:
+ 1. The ε naturalness problem is addressed (Phase 0 strategic decision)
+ 2. Cross-channel correlations are fixed (Phase 3)
+ 3. m_χ + m_A' are added (Phase 2)
+
+**This is an audit-trail marker**: future sessions should not add Ch14, Ch15, etc. without explicit user direction to override this stop rule.
 
 ---
 
@@ -375,7 +448,20 @@ These are all research directions but not "missing posteriors" — they're model
 
 ## What I recommend as the next concrete step
 
-**Ship Phase 2 (m_χ + m_A' joint posterior)**:
+**Strategic decision first, then Phase 2:**
+
+### Step 1 — Strategic decision (per R1, paragraphs 64–70)
+
+Before beginning Phase 2, decide which of the four legitimate outcomes the project should pursue:
+- **(A) Continue with Phase 2+**: assume the model is worth pursuing (default)
+- **(B) Pivot to publishing the null result**: publish the naturalness catastrophe as the contribution
+- **(C) Pivot to the symmetry question**: investigate what symmetry could enforce ε ~ 10⁻⁵⁴
+- **(D) Defer to particle-physics collaboration**: hand off the ε problem to model-builders
+
+This decision should be made before Phase 2 (m_χ + m_A') begins, not after.
+
+### Step 2 — If (A) chosen: ship Phase 2 (m_χ + m_A' joint posterior)
+
 - 1–2 weeks
 - Highest particle-physics payoff
 - Builds on existing infrastructure (just adds 2 dimensions to T39 framework)
@@ -388,16 +474,37 @@ If you want to commit to that, the next step would be to:
 4. Pull LZ direct-detection data
 5. Re-run as 6D joint fit
 
+### Step 2.5 — Fix cross-channel correlations (per R1, paragraph 53) BEFORE Phase 2
+
+- 1-2 weeks of bookkeeping
+- Required for statistical validity of any future joint fit
+- Add hierarchical nuisance parameters for shared systematics
+- **Bumped to MEDIUM priority** (was LOW) per R1's "statistically invalid" critique
+
+### Step 3 — If (A) chosen AND Phase 2 succeeds: ship Phase 5 (baryonic feedback)
+
+- 4–8 weeks of simulation work (EAGLE/IllustrisTNG comparison)
+- **Bumped to HIGH priority** (was MEDIUM) per R1's "fundamental degeneracy" critique
+- Could invalidate the SIDM interpretation entirely
+- Run in parallel with Phase 2 if resources allow
+
 **Or if you'd rather defer Phase 2**, this roadmap doc is sufficient as a reference for future sessions.
 
 ---
 
 ## Tracking
 
-- **Roadmap written:** 2026-09-12 (this doc)
+- **Roadmap written:** 2026-09-12 (this doc, initial version)
+- **Roadmap updated:** 2026-09-12 (this version, per R1+R2 review in roadmap1.docx)
 - **Code changes:** none
 - **Test changes:** none
 - **Channel additions:** none
+- **Priority bumps:**
+ - Baryonic feedback: MEDIUM → **HIGH** (R1: "fundamental degeneracy")
+ - Cross-channel correlations: LOW → **MEDIUM** (R1: "statistically invalid")
+ - m_χ + m_A': unchanged at HIGH
+- **New sections:** Null result as legitimate outcome, STOP RULE for new channels, strategic decision framing
+- **Verdict softening:** "Tier-3 RESOLVED" → "Tier-3 WEAKLY CONSISTENT (log_Z = -2.94)" per R1's Jeffreys-scale analysis
 - **Priority list:** Phase 2 (m_χ + m_A') is highest-impact
 
 Reference: T39 Tier-3 fit at `v0.3-prelim/data/results/t39_tier3_epsilon_alpha_joint_fit.json`
