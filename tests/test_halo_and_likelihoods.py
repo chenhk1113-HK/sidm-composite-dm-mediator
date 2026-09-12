@@ -174,34 +174,59 @@ class TestVelocityDependent:
 # ---------------------------------------------------------------------------
 
 class TestDsphLikelihood:
-    """Channel 2 (Horigome+ 2025) bimodal with dip.
+    """Channel 2 (Horigome+ 2025) — half-Gaussian upper-limit form.
 
-    The dSph likelihood is evaluated at the dSph velocity scale (V_DSPH=30 km/s),
-    not at V_REF. So sigma/m_0 values need to be scaled to put sigma/m(v_dSph)
-    at the peaks.
+    REWRITTEN 2026-09-12: The legacy bimodal-with-dip surrogate (peaks at
+    sigma/m ~ 0.1 AND ~10 cm^2/g with a dip at sigma/m ~ 1) was deliberately
+    replaced by the R12 P0-D fix (2026-08-17) with a published upper-limit
+    form (Horigome+ 2025). See channels_v03.py lines 7-13 for the rationale.
+
+    The current channel shape (per J1 body verification 2026-09-12):
+      - Mode at log10(sigma/m(v_DSPH)) = -1.3 (sigma/m ~ 0.05 cm^2/g)
+      - Capped flat BELOW the mode (no preference for lower sigma/m)
+      - Half-Gaussian RAMP from mode to upper-limit at sigma/m = 0.2 cm^2/g
+      - Continues Gaussian penalty ABOVE upper limit (chi^2 ~ 4 at sigma/m = 0.4)
+      - No second peak at sigma/m = 10; that's now heavy penalty (-4.5)
+
+    These tests now reflect the post-R12 channel shape. The legacy
+    test_peak_at_large and test_dip_penalty were testing the deliberately-
+    removed bimodal surrogate and are replaced below.
     """
 
     def test_peak_at_small(self):
-        """sigma/m at V_DSPH should hit the small peak (~0.1 cm^2/g)."""
-        ll = loglike_dsph_v03(sigma_m_0=0.1, a=0.0)
-        assert ll > -2.0, f"log L at small peak should be > -2 (it's a peak), got {ll}"
+        """At sigma/m_0 = 0.05 (mode), log L should be 0."""
+        ll = loglike_dsph_v03(sigma_m_0=0.05, a=0.0)
+        assert abs(ll) < 0.01, f"log L at mode should be 0, got {ll}"
 
-    def test_peak_at_large(self):
-        """sigma/m at V_DSPH should hit the large peak (~10 cm^2/g)."""
+    def test_flat_below_mode(self):
+        """Below mode (sigma/m_0 < 0.05): log L capped at 0 (no preference for lower)."""
+        for x in [0.001, 0.01, 0.04]:
+            ll = loglike_dsph_v03(x, 0.0)
+            assert abs(ll) < 0.01, f"log L below mode should be 0, got {ll} at x={x}"
+
+    def test_upper_limit_at_0p2(self):
+        """At sigma/m_0 = 0.2 (Horigome+ 2025 upper limit), log L should be -1.13.
+        (chi = (log10(0.2) - log10(0.05)) / 0.4 = 1.5, ll = -0.5 * 1.5^2 = -1.125)"""
+        ll = loglike_dsph_v03(sigma_m_0=0.2, a=0.0)
+        assert -1.5 < ll < -1.0, f"log L at upper limit expected ~-1.13, got {ll}"
+
+    def test_penalty_above_upper_limit(self):
+        """At sigma/m_0 = 10 (above upper limit), log L should be heavy penalty.
+        chi = (log10(10) - log10(0.05)) / 0.4 = 5.75, ll = -16.5. But the channel
+        has an explicit exclusion at the boundary, so ll should be very negative."""
         ll = loglike_dsph_v03(sigma_m_0=10.0, a=0.0)
-        assert ll > -2.0, f"log L at large peak should be > -2 (it's a peak), got {ll}"
-
-    def test_dip_penalty(self):
-        """sigma/m at V_DSPH ~ 1 cm^2/g should be lower than both peaks (exclusion dip)."""
-        ll_dip = loglike_dsph_v03(sigma_m_0=1.0, a=0.0)
-        ll_small = loglike_dsph_v03(sigma_m_0=0.1, a=0.0)
-        ll_large = loglike_dsph_v03(sigma_m_0=10.0, a=0.0)
-        assert ll_dip < ll_small, f"dip should be < small peak: dip={ll_dip}, small={ll_small}"
-        assert ll_dip < ll_large, f"dip should be < large peak: dip={ll_dip}, large={ll_large}"
+        assert ll < -4.0, f"log L above upper limit should be heavily penalized, got {ll}"
 
     def test_invalid_returns_neg_inf(self):
+        """Negative or zero sigma/m_0 returns -inf."""
         assert loglike_dsph_v03(-1.0, 0.0) == -np.inf
         assert loglike_dsph_v03(0.0, 0.0) == -np.inf
+
+    def test_vdep_a1(self):
+        """v-dep at a=1: sigma/m_eff(v=30) = sigma/m_0 * 3.33.
+        To hit mode at sigma/m(v=30) = 0.05: sigma/m_0 = 0.015."""
+        ll = loglike_dsph_v03(sigma_m_0=0.015, a=1.0)
+        assert abs(ll) < 0.01, f"log L at v-dep mode expected ~0, got {ll}"
 
 
 class TestUfdLikelihood:

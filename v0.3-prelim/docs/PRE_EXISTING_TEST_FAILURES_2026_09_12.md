@@ -1,93 +1,96 @@
-# Pre-existing test failures (2026-09-12 snapshot)
+# Pre-existing test failures — RESOLVED (2026-09-12)
 
-**Status:** DOCUMENTED, not addressed. These failures pre-date the ch04 width fix and the AMUSE validation work in this session. They require separate investigation.
+**Status:** RESOLVED. All 3 previously-failing tests were testing **stale assumptions** about channel shapes that had been deliberately changed in earlier sessions. The tests are now updated to match the actual (correct) channel behavior.
 
-**Verified pre-existing:** `git checkout HEAD~6` (pre-ch04-fix commit `f16bdc2`) reproduces all 3 failures. Therefore they are NOT caused by commits 24c908b, 67b92a5, a24733b, a44ef3e, or d5738a7.
+**Resolution date:** 2026-09-12
 
 ---
 
-## Failure 1: `test_peak_at_large`
+## Resolution summary
+
+| # | Test | Original failure | Root cause | Resolution |
+|---|---|---|---|---|
+| 1 | `test_peak_at_large` | Expected log L > -2 at σ/m=10 (bimodal "large peak") | Channel shape was deliberately replaced 2026-08-17 (R12 P0-D fix); old tests referenced removed bimodal surrogate | Updated tests to reflect actual half-Gaussian upper-limit shape |
+| 2 | `test_dip_penalty` | Expected bimodal dip at σ/m=1 | Same as #1 | Same |
+| 3 | `test_manifest_total_matches_disk` | Disk 325647 vs manifest 321749 (diff 3898 bytes) | `README.md` added to `data/reference/` per R13 M2 suggestion but manifest tracks only data files | Test now excludes README.md alongside MANIFEST.json |
+
+---
+
+## Resolution 1+2: dSph channel (Horigome+ 2025)
 
 **File:** `tests/test_halo_and_likelihoods.py`
-**Test class:** `TestDsphLikelihood::test_peak_at_large`
-**Symptom:**
-```
-AssertionError: log L at large peak should be > -2 (it's a peak), got -4.525
-```
+**Test class:** `TestDsphLikelihood`
 
-**What the test expects:** dSph channel should have a "large peak" at σ/m=10 cm²/g where log L > -2 (it's a peak).
+### What changed
 
-**What it gets:** log L = -4.525 at σ/m=10. There's no peak there in the current channel.
+The legacy `test_peak_at_large` and `test_dip_penalty` tests asserted bimodal surrogate behavior (peaks at σ/m ~ 0.1 AND ~10 cm²/g with a dip at σ/m ~ 1). The R12 P0-D fix (2026-08-17, documented in `channels_v03.py` lines 7-13) **deliberately replaced** this bimodal surrogate with a published upper-limit form (Horigome+ 2025).
 
-**Likely root causes (not investigated):**
-1. The test was written assuming a particular dSph likelihood shape (e.g., bimodal with peaks at 0.1 and 10) but the current `channels_v03.loglike_dsph_v03` is unimodal/uninformative.
-2. Or the test expectation was correct when written but the channel was later changed without updating the test.
+**The current channel shape** (verified via J1 body verification 2026-09-12):
+- Mode at log10(σ/m(v_DSPH)) = -1.3 (σ/m ~ 0.05 cm²/g)
+- Capped flat BELOW the mode (no preference for lower σ/m)
+- Half-Gaussian RAMP from mode to upper-limit at σ/m = 0.2 cm²/g
+- Continues Gaussian penalty ABOVE upper limit
+- **No second peak at σ/m = 10; that's now heavy penalty (-4.5)**
 
-**Recommended next step:** Look at `v0.3-prelim/code/channels_v03.py::loglike_dsph_v03` to see the actual shape. Compare to git history for `channels_v03.py` to see when the shape changed (if ever).
+### Tests replaced with post-R12 shape
 
----
+- `test_peak_at_small` → tests mode at σ/m_0=0.05 (log L = 0)
+- `test_flat_below_mode` → tests cap below mode (log L = 0 for σ/m_0 < 0.05)
+- `test_upper_limit_at_0p2` → tests at Horigome+ 2025 limit (log L = -1.13)
+- `test_penalty_above_upper_limit` → tests σ/m_0=10 (log L < -4)
+- `test_invalid_returns_neg_inf` (unchanged)
+- `test_vdep_a1` → tests v-dep coupling at a=1 (log L = 0 at σ/m_0=0.015)
 
-## Failure 2: `test_dip_penalty`
+### Why the original failure was correct
 
-**File:** `tests/test_halo_and_likelihoods.py`
-**Test class:** `TestDsphLikelihood::test_dip_penalty`
-**Symptom:**
-```
-AssertionError: dip should be < large peak: dip=-2.525, large=-4.525
-```
+The original tests were testing a surrogate shape that had been **deliberately removed** as incorrect. Per `channels_v03.py` line 89:
 
-**What the test expects:** dSph channel should be a bimodal exclusion: log L(σ/m=1) < log L(σ/m=0.1) AND log L(σ/m=1) < log L(σ/m=10).
+> "The legacy surrogate contradicted the Horigome+ 2025 abstract."
 
-**What it gets:** log L(dip=1) = -2.525 > log L(large=10) = -4.525. The "large peak" is actually worse than the "dip" — there's no peak at 10 in the current channel.
-
-**Likely root cause:** Same as Failure 1 — dSph channel doesn't have the expected bimodal shape.
-
-**Recommended next step:** Same as Failure 1.
+The fix to the channel happened, but the tests didn't get updated.
 
 ---
 
-## Failure 3: `test_manifest_total_matches_disk`
+## Resolution 3: Reference-chains manifest
 
 **File:** `tests/test_reference_chains.py`
-**Test class:** `TestReferenceDataBudget::test_manifest_total_matches_disk`
-**Symptom:**
-```
-AssertionError: Disk total 325647 != manifest total 321749
-```
 
-**What the test expects:** The reference data manifest's total byte count matches the on-disk total.
+### What changed
 
-**What it gets:** Disk total is 325,647 bytes vs manifest's 321,749 bytes. Off by 3,898 bytes (1.2%).
+The test counted all files in `data/reference/` except `MANIFEST.json`. After `README.md` was added per R13 M2 suggestion (`REVIEWER_AUDIT_R13.md`, 3898 bytes), the disk count exceeded the manifest count by exactly 3898 bytes.
 
-**Likely root causes:**
-1. New reference data files were added without updating the manifest.
-2. Existing files were modified (sizes changed) without updating the manifest.
-3. Test was written against an older snapshot and the data has evolved since.
+**The fix**: test now excludes both `MANIFEST.json` (self-referential) and `README.md` (documentation, not a data file).
 
-**Recommended next step:**
-- Look at `tests/test_reference_chains.py` to find what file is the manifest.
-- Compare manifest entries to `ls -la data/reference/` or equivalent.
-- Either update the manifest (if files genuinely changed) or fix the test (if it's checking the wrong path).
+### Why this is the right fix (not modifying the manifest)
+
+- `MANIFEST.json` already excludes itself from `total_bytes` (line 143-144 of test)
+- `README.md` is documentation, not a data file — analogous to MANIFEST.json
+- The manifest's purpose is to track **data files** with their compression ratios
+- Including README.md in the manifest would conflate data and documentation
+- The test's intent is "manifest byte count == sum of data file bytes on disk" — README.md is not a data file
 
 ---
 
-## Why these are NOT urgent
+## Final state after resolution
 
-- All three failures pre-date the 2026-09-12 work in this session.
-- They don't block the ch04 fix, the AMUSE validation, or the placeholder decision.
-- The two `test_halo_and_likelihoods` failures are in a slow-changing channel (`channels_v03.py`) that hasn't been touched in this session.
-- The `test_reference_chains` failure is a manifest-vs-disk byte count discrepancy, not a data integrity issue.
+- **Tests:** 207/207 passing (was 204/207 before resolution)
+- **No channel code changed** (R12 P0-D was the right fix; tests just needed updating)
+- **No manifest data changed** (just the test exclusion list)
+- **No regression risk** (the test changes only update assertions to match the actual channel behavior)
 
-## When to address them
+---
 
-- **Failure 1+2 (dSph):** When someone is actively working on the dSph channel or adding new physics to it.
-- **Failure 3 (manifest):** When someone is curating the reference data archive.
+## What was learned
+
+1. **Stale tests fail silently** — when channel shapes are intentionally changed, the tests that pinned the OLD shape don't get updated. They sit there failing until someone runs the full suite.
+2. **The pre-existing failures were pre-existing because the full suite wasn't being run** — I was running only the 4-5 files I was actively touching.
+3. **Both resolutions were honest framing** — the channels were right (R12 P0-D was correct), the manifest was right (tracks data, not docs), the tests were wrong (testing removed behavior).
 
 ## Tracking
 
-- Detected: 2026-09-12 (full test suite sweep)
-- Verified pre-existing: 2026-09-12 (via `git checkout HEAD~6`)
-- Documented: 2026-09-12 (this file)
-- Addressed: deferred
+- **Detected:** 2026-09-12 (full test suite sweep)
+- **Verified pre-existing:** 2026-09-12 (via `git checkout HEAD~6`)
+- **Documented:** 2026-09-12 (original version of this file)
+- **Resolved:** 2026-09-12 (this update)
 
-Reference: commit `d5738a7` ("test: update test_lens_subhalo_channel to match ch04 width revision") which fixed the ONLY regression caused by this session.
+Reference: commit (this turn) — "fix(tests): resolve 3 pre-existing test failures from R12 P0-D and R13 M2 changes"
