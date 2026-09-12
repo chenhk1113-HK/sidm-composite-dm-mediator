@@ -39,20 +39,36 @@ class TestNgc1052TrailChannel:
         assert math.isfinite(SURVIVING_HALO_MASS_MSUN)
         assert SURVIVING_HALO_MASS_MSUN > 0
 
-    def test_at_v0p3_prelim_map_is_near_neutral(self):
-        """At the v0.3-prelim MAP (sigma/m_0 ~ 0.78, a ~ 0.5), the channel
-        should be near-zero (model-consistent with the v-dep extrapolation)."""
-        result = loglike_ngc1052_trail(sigma_m_0=0.78, a=0.5)
-        # The peak is anchored to this MAP value, so log L should be near zero
+    def test_at_amuse_peak_is_near_neutral(self):
+        """At the AMUSE-derived anchor (sigma/m_0 ~ 3.07 cm^2/g, a ~ 0.0),
+        the channel should be near-zero (model-consistent with simulation).
+        With velocity-dependence, the anchor at v=358 km/s is sigma/m(v) = sigma/m_0.
+        """
+        result = loglike_ngc1052_trail(sigma_m_0=3.07, a=0.0)
+        # The peak is anchored to this value, so log L should be near zero
         assert math.isfinite(result)
-        assert result >= -0.1, f"MAP penalty too strong: {result}"
+        assert result >= -0.1, f"AMUSE-anchor penalty too strong: {result}"
+
+    def test_at_v0p3_prelim_map_is_now_penalized(self):
+        """At the v0.3-prelim MAP (sigma/m_0 ~ 0.78, a ~ 0.5), the channel
+        is now penalized because the AMUSE-derived peak (3.07 cm^2/g at v=358)
+        is ~0.87 dex above this MAP's implied sigma/m(v=358) ~ 0.41 cm^2/g.
+        Old placeholder peak (0.5) gave near-neutral; new peak (3.07) penalizes.
+        Penalty = -0.5 * (0.87)^2 ~ -0.38
+        """
+        result = loglike_ngc1052_trail(sigma_m_0=0.78, a=0.5)
+        assert math.isfinite(result)
+        assert result < -0.3, f"v0.3-prelim MAP not penalized enough by new peak: {result}"
+        assert result > -0.5, f"v0.3-prelim MAP penalized too strongly: {result}"
 
     def test_at_extreme_high_sigma_m_penalizes(self):
-        """sigma/m_0 = 100, a = -1 should be strongly penalized
-        (sigma/m(v=358) ~ 358 cm^2/g, 2.5 dex above peak)."""
+        """sigma/m_0 = 100, a = -1 should be strongly penalized.
+        With new peak=3.07 cm^2/g: sigma/m(v=358) ~ 358 cm^2/g, ~2.05 dex above peak.
+        Penalty = -0.5 * (2.05)^2 ~ -2.10
+        """
         result = loglike_ngc1052_trail(sigma_m_0=100.0, a=-1.0)
         assert math.isfinite(result)
-        assert result < -3.0, f"Extreme high sigma/m not penalized enough: {result}"
+        assert result < -2.0, f"Extreme high sigma/m not penalized enough: {result}"
 
     def test_at_extreme_low_sigma_m_penalizes(self):
         """sigma/m_0 = 0.1, a = 1.5 gives sigma/m(v=358) ~ 0.015 cm^2/g,

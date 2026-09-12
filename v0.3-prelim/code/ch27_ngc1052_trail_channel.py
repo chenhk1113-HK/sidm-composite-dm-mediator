@@ -94,7 +94,13 @@ SURVIVING_HALO_MASS_MSUN = 1.0e10    # M_sun (NGC 1052 central elliptical)
 #   Geometric mean: sigma/m(v=358) ~ 0.5 cm^2/g -> log10(0.5) ~ -0.30
 # Anchored to the v-dep extrapolation of the v0.3-prelim MAP. This is a
 # PLACEHOLDER pending a simulation-based calibration; see HONEST CAVEATS.
-NGC1052_TRAIL_LOG_SM_PEAK = -0.30   # log10(cm^2/g) -> ~0.5 cm^2/g at v=358 km/s
+NGC1052_TRAIL_LOG_SM_PEAK = 0.487  # log10(cm^2/g) -> ~3.07 cm^2/g at v=358 km/s
+# 2026-09-12: REPLACED placeholder value of -0.30 (~0.5 cm^2/g) with AMUSE-N-body
+# simulation-derived value. See data/results/amuse_bullet_dwarf_calibration_2026_09_12.json
+# and v0.3-prelim/docs/CH27_PEAK_FROM_AMUSE_2026_09_12.md.
+# Sigmoid fit at t=300 Myr (the discriminating region before bulk disruption)
+# gives sigma/m_peak = 3.07 +/- 0.15 cm^2/g (formal fit uncertainty).
+# Honest uncertainty ~ +/- 0.5 cm^2/g due to N=1024 noise + only 6 sigma/m data points.
 NGC1052_TRAIL_LOG_SM_WIDTH = 1.0    # dex (factor-of-10 Gaussian width)
 
 
