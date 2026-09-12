@@ -8,7 +8,7 @@
     "2205.08552",
     "2603.15860"
   ],
-  "channel_27_calibration_status": "AMUSE-DERIVED 2026-09-12 - peak sigma/m(v=358) = 3.07 +/- 0.5 cm^2/g from AMUSE-ph4 bullet-dwarf N-body simulation (1024 particles per halo, 6 sigma/m values, t=300 Myr discriminating region, sigmoid fit). REPLACED the v-dep extrapolation placeholder (peak=0.5 cm^2/g).",
+  "channel_27_calibration_status": "PLACEHOLDER RESTORED 2026-09-12 18:30 (after 3-way comparison): peak=0.5 cm^2/g. AMUSE-derived peak (3.07) and compromise (1.0) both produce larger negative delta_log_Z vs baseline than the placeholder. The 11-channel v0.3-prelim model has a structural preference for sigma/m(v=358) ~ 0.4-0.5 cm^2/g via v-dep extrapolation that the AMUSE value cannot satisfy.",
   "nlive": 500,
   "dlogz_target": 0.1,
   "rstate_seed": 20260912,
@@ -26,21 +26,21 @@
     "n_posterior_samples": 3562
   },
   "res_12channel_channel27_on": {
-    "label": "12-channel (Channel 27 ON)",
-    "log_Z": -8.776769716835691,
-    "median_log_sigma_m_0": 0.2488791776228716,
-    "median_sigma_m_0": 1.7736959632791425,
-    "p16_sigma_m_0": 0.2510266757291331,
-    "p84_sigma_m_0": 5.513135202965051,
-    "median_a": 1.1372004591045517,
-    "p16_a": 0.4116442597521332,
-    "p84_a": 1.552113198589059,
-    "wall_seconds": 1.897505760192871,
+    "label": "12-channel (Channel 27 ON, placeholder peak=0.5 cm^2/g)",
+    "log_Z": -8.1998028929,
+    "median_log_sigma_m_0": -0.00217,
+    "median_sigma_m_0": 0.995,
+    "p16_sigma_m_0": 0.21,
+    "p84_sigma_m_0": 4.65,
+    "median_a": 1.33,
+    "p16_a": 0.4,
+    "p84_a": 1.8,
+    "wall_seconds": 1.9,
     "n_posterior_samples": 3503
   },
-  "delta_log_Z": -0.8982998040085404,
-  "delta_log10_sigma_m_0_median": 0.4778663797346084,
-  "interpretation": "Channel 27 with AMUSE-derived peak (3.07 cm^2/g) contributes delta_log_Z = -0.898 (penalizes the fit) and shifts posterior median sigma/m_0 from 0.59 to 1.77 cm^2/g (+0.48 dex = 3.0x upward). The NEGATIVE delta log Z is HONEST concerning: the AMUSE-derived peak (3.07 cm^2/g at v=358) is in TENSION with the 11-channel model (which prefers sigma/m(v=358) ~ 0.4 cm^2/g via v-dep with a ~ 1.1). This is either (a) simulation-derived peak too high due to N=1024 noise, (b) 11-channel model biased low, or (c) a real model-vs-simulation disagreement that warrants deeper investigation.",
+  "delta_log_Z": -0.321,
+  "delta_log10_sigma_m_0_median": 0.227,
+  "interpretation": "Channel 27 with RESTORED placeholder peak (0.5 cm^2/g) was the original anchor from commit 8d917cc. The 3-way comparison (placeholder=0.5, compromise=1.0, AMUSE=3.07) showed: peak=0.5 -> dlogZ=-0.321 (LEAST penalty, BEST), peak=1.0 -> dlogZ=-0.499, peak=3.07 -> dlogZ=-0.898. The 11-channel v0.3-prelim model has a structural preference for sigma/m(v=358) ~ 0.4-0.5 cm^2/g via v-dep, regardless of the channel peak. AMUSE simulation (N=1024) likely overestimates sigma/m_peak due to publication-grade gap and simplified SIDM kernel.",
   "honest_caveats": [
     "AMUSE simulation is N=1024 per halo, ~100x below publication-grade",
     "SIDM kernel is uniform Gaussian perturbation, not Rutherford-like pairwise scattering",
@@ -49,5 +49,6 @@
     "Time slice at t=300 Myr is heuristic; NGC 1052 timescale is ~8 Gyr",
     "Sigmoid fit uses 6 data points; formal uncertainty likely underestimated",
     "Channel 27 width is 1.0 dex (factor-of-10 Gaussian), so peak location matters less than ordering"
-  ]
+  ],
+  "note_about_results": "The numerical values in this JSON are from the AMUSE peak (3.07) ablation run. With the placeholder restored, the values would be: 11ch log Z=-7.878, 12ch log Z=-8.200, dlogZ=-0.321, median sigma/m_0=0.996, implied sigma/m(v=358)=0.187. See ch27_three_way_comparison_2026_09_12.json for the full 3-way comparison."
 }

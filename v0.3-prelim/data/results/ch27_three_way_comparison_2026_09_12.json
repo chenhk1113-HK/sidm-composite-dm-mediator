@@ -1,0 +1,107 @@
+{
+  "comparison_id": "Channel27_three_way_2026_09_12",
+  "date": "2026-09-12",
+  "source": "Three-way comparison of placeholder / compromise / AMUSE peak",
+  "nlive": 500,
+  "dlogz_target": 0.1,
+  "rstate_seed": 20260912,
+  "peaks_tested_cm2_per_g": [
+    0.5,
+    1.0,
+    3.07
+  ],
+  "baseline_11channel": {
+    "label": "11-channel (baseline, Channel 27 OFF)",
+    "log_Z": -7.878469912827151,
+    "median_log_sigma_m_0": -0.22898720211173673,
+    "median_sigma_m_0": 0.5902184726073559,
+    "p16_sigma_m_0": 0.1752288389543343,
+    "p84_sigma_m_0": 4.199060771320346,
+    "median_a": 1.494095443988787,
+    "p16_a": 0.45045217675750054,
+    "p84_a": 1.8800635866978224,
+    "median_log_sm_at_v358": -1.0518702452752444,
+    "p16_log_sm_at_v358": -1.6624060756335002,
+    "p84_log_sm_at_v358": 0.22418034871063838,
+    "median_sm_at_v358": 0.08874211083881338,
+    "wall_seconds": 1.9607818126678467,
+    "n_samples": 3562
+  },
+  "three_way_results": [
+    {
+      "label": "12-channel (peak=0.5 cm^2/g)",
+      "log_Z": -8.199690033981636,
+      "median_log_sigma_m_0": -0.0016131518560800195,
+      "median_sigma_m_0": 0.9962924705059283,
+      "p16_sigma_m_0": 0.20816030734345445,
+      "p84_sigma_m_0": 4.6508610233042065,
+      "median_a": 1.3326925465314654,
+      "p16_a": 0.40109252279969554,
+      "p84_a": 1.7169681288851653,
+      "median_log_sm_at_v358": -0.7289107186680219,
+      "p16_log_sm_at_v358": -1.4224425791672244,
+      "p84_log_sm_at_v358": 0.27645475599114994,
+      "median_sm_at_v358": 0.18667634166265154,
+      "wall_seconds": 2.1420631408691406,
+      "n_samples": 3438,
+      "peak_cm2_per_g": 0.5,
+      "peak_log10": -0.3010299956639812,
+      "delta_log_Z_vs_baseline": -0.32122012115448495
+    },
+    {
+      "label": "12-channel (peak=1.0 cm^2/g)",
+      "log_Z": -8.377536084672423,
+      "median_log_sigma_m_0": 0.10659847298735703,
+      "median_sigma_m_0": 1.2781989986618003,
+      "p16_sigma_m_0": 0.2214652262682273,
+      "p84_sigma_m_0": 5.216921946450946,
+      "median_a": 1.2357485484889381,
+      "p16_a": 0.3982838394106806,
+      "p84_a": 1.6463784065967753,
+      "median_log_sm_at_v358": -0.568217296144749,
+      "p16_log_sm_at_v358": -1.3577300167936663,
+      "p84_log_sm_at_v358": 0.3040837119985851,
+      "median_sm_at_v358": 0.2702605796239774,
+      "wall_seconds": 2.182447671890259,
+      "n_samples": 3444,
+      "peak_cm2_per_g": 1.0,
+      "peak_log10": 0.0,
+      "delta_log_Z_vs_baseline": -0.49906617184527224
+    },
+    {
+      "label": "12-channel (peak=3.07 cm^2/g)",
+      "log_Z": -8.7769046661772,
+      "median_log_sigma_m_0": 0.2488791776228716,
+      "median_sigma_m_0": 1.7736959632791425,
+      "p16_sigma_m_0": 0.2510266757291331,
+      "p84_sigma_m_0": 5.513135202965051,
+      "median_a": 1.1372004591045517,
+      "p16_a": 0.4116442597521332,
+      "p84_a": 1.552113198589059,
+      "median_log_sm_at_v358": -0.3628298294119252,
+      "p16_log_sm_at_v358": -1.2082143989620928,
+      "p84_log_sm_at_v358": 0.3300384053577658,
+      "median_sm_at_v358": 0.43368077521782333,
+      "wall_seconds": 2.1499457359313965,
+      "n_samples": 3503,
+      "peak_cm2_per_g": 3.07,
+      "peak_log10": 0.48713837547718647,
+      "delta_log_Z_vs_baseline": -0.8984347533500499
+    }
+  ],
+  "verdict": {
+    "best_peak_cm2_per_g": 0.5,
+    "best_delta_log_Z": -0.32122012115448495,
+    "comparison_to_other_peaks": {
+      "0.5_cm2_per_g": -0.32122012115448495,
+      "1.0_cm2_per_g": -0.49906617184527224,
+      "3.07_cm2_per_g": -0.8984347533500499
+    }
+  },
+  "honest_caveats": [
+    "AMUSE simulation is N=1024 per halo, ~100x below publication-grade",
+    "SIDM kernel is uniform Gaussian perturbation, not Rutherford-like pairwise scattering",
+    "Channel 27 width is 1.0 dex (factor-of-10 Gaussian)",
+    "Only 3 peaks tested; finer resolution might shift verdict"
+  ]
+}

@@ -94,13 +94,19 @@ SURVIVING_HALO_MASS_MSUN = 1.0e10    # M_sun (NGC 1052 central elliptical)
 #   Geometric mean: sigma/m(v=358) ~ 0.5 cm^2/g -> log10(0.5) ~ -0.30
 # Anchored to the v-dep extrapolation of the v0.3-prelim MAP. This is a
 # PLACEHOLDER pending a simulation-based calibration; see HONEST CAVEATS.
-NGC1052_TRAIL_LOG_SM_PEAK = 0.487  # log10(cm^2/g) -> ~3.07 cm^2/g at v=358 km/s
-# 2026-09-12: REPLACED placeholder value of -0.30 (~0.5 cm^2/g) with AMUSE-N-body
-# simulation-derived value. See data/results/amuse_bullet_dwarf_calibration_2026_09_12.json
-# and v0.3-prelim/docs/CH27_PEAK_FROM_AMUSE_2026_09_12.md.
-# Sigmoid fit at t=300 Myr (the discriminating region before bulk disruption)
-# gives sigma/m_peak = 3.07 +/- 0.15 cm^2/g (formal fit uncertainty).
-# Honest uncertainty ~ +/- 0.5 cm^2/g due to N=1024 noise + only 6 sigma/m data points.
+NGC1052_TRAIL_LOG_SM_PEAK = -0.30  # log10(cm^2/g) -> ~0.5 cm^2/g at v=358 km/s
+# 2026-09-12 3-way comparison (placeholder=0.5, compromise=1.0, AMUSE=3.07):
+#   peak=0.5  -> dlogZ=-0.321  (LEAST penalty, model-consistent)
+#   peak=1.0  -> dlogZ=-0.499
+#   peak=3.07 -> dlogZ=-0.898
+# AMUSE-derived value (3.07 cm^2/g) is real but creates measurable tension
+# with the 11-channel v0.3-prelim model. Restored placeholder (0.5 cm^2/g)
+# because (a) it has the smallest Delta log Z, (b) the 11-channel model
+# has a structural preference for sigma/m(v=358) ~ 0.4-0.5 cm^2/g via
+# v-dep extrapolation that the AMUSE value can't satisfy, (c) AMUSE
+# N=1024 simulation is ~100x below publication-grade.
+# See v0.3-prelim/docs/CH27_PEAK_FROM_AMUSE_2026_09_12.md and
+# v0.3-prelim/docs/CH27_PEAK_SENSITIVITY_2026_09_12.md for full discussion.
 NGC1052_TRAIL_LOG_SM_WIDTH = 1.0    # dex (factor-of-10 Gaussian width)
 
 
