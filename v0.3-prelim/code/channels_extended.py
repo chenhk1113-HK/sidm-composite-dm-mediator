@@ -88,6 +88,7 @@ from config import (
     SIDM_MASS_CLASSICAL_FLOOR_EV,
 )
 from sidm_velocity_dependent import sigma_m_effective
+from mediator_registry import sigma_m_at_v as _sigma_m_at_v_mediator
 
 # LZ 2024 results (arXiv 2410.17034 / WS2024 dataset, 220 days + 60 days)
 # World-leading spin-independent WIMP-nucleon cross-section limits.
@@ -680,7 +681,7 @@ NGC1052_DF2_VMAX_KMS = 30.0        # UDG internal velocity scale (typical)
 # Channel 11: DM_FREE_UDG_RATE_PEAK, DM_FREE_UDG_RATE_WIDTH imported from config.py
 
 
-def loglike_dm_free_udg(sigma_m_0: float, a: float) -> float:
+def loglike_dm_free_udg(sigma_m_0: float, a: float, mediator_class: str = "power_law") -> float:
     """Channel 11: Dark-matter-free UDG existence constraint (van Dokkum+ 2018-2026).
 
     CONSISTENCY CHECK on SIDM model: NGC 1052-DF2/DF4 + FCC 224/240 establish
@@ -709,10 +710,10 @@ def loglike_dm_free_udg(sigma_m_0: float, a: float) -> float:
     """
     if sigma_m_0 <= 0 or not np.isfinite(sigma_m_0) or not np.isfinite(a):
         return -np.inf
-    # σ/m_eff at NGC 1052 UDG velocity (v=30 km/s):
-    # log10(σ/m_eff) = log10(σ/m_0) + a * log10(V_REF/v) = log10(σ/m_0) + a * log10(100/30)
-    # ~ log10(σ/m_0) + 0.523 * a
-    log_sm_eff = np.log10(sigma_m_0) + 0.523 * a
+    # σ/m_eff at NGC 1052 UDG velocity (v=30 km/s).
+    # Phase 5b: use mediator registry instead of inline power-law linearization.
+    sigma_m_eff_udg = _sigma_m_at_v_mediator(sigma_m_0, a, 30.0, mediator_class=mediator_class)
+    log_sm_eff = np.log10(sigma_m_eff_udg)
     # Distance from peak (in dex)
     chi = ((log_sm_eff - np.log10(NGC1052_DF2_SIGMA_M_TYPICAL)) / DM_FREE_UDG_RATE_WIDTH) ** 2
     return -0.5 * chi
@@ -756,7 +757,7 @@ def loglike_dm_free_udg_placeholder(sigma_m: float) -> float:
 # σ/m ~ 0.7 cm²/g. Almeida (2025) shows UFDs in core-formation phase have
 # similar σ/m, supporting a velocity-dependent cross section consistent across
 # dwarf and LSB scales (per Kaplinghat+ 2016, Tulin & Yu 2018).
-def loglike_dm_dominated_udg(sigma_m_0: float, a: float) -> float:
+def loglike_dm_dominated_udg(sigma_m_0: float, a: float, mediator_class: str = "power_law") -> float:
     """Channel 13: DM-dominated UDG existence constraint (LSB-6 anchor, arXiv:2609.10700).
 
     Tests whether the model can produce a DM-DOMINATED UDG by requiring σ/m_eff
@@ -780,9 +781,10 @@ def loglike_dm_dominated_udg(sigma_m_0: float, a: float) -> float:
     """
     if sigma_m_0 <= 0 or not np.isfinite(sigma_m_0) or not np.isfinite(a):
         return -np.inf
-    # σ/m_eff at LSB-6 velocity (v=20 km/s):
-    # log10(σ/m_eff) = log10(σ/m_0) + a * log10(20/100) = log10(σ/m_0) - 0.699 * a
-    log_sm_eff = np.log10(sigma_m_0) - 0.699 * a
+    # σ/m_eff at LSB-6 velocity (v=20 km/s).
+    # Phase 5b: use mediator registry instead of inline power-law linearization.
+    sigma_m_eff_lsb6 = _sigma_m_at_v_mediator(sigma_m_0, a, 20.0, mediator_class=mediator_class)
+    log_sm_eff = np.log10(sigma_m_eff_lsb6)
     # Distance from peak (in dex)
     chi = ((log_sm_eff - np.log10(DM_DOM_UDG_SIGMA_M_PEAK)) / DM_DOM_UDG_SIGMA_M_WIDTH) ** 2
     return -0.5 * chi

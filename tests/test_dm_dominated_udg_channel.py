@@ -72,22 +72,22 @@ class TestChannel13Behavior:
         assert loglike_dm_dominated_udg(1.0, np.inf) == -np.inf
 
     def test_vdep_at_a1(self):
-        """At a=1: σ/m_eff = σ/m_0 * (V_LSB6/V_REF) = σ/m_0 * 0.2.
-        Peak should be at σ/m_0 = 0.7/0.2 = 3.5."""
-        val = loglike_dm_dominated_udg(3.5, 1.0)
-        assert abs(val) < 0.05, f"v-dep at a=1 expected ~0 at σ/m_0=3.5, got {val}"
+        """At a=1: sigma/m_eff = sigma/m_0 * (V_LSB6/V_REF)^(-a) = sigma/m_0 * 5.0.
+        Peak should be at sigma/m_0 = 0.7/5 = 0.14."""
+        val = loglike_dm_dominated_udg(0.14, 1.0)
+        assert abs(val) < 0.05, f"v-dep at a=1 expected ~0 at sigma/m_0=0.14, got {val}"
 
     def test_vdep_at_a2(self):
-        """At a=2: σ/m_eff = σ/m_0 * 0.04.
-        Peak should be at σ/m_0 = 0.7/0.04 = 17.5."""
-        val = loglike_dm_dominated_udg(17.5, 2.0)
-        assert abs(val) < 0.05, f"v-dep at a=2 expected ~0 at σ/m_0=17.5, got {val}"
+        """At a=2: sigma/m_eff = sigma/m_0 * 25.
+        Peak should be at sigma/m_0 = 0.7/25 = 0.028."""
+        val = loglike_dm_dominated_udg(0.028, 2.0)
+        assert abs(val) < 0.05, f"v-dep at a=2 expected ~0 at sigma/m_0=0.028, got {val}"
 
     def test_vdep_at_a_neg1(self):
-        """At a=-1: σ/m_eff = σ/m_0 * 5.
-        Peak should be at σ/m_0 = 0.7/5 = 0.14."""
-        val = loglike_dm_dominated_udg(0.14, -1.0)
-        assert abs(val) < 0.05, f"v-dep at a=-1 expected ~0 at σ/m_0=0.14, got {val}"
+        """At a=-1: sigma/m_eff = sigma/m_0 * (V_LSB6/V_REF)^(1) = sigma/m_0 * 0.2.
+        Peak should be at sigma/m_0 = 0.7/0.2 = 3.5."""
+        val = loglike_dm_dominated_udg(3.5, -1.0)
+        assert abs(val) < 0.05, f"v-dep at a=-1 expected ~0 at sigma/m_0=3.5, got {val}"
 
     def test_extreme_low_penalized(self):
         """σ/m_0 = 0.01 (~2 dex below peak with a=0): moderate penalty."""
