@@ -221,11 +221,17 @@ DM_FREE_UDG_RATE_WIDTH = 2.0      # dex — 2 order of magnitude Gaussian width
 # LSB-6 gas-rich DM-dominated UDG (arXiv:2609.10700 — Channel 13, NEW 2026-09-12)
 # Channel 13 — counterpart to Channel 11. Tests BOTH UDG extremes per LRD2.docx
 # review recommendation. Single-object constraint, not a population rate.
-# σ/m_eff at LSB-6 velocity (~15 km/s) ~14.3 cm²/g (value from arXiv:2609.10700
-# abstract; full text not yet retrieved, magnitude flagged as plausible-imprecise).
-DM_DOM_UDG_SIGMA_M_PEAK = 14.3    # cm²/g — sigma/m_eff at v_LSB6 ~15 km/s
-DM_DOM_UDG_SIGMA_M_WIDTH = 1.0    # dex — single-object constraint, ~1 dex
-LSB6_VMAX_KMS = 15.0              # UDG internal velocity scale (gas-rich, low-vdisp)
+#
+# CORRECTED 2026-09-12 (per full paper retrieval, arXiv:2609.10700 Section 6.4):
+#   σ/m_eff at v_LSB6 ~ 20 km/s ~ 0.7 cm²/g (NOT 14.3 cm²/g — that was σv/m).
+#   Reference: Bouchè+ 2026, lines 142-143: "log10 v = 1.30 km/s,
+#   ⟨σv⟩/m = 14.31 cm² km/g/s; Rescaling yields σ/m ≈ 0.7 cm²/g,
+#   in excellent agreement with Almeida (2025) for UFDs in core-formation."
+#   LSB-6 is in the core-FORMATION phase, providing evidence for σ/m ~ 0.7 cm²/g
+#   at v ~ 20 km/s.
+DM_DOM_UDG_SIGMA_M_PEAK = 0.7    # cm²/g — sigma/m at v_LSB6 ~20 km/s (rescaled)
+DM_DOM_UDG_SIGMA_M_WIDTH = 0.5    # dex — Bouchè+ 2026 estimate ±0.13 dex rescaled uncertainty
+LSB6_VMAX_KMS = 20.0              # SIDM characteristic DM velocity (log10 v = 1.30 km/s)
 
 # Cosmic-web radio synchrotron 40x excess (Pinetti+ 2025-26 — Channel 12)
 # T70: Gaussian UPPER LIMIT on dark photon kinetic mixing at log10(eps_upper) = -11
