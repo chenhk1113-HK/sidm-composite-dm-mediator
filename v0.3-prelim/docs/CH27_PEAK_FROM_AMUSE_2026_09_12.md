@@ -81,24 +81,29 @@ The placeholder peak of 0.5 cm²/g was tuned to give the NGC 1052 trail observab
 
 ---
 
-## Next steps (in priority order)
+## Next steps (in priority order, post-sensitivity sweep)
 
-### High priority (this session)
+### DONE in this session
 - [x] Move simulation script to project repo ✓
 - [x] Compute σ/m_peak from simulation data ✓
-- [ ] **Re-run t13_v2_trail_ablation.py with new peak** to see if posterior shifts measurably
-- [ ] Document the uncertainty in v0.3-prelim/docs/CH27_NGC1052_TRAIL_CHANNEL.md
+- [x] **Re-run t13_v2_trail_ablation.py with new peak** — ΔlogZ = -0.898 (penalizes fit)
+- [x] **Try σ/m_peak ∈ {1.0, 2.0, 3.0, 5.0} cm²/g** — see `code/ch27_peak_sensitivity.py`
+- [x] Add the σ/m_peak value to `code/ch27_ngc1052_trail_channel.py` ✓ (line 97)
+- [x] Update `tests/test_ngc1052_trail_channel.py` to reflect new peak (11/11 passing)
+- [x] Write `docs/CH27_PEAK_SENSITIVITY_2026_09_12.md` documenting the tension ✓
 
-### Medium priority (next session)
-- [ ] **Try σ/m_peak ∈ {1.0, 2.0, 3.0, 5.0} cm²/g** in the ablation to map out sensitivity
-- [ ] Add the σ/m_peak value to `code/ch27_ngc1052_trail_channel.py` as an alternative to PLACEHOLDER
+### Medium priority (next session, ~2 hours)
+- [ ] **Try Channel 27 with σ/m_peak = 0.5 cm²/g AND reduced width (0.5 dex)** to see if the model-vs-simulation tension resolves with a tighter channel
+- [ ] **Use σ/m_peak = 1.0 cm²/g** as a compromise between AMUSE (3.07) and placeholder (0.5)
 - [ ] Update `data/DATA_SOURCES.md` with the AMUSE-simulation provenance
 
-### Low priority (when motivation returns)
-- [ ] Run with N=10⁴ particles (still proof-of-concept, but cleaner)
-- [ ] Implement proper pairwise SIDM scattering kernel
-- [ ] Add impact-parameter sweep (b ∈ {0, 0.5, 1.0} × R_halo)
-- [ ] Add baryonic physics (gas + star formation)
+### Low priority (deferred to when motivation returns)
+- [ ] **N=10⁴ particles** for AMUSE simulation (~10× more particles, ~10× more wall time)
+- [ ] **Pairwise Rutherford-like SIDM scattering** (replace uniform Gaussian perturbation)
+- [ ] **Baryonic physics** — Hydra/Fi codes for gas + star formation + feedback
+- [ ] **Impact-parameter sweep** (b ∈ {0, 0.5, 1.0} × R_halo)
+- [ ] **Higher σ/m resolution** in the sweep (10 values instead of 6)
+- [ ] Run the 11-channel model without v-dep to test if `a` is the culprit
 
 ---
 
