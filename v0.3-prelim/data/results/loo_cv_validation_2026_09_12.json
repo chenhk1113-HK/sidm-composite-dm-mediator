@@ -7,111 +7,111 @@
   "dlogz_target": 0.1,
   "rstate_seed": 20260912,
   "full_11ch_fit": {
-    "log_Z": -7.878469912827151,
-    "median_sigma_m_0": 0.5902184726073559,
-    "median_a": 1.494095443988787,
-    "wall_seconds": 3.043560743331909
+    "log_Z": -5.705486608771671,
+    "median_sigma_m_0": 0.11278893857500465,
+    "median_a": 1.515507384920479,
+    "wall_seconds": 2.764707326889038
   },
   "loo_results": [
     {
       "channel": "ch01_dsph",
-      "log_Z_minus_held": -6.224723935794586,
-      "log_l_predictive": -1.715743181663008,
-      "mean_log_l_held": -1.715743181663008,
-      "var_log_l_held": 0.04614476470141239,
-      "p_value": 0.8324743392554117,
-      "wall_seconds": 1.8712964057922363
+      "log_Z_minus_held": -4.252913255112017,
+      "log_l_predictive": -1.5108898003928295,
+      "mean_log_l_held": -1.5108898003928295,
+      "var_log_l_held": 0.17896420316487452,
+      "p_value": 0.7698369452353299,
+      "wall_seconds": 1.599757432937622
     },
     {
       "channel": "ch02_ufd",
-      "log_Z_minus_held": -7.879314806081365,
-      "log_l_predictive": -0.09425363413270274,
-      "mean_log_l_held": -0.09425363413270274,
-      "var_log_l_held": 0.008363165073269445,
-      "p_value": 0.8352470818718394,
-      "wall_seconds": 1.9487698078155518
+      "log_Z_minus_held": -5.59405275330388,
+      "log_l_predictive": -0.11343303572318435,
+      "mean_log_l_held": -0.11343303572318435,
+      "var_log_l_held": 0.02358950917494102,
+      "p_value": 0.09604645215633646,
+      "wall_seconds": 1.6394062042236328
     },
     {
       "channel": "ch03_bullet",
-      "log_Z_minus_held": -7.88704868811157,
-      "log_l_predictive": -0.01849767235058636,
-      "mean_log_l_held": -0.01849767235058636,
-      "var_log_l_held": 0.07320902936603899,
+      "log_Z_minus_held": -5.703758083820992,
+      "log_l_predictive": -0.015140831262585896,
+      "mean_log_l_held": -0.015140831262585896,
+      "var_log_l_held": 0.14286161265514333,
       "p_value": 0.0,
-      "wall_seconds": 1.939490795135498
+      "wall_seconds": 1.7168152332305908
     },
     {
       "channel": "ch04_lens_subhalo",
       "log_Z_minus_held": -2.755325562249969,
-      "log_l_predictive": -32.76899691432829,
-      "mean_log_l_held": -32.76899691432829,
-      "var_log_l_held": 418.3317992065975,
-      "p_value": 0.00033938735927923437,
-      "wall_seconds": 1.4277818202972412
+      "log_l_predictive": -6.018795351611319,
+      "mean_log_l_held": -6.018795351611319,
+      "var_log_l_held": 14.112817882438321,
+      "p_value": 0.017650966653125478,
+      "wall_seconds": 1.4511981010437012
     },
     {
       "channel": "ch05_mw_satellite",
-      "log_Z_minus_held": -6.823887093090199,
-      "log_l_predictive": -1.124412655568082,
-      "mean_log_l_held": -1.124412655568082,
-      "var_log_l_held": 0.08827242697334618,
-      "p_value": 0.8031105461491603,
-      "wall_seconds": 2.022765636444092
+      "log_Z_minus_held": -5.2217202413784785,
+      "log_l_predictive": -0.5684329015050159,
+      "mean_log_l_held": -0.5684329015050159,
+      "var_log_l_held": 0.22156748458405628,
+      "p_value": 0.6794011853208155,
+      "wall_seconds": 1.6570312976837158
     },
     {
       "channel": "ch06_cluster_upper",
-      "log_Z_minus_held": -7.847457663404956,
-      "log_l_predictive": -0.0042252338388742375,
-      "mean_log_l_held": -0.0042252338388742375,
-      "var_log_l_held": 0.0011272581431719933,
+      "log_Z_minus_held": -5.709985768090315,
+      "log_l_predictive": -0.0014737304105991323,
+      "mean_log_l_held": -0.0014737304105991323,
+      "var_log_l_held": 0.00039663629152876203,
       "p_value": 0.0,
-      "wall_seconds": 1.9252030849456787
+      "wall_seconds": 1.6950359344482422
     },
     {
       "channel": "ch07_draco",
-      "log_Z_minus_held": -6.647592399081315,
-      "log_l_predictive": -1.3040413549141439,
-      "mean_log_l_held": -1.3040413549141439,
-      "var_log_l_held": 0.08975314927876833,
-      "p_value": 0.796037781179431,
-      "wall_seconds": 1.950387954711914
+      "log_Z_minus_held": -5.07613453116975,
+      "log_l_predictive": -0.7430983797523358,
+      "mean_log_l_held": -0.7430983797523358,
+      "var_log_l_held": 0.2506394810244071,
+      "p_value": 0.6839484439410644,
+      "wall_seconds": 1.6414062976837158
     },
     {
       "channel": "ch08_radio_relic",
-      "log_Z_minus_held": -7.826150280147675,
-      "log_l_predictive": -0.09144768380038878,
-      "mean_log_l_held": -0.09144768380038878,
-      "var_log_l_held": 0.04747965392136934,
+      "log_Z_minus_held": -5.689141604681287,
+      "log_l_predictive": -0.034061362628381775,
+      "mean_log_l_held": -0.034061362628381775,
+      "var_log_l_held": 0.017074973335720167,
       "p_value": 0.0,
-      "wall_seconds": 1.9412691593170166
+      "wall_seconds": 1.642930269241333
     },
     {
       "channel": "ch09_dm_free_udg",
-      "log_Z_minus_held": -7.80322876991568,
-      "log_l_predictive": -0.10215794318492427,
-      "mean_log_l_held": -0.10215794318492427,
-      "var_log_l_held": 0.005123781810468641,
-      "p_value": 0.8430566578954177,
-      "wall_seconds": 2.079293966293335
+      "log_Z_minus_held": -5.679848932460174,
+      "log_l_predictive": -0.038031440292447094,
+      "mean_log_l_held": -0.038031440292447094,
+      "var_log_l_held": 0.00308711473587881,
+      "p_value": 0.7866042505084404,
+      "wall_seconds": 1.6557023525238037
     }
   ],
   "in_sample_contributions": {
-    "ch01_dsph": -1.6917042012813241,
-    "ch02_ufd": -0.08893811213140304,
-    "ch03_bullet": -0.0038362322094443718,
-    "ch04_lens_subhalo": -0.9648883865597798,
-    "ch05_mw_satellite": -1.0393950273639894,
-    "ch06_cluster_upper": -0.0031251144485483994,
-    "ch07_draco": -1.2161591445891786,
-    "ch08_radio_relic": -0.05628003014953842,
-    "ch09_dm_free_udg": -0.0982050855993046
+    "ch01_dsph": -1.3623951678559136,
+    "ch02_ufd": -0.09455794810864918,
+    "ch03_bullet": -0.002001542129778692,
+    "ch04_lens_subhalo": -1.43436170311301,
+    "ch05_mw_satellite": -0.3712561559758412,
+    "ch06_cluster_upper": -0.0011462155064863636,
+    "ch07_draco": -0.5079605584551974,
+    "ch08_radio_relic": -0.020603170396837962,
+    "ch09_dm_free_udg": -0.0352081046883744
   },
   "aggregate_metrics": {
-    "mean_p_value": 0.456696199301171,
-    "median_log_l_predictive": -0.10215794318492427,
-    "mean_log_z_minus_held": -6.854969910875257,
-    "mean_in_sample_minus_predictive": 3.5623605488276104,
-    "std_in_sample_minus_predictive": 9.98501450002771
+    "mean_p_value": 0.3370542493127902,
+    "median_log_l_predictive": -0.11343303572318435,
+    "mean_log_z_minus_held": -5.07587563691854,
+    "mean_in_sample_minus_predictive": 0.5793184741498455,
+    "std_in_sample_minus_predictive": 1.4186644759622553
   },
   "honest_caveats": [
     "LOO-CV is computationally expensive: 10 nested sampling fits per validation",
