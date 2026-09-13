@@ -1,0 +1,96 @@
+{
+  "phase": "7e",
+  "date": "2026-09-13",
+  "title": "Unit-conversion audit of T87 LZ event rate formula",
+  "bug_found": true,
+  "bug_location": "code/t87_lz_event_rate.py:243",
+  "bug_description": "N_T is computed as M_T_kg_days * 1000 / 131 * N_A, where M_T_kg_days has units of kg*days (mass * time). The result has units of 'days' instead of dimensionless # of nuclei. Bug factor: 365.25x for 1 tonne-year exposure.",
+  "bug_factor": 365.25,
+  "N_T_correct_for_1_ty": 4.5969465648854964e+27,
+  "N_T_buggy_for_1_ty": 1.6790347328244275e+30,
+  "v07_MAP_audit": [
+    {
+      "delta_keV": 50,
+      "N_buggy": 3.6351377669746426e-73,
+      "N_correct": 9.755181849975329e-76,
+      "ratio_buggy_over_correct": 372.63659692656944
+    },
+    {
+      "delta_keV": 100,
+      "N_buggy": 3.8847272070591983e-73,
+      "N_correct": 1.0424987367127778e-75,
+      "ratio_buggy_over_correct": 372.63615487041994
+    },
+    {
+      "delta_keV": 200,
+      "N_buggy": 4.375738405985671e-73,
+      "N_correct": 1.1742684320874474e-75,
+      "ratio_buggy_over_correct": 372.63527541203723
+    },
+    {
+      "delta_keV": 297,
+      "N_buggy": 4.8143849408027244e-73,
+      "N_correct": 1.291986106449933e-75,
+      "ratio_buggy_over_correct": 372.6344205071598
+    },
+    {
+      "delta_keV": 371,
+      "N_buggy": 5.1235201380901203e-73,
+      "N_correct": 1.374947896514401e-75,
+      "ratio_buggy_over_correct": 372.6337667833551
+    },
+    {
+      "delta_keV": 500,
+      "N_buggy": 5.614972093911222e-73,
+      "N_correct": 1.5068385652163636e-75,
+      "ratio_buggy_over_correct": 372.6326245907424
+    }
+  ],
+  "v03_MAP_audit": [
+    {
+      "delta_keV": 50,
+      "N_buggy": 7.00887615942712e-119,
+      "N_correct": 1.8808967229441445e-121,
+      "ratio_buggy_over_correct": 372.6348222063045
+    },
+    {
+      "delta_keV": 100,
+      "N_buggy": 8.363001049710732e-119,
+      "N_correct": 2.2442979643116775e-121,
+      "ratio_buggy_over_correct": 372.63327698448677
+    },
+    {
+      "delta_keV": 200,
+      "N_buggy": 1.045053068592177e-118,
+      "N_correct": 2.804532686408914e-121,
+      "ratio_buggy_over_correct": 372.6300191317519
+    },
+    {
+      "delta_keV": 297,
+      "N_buggy": 1.1812021467871549e-118,
+      "N_correct": 3.1699336049554137e-121,
+      "ratio_buggy_over_correct": 372.6267783465985
+    },
+    {
+      "delta_keV": 371,
+      "N_buggy": 0.0,
+      "N_correct": 0.0,
+      "ratio_buggy_over_correct": Infinity
+    },
+    {
+      "delta_keV": 500,
+      "N_buggy": 0.0,
+      "N_correct": 0.0,
+      "ratio_buggy_over_correct": Infinity
+    }
+  ],
+  "impact_on_phase_7": "All kill verdicts remain valid (defects are 60+ orders of magnitude below 1). The bug is a constant 365.25x factor on N_pred values; relative comparisons are unaffected.",
+  "fix_recommendation": "Replace line 197: M_T_kg_days = exposure_tonne_years * 1000 * DAYS_PER_YEAR with: M_T_kg = exposure_tonne_years * 1000 (remove DAYS_PER_YEAR). Then N_T in line 243 is dimensionless as intended.",
+  "docs_to_update": [
+    "T87_LZ_FORWARD_PREDICTION.md (cite buggy N_pred values)",
+    "PHASE7A_COMPOSITE_MEDIATOR_2026_09_13.md (cite T87 N_pred at delta=297)",
+    "PHASE7C_DI_MAURO_2026_09_13.md (cite T87 N_pred at delta=297)",
+    "data/results/2026-09-03_t87_lz_forward_prediction.json (N_predicted values)"
+  ],
+  "kill_verdicts_unchanged": true
+}

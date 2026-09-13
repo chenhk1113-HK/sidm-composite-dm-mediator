@@ -177,6 +177,22 @@ Total Phase 7 wall time: ~13 minutes (7a: 10 min, 7b: 5 min, 7c: 5 min, 7d: 5 mi
 Total Phase 7 estimate was 1-2 weeks (best case kill triggers on sub-task 1, then magnetic-moment dominates).
 Massively over-estimated pattern continues.
 
+### 2026-09-13 — Phase 7e (unit-conversion audit of T87 LZ event rate) — DONE
+
+- **ESTIMATE**: not estimated (audit task triggered by AGENTS.md memory entry)
+- **ACTUAL**: ~5 minutes active (script + tests + doc)
+- **RATIO**: N/A (audit, not estimated)
+- **NOTE**: Bug FOUND. t87_lz_event_rate.py:197 multiplies exposure by DAYS_PER_YEAR unnecessarily, causing N_T to have units of 'days' instead of dimensionless. All N_pred values are 365.25x too large. Phase 7 kill verdicts unchanged (defects are 60+ orders short, 365x factor is irrelevant). Quantitative N_pred values in T87 doc and Phase 7a/c docs need revision (divide by 372.6).
+
+**Verdict (Phase 7e)**: BUG FOUND, RECOMMENDED FIX 1-line change at t87_lz_event_rate.py:197.
+- Bug factor: 365.25x constant factor on all N_pred values
+- Affected files: T87_LZ_FORWARD_PREDICTION.md, PHASE7A doc, PHASE7C doc
+- Not affected: magnetic-moment (Phase 7b, operator independent of N_T), T95 stream (Phase 7d, no LZ event-rate integration)
+
+This validates the AGENTS.md memory rule: "ALWAYS include a sanity-check
+test against a published value BEFORE integrating into a multi-channel sampler."
+The Phase 7e audit IS that sanity check, and it caught a real bug.
+
 ---
 
 ## Next estimate to log
