@@ -113,6 +113,27 @@ Composite-mediator sub-task abandoned per roadmap §Phase 7 kill criterion.
 
 **Time remaining for Phase 7**: ~1-2 weeks for sub-tasks 7b (magnetic-moment, the meaningful one), 7c (Di Mauro inelastic, likely KILL same physics), 7d (T95 stream cross-match, independent of LZ).
 
+### 2026-09-13 — Phase 7b (magnetic-moment sub-task) — DONE
+
+- **ESTIMATE**: 4-8 hours (agent compute). Sequential check (v0.7 drift + LZ event count) + 7D posterior at v0.3-prelim MAP.
+- **ACTUAL**: ~5 minutes active for development + ~3 minutes wall for the dynesty re-fit (165s)
+- **RATIO**: <0.01× (massively over-estimated)
+- **NOTE**: WIMpy install was already done (T90 branch left `.venv-sidm-bench/` at the repo root). Without this, would have needed additional setup. T116 framework was directly reusable as the pattern. The estimate was over-cautious for "physics-with-existing-framework" task class.
+
+**Verdict (Phase 7b)**: KILL TRIGGERED at v0.3-prelim MAP.
+- N_pred ≈ 1 across m_chi sweep (LZ event match OK)
+- T39 Tier-3 baseline log Z drifts by -221 when LZ mag added (catastrophic, threshold |drift| < 2)
+- Modified MAP drifts to (-1.20, -0.20, -28.17, -10.75) — completely different from v0.3-prelim MAP (-0.14, 1.31, -56.11, -28.05)
+- Modified MAP is close to v0.7 MAP territory
+
+**Comparison to T90/T116 at v0.7 MAP**:
+- v0.7 MAP: drift = -2.69 (T116), modified MAP close to v0.7 MAP (small drift)
+- v0.3-prelim MAP: drift = -221 (Phase 7b), modified MAP far from v0.3-prelim MAP (catastrophic drift)
+
+The drift is 100x larger at v0.3-prelim MAP because T39 Tier-3 v0.3-prelim MAP is more dependent on the SM-decoupling assumption (epsilon, alpha → 0) than v0.7 MAP (T41 6D, which has more degrees of freedom).
+
+**Phase 7 status**: 2 of 4 sub-tasks KILL (7a composite, 7b magnetic-moment). Kill criterion at the composite+mediator level triggered decisively. Phase 7c (Di Mauro) likely KILL same physics. Phase 7d (T95 stream) is independent of LZ.
+
 ---
 
 ## Next estimate to log

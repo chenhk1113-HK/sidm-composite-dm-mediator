@@ -1,0 +1,76 @@
+{
+  "phase": "7b",
+  "date": "2026-09-13",
+  "title": "Magnetic-moment LZ forward prediction at v0.3-prelim MAP",
+  "v03_MAP": {
+    "sigma_m_0": 0.72,
+    "a": 1.31,
+    "log_epsilon": -56.113,
+    "log_alpha": -28.047,
+    "log_Z_baseline": -2.941
+  },
+  "v03_MAP_theta": [
+    -0.14266750356873156,
+    1.31,
+    -56.113,
+    -28.047
+  ],
+  "t90_reference": {
+    "mu_chi_mu_N": 6.1e-08,
+    "m_chi_GeV": 1000.0,
+    "log_Z_v07_published": -163.29
+  },
+  "step_1_sweep": [
+    {
+      "m_chi_GeV": 200.0,
+      "mu_chi_mu_N": 6.1e-08,
+      "log_L_lz_mag": -1.311817438257262,
+      "N_pred": 2.009904792084,
+      "in_reasonable_range": true
+    },
+    {
+      "m_chi_GeV": 500.0,
+      "mu_chi_mu_N": 6.1e-08,
+      "log_L_lz_mag": -1.163496129949363,
+      "N_pred": 1.6856435490678368,
+      "in_reasonable_range": true
+    },
+    {
+      "m_chi_GeV": 1000.0,
+      "mu_chi_mu_N": 6.1e-08,
+      "log_L_lz_mag": -1.000000103496805,
+      "N_pred": 100.0,
+      "in_reasonable_range": false
+    },
+    {
+      "m_chi_GeV": 2000.0,
+      "mu_chi_mu_N": 6.1e-08,
+      "log_L_lz_mag": -1.1585431734472504,
+      "N_pred": 1.6734016359414199,
+      "in_reasonable_range": true
+    }
+  ],
+  "step_2_t39_with_fixed_mu": {
+    "log_Z": -224.0473441818656,
+    "log_Z_err": 0.20815468412667054,
+    "wall_seconds": 174.32690143585205,
+    "MAP": [
+      -1.2015551420288477,
+      -0.20447242303439617,
+      -28.165060089320466,
+      -10.751252815110316
+    ],
+    "log_L_at_MAP": -217.91513877928787,
+    "log_L_baseline_at_MAP": -216.91513867579107,
+    "log_L_lz_mag_at_MAP": -1.000000103496805
+  },
+  "step_2_drift": -221.1063441818656,
+  "step_2_preservation_pass": false,
+  "step_3_tuned": {
+    "mu_chi_mu_N": NaN,
+    "N_pred": NaN
+  },
+  "kill_triggered": true,
+  "decision": "KILL \u2014 magnetic-moment sub-task triggers kill criterion at v0.3-prelim MAP",
+  "wimpy_available": true
+}
