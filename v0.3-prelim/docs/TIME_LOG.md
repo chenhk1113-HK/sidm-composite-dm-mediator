@@ -98,7 +98,20 @@ ALL sessions, ALL tasks where I say "X minutes/hours/days/weeks".
 - **ESTIMATE (sub-task 3: Di Mauro inelastic)**: 30-60 min (agent compute). Extend T87 framework to test δ = 297-371 keV at v0.3-prelim MAP.
 - **ESTIMATE (sub-task 4: T95 stream cross-match)**: 3-5 days (agent compute). Checkout wip/t95-stream-cross-match, re-run T95 with σ/m_0 = 0.72.
 
-**TOTAL ESTIMATE**: 1-2 weeks agent compute (best case: kill triggers on sub-task 1, then magnetic-moment dominates).
+- **TOTAL ESTIMATE**: 1-2 weeks agent compute (best case: kill triggers on sub-task 1, then magnetic-moment dominates).
+
+### 2026-09-13 — Phase 7a (composite-mediator sub-task) — DONE
+
+- **ESTIMATE**: 30-60 min (agent compute). Re-run T87 with v0.3-prelim MAP input.
+- **ACTUAL**: ~10 minutes active (script + tests + doc + commit + push)
+- **RATIO**: 0.17-0.33× (over-estimated 3-6×)
+- **NOTE**: Pattern confirmed — physics-with-existing-framework tasks are massively over-estimated. T87 framework already had all the right inputs; just needed to swap v0.7 MAP for v0.3-prelim MAP and add the ε² scaling comparison.
+
+**Verdict (Phase 7a)**: KILL CONFIRMED. N_pred = 1.18e-118 at δ=297, Gaussian ansatz.
+Composite-DM CANNOT produce LZ event at v0.3-prelim MAP. 117 orders short.
+Composite-mediator sub-task abandoned per roadmap §Phase 7 kill criterion.
+
+**Time remaining for Phase 7**: ~1-2 weeks for sub-tasks 7b (magnetic-moment, the meaningful one), 7c (Di Mauro inelastic, likely KILL same physics), 7d (T95 stream cross-match, independent of LZ).
 
 ---
 
