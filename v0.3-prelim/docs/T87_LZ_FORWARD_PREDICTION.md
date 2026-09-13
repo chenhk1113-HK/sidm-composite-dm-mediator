@@ -18,7 +18,7 @@
 | σ_inel_nuc(248 keV, δ=297 keV, gaussian) | **1.15 × 10⁻¹¹⁷ cm²** |
 | σ_inel_nuc(248 keV, δ=297 keV, dipole)  | **1.07 × 10⁻¹¹⁷ cm²** |
 | LZ sensitivity at m_χ=770 GeV | ~10⁻⁴⁶ cm² |
-| **Predicted N_events at 248 keV, 2.84 tonne-years** | **4.81 × 10⁻⁷³** |
+| **Predicted N_events at 248 keV, 2.84 tonne-years** | **1.29 × 10⁻⁷⁵** |
 | **N observed** | **1** |
 | **Verdict** | **DOES NOT EXPLAIN LZ EVENT** |
 
@@ -133,11 +133,11 @@ value at v0.7 MAP**.
 
 | δ [keV] | v_min [km/s] | N_predicted | N_observed | verdict |
 |---|---|---|---|---|
-| 50 | 108 | 3.63 × 10⁻⁷³ | 1 | DOES NOT EXPLAIN |
-| 100 | 153 | 3.88 × 10⁻⁷³ | 1 | DOES NOT EXPLAIN |
-| 200 | 216 | 4.37 × 10⁻⁷³ | 1 | DOES NOT EXPLAIN |
-| 297 | 263 | 4.81 × 10⁻⁷³ | 1 | DOES NOT EXPLAIN |
-| 500 | 342 | 5.61 × 10⁻⁷³ | 1 | DOES NOT EXPLAIN |
+| 50 | 108 | 9.76 × 10⁻⁷⁶ | 1 | DOES NOT EXPLAIN |
+| 100 | 153 | 1.04 × 10⁻⁷⁵ | 1 | DOES NOT EXPLAIN |
+| 200 | 216 | 1.17 × 10⁻⁷⁵ | 1 | DOES NOT EXPLAIN |
+| 297 | 263 | 1.29 × 10⁻⁷⁵ | 1 | DOES NOT EXPLAIN |
+| 500 | 342 | 1.51 × 10⁻⁷⁵ | 1 | DOES NOT EXPLAIN |
 
 **All N_predicted are ≪ 1** by 70+ orders of magnitude.
 
@@ -161,7 +161,7 @@ Per the pre-registered T87 plan, three outcomes were possible:
 | **Predicts N_events >> 1** | Composite DM is constrained. Falsification signal. |
 | **Predicts N_events << 1** | Composite DM does not explain the LZ event at v0.7 MAP. |
 
-**Outcome: N_events = 4.81 × 10⁻⁷³ ≪ 1.** This is the **third option**:
+**Outcome: N_events = 1.29 × 10⁻⁷⁵ ≪ 1.** This is the **third option**:
 
 **The composite-DM inelastic channel at v0.7 MAP is suppressed by 71+ orders
 of magnitude relative to LZ sensitivity.** The LZ event — if real — is
@@ -229,7 +229,7 @@ Three implications:
 - **Composite-DM inelastic σ_DM-nucleon at v0.7 MAP = 1.1 × 10⁻¹¹⁷ cm²**
   (Gaussian F²) or 1.07 × 10⁻¹¹⁷ cm² (dipole F²). This is the **first
   quantitative computation** of this quantity in the LZ energy range.
-- **Predicted N_events = 4.8 × 10⁻⁷³** in 2.84 tonne-years. **71 orders
+- **Predicted N_events = 1.3 × 10⁻⁷⁵** in 2.84 tonne-years. **71 orders
   of magnitude below** LZ's effective event-rate-implied cross-section.
 - **The "10⁷¹× below LZ" claim is verified quantitatively** for both
   elastic AND inelastic channels. The composite-DM SIDM model is
@@ -268,7 +268,7 @@ Three implications:
 # → Smoke test prints σ_inel_nuc at v0.7 MAP for δ in [50, 1000] keV
 
 /c/Python314/python.exe v0.3-prelim/code/t87_lz_event_rate.py
-# → Smoke test prints N_events for δ in [50, 1000] keV, all ≈ 10⁻⁷³
+# → Smoke test prints N_events for δ in [50, 1000] keV, all ≈ 10⁻⁷⁵
 ```
 
 ---
@@ -343,7 +343,7 @@ model at v0.7 MAP cannot produce the LZ event at the observed rate.**
 > + t87_lz_event_rate.py), 9 new tests (test_t87_inelastic_nucleon.py),
 > this verdict doc. Standing posture preserved. Verdict: composite-DM
 > inelastic σ_DM-nucleon at v0.7 MAP = 1.15 × 10⁻¹¹⁷ cm² (Gaussian) or
-> 1.07 × 10⁻¹¹⁷ cm² (dipole); predicted N_events at LZ = 4.8 × 10⁻⁷³
+> 1.07 × 10⁻¹¹⁷ cm² (dipole); predicted N_events at LZ = 1.3 × 10⁻⁷⁵
 > (≪ 1 observed); model **does not explain the LZ event**.
 >
 > Audit: 40/40 ALL CLEAR. Tests: 549 pass / 8 skip (was 540/8 before T87).
@@ -381,7 +381,7 @@ At v0.7 MAP (m_χ = 770 GeV, m_φ = 453 MeV, ε ~ 1.1×10⁻³⁷, α_χ ~ 6.8×
 | m_χ | 770 GeV | 1000-1100 GeV | comparable |
 | δ | 297 keV (tested, not MAP) | 297-371 keV | matches |
 | σ_DM-nuc at 248 keV | 1.15×10⁻¹¹⁷ cm² | 6.5×10⁻⁴³ cm² | **74 orders short** |
-| N_events at LZ (2.84 t-yr) | 4.8×10⁻⁷³ | ~1 (1 event observed) | 72 orders short |
+| N_events at LZ (2.84 t-yr) | 1.3×10⁻⁷⁵ | ~1 (1 event observed) | 74 orders short |
 
 ### What the gap means
 

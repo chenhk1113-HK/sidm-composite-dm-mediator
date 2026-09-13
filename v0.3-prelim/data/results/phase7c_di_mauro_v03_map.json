@@ -30,11 +30,11 @@
       "delta_keV": 200.0,
       "form_factor_ansatz": "gaussian",
       "sigma_inel_at_target_cm2": 4.813636450949329e-164,
-      "N_predicted": 1.7495567268889944e-119,
+      "N_predicted": 4.790025261845295e-122,
       "N_observed": 1,
       "ratio_sigma_over_DiMauro_target": 4.813636450949329e-121,
       "log10_ratio_sigma_vs_DiMauro": -120.31752671283719,
-      "log10_N_pred": -118.75707197157178
+      "log10_N_pred": -121.31966219617811
     },
     {
       "m_chi_GeV": 800.0,
@@ -42,11 +42,11 @@
       "delta_keV": 200.0,
       "form_factor_ansatz": "dipole",
       "sigma_inel_at_target_cm2": 4.501109694379041e-164,
-      "N_predicted": 1.6328192123653002e-119,
+      "N_predicted": 4.4704153658187536e-122,
       "N_observed": 1,
       "ratio_sigma_over_DiMauro_target": 4.50110969437904e-121,
       "log10_ratio_sigma_vs_DiMauro": -120.34668040295065,
-      "log10_N_pred": -118.78706189818962
+      "log10_N_pred": -121.34965212279596
     },
     {
       "m_chi_GeV": 800.0,
@@ -54,11 +54,11 @@
       "delta_keV": 297.0,
       "form_factor_ansatz": "gaussian",
       "sigma_inel_at_target_cm2": 4.809248869311776e-164,
-      "N_predicted": 1.921206047539364e-119,
+      "N_predicted": 5.2599754894986e-122,
       "N_observed": 1,
       "ratio_sigma_over_DiMauro_target": 4.809248869311775e-121,
       "log10_ratio_sigma_vs_DiMauro": -120.31792274844662,
-      "log10_N_pred": -118.71642605496622
+      "log10_N_pred": -121.27901627957256
     },
     {
       "m_chi_GeV": 800.0,
@@ -66,11 +66,11 @@
       "delta_keV": 297.0,
       "form_factor_ansatz": "dipole",
       "sigma_inel_at_target_cm2": 4.497006977764499e-164,
-      "N_predicted": 1.7930160082431732e-119,
+      "N_predicted": 4.909010289509028e-122,
       "N_observed": 1,
       "ratio_sigma_over_DiMauro_target": 4.497006977764498e-121,
       "log10_ratio_sigma_vs_DiMauro": -120.34707643856008,
-      "log10_N_pred": -118.74641583299184
+      "log10_N_pred": -121.30900605759817
     },
     {
       "m_chi_GeV": 800.0,
@@ -78,11 +78,11 @@
       "delta_keV": 371.0,
       "form_factor_ansatz": "gaussian",
       "sigma_inel_at_target_cm2": 4.8059029873222795e-164,
-      "N_predicted": 2.0425420142640354e-119,
+      "N_predicted": 5.592175261503176e-122,
       "N_observed": 1,
       "ratio_sigma_over_DiMauro_target": 4.805902987322279e-121,
       "log10_ratio_sigma_vs_DiMauro": -120.31822500017711,
-      "log10_N_pred": -118.68982900144164
+      "log10_N_pred": -121.25241922604796
     },
     {
       "m_chi_GeV": 800.0,
@@ -90,11 +90,11 @@
       "delta_keV": 371.0,
       "form_factor_ansatz": "dipole",
       "sigma_inel_at_target_cm2": 4.493878328143234e-164,
-      "N_predicted": 1.9062564850432158e-119,
+      "N_predicted": 5.21904581805124e-122,
       "N_observed": 1,
       "ratio_sigma_over_DiMauro_target": 4.493878328143234e-121,
       "log10_ratio_sigma_vs_DiMauro": -120.34737869029057,
-      "log10_N_pred": -118.71981866584622
+      "log10_N_pred": -121.28240889045256
     },
     {
       "m_chi_GeV": 800.0,
@@ -102,11 +102,11 @@
       "delta_keV": 500.0,
       "form_factor_ansatz": "gaussian",
       "sigma_inel_at_target_cm2": 4.80007308507567e-164,
-      "N_predicted": 2.2360525429994906e-119,
+      "N_predicted": 6.12197821491989e-122,
       "N_observed": 1,
       "ratio_sigma_over_DiMauro_target": 4.80007308507567e-121,
       "log10_ratio_sigma_vs_DiMauro": -120.31875215008203,
-      "log10_N_pred": -118.65051799556798
+      "log10_N_pred": -121.2131082201743
     },
     {
       "m_chi_GeV": 800.0,
@@ -114,11 +114,11 @@
       "delta_keV": 500.0,
       "form_factor_ansatz": "dipole",
       "sigma_inel_at_target_cm2": 4.48842693400766e-164,
-      "N_predicted": 2.0868562701122948e-119,
+      "N_predicted": 5.713501081758506e-122,
       "N_observed": 1,
       "ratio_sigma_over_DiMauro_target": 4.4884269340076595e-121,
       "log10_ratio_sigma_vs_DiMauro": -120.3479058401955,
-      "log10_N_pred": -118.68050746145043
+      "log10_N_pred": -121.24309768605677
     },
     {
       "m_chi_GeV": 1000.0,
@@ -126,11 +126,11 @@
       "delta_keV": 200.0,
       "form_factor_ansatz": "gaussian",
       "sigma_inel_at_target_cm2": 4.8154463455403286e-164,
-      "N_predicted": 1.3396126287446307e-119,
+      "N_predicted": 3.6676594900605904e-122,
       "N_observed": 1,
       "ratio_sigma_over_DiMauro_target": 4.815446345540328e-121,
       "log10_ratio_sigma_vs_DiMauro": -120.31736345175418,
-      "log10_N_pred": -118.87302076694864
+      "log10_N_pred": -121.43561099155498
     },
     {
       "m_chi_GeV": 1000.0,
@@ -138,11 +138,11 @@
       "delta_keV": 200.0,
       "form_factor_ansatz": "dipole",
       "sigma_inel_at_target_cm2": 4.502802081033572e-164,
-      "N_predicted": 1.2502280620628088e-119,
+      "N_predicted": 3.422937883813302e-122,
       "N_observed": 1,
       "ratio_sigma_over_DiMauro_target": 4.5028020810335715e-121,
       "log10_ratio_sigma_vs_DiMauro": -120.34651714186762,
-      "log10_N_pred": -118.90301075734311
+      "log10_N_pred": -121.46560098194944
     },
     {
       "m_chi_GeV": 1000.0,
@@ -150,11 +150,11 @@
       "delta_keV": 297.0,
       "form_factor_ansatz": "gaussian",
       "sigma_inel_at_target_cm2": 4.811935460219104e-164,
-      "N_predicted": 1.4542510230777024e-119,
+      "N_predicted": 3.98152230822095e-122,
       "N_observed": 1,
       "ratio_sigma_over_DiMauro_target": 4.811935460219104e-121,
       "log10_ratio_sigma_vs_DiMauro": -120.31768020624048,
-      "log10_N_pred": -118.83736062199971
+      "log10_N_pred": -121.39995084660603
     },
     {
       "m_chi_GeV": 1000.0,
@@ -162,11 +162,11 @@
       "delta_keV": 297.0,
       "form_factor_ansatz": "dipole",
       "sigma_inel_at_target_cm2": 4.499519140970224e-164,
-      "N_predicted": 1.3572176745623125e-119,
+      "N_predicted": 3.7158594786100267e-122,
       "N_observed": 1,
       "ratio_sigma_over_DiMauro_target": 4.499519140970223e-121,
       "log10_ratio_sigma_vs_DiMauro": -120.34683389635394,
-      "log10_N_pred": -118.86735049332776
+      "log10_N_pred": -121.42994071793409
     },
     {
       "m_chi_GeV": 1000.0,
@@ -174,11 +174,11 @@
       "delta_keV": 371.0,
       "form_factor_ansatz": "gaussian",
       "sigma_inel_at_target_cm2": 4.809257913813703e-164,
-      "N_predicted": 1.5366741094540922e-119,
+      "N_predicted": 4.207184420134407e-122,
       "N_observed": 1,
       "ratio_sigma_over_DiMauro_target": 4.809257913813703e-121,
       "log10_ratio_sigma_vs_DiMauro": -120.31792193169255,
-      "log10_N_pred": -118.81341822584606
+      "log10_N_pred": -121.37600845045239
     },
     {
       "m_chi_GeV": 1000.0,
@@ -186,11 +186,11 @@
       "delta_keV": 371.0,
       "form_factor_ansatz": "dipole",
       "sigma_inel_at_target_cm2": 4.49701543504949e-164,
-      "N_predicted": 1.434141468790909e-119,
+      "N_predicted": 3.9264653491879774e-122,
       "N_observed": 1,
       "ratio_sigma_over_DiMauro_target": 4.497015435049489e-121,
       "log10_ratio_sigma_vs_DiMauro": -120.34707562180601,
-      "log10_N_pred": -118.84340800621015
+      "log10_N_pred": -121.4059982308165
     },
     {
       "m_chi_GeV": 1000.0,
@@ -198,11 +198,11 @@
       "delta_keV": 500.0,
       "form_factor_ansatz": "gaussian",
       "sigma_inel_at_target_cm2": 4.804592080845548e-164,
-      "N_predicted": 1.6703533094810026e-119,
+      "N_predicted": 4.5731781231512726e-122,
       "N_observed": 1,
       "ratio_sigma_over_DiMauro_target": 4.8045920808455475e-121,
       "log10_ratio_sigma_vs_DiMauro": -120.31834347887121,
-      "log10_N_pred": -118.77719165811638
+      "log10_N_pred": -121.33978188272272
     },
     {
       "m_chi_GeV": 1000.0,
@@ -210,11 +210,11 @@
       "delta_keV": 500.0,
       "form_factor_ansatz": "dipole",
       "sigma_inel_at_target_cm2": 4.49265253265349e-164,
-      "N_predicted": 1.5589016630306383e-119,
+      "N_predicted": 4.268040145189974e-122,
       "N_observed": 1,
       "ratio_sigma_over_DiMauro_target": 4.49265253265349e-121,
       "log10_ratio_sigma_vs_DiMauro": -120.34749716898467,
-      "log10_N_pred": -118.80718127964768
+      "log10_N_pred": -121.36977150425402
     },
     {
       "m_chi_GeV": 1100.0,
@@ -222,11 +222,11 @@
       "delta_keV": 200.0,
       "form_factor_ansatz": "gaussian",
       "sigma_inel_at_target_cm2": 4.816104573372614e-164,
-      "N_predicted": 1.1975800408340498e-119,
+      "N_predicted": 3.2787954574511977e-122,
       "N_observed": 1,
       "ratio_sigma_over_DiMauro_target": 4.816104573372614e-121,
       "log10_ratio_sigma_vs_DiMauro": -120.31730409169508,
-      "log10_N_pred": -118.92169545066423
+      "log10_N_pred": -121.48428567527056
     },
     {
       "m_chi_GeV": 1100.0,
@@ -234,11 +234,11 @@
       "delta_keV": 200.0,
       "form_factor_ansatz": "dipole",
       "sigma_inel_at_target_cm2": 4.50341757323104e-164,
-      "N_predicted": 1.1176724239175364e-119,
+      "N_predicted": 3.060020325578471e-122,
       "N_observed": 1,
       "ratio_sigma_over_DiMauro_target": 4.50341757323104e-121,
       "log10_ratio_sigma_vs_DiMauro": -120.34645778180854,
-      "log10_N_pred": -118.95168546418749
+      "log10_N_pred": -121.51427568879383
     },
     {
       "m_chi_GeV": 1100.0,
@@ -246,11 +246,11 @@
       "delta_keV": 297.0,
       "form_factor_ansatz": "gaussian",
       "sigma_inel_at_target_cm2": 4.812912588366151e-164,
-      "N_predicted": 1.2937086952841618e-119,
+      "N_predicted": 3.541981369703385e-122,
       "N_observed": 1,
       "ratio_sigma_over_DiMauro_target": 4.812912588366151e-121,
       "log10_ratio_sigma_vs_DiMauro": -120.31759202586368,
-      "log10_N_pred": -118.88816350285816
+      "log10_N_pred": -121.45075372746449
     },
     {
       "m_chi_GeV": 1100.0,
@@ -258,11 +258,11 @@
       "delta_keV": 297.0,
       "form_factor_ansatz": "dipole",
       "sigma_inel_at_target_cm2": 4.500432828786107e-164,
-      "N_predicted": 1.207387268158993e-119,
+      "N_predicted": 3.305646182502376e-122,
       "N_observed": 1,
       "ratio_sigma_over_DiMauro_target": 4.500432828786107e-121,
       "log10_ratio_sigma_vs_DiMauro": -120.34674571597712,
-      "log10_N_pred": -118.91815340807294
+      "log10_N_pred": -121.48074363267928
     },
     {
       "m_chi_GeV": 1100.0,
@@ -270,11 +270,11 @@
       "delta_keV": 371.0,
       "form_factor_ansatz": "gaussian",
       "sigma_inel_at_target_cm2": 4.810478177315355e-164,
-      "N_predicted": 1.363310096841025e-119,
+      "N_predicted": 3.7325396217413413e-122,
       "N_observed": 1,
       "ratio_sigma_over_DiMauro_target": 4.810478177315354e-121,
       "log10_ratio_sigma_vs_DiMauro": -120.31781175118385,
-      "log10_N_pred": -118.86540534883926
+      "log10_N_pred": -121.42799557344559
     },
     {
       "m_chi_GeV": 1100.0,
@@ -282,11 +282,11 @@
       "delta_keV": 371.0,
       "form_factor_ansatz": "dipole",
       "sigma_inel_at_target_cm2": 4.498156472585862e-164,
-      "N_predicted": 1.272344827702743e-119,
+      "N_predicted": 3.4834902880294125e-122,
       "N_observed": 1,
       "ratio_sigma_over_DiMauro_target": 4.498156472585861e-121,
       "log10_ratio_sigma_vs_DiMauro": -120.3469654412973,
-      "log10_N_pred": -118.89539517133436
+      "log10_N_pred": -121.4579853959407
     },
     {
       "m_chi_GeV": 1100.0,
@@ -294,11 +294,11 @@
       "delta_keV": 500.0,
       "form_factor_ansatz": "gaussian",
       "sigma_inel_at_target_cm2": 4.8062358791886456e-164,
-      "N_predicted": 1.4769397526109374e-119,
+      "N_predicted": 4.0436406642325455e-122,
       "N_observed": 1,
       "ratio_sigma_over_DiMauro_target": 4.806235879188645e-121,
       "log10_ratio_sigma_vs_DiMauro": -120.31819491881797,
-      "log10_N_pred": -118.83063722008566
+      "log10_N_pred": -121.393227444692
     },
     {
       "m_chi_GeV": 1100.0,
@@ -306,11 +306,11 @@
       "delta_keV": 500.0,
       "form_factor_ansatz": "dipole",
       "sigma_inel_at_target_cm2": 4.494189606907667e-164,
-      "N_predicted": 1.3783931361193842e-119,
+      "N_predicted": 3.773834732701942e-122,
       "N_observed": 1,
       "ratio_sigma_over_DiMauro_target": 4.494189606907667e-121,
       "log10_ratio_sigma_vs_DiMauro": -120.34734860893143,
-      "log10_N_pred": -118.86062689817821
+      "log10_N_pred": -121.42321712278454
     },
     {
       "m_chi_GeV": 1300.0,
@@ -318,11 +318,11 @@
       "delta_keV": 200.0,
       "form_factor_ansatz": "gaussian",
       "sigma_inel_at_target_cm2": 4.817117319414342e-164,
-      "N_predicted": 9.866816041208904e-120,
+      "N_predicted": 2.701387006491144e-122,
       "N_observed": 1,
       "ratio_sigma_over_DiMauro_target": 4.817117319414341e-121,
       "log10_ratio_sigma_vs_DiMauro": -120.3172127764479,
-      "log10_N_pred": -119.00582296879095
+      "log10_N_pred": -121.56841319339729
     },
     {
       "m_chi_GeV": 1300.0,
@@ -330,11 +330,11 @@
       "delta_keV": 200.0,
       "form_factor_ansatz": "dipole",
       "sigma_inel_at_target_cm2": 4.504364566439359e-164,
-      "N_predicted": 9.208459496311428e-120,
+      "N_predicted": 2.521138808025031e-122,
       "N_observed": 1,
       "ratio_sigma_over_DiMauro_target": 4.504364566439358e-121,
       "log10_ratio_sigma_vs_DiMauro": -120.34636646656136,
-      "log10_N_pred": -119.03581301781728
+      "log10_N_pred": -121.59840324242361
     },
     {
       "m_chi_GeV": 1300.0,
@@ -342,11 +342,11 @@
       "delta_keV": 297.0,
       "form_factor_ansatz": "gaussian",
       "sigma_inel_at_target_cm2": 4.814416056141555e-164,
-      "N_predicted": 1.0569147095747883e-119,
+      "N_predicted": 2.89367476954083e-122,
       "N_observed": 1,
       "ratio_sigma_over_DiMauro_target": 4.8144160561415545e-121,
       "log10_ratio_sigma_vs_DiMauro": -120.3174563812237,
-      "log10_N_pred": -118.97596005777824
+      "log10_N_pred": -121.53855028238458
     },
     {
       "m_chi_GeV": 1300.0,
@@ -354,11 +354,11 @@
       "delta_keV": 297.0,
       "form_factor_ansatz": "dipole",
       "sigma_inel_at_target_cm2": 4.501838683475802e-164,
-      "N_predicted": 9.863930075574449e-120,
+      "N_predicted": 2.700596872162751e-122,
       "N_observed": 1,
       "ratio_sigma_over_DiMauro_target": 4.501838683475801e-121,
       "log10_ratio_sigma_vs_DiMauro": -120.34661007133717,
-      "log10_N_pred": -119.00595001507207
+      "log10_N_pred": -121.56854023967841
     },
     {
       "m_chi_GeV": 1300.0,
@@ -366,11 +366,11 @@
       "delta_keV": 371.0,
       "form_factor_ansatz": "gaussian",
       "sigma_inel_at_target_cm2": 4.812355808032924e-164,
-      "N_predicted": 1.1083851459563847e-119,
+      "N_predicted": 3.034593144302216e-122,
       "N_observed": 1,
       "ratio_sigma_over_DiMauro_target": 4.812355808032923e-121,
       "log10_ratio_sigma_vs_DiMauro": -120.3176422699954,
-      "log10_N_pred": -118.95530930305617
+      "log10_N_pred": -121.51789952766251
     },
     {
       "m_chi_GeV": 1300.0,
@@ -378,11 +378,11 @@
       "delta_keV": 371.0,
       "form_factor_ansatz": "dipole",
       "sigma_inel_at_target_cm2": 4.499912197579104e-164,
-      "N_predicted": 1.0344292912566001e-119,
+      "N_predicted": 2.8321130492993845e-122,
       "N_observed": 1,
       "ratio_sigma_over_DiMauro_target": 4.499912197579103e-121,
       "log10_ratio_sigma_vs_DiMauro": -120.34679596010886,
-      "log10_N_pred": -118.9852991903212
+      "log10_N_pred": -121.54788941492754
     },
     {
       "m_chi_GeV": 1300.0,
@@ -390,11 +390,11 @@
       "delta_keV": 500.0,
       "form_factor_ansatz": "gaussian",
       "sigma_inel_at_target_cm2": 4.808765348705324e-164,
-      "N_predicted": 1.1933506901154387e-119,
+      "N_predicted": 3.2672161262571896e-122,
       "N_observed": 1,
       "ratio_sigma_over_DiMauro_target": 4.808765348705324e-121,
       "log10_ratio_sigma_vs_DiMauro": -120.31796641449384,
-      "log10_N_pred": -118.92323191139991
+      "log10_N_pred": -121.48582213600625
     },
     {
       "m_chi_GeV": 1300.0,
@@ -402,11 +402,11 @@
       "delta_keV": 500.0,
       "form_factor_ansatz": "dipole",
       "sigma_inel_at_target_cm2": 4.496554849875052e-164,
-      "N_predicted": 1.1137259105732539e-119,
+      "N_predicted": 3.0492153609123997e-122,
       "N_observed": 1,
       "ratio_sigma_over_DiMauro_target": 4.496554849875052e-121,
       "log10_ratio_sigma_vs_DiMauro": -120.3471201046073,
-      "log10_N_pred": -118.95322167646192
+      "log10_N_pred": -121.51581190106825
     }
   ],
   "di_mauro_model_specific": {
@@ -416,11 +416,11 @@
       "delta_keV": 297.0,
       "form_factor_ansatz": "gaussian",
       "sigma_inel_at_target_cm2": 4.811935460219104e-164,
-      "N_predicted": 1.4542510230777024e-119,
+      "N_predicted": 3.98152230822095e-122,
       "N_observed": 1,
       "ratio_sigma_over_DiMauro_target": 4.811935460219104e-121,
       "log10_ratio_sigma_vs_DiMauro": -120.31768020624048,
-      "log10_N_pred": -118.83736062199971
+      "log10_N_pred": -121.39995084660603
     },
     "Thermal Higgsino": {
       "m_chi_GeV": 1100.0,
@@ -428,11 +428,11 @@
       "delta_keV": 371.0,
       "form_factor_ansatz": "gaussian",
       "sigma_inel_at_target_cm2": 4.810478177315355e-164,
-      "N_predicted": 1.363310096841025e-119,
+      "N_predicted": 3.7325396217413413e-122,
       "N_observed": 1,
       "ratio_sigma_over_DiMauro_target": 4.810478177315354e-121,
       "log10_ratio_sigma_vs_DiMauro": -120.31781175118385,
-      "log10_N_pred": -118.86540534883926
+      "log10_N_pred": -121.42799557344559
     }
   },
   "kill_triggered": true,

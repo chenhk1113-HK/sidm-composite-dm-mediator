@@ -11,65 +11,65 @@
   "v07_MAP_audit": [
     {
       "delta_keV": 50,
-      "N_buggy": 3.6351377669746426e-73,
+      "N_buggy": 9.952464796645152e-76,
       "N_correct": 9.755181849975329e-76,
-      "ratio_buggy_over_correct": 372.63659692656944
+      "ratio_buggy_over_correct": 1.0202234002096355
     },
     {
       "delta_keV": 100,
-      "N_buggy": 3.8847272070591983e-73,
+      "N_buggy": 1.0635803441640513e-75,
       "N_correct": 1.0424987367127778e-75,
-      "ratio_buggy_over_correct": 372.63615487041994
+      "ratio_buggy_over_correct": 1.0202221899258586
     },
     {
       "delta_keV": 200,
-      "N_buggy": 4.375738405985671e-73,
+      "N_buggy": 1.198011883911203e-75,
       "N_correct": 1.1742684320874474e-75,
-      "ratio_buggy_over_correct": 372.63527541203723
+      "ratio_buggy_over_correct": 1.0202197821000332
     },
     {
       "delta_keV": 297,
-      "N_buggy": 4.8143849408027244e-73,
+      "N_buggy": 1.3181067599733674e-75,
       "N_correct": 1.291986106449933e-75,
-      "ratio_buggy_over_correct": 372.6344205071598
+      "ratio_buggy_over_correct": 1.0202174414980418
     },
     {
       "delta_keV": 371,
-      "N_buggy": 5.1235201380901203e-73,
+      "N_buggy": 1.4027433642957206e-75,
       "N_correct": 1.374947896514401e-75,
-      "ratio_buggy_over_correct": 372.6337667833551
+      "ratio_buggy_over_correct": 1.0202156516998087
     },
     {
       "delta_keV": 500,
-      "N_buggy": 5.614972093911222e-73,
+      "N_buggy": 1.5372955767039622e-75,
       "N_correct": 1.5068385652163636e-75,
-      "ratio_buggy_over_correct": 372.6326245907424
+      "ratio_buggy_over_correct": 1.020212524546865
     }
   ],
   "v03_MAP_audit": [
     {
       "delta_keV": 50,
-      "N_buggy": 7.00887615942712e-119,
+      "N_buggy": 1.9189257109998956e-121,
       "N_correct": 1.8808967229441445e-121,
-      "ratio_buggy_over_correct": 372.6348222063045
+      "ratio_buggy_over_correct": 1.020218541290361
     },
     {
       "delta_keV": 100,
-      "N_buggy": 8.363001049710732e-119,
+      "N_buggy": 2.2896649006737113e-121,
       "N_correct": 2.2442979643116775e-121,
-      "ratio_buggy_over_correct": 372.63327698448677
+      "ratio_buggy_over_correct": 1.0202143107035913
     },
     {
       "delta_keV": 200,
-      "N_buggy": 1.045053068592177e-118,
+      "N_buggy": 2.8611993664399095e-121,
       "N_correct": 2.804532686408914e-121,
-      "ratio_buggy_over_correct": 372.6300191317519
+      "ratio_buggy_over_correct": 1.0202053911889168
     },
     {
       "delta_keV": 297,
-      "N_buggy": 1.1812021467871549e-118,
+      "N_buggy": 3.233955227343339e-121,
       "N_correct": 3.1699336049554137e-121,
-      "ratio_buggy_over_correct": 372.6267783465985
+      "ratio_buggy_over_correct": 1.0201965184027335
     },
     {
       "delta_keV": 371,

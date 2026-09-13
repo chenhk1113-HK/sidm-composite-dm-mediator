@@ -162,29 +162,77 @@ IS that sanity check — and it caught a real bug.
 
 ---
 
-## 7. Recommended Fix (NOT YET APPLIED)
+## 7. Recommended Fix (APPLIED 2026-09-13)
 
-To fix the bug in `t87_lz_event_rate.py`, apply this 1-line change:
+The 1-line fix has been **applied** to `t87_lz_event_rate.py`:
 
 ```python
-# Line 197 (CURRENT — buggy):
+# Line 197 (BEFORE — buggy):
 M_T_kg_days = exposure_tonne_years * 1000 * DAYS_PER_YEAR  # kg × days
 
-# Line 197 (FIXED):
+# Line 197 (AFTER — fixed):
 M_T_kg = exposure_tonne_years * 1000  # kg only
 ```
 
-No change needed to line 243 (it's correct given the fixed line 197 input).
+```python
+# Line 243 (BEFORE — buggy):
+N_T = M_T_kg_days * 1000 / 131 * 6.022e23  # dimensionless
 
-After the fix, re-run the test:
-```bash
-python -m pytest tests/test_t87_lz_event_rate.py  # if exists
-python -m pytest tests/test_phase7a_composite_mediator.py  # should still pass
+# Line 243 (AFTER — fixed):
+N_T = M_T_kg * 1000 / 131 * 6.022e23  # dimensionless (# of Xe nuclei)
 ```
+
+### Post-fix verification
+
+After the fix, all Phase 7 N_pred values are 365.25× smaller:
+
+| Point | Pre-fix N_pred | Post-fix N_pred |
+|---|---|---|
+| T87 v0.7 MAP, δ=297 keV | 4.81 × 10⁻⁷³ | **1.29 × 10⁻⁷⁵** |
+| Phase 7a v0.3-prelim, δ=297 keV | 1.18 × 10⁻¹¹⁸ | **3.23 × 10⁻¹²¹** |
+| Phase 7c Di Mauro, δ=297 keV | 1.45 × 10⁻¹¹⁹ | **3.98 × 10⁻¹²²** |
+
+**All kill verdicts remain valid** (defects are 70+ orders of magnitude below 1).
+**Phase 7a/7c/T87 docs have been updated with corrected values.**
 
 ---
 
-## 8. Cross-references
+## 10. Other Unit-Conversion Audit Findings (Phase 7f follow-up)
+
+The audit extended to other files. Findings:
+
+1. **`channels_extended.py:1715`**, **`t116_sequential_t90_value.py:46`**, **`t90_v23_lz_evt_in_lowE_window.py:446`**,
+   **`t41_v08_phase8_d10_mapping.py:75`**, **`t90_v14_calibrated_operators.py:70`** — all define
+   `LZ_EXPOSURE_KG_DAYS = kg × days` but use it correctly as a multiplier for per-kg-per-day rates.
+   **Not bugs** (unlike T87 where the kg×days value was used as if it were kg).
+
+2. **`sashimi_si.py:1334-1337`** — lookback time and age of universe integration. Both
+   use `t = t_U - lookback_time(z)` to convert lookback to age, which is correct per
+   the AGENTS.md memory rule ("Integrating dt/dz from z=0 gives LOOKBACK TIME, not age").
+
+3. **`sashimi_parametric.py:93`** — `H0_GYR = H0_KM_S_MPC / 977.79`. Conversion factor 977.79 is
+   (1 Mpc in km) × (1 Gyr in s) = 3.0857e19 × 3.1557e16 = 9.738e35 km·s/Mpc/Gyr = 9.738e35 / 1e36 ≈ 973.8.
+   Wait — that's 973.8, not 977.79. Let me recompute: 1 Mpc = 3.0857e22 m = 3.0857e19 km. 1 Gyr = 3.15576e16 s.
+   (1 Mpc/km) / (1 Gyr/s) = 3.0857e19 / 3.15576e16 = 977.79. ✓ Correct.
+
+4. **`t39_tier3_epsilon_alpha_joint_fit.py:130-135`** — `sigma_SI = ... * (HBAR_C_GEV_CM ** 2)`.
+   Uses `(ℏc)²` (correct) to convert from 1/GeV² to cm². Per AGENTS.md memory rule,
+   this is the OPPOSITE of the bug mentioned ("T90.61 used (1/ℏc)² = 2.57e27"). This code
+   is **correct**.
+
+5. **`t62_lz_direct_detection.py:48-50`** — also uses `(ℏc)²`. Correct.
+
+6. **`t87_composite_inelastic_nucleon.py:114-149`** — `C0 = 1.5e-24 cm²` is the canonical
+   normalization for σ_elastic_nuc. Cross-checked at v0.7 MAP: gives 2.48e-117 cm², matching
+   T79 reference (2.47e-117 cm²) within 0.3%. **Correct.**
+
+**Conclusion of broader audit:** The only real bug found was in `t87_lz_event_rate.py:197,243`
+(Phase 7e). All other files with similar "kg × days" patterns use the values correctly.
+The T39 Tier-3 σ_SI calculation correctly uses `(ℏc)²` rather than `1/(ℏc)²`.
+
+---
+
+## 11. Cross-references
 
 - AGENTS.md memory entry "UNIT-CONVERSION PITFALL (2026-09-11/12)" — context
 - `code/t87_lz_event_rate.py:197,243` — the bug location

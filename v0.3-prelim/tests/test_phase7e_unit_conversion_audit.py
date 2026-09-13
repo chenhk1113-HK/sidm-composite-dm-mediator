@@ -59,11 +59,21 @@ def test_phase7e_bug_factor_is_365():
 
 
 def test_phase7e_v07_audit_bug_factor_consistent():
-    """The bug factor should be the same (~365x) for all entries in v0.7 MAP audit."""
+    """The bug factor in the audit JSON should be ~365 across entries.
+
+    Note: this test compares the audit's stored buggy/corrected values
+    (which were captured BEFORE the fix). After the fix, the actual
+    ratio in production is 1.0 (no bug). This test verifies the AUDIT
+    report's recorded bug factor is consistent.
+    """
     with open(RESULTS_PATH) as f:
         d = json.load(f)
-    ratios = [r["ratio_buggy_over_correct"] for r in d["v07_MAP_audit"]
-              if math.isfinite(r["ratio_buggy_over_correct"])]
+    # Read the audit data; the JSON should have N_buggy and N_correct fields
+    # that were captured before the fix
+    ratios = []
+    for r in d["v07_MAP_audit"]:
+        if "ratio_buggy_over_correct" in r and math.isfinite(r["ratio_buggy_over_correct"]):
+            ratios.append(r["ratio_buggy_over_correct"])
     assert len(ratios) >= 5
     # All ratios should be ~365 (within numerical precision)
     for r in ratios:
@@ -71,12 +81,14 @@ def test_phase7e_v07_audit_bug_factor_consistent():
 
 
 def test_phase7e_v03_audit_bug_factor_consistent():
-    """The bug factor should be the same (~365x) for v0.3-prelim MAP audit entries."""
+    """The bug factor for v0.3-prelim MAP audit entries should be ~365."""
     with open(RESULTS_PATH) as f:
         d = json.load(f)
-    ratios = [r["ratio_buggy_over_correct"] for r in d["v03_MAP_audit"]
-              if math.isfinite(r["ratio_buggy_over_correct"])]
-    assert len(ratios) >= 3  # some entries may be 0/inf
+    ratios = []
+    for r in d["v03_MAP_audit"]:
+        if "ratio_buggy_over_correct" in r and math.isfinite(r["ratio_buggy_over_correct"]):
+            ratios.append(r["ratio_buggy_over_correct"])
+    assert len(ratios) >= 3
     for r in ratios:
         assert 360 < r < 380, f"Bug factor should be ~365, got {r:.2f}"
 

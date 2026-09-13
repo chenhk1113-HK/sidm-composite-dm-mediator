@@ -14,9 +14,9 @@
 | v0.3-prelim MAP a | 1.31 |
 | v0.3-prelim MAP ε | 7.71 × 10⁻⁵⁷ |
 | v0.3-prelim MAP α_χ | 8.98 × 10⁻²⁹ |
-| σ_inel_nuc at LZ event (248 keV, δ=297 keV, gaussian) | **4.77 × 10⁻¹⁶⁴ cm²** |
-| N_events at LZ (2.84 t-yr, δ=297 keV, gaussian) | **1.18 × 10⁻¹¹⁸** |
-| log10(N_pred / N_obs) | **−117.93** |
+| **σ_inel_nuc at LZ event (248 keV, δ=297 keV, gaussian)** | **4.77 × 10⁻¹⁶⁴ cm²** |
+| **N_events at LZ (2.84 t-yr, δ=297 keV, gaussian)** | **3.23 × 10⁻¹²¹** |
+| log10(N_pred / N_obs) | **−120.49** |
 | **Verdict** | **DOES NOT EXPLAIN LZ EVENT (predicted ≪ observed)** |
 
 **Kill criterion triggered.** Even MORE suppressed than v0.7 MAP (N_pred ≈ 10⁻⁷³).
@@ -113,20 +113,20 @@ The full sweep over (δ, form-factor ansatz):
 
 | δ (keV) | ansatz | σ_inel (cm²) | N_pred | log10(N/obs) | verdict |
 |---|---|---|---|---|---|
-| 50 | gaussian | 4.81e-164 | 7.00e-119 | -118.15 | DOES NOT EXPLAIN |
-| 50 | dipole | 4.50e-164 | 6.54e-119 | -118.18 | DOES NOT EXPLAIN |
-| 100 | gaussian | 4.81e-164 | 8.36e-119 | -118.08 | DOES NOT EXPLAIN |
-| 100 | dipole | 4.49e-164 | 7.80e-119 | -118.11 | DOES NOT EXPLAIN |
-| 200 | gaussian | 4.79e-164 | 1.04e-118 | -117.98 | DOES NOT EXPLAIN |
-| 200 | dipole | 4.48e-164 | 9.75e-119 | -118.01 | DOES NOT EXPLAIN |
-| 297 | gaussian | 4.77e-164 | 1.18e-118 | -117.93 | DOES NOT EXPLAIN |
-| 297 | dipole | 4.46e-164 | 1.10e-118 | -117.96 | DOES NOT EXPLAIN |
-| 371 | gaussian | 4.76e-164 | 0 | -inf | DOES NOT EXPLAIN |
-| 371 | dipole | 4.45e-164 | 0 | -inf | DOES NOT EXPLAIN |
-| 500 | gaussian | 4.73e-164 | 0 | -inf | DOES NOT EXPLAIN |
-| 500 | dipole | 4.43e-164 | 0 | -inf | DOES NOT EXPLAIN |
+| 50 | gaussian | 4.81e-164 | 1.92e-121 | -120.72 | DOES NOT EXPLAIN |
+| 50 | dipole | 4.50e-164 | 1.79e-121 | -120.75 | DOES NOT EXPLAIN |
+| 100 | gaussian | 4.81e-164 | 2.29e-121 | -120.64 | DOES NOT EXPLAIN |
+| 100 | dipole | 4.49e-164 | 2.13e-121 | -120.67 | DOES NOT EXPLAIN |
+| 200 | gaussian | 4.79e-164 | 2.86e-121 | -120.54 | DOES NOT EXPLAIN |
+| 200 | dipole | 4.48e-164 | 2.67e-121 | -120.57 | DOES NOT EXPLAIN |
+| 297 | gaussian | 4.77e-164 | 3.23e-121 | -120.49 | DOES NOT EXPLAIN |
+| 297 | dipole | 4.46e-164 | 3.02e-121 | -120.52 | DOES NOT EXPLAIN |
+| 371 | gaussian | 4.76e-164 | 0.00e+00 | -inf | DOES NOT EXPLAIN |
+| 371 | dipole | 4.45e-164 | 0.00e+00 | -inf | DOES NOT EXPLAIN |
+| 500 | gaussian | 4.73e-164 | 0.00e+00 | -inf | DOES NOT EXPLAIN |
+| 500 | dipole | 4.43e-164 | 0.00e+00 | -inf | DOES NOT EXPLAIN |
 
-**Max N_predicted across sweep:** 1.18 × 10⁻¹¹⁸ (at δ=297, gaussian)
+**Max N_predicted across sweep:** 3.23 × 10⁻¹²¹ (at δ=297, gaussian)
 **Min log10(N_pred/observed):** −∞ (at δ≥371 where E_R threshold suppresses)
 **Kill criterion (N_pred < 0.1):** **TRIGGERED**
 
@@ -136,15 +136,21 @@ The full sweep over (δ, form-factor ansatz):
 
 | Operating point | ε | N_pred at δ=297 | log10(N/obs) | Verdict |
 |---|---|---|---|---|
-| **v0.7 MAP** (T87, 2026-09-03) | 1.12 × 10⁻³⁷ | 3.63 × 10⁻⁷³ | −72.44 | DOES NOT EXPLAIN |
-| **v0.3-prelim MAP** (Phase 7a, this doc) | 7.71 × 10⁻⁵⁷ | 1.18 × 10⁻¹¹⁸ | −117.93 | DOES NOT EXPLAIN |
-| **Ratio (v0.3 / v0.7)** | — | 3.25 × 10⁻⁴⁶ | — | Both KILL |
+| **v0.7 MAP** (T87, 2026-09-03) | 1.12 × 10⁻³⁷ | 1.29 × 10⁻⁷⁵ | −74.88 | DOES NOT EXPLAIN |
+| **v0.3-prelim MAP** (Phase 7a, this doc) | 7.71 × 10⁻⁵⁷ | 3.23 × 10⁻¹²¹ | −120.49 | DOES NOT EXPLAIN |
+| **Ratio (v0.3 / v0.7)** | — | 3.99 × 10⁻⁴⁶ | — | Both KILL |
 
-The v0.3-prelim MAP operating point is **~10⁻⁴⁶× worse** than v0.7 MAP
+The v0.3-prelim MAP operating point is **~10⁴⁶× worse** than v0.7 MAP
 for composite-DM LZ event prediction. This is consistent with the
 ε² scaling factor of (ε_v03/ε_v07)² ≈ 4.74 × 10⁻³⁹ — the small discrepancy
 (10⁻⁴⁶ actual vs 10⁻³⁹ expected) comes from the m_φ normalization difference
 (50 MeV vs 453 MeV: factor of (50/453)⁻⁴ ≈ 6.6 × 10⁻⁷ in the Gaussian ansatz).
+
+> **Note:** All T87 N_pred values were systematically 365.25× too high due
+> to a unit-conversion bug in `t87_lz_event_rate.py:197` (Phase 7e audit,
+> fixed 2026-09-13). Corrected values shown above. The Phase 7e audit
+> verified this bug does not change any kill verdicts (defects remain
+> 60+ orders of magnitude below 1).
 
 ---
 
