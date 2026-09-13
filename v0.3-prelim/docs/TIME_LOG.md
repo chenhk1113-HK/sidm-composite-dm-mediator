@@ -134,6 +134,28 @@ The drift is 100x larger at v0.3-prelim MAP because T39 Tier-3 v0.3-prelim MAP i
 
 **Phase 7 status**: 2 of 4 sub-tasks KILL (7a composite, 7b magnetic-moment). Kill criterion at the composite+mediator level triggered decisively. Phase 7c (Di Mauro) likely KILL same physics. Phase 7d (T95 stream) is independent of LZ.
 
+### 2026-09-13 — Phase 7c (Di Mauro inelastic sub-task) — DONE
+
+- **ESTIMATE**: 30-60 min (agent compute). Extend T87 framework to test δ = 297-371 keV at v0.3-prelim MAP.
+- **ACTUAL**: ~5 minutes active (script + tests + doc)
+- **RATIO**: 0.08-0.17× (over-estimated 6-12×)
+- **NOTE**: Phase 7a's T87 framework was directly reusable. Just needed to extend m_chi sweep to Di Mauro's mass range (800-1300 GeV) and add the explicit σ_DM-nuc comparison. Pattern continues: sub-tasks that reuse existing frameworks are 10× over-estimated.
+
+**Verdict (Phase 7c)**: KILL CONFIRMED at v0.3-prelim MAP.
+- Pseudo-Dirac fermion (Di Mauro): deficit 121 orders short
+- Thermal Higgsino: deficit 117 orders short
+- Best-case across sweep: 120 orders short
+- vs v0.7 MAP (T87): deficit was 74 orders → v0.3-prelim is 10^46× worse
+
+**Phase 7 final status**: 3 of 4 sub-tasks KILL.
+- 7a composite: KILL (Phase 7a ship)
+- 7b magnetic-moment: KILL (Phase 7b ship)
+- 7c Di Mauro: KILL (Phase 7c ship, this doc)
+- 7d T95 stream: INDEPENDENT of LZ (separate branch, future work)
+
+Per roadmap §Phase 7 kill criterion action: "Abandon LZ event interpretation;
+treat LZ as Ch14 constraint." This action is now DECISIVELY TRIGGERED.
+
 ---
 
 ## Next estimate to log
