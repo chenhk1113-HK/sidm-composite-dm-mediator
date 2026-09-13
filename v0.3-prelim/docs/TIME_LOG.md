@@ -87,6 +87,21 @@ ALL sessions, ALL tasks where I say "X minutes/hours/days/weeks".
 
 ---
 
+## 2026-09-13 — Phase 7 (LZ event interpretation at v0.3-prelim MAP)
+
+**User directive:** "proceed phase 7" (resume of roadmap Phase 7 added 2026-09-12).
+**Scope per roadmap §Phase 7:** 2-4 weeks, 4 sub-tasks (composite-mediator, magnetic-moment, T95 stream, Di Mauro).
+**Honest prior:** T87 already triggered kill criterion at v0.7 MAP (composite-DM inelastic 71 orders short). v0.3-prelim MAP is 7× higher in σ/m_0 (0.72 vs 0.273), so composite-mediator sub-task will likely still trigger kill. Magnetic-moment sub-task has real chance of meaningful answer (T90 value 6.1e-8 μ_N at σ/m_0 = 0.06 was tuned to LZ; at σ/m_0 = 0.72, scaled μ_χ ~ 2.3e-8 μ_N).
+
+- **ESTIMATE (sub-task 1: composite-mediator)**: 30-60 min (agent compute). Re-run T87 with v0.3-prelim MAP input.
+- **ESTIMATE (sub-task 2: magnetic-moment)**: 4-8 hours (agent compute). Sequential check (v0.7 drift + LZ event count) + 7D posterior at v0.3-prelim MAP.
+- **ESTIMATE (sub-task 3: Di Mauro inelastic)**: 30-60 min (agent compute). Extend T87 framework to test δ = 297-371 keV at v0.3-prelim MAP.
+- **ESTIMATE (sub-task 4: T95 stream cross-match)**: 3-5 days (agent compute). Checkout wip/t95-stream-cross-match, re-run T95 with σ/m_0 = 0.72.
+
+**TOTAL ESTIMATE**: 1-2 weeks agent compute (best case: kill triggers on sub-task 1, then magnetic-moment dominates).
+
+---
+
 ## Next estimate to log
 
 When user asks for next task, log HERE before starting.
