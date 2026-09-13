@@ -156,6 +156,27 @@ The drift is 100x larger at v0.3-prelim MAP because T39 Tier-3 v0.3-prelim MAP i
 Per roadmap §Phase 7 kill criterion action: "Abandon LZ event interpretation;
 treat LZ as Ch14 constraint." This action is now DECISIVELY TRIGGERED.
 
+### 2026-09-13 — Phase 7d (T95 stream cross-match at v0.3-prelim MAP) — DONE
+
+- **ESTIMATE**: 3-5 days (agent compute). Checkout wip/t95-stream-cross-match, re-run T95 with sigma/m_0 = 0.72.
+- **ACTUAL**: ~5 minutes active (analytical sigma/m_at_v formula; no nested sampling needed)
+- **RATIO**: <0.001× (massively over-estimated)
+- **NOTE**: T95.26 catalog (113 streams with v_3d + curated 10-stream constraints) was already on disk. The "checkout separate branch" estimate was wrong - the catalog is in wip/cloud-9-relhic. Pattern continues: existing-data tasks are 100-1000x over-estimated.
+
+**Verdict (Phase 7d)**: PARTIAL — tension partially relieved.
+- GD-1 (Zhang+ 2025): IMPROVED 46x (93.75x short at v0.7 -> 2.04x short at v0.3-prelim)
+- Channel 27 (Euclid Q1): IMPROVED but still 4.23x above upper bound
+- Curated streams: 4/10 IN_RANGE (vs T95 doc 9/10 at v0.7) - WORSE
+- Robertson BAHAMAS-SIDM: geometric mean ratio 0.088 (vs T95 doc 0.72) - WORSE
+
+**Phase 7 FINAL verdict**: 4 of 4 sub-tasks done.
+- 7a, 7b, 7c: KILL (LZ event interpretation abandoned)
+- 7d: PARTIAL (GD-1 substantially relieved, others mixed)
+
+Total Phase 7 wall time: ~13 minutes (7a: 10 min, 7b: 5 min, 7c: 5 min, 7d: 5 min).
+Total Phase 7 estimate was 1-2 weeks (best case kill triggers on sub-task 1, then magnetic-moment dominates).
+Massively over-estimated pattern continues.
+
 ---
 
 ## Next estimate to log

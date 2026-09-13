@@ -1,0 +1,162 @@
+{
+  "phase": "7d",
+  "date": "2026-09-13",
+  "title": "T95 stream cross-match tension at v0.3-prelim MAP",
+  "v03_MAP": {
+    "sigma_m_0": 0.72,
+    "a": 1.31,
+    "log_epsilon": -56.113,
+    "log_alpha": -28.047,
+    "V_REF": 100.0
+  },
+  "sigma_m_profile_at_v03_map": {
+    "v=10_kms": 14.70051320162061,
+    "v=30_kms": 3.485809528759289,
+    "v=100_kms": 0.72,
+    "v=150_kms": 0.42330456017684764,
+    "v=200_kms": 0.2903910333199654,
+    "v=300_kms": 0.17072756755390042,
+    "v=500_kms": 0.08743429060388477,
+    "v=1000_kms": 0.035264074994528126,
+    "v=1500_kms": 0.02073256077166958
+  },
+  "step_1_curated_streams": [
+    {
+      "stream": "GD-1",
+      "v_kms": 10.0,
+      "sigma_m_lower": 30.0,
+      "sigma_m_upper": 100.0,
+      "sigma_m_pred": 14.70051320162061,
+      "in_range": false,
+      "log10_tension_vs_nearest_bound": -0.309788758288394,
+      "tension_label": "UNDERPREDICTION"
+    },
+    {
+      "stream": "Pal5",
+      "v_kms": 30.0,
+      "sigma_m_lower": 0.5,
+      "sigma_m_upper": 2.0,
+      "sigma_m_pred": 3.485809528759289,
+      "in_range": false,
+      "log10_tension_vs_nearest_bound": 0.2412736570845295,
+      "tension_label": "OVERPREDICTION"
+    },
+    {
+      "stream": "Orphan-Chenab",
+      "v_kms": 70.0,
+      "sigma_m_lower": 0.1,
+      "sigma_m_upper": 1.0,
+      "sigma_m_pred": 1.1488254924717731,
+      "in_range": false,
+      "log10_tension_vs_nearest_bound": 0.060254064012592,
+      "tension_label": "OVERPREDICTION"
+    },
+    {
+      "stream": "AAU-AliqaUma",
+      "v_kms": 50.0,
+      "sigma_m_lower": 0.2,
+      "sigma_m_upper": 1.5,
+      "sigma_m_pred": 1.7851790879121407,
+      "in_range": false,
+      "log10_tension_vs_nearest_bound": 0.07559053169540264,
+      "tension_label": "OVERPREDICTION"
+    },
+    {
+      "stream": "Jhelum",
+      "v_kms": 60.0,
+      "sigma_m_lower": 0.1,
+      "sigma_m_upper": 1.0,
+      "sigma_m_pred": 1.4058997652958218,
+      "in_range": false,
+      "log10_tension_vs_nearest_bound": 0.14795435842869528,
+      "tension_label": "OVERPREDICTION"
+    },
+    {
+      "stream": "Phoenix",
+      "v_kms": 80.0,
+      "sigma_m_lower": 0.5,
+      "sigma_m_upper": 5.0,
+      "sigma_m_pred": 0.9644608728476441,
+      "in_range": true,
+      "log10_tension_vs_nearest_bound": 0.0,
+      "tension_label": "IN_RANGE"
+    },
+    {
+      "stream": "Indus",
+      "v_kms": 70.0,
+      "sigma_m_lower": 0.5,
+      "sigma_m_upper": 5.0,
+      "sigma_m_pred": 1.1488254924717731,
+      "in_range": true,
+      "log10_tension_vs_nearest_bound": 0.0,
+      "tension_label": "IN_RANGE"
+    },
+    {
+      "stream": "NGC3201",
+      "v_kms": 50.0,
+      "sigma_m_lower": 0.1,
+      "sigma_m_upper": 1.0,
+      "sigma_m_pred": 1.7851790879121407,
+      "in_range": false,
+      "log10_tension_vs_nearest_bound": 0.2516817907510839,
+      "tension_label": "OVERPREDICTION"
+    },
+    {
+      "stream": "M5",
+      "v_kms": 40.0,
+      "sigma_m_lower": 0.5,
+      "sigma_m_upper": 5.0,
+      "sigma_m_pred": 2.3912991407182007,
+      "in_range": true,
+      "log10_tension_vs_nearest_bound": 0.0,
+      "tension_label": "IN_RANGE"
+    },
+    {
+      "stream": "M92",
+      "v_kms": 40.0,
+      "sigma_m_lower": 0.5,
+      "sigma_m_upper": 5.0,
+      "sigma_m_pred": 2.3912991407182007,
+      "in_range": true,
+      "log10_tension_vs_nearest_bound": 0.0,
+      "tension_label": "IN_RANGE"
+    }
+  ],
+  "step_1_summary": {
+    "n_total": 10,
+    "n_in_range": 4,
+    "n_underpredict": 1,
+    "n_overpredict": 5
+  },
+  "step_2_gd1": {
+    "constraint": {
+      "sigma_m_lower": 30.0,
+      "sigma_m_upper": 100.0,
+      "v_kms": 10.0,
+      "reference": "Zhang+ 2025 ApJL 978 L23 (SIDM interpretation)"
+    },
+    "v03_prediction_at_v10": 14.70051320162061,
+    "v07_reference_at_v10": 0.32,
+    "v03_log10_tension_vs_lower": -0.309788758288394,
+    "v07_log10_tension_vs_lower": -1.9719712763997566,
+    "improvement_factor": 45.93910375506441,
+    "improved_at_v03": true
+  },
+  "step_3_channel27": {
+    "forecast_range": [
+      0.05,
+      0.1
+    ],
+    "v03_prediction_at_v150": 0.42330456017684764,
+    "v07_reference_at_v150": 0.7,
+    "v03_status": "UNDERPREDICTION (0.24x below lower bound)",
+    "v07_status": "UNDERPREDICTION (0.14x below lower bound)",
+    "improved_at_v03": false
+  },
+  "step_4_robertson": {
+    "geo_mean_ratio_v03": 0.08765442440675526,
+    "geo_mean_ratio_t95_reference": 0.72
+  },
+  "overall_verdict": "v0.3-prelim MAP PARTIALLY RESOLVES the T95 stream tension (GD-1 improved, Channel 27 not)",
+  "kill_criterion": "NONE (Phase 7d is independent of LZ, no kill criterion per roadmap \u00a7Phase 7)"
+}
