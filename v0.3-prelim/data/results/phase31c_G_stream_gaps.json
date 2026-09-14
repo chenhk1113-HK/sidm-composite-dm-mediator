@@ -1,0 +1,59 @@
+{
+  "test": "Phase31c_G_stream_gaps",
+  "median_params": {
+    "m_chi_GeV": 6.091783883158755,
+    "E_R_eV": 42.30202214765859,
+    "Gamma_R_eV": 0.5568654618091413,
+    "sigma_0": 0.00036381577094072947,
+    "alpha_Y": 0.0074603904375728225
+  },
+  "gap_predictions": [
+    {
+      "v_stream_kms": 150,
+      "sigma_m_cm2_per_g": 0.017303872408148905,
+      "M_cut_Msun": 29163706.064151533,
+      "gap_density_per_10kpc": 0.025,
+      "suppression_factor": 0.05
+    },
+    {
+      "v_stream_kms": 200,
+      "sigma_m_cm2_per_g": 0.012805402770084082,
+      "M_cut_Msun": 18565968.98557039,
+      "gap_density_per_10kpc": 0.025,
+      "suppression_factor": 0.05
+    },
+    {
+      "v_stream_kms": 250,
+      "sigma_m_cm2_per_g": 0.010229265032651836,
+      "M_cut_Msun": 13255447.766971363,
+      "gap_density_per_10kpc": 0.025,
+      "suppression_factor": 0.05
+    },
+    {
+      "v_stream_kms": 300,
+      "sigma_m_cm2_per_g": 0.008522104029339436,
+      "M_cut_Msun": 10079709.20772453,
+      "gap_density_per_10kpc": 0.025,
+      "suppression_factor": 0.05
+    },
+    {
+      "v_stream_kms": 400,
+      "sigma_m_cm2_per_g": 0.0063910211278622635,
+      "M_cut_Msun": 6546107.546996682,
+      "gap_density_per_10kpc": 0.01,
+      "suppression_factor": 0.02
+    }
+  ],
+  "avg_gap_density": 0.022,
+  "observation_references": {
+    "Pal_5_gaps_per_10kpc": [
+      0.2,
+      0.5
+    ],
+    "GD-1_total_gaps": [
+      5,
+      15
+    ]
+  },
+  "verdict": "TOO_FEW_GAPS"
+}

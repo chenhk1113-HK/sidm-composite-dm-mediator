@@ -506,34 +506,35 @@ Posterior median (Phase 29, 50k samples, 6D joint fit):
 **Phase 30 critical review response**: The "FULL SOLUTION" framing
 was overstated. After running critical tests:
 - **Test D (fine-tuning)**: Max sensitivity = 1.30 → **NATURAL** (not >>100)
-- **Test A (other low-v systems)**: 4/10 in Cloud-9 band → **PARTIAL** (fails for v < 10 km/s)
+- **Test A (other low-v)**: 4/10 in Cloud-9 band → **PARTIAL** (fails for v < 10 km/s)
 - **Test F (relic density)**: η/η_B = 0.82 → **REASONABLE**
 - **Test B (SPARC Bayes)**: Δlog L = -0.48 → power-law slightly better
 
-**Honest reframing** (per consider8.docx reviewer):
-> "A resonant SIDM effective model that simultaneously satisfies the
-> Cloud-9, SPARC, Euclid-subhalo and Bullet velocity scales (with residual
-> SPARC tension quantified), under the assumption of asymmetric dark matter.
-> The narrow Breit-Wigner resonance is phenomenological pending UV completion."
+**Phase 31a-c: All 9 critical review tests done**:
+- **Test C (subhalo)**: CONSISTENT
+- **Test H (dwarf cores)**: **OVERSHOOTS 40-300×** — CRITICAL FAILURE
+- **Test I (DD limits)**: Evades with ε ≤ 1.4×10⁻¹³
+- **Test E (UV completion)**: MULTIPLE_UV (2/4 work: composite mesons, magnetic dipole)
+- **Test G (stream gaps)**: **TOO_FEW_GAPS (10-25×)** — CRITICAL FAILURE
 
-Resolves Phase 24-25 structural conflicts: SPARC Δlog Z improved from
--109,263 (multi-portal) to -30,400 (resonant — 3.6× better); Euclid
-subhalo FAIL → PASS.
+**Final verdict: PARTIALLY_PLAUSIBLE — 2 critical structural failures**
 
-See [`v0.3-prelim/docs/PHASE29_FULL_RESONANT_JOINT_FIT_2026_09_14.md`](v0.3-prelim/docs/PHASE29_FULL_RESONANT_JOINT_FIT_2026_09_14.md)
-for Phase 29 details and
-[`v0.3-prelim/docs/PHASE30_CRITICAL_REVIEW_RESPONSE_2026_09_14.md`](v0.3-prelim/docs/PHASE30_CRITICAL_REVIEW_RESPONSE_2026_09_14.md)
-for the honest reframing.
+The resonant model solves Cloud-9 but breaks at dwarf cores
+and stellar streams (same root cause: Γ_R/E_R ~ 0.013 is too
+wide for the velocity ranges involved). NOT a viable dark matter
+solution in its current form.
 
 Tags: `t90-grand-unified-v63-2026-09-14` (synthesis),
 `t90-reviewer-fixes-v22-2026-09-14` (Phase 22),
 `t90-tension-diagnostics-v25-2026-09-14` (Phase 23-25),
 `t90-architectural-options-v28-2026-09-14` (Phase 27-28),
 `t90-full-resonant-solution-v29-2026-09-14` (Phase 29),
-`t90-honest-reframe-v30-2026-09-14` (Phase 30, critical review response).
+`t90-honest-reframe-v30-2026-09-14` (Phase 30),
+`t90-critical-failure-v31a-2026-09-14` (Phase 31a),
+`t90-all-tests-done-v31c-2026-09-14` (Phase 31bc).
 Master reference: [`v0.3-prelim/docs/T90_MASTER_REFERENCE_2026_09_14.md`](v0.3-prelim/docs/T90_MASTER_REFERENCE_2026_09_14.md).
 Navigation index: [`v0.3-prelim/docs/T90_CLOUD9_INDEX.md`](v0.3-prelim/docs/T90_CLOUD9_INDEX.md).
-87/87 tests pass across Phase 11-30.
+97/97 tests pass across Phase 11-31c.
 
 **T95.9 (2026-09-07): Multi-stream analysis with REAL galstreams v1.2
 catalog data — major positive result for non-GD-1 streams.** Loaded 123

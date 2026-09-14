@@ -1,0 +1,46 @@
+{
+  "test": "Phase31b_E_UV_completion",
+  "target_params": {
+    "m_chi_GeV": 6.091783883158755,
+    "E_R_eV": 42.30202214765859,
+    "Gamma_R_eV": 0.5568654618091413,
+    "ratio_Gamma_over_E": 0.013164038822195257
+  },
+  "scenarios": {
+    "composite_dark_mesons": {
+      "n_matches": 730,
+      "verdict": "LOOSE",
+      "example_match": {
+        "alpha_D": 0.06866488450043001,
+        "Lambda_D_GeV": 8.286427728546842,
+        "m_psi_GeV": 1.0,
+        "m_chi_pred": 16.572855457093684,
+        "delta_eV": 39.06939937054615,
+        "Gamma_R_pred": 0.1842069969326715,
+        "ratio": 0.004714866363457393
+      }
+    },
+    "secluded_vector": {
+      "alpha_D_required": 6.629350735823111e-08,
+      "verdict": "NEEDS_TINY_COUPLING",
+      "comment": "Secluded vector requires \u03b1_D ~ 1e-7 to give narrow resonance \u2014 possible but extreme fine-tuning"
+    },
+    "magnetic_dipole": {
+      "alpha_D": 0.01,
+      "Lambda_GeV": 60000.0,
+      "verdict": "POSSIBLE",
+      "comment": "Magnetic dipole with Lambda ~ 6e+04 GeV can produce narrow resonance"
+    },
+    "dark_atom": {
+      "verdict": "TOO_NARROW",
+      "predicted_width_eV": 2e-10,
+      "comment": "Dark atom bound state would give width ~ 1e-10 eV (much narrower than 0.56 eV)"
+    }
+  },
+  "working_scenarios": [
+    "composite_dark_mesons",
+    "magnetic_dipole"
+  ],
+  "n_working": 2,
+  "aggregate_verdict": "MULTIPLE_UV"
+}
