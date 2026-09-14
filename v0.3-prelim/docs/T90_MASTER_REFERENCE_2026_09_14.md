@@ -93,6 +93,22 @@ The T90 Cloud-9 branch tested whether a single SIDM model can simultaneously sat
   SPARC + Euclid subhalo are real structural conflicts)
   See `PHASE23_24_25_TENSION_DIAGNOSTICS_2026_09_14.md` for details
 
+**Phase 26-28 update (2026-09-14): Architectural options tested per consider7.docx.**
+- **Phase 26 (Option C: partial-solution framing)**: Done. Model is now explicitly
+  framed as 16-18/20 channel partial solution with 2 documented structural conflicts.
+- **Phase 27 (Option A: three-portal architecture)**: **FAILS**. Yukawa cross-sections
+  are always positive; adding a 3rd portal increases σ/m at every velocity. 0/144 configs
+  reduce σ/m(100) or σ/m(150). Would need amplitude-level interference (not incoherent sum).
+- **Phase 28 (Option B: resonant Portal B)**: **WORKS**. 15/45 (E_R, Γ_R) combinations
+  satisfy Cloud-9 + SPARC + Euclid simultaneously. Best: E_R=65 eV, Γ_R=100 eV
+  (σ/m(28)=2671, σ/m(100)=0.16, σ/m(150)=0.065).
+- **Future (Phase 29, deferred per STOP RULE)**: Full T90.50-style resonant fit with
+  m_chi=30 GeV, E_R=65 eV, asymmetric DM. Could potentially satisfy 20/20 channels.
+
+**Tags**: `t90-grand-unified-v59`, `t90-grand-unified-v63`,
+`t90-reviewer-fixes-v22`, `t90-tension-diagnostics-v25`
+(Phase 26-28 not tagged separately as they're follow-ons to v25)
+
 ---
 
 ## 4. Extensions (V60–V63)
@@ -225,8 +241,10 @@ Test files:
 - `tests/test_phase22_reviewer_driven_refit.py` — 6/6
 - `tests/test_phase23_cloud9_nuisance.py` — 6/6
 - `tests/test_phase24_25_sparc_euclid.py` — 6/6
+- `tests/test_phase27_three_portal.py` — 3/3
+- `tests/test_phase28_resonant.py` — 3/3
 
-**Total: 67/67 pass**
+**Total: 73/73 pass**
 
 ---
 
