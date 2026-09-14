@@ -1,0 +1,16 @@
+{
+  "test": "Phase27_three_portal_diagnostic",
+  "baseline_2portal": {
+    "sigma_m_28": 42.40906112108399,
+    "sigma_m_100": 3.914586970138978,
+    "sigma_m_150": 1.3301689882921754
+  },
+  "scan": {
+    "n_tested": 144,
+    "n_sm100_lower": 0,
+    "n_sm150_lower": 0
+  },
+  "best_config": null,
+  "verdict": "ADDITIVE_PORTAL_C_CANNOT_REDUCE_SIGMA_M",
+  "honest_physics_note": "Yukawa cross-sections are always positive. Adding a third additive portal contribution always INCREASES sigma/m. To get destructive interference (sigma/m reduction at intermediate velocities), one needs amplitude-level treatment with portal mixing, not incoherent cross-section sum."
+}
