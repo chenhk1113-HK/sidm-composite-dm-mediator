@@ -1,0 +1,61 @@
+{
+  "test": "Phase8d3_majorana_thermal_fH_prior",
+  "direction": "Majorana + dark photon, 5D with bimodal f_H prior (thermal/non-thermal)",
+  "ndim": 5,
+  "f_H_prior": {
+    "thermal_weight": 0.5,
+    "thermal_mean_log": -5.0,
+    "thermal_sigma_log": 0.5,
+    "nonthermal_weight": 0.5,
+    "nonthermal_range_log": [
+      -3.0,
+      0.0
+    ]
+  },
+  "log_Z_baseline_no_248kev": -206.36397716691278,
+  "log_Z_full_with_248kev": -206.50760979896032,
+  "delta_log_Z_248keV_contribution": -0.14363263204754162,
+  "MAP_full": {
+    "log_sigma_m_0": -1.2194720879243044,
+    "a": 0.05498295332583414,
+    "log_epsilon": -7.906719559889998,
+    "log_g_D": -0.8057072065989543,
+    "log_f_H": -0.36357790039021376,
+    "sigma_m_cm2_per_g": 0.06032924802457721,
+    "epsilon": 1.2395967819204634e-08,
+    "g_D": 0.1564201843529737,
+    "f_H": 0.4329344043428778
+  },
+  "posteriors_full_16_50_84": {
+    "sigma_m_cm2_per_g": [
+      0.059796379708116236,
+      0.06476276486539888,
+      0.06728015737157676
+    ],
+    "epsilon": [
+      1.1382059760353778e-11,
+      2.644781193109254e-09,
+      5.965919350564365e-07
+    ],
+    "g_D": [
+      0.12950618322296983,
+      0.14467649968716242,
+      0.1611884086339905
+    ],
+    "f_H": [
+      3.226201642969834e-06,
+      0.0002450154503836892,
+      0.0714421509706988
+    ]
+  },
+  "f_H_mode_weights": {
+    "thermal": 0.5175046860857464,
+    "nonthermal": 0.4824953139142536
+  },
+  "verdict": "MIXED: physical f_H prior is neutral",
+  "comparison_to_phase8d": {
+    "phase8d_delta_log_Z_248kev": 0.218,
+    "improvement_from_physical_fH_prior": -0.3616326320475416
+  },
+  "wall_seconds": 41.91275644302368
+}
