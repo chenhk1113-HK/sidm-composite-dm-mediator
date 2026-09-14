@@ -1,0 +1,98 @@
+{
+  "test": "Phase8c_majorana_reframe_joint_fit",
+  "direction": "Pathway 7B: Majorana + dark photon, 6D with LZ 248 keV toggle",
+  "ndim": 6,
+  "parameters": [
+    "log_sigma_m_0",
+    "a",
+    "log_epsilon",
+    "log_alpha",
+    "log_g_D",
+    "log_f_H"
+  ],
+  "priors": {
+    "log_sigma_m_0": [
+      -3.0,
+      2.5
+    ],
+    "a": [
+      -2.0,
+      2.0
+    ],
+    "log_epsilon": [
+      -12.0,
+      -3.0
+    ],
+    "log_alpha": [
+      -12.0,
+      -1.0
+    ],
+    "log_g_D": [
+      -2.0,
+      0.5
+    ],
+    "log_f_H": [
+      -3.0,
+      0.0
+    ]
+  },
+  "log_Z_baseline_no_248kev": -206.76309776914837,
+  "log_Z_baseline_err": 0.2418817467473715,
+  "log_Z_full_with_248kev": -206.93016222578132,
+  "log_Z_full_err": 0.2455468595429786,
+  "delta_log_Z_248keV_contribution": -0.1670644566329429,
+  "MAP_full": {
+    "log_sigma_m_0": -1.1927809671435272,
+    "a": -0.7693238566721958,
+    "log_epsilon": -6.246816041594605,
+    "log_alpha": -1.524510928445368,
+    "log_g_D": -0.999034915010802,
+    "log_f_H": -2.3664496769251318,
+    "sigma_m_cm2_per_g": 0.06415330469338545,
+    "epsilon": 5.664791874139601e-07,
+    "alpha": 0.029887464381679097,
+    "g_D": 0.10022246612044129,
+    "f_H": 0.004300810655963927
+  },
+  "MAP_baseline": {
+    "log_sigma_m_0": -1.165601540808735,
+    "a": -0.35773153213613584,
+    "log_epsilon": -5.57702306170417,
+    "log_alpha": -1.363531086977238,
+    "log_g_D": -0.014178980998941881,
+    "log_f_H": -2.084316607967164
+  },
+  "posteriors_full_16_50_84": {
+    "sigma_m_cm2_per_g": [
+      0.060167216739486086,
+      0.06496298102634643,
+      0.06714565741733546
+    ],
+    "epsilon": [
+      9.329825207964702e-12,
+      1.5348281351539913e-09,
+      2.566563759722387e-07
+    ],
+    "g_D": [
+      0.021808819867860207,
+      0.13823571176388724,
+      0.9697018925447509
+    ],
+    "f_H": [
+      0.0023697360615268954,
+      0.024985701250751988,
+      0.35703158202660856
+    ]
+  },
+  "verdict": "MIXED: 248 keV channel is consistent (no penalty)",
+  "checks": {
+    "epsilon_MAP_opened": true,
+    "g_D_in_SIDM_range": false,
+    "f_H_MAP_opened": false
+  },
+  "wall_seconds": 36.87736892700195,
+  "wall_seconds_full": 20.040584325790405,
+  "wall_seconds_baseline": 16.836784601211548,
+  "n_samples": 2709,
+  "T39_baseline_log_Z_reference": -2.9412912122660257
+}
