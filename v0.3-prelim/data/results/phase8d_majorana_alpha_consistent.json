@@ -1,0 +1,86 @@
+{
+  "test": "Phase8d_majorana_alpha_consistent",
+  "direction": "Majorana + dark photon, 5D with \u03b1 = g_D\u00b2/(4\u03c0) enforced",
+  "ndim": 5,
+  "parameters": [
+    "log_sigma_m_0",
+    "a",
+    "log_epsilon",
+    "log_g_D",
+    "log_f_H"
+  ],
+  "priors": {
+    "log_sigma_m_0": [
+      -3.0,
+      2.5
+    ],
+    "a": [
+      -2.0,
+      2.0
+    ],
+    "log_epsilon": [
+      -12.0,
+      -3.0
+    ],
+    "log_g_D": [
+      -2.0,
+      0.5
+    ],
+    "log_f_H": [
+      -3.0,
+      0.0
+    ]
+  },
+  "log_Z_baseline_no_248kev": -206.8470444293444,
+  "log_Z_full_with_248kev": -206.62917021142707,
+  "delta_log_Z_248keV_contribution": 0.21787421791734118,
+  "MAP_full": {
+    "log_sigma_m_0": -1.1761949872285289,
+    "a": -0.5643519784177473,
+    "log_epsilon": -8.280017425602965,
+    "log_g_D": -0.9080534889269427,
+    "log_f_H": -1.4593200143783753,
+    "sigma_m_cm2_per_g": 0.06665074570507885,
+    "epsilon": 5.24786403332518e-09,
+    "g_D": 0.12357952200644691,
+    "f_H": 0.034728017015659446,
+    "alpha_D_implied": 0.0012152990491853875
+  },
+  "MAP_baseline": {
+    "log_sigma_m_0": -1.2144129688915437,
+    "a": -0.4541653837909574,
+    "log_epsilon": -11.580599597013908,
+    "log_g_D": -0.816221256442534,
+    "log_f_H": -2.619016617244701
+  },
+  "posteriors_full_16_50_84": {
+    "sigma_m_cm2_per_g": [
+      0.060121373066479966,
+      0.06490942193925371,
+      0.06719777791505493
+    ],
+    "epsilon": [
+      1.062369470956592e-11,
+      1.7679209502398643e-09,
+      2.8344303123252805e-07
+    ],
+    "g_D": [
+      0.12953599350179096,
+      0.14523275299258737,
+      0.1618245630179949
+    ],
+    "f_H": [
+      0.0027657818436258915,
+      0.023572283129398162,
+      0.3025304114072604
+    ]
+  },
+  "verdict": "MIXED: consistency constraint is neutral",
+  "comparison_to_phase8c": {
+    "phase8c_baseline_log_Z": -206.76,
+    "phase8c_delta_log_Z_248kev": -0.17,
+    "improvement_from_consistency": -0.08704442934441659,
+    "improvement_in_248kev_channel": 0.3878742179173412
+  },
+  "wall_seconds": 38.26974058151245
+}
