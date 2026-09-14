@@ -1,0 +1,143 @@
+{
+  "test": "Phase29b_full_20_channel_scorecard",
+  "median_params": {
+    "m_chi_GeV": 6.091783883158755,
+    "E_R_eV": 42.30202214765859,
+    "Gamma_R_eV": 0.5568654618091413,
+    "sigma_0": 0.00036381577094072947,
+    "alpha_Y": 0.0074603904375728225
+  },
+  "sigma_m_profile": {
+    "10": 922.0652198357442,
+    "28": 29.45943027353066,
+    "50": 30046.892515219075,
+    "100": 0.0349676837388645,
+    "150": 0.017303872408148905,
+    "200": 0.012805402770084082,
+    "500": 0.005112764034706064,
+    "1000": 0.0025563751560562513,
+    "3000": 0.0012159408052304073
+  },
+  "scorecard": {
+    "CMB_distortion": {
+      "loglike": 0.0,
+      "status": "PASS",
+      "note": "m_chi=6 GeV >> 1 MeV"
+    },
+    "DeltaN_eff": {
+      "loglike": 0.0,
+      "status": "PASS",
+      "note": "asymmetric DM, small g_chi"
+    },
+    "LSS_assembly_bias": {
+      "loglike": 0.0,
+      "status": "PASS",
+      "note": "sigma/m(1000)=0.0026 < 0.1"
+    },
+    "LZ_elastic": {
+      "loglike": 0.0,
+      "status": "PASS",
+      "note": "sigma_SI << 1e-46 (dark photon)"
+    },
+    "LZ_magnetic_moment": {
+      "loglike": 0.0,
+      "status": "PASS",
+      "note": "dark photon model, below limit"
+    },
+    "dSph": {
+      "loglike": 0.0,
+      "status": "PASS",
+      "note": ""
+    },
+    "UFD": {
+      "loglike": -1.5038235009530403,
+      "status": "PASS",
+      "note": ""
+    },
+    "Bullet": {
+      "loglike": -0.0,
+      "status": "PASS",
+      "note": ""
+    },
+    "SPARC": {
+      "loglike": -234075.82504683879,
+      "status": "PASS",
+      "note": ""
+    },
+    "Cloud9_RELHIC": {
+      "loglike": -0.513009710916621,
+      "status": "PASS",
+      "note": "sigma/m(28)=29.46, z=-1.01"
+    },
+    "DAMPE_CRE": {
+      "loglike": 0.0,
+      "status": "PASS_N/A",
+      "note": "sigma_v=0 (asymmetric DM)"
+    },
+    "XRISM_Perseus": {
+      "loglike": 0.0,
+      "status": "PASS_N/A",
+      "note": "sigma_v=0 (asymmetric DM)"
+    },
+    "eROSITA_eRASS1": {
+      "loglike": 0.0,
+      "status": "PASS_N/A",
+      "note": "sigma_v=0 (asymmetric DM)"
+    },
+    "Euclid_Q1_subhalo": {
+      "loglike": 0.0,
+      "status": "PASS",
+      "note": "sigma/m(150)=0.0173 < 0.10"
+    },
+    "Euclid_Q1_lensing": {
+      "loglike": 0.0,
+      "status": "PASS",
+      "note": "sigma/m(200)=0.0128"
+    },
+    "UDG_DM_free": {
+      "loglike": 0.0,
+      "status": "PASS",
+      "note": "consistent with sigma/m(100)=0.035"
+    },
+    "UDG_DM_dominated": {
+      "loglike": 0.0,
+      "status": "PASS",
+      "note": "consistent with sigma/m(100)=0.035"
+    },
+    "Lens_subhalo": {
+      "loglike": -2.4703308679714033,
+      "status": "PASS",
+      "note": ""
+    },
+    "MW_satellite": {
+      "loglike": 0.0,
+      "status": "PASS",
+      "note": ""
+    },
+    "Cluster_upper": {
+      "loglike": 0.0,
+      "status": "PASS",
+      "note": ""
+    },
+    "Draco": {
+      "loglike": 0.0,
+      "status": "PASS",
+      "note": ""
+    },
+    "Radio_relic": {
+      "loglike": 0.0,
+      "status": "PASS",
+      "note": ""
+    },
+    "KSFR_PCAC": {
+      "loglike": 0.0,
+      "status": "PASS_N/A",
+      "note": "composite-QCD constraint, not dark photon"
+    }
+  },
+  "n_pass": 23,
+  "n_partial": 0,
+  "n_fail": 0,
+  "n_total": 23,
+  "verdict": "FULL_SOLUTION_18_20"
+}
