@@ -1,0 +1,74 @@
+{
+  "test": "Phase18_mchi_comparison",
+  "direction": "Quantify m_chi dependence on the Majorana reframe",
+  "results": {
+    "5": {
+      "m_chi_GeV": 5.0,
+      "log_Z": -207.89653200624835,
+      "MAP_log_sigma_m": -1.2055375192654956,
+      "MAP_sigma_m": 0.062296332649174835,
+      "MAP_g_D": 0.09115688853699924,
+      "posterior_sigma_m_16_50_84": [
+        0.06012655624057028,
+        0.06480319802293001,
+        0.06711981692641109
+      ],
+      "posterior_g_D_16_50_84": [
+        0.0806165394215766,
+        0.08943032629722715,
+        0.09913417989993753
+      ],
+      "tau_core_Gyr": 16.05230930095924,
+      "eta_DM_over_eta_B": 1.0083975659229207,
+      "wall_seconds": 15.149246454238892
+    },
+    "10": {
+      "m_chi_GeV": 10.0,
+      "log_Z": -208.1330711422514,
+      "MAP_log_sigma_m": -1.1742210334990018,
+      "MAP_sigma_m": 0.06695437594345725,
+      "MAP_g_D": 0.10678085322434477,
+      "posterior_sigma_m_16_50_84": [
+        0.06020009466809942,
+        0.06507256449483048,
+        0.0672985719931044
+      ],
+      "posterior_g_D_16_50_84": [
+        0.09191899708772136,
+        0.10432749569215007,
+        0.11431142637472588
+      ],
+      "tau_core_Gyr": 14.935543583357372,
+      "eta_DM_over_eta_B": 0.5041987829614604,
+      "wall_seconds": 16.104387760162354
+    },
+    "45": {
+      "m_chi_GeV": 45.0,
+      "log_Z": -206.75334749005924,
+      "MAP_log_sigma_m": -1.2119859711454302,
+      "MAP_sigma_m": 0.06137818316128385,
+      "MAP_g_D": 0.13873212702031262,
+      "posterior_sigma_m_16_50_84": [
+        0.06028421169473239,
+        0.06508528012212215,
+        0.06717315119227611
+      ],
+      "posterior_g_D_16_50_84": [
+        0.12974322764439475,
+        0.14530941150800156,
+        0.16136874242137947
+      ],
+      "tau_core_Gyr": 16.29243402940575,
+      "eta_DM_over_eta_B": 0.11204417399143567,
+      "wall_seconds": 13.62213921546936
+    }
+  },
+  "hypotheses": {
+    "sigma_m_drop_at_5GeV": "PERSISTS: \u03c3/m at 5 GeV = 0.062 (still dropped)",
+    "g_D_recovery_at_5GeV": "PERSISTS: g_D at 5 GeV = 0.091 (Fermi still binds)",
+    "core_collapse_at_5GeV": "RESOLVED: \u03c4_core at 5 GeV = 16.1 Gyr (collapse happens)",
+    "asymmetric_dm_at_5GeV": "NATURAL: \u03b7/\u03b7_B at 5 GeV = 1.008 (1:1 transfer)"
+  },
+  "n_resolved": 2,
+  "overall_verdict": "PARTIAL: m_chi = 5 GeV partially resolves the inconsistency"
+}
