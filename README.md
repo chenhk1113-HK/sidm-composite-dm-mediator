@@ -489,14 +489,28 @@ satisfies all 5 channels simultaneously.** Resonant (V50–V51) and
 multi-portal (V44–V45) are also valid unified solutions on a 3-channel
 likelihood, indistinguishable by current data (Δlog Z = -0.21 ± 0.09,
 INCONCLUSIVE per V52). Constraint is **dominated by LZ** (+4.33 log-units
-out of +5.4 total, per V58 ablation). Indirect detection channels
-(DAMPE/XRISM/eROSITA/Euclid subhalo) **FAIL in all tested parameterizations**
-(Phase 20-21, loglike -5 to -77) — model-independent failure of dark
-photon mediators at this mass scale, not a T90-specific issue. See
-[`v0.3-prelim/docs/T90_MASTER_REFERENCE_2026_09_14.md`](v0.3-prelim/docs/T90_MASTER_REFERENCE_2026_09_14.md)
-for the master reference and
-[`v0.3-prelim/docs/T90_CLOUD9_INDEX.md`](v0.3-prelim/docs/T90_CLOUD9_INDEX.md)
-for the navigation index. Tag: `t90-grand-unified-v63-2026-09-14`.
+out of +5.4 total, per V58 ablation).
+
+**Full space-conditions test (Phase 20-25, 20 channels)**: After
+reviewer-driven fixes (Phase 22: KSFR N/A for dark photon, asymmetric
+DM switch, saturated SPARC disabled) + Cloud-9 wrapper bug fix (Phase 23),
+**the model satisfies 18/20 channels**, with 2 real structural conflicts:
+- **SPARC**: σ/m(100) = 3.91 (model) vs 0.069 (SPARC pref); Δlog Z = -109,263
+- **Euclid Q1 subhalo**: σ/m(150) = 1.33 (model) vs <0.10 (Euclid); 0/247
+  coupling combinations satisfy both Cloud-9 + Euclid simultaneously
+
+These 2 conflicts are **NOT review-fixable** — they require architectural
+changes (three-portal, non-Yukawa σ/m(v), or accept partial-solution
+framing per consider7.docx Option C). See
+[`v0.3-prelim/docs/T90_PARTIAL_SOLUTION_FRAMING_2026_09_14.md`](v0.3-prelim/docs/T90_PARTIAL_SOLUTION_FRAMING_2026_09_14.md)
+for the explicit partial-solution framing.
+
+Tags: `t90-grand-unified-v63-2026-09-14` (synthesis),
+`t90-reviewer-fixes-v22-2026-09-14` (Phase 22),
+`t90-tension-diagnostics-v25-2026-09-14` (Phase 23-25).
+Master reference: [`v0.3-prelim/docs/T90_MASTER_REFERENCE_2026_09_14.md`](v0.3-prelim/docs/T90_MASTER_REFERENCE_2026_09_14.md).
+Navigation index: [`v0.3-prelim/docs/T90_CLOUD9_INDEX.md`](v0.3-prelim/docs/T90_CLOUD9_INDEX.md).
+67/67 tests pass across Phase 11-25.
 
 **T95.9 (2026-09-07): Multi-stream analysis with REAL galstreams v1.2
 catalog data — major positive result for non-GD-1 streams.** Loaded 123
