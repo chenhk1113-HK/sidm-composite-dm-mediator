@@ -1,0 +1,29 @@
+{
+  "test": "Phase31a_C_subhalo_real_data",
+  "median_params": {
+    "m_chi_GeV": 6.091783883158755,
+    "E_R_eV": 42.30202214765859,
+    "Gamma_R_eV": 0.5568654618091413,
+    "sigma_0": 0.00036381577094072947,
+    "alpha_Y": 0.0074603904375728225
+  },
+  "sigma_m_at_cluster_velocities": {
+    "sigma_m_100": 0.0349676837388645,
+    "sigma_m_500": 0.005112764034706064,
+    "sigma_m_1000": 0.0025563751560562513
+  },
+  "effective_power_law": {
+    "sigma_m_0": 0.0349676837388645,
+    "a": 1.1946308294335477
+  },
+  "log_likelihoods": {
+    "resonant": -2.247256470570335,
+    "cdm_baseline": -2.247256470570335
+  },
+  "delta_log_likelihood": 0.0,
+  "euclid_q1_observation": {
+    "n_grade_A_clusters": 14,
+    "area_deg2": 63.1
+  },
+  "verdict": "CONSISTENT_WITH_DATA"
+}
