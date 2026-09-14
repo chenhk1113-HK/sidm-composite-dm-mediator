@@ -1,0 +1,82 @@
+{
+  "test": "Phase20_full_space_conditions",
+  "m_chi_GeV": 5.0,
+  "m_phi_MeV": 200.0,
+  "sigma_m": 0.067,
+  "g_D": 0.092,
+  "epsilon": 5.495408738576248e-07,
+  "channels": {
+    "lz_elastic": {
+      "loglike": 0.0,
+      "sigma_SI": 3.906517199017347e-56
+    },
+    "lz_248keV": {
+      "loglike": -0.08000000000000002,
+      "n_pred": 1.2146803831604701e-90
+    },
+    "lz_magnetic_moment": {
+      "loglike": 0.0,
+      "mu_x": 5.495408738576248e-13
+    },
+    "fermi_dwarf": {
+      "loglike": 0.0,
+      "sigma_v": 2.456579574016006e-27
+    },
+    "cmb_distortion": {
+      "loglike": 0.0
+    },
+    "delta_N_eff": {
+      "loglike": 0.0
+    },
+    "lss_assembly_bias": {
+      "loglike": 0.0
+    },
+    "dampe_cre": {
+      "loglike": -19.73514076932373
+    },
+    "xrism_perseus": {
+      "loglike": -76.19423203083059
+    },
+    "erosita": {
+      "loglike": -5.555555555555556
+    },
+    "xrism_phi_decay": {
+      "loglike": 0.0
+    },
+    "euclid_q1_lensing": {
+      "loglike": 0.0
+    },
+    "euclid_subhalo": {
+      "loglike": 0.0
+    },
+    "dsph": {
+      "loglike": -0.04967142461266352
+    },
+    "ufd": {
+      "loglike": -1.1680224657372213
+    },
+    "bullet": {
+      "loglike": -0.0
+    },
+    "ksfr_pcac": {
+      "loglike": -Infinity
+    },
+    "sparc": {
+      "loglike": -202228.9449429543,
+      "saturated_proxy": true
+    },
+    "competitor_dd": {
+      "loglike": 0.0
+    },
+    "cloud9_relhic": {
+      "loglike": -10.0,
+      "available": true
+    }
+  },
+  "failures": [],
+  "n_channels": 20,
+  "n_pass": 20,
+  "n_fail": 0,
+  "total_loglike": -Infinity,
+  "verdict": "PROCEED: All 20 channels evaluable at v0.3-prelim MAP"
+}
