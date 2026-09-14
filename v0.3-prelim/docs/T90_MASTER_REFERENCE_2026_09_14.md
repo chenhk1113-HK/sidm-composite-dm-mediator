@@ -78,6 +78,21 @@ The T90 Cloud-9 branch tested whether a single SIDM model can simultaneously sat
 - **Result: 6/20 → 2/20 channel failures** (Euclid subhalo, Cloud-9 magnitude)
 - See `PHASE22_REVIEWER_DRIVEN_REFIT_2026_09_14.md` for full details
 
+**Phase 23 update (2026-09-14): Cloud-9 RESOLVED via wrapper fix.**
+- The T90.45 multi-portal wrapper was incorrectly using Portal A only
+- New `t90_v45_cloud9_multi_portal.py` correctly sums Portal A + Portal B
+- σ/m(28) = 42.41 cm²/g (in [30, 500] range) → Cloud-9 PASSES
+
+**Phase 24-25 update (2026-09-14): Real structural conflicts surfaced.**
+- **SPARC**: σ/m(100) = 3.91 (T90.45) vs 0.069 (SPARC pref); Δlog Z = -109,263
+- **Euclid subhalo**: 0/247 coupling combinations satisfy Cloud-9 + Euclid
+- These are NOT review-fixable — require architectural changes
+  (different Portal B mass, non-Yukawa σ/m(v), or 3-portal architecture)
+
+**Updated total: 4 channel failures** (Cloud-9 PASSES via wrapper fix;
+  SPARC + Euclid subhalo are real structural conflicts)
+  See `PHASE23_24_25_TENSION_DIAGNOSTICS_2026_09_14.md` for details
+
 ---
 
 ## 4. Extensions (V60–V63)
@@ -208,8 +223,10 @@ Test files:
 - `tests/test_phase20_full_space_conditions.py` — 3/3
 - `tests/test_phase21_t90_45_multi_portal.py` — 4/4
 - `tests/test_phase22_reviewer_driven_refit.py` — 6/6
+- `tests/test_phase23_cloud9_nuisance.py` — 6/6
+- `tests/test_phase24_25_sparc_euclid.py` — 6/6
 
-**Total: 55/55 pass**
+**Total: 67/67 pass**
 
 ---
 

@@ -99,6 +99,7 @@ The master reference consolidates T90.14 → T90.63 + Phase 20-21 findings into:
 |---|---|---|
 | **Phase 21** | **[`PHASE21_T90_45_MULTI_PORTAL_2026_09_14`](./PHASE21_T90_45_MULTI_PORTAL_2026_09_14.md)** | **T90.45 Cloud-9 mode σ/m(28)=42; KSFR/DAMPE/XRISM still FAIL** |
 | **Phase 22** | **[`PHASE22_REVIEWER_DRIVEN_REFIT_2026_09_14`](./PHASE22_REVIEWER_DRIVEN_REFIT_2026_09_14.md)** | **Reviewer fixes: KSFR N/A + asymmetric DM + median mode → 6→2 failures** |
+| **Phase 23-25** | **[`PHASE23_24_25_TENSION_DIAGNOSTICS_2026_09_14`](./PHASE23_24_25_TENSION_DIAGNOSTICS_2026_09_14.md)** | **Cloud-9 RESOLVED (wrapper fix); SPARC + Euclid subhalo are real structural conflicts** |
 
 ---
 
