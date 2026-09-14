@@ -79,7 +79,7 @@ The master reference consolidates T90.14 → T90.63 + Phase 20-21 findings into:
 
 ---
 
-## 🧪 Phase 11-21 series (Majorana reframe + failed-channel analysis)
+## 🧪 Phase 11-22 series (Majorana reframe + failed-channel analysis + reviewer fixes)
 
 ### LZ 248 keV sweep + Majorana reframe
 
@@ -97,8 +97,8 @@ The master reference consolidates T90.14 → T90.63 + Phase 20-21 findings into:
 
 | Phase | Doc | Verdict |
 |---|---|---|
-| **20** | **[`PHASE20_FULL_SPACE_CONDITIONS_2026_09_14`](./PHASE20_FULL_SPACE_CONDITIONS_2026_09_14.md)** | **v0.3-prelim FAILS at 6/20 channels** |
-| **21** | **[`PHASE21_T90_45_MULTI_PORTAL_2026_09_14`](./PHASE21_T90_45_MULTI_PORTAL_2026_09_14.md)** | **T90.45 Cloud-9 mode σ/m(28)=42; KSFR/DAMPE/XRISM still FAIL** |
+| **Phase 21** | **[`PHASE21_T90_45_MULTI_PORTAL_2026_09_14`](./PHASE21_T90_45_MULTI_PORTAL_2026_09_14.md)** | **T90.45 Cloud-9 mode σ/m(28)=42; KSFR/DAMPE/XRISM still FAIL** |
+| **Phase 22** | **[`PHASE22_REVIEWER_DRIVEN_REFIT_2026_09_14`](./PHASE22_REVIEWER_DRIVEN_REFIT_2026_09_14.md)** | **Reviewer fixes: KSFR N/A + asymmetric DM + median mode → 6→2 failures** |
 
 ---
 

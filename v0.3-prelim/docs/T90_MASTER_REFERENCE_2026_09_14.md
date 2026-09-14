@@ -70,6 +70,14 @@ The T90 Cloud-9 branch tested whether a single SIDM model can simultaneously sat
 
 **All 5 channels satisfied at posterior median.**
 
+**Phase 22 update (2026-09-14): Reviewer-driven fixes applied.**
+- KSFR/PCAC recognized as N/A for dark photon (was -inf, now 0)
+- Asymmetric DM switch: σv = 0, nullifies DAMPE/Fermi/XRISM-φ→γγ
+- SPARC saturated proxy disabled for multi-portal
+- Median mode used as baseline (not MAP)
+- **Result: 6/20 → 2/20 channel failures** (Euclid subhalo, Cloud-9 magnitude)
+- See `PHASE22_REVIEWER_DRIVEN_REFIT_2026_09_14.md` for full details
+
 ---
 
 ## 4. Extensions (V60–V63)
@@ -199,6 +207,9 @@ Test files:
 - `tests/test_phase19_full_fit_mchi_5GeV.py` — 6/6
 - `tests/test_phase20_full_space_conditions.py` — 3/3
 - `tests/test_phase21_t90_45_multi_portal.py` — 4/4
+- `tests/test_phase22_reviewer_driven_refit.py` — 6/6
+
+**Total: 55/55 pass**
 
 ---
 
