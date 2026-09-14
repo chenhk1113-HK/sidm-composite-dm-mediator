@@ -1,0 +1,57 @@
+{
+  "test": "Phase12_sigma_m_drop_mystery",
+  "direction": "Three ablations on LZ 248 keV channel mode",
+  "results": {
+    "on": {
+      "mode": "on",
+      "log_Z": -206.71375958296034,
+      "MAP_log_sigma_m": -1.1737304345629356,
+      "MAP_sigma_m": 0.06703005340913866,
+      "MAP_g_D": 0.14675208392604672,
+      "MAP_f_H": 0.014410139610095928,
+      "posterior_sigma_m_16_50_84": [
+        0.059911452554632746,
+        0.0647568956393531,
+        0.06722305462526558
+      ],
+      "wall_seconds": 16.156400203704834
+    },
+    "off": {
+      "mode": "off",
+      "log_Z": -206.40716796704305,
+      "MAP_log_sigma_m": -1.1748716552409282,
+      "MAP_sigma_m": 0.06685414589114728,
+      "MAP_g_D": 0.15033273348258658,
+      "MAP_f_H": 0.21120964152622718,
+      "posterior_sigma_m_16_50_84": [
+        0.0598904856309271,
+        0.06476506151869074,
+        0.06717050280280269
+      ],
+      "wall_seconds": 17.38587498664856
+    },
+    "null": {
+      "mode": "null",
+      "log_Z": -206.4735705909857,
+      "MAP_log_sigma_m": -1.1764957150162423,
+      "MAP_sigma_m": 0.0666046092836237,
+      "MAP_g_D": 0.12795816322368303,
+      "MAP_f_H": 0.12156709299947527,
+      "posterior_sigma_m_16_50_84": [
+        0.06001738299049032,
+        0.06488500733877631,
+        0.0672156946231906
+      ],
+      "wall_seconds": 17.601113319396973
+    }
+  },
+  "comparisons": {
+    "delta_log_Z_off_vs_on": 0.30659161591728434,
+    "delta_log_Z_null_vs_on": 0.24018899197463384
+  },
+  "hypotheses": {
+    "A_statistical_fluctuation": "NOT supported: \u03c3/m stays at 0.067 even without 248 keV channel",
+    "B_sidm_overestimate": "(not directly testable in this framework)",
+    "C_different_physics": "NOT supported: \u03c3/m same in 'on' and 'null' modes"
+  }
+}
