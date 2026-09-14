@@ -1,0 +1,28 @@
+{
+  "test": "Phase24_multi_portal_sparc",
+  "median_params": {
+    "m_phi_A_MeV": 365.8191084345798,
+    "m_chi_A_GeV": 41.39101146100893,
+    "g_chi_A": 1.1866198418249745,
+    "m_phi_B_MeV": 20.505207924646257,
+    "m_chi_B_GeV": 302.29484504617363,
+    "g_chi_B": 0.27552076533644126
+  },
+  "sigma_m_values": {
+    "sigma_m_28": 42.40906112108399,
+    "sigma_m_100": 3.914586970138978,
+    "sigma_m_3000": 0.023841010969050818
+  },
+  "effective_power_law": {
+    "sigma_m_0": 5.524771364046798,
+    "a": 1.6010802328318654
+  },
+  "sparc_loglike_at_effective": -312938.9219926802,
+  "sparc_loglike_at_sm100": -325921.05388393736,
+  "sparc_best": {
+    "sigma_m_100": 0.06866488450043001,
+    "loglike": -203676.45488844442
+  },
+  "delta_loglike_vs_sparc_max": -109262.46710423575,
+  "verdict": "FAILS_SPARC"
+}

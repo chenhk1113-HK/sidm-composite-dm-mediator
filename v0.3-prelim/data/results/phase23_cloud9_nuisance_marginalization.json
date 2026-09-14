@@ -1,0 +1,49 @@
+{
+  "test": "Phase23_cloud9_nuisance_marginalization",
+  "median_params": {
+    "m_phi_A_MeV": 365.8191084345798,
+    "m_chi_A_GeV": 41.39101146100893,
+    "g_chi_A": 1.1866198418249745,
+    "m_phi_B_MeV": 20.505207924646257,
+    "m_chi_B_GeV": 302.29484504617363,
+    "g_chi_B": 0.27552076533644126
+  },
+  "sigma_m_at_v200": 42.40906112108399,
+  "fixed_halo_loglike": 0.6027041528673522,
+  "fixed_halo_params": {
+    "M200": 4700000000.0,
+    "c200": 4.0
+  },
+  "marginalized_loglike": 0.6038244909449112,
+  "best_halo": {
+    "M200": 20000000000.000004,
+    "c200": 8.0,
+    "loglike": 0.7232224634942458
+  },
+  "delta_loglike_marginalization_gain": 0.0011203380775589578,
+  "nuisance_priors": {
+    "M200": {
+      "type": "log-normal",
+      "mean": 4700000000.0,
+      "sigma_dex": 0.3
+    },
+    "c200": {
+      "type": "half-gaussian",
+      "mean": 4.0,
+      "sigma": 0.5
+    }
+  },
+  "marginalization_grid": {
+    "M200_range": [
+      1000000000.0,
+      20000000000.000004,
+      25
+    ],
+    "c200_range": [
+      2.0,
+      8.0,
+      15
+    ]
+  },
+  "verdict": "PASS_AFTER_MARGINALIZATION"
+}
