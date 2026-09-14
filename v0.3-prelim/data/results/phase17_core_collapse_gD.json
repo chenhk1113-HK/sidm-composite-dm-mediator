@@ -1,0 +1,62 @@
+{
+  "test": "Phase17_core_collapse_gD",
+  "direction": "Find g_D that gives \u03c4_core ~ 10 Gyr (matches observed collapsed halos)",
+  "gD_0.05": {
+    "sigma_m_at_v100": 1.5234034423626064e-06,
+    "tau_core_Gyr": 656424.9313032445,
+    "loglike_fermi": 0.09525826414676902,
+    "verdict": "TOO SLOW (no collapse)"
+  },
+  "gD_0.10": {
+    "sigma_m_at_v100": 2.4374455077801703e-05,
+    "tau_core_Gyr": 41026.558206452784,
+    "loglike_fermi": 3.5457532596250267,
+    "verdict": "TOO SLOW (no collapse)"
+  },
+  "gD_0.15": {
+    "sigma_m_at_v100": 0.0001233956788313711,
+    "tau_core_Gyr": 8104.01149757092,
+    "loglike_fermi": 6.831469394828067,
+    "verdict": "TOO SLOW (no collapse)"
+  },
+  "gD_0.16": {
+    "sigma_m_at_v100": 0.0001597404287978812,
+    "tau_core_Gyr": 6260.155976326414,
+    "loglike_fermi": 6.519058082119751,
+    "verdict": "TOO SLOW (no collapse)"
+  },
+  "gD_0.20": {
+    "sigma_m_at_v100": 0.00038999128124482725,
+    "tau_core_Gyr": 2564.159887903299,
+    "loglike_fermi": 1.6086716981411424,
+    "verdict": "TOO SLOW (no collapse)"
+  },
+  "gD_0.30": {
+    "sigma_m_at_v100": 0.0019743308613019376,
+    "tau_core_Gyr": 506.5007185981825,
+    "loglike_fermi": -40.4354778024532,
+    "verdict": "TOO SLOW (no collapse)"
+  },
+  "gD_0.50": {
+    "sigma_m_at_v100": 0.01523403442362606,
+    "tau_core_Gyr": 65.64249313032447,
+    "loglike_fermi": -228.03683683086248,
+    "verdict": "TOO SLOW (no collapse)"
+  },
+  "gD_0.70": {
+    "sigma_m_at_v100": 0.05852306664180185,
+    "tau_core_Gyr": 17.08727955287497,
+    "loglike_fermi": -429.29533648910046,
+    "verdict": "MATCH (10 Gyr)"
+  },
+  "gD_1.00": {
+    "sigma_m_at_v100": 0.24374455077801696,
+    "tau_core_Gyr": 4.102655820645279,
+    "loglike_fermi": -698.7650343845469,
+    "verdict": "MATCH (10 Gyr)"
+  },
+  "natural_gD_for_collapse": 0.8003247933937496,
+  "sigma_m_at_fermi_gD": 0.0001597404287978812,
+  "tau_at_fermi_gD": 6260.155976326414,
+  "verdict": "COLLAPSE_REQUIRES_LARGER_gD"
+}

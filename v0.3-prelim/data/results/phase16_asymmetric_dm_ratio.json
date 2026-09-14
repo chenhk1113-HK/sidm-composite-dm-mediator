@@ -1,0 +1,39 @@
+{
+  "test": "Phase16_asymmetric_dm_ratio",
+  "direction": "Check if asymmetric DM at m_chi gives consistent \u03b7_DM/\u03b7_B",
+  "m_chi_1_GeV": {
+    "eta_DM_over_eta_B": 5.041987829614604,
+    "verdict": "PLAUSIBLE (modest transfer)"
+  },
+  "m_chi_5_GeV": {
+    "eta_DM_over_eta_B": 1.0083975659229207,
+    "verdict": "NATURAL (1:1 transfer)"
+  },
+  "m_chi_10_GeV": {
+    "eta_DM_over_eta_B": 0.5041987829614604,
+    "verdict": "NATURAL (1:1 transfer)"
+  },
+  "m_chi_15_GeV": {
+    "eta_DM_over_eta_B": 0.336132521974307,
+    "verdict": "PLAUSIBLE (modest transfer)"
+  },
+  "m_chi_45_GeV": {
+    "eta_DM_over_eta_B": 0.11204417399143567,
+    "verdict": "PLAUSIBLE (modest transfer)"
+  },
+  "m_chi_100_GeV": {
+    "eta_DM_over_eta_B": 0.050419878296146046,
+    "verdict": "TUNED"
+  },
+  "m_chi_500_GeV": {
+    "eta_DM_over_eta_B": 0.01008397565922921,
+    "verdict": "TUNED"
+  },
+  "m_chi_1000_GeV": {
+    "eta_DM_over_eta_B": 0.005041987829614605,
+    "verdict": "UNNATURAL (extreme transfer)"
+  },
+  "m_chi_natural_GeV": 5.041987829614604,
+  "v03_MAP_eta_ratio": 0.11204417399143567,
+  "v03_MAP_verdict": "PLAUSIBLE"
+}
