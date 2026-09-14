@@ -1,0 +1,105 @@
+{
+  "test": "Phase22_reviewer_driven_refit",
+  "median_params": {
+    "m_phi_A_MeV": 365.8191084345798,
+    "m_chi_A_GeV": 41.39101146100893,
+    "g_chi_A": 1.1866198418249745,
+    "m_phi_B_MeV": 20.505207924646257,
+    "m_chi_B_GeV": 302.29484504617363,
+    "g_chi_B": 0.27552076533644126,
+    "epsilon_A": 1.4858770652782045e-32,
+    "alpha_A": 5.337910119441256e-16,
+    "sigma_m_28": 42.40906112108399,
+    "sigma_m_100": 3.914586970138978,
+    "sigma_m_1000": 0.040113750817384705,
+    "sigma_m_3000": 0.023841010969050818
+  },
+  "full_results": {
+    "lz_elastic": {
+      "loglike": 0.0
+    },
+    "fermi_dwarf": {
+      "loglike": 0.0,
+      "asymmetric_disabled": true
+    },
+    "cmb_distortion": {
+      "loglike": 0.0
+    },
+    "delta_N_eff": {
+      "loglike": 0.0
+    },
+    "lss_assembly_bias": {
+      "loglike": 0.0
+    },
+    "dampe_cre": {
+      "loglike": 0.0,
+      "asymmetric_disabled": true
+    },
+    "xrism_perseus": {
+      "loglike": 0.0
+    },
+    "erosita": {
+      "loglike": -4.437378804139348
+    },
+    "xrism_phi_decay": {
+      "loglike": 0.0,
+      "asymmetric_disabled": true
+    },
+    "euclid_q1_lensing": {
+      "loglike": -4.437378804139346
+    },
+    "euclid_subhalo": {
+      "loglike": -14.092491795715546
+    },
+    "ksfr_pcac": {
+      "loglike": 0.0,
+      "mask_active": true,
+      "model_type": "dark_photon",
+      "note": "KSFR/PCAC is composite-dark-QCD constraint; not applicable to U(1) dark photon. Set to 0 (pass)."
+    },
+    "cloud9_relhic": {
+      "loglike": -13.208113938300684
+    },
+    "sparc": {
+      "loglike": 0.0,
+      "saturated_proxy_disabled": true
+    },
+    "competitor_dd": {
+      "loglike": 0.0
+    },
+    "dsph": {
+      "loglike": -3.7103718924036473
+    },
+    "ufd": {
+      "loglike": -0.028540276470189037
+    },
+    "bullet": {
+      "loglike": -0.0
+    },
+    "lz_magnetic_moment": {
+      "loglike": 0.0
+    },
+    "lrd_jiang2026": {
+      "loglike": 0.0
+    }
+  },
+  "full_failures": [],
+  "remaining_real_failures": [
+    [
+      "euclid_subhalo",
+      -14.092491795715546
+    ],
+    [
+      "cloud9_relhic",
+      -13.208113938300684
+    ]
+  ],
+  "total_loglike_excl_nullified": -39.91427551116876,
+  "config": {
+    "ksfr_mask": true,
+    "asymmetric_dm": true,
+    "sparc_saturated_proxy_disabled": true,
+    "median_mode_used": true
+  },
+  "verdict": "see verdict output above"
+}
