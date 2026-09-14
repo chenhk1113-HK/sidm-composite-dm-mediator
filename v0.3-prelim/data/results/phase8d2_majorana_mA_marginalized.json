@@ -1,0 +1,88 @@
+{
+  "test": "Phase8d2_majorana_mA_marginalized",
+  "direction": "Majorana + dark photon, 6D with m_A' marginalized",
+  "ndim": 6,
+  "parameters": [
+    "log_sigma_m_0",
+    "a",
+    "log_epsilon",
+    "log_g_D",
+    "log_f_H",
+    "log_m_A_prime_MeV"
+  ],
+  "priors": {
+    "log_sigma_m_0": [
+      -3.0,
+      2.5
+    ],
+    "a": [
+      -2.0,
+      2.0
+    ],
+    "log_epsilon": [
+      -12.0,
+      -3.0
+    ],
+    "log_g_D": [
+      -2.0,
+      0.5
+    ],
+    "log_f_H": [
+      -3.0,
+      0.0
+    ],
+    "log_m_A_prime_MeV": [
+      1.0,
+      3.0
+    ]
+  },
+  "log_Z_baseline_no_248kev": -206.76307937848418,
+  "log_Z_full_with_248kev": -206.66130249727473,
+  "delta_log_Z_248keV_contribution": 0.10177688120944595,
+  "MAP_full": {
+    "log_sigma_m_0": -1.173949498823137,
+    "a": -0.08703528396218796,
+    "log_epsilon": -5.612817483135408,
+    "log_g_D": -0.8258148028966514,
+    "log_f_H": -1.9873846716515806,
+    "log_m_A_prime_MeV": 2.543688462554824,
+    "sigma_m_cm2_per_g": 0.06699625103099363,
+    "epsilon": 2.4388355495463116e-06,
+    "g_D": 0.14934311207655637,
+    "f_H": 0.010294738711197932,
+    "m_A_prime_MeV": 349.69422686096806
+  },
+  "posteriors_full_16_50_84": {
+    "sigma_m_cm2_per_g": [
+      0.060214085118443325,
+      0.06462131719958139,
+      0.06717165785936825
+    ],
+    "epsilon": [
+      7.951326156757583e-12,
+      1.3557092433014253e-09,
+      1.574256426754901e-07
+    ],
+    "g_D": [
+      0.1306665348129502,
+      0.14558959078356926,
+      0.1626742827644858
+    ],
+    "f_H": [
+      0.002900909210439655,
+      0.02203697646152926,
+      0.24598515949974895
+    ],
+    "m_A_prime_MeV": [
+      27.912002002787556,
+      146.15830399259036,
+      595.9192854598185
+    ]
+  },
+  "verdict": "MIXED: m_A' marginalization is neutral",
+  "comparison_to_phase8d": {
+    "phase8d_delta_log_Z_248kev": 0.218,
+    "improvement_from_mA_marginalization": -0.11622311879055405
+  },
+  "wall_seconds": 32.97530221939087
+}
