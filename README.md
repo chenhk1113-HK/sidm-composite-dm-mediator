@@ -479,6 +479,25 @@ limit). The T90 program stays on `wip/tier3-magnetic-moment-LZ` until
 the LZ community resolves the 248 keV event. See
 `v0.3-prelim/docs/T90_INDEX.md` for the consolidated index.
 
+**T90.14–T90.63 (2026-09-14): Cloud-9 / multi-channel SIDM branch** —
+separate evolution line on `wip/cloud-9-relhic`. Tests whether a single
+SIDM model can simultaneously satisfy 5+1 channels: **Cloud-9 / Galactic /
+Bullet / LZ / KSFR** + optional LRD (Jiang 2026 ApJL 996 L19). Tested 5
+alternative frameworks (single-portal, multi-portal, multi-component,
+resonant, hybrid). **Hybrid SIDM (V55–V57) is the simplest model that
+satisfies all 5 channels simultaneously.** Resonant (V50–V51) and
+multi-portal (V44–V45) are also valid unified solutions on a 3-channel
+likelihood, indistinguishable by current data (Δlog Z = -0.21 ± 0.09,
+INCONCLUSIVE per V52). Constraint is **dominated by LZ** (+4.33 log-units
+out of +5.4 total, per V58 ablation). Indirect detection channels
+(DAMPE/XRISM/eROSITA/Euclid subhalo) **FAIL in all tested parameterizations**
+(Phase 20-21, loglike -5 to -77) — model-independent failure of dark
+photon mediators at this mass scale, not a T90-specific issue. See
+[`v0.3-prelim/docs/T90_MASTER_REFERENCE_2026_09_14.md`](v0.3-prelim/docs/T90_MASTER_REFERENCE_2026_09_14.md)
+for the master reference and
+[`v0.3-prelim/docs/T90_CLOUD9_INDEX.md`](v0.3-prelim/docs/T90_CLOUD9_INDEX.md)
+for the navigation index. Tag: `t90-grand-unified-v63-2026-09-14`.
+
 **T95.9 (2026-09-07): Multi-stream analysis with REAL galstreams v1.2
 catalog data — major positive result for non-GD-1 streams.** Loaded 123
 Milky Way stellar streams from the `galstreams` library (Mateu 2023,
