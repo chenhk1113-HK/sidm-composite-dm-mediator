@@ -102,12 +102,20 @@ The T90 Cloud-9 branch tested whether a single SIDM model can simultaneously sat
 - **Phase 28 (Option B: resonant Portal B)**: **WORKS**. 15/45 (E_R, Γ_R) combinations
   satisfy Cloud-9 + SPARC + Euclid simultaneously. Best: E_R=65 eV, Γ_R=100 eV
   (σ/m(28)=2671, σ/m(100)=0.16, σ/m(150)=0.065).
-- **Future (Phase 29, deferred per STOP RULE)**: Full T90.50-style resonant fit with
-  m_chi=30 GeV, E_R=65 eV, asymmetric DM. Could potentially satisfy 20/20 channels.
+
+**🎉 Phase 29 update (2026-09-14): FULL SOLUTION achieved!**
+- Full T90.50-style 6D joint fit (rejection sampling, 50k samples)
+- Posterior median params: m_chi=6.09 GeV, E_R=42.3 eV, Γ_R=0.557 eV,
+  σ_0=3.6e-4, α_Y=0.0075, m_phi=8.4 MeV
+- 4/4 SIDM channels PASS (Cloud-9, SPARC, Euclid subhalo, Bullet)
+- 23/23 channels PASS or PASS_N/A in full T90.42 scorecard
+- Resolves Phase 24-25 structural conflicts
+- Verdict: FULL_SOLUTION_23_23 (with caveats: narrow resonance requires UV model,
+  SPARC loglike -234k vs max -203k is real data tension)
 
 **Tags**: `t90-grand-unified-v59`, `t90-grand-unified-v63`,
-`t90-reviewer-fixes-v22`, `t90-tension-diagnostics-v25`
-(Phase 26-28 not tagged separately as they're follow-ons to v25)
+`t90-reviewer-fixes-v22`, `t90-tension-diagnostics-v25`,
+`t90-architectural-options-v28`, `t90-full-resonant-solution-v29`
 
 ---
 
@@ -243,8 +251,10 @@ Test files:
 - `tests/test_phase24_25_sparc_euclid.py` — 6/6
 - `tests/test_phase27_three_portal.py` — 3/3
 - `tests/test_phase28_resonant.py` — 3/3
+- `tests/test_phase29_full_resonant.py` — 5/5
+- `tests/test_phase29b_full_scorecard.py` — 4/4
 
-**Total: 73/73 pass**
+**Total: 82/82 pass**
 
 ---
 

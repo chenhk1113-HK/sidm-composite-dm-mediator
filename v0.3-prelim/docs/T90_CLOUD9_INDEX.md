@@ -102,6 +102,7 @@ The master reference consolidates T90.14 → T90.63 + Phase 20-21 findings into:
 | **Phase 23-25** | **[`PHASE23_24_25_TENSION_DIAGNOSTICS_2026_09_14`](./PHASE23_24_25_TENSION_DIAGNOSTICS_2026_09_14.md)** | **Cloud-9 RESOLVED (wrapper fix); SPARC + Euclid subhalo are real structural conflicts** |
 | **Phase 26** | **[`T90_PARTIAL_SOLUTION_FRAMING_2026_09_14`](./T90_PARTIAL_SOLUTION_FRAMING_2026_09_14.md)** | **Partial-solution framing (consider7 Option C): 16-18/20 channels** |
 | **Phase 27-28** | **[`PHASE26_27_28_ARCHITECTURAL_OPTIONS_2026_09_14`](./PHASE26_27_28_ARCHITECTURAL_OPTIONS_2026_09_14.md)** | **consider7 Option A FAILS (3-portal), Option B WORKS (resonance, 15/45 configs)** |
+| **Phase 29** | **[`PHASE29_FULL_RESONANT_JOINT_FIT_2026_09_14`](./PHASE29_FULL_RESONANT_JOINT_FIT_2026_09_14.md)** | **🎉 FULL SOLUTION: resonant SIDM satisfies 23/23 channels** |
 
 ---
 

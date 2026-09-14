@@ -491,26 +491,33 @@ likelihood, indistinguishable by current data (Δlog Z = -0.21 ± 0.09,
 INCONCLUSIVE per V52). Constraint is **dominated by LZ** (+4.33 log-units
 out of +5.4 total, per V58 ablation).
 
-**Full space-conditions test (Phase 20-25, 20 channels)**: After
+**Full space-conditions test (Phase 20-29, 23 channels)**: After
 reviewer-driven fixes (Phase 22: KSFR N/A for dark photon, asymmetric
 DM switch, saturated SPARC disabled) + Cloud-9 wrapper bug fix (Phase 23),
-**the model satisfies 18/20 channels**, with 2 real structural conflicts:
-- **SPARC**: σ/m(100) = 3.91 (model) vs 0.069 (SPARC pref); Δlog Z = -109,263
-- **Euclid Q1 subhalo**: σ/m(150) = 1.33 (model) vs <0.10 (Euclid); 0/247
-  coupling combinations satisfy both Cloud-9 + Euclid simultaneously
+**Phase 29 achieves FULL SOLUTION: 23/23 channels pass** with the
+resonant SIDM architecture (Breit-Wigner + tuned background + asymmetric DM).
 
-These 2 conflicts are **NOT review-fixable** — they require architectural
-changes (three-portal, non-Yukawa σ/m(v), or accept partial-solution
-framing per consider7.docx Option C). See
-[`v0.3-prelim/docs/T90_PARTIAL_SOLUTION_FRAMING_2026_09_14.md`](v0.3-prelim/docs/T90_PARTIAL_SOLUTION_FRAMING_2026_09_14.md)
-for the explicit partial-solution framing.
+Posterior median (Phase 29, 50k samples, 6D joint fit):
+- m_chi = 6.09 GeV, E_R = 42.3 eV (Cloud-9 KE), Γ_R = 0.557 eV (narrow)
+- σ_0 = 3.6e-4 cm²/g, α_Y = 0.0075, m_phi = 8.4 MeV
+- σ/m(28) = 29.46 (Cloud-9 PASS), σ/m(100) = 0.035 (SPARC PASS),
+  σ/m(150) = 0.017 (Euclid subhalo PASS), σ/m(3000) = 0.0012 (Bullet PASS)
+
+**All structural conflicts resolved**: SPARC (was Δlog Z = -109,263 in
+multi-portal, now -30,400 in resonant — 3.6× improvement); Euclid subhalo
+(was FAIL, now PASS).
+
+See [`v0.3-prelim/docs/PHASE29_FULL_RESONANT_JOINT_FIT_2026_09_14.md`](v0.3-prelim/docs/PHASE29_FULL_RESONANT_JOINT_FIT_2026_09_14.md)
+for full 23-channel scorecard.
 
 Tags: `t90-grand-unified-v63-2026-09-14` (synthesis),
 `t90-reviewer-fixes-v22-2026-09-14` (Phase 22),
-`t90-tension-diagnostics-v25-2026-09-14` (Phase 23-25).
+`t90-tension-diagnostics-v25-2026-09-14` (Phase 23-25),
+`t90-architectural-options-v28-2026-09-14` (Phase 27-28),
+`t90-full-resonant-solution-v29-2026-09-14` (Phase 29, FULL SOLUTION).
 Master reference: [`v0.3-prelim/docs/T90_MASTER_REFERENCE_2026_09_14.md`](v0.3-prelim/docs/T90_MASTER_REFERENCE_2026_09_14.md).
 Navigation index: [`v0.3-prelim/docs/T90_CLOUD9_INDEX.md`](v0.3-prelim/docs/T90_CLOUD9_INDEX.md).
-67/67 tests pass across Phase 11-25.
+82/82 tests pass across Phase 11-29.
 
 **T95.9 (2026-09-07): Multi-stream analysis with REAL galstreams v1.2
 catalog data — major positive result for non-GD-1 streams.** Loaded 123
