@@ -491,11 +491,11 @@ likelihood, indistinguishable by current data (Δlog Z = -0.21 ± 0.09,
 INCONCLUSIVE per V52). Constraint is **dominated by LZ** (+4.33 log-units
 out of +5.4 total, per V58 ablation).
 
-**Full space-conditions test (Phase 20-29, 23 channels)**: After
+**Full space-conditions test (Phase 20-30, 23 channels)**: After
 reviewer-driven fixes (Phase 22: KSFR N/A for dark photon, asymmetric
 DM switch, saturated SPARC disabled) + Cloud-9 wrapper bug fix (Phase 23),
-**Phase 29 achieves FULL SOLUTION: 23/23 channels pass** with the
-resonant SIDM architecture (Breit-Wigner + tuned background + asymmetric DM).
+**Phase 29 achieves 23/23 channels pass** with the resonant SIDM
+architecture (Breit-Wigner + tuned background + asymmetric DM).
 
 Posterior median (Phase 29, 50k samples, 6D joint fit):
 - m_chi = 6.09 GeV, E_R = 42.3 eV (Cloud-9 KE), Γ_R = 0.557 eV (narrow)
@@ -503,21 +503,37 @@ Posterior median (Phase 29, 50k samples, 6D joint fit):
 - σ/m(28) = 29.46 (Cloud-9 PASS), σ/m(100) = 0.035 (SPARC PASS),
   σ/m(150) = 0.017 (Euclid subhalo PASS), σ/m(3000) = 0.0012 (Bullet PASS)
 
-**All structural conflicts resolved**: SPARC (was Δlog Z = -109,263 in
-multi-portal, now -30,400 in resonant — 3.6× improvement); Euclid subhalo
-(was FAIL, now PASS).
+**Phase 30 critical review response**: The "FULL SOLUTION" framing
+was overstated. After running critical tests:
+- **Test D (fine-tuning)**: Max sensitivity = 1.30 → **NATURAL** (not >>100)
+- **Test A (other low-v systems)**: 4/10 in Cloud-9 band → **PARTIAL** (fails for v < 10 km/s)
+- **Test F (relic density)**: η/η_B = 0.82 → **REASONABLE**
+- **Test B (SPARC Bayes)**: Δlog L = -0.48 → power-law slightly better
+
+**Honest reframing** (per consider8.docx reviewer):
+> "A resonant SIDM effective model that simultaneously satisfies the
+> Cloud-9, SPARC, Euclid-subhalo and Bullet velocity scales (with residual
+> SPARC tension quantified), under the assumption of asymmetric dark matter.
+> The narrow Breit-Wigner resonance is phenomenological pending UV completion."
+
+Resolves Phase 24-25 structural conflicts: SPARC Δlog Z improved from
+-109,263 (multi-portal) to -30,400 (resonant — 3.6× better); Euclid
+subhalo FAIL → PASS.
 
 See [`v0.3-prelim/docs/PHASE29_FULL_RESONANT_JOINT_FIT_2026_09_14.md`](v0.3-prelim/docs/PHASE29_FULL_RESONANT_JOINT_FIT_2026_09_14.md)
-for full 23-channel scorecard.
+for Phase 29 details and
+[`v0.3-prelim/docs/PHASE30_CRITICAL_REVIEW_RESPONSE_2026_09_14.md`](v0.3-prelim/docs/PHASE30_CRITICAL_REVIEW_RESPONSE_2026_09_14.md)
+for the honest reframing.
 
 Tags: `t90-grand-unified-v63-2026-09-14` (synthesis),
 `t90-reviewer-fixes-v22-2026-09-14` (Phase 22),
 `t90-tension-diagnostics-v25-2026-09-14` (Phase 23-25),
 `t90-architectural-options-v28-2026-09-14` (Phase 27-28),
-`t90-full-resonant-solution-v29-2026-09-14` (Phase 29, FULL SOLUTION).
+`t90-full-resonant-solution-v29-2026-09-14` (Phase 29),
+`t90-honest-reframe-v30-2026-09-14` (Phase 30, critical review response).
 Master reference: [`v0.3-prelim/docs/T90_MASTER_REFERENCE_2026_09_14.md`](v0.3-prelim/docs/T90_MASTER_REFERENCE_2026_09_14.md).
 Navigation index: [`v0.3-prelim/docs/T90_CLOUD9_INDEX.md`](v0.3-prelim/docs/T90_CLOUD9_INDEX.md).
-82/82 tests pass across Phase 11-29.
+87/87 tests pass across Phase 11-30.
 
 **T95.9 (2026-09-07): Multi-stream analysis with REAL galstreams v1.2
 catalog data — major positive result for non-GD-1 streams.** Loaded 123

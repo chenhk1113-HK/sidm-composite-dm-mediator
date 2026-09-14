@@ -1,0 +1,41 @@
+{
+  "test": "Phase30_critical_review_response",
+  "median_params": {
+    "m_chi_GeV": 6.091783883158755,
+    "E_R_eV": 42.30202214765859,
+    "Gamma_R_eV": 0.5568654618091413,
+    "sigma_0": 0.00036381577094072947,
+    "alpha_Y": 0.0074603904375728225
+  },
+  "results": {
+    "D_fine_tuning": {
+      "test": "D_fine_tuning",
+      "d_log_sm_d_log_Gamma": 0.8686757655035748,
+      "d_log_sm_d_log_E": -1.2712674518442668,
+      "d_log_sm_d_log_sigma": 0.001345942570216696,
+      "d_log_sm_d_log_alpha": 0.001345942570216696,
+      "max_sensitivity": 1.2712674518442668,
+      "naturalness": "NATURAL"
+    },
+    "A_other_low_velocity": {
+      "test": "A_other_low_velocity",
+      "systems_tested": 10,
+      "systems_in_band": 4,
+      "verdict": "PARTIAL"
+    },
+    "F_relic_density": {
+      "test": "F_relic_density",
+      "m_chi_GeV": 6.091783883158755,
+      "eta_over_eta_B_required": 0.8160827920609346,
+      "verdict": "REASONABLE",
+      "sigma_m_at_freeze_in_v_300": 0.008522104029339436
+    },
+    "B_bayes_factor_sparc": {
+      "test": "B_bayes_factor_sparc",
+      "log_L_resonant": -0.4840697002920668,
+      "log_L_power_law": 0.0,
+      "delta_log_L": -0.4840697002920668
+    }
+  },
+  "aggregate_verdict": "PLAUSIBLE"
+}

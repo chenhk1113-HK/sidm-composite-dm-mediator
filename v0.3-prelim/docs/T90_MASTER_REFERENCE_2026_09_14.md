@@ -103,19 +103,28 @@ The T90 Cloud-9 branch tested whether a single SIDM model can simultaneously sat
   satisfy Cloud-9 + SPARC + Euclid simultaneously. Best: E_R=65 eV, Γ_R=100 eV
   (σ/m(28)=2671, σ/m(100)=0.16, σ/m(150)=0.065).
 
-**🎉 Phase 29 update (2026-09-14): FULL SOLUTION achieved!**
+**🎉 Phase 29 update (2026-09-14): 23/23 channels pass.**
 - Full T90.50-style 6D joint fit (rejection sampling, 50k samples)
 - Posterior median params: m_chi=6.09 GeV, E_R=42.3 eV, Γ_R=0.557 eV,
   σ_0=3.6e-4, α_Y=0.0075, m_phi=8.4 MeV
 - 4/4 SIDM channels PASS (Cloud-9, SPARC, Euclid subhalo, Bullet)
 - 23/23 channels PASS or PASS_N/A in full T90.42 scorecard
-- Resolves Phase 24-25 structural conflicts
-- Verdict: FULL_SOLUTION_23_23 (with caveats: narrow resonance requires UV model,
-  SPARC loglike -234k vs max -203k is real data tension)
+
+**Phase 30 update (2026-09-14): Critical review response.**
+- The "FULL SOLUTION" framing was overstated (per consider8.docx)
+- Ran 4 critical tests (A, B, D, F from reviewer's 9 recommendations)
+- Test D (fine-tuning): **NATURAL** (max sensitivity 1.30, not >>100)
+- Test A (other low-v): **PARTIAL** (4/10 systems in Cloud-9 band)
+- Test F (relic density): **REASONABLE** (η/η_B = 0.82)
+- Test B (SPARC Bayes): Δlog L = -0.48 (resonant slightly worse than power-law)
+- Aggregate: **PLAUSIBLE with caveats**, NOT "premature full solution"
+- Honest reframing: "phenomenological effective model under asymmetric DM,
+  pending UV completion"
 
 **Tags**: `t90-grand-unified-v59`, `t90-grand-unified-v63`,
 `t90-reviewer-fixes-v22`, `t90-tension-diagnostics-v25`,
-`t90-architectural-options-v28`, `t90-full-resonant-solution-v29`
+`t90-architectural-options-v28`, `t90-full-resonant-solution-v29`,
+`t90-honest-reframe-v30`
 
 ---
 
@@ -253,8 +262,9 @@ Test files:
 - `tests/test_phase28_resonant.py` — 3/3
 - `tests/test_phase29_full_resonant.py` — 5/5
 - `tests/test_phase29b_full_scorecard.py` — 4/4
+- `tests/test_phase30_critical_review.py` — 5/5
 
-**Total: 82/82 pass**
+**Total: 87/87 pass**
 
 ---
 
