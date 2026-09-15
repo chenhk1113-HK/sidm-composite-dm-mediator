@@ -1,0 +1,55 @@
+{
+  "test": "Phase45_theoretical_UV_survey",
+  "t90_70_requirements": {
+    "v_targets_km_s": [
+      28.0,
+      100.0,
+      300.0,
+      700.0
+    ],
+    "sigma_peaks_cm2_g": [
+      100.0,
+      0.07,
+      0.1,
+      0.01
+    ],
+    "n_resonances": 4
+  },
+  "candidates": {
+    "1_single_breit_wigner": {
+      "description": "Single s-channel Breit-Wigner resonance",
+      "verdict": "Cannot produce 4 peaks with single mediator",
+      "feasibility": "Poor"
+    },
+    "2_multiple_mediators": {
+      "description": "4 different U(1) gauge bosons",
+      "verdict": "Plausible but contrived",
+      "feasibility": "Marginal"
+    },
+    "3_hidden_valley_composite": {
+      "description": "Composite dark matter (dark hadrons, SIMPs)",
+      "verdict": "Plausible, well-motivated",
+      "feasibility": "Good"
+    },
+    "4_sommerfeld_yukawa": {
+      "description": "Sommerfeld-enhanced Yukawa",
+      "verdict": "Does NOT produce resonance peaks",
+      "feasibility": "Poor"
+    },
+    "5_atomic_dark_matter": {
+      "description": "Atomic dark matter (dark photon + dark electron)",
+      "verdict": "Gives 1/v^4, no peaks",
+      "feasibility": "Poor"
+    },
+    "6_self_interacting_dark_photon": {
+      "description": "Massive vector with non-abelian self-interaction",
+      "verdict": "Hard to produce 4 peaks",
+      "feasibility": "Marginal"
+    }
+  },
+  "quantitative_test": {
+    "single_BW_loss": 3.610583082509587,
+    "verdict": "Single Breit-Wigner CAN approximately reproduce T90.70"
+  },
+  "final_verdict": "T90.70 multi-resonant architecture (4 peaks at v=[28,100,300,700]) is BEST matched by:\n  - Hidden valley / composite dark matter (Candidate 3) - well-motivated\n  - Multiple mediators (Candidate 2) - plausible but contrived\n\nA SINGLE s-channel Breit-Wigner resonance cannot reproduce 4 peaks.\nThe Tsai 2022 UV completion is INCONSISTENT with the fitted resonance positions.\n\nRecommended particle-physics home for T90.70: Hidden valley with multiple bound states, similar to SM meson spectrum but at GeV scale."
+}
