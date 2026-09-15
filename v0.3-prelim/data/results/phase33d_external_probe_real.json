@@ -1,0 +1,66 @@
+{
+  "test": "Phase33d_external_probe_real_sparc",
+  "n_galaxies": 127,
+  "vflat_range_kms": [
+    33.6,
+    332.0
+  ],
+  "vflat_median_kms": 116.6,
+  "model_parameters": {
+    "m_chi_GeV": 6.576626503673317,
+    "sigma_0_dwarf": 0.19482843002577083,
+    "a_slope": 0.8690943180069614,
+    "v_targets_kms": [
+      27.882984429518316,
+      54.818601239329624,
+      272.01009318019567,
+      978.3999077421431
+    ],
+    "width_fractions": [
+      0.0600320916568161,
+      0.054618330881576374,
+      0.11865494077389412,
+      0.14177654480103274
+    ],
+    "loglike": -0.8028410225178919
+  },
+  "n_consistent": 115,
+  "n_too_low": 12,
+  "n_too_high": 0,
+  "pct_consistent": 90.55118110236221,
+  "verdict": "EXTERNAL_PROBE_PASS",
+  "velocity_band_breakdown": {
+    "Dwarfs (Vflat 30-80)": {
+      "n_galaxies": 31,
+      "n_in_sidm_range": 31,
+      "sigma_m_min": 0.23956265827742357,
+      "sigma_m_max": 0.9420837210463338
+    },
+    "Intermediate (80-150)": {
+      "n_galaxies": 44,
+      "n_in_sidm_range": 44,
+      "sigma_m_min": 0.1400230621290246,
+      "sigma_m_max": 0.2384921680814567
+    },
+    "Spirals (150-250)": {
+      "n_galaxies": 42,
+      "n_in_sidm_range": 35,
+      "sigma_m_min": 0.09778296568345377,
+      "sigma_m_max": 0.13606975846536923
+    },
+    "Giants (250-350)": {
+      "n_galaxies": 10,
+      "n_in_sidm_range": 5,
+      "sigma_m_min": 0.07017953312133515,
+      "sigma_m_max": 0.1730159167482732
+    }
+  },
+  "sigma_m_statistics": {
+    "min": 0.07017953312133515,
+    "p25": 0.11710590443555349,
+    "median": 0.17178176101767106,
+    "p75": 0.23576857841291632,
+    "max": 0.9420837210463338
+  },
+  "data_source": "SPARC database (Lelli, McGaugh, Schombert 2016), downloaded from https://astroweb.cwru.edu/SPARC/"
+}
