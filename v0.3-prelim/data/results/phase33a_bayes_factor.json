@@ -1,0 +1,54 @@
+{
+  "test": "Phase33a_bayes_factor_comparison",
+  "n_samples_per_model": 10000,
+  "n_test_systems": 11,
+  "results": {
+    "1_resonance": {
+      "n_resonances": 1,
+      "log_Z": -8.227196159127512,
+      "L_max": -0.015064669070575461,
+      "N_params": 3,
+      "N_data": 11,
+      "log_V_ratio": -4.61528858085938,
+      "n_top_samples": 100.0,
+      "n_samples": 10000
+    },
+    "2_resonance": {
+      "n_resonances": 2,
+      "log_Z": -8.619626318238517,
+      "L_max": -0.18136927859379623,
+      "N_params": 3,
+      "N_data": 11,
+      "log_V_ratio": -4.841414130447165,
+      "n_top_samples": 100.0,
+      "n_samples": 10000
+    },
+    "3_resonance": {
+      "n_resonances": 3,
+      "log_Z": -8.325659128711045,
+      "L_max": -0.17962141487882977,
+      "N_params": 3,
+      "N_data": 11,
+      "log_V_ratio": -4.54919480463466,
+      "n_top_samples": 100.0,
+      "n_samples": 10000
+    },
+    "4_resonance": {
+      "n_resonances": 4,
+      "log_Z": -8.471528675857352,
+      "L_max": -0.1775981695451325,
+      "N_params": 3,
+      "N_data": 11,
+      "log_V_ratio": -4.697087597114663,
+      "n_top_samples": 100.0,
+      "n_samples": 10000
+    }
+  },
+  "best_model": "1_resonance",
+  "verdict": "1_RESONANCE_MARGINALLY_PREFERRED",
+  "deltas": {
+    "delta_4_vs_1": -0.24433251672983936,
+    "delta_4_vs_2": 0.14809764238116507,
+    "delta_4_vs_3": -0.1458695471463063
+  }
+}

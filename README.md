@@ -533,6 +533,22 @@ was overstated. After running critical tests:
 **Final verdict: ALL_9_PASS — Multi-resonance architecture is a complete
 dark matter solution.** This is publication-quality.
 
+**Phase 33a (2026-09-14): Bayes factor comparison**:
+- 1, 2, 3, 4 resonance models all have same free params (m_chi, σ_0_dwarf, a_slope)
+- All models fit the data within Δlog Z ~ 0.4 (INCONCLUSIVE)
+- 4-resonance is **NOT Occam-justified** over 1-resonance
+- **SPARC tight band [0.05, 0.15]**: 4-resonance FAILS (σ/m(100)=0.29, too high)
+- Phase 32c's "ALL_9_PASS" was based on loose target bands
+
+**Updated honest verdict**: Multi-resonance dark-QCD-inspired SIDM model passes
+internal tests under loose bands. Bayes factor comparison is inconclusive.
+External probes and tighter observational constraints are required to
+distinguish architectures. The model remains a viable candidate but **not**
+a demonstrated unique solution. (Retiring the overstated Phase 32c claim.)
+
+Phase 33b-d (resonance prediction vs Tsai 2022, external probe with THINGS,
+verdict update) still pending.
+
 Tags: `t90-grand-unified-v63-2026-09-14` (synthesis),
 `t90-reviewer-fixes-v22-2026-09-14` (Phase 22),
 `t90-tension-diagnostics-v25-2026-09-14` (Phase 23-25),
@@ -542,7 +558,8 @@ Tags: `t90-grand-unified-v63-2026-09-14` (synthesis),
 `t90-critical-failure-v31a-2026-09-14` (Phase 31a),
 `t90-all-tests-done-v31c-2026-09-14` (Phase 31bc),
 `t90-multi-resonant-darkqcd-v32a-2026-09-14` (Phase 32a, architecture),
-`t90-all-9-pass-v32c-2026-09-14` (Phase 32c, 🎉 final).
+`t90-all-9-pass-v32c-2026-09-14` (Phase 32c, OVERSTATED — superseded by Phase 33a),
+`t90-honest-bayes-factor-v33a-2026-09-14` (Phase 33a, honest verdict).
 Master reference: [`v0.3-prelim/docs/T90_MASTER_REFERENCE_2026_09_14.md`](v0.3-prelim/docs/T90_MASTER_REFERENCE_2026_09_14.md).
 Navigation index: [`v0.3-prelim/docs/T90_CLOUD9_INDEX.md`](v0.3-prelim/docs/T90_CLOUD9_INDEX.md).
 115/115 tests pass across Phase 11-32c.
