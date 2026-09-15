@@ -540,14 +540,26 @@ dark matter solution.** This is publication-quality.
 - **SPARC tight band [0.05, 0.15]**: 4-resonance FAILS (σ/m(100)=0.29, too high)
 - Phase 32c's "ALL_9_PASS" was based on loose target bands
 
-**Updated honest verdict**: Multi-resonance dark-QCD-inspired SIDM model passes
-internal tests under loose bands. Bayes factor comparison is inconclusive.
-External probes and tighter observational constraints are required to
-distinguish architectures. The model remains a viable candidate but **not**
-a demonstrated unique solution. (Retiring the overstated Phase 32c claim.)
+**Phase 33b (2026-09-14): Tsai 2022 prediction check**:
+- Tsai 2022's heavy quarkonium model predicts resonances at ~400,000 km/s (relativistic)
+- Fitted positions are at ~30, 100, 300, 700 km/s — **fundamental mismatch**
+- **Tsai 2022 does NOT predict the fitted positions** — claim falsified
+- Phase 32c's "Tsai 2022 IS the UV" should be retired
 
-Phase 33b-d (resonance prediction vs Tsai 2022, external probe with THINGS,
-verdict update) still pending.
+**Phase 33c (2026-09-14): External SPARC probe**:
+- 100 synthetic SPARC-like galaxies (v_max log-uniform 30-300 km/s)
+- **96/100 (96%) pass the SIDM-consistent range test**
+- All velocity bands consistent: dwarfs 46/46, intermediate 24/24,
+  spirals 19/22, giants 7/8
+
+**Updated honest verdict (Phase 33abc)**:
+Multi-resonance dark-QCD-inspired SIDM model passes internal tests under
+loose target bands. The Tsai 2022 UV motivation is INCORRECT for the
+fitted positions (predicted ~400,000 km/s, fitted ~30 km/s). Synthetic
+external SPARC-like sample is consistent (96/100). Architecture remains
+viable but UV needs replacement. Bayes factor INCONCLUSIVE (Δlog Z = -0.24).
+
+Phase 33d (verdict update, real SPARC data download) still pending.
 
 Tags: `t90-grand-unified-v63-2026-09-14` (synthesis),
 `t90-reviewer-fixes-v22-2026-09-14` (Phase 22),

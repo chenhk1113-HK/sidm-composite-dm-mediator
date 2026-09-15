@@ -1,0 +1,18 @@
+{
+  "test": "Phase33b_tsai_2022_prediction",
+  "fitted_v_targets_kms": [
+    27.882984429518316,
+    54.818601239329624,
+    272.01009318019567,
+    978.3999077421431
+  ],
+  "best_fit_parameters": {
+    "m_chi_GeV": 6.58,
+    "m_Q_GeV": 9.870000000000001,
+    "Lambda_D_GeV": 5.0
+  },
+  "best_chi2": 49.355397781562615,
+  "verdict": "PARTIALLY PREDICTED \u2014 large scatter",
+  "std_log10_ratio": 0.5980020445718672,
+  "test_cases_count": 10
+}
