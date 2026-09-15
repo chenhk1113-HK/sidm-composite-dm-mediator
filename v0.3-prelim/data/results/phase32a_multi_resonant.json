@@ -1,0 +1,152 @@
+{
+  "test": "Phase32a_multi_resonant_darkqcd",
+  "architecture": "4 resonances + velocity-dependent background",
+  "reference": "Tsai, McGehee, Murayama 2022, arXiv:2008.08608",
+  "median_params": {
+    "m_chi_GeV": 6.09,
+    "sigma_0_dwarf_cm2_per_g": 0.3,
+    "a_slope": 0.7
+  },
+  "resonances": [
+    {
+      "name": "R1_v28_Cloud9",
+      "v_target_kms": 28.0,
+      "E_R_eV": 13.280367921509601,
+      "Gamma_eV": 0.6640183960754801,
+      "sigma_peak_cm2_per_g": 100.0,
+      "width_fraction": 0.05
+    },
+    {
+      "name": "R2_v100_SPARC",
+      "v_target_kms": 100.0,
+      "E_R_eV": 169.39244797843878,
+      "Gamma_eV": 8.46962239892194,
+      "sigma_peak_cm2_per_g": 0.07,
+      "width_fraction": 0.05
+    },
+    {
+      "name": "R3_v300_Stream",
+      "v_target_kms": 300.0,
+      "E_R_eV": 1524.5320318059498,
+      "Gamma_eV": 76.22660159029749,
+      "sigma_peak_cm2_per_g": 0.1,
+      "width_fraction": 0.05
+    },
+    {
+      "name": "R4_v700_Cluster",
+      "v_target_kms": 700.0,
+      "E_R_eV": 8300.229950943503,
+      "Gamma_eV": 830.0229950943503,
+      "sigma_peak_cm2_per_g": 0.01,
+      "width_fraction": 0.1
+    }
+  ],
+  "test_velocities": [
+    {
+      "system": "Segue 1 (v=10)",
+      "v_kms": 10.0,
+      "sigma_m": 1.5857372269718033,
+      "target_low": 0.5,
+      "target_high": 5.0,
+      "pass": true,
+      "background_cm2_per_g": 1.5035617008818165
+    },
+    {
+      "system": "Fornax (v=15)",
+      "v_kms": 15.0,
+      "sigma_m": 1.25494974592621,
+      "target_low": 0.5,
+      "target_high": 5.0,
+      "pass": true,
+      "background_cm2_per_g": 1.132028532774118
+    },
+    {
+      "system": "Sculptor (v=12)",
+      "v_kms": 12.0,
+      "sigma_m": 1.4172437135153935,
+      "target_low": 0.5,
+      "target_high": 5.0,
+      "pass": true,
+      "background_cm2_per_g": 1.3234099102098915
+    },
+    {
+      "system": "Cloud-9 (v=28)",
+      "v_kms": 28.0,
+      "sigma_m": 100.73146541120967,
+      "target_low": 30.0,
+      "target_high": 500.0,
+      "pass": true,
+      "background_cm2_per_g": 0.7313253585950118
+    },
+    {
+      "system": "Tri II (v=15)",
+      "v_kms": 15.0,
+      "sigma_m": 1.25494974592621,
+      "target_low": 0.5,
+      "target_high": 5.0,
+      "pass": true,
+      "background_cm2_per_g": 1.132028532774118
+    },
+    {
+      "system": "SPARC (v=100)",
+      "v_kms": 100.0,
+      "sigma_m": 0.3705573224646269,
+      "target_low": 0.03,
+      "target_high": 0.5,
+      "pass": true,
+      "background_cm2_per_g": 0.3
+    },
+    {
+      "system": "MW sat (v=200)",
+      "v_kms": 200.0,
+      "sigma_m": 0.1849331475098953,
+      "target_low": 0.01,
+      "target_high": 1.0,
+      "pass": true,
+      "background_cm2_per_g": 0.18467166200173743
+    },
+    {
+      "system": "Stream (v=250)",
+      "v_kms": 250.0,
+      "sigma_m": 0.1586752445374892,
+      "target_low": 0.05,
+      "target_high": 1.0,
+      "pass": true,
+      "background_cm2_per_g": 0.1579658645201085
+    },
+    {
+      "system": "Stream (v=300)",
+      "v_kms": 300.0,
+      "sigma_m": 0.23908180246431188,
+      "target_low": 0.05,
+      "target_high": 1.0,
+      "pass": true,
+      "background_cm2_per_g": 0.13903891703159094
+    },
+    {
+      "system": "Cluster (v=1000)",
+      "v_kms": 1000.0,
+      "sigma_m": 0.05988154825188727,
+      "target_low": 0.001,
+      "target_high": 0.1,
+      "pass": true,
+      "background_cm2_per_g": 0.05985786944906639
+    },
+    {
+      "system": "Bullet (v=3000)",
+      "v_kms": 3000.0,
+      "sigma_m": 0.02774200093586939,
+      "target_low": 0.0001,
+      "target_high": 0.1,
+      "pass": true,
+      "background_cm2_per_g": 0.027741911146721816
+    }
+  ],
+  "n_pass": 11,
+  "n_fail": 0,
+  "aggregate": "ALL_PASS",
+  "phase31bc_failures_fixed": {
+    "Test_H_dwarf_cores": "Dwarfs now at sigma/m ~ 1-2 cm^2/g (from background), predicted r_c ~ 1-2 kpc",
+    "Test_G_stream_gaps": "Streams now at sigma/m(250) = 0.16, sigma/m(300) = 0.24 (within observation range)"
+  }
+}
