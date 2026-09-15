@@ -1,0 +1,24 @@
+{
+  "test": "Phase48_hidden_valley_benchmark",
+  "t90_70_required_v_targets": [
+    28.0,
+    100.0,
+    300.0,
+    700.0
+  ],
+  "best_fit_params": {
+    "N_c": 2,
+    "N_f": 2,
+    "Lambda_dark_MeV": 50,
+    "m_chi_MeV": 10000
+  },
+  "best_fit_v_resonances_km_s": [
+    30000.0,
+    67082.04,
+    77653.07,
+    77653.07
+  ],
+  "fine_tuning_rms_log10": 2.6065,
+  "fine_tuning_verdict": "EXTREME fine-tuning (off by orders of magnitude)",
+  "interpretation": "Phase 48 tests whether the T90.70 4-resonance structure can emerge naturally from a concrete hidden-valley benchmark (dark SU(N_c) with N_f flavors). Best case: N_c=2, N_f=2, Lambda_dark=50 MeV, m_chi=10000 MeV produces resonances at 30000-78000 km/s, but T90.70 requires 28-700 km/s. Fine-tuning measure: 2.61 orders of magnitude off."
+}
