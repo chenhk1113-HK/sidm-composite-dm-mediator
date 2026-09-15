@@ -573,6 +573,29 @@ INCORRECT for fitted positions, Bayes factor INCONCLUSIVE vs simpler
 models. Architecture is viable but the UV motivation needs replacement.
 External validation strongly supports the model as a SIDM candidate.
 
+**Phase 34a (2026-09-14): JVAS B1938+666 lensing test (Paper 2 in halo1.docx)**:
+- Tested against arXiv:2606.12909 — JVAS B1938+666 lensing perturber as
+  deep core-collapsed SIDM halo
+- Paper 2 requires σ/m(v=15 km/s) ~ 100 cm²/g for core collapse to occur
+  within Hubble time
+- **Our model gives σ/m(15) = 1.19 cm²/g (factor 84 too low)**
+- Estimated core-collapse timescale: **68 Gyr** (5× the age of the universe)
+- **Verdict: JVAS_FAIL** — model CANNOT explain JVAS-like perturbers
+
+**Updated honest verdict (Phase 33abcd + Phase 34a)**:
+Multi-resonance SIDM model:
+  ✓ Passes internal tests (loose bands)
+  ✓ Passes real SPARC external probe (115/127 = 90.6%)
+  ✓ Passes subhalo diversity considerations (Paper 1 framework)
+  ✗ **FAILS JVAS B1938+666 lensing test by factor 84**
+  ✗ Tsai 2022 UV motivation INCORRECT
+  ~ Bayes factor INCONCLUSIVE vs simpler models
+
+The model is a viable candidate for Cloud-9 + SPARC + subhalos but
+NOT a complete dark matter solution that explains all observations.
+The JVAS lensing test is the most decisive external falsification
+to date.
+
 Tags: `t90-grand-unified-v63-2026-09-14` (synthesis),
 `t90-reviewer-fixes-v22-2026-09-14` (Phase 22),
 `t90-tension-diagnostics-v25-2026-09-14` (Phase 23-25),

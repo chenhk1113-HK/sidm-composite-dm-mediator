@@ -1,0 +1,49 @@
+{
+  "test": "Phase34a_jvas_b1938_lensing",
+  "paper_reference": "arXiv:2606.12909",
+  "required_sigma_m_at_v15_cm2_per_g": 100.0,
+  "our_sigma_m_at_v15_cm2_per_g": 1.1918001881613813,
+  "ratio": 0.011918001881613814,
+  "deficit_factor": 83.90668250713435,
+  "core_collapse_timescale_Gyr": 68.1936292436434,
+  "core_collapse_feasible": false,
+  "verdict": "JVAS_FAIL",
+  "all_sigma_m_evaluated": {
+    "10": 1.5602488213093817,
+    "12": 1.3660620852457777,
+    "15": 1.1918001881613813,
+    "20": 1.1703285002111183,
+    "28": 93.30913419512065,
+    "50": 0.37643400846673103,
+    "100": 0.19599776252657994,
+    "200": 0.10839738785309076
+  },
+  "model_parameters": {
+    "m_chi_GeV": 6.576626503673317,
+    "sigma_0_dwarf": 0.19482843002577083,
+    "a_slope": 0.8690943180069614,
+    "v_targets_kms": [
+      27.882984429518316,
+      54.818601239329624,
+      272.01009318019567,
+      978.3999077421431
+    ],
+    "width_fractions": [
+      0.0600320916568161,
+      0.054618330881576374,
+      0.11865494077389412,
+      0.14177654480103274
+    ],
+    "loglike": -0.8028410225178919
+  },
+  "interpretation": {
+    "sigma_m_at_v15_too_low_by": 83.90668250713435,
+    "would_need_to_increase_by": 83.90668250713435,
+    "retune_options": [
+      "Widen R1 resonance (would over-shoot dwarfs)",
+      "Add R0 resonance at v=10-15 (would break Cloud-9 v_target)",
+      "Increase sigma_0_dwarf to ~80 cm^2/g (would break dwarf core tests)",
+      "Accept that model cannot explain JVAS B1938+666"
+    ]
+  }
+}
