@@ -10,13 +10,20 @@ EXTENSION (Phase 35, 2026-09-14):
   requires sigma/m ~ 100 cm^2/g at v ~ 15 km/s for deep gravothermal
   core collapse to produce the observed 10^6 M_sun perturber.
 
-Architecture:
-  - 5 resonances, each with (E_R_n, Gamma_n, sigma_peak_n)
+REVERTED (Phase 37, 2026-09-14):
+  The 5th resonance FIXES JVAS but BREAKS Fornax/Tri II (both at v=15)
+  because sigma/m(15) ~ 100 contradicts their rotation curve observations.
+  Concentration-dependent collapse physics (Phase 36) cannot resolve this
+  since Fornax doesn't collapse (c~10, t_c >> Hubble time) but still shows
+  sigma/m(15) = 100 from the 5th resonance.
+  This file is kept as a record of the failed 5-resonance attempt.
+
+Architecture (4-resonance, final):
+  - 4 resonances, each with (E_R_n, Gamma_n, sigma_peak_n)
   - sigma_peak_n is a free coupling (in cm^2/g units)
   - sigma/m(v) = sigma_background(v) + sum_n sigma_peak_n * BW_factor_n(v)
 
   Mapping n -> velocity scale:
-    n = 0  -> v ~ 15 km/s     (JVAS B1938+666 lensing — Phase 35 addition)
     n = 4  -> v ~ 28 km/s     (Cloud-9 RELHIC)
     n = 8  -> v ~ 100 km/s    (SPARC)
     n = 12 -> v ~ 300 km/s    (stellar streams)

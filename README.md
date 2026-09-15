@@ -596,6 +596,28 @@ NOT a complete dark matter solution that explains all observations.
 The JVAS lensing test is the most decisive external falsification
 to date.
 
+**Phase 35-37 (2026-09-14): Resolution attempt and FINAL VERDICT**:
+- **Phase 35**: Added 5th resonance at v=15 km/s with σ_peak=100 to fix JVAS.
+  Result: JVAS FIXED (σ/m(15)=101) but Fornax/Tri II BROKEN (σ/m(15)=101 vs
+  expected 1-5). Net effect: 8/11 PASS (similar to Phase 32b's 9/11, traded tests).
+- **Phase 36**: Added concentration-dependent collapse physics (Paper 2 Eq. 3).
+  Result: JVAS perturber (c=50) collapses with t_c=0.75 Gyr ✓. Fornax (c=10)
+  doesn't collapse (t_c=39 Gyr) but σ/m(15)=100 still contradicts its rotation.
+  Tension NOT fully resolved.
+- **Phase 37 (FINAL)**: User agreed to drop 5th resonance, accept partial solution.
+  Return to Phase 32b's 4-resonance architecture.
+
+**FINAL VERDICT (Phase 37)**:
+> "Multi-resonance SIDM model works for Cloud-9 (σ/m=100 at v=28),
+> SPARC rotation curves (115/127 = 90.6% pass on real observational data),
+> and subhalo structure considerations. Does NOT explain JVAS B1938+666
+> lensing perturber (fails by 84× — σ/m(15) too low for core collapse).
+> This is consistent with Paper 2's CDM+black hole alternative interpretation
+> of the lensing perturber. The model is a viable SIDM candidate but NOT a
+> complete dark matter solution that explains ALL observations."
+
+**Tests**: 139/139 PASS (Phase 11-37, 24 phases, 37 sub-tasks).
+
 Tags: `t90-grand-unified-v63-2026-09-14` (synthesis),
 `t90-reviewer-fixes-v22-2026-09-14` (Phase 22),
 `t90-tension-diagnostics-v25-2026-09-14` (Phase 23-25),
@@ -606,7 +628,13 @@ Tags: `t90-grand-unified-v63-2026-09-14` (synthesis),
 `t90-all-tests-done-v31c-2026-09-14` (Phase 31bc),
 `t90-multi-resonant-darkqcd-v32a-2026-09-14` (Phase 32a, architecture),
 `t90-all-9-pass-v32c-2026-09-14` (Phase 32c, OVERSTATED — superseded by Phase 33a),
-`t90-honest-bayes-factor-v33a-2026-09-14` (Phase 33a, honest verdict).
+`t90-honest-bayes-factor-v33a-2026-09-14` (Phase 33a, honest verdict),
+`t90-tsai-falsified-external-pass-v33bc-2026-09-14` (Phase 33bc),
+`t90-real-sparc-pass-v33d-2026-09-14` (Phase 33d, **STRONG EXTERNAL**),
+`t90-jvas-fail-v34a-2026-09-14` (Phase 34a, honest failure),
+`t90-five-resonance-jvas-tradeoff-v35-2026-09-14` (Phase 35, attempt),
+`t90-concentration-collapse-v36-2026-09-14` (Phase 36, analysis),
+`t90-final-verdict-v37-2026-09-14` (Phase 37, **FINAL**).
 Master reference: [`v0.3-prelim/docs/T90_MASTER_REFERENCE_2026_09_14.md`](v0.3-prelim/docs/T90_MASTER_REFERENCE_2026_09_14.md).
 Navigation index: [`v0.3-prelim/docs/T90_CLOUD9_INDEX.md`](v0.3-prelim/docs/T90_CLOUD9_INDEX.md).
 115/115 tests pass across Phase 11-32c.
