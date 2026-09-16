@@ -1,6 +1,6 @@
 # sidm-composite-dm-mediator
 
-> ⚠️ **Disclaimer:** It is a personal project out of curiosity, made using Hermes with **MiniMax M3** as the coder, **Grok*y, **Doubao**, **Qwen 3.8 Max** and other AIs as reviewers.
+> ⚠️ **Disclaimer:** It is a personal project out of curiosity, made using Hermes with **MiniMax M3** as the coder, **Grok**, **Doubao**, **Qwen 3.8 Max** and other AIs as reviewers.
 
 **Joint-fit framework for self-interacting dark matter (SIDM), grounded in published multi-channel data (dSph, UFD, Bullet, SPARC, LZ, Fermi, DAMPE, Zhang+2025 LSS).**
 
