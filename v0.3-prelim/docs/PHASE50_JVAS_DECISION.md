@@ -112,10 +112,10 @@ In the discussion:
 > "Multi-resonance SIDM:
 > ✓ Passes internal multi-scale tests (Phase 32)
 > ✓ Consistent with SPARC Vflat (Phase 33d, 115/127)
-|> ✓ Multi-channel consistency +8 log-units over T90.70 baseline (Phase 44; SPARC-dominated per Phase 47 LOO — JVAS+Cloud-9 are variance-absorbing channels)
+> ✓ Multi-channel consistency +8 log-units over T90.70 baseline (Phase 44; SPARC-dominated per Phase 47 LOO — JVAS+Cloud-9 are variance-absorbing channels)
 > ✓ Velocity-weighted gravothermal confirms earlier conclusion (Phase 43)
-> ✓ Plausible particle-physics embedding class (Phase 45, with fine-tuning caveat Phase 48)
-|> ~ **JVAS B1938+666 lies outside the reliable domain of the present multi-resonance model and is better described by complementary core-collapse SIDM (Zhang & Yu 2026)** [Phase 50 NEW]
+> ✓ Plausible particle-physics embedding class (Phase 45; fine-tuning caveat Phase 48 REDUCED to MINIMAL ~0.02 orders via geometric-ladder constructions [Phase 51 NEW])
+> ~ **JVAS B1938+666 lies outside the reliable domain of the present multi-resonance model and is better described by complementary core-collapse SIDM (Zhang & Yu 2026)** [Phase 50 NEW]
 > ✗ Rotation curves alone don't prefer multi-resonance (Phase 41)
 > ✗ Tsai 2022 UV completion falsified (Phase 33b)"
 
@@ -124,7 +124,9 @@ In the discussion:
 ## 📁 FILES
 
 - `docs/PHASE50_JVAS_DECISION.md` (this document)
-- (No new code or data; decision based on literature review)
+- `docs/PHASE51_PORTAL_RESONANCE_UV.md` (Phase 51 update — fine-tuning reduction)
+- `code/phase51_portal_resonance.py` (Phase 51 code)
+- `data/results/phase51_portal_resonance.json` (Phase 51 results)
 
 ---
 
