@@ -114,7 +114,7 @@ In the discussion:
 > ✓ Consistent with SPARC Vflat (Phase 33d, 115/127)
 > ✓ Multi-channel consistency +8 log-units over T90.70 baseline (Phase 44; SPARC-dominated per Phase 47 LOO — JVAS+Cloud-9 are variance-absorbing channels)
 > ✓ Velocity-weighted gravothermal confirms earlier conclusion (Phase 43)
-> ✓ Multiple UV embeddings (clockwork, secluded U(1), multi-mediator product groups) achieve MINIMAL fine-tuning for the required resonance spectrum (Phases 51–52). The earlier dark-SU(N) benchmark remains tuned; more general constructions do not. [Comment11.docx reviewer-suggested wording]
+> ✓ Multiple UV embeddings (clockwork, secluded U(1), multi-mediator product groups) achieve MINIMAL fine-tuning for the required resonance spectrum (Phases 51–52). The earlier dark-SU(N) benchmark remains tuned; more general constructions do not. **Phase 53 v2 confirms the +8 log-unit multi-channel joint-fit gain survives the clockwork UV prior (Δ = −0.16 log-units vs free fit; BIC Δ = −5.66 favoring clockwork).** [Comment11.docx reviewer-suggested wording]
 > ~ **JVAS B1938+666 lies outside the reliable domain of the present multi-resonance model and is better described by complementary core-collapse SIDM (Zhang & Yu 2026)** [Phase 50 NEW]
 > ✗ Rotation curves alone don't prefer multi-resonance (Phase 41)
 > ✗ Tsai 2022 UV completion falsified (Phase 33b)"

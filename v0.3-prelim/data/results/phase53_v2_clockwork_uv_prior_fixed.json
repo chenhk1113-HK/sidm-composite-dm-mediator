@@ -1,0 +1,65 @@
+{
+  "test": "Phase53_v2_clockwork_uv_prior_joint_fit_FIXED",
+  "phase44_reference": {
+    "t90_70_baseline_logL": -19.67268668762108,
+    "t90_70_best_fit_logL": -11.577625403084578,
+    "improvement_log_units": 8.095061284536502,
+    "n_free_params": 15
+  },
+  "clockwork_construction_v2": {
+    "k_levels": [
+      3,
+      6,
+      9,
+      11
+    ],
+    "sigma_peaks": [
+      100.0,
+      0.07,
+      0.1,
+      0.01
+    ],
+    "width_fracs": [
+      0.05,
+      0.05,
+      0.05,
+      0.1
+    ],
+    "rationale": "Phase 51 clockwork fit (RMS=0.0159). Sigma_peaks and width_fracs fixed at T90.70 values to prevent the optimizer from absorbing velocity error into peak heights (Phase 53 v1 bug). q bounded to [1.5, 3.0] near Phase 51's fit q=2.221.",
+    "n_free_params": 5,
+    "params_free": [
+      "m_chi",
+      "sigma_0",
+      "a_slope",
+      "log_v_1",
+      "q"
+    ]
+  },
+  "phase53_v2_results": {
+    "best_fit_logL": -11.740201938315574,
+    "improvement_vs_phase44_baseline": 7.932484749305507,
+    "improvement_vs_phase44_best_fit": -0.16257653523099513,
+    "best_params": {
+      "m_chi_GeV": 11.543920812606586,
+      "sigma_0": 0.0812466371949245,
+      "a_slope": 2.0,
+      "log_v_1": 1.0341147403744195,
+      "q": 1.8836020594360918
+    },
+    "v_targets_kms": [
+      27.96394731834627,
+      72.29066339627046,
+      186.8813424220801,
+      352.01008145641157
+    ],
+    "verdict": "CLOCKWORK_UV_PRESERVES_JOINT_FIT_GAIN"
+  },
+  "bic_comparison": {
+    "phase44_bic": -3.3380332380737556,
+    "phase53_bic": -8.9936712166453,
+    "delta_bic": -5.655637978571544,
+    "interpretation": "Negative \u0394 BIC means clockwork UV prior is preferred under BIC-style Occam penalty. Positive means the free fit's extra parameters earn their keep."
+  },
+  "v1_bug_note": "Phase 53 v1 (this commit's first version) allowed q in [1.05, 5.0] with free sigma_peaks. The optimizer found q=4.16 with peaks at [29, 2112, 151921, 2.6M] km/s \u2014 completely outside the T90.70 ladder. Free sigma_peaks absorbed the velocity error and log L matched Phase 44 trivially (8.10 log-units). This was NOT a valid test of the clockwork UV prior because sigma_peaks freedom masked the velocity-ladder constraint.",
+  "interpretation": "Phase 53 v2 is the proper test: with sigma_peaks fixed at T90.70 values, the clockwork UV prior's 5 free parameters must satisfy the 3 channel likelihoods. If log L degrades significantly vs Phase 44's free fit, the UV prior costs too much likelihood. If log L is preserved within BIC tolerance, the UV prior is compatible with the multi-channel phenomenology."
+}

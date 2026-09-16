@@ -51,6 +51,7 @@ This branch (`wip/cloud-9-relhic`) develops the **T90 multi-resonance SIDM archi
 | **Phase 50** | JVAS reclassified as domain boundary (not internal contradiction) — Zhang & Yu 2026 + Tran+ 2025 (PRD 112, 083003) + Comment10 reviewer fixes | ✅ shipped |
 | **Phase 51** | **Geometric-ladder benchmark — fine-tuning reduced 163×** (Clockwork q=2.22, k=[3,6,9,11] → RMS 0.016; Secluded U(1) n=[1,4,11,26] → RMS 0.018; Phase 48 2.61 → 0.016 = MINIMAL fine-tuning) | ✅ shipped |
 | **Phase 52** | **Multi-mediator product-group UV benchmark** (Power-law q^(i-1) q=2.93 → RMS 0.046; Integer n^alpha α=2.31 → RMS 0.061; both MINIMAL; reviewer's UVplan.docx Phase B suggestion confirmed) | ✅ shipped |
+| **Phase 53 v2** | **UV-prior joint fit re-evaluation** (clockwork q^k ladder with FIXED k=[3,6,9,11] + sigma_peaks fixed at T90.70 values, 5 free params; reproduces Phase 44's +8 log-units gain to within Δ = −0.16; BIC Δ = −5.66 favoring clockwork; reviewer's Comment11.docx Action 2 confirmation) | ✅ shipped |
 
 **Phase 51 headline (most recent):** T90.70 velocity ladder `[28, 100, 300, 700] km/s` is reproduced to within ~5% per peak using either:
 - **Clockwork q^k ladder** (q = 2.221, k = [3, 6, 9, 11] integer, v_1 = 8.63 km/s) — RMS = 0.0159 orders of magnitude
