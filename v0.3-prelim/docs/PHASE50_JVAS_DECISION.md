@@ -114,7 +114,7 @@ In the discussion:
 > ✓ Consistent with SPARC Vflat (Phase 33d, 115/127)
 > ✓ Multi-channel consistency +8 log-units over T90.70 baseline (Phase 44; SPARC-dominated per Phase 47 LOO — JVAS+Cloud-9 are variance-absorbing channels)
 > ✓ Velocity-weighted gravothermal confirms earlier conclusion (Phase 43)
-> ✓ Plausible particle-physics embedding class (Phase 45; fine-tuning caveat Phase 48 REDUCED to MINIMAL ~0.02 orders via geometric-ladder constructions — clockwork q≈2.22 with k=[3,6,9,11] or Secluded U(1) with n=[1,4,11,26] [Phase 51 NEW]; multi-mediator product-group constructions — power-law q≈2.93 or integer n^alpha ≈2.31 [Phase 52 NEW, UVplan.docx reviewer's Phase B])
+> ✓ Multiple UV embeddings (clockwork, secluded U(1), multi-mediator product groups) achieve MINIMAL fine-tuning for the required resonance spectrum (Phases 51–52). The earlier dark-SU(N) benchmark remains tuned; more general constructions do not. [Comment11.docx reviewer-suggested wording]
 > ~ **JVAS B1938+666 lies outside the reliable domain of the present multi-resonance model and is better described by complementary core-collapse SIDM (Zhang & Yu 2026)** [Phase 50 NEW]
 > ✗ Rotation curves alone don't prefer multi-resonance (Phase 41)
 > ✗ Tsai 2022 UV completion falsified (Phase 33b)"

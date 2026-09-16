@@ -63,13 +63,17 @@ This addresses the most prominent "soft spot" identified by the Phase 50 reviewe
 - ✅ Consistent with SPARC Vflat (Phase 33d, 115/127 = 90.6%)
 - ✅ Multi-channel consistency +8 log-units (Phase 44, stress-tested Phase 47 — SPARC-dominated)
 - ✅ Velocity-weighted gravothermal confirms earlier conclusion (Phase 43)
-- ✅ Plausible particle-physics embedding class (Phase 45; Phase 48 caveat REDUCED to MINIMAL fine-tuning via geometric-ladder constructions [Phase 51], AND multi-mediator product-group constructions [Phase 52])
+- ✅ **Multiple UV embeddings** (clockwork q^k, Secluded U(1) n², multi-mediator product groups) achieve MINIMAL fine-tuning for the required resonance spectrum (Phases 51–52). The earlier dark-SU(N) benchmark remains tuned; more general constructions do not. [Comment11.docx reviewer-suggested wording]
 - ~ JVAS B1938+666 lies outside the reliable domain of the present multi-resonance model and is better described by complementary core-collapse SIDM (Zhang & Yu 2026; Tran+ 2025, PRD 112, 083003)
 - ✗ Rotation curves alone don't prefer multi-resonance (Phase 41)
 - ✗ Tsai 2022 UV completion falsified (Phase 33b)
 
-**Master reference:** [`v0.3-prelim/docs/PHASE51_PORTAL_RESONANCE_UV.md`](v0.3-prelim/docs/PHASE51_PORTAL_RESONANCE_UV.md) (Phase 51 write-up)
-**Reviewer feedback captured:** Comment10.docx (Phase 50 fixes), halo2.docx (DF44 consistency check)
+**Caveats (per Comment11.docx reviewer, 2026-09-16):**
+- "MINIMAL" must remain precisely defined: the RMS_log10 metric quantifies ladder-match quality, not symmetry protection, relic-density compatibility, or direct-detection compatibility. Phase 53 (proposed) would address those.
+- 5 independent constructions now exist — this is a **strength** (robustness), not "THE" UV completion. Multiple embeddings, all MINIMAL.
+
+**Master reference:** [`v0.3-prelim/docs/PHASE51_PORTAL_RESONANCE_UV.md`](v0.3-prelim/docs/PHASE51_PORTAL_RESONANCE_UV.md) (Phase 51 write-up), [`v0.3-prelim/docs/PHASE52_MULTI_MEDIATOR_UV.md`](v0.3-prelim/docs/PHASE52_MULTI_MEDIATOR_UV.md) (Phase 52 write-up)
+**Reviewer feedback captured:** Comment10.docx (Phase 50 fixes), halo2.docx (DF44 consistency check), UVplan.docx (Phase A/B/C plan → Phases 51–52 shipped), Comment11.docx (lock-in + UV-prior re-fit suggestion)
 
 **This branch is NOT promoted to master yet** — it stays on `wip/cloud-9-relhic` while the T90 program completes its remaining rounds. The master standing version (`v0.4-prelim+T88E`) reflects the Tier-1 milestone work as of 2026-09-02.
 

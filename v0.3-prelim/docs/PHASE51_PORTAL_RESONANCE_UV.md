@@ -165,6 +165,34 @@ This supersedes the simpler "tuned at 2.6 orders" framing in earlier docs.
 
 ---
 
+## 6.1 Tuning metric definition (per Comment11.docx reviewer caveat 1)
+
+The "fine-tuning" measure used throughout Phases 48, 51, 52 is:
+
+  **RMS_log10 = sqrt(mean_i (log10(v_i_predicted / v_i_target))^2)**
+
+where v_i_target are the 4 T90.70 resonance velocities [28, 100, 300, 700] km/s, and v_i_predicted are the velocities produced by the candidate UV construction.
+
+**What is being tuned (clarification per Caveat 1):**
+
+| Construction | What's tuned | | What's NOT tuned | |
+|---|---|---|---|---|
+| Phase 48 dark SU(N) | m_meson/Λ ratios (rigid QCD-like), m_χ scale | | nothing | |
+| Phase 51 clockwork q^k | **2 free parameters:** v_1 (overall scale), q (geometric ratio). Mass ratios q^k are then fixed by k = [3,6,9,11]. | | the k-set itself (structural choice, not a fit) | |
+| Phase 51 Secluded U(1) | **1 free parameter:** v_1 (overall scale). Mass ratios n are rigid integers, then a 4-subset is chosen from {v_1 · n}. | | | |
+| Phase 52 power-law q^(i-1) | **2 free parameters:** v_1, q. Mass ratios are q^(i-1). | | | |
+| Phase 52 integer n^alpha | **2 free parameters:** v_1, alpha. Mass ratios are n^alpha. | | | |
+
+The metric quantifies **how well the predicted velocity ladder matches the target ladder** under the chosen free parameters. It does NOT quantify:
+- The protection of the chosen mass-hierarchy pattern by a symmetry (e.g., whether clockwork q is radiatively stable)
+- The relic-density compatibility
+- Direct-detection compatibility
+- Whether the resonance widths match observational constraints
+
+These other "viability" checks (Caveat 3) remain open work. Phase 53 (proposed) would address them per construction.
+
+---
+
 ## 7. References
 
 - **Chu, C. et al.** (2018) *Velocity Dependence from Resonant Self-Interacting Dark Matter*, PRL 122, 071103 — RSIDM mechanism.
