@@ -36,7 +36,7 @@ Recent rounds within this standing version: **+T80** (LZ paper compatibility), *
 
 This branch (`wip/cloud-9-relhic`) develops the **T90 multi-resonance SIDM architecture** — a separate evolution line that tests whether a single SIDM model can simultaneously satisfy 5+1 channels (Cloud-9, Galactic, Bullet, LZ, KSFR + optional LRD via Jiang 2026). Last updated 2026-09-16.
 
-**Latest work in this branch (Phase 41d → Action 3+4):**
+**Latest work in this branch (Phase 41d → Paper v1.1):**
 
 | Phase | Headline | Status |
 |---|---|---|
@@ -53,6 +53,7 @@ This branch (`wip/cloud-9-relhic`) develops the **T90 multi-resonance SIDM archi
 | **Phase 52** | **Multi-mediator product-group UV benchmark** (Power-law q^(i-1) q=2.93 → RMS 0.046; Integer n^alpha α=2.31 → RMS 0.061; both MINIMAL; reviewer's UVplan.docx Phase B suggestion confirmed) | ✅ shipped |
 | **Phase 53 v2** | **UV-prior joint fit re-evaluation** (clockwork q^k ladder with FIXED k=[3,6,9,11] + sigma_peaks fixed at T90.70 values, 5 free params; reproduces Phase 44's +8 log-units gain to within Δ = −0.16; BIC Δ = −5.66 favoring clockwork; reviewer's Comment11.docx Action 2 confirmation) | ✅ shipped |
 | **Action 3 + Action 4** | **Rotation-curve status declaration + Paper v1 draft** (Phase 41 status formalized: rotation curves are CONSISTENCY-ONLY for multi-resonance SIDM, not primary evidence; Burkert wins Bayesian evidence. PAPER_V1_DRAFT.md shipped with all Phases 32–53 incorporated.) | ✅ shipped |
+| **Paper1.docx fixes (v1.1)** | **All 5 major + 5 minor reviewer issues addressed** (JVAS wording inconsistency; baseline precision in §3.4; v₂=100 km/s clarified as suppression feature; Cloud-9 citation transparency; Burkert-on-joint comparison §4.5/Phase 54; formula typesetting; checkbox cleanup; Appendix A trimmed; ref [23] verified). Multi-resonance wins RAW likelihood (+6.08 log-units) but LOSES BIC (+3.22 favoring constant σ/m). Honest mixed result. | ✅ shipped |
 
 **Phase 51 headline (most recent):** T90.70 velocity ladder `[28, 100, 300, 700] km/s` is reproduced to within ~5% per peak using either:
 - **Clockwork q^k ladder** (q = 2.221, k = [3, 6, 9, 11] integer, v_1 = 8.63 km/s) — RMS = 0.0159 orders of magnitude
