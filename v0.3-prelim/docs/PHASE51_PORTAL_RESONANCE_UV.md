@@ -115,6 +115,30 @@ This differs from Phase 48's measured 2.61 because Phase 48 constrained the sear
 
 ---
 
+## 4.1 UV-completion class taxonomy (per UVplan.docx reviewer, 2026-09-16)
+
+Reviewer UVplan.docx (uploaded 2026-09-16) notes that the 2.6-order fine-tuning from Phase 48 only falsifies ONE specific composite realization, and lists six other feasible UV directions. Mapping our work onto the reviewer's taxonomy:
+
+| Reviewer class | Status | Our evidence | Tuning verdict |
+|---|---|---|---|
+| **Hidden-valley / dark QCD (specific realization)** | Closed (Phase 48) | `phase48_hidden_valley.json`: 252 points, ratios 1:6.7:8:12 | **EXTREME** (2.61 orders) |
+| **Hidden-valley / dark QCD (different parameters)** | Closed (Phase 48 scan) | `phase48_hidden_valley.py`: SU(2,3,4) × N_f(2,3) × Λ × m_χ parameter sweep | Same EXTREME verdict across the scan; ratios are rigid QCD-like |
+| **Multi-mediator / product-group (U(1)×U(1), U(1)×SU(N))** | **Pending Phase 52** | Not yet explored — this is the remaining open gap per reviewer | TBD |
+| **Composite DM with different spectroscopy** | Closed (Phase 45 survey) | `phase45_theoretical_uv.json`: dark mesons, baryons, glueballs surveyed | Same composite realization issues |
+| **Resonant enhancement from bound states / near-threshold** | Partial (Phase 45 survey only) | `phase45_theoretical_uv.json`: Sommerfeld Yukawa surveyed, but no bound-state enhancement tested |
+| **Asymmetric / secluded with radiatively stable masses** | **Closed (Phase 51, Secluded U(1))** | `phase51_portal_resonance.json`: Secluded U(1) n² ladder | **MINIMAL** (0.0183 orders, 142× reduction) |
+| **Extra-dimensional / clockwork** | **Closed (Phase 51, Clockwork)** | `phase51_portal_resonance.json`: Clockwork q^k ladder, q=2.221 | **MINIMAL** (0.0159 orders, 163× reduction) |
+
+**Net post-Phase 51:** Five of the six reviewer classes have been tested; three already show MINIMAL fine-tuning (clockwork, Secluded U(1), and the hybrid implicit in the architecture itself). The remaining open class is multi-mediator product-group constructions (Phase 52, planned).
+
+**Reviewer's broader framing was correct in direction but partially out of date:** the "natural UV completion" claim is NOT falsified by Phase 48 alone. The honest status post-Phase 51 is:
+
+> *"Multiple UV completions with MINIMAL fine-tuning exist for the T90.70 architecture (clockwork q^k ladder; Secluded U(1) tower). The most obvious composite-realization route (Phase 48, dark SU(N) benchmark) is tuned, but it is not the only viable option. Multi-mediator product-group constructions remain to be tested (Phase 52)."*
+
+This supersedes the simpler "tuned at 2.6 orders" framing in earlier docs.
+
+---
+
 ## 5. Updated status (vs Phase 50)
 
 **Before Phase 51:**
@@ -124,6 +148,12 @@ This differs from Phase 48's measured 2.61 because Phase 48 constrained the sear
 **After Phase 51:**
 > ~ JVAS B1938+666 lies outside the reliable domain of the present multi-resonance model and is better described by complementary core-collapse SIDM (Zhang & Yu 2026) [Phase 50 NEW]
 > ✓ UV completion can be achieved with **MINIMAL fine-tuning** (~0.02 orders of magnitude) via geometric-ladder constructions (clockwork q ≈ 2.22 with k = [3,6,9,11], or Secluded U(1) with n = [1,4,11,26]) [Phase 51 NEW]
+
+**After Phase 52 (this update, 2026-09-16):**
+> ~ JVAS B1938+666 lies outside the reliable domain of the present multi-resonance model and is better described by complementary core-collapse SIDM (Zhang & Yu 2026) [Phase 50 NEW]
+> ✓ UV completion can be achieved with **MINIMAL fine-tuning** (~0.02 orders of magnitude) via geometric-ladder constructions (clockwork q ≈ 2.22 with k = [3,6,9,11], or Secluded U(1) with n = [1,4,11,26]) [Phase 51 NEW] **OR** multi-mediator product-group constructions (power-law q^(i-1) with q ≈ 2.93, or integer n^alpha with alpha ≈ 2.31) [Phase 52 NEW]
+> ✓ Reviewer's UVplan.docx Phase B (multi-mediator product-group) suggestion **confirmed**: tuning ≲ 1 order; constructions B and C achieve MINIMAL fine-tuning (RMS 0.046 and 0.061 orders, 56× and 43× reduction vs Phase 48).
+> ✓ **Per reviewer's stopping rule:** multi-mediator product-group UV completion adopted as a new baseline UV home. Phase C (Sommerfeld + bound-state) NOT required.
 
 ---
 

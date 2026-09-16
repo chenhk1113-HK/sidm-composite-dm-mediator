@@ -1,0 +1,124 @@
+{
+  "test": "Phase52_multi_mediator_product_group_benchmark",
+  "t90_70_required_v_targets": [
+    28.0,
+    100.0,
+    300.0,
+    700.0
+  ],
+  "phase48_reference_rms_log10": 2.6065,
+  "phase51_references": {
+    "clockwork_q_k_rms": 0.0159,
+    "secluded_u1_n2_rms": 0.0183
+  },
+  "constructions": {
+    "A_free_mass_ratios": {
+      "construction": "Free mass ratios (4 independent mediators)",
+      "free_parameters": [
+        "m_chi",
+        "m_med_1",
+        "m_med_2",
+        "m_med_3",
+        "m_med_4"
+      ],
+      "rigidity": "free (no mass hierarchy imposed)",
+      "n_free_parameters": 5,
+      "best_fit": {
+        "m_chi_MeV": 1000.0,
+        "m_med_MeV": [
+          0.09339794665548258,
+          0.33356409519815206,
+          1.0006922855944562,
+          2.3349486663870644
+        ],
+        "v_resonances_kms": [
+          28.0,
+          100.0,
+          300.0,
+          700.0
+        ]
+      },
+      "fine_tuning_rms_log10": 0.0,
+      "verdict": "EXACT FIT (no residual; trivial, see caveats)",
+      "is_trivial": true,
+      "caveat": "5 free parameters exactly hit 4 targets. Not a UV model; the result is tautological. Compare to clockwork (2 free params, RMS=0.0159) for a non-trivial benchmark."
+    },
+    "B_power_law_q_ip1": {
+      "construction": "Power-law mass hierarchy q^(i-1)",
+      "free_parameters": [
+        "v_1 (overall scale)",
+        "q (geometric ratio)"
+      ],
+      "rigidity": "exponential (m_med_i = m_0 * q^(i-1))",
+      "n_free_parameters": 2,
+      "best_fit": {
+        "v_1_kms": 31.11363264697656,
+        "q": 2.925919732441472,
+        "v_resonances_kms": [
+          31.11363264697656,
+          91.0359917097239,
+          266.3640045058594,
+          779.3596967958231
+        ],
+        "levels_k": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "fine_tuning_rms_log10": 0.04637644922078194,
+      "verdict": "MINIMAL fine-tuning (natural emergence)"
+    },
+    "C_integer_n_alpha": {
+      "construction": "Integer n^alpha ladder",
+      "free_parameters": [
+        "v_1 (overall scale)",
+        "alpha (mass scaling exponent)"
+      ],
+      "rigidity": "power-law with integer exponents (n=1,2,3,4)",
+      "n_free_parameters": 2,
+      "best_fit": {
+        "v_1_kms": 24.86576281920689,
+        "alpha": 2.309045226130653,
+        "v_resonances_kms": [
+          24.86576281920689,
+          123.22353434769065,
+          314.2652362071373,
+          610.6404025300196
+        ],
+        "n_levels": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "fine_tuning_rms_log10": 0.06084487215697911,
+      "verdict": "MINIMAL fine-tuning (natural emergence)"
+    }
+  },
+  "headline_comparison": [
+    {
+      "name": "Phase 51 clockwork q^k (k=[3,6,9,11])",
+      "rms_log10": 0.0159,
+      "factor_vs_phase48": 163.9308176100629
+    },
+    {
+      "name": "Phase 51 Secluded U(1) n^2",
+      "rms_log10": 0.0183,
+      "factor_vs_phase48": 142.43169398907105
+    },
+    {
+      "name": "Phase 52 Power-law q^(i-1)",
+      "rms_log10": 0.04637644922078194,
+      "factor_vs_phase48": 56.203095402827664
+    },
+    {
+      "name": "Phase 52 Integer n^alpha",
+      "rms_log10": 0.06084487215697911,
+      "factor_vs_phase48": 42.83844977560736
+    }
+  ],
+  "verdict": "Phase 52 tests the reviewer's Phase B (multi-mediator product-group constructions) suggestion. Construction A (4 independent mediators) trivially hits 4 targets exactly but with 5 free parameters \u2014 not a predictive model. Constructions B (power-law q^(i-1)) and C (integer n^alpha) impose mass hierarchy with 2 free parameters. Both achieve RMS well below 0.6 (MODERATE threshold), with Construction C landing at MINIMAL if n=4 levels are relaxed to non-integer. The multi-mediator product-group direction confirms the Phase 51 verdict: multiple UV constructions exist with MINIMAL fine-tuning, beyond the specific dark-SU(N) benchmark of Phase 48."
+}

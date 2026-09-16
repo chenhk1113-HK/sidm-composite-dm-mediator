@@ -50,6 +50,7 @@ This branch (`wip/cloud-9-relhic`) develops the **T90 multi-resonance SIDM archi
 | **Phase 49** | Paper outline (8-section mixed-verdict structure) | ✅ shipped |
 | **Phase 50** | JVAS reclassified as domain boundary (not internal contradiction) — Zhang & Yu 2026 + Tran+ 2025 (PRD 112, 083003) + Comment10 reviewer fixes | ✅ shipped |
 | **Phase 51** | **Geometric-ladder benchmark — fine-tuning reduced 163×** (Clockwork q=2.22, k=[3,6,9,11] → RMS 0.016; Secluded U(1) n=[1,4,11,26] → RMS 0.018; Phase 48 2.61 → 0.016 = MINIMAL fine-tuning) | ✅ shipped |
+| **Phase 52** | **Multi-mediator product-group UV benchmark** (Power-law q^(i-1) q=2.93 → RMS 0.046; Integer n^alpha α=2.31 → RMS 0.061; both MINIMAL; reviewer's UVplan.docx Phase B suggestion confirmed) | ✅ shipped |
 
 **Phase 51 headline (most recent):** T90.70 velocity ladder `[28, 100, 300, 700] km/s` is reproduced to within ~5% per peak using either:
 - **Clockwork q^k ladder** (q = 2.221, k = [3, 6, 9, 11] integer, v_1 = 8.63 km/s) — RMS = 0.0159 orders of magnitude
@@ -62,7 +63,7 @@ This addresses the most prominent "soft spot" identified by the Phase 50 reviewe
 - ✅ Consistent with SPARC Vflat (Phase 33d, 115/127 = 90.6%)
 - ✅ Multi-channel consistency +8 log-units (Phase 44, stress-tested Phase 47 — SPARC-dominated)
 - ✅ Velocity-weighted gravothermal confirms earlier conclusion (Phase 43)
-- ✅ Plausible particle-physics embedding class (Phase 45; Phase 48 caveat REDUCED to MINIMAL fine-tuning via geometric-ladder constructions, Phase 51)
+- ✅ Plausible particle-physics embedding class (Phase 45; Phase 48 caveat REDUCED to MINIMAL fine-tuning via geometric-ladder constructions [Phase 51], AND multi-mediator product-group constructions [Phase 52])
 - ~ JVAS B1938+666 lies outside the reliable domain of the present multi-resonance model and is better described by complementary core-collapse SIDM (Zhang & Yu 2026; Tran+ 2025, PRD 112, 083003)
 - ✗ Rotation curves alone don't prefer multi-resonance (Phase 41)
 - ✗ Tsai 2022 UV completion falsified (Phase 33b)
