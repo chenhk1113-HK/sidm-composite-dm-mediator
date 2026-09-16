@@ -74,3 +74,33 @@ Interpretation:
 - **arXiv:2506.L19 (Jiang et al. 2026 ApJL 996 L19)**: SIDM core collapse → LRD seed mechanism
 - **AGENTS.md rule 12**: catch and flag (per this doc — Channel 13 overfit is a real signal, not noise)
 - **AGENTS.md rule 23**: watch for silent computational failure (this doc is the formal capture of the Ch13 overfit signal)
+
+---
+
+## Update: DF44 (Buzzo+ 2026) — consistency with v ≈ 28 km/s Cloud-9 peak [Phase 51+]
+
+**arXiv:2607.26152v2** (Buzzo, van Dokkum, Abraham, Danieli, Romanowsky 2026, accepted ApJ Letters). The paper reports new ultra-deep HST WFC3/UVIS F350LP imaging of the "failed galaxy" Dragonfly-44 (DF44):
+
+| Quantity | Value |
+|---|---|
+| N_GC | 73.1 ± 8.6 (settles earlier factor-of-4 controversy) |
+| Half-number radius R_gc | 1.48^{+0.39}_{-0.51} R_e |
+| Specific frequency S_N | 42.1 ± 4.9 |
+| Inferred log(M_vir/M_⊙) | 11.5 ± 0.3 (via GC–halo mass relation) |
+| Profile | Consistent with cored halo mass from stellar kinematics |
+
+**Relevance to this project (low priority but citable):**
+
+- **DF44 is not in our channels.** Our UDG scope is NGC 1052-DF2/DF4/DF9 (Channel 11, DM-free UDGs) and LSB-6 (Channel 13, DM-dominated UDGs). DF44 is a *separate* UDG class (massive + cored + GC-rich, in tension with the DM-free NGC 1052 family). Building a DF44 channel is a separate subproject and not recommended at this stage.
+
+- **DF44 IS consistent with the v ≈ 28 km/s Cloud-9 peak.** The inferred cored profile at log M_vir = 11.5 indicates core-formation physics (not core-collapse) at DF44's velocity scale (~15–30 km/s). Our multi-resonance architecture predicts σ/m ≈ 100 cm²/g at v ≈ 28 km/s (Phase 44 / Cloud-9 channel), which is precisely the regime where DF44's cored profile indicates core-formation rather than collapse. **No tension with our architecture.**
+
+- **Practical use:** cite as the modern DF44 census in any synthesis paper that touches UDGs. Do not add a DF44-specific channel; the marginal information value over our existing NGC 1052 + LSB-6 channels is low.
+
+- **Reviewer verdict** (halo2.docx): "Moderately useful — relevant to the UDG / failed-galaxy side of your project, but not to the multi-resonance SIDM core physics." **Confirmed accurate.**
+
+**Refs for this update:**
+- arXiv:2607.26152v2 (Buzzo+ 2026, accepted ApJ Letters)
+- reviewer doc: halo2.docx (uploaded 2026-09-16)
+- our v ≈ 28 km/s peak: `v0.3-prelim/data/results/phase44_joint_fit.json`, `phase47_stress_test.json`
+- our UDG channels: `code/channels_extended.py` (Channel 11), `code/amuse_bullet_dwarf.py`, `code/ch27_ngc1052_trail_channel.py`
