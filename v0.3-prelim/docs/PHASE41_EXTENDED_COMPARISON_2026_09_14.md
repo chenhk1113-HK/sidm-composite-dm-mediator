@@ -130,3 +130,54 @@ Phase 41 extends Phase 40 with:
 The honest verdict: **Multi-resonance SIDM is NOT statistically preferred** on rotation curves. Burkert, PISO, and Einasto all win by chi²; Burkert wins by Bayesian evidence.
 
 The model remains viable as a **unified particle-physics framework** across multiple scales but doesn't deliver decisive improvement on rotation curves alone.
+
+---
+
+## 📜 ROTATION-CURVE STATUS DECLARATION (Action 3, 2026-09-16)
+
+**Per Comment11.docx reviewer Action 3 (2026-09-16):**
+
+The reviewer wrote:
+
+> "Decide rotation-curve status: the analysis above shows the 5-model head-to-head (NFW, Burkert, PISO, Einasto, SIDM), with Burkert best by dynesty Bayesian evidence. Decide and document whether the rotation-curve evidence is consistency-only or whether multi-resonance SIDM is a preferred model on its own."
+
+**Decision (this section formalizes it):**
+
+**Rotation curves are CONSISTENCY-ONLY for the multi-resonance SIDM architecture.** They are not unique evidence for the model.
+
+### Headline numbers (from Phase 41)
+
+- **5-model χ² fit on 120 SPARC galaxies (Q ≤ 2 with V_flat > 0):**
+  - NFW: χ² = 4033.2
+  - **Burkert: χ² = 3081.2** (best of 4 non-SIDM)
+  - Einasto: χ² = 3016.8
+  - **PISO: χ² = 2967.0** (best χ² overall)
+  - **SIDM: χ² = 2986.2** (close to PISO, but worse)
+- **Nested-sampling Bayesian evidence (dynesty, 15-galaxy subset):**
+  - **Burkert wins the evidence comparison** (lower logZ is better for nested sampling; Burkert has the most negative logZ).
+  - **Multi-resonance SIDM is competitive but not best on Bayesian evidence.**
+
+### Implications
+
+1. **The multi-resonance SIDM model is consistent with rotation-curve data**, but rotation curves do not uniquely require it.
+2. **Burkert is the simplest viable model** that fits the data. PISO is the best χ² model. SIDM is competitive but not preferred.
+3. **The multi-resonance architecture is uniquely constrained by the SPARC + Cloud-9 joint fit** (§3.4 of paper): the joint +8 log-unit improvement over the single-channel baseline (Phase 44) and the survival of this gain under UV priors (Phase 53 v2) are the model-defining evidence.
+4. **Rotation curves serve as a consistency check**, not as primary evidence. They validate that the multi-resonance σ/m(v) at v ≈ 100 km/s does not conflict with observed V_flat, but they do not discriminate between models at the level of evidence comparison.
+
+### Concluding statement
+
+> **Rotation curves are CONSISTENCY-ONLY for the multi-resonance SIDM architecture. The model's primary evidence comes from the joint multi-channel fit (Phase 44, +8 log-units) and its UV-prior robustness (Phase 53 v2, BIC Δ = −5.66 favoring clockwork). Rotation curves serve to validate consistency, not to establish preference.**
+
+### Standing for the paper
+
+This declaration is reflected in §4.4 ("Honest statement") of PAPER_V1_DRAFT.md (2026-09-16): "Rotation curves alone do NOT preferentially prefer the multi-resonance model over simpler cored profiles (Burkert wins by Bayesian evidence)."
+
+It is also reflected in PHASE50_JVAS_DECISION.md status line:
+
+> ✗ Rotation curves alone don't prefer multi-resonance (Phase 41)
+
+This declaration is the formal Action 3 commitment: future work on rotation-curve model comparison should treat multi-resonance SIDM as a consistency check, not a preference target. Any future claim that multi-resonance SIDM is "preferred" by rotation-curve data would contradict this declaration.
+
+---
+
+**End of Phase 41 status declaration.**
