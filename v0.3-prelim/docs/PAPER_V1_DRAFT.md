@@ -2,14 +2,14 @@
 
 **Authors:** SIDM Composite DM-Mediator Collaboration
 **Branch:** `wip/cloud-9-relhic` (commit `10d29f7`, 2026-09-16)
-**Status:** Paper draft (v1.0) incorporating Phases 32–53
+**Status:** Paper draft (v1.1) incorporating Phases 32–54 (Paper1.docx reviewer feedback addressed: JVAS wording, baseline precision, v₂ role, Cloud-9 citation, Burkert-on-joint comparison)
 **Recommended venue:** PRD, JCAP, or JHEP (mixed-verdict focus appropriate for all three)
 
 ---
 
 ## Abstract
 
-We present a velocity-dependent self-interacting dark matter (SIDM) framework in which the momentum-transfer cross-section σ/m(v) is parameterized as a sum of four Breit-Wigner resonances on a velocity-dependent background. The model is tested against three observational channels: rotation-curve consistency with the SPARC sample (115/127 galaxies), the σ/m ≈ 100 cm²/g requirement at v ≈ 28 km/s from Cloud-9 ultra-diffuse galaxies, and the σ/m ≈ 100 cm²/g requirement at v ≈ 15 km/s from the JVAS B1938+666 strong-lensing perturber. **The free-parameterized fit improves over a single-channel T90.70 baseline by +8.10 log-units** (Phase 44). When the four resonance velocities are constrained to follow the clockwork q^k mass hierarchy from the MINIMAL fine-tuning UV completion of Phase 51 (RMS = 0.0159), the fit still improves over baseline by **+7.93 log-units** (Δ = −0.16 vs the free fit, BIC Δ = −5.66 favoring the clockwork prior). Five UV constructions now achieve MINIMAL fine-tuning: clockwork q^k, Secluded U(1) n², power-law q^(i−1), integer n^α, and free mass ratios. **Rotation curves alone do not preferentially prefer the multi-resonance model over simpler cored profiles** (Burkert wins the Bayesian evidence comparison); the multi-resonance architecture is constrained by and consistent with the SPARC + Cloud-9 joint constraint, but is not uniquely required by rotation-curve data alone. **The JVAS B1938+666 lensing constraint lies outside the reliable domain of the present multi-resonance model** and is better described by complementary core-collapse SIDM mechanisms (Zhang & Yu 2026).
+We present a velocity-dependent self-interacting dark matter (SIDM) framework in which the momentum-transfer cross-section σ/m(v) is parameterized as a sum of four Breit-Wigner resonances on a velocity-dependent background. The model is tested against three observational channels: rotation-curve consistency with the SPARC sample (115/127 galaxies), the σ/m ≈ 100 cm²/g requirement at v ≈ 28 km/s from Cloud-9 ultra-diffuse galaxies (an internal target derived from Cloud-9's published σ/m ≳ 50 cm²/g floor; see §3.2), and a dense strong-lensing perturber in the JVAS B1938+666 system that has been interpreted as requiring high σ/m at low velocity — a constraint we reclassify as lying outside the reliable domain of the present multi-resonance model and better described by complementary core-collapse SIDM (Zhang & Yu 2026; see §7). **The free-parameterized fit improves over a single-channel T90.70 baseline by +8.10 log-units** (Phase 44). When the four resonance velocities are constrained to follow the clockwork q^k mass hierarchy from the MINIMAL fine-tuning UV completion of Phase 51 (RMS = 0.0159), the fit still improves over baseline by **+7.93 log-units** (Δ = −0.16 vs the free fit, BIC Δ = −5.66 favoring the clockwork prior). Five UV constructions now achieve MINIMAL fine-tuning: clockwork q^k, Secluded U(1) n², power-law q^(i−1), integer n^α, and free mass ratios. **Rotation curves alone do not preferentially prefer the multi-resonance model over simpler cored profiles** (Burkert wins the Bayesian evidence comparison); the multi-resonance architecture is constrained by and consistent with the SPARC + Cloud-9 joint constraint, but is not uniquely required by rotation-curve data alone. **The JVAS B1938+666 lensing constraint lies outside the reliable domain of the present multi-resonance model** and is better described by complementary core-collapse SIDM mechanisms (Zhang & Yu 2026).
 
 ---
 
@@ -37,21 +37,28 @@ In this work, we develop a **multi-resonance SIDM architecture** in which σ/m(v
 
 The momentum-transfer cross-section per unit mass is parameterized as:
 
-  σ/m(v) = σ₀(v) + Σᵢ σₚₑₐₖ,ᵢ / (1 + (v² − vᵢ²)² / (Γᵢ · vᵢ)²)
+  σ/m(v) = σ₀(v) + Σᵢ σ_peak,ᵢ × BW(v; v_target,ᵢ, Γᵢ)
 
-where σ₀(v) = σ₀ · (v₀/v)^α is the velocity-dependent background (Yukawa-type suppression, Feng+ 2009 [5]), and the sum runs over the four Breit-Wigner resonances.
+where the Breit-Wigner factor is
+
+  BW(v; v_t, Γ) = (Γ/2)² / [(v² − v_t²)² + (Γ · v_t / 2)²]
+
+and σ₀(v) = σ₀ · (1 km/s / v)^α is the velocity-dependent background (Yukawa-type suppression, Feng+ 2009 [5]). The sum runs over the four Breit-Wigner resonances. Each resonance's peak height σ_peak,ᵢ and width Γᵢ are free parameters (see §2.2 for per-resonance values).
 
 **Velocity-dependent background:** The background σ₀(v) = σ₀ · (1 km/s / v)^α with σ₀ ≈ 0.2 cm²/g and α ≈ 0.7 (Feng+ 2009 [5]) provides the dominant cross-section at low velocities. This is the standard Yukawa-SIDM background.
 
-**Breit-Wigner peaks:** Each peak at velocity vᵢ has peak cross-section σₚₑₐₖ,ᵢ ≈ 100 cm²/g, peak width Γᵢ/vᵢ ≈ 0.05–0.10. The peaks are localized in velocity space and contribute σ/m ≈ 100 cm²/g only within a narrow window around vᵢ.
+**Breit-Wigner peaks:** Each peak at velocity vᵢ has its own peak cross-section σ_peak,ᵢ (different per resonance, see §2.2) and width Γᵢ/vᵢ ≈ 0.05–0.10. The peaks are localized in velocity space and contribute σ/m ≈ σ_peak,ᵢ only within a narrow window around vᵢ.
 
 ### 2.2 Four resonance positions
 
-The four resonance positions are v₁ = 28 km/s, v₂ = 100 km/s, v₃ = 300 km/s, v₄ = 700 km/s. These are chosen to satisfy:
-- v₁ = 28 km/s: matches the Cloud-9 σ/m(28) ≈ 100 cm²/g requirement from UDG kinematics (Phase 32).
-- v₂ = 100 km/s: matches the SPARC σ/m(100) ≈ 0.07 cm²/g requirement from rotation-curve inner-core consistency (Phase 33d).
-- v₃ = 300 km/s: provides suppression at cluster scales (σ/m(1000) ≪ 1 cm²/g).
-- v₄ = 700 km/s: provides additional suppression at the highest velocities probed by galaxy-cluster lensing.
+The four resonance positions are v₁ = 28 km/s, v₂ = 100 km/s, v₃ = 300 km/s, v₄ = 700 km/s. Each resonance has a *different peak height* (σ_peak,ᵢ) chosen to satisfy the corresponding observational target:
+
+- v₁ = 28 km/s: σ_peak ≈ 100 cm²/g (Cloud-9 requirement from UDG kinematics; Phase 32). This is a *true* high-amplitude peak.
+- v₂ = 100 km/s: σ_peak ≈ 0.07 cm²/g (SPARC requirement from rotation-curve inner-core consistency; Phase 33d). This is a *low-amplitude* feature, not a high-amplitude peak. It represents the velocity scale at which σ/m transitions from high (dwarf regime) to low (cluster regime); the rotation-curve data are consistent with σ/m(100) ≈ 0.07 because that is the value the multi-resonance architecture predicts at this transition velocity. We retain the label "peak" for consistency with the s-channel Breit-Wigner formalism, but readers should be aware that v₂ is structurally a low-amplitude suppression feature, not an enhancement.
+- v₃ = 300 km/s: σ_peak ≈ 0.1 cm²/g (subhalo/stream requirement; not a strong constraint).
+- v₄ = 700 km/s: σ_peak ≈ 0.01 cm²/g (cluster-scale suppression; essentially CDM-like at v ≈ 1000 km/s).
+
+The key insight is that the multi-resonance architecture generates a σ/m(v) shape that is high at v ≈ 28 km/s (Cloud-9), falls off at v ≈ 100 km/s to a value compatible with SPARC rotation-curve inner cores (σ/m ≈ 0.07), and remains low at higher velocities (cluster/strong-lensing scales). This monotonic falloff is what the four-position parameterization achieves, regardless of whether the v₂–v₄ features are called "peaks" or "suppression features."
 
 ### 2.3 Physical motivation
 
@@ -71,29 +78,31 @@ The closest existing work is **Yang & Yu 2023** [11] (single-breathing-mode medi
 
 **Constraint:** σ/m at v ≈ 100 km/s should be ≈ 0.07 cm²/g for the rotation curves to be consistent with the observed V_flat in the inner core. Phase 33d tested all 127 SPARC galaxies; **115/127 = 90.6% pass the V_flat test** with the multi-resonance σ/m(v) architecture. This is consistent with, but not better than, single-Yukawa SIDM.
 
-**Result:** ✅ Multi-resonance architecture is consistent with SPARC.
+**Result:** Multi-resonance architecture is consistent with SPARC.
 
 ### 3.2 Cloud-9 ultra-diffuse galaxies
 
-**Data:** Cloud-9 UDGs (Sifón+ 2025 [15]) with central velocity dispersions requiring σ/m(28) ≈ 100 cm²/g.
+**Data:** Cloud-9 UDGs (Sifón+ 2025 [15]) with central velocity dispersions requiring high σ/m at v ≈ 28 km/s. The published Cloud-9 paper concludes σ/m ≳ 50 cm²/g; the σ/m(28) ≈ 100 cm²/g value we adopt as a working target is an internal derivation (consistent with the published floor and chosen to provide a concrete quantitative anchor for the multi-resonance fit).
 
-**Constraint:** At v ≈ 28 km/s, the cross-section must be high enough to flatten the central density via self-interactions within a Hubble time.
+**Constraint:** At v ≈ 28 km/s, σ/m should be high (≳ 50 cm²/g published; we use ≈ 100 cm²/g as the internal target).
 
 **Result:** ✅ Multi-resonance architecture satisfies this via the v₁ = 28 km/s Breit-Wigner peak.
 
 ### 3.3 JVAS B1938+666 strong-lensing perturber
 
-**Data:** Vegetti et al. 2010 [16] observed a small-density perturbation in the JVAS B1938+666 strong-lensing system, requiring σ/m(15) ≈ 100 cm²/g.
+**Data:** Vegetti et al. 2010 [16] observed a small-density perturbation in the JVAS B1938+666 strong-lensing system that has been *interpreted* (in subsequent lensing-modelling literature) as requiring σ/m(15) ≈ 100 cm²/g. Note: this constraint is a derived interpretation of the lensing-perturbation signal rather than a direct cross-section measurement, and it carries substantial modelling uncertainty.
 
-**Constraint:** At v ≈ 15 km/s, σ/m must be ≈ 100 cm²/g.
+**Constraint (as commonly stated):** σ/m ≈ 100 cm²/g at v ≈ 15 km/s.
 
-**Result:** ⚠ Tension with the multi-resonance architecture (see §7).
+**Result:** ⚠ Tension with the multi-resonance architecture (see §7 for the domain-limitation reclassification).
 
 ### 3.4 Joint fit
 
 We performed a joint fit of all three channel likelihoods using the **dynesty** nested-sampling algorithm. The free parameters are: m_χ (DM mass), σ₀ (background normalization), α (background slope), v_targets[4] (4 free resonance positions), σ_peaks[4] (4 free peak heights), width_fracs[4] (4 free peak widths). Total: **15 free parameters**.
 
-**Result:** **+8.10 log-units** improvement over a single-channel baseline (Phase 44). The stress test (Phase 47) reveals that SPARC dominates the fit; JVAS and Cloud-9 are variance-absorbing channels (their LOO contribution to the joint log-likelihood is small).
+**Baseline definition (T90.70):** the same 15-parameter multi-resonance parameterization with **v_targets fixed at the canonical T90.70 values [28, 100, 300, 700] km/s** (i.e., a T90.70 pre-fit snapshot where the resonance positions have not yet been adjusted to match the multi-channel likelihoods). All other parameters (background σ₀, α, peak heights, widths) are held at their T90.70 priors. The "+8.10 log-units" improvement reflects the optimizer adjusting the v_targets (and other free parameters) to fit the SPARC + Cloud-9 + JVAS likelihoods simultaneously. The BIC correction is provided in §6 (Phase 53 v2) — with the clockwork UV prior replacing the 4 free v_targets with 2 clockwork parameters (log_v₁, q), the 5-parameter model is strongly preferred over the 15-parameter free fit (BIC Δ = −5.66), indicating that most of the free-parameter advantage is not essential to the multi-channel fit.
+
+**Result:** **+8.10 log-units** improvement over the T90.70 baseline (Phase 44). The stress test (Phase 47) reveals that SPARC dominates the fit; JVAS and Cloud-9 are variance-absorbing channels (their LOO contribution to the joint log-likelihood is small).
 
 ### 3.5 Stress-test analysis
 
@@ -129,6 +138,24 @@ The gravothermal evolution of SIDM halos (Phase 41D, Phase 43) was computed usin
 ### 4.4 Honest statement
 
 **Rotation curves alone do NOT preferentially prefer the multi-resonance model over simpler cored profiles (Burkert wins by Bayesian evidence).** The multi-resonance architecture is **consistent with** rotation-curve data but is not uniquely required by it.
+
+### 4.5 Joint-channel comparison with constant σ/m (Phase 54)
+
+To address the question "does the multi-resonance architecture still win on the joint SPARC + Cloud-9 likelihood?" we performed a direct comparison (Phase 54, see `docs/PHASE54_JOINT_COMPARISON.md`) between the multi-resonance model and a **constant σ/m** baseline (1 free parameter, the simplest possible velocity-independent cross-section).
+
+| Model | log L (3-channel) | log L (2-channel) | # free params |
+|---|---|---|---|
+| Constant σ/m | −17.66 | −7.79 | 1 |
+| **Multi-resonance (15 params)** | **−11.58** | **−2.24** | 15 |
+| Δ log L (raw likelihood) | **+6.08** | **+5.55** | — |
+
+**Raw likelihood:** the multi-resonance model wins by +6 log-units on joint channels. This is a genuine fit improvement — the multi-velocity resonance structure captures features that a single σ_const cannot.
+
+**BIC-corrected evidence:** the constant σ/m model is preferred by +3.22 BIC units (lower BIC = better, accounting for the 14-parameter advantage of the simpler model). This is a **mixed result**: the multi-resonance architecture is a better fit at the cost of substantially more parameters.
+
+**Per-channel:** the constant σ/m model matches SPARC perfectly (σ_const ≈ 0.07 cm²/g) but fails the Cloud-9 UDG requirement by ~99.93 cm²/g and the JVAS by ~99.93 cm²/g. The multi-resonance architecture uniquely matches both Cloud-9 (σ/m(28) ≈ 100) and SPARC (σ/m(100) ≈ 0.07) within the same parameterization, while leaving JVAS outside its reliable domain (Phase 50).
+
+**Honest framing:** the "+8.10 log-units" headline from Phase 44 refers to improvement over the T90.70 baseline, not over a simpler alternative. The multi-resonance architecture provides a better raw-likelihood fit on joint channels at the cost of substantially more parameters; both models have merit depending on whether raw likelihood or BIC-penalized evidence is the criterion. The architecture's strongest claim is that it **uniquely satisfies the Cloud-9 + SPARC joint constraint** that no single-parameter alternative can.
 
 ---
 
@@ -311,39 +338,35 @@ This work is the result of the SIDM Composite DM-Mediator project on branch `wip
 [20] J. Einasto, Trudy Astrofiz. Inst. Alma-Ata 5, 87 (1965).
 [21] Y. Tsai, Phys. Rev. D 105, 055008 (2022).
 [22] M. Pospelov, A. Ritz, M. Voloshin, Phys. Lett. B 662, 53 (2008).
-[23] H. Zhang, H.-B. Yu, JCAP 2026 (in press); arXiv:2606.00000 (placeholder).
+[23] H.-B. Yu, "Core-Collapsed SIDM Halos as the Common Origin of Dense Perturbers in Lenses, Streams, and Satellites," Phys. Rev. Lett. (2026); see UCR press release 2026-04-13.
 [24] V. A, Tran et al., Phys. Rev. D 112, 083003 (2025).
 [25] J. S. Buzzo et al., Astrophys. J. Lett. (in press, 2026); arXiv:2607.26152.
 
 ---
 
-## Appendix A: Phase Summary
+## Appendix A: Phase summary (highlights only)
 
-| Phase | Description | Verdict |
+Full phase-by-phase documentation is available in `v0.3-prelim/docs/` and the project README.
+
+| Phase | Headline | Verdict |
 |---|---|---|
-| 32 | Multi-scale SIDM test (internal consistency) | ✓ Shipped |
-| 33b | Tsai 2022 UV completion | ✗ Falsified |
+| 32 | Internal multi-scale SIDM test | ✓ Passed |
 | 33d | SPARC Vflat test | ✓ 115/127 (90.6%) |
-| 34a | JVAS B1938+666 lensing perturber | ~ Domain boundary |
-| 41 | Head-to-head profile comparison | Burkert wins Bayesian evidence |
-| 43 | Velocity-weighted gravothermal | ✓ Shipped |
-| 44 | Joint multi-channel fit | +8.10 log-units |
-| 45 | 6-candidate UV survey | Hidden valley / composite best |
+| 41 | Head-to-head profile comparison | Burkert wins rotation-curve evidence |
+| 44 | Joint multi-channel fit | +8.10 log-units (15-param free fit) |
 | 47 | LOO stress test | SPARC-dominated |
-| 48 | Hidden-valley UV benchmark | 2.61 orders (superseded by 51–52) |
-| 49 | Paper outline | ✓ Shipped |
-| 50 | JVAS domain reclassification | ✓ Shipped |
-| 51 | Geometric-ladder UV | MINIMAL (163× reduction) |
-| 52 | Multi-mediator product-group | MINIMAL (43–56× reduction) |
-| 53 v2 | UV-prior joint fit | +7.93 log-units, BIC Δ = −5.66 |
+| 50 | JVAS domain reclassification | Out of reliable model domain |
+| 51 | Geometric-ladder UV | MINIMAL (163× fine-tuning reduction) |
+| 52 | Multi-mediator product-group UV | MINIMAL (43–56× reduction) |
+| 53 v2 | UV-prior joint fit | +7.93 log-units, BIC Δ = −5.66 favoring clockwork |
+| 54 | Joint-channel vs constant σ/m | Multi-resonance wins raw log L (+6.08); loses BIC (+3.22) |
 
 ---
 
-## Appendix B: Standing Repository State
+## Appendix B: Standing repository state
 
 - Branch: `wip/cloud-9-relhic`
-- HEAD: `10d29f7` (2026-09-16)
-- Phases shipped: 32–53 (continuous line)
+- HEAD: at time of writing — see `git log` (continuously updated)
 - Code: `v0.3-prelim/code/`
 - Results: `v0.3-prelim/data/results/`
 - Documentation: `v0.3-prelim/docs/`
@@ -351,4 +374,4 @@ This work is the result of the SIDM Composite DM-Mediator project on branch `wip
 
 ---
 
-**END OF PAPER DRAFT v1.0**
+**END OF PAPER DRAFT v1.1**
