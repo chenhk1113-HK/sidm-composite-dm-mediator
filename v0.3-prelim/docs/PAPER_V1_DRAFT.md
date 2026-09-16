@@ -2,7 +2,7 @@
 
 **Authors:** SIDM Composite DM-Mediator Collaboration
 **Branch:** `wip/cloud-9-relhic` (commit `10d29f7`, 2026-09-16)
-**Status:** Paper draft (v1.1) incorporating Phases 32–54 (Paper1.docx reviewer feedback addressed: JVAS wording, baseline precision, v₂ role, Cloud-9 citation, Burkert-on-joint comparison)
+**Status:** Paper draft (v1.1, INTERNAL REFERENCE) incorporating Phases 32–54 (Paper1.docx reviewer feedback addressed: JVAS wording, baseline precision, v₂ role, Cloud-9 citation, Burkert-on-joint comparison). **Not intended for submission** in current form — pending additional analysis and author-list decision.
 **Recommended venue:** PRD, JCAP, or JHEP (mixed-verdict focus appropriate for all three)
 
 ---
