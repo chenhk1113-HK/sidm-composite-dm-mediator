@@ -6,7 +6,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/version-0.4--prelim%2BT75-blue)](VERSION)
-[![Tests](https://img.shields.io/badge/tests-549%20pass%2C%208%20skip-green)](v0.3-prelim/tests/)
+[![Tests](https://img.shields.io/badge/tests-branch--dependent-blue)](v0.3-prelim/tests/)
 [![arXiv:2506.22997](https://img.shields.io/badge/cross--validated-arXiv%3A2506.22997-b31b1b)](https://arxiv.org/abs/2506.22997)
 
 ---
@@ -29,6 +29,48 @@ Recent rounds within this standing version: **+T80** (LZ paper compatibility), *
 | **KIV cron** | **2026-11-01 09:00** | re-checks LZ paper via `scripts/lz_kiv_check.py` |
 
 > All headline numbers are spot-checked against `v0.3-prelim/data/results/t41_mediator_mass_joint_fit_t88ce_v08_with_euclid_lensing_and_subhalo_forecast_nlive2000.json` and verified by `scripts/t82_audit.py` (43 doc-presence + 1 VERSION-drift checks, all passing).
+
+---
+
+## ⚡ WIP-branch headline — `wip/cloud-9-relhic` (T90 Cloud-9 multi-resonance SIDM)
+
+This branch (`wip/cloud-9-relhic`) develops the **T90 multi-resonance SIDM architecture** — a separate evolution line that tests whether a single SIDM model can simultaneously satisfy 5+1 channels (Cloud-9, Galactic, Bullet, LZ, KSFR + optional LRD via Jiang 2026). Last updated 2026-09-16.
+
+**Latest work in this branch (Phase 41d → 51):**
+
+| Phase | Headline | Status |
+|---|---|---|
+| **Phase 41d** | Self-consistent gravothermal SIDM profile (Yang+ 2023) | ✅ shipped |
+| **Phase 42** | Master rotation-curve verdict + branch README | ✅ shipped |
+| **Phase 43** | Velocity-weighted gravothermal SIDM (Yang+ 2022) | ✅ shipped |
+| **Phase 44** | Multi-channel joint fit (SPARC + JVAS + Cloud-9): **+8 log-units over T90.70 baseline** | ✅ shipped |
+| **Phase 45+46** | Theoretical UV survey + master 3-item verdict | ✅ shipped |
+| **Phase 47** | **Stress-test of the +8 log-unit joint fit** (LOO test, JVAS+Cloud-9 are variance-absorbing; SPARC is the only channel whose removal hurts) | ✅ shipped |
+| **Phase 48** | Concrete hidden-valley benchmark (dark SU(N_c)): **2.61 orders EXTREME fine-tuning** | ✅ shipped |
+| **Phase 49** | Paper outline (8-section mixed-verdict structure) | ✅ shipped |
+| **Phase 50** | JVAS reclassified as domain boundary (not internal contradiction) — Zhang & Yu 2026 + Tran+ 2025 (PRD 112, 083003) + Comment10 reviewer fixes | ✅ shipped |
+| **Phase 51** | **Geometric-ladder benchmark — fine-tuning reduced 163×** (Clockwork q=2.22, k=[3,6,9,11] → RMS 0.016; Secluded U(1) n=[1,4,11,26] → RMS 0.018; Phase 48 2.61 → 0.016 = MINIMAL fine-tuning) | ✅ shipped |
+
+**Phase 51 headline (most recent):** T90.70 velocity ladder `[28, 100, 300, 700] km/s` is reproduced to within ~5% per peak using either:
+- **Clockwork q^k ladder** (q = 2.221, k = [3, 6, 9, 11] integer, v_1 = 8.63 km/s) — RMS = 0.0159 orders of magnitude
+- **Secluded U(1) n² ladder** (v_1 = 26.79 km/s, n = [1, 4, 11, 26]) — RMS = 0.0183 orders of magnitude
+
+This addresses the most prominent "soft spot" identified by the Phase 50 reviewer (Comment10.docx): the 2.6 orders-of-magnitude fine-tuning was specific to the dark-QCD realization, not intrinsic to the T90.70 architecture.
+
+**Multi-resonance SIDM status (Phase 51 verdict):**
+- ✅ Passes internal multi-scale tests (Phase 32)
+- ✅ Consistent with SPARC Vflat (Phase 33d, 115/127 = 90.6%)
+- ✅ Multi-channel consistency +8 log-units (Phase 44, stress-tested Phase 47 — SPARC-dominated)
+- ✅ Velocity-weighted gravothermal confirms earlier conclusion (Phase 43)
+- ✅ Plausible particle-physics embedding class (Phase 45; Phase 48 caveat REDUCED to MINIMAL fine-tuning via geometric-ladder constructions, Phase 51)
+- ~ JVAS B1938+666 lies outside the reliable domain of the present multi-resonance model and is better described by complementary core-collapse SIDM (Zhang & Yu 2026; Tran+ 2025, PRD 112, 083003)
+- ✗ Rotation curves alone don't prefer multi-resonance (Phase 41)
+- ✗ Tsai 2022 UV completion falsified (Phase 33b)
+
+**Master reference:** [`v0.3-prelim/docs/PHASE51_PORTAL_RESONANCE_UV.md`](v0.3-prelim/docs/PHASE51_PORTAL_RESONANCE_UV.md) (Phase 51 write-up)
+**Reviewer feedback captured:** Comment10.docx (Phase 50 fixes), halo2.docx (DF44 consistency check)
+
+**This branch is NOT promoted to master yet** — it stays on `wip/cloud-9-relhic` while the T90 program completes its remaining rounds. The master standing version (`v0.4-prelim+T88E`) reflects the Tier-1 milestone work as of 2026-09-02.
 
 ---
 
