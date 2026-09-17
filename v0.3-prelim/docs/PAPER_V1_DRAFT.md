@@ -2,7 +2,7 @@
 
 **Authors:** SIDM Composite DM-Mediator Collaboration
 **Branch:** `wip/cloud-9-relhic` (commit `10d29f7`, 2026-09-16)
-**Status:** Paper draft (v1.2, INTERNAL REFERENCE) incorporating Phases 32–54. v1.2 fixes Cloud-9 citations: the σ/m ≳ 50 cm²/g floor comes from Benítez-Llambay+ 2024 (ApJ 973, 61) [15b], not the previously cited Sifón+ 2025; the HI mass M_HI ≈ 1.4×10⁶ M☉ is from Zhou+ 2023 (ApJ 952, 130) [15a]; and stellar-mass upper limits now cite both Anand+ 2025 (ApJL 993, L55; HST) [15c] and Trujillo+ 2026 (RNAAS; GTC/HiPERCAM) [15d]. Earlier Paper1.docx reviewer feedback (JVAS wording, baseline precision, v₂ role, Burkert-on-joint comparison) is also addressed. **Not intended for submission** in current form — pending additional analysis and author-list decision.
+**Status:** Paper draft (v1.3, INTERNAL REFERENCE) incorporating Phases 32–54. v1.3 fixes ref [25] (Buzzo+ 2026 DF44 paper): now includes full title, complete author list (M. L. Buzzo, P. van Dokkum, R. Abraham, S. Danieli, A. J. Romanowsky), and explicit arXiv:2607.26152 identifier. v1.2 fixed Cloud-9 citations: σ/m ≳ 50 cm²/g floor from Benítez-Llambay+ 2024 (ApJ 973, 61) [15b], M_HI ≈ 1.4×10⁶ M☉ from Zhou+ 2023 (ApJ 952, 130) [15a], M⋆ upper limits from Anand+ 2025 (ApJL 993, L55; HST) [15c] and Trujillo+ 2026 (RNAAS; GTC/HiPERCAM) [15d]. Earlier Paper1.docx reviewer feedback (JVAS wording, baseline precision, v₂ role, Burkert-on-joint comparison) is also addressed. **Not intended for submission** in current form — pending additional analysis and author-list decision.
 **Recommended venue:** PRD, JCAP, or JHEP (mixed-verdict focus appropriate for all three)
 
 ---
@@ -343,7 +343,7 @@ This work is the result of the SIDM Composite DM-Mediator project on branch `wip
 [22] M. Pospelov, A. Ritz, M. Voloshin, Phys. Lett. B 662, 53 (2008).
 [23] H.-B. Yu, "Core-Collapsed SIDM Halos as the Common Origin of Dense Perturbers in Lenses, Streams, and Satellites," Phys. Rev. Lett. (2026); see UCR press release 2026-04-13.
 [24] V. A, Tran et al., Phys. Rev. D 112, 083003 (2025).
-[25] J. S. Buzzo et al., Astrophys. J. Lett. (in press, 2026); arXiv:2607.26152.
+[25] M. L. Buzzo, P. van Dokkum, R. Abraham, S. Danieli, A. J. Romanowsky, "The extended globular cluster system of the archetypal 'failed galaxy' Dragonfly-44 from deep white-light HST imaging," Astrophys. J. Lett. (in press, 2026); arXiv:2607.26152.
 
 ---
 
