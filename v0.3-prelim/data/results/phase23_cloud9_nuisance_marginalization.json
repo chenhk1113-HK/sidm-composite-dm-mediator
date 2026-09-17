@@ -24,8 +24,9 @@
   "nuisance_priors": {
     "M200": {
       "type": "log-normal",
-      "mean": 4700000000.0,
-      "sigma_dex": 0.3
+      "mean": 5000000000.0,
+      "sigma_dex": 0.3,
+      "provenance": "Benitez-Llambay, Dutta, Fumagalli & Navarro 2024 (ApJ 973, 61): hydrostatic-equilibrium analysis of Cloud-9 HI gas yields M_halo = 5e9 M_sun. Updated 2026-09-16 from prior internal estimate of 4.7e9 M_sun."
     },
     "c200": {
       "type": "half-gaussian",
