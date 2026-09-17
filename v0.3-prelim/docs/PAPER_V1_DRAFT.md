@@ -2,7 +2,7 @@
 
 **Authors:** SIDM Composite DM-Mediator Collaboration
 **Branch:** `wip/cloud-9-relhic` (commit `10d29f7`, 2026-09-16)
-**Status:** Paper draft (v1.1, INTERNAL REFERENCE) incorporating Phases 32–54 (Paper1.docx reviewer feedback addressed: JVAS wording, baseline precision, v₂ role, Cloud-9 citation, Burkert-on-joint comparison). **Not intended for submission** in current form — pending additional analysis and author-list decision.
+**Status:** Paper draft (v1.2, INTERNAL REFERENCE) incorporating Phases 32–54. v1.2 fixes Cloud-9 citations: the σ/m ≳ 50 cm²/g floor comes from Benítez-Llambay+ 2024 (ApJ 973, 61) [15b], not the previously cited Sifón+ 2025; the HI mass M_HI ≈ 1.4×10⁶ M☉ is from Zhou+ 2023 (ApJ 952, 130) [15a]; and stellar-mass upper limits now cite both Anand+ 2025 (ApJL 993, L55; HST) [15c] and Trujillo+ 2026 (RNAAS; GTC/HiPERCAM) [15d]. Earlier Paper1.docx reviewer feedback (JVAS wording, baseline precision, v₂ role, Burkert-on-joint comparison) is also addressed. **Not intended for submission** in current form — pending additional analysis and author-list decision.
 **Recommended venue:** PRD, JCAP, or JHEP (mixed-verdict focus appropriate for all three)
 
 ---
@@ -82,7 +82,7 @@ The closest existing work is **Yang & Yu 2023** [11] (single-breathing-mode medi
 
 ### 3.2 Cloud-9 ultra-diffuse galaxies
 
-**Data:** Cloud-9 UDGs (Sifón+ 2025 [15]) with central velocity dispersions requiring high σ/m at v ≈ 28 km/s. The published Cloud-9 paper concludes σ/m ≳ 50 cm²/g; the σ/m(28) ≈ 100 cm²/g value we adopt as a working target is an internal derivation (consistent with the published floor and chosen to provide a concrete quantitative anchor for the multi-resonance fit).
+**Data:** Cloud-9, a Reionization-Limited H I Cloud (RELHIC) candidate near M94, discovered by Zhou+ 2023 [15a] (FAST H I detection, M_HI ≈ 1.4×10⁶ M☉, W50 ≲ 20 km s⁻¹). The hydrostatic-equilibrium analysis of Benítez-Llambay, Dutta, Fumagalli & Navarro 2024 [15b] (ApJ 973, 61) yields a σ/m ≳ 50 cm²/g floor at v ≈ 28 km s⁻¹, with a halo mass M_200 ≈ 5×10⁹ M☉ (consistent with M_crit). Stellar-mass upper limits on any luminous counterpart have been refined by Anand+ 2025 [15c] (HST/ACS star-counts, M⋆ < 10³·⁵ M☉, 99.5% CL) and Trujillo+ 2026 [15d] (GTC/HiPERCAM integrated light, M⋆ < 1.6×10⁴ M☉). The σ/m(28) ≈ 100 cm²/g value we adopt as the multi-resonance working anchor is an internal derivation, consistent with the Benítez-Llambay+ 2024 published floor and chosen to provide a concrete quantitative target.
 
 **Constraint:** At v ≈ 28 km/s, σ/m should be high (≳ 50 cm²/g published; we use ≈ 100 cm²/g as the internal target).
 
@@ -330,7 +330,10 @@ This work is the result of the SIDM Composite DM-Mediator project on branch `wip
 [12] M. S. Turner et al., Phys. Rev. D 104, 013005 (2021).
 [13] H. Yang, H.-B. Yu, Phys. Rev. D 105, 063533 (2022).
 [14] F. Lelli, S. S. McGaugh, J. M. Schombert, Astron. J. 152, 157 (2016).
-[15] C. Sifón et al., Astrophys. J. 974, 100 (2025).
+[15a] R. Zhou, M. Zhu, Y. Yang et al., "FAST Reveals New Evidence for M94 as a Merger," Astrophys. J. 952, 130 (2023); Erratum Astrophys. J. (2024), doi:10.3847/1538-4357/ad22e4.
+[15b] A. Benítez-Llambay, R. Dutta, M. Fumagalli, J. F. Navarro, "Examining the Nature of the Starless Dark Matter Halo Candidate Cloud-9," Astrophys. J. 973, 61 (2024).
+[15c] G. S. Anand, A. Benítez-Llambay, R. Beaton et al., "The First RELHIC? Cloud-9 is a Starless Gas Cloud," Astrophys. J. Lett. 993, L55 (2025).
+[15d] I. Trujillo, I. Ruiz Cejudo, S. Guerra Arencibia, M. Montes, "Ultra-Deep Imaging of the Starless Galaxy Candidate Cloud-9," Res. Notes Am. Astron. Soc. (2026); arXiv:2608.20911.
 [16] S. Vegetti et al., Mon. Not. R. Astron. Soc. 408, 1969 (2010).
 [17] J. F. Navarro, C. S. Frenk, S. D. M. White, Astrophys. J. 490, 493 (1997).
 [18] A. Burkert, Astrophys. J. 447, L25 (1995).
