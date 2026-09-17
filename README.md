@@ -36,7 +36,7 @@ Recent rounds within this standing version: **+T80** (LZ paper compatibility), *
 
 This branch (`wip/cloud-9-relhic`) develops the **T90 multi-resonance SIDM architecture** — a separate evolution line that tests whether a single SIDM model can simultaneously satisfy 5+1 channels (Cloud-9, Galactic, Bullet, LZ, KSFR + optional LRD via Jiang 2026). Last updated 2026-09-16.
 
-**Latest work in this branch (Phase 41d → Paper v1.1):**
+**Latest work in this branch (Phase 41d → Paper v1.3, .md-only drafting):**
 
 | Phase | Headline | Status |
 |---|---|---|
@@ -55,6 +55,8 @@ This branch (`wip/cloud-9-relhic`) develops the **T90 multi-resonance SIDM archi
 | **Action 3 + Action 4** | **Rotation-curve status declaration + Paper v1 draft** (Phase 41 status formalized: rotation curves are CONSISTENCY-ONLY for multi-resonance SIDM, not primary evidence; Burkert wins Bayesian evidence. PAPER_V1_DRAFT.md shipped with all Phases 32–53 incorporated.) | ✅ shipped |
 | **Paper1.docx fixes (v1.1)** | **All 5 major + 5 minor reviewer issues addressed** (JVAS wording inconsistency; baseline precision in §3.4; v₂=100 km/s clarified as suppression feature; Cloud-9 citation transparency; Burkert-on-joint comparison §4.5/Phase 54; formula typesetting; checkbox cleanup; Appendix A trimmed; ref [23] verified). Multi-resonance wins RAW likelihood (+6.08 log-units) but LOSES BIC (+3.22 favoring constant σ/m). Honest mixed result. | ✅ shipped |
 | **Paper v1.2 (citation fix)** | **Cloud-9 references corrected**: Sifón+ 2025 [15] (incorrect) replaced by Zhou+ 2023 [15a] (Cloud-9 discovery, FAST H I, M_HI ≈ 1.4×10⁶ M☉), Benítez-Llambay+ 2024 [15b] (ApJ 973, 61; the actual σ/m ≳ 50 cm²/g source from hydrostatic equilibrium), Anand+ 2025 [15c] (ApJL 993, L55; HST star-counts M⋆ < 10³·⁵ M☉), Trujillo+ 2026 [15d] (RNAAS; GTC/HiPERCAM M⋆ < 1.6×10⁴ M☉). Halo-mass prior mean updated 4.7→5.0×10⁹ M☉ (provenance in `phase23_cloud9_nuisance_marginalization.json`). v1.2 PDF shipped as `PAPER_V1_DRAFT_2026-09-16_v12_INTERNAL-REFERENCE.pdf`. No refit needed: numerical impact of prior mean shift is <1σ. Audit doc: `docs/CLOUD9_LITERATURE_AUDIT_2026_09_16.md`. | ✅ shipped |
+| **Paper v1.3 (ref [25] fix)** | Buzzo+ 2026 DF44 paper (arXiv:2607.26152) ref [25] corrected: full title + complete author list (M. L. Buzzo, P. van Dokkum, R. Abraham, S. Danieli, A. J. Romanowsky). v1.2 had truncated "J. S. Buzzo et al.". No numerical impact — DF44 is out of scope by design (separate UDG class). Already documented in `docs/LRD_UDG_VS_EPSILON_2026_09_16.md`. | ✅ shipped |
+| **Drafting workflow change** | **Markdown is now the source of truth during drafting** (per 2026-09-17 user decision). The ReportLab PDF builder was retired: it had ~50 hardcoded char-replacements for Unicode subscripts/superscripts/⚠/✓/M☉ that all hit Helvetica's missing-glyph wall. v1.4 builder draft (with 50-char replacement table) was abandoned. Three historical PDFs (v1.1, v1.2, v1.3) removed from repo. Future paper build (when needed): `pandoc PAPER_V1_DRAFT.md -o paper.pdf` after one-time MiKTeX + Pandoc install. | ✅ done |
 
 **Phase 51 headline (most recent):** T90.70 velocity ladder `[28, 100, 300, 700] km/s` is reproduced to within ~5% per peak using either:
 - **Clockwork q^k ladder** (q = 2.221, k = [3, 6, 9, 11] integer, v_1 = 8.63 km/s) — RMS = 0.0159 orders of magnitude
