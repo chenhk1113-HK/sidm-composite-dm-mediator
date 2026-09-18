@@ -57,6 +57,15 @@ echo "------------------------------------------------------------"
 }
 
 echo
+echo ">>> Layer D + E (independent + robustness): pytest test_independent_and_robustness.py"
+echo "------------------------------------------------------------"
+"$PYTHON" -m pytest v0.3-prelim/tests/test_independent_and_robustness.py -v --tb=short || {
+    echo
+    echo ">>> Independent + robustness tests FAILED"
+    exit 1
+}
+
+echo
 echo ">>> Layer F: audit_claims.py"
 echo "------------------------------------------------------------"
 "$PYTHON" scripts/audit_claims.py || {
