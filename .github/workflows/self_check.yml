@@ -1,0 +1,52 @@
+name: Self-check
+
+# Per checking plan (docs/CHECKING_PLAN_2026_09_17.md), this runs the
+# paper-claims regression tests + audit on every push and PR to the
+# active branches. Catches silent drift in the headline numbers
+# (Phase 44 +8.10, Phase 53 +7.93, SPARC 115/127, etc.).
+
+on:
+  push:
+    branches:
+      - wip/cloud-9-relhic
+      - master
+  pull_request:
+    branches:
+      - wip/cloud-9-relhic
+      - master
+  # Manual trigger
+  workflow_dispatch:
+
+jobs:
+  self-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install pytest
+        run: pip install pytest
+
+      - name: Run paper-claims tests (Layer A + B)
+        run: |
+          python -m pytest v0.3-prelim/tests/test_paper_claims.py -v --tb=short
+
+      - name: Run audit_claims.py (Layer F)
+        run: |
+          python scripts/audit_claims.py
+
+      - name: Upload audit report on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: self-check-failure-logs
+          path: |
+            v0.3-prelim/tests/
+            scripts/
+          retention-days: 7
