@@ -5,8 +5,8 @@
 **Joint-fit framework for self-interacting dark matter (SIDM), grounded in published multi-channel data (dSph, UFD, Bullet, SPARC, LZ, Fermi, DAMPE, Zhang+2025 LSS).**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.4--prelim%2BT88E%2BT90--v17-blue)](VERSION)
-[![WIP Paper](https://img.shields.io/badge/wip_paper-v1.7-blueviolet)](v0.3-prelim/docs/PAPER_V1_DRAFT.md)
+[![Version](https://img.shields.io/badge/version-0.4--prelim%2BT88E%2BT90--v18-blue)](VERSION)
+[![WIP Paper](https://img.shields.io/badge/wip_paper-v1.8-blueviolet)](v0.3-prelim/docs/PAPER_V1_DRAFT.md)
 [![Tests](https://img.shields.io/badge/tests-branch--dependent-blue)](v0.3-prelim/tests/)
 [![arXiv:2506.22997](https://img.shields.io/badge/cross--validated-arXiv%3A2506.22997-b31b1b)](https://arxiv.org/abs/2506.22997)
 
@@ -17,7 +17,7 @@
 | Track | Version | Status | Headline |
 |---|---|---|---|
 | **Standing (Tier-1, master)** | `v0.4-prelim+T88E` | master @ 2026-09-02 | σ/m₀ = **0.06 cm²/g**, log Z = **−164.87 ± 0.084**, m_χ = **770 GeV**, m_φ = **453 MeV**; 22 channels; 677 tests pass |
-| **WIP (Tier-2, cloud-9-relhic)** | `T90-Paper-v17` | wip/cloud-9-relhic @ `6884947` | Multi-resonance SIDM satisfies Cloud-9 + SPARC + JVAS; self-check **50 tests pass + 9 parametrized skips + 7 audit claims pass**; paper v1.7 INTERNAL REFERENCE |
+| **WIP (Tier-2, cloud-9-relhic)** | `T90-Paper-v18` | wip/cloud-9-relhic @ `04ab4e9` | Multi-resonance SIDM satisfies Cloud-9 + SPARC + JVAS; self-check **50 tests pass + 9 parametrized skips + 7 audit claims pass**; paper v1.8 INTERNAL REFERENCE |
 
 **Standing version: `v0.4-prelim+T88E`** (Tier-1 milestone, 2026-09-02).
 Recent rounds within this standing version: **+T80** (LZ paper compatibility), **+T81** (Channel 19 = XENONnT/PandaX watch), **+T82** (stale-claim audit), **+T83** (KSFR (3,2) promotion to LATTICE), **+T84** (Channel 18 ρ sensitivity sweep), **+T88.A-E** (XRISM/eROSITA/Euclid Q1 series, T88.E first non-silent FORECAST at v0.7→v0.8), **+T89** (Channel 25 = Goldstein & Hill 2026 ΔN_eff documented null + sidmkit/sidm-vdsigmas σ/m benchmark + 4 citation corrections).
@@ -42,7 +42,7 @@ Recent rounds within this standing version: **+T80** (LZ paper compatibility), *
 
 This branch (`wip/cloud-9-relhic`) develops the **T90 multi-resonance SIDM architecture** — a separate evolution line that tests whether a single SIDM model can simultaneously satisfy 5+1 channels (Cloud-9, Galactic, Bullet, LZ, KSFR + optional LRD via Jiang 2026). Last updated 2026-09-17.
 
-**Latest work in this branch (Phase 41d → Paper v1.7, .md-only drafting):**
+**Latest work in this branch (Phase 41d → Paper v1.8, .md-only drafting):**
 
 | Phase | Headline | Status |
 |---|---|---|
@@ -67,6 +67,7 @@ This branch (`wip/cloud-9-relhic`) develops the **T90 multi-resonance SIDM archi
 | **Paper v1.5 (Aquarius IV ref [26])** | §1 introduction now cites [26] (Cerny et al. 2026, Aquarius IV — first UFD from Rubin LSST EDP2) to mark the onset of high-efficiency UFD discovery in the v ≈ 28 km/s SIDM-relevant dwarf regime. No new σ/m data, no new likelihood term — purely framing citation. Aquarius IV: M_V = −1.9, r_1/2 = 19 pc, D_⊙ = 109 kpc, τ = 13 Gyr, Z = 0.0001. First author W. Cerny (Yale) + 19 co-authors; submitted to RNAAS. | ✅ shipped |
 | **Paper v1.6 (testreport-review fixes)** | §2.1: explicit v_target vs v_peak distinction (v_target is kinematic input; v_peak,1 ≈ 41 km/s for the v₁ resonance, satisfying Cloud-9). §3.6: new section quantifying the Horigome+ 2025 dSph upper-limit tension (σ/m(30) ≈ 7.5 vs limit < 0.2, a 38× violation), with ref [27] (S. Ando, K. Hayashi, S. Horigome, M. Ibe, S. Shirai, arXiv:2503.13650). §3.3 + §7.1: consistent JVAS shortfall factor of 24× (σ/m(15) ≈ 4.2 vs target 100). Figure 1 (`v0.3-prelim/docs/figures/sigma_m_v_phase44.png`) showing σ/m(v) with both v_target inputs and v_peak actual peaks marked. Self-check: 41 tests pass, 1 skip (sigma_m positivity now runs after import fix). | ✅ shipped |
 | **Paper v1.7 (Reviewtest fixes)** | §2.1: explicit declaration that the v²-space Breit-Wigner form is canonical (implemented in `phase44_joint_fit.sigma_m_at_v`, used by every Phase 32–54 result). v-space form retained only as independent cross-check (`v0.3-prelim/code/independent_sigma_m.py`), agreeing in non-resonant regime (≈10× tolerance) and differing by up to ≈30× at resonant peaks (genuine physical ambiguity, not a coding error). Self-check now includes `test_independent_and_robustness.py` (8 tests, all pass) — Layer D independent + Layer E statistical robustness. Total: 50 tests pass + 9 parametrized skips + 7 audit claims pass. | ✅ shipped |
+| **Paper v1.8 (qwen1 fixes)** | §8.4 NEW: "Limitations and Future Work" subsection documenting three concrete improvements out of scope: (i) partial-wave / numerical Schrödinger treatment replacing the semi-classical Yukawa; (ii) hierarchical forward-model for SPARC replacing the 175-galaxy consistency check; (iii) Boltzmann-solver relic density replacing the calibrated 1/⟨σv⟩ mapping. §8.5 NEW: "Honest mixed verdict" paragraph framing the work as appropriate for PRD / JCAP / JHEP mixed-verdict papers (not a strong-claim discovery paper). New doc: `v0.3-prelim/docs/POST_PAPER_ROADMAP_2026_09_17.md` tracking T100–T103 roadmap for post-paper elevation. | ✅ shipped |
 
 **Phase 51 headline (most recent):** T90.70 velocity ladder `[28, 100, 300, 700] km/s` is reproduced to within ~5% per peak using either:
 - **Clockwork q^k ladder** (q = 2.221, k = [3, 6, 9, 11] integer, v_1 = 8.63 km/s) — RMS = 0.0159 orders of magnitude
