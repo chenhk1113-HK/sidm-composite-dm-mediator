@@ -48,6 +48,15 @@ echo "------------------------------------------------------------"
 }
 
 echo
+echo ">>> Layer D (extended): pytest test_physical_constraints.py"
+echo "------------------------------------------------------------"
+"$PYTHON" -m pytest v0.3-prelim/tests/test_physical_constraints.py -v --tb=short || {
+    echo
+    echo ">>> Physical-constraints tests FAILED"
+    exit 1
+}
+
+echo
 echo ">>> Layer F: audit_claims.py"
 echo "------------------------------------------------------------"
 "$PYTHON" scripts/audit_claims.py || {
