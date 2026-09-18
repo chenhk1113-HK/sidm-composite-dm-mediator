@@ -39,6 +39,15 @@ cd "$REPO_ROOT"
 }
 
 echo
+echo ">>> Layer C + D + E: pytest test_physical_invariants.py"
+echo "------------------------------------------------------------"
+"$PYTHON" -m pytest v0.3-prelim/tests/test_physical_invariants.py -v --tb=short || {
+    echo
+    echo ">>> Physical-invariants tests FAILED"
+    exit 1
+}
+
+echo
 echo ">>> Layer F: audit_claims.py"
 echo "------------------------------------------------------------"
 "$PYTHON" scripts/audit_claims.py || {
