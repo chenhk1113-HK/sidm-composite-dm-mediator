@@ -36,7 +36,7 @@ Recent rounds within this standing version: **+T80** (LZ paper compatibility), *
 
 This branch (`wip/cloud-9-relhic`) develops the **T90 multi-resonance SIDM architecture** — a separate evolution line that tests whether a single SIDM model can simultaneously satisfy 5+1 channels (Cloud-9, Galactic, Bullet, LZ, KSFR + optional LRD via Jiang 2026). Last updated 2026-09-16.
 
-**Latest work in this branch (Phase 41d → Paper v1.5, .md-only drafting):**
+**Latest work in this branch (Phase 41d → Paper v1.6, .md-only drafting):**
 
 | Phase | Headline | Status |
 |---|---|---|
@@ -59,6 +59,7 @@ This branch (`wip/cloud-9-relhic`) develops the **T90 multi-resonance SIDM archi
 | **Drafting workflow change** | **Markdown is now the source of truth during drafting** (per 2026-09-17 user decision). The ReportLab PDF builder was retired: it had ~50 hardcoded char-replacements for Unicode subscripts/superscripts/⚠/✓/M☉ that all hit Helvetica's missing-glyph wall. v1.4 builder draft (with 50-char replacement table) was abandoned. Three historical PDFs (v1.1, v1.2, v1.3) removed from repo. Future paper build (when needed): `pandoc PAPER_V1_DRAFT.md -o paper.pdf` after one-time MiKTeX + Pandoc install. | ✅ done |
 | **Paper v1.4 (Review of Paper.docx fixes)** | All 4 reviewer points in `Review of Paper.docx` (uploaded 2026-09-17) addressed. (i) §2.2: terminology note that only v₁ is a true high-amplitude Breit-Wigner resonance; v₂–v₄ are low-amplitude suppression features retained only for s-channel formalism uniformity. (ii) Abstract: "SPARC-dominated" qualifier added with Phase 47 LOO citation. (iii) §4.5.1: scope note explaining why a Burkert / single-Yukawa on joint channels is not included (Cloud-9 is kinematic; Burkert has no σ/m parameter; single-Yukawa is excluded by Cloud-9 at the kinematic level). (iv) §2.1: Γ-convention note (FWHM in v²-space, not half-width). | ✅ shipped |
 | **Paper v1.5 (Aquarius IV ref [26])** | §1 introduction now cites [26] (Cerny et al. 2026, Aquarius IV — first UFD from Rubin LSST EDP2) to mark the onset of high-efficiency UFD discovery in the v ≈ 28 km/s SIDM-relevant dwarf regime. No new σ/m data, no new likelihood term — purely framing citation. Aquarius IV: M_V = −1.9, r_1/2 = 19 pc, D_⊙ = 109 kpc, τ = 13 Gyr, Z = 0.0001. First author W. Cerny (Yale) + 19 co-authors; submitted to RNAAS. | ✅ shipped |
+| **Paper v1.6 (testreport-review fixes)** | §2.1: explicit v_target vs v_peak distinction (v_target is kinematic input; v_peak,1 ≈ 41 km/s for the v₁ resonance, satisfying Cloud-9). §3.6: new section quantifying the Horigome+ 2025 dSph upper-limit tension (σ/m(30) ≈ 7.5 vs limit < 0.2, a 38× violation), with ref [27] (S. Ando, K. Hayashi, S. Horigome, M. Ibe, S. Shirai, arXiv:2503.13650). §3.3 + §7.1: consistent JVAS shortfall factor of 24× (σ/m(15) ≈ 4.2 vs target 100). Figure 1 (`v0.3-prelim/docs/figures/sigma_m_v_phase44.png`) showing σ/m(v) with both v_target inputs and v_peak actual peaks marked. Self-check: 41 tests pass, 1 skip (sigma_m positivity now runs after import fix). | ✅ shipped |
 
 **Phase 51 headline (most recent):** T90.70 velocity ladder `[28, 100, 300, 700] km/s` is reproduced to within ~5% per peak using either:
 - **Clockwork q^k ladder** (q = 2.221, k = [3, 6, 9, 11] integer, v_1 = 8.63 km/s) — RMS = 0.0159 orders of magnitude

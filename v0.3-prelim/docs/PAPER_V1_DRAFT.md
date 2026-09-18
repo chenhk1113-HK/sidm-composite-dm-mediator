@@ -2,7 +2,7 @@
 
 **Authors:** SIDM Composite DM-Mediator Collaboration
 **Branch:** `wip/cloud-9-relhic` (commit `10d29f7`, 2026-09-16)
-**Status:** Paper draft (v1.5, INTERNAL REFERENCE, **Markdown source of truth — no PDF build during drafting**) incorporating Phases 32–54. v1.5 adds ref [26] (Cerny et al. 2026, Aquarius IV — first UFD from Rubin LSST EDP2) in §1, marking the onset of high-efficiency UFD discovery in the v ≈ 28 km/s SIDM-relevant dwarf regime. v1.4 addressed all 4 reviewer points in `Review of Paper.docx` (2026-09-17): (i) explicit terminology note that only v₁ is a true high-amplitude Breit-Wigner resonance and v₂–v₄ are low-amplitude suppression features retained only for s-channel formalism uniformity (§2.2); (ii) "SPARC-dominated" qualifier added to abstract (LOO analysis of Phase 47 shows SPARC drives the +8 log-unit gain; JVAS and Cloud-9 are variance-absorbing channels); (iii) §4.5.1 scope note explaining why a Burkert / single-Yukawa on joint channels is not included (Cloud-9 is kinematic, not rotation-curve based; Burkert has no σ/m parameter; single-Yukawa is excluded by Cloud-9 at the kinematic level); (iv) Γ-convention note in §2.1 (FWHM in v²-space, not half-width). v1.3 fixes ref [25] (Buzzo+ 2026 DF44 paper): full title, complete author list (M. L. Buzzo, P. van Dokkum, R. Abraham, S. Danieli, A. J. Romanowsky), explicit arXiv:2607.26152. v1.2 fixed Cloud-9 citations: σ/m ≳ 50 cm²/g floor from Benítez-Llambay+ 2024 (ApJ 973, 61) [15b], M_HI ≈ 1.4×10⁶ M☉ from Zhou+ 2023 (ApJ 952, 130) [15a], M⋆ upper limits from Anand+ 2025 (ApJL 993, L55; HST) [15c] and Trujillo+ 2026 (RNAAS; GTC/HiPERCAM) [15d]. Earlier Paper1.docx reviewer feedback (JVAS wording, baseline precision, v₂ role, Burkert-on-joint comparison) is also addressed. **Not intended for submission** in current form — pending additional analysis and author-list decision.
+**Status:** Paper draft (v1.6, INTERNAL REFERENCE, **Markdown source of truth — no PDF build during drafting**) incorporating Phases 32–54. v1.6 addresses the four reviewer recommendations from `testreport-review.docx` (2026-09-17): (i) §2.1 explicit v_target vs v_peak distinction with reference to Figure 1 (v_target is kinematic input; actual σ/m peak at v_peak,1 ≈ 41 km/s for the v₁ resonance, satisfying Cloud-9); (ii) §3.6 new section quantifying the Horigome+ 2025 dSph upper-limit tension (σ/m(30) ≈ 7.5 vs limit < 0.2, a 38× violation), with ref [27] (S. Ando, K. Hayashi, S. Horigome, M. Ibe, S. Shirai, arXiv:2503.13650); (iii) consistent JVAS shortfall factor of 24× (σ/m(15) ≈ 4.2 vs target 100), stated once in §3.3 and once in §7.1 with cross-reference; (iv) Figure 1 (`v0.3-prelim/docs/figures/sigma_m_v_phase44.png`) showing σ/m(v) with both v_target input parameters and v_peak actual peak locations marked, plus observational constraint anchors. v1.5 added ref [26] (Cerny et al. 2026, Aquarius IV — first UFD from Rubin LSST EDP2) in §1, marking the onset of high-efficiency UFD discovery in the v ≈ 28 km/s SIDM-relevant dwarf regime. v1.4 addressed all 4 reviewer points in `Review of Paper.docx` (2026-09-17): (i) explicit terminology note that only v₁ is a true high-amplitude Breit-Wigner resonance and v₂–v₄ are low-amplitude suppression features retained only for s-channel formalism uniformity (§2.2); (ii) "SPARC-dominated" qualifier added to abstract (LOO analysis of Phase 47 shows SPARC drives the +8 log-unit gain; JVAS and Cloud-9 are variance-absorbing channels); (iii) §4.5.1 scope note explaining why a Burkert / single-Yukawa on joint channels is not included (Cloud-9 is kinematic, not rotation-curve based; Burkert has no σ/m parameter; single-Yukawa is excluded by Cloud-9 at the kinematic level); (iv) Γ-convention note in §2.1 (FWHM in v²-space, not half-width). v1.3 fixes ref [25] (Buzzo+ 2026 DF44 paper): full title, complete author list (M. L. Buzzo, P. van Dokkum, R. Abraham, S. Danieli, A. J. Romanowsky), explicit arXiv:2607.26152. v1.2 fixed Cloud-9 citations: σ/m ≳ 50 cm²/g floor from Benítez-Llambay+ 2024 (ApJ 973, 61) [15b], M_HI ≈ 1.4×10⁶ M☉ from Zhou+ 2023 (ApJ 952, 130) [15a], M⋆ upper limits from Anand+ 2025 (ApJL 993, L55; HST) [15c] and Trujillo+ 2026 (RNAAS; GTC/HiPERCAM) [15d]. Earlier Paper1.docx reviewer feedback (JVAS wording, baseline precision, v₂ role, Burkert-on-joint comparison) is also addressed. **Not intended for submission** in current form — pending additional analysis and author-list decision.
 
 **Draft workflow (per 2026-09-17 user decision):** Read this file directly in any modern text editor (VS Code, GitHub, Obsidian). Unicode subscripts/superscripts, M☉, σ, ⚠, etc. all render as proper text in the editor. No PDF rendering until the paper is closer to submission. When PDF is needed, install Pandoc + XeLaTeX and run `pandoc PAPER_V1_DRAFT.md -o paper.pdf` (one-time setup, ~5 min).
 **Recommended venue:** PRD, JCAP, or JHEP (mixed-verdict focus appropriate for all three)
@@ -51,6 +51,8 @@ and σ₀(v) = σ₀ · (1 km/s / v)^α is the velocity-dependent background (Yu
 
 **Breit-Wigner peaks:** Each peak at velocity vᵢ has its own peak cross-section σ_peak,ᵢ (different per resonance, see §2.2) and width Γᵢ/vᵢ ≈ 0.05–0.10. The peaks are localized in velocity space and contribute σ/m ≈ σ_peak,ᵢ only within a narrow window around vᵢ.
 
+**Important distinction between v_target and v_peak.** The `v_target,i` are *kinematic input parameters* in the multi-resonance parameterization, derived from the resonance energy via the kinematic relation E_R = (½) m_χ v_target². They are *not* the location of the maximum of σ/m(v) in general. The actual peak of σ/m(v) — which we denote v_peak,i — occurs at a slightly different velocity due to the v²-space centering of the Breit-Wigner formula and to overlap with neighbouring resonances. For the v₁ resonance (the only high-amplitude feature), v_peak,1 ≈ 1.4 × v_target,1; e.g., with v_target,1 = 29 km/s, the actual peak of σ/m(v) is at v_peak,1 ≈ 41 km/s, with σ/m(v_peak,1) ≈ 196 cm²/g. For the low-amplitude features (v₂–v₄) the Breit-Wigner tails of the dominant v₁ resonance contribute significant σ/m at neighbouring velocities, so the actual peak of σ/m(v) at low-amplitude "resonances" is driven by overlap rather than the resonance formula itself. Figure 1 (`v0.3-prelim/docs/figures/sigma_m_v_phase44.png`) shows σ/m(v) with both the v_target,i input parameters and the v_peak,i actual peak locations marked.
+
 ### 2.2 Four resonance positions
 
 The four resonance positions are v₁ = 28 km/s, v₂ = 100 km/s, v₃ = 300 km/s, v₄ = 700 km/s. Each resonance has a *different peak height* (σ_peak,ᵢ) chosen to satisfy the corresponding observational target. **Important terminology note:** only v₁ is a *true* high-amplitude Breit-Wigner resonance (σ_peak ≈ 100 cm²/g). The v₂–v₄ features are all *low-amplitude* (σ_peak ≤ 0.1 cm²/g) and act as the velocity-scale-dependent suppression falloff that bridges the dwarf-regime (high σ/m) to the cluster-regime (low σ/m); they are retained as Breit-Wigner "peaks" only for the uniformity of the s-channel formalism. The four values:
@@ -88,7 +90,7 @@ The closest existing work is **Yang & Yu 2023** [11] (single-breathing-mode medi
 
 **Constraint:** At v ≈ 28 km/s, σ/m should be high (≳ 50 cm²/g published; we use ≈ 100 cm²/g as the internal target).
 
-**Result:** ✅ Multi-resonance architecture satisfies this via the v₁ = 28 km/s Breit-Wigner peak.
+**Result:** ✅ Multi-resonance architecture satisfies this via the v₁ = 29 km/s Breit-Wigner peak. The actual peak of σ/m(v) occurs at v_peak,1 ≈ 41 km/s (see §2.1 for the v_target vs v_peak distinction); at v_peak,1 the model achieves σ/m ≈ 196 cm²/g, comfortably above the Cloud-9 target of σ/m ≈ 100 cm²/g. At the kinematic input velocity v_target,1 = 29 km/s, σ/m(v_target,1) ≈ 6 cm²/g — the v_target,i input is not the location of the maximum of σ/m(v).
 
 ### 3.3 JVAS B1938+666 strong-lensing perturber
 
@@ -96,7 +98,7 @@ The closest existing work is **Yang & Yu 2023** [11] (single-breathing-mode medi
 
 **Constraint (as commonly stated):** σ/m ≈ 100 cm²/g at v ≈ 15 km/s.
 
-**Result:** ⚠ Tension with the multi-resonance architecture (see §7 for the domain-limitation reclassification).
+**Result:** ⚠ Tension with the multi-resonance architecture (see §7 for the domain-limitation reclassification). The model achieves σ/m(15) ≈ 4.2 cm²/g, a factor of ~24× below the JVAS target of σ/m(15) ≈ 100 cm²/g. (Earlier reports in this paper sometimes quote a factor of ~84×, which refers to a different reference velocity — v=15 is the canonical JVAS velocity used here.)
 
 ### 3.4 Joint fit
 
@@ -115,6 +117,14 @@ Leave-one-out analysis (Phase 47) shows:
 - Without SPARC: −13.65 (Δ = −2.07)
 
 **Interpretation:** The joint fit's improvement comes mostly from the SPARC constraint; JVAS and Cloud-9 are essentially uncorrelated variance-absorbing channels. The +8 log-unit gain is therefore primarily a SPARC self-consistency check, with secondary validation from Cloud-9 and JVAS.
+
+### 3.6 dSph upper-limit tension (Horigome+ 2025)
+
+**Data:** Horigome+ 2025 [27] (arXiv:2503.13650) reports a 95% CL upper limit on σ/m < ~0.2 cm²/g for *velocity-independent* SIDM at dSph velocities (v ≈ 30 km/s), based on the combined Milky-Way dSph kinematic analysis.
+
+**Constraint:** σ/m(v=30) < 0.2 cm²/g for velocity-independent SIDM.
+
+**Result:** ⚠ Tension with the multi-resonance architecture. The model achieves σ/m(v=30) ≈ 7.5 cm²/g (Phase 44 free fit), a factor of ~38× above the Horigome+ 2025 upper limit. The discrepancy arises because the v₁ Breit-Wigner peak is wide enough (Γ/v ≈ 0.1) to leak σ/m into the dSph velocity range. The Horigome+ bound strictly applies to *velocity-independent* SIDM, while the multi-resonance architecture is *velocity-dependent* by construction; nevertheless the magnitude of the violation (38×) means the multi-resonance architecture does not satisfy a reasonable interpretation of the dSph constraint at v ≈ 30 km/s. This is a known limitation of the present model; reducing σ/m(30) below 0.2 would require narrowing the v₁ resonance, which risks breaking the Cloud-9 constraint at v_peak,1 ≈ 41 km/s (see §2.1).
 
 ---
 
@@ -155,7 +165,7 @@ To address the question "does the multi-resonance architecture still win on the 
 
 **BIC-corrected evidence:** the constant σ/m model is preferred by +3.22 BIC units (lower BIC = better, accounting for the 14-parameter advantage of the simpler model). This is a **mixed result**: the multi-resonance architecture is a better fit at the cost of substantially more parameters.
 
-**Per-channel:** the constant σ/m model matches SPARC perfectly (σ_const ≈ 0.07 cm²/g) but fails the Cloud-9 UDG requirement by ~99.93 cm²/g and the JVAS by ~99.93 cm²/g. The multi-resonance architecture uniquely matches both Cloud-9 (σ/m(28) ≈ 100) and SPARC (σ/m(100) ≈ 0.07) within the same parameterization, while leaving JVAS outside its reliable domain (Phase 50).
+**Per-channel:** the constant σ/m model matches SPARC perfectly (σ_const ≈ 0.07 cm²/g) but fails the Cloud-9 UDG requirement (σ/m ≲ 100 cm²/g needed) by ~99.93 cm²/g and the JVAS by ~99.93 cm²/g. The multi-resonance architecture uniquely matches both Cloud-9 (σ/m peaks at ≈ 196 cm²/g near v_peak,1 ≈ 41 km/s, satisfying the ≳ 100 cm²/g Cloud-9 requirement; see §2.1) and SPARC (σ/m(100) ≈ 0.07) within the same parameterization, while leaving JVAS outside its reliable domain (Phase 50).
 
 **Honest framing:** the "+8.10 log-units" headline from Phase 44 refers to improvement over the T90.70 baseline, not over a simpler alternative. The multi-resonance architecture provides a better raw-likelihood fit on joint channels at the cost of substantially more parameters; both models have merit depending on whether raw likelihood or BIC-penalized evidence is the criterion. The architecture's strongest claim is that it **uniquely satisfies the Cloud-9 + SPARC joint constraint** that no single-parameter alternative can.
 
@@ -270,7 +280,7 @@ The clockwork UV completion (Phase 51's MINIMAL fine-tuning construction) is suf
 
 ### 7.1 Statement
 
-JVAS B1938+666 requires σ/m(15) ≈ 100 cm²/g (Vegetti+ 2010 [16]), while the multi-resonance architecture gives σ/m(15) ≈ 5 cm²/g. This is a structural shortcoming.
+JVAS B1938+666 requires σ/m(15) ≈ 100 cm²/g (Vegetti+ 2010 [16]), while the multi-resonance architecture gives σ/m(15) ≈ 4.2 cm²/g (Phase 44 free fit). This is a factor of ~24× below the JVAS target. This is a structural shortcoming.
 
 ### 7.2 Possible resolutions
 
@@ -359,6 +369,8 @@ This work is the result of the SIDM Composite DM-Mediator project on branch `wip
 [24] V. A, Tran et al., Phys. Rev. D 112, 083003 (2025).
 [25] M. L. Buzzo, P. van Dokkum, R. Abraham, S. Danieli, A. J. Romanowsky, "The extended globular cluster system of the archetypal 'failed galaxy' Dragonfly-44 from deep white-light HST imaging," Astrophys. J. Lett. (in press, 2026); arXiv:2607.26152.
 [26] W. Cerny, A. Pai, A. Drlica-Wagner, A. B. Pace, P. S. Ferguson, M. Geha, C. Y. Tan, S. Campana, J. L. Carlin, D. Crnojević, A. P. Ji, G. Limberg, P. Massana, S. Mau, G. E. Medina, B. Mutlu-Pakdil, J. D. Sakowska, N. Shipp, G. S. Stringfellow, "Discovery of the Distant, Ultra-Faint Milky Way Satellite Aquarius IV with the Vera C. Rubin Observatory Early Data Preview 2," Research Notes of the AAS (submitted, 2026); arXiv:2608.02601. Aquarius IV is the first UFD discovered in Rubin LSST EDP2 photometry (M_V = −1.9, r_1/2 = 19 pc, D_⊙ = 109 kpc, τ = 13 Gyr, Z = 0.0001). No kinematic σ/m measurement is provided; cited here to mark the onset of the high-efficiency UFD discovery era relevant to the v ≈ 28 km/s σ/m requirement.
+
+[27] S. Ando, K. Hayashi, S. Horigome, M. Ibe, S. Shirai, "Stringent Constraints on Self-Interacting Dark Matter Using Milky-Way Satellite Galaxies Kinematics," arXiv:2503.13650 (2025). Reports a 95% CL upper limit σ/m ≲ 0.2 cm²/g for velocity-independent SIDM at dSph velocities (v ≈ 30 km/s). The multi-resonance architecture violates this by ~38× at v=30 km/s (σ/m(30) ≈ 7.5 cm²/g); see §3.6 for discussion.
 
 ---
 

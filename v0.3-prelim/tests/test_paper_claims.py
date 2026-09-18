@@ -212,16 +212,42 @@ def test_sigma_m_positive_in_dwarf_regime():
 
     This is a sanity check on the underlying formula. If the function
     ever returns negative cross-sections, something has gone wrong.
+
+    Uses the Phase 44 free best-fit parameters (m_chi, sigma_0, a_slope,
+    v_targets, sigma_peaks, gamma_fracs) and the canonical multi-resonance
+    sigma_m_at_v function.
     """
     try:
-        # Try to import the canonical multi-resonance function
         import sys
         sys.path.insert(0, str(RESULTS_DIR.parent / "code"))
-        from phase44_joint_fit import sigma_m_v  # type: ignore
+        from phase44_joint_fit import sigma_m_at_v  # type: ignore
     except (ImportError, ModuleNotFoundError):
-        pytest.skip("phase44_joint_fit.sigma_m_v not importable")
+        pytest.skip("phase44_joint_fit.sigma_m_at_v not importable")
+
+    # Load the Phase 44 free best-fit parameters
+    d = _load("phase44_joint_fit.json")
+    p = d.get("best_params", [])
+    if len(p) < 15:
+        pytest.skip("Phase 44 best_params not in expected format")
+    m_chi, sigma_0, a_slope = p[0], p[1], p[2]
+    v_targets = p[3:7]
+    sigma_peaks = p[7:11]
+    gamma_fracs = p[11:15]
+
+    # Build the resonances list
+    m_chi_eV = m_chi * 1e9  # GeV -> eV
+    resonances = []
+    for vt, sp, gf in zip(v_targets, sigma_peaks, gamma_fracs):
+        v_cm_s = vt * 1e5
+        E_R_eV = 0.5 * m_chi_eV * (v_cm_s / 2.998e10) ** 2
+        resonances.append({
+            "name": "r",
+            "E_R_eV": float(E_R_eV),
+            "Gamma_eV": float(gf * E_R_eV),
+            "sigma_peak_cm2_per_g": float(sp),
+        })
 
     # Spot check at v = 15, 28, 100, 300, 700 km/s
     for v in [15.0, 28.0, 100.0, 300.0, 700.0]:
-        val = sigma_m_v(v)
+        val = sigma_m_at_v(v, m_chi, resonances, sigma_0, a_slope)
         assert val > 0, f"sigma/m(v={v}) should be > 0, got {val}."
