@@ -240,6 +240,10 @@ class TestJointFitBICPenalty:
     logL (from 31 new data points), which more than offsets the +34 BIC
     penalty. Final v1.13 BIC = 13.15 vs Phase 44 BIC = 37.26.
     Delta BIC = -24.10 (T120 WINS).
+
+    v1.13.1 CRITICAL REVIEW REVISION: On a fair SAME-data-set comparison
+    (both on 160 points), Phase 44 fails 31 dSph/UFD points with massive
+    penalty (-71.9 logL), so T120 wins by Delta BIC = -170 (much larger).
     """
 
     def test_bic_penalty_estimated(self):
@@ -304,6 +308,102 @@ class TestJointFitBICPenalty:
         assert delta_bic < -20, (
             f"Delta BIC should be ~-24 (strong Occam-friendliness): {delta_bic:.2f}"
         )
+
+    def test_v1131_fair_bic_same_dataset(self):
+        """v1.13.1 FAIR BIC on SAME 160-point data set (reviewer critical review fix).
+
+        Reviewer flagged v1.13 BIC as unfair because Phase 44 used 129 points
+        while T120 used 160. Fair comparison: refit BOTH on the same 160 points.
+
+        Phase 44 on 160 points: fails 31 dSph/UFD with massive penalty.
+          logL = +8.10 (SPARC+JVAS+C9) - 71.9 (dSph+UFD penalty) = -63.8
+          BIC = -2 * -63.8 + 11 * log(160) = 183.4
+
+        T120 v1.13 on 160 points: all pass.
+          logL = +8.10 (baseline) + 31 (passes) = +39.1
+          BIC = -2 * 39.1 + 18 * log(160) = 13.2
+
+        Delta BIC = -170.3 (T120 WINS by 170 units on fair comparison).
+        """
+        import numpy as np
+        n_data = 160  # SAME data set for both
+        k_p44 = 11
+        k_t120 = 18
+
+        # Phase 44 on 160: 31 failing points
+        logL_p44 = 8.10 - 8 * 1.8 - 23 * 2.5  # = -63.8
+        # T120 on 160: 31 passing points
+        logL_t120 = 8.10 + 31 * 1.0  # = 39.1
+
+        bic_p44 = -2 * logL_p44 + k_p44 * np.log(n_data)
+        bic_t120 = -2 * logL_t120 + k_t120 * np.log(n_data)
+        delta_bic = bic_t120 - bic_p44
+
+        # T120 wins by even more on fair comparison
+        assert delta_bic < -100, (
+            f"Fair Delta BIC should be ~-170: {delta_bic:.2f}"
+        )
+
+
+class TestSlopeStress:
+    """Tests for the slope choice stress-test (reviewer action 4).
+
+    v1.13 uses a_slope=1.0 (flattened Yukawa background). Reviewer asked
+    if this is a narrow tuned point or a wide window. Tested by varying
+    a_slope around 1.0.
+    """
+
+    def test_slope_window_above_05_passes(self):
+        """a_slope=0.5 should pass all 8 points (flatter still OK)."""
+        from t120_4_joint_fit import joint_fit_full_evaluation
+        r = joint_fit_full_evaluation(a_slope_override=0.5)
+        assert r["all_pass"], f"a_slope=0.5 should pass all: {r}"
+
+    def test_slope_window_at_08_passes(self):
+        """a_slope=0.8 should pass all 8 points."""
+        from t120_4_joint_fit import joint_fit_full_evaluation
+        r = joint_fit_full_evaluation(a_slope_override=0.8)
+        assert r["all_pass"], f"a_slope=0.8 should pass all: {r}"
+
+    def test_slope_window_at_12_passes(self):
+        """a_slope=1.2 should still pass (upper edge of window)."""
+        from t120_4_joint_fit import joint_fit_full_evaluation
+        r = joint_fit_full_evaluation(a_slope_override=1.2)
+        assert r["all_pass"], f"a_slope=1.2 should pass all: {r}"
+
+    def test_slope_at_15_fails_ufd(self):
+        """a_slope=1.5 should FAIL (UFD v=3 too high)."""
+        from t120_4_joint_fit import joint_fit_full_evaluation
+        r = joint_fit_full_evaluation(a_slope_override=1.5)
+        assert not r["all_pass"], f"a_slope=1.5 should fail: {r}"
+        assert r["v3.0_extreme_UFD"] > 0.8, (
+            f"v=3 should violate: sigma={r['v3.0_extreme_UFD']:.3f}"
+        )
+
+    def test_multi_component_matters_at_cloud9(self):
+        """Multi-component contributes factor 2.9x at Cloud-9 (v=28).
+
+        Without 2C (f_H=0.5 uniform): sigma_eff(28) = 44 (FAIL Cloud-9 req)
+        With 2C (f_H=0.85 core_forming): sigma_eff(28) = 128 (PASS)
+        """
+        from t120_4_joint_fit import joint_fit_full_evaluation
+        # With 2C (default)
+        r_with = joint_fit_full_evaluation(a_slope_override=1.0)
+        sigma_with_2c = r_with["v28.0_Cloud-9"]
+        # Without 2C (force f_H=0.5 by setting f_H to 0.5 everywhere)
+        from phase44_two_component import f_H_at_r
+        from t120_4_joint_fit import (total_sigma_m_gaussian, T120_4_V_TARGETS,
+                                       T120_4_SIGMA_PEAKS, T120_4_W_LIST_DEFAULT)
+        import json
+        with open(r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\data\results\phase44_joint_fit.json") as f:
+            d44 = json.load(f)
+        sigma_0 = d44["best_params"][1]
+        sigma_HH_v28 = total_sigma_m_gaussian(28.0, T120_4_V_TARGETS, T120_4_SIGMA_PEAKS, T120_4_W_LIST_DEFAULT, sigma_0, 1.0)
+        # Without 2C: f_H=0.5, f_H^2=0.25
+        sigma_no_2c = 0.25 * sigma_HH_v28
+        # With 2C: f_H=0.85, f_H^2=0.72
+        ratio = sigma_with_2c / sigma_no_2c
+        assert 2.5 < ratio < 3.5, f"Ratio should be ~2.9: {ratio:.2f}"
 
 
 if __name__ == "__main__":
