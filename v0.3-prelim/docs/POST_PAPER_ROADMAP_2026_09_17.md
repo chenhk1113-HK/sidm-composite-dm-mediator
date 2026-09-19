@@ -125,4 +125,50 @@ The master branch's ε ~ 10^-37 is a more serious problem, but that's a separate
 
 KIV. The T100–T103 roadmap is **post-paper scope**, not Paper v1.8 scope. Paper v1.8 already documents the relevant limitations honestly in §8.4 and frames the work appropriately in §8.5. The next actionable step is to **submit Paper v1.8** (or later revision) and then execute T100–T103 as a post-publication roadmap.
 
-**No further action required for Paper v1.8.**
+**Recommended option: Decision-gate sequencing**
+
+Per `plan2.docx` Reviewer1 (2026-09-17), the T101 effort should be treated as a **decision gate**, not as the first step of an automatic 9-month sequence. The reviewer correctly notes that if T101 doesn't meaningfully improve the dSph tension or preserve the Cloud-9 peak, most of the downstream value disappears. Recommended path:
+
+1. **Freeze paper at current version (v1.8)**. Do NOT start T101 while paper is still under active revision. Submit or freeze the present mixed-verdict draft first.
+2. **Open independent branch `wip/T101-partial-wave`** from `wip/cloud-9-relhic` @ 89b5c8f.
+3. **Execute T101.1–T101.4** (infrastructure → weak-coupling validation → resonance shape → Cloud-9 + dSph re-fit). Build the partial-wave solver WITHOUT touching the existing σ/m on cloud-9-relhic.
+4. **STOP and evaluate**:
+   - Did the peak offset reproduce? (v_peak ≈ 1.4 × v_target)
+   - Did σ/m at the Cloud-9 peak stay adequate? (≥ 50 cm²/g)
+   - By how much did the dSph tension improve?
+5. **Decision**:
+   - If dSph tension drops below ~10× AND Cloud-9 peak is preserved → continue to T100 and T102
+   - If dSph tension is still ≥10× OR Cloud-9 peak collapses → STOP, the project is already in a publishable state with the existing self-check suite and honest limitations; further investment should be re-evaluated
+6. **T103 in parallel or later**, contingent on LSD data accessibility verification
+7. **T102 (hierarchical SPARC) requires reduced-galaxy pilot** (T102.1 with 20-30 galaxies) **MANDATORY** before the full 175-galaxy run. Reviewer1's correction to my plan: I had T102.2 (sidmkit cross-check) optional; it should be mandatory.
+
+This decision-gate approach limits the downside to **6–8 weeks of work** (T101 alone) instead of a 6–9 month commitment. The reviewer notes "the project is already in a publishable state with the existing self-check suite and honest limitations" — so the cost of stopping is low.
+
+### Critical success criteria for T101 (decision gate)
+
+These should be evaluated **at T101.4** (Cloud-9 + dSph re-fit) before proceeding to T100/T102:
+
+1. **Peak offset**: does partial-wave reproduce v_peak ≈ 1.4 × v_target? If not, the architecture may have a hidden assumption that breaks down.
+2. **Cloud-9 preservation**: does σ/m at the peak stay ≥ 50 cm²/g? If it drops below 50, the architecture collapses (Cloud-9 requires ~100).
+3. **dSph improvement**: does σ/m(v=30) drop from 7.5 toward ≤ 2? If the dSph tension stays at 38×, partial-wave doesn't help and the architecture can't be fixed by this route.
+4. **Semi-classical limit match**: does the partial-wave σ/m match the semi-classical Yukawa + classical BW at weak coupling (α ~ 10^-3) to within 10%? If not, there's a code bug or a fundamental disagreement.
+
+**Decision rule**: if criteria 1, 2, 3 are all met → proceed to T100 + scoped T102. Otherwise → stop.
+
+---
+
+## Why this revision is important
+
+Reviewer1's main critique of my original plan was that it was structured as an **automatic 9-month sequence** without a clear stopping criterion. If T101 is the foundation and T101's results don't move the needle, the whole chain is sunk cost. The decision-gate approach:
+
+- Caps downside at 6-8 weeks of T101 work (instead of 9 months)
+- Forces an honest evaluation at T101.4 (not "we'll see how it goes")
+- Recognizes that v1.8 is already publishable, so stopping is acceptable
+- Keeps T103 alive as a parallel track (no dependency on T101 outcome)
+
+The reviewer also correctly flagged three **practical risks** I underweighted:
+- Partial-wave solver stability (radial ODE, partial-wave truncation, resonance extraction)
+- Hierarchical SPARC at 500 dimensions with dynesty is ambitious
+- LSD lattice data accessibility not confirmed
+
+These are real concerns that the decision-gate helps mitigate: if T101's solver is unstable, we find out at T101.2 (validation step), not at T101.4.
