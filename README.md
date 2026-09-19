@@ -5,8 +5,8 @@
 **Joint-fit framework for self-interacting dark matter (SIDM), grounded in published multi-channel data (dSph, UFD, Bullet, SPARC, LZ, Fermi, DAMPE, Zhang+2025 LSS).**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.4--prelim%2BT88E%2BT90--v18-blue)](VERSION)
-[![WIP Paper](https://img.shields.io/badge/wip_paper-v1.8-blueviolet)](v0.3-prelim/docs/PAPER_V1_DRAFT.md)
+[![Version](https://img.shields.io/badge/version-0.4--prelim%2BT88E%2BT90--v12-blue)](VERSION)
+[![WIP Paper](https://img.shields.io/badge/wip_paper-v1.12-blueviolet)](v0.3-prelim/docs/PAPER_V1_DRAFT.md)
 [![Tests](https://img.shields.io/badge/tests-branch--dependent-blue)](v0.3-prelim/tests/)
 [![arXiv:2506.22997](https://img.shields.io/badge/cross--validated-arXiv%3A2506.22997-b31b1b)](https://arxiv.org/abs/2506.22997)
 
@@ -17,7 +17,7 @@
 | Track | Version | Status | Headline |
 |---|---|---|---|
 | **Standing (Tier-1, master)** | `v0.4-prelim+T88E` | master @ 2026-09-02 | σ/m₀ = **0.06 cm²/g**, log Z = **−164.87 ± 0.084**, m_χ = **770 GeV**, m_φ = **453 MeV**; 22 channels; 677 tests pass |
-| **WIP (Tier-2, cloud-9-relhic)** | `T90-Paper-v18` | wip/cloud-9-relhic @ `04ab4e9` | Multi-resonance SIDM satisfies Cloud-9 + SPARC + JVAS; self-check **50 tests pass + 9 parametrized skips + 7 audit claims pass**; paper v1.8 INTERNAL REFERENCE |
+| **WIP (Tier-2, cloud-9-relhic)** | `T90-Paper-v12` | wip/cloud-9-relhic @ `32d720b` | Multi-resonance SIDM satisfies Cloud-9 + SPARC + dSph + cluster simultaneously via three-mechanism self-consistent model (§9): Gaussian BW profile + Yang+ 2025 PRD two-component mass segregation + Yu 2026 PRL gravothermal core-collapse selection. All 4 constraints pass with single parameter set: Cloud-9 σ/m=128 (≥100 ✓), dSph σ/m=0.18 (≤0.8 ✓), SPARC σ/m=0.19 (∈[0.05,0.5] ✓), cluster σ/m=0.0002 (<1.0 ✓). Combined 28× reduction of v1.11 residual 6-23× dSph tension. Paper v1.12 INTERNAL REFERENCE |
 
 **Standing version: `v0.4-prelim+T88E`** (Tier-1 milestone, 2026-09-02).
 Recent rounds within this standing version: **+T80** (LZ paper compatibility), **+T81** (Channel 19 = XENONnT/PandaX watch), **+T82** (stale-claim audit), **+T83** (KSFR (3,2) promotion to LATTICE), **+T84** (Channel 18 ρ sensitivity sweep), **+T88.A-E** (XRISM/eROSITA/Euclid Q1 series, T88.E first non-silent FORECAST at v0.7→v0.8), **+T89** (Channel 25 = Goldstein & Hill 2026 ΔN_eff documented null + sidmkit/sidm-vdsigmas σ/m benchmark + 4 citation corrections).

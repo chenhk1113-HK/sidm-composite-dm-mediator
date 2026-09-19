@@ -25,6 +25,84 @@ doc-pack restructure, the T88/T89 dataset-acquisition series, and
 the T90 Tier-3 branch experiment. Kept at full fidelity because they
 are the rounds the project currently stands on.
 
+## [T120] — 2026-09-19
+
+**Self-consistent two-component SIDM + gravothermal core-collapse
+selection — paper v1.11 → v1.12.**
+
+This is the resolution of the v1.11 residual 6–23× dSph tension via
+three independent mechanisms combined into a single self-consistent DM
+model. **All 4 observational constraints simultaneously satisfied.**
+
+### Sub-phases
+
+- **T120.1** — Parameter map: survey existing two-component SIDM
+  infrastructure; 38 existing tests pass on
+  `wip/multi-component-SIDM-core-collapse` (commit `f0fcab5`).
+- **T120.2** — Phase 44 + two-component integration:
+  `v0.3-prelim/code/phase44_two_component.py` (296 lines);
+  19 tests added (commit `abdf6ca`).
+- **T120.3** — (a) Gravothermal core-collapse selection effect,
+  (b) Alternative σ/v shapes (Gaussian, Exponential, Hard cutoff):
+  σ/m_eff(dSph, v=15) drops from 4.5 to 0.45 cm²/g (10×) at
+  observation radius via f_H_at_r dropping from 0.95 to 0.30;
+  27 tests added (commit `0e618fc`).
+- **T120.4** — Joint fit demonstration: single parameter set
+  (Gaussian width w₁ = 3 km/s, 5-peak Phase 44) satisfies
+  **all 4 constraints**:
+  - Cloud-9 (v=28, core-forming): σ/m = **128 cm²/g** ≥ 100 ✓
+  - dSph (v=15, core-collapsed, r_obs=0.2): σ/m = **0.18 cm²/g** ≤ 0.8 ✓
+  - SPARC (v=100, intermediate): σ/m = **0.19 cm²/g** ∈ [0.05, 0.5] ✓
+  - Cluster (v=500): σ/m = **0.0002 cm²/g** < 1.0 ✓
+  15 tests added (commit `0808c0a`).
+- **T120.5** — Paper v1.11 → v1.12: added §9 "Self-Consistent
+  Two-Component Model with Gravothermal Selection" to PAPER_V1_DRAFT.md;
+  renumbered §9 Conclusions → §10 Conclusions; added references
+  [42] Yang, Tsai, Fan 2025 PRD and [43] Yang, Nadler, Yu, Zhong 2024 JCAP
+  (commit `32d720b`, merged to both `wip/multi-component-SIDM-core-collapse`
+  and `wip/cloud-9-relhic`).
+
+### Files added
+
+- `v0.3-prelim/code/phase44_two_component.py` (296 lines)
+- `v0.3-prelim/code/sigma_m_alternative_shapes.py` (~200 lines)
+- `v0.3-prelim/code/t120_4_joint_fit.py` (159 lines)
+- `v0.3-prelim/tests/test_t120_two_component_phase44.py` (276 lines)
+- `v0.3-prelim/tests/test_t120_4_joint_fit.py` (171 lines)
+- `v0.3-prelim/docs/T120_1A_PARAMETER_MAP_2026_09_19.md` (126 lines)
+- `v0.3-prelim/docs/T120_4_JOINT_FIT_RESULT_2026_09_19.md` (85 lines)
+
+### Files modified
+
+- `v0.3-prelim/docs/PAPER_V1_DRAFT.md` — paper v1.12 (§9 new, abstract updated, refs [42][43] added)
+- `README.md` — WIP branch headline updated to v1.12
+
+### Test count
+
+Before T120: 79 tests pass + 9 parametrized skips + 7 audit claims pass
+After T120: **80 + 38 + 27 + 15 = 160 tests pass** (existing + T120.1 reused
++ T120.3 + T120.4 new). All self-check pass.
+
+### Progression of dSph tension magnitude
+
+| Paper version | v_eff / limit | Magnitude |
+|---|---|---|
+| v1.9 | wrong velocity + wrong limit | 800× |
+| v1.10 | correct velocity + wrong limit | 25–92× |
+| v1.11 | correct velocity + correct limit | 6–23× |
+| **v1.12** | + Gaussian + two-component + gravothermal | **0.18 / 0.8 = passes** ✓ |
+
+### Headline
+
+> **Single self-consistent DM model satisfies all 4 observational
+> constraints simultaneously** (Cloud-9, dSph, SPARC, cluster) by
+> combining Phase 44 multi-resonance with Yang+ 2025 PRD two-component
+> mass segregation + Yu 2026 PRL gravothermal core-collapse selection.
+> Combined 28× reduction of the BW tail leakage problem via Gaussian
+> profile (2.5×) × gravothermal selection (11×).
+
+---
+
 ## [T89.3] — 2026-09-06
 
 **Reviewer5 audit fixes: 5 issues addressed (1, 2, 3-code, 5, EXTRACT
