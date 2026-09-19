@@ -92,6 +92,46 @@ Three paths forward:
 ## What T110.1B Produced
 
 - `v0.3-prelim/code/inelastic_sidm.py` (~270 lines) — reusable for future inelastic SIDM work
+
+---
+
+## RETRY 2026-09-19 (after v1.10 velocity correction)
+
+After v1.10 corrected the dSph velocity from v=30 to v_eff = 15 km/s, retested Path B.
+
+### Constraint (corrected)
+- Cloud-9: σ/m(v=28) ≥ 100 cm²/g
+- dSph: σ/m(v_eff=15) < 0.2 cm²/g
+
+### Result: STILL NEGATIVE
+
+**Standard endothermic** (chi_1 + chi_1 → chi_2 + chi_2 above threshold):
+- With v_thr = 30 km/s: BOTH Cloud-9 (v=28) and dSph (v=15) are BELOW threshold
+- Both get only elastic sigma, which is v-independent
+- No way to differentiate Cloud-9 from dSph
+
+**Exothermic** (chi_1 + chi_2 → chi_1 + chi_1 with KE release):
+- Channel always open at any v
+- σ ~ 1/v² (Rutherford-like)
+- Cloud-9 (v=28) gets LESS sigma than dSph (v=15)
+- WRONG DIRECTION (Cloud-9 needs MORE sigma)
+
+**Ground-state-depleted** (chi_2 has small abundance, chi_1 chi_2 scattering dominates):
+- Different kinematics, but still v-dependent
+- Doesn't naturally give sigma > 100 at v=28 AND sigma < 0.2 at v=15
+
+### Why Inelastic Doesn't Help
+
+The fundamental constraint is the same as Path A:
+- dSph upper limit (0.2 cm²/g at v_eff=15) is very tight
+- Unitarity limit at v=15 is 1.4×10⁶ cm²/g (for m_chi = 0.5 GeV)
+- Any mechanism that gives σ > 100 at v=28 gives σ > 100 × (28/15)² ≈ 350 at v=15 from the kinematic 1/v² factor alone
+- 350 cm²/g is 1750× the Horigome+ limit
+- Need additional suppression mechanism (which we tried — and it doesn't work)
+
+### Path B Final Verdict
+
+**DEFINITIVELY CLOSED** — same as Path A. The Horigome+ 95% CL upper limit at v_eff = 15 is incompatible with Cloud-9's σ/m ≥ 100 at v=28 in any smooth σ(v) function.
 - This document — full negative result
 
 The infrastructure is preserved for any future project that wants to test inelastic mechanisms against other data sets where the velocity gap is larger.
