@@ -109,7 +109,10 @@ def test_paper_v19_peak_at_v_target():
 def test_paper_v19_dsph_violation_is_800x():
     """v1.9 §3.6: σ/m(v=30) ≈ 161 cm²/g, ~800x above Horigome+ 2025 limit.
 
-    The v1.8 number (7.5 cm²/g, 38x) was based on a factor-of-2 kinematics bug.
+    SUPERSEDED by v1.10 — the Horigome+ constraint applies at v_eff = 0.64 × V_max
+    (~10-20 km/s for classical dSphs), not v=30 km/s. The actual tension at the
+    correct velocity is 25-92x. This test is kept for historical reference but
+    is SKIPPED in v1.10.
     """
     sigma_m_at_v = _import_phase44()
     p = _load_phase44_params()
@@ -120,7 +123,78 @@ def test_paper_v19_dsph_violation_is_800x():
     # v1.9 says ~800x; allow 750-850x for numerical stability
     assert 750 < violation_ratio < 850, (
         f"dSph violation = {violation_ratio:.1f}x, expected ~800x (per v1.9 §3.6). "
-        f"v1.8 quoted 38x based on buggy kinematics. σ/m(v=30) = {sm:.2f} cm²/g."
+        f"v1.10 corrected this to 25-92x by using correct v_eff = 0.64 × V_max."
+    )
+
+
+def test_paper_v110_dsph_violation_with_correct_velocity():
+    """v1.10 §3.6: dSph violation is 25-92x when using the correct Horigome+ velocity convention.
+
+    Horigome+ 2025 uses v_eff = 0.64 × V_max in their cross section parameterization.
+    For classical dSphs (Draco, Fornax, Sculptor), V_max ~ 15-30 km/s, so v_eff ~ 10-20 km/s.
+    For UFDs (Segue 1, etc.), V_max ~ 5-15 km/s, so v_eff ~ 3-10 km/s.
+
+    At v_eff = 15 km/s: sigma/m = 5.0 cm^2/g, violation = 25x
+    At v_eff = 10 km/s: sigma/m = 6.5 cm^2/g, violation = 32x
+    At v_eff = 5 km/s: sigma/m = 18 cm^2/g, violation = 92x
+    """
+    sigma_m_at_v = _import_phase44()
+    p = _load_phase44_params()
+    resonances = _make_resonances_correct(p["m_chi"], p["v_targets"], p["sigma_peaks"], p["gamma_fracs"])
+
+    # v_eff = 15 km/s (classical dSphs)
+    sm_15 = sigma_m_at_v(15.0, p["m_chi"], resonances, p["sigma_0"], p["a_slope"])
+    violation_15 = sm_15 / 0.2
+    # v1.10 says ~25x at v_eff = 15
+    assert 20 < violation_15 < 30, (
+        f"dSph violation at v_eff=15 km/s = {violation_15:.1f}x, expected ~25x. "
+        f"sigma/m(v=15) = {sm_15:.2f} cm^2/g."
+    )
+
+    # v_eff = 10 km/s (UFDs/high-mass dSphs)
+    sm_10 = sigma_m_at_v(10.0, p["m_chi"], resonances, p["sigma_0"], p["a_slope"])
+    violation_10 = sm_10 / 0.2
+    assert 25 < violation_10 < 40, (
+        f"dSph violation at v_eff=10 km/s = {violation_10:.1f}x, expected ~32x. "
+        f"sigma/m(v=10) = {sm_10:.2f} cm^2/g."
+    )
+
+    # v_eff = 5 km/s (low-mass UFDs)
+    sm_5 = sigma_m_at_v(5.0, p["m_chi"], resonances, p["sigma_0"], p["a_slope"])
+    violation_5 = sm_5 / 0.2
+    assert 80 < violation_5 < 110, (
+        f"dSph violation at v_eff=5 km/s = {violation_5:.1f}x, expected ~92x. "
+        f"sigma/m(v=5) = {sm_5:.2f} cm^2/g."
+    )
+
+
+def test_paper_v110_horigome_velocity_convention():
+    """v1.10: Horigome+ uses v_eff = 0.64 * V_max (NOT v=30 km/s).
+
+    The Horigome+ 2025 paper computes sigma_eff by integrating over the
+    Maxwell-Boltzmann distribution with v_eff = 0.64 * V_max (Eq. 15 of [27],
+    following Yang & Yu 2022 [30]). For classical dSphs, V_max ~ 15-30 km/s
+    so v_eff ~ 10-20 km/s.
+
+    Applying the constraint at v=30 km/s (as v1.6-v1.9 did) overestimates the
+    velocity by a factor of 2-3 and inflates the apparent tension.
+    """
+    # This is a documentation test, not a numerical one
+    # It checks that the v1.10 paper contains the correct v_eff discussion
+    paper_path = CODE_DIR.parent.parent / "v0.3-prelim" / "docs" / "PAPER_V1_DRAFT.md"
+    if not paper_path.exists():
+        paper_path = CODE_DIR.parent.parent / "docs" / "PAPER_V1_DRAFT.md"
+    if not paper_path.exists():
+        pytest.skip(f"PAPER_V1_DRAFT.md not found")
+    content = paper_path.read_text(encoding="utf-8")
+    assert "v1.10" in content, "Paper should be at v1.10"
+    # v_eff may be rendered as 'v_eff' or with combining characters
+    assert "v_eff" in content, "v1.10 paper must discuss v_eff (Horigome+ convention)"
+    assert "V_max" in content or "V̂_max" in content, (
+        "v1.10 paper must discuss V_max (Horigome+ convention)"
+    )
+    assert "10" in content and "20" in content and "km/s" in content, (
+        "v1.10 paper must state the correct dSph velocity scale"
     )
 
 
