@@ -167,5 +167,108 @@ class TestJointFitMechanism:
         )
 
 
+class TestJointFitLimitations:
+    """Tests for known limitations of the v1.12 model.
+
+    These tests DOCUMENT where the model fails; they are not regression
+    guards for a passing condition. Reviewer T120review1.docx flagged the
+    UFD v<7 km/s tension as a real concern.
+    """
+
+    def test_ufd_v5_violation_documented(self):
+        """v1.12 model FAILS at v=5 km/s (extreme UFDs): 1.87x violation.
+
+        This is a DOCUMENTED LIMITATION, not a regression. The Yukawa
+        background sigma_0 * (v_ref/v)^a_slope with sigma_0=0.052 and
+        a_slope=1.93 grows too fast at low v. The two-component
+        f_H^2 = 0.09 reduction is not enough at v=5.
+
+        See §9.5 of paper v1.12 for discussion and possible fixes.
+        """
+        sigma_HH_v5 = total_sigma_m_gaussian(5.0, T120_4_V_TARGETS, T120_4_SIGMA_PEAKS, T120_4_W_LIST_DEFAULT, 0.052, 1.93)
+        # Core-collapsed at r=0.2 (most aggressive reduction)
+        f_H = 0.30
+        sigma_eff = f_H * f_H * sigma_HH_v5
+        # Document the violation (not a test failure, just a measurement)
+        violation = sigma_eff / 0.8
+        assert violation > 1.0, (
+            f"v1.12 should fail at v=5 (reviewer flagged): violation={violation:.2f}x"
+        )
+        # Print for clarity
+        print(f"\n  DOCUMENTED LIMITATION at v=5: sigma_eff={sigma_eff:.2f}, "
+              f"violation={violation:.2f}x (FAIL)")
+
+    def test_ufd_v7_at_threshold(self):
+        """v1.12 model at v=7 km/s is right at the threshold (~1x violation).
+
+        This is the BORDERLINE case: v_eff=7 km/s gives sigma_eff ~ 0.78,
+        just below the 0.8 limit. UFDs with V_max ~ 11 km/s -> v_eff ~ 7 km/s
+        are at the model boundary.
+        """
+        sigma_HH_v7 = total_sigma_m_gaussian(7.0, T120_4_V_TARGETS, T120_4_SIGMA_PEAKS, T120_4_W_LIST_DEFAULT, 0.052, 1.93)
+        f_H = 0.30
+        sigma_eff = f_H * f_H * sigma_HH_v7
+        # At v=7, expect ~0.98x violation (right at limit)
+        violation = sigma_eff / 0.8
+        assert 0.5 < violation < 2.0, (
+            f"v=7 should be borderline: violation={violation:.2f}x"
+        )
+
+    def test_v10_passes(self):
+        """v1.12 model passes at v=10 km/s (most UFDs)."""
+        sigma_HH_v10 = total_sigma_m_gaussian(10.0, T120_4_V_TARGETS, T120_4_SIGMA_PEAKS, T120_4_W_LIST_DEFAULT, 0.052, 1.93)
+        f_H = 0.30
+        sigma_eff = f_H * f_H * sigma_HH_v10
+        violation = sigma_eff / 0.8
+        assert violation < 1.0, (
+            f"v=10 should pass: violation={violation:.2f}x"
+        )
+
+
+class TestJointFitBICPenalty:
+    """Tests documenting the BIC complexity penalty.
+
+    Reviewer T120review1.docx requested complexity cost analysis.
+    T120 adds ~7 free parameters over Phase 44. At same logL improvement,
+    BIC penalty is +34 (T120 worse by Occam's razor).
+    """
+
+    def test_bic_penalty_estimated(self):
+        """Estimate the BIC penalty from additional parameters.
+
+        Phase 44: k=11 free params
+        T120:     k=11+7 = 18 free params
+        Delta BIC = 7 * log(127) = 34.9 (T120 worse at same logL)
+
+        This is DOCUMENTED LIMITATION, not a regression. To beat this,
+        joint fit must show Delta logL >= +17 (which would make
+        Delta BIC = 2*17 - 7*log(127) = 34 - 35 = -1, i.e. T120 slightly
+        preferred).
+        """
+        import numpy as np
+        n_data = 127
+        k_phase44 = 11
+        k_t120 = 18
+        bic_penalty = (k_t120 - k_phase44) * np.log(n_data)
+        # This is a measurement, not a regression
+        assert bic_penalty > 30, f"BIC penalty should be ~35: {bic_penalty:.2f}"
+
+    def test_required_dlogl_to_beat_bic(self):
+        """Compute required Delta logL to beat BIC penalty.
+
+        For Delta BIC <= 0 (T120 preferred), need Delta logL >= +17.
+        Phase 44 achieved +8.10 on SPARC + JVAS + Cloud-9.
+        Joint fit with dSph + UFD would need to show additional +9 logL.
+        """
+        import numpy as np
+        n_data = 127
+        k_diff = 7
+        required_dlogl = k_diff * np.log(n_data) / 2
+        # This is a calculation, just document it
+        assert 16 < required_dlogl < 18, (
+            f"Required Delta logL should be ~17: {required_dlogl:.2f}"
+        )
+
+
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])

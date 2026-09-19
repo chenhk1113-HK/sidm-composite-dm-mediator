@@ -2,7 +2,7 @@
 
 **Authors:** SIDM Composite DM-Mediator Collaboration
 **Branch:** `wip/cloud-9-relhic` (commit `10d29f7`, 2026-09-16)
-**Status:** Paper draft (v1.12, INTERNAL REFERENCE, **Markdown source of truth — no PDF build during drafting**) incorporating Phases 32–54 plus T120 self-consistent model resolution. v1.12 adds **§9 "Self-Consistent Two-Component Model with Gravothermal Selection"** which resolves the v1.11 6–23× dSph tension by combining three mechanisms: (a) Gaussian Breit-Wigner profile (replaces Lorentzian 1/Δv² tail), (b) two-component asymmetric DM (Yang, Tsai, Fan 2025 PRD [42]) with mass segregation, (c) gravothermal core-collapse selection effect (Yu 2026 PRL [23], Yang, Nadler, Yu, Zhong 2024 JCAP [43]). With Gaussian width w₁ = 3 km/s, the framework satisfies ALL four observational constraints simultaneously: Cloud-9 (v=28, σ/m = 128 cm²/g ≥ 100 ✓), dSph (v=15, σ/m = 0.18 cm²/g ≤ 0.8 ✓), SPARC (v=100, σ/m = 0.19 cm²/g ∈ [0.05, 0.5] ✓), cluster (v=500, σ/m = 0.0002 cm²/g < 1.0 ✓). The dSph reduction comes from Gaussian (2.5×) × gravothermal selection (11×) = 28× combined. The framework is now a **self-contained DM model** that reconciles tensions across conditions. v1.11 corrected §3.6 dSph limit choice (25–92× → 6–23× using Horigome+ w=10 km/s limit); v1.12 supersedes this with the full resolution. T120.1–T120.4 code, tests, and joint fit live on `wip/multi-component-SIDM-core-collapse` branch. T101 partial-wave, T110 Path A (Chu+ near-threshold), and T110 Path B (inelastic) closed branches remain as documented investigations.
+**Status:** Paper draft (v1.12, INTERNAL REFERENCE, **Markdown source of truth — no PDF build during drafting**) incorporating Phases 32–54 plus T120 self-consistent model resolution. v1.12 adds **§9 "Self-Consistent Two-Component Model with Gravothermal Selection"** which resolves the v1.11 6–23× dSph tension by combining three mechanisms: (a) Gaussian Breit-Wigner profile (replaces Lorentzian 1/Δv² tail), (b) two-component asymmetric DM (Yang, Tsai, Fan 2025 PRD [42]) with mass segregation, (c) gravothermal core-collapse selection effect (Yu 2026 PRL [23], Yang, Nadler, Yu, Zhong 2024 JCAP [43]). With Gaussian width w₁ = 3 km/s, the framework satisfies ALL four observational constraints at v_eff ≥ 7 km/s simultaneously: Cloud-9 (v=28, σ/m = 128 cm²/g ≥ 100 ✓), dSph (v=15, σ/m = 0.18 cm²/g ≤ 0.8 ✓), SPARC (v=100, σ/m = 0.19 cm²/g ∈ [0.05, 0.5] ✓), cluster (v=500, σ/m = 0.0002 cm²/g < 1.0 ✓). The dSph reduction comes from Gaussian (2.5×) × gravothermal selection (11×) = 28× combined. **v1.12 honest limitations (§9.5, §9.7):** the model **FAILS at v_eff < 7 km/s** (extreme UFDs, 1.87× violation at v=5 km/s); the BIC complexity penalty is +34 (T120 worse by Occam unless joint logL improvement exceeds +17). The framework is now a **self-contained DM model** that reconciles tensions at v_eff ≥ 7 km/s. v1.11 corrected §3.6 dSph limit choice (25–92× → 6–23× using Horigome+ w=10 km/s limit); v1.12 supersedes this with the resolution. T120.1–T120.6 code, tests, reviewer response, and joint fit live on `wip/multi-component-SIDM-core-collapse` branch. T101 partial-wave, T110 Path A (Chu+ near-threshold), and T110 Path B (inelastic) closed branches remain as documented investigations.
 
 **Draft workflow (per 2026-09-17 user decision):** Read this file directly in any modern text editor (VS Code, GitHub, Obsidian). Unicode subscripts/superscripts, M☉, σ, ⚠, etc. all render as proper text in the editor. No PDF rendering until the paper is closer to submission. When PDF is needed, install Pandoc + XeLaTeX and run `pandoc PAPER_V1_DRAFT.md -o paper.pdf` (one-time setup, ~5 min).
 **Recommended venue:** PRD, JCAP, or JHEP (mixed-verdict focus appropriate for all three)
@@ -421,13 +421,39 @@ The combined 28× reduction (5.0 → 0.18 cm²/g) comes from Gaussian (2.5×) ×
 
 - **f_H profile**: We adopt Yang+ 2025 PRD Fig. 2 patterns. These come from Møller/Rutherford cross-sections with σ₀/m = 147.1 cm²/g, w = 24.33 km/s in the VD100 model. Our Phase 44 multi-resonance uses different parameters; a full cosmological simulation with our exact parameters is a future task.
 - **Gaussian BW**: The Gaussian is a phenomenological choice. The actual resonance profile depends on the channel couplings and decay widths; the Gaussian is a good approximation when Γ_channel ≪ Γ_resonance.
-- **Observation radius**: We assume dSph stars are observed at r ≈ 0.2 r_vir (half-light radius). For Draco (r_half-light ≈ 220 pc, r_vir ≈ 9 kpc → ratio 0.024), this is conservative; for Fornax (r_half ≈ 700 pc, r_vir ≈ 16 kpc → ratio 0.044), still conservative.
+- **Observation radius**: We assume dSph stars are observed at r ≈ 0.2 r_vir (half-light radius). For Draco (r_half-light ≈ 220 pc, r_vir ≈ 9 kpc → ratio 0.024), this is conservative; Fornax (r_half ≈ 700 pc, r_vir ≈ 16 kpc → ratio 0.044), still conservative.
 - **Two-component mass ratio**: We use m_H/m_L = 3 from Yang+ 2025 PRD. Other mass ratios give different segregation strengths but the qualitative selection effect is robust.
 - **Gravitational state**: We assume dSphs are fully core-collapsed. Subhalo tidal stripping in the Milky Way may have stripped the outer light component, modifying f_H at the observation radius. This is a sub-percent effect on σ/m_eff at v=15.
+- **UFD limit (v_eff < 7 km/s)**: The Yukawa background σ₀ × (v_ref/v)^α with σ₀ = 0.052, α = 1.93 grows without bound at low v. Combined with two-component f_H² = 0.09 reduction, the predicted σ/m_eff at v=5 km/s is 1.50 cm²/g, which **violates the Horigome+ 0.8 cm²/g limit by 1.87×**. The model PASSES at v_eff ≥ 7 km/s but FAILS for the most extreme UFDs (V_max ~ 5 km/s → v_eff ~ 3 km/s). Possible fixes for v1.13: (a) flatten the Yukawa background to α ~ 1.0, (b) impose a hard cutoff below v_min ~ 10 km/s, (c) tighter gravothermal selection (f_H < 0.30 at v=5 km/s). This is a real limitation that must be addressed before final submission.
+- **Occam / complexity penalty**: T120 adds ~7 free parameters over Phase 44 (m_H/m_L ratio, Gaussian width w₁, f_H profile parameters, gravothermal evolution time). At the same logL improvement as Phase 44, the BIC penalty is +34 (T120 worse by Occam). A proper joint fit including dSph and UFD data is required to determine the true ΔlogL. Until that fit is done, the complexity penalty is a real concern; see §9.7.
 
 ### 9.6 Summary
 
-The v1.12 framework presented here provides a self-consistent, multi-component DM model that simultaneously satisfies the Cloud-9 high-σ/m requirement, the Horigome+ dSph upper limit, the SPARC rotation-curve band, and the cluster-scale bound. The key innovations are: (1) Gaussian Breit-Wigner profile, (2) two-component asymmetric DM with mass segregation, (3) gravothermal core-collapse selection effect on the observation radius. The model is testable against future observations of core-collapse substructures in dSphs and dwarf irregular galaxies.
+The v1.12 framework presented here provides a self-consistent, multi-component DM model that simultaneously satisfies the Cloud-9 high-σ/m requirement, the Horigome+ dSph upper limit, the SPARC rotation-curve band, and the cluster-scale bound at v_eff ≥ 7 km/s. The key innovations are: (1) Gaussian Breit-Wigner profile, (2) two-component asymmetric DM with mass segregation, (3) gravothermal core-collapse selection effect on the observation radius. The model is testable against future observations of core-collapse substructures in dSphs and dwarf irregular galaxies. Limitations include the UFD v<7 km/s tension (§9.5) and the unverified BIC penalty (§9.7).
+
+### 9.7 Occam's Razor: Complexity Cost
+
+The T120 model adds ~7 free parameters over Phase 44:
+- 1 (mass ratio m_H/m_L)
+- 1 (Gaussian width w₁)
+- 3-5 (f_H profile shape parameters: r_collapse, σ_seg, etc.)
+- 1 (gravothermal evolution time τ)
+
+At the same logL improvement as Phase 44 (ΔlogL = +8.10), the BIC difference is:
+
+  ΔBIC = (k_T120 - k_Phase44) × log(N_data) = 7 × log(127) = +34.9
+
+This means T120 is **WORSE by Occam's razor** unless the joint logL improvement exceeds +17 (BIC = -2*logL + k*log(N); for ΔBIC = 0 we need ΔlogL ≥ k×log(N)/2 ≈ 17).
+
+**This is a real concern.** The Phase 44 +8 log-unit improvement was achieved on (SPARC + JVAS + Cloud-9) data. If a joint fit including (dSph + UFD) shows a comparable or larger improvement, the model is justified. Until that fit is done, the T120 model is **post-hoc** — it was designed to fix the v1.11 tension rather than being predicted a priori.
+
+**Justification for additional complexity:**
+- m_H/m_L is fixed by Yang+ 2025 PRD at 3:1 (not free).
+- Gaussian width w₁ is constrained by the resonance natural width Γ.
+- f_H profile shape is constrained by cosmological simulations (Yang+ 2025 PRD Fig. 2).
+- Gravothermal evolution time τ is constrained by cluster density profiles.
+
+A refined v1.13 model could fix 4-5 of these parameters from independent measurements, reducing effective free parameters to 2-3.
 
 ---
 
