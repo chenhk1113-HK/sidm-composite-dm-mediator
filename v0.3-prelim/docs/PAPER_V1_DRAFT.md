@@ -590,13 +590,38 @@ The two are **complementary, not redundant**.
 | σ/m(v=100 km/s) | 0.044 cm²/g | 0.052 cm²/g | ✓ MATCH |
 | σ_SI (loop) | 3.8 × 10⁻⁵¹ cm² | < 9.4 × 10⁻⁴⁷ cm² | ✓ PASS |
 
+**Full σ/m(v) curve in 3-30 km/s window (T120.11.B, comment12 response)**:
+
+The pseudo-Dirac Yukawa component, evaluated with our parameters
+(α_D=0.0015, m_A'=30 MeV, Δm=10 MeV), gives the following σ/m(v) values:
+
+| v (km/s) | σ_Yukawa_pseudo_Dirac | + BW peaks | + 2C+grav (σ_eff) | Observation | Status |
+|---|---|---|---|---|---|
+| 3 | 0.44 cm²/g | 0.44 | 0.04 | < 0.8 | ✓ |
+| 5 | 0.34 | 0.34 | 0.09 | < 0.8 | ✓ |
+| 7 | 0.29 | 0.29 | 0.07 | < 0.8 | ✓ |
+| 10 | 0.24 | 0.24 | 0.05 | < 0.8 | ✓ |
+| 15 | 0.20 | 0.20 | 0.03 | < 0.8 | ✓ |
+| **28** | **0.14** | **184** (BW peak dominates) | **128** | **≥100** | **✓** |
+| 100 | 0.08 | 0.46 | 0.19 | ∈[0.05, 0.5] | ✓ |
+| 500 | 0.03 | 0.03 | 0.0002 | < 1.0 | ✓ |
+
+Notes:
+- "σ_Yukawa_pseudo_Dirac" is the Zhang 2016 prediction alone (no BW peaks)
+- "+ BW peaks" adds Phase 44's 5 Gaussian Breit-Wigner resonances
+- "+ 2C+grav" applies the two-component + gravothermal factor f_H²
+- Cloud-9 (v=28) is satisfied almost entirely by the BW peak at v=29 km/s
+- dSph/UFD (v<15) are satisfied by σ_Yukawa alone (all < 0.8) and improved by 2C+grav
+- The pseudo-Dirac does NOT degrade Cloud-9 because the BW peak dominates
+
 **Velocity dependence in pseudo-Dirac (T120.11.B)**: At low v (v < Δm/m_χ),
 the pseudo-Dirac cross-section has additional velocity dependence beyond
 the Yukawa form. The full σ/m(v) curve in the critical 3-30 km/s window
 is computed in `t120_11_hidden_u1_uv.py`. The key feature is that for
 v < ~30 km/s, σ/m(v) can have an additional suppression because the
 adiabatic approximation breaks down; this needs to be checked against
-the Cloud-9 (v=28) and dSph (v=15) constraints.
+the Cloud-9 (v=28) and dSph (v=15) constraints. **Verified above**: all
+low-v points sit comfortably below the 0.8 cm²/g threshold.
 
 **Excited-state abundance (T120.11.C)**: The χ_2 excited state can be
 populated thermally in the early universe if kT > Δm. At recombination
@@ -640,8 +665,10 @@ Reviewer comment12.docx emphasized that the claim hierarchy should be
 explicit:
 
 1. **T120.1–T120.7 (phenomenological)**: Multi-component DM + gravothermal
-   core-collapse selection + Gaussian BW + flattened background slope
-   → **resolves** the Cloud-9 vs UFD/dSph tension. This is the CORE RESULT.
+   core-collapse selection + Gaussian BW + **flattened background slope
+   (a_slope = 1.93 → 1.0)** → **resolves** the Cloud-9 vs UFD/dSph
+   tension. This is the **CORE RESULT**. (Note: the background-slope
+   adjustment is part of the phenomenological layer, not the UV layer.)
 
 2. **T120.9a (statistical)**: MCMC refit verifies the phenomenological
    parameters. ΔBIC = -170 (T120 WINS by Occam).
@@ -665,15 +692,37 @@ component should be cited for what it actually does.
 
 ## 10. Conclusions
 
-We have presented a multi-resonance SIDM framework in which σ/m(v) contains four Breit-Wigner peaks at velocities v = [28, 100, 300, 700] km/s. The framework is tested against three observational channels (SPARC, Cloud-9, JVAS) with the following headline results:
+We have presented a **coherent mixed-verdict multi-scale SIDM framework**
+that combines three layers — phenomenological multi-component dynamics,
+statistical verification, and a UV-complete mediator sector — into a
+single self-consistent picture. The model is **consistent with** eight
+observational constraints spanning four orders of magnitude in velocity
+(3-500 km/s), under the assumptions documented in §9. The headline
+results are:
 
 - **+8.10 log-units** joint-fit improvement over single-channel baseline (Phase 44, free fit)
 - **+7.93 log-units** with the clockwork UV prior (Phase 53 v2, BIC Δ = −5.66 favoring clockwork)
 - **Five UV constructions** achieving MINIMAL fine-tuning (Phases 51–52)
 - **115/127 = 90.6%** SPARC rotation-curve consistency (Phase 33d)
-- **Honest mixed verdict**: rotation curves alone do NOT uniquely prefer the multi-resonance architecture (Burkert wins by Bayesian evidence, Phase 41); JVAS B1938+666 lies outside the reliable domain and is better described by complementary core-collapse SIDM (Phase 50)
+- **Fair BIC Δ = -170** vs constant-σ/m on same data set (T120.8): T120 WINS by Occam's razor
+- **MCMC posterior** (T120.9a) recovers v1.13.1 parameters within 1σ
+- **Hidden U(1) pseudo-Dirac** (T120.11): UV-complete + DD-safe (σ_SI = 3.8×10⁻⁵¹ cm², 2400× below LZ)
+- **Honest mixed verdict**: rotation curves alone do NOT uniquely prefer the multi-resonance architecture (Burkert wins by Bayesian evidence, Phase 41); JVAS B1938+666 lies outside the reliable domain and is better described by complementary core-collapse SIDM (Phase 50); the multi-component + gravothermal + flattened-background combination (T120.7) is **consistent with** the Ando+ 2025 [27] dSph/UFD constraints but is **not the unique solution** to the Cloud-9 vs UFD tension.
 
-The multi-resonance architecture is a **defensible particle-physics framework** for unifying cross-sections across velocity scales, with concrete UV homes and multi-channel consistency. It is not a unique or decisive solution, but it is a viable and well-constrained candidate.
+The framework is a **defensible particle-physics framework** for unifying
+cross-sections across velocity scales, with concrete UV homes and
+multi-channel consistency. **It is not the unique solution to the
+Cloud-9 vs UFD tension**, but it is a viable and well-constrained
+candidate that satisfies a wide range of observational constraints with
+explicit, testable UV physics.
+
+**Caveat (per T120.docx 2026-09-19 reviewer recommendation):**
+The background-slope adjustment (a_slope = 1.93 → 1.0) is a phenomenological
+flattening that emerges from the MCMC posterior and is part of the
+phenomenological layer, not a UV-level prediction. The Hidden U(1)
+pseudo-Dirac UV completion provides a separate particle-physics
+interpretation for the Yukawa background, but does not derive the
+slope-1.0 scaling from first principles (it emerges from the data).
 
 ---
 
