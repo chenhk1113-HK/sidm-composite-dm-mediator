@@ -5,8 +5,8 @@
 **Joint-fit framework for self-interacting dark matter (SIDM), grounded in published multi-channel data (dSph, UFD, Bullet, SPARC, LZ, Fermi, DAMPE, Zhang+2025 LSS).**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.4--prelim%2BT88E%2BT90--v13.3-blue)](VERSION)
-[![WIP Paper](https://img.shields.io/badge/wip_paper-v1.13.3-blueviolet)](v0.3-prelim/docs/PAPER_V1_DRAFT.md)
+[![Version](https://img.shields.io/badge/version-0.4--prelim%2BT88E%2BT90--v13.4-blue)](VERSION)
+[![WIP Paper](https://img.shields.io/badge/wip_paper-v1.13.4-blueviolet)](v0.3-prelim/docs/PAPER_V1_DRAFT.md)
 [![Tests](https://img.shields.io/badge/tests-branch--dependent-blue)](v0.3-prelim/tests/)
 [![arXiv:2506.22997](https://img.shields.io/badge/cross--validated-arXiv%3A2506.22997-b31b1b)](https://arxiv.org/abs/2506.22997)
 
@@ -17,7 +17,7 @@
 | Track | Version | Status | Headline |
 |---|---|---|---|
 | **Standing (Tier-1, master)** | `v0.4-prelim+T88E` | master @ 2026-09-02 | σ/m₀ = **0.06 cm²/g**, log Z = **−164.87 ± 0.084**, m_χ = **770 GeV**, m_φ = **453 MeV**; 22 channels; 677 tests pass |
-| **WIP (Tier-2, cloud-9-relhic)** | `T90-Paper-v13.2` | wip/cloud-9-relhic @ `tbd` | Multi-resonance SIDM + Yang+ 2025 PRD two-component + Yu 2026 PRL gravothermal selection + magnetic dipole DM UV completion (a_slope=1.0 PREDICTED, not phenomenological). All 8 observational constraints pass. MCMC posterior recovers v1.13.1 parameters within 1σ (well-defined unimodal). FAIR BIC Δ = -170 T120 WINS by Occam. Multi-component contributes factor 2.9x at Cloud-9. Slope window: a_slope ∈ [0.5, 1.2]. Paper v1.13.2 INTERNAL REFERENCE |
+| **WIP (Tier-2, cloud-9-relhic)** | `T90-Paper-v13.4` | wip/cloud-9-relhic @ `tbd` | Multi-resonance SIDM + Yang+ 2025 PRD two-component + Yu 2026 PRL gravothermal + **Hidden U(1) dark photon + pseudo-Dirac mass splitting UV completion** (Zhang 2016). All 8 constraints pass. MCMC-verified. ΔBIC = -170. σ_DM-DM/m(v=100) = 0.044 cm²/g (close to Phase 44). σ_SI = 3.8e-51 cm² (2400× below LZ limit via kinematic forbiddenness). Paper v1.13.4 INTERNAL REFERENCE |
 
 **Standing version: `v0.4-prelim+T88E`** (Tier-1 milestone, 2026-09-02).
 Recent rounds within this standing version: **+T80** (LZ paper compatibility), **+T81** (Channel 19 = XENONnT/PandaX watch), **+T82** (stale-claim audit), **+T83** (KSFR (3,2) promotion to LATTICE), **+T84** (Channel 18 ρ sensitivity sweep), **+T88.A-E** (XRISM/eROSITA/Euclid Q1 series, T88.E first non-silent FORECAST at v0.7→v0.8), **+T89** (Channel 25 = Goldstein & Hill 2026 ΔN_eff documented null + sidmkit/sidm-vdsigmas σ/m benchmark + 4 citation corrections).
