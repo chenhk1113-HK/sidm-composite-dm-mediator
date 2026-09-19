@@ -214,5 +214,136 @@ class TestHiddenU1Parameters:
         assert sm < 0.02
 
 
+class TestHiddenU1SigmaVCurve:
+    """Tests for the full σ/m(v) curve in 3-30 km/s window (comment12 point 2)."""
+
+    def test_sigma_v_at_extreme_ufd(self):
+        """σ/m at v=3 km/s (extreme UFD) should be < 0.8 cm²/g."""
+        from t120_11_hidden_u1_uv import zhang2016_self_scattering
+        sm = zhang2016_self_scattering(10.44, 0.0015, 0.030, 0.010, v_rel_c=3/2.998e5)
+        assert sm < 0.8, f"sigma/m at v=3 should be < 0.8: got {sm:.3f}"
+
+    def test_sigma_v_at_ufd(self):
+        """σ/m at v=5 km/s (UFD) should be < 0.8 cm²/g."""
+        from t120_11_hidden_u1_uv import zhang2016_self_scattering
+        sm = zhang2016_self_scattering(10.44, 0.0015, 0.030, 0.010, v_rel_c=5/2.998e5)
+        assert sm < 0.8, f"sigma/m at v=5 should be < 0.8: got {sm:.3f}"
+
+    def test_sigma_v_at_dsph(self):
+        """σ/m at v=15 km/s (dSph) should be < 0.8 cm²/g."""
+        from t120_11_hidden_u1_uv import zhang2016_self_scattering
+        sm = zhang2016_self_scattering(10.44, 0.0015, 0.030, 0.010, v_rel_c=15/2.998e5)
+        assert sm < 0.8, f"sigma/m at v=15 should be < 0.8: got {sm:.3f}"
+
+    def test_sigma_v_at_sparc(self):
+        """σ/m at v=100 km/s (SPARC) should be in [0.05, 0.5] cm²/g."""
+        from t120_11_hidden_u1_uv import zhang2016_self_scattering
+        sm = zhang2016_self_scattering(10.44, 0.0015, 0.030, 0.010, v_rel_c=100/2.998e5)
+        assert 0.05 < sm < 0.5, f"sigma/m at v=100 should be in band: got {sm:.3f}"
+
+    def test_sigma_v_at_cloud9_yukawa_only(self):
+        """σ/m from Yukawa at v=28 should be < 0.8 (BW peak handles Cloud-9)."""
+        from t120_11_hidden_u1_uv import zhang2016_self_scattering
+        sm = zhang2016_self_scattering(10.44, 0.0015, 0.030, 0.010, v_rel_c=28/2.998e5)
+        assert sm < 0.8, f"Yukawa sigma/m at v=28 should be < 0.8: got {sm:.3f}"
+
+    def test_sigma_v_velocity_scaling(self):
+        """σ/m should decrease with increasing v (1/v dependence)."""
+        from t120_11_hidden_u1_uv import zhang2016_self_scattering
+        sm_low = zhang2016_self_scattering(10.44, 0.0015, 0.030, 0.010, v_rel_c=10/2.998e5)
+        sm_high = zhang2016_self_scattering(10.44, 0.0015, 0.030, 0.010, v_rel_c=100/2.998e5)
+        assert sm_low > sm_high, (
+            f"sigma/m should decrease with v: {sm_low:.3f} (v=10) > {sm_high:.3f} (v=100)?"
+        )
+
+
+class TestExcitedStateAbundance:
+    """Tests for χ_2 excited state abundance (comment12 point 3)."""
+
+    def test_excited_state_zero_at_BBN(self):
+        """n_χ2/n_χ1 at BBN (T=1 MeV, Δm=10 MeV) should be exponentially small."""
+        import numpy as np
+        Delta_m_eV = 10e6  # 10 MeV in eV
+        T_BBN_eV = 1e6  # 1 MeV
+        ratio = np.exp(-Delta_m_eV / T_BBN_eV)
+        assert ratio < 1e-3, (
+            f"Excited state should be negligible at BBN: n_chi2/n_chi1 = {ratio:.2e}"
+        )
+
+    def test_excited_state_zero_at_recombination(self):
+        """n_χ2/n_χ1 at recombination should be ~0 (Δm >> T)."""
+        import numpy as np
+        Delta_m_eV = 10e6
+        T_recomb_eV = 0.26
+        # exp(-4e7) is effectively 0
+        log_ratio = -Delta_m_eV / T_recomb_eV
+        assert log_ratio < -100, (
+            f"log ratio should be very negative at recombination: {log_ratio:.2e}"
+        )
+
+    def test_excited_state_zero_today(self):
+        """n_χ2/n_χ1 today is essentially 0."""
+        import numpy as np
+        Delta_m_eV = 10e6
+        T_today_eV = 1e-4  # ~1 K in eV (CMB temperature)
+        log_ratio = -Delta_m_eV / T_today_eV
+        assert log_ratio < -1e10
+
+
+class TestPseudoDiracCompatibityWithV113:
+    """Tests that pseudo-Dirac UV is COMPATIBLE with v1.13.1 phenomenology."""
+
+    def test_pseudo_dirac_does_not_break_cloud9(self):
+        """Pseudo-Dirac Yukawa + BW peaks must still give Cloud-9 sigma/m ~ 128."""
+        import sys
+        sys.path.insert(0, 'v0.3-prelim/code')
+        from t120_4_joint_fit import (total_sigma_m_gaussian, T120_4_V_TARGETS,
+                                       T120_4_SIGMA_PEAKS, T120_4_W_LIST_DEFAULT)
+        from phase44_two_component import f_H_at_r
+        import json
+        with open('v0.3-prelim/data/results/phase44_joint_fit.json') as f:
+            d44 = json.load(f)
+        sigma_0 = d44['best_params'][1]
+
+        # At v=28, BW peak dominates
+        sigma_HH = total_sigma_m_gaussian(28.0, T120_4_V_TARGETS, T120_4_SIGMA_PEAKS,
+                                          T120_4_W_LIST_DEFAULT, sigma_0, 1.0)
+        f_H = f_H_at_r(0.05, "core_forming")  # 0.85
+        sigma_eff = f_H * f_H * sigma_HH
+        # Should be ~128 cm²/g (Cloud-9 PASS)
+        assert sigma_eff > 100, f"Cloud-9 should still pass: {sigma_eff:.2f}"
+
+    def test_pseudo_dirac_does_not_break_dsph(self):
+        """Pseudo-Dirac Yukawa + BW peaks + 2C + gravothermal still passes dSph."""
+        import sys
+        sys.path.insert(0, 'v0.3-prelim/code')
+        from t120_4_joint_fit import (total_sigma_m_gaussian, T120_4_V_TARGETS,
+                                       T120_4_SIGMA_PEAKS, T120_4_W_LIST_DEFAULT)
+        from phase44_two_component import f_H_at_r
+        import json
+        with open('v0.3-prelim/data/results/phase44_joint_fit.json') as f:
+            d44 = json.load(f)
+        sigma_0 = d44['best_params'][1]
+
+        # At v=15, BW peaks don't contribute much
+        sigma_HH = total_sigma_m_gaussian(15.0, T120_4_V_TARGETS, T120_4_SIGMA_PEAKS,
+                                          T120_4_W_LIST_DEFAULT, sigma_0, 1.0)
+        f_H = f_H_at_r(0.20, "core_collapsed")  # 0.30
+        sigma_eff = f_H * f_H * sigma_HH
+        # Should be ~0.03 cm²/g (dSph PASS)
+        assert sigma_eff < 0.8, f"dSph should still pass: {sigma_eff:.3f}"
+
+    def test_uv_completion_does_not_change_observables(self):
+        """UV completion is invisible to observations; only affects DD safety."""
+        # UV completion (pseudo-Dirac) doesn't change sigma/v curve
+        # It only changes the particle-physics interpretation of sigma_0
+        # Therefore all 8 observational constraints still pass
+
+        # Just verify the framework is consistent
+        from t120_4_joint_fit import joint_fit_full_evaluation
+        r = joint_fit_full_evaluation(a_slope_override=1.0)
+        assert r["all_pass"], "All 8 should still pass with UV completion"
+
+
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])

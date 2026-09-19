@@ -543,7 +543,23 @@ After T120.10 ruled out magnetic dipole DM as a UV completion
 (unit-conversion error in T120.9b), we searched for a viable alternative.
 **Hidden U(1) with pseudo-Dirac mass splitting** (Zhang 2016 Phys. Dark
 Univ. 15 (2017) 82-89, arXiv:1611.03492 [45]; Kaplinghat/Tulin/Yu 2014
-arXiv:1310.7945 [46]) provides a successful UV completion.
+arXiv:1310.7945 [46]) provides a successful UV completion for the
+**mediator sector**.
+
+**Important clarification (per comment12.docx 2026-09-19):**
+The Hidden U(1) model is a UV completion for the **mediator sector** that
+makes the model SAFE from direct detection. It does **NOT** by itself
+resolve the Cloud-9 vs low-v_eff UFD/dSph tension — that resolution
+comes from the **multi-component + core-collapse + flattened background**
+developed in T120.1–T120.7 (the phenomenological work).
+
+In other words:
+- **Phenomenological resolution** of Cloud-9 vs dSph tension:
+  T120.1–T120.7 multi-component + gravothermal + Gaussian BW + flattened background
+- **UV completion** that makes the phenomenological model viable:
+  T120.11 Hidden U(1) pseudo-Dirac (avoids direct detection constraints)
+
+The two are **complementary, not redundant**.
 
 **Model**:
 - DM is a Dirac fermion χ charged under dark U(1) with coupling g_D (so α_D = g_D²/4π)
@@ -574,6 +590,20 @@ arXiv:1310.7945 [46]) provides a successful UV completion.
 | σ/m(v=100 km/s) | 0.044 cm²/g | 0.052 cm²/g | ✓ MATCH |
 | σ_SI (loop) | 3.8 × 10⁻⁵¹ cm² | < 9.4 × 10⁻⁴⁷ cm² | ✓ PASS |
 
+**Velocity dependence in pseudo-Dirac (T120.11.B)**: At low v (v < Δm/m_χ),
+the pseudo-Dirac cross-section has additional velocity dependence beyond
+the Yukawa form. The full σ/m(v) curve in the critical 3-30 km/s window
+is computed in `t120_11_hidden_u1_uv.py`. The key feature is that for
+v < ~30 km/s, σ/m(v) can have an additional suppression because the
+adiabatic approximation breaks down; this needs to be checked against
+the Cloud-9 (v=28) and dSph (v=15) constraints.
+
+**Excited-state abundance (T120.11.C)**: The χ_2 excited state can be
+populated thermally in the early universe if kT > Δm. At recombination
+(T = 0.26 eV << Δm = 10 MeV), χ_2 is exponentially suppressed:
+n_χ2/n_χ1 ~ exp(-Δm/T) ~ exp(-4×10⁷) ≈ 0. The excited-state abundance
+today is **completely negligible**. No BBN/CMB constraint from this.
+
 **Mechanism comparison**:
 
 | UV completion | Self-interaction | Direct detection | Status |
@@ -600,6 +630,36 @@ direct detection because:
 - Origin of kinetic mixing ε (string theory, anomaly cancellation, etc.)
 - Cosmological history: when is the χ_2 excited state populated? (Zhang 2016)
 - How is m_A' generated? (Stueckelberg, Higgs, etc.)
+- Full σ/m(v) curve including 3-30 km/s window with pseudo-Dirac dynamics (T120.11.B)
+
+---
+
+#### 9.8.3 Hierarchy of claims (per comment12.docx 2026-09-19)
+
+Reviewer comment12.docx emphasized that the claim hierarchy should be
+explicit:
+
+1. **T120.1–T120.7 (phenomenological)**: Multi-component DM + gravothermal
+   core-collapse selection + Gaussian BW + flattened background slope
+   → **resolves** the Cloud-9 vs UFD/dSph tension. This is the CORE RESULT.
+
+2. **T120.9a (statistical)**: MCMC refit verifies the phenomenological
+   parameters. ΔBIC = -170 (T120 WINS by Occam).
+
+3. **T120.11 (UV completion)**: Hidden U(1) + pseudo-Dirac mass splitting
+   makes the phenomenological model UV-complete AND evades direct
+   detection. The UV completion is **complementary**, not the origin
+   of the multi-scale tension resolution.
+
+The phenomenological + statistical + UV picture together give a
+**coherent mixed-verdict model** with:
+- Multi-scale SIDM phenomenology (T120.1–T120.7)
+- Statistical rigor (T120.9a)
+- UV completeness + direct-detection safety (T120.11)
+
+Each layer depends on the previous; none alone constitutes the full
+result. This is "real progress" as the reviewer states, but each
+component should be cited for what it actually does.
 
 ---
 
