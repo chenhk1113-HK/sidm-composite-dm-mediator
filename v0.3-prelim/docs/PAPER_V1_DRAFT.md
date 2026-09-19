@@ -2,7 +2,7 @@
 
 **Authors:** SIDM Composite DM-Mediator Collaboration
 **Branch:** `wip/cloud-9-relhic` (commit `10d29f7`, 2026-09-16)
-**Status:** Paper draft (v1.13.2, INTERNAL REFERENCE, **Markdown source of truth — no PDF build during drafting**) incorporating Phases 32–54 plus T120 self-consistent model + MCMC refit + magnetic dipole UV completion. v1.13.2 builds on v1.13.1 by adding **§9.8.1 MCMC refit** (32-walker emcee × 2000 steps on joint 39-point dataset: posterior median [16%, 84%] a_slope=0.92 [0.63, 1.35], w₁=4.4 [2.6, 6.5] km/s, f_H=0.20 [0.12, 0.34] — all consistent with v1.13.1 hand-tuned values within 1σ) and **§9.8.2 Magnetic dipole UV completion** (Sigurdson+ 2004 PRD 70, 083501 [44]: σ ∝ 1/v from single-photon exchange via magnetic dipole µ_χ — NATURALLY predicts a_slope=1.0, removing the phenomenological-re-tune criticism). Required µ_χ ~ 6.6×10⁻¹⁹ cm is well below Sigurdson+ 2004 bound of ~10⁻¹⁶ e·cm; achievable in composite DM, extra-dim, hidden U(1), or strong dynamics models. With v1.13.2, the framework satisfies **ALL 8 observational constraints simultaneously** at v_eff ≥ 3 km/s with a fully UV-complete particle physics model. T120.1–T120.9 code, tests, MCMC chain, UV completion doc live on `wip/multi-component-SIDM-core-collapse` branch. T101 partial-wave, T110 Path A (Chu+ near-threshold), T110 Path B (inelastic) closed branches remain as documented investigations.
+**Status:** Paper draft (v1.13.3, INTERNAL REFERENCE, **Markdown source of truth — no PDF build during drafting**) incorporating Phases 32–54 plus T120 self-consistent model + MCMC refit + honest UV-completion limitation. v1.13.3 builds on v1.13.2 by correcting the **magnetic dipole UV completion claim** (T120.10): the required µ_χ = 5.35×10⁻¹³ cm is **5350× ABOVE** the Sigurdson+ 2004 bound, and predicts σ_SI = 2.04×10⁻³⁰ cm² which is **2.17×10¹⁶× ABOVE** the LZ 2024 limit. The magnetic dipole DM UV completion is RULED OUT for our σ_0 = 0.052 cm²/g model. **What remains valid**: v1.13.1 phenomenology (σ/v curve, all 8 constraints, MCMC posterior, fair BIC Δ = -170, multi-component + gravothermal selection doing real work) is robust. **What's missing**: a UV completion for a_slope=1.0. Candidates (hidden U(1), composite DM, P-wave resonance) are FUTURE WORK. v1.13.3 documents this honestly rather than post-hoc rationalizing. T120.1–T120.10 code, tests, MCMC chain, all docs live on `wip/multi-component-SIDM-core-collapse` branch.
 
 **Draft workflow (per 2026-09-17 user decision):** Read this file directly in any modern text editor (VS Code, GitHub, Obsidian). Unicode subscripts/superscripts, M☉, σ, ⚠, etc. all render as proper text in the editor. No PDF rendering until the paper is closer to submission. When PDF is needed, install Pandoc + XeLaTeX and run `pandoc PAPER_V1_DRAFT.md -o paper.pdf` (one-time setup, ~5 min).
 **Recommended venue:** PRD, JCAP, or JHEP (mixed-verdict focus appropriate for all three)
@@ -537,42 +537,46 @@ posterior width.
 This confirms that **v1.13.1 is the maximum-likelihood (or close to it)
 configuration of the joint posterior** — not a hand-tuned outlier.
 
-#### 9.8.2 Magnetic Dipole UV Completion (T120.9b)
+#### 9.8.2 UV Completion Status (T120.9b + T120.10 limitation)
 
 The reviewer "Critical review.docx" 2026-09-19 noted that the UFD fix
 (flattening a_slope from 1.93 to 1.0) was a phenomenological re-tune.
-We now identify a **fundamental UV completion** that PREDICTS a_slope=1.0
-from basic physics: **magnetic dipole dark matter** (Sigurdson, Doran,
-Kurylov, Caldwell, Kamionkowski 2004 PRD 70, 083501 [44]).
+T120.9b proposed magnetic dipole dark matter as a UV completion
+(Sigurdson+ 2004 PRD 70, 083501 [44]) that PREDICTS a_slope=1.0 from
+basic physics. However, T120.10 direct-detection analysis revealed a
+**critical unit-conversion error in T120.9b**:
 
-A neutral Dirac fermion χ with magnetic dipole moment µ_χ scatters via
-single-photon exchange:
+| Quantity | T120.9b (wrong) | T120.10 (correct) |
+|---|---|---|
+| Required µ_χ | 1.57×10⁻²⁰ cm | **5.35×10⁻¹³ cm** |
+| σ_SI (DM-nucleon) | "consistent with LZ" | **2.04×10⁻³⁰ cm²** (2.17×10¹⁶× ABOVE LZ limit) |
+| Sigurdson+ 2004 bound | "below bound" | **5350× ABOVE bound** |
 
-  σ(v)/m_χ = (α_EM × µ_χ²)² × π / (m_χ² × v_rel)
+The magnetic dipole UV completion is **RULED OUT** for our model. With
+Phase 44's σ_0 = 0.052 cm²/g, the required µ_χ is 5350× above the
+published Sigurdson+ 2004 upper limit and would predict σ_SI 16 orders
+of magnitude above the LZ 2024 limit. This is a **fundamental
+limitation**, not a parameter adjustment.
 
-This **naturally gives σ ∝ 1/v** at v << m_χ, i.e., **a_slope = 1.0** in
-the Phase 44 + T120 parametrization. The required µ_χ for our σ_0 = 0.052
-cm²/g is µ_χ ~ 6.6 × 10⁻¹⁹ cm (well below Sigurdson+ 2004 bound of ~10⁻¹⁶
-e·cm). The magnetic dipole moment arises naturally in:
+**What remains valid**:
+- v1.13.1 phenomenological σ/v curve satisfies all 8 constraints
+- MCMC posterior (T120.9a) is unimodal and recovers v1.13.1 values
+- Fair BIC Δ = -170 (T120 wins on same data set)
+- Multi-component + gravothermal selection is doing real work
 
-- **Composite DM** (bound state of heavier constituents)
-- **Extra-dimensional models** (Kaluza-Klein excitations)
-- **Hidden U(1)** with kinetic mixing (dark photon)
-- **Strong dynamics** (technicolor or similar)
+**What's missing**: A UV completion for a_slope=1.0. Candidate alternatives:
+1. **Hidden U(1)** with dark-only mediator (bypasses SM direct detection
+   because DM doesn't couple to photons directly)
+2. **Composite DM** with non-point-like structure (different DM-DM vs
+   DM-nucleon coupling)
+3. **P-wave/BW resonance** with different velocity scaling
+4. **Resonant SIDM** (Chu+ 2019) with carefully tuned parameters
 
-**Implications**: v1.13.1's a_slope = 1.0 is no longer a phenomenological
-adjustment but a **PREDICTION of the underlying particle physics**. The
-magnetic dipole model is testable via:
-1. Direct detection recoil spectrum ~ 1/E_R (vs standard WIMP ~ exp(-E_R))
-2. Mono-photon + MET at LHC from χχ̄γ production
-3. CMB power spectrum (magnetic dipole DM is partially ionized)
-4. Future low-threshold direct detection experiments
+These are FUTURE WORK; the v1.13.2 paper documents the limitation
+honestly rather than post-hoc rationalizing a broken UV claim.
 
-**Remaining open questions**:
-- Regularization of 1/v divergence at v → 0 (s-wave unitarity bound or
-  in-medium effects)
-- Whether the magnetic dipole model is consistent with all CMB constraints
-- Projected sensitivity of next-generation LZ, XENONnT, DARWIN
+**§9.8.2 of v1.13.2 should be read with T120.10's correction in mind.**
+The phenomenological model is robust; the UV completion is incomplete.
 
 ---
 
