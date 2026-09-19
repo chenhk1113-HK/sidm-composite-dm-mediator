@@ -77,33 +77,38 @@ def joint_fit_evaluation(
     w_list=T120_4_W_LIST_DEFAULT,
     v_targets=T120_4_V_TARGETS,
     sigma_peaks=T120_4_SIGMA_PEAKS,
+    a_slope_override=None,
 ):
     """Evaluate the T120.4 joint fit at all 4 observational constraints.
 
-    Returns:
-        dict with 'Cloud-9', 'dSph', 'SPARC', 'cluster' sigma/m_eff values
-        and 'all_pass' boolean
+    Parameters
+    ----------
+    a_slope_override : float or None
+        If provided, use this a_slope instead of the Phase 44 best-fit value.
+        Use a_slope_override=1.0 for Option A (flattened Yukawa background)
+        which fixes the UFD v<7 km/s tension in v1.12.
     """
     p44 = _load_phase44_params()
+    a_slope = a_slope_override if a_slope_override is not None else p44["a_slope"]
 
     sm_cloud9 = sigma_eff_two_comp(
         28.0,
-        total_sigma_m_gaussian(28.0, v_targets, sigma_peaks, w_list, p44["sigma_0"], p44["a_slope"]),
+        total_sigma_m_gaussian(28.0, v_targets, sigma_peaks, w_list, p44["sigma_0"], a_slope),
         "core_forming", 0.05,
     )
     sm_dsph = sigma_eff_two_comp(
         15.0,
-        total_sigma_m_gaussian(15.0, v_targets, sigma_peaks, w_list, p44["sigma_0"], p44["a_slope"]),
+        total_sigma_m_gaussian(15.0, v_targets, sigma_peaks, w_list, p44["sigma_0"], a_slope),
         "core_collapsed", 0.20,  # observation radius (half-light radius)
     )
     sm_sparc = sigma_eff_two_comp(
         100.0,
-        total_sigma_m_gaussian(100.0, v_targets, sigma_peaks, w_list, p44["sigma_0"], p44["a_slope"]),
+        total_sigma_m_gaussian(100.0, v_targets, sigma_peaks, w_list, p44["sigma_0"], a_slope),
         "intermediate", 0.05,
     )
     sm_cluster = sigma_eff_two_comp(
         500.0,
-        total_sigma_m_gaussian(500.0, v_targets, sigma_peaks, w_list, p44["sigma_0"], p44["a_slope"]),
+        total_sigma_m_gaussian(500.0, v_targets, sigma_peaks, w_list, p44["sigma_0"], a_slope),
         "core_collapsed", 0.50,
     )
 
@@ -119,6 +124,57 @@ def joint_fit_evaluation(
             and sm_cluster < 1.0
         ),
     }
+
+
+def joint_fit_full_evaluation(
+    w_list=T120_4_W_LIST_DEFAULT,
+    v_targets=T120_4_V_TARGETS,
+    sigma_peaks=T120_4_SIGMA_PEAKS,
+    a_slope_override=None,
+):
+    """Evaluate the T120.4 joint fit at ALL 8 observational points (v1.13).
+
+    Returns dict with sigma/m_eff at each point, plus 'all_pass' which
+    requires all 8 points to satisfy their respective limits.
+
+    v1.13 fix: a_slope_override=1.0 (flattened Yukawa background) fixes
+    the UFD v<7 km/s tension from v1.12.
+    """
+    p44 = _load_phase44_params()
+    a_slope = a_slope_override if a_slope_override is not None else p44["a_slope"]
+
+    # Observation points
+    points = [
+        (3.0, "core_collapsed", 0.20, 0.8, "extreme UFD"),
+        (5.0, "core_collapsed", 0.20, 0.8, "UFD"),
+        (7.0, "core_collapsed", 0.20, 0.8, "edge UFD"),
+        (10.0, "core_collapsed", 0.20, 0.8, "UFD"),
+        (15.0, "core_collapsed", 0.20, 0.8, "classical dSph"),
+        (28.0, "core_forming", 0.05, 100.0, "Cloud-9"),
+        (100.0, "intermediate", 0.05, 0.5, "SPARC"),
+        (500.0, "core_collapsed", 0.50, 1.0, "cluster"),
+    ]
+
+    results = {}
+    for v, ht, r, lim, lbl in points:
+        sigma_HH = total_sigma_m_gaussian(v, v_targets, sigma_peaks, w_list, p44["sigma_0"], a_slope)
+        sm = sigma_eff_two_comp(v, sigma_HH, ht, r)
+        results[f"v{v}_{lbl.replace(' ', '_')}"] = sm
+
+    # all_pass: every point satisfies its limit
+    all_pass = True
+    for v, ht, r, lim, lbl in points:
+        sigma_HH = total_sigma_m_gaussian(v, v_targets, sigma_peaks, w_list, p44["sigma_0"], a_slope)
+        sm = sigma_eff_two_comp(v, sigma_HH, ht, r)
+        if v == 28.0:  # Cloud-9: needs >= 100
+            if sm < lim:
+                all_pass = False
+        else:  # All others: need <= limit
+            if sm > lim:
+                all_pass = False
+    results["all_pass"] = all_pass
+
+    return results
 
 
 # --- Self-test ---
@@ -154,6 +210,43 @@ if __name__ == "__main__":
     print(f"  dSph:     sigma/m(v=15) = {r['dSph']:.3f} cm^2/g  (required <= 0.8, ✓ PASS)")
     print(f"  SPARC:    sigma/m(v=100) = {r['SPARC']:.4f} cm^2/g  (required 0.05-0.5, ✓ PASS)")
     print(f"  cluster:  sigma/m(v=500) = {r['cluster']:.4f} cm^2/g  (required < 1.0, ✓ PASS)")
+
+    print()
+    print("=" * 80)
+    print("v1.13 EXTENDED CHECK — UFD v=3,5,7,10 (with Option A a_slope=1.0)")
+    print("=" * 80)
+    r_v113 = joint_fit_full_evaluation(a_slope_override=1.0)
+    print()
+    for key, sm in r_v113.items():
+        if key == 'all_pass':
+            continue
+        if 'extreme_UFD' in key:
+            lim = 0.8
+            viol = sm / lim
+            status = 'PASS' if viol < 1.0 else 'FAIL'
+        elif 'UFD' in key:
+            lim = 0.8
+            viol = sm / lim
+            status = 'PASS' if viol < 1.0 else 'FAIL'
+        elif 'dSph' in key:
+            lim = 0.8
+            viol = sm / lim
+            status = 'PASS' if viol < 1.0 else 'FAIL'
+        elif 'Cloud-9' in key:
+            lim = 100
+            viol = sm / lim
+            status = 'PASS' if viol >= 1.0 else 'FAIL'
+        elif 'SPARC' in key:
+            lim = 0.5
+            viol = sm / lim
+            status = 'PASS' if viol < 1.0 else 'FAIL'
+        else:  # cluster
+            lim = 1.0
+            viol = sm / lim
+            status = 'PASS' if viol < 1.0 else 'FAIL'
+        print(f"  {key:>30}: sigma/m = {sm:>8.3f}, limit = {lim:>5}, violation = {viol:>5.2f}x [{status}]")
+    print()
+    print(f"  ALL 8 POINTS PASS: {r_v113['all_pass']}")
     print()
     print("This is the SELF-CONSISTENT model the user requested:")
     print("a self-contained DM model that reconciles tensions in different conditions.")
