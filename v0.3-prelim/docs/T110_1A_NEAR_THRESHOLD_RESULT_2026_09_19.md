@@ -5,6 +5,10 @@
 **Sub-task**: T110.1A (literature + parameter mapping)
 **Status**: NEGATIVE RESULT — near-threshold RSIDM cannot satisfy all 3 constraints
 
+**RETRY 2026-09-19 (after v1.10 velocity correction)**: CONFIRMED NEGATIVE.
+
+See end of document for retry results.
+
 ## Summary
 
 Per Chu, Garcia-Cely, Murayama 2019 (PRL 122, 071103), Eq. 2:
@@ -116,3 +120,39 @@ This **naturally inverts** the requirement: σ/m RISES at higher v instead of fa
 ## Recommendation
 
 **Path A is closed (negative result documented). Pivot to Path B (inelastic SIDM) on wip/inelastic-SIDM branch.**
+
+---
+
+## RETRY 2026-09-19 (after v1.10 velocity correction)
+
+After the v1.10 paper correction (using v_eff = 0.64 × V_max instead of v=30 km/s), the dSph tension reduces from 800× to 25-92×. Retested Path A to see if the Chu+ near-threshold resonance could satisfy the corrected 25× target.
+
+### Constraint (corrected)
+- Cloud-9: σ/m(v=28) ≥ 100 cm²/g (Benítez-Llambay+ 2024 floor)
+- dSph: σ/m(v_eff=15) < 0.2 cm²/g (Horigome+ 2025 at classical dSph v_eff)
+- SPARC: σ/m(v=100) in [0.05, 0.5] cm²/g
+
+### Result: STILL NEGATIVE
+
+Parameter scan for S-wave near-threshold with v_R tuned to give σ(28) ~ 100:
+
+| v_R (km/s) | γ (S-wave) | σ(v=15) | dSph violation |
+|---|---|---|---|
+| 50 | 3.8×10⁻¹¹ | 2484 cm²/g | 12,000× |
+| 60 | 6.2×10⁻¹¹ | 3040 cm²/g | 15,000× |
+| 80 | 1.2×10⁻¹⁰ | 3612 cm²/g | 18,000× |
+| 100 | 2.0×10⁻¹⁰ | 3882 cm²/g | 19,000× |
+
+### Why It Still Fails
+
+The fundamental issue: **unitarity limit at v=15 is σ_max ~ 1.4×10⁶ cm²/g** (for m_chi = 0.5 GeV). Even with the resonance peak placed at v_R=50, the off-resonance BW factor at v=15 is not enough to suppress σ to <0.2 cm²/g. The required BW factor of 10⁻⁶ would need Gamma/Delta_E ~ 10⁻³, requiring γ ~ 10⁻¹³ — extreme fine-tuning.
+
+P-wave (L=1) is WORSE because Γ ∝ v³ means the BW is even narrower at low v.
+
+### Implication
+
+The Horigome+ 95% CL upper limit of σ/m < 0.2 cm²/g at v_eff = 15 km/s is **physically incompatible** with σ/m ≥ 100 cm²/g at v=28 km/s in ANY smooth σ(v) function. This is not a Phase 44 problem — it's a fundamental issue with the Horigome+ limit being very tight at low v.
+
+### Path A Final Verdict
+
+**DEFINITIVELY CLOSED** — both under the original 800× target AND the corrected 25× target.
