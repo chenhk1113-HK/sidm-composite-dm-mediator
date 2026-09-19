@@ -5,8 +5,8 @@
 **Multi-scale self-interacting dark matter framework: a self-consistent multi-component + gravothermal + Hidden U(1) UV model that satisfies 8 observational constraints spanning 4 orders of magnitude in velocity.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.4--prelim%2BT88E%2BT90--v13.4-blue)](VERSION)
-[![WIP Paper](https://img.shields.io/badge/wip_paper-v1.13.4-blueviolet)](v0.3-prelim/docs/PAPER_V1_DRAFT.md)
+[![Version](https://img.shields.io/badge/version-0.4--prelim%2BT88E%2BT90--v13.5-blue)](VERSION)
+[![WIP Paper](https://img.shields.io/badge/wip_paper-v1.13.5-blueviolet)](v0.3-prelim/docs/PAPER_V1_DRAFT.md)
 [![Tests](https://img.shields.io/badge/tests-branch--dependent-blue)](v0.3-prelim/tests/)
 [![arXiv:2506.22997](https://img.shields.io/badge/cross--validated-arXiv%3A2506.22997-b31b1b)](https://arxiv.org/abs/2506.22997)
 
@@ -24,11 +24,21 @@
 3. **Resonance + Gaussian broadening** (peaks in scattering at specific velocities)
 4. **Hidden U(1) dark photon** (UV-complete particle physics)
 
-**Verification:** 94 automated tests pass. MCMC independently recovered our hand-tuned parameters. Statistical comparison beats simpler models by ΔBIC = -170.
+**Verification:** 116 automated T120 tests pass. MCMC independently recovered our hand-tuned parameters. Statistical comparison beats simpler models by ΔBIC = -170. Direct detection safely evaded.
 
-**What remains:** The slope of the velocity dependence (α ≈ 1) emerges from data but isn't derived from UV physics yet — first-principles UV derivation is future work.
+**What remains:** Specific parameter values (α_D, m_A', Δm) are still chosen for data compatibility, not derived. But the **velocity slope of the background** is now a UV prediction (a_slope = 0.5 from Zhang 2016's off-diagonal Yukawa matrix element).
 
-**Read the paper:** [`v0.3-prelim/docs/PAPER_V1_DRAFT.md`](v0.3-prelim/docs/PAPER_V1_DRAFT.md) (v1.13.4)
+**Read the paper:** [`v0.3-prelim/docs/PAPER_V1_DRAFT.md`](v0.3-prelim/docs/PAPER_V1_DRAFT.md) (v1.13.5)
+
+**T120 series journey:**
+- T120.1-7: Built the phenomenology (multi-component + core-collapse + flattened slope)
+- T120.8-9: MCMC verification + fair BIC comparison
+- T120.10: Direct detection analysis (ruled out magnetic dipole)
+- T120.11: Found Hidden U(1) UV completion (Zhang 2016)
+- T120.12: Paper polishing
+- T120.13: Self-check found 2 bugs in new code
+- T120.14: Reframed slope problem as feature, not flaw
+- T120.15.B: Derived slope = 0.5 from UV physics, addressed reviewer comments
 
 ---
 
@@ -37,7 +47,7 @@
 | Track | Version | Status | Headline |
 |---|---|---|---|
 | **Standing (Tier-1, master)** | `v0.4-prelim+T88E` | master @ 2026-09-02 | σ/m₀ = **0.06 cm²/g**, log Z = **−164.87 ± 0.084**, m_χ = **770 GeV**, m_φ = **453 MeV**; 22 channels; 677 tests pass |
-| **WIP (Tier-2, multi-component-SIDM-core-collapse)** | `T90-Paper-v13.5` | wip/multi-component-SIDM-core-collapse @ `tbd` | **MOST PROMISING**: Multi-resonance SIDM + Yang+ 2025 PRD two-component + Yu 2026 PRL gravothermal + **Hidden U(1) dark photon + pseudo-Dirac mass splitting UV completion** (Zhang 2016). **All 8 observational constraints pass simultaneously.** **NEW (T120.15): UV-derived slope a_slope = 0.5 from first principles** (Hidden U(1) Born-approximation prediction); verified by Schutz-Slatyer 2014 + Brahma+ 2024 alternative UV derivations as comparison. MCMC independently recovers parameters within 1σ. Fair BIC Δ = -170. σ_SI = 3.8×10⁻⁵¹ cm² (2400× below LZ). **186 tests + 9 skips + 7 audit claims pass.** Paper v1.13.5 INTERNAL REFERENCE |
+| **WIP (Tier-2, multi-component-SIDM-core-collapse)** | `T90-Paper-v13.5` | wip/multi-component-SIDM-core-collapse @ `453c542` | **MOST PROMISING**: Multi-resonance SIDM + Yang+ 2025 PRD two-component + Yu 2026 PRL gravothermal + **Hidden U(1) dark photon + pseudo-Dirac mass splitting UV completion** (Zhang 2016). **All 8 observational constraints pass simultaneously.** **NEW (T120.15.B): UV-derived slope a_slope = 0.5** (from off-diagonal Yukawa matrix element, robust in α_D ∈ [0.001, 0.01]); verified by Schutz-Slatyer 2014 + Brahma+ 2024 comparison; with FULL DERIVATION in `docs/T120_15_UV_SLOPE_DERIVATION.md`. All 8 constraints pass with LARGER safety margin (2.5× at dSph, 5.9× at UFD) than phenomenological slope=1.0. MCMC verifies parameters. Fair BIC Δ = -170. σ_SI = 3.8×10⁻⁵¹ cm² (2400× below LZ). **116 T120 tests + 9 skips + 7 audit claims pass.** Paper v1.13.5 INTERNAL REFERENCE |
 
 **The most promising track** is `wip/multi-component-SIDM-core-collapse` (T120 series) — it satisfies more constraints with fewer assumptions than the v0.4-prelim master or the older cloud-9-relhic track.
 

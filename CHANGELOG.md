@@ -28,11 +28,13 @@ are the rounds the project currently stands on.
 ## [T120] — 2026-09-19
 
 **Self-consistent two-component SIDM + gravothermal core-collapse
-selection — paper v1.11 → v1.12.**
+selection + Hidden U(1) UV completion — paper v1.11 → v1.12 → v1.13.5.**
 
 This is the resolution of the v1.11 residual 6–23× dSph tension via
 three independent mechanisms combined into a single self-consistent DM
 model. **All 4 observational constraints simultaneously satisfied.**
+**v1.13.5 adds UV-derived velocity slope α_slope = 0.5** from
+Zhang 2016's off-diagonal Yukawa matrix element.
 
 ### Sub-phases
 
