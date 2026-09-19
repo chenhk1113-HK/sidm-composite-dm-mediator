@@ -366,6 +366,131 @@ def sigma_m_partial_wave(
     return sigma_cm2_per_g
 
 
+# =========================================================================
+# T101.3 — Breit-Wigner resonance profile (additive on partial-wave background)
+# =========================================================================
+
+def breit_wigner_factor_v2_space(
+    v_kms: float,
+    m_chi_GeV: float,
+    E_R_eV: float,
+    Gamma_eV: float,
+) -> float:
+    """Breit-Wigner shape factor in v^2-space (Phase 44 convention).
+
+    Mirrors the v^2-space form used in Phase 44 / phase44_joint_fit:
+        E = 0.5 m_chi v^2  (kinetic energy in the CM frame)
+        BW = (Gamma/2)^2 / [(E - E_R)^2 + (Gamma/2)^2]
+
+    This form produces a peak at v_peak != v_target when gamma_frac is non-zero.
+    Specifically: with Gamma = gamma_frac * E_R, the BW factor peaks at v_peak
+    approximately equal to v_target * sqrt(1 + gamma_frac^2/4) for moderate gamma_frac.
+
+    Args:
+        v_kms: relative velocity (km/s)
+        m_chi_GeV: DM mass (GeV)
+        E_R_eV: resonance energy (eV)
+        Gamma_eV: resonance width (eV)
+
+    Returns:
+        BW factor (dimensionless, in [0, 1] when v is on-resonance)
+    """
+    # Kinetic energy in CM: E = 0.5 m_red v^2 = 0.25 m_chi v^2
+    m_chi_eV = m_chi_GeV * 1e9
+    v_cm_s = v_kms * 1e5
+    c_cm_s = 2.998e10
+    E_eV = 0.25 * m_chi_eV * (v_cm_s / c_cm_s) ** 2
+    Gamma_half = Gamma_eV / 2.0
+    denom = (E_eV - E_R_eV) ** 2 + Gamma_half ** 2
+    return (Gamma_half ** 2) / denom
+
+
+def sigma_m_with_resonances(
+    v_kms: float,
+    m_chi_GeV: float,
+    alpha: float,
+    m_phi_GeV: float,
+    resonances: list,
+    l_max: int = 10,
+    **kwargs,
+) -> dict:
+    """Compute σ/m(v) with partial-wave background + additive Breit-Wigner resonances.
+
+    σ/m(v) = σ/m_background(v) + Σ_resonances σ_peak * BW(v; v_target, Γ)
+
+    This is the T101.3 implementation. It uses the partial-wave σ/m for the
+    non-resonant background and adds resonance enhancements in the v²-space
+    form (Phase 44 convention) on top.
+
+    Args:
+        v_kms: relative velocity (km/s)
+        m_chi_GeV: DM mass (GeV)
+        alpha: Yukawa coupling for background (dimensionless)
+        m_phi_GeV: mediator mass (GeV)
+        resonances: list of dicts, each with:
+            {"name": str, "E_R_eV": float, "Gamma_eV": float, "sigma_peak_cm2_per_g": float}
+        l_max: max partial wave for background
+
+    Returns:
+        dict with sigma_m_total, sigma_background, sigma_resonant, per_resonance
+    """
+    # Background from partial-wave (T101.1 + T101.2)
+    sigma_background = sigma_m_partial_wave(
+        v_kms, m_chi_GeV, alpha, m_phi_GeV, l_max=l_max, **kwargs
+    )
+
+    # Resonant contribution (additive, v²-space BW)
+    sigma_resonant_total = 0.0
+    per_resonance = {}
+    for res in resonances:
+        E_R_eV = res["E_R_eV"]
+        Gamma_eV = res["Gamma_eV"]
+        sigma_peak = res["sigma_peak_cm2_per_g"]
+        bw_factor = breit_wigner_factor_v2_space(v_kms, m_chi_GeV, E_R_eV, Gamma_eV)
+        sigma_contribution = sigma_peak * bw_factor
+        sigma_resonant_total += sigma_contribution
+        per_resonance[res["name"]] = {
+            "E_R_eV": E_R_eV,
+            "Gamma_eV": Gamma_eV,
+            "sigma_peak_cm2_per_g": sigma_peak,
+            "bw_factor": bw_factor,
+            "sigma_m_contribution": sigma_contribution,
+        }
+
+    sigma_m_total = sigma_background + sigma_resonant_total
+    return {
+        "sigma_m_total": sigma_m_total,
+        "sigma_background": sigma_background,
+        "sigma_resonant_total": sigma_resonant_total,
+        "per_resonance": per_resonance,
+    }
+
+
+def find_peak_near(
+    v_center: float,
+    v_span: tuple,
+    n_pts: int,
+    sigma_m_func,
+    **kwargs,
+) -> tuple:
+    """Find σ/m peak in a velocity range.
+
+    Args:
+        v_center: approximate peak location (km/s)
+        v_span: (v_min, v_max) search range
+        n_pts: number of sample points
+        sigma_m_func: callable returning σ/m at v
+        **kwargs: passed to sigma_m_func
+
+    Returns:
+        (v_peak, sigma_m_peak)
+    """
+    vs = np.linspace(v_span[0], v_span[1], n_pts)
+    vals = [sigma_m_func(v, **kwargs) for v in vs]
+    i_max = int(np.argmax(vals))
+    return float(vs[i_max]), float(vals[i_max])
+
+
 if __name__ == "__main__":
     # Smoke test: compare to classical BW limit at weak coupling
     print("T101 partial-wave sigma/m(v) — smoke test")
