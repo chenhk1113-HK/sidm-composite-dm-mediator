@@ -1,0 +1,97 @@
+"""Open questions in our SIDM model.
+
+Based on T133 audit + paper v1.14.1, here are the things we know we don't know.
+"""
+import sys
+sys.path.insert(0, r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\code")
+
+import json
+import numpy as np
+
+# Load phenomenology
+with open(r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\data\results\sigma_m_phase44.json") as f:
+    data = json.load(f)
+
+print("=" * 80)
+print("UNKNOWN #1: Why does α_γ ≈ 1.0 instead of Born 2.0?")
+print("=" * 80)
+print("Born (Hidden U(1), m_A'=30 MeV, m_χ=10 GeV): σ_Born ~ 1/v² (slope = 2.0)")
+print("Data (8 points, log-log fit):  slope = -0.97 ± ?")
+print("PySR independent:  slope = -0.97")
+print("GAP: factor of ~2 between theory and data")
+print("Possible explanations:")
+print("  a) Non-perturbative (Sommerfeld) enhancement")
+print("  b) Multi-body effects")
+print("  c) Velocity-dependent resonance overlap")
+print("  d) Modified mediator propagator (running α_D)")
+print("  e) Some combination we haven't identified")
+print()
+
+print("=" * 80)
+print("UNKNOWN #2: What causes the Cloud-9 peak at v=28 km/s?")
+print("=" * 80)
+print(f"σ/m(28) = {data['v28.0_Cloud-9']:.2f} cm²/g")
+print(f"σ/m(15) = {data['v15.0_classical_dSph']:.2e} cm²/g")
+print(f"Ratio: {data['v28.0_Cloud-9']/data['v15.0_classical_dSph']:.0f}× over 2× velocity range")
+print()
+print("Possible explanations:")
+print("  a) Bound-state resonance (n=1, 2, ...)")
+print("  b) Velocity-dependent Breit-Wigner (v_R ~ 28 km/s)")
+print("  c) Phase transition threshold")
+print("  d) Multi-body cusp-core transition")
+print()
+
+print("=" * 80)
+print("UNKNOWN #3: Why 4 Breit-Wigner peaks at specific velocities?")
+print("=" * 80)
+print("v ≈ 28, 100, 178, 430, 769 km/s")
+print("Are these:")
+print("  a) Bound states of the dark photon (n=1, 2, 3, 4)?")
+print("  b) Multi-mediator resonances?")
+print("  c) Multiple velocity scales from DM halos (v_max dispersion)?")
+print("  d) Just phenomenological fits?")
+print()
+
+print("=" * 80)
+print("UNKNOWN #4: Gravothermal collapse — full vs decoupled?")
+print("=" * 80)
+print("Yu+ 2026 PRL model gives core-collapse timing")
+print("We use it for velocity selection (which halos are core-collapsed)")
+print("Question: is selection effect real, or fitting artifact?")
+print()
+
+print("=" * 80)
+print("UNKNOWN #5: Thermal relic consistency")
+print("=" * 80)
+print("Our phenomenology: α_D = 0.0015 (perturbative, σ_SI ~ 10⁻⁵¹)")
+print("Thermal relic α_D ~ 1-3 (standard WIMP)")
+print("GAP: factor of ~2000 between thermal and phenomenology α_D")
+print("Implication: our DM is NOT a thermal relic")
+print("Production mechanism:")
+print("  a) Freeze-in (very small coupling — matches our α_D)")
+print("  b) Asymmetric DM (like baryons — heavy χH, light χL)")
+print("  c) Non-thermal production (e.g., from decay)")
+print()
+
+print("=" * 80)
+print("UNKNOWN #6: Multi-component mass ratio 3:1")
+print("=" * 80)
+print("Yang+ 2025 PRD choice")
+print("Is 3:1 special? Other ratios?")
+print("Physical motivation:")
+print("  a) Atomic physics analog (H:He ratio?)")
+print("  b) Stability condition (m_χH > 2 m_χL for stability?)")
+print("  c) Just a working phenomenological choice")
+print()
+
+print("=" * 80)
+print("WHAT TO SEARCH FOR")
+print("=" * 80)
+print()
+print("Web searches to run:")
+print("1. 'dark matter self-interaction velocity dependence slope'")
+print("2. 'Cloud-9 RELHIC dark matter cross section 2026'")
+print("3. 'hidden sector bound state dark matter resonance'")
+print("4. 'SIDM UV completion 2024 2025 2026'")
+print("5. 'asymmetric dark matter freeze-in'")
+print("6. 'Sommerfeld enhancement SIDM slope'")
