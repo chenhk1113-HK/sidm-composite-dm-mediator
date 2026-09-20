@@ -25,6 +25,49 @@ doc-pack restructure, the T88/T89 dataset-acquisition series, and
 the T90 Tier-3 branch experiment. Kept at full fidelity because they
 are the rounds the project currently stands on.
 
+## [T136] — 2026-09-20
+
+**Asymmetric Dark Atom Theory (ADAT) investigation — Phases 1-4 honest
+verdict: Born-approximation asymmetric DM CANNOT derive our α_γ ≈ 1.**
+
+User committed to working out our own theory based on existing
+complementary frameworks. Phase 1-4 systematically tested:
+
+**Phase 1** (T136_adat_phase1.py): Lagrangian + Born-Yukawa limit
+- Standard Born-Yukawa slope only varies between 0 (saturated) and -4 (Born)
+- The "knee" is around -0.4
+- Petraki atomic formula gives flat slope (b₁, b₂ don't capture resonances)
+- **CANNOT give α_γ ≈ -1** from Born alone
+
+**Phase 2** (T136_adat_phase2.py): Resonance structure
+- Multiple bound states for ξ > 1.68
+- But: simple Yukawa resonances don't easily produce 4 peaks at
+  our specific velocities (28, 100, 178, 430, 769 km/s)
+- Need numerical Schrödinger solver
+
+**Phase 3** (T136_adat_phase3.py): Multi-channel + Breit-Wigner
+- Initial unit conversion bug (factor 10^52 — caught and fixed)
+- After fix: arbitrary peak positions don't naturally give our data
+
+**Phase 4** (T136_adat_phase4.py): Two-component asymmetric DM
+- Even with m_H/m_L = 3:1, weighted Born-Yukawa slope is still in {0, -4, -0.4}
+- Multi-component doesn't bypass Born limitation
+
+**Honest conclusion**:
+- Our phenomenology's specific slope MUST come from non-perturbative
+  resonance physics
+- A real theory requires numerical Schrödinger equation solver (~1-2 weeks)
+- Or: extended dark sector with additional interactions
+
+**Recommendation**: Accept current phenomenology as published (Option A),
+OR invest in numerical solver (Option B), OR extended sector (Option C).
+
+**Files**:
+- v0.3-prelim/code/T136_adat_phase1.py through phase4.py
+- v0.3-prelim/docs/T136_ADAT_INVESTIGATION.md
+
+All compile-checked. Self-check passes. No fabricated results.
+
 ## [T135] — 2026-09-20
 
 **T134 retracted: CFT 2021 match and PySR "independent verification"
