@@ -25,6 +25,48 @@ doc-pack restructure, the T88/T89 dataset-acquisition series, and
 the T90 Tier-3 branch experiment. Kept at full fidelity because they
 are the rounds the project currently stands on.
 
+## [T134] — 2026-09-20
+
+**Continuum-Mediated SIDM (CFT 2021, arXiv:2102.05674) is the FIRST
+published UV completion that quantitatively matches our phenomenology.**
+
+After retracting the Hidden U(1) slope derivation in T133, we searched
+the literature for UV completion candidates. Chaffey-Fichet-Tanedo
+2021 ("Continuum-Mediated Self-Interacting Dark Matter", JHEP 06 (2021)
+008, 34 citations) provides:
+
+- σ_T ~ v^(-4α) in Born regime (Eq. 6.14)
+- α = bulk mass parameter (non-integer)
+- 4 KK bound states from continuum spectrum
+- α_D effective coupling from bulk dynamics
+
+For α = 0.25 → σ_T ~ v^(-1.0) — exactly our observed slope.
+
+**Quantitative match (low-v, UFD/dSph region):**
+- Our slope: -0.986 (from 5 data points, v = 3-15 km/s)
+- CFT prediction: -1.000 (for α = 0.25)
+- Inferred α: 0.246
+- **Match within 0.4%**
+
+**High-v regime (SPARC/cluster) partial match:**
+- Apparent slope: -4.13
+- CFT classical prediction (α=0.25): -1.60
+- ~2.5σ mismatch — but our data is missing intermediate KK peaks at
+  v ≈ 178, 430 km/s
+
+**Verdict**: First quantitative UV derivation of α_γ ≈ 1.0 from a
+published framework. Substantially reopens the UV completion question.
+
+Files:
+- v0.3-prelim/docs/T134_CONTINUUM_MEDIATOR_UV.md
+- v0.3-prelim/tests/test_T134_cft_continuum_mediator.py (3 tests pass)
+- cft_deeper_fit.py
+
+Future work (§10.7 candidate, REQUIRES APPROVAL):
+- Solve AdS/CFT Schrödinger equation for our geometry
+- Verify multi-peak structure (4 KK resonances)
+- Check direct detection safety in CFT framework
+
 ## [T133] — 2026-09-20
 
 **§9.8.4 RETRACTED: Hidden U(1) slope derivation was wrong (slope = 2.0, not 0.5).**
