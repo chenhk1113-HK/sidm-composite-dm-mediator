@@ -13,7 +13,7 @@
 
 We present a **self-consistent multi-component SIDM framework (v1.14)** that resolves the long-standing tension between Cloud-9's high self-interaction requirement (σ/m ≈ 100 cm²/g at v ≈ 28 km/s) and the dSph/UFD upper limits (σ/m ≲ 0.8 cm²/g at v ≈ 5–15 km/s). The v1.14 phenomenology combines **four physical ingredients** into a single coherent framework: (1) **multi-resonance SIDM** with four Breit-Wigner peaks at v ≈ 28, 100, 178, 430, 769 km/s on top of a velocity-dependent Yukawa background (Phase 44, +8.10 log-units improvement over single-channel baseline); (2) **two-component asymmetric dark matter** (Yang, Tsai & Fan 2025, PRD 112, 083011 [42]) — heavy χH + light χL with mass ratio 3:1; (3) **gravothermal core-collapse selection** (Yu et al. 2026, PRL [23]) — the heavy component sinks out of observation region in collapsed halos; (4) **Gaussian Breit-Wigner profiles** (replacing the Lorentzian 1/Δv² tails of earlier versions).
 
-**The four ingredients work together** to satisfy **8 observational constraints simultaneously** spanning four orders of magnitude in velocity: Cloud-9 (v = 28 km/s, σ/m = 128 cm²/g), 8 classical dSphs (v = 15 km/s, σ/m = 0.013 cm²/g), 23 UFDs in 4 bins (v = 3, 5, 7, 10 km/s, all σ/m < 0.03 cm²/g), SPARC (v = 100 km/s, σ/m = 0.19 cm²/g), and galaxy clusters (v = 500 km/s, σ/m = 4 × 10⁻⁴ cm²/g).
+**The four ingredients work together** to satisfy **8 observational constraints simultaneously** spanning four orders of magnitude in velocity (from `joint_fit_full_evaluation(a_slope_override=1.0)`, the v1.13 default parameters): Cloud-9 (v = 28 km/s, σ/m = **128.13 cm²/g**), 8 classical dSphs (v = 15 km/s, σ/m = **0.032 cm²/g**), 23 UFDs in 4 bins (v = 3, 5, 7, 10 km/s, σ/m = 0.155, 0.093, 0.067, 0.047 cm²/g — all well below the 0.8 cm²/g upper limit from Ando+ 2025 [27]), SPARC (v = 100 km/s, σ/m = **0.193 cm²/g**), and galaxy clusters (v = 500 km/s, σ/m = **2.5×10⁻⁴ cm²/g**). All 8 constraints pass (`all_pass=True`).
 
 **Statistical verification** (T120.8, T120.9a): MCMC posterior (32 walkers × 2000 steps) independently recovers parameters within 1σ (a_slope = 0.92 ± 0.36, w₁ = 4.4 ± 2.0 km/s, f_H = 0.20 ± 0.11). Fair BIC comparison on the same 160-point dataset: T120 WINS by ΔBIC = -170 vs constant-σ/m baseline (caveat: scoring-rule BIC, see §6 and §10).
 
@@ -952,17 +952,19 @@ Cloud-9; SPARC marginal).
 
 ### 10.5 EFT target map for future UV completions
 
-The three no-go theorems above define what any future UV completion must
-satisfy to reproduce our phenomenology:
+The four no-go theorems above define what any future UV completion must
+satisfy to reproduce our phenomenology. Numerical values from
+`joint_fit_full_evaluation(a_slope_override=1.0)` (the v1.13 default
+parameters, verified in T132):
 
-| Requirement | What we need | What fails |
-|---|---|---|
-| σ_DM-DM/m ~ 100 cm²/g at v = 28 km/s | High cross-section at dwarf scale | Standard perturbative Yukawa gives <1 cm²/g |
-| σ_DM-DM/m ~ 0.013 cm²/g at v = 15 km/s | Sharp suppression between 28 → 15 km/s | Monotonic σ/m(v) cannot satisfy both |
-| σ_DM-DM/m ~ 0.19 cm²/g at v = 100 km/s | Non-trivial velocity dependence | P-wave resonances too narrow |
-| σ_DM-DM/m ~ 4×10⁻⁴ cm²/g at v = 500 km/s | v⁻¹ or steeper falloff at cluster | Cluster limits σ/m < 1 |
-| σ_SI < 9.4×10⁻⁴⁷ cm² (LZ 2024) | DD evasion | Magnetic dipole, Majorana splitting at MeV |
-| Thermal relic (if applicable) | α_D < 1 (perturbative) | Multi-TeV inelastic requires α_D ~ 404 |
+| Requirement | What we need | What fails | Source |
+|---|---|---|---|
+| σ/m(28) = 128.13 cm²/g (Cloud-9) | High cross-section at dwarf scale | Standard perturbative Yukawa gives wrong velocity dependence (1/v² or 1/v⁴), not a peak at v=28 | T132 full chain |
+| σ/m(15) = 0.032 cm²/g (dSph) | Sharp suppression between 28 → 15 km/s | Monotonic σ/m(v) cannot satisfy both Cloud-9 high + dSph low | T132 full chain |
+| σ/m(100) = 0.193 cm²/g (SPARC) | Non-trivial velocity dependence | Standard Yukawa monotonic | T132 full chain |
+| σ/m(500) = 2.5×10⁻⁴ cm²/g (cluster) | v⁻¹ or steeper falloff at cluster | Standard Yukawa decay too slow | T132 full chain |
+| σ_SI < 9.4×10⁻⁴⁷ cm² (LZ 2024) | DD evasion | Magnetic dipole, Majorana splitting at MeV | [44], T120.10 |
+| Thermal relic (if applicable) | α_D < 1 (perturbative) | Multi-TeV inelastic requires α_D ~ 404 | T130 |
 
 **A viable UV completion must combine: non-perturbative enhancement at
 v ≈ 28 km/s (achievable via Breit-Wigner or bound-state resonance)
@@ -970,6 +972,24 @@ WITH rapid suppression at v < 28 km/s (dSph/UFD) AND rapid suppression
 at v > 28 km/s (cluster). The phenomenology suggests this requires a
 multi-mechanism combination — exactly what our four-ingredient
 framework provides, but with no standard UV analog yet identified.**
+
+**Important clarification on §10.5 wording (from T132 sanity check):**
+The earlier draft stated "Standard perturbative Yukawa gives <1 cm²/g"
+and "P-wave resonances too narrow" as failure modes. Both wordings
+were misleading or incorrect:
+
+- Standard Yukawa Born (α=0.01, m_φ=100 MeV, m_χ=10 GeV) at v=28 km/s
+  gives σ/m ~ 9×10⁵ cm²/g (huge 1/v⁴ enhancement). The real failure is
+  **wrong velocity dependence** (1/v² classical or 1/v⁴ Born), not
+  magnitude. Both regimes are **monotonic** in v and cannot produce the
+  required peak at v=28 followed by suppression at v=15.
+
+- Chu P1 p-wave resonance (T131) σ/m(100) = 0.15 cm²/g actually matches
+  SPARC (~0.19 cm²/g) within 25%. The failure is at **Cloud-9** (P1
+  gives 0.1 vs required 100), not at SPARC. Chu P1 was designed to
+  solve the older Kaplinghat/Tulin/Yu dwarf-vs-cluster tension, with
+  resonance centered at v_R = 108 km/s — not our Cloud-9-vs-dSph
+  tension which requires resonance at v_R ~ 20 km/s.
 
 ### 10.6 Honest framing
 
