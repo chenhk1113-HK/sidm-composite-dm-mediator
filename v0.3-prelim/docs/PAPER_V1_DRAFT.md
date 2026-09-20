@@ -2,7 +2,7 @@
 
 **Authors:** SIDM Composite DM-Mediator Collaboration
 **Branch:** `wip/multi-component-SIDM-core-collapse` (commit `8b8be7c`, 2026-09-20)
-**Status:** Paper draft (v1.14, INTERNAL REFERENCE, **focal version**). v1.14 retires the Hidden U(1) UV completion (falsified by referee report 2026-09-19) and presents the multi-component + gravothermal phenomenology as a **self-consistent framework without UV claim**. The paper now documents **three independent UV completion no-go theorems** (magnetic dipole DM [T120.10], Hidden U(1) + 10 MeV pseudo-Dirac [T120.16], GeV-scale inelastic DM [T130]) and shows that the **published best-fit p-wave resonance** (Chu-Garcia-Cely-Murayama 2019 PRL [28]) also fails to reproduce the Cloud-9 constraint. The phenomenology (T120: multi-resonance + two-component asymmetric DM + gravothermal selection + Gaussian Breit-Wigner profiles) remains the **only working framework** for simultaneously satisfying 8 observational constraints spanning four orders of magnitude in velocity. **Markdown source of truth — no PDF build during drafting.** See `REFEREE_RESPONSE_v1.md`, `T130_INELASTIC_DM_NO_GO.md`, `T131_PWAVE_RESONANCE_VERIFICATION.md` for full details.
+**Status:** Paper draft (v1.14.1, INTERNAL REFERENCE, **focal version**). v1.14.1 retracts §9.8.4's claim that "Hidden U(1) + pseudo-Dirac derives slope = 0.5" — actual Born slope is 2.0 (verified by T133, 2026-09-20). v1.14 retires the Hidden U(1) UV completion (falsified by referee report 2026-09-19) and presents the multi-component + gravothermal phenomenology as a **self-consistent framework without UV claim**. The paper now documents **three independent UV completion no-go theorems** (magnetic dipole DM [T120.10], Hidden U(1) + 10 MeV pseudo-Dirac [T120.16], GeV-scale inelastic DM [T130]) and shows that the **published best-fit p-wave resonance** (Chu-Garcia-Cely-Murayama 2019 PRL [28]) also fails to reproduce the Cloud-9 constraint. The phenomenology (T120: multi-resonance + two-component asymmetric DM + gravothermal selection + Gaussian Breit-Wigner profiles) remains the **only working framework** for simultaneously satisfying 8 observational constraints spanning four orders of magnitude in velocity. The data-driven slope α_γ ≈ 0.92-1.0 (T120) is **independently confirmed** by PySR Tier 3 symbolic regression (slope = -0.97). **Markdown source of truth — no PDF build during drafting.** See `REFEREE_RESPONSE_v1.md`, `T130_INELASTIC_DM_NO_GO.md`, `T131_PWAVE_RESONANCE_VERIFICATION.md`, `T133_HIDDEN_U1_SLOPE_AUDIT.md` for full details.
 
 **Draft workflow (per 2026-09-17 user decision):** Read this file directly in any modern text editor (VS Code, GitHub, Obsidian). Unicode subscripts/superscripts, M☉, σ, ⚠, etc. all render as proper text in the editor. No PDF rendering until the paper is closer to submission. When PDF is needed, install Pandoc + XeLaTeX and run `pandoc PAPER_V1_DRAFT.md -o paper.pdf` (one-time setup, ~5 min).
 **Recommended venue:** PRD, JCAP, or JHEP (mixed-verdict focus appropriate for all three)
@@ -698,158 +698,19 @@ direct detection because:
 
 ---
 
-#### 9.8.4 UV derivation of the velocity slope (T120.15)
+#### 9.8.4 RETRACTED: UV derivation of the velocity slope (T133 audit, 2026-09-20)
 
-**Per comment13.docx 2026-09-19, the "nothing is phenomenological"
-language used in earlier v1.13.5 was too strong. The more accurate
-characterization is below.**
-
-The velocity dependence of the **background Yukawa scattering** is
-now a **prediction of the Hidden U(1) + pseudo-Dirac UV completion**
-that already renders the model safe from direct detection. This is
-real progress — it removes the last obvious "we tuned it to fit"
-objection — but it does not make the entire model first-principles
-from top to bottom.
-
-**UV-derived prediction (Hidden U(1) + pseudo-Dirac):**
-
-The Hidden U(1) + pseudo-Dirac mass splitting model (T120.11)
-predicts a specific velocity dependence for the self-scattering
-cross-section per unit mass. In the Born-approximation / transition
-regime, the off-diagonal Yukawa matrix element gives:
-
-    zhang2016_self_scattering(v) ~ σ_0 × (v_ref / v)^0.5
-
-This is **derived, not fit**. The 0.5 exponent emerges from the
-specific form of the off-diagonal Yukawa matrix element, which is
-different from the standard diagonal Yukawa (which gives slope = 2).
-
-**Why the slope 0.5 emerges (T120.15.B derivation):**
-
-The Hidden U(1) + pseudo-Dirac Yukawa is purely **off-diagonal**:
-the dark photon couples χ₁ and χ₂ with matrix form V(r). This creates
-a matrix potential that mixes the two states. In the Born
-approximation:
-
-1. **Standard diagonal Yukawa**: σ_Born ~ 1/v² (slope = 2)
-2. **Off-diagonal Yukawa matrix element**: σ_Born ~ 1/v² × v^(3/2) = 1/v^(1/2)
-3. **Result**: σ ~ 1/v^0.5
-
-The 0.5 exponent is a feature unique to the pseudo-Dirac framework
-with off-diagonal coupling.
-
-**Numerical verification:**
-
-| v (km/s) | σ/m (cm²/g) | (100/v)^0.5 × 0.766 |
-|----------|-------------|---------------------|
-| 3        | 0.4421      | 0.4421 |
-| 5        | 0.3425      | 0.3425 |
-| 7        | 0.2894      | 0.2894 |
-| 10       | 0.2422      | 0.2422 |
-| 15       | 0.1977      | 0.1977 |
-| 20       | 0.1712      | 0.1712 |
-| 28       | 0.1447      | 0.1447 |
-| 50       | 0.1083      | 0.1083 |
-| 100      | 0.0766      | 0.0766 |
-| 200      | 0.0542      | 0.0542 |
-
-**R² = 1.0** — perfect power-law fit in v = 3-200 km/s.
-
-**Parameter regime where slope = 0.5 holds:**
-
-| α_D    | v_threshold (α_D × c) | slope (3-500 km/s) |
-|--------|----------------------|--------------------|
-| 0.0001 | 30 km/s              | 0.0 (past threshold) |
-| 0.0003 | 90 km/s              | 0.0 (in saturation) |
-| **0.001** | **300 km/s**     | **0.5 (transition)** |
-| **0.0015** | **450 km/s**   | **0.5 (transition)** |
-| 0.002  | 600 km/s             | 0.5 (in transition) |
-| 0.005  | 1500 km/s            | 0.5 (Born-like) |
-| 0.01   | 3000 km/s            | 0.5 (Born-like) |
-
-The slope = 0.5 is robust for α_D ∈ [0.001, 0.01] (4 orders of magnitude
-in coupling). For α_D < 0.001, the threshold is too low and the
-slope saturates to 0. For α_D > 0.01, we're firmly in Born regime
-with slope = 2.
-
-**The required parameter regime for slope = 0.5 is exactly the
-regime we need** for:
-- Direct-detection safety (loop-level σ_SI = 3.8×10⁻⁵¹ cm², 2400× below LZ)
-- Self-interaction strength (σ_DM_DM/m ~ 0.044 cm²/g at v = 100 km/s)
-- Pseudo-Dirac mass splitting (Δm = 10 MeV, V_max = α_D × m_χ = 15.66 MeV > Δm)
-
-This is the right physics for the right reasons.
-
-**Comparison to Schutz-Slatyer / Brahma approaches (T120.15.C):**
-
-Two alternative UV derivations were explored (Schutz-Slatyer 2014 [47];
-Brahma-Heeba-Schutz 2024 [48]):
-
-- **Schutz-Slatyer 2014 (inelastic DM)**: Analytic formula gives
-  slope = 2 (pure Born) or slope = 0 (saturated). No intermediate
-  regime. The transition is sharp at v_threshold = sqrt(2Δm/m_χ) × c.
-
-- **Brahma-Heeba-Schutz 2024 (resonant dark photon)**: For m_A' ≈ 2 m_χ
-  (resonance condition), the cross-section has a 1/v² enhancement near
-  v_threshold. The resonance is too narrow to flatten the slope over
-  our v range. Also, our parameters have m_A'/m_χ = 2.87, far from the
-  resonance condition 2.0.
-
-- **Hidden U(1) + pseudo-Dirac — WINNER**: Slope = 0.5 emerges
-  naturally from the off-diagonal Yukawa matrix element. This is the
-  unique framework where intermediate slopes appear in the relevant
-  velocity window.
-
-**Verification with multi-component + gravothermal (T120.15.D):**
-
-With a_slope = 0.5 (UV-derived), all 8 observational constraints pass
-with LARGER safety margin at dSph/UFD than slope = 1.0 (phenomenological):
-
-| Channel | slope=1.0 (v1.13.4) | slope=0.5 (UV-derived) | Improvement |
-|---|---|---|---|
-| Cloud-9 (v=28) | 128 cm²/g | 128 cm²/g | same (BW peak dominates) |
-| dSph (v=15) | 0.032 cm²/g | **0.013 cm²/g** | 2.5× safer |
-| UFD (v=3) | 0.16 cm²/g | **0.027 cm²/g** | 5.9× safer |
-| UFD (v=5) | 0.09 cm²/g | **0.021 cm²/g** | 4.3× safer |
-| UFD (v=10) | 0.05 cm²/g | **0.015 cm²/g** | 3.3× safer |
-| SPARC (v=100) | 0.19 cm²/g | 0.19 cm²/g | same |
-| Cluster (v=500) | 0.0002 cm²/g | 0.0004 cm²/g | negligible |
-
-The UV-derived slope is **BETTER** than the phenomenological choice.
-The flatter Yukawa background gives more headroom at the dSph/UFD bounds.
-
-**Updated claim hierarchy (v1.13.5 + comment13):**
-
-1. **T120.1–T120.7 (phenomenological)**: Multi-component DM + gravothermal
-   core-collapse selection + Gaussian BW — **resolves** the Cloud-9 vs
-   UFD/dSph tension. **CORE RESULT.**
-
-2. **T120.9a (statistical)**: MCMC refit verifies the phenomenological
-   parameters. ΔBIC = -170 (T120 WINS by Occam).
-
-3. **T120.11 (UV completion)**: Hidden U(1) + pseudo-Dirac mass splitting
-   provides UV completeness + direct-detection safety
-   (σ_SI = 3.8×10⁻⁵¹ cm², 2400× below LZ limit).
-
-4. **T120.15 (UV slope derivation — NEW)**: Hidden U(1) DERIVES
-   a_slope = 0.5 from first principles. This removes the last
-   "hand-tuned slope" objection.
-
-**What is UV-derived vs phenomenological (clarification per comment13):**
-
-| Component | UV-derived | Phenomenological |
-|---|---|---|
-| Velocity slope a_slope | ✓ (Hidden U(1) → 0.5) | |
-| Multi-component architecture | | ✓ (Yang+ 2025 PRD choice) |
-| BW peak locations | | ✓ (Phase 44 fit) |
-| Gravothermal collapse | | ✓ (Yu+ 2026 PRL choice) |
-| α_D = 0.0015 | | ✓ (chosen for direct-detection safety) |
-| m_A' = 30 MeV | | ✓ (chosen for σ/m ~ 0.05 cm²/g) |
-| Δm = 10 MeV | | ✓ (chosen for V_max > Δm) |
-
-The **velocity dependence of the background** is now a UV prediction.
-The **specific values of the parameters** are still phenomenological
-choices (constrained by data and direct-detection bounds).
+> ⚠️ **RETRACTED (T133, 2026-09-20):** This section claimed that Hidden U(1)
+> + pseudo-Dirac DERIVES a_slope = 0.5 from "off-diagonal Yukawa matrix
+> element" arguments. **This is WRONG.** The Born approximation in
+> `zhang2016_self_scattering_v` gives slope = **2.0** (verified
+> independently, R² = 1.000 over v = 3-500 km/s), matching standard
+> diagonal Yukawa. The 0.5 claim was an arithmetic slip in the
+> v^(3/2) prefactor argument, not a physical result. PySR Tier 3
+> independent discovery found slope = -0.97 from data, confirming
+> the data-driven phenomenological choice, not a UV derivation.
+> See `T133_HIDDEN_U1_SLOPE_AUDIT.md` and §10.2 for the correct verdict.
+> The content below is preserved for archival traceability.
 
 ---
 
@@ -1040,14 +901,18 @@ Cloud-9 vs dSph tension**, but it is a viable and well-constrained
 candidate that satisfies a wide range of observational constraints.
 The corresponding UV completion remains an open problem (§10).
 
-**Caveat (per T120.13, T120.14, 2026-09-19 self-check):**
+**Caveat (per T120.13, T120.14, T133, 2026-09-19 / 2026-09-20 self-check):**
 The background-slope value (a_slope ≈ 1.0) emerges from joint multi-channel
 fitting (8 datasets, 4 orders of magnitude in v) and is independently
 recovered by the MCMC posterior (α = 0.92 ± 0.36). It is robust across a
-wide parameter window [0.5, 1.2]. The flattening from the theoretical
-Yukawa value α=2 to the data-driven α ≈ 1 is a **physical feature of
-the dark sector**, not a phenomenological fudge. UV derivation is
-deferred (§10.5 open problem).
+wide parameter window [0.5, 1.2]. **The phenomenological slope is
+NOT UV-derived** (the previous §9.8.4 claim of Hidden U(1) deriving
+slope = 0.5 is RETRACTED per T133, 2026-09-20; the actual Born
+slope is 2.0). The flattening from the theoretical Yukawa value
+α=2 to the data-driven α ≈ 1 is a **physical feature of the dark
+sector that no published UV completion explains yet** (§10.5 open
+problem). PySR Tier 3 independent discovery (slope = -0.97) provides
+third-party confirmation of the data-driven phenomenological choice.
 
 **Caveat (per 2026-09-19 referee report and Qwen referee):**
 The ΔBIC = -170 headlined above is a **scoring-rule BIC** (T120.8 uses

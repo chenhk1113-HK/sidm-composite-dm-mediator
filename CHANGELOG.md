@@ -25,6 +25,42 @@ doc-pack restructure, the T88/T89 dataset-acquisition series, and
 the T90 Tier-3 branch experiment. Kept at full fidelity because they
 are the rounds the project currently stands on.
 
+## [T133] — 2026-09-20
+
+**§9.8.4 RETRACTED: Hidden U(1) slope derivation was wrong (slope = 2.0, not 0.5).**
+
+PySR Tier 3 independent discovery (symbolic regression) found σ/m
+slope = -0.97 from the 8 phenomenology points. This triggered an
+audit of §9.8.4's claim that "Hidden U(1) + pseudo-Dirac derives
+a_slope = 0.5." Direct verification:
+
+- Running `zhang2016_self_scattering_v` at v = 3-500 km/s with
+  α_D = 0.001, m_χ = 10.7 GeV, Δm = 1 keV (allowed regime):
+- Linear fit in log-log: slope = **-2.000** (R² = 1.000)
+- **§9.8.4's "0.5" claim was WRONG** — it was an arithmetic slip
+  in the v^(3/2) prefactor argument, not a physical result.
+- §9.8.4's argument: σ_Born ~ 1/v² × v^(3/2) = 1/v^(1/2). The
+  arithmetic is correct, but the v^(3/2) prefactor doesn't
+  physically appear in off-diagonal Yukawa. The actual Born slope
+  for off-diagonal Yukawa is 2.0 (same as diagonal).
+
+This means:
+- §9.8.4 (UV-derived slope = 0.5) is **RETRACTED**
+- §10.2 (Hidden U(1) doesn't work) is the **correct** verdict
+- §10.3 (GeV-scale inelastic DM): KE_CM(28) at m_χ=46 TeV = 100.3 keV ✓ EXACT MATCH
+- §10.4 (Chu P1 p-wave): confirmed fails at Cloud-9
+- Phenomenological slope α_γ ≈ 0.92-1.0 (T120) is **data-driven**,
+  not UV-derived. PySR independently confirms -0.97.
+
+Files:
+- v0.3-prelim/tests/test_T133_hidden_u1_slope_audit.py (4 tests, all pass)
+- v0.3-prelim/docs/T133_HIDDEN_U1_SLOPE_AUDIT.md
+- v0.3-prelim/docs/PAPER_V1_DRAFT.md (§9.8.4 retraction banner + §11 caveat)
+
+Honest documentation principle: this is the kind of subtle error that
+Tier 3 PySR verification was designed to catch. Better to find it now
+than in peer review.
+
 ## [T132] — 2026-09-20
 
 **§10.5 sanity check found 2 numerical errors + 2 wording issues; v1.14 paper corrected.**

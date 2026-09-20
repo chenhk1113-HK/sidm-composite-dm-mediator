@@ -6,7 +6,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/version-0.4--prelim%2BT88E%2BT90--v14-blue)](VERSION)
-[![WIP Paper](https://img.shields.io/badge/wip_paper-v1.14-blueviolet)](v0.3-prelim/docs/PAPER_V1_DRAFT.md)
+[![WIP Paper](https://img.shields.io/badge/wip_paper-v1.14.1-blueviolet)](v0.3-prelim/docs/PAPER_V1_DRAFT.md)
 [![Tests](https://img.shields.io/badge/tests-branch--dependent-blue)](v0.3-prelim/tests/)
 [![arXiv:2506.22997](https://img.shields.io/badge/cross--validated-arXiv%3A2506.22997-b31b1b)](https://arxiv.org/abs/2506.22997)
 
@@ -26,7 +26,20 @@
 
 **Verification:** 116 automated T120 tests pass. MCMC independently recovered our hand-tuned parameters. Statistical comparison beats simpler models by ΔBIC = -170.
 
-**What's NEW in v1.14:** The Hidden U(1) UV completion proposed in v1.13.5 was **FALSIFIED** by the 2026-09-19 referee report (Δm = 10 MeV exceeds galactic KE_CM by 5 orders of magnitude). v1.14 explicitly retires the UV claim and documents **three independent UV completion no-go theorems**:
+**What's NEW in v1.14.1 (T133, 2026-09-20):** Tier 3 PySR symbolic regression
+independently discovered σ/m slope = -0.97 from the 8 phenomenology data
+points — matching our data-driven phenomenological slope. This triggered
+an audit of §9.8.4's earlier claim that "Hidden U(1) derives slope = 0.5."
+**The 0.5 claim was wrong** — the actual Born slope from
+`zhang2016_self_scattering_v` is exactly 2.0. §9.8.4 is now RETRACTED
+with a clear banner. The paper's phenomenology is unchanged (still
+data-driven, slope α_γ ≈ 0.92-1.0); only the failed UV-derivation
+claim is removed. The four no-go theorems are unchanged.
+
+**What's NEW in v1.14:** The Hidden U(1) UV completion proposed in v1.13.5 was
+**FALSIFIED** by the 2026-09-19 referee report (Δm = 10 MeV exceeds galactic
+KE_CM by 5 orders of magnitude). v1.14 explicitly retires the UV claim and
+documents **three independent UV completion no-go theorems**:
 - Magnetic dipole DM (T120.10): ruled out by LZ direct detection
 - Hidden U(1) + 10 MeV pseudo-Dirac (T120.16): ruled out by galactic kinematics
 - GeV-scale inelastic DM (T130): requires m_χ ≥ 46 TeV + thermal-relic unitarity violation
