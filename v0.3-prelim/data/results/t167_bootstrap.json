@@ -1,0 +1,56 @@
+[
+  {
+    "iteration": 1,
+    "best_rmse": 0.568,
+    "best_params": [
+      0.3,
+      0.3,
+      100
+    ]
+  },
+  {
+    "iteration": 2,
+    "best_rmse": 0.486,
+    "best_params": [
+      0.3,
+      0.3,
+      100
+    ]
+  },
+  {
+    "iteration": 3,
+    "best_rmse": 1.185,
+    "best_params": [
+      0.3,
+      0.3,
+      100
+    ]
+  },
+  {
+    "iteration": 4,
+    "best_rmse": 1.579,
+    "best_params": [
+      0.3,
+      0.3,
+      100
+    ]
+  },
+  {
+    "iteration": 5,
+    "best_rmse": 1.102,
+    "best_params": [
+      0.1,
+      0.1,
+      30
+    ]
+  },
+  {
+    "iteration": 6,
+    "best_rmse": 0.52,
+    "best_params": [
+      0.3,
+      0.3,
+      100
+    ]
+  }
+]

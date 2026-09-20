@@ -1,0 +1,65 @@
+[
+  {
+    "cloud9_value": 50,
+    "best_rmse": 1.0334192482678701,
+    "best_params": [
+      0.3,
+      0.3,
+      100
+    ]
+  },
+  {
+    "cloud9_value": 100,
+    "best_rmse": 1.1310961105186417,
+    "best_params": [
+      0.3,
+      0.3,
+      100
+    ]
+  },
+  {
+    "cloud9_value": 200,
+    "best_rmse": 1.230226094806411,
+    "best_params": [
+      0.3,
+      0.3,
+      100
+    ]
+  },
+  {
+    "cloud9_value": 500,
+    "best_rmse": 1.3629595828645913,
+    "best_params": [
+      0.3,
+      0.3,
+      100
+    ]
+  },
+  {
+    "cloud9_value": 1000,
+    "best_rmse": 1.4643563063606773,
+    "best_params": [
+      0.3,
+      0.3,
+      100
+    ]
+  },
+  {
+    "cloud9_value": 5000,
+    "best_rmse": 1.7021640068907318,
+    "best_params": [
+      0.3,
+      0.3,
+      100
+    ]
+  },
+  {
+    "cloud9_value": 21000,
+    "best_rmse": 1.9161988113652737,
+    "best_params": [
+      0.3,
+      0.3,
+      100
+    ]
+  }
+]
