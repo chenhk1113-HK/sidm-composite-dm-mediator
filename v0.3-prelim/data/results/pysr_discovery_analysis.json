@@ -1,0 +1,10 @@
+{
+  "pysr_slope": -0.974,
+  "linear_fit_slope_excluding_Cloud9": -0.9033053935863051,
+  "linear_fit_intercept_excluding_Cloud9": -0.30332806956561154,
+  "paper_alpha_gamma_range": [
+    0.92,
+    1.0
+  ],
+  "agreement": "PASS \u2014 PySR slope within paper \u03b1_\u03b3 range"
+}
