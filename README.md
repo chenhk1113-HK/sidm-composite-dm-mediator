@@ -2,11 +2,11 @@
 
 > ⚠️ **Disclaimer:** It is a personal project out of curiosity, made using Hermes with **MiniMax M3** as the coder, **Doubao**, **Qwen 3.8 Max** and other AIs as reviewers.
 
-**Multi-scale self-interacting dark matter framework: a self-consistent multi-component + gravothermal + Hidden U(1) UV model that satisfies 8 observational constraints spanning 4 orders of magnitude in velocity.**
+**Multi-scale self-interacting dark matter framework: a self-consistent multi-component + gravothermal phenomenology that satisfies 8 observational constraints spanning 4 orders of magnitude in velocity. UV completion is documented as an open problem with three no-go theorems (v1.14).**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.4--prelim%2BT88E%2BT90--v13.5-blue)](VERSION)
-[![WIP Paper](https://img.shields.io/badge/wip_paper-v1.13.5-blueviolet)](v0.3-prelim/docs/PAPER_V1_DRAFT.md)
+[![Version](https://img.shields.io/badge/version-0.4--prelim%2BT88E%2BT90--v14-blue)](VERSION)
+[![WIP Paper](https://img.shields.io/badge/wip_paper-v1.14-blueviolet)](v0.3-prelim/docs/PAPER_V1_DRAFT.md)
 [![Tests](https://img.shields.io/badge/tests-branch--dependent-blue)](v0.3-prelim/tests/)
 [![arXiv:2506.22997](https://img.shields.io/badge/cross--validated-arXiv%3A2506.22997-b31b1b)](https://arxiv.org/abs/2506.22997)
 
@@ -22,13 +22,19 @@
 1. **Two-component DM** (heavy + light, mass ratio 3:1)
 2. **Gravothermal core-collapse** (heavy sinks out of dense cores)
 3. **Resonance + Gaussian broadening** (peaks in scattering at specific velocities)
-4. **Hidden U(1) dark photon** (UV-complete particle physics)
+4. **Multi-resonance SIDM** with 4 Breit-Wigner peaks (cloud-9, SPARC, subhalo, cluster scales)
 
-**Verification:** 116 automated T120 tests pass. MCMC independently recovered our hand-tuned parameters. Statistical comparison beats simpler models by ΔBIC = -170. Direct detection safely evaded.
+**Verification:** 116 automated T120 tests pass. MCMC independently recovered our hand-tuned parameters. Statistical comparison beats simpler models by ΔBIC = -170.
 
-**What remains:** Specific parameter values (α_D, m_A', Δm) are still chosen for data compatibility, not derived. But the **velocity slope of the background** is now a UV prediction (a_slope = 0.5 from Zhang 2016's off-diagonal Yukawa matrix element).
+**What's NEW in v1.14:** The Hidden U(1) UV completion proposed in v1.13.5 was **FALSIFIED** by the 2026-09-19 referee report (Δm = 10 MeV exceeds galactic KE_CM by 5 orders of magnitude). v1.14 explicitly retires the UV claim and documents **three independent UV completion no-go theorems**:
+- Magnetic dipole DM (T120.10): ruled out by LZ direct detection
+- Hidden U(1) + 10 MeV pseudo-Dirac (T120.16): ruled out by galactic kinematics
+- GeV-scale inelastic DM (T130): requires m_χ ≥ 46 TeV + thermal-relic unitarity violation
+- Published best-fit p-wave resonance (T131, Chu et al. 2019): fails on Cloud-9
 
-**Read the paper:** [`v0.3-prelim/docs/PAPER_V1_DRAFT.md`](v0.3-prelim/docs/PAPER_V1_DRAFT.md) (v1.13.5)
+**Result:** No published UV completion solves the Cloud-9 vs dSph tension. The phenomenology (multi-component + gravothermal + Gaussian Breit-Wigner) is the only working framework.
+
+**Read the paper:** [`v0.3-prelim/docs/PAPER_V1_DRAFT.md`](v0.3-prelim/docs/PAPER_V1_DRAFT.md) (v1.14)
 
 **T120 series journey:**
 - T120.1-7: Built the phenomenology (multi-component + core-collapse + flattened slope)
@@ -47,7 +53,7 @@
 | Track | Version | Status | Headline |
 |---|---|---|---|
 | **Standing (Tier-1, master)** | `v0.4-prelim+T88E` | master @ 2026-09-02 | σ/m₀ = **0.06 cm²/g**, log Z = **−164.87 ± 0.084**, m_χ = **770 GeV**, m_φ = **453 MeV**; 22 channels; 677 tests pass |
-| **WIP (Tier-2, multi-component-SIDM-core-collapse)** | `T90-Paper-v13.5` | wip/multi-component-SIDM-core-collapse @ `453c542` | **MOST PROMISING**: Multi-resonance SIDM + Yang+ 2025 PRD two-component + Yu 2026 PRL gravothermal + **Hidden U(1) dark photon + pseudo-Dirac mass splitting UV completion** (Zhang 2016). **All 8 observational constraints pass simultaneously.** **NEW (T120.15.B): UV-derived slope a_slope = 0.5** (from off-diagonal Yukawa matrix element, robust in α_D ∈ [0.001, 0.01]); verified by Schutz-Slatyer 2014 + Brahma+ 2024 comparison; with FULL DERIVATION in `docs/T120_15_UV_SLOPE_DERIVATION.md`. All 8 constraints pass with LARGER safety margin (2.5× at dSph, 5.9× at UFD) than phenomenological slope=1.0. MCMC verifies parameters. Fair BIC Δ = -170. σ_SI = 3.8×10⁻⁵¹ cm² (2400× below LZ). **116 T120 tests + 9 skips + 7 audit claims pass.** Paper v1.13.5 INTERNAL REFERENCE |
+| **WIP (Tier-2, multi-component-SIDM-core-collapse)** | `T90-Paper-v14` | wip/multi-component-SIDM-core-collapse @ `05cfe5d` | **MOST PROMISING**: Multi-resonance SIDM + Yang+ 2025 PRD two-component + Yu 2026 PRL gravothermal + Gaussian Breit-Wigner profiles. **All 8 observational constraints pass simultaneously.** **NEW (v1.14)**: Hidden U(1) UV completion retired (falsified by 2026-09-19 referee report). Three independent UV completion no-go theorems documented (magnetic dipole, Hidden U(1) + pseudo-Dirac, GeV-scale inelastic DM). Published best-fit p-wave resonance (Chu et al. 2019) also fails. **No published UV completion solves the Cloud-9 vs dSph tension.** Phenomenology remains the only working framework. MCMC verifies parameters. Fair BIC Δ = -170. **116 T120 tests + 13 T130 + 11 T131 tests + 17 T120.16 tests pass.** Paper v1.14 INTERNAL REFERENCE |
 
 **The most promising track** is `wip/multi-component-SIDM-core-collapse` (T120 series) — it satisfies more constraints with fewer assumptions than the v0.4-prelim master or the older cloud-9-relhic track.
 
@@ -130,17 +136,17 @@ This addresses the most prominent "soft spot" identified by the Phase 50 reviewe
 
 ## 🎯 Key findings (TL;DR) — focus on the most promising model
 
-**The most promising track (T120 multi-component SIDM, Paper v1.13.4 on `wip/multi-component-SIDM-core-collapse` @ `0d80d7d`):**
+**The most promising track (T120 multi-component SIDM, Paper v1.14 on `wip/multi-component-SIDM-core-collapse` @ `05cfe5d`):**
 
-1. **A self-consistent multi-component SIDM model satisfies all 8 observational constraints simultaneously.** Phase 44 multi-resonance SIDM + Yang+ 2025 PRD two-component DM + Yu 2026 PRL gravothermal selection + Gaussian Breit-Wigner shapes + flattened background slope (α ≈ 1.0, data-driven) + Hidden U(1) pseudo-Dirac UV completion. **8/8 constraints pass: Cloud-9 (v=28, σ/m=128), classical dSph (v=15, σ/m=0.03), UFD (v=3-10, σ/m<0.16), SPARC (v=100, σ/m=0.19), cluster (v=500, σ/m=0.0002).**
+1. **A self-consistent multi-component SIDM phenomenology satisfies all 8 observational constraints simultaneously.** Phase 44 multi-resonance SIDM + Yang+ 2025 PRD two-component DM + Yu 2026 PRL gravothermal selection + Gaussian Breit-Wigner shapes + flattened background slope (α ≈ 1.0, data-driven). **8/8 constraints pass: Cloud-9 (v=28, σ/m=128), classical dSph (v=15, σ/m=0.013), UFD (v=3-10, σ/m<0.03), SPARC (v=100, σ/m=0.19), cluster (v=500, σ/m=4×10⁻⁴).**
 
-2. **Statistical rigor confirms the model.** Fair BIC Δ = -170 (T120 WINS by Occam's razor on same 160-point data set vs simpler single-component Lorentzian). MCMC posterior (32 walkers × 2000 steps) independently recovers v1.13.1 parameters within 1σ: σ₀ = 0.12 [0.03, 0.30], **a_slope = 0.92 [0.63, 1.35]**, **w₁ = 4.4 [2.6, 6.5] km/s**, **f_H = 0.20 [0.12, 0.34]**. Acceptance fraction 0.38 (healthy). Posterior unimodal, not over-fitted.
+2. **Statistical rigor confirms the model.** Fair BIC Δ = -170 (T120 WINS by occam's razor on same 160-point data set vs simpler single-component Lorentzian; scoring-rule caveat acknowledged per 2026-09-19 referee M2). MCMC posterior (32 walkers × 2000 steps) independently recovers parameters within 1σ: **a_slope = 0.92 [0.63, 1.35]**, **w₁ = 4.4 [2.6, 6.5] km/s**, **f_H = 0.20 [0.12, 0.34]**. Acceptance fraction 0.38 (healthy). Posterior unimodal, not over-fitted.
 
-3. **UV completion via Hidden U(1) + pseudo-Dirac mass splitting (Zhang 2016).** DM is a Dirac fermion χ charged under dark U(1) with α_D = 0.0015, mediator is dark photon A' (m_A' = 30 MeV), pseudo-Dirac mass splitting Δm = 10 MeV, kinetic mixing ε = 10⁻⁵ to SM photon. **σ_SI (loop) = 3.8×10⁻⁵¹ cm², 2400× below LZ 2024 limit** — direct detection safely evaded via kinematic forbiddenness (Δm >> recoil energy).
+3. **UV completion: open problem.** v1.13.5 attempted Hidden U(1) + pseudo-Dirac mass splitting (Zhang 2016); **falsified by 2026-09-19 referee report** (Δm = 10 MeV exceeds galactic KE_CM by 5 orders of magnitude — see T120.16). v1.14 documents **three independent UV completion no-go theorems** + verification that the published best-fit p-wave resonance (Chu et al. 2019 PRL [28]) also fails on Cloud-9 (T131). **No published UV completion solves the Cloud-9 vs dSph tension.**
 
-4. **Slope flattening (α ≈ 1.0) is a physical feature, not a fudge.** Emerges from joint multi-channel fitting (8 datasets, 4 orders of magnitude in v), independently recovered by MCMC, robust over window [0.5, 1.2], has plausible UV motivation (Zhang 2016 pseudo-Dirac scaling, composite DM, P-wave resonance). First-principles UV derivation is future work.
+4. **Slope flattening (α ≈ 1.0) is a physical feature, not a fudge.** Emerges from joint multi-channel fitting (8 datasets, 4 orders of magnitude in v), independently recovered by MCMC, robust over window [0.5, 1.2]. UV derivation is deferred (§10.5 open problem in paper).
 
-5. **Self-check harness is comprehensive (174 tests + 9 skips + 7 audit claims pass).** Standard self-check (Layers A-F), T120-specific tests (T120.4 joint fit + T120.9 MCMC + T120.10 direct detection + T120.11 Hidden U(1) + T120.13 integration), audit_claims.py for doc-vs-data drift. Two real bugs caught during self-check of new code (T120.13): wrong µ_χ hardcoded + log-value bug in LZ limit function. Both fixed.
+5. **Self-check harness is comprehensive (174 tests + 13 T130 + 11 T131 + 17 T120.16 = 215 tests pass).** Standard self-check (Layers A-F), T120-specific tests (T120.4 joint fit + T120.9 MCMC + T120.10 direct detection + T120.11 Hidden U(1) + T120.13 integration + T120.15 UV slope + T120.16 kinematic threshold + T130 inelastic scan + T131 Chu P1 verification). Three real bugs caught during self-check: wrong µ_χ hardcoded (T120.10) + log-value bug in LZ limit (T120.10) + dimensionally wrong V_max formula (T120.16). All fixed.
 
 **Tier-1 (master) findings (for context):**
 
