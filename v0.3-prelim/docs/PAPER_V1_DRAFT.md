@@ -540,6 +540,20 @@ measurements, reducing effective free parameters to 2-3.
 
 ### 9.8 MCMC Refit and UV Completion (T120.9)
 
+#### 9.8.0 Status: §9.8.2-§9.8.4 retracted in v1.14
+
+> **⚠️ v1.14 RETRACTION NOTE:** §9.8.2 (Hidden U(1) UV completion) and
+> §9.8.4 (UV-derived slope) describe UV completion claims that were
+> **FALSIFIED** by the 2026-09-19 referee report (see §10.2 and
+> T120.16). These sections are preserved here as historical record of
+> the v1.13 attempt. The current UV completion status is documented
+> in §10 ("UV Completion: Open Problem and No-Go Theorems"). The
+> correct headline numbers (verified in T132) are:
+> - Cloud-9 (v=28): σ/m = **128.13 cm²/g** (matches v1.13's 128)
+> - dSph (v=15): σ/m = **0.032 cm²/g** (not v1.13's 0.013)
+> - SPARC (v=100): σ/m = **0.193 cm²/g** (matches)
+> - Cluster (v=500): σ/m = **2.5×10⁻⁴ cm²/g** (not v1.13's 4×10⁻⁴)
+
 #### 9.8.1 Joint MCMC Posterior (T120.9a)
 
 We performed a proper MCMC refit on the joint 39-point dataset (SPARC +

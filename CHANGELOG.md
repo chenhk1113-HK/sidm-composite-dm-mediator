@@ -25,10 +25,97 @@ doc-pack restructure, the T88/T89 dataset-acquisition series, and
 the T90 Tier-3 branch experiment. Kept at full fidelity because they
 are the rounds the project currently stands on.
 
+## [T132] — 2026-09-20
+
+**§10.5 sanity check found 2 numerical errors + 2 wording issues; v1.14 paper corrected.**
+
+Following Qwen referee 2 (2026-09-20) recommendation to "do one last
+sanity check on the EFT Target Map (§10.5) before freezing the text":
+
+- T132 sanity check: ran `joint_fit_full_evaluation(a_slope_override=1.0)`
+  and verified 8 numerical claims in §10.5.
+- Found: paper's headline σ/m(15) = 0.013 cm²/g was wrong (actual
+  full chain = 0.032 cm²/g, 2.5× off). Cluster σ/m(500) = 4×10⁻⁴
+  was wrong (actual = 2.5×10⁻⁴).
+- The phenomenology still passes all 8 constraints (`all_pass=True`),
+  but the paper's headline numbers needed correction.
+- Also fixed two wording issues: "Standard Yukawa gives <1" was
+  misleading (the issue is wrong velocity dependence, not magnitude);
+  "P-wave too narrow for SPARC" was wrong (P1 actually matches
+  SPARC; failure is at Cloud-9).
+
+Files:
+- v0.3-prelim/tests/test_T132_eft_target_map_sanity.py (18 tests)
+- v0.3-prelim/docs/T132_EFT_TARGET_MAP_SANITY.md
+- v0.3-prelim/docs/PAPER_V1_DRAFT.md (abstract + §10.5 corrected)
+- Added §9.8.0 RETRACTION banner pointing to §10
+
+---
+
+## [T130/T131] — 2026-09-19/20
+
+**Two more UV completion no-go theorems.**
+
+Following Qwen referee (2026-09-19) Strategy 1 (multi-TeV inelastic
+DM) and Strategy 2 (p-wave resonances):
+
+- **T130** (Strategy 1): Inelastic DM (pseudo-Dirac) with Δm > 100 keV
+  (DD evasion) requires m_χ ≥ 46 TeV. At 46 TeV, Δm window is 0.3 keV
+  (razor-thin) AND thermal relic requires α_D ~ 404 (unitarity
+  violation). NO-GO.
+- **T131** (Strategy 2): Chu, Garcia-Cely, Murayama 2019 [28] P1
+  benchmark p-wave resonance gives σ/m(28) = 0.1 cm²/g (fails
+  Cloud-9's 100). P1 was designed for older Kaplinghat dwarf-vs-
+  cluster tension, not our Cloud-9 vs dSph.
+
+Combined with T120.16, three independent UV completion no-go
+theorems. No published UV completion solves the Cloud-9 vs dSph
+tension.
+
+Files:
+- v0.3-prelim/code/T130_inelastic_kinematic_scan.py + tests
+- v0.3-prelim/code/T131_chu_pwave_verification.py + tests
+- v0.3-prelim/docs/T130_INELASTIC_DM_NO_GO.md
+- v0.3-prelim/docs/T131_PWAVE_RESONANCE_VERIFICATION.md
+- v0.3-prelim/references/chu_garcia_murayama_2019.pdf
+
+---
+
+## [T120.16] — 2026-09-19
+
+**Hidden U(1) UV completion FALSIFIED. Paper retracted to v1.14.**
+
+Referee report 2026-09-19 identified 3 make-or-break issues:
+
+1. **M1 (kinematic forbiddenness)**: Δm = 10 MeV exceeds galactic
+   KE_CM(v=28) = 23 eV by 5 orders of magnitude. Up-scattering is
+   kinematically forbidden, not "adiabatically enabled."
+2. **M2 (scoring-rule BIC)**: ΔBIC = -170 is +1.0 per pass / -1.8
+   per fail, not a likelihood.
+3. **M3 (tautology)**: σ/m(v) ~ (100/v)^0.5 fitted to itself.
+
+All three valid. Paper v1.13.5 retracted; v1.14 retires the Hidden
+U(1) UV completion claim.
+
+Additional finding (T120.16): Our V_max = α_D × m_χ = 16 MeV formula
+was dimensionally wrong. Zhang 2016's actual formula is V_max =
+α_D² × m_χ = 0.024 MeV. Our formula overstated the well depth by
+667×.
+
+Files:
+- v0.3-prelim/code/t120_16_kinematic_threshold.py + tests (17)
+- v0.3-prelim/docs/REFEREE_RESPONSE_v1.md (honest referee response)
+- v0.3-prelim/docs/REFEREE_M1_VERIFICATION.json (machine-readable)
+- v0.3-prelim/docs/LAYMAN_STATUS_v1_14.md (layman summary)
+
+---
+
 ## [T120] — 2026-09-19
 
 **Self-consistent two-component SIDM + gravothermal core-collapse
 selection + Hidden U(1) UV completion — paper v1.11 → v1.12 → v1.13.5.**
+
+**⚠️ v1.13.5 RETRACTED 2026-09-19 (see T120.16 above).**
 
 This is the resolution of the v1.11 residual 6–23× dSph tension via
 three independent mechanisms combined into a single self-consistent DM
