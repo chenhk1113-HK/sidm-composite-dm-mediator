@@ -61,6 +61,25 @@
 | M⋆ < 10³·⁵ M☉ (HST) | Photometric | NO (orthogonal channel) | No (independent constraint) |
 | M⋆ < 1.6×10⁴ M☉ (GTC) | Photometric | NO (orthogonal channel) | No (independent constraint) |
 
+## Host-galaxy environmental effect (M94, 2026-09-20 addendum)
+
+**Question raised (2026-09-20, K. Lam):** Is Cloud-9's σ/m floor affected by the nearby host galaxy M94 (NGC 4736), and is this accounted for?
+
+**Answer:** Yes, M94's tidal/gravitational influence is documented and already accounted for:
+
+- **Geometric fact:** Cloud-9 is at projected separation ≈52′ ≈ 70 kpc from M94 (Benítez-Llambay+ 2024 §2, VLA-D data). Same recession velocity (v_LSR ≈ +300 km/s), so physically associated.
+- **Observed effect:** VLA interferometry shows Cloud-9 is **slightly lop-sided and smaller** than the FAST discovery suggested. Astrobites (2025-03-06) and the Astrobites summary explicitly attribute this to "gravitational interactions with the larger nearby galaxy M94, causing the gas in Cloud-9 to squish and stretch."
+- **How it's accounted for:** The hydrostatic-equilibrium derivation (BLN24 §4) uses the gas profile shape + W50 line width together. The lop-sided shape **does not** invalidate the σ/m ≳ 50 cm²/g floor because:
+  1. The floor comes from gas pressure support, not symmetry assumption.
+  2. Distortion affects shape but not the total pressure needed to keep gas bound at the observed W50.
+  3. Benítez-Llambay+ 2024 explicitly models this as hydrostatic equilibrium *within* a tidally-perturbed potential.
+
+**Bottom line:** M94 contamination is **physical** (real tidal effect on Cloud-9's shape) but **does NOT weaken** the σ/m ≳ 50 cm²/g at v ≈ 28 km/s constraint that Phase 32 / Phase 44 adopts.
+
+**Common confusion note:** M92 (NGC 6341, a Hercules globular cluster at 8.3 kpc) is a completely different object. Cloud-9 is nowhere near M92. The "M9x" confusion likely stems from M94 and M92 sharing the first digit.
+
+---
+
 **Honest verdict:** None of the four papers introduces new data that **directly refines σ/m at v ≈ 28 km s⁻¹**. The kinematic constraint is already at its strongest published level (Benítez-Llambay+ 2024). The photometric M⋆ upper limits are **independent channels** that strengthen the RELHIC interpretation but do not enter the SIDM likelihood.
 
 The only legitimate numerical refinement is the halo-mass prior mean (4.7→5.0×10⁹ M☉). The numerical impact is <1σ (the prior sigma is 0.3 dex ≈ factor of 2 in linear units), so the joint log-likelihood and σ/m posterior are essentially unchanged.
