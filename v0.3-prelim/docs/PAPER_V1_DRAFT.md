@@ -2,7 +2,7 @@
 
 **Authors:** SIDM Composite DM-Mediator Collaboration
 **Branch:** `wip/multi-component-SIDM-core-collapse` (commit `8b8be7c`, 2026-09-20)
-**Status:** Paper draft (v1.14.1, INTERNAL REFERENCE, **focal version**). v1.14.1 retracts §9.8.4's claim that "Hidden U(1) + pseudo-Dirac derives slope = 0.5" — actual Born slope is 2.0 (verified by T133, 2026-09-20). v1.14 retires the Hidden U(1) UV completion (falsified by referee report 2026-09-19) and presents the multi-component + gravothermal phenomenology as a **self-consistent framework without UV claim**. The paper now documents **three independent UV completion no-go theorems** (magnetic dipole DM [T120.10], Hidden U(1) + 10 MeV pseudo-Dirac [T120.16], GeV-scale inelastic DM [T130]) and shows that the **published best-fit p-wave resonance** (Chu-Garcia-Cely-Murayama 2019 PRL [28]) also fails to reproduce the Cloud-9 constraint. The phenomenology (T120: multi-resonance + two-component asymmetric DM + gravothermal selection + Gaussian Breit-Wigner profiles) remains the **only working framework** for simultaneously satisfying 8 observational constraints spanning four orders of magnitude in velocity. The data-driven slope α_γ ≈ 0.92-1.0 (T120) is **independently confirmed** by PySR Tier 3 symbolic regression (slope = -0.97). **Markdown source of truth — no PDF build during drafting.** See `REFEREE_RESPONSE_v1.md`, `T130_INELASTIC_DM_NO_GO.md`, `T131_PWAVE_RESONANCE_VERIFICATION.md`, `T133_HIDDEN_U1_SLOPE_AUDIT.md` for full details.
+**Status:** Paper draft (v1.14.1, INTERNAL REFERENCE, **focal version**). v1.14.1 retracts §9.8.4's claim that "Hidden U(1) + pseudo-Dirac derives slope = 0.5" — actual Born slope is 2.0 (verified by T133, 2026-09-20). v1.14.1 ALSO retracts the T134 "CFT 2021 quantitative match" and "PySR Tier 3 independent verification" claims — both were based on circular reasoning (data generated with a_slope_override=1.0) per T135 (2026-09-20). v1.14 retires the Hidden U(1) UV completion (falsified by referee report 2026-09-19) and presents the multi-component + gravothermal phenomenology as a **self-consistent framework without UV claim**. The paper now documents **three independent UV completion no-go theorems** (magnetic dipole DM [T120.10], Hidden U(1) + 10 MeV pseudo-Dirac [T120.16], GeV-scale inelastic DM [T130]) and shows that the **published best-fit p-wave resonance** (Chu-Garcia-Cely-Murayama 2019 PRL [28]) also fails to reproduce the Cloud-9 constraint. The phenomenology (T120: multi-resonance + two-component asymmetric DM + gravothermal selection + Gaussian Breit-Wigner profiles) remains the **only working framework** for simultaneously satisfying 8 observational constraints spanning four orders of magnitude in velocity. The data-driven slope α_γ ≈ 0.92-1.0 (T120) is a phenomenological fit, NOT UV-derived and NOT independently confirmed by any third-party method. **Markdown source of truth — no PDF build during drafting.** See `REFEREE_RESPONSE_v1.md`, `T130_INELASTIC_DM_NO_GO.md`, `T131_PWAVE_RESONANCE_VERIFICATION.md`, `T133_HIDDEN_U1_SLOPE_AUDIT.md`, `T135_T134_RETRACTION.md` for full details.
 
 **Draft workflow (per 2026-09-17 user decision):** Read this file directly in any modern text editor (VS Code, GitHub, Obsidian). Unicode subscripts/superscripts, M☉, σ, ⚠, etc. all render as proper text in the editor. No PDF rendering until the paper is closer to submission. When PDF is needed, install Pandoc + XeLaTeX and run `pandoc PAPER_V1_DRAFT.md -o paper.pdf` (one-time setup, ~5 min).
 **Recommended venue:** PRD, JCAP, or JHEP (mixed-verdict focus appropriate for all three)
@@ -706,9 +706,9 @@ direct detection because:
 > `zhang2016_self_scattering_v` gives slope = **2.0** (verified
 > independently, R² = 1.000 over v = 3-500 km/s), matching standard
 > diagonal Yukawa. The 0.5 claim was an arithmetic slip in the
-> v^(3/2) prefactor argument, not a physical result. PySR Tier 3
-> independent discovery found slope = -0.97 from data, confirming
-> the data-driven phenomenological choice, not a UV derivation.
+|> v^(3/2) prefactor argument, not a physical result. The
+> phenomenological slope α ≈ 1 (data-driven) is NOT UV-derived.
+> The 0.5 claim was an arithmetic slip, not a physical result.
 > See `T133_HIDDEN_U1_SLOPE_AUDIT.md` and §10.2 for the correct verdict.
 > The content below is preserved for archival traceability.
 
@@ -911,8 +911,15 @@ slope = 0.5 is RETRACTED per T133, 2026-09-20; the actual Born
 slope is 2.0). The flattening from the theoretical Yukawa value
 α=2 to the data-driven α ≈ 1 is a **physical feature of the dark
 sector that no published UV completion explains yet** (§10.5 open
-problem). PySR Tier 3 independent discovery (slope = -0.97) provides
-third-party confirmation of the data-driven phenomenological choice.
+problem). **NOTE (T135, 2026-09-20, retraction):** The earlier
+"PySR Tier 3 independent discovery (slope = -0.97) provides
+third-party confirmation" claim was based on data generated by our
+own phenomenology code with `a_slope_override=1.0`, which is
+**circular reasoning**. PySR was given data with slope = -1.0 by
+construction and "discovered" slope ≈ -1.0 — this is NOT
+independent verification. The phenomenological slope remains
+data-driven (from MCMC posterior α = 0.92 ± 0.36) but is NOT
+confirmed by any third-party method. See `T135_T134_RETRACTION.md`.
 
 **Caveat (per 2026-09-19 referee report and Qwen referee):**
 The ΔBIC = -170 headlined above is a **scoring-rule BIC** (T120.8 uses
