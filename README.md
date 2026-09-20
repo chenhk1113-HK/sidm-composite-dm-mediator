@@ -239,7 +239,7 @@ sidm-composite-dm-mediator/
     └── tests/                             ← 549 pytest tests
 ```
 
-> Most README references in `v0.3-prelim/docs/` use relative paths starting from `v0.3-prelim/`. When in doubt, the canonical reference doc for the current standing version is `docs/LAYMAN_SUMMARY.md`.
+> Most README references in `v0.3-prelim/docs/` use relative paths starting from `v0.3-prelim/`. When in doubt, the canonical reference doc for the current standing version is `docs/LAYMAN_SUMMARY.md`. For the current WIP Tier-2 paper (v1.14), see `v0.3-prelim/docs/LAYMAN_STATUS_v1_14.md`.
 
 ---
 
