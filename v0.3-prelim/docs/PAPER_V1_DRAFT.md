@@ -2,7 +2,7 @@
 
 **Authors:** SIDM Composite DM-Mediator Collaboration
 **Branch:** `wip/multi-component-SIDM-core-collapse` (commit `9daf10a`, 2026-09-21; synced with `wip/cloud-9-relhic`)
-**Status:** Paper draft (v1.14.1, INTERNAL REFERENCE, **focal version**). v1.14.1 retracts §9.8.4's claim that "Hidden U(1) + pseudo-Dirac derives slope = 0.5" — actual Born slope is 2.0 (verified by T133, 2026-09-20). v1.14.1 ALSO retracts the T134 "CFT 2021 quantitative match" and "PySR Tier 3 independent verification" claims — both were based on circular reasoning (data generated with a_slope_override=1.0) per T135 (2026-09-20). v1.14 retires the Hidden U(1) UV completion (falsified by referee report 2026-09-19) and presents the multi-component + gravothermal phenomenology as a **self-consistent framework without UV claim**. The paper now documents **three independent UV completion no-go theorems** (magnetic dipole DM [T120.10], Hidden U(1) + 10 MeV pseudo-Dirac [T120.16], GeV-scale inelastic DM [T130]) and shows that the **published best-fit p-wave resonance** (Chu-Garcia-Cely-Murayama 2019 PRL [28]) also fails to reproduce the Cloud-9 constraint. The phenomenology (T120: multi-resonance + two-component asymmetric DM + gravothermal selection + Gaussian Breit-Wigner profiles) remains the **only working framework** for simultaneously satisfying 7 of 8 observational constraints — Cloud-9's σ/m ≥ 50 floor is confirmed by independent MCMC (Ohana, Zhang & Yu 2026, arXiv:2608.04362) but cannot be derived from standard Yukawa physics (T165-T172 robustness investigation, 2026-09-20). The data-driven slope α_γ ≈ 0.92-1.0 (T120) is a phenomenological fit, NOT UV-derived and NOT independently confirmed by any third-party method. **Markdown source of truth — no PDF build during drafting.** See `REFEREE_RESPONSE_v1.md`, `T130_INELASTIC_DM_NO_GO.md`, `T131_PWAVE_RESONANCE_VERIFICATION.md`, `T133_HIDDEN_U1_SLOPE_AUDIT.md`, `T135_T134_RETRACTION.md`, `CLOUD9_SIGMA_M_VERIFICATION_2026_09_20.md`, `T165_T169_ROBUSTNESS_REPORT.md`, `T170_T172_RESONANT_SIDM.md` for full details.
+**Status:** Paper draft (v1.14.1, INTERNAL REFERENCE, **focal version**). v1.14.1 retires the Hidden U(1) UV completion (falsified by referee report 2026-09-19) and presents the multi-component + gravothermal phenomenology as a **self-consistent framework without UV claim**. The paper documents **four independent UV completion no-go theorems** (magnetic dipole DM, Hidden U(1) + 10 MeV pseudo-Dirac, GeV-scale inelastic DM, Chu+ 2019 p-wave resonance) and shows that the **specific 4000× Cloud-9 spike** cannot be derived from standard Yukawa physics (T165-T172 robustness investigation). The phenomenology (T120: multi-resonance + two-component asymmetric DM + gravothermal selection + Gaussian Breit-Wigner profiles) satisfies **7 of 8 observational constraints** (RMSE = 0.25 on the 7-point fit). **Markdown source of truth — no PDF build during drafting.** See README.md, CHANGELOG.md, and `v0.3-prelim/docs/` for full supporting documentation.
 
 **Draft workflow (per 2026-09-17 user decision):** Read this file directly in any modern text editor (VS Code, GitHub, Obsidian). Unicode subscripts/superscripts, M☉, σ, ⚠, etc. all render as proper text in the editor. No PDF rendering until the paper is closer to submission. When PDF is needed, install Pandoc + XeLaTeX and run `pandoc PAPER_V1_DRAFT.md -o paper.pdf` (one-time setup, ~5 min).
 **Recommended venue:** PRD, JCAP, or JHEP (mixed-verdict focus appropriate for all three)
@@ -19,9 +19,9 @@ We present a **self-consistent multi-component SIDM framework (v1.14)** that res
 
 **UV completion: open problem.** v1.13.5 proposed Hidden U(1) + pseudo-Dirac mass splitting (Zhang 2016 [45]) as UV completion; **this was falsified by referee report 2026-09-19** (Δm = 10 MeV exceeds galactic KE_CM by 4-7 orders of magnitude, making up-scattering kinematically forbidden — see §10.1 and T120.16). v1.14 explicitly retires this UV claim and presents **four independent no-go theorems** for the simplest UV completion paths: (i) magnetic dipole DM [44, T120.10] ruled out by LZ direct detection; (ii) Hidden U(1) + 10 MeV pseudo-Dirac [45, T120.16] ruled out by galactic kinematics; (iii) GeV-scale inelastic DM [T130] no-go theorem (requires m_χ ≥ 46 TeV with razor-thin Δm window and thermal-relic unitarity violation); (iv) published best-fit p-wave resonance (Chu-Garcia-Cely-Murayama 2019 [28] P1 benchmark) fails Cloud-9 constraint (T131). **No published UV completion solves the Cloud-9 vs dSph tension.**
 
-**Historical context**: Earlier versions (v1.6–v1.10) applied Lorentzian Breit-Wigner profiles and reported a 6–23× tension with Ando et al. 2025 [27] dSph/UFD upper limits. v1.11 adopted Gaussian profiles (T120.1–T120.4). v1.12 introduced multi-component DM + gravothermal selection + flattened background slope (T120.1–T120.7). v1.13.2 attempted magnetic dipole DM as UV completion (ruled out in T120.10). v1.13.5 attempted Hidden U(1) + pseudo-Dirac UV completion (falsified by 2026-09-19 referee report). **v1.14 — the focal version** — presents the multi-component phenomenology without UV claim and documents the UV completion open problem.
+**Note on prior versions:** v1.14 supersedes earlier drafts (v1.6–v1.13.5); see git history for the version chain. The four no-go theorems in §10 document why specific UV completion attempts in v1.13.x were falsified.
 
-**Mixed verdict**: rotation curves alone do not uniquely prefer multi-resonance (Burkert wins Bayesian evidence per Phase 41); JVAS B1938+666 lies outside the reliable domain of the present model and is better described by complementary core-collapse SIDM. The **multi-component + gravothermal phenomenology** is a **compelling candidate** for the Cloud-9 vs dSph tension but is not the unique solution; the corresponding UV completion remains an open problem. We organize the paper around **four physical ingredients** (§2), their **joint constraints** (§3), **comparison with simpler alternatives** (§4), **statistical verification** (§5), **the JVAS tension and its reclassification** (§6), **the multi-component resolution** (§7), **mixed verdict** (§8), and **UV completion no-go theorems + Cloud-9 robustness investigation** (§10).
+**Mixed verdict**: rotation curves alone do not uniquely prefer multi-resonance (Burkert wins Bayesian evidence per Phase 41); JVAS B1938+666 lies outside the reliable domain of the present model and is better described by complementary core-collapse SIDM. The **multi-component + gravothermal phenomenology** is a **compelling candidate** for the Cloud-9 vs dSph tension but is not the unique solution; the corresponding UV completion remains an open problem. The paper is organized as: **four physical ingredients** (§2), **joint constraints** (§3), **two-component resolution** (§9), **UV completion no-go theorems + Cloud-9 robustness investigation** (§10), **conclusions** (§11). Sections 4–8 (profile comparison, mass-spectrum embeddings, UV-prior joint fit, JVAS tension, discussion) are in `PAPER_V1_DRAFT_SUPPLEMENTARY.md`.
 
 ---
 
@@ -208,192 +208,14 @@ All four constraints are simultaneously satisfied by the self-consistent model d
 
 ---
 
-## 4. Comparison with Simpler Halo Profiles
+---
 
-### 4.1 Profile comparisons
+## Supplementary Material Pointer
 
-We tested the multi-resonance SIDM model against four simpler halo profiles: NFW (Navarro, Frenk & White 1997 [17]), Burkert (Burkert 1995 [18]), PISO (Read, Agertz & Collins 2016 [19]), and Einasto (Einasto 1965 [20]). The comparison is performed on the SPARC rotation-curve sample (Phase 41).
-
-**Results:**
-- **Best χ²:** PISO wins the χ² comparison.
-- **Best Bayesian evidence (dynesty):** Burkert wins.
-- **Multi-resonance SIDM:** Competitive but not best on either metric.
-
-### 4.2 Bayesian evidence
-
-The Bayesian evidence comparison is the more discriminating test because it accounts for model complexity via the Occam penalty. **Burkert wins** the evidence comparison, indicating that the multi-resonance architecture is not uniquely preferred over the simpler cored profile (Phase 41).
-
-### 4.3 Gravothermal evolution
-
-The gravothermal evolution of SIDM halos (Phase 41D, Phase 43) was computed using the velocity-dependent cross-section. The gravothermal collapse timescale in cluster-scale halos is ≳ 10 Gyr, so gravothermal evolution does not change the picture on the timescales probed by current observations.
-
-### 4.4 Honest statement
-
-**Rotation curves alone do NOT preferentially prefer the multi-resonance model over simpler cored profiles (Burkert wins by Bayesian evidence).** The multi-resonance architecture is **consistent with** rotation-curve data but is not uniquely required by it.
-
-### 4.5 Joint-channel comparison with constant σ/m (Phase 54)
-
-To address the question "does the multi-resonance architecture still win on the joint SPARC + Cloud-9 likelihood?" we performed a direct comparison (Phase 54, see `docs/PHASE54_JOINT_COMPARISON.md`) between the multi-resonance model and a **constant σ/m** baseline (1 free parameter, the simplest possible velocity-independent cross-section).
-
-| Model | log L (3-channel) | log L (2-channel) | # free params |
-|---|---|---|---|
-| Constant σ/m | −17.66 | −7.79 | 1 |
-| **Multi-resonance (15 params)** | **−11.58** | **−2.24** | 15 |
-| Δ log L (raw likelihood) | **+6.08** | **+5.55** | — |
-
-**Raw likelihood:** the multi-resonance model wins by +6 log-units on joint channels. This is a genuine fit improvement — the multi-velocity resonance structure captures features that a single σ_const cannot.
-
-**BIC-corrected evidence:** the constant σ/m model is preferred by +3.22 BIC units (lower BIC = better, accounting for the 14-parameter advantage of the simpler model). This is a **mixed result**: the multi-resonance architecture is a better fit at the cost of substantially more parameters.
-
-**Per-channel:** the constant σ/m model matches SPARC perfectly (σ_const ≈ 0.07 cm²/g) but fails the Cloud-9 UDG requirement (σ/m ≲ 100 cm²/g needed) by ~99.93 cm²/g and the JVAS by ~99.93 cm²/g. The multi-resonance architecture uniquely matches both Cloud-9 (σ/m peaks at ≈ 197 cm²/g near v_peak,1 = v_target,1 ≈ 29 km/s, satisfying the ≳ 100 cm²/g Cloud-9 requirement; see §2.1) and SPARC (σ/m(100) ≈ 0.07) within the same parameterization, while leaving JVAS outside its reliable domain (Phase 50).
-
-**Honest framing:** the "+8.10 log-units" headline from Phase 44 refers to improvement over the T90.70 baseline, not over a simpler alternative. The multi-resonance architecture provides a better raw-likelihood fit on joint channels at the cost of substantially more parameters; both models have merit depending on whether raw likelihood or BIC-penalized evidence is the criterion. The architecture's strongest claim is that it **uniquely satisfies the Cloud-9 + SPARC joint constraint** that no single-parameter alternative can.
-
-#### 4.5.1 Scope note: Burkert / single-Yukawa comparison on joint channels
-
-The Burkert halo profile wins the rotation-curve-only Bayesian evidence comparison (Phase 41, §4.2), and the constant σ/m model loses the joint-channel raw-likelihood comparison (§4.5 above). A natural next step is to ask whether **Burkert + single-Yukawa SIDM** (a single Yukawa-mediated cross-section with a velocity-dependent background σ₀(v) = σ₀·(v_ref/v)^α acting on Burkert halos) could match the joint SPARC + Cloud-9 likelihood.
-
-**This comparison is not included in the present draft for the following reasons:**
-
-1. **The Cloud-9 channel is kinematic, not rotation-curve based.** Burkert is a *halo density profile*, not a σ/m parameterization. A Burkert-vs-multi-resonance comparison on Cloud-9 would have to translate Cloud-9's required σ/m(v ≈ 28 km/s) ≳ 50 cm²/g into a Burkert-core prediction — but Burkert has no σ/m parameter; the cross-section is an input to gravothermal evolution of the Burkert profile, not a free parameter of the profile itself.
-2. **Single-Yukawa SIDM** (Feng, Kaplinghat & Yu 2009 [5]) is a specific functional form σ/m(v) = σ₀·(v_ref/v)^α with two free parameters (σ₀, α). On dwarf velocities, a single Yukawa gives a smooth power-law suppression; it cannot produce the Breit-Wigner peak at v ≈ 28 km/s that Cloud-9 requires. The Cloud-9 channel therefore *excludes* single-Yukawa at the kinematic level, before any rotation-curve comparison is made.
-3. **The joint SPARC + Cloud-9 likelihood (Phase 44) is therefore the appropriate test**, and the multi-resonance architecture wins the raw likelihood there. The honest empirical ordering of simpler alternatives on the **joint** channels is: constant σ/m < single-Yukawa < multi-resonance (in raw likelihood), with constant σ/m preferred by BIC over multi-resonance. A direct Burkert + single-Yukawa MCMC on the joint likelihood would be a worthwhile follow-up but requires a Yukawa-SIDM gravothermal implementation (Phase 50 candidate work) that is outside the scope of the present internal-reference draft.
-
-The constant-σ/m comparison in §4.5 is therefore the simplest, most direct head-to-head available without a new MCMC. The reviewer-side suggestion of adding a Burkert-on-joint comparison is noted and would strengthen the paper if the Yukawa-SIDM gravothermal machinery were available; deferred to a future revision.
+**Sections 4–8 of earlier drafts (Comparison with Simpler Halo Profiles, Mass-Spectrum Embeddings, UV-Prior Joint Fit, JVAS Tension, Discussion) have been moved to `PAPER_V1_DRAFT_SUPPLEMENTARY.md` for journal submission brevity.** Per Review_PAPER_V.docx structural suggestion (2026-09-21), the main paper is now organized around the core phenomenology (§1 Introduction → §2 Model → §3 Constraints → §9 Two-Component Resolution → §10 UV Completion No-Go Theorems → §11 Conclusions).
 
 ---
 
-## 5. Mass-Spectrum Embeddings (Kinematic Bookkeeping, NOT UV Completion)
-
-**Reframing (per R2 review, 2026-09-21):** What §5 presents is *mass-spectrum embedding* — group-theoretic patterns that produce the right hierarchy of mediator masses. This is **kinematic bookkeeping**, NOT a UV completion. A UV completion also needs to specify: what dynamics produces the cross-section, how direct-detection constraints are evaded, and how the correct relic density is achieved. None of those is addressed in §5. See §10 for the actual UV completion open problem and four no-go theorems.
-
-Five constructions achieve MINIMAL fine-tuning on the resonance-mass spectrum:
-
-| Construction | RMS log₁₀ | Reduction vs Phase 48 |
-|---|---|---|
-| Phase 51 clockwork q^k (k = [3, 6, 9, 11]) | 0.0159 | 163.9× |
-| Phase 51 Secluded U(1) n² (n = [1, 4, 11, 26]) | 0.0183 | 142.4× |
-| Phase 52 power-law q^(i−1) (q ≈ 2.93) | 0.0464 | 56.2× |
-| Phase 52 integer n^α (α ≈ 2.31) | 0.0608 | 42.8× |
-| Free mass ratios (5 params, trivial) | 0.0000 | (trivial) |
-
-The dark-SU(N) benchmark (Phase 48, 2.61 orders) is now superseded. Earlier verdict "tuned but possible" → current verdict "MINIMAL fine-tuning, multiple UV homes."
-
-**Caveat:** The 4-peak coincidence is irreducible — all constructions produce a tower of resonances; the choice of exactly 4 peaks at v = [28, 100, 178, 430] (clockwork UV) is a design choice, not a UV prediction. The fine-tuning metric quantifies how precisely the chosen peak positions are reproduced, not whether the tower structure itself is natural. We do not claim the tower's existence is itself a UV prediction.
-
----
-
-## 6. UV-Prior Re-Evaluation of the Joint Fit (Phase 53 v2)
-
-### 6.1 Question
-
-Does the +8 log-unit joint-fit improvement (§3.4) survive when the four resonance velocities are no longer independently free, but constrained to follow the clockwork q^k mass hierarchy from §5.2? This is the "decisive test" proposed by the Comment11.docx reviewer (2026-09-16).
-
-### 6.2 Method
-
-The Phase 44 15-parameter free fit is replaced by a **5-parameter clockwork UV-prior fit**:
-- m_χ, σ₀, α (3 background parameters, free)
-- log v₁, q (2 clockwork parameters, free)
-- k-levels = [3, 6, 9, 11] (FIXED, from Phase 51)
-- σ_peaks = [100, 0.07, 0.1, 0.01] (FIXED, T90.70 values)
-- width_fracs = [0.05, 0.05, 0.05, 0.10] (FIXED, T90.70 values)
-
-The four velocities are computed from the clockwork formula:
-
-  v_target[i] = v₁ · q^(k[i] / 2)   for k = [3, 6, 9, 11]
-
-The σ_peaks are FIXED to prevent the optimizer from absorbing velocity error into peak heights (Phase 53 v1 bug, see §6.5).
-
-### 6.3 Results
-
-| Configuration | N params | log L | Improvement |
-|---|---|---|---|
-| Phase 44 T90.70 baseline | 15 | −19.67 | — |
-| Phase 44 free v_targets | 15 | −11.58 | **+8.10 log-units** (scoring-rule units, see §9.7) |
-| **Phase 53 v2 clockwork UV** | **5** | **−11.74** | **+7.93 log-units** |
-- | vs Phase 44 free fit: | | **Δ = −0.16 log-units** |
-- | vs Phase 44 baseline: | | **+7.93 log-units** |
-
-### 6.4 BIC-corrected comparison
-
-BIC penalty: 0.5 · k · ln(n) per parameter (n = 3 channels).
-
-| Configuration | BIC log L |
-|---|---|
-| Phase 44 (k=15) | −11.58 + 8.22 = **−3.36** |
-| Phase 53 v2 (k=5) | −11.74 + 2.74 = **−9.00** |
-| **Δ BIC (Phase 53 − Phase 44)** | **−5.66** (clockwork UV **preferred**) |
-
-### 6.5 Phase 53 v1 bug
-
-A first implementation (Phase 53 v1) allowed q ∈ [1.05, 5.0] with free σ_peaks. The optimizer found q = 4.16 with peaks at [29, 2112, 151921, 2.6M] km/s — completely outside the T90.70 ladder — but log L matched Phase 44 trivially because free σ_peaks absorbed the velocity error. This was **not a valid test**. The v2 implementation fixes σ_peaks at T90.70 values.
-
-### 6.6 Interpretation
-
-**The +8 log-unit gain survives UV priors.** With only 5 free parameters (vs Phase 44's 15) constrained by the clockwork q^k mass hierarchy, the multi-channel joint-fit gain is preserved at +7.93 log-units. Δ vs the free fit is only −0.16 log-units, and BIC-corrected Δ is −5.66 favoring the clockwork UV completion.
-
-The clockwork UV completion (Phase 51's MINIMAL fine-tuning construction) is sufficient to satisfy the 3-channel likelihood with only 5 free parameters. The architecture is no longer "tuned phenomenology with concrete UV homes" — it is now "concrete UV homes with the multi-channel phenomenology intact."
-
----
-
-## 7. The JVAS Tension
-
-### 7.1 Statement
-
-JVAS B1938+666 requires σ/m(15) ≈ 100 cm²/g (Vegetti+ 2010 [16]), while the multi-resonance architecture gives σ/m(15) ≈ 4.2 cm²/g (Phase 44 free fit). This is a factor of ~24× below the JVAS target. This is a structural shortcoming.
-
-### 7.2 Possible resolutions
-
-- **(a) Phase 50: domain-boundary reclassification.** JVAS lies outside the reliable domain of the present multi-resonance model and is better described by complementary core-collapse SIDM (Zhang & Yu 2026 [23]; Tran+ 2025 PRD 112, 083003 [24]). The complementary mechanism (gravothermal core collapse) provides σ/m ≈ 100 at v ≈ 15 km/s without requiring a resonance at that velocity.
-- **(b) Phase 47 stress test.** We tested selective σ/m(15) enhancement without breaking Cloud-9; the joint-fit constraints prevent it.
-- **(c) Domain limitation.** The multi-resonance architecture is designed for v ≈ 28–700 km/s; JVAS v ≈ 15 km/s is outside the design domain.
-
-### 7.3 Resolution adopted
-
-We adopt (a): JVAS lies outside the reliable domain of the present multi-resonance model. The complementary core-collapse mechanism (Zhang & Yu 2026 [23]) is the more appropriate framework for v ≈ 15 km/s. This is consistent with the Phase 47 stress-test analysis and the Phase 50 domain-boundary reclassification.
-
----
-
-## 8. Discussion
-
-### 8.1 What the model achieves
-
-1. **Multi-channel consistency**: 7 of 8 observational constraints satisfied simultaneously (RMSE = 0.25 on the 7-point fit). Cloud-9 σ/m ≥ 50 floor confirmed (Ohana+ 2026 [15e]) but specific 4000× spike not derived from our model.
-2. **Concrete UV homes** (Phases 51–52): Five UV constructions achieve MINIMAL fine-tuning on the resonance-mass spectrum (§5).
-3. **UV-prior joint fit** (Phase 53 v2): The 5-parameter clockwork UV-prior fit satisfies the joint likelihood nearly as well as the 15-parameter free fit (§6).
-4. **Multi-resonance SPARC consistency** (Phase 33d): 115/127 = 90.6% of SPARC galaxies pass the V_flat test.
-
-### 8.2 What the model does NOT achieve
-
-1. **Decisive preference on rotation curves** (Phase 41): Burkert wins the Bayesian evidence comparison. Multi-resonance is consistent but not uniquely preferred.
-2. **Full explanation of JVAS B1938+666** (Phase 50): Lies outside the reliable domain; complementary core-collapse SIDM is needed.
-3. **Unique UV completion** (Phases 51–52): Five MINIMAL UV homes exist; the architecture is "multiple UV embeddings," not "THE UV."
-4. **Tower structure as UV prediction**: The four-peak coincidence is a design choice; UV constructions predict an entire tower, of which we select 4 peaks.
-5. **Derivation of Cloud-9's specific spike shape**: T165-T172 robustness investigation (§10.7) showed standard Yukawa (with or without resonance) cannot simultaneously fit Cloud-9 and the other 7 points. The Cloud-9 spike requires physics beyond standard Yukawa interactions.
-
-### 8.3 Implications for the multi-scale SIDM problem
-
-The multi-resonance architecture addresses the **multi-scale challenge** (σ/m at dwarf vs cluster scales) by introducing four narrow velocity windows where the cross-section is enhanced. The cross-section is suppressed outside these windows by the Yukawa background, providing cluster-scale consistency.
-
-The JVAS shortfall (§7) demonstrates that no single framework can address all velocity scales; complementary mechanisms (gravothermal core collapse, multi-mediator non-resonant cross-section enhancement, etc.) are needed for v ≈ 15 km/s. The multi-resonance architecture is one piece of a larger multi-mechanism picture.
-
-### 8.4 Limitations and Future Work
-
-Three concrete improvements are out of scope for this revision and are planned for follow-up work:
-
-1. **Partial-wave / numerical Schrödinger treatment** — explored and closed (T101 + T110, see `T101_4_DECISION_GATE_REPORT_2026_09_19.md`, `T110_1A_NEAR_THRESHOLD_RESULT_2026_09_19.md`): partial-wave solver matches Born approximation to <1% in weak-coupling limit; does not generate Breit-Wigner peaks from Yukawa scattering alone. Near-threshold resonances and inelastic mass-splitting mechanisms fail the Cloud-9/dSph velocity lever-arm test.
-
-2. **Hierarchical forward-model for SPARC** — the Phase 33d V_flat pass count treats SPARC as 175 independent consistency checks at fixed σ/m(v=100). A proper hierarchical Bayesian forward-model would marginalize over galaxy-specific nuisance parameters (distance, inclination, stellar mass-to-light ratio) and would constrain the v₂ ≈ 100 km/s bookkeeping node more tightly. Current 90.6% pass rate is a *lower bound* on SPARC consistency.
-
-3. **Boltzmann-solver relic density** — the present analysis uses a calibrated 1/⟨σv⟩ mapping, not a Boltzmann solver (micrOMEGAs-class). A full Boltzmann-solver treatment would verify Ω_χ h² ≈ 0.12 and would add the CMB energy-injection constraint (p_ann) as a hard upper bound on σ/m at low velocities.
-
-These three improvements constitute the "T100–T103" roadmap for post-paper revision. The T110 alternative-mechanism investigation is closed with negative results.
-
-### 8.5 Honest mixed verdict
-
-The multi-resonance architecture is consistent with the 7-point fit (RMSE = 0.25) and has five independent UV embeddings that achieve MINIMAL fine-tuning on the resonance-mass spectrum. The framework does **not** uniquely prefer multi-resonance over constant σ/m on rotation-curve data alone (Phase 41 BIC Δ = +3.22 favoring constant σ/m — but this BIC is also scoring-rule, see §9.7). Two known limitations are documented honestly: the JVAS shortfall (24×, §3.3, §7) and the dSph upper-limit tension (6–23× at v_eff = 5–15 km/s, §3.6, **corrected from v1.10 after Horigome+ velocity convention v_eff = 0.64 × V̂_max was applied**). The combination of these is appropriate for a "mixed-verdict" paper at PRD / JCAP / JHEP.
-
----
 
 ## 9. Self-Consistent Two-Component Model with Gravothermal Selection (v1.12)
 
@@ -518,55 +340,9 @@ The T120 model adds ~7 free parameters over Phase 44 (m_H/m_L ratio, Gaussian wi
 
 So the **effective free-parameter count** is closer to 3-4 (not 7), which is consistent with the **5-parameter clockwork UV-prior fit** in §6 (Phase 53 v2).
 
+A separate joint-channel comparison (Phase 54, see Supplementary §S1.5) found that the multi-resonance model wins the **raw log-likelihood** by +6.08 log-units but **loses by +3.22 BIC (i.e., Δ = +3.22 favoring the constant σ/m model)** (1 free parameter vs 15). This **mixed verdict** on rotation-curve-only data is documented in Supplementary §S1.5.
+
 A formal per-point Gaussian likelihood comparison (rather than the scoring-rule pass/fail that yielded ΔBIC = -170 cited in earlier drafts) is pending. The qualitative preference for T120 over Phase 44 is robust — Phase 44 fails 31/160 dSph/UFD points at 6-23× violation, while T120 passes all 31 — but the formal BIC delta needs proper likelihood construction.
-
-### 9.8 MCMC Refit and UV Completion (T120.9)
-
-#### 9.8.0 Status: §9.8.2-§9.8.4 retracted in v1.14
-
-> **⚠️ v1.14 RETRACTION NOTE:** §9.8.2 (Hidden U(1) UV completion) and
-> §9.8.4 (UV-derived slope) describe UV completion claims that were
-> **FALSIFIED** by the 2026-09-19 referee report (see §10.2 and
-> T120.16). These sections are preserved here as historical record of
-> the v1.13 attempt. The current UV completion status is documented
-> in §10 ("UV Completion: Open Problem and No-Go Theorems"). The
-> correct headline numbers (verified in T132) are:
-> - Cloud-9 (v=28): σ/m = **128.13 cm²/g** (matches v1.13's 128)
-> - dSph (v=15): σ/m = **0.032 cm²/g** (not v1.13's 0.013)
-> - SPARC (v=100): σ/m = **0.193 cm²/g** (matches)
-> - Cluster (v=500): σ/m = **2.5×10⁻⁴ cm²/g** (not v1.13's 4×10⁻⁴)
-
-#### 9.8.1 Joint MCMC Posterior (T120.9a)
-
-We performed a proper MCMC refit on the joint 39-point dataset (SPARC +
-Cloud-9 + 8 classical dSphs + 23 UFDs + cluster) using `emcee` with 32
-walkers × 2000 steps (500 burn-in). The posterior independently recovers
-the v1.13.1 parameter values within 1σ:
-
-| Parameter | v1.13.1 (hand-tuned) | MCMC posterior median [16%, 84%] |
-|---|---|---|
-| σ_0 | 0.052 | 0.12 [0.03, 0.30] |
-| a_slope | 1.0 | **0.92 [0.63, 1.35]** ✓ |
-| w₁ | 3.0 km/s | **4.4 [2.6, 6.5]** ✓ |
-| f_H at r=0.2 (core-collapsed) | 0.30 | **0.20 [0.12, 0.34]** ✓ |
-
-The MCMC posterior is **well-defined and unimodal** (not multi-modal or
-degenerate). The acceptance fraction is 0.38 (healthy). The recovered
-parameter values agree with the hand-tuned v1.13.1 values to within the
-posterior width.
-
-This confirms that **v1.13.1 is the maximum-likelihood (or close to it)
-configuration of the joint posterior** — not a hand-tuned outlier.
-
-#### 9.8.2-9.8.4 RETRACTED — see §10 for canonical no-go theorems
-
-§9.8.2 (Hidden U(1) UV), §9.8.4 (UV derivation of velocity slope), and §9.8.3 (hierarchy of claims) were the v1.13.5-era UV completion attempts. All three are RETRACTED in v1.14:
-
-- §9.8.2 Hidden U(1) UV → retracted (T120.16 / 2026-09-19 referee); canonical no-go at §10.2
-- §9.8.4 Velocity-slope UV → retracted (T133 / 2026-09-20); actual Born slope is 2.0, not 0.5
-- §9.8.3 Hierarchy of claims → superseded by §10 multi-strategy no-go theorem composition
-
-The §10 series (10.1-10.4) is the canonical location for all UV completion status. Readers interested in the historical UV attempts should consult the git history at `wip/cloud-9-relhic` for pre-retraction commits.
 
 ## 10. UV Completion: Open Problem and No-Go Theorems
 
