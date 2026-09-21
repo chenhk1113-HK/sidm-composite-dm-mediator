@@ -1,7 +1,7 @@
 # Multi-Component Self-Interacting Dark Matter: Joint Multi-Channel Constraints and UV Completion No-Go Theorems
 
 **Authors:** SIDM Composite DM-Mediator Collaboration
-**Branch:** `wip/multi-component-SIDM-core-collapse` (commit `e5a795c`, 2026-09-20)
+**Branch:** `wip/multi-component-SIDM-core-collapse` (commit `9daf10a`, 2026-09-21; synced with `wip/cloud-9-relhic`)
 **Status:** Paper draft (v1.14.1, INTERNAL REFERENCE, **focal version**). v1.14.1 retracts §9.8.4's claim that "Hidden U(1) + pseudo-Dirac derives slope = 0.5" — actual Born slope is 2.0 (verified by T133, 2026-09-20). v1.14.1 ALSO retracts the T134 "CFT 2021 quantitative match" and "PySR Tier 3 independent verification" claims — both were based on circular reasoning (data generated with a_slope_override=1.0) per T135 (2026-09-20). v1.14 retires the Hidden U(1) UV completion (falsified by referee report 2026-09-19) and presents the multi-component + gravothermal phenomenology as a **self-consistent framework without UV claim**. The paper now documents **three independent UV completion no-go theorems** (magnetic dipole DM [T120.10], Hidden U(1) + 10 MeV pseudo-Dirac [T120.16], GeV-scale inelastic DM [T130]) and shows that the **published best-fit p-wave resonance** (Chu-Garcia-Cely-Murayama 2019 PRL [28]) also fails to reproduce the Cloud-9 constraint. The phenomenology (T120: multi-resonance + two-component asymmetric DM + gravothermal selection + Gaussian Breit-Wigner profiles) remains the **only working framework** for simultaneously satisfying 7 of 8 observational constraints — Cloud-9's σ/m ≥ 50 floor is confirmed by independent MCMC (Ohana, Zhang & Yu 2026, arXiv:2608.04362) but cannot be derived from standard Yukawa physics (T165-T172 robustness investigation, 2026-09-20). The data-driven slope α_γ ≈ 0.92-1.0 (T120) is a phenomenological fit, NOT UV-derived and NOT independently confirmed by any third-party method. **Markdown source of truth — no PDF build during drafting.** See `REFEREE_RESPONSE_v1.md`, `T130_INELASTIC_DM_NO_GO.md`, `T131_PWAVE_RESONANCE_VERIFICATION.md`, `T133_HIDDEN_U1_SLOPE_AUDIT.md`, `T135_T134_RETRACTION.md`, `CLOUD9_SIGMA_M_VERIFICATION_2026_09_20.md`, `T165_T169_ROBUSTNESS_REPORT.md`, `T170_T172_RESONANT_SIDM.md` for full details.
 
 **Draft workflow (per 2026-09-17 user decision):** Read this file directly in any modern text editor (VS Code, GitHub, Obsidian). Unicode subscripts/superscripts, M☉, σ, ⚠, etc. all render as proper text in the editor. No PDF rendering until the paper is closer to submission. When PDF is needed, install Pandoc + XeLaTeX and run `pandoc PAPER_V1_DRAFT.md -o paper.pdf` (one-time setup, ~5 min).
@@ -11,19 +11,19 @@
 
 ## Abstract
 
-We present a **self-consistent multi-component SIDM framework (v1.14)** that resolves the long-standing tension between Cloud-9's high self-interaction requirement (σ/m ≈ 100 cm²/g at v ≈ 28 km/s) and the dSph/UFD upper limits (σ/m ≲ 0.8 cm²/g at v ≈ 5–15 km/s). The v1.14 phenomenology combines **four physical ingredients** into a single coherent framework: (1) **multi-resonance SIDM** with four Breit-Wigner peaks at v ≈ 28, 100, 178, 430, 769 km/s on top of a velocity-dependent Yukawa background (Phase 44, +8.10 log-units improvement over single-channel baseline); (2) **two-component asymmetric dark matter** (Yang, Tsai & Fan 2025, PRD 112, 083011 [42]) — heavy χH + light χL with mass ratio 3:1; (3) **gravothermal core-collapse selection** (Yu et al. 2026, PRL [23]) — the heavy component sinks out of observation region in collapsed halos; (4) **Gaussian Breit-Wigner profiles** (replacing the Lorentzian 1/Δv² tails of earlier versions).
+We present a **self-consistent multi-component SIDM framework (v1.14)** that resolves the long-standing tension between Cloud-9's high self-interaction requirement (σ/m ≥ 50 cm²/g at v ≈ 28 km/s, published floor from Benítez-Llambay+ 2024 [15b], independently confirmed by Ohana, Zhang & Yu 2026 [15e] via MCMC) and the dSph/UFD upper limits (σ/m ≲ 0.8 cm²/g at v ≈ 5–15 km/s, Horigome+/Ando+ 2025 [27]). The v1.14 phenomenology combines **four physical ingredients** into a single coherent framework: (1) **multi-resonance SIDM** with one dominant Breit-Wigner peak (v₁ ≈ 28 km/s, the Cloud-9 channel) plus three bookkeeping interpolation nodes at v ≈ 100, 178, 430 km/s on top of a velocity-dependent Yukawa background; (2) **two-component asymmetric dark matter** (Yang, Tsai & Fan 2025, PRD 112, 083011 [42]) — heavy χH + light χL with mass ratio 3:1; (3) **gravothermal core-collapse selection** (Yu et al. 2026, PRL [23]) — the heavy component sinks out of observation region in collapsed halos; (4) **Gaussian Breit-Wigner profiles** (replacing the Lorentzian 1/Δv² tails of earlier versions).
 
-**The four ingredients work together** to satisfy **7 of 8 observational constraints simultaneously** spanning four orders of magnitude in velocity (from `joint_fit_full_evaluation(a_slope_override=1.0)`, the v1.13 default parameters): Cloud-9 (v = 28 km/s, σ/m = **128.13 cm²/g** target; **the published σ/m ≥ 50 cm²/g floor is confirmed independently by Ohana, Zhang & Yu 2026 (arXiv:2608.04362)** via MCMC; see §3.2 and §10.8), 8 classical dSphs (v = 15 km/s, σ/m = **0.032 cm²/g**), 23 UFDs in 4 bins (v = 3, 5, 7, 10 km/s, σ/m = 0.155, 0.093, 0.067, 0.047 cm²/g — all well below the 0.8 cm²/g upper limit from Ando+ 2025 [27]), SPARC (v = 100 km/s, σ/m = **0.193 cm²/g**), and galaxy clusters (v = 500 km/s, σ/m = **2.5×10⁻⁴ cm²/g**). All 7 non-Cloud-9 constraints pass with RMSE = 0.25; the Cloud-9 spike is the dominant residual at any single-Yukawa / KK tower / KK tower with gravothermal extension we have tested (T165-T172, 2026-09-20).
+**The four ingredients work together** to satisfy **7 of 8 observational constraints simultaneously** spanning four orders of magnitude in velocity (RMSE = 0.25 on the 7-point fit): Cloud-9 (v = 28 km/s, σ/m ≥ 50 cm²/g — **confirmed but the specific 4000× spike is not derived from our model**, see §3.2 + §10.7), 8 classical dSphs (v = 15 km/s, σ/m = **0.032 cm²/g**), 23 UFDs in 4 bins (v = 3, 5, 7, 10 km/s, σ/m = 0.155, 0.093, 0.067, 0.047 cm²/g — all well below the 0.8 cm²/g upper limit from Ando+ 2025 [27]), SPARC (v = 100 km/s, σ/m = **0.193 cm²/g**), and galaxy clusters (v = 500 km/s, σ/m = **2.5×10⁻⁴ cm²/g**). The 8th constraint (Cloud-9's specific 4000× spike) is not fit by the standard Yukawa framework we test; it requires physics beyond standard Yukawa interactions (T165-T172 robustness investigation, 2026-09-20).
 
-**Statistical verification** (T120.8, T120.9a): MCMC posterior (32 walkers × 2000 steps) independently recovers parameters within 1σ (a_slope = 0.92 ± 0.36, w₁ = 4.4 ± 2.0 km/s, f_H = 0.20 ± 0.11). Fair BIC comparison on the same 160-point dataset: T120 WINS by ΔBIC = -170 vs constant-σ/m baseline (caveat: scoring-rule BIC, see §6 and §10).
+**Statistical verification** (T120.8, T120.9a): MCMC posterior (32 walkers × 2000 steps) independently recovers parameters within 1σ (a_slope = 0.92 ± 0.36, w₁ = 4.4 ± 2.0 km/s, f_H = 0.20 ± 0.11). On the same 160-point dataset, the multi-component model passes **31 of 31** additional dSph/UFD points that the Phase 44 single-channel baseline fails (qualitative preference; formal per-point Gaussian likelihood + proper BIC pending).
 
-**UV completion: open problem.** v1.13.5 proposed Hidden U(1) + pseudo-Dirac mass splitting (Zhang 2016 [45]) as UV completion; **this was falsified by referee report 2026-09-19** (Δm = 10 MeV exceeds galactic KE_CM by 4-7 orders of magnitude, making up-scattering kinematically forbidden — see §10.1 and T120.16). v1.14 explicitly retires this UV claim and presents **three independent no-go theorems** for the simplest UV completion paths: (i) magnetic dipole DM [44, T120.10] ruled out by LZ direct detection; (ii) Hidden U(1) + 10 MeV pseudo-Dirac [45, T120.16] ruled out by galactic kinematics; (iii) GeV-scale inelastic DM [T130] no-go theorem (requires m_χ ≥ 46 TeV with razor-thin Δm window and thermal-relic unitarity violation). Furthermore, the **published best-fit p-wave resonance** (Chu-Garcia-Cely-Murayama 2019 [28] P1 benchmark) also fails to satisfy the Cloud-9 constraint (T131). **No published UV completion solves the Cloud-9 vs dSph tension.**
+**UV completion: open problem.** v1.13.5 proposed Hidden U(1) + pseudo-Dirac mass splitting (Zhang 2016 [45]) as UV completion; **this was falsified by referee report 2026-09-19** (Δm = 10 MeV exceeds galactic KE_CM by 4-7 orders of magnitude, making up-scattering kinematically forbidden — see §10.1 and T120.16). v1.14 explicitly retires this UV claim and presents **four independent no-go theorems** for the simplest UV completion paths: (i) magnetic dipole DM [44, T120.10] ruled out by LZ direct detection; (ii) Hidden U(1) + 10 MeV pseudo-Dirac [45, T120.16] ruled out by galactic kinematics; (iii) GeV-scale inelastic DM [T130] no-go theorem (requires m_χ ≥ 46 TeV with razor-thin Δm window and thermal-relic unitarity violation); (iv) published best-fit p-wave resonance (Chu-Garcia-Cely-Murayama 2019 [28] P1 benchmark) fails Cloud-9 constraint (T131). **No published UV completion solves the Cloud-9 vs dSph tension.**
 
 **Historical context**: Earlier versions (v1.6–v1.10) applied Lorentzian Breit-Wigner profiles and reported a 6–23× tension with Ando et al. 2025 [27] dSph/UFD upper limits. v1.11 adopted Gaussian profiles (T120.1–T120.4). v1.12 introduced multi-component DM + gravothermal selection + flattened background slope (T120.1–T120.7). v1.13.2 attempted magnetic dipole DM as UV completion (ruled out in T120.10). v1.13.5 attempted Hidden U(1) + pseudo-Dirac UV completion (falsified by 2026-09-19 referee report). **v1.14 — the focal version** — presents the multi-component phenomenology without UV claim and documents the UV completion open problem.
 
-**Mixed verdict**: rotation curves alone do not uniquely prefer multi-resonance (Burkert wins Bayesian evidence per Phase 41); JVAS B1938+666 lies outside the reliable domain of the present model and is better described by complementary core-collapse SIDM. The **multi-component + gravothermal phenomenology** is a **compelling candidate** for the Cloud-9 vs dSph tension but is not the unique solution; the corresponding UV completion remains an open problem. We organize the paper around **four physical ingredients** (Sections 2–4), their **joint constraints** (§5), **MCMC verification** (§6), **mixed verdict and limitations** (§7), **historical evolution** (§8), and **UV completion no-go theorems** (§10).
+**Mixed verdict**: rotation curves alone do not uniquely prefer multi-resonance (Burkert wins Bayesian evidence per Phase 41); JVAS B1938+666 lies outside the reliable domain of the present model and is better described by complementary core-collapse SIDM. The **multi-component + gravothermal phenomenology** is a **compelling candidate** for the Cloud-9 vs dSph tension but is not the unique solution; the corresponding UV completion remains an open problem. We organize the paper around **four physical ingredients** (§2), their **joint constraints** (§3), **comparison with simpler alternatives** (§4), **statistical verification** (§5), **the JVAS tension and its reclassification** (§6), **the multi-component resolution** (§7), **mixed verdict** (§8), and **UV completion no-go theorems + Cloud-9 robustness investigation** (§10).
 
-We present a velocity-dependent self-interacting dark matter (SIDM) framework in which the momentum-transfer cross-section σ/m(v) is parameterized as a sum of four Breit-Wigner resonances on a velocity-dependent background. The model is tested against three observational channels: rotation-curve consistency with the SPARC sample (115/127 galaxies), the σ/m ≈ 100 cm²/g requirement at v ≈ 28 km/s from Cloud-9 ultra-diffuse galaxies (an internal target derived from Cloud-9's published σ/m ≳ 50 cm²/g floor; see §3.2), and a dense strong-lensing perturber in the JVAS B1938+666 system that has been interpreted as requiring high σ/m at low velocity — a constraint we reclassify as lying outside the reliable domain of the present multi-resonance model and better described by complementary core-collapse SIDM (Zhang & Yu 2026; see §7). **The free-parameterized fit improves over a single-channel T90.70 baseline by +8.10 log-units** (Phase 44). When the four resonance velocities are constrained to follow the clockwork q^k mass hierarchy from the MINIMAL fine-tuning UV completion of Phase 51 (RMS = 0.0159), the fit still improves over baseline by **+7.93 log-units** (Δ = −0.16 vs the free fit, BIC Δ = −5.66 favoring the clockwork prior). Five UV constructions now achieve MINIMAL fine-tuning: clockwork q^k, Secluded U(1) n², power-law q^(i−1), integer n^α, and free mass ratios. **Rotation curves alone do not preferentially prefer the multi-resonance model over simpler cored profiles** (Burkert wins the Bayesian evidence comparison); the multi-resonance architecture is constrained by and consistent with the **SPARC-dominated** joint constraint (LOO analysis of Phase 47 shows SPARC drives the +8 log-unit gain; JVAS and Cloud-9 are variance-absorbing channels), but is not uniquely required by rotation-curve data alone. **The JVAS B1938+666 lensing constraint lies outside the reliable domain of the present multi-resonance model** and is better described by complementary core-collapse SIDM (Zhang & Yu 2026; see §7). **The Cloud-9 requirement (σ/m ≈ 100 cm²/g at v ≈ 28 km/s) and the tightest classical/UFD dSph kinematic constraints** (Horigome+/Ando+ 2025 [27], evaluated at v_eff = 0.64 × V̂_max ≈ 10–20 km/s; σ/m ≲ 0.8 cm²/g for velocity-dependent SIDM at w=10 km/s) **cannot be simultaneously satisfied by any single-component smooth σ(v) function in our model class without extreme fine-tuning** (γ ∼ 10⁻¹³ in near-threshold resonance scenarios; see §8.4 and T110 investigation). **The v1.12 resolution (§9) combines three mechanisms**: (a) Gaussian Breit-Wigner profile replacing the Lorentzian 1/Δv² tail, (b) two-component asymmetric DM (Yang, Tsai, Fan 2025 PRD [42]) with mass segregation, (c) gravothermal core-collapse selection effect (Yu 2026 PRL [23]). With Gaussian width w₁ = 3 km/s, the framework simultaneously satisfies all four observational constraints: Cloud-9 (σ/m = 128 cm²/g), dSph (σ/m = 0.18 cm²/g), SPARC (σ/m = 0.19 cm²/g), and cluster (σ/m = 0.0002 cm²/g). The v1.11 residual 6–23× tension at v_eff = 5–20 km/s is reduced by 28× through the combined Gaussian (2.5×) × gravothermal (11×) suppression.
+---
 
 ---
 
@@ -33,9 +33,9 @@ Self-interacting dark matter (SIDM) was proposed as a solution to small-scale st
 
 Velocity-dependent SIDM models resolve this tension by reducing σ/m at high velocities through one of several mechanisms: Yukawa suppression (Feng, Kaplinghat & Yu 2009 [5]; Tulin, Yu & Zurek 2013 [6]), threshold resonances (Chu, Hambye & Tytgat 2018 [7]; Duerr et al. 2021 [8]), or geometric mass-ladder constructions (Hong, Kuranchi & Perez 2020 [9]; Girmohanta & Yasuoka 2025 [10]).
 
-**The v1.14 model** — the focal version of this paper — combines **four physical ingredients** into a single coherent framework that satisfies **8 observational constraints simultaneously** spanning four orders of magnitude in velocity: Cloud-9 (σ/m ≈ 100 cm²/g at v = 28 km/s), dSph (σ/m ≲ 0.8 at v = 15), UFD (σ/m ≲ 0.1 at v = 3–10), SPARC (σ/m ≈ 0.2 at v = 100), and clusters (σ/m ≲ 0.001 at v = 500). The four ingredients are:
+**The v1.14 model** — the focal version of this paper — combines **four physical ingredients** into a single coherent framework that satisfies **7 of 8 observational constraints simultaneously** spanning four orders of magnitude in velocity (RMSE = 0.25 on the 7-point fit): Cloud-9 (σ/m ≥ 50 cm²/g at v = 28 km/s, lower bound; the specific 4000× spike is not derived from our model — see §3.2 + §10.7), dSph (σ/m ≲ 0.8 at v = 15), UFD (σ/m ≲ 0.1 at v = 3–10), SPARC (σ/m ≈ 0.2 at v = 100), and clusters (σ/m ≲ 0.001 at v = 500). The four ingredients are:
 
-1. **Multi-resonance SIDM** with four Breit-Wigner peaks (v ≈ 28, 100, 178, 430, 769 km/s) on a velocity-dependent Yukawa background. Phase 44 fit: **+8.10 log-units** over single-channel baseline.
+1. **Multi-resonance SIDM** with one dominant Breit-Wigner peak (v₁ ≈ 28 km/s, the Cloud-9 channel) plus three bookkeeping interpolation nodes at v ≈ 100, 178, 430 km/s on a velocity-dependent Yukawa background.
 2. **Two-component asymmetric DM** (Yang, Tsai & Fan 2025, PRD 112, 083011 [42]) — heavy χH + light χL, mass ratio 3:1. Yang, Nadler, Yu & Zhong 2024 JCAP framework [43] for parametric halo modeling.
 3. **Gravothermal core-collapse selection** (Yu et al. 2026, PRL [23]) — the heavy component sinks out of the observation region in collapsed halos.
 4. **Gaussian Breit-Wigner profiles** — replaces the Lorentzian 1/Δv² tails of v1.6–v1.10. This is **OUR innovation** (T120.1–T120.4); earlier published work used Lorentzian profiles and suffered 6–23× tension with dSph/UFD limits.
@@ -43,11 +43,11 @@ Velocity-dependent SIDM models resolve this tension by reducing σ/m at high vel
 The ultra-faint dwarf regime relevant to the v ≈ 28 km/s requirement is now being mapped at high discovery efficiency by the Vera C. Rubin Observatory LSST, with the first UFD from EDP2 — Aquarius IV at D_⊙ = 109 kpc (M_V = −1.9, r_1/2 = 19 pc; Cerny et al. 2026 [26]) — demonstrating that the population of SIDM-relevant dwarf systems is expected to grow substantially over the coming decade.
 
 **Our contributions (v1.14):**
-1. **Multi-component + gravothermal + Gaussian Breit-Wigner phenomenology** — self-consistent framework satisfying 8 observational constraints (§2, §3). This is the **focal result** of the paper.
-2. **Joint multi-channel evidence**: +8.10 log-units improvement over single-channel baseline (§5).
+1. **Multi-component + gravothermal + Gaussian Breit-Wigner phenomenology** — self-consistent framework satisfying 7 of 8 observational constraints (§2, §3). This is the **focal result** of the paper.
+2. **Joint multi-channel evidence**: 31/31 additional dSph/UFD points satisfied that the Phase 44 single-channel baseline fails (§5). On the same dataset, a proper per-point Gaussian likelihood + BIC analysis is pending.
 3. **MCMC verification** (T120.9a, §6): posterior recovers parameters within 1σ (a_slope = 0.92 ± 0.36, w₁ = 4.4 ± 2.0 km/s, f_H = 0.20 ± 0.11).
-4. **Fair BIC comparison** (T120.8, §6): T120 WINS by ΔBIC = -170 on same 160-point dataset vs constant-σ/m baseline (with scoring-rule caveat, see §6 and §10).
-5. **Three UV completion no-go theorems** (§10): magnetic dipole DM [T120.10], Hidden U(1) + pseudo-Dirac [T120.16], GeV-scale inelastic DM [T130] all fail. The published best-fit p-wave resonance (Chu-Garcia-Cely-Murayama 2019 [28], T131) also fails. **No published UV completion solves the Cloud-9 vs dSph tension.**
+4. **Pass-rate improvement** (T120.8, §6): 31/31 additional dSph/UFD points satisfied that the Phase 44 single-channel baseline fails (qualitative preference; formal per-point Gaussian likelihood + proper BIC pending).
+5. **Four UV completion no-go theorems** (§10): magnetic dipole DM [T120.10], Hidden U(1) + pseudo-Dirac [T120.16], GeV-scale inelastic DM [T130], published best-fit p-wave resonance (Chu-Garcia-Cely-Murayama 2019 [28], T131) all fail. **No published UV completion solves the Cloud-9 vs dSph tension.**
 6. **EFT target map** (§10.5): what UV completions must satisfy to reproduce our phenomenology.
 7. **Honest mixed-result on rotation curves**: architecture is consistent with rotation-curve data but not uniquely preferred over simpler cored profiles (§7).
 
@@ -80,16 +80,20 @@ and σ₀(v) = σ₀ · (1 km/s / v)^α is the velocity-dependent background (Yu
 
 **Canonical kinematic form (v²-space).** The Breit-Wigner formula used throughout this paper — and implemented in `phase44_joint_fit.sigma_m_at_v`, which is the canonical reference used by every Phase 32–54 result — uses the v²-space form (equation above). This is the standard kinematic form for s-channel dark-matter scattering, in which the resonance is centered on the energy E_R = (½) m_χ v_target² and the BW factor is constructed from (v² − v_t²)² rather than (v − v_t)². An alternative implementation using the *v-space* form — `BW(v) = (Γ_v/2)² / [(v − v_t)² + (Γ_v/2)²]` with Γ_v = γ_frac × v_target — was constructed as an independent cross-check (`v0.3-prelim/code/independent_sigma_m.py`, with tests in `test_independent_and_robustness.py`). The two implementations agree in the non-resonant regime (off-peak velocities where both reduce to the background σ₀(v)); at the resonant peaks they differ by up to ≈30× because the v-space form has wider non-resonant tails and the v²-space form has narrower resonant peaks. This is a **genuine physical ambiguity** between the two kinematic forms, not a coding error, and it is captured by the self-check tests (`test_independent_matches_phase44_at_non_resonant_velocities`, `test_independent_peak_at_each_v_target`). We adopt the v²-space form as canonical because (i) it matches the kinematic s-channel derivation, (ii) it is the form used in all Phase 32–54 fits, and (iii) it produces the σ/m values cited in this paper. The v-space form is retained only as a cross-check, not as an alternative computation.
 
-### 2.2 Four resonance positions
+### 2.2 One resonance + three bookkeeping interpolation nodes
 
-The four resonance positions are v₁ = 28 km/s, v₂ = 100 km/s, v₃ = 300 km/s, v₄ = 700 km/s. Each resonance has a *different peak height* (σ_peak,ᵢ) chosen to satisfy the corresponding observational target. **Important terminology note:** only v₁ is a *true* high-amplitude Breit-Wigner resonance (σ_peak ≈ 100 cm²/g). The v₂–v₄ features are all *low-amplitude* (σ_peak ≤ 0.1 cm²/g) and act as the velocity-scale-dependent suppression falloff that bridges the dwarf-regime (high σ/m) to the cluster-regime (low σ/m); they are retained as Breit-Wigner "peaks" only for the uniformity of the s-channel formalism. The four values:
+**Reframing (per R2 review, 2026-09-21):** The architecture uses ONE genuine high-amplitude Breit-Wigner resonance (v₁ = 28 km/s, the Cloud-9 channel) plus THREE low-amplitude bookkeeping interpolation nodes (v₂ = 100 km/s, v₃ = 178 km/s, v₄ = 430 km/s). The bookkeeping nodes are NOT physically motivated resonances — they are interpolation anchors that allow the σ/m(v) curve to fall smoothly from the high Cloud-9 value to the low cluster-scale value. This reframing does NOT change any fitted values; it makes the model architecture honest: a single resonance (v₁) on a velocity-dependent background, with three nodes providing numerical interpolation flexibility.
 
-- v₁ = 28 km/s: σ_peak ≈ 100 cm²/g (Cloud-9 requirement from UDG kinematics; Phase 32). This is a *true* high-amplitude peak.
-- v₂ = 100 km/s: σ_peak ≈ 0.07 cm²/g (SPARC requirement from rotation-curve inner-core consistency; Phase 33d). This is a *low-amplitude* feature, not a high-amplitude peak. It represents the velocity scale at which σ/m transitions from high (dwarf regime) to low (cluster regime); the rotation-curve data are consistent with σ/m(100) ≈ 0.07 because that is the value the multi-resonance architecture predicts at this transition velocity. We retain the label "peak" for consistency with the s-channel Breit-Wigner formalism, but readers should be aware that v₂ is structurally a low-amplitude suppression feature, not an enhancement.
-- v₃ = 300 km/s: σ_peak ≈ 0.1 cm²/g (subhalo/stream requirement; not a strong constraint).
-- v₄ = 700 km/s: σ_peak ≈ 0.01 cm²/g (cluster-scale suppression; essentially CDM-like at v ≈ 1000 km/s).
+**Reservation about v₃, v₄ positions:** The original parameterization used v₃ = 300 km/s and v₄ = 700 km/s (T90.70 priors). The clockwork UV prior (§6, Phase 53 v2) produces v₃ = 178 km/s, v₄ = 430 km/s. We adopt the clockwork values because they have a UV-aware derivation. Either choice produces σ/m ≤ 0.1 cm²/g at v > 100 km/s — both are below observational upper limits in that velocity range.
 
-The key insight is that the multi-resonance architecture generates a σ/m(v) shape that is high at v ≈ 28 km/s (Cloud-9), falls off at v ≈ 100 km/s to a value compatible with SPARC rotation-curve inner cores (σ/m ≈ 0.07), and remains low at higher velocities (cluster/strong-lensing scales). This monotonic falloff is what the four-position parameterization achieves, regardless of whether the v₂–v₄ features are called "peaks" or "suppression features."
+**Per-feature values:**
+
+- v₁ = 28 km/s: σ_peak ≈ 100 cm²/g (Cloud-9 requirement from UDG kinematics; Phase 32). **This is the only true high-amplitude Breit-Wigner resonance.**
+- v₂ = 100 km/s: σ_peak ≈ 0.07 cm²/g (SPARC transition velocity; rotation-curve inner-core consistency, Phase 33d). **Bookkeeping interpolation node** — structurally a low-amplitude suppression feature, not an enhancement. The rotation-curve data are consistent with σ/m(100) ≈ 0.07 because that is the value the architecture predicts at this transition velocity.
+- v₃ = 178 km/s (clockwork) or 300 km/s (T90.70): σ_peak ≈ 0.1 cm²/g. **Bookkeeping interpolation node.**
+- v₄ = 430 km/s (clockwork) or 700 km/s (T90.70): σ_peak ≈ 0.01 cm²/g (cluster-scale suppression; essentially CDM-like at v ≈ 1000 km/s). **Bookkeeping interpolation node.**
+
+The key insight is that the multi-resonance architecture generates a σ/m(v) shape that is high at v ≈ 28 km/s (Cloud-9), falls off at v ≈ 100 km/s to a value compatible with SPARC rotation-curve inner cores (σ/m ≈ 0.07), and remains low at higher velocities (cluster/strong-lensing scales). This monotonic falloff is what the four-position parameterization achieves, regardless of whether the v₂–v₄ features are called "peaks" or "interpolation nodes."
 
 ### 2.3 Physical motivation
 
@@ -129,11 +133,31 @@ The closest existing work is **Yang & Yu 2023** [11] (single-breathing-mode medi
 
 ### 3.4 Joint fit
 
-We performed a joint fit of all three channel likelihoods using the **dynesty** nested-sampling algorithm. The free parameters are: m_χ (DM mass), σ₀ (background normalization), α (background slope), v_targets[4] (4 free resonance positions), σ_peaks[4] (4 free peak heights), width_fracs[4] (4 free peak widths). Total: **15 free parameters**.
+**Canonical parameter table** (referenced from §3.4 throughout the paper):
 
-**Baseline definition (T90.70):** the same 15-parameter multi-resonance parameterization with **v_targets fixed at the canonical T90.70 values [28, 100, 300, 700] km/s** (i.e., a T90.70 pre-fit snapshot where the resonance positions have not yet been adjusted to match the multi-channel likelihoods). All other parameters (background σ₀, α, peak heights, widths) are held at their T90.70 priors. The "+8.10 log-units" improvement reflects the optimizer adjusting the v_targets (and other free parameters) to fit the SPARC + Cloud-9 + JVAS likelihoods simultaneously. The BIC correction is provided in §6 (Phase 53 v2) — with the clockwork UV prior replacing the 4 free v_targets with 2 clockwork parameters (log_v₁, q), the 5-parameter model is strongly preferred over the 15-parameter free fit (BIC Δ = −5.66), indicating that most of the free-parameter advantage is not essential to the multi-channel fit.
+| Parameter | Symbol | Free / Fixed | Value (v1.98 fit) | Source / Constraint |
+|---|---|---|---|---|
+| DM mass | m_χ | FREE | (Phase 44 default) | T90.70 prior |
+| Background σ/m normalization | σ₀ | FREE | (Phase 44 default) | T90.70 prior |
+| Background slope | α | FREE | 1.0 (default; a_slope_override) | T90.70 prior |
+| Resonance v₁ position (Cloud-9) | v_target[0] | FREE | 28 km/s | T120 fit |
+| Resonance v₁ peak height | σ_peak[0] | FREE | ~100 cm²/g | T120 fit |
+| Resonance v₁ width | width_frac[0] | FREE | 0.05 | T90.70 |
+| Resonance v₂–v₄ positions | v_target[1..3] | FIXED | [100, 178, 430] km/s | §2.2 (bookkeeping nodes) |
+| Resonance v₂–v₄ peak heights | σ_peak[1..3] | FIXED | [0.07, 0.10, 0.01] cm²/g | T90.70 |
+| Resonance v₂–v₄ widths | width_frac[1..3] | FIXED | [0.05, 0.05, 0.10] | T90.70 |
+| Heavy/light mass ratio | m_H/m_L | FIXED | 3:1 | Yang, Tsai, Fan 2025 PRD [42] |
+| Gaussian width | w₁ | FREE | 4.4 ± 2.0 km/s | T120 MCMC |
+| Heavy fraction profile | f_H(r) | FIXED (function) | Yang+ 2025 Fig. 2 | borrowed; σ₀/m=147, w=24 km/s in source |
+| Clockwork prior (Phase 53 v2) | log v₁, q | FREE | 5 params total | Phase 51 MINIMAL fit |
 
-**Result:** **+8.10 log-units** improvement over the T90.70 baseline (Phase 44). The stress test (Phase 47) reveals that SPARC dominates the fit; JVAS and Cloud-9 are variance-absorbing channels (their LOO contribution to the joint log-likelihood is small).
+**Phase 44 free fit**: 15 parameters (background 3 + resonance 4×3) → see §8.1 for parameter-by-parameter breakdown
+**Phase 53 v2 clockwork fit**: 5 parameters (background 3 + clockwork log v₁, q)
+**Phase 44 + T120 added**: 18 parameters (15 + 3 new: w₁, f_H profile, m_H/m_L ratio → but m_H/m_L fixed by Yang+ so effectively 17 free; see §9.7)
+
+**Baseline definition (T90.70):** the same 15-parameter multi-resonance parameterization with **v_targets fixed at the canonical T90.70 values [28, 100, 300, 700] km/s** (i.e., a T90.70 pre-fit snapshot where the resonance positions have not yet been adjusted to match the multi-channel likelihoods). All other parameters (background σ₀, α, peak heights, widths) are held at their T90.70 priors. The **joint multi-channel improvement** reflects the optimizer adjusting the v_targets (and other free parameters) to fit the SPARC + Cloud-9 + JVAS likelihoods simultaneously. The clockwork UV prior (§6, Phase 53 v2) replaces the 4 free v_targets with 2 clockwork parameters (log_v₁, q); the 5-parameter model satisfies the joint likelihood nearly as well as the 15-parameter free fit (Δ = −0.16 in scoring-rule units; the qualitative preference is robust but formal BIC requires proper likelihood construction).
+
+**Result:** **31/31 additional dSph/UFD points satisfied** that the Phase 44 single-channel baseline fails (T120.8). The stress test (Phase 47) reveals that SPARC dominates the fit; JVAS and Cloud-9 are variance-absorbing channels (their LOO contribution to the joint log-likelihood is small).
 
 ### 3.5 Stress-test analysis
 
@@ -239,7 +263,9 @@ The constant-σ/m comparison in §4.5 is therefore the simplest, most direct hea
 
 ---
 
-## 5. Particle-Physics Embedding (UV Completions)
+## 5. Mass-Spectrum Embeddings (Kinematic Bookkeeping, NOT UV Completion)
+
+**Reframing (per R2 review, 2026-09-21):** What §5 presents is *mass-spectrum embedding* — group-theoretic patterns that produce the right hierarchy of mediator masses. This is **kinematic bookkeeping**, NOT a UV completion. A UV completion also needs to specify: what dynamics produces the cross-section, how direct-detection constraints are evaded, and how the correct relic density is achieved. None of those is addressed in §5. See §10 for the actual UV completion open problem and four no-go theorems.
 
 ### 5.1 Earlier UV benchmark (dark-QCD, Phase 48)
 
@@ -945,7 +971,7 @@ data range, not just v=28.
 2. Treat σ/m ≥ 50 as a lower-bound CONSTRAINT (not specific value 128)
 3. Show 7-point fit separately (RMSE=0.25, publishable on its own)
 4. Cite Ohana, Zhang & Yu 2026 [15e] as independent confirmation of σ/m floor
-5. Acknowledge Cloud-9's 4000× enhancement requires physics beyond standard Yukawa
+**5. Acknowledge Cloud-9's 4000× enhancement requires physics beyond standard Yukawa**
 
 ---
 
@@ -961,13 +987,11 @@ is published and confirmed independently by Ohana, Zhang & Yu 2026 [15e],
 but cannot be derived from standard Yukawa physics (T165-T172, §10.7).
 The headline results are:
 
-- **+8.10 log-units** joint-fit improvement over single-channel baseline (Phase 44, free fit)
-- **+7.93 log-units** with the clockwork q^k UV prior (Phase 53 v2, BIC Δ = −5.66 favoring clockwork)
-- **Five UV constructions** achieving MINIMAL fine-tuning on the resonance mass pattern (Phases 51–52)
+- **Multi-component + gravothermal phenomenology** satisfies 7/8 observational constraints with **RMSE = 0.25** on the 7-point fit (excluding Cloud-9). The Cloud-9 spike is the dominant residual at any single-Yukawa / KK tower / KK tower with gravothermal extension we tested (T165-T172, 2026-09-20).
 - **115/127 = 90.6%** SPARC rotation-curve consistency (Phase 33d)
-- **Fair BIC Δ = -170** vs constant-σ/m on same data set (T120.8; scoring-rule caveat, see §6 and §10)
 - **MCMC posterior** (T120.9a) recovers parameters within 1σ (a_slope = 0.92 ± 0.36, w₁ = 4.4 ± 2.0 km/s, f_H = 0.20 ± 0.11)
-- **Three UV completion no-go theorems** (§10): magnetic dipole DM [44, T120.10], Hidden U(1) + 10 MeV pseudo-Dirac [45, T120.16], GeV-scale inelastic DM [T130], plus published best-fit p-wave resonance [28, T131] all fail. **No published UV completion solves the Cloud-9 vs dSph tension.**
+- **31/31 additional dSph/UFD points** satisfied that the Phase 44 single-channel baseline fails (qualitative preference; formal per-point Gaussian likelihood + proper BIC pending)
+- **Four UV completion no-go theorems** (§10): magnetic dipole DM [44, T120.10], Hidden U(1) + 10 MeV pseudo-Dirac [45, T120.16], GeV-scale inelastic DM [T130], plus published best-fit p-wave resonance [28, T131] all fail. **No published UV completion solves the Cloud-9 vs dSph tension.**
 - **EFT target map** (§10.5): what UV physics must satisfy to reproduce our phenomenology
 
 The framework is a **defensible phenomenology framework** for unifying
@@ -1014,7 +1038,14 @@ phenomenology is presented without UV claim.
 
 ## Acknowledgements
 
-This work is the result of the SIDM Composite DM-Mediator project on branch `wip/cloud-9-relhic`. We thank the Comment10 and Comment11 reviewers for constructive feedback.
+This work is the result of the SIDM Composite DM-Mediator project on branch `wip/multi-component-SIDM-core-collapse` (synced with `wip/cloud-9-relhic`). We thank:
+- **Comment10.docx** reviewer (2026-09-14) — for the stress-test / LOO framework
+- **Comment11.docx** reviewer (2026-09-16) — for the clockwork UV-prior decisive-test proposal
+- **2026-09-19 referee report** (anonymous) — for falsifying the Hidden U(1) UV completion and prompting v1.14
+- **Qwen referee** (2026-09-19) — for the multi-strategy no-go theorem composition that yielded §10.1–10.4
+- **Reviewer15.docx** (2026-09-21) — for the substantive v1.14.1 polish recommendations (R1: high-level endorsement of the mixed-verdict framing; R2: 5 major + 5 moderate issues, all addressed in v1.14.1 §10.7 + §3.4 + §2.2)
+
+Their constructive feedback has substantially improved the paper's scientific clarity and intellectual honesty.
 
 ---
 
@@ -1094,8 +1125,8 @@ Full phase-by-phase documentation is available in `v0.3-prelim/docs/` and the pr
 
 ## Appendix B: Standing repository state
 
-- Branch: `wip/cloud-9-relhic`
-- HEAD: at time of writing — see `git log` (continuously updated)
+- Branch: `wip/multi-component-SIDM-core-collapse` (synced with `wip/cloud-9-relhic`)
+- HEAD: `9daf10a` at time of writing (2026-09-21) — see `git log` (continuously updated)
 - Code: `v0.3-prelim/code/`
 - Results: `v0.3-prelim/data/results/`
 - Documentation: `v0.3-prelim/docs/`
@@ -1103,4 +1134,4 @@ Full phase-by-phase documentation is available in `v0.3-prelim/docs/` and the pr
 
 ---
 
-**END OF PAPER DRAFT v1.1**
+**END OF PAPER DRAFT v1.14.1** (2026-09-21)
