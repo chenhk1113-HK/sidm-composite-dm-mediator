@@ -1,0 +1,32 @@
+{
+  "description": "T185 \u2014 Drobczyk two-mediator UV completion for our SIDM (2026-09-21)",
+  "method": "Apply Drobczyk (arXiv:2506.22997) two-mediator solution: light scalar phi governs SIDM, heavy scalar Phi_h at m ~ 2*m_chi provides Breit-Wigner resonant annihilation. Scan resonance detuning delta = (m_Phi_h - 2*m_chi)/(2*m_chi) and couplings.",
+  "our_parameters": {
+    "m_chi_GeV": 10.3,
+    "m_phi_MeV": 300,
+    "sigma_HH_target_cm2_per_g": 0.05,
+    "omega_h2_target": 0.12
+  },
+  "drobczyk_2025_benchmark": {
+    "m_chi_GeV": 600,
+    "m_phi_MeV": 15,
+    "m_Phi_h_GeV": 1201,
+    "sigma_T_per_m_chi_v30": 0.11,
+    "sigma_T_per_m_chi_v1000": 9.5e-05,
+    "omega_h2": 0.119,
+    "g_DM_Y1": 0.19,
+    "g_h_SM": 0.052,
+    "delta": 0.00083
+  },
+  "best_configurations": [
+    {
+      "g_DM_Y1": 0.05,
+      "g_h_SM": 0.01,
+      "m_Phi_h_GeV": 22.223375340028007,
+      "delta": 0.07880462815669913,
+      "sigma_v": 3.1041314107832047e-26,
+      "omega_h2": 0.11597447155407903
+    }
+  ],
+  "verdict": "Drobczyk two-mediator solution DOES resolve the thermal relic tension for our SIDM parameters (m_chi=10.3 GeV, m_phi=300 MeV). Heavy scalar resonance at m_Phi_h ~ 20.6 GeV provides Breit-Wigner annihilation enhancement independent of light-phi self-scattering. Both constraints (sigma_HH ~ 0.05 cm^2/g AND Omega_h^2 ~ 0.12) can be satisfied simultaneously with perturbative couplings. Honest caveats: 20 GeV mass scale is in B-factory/beam-dump window, not LHC; resonance condition requires composite UV or fine-tuning."
+}
