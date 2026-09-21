@@ -573,9 +573,11 @@ The §10 series (10.1-10.4) is the canonical location for all UV completion stat
 In v1.13.5 we attempted to provide a Hidden U(1) + pseudo-Dirac UV completion
 following Zhang 2016 [45]. The 2026-09-19 referee report and our own
 follow-up investigation (T120.16) revealed that this specific realization
-does **not** work for our phenomenology. This section presents three
+does **not** work for our phenomenology. This section presents four
 independent no-go theorems for the simplest UV completion paths, plus an
 EFT target map for future work.
+
+**Scope of the no-go theorems (important caveat, added 2026-09-21 per Reviewer15 R2):** All four no-gos were tested against the **Phase 44 single-component baseline** (σ/m = 0.052 cm²/g at v=100 km/s, m_χ = 10.44 GeV, α = 1.0). The Phase 6+ T163 best fit (KK tower, α_D = 0.3, m_0 = 0.3 GeV, r = 1.5, n_modes = 2, RMSE = 1.408) is **not separately tested** here. The no-gos target specific UV constructions — magnetic dipole moments, hidden U(1) with pseudo-Dirac splitting, GeV-scale inelastic DM, Chu P1 p-wave resonance — all of which were proposed to address the Phase 44 phenomenology. **Whether a UV construction satisfies the Phase 6+ T163 best fit (or any updated phenomenology parameters) requires re-running the no-go tests with the updated cross-section target.** The qualitative verdicts (each of these UV constructions fails Cloud-9 for a different structural reason) are expected to remain valid because the failure mechanisms (LZ direct detection, kinematic forbiddance, unitarity violation, flat velocity dependence) are independent of the specific Phase 44 vs T163 cross-section values. But this should be re-verified before any future claim of "the model is UV-complete." For T163-specific UV tests, see `v0.3-prelim/docs/POST_PAPER_ROADMAP_2026_09_17.md` §3 roadmap item.
 
 ### 10.1 No-go #1: Magnetic dipole DM (T120.10)
 
@@ -583,7 +585,23 @@ Following T120.9b (which attempted magnetic dipole as UV completion), T120.10
 showed that the required magnetic dipole moment µ_χ = 8.23×10⁻¹⁴ cm (to
 give σ_DM-DM/m = 0.052 cm²/g via the Sigurdson+ 2004 formula [44]) gives
 σ_SI = 1.15×10⁻³³ cm², which is **1.22×10¹³× above the LZ 2024 limit
-(9.4×10⁻⁴⁷ cm²)**. Magnetic dipole DM is RULED OUT.
+(9.4×10⁻⁴⁷ cm²)**. Even with the magnetic-dipole recoil weakening factor
+of 30 (Per Sigurdson+ 2004 Fig. 3), σ_SI is still 4.05×10¹¹× above the
+weakened limit. Magnetic dipole DM is RULED OUT.
+
+**Two independent failure mechanisms** (added per user request 2026-09-21):
+
+- (a) **Direct detection**: As above, σ_SI is 4-13 orders of magnitude above LZ.
+- (b) **Cloud-9 velocity scale**: The magnetic dipole σ_DM-DM ∝ 1/v_rel formula
+  predicts σ_DM-DM/m = 0.052 × (100/28) = **0.186 cm²/g at v=28 km/s**.
+  This is **270× below the published Cloud-9 floor σ/m ≥ 50 cm²/g** (BLN24,
+  independently confirmed Ohana+ 2026 [15e]). Magnetic dipole fails Cloud-9
+  *before* it fails LZ. The required µ_χ to reach σ/m = 50 at v=28 would be
+  ~1.0×10⁻¹² cm (15× larger than the µ_χ that already violates LZ by 13
+  orders of magnitude), making the tension even worse.
+
+Either failure mechanism alone is sufficient to rule out magnetic dipole DM
+as a UV completion for our phenomenology.
 
 ### 10.2 No-go #2: Hidden U(1) + 10 MeV pseudo-Dirac (T120.16)
 
@@ -614,14 +632,17 @@ At this mass scale, three additional problems arise:
 
 ### 10.4 No-go #4: Published best-fit p-wave resonance (T131)
 
-The Qwen referee (2026-09-19) suggested Strategy 2: scan for p-wave shape
-resonances. We verified against the published best-fit p-wave resonance
-benchmark (Chu, Garcia-Cely, Murayama 2019 [28], P1: m_DM_tilde = 400 MeV,
-v_R = 108 km/s, γ = 10⁻³, σ_0/m = 0.1 cm²/g). P1 gives σ/m ~ 0.1 cm²/g
-at v = 28 km/s — but Cloud-9 requires σ/m ~ 100 cm²/g. **P1 solves the
-older Kaplinghat/Tulin/Yu dwarf-vs-cluster tension, but NOT our
-Cloud-9-vs-dSph tension.** Score: 6/8 (passes dSph/UFD/cluster but fails
-Cloud-9; SPARC marginal).
+The Qwen referee (2026-09-19) suggested Strategy 2: scan for p-wave shape resonances. We verified against the published best-fit p-wave resonance benchmark (Chu, Garcia-Cely, Murayama 2019 [28], P1: m_DM_tilde = 400 MeV, v_R = 108 km/s, γ = 10⁻³, σ_0/m = 0.1 cm²/g). **T131 verification script** (`v0.3-prelim/code/T131_chu_pwave_verification.py`) computes P1's σ/m at each of our 8 observational velocities using Chu+ 2019 Eq. 7 (narrow-width approximation):
+
+| Channel | v (km/s) | P1 σ/m (cm²/g) | Our target | Match? |
+|---|---|---|---|---|
+| Cloud-9 | 28 | **0.10** | ≥ 50–100 | **✗ FAIL** (1000× too small) |
+| classical dSph | 15 | 0.10 | ≤ 0.8 | ✓ pass |
+| UFD (v=10,7,5,3) | 3–10 | 0.10 | ≤ 0.8 | ✓ pass |
+| SPARC | 100 | 0.15 | ~0.19 | ~ marginal |
+| Cluster | 500 | 0.10 | ≤ 1.0 | ✓ pass |
+
+**Result: 6/8 pass, 2/8 fail (Cloud-9 + SPARC-marginal).** P1 solves the original Kaplinghat/Tulin/Yu dwarf-vs-cluster tension (dSph ≤ 0.8 ✓ + cluster ≤ 1.0 ✓) but **fails our extended Cloud-9-vs-dSph tension**: P1's velocity dependence is too flat (σ/m ≈ 0.1 cm²/g everywhere) to produce the required σ/m ≥ 50 cm²/g at v=28 km/s. **Honest framing**: P1 is a viable SIDM model for dwarf-galaxy-vs-cluster constraints, just not for the Cloud-9 UDG constraint. The 2-channel Cloud-9-vs-dSph tension requires velocity dependence P1 does not provide.
 
 ### 10.5 EFT target map for future UV completions
 
