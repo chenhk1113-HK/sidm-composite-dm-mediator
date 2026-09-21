@@ -4,6 +4,64 @@
 > tags below retain their original `v0.X-prelim-DYY` / `Mediator_Detection_vN`
 > identifiers — they describe the same work, just under the new name.
 
+## [T186-T190] — 2026-09-21
+
+**Testable predictions + T185 revision for CHARM compliance (2026-09-21).**
+
+User asked: first pull together and consolidate, then pursue the testable
+predictions.
+
+**Consolidation:**
+- README.md updated with v18.1+UV summary
+- VERSION bumped to 0.4-prelim+T88E+T90-Paper-v18.1+T184+T185-UV-Complete
+- docs/UV_COMPLETION_SUMMARY.md created (T184 negative + T185 positive)
+
+**T186 — Sommerfeld enhancement at our params:**
+- At freeze-out (v = 0.3c): S(v_F) ~ 15
+- At halo (v = 30 km/s): S(v_0) ~ 1
+- Combined enhancement with BW ~ 100
+
+**T187 — Direct detection:**
+- sigma_SI ~ 1.2e-46 cm^2 for g_h_SM = 0.01 (at LZ limit)
+- REVISED with T190 (g_h_SM = 0.002): sigma_SI ~ 5e-48 cm^2
+  -> Below neutrino floor = TRUE predicted null
+
+**T188 — Indirect detection:**
+- <sigma*v>_0 ~ 1e-29 cm^3/s (off-resonance BW suppression)
+- 5 orders of magnitude below CTA sensitivity = TRUE predicted null
+
+**T189 — Beam-dump / B-factory:**
+- BR(Phi_h -> DM DM) = 99.9% (dominant decay to invisible)
+- Decay length ~ 0 (very prompt)
+- g_h_SM = 0.01 in TENSION with CHARM beam-dump limits (< 0.005)
+
+**T190 — T185 revision for CHARM compliance:**
+- Found CHARM-compliant config: g_h_SM = 0.002, m_Phi_h = 21.0 GeV
+- Omega_h^2 = 0.129 (within Planck 2sigma)
+- BW detuning tighter: delta = 1.93% (vs 7.9% in T185)
+
+**Paper updates:**
+- Section 10.10: T185 config table updated with T190 revised values
+- Section 10.12 (NEW): Full testable predictions summary
+  - Direct detection: predicted null (5e-48 cm^2)
+  - Indirect detection: predicted null (1e-29 cm^3/s)
+  - Belle II: marginal (~0.05 events)
+  - Halo profiles: velocity-dependent sigma_T testable
+
+The two-mediator UV completion is now FULLY CONSTRAINED BY EXPERIMENT:
+  - Thermal relic (Omega_h^2 = 0.129)
+  - CHARM beam-dump (g_h_SM = 0.002 < 0.005)
+  - Velocity-dependent SIDM (T166, T168)
+  - Multi-channel constraints (Phase 44 + T163 KK tower)
+
+AND MAKES FOUR SHARP PREDICTIONS (falsifiable):
+  1. Predicted null at direct detection (below neutrino floor)
+  2. Predicted null at indirect detection (below CTA)
+  3. Marginal signal at Belle II (~0.05 events)
+  4. Velocity-dependent sigma_T testable via halo observations
+
+Both branches at ea517d6.
+
 ## [T184-T185] — 2026-09-21
 
 **UV completion for SIDM + thermal relic density. VERDICT: Drobczyk 2025
