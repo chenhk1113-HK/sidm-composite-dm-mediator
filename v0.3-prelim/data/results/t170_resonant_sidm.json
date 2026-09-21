@@ -1,0 +1,76 @@
+{
+  "tran_plus_2024_params": {
+    "alpha": 0.0016,
+    "m_phi_GeV": 0.0057,
+    "m_chi_GeV": 31.8,
+    "paper_arxiv": "2405.02388"
+  },
+  "resonance_scan": [
+    {
+      "alpha": 0.0016,
+      "m_phi_MeV": 5.7,
+      "m_chi_GeV": 31.8,
+      "sigma_at_v28": 21.59291051349702
+    },
+    {
+      "alpha": 0.0016,
+      "m_phi_MeV": 10.0,
+      "m_chi_GeV": 31.8,
+      "sigma_at_v28": 0.8031447968943318
+    },
+    {
+      "alpha": 0.0016,
+      "m_phi_MeV": 20.0,
+      "m_chi_GeV": 31.8,
+      "sigma_at_v28": 2.2038870327016418
+    },
+    {
+      "alpha": 0.0016,
+      "m_phi_MeV": 3.0,
+      "m_chi_GeV": 31.8,
+      "sigma_at_v28": 90.87153719134047
+    },
+    {
+      "alpha": 0.005,
+      "m_phi_MeV": 10.0,
+      "m_chi_GeV": 31.8,
+      "sigma_at_v28": 29.109195170545505
+    },
+    {
+      "alpha": 0.01,
+      "m_phi_MeV": 10.0,
+      "m_chi_GeV": 31.8,
+      "sigma_at_v28": 6.28479123727312
+    },
+    {
+      "alpha": 0.005,
+      "m_phi_MeV": 20.0,
+      "m_chi_GeV": 31.8,
+      "sigma_at_v28": 4.51951920102307
+    },
+    {
+      "alpha": 0.01,
+      "m_phi_MeV": 50.0,
+      "m_chi_GeV": 31.8,
+      "sigma_at_v28": 26.69485334862547
+    },
+    {
+      "alpha": 0.0016,
+      "m_phi_MeV": 5.7,
+      "m_chi_GeV": 10.0,
+      "sigma_at_v28": 52.679550730671885
+    },
+    {
+      "alpha": 0.0016,
+      "m_phi_MeV": 5.7,
+      "m_chi_GeV": 100.0,
+      "sigma_at_v28": 3.4554897996317613
+    }
+  ],
+  "best_params": [
+    0.0016,
+    0.02,
+    31.8
+  ],
+  "best_rmse": 2.191361427554834
+}
