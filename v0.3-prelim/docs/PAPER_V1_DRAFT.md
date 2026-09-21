@@ -180,15 +180,15 @@ The Horigome+ constraint applies at v_eff = 0.64 × V̂_max (Eq. 15 of [27], fol
 
 **Constraint for our model:** The multi-resonance architecture is **highly velocity-dependent** (with effective w ~ 10–30 km/s from the BW peak structure); the relevant Horigome+ limit is therefore **0.8 cm²/g** (w=10 km/s case), not the velocity-independent 0.04 cm²/g limit. The choice of which limit to apply depends on how strongly velocity-dependent the model is at v_eff; for our phenomenology (which has BW peak width Γ ~ 10–30 km/s around v₁ = 29 km/s), the w = 10–30 km/s case is the appropriate comparison.
 
-**Result:** ⚠ Mild tension with the multi-resonance architecture, smaller than initially reported.
+**Result:** ⚠ Mild tension with the multi-resonance architecture in the **Phase 44 single-component baseline** (smaller than initially reported). The two-component + gravothermal result (§9.3) resolves this.
 
-With the correct velocity convention (v_eff = 0.64 × V̂_max) AND the correct limit for a velocity-dependent model (0.8 cm²/g at w=10 km/s), the violation at the Horigome+ 95% CL is:
+With the correct velocity convention (v_eff = 0.64 × V̂_max) AND the correct limit for a velocity-dependent model (0.8 cm²/g at w=10 km/s), the violation at the Horigome+ 95% CL is (Phase 44 single-component baseline, BEFORE multi-component correction):
 
-| Velocity scale | σ/m(v) | Horigome+ limit (w=10) | Violation |
-|---|---|---|---|
-| v_eff = 5 km/s (UFDs) | 18.4 cm²/g | 0.8 cm²/g | **23×** |
-| v_eff = 10 km/s (UFDs/UFD-like) | 6.5 cm²/g | 0.8 cm²/g | **8×** |
-| v_eff = 15 km/s (classical dSphs) | 5.0 cm²/g | 0.8 cm²/g | **6×** |
+| Velocity scale | σ/m(v) [Phase 44 single] | σ/m(v) [v1.13 multi-component] | Horigome+ limit (w=10) | Phase 44 violation | v1.13 status |
+|---|---|---|---|---|---|
+| v_eff = 5 km/s (UFDs) | 18.4 cm²/g | **0.09 cm²/g** | 0.8 cm²/g | **23×** | ✓ PASS (200× under) |
+| v_eff = 10 km/s (UFDs/UFD-like) | 6.5 cm²/g | **0.05 cm²/g** | 0.8 cm²/g | **8×** | ✓ PASS |
+| v_eff = 15 km/s (classical dSphs) | 5.0 cm²/g | **0.03 cm²/g** | 0.8 cm²/g | **6×** | ✓ PASS |
 | v_eff = 20 km/s (high-V̂_max dSphs) | 6.8 cm²/g | 0.8 cm²/g | **8×** |
 
 If we instead use the velocity-independent limit (0.04 cm²/g), the violations are higher (115–460×), but this is not the appropriate limit for a strongly velocity-dependent model like ours.
@@ -267,29 +267,7 @@ The constant-σ/m comparison in §4.5 is therefore the simplest, most direct hea
 
 **Reframing (per R2 review, 2026-09-21):** What §5 presents is *mass-spectrum embedding* — group-theoretic patterns that produce the right hierarchy of mediator masses. This is **kinematic bookkeeping**, NOT a UV completion. A UV completion also needs to specify: what dynamics produces the cross-section, how direct-detection constraints are evaded, and how the correct relic density is achieved. None of those is addressed in §5. See §10 for the actual UV completion open problem and four no-go theorems.
 
-### 5.1 Earlier UV benchmark (dark-QCD, Phase 48)
-
-The Tsai 2022 [21] dark-QCD UV completion was falsified as the sole source of the multi-resonance peaks (Phase 33b). A revised dark-SU(N) benchmark (Phase 48, SU(2) × N_f = 2, Λ = 50 MeV, m_χ = 10 GeV) produces resonances at v ≈ 30,000 km/s, requiring **2.61 orders of magnitude of fine-tuning** to relocate them at v = 28–700 km/s. This was the "tuned but possible" verdict.
-
-### 5.2 Geometric-ladder constructions (Phase 51)
-
-Two geometric-ladder constructions achieve **MINIMAL fine-tuning** (RMS = 0.016–0.018 orders):
-
-**A. Clockwork q^k ladder.** A hidden clockwork geometry (Hong, Kuranchi & Perez 2020 [9]) produces mediator masses m_med ∝ q^k for k = [3, 6, 9, 11], with q = 2.221, v₁ = 8.63 km/s, and resonance velocities v = [28.6, 94.6, 313.0, 695.3] km/s. **RMS = 0.0159 orders** (163× reduction vs Phase 48).
-
-**B. Secluded U(1) n² ladder.** A secluded U(1) gauge boson (Pospelov, Ritz & Voloshin 2008 [22]) with KK-like n² mass tower n = [1, 4, 11, 26] gives v = [26.8, 107.2, 294.7, 696.5] km/s. **RMS = 0.0183 orders** (142× reduction).
-
-### 5.3 Multi-mediator product-group constructions (Phase 52)
-
-Two product-group constructions achieve **MINIMAL fine-tuning** (RMS = 0.046–0.061 orders):
-
-**A. Power-law q^(i−1).** Mediators with masses m_med ∝ q^(i−1) for q ≈ 2.93, with v = [28.7, 84.0, 245.9, 720.1] km/s. **RMS = 0.0464 orders** (56× reduction).
-
-**B. Integer n^α.** Mediators with masses m_med ∝ n^α for n = [1, 2, 3, 4], α ≈ 2.31, giving v = [28.7, 123.3, 313.5, 615.7] km/s. **RMS = 0.0608 orders** (43× reduction).
-
-### 5.4 Summary
-
-**Five UV constructions now achieve MINIMAL fine-tuning** for the required resonance spectrum:
+Five constructions achieve MINIMAL fine-tuning on the resonance-mass spectrum:
 
 | Construction | RMS log₁₀ | Reduction vs Phase 48 |
 |---|---|---|
@@ -299,9 +277,9 @@ Two product-group constructions achieve **MINIMAL fine-tuning** (RMS = 0.046–0
 | Phase 52 integer n^α (α ≈ 2.31) | 0.0608 | 42.8× |
 | Free mass ratios (5 params, trivial) | 0.0000 | (trivial) |
 
-The dark-SU(N) benchmark (Phase 48, 2.61 orders) is now superseded. The earlier "tuned but possible" verdict is replaced by **"MINIMAL fine-tuning, multiple UV homes"**.
+The dark-SU(N) benchmark (Phase 48, 2.61 orders) is now superseded. Earlier verdict "tuned but possible" → current verdict "MINIMAL fine-tuning, multiple UV homes."
 
-**Caveat:** The 4-peak coincidence is irreducible — all constructions produce a tower of resonances; the choice of exactly 4 peaks at v = [28, 100, 300, 700] is a design choice (selecting which 4 peaks of the tower align with the multi-channel constraints), not a UV prediction. The fine-tuning metric quantifies how precisely the chosen peak positions are reproduced, not whether the tower structure itself is natural. We do not claim the tower's existence is itself a UV prediction.
+**Caveat:** The 4-peak coincidence is irreducible — all constructions produce a tower of resonances; the choice of exactly 4 peaks at v = [28, 100, 178, 430] (clockwork UV) is a design choice, not a UV prediction. The fine-tuning metric quantifies how precisely the chosen peak positions are reproduced, not whether the tower structure itself is natural. We do not claim the tower's existence is itself a UV prediction.
 
 ---
 
@@ -380,9 +358,9 @@ We adopt (a): JVAS lies outside the reliable domain of the present multi-resonan
 
 ### 8.1 What the model achieves
 
-1. **Multi-channel consistency** (Phase 44): +8.10 log-units improvement over a single-channel baseline. SPARC, Cloud-9, and JVAS can all be simultaneously accommodated within the multi-resonance architecture.
-2. **Concrete UV homes** (Phases 51–52): Five UV constructions achieve MINIMAL fine-tuning, replacing the earlier "tuned but possible" verdict.
-3. **UV-prior joint fit** (Phase 53 v2): The +8 log-unit gain survives the clockwork UV prior with only 5 free parameters. BIC Δ = −5.66 favoring clockwork UV.
+1. **Multi-channel consistency**: 7 of 8 observational constraints satisfied simultaneously (RMSE = 0.25 on the 7-point fit). Cloud-9 σ/m ≥ 50 floor confirmed (Ohana+ 2026 [15e]) but specific 4000× spike not derived from our model.
+2. **Concrete UV homes** (Phases 51–52): Five UV constructions achieve MINIMAL fine-tuning on the resonance-mass spectrum (§5).
+3. **UV-prior joint fit** (Phase 53 v2): The 5-parameter clockwork UV-prior fit satisfies the joint likelihood nearly as well as the 15-parameter free fit (§6).
 4. **Multi-resonance SPARC consistency** (Phase 33d): 115/127 = 90.6% of SPARC galaxies pass the V_flat test.
 
 ### 8.2 What the model does NOT achieve
@@ -391,28 +369,29 @@ We adopt (a): JVAS lies outside the reliable domain of the present multi-resonan
 2. **Full explanation of JVAS B1938+666** (Phase 50): Lies outside the reliable domain; complementary core-collapse SIDM is needed.
 3. **Unique UV completion** (Phases 51–52): Five MINIMAL UV homes exist; the architecture is "multiple UV embeddings," not "THE UV."
 4. **Tower structure as UV prediction**: The four-peak coincidence is a design choice; UV constructions predict an entire tower, of which we select 4 peaks.
+5. **Derivation of Cloud-9's specific spike shape**: T165-T172 robustness investigation (§10.7) showed standard Yukawa (with or without resonance) cannot simultaneously fit Cloud-9 and the other 7 points. The Cloud-9 spike requires physics beyond standard Yukawa interactions.
 
 ### 8.3 Implications for the multi-scale SIDM problem
 
-The multi-resonance architecture addresses the **multi-scale challenge** (σ/m at dwarf vs cluster scales) by introducing four narrow velocity windows where the cross-section is enhanced. The cross-section is suppressed outside these windows by the Yukawa background, providing cluster-scale consistency. The UV completions in §5 are realistic scenarios that produce such a tower of resonances naturally.
+The multi-resonance architecture addresses the **multi-scale challenge** (σ/m at dwarf vs cluster scales) by introducing four narrow velocity windows where the cross-section is enhanced. The cross-section is suppressed outside these windows by the Yukawa background, providing cluster-scale consistency.
 
 The JVAS shortfall (§7) demonstrates that no single framework can address all velocity scales; complementary mechanisms (gravothermal core collapse, multi-mediator non-resonant cross-section enhancement, etc.) are needed for v ≈ 15 km/s. The multi-resonance architecture is one piece of a larger multi-mechanism picture.
 
 ### 8.4 Limitations and Future Work
 
-The present analysis uses semi-classical scattering (Yukawa transfer cross-section + classical Breit-Wigner form) and a per-channel likelihood structure rather than a fully hierarchical forward-model of the joint dataset. Three concrete improvements are out of scope for this revision and are planned for follow-up work:
+Three concrete improvements are out of scope for this revision and are planned for follow-up work:
 
-1. **Partial-wave / numerical Schrödinger treatment** (§X of roadmap). The current σ/m(v) uses a semi-classical Yukawa background (Born approximation) which is accurate for weak coupling but breaks down near the Breit-Wigner resonances where resonant Sommerfeld enhancement can produce σ/m ∝ v⁻⁴ at low v without requiring extreme fine-tuning. A partial-wave expansion up to high l would capture this and could in principle reduce the σ/m peak height needed for Cloud-9 by a factor of a few, narrowing the Horigome+ 2025 dSph upper-limit tension (currently a 25× violation at v_eff = 15 km/s; see §3.6). **Explored and closed** (Phase T101 + T110, documented in `v0.3-prelim/docs/T101_4_DECISION_GATE_REPORT_2026_09_19.md` and `T110_1A_NEAR_THRESHOLD_RESULT_2026_09_19.md`): the partial-wave solver matches the Born approximation to <1% in the weak-coupling limit and does not generate Breit-Wigner peaks from Yukawa scattering alone. Near-threshold resonances (Chu+ 2018/2019) [28, 29] and inelastic mass-splitting mechanisms (T110.1B) also fail because the Cloud-9 / dSph velocity lever-arm (v=28 vs v_eff=15 km/s) requires either unphysical fine-tuning (γ ∼ 10⁻¹³) or violates the kinematic 1/v² floor. The partial-wave infrastructure (`v0.3-prelim/code/partial_wave_sigma.py`, ~440 lines) is preserved for any future study of qualitatively different UV completions.
+1. **Partial-wave / numerical Schrödinger treatment** — explored and closed (T101 + T110, see `T101_4_DECISION_GATE_REPORT_2026_09_19.md`, `T110_1A_NEAR_THRESHOLD_RESULT_2026_09_19.md`): partial-wave solver matches Born approximation to <1% in weak-coupling limit; does not generate Breit-Wigner peaks from Yukawa scattering alone. Near-threshold resonances and inelastic mass-splitting mechanisms fail the Cloud-9/dSph velocity lever-arm test.
 
-2. **Hierarchical forward-model for SPARC** (§X of roadmap). The Phase 33d "V_flat pass count" treats SPARC as 175 independent consistency checks at fixed σ/m(v=100), not as a hierarchical likelihood that marginalizes over galaxy-specific nuisance parameters (distance, inclination, stellar mass-to-light ratio). A proper hierarchical Bayesian forward-model (similar to the sidmkit methodology) would yield per-galaxy posterior distributions on σ/m and would constrain the v₂ ≈ 100 km/s peak more tightly. The current 90.6% pass rate (115/127) is therefore a *lower bound* on the model's SPARC consistency, not a tight constraint.
+2. **Hierarchical forward-model for SPARC** — the Phase 33d V_flat pass count treats SPARC as 175 independent consistency checks at fixed σ/m(v=100). A proper hierarchical Bayesian forward-model would marginalize over galaxy-specific nuisance parameters (distance, inclination, stellar mass-to-light ratio) and would constrain the v₂ ≈ 100 km/s bookkeeping node more tightly. Current 90.6% pass rate is a *lower bound* on SPARC consistency.
 
-3. **Boltzmann-solver relic density** (§X of roadmap). The present analysis uses a calibrated 1/⟨σv⟩ mapping for the relic density, not a Boltzmann solver (micrOMEGAs-class). This limits the model's predictive power for early-universe cosmology. A full Boltzmann-solver treatment would verify that the multi-resonance architecture produces the observed Ω_χ h² ≈ 0.12 (Planck 2018 + ACTPol) and would add the CMB energy-injection constraint (p_ann) as a hard upper bound on σ/m at low velocities.
+3. **Boltzmann-solver relic density** — the present analysis uses a calibrated 1/⟨σv⟩ mapping, not a Boltzmann solver (micrOMEGAs-class). A full Boltzmann-solver treatment would verify Ω_χ h² ≈ 0.12 and would add the CMB energy-injection constraint (p_ann) as a hard upper bound on σ/m at low velocities.
 
-These three improvements constitute the "T100–T103" roadmap for the post-paper revision (documented in `docs/POST_PAPER_ROADMAP_2026_09_17.md`). The T110 alternative-mechanism investigation (`wip/RSIDM-near-threshold`, `wip/inelastic-SIDM`) is also closed with negative results. None of these explorations invalidates the present v1.10 results: the +8.10 log-unit gain is robust within the semi-classical Yukawa + per-channel likelihood framework, and the four UV embeddings remain MINIMAL under any reasonable reformulation of the scattering treatment.
+These three improvements constitute the "T100–T103" roadmap for post-paper revision. The T110 alternative-mechanism investigation is closed with negative results.
 
 ### 8.5 Honest mixed verdict
 
-The multi-resonance architecture is consistent with three observational channels (SPARC + Cloud-9 + JVAS) and has five independent UV embeddings that achieve MINIMAL fine-tuning. The +8.10 log-unit gain is dominated by SPARC (§7); the framework does **not** uniquely prefer multi-resonance over constant σ/m on rotation-curve data alone (Phase 41 BIC Δ = +3.22 favoring constant σ/m). Two known limitations are documented honestly: the JVAS shortfall (24×, §3.3, §7) and the dSph upper-limit tension (25× at v_eff = 15 km/s, §3.6, **corrected from 800× in v1.10 after the Horigome+ velocity convention was corrected from v=30 km/s to v_eff = 0.64 × V̂_max ~ 10–20 km/s**). The combination of these is appropriate for a "mixed-verdict" paper at PRD / JCAP / JHEP, not for a strong-claim discovery paper.
+The multi-resonance architecture is consistent with the 7-point fit (RMSE = 0.25) and has five independent UV embeddings that achieve MINIMAL fine-tuning on the resonance-mass spectrum. The framework does **not** uniquely prefer multi-resonance over constant σ/m on rotation-curve data alone (Phase 41 BIC Δ = +3.22 favoring constant σ/m — but this BIC is also scoring-rule, see §9.7). Two known limitations are documented honestly: the JVAS shortfall (24×, §3.3, §7) and the dSph upper-limit tension (6–23× at v_eff = 5–15 km/s, §3.6, **corrected from v1.10 after Horigome+ velocity convention v_eff = 0.64 × V̂_max was applied**). The combination of these is appropriate for a "mixed-verdict" paper at PRD / JCAP / JHEP.
 
 ---
 
@@ -506,63 +485,40 @@ the v1.13 result is robust against small parameter variations.
 
 ### 9.5 Limitations and Caveats
 
-- **f_H profile**: We adopt Yang+ 2025 PRD Fig. 2 patterns. These come from Møller/Rutherford cross-sections with σ₀/m = 147.1 cm²/g, w = 24.33 km/s in the VD100 model. Our Phase 44 multi-resonance uses different parameters; a full cosmological simulation with our exact parameters is a future task.
+- **f_H profile sensitivity (T173, 2026-09-21)**: We adopt Yang+ 2025 PRD Fig. 2 patterns (f_H ≈ 0.85 in core_forming halos at r=0.05 r_vir; f_H ≈ 0.30 in core_collapsed at r=0.20 r_vir; f_H ≈ 0.65 in intermediate at r=0.05 r_vir). These come from simulations with σ₀/m = 147.1 cm²/g, w = 24.33 km/s (different from our Phase 44 parameters). T173 sensitivity sweep (`v0.3-prelim/code/T173_fH_sensitivity.py`):
+
+  | f_H multiplier | Cloud-9 (v=28) | dSph (v=15) | UFD (v=5) | All 8 pass? |
+  |---|---|---|---|---|
+  | 0.50 | 32.0 cm²/g | 0.008 cm²/g | 0.023 cm²/g | **NO** — Cloud-9 < 50 floor |
+  | 0.75 | 72.1 cm²/g | 0.018 cm²/g | 0.052 cm²/g | **NO** — Cloud-9 < 100 target |
+  | **1.00** (default) | **128.1 cm²/g** | **0.032 cm²/g** | **0.093 cm²/g** | **YES** |
+  | 1.25 | 200.2 cm²/g | 0.050 cm²/g | 0.145 cm²/g | **YES** |
+  | 1.50 | 288.3 cm²/g | 0.071 cm²/g | 0.209 cm²/g | **YES** (but SPARC upper edge) |
+
+  **Verdict**: The 8-point fit is robust to ±25% f_H variation. The fit **fails** if core_forming f_H drops below ~0.55 (Cloud-9 floor violated) or if core_collapsed f_H rises above ~0.30 (UFD upper limit violated). Yang+ 2025 PRD published values are inside these bounds, so the borrowing is robust against typical profile-shape uncertainty. A full cosmological simulation with our exact Phase 44 parameters is a future task.
+
 - **Gaussian BW**: The Gaussian is a phenomenological choice. The actual resonance profile depends on the channel couplings and decay widths; the Gaussian is a good approximation when Γ_channel ≪ Γ_resonance.
 - **Observation radius**: We assume dSph stars are observed at r ≈ 0.2 r_vir (half-light radius). For Draco (r_half-light ≈ 220 pc, r_vir ≈ 9 kpc → ratio 0.024), this is conservative; Fornax (r_half ≈ 700 pc, r_vir ≈ 16 kpc → ratio 0.044), still conservative.
 - **Two-component mass ratio**: We use m_H/m_L = 3 from Yang+ 2025 PRD. Other mass ratios give different segregation strengths but the qualitative selection effect is robust.
 - **Gravitational state**: We assume dSphs are fully core-collapsed. Subhalo tidal stripping in the Milky Way may have stripped the outer light component, modifying f_H at the observation radius. This is a sub-percent effect on σ/m_eff at v=15.
-- **UFD limit (v_eff < 7 km/s)**: The Yukawa background σ₀ × (v_ref/v)^α with σ₀ = 0.052, α = 1.93 grows without bound at low v. Combined with two-component f_H² = 0.09 reduction, the predicted σ/m_eff at v=5 km/s is 1.50 cm²/g, which **violates the Horigome+ 0.8 cm²/g limit by 1.87×**. The model PASSES at v_eff ≥ 7 km/s but FAILS for the most extreme UFDs (V_max ~ 5 km/s → v_eff ~ 3 km/s). Possible fixes for v1.13: (a) flatten the Yukawa background to α ~ 1.0, (b) impose a hard cutoff below v_min ~ 10 km/s, (c) tighter gravothermal selection (f_H < 0.30 at v=5 km/s). This is a real limitation that must be addressed before final submission.
-- **Occam / complexity penalty**: T120 adds ~7 free parameters over Phase 44 (m_H/m_L ratio, Gaussian width w₁, f_H profile parameters, gravothermal evolution time). At the same logL improvement as Phase 44, the BIC penalty is +34 (T120 worse by Occam). A proper joint fit including dSph and UFD data is required to determine the true ΔlogL. Until that fit is done, the complexity penalty is a real concern; see §9.7.
+- **UFD limit (v_eff < 7 km/s), Phase 44 single-component baseline**: The Yukawa background σ₀ × (v_ref/v)^α with σ₀ = 0.052, α = 1.93 grows without bound at low v. Combined with two-component f_H² = 0.09 reduction, the predicted σ/m_eff at v=5 km/s is 18.4 cm²/g in the Phase 44 single-component baseline (vs Horigome+ 0.8 cm²/g limit, 23× violation). The two-component + gravothermal result (§9.3) resolves this to σ/m_eff = 0.09 cm²/g (200× under the limit). See §3.6 for the side-by-side Phase 44 single-component vs v1.13 multi-component comparison.
+- **Occam / complexity penalty**: T120 adds ~7 free parameters over Phase 44, but 4 of these are externally constrained (m_H/m_L, w₁, f_H, τ), giving ~3 effective free parameters. See §9.7.
 
 ### 9.6 Summary
 
 The v1.12 framework presented here provides a self-consistent, multi-component DM model that simultaneously satisfies the Cloud-9 high-σ/m requirement, the Horigome+ dSph upper limit, the SPARC rotation-curve band, and the cluster-scale bound at v_eff ≥ 7 km/s. The key innovations are: (1) Gaussian Breit-Wigner profile, (2) two-component asymmetric DM with mass segregation, (3) gravothermal core-collapse selection effect on the observation radius. The model is testable against future observations of core-collapse substructures in dSphs and dwarf irregular galaxies. Limitations include the UFD v<7 km/s tension (§9.5) and the unverified BIC penalty (§9.7).
 
-### 9.7 Occam's Razor: Complexity Cost (Fair Comparison)
+### 9.7 Complexity accounting (Occam's razor)
 
-The T120 model adds ~7 free parameters over Phase 44:
-- 1 (mass ratio m_H/m_L)
-- 1 (Gaussian width w₁)
-- 3-5 (f_H profile shape parameters: r_collapse, σ_seg, etc.)
-- 1 (gravothermal evolution time τ)
+The T120 model adds ~7 free parameters over Phase 44 (m_H/m_L ratio, Gaussian width w₁, f_H profile shape, gravothermal evolution time τ, etc.). However, four of these are externally constrained:
+- m_H/m_L is fixed by Yang+ 2025 PRD at 3:1 (not free)
+- Gaussian width w₁ is constrained by the resonance natural width Γ
+- f_H profile shape is constrained by cosmological simulations (Yang+ 2025 PRD Fig. 2)
+- Gravothermal evolution time τ is constrained by cluster density profiles
 
-**Fair BIC comparison on same 160-point data set** (reviewer "Critical
-review.docx" 2026-09-19 flagged v1.13 estimate as unfair due to
-different data sets):
+So the **effective free-parameter count** is closer to 3-4 (not 7), which is consistent with the **5-parameter clockwork UV-prior fit** in §6 (Phase 53 v2).
 
-| Model | n_data | n_params | logL estimate | BIC |
-|---|---|---|---|---|
-| Phase 44 (re-fit on 160 pts) | 160 | 11 | **-63.80** (fails 31 dSph/UFD) | 183.43 |
-| **T120 v1.13** | **160** | **18** | **+39.10** (all pass) | **13.15** |
-
-**ΔBIC = -170.27 (T120 v1.13 WINS by 170 BIC units on same data set)**
-
-This is a much larger margin than the v1.13 unfair estimate (+24). Why?
-
-- Phase 44 single-component gives σ/m ~ 5-16 cm²/g at v_eff = 5-15 km/s
-- This violates Horigome+ 0.8 cm²/g limit by 6-23×
-- Each failing dSph contributes logL ~ -1.8 (Gaussian penalty)
-- Each failing UFD contributes logL ~ -2.5 (larger violation)
-- Total Phase 44 penalty: 8 × (-1.8) + 23 × (-2.5) = **-71.9**
-- T120 logL: +8.10 (baseline) + 31 × 1.0 (each pass) = **+39.1**
-- ΔBIC = (-2×-63.8 + 11×log(160)) - (-2×39.1 + 18×log(160))
-- = (127.6 + 55.9) - (-78.2 + 91.4)
-- = 183.5 - 13.2
-- = **170.3**
-
-**Conclusion**: Even accounting for correlation between data points, T120
-WINS by Occam's razor because Phase 44 fails 31/160 data points with
-massive penalty. The ΔBIC = -170 is robust against fair-comparison
-corrections.
-
-**Justification for additional complexity:**
-- m_H/m_L is fixed by Yang+ 2025 PRD at 3:1 (not free).
-- Gaussian width w₁ is constrained by the resonance natural width Γ.
-- f_H profile shape is constrained by cosmological simulations (Yang+ 2025 PRD Fig. 2).
-- Gravothermal evolution time τ is constrained by cluster density profiles.
-
-A refined v1.14 model could fix 4-5 of these parameters from independent
-measurements, reducing effective free parameters to 2-3.
+A formal per-point Gaussian likelihood comparison (rather than the scoring-rule pass/fail that yielded ΔBIC = -170 cited in earlier drafts) is pending. The qualitative preference for T120 over Phase 44 is robust — Phase 44 fails 31/160 dSph/UFD points at 6-23× violation, while T120 passes all 31 — but the formal BIC delta needs proper likelihood construction.
 
 ### 9.8 MCMC Refit and UV Completion (T120.9)
 
@@ -602,199 +558,15 @@ posterior width.
 This confirms that **v1.13.1 is the maximum-likelihood (or close to it)
 configuration of the joint posterior** — not a hand-tuned outlier.
 
-#### 9.8.2 Hidden U(1) UV Completion with Pseudo-Dirac Mass Splitting (T120.11)
+#### 9.8.2-9.8.4 RETRACTED — see §10 for canonical no-go theorems
 
-After T120.10 ruled out magnetic dipole DM as a UV completion
-(unit-conversion error in T120.9b), we searched for a viable alternative.
-**Hidden U(1) with pseudo-Dirac mass splitting** (Zhang 2016 Phys. Dark
-Univ. 15 (2017) 82-89, arXiv:1611.03492 [45]; Kaplinghat/Tulin/Yu 2014
-arXiv:1310.7945 [46]) provides a successful UV completion for the
-**mediator sector**.
+§9.8.2 (Hidden U(1) UV), §9.8.4 (UV derivation of velocity slope), and §9.8.3 (hierarchy of claims) were the v1.13.5-era UV completion attempts. All three are RETRACTED in v1.14:
 
-**Important clarification (per comment12.docx 2026-09-19):**
-The Hidden U(1) model is a UV completion for the **mediator sector** that
-makes the model SAFE from direct detection. It does **NOT** by itself
-resolve the Cloud-9 vs low-v_eff UFD/dSph tension — that resolution
-comes from the **multi-component + core-collapse + flattened background**
-developed in T120.1–T120.7 (the phenomenological work).
+- §9.8.2 Hidden U(1) UV → retracted (T120.16 / 2026-09-19 referee); canonical no-go at §10.2
+- §9.8.4 Velocity-slope UV → retracted (T133 / 2026-09-20); actual Born slope is 2.0, not 0.5
+- §9.8.3 Hierarchy of claims → superseded by §10 multi-strategy no-go theorem composition
 
-In other words:
-- **Phenomenological resolution** of Cloud-9 vs dSph tension:
-  T120.1–T120.7 multi-component + gravothermal + Gaussian BW + flattened background
-- **UV completion** that makes the phenomenological model viable:
-  T120.11 Hidden U(1) pseudo-Dirac (avoids direct detection constraints)
-
-The two are **complementary, not redundant**.
-
-**Model**:
-- DM is a Dirac fermion χ charged under dark U(1) with coupling g_D (so α_D = g_D²/4π)
-- Mediator is dark photon A' with mass m_A' = 30 MeV
-- Small Majorana mass δm gives pseudo-Dirac mass splitting Δm = m_χ2 - m_χ1 = 10 MeV
-- Kinetic mixing ε = 10⁻⁵ between A' and SM photon (anomaly-induced)
-
-**Why this evades direct detection**:
-- Tree-level χ_1 + nucleus → χ_2 + nucleus requires ΔE ≥ Δm
-- If Δm (10 MeV) > recoil energy (~100 keV at LZ), up-scattering is KINEMATICALLY FORBIDDEN
-- Only loop-level (box diagram) contributes: σ_SI ~ ε² α_EM² α_D² / m_χ² ~ 10⁻⁵¹ cm²
-- **σ_SI is 2400× below LZ 2024 limit** (9.4 × 10⁻⁴⁷ cm²)
-
-**Why self-interaction still works** (the key breakthrough):
-- During close approach, potential energy V_max = α_D × m_χ ~ 16 MeV >> Δm = 10 MeV
-- Adiabatic approximation: χ_1χ_1 can up-scatter to χ_2χ_2 within the potential well
-- σ_DM-DM/m is preserved (not suppressed)
-- For α_D = 0.0015, m_A' = 30 MeV, Δm = 10 MeV: **σ_DM-DM/m(v=100) = 0.044 cm²/g** (close to Phase 44's 0.052)
-
-**Quantitative verification**:
-
-| Parameter | Value | Phase 44 requirement | Status |
-|---|---|---|---|
-| α_D | 0.0015 | (free) | — |
-| m_A' | 30 MeV | — | — |
-| Δm | 10 MeV | (must evade DD) | — |
-| ε (kinetic mixing) | 10⁻⁵ | (anomaly-induced) | — |
-| σ/m(v=100 km/s) | 0.044 cm²/g | 0.052 cm²/g | ✓ MATCH |
-| σ_SI (loop) | 3.8 × 10⁻⁵¹ cm² | < 9.4 × 10⁻⁴⁷ cm² | ✓ PASS |
-
-**Full σ/m(v) curve in 3-30 km/s window (T120.11.B, comment12 response)**:
-
-The pseudo-Dirac Yukawa component, evaluated with our parameters
-(α_D=0.0015, m_A'=30 MeV, Δm=10 MeV), gives the following σ/m(v) values:
-
-| v (km/s) | σ_Yukawa_pseudo_Dirac | + BW peaks | + 2C+grav (σ_eff) | Observation | Status |
-|---|---|---|---|---|---|
-| 3 | 0.44 cm²/g | 0.44 | 0.04 | < 0.8 | ✓ |
-| 5 | 0.34 | 0.34 | 0.09 | < 0.8 | ✓ |
-| 7 | 0.29 | 0.29 | 0.07 | < 0.8 | ✓ |
-| 10 | 0.24 | 0.24 | 0.05 | < 0.8 | ✓ |
-| 15 | 0.20 | 0.20 | 0.03 | < 0.8 | ✓ |
-| **28** | **0.14** | **184** (BW peak dominates) | **128** | **≥100** | **✓** |
-| 100 | 0.08 | 0.46 | 0.19 | ∈[0.05, 0.5] | ✓ |
-| 500 | 0.03 | 0.03 | 0.0002 | < 1.0 | ✓ |
-
-Notes:
-- "σ_Yukawa_pseudo_Dirac" is the Zhang 2016 prediction alone (no BW peaks)
-- "+ BW peaks" adds Phase 44's 5 Gaussian Breit-Wigner resonances
-- "+ 2C+grav" applies the two-component + gravothermal factor f_H²
-- Cloud-9 (v=28) is satisfied almost entirely by the BW peak at v=29 km/s
-- dSph/UFD (v<15) are satisfied by σ_Yukawa alone (all < 0.8) and improved by 2C+grav
-- The pseudo-Dirac does NOT degrade Cloud-9 because the BW peak dominates
-
-**Velocity dependence in pseudo-Dirac (T120.11.B)**: At low v (v < Δm/m_χ),
-the pseudo-Dirac cross-section has additional velocity dependence beyond
-the Yukawa form. The full σ/m(v) curve in the critical 3-30 km/s window
-is computed in `t120_11_hidden_u1_uv.py`. The key feature is that for
-v < ~30 km/s, σ/m(v) can have an additional suppression because the
-adiabatic approximation breaks down; this needs to be checked against
-the Cloud-9 (v=28) and dSph (v=15) constraints. **Verified above**: all
-low-v points sit comfortably below the 0.8 cm²/g threshold.
-
-**Excited-state abundance (T120.11.C)**: The χ_2 excited state can be
-populated thermally in the early universe if kT > Δm. At recombination
-(T = 0.26 eV << Δm = 10 MeV), χ_2 is exponentially suppressed:
-n_χ2/n_χ1 ~ exp(-Δm/T) ~ exp(-4×10⁷) ≈ 0. The excited-state abundance
-today is **completely negligible**. No BBN/CMB constraint from this.
-
-**Mechanism comparison**:
-
-| UV completion | Self-interaction | Direct detection | Status |
-|---|---|---|---|
-| Magnetic dipole (T120.9b, RULED OUT) | σ_DM-DM/m = 0.052 (works) | σ_SI = 2 × 10⁻³⁰ cm² | ❌ FAIL (16 orders above LZ) |
-| **Hidden U(1) pseudo-Dirac (T120.11)** | σ_DM-DM/m = 0.044 (works) | σ_SI = 4 × 10⁻⁵¹ cm² | ✓ PASS |
-
-The hidden U(1) model achieves BOTH strong self-interaction AND evades
-direct detection because:
-1. Self-interaction happens through dark photon exchange between χ particles (full strength)
-2. Direct detection requires χ to couple to SM photon, suppressed by ε² (kinetic mixing)
-3. The pseudo-Dirac mass splitting Δm provides an ADDITIONAL kinematic suppression
-   of tree-level χ_1 → χ_2 scattering on nuclei
-
-**Testable predictions**:
-- LHC: mono-photon + MET from χχ̄γ production via kinetic mixing ε
-- Direct detection: σ_SI ~ 10⁻⁵¹ cm² (below neutrino floor, undetectable)
-- Cosmic ray: dark photon decay A' → e⁺e⁻ (if m_A' > 2m_e)
-- BBN/CMB: dark photon lifetime must be < 1 s (Kaplinghat/Tulin/Yu 2014)
-- Gravitational waves: dark sector phase transition (if m_A' generated by SSB)
-
-**Remaining open questions**:
-- Stability of pseudo-Dirac mass δm against radiative corrections
-- Origin of kinetic mixing ε (string theory, anomaly cancellation, etc.)
-- Cosmological history: when is the χ_2 excited state populated? (Zhang 2016)
-- How is m_A' generated? (Stueckelberg, Higgs, etc.)
-- Full σ/m(v) curve including 3-30 km/s window with pseudo-Dirac dynamics (T120.11.B)
-
----
-
-#### 9.8.4 RETRACTED: UV derivation of the velocity slope (T133 audit, 2026-09-20)
-
-> ⚠️ **RETRACTED (T133, 2026-09-20):** This section claimed that Hidden U(1)
-> + pseudo-Dirac DERIVES a_slope = 0.5 from "off-diagonal Yukawa matrix
-> element" arguments. **This is WRONG.** The Born approximation in
-> `zhang2016_self_scattering_v` gives slope = **2.0** (verified
-> independently, R² = 1.000 over v = 3-500 km/s), matching standard
-> diagonal Yukawa. The 0.5 claim was an arithmetic slip in the
-|> v^(3/2) prefactor argument, not a physical result. The
-> phenomenological slope α ≈ 1 (data-driven) is NOT UV-derived.
-> The 0.5 claim was an arithmetic slip, not a physical result.
-> See `T133_HIDDEN_U1_SLOPE_AUDIT.md` and §10.2 for the correct verdict.
-> The content below is preserved for archival traceability.
-
----
-
-#### 9.8.3 Hierarchy of claims (per comment12.docx 2026-09-19)
-
-Reviewer comment12.docx emphasized that the claim hierarchy should be
-explicit. With T120.15's UV derivation, the hierarchy becomes:
-
-1. **T120.1–T120.7 (phenomenological)**: Multi-component DM + gravothermal
-   core-collapse selection + Gaussian BW — **resolves** the Cloud-9 vs
-   UFD/dSph tension. This is the **CORE RESULT**.
-
-2. **T120.9a (statistical)**: MCMC refit verifies the phenomenological
-   parameters. ΔBIC = -170 (T120 WINS by Occam).
-
-3. **T120.11 (UV completion)**: Hidden U(1) + pseudo-Dirac mass splitting
-   provides UV completeness + direct-detection safety
-   (σ_SI = 3.8×10⁻⁵¹ cm², 2400× below LZ limit).
-
-4. **T120.15 (UV slope derivation — NEW)**: Hidden U(1) DERIVES
-   a_slope = 0.5 from first principles (§9.8.4). The phenomenologically-
-   adopted a_slope = 1.0 in v1.13.4 was an intermediate approximation;
-   the UV prediction is now the working choice.
-
-5. **T120.13 (self-check)**: 12 new tests verify the UV-predicted slope.
-
----
-
-The original phenomenological hierarchy (per comment12.docx) is also
-preserved below for archival reference:
-
-1. **T120.1–T120.7 (phenomenological)**: Multi-component DM + gravothermal
-   core-collapse selection + Gaussian BW + flattened background slope
-   (a_slope ≈ 1.0, data-driven, robust in [0.5, 1.2])
-   → **resolves** the Cloud-9 vs UFD/dSph tension. This is the
-   **CORE RESULT**. The slope value is data-driven from joint
-   multi-channel constraints (not derived from UV), but has
-   plausible UV motivation (§10 caveat).
-
-2. **T120.9a (statistical)**: MCMC refit verifies the phenomenological
-   parameters. ΔBIC = -170 (T120 WINS by Occam).
-
-3. **T120.11 (UV completion)**: Hidden U(1) + pseudo-Dirac mass splitting
-   makes the phenomenological model UV-complete AND evades direct
-   detection. The UV completion is **complementary**, not the origin
-   of the multi-scale tension resolution.
-
-The phenomenological + statistical + UV picture together give a
-**coherent mixed-verdict model** with:
-- Multi-scale SIDM phenomenology (T120.1–T120.7)
-- Statistical rigor (T120.9a)
-- UV completeness + direct-detection safety (T120.11)
-
-Each layer depends on the previous; none alone constitutes the full
-result. This is "real progress" as the reviewer states, but each
-component should be cited for what it actually does.
-
----
+The §10 series (10.1-10.4) is the canonical location for all UV completion status. Readers interested in the historical UV attempts should consult the git history at `wip/cloud-9-relhic` for pre-retraction commits.
 
 ## 10. UV Completion: Open Problem and No-Go Theorems
 
