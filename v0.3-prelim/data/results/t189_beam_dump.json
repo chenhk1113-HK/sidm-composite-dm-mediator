@@ -1,0 +1,31 @@
+{
+  "description": "T189 \u2014 B-factory / beam-dump sensitivity at m_Phi_h = 22 GeV (2026-09-21)",
+  "method": "Compute branching ratios, lifetime, and detection rates at Belle II, NA62, and other beam-dump experiments for our T185 benchmark (m_Phi_h = 22.223 GeV, g_h_SM = 0.01).",
+  "parameters": {
+    "m_Phi_h_GeV": 22.223,
+    "m_DM_GeV": 10.3,
+    "g_h_SM": 0.01,
+    "g_DM_Y1": 0.05
+  },
+  "channels": {
+    "DM": 0.00011670465779704519,
+    "e+e-": 3.8153502395766575e-16,
+    "mu+mu-": 1.63223856526956e-11,
+    "tau+tau-": 4.438023014580905e-09,
+    "cc": 2.310648158634271e-09,
+    "bb": 2.030687423157674e-08,
+    "gg": 4.00014e-08
+  },
+  "total_width_MeV": 0.11677173106521717,
+  "decay_length_cm": 1.6898641323540187e-10,
+  "BR_to_DM_percent": 99.94256035466793,
+  "belle_II_events_50ab": 0.05,
+  "beam_dump_events": 0.0,
+  "existing_constraints": {
+    "CHARM_g_h_SM_limit": 0.005,
+    "LSND_g_h_SM_limit": 0.01,
+    "E137_g_h_SM_limit": 0.02
+  },
+  "tension_with_T185": true,
+  "verdict": "For our T185 benchmark, m_Phi_h = 22.223 GeV with g_h_SM = 0.01. Beam-dump limits (CHARM/LSND) may exclude this. **Recommendation**: revise T185 to use smaller g_h_SM (e.g., 0.003) or verify our specific portal model is not excluded."
+}

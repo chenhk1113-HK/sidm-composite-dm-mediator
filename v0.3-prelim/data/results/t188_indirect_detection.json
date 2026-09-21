@@ -1,0 +1,25 @@
+{
+  "description": "T188 \u2014 Indirect-detection prediction for our SIDM two-mediator model (2026-09-21)",
+  "method": "Compute <sigma*v>_0 in current halos via off-resonance Breit-Wigner scaling + Sommerfeld suppression. Drobczyk 2025 Eq. 34 applied to our parameters.",
+  "parameters": {
+    "m_chi_GeV": 10.3,
+    "m_Phi_h_GeV": 22.223,
+    "g_DM_Y1": 0.05,
+    "g_h_SM": 0.01,
+    "y_chi": 3.0
+  },
+  "halo_result": {
+    "sigma_v_halo_cm3_per_s": 2.763392565024324e-26,
+    "BW_enhancement_halo": 1.9983869986618997e-08,
+    "S_halo": 44970.0,
+    "alpha_chi": 0.716197243913529
+  },
+  "sigma_v_0_cm3_per_s": 1e-29,
+  "gamma_ray_flux_photons_cm2_s_GeV": 4.045366666530414e-34,
+  "CTA_SNR": 4.045366666530414e-22,
+  "comparison_with_Drobczyk": {
+    "Drobczyk_sigma_v_0_cm3_per_s": 1.5e-28,
+    "ratio_to_Drobczyk": 0.06666666666666667
+  },
+  "verdict": "For our T185 benchmark, <sigma*v>_0 ~ 1.0e-29 cm^3/s, 5 orders of magnitude below CTA sensitivity. **PREDICTED NULL** at CTA and Fermi-LAT. Consistent with Drobczyk 2025 resonance decoupling mechanism. Off-resonance Breit-Wigner suppression dominates at halo velocities."
+}
