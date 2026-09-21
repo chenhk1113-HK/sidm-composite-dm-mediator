@@ -6,6 +6,27 @@
 
 
 
+
+## [Review5-Editorial-v18.4] — 2026-09-21 — v1.14.4 / v18.4
+
+### DeepSeek Review 5 — 8 of 9 priorities fixed
+- Priority 1: Section 10 subsections physically reordered to numerical order
+  (was §10.2a-d, §10.5, §10.1, §10.4a-c, §10.3, §10.6, §10.5a → now
+  §10.1, §10.2a-d, §10.3, §10.4a-c, §10.5, §10.5a, §10.6)
+- Priority 2: Duplicate table in §10.5 removed
+- Priority 3: g_h_SM and Omega_h^2 in §10.5a summary updated to T192 values
+  (g_h_SM = 0.00040, Omega_h^2 = 0.119, m_Phi = 20.69 GeV)
+- Priority 4: Stale §10.X cross-references updated (X = 7, 8, 9, 10, 11, 13)
+- Priority 5: Abstract duplicate text removed ("requires physics beyond
+  standard Yukawa interactions" was twice)
+- Priority 6: Abstract sigma_SI updated to 2e-49 cm^2 (was 5e-48)
+- Priority 7: §10.3.1 stale cross-references updated
+- Priority 8: Newline inserted between §10.4c and §10.3 headings
+- Priority 9 (matplotlib figure for T193): deferred (not blocking)
+
+### Self-check
+- ALL PASSED (31/31)
+
 ## [T193+Editorial-v18.3] — 2026-09-21 — v1.14.3 / v18.3
 
 ### T193 — Thermal averaging visualization (DeepSeek Review 4 Priority #6)

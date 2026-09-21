@@ -11,9 +11,9 @@
 
 ## Abstract
 
-We present a self-consistent multi-component self-interacting dark matter (SIDM) framework that addresses the tension between Cloud-9's high self-interaction requirement (σ/m ≥ 50 cm²/g at v ≈ 28 km/s [15b, 15e]) and the dwarf galaxy upper limits (σ/m ≲ 0.8 cm²/g at v ≈ 5–15 km/s [27]). The framework satisfies 7 of 8 observational constraints on a 7-point fit (RMSE = 0.250). The 8th constraint — Cloud-9's 4000× enhancement over the cluster-scale cross-section — requires physics beyond standard Yukawa interactions (T165–T172, T179, T191). The framework is composed of **four physical ingredients** (§2, matching the introduction's list): (i) multi-resonance SIDM cross-section with one dominant Breit-Wigner peak plus three bookkeeping interpolation nodes; (ii) two-component asymmetric dark matter with a heavy component (χ_H, σ_HH dominant) and a light component (χ_L); (iii) gravothermal core-collapse selection; (iv) Gaussian Breit-Wigner resonance profiles. The phenomenology satisfies 7 of 8 observational constraints with RMSE = 0.250 on the 7-point fit. The 8th constraint — Cloud-9's 4000× enhancement over the cluster-scale cross-section — requires physics beyond standard Yukawa interactions (T165–T172, T179, T191). Best-fit parameters: T163 KK-tower (α_D = 0.3, m₀ = 0.3 GeV, r = 1.5, n_modes = 2, RMSE = 1.408) within the Phase 44 framework (σ/m = 0.052 cm²/g at v = 100 km/s). The Bayesian evidence comparison against constant σ/m gives T177 log B = 3.06 (B = 21, strong evidence per Jeffreys — semi-informative Bayes factor with Gaussian likelihoods informed by published uncertainties).
+We present a self-consistent multi-component self-interacting dark matter (SIDM) framework that addresses the tension between Cloud-9's high self-interaction requirement (σ/m ≥ 50 cm²/g at v ≈ 28 km/s [15b, 15e]) and the dwarf galaxy upper limits (σ/m ≲ 0.8 cm²/g at v ≈ 5–15 km/s [27]). The framework satisfies 7 of 8 observational constraints on a 7-point fit (RMSE = 0.250). The 8th constraint — Cloud-9's 4000× enhancement over the cluster-scale cross-section — requires physics beyond standard Yukawa interactions (T165–T172, T179, T191). The framework is composed of **four physical ingredients** (§2, matching the introduction's list): (i) multi-resonance SIDM cross-section with one dominant Breit-Wigner peak plus three bookkeeping interpolation nodes; (ii) two-component asymmetric dark matter with a heavy component (χ_H, σ_HH dominant) and a light component (χ_L); (iii) gravothermal core-collapse selection; (iv) Gaussian Breit-Wigner resonance profiles. Best-fit parameters: T163 KK-tower (α_D = 0.3, m₀ = 0.3 GeV, r = 1.5, n_modes = 2, RMSE = 1.408) within the Phase 44 framework (σ/m = 0.052 cm²/g at v = 100 km/s). The Bayesian evidence comparison against constant σ/m gives T177 log B = 3.06 (B = 21, strong evidence per Jeffreys — semi-informative Bayes factor with Gaussian likelihoods informed by published uncertainties).
 
-Three independent observational anchors support the framework: (1) thermal relic density via a two-mediator UV completion (Drobczyk 2025 [15f], T185/T190/T192), with the CHARM-compliant configuration at g_h_SM = 0.00040, δ = 0.43%, m_Φh = 20.69 GeV, Ωh² = 0.119; (2) JVAS substructure physics via core-collapsed SIDM (Yu 2026 [23], three-bird-one-stone for JVAS + GD-1 + Fornax 6 at ~10⁶ M☉ halo mass scale); and (3) four falsifiable predictions (§10.5a): Sommerfeld enhancement at freeze-out, direct-detection null at σ_SI ~ 5×10⁻⁴⁸ cm², indirect-detection null at ⟨σv⟩₀ ~ 10⁻²⁹ cm³/s, and beam-dump sensitivity at 20 GeV.
+Three independent observational anchors support the framework: (1) thermal relic density via a two-mediator UV completion (Drobczyk 2025 [15f], T185/T190/T192), with the CHARM-compliant configuration at g_h_SM = 0.00040, δ = 0.43%, m_Φh = 20.69 GeV, Ωh² = 0.119; (2) JVAS substructure physics via core-collapsed SIDM (Yu 2026 [23], three-bird-one-stone for JVAS + GD-1 + Fornax 6 at ~10⁶ M☉ halo mass scale); and (3) four falsifiable predictions (§10.5a): Sommerfeld enhancement at freeze-out, direct-detection null at σ_SI ~ 2×10⁻⁴⁹ cm² (below neutrino floor), indirect-detection null at ⟨σv⟩₀ ~ 10⁻²⁹ cm³/s, and beam-dump sensitivity at 20 GeV.
 
 Sections 4–8 (mass-spectrum embeddings, JVAS tension, profile discussion) are in `PAPER_V1_DRAFT_SUPPLEMENTARY.md`. The paper is organized as: physical ingredients (§2), joint constraints (§3), two-component resolution (§9), UV completion + Cloud-9 robustness (§10), conclusions (§11).
 
@@ -395,6 +395,16 @@ EFT target map for future work.
 
 **Scope of the no-go theorems (important caveat, added 2026-09-21 per Reviewer15 R2):** All four no-gos were tested against the **Phase 44 single-component baseline** (σ/m = 0.052 cm²/g at v=100 km/s, m_χ = 10.44 GeV, α = 1.0). The Phase 6+ T163 best fit (KK tower, α_D = 0.3, m_0 = 0.3 GeV, r = 1.5, n_modes = 2, RMSE = 1.408) is **not separately tested** here. The no-gos target specific UV constructions — magnetic dipole moments, hidden U(1) with pseudo-Dirac splitting, GeV-scale inelastic DM, Chu P1 p-wave resonance — all of which were proposed to address the Phase 44 phenomenology. **Whether a UV construction satisfies the Phase 6+ T163 best fit (or any updated phenomenology parameters) requires re-running the no-go tests with the updated cross-section target.** The qualitative verdicts (each of these UV constructions fails Cloud-9 for a different structural reason) are expected to remain valid because the failure mechanisms (LZ direct detection, kinematic forbiddance, unitarity violation, flat velocity dependence) are independent of the specific Phase 44 vs T163 cross-section values. But this should be re-verified before any future claim of "the model is UV-complete." For T163-specific UV tests, see `v0.3-prelim/docs/POST_PAPER_ROADMAP_2026_09_17.md` §3 roadmap item.
 
+### 10.1 UV completion: general framework and constraints
+
+The phenomenology (T120 multi-component + gravothermal + Gaussian Breit-Wigner)
+**works** — it satisfies 7 of 8 observational constraints spanning 4 orders of
+magnitude in velocity. The 8th constraint (Cloud-9's σ/m ≥ 50 floor at v=28 km/s)
+is published and confirmed independently by Ohana, Zhang & Yu 2026 [15e] via
+MCMC, but cannot be derived from standard Yukawa physics. This is honest:
+we present a self-consistent phenomenology for 7 constraints and document
+what UV physics would need to look like to reproduce the 8th.
+
 ### 10.2a No-go #1: Magnetic dipole DM (T120.10)
 
 Following T120.9b (which attempted magnetic dipole as UV completion), T120.10
@@ -460,63 +470,176 @@ The Qwen referee (2026-09-19) suggested Strategy 2: scan for p-wave shape resona
 
 **Result: 6/8 pass, 2/8 fail (Cloud-9 + SPARC-marginal).** P1 solves the original Kaplinghat/Tulin/Yu dwarf-vs-cluster tension (dSph ≤ 0.8 ✓ + cluster ≤ 1.0 ✓) but **fails our extended Cloud-9-vs-dSph tension**: P1's velocity dependence is too flat (σ/m ≈ 0.1 cm²/g everywhere) to produce the required σ/m ≥ 50 cm²/g at v=28 km/s. **Honest framing**: P1 is a viable SIDM model for dwarf-galaxy-vs-cluster constraints, just not for the Cloud-9 UDG constraint. The 2-channel Cloud-9-vs-dSph tension requires velocity dependence P1 does not provide.
 
-### 10.5 EFT target map for future UV completions
+### 10.3 Two-mediator candidate (Drobczyk 2025): thermal relic density
 
-The four no-go theorems above define what any future UV completion must
-satisfy to reproduce our phenomenology. **Numerical values shown below
-are from the Phase 44 baseline framework (v1.13 default parameters,
-verified in T132); the T163 KK-tower best fit (α_D = 0.3, m₀ = 0.3 GeV,
-r = 1.5, n_modes = 2, RMSE = 1.408) is a specific KK-tower realization
-within the Phase 44 framework. Both Phase 44 and T163 share the same
-σ/m(v) structure; T163 is a finer-grained model within the framework.**
+**§10.3.1 — Thermal relic density UV completion (T184, T185, T190, T192, 2026-09-21):**
 
-| Requirement | What we need | What fails | Source |
+**Scope clarification (per DeepSeek review2, 2026-09-21):** This section
+addresses the **thermal relic density** problem (Ωh² = 0.12), NOT the
+**Cloud-9 4000× spike** which remains an open problem requiring physics
+beyond standard Yukawa (T165-T172, T179; see §10.7 for Cloud-9 robustness
+investigation). The two-mediator framework decouples annihilation from
+self-scattering but does not produce Cloud-9's specific spike — that
+remains substructure physics per Yu 2026 [23] (§3.3, §10.9.A5).
+
+T181 established that the SIDM phenomenology σ_HH = 0.05 cm²/g is the
+**elastic self-scattering cross-section**, distinct from the annihilation
+cross-section <σv>_ann that determines relic density.
+
+**One-mediator UV completions ruled out (see §10.2 for full details):**
+A purely thermal WIMP-miracle UV completion with ONE mediator is **NOT
+viable** at our SIDM parameters (T184 dark photon 10⁸× gap, Higgs portal
+10¹³× gap). See §10.2 for the systematic no-go theorems.
+
+**T185 — Two-mediator resolution (positive result):**
+
+The two-mediator solution proposed by Drobczyk (arXiv:2506.22997v3,
+CQG 42 (2025) 225006) **resolves** the tension via s-channel Breit-Wigner
+resonance enhancement from a heavy scalar Φh near m_Φh ≈ 2 m_χ.
+
+The setup:
+- **Light scalar φ** (m_φ = 300 MeV): governs SIDM phenomenology (σ_HH)
+- **Heavy scalar Φh** (m_Φh ≈ 20.6 GeV): provides resonant annihilation
+  enhancement (σ_v) without affecting σ_HH
+
+The Breit-Wigner enhancement factor near the pole dramatically boosts
+<σv>_ann while σ_HH (governed by the light φ) is independent.
+
+**Best configuration found (T185), REVISED for CHARM compliance (T190), RE-REVISED post bug-fix (2026-09-21):**
+
+| Parameter | T185 (original, buggy) | T190 v1 (CHARM, buggy) | T190 v2 (post bug-fix) |
 |---|---|---|---|
-| σ/m(28) = 128.13 cm²/g (Cloud-9, Phase 44) | High cross-section at dwarf scale | Standard perturbative Yukawa gives wrong velocity dependence (1/v² or 1/v⁴), not a peak at v=28 | T132 full chain |
+| g_DM_Y1 (DM-Φh coupling) | 0.05 | 0.05 | 0.05 | 0.05 |
+| g_h_SM (Φh-SM Higgs portal) | 0.01 | 0.002 | 0.001 | **0.00040** (CHARM limit: < 0.005) |
+| m_Φh | 22.223 GeV | 21.00 GeV | 20.69 GeV | **20.69 GeV** |
+| δ = (m_Φh - 2 m_χ)/(2 m_χ) | 7.9% | 1.93% | 0.43% | **0.43%** |
+| Γ_Φh/m_Φh | 2.4×10⁻⁵ | 9.96×10⁻⁵ | 1.7×10⁻⁴ | 1.7×10⁻⁴ |
+| v_res = √(8δ) | 0.79c | 0.39c | 0.19c | **0.19c** (in thermal window v_0=0.30c) |
+| **<σv>_ann** (calculation method) | 3.10×10⁻²⁶ (buggy) | 2.79×10⁻²⁶ (buggy) | 2.82×10⁻²⁶ (buggy) | **2.63×10⁻²⁶ (thermal-avg, T192)** |
+| **Ωh²** | 0.116 | 0.129 | 0.128 | **0.119** (within Planck 2σ) |
+| σ_HH | 0.05 cm²/g (independent) | 0.05 cm²/g (independent) | 0.05 cm²/g (independent) | 0.05 cm²/g (independent) |
 
-| Requirement | What we need | What fails | Source |
-|---|---|---|---|
-| σ/m(28) = 128.13 cm²/g (Cloud-9) | High cross-section at dwarf scale | Standard perturbative Yukawa gives wrong velocity dependence (1/v² or 1/v⁴), not a peak at v=28 | T132 full chain |
-| σ/m(15) = 0.032 cm²/g (dSph) | Sharp suppression between 28 → 15 km/s | Monotonic σ/m(v) cannot satisfy both Cloud-9 high + dSph low | T132 full chain |
-| σ/m(100) = 0.193 cm²/g (SPARC) | Non-trivial velocity dependence | Standard Yukawa monotonic | T132 full chain |
-| σ/m(500) = 2.5×10⁻⁴ cm²/g (cluster) | v⁻¹ or steeper falloff at cluster | Standard Yukawa decay too slow | T132 full chain |
-| σ_SI < 9.4×10⁻⁴⁷ cm² (LZ 2024) | DD evasion | Magnetic dipole, Majorana splitting at MeV | [44], T120.10 |
-| Thermal relic (if applicable) | α_D < 1 (perturbative) | Multi-TeV inelastic requires α_D ~ 404 | T130 |
+**Three successive corrections (2026-09-21):**
 
-**A viable UV completion must combine: non-perturbative enhancement at
-v ≈ 28 km/s (achievable via Breit-Wigner or bound-state resonance)
-WITH rapid suppression at v < 28 km/s (dSph/UFD) AND rapid suppression
-at v > 28 km/s (cluster). The phenomenology suggests this requires a
-multi-mechanism combination — exactly what our four-ingredient
-framework provides, but with no standard UV analog yet identified.**
+1. **T185 bug fix (DeepSeek review2):** Original T185 hardcoded
+   `s = s_threshold * (1 + 0.01)`, decoupling the BW propagator from
+   actual m_Φh. Fixed: `s = 4 m_χ² * (1 + v_F²/4)` with v_F ≈ 0.3c.
+   This gave "T190 v2" with δ = 0.43%, g_h_SM = 0.001, Ωh² = 0.128.
 
-**Important clarification on §10.5 wording (from T132 sanity check):**
-The earlier draft stated "Standard perturbative Yukawa gives <1 cm²/g"
-and "P-wave resonances too narrow" as failure modes. Both wordings
-were misleading or incorrect:
+2. **Thermal averaging fix (DeepSeek review3, T192):** At δ = 0.43%,
+   the BW resonance is at v_res = √(8δ) = 0.185c, NOT v_F = 0.3c.
+   Single-velocity BW evaluation at v_F = 0.3c is suppressed by
+   **6,668× off-resonance**. Proper Gondolo-Gelmini (1991) thermal
+   average over Maxwell-Boltzmann at T_F = m_χ/x_F = 0.47 GeV gives
+   <σv>_thermal = 2.63×10⁻²⁶ cm³/s. To match Planck Ωh² = 0.12 with
+   thermal averaging, g_h_SM must be **0.00040** (2.5× smaller than the
+   single-velocity T190 v2). Ωh² = 0.119 (within Planck 2σ).
 
-- Standard Yukawa Born (α=0.01, m_φ=100 MeV, m_χ=10 GeV) at v=28 km/s
-  gives σ/m ~ 9×10⁵ cm²/g (huge 1/v⁴ enhancement). The real failure is
-  **wrong velocity dependence** (1/v² classical or 1/v⁴ Born), not
-  magnitude. Both regimes are **monotonic** in v and cannot produce the
-  required peak at v=28 followed by suppression at v=15.
+3. **Verdict restored:** With thermal averaging, the two-mediator UV
+   completion IS VIABLE. The candidate was being prematurely downgraded
+   because T190 v2 used a single-velocity BW evaluation at the wrong
+   velocity. Per DeepSeek review3 recommendation to "downgrade from
+   'resolution' to 'candidate requiring verification'", we keep the
+   "candidate resolution" framing but note that thermal averaging
+   has now been done (T192) and the candidate survives. The required
+   detuning δ = 0.43% is **5× broader than Drobczyk's benchmark of
+   δ = 0.083%** — borderline-natural, requires composite UV completion
+   (Drobczyk SU(3)_H with N_f=10) or technical naturalness argument.
+   See §10.11 for caveats and §10.13 for the 5-no-go + 1-candidate status.
 
-- Chu P1 p-wave resonance (T131) σ/m(100) = 0.15 cm²/g actually matches
-  SPARC (~0.19 cm²/g) within 25%. The failure is at **Cloud-9** (P1
-  gives 0.1 vs required 100), not at SPARC. Chu P1 was designed to
-  solve the older Kaplinghat/Tulin/Yu dwarf-vs-cluster tension, with
-  resonance centered at v_R = 108 km/s — not our Cloud-9-vs-dSph
-  tension which requires resonance at v_R ~ 20 km/s.
+**Both constraints are simultaneously satisfied:**
+1. **SIDM phenomenology**: σ_HH = 0.05 cm²/g via light φ (independent)
+2. **Thermal relic**: Ωh² = 0.116 via heavy Φh resonance enhancement
 
-### 10.1 UV completion: general framework and constraints
+**Comparison with Drobczyk (2025) benchmark:**
 
-The phenomenology (T120 multi-component + gravothermal + Gaussian Breit-Wigner)
-**works** — it satisfies 7 of 8 observational constraints spanning 4 orders of
-magnitude in velocity. The 8th constraint (Cloud-9's σ/m ≥ 50 floor at v=28 km/s)
-is published and confirmed independently by Ohana, Zhang & Yu 2026 [15e] via
-MCMC, but cannot be derived from standard Yukawa physics. This is honest:
-we present a self-consistent phenomenology for 7 constraints and document
-what UV physics would need to look like to reproduce the 8th.
+| Quantity | Drobczyk | Ours (T185) |
+|---|---|---|
+| m_χ | 600 GeV | 10.3 GeV |
+| m_φ | 15 MeV | 300 MeV |
+| m_Φh | 1201 GeV | 22.2 GeV |
+| δ (detuning) | 8.3×10⁻⁴ | 7.9% |
+| σ_T/m_χ at v=30 | 0.11 cm²/g | 0.05 cm²/g |
+| Ωh² | 0.119 | 0.116 |
+| LHC / collider probe | 1.2 TeV tt̄ | **20 GeV (B-factory / beam-dump)** |
+
+The mechanism is identical; the mass scales differ. Our lower DM mass
+puts the heavy resonance at 20 GeV (B-factory window) rather than
+1.2 TeV (LHC window).
+
+**Thermal averaging verification (T193, 2026-09-21, per DeepSeek Review 4):**
+
+The T192 thermal averaging result can be visualized by computing
+d<σv>/dv_rel vs. v_rel. The Maxwell-Boltzmann distribution at T_F
+has v_0 = √(2/x_F) = 0.302c (most probable v_rel), and v_res = √(8δ)
+= 0.185c for δ = 0.43%. The resonance lies within the thermal window.
+
+**Resonance recovery factor** = fraction of <σv>_thermal that comes from
+v_rel ∈ [0.5 v_res, 1.5 v_res] around the resonance peak:
+- v_res = 0.185c (resonance)
+- Resonance region: v_rel ∈ [0.093, 0.278] c
+- Resonance contribution: dominant peak in d<σv>/dv_rel
+- ASCII plot (T193, `t193_thermal_visualization.json`):
+
+```
+  v=0.150c | #
+  v=0.167c | #
+  v=0.183c | ######### <- v_res
+  v=0.200c | #########
+  v=0.217c | ########################################
+  v=0.233c | ########################################
+  v=0.250c | #
+  v=0.267c | #
+```
+
+The plot shows the BW resonance peak at v_res = 0.185c and a slight
+Sommerfeld tail at higher velocities (v > 0.2c). The fraction of pairs
+with v_rel ≤ v_res is erf(v_res/√2/v_0) ≈ **15%** of the Maxwell-Boltzmann
+distribution, and the BW enhancement at resonance is ~100× relative to
+the off-resonance value, so the thermal average is dominated by this
+resonance tail.
+
+**Conclusion:** The T192 thermal averaging is physically correct. The
+g_h_SM reduction from 0.001 to 0.00040 (2.5× smaller) is consistent
+with the resonance recovery factor being O(2-3×) relative to the
+single-velocity estimate at v_F = 0.3c (which was off-resonance by
+6,668×, requiring a much larger g_h_SM to compensate incorrectly).
+
+**Testable predictions (T185):**
+1. Heavy scalar resonance at m_Φh ≈ 22 GeV (narrow, Γ/m ~ 10⁻³)
+   decaying to SM channels. **Probe at B-factories (Belle II), beam-dump
+   experiments, low-energy e⁺e⁻ colliders** — NOT LHC.
+2. Direct detection: σ_SI ~ 10⁻⁴⁸ to 10⁻⁵⁰ cm² (below neutrino floor
+   for 10 GeV DM). Predicted null in nuclear-recoil experiments.
+3. Indirect detection: ⟨σv⟩₀ ~ 10⁻²⁸ cm³/s in current halos. Below
+   CTA sensitivity.
+
+**Honest caveats:**
+1. Our δ = 7.9% is much broader than Drobczyk's 8.3×10⁻⁴. The resonance
+   condition requires composite UV completion (Drobczyk SU(3)_H with
+   N_f=10) or explicit technical-naturalness argument.
+2. Sommerfeld enhancement from φ (not included here) would underestimate
+   σ_v; Drobczyk shows factor ~143 at their benchmark.
+3. Light φ coupling to SM requires leptophilic/quark-silent portal to
+   satisfy direct-detection bounds (Drobczyk Appendix C.4).
+4. Higher-order corrections (bound states, co-annihilation, finite-width
+   effects) neglected.
+
+**Paper impact:** §10.10 supersedes the "5th no-go theorem" from T184.
+The phenomenology now has a **constructive UV completion** that satisfies
+ALL constraints:
+- Multi-channel SIDM (7 of 8 channels)
+- Thermal relic density (Ωh² = 0.116)
+- No-go theorems for one-mediator UV completions (still valid)
+- Testable predictions at B-factories / beam-dumps
+
+The two-mediator solution transforms the paper from "consistent with
+multi-channel data but UV-construction-limited" to "has a constructive,
+predictive UV completion."
+
+Full docs:
+- `v0.3-prelim/docs/T184_UV_COMPLETION.md` (T184 one-mediator negative)
+- `v0.3-prelim/docs/T185_TWO_MEDIATOR.md` (T185 two-mediator resolution)
 
 ### 10.4a Cloud-9 robustness: standard Yukawa investigation
 
@@ -716,199 +839,51 @@ PAPER_V1_DRAFT_SUPPLEMENTARY.md §A.1 for full details.
 | A5 JVAS gravothermal (T180) | 100× enhancement vs 3125× needed — structural limitation |
 
 All six items investigated with concrete numerical results. None changes
-the paper's headline 7-of-8 channel satisfaction; each adds an honest caveat.### 10.3 Two-mediator candidate (Drobczyk 2025): thermal relic density
+the paper's headline 7-of-8 channel satisfaction; each adds an honest caveat.
 
-**§10.3.1 — Thermal relic density UV completion (T184, T185, T190, T192, 2026-09-21):**
+### 10.5 EFT target map for future UV completions
 
-**Scope clarification (per DeepSeek review2, 2026-09-21):** This section
-addresses the **thermal relic density** problem (Ωh² = 0.12), NOT the
-**Cloud-9 4000× spike** which remains an open problem requiring physics
-beyond standard Yukawa (T165-T172, T179; see §10.7 for Cloud-9 robustness
-investigation). The two-mediator framework decouples annihilation from
-self-scattering but does not produce Cloud-9's specific spike — that
-remains substructure physics per Yu 2026 [23] (§3.3, §10.9.A5).
+The four no-go theorems above define what any future UV completion must
+satisfy to reproduce our phenomenology. **Numerical values shown below
+are from the Phase 44 baseline framework (v1.13 default parameters,
+verified in T132); the T163 KK-tower best fit (α_D = 0.3, m₀ = 0.3 GeV,
+r = 1.5, n_modes = 2, RMSE = 1.408) is a specific KK-tower realization
+within the Phase 44 framework. Both Phase 44 and T163 share the same
+σ/m(v) structure; T163 is a finer-grained model within the framework.**
 
-T181 established that the SIDM phenomenology σ_HH = 0.05 cm²/g is the
-**elastic self-scattering cross-section**, distinct from the annihilation
-cross-section <σv>_ann that determines relic density.
-
-**One-mediator UV completions ruled out (see §10.2 for full details):**
-A purely thermal WIMP-miracle UV completion with ONE mediator is **NOT
-viable** at our SIDM parameters (T184 dark photon 10⁸× gap, Higgs portal
-10¹³× gap). See §10.2 for the systematic no-go theorems.
-
-**T185 — Two-mediator resolution (positive result):**
-
-The two-mediator solution proposed by Drobczyk (arXiv:2506.22997v3,
-CQG 42 (2025) 225006) **resolves** the tension via s-channel Breit-Wigner
-resonance enhancement from a heavy scalar Φh near m_Φh ≈ 2 m_χ.
-
-The setup:
-- **Light scalar φ** (m_φ = 300 MeV): governs SIDM phenomenology (σ_HH)
-- **Heavy scalar Φh** (m_Φh ≈ 20.6 GeV): provides resonant annihilation
-  enhancement (σ_v) without affecting σ_HH
-
-The Breit-Wigner enhancement factor near the pole dramatically boosts
-<σv>_ann while σ_HH (governed by the light φ) is independent.
-
-**Best configuration found (T185), REVISED for CHARM compliance (T190), RE-REVISED post bug-fix (2026-09-21):**
-
-| Parameter | T185 (original, buggy) | T190 v1 (CHARM, buggy) | T190 v2 (post bug-fix) |
+| Requirement | What we need | What fails | Source |
 |---|---|---|---|
-| g_DM_Y1 (DM-Φh coupling) | 0.05 | 0.05 | 0.05 | 0.05 |
-| g_h_SM (Φh-SM Higgs portal) | 0.01 | 0.002 | 0.001 | **0.00040** (CHARM limit: < 0.005) |
-| m_Φh | 22.223 GeV | 21.00 GeV | 20.69 GeV | **20.69 GeV** |
-| δ = (m_Φh - 2 m_χ)/(2 m_χ) | 7.9% | 1.93% | 0.43% | **0.43%** |
-| Γ_Φh/m_Φh | 2.4×10⁻⁵ | 9.96×10⁻⁵ | 1.7×10⁻⁴ | 1.7×10⁻⁴ |
-| v_res = √(8δ) | 0.79c | 0.39c | 0.19c | **0.19c** (in thermal window v_0=0.30c) |
-| **<σv>_ann** (calculation method) | 3.10×10⁻²⁶ (buggy) | 2.79×10⁻²⁶ (buggy) | 2.82×10⁻²⁶ (buggy) | **2.63×10⁻²⁶ (thermal-avg, T192)** |
-| **Ωh²** | 0.116 | 0.129 | 0.128 | **0.119** (within Planck 2σ) |
-| σ_HH | 0.05 cm²/g (independent) | 0.05 cm²/g (independent) | 0.05 cm²/g (independent) | 0.05 cm²/g (independent) |
+| σ/m(28) = 128.13 cm²/g (Cloud-9) | High cross-section at dwarf scale | Standard perturbative Yukawa gives wrong velocity dependence (1/v² or 1/v⁴), not a peak at v=28 | T132 full chain |
+| σ/m(15) = 0.032 cm²/g (dSph) | Sharp suppression between 28 → 15 km/s | Monotonic σ/m(v) cannot satisfy both Cloud-9 high + dSph low | T132 full chain |
+| σ/m(100) = 0.193 cm²/g (SPARC) | Non-trivial velocity dependence | Standard Yukawa monotonic | T132 full chain |
+| σ/m(500) = 2.5×10⁻⁴ cm²/g (cluster) | v⁻¹ or steeper falloff at cluster | Standard Yukawa decay too slow | T132 full chain |
+| σ_SI < 9.4×10⁻⁴⁷ cm² (LZ 2024) | DD evasion | Magnetic dipole, Majorana splitting at MeV | [44], T120.10 |
+| Thermal relic (if applicable) | α_D < 1 (perturbative) | Multi-TeV inelastic requires α_D ~ 404 | T130 |
 
-**Three successive corrections (2026-09-21):**
+**A viable UV completion must combine: non-perturbative enhancement at
+v ≈ 28 km/s (achievable via Breit-Wigner or bound-state resonance)
+WITH rapid suppression at v < 28 km/s (dSph/UFD) AND rapid suppression
+at v > 28 km/s (cluster). The phenomenology suggests this requires a
+multi-mechanism combination — exactly what our four-ingredient
+framework provides, but with no standard UV analog yet identified.**
 
-1. **T185 bug fix (DeepSeek review2):** Original T185 hardcoded
-   `s = s_threshold * (1 + 0.01)`, decoupling the BW propagator from
-   actual m_Φh. Fixed: `s = 4 m_χ² * (1 + v_F²/4)` with v_F ≈ 0.3c.
-   This gave "T190 v2" with δ = 0.43%, g_h_SM = 0.001, Ωh² = 0.128.
+**Important clarification on §10.5 wording (from T132 sanity check):**
+The earlier draft stated "Standard perturbative Yukawa gives <1 cm²/g"
+and "P-wave resonances too narrow" as failure modes. Both wordings
+were misleading or incorrect:
 
-2. **Thermal averaging fix (DeepSeek review3, T192):** At δ = 0.43%,
-   the BW resonance is at v_res = √(8δ) = 0.185c, NOT v_F = 0.3c.
-   Single-velocity BW evaluation at v_F = 0.3c is suppressed by
-   **6,668× off-resonance**. Proper Gondolo-Gelmini (1991) thermal
-   average over Maxwell-Boltzmann at T_F = m_χ/x_F = 0.47 GeV gives
-   <σv>_thermal = 2.63×10⁻²⁶ cm³/s. To match Planck Ωh² = 0.12 with
-   thermal averaging, g_h_SM must be **0.00040** (2.5× smaller than the
-   single-velocity T190 v2). Ωh² = 0.119 (within Planck 2σ).
+- Standard Yukawa Born (α=0.01, m_φ=100 MeV, m_χ=10 GeV) at v=28 km/s
+  gives σ/m ~ 9×10⁵ cm²/g (huge 1/v⁴ enhancement). The real failure is
+  **wrong velocity dependence** (1/v² classical or 1/v⁴ Born), not
+  magnitude. Both regimes are **monotonic** in v and cannot produce the
+  required peak at v=28 followed by suppression at v=15.
 
-3. **Verdict restored:** With thermal averaging, the two-mediator UV
-   completion IS VIABLE. The candidate was being prematurely downgraded
-   because T190 v2 used a single-velocity BW evaluation at the wrong
-   velocity. Per DeepSeek review3 recommendation to "downgrade from
-   'resolution' to 'candidate requiring verification'", we keep the
-   "candidate resolution" framing but note that thermal averaging
-   has now been done (T192) and the candidate survives. The required
-   detuning δ = 0.43% is **5× broader than Drobczyk's benchmark of
-   δ = 0.083%** — borderline-natural, requires composite UV completion
-   (Drobczyk SU(3)_H with N_f=10) or technical naturalness argument.
-   See §10.11 for caveats and §10.13 for the 5-no-go + 1-candidate status.
-
-**Both constraints are simultaneously satisfied:**
-1. **SIDM phenomenology**: σ_HH = 0.05 cm²/g via light φ (independent)
-2. **Thermal relic**: Ωh² = 0.116 via heavy Φh resonance enhancement
-
-**Comparison with Drobczyk (2025) benchmark:**
-
-| Quantity | Drobczyk | Ours (T185) |
-|---|---|---|
-| m_χ | 600 GeV | 10.3 GeV |
-| m_φ | 15 MeV | 300 MeV |
-| m_Φh | 1201 GeV | 22.2 GeV |
-| δ (detuning) | 8.3×10⁻⁴ | 7.9% |
-| σ_T/m_χ at v=30 | 0.11 cm²/g | 0.05 cm²/g |
-| Ωh² | 0.119 | 0.116 |
-| LHC / collider probe | 1.2 TeV tt̄ | **20 GeV (B-factory / beam-dump)** |
-
-The mechanism is identical; the mass scales differ. Our lower DM mass
-puts the heavy resonance at 20 GeV (B-factory window) rather than
-1.2 TeV (LHC window).
-
-**Thermal averaging verification (T193, 2026-09-21, per DeepSeek Review 4):**
-
-The T192 thermal averaging result can be visualized by computing
-d<σv>/dv_rel vs. v_rel. The Maxwell-Boltzmann distribution at T_F
-has v_0 = √(2/x_F) = 0.302c (most probable v_rel), and v_res = √(8δ)
-= 0.185c for δ = 0.43%. The resonance lies within the thermal window.
-
-**Resonance recovery factor** = fraction of <σv>_thermal that comes from
-v_rel ∈ [0.5 v_res, 1.5 v_res] around the resonance peak:
-- v_res = 0.185c (resonance)
-- Resonance region: v_rel ∈ [0.093, 0.278] c
-- Resonance contribution: dominant peak in d<σv>/dv_rel
-- ASCII plot (T193, `t193_thermal_visualization.json`):
-
-```
-  v=0.150c | #
-  v=0.167c | #
-  v=0.183c | ######### <- v_res
-  v=0.200c | #########
-  v=0.217c | ########################################
-  v=0.233c | ########################################
-  v=0.250c | #
-  v=0.267c | #
-```
-
-The plot shows the BW resonance peak at v_res = 0.185c and a slight
-Sommerfeld tail at higher velocities (v > 0.2c). The fraction of pairs
-with v_rel ≤ v_res is erf(v_res/√2/v_0) ≈ **15%** of the Maxwell-Boltzmann
-distribution, and the BW enhancement at resonance is ~100× relative to
-the off-resonance value, so the thermal average is dominated by this
-resonance tail.
-
-**Conclusion:** The T192 thermal averaging is physically correct. The
-g_h_SM reduction from 0.001 to 0.00040 (2.5× smaller) is consistent
-with the resonance recovery factor being O(2-3×) relative to the
-single-velocity estimate at v_F = 0.3c (which was off-resonance by
-6,668×, requiring a much larger g_h_SM to compensate incorrectly).
-
-**Testable predictions (T185):**
-1. Heavy scalar resonance at m_Φh ≈ 22 GeV (narrow, Γ/m ~ 10⁻³)
-   decaying to SM channels. **Probe at B-factories (Belle II), beam-dump
-   experiments, low-energy e⁺e⁻ colliders** — NOT LHC.
-2. Direct detection: σ_SI ~ 10⁻⁴⁸ to 10⁻⁵⁰ cm² (below neutrino floor
-   for 10 GeV DM). Predicted null in nuclear-recoil experiments.
-3. Indirect detection: ⟨σv⟩₀ ~ 10⁻²⁸ cm³/s in current halos. Below
-   CTA sensitivity.
-
-**Honest caveats:**
-1. Our δ = 7.9% is much broader than Drobczyk's 8.3×10⁻⁴. The resonance
-   condition requires composite UV completion (Drobczyk SU(3)_H with
-   N_f=10) or explicit technical-naturalness argument.
-2. Sommerfeld enhancement from φ (not included here) would underestimate
-   σ_v; Drobczyk shows factor ~143 at their benchmark.
-3. Light φ coupling to SM requires leptophilic/quark-silent portal to
-   satisfy direct-detection bounds (Drobczyk Appendix C.4).
-4. Higher-order corrections (bound states, co-annihilation, finite-width
-   effects) neglected.
-
-**Paper impact:** §10.10 supersedes the "5th no-go theorem" from T184.
-The phenomenology now has a **constructive UV completion** that satisfies
-ALL constraints:
-- Multi-channel SIDM (7 of 8 channels)
-- Thermal relic density (Ωh² = 0.116)
-- No-go theorems for one-mediator UV completions (still valid)
-- Testable predictions at B-factories / beam-dumps
-
-The two-mediator solution transforms the paper from "consistent with
-multi-channel data but UV-construction-limited" to "has a constructive,
-predictive UV completion."
-
-Full docs:
-- `v0.3-prelim/docs/T184_UV_COMPLETION.md` (T184 one-mediator negative)
-- `v0.3-prelim/docs/T185_TWO_MEDIATOR.md` (T185 two-mediator resolution)
-
-### 10.6 Summary of §10 UV no-go theorems
-
-Five no-go theorems demonstrate that the Phase 44 phenomenology is
-**inconsistent with standard WIMP/SIDM UV completions**:
-
-| # | Mechanism | Failure mode | Status |
-|---|---|---|---|
-| 1 | Magnetic dipole DM | LZ (1.22×10¹³× above) + Cloud-9 floor (270× below) | **ROBUST** |
-| 2 | Hidden U(1) + 10 MeV pseudo-Dirac | KE_CM(28) = 0.046 MeV vs Δm = 10 MeV (220×) | **ROBUST** |
-| 3 | GeV inelastic DM | m_χ ≥ 46 TeV + razor window + unitarity | **ROBUST** |
-| 4 | Chu P1 p-wave resonance | σ/m ≈ 0.1 everywhere (Cloud-9 500×) | **ROBUST** |
-| **5** | **Thermal WIMP UV completion (T184)** | **σ_HH 8-13 orders too small at thermal relic coupling** | **ROBUST** |
-
-All five verdicts are **independent** of the specific cross-section values
-(they depend on the failure mechanism, not the specific parameter tuning).
-The phenomenology is consistent with multi-channel data but requires
-**non-minimal UV construction** (non-thermal, co-annihilation, or
-forbidden-channel). This is a publishable finding: the SIDM phenomenology
-is observationally consistent but theoretically constraining.
-
-
----
+- Chu P1 p-wave resonance (T131) σ/m(100) = 0.15 cm²/g actually matches
+  SPARC (~0.19 cm²/g) within 25%. The failure is at **Cloud-9** (P1
+  gives 0.1 vs required 100), not at SPARC. Chu P1 was designed to
+  solve the older Kaplinghat/Tulin/Yu dwarf-vs-cluster tension, with
+  resonance centered at v_R = 108 km/s — not our Cloud-9-vs-dSph
+  tension which requires resonance at v_R ~ 20 km/s.
 
 ### 10.5a Testable predictions of the two-mediator UV completion
 
@@ -951,7 +926,7 @@ neutrino floor.
 
 **Prediction #3 — Indirect-detection <σv>_0 (T188):**
 
-For our m_Φh = 21.0 GeV (close to 2 m_χ = 20.6 GeV):
+For our m_Φh = 20.69 GeV (close to 2 m_χ = 20.6 GeV):
 - At freeze-out: BW on resonance, <σv>_F ~ 2.2×10⁻²⁶ cm³/s
 - At halo v = 30 km/s: BW FAR off-resonance (s = 4 m_χ² ≪ m_Φh²)
 - Off-resonance suppression: ~10⁻³ relative to peak
@@ -963,7 +938,7 @@ gamma-ray experiments.
 
 **Prediction #4 — B-factory / beam-dump signatures (T189):**
 
-For m_Φh = 21.0 GeV with g_h_SM = 0.002:
+For m_Φh = 20.69 GeV with g_h_SM = 0.00040 (T192 thermal-avg config):
 - Total width Γ_Φh ~ 0.05 MeV (very narrow, BR(Φh → DM DM) ~ 99.9%)
 - Decay length ~ 0 (prompt decay at all experiments)
 - Existing CHARM/LSND/E137 constraints: g_h_SM < 0.005 ✓ (we satisfy)
@@ -992,9 +967,9 @@ km/s) and galaxy clusters (v = 1000 km/s). This is **directly testable**
 via combined dwarf + cluster observations (Ohana+ 2026, future surveys).
 
 **Honest caveats:**
-1. CHARM/LSND limits on g_h_SM at m_Φh = 21 GeV are model-dependent.
+1. CHARM/LSND limits on g_h_SM at m_Φh = 20.69 GeV are model-dependent.
    Our specific portal may not be exactly excluded by existing data.
-2. B-factory ISR sensitivity at 21 GeV is poorly characterized.
+2. B-factory ISR sensitivity at 20.69 GeV is poorly characterized.
 3. Indirect-detection <σv>_0 estimate uses analytic BW scaling; full
    non-perturbative Yukawa solver (T179 framework) needed for precision.
 4. The dominant BR(Φh → DM DM) makes the beam-dump signature challenging
@@ -1003,8 +978,8 @@ via combined dwarf + cluster observations (Ohana+ 2026, future surveys).
 **What this means for the paper:**
 
 The two-mediator UV completion is now **fully constrained by experiment**:
-- ✓ Thermal relic (Ωh² = 0.129)
-- ✓ CHARM beam-dump (g_h_SM = 0.002 < 0.005)
+- ✓ Thermal relic (Ωh² = 0.119, T192 thermal-avg)
+- ✓ CHARM beam-dump (g_h_SM = 0.00040 < 0.005, T192 thermal-avg)
 - ✓ Velocity-dependent SIDM (T166, T168)
 - ✓ Multi-channel constraints (Phase 44 + T163 KK tower)
 
@@ -1016,9 +991,32 @@ And predicts:
 
 This is a **predictive framework**, not a "no-go" list. The model
 can be falsified by:
-1. Direct-detection signal > 10⁻⁴⁸ cm² (excluding our g_h_SM = 0.002)
-2. Indirect-detection signal > 10⁻²⁸ cm³/s (excluding our m_Φh = 21 GeV)
+1. Direct-detection signal > 10⁻⁴⁸ cm² (excluding our g_h_SM = 0.00040; σ_SI = 2×10⁻⁴⁹ cm²)
+2. Indirect-detection signal > 10⁻²⁸ cm³/s (excluding our m_Φh = 20.69 GeV)
 3. Observation of Φh resonance at LHC (would exclude our low-mass scale)
+
+---
+
+### 10.6 Summary of §10 UV no-go theorems
+
+Five no-go theorems demonstrate that the Phase 44 phenomenology is
+**inconsistent with standard WIMP/SIDM UV completions**:
+
+| # | Mechanism | Failure mode | Status |
+|---|---|---|---|
+| 1 | Magnetic dipole DM | LZ (1.22×10¹³× above) + Cloud-9 floor (270× below) | **ROBUST** |
+| 2 | Hidden U(1) + 10 MeV pseudo-Dirac | KE_CM(28) = 0.046 MeV vs Δm = 10 MeV (220×) | **ROBUST** |
+| 3 | GeV inelastic DM | m_χ ≥ 46 TeV + razor window + unitarity | **ROBUST** |
+| 4 | Chu P1 p-wave resonance | σ/m ≈ 0.1 everywhere (Cloud-9 500×) | **ROBUST** |
+| **5** | **Thermal WIMP UV completion (T184)** | **σ_HH 8-13 orders too small at thermal relic coupling** | **ROBUST** |
+
+All five verdicts are **independent** of the specific cross-section values
+(they depend on the failure mechanism, not the specific parameter tuning).
+The phenomenology is consistent with multi-channel data but requires
+**non-minimal UV construction** (non-thermal, co-annihilation, or
+forbidden-channel). This is a publishable finding: the SIDM phenomenology
+is observationally consistent but theoretically constraining.
+
 
 ---
 
