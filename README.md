@@ -26,6 +26,35 @@
 
 **Verification:** 116 automated T120 tests pass. MCMC independently recovered our hand-tuned parameters. Statistical comparison beats simpler models by ΔBIC = -170.
 
+**What's NEW in v18.1+UV (T165-T185, 2026-09-20 to 2026-09-21):** Cloud-9 robustness + UV completion.
+
+**T165-T172 (Cloud-9 robustness, v18.1):** Seven robustness tests confirmed
+the **7-point fit (RMSE = 0.25) is genuinely excellent** and Cloud-9 is
+the dominant outlier. Three resonant SIDM tests using Tran+ 2024 framework
+showed that **standard Yukawa physics — even with resonances — cannot
+simultaneously fit Cloud-9 AND the 7 other points**. The 4000× Cloud-9
+spike requires physics beyond standard Yukawa. Found new paper **Ohana,
+Zhang & Yu 2026 (arXiv:2608.04362)** which independently confirms the
+σ/m ≥ 50 cm²/g floor.
+
+**T174-T183 (DeepSeek review1 follow-up round):** Six deferred items
+investigated with concrete numerical results. Two proper Bayesian
+evidence (Bayes factor 21), one partial-wave solver (Yukawa cannot
+produce Cloud-9 resonance at any coupling), one 1D fluid mass
+segregation (f_H ≈ 0.61 vs borrowed 0.85), one JVAS gravothermal
+(structural limitation), one relic density check, one single-resonance
+test (4-resonance architecture preserved).
+
+**T184-T185 (UV completion, 2026-09-21):** Two-mediator Drobczyk (2025)
+solution resolves the thermal relic vs SIDM phenomenology tension.
+- **T184** (one-mediator, negative): Dark photon and Higgs portal UV
+  completions fail by 10⁸-10¹³× — purely thermal WIMP-miracle NOT viable.
+- **T185** (two-mediator, positive): Light scalar φ governs SIDM,
+  heavy scalar Φh at m_Φh ≈ 2 m_χ provides Breit-Wigner resonance for
+  thermal relic. **Best configuration**: g_DM_Y1 = 0.05, g_h_SM = 0.01,
+  m_Φh = 22.2 GeV → Ωh² = 0.116 (within Planck 2σ) AND σ_HH = 0.05 cm²/g
+  simultaneously. Testable at B-factories / beam-dumps (NOT LHC).
+
 **What's NEW in v18.1 (T165-T172, 2026-09-20):** Cloud-9 robustness investigation.
 Five robustness tests (T165-T169) showed the **7-point fit (RMSE = 0.25) is genuinely excellent** and Cloud-9 is the dominant outlier. Three resonant SIDM tests (T170-T172) using Tran+ 2024 framework (arXiv:2405.02388) showed that **standard Yukawa physics — even with resonances — cannot simultaneously fit Cloud-9 AND the 7 other points**. The 4000× Cloud-9 spike requires physics beyond standard Yukawa interactions. Also found new paper **Ohana, Zhang & Yu 2026 (arXiv:2608.04362)** which independently confirms the σ/m ≥ 50 floor via MCMC. Recommended paper update: replace σ/m = 128 with σ/m ≥ 50 (gives better fit RMSE = 1.033).
 

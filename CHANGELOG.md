@@ -4,6 +4,62 @@
 > tags below retain their original `v0.X-prelim-DYY` / `Mediator_Detection_vN`
 > identifiers — they describe the same work, just under the new name.
 
+## [T184-T185] — 2026-09-21
+
+**UV completion for SIDM + thermal relic density. VERDICT: Drobczyk 2025
+two-mediator solution resolves the tension; both constraints satisfied.**
+
+User asked (2026-09-21): do the relic density uv. Then user said
+"this topic is very interesting, worthy for further research. try search
+for useful info and deliberate further".
+
+**T184 — One-mediator UV completion (negative result):**
+
+Tested dark photon (m_A' = 300 MeV) and Higgs portal UV completions:
+| UV completion | For Ωh² = 0.12 | σ_HH at that coupling | Gap |
+|---|---|---|---|
+| Dark photon | g_D = 0.135 | 6.5×10⁻¹⁰ cm²/g | 10⁸× too small |
+| Higgs portal | λ_hs = 10⁻⁵ | 10⁻¹⁵ cm²/g | 10¹³× too small |
+
+Purely thermal WIMP-miracle UV completion with ONE mediator is NOT
+viable at our SIDM parameters (m_χ = 10.3 GeV, m_φ = 300 MeV).
+
+**T185 — Two-mediator Drobczyk (2025) resolution (positive result):**
+
+Found arXiv:2506.22997v3 (Drobczyk, CQG 42 (2025) 225006) which
+directly resolves the tension:
+- Light scalar φ governs SIDM phenomenology
+- Heavy scalar Φh at m_Φh ≈ 2 m_χ provides s-channel Breit-Wigner
+  resonance enhancement for thermal relic
+- The two are INDEPENDENT
+
+Applied to our parameters (m_χ = 10.3 GeV):
+| Parameter | Value |
+|---|---|
+| m_Φh | 22.223 GeV (near resonance pole) |
+| g_DM_Y1 | 0.05 |
+| g_h_SM | 0.01 |
+| δ (detuning) | 7.9% |
+| <σv>_ann | 3.10×10⁻²⁶ cm³/s |
+| Ωh² | 0.116 (within Planck 2σ) |
+| σ_HH | 0.05 cm²/g (independent) |
+
+**Both constraints satisfied simultaneously.** Testable predictions:
+1. Heavy scalar at ~20 GeV (B-factory / beam-dump window, not LHC)
+2. Direct-detection σ_SI ~ 10⁻⁴⁸ to 10⁻⁵⁰ cm² (predicted null)
+3. Indirect-detection ⟨σv⟩₀ ~ 10⁻²⁸ cm³/s (suppressed by resonance)
+
+**Paper impact**: §10.10 now has a constructive UV completion that
+supersedes the 5th no-go theorem. Reference [15f] added for
+Drobczyk (2025). Both branches at 862cbe8.
+
+Files added:
+- code/T184_dark_higgs_uv.py (one-mediator negative)
+- code/T185_two_mediator.py (two-mediator positive)
+- docs/T184_UV_COMPLETION.md
+- docs/T185_TWO_MEDIATOR.md
+- docs/UV_COMPLETION_SUMMARY.md (consolidated)
+
 ## [T165-T172] — 2026-09-20
 
 **Cloud-9 robustness + resonant SIDM investigation. VERDICT: cannot bring
