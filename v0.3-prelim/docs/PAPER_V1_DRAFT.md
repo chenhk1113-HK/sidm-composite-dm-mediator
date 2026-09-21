@@ -647,6 +647,22 @@ multi-resonance over constant σ/m**. This is a defensible Bayesian claim.
 The scoring-rule ΔBIC = -170 corresponds to log B ≈ 170 (Bayes factor 10⁷⁴),
 which was an overstatement.
 
+**Unified model-comparison statement (per DeepSeek review3, 2026-09-21):**
+Three BIC/Bayes comparisons have been performed in this paper:
+
+| Method | Location | Result | Interpretation |
+|---|---|---|---|
+| Scoring-rule BIC (ΔBIC = -24.10) | §9.3.1 | favors T120 v1.13 | methodological, not Bayesian evidence |
+| Proper Bayesian evidence (log B = 3.06) | §10.8 (T177) | **favors multi-resonance** | proper likelihood integration |
+| BIC on constant σ/m (ΔBIC = -19.80) | §10.9 | favors constant σ/m | n-dependent BIC, sensitive to dataset |
+
+**Synthesis:** The BIC-based tests give **mixed results** depending on
+dataset and whether scoring-rule or proper likelihood is used. The
+proper Bayesian evidence (T177) gives **log B = 3.06 — strong but not
+decisive**. We adopt log B = 3.06 as the paper's headline comparison
+statistic and note the BIC-based tests as alternative comparisons with
+sensitivity to methodology.
+
 **Honest qualifier (per DeepSeek review2, 2026-09-21):** The T177 likelihood
 uses **soft Gaussian penalties** with widths informed by published
 observational uncertainties (Horigome+ for dSph ceiling, BLN24/Ohana+
@@ -857,25 +873,43 @@ The Breit-Wigner enhancement factor near the pole dramatically boosts
 
 | Parameter | T185 (original, buggy) | T190 v1 (CHARM, buggy) | T190 v2 (post bug-fix) |
 |---|---|---|---|
-| g_DM_Y1 (DM-Φh coupling) | 0.05 | 0.05 | 0.05 |
-| g_h_SM (Φh-SM Higgs portal) | 0.01 | 0.002 | **0.001** (CHARM limit: < 0.005) |
-| m_Φh | 22.223 GeV | 21.00 GeV | **20.69 GeV** |
-| δ = (m_Φh - 2 m_χ)/(2 m_χ) | 7.9% | 1.93% | **0.43%** |
-| Γ_Φh/m_Φh | 2.4×10⁻⁵ | 9.96×10⁻⁵ | 1.7×10⁻⁴ |
-| **<σv>_ann** | 3.10×10⁻²⁶ cm³/s | 2.79×10⁻²⁶ cm³/s | **2.82×10⁻²⁶ cm³/s** |
-| **Ωh²** | 0.116 | 0.129 | **0.128** (within Planck 2σ) |
-| σ_HH | 0.05 cm²/g (independent) | 0.05 cm²/g (independent) | 0.05 cm²/g (independent) |
+| g_DM_Y1 (DM-Φh coupling) | 0.05 | 0.05 | 0.05 | 0.05 |
+| g_h_SM (Φh-SM Higgs portal) | 0.01 | 0.002 | 0.001 | **0.00040** (CHARM limit: < 0.005) |
+| m_Φh | 22.223 GeV | 21.00 GeV | 20.69 GeV | **20.69 GeV** |
+| δ = (m_Φh - 2 m_χ)/(2 m_χ) | 7.9% | 1.93% | 0.43% | **0.43%** |
+| Γ_Φh/m_Φh | 2.4×10⁻⁵ | 9.96×10⁻⁵ | 1.7×10⁻⁴ | 1.7×10⁻⁴ |
+| v_res = √(8δ) | 0.79c | 0.39c | 0.19c | **0.19c** (in thermal window v_0=0.30c) |
+| **<σv>_ann** (calculation method) | 3.10×10⁻²⁶ (buggy) | 2.79×10⁻²⁶ (buggy) | 2.82×10⁻²⁶ (buggy) | **2.63×10⁻²⁶ (thermal-avg, T192)** |
+| **Ωh²** | 0.116 | 0.129 | 0.128 | **0.119** (within Planck 2σ) |
+| σ_HH | 0.05 cm²/g (independent) | 0.05 cm²/g (independent) | 0.05 cm²/g (independent) | 0.05 cm²/g (independent) |
 
-**Bug fix note (2026-09-21, per DeepSeek review2):** The original T185 had a hardcoded
-`s = s_threshold * (1 + 0.01)`, decoupling the BW propagator from actual m_Φh.
-This was fixed: `s = 4 m_χ² * (1 + v_F²/4)` with v_F ≈ 0.3c (freeze-out velocity).
-The CHARM-compliant config still exists but at more constrained parameters
-(g_h_SM 5× smaller, δ 5× tighter than Drobczyk's benchmark of δ = 8.3×10⁻⁴).
-Per reviewer recommendation, we **downgrade from "resolution" to "candidate
-resolution"**: the detuning δ = 0.43% is borderline-natural — requires either
-composite UV completion (Drobczyk SU(3)_H with N_f=10) or technical naturalness
-argument. See §10.11 for full caveats and §10.13 for the 5-no-go + 1-candidate
-status.
+**Three successive corrections (2026-09-21):**
+
+1. **T185 bug fix (DeepSeek review2):** Original T185 hardcoded
+   `s = s_threshold * (1 + 0.01)`, decoupling the BW propagator from
+   actual m_Φh. Fixed: `s = 4 m_χ² * (1 + v_F²/4)` with v_F ≈ 0.3c.
+   This gave "T190 v2" with δ = 0.43%, g_h_SM = 0.001, Ωh² = 0.128.
+
+2. **Thermal averaging fix (DeepSeek review3, T192):** At δ = 0.43%,
+   the BW resonance is at v_res = √(8δ) = 0.185c, NOT v_F = 0.3c.
+   Single-velocity BW evaluation at v_F = 0.3c is suppressed by
+   **6,668× off-resonance**. Proper Gondolo-Gelmini (1991) thermal
+   average over Maxwell-Boltzmann at T_F = m_χ/x_F = 0.47 GeV gives
+   <σv>_thermal = 2.63×10⁻²⁶ cm³/s. To match Planck Ωh² = 0.12 with
+   thermal averaging, g_h_SM must be **0.00040** (2.5× smaller than the
+   single-velocity T190 v2). Ωh² = 0.119 (within Planck 2σ).
+
+3. **Verdict restored:** With thermal averaging, the two-mediator UV
+   completion IS VIABLE. The candidate was being prematurely downgraded
+   because T190 v2 used a single-velocity BW evaluation at the wrong
+   velocity. Per DeepSeek review3 recommendation to "downgrade from
+   'resolution' to 'candidate requiring verification'", we keep the
+   "candidate resolution" framing but note that thermal averaging
+   has now been done (T192) and the candidate survives. The required
+   detuning δ = 0.43% is **5× broader than Drobczyk's benchmark of
+   δ = 0.083%** — borderline-natural, requires composite UV completion
+   (Drobczyk SU(3)_H with N_f=10) or technical naturalness argument.
+   See §10.11 for caveats and §10.13 for the 5-no-go + 1-candidate status.
 
 **Both constraints are simultaneously satisfied:**
 1. **SIDM phenomenology**: σ_HH = 0.05 cm²/g via light φ (independent)
@@ -1076,7 +1110,18 @@ The headline results are:
 - **31/31 additional dSph/UFD points** satisfied that the Phase 44 single-channel baseline fails (qualitative preference)
 - **Proper Bayesian evidence (T177, 2026-09-21)**: log Bayes factor = 3.06 (Bayes factor = 21.3) favoring multi-resonance over constant σ/m on the 8-channel dataset. Strong evidence per Jeffreys scale; replaces the prior "+8.10 log-units" scoring-rule headline
 - **Four UV completion no-go theorems** (§10): magnetic dipole DM [44, T120.10], Hidden U(1) + 10 MeV pseudo-Dirac [45, T120.16], GeV-scale inelastic DM [T130], plus published best-fit p-wave resonance [28, T131] all fail for one-mediator UV. **The Cloud-9 4000× spike is NOT solved by any one-mediator UV completion; it requires physics beyond standard Yukawa.**
-- **Two-mediator UV candidate (Drobczyk 2025 [15f], T185/T190, §10.10)**: A light scalar φ + heavy scalar Φh at m_Φh ≈ 2 m_χ provides s-channel Breit-Wigner enhancement for thermal relic, decoupled from σ_HH. **CHARM-compliant config exists** at g_h_SM = 0.001, δ = 0.43%, m_Φh = 20.69 GeV, Ωh² = 0.128 (within Planck 2σ). This addresses **thermal relic density**, NOT the Cloud-9 spike specifically. **Downgraded from "resolution" to "candidate resolution"** per DeepSeek review2 (2026-09-21) — the detuning δ = 0.43% is borderline-natural and requires either composite UV completion (Drobczyk SU(3)_H with N_f=10) or technical naturalness argument.
+- **Two-mediator UV candidate (Drobczyk 2025 [15f], T185/T190/T192, §10.10)**: A light scalar φ + heavy scalar Φh at m_Φh ≈ 2 m_χ provides s-channel Breit-Wigner enhancement for thermal relic, decoupled from σ_HH. **CHARM-compliant config (with proper thermal averaging, T192)**: g_h_SM = **0.00040**, δ = 0.43%, m_Φh = 20.69 GeV, <σv>_thermal = 2.63×10⁻²⁶ cm³/s, Ωh² = 0.119 (within Planck 2σ). This addresses **thermal relic density**, NOT the Cloud-9 spike specifically. The detuning δ = 0.43% is **5× broader than Drobczyk's benchmark of δ = 0.083%** — borderline-natural, requires either composite UV completion (Drobczyk SU(3)_H with N_f=10) or technical naturalness argument.
+
+**Summary of UV completion status (per DeepSeek review3, 2026-09-21):**
+
+| Status | Mechanism | Verdict |
+|---|---|---|
+| Hidden U(1) + 10 MeV pseudo-Dirac (§9.8) | Original attempt | **Falsified** |
+| Magnetic dipole DM (T120.10) | One-mediator UV | **Ruled out** (LZ 1.22×10¹³×) |
+| GeV-scale inelastic DM (T130) | One-mediator UV | **Ruled out** (3-chain failure) |
+| Chu+ 2019 P1 p-wave (T131) | Published best-fit | **Ruled out** (flat velocity) |
+| One-mediator UV (T184 dark Higgs) | Systematic | **Ruled out** (8-13 orders of magnitude gap) |
+| Two-mediator Drobczyk (T185/T190/T192) | Light + heavy scalar | **Candidate resolution** (thermal-avg OK, detuning borderline-natural) |
 - **EFT target map** (§10.5): what UV physics must satisfy to reproduce our phenomenology
 
 The framework is a **defensible phenomenology framework** for unifying
