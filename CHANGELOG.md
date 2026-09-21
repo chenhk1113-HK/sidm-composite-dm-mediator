@@ -4,6 +4,28 @@
 > tags below retain their original `v0.X-prelim-DYY` / `Mediator_Detection_vN`
 > identifiers — they describe the same work, just under the new name.
 
+
+## [T192+Editorial] — 2026-09-21 — v1.14.2 / v18.2
+
+### T192 — Proper thermal-averaged BW (DeepSeek Review 3 Priority #1)
+- ROOT CAUSE: At delta = 0.43%, BW resonance is at v_res = sqrt(8*delta) = 0.185c,
+  NOT v_F = 0.3c. Single-velocity BW evaluation at v_F = 0.3c was suppressed
+  by 6,668x off-resonance.
+- FIX: Proper Gondolo-Gelmini (1991) thermal integration over Maxwell-Boltzmann.
+- RESULT: Best config delta = 0.43%, g_h_SM = 0.00040 (5x smaller than T190 v2),
+  m_Phi = 20.69 GeV, <sigma v>_thermal = 2.63e-26 cm^3/s, Omega_h^2 = 0.119.
+- VERDICT: Two-mediator UV completion IS VIABLE with proper thermal averaging.
+
+### Editorial pass (Priorities #3, #4, #5, #6, #7)
+- Priority #3: Three BIC/Bayes results reconciled in unified statement.
+- Priority #4: Cut internal-process content to supplementary.
+- Priority #5: Abstract shortened from 757 -> 287 words.
+- Priority #6: Section 10 restructured into 5-section roadmap.
+- Priority #7: Section 11 UV completion status consolidated.
+
+### Self-check
+- ALL PASSED (31/31)
+
 ## [Yu 2026 PRL reframing + AIDA-TNG + micrOMEGAs future-work] — 2026-09-21
 
 **User uploaded "Fornax 6.docx" asking for critical consideration. After
