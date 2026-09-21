@@ -88,7 +88,7 @@ and σ₀(v) = σ₀ · (1 km/s / v)^α is the velocity-dependent background (Yu
 
 **Per-feature values:**
 
-- v₁ = 28 km/s: σ_peak ≈ 100 cm²/g (Cloud-9 requirement from UDG kinematics; Phase 32). **This is the only true high-amplitude Breit-Wigner resonance.**
+- v₁ = 28 km/s: σ_peak ≈ 100 cm²/g (Cloud-9 requirement from UDG kinematics; Phase 32). Cloud-9 is the prototypical ultra-diffuse galaxy (UDG) of the kind with extremely extended globular cluster systems [25]. **This is the only true high-amplitude Breit-Wigner resonance.**
 - v₂ = 100 km/s: σ_peak ≈ 0.07 cm²/g (SPARC transition velocity; rotation-curve inner-core consistency, Phase 33d). **Bookkeeping interpolation node** — structurally a low-amplitude suppression feature, not an enhancement. The rotation-curve data are consistent with σ/m(100) ≈ 0.07 because that is the value the architecture predicts at this transition velocity.
 - v₃ = 178 km/s (clockwork) or 300 km/s (T90.70): σ_peak ≈ 0.1 cm²/g. **Bookkeeping interpolation node.**
 - v₄ = 430 km/s (clockwork) or 700 km/s (T90.70): σ_peak ≈ 0.01 cm²/g (cluster-scale suppression; essentially CDM-like at v ≈ 1000 km/s). **Bookkeeping interpolation node.**
@@ -189,7 +189,7 @@ With the correct velocity convention (v_eff = 0.64 × V̂_max) AND the correct l
 | v_eff = 5 km/s (UFDs) | 18.4 cm²/g | **0.09 cm²/g** | 0.8 cm²/g | **23×** | ✓ PASS (200× under) |
 | v_eff = 10 km/s (UFDs/UFD-like) | 6.5 cm²/g | **0.05 cm²/g** | 0.8 cm²/g | **8×** | ✓ PASS |
 | v_eff = 15 km/s (classical dSphs) | 5.0 cm²/g | **0.03 cm²/g** | 0.8 cm²/g | **6×** | ✓ PASS |
-| v_eff = 20 km/s (high-V̂_max dSphs) | 6.8 cm²/g | 0.8 cm²/g | **8×** |
+| v_eff = 20 km/s (high-V̂_max dSphs) | 6.8 cm²/g | **0.04 cm²/g** | 0.8 cm²/g | **8×** | ✓ PASS |
 
 If we instead use the velocity-independent limit (0.04 cm²/g), the violations are higher (115–460×), but this is not the appropriate limit for a strongly velocity-dependent model like ours.
 
@@ -309,7 +309,7 @@ The σ_peaks are FIXED to prevent the optimizer from absorbing velocity error in
 | Configuration | N params | log L | Improvement |
 |---|---|---|---|
 | Phase 44 T90.70 baseline | 15 | −19.67 | — |
-| Phase 44 free v_targets | 15 | −11.58 | **+8.10 log-units** |
+| Phase 44 free v_targets | 15 | −11.58 | **+8.10 log-units** (scoring-rule units, see §9.7) |
 | **Phase 53 v2 clockwork UV** | **5** | **−11.74** | **+7.93 log-units** |
 - | vs Phase 44 free fit: | | **Δ = −0.16 log-units** |
 - | vs Phase 44 baseline: | | **+7.93 log-units** |
@@ -436,7 +436,7 @@ Combining the three mechanisms with **v1.13 fix Option A** (flatten Yukawa backg
 | SPARC (v=100, intermediate, f_H≈0.65) | ∈[0.05, 0.5] cm²/g | **0.19 cm²/g** | ✓ PASS |
 | Cluster (v=500, f_H≈0.10) | <1.0 cm²/g | **0.0002 cm²/g** | ✓ PASS |
 
-**All 8 observational constraints simultaneously satisfied** with v1.13. The v1.12 UFD v<7 km/s failure (1.87× violation at v=5) is fixed by Option A. Without Option A, the model passes at v ≥ 7 km/s only; with Option A, the model passes at v ≥ 3 km/s.
+**7 of 8 observational constraints simultaneously satisfied** with v1.13 (Cloud-9's σ/m = 128 cm²/g satisfies the ≥100 floor; the specific 4000× spike above the floor is not derived, see §10.7). The v1.12 UFD v<7 km/s failure (1.87× violation at v=5) is fixed by Option A. Without Option A, the model passes at v ≥ 7 km/s only; with Option A, the model passes at v ≥ 3 km/s.
 
 The parameter scan over w₁ shows the transition from "all pass" to "dSph fails" between w₁ = 5 and w₁ = 8 km/s; for w₁ ≤ 5 km/s the model is viable.
 
@@ -449,7 +449,7 @@ When the joint fit includes the 31 additional data points from Horigome+ 2025 (8
 | Phase 44 (SPARC + JVAS + Cloud-9) | 129 | 11 | +8.10 | 37.26 |
 | **T120 v1.13 (+dSph +UFD data)** | **160** | **18** | **+39.10** | **13.15** |
 
-**ΔBIC = -24.10 (T120 v1.13 WINS by Occam's razor).** The complexity penalty (+34 from 7 extra params × log(160) = +43.7) is more than offset by the 31 additional logL contributions from correctly predicting the dSph + UFD upper limits. This contradicts the v1.12 estimate (which assumed Phase 44's logL improvement unchanged); the v1.13 calculation properly accounts for the new data fit.
+**ΔBIC = -24.10 (T120 v1.13 WINS by Occam's razor, scoring-rule logL units, see §9.7 caveat).** The complexity penalty (+34 from 7 extra params × log(160) = +43.7) is more than offset by the 31 additional logL contributions from correctly predicting the dSph + UFD upper limits. This contradicts the v1.12 estimate (which assumed Phase 44's logL improvement unchanged); the v1.13 calculation properly accounts for the new data fit.
 
 ### 9.4 Why It Works: Mechanism Decomposition
 
@@ -906,7 +906,7 @@ Full phase-by-phase documentation is available in `v0.3-prelim/docs/` and the pr
 | 32 | Internal multi-scale SIDM test | ✓ Passed |
 | 33d | SPARC Vflat test | ✓ 115/127 (90.6%) |
 | 41 | Head-to-head profile comparison | Burkert wins rotation-curve evidence |
-| 44 | Joint multi-channel fit | +8.10 log-units (15-param free fit) |
+| 44 | Joint multi-channel fit | +8.10 log-units (15-param free fit, scoring-rule units, see §9.7) |
 | 47 | LOO stress test | SPARC-dominated |
 | 50 | JVAS domain reclassification | Out of reliable model domain |
 | 51 | Geometric-ladder UV | MINIMAL (163× fine-tuning reduction) |
