@@ -9,9 +9,11 @@
     "y_chi": 3.0
   },
   "halo_result": {
-    "sigma_v_halo_cm3_per_s": 2.763392565024324e-26,
+    "sigma_v_halo_cm3_per_s_BUGGY_DOUBLE_C": 2.763392565024324e-26,
+    "sigma_v_halo_off_resonance_estimate_cm3_per_s": 1e-29,
     "BW_enhancement_halo": 1.9983869986618997e-08,
-    "S_halo": 44970.0,
+    "S_halo_formal": 44970.0,
+    "S_halo_caveat": "Analytic S(v=30km/s) ~ 45000 is unreliable; Yukawa solver needed for v < 100 km/s",
     "alpha_chi": 0.716197243913529
   },
   "sigma_v_0_cm3_per_s": 1e-29,

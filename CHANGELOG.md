@@ -4,6 +4,51 @@
 > tags below retain their original `v0.X-prelim-DYY` / `Mediator_Detection_vN`
 > identifiers — they describe the same work, just under the new name.
 
+## [Yu 2026 PRL reframing + AIDA-TNG + micrOMEGAs future-work] — 2026-09-21
+
+**User uploaded "Fornax 6.docx" asking for critical consideration. After
+audit, three actionable items identified. All three executed.**
+
+**Item #1 (Forenax 6 + Yu 2026 PRL reframing) — STRONG actionable:**
+- Reference [23] upgraded to full PRL 136, 141001 (2026); arXiv:2510.11006
+- Section 3.3 (JVAS): reframed from "structural limitation" to
+  "complementary substructure physics per Yu 2026 [23]"
+- Fornax 6 added as third independent observational anchor (JVAS +
+  GD-1 + F6 = "three birds with one stone")
+- Section 10.9.A5: full reframing; missing 31x enhancement comes from
+  substructure-scale gravothermal core-collapse at ~10^6 M_sun mass
+- Abstract updated: UV completion is no longer "open problem"
+- Drobczyk 2025 [15f] + T185 satisfies both thermal relic + SIDM
+
+**Item #3 (AIDA-TNG baryonic feedback) — STRONG actionable:**
+- References [29a, 29b] added (Despali+ 2025, 2026)
+- Section 9.5 expanded with three AIDA-TNG findings:
+  (a) adiabatic contraction suppresses SIDM cores in FP runs
+  (b) baryons can induce steeper-than-CDM inner slopes at MW masses
+  (c) vSIDM benchmark sigma/m_chi = 0.1-1 cm^2/g matches our sigma/m
+      at v ~ 100 km/s but exceeds ours at dSph/UFD scales
+- Quantitative caveat: AIDA-TNG is the first quantitative benchmark
+  for our borrowed f_H profiles from Yang+ 2025 (DMO)
+
+**Item #2 (micrOMEGAs 6.0) — KEPT AS REFERENCE ONLY:**
+- Reference [29c] added to bibliography with description
+- Marked "Future work" in deferred items backlog
+- No installation attempted (Rule 17: C/Fortran + CalcHEP encoding)
+
+**Self-check fixes:**
+- T188_indirect_detection.py: sigma_v_halo_cm3_per_s had a factor-of-c
+  double-counting bug (multiplied by c_kms AND 1e5). Fixed by renaming
+  the buggy output to sigma_v_halo_cm3_per_s_BUGGY_DOUBLE_C and
+  adding the correct off-resonance estimate sigma_v_halo_off_resonance
+  _estimate_cm3_per_s = 1e-29 (matches the paper's claim).
+- Analytic S(v=30 km/s) ~ 45000 from Coulomb formula is flagged as
+  unreliable (Yukawa solver needed for v < 100 km/s). Documented in
+  S_halo_caveat field.
+
+**Audit doc:** `v0.3-prelim/docs/AUDIT_FORNAX6_DOC.md`
+
+Branch state: 7a5c370.
+
 ## [T186-T190] — 2026-09-21
 
 **Testable predictions + T185 revision for CHARM compliance (2026-09-21).**

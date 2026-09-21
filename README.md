@@ -5,7 +5,7 @@
 **Multi-scale self-interacting dark matter framework: a self-consistent multi-component + gravothermal phenomenology that satisfies 8 observational constraints spanning 4 orders of magnitude in velocity. UV completion is documented as an open problem with three no-go theorems (v1.14).**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.4--prelim%2BT88E%2BT90--v18.1%2BT184%2BT185%2BT186--T190-blue)](VERSION)
+[![Version](https://img.shields.io/badge/version-0.4--prelim%2BT88E%2BT90--v18.1%2BT184--T190%2BYu26%2BAIDA-blue)](VERSION)
 [![WIP Paper](https://img.shields.io/badge/wip_paper-v1.14.1-blueviolet)](v0.3-prelim/docs/PAPER_V1_DRAFT.md)
 [![Tests](https://img.shields.io/badge/tests-branch--dependent-blue)](v0.3-prelim/tests/)
 [![arXiv:2506.22997](https://img.shields.io/badge/cross--validated-arXiv%3A2506.22997-b31b1b)](https://arxiv.org/abs/2506.22997)
@@ -59,10 +59,10 @@ solution resolves the thermal relic vs SIDM phenomenology tension.
 The two-mediator UV completion makes four sharp, falsifiable predictions.
 - **T186** (Sommerfeld): S(v_F) ~ 15 at freeze-out, S(v_0) ~ 1 at halo.
   Combined enhancement ~100.
-- **T187** (Direct detection): σ_SI ~ 5×10⁻⁴⁸ cm² — **predicted null**
-  below neutrino floor.
-- **T188** (Indirect detection): <σv>_0 ~ 10⁻²⁹ cm³/s — **predicted null**
-  below CTA sensitivity.
+- **T187** (Direct detection): σ_SI ~ 5×10⁻⁴⁸ cm² (CHARM-compliant
+  config g_h_SM = 0.002) — **predicted null** below neutrino floor.
+- **T188** (Indirect detection): <σv>_0 ~ 10⁻²⁹ cm³/s (off-resonance BW
+  suppression) — **predicted null** below CTA sensitivity.
 - **T189** (Beam-dump): Found g_h_SM = 0.01 in TENSION with CHARM limits
   (g_h_SM < 0.005 at m_Φh = 22 GeV).
 - **T190** (CHARM revision): Found CHARM-compliant config with
@@ -72,6 +72,22 @@ The two-mediator UV completion makes four sharp, falsifiable predictions.
 **Section 10.12 (new)** in PAPER_V1_DRAFT.md summarizes the testable
 predictions with quantitative thresholds for falsification. The model
 is now a **predictive framework** rather than a "no-go" list.
+
+**Yu 2026 PRL reframing + AIDA-TNG systematic (2026-09-21):**
+Following user-uploaded "Fornax 6.docx" audit:
+- **Yu (2026) PRL 136, 141001 [23]**: "Three Birds with One Stone" —
+  N-body simulations show core-collapsed SIDM halos of mass ~10⁶ M☉
+  simultaneously explain JVAS B1938+666 + GD-1 + Fornax 6. Reframes
+  §3.3 and §10.9.A5 from "structural limitation" to "complementary
+  substructure physics at 10⁶ M☉ scale."
+- **AIDA-TNG (Despali+ 2025, 2026) [29a, 29b]**: First cosmological
+  MHD simulations with SIDM. §9.5 expanded with baryonic-feedback
+  systematic: "adiabatic contraction suppresses SIDM cores in FP runs"
+  (density ratio FP/DMO ~30 in SIDM vs ~4 in CDM).
+- **micrOMEGAs 6.0 (Alguero+ 2025) [29c]**: Future-work reference only;
+  no installation attempted (per Rule 17).
+- **Audit doc**: `v0.3-prelim/docs/AUDIT_FORNAX6_DOC.md` documents the
+  full analysis of each proposal.
 
 **What's NEW in v18.1 (T165-T172, 2026-09-20):** Cloud-9 robustness investigation.
 Five robustness tests (T165-T169) showed the **7-point fit (RMSE = 0.25) is genuinely excellent** and Cloud-9 is the dominant outlier. Three resonant SIDM tests (T170-T172) using Tran+ 2024 framework (arXiv:2405.02388) showed that **standard Yukawa physics — even with resonances — cannot simultaneously fit Cloud-9 AND the 7 other points**. The 4000× Cloud-9 spike requires physics beyond standard Yukawa interactions. Also found new paper **Ohana, Zhang & Yu 2026 (arXiv:2608.04362)** which independently confirms the σ/m ≥ 50 floor via MCMC. Recommended paper update: replace σ/m = 128 with σ/m ≥ 50 (gives better fit RMSE = 1.033).

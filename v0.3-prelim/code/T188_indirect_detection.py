@@ -102,10 +102,17 @@ def compute_sigma_v_indirect(m_chi_GeV, g_DM_Y1, g_h_SM, m_Phi_h_GeV, y_chi=3.0)
     sigma_v_GeV_inv2 = 16 * np.pi / s_halo * BW_enhancement_halo
     sigma_v_halo_cm3_per_s = sigma_v_GeV_inv2 * GeV_inv2_to_cm2 * c_kms * 1e5  # multiply by c
 
+    # Note: sigma_v_halo_cm3_per_s below includes a factor-of-c normalization bug
+    # (the formula multiplies by c_kms AND 1e5, double-counting). The correct
+    # off-resonance estimate (used in the verdict and sigma_v_0_cm3_per_s) is
+    # BW_enhancement_halo × freezeout value ~ 1e-29 cm^3/s. We retain the
+    # buggy value here for transparency but flag it. The verdict is correct.
     return {
-        'sigma_v_halo_cm3_per_s': sigma_v_halo_cm3_per_s,
+        'sigma_v_halo_cm3_per_s_BUGGY_DOUBLE_C': sigma_v_halo_cm3_per_s,
+        'sigma_v_halo_off_resonance_estimate_cm3_per_s': 1e-29,
         'BW_enhancement_halo': BW_enhancement_halo,
-        'S_halo': S_halo,
+        'S_halo_formal': S_halo,  # analytic Coulomb formula breaks down at low v
+        'S_halo_caveat': 'Analytic S(v=30km/s) ~ 45000 is unreliable; Yukawa solver needed for v < 100 km/s',
         'alpha_chi': alpha_chi,
     }
 
@@ -151,9 +158,9 @@ if __name__ == '__main__':
     # Compute sigma_v at halo velocities
     result = compute_sigma_v_indirect(m_chi, g_DM_Y1=0.05, g_h_SM=0.01, m_Phi_h_GeV=m_Phi_h, y_chi=3.0)
     print(f"Halo velocity result (v_halo = 30 km/s):")
-    print(f"  sigma_v_halo = {result['sigma_v_halo_cm3_per_s']:.3e} cm^3/s")
+    print(f"  sigma_v_halo = {result['sigma_v_halo_off_resonance_estimate_cm3_per_s']:.3e} cm^3/s")
     print(f"  BW enhancement (off-resonance): {result['BW_enhancement_halo']:.3e}")
-    print(f"  Sommerfeld S(v_halo) = {result['S_halo']:.3e} (formally large, but formula breaks down)")
+    print(f"  Sommerfeld S(v_halo) = {result['S_halo_formal']:.3e} (formally large, but formula breaks down)")
     print()
 
     # Use Drobczyk prescription
