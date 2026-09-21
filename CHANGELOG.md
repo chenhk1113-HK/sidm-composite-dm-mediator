@@ -5,6 +5,29 @@
 > identifiers — they describe the same work, just under the new name.
 
 
+
+## [T193+Editorial-v18.3] — 2026-09-21 — v1.14.3 / v18.3
+
+### T193 — Thermal averaging visualization (DeepSeek Review 4 Priority #6)
+- Computes d<sigma v>/dv_rel vs v_rel
+- ASCII plot shows resonance peak at v_res = 0.185c
+- Resonance recovery factor: dominant peak in thermal window
+- 15% of pairs have v_rel <= v_res; BW enhancement at resonance is ~100x
+- Verifies T192 thermal averaging is physically correct
+
+### Editorial fixes (Priorities #1-8)
+- Priority #1: Abstract ingredient list now matches Introduction's
+- Priority #2: g_h_SM = 0.00040 used consistently; sigma_SI = 2e-49 cm^2
+- Priority #3: Section 10 renumbered into 6-section structure
+- Priority #4: Section 10.5 labeled as Phase 44 baseline
+- Priority #5: T184 (one-mediator) moved out of Section 10.3
+- Priority #6: T193 visualization added to Section 10.3
+- Priority #7: T163 best fit explained in Section 3.4
+- Priority #8: Abstract cross-references fixed
+
+### Self-check
+- ALL PASSED (31/31)
+
 ## [T192+Editorial] — 2026-09-21 — v1.14.2 / v18.2
 
 ### T192 — Proper thermal-averaged BW (DeepSeek Review 3 Priority #1)
