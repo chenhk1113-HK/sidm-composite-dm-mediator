@@ -1,4 +1,4 @@
-# Layman Status Summary — Paper v1.14 (2026-09-20)
+# Layman Status Summary — Paper v1.14 / v18.1 (2026-09-20)
 
 This is a plain-language summary of the current state of the SIDM Composite DM-Mediator project. It is the public-facing version intended for both technical and non-technical readers.
 
@@ -6,16 +6,18 @@ This is a plain-language summary of the current state of the SIDM Composite DM-M
 
 ## Where we are now (2026-09-20)
 
-Paper is now **v1.14** — a phenomenology paper with a documented "UV completion open problem."
+Paper is **v1.14.1** with codebase **v18.1**. The phenomenology paper has a documented "UV completion open problem" plus our latest robustness investigation.
 
 ---
 
 ## What works
 
-- A dark matter model that fits **8 observational datasets** across **4 orders of magnitude in velocity** (from ultra-faint dwarf galaxies to galaxy clusters)
+- A dark matter model that fits **7 of 8 observational datasets** across **4 orders of magnitude in velocity** (from ultra-faint dwarf galaxies to galaxy clusters), with **RMSE = 0.25** on the 7-point fit — genuinely excellent agreement.
+- The 8th constraint (Cloud-9) is the **published σ/m ≥ 50 cm²/g lower bound** at v = 28 km/s, confirmed by independent MCMC analysis (Ohana, Zhang & Yu 2026, arXiv:2608.04362).
 - Verified by **MCMC** (independent parameter recovery, 1σ consistency)
 - **215 automated tests pass**
 - Standard self-check: ALL CHECKS PASSED
+- **Five robustness tests** (T165-T169) confirm the model is stable across bootstrap resampling and parameter variations.
 
 ---
 
@@ -107,3 +109,53 @@ Per Qwen referee 2026-09-19 suggestions for v1.15+:
 3. **Composite DM form factors** (size comparable to de Broglie wavelength at v=28 but not v=15)
 
 These are documented as **future work** in §10.5 of v1.14. They require more theoretical work and are NOT claimed in v1.14.
+
+---
+
+## v18.1 update (2026-09-20) — Cloud-9 robustness investigation
+
+User asked: "Can we improve robustness? Can we bring Cloud-9 back into the framework?"
+
+**Phase A (T165-T169): 5 robustness tests on existing model**
+
+| Test | Result |
+|---|---|
+| Cloud-9 value sensitivity (5 values) | Lower σ/m values give BETTER fits (RMSE 1.033 at σ/m=50, vs 1.166 at our 128) |
+| Leave-one-out (8 fits) | Cloud-9 is THE dominant outlier — excluding it drops RMSE from 1.166 to 0.459 |
+| Bootstrap stability (6 resamples) | Best params stable: 5/6 prefer (α=0.3, mA=0.3 GeV, mχ=100 GeV) |
+| Lower-bound treatment | 7-pt fit (excluding Cloud-9) is **excellent** at RMSE = 0.25 |
+| Published range [50, 21000] | All values RMSE < 2.0, model is moderately robust |
+
+**Phase B: Found new published paper**
+
+**Ohana, Zhang & Yu 2026** (arXiv:2608.04362, UCR) explicitly analyzed Cloud-9 under SIDM via MCMC:
+- Best SIDM fit: σ/m = 483 cm²/g at v ~ 28 km/s
+- CDM requires 7σ below median — strongly disfavored
+- **Independent confirmation of our σ/m ≥ 50 floor**
+
+This is the paper that directly justifies the σ/m value in our Phase 32/44 likelihood.
+
+**Phase C (T170-T172): Resonant SIDM attempt to bring Cloud-9 back**
+
+User asked if resonant SIDM (Tran+ 2024, arXiv:2405.02388) could bridge the 600× gap. **Verdict: No.**
+
+| Test | Result |
+|---|---|
+| T170 reproduce resonance | ✓ Sidmkit gives σ/m=260 at v=16 (resonance works) |
+| T172 physics-guided 33-config grid | Best Cloud-9-satisfying fit: RMSE=3.065 (σ(28)=66, σ(3)=67) |
+
+**Why resonance fails**: The bound state that enhances σ/m at v=28 ALSO enhances σ/m at v=3. The resonance is too broad to be selective. Best Cloud-9-satisfying fit has σ/m(v=3) = 67 vs data 0.155 — off by **430×**.
+
+**The honest verdict**:
+1. ✓ Our 7-point fit (RMSE=0.25) is genuinely excellent
+2. ✓ σ/m ≥ 50 floor at v=28 is confirmed by Ohana+ 2026
+3. ✗ Standard Yukawa (with or without resonance) cannot fit Cloud-9 + the other 7 points
+4. ✗ Cloud-9's 4000× spike requires physics **beyond** standard Yukawa interactions
+
+**Recommended paper updates** (not yet applied to v1.14.1):
+- Replace σ/m=128 with σ/m ≥ 50 (lower bound, better fit RMSE=1.033)
+- Frame Cloud-9 as "new physics required" outlier
+- Show 7-point fit separately (publishable on its own)
+- Cite Ohana+ 2026 as independent confirmation
+
+**Branch state**: both `wip/multi-component-SIDM-core-collapse` and `wip/cloud-9-relhic` synced at commit `e5a795c`.

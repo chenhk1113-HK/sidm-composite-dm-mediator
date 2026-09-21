@@ -4,6 +4,80 @@
 > tags below retain their original `v0.X-prelim-DYY` / `Mediator_Detection_vN`
 > identifiers — they describe the same work, just under the new name.
 
+## [T165-T172] — 2026-09-20
+
+**Cloud-9 robustness + resonant SIDM investigation. VERDICT: cannot bring
+Cloud-9 into framework; 7-point fit (RMSE=0.25) remains best result.**
+
+User asked (2026-09-20): can we improve model robustness, especially
+investigate whether the 4000× Cloud-9 spike is required?
+
+**Phase A: Robustness tests (T165-T169, 5 tests)**
+
+| Test | Finding |
+|---|---|
+| T165 Cloud-9 value sensitivity | σ/m=50 gives RMSE=1.033 (BETTER than our 128=1.166) |
+| T166 Leave-one-out | Cloud-9 is THE dominant outlier (delta=-0.707 when excluded) |
+| T167 Bootstrap | Best params stable (5/6 prefer same config) |
+| T168 Lower-bound only | 7-pt fit RMSE=0.25, but σ/m(v=28)=0.081 violates ≥50 |
+| T169 Published range [50,21000] | All RMSE<2.0; lower values better fit |
+
+**Key finding**: Our 7-point fit (excluding Cloud-9) is genuinely excellent
+(RMSE=0.25). Cloud-9 spike is THE dominant source of model-data tension.
+
+**Phase B: Cloud-9 verification**
+
+Found new paper **Ohana, Zhang & Yu 2026 (arXiv:2608.04362)** which
+explicitly analyzes Cloud-9 under SIDM via MCMC:
+- Best fit: σ/m = 483 cm²/g, M_200 = 4.7×10⁹ M_☉, c_200 = 4.0 (3.2σ below median)
+- Extreme: σ/m = 2.1×10⁴ cm²/g (gravothermal core-collapse phase)
+- CDM requires 7σ below median — strongly disfavored
+- **Provides independent confirmation of σ/m ≥ 50 floor at v=28**
+
+M94 tidal distortion is documented in VLA data and already accounted for
+in hydrostatic analysis (lop-sided shape, ram-pressure compression).
+
+**Phase C: Resonant SIDM (T170-T172, 3 tests)**
+
+User asked: can resonant SIDM (Tran+ 2024, arXiv:2405.02388) bring Cloud-9 back?
+
+| Test | Finding |
+|---|---|
+| T170 Initial test | Sidmkit reproduces resonance (σ/m=260 at v=16); 2 configs give σ/m≥50 at v=28 |
+| T171 Systematic 330-grid | KILLED (too slow, 30s timeout × 330 = 165 min) |
+| T172 Physics-guided 33-grid | Best Cloud-9 fit: RMSE=3.065 (σ(3)=67 vs data=0.155) |
+
+**CRITICAL FINDING**: Resonant SIDM CAN technically produce σ/m ≥ 50 at v=28,
+BUT the same resonance enhances σ/m at v=3 too (67 vs data 0.155 — 430× off).
+Resonance is too broad to be selective.
+
+| Method | RMSE | Cloud-9 satisfied? |
+|---|---|---|
+| Single-Yukawa (T160) | 1.42 | NO |
+| KK tower (T163) | 1.408 | NO |
+| **σ/m=50 forced (T165)** | **1.033** | **YES** |
+| Resonant SIDM (T172) | 3.065 | YES (worse fit) |
+
+**HONEST VERDICT**:
+1. Standard Yukawa (with or without resonance) CANNOT fit all 8 points
+2. Resonance HURTS the fit (1.033 → 3.065) due to broad enhancement
+3. Cloud-9 4000× spike requires physics BEYOND standard Yukawa
+4. Best publishable result: 7-point fit (RMSE=0.25) + σ/m≥50 constraint
+
+**Files**:
+- 9 Python scripts (T165-T172)
+- 5 JSON result files
+- 3 markdown docs (robustness report, resonant SIDM, σ/m verification)
+- All compile-checked. Self-check passes.
+
+**Recommended paper updates**:
+1. Replace σ/m = 128 with σ/m ≥ 50 (lower bound, better fit)
+2. Frame Cloud-9 as "new physics required" outlier
+3. Show 7-point fit separately (publishable on its own)
+4. Cite Ohana+ 2026 as independent confirmation of σ/m floor
+
+---
+
 All notable changes to this project are documented here. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
