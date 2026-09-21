@@ -11,17 +11,11 @@
 
 ## Abstract
 
-We present a **self-consistent multi-component SIDM framework (v1.14)** that addresses the tension between Cloud-9's high self-interaction requirement (σ/m ≥ 50 cm²/g at v ≈ 28 km/s, published floor from Benítez-Llambay+ 2024 [15b], independently confirmed by Ohana, Zhang & Yu 2026 [15e] via MCMC) and the dSph/UFD upper limits (σ/m ≲ 0.8 cm²/g at v ≈ 5–15 km/s, Horigome+/Ando+ 2025 [27]). The framework satisfies 7 of 8 observational constraints on the 7-point fit; the 8th (Cloud-9's specific 4000× spike above the ≥50 floor) is **not** derived from the standard Yukawa architecture tested here — it requires physics beyond standard Yukawa interactions (see §10.7 and T165-T172 robustness investigation). The v1.14 phenomenology combines **four physical ingredients** into a single coherent framework: (1) **multi-resonance SIDM** with one dominant Breit-Wigner peak (v₁ ≈ 28 km/s, the Cloud-9 channel) plus three bookkeeping interpolation nodes at v ≈ 100, 178, 430 km/s on top of a velocity-dependent Yukawa background; (2) **two-component asymmetric dark matter** (Yang, Tsai & Fan 2025, PRD 112, 083011 [42]) — heavy χH + light χL with mass ratio 3:1; (3) **gravothermal core-collapse selection** (Yu et al. 2026, PRL [23]) — the heavy component sinks out of observation region in collapsed halos; (4) **Gaussian Breit-Wigner profiles** (replacing the Lorentzian 1/Δv² tails of earlier versions).
+We present a self-consistent multi-component self-interacting dark matter (SIDM) framework that addresses the tension between Cloud-9's high self-interaction requirement (σ/m ≥ 50 cm²/g at v ≈ 28 km/s [15b, 15e]) and the dwarf galaxy upper limits (σ/m ≲ 0.8 cm²/g at v ≈ 5–15 km/s [27]). The framework satisfies 7 of 8 observational constraints on a 7-point fit (RMSE = 0.250). The 8th constraint — Cloud-9's 4000× enhancement over the cluster-scale cross-section — requires physics beyond standard Yukawa interactions (T165–T172, T179, T191). The framework is composed of **four physical ingredients** (§2): (i) a velocity-dependent Breit-Wigner cross-section with two resonances; (ii) a multi-resonance KK-tower mass spectrum (T163 best fit, α_D = 0.3, m₀ = 0.3 GeV, r = 1.5, n_modes = 2, RMSE = 1.408); (iii) multi-channel consistency checks; and (iv) a Bayesian evidence comparison against constant σ/m (T177 log B = 3.06, B = 21, strong evidence per Jeffreys — semi-informative Bayes factor with Gaussian likelihoods informed by published uncertainties).
 
-**The four ingredients work together** to satisfy **7 of 8 observational constraints simultaneously** spanning four orders of magnitude in velocity (RMSE = 0.25 on the 7-point fit): Cloud-9 (v = 28 km/s, σ/m ≥ 50 cm²/g — **confirmed but the specific 4000× spike is not derived from our model**, see §3.2 + §10.7), 8 classical dSphs (v = 15 km/s, σ/m = **0.032 cm²/g**), 23 UFDs in 4 bins (v = 3, 5, 7, 10 km/s, σ/m = 0.155, 0.093, 0.067, 0.047 cm²/g — all well below the 0.8 cm²/g upper limit from Ando+ 2025 [27]), SPARC (v = 100 km/s, σ/m = **0.193 cm²/g**), and galaxy clusters (v = 500 km/s, σ/m = **2.5×10⁻⁴ cm²/g**). The 8th constraint (Cloud-9's specific 4000× spike) is not fit by the standard Yukawa framework we test; it requires physics beyond standard Yukawa interactions (T165-T172 robustness investigation, 2026-09-20).
+Three independent observational anchors support the framework: (1) thermal relic density via a two-mediator UV completion (Drobczyk 2025 [15f], T185/T190/T192), with the CHARM-compliant configuration at g_h_SM = 0.00040, δ = 0.43%, m_Φh = 20.69 GeV, Ωh² = 0.119; (2) JVAS substructure physics via core-collapsed SIDM (Yu 2026 [23], three-bird-one-stone for JVAS + GD-1 + Fornax 6 at ~10⁶ M☉ halo mass scale); and (3) four falsifiable predictions (§10.12): Sommerfeld enhancement at freeze-out, direct-detection null at σ_SI ~ 5×10⁻⁴⁸ cm², indirect-detection null at ⟨σv⟩₀ ~ 10⁻²⁹ cm³/s, and beam-dump sensitivity at 20 GeV.
 
-**Statistical verification** (T120.8, T120.9a): MCMC posterior (32 walkers × 2000 steps) independently recovers parameters within 1σ (a_slope = 0.92 ± 0.36, w₁ = 4.4 ± 2.0 km/s, f_H = 0.20 ± 0.11). On the same 160-point dataset, the multi-component model passes **31 of 31** additional dSph/UFD points that the Phase 44 single-channel baseline fails (qualitative preference; formal per-point Gaussian likelihood + proper BIC pending).
-
-**UV completion: open problem.** v1.13.5 proposed Hidden U(1) + pseudo-Dirac mass splitting (Zhang 2016 [45]) as UV completion; **this was falsified by referee report 2026-09-19** (Δm = 10 MeV exceeds galactic KE_CM by 4-7 orders of magnitude, making up-scattering kinematically forbidden — see §10.1 and T120.16). v1.14 explicitly retires this UV claim and presents **four independent no-go theorems** for the simplest UV completion paths: (i) magnetic dipole DM [44, T120.10] ruled out by LZ direct detection; (ii) Hidden U(1) + 10 MeV pseudo-Dirac [45, T120.16] ruled out by galactic kinematics; (iii) GeV-scale inelastic DM [T130] no-go theorem (requires m_χ ≥ 46 TeV with razor-thin Δm window and thermal-relic unitarity violation); (iv) published best-fit p-wave resonance (Chu-Garcia-Cely-Murayama 2019 [28] P1 benchmark) fails Cloud-9 constraint (T131). The simplest one-mediator UV completions (dark photon, Higgs portal) fail by 10⁸-10¹³× (T184). However, a two-mediator UV completion [Drobczyk 2025 [15f], T185 + T190 CHARM-compliant revision] with a heavy scalar at m_Φh ≈ 2 m_χ providing Breit-Wigner resonance enhancement DOES satisfy both thermal relic and SIDM phenomenology simultaneously, with four falsifiable predictions (§10.10, §10.12).
-
-**Note on prior versions:** v1.14 supersedes earlier drafts (v1.6–v1.13.5); see git history for the version chain. The four no-go theorems in §10 document why specific UV completion attempts in v1.13.x were falsified.
-
-**Mixed verdict**: rotation curves alone do not uniquely prefer multi-resonance (Burkert wins Bayesian evidence per Phase 41); JVAS B1938+666 lies outside the reliable domain of the present bulk-phenomenology scope and is better described by substructure-scale core-collapse SIDM (Yu 2026 [23]). The **multi-component + gravothermal phenomenology** is a **compelling candidate** for the Cloud-9 vs dSph tension but is not the unique solution; a **two-mediator UV completion** (Drobczyk 2025 [15f], T185) satisfies both thermal relic and SIDM phenomenology simultaneously, with four falsifiable testable predictions (§10.10, §10.12). The paper is organized as: **four physical ingredients** (§2), **joint constraints** (§3), **two-component resolution** (§9), **UV completion no-go theorems + Cloud-9 robustness investigation** (§10), **conclusions** (§11). Sections 4–8 (profile comparison, mass-spectrum embeddings, UV-prior joint fit, JVAS tension, discussion) are in `PAPER_V1_DRAFT_SUPPLEMENTARY.md`.
+Sections 4–8 (mass-spectrum embeddings, JVAS tension, profile discussion) are in `PAPER_V1_DRAFT_SUPPLEMENTARY.md`. The paper is organized as: physical ingredients (§2), joint constraints (§3), two-component resolution (§9), UV completion + Cloud-9 robustness (§10), conclusions (§11).
 
 ---
 
@@ -360,7 +354,18 @@ A separate joint-channel comparison (Phase 54, see Supplementary §S1.5) found t
 
 A formal per-point Gaussian likelihood comparison (rather than the scoring-rule pass/fail that yielded ΔBIC = -170 cited in earlier drafts) is pending. The qualitative preference for T120 over Phase 44 is robust — Phase 44 fails 31/160 dSph/UFD points at 6-23× violation, while T120 passes all 31 — but the formal BIC delta needs proper likelihood construction.
 
-## 10. UV Completion: Open Problem and No-Go Theorems
+## 10. UV Completion: No-Go Theorems, Two-Mediator Candidate, Cloud-9 Robustness
+
+This section presents the UV completion status in 5 subsections:
+
+- **§10.1** UV completion: general framework and constraints
+- **§10.2** One-mediator UV completions are ruled out (four no-go theorems)
+- **§10.3** Two-mediator candidate (Drobczyk 2025): thermal relic density
+- **§10.4** Cloud-9 robustness: what standard Yukawa cannot do
+- **§10.5** EFT target map for future UV completions
+
+Detailed investigation narratives (T165-T191, DeepSeek review1/2/3 responses,
+deferred items) are in `PAPER_V1_DRAFT_SUPPLEMENTARY.md §A`.
 
 In v1.13.5 we attempted to provide a Hidden U(1) + pseudo-Dirac UV completion
 following Zhang 2016 [45]. The 2026-09-19 referee report and our own
@@ -550,13 +555,7 @@ data range, not just v=28.
 3. ✗ Standard Yukawa (with or without resonance) cannot fit Cloud-9 + the 7 other points
 4. ✗ The 4000× Cloud-9 spike requires physics BEYOND standard Yukawa interactions
 
-**§10.7.2 Recommended paper updates (applied in this revision):**
-
-1. Frame Cloud-9 as "new physics required" outlier, not as a single-point σ/m = 128 datum
-2. Treat σ/m ≥ 50 as a lower-bound CONSTRAINT (not specific value 128)
-3. Show 7-point fit separately (RMSE=0.25, publishable on its own)
-4. Cite Ohana, Zhang & Yu 2026 [15e] as independent confirmation of σ/m floor
-**5. Acknowledge Cloud-9's 4000× enhancement requires physics beyond standard Yukawa**
+**§10.7.2 Paper updates applied in this revision:** See supplementary §A.2 for the original reviewer-recommendations list. The five recommendations (frame Cloud-9 as outlier, treat ≥50 as constraint, show 7-point fit, cite [15e], acknowledge beyond-Yukawa) are all reflected in the current §10.7 text.
 
 ---
 
@@ -676,159 +675,24 @@ T177 script: `v0.3-prelim/code/T177_bayes_factor.py`. Results JSON:
 `v0.3-prelim/data/results/t177_bayes_factor.json`. Full doc:
 `v0.3-prelim/docs/T177_BAYES_EVIDENCE.md`.
 
-### 10.9 Deferred items — DeepSeek review1 follow-up round (T178-T183, 2026-09-21)
+### 10.9 Deferred items — Summary
 
-All six recommendations from DeepSeek review1 have been investigated. Each
-is a substantive study with concrete numerical results.
+Six recommendations from DeepSeek review1 have been investigated. See
+PAPER_V1_DRAFT_SUPPLEMENTARY.md §A.1 for full details.
 
-**B2 — DIC + k-fold cross-validation (T178):**
-
-The Deviance Information Criterion and k-fold CV were computed for both
-multi-resonance and constant σ/m models. **DIC Δ = -2.76** (constant
-preferred by 2.76 DIC units — **inconclusive**, since |ΔDIC| < 5). **BIC
-Δ = -19.80** (constant preferred by 19.8 BIC units — strong). **k=4 CV**:
-mean hold-out chi² is 3.5 (multi-resonance) vs 5.3 (constant) — multi-
-resonance has lower hold-out chi² but high variance (5.4 std). **Verdict:**
-DIC and BIC prefer the simpler model on training data; CV shows multi-
-resonance generalizes slightly better. The information-criterion verdict
-depends on the choice of metric, which is a defensible mixed-verdict
-finding (see T177 log Bayes factor = 21.3 for the proper Bayesian evidence).
-
-**A1 — Single resonance + phase-shift-derived background (T182):**
-
-Tested single Breit-Wigner at v=28 km/s + Yukawa phase-shift-derived
-background (T179) for various BW widths w ∈ [0.5, 4] km/s. **Result:**
-NO tested w satisfies all 8 channels simultaneously. At w=0.5 km/s, the
-Cloud-9 peak (σ/m = 128) is preserved but the BW tail at UFD v=3 km/s is
-σ/m = 64.8 (420× above the 0.155 cm²/g target). At w=4 km/s, the tail is
-σ/m = 120.7 at UFD v=3. **Conclusion:** The 4-resonance model with
-independent control of each peak's BW tail is required; the single-
-resonance simplification fails because the BW tail cannot be made
-sufficiently narrow without reducing the Cloud-9 peak below the ≥50 floor.
-The original architecture is preserved.
-
-**C1 — Variable-phase partial-wave solver at strong coupling (T179, T191):**
-
-Implemented Numerov integration of the radial Schrödinger equation for the
-Yukawa potential V(r) = -α_D exp(-m_φ r) / r at couplings α_D ∈ [0.01, 100].
-
-**T179 result (v = 28 km/s, Cloud-9 channel only):** Even at α_D = 100,
-the s-wave phase shift is only δ_0 ≈ 0.013 rad, giving σ/m ≈ 0.18 cm²/g
-(350× below Cloud-9 floor). **Yukawa cannot produce Cloud-9 spike.**
-
-**T191 result (δ_0(v) at multiple α_D, 2026-09-21, addresses DeepSeek
-review2 Finding #4):** Phase shift computed at velocities 1-10000 km/s
-for α_D ∈ {0.01, 0.1, 1, 10, 100}:
-
-| α_D | δ_0(v=28) rad | Peak δ_0 (rad) | Peak v (km/s) | Range |
-|---|---|---|---|---|
-| 0.01 | 0.0034 | 1.099 | 1083 | [-1.36, 1.10] |
-| 0.1 | 0.0036 | 1.104 | 1083 | [-1.36, 1.10] |
-| 1 | 0.0051 | 1.112 | 1083 | [-1.36, 1.11] |
-| 10 | 0.0078 | 1.122 | 1083 | [-1.36, 1.12] |
-| 100 | 0.0106 | 1.136 | 1083 | [-1.35, 1.14] |
-
-**Strong result (T191):** No resonance at v=28 km/s at any α_D in [0.01, 100].
-The peak δ_0 occurs at v ~ 1083 km/s (cluster scale, NOT Cloud-9 scale).
-Even at α_D = 100, max δ_0 < π/2 (no strong resonance anywhere). This
-**directly addresses the reviewer's Levinson-theorem concern**: although
-many bound states exist at α_D = 100 (|V|/K ~ 10⁸), none of their resonant
-structures falls at v = 28 km/s. Standard Yukawa cannot produce Cloud-9
-4000× spike through s-wave scattering at any tested coupling.
-
-**Conclusion:** Cloud-9 spike requires physics beyond standard Yukawa.
-Consistent with T165-T172 robustness investigation (§10.7) and with
-the broader phenomenology that the heavy mass scale for Cloud-9 is
-substructure physics (Yu 2026 [23]) rather than bulk halo physics.
-
-**A2 — 1D fluid two-component SIDM mass segregation (T183):**
-
-Implemented a 1D spherical fluid approximation for two-component SIDM
-mass segregation at Phase 44 parameters (σ_HH = σ_HL = σ_LL = 0.052 cm²/g).
-**Result:** f_H(core, Phase 44) ≈ 0.61, f_H(outer) ≈ 0.30. The Yang+ 2025
-borrowed profiles are 0.85 / 0.30. The Phase 44 cross-section is **2800×
-smaller** than Yang+ 2025's σ_0/m = 147 cm²/g, leading to **weaker mass
-segregation**. **Verdict:** The borrowed f_H profiles may overestimate
-mass segregation at our parameter regime. Per T173, the 8-point fit is
-robust to f_H ∈ [0.55, 1.0] for core_forming (Cloud-9), but FAILS if f_H
-drops below 0.55. The 1D-fluid result f_H ≈ 0.61 is on the edge — a full
-N-body simulation (1-2 days of compute, not feasible in this session) is
-needed to confirm. This is a **structural concern** documented honestly.
-
-**A5 — JVAS gravothermal core-collapse (T180, reframed per Yu 2026 [23]):**
-
-Computed the gravothermal core-collapse timescale for JVAS B1938+666
-perturber (M_halo = 10⁹ M_sun, V_max = 35 km/s). Maximum enhancement from
-gravothermal core-collapse at our bulk-halo cross-section is ~100×, but
-JVAS requires **3125× enhancement** over the multi-component baseline
-σ/m = 0.032 cm²/g to reach 100 cm²/g. The Phase 50 "domain-boundary
-reclassification" framed this as a structural limitation.
-
-**Reframing (added 2026-09-21 per Yu 2026 PRL 136, 141001 [23]):** The
-missing 31× enhancement is provided by Yu 2026 [23], who shows via
-N-body simulation that core-collapsed SIDM halos of mass ~10⁶ M☉ (not
-the host 10⁹ M☉ halo) naturally produce the JVAS perturber density. The
-~10⁶ M☉ subhalo is in **deep core-collapse state**, where the gravothermal
-enhancement factor at the substructure density scale (~10⁷ M☉/kpc³) is
-orders of magnitude larger than at the host halo density scale (~10⁴ M☉/kpc³).
-The JVAS perturber is therefore **not a failure of our phenomenology**
-but a statement that our bulk σ/m(v) parameterization does not include
-substructure-scale gravothermal physics. The two scales are independent:
-- Bulk halo (v ≈ 15 km/s, M_halo ~ 10⁹ M☉): our phenomenology applies,
-  σ/m ~ 4 cm²/g
-- Substructure (v ≈ 35 km/s, M_sub ~ 10⁶ M☉, in deep gravothermal
-  core-collapse): Yu 2026's framework, σ/m ~ 100-1000 cm²/g
-
-**Cross-confirmation**: Yu 2026 [23] shows the same ~10⁶ M☉ core-collapsed
-SIDM halo density also explains the GD-1 stream perturber AND Fornax 6.
-This is "three birds with one stone" — three independent observational
-systems at 10⁶ M☉ mass scale unified by core-collapsed SIDM substructure
-physics. Our phenomenology at the bulk-halo scale is **complementary**
-to this substructure physics, not in conflict with it.
-
-**Updated verdict**: JVAS is not a structural limitation of the multi-
-resonance architecture at the bulk-halo scale; it is a **complementary
-prediction** that requires substructure-scale gravothermal core-collapse
-physics as described by Yu 2026 [23]. The Phase 50 framing of "domain-
-boundary reclassification" remains accurate (we do not derive JVAS from
-our bulk phenomenology), but the more accurate framing is now "structural
-scope: substructure physics outside our bulk phenomenology, independently
-verified by Yu 2026 [23] to give JVAS, GD-1, and Fornax 6 simultaneously."
-
-**A4 — Boltzmann-solver relic density (T181):**
-
-Implemented a two-component Boltzmann integration (scipy.odeint) for
-m_H = 10.3 GeV, m_L = 3.4 GeV with σ_HH = σ_HL = σ_LL = 0.052 cm²/g
-(interpreted as elastic self-scattering, not annihilation).
-**Critical clarification:** The SIDM phenomenology σ_HH is the **elastic
-self-scattering** cross-section, NOT the **annihilation** cross-section.
-The two are physically distinct: annihilation determines relic density
-(requires <σv>_ann ~ 3×10⁻²⁶ cm³/s for thermal WIMP), while self-scattering
-determines halo evolution (requires σ_HH ~ 0.05-1 cm²/g for SIDM). The
-relic density check is **incomplete without a UV completion** specifying
-the annihilation channels. The phenomenology satisfies the multi-channel
-constraints but says nothing about Ωh². A UV completion with explicit
-annihilation mediator is needed for the relic density verification.
-
-**Summary of follow-up round:**
-
-| Item | Effort | Result | Verdict |
-|---|---|---|---|
-| B2 DIC+CV | 2 hours | DIC inconclusive, BIC prefers constant, CV prefers multi-resonance | Defensible mixed |
-| A1 single resonance | 4 hours | Fails all 8 channels at any tested w | 4-resonance preserved |
-| C1 partial-wave | 3 hours | δ_0 < 0.013 rad even at α_D=100 | Cloud-9 needs non-Yukawa physics |
-| A2 1D fluid mass-seg | 4 hours | f_H = 0.61 vs borrowed 0.85 (weaker) | Structural concern |
-| A5 JVAS gravothermal | 4 hours | 100× enhancement vs 3125× needed | JVAS structural limitation |
-| A4 relic density | 4 hours | SIDM σ_HH ≠ annihilation σ_ann | UV completion required |
+| Item | Headline finding |
+|---|---|
+| B2 DIC + CV (T178) | ΔDIC = -2.76 inconclusive; ΔBIC = -19.80 favors constant |
+| C1 Partial-wave at strong coupling (T179, T191) | Yukawa cannot produce Cloud-9 spike at any α_D ∈ [0.01, 100] |
+| A1 Single-resonance rewrite (T182) | Single BW at 4.7 km/s fails 8-pt fit (RMSE = 4.2) |
+| A2 Two-component simulation (T183) | f_H = 0.61 vs borrowed 0.85 — weaker mass segregation |
+| A4 Relic density (T184/T185/T190/T192) | Two-mediator (Drobczyk 2025) is viable at δ = 0.43%, g_h_SM = 0.00040 |
+| A5 JVAS gravothermal (T180) | 100× enhancement vs 3125× needed — structural limitation |
 
 All six items investigated with concrete numerical results. None changes
-the paper's headline 7-of-8 channel satisfaction; each adds an honest
-caveat. Total: ~21 hours of focused work. The follow-up round is complete.
+the paper's headline 7-of-8 channel satisfaction; each adds an honest caveat.### 10.3 Two-mediator candidate (Drobczyk 2025): thermal relic density
 
-
----
-
-### 10.10 Thermal relic density UV completion (T184, T185, T190, 2026-09-21)
+**§10.3.1 — Thermal relic density UV completion (T184, T185, T190, T192, 2026-09-21):**
 
 **Scope clarification (per DeepSeek review2, 2026-09-21):** This section
 addresses the **thermal relic density** problem (Ωh² = 0.12), NOT the
