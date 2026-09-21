@@ -736,6 +736,72 @@ caveat. Total: ~21 hours of focused work. The follow-up round is complete.
 
 ---
 
+### 10.10 Thermal relic density UV completion (T184, 2026-09-21)
+
+T181 established that the SIDM phenomenology σ_HH = 0.05 cm²/g is the
+**elastic self-scattering cross-section**, distinct from the annihilation
+cross-section <σv>_ann that determines relic density. T184 implements
+two UV completion candidates and shows a structural incompatibility:
+
+**Dark photon mediator (m_A' = 300 MeV):**
+
+| g_D | <σv>_ann (cm³/s) | Ωh² | σ_HH (cm²/g) | Verdict |
+|---|---|---|---|---|
+| 0.135 | 1.7×10⁻²⁴ | **0.12** | 6.5×10⁻¹⁰ | **PASS relic, σ_HH 8 orders too small** |
+| 3.0 | 7×10⁻¹⁹ | 5×10⁻⁹ | 0.055 | **PASS σ_HH, undercloses** |
+
+**Higgs portal (m_h = 125 GeV):**
+
+| λ_hs | <σv>_ann | Ωh² | σ_HH |
+|---|---|---|---|
+| 10⁻⁵ | 3×10⁻²⁶ | **0.12** | 10⁻¹⁵ |
+
+**Verdict:** A purely thermal WIMP-miracle UV completion is **NOT viable**
+at our SIDM parameters (m_χ = 10.3 GeV, m_φ = 300 MeV). The thermal relic
+constraint (g_D ~ 0.135 or λ_hs ~ 10⁻⁵) gives σ_HH 8-13 orders of magnitude
+too small for SIDM phenomenology. Three viable resolutions:
+
+1. **Non-thermal relic**: DM produced via decay of heavier particle
+   (moduli, inflaton, scalar). Decouples σ_v from σ_HH. Can give correct
+   Ωh² AND σ_HH = 0.05 cm²/g simultaneously with g_D ~ 3.
+2. **Forbidden-channel relic**: χχ → YY where m_Y slightly > m_χ. Closed
+   at T=0 (no direct-detection), open at freeze-out. Naturally suppresses
+   σ_v without affecting σ_HH.
+3. **Co-annihilation**: Partner χ' nearly degenerate with χ. Co-annihilation
+   channels χχ' dominate freeze-out, decoupling σ_v from σ_HH.
+
+This is the **fifth no-go theorem**: thermal WIMP-miracle UV completion
+fails by 8-13 orders of magnitude at our SIDM parameters. The phenomenology
+requires one of the three resolutions above. This is a **substantive
+UV-construction problem**, not a phenomenology problem. Honest framing
+acknowledged: the SIDM parameter space is consistent with multi-channel
+data and BBN/CMB constraints, but requires non-minimal UV construction.
+
+Full doc: `v0.3-prelim/docs/T184_UV_COMPLETION.md`.
+
+### 10.11 Summary of §10 UV no-go theorems
+
+Five no-go theorems demonstrate that the Phase 44 phenomenology is
+**inconsistent with standard WIMP/SIDM UV completions**:
+
+| # | Mechanism | Failure mode | Status |
+|---|---|---|---|
+| 1 | Magnetic dipole DM | LZ (1.22×10¹³× above) + Cloud-9 floor (270× below) | **ROBUST** |
+| 2 | Hidden U(1) + 10 MeV pseudo-Dirac | KE_CM(28) = 0.046 MeV vs Δm = 10 MeV (220×) | **ROBUST** |
+| 3 | GeV inelastic DM | m_χ ≥ 46 TeV + razor window + unitarity | **ROBUST** |
+| 4 | Chu P1 p-wave resonance | σ/m ≈ 0.1 everywhere (Cloud-9 500×) | **ROBUST** |
+| **5** | **Thermal WIMP UV completion (T184)** | **σ_HH 8-13 orders too small at thermal relic coupling** | **ROBUST** |
+
+All five verdicts are **independent** of the specific cross-section values
+(they depend on the failure mechanism, not the specific parameter tuning).
+The phenomenology is consistent with multi-channel data but requires
+**non-minimal UV construction** (non-thermal, co-annihilation, or
+forbidden-channel). This is a publishable finding: the SIDM phenomenology
+is observationally consistent but theoretically constraining.
+
+
+---
+
 ## 11. Conclusions
 
 We have presented a **coherent mixed-verdict multi-scale SIDM phenomenology**
