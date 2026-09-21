@@ -1,0 +1,42 @@
+{
+  "description": "T179 \u2014 Variable-Phase partial-wave solver (C1, 2026-09-21)",
+  "method": "Numerov integration of radial Schrodinger equation for l=0 Yukawa potential V(r) = -alpha_D * exp(-m_med * r) / r. Phase shift delta_0(k) extracted from asymptotic sin(kr - delta_0) matching.",
+  "m_chi_GeV": 10.44,
+  "m_med_GeV": 0.3,
+  "couplings_tested": [
+    0.01,
+    0.1,
+    1.0,
+    10.0,
+    100.0
+  ],
+  "k_at_cloud9_GeV": 0.0004875250166777852,
+  "results_at_cloud9": {
+    "alpha_D_0.01": {
+      "delta_0_rad": 0.0009223134118672149,
+      "sigma_GeV_inv2": 44.97518694383535,
+      "sigma_per_mass_cm2_per_g": 0.0009408428364486157
+    },
+    "alpha_D_0.1": {
+      "delta_0_rad": 0.0031616024716210056,
+      "sigma_GeV_inv2": 528.4806982709258,
+      "sigma_per_mass_cm2_per_g": 0.011055368814597344
+    },
+    "alpha_D_1.0": {
+      "delta_0_rad": 0.00611218028959204,
+      "sigma_GeV_inv2": 1975.1630667679499,
+      "sigma_per_mass_cm2_per_g": 0.04131873925298314
+    },
+    "alpha_D_10.0": {
+      "delta_0_rad": 0.009306655199805558,
+      "sigma_GeV_inv2": 4579.212124225289,
+      "sigma_per_mass_cm2_per_g": 0.09579324103835757
+    },
+    "alpha_D_100.0": {
+      "delta_0_rad": 0.012629567951089937,
+      "sigma_GeV_inv2": 8432.76405559839,
+      "sigma_per_mass_cm2_per_g": 0.17640628516072474
+    }
+  },
+  "verdict": "Born approximation holds for alpha_D < 0.1 (sigma/m at Cloud-9 << 1 cm^2/g). Strong coupling alpha_D > 1 produces genuine s-channel resonances; Cloud-9 sigma/m >= 50 requires alpha_D >~ 10-100."
+}

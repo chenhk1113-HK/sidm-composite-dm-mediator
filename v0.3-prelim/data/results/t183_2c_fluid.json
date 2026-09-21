@@ -1,0 +1,23 @@
+{
+  "description": "T183 \u2014 1D fluid two-component SIDM mass segregation (A2, 2026-09-21)",
+  "method": "1D spherical fluid approximation. Heavy component segregates inward at rate ~ (sigma_HL/sigma_0) * (m_H - m_L)/m_H * t. Initial conditions: equal fractions of NFW profile.",
+  "Phase_44_params": {
+    "sigma_HH_cm2_per_g": 0.052,
+    "sigma_HL_cm2_per_g": 0.052,
+    "sigma_LL_cm2_per_g": 0.052,
+    "m_H_GeV": 10.3,
+    "m_L_GeV": 3.4
+  },
+  "Yang_2025_params": {
+    "sigma_m_cm2_per_g": 147.1,
+    "w_kms": 24.33,
+    "note": "Yang+ used 2800x larger cross-section than Phase 44"
+  },
+  "T183_results_at_t13.8_Gyr": {
+    "f_H_at_r_0.05_kpc": 0.6105388952091781,
+    "f_H_at_r_0.2_kpc": 0.5791894127867749,
+    "f_H_at_r_1.5_kpc": 0.4193503399447588,
+    "f_H_at_r_5_kpc": 0.3158008252292903
+  },
+  "verdict": "Mass segregation at Phase 44 cross-sections (0.052 cm^2/g) is WEAKER than Yang+ 2025 (147 cm^2/g). The borrowed f_H profiles (0.85/0.30) are likely an overestimate for our parameter regime. If f_H is actually 0.40 instead of 0.85, Cloud-9 sigma/m drops to ~28, failing the >=50 floor. A full N-body simulation is needed to verify."
+}

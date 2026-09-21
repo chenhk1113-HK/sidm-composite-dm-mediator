@@ -1,0 +1,55 @@
+{
+  "description": "T182 \u2014 Single resonance + phase-shift background (A1, 2026-09-21)",
+  "method": "Single Breit-Wigner at v=28 + Yukawa phase-shift-derived background (T179) + power-law sigma_0(v). Tested w in [0.5, 4] km/s.",
+  "alpha_D_test": 1.0,
+  "best_w_found": null,
+  "verdict": "Single resonance + phase-shift background is more physically defensible, but the BW tail constraint (sigma/m at v=3-15 km/s) requires w < 1 km/s. The 4-resonance model preserves the phenomenology because the 3 interpolation nodes allow independent control of the BW tail at each velocity scale.",
+  "ch_3_UFD_v3": {
+    "v": 3.0,
+    "target": 0.155,
+    "sigma_m_w1": 64.79687421972305,
+    "sigma_m_w4": 120.69053588319592
+  },
+  "ch_5_UFD_v5": {
+    "v": 5.0,
+    "target": 0.093,
+    "sigma_m_w1": 66.12438224992013,
+    "sigma_m_w4": 120.9680203561944
+  },
+  "ch_7_UFD_v7": {
+    "v": 7.0,
+    "target": 0.067,
+    "sigma_m_w1": 68.17283444524006,
+    "sigma_m_w4": 121.38297050656797
+  },
+  "ch_10_UFD_v10": {
+    "v": 10.0,
+    "target": 0.047,
+    "sigma_m_w1": 72.72498334299144,
+    "sigma_m_w4": 122.23310549896536
+  },
+  "ch_15_dSph_v15": {
+    "v": 15.0,
+    "target": 0.032,
+    "sigma_m_w1": 84.90334170198621,
+    "sigma_m_w4": 124.10246741312405
+  },
+  "ch_28_Cloud-9_v28": {
+    "v": 28.0,
+    "target": 128.0,
+    "sigma_m_w1": 128.04317588211012,
+    "sigma_m_w4": 128.04317588211012
+  },
+  "ch_100_SPARC_v100": {
+    "v": 100.0,
+    "target": 0.193,
+    "sigma_m_w1": 0.9699184934738078,
+    "sigma_m_w4": 13.333228820446621
+  },
+  "ch_500_Cluster_v500": {
+    "v": 500.0,
+    "target": 0.00025,
+    "sigma_m_w1": 0.3032571890295784,
+    "sigma_m_w4": 0.3222552138838905
+  }
+}

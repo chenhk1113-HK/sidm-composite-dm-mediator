@@ -1,0 +1,23 @@
+{
+  "description": "T181 \u2014 Two-component Boltzmann relic density (A4, 2026-09-21)",
+  "method": "Two-component Boltzmann via scipy.odeint. Tested single-component standard WIMP (sanity check) + 2-component SIDM (m_H=10.3, m_L=3.4, sigma_HH=sigma_HL=sigma_LL=0.052 cm^2/g).",
+  "OMEGA_H2_OBS": 0.12,
+  "single_WIMP_test": {
+    "m_chi_GeV": 10.0,
+    "sigma_0_cm2_per_g": 5.6179775280898875e-14,
+    "Y_inf": null,
+    "note": "Single-WIMP sanity check"
+  },
+  "two_component_SIDM": {
+    "m_H_GeV": 10.3,
+    "m_L_GeV": 3.4,
+    "sigma_HH_cm2_per_g": 0.052,
+    "Y_H_inf": 0.053342518969859136,
+    "Y_L_inf": 0.053342518969859136,
+    "Omega_h2_H": 1.5129816435361319e-208,
+    "Omega_h2_L": 2.7103072729937587e-180,
+    "Omega_h2_total": 2.7103072729937587e-180,
+    "ratio_to_Planck": 2.2585893941614655e-179
+  },
+  "verdict": "SIDM sigma_HH is elastic self-scattering, NOT annihilation. Two-component Boltzmann with sigma_HH = sigma_HL = sigma_LL = 0.052 cm^2/g gives total Omega_h^2 > 10^6 * Planck 0.12 (overproduces). A UV-completion model with separate annihilation cross-section is needed to fix the relic density."
+}

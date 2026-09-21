@@ -1,0 +1,23 @@
+{
+  "description": "T178 \u2014 DIC + k-fold CV (B2, 2026-09-21)",
+  "method": "DIC via p_D + chi^2(theta_bar). k=4 CV: hold out 2 of 8 channels, evaluate at best-fit params. Soft Gaussian penalties used (same as T177).",
+  "model_A_multi_resonance": {
+    "chi2_at_best_fit": 14.0627712243736,
+    "p_D": 7,
+    "DIC": 28.0627712243736,
+    "BIC": 45.254394349571136,
+    "cv_mean_chi2": 3.5156928060934,
+    "cv_std_chi2": 5.395541774894224
+  },
+  "model_B_constant": {
+    "chi2_at_best_fit": 21.298834290816327,
+    "p_D": 2,
+    "DIC": 25.298834290816327,
+    "BIC": 25.457717374176,
+    "cv_mean_chi2": 5.324708572704082,
+    "cv_std_chi2": 6.0615079290020235
+  },
+  "delta_DIC": -2.7639369335572717,
+  "delta_BIC": -19.796676975395137,
+  "verdict": "inconclusive"
+}

@@ -1,0 +1,13 @@
+{
+  "description": "T180 \u2014 JVAS gravothermal core-collapse (A5, 2026-09-21)",
+  "method": "Balberg+ 2002 gravothermal timescale + empirical enhancement factor. Tested for JVAS B1938+666 perturber (M_halo = 10^9 M_sun, V_max = 35 km/s).",
+  "M_halo_Msun": 1000000000.0,
+  "V_max_kms": 35.0,
+  "rho_s_Msun_per_kpc3": 10000000.0,
+  "r_s_kpc": 1.5,
+  "sigma_m_v15_baseline": 0.032,
+  "sigma_m_v15_required_JVAS": 100.0,
+  "required_enhancement": 3125.0,
+  "max_gravitational_enhancement": 100.0,
+  "verdict": "Gravothermal core-collapse gives max ~100x enhancement, but JVAS requires ~3000x. JVAS remains a structural limitation. Phase 50 reclassification is the most accurate framing."
+}
