@@ -47,7 +47,7 @@ The ultra-faint dwarf regime relevant to the v ≈ 28 km/s requirement is now be
 2. **Joint multi-channel evidence**: 31/31 additional dSph/UFD points satisfied that the Phase 44 single-channel baseline fails (§5). On the same dataset, a proper per-point Gaussian likelihood + BIC analysis is pending.
 3. **MCMC verification** (T120.9a, §6): posterior recovers parameters within 1σ (a_slope = 0.92 ± 0.36, w₁ = 4.4 ± 2.0 km/s, f_H = 0.20 ± 0.11).
 4. **Pass-rate improvement** (T120.8, §6): 31/31 additional dSph/UFD points satisfied that the Phase 44 single-channel baseline fails (qualitative preference; formal per-point Gaussian likelihood + proper BIC pending).
-5. **Four UV completion no-go theorems** (§10): magnetic dipole DM [T120.10], Hidden U(1) + pseudo-Dirac [T120.16], GeV-scale inelastic DM [T130], published best-fit p-wave resonance (Chu-Garcia-Cely-Murayama 2019 [28], T131) all fail. **No published UV completion solves the Cloud-9 vs dSph tension.**
+5. **Four UV completion no-go theorems** (§10): magnetic dipole DM [T120.10], Hidden U(1) + pseudo-Dirac [T120.16], GeV-scale inelastic DM [T130], published best-fit p-wave resonance (Chu-Garcia-Cely-Murayama 2019 [28], T131) all fail. **The Cloud-9 4000× spike is not solved by any one-mediator UV completion (four no-go theorems); it requires physics beyond standard Yukawa interactions (T165-T172, T179). The thermal relic density is solved by a two-mediator UV completion (Drobczyk 2025 [15f], T185/T190, §10.10) — this addresses the relic but does NOT solve the Cloud-9 spike specifically.**
 6. **EFT target map** (§10.5): what UV completions must satisfy to reproduce our phenomenology.
 7. **Honest mixed-result on rotation curves**: architecture is consistent with rotation-curve data but not uniquely preferred over simpler cored profiles (§7).
 
@@ -322,6 +322,8 @@ the v1.13 result is robust against small parameter variations.
   | 1.50 | 288.3 cm²/g | 0.071 cm²/g | 0.209 cm²/g | **YES** (but SPARC upper edge) |
 
   **Verdict**: The 8-point fit is robust to ±25% f_H variation. The fit **fails** if core_forming f_H drops below ~0.55 (Cloud-9 floor violated) or if core_collapsed f_H rises above ~0.30 (UFD upper limit violated). Yang+ 2025 PRD published values are inside these bounds, so the borrowing is robust against typical profile-shape uncertainty. A full cosmological simulation with our exact Phase 44 parameters is a future task.
+
+  **f_H = 0.61 consequence (per T183 + DeepSeek review2, 2026-09-21):** T183's 1D spherical gravothermal fluid at our Phase 44 parameters gives f_H(core) ≈ 0.61, vs the borrowed f_H ≈ 0.85 from Yang+ 2025 (which used σ₀/m = 147.1 cm²/g vs ours 0.052 cm²/g, i.e., 2800× larger). At f_H = 0.61, the T173 sensitivity table above gives Cloud-9 σ/m ≈ 78 cm²/g — **above the published ≥50 floor (BLN24, Ohana+ 2026) but below the internal 100 target**. This **still passes the published constraint but weakens the "comfortable margin" claim**. The fit is on the lower edge of the ±25% band; a full N-body simulation with our exact parameters is needed to confirm whether f_H = 0.61 or f_H ≈ 0.85 is the realistic value.
 
 - **Gaussian BW**: The Gaussian is a phenomenological choice. The actual resonance profile depends on the channel couplings and decay widths; the Gaussian is a good approximation when Γ_channel ≪ Γ_resonance.
 - **Observation radius**: We assume dSph stars are observed at r ≈ 0.2 r_vir (half-light radius). For Draco (r_half-light ≈ 220 pc, r_vir ≈ 9 kpc → ratio 0.024), this is conservative; Fornax (r_half ≈ 700 pc, r_vir ≈ 16 kpc → ratio 0.044), still conservative.
@@ -645,6 +647,15 @@ multi-resonance over constant σ/m**. This is a defensible Bayesian claim.
 The scoring-rule ΔBIC = -170 corresponds to log B ≈ 170 (Bayes factor 10⁷⁴),
 which was an overstatement.
 
+**Honest qualifier (per DeepSeek review2, 2026-09-21):** The T177 likelihood
+uses **soft Gaussian penalties** with widths informed by published
+observational uncertainties (Horigome+ for dSph ceiling, BLN24/Ohana+
+for Cloud-9 floor, etc.), not full likelihoods derived from raw error
+bars. This makes the Bayes factor a **"semi-informative Bayes factor"**
+rather than a full-likelihood proper Bayesian evidence. The result is
+defensible as an order-of-magnitude estimate; a full-likelihood dynesty
+run with detailed observational error budgets is a future task.
+
 T177 script: `v0.3-prelim/code/T177_bayes_factor.py`. Results JSON:
 `v0.3-prelim/data/results/t177_bayes_factor.json`. Full doc:
 `v0.3-prelim/docs/T177_BAYES_EVIDENCE.md`.
@@ -680,18 +691,39 @@ resonance simplification fails because the BW tail cannot be made
 sufficiently narrow without reducing the Cloud-9 peak below the ≥50 floor.
 The original architecture is preserved.
 
-**C1 — Variable-phase partial-wave solver at strong coupling (T179):**
+**C1 — Variable-phase partial-wave solver at strong coupling (T179, T191):**
 
 Implemented Numerov integration of the radial Schrödinger equation for the
 Yukawa potential V(r) = -α_D exp(-m_φ r) / r at couplings α_D ∈ [0.01, 100].
-**Result:** Even at α_D = 100 (very strong coupling), the s-wave phase shift
-at Cloud-9 (v=28 km/s) is only δ_0 ≈ 0.013 rad, giving σ/m ≈ 0.18 cm²/g.
-This is **350× below the ≥50 cm²/g Cloud-9 floor**. **Conclusion:**
-Yukawa-mediated interactions cannot produce the Cloud-9 resonance at any
-tested coupling. The Cloud-9 spike requires physics beyond standard Yukawa
-— consistent with T165-T172 (§10.7). The Born approximation (T101/T110)
-holds for α_D < 0.1; at α_D > 1 the phase shifts grow linearly but never
-reach resonance.
+
+**T179 result (v = 28 km/s, Cloud-9 channel only):** Even at α_D = 100,
+the s-wave phase shift is only δ_0 ≈ 0.013 rad, giving σ/m ≈ 0.18 cm²/g
+(350× below Cloud-9 floor). **Yukawa cannot produce Cloud-9 spike.**
+
+**T191 result (δ_0(v) at multiple α_D, 2026-09-21, addresses DeepSeek
+review2 Finding #4):** Phase shift computed at velocities 1-10000 km/s
+for α_D ∈ {0.01, 0.1, 1, 10, 100}:
+
+| α_D | δ_0(v=28) rad | Peak δ_0 (rad) | Peak v (km/s) | Range |
+|---|---|---|---|---|
+| 0.01 | 0.0034 | 1.099 | 1083 | [-1.36, 1.10] |
+| 0.1 | 0.0036 | 1.104 | 1083 | [-1.36, 1.10] |
+| 1 | 0.0051 | 1.112 | 1083 | [-1.36, 1.11] |
+| 10 | 0.0078 | 1.122 | 1083 | [-1.36, 1.12] |
+| 100 | 0.0106 | 1.136 | 1083 | [-1.35, 1.14] |
+
+**Strong result (T191):** No resonance at v=28 km/s at any α_D in [0.01, 100].
+The peak δ_0 occurs at v ~ 1083 km/s (cluster scale, NOT Cloud-9 scale).
+Even at α_D = 100, max δ_0 < π/2 (no strong resonance anywhere). This
+**directly addresses the reviewer's Levinson-theorem concern**: although
+many bound states exist at α_D = 100 (|V|/K ~ 10⁸), none of their resonant
+structures falls at v = 28 km/s. Standard Yukawa cannot produce Cloud-9
+4000× spike through s-wave scattering at any tested coupling.
+
+**Conclusion:** Cloud-9 spike requires physics beyond standard Yukawa.
+Consistent with T165-T172 robustness investigation (§10.7) and with
+the broader phenomenology that the heavy mass scale for Cloud-9 is
+substructure physics (Yu 2026 [23]) rather than bulk halo physics.
 
 **A2 — 1D fluid two-component SIDM mass segregation (T183):**
 
@@ -780,7 +812,15 @@ caveat. Total: ~21 hours of focused work. The follow-up round is complete.
 
 ---
 
-### 10.10 Thermal relic density UV completion (T184, T185, 2026-09-21)
+### 10.10 Thermal relic density UV completion (T184, T185, T190, 2026-09-21)
+
+**Scope clarification (per DeepSeek review2, 2026-09-21):** This section
+addresses the **thermal relic density** problem (Ωh² = 0.12), NOT the
+**Cloud-9 4000× spike** which remains an open problem requiring physics
+beyond standard Yukawa (T165-T172, T179; see §10.7 for Cloud-9 robustness
+investigation). The two-mediator framework decouples annihilation from
+self-scattering but does not produce Cloud-9's specific spike — that
+remains substructure physics per Yu 2026 [23] (§3.3, §10.9.A5).
 
 T181 established that the SIDM phenomenology σ_HH = 0.05 cm²/g is the
 **elastic self-scattering cross-section**, distinct from the annihilation
@@ -813,17 +853,29 @@ The setup:
 The Breit-Wigner enhancement factor near the pole dramatically boosts
 <σv>_ann while σ_HH (governed by the light φ) is independent.
 
-**Best configuration found (T185), REVISED for CHARM compliance (T190):**
+**Best configuration found (T185), REVISED for CHARM compliance (T190), RE-REVISED post bug-fix (2026-09-21):**
 
-| Parameter | T185 (original) | T190 (CHARM-compliant) |
-|---|---|---|
-| g_DM_Y1 (DM-Φh coupling) | 0.05 | 0.05 |
-| g_h_SM (Φh-SM Higgs portal) | 0.01 | **0.002** (CHARM limit: < 0.005) |
-| m_Φh | 22.223 GeV | **21.00 GeV** |
-| δ = (m_Φh - 2 m_χ)/(2 m_χ) | 7.9% | **1.93%** |
-| **<σv>_ann** | 3.10×10⁻²⁶ cm³/s | **2.79×10⁻²⁶ cm³/s** |
-| **Ωh²** | 0.116 | **0.129** (within Planck 2σ) |
-| σ_HH | 0.05 cm²/g (independent) | 0.05 cm²/g (independent) |
+| Parameter | T185 (original, buggy) | T190 v1 (CHARM, buggy) | T190 v2 (post bug-fix) |
+|---|---|---|---|
+| g_DM_Y1 (DM-Φh coupling) | 0.05 | 0.05 | 0.05 |
+| g_h_SM (Φh-SM Higgs portal) | 0.01 | 0.002 | **0.001** (CHARM limit: < 0.005) |
+| m_Φh | 22.223 GeV | 21.00 GeV | **20.69 GeV** |
+| δ = (m_Φh - 2 m_χ)/(2 m_χ) | 7.9% | 1.93% | **0.43%** |
+| Γ_Φh/m_Φh | 2.4×10⁻⁵ | 9.96×10⁻⁵ | 1.7×10⁻⁴ |
+| **<σv>_ann** | 3.10×10⁻²⁶ cm³/s | 2.79×10⁻²⁶ cm³/s | **2.82×10⁻²⁶ cm³/s** |
+| **Ωh²** | 0.116 | 0.129 | **0.128** (within Planck 2σ) |
+| σ_HH | 0.05 cm²/g (independent) | 0.05 cm²/g (independent) | 0.05 cm²/g (independent) |
+
+**Bug fix note (2026-09-21, per DeepSeek review2):** The original T185 had a hardcoded
+`s = s_threshold * (1 + 0.01)`, decoupling the BW propagator from actual m_Φh.
+This was fixed: `s = 4 m_χ² * (1 + v_F²/4)` with v_F ≈ 0.3c (freeze-out velocity).
+The CHARM-compliant config still exists but at more constrained parameters
+(g_h_SM 5× smaller, δ 5× tighter than Drobczyk's benchmark of δ = 8.3×10⁻⁴).
+Per reviewer recommendation, we **downgrade from "resolution" to "candidate
+resolution"**: the detuning δ = 0.43% is borderline-natural — requires either
+composite UV completion (Drobczyk SU(3)_H with N_f=10) or technical naturalness
+argument. See §10.11 for full caveats and §10.13 for the 5-no-go + 1-candidate
+status.
 
 **Both constraints are simultaneously satisfied:**
 1. **SIDM phenomenology**: σ_HH = 0.05 cm²/g via light φ (independent)
@@ -1023,7 +1075,8 @@ The headline results are:
 - **MCMC posterior** (T120.9a) recovers parameters within 1σ (a_slope = 0.92 ± 0.36, w₁ = 4.4 ± 2.0 km/s, f_H = 0.20 ± 0.11)
 - **31/31 additional dSph/UFD points** satisfied that the Phase 44 single-channel baseline fails (qualitative preference)
 - **Proper Bayesian evidence (T177, 2026-09-21)**: log Bayes factor = 3.06 (Bayes factor = 21.3) favoring multi-resonance over constant σ/m on the 8-channel dataset. Strong evidence per Jeffreys scale; replaces the prior "+8.10 log-units" scoring-rule headline
-- **Four UV completion no-go theorems** (§10): magnetic dipole DM [44, T120.10], Hidden U(1) + 10 MeV pseudo-Dirac [45, T120.16], GeV-scale inelastic DM [T130], plus published best-fit p-wave resonance [28, T131] all fail. **No published UV completion solves the Cloud-9 vs dSph tension.**
+- **Four UV completion no-go theorems** (§10): magnetic dipole DM [44, T120.10], Hidden U(1) + 10 MeV pseudo-Dirac [45, T120.16], GeV-scale inelastic DM [T130], plus published best-fit p-wave resonance [28, T131] all fail for one-mediator UV. **The Cloud-9 4000× spike is NOT solved by any one-mediator UV completion; it requires physics beyond standard Yukawa.**
+- **Two-mediator UV candidate (Drobczyk 2025 [15f], T185/T190, §10.10)**: A light scalar φ + heavy scalar Φh at m_Φh ≈ 2 m_χ provides s-channel Breit-Wigner enhancement for thermal relic, decoupled from σ_HH. **CHARM-compliant config exists** at g_h_SM = 0.001, δ = 0.43%, m_Φh = 20.69 GeV, Ωh² = 0.128 (within Planck 2σ). This addresses **thermal relic density**, NOT the Cloud-9 spike specifically. **Downgraded from "resolution" to "candidate resolution"** per DeepSeek review2 (2026-09-21) — the detuning δ = 0.43% is borderline-natural and requires either composite UV completion (Drobczyk SU(3)_H with N_f=10) or technical naturalness argument.
 - **EFT target map** (§10.5): what UV physics must satisfy to reproduce our phenomenology
 
 The framework is a **defensible phenomenology framework** for unifying
@@ -1031,7 +1084,10 @@ cross-sections across velocity scales, with multi-channel consistency
 and MCMC parameter recovery. **It is not the unique solution to the
 Cloud-9 vs dSph tension**, but it is a viable and well-constrained
 candidate that satisfies a wide range of observational constraints.
-The corresponding UV completion remains an open problem (§10).
+The thermal relic density problem has a candidate UV solution
+(Drobczyk 2025, T185/T190); the Cloud-9 4000× spike does not (§10.7
+robustness investigation; complementarity with Yu 2026 [23] substructure
+physics at 10⁶ M☉).
 
 **Caveat (per T120.13, T120.14, T133, 2026-09-19 / 2026-09-20 self-check):**
 The background-slope value (a_slope ≈ 1.0) emerges from joint multi-channel
