@@ -1,0 +1,57 @@
+{
+  "description": "B3 \u2014 v\u00b2-space vs v-space BW ambiguity quantification (T176, 2026-09-21)",
+  "method": "Compare sigma_v2_space and sigma_v_space Breit-Wigner forms at each of the 8 observational channels. Both forms use the same sigma_peak and width parameter; only the BW denominator is different (v\u00b2-v_t\u00b2)\u00b2 vs (v-v_t)\u00b2.",
+  "sigma_peak": 197.0,
+  "v_target": 28.0,
+  "w_frac": 0.05,
+  "per_channel": {
+    "Cloud-9": {
+      "v": 28,
+      "v2_space": 197.0,
+      "v_space": 197.0,
+      "ratio": 1.0
+    },
+    "dSph": {
+      "v": 15,
+      "v2_space": 0.9640161616398367,
+      "v_space": 0.5695321257891321,
+      "ratio": 1.6926458016817145
+    },
+    "UFD": {
+      "v": 5,
+      "v2_space": 0.524080393389648,
+      "v_space": 0.1823075034467129,
+      "ratio": 2.874705557815028
+    },
+    "v=3 UFD": {
+      "v": 3,
+      "v2_space": 0.502718970939431,
+      "v_space": 0.15432700762602122,
+      "ratio": 3.2574918588304635
+    },
+    "v=7 UFD": {
+      "v": 7,
+      "v2_space": 0.558766176209892,
+      "v_space": 0.218645948945616,
+      "ratio": 2.555575252614785
+    },
+    "v=10 UFD": {
+      "v": 10,
+      "v2_space": 0.644914415360241,
+      "v_space": 0.2974822028413819,
+      "ratio": 2.1679092369236983
+    },
+    "SPARC": {
+      "v": 100,
+      "v2_space": 0.003564064630057805,
+      "v_space": 0.018618996275429216,
+      "ratio": 0.1914208788344389
+    },
+    "Cluster": {
+      "v": 500,
+      "v2_space": 4.874011023866167e-06,
+      "v_space": 0.0004332886907881245,
+      "ratio": 0.011248876620805984
+    }
+  }
+}

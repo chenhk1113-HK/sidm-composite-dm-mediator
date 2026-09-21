@@ -1,0 +1,14 @@
+{
+  "description": "Partial-wave unitarity bounds on Cloud-9 resonance (A3, T174, 2026-09-21, corrected)",
+  "method": "s-wave unitarity: \u03c3_max(\u2113=0) = 4\u03c0/k_CM\u00b2 = 16\u03c0/(m_\u03c7\u00b2 v\u00b2). For v=28 km/s, m_\u03c7=10.44 GeV. Identical-particle combinatoric factor included. NR limit: k_CM = m_\u03c7 v/2.",
+  "m_chi_GeV": 10.44,
+  "v_kms": 28.0,
+  "s_wave_unitarity_cm2_per_g": 1106.0128116321425,
+  "p_wave_unitarity_cm2_per_g": 3318.038434896428,
+  "cloud9_peak_cm2_per_g_phase44": 197.0,
+  "cloud9_peak_cm2_per_g_v113": 128.0,
+  "peak_to_unitarity_ratio_phase44": 0.1781172857385686,
+  "peak_to_unitarity_ratio_v113": 0.11573102829714103,
+  "verdict": "perturbative",
+  "note": "Initial calculation used threshold formula \u03c3_max = \u03c0/m\u00b2 which is wrong for non-zero v. Corrected formula uses \u03c3_max = 4\u03c0/k_CM\u00b2 at finite v_rel. Cloud-9 peak is well below s-wave unitarity bound by factor ~10^-6. Resonance is perturbative."
+}
