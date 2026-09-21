@@ -86,11 +86,14 @@ def sigma_v_resonant(g_DM_Y1, m_chi_GeV, m_Phi_h_GeV, g_h_SM, v_H=v_H):
     delta = (m_Phi_h_GeV - 2 * m_chi_GeV) / (2 * m_chi_GeV)
 
     # Breit-Wigner propagator
-    s_threshold = 4 * m_chi_GeV**2
-    s = s_threshold * (1 + 0.01)  # small velocity correction at freeze-out
+    # s = 4 m_chi^2 * (1 + v^2/4) where v is the relative velocity at freeze-out
+    # For non-relativistic DM (T ~ m_chi/20 at freeze-out), v_F ~ sqrt(6 T / m_chi) ~ 0.3 c
+    # v_F^2/4 ~ 0.0225 at freeze-out
+    v_F_over_c_sq = 0.0225  # ~0.3c gives 0.0225
+    s = 4 * m_chi_GeV**2 * (1 + v_F_over_c_sq)
     s_m_Phi_h_sq = s - m_Phi_h_GeV**2
 
-    # Resonance enhancement
+    # Resonance enhancement (Breit-Wigner propagator)
     denom = s_m_Phi_h_sq**2 + (m_Phi_h_GeV * Gamma_total)**2
     BW_enhancement = m_Phi_h_GeV**2 * Gamma_chi * Gamma_SM / denom
 

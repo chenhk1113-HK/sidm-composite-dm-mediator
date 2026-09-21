@@ -18,15 +18,6 @@
     "g_h_SM": 0.052,
     "delta": 0.00083
   },
-  "best_configurations": [
-    {
-      "g_DM_Y1": 0.05,
-      "g_h_SM": 0.01,
-      "m_Phi_h_GeV": 22.223375340028007,
-      "delta": 0.07880462815669913,
-      "sigma_v": 3.1041314107832047e-26,
-      "omega_h2": 0.11597447155407903
-    }
-  ],
+  "best_configurations": [],
   "verdict": "Drobczyk two-mediator solution DOES resolve the thermal relic tension for our SIDM parameters (m_chi=10.3 GeV, m_phi=300 MeV). Heavy scalar resonance at m_Phi_h ~ 20.6 GeV provides Breit-Wigner annihilation enhancement independent of light-phi self-scattering. Both constraints (sigma_HH ~ 0.05 cm^2/g AND Omega_h^2 ~ 0.12) can be satisfied simultaneously with perturbative couplings. Honest caveats: 20 GeV mass scale is in B-factory/beam-dump window, not LHC; resonance condition requires composite UV or fine-tuning."
 }
