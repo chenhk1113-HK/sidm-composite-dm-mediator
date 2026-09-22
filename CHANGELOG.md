@@ -8,6 +8,51 @@
 
 
 
+
+## [GrokReview-v18.7] — 2026-09-21 — v1.14.7 / v18.7
+
+### Grok Review — Scientific-posture fixes (Tier 1)
+
+Grok's review is the most useful of seven reviews because it points to
+the actual gap between paper and repo: DeepSeek fixed internal
+consistency; Grok identifies external clarity problems.
+
+**Tier 1 (must address) — DONE:**
+- T1-A (repo/paper version drift): README headline reframed from
+  "satisfies 8 constraints" to "constraint map + no-go catalogue."
+  Layman summary adds Burkert caveat.
+- T1-B (Burkert wins on rotation curves): verified in
+  Phase 42 dynesty (Burkert log Z = -963 best; SIDM -3300 worst of 5
+  models). Abstract now states this directly.
+- T1-C (f_H borrowing caveat): made more prominent.
+
+**Tier 2 (important) — partial:**
+- T2-A (cut T-numbers/Phase IDs from main text): deferred to v1.15.
+- T2-B (interpolation nodes vs resonances): verified all 7 references
+  to "bookkeeping" already say "NOT physically motivated resonances."
+- T2-C (JVAS out of 8-point table): JVAS marked "excluded from
+  4-channel fit; complementary substructure physics" per Yu 2026.
+- T2-D (mixed-method table): abstract consolidates BIC/Bayes/RMSE.
+- T2-E (JCAP venue): abstract reframes as constraint map + no-go catalogue.
+
+**Tier 3 (consider) — deferred:**
+- T3-A (master sigma/m(v) figure): deferred to v1.15.
+- T3-B (external reference audit): required before journal submission.
+
+### Self-check
+- ALL PASSED (31/31)
+
+### Bottom line (Grok)
+"The scientific taste of v1.14.1 is better than the earlier 'ALL 9
+TESTS PASS / FULL SOLUTION' releases: the project learned to prefer
+no-gos and mixed verdicts over unification theater. That evolution is
+impressive for an AI-assisted curiosity repo. It is not yet a citeable
+SIDM model. It is a serious notebook that has identified a real tension
+(Cloud-9 vs dSph/UFD under velocity-dependent SIDM) and shown that
+standard Yukawa, magnetic-dipole, hidden U(1)+MeV splitting, and the
+published Chu P1 benchmark do not resolve it. That negative result,
+cleaned and shortened, is the publishable core."
+
 ## [Review6-XRef-v18.5] — 2026-09-21 — v1.14.5 / v18.5
 
 ### DeepSeek Review 6 — Stale cross-references fixed

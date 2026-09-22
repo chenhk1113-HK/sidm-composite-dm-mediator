@@ -2,11 +2,11 @@
 
 > ⚠️ **Disclaimer:** It is a personal project out of curiosity, made using Hermes with **MiniMax M3** as the coder, **Doubao**, **Qwen 3.8 Max** and other AIs as reviewers.
 
-**Multi-scale self-interacting dark matter framework: a self-consistent multi-component + gravothermal phenomenology that satisfies 8 observational constraints spanning 4 orders of magnitude in velocity. UV completion is documented as an open problem with three no-go theorems (v1.14).**
+**SIDM constraint map + no-go catalogue (v1.14.6): a velocity-dependent SIDM architecture (multi-resonance + two-component + gravothermal) achieves RMSE=0.25 on 7 channels but does NOT dominate Burkert/PISO on rotation curves alone (Phase 42 dynesty); one-mediator UV completions are ruled out (4 no-go theorems); two-mediator Drobczyk candidate satisfies thermal relic at δ=0.43% (requires composite UV or fine-tuning).**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.4--prelim%2BT88E%2BT90--v18.1%2BT184--T190%2BYu26%2BAIDA-blue)](VERSION)
-[![WIP Paper](https://img.shields.io/badge/wip_paper-v1.14.1-blueviolet)](v0.3-prelim/docs/PAPER_V1_DRAFT.md)
+[![Version](https://img.shields.io/badge/version-0.4--prelim%2BT88E%2BT90--v18.1%2BT184--T192%2BYu26%2BAIDA%2BGrok--Review--v18.7-blue)](VERSION)
+[![WIP Paper](https://img.shields.io/badge/wip_paper-v1.14.6-blueviolet)](v0.3-prelim/docs/PAPER_V1_DRAFT.md)
 [![Tests](https://img.shields.io/badge/tests-branch--dependent-blue)](v0.3-prelim/tests/)
 [![arXiv:2506.22997](https://img.shields.io/badge/cross--validated-arXiv%3A2506.22997-b31b1b)](https://arxiv.org/abs/2506.22997)
 
@@ -14,7 +14,9 @@
 
 ## 🎯 Layman summary (read this first)
 
-**What we built:** A self-consistent dark matter model that satisfies **7 of 8** independent observational constraints simultaneously (RMSE = 0.25 on the 7-point fit). The 8th constraint (Cloud-9's 4000× σ/m spike at v=28 km/s) is the published σ/m ≥ 50 cm²/g lower bound (Ohana, Zhang & Yu 2026, arXiv:2608.04362), confirmed independently — but cannot be derived from standard Yukawa physics.
+**What we built:** A velocity-dependent SIDM architecture (multi-resonance + two-component + gravothermal) that achieves **RMSE = 0.25 on 7 of 8 independent observational channels** spanning 4 orders of magnitude in velocity. The 8th channel (Cloud-9's 4000× σ/m spike at v=28 km/s) is the published σ/m ≥ 50 cm²/g lower bound (Ohana, Zhang & Yu 2026, arXiv:2608.04362), confirmed independently — but cannot be derived from standard Yukawa physics.
+
+**Honest caveat:** On rotation curves alone (SPARC 120 galaxies, Phase 42 dynesty), this architecture is **outperformed by Burkert** (coreless isothermal profile) and PISO profiles on Bayesian evidence. The 7-of-8 channel pass rate is a *channel-coverage* result, not a "model dominates the data" claim. Treat this work as a **constraint map + no-go catalogue** rather than a definitive SIDM model.
 
 **Why it matters:** Dark matter makes up 85% of the matter in the universe, but we don't know what it is. Different observations demand different amounts of dark-matter self-interaction — and simple models can't fit all the data at once.
 
@@ -24,7 +26,12 @@
 3. **Resonance + Gaussian broadening** (peaks in scattering at specific velocities)
 4. **Multi-resonance SIDM** with 4 Breit-Wigner peaks (cloud-9, SPARC, subhalo, cluster scales)
 
-**Verification:** 116 automated T120 tests pass. MCMC independently recovered our hand-tuned parameters. Statistical comparison beats simpler models by ΔBIC = -170.
+**Verification:** 116 automated T120 tests pass. MCMC independently recovered our hand-tuned parameters.
+
+**Statistical comparison (mixed verdict):**
+- On the **7-channel joint likelihood** (Phase 54), multi-resonance wins on raw log L (+6.08 over constant σ/m) but loses on BIC-corrected evidence (ΔBIC = +3.22 favoring constant) because of the 15 vs 1 parameter penalty.
+- On **SPARC rotation curves alone** (Phase 42, 120 galaxies), Burkert profile wins on dynesty Bayesian evidence; multi-resonance has lowest evidence of 5 tested models.
+- **The headline number for reviewers is T177 log B ≈ 3 (semi-informative Bayes factor)** favoring multi-resonance on the joint channels.
 
 **What's NEW in v18.1+UV (T165-T185, 2026-09-20 to 2026-09-21):** Cloud-9 robustness + UV completion.
 
