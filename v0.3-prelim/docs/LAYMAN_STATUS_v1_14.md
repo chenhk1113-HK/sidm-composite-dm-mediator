@@ -1,4 +1,4 @@
-# Layman Status Summary — Paper v1.14 / v18.1+UV+Yu26+AIDA (2026-09-21)
+# Layman Status Summary — Paper v1.14.8 / v18.8 (2026-09-21)
 
 This is a plain-language summary of the current state of the SIDM Composite DM-Mediator project. It is the public-facing version intended for both technical and non-technical readers.
 
@@ -6,15 +6,25 @@ This is a plain-language summary of the current state of the SIDM Composite DM-M
 
 ## Where we are now (2026-09-21)
 
-Paper is **v1.14.1** with codebase **v18.1+UV+Yu26+AIDA**. The phenomenology paper now has a **complete UV completion** (two-mediator Drobczyk solution), four **testable predictions** across direct/indirect detection + halo observations, and a **positive structural reframing** of the JVAS B1938+666 result via Yu 2026 PRL.
+Paper is **v1.14.8 / v18.8** with codebase **`+T194+RefAudit-v18.8`**. The paper has been processed through **eight reviews** (DeepSeek 1-6, Grok, Fornax 6 doc) and audited for cross-reference consistency, scientific posture, and external literature.
 
-**Major milestone**: The "UV completion open problem" is now **CLOSED**. The two-mediator framework satisfies both the thermal relic density AND the SIDM phenomenology. The model makes four sharp, falsifiable predictions. The JVAS "structural limitation" is reframed as complementary substructure physics independently verified by Yu 2026 [23] for JVAS + GD-1 + Fornax 6 — "three birds with one stone."
+**Major updates in v18.4-v18.8:**
+- **T192 thermal-averaged Breit-Wigner** (DeepSeek review3 Priority #1): proper Gondolo-Gelmini integration fixes the off-resonance issue. Best CHARM-compliant config: δ = 0.43%, **g_h_SM = 0.00040**, Ωh² = 0.119.
+- **T191 δ_0(v) at multiple α_D** confirms standard Yukawa cannot produce Cloud-9 spike at any coupling tested.
+- **T194 master σ/m(v) figure** with all observational bands and 7-point fit data.
+- **8 references web-verified** real (Yu 2026, Ohana 2026, Drobczyk 2025, Benitez-Llambay 2024, Horigome 2025, AIDA-TNG, micrOMEGAs 6.0).
+- **Grok review honest reframing**: paper is now positioned as a **constraint map + no-go catalogue**, not a definitive model. Burkert wins on rotation curves alone (Phase 42); this is now stated explicitly.
+
+**Major milestone (with honest framing):** The "UV completion open problem" is now **CLOSED FOR THERMAL RELIC ONLY** via the two-mediator Drobczyk framework. The Cloud-9 4000× spike (the actual σ/m(v) shape, not the bulk Ωh²) **remains unresolved at standard Yukawa level** — this is explicitly stated throughout the paper.
+
+**Four falsifiable predictions** for the two-mediator UV: σ_SI ~ 2×10⁻⁴⁹ cm² (below neutrino floor), ⟨σv⟩₀ ~ 10⁻²⁹ cm³/s (below CTA), beam-dump at 20 GeV. The JVAS "structural limitation" is reframed as **complementary substructure physics** at ~10⁶ M☉ scale, independently verified by Yu 2026 [23] for JVAS + GD-1 + Fornax 6 — "three birds with one stone."
 
 ---
 
 ## What works
 
-- A dark matter model that fits **7 of 8 observational datasets** across **4 orders of magnitude in velocity** (from ultra-faint dwarf galaxies to galaxy clusters), with **RMSE = 0.25** on the 7-point fit — genuinely excellent agreement.
+- A velocity-dependent SIDM **architecture** that achieves **7 of 8 channel coverage** across **4 orders of magnitude in velocity** (from ultra-faint dwarf galaxies to galaxy clusters), with **RMSE = 0.25** on the 7-point fit — genuinely excellent agreement on the channels tested.
+- **Honest caveat (Grok review, 2026-09-21):** On SPARC rotation curves **alone** (120 galaxies, dynesty), this architecture is **outperformed by Burkert** and PISO profiles on Bayesian evidence. The 7-of-8 channel coverage is a **channel-completeness result**, not a "model dominates the data" claim. Treat this project as a **constraint map + no-go catalogue**.
 - The 8th constraint (Cloud-9) is the **published σ/m ≥ 50 cm²/g lower bound** at v = 28 km/s, confirmed by independent MCMC analysis (Ohana, Zhang & Yu 2026, arXiv:2608.04362).
 - Verified by **MCMC** (independent parameter recovery, 1σ consistency)
 - **215 automated tests pass**

@@ -10,6 +10,59 @@
 
 
 
+
+## [Tier3-Polish-v18.9] — 2026-09-21 — v1.14.9 / v18.9
+
+### Polish pass — 8 improvements shipped (per user direction)
+
+PHASE 1: Option 1 — T194 σ/m(v) figure embedded in paper
+- §2.2 now references t194_master_sigma_v.png as canonical figure
+- Distinguishes dominant resonance v₁ from bookkeeping nodes
+- Shows all observational bands (Cloud-9 floor, dSph ceiling, etc.)
+
+PHASE 2: Option 2 — LAYMAN_STATUS updated to v18.8
+- Header, "where we are now", and "What works" sections all updated
+- Adds honest Burkert caveat from Grok review
+
+PHASE 3: Option 3 — Phase 42 verdict added to §11 Conclusions
+- Side-by-side table: Burkert (-963), PISO (-1409), Einasto (-1595),
+  NFW (-2654), SIDM hybrid (-3300) on 120 SPARC galaxies
+- Reframes paper as "constraint map + no-go catalogue, not model"
+
+PHASE 4: Option 4 — DEFERRED to v1.15 (per Grok recommendation)
+- T-numbers/Phase IDs in main text: cleanup pass requires v1.15 freeze
+- Not blocking; audit trail kept in supplementary
+
+PHASE 5: Option 5 — 19 regression tests added for T191-T194
+- NEW test_t191_t194_uv_completion.py: 19/19 PASSED
+- Locks δ_0(v) at v=28 km/s for multiple α_D ∈ [0.01, 100]
+- Locks Ωh² = 0.119, g_h_SM = 0.00040, δ = 0.43% (T192 thermal-avg)
+- Locks T194 best-fit parameters (σ_0 = 0.052, α = 1.93)
+- Locks RMSE = 0.250 on 7-point fit
+- Locks all 6 observational constraints present in figure
+
+PHASE 6: Option 6 — 2026 arXiv sweep
+- Found Engelhardt et al. 2026 "MARVEL-ously Dark" (arXiv:2601.23264)
+  on velocity-dependent SIDM dwarf halos
+- Direct comparison to our framework
+- NEW reference [49] added; cited in §2.2 as independent confirmation
+
+PHASE 7: Option 7 — Bookkeeping nodes UV status clarified
+- v₃ = 178, v₄ = 430 km/s positions ARE UV-derived (clockwork)
+- Peak heights ARE phenomenological (optimized for smooth σ/m(v))
+- Mixed-status label added to §2.2
+
+PHASE 8: Option 8 — Bayesian model comparison plot (T195)
+- NEW t195_model_comparison.png + .json
+- Two panels: SPARC-only (Burkert wins) and joint-channel
+  (multi-resonance wins raw log L, loses BIC-corrected)
+- T177 Bayes factor B = 21 shown
+- Side-by-side honest mixed-verdict framing
+
+### Self-check
+- ALL PASSED (31/31)
+- Tests: 19 new + 31 existing = 50 total
+
 ## [Tier3-Finalization-v18.8] — 2026-09-21 — v1.14.8 / v18.8
 
 ### Grok Tier 3 — Final cleanup pass

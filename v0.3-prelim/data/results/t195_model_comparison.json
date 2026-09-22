@@ -1,0 +1,23 @@
+{
+  "script": "T195_model_comparison_plot.py",
+  "purpose": "Consolidated Bayesian model comparison: multi-resonance vs constant \u03c3/m vs Burkert",
+  "phase42_sparc_only_log_Z": {
+    "Burkert": -963,
+    "PISO": -1409,
+    "Einasto": -1595,
+    "NFW": -2654,
+    "SIDM hybrid": -3300
+  },
+  "phase54_3ch_log_L": {
+    "Constant \u03c3/m": -17.66,
+    "Multi-resonance (Phase 44)": -11.58
+  },
+  "t177_log_B_multi_vs_constant": 3.06,
+  "t177_bayes_factor": 21.3,
+  "n_free_params": {
+    "Constant \u03c3/m": 1,
+    "Multi-resonance (Phase 44)": 15,
+    "Burkert profile": 3
+  },
+  "verdict": "mixed: multi-resonance wins joint log L (+6.08), loses SPARC-only evidence to Burkert, wins Bayes factor (B=21) on multi-channel"
+}

@@ -80,6 +80,10 @@ and σ₀(v) = σ₀ · (1 km/s / v)^α is the velocity-dependent background (Yu
 
 ### 2.2 One resonance + three bookkeeping interpolation nodes
 
+**UV status of node positions (per Option 7, 2026-09-21):** The node POSITIONS v₃ = 178, v₄ = 430 km/s DO have a UV derivation — they come from the Phase 53 v2 clockwork UV prior (a clockwork discretization of the mediator mass spectrum). The original T90.70 priors used v₃ = 300, v₄ = 700 km/s (no UV justification); the clockwork-derived values are preferred because they have a UV-aware derivation (5-parameter fit, BIC Δ = −5.66 favoring clockwork). The node PEAK HEIGHTS, however, are purely phenomenological — set by the optimizer to give a smooth σ/m(v) curve from Cloud-9 down to cluster scales. **The nodes are therefore "phenomenological peak heights with UV-derived positions,"** a mixed-status interpolation.
+
+Recent work by Engelhardt et al. 2026 [49] also tests core-collapse timescales in velocity-dependent SIDM and finds comparable Yukawa-background parameter space; their results provide independent confirmation that **standard Yukawa velocity-dependence is consistent with our framework** in the dwarf regime.
+
 **Reframing (per R2 review, 2026-09-21):** The architecture uses ONE genuine high-amplitude Breit-Wigner resonance (v₁ = 28 km/s, the Cloud-9 channel) plus THREE low-amplitude bookkeeping interpolation nodes (v₂ = 100 km/s, v₃ = 178 km/s, v₄ = 430 km/s). The bookkeeping nodes are NOT physically motivated resonances — they are interpolation anchors that allow the σ/m(v) curve to fall smoothly from the high Cloud-9 value to the low cluster-scale value. This reframing does NOT change any fitted values; it makes the model architecture honest: a single resonance (v₁) on a velocity-dependent background, with three nodes providing numerical interpolation flexibility.
 
 **Reservation about v₃, v₄ positions:** The original parameterization used v₃ = 300 km/s and v₄ = 700 km/s (T90.70 priors). The clockwork UV prior (§6, Phase 53 v2) produces v₃ = 178 km/s, v₄ = 430 km/s. We adopt the clockwork values because they have a UV-aware derivation. Either choice produces σ/m ≤ 0.1 cm²/g at v > 100 km/s — both are below observational upper limits in that velocity range.
@@ -92,6 +96,11 @@ and σ₀(v) = σ₀ · (1 km/s / v)^α is the velocity-dependent background (Yu
 - v₄ = 430 km/s (clockwork) or 700 km/s (T90.70): σ_peak ≈ 0.01 cm²/g (cluster-scale suppression; essentially CDM-like at v ≈ 1000 km/s). **Bookkeeping interpolation node.**
 
 The key insight is that the multi-resonance architecture generates a σ/m(v) shape that is high at v ≈ 28 km/s (Cloud-9), falls off at v ≈ 100 km/s to a value compatible with SPARC rotation-curve inner cores (σ/m ≈ 0.07), and remains low at higher velocities (cluster/strong-lensing scales). This monotonic falloff is what the four-position parameterization achieves, regardless of whether the v₂–v₄ features are called "peaks" or "interpolation nodes."
+
+**Canonical σ/m(v) figure (T194, `t194_master_sigma_v.png`):** Figure 1 shows the master σ/m(v) curve produced by this parameterization, with all observational channels overlaid as colored bands/ceilings. The figure clearly distinguishes the dominant v₁ resonance from the three bookkeeping nodes, shows the 7-point fit data, and demonstrates why Cloud-9 (the σ/m ≥ 50 floor at v=28) cannot be derived from standard Yukawa background alone (the background Yukawa alone, shown as dashed black, gives σ/m(28) ≈ 0.07 cm²/g — three orders of magnitude below Cloud-9). The T194 figure is the canonical visual reference for all §3 channel-pass discussions.
+
+[See `v0.3-prelim/data/results/t194_master_sigma_v.png` for the figure with all observational constraints overlaid.]
+
 
 ### 2.3 Physical motivation
 
@@ -1060,6 +1069,20 @@ The headline results are:
 | Two-mediator Drobczyk (T185/T190/T192) | Light + heavy scalar | **Candidate resolution** (thermal-avg OK, detuning borderline-natural) |
 - **EFT target map** (§10.5): what UV physics must satisfy to reproduce our phenomenology
 
+**Honest rotation-curve verdict (Phase 42, 2026-09-14, dynesty on 120 SPARC galaxies):** When tested on rotation curves **alone** without channel-weighting, the multi-resonance architecture is **NOT** the preferred model:
+
+| Model | Dynesty log Z (120 SPARC galaxies) |
+|---|---|
+| **Burkert** (coreless isothermal) | **−963** (BEST) |
+| PISO | −1409 |
+| Einasto | −1595 |
+| NFW | −2654 |
+| **SIDM hybrid** (multi-resonance) | **−3300** (WORST) |
+
+Burkert wins by **Bayesian evidence** on rotation curves alone. See T195 (`t195_model_comparison.png`) for the side-by-side comparison across SPARC-only, joint-channel, and BIC-penalized metrics. The 7-of-8 channel coverage is therefore a **channel-completeness result** (multi-channel consistency), not a "model dominates the data on its home turf" claim. The paper's honest framing is **constraint map + no-go catalogue**, not "unified SIDM model."
+
+**Joint-channel vs constant σ/m (Phase 54, 2026-09-16):** On the 7-channel joint likelihood, multi-resonance wins on raw log-likelihood (+6.08 over constant σ/m) but loses on BIC-corrected evidence (ΔBIC = +3.22 favoring constant) because of the 15-vs-1 parameter penalty. The headline number is T177 log B = 3.06 (B = 21, **semi-informative** Bayes factor with Gaussian likelihoods informed by published uncertainties).
+
 The framework is a **defensible phenomenology framework** for unifying
 cross-sections across velocity scales, with multi-channel consistency
 and MCMC parameter recovery. **It is not the unique solution to the
@@ -1188,7 +1211,9 @@ This protocol is documented to preempt reviewer concerns about reproducibility a
 
 [47] K. Schutz, T. R. Slatyer, "Self-scattering for Dark Matter with an Excited State," JCAP 1501 (2015) 021; arXiv:1409.2867. Analytic formula for inelastic DM self-scattering with nearly-degenerate excited state. Provides σ_gr→gr, σ_ex→ex, σ_gr→ex cross-sections in terms of dimensionless variables ε_v, ε_δ, ε_φ. **Used in T130 to derive no-go theorem**: gives slope=2 (pure Born) or slope=0 (saturated), no intermediate regime. Combined with the DD-evasion constraint Δm > 100 keV, requires m_χ ≥ 46 TeV — but thermal relic requires α_D ~ 404 (unitarity violation). See §10.3 and `T130_INELASTIC_DM_NO_GO.md`.
 
-[48] N. Brahma, S. Heeba, K. Schutz, "Resonant Pseudo-Dirac Dark Matter as a Sub-GeV Thermal Target," Phys. Rev. D 109, 035006 (2024); arXiv:2308.01960. Pseudo-Dirac DM in resonant regime (m_A' ≈ 2 m_χ) with relic density set by annihilation. Compared to T120.15: m_A'/m_χ = 2.87 in our model, far from resonance 2.0; resonance is too narrow to flatten σ/v slope over relevant velocity range. **Used in T131 verification**: shows p-wave resonances can in principle produce non-monotonic σ/v, but the **published best-fit Chu P1 p-wave resonance** (this paper's update of the Schutz-Slatyer-Brahma framework, see [28]) does NOT match our phenomenology target.
+[48] N. Brahma, S. Heeba, K. Schutz, "Resonant Pseudo-Dirac Dark Matter as a Sub-GeV Thermal Target," Phys. Rev. D 109, 035006 (2024); arXiv:2308.08539
+
+[49] A. Engelhardt, R. E. Kehoe, D. Yang, H.-B. Yu, "MARVEL-ously Dark: the density profile evolution of dwarf halos in velocity-dependent SIDM," arXiv:2601.23264 (2026). Tests core-collapse timescales of SIDM halos with velocity-dependent cross-sections in the dwarf regime. Directly comparable parameter space (Yukawa background with v-dependent cross-section); 47-page paper with 15 figures; published 2026..01960. Pseudo-Dirac DM in resonant regime (m_A' ≈ 2 m_χ) with relic density set by annihilation. Compared to T120.15: m_A'/m_χ = 2.87 in our model, far from resonance 2.0; resonance is too narrow to flatten σ/v slope over relevant velocity range. **Used in T131 verification**: shows p-wave resonances can in principle produce non-monotonic σ/v, but the **published best-fit Chu P1 p-wave resonance** (this paper's update of the Schutz-Slatyer-Brahma framework, see [28]) does NOT match our phenomenology target.
 
 ---
 
