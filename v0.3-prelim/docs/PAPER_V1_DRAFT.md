@@ -218,6 +218,36 @@ Leave-one-out analysis (Phase 47) shows:
 
 **T90 magnetic-moment branch (μ_χ = 6.10×10⁻⁸ μ_N, m_χ = 1 TeV, σ = 6.5×10⁻⁴³ cm²):** T197 cross-detector gives N_events ≈ 3.66×10⁻⁴¹ at LZ (40.4 orders deficit), 2.23×10⁻⁴¹ at PandaX-4T (40.7 orders deficit), 1.19×10⁻⁴¹ at XENONnT (40.9 orders deficit). The T90 magnetic-moment value is the closest viable interpretation to producing ~1 event but predicts too few events by ~40 orders. Per the project's T90 cross-link to Di Mauro 2026 [51], the LZ event requires a magnetic-moment cross-section ~40 orders larger than T90's tuned value — which is excluded by PandaX-4T magnetic-moment bound (4.8×10⁻¹⁰ μ_B at m_χ = 40 GeV, Nature 618, 47-50, 2023).
 
+**T198 cross-detector with WIMpy 1.1.1 (per user approval, 2026-09-22):** The project's `wip/tier3-sequential-T90-magnetic` branch contains T90 v10 cross-detector (`v0.3-prelim/code/t90_v10_cross_detector.py`) which uses WIMpy's `DMUtils.dRdE_magnetic` for proper form-factor calculation. WIMpy is now installed in `.venv-sidm-bench/`. With LZ-tuned μ_χ = 6.10×10⁻⁸ μ_N at m_χ = 1 TeV (T90 phase 8), WIMpy predicts N_events:
+
+| Detector | N_predicted | Verdict |
+|---|---|---|
+| **LZ SR0+SR1** | **0.998** | ~1 event by construction (LZ-tuned) |
+| XENONnT SR0 (4.3 t·y) | 499 | **100-500× OVER-predicted** |
+| PandaX-4T Run-0+1 (1.54 t·y) | 179 | **50-180× OVER-predicted** |
+| DARWIN projection (200 t·y) | 23,191 | **>10⁴× OVER-predicted** |
+| DarkSide-20k (Ar-40 I=0) | 0 | Argon I=0 suppresses magnetic-moment |
+| LZ-Upgrade (3 t·y) | 348 | **16-350× OVER-predicted** |
+
+**This is the central tension of the T90 branch**: tuned to LZ's single event, but over-predicts by 100-23,000× at every other xenon detector. **The T90 magnetic-moment interpretation is FALSIFIED by cross-detector consistency** unless either (a) the LZ event is real AND other detectors have an unexplained signal deficit, or (b) the LZ event is not real (in which case the T90 branch becomes a future-detection forecast rather than a current explanation). Per the T90 v17 LZ time-series analysis (`v0.3-prelim/code/t90_v17_lz_time_series.py`), the Bayesian posterior on LZ event hypotheses is:
+
+| Hypothesis | Posterior |
+|---|---|
+| magnetic_moment_DM | **47.0%** |
+| higgsino_inelastic | **47.0%** |
+| instrumental | 6.1% |
+| solar_neutrino_8B | 0.03% |
+| ¹²⁴Xe DEC | 0.0% |
+
+**Two DM interpretations are TIED at 47% posterior** — the magnetic-moment and Higgsino-inelastic interpretations are indistinguishable given the single event. This motivates a **second LZ data release** to discriminate, and validates the paper's framing of LZ as a "marginal future channel" rather than a discovery.
+
+**Cross-link summary:**
+- T87 archive: `v0.3-prelim/docs/archive/other/T87_LZ_FORWARD_PREDICTION.md` (v0.7 MAP, 72.3 order deficit)
+- T196 fresh: `v0.3-prelim/code/T196_v18_lz_event_rate.py` (v18.11 Drobczyk, kinematic issue identified)
+- T197 deep: `v0.3-prelim/code/T197_deep_lz_analysis.py` (4-model cross-detector, no WIMpy)
+- T198 WIMpy: `v0.3-prelim/code/t90_v10_cross_detector.py` + `t90_v17_lz_time_series.py` (T90 branch, cross-detector with WIMpy form factors)
+- Result files: `v0.3-prelim/data/results/{t196,t197}_*.json` and `v0.3-prelim/outputs/t90/{cross_detector_predictions,lz_time_series}.json`
+
 **Verdict:** Composite-DM at v0.7 MAP **fails this test by 115 orders of magnitude** (T87 frozen); v18.11 Drobczyk is **kinematically inaccessible** at LZ 5.4-270 keV window — produces 0 events regardless of σ_SI (T197 fresh); Di Mauro 2026 inelastic interpretation fails by **42 orders** (T197); T90 magnetic-moment branch fails by **40 orders** (T197). Four-model cross-detector test. This is the strongest no-go channel in our composite-DM direct-detection test, and importantly, it is **falsifiable** — any future composite-DM parameter point that recovers the LZ event rate would have to bridge a 40-115 order deficit. Per the project's cross-link to Di Mauro 2026 [51], this deficit is consistent with the magnetic-moment (T90) and Higgsino-inelastic branches being separate EFT channels; the composite-DM σ_DM-nuc is not a generic WIMP cross-section.
 
 **Honest framing:** We do not claim the LZ event is real. We test whether, *if* it is real, our model can explain it. The answer is **no** across all four tested configurations: v0.7 composite-DM (fails by 115 orders), v18.11 Drobczyk (kinematically inaccessible, 0 events), Di Mauro 2026 inelastic (fails by 42 orders), T90 magnetic-moment (fails by 40 orders). If the event is later attributed to background or revised to <2σ, this test becomes "untestable" rather than "failed"; if it is confirmed at higher significance, all four verdicts stand and the composite-DM / two-mediator parameter spaces must be revisited at higher ε or with SD operators.
@@ -965,6 +995,24 @@ predicted null at LZ, XENONnT, DARWIN, and all current and future
 direct-detection experiments. The reduced σ_SI makes the null even
 more robust than previously claimed. This is the **PREDICTED NULL**
 that discriminates our model from generic WIMP scenarios.
+
+**Important kinematic caveat (per T197, 2026-09-22):** The "predicted
+null" framing is technically correct (no events predicted at LZ) but the
+**physical reason is kinematic, not σ_SI**. At m_χ = 10.3 GeV, the
+minimum velocity to produce a 5.4 keV nuclear recoil on xenon is
+**v_min = 1096 km/s**, which exceeds the SHM escape velocity + lab
+motion of 776 km/s. Therefore **v18.11 produces 0 events at LZ
+regardless of σ_SI in the 5.4-270 keV window** — the standard analysis
+energy range that produced the 2026 September single-event observation.
+The T187 benchmark σ_SI = 1.23×10⁻⁴⁶ at 10 GeV (cited as "RIGHT AT LZ
+SENSITIVITY" in earlier versions) was computed against the LZ 2023
+~1 keV low-E analysis, NOT the 2026 5.4-270 keV extended-window
+analysis. For detectors with lower E_R thresholds (DarkSide-20k's
+argon target at 30 keV; S2-only XENONnT analyses), v18.11 IS
+kinematically accessible, and σ_SI = 2×10⁻⁴⁹ cm² IS a true predicted
+null. The null is real but for **two** compounding reasons:
+(a) σ_SI is below the neutrino floor AND (b) the kinematic threshold
+excludes v18.11 from the LZ 2026 energy window entirely.
 
 **Caveat:** σ_SI depends on the Higgs-nucleon coupling f_N ~ 0.3
 (which has ~30% uncertainty); the predicted σ_SI could be 5×10⁻⁴⁹ to

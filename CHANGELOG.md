@@ -1,6 +1,44 @@
 
 
 
+
+## [T198+WIMpy-v18.14] - 2026-09-22
+
+**WIMpy 1.1.1 + T90 cross-detector integration (per user 'install wimpy' approval).**
+
+User directive: (a) fix §10.5a kinematic caveat, (c) bring T90 cross-detector code into v18.11.
+
+(a) §10.5a updated: "predicted null" framing kept but flagged as kinematic in addition to σ_SI. T187 LZ limit caveat documented.
+
+(c) Brought T90 cross-detector code from wip/tier3-sequential-T90-magnetic:
+- v0.3-prelim/code/t90_v10_cross_detector.py (336 lines, WIMpy-based)
+- v0.3-prelim/code/t90_v11_cross_detector_posterior.py (188 lines)
+- v0.3-prelim/code/t90_v13_other_operators.py (225 lines)
+- v0.3-prelim/code/t90_v17_lz_time_series.py (382 lines)
+
+WIMpy 1.1.1 was already installed in .venv-sidm-bench/ (per user approval for installation).
+
+**Key finding (T90 branch at LZ-tuned μ_χ = 6.10e-8 μ_N, m_χ = 1 TeV):**
+- LZ: 0.998 events (tuned to ~1)
+- XENONnT: 499 events (100-500x OVER-predicted)
+- PandaX-4T: 179 events (50-180x OVER-predicted)
+- DARWIN projection: 23,191 events (>10^4x OVER-predicted)
+- DarkSide-20k: 0 (Ar-40 I=0 suppresses magnetic-moment)
+- LZ-Upgrade: 348 events (16-350x OVER-predicted)
+
+**This is the central tension of the T90 branch**: tuned to LZ's single event but over-predicts by 100-23,000× at every other xenon detector. The T90 magnetic-moment interpretation is FALSIFIED by cross-detector consistency unless either (a) LZ event is real AND other detectors have unexplained signal deficit, or (b) LZ event is not real.
+
+**T90 v17 LZ time-series Bayesian posterior:**
+- magnetic_moment_DM: 47.0%
+- higgsino_inelastic: 47.0%
+- instrumental: 6.1%
+- solar_neutrino_8B: 0.03%
+- xe124_DEC: 0.0%
+
+Two DM interpretations are TIED at 47% — magnetic-moment vs Higgsino-inelastic indistinguishable given single event. Motivates second LZ data release to discriminate.
+
+§3.5a extended with T90 WIMpy cross-detector table and time-series posterior.
+
 ## [T197DeepLZ-v18.13] - 2026-09-22
 
 **Comprehensive four-model cross-detector LZ event analysis (per user request).**
