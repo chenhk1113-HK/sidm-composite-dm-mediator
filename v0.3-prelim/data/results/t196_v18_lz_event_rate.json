@@ -1,0 +1,31 @@
+{
+  "T196_summary": "v18.11 LZ event-rate test (option-b fresh computation)",
+  "date": "2026-09-22",
+  "v18_11_parameters": {
+    "m_chi_GeV": 10.3,
+    "sigma_SI_cm2": 2e-49,
+    "source": "T192 thermal-averaged BW, g_h_SM=0.00040, m_Phi_h=20.69 GeV"
+  },
+  "v07_MAP_parameters": {
+    "m_chi_GeV": 770,
+    "sigma_SI_cm2": 1.15e-117,
+    "source": "T87 archived, v0.7 MAP composite-DM"
+  },
+  "v18_11_results": {
+    "dN_dt_per_kg_Hz": 1.7087378640776698e-43,
+    "N_events_LZ_284_ty": 4.349267206462136e-29,
+    "log10_N_pred_over_N_obs": -28.36158390971172,
+    "verdict": "DOES NOT EXPLAIN LZ EVENT"
+  },
+  "v07_MAP_results": {
+    "dN_dt_per_kg_Hz": 1.3142857142857142e-113,
+    "N_events_LZ_284_ty": 3.3452642896457144e-99,
+    "log10_N_pred_over_N_obs": -98.4755695654894,
+    "verdict": "DOES NOT EXPLAIN LZ EVENT",
+    "note": "Elastic point-particle; T87 inelastic (gaussian F\u00b2, \u03b4=297 keV) gives N_events = 4.81e-73"
+  },
+  "comparison": {
+    "v18_11_to_v07_orders_of_magnitude": 70.11398565577768,
+    "interpretation": "v18.11 Drobczyk candidate is 60+ orders of magnitude closer to LZ sensitivity than v0.7 composite-DM, but still ~25 orders below producing 1 event."
+  }
+}

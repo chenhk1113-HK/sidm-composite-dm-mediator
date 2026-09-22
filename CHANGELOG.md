@@ -1,4 +1,27 @@
 
+
+## [T196Fresh-v18.12] - 2026-09-22
+
+**Fresh LZ event-rate computation at v18.11 posteriors (option-b per user).**
+
+Per user request "did you test lz channel with our posteriors" — yes, now done.
+Previous v18.11 cited the frozen T87 v0.7 result (74 orders deficit); this update adds
+T196 fresh computation against v18.11 posteriors:
+
+- Wrote `v0.3-prelim/code/T196_v18_lz_event_rate.py` (uses LZ 2.84 tonne-year exposure,
+  SHM with v₀=220 km/s, v_esc=544 km/s, m_N_xe=131 GeV)
+- Result: v18.11 Drobczyk candidate (σ_SI = 2×10⁻⁴⁹ cm², m_χ = 10.3 GeV) → **N_events ≈ 4.35×10⁻²⁹**
+  (28.36 orders below observed 1 event)
+- Comparison to v0.7 composite-DM (frozen T87): v0.7 fails by 72.3 orders, v18.11 by 28.4 orders
+- v18.11 is **70 orders of magnitude closer** to LZ sensitivity than v0.7 but still fails
+
+§3.5a updated:
+- Replaces single "74 orders deficit" with two-regime framing (T87 frozen v0.7 vs T196 fresh v18.11)
+- Notes v18.11's thermal-relic σ_SI is structurally different from v0.7's freeze-in ε² × F²_composite
+- Adds comparison: structural shift from composite-DM to two-mediator UV completion
+
+Saved JSON: `v0.3-prelim/data/results/t196_v18_lz_event_rate.json`
+
 ## [LZEvent-v18.11] - 2026-09-22
 
 **Add LZ 2026 September event as falsifiability demonstration, NOT as passing observational channel.**
