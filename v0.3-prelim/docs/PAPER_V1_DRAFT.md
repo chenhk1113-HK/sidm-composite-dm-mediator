@@ -124,7 +124,7 @@ The closest existing work is **Yang & Yu 2023** [11] (single-breathing-mode medi
 
 ### 3.2 Cloud-9 ultra-diffuse galaxies
 
-**Data:** Cloud-9, a Reionization-Limited H I Cloud (RELHIC) candidate near M94, discovered by Zhou+ 2023 [15a] (FAST H I detection, M_HI ≈ 1.4×10⁶ M☉, W50 ≲ 20 km s⁻¹). The hydrostatic-equilibrium analysis of Benítez-Llambay, Dutta, Fumagalli & Navarro 2024 [15b] (ApJ 973, 61) yields a σ/m ≳ 50 cm²/g floor at v ≈ 28 km s⁻¹, with a halo mass M_200 ≈ 5×10⁹ M☉ (consistent with M_crit). Stellar-mass upper limits on any luminous counterpart have been refined by Anand+ 2025 [15c] (HST/ACS star-counts, M⋆ < 10³·⁵ M☉, 99.5% CL) and Trujillo+ 2026 [15d] (GTC/HiPERCAM integrated light, M⋆ < 1.6×10⁴ M☉). The σ/m(28) ≈ 100 cm²/g value we adopt as the multi-resonance working anchor is an internal derivation, consistent with the Benítez-Llambay+ 2024 published floor and chosen to provide a concrete quantitative target.
+**Data:** Cloud-9, a Reionization-Limited H I Cloud (RELHIC) candidate near M94, discovered by Zhou+ 2023 [15a] (FAST H I detection, M_HI ≈ 1.4×10⁶ M☉, W50 ≲ 20 km s⁻¹). The hydrostatic-equilibrium analysis of Benítez-Llambay, Dutta, Fumagalli & Navarro 2024 [15b] (ApJ 973, 61) yields a σ/m ≳ 50 cm²/g floor at v ≈ 28 km s⁻¹, with a halo mass M_200 ≈ 5×10⁹ M☉ (consistent with M_crit). Stellar-mass upper limits on any luminous counterpart have been refined by Anand+ 2025 [15c] (HST/ACS star-counts, M⋆ < 10³·⁵ M☉, 99.5% CL; baseline comparison with Leo T, μ_0,V ≈ 27 mag arcsec⁻²) and Trujillo+ 2026 [15d] (GTC/HiPERCAM integrated light at surface-brightness limits 31.4 mag arcsec⁻² in g, 31.0 in r — **~10× deeper than previous DESI Legacy / HST searches**, M⋆ < 1.6×10⁴ M☉ assuming old, metal-poor population; surface mass density < 0.01 M☉/pc²). **Trujillo+ 2026 [15d] is the strongest stellar-mass bound on Cloud-9 to date**, with the Leo T comparison caveat noted in Anand+ 2025 [15c] potentially underestimating the bound by 2-3 mag for galaxies with the diffuse extended morphology of Cloud-9. The σ/m(28) ≈ 100 cm²/g value we adopt as the multi-resonance working anchor is an internal derivation, consistent with the Benítez-Llambay+ 2024 published floor and chosen to provide a concrete quantitative target.
 
 **Constraint:** At v ≈ 28 km/s, σ/m should be high (≳ 50 cm²/g published; we use ≈ 100 cm²/g as the internal target).
 
@@ -1047,6 +1047,11 @@ constraints spanning four orders of magnitude in velocity (3-500 km/s), under
 the assumptions documented in §9. The Cloud-9 σ/m ≥ 50 constraint (the 8th)
 is published and confirmed independently by Ohana, Zhang & Yu 2026 [15e],
 but cannot be derived from standard Yukawa physics (T165-T172, §10.4a).
+Stellar-mass upper limits on any luminous counterpart of Cloud-9 have been
+refined by Anand+ 2025 [15c] and Trujillo+ 2026 [15d] (GTC/HiPERCAM
+~10× deeper than previous searches, M⋆ < 1.6×10⁴ M☉ — **strongest stellar
+bound to date**); the underlying gas mass M_HI ≈ 1.4×10⁶ M☉ remains at least
+60× larger than any possible stellar counterpart.
 The headline results are:
 
 - **Multi-component + gravothermal phenomenology** satisfies 7/8 observational constraints with **RMSE = 0.25** on the 7-point fit (excluding Cloud-9). The Cloud-9 spike is the dominant residual at any single-Yukawa / KK tower / KK tower with gravothermal extension we tested (T165-T172, 2026-09-20).

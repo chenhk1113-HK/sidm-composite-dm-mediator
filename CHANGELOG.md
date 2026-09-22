@@ -11,6 +11,29 @@
 
 
 
+
+## [TrujilloPolish-v18.10] — 2026-09-21 — v1.14.10 / v18.10
+
+### Light polish — Trujillo+ 2026 [15d] context added
+
+Per user direction, integrated Trujillo+ 2026 (arXiv:2608.20911) details
+into Cloud-9 narrative as the strongest stellar-mass bound to date.
+
+§3.2 (Cloud-9): Added GTC/HiPERCAM surface-brightness limits (31.4 g,
+31.0 r mag/arcsec^2 — 10x deeper than DESI Legacy / HST), explicit M*
+< 1.6e4 Msun bound, surface mass density < 0.01 Msun/pc^2, old metal-poor
+population assumption. Added Anand+ 2025 [15c] Leo T baseline caveat
+(mu_0,V ~ 27 mag/arcsec^2, may underestimate Cloud-9 bound by 2-3 mag for
+diffuse extended morphology). Bolded: "Trujillo+ 2026 [15d] is the
+strongest stellar-mass bound on Cloud-9 to date".
+
+§11 (Conclusions): Added paragraph noting stellar-mass upper limits
+refined by Anand+ 2025 + Trujillo+ 2026, gas/stellar ratio 60x favoring
+dark-matter-dominated interpretation.
+
+No numerical impact on 7-of-8 fit. No new figures. No new tests.
+
+Self-check: ALL PASSED (31/31).
 ## [Tier3-Polish-v18.9] — 2026-09-21 — v1.14.9 / v18.9
 
 ### Polish pass — 8 improvements shipped (per user direction)
