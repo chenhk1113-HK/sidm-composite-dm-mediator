@@ -1,3 +1,16 @@
+
+## [LZEvent-v18.11] - 2026-09-22
+
+**Add LZ 2026 September event as falsifiability demonstration, NOT as passing observational channel.**
+
+- §3.5a added: LZ 2026 September event (248 keV, 2.6σ, marginal) tested against composite-DM at v0.7 MAP
+- Composite-DM σ_DM-nuc ≈ 1.1×10⁻¹⁷ cm² → fails LZ test by **74 orders of magnitude** (consistent with ε ~ 10⁻³⁷ freeze-in regime)
+- 4 new references added: [50] LZ Collab arXiv:2609.02823, [51] Di Mauro arXiv:2609.02608, [52] Visinelli arXiv:2609.02807, [53] Buckley et al. arXiv:2609.14799
+- Abstract reframed: keep "7 of 8 observational channels" framing; LZ event added as **falsifiability demonstration**, not a 9th passing channel
+- Cross-link to archived T87 doc (`v0.3-prelim/docs/archive/other/T87_LZ_FORWARD_PREDICTION.md` §13) with Di Mauro cross-link
+- Per user's deliberation: 2.6σ is below 5σ discovery threshold; treat as conditional on LZ confirmation; honest framing "fails this test by 74 orders" rather than "channel count 9"
+- Pre-existing [30] orphan ref noted but NOT fixed (outside LZ task scope; flagged for user awareness)
+
 # Changelog — sidm-composite-dm-mediator
 
 > **Note 2026-08-14**: project renamed from `dm-sidm-pipeline`. All version
