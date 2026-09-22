@@ -7,6 +7,33 @@
 
 
 
+
+## [Review6-XRef-v18.5] — 2026-09-21 — v1.14.5 / v18.5
+
+### DeepSeek Review 6 — Stale cross-references fixed
+- Global search-and-replace applied to all stale section references:
+  - §10.7.1 -> §10.4a.1 (1)
+  - §10.7.2 -> §10.4a.2 (1)
+  - §10.13 -> §10.6 (1)
+  - §10.10 -> §10.3 (4)
+  - §10.11 -> §10.6 (1)
+  - §10.9 -> §10.4c (6)
+  - §10.7 -> §10.4a (7)
+  - §10.8 -> §10.4b (1, conditional)
+- Total: 22 cross-references updated
+- §10 header updated to list 7 subsections (including §10.5a)
+
+### Minor items
+- T193 matplotlib figure: deferred (not blocking)
+- Abstract T163 parenthetical: deferred (not blocking)
+
+### Self-check
+- ALL PASSED (31/31)
+
+### Per reviewer
+"The physics is now sound and the structure is coherent. The paper is
+ready for submission at PRD or JCAP with the mixed-verdict framing."
+
 ## [Review5-Editorial-v18.4] — 2026-09-21 — v1.14.4 / v18.4
 
 ### DeepSeek Review 5 — 8 of 9 priorities fixed

@@ -366,7 +366,7 @@ A formal per-point Gaussian likelihood comparison (rather than the scoring-rule 
 
 ## 10. UV Completion: No-Go Theorems, Two-Mediator Candidate, Cloud-9 Robustness
 
-This section presents the UV completion status in 6 subsections:
+This section presents the UV completion status in 7 subsections:
 
 - **§10.1** UV completion: general framework and constraints
 - **§10.2** One-mediator UV completions ruled out
@@ -380,7 +380,8 @@ This section presents the UV completion status in 6 subsections:
   - §10.4a T165-T172 robustness investigation
   - §10.4b T174-T177 DeepSeek verifications
   - §10.4c T178-T183 deferred items summary
-- **§10.5** EFT target map + testable predictions
+- **§10.5** EFT target map for future UV completions
+- **§10.5a** Testable predictions of the two-mediator UV completion (T186-T190)
 - **§10.6** Summary of §10 UV no-go theorems
 
 Detailed investigation narratives (T165-T191, DeepSeek review1/2/3/4 responses,
@@ -801,7 +802,7 @@ Three BIC/Bayes comparisons have been performed in this paper:
 | Method | Location | Result | Interpretation |
 |---|---|---|---|
 | Scoring-rule BIC (ΔBIC = -24.10) | §9.3.1 | favors T120 v1.13 | methodological, not Bayesian evidence |
-| Proper Bayesian evidence (log B = 3.06) | §10.8 (T177) | **favors multi-resonance** | proper likelihood integration |
+| Proper Bayesian evidence (log B = 3.06) | §10.4b (T177) | **favors multi-resonance** | proper likelihood integration |
 | BIC on constant σ/m (ΔBIC = -19.80) | §10.9 | favors constant σ/m | n-dependent BIC, sensitive to dataset |
 
 **Synthesis:** The BIC-based tests give **mixed results** depending on
