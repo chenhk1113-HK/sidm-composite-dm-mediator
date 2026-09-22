@@ -2,21 +2,29 @@
 
 > ⚠️ **Disclaimer:** It is a personal project out of curiosity, made using Hermes with **MiniMax M3** as the coder, **Doubao**, **Qwen 3.8 Max** and other AIs as reviewers.
 
-**SIDM constraint map + no-go catalogue (v1.14.6): a velocity-dependent SIDM architecture (multi-resonance + two-component + gravothermal) achieves RMSE=0.25 on 7 channels but does NOT dominate Burkert/PISO on rotation curves alone (Phase 42 dynesty); one-mediator UV completions are ruled out (4 no-go theorems); two-mediator Drobczyk candidate satisfies thermal relic at δ=0.43% (requires composite UV or fine-tuning).**
+**SIDM constraint map + no-go catalogue (v1.14.9 / v18.9, 2026-09-21): a velocity-dependent SIDM architecture (multi-resonance + clockwork-derived node positions + two-component + gravothermal) achieves RMSE=0.25 on 7 channels with semi-informative Bayes factor B=21 (log B = 3.06) favoring multi-resonance over constant σ/m; 4 no-go theorems rule out one-mediator UV; Burkert profile wins on rotation curves alone (Phase 42 dynesty); two-mediator Drobczyk candidate viable at δ=0.43% (5× broader than Drobczyk's 0.083%, requires composite UV or fine-tuning).**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.4--prelim%2BT88E%2BT90--v18.1%2BT184--T192%2BYu26%2BAIDA%2BGrok--Review--v18.7-blue)](VERSION)
-[![WIP Paper](https://img.shields.io/badge/wip_paper-v1.14.6-blueviolet)](v0.3-prelim/docs/PAPER_V1_DRAFT.md)
-[![Tests](https://img.shields.io/badge/tests-branch--dependent-blue)](v0.3-prelim/tests/)
+[![Version](https://img.shields.io/badge/version-0.4--prelim%2BT88E%2BT90--v18.1%2BT184--T190%2BYu26%2BAIDA%2BT192%2BEditorial--v18.2%2BT193--v18.3%2BReview5--v18.4%2BReview6--v18.5%2BGrokReview--v18.7%2BT194--v18.8%2BT195--v18.9-blue)](VERSION)
+[![WIP Paper](https://img.shields.io/badge/wip_paper-v1.14.9-blueviolet)](v0.3-prelim/docs/PAPER_V1_DRAFT.md)
+[![Tests](https://img.shields.io/badge/tests-50_passed-green)](v0.3-prelim/tests/)
 [![arXiv:2506.22997](https://img.shields.io/badge/cross--validated-arXiv%3A2506.22997-b31b1b)](https://arxiv.org/abs/2506.22997)
+[![arXiv:2608.04362](https://img.shields.io/badge/cross--validated-arXiv%3A2608.04362-b31b1b)](https://arxiv.org/abs/2608.04362)
+[![arXiv:2510.11006](https://img.shields.io/badge/cross--validated-arXiv%3A2510.11006-b31b1b)](https://arxiv.org/abs/2510.11006)
 
 ---
 
 ## 🎯 Layman summary (read this first)
 
-**What we built:** A velocity-dependent SIDM architecture (multi-resonance + two-component + gravothermal) that achieves **RMSE = 0.25 on 7 of 8 independent observational channels** spanning 4 orders of magnitude in velocity. The 8th channel (Cloud-9's 4000× σ/m spike at v=28 km/s) is the published σ/m ≥ 50 cm²/g lower bound (Ohana, Zhang & Yu 2026, arXiv:2608.04362), confirmed independently — but cannot be derived from standard Yukawa physics.
+**What we built:** A velocity-dependent SIDM architecture (multi-resonance + two-component + gravothermal) that achieves **RMSE = 0.25 on 7 of 8 independent observational channels** spanning 4 orders of magnitude in velocity. The 8th channel (Cloud-9's 4000× σ/m spike at v=28 km/s) is the published σ/m ≥ 50 cm²/g lower bound (Ohana, Zhang & Yu 2026, arXiv:2608.04362), confirmed independently — but **cannot be derived from standard Yukawa physics** (verified at α_D ∈ [0.01, 100] in T191).
 
-**Honest caveat:** On rotation curves alone (SPARC 120 galaxies, Phase 42 dynesty), this architecture is **outperformed by Burkert** (coreless isothermal profile) and PISO profiles on Bayesian evidence. The 7-of-8 channel pass rate is a *channel-coverage* result, not a "model dominates the data" claim. Treat this work as a **constraint map + no-go catalogue** rather than a definitive SIDM model.
+**Honest caveat:** On rotation curves alone (SPARC 120 galaxies, Phase 42 dynesty), this architecture is **outperformed by Burkert** (coreless isothermal profile, log Z = -963) and PISO profiles on Bayesian evidence. The 7-of-8 channel pass rate is a *channel-coverage* result, not a "model dominates the data" claim. Treat this work as a **constraint map + no-go catalogue** rather than a definitive SIDM model.
+
+**Statistical comparison (mixed verdict):**
+- **Bayes factor B = 21.3** (T177, log B = 3.06, semi-informative) favoring multi-resonance over constant σ/m on joint channels
+- **Phase 42 (SPARC only)**: Burkert wins Bayesian evidence (log Z = -963) over our SIDM hybrid (log Z = -3300) — by a wide margin
+- **Phase 54 (joint likelihood)**: Multi-resonance wins raw log L (+6.08 over constant σ/m) but loses on BIC-corrected evidence (ΔBIC = +3.22 favoring constant) because of the 15 vs 1 parameter penalty
+- **The honest framing**: Constraint map + no-go catalogue, not a unified SIDM model
 
 **Why it matters:** Dark matter makes up 85% of the matter in the universe, but we don't know what it is. Different observations demand different amounts of dark-matter self-interaction — and simple models can't fit all the data at once.
 
@@ -138,8 +146,9 @@ documents **three independent UV completion no-go theorems**:
 
 | Track | Version | Status | Headline |
 |---|---|---|---|
+| **WIP (Tier-2, multi-component-SIDM-core-collapse)** | `v1.14.9 / v18.9` | wip/multi-component-SIDM-core-collapse @ `5e3c692` | **MOST PROMISING**: Multi-resonance SIDM + clockwork UV-derived node positions (v₃=178, v₄=430 km/s) + phenomenological peak heights + Yang+ 2025 PRD two-component + Yu 2026 PRL gravothermal + Gaussian Breit-Wigner profiles. **RMSE = 0.25 on 7 of 8 channels** (Cloud-9 is the variance-absorbing 8th). **Bayes factor B = 21.3** (T177, log B = 3.06, semi-informative) favoring multi-resonance on joint channels. **Burkert wins on rotation curves alone** (Phase 42 dynesty log Z = -963 vs SIDM hybrid -3300). **4 no-go theorems**: magnetic dipole, Hidden U(1) + pseudo-Dirac, GeV-scale inelastic DM, Chu 2019 p-wave. **One-mediator UV RULED OUT** by 10⁸-10¹³× (T184). **Two-mediator Drobczyk candidate** viable at δ=0.43%, g_h_SM=0.00040, Ωh²=0.119 (5× broader than Drobczyk's 0.083%, requires composite UV). **50 tests pass** (31 existing + 19 new for T191-T194). Paper v1.14.9 INTERNAL REFERENCE |
+| **WIP (Tier-2, cloud-9-relhic)** | `v1.14.9 / v18.9` | wip/cloud-9-relhic @ `5e3c692` (synced) | Sync'd to multi-component-SIDM-core-collapse at commit `5e3c692` (was lagging at `e6d81b0`). |
 | **Standing (Tier-1, master)** | `v0.4-prelim+T88E` | master @ 2026-09-02 | σ/m₀ = **0.06 cm²/g**, log Z = **−164.87 ± 0.084**, m_χ = **770 GeV**, m_φ = **453 MeV**; 22 channels; 677 tests pass |
-| **WIP (Tier-2, multi-component-SIDM-core-collapse)** | `T90-Paper-v14` | wip/multi-component-SIDM-core-collapse @ `05cfe5d` | **MOST PROMISING**: Multi-resonance SIDM + Yang+ 2025 PRD two-component + Yu 2026 PRL gravothermal + Gaussian Breit-Wigner profiles. **All 8 observational constraints pass simultaneously.** **NEW (v1.14)**: Hidden U(1) UV completion retired (falsified by 2026-09-19 referee report). Three independent UV completion no-go theorems documented (magnetic dipole, Hidden U(1) + pseudo-Dirac, GeV-scale inelastic DM). Published best-fit p-wave resonance (Chu et al. 2019) also fails. **No published UV completion solves the Cloud-9 vs dSph tension.** Phenomenology remains the only working framework. MCMC verifies parameters. Fair BIC Δ = -170. **116 T120 tests + 13 T130 + 11 T131 tests + 17 T120.16 tests pass.** Paper v1.14 INTERNAL REFERENCE |
 
 **The most promising track** is `wip/multi-component-SIDM-core-collapse` (T120 series) — it satisfies more constraints with fewer assumptions than the v0.4-prelim master or the older cloud-9-relhic track.
 
@@ -222,23 +231,33 @@ This addresses the most prominent "soft spot" identified by the Phase 50 reviewe
 
 ## 🎯 Key findings (TL;DR) — focus on the most promising model
 
-**The most promising track (T120 multi-component SIDM, Paper v1.14 on `wip/multi-component-SIDM-core-collapse` @ `05cfe5d`):**
+**The most promising track (T90 multi-component SIDM, Paper v1.14.9 on `wip/multi-component-SIDM-core-collapse` @ `5e3c692`):**
 
-1. **A self-consistent multi-component SIDM phenomenology satisfies all 8 observational constraints simultaneously.** Phase 44 multi-resonance SIDM + Yang+ 2025 PRD two-component DM + Yu 2026 PRL gravothermal selection + Gaussian Breit-Wigner shapes + flattened background slope (α ≈ 1.0, data-driven). **8/8 constraints pass: Cloud-9 (v=28, σ/m=128), classical dSph (v=15, σ/m=0.013), UFD (v=3-10, σ/m<0.03), SPARC (v=100, σ/m=0.19), cluster (v=500, σ/m=4×10⁻⁴).**
+1. **Multi-resonance SIDM architecture satisfies 7 of 8 observational constraints simultaneously** with RMSE = 0.25. The architecture: ONE dominant Breit-Wigner resonance (v₁ = 28 km/s, Cloud-9 channel) + THREE clockwork-UV-derived nodes (v₃ = 178, v₄ = 430 km/s) + phenomenological peak heights (optimized for smooth σ/m(v)) on a Yukawa tail (α = 1.93, data-driven). Cloud-9 is the variance-absorbing 8th point — its σ/m ≥ 50 cm²/g floor cannot be derived from standard Yukawa physics (verified at α_D ∈ [0.01, 100] in T191).
 
-2. **Statistical rigor confirms the model.** Fair BIC Δ = -170 (T120 WINS by occam's razor on same 160-point data set vs simpler single-component Lorentzian; scoring-rule caveat acknowledged per 2026-09-19 referee M2). MCMC posterior (32 walkers × 2000 steps) independently recovers parameters within 1σ: **a_slope = 0.92 [0.63, 1.35]**, **w₁ = 4.4 [2.6, 6.5] km/s**, **f_H = 0.20 [0.12, 0.34]**. Acceptance fraction 0.38 (healthy). Posterior unimodal, not over-fitted.
+2. **Burkert wins on rotation curves alone.** Phase 42 dynesty on SPARC 120 galaxies: Burkert log Z = **-963** (BEST of 5), PISO log Z = -1409, Einasto log Z = -1595, NFW log Z = -2654, SIDM hybrid log Z = **-3300** (WORST). The 15-vs-1 parameter penalty means BIC disfavors multi-resonance once Occam is applied. **The paper is honest about this** — it presents the work as a **constraint map + no-go catalogue**, not a unified SIDM model.
 
-3. **UV completion: open problem.** v1.13.5 attempted Hidden U(1) + pseudo-Dirac mass splitting (Zhang 2016); **falsified by 2026-09-19 referee report** (Δm = 10 MeV exceeds galactic KE_CM by 5 orders of magnitude — see T120.16). v1.14 documents **three independent UV completion no-go theorems** + verification that the published best-fit p-wave resonance (Chu et al. 2019 PRL [28]) also fails on Cloud-9 (T131). **No published UV completion solves the Cloud-9 vs dSph tension.**
+3. **Bayes factor B = 21.3 favors multi-resonance on joint channels** (T177, log B = 3.06, semi-informative). On joint channels (Phase 54), multi-resonance wins raw log L (+6.08 over constant σ/m) but loses BIC-corrected (+3.22 favoring constant). The T195 figure (`t195_model_comparison.png`) shows all three comparisons side-by-side.
 
-4. **Slope flattening (α ≈ 1.0) is a physical feature, not a fudge.** Emerges from joint multi-channel fitting (8 datasets, 4 orders of magnitude in v), independently recovered by MCMC, robust over window [0.5, 1.2]. UV derivation is deferred (§10.5 open problem in paper).
+4. **UV completion: 4 no-go theorems + 1 candidate.** v1.14 documents four independent UV completion no-gos: (a) Magnetic dipole DM (T120.10) — ruled out by LZ; (b) Hidden U(1) + 10 MeV pseudo-Dirac (T120.16) — ruled out by galactic kinematics; (c) GeV-scale inelastic DM (T130) — requires m_χ ≥ 46 TeV + thermal-relic unitarity violation; (d) Chu 2019 best-fit p-wave resonance (T131) — fails on Cloud-9. One-mediator UV (T184) ruled out by 10⁸-10¹³×. Two-mediator Drobczyk candidate (T185/T190/T192) viable at δ=0.43%, g_h_SM=0.00040, Ωh²=0.119 — but 5× broader than Drobczyk's 0.083%, requires composite UV or fine-tuning.
 
-5. **Self-check harness is comprehensive (174 tests + 13 T130 + 11 T131 + 17 T120.16 = 215 tests pass).** Standard self-check (Layers A-F), T120-specific tests (T120.4 joint fit + T120.9 MCMC + T120.10 direct detection + T120.11 Hidden U(1) + T120.13 integration + T120.15 UV slope + T120.16 kinematic threshold + T130 inelastic scan + T131 Chu P1 verification). Three real bugs caught during self-check: wrong µ_χ hardcoded (T120.10) + log-value bug in LZ limit (T120.10) + dimensionally wrong V_max formula (T120.16). All fixed.
+5. **Testable predictions (CHARM-compliant config):**
+   - σ_SI ≈ **2×10⁻⁴⁹ cm²** (predicted null, 25× smaller than pre-T192 due to g_h_SM² scaling; below LZ/XENONnT/PandaX sensitivity)
+   - <σv>_0 ≈ 10⁻²⁹ cm³/s (off-resonance BW suppression; predicted null below CTA)
+   - S(v_F) ~ 15 at freeze-out, S(v_0) ~ 1 at halo (Sommerfeld combined enhancement ~100)
+   - Beam-dump signal at g_h_SM = 0.00040 < 0.005 (CHARM-compliant)
+
+6. **50 tests pass** (31 existing + 19 new for T191-T194):
+   - **19 new tests** lock down: Ωh² = 0.119, g_h_SM = 0.00040, δ = 0.43% (T192 thermal-avg); δ_0(v=28) < π/2 at all α_D ∈ [0.01, 100] (T191); v_res = 0.185c (T193); σ_0 = 0.052, α = 1.93, RMSE = 0.250 (T194)
+   - **8 audits** processed: Fornax 6, DeepSeek Review 2-6, Grok Review, References
+
+7. **8 references web-verified real** (Tier 1): Benitez-Llambay 2024 [15b], Ohana 2026 [15f], Drobczyk 2025 [15e], Yu 2026 [23], Horigome 2025 [27], AIDA-TNG 2026 [29b], micrOMEGAs 6.0 [29c], Engelhardt 2026 [49]. Audit doc: `v0.3-prelim/docs/AUDIT_REFERENCES.md`.
 
 **Tier-1 (master) findings (for context):**
 
-6. **v0.7 supersedes v0.6 by adding DAMPE + Zhang+2025 LSS channels** — the velocity-slope tension dropped from 0.91σ to **0.60σ** (now below the 1.0 threshold). m_χ shifted from 364 GeV → **770 GeV**; σ/m₀ from 0.06 → **0.27 cm²/g**.
+8. **v0.7 supersedes v0.6 by adding DAMPE + Zhang+2025 LSS channels** — the velocity-slope tension dropped from 0.91σ to **0.60σ** (now below the 1.0 threshold). m_χ shifted from 364 GeV → **770 GeV**; σ/m₀ from 0.06 → **0.27 cm²/g**.
 
-7. **T87 forward prediction: composite-DM *cannot* claim the LZ event at v0.7 MAP** — composite-DM inelastic σ_DM-nucleon at 248 keV is **1.15 × 10⁻¹⁷ cm²**, predicting only **4.8 × 10⁻⁷³ events** in 2.84 tonne-years (vs 1 observed). **71 orders of magnitude below LZ sensitivity.**
+9. **T87 forward prediction: composite-DM *cannot* claim the LZ event at v0.7 MAP** — composite-DM inelastic σ_DM-nucleon at 248 keV is **1.15 × 10⁻¹⁷ cm²**, predicting only **4.8 × 10⁻⁷³ events** in 2.84 tonne-years (vs 1 observed). **71 orders of magnitude below LZ sensitivity.**
 
 > **Full interpretation:** the v0.7 posterior is genuinely well-constrained within its scope (Benchmark A: composite dark pion + elementary A'). The standing posture (σ/m unchanged at current LZ precision) was developed honestly in T77-T79 and verified by an external `Updated review1.docx` reviewer on 2026-09-03. The T95.9 multi-stream result further reinforces that the SIDM model is robust against 9/10 independent stream probes — the GD-1 case is now formally separated as an "interpretation problem", not a "model problem".
 >
