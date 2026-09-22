@@ -1,0 +1,149 @@
+{
+  "T199_summary": "T199 \u2014 Corrected LZ event-rate analysis (per DeepSeek review of v18.14)",
+  "date": "2026-09-22",
+  "reviewer": "DeepSeek (deepseeklz.docx)",
+  "corrections": [
+    "Elastic v_min: m_chi^2 -> mu^2 in denominator",
+    "Inelastic v_min: T87 approximate formula -> TS&W 2001 PRD 64, 043502 Eq. 7"
+  ],
+  "results": {
+    "v0.7_composite": {
+      "LZ_2026": {
+        "N_predicted": 1.0849724247630684e-116,
+        "kinematically_accessible": true,
+        "v_min_at_E_R_min_kms": 50.39663678131992,
+        "log10_N_pred": -115.96458129953473,
+        "orders_below_observed": -115.96458129953473
+      },
+      "PandaX_4T_2023": {
+        "N_predicted": 8.257941742813304e-117,
+        "kinematically_accessible": true,
+        "v_min_at_E_R_min_kms": 48.49418635324474,
+        "log10_N_pred": -116.08312818526174,
+        "orders_below_observed": -Infinity
+      },
+      "XENONnT_2023": {
+        "N_predicted": 4.414383604453195e-117,
+        "kinematically_accessible": true,
+        "v_min_at_E_R_min_kms": 48.49418635324474,
+        "log10_N_pred": -116.35512992988336,
+        "orders_below_observed": -Infinity
+      },
+      "DARWIN_2023": {
+        "N_predicted": 7.611006214574474e-115,
+        "kinematically_accessible": true,
+        "v_min_at_E_R_min_kms": 48.49418635324474,
+        "log10_N_pred": -114.11855792344629,
+        "orders_below_observed": -Infinity
+      }
+    },
+    "v18_11_drobczyk": {
+      "LZ_2026": {
+        "N_predicted": 1.0137814027220811e-53,
+        "kinematically_accessible": true,
+        "v_min_at_E_R_min_kms": 590.84345101391,
+        "log10_N_pred": -52.99405567993966,
+        "orders_below_observed": -52.99405567993966
+      },
+      "PandaX_4T_2023": {
+        "N_predicted": 1.6161495735199823e-53,
+        "kinematically_accessible": true,
+        "v_min_at_E_R_min_kms": 568.5393758196806,
+        "log10_N_pred": -52.791518448048855,
+        "orders_below_observed": -Infinity
+      },
+      "XENONnT_2023": {
+        "N_predicted": 8.639324909139076e-54,
+        "kinematically_accessible": true,
+        "v_min_at_E_R_min_kms": 568.5393758196806,
+        "log10_N_pred": -53.06352019267047,
+        "orders_below_observed": -Infinity
+      },
+      "DarkSide_20k_2024": {
+        "N_predicted": 0.0,
+        "kinematically_accessible": false,
+        "v_min_at_E_R_min_kms": 897.1553451116057,
+        "SHM_threshold_kms": 776.0
+      },
+      "DARWIN_2023": {
+        "N_predicted": 1.489538777437772e-51,
+        "kinematically_accessible": true,
+        "v_min_at_E_R_min_kms": 568.5393758196806,
+        "log10_N_pred": -50.82694818623341,
+        "orders_below_observed": -Infinity
+      }
+    },
+    "di_mauro_2026_inelastic": {
+      "LZ_2026": {
+        "N_predicted": 0.0,
+        "kinematically_accessible": false,
+        "v_min_at_E_R_min_kms": 75086.75898575416,
+        "SHM_threshold_kms": 776.0,
+        "note": "TS&W 2001 v_min >> SHM threshold"
+      },
+      "PandaX_4T_2023": {
+        "N_predicted": 0.0,
+        "kinematically_accessible": false,
+        "v_min_at_E_R_min_kms": 78018.71429563238,
+        "SHM_threshold_kms": 776.0,
+        "note": "TS&W 2001 v_min >> SHM threshold"
+      },
+      "XENONnT_2023": {
+        "N_predicted": 0.0,
+        "kinematically_accessible": false,
+        "v_min_at_E_R_min_kms": 78018.71429563238,
+        "SHM_threshold_kms": 776.0,
+        "note": "TS&W 2001 v_min >> SHM threshold"
+      },
+      "DarkSide_20k_2024": {
+        "N_predicted": 0.0,
+        "kinematically_accessible": false,
+        "v_min_at_E_R_min_kms": 57746.18169195257,
+        "SHM_threshold_kms": 776.0,
+        "note": "TS&W 2001 v_min >> SHM threshold"
+      },
+      "DARWIN_2023": {
+        "N_predicted": 0.0,
+        "kinematically_accessible": false,
+        "v_min_at_E_R_min_kms": 78018.71429563238,
+        "SHM_threshold_kms": 776.0,
+        "note": "TS&W 2001 v_min >> SHM threshold"
+      }
+    },
+    "t90_magnetic_moment": {
+      "LZ_2026": {
+        "N_predicted": 5.096214830303528e-42,
+        "kinematically_accessible": true,
+        "v_min_at_E_R_min_kms": 48.71134192424871,
+        "log10_N_pred": -41.29275227265685,
+        "orders_below_observed": -41.29275227265685
+      },
+      "PandaX_4T_2023": {
+        "N_predicted": 3.864259147461685e-42,
+        "kinematically_accessible": true,
+        "v_min_at_E_R_min_kms": 46.87251062092149,
+        "log10_N_pred": -41.412933756340735,
+        "orders_below_observed": -Infinity
+      },
+      "XENONnT_2023": {
+        "N_predicted": 2.065686917537122e-42,
+        "kinematically_accessible": true,
+        "v_min_at_E_R_min_kms": 46.87251062092149,
+        "log10_N_pred": -41.68493550096235,
+        "orders_below_observed": -Infinity
+      },
+      "DarkSide_20k_2024": {
+        "N_predicted": 0.0,
+        "kinematically_accessible": true,
+        "note": "Ar-40 is I=0; magnetic-moment scattering suppressed"
+      },
+      "DARWIN_2023": {
+        "N_predicted": 3.5615291681674513e-40,
+        "kinematically_accessible": true,
+        "v_min_at_E_R_min_kms": 46.87251062092149,
+        "log10_N_pred": -39.44836349452528,
+        "orders_below_observed": -Infinity
+      }
+    }
+  }
+}

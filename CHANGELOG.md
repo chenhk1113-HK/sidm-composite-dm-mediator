@@ -2,6 +2,32 @@
 
 
 
+
+## [T199vMinFix-v18.15] - 2026-09-22
+
+**CORRECTED v_min formulas (per DeepSeek review 'deepseeklz.docx').**
+
+Reviewer caught two physics bugs in T196/T197:
+1. Elastic v_min: used m_chi^2 in denominator instead of mu^2.
+   Correct: v_min = c × sqrt(m_N × E_R / (2 × mu^2)) where mu = m_chi m_N / (m_chi + m_N).
+   At m_chi=10.3 GeV, E_R=5.4 keV, m_N=131: v_min = 591 km/s (NOT 1096 km/s).
+2. Inelastic v_min: used T87 doc's approximate formula. Correct: TS&W 2001 PRD 64, 043502.
+   At delta=297 keV, m_chi=1 TeV, E_R=5.4 keV: v_min = 75087 km/s (NOT 232 km/s).
+
+**T199_corrected_lz_analysis.py** redoes the four-model cross-detector test:
+- v0.7 composite-DM: 115 orders deficit (consistent)
+- v18.11 Drobczyk: ACCESSIBLE (v_min=591 km/s < 776 km/s) → 53 orders deficit (NOT 0 events)
+- Di Mauro 2026 inelastic: INACCESSIBLE (v_min=75087 km/s >> 776 km/s) → 0 events (CORRECTION)
+- T90 magnetic-moment: 40 orders deficit (consistent)
+
+**Paper corrections (v18.15):**
+- Abstract: "v18.11 Drobczyk candidate is kinematically inaccessible (0 events)" → "v18.11 IS kinematically accessible (v_min=591 km/s) but fails by 53 orders due to small sigma_SI"
+- §3.5a (b): T196 OMITTED kinematic threshold; T196 N_events=4.35e-29 → T199 N_events=1.01e-53
+- §3.5a (c): Di Mauro 2026 INACCESSIBLE per TS&W 2001 (v_min=75087 km/s >> 776 km/s)
+- §10.5a: Earlier "two compounding reasons" framing replaced with single reason (sigma_SI below neutrino floor); explicit acknowledgement of v18.13-v18.14 bug
+
+This is a paper-relevant correction: the headline verdict (v18.11 fails LZ test) is unchanged but the physical reason was wrong in v18.13-v18.14. Per Rule 11 (never fabricate), per Rule 21 (verify quantitative claims), the corrected version is the honest one.
+
 ## [T198+WIMpy-v18.14] - 2026-09-22
 
 **WIMpy 1.1.1 + T90 cross-detector integration (per user 'install wimpy' approval).**
