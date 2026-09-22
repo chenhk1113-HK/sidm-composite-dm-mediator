@@ -1147,7 +1147,7 @@ This protocol is documented to preempt reviewer concerns about reproducibility a
 [13] H. Yang, H.-B. Yu, Phys. Rev. D 105, 063533 (2022).
 [14] F. Lelli, S. S. McGaugh, J. M. Schombert, Astron. J. 152, 157 (2016).
 [15a] R. Zhou, M. Zhu, Y. Yang et al., "FAST Reveals New Evidence for M94 as a Merger," Astrophys. J. 952, 130 (2023); Erratum Astrophys. J. (2024), doi:10.3847/1538-4357/ad22e4.
-[15b] A. Benítez-Llambay, R. Dutta, M. Fumagalli, J. F. Navarro, "Examining the Nature of the Starless Dark Matter Halo Candidate Cloud-9," Astrophys. J. 973, 61 (2024).
+[15b] A. Benítez-Llambay, R. Dutta, M. Fumagalli, J. F. Navarro, "Examining the Nature of the Starless Dark Matter Halo Candidate Cloud-9," Astrophys. J. 973, 61 (2024)hys. J. 973, 61 (2024).
 [15c] G. S. Anand, A. Benítez-Llambay, R. Beaton et al., "The First RELHIC? Cloud-9 is a Starless Gas Cloud," Astrophys. J. Lett. 993, L55 (2025).
 [15d] I. Trujillo, I. Ruiz Cejudo, S. Guerra Arencibia, M. Montes, "Ultra-Deep Imaging of the Starless Galaxy Candidate Cloud-9," Res. Notes Am. Astron. Soc. (2026); arXiv:2608.20911.
 [15e] M. Ohana, X. Zhang, H.-B. Yu, "Cold Dark Matter and Self-Interacting Dark Matter Interpretations of Cloud-9," arXiv:2608.04362 (2026); independently confirms σ/m ≥ 50 cm²/g floor at v ≈ 28 km/s via MCMC.

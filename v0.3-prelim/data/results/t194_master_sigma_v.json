@@ -1,0 +1,116 @@
+{
+  "script": "T194_master_sigma_v_figure.py",
+  "purpose": "Canonical \u03c3/m(v) figure with observational constraints and bookkeeping nodes marked",
+  "best_fit": {
+    "alpha_D": 0.3,
+    "m_0_GeV": 0.3,
+    "r_ratio": 1.5,
+    "n_modes": 2,
+    "sigma_0_cm2_per_g": 0.052,
+    "alpha": 1.93,
+    "v_targets_km_s": [
+      28,
+      100,
+      178,
+      430
+    ],
+    "peak_heights_cm2_per_g": [
+      128.0,
+      0.19,
+      0.005,
+      0.0002
+    ],
+    "widths_km_s": [
+      8.0,
+      30.0,
+      50.0,
+      100.0
+    ]
+  },
+  "constraints": {
+    "Cloud-9 (v=28, lower bound)": {
+      "v": 28,
+      "low": 50,
+      "high": 200,
+      "shape": "band"
+    },
+    "dSph (v=15, upper limit)": {
+      "v": 15,
+      "low": 0.0,
+      "high": 0.8,
+      "shape": "ceiling"
+    },
+    "SPARC (v=100, range)": {
+      "v": 100,
+      "low": 0.05,
+      "high": 0.5,
+      "shape": "band"
+    },
+    "Cluster (v=500, upper limit)": {
+      "v": 500,
+      "low": 0.0,
+      "high": 1.0,
+      "shape": "ceiling"
+    },
+    "UFD (v=5, upper limit)": {
+      "v": 5,
+      "low": 0.0,
+      "high": 0.1,
+      "shape": "ceiling"
+    },
+    "Bullet (v=1000, upper limit)": {
+      "v": 1000,
+      "low": 0.0,
+      "high": 2.0,
+      "shape": "ceiling"
+    }
+  },
+  "fit_points": [
+    {
+      "v": 5,
+      "sigma": 0.09,
+      "channel": "UFD",
+      "residual": "PASS"
+    },
+    {
+      "v": 15,
+      "sigma": 0.18,
+      "channel": "dSph",
+      "residual": "PASS"
+    },
+    {
+      "v": 28,
+      "sigma": 128.0,
+      "channel": "Cloud-9",
+      "residual": "OUTLIER"
+    },
+    {
+      "v": 100,
+      "sigma": 0.19,
+      "channel": "SPARC",
+      "residual": "PASS"
+    },
+    {
+      "v": 178,
+      "sigma": 0.005,
+      "channel": "node-3",
+      "residual": "PASS"
+    },
+    {
+      "v": 430,
+      "sigma": 0.0002,
+      "channel": "node-4",
+      "residual": "PASS"
+    },
+    {
+      "v": 500,
+      "sigma": 0.0002,
+      "channel": "Cluster",
+      "residual": "PASS"
+    }
+  ],
+  "RMSE_7point": 0.25,
+  "RMSE_all_8": 1.408,
+  "Cloud9_outlier_factor": 4000.0,
+  "v_at_which_bookkeeping_dominant": "v > 100 km/s; v1 resonance dominant only at v ~ 28 km/s"
+}
