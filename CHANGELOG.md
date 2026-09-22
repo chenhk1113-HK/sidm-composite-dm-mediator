@@ -1,5 +1,29 @@
 
 
+
+## [T197DeepLZ-v18.13] - 2026-09-22
+
+**Comprehensive four-model cross-detector LZ event analysis (per user request).**
+
+User directive: "deeper and more extensive test, LZ event maybe a significant finding which have strong implication to sidm, so I want more thorough analysis and testing. I remember our project branch (t95?) has even included pandax data."
+
+This update adds T197 (`v0.3-prelim/code/T197_deep_lz_analysis.py`), a comprehensive four-model cross-detector test:
+1. **v0.7 composite-DM** (T87 frozen): σ_DM_nuc = 1.15e-117, m_chi=770 GeV, fails by 115 orders
+2. **v18.11 Drobczyk** (T196 fresh): σ_SI = 2e-49, m_chi=10.3 GeV → **KINEMATICALLY INACCESSIBLE** at LZ 5.4-270 keV (v_min=1096 km/s > SHM threshold 776 km/s), 0 events
+3. **Di Mauro 2026 inelastic** (T197): m_chi=1 TeV, δ=297 keV, σ_inel=6.5e-43, fails by 42 orders
+4. **T90 magnetic-moment** (T197): μ_χ=6.10e-8 μ_N, σ=6.5e-43, fails by 40 orders
+
+**Critical finding**: v18.11's m_chi=10.3 GeV cannot reach LZ's 5.4 keV threshold. T187 benchmark "RIGHT AT LZ SENSITIVITY" used LZ 2023 ~1 keV analysis, NOT 2026's 5.4-270 keV extended window. Paper §10.5a should be updated to flag this.
+
+§3.5a reframed with 4-model cross-detector comparison:
+- LZ, PandaX-4T, XENONnT, DarkSide-20k, DARWIN all tested
+- All four configurations fail; closest (T90) is 40 orders short
+- Includes TS&W 2001 vs T87 kinematic formula caveat
+
+User cross-reference also revealed `wip/inelastic-SIDM` branch (T110.1A/B NEGATIVE), `wip/tier3-sequential-T90-magnetic` branch (full LZ infrastructure: T90 v10-v22, PandaX module), and `wip/t95-stream-cross-match` (T77-T81 LZ docs from Sep 2026).
+
+Paper updated to v18.13.
+
 ## [T196Fresh-v18.12] - 2026-09-22
 
 **Fresh LZ event-rate computation at v18.11 posteriors (option-b per user).**
