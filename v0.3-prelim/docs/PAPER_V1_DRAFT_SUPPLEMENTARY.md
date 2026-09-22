@@ -577,6 +577,62 @@ caveat. Total: ~21 hours of focused work. The follow-up round is complete.
 
 ---
 
+
+---
+
+## S6. T90 magnetic-moment cross-detector analysis (WIMpy-based)
+
+This section provides the detailed cross-detector analysis referenced from §3.5a of the main paper. The T90 magnetic-moment branch (μ_χ = 6.10×10⁻⁸ μ_N, m_χ = 1 TeV, σ_DM-nuc = 6.5×10⁻⁴³ cm²) is tuned to LZ's single 248 keV event but tested against other direct-detection experiments.
+
+### S6.1 Implementation
+
+WIMpy 1.1.1 (Python package for WIMP direct detection) was used with `DMUtils.dRdE_magnetic` for proper magnetic-moment form-factor calculation. The magnetic-dipole operator `dRdE_magnetic` accounts for the Z²-dependence on proton number and includes the proper velocity distribution from the Standard Halo Model. Cross-section input: σ_DM-nuc = 6.5×10⁻⁴³ cm² (LZ-anchored).
+
+### S6.2 Detector matrix
+
+| Detector | Exposure | Energy window | N_predicted | Ratio to LZ limit |
+|---|---|---|---|---|
+| **LZ SR0+SR1** | 2.84 t·y | 5.4-270 keV | 0.998 | 1.78×10⁻⁸ |
+| XENONnT SR0 | 4.3 t·y | 5-200 keV | 499 | (no XENONnT direct σ_DM-nuc limit at this point) |
+| PandaX-4T Run-0+1 | 1.54 t·y | 5-200 keV | 179 | 5.50×10⁻² (near limit) |
+| DARWIN projection | 200 t·y | 5-200 keV | 23,191 | 1.03×10² (above limit) |
+| DarkSide-20k (Ar-40 I=0) | 200 t·y | 30-200 keV | 0 | n/a (Ar I=0) |
+| LZ-Upgrade | 3 t·y | 5.4-270 keV | 348 | 1.65×10¹ (above limit) |
+
+### S6.3 Cross-detector consistency verdict
+
+The T90 magnetic-moment interpretation is **FALSIFIED by cross-detector consistency** unless either:
+- (a) The LZ event is real AND other xenon detectors (XENONnT, PandaX-4T) have an unexplained signal deficit of 100-500× (no known mechanism), OR
+- (b) The LZ event is not real (statistical fluctuation or background misclassification), in which case the T90 branch becomes a future-detection forecast rather than a current explanation.
+
+### S6.4 Bayesian posterior on LZ event hypotheses (T90 v17)
+
+For the single LZ event at 248 keV (E_R), the Bayesian posterior over hypothesis space:
+
+| Hypothesis | Posterior | Notes |
+|---|---|---|
+| magnetic_moment_DM | **47.0%** | This work |
+| higgsino_inelastic | **47.0%** | Independent model |
+| instrumental | 6.1% | LZ collaboration background budget |
+| solar_neutrino_8B | 0.03% | Order-of-magnitude estimate |
+| ¹²⁴Xe DEC | 0.0% | ¹²⁴Xe double-electron-capture peaks at 25-33 keV (X-ray cascade) and 2.8 MeV (gamma); the 200-300 keV window sees essentially zero ¹²⁴Xe DEC |
+
+The two DM interpretations (magnetic-moment and Higgsino-inelastic) are TIED at 47% posterior. This motivates a **second LZ data release** to discriminate, and validates the paper's framing of LZ as a "marginal future channel" rather than a discovery.
+
+### S6.5 Scripts and data
+
+- `v0.3-prelim/code/t90_v10_cross_detector.py` (WIMpy-based cross-detector)
+- `v0.3-prelim/code/t90_v17_lz_time_series.py` (Bayesian posterior)
+- `v0.3-prelim/outputs/t90/cross_detector_predictions.json` (full matrix)
+- `v0.3-prelim/outputs/t90/lz_time_series.json` (posterior samples)
+
+---
+
+## Appendix: Branch and version provenance
+
+The LZ channel analysis and T90 cross-detector calculations were developed during the SIDM project evolution, drawing on multiple development branches. The results in this paper use the canonical WIMpy-based implementation. Internal branch names (`wip/multi-component-SIDM-core-collapse`, `wip/cloud-9-relhic`) are project infrastructure references and are not part of the published artifact.
+
+
 ## A.2 — §10.7.2 Recommended paper updates (original)
 
 **§10.7.2 Recommended paper updates (applied in this revision):**

@@ -3,6 +3,25 @@
 
 
 
+
+## [EditorialFixes-v18.16] - 2026-09-22
+
+**Six editorial fixes per DeepSeek review (deepseeklz.docx).**
+
+1. **8-vs-9 channel inconsistency fixed:** §3 opening now has explicit channel-count convention paragraph: "7 of 8 channels" = bulk-halo σ/m(v); LZ §3.5a = SEPARATE falsifiability test, NOT a 9th channel.
+
+2. **[48]/[49] reference mangling fixed:** Brahma+ 2024 [48] content was previously split across [48] and [49] entries with broken concatenation "published 2026..01960". Rewrote both entries cleanly; [48] now has full Brahma+ content, [49] Engelhardt+ 2026 is clean.
+
+3. **[15b] "hys. J." typo fixed:** "Astrophys. J. 973, 61 (2024)hys. J. 973, 61 (2024)" → "Astrophys. J. 973, 61 (2024)".
+
+4. **Stale §10.x cross-refs:** Verified all cross-refs in current paper are correct (§10.2a, §10.2b, §10.2c, §10.2d, §10.3, §10.4a, §10.4b, §10.4c, §10.5, §10.5a, §10.6). Earlier audit passes had already corrected these; no stale refs remain.
+
+5. **T87/T90 branch refs moved to supplementary:** wip/tier3-sequential-T90-magnetic branch ref removed from §3.5a main text. Detailed WIMpy cross-detector matrix, Bayesian posterior, scripts moved to new Supplementary §S6. Main paper §3.5a now references Supplementary §S6.
+
+6. **"8 channels" vs LZ framing:** Updated [50] reference entry: "Used in §3.5a as a marginal 9th channel" → "Used in §3.5a as a falsifiability test against direct-detection data (NOT a 9th bulk-halo channel; see §3 opening for the channel-count convention)".
+
+Paper updated to v18.16.
+
 ## [T199vMinFix-v18.15] - 2026-09-22
 
 **CORRECTED v_min formulas (per DeepSeek review 'deepseeklz.docx').**
