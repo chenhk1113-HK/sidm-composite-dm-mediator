@@ -142,6 +142,45 @@ Reviewer Rev18.2.docx (2026-09-23) caught 6 issues from v18.20:
 
 Paper v18.21 is now near submittable state (per reviewer).
 
+
+## [Revv18.2Polish-v18.22] - 2026-09-23
+
+**Final polish per Revv18.2.docx audit (third-party review of v18.21).**
+
+Reviewer confirmed 5 priority issues from Rev18.2.docx are fixed and identified
+3 optional polish items. All 3 applied:
+
+1. **MINOR**: section 3.5a "Comparison:" bullet still used old label
+   "T90 magnetic-moment (T201)". Updated to "T90-equivalent σ_SI magnitude (T201)"
+   to match the fixed label elsewhere.
+
+2. **MINOR**: Code document's CHARM-ceiling parenthetical was confusing — 0.42 is
+   P(N >= 1), parenthetical (32%) is actually P(N = 1). Different quantities.
+   Fixed: now lists both explicitly:
+     P(N >= 1 | Poisson(0.54)) = 0.42  # at least one event
+     P(N = 1  | Poisson(0.54)) = 0.32  # exactly one event (matches LZ)
+   The paper section 11 uses the correct quantity (P(N = 1)) — only the code
+   doc parenthetical was awkward.
+
+3. **MINOR**: section 3.5a had both "Comparison:" and "Verdict:" bullets that
+   were substantially redundant. Deleted the "Comparison:" bullet; the
+   consolidated "Verdict (T201, WIMpy-validated canonical) and Honest framing:"
+   now stands alone.
+
+**Reviewer's broader assessment:** "The paper is ready for submission."
+"a physics paper that documents its own audit trail, including five failed
+attempts at the same numerical calculation, and uses a peer-reviewed external
+code (WIMpy) as canonical ground truth to resolve the ambiguity. This is a
+model for how AI-assisted physics should be done."
+
+**The LZ section's ultimate scientific claim is now modest but well-supported:**
+- The model does not explain the LZ event at its stated benchmark (2.5 orders short)
+- The model is not excluded by the LZ event (at CHARM ceiling, predicts 0.55 events)
+- The model is falsifiable in real time (a future LZ signal of sigma_SI ~ 1e-47 cm^2
+  at m_chi = 10 GeV would exclude v18.11 outright)
+
+Paper v18.22 is the final submittable version.
+
 ## [T200ProperRateFormula-v18.17] - 2026-09-23
 
 **CRITICAL: third-party audit caught 3 bugs in T199 (sent as T199.docx).**
