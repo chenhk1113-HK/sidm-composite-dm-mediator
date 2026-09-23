@@ -1,0 +1,91 @@
+{
+  "T205_summary": "Full-likelihood with published error budgets",
+  "date": "2026-09-23",
+  "method": "dynesty 3.x nested sampling, 8-channel likelihood",
+  "OBS_PUBLISHED": [
+    {
+      "v_kms": 3.0,
+      "sigma_obs": 0.155,
+      "sigma_unc": 0.05,
+      "kind": "ceiling",
+      "label": "UFD v=3",
+      "citation": "Horigome+ 2025 Table II"
+    },
+    {
+      "v_kms": 5.0,
+      "sigma_obs": 0.093,
+      "sigma_unc": 0.05,
+      "kind": "ceiling",
+      "label": "UFD v=5",
+      "citation": "Horigome+ 2025 Table II"
+    },
+    {
+      "v_kms": 7.0,
+      "sigma_obs": 0.067,
+      "sigma_unc": 0.05,
+      "kind": "ceiling",
+      "label": "UFD v=7",
+      "citation": "Horigome+ 2025 Table II"
+    },
+    {
+      "v_kms": 10.0,
+      "sigma_obs": 0.047,
+      "sigma_unc": 0.05,
+      "kind": "ceiling",
+      "label": "UFD v=10",
+      "citation": "Horigome+ 2025 Table II"
+    },
+    {
+      "v_kms": 15.0,
+      "sigma_obs": 0.032,
+      "sigma_unc": 0.04,
+      "kind": "ceiling",
+      "label": "dSph v=15",
+      "citation": "Horigome+ 2025 Table II"
+    },
+    {
+      "v_kms": 28.0,
+      "sigma_obs": 128.0,
+      "sigma_unc": 30.0,
+      "kind": "floor",
+      "label": "Cloud-9 v=28",
+      "citation": "BLN24 / Ohana+ 2026"
+    },
+    {
+      "v_kms": 100.0,
+      "sigma_obs": 0.193,
+      "sigma_unc": 0.05,
+      "kind": "gaussian",
+      "label": "SPARC v=100",
+      "citation": "Lelli+ 2016"
+    },
+    {
+      "v_kms": 500.0,
+      "sigma_obs": 0.00025,
+      "sigma_unc": 0.0005,
+      "kind": "ceiling",
+      "label": "Cluster v=500",
+      "citation": "Randall+ 2008"
+    }
+  ],
+  "model_A_multi_resonance": {
+    "logZ": -14.285314279516502,
+    "n_params": 15
+  },
+  "model_B_constant": {
+    "logZ": -16.69669052746084,
+    "n_params": 2
+  },
+  "log_bayes_factor": 2.4113762479443395,
+  "bayes_factor": 11.1492947852287,
+  "comparison_to_T177": {
+    "T177_log_bf": 3.06,
+    "T177_bayes_factor": 21.26,
+    "delta_logbf": -0.6486237520556606
+  },
+  "HONEST_LIMITATIONS": [
+    "Published \u03c3_unc values are approximate extractions from papers (not posterior chains)",
+    "Horigome+ 2025 reports a single combined \u03c3/m; we split across 5 v bins",
+    "Some \u03c3_unc values may not include all systematics (e.g., velocity convention)"
+  ]
+}

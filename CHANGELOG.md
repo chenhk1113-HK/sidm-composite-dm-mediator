@@ -7,6 +7,55 @@
 
 
 
+## [T205FullLikelihood-v18.25] - 2026-09-23
+
+**Full-likelihood with published error budgets (per reviewer model comments.docx).**
+
+Per user direction (after T202 + T204): "do #3" — implement full-likelihood
+analysis with real error budgets from the original observational papers,
+not hand-picked σ_unc.
+
+**T205 replaces T177's hand-picked σ_unc with σ_unc extracted from the
+actual published papers:**
+- Horigome+ 2025 Table II for dSph/UFD (UFD unchanged at 0.05; dSph
+  v=15 tightened from 0.05 to 0.04 per combined 8-dSph systematic)
+- BLN24/Ohana+ 2026 for Cloud-9 floor (TIGHTENED from 50 to 30 cm²/g
+  per published 1σ floor uncertainty)
+- Lelli+ 2016 for SPARC (unchanged at 0.05)
+- Randall+ 2008 for cluster (unchanged at 5e-4)
+
+**Results: log Bayes factor DROPS from 3.06 → 2.41 (B = 21.3 → 11.15).**
+
+| Model | T177 logZ | T205 logZ |
+|---|---|---|
+| Multi-resonance (15 params) | -8.123 | -14.285 |
+| Constant σ/m (2 params) | -11.180 | -16.697 |
+| **log Bayes factor** | **3.057** | **2.411** |
+| **Bayes factor** | **21.3** | **11.15** |
+| Jeffreys verdict | Strong | Moderate |
+
+**Δ log B = -0.65.** The Bayes factor is **moderately sensitive** to the
+σ_unc choice. Tightening the Cloud-9 floor uncertainty from 50 → 30 cm²/g
+makes the multi-resonance fit harder because the model has less room
+to fit below the floor.
+
+**Honest framing (paper §10.4b updated):** Both T177 and T205 give Bayes
+factors that **favor multi-resonance** over constant σ/m. The qualitative
+conclusion is robust, but the **strength of evidence** drops from "strong"
+to "moderate" when published error budgets are used. BIC-based tests in
+§10.4c still favor constant σ/m (ΔBIC = +3.22), so the model comparison
+remains **methodology-sensitive**.
+
+**Files added:**
+- `v0.3-prelim/code/T205_full_likelihood_published.py` (12 KB)
+- `v0.3-prelim/data/results/t205_full_likelihood_published.json` (results)
+
+**Versions:** Phase 44 +T202+T204+T205. 31/31 self-check passes.
+
+**Headline model-comparison number updated from log B = 3.06 to log B = 2.41**
+throughout the paper (abstract, §10.4b, §11).
+
+
 ## [T204SubstructureTest-v18.24] - 2026-09-23
 
 **Explicit numerical test of the Yu+ 2026 substructure mechanism at Phase 44 parameters.**

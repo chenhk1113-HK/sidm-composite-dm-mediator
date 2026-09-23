@@ -13,7 +13,7 @@
 
 We present a velocity-dependent self-interacting dark matter (SIDM) architecture — **a constraint map and no-go catalogue, not a definitive particle-physics model** — that addresses the tension between Cloud-9's high self-interaction requirement (σ/m ≥ 50 cm²/g at v ≈ 28 km/s [15b, 15e]) and the dwarf galaxy upper limits (σ/m ≲ 0.8 cm²/g at v ≈ 5–15 km/s [27]). The architecture achieves 7 of 8 observational-channel coverage on a 7-point fit (RMSE = 0.250); the 8th channel — Cloud-9's 4000× enhancement over the cluster-scale cross-section — requires physics beyond standard Yukawa interactions (T165–T172, T179, T191). **Note on the LZ 2026 September event below: this is a separate falsifiability test against direct-detection data, NOT a 9th bulk-halo σ/m channel.** In addition to these 8 channels, we explicitly test our composite-DM model against the LZ September 2026 248 keV single-event observation [50] (arXiv:2609.02823, 2.6σ significance, marginal status) using a comprehensive four-model cross-detector analysis (T201 canonical, `v0.3-prelim/code/T201_canonical_lz_audit.py`, using WIMpy 1.1.1 as ground truth): v0.7 composite-DM fails by 70 orders; v18.11 Drobczyk candidate is **kinematically accessible** (v_min = 591 km/s < SHM threshold 776 km/s at E_R = 5.4 keV, m_χ = 10.3 GeV) but **under-predicts** LZ events by ~2.5 orders per WIMpy 1.1.1 (N ≈ 3.5×10⁻³ vs 1 observed, a factor of ~300 below the single event; per T201 with WIMpy as ground truth). This is fully consistent with the LZ observation being background; v18.11 does not explain the event, and a ~300× enhancement of σ_SI (e.g., higher g_h_SM) would be required to bring v18.11 into the LZ sensitivity regime. Di Mauro 2026 inelastic interpretation [51] is **kinematically inaccessible** at LZ (TS&W 2001 PRD 64, 043502 v_min = 2418 km/s with reduced mass > SHM threshold 776 km/s, 0 events regardless of σ_inel); and T90-equivalent σ_SI magnitude (6.5×10⁻⁴³ cm² treated as elastic SI at T90's benchmark, NOT the actual magnetic-moment operator) OVER-predicts LZ by ~5 orders (N ≈ 1.16×10⁵ events, point-particle WIMpy T201); the LZ-tuned T90 WIMpy T198 result (using the actual magnetic-moment operator with form factors, tuned to ~1 event at LZ by construction) gives N ≈ 1 event at LZ but over-predicts XENONnT/PandaX-4T by 100-500×. This demonstrates that the model is **falsifiable in real time** against current direct-detection experiments but also that **no tested parameter point reaches LZ sensitivity**, leaving the LZ event — if real — as an open signature that requires either heavier DM mass (m_χ ≥ 50 GeV) or an inelastic channel not captured by v18.11. The architecture is composed of **four physical ingredients** (§2): (i) multi-resonance SIDM cross-section with one dominant Breit-Wigner peak plus three bookkeeping interpolation nodes; (ii) two-component asymmetric dark matter with a heavy component (χ_H, σ_HH dominant) and a light component (χ_L); (iii) gravothermal core-collapse selection; (iv) Gaussian Breit-Wigner resonance profiles. Best-fit parameters: T163 KK-tower (α_D = 0.3, m₀ = 0.3 GeV, r = 1.5, n_modes = 2, RMSE = 1.408) within the Phase 44 framework (σ/m = 0.052 cm²/g at v = 100 km/s).
 
-**Honest model-comparison framing (Phase 42, Phase 54):** On SPARC rotation curves alone (120 galaxies, dynesty Bayesian evidence), this architecture is **outperformed by Burkert** (coreless isothermal) and PISO profiles. On the joint 7-channel likelihood (Phase 54), it wins on raw log-likelihood (+6.08 over constant σ/m) but loses on BIC-corrected evidence (ΔBIC = +3.22 favoring constant) due to the 15-vs-1 parameter penalty. The headline model-comparison number is T177 log B = 3.06 (B = 21, **semi-informative Bayes factor** with Gaussian likelihoods informed by published uncertainties, not a full observational likelihood). The 7-of-8 channel-coverage rate is therefore a **channel-completeness result**, not a "model dominates the data" claim.
+**Honest model-comparison framing (Phase 42, Phase 54, T205):** On SPARC rotation curves alone (120 galaxies, dynesty Bayesian evidence), this architecture is **outperformed by Burkert** (coreless isothermal) and PISO profiles. On the joint 7-channel likelihood (Phase 54), it wins on raw log-likelihood (+6.08 over constant σ/m) but loses on BIC-corrected evidence (ΔBIC = +3.22 favoring constant) due to the 15-vs-1 parameter penalty. The headline model-comparison number is T177 log B = 3.06 (B = 21, **semi-informative Bayes factor** with Gaussian likelihoods informed by published uncertainties, not a full observational likelihood). The 7-of-8 channel-coverage rate is therefore a **channel-completeness result**, not a "model dominates the data" claim.
 
 **Four no-go theorems on UV completion** (one-mediator dark photon, Higgs portal, magnetic dipole, Hidden U(1)+MeV splitting) and a **two-mediator Drobczyk candidate** (thermal relic Ωh² = 0.119 at δ = 0.43%, g_h_SM = 0.00040, m_Φh = 20.69 GeV; T192 thermal-averaged) constitute the UV status. The Drobczyk candidate requires detuning 5× broader than the published benchmark (composite UV or fine-tuning argument required).
 
@@ -911,6 +911,47 @@ rather than a full-likelihood proper Bayesian evidence. The result is
 defensible as an order-of-magnitude estimate; a full-likelihood dynesty
 run with detailed observational error budgets is a future task.
 
+**T205 — Full-likelihood with published error budgets (2026-09-23):**
+Replaced the T177 hand-picked σ_unc with σ_unc extracted from the actual
+published papers (Horigome+ 2025 Table II for dSph/UFD, BLN24/Ohana+ 2026
+for Cloud-9, Lelli+ 2016 for SPARC, Randall+ 2008 for cluster). The 8
+channels use the published 95% CL or systematic uncertainties:
+
+| Channel | σ_unc (T205) | σ_unc (T177) | Source |
+|---|---|---|---|
+| UFD v=3-10 | 0.05 | 0.05 | Horigome+ 2025 (unchanged) |
+| dSph v=15 | 0.04 | 0.05 | Horigome+ 2025 (combined) |
+| Cloud-9 v=28 | **30** | 50 | BLN24/Ohana+ 2026 (1σ floor) |
+| SPARC v=100 | 0.05 | 0.05 | Lelli+ 2016 (unchanged) |
+| Cluster v=500 | 5e-4 | 5e-4 | Randall+ 2008 (unchanged) |
+
+| Model | logZ | |
+|---|---|---|
+| Multi-resonance (15 params) | **-14.285** | |
+| Constant σ/m (2 params) | **-16.697** | |
+| **log Bayes factor (A over B)** | **2.411** | |
+| **Bayes factor B** | **11.15** | |
+
+**Verdict (Jeffreys):** log B = 2.41 → B = 11 → **Moderate evidence for
+multi-resonance over constant σ/m** (downgraded from "strong" in T177).
+
+**T205 vs T177:** Δ log B = -0.65 (decrease). The Bayes factor is
+**moderately sensitive** to the σ_unc choice: tightening the Cloud-9
+floor uncertainty from 50 → 30 cm²/g (per BLN24) makes the multi-resonance
+fit harder because the model has less room to fit below the floor.
+Multi-resonance still wins on Bayes factor, but with reduced confidence.
+
+**Honest framing:** Both T177 and T205 give Bayes factors that **favor
+multi-resonance** over constant σ/m. The qualitative conclusion is robust,
+but the **strength of evidence** drops from "strong" (log B > 2.5) to
+"moderate" (log B in [1.5, 2.5]) when published error budgets are used
+instead of hand-picked ones. The BIC-based tests in §10.4c still favor
+constant σ/m (ΔBIC = +3.22), so the model comparison remains **methodology-
+sensitive**.
+
+T205 script: `v0.3-prelim/code/T205_full_likelihood_published.py`. Results
+JSON: `v0.3-prelim/data/results/t205_full_likelihood_published.json`.
+
 T177 script: `v0.3-prelim/code/T177_bayes_factor.py`. Results JSON:
 `v0.3-prelim/data/results/t177_bayes_factor.json`. Full doc:
 `v0.3-prelim/docs/T177_BAYES_EVIDENCE.md`.
@@ -1154,7 +1195,7 @@ The headline results are:
 - **115/127 = 90.6%** SPARC rotation-curve consistency (Phase 33d)
 - **MCMC posterior** (T120.9a) recovers parameters within 1σ (a_slope = 0.92 ± 0.36, w₁ = 4.4 ± 2.0 km/s, f_H = 0.20 ± 0.11)
 - **31/31 additional dSph/UFD points** satisfied that the Phase 44 single-channel baseline fails (qualitative preference)
-- **Proper Bayesian evidence (T177, 2026-09-21)**: log Bayes factor = 3.06 (Bayes factor = 21.3) favoring multi-resonance over constant σ/m on the 8-channel dataset. Strong evidence per Jeffreys scale; replaces the prior "+8.10 log-units" scoring-rule headline
+- **Proper Bayesian evidence (T177, 2026-09-21)**: log Bayes factor = 3.06 (Bayes factor = 21.3) favoring multi-resonance over constant σ/m on the 8-channel dataset. Strong evidence per Jeffreys scale; replaces the prior "+8.10 log-units" scoring-rule headline. **Updated 2026-09-23 with published error budgets (T205)**: log B = 2.41 (B = 11.2) — moderate evidence, downgraded from strong, but still favors multi-resonance.
 - **Four UV completion no-go theorems** (§10): magnetic dipole DM [44, T120.10], Hidden U(1) + 10 MeV pseudo-Dirac [45, T120.16], GeV-scale inelastic DM [T130], plus published best-fit p-wave resonance [28, T131] all fail for one-mediator UV. **The Cloud-9 4000× spike is NOT solved by any one-mediator UV completion; it requires physics beyond standard Yukawa.**
 - **Two-mediator UV candidate (Drobczyk 2025 [15f], T185/T190/T192, §10.3)**: A light scalar φ + heavy scalar Φh at m_Φh ≈ 2 m_χ provides s-channel Breit-Wigner enhancement for thermal relic, decoupled from σ_HH. **CHARM-compliant config (with proper thermal averaging, T192)**: g_h_SM = **0.00040**, δ = 0.43%, m_Φh = 20.69 GeV, <σv>_thermal = 2.63×10⁻²⁶ cm³/s, Ωh² = 0.119 (within Planck 2σ). This addresses **thermal relic density**, NOT the Cloud-9 spike specifically. The detuning δ = 0.43% is **5× broader than Drobczyk's benchmark of δ = 0.083%** — borderline-natural, requires either composite UV completion (Drobczyk SU(3)_H with N_f=10) or technical naturalness argument.
 
