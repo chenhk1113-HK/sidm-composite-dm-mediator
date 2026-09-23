@@ -2,7 +2,7 @@
 
 **Authors:** SIDM Composite DM-Mediator Collaboration
 **Branch:** `wip/multi-component-SIDM-core-collapse` (commit `9daf10a`, 2026-09-21; synced with `wip/cloud-9-relhic`)
-**Status:** Paper draft (v1.14.1, INTERNAL REFERENCE, **focal version**). v1.14.1 retires the Hidden U(1) UV completion (falsified by referee report 2026-09-19) and presents the multi-component + gravothermal phenomenology as a **self-consistent framework without UV claim**. The paper documents **four independent UV completion no-go theorems** (magnetic dipole DM, Hidden U(1) + 10 MeV pseudo-Dirac, GeV-scale inelastic DM, Chu+ 2019 p-wave resonance) and shows that the **specific 4000× Cloud-9 spike** cannot be derived from standard Yukawa physics (T165-T172 robustness investigation). The phenomenology (T120: multi-resonance + two-component asymmetric DM + gravothermal selection + Gaussian Breit-Wigner profiles) satisfies **7 of 8 observational constraints** (RMSE = 0.25 on the 7-point fit). **Markdown source of truth — no PDF build during drafting.** See README.md, CHANGELOG.md, and `v0.3-prelim/docs/` for full supporting documentation.
+**Status:** Paper draft (v18.34, INTERNAL REFERENCE, **focal version**). v18.34 retires the Hidden U(1) UV completion (falsified by referee report 2026-09-19) and presents the multi-component + gravothermal phenomenology as a **phenomenological constraint map, not a unified derivation**. The paper documents **five independent UV completion no-go theorems** (magnetic dipole DM, Hidden U(1) + 10 MeV pseudo-Dirac, GeV-scale inelastic DM, Chu+ 2019 p-wave resonance, T184 one-mediator UV systematic) and shows that the **specific 4000× Cloud-9 spike** cannot be derived from standard Yukawa physics (T165-T172 robustness investigation). The phenomenology (T120: multi-resonance + two-component asymmetric DM + gravothermal selection + Gaussian Breit-Wigner profiles) is consistent with **6–7 of 8 observational constraints depending on the f_H prescription** (RMSE = 0.25 on the 7-point fit under borrowed f_H). **Markdown source of truth — no PDF build during drafting.** See README.md, CHANGELOG.md, and `v0.3-prelim/docs/` for full supporting documentation.
 
 **Draft workflow (per 2026-09-17 user decision):** Read this file directly in any modern text editor (VS Code, GitHub, Obsidian). Unicode subscripts/superscripts, M☉, σ, ⚠, etc. all render as proper text in the editor. No PDF rendering until the paper is closer to submission. When PDF is needed, install Pandoc + XeLaTeX and run `pandoc PAPER_V1_DRAFT.md -o paper.pdf` (one-time setup, ~5 min).
 **Recommended venue:** PRD, JCAP, or JHEP (mixed-verdict focus appropriate for all three)
@@ -15,7 +15,7 @@ We present a velocity-dependent self-interacting dark matter (SIDM) architecture
 
 **Honest model-comparison framing (Phase 42, Phase 54, T177, T205):** On SPARC rotation curves alone (120 galaxies, dynesty Bayesian evidence), this architecture is **outperformed by Burkert** (coreless isothermal) and PISO profiles. On the joint 7-channel likelihood (Phase 54), it wins on raw log-likelihood (+6.08 over constant σ/m) but loses on BIC-corrected evidence (ΔBIC = +3.22 favoring constant) due to the 15-vs-1 parameter penalty. The headline model-comparison number is **T177 log B = 3.06 (B = 21) — semi-informative Bayes factor using Gaussian likelihoods with hand-picked σ_unc (50 for Cloud-9, 0.05 for dSph, etc.). T205 update with published error budgets from the actual observational papers gives log B = 2.41 (B = 11, moderate evidence)**. The 6–7-of-8 channel-coverage rate is therefore a **channel-completeness result**, not a "model dominates the data" claim.
 
-**Five no-go theorems on UV completion** (one-mediator dark photon, Higgs portal, magnetic dipole, Hidden U(1)+MeV splitting) and a **two-mediator Drobczyk candidate** (thermal relic Ωh² = 0.119 at δ = 0.43%, g_h_SM = 0.00040, m_Φh = 20.69 GeV; T192 thermal-averaged) constitute the UV status. The Drobczyk candidate requires detuning 5× broader than the published benchmark (composite UV or fine-tuning argument required).
+**Five no-go theorems on UV completion** (magnetic dipole DM [T120.10], Hidden U(1) + 10 MeV pseudo-Dirac [T120.16], GeV-scale inelastic DM [T130], Chu+ 2019 p-wave resonance [T131], thermal-WIMP one-mediator UV systematic [T184]) and a **two-mediator Drobczyk candidate** (thermal relic Ωh² = 0.119 at δ = 0.43%, g_h_SM = 0.00040, m_Φh = 20.69 GeV; T192 thermal-averaged) constitute the UV status. The Drobczyk candidate requires detuning 5× broader than the published benchmark (composite UV or fine-tuning argument required).
 
 Three independent observational anchors support the framework: (1) thermal relic density via a two-mediator UV completion (Drobczyk 2025 [15f], T185/T190/T192), with the CHARM-compliant configuration at g_h_SM = 0.00040, δ = 0.43%, m_Φh = 20.69 GeV, Ωh² = 0.119; (2) JVAS substructure physics via core-collapsed SIDM (Yu 2026 [23], three-bird-one-stone for JVAS + GD-1 + Fornax 6 at ~10⁶ M☉ halo mass scale); and (3) four falsifiable predictions (§10.5a): Sommerfeld enhancement at freeze-out, direct-detection null at σ_SI ~ 2×10⁻⁴⁹ cm² (below neutrino floor), indirect-detection null at ⟨σv⟩₀ ~ 10⁻²⁹ cm³/s, and beam-dump sensitivity at 20 GeV.
 
@@ -227,12 +227,14 @@ The Horigome+ constraint applies at v_eff = 0.64 × V̂_max (Eq. 15 of [27], fol
 
 With the correct velocity convention (v_eff = 0.64 × V̂_max) AND the correct limit for a velocity-dependent model (0.8 cm²/g at w=10 km/s), the violation at the Horigome+ 95% CL is (Phase 44 single-component baseline, BEFORE multi-component correction):
 
-| Velocity scale | σ/m(v) [Phase 44 single] | σ/m(v) [v1.13 multi-component] | Horigome+ limit (w=10) | Phase 44 violation | v1.13 status |
+| Velocity scale | σ/m(v) [Phase 44 single] | σ/m(v) [v1.13 with hand-picked placeholder f_H, retracted v18.29 — shown for reference only] | Horigome+ limit (w=10) | Phase 44 violation | v1.13 status (placeholder f_H) |
 |---|---|---|---|---|---|
 | v_eff = 5 km/s (UFDs) | 18.4 cm²/g | **0.09 cm²/g** | 0.8 cm²/g | **23×** | ✓ PASS (200× under) |
 | v_eff = 10 km/s (UFDs/UFD-like) | 6.5 cm²/g | **0.05 cm²/g** | 0.8 cm²/g | **8×** | ✓ PASS |
 | v_eff = 15 km/s (classical dSphs) | 5.0 cm²/g | **0.03 cm²/g** | 0.8 cm²/g | **6×** | ✓ PASS |
 | v_eff = 20 km/s (high-V̂_max dSphs) | 6.8 cm²/g | **0.04 cm²/g** | 0.8 cm²/g | **8×** | ✓ PASS |
+
+**Caveat:** the v1.13 ✓ PASS values in this table use the **hand-picked placeholder f_H** (retracted v18.29; see §9.3 and §9.7). With Yang+ 2025-derived or T202 N-body f_H, the dSph v=15 channel fails (σ/m_eff ≈ 3.1 cm²/g vs 0.8 ceiling; see §9.3 table). The table is retained here for archival purposes; the current honest status is documented in §3.6 status line below.
 
 If we instead use the velocity-independent limit (0.04 cm²/g), the violations are higher (115–460×), but this is not the appropriate limit for a strongly velocity-dependent model like ours.
 
@@ -293,7 +295,7 @@ The effective cross-section per unit mass in the mixed halo is σ_eff/m = f_H² 
 
 The 8-channel fit outcome **depends on the assumed f_H prescription**. We document this honestly by showing the channel-by-channel outcome under three different f_H choices:
 
-| Channel | Constraint | σ/m_eff (borrowed f_H) | σ/m_eff (Yang+ 2025-derived f_H) | σ/m_eff (T202 N-body f_H) | Status across prescriptions |
+| Channel | Constraint | σ/m_eff (hand-picked placeholder f_H, retracted v18.29; shown for reference only) | σ/m_eff (Yang+ 2025-derived f_H) | σ/m_eff (T202 N-body f_H) | Status across prescriptions |
 |---|---|---|---|---|---|
 | Cloud-9 (v=28, core-forming) | ≥100 cm²/g | 128 cm²/g ✓ | 87 cm²/g ✗ | 92 cm²/g ✗ | Pass with borrowed; fail with derived |
 | dSph (v=15, core-collapsed) | ≤0.8 cm²/g | 0.18 cm²/g ✓ | 3.1 cm²/g ✗ | 4.2 cm²/g ✗ | Pass with borrowed; fail with derived |
@@ -338,10 +340,21 @@ The 8-channel fit is best interpreted as:
 
 The T206 Path C free-parameter fit (run on the joint 8-channel likelihood with corrected one-sided penalties) gives:
 
-- Peak log L = −0.43 (dominated by SPARC residual).
-- Peak f_H_core_forming = 1.00 (boundary).
-- Peak f_H_core_collapsed = 0.05 (boundary).
-- 68% CI on f_H_core_collapsed = [0.05, 0.069] — boundary sliver.
+- Peak log L = **−0.431** (dominated by SPARC residual).
+- Peak f_H_core_forming = **1.000** (boundary).
+- Peak f_H_core_collapsed = **0.041** (boundary; grid extended to [0.0, 1.0] in v18.34).
+- 68% CI on f_H_core_collapsed = **[0.0, 0.061]** — boundary sliver including the lower bound, confirming the likelihood is **monotonically decreasing above 0.041** and does not turn over inside the physical region.
+- Per-channel contribution at peak (T206 v18.34, σ_unc-normalized one-sided Gaussian):
+
+| Channel | log L contribution | σ_eff at peak | obs |
+|---|---|---|---|
+| SPARC v=100 | **−0.408** | 0.019 | 0.193 |
+| Cloud-9 v=28 | −0.024 | 100.07 | 128.0 |
+| UFD v=3, 5, 7, 10 | 0.000 each | 0.011–0.077 | 0.047–0.155 |
+| dSph v=15 | 0.000 | 0.008 | 0.032 |
+| Cluster v=500 | 0.000 | 0.000 | 0.000 |
+
+The fit is **dominated by a single residual (SPARC)**; the boundary peak reflects the structural failure of σ_eff = f_H² × σ_HH to reach SPARC, not a data-driven f_H measurement.
 
 **Interpretation**: The fit peaks at the grid boundary because the σ_eff = f_H² × σ_HH decomposition **cannot reach SPARC's σ/m ≈ 0.193** (max σ_eff = 0.069). The optimizer pushes f_H_cc to minimize UFD ceiling penalties while accepting an irreducible SPARC residual. This is **not a phenomenological measurement of f_H**; it reflects the structural failure of the heavy-channel-only decomposition.
 
@@ -415,13 +428,7 @@ EFT target map for future work.
 
 ### 10.1 UV completion: general framework and constraints
 
-The phenomenology (T120 multi-component + gravothermal + Gaussian Breit-Wigner)
-**works** — it satisfies 7 of 8 observational constraints spanning 4 orders of
-magnitude in velocity. The 8th constraint (Cloud-9's σ/m ≥ 50 floor at v=28 km/s)
-is published and confirmed independently by Ohana, Zhang & Yu 2026 [15e] via
-MCMC, but cannot be derived from standard Yukawa physics. This is honest:
-we present a self-consistent phenomenology for 7 constraints and document
-what UV physics would need to look like to reproduce the 8th.
+The phenomenology (T120 multi-component + gravothermal + Gaussian Breit-Wigner) is consistent with **6–7 of 8 observational channels depending on the f_H prescription** (§9.3, §9.7). With the borrowed (hand-picked placeholder, retracted v18.29) f_H values, 7 of 8 channels pass; with Yang+ 2025-derived or T202 N-body-derived f_H, only 4 of 8 pass. The Cloud-9 vs dSph tension is **unresolved at Phase 44 parameters** when f_H is derived from a first-principles source. The 8th channel (Cloud-9's σ/m ≥ 50 floor at v=28 km/s) is published and confirmed independently by Ohana, Zhang & Yu 2026 [15e] via MCMC, but cannot be derived from standard Yukawa physics; the heavy-channel-only σ_eff = f_H² × σ_HH(v) decomposition also cannot match SPARC's σ/m ≈ 0.193 at v = 100 km/s. This is honest: we present **a constraint map, not a self-consistent derivation**, and document what UV physics would need to look like to reproduce the full 8 channels.
 
 ### 10.2a No-go #1: Magnetic dipole DM (T120.10)
 
@@ -647,7 +654,7 @@ single-velocity estimate at v_F = 0.3c (which was off-resonance by
 **Paper impact:** §10.3 supersedes the "5th no-go theorem" from T184.
 The phenomenology now has a **constructive UV completion** that satisfies
 ALL constraints:
-- Multi-channel SIDM (7 of 8 channels)
+- Multi-channel SIDM (6–7 of 8 channels depending on f_H prescription)
 - Thermal relic density (Ωh² = 0.116)
 - No-go theorems for one-mediator UV completions (still valid)
 - Testable predictions at B-factories / beam-dumps
@@ -825,10 +832,8 @@ Three BIC/Bayes comparisons have been performed in this paper:
 
 **Synthesis:** The BIC-based tests give **mixed results** depending on
 dataset and whether scoring-rule or proper likelihood is used. The
-proper Bayesian evidence (T177) gives **log B = 3.06 — strong but not
-decisive**. We adopt log B = 3.06 as the paper's headline comparison
-statistic and note the BIC-based tests as alternative comparisons with
-sensitivity to methodology.
+proper Bayesian evidence (T205, with published error budgets) gives **log B = 2.41 — moderate evidence**. We adopt log B = 2.41 (T205) as the paper's headline comparison
+statistic; the earlier T177 log B = 3.06 (hand-picked-error upper estimate) is shown for reference and demoted to a secondary number. BIC-based tests remain alternative comparisons with sensitivity to methodology.
 
 **Honest qualifier (per DeepSeek review2, 2026-09-21):** The T177 likelihood
 uses **soft Gaussian penalties** with widths informed by published
@@ -903,7 +908,7 @@ the paper's headline 7-of-8 channel satisfaction; each adds an honest caveat.
 
 ### 10.5 EFT target map for future UV completions
 
-The four no-go theorems above define what any future UV completion must
+The five no-go theorems above define what any future UV completion must
 satisfy to reproduce our phenomenology. **Numerical values shown below
 are from the Phase 44 baseline framework (v1.13 default parameters,
 verified in T132); the T163 KK-tower best fit (α_D = 0.3, m₀ = 0.3 GeV,
@@ -1328,4 +1333,4 @@ Full phase-by-phase documentation is available in `v0.3-prelim/docs/` and the pr
 
 ---
 
-**END OF PAPER DRAFT v1.14.1** (2026-09-21)
+**END OF PAPER DRAFT v18.34** (2026-09-23)

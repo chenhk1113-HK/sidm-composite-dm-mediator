@@ -7,6 +7,24 @@
 
 
 
+## [CopyEdit-v18.35] - 2026-09-23
+
+**review4.docx copy-edit pass — 11 residual inconsistencies cleaned up.**
+
+1. Status line: "v1.14.1, four no-go, 7 of 8, self-consistent" → "v18.34, five no-go, 6-7 of 8, phenomenological constraint map". ✓
+2. §10.1: "works — 7 of 8, self-consistent phenomenology" → honest 6-7 of 8 per §9.3/§9.7. ✓
+3. §10.3 Paper impact: "7 of 8 channels" → "6-7 of 8 channels depending on f_H". ✓
+4. §10.5: "four no-go theorems" → "five no-go theorems". ✓
+5. §10.4b: "adopt log B = 3.06" → "adopt log B = 2.41 (T205); T177 = 3.06 demoted". ✓
+6. §9.3 table: "σ/m_eff (borrowed f_H)" → "σ/m_eff (hand-picked placeholder f_H, retracted v18.29; shown for reference only)". ✓
+7. §3.6: residual "Status (v1.12 — RESOLVED)" confirmed already removed in v18.33. ✓
+8. Abstract five-no-go parenthetical: re-listed (magnetic dipole / Hidden U(1) / GeV-scale inelastic / Chu+ p-wave / T184). ✓
+9. §9.6 T206 numbers refreshed: peak f_H_cc = 0.041 (was 0.05); 68% CI = [0.0, 0.061] (was [0.05, 0.069]); per-channel contribution table added (SPARC dominates at -0.408). ✓
+10. §3.6 v1.13 ✓ PASS column relabelled: "v1.13 multi-component" → "v1.13 with hand-picked placeholder f_H, retracted v18.29 — shown for reference only"; dSph fails with Yang+-derived caveat added. ✓
+11. END marker: "v1.14.1 (2026-09-21)" → "v18.34 (2026-09-23)". ✓
+
+Rule 29 (reviewer-checklist processing) followed end-to-end.
+
 ## [BodyReconciled-v18.34] - 2026-09-23
 
 **Body reconciled to abstract per review.docx §3 (full checklist).**

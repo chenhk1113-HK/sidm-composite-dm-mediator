@@ -2,9 +2,27 @@
 
 > **For:** Anyone who has 60 seconds and wants to know what this project
 > is, what it claims, and what the current best numbers are.
-> Updated with each version-bump round. Last refresh: 2026-09-23 (v18.34).
+> Updated with each version-bump round. Last refresh: 2026-09-23 (v18.35).
 
 ---
+
+## Standing: v0.4-prelim+v18.35 (2026-09-23, copy-edit pass per review4.docx)
+
+**v18.35 copy-edit pass** — applies Rule 29 (reviewer-checklist processing) end-to-end. 11 residual inconsistencies cleaned up:
+
+1. **Status line**: v1.14.1, four no-go, 7/8, self-consistent → v18.34, five no-go, 6-7/8, phenomenological constraint map.
+2. **§10.1**: "works — 7/8, self-consistent" → "6-7/8 depending on f_H, constraint map, not self-consistent derivation".
+3. **§10.3 Paper impact**: "7 of 8 channels" → "6-7 of 8 channels depending on f_H prescription".
+4. **§10.5**: "four no-go theorems" → "five no-go theorems".
+5. **§10.4b**: log B = 3.06 (T177) → log B = 2.41 (T205, published error budgets); T177 demoted to upper estimate.
+6. **§9.3 table**: "σ/m_eff (borrowed f_H)" column relabelled "σ/m_eff (hand-picked placeholder f_H, retracted v18.29; shown for reference only)".
+7. **§3.6**: residual "Status (v1.12 — RESOLVED)" confirmed already removed in v18.33.
+8. **Abstract five-no-go parenthetical**: now correctly lists all 5 (magnetic dipole / Hidden U(1) / GeV-scale inelastic / Chu+ p-wave / T184).
+9. **§9.6 T206 numbers refreshed**: f_H_cc = 0.041 (was 0.05); 68% CI = [0.0, 0.061] (was [0.05, 0.069]); per-channel contribution table added (SPARC dominates at -0.408).
+10. **§3.6 v1.13 ✓ PASS column relabelled**: "v1.13 multi-component" → "v1.13 with hand-picked placeholder f_H, retracted v18.29 — shown for reference only"; dSph fails with Yang+-derived caveat added.
+11. **END marker**: "v1.14.1 (2026-09-21)" → "v18.34 (2026-09-23)".
+
+After this pass, the paper's status line, abstract, §1, §3.4, §3.6, §9, §10, §11, and END marker are **mutually consistent**. The honest phenomenological framing now appears in **all** parts of the paper, not just the abstract.
 
 ## Standing: v0.4-prelim+v18.34 (2026-09-23, body reconciled to abstract)
 
