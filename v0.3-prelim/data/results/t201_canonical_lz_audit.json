@@ -5,54 +5,54 @@
   "results": {
     "v0.7_composite": {
       "LZ_2026": {
-        "N_predicted": 1.2679564978834753e-91,
+        "N_predicted": 2.6464079924151004e-70,
         "kinematically_accessible": true,
         "v_min_at_E_R_min_kms": 50.36177205201703,
-        "log10_N_pred": -90.89689564633855
+        "log10_N_pred": -69.57734320051308
       },
       "PandaX_4T_2023": {
-        "N_predicted": 7.150347318486347e-92,
+        "N_predicted": 1.5812170271392957e-70,
         "kinematically_accessible": true,
         "v_min_at_E_R_min_kms": 48.460637751830994,
-        "log10_N_pred": -91.14567286241729
+        "log10_N_pred": -69.80100851765766
       },
       "XENONnT_2023": {
-        "N_predicted": 2.0432600717269903e-92,
+        "N_predicted": 4.518434521265341e-71,
         "kinematically_accessible": true,
         "v_min_at_E_R_min_kms": 48.460637751830994,
-        "log10_N_pred": -91.68967635166051
+        "log10_N_pred": -70.34501200690089
       },
       "DARWIN_2023": {
-        "N_predicted": 6.073900332125419e-88,
+        "N_predicted": 1.3431731632774498e-66,
         "kinematically_accessible": true,
         "v_min_at_E_R_min_kms": 48.460637751830994,
-        "log10_N_pred": -87.2165323387864
+        "log10_N_pred": -65.87186799402676
       }
     },
     "v18_11_drobczyk": {
       "LZ_2026": {
-        "N_predicted": 5.415912416986885e-28,
+        "N_predicted": 0.0034583094710074515,
         "kinematically_accessible": true,
         "v_min_at_E_R_min_kms": 590.4347015755421,
-        "log10_N_pred": -27.266328367426098
+        "log10_N_pred": -2.4611361459559298
       },
       "PandaX_4T_2023": {
-        "N_predicted": 6.37008843949776e-28,
+        "N_predicted": 0.0030889551209419427,
         "kinematically_accessible": true,
         "v_min_at_E_R_min_kms": 568.146056489226,
-        "log10_N_pred": -27.195854538069792
+        "log10_N_pred": -2.510188401465094
       },
       "XENONnT_2023": {
-        "N_predicted": 1.820295823693046e-28,
+        "N_predicted": 0.0008826898024463205,
         "kinematically_accessible": true,
         "v_min_at_E_R_min_kms": 568.146056489226,
-        "log10_N_pred": -27.739858027313016
+        "log10_N_pred": -3.054191890708316
       },
       "DARWIN_2023": {
-        "N_predicted": 5.4111053022979965e-24,
+        "N_predicted": 26.239292581638537,
         "kinematically_accessible": true,
         "v_min_at_E_R_min_kms": 568.146056489226,
-        "log10_N_pred": -23.26671401443889
+        "log10_N_pred": 1.4189521221658095
       }
     },
     "di_mauro_inelastic": {
@@ -83,28 +83,28 @@
     },
     "t90_magnetic_moment": {
       "LZ_2026": {
-        "N_predicted": 5.891702699732802e-17,
+        "N_predicted": 115870.0827723477,
         "kinematically_accessible": true,
         "v_min_at_E_R_min_kms": 48.67764309316323,
-        "log10_N_pred": -16.229759176140863
+        "log10_N_pred": 5.063971317205213
       },
       "PandaX_4T_2023": {
-        "N_predicted": 3.299596356734703e-17,
+        "N_predicted": 69219.07723423759,
         "kinematically_accessible": true,
         "v_min_at_E_R_min_kms": 46.84008390559053,
-        "log10_N_pred": -16.481539184596254
+        "log10_N_pred": 4.840225805377786
       },
       "XENONnT_2023": {
-        "N_predicted": 9.428819591883912e-18,
+        "N_predicted": 19779.81913533736,
         "kinematically_accessible": true,
         "v_min_at_E_R_min_kms": 46.84008390559053,
-        "log10_N_pred": -17.025542673839475
+        "log10_N_pred": 4.296222316134564
       },
       "DARWIN_2023": {
-        "N_predicted": 2.802859569525539e-13,
+        "N_predicted": 587985111.038566,
         "kinematically_accessible": true,
         "v_min_at_E_R_min_kms": 46.84008390559053,
-        "log10_N_pred": -12.55239866096535
+        "log10_N_pred": 8.76936632900869
       }
     }
   }

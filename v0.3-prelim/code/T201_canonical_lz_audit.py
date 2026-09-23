@@ -123,6 +123,17 @@ def v_min_inelastic_TSW2001(E_R_keV, m_chi_GeV, delta_keV, m_N_GeV):
 def N_events_wimpy(sigma_SI_cm2, m_chi_GeV, detector_key):
     """Use WIMpy's dRdE_standard for canonical event count.
 
+    WIMpy 1.1.1 signature: dRdE_standard(E, N_p, N_n, m_x, sig, ...)
+        E:    recoil energy [keV]
+        N_p:  number of protons in target nucleus (e.g. 54 for Xe-132)
+        N_n:  number of neutrons in target nucleus (e.g. 78 for Xe-132)
+        m_x:  DM mass [GeV]
+        sig:  DM-nucleon cross-section [cm^2]
+
+    For xenon, use natural-abundance weighted average:
+        A_xe_nat = 131.29 amu, Z = 54, N = 77 (rounded)
+    For argon-40: Z = 18, N = 22.
+
     WIMpy's dRdE_standard returns dR/dE_R in events/(kg × day × keV).
     Integrate over E_R window, multiply by mass × days.
 
@@ -134,58 +145,46 @@ def N_events_wimpy(sigma_SI_cm2, m_chi_GeV, detector_key):
     M_target_kg = det['exposure_tonne_year'] * 1000
     time_days = det['exposure_tonne_year'] * 365.25
 
+    # Target nuclei Z, N (most abundant isotope)
+    if det['wimpy_target'] == 'xenon':
+        Z, N_nuc = 54, 77  # Xe-131
+    elif det['wimpy_target'] == 'argon':
+        Z, N_nuc = 18, 22  # Ar-40
+    else:
+        Z, N_nuc = det['m_N_GeV'] // 2, det['m_N_GeV'] // 2
+
     try:
         def dRdE(E_R_keV):
             return DMU.dRdE_standard(
-                sigma_SI_cm2, m_chi_GeV, det['wimpy_target'], E_R_keV
+                E_R_keV, Z, N_nuc, m_chi_GeV, sigma_SI_cm2
             )
 
         rate_per_kg_day, _ = quad(dRdE, E_R_min, E_R_max, limit=100)
         N_events = rate_per_kg_day * M_target_kg * time_days
         return N_events
     except Exception as e:
+        print(f'    WIMpy error: {e}')
         return None
 
 
 def N_events_simple_estimate(sigma_SI_cm2, m_chi_GeV, detector_key):
-    """Simple L&S estimate calibrated against WIMpy.
+    """Fallback only for development; not for publication use.
 
-    Use this only when WIMpy is unavailable. Validated against WIMpy T198
-    for the T90 magnetic-moment case (over-predicts LZ by < 2x for that
-    specific case).
+    WIMpy is the canonical reference for all published event-rate numbers.
+    This fallback is included so the script doesn't crash if WIMpy is
+    unavailable, but its output has NOT been validated against WIMpy and
+    should not be cited in the paper.
+
+    For publication, use WIMpy (set HAS_WIMPY=True) and call N_events_wimpy.
+
+    NOTE: As of T201, the calibration factor is approximately c / (2*pi) ~ 0.05,
+    but this has not been precisely validated. If you must use the fallback,
+    compare against WIMpy first at the same parameter point.
     """
-    det = DETECTORS[detector_key]
-    m_N = det['m_N_GeV']
-    A_mol = det['A_mol']
-    E_R_min, E_R_max = det['energy_window_keV']
-
-    v_min_at_E_min = v_min_elastic_LewinSmith(E_R_min, m_chi_GeV, m_N)
-    if v_min_at_E_min >= SHM_threshold:
-        return 0.0
-
-    M_target_kg = det['exposure_tonne_year'] * 1000
-    N_target = M_target_kg * 1000 * N_A / A_mol
-    m_chi_g = m_chi_GeV * GeV_to_g
-    time_seconds = det['exposure_tonne_year'] * year_s
-
-    # Use simple LS eta with proper calibration factor (to match WIMpy)
-    # The factor v_0 / c converts eta from "1/v" to "v/v_0" units
-    def integrand(E_R_keV):
-        v_m = v_min_elastic_LewinSmith(E_R_keV, m_chi_GeV, m_N)
-        if v_m >= SHM_threshold:
-            return 0.0
-        # Lewin-Smith 1996 Eq. 2.14 approximation (no truncation):
-        return np.exp(-((v_m + v_lab) / v_0)**2) * v_m / v_0**2
-
-    integral, _ = quad(integrand, E_R_min, E_R_max, limit=100)
-
-    # Per Lewin-Smith 1996 Eq. 2.1:
-    # N = t × N_target × (rho_DM/m_chi) × sigma × integral
-    # with integral in units of cm^-1 × keV (this is the calibrated form)
-    d_factor = rho_DM_g_cm3 / m_chi_g  # cm^-3
-    N_pred = time_seconds * N_target * d_factor * sigma_SI_cm2 * integral
-
-    return N_pred
+    # Print warning, return None to force use of WIMpy
+    print(f'  WARNING: N_events_simple_estimate is unvalidated; '
+          f'use WIMpy for publication numbers.')
+    return None
 
 
 def main():

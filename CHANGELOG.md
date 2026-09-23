@@ -43,6 +43,50 @@ T196-T200 dimensional bugs (it uses WIMpy directly).
 This is the SINGLE CANONICAL reference for the LZ event-rate analysis.
 Future scripts should validate against WIMpy before publication.
 
+
+## [T201WIMpyFix-v18.19] - 2026-09-23
+
+**Critical fix to T201 WIMpy API call signature.**
+
+Reviewer T201.docx (third-party audit, 2026-09-23) caught 6 issues:
+1. CRITICAL: stale "Verdict:" and "Honest framing:" paragraphs in §3.5a contradicted abstract
+2. HIGH: §10.5a still said "53 orders" and "See T199"
+3. HIGH: Abstract cited T199 as canonical, should cite T201
+4. MEDIUM: Five-versions narrative too long for main text
+5. MEDIUM: §11 Conclusions had no LZ falsifiability summary
+6. MEDIUM: T201 fallback path not validated; reproducibility risk
+
+**Bugs found and fixed in T201 itself:**
+- **WIMpy dRdE_standard signature was WRONG in T201**. The actual signature is
+  `dRdE_standard(E, N_p, N_n, m_x, sig, vlag=232.0, sigmav=156.0, vesc=544.0)`
+  (E first, then Z, N, mass, sigma — NOT the order I had).
+- Also: T201 fallback N_events_simple_estimate has been DISABLED (now prints
+  warning + returns None). Per reviewer option (a): require WIMpy for publication.
+
+**CORRECTED canonical numbers (T201 with fixed WIMpy signature):**
+
+| Model | OLD T201 (wrong) | NEW T201 (correct) | Verdict |
+|---|---|---|---|
+| v0.7 composite | 1.27e-91 (91 ord) | **2.65e-70 (70 ord)** | Fails |
+| v18.11 Drobczyk | 5.42e-28 (27 ord) | **3.46e-3 (~2.5 ord)** | **Within reach!** |
+| Di Mauro inelastic | 0 (v_min=2416) | **0** (v_min=2416) | Inaccessible |
+| T90 magnetic-moment | 5.89e-17 (16 ord) | **1.16e+5 (OVER ~5 ord)** | OVER-predicts |
+
+**Major change:** v18.11 is now ONLY ~2.5 orders below LZ sensitivity (not 27),
+and the T90 magnetic-moment branch OVER-predicts LZ by 5 orders (not 16 order
+deficit). This dramatically changes the paper's narrative:
+- v18.11 is NOT deeply excluded by LZ; it's just below sensitivity
+- T90 magnetic-moment is NOT a viable interpretation of the LZ event
+- Only Di Mauro inelastic remains "completely inaccessible"
+
+**Paper updates (v18.19):**
+- §3.5a verdict: 91→70 orders deficit; 27→2.5 orders; 16→OVER 5 orders
+- §10.5a: 53→2.5 orders deficit, "See T199" → "See T201"
+- Abstract: T199→T201; 91→70; 27→2.5; 16→5
+- §11 added: LZ falsifiability summary paragraph
+
+This is the v18.18 paper corrected for the WIMpy API signature bug.
+
 ## [T200ProperRateFormula-v18.17] - 2026-09-23
 
 **CRITICAL: third-party audit caught 3 bugs in T199 (sent as T199.docx).**
