@@ -7,6 +7,50 @@
 
 
 
+## [T120.3aFix-v18.30] - 2026-09-23
+
+**Two-regime framing: Phase 44 vs Yang+ σ/m.**
+
+Building on the v18.29 honesty about f_H_at_r being a placeholder, we now
+make the two-regime distinction explicit in the paper:
+
+**Phase 44 regime** (σ/m = 0.052 cm²/g at v = 100 km/s):
+- Gravothermal cascade timescale ≫ Hubble time
+- No significant two-component segregation occurs
+- f_H ≈ 0.75 everywhere (uniform mix, equal number densities × mass_ratio = 3)
+- σ_eff = 0.56 × σ_HH(v) — the "heavy channel" is the bottleneck
+- Result: 0/8 channels pass simultaneously (Cloud-9 needs σ/m ≥ 128, but
+  dSph needs σ/m ≤ 0.8 — the multi-resonance profile cannot bridge both)
+
+**Yang+ 2025 regime** (σ₀/m = 147 cm²/g at v = 100 km/s):
+- Gravothermal cascade timescale ≪ Hubble time
+- Full segregation: heavy sinks to r < 0.05 r_vir, light dominates at r > 0.1
+- f_H(r) follows Yang+ Fig. 2 profile (f_L ∈ 0.3-0.6)
+- Two-component + gravothermal selection IS operative
+- This regime is NOT Phase 44 — it's a different parameter point
+
+**Implication for the paper:**
+The paper's headline "7 of 8 channels pass" was structurally dependent on
+borrowed f_H values from the Yang+ regime applied to Phase 44 parameters.
+This is inconsistent: at Phase 44, the gravothermal cascade hasn't had time
+to produce those f_H values.
+
+**Updated honest framing:**
+- Phase 44 framework is a **phenomenological interpolation** through the
+  8 observational channels, not a first-principles derivation
+- Two-component + gravothermal selection is a **separate regime** (Yang+
+  σ/m) and does not apply at Phase 44 parameters
+- The "Cloud-9 vs dSph tension" is **unresolved** at Phase 44 — the
+  multi-resonance profile cannot simultaneously satisfy both
+- The paper is best read as a **constraint map and no-go catalogue** that
+  bounds the parameter space but does not claim a unified solution
+
+**Files updated:**
+- Abstract: explicit two-regime framing; retired "7-of-8" headline
+- CHANGELOG: this entry
+- VERSION: bumped to v18.30
+
+
 ## [T120.3aFix-v18.29] - 2026-09-23
 
 **CRITICAL: phase44 f_H_at_r was a placeholder, now Yang+ 2025-derived.**
