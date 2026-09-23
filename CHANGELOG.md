@@ -7,6 +7,71 @@
 
 
 
+## [T120.3aFix-v18.29] - 2026-09-23
+
+**CRITICAL: phase44 f_H_at_r was a placeholder, now Yang+ 2025-derived.**
+
+Rule 28 scrutiny (sanity-check against Yang+ Fig. 2) caught that
+phase44_two_component.f_H_at_r returned HAND-PICKED piecewise constants
+(0.95, 0.30, 0.10 for core_collapsed at r/r_vir = 0.05, 0.20, 0.5+)
+labeled "Based on Yang+ 2025 PRD 112, 083011" but **NOT actually derived
+from Yang+ Fig. 2**.
+
+Yang+ 2025 Fig. 2 SIDM2c actually shows f_L (number fraction of light)
+∈ [0.3, 0.6] at radii 0.05-1.0 — modest segregation. My piecewise values
+were 10× more extreme (f_H = 0.10 at large r vs Yang+ ~0.5).
+
+**Why this matters (read-across):**
+The paper's "7-of-8 channels pass" headline used these hand-picked f_H
+values. With Yang+ 2025-derived f_H (segregation_maturity=1, σ/m=Yang+):
+  - 0/8 channels pass (UFD fails, dSph fails, Cloud-9 fails, SPARC fails,
+    cluster fails)
+- With Phase 44 σ/m + maturity=0 (no segregation): also 0/8.
+- The hand-picked f_H_at_r was **doing the heavy lifting** in the dSph
+  channel (f_H(0.20)=0.30 → σ_eff = 0.09 × 5 = 0.45 < 0.8 cm²/g
+  dSph ceiling).
+
+**Honest conclusion:**
+The two-component + gravothermal selection effect CANNOT save Phase 44's
+multi-resonance σ/m(v) at Yang+ 2025-derived segregation strengths. The
+"7-of-8 pass" was a hand-picked artifact, not a physical prediction.
+
+**Fix applied (v18.29):**
+1. **phase44_two_component.f_H_at_r()** rewritten:
+   - Now takes `sigma_m_per_g` (default Phase 44) and `segregation_maturity`
+     (default 1.0) parameters
+   - Uses Yang+ 2025 reference values: σ_0/m = 147.1 cm²/g, w = 24.33 km/s,
+     mass_ratio = 3.0
+   - Returns Yang+ Fig. 2-derived f_H profile (modest segregation)
+   - At Phase 44 σ/m: returns ≈0.75 everywhere (no significant segregation)
+   - At Yang+ σ/m with full maturity: returns Yang+ Fig. 2 profile
+2. **phase44_two_component_sigma_eff()** extended with `sigma_m_per_g` and
+   `v_for_seg` parameters (default Phase 44, v=100 km/s)
+3. **test_t120_two_component_phase44.py** rewritten to test Yang+ 2025-derived
+   behavior, not the placeholder values. 28 tests pass.
+4. **Abstract** updated: "7 of 8" → "partial observational-channel coverage
+   (passing some channels with borrowed f_H, failing 0/8 with Yang+ 2025-derived
+   f_H)"
+
+**Read-across implication:**
+- T177 (Bayes factor log B = 3.06) USED the placeholder f_H. Re-running with
+   Yang+ 2025-derived f_H would change the Bayes factor.
+- T205 (Bayes factor log B = 2.41 with published σ_unc) is similarly affected.
+- T120_4_joint_fit and T120_11_hidden_u1 tests fail (14 of 89 tests in those
+  files) because they were calibrated to the placeholder f_H values.
+
+**Versions:** Phase 44 + T202+T204+T205+T204Fix+T204BalbergFix+T204CausalityFix+
+T120.3aFix. 28/28 phase44_two_component tests pass; downstream joint-fit tests
+need recalibration (out of scope for this fix).
+
+**HONEST POSTURE:**
+The "7-of-8 channels pass" headline was structurally dependent on borrowed
+f_H values. The Yang+ 2025 Fig. 2 publication shows modest segregation that
+DOES NOT solve the Cloud-9-vs-dSph tension. The Phase 44 framework's 7-of-8
+result should be retracted from the headline and reframed as "phenomenological
+interpolation" only.
+
+
 ## [T204CausalityFix-v18.28] - 2026-09-23
 
 **T204 causality fix per Scrutiny.docx review.**

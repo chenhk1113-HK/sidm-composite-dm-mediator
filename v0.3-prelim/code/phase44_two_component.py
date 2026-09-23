@@ -97,55 +97,187 @@ def _make_resonances(m_chi, v_targets, sigma_peaks, gamma_fracs):
 
 
 # --- Halo-specific f_H predictions (Yang+ 2025 PRD Fig. 2) ---
-def f_H_at_r(r_over_rvir: float, halo_type: str) -> float:
+# Yang, Tsai, Fan 2025 PRD 112, 083011 (arXiv:2504.02303) Fig. 2 shows:
+#   - CDM2c (no SIDM): f_L ~ 0.5 everywhere (uniform mix)
+#   - SIDM2c (σ_0/m = 147.1 cm²/g, w = 24.33 km/s): f_L rises from ~0.3 at
+#     small r to ~0.6 at large r — modest segregation. Fig. 3 shows f_L(<0.2 R_vir)
+#     spans 0 to 0.5 depending on subhalo.
+#   - SIDMx (cross-only): more extreme segregation.
+#
+# Yang+ 2025 σ_0/m = 147.1 cm²/g with v_ref = 100 km/s gives σ/m(100) ≈ 8 cm²/g.
+# Phase 44 σ/m(100) = 0.052 cm²/g is ~150× weaker than Yang+ 2025.
+# Mass segregation efficiency scales with the local scattering rate
+# Γ = ρ σ/m v_rel; the segregation timescale scales as t_seg ~ 1/Γ.
+# So at the same density and velocity, t_seg scales as (σ_ref_Yang / σ_phase44).
+# For 2 Gyr to show the same segregation as Yang+ would require
+# (σ_phase44 / σ_ref_Yang) × t_Yang ≈ (1/150) × t_Yang — much longer than 2 Gyr.
+# Hence at Phase 44, segregation is INVISIBLE in our T202 2 Gyr run.
+#
+# This function provides:
+#   (a) Yang+ 2025-derived f_H profiles for SIDM2c (modest, subhalo-dependent),
+#   (b) explicit σ/m scaling so the user can specify a different cross-section,
+#   (c) a CDM limit at very low σ/m.
+#
+# IMPORTANT: the v18.29 (and earlier) version of this function returned
+# HAND-PICKED piecewise constants (0.95, 0.30, 0.10 for core_collapsed at
+# r/r_vir = 0.05, 0.20, 0.5+) that were NOT derived from Yang+ 2025 Fig. 2.
+# Those values were 10× more extreme than what Fig. 2 actually shows, and were
+# borrowed from a different parameter regime. The Rule 28 sanity check (compare
+# to Yang+ Fig. 2 published values) caught this. See CHANGELOG.md T120.3aFix-v18.29.
+
+# Yang+ 2025 reference values (Table I + Fig. 2 captions)
+YANG_SIGMA_0_PER_M = 147.1   # cm²/g
+YANG_W = 24.33                 # km/s
+YANG_MASS_RATIO = 3.0          # m_H/m_L in Yang+
+PHASE44_SIGMA_0_PER_M = 0.052  # cm²/g at v_ref = 100 km/s
+PHASE44_V_REF = 100.0          # km/s
+
+
+def _yang_sigma_m_at_v(v_kms: float) -> float:
+    """Yang+ 2025 velocity-dependent σ/m(v) = σ_0 / (1 + v²/w²)."""
+    return YANG_SIGMA_0_PER_M / (1.0 + (v_kms / YANG_W) ** 2)
+
+
+def _segregation_strength(sigma_m_per_g: float, v_kms: float = 100.0) -> float:
+    """Strength of segregation relative to Yang+ 2025 reference.
+
+    Returns:
+        0.0 if σ/m is far below the threshold where segregation operates;
+        1.0 if σ/m matches Yang+ 2025 (modest segregation in Fig. 2);
+        >1.0 if σ/m exceeds Yang+ 2025 (more extreme segregation).
+
+    We use a simple linear scaling with the σ/m ratio, since mass segregation
+    efficiency scales linearly with the local scattering rate Γ ∝ σ/m.
+    """
+    sig_ref = _yang_sigma_m_at_v(v_kms)
+    return sigma_m_per_g / sig_ref
+
+
+# Yang+ 2025 SIDM2c radial profile (Fig. 2, qualitative)
+# f_L (light fraction) as a function of r/R_vir, for subhalos in the SIDM2c run.
+# We use a smooth interpolant from Yang+ Fig. 2 caption (modest segregation):
+#   r/R_vir ≈ 0.05: f_L ≈ 0.35
+#   r/R_vir ≈ 0.20: f_L ≈ 0.45
+#   r/R_vir ≈ 0.50: f_L ≈ 0.55
+#   r/R_vir ≈ 1.00: f_L ≈ 0.60
+# This is the AVERAGE subhalo profile; individual subhalos span a wider range
+# (f_L(<0.2 R_vir) ∈ [0, 0.5] per Fig. 3).
+_YANG_F_L_RADII = np.array([0.05, 0.20, 0.50, 1.00])
+_YANG_F_L_VALUES = np.array([0.35, 0.45, 0.55, 0.60])
+
+
+def _yang_f_H_at_r(r_over_rvir: float, mass_ratio: float = 3.0) -> float:
+    """Yang+ 2025 SIDM2c heavy fraction at r/R_vir, for mass ratio m_H/m_L.
+
+    For m_H/m_L = 3 and equal NUMBER densities, the asymptotic (no-segregation)
+    f_H = m_H / (m_H + m_L) = 3/4 = 0.75. Yang+ Fig. 2 shows f_L varies from ~0.3
+    at small r to ~0.6 at large r — meaning f_H varies from ~0.7 at small r to
+    ~0.4 at large r for the standard heavy-asymmetric Yang+ setup.
+
+    Args:
+        r_over_rvir: radius normalized to virial radius
+        mass_ratio: m_H/m_L (3.0 in Yang+ 2025)
+
+    Returns:
+        f_H (heavy fraction) in [0, 1]
+    """
+    # Interpolate f_L from Yang+ Fig. 2
+    f_L = np.interp(r_over_rvir, _YANG_F_L_RADII, _YANG_F_L_VALUES)
+    # Convert f_L → f_H, but account for the heavy-asymmetric mass ratio.
+    # If mass ratio = m_H/m_L with EQUAL NUMBER densities:
+    #   f_number_H = 1/(1 + m_L/m_H) = 1/(1 + 1/mass_ratio) = mass_ratio/(1+mass_ratio)
+    #   f_mass_H = m_H n_H / (m_H n_H + m_L n_L) = mass_ratio / (mass_ratio + 1)
+    # The no-segregation limit is f_mass_H = mass_ratio/(1+mass_ratio).
+    # With segregation, f_L (number fraction of light) varies; f_mass_H follows.
+    # For equal-number-density initial conditions, f_H (mass) = f_L_number relation:
+    #   f_mass_H = mass_ratio × (1 - f_L) / (mass_ratio × (1 - f_L) + f_L)
+    f_H_number_H = 1.0 - f_L  # number fraction of heavy (in Yang+ equal-number setup)
+    f_H = mass_ratio * f_H_number_H / (mass_ratio * f_H_number_H + (1.0 - f_H_number_H))
+    return float(np.clip(f_H, 0.0, 1.0))
+
+
+def f_H_at_r(
+    r_over_rvir: float,
+    halo_type: str,
+    sigma_m_per_g: float = PHASE44_SIGMA_0_PER_M,
+    v_kms: float = PHASE44_V_REF,
+    segregation_maturity: float = 1.0,
+) -> float:
     """Local heavy fraction f_H at radius r/r_vir.
 
-    Based on Yang, Tsai, Fan 2025 PRD 112, 083011 (arXiv:2504.02303)
-    Fig. 2 (mass segregation patterns):
-      - CDM2c (no interactions): f_H ~ 0.5 everywhere
-      - SIDM2c (with cross-interactions): heavy in center, light at large r
-      - SIDMx (only cross): most extreme segregation
+    Yang+ 2025 PRD 112, 083011 (arXiv:2504.02303) Fig. 2 derived profile.
+    Mass segregation efficiency scales linearly with σ/m (since Γ ∝ σ/m).
 
-    For our purposes, we map to three astrophysical classes:
-      - 'core_forming'  (Cloud-9-like, low-density, still forming)
-      - 'core_collapsed' (dSph-like, dense, already collapsed)
-      - 'intermediate'  (SPARC-like, between the two extremes)
+    For each astrophysical class, the segregation strength is calibrated to the
+    *target* σ/m (default = Phase 44 σ/m at v=100 km/s):
 
-    NOTE (T120.3a — gravothermal selection effect):
-      For core-collapsed halos, the heavy component has sunk to a very small
-      inner region. The OBSERVED region (half-light radius) is dominated by
-      the LIGHT component. This is the gravothermal selection effect from
-      Yu+ 2026 PRL: same microscopic sigma/v, different effective sigma/m
-      depending on halo evolutionary state and observation radius.
+      - 'CDM' (no SIDM, σ/m → 0): f_H = f_H_no_seg = mass_ratio/(1+mass_ratio)
+        regardless of r. With Yang+ mass_ratio = 3: f_H = 0.75.
+
+      - 'core_forming' (Cloud-9-like, σ/m low, still forming): weak segregation,
+        f_H follows a slight Yang+ curve scaled by the segregation strength.
+
+      - 'core_collapsed' (dSph-like, fully segregated, observation at r~0.2):
+        The heavy component has sunk to smaller r, leaving the OBSERVATION
+        region (r~0.2 r_vir) dominated by LIGHT component. f_H(observation)
+        is much smaller than f_H(no-segregation).
+        THIS REQUIRES segregation_maturity = 1.0 (full segregation achieved).
+        At Phase 44 σ/m, segregation_maturity is essentially 0 — the heavy
+        component has NOT sunk to smaller r in 2 Gyr, so f_H at r~0.2 is
+        still ~0.75 (no segregation). This is the honest Phase 44 conclusion.
+
+      - 'intermediate' (SPARC-like): moderate segregation.
+
+    Args:
+        r_over_rvir: radius normalized to virial radius
+        halo_type: 'CDM', 'core_forming', 'core_collapsed', 'intermediate'
+        sigma_m_per_g: σ/m at the reference velocity (default Phase 44)
+        v_kms: reference velocity for segregation strength (default v=100 km/s)
+        segregation_maturity: 0.0 = no gravothermal evolution yet (heavy uniform);
+                              1.0 = full core-collapse (heavy fully sunk);
+                              intermediate values = partial segregation.
+                              This parameter captures the TIME-DEPENDENCE of
+                              the gravothermal cascade — even with Yang+ σ/m,
+                              a halo that hasn't evolved won't show full segregation.
 
     Returns:
         f_H in [0, 1]
     """
+    # Determine the no-segregation f_H for this halo's mass ratio
+    if halo_type in ("core_collapsed", "core_forming", "intermediate", "CDM"):
+        mass_ratio = 3.0  # Yang+ 2025 fiducial
+    else:
+        raise ValueError(f"Unknown halo_type: {halo_type}")
+
+    f_H_no_seg = mass_ratio / (1.0 + mass_ratio)
+
     if halo_type == "CDM":
-        return 0.5
-    if halo_type == "core_forming":
-        # Cloud-9: heavy still distributed broadly (not yet fully segregated)
-        if r_over_rvir <= 0.1:
-            return 0.85
-        if r_over_rvir <= 0.5:
-            return 0.75
-        return 0.55
+        return f_H_no_seg
+
+    # Compute segregation strength (scales linearly with σ/m ratio)
+    s = _segregation_strength(sigma_m_per_g, v_kms)
+
+    # Effective segregation = σ/m strength × time evolution
+    # (both must be > 0 for segregation to operate; this captures the fact that
+    # at weak σ/m the gravothermal cascade takes much longer than the Hubble time)
+    s_eff = s * segregation_maturity
+
     if halo_type == "core_collapsed":
-        # dSph: heavy has sunk to center, but observation is at larger r
-        # (half-light radius is ~r_vir/20, but inner f_H drops fast)
-        if r_over_rvir <= 0.05:
-            return 0.95
-        if r_over_rvir <= 0.2:
-            return 0.30  # GRAVOTHERMAL: heavy has sunk out of observed region
-        return 0.10  # Light dominates at larger r (where observations sample)
-    if halo_type == "intermediate":
-        # SPARC: moderate segregation
-        if r_over_rvir <= 0.1:
-            return 0.65
-        if r_over_rvir <= 0.5:
-            return 0.55
-        return 0.45
-    raise ValueError(f"Unknown halo_type: {halo_type}")
+        # Fully developed segregation: use the full Yang+ curve.
+        f_H_yang = _yang_f_H_at_r(r_over_rvir, mass_ratio)
+        f_H = f_H_no_seg + s_eff * (f_H_yang - f_H_no_seg)
+    elif halo_type == "core_forming":
+        f_H_yang = _yang_f_H_at_r(r_over_rvir, mass_ratio)
+        f_H_partial = f_H_no_seg + 0.3 * (f_H_yang - f_H_no_seg)
+        f_H = f_H_no_seg + s_eff * (f_H_partial - f_H_no_seg)
+    elif halo_type == "intermediate":
+        f_H_yang = _yang_f_H_at_r(r_over_rvir, mass_ratio)
+        f_H_partial = f_H_no_seg + 0.6 * (f_H_yang - f_H_no_seg)
+        f_H = f_H_no_seg + s_eff * (f_H_partial - f_H_no_seg)
+    else:
+        f_H = f_H_no_seg
+
+    return float(np.clip(f_H, 0.0, 1.0))
 
 
 def f_H_halo_average(halo_type: str, r_inner: float = 0.0, r_outer: float = 1.0) -> float:
@@ -184,6 +316,8 @@ def phase44_two_component_sigma_eff(
     halo_type: str = "core_forming",
     r_over_rvir: float = 0.05,
     sigma_HL_per_m: float = 1.0,
+    sigma_m_per_g: float = PHASE44_SIGMA_0_PER_M,
+    v_for_seg: float = PHASE44_V_REF,
 ) -> float:
     """Effective sigma/m in a two-component SIDM halo with Phase 44 heavy channel.
 
@@ -192,11 +326,13 @@ def phase44_two_component_sigma_eff(
         halo_type: 'CDM', 'core_forming', 'core_collapsed', 'intermediate'
         r_over_rvir: radius normalized to virial radius
         sigma_HL_per_m: cross-channel cross section per unit mass
+        sigma_m_per_g: σ/m at the segregation reference velocity (default Phase 44)
+        v_for_seg: reference velocity for segregation strength (default v=100 km/s)
 
     Returns:
         sigma_eff/m_eff in cm^2/g
     """
-    f_H = f_H_at_r(r_over_rvir, halo_type)
+    f_H = f_H_at_r(r_over_rvir, halo_type, sigma_m_per_g=sigma_m_per_g, v_kms=v_for_seg)
     f_L = 1.0 - f_H
 
     sigma_HH = phase44_sigma_HH_at_v(v_kms)
