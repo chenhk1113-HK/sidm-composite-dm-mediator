@@ -7,6 +7,51 @@
 
 
 
+## [T204Fix-v18.26] - 2026-09-23
+
+**T204 numerical corrections per Re18.2.docx review.**
+
+Reviewer Re18.2.docx (2026-09-23) flagged two numerical errors in T204:
+
+1. **ρ_s reported wrong by 6 orders of magnitude.** Code printed
+   ρ_s = 4.34×10⁻² M☉/pc³ (correct), but paper text said 3.5×10⁴
+   M☉/pc³ (galaxy-scale value, ~10⁶× too large). The paper text
+   was wrong; the code was right.
+
+2. **σ_required formula was algebraically inconsistent.** The code's
+   `sigma_m_required = 12.7 / (HUBBLE_TIME × (rho/1e3) × (r_s/v_max))`
+   used a units/scaling that was NOT the inverse of the t_core formula.
+   The correct algebraic inversion is:
+   `sigma_required = 12.7 / t_target × (rho/1e3)^-1 × (r_s/v_max)`
+   This gives σ_required = **1.25×10⁶ cm²/g** (not 360 cm²/g).
+
+3. **Phase 44 shortfall: 9,200×, not 2.6×.** Phase 44 σ/m(v_max) =
+   136 cm²/g vs required 1.25×10⁶ cm²/g = factor of ~9,200× short.
+   This is even stronger than the original "2.6×" claim; Phase 44
+   is dramatically insufficient for Yu+ 2026 substructure core-collapse.
+
+**T202 framing sharpened (per Re18.2.docx item 3):** The T202 null
+result is **degenerate** between "no segregation occurs at Phase 44"
+and "our N-body is too coarse to detect it" — the same N-body fails
+to reproduce Yang+ 2025's Fig. 2 segregation at their σ/m = 147
+cm²/g (control run). T202 does NOT falsify the two-component
+mechanism; it shows the current N-body is inconclusive. Higher
+resolution (N ≥ 10⁵ with proper scattering; T203 draft) is required
+to distinguish. Paper §9.5a paragraph updated with explicit
+"null result is degenerate" framing.
+
+**Abstract softened (per Re18.2.docx item 4):** Added explicit
+"phenomenological interpolation, not a first-principles derivation"
+language to the abstract.
+
+**Files modified:**
+- `v0.3-prelim/code/T204_substructure_test.py` (formula fix)
+- `v0.3-prelim/data/results/t204_substructure_test.json` (regenerated)
+- `v0.3-prelim/docs/PAPER_V1_DRAFT.md` (T204, T202, abstract)
+
+**Versions:** Phase 44 +T202+T204+T205+T204Fix. 31/31 self-check passes.
+
+
 ## [T205FullLikelihood-v18.25] - 2026-09-23
 
 **Full-likelihood with published error budgets (per reviewer model comments.docx).**

@@ -25,5 +25,5 @@
   "collapsed_in_hubble_time": false,
   "M_80pc_NFW": 78111.87476686199,
   "M_80pc_observed": 1130000.0,
-  "verdict": "Phase 44 sigma/m is INSUFFICIENT to drive core-collapse. Need sigma/m(v_max) >= 359.36 cm^2/g to collapse in Hubble time. Phase 44 gives 136.3156 cm^2/g, a factor of 3x too low. Yu+ 2026 substructure mechanism is NOT active at our parameters."
+  "verdict": "Phase 44 sigma/m is INSUFFICIENT to drive core-collapse. Need sigma/m(v_max) >= 1.253e+06 cm^2/g to collapse in Hubble time. Phase 44 gives 1.363e+02 cm^2/g, a factor of 9.19e+03x too low. Yu+ 2026 substructure mechanism is NOT active at our parameters."
 }

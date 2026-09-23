@@ -194,13 +194,16 @@ def main():
             "JVAS, GD-1, Fornax 6 are EXPLICITLY predicted."
         )
     else:
-        # Compute required sigma/m for collapse
-        sigma_m_required = 12.7 / (HUBBLE_TIME_GYR * (rho_s/1e3) * (r_s_pc / v_max))
+        # Compute required sigma/m for collapse.
+        # t_core = 12.7/sigma * (rho_s/1e3)^-1 * (r_s/v_max)
+        # Solving for sigma: sigma_required = 12.7 / t_target * (rho_s/1e3)^-1 * (r_s/v_max)
+        # i.e., LOW rho -> LARGE sigma required (since collapse is harder in low-density halos).
+        sigma_m_required = 12.7 / HUBBLE_TIME_GYR * (rho_s / 1e3) ** (-1) * (r_s_pc / v_max)
         verdict = (
             f"Phase 44 sigma/m is INSUFFICIENT to drive core-collapse. "
-            f"Need sigma/m(v_max) >= {sigma_m_required:.2f} cm^2/g to collapse in Hubble time. "
-            f"Phase 44 gives {sigma_m_at_v(v_max):.4f} cm^2/g, a factor of "
-            f"{sigma_m_required/sigma_m_at_v(v_max):.0f}x too low. "
+            f"Need sigma/m(v_max) >= {sigma_m_required:.3e} cm^2/g to collapse in Hubble time. "
+            f"Phase 44 gives {sigma_m_at_v(v_max):.3e} cm^2/g, a factor of "
+            f"{sigma_m_required/sigma_m_at_v(v_max):.2e}x too low. "
             f"Yu+ 2026 substructure mechanism is NOT active at our parameters."
         )
     print(verdict)
