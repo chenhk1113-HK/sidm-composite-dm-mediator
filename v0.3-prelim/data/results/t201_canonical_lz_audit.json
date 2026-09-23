@@ -1,0 +1,111 @@
+{
+  "T201_summary": "T201 \u2014 Canonical LZ event-rate audit",
+  "date": "2026-09-23",
+  "wimpy_available": true,
+  "results": {
+    "v0.7_composite": {
+      "LZ_2026": {
+        "N_predicted": 1.2679564978834753e-91,
+        "kinematically_accessible": true,
+        "v_min_at_E_R_min_kms": 50.36177205201703,
+        "log10_N_pred": -90.89689564633855
+      },
+      "PandaX_4T_2023": {
+        "N_predicted": 7.150347318486347e-92,
+        "kinematically_accessible": true,
+        "v_min_at_E_R_min_kms": 48.460637751830994,
+        "log10_N_pred": -91.14567286241729
+      },
+      "XENONnT_2023": {
+        "N_predicted": 2.0432600717269903e-92,
+        "kinematically_accessible": true,
+        "v_min_at_E_R_min_kms": 48.460637751830994,
+        "log10_N_pred": -91.68967635166051
+      },
+      "DARWIN_2023": {
+        "N_predicted": 6.073900332125419e-88,
+        "kinematically_accessible": true,
+        "v_min_at_E_R_min_kms": 48.460637751830994,
+        "log10_N_pred": -87.2165323387864
+      }
+    },
+    "v18_11_drobczyk": {
+      "LZ_2026": {
+        "N_predicted": 5.415912416986885e-28,
+        "kinematically_accessible": true,
+        "v_min_at_E_R_min_kms": 590.4347015755421,
+        "log10_N_pred": -27.266328367426098
+      },
+      "PandaX_4T_2023": {
+        "N_predicted": 6.37008843949776e-28,
+        "kinematically_accessible": true,
+        "v_min_at_E_R_min_kms": 568.146056489226,
+        "log10_N_pred": -27.195854538069792
+      },
+      "XENONnT_2023": {
+        "N_predicted": 1.820295823693046e-28,
+        "kinematically_accessible": true,
+        "v_min_at_E_R_min_kms": 568.146056489226,
+        "log10_N_pred": -27.739858027313016
+      },
+      "DARWIN_2023": {
+        "N_predicted": 5.4111053022979965e-24,
+        "kinematically_accessible": true,
+        "v_min_at_E_R_min_kms": 568.146056489226,
+        "log10_N_pred": -23.26671401443889
+      }
+    },
+    "di_mauro_inelastic": {
+      "LZ_2026": {
+        "N_predicted": 0.0,
+        "kinematically_accessible": false,
+        "v_min_at_E_R_min_kms": 2415.8486157934085,
+        "log10_N_pred": null
+      },
+      "PandaX_4T_2023": {
+        "N_predicted": 0.0,
+        "kinematically_accessible": false,
+        "v_min_at_E_R_min_kms": 2506.8763208570294,
+        "log10_N_pred": null
+      },
+      "XENONnT_2023": {
+        "N_predicted": 0.0,
+        "kinematically_accessible": false,
+        "v_min_at_E_R_min_kms": 2506.8763208570294,
+        "log10_N_pred": null
+      },
+      "DARWIN_2023": {
+        "N_predicted": 0.0,
+        "kinematically_accessible": false,
+        "v_min_at_E_R_min_kms": 2506.8763208570294,
+        "log10_N_pred": null
+      }
+    },
+    "t90_magnetic_moment": {
+      "LZ_2026": {
+        "N_predicted": 5.891702699732802e-17,
+        "kinematically_accessible": true,
+        "v_min_at_E_R_min_kms": 48.67764309316323,
+        "log10_N_pred": -16.229759176140863
+      },
+      "PandaX_4T_2023": {
+        "N_predicted": 3.299596356734703e-17,
+        "kinematically_accessible": true,
+        "v_min_at_E_R_min_kms": 46.84008390559053,
+        "log10_N_pred": -16.481539184596254
+      },
+      "XENONnT_2023": {
+        "N_predicted": 9.428819591883912e-18,
+        "kinematically_accessible": true,
+        "v_min_at_E_R_min_kms": 46.84008390559053,
+        "log10_N_pred": -17.025542673839475
+      },
+      "DARWIN_2023": {
+        "N_predicted": 2.802859569525539e-13,
+        "kinematically_accessible": true,
+        "v_min_at_E_R_min_kms": 46.84008390559053,
+        "log10_N_pred": -12.55239866096535
+      }
+    }
+  }
+}

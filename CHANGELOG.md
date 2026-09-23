@@ -5,6 +5,44 @@
 
 
 
+
+## [T201WIMpyAudit-v18.18] - 2026-09-23
+
+**CANONICAL audit using WIMpy 1.1.1 as ground truth (per reviewer T199R.docx).**
+
+Third-party review (T199R.docx, 2026-09-23) recommended:
+"Run a one-time dedicated audit of the full rate calculation against a textbook
+reference (Lewin & Smith 1996 or the standard review literature), with a single
+canonical script whose output the paper cites."
+
+**T201 uses WIMpy 1.1.1's DMUtils.dRdE_standard as canonical ground truth.**
+WIMpy is peer-reviewed, validated against published LZ/PandaX/XENONnT limits.
+
+**CANONICAL NUMBERS (T201 WIMpy):**
+
+| Model | T199 | T200 | T201 (WIMpy) | T201 verdict |
+|---|---|---|---|---|
+| v0.7 composite | 1.1e-116 (115 ord) | 1.5e-68 (68 ord) | **1.3e-91 (91 ord)** | Fails |
+| v18.11 Drobczyk | 1.0e-53 (53 ord) | 1.2e-3 (3 ord) | **5.4e-28 (27 ord)** | Under-predicts |
+| Di Mauro inelastic | 0 events | 0 events | **0 events** (v_min=2416) | Inaccessible |
+| T90 magnetic-moment | 5.1e-42 (41 ord) | 7.1e+6 (OVER 7 ord) | **5.9e-17 (16 ord)** | Under-predicts (point-particle) |
+
+**Five consecutive versions of the rate calculation had dimensional bugs:**
+- T196: v_min wrong (m_chi^2 instead of mu^2)
+- T197: same as T196 + extra bugs
+- T199: v_min fixed but rate formula still missing N_target factor (~24 ord error)
+- T200: tried to add N_target but had different dimensional issue (gave T90 OVER-predicted by 7 orders vs WIMpy)
+- T201: uses WIMpy DMUtils.dRdE_standard as canonical reference (peer-reviewed)
+
+**WIMpy T198 (LZ-tuned magnetic-moment) was correct** — N = 0.998 at LZ by construction,
+over-predicts other detectors 100-500x. The T90 WIMpy T198 result is unaffected by the
+T196-T200 dimensional bugs (it uses WIMpy directly).
+
+**Paper §3.5a + abstract updated to use WIMpy-validated canonical numbers.**
+
+This is the SINGLE CANONICAL reference for the LZ event-rate analysis.
+Future scripts should validate against WIMpy before publication.
+
 ## [T200ProperRateFormula-v18.17] - 2026-09-23
 
 **CRITICAL: third-party audit caught 3 bugs in T199 (sent as T199.docx).**
