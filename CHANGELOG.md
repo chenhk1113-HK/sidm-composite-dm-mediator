@@ -7,6 +7,58 @@
 
 
 
+## [T206Retraction-v18.32] - 2026-09-23
+
+**RETRACTION of v18.31 T206 Path D finding.**
+
+Per Comments.docx reviewer critique:
+
+1. **T206 likelihood was inverted for one-sided constraints.** The original
+   log_likelihood() penalized σ_eff for being BELOW ceiling limits and
+   ABOVE floor limits (the correct behavior is the opposite). This
+   caused the optimizer to push f_H values to extremes that put σ_eff
+   exactly at each limit. **Fixed in v18.32.**
+
+2. **T206 model structure cannot match SPARC.** σ_eff = f_H² × σ_HH(v)
+   gives max σ_eff(100) = 0.069 cm²/g, but SPARC target is 0.193. The
+   formula is structurally insufficient — no f_H values can match SPARC.
+   The T206 fit was therefore searching for f_H that "minimized SPARC
+   penalty" by minimizing σ_eff everywhere, which is structurally meaningless.
+
+3. **No unified f_H scheme.** Paper §9 still uses borrowed placeholder
+   values (0.85/0.30), while v18.31 header claimed "fit to data" and
+   the new code computes ~0.75 (Yang+-derived). Three inconsistent
+   sources of f_H. **Need unified definition before claiming any result.**
+
+**Corrected v18.32 framing:**
+
+The T206 fit is structurally degenerate and **cannot serve as evidence**
+for any particular f_H values. The paper's honest framing reverts to v18.30:
+
+- Phase 44 framework is a **phenomenological interpolation** through 8
+  observational channels, not a first-principles derivation
+- Two-component + gravothermal selection is **not operative** at Phase 44
+  (cascade timescale ≫ Hubble time)
+- Cloud-9 vs dSph tension is **unresolved** at Phase 44
+- The paper is best read as a **constraint map + no-go catalogue**
+
+**Files updated:**
+- v0.3-prelim/code/T206_f_H_fit.py: log_likelihood() fixed (one-sided,
+  σ_unc-normalized); added docstring explaining v18.31 bug
+- v0.3-prelim/docs/PAPER_V1_DRAFT.md: abstract now states v18.32 retraction
+- VERSION bumped to v18.32
+
+**Honest lesson:** This is the third arithmetic/logic error in 24 hours
+(v18.26 σ_required formula → v18.27 Balberg normalization → v18.28 α → v18.31
+likelihood inversion → v18.32 SPARC structural mismatch). Each fix
+revealed a deeper issue. The T206 Path C approach (fit f_H as free parameter)
+is sound in principle but the σ_eff = f_H² × σ_HH decomposition is too
+simplified to support the multi-resonance σ/m(v) profile. A proper fit
+would require σ_eff = f_H² σ_HH + 2 f_H f_L σ_HL + f_L² σ_LL with
+σ_HL ≠ σ_LL ≠ σ_HH (different mediators, different mass channels) — but
+this is a new physics study, not a fix.
+
+
 ## [T206-PathCFreeFit-v18.31] - 2026-09-23
 
 **Path C check: f_H as a free parameter, fit on joint 8-channel likelihood.**

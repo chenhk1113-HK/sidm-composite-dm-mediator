@@ -2,11 +2,27 @@
 
 > **For:** Anyone who has 60 seconds and wants to know what this project
 > is, what it claims, and what the current best numbers are.
-> Updated with each version-bump round. Last refresh: 2026-09-23 (v18.31).
+> Updated with each version-bump round. Last refresh: 2026-09-23 (v18.32).
 
 ---
 
-## Standing: v0.4-prelim+v18.31 (2026-09-23, Tier-2 arithmetic-audit milestone, T206 Path C empirical finding)
+## Standing: v0.4-prelim+v18.32 (2026-09-23, retraction of v18.31 T206 Path D)
+
+**v18.32 retraction:** v18.31 T206 "data prefer extreme segregation" finding
+**retracted**. T206's likelihood was inverted for one-sided constraints
+(penalized σ_eff for being BELOW ceiling instead of above), AND the
+σ_eff = f_H² × σ_HH(v) decomposition cannot match SPARC's σ/m ≈ 0.193 at
+v = 100 km/s regardless of f_H (max σ_eff = 0.069). T206 was structurally
+degenerate. Paper framing reverts to v18.30: constraint map + no-go
+catalogue, Cloud-9 vs dSph tension unresolved at Phase 44.
+
+**v18.31 (T206 Path C, retracted):** Fit f_H_at_r as free parameter on joint
+8-channel likelihood. Result: data prefer extreme segregation in core-collapsed
+halos (f_H_core_collapsed ≤ 0.07, complete core-collapse picture). **This was
+later shown to be an artifact of the inverted likelihood + structurally
+insufficient σ_eff formula.**
+
+## Standing: v0.4-prelim+v18.31 (2026-09-23, Tier-2 arithmetic-audit milestone, T206 Path C empirical finding, retracted in v18.32)
 
 **v18.31 (T206 Path C check):** Fit f_H_at_r as free parameter on joint 8-channel likelihood.
 Result: data prefer extreme segregation in core-collapsed halos (f_H_core_collapsed ≤ 0.07,

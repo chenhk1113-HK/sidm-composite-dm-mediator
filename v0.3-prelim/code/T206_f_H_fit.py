@@ -47,7 +47,30 @@ CHANNELS = [
 def log_likelihood(f_H_cf, f_H_cc):
     """Log-likelihood for joint 8 channels, given f_H_core_forming and f_H_core_collapsed.
 
-    f_H_intermediate interpolated linearly between cf and cc.
+    One-sided Gaussian likelihoods (FIXED v18.32 — was backwards in v18.31):
+
+    For ceiling channels (σ/m should be ≤ upper limit obs):
+      If σ_eff ≤ obs: no penalty (correctly below the limit)
+      If σ_eff > obs: Gaussian penalty normalized by σ_unc
+
+    For floor channels (σ/m should be ≥ lower limit obs):
+      If σ_eff ≥ obs: no penalty (correctly above the limit)
+      If σ_eff < obs: Gaussian penalty normalized by σ_unc
+
+    For Gaussian channels (σ/m should match value target):
+      Standard Gaussian normalized by σ_unc
+
+    Note: σ_unc is the published error budget per channel (T205). For ceiling
+    channels, σ_unc is the systematic uncertainty on the upper limit; for floor
+    channels, σ_unc is the 1σ floor uncertainty; for Gaussian channels, σ_unc
+    is the measurement uncertainty.
+
+    Args:
+        f_H_cf: heavy mass fraction in core-forming halos at observation radius
+        f_H_cc: heavy mass fraction in core-collapsed halos at observation radius
+
+    Returns:
+        log-likelihood (higher = better fit)
     """
     f_H_int = 0.5 * (f_H_cf + f_H_cc)
 
@@ -58,23 +81,29 @@ def log_likelihood(f_H_cf, f_H_cc):
     }
 
     log_L = 0.0
-    for name, v, obs, target, kind, halo, r_rvir in CHANNELS:
+    for name, v, sigma_unc, obs, kind, halo, r_rvir in CHANNELS:
         f_H = halo_fH[halo]
         f_L = 1.0 - f_H
         sigma_HH = phase44_sigma_HH_at_v(v)
         sigma_eff = f_H**2 * sigma_HH
 
         if kind == 'ceiling':
-            # Gaussian likelihood: should be < obs
-            z = (obs - sigma_eff) / obs  # normalized residual
-            log_L += -0.5 * z**2
+            # σ_eff should be ≤ obs. Penalize only if σ_eff > obs.
+            if sigma_eff > obs:
+                z = (sigma_eff - obs) / sigma_unc
+                log_L += -0.5 * z**2
+            # else: no penalty (σ_eff ≤ obs is acceptable)
+
         elif kind == 'floor':
-            # Gaussian likelihood: should be > obs
-            z = (sigma_eff - obs) / obs
-            log_L += -0.5 * z**2
+            # σ_eff should be ≥ obs. Penalize only if σ_eff < obs.
+            if sigma_eff < obs:
+                z = (obs - sigma_eff) / sigma_unc
+                log_L += -0.5 * z**2
+            # else: no penalty (σ_eff ≥ obs is acceptable)
+
         elif kind == 'gaussian':
-            # Match value
-            z = (sigma_eff - target) / target
+            # σ_eff should match obs within σ_unc
+            z = (sigma_eff - obs) / sigma_unc
             log_L += -0.5 * z**2
 
     return log_L

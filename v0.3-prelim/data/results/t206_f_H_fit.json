@@ -1,14 +1,14 @@
 {
   "grid_n": 50,
   "peak_f_H_core_forming": 1.0,
-  "peak_f_H_core_collapsed": 0.06938775510204082,
-  "peak_log_L": -1.0710978186651179,
+  "peak_f_H_core_collapsed": 0.05,
+  "peak_log_L": -0.4298638559353659,
   "ci68_f_H_core_forming": [
     0.5,
     1.0
   ],
   "ci68_f_H_core_collapsed": [
-    0.06938775510204082,
+    0.05,
     0.06938775510204082
   ],
   "yang_f_H_range_at_r02": [
