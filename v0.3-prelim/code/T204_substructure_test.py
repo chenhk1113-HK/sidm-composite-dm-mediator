@@ -27,7 +27,8 @@ from pathlib import Path
 
 # Phase 44 parameters
 SIGMA_0 = 0.052  # cm^2/g
-A_SLOPE = 1.93  # velocity dependence exponent
+A_SLOPE = 1.0  # v1.13 canonical (flattened from Phase 44's 1.93 via Option A)
+TCROSS_CAP_FACTOR = 3.0  # enforce causality: t_core >= 3 * r_s / v_max
 V_REF = 100.0  # km/s reference velocity
 
 # Subhalo parameters (Yu+ 2026)
@@ -37,8 +38,8 @@ SUBHALO_R_S_PC = 100.0  # scale radius (pc); r_vir ~ c * r_s ~ 1.5 kpc
 HUBBLE_TIME_GYR = 13.8
 
 
-def sigma_m_at_v(v_kms, sigma_0=0.052, a_slope=1.93, v_ref=100.0):
-    """Phase 44 sigma/m(v) = sigma_0 * (v_ref/v)^a_slope."""
+def sigma_m_at_v(v_kms, sigma_0=0.052, a_slope=A_SLOPE, v_ref=100.0):
+    """Phase 44 sigma/m(v) = sigma_0 * (v_ref/v)^a_slope. a_slope uses A_SLOPE global (v1.13 canonical = 1.0)."""
     return sigma_0 * (v_ref / v_kms) ** a_slope
 
 
@@ -122,8 +123,16 @@ def main():
     print()
 
     t_core = gravothermal_t_core_Gyr(sigma_m_at_v(v_max), rho_s, r_s_pc, v_max)
-    collapsed = t_core < HUBBLE_TIME_GYR
-    print(f"t_core (Balberg+ 2002 normalized): {t_core:.2f} Gyr")
+    # Enforce causality: collapse cannot proceed faster than ~few t_cross.
+    # (Reviewer Scrutiny.docx: t_core = 13 Myr < t_cross = 60 Myr is unphysical.)
+    t_cross_Myr = (r_s_pc / v_max) * (3.156e13 * 1e5) / (3.086e18)  # Myr
+    t_cross_cap_Gyr = TCROSS_CAP_FACTOR * t_cross_Myr / 1000.0
+    t_core_capped = max(t_core, t_cross_cap_Gyr)
+    t_core_for_verdict = t_core_capped  # use capped value for collapse check
+    collapsed = t_core_for_verdict < HUBBLE_TIME_GYR
+    print(f"t_core (Balberg+ 2002 normalized): {t_core:.3e} Gyr")
+    print(f"t_cross (r_s/v_max): {t_cross_Myr:.1f} Myr")
+    print(f"t_core capped at {TCROSS_CAP_FACTOR} x t_cross: {t_core_capped:.3e} Gyr")
     print(f"Hubble time: {HUBBLE_TIME_GYR} Gyr")
     print(f"  {'YES' if collapsed else 'NO'} — core-collapse completes in Hubble time")
     print()

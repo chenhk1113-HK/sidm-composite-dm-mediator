@@ -3,7 +3,7 @@
   "date": "2026-09-23",
   "parameters": {
     "SIGMA_0": 0.052,
-    "A_SLOPE": 1.93,
+    "A_SLOPE": 1.0,
     "V_REF_KM_S": 100.0,
     "SUBHALO_MASS": 1000000.0,
     "SUBHALO_C": 15.0,
@@ -16,12 +16,12 @@
     "r_s_pc": 100.0
   },
   "sigma_m_at_v": {
-    "inner core (r=80 pc)": 519.4378089715128,
-    "virial velocity": 136.31563354550218,
-    "CM velocity (subhalo)": 62.32891061714144,
-    "stream velocity (GD-1)": 0.011353442626858433
+    "inner core (r=80 pc)": 6.141844143043372,
+    "virial velocity": 3.070922071521686,
+    "CM velocity (subhalo)": 2.0472813810144572,
+    "stream velocity (GD-1)": 0.023636363636363636
   },
-  "t_core_Gyr": 0.01268792015671742,
+  "t_core_Gyr": 0.5632060450432269,
   "collapsed_in_hubble_time": true,
   "M_80pc_NFW": 78111.87476686199,
   "M_80pc_observed": 1130000.0,

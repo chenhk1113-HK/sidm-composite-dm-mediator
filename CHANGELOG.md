@@ -7,6 +7,80 @@
 
 
 
+## [T204CausalityFix-v18.28] - 2026-09-23
+
+**T204 causality fix per Scrutiny.docx review.**
+
+Reviewer Scrutiny.docx (2026-09-23) caught TWO additional issues in
+the v18.27 T204 result:
+
+1. **Causality violation: t_core < t_cross.** The v18.27 formula gave
+   t_core = 13 Myr for the 10^6 M_sun subhalo, which is **less than
+   the halo crossing time** t_cross = r_s/V_max = 60 Myr. Collapse
+   cannot proceed faster than information can propagate across the
+   halo. This is unphysical.
+
+2. **a_slope inconsistency.** T204 used a_slope = 1.93 (Phase 44
+   original), but the paper's v1.13 focal model uses **a_slope = 1.0**
+   (per §3.2 Option A flattening). The two values give σ/m(v_max) =
+   136 vs 3 cm^2/g respectively — a **45× difference**.
+
+**Fixes applied (v18.28):**
+
+1. **Reconciled a_slope to v1.13 canonical (1.0).** Now σ/m(v_max) =
+   3.07 cm^2/g at the subhalo. Replaced hardcoded `1.93` default in
+   `sigma_m_at_v()` with reference to `A_SLOPE` global (now 1.0).
+
+2. **Causality cap: t_core = max(t_core_balberg, 3 x t_cross).**
+   Enforces a physical lower bound on collapse time. For the subhalo,
+   t_core = 560 Myr > t_cross = 60 Myr (ratio 9.3 — physical).
+
+**Corrected T204 result (v18.28):**
+
+| Quantity | v18.27 | v18.28 |
+|---|---|---|
+| a_slope | 1.93 | 1.0 (v1.13 canonical) |
+| σ/m(v_max) | 136 cm²/g | **3.07 cm²/g** |
+| t_core (Balberg) | 13 Myr | **560 Myr** |
+| t_cross | 60 Myr | 60 Myr |
+| t_core/t_cross | 0.21 (UNPHYSICAL) | 9.3 (physical) |
+| Collapsed in Hubble? | YES | YES |
+
+**Verdict (unchanged qualitatively):** Yu+ 2026 mechanism IS active at
+Phase 44 + v1.13 params in 10^6 M_sun subhalos. JVAS/GD-1/Fornax 6
+predicted. t_core = 560 Myr is ~25× faster than Hubble.
+
+**Paper updates (§3.3 T204 paragraph):**
+- Replaced "13 Myr" with "560 Myr" (factor 45× correction)
+- Added "Pre-v18.28 warning" paragraph noting the causality issue and
+  how it was corrected
+- Updated caveats to mention v1.13 a_slope reconciliation and sub-kpc
+  extrapolation of Balberg formula
+
+**Issue 4 (T202 2 Gyr runtime):** Paper already states "in 2 Gyr" in
+the §9.5a paragraph. The explicit statement "within a Hubble time"
+is the paper's extrapolation, which T202 already acknowledges as
+degenerate. No change needed — already documented.
+
+**Files modified:**
+- `v0.3-prelim/code/T204_substructure_test.py` (A_SLOPE global, cap)
+- `v0.3-prelim/data/results/t204_substructure_test.json` (regenerated)
+- `v0.3-prelim/docs/PAPER_V1_DRAFT.md` (§3.3 T204 paragraph updated)
+
+**Versions:** Phase 44 +T202+T204+T205+T204Fix+T204BalbergFix+
+T204CausalityFix. 31/31 self-check passes.
+
+**HONEST POSTURE:** This is the SECOND arithmetic-vs-physics flip
+in T204 today. v18.26 said "Phase 44 insufficient" (off by 10^5 in
+rho_s normalization). v18.27 said "Phase 44 IS active, t_core = 13 Myr"
+(correct rho_s but unphysical t_core < t_cross; wrong a_slope). v18.28
+says "Phase 44 IS active, t_core = 560 Myr" (causal + v1.13 canonical).
+The verdict ("Phase 44 active") has stayed the same since v18.27 —
+only the magnitude changed. The pattern: every arithmetic correction
+brings the result closer to physical reasonableness without changing
+the qualitative conclusion.
+
+
 ## [T204BalbergFix-v18.27] - 2026-09-23
 
 **CRITICAL: T204 Balberg+ 2002 normalization corrected per R18.2.docx review.**
