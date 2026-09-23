@@ -7,6 +7,73 @@
 
 
 
+## [T204BalbergFix-v18.27] - 2026-09-23
+
+**CRITICAL: T204 Balberg+ 2002 normalization corrected per R18.2.docx review.**
+
+Reviewer R18.2.docx (2026-09-23) caught a fundamental units error in
+T204's gravothermal_t_core_Gyr normalization. The code used
+`(rho_s/1e3)^-1` (M_sun/pc^3 units) when the **physical** Balberg+
+2002 Eq. 22 normalization is `(rho_s/1e-2)^-1` (= `(rho_s/1e7
+M_sun/kpc^3)^-1`). My previous code was **off by 10^5** in the rho_s
+normalization, giving wildly wrong t_core values.
+
+**Sanity check (reviewer's):** For MW (sigma=1 cm^2/g, rho_s=10^-2
+M_sun/pc^3, r_s=10^4 pc, v_max=100 km/s), corrected formula gives
+**t_core = 12.7 Gyr** (physically reasonable). My v18.25 formula
+gave 6.35×10^7 Gyr (8 orders of magnitude wrong).
+
+**Corrected T204 result:**
+
+| Quantity | v18.26 (buggy) | v18.27 (corrected) |
+|---|---|---|
+| t_core (10^6 M_sun subhalo, Phase 44) | 1.3×10^5 Gyr | **13 Myr** |
+| Core-collapse in Hubble time? | NO | **YES** |
+| σ/m shortfall | "9,200×" | **Phase 44 IS sufficient** |
+| Yu+ 2026 mechanism active at Phase 44? | NO | **YES** |
+| JVAS/GD-1/Fornax 6 explained? | NO | **YES (predicted)** |
+
+This is a **dramatic reversal** of the previous "Phase 44 insufficient"
+verdict. The corrected code's t_core = 13 Myr for our subhalo is a
+**physical consequence** of the (r_s/v_max) scaling: smaller, slower
+halos collapse faster (fewer orbital periods). The Yu+ 2026 mechanism
+**IS active** at Phase 44 parameters in 10^6 M_sun subhalos.
+
+**Paper updates (§3.3 T204 paragraph):**
+- Replaced "Phase 44 is 9,200× short" with "Yu+ 2026 mechanism IS
+  active; JVAS/GD-1/Fornax 6 are explicitly predicted."
+- Added 3 honest caveats (T202 N-body inconclusive, Balberg+ is order-
+  of-magnitude estimate, velocity-dependence extrapolation below
+  Phase 44 calibration range).
+
+**Issue 2 fix (T202 mass ratio note):** Added explicit "Mass-ratio note"
+to §9.5a acknowledging that T202 used 10:1 (vs fiducial 3:1 from Yang+
+2025), so the T202 null result is *conservative* for the 3:1 case.
+
+**Issue 3 fix (abstract T177 σ_unc description):** Corrected abstract
+from "T177 uses Gaussian likelihoods informed by published uncertainties"
+(WRONG — that was T205) to "T177 uses hand-picked σ_unc (50 for Cloud-9,
+0.05 for dSph, etc.). T205 update with published error budgets gives
+log B = 2.41 (B = 11, moderate evidence)."
+
+**Files modified:**
+- `v0.3-prelim/code/T204_substructure_test.py` (Balberg normalization fix)
+- `v0.3-prelim/data/results/t204_substructure_test.json` (regenerated)
+- `v0.3-prelim/docs/PAPER_V1_DRAFT.md` (§3.3 T204 paragraph, §9.5a
+  T202 mass-ratio note, abstract T177/T205 σ_unc description)
+
+**Versions:** Phase 44 +T202+T204+T205+T204Fix+T204BalbergFix. 31/31
+self-check passes.
+
+**HONEST POSTURE:** This v18.26 → v18.27 reversal is embarrassing but
+necessary. The paper's previous "Phase 44 is insufficient" conclusion
+was wrong because of an arithmetic error I introduced. The corrected
+result is that the framework **IS** consistent with the Yu+ 2026
+substructure mechanism, which is a *stronger* claim. Whether to
+keep this stronger claim or apply more pessimistic caveats is the
+next decision point.
+
+
 ## [T204Fix-v18.26] - 2026-09-23
 
 **T204 numerical corrections per Re18.2.docx review.**

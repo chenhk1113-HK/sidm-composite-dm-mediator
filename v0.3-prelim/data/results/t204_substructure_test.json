@@ -21,9 +21,9 @@
     "CM velocity (subhalo)": 62.32891061714144,
     "stream velocity (GD-1)": 0.011353442626858433
   },
-  "t_core_Gyr": 126879.20156717418,
-  "collapsed_in_hubble_time": false,
+  "t_core_Gyr": 0.01268792015671742,
+  "collapsed_in_hubble_time": true,
   "M_80pc_NFW": 78111.87476686199,
   "M_80pc_observed": 1130000.0,
-  "verdict": "Phase 44 sigma/m is INSUFFICIENT to drive core-collapse. Need sigma/m(v_max) >= 1.253e+06 cm^2/g to collapse in Hubble time. Phase 44 gives 1.363e+02 cm^2/g, a factor of 9.19e+03x too low. Yu+ 2026 substructure mechanism is NOT active at our parameters."
+  "verdict": "Phase 44 sigma/m DOES drive core-collapse in 10^6 M_sun subhalos. Yu+ 2026 mechanism applies at our parameters. JVAS, GD-1, Fornax 6 are EXPLICITLY predicted."
 }

@@ -50,21 +50,28 @@ def subhalo_v_max_kms(M_halo, r_vir_pc):
 
 def gravothermal_t_core_Gyr(sigma_m_cm2_per_g, rho_s_Msun_per_pc3,
                              r_s_pc, v_max_kms):
-    """Balberg+ 2002 normalized t_core for SIDM halo.
+    """Balberg+ 2002 Eq. 22 (PRL 88, 101301) normalized to physical scales:
 
-    t_core ~ 12.7 / (sigma/m) * (rho_s/10^7)^-1 * (r_s/v_max)  [in some units]
+        t_core = 12.7 / (sigma/m) * (rho_s / 1e7 M_sun/kpc^3)^-1
+                  * (r_s / 10 kpc) * (100 km/s / v_max)    [Gyr]
 
-    For our subhalo (10^6 M_sun): rho_s ~ 10^3 M_sun/pc^3 (much lower than
-    galaxy-scale), r_s ~ 100 pc, v_max ~ 5-10 km/s.
+    Conversion to M_sun/pc^3 and pc:
+        10^7 M_sun/kpc^3 = 10^-2 M_sun/pc^3
+        10 kpc = 10^4 pc
 
-    Returns t_core in Gyr.
+    So in M_sun/pc^3 and pc:
+        t_core = 12.7 / sigma * (rho_s / 1e-2)^-1
+                  * (r_s_pc / 1e4) * (100 / v_max)   [Gyr]
+
+    Sanity check (reviewer Re18.2.docx, R18.2.docx):
+        MW halo (sigma=1 cm^2/g, rho_s=1e-2 M_sun/pc^3, r_s=1e4 pc,
+        v_max=100 km/s) -> t_core = 12.7 Gyr. PHYSICALLY REASONABLE.
     """
-    # Use the formula in physical units (normalized to Balberg+ 2002)
-    # rho_s in M_sun/pc^3, r_s in pc, v_max in km/s, sigma/m in cm^2/g
-    # The Balberg formula: t_core ~ 10^10 yr * (sigma/m)^-1 * (rho_s)^-1 * (r_s)^-1 * v_max
-    # For 10^6 M_sun halo, expected t_core ~ 1-10 Gyr at sigma/m ~ 1 cm^2/g
-    t = 12.7 / sigma_m_cm2_per_g * (rho_s_Msun_per_pc3 / 1e3) ** (-1) * (r_s_pc / v_max_kms)
-    return t  # in Gyr (using pc-scale normalization)
+    rho_s_norm = rho_s_Msun_per_pc3 / 1e-2     # normalize to 1e-2 M_sun/pc^3
+    r_s_norm = r_s_pc / 1e4                   # normalize to 10 kpc
+    v_norm = 100.0 / v_max_kms                # normalize to 100 km/s
+    t = 12.7 / sigma_m_cm2_per_g * (1.0 / rho_s_norm) * r_s_norm * v_norm
+    return t  # Gyr
 
 
 def nfw_rho_s_from_concentration(M_halo, c, r_vir_pc):
@@ -195,10 +202,16 @@ def main():
         )
     else:
         # Compute required sigma/m for collapse.
-        # t_core = 12.7/sigma * (rho_s/1e3)^-1 * (r_s/v_max)
-        # Solving for sigma: sigma_required = 12.7 / t_target * (rho_s/1e3)^-1 * (r_s/v_max)
-        # i.e., LOW rho -> LARGE sigma required (since collapse is harder in low-density halos).
-        sigma_m_required = 12.7 / HUBBLE_TIME_GYR * (rho_s / 1e3) ** (-1) * (r_s_pc / v_max)
+        # t_core = 12.7/sigma * (rho_s/1e-2)^-1 * (r_s/1e4) * (100/v_max)
+        # Solving for sigma: sigma_required = (12.7 / t_target) * (rho_s/1e-2)^-1
+        #                                       * (r_s_pc/1e4) * (100/v_max)
+        # i.e., LOW rho -> LARGE sigma required (collapse harder in low-density halos).
+        sigma_m_required = (
+            (12.7 / HUBBLE_TIME_GYR)
+            * (rho_s / 1e-2) ** (-1)
+            * (r_s_pc / 1e4)
+            * (100.0 / v_max)
+        )
         verdict = (
             f"Phase 44 sigma/m is INSUFFICIENT to drive core-collapse. "
             f"Need sigma/m(v_max) >= {sigma_m_required:.3e} cm^2/g to collapse in Hubble time. "
