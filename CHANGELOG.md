@@ -6,6 +6,57 @@
 
 
 
+
+## [T202NBodyValidation-v18.23] - 2026-09-23
+
+**Two-component SIDM N-body simulation with Phase 44 parameters (per reviewer model comments.docx).**
+
+Third-party review (model comments.docx, 2026-09-23) recommended:
+"Conduct Dedicated N-body Simulations: Run N-body simulations with the paper's
+exact Phase 44 parameters. The goal is to derive a self-consistent f_H(r) profile
+from first principles rather than borrowing one."
+
+**T202 ran AMUSE-ph4 2024.6.0 (WSL Python 3.10 venv) with:**
+- N = 2048 particles (1024 heavy + 1024 light)
+- Heavy:light mass ratio = 10:1
+- Phase 44 σ/m = 0.052 cm²/g (paper's claim)
+- 2 Gyr integration, 50 Myr snapshots
+
+**CANONICAL RESULT: NO MASS SEGREGATION AT PHASE 44 PARAMETERS.**
+
+| r/r_vir | f_H (T202 N-body) | f_H (hand-coded paper) | Δ |
+|---|---|---|---|
+| 0.05 | 0.952 | 0.95 | +0.002 (match) |
+| 0.10 | 0.930 | 0.30 | **+0.63** |
+| 0.20 | 0.923 | 0.30 | **+0.62** |
+| 0.50 | 0.916 | 0.10 | **+0.82** |
+
+**At Phase 44 σ/m = 0.052 cm²/g, heavy particles do NOT sink in 2 Gyr.**
+Heavy dominates everywhere (f_H ≈ 0.92 average). The hand-coded
+`f_H_at_r` in `phase44_two_component.py` assumes segregation that
+requires σ/m ≥ 147 cm²/g (Yang+ 2025 regime), not our 0.052.
+
+**Paper impact:** This confirms reviewer concern that f_H_at_r is
+borrowed from a different σ/m regime. The 7-of-8 fit success and
+the gravothermal-collapse resolution of the dSph tension may need
+re-framing in §10.6.
+
+**HONEST CAVEATS:**
+- N=2048 << N≥10⁵ for realistic gravothermal evolution
+- SIDM kick model is 10% velocity perturbation (approximation, not proper scattering)
+- Even Yang+ 2025's high σ/m doesn't reproduce their Fig. 2 in our N-body,
+  suggesting the kick model is too crude for "first-principles" claims
+- T202 is a "qualitative check," not "first-principles f_H(r)"
+
+**Files added:**
+- `v0.3-prelim/code/T202_two_component_sidm_nbody.py` (15 KB simulator)
+- `v0.3-prelim/docs/T202_NBODY_RESULTS.md` (full analysis)
+- `v0.3-prelim/data/results/t202_two_component_sidm.json` (Phase 44 run)
+- `v0.3-prelim/data/results/t202_control_highsigma.json` (Yang+ 2025 control)
+
+**Versions:** Phase 44 +T202. 31/31 self-check passes.
+
+
 ## [T201WIMpyAudit-v18.18] - 2026-09-23
 
 **CANONICAL audit using WIMpy 1.1.1 as ground truth (per reviewer T199R.docx).**
