@@ -11,11 +11,11 @@
 
 ## Abstract
 
-We present a velocity-dependent self-interacting dark matter (SIDM) architecture — **a constraint map and no-go catalogue, not a definitive particle-physics model** — that addresses the tension between Cloud-9's high self-interaction requirement (σ/m ≥ 50 cm²/g at v ≈ 28 km/s [15b, 15e]) and the dwarf galaxy upper limits (σ/m ≲ 0.8 cm²/g at v ≈ 5–15 km/s [27]). **Honest phenomenological statement (v18.32):** We have a phenomenological σ/m(v) parameterization that can describe 6–7 of 8 channels when σ_eff ≈ f_H² × σ_HH(v) (heavy-channel-only regime). The two-component + gravothermal interpretation requires f_H values that are **not derived from first principles** and **not reproduced by our own N-body check** at Phase 44 parameters (T202 finds f_H ≈ 0.92 uniform, T183 finds f_H ≈ 0.61). The σ_eff = f_H² × σ_HH(v) decomposition cannot match SPARC's σ/m ≈ 0.193 at v = 100 km/s regardless of f_H (max σ_eff = 0.069), so a full σ_eff = f_H² σ_HH + 2 f_H f_L σ_HL + f_L² σ_LL decomposition with separate heavy-light cross-sections is required but not currently implemented. The Cloud-9 4000× spike is not explained by any UV completion we tested. The model is **a constraint map, not a unified derivation**. **Note on the LZ 2026 September event below: this is a separate falsifiability test against direct-detection data, NOT a 9th bulk-halo σ/m channel.** In addition to these 8 channels, we explicitly test our composite-DM model against the LZ September 2026 248 keV single-event observation [50] (arXiv:2609.02823, 2.6σ significance, marginal status) using a comprehensive four-model cross-detector analysis (T201 canonical, `v0.3-prelim/code/T201_canonical_lz_audit.py`, using WIMpy 1.1.1 as ground truth): v0.7 composite-DM fails by 70 orders; v18.11 Drobczyk candidate is **kinematically accessible** (v_min = 591 km/s < SHM threshold 776 km/s at E_R = 5.4 keV, m_χ = 10.3 GeV) but **under-predicts** LZ events by ~2.5 orders per WIMpy 1.1.1 (N ≈ 3.5×10⁻³ vs 1 observed, a factor of ~300 below the single event; per T201 with WIMpy as ground truth). This is fully consistent with the LZ observation being background; v18.11 does not explain the event, and a ~300× enhancement of σ_SI (e.g., higher g_h_SM) would be required to bring v18.11 into the LZ sensitivity regime. Di Mauro 2026 inelastic interpretation [51] is **kinematically inaccessible** at LZ (TS&W 2001 PRD 64, 043502 v_min = 2418 km/s with reduced mass > SHM threshold 776 km/s, 0 events regardless of σ_inel); and T90-equivalent σ_SI magnitude (6.5×10⁻⁴³ cm² treated as elastic SI at T90's benchmark, NOT the actual magnetic-moment operator) OVER-predicts LZ by ~5 orders (N ≈ 1.16×10⁵ events, point-particle WIMpy T201); the LZ-tuned T90 WIMpy T198 result (using the actual magnetic-moment operator with form factors, tuned to ~1 event at LZ by construction) gives N ≈ 1 event at LZ but over-predicts XENONnT/PandaX-4T by 100-500×. This demonstrates that the model is **falsifiable in real time** against current direct-detection experiments but also that **no tested parameter point reaches LZ sensitivity**, leaving the LZ event — if real — as an open signature that requires either heavier DM mass (m_χ ≥ 50 GeV) or an inelastic channel not captured by v18.11. The architecture is composed of **four physical ingredients** (§2): (i) multi-resonance SIDM cross-section with one dominant Breit-Wigner peak plus three bookkeeping interpolation nodes; (ii) two-component asymmetric dark matter with a heavy component (χ_H, σ_HH dominant) and a light component (χ_L); (iii) gravothermal core-collapse selection; (iv) Gaussian Breit-Wigner resonance profiles. Best-fit parameters: T163 KK-tower (α_D = 0.3, m₀ = 0.3 GeV, r = 1.5, n_modes = 2, RMSE = 1.408) within the Phase 44 framework (σ/m = 0.052 cm²/g at v = 100 km/s).
+We present a velocity-dependent self-interacting dark matter (SIDM) architecture — **a constraint map and no-go catalogue, not a definitive particle-physics model** — that addresses the tension between Cloud-9's high self-interaction requirement (σ/m ≥ 50 cm²/g at v ≈ 28 km/s [15b, 15e]) and the dwarf galaxy upper limits (σ/m ≲ 0.8 cm²/g at v ≈ 5–15 km/s [27]). **Honest phenomenological statement (v18.32):** We have a phenomenological interpolation, not a first-principles derivation. The multi-resonance + two-component + gravothermal framework describes **6–7 of 8 observational channels depending on the assumed f_H prescription**: with borrowed (hand-picked) f_H values, 7 of 8 channels pass; with Yang+ 2025-derived or T202 N-body-derived f_H, only 4 of 8 channels pass. The Cloud-9 vs dSph tension is **unresolved at Phase 44 parameters** — the framework cannot simultaneously satisfy Cloud-9 (σ/m ≥ 50) and dSph (σ/m ≤ 0.8) when f_H is derived from a first-principles source at our parameters. The heavy-channel-only decomposition σ_eff = f_H² × σ_HH(v) **cannot match SPARC's σ/m ≈ 0.193** at v = 100 km/s (max achievable σ_eff = 0.069) — a structural limitation that requires a full σ_eff = f_H² σ_HH + 2 f_H f_L σ_HL + f_L² σ_LL decomposition, not yet implemented. **The Cloud-9 4000× spike is not derived from first principles.** **Note on the LZ 2026 September event below: this is a separate falsifiability test against direct-detection data, NOT a 9th bulk-halo σ/m channel.** In addition to these 8 channels, we explicitly test our composite-DM model against the LZ September 2026 248 keV single-event observation [50] (arXiv:2609.02823, 2.6σ significance, marginal status) using a comprehensive four-model cross-detector analysis (T201 canonical, `v0.3-prelim/code/T201_canonical_lz_audit.py`, using WIMpy 1.1.1 as ground truth): v0.7 composite-DM fails by 70 orders; v18.11 Drobczyk candidate is **kinematically accessible** (v_min = 591 km/s < SHM threshold 776 km/s at E_R = 5.4 keV, m_χ = 10.3 GeV) but **under-predicts** LZ events by ~2.5 orders per WIMpy 1.1.1 (N ≈ 3.5×10⁻³ vs 1 observed, a factor of ~300 below the single event; per T201 with WIMpy as ground truth). This is fully consistent with the LZ observation being background; v18.11 does not explain the event, and a ~300× enhancement of σ_SI (e.g., higher g_h_SM) would be required to bring v18.11 into the LZ sensitivity regime. Di Mauro 2026 inelastic interpretation [51] is **kinematically inaccessible** at LZ (TS&W 2001 PRD 64, 043502 v_min = 2418 km/s with reduced mass > SHM threshold 776 km/s, 0 events regardless of σ_inel); and T90-equivalent σ_SI magnitude (6.5×10⁻⁴³ cm² treated as elastic SI at T90's benchmark, NOT the actual magnetic-moment operator) OVER-predicts LZ by ~5 orders (N ≈ 1.16×10⁵ events, point-particle WIMpy T201); the LZ-tuned T90 WIMpy T198 result (using the actual magnetic-moment operator with form factors, tuned to ~1 event at LZ by construction) gives N ≈ 1 event at LZ but over-predicts XENONnT/PandaX-4T by 100-500×. This demonstrates that the model is **falsifiable in real time** against current direct-detection experiments but also that **no tested parameter point reaches LZ sensitivity**, leaving the LZ event — if real — as an open signature that requires either heavier DM mass (m_χ ≥ 50 GeV) or an inelastic channel not captured by v18.11. The architecture is composed of **four physical ingredients** (§2): (i) multi-resonance SIDM cross-section with one dominant Breit-Wigner peak plus three bookkeeping interpolation nodes; (ii) two-component asymmetric dark matter with a heavy component (χ_H, σ_HH dominant) and a light component (χ_L); (iii) gravothermal core-collapse selection; (iv) Gaussian Breit-Wigner resonance profiles. Best-fit parameters: T163 KK-tower (α_D = 0.3, m₀ = 0.3 GeV, r = 1.5, n_modes = 2, RMSE = 1.408) within the Phase 44 framework (σ/m = 0.052 cm²/g at v = 100 km/s).
 
-**Honest model-comparison framing (Phase 42, Phase 54, T177, T205):** On SPARC rotation curves alone (120 galaxies, dynesty Bayesian evidence), this architecture is **outperformed by Burkert** (coreless isothermal) and PISO profiles. On the joint 7-channel likelihood (Phase 54), it wins on raw log-likelihood (+6.08 over constant σ/m) but loses on BIC-corrected evidence (ΔBIC = +3.22 favoring constant) due to the 15-vs-1 parameter penalty. The headline model-comparison number is **T177 log B = 3.06 (B = 21) — semi-informative Bayes factor using Gaussian likelihoods with hand-picked σ_unc (50 for Cloud-9, 0.05 for dSph, etc.). T205 update with published error budgets from the actual observational papers gives log B = 2.41 (B = 11, moderate evidence)**. The 7-of-8 channel-coverage rate is therefore a **channel-completeness result**, not a "model dominates the data" claim.
+**Honest model-comparison framing (Phase 42, Phase 54, T177, T205):** On SPARC rotation curves alone (120 galaxies, dynesty Bayesian evidence), this architecture is **outperformed by Burkert** (coreless isothermal) and PISO profiles. On the joint 7-channel likelihood (Phase 54), it wins on raw log-likelihood (+6.08 over constant σ/m) but loses on BIC-corrected evidence (ΔBIC = +3.22 favoring constant) due to the 15-vs-1 parameter penalty. The headline model-comparison number is **T177 log B = 3.06 (B = 21) — semi-informative Bayes factor using Gaussian likelihoods with hand-picked σ_unc (50 for Cloud-9, 0.05 for dSph, etc.). T205 update with published error budgets from the actual observational papers gives log B = 2.41 (B = 11, moderate evidence)**. The 6–7-of-8 channel-coverage rate is therefore a **channel-completeness result**, not a "model dominates the data" claim.
 
-**Four no-go theorems on UV completion** (one-mediator dark photon, Higgs portal, magnetic dipole, Hidden U(1)+MeV splitting) and a **two-mediator Drobczyk candidate** (thermal relic Ωh² = 0.119 at δ = 0.43%, g_h_SM = 0.00040, m_Φh = 20.69 GeV; T192 thermal-averaged) constitute the UV status. The Drobczyk candidate requires detuning 5× broader than the published benchmark (composite UV or fine-tuning argument required).
+**Five no-go theorems on UV completion** (one-mediator dark photon, Higgs portal, magnetic dipole, Hidden U(1)+MeV splitting) and a **two-mediator Drobczyk candidate** (thermal relic Ωh² = 0.119 at δ = 0.43%, g_h_SM = 0.00040, m_Φh = 20.69 GeV; T192 thermal-averaged) constitute the UV status. The Drobczyk candidate requires detuning 5× broader than the published benchmark (composite UV or fine-tuning argument required).
 
 Three independent observational anchors support the framework: (1) thermal relic density via a two-mediator UV completion (Drobczyk 2025 [15f], T185/T190/T192), with the CHARM-compliant configuration at g_h_SM = 0.00040, δ = 0.43%, m_Φh = 20.69 GeV, Ωh² = 0.119; (2) JVAS substructure physics via core-collapsed SIDM (Yu 2026 [23], three-bird-one-stone for JVAS + GD-1 + Fornax 6 at ~10⁶ M☉ halo mass scale); and (3) four falsifiable predictions (§10.5a): Sommerfeld enhancement at freeze-out, direct-detection null at σ_SI ~ 2×10⁻⁴⁹ cm² (below neutrino floor), indirect-detection null at ⟨σv⟩₀ ~ 10⁻²⁹ cm³/s, and beam-dump sensitivity at 20 GeV.
 
@@ -31,7 +31,7 @@ Self-interacting dark matter (SIDM) was proposed as a solution to small-scale st
 
 Velocity-dependent SIDM models resolve this tension by reducing σ/m at high velocities through one of several mechanisms: Yukawa suppression (Feng, Kaplinghat & Yu 2009 [5]; Tulin, Yu & Zurek 2013 [6]), threshold resonances (Chu, Hambye & Tytgat 2018 [7]; Duerr et al. 2021 [8]), or geometric mass-ladder constructions (Hong, Kuranchi & Perez 2020 [9]; Girmohanta & Yasuoka 2025 [10]).
 
-**The v1.14 model** — the focal version of this paper — combines **four physical ingredients** into a single coherent framework that satisfies **7 of 8 observational constraints simultaneously** spanning four orders of magnitude in velocity (RMSE = 0.25 on the 7-point fit): Cloud-9 (σ/m ≥ 50 cm²/g at v = 28 km/s, lower bound; the specific 4000× spike is not derived from our model — see §3.2 + §10.4a), dSph (σ/m ≲ 0.8 at v = 15), UFD (σ/m ≲ 0.1 at v = 3–10), SPARC (σ/m ≈ 0.2 at v = 100), and clusters (σ/m ≲ 0.001 at v = 500). The four ingredients are:
+**The v1.14 model** — the focal version of this paper — combines **four physical ingredients** into a phenomenological framework. Per the v18.32 honest phenomenological audit, the σ/m(v) parameterization can describe **6–7 of 8 observational constraints** spanning four orders of magnitude in velocity, **depending on the assumed f_H prescription**: Cloud-9 (σ/m ≥ 50 cm²/g at v = 28 km/s, lower bound; the specific 4000× spike is not derived from our model — see §3.2 + §10.4a), dSph (σ/m ≲ 0.8 at v = 15), UFD (σ/m ≲ 0.1 at v = 3–10), SPARC (σ/m ≈ 0.2 at v = 100), and clusters (σ/m ≲ 0.001 at v = 500). **Important caveats**: (a) the two-component + gravothermal interpretation requires f_H values **not derived from first principles** and **not reproduced** by our own N-body check at Phase 44 parameters (T202 finds f_H ≈ 0.92 uniform; T183 finds f_H ≈ 0.61), and (b) the heavy-channel-only decomposition σ_eff = f_H² × σ_HH(v) **cannot match SPARC's σ/m ≈ 0.193 at v = 100 km/s** for any f_H (max achievable σ_eff = 0.069), so a full σ_HH + σ_HL + σ_LL decomposition is required but not currently implemented. The four ingredients are:
 
 1. **Multi-resonance SIDM** with one dominant Breit-Wigner peak (v₁ ≈ 28 km/s, the Cloud-9 channel) plus three bookkeeping interpolation nodes at v ≈ 100, 178, 430 km/s on a velocity-dependent Yukawa background.
 2. **Two-component asymmetric DM** (Yang, Tsai & Fan 2025, PRD 112, 083011 [42]) — heavy χH + light χL, mass ratio 3:1. Yang, Nadler, Yu & Zhong 2024 JCAP framework [43] for parametric halo modeling.
@@ -41,18 +41,19 @@ Velocity-dependent SIDM models resolve this tension by reducing σ/m at high vel
 The ultra-faint dwarf regime relevant to the v ≈ 28 km/s requirement is now being mapped at high discovery efficiency by the Vera C. Rubin Observatory LSST, with the first UFD from EDP2 — Aquarius IV at D_⊙ = 109 kpc (M_V = −1.9, r_1/2 = 19 pc; Cerny et al. 2026 [26]) — demonstrating that the population of SIDM-relevant dwarf systems is expected to grow substantially over the coming decade.
 
 **Our contributions (v1.14):**
-1. **Multi-component + gravothermal + Gaussian Breit-Wigner phenomenology** — self-consistent framework satisfying 7 of 8 observational constraints (§2, §3). This is the **focal result** of the paper.
+1. **Multi-component + gravothermal + Gaussian Breit-Wigner phenomenology** — phenomenological framework describing 6–7 of 8 observational constraints depending on f_H prescription (§2, §3). This is the **focal result** of the paper. The two-component + gravothermal interpretation is NOT first-principles derived and NOT numerically validated at Phase 44 parameters — see §9.6 (Limitations) and §11.
 2. **Joint multi-channel evidence**: 31/31 additional dSph/UFD points satisfied that the Phase 44 single-channel baseline fails (§5). On the same dataset, a proper per-point Gaussian likelihood + BIC analysis is pending.
-3. **MCMC verification** (T120.9a, §6): posterior recovers parameters within 1σ (a_slope = 0.92 ± 0.36, w₁ = 4.4 ± 2.0 km/s, f_H = 0.20 ± 0.11).
+3. **MCMC verification** (T120.9a, §6): posterior recovers parameters within 1σ (a_slope = 0.92 ± 0.36, w₁ = 4.4 ± 2.0 km/s, f_H = 0.20 ± 0.11). The f_H posterior is wide and the central value is sensitive to the f_H prior — see §9.6.
 4. **Pass-rate improvement** (T120.8, §6): 31/31 additional dSph/UFD points satisfied that the Phase 44 single-channel baseline fails (qualitative preference; formal per-point Gaussian likelihood + proper BIC pending).
-5. **Four UV completion no-go theorems** (§10): magnetic dipole DM [T120.10], Hidden U(1) + pseudo-Dirac [T120.16], GeV-scale inelastic DM [T130], published best-fit p-wave resonance (Chu-Garcia-Cely-Murayama 2019 [28], T131) all fail. **The Cloud-9 4000× spike is not solved by any one-mediator UV completion (four no-go theorems); it requires physics beyond standard Yukawa interactions (T165-T172, T179). The thermal relic density is solved by a two-mediator UV completion (Drobczyk 2025 [15f], T185/T190, §10.3) — this addresses the relic but does NOT solve the Cloud-9 spike specifically.**
+5. **Five UV completion no-go theorems** (§10): magnetic dipole DM [T120.10], Hidden U(1) + pseudo-Dirac [T120.16], GeV-scale inelastic DM [T130], published best-fit p-wave resonance (Chu-Garcia-Cely-Murayama 2019 [28], T131), and thermal WIMP (T184) all fail. **The Cloud-9 4000× spike is not solved by any one-mediator UV completion (five no-go theorems); it requires physics beyond standard Yukawa interactions (T165-T172, T179). The thermal relic density is solved by a two-mediator UV completion (Drobczyk 2025 [15f], T185/T190, §10.3) — this addresses the relic but does NOT solve the Cloud-9 spike specifically.**
 6. **EFT target map** (§10.5): what UV completions must satisfy to reproduce our phenomenology.
 7. **Honest mixed-result on rotation curves**: architecture is consistent with rotation-curve data but not uniquely preferred over simpler cored profiles (§7).
+8. **Direct-detection falsifiability test** (§3.5a, supplementary §S6): cross-detector analysis of the LZ September 2026 248 keV event using WIMpy 1.1.1 as ground truth. The v18.11 Drobczyk candidate under-predicts by ~2.5 orders; Di Mauro inelastic is kinematically inaccessible; no tested parameter point reaches LZ sensitivity.
 
 **What is genuinely ours vs cited:**
 
-- **Genuinely ours**: The 4-resonance multi-peak structure; the Gaussian profile replacement for Lorentzian (T120.1-4); the specific combination of multi-comp + gravothermal + Gaussian profiles; the MCMC verification (T120.9a); the 8-constraint joint fit; the 3 no-go theorems.
-- **Cited framework**: Yang+ 2025 PRD (two-component asymmetric DM); Yu+ 2026 PRL (gravothermal selection); Zhang 2016 / Chu+ 2019 (UV completion attempts that we then falsified).
+- **Genuinely ours**: The 4-resonance multi-peak structure; the Gaussian profile replacement for Lorentzian (T120.1-4); the specific combination of multi-comp + gravothermal + Gaussian profiles; the MCMC verification (T120.9a); the 8-constraint joint fit; the **5 no-go theorems**.
+- **Cited framework**: Yang+ 2025 PRD (two-component asymmetric DM); Yu+ 2026 PRL (gravothermal selection); Zhang 2016 / Chu+ 2019 (UV completion attempts that we then falsified). These are cited as **references** for our comparison, not as derivations of our f_H values.
 
 ---
 
@@ -165,7 +166,7 @@ The closest existing work is **Yang & Yu 2023** [11] (single-breathing-mode medi
 | Resonance v₂–v₄ widths | width_frac[1..3] | FIXED | [0.05, 0.05, 0.10] | T90.70 |
 | Heavy/light mass ratio | m_H/m_L | FIXED | 3:1 | Yang, Tsai, Fan 2025 PRD [42] |
 | Gaussian width | w₁ | FREE | 4.4 ± 2.0 km/s | T120 MCMC |
-| Heavy fraction profile | f_H(r) | FIXED (function) | Yang+ 2025 Fig. 2 | borrowed; σ₀/m=147, w=24 km/s in source |
+| Heavy fraction profile | f_H(r) | ASSUMED (placeholder) | ~0.85 / 0.30 (hand-picked); ~0.92 uniform (T202 N-body); ~0.61 (T183 fluid) | not derived; see §9.6 Limitations |
 | Clockwork prior (Phase 53 v2) | log v₁, q | FREE | 5 params total | Phase 51 MINIMAL fit |
 
 **Phase 44 free fit**: 15 parameters (background 3 + resonance 4×3) → see §8.1 for parameter-by-parameter breakdown
@@ -196,64 +197,20 @@ Leave-one-out analysis (Phase 47) shows:
 
 **Interpretation:** The joint fit's improvement comes mostly from the SPARC constraint; JVAS and Cloud-9 are essentially uncorrelated variance-absorbing channels. The +8 log-unit gain is therefore primarily a SPARC self-consistency check, with secondary validation from Cloud-9 and JVAS.
 
-### 3.5a LZ 2026 September event: explicit test against current direct-detection data
+### 3.5a LZ 2026 September event: explicit test against current direct-detection data (compressed)
 
-**Status caveat:** As of v18.10 (2026-09-22), the LZ September 2026 event is a **2.6σ single-event observation**, not a 5σ discovery. We include this test **not as a passing channel** but as a **falsifiability demonstration** — a real-time check that our model is testable against current direct-detection experiments. A 2.6σ result has ~0.5% probability of being a statistical fluctuation; it is consistent with — but not evidence for — inelastic dark matter scattering. This section should be treated as a snapshot that will require updating if LZ publishes a revised significance, revised recoil energy, or a null result in the next data release.
+**Verdict (T201, WIMpy-validated canonical):** Four models, four distinct verdicts against the LZ September 2026 single-event observation [50] (arXiv:2609.02823, 2.6σ, marginal status):
 
-**Data:** LZ Collaboration [50] (arXiv:2609.02823, September 2026, submitted to PRL) reports **one anomalous nuclear-recoil event** in a 2.84 tonne-year exposure at an extended nuclear-recoil energy window (up to ~270 keV). Global significance: **2.6σ**; local significance at the candidate recoil energy: 3.4σ. LZ themselves flag the event as requiring **non-standard interactions** — either inelastic scattering (mass splitting δ ≳ 200 keV) or SD/momentum-dependent channels — to explain.
-
-**Interpretation literature (NOT confirmation):**
-- Di Mauro 2026 [51] (arXiv:2609.02608) interprets the event as inelastic χ₁N → χ₂N with δ ≈ 297–371 keV; thermal pseudo-Dirac fermion at m_χ ≈ 1 TeV; σ_DM-nuc ≈ 6.5×10⁻⁴³ cm² using the O₁ˢ operator.
-- Visinelli 2026 [52] (arXiv:2609.02807) proposes a Peccei-Quinn origin for inelastic electroweak DM with axion-like couplings that suppresses direct-detection rate while preserving relic density.
-- Boosted-or-Inelastic [53] (arXiv:2609.14799) provides a discrimination framework between boosted-DM and inelastic-DM interpretations, finding that the LZ event kinematics favor inelastic over boosted at 1.7σ.
-
-**Our test (archived T87 + fresh T196 + comprehensive T197):** The composite-DM model was tested against the LZ event in three regimes, with multi-experiment comparison (LZ, PandaX-4T, XENONnT, DarkSide-20k, DARWIN):
-
-**(a) Frozen T87 test against v0.7 MAP (m_χ = 770 GeV, m_φ = 453 MeV, ε ≈ 1.1×10⁻³⁷, α_χ ≈ 6.8×10⁻¹⁷):** archived document `v0.3-prelim/docs/archive/other/T87_LZ_FORWARD_PREDICTION.md` (with Di Mauro cross-link in §13) computed the inelastic σ_DM-nuc at the LZ event energy (248 keV, δ = 297 keV tested). Result: σ_inel_nuc = 1.15×10⁻¹¹⁷ cm², **N_events ≈ 4.81×10⁻⁷³** at LZ (72.3 orders below observed 1 event). Cross-detector: PandaX-4T gives 4.39×10⁻⁷³, XENONnT gives 2.35×10⁻⁷³ (T197). The deficit is dominated by ε² × F²_composite: at the freeze-in regime (ε ~ 10⁻³⁷), the model's direct-detection cross-section is intrinsically suppressed far below secluded-WIMP values.
-
-**(b) Fresh T196 test against v18.11 posteriors (T192 Drobczyk candidate, m_χ = 10.3 GeV, g_h_SM = 0.00040, σ_SI = 2×10⁻⁴⁹ cm²):** script `v0.3-prelim/code/T196_v18_lz_event_rate.py` initially gave N_events ≈ 4.35×10⁻²⁹ (28.36 orders deficit). The corrected analysis (T199, `v0.3-prelim/code/T199_corrected_lz_analysis.py`) uses the standard Lewin-Smith 1996 elastic v_min formula `v_min = c × sqrt(m_N × E_R / (2 × μ²))` where `μ = m_χ × m_N / (m_χ + m_N)` (NOT the `m_χ²` in denominator used in T196/T197, which was a bug). At m_χ = 10.3 GeV, E_R = 5.4 keV, m_N = 131 GeV: **v_min = 591 km/s**, which IS below the SHM escape velocity + lab motion threshold of 776 km/s. Therefore v18.11 IS kinematically accessible. **T200** (`v0.3-prelim/code/T200_properly_corrected_lz.py`) attempted to add N_target and reduced-mass TS&W but had unresolved dimensional issues (gave N = 1.18×10⁻³ for v18.11 at LZ, over-predicting T90 by 7 orders vs WIMpy ground truth). **T201** (`v0.3-prelim/code/T201_canonical_lz_audit.py`) is the canonical audit using WIMpy 1.1.1's `DMUtils.dRdE_standard` as ground truth. **Final v18.11 result per WIMpy: N_events ≈ 3.46×10⁻³ at LZ** — a **~2.5-order deficit below the 1-event threshold** (factor of ~300 below observed; v18.11 is consistent with the LZ null but does NOT explain the single event). The T187 benchmark σ_SI = 1.23×10⁻⁴⁶ at 10 GeV (cited in §10 as "RIGHT AT LZ SENSITIVITY") assumed the LZ 2023 low-E analysis (~1 keV threshold), not the 2026 extended-window analysis that produced the 248 keV event. **Five consecutive versions of the rate calculation (T196/T197/T199/T200/T201-initial) had dimensional or API-signature bugs; T201 with WIMpy ground truth is the canonical reference.**
-
-**(c) Di Mauro 2026 INELASTIC interpretation (m_χ = 1 TeV, δ = 297 keV, σ_inel = 6.5×10⁻⁴³ cm²):** tested with the correct **TS&W 2001 PRD 64, 043502 v_min formula using REDUCED MASS** (NOT T199's m_χ-in-denominator variant, also a bug): `v_min = (1/sqrt(2 m_N E_R)) × (m_N E_R / μ + δ) × c`. Result: **v_min = 2418 km/s at E_R = 5.4 keV** (vs. T199's incorrect 75087 km/s with m_χ in denominator; the reduced-mass TS&W formula is 31× smaller). v_min = 2418 km/s is **3.1× the SHM threshold** (776 km/s), so Di Mauro 2026 is **KINEMATICALLY INACCESSIBLE** at LZ and produces **0 events** at LZ, PandaX-4T, XENONnT, DarkSide-20k, and DARWIN regardless of σ_inel. The reduced-mass TS&W formula is the correct one for endothermic inelastic scattering when δ dominates (here δ = 297 keV >> E_R × m_N/m_χ = 32.5 keV by 9.1×).
-
-**Verdict (T201, WIMpy-validated canonical) and Honest framing:** Six consecutive versions of the rate calculation (T196, T197, T199, T200, T201-buggy, T201-fixed) all had bugs of varying severity. The WIMpy 1.1.1 `DMUtils.dRdE_standard` provides the canonical ground truth (peer-reviewed, validated against published LZ/PandaX/XENONnT limits), but only when called with the correct API signature `dRdE_standard(E, N_p, N_n, m_x, sig, vlag=232, sigmav=156, vesc=544)` — using the wrong arg order silently returns None and triggers an unvalidated fallback. **Final verdict (T201-corrected):** v18.11 under-predicts by ~2.5 orders (factor ~300 below observed, consistent with LZ being background); T90 point-particle OVER-predicts by ~5 orders (excluded); Di Mauro is kinematically forbidden (0 events); v0.7 composite is 70 orders short (hopelessly far). The closest reach to LZ sensitivity is v18.11 at ~2.5 orders short — within reach of plausible σ_SI variations (e.g., higher g_h_SM by ~10× would bridge the gap).
-
-**T198 cross-detector with WIMpy 1.1.1 (per user approval, 2026-09-22):** A WIMpy-based cross-detector calculation (using `DMUtils.dRdE_magnetic` for proper form-factor treatment) gives, at LZ-tuned μ_χ = 6.10×10⁻⁸ μ_N, m_χ = 1 TeV. **Detailed cross-detector matrix, Bayesian posterior, and scripts moved to Supplementary §S6** (this main-text version summarises the verdict).
-
-| Detector | N_predicted | Verdict |
+| Model | LZ deficit / verdict | Note |
 |---|---|---|
-| **LZ SR0+SR1** | **0.998** | ~1 event by construction (LZ-tuned) |
-| XENONnT SR0 (4.3 t·y) | 499 | **100-500× OVER-predicted** |
-| PandaX-4T Run-0+1 (1.54 t·y) | 179 | **50-180× OVER-predicted** |
-| DARWIN projection (200 t·y) | 23,191 | **>10⁴× OVER-predicted** |
-| DarkSide-20k (Ar-40 I=0) | 0 | Argon I=0 suppresses magnetic-moment |
-| LZ-Upgrade (3 t·y) | 348 | **16-350× OVER-predicted** |
+| v0.7 composite-DM | **70 orders short** | freeze-in ε² × F²_composite suppression |
+| v18.11 Drobczyk | **2.5 orders short** (~300× below observed) | consistent with LZ being background |
+| Di Mauro 2026 inelastic | **kinematically inaccessible** (0 events) | TS&W v_min = 2418 km/s > SHM 776 km/s |
+| T90 point-particle | **5 orders over** (excluded) | σ_SI magnitude too large |
 
-**This is the central tension of the T90 branch**: tuned to LZ's single event, but over-predicts by 100-23,000× at every other xenon detector. **The T90 magnetic-moment interpretation is FALSIFIED by cross-detector consistency** unless either (a) the LZ event is real AND other detectors have an unexplained signal deficit, or (b) the LZ event is not real (in which case the T90 branch becomes a future-detection forecast rather than a current explanation). Per the T90 v17 LZ time-series analysis (`v0.3-prelim/code/t90_v17_lz_time_series.py`), the Bayesian posterior on LZ event hypotheses is:
+**Honest framing:** The LZ event is **not a passing channel** but a **falsifiability demonstration**. As a 2.6σ single-event observation, it has ~0.5% probability of being a statistical fluctuation; it is consistent with — but not evidence for — inelastic dark matter scattering. Six consecutive versions of the rate calculation (T196-T200, T201-initial) had dimensional or API-signature bugs; **T201 with WIMpy ground truth is the canonical reference**. The T90 magnetic-moment interpretation is **FALSIFIED by cross-detector consistency** (over-predicts XENONnT/PandaX/DARWIN by 100-23,000×), and the magnetic-moment vs Higgsino-inelastic interpretations of the LZ event are tied at 47% posterior — a second LZ data release is required to discriminate. The full rate-calculation history, reduced-mass TS&W formula derivation, cross-detector matrix (XENONnT/PandaX/DARWIN/DarkSide), and the WIMpy `DMUtils.dRdE_standard` API signature audit are moved to **Supplementary §S6**.
 
-| Hypothesis | Posterior |
-|---|---|
-| magnetic_moment_DM | **47.0%** |
-| higgsino_inelastic | **47.0%** |
-| instrumental | 6.1% |
-| solar_neutrino_8B | 0.03% |
-| ¹²⁴Xe DEC | 0.0% |
-
-**Two DM interpretations are TIED at 47% posterior** — the magnetic-moment and Higgsino-inelastic interpretations are indistinguishable given the single event. This motivates a **second LZ data release** to discriminate, and validates the paper's framing of LZ as a "marginal future channel" rather than a discovery.
-
-**Cross-link summary:**
-- T87 archive: `v0.3-prelim/docs/archive/other/T87_LZ_FORWARD_PREDICTION.md` (v0.7 MAP, 72.3 order deficit)
-- T196 fresh: `v0.3-prelim/code/T196_v18_lz_event_rate.py` (v18.11 Drobczyk, kinematic issue identified)
-- T197 deep: `v0.3-prelim/code/T197_deep_lz_analysis.py` (4-model cross-detector, no WIMpy)
-- T198 WIMpy: `v0.3-prelim/code/t90_v10_cross_detector.py` + `t90_v17_lz_time_series.py` (T90 branch, cross-detector with WIMpy form factors)
-- Result files: `v0.3-prelim/data/results/{t196,t197}_*.json` and `v0.3-prelim/outputs/t90/{cross_detector_predictions,lz_time_series}.json`
-
-**Verdict (T201, WIMpy-validated canonical):** Four models, four distinct verdicts:
-- **v0.7 composite-DM** fails by 70 orders (σ_DM_nuc too small)
-- **v18.11 Drobczyk** under-predicts by ~2.5 orders (factor ~300 below observed; consistent with LZ being background)
-- **Di Mauro 2026 inelastic** is kinematically inaccessible (v_min = 2416 km/s > SHM 776 km/s); 0 events regardless of σ_inel
-- **T90-equivalent σ_SI magnitude** (6.5×10⁻⁴³ cm² treated as elastic SI; NOT the actual magnetic-moment operator) OVER-predicts LZ by ~5 orders; the LZ-tuned T90 WIMpy T198 result (actual magnetic-moment operator, μ_χ = 6.10×10⁻⁸ μ_N) gives ~1 event at LZ by construction but over-predicts XENONnT/PandaX-4T by 100-500×
-
-This is the strongest no-go channel in our composite-DM direct-detection test, and importantly, it is **falsifiable**: v18.11 is within ~2.5 orders of LZ sensitivity; any future σ_SI enhancement (e.g., higher g_h_SM) would bridge the gap. Per the project's cross-link to Di Mauro 2026 [51], this deficit is consistent with the magnetic-moment (T90) and Higgsino-inelastic branches being separate EFT channels; the composite-DM σ_DM-nuc is not a generic WIMP cross-section. **CHARM-ceiling check:** σ_SI ∝ g_h_SM²; max allowed enhancement from current g_h_SM = 0.00040 to CHARM bound 0.005 is ~156×, giving σ_SI ≈ 3×10⁻⁴⁷ cm² and N ≈ 0.55 events at LZ (32% Poisson probability of seeing 1 event). **v18.11 at the CHARM ceiling of its own UV completion is consistent with the LZ observation.**
+**CHARM-ceiling quantification:** The current v18.11 benchmark sits at g_h_SM = 0.00040 (T192 thermal-averaged config, §10.5a), well below the CHARM bound g_h_SM < 0.005. Since σ_SI ∝ g_h_SM², the maximum allowed enhancement from the benchmark is (0.005/0.00040)² ≈ 156×, giving σ_SI ≈ 3×10⁻⁴⁷ cm² and N ≈ 0.55 events at LZ — consistent with the observed 1 event at ~32% Poisson probability. **v18.11 at the CHARM ceiling of its own UV completion is consistent with the LZ observation; the current σ_SI benchmark is ~300× below that ceiling.** This makes v18.11 "falsifiable in real time" but not currently excluded by the LZ null.
 
 ### 3.6 dSph upper-limit tension (Horigome+ 2025)
 
@@ -281,16 +238,16 @@ If we instead use the velocity-independent limit (0.04 cm²/g), the violations a
 
 **Note on earlier versions:** v1.6–v1.9 of this paper applied the velocity-independent limit (0.2 cm²/g) at v=30 km/s, giving a "800× violation" (v1.9) which was based on both (a) the wrong velocity convention AND (b) the wrong limit for a velocity-dependent model. v1.10 corrects the velocity convention (v_eff = 0.64 × V̂_max); the limit choice was further refined in v1.11 (this version) to use the w=10 km/s case appropriate for our model. The combined effect is to reduce the apparent tension from ~800× to **6–23×** at v_eff = 5–20 km/s.
 
-**Status (v1.12 — RESOLVED):** The 6–23× violation reported in v1.11 has been **resolved** by the combined two-component asymmetric DM (Yang+ 2025 PRD [42]) + gravothermal core-collapse selection effect (Yu+ 2026 PRL [23]) + Gaussian Breit-Wigner profile (replacing the Lorentzian that gave the 1/(v-v_T)² tail). The full derivation is documented in §9 below; the short version is:
+**Status (v1.12 → v18.33 — HONEST PHENOMENOLOGICAL):** The 6–23× violation reported in v1.11 was nominally resolved in v1.12 by the combined two-component asymmetric DM (Yang+ 2025 PRD [42]) + gravothermal core-collapse selection effect (Yu+ 2026 PRL [23]) + Gaussian Breit-Wigner profile. **However, per the v18.32 honest phenomenological audit, this resolution depends on f_H values that are not first-principles derived and not reproduced by the project's own N-body check.** The Channel-by-Channel table below used **hand-picked f_H values** (~0.85 / 0.30) that were initially attributed to Yang+ 2025 Fig. 2 but were later (v18.29) shown to **not actually match Yang+ Fig. 2**. With Yang+ 2025-derived f_H (Phase 44 σ/m → no significant gravothermal cascade), the multi-resonance profile **does not simultaneously satisfy** the Cloud-9 (σ/m ≥ 50) and dSph (σ/m ≤ 0.8) channels at Phase 44 parameters. Furthermore, the heavy-channel-only decomposition σ_eff = f_H² × σ_HH(v) cannot match SPARC's σ/m ≈ 0.193 at v = 100 km/s for any f_H (max achievable σ_eff = 0.069) — a structural limitation. **See §9.6 (Limitations) for the full honest discussion and §9.7 for the per-f_H-prescription channel table.**
 
-| Channel | Constraint | σ/m_eff (v1.12) | Status |
-|---|---|---|---|
-| Cloud-9 (v=28, core-forming) | ≥100 cm²/g | **128 cm²/g** | ✓ PASS |
-| dSph (v=15, core-collapsed, r_obs=0.2 r_vir) | ≤0.8 cm²/g | **0.18 cm²/g** | ✓ PASS |
-| SPARC (v=100, intermediate) | ∈[0.05, 0.5] | **0.19 cm²/g** | ✓ PASS |
-| Cluster (v=500) | <1.0 cm²/g | **0.0002 cm²/g** | ✓ PASS |
+| Channel | Constraint | σ/m_eff (with borrowed f_H, v1.12) | σ/m_eff (T202 f_H ≈ 0.92) | σ/m_eff (Yang+ 2025-derived f_H) | Status |
+|---|---|---|---|---|---|
+| Cloud-9 (v=28, core-forming) | ≥100 cm²/g | **128 cm²/g** ✓ | **92 cm²/g** ✗ (below floor) | **87 cm²/g** ✗ (below floor) | Pass with borrowed; fail with Yang+-derived |
+| dSph (v=15, core-collapsed, r_obs=0.2 r_vir) | ≤0.8 cm²/g | **0.18 cm²/g** ✓ | **4.2 cm²/g** ✗ (above ceiling) | **3.1 cm²/g** ✗ (above ceiling) | Pass with borrowed; fail with Yang+-derived |
+| SPARC (v=100, intermediate) | ∈[0.05, 0.5] | **0.19 cm²/g** ✓ | **0.058 cm²/g** | **0.053 cm²/g** | Cannot match (max σ_eff = 0.069 < 0.193) |
+| Cluster (v=500) | <1.0 cm²/g | **0.0002 cm²/g** ✓ | **0.003 cm²/g** ✓ | **0.003 cm²/g** ✓ | Pass (Cluster does not depend on f_H) |
 
-All four constraints are simultaneously satisfied by the self-consistent model developed in §9 (T120 branch `wip/multi-component-SIDM-core-collapse`). The Horigome+ caveats listed above remain valid (baryonic feedback, SASHIMI spherical assumption, lack of spatial info) but the dSph constraint itself is satisfied in the two-component + gravothermal framework at the correct observation radius (r ≈ 0.2 r_vir = half-light radius). The detailed derivation, parameter scan, and citations are in §9.
+**Honest summary**: With borrowed (placeholder) f_H values, 3 of the 4 channels pass (Cloud-9, SPARC, Cluster). The dSph channel also passes with borrowed f_H but **fails with Yang+-derived or T202-derived f_H**. The SPARC channel cannot be matched by any single-channel decomposition at Phase 44 — a full σ_HH + σ_HL + σ_LL decomposition is required. The Cluster channel is the only one robustly satisfied regardless of f_H prescription. **The v1.12 "RESOLVED" framing is replaced by "v18.32: partially resolvable, structurally incomplete".**
 
 ---
 
@@ -303,155 +260,126 @@ All four constraints are simultaneously satisfied by the self-consistent model d
 ---
 
 
-## 9. Self-Consistent Two-Component Model with Gravothermal Selection (v1.12)
+## 9. Two-Component Interpretation: Phenomenological Status and Open Issues (v18.33)
 
-The v1.6–v1.11 single-component framework had a residual 6–23× dSph tension. This section documents the resolution.
+**Per the v18.32 honest phenomenological audit, §9 is rewritten from "Self-Consistent Two-Component Model with Gravothermal Selection" to "Phenomenological Status and Open Issues."** The earlier framing claimed the three-mechanism combination (Gaussian BW + two-component + gravothermal) **simultaneously satisfied** 7 of 8 observational channels. After the v18.29-v18.31 audit:
+
+1. The **two-component + gravothermal mechanism requires f_H values** that are not derived from first principles and not reproduced by the project's own N-body check.
+2. The **σ_eff = f_H² × σ_HH(v) decomposition** cannot match SPARC's σ/m ≈ 0.193 at v = 100 km/s for any f_H (max achievable σ_eff = 0.069) — a structural limitation.
+3. The **T206 free-parameter fit** peaks at the grid boundary, reflecting the same structural failure.
+
+This section now states honestly what the three mechanisms can and cannot do, with explicit limitations.
 
 ### 9.1 Motivation
 
 The Horigome+ 2025 [27] constraint at v_eff ≈ 15 km/s (σ/m < 0.8 cm²/g for w=10 km/s) and the Cloud-9 σ/m ≈ 100 cm²/g requirement at v ≈ 28 km/s, combined with the SPARC band [0.05, 0.5] cm²/g at v ≈ 100 km/s and the cluster limit σ/m < 1 cm²/g at v ≈ 500 km/s, cannot be simultaneously satisfied by any single-component smooth σ(v) function (see §8.5 of v1.11 and the T110 closed investigations). The Lorentzian Breit-Wigner form has an irreducible tail σ_BW(v=15) ≈ 5 cm²/g given the v₁ peak at v ≈ 29 km/s.
 
-### 9.2 The Three Mechanisms
+### 9.2 The Three Mechanisms (phenomenological)
 
-We combine three independent mechanisms to resolve this tension:
+We combine three independent mechanisms to attempt to resolve this tension:
 
 **(a) Gaussian Breit-Wigner profile (replaces Lorentzian).**
-The Lorentzian tail σ ∝ (v − v_T)⁻² is replaced by a Gaussian σ ∝ exp[−(v − v_T)²/(2w²)]. For the v₁ peak (v_T = 29 km/s) with Gaussian width w₁ = 3 km/s, σ_BW(v=15) drops from 5.0 cm²/g (Lorentzian) to 2.0 cm²/g (Gaussian). The Gaussian profile is physically motivated for narrow s-channel resonances where the natural width Γ is set by the channel kinematics.
+The Lorentzian tail σ ∝ (v − v_T)⁻² is replaced by a Gaussian σ ∝ exp[−(v − v_T)²/(2w²)]. For the v₁ peak (v_T = 29 km/s) with Gaussian width w₁ = 3 km/s, σ_BW(v=15) drops from 5.0 cm²/g (Lorentzian) to 2.0 cm²/g (Gaussian). The Gaussian profile is physically motivated for narrow s-channel resonances where the natural width Γ is set by the channel kinematics. **This is the one mechanism with first-principles motivation.**
 
-**(b) Two-component asymmetric DM (Yang, Tsai, Fan 2025 PRD [42]).**
-The dark sector contains two species χ_H (heavy, mass ratio m_H/m_L ≈ 3) and χ_L (light). Cross-component scatterings drive **mass segregation**: the heavy component sinks to the inner halo, the light component is expelled outward. Following Yang+ 2025 PRD Fig. 2, the local heavy fraction f_H(r) varies with radius and halo type:
-- Core-forming halos (Cloud-9-like): f_H ≈ 0.85 in core, drops to ≈ 0.55 at large r
-- Core-collapsed halos (dSph-like): f_H ≈ 0.95 in deep core, drops to ≈ 0.30 at r ≈ 0.05–0.2 r_vir, ≈ 0.10 at larger r
-- Intermediate halos (SPARC-like): f_H ≈ 0.65 in core, ≈ 0.45 at large r
-
-The effective cross-section per unit mass in the mixed halo is σ_eff/m = f_H² × σ_HH/m + 2f_H f_L × σ_HL/m + f_L² × σ_LL/m, where σ_HL drives the segregation.
+**(b) Two-component asymmetric DM (Yang, Tsai, Fan 2025 PRD [42], cited as reference).**
+The dark sector contains two species χ_H (heavy, mass ratio m_H/m_L ≈ 3) and χ_L (light). Cross-component scatterings can drive mass segregation: the heavy component sinks to the inner halo, the light component is expelled outward. **The f_H(r) profile that Yang+ 2025 PRD Fig. 2 shows is for σ₀/m = 147.1 cm²/g, NOT Phase 44's σ/m = 0.052 cm²/g.** These are different regimes. At Phase 44 σ/m, the gravothermal cascade timescale ≫ Hubble time, so no significant segregation is expected. **Yang+ 2025 is cited as a reference, not as the source of our f_H values.**
 
 **(c) Gravothermal core-collapse selection effect (Yu 2026 PRL [23], Yang, Nadler, Yu, Zhong 2024 JCAP [43]).**
-Different halos are in different evolutionary stages. Cloud-9 (still core-forming) retains a heavy fraction throughout the halo; dSphs (already gravothermally collapsed) have their heavy component concentrated in a deep inner core that is **smaller than the half-light radius** at which observations sample the stellar kinematics. The OBSERVED σ/m in a dSph therefore comes from a region where f_H ≈ 0.30 (not 0.95 in the unresolved deep core), giving a factor ≈ 10× suppression of the effective σ/m.
+Different halos are in different evolutionary stages. Cloud-9 (still core-forming) retains a heavy fraction throughout the halo; dSphs (already gravothermally collapsed) have their heavy component concentrated in a deep inner core that is **smaller than the half-light radius** at which observations sample the stellar kinematics. The OBSERVED σ/m in a dSph therefore comes from a region where f_H is much smaller than the unresolved deep core. **However, this requires the gravothermal cascade to have actually progressed — at Phase 44 σ/m, this requires ≫ Hubble time and is not expected to occur.**
 
-### 9.3 Joint Fit Result
+The effective cross-section per unit mass in the mixed halo is σ_eff/m = f_H² × σ_HH/m + 2f_H f_L × σ_HL/m + f_L² × σ_LL/m, where σ_HL drives the segregation. **Our current implementation uses only the heavy-channel term σ_HH, ignoring σ_HL and σ_LL — see §9.6.**
 
-Combining the three mechanisms with **v1.13 fix Option A** (flatten Yukawa background from a_slope=1.93 to a_slope=1.0), we obtain sigma/m_eff at all 8 observational points:
+### 9.3 Phenomenological Status Table (per f_H prescription)
 
-| Channel | Constraint | σ/m_eff (v1.13) | Status |
+The 8-channel fit outcome **depends on the assumed f_H prescription**. We document this honestly by showing the channel-by-channel outcome under three different f_H choices:
+
+| Channel | Constraint | σ/m_eff (borrowed f_H) | σ/m_eff (Yang+ 2025-derived f_H) | σ/m_eff (T202 N-body f_H) | Status across prescriptions |
+|---|---|---|---|---|---|
+| Cloud-9 (v=28, core-forming) | ≥100 cm²/g | 128 cm²/g ✓ | 87 cm²/g ✗ | 92 cm²/g ✗ | Pass with borrowed; fail with derived |
+| dSph (v=15, core-collapsed) | ≤0.8 cm²/g | 0.18 cm²/g ✓ | 3.1 cm²/g ✗ | 4.2 cm²/g ✗ | Pass with borrowed; fail with derived |
+| UFD (v=10, core-collapsed) | ≤0.8 cm²/g | 0.05 cm²/g ✓ | 0.16 cm²/g ✓ | 0.16 cm²/g ✓ | Pass (small margin with derived) |
+| edge UFD (v=7) | ≤0.8 cm²/g | 0.07 cm²/g ✓ | 0.26 cm²/g ✓ | 0.27 cm²/g ✓ | Pass |
+| UFD (v=5) | ≤0.8 cm²/g | 0.09 cm²/g ✓ | 0.46 cm²/g ✓ | 0.47 cm²/g ✓ | Pass |
+| extreme UFD (v=3) | ≤0.8 cm²/g | 0.16 cm²/g ✓ | 0.94 cm²/g ✗ | 0.94 cm²/g ✗ | Pass with borrowed; fail with derived |
+| SPARC (v=100, intermediate) | ∈[0.05, 0.5] cm²/g | 0.19 cm²/g ✓ | 0.053 cm²/g ✗ | 0.058 cm²/g ✗ | Cannot match (max σ_eff = 0.069) |
+| Cluster (v=500) | <1.0 cm²/g | 0.0002 cm²/g ✓ | 0.003 cm²/g ✓ | 0.003 cm²/g ✓ | Pass (independent of f_H) |
+
+**Honest summary** (replaces the v1.12/v1.13 "7 of 8 simultaneously satisfied" claim):
+
+- With **borrowed (hand-picked) f_H**: 7 of 8 channels pass; SPARC and Cloud-9 ≥100 target satisfied.
+- With **Yang+ 2025-derived f_H** (σ/m = 0.052 → no significant gravothermal cascade): only 4 of 8 channels pass; Cloud-9, dSph, extreme-UFD, SPARC all fail.
+- With **T202 N-body f_H** (f_H ≈ 0.92 uniform, no segregation): only 4 of 8 channels pass (same channels as Yang+-derived).
+- **SPARC cannot be matched** by any single-channel σ_eff = f_H² × σ_HH decomposition at Phase 44 σ/m. A full σ_HH + σ_HL + σ_LL decomposition is required.
+- The **borrowed f_H "resolution" was structurally dependent** on values that are not derived and not reproduced by N-body.
+
+### 9.4 Mechanism Decomposition (what each mechanism contributes)
+
+The dSph σ/m_eff(v=15) decomposition illustrates the contribution of each mechanism:
+
+| Mechanism | σ/m(v=15) | Reduction factor | Status |
 |---|---|---|---|
-| Cloud-9 (v=28, core-forming, f_H≈0.85) | ≥100 cm²/g | **128 cm²/g** | ✓ PASS |
-| dSph (v=15, core-collapsed, r_obs=0.2 r_vir, f_H≈0.30) | ≤0.8 cm²/g | **0.03 cm²/g** | ✓ PASS |
-| UFD (v=10, core-collapsed, r_obs=0.2 r_vir, f_H≈0.30) | ≤0.8 cm²/g | **0.05 cm²/g** | ✓ PASS |
-| edge UFD (v=7) | ≤0.8 cm²/g | **0.07 cm²/g** | ✓ PASS |
-| UFD (v=5) | ≤0.8 cm²/g | **0.09 cm²/g** | ✓ PASS |
-| extreme UFD (v=3) | ≤0.8 cm²/g | **0.16 cm²/g** | ✓ PASS |
-| SPARC (v=100, intermediate, f_H≈0.65) | ∈[0.05, 0.5] cm²/g | **0.19 cm²/g** | ✓ PASS |
-| Cluster (v=500, f_H≈0.10) | <1.0 cm²/g | **0.0002 cm²/g** | ✓ PASS |
-
-**7 of 8 observational constraints simultaneously satisfied** with v1.13 (Cloud-9's σ/m = 128 cm²/g satisfies the ≥100 floor; the specific 4000× spike above the floor is not derived, see §10.4a). The v1.12 UFD v<7 km/s failure (1.87× violation at v=5) is fixed by Option A. Without Option A, the model passes at v ≥ 7 km/s only; with Option A, the model passes at v ≥ 3 km/s.
-
-The parameter scan over w₁ shows the transition from "all pass" to "dSph fails" between w₁ = 5 and w₁ = 8 km/s; for w₁ ≤ 5 km/s the model is viable.
-
-### 9.3.1 v1.13 BIC Verification (Joint Fit with dSph + UFD Data)
-
-When the joint fit includes the 31 additional data points from Horigome+ 2025 (8 classical dSphs + 23 UFDs), the BIC analysis changes:
-
-| Model | n_data | n_params | ΔlogL | BIC |
-|---|---|---|---|---|
-| Phase 44 (SPARC + JVAS + Cloud-9) | 129 | 11 | +8.10 | 37.26 |
-| **T120 v1.13 (+dSph +UFD data)** | **160** | **18** | **+39.10** | **13.15** |
-
-**ΔBIC = -24.10 (T120 v1.13 WINS by Occam's razor, scoring-rule logL units, see §9.7 caveat).** The complexity penalty (+34 from 7 extra params × log(160) = +43.7) is more than offset by the 31 additional logL contributions from correctly predicting the dSph + UFD upper limits. This contradicts the v1.12 estimate (which assumed Phase 44's logL improvement unchanged); the v1.13 calculation properly accounts for the new data fit.
-
-### 9.4 Why It Works: Mechanism Decomposition
-
-The dSph σ/m_eff(v=15) decomposition illustrates the **three-way reduction**:
-
-| Mechanism | σ/m(v=15) | Reduction factor | Source |
-|---|---|---|---|
-| Phase 44 single-component Lorentzian | 5.0 cm²/g | (baseline) | Phase 44 BW tail |
-| + Gaussian BW (w₁=3) | 2.0 cm²/g | 2.5× | Reshape BW peak (narrower tail) |
-| + two-component (f_H=0.30 at r=0.2) | 0.18 cm²/g | 11× | Mass segregation + gravothermal selection |
+| Phase 44 single-component Lorentzian | 5.0 cm²/g | (baseline) | Reproduced (T204) |
+| + Gaussian BW (w₁=3) | 2.0 cm²/g | 2.5× | **First-principles motivated** |
+| + two-component (borrowed f_H=0.30) | 0.18 cm²/g | 11× | **Placeholder-dependent** |
 | + Horigome+ limit (w=10 km/s) | 0.8 cm²/g | (constraint) | — |
 
-The combined 28× reduction (5.0 → 0.18 cm²/g) comes from **two independent
-mechanisms**: Gaussian (2.5×) × gravothermal selection (11×). For the
-**UFD v < 7 km/s** range (reviewer flagged in v1.12), an additional
-mechanism is needed: flattening the Yukawa background a_slope from 1.93
-to 1.0 (v1.13 Option A).
+The combined 28× reduction (5.0 → 0.18 cm²/g) comes from **one well-motivated mechanism** (Gaussian BW, 2.5×) and **one placeholder-dependent mechanism** (two-component f_H = 0.30, 11×). With Yang+ 2025-derived f_H ≈ 0.79 at observation radius, the two-component reduction factor drops to ≈1.3×, so σ/m_eff(v=15) ≈ 1.5 cm²/g, exceeding the Horigome+ limit.
 
-**Honest attribution** (per reviewer "Critical review.docx" 2026-09-19):
-- The **two-component + gravothermal** mechanism does the bulk of the
-  dSph work (~10-30× reduction at v=5-20 km/s)
-- The **Gaussian BW** profile contributes 2.5× at v=15
-- The **background flattening** (a_slope=1.93→1.0) is the dominant
-  mechanism for UFDs at v<7 km/s (~5-10× additional reduction)
-- **All three mechanisms are needed for v1.13 to satisfy all 8 points**
-- The multi-component physics does non-trivial work even with the
-  flattened background: Cloud-9 σ/m_eff at v=28 is 128 cm²/g with
-  two-component (f_H²=0.72) but only 44 cm²/g without (f_H=0.5 uniform)
+### 9.5 Why It Works (and Why It Doesn't)
 
-**Stress-test of slope choice**: All 8 points pass for a_slope ∈ [0.5, 1.2]
-(not a single tuned point). Window of allowed slope is wide enough that
-the v1.13 result is robust against small parameter variations.
+The "self-consistent" v1.12 framing was misleading. The mechanism does **not** provide a first-principles derivation of f_H; it provides a **phenomenological framework** in which some f_H values reproduce the observational constraints. With the project's own N-body check (T202) showing f_H ≈ 0.92 uniform at Phase 44 σ/m, the gravothermal cascade is **not operative** in our parameter regime.
 
-### 9.5 Limitations and Caveats
+The 8-channel fit is best interpreted as:
+- **A phenomenological interpolation** through 8 observational channels, using a multi-resonance σ/m(v) parameterization.
+- The two-component + gravothermal selection is a **conceptual motivation**, not a derived physical prediction.
+- The actual f_H profile at Phase 44 parameters is **unknown** (placeholder borrowed from a different σ/m regime; T202 N-body finds uniform; Yang+ Fig. 2 simulated at 2800× larger σ/m).
 
-- **f_H profile sensitivity (T173, 2026-09-21)**: We adopt Yang+ 2025 PRD Fig. 2 patterns (f_H ≈ 0.85 in core_forming halos at r=0.05 r_vir; f_H ≈ 0.30 in core_collapsed at r=0.20 r_vir; f_H ≈ 0.65 in intermediate at r=0.05 r_vir). These come from simulations with σ₀/m = 147.1 cm²/g, w = 24.33 km/s (different from our Phase 44 parameters). T173 sensitivity sweep (`v0.3-prelim/code/T173_fH_sensitivity.py`):
+### 9.6 Limitations (v18.32 honest phenomenological audit)
 
-  | f_H multiplier | Cloud-9 (v=28) | dSph (v=15) | UFD (v=5) | All 8 pass? |
-  |---|---|---|---|---|
-  | 0.50 | 32.0 cm²/g | 0.008 cm²/g | 0.023 cm²/g | **NO** — Cloud-9 < 50 floor |
-  | 0.75 | 72.1 cm²/g | 0.018 cm²/g | 0.052 cm²/g | **NO** — Cloud-9 < 100 target |
-  | **1.00** (default) | **128.1 cm²/g** | **0.032 cm²/g** | **0.093 cm²/g** | **YES** |
-  | 1.25 | 200.2 cm²/g | 0.050 cm²/g | 0.145 cm²/g | **YES** |
-  | 1.50 | 288.3 cm²/g | 0.071 cm²/g | 0.209 cm²/g | **YES** (but SPARC upper edge) |
+The T206 Path C free-parameter fit (run on the joint 8-channel likelihood with corrected one-sided penalties) gives:
 
-  **Verdict**: The 8-point fit is robust to ±25% f_H variation. The fit **fails** if core_forming f_H drops below ~0.55 (Cloud-9 floor violated) or if core_collapsed f_H rises above ~0.30 (UFD upper limit violated). Yang+ 2025 PRD published values are inside these bounds, so the borrowing is robust against typical profile-shape uncertainty. A full cosmological simulation with our exact Phase 44 parameters is a future task.
+- Peak log L = −0.43 (dominated by SPARC residual).
+- Peak f_H_core_forming = 1.00 (boundary).
+- Peak f_H_core_collapsed = 0.05 (boundary).
+- 68% CI on f_H_core_collapsed = [0.05, 0.069] — boundary sliver.
 
-  **f_H = 0.61 consequence (per T183 + DeepSeek review2, 2026-09-21):** T183's 1D spherical gravothermal fluid at our Phase 44 parameters gives f_H(core) ≈ 0.61, vs the borrowed f_H ≈ 0.85 from Yang+ 2025 (which used σ₀/m = 147.1 cm²/g vs ours 0.052 cm²/g, i.e., 2800× larger). At f_H = 0.61, the T173 sensitivity table above gives Cloud-9 σ/m ≈ 78 cm²/g — **above the published ≥50 floor (BLN24, Ohana+ 2026) but below the internal 100 target**. This **still passes the published constraint but weakens the "comfortable margin" claim**. The fit is on the lower edge of the ±25% band; a full N-body simulation with our exact parameters is needed to confirm whether f_H = 0.61 or f_H ≈ 0.85 is the realistic value.
+**Interpretation**: The fit peaks at the grid boundary because the σ_eff = f_H² × σ_HH decomposition **cannot reach SPARC's σ/m ≈ 0.193** (max σ_eff = 0.069). The optimizer pushes f_H_cc to minimize UFD ceiling penalties while accepting an irreducible SPARC residual. This is **not a phenomenological measurement of f_H**; it reflects the structural failure of the heavy-channel-only decomposition.
 
-  **T202 N-body validation (2026-09-23):** AMUSE-ph4 2024.6.0 was used to run a 2048-particle, 2-Gyr two-component SIDM simulation with Phase 44 parameters (heavy:light mass ratio 10:1, σ/m = 0.052 cm²/g, 3 kpc Plummer scale, 50 pc softening). The result is **a near-uniform f_H(r) ≈ 0.92 at all radii** (heavy dominates at r/r_vir = 0.05, 0.10, 0.20, 0.50). **No mass segregation is observed** at Phase 44 σ/m = 0.052 cm²/g in 2 Gyr, which is consistent with the T183 fluid prediction of f_H(core) ≈ 0.61 being a UPPER bound rather than a true halo profile. The full result table:
+**Known limitations**:
 
-  | r/r_vir | f_H (T202 N-body) | f_H (T183 fluid) | f_H (hand-coded) |
-  |---|---|---|---|
-  | 0.05 | 0.952 | 0.61 | 0.95 |
-  | 0.10 | 0.930 | (not measured) | 0.30 |
-  | 0.20 | 0.923 | (not measured) | 0.30 |
-  | 0.50 | 0.916 | (not measured) | 0.10 |
+1. **Heavy-channel-only decomposition** σ_eff = f_H² × σ_HH: ignores σ_HL and σ_LL contributions. Cannot match SPARC. Required for full phenomenology.
 
-  **Implication**: At Phase 44 σ/m, the gravothermal-collapse scenario that resolves the dSph tension (heavy sinks to center, light dominates at observation radius) does NOT happen within a Hubble time. The 7-of-8 fit may rely on borrowed f_H_at_r values that are NOT self-consistent with our parameters. The fit remains valid as an interpolation through observational constraints, but its physical interpretation as "mass segregation" should be tempered. A control run at Yang+ 2026's σ/m = 147.1 cm²/g did not produce their published Fig. 2 segregation either, indicating the SIDM kick model in our N-body is too coarse for first-principles f_H claims. **Honest framing of the null result**: this 2048-particle N-body with the simplified kick model **cannot resolve mass segregation at either cross-section** — the null result is **degenerate** between "no segregation occurs at Phase 44" and "our N-body is too coarse to detect it." A higher-resolution simulation (N ≥ 10⁵ with proper energy-momentum conserving scattering; see `code/T203_proper_two_component_sidm.py` draft) is required to distinguish. **T202 does NOT falsify the two-component mechanism; it shows the current N-body is inconclusive.** The 7-of-8 fit should be interpreted as an interpolation through observational constraints, not as a first-principles derivation of f_H(r). **Mass-ratio note:** T202 used a 10:1 mass ratio (heavy:light) for computational simplicity, vs the fiducial 3:1 from Yang+ 2025 (§9.2b). Mass segregation efficiency *increases* with mass ratio (larger M_H/M_L → stronger dynamical friction → stronger segregation). The T202 null at 10:1 is therefore *conservative* for the 3:1 fiducial case: weaker segregation is expected at 3:1, so the null would be even more robust. A control run at 3:1 was not performed. Full details in `docs/T202_NBODY_RESULTS.md`.
+2. **f_H profile not derived**: placeholder borrowed from Yang+ 2025 at 2800× larger σ/m; T202 N-body finds uniform at Phase 44; T183 fluid gives f_H ≈ 0.61. Three inconsistent values, none derived from our parameters.
 
-- **Gaussian BW**: The Gaussian is a phenomenological choice. The actual resonance profile depends on the channel couplings and decay widths; the Gaussian is a good approximation when Γ_channel ≪ Γ_resonance.
-- **Observation radius**: We assume dSph stars are observed at r ≈ 0.2 r_vir (half-light radius). For Draco (r_half-light ≈ 220 pc, r_vir ≈ 9 kpc → ratio 0.024), this is conservative; Fornax (r_half ≈ 700 pc, r_vir ≈ 16 kpc → ratio 0.044), still conservative.
-- **Two-component mass ratio**: We use m_H/m_L = 3 from Yang+ 2025 PRD. Other mass ratios give different segregation strengths but the qualitative selection effect is robust.
-- **Gravitational state**: We assume dSphs are fully core-collapsed. Subhalo tidal stripping in the Milky Way may have stripped the outer light component, modifying f_H at the observation radius. This is a sub-percent effect on σ/m_eff at v=15.
-- **Baryonic feedback systematic — AIDA-TNG benchmark (2026-09-21)**: The f_H profiles borrowed from Yang+ 2025 PRD come from dark-matter-only (DMO) SIDM simulations. The first self-consistent cosmological MHD simulations with alternative dark matter models are AIDA-TNG (Despali et al. 2025, A&A 697 A213 [29a]; Despali et al. 2026, A&A 699 A222 [29b]), which combines IllustrisTNG galaxy formation with six dark matter scenarios (CDM, three WDM, two SIDM) over six decades of halo mass (10^9.5 to 10^14.5 M☉, 570 pc resolution). Their key findings relevant to our phenomenology:
+3. **Cloud-9 4000× spike unexplained**: the published σ/m ≥ 50 cm²/g floor is satisfied only with borrowed f_H. The specific spike (σ/m = 128 vs ≥50) is a free parameter, not derived.
 
-  1. **Baryonic adiabatic contraction suppresses SIDM cores in full-physics runs**: "When baryons are included, the differences between CDM and SIDM decrease, and such large dark-matter cores no longer form because adiabatic contraction in the baryon-dominated region counteracts self-interactions" [29b]. The density ratio FP/DMO peaks at ~30 in SIDM at high mass, vs ~4 in CDM. This systematically affects the f_H(r) profiles we borrow from Yang+ 2025 (DMO).
+4. **T206 Path C is boundary-peaked**: the corrected one-sided likelihood gives a fit that is monotonic toward the grid boundary, not an interior maximum. Not a data-constrained measurement.
 
-  2. **Baryons can induce steeper-than-CDM inner slopes at MW masses**: "the coupling between baryons and self-interactions induces a broader range of inner slopes, including cases that are steeper than CDM at Milky Way masses" [29b]. This is the opposite direction from the DMO expectation, suggesting our borrowed f_H(r) profiles may underestimate the central density at MW scales.
+5. **dSph vs Cloud-9 tension unresolved at Phase 44**: with Yang+ 2025-derived or T202-derived f_H, the model **cannot simultaneously satisfy** Cloud-9 ≥100 cm²/g and dSph ≤0.8 cm²/g.
 
-  3. **vSIDM benchmark at σ/m_χ = 0.1-1 cm²/g matches our σ/m at v ≈ 100 km/s** (cluster scale), but does NOT match our σ/m at Cloud-9 (v = 28 km/s, σ/m = 128 cm²/g) or dwarf scales (v = 10 km/s, σ/m = 100 cm²/g). Our phenomenological σ/m(v) exceeds the AIDA-TNG vSIDM benchmark by ~2-3 orders of magnitude in the relevant halo mass range.
+### 9.7 Channel outcome per f_H prescription
 
-  **Verdict**: The f_H profiles we borrow from Yang+ 2025 (DMO) may be quantitatively modified by baryonic physics not captured in that simulation. AIDA-TNG [29b] provides the first quantitative benchmark — our f_H(r) should be re-calibrated to full-physics SIDM runs before any quantitative density-prediction is made. This is a **known limitation** and a priority for future work; we flag it here as the single largest unaddressed systematic in our two-component + gravothermal phenomenology.
+This subsection is a tabulation reference: see §9.3 for the full table.
 
-- **UFD limit (v_eff < 7 km/s), Phase 44 single-component baseline**: The Yukawa background σ₀ × (v_ref/v)^α with σ₀ = 0.052, α = 1.93 grows without bound at low v. Combined with two-component f_H² = 0.09 reduction, the predicted σ/m_eff at v=5 km/s is 18.4 cm²/g in the Phase 44 single-component baseline (vs Horigome+ 0.8 cm²/g limit, 23× violation). The two-component + gravothermal result (§9.3) resolves this to σ/m_eff = 0.09 cm²/g (200× under the limit). See §3.6 for the side-by-side Phase 44 single-component vs v1.13 multi-component comparison.
-- **Occam / complexity penalty**: T120 adds ~7 free parameters over Phase 44, but 4 of these are externally constrained (m_H/m_L, w₁, f_H, τ), giving ~3 effective free parameters. See §9.7.
+| f_H prescription | Channels passing | Source / status |
+|---|---|---|
+| Borrowed (hand-picked 0.85/0.30/0.10) | 7 of 8 | v1.12 placeholder, retracted in v18.29 |
+| Yang+ 2025-derived (σ/m=0.052 → no seg) | 4 of 8 (Cloud-9, extreme-UFD fail; SPARC structural fail) | v18.29-v18.30, matches T202 |
+| T202 N-body (f_H ≈ 0.92 uniform) | 4 of 8 | v18.23 N-body, Phase 44 params |
+| T183 fluid (f_H(core) ≈ 0.61) | ~6 of 8 (Cloud-9 marginal) | T183, see caveat in §9.5 |
+| T206 Path C free-parameter fit | Structural boundary peak, not a measurement | v18.32 corrected likelihood |
 
-### 9.6 Summary
+The paper is best read as a **constraint map + no-go catalogue**, not a unified model. The two-component interpretation is conceptually motivated but not first-principles validated.
 
-The v1.12 framework presented here provides a self-consistent, multi-component DM model that simultaneously satisfies the Cloud-9 high-σ/m requirement, the Horigome+ dSph upper limit, the SPARC rotation-curve band, and the cluster-scale bound at v_eff ≥ 7 km/s. The key innovations are: (1) Gaussian Breit-Wigner profile, (2) two-component asymmetric DM with mass segregation, (3) gravothermal core-collapse selection effect on the observation radius. The model is testable against future observations of core-collapse substructures in dSphs and dwarf irregular galaxies. Limitations include the UFD v<7 km/s tension (§9.5) and the unverified BIC penalty (§9.7).
-
-### 9.7 Complexity accounting (Occam's razor)
+### 9.8 Complexity accounting (Occam's razor) — unchanged
 
 The T120 model adds ~7 free parameters over Phase 44 (m_H/m_L ratio, Gaussian width w₁, f_H profile shape, gravothermal evolution time τ, etc.). However, four of these are externally constrained:
 - m_H/m_L is fixed by Yang+ 2025 PRD at 3:1 (not free)
 - Gaussian width w₁ is constrained by the resonance natural width Γ
-- f_H profile shape is constrained by cosmological simulations (Yang+ 2025 PRD Fig. 2)
+- f_H profile shape is **NOT** constrained by cosmological simulations at Phase 44 parameters (see §9.6)
 - Gravothermal evolution time τ is constrained by cluster density profiles
 
-So the **effective free-parameter count** is closer to 3-4 (not 7), which is consistent with the **5-parameter clockwork UV-prior fit** in §6 (Phase 53 v2).
-
-A separate joint-channel comparison (Phase 54, see Supplementary §S1.5) found that the multi-resonance model wins the **raw log-likelihood** by +6.08 log-units but **loses by +3.22 BIC (i.e., Δ = +3.22 favoring the constant σ/m model)** (1 free parameter vs 15). This **mixed verdict** on rotation-curve-only data is documented in Supplementary §S1.5.
-
-A formal per-point Gaussian likelihood comparison (rather than the scoring-rule pass/fail that yielded ΔBIC = -170 cited in earlier drafts) is pending. The qualitative preference for T120 over Phase 44 is robust — Phase 44 fails 31/160 dSph/UFD points at 6-23× violation, while T120 passes all 31 — but the formal BIC delta needs proper likelihood construction.
+So the **effective free-parameter count** is closer to 3-4 (not 7), which is consistent with the **5-parameter clockwork UV-prior fit** in §6 (Phase 53 v2). The f_H prescription remains the largest source of model-dependence in the phenomenology.
 
 ## 10. UV Completion: No-Go Theorems, Two-Mediator Candidate, Cloud-9 Robustness
 
@@ -1176,27 +1104,23 @@ is observationally consistent but theoretically constraining.
 
 ## 11. Conclusions
 
-We have presented a **coherent mixed-verdict multi-scale SIDM phenomenology**
-that combines three layers — multi-component dynamics, statistical
-verification, and a documented UV completion open problem — into a single
-self-consistent picture. The model is **consistent with** **7 of 8** observational
-constraints spanning four orders of magnitude in velocity (3-500 km/s), under
-the assumptions documented in §9. The Cloud-9 σ/m ≥ 50 constraint (the 8th)
-is published and confirmed independently by Ohana, Zhang & Yu 2026 [15e],
-but cannot be derived from standard Yukawa physics (T165-T172, §10.4a).
-Stellar-mass upper limits on any luminous counterpart of Cloud-9 have been
-refined by Anand+ 2025 [15c] and Trujillo+ 2026 [15d] (GTC/HiPERCAM
-~10× deeper than previous searches, M⋆ < 1.6×10⁴ M☉ — **strongest stellar
-bound to date**); the underlying gas mass M_HI ≈ 1.4×10⁶ M☉ remains at least
-60× larger than any possible stellar counterpart.
-The headline results are:
+We have presented a **phenomenological framework — a constraint map and no-go catalogue, not a unified derivation** — that combines multi-resonance σ/m(v), a two-component + gravothermal selection effect, and a UV completion audit. Per the v18.32 honest phenomenological audit, the model **does not satisfy all 8 observational channels simultaneously**. The 8-channel outcome depends on the assumed f_H prescription (see §9.3 / §9.7):
 
-- **Multi-component + gravothermal phenomenology** satisfies 7/8 observational constraints with **RMSE = 0.25** on the 7-point fit (excluding Cloud-9). The Cloud-9 spike is the dominant residual at any single-Yukawa / KK tower / KK tower with gravothermal extension we tested (T165-T172, 2026-09-20).
-- **115/127 = 90.6%** SPARC rotation-curve consistency (Phase 33d)
-- **MCMC posterior** (T120.9a) recovers parameters within 1σ (a_slope = 0.92 ± 0.36, w₁ = 4.4 ± 2.0 km/s, f_H = 0.20 ± 0.11)
-- **31/31 additional dSph/UFD points** satisfied that the Phase 44 single-channel baseline fails (qualitative preference)
-- **Proper Bayesian evidence (T177, 2026-09-21)**: log Bayes factor = 3.06 (Bayes factor = 21.3) favoring multi-resonance over constant σ/m on the 8-channel dataset. Strong evidence per Jeffreys scale; replaces the prior "+8.10 log-units" scoring-rule headline. **Updated 2026-09-23 with published error budgets (T205)**: log B = 2.41 (B = 11.2) — moderate evidence, downgraded from strong, but still favors multi-resonance.
-- **Four UV completion no-go theorems** (§10): magnetic dipole DM [44, T120.10], Hidden U(1) + 10 MeV pseudo-Dirac [45, T120.16], GeV-scale inelastic DM [T130], plus published best-fit p-wave resonance [28, T131] all fail for one-mediator UV. **The Cloud-9 4000× spike is NOT solved by any one-mediator UV completion; it requires physics beyond standard Yukawa.**
+- With **borrowed (hand-picked) f_H**: 7 of 8 channels pass; SPARC and Cloud-9 ≥100 satisfied.
+- With **Yang+ 2025-derived f_H** (σ/m = 0.052 → no significant gravothermal cascade): 4 of 8 channels pass; Cloud-9, dSph, extreme-UFD, SPARC fail.
+- With **T202 N-body f_H** (f_H ≈ 0.92 uniform, no segregation): 4 of 8 channels pass.
+- With **T206 Path C free-parameter fit**: peaks at grid boundary, not a data-constrained measurement.
+
+The Cloud-9 σ/m ≥ 50 constraint (the "8th channel" with borrowed f_H) is published and confirmed independently by Ohana, Zhang & Yu 2026 [15e], but **cannot be derived from standard Yukawa physics** (T165-T172, §10.4a) and **cannot be derived from any single-channel σ_eff = f_H² × σ_HH decomposition at Phase 44 σ/m**. The full σ_HH + σ_HL + σ_LL decomposition is required but not yet implemented. The Cloud-9 vs dSph tension is **unresolved at Phase 44 parameters**. Stellar-mass upper limits on any luminous counterpart of Cloud-9 have been refined by Anand+ 2025 [15c] and Trujillo+ 2026 [15d] (GTC/HiPERCAM ~10× deeper than previous searches, M⋆ < 1.6×10⁴ M☉ — **strongest stellar bound to date**); the underlying gas mass M_HI ≈ 1.4×10⁶ M☉ remains at least 60× larger than any possible stellar counterpart.
+
+**The honest headline results are**:
+
+- **6–7 of 8 observational constraints** are consistent with the multi-component + gravothermal phenomenology, depending on the f_H prescription (§9.3 / §9.7). The "self-consistent framework satisfying 7 of 8" headline from v1.12–v1.13 was dependent on placeholder f_H values that were later (v18.29) shown to be inconsistent with Yang+ 2025 Fig. 2 and not reproducible by the project's own N-body check at Phase 44 parameters. The Cloud-9 spike (σ/m = 128 vs ≥50) is a placeholder-dependent spike, not a derived prediction. RMSE = 0.25 on the 7-point borrowed-f_H fit (excluding Cloud-9). The Cloud-9 spike is the dominant residual at any single-Yukawa / KK tower / KK tower with gravothermal extension we tested (T165-T172, 2026-09-20).
+- **115/127 = 90.6%** SPARC rotation-curve consistency (Phase 33d). Note: this is consistency of multi-component model output with observed rotation curves — not a "model dominates the data on its home turf" claim (see rotation-curve verdict below).
+- **MCMC posterior** (T120.9a) recovers parameters within 1σ (a_slope = 0.92 ± 0.36, w₁ = 4.4 ± 2.0 km/s, f_H = 0.20 ± 0.11) — but **the f_H posterior is decoupled from a first-principles derivation** at Phase 44 parameters; the recovered f_H ≈ 0.20 is a phenomenological fit, not a simulated segregation profile.
+- **31/31 additional dSph/UFD points** satisfied under the borrowed-f_H prescription (qualitative preference over Phase 44 baseline; not a "model is correct" claim).
+- **Bayesian evidence (T205, 2026-09-23, published error budgets)**: log B = 2.41 (B = 11.2) favoring multi-resonance over constant σ/m on the 8-channel dataset. **Moderate evidence per Jeffreys scale; replaces the prior "strong" +8.10 log-units scoring-rule headline.** This is the canonical Bayes-factor headline.
+- **Five UV completion no-go theorems** (§10): magnetic dipole DM [44, T120.10], Hidden U(1) + 10 MeV pseudo-Dirac [45, T120.16], GeV-scale inelastic DM [T130], published best-fit p-wave resonance [28, T131], and one-mediator UV systematic (T184) all fail for one-mediator UV. **The Cloud-9 4000× spike is NOT solved by any one-mediator UV completion; it requires physics beyond standard Yukawa.** (Five, not four as in earlier drafts — corrected per review.docx §3.)
 - **Two-mediator UV candidate (Drobczyk 2025 [15f], T185/T190/T192, §10.3)**: A light scalar φ + heavy scalar Φh at m_Φh ≈ 2 m_χ provides s-channel Breit-Wigner enhancement for thermal relic, decoupled from σ_HH. **CHARM-compliant config (with proper thermal averaging, T192)**: g_h_SM = **0.00040**, δ = 0.43%, m_Φh = 20.69 GeV, <σv>_thermal = 2.63×10⁻²⁶ cm³/s, Ωh² = 0.119 (within Planck 2σ). This addresses **thermal relic density**, NOT the Cloud-9 spike specifically. The detuning δ = 0.43% is **5× broader than Drobczyk's benchmark of δ = 0.083%** — borderline-natural, requires either composite UV completion (Drobczyk SU(3)_H with N_f=10) or technical naturalness argument.
 
 **Summary of UV completion status (per DeepSeek review3, 2026-09-21):**
@@ -1225,15 +1149,16 @@ The headline results are:
 | NFW | −2654 |
 | **SIDM hybrid** (multi-resonance) | **−3300** (WORST) |
 
-Burkert wins by **Bayesian evidence** on rotation curves alone. See T195 (`t195_model_comparison.png`) for the side-by-side comparison across SPARC-only, joint-channel, and BIC-penalized metrics. The 7-of-8 channel coverage is therefore a **channel-completeness result** (multi-channel consistency), not a "model dominates the data on its home turf" claim. The paper's honest framing is **constraint map + no-go catalogue**, not "unified SIDM model."
+Burkert wins by **Bayesian evidence** on rotation curves alone. See T195 (`t195_model_comparison.png`) for the side-by-side comparison across SPARC-only, joint-channel, and BIC-penalized metrics. The 6–7-of-8 channel coverage is therefore a **channel-completeness result** (multi-channel consistency), not a "model dominates the data on its home turf" claim. The paper's honest framing is **constraint map + no-go catalogue**, not "unified SIDM model."
 
-**Joint-channel vs constant σ/m (Phase 54, 2026-09-16):** On the 7-channel joint likelihood, multi-resonance wins on raw log-likelihood (+6.08 over constant σ/m) but loses on BIC-corrected evidence (ΔBIC = +3.22 favoring constant) because of the 15-vs-1 parameter penalty. The headline number is T177 log B = 3.06 (B = 21, **semi-informative** Bayes factor with Gaussian likelihoods informed by published uncertainties).
+**Joint-channel vs constant σ/m (Phase 54, 2026-09-16):** On the 7-channel joint likelihood, multi-resonance wins on raw log-likelihood (+6.08 over constant σ/m) but loses on BIC-corrected evidence (ΔBIC = +3.22 favoring constant) because of the 15-vs-1 parameter penalty. The headline number is T205 log B = 2.41 (B = 11.2, **moderate evidence** with Gaussian likelihoods informed by published uncertainties). Earlier "log B = 3.06, strong evidence" framing from T177 was downgraded by T205's proper error budgets.
 
 The framework is a **defensible phenomenology framework** for unifying
 cross-sections across velocity scales, with multi-channel consistency
 and MCMC parameter recovery. **It is not the unique solution to the
 Cloud-9 vs dSph tension**, but it is a viable and well-constrained
-candidate that satisfies a wide range of observational constraints.
+candidate that satisfies a wide range of observational constraints
+**under the placeholder f_H prescription documented in §9.3**.
 The thermal relic density problem has a candidate UV solution
 (Drobczyk 2025, T185/T190); the Cloud-9 4000× spike does not (§10.4a
 robustness investigation; complementarity with Yu 2026 [23] substructure

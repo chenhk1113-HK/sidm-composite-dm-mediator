@@ -44,7 +44,7 @@ CHANNELS = [
 ]
 
 
-def log_likelihood(f_H_cf, f_H_cc):
+def log_likelihood(f_H_cf, f_H_cc, return_per_channel=False):
     """Log-likelihood for joint 8 channels, given f_H_core_forming and f_H_core_collapsed.
 
     One-sided Gaussian likelihoods (FIXED v18.32 — was backwards in v18.31):
@@ -68,9 +68,10 @@ def log_likelihood(f_H_cf, f_H_cc):
     Args:
         f_H_cf: heavy mass fraction in core-forming halos at observation radius
         f_H_cc: heavy mass fraction in core-collapsed halos at observation radius
+        return_per_channel: if True, returns dict of {channel_name: log_L_contribution}
 
     Returns:
-        log-likelihood (higher = better fit)
+        log-likelihood (higher = better fit) OR dict if return_per_channel=True
     """
     f_H_int = 0.5 * (f_H_cf + f_H_cc)
 
@@ -81,40 +82,45 @@ def log_likelihood(f_H_cf, f_H_cc):
     }
 
     log_L = 0.0
+    per_ch = {}
     for name, v, sigma_unc, obs, kind, halo, r_rvir in CHANNELS:
         f_H = halo_fH[halo]
         f_L = 1.0 - f_H
         sigma_HH = phase44_sigma_HH_at_v(v)
         sigma_eff = f_H**2 * sigma_HH
 
+        ch_log_L = 0.0
         if kind == 'ceiling':
             # σ_eff should be ≤ obs. Penalize only if σ_eff > obs.
             if sigma_eff > obs:
                 z = (sigma_eff - obs) / sigma_unc
-                log_L += -0.5 * z**2
-            # else: no penalty (σ_eff ≤ obs is acceptable)
+                ch_log_L = -0.5 * z**2
 
         elif kind == 'floor':
             # σ_eff should be ≥ obs. Penalize only if σ_eff < obs.
             if sigma_eff < obs:
                 z = (obs - sigma_eff) / sigma_unc
-                log_L += -0.5 * z**2
-            # else: no penalty (σ_eff ≥ obs is acceptable)
+                ch_log_L = -0.5 * z**2
 
         elif kind == 'gaussian':
             # σ_eff should match obs within σ_unc
             z = (sigma_eff - obs) / sigma_unc
-            log_L += -0.5 * z**2
+            ch_log_L = -0.5 * z**2
 
+        per_ch[name] = ch_log_L
+        log_L += ch_log_L
+
+    if return_per_channel:
+        return per_ch
     return log_L
 
 
 def main():
     # Coarse grid scan (f_H_cf, f_H_cc) ∈ [0.05, 1.00]²
-    # Extended lower bound because data prefer f_H_core_collapsed small
+    # Extended per review.docx §3: extend to f_H_cc ∈ [0.0, 1.0] for full boundary check
     grid_n = 50
     f_H_cf_grid = np.linspace(0.50, 1.00, grid_n)
-    f_H_cc_grid = np.linspace(0.05, 1.00, grid_n)
+    f_H_cc_grid = np.linspace(0.00, 1.00, grid_n)
 
     log_L_grid = np.zeros((grid_n, grid_n))
     for i, fcf in enumerate(f_H_cf_grid):
@@ -140,6 +146,21 @@ def main():
     print(f"Peak f_H_core_collapsed: {fcc_peak:.3f}")
     print(f"68% CI f_H_core_forming: [{fcf_68.min():.3f}, {fcf_68.max():.3f}]")
     print(f"68% CI f_H_core_collapsed: [{fcc_68.min():.3f}, {fcc_68.max():.3f}]")
+    print()
+
+    # Per-channel contribution at peak (per review.docx §3 — identify dominant channel)
+    per_ch = log_likelihood(fcf_peak, fcc_peak, return_per_channel=True)
+    sorted_ch = sorted(per_ch.items(), key=lambda x: x[1])  # most-negative first
+    print(f"=== Per-channel log L contribution at peak ===")
+    for name, ch_logL in sorted_ch:
+        # Compute σ_eff at peak for context
+        ch_data = next(c for c in CHANNELS if c[0] == name)
+        v = ch_data[1]; kind = ch_data[4]; halo = ch_data[5]; obs = ch_data[3]
+        f_H_at_peak = {'core_forming': fcf_peak, 'core_collapsed': fcc_peak,
+                       'intermediate': 0.5*(fcf_peak+fcc_peak)}[halo]
+        sigma_HH_at_v = phase44_sigma_HH_at_v(v)
+        sigma_eff_peak = f_H_at_peak**2 * sigma_HH_at_v
+        print(f"  {name:18s} ({kind:8s}): log L contrib = {ch_logL:+.3f},  σ_eff(peak) = {sigma_eff_peak:.3f},  obs = {obs:.3f}")
     print()
 
     # Compare to Yang+ 2025 Fig. 2

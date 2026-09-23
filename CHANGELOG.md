@@ -7,7 +7,24 @@
 
 
 
-## [HonestPhenomenology-v18.33] - 2026-09-23
+## [BodyReconciled-v18.34] - 2026-09-23
+
+**Body reconciled to abstract per review.docx §3 (full checklist).**
+
+Changes applied to PAPER_V1_DRAFT.md:
+1. **§1 Introduction**: "self-consistent framework satisfying 7 of 8" → "phenomenological framework describing 6–7 of 8 depending on f_H prescription". Headline contribution now honest about per-prescription outcome.
+2. **§3.4 parameter table**: f_H source row updated from "Yang+ 2025 Fig. 2, borrowed" → "placeholder/T206 boundary, not derived". Three values now cited explicitly (0.85/0.30 placeholder; 0.92 T202 N-body; 0.61 T183 fluid).
+3. **§3.6 dSph status table**: "v1.12 — RESOLVED" → "v18.33 — HONEST PHENOMENOLOGICAL". Per-prescription channel-by-channel table replaces single PASS column.
+4. **§9 entire rewrite**: "Self-Consistent Two-Component Model with Gravothermal Selection" → "Two-Component Interpretation: Phenomenological Status and Open Issues". §9.3 is now per-prescription; §9.4 shows mechanism contribution; §9.5 states why it works and why it doesn't; §9.6 lists known limitations; §9.7 channel outcome per prescription; §9.8 complexity accounting unchanged.
+5. **§9.5 T202 connection**: explicit statement that the T202 N-body null + borrowed f_H = structural inconsistency.
+6. **§11 Conclusions**: "7 of 8" → "6–7 of 8 depending on f_H"; "self-consistent picture" → "phenomenological framework"; "Four no-go theorems" → "Five no-go theorems" (added T184 dark Higgs systematic); Cloud-9 spike honest statement; T205 log B = 2.41 (moderate) replaces "log B = 3.06, strong"; "Cloud-9 vs dSph tension unresolved" stated.
+7. **§3.5a LZ section compressed**: from 60 lines to 18 lines. Detailed rate history, reduced-mass TS&W derivation, cross-detector matrix, WIMpy API signature audit moved to Supplementary §S6.
+8. **Abstract tightened**: phenomenological paragraph rewritten with explicit per-prescription breakdown.
+
+**T206 extended**: grid extended to f_H_cc ∈ [0.0, 1.0]; per-channel log L contribution at peak now reported. SPARC dominates penalty (log L = -0.408); Cloud-9 contributes -0.024; all other channels 0. Peak at f_H_cf=1.0, f_H_cc=0.041 — boundary sliver, structural SPARC failure.
+
+**Commits to follow**: see git log for v18.34 atomic commit.
+
 
 **Adopting Comment2.docx reviewer's epistemic framing.**
 

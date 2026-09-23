@@ -2,11 +2,26 @@
 
 > **For:** Anyone who has 60 seconds and wants to know what this project
 > is, what it claims, and what the current best numbers are.
-> Updated with each version-bump round. Last refresh: 2026-09-23 (v18.33).
+> Updated with each version-bump round. Last refresh: 2026-09-23 (v18.34).
 
 ---
 
-## Standing: v0.4-prelim+v18.33 (2026-09-23, honest phenomenological framing)
+## Standing: v0.4-prelim+v18.34 (2026-09-23, body reconciled to abstract)
+
+**v18.34 body reconciliation** (per review.docx §3 full checklist):
+
+The paper body is now consistent with the abstract. Specific changes:
+1. §1 introduction: "self-consistent framework satisfying 7 of 8" → "phenomenological framework describing 6-7 of 8 depending on f_H prescription".
+2. §3.4 parameter table: f_H source row clarified (placeholder/T206 boundary, not derived).
+3. §3.6 dSph status: "v1.12 RESOLVED" → "v18.33 HONEST PHENOMENOLOGICAL"; per-prescription table replaces single PASS column.
+4. §9 entire rewrite: "Self-Consistent Two-Component Model..." → "Two-Component Interpretation: Phenomenological Status and Open Issues". §9.3 per-prescription; §9.4 mechanism decomposition; §9.5 why it works and why it doesn't; §9.6 known limitations; §9.7 per-prescription summary.
+5. §11 conclusions: "self-consistent picture" → "phenomenological framework"; Four → Five no-go theorems (added T184 dark Higgs); T205 log B = 2.41 moderate (was T177 log B = 3.06 strong); Cloud-9 vs dSph tension unresolved stated explicitly.
+6. §3.5a LZ section compressed 60→18 lines; details moved to Supplementary §S6.
+7. Abstract phenomenological paragraph rewritten with explicit per-prescription breakdown.
+
+**T206 extended**: grid extended to f_H_cc ∈ [0.0, 1.0]; per-channel log L contribution at peak now reported. **SPARC dominates penalty (log L = -0.408)**; Cloud-9 contributes -0.024; all other channels 0. Peak at f_H_cf=1.0, f_H_cc=0.041 — boundary sliver, structural SPARC failure.
+
+The honest phenomenological framing now appears in **all** parts of the paper (abstract, §1, §3.4, §3.6, §9, §11), not just the abstract.
 
 **v18.33 honest phenomenological framing** (per Comment2.docx reviewer):
 
