@@ -117,6 +117,31 @@ Third-party audit (Rev18.1.docx, 2026-09-23) caught 9 issues from my partial upd
 
 Paper draft now has consistent numbers throughout (abstract, §3.5a, §10.5a, §11).
 
+
+## [Rev18.2Polish-v18.21] - 2026-09-23
+
+**Polish pass per Rev18.2.docx audit (third-party review).**
+
+Reviewer Rev18.2.docx (2026-09-23) caught 6 issues from v18.20:
+
+1. **HIGH**: T90 point-particle label was mislabeled — it's elastic SI at T90's
+   σ magnitude (6.5e-43 cm²), NOT the magnetic-moment operator. Fixed by relabeling
+   "T90 magnetic-moment point-particle" → "T90-equivalent σ_SI magnitude (treated
+   as elastic SI)" throughout the paper.
+2. **HIGH**: §11 "within reach" was too optimistic. Added CHARM-ceiling
+   quantification: max enhancement from g_h_SM=0.00040 to CHARM bound 0.005 is
+   ~156×, giving σ_SI ~3e-47 cm² and N ~ 0.55 events at LZ. At the CHARM ceiling
+   v18.11 IS consistent with the LZ observation (32% Poisson probability).
+3. **MEDIUM**: §10.5a DarkSide-20k referenced T199 instead of T201. Fixed.
+4. **MEDIUM**: "Five consecutive versions" was vague (listed 4 items). Made precise:
+   "Five consecutive versions of the rate calculation (T196/T197/T199/T200/T201-initial)"
+5. **LOW**: Cut historical bug parenthetical from §3.5a main text (move to
+   supplementary §S6).
+6. **LOW**: Merged redundant "Verdict:" and "Honest framing:" paragraphs in §3.5a
+   into a single consolidated bullet list with CHARM-ceiling check appended.
+
+Paper v18.21 is now near submittable state (per reviewer).
+
 ## [T200ProperRateFormula-v18.17] - 2026-09-23
 
 **CRITICAL: third-party audit caught 3 bugs in T199 (sent as T199.docx).**
