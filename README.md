@@ -5,7 +5,7 @@
 **SIDM constraint map + no-go catalogue (v18.34, 2026-09-23): a velocity-dependent SIDM architecture (multi-resonance σ/m(v) + two-component + gravothermal) achieves **partial observational-channel coverage** via a phenomenological σ/m(v) parameterization that describes 6–7 of 8 channels depending on the f_H prescription: with borrowed (hand-picked) f_H, 7 of 8 pass; with Yang+ 2025-derived or T202 N-body f_H, only 4 of 8 pass. The Cloud-9 vs dSph tension is unresolved at Phase 44 parameters. The σ_eff = f_H² × σ_HH(v) decomposition cannot match SPARC's σ/m ≈ 0.193 at v = 100 km/s regardless of f_H (max σ_eff = 0.069 < 0.193). A full heavy-light-light decomposition is required but not yet implemented. The Cloud-9 4000× spike is not derived from first principles. The model is **a constraint map, not a unified derivation**. 5 no-go theorems rule out one-mediator UV; two-mediator Drobczyk candidate viable at δ=0.43% (requires composite UV).**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.4--prelim%2Bv18.35-blue)](VERSION)
+[![Version](https://img.shields.io/badge/version-0.4--prelim%2Bv18.36-blue)](VERSION)
 [![WIP Paper](https://img.shields.io/badge/wip_paper-v18.30-blueviolet)](v0.3-prelim/docs/PAPER_V1_DRAFT.md)
 [![Tests](https://img.shields.io/badge/tests-31_passed-green)](v0.3-prelim/tests/)
 [![arXiv:2506.22997](https://img.shields.io/badge/cross--validated-arXiv%3A2506.22997-b31b1b)](https://arxiv.org/abs/2506.22997)
@@ -46,6 +46,8 @@
 **v18.28:** Fixed T204 (subhalo gravothermal collapse) a_slope from 1.93 → 1.0 (v1.13 canonical). Previous value gave t_core = 13 Myr < t_cross = 60 Myr = causality violation. New t_core = 560 Myr (physical, < Hubble).
 
 **v18.29:** Rule 28 scrutiny caught that `phase44_two_component.f_H_at_r` was a placeholder (hand-picked piecewise constants 0.95/0.30/0.10) labeled "Based on Yang+ 2025" but NOT actually derived from the paper. Yang+ Fig. 2 actually shows modest segregation (f_L ∈ 0.3-0.6), ~10× less extreme than the placeholder. New function is Yang+ 2025-derived and σ/m-parameterized.
+
+**v18.36:** Residual clean-up per review 5.docx. §10 intro "four" → "five" no-go theorems (lists all 5). §10 scope caveat "All four no-gos were tested" → "All **four specific UV-construction** no-gos ... were tested; the fifth (T184 systematic) is separate". §10.4c "7-of-8 channel satisfaction" → "6–7 of 8 depending on f_H prescription (§9.3, §9.7)". §11 final caveat "three independent" → "five independent". §9.6 σ_unc convention note added: T206 uses σ_unc=obs (self-normalized) vs T205 published error budgets; qualitative conclusion (SPARC-dominated, boundary peak) unchanged under either choice.
 
 **v18.35:** Copy-edit pass per review4.docx. Status line v1.14.1→v18.34, four→five no-go, 7/8→6-7 of 8. §10.1 self-consistent→constraint map. §10.3 Paper impact 7/8→6-7. §10.4b log B = 3.06→2.41 (T205 headline). §9.3 borrowed column relabelled "retracted v18.29 placeholder". Abstract five-no-go parenthetical now lists all 5. §9.6 T206 numbers refreshed (f_H_cc=0.041, CI=[0.0,0.061]) + per-channel contribution table (SPARC dominates -0.408). §3.6 v1.13 ✓ PASS column relabelled. END marker v1.14.1→v18.34.
 

@@ -356,6 +356,8 @@ The T206 Path C free-parameter fit (run on the joint 8-channel likelihood with c
 
 The fit is **dominated by a single residual (SPARC)**; the boundary peak reflects the structural failure of σ_eff = f_H² × σ_HH to reach SPARC, not a data-driven f_H measurement.
 
+**σ_unc convention (T206 vs T205):** The per-channel contributions above use T206's internal convention σ_unc = obs (a self-normalized choice per channel). T205, in contrast, uses the published error budgets from the actual observational papers (Cloud-9 floor ≈ 30 cm²/g; UFD/dSph ceiling ≈ 0.05 cm²/g; SPARC measurement ≈ 0.05 cm²/g; cluster ceiling ≈ 5×10⁻⁴ cm²/g). The qualitative conclusion is unchanged under either choice: **SPARC dominates the residual, the fit peaks at the f_H_cc lower boundary, and the boundary peak is structural rather than data-driven.** The two conventions are not directly comparable numerically (Cloud-9 σ_unc differs by ≈4×: 128 in T206 vs 30 in T205), but they are consistent in identifying SPARC as the irreducible residual.
+
 **Interpretation**: The fit peaks at the grid boundary because the σ_eff = f_H² × σ_HH decomposition **cannot reach SPARC's σ/m ≈ 0.193** (max σ_eff = 0.069). The optimizer pushes f_H_cc to minimize UFD ceiling penalties while accepting an irreducible SPARC residual. This is **not a phenomenological measurement of f_H**; it reflects the structural failure of the heavy-channel-only decomposition.
 
 **Known limitations**:
@@ -420,11 +422,11 @@ deferred items) are in `PAPER_V1_DRAFT_SUPPLEMENTARY.md §A`.
 In v1.13.5 we attempted to provide a Hidden U(1) + pseudo-Dirac UV completion
 following Zhang 2016 [45]. The 2026-09-19 referee report and our own
 follow-up investigation (T120.16) revealed that this specific realization
-does **not** work for our phenomenology. This section presents four
-independent no-go theorems for the simplest UV completion paths, plus an
+does **not** work for our phenomenology. This section presents **five**
+independent no-go theorems for the simplest UV completion paths (magnetic dipole DM [T120.10], Hidden U(1) + 10 MeV pseudo-Dirac [T120.16], GeV-scale inelastic DM [T130], Chu+ 2019 P1 p-wave resonance [T131], one-mediator UV systematic [T184]), plus an
 EFT target map for future work.
 
-**Scope of the no-go theorems (important caveat, added 2026-09-21 per Reviewer15 R2):** All four no-gos were tested against the **Phase 44 single-component baseline** (σ/m = 0.052 cm²/g at v=100 km/s, m_χ = 10.44 GeV, α = 1.0). The Phase 6+ T163 best fit (KK tower, α_D = 0.3, m_0 = 0.3 GeV, r = 1.5, n_modes = 2, RMSE = 1.408) is **not separately tested** here. The no-gos target specific UV constructions — magnetic dipole moments, hidden U(1) with pseudo-Dirac splitting, GeV-scale inelastic DM, Chu P1 p-wave resonance — all of which were proposed to address the Phase 44 phenomenology. **Whether a UV construction satisfies the Phase 6+ T163 best fit (or any updated phenomenology parameters) requires re-running the no-go tests with the updated cross-section target.** The qualitative verdicts (each of these UV constructions fails Cloud-9 for a different structural reason) are expected to remain valid because the failure mechanisms (LZ direct detection, kinematic forbiddance, unitarity violation, flat velocity dependence) are independent of the specific Phase 44 vs T163 cross-section values. But this should be re-verified before any future claim of "the model is UV-complete." For T163-specific UV tests, see `v0.3-prelim/docs/POST_PAPER_ROADMAP_2026_09_17.md` §3 roadmap item.
+**Scope of the no-go theorems (important caveat, added 2026-09-21 per Reviewer15 R2):** All **four specific UV-construction** no-gos (magnetic dipole, Hidden U(1) + pseudo-Dirac, GeV-scale inelastic DM, Chu+ 2019 P1 p-wave) were tested against the **Phase 44 single-component baseline** (σ/m = 0.052 cm²/g at v=100 km/s, m_χ = 10.44 GeV, α = 1.0). The Phase 6+ T163 best fit (KK tower, α_D = 0.3, m_0 = 0.3 GeV, r = 1.5, n_modes = 2, RMSE = 1.408) is **not separately tested** here. The no-gos target specific UV constructions — magnetic dipole moments, hidden U(1) with pseudo-Dirac splitting, GeV-scale inelastic DM, Chu P1 p-wave resonance — all of which were proposed to address the Phase 44 phenomenology. **Whether a UV construction satisfies the Phase 6+ T163 best fit (or any updated phenomenology parameters) requires re-running the no-go tests with the updated cross-section target.** The qualitative verdicts (each of these UV constructions fails Cloud-9 for a different structural reason) are expected to remain valid because the failure mechanisms (LZ direct detection, kinematic forbiddance, unitarity violation, flat velocity dependence) are independent of the specific Phase 44 vs T163 cross-section values. But this should be re-verified before any future claim of "the model is UV-complete." For T163-specific UV tests, see `v0.3-prelim/docs/POST_PAPER_ROADMAP_2026_09_17.md` §3 roadmap item.
 
 ### 10.1 UV completion: general framework and constraints
 
@@ -904,7 +906,7 @@ PAPER_V1_DRAFT_SUPPLEMENTARY.md §A.1 for full details.
 | A5 JVAS gravothermal (T180) | 100× enhancement vs 3125× needed — structural limitation |
 
 All six items investigated with concrete numerical results. None changes
-the paper's headline 7-of-8 channel satisfaction; each adds an honest caveat.
+the paper's headline **6–7 of 8 channel coverage depending on the f_H prescription (§9.3, §9.7)**; each adds an honest caveat.
 
 ### 10.5 EFT target map for future UV completions
 
@@ -1199,7 +1201,7 @@ acknowledged; future work should use real per-point Gaussian likelihoods.
 
 **Caveat (per T120.16, T130, T131):**
 Hidden U(1) + 10 MeV pseudo-Dirac UV completion (v1.13.5) is **FALSIFIED**.
-See §10 for three independent UV completion no-go theorems. The v1.14
+See §10 for the **five independent UV completion no-go theorems**. The v1.14
 phenomenology is presented without UV claim.
 
 ---

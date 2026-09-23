@@ -2,9 +2,21 @@
 
 > **For:** Anyone who has 60 seconds and wants to know what this project
 > is, what it claims, and what the current best numbers are.
-> Updated with each version-bump round. Last refresh: 2026-09-23 (v18.35).
+> Updated with each version-bump round. Last refresh: 2026-09-23 (v18.36).
 
 ---
+
+## Standing: v0.4-prelim+v18.36 (2026-09-23, residual clean-up per review 5.docx)
+
+**v18.36 residual clean-up** — 5 short edits per review 5.docx:
+
+1. §10 intro: "four independent no-go theorems" → "**five** independent no-go theorems" (lists all 5 explicitly).
+2. §10 scope caveat: "All four no-gos were tested" → "All **four specific UV-construction** no-gos (magnetic dipole, Hidden U(1) + pseudo-Dirac, GeV-scale inelastic DM, Chu+ 2019 P1 p-wave) were tested; the fifth (T184 systematic) is separate".
+3. §10.4c: "headline 7-of-8 channel satisfaction" → "headline **6–7 of 8 channel coverage depending on the f_H prescription (§9.3, §9.7)**".
+4. §11 final caveat: "three independent UV completion no-go theorems" → "**five** independent UV completion no-go theorems".
+5. §9.6 σ_unc convention note added: T206 uses σ_unc = obs (self-normalized) vs T205 published error budgets (Cloud-9 σ_unc ≈ 30 vs T206's 128). Qualitative conclusion (SPARC-dominated, boundary peak) unchanged under either choice.
+
+After this pass, every "four/three no-go" and "7 of 8" residual from earlier drafts is removed. Rule 29 (reviewer-checklist processing) followed end-to-end.
 
 ## Standing: v0.4-prelim+v18.35 (2026-09-23, copy-edit pass per review4.docx)
 

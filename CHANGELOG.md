@@ -7,6 +7,19 @@
 
 
 
+
+## [ResidualClean-v18.36] - 2026-09-23
+
+**review 5.docx copy-edit pass — 5 residuals cleaned up.**
+
+1. §10 intro: "four independent no-go theorems" → "**five** independent no-go theorems" (lists all five). ✓
+2. §10 scope caveat: "All four no-gos were tested against the Phase 44 single-component baseline" → "All **four specific UV-construction** no-gos (magnetic dipole, Hidden U(1) + pseudo-Dirac, GeV-scale inelastic DM, Chu+ 2019 P1 p-wave) were tested; the fifth (T184 systematic) is separate". ✓
+3. §10.4c: "headline 7-of-8 channel satisfaction" → "headline **6–7 of 8 channel coverage depending on the f_H prescription (§9.3, §9.7)**". ✓
+4. §11 final caveat: "three independent UV completion no-go theorems" → "**five** independent UV completion no-go theorems". ✓
+5. §9.6 σ_unc convention note added: T206 uses σ_unc = obs (self-normalized) vs T205 published error budgets; qualitative conclusion (SPARC-dominated, boundary peak) unchanged under either choice. ✓
+
+Rule 29 (reviewer-checklist processing) followed end-to-end.
+
 ## [CopyEdit-v18.35] - 2026-09-23
 
 **review4.docx copy-edit pass — 11 residual inconsistencies cleaned up.**
