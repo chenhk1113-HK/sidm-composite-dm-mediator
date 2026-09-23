@@ -5,7 +5,7 @@
 **SIDM constraint map + no-go catalogue (v18.34, 2026-09-23): a velocity-dependent SIDM architecture (multi-resonance σ/m(v) + two-component + gravothermal) achieves **partial observational-channel coverage** via a phenomenological σ/m(v) parameterization that describes 6–7 of 8 channels depending on the f_H prescription: with borrowed (hand-picked) f_H, 7 of 8 pass; with Yang+ 2025-derived or T202 N-body f_H, only 4 of 8 pass. The Cloud-9 vs dSph tension is unresolved at Phase 44 parameters. The σ_eff = f_H² × σ_HH(v) decomposition cannot match SPARC's σ/m ≈ 0.193 at v = 100 km/s regardless of f_H (max σ_eff = 0.069 < 0.193). A full heavy-light-light decomposition is required but not yet implemented. The Cloud-9 4000× spike is not derived from first principles. The model is **a constraint map, not a unified derivation**. 5 no-go theorems rule out one-mediator UV; two-mediator Drobczyk candidate viable at δ=0.43% (requires composite UV).**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.4--prelim%2Bv18.36-blue)](VERSION)
+[![Version](https://img.shields.io/badge/version-0.4--prelim%2Bv18.37-blue)](VERSION)
 [![WIP Paper](https://img.shields.io/badge/wip_paper-v18.30-blueviolet)](v0.3-prelim/docs/PAPER_V1_DRAFT.md)
 [![Tests](https://img.shields.io/badge/tests-31_passed-green)](v0.3-prelim/tests/)
 [![arXiv:2506.22997](https://img.shields.io/badge/cross--validated-arXiv%3A2506.22997-b31b1b)](https://arxiv.org/abs/2506.22997)
@@ -46,6 +46,8 @@
 **v18.28:** Fixed T204 (subhalo gravothermal collapse) a_slope from 1.93 → 1.0 (v1.13 canonical). Previous value gave t_core = 13 Myr < t_cross = 60 Myr = causality violation. New t_core = 560 Myr (physical, < Hubble).
 
 **v18.29:** Rule 28 scrutiny caught that `phase44_two_component.f_H_at_r` was a placeholder (hand-picked piecewise constants 0.95/0.30/0.10) labeled "Based on Yang+ 2025" but NOT actually derived from the paper. Yang+ Fig. 2 actually shows modest segregation (f_L ∈ 0.3-0.6), ~10× less extreme than the placeholder. New function is Yang+ 2025-derived and σ/m-parameterized.
+
+**v18.37:** Stellar streams and stellar halo substructure consolidated as new §3.3b "Stellar streams and stellar halo substructure (Yu 2026 PRL 136, 141001 [23])". Dataset table: GD-1 stellar stream perturber (Bonaca+ 2019, 2020; Price-Whelan & Bonaca 2018; Malhan+ 2019; Erkal+ 2019; M_sub ≈ 10⁶–10⁷ M☉); JVAS B1938+666 strong-lensing perturber (Vegetti+ 2010, M=(1.13±0.04)×10⁶ M☉); Fornax 6 cluster (Pace+ 2021, Peñarrubia+ 2024; M★ ≈ 7.2×10³ M☉, σ ≈ 5.6 km/s, M/L ≈ 15-258). T204 numerical check: σ/m(v=1.69 km/s)=3.07 cm²/g, t_core=560 Myr (25× faster than Hubble), t_core/t_cross=9.3. Verdict: consistent with framework as complementary substructure predictions, not bulk σ/m channels.
 
 **v18.36:** Residual clean-up per review 5.docx. §10 intro "four" → "five" no-go theorems (lists all 5). §10 scope caveat "All four no-gos were tested" → "All **four specific UV-construction** no-gos ... were tested; the fifth (T184 systematic) is separate". §10.4c "7-of-8 channel satisfaction" → "6–7 of 8 depending on f_H prescription (§9.3, §9.7)". §11 final caveat "three independent" → "five independent". §9.6 σ_unc convention note added: T206 uses σ_unc=obs (self-normalized) vs T205 published error budgets; qualitative conclusion (SPARC-dominated, boundary peak) unchanged under either choice.
 

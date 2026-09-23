@@ -2,9 +2,19 @@
 
 > **For:** Anyone who has 60 seconds and wants to know what this project
 > is, what it claims, and what the current best numbers are.
-> Updated with each version-bump round. Last refresh: 2026-09-23 (v18.36).
+> Updated with each version-bump round. Last refresh: 2026-09-23 (v18.37).
 
 ---
+
+## Standing: v0.4-prelim+v18.37 (2026-09-23, stellar streams and stellar halo substructure consolidated as §3.3b)
+
+**v18.37 stellar streams and stellar halo substructure** — new §3.3b "Stellar streams and stellar halo substructure (Yu 2026 PRL 136, 141001 [23])" consolidates the Yu+ 2026 "three birds with one stone" dataset into one observation section:
+
+- **GD-1 stellar stream perturber** (Bonaca+ 2019, 2020; Price-Whelan & Bonaca 2018; Malhan+ 2019; Erkal+ 2019): M_sub ≈ 10⁶–10⁷ M☉ at ~10–20 kpc from GC, off-stream spur + gap structure
+- **JVAS B1938+666 strong-lensing perturber** (already in §3.3): (1.13±0.04)×10⁶ M☉ within 80 pc at z = 0.881
+- **Fornax 6 cluster** (Pace+ 2021, Peñarrubia+ 2024): M★ ≈ 7.2×10³ M☉, r_h ≈ 11 pc, σ ≈ 5.6 km/s, anomalous M/L ≈ 15-258
+
+Mechanism: Yu 2026 [23] N-body demonstrates all three explained by single ~10⁶ M☉ core-collapsed SIDM halo. T204 numerical check: σ/m(v=1.69 km/s) = 3.07 cm²/g, t_core = 560 Myr (25× faster than Hubble), t_core/t_cross = 9.3 (no causality violation). Verdict: consistent with framework as **complementary substructure predictions**, not bulk σ/m channels. Honest caveat (v18.32 audit): contingent on gravothermal cascade being operative at ~10⁶ M☉, which Yu+ 2026 confirms via N-body but our T202 N-body check cannot independently validate at Phase 44.
 
 ## Standing: v0.4-prelim+v18.36 (2026-09-23, residual clean-up per review 5.docx)
 

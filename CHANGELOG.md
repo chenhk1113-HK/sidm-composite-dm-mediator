@@ -8,6 +8,14 @@
 
 
 
+## [StellarStreamsHalo-v18.37] - 2026-09-23
+
+**New §3.3b "Stellar streams and stellar halo substructure" — dedicated subsection consolidating Yu+ 2026 [23] "three birds with one stone" dataset.**
+
+Per user request: include stellar streams and stellar halo observation constraints as a dedicated observational channel section.
+
+Added §3.3b with explicit dataset table (GD-1 stellar stream, JVAS B1938+666, Fornax 6 cluster), mechanism description, T204 numerical check (σ/m(v=1.69)=3.07 cm²/g, t_core=560 Myr), honest caveat. Existing §3.3 (JVAS) and §10.4c (JVAS A5) unchanged.
+
 ## [ResidualClean-v18.36] - 2026-09-23
 
 **review 5.docx copy-edit pass — 5 residuals cleaned up.**
