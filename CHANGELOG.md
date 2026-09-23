@@ -4,6 +4,47 @@
 
 
 
+
+## [T200ProperRateFormula-v18.17] - 2026-09-23
+
+**CRITICAL: third-party audit caught 3 bugs in T199 (sent as T199.docx).**
+
+T199 had three remaining bugs after the v_min fix:
+1. **Dimensional inconsistency in rate formula (Critical):** T199 used M_target_kg
+   directly in the rate formula, but the proper formula needs N_target = M_target × N_A / A_mol
+   (number of target nuclei). Missing factor of N_A/A ~ 4.6e24 for xenon, off by 24 orders
+   of magnitude.
+2. **TS&W 2001 inelastic v_min used m_chi instead of reduced mass mu (High):**
+   v_min = (1/sqrt(2 m_N E_R)) * (m_N E_R / mu + delta) * c
+   T199 gave v_min = 75087 km/s; correct is v_min = 2418 km/s (31x smaller).
+3. **Crude eta approximation (Medium):** T199 used exp(-((v_min+v_lab)/v_0)^2) / v_0
+   instead of the standard Lewin-Smith 1996 truncated-MB integral.
+
+**T200_properly_corrected_lz.py fixes them all:**
+- Added N_target = M_target × N_A / A_mol with proper kg-to-g conversion
+- TS&W 2001 with REDUCED MASS mu (not m_chi)
+- Standard truncated-MB eta function
+
+**CORRECTED VERDICT (T200):**
+| Model | T199 | T200 | T200 verdict |
+|---|---|---|---|
+| v0.7 composite-DM | 10^-116 (115 ord deficit) | 1.54e-68 (68 ord deficit) | Fails |
+| v18.11 Drobczyk | 10^-53 (53 ord deficit) | 1.18e-03 (3 ord deficit) | Under-predicts but consistent with LZ null |
+| Di Mauro 2026 inelastic | 0 events (v_min=75087) | 0 events (v_min=2418) | Inaccessible (3.1x SHM threshold) |
+| T90 magnetic-moment | 5.10e-42 (41 ord deficit) | 7.07e+06 (OVER-PREDICT 7 orders) | EXCLUDED by over-prediction |
+
+**MAJOR CHANGE TO PAPER NARRATIVE:**
+- v18.11 IS CONSISTENT with the LZ null (3 orders short of 1-event threshold)
+  — earlier "53 order deficit" was wrong; v18.11 reaches LZ sensitivity but is silent.
+- T90 is EXCLUDED by over-prediction (a new failure mode), not just cross-detector inconsistency.
+  Earlier T90 "40 order deficit" framing was wrong because T197 also missed N_target.
+- v0.7 still fails but by a smaller margin (68 vs 115 orders).
+- Di Mauro v_min is 2418 km/s (correct TS&W with mu), not 75087 km/s (T199's m_chi formula).
+
+**Paper §3.5a + abstract updated to reflect T200 verdict.**
+This is the THIRD consecutive version with kinematic v_min / rate formula issues.
+Future scripts should validate against Lewin-Smith 1996 / standard WIMP rate review literature.
+
 ## [EditorialFixes-v18.16] - 2026-09-22
 
 **Six editorial fixes per DeepSeek review (deepseeklz.docx).**
