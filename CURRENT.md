@@ -2,9 +2,32 @@
 
 > **For:** Anyone who has 60 seconds and wants to know what this project
 > is, what it claims, and what the current best numbers are.
-> Updated with each version-bump round. Last refresh: 2026-09-23 (v18.32).
+> Updated with each version-bump round. Last refresh: 2026-09-23 (v18.33).
 
 ---
+
+## Standing: v0.4-prelim+v18.33 (2026-09-23, honest phenomenological framing)
+
+**v18.33 honest phenomenological framing** (per Comment2.docx reviewer):
+
+The paper distinguishes three epistemic statuses for f_H:
+- (a) Derive from external simulation (Yang+ 2025) → f_H is an input
+- (b) Fit to the same 8 channels → f_H is a phenomenological parameter
+- (c) Hand-pick from placeholder → retracted
+
+**Abstract statement (v18.33):** "We have a phenomenological σ/m(v) parameterization
+that can describe 6–7 of 8 channels when σ_eff ≈ f_H² × σ_HH(v) (heavy-channel-only
+regime). The two-component + gravothermal interpretation requires f_H values that
+are not derived from first principles and not reproduced by our own N-body check at
+Phase 44 parameters (T202 finds f_H ≈ 0.92 uniform, T183 finds f_H ≈ 0.61). The
+σ_eff = f_H² × σ_HH(v) decomposition cannot match SPARC's σ/m ≈ 0.193 at v = 100
+km/s regardless of f_H (max σ_eff = 0.069), so a full σ_eff = f_H² σ_HH + 2 f_H f_L
+σ_HL + f_L² σ_LL decomposition with separate heavy-light cross-sections is required
+but not currently implemented. The Cloud-9 4000× spike is not explained by any UV
+completion we tested. The model is a constraint map, not a unified derivation."
+
+This is stronger science than the original "7/8 self-consistent" claim because
+it tells the reader what the model actually establishes.
 
 ## Standing: v0.4-prelim+v18.32 (2026-09-23, retraction of v18.31 T206 Path D)
 

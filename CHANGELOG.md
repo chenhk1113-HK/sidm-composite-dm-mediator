@@ -7,6 +7,77 @@
 
 
 
+## [HonestPhenomenology-v18.33] - 2026-09-23
+
+**Adopting Comment2.docx reviewer's epistemic framing.**
+
+Three epistemic statuses for f_H are now distinguished in the paper:
+
+(a) **Derive from external simulation** (Yang+ 2025). Then f_H is an input, not a fit.
+    Claim allowed: "Using the Yang+ profile, the model passes X channels."
+    Claim NOT allowed: "The data prefer extreme segregation."
+    Caveat: Yang+ uses σ₀/m = 147 cm²/g, not Phase 44's σ/m = 0.052.
+
+(b) **Fit f_H to the same 8 channels** (T206 Path C). Then f_H is a phenomenological
+    parameter. Claim allowed: "The data are consistent with f_H in this range."
+    Claim NOT allowed: "The model is self-consistent" or "the data support
+    two-component segregation" (this double-uses the data: once to fit, once to claim).
+
+(c) **Hand-pick f_H from a placeholder** (v18.22 and earlier). Not phenomenology;
+    unstated assumption. Retracted in v18.29.
+
+**Honest phenomenological statement (v18.33 abstract):**
+
+> "We have a phenomenological σ/m(v) parameterization that can describe 6–7 of 8
+> channels when σ_eff ≈ f_H² × σ_HH(v) (heavy-channel-only regime). The
+> two-component + gravothermal interpretation requires f_H values that are
+> not derived from first principles and not reproduced by our own N-body check
+> at Phase 44 parameters (T202 finds f_H ≈ 0.92 uniform, T183 finds f_H ≈ 0.61).
+> The σ_eff = f_H² × σ_HH(v) decomposition cannot match SPARC's σ/m ≈ 0.193 at
+> v = 100 km/s regardless of f_H (max σ_eff = 0.069), so a full σ_eff =
+> f_H² σ_HH + 2 f_H f_L σ_HL + f_L² σ_LL decomposition with separate
+> heavy-light cross-sections is required but not currently implemented.
+> The Cloud-9 4000× spike is not explained by any UV completion we tested.
+> The model is a constraint map, not a unified derivation."
+
+**Why this is the correct framing:**
+
+The reviewer correctly notes that the v18.31 T206 result violated TWO requirements
+of valid phenomenology:
+1. The likelihood was inverted for one-sided constraints (FIXED in v18.32)
+2. The model was structurally incapable of reaching SPARC (max σ_eff = 0.069 vs 0.193 needed)
+
+Even with (1) fixed, (2) means the model can't be fit to the data with σ_eff =
+f_H² × σ_HH(v). A full heavy-light-light decomposition is required.
+
+**What the v18.33 framing says:**
+
+- 6-7 channels phenomenologically describable (descriptive)
+- Mechanism (two-component + gravothermal) NOT operative at Phase 44
+- SPARC match requires σ_HL or σ_LL contributions (not yet implemented)
+- Cloud-9 4000× spike unexplained by any UV completion
+- The paper is honest about being a constraint map, not a unified model
+
+**Files updated:**
+- v0.3-prelim/docs/PAPER_V1_DRAFT.md: abstract now states honest phenomenological framing
+- README.md: top blurb updated
+- CURRENT.md: standing section updated
+- VERSION bumped to v18.33
+
+**Five-bug summary (now resolved):**
+
+1. v18.26: σ_required formula algebraically wrong (~3500× off)
+2. v18.27: Balberg+ 2002 normalization wrong by 10⁵
+3. v18.28: α_slope inconsistent with v1.13 canonical (causality violation)
+4. v18.31: T206 likelihood inverted for one-sided constraints
+5. v18.32: σ_eff = f_H² × σ_HH cannot match SPARC structurally
+
+Each fix revealed a deeper assumption that had been silently doing work. The
+honest conclusion ("6-7 channels describable, not derivable") is stronger science
+than the original "7/8 self-consistent" claim because it tells the reader what
+the model actually establishes.
+
+
 ## [T206Retraction-v18.32] - 2026-09-23
 
 **RETRACTION of v18.31 T206 Path D finding.**
