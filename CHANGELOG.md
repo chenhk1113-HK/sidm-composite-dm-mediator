@@ -87,6 +87,36 @@ deficit). This dramatically changes the paper's narrative:
 
 This is the v18.18 paper corrected for the WIMpy API signature bug.
 
+
+## [T201Consistency-v18.20] - 2026-09-23
+
+**Consistency pass for v18.19 paper draft per Rev18.1.docx audit.**
+
+Third-party audit (Rev18.1.docx, 2026-09-23) caught 9 issues from my partial update:
+
+1. Abstract T90 "under-predicts by 16 orders" → "OVER-predicts by ~5 orders (point-particle)"
+2. §3.5a (b) body: "5.4×10⁻²⁸, 27-order deficit" → "3.46×10⁻³, ~2.5-order deficit"
+3. §3.5a "Comparison:" bullet: 91 → 70 orders (v0.7), 27 → ~2.5 orders (v18.11),
+   16 → OVER ~5 orders (T90)
+4. §3.5a "Honest framing (T201):" paragraph: 27 → ~2.5 orders, 16 → ~5 orders OVER
+5. §3.5a last "Honest framing:" paragraph had stale numbers — already deleted
+6. §10.5a "T201 analysis analysis (T199_corrected_lz_analysis.py)" — broken grammar
+   and stale file ref. Fixed to "T201 analysis (T201_canonical_lz_audit.py)".
+7. Abstract "within reach" framing — rephrased: "3.5×10⁻³ is a factor of ~300 below
+   the observed single event; fully consistent with LZ observation being background."
+8. Five-version narrative — updated to acknowledge T196 was numerically closest
+9. Dual "Honest framing" paragraphs in §3.5a — merged
+
+**Final canonical numbers (T201-corrected, v18.20):**
+- v0.7 composite-DM: 70 ord deficit
+- v18.11 Drobczyk: ~2.5 ord deficit (N ≈ 3.46×10⁻³, factor ~300 below observed)
+- Di Mauro 2026 inelastic: 0 events (kinematically inaccessible, v_min = 2416 km/s)
+- T90 magnetic-moment (point-particle): OVER ~5 ord (N ≈ 1.16×10⁵)
+- T90 magnetic-moment (LZ-tuned WIMpy T198): ~1 event at LZ by construction;
+  over-predicts XENONnT/PandaX-4T by 100-500×
+
+Paper draft now has consistent numbers throughout (abstract, §3.5a, §10.5a, §11).
+
 ## [T200ProperRateFormula-v18.17] - 2026-09-23
 
 **CRITICAL: third-party audit caught 3 bugs in T199 (sent as T199.docx).**
