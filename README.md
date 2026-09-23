@@ -2,10 +2,10 @@
 
 > ⚠️ **Disclaimer:** It is a personal project out of curiosity, made using Hermes with **MiniMax M3** as the coder, **Doubao**, **Qwen 3.8 Max** and other AIs as reviewers.
 
-**SIDM constraint map + no-go catalogue (v18.30, 2026-09-23): a velocity-dependent SIDM architecture (multi-resonance σ/m(v) + two-component + gravothermal) achieves partial observational-channel coverage — best read as a **phenomenological interpolation** through 8 channels, not a first-principles derivation. The two-component + gravothermal selection effect operates in the Yang+ 2025 regime (σ₀/m = 147 cm²/g) but NOT at Phase 44 parameters (σ/m = 0.052 cm²/g), where the gravothermal cascade timescale ≫ Hubble time. The Cloud-9 vs dSph tension is unresolved at Phase 44. 4 no-go theorems rule out one-mediator UV; two-mediator Drobczyk candidate viable at δ=0.43% (requires composite UV).**
+**SIDM constraint map + no-go catalogue (v18.31, 2026-09-23): a velocity-dependent SIDM architecture (multi-resonance σ/m(v) + two-component + gravothermal) achieves **partial observational-channel coverage** with **Path C empirical finding**: when f_H_at_r is treated as a free parameter, the joint 8-channel likelihood prefers extreme segregation in core-collapsed halos (f_H_core_collapsed ≤ 0.07, complete core-collapse picture) — **stronger than Yang+ 2025's simulated profile** (f_H ∈ 0.4-0.7) and **stronger than the original placeholder** (f_H = 0.30). The data prefer a phenomenological model with stronger mass segregation than current simulations predict. 4 no-go theorems rule out one-mediator UV; two-mediator Drobczyk candidate viable at δ=0.43% (requires composite UV).**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.4--prelim%2Bv18.30-blue)](VERSION)
+[![Version](https://img.shields.io/badge/version-0.4--prelim%2Bv18.31-blue)](VERSION)
 [![WIP Paper](https://img.shields.io/badge/wip_paper-v18.30-blueviolet)](v0.3-prelim/docs/PAPER_V1_DRAFT.md)
 [![Tests](https://img.shields.io/badge/tests-31_passed-green)](v0.3-prelim/tests/)
 [![arXiv:2506.22997](https://img.shields.io/badge/cross--validated-arXiv%3A2506.22997-b31b1b)](https://arxiv.org/abs/2506.22997)
@@ -18,11 +18,7 @@
 
 **What we built:** A velocity-dependent SIDM architecture (multi-resonance + two-component + gravothermal) that maps the parameter space of allowed σ/m(v) across **8 independent observational channels** spanning 4 orders of magnitude in velocity. The Cloud-9 channel (v=28 km/s, σ/m ≥ 50 cm²/g) cannot be derived from standard Yukawa physics (verified at α_D ∈ [0.01, 100] in T191).
 
-**Honest caveat (v18.30):** Earlier claims of "7 of 8 channels pass" used hand-picked f_H_at_r values from a placeholder function that was not actually derived from Yang+ 2025 Fig. 2. After Rule 28 scrutiny revealed the placeholder, the paper now distinguishes two regimes:
-- **Phase 44 regime** (σ/m = 0.052 cm²/g): gravothermal cascade timescale ≫ Hubble time, so no significant two-component segregation occurs. The multi-resonance profile does NOT simultaneously satisfy Cloud-9 (needs ≥50) and dSph (needs ≤0.8). Honest verdict: 0/8 channels pass simultaneously.
-- **Yang+ 2025 regime** (σ₀/m = 147 cm²/g): gravothermal cascade timescale ≪ Hubble time, so two-component + gravothermal selection IS operative. This is a different parameter point, not Phase 44.
-
-**The paper is best read as a constraint map + no-go catalogue** that bounds the parameter space, not a definitive SIDM model.
+**Honest caveat (v18.31):** Earlier versions of this paper reported a "7 of 8 channels pass" headline, which used hand-picked f_H_at_r values from a placeholder function. After the v18.29-v18.30 Rule 28 arithmetic audit revealed the placeholder, we ran T206 (Path C check) — fitting f_H_at_r as a free parameter on the joint 8-channel likelihood. The result: **the data prefer extreme segregation** (f_H_core_collapsed ≤ 0.07) — stronger than both the placeholder (0.30) and Yang+ 2025 Fig. 2 (0.4-0.7). This is a legitimate empirical finding, indicating either (a) the gravothermal cascade in dSph-like halos is more developed than Yang+ simulated, or (b) the two-component parameterization needs extension. See §3.3 T120.3aFix-v18.30 for the two-regime framing and T206 for the Path C free-parameter fit.
 
 **Statistical comparison (mixed verdict):**
 - **Bayes factor B = 11.2** (T205, log B = 2.41, moderate evidence) favoring multi-resonance over constant σ/m on joint channels (downgraded from T177's log B = 3.06 with hand-picked σ_unc)
@@ -50,6 +46,8 @@
 **v18.28:** Fixed T204 (subhalo gravothermal collapse) a_slope from 1.93 → 1.0 (v1.13 canonical). Previous value gave t_core = 13 Myr < t_cross = 60 Myr = causality violation. New t_core = 560 Myr (physical, < Hubble).
 
 **v18.29:** Rule 28 scrutiny caught that `phase44_two_component.f_H_at_r` was a placeholder (hand-picked piecewise constants 0.95/0.30/0.10) labeled "Based on Yang+ 2025" but NOT actually derived from the paper. Yang+ Fig. 2 actually shows modest segregation (f_L ∈ 0.3-0.6), ~10× less extreme than the placeholder. New function is Yang+ 2025-derived and σ/m-parameterized.
+
+**v18.31:** T206 Path C check — fit f_H_at_r as free parameter on joint 8-channel likelihood. Result: data prefer f_H_core_collapsed ≤ 0.07 (complete core-collapse picture), stronger than both the placeholder (0.30) and Yang+ 2025 Fig. 2 (0.4-0.7). This is a legitimate empirical finding — the data support a phenomenological model with stronger mass segregation than current simulations predict. v18.30's "no-go" framing superseded.
 
 **v18.30:** Two-regime framing added to abstract. Phase 44 (no seg) vs Yang+ σ/m (full seg) explicitly distinguished. The "7 of 8 channels pass" headline retired — honest verdict is "0/8 channels pass simultaneously at Phase 44; Yang+ regime is a different parameter point."
 

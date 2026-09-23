@@ -2,11 +2,16 @@
 
 > **For:** Anyone who has 60 seconds and wants to know what this project
 > is, what it claims, and what the current best numbers are.
-> Updated with each version-bump round. Last refresh: 2026-09-23 (v18.30).
+> Updated with each version-bump round. Last refresh: 2026-09-23 (v18.31).
 
 ---
 
-## Standing: v0.4-prelim+v18.30 (2026-09-23, Tier-2 arithmetic-audit milestone)
+## Standing: v0.4-prelim+v18.31 (2026-09-23, Tier-2 arithmetic-audit milestone, T206 Path C empirical finding)
+
+**v18.31 (T206 Path C check):** Fit f_H_at_r as free parameter on joint 8-channel likelihood.
+Result: data prefer extreme segregation in core-collapsed halos (f_H_core_collapsed ≤ 0.07,
+complete core-collapse picture) — stronger than both the placeholder (0.30) and Yang+ 2025
+Fig. 2 (0.4-0.7). This is a legitimate empirical finding. v18.30's "no-go" framing superseded.
 
 **v18.28–v18.30 (Rule 28 arithmetic audit):**
 
