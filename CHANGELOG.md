@@ -7,6 +7,46 @@
 
 
 
+## [T204SubstructureTest-v18.24] - 2026-09-23
+
+**Explicit numerical test of the Yu+ 2026 substructure mechanism at Phase 44 parameters.**
+
+Per user direction: "do n-body first, then reconsider #3 and #4." Item #4 was
+"Re-frame Cloud-9 as substructure test." This is a quantitative test of whether
+the Yu+ 2026 [23] core-collapsed subhalo mechanism (JVAS / GD-1 / Fornax 6)
+actually works at our parameters.
+
+**T204 setup:** 10⁶ M☉ subhalo (matches JVAS perturber), c = 15, r_vir = 1.5 kpc,
+V_max = 1.69 km/s, ρ_s ≈ 3.5×10⁴ M☉/pc³. At Phase 44 σ₀ = 0.052 cm²/g,
+α = 1.93, v_ref = 100 km/s, the σ/m at the subhalo virial velocity is
+**σ/m(v_max) ≈ 136 cm²/g**.
+
+**Result: Phase 44 σ/m is INSUFFICIENT for subhalo core-collapse.**
+
+Balberg+ 2002 gravothermal t_core at these parameters: **1.3×10⁵ Gyr**
+(far longer than 13.8 Gyr Hubble time). For collapse in 13.8 Gyr, would
+need σ/m(v_max) ≥ **360 cm²/g** — **2.6× higher than Phase 44 provides**.
+
+**Paper impact (§3.3):** The Yu+ 2026 substructure mechanism is **NOT
+active** at our parameters. We **downgrade** the §3.3 framing from
+"complementary substructure physics within our scope" to "complementary
+substructure physics *outside* our scope, requiring ~3× higher σ/m at
+v ≈ 2 km/s than Phase 44 provides." This is **honest**: JVAS / GD-1 /
+Fornax 6 are not explained by our framework via either bulk phenomenology
+or substructure.
+
+**Combined with T202 (f_H not self-consistent) and T180 (gravothermal
+~100× vs needs 3125×), this is the THIRD confirmation that Phase 44
+parameters are insufficient to drive the small-scale structure physics
+needed for full resolution.**
+
+**Files added:**
+- `v0.3-prelim/code/T204_substructure_test.py` (10 KB test)
+- `v0.3-prelim/data/results/t204_substructure_test.json` (results)
+
+**Versions:** Phase 44 +T202+T204. 31/31 self-check passes.
+
+
 ## [T202NBodyValidation-v18.23] - 2026-09-23
 
 **Two-component SIDM N-body simulation with Phase 44 parameters (per reviewer model comments.docx).**

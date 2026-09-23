@@ -1,0 +1,29 @@
+{
+  "T204_summary": "Substructure test (Cloud-9 + JVAS + GD-1 + Fornax 6) per Yu+ 2026 [23]",
+  "date": "2026-09-23",
+  "parameters": {
+    "SIGMA_0": 0.052,
+    "A_SLOPE": 1.93,
+    "V_REF_KM_S": 100.0,
+    "SUBHALO_MASS": 1000000.0,
+    "SUBHALO_C": 15.0,
+    "SUBHALO_R_S_PC": 100.0
+  },
+  "derived": {
+    "r_vir_pc": 1500.0,
+    "v_max_kms": 1.6933024931574787,
+    "rho_s_Msun_per_pc3": 0.0433643728401431,
+    "r_s_pc": 100.0
+  },
+  "sigma_m_at_v": {
+    "inner core (r=80 pc)": 519.4378089715128,
+    "virial velocity": 136.31563354550218,
+    "CM velocity (subhalo)": 62.32891061714144,
+    "stream velocity (GD-1)": 0.011353442626858433
+  },
+  "t_core_Gyr": 126879.20156717418,
+  "collapsed_in_hubble_time": false,
+  "M_80pc_NFW": 78111.87476686199,
+  "M_80pc_observed": 1130000.0,
+  "verdict": "Phase 44 sigma/m is INSUFFICIENT to drive core-collapse. Need sigma/m(v_max) >= 359.36 cm^2/g to collapse in Hubble time. Phase 44 gives 136.3156 cm^2/g, a factor of 3x too low. Yu+ 2026 substructure mechanism is NOT active at our parameters."
+}
