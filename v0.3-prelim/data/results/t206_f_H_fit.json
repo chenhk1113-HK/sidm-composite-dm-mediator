@@ -1,0 +1,68 @@
+{
+  "grid_n": 50,
+  "peak_f_H_core_forming": 1.0,
+  "peak_f_H_core_collapsed": 0.06938775510204082,
+  "peak_log_L": -1.0710978186651179,
+  "ci68_f_H_core_forming": [
+    0.5,
+    1.0
+  ],
+  "ci68_f_H_core_collapsed": [
+    0.06938775510204082,
+    0.06938775510204082
+  ],
+  "yang_f_H_range_at_r02": [
+    0.4,
+    0.7
+  ],
+  "channels": [
+    {
+      "name": "UFD v=3",
+      "v": 3,
+      "halo": "core_collapsed",
+      "r_rvir": 0.2
+    },
+    {
+      "name": "UFD v=5",
+      "v": 5,
+      "halo": "core_collapsed",
+      "r_rvir": 0.2
+    },
+    {
+      "name": "UFD v=7",
+      "v": 7,
+      "halo": "core_collapsed",
+      "r_rvir": 0.2
+    },
+    {
+      "name": "UFD v=10",
+      "v": 10,
+      "halo": "core_collapsed",
+      "r_rvir": 0.2
+    },
+    {
+      "name": "dSph v=15",
+      "v": 15,
+      "halo": "core_collapsed",
+      "r_rvir": 0.2
+    },
+    {
+      "name": "Cloud-9 v=28",
+      "v": 28,
+      "halo": "core_forming",
+      "r_rvir": 0.2
+    },
+    {
+      "name": "SPARC v=100",
+      "v": 100,
+      "halo": "intermediate",
+      "r_rvir": 0.2
+    },
+    {
+      "name": "Cluster v=500",
+      "v": 500,
+      "halo": "core_collapsed",
+      "r_rvir": 0.5
+    }
+  ]
+}
