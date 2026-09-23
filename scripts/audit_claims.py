@@ -84,7 +84,7 @@ CLAIM_MAP = [
     },
     {
         "label": "Phase 54: BIC Δ = +3.22 favoring constant σ/m",
-        "regex": r"\+3\.22\s+BIC",
+        "regex": r"\+3\.22\s+(BIC|favoring)",
         "ref_json": "phase54_joint_comparison.json",
         "ref_key": ("headline", "bic_delta_3channel"),
         "expected": 3.22,
