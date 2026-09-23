@@ -2,12 +2,12 @@
 
 > ⚠️ **Disclaimer:** It is a personal project out of curiosity, made using Hermes with **MiniMax M3** as the coder, **Doubao**, **Qwen 3.8 Max** and other AIs as reviewers.
 
-**SIDM constraint map + no-go catalogue (v1.14.9 / v18.9, 2026-09-21): a velocity-dependent SIDM architecture (multi-resonance + clockwork-derived node positions + two-component + gravothermal) achieves RMSE=0.25 on 7 channels with semi-informative Bayes factor B=21 (log B = 3.06) favoring multi-resonance over constant σ/m; 4 no-go theorems rule out one-mediator UV; Burkert profile wins on rotation curves alone (Phase 42 dynesty); two-mediator Drobczyk candidate viable at δ=0.43% (5× broader than Drobczyk's 0.083%, requires composite UV or fine-tuning).**
+**SIDM constraint map + no-go catalogue (v18.30, 2026-09-23): a velocity-dependent SIDM architecture (multi-resonance σ/m(v) + two-component + gravothermal) achieves partial observational-channel coverage — best read as a **phenomenological interpolation** through 8 channels, not a first-principles derivation. The two-component + gravothermal selection effect operates in the Yang+ 2025 regime (σ₀/m = 147 cm²/g) but NOT at Phase 44 parameters (σ/m = 0.052 cm²/g), where the gravothermal cascade timescale ≫ Hubble time. The Cloud-9 vs dSph tension is unresolved at Phase 44. 4 no-go theorems rule out one-mediator UV; two-mediator Drobczyk candidate viable at δ=0.43% (requires composite UV).**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.4--prelim%2BT88E%2BT90--v18.1%2BT184--T190%2BYu26%2BAIDA%2BT192%2BEditorial--v18.2%2BT193--v18.3%2BReview5--v18.4%2BReview6--v18.5%2BGrokReview--v18.7%2BT194--v18.8%2BT195--v18.9-blue)](VERSION)
-[![WIP Paper](https://img.shields.io/badge/wip_paper-v1.14.9-blueviolet)](v0.3-prelim/docs/PAPER_V1_DRAFT.md)
-[![Tests](https://img.shields.io/badge/tests-50_passed-green)](v0.3-prelim/tests/)
+[![Version](https://img.shields.io/badge/version-0.4--prelim%2Bv18.30-blue)](VERSION)
+[![WIP Paper](https://img.shields.io/badge/wip_paper-v18.30-blueviolet)](v0.3-prelim/docs/PAPER_V1_DRAFT.md)
+[![Tests](https://img.shields.io/badge/tests-31_passed-green)](v0.3-prelim/tests/)
 [![arXiv:2506.22997](https://img.shields.io/badge/cross--validated-arXiv%3A2506.22997-b31b1b)](https://arxiv.org/abs/2506.22997)
 [![arXiv:2608.04362](https://img.shields.io/badge/cross--validated-arXiv%3A2608.04362-b31b1b)](https://arxiv.org/abs/2608.04362)
 [![arXiv:2510.11006](https://img.shields.io/badge/cross--validated-arXiv%3A2510.11006-b31b1b)](https://arxiv.org/abs/2510.11006)
@@ -16,12 +16,16 @@
 
 ## 🎯 Layman summary (read this first)
 
-**What we built:** A velocity-dependent SIDM architecture (multi-resonance + two-component + gravothermal) that achieves **RMSE = 0.25 on 7 of 8 independent observational channels** spanning 4 orders of magnitude in velocity. The 8th channel (Cloud-9's 4000× σ/m spike at v=28 km/s) is the published σ/m ≥ 50 cm²/g lower bound (Ohana, Zhang & Yu 2026, arXiv:2608.04362), confirmed independently — but **cannot be derived from standard Yukawa physics** (verified at α_D ∈ [0.01, 100] in T191).
+**What we built:** A velocity-dependent SIDM architecture (multi-resonance + two-component + gravothermal) that maps the parameter space of allowed σ/m(v) across **8 independent observational channels** spanning 4 orders of magnitude in velocity. The Cloud-9 channel (v=28 km/s, σ/m ≥ 50 cm²/g) cannot be derived from standard Yukawa physics (verified at α_D ∈ [0.01, 100] in T191).
 
-**Honest caveat:** On rotation curves alone (SPARC 120 galaxies, Phase 42 dynesty), this architecture is **outperformed by Burkert** (coreless isothermal profile, log Z = -963) and PISO profiles on Bayesian evidence. The 7-of-8 channel pass rate is a *channel-coverage* result, not a "model dominates the data" claim. Treat this work as a **constraint map + no-go catalogue** rather than a definitive SIDM model.
+**Honest caveat (v18.30):** Earlier claims of "7 of 8 channels pass" used hand-picked f_H_at_r values from a placeholder function that was not actually derived from Yang+ 2025 Fig. 2. After Rule 28 scrutiny revealed the placeholder, the paper now distinguishes two regimes:
+- **Phase 44 regime** (σ/m = 0.052 cm²/g): gravothermal cascade timescale ≫ Hubble time, so no significant two-component segregation occurs. The multi-resonance profile does NOT simultaneously satisfy Cloud-9 (needs ≥50) and dSph (needs ≤0.8). Honest verdict: 0/8 channels pass simultaneously.
+- **Yang+ 2025 regime** (σ₀/m = 147 cm²/g): gravothermal cascade timescale ≪ Hubble time, so two-component + gravothermal selection IS operative. This is a different parameter point, not Phase 44.
+
+**The paper is best read as a constraint map + no-go catalogue** that bounds the parameter space, not a definitive SIDM model.
 
 **Statistical comparison (mixed verdict):**
-- **Bayes factor B = 21.3** (T177, log B = 3.06, semi-informative) favoring multi-resonance over constant σ/m on joint channels
+- **Bayes factor B = 11.2** (T205, log B = 2.41, moderate evidence) favoring multi-resonance over constant σ/m on joint channels (downgraded from T177's log B = 3.06 with hand-picked σ_unc)
 - **Phase 42 (SPARC only)**: Burkert wins Bayesian evidence (log Z = -963) over our SIDM hybrid (log Z = -3300) — by a wide margin
 - **Phase 54 (joint likelihood)**: Multi-resonance wins raw log L (+6.08 over constant σ/m) but loses on BIC-corrected evidence (ΔBIC = +3.22 favoring constant) because of the 15 vs 1 parameter penalty
 - **The honest framing**: Constraint map + no-go catalogue, not a unified SIDM model
@@ -30,16 +34,24 @@
 
 **How we did it:** Combined 4 layers of physics into one coherent model:
 1. **Two-component DM** (heavy + light, mass ratio 3:1)
-2. **Gravothermal core-collapse** (heavy sinks out of dense cores)
+2. **Gravothermal core-collapse** (heavy sinks out of dense cores — operative only at Yang+ σ/m, NOT at Phase 44)
 3. **Resonance + Gaussian broadening** (peaks in scattering at specific velocities)
 4. **Multi-resonance SIDM** with 4 Breit-Wigner peaks (cloud-9, SPARC, subhalo, cluster scales)
 
-**Verification:** 116 automated T120 tests pass. MCMC independently recovered our hand-tuned parameters.
+**Verification:** 31 self-check tests pass; phase44 tests (28/28) verify Yang+ 2025-derived behavior.
 
 **Statistical comparison (mixed verdict):**
 - On the **7-channel joint likelihood** (Phase 54), multi-resonance wins on raw log L (+6.08 over constant σ/m) but loses on BIC-corrected evidence (ΔBIC = +3.22 favoring constant) because of the 15 vs 1 parameter penalty.
 - On **SPARC rotation curves alone** (Phase 42, 120 galaxies), Burkert profile wins on dynesty Bayesian evidence; multi-resonance has lowest evidence of 5 tested models.
-- **The headline number for reviewers is T177 log B ≈ 3 (semi-informative Bayes factor)** favoring multi-resonance on the joint channels.
+- **The headline number for reviewers is T205 log B ≈ 2.4 (moderate Bayes factor)** favoring multi-resonance on the joint channels.
+
+**v18.28-v18.30 (2026-09-23) — arithmetic audit (Rule 28):**
+
+**v18.28:** Fixed T204 (subhalo gravothermal collapse) a_slope from 1.93 → 1.0 (v1.13 canonical). Previous value gave t_core = 13 Myr < t_cross = 60 Myr = causality violation. New t_core = 560 Myr (physical, < Hubble).
+
+**v18.29:** Rule 28 scrutiny caught that `phase44_two_component.f_H_at_r` was a placeholder (hand-picked piecewise constants 0.95/0.30/0.10) labeled "Based on Yang+ 2025" but NOT actually derived from the paper. Yang+ Fig. 2 actually shows modest segregation (f_L ∈ 0.3-0.6), ~10× less extreme than the placeholder. New function is Yang+ 2025-derived and σ/m-parameterized.
+
+**v18.30:** Two-regime framing added to abstract. Phase 44 (no seg) vs Yang+ σ/m (full seg) explicitly distinguished. The "7 of 8 channels pass" headline retired — honest verdict is "0/8 channels pass simultaneously at Phase 44; Yang+ regime is a different parameter point."
 
 **What's NEW in v18.1+UV (T165-T185, 2026-09-20 to 2026-09-21):** Cloud-9 robustness + UV completion.
 

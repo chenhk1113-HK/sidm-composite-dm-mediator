@@ -2,11 +2,40 @@
 
 > **For:** Anyone who has 60 seconds and wants to know what this project
 > is, what it claims, and what the current best numbers are.
-> Updated with each version-bump round. Last refresh: 2026-09-04 (T88.E).
+> Updated with each version-bump round. Last refresh: 2026-09-23 (v18.30).
 
 ---
 
-## Standing: v0.4-prelim+T88E (Tier-1 milestone)
+## Standing: v0.4-prelim+v18.30 (2026-09-23, Tier-2 arithmetic-audit milestone)
+
+**v18.28–v18.30 (Rule 28 arithmetic audit):**
+
+Three arithmetic errors caught by applying the three-check sanity rule
+(known-system sanity / unit consistency / physics consistency):
+
+1. **v18.28 — T204 causality violation:** t_core was 13 Myr (raw Balberg+
+   2002 with v1.13-canonical a_slope=1.0), which is < t_cross = 60 Myr.
+   Collapse cannot proceed faster than orbital crossing time. Fixed by
+   enforcing t_core ≥ 3 × t_cross and reconciling a_slope with v1.13
+   canonical. New t_core = 560 Myr (physical, < Hubble).
+
+2. **v18.29 — phase44 f_H_at_r placeholder:** the function returned
+   hand-picked piecewise constants (0.95/0.30/0.10) labeled "Based on
+   Yang+ 2025" but NOT actually derived from Yang+ Fig. 2. Yang+ Fig. 2
+   actually shows modest segregation (f_L ∈ 0.3-0.6), ~10× less extreme
+   than the placeholder. New function is Yang+ 2025-derived and σ/m-
+   parameterized.
+
+3. **v18.30 — Two-regime framing:** Phase 44 (σ/m = 0.052) vs Yang+ 2025
+   (σ₀/m = 147) explicitly distinguished. At Phase 44, gravothermal
+   cascade timescale ≫ Hubble time → no significant two-component
+   segregation. "7 of 8 channels pass" headline retired; honest verdict
+   is "0/8 channels pass simultaneously at Phase 44; Yang+ regime is a
+   different parameter point."
+
+**Standing version:** v0.4-prelim+T88E+T90-Paper-v18.1+...+T120.3aFix-v18.29+TwoRegime-v18.30
+
+## Standing: v0.4-prelim+T88E (Tier-1 milestone) (historical)
 
 The project is a joint-fit framework for self-interacting dark matter
 (SIDM), grounded in published astrophysical data. The standing version
