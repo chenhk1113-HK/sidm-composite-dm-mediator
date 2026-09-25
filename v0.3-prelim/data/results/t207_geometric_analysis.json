@@ -1,0 +1,35 @@
+{
+  "analysis": "C \u2014 Geometric degeneracy in sigma_HL",
+  "mechanism_A_physical": {
+    "description": "On-peak resonance (v_HL \u2248 100)",
+    "params": {
+      "sigma_0_HL": 0.0001,
+      "sigma_peak_HL": 0.346,
+      "v_HL": 98.2,
+      "a_slope": 1.0
+    },
+    "decomposition_at_v100": {
+      "Yukawa_bg": 0.0001,
+      "peak_contribution": 0.34253999999999996,
+      "sigma_HL_total": 0.346
+    },
+    "source": "borrowed prescription emcee median",
+    "computed_sigma_HL_100": 0.34431558640010185
+  },
+  "mechanism_B_geometric": {
+    "description": "Off-peak + high background (v_HL = 178)",
+    "params": {
+      "sigma_0_HL": 0.094,
+      "sigma_peak_HL": 1.89,
+      "v_HL": 178.18,
+      "a_slope": 1.21
+    },
+    "decomposition_at_v100": {
+      "Yukawa_bg": 0.094,
+      "peak_contribution": 0.17576999999999998,
+      "sigma_HL_total": 0.26976999999999995
+    },
+    "source": "free fit DE best-fit",
+    "computed_sigma_HL_100": 0.26933476211559126
+  }
+}

@@ -1,0 +1,517 @@
+{
+  "metadata": {
+    "generated": "2026-09-23 (v5 consolidated, post-ReT207)",
+    "description": "Consolidated summary across all T207 phases. Supersedes v3/v4/D bundle summaries.",
+    "causality_fix": "dSph ceiling 0.8 cm\u00b2/g (Horigome+ 2025 w=10); Cloud-9 NFW inputs from paper \u00a73.2 (M_200=5e9, c=12, r_s=2.93 kpc)"
+  },
+  "t207_de_prescription_modes": {
+    "borrowed": {
+      "log_L_peak": -6.0427897759681395,
+      "best_params": {
+        "sigma_0": 0.001,
+        "sigma_peak_HH_1": 104.8083457524701,
+        "sigma_0_HL": 1e-05,
+        "sigma_peak_HL": 0.3432782307837696,
+        "v_HL": 100.61300126193342,
+        "sigma_0_LL": 1e-05,
+        "a_slope": 0.8443693737207815,
+        "f_H_cf": 0.85,
+        "f_H_cc": 0.3
+      },
+      "per_channel_log_L": {
+        "UFD v=3": 0.0,
+        "UFD v=5": -0.00047059199304399374,
+        "UFD v=7": -0.21226275827426283,
+        "UFD v=10": -0.8475593325482604,
+        "dSph v=15": 0.0,
+        "Cloud-9 v=28": -4.461650194275223,
+        "SPARC v=100": -0.09190591069850636,
+        "Cluster v=500": -0.4289409881788428
+      }
+    },
+    "yang": {
+      "log_L_peak": -9.091415468063039,
+      "best_params": {
+        "sigma_0": 0.0010000023115075724,
+        "sigma_peak_HH_1": 34.114680878821325,
+        "sigma_0_HL": 1.0000026769186649e-05,
+        "sigma_peak_HL": 0.3418309599989508,
+        "v_HL": 99.44002167891655,
+        "sigma_0_LL": 1.0000811767881468e-05,
+        "a_slope": 1.108316617839932,
+        "f_H_cf": 0.85,
+        "f_H_cc": 0.45
+      },
+      "per_channel_log_L": {
+        "UFD v=3": 0.0,
+        "UFD v=5": 0.0,
+        "UFD v=7": -0.03897810441781929,
+        "UFD v=10": -0.35767362007413844,
+        "dSph v=15": 0.0,
+        "Cloud-9 v=28": -7.410805043258955,
+        "SPARC v=100": -0.24264943377509,
+        "Cluster v=500": -1.0413092665370363
+      }
+    },
+    "t202": {
+      "log_L_peak": -11.074708972720378,
+      "best_params": {
+        "sigma_0": 0.001,
+        "sigma_peak_HH_1": 14.134553879636496,
+        "sigma_0_HL": 1e-05,
+        "sigma_peak_HL": 0.37622171120335585,
+        "v_HL": 98.97649637462487,
+        "sigma_0_LL": 1e-05,
+        "a_slope": 1.2973509051903676,
+        "f_H_cf": 0.92,
+        "f_H_cc": 0.61
+      },
+      "per_channel_log_L": {
+        "UFD v=3": 0.0,
+        "UFD v=5": 0.0,
+        "UFD v=7": -0.010849799563318573,
+        "UFD v=10": -0.1862471204743897,
+        "dSph v=15": 0.0,
+        "Cloud-9 v=28": -8.258842631717485,
+        "SPARC v=100": -0.6068216487406486,
+        "Cluster v=500": -2.0119477722245365
+      }
+    }
+  },
+  "t207_de_free_fit": {
+    "log_L_peak": -6.628784915763357e-16,
+    "best_params": {
+      "sigma_0": 0.3482569413317962,
+      "sigma_peak_HH_1": 580.6755490517571,
+      "sigma_0_HL": 0.06539979609741861,
+      "sigma_peak_HL": 0.8177970166491924,
+      "v_HL": 149.04964112468966,
+      "sigma_0_LL": 0.00023987269020298675,
+      "a_slope": 1.4466001432785676,
+      "f_H_cf": 0.8815701738565896,
+      "f_H_cc": 0.004114332360390603
+    },
+    "per_channel_log_L": {
+      "UFD v=3": 0.0,
+      "UFD v=5": 0.0,
+      "UFD v=7": 0.0,
+      "UFD v=10": 0.0,
+      "dSph v=15": 0.0,
+      "Cloud-9 v=28": 0.0,
+      "SPARC v=100": -6.628784915763357e-16,
+      "Cluster v=500": 0.0
+    }
+  },
+  "t207b_emcee_short_5k_free_fit": {
+    "log_L_peak_max": -6.7693325176858e-07,
+    "converged": true,
+    "converged_50tau": null,
+    "posterior_medians": {
+      "sigma_0": 0.2524297195527053,
+      "sigma_peak_HH_1": 672.7109475865861,
+      "sigma_0_HL": 0.08827798724433356,
+      "sigma_peak_HL": 0.6321778064483636,
+      "v_HL": 145.85095900168005,
+      "sigma_0_LL": 0.0009757960989881816,
+      "a_slope": 0.9697108278256972,
+      "f_H_cf": 0.7881828387694728,
+      "f_H_cc": 0.003901989918419644
+    },
+    "posterior_stds": {
+      "sigma_0": 0.1395594972519374,
+      "sigma_peak_HH_1": 212.77781143309483,
+      "sigma_0_HL": 0.11446662559791614,
+      "sigma_peak_HL": 0.5460015441547645,
+      "v_HL": 39.916969513531456,
+      "sigma_0_LL": 0.001091428065833132,
+      "a_slope": 0.2548785700508028,
+      "f_H_cf": 0.13963571659770982,
+      "f_H_cc": 0.009122938076340157
+    }
+  },
+  "t207b_emcee_short_5k_prescription_modes": {
+    "borrowed": {
+      "log_L_peak_max": -6.186909987416984,
+      "converged": false,
+      "converged_50tau": null,
+      "posterior_medians": {
+        "sigma_0": 0.004905856638331273,
+        "sigma_peak_HH_1": 84.42341147673235,
+        "sigma_0_HL": 0.0001477677119046954,
+        "sigma_peak_HL": 0.3457511812355376,
+        "v_HL": 98.19965005337053,
+        "sigma_0_LL": 0.0005645306703349097,
+        "a_slope": 0.9218363573229666,
+        "f_H_cf": 0.7185037545868338,
+        "f_H_cc": 0.44785443981012274
+      },
+      "posterior_stds": {
+        "sigma_0": 0.006258206431816497,
+        "sigma_peak_HH_1": 33.30059074102419,
+        "sigma_0_HL": 0.0006517904935075316,
+        "sigma_peak_HL": 0.14922387691707156,
+        "v_HL": 17.791302724381005,
+        "sigma_0_LL": 0.0011040124880751323,
+        "a_slope": 0.267109877217557,
+        "f_H_cf": 0.14463252044338254,
+        "f_H_cc": 0.2938433774393367
+      }
+    },
+    "yang": {
+      "log_L_peak_max": -9.157876352408092,
+      "converged": false,
+      "converged_50tau": null,
+      "posterior_medians": {
+        "sigma_0": 0.002933954431102808,
+        "sigma_peak_HH_1": 28.829476640653247,
+        "sigma_0_HL": 0.00017609528307350187,
+        "sigma_peak_HL": 0.32493455114417463,
+        "v_HL": 99.36818074065974,
+        "sigma_0_LL": 0.00019123291678015334,
+        "a_slope": 0.9553785078971376,
+        "f_H_cf": 0.727389168132021,
+        "f_H_cc": 0.5114874294241114
+      },
+      "posterior_stds": {
+        "sigma_0": 0.0030229007677293972,
+        "sigma_peak_HH_1": 13.39198938912383,
+        "sigma_0_HL": 0.0006717473222447899,
+        "sigma_peak_HL": 0.13684248660689535,
+        "v_HL": 15.911988435313878,
+        "sigma_0_LL": 0.0010371490370558077,
+        "a_slope": 0.2685142703043234,
+        "f_H_cf": 0.14535832967836698,
+        "f_H_cc": 0.29994303020998525
+      }
+    },
+    "t202": {
+      "log_L_peak_max": -11.229736685829094,
+      "converged": false,
+      "converged_50tau": null,
+      "posterior_medians": {
+        "sigma_0": 0.0020776739810580576,
+        "sigma_peak_HH_1": 17.02223906157775,
+        "sigma_0_HL": 0.00018225246966827307,
+        "sigma_peak_HL": 0.35002500081528465,
+        "v_HL": 99.89228794871946,
+        "sigma_0_LL": 0.00021669681967364255,
+        "a_slope": 0.9645574898278604,
+        "f_H_cf": 0.6976421788156922,
+        "f_H_cc": 0.522488859684562
+      },
+      "posterior_stds": {
+        "sigma_0": 0.0013989208384912338,
+        "sigma_peak_HH_1": 6.374229772322668,
+        "sigma_0_HL": 0.0008604194242929233,
+        "sigma_peak_HL": 0.14926260519215775,
+        "v_HL": 19.694061195469015,
+        "sigma_0_LL": 0.0025264513437556453,
+        "a_slope": 0.23059012711795634,
+        "f_H_cf": 0.14407596951229346,
+        "f_H_cc": 0.2962222649638227
+      }
+    }
+  },
+  "t207b_emcee_long_15k_free_fit": {
+    "log_L_peak_max": null,
+    "converged": null,
+    "converged_50tau": false,
+    "posterior_medians": {
+      "sigma_0": 0.26792576418693126,
+      "sigma_peak_HH_1": 663.8615307302289,
+      "sigma_0_HL": 0.0708211563826274,
+      "sigma_peak_HL": 0.7747523080634846,
+      "v_HL": 141.82861639377137,
+      "sigma_0_LL": 0.0010237204458722893,
+      "a_slope": 0.9958903485464067,
+      "f_H_cf": 0.7957664888159736,
+      "f_H_cc": 0.005528149317134438
+    },
+    "posterior_stds": {
+      "sigma_0": 0.1386596098805733,
+      "sigma_peak_HH_1": 212.5468725345622,
+      "sigma_0_HL": 0.10516436564433951,
+      "sigma_peak_HL": 0.5538455451311397,
+      "v_HL": 46.71266486772525,
+      "sigma_0_LL": 0.001100518584788222,
+      "a_slope": 0.24092871677042493,
+      "f_H_cf": 0.13608125108424318,
+      "f_H_cc": 0.013452407816327977
+    }
+  },
+  "t207b_emcee_long_15k_prescription_modes": {
+    "borrowed": {
+      "log_L_peak_max": null,
+      "converged": null,
+      "converged_50tau": false,
+      "posterior_medians": {
+        "sigma_0": 0.005915705736447423,
+        "sigma_peak_HH_1": 78.92763026733206,
+        "sigma_0_HL": 0.0010244426188870896,
+        "sigma_peak_HL": 0.33188505352558106,
+        "v_HL": 99.3705940747226,
+        "sigma_0_LL": 0.0009076830618776398,
+        "a_slope": 0.9006874879654766,
+        "f_H_cf": 0.7490538367805096,
+        "f_H_cc": 0.4693925170528282
+      },
+      "posterior_stds": {
+        "sigma_0": 0.006435520595630336,
+        "sigma_peak_HH_1": 32.814208003243785,
+        "sigma_0_HL": 0.0013522035532736898,
+        "sigma_peak_HL": 0.12988058668523841,
+        "v_HL": 15.315073104350745,
+        "sigma_0_LL": 0.0011141928730530877,
+        "a_slope": 0.20600570435909663,
+        "f_H_cf": 0.14564279873911468,
+        "f_H_cc": 0.28827733939404976
+      }
+    },
+    "yang": {
+      "log_L_peak_max": null,
+      "converged": null,
+      "converged_50tau": false,
+      "posterior_medians": {
+        "sigma_0": 0.0031366309549660147,
+        "sigma_peak_HH_1": 26.230914981217424,
+        "sigma_0_HL": 0.0007569744378384119,
+        "sigma_peak_HL": 0.31673796505542096,
+        "v_HL": 99.67384046452602,
+        "sigma_0_LL": 0.0013107026390406953,
+        "a_slope": 0.9538586881336097,
+        "f_H_cf": 0.745040208620868,
+        "f_H_cc": 0.5358739011439142
+      },
+      "posterior_stds": {
+        "sigma_0": 0.002774213350550028,
+        "sigma_peak_HH_1": 12.464398259109462,
+        "sigma_0_HL": 0.0010775309178869877,
+        "sigma_peak_HL": 0.12366039717669845,
+        "v_HL": 15.64846309461458,
+        "sigma_0_LL": 0.0017440430985171832,
+        "a_slope": 0.20600960343068175,
+        "f_H_cf": 0.14449106279086554,
+        "f_H_cc": 0.28358794910084134
+      }
+    },
+    "t202": {
+      "log_L_peak_max": null,
+      "converged": null,
+      "converged_50tau": false,
+      "posterior_medians": {
+        "sigma_0": 0.0020367615546220052,
+        "sigma_peak_HH_1": 16.175347557774842,
+        "sigma_0_HL": 0.0007619309648898355,
+        "sigma_peak_HL": 0.306203572461369,
+        "v_HL": 99.47657929352604,
+        "sigma_0_LL": 0.002379096252835665,
+        "a_slope": 0.9656831636772173,
+        "f_H_cf": 0.7384625853137625,
+        "f_H_cc": 0.47438496110204326
+      },
+      "posterior_stds": {
+        "sigma_0": 0.0013796029837275488,
+        "sigma_peak_HH_1": 5.687763231589302,
+        "sigma_0_HL": 0.0010555315713357584,
+        "sigma_peak_HL": 0.1453056572118766,
+        "v_HL": 18.91579973760153,
+        "sigma_0_LL": 0.0031323955673497944,
+        "a_slope": 0.19368008268528575,
+        "f_H_cf": 0.14539738951023848,
+        "f_H_cc": 0.2803642462947602
+      }
+    }
+  },
+  "t207c_extended_free_emcee_50k": {
+    "log_L_at_median": -0.11291792466143376,
+    "converged_50tau": false,
+    "convergence_ratio_n_over_50tau": 0.5756522139584149,
+    "posterior_medians": {
+      "sigma_0": 0.25157638175383157,
+      "sigma_peak_HH_1": 672.4493373314514,
+      "sigma_0_HL": 0.08179050839216452,
+      "sigma_peak_HL": 0.7199385917918073,
+      "v_HL": 143.04832575936024,
+      "sigma_0_LL": 0.0009810397088093952,
+      "a_slope": 0.9959849431582605,
+      "f_H_cf": 0.7873091289869228,
+      "f_H_cc": 0.005005861571573246
+    },
+    "posterior_stds": {
+      "sigma_0": 0.14494574894384135,
+      "sigma_peak_HH_1": 213.0940777881262,
+      "sigma_0_HL": 0.11074736458664745,
+      "sigma_peak_HL": 0.5388256683782904,
+      "v_HL": 45.300277059426826,
+      "sigma_0_LL": 0.0010724544803692047,
+      "a_slope": 0.23463135795210094,
+      "f_H_cf": 0.13713593205426156,
+      "f_H_cc": 0.013378852000933287
+    }
+  },
+  "t207c_geometric_analysis": {
+    "analysis": "C \u2014 Geometric degeneracy in sigma_HL",
+    "mechanism_A_physical": {
+      "description": "On-peak resonance (v_HL \u2248 100)",
+      "params": {
+        "sigma_0_HL": 0.0001,
+        "sigma_peak_HL": 0.346,
+        "v_HL": 98.2,
+        "a_slope": 1.0
+      },
+      "decomposition_at_v100": {
+        "Yukawa_bg": 0.0001,
+        "peak_contribution": 0.34253999999999996,
+        "sigma_HL_total": 0.346
+      },
+      "source": "borrowed prescription emcee median",
+      "computed_sigma_HL_100": 0.34431558640010185
+    },
+    "mechanism_B_geometric": {
+      "description": "Off-peak + high background (v_HL = 178)",
+      "params": {
+        "sigma_0_HL": 0.094,
+        "sigma_peak_HL": 1.89,
+        "v_HL": 178.18,
+        "a_slope": 1.21
+      },
+      "decomposition_at_v100": {
+        "Yukawa_bg": 0.094,
+        "peak_contribution": 0.17576999999999998,
+        "sigma_HL_total": 0.26976999999999995
+      },
+      "source": "free fit DE best-fit",
+      "computed_sigma_HL_100": 0.26933476211559126
+    }
+  },
+  "t206_f_H_fit_post_fix": {
+    "log_L_peak": null,
+    "description": "Re-run with dSph ceiling fixed from 0.032 to 0.8 cm\u00b2/g"
+  },
+  "causality_summary_corrected": {
+    "method": "Balberg+ 2002 Eq. 22",
+    "cloud_9_nfw_params": {
+      "M_200_MSun": 5000000000.0,
+      "c": 12,
+      "v_max_kms": 28,
+      "r_vir_kpc": 35.1,
+      "r_s_kpc": 2.93,
+      "rho_s_MSun_pc3": 0.0096,
+      "t_cross_Myr": 102.3
+    },
+    "TCROSS_CAP_FACTOR": 3,
+    "cap_Myr": 307,
+    "yukawa_bg_alone": {
+      "sigma_v28_cm2_g": 0.607,
+      "t_core_Myr": 22690,
+      "t_core_over_t_cross": 222,
+      "verdict": "OK (Yukawa bg is fine)"
+    },
+    "at_cloud_9_threshold": {
+      "sigma_peak_HH_1": 174,
+      "sigma_v28_cm2_g": 164,
+      "t_core_Myr": 84,
+      "t_core_over_t_cross": 0.82,
+      "verdict": "Sits at causality boundary (cap=1: 1.2x below; cap=3: 3.7x below)"
+    },
+    "sensitivity_to_concentration": {
+      "c=8": "t_core/t_cross=2.20 (OK)",
+      "c=10": "t_core/t_cross=1.29 (marginal)",
+      "c=12": "t_core/t_cross=0.82 (FAIL, this is Cloud-9)",
+      "c=15": "t_core/t_cross=0.47 (FAIL)",
+      "c=20": "t_core/t_cross=0.23 (FAIL)"
+    },
+    "precise_statement": "Cloud-9 floor is incompatible with NFW initial conditions at c >= 10. Yukawa background alone is fine. The v3 \"intrinsically causality-violating\" wording was an arithmetic error and is retracted.",
+    "c_value_justification": {
+      "c_value_used": 12,
+      "halo_mass_MSun": 5000000000.0,
+      "redshift": 0,
+      "references": [
+        "Duffy+ 2008 (all halos, full sample): c \u2248 10-13 at M \u2248 5\u00d710\u2079 M\u2609",
+        "Dutton+ 2014 (relaxed halos): c \u2248 12-14",
+        "UDG-specific literature (Carleton+ 2019, Forbes+ 2021): c \u2248 8-15"
+      ],
+      "sensitivity_verdict": {
+        "c=8": "OK (model is fine)",
+        "c=10": "marginal",
+        "c=12": "FAIL (chosen reference)",
+        "c=15": "FAIL",
+        "c=20": "FAIL"
+      },
+      "note": "Paper \u00a73.2 should cite the specific value used. Re2T207 reviewer note: if the paper uses c=10 or c=15, the verdict changes accordingly."
+    }
+  },
+  "channel_coverage_summary": {
+    "free_fit_extreme": {
+      "clear_pass": 8,
+      "marginal": 0,
+      "clear_fail": 0,
+      "note": "Cloud-9 violates causality 1.2x (cap=1), 3.7x (cap=3)"
+    },
+    "borrowed": {
+      "clear_pass": 4,
+      "marginal": 2,
+      "clear_fail": 2,
+      "note": "Cloud-9 structural fail"
+    },
+    "yang": {
+      "clear_pass": 4,
+      "marginal": 2,
+      "clear_fail": 2,
+      "note": "Cloud-9 structural fail; yang channel count corrected per Re2T207",
+      "per_channel_breakdown": {
+        "clear_pass": [
+          "UFD v=3 (0.000)",
+          "UFD v=5 (0.000)",
+          "UFD v=7 (-0.039)",
+          "dSph v=15 (0.000)"
+        ],
+        "marginal": [
+          "UFD v=10 (-0.358)",
+          "SPARC v=100 (-0.243)"
+        ],
+        "clear_fail": [
+          "Cloud-9 v=28 (-7.411)",
+          "Cluster v=500 (-1.041)"
+        ]
+      }
+    },
+    "t202": {
+      "clear_pass": 3,
+      "marginal": 1,
+      "clear_fail": 4,
+      "note": "Cluster + Cloud-9 fail"
+    }
+  },
+  "v_HL_mechanism_summary": {
+    "mechanism_A_physical": {
+      "description": "On-peak resonance (v_HL=100), small peak, no background",
+      "source": "borrowed emcee median v_HL=98.2",
+      "sigma_HL_100": 0.34
+    },
+    "mechanism_B_geometric": {
+      "description": "Off-peak + high background (v_HL=178), large peak partial overlap",
+      "source": "free fit DE best-fit v_HL=178.18",
+      "sigma_HL_100": 0.27
+    },
+    "geometric_degeneracy": "Both mechanisms give sigma_eff(100) \u2248 0.19. Free fit uses Mechanism B because it requires less f_H constraint, but Mechanism B violates Cloud-9 causality."
+  },
+  "convergence_summary": {
+    "free_fit_15k": {
+      "tau_max": 1000,
+      "n_over_50tau": 0.3,
+      "effective_samples": 700
+    },
+    "free_fit_50k": {
+      "tau_max": 1737,
+      "n_over_50tau": 0.58,
+      "effective_samples": 691
+    },
+    "prescription_modes_15k": {
+      "tau_max": "300-360",
+      "n_over_50tau": 0.83,
+      "note": "Closer to convergence than free fit"
+    },
+    "recommendation": "Prescription mode posteriors are the physically motivated ones and should carry more weight than the free fit exploratory posterior."
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "FWHM_10": {
+    "FWHM_kms": 10,
+    "log_L": -72354457376.33774,
+    "best_params": {
+      "v_HL": 89.16224781507339,
+      "sigma_peak_HL": 0.6921540555677638,
+      "sigma_0_HL": 0.5,
+      "sigma_peak_HH_1": 1000.0,
+      "f_H_cf": 0.8026836806839753,
+      "f_H_cc": 1.0
+    },
+    "sigma_HL_100_decomposition": {
+      "bg_contribution": 0.5,
+      "peak_contribution": 0.12146729810232865,
+      "total": 0.6214672981023286
+    },
+    "mechanism": "mixed"
+  },
+  "FWHM_30": {
+    "FWHM_kms": 30,
+    "log_L": -72354457379.56897,
+    "best_params": {
+      "v_HL": 126.33880181269949,
+      "sigma_peak_HL": 0.698170484190489,
+      "sigma_0_HL": 0.5,
+      "sigma_peak_HH_1": 1000.0,
+      "f_H_cf": 0.588347454824579,
+      "f_H_cc": 1.0
+    },
+    "sigma_HL_100_decomposition": {
+      "bg_contribution": 0.5,
+      "peak_contribution": 0.17098378712383602,
+      "total": 0.670983787123836
+    },
+    "mechanism": "mixed"
+  },
+  "FWHM_50": {
+    "FWHM_kms": 50,
+    "log_L": -72267538089.09659,
+    "best_params": {
+      "v_HL": 181.80193328929647,
+      "sigma_peak_HL": 0.18128779513027282,
+      "sigma_0_HL": 0.5,
+      "sigma_peak_HH_1": 356.8533134252341,
+      "f_H_cf": 0.9003618669861745,
+      "f_H_cc": 1.2909941101546037e-06
+    },
+    "sigma_HL_100_decomposition": {
+      "bg_contribution": 0.5,
+      "peak_contribution": 0.015486093110955584,
+      "total": 0.5154860931109556
+    },
+    "mechanism": "B (off-peak + high bg)"
+  },
+  "FWHM_100": {
+    "FWHM_kms": 100,
+    "log_L": -72326266760.2251,
+    "best_params": {
+      "v_HL": 141.1708563123458,
+      "sigma_peak_HL": 0.4612697706525246,
+      "sigma_0_HL": 0.5,
+      "sigma_peak_HH_1": 675.9766320894433,
+      "f_H_cf": 0.6020559171555968,
+      "f_H_cc": 1.0
+    },
+    "sigma_HL_100_decomposition": {
+      "bg_contribution": 0.5,
+      "peak_contribution": 0.2748900103350887,
+      "total": 0.7748900103350886
+    },
+    "mechanism": "B (off-peak + high bg)"
+  },
+  "FWHM_200": {
+    "FWHM_kms": 200,
+    "log_L": -72354457396.53304,
+    "best_params": {
+      "v_HL": 192.67660481238966,
+      "sigma_peak_HL": 2.0,
+      "sigma_0_HL": 0.5,
+      "sigma_peak_HH_1": 1000.0,
+      "f_H_cf": 0.8716425287706133,
+      "f_H_cc": 1.0
+    },
+    "sigma_HL_100_decomposition": {
+      "bg_contribution": 0.5,
+      "peak_contribution": 1.0759078208659492,
+      "total": 1.5759078208659492
+    },
+    "mechanism": "B (off-peak + high bg)"
+  }
+}

@@ -33,14 +33,16 @@ from phase44_two_component import phase44_sigma_HH_at_v, phase44_two_component_s
 
 CHANNELS = [
     # (name, v, σ_unc, obs_value, kind, halo_type, r/r_vir)
-    ('UFD v=3',   3,    0.155, 0.155, 'ceiling',  'core_collapsed', 0.20),
-    ('UFD v=5',   5,    0.093, 0.093, 'ceiling',  'core_collapsed', 0.20),
-    ('UFD v=7',   7,    0.067, 0.067, 'ceiling',  'core_collapsed', 0.20),
-    ('UFD v=10', 10,    0.047, 0.047, 'ceiling',  'core_collapsed', 0.20),
-    ('dSph v=15',15,    0.032, 0.032, 'ceiling',  'core_collapsed', 0.20),
-    ('Cloud-9 v=28', 28, 128.0, 128.0, 'floor',   'core_forming',   0.20),
-    ('SPARC v=100', 100, 0.193, 0.193, 'gaussian', 'intermediate',   0.20),
-    ('Cluster v=500', 500, 0.00025, 0.00025, 'ceiling', 'core_collapsed', 0.50),
+    # dSph v=15: ceiling 0.8 cm²/g per Horigome+ 2025 [27] w=10 km/s case
+    # (paper §3.6). σ_unc = ±0.04 cm²/g Table II combined stat+syst.
+    ('UFD v=3',   3,    0.05,  0.155, 'ceiling',  'core_collapsed', 0.20),
+    ('UFD v=5',   5,    0.05,  0.093, 'ceiling',  'core_collapsed', 0.20),
+    ('UFD v=7',   7,    0.05,  0.067, 'ceiling',  'core_collapsed', 0.20),
+    ('UFD v=10', 10,    0.05,  0.047, 'ceiling',  'core_collapsed', 0.20),
+    ('dSph v=15',15,    0.04,  0.8,   'ceiling',  'core_collapsed', 0.20),
+    ('Cloud-9 v=28', 28, 30.0, 128.0, 'floor',   'core_forming',   0.20),
+    ('SPARC v=100', 100, 0.05, 0.193, 'gaussian', 'intermediate',   0.20),
+    ('Cluster v=500', 500, 5e-4, 2.5e-4, 'ceiling', 'core_collapsed', 0.50),
 ]
 
 
