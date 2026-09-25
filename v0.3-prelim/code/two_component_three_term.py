@@ -98,7 +98,8 @@ def _build_phase44_resonances(override_sigma_0: Optional[float] = None,
     Returns list of dicts suitable for sigma_m_at_v (Phase 44's native format):
         {'name', 'E_R_eV', 'Gamma_eV', 'sigma_peak_cm2_per_g'}
     """
-    from phase44_joint_fit import sigma_m_at_v as p44_sigma_m_at_v
+    # Note: sigma_m_at_v is imported in sigma_HH_at_v (the only caller); only
+    # kinetic_energy_eV is needed here for the E=0.5 m v^2 conversion.
     from t90_v70_multi_resonant_darkqcd import kinetic_energy_eV
 
     p = _phase44_params()

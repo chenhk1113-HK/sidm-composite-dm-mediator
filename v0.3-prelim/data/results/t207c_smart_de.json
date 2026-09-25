@@ -5,29 +5,29 @@
     "f_H_cc": 0.3,
     "best_params": {
       "sigma_0": 0.001,
-      "sigma_peak_HH_1": 19.569778917806257,
+      "sigma_peak_HH_1": 104.80576984848268,
       "sigma_0_HL": 1e-05,
-      "sigma_peak_HL": 0.11418171342709281,
-      "v_HL": 99.34438923063412,
+      "sigma_peak_HL": 0.34314771886309586,
+      "v_HL": 100.24805688564123,
       "sigma_0_LL": 1e-05,
-      "a_slope": 1.7426345405650128,
+      "a_slope": 0.8391277209910946,
       "f_H_cf": 0.85,
       "f_H_cc": 0.3
     },
-    "log_L_peak": -0.7280867453596086,
+    "log_L_peak": -6.04312574640979,
     "per_channel_log_L": {
       "UFD v=3": 0.0,
-      "UFD v=5": 0.0,
-      "UFD v=7": 0.0,
-      "UFD v=10": 0.0,
-      "dSph v=15": -0.001234113769119277,
-      "Cloud-9 v=28": -0.44551088888929113,
-      "SPARC v=100": -0.24634050083403997,
-      "Cluster v=500": -0.03500124186715823
+      "UFD v=5": -0.0004962750135010882,
+      "UFD v=7": -0.21293322912019055,
+      "UFD v=10": -0.8491760662252751,
+      "dSph v=15": 0.0,
+      "Cloud-9 v=28": -4.461737505881631,
+      "SPARC v=100": -0.09173063691145875,
+      "Cluster v=500": -0.4270520332577329
     },
     "de_result_success": false,
     "de_result_message": "Maximum number of iterations has been exceeded.",
-    "de_elapsed_sec": 86.46060180664062,
+    "de_elapsed_sec": 152.9454526901245,
     "init_strategy": "phase44_best_fit"
   },
   "yang": {
@@ -36,29 +36,29 @@
     "f_H_cc": 0.45,
     "best_params": {
       "sigma_0": 0.001,
-      "sigma_peak_HH_1": 10.0,
+      "sigma_peak_HH_1": 33.895869089451075,
       "sigma_0_HL": 1e-05,
-      "sigma_peak_HL": 0.011160928048181173,
-      "v_HL": 102.52979080008284,
+      "sigma_peak_HL": 0.3421140150609466,
+      "v_HL": 99.31327024947845,
       "sigma_0_LL": 1e-05,
-      "a_slope": 1.573202019910741,
+      "a_slope": 1.1120949933187394,
       "f_H_cf": 0.85,
       "f_H_cc": 0.45
     },
-    "log_L_peak": -0.9799045166342556,
+    "log_L_peak": -9.091542453246099,
     "per_channel_log_L": {
       "UFD v=3": 0.0,
       "UFD v=5": 0.0,
-      "UFD v=7": 0.0,
-      "UFD v=10": 0.0,
-      "dSph v=15": -0.0070059146452866395,
-      "Cloud-9 v=28": -0.4717549068778105,
-      "SPARC v=100": -0.4645276931150133,
-      "Cluster v=500": -0.03661600199614515
+      "UFD v=7": -0.03711321560505406,
+      "UFD v=10": -0.3507935063766407,
+      "dSph v=15": 0.0,
+      "Cloud-9 v=28": -7.42108236406662,
+      "SPARC v=100": -0.2415020515195801,
+      "Cluster v=500": -1.0410513156782046
     },
     "de_result_success": false,
     "de_result_message": "Maximum number of iterations has been exceeded.",
-    "de_elapsed_sec": 83.10632371902466,
+    "de_elapsed_sec": 92.10050225257874,
     "init_strategy": "phase44_best_fit"
   },
   "t202": {
@@ -67,29 +67,29 @@
     "f_H_cc": 0.61,
     "best_params": {
       "sigma_0": 0.001,
-      "sigma_peak_HH_1": 10.0,
+      "sigma_peak_HH_1": 13.839979919703625,
       "sigma_0_HL": 1e-05,
-      "sigma_peak_HL": 0.0,
-      "v_HL": 165.2174955202965,
+      "sigma_peak_HL": 0.3765304187705384,
+      "v_HL": 99.09795438045761,
       "sigma_0_LL": 1e-05,
-      "a_slope": 1.3828706418626646,
+      "a_slope": 1.309435948567947,
       "f_H_cf": 0.92,
       "f_H_cc": 0.61
     },
-    "log_L_peak": -2.149133801183793,
+    "log_L_peak": -11.075156457263915,
     "per_channel_log_L": {
       "UFD v=3": 0.0,
       "UFD v=5": 0.0,
-      "UFD v=7": 0.0,
-      "UFD v=10": -0.0014912626446857266,
-      "dSph v=15": -0.4560708467784546,
-      "Cloud-9 v=28": -0.46700654551165827,
-      "SPARC v=100": -0.48615557897400047,
-      "Cluster v=500": -0.7384095672749942
+      "UFD v=7": -0.008981648488300745,
+      "UFD v=10": -0.17441654415711963,
+      "dSph v=15": 0.0,
+      "Cloud-9 v=28": -8.275960021342371,
+      "SPARC v=100": -0.6035579607776231,
+      "Cluster v=500": -2.0122402824985013
     },
     "de_result_success": false,
     "de_result_message": "Maximum number of iterations has been exceeded.",
-    "de_elapsed_sec": 82.47889447212219,
+    "de_elapsed_sec": 144.80559754371643,
     "init_strategy": "phase44_best_fit"
   }
 }

@@ -85,6 +85,10 @@ PARAM_NAMES = [
 ]
 
 # Bounds (lower, upper)
+# v18.38: f_H_cc lower bound tightened from 0.0 to 0.05 per Yang+ 2025 Fig. 2
+# (f_L ~ 0.3-0.6 across all M_halo bins => f_H_cc >= 0.4 worst-case; we use 0.05
+# as the conservative physical floor, ruling out the v18.31 boundary-peak pathology
+# where f_H_cc -> 0.004 at the likelihood maximum).
 BOUNDS = [
     (0.001, 0.5),      # sigma_0 (HH bg)
     (10.0, 1000.0),    # sigma_peak_HH_1 (Cloud-9 peak)
@@ -94,7 +98,7 @@ BOUNDS = [
     (1e-5, 0.5),       # sigma_0_LL (LL bg)
     (0.5, 3.0),        # a_slope (Yukawa)
     (0.5, 1.0),        # f_H_cf
-    (0.0, 1.0),        # f_H_cc
+    (0.05, 1.0),       # f_H_cc (v18.38: Yang+ 2025 Fig. 2 lower limit)
 ]
 
 
