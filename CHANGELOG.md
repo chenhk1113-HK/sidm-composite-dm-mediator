@@ -16,6 +16,25 @@ Per user request: include stellar streams and stellar halo observation constrain
 
 Added §3.3b with explicit dataset table (GD-1 stellar stream, JVAS B1938+666, Fornax 6 cluster), mechanism description, T204 numerical check (σ/m(v=1.69)=3.07 cm²/g, t_core=560 Myr), honest caveat. Existing §3.3 (JVAS) and §10.4c (JVAS A5) unchanged.
 
+## [PathF1ThreeTerm-v18.38] - 2026-09-25
+
+**T207 Path F1: three-term σ_eff decomposition (§9.9-§9.11 in PAPER_V1_DRAFT.md).** Resolves the v18.34 structural SPARC limitation (heavy-channel-only decomposition σ_eff = f_H² × σ_HH(v) cannot match SPARC's σ/m ≈ 0.193 at v=100 km/s for any f_H — max achievable σ_eff = 0.069).
+
+**Three new sections** added to the paper:
+- §9.9 Path F1 motivation: introduces the three-term σ_eff = f_H² σ_HH + 2 f_H f_L σ_HL + f_L² σ_LL mixture rule; documents T207 v18.37 boundary-peak pathology (f_H_cc → 0.004 at grid lower bound — same pathology as v18.31 T206 retracted in v18.32)
+- §9.10 Path F1 v18.38: free fit with Yang+ 2025 Fig. 2 prior (f_H_cc ≥ 0.05, conservative floor) — DE peak at f_H_cc=0.053, emcee 50k posterior at f_H_cc = **0.060 ± 0.012**, v_HL = **105 ± 39 km/s** (Mechanism A on-peak), 50τ convergence marginally achieved (ratio 1.089 vs v18.37's 0.576, **1.89× improvement**), τ_max dropped 1737→918
+- §9.11 honest verdict split: Path F1 RESOLVED under borrowed prescription mode (SPARC log L = -0.09, z ≈ 0.42); MARGINAL under yang (SPARC -0.24); NOT RESOLVED under t202 (SPARC -0.60) or priored free fit (SPARC -2.03, z ≈ 2.0, clear fail)
+
+**Honest framing**: Path F1 is a **structural fix** (resolves the v18.34 SPARC limitation under borrowed prescription) **not an automatic data-resolution** (free fit trades SPARC fit quality for physically motivated f_H_cc — standard prior-vs-likelihood tradeoff).
+
+**Abstract + §1 caveat updated** to reflect T207 resolution. **§10.1 + §11 conclusions** updated. **Front-matter** bumped to v18.38. **Standing version file** updated to include `+T207-PathF1ThreeTerm-v18.38`.
+
+**Code shipped**: `v0.3-prelim/code/two_component_three_term.py` (165 LoC, foundational), `T207_three_term_fit.py` (250 LoC, fit driver), `T207_priored_free_de.py` (90 LoC, DE-only driver), `T207c_priored_free_emcee.py` (147 LoC, emcee driver with n/50τ bug fix from RT207 review). **Results**: `t207_priored_free_de.json`, `t207c_priored_free_emcee.json` (ratio corrected 54.44→1.089 per RT207 erratum), `t207c_smart_de.json` (prescription cross-check identical to v18.37 to 4 sig figs).
+
+**Cross-references**: §9.9-§9.11 referenced from front-matter, abstract, §1 caveat, §10.1 framework section, §11 conclusions. Paper-cross-reference audit passed (§9.X refs all valid, §10 numbering unchanged).
+
+**RT207 review corrections applied** (per reviewer checklist, all 10 items: 1.89× convergence correction, §2 SPARC sensitivity recomputed, causality vs A/B framing clarified, Cloud-9 obs = 128 not 50, SPARC clear-fail split, JSON files embedded, f_H_cc = 0.05 relabeled, τ_max drop explained, etc.). RT207 final review signed off: "the report can go into the paper as-is."
+
 ## [ResidualClean-v18.36] - 2026-09-23
 
 **review 5.docx copy-edit pass — 5 residuals cleaned up.**

@@ -2,9 +2,38 @@
 
 > **For:** Anyone who has 60 seconds and wants to know what this project
 > is, what it claims, and what the current best numbers are.
-> Updated with each version-bump round. Last refresh: 2026-09-23 (v18.37).
+> Updated with each version-bump round. Last refresh: 2026-09-25 (v18.38).
 
 ---
+
+## Standing: v0.4-prelim+v18.38 (2026-09-25, T207 Path F1 three-term σ_eff decomposition)
+
+**v18.38 Path F1** — three-term σ_eff = f_H² σ_HH + 2 f_H f_L σ_HL + f_L² σ_LL decomposition added to resolve the v18.34 structural SPARC limitation (heavy-channel-only σ_eff = f_H² × σ_HH(v) could not match SPARC's σ/m ≈ 0.193 at v = 100 km/s for any f_H — max achievable σ_eff = 0.069):
+
+- **§9.9 Path F1 motivation**: introduces the three-term mixture rule; documents v18.37 boundary-peak pathology (f_H_cc → 0.004, same retraction pattern as v18.31 T206)
+- **§9.10 v18.38 results**: free fit with Yang+ 2025 Fig. 2 prior (f_H_cc ≥ 0.05 conservative floor)
+  - DE peak: f_H_cc = 0.053, v_HL = 103.3 km/s, σ_peak_HL = 0.325 (Mechanism A on-peak)
+  - emcee 50k posterior median (32 walkers × 50000 steps, burn-in 2000, Gaussian init from DE):
+    - f_H_cc = **0.060 ± 0.012** (narrow, at floor — boundary pathology eliminated)
+    - v_HL = **105 ± 39 km/s** (Mechanism A on-peak)
+    - σ_peak_HL = 0.52 ± 0.36, σ_peak_HH_1 = 625 ± 250
+    - a_slope = 0.96 ± 0.20, f_H_cf = 0.83 ± 0.15
+  - 50τ convergence marginally achieved: ratio = 50000 / (50 × 918) = **1.089** vs v18.37's 0.576 (1.89× improvement; not 94× — see RT207 erratum)
+  - τ_max dropped 1737 → 918 (prior removed slow direction)
+  - Smart_de cross-check: all 3 prescription modes (borrowed, yang, t202) reproduce v18.37 results to 4 sig figs — prior change does not disturb prescription baselines
+- **§9.11 honest verdict split**:
+  | Mode | SPARC log L | z | F1 verdict |
+  |---|---|---|---|
+  | borrowed (hand-picked f_H) | -0.09 | 0.42 | **RESOLVED** |
+  | yang (Yang+ 2025-derived f_H) | -0.24 | 0.69 | **MARGINAL** |
+  | t202 (N-body f_H) | -0.60 | 1.10 | **NOT RESOLVED** |
+  | free_f_H priored (v18.38) | -2.03 | 2.01 | **CLEAR FAIL** |
+
+**Honest framing**: Path F1 is a **structural fix**, not an automatic data-resolution. The free fit trades SPARC fit quality for physically motivated f_H_cc (standard prior-vs-likelihood tradeoff). Mechanism A vs B remains observationally degenerate at SPARC; the prior (not causality) selects A in v18.38. Cloud-9 vs dSph tension unchanged from v18.37.
+
+**Abstract + §1 caveat + §10.1 + §11 conclusions updated**. Standing paper verdict (6–7 of 8 channels, five no-go theorems) unchanged. **RT207 final review signed off** — "the report can go into the paper as-is."
+
+**Code shipped**: `v0.3-prelim/code/two_component_three_term.py` (165 LoC), `T207_three_term_fit.py` (250 LoC), `T207_priored_free_de.py` (90 LoC), `T207c_priored_free_emcee.py` (147 LoC with n/50τ bug fix). **Results**: `t207_priored_free_de.json`, `t207c_priored_free_emcee.json` (ratio corrected 54.44→1.089), `t207c_smart_de.json`.
 
 ## Standing: v0.4-prelim+v18.37 (2026-09-23, stellar streams and stellar halo substructure consolidated as §3.3b)
 
