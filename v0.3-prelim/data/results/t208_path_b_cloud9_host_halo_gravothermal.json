@@ -1,0 +1,41 @@
+{
+  "Cloud9_host_halo_params": {
+    "M_halo_Msun": 5000000000.0,
+    "concentration_c": 12,
+    "r_vir_pc": 35092.89849908858,
+    "r_s_pc": 2924.408208257382,
+    "V_max_kms": 24.754551058223765,
+    "rho_s_Msun_per_pc3": 0.009689620013605297
+  },
+  "sigma_m_at_v_virial_C9": 0.21006238359036997,
+  "sigma_m_v28_C9_pre_corecollapse": 0.18571428571428572,
+  "sigma_m_v15_C9_pre_corecollapse": 0.3466666666666667,
+  "Cloud9_gravothermal": {
+    "t_core_Gyr": 73.71088497222982,
+    "t_cross_Gyr": 0.11551567771529728,
+    "t_core_over_t_cross": 638.1028656032253,
+    "t_core_over_t_Hubble": 5.341368476248538,
+    "runs_in_Hubble": false,
+    "causality_OK": true
+  },
+  "subhalo_1e6_crosscheck": {
+    "M_halo_Msun": 1000000.0,
+    "c": 15,
+    "V_max_kms": 1.447654927914847,
+    "sigma_m_at_v_virial": 3.5920162324110643,
+    "t_core_Gyr": 1.9734186426334033,
+    "t_cross_Gyr": 0.09241254217223784,
+    "t_core_over_t_Hubble": 0.143001350915464,
+    "matches_T204": false
+  },
+  "Cloud9_core_collapse_enhancement_estimate": {
+    "rho_core_over_rho_s_factor": 100,
+    "sigma_m_v28_C9_CORE_enhanced": 18.571428571428573,
+    "sigma_m_v15_C9_CORE_enhanced": 34.66666666666667,
+    "Cloud9_threshold_50": 50.0,
+    "Cloud9_PASSES_if_50": false,
+    "dSph_ceiling_0p8": 0.8,
+    "dSph_violation_factor": 43.333333333333336
+  },
+  "verdict": "Gravothermal phase DOES NOT run at Cloud-9 host-halo params (t_core = 73.7 Gyr > t_Hubble = 13.8 Gyr). Path 2 REFUTED at Phase 44 sigma/m. Cloud-9 vs dSph tension is NOT resolved by host-halo gravothermal evolution at these parameters."
+}
