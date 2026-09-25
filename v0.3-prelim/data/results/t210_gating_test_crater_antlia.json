@@ -1,0 +1,91 @@
+{
+  "borrowed_params": {
+    "sigma_0": 0.005,
+    "sigma_peak_HH_1": 84.4,
+    "sigma_0_HL": 0.0001,
+    "sigma_peak_HL": 0.318,
+    "v_HL": 98.2,
+    "sigma_0_LL": 0.0006,
+    "a_slope": 1.0
+  },
+  "f_H_cf_borrowed": 0.85,
+  "f_H_cc_borrowed": 0.5,
+  "scenarios": {
+    "A: V_max = sigma_los": {
+      "Crater II": {
+        "v_max_km_s": 2.3,
+        "sigma_eff_cm2_g": 0.25281221296029516,
+        "target_cm2_g": 30.0,
+        "verdict": "FAIL",
+        "z": 2.974718778703971
+      },
+      "Antlia II": {
+        "v_max_km_s": 5.7,
+        "sigma_eff_cm2_g": 0.22775149762525512,
+        "target_cm2_g": 30.0,
+        "verdict": "FAIL",
+        "z": 2.9772248502374743
+      }
+    },
+    "B: V_max = sqrt(3) * sigma_los (Jeans isotropic)": {
+      "Crater II": {
+        "v_max_km_s": 3.9837168574084174,
+        "sigma_eff_cm2_g": 0.23097862294982613,
+        "target_cm2_g": 30.0,
+        "verdict": "FAIL",
+        "z": 2.976902137705017
+      },
+      "Antlia II": {
+        "v_max_km_s": 9.8726896031426,
+        "sigma_eff_cm2_g": 0.25146501202200117,
+        "target_cm2_g": 30.0,
+        "verdict": "FAIL",
+        "z": 2.9748534987978
+      }
+    },
+    "C: V_max ~ 15 km/s (full halo circular velocity)": {
+      "Crater II": {
+        "v_max_km_s": 15.0,
+        "sigma_eff_cm2_g": 0.3452046381318808,
+        "target_cm2_g": 30.0,
+        "verdict": "FAIL",
+        "z": 2.9654795361868116
+      },
+      "Antlia II": {
+        "v_max_km_s": 15.0,
+        "sigma_eff_cm2_g": 0.3452046381318808,
+        "target_cm2_g": 30.0,
+        "verdict": "FAIL",
+        "z": 2.9654795361868116
+      }
+    },
+    "D: V_max ~ 28 km/s (Cloud-9 host-halo scale)": {
+      "Crater II": {
+        "v_max_km_s": 28.0,
+        "sigma_eff_cm2_g": 10.715509568816657,
+        "target_cm2_g": 30.0,
+        "verdict": "FAIL",
+        "z": 1.9284490431183343
+      },
+      "Antlia II": {
+        "v_max_km_s": 28.0,
+        "sigma_eff_cm2_g": 10.715509568816657,
+        "target_cm2_g": 30.0,
+        "verdict": "FAIL",
+        "z": 1.9284490431183343
+      }
+    }
+  },
+  "reference_observations": {
+    "Crater II": {
+      "sigma_los_km_s": 2.3,
+      "inferred_sigma_m_cm2_g": 60.0,
+      "r_half_pc": 1066
+    },
+    "Antlia II": {
+      "sigma_los_km_s": 5.7,
+      "inferred_sigma_m_cm2_g": 60.0,
+      "r_half_pc": 2301
+    }
+  }
+}

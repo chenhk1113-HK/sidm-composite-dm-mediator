@@ -1,0 +1,3446 @@
+{
+  "v_HL=25, width_HL=5": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.23156036109510017,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 1.5312072219020034,
+      "verdict": "MARGINAL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.21956148044112378,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 2.5312296088224753,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.2229773244829302,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 3.1195464896586036,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.24525996811487805,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 3.965199362297561,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.3413905142620563,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -11.465237143448594,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.947412967394424,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.235086234420186,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.76277790011379,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.923722209988621,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.76277790011379,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.923722209988621,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.0067310544011208034,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -3.7253789119775838,
+      "verdict": "FAIL"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.0006409200478185946,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 0.7818400956371891,
+      "verdict": "PASS"
+    }
+  },
+  "v_HL=25, width_HL=10": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.2373427643234759,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 1.6468552864695178,
+      "verdict": "MARGINAL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.22646826777144052,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 2.6693653554288104,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.2313579252694317,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 3.2871585053886334,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.25686267081758074,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 4.197253416351614,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.36383757308558573,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -10.904060672860357,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.973804360837047,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.2342065213054316,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.814525730393443,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.918547426960656,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.814525730393443,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.918547426960656,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.007193557654634599,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -3.716128846907308,
+      "verdict": "FAIL"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.0006541315143339284,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 0.8082630286678567,
+      "verdict": "PASS"
+    }
+  },
+  "v_HL=25, width_HL=15": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.2460881697922749,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 1.8217633958454982,
+      "verdict": "MARGINAL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.23671806632099732,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 2.874361326419946,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.2434889505148497,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 3.529779010296994,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.27276267081758077,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 4.515253416351615,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.3892775730855857,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -10.268060672860358,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.98408453325084,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.2338638488916387,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.834682931204801,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9165317068795198,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.834682931204801,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9165317068795198,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.007957612351033441,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -3.7008477529793313,
+      "verdict": "FAIL"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.0006761457468276771,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 0.8522914936553543,
+      "verdict": "PASS"
+    }
+  },
+  "v_HL=25, width_HL=20": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.2567593614653334,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 2.035187229306668,
+      "verdict": "FAIL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.24891532659496993,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 3.1183065318993983,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.2574682404556781,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 3.8093648091135623,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.2898857477406577,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 4.8577149548131535,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.4115375730855857,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -9.711560672860358,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.98857385624989,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.2337142047916703,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.843485525320588,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9156514474679411,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.843485525320588,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9156514474679411,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.009013275695752191,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -3.679734486084956,
+      "verdict": "FAIL"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.000706955432006989,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 0.9139108640139779,
+      "verdict": "PASS"
+    }
+  },
+  "v_HL=25, width_HL=30": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.27999172616962464,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 2.499834523392493,
+      "verdict": "FAIL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.2743553265949699,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 3.6271065318993982,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.2851321748819076,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 4.362643497638152,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.32046267081758073,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 5.469253416351615,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.4421144961625088,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -8.947137595937281,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.9921505146832,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.233594982843893,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.850498581072175,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9149501418927826,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.850498581072175,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9149501418927826,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.01194245145994433,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -3.6211509708011134,
+      "verdict": "FAIL"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.0007949173316669855,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 1.0898346633339708,
+      "verdict": "MARGINAL"
+    }
+  },
+  "v_HL=25, width_HL=50": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.3191410888020677,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 3.282821776041354,
+      "verdict": "FAIL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.31406654610716506,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 4.421330922143301,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.3246837304451407,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 5.153674608902814,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.3578744355234631,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 6.2174887104692615,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.4691065386028271,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -8.272336534929323,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.99411824096323,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.2335293919678922,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.854356867895762,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.914564313210424,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.854356867895762,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.914564313210424,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.020528451459944336,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -3.4494309708011133,
+      "verdict": "FAIL"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.001075742257025698,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 1.651484514051396,
+      "verdict": "MARGINAL"
+    }
+  },
+  "v_HL=28, width_HL=5": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.23110759149381574,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 1.5221518298763148,
+      "verdict": "MARGINAL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.2189719356561563,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 2.519438713123126,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.2221901521381823,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 3.1038030427636456,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.24397175484483283,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 3.939435096896656,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.3377080438416485,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -11.557298903958788,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.995269360837046,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.233491021305432,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.85661396568756,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9143386034312442,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.85661396568756,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9143386034312442,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.006744211791816594,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -3.725115764163668,
+      "verdict": "FAIL"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.0006409762111609271,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 0.7819524223218541,
+      "verdict": "PASS"
+    }
+  },
+  "v_HL=28, width_HL=10": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.23564871868345777,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 1.6129743736691553,
+      "verdict": "MARGINAL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.2242904168476775,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 2.62580833695355,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.22849828337413305,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 3.2299656674826607,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.25235235563133435,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 4.107047112626687,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.3525272638072352,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -11.186818404819121,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.995269360837046,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.233491021305432,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.85661396568756,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9143386034312442,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.85661396568756,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9143386034312442,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.007245823748291425,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -3.7150835250341716,
+      "verdict": "FAIL"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.0006543561301324336,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 0.8087122602648672,
+      "verdict": "PASS"
+    }
+  },
+  "v_HL=28, width_HL=15": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.24266177443504564,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 1.7532354887009127,
+      "verdict": "MARGINAL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.23239725739377387,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 2.7879451478754773,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.23795466579504462,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 3.4190933159008923,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.2644833808767523,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 4.349667617535046,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.3717434554385269,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -10.706413614036828,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.995269360837046,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.233491021305432,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.85661396568756,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9143386034312442,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.85661396568756,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9143386034312442,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.008073866766943045,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -3.698522664661139,
+      "verdict": "FAIL"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.0006766509915308395,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 0.853301983061679,
+      "verdict": "PASS"
+    }
+  },
+  "v_HL=28, width_HL=20": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.25146436855083176,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 1.9292873710166352,
+      "verdict": "MARGINAL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.2423935459908364,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 2.9878709198167277,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.24935825893996647,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 3.647165178799329,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.27846267081758075,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 4.629253416351615,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.3911453797770355,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -10.221365505574113,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.995269360837046,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.233491021305432,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.85661396568756,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9143386034312442,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.85661396568756,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9143386034312442,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.009216672693858034,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -3.675666546122839,
+      "verdict": "FAIL"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.000707853294444662,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 0.9157065888893241,
+      "verdict": "PASS"
+    }
+  },
+  "v_HL=28, width_HL=30": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.2716215693621908,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 2.3324313872438154,
+      "verdict": "FAIL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.26456227619709194,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 3.4312455239418385,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.27368445667189434,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 4.133689133437886,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.30612660524381025,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 5.182532104876205,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.4228370654713725,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -9.429073363215688,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.995269360837046,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.233491021305432,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.85661396568756,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9143386034312442,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.85661396568756,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9143386034312442,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.012379966019012551,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -3.6124006796197485,
+      "verdict": "FAIL"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.0007969352723262968,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 1.0938705446525936,
+      "verdict": "MARGINAL"
+    }
+  },
+  "v_HL=28, width_HL=50": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.30903333406807315,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 3.0806666813614627,
+      "verdict": "FAIL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.3032288447925436,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 4.204576895850871,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.3131905669097119,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 4.923811338194238,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.34567816080704333,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 5.9735632161408665,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.45719500381606426,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -8.570124904598394,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.995269360837046,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.233491021305432,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.85661396568756,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9143386034312442,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.85661396568756,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9143386034312442,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.021587659972597116,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -3.4282468005480573,
+      "verdict": "FAIL"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.0010813277193008814,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 1.662655438601763,
+      "verdict": "MARGINAL"
+    }
+  },
+  "v_HL=30, width_HL=5": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.23088491516293885,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 1.517698303258777,
+      "verdict": "MARGINAL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.2186895840207125,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 2.51379168041425,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.22182484951686446,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 3.0964969903372888,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.2434088246637346,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 3.928176493274692,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.336334870382883,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -11.591628240427925,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.963624482788266,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.2345458505737246,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.794565185199755,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9205434814800246,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.794565185199755,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9205434814800246,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.006753937128734142,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -3.7249212574253168,
+      "verdict": "FAIL"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.0006410142523300733,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 0.7820285046601465,
+      "verdict": "PASS"
+    }
+  },
+  "v_HL=30, width_HL=10": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.2348052173571978,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 1.5961043471439562,
+      "verdict": "MARGINAL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.22323071121035454,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 2.6046142242070904,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.2271433307083857,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 3.2028666141677133,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.25031561199405133,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 4.066312239881027,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.3479375730855857,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -11.301560672860358,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.98408453325084,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.2338638488916387,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.834682931204801,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9165317068795198,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.834682931204801,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9165317068795198,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.007284437500553471,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -3.714311249988931,
+      "verdict": "FAIL"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.0006545082690907408,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 0.8090165381814817,
+      "verdict": "PASS"
+    }
+  },
+  "v_HL=30, width_HL=15": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.24092301888182674,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 1.7184603776365348,
+      "verdict": "MARGINAL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.2302437669619424,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 2.744875339238848,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.23525017125448203,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 3.36500342508964,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.26056541054360816,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 4.271308210872163,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.36383757308558573,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -10.904060672860357,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.989885792372316,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.233670473587589,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.84605794909005,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9153942050909951,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.84605794909005,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9153942050909951,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.008159685066501709,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -3.6968062986699657,
+      "verdict": "FAIL"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.0006769932077760855,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 0.8539864155521709,
+      "verdict": "PASS"
+    }
+  },
+  "v_HL=30, width_HL=20": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.24871306868809728,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 1.8742613737619456,
+      "verdict": "MARGINAL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.23904636107772856,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 2.920927221554571,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.24524645985154456,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 3.564929197030891,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.27276267081758077,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 4.515253416351615,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.38096065000866264,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -10.475983749783435,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.9921505146832,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.233594982843893,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.850498581072175,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9149501418927826,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.850498581072175,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9149501418927826,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.009366651459944333,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -3.6726669708011133,
+      "verdict": "FAIL"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.0007084614390461474,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 0.9169228780922948,
+      "verdict": "PASS"
+    }
+  },
+  "v_HL=30, width_HL=30": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.26703333406807317,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 2.2406666813614633,
+      "verdict": "FAIL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.25920356188908755,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 3.3240712377817507,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.2674151900578002,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 4.0083038011560035,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.29820267081758073,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 5.024053416351615,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.4115375730855857,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -9.711560672860358,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.99385294162307,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.233538235279231,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.853836673111141,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.914616332688886,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.853836673111141,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.914616332688886,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.012701579508724819,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -3.605968409825503,
+      "verdict": "FAIL"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.000798302057643458,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 1.096604115286916,
+      "verdict": "MARGINAL"
+    }
+  },
+  "v_HL=30, width_HL=50": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.30292698251711303,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 2.9585396503422605,
+      "verdict": "FAIL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.2966153265949699,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 4.0723065318993985,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.30608175865325177,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 4.781635173065035,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.33791389032977587,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 5.818277806595518,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.44894933779146806,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -8.776266555213299,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.99475368516137,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.233508210494621,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.855602836911725,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9144397163088276,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.855602836911725,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9144397163088276,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.022359289695238455,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -3.4128142060952307,
+      "verdict": "FAIL"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.001085110704396728,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 1.670221408793456,
+      "verdict": "MARGINAL"
+    }
+  },
+  "v_HL=35, width_HL=5": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.23049790577396978,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 1.5099581154793955,
+      "verdict": "MARGINAL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.21821187831910785,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 2.504237566382157,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.2212257539007904,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 3.084515078015808,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.24253692824332332,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 3.910738564866466,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.33448372693173956,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -11.637906826706512,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.923352437760123,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.235888252074663,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.715600391026927,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9284399608973075,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.715600391026927,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9284399608973075,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.006782290824789238,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -3.7243541835042153,
+      "verdict": "FAIL"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.0006411115118887565,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 0.782223023777513,
+      "verdict": "PASS"
+    }
+  },
+  "v_HL=35, width_HL=10": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.23332265723299211,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 1.5664531446598422,
+      "verdict": "MARGINAL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.22141262389226724,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 2.5682524778453444,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.22488171387965833,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 3.1576342775931665,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.24707805543296535,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 4.001561108659307,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.3413905142620563,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -11.465237143448594,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.94157463110732,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.2352808456297564,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.751330181903777,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9248669818096225,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.751330181903777,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9248669818096225,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.007396922048179627,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -3.712061559036407,
+      "verdict": "FAIL"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.0006548972405788547,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 0.8097944811577094,
+      "verdict": "PASS"
+    }
+  },
+  "v_HL=35, width_HL=15": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.23781266755569175,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 1.6562533511138349,
+      "verdict": "MARGINAL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.22646826777144052,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 2.6693653554288104,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.2306123939814145,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 3.27224787962829,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.25409111118455324,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 4.141822223691065,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.3516403128116131,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -11.208992179709673,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.957517246822796,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.2347494251059072,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.78259021271844,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.921740978728156,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.78259021271844,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.921740978728156,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.008409343795710756,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -3.6918131240857845,
+      "verdict": "FAIL"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.0006778681434103978,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 0.8557362868207956,
+      "verdict": "PASS"
+    }
+  },
+  "v_HL=35, width_HL=20": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.24367924154138276,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 1.7735848308276552,
+      "verdict": "MARGINAL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.23301532659496993,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 2.8003065318993983,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.23795466579504462,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 3.4190933159008923,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.26289370530033934,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 4.317874106006787,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.36383757308558573,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -10.904060672860357,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.96860217962899,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.2343799273457003,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.804325375083533,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9195674624916468,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.804325375083533,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9195674624916468,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.009802155217169766,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -3.6639568956566047,
+      "verdict": "FAIL"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.0007100162577395307,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 0.9200325154790614,
+      "verdict": "PASS"
+    }
+  },
+  "v_HL=35, width_HL=30": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.25817624839953834,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 2.063524967990767,
+      "verdict": "FAIL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.24891532659496993,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 3.1183065318993983,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.25542413738332925,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 3.7684827476665848,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.2830509061116984,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 4.721018122233969,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.3892775730855857,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -10.268060672860358,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.980767864486683,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.233974404517111,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.828179659118216,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9171820340881784,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.828179659118216,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9171820340881784,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.013630709886910624,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -3.5873858022617875,
+      "verdict": "FAIL"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.0008017964029693466,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 1.1035928059386932,
+      "verdict": "MARGINAL"
+    }
+  },
+  "v_HL=35, width_HL=50": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.2897971303082187,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 2.6959426061643734,
+      "verdict": "FAIL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.28227926102119943,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 3.7855852204239886,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.29049698424560005,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 4.469939684912001,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.32046267081758073,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 5.469253416351615,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.42898879259778083,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -9.27528018505548,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.98937409377473,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.233687530207509,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.845054618506552,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.915494538149345,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.845054618506552,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.915494538149345,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.024555905068191754,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -3.368881898636165,
+      "verdict": "FAIL"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.00109478182023422,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 1.6895636404684398,
+      "verdict": "MARGINAL"
+    }
+  },
+  "v_HL=50, width_HL=5": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.2299819290347812,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 1.499638580695624,
+      "verdict": "MARGINAL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.2176045573642007,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 2.4920911472840137,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.22050388255243056,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 3.070077651048611,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.2415813478603823,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 3.8916269572076456,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.3328446796845705,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -11.678883007885739,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.915213144620832,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.236159561845972,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.699640992714587,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9300359007285415,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.699640992714587,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9300359007285415,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.00692413786892189,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -3.7215172426215624,
+      "verdict": "FAIL"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.0006414229936375717,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 0.7828459872751434,
+      "verdict": "PASS"
+    }
+  },
+  "v_HL=50, width_HL=10": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.2313126536741609,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 1.526253073483218,
+      "verdict": "MARGINAL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.21905435098521384,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 2.5210870197042765,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.22208937172568877,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 3.101787434513775,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.2434088246637346,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 3.928176493274692,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.3352175730855857,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -11.61956067286036,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.9181621702673,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.2360612609910904,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.705423395942963,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9294576604057034,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.705423395942963,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9294576604057034,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.007957612351033441,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -3.7008477529793313,
+      "verdict": "FAIL"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.0006561429442063952,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 0.8122858884127904,
+      "verdict": "PASS"
+    }
+  },
+  "v_HL=50, width_HL=15": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.23348157377671458,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 1.5696314755342915,
+      "verdict": "MARGINAL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.22141262389226724,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 2.5682524778453444,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.2246625063000555,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 3.1532501260011094,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.24636267081758073,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 3.987253416351615,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.33901806089046377,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -11.524548477738406,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.92262232705639,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.2359125890981204,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.714168801411763,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9285831198588237,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.714168801411763,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9285831198588237,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.009646378721558024,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -3.6670724255688394,
+      "verdict": "FAIL"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.0006806701392438049,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 0.8613402784876099,
+      "verdict": "PASS"
+    }
+  },
+  "v_HL=50, width_HL=20": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.23641943194594237,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 1.6283886389188473,
+      "verdict": "MARGINAL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.2245976795361464,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 2.6319535907229277,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.2281262702145288,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 3.2225254042905758,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.25031561199405133,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 4.066312239881027,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.3440375730855857,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -11.399060672860358,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.92806463480965,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.235731178839678,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.72483999308482,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.927516000691518,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.72483999308482,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.927516000691518,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.01194245145994433,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -3.6211509708011134,
+      "verdict": "FAIL"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.0007149955007686418,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 0.9299910015372835,
+      "verdict": "PASS"
+    }
+  },
+  "v_HL=50, width_HL=30": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.2442313620056245,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 1.78462724011249,
+      "verdict": "MARGINAL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.23301532659496993,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 2.8003065318993983,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.2372175172155624,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 3.4043503443112475,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.26056541054360816,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 4.271308210872163,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.35670998687868916,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -11.082250328032773,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.939913140808837,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.235336228639705,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.74807235778911,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9251927642210886,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.74807235778911,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9251927642210886,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.018096407881962682,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -3.4980718423607464,
+      "verdict": "FAIL"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.0008129863259239754,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 1.125972651847951,
+      "verdict": "MARGINAL"
+    }
+  },
+  "v_HL=50, width_HL=50": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.2645986128260125,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 2.1919722565202497,
+      "verdict": "FAIL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.25461532659496994,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 3.2323065318993986,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.2601359849989279,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 3.8627196999785585,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.28562559216589534,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 4.772511843317907,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.38575378930180193,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -10.356155267454954,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.959879315751383,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.234670689474954,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.787221720421554,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9212778279578444,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.787221720421554,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9212778279578444,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.03448070145994433,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -3.1703859708011133,
+      "verdict": "FAIL"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.0011257465069194508,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 1.7514930138389015,
+      "verdict": "MARGINAL"
+    }
+  },
+  "v_HL=75, width_HL=5": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.22972479883373956,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 1.4944959766747912,
+      "verdict": "MARGINAL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.21731787436567057,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 2.4863574873134113,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.22018286169643184,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 3.0636572339286365,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.24119753049261766,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 3.8839506098523535,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.3323131363438179,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -11.692171591404552,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.91440814427007,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.2361863951909977,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.698062560654268,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.930193743934573,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.698062560654268,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.930193743934573,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.007957612351033441,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -3.7008477529793313,
+      "verdict": "FAIL"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.0006420172774277906,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 0.7840345548555813,
+      "verdict": "PASS"
+    }
+  },
+  "v_HL=75, width_HL=10": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.23029643639097583,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 1.5059287278195166,
+      "verdict": "MARGINAL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.2179224331939547,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 2.498448663879094,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.22082326304118036,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 3.076465260823607,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.2418979649352278,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 3.8979592987045564,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.33313412480972365,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -11.67164687975691,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.91508681383615,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.236163772872128,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.699393285293647,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9300606714706354,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.699393285293647,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9300606714706354,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.01194245145994433,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -3.6211509708011134,
+      "verdict": "FAIL"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.0006585196125848895,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 0.8170392251697789,
+      "verdict": "PASS"
+    }
+  },
+  "v_HL=75, width_HL=15": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.23124007515866998,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 1.5248015031733997,
+      "verdict": "MARGINAL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.21891986631754243,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 2.5183973263508483,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.22187919606702367,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 3.097583921340473,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.24305172191247126,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 3.9210344382494253,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.33448372693173956,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -11.637906826706512,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.916192963088452,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.236126901230385,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.701562205396202,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.92984377946038,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.701562205396202,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.92984377946038,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.018096407881962682,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -3.4980718423607464,
+      "verdict": "FAIL"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.0006860158933495482,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 0.8720317866990963,
+      "verdict": "PASS"
+    }
+  },
+  "v_HL=75, width_HL=20": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.23254241809532525,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 1.550848361906505,
+      "verdict": "MARGINAL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.22029532659496992,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 2.5459065318993983,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.22333403215762562,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 3.126680643152512,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.2446389713956154,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 3.9527794279123083,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.336334870382883,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -11.591628240427925,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.91769127075476,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.236076957641508,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.70450006356543,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.929549993643457,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.70450006356543,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.929549993643457,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.025820684218565024,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -3.3435863156286993,
+      "verdict": "FAIL"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.0007244947112673229,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 0.9489894225346458,
+      "verdict": "PASS"
+    }
+  },
+  "v_HL=75, width_HL=30": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.236147310773564,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 1.6229462154712797,
+      "verdict": "MARGINAL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.224095814399848,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 2.6219162879969597,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.22734605031338073,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 3.2069210062676143,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.24900199666027736,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 4.040039933205547,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.3413905142620563,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -11.465237143448594,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.9216753550852,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.2359441548304932,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.71231199362511,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.928768800637489,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.71231199362511,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.928768800637489,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.04350862793053257,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -2.9898274413893486,
+      "verdict": "FAIL"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.000834331607193796,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 1.168663214387592,
+      "verdict": "MARGINAL"
+    }
+  },
+  "v_HL=75, width_HL=50": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.24664040929616748,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 1.8328081859233496,
+      "verdict": "MARGINAL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.23510175193433644,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 2.8420350386867286,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.23890041801330814,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 3.4380083602661626,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.26145236153923024,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 4.289047230784605,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.3555582831447573,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -11.111042921381069,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.932062653003594,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.2355979115665465,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.7326792444455,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.92673207555545,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.7326792444455,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.92673207555545,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.07633745145994433,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -2.3332509708011133,
+      "verdict": "FAIL"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.001184791599757647,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 1.8695831995152938,
+      "verdict": "MARGINAL"
+    }
+  },
+  "v_HL=100, width_HL=5": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.22963888092025445,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 1.492777618405089,
+      "verdict": "MARGINAL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.21722536119704605,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 2.4845072239409207,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.2200830551635144,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 3.061661103270288,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.24108526141125847,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 3.8817052282251696,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.33217499745896517,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -11.695625063525872,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.914277007867536,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.236190766404415,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.697805430453226,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9302194569546773,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.697805430453226,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9302194569546773,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.14609870145994433,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -0.9380259708011135,
+      "verdict": "PASS"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.000642726432583412,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 0.7854528651668239,
+      "verdict": "PASS"
+    }
+  },
+  "v_HL=100, width_HL=10": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.22995468238267988,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 1.4990936476535976,
+      "verdict": "MARGINAL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.21755455311430694,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 2.4910910622861384,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.22042650653822365,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 3.068530130764473,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.2414519015868115,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 3.8890380317362303,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.3325858489476547,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -11.685353776308634,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.914568543021726,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.236181048565942,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.698377068010462,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9301622931989537,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.698377068010462,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9301622931989537,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.14609870145994433,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -0.9380259708011135,
+      "verdict": "PASS"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.0006613556064591859,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 0.8227112129183718,
+      "verdict": "PASS"
+    }
+  },
+  "v_HL=100, width_HL=15": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.23047823779486326,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 1.5095647558972651,
+      "verdict": "MARGINAL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.21810018550756458,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 2.5020037101512913,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.22099563771595207,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 3.079912754319041,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.24205922254171866,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 3.9011844508343727,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.3332658992658432,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -11.66835251835392,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.91504979879325,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.2361650067068917,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.699320706778156,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9300679293221843,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.699320706778156,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9300679293221843,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.14609870145994433,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -0.9380259708011135,
+      "verdict": "PASS"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.0006923945303006537,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 0.8847890606013074,
+      "verdict": "PASS"
+    }
+  },
+  "v_HL=100, width_HL=20": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.23120543418375303,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 1.5241086836750606,
+      "verdict": "MARGINAL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.2188577923483946,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 2.5171558469678916,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.22178559101002718,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 3.095711820200543,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.24290169520782465,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 3.9180339041564927,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.33420822154974955,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -11.644794461256263,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.915713993690947,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.2361428668769685,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.700623049714812,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9299376950285185,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.700623049714812,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9299376950285185,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.14609870145994433,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -0.9380259708011135,
+      "verdict": "PASS"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.0007358286671077944,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 0.9716573342155886,
+      "verdict": "PASS"
+    }
+  },
+  "v_HL=100, width_HL=30": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.23324674490469346,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 1.5649348980938693,
+      "verdict": "MARGINAL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.2209828941625375,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 2.55965788325075,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.22399968061794992,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 3.139993612358998,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.24525996811487805,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 3.965199362297561,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.3368395865084045,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -11.579010337289889,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.917552488956847,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.2360815837014387,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.70422794239305,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.929577205760695,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.70422794239305,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.929577205760695,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.14609870145994433,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -0.9380259708011135,
+      "verdict": "PASS"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.0008597955005221967,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 1.2195910010443933,
+      "verdict": "MARGINAL"
+    }
+  },
+  "v_HL=100, width_HL=50": {
+    "UFD v=3": {
+      "v": 3.0,
+      "sigma_eff": 0.23943716105631313,
+      "obs": 0.155,
+      "kind": "ceiling",
+      "z": 1.6887432211262625,
+      "verdict": "MARGINAL"
+    },
+    "UFD v=5": {
+      "v": 5.0,
+      "sigma_eff": 0.22741325405610982,
+      "obs": 0.093,
+      "kind": "ceiling",
+      "z": 2.6882650811221964,
+      "verdict": "FAIL"
+    },
+    "UFD v=7": {
+      "v": 7.0,
+      "sigma_eff": 0.23068368147357762,
+      "obs": 0.067,
+      "kind": "ceiling",
+      "z": 3.2736736294715523,
+      "verdict": "FAIL"
+    },
+    "UFD v=10": {
+      "v": 10.0,
+      "sigma_eff": 0.25235235563133435,
+      "obs": 0.047,
+      "kind": "ceiling",
+      "z": 4.107047112626687,
+      "verdict": "FAIL"
+    },
+    "dSph v=15": {
+      "v": 15.0,
+      "sigma_eff": 0.3446968087543755,
+      "obs": 0.8,
+      "kind": "ceiling",
+      "z": -11.382579781140613,
+      "verdict": "PASS"
+    },
+    "Cloud-9 v=28": {
+      "v": 28.0,
+      "sigma_eff": 30.922903969203375,
+      "obs": 128.0,
+      "kind": "floor",
+      "z": 3.235903201026554,
+      "verdict": "FAIL"
+    },
+    "Crater II": {
+      "v": 28.0,
+      "sigma_eff": 10.714721040915654,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9285278959084344,
+      "verdict": "MARGINAL"
+    },
+    "Antlia II": {
+      "v": 28.0,
+      "sigma_eff": 10.714721040915654,
+      "obs": 30.0,
+      "kind": "floor",
+      "z": 1.9285278959084344,
+      "verdict": "MARGINAL"
+    },
+    "SPARC v=100": {
+      "v": 100.0,
+      "sigma_eff": 0.14609870145994433,
+      "obs": 0.193,
+      "kind": "gaussian",
+      "z": -0.9380259708011135,
+      "verdict": "PASS"
+    },
+    "Cluster v=500": {
+      "v": 500.0,
+      "sigma_eff": 0.001255192780490238,
+      "obs": 0.00025,
+      "kind": "ceiling",
+      "z": 2.010385560980476,
+      "verdict": "FAIL"
+    }
+  }
+}
