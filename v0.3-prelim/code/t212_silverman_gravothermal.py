@@ -139,7 +139,7 @@ def main():
         "threshold_5e9_cm2_g": sigma_threshold_5e9,
         "threshold_1e10_cm2_g": sigma_threshold_1e10,
     }
-    out_path = Path(r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\data\results\t212_silverman_gravothermal.json")
+    out_path = Path(__file__).resolve().parent.parent / "data" / "results" / "t212_silverman_gravothermal.json"
     with open(out_path, "w") as f:
         json.dump(results, f, indent=2)
     print(f"\nResults saved to {out_path}")
