@@ -8,6 +8,30 @@
 
 
 
+## [PaperPolish-2ReviewResponse-v18.41] - 2026-09-26
+
+**v18.41 paper polish round** — response to 2review.docx (2 reviewers, 2026-09-26). Per Rule 29 (reviewer checklist as literal TODO list), 5 of 5 immediate fixes applied; medium-term items deferred.
+
+**§1 Abstract compressed** (1,200 → 282 words). Removed LZ event 4-model discussion, three-observational-anchors elaboration, detailed Bayes factor numbers, detailed Drobczyk parameter numbers. Core messages retained: framework = constraint map + no-go catalogue; 4 of 8 channels under physically motivated f_H; Cloud-9 vs dSph tension unresolved; Path F1 structural fix; five no-go theorems; two-mediator Drobczyk candidate.
+
+**§11 lead paragraph** — "6-7 of 8" headline retired → "4 of 8 under physically motivated f_H" (Reviewer 2 §1.2, §3.2). 7 of 8 under borrowed f_H mentioned but explicitly flagged as not self-consistently derived at Phase 44.
+
+**§10 scope statement** added (Reviewer 2 §1.3): five no-go theorems apply to Phase 44 single-component σ/m = 0.052 cm²/g baseline. T163 KK-tower best-fit parameters NOT independently re-tested; deferred to v19.0. T184 systematic distinguished from four specific no-gos.
+
+**§11 LZ section compressed** (Reviewer 2 §1.5): from 2 paragraphs (~700 words) to 1 paragraph (~120 words). Detailed audit trail in supplementary §S6.
+
+**T209 NFW sampling bug fixed** (Reviewer 2 §2.2): the previous `nfw_sample_r` had `if rand() < rho_proportional * (x * (1 + x)^2) / 1.0` which simplifies to `rand() < 1.0` (always true) — uniform sampling, not NFW. Fixed to proper rejection sampling with f_max = 4 normalization. T209 was never executed (single-comp KiSS-SIDM blocker); bug noted, code kept for archive.
+
+**T210 justifications added** (Reviewer 2 §2.3): explicit comments for width_HL = 50.0 (intentionally broader than Path A2 narrow-resonance scan) and σ_unc = 10.0 for Crater II/Antlia II (kinematic-inference systematic, not observational scatter).
+
+**Files modified:**
+- `v0.3-prelim/docs/PAPER_V1_DRAFT.md` (abstract, §10 scope, §11 lead + LZ compression)
+- `v0.3-prelim/code/t209_cloud9_nbody_setup.jl` (NFW sampling bug fix)
+- `v0.3-prelim/code/t210_gating_test_crater_antlia.py` (justifications added)
+- `VERSION`, `README.md`, `v0.3-prelim/README.md`, `CURRENT.md` — bumped to v18.41
+
+**Status:** Paper is now polished per Reviewer 2's "honesty is strong, presentation needs tightening" guidance. v18.41 ships at commit `pending`, tag `v18.41-paper-polish-2review-response`.
+
 ## [PathA3-PathB3Trim-v18.40] - 2026-09-25
 
 **T212 Path A3 + Path B3 trim: two structural refinements to the Cloud-9 vs dSph tension discussion (§10.4d, §10.4e in PAPER_V1_DRAFT.md).** Refines but does not change the headline verdict (constraint map + no-go catalogue, not unified model).

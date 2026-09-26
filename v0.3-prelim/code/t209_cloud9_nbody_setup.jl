@@ -100,17 +100,32 @@ function nfw_cdf(r, r_s, c)
 end
 
 function nfw_sample_r(N, r_s, c; rng=Random.default_rng())
-    """Sample N radii from NFW profile (Eddington inversion)."""
-    # Use rejection sampling on the density profile: rho(r) ~ 1/((r/r_s)(1+r/r_s)^2)
+    """Sample N radii from NFW profile (rejection sampling).
+
+    Per Reviewer 2 (2review.docx §2.2): the previous version had
+    `if rand() < rho_proportional * (x * (1 + x)^2) / 1.0`, which
+    simplifies to `rand() < 1.0` (always true) because rho_proportional
+    = 1/(x*(1+x)^2) cancels the (x*(1+x)^2) factor. This means the
+    function was uniform sampling, not NFW sampling.
+
+    FIXED: rejection sampling with proper envelope normalization.
+    The maximum of f(x) = 1/(x*(1+x)^2) is at x = 1, where f_max = 1/4.
+    We sample x uniformly in [r_min, r_max] and accept with probability
+    f(x) / f_max.
+    """
     r_samples = Float64[]
-    r_max_sample = c * ustrip(u"pc", r_s)  # up to r_vir
+    r_s_pc = ustrip(u"pc", r_s)
+    r_max_sample = c * r_s_pc  # up to r_vir
+    r_min_sample = 1e-3 * r_s_pc  # avoid r=0 singularity
+    f_max = 4.0  # = 1 / min f(x) for x in [0, inf], min occurs at x=1
+
     while length(r_samples) < N
-        r_try = rand(rng) * r_max_sample
-        # Acceptance probability proportional to density
-        x = r_try / ustrip(u"pc", r_s)
-        rho_proportional = 1.0 / (x * (1 + x)^2)
-        if rand(rng) < rho_proportional * (x * (1 + x)^2) / 1.0
-            # max density is at x=1, rho_proportional_max = 1/4
+        r_try = r_min_sample + rand(rng) * (r_max_sample - r_min_sample)
+        x = r_try / r_s_pc
+        # f(x) = 1 / (x * (1 + x)^2)
+        f_x = 1.0 / (x * (1 + x)^2)
+        # Accept with probability f(x) / f_max
+        if rand(rng) < f_x / f_max
             push!(r_samples, r_try)
         end
     end

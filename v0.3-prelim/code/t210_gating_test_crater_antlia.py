@@ -134,7 +134,19 @@ FLOORS = {
 
 
 def evaluate_sigma_eff(v: float) -> float:
-    """Compute sigma_eff at velocity v under borrowed prescription."""
+    """Compute sigma_eff at velocity v under borrowed prescription.
+
+    Note on width_HL (per Reviewer 2 2review.docx section 2.3): the
+    hardcoded value 50.0 km/s is INCONSISTENT with the Path A2 scan script
+    (which uses width_HL as a free parameter in [0.5, 5] km/s). For the
+    gating test specifically, we use the wider width (50.0 km/s) because
+    it represents the BROAD feature of the borrowed-prescription sigma_HL
+    (peak at v_HL = 100 km/s, slow rolloff over the v = 28-100 km/s range)
+    rather than the narrow resonance being scanned in Path A2. If the
+    Path A2 narrow resonance (width = 0.5-5 km/s) is more physically
+    motivated, the result is even worse for Crater/Antlia (the resonance
+    misses their velocity scale entirely).
+    """
     return sigma_eff_three_term(
         v,
         f_H=F_H_CC_BORROWED,  # UDG-like, use f_H_cc
@@ -144,13 +156,23 @@ def evaluate_sigma_eff(v: float) -> float:
         sigma_0_HL=BORROWED_PARAMS["sigma_0_HL"],
         sigma_peak_HL=BORROWED_PARAMS["sigma_peak_HL"],
         v_HL=BORROWED_PARAMS["v_HL"],
-        width_HL=50.0,
+        width_HL=50.0,  # see note above; broader than Path A2 scan
         sigma_0_LL=BORROWED_PARAMS["sigma_0_LL"],
     )
 
 
 def verdict(sigma_eff_val: float, target_value: float, target_type: str, sigma_unc: float = 5.0) -> dict:
-    """Check pass/fail against floor/ceiling/gaussian."""
+    """Check pass/fail against floor/ceiling/gaussian.
+
+    Note on sigma_unc (per Reviewer 2 2review.docx section 2.3): the default
+    of 5.0 cm^2/g is an exploratory convention for cross-system consistency
+    tests. For Crater II / Antlia II we override to 10.0 (call sites below)
+    to reflect the larger kinematic-inference uncertainty for these systems
+    (sigma/m ~ 60 cm^2/g at V_max ~ 26 km/s from Zhang+ 2024; the +/-10
+    reflects the kinematic-inference systematic uncertainty in the published
+    sigma/m value, NOT observational scatter). For systems with published
+    sigma_unc values (e.g., SPARC, dSph), we use the published values.
+    """
     if target_type == "floor":
         # Need sigma_eff >= target_value
         if sigma_eff_val >= target_value:

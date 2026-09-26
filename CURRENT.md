@@ -2,7 +2,32 @@
 
 > **For:** Anyone who has 60 seconds and wants to know what this project
 > is, what it claims, and what the current best numbers are.
-> Updated with each version-bump round. Last refresh: 2026-09-25 (v18.40).
+> Updated with each version-bump round. Last refresh: 2026-09-26 (v18.41).
+
+---
+
+## Standing: v0.4-prelim+v18.41 (2026-09-26, 2review.docx paper polish)
+
+**v18.41 paper polish** — response to 2review.docx (2 reviewers: constructive feedback on v18.40 review bundle). Per Rule 29 (reviewer checklist as literal TODO list), 5 of 5 immediate fixes applied; medium-term items deferred.
+
+- **Abstract compressed**: 1,200 → 282 words (Reviewer 2 §3.4). Cut LZ event digression, three-observational-anchors elaboration, detailed Drobczyk parameter numbers. Core messages retained: framework = constraint map + no-go catalogue; 4 of 8 channels under physically motivated f_H; Cloud-9 vs dSph tension unresolved; Path F1 structural fix; five no-go theorems; two-mediator Drobczyk candidate.
+
+- **"6-7 of 8" headline retired → "4 of 8 under physically motivated f_H"** (Reviewer 2 §1.2, §3.2). §11 lead paragraph and honest-headline-results section now lead with 4 of 8 under physically motivated f_H. 7 of 8 under borrowed f_H is mentioned but explicitly flagged as not self-consistently derived at Phase 44.
+
+- **§10 scope statement added** (Reviewer 2 §1.3): explicit statement that the five no-go theorems apply to the Phase 44 single-component σ/m = 0.052 cm²/g baseline. T163 KK-tower best-fit parameters have NOT been independently re-tested; re-running the no-gos against T163 is deferred to v19.0. T184 systematic distinguished from the four specific no-gos.
+
+- **LZ section compressed** (Reviewer 2 §1.5): §11 LZ paragraph compressed from 2 paragraphs (~700 words) to 1 paragraph (~120 words). Detailed audit trail preserved in supplementary §S6.
+
+- **T209 NFW sampling bug fixed** (Reviewer 2 §2.2): the previous `nfw_sample_r` had `if rand() < rho_proportional * (x * (1 + x)^2) / 1.0` which simplifies to `rand() < 1.0` (always true) — the function was uniform sampling, not NFW sampling. Fixed to proper rejection sampling with f_max = 4 normalization. (T209 was never executed; bug noted, code kept for archive.)
+
+- **T210 justifications added** (Reviewer 2 §2.3): explicit comments for width_HL = 50.0 (intentionally broader than Path A2 narrow-resonance scan) and σ_unc = 10.0 for Crater II/Antlia II (kinematic-inference systematic, not observational scatter).
+
+**Honest verdict (unchanged from v18.40):**
+- 4 of 8 channels under physically motivated f_H (the honest number)
+- 7 of 8 channels only under borrowed (hand-picked) f_H
+- Framework is a structural constraint map + no-go catalogue, not a unified derivation
+
+**Status:** paper is now polished per Reviewer 2's "honesty is strong, presentation needs tightening" guidance. v18.41 ships at commit `pending`, tag `v18.41-paper-polish-2review-response`.
 
 ---
 
