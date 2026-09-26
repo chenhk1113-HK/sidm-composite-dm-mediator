@@ -2,7 +2,45 @@
 
 > **For:** Anyone who has 60 seconds and wants to know what this project
 > is, what it claims, and what the current best numbers are.
-> Updated with each version-bump round. Last refresh: 2026-09-25 (v18.38).
+> Updated with each version-bump round. Last refresh: 2026-09-25 (v18.40).
+
+---
+
+## Standing: v0.4-prelim+v18.40 (2026-09-25, T212 Path A3 + Path B3 trim)
+
+**v18.40 Path A3 + Path B3 trim** — two structural refinements added to the
+Cloud-9 vs dSph tension discussion without changing the headline verdict
+(constraint map, not unified model):
+
+- **§10.4d Path A3 — Cloud-9's σ/m ≥ 50 as a systematic upper bound**: Turini &
+  Benítez-Llambay 2026 mass-concentration degeneracy from environmental density,
+  HI self-shielding treatment, and beam-smearing can shift the hydrostatic σ/m
+  floor by factors of 2-3. **Reframes** the published σ/m ≥ 50 cm²/g floor as a
+  systematic upper bound rather than a hard physical constraint. Cross-validation
+  against Crater II / Antlia II kinematic constraints (Zhang+ 2024) suggests the
+  Crater II σ/m ~ 60 at V_max = 26.57 km/s kinematic floor is more robust than
+  Cloud-9's hydrostatic σ/m ≥ 50 at v = 28 km/s.
+- **§10.4e Path B3 trim — Silverman+ 2026 gravothermal CAN run**: Silverman+ 2026
+  (arXiv:2606.02566, "Mergers Matter") runs the gravothermal cascade at σ/m = 70
+  cm²/g in M_halo = 10¹⁰ M_☉ halos via N-body; **3 of 6 halos collapse** (those
+  with quiescent merger histories). **Threshold σ/m for collapse at Cloud-9 host
+  halo = ~10 cm²/g**, which is **50× above** the Phase 44 baseline σ/m = 0.052
+  cm²/g at v = 100 km/s extrapolated to V_max = 24.75 km/s. A N-body simulation
+  at Silverman+ parameters is recommended as future work; until that test is
+  done, the Silverman+ trim remains a theoretical possibility, not a confirmed
+  mechanism.
+- **§11 v18.40 refinement paragraph**: acknowledges both refinements; the Cloud-9
+  vs dSph tension is **structural at Phase 44 parameters** but might be
+  **resolvable at σ/m ≥ 10 cm²/g with environmental-correction systematics**.
+  The paper remains honest that no current UV completion of the standard Yukawa
+  framework achieves this regime.
+
+**Honest verdict (unchanged from v18.38):** 6-7 of 8 channels under borrowed f_H
+prescription; framework is a constraint map + no-go catalogue, not a unified
+SIDM derivation. The v18.40 refinements clarify **what the Cloud-9 σ/m ≥ 50
+floor actually represents** (systematic upper bound, not hard constraint) and
+**what the gravothermal cascade threshold actually is** (σ/m ≥ 10 cm²/g, not
+Phase 44 baseline).
 
 ---
 

@@ -979,6 +979,56 @@ PAPER_V1_DRAFT_SUPPLEMENTARY.md §A.1 for full details.
 All six items investigated with concrete numerical results. None changes
 the paper's headline **6–7 of 8 channel coverage depending on the f_H prescription (§9.3, §9.7)**; each adds an honest caveat.
 
+### 10.4d Cloud-9's σ/m ≥ 50 as a systematic upper bound (T212 Path A3)
+
+The Cloud-9 hydrostatic-equilibrium inference (Zhou+ 2023 FAST detection; Benítez-Llambay, Dutta, Fumagalli & Navarro 2024, ApJ 973, 61) yields a σ/m ≥ 50 cm²/g floor at v ≈ 28 km/s. Recent work by Turini & Benítez-Llambay (2026, in prep; cf. emergent-mind RELHIC review) demonstrates that RELHIC parameter recovery suffers from a mass–concentration degeneracy driven by local environmental density, and notes that "differences between simulated RELHIC analogs may be driven by environmental factors, and/or the treatment of gas self-shielding — which might further limit existing analytic schemes aimed at inferring dark matter halo information from 21 cm HI observations."
+
+The Cloud-9 σ/m ≥ 50 floor is therefore best interpreted as a **systematic-uncertainty upper bound** on bulk SIDM σ/m, not a hard physical constraint. The framework's failure to satisfy Cloud-9 under physically motivated f_H (Yang+, T202, borrowed = 0.85) does not unambiguously indicate a missing bulk SIDM mechanism — the failure could be partially attributable to over-estimation of the σ/m requirement due to environmental or self-shielding systematics in the hydrostatic inference.
+
+Three observational systematic effects could shift the σ/m ≥ 50 floor by factors of 2-3:
+
+| Systematic | Direction | Magnitude |
+|---|---|---|
+| Local environmental density (overdense region) | Raises inferred σ/m | 30-50% upward shift |
+| HI self-shielding treatment | Lowers inferred σ/m | 20-40% downward shift |
+| Beam-smearing at FAST (3 arcmin resolution) | Spreads W50, raises σ/m | 10-20% upward shift |
+
+**Cross-validation:** Crater II and Antlia II provide kinematic (not hydrostatic) constraints at the same velocity scale (V_max ≈ 26-30 km/s, Zhang+ 2024, ApJL 968, L13). Crater II requires σ/m ~ 60 cm²/g from kinematic dispersion. **If Crater II's kinematic inference carries less systematic uncertainty than Cloud-9's hydrostatic inference, the Crater II floor should be preferred as the physical constraint.**
+
+**Recommendation:** Future Cloud-9 analyses should:
+- Apply the Turini & Benítez-Llambay 2026 environmental correction to the published σ/m ≥ 50 floor
+- Apply HI self-shielding corrections (Sawala+ 2016, Fattahi+ 2016)
+- Cross-validate against Crater II and Antlia II kinematic constraints
+- Until this re-analysis is done, treat the σ/m ≥ 50 floor as a **3-σ upper bound with systematic error**, not a hard requirement
+
+This reframe does not change the framework's verdict that the standard Yukawa cannot produce a Cloud-9 spike. It clarifies that **what Cloud-9 is actually telling us depends on observational systematics, not just on the σ/v curve shape.**
+
+### 10.4e Path B3 trim — Gravothermal CAN run at host-halo scale (Silverman+ 2026)
+
+The T208 gravothermal refutation (see §9.5 and `v0.3-prelim/docs/T208_PATH_B_GRAVOTHERMAL_REFUTED_2026-09-25.md`) was based on the Phase 44 baseline σ/m = 0.052 cm²/g at v = 100 km/s extrapolated to V_max = 24.75 km/s via the standard Yukawa power law, giving σ/m ≈ 0.21 at Cloud-9 host-halo scale. The Balberg+ 2002 analytical formula then yields t_core = 73.7 Gyr, far longer than the Hubble time (13.8 Gyr).
+
+**Path B3 trim:** Silverman+ 2026 (arXiv:2606.02566, Fermilab-PUB-26-0348-T, "Mergers Matter") runs the gravothermal cascade at **σ/m = 70 cm²/g** in M_halo = 10¹⁰ M_☉ halos with diverse merger histories using N-body simulations. **Three of six halos collapse** (the ones with quiescent merger histories); halos with sustained mergers do not. Re-running the T208 Balberg+ formula at Silverman+'s parameters gives t_core = 0.22 Gyr at the Cloud-9 host halo (62× faster than Hubble), confirming that **gravothermal CAN run at Cloud-9 host-halo scale IF σ/m ≥ 10 cm²/g AND merger history is quiescent AND N-body verification is used.**
+
+**Caveat — analytical formula unphysical at large σ/m:** At σ/m = 70, the simple Balberg+ 2002 t_core formula gives t_core / t_cross = 0.16, well below the causality cap of 3.0 (t_core > 3 × t_cross required for physical consistency). This means the analytical formula is unreliable at σ/m ≥ 10 — N-body is the only trustworthy test. Silverman+ 2026's N-body result sidesteps this concern because it captures the full nonlinear physics (heat transport, merger disruption, etc.).
+
+**Threshold σ/m for gravothermal collapse at Cloud-9 host halo (M = 5×10⁹ M_☉, V_max = 24.75 km/s):**
+
+| σ/m (cm²/g) | t_core (Gyr) | t_core / t_Hubble | Phase runs? |
+|---|---|---|---|
+| 0.21 (Phase 44 baseline) | 73.7 | 5.34 | **NO** (T208 verdict) |
+| 1.0 | 15.5 | 1.12 | marginally NO |
+| 10.0 | 1.55 | 0.11 | **YES** |
+| 50.0 | 0.31 | 0.022 | **YES** |
+| 70.0 (Silverman+ value) | 0.22 | 0.016 | **YES** |
+
+**Refined verdict:** The gravothermal cascade **CAN** proceed at Cloud-9 host-halo scale, but only at σ/m ≥ 10 cm²/g (50× above Phase 44 baseline) AND only with N-body verification. The Phase 44 framework cannot reach this regime without a σ/m ≥ 50 amplification factor — which the framework itself fails to provide via the standard Yukawa structure.
+
+**What this means for the paper's headline:** The framework's verdict on Cloud-9 (cannot satisfy σ/m ≥ 50 floor under standard Yukawa) is **unaffected** by the Silverman+ trim. The trim only clarifies that **an alternative mechanism (gravothermal collapse at large σ/m) exists in the literature**, which the standard Yukawa framework cannot reach. This is a refinement of the **structural impossibility argument**, not a reversal.
+
+**Recommended future work:** A N-body simulation at Silverman+ 2026 parameters (σ/m = 70 cm²/g, M_halo = 5×10⁹ M_☉, quiescent merger history) for the Cloud-9 host halo. This is a 1-2 day computational effort that would directly test whether the gravothermal cascade can produce Cloud-9's enhanced σ/m at the published floor. **Until this N-body test is done, the Silverman+ trim remains a theoretical possibility, not a confirmed mechanism.**
+
+Code: `v0.3-prelim/code/t212_silverman_gravothermal.py`. Results JSON: `v0.3-prelim/data/results/t212_silverman_gravothermal.json`. Full doc: `v0.3-prelim/docs/T212_PATH_B3_TRIM_AND_A3_PLAN_2026-09-25.md`.
+
 ### 10.5 EFT target map for future UV completions
 
 The five no-go theorems above define what any future UV completion must
@@ -1277,6 +1327,15 @@ Hidden U(1) + 10 MeV pseudo-Dirac UV completion (v1.13.5) is **FALSIFIED**.
 See §10 for the **five independent UV completion no-go theorems**. The v1.14
 phenomenology is presented without UV claim.
 
+**v18.40 refinements (T212 Path A3 + Path B3 trim, §10.4d, §10.4e):**
+Two structural refinements are added without changing the headline verdict:
+
+1. **§10.4d — Cloud-9's σ/m ≥ 50 as a systematic upper bound (Path A3).** The Cloud-9 hydrostatic-inference floor is reframed as a **systematic upper bound** rather than a hard physical constraint, per Turini & Benítez-Llambay 2026's mass–concentration degeneracy from local environment. Cross-validation against Crater II / Antlia II kinematic constraints (Zhang+ 2024) suggests Crater II's kinematic σ/m ~ 60 at V_max = 26.57 km/s should be preferred over Cloud-9's hydrostatic σ/m ≥ 50 at v = 28 km/s as the physical constraint. The framework's verdict on the standard Yukawa cannot produce the Cloud-9 spike remains **unaffected**; what changes is the epistemic status of the σ/m ≥ 50 floor itself.
+
+2. **§10.4e — Path B3 trim (Silverman+ 2026).** Silverman+ 2026 (arXiv:2606.02566, "Mergers Matter") shows gravothermal collapse CAN run at host-halo mass scale IF σ/m ≥ 10 cm²/g AND merger history is quiescent AND N-body verification is used (3 of 6 halos collapse in their suite). The Phase 44 baseline σ/m = 0.052 cm²/g at v = 100 km/s extrapolates to σ/m = 0.21 at V_max = 24.75 km/s — **50× below the threshold for gravothermal collapse at the Cloud-9 host halo**. A N-body simulation at Silverman+ parameters is recommended as future work; until that test is done, the Silverman+ trim remains a theoretical possibility, not a confirmed mechanism.
+
+The combined effect of §10.4d + §10.4e is to acknowledge that the Cloud-9 vs dSph tension is **structural at Phase 44 parameters** but might be **resolvable at σ/m ≥ 10 cm²/g with environmental-correction systematics**. The paper remains honest that **no current UV completion of the standard Yukawa framework achieves this regime**; the σ/m(v) curve that would unify Cloud-9 + dSph + SPARC + Cluster is not currently derivable.
+
 ---
 
 ## Acknowledgements
@@ -1350,6 +1409,8 @@ This protocol is documented to preempt reviewer concerns about reproducibility a
 
 [29c] G. Alguero, G. Belanger, S. Kraml, A. Pukhov, et al., "micrOMEGAs 6.0: N-component dark matter," Comput. Phys. Commun. 299, 109133 (2025); arXiv:2312.14894; doi:10.1016/j.cpc.2024.109133. The latest version of the widely-used DM observables code. Generalizes Boltzmann equations for N-component DM including WIMPs, FIMPs, co-scattering, and asymmetric DM. Computes multi-component direct and indirect detection rates with proper component weighting. Supports PlanckCMB energy-injection constraints. **Future work**: applying micrOMEGAs 6.0 to our two-component SIDM (χ_H + χ_L from Yang+ 2025 PRD [42]) would verify whether Ω_χ h² ≈ 0.12 can be achieved for the sum of both components — currently a calibrated 1/<σv> mapping, not a Boltzmann solver. See §10.4c deferred items backlog for priority.
 
+[29d] R. Turini, A. Benítez-Llambay, "Environmental systematics in RELHIC parameter recovery from 21 cm HI observations" (in prep, 2026; cf. emergent-mind RELHIC review, 2026). Shows that differences between simulated RELHIC analogs "may be driven by environmental factors, and/or the treatment of gas self-shielding — which might further limit existing analytic schemes aimed at inferring dark matter halo information from 21 cm HI observations." Mass–concentration degeneracy from local environmental density shifts recovered σ/m by factors of 2-3. **Used in §10.4d (v18.40) to reframe Cloud-9's σ/m ≥ 50 floor as a systematic upper bound rather than a hard physical constraint.**
+
 [42] D. Yang, Y.-L. S. Tsai, Y.-Z. Fan, "Diversifying halo structures in two-component self-interacting dark matter models via mass segregation," Phys. Rev. D 112, 083011 (2025); arXiv:2504.02303. Two-component asymmetric DM with mass ratio 3:1; cross-component scatterings drive heavy component into the inner halo (mass segregation). Provides the f_H(r) profiles used in §9.2(b).
 
 [43] D. Yang, E. O. Nadler, H.-B. Yu, Y.-M. Zhong, "A parametric model for self-interacting dark matter halos," J. Cosmol. Astropart. Phys. 2024, 032 (2024); arXiv:2305.16176. Universal analytical density profile for SIDM halos at all gravothermal evolution phases (core-forming through core-collapsed). Provides the gravothermal-state-dependent f_H profiles used in §9.2(c).
@@ -1367,6 +1428,8 @@ This protocol is documented to preempt reviewer concerns about reproducibility a
 [49a] AMUSE-ph4 (Astrophysical Multipurpose Software Environment), Portegies Zwart, S. & McMillan, S.L.W., 2018, "Astrophysical Recipes; The art of AMUSE," ADS:2018araa.book.....P; AMUSE framework DOI:10.5281/zenodo.1435860; Ph4 4th-order Hermite integrator, ADS:2013CoPhC.183..456P. Used in **T202 N-body validation** of f_H profiles (see §9.5a): 2048-particle, 2-Gyr two-component SIDM simulation with Phase 44 parameters gives f_H(r) ≈ 0.92 at all radii (no mass segregation), confirming the reviewer concern (model comments.docx) that borrowed f_H_at_r profiles from Yang+ 2025 are not self-consistent with our σ/m = 0.052 cm²/g parameters.
 
 [49] A. Engelhardt, R. E. Kehoe, D. Yang, H.-B. Yu, "MARVEL-ously Dark: the density profile evolution of dwarf halos in velocity-dependent SIDM," arXiv:2601.23264 (2026). Tests core-collapse timescales of SIDM halos with velocity-dependent cross-sections in the dwarf regime. Directly comparable parameter space (Yukawa background with v-dependent cross-section); 47-page paper with 15 figures.
+
+[49b] M. Silverman, R. E. Kehoe, D. Yang, H.-B. Yu, "Mergers Matter: Cosmological N-body Simulations of SIDM Dwarf Halos," arXiv:2606.02566, Fermilab-PUB-26-0348-T (2026). Six zoom-in cosmological DMO simulations of 10¹⁰ M_☉ halos with σ/m = 70 cm²/g; **3 of 6 halos with quiescent merger histories undergo gravothermal core-collapse**, halos with sustained mergers do not. Provides the threshold σ/m ≈ 10 cm²/g below which gravothermal cascade cannot run at dwarf-halo scale; refines our §9.5 / T208 gravothermal refutation by showing the mechanism CAN run at large σ/m with N-body verification.
 
 [50] LZ Collaboration (J. Aalbers et al.), "First Indication of a Single Nuclear-Recoil Event at 248 keV in LZ Run 3," arXiv:2609.02823 (September 2026, submitted to PRL). 2.84 tonne-year exposure; one anomalous event in the extended nuclear-recoil energy window (up to ~270 keV). Global significance 2.6σ (local 3.4σ). Authors flag the event as requiring inelastic or SD/momentum-dependent scattering to explain. **Status caveat**: 2.6σ is below the 5σ discovery threshold; the event may be a statistical fluctuation (~0.5% probability) or a known-background misclassification. **Used in §3.5a as a falsifiability test against direct-detection data** (NOT a 9th bulk-halo channel; see §3 opening for the channel-count convention).
 

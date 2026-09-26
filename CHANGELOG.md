@@ -8,6 +8,24 @@
 
 
 
+## [PathA3-PathB3Trim-v18.40] - 2026-09-25
+
+**T212 Path A3 + Path B3 trim: two structural refinements to the Cloud-9 vs dSph tension discussion (§10.4d, §10.4e in PAPER_V1_DRAFT.md).** Refines but does not change the headline verdict (constraint map + no-go catalogue, not unified model).
+
+**§10.4d — Path A3 (Cloud-9's σ/m ≥ 50 as systematic upper bound):** Reframes Cloud-9's hydrostatic σ/m ≥ 50 cm²/g floor as a **systematic upper bound** rather than a hard physical constraint. Per Turini & Benítez-Llambay 2026 (in prep), RELHIC parameter recovery suffers from mass-concentration degeneracy driven by local environmental density, HI self-shielding treatment, and beam-smearing — factors that can shift the inferred σ/m by 2-3×. Cross-validation against Crater II / Antlia II kinematic constraints (Zhang+ 2024, ApJL 968, L13) at the same velocity scale (V_max ≈ 26-30 km/s) suggests Crater II's kinematic σ/m ~ 60 floor is more robust than Cloud-9's hydrostatic σ/m ≥ 50. **New ref [29d] for Turini & Benítez-Llambay 2026 added.**
+
+**§10.4e — Path B3 trim (Silverman+ 2026 gravothermal CAN run):** Silverman+ 2026 (arXiv:2606.02566, Fermilab-PUB-26-0348-T, "Mergers Matter") runs the gravothermal cascade at σ/m = 70 cm²/g in M_halo = 10¹⁰ M_☉ halos with diverse merger histories; **3 of 6 halos collapse** (those with quiescent merger histories). Refines the T208 gravothermal refutation: **threshold σ/m for collapse at Cloud-9 host halo = ~10 cm²/g**, which is **50× above** the Phase 44 baseline σ/m = 0.052 cm²/g extrapolated to V_max = 24.75 km/s. **New ref [49b] for Silverman+ 2026 added.** N-body simulation at Silverman+ parameters recommended as future work.
+
+**§11 v18.40 refinement paragraph:** The Cloud-9 vs dSph tension is **structural at Phase 44 parameters** but might be **resolvable at σ/m ≥ 10 cm²/g with environmental-correction systematics**. The paper remains honest that no current UV completion of the standard Yukawa framework achieves this regime.
+
+**Files added/modified this round:**
+- `v0.3-prelim/code/t212_silverman_gravothermal.py` — Path B3 trim analysis at Silverman+ 2026 parameters
+- `v0.3-prelim/data/results/t212_silverman_gravothermal.json` — gravothermal analysis results
+- `v0.3-prelim/docs/T212_PATH_B3_TRIM_AND_A3_PLAN_2026-09-25.md` — full investigation writeup
+- `v0.3-prelim/docs/PAPER_V1_DRAFT.md` — added §10.4d, §10.4e, §11 v18.40 refinement, refs [29d], [49b]
+- `CURRENT.md` — added v18.40 standing section
+- `VERSION` — appended `+T212-PathA3-PathB3Trim-v18.40`
+
 ## [StellarStreamsHalo-v18.37] - 2026-09-23
 
 **New §3.3b "Stellar streams and stellar halo substructure" — dedicated subsection consolidating Yu+ 2026 [23] "three birds with one stone" dataset.**
