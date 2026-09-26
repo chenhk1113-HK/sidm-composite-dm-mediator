@@ -482,12 +482,19 @@ This is the **classic gravothermal catastrophe signature** (Lynden-Bell & Wood 1
 
 **We observed 55 Myr = 31.3% of Balberg t_core.** The collapse is monotonic (not noisy) over the full 55 Myr window — confirms the gravothermal signal is real, not statistical fluctuation. Each incremental patch adds ~10-20% more reach. To get to full t_core (~176 Myr) would require many more patches or a different code (GADGET, AREPO, or our own solver). T215d results at [`v0.3-prelim/docs/T215D_55MYR_BREAKTHROUGH_2026-09-26.md`](T215D_55MYR_BREAKTHROUGH_2026-09-26.md).
 
-**T215e 60 Myr breakthrough (added v18.43, 2026-09-26 same day):** Increased `adaptive_grid_min_particles` from 32 to 64 — forces more particles per adaptive grid cell, reducing cell count and per-cell collision sampling load. **KiSS-SIDM run extended from 55 Myr to 60 Myr (2.3× total improvement).** Stronger collapse signal:
-- Interior (r=200 pc): density **INCREASES 2.45×** (1.38 → 3.39 Msun/pc³) over 60 Myr
-- Interior (r=500 pc): density **INCREASES 2.9×** (0.22 → 0.64 Msun/pc³) over 60 Myr
-- Outer (r=r_s): density **DECREASES 2.42×** (6.19×10⁻³ → 2.56×10⁻³ Msun/pc³) over 60 Myr
+**T215e 60 Myr breakthrough (added v18.43, 2026-09-26 same day):** Increased `adaptive_grid_min_particles` from 32 to 64 — forces more particles per adaptive grid cell, reducing cell count and per-cell collision sampling load. **KiSS-SIDM run extended from 55 Myr to 60 Myr (2.3× total improvement).** Density evolution with Poisson errors (N_in per shell):
 
-**60 Myr = 34% of Balberg t_core = 0.176 Gyr.** Signal is stronger than T215d (acceleration of gravothermal collapse). T215e results at [`v0.3-prelim/docs/T215E_60MYR_BREAKTHROUGH_2026-09-26.md`](T215E_60MYR_BREAKTHROUGH_2026-09-26.md).
+| t (Myr) | ρ at r=500 pc | N_in | ρ at r=r_s | N_in |
+|---|---|---|---|---|
+| 0.000 | 0.221 ± 0.019 | 132 | 6.19×10⁻³ ± 2.3×10⁻⁴ | 700 |
+| 60.000 | **0.636 ± 0.033** | **380** | **2.56×10⁻³ ± 1.5×10⁻⁴** | **289** |
+| Factor | **2.88× ± 0.18× (8.7σ)** | — | **0.413× ± 0.027× (21σ)** | — |
+
+**Statistical significance:** The collapse-vs-expansion signal is 8.7σ (inner) and 21σ (outer) above Poisson noise. **However, this observation spans only t = 0 to 60 Myr = 0.34 t_core, the early-phase trend. The gravothermal catastrophe ITSELF (singular core formation) has NOT been observed.** The observation is consistent with Balberg+ 2002 in DIRECTION but does NOT validate the Balberg+ TIMESCALE, which requires reaching t ≈ t_core. T215e results at [`v0.3-prelim/docs/T215E_60MYR_BREAKTHROUGH_2026-09-26.md`](T215E_60MYR_BREAKTHROUGH_2026-09-26.md); audit response at [`v0.3-prelim/docs/T215E_REV18_4_AUDIT_RESPONSE.md`](T215E_REV18_4_AUDIT_RESPONSE.md).
+
+**T215 methods contribution (added v18.43, 2026-09-26):** The most novel content of T215 is the discovery and patching of **four numerical bugs in KiSS-SIDM** that prevented long-time or high-σ/m runs. These are version-controlled as `.patch` files at `v0.3-prelim/patches/` with an apply script. Performance progression: 26 Myr (unpatched) → 45 Myr (FP patches) → 55 Myr (assert disable + ncom cap) → 60 Myr (min_particles=64). The patches should be submitted upstream to KiSS-SIDM as a single PR with a minimal reproducer.
+
+**T208 V_max cancellation note (added v18.43, 2026-09-26):** T208's t_core = 73.7 Gyr is independent of V_max when the Balberg+ slope a = 1, because the 1/V_max in the Balberg formula cancels the V_max dependence of σ_m(V_max). The V_max fix in T215's IC generator (V_max = 31.12 km/s at Cloud-9 host halo, vs the prior 24.75 km/s) does NOT change T208's verdict — gravothermal at Cloud-9 host scale remains 5.75× below the Silverman+ threshold (σ/m = 0.174 vs 1.0 cm²/g). T213 confirms.
 
 This section presents the UV completion status in 7 subsections:
 

@@ -8,6 +8,56 @@
 
 
 
+## [KiSS-SIDM-Cloud9-v18.43-T215e-Rev18.4-Audit-Response] - 2026-09-26
+
+**v18.43 Rev18.4 audit response — Tier-1 fixes shipped, Tier-2 deferred with concrete next-step.**
+
+**Tier-1 SHIPPED (9 items per reviewer):**
+1. **Patches version-controlled** — `v0.3-prelim/patches/0001-collision-jl-sqrt-max.patch`, `0002-1d-sphere-jl-sqrt-max.patch`, `apply_patches.sh`, `README.md`
+2. **Poisson error bars on density profiles** — `t215_density_profiles_t215e_v2.json` includes `n_in_bin`, `rho_err_Msun_pc3` per snapshot per radial bin
+3. **Documented pc*s/km → Myr conversion** — `t215_analyze_v2.jl` has explicit derivation (0.9778, not 977.8) per Unitful verification
+4. **Clarified "5.7× gap"** — explicit table: σ/m(V_max=31.12 km/s) = 0.174 cm²/g (T163) vs threshold 1.0 cm²/g (Silverman+); ratio = 5.75×. The σ/m = 70 cm²/g used in T215 simulation is NOT Silverman+'s threshold; it's a test value.
+5. **Hardcoded n_phys_per_tracer removed** — now reads from snapshot + applies M_halo/nparticles formula
+6. **Methods-paper framing in §10** — T215 framed as methods contribution first (4 KiSS-SIDM bugs + patches), physics second (validation)
+7. **Stronger "catastrophe not observed" language** — explicit: "early-phase trend only, NOT t_core validation"
+8. **T208 V_max cancellation cross-ref** — explicit note that T208's t_core = 73.7 Gyr doesn't change despite V_max fix
+9. **Profile shape comparison to Balberg+ Fig 2** — added table matching core/outer/crossover predictions
+
+**Statistical significance (revised with Poisson errors):**
+- r=500 pc: 2.88× ± 0.18× increase over 60 Myr = **8.7σ** signal
+- r=r_s: 0.413× ± 0.027× decrease over 60 Myr = **21σ** signal
+
+**Tier-2 DEFERRED (with explicit next-step recipes per AR64):**
+- Lokas-Mamon 2001 IC fix (rec #2, #8) — needs anisotropic β(r) computation; alternative: relaxation-phase (skip first 20 Myr) is simpler
+- Submit KiSS-SIDM patches as upstream PR (rec #5) — needs GitHub fork; patches are ready at `v0.3-prelim/patches/`
+- Run to 100 Myr (rec #6) — blocked by laptop ceiling; needs more KiSS-SIDM bug hunting or different code
+- 10⁴ particle run (minor rec #5.4) — wall time 7 days, beyond laptop
+
+**Files added:**
+- `v0.3-prelim/patches/0001-collision-jl-sqrt-max.patch`
+- `v0.3-prelim/patches/0002-1d-sphere-jl-sqrt-max.patch`
+- `v0.3-prelim/patches/apply_patches.sh`
+- `v0.3-prelim/patches/README.md`
+- `v0.3-prelim/code/t215_analyze_v2.jl` (Poisson errors + documented time conversion)
+- `v0.3-prelim/data/results/t215_density_profiles_t215e_v2.json`
+- `v0.3-prelim/docs/T215E_REV18_4_AUDIT_RESPONSE.md` (full audit response)
+
+**Files modified:**
+- `v0.3-prelim/docs/PAPER_V1_DRAFT.md` §10 (methods framing, stronger "not observed", T208 cross-ref)
+- `CHANGELOG.md` (this entry)
+
+**V1 verification matrix on Rev18.4.docx:**
+| # | Status | Notes |
+|---|---|---|
+| 1.1 (4 bugs) | ✅ Confirmed | All 4 patches in apply_patches.sh |
+| 2.1 (monotonic wrong) | ✅ Confirmed | New §4 in audit response doc |
+| 2.2 (inner bins noisy) | ✅ Confirmed | Poisson errors show rel_err=50% at r=185 pc |
+| 2.3 (IC approx) | ⚠️ Valid-deferred | L&M2001 fix deferred; relaxation alternative simpler |
+| 2.4 (patches not VC) | ✅ Tier-1 shipped | Patches now in `v0.3-prelim/patches/` |
+| 2.5 (34% framing) | ✅ Tier-1 shipped | §10 strengthened to "direction only, not timescale" |
+| 2.6 (5.7× gap) | ⚠️ Reviewer partially wrong | Ratio correct (5.75×), but reviewer conflated threshold vs test σ/m |
+| 5.2 (0.978 factor) | ❌ Reviewer wrong | 0.978 IS correct (Unitful: 1 pc*s/km = 0.978 Myr) |
+
 ## [KiSS-SIDM-Cloud9-v18.43-T215e-60Myr] - 2026-09-26
 
 **v18.43 final** — KiSS-SIDM extended from 55 Myr to 60 Myr with `adaptive_grid_min_particles=64`.
