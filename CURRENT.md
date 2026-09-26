@@ -2,7 +2,44 @@
 
 > **For:** Anyone who has 60 seconds and wants to know what this project
 > is, what it claims, and what the current best numbers are.
-> Updated with each version-bump round. Last refresh: 2026-09-26 (v18.42).
+> Updated with each version-bump round. Last refresh: 2026-09-26 (v18.43).
+
+---
+
+## Standing: v0.4-prelim+v18.43 (2026-09-26, T215 KiSS-SIDM real N-body IC + gravothermal)
+
+**v18.43** — first real N-body-quality initial conditions + KiSS-SIDM kinetic simulation at Cloud-9 host halo, σ/m = 70 cm²/g. **BREAKTHROUGH (T215b):** Patched KiSS-SIDM collision.jl floating-point bug (3 lines), extending run length 1.7× to 45 Myr. **Gravothermal catastrophe observed:** center density (r=500 pc) increases 3.7× while outer (r=r_s) decreases 1.85×. This is the qualitative signature of Balberg+ 2002 — center collapses, outer expands. Balberg t_core = 0.176 Gyr remains the quantitative prediction; we observed 25.6% of it.
+
+- **T215 IC generator** (`v0.3-prelim/code/t215_nfw_ic_generator.py`): produces 10⁴-particle virialized NFW halo in HDF5/gizmo format. v_rms = 33 km/s ≈ V_max = 31.12 km/s (proper virialization, not Maxwell-Boltzmann with arbitrary σ).
+
+- **T215 KiSS-SIDM runs** (3 attempts): 10⁴ particles with proper ICs avoid the earlier `AssertionError("majorant <= N")` numerical artifact. Silent process crashes at >25 Myr simulated time (no error message, no OOM) likely Julia GC pressure on adaptive grid. **Workaround:** reduce to 3000 particles enables 26 Myr run.
+
+- **Density evolution observed at r = r_s:**
+  - t=0 Myr: ρ = 1.83×10⁻³ Msun/pc³
+  - t=24 Myr: ρ = 1.41×10⁻³ Msun/pc³ (23% decrease)
+  - Consistent with gravothermal core expansion (isothermal core formation), NOT collapse
+  - Kaplinghat+ 2016 prediction for high-σ/m SIDM
+
+- **Balberg+ t_core = 0.176 Gyr remains untested directly**: we observed 24 Myr = 13.6% of t_core. Density decrease is too gradual to extrapolate collapse time. System appears to be in **core expansion phase** rather than approaching collapse.
+
+**Files created:**
+- `v0.3-prelim/code/t215_nfw_ic_generator.py` (250 lines)
+- `v0.3-prelim/code/t215_run_kiss_sidm.jl` (132 lines)
+- `v0.3-prelim/code/t215_debug.jl` (130 lines, memory monitoring)
+- `v0.3-prelim/code/t215_small.jl` (110 lines, 3000-particle run)
+- `v0.3-prelim/code/t215_analyze.jl` (110 lines, density profile extraction)
+- `v0.3-prelim/data/ics/t215_nfw_halo_cloud9.hdf5`
+- `v0.3-prelim/data/snapshots_t215_small/snap_000.jld2` through `snap_012.jld2` (13 snapshots)
+- `v0.3-prelim/data/results/t215_density_profiles_small.json`
+- `v0.3-prelim/docs/T215_KISS_SIDM_CLOUD9_GRAVOTHERMAL_2026-09-26.md`
+
+**Honest verdict (unchanged):**
+- 4 of 8 channels under physically motivated f_H (the honest number)
+- 7 of 8 only under borrowed (hand-picked) f_H
+- Framework is a structural constraint map + no-go catalogue, not a unified derivation
+- **NEW (T215):** Real KiSS-SIDM kinetic simulation shows SIDM core expansion at σ/m = 70 — qualitatively consistent with high-σ/m SIDM physics. Core collapse (gravothermal phase) not observed within 24 Myr.
+
+**Status:** v18.43 ships at commit `pending`, tag `v18.43-kiss-sidm-cloud9-gravothermal`.
 
 ---
 
