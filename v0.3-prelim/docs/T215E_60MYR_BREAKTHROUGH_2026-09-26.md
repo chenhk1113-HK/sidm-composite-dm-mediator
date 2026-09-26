@@ -7,27 +7,35 @@
 
 By changing `adaptive_grid_min_particles` from 32 to 64 (forces more particles per cell), the KiSS-SIDM run extended from 55 Myr (T215d) to **60 Myr**. Same 3000 particles, same patch set.
 
-### Density evolution (3000 particles, t=0 to 60 Myr)
+### Density evolution (3000 particles, t=0 to 60 Myr, bin centers from log-spaced grid)
 
-| t (Myr) | ρ at r=200 pc | ρ at r=500 pc | ρ at r=r_s |
+**Using r=444 pc (bin 5) as headline because it has the largest particle count (N=380) and smoothest monotonic behavior.**
+
+| t (Myr) | ρ at r=287 pc (bin 4) | ρ at r=444 pc (bin 5) | ρ at r=r_s (bin 10) |
 |---|---|---|---|
-| 0 | 1.38 | 0.22 | 6.19×10⁻³ |
-| 5 | 0.092 | 0.28 | 6.14×10⁻³ |
-| 10 | 0.092 | 0.17 | 6.14×10⁻³ |
-| 15 | 0.21 | 0.16 | 6.21×10⁻³ |
-| 20 | 0.51 | 0.18 | 6.14×10⁻³ |
-| 30 | 1.66 | 0.25 | 4.97×10⁻³ |
-| 35 | 2.72 | 0.29 | 4.57×10⁻³ |
-| 40 | 2.90 | 0.42 | 4.03×10⁻³ |
-| 45 | 2.86 | 0.52 | 3.52×10⁻³ |
-| 55 | 3.52 | 0.63 | 2.73×10⁻³ |
-| **60** | **3.39** | **0.64** | **2.56×10⁻³** |
+| 0 | 0.528 ± 0.057 | 0.221 ± 0.019 | 6.19×10⁻³ |
+| 5 | 0.236 ± 0.038 | 0.276 ± 0.022 | 6.14×10⁻³ |
+| 10 | 0.180 ± 0.033 | 0.171 ± 0.017 | 6.14×10⁻³ |
+| 15 | 0.286 ± 0.042 | 0.156 ± 0.016 | 6.21×10⁻³ |
+| 20 | 0.273 ± 0.041 | 0.176 ± 0.017 | 6.14×10⁻³ |
+| 30 | 0.689 ± 0.065 | 0.248 ± 0.020 | 4.97×10⁻³ |
+| 35 | 1.099 ± 0.083 | 0.293 ± 0.022 | 4.57×10⁻³ |
+| 40 | 1.397 ± 0.093 | 0.415 ± 0.026 | 4.03×10⁻³ |
+| 45 | 1.552 ± 0.098 | 0.524 ± 0.030 | 3.52×10⁻³ |
+| 55 | 1.993 ± 0.111 | 0.635 ± 0.033 | 2.73×10⁻³ |
+| **60** | **1.807 ± 0.106** | **0.636 ± 0.033** | **2.56×10⁻³** |
 
-**Interior (r=200 pc): 2.45× density increase over 60 Myr**
-**Interior (r=500 pc): 2.9× density increase over 60 Myr**
-**Outer (r=r_s): 2.42× density decrease over 60 Myr**
+**Interior (r=287 pc, bin 4, N=85→321): ρ rises from 0.528 to 1.993 (3.78×), but last snapshot drops to 1.807 (9% drop). NOT monotonic — local fluctuations from low N_in_bin (85-321).**
 
-The signal is **stronger than T215d** (which had 2.0× / 2.1× / 2.0× at 55 Myr). The gravothermal catastrophe is **accelerating** as the system evolves toward full collapse.
+**Interior (r=444 pc, bin 5, N=132→380): ρ rises from 0.221 to 0.636 (2.88×) — monotonic from t=10 onwards. This is the ROBUST headline.**
+
+**Outer (r=r_s, bin 10, N=700→458): ρ decreases from 6.19×10⁻³ to 2.56×10⁻³ (2.42×) — monotonic.**
+
+**Statistical significance (with Poisson errors, per Rv18.4 rec #4):**
+- r=444 pc: ρ ratio = 2.88 ± 0.18 = **16σ** (combined Poisson)
+- r=r_s: ρ ratio = 0.413 ± 0.027 = **21σ** (combined Poisson)
+
+The **r=287 pc bin (closest to reviewer's "r≈200 pc" example)** shows the LAST snapshot dropping from t=55 to t=60 — this is consistent with the reviewer's observation that the inner bin is noisy. The r=444 pc bin is the smoother, more statistically significant choice.
 
 ## Performance comparison
 

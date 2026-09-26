@@ -1,0 +1,10 @@
+{
+  "status": "RUN_INCOMPLETE_DT_COLLAPSE",
+  "n_particles": 3000,
+  "t_end_Gyr": 0.07,
+  "t_max_reached_pcs_per_kms": 47.87,
+  "t_max_reached_myr": 46.83,
+  "rng_seed_task_local": 7,
+  "note": "Died at 47.9 Myr with seed 7. Different from t215i_seed42 (46.6 Myr) — confirms per-seed determinism is partial.",
+  "timestamp": "2026-09-26"
+}
