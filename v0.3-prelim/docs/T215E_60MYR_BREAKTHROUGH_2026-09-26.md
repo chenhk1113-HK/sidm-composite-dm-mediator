@@ -1,7 +1,15 @@
 # T215e — v18.43 Pushed to 60 Myr with adaptive_grid_min_particles=64
 
 **Date:** 2026-09-26
-**Status:** T215e extends the KiSS-SIDM run to **60 Myr** (34% of Balberg t_core).
+**Status:** T215e is **ONE specific run that reached 60 Myr**. Per Rv18.4 review (Round 4), this is **not reproducible** — the same script gives t_max ranging from 3.9 to 47.3 Myr across fresh-session runs (see T215K_FRESH_SESSION_TEST_2026-09-26.md). The "60 Myr" result should be treated as **indicative, not canonical**.
+
+## ⚠️ Contradiction Note (added after Rv18.4 Round 4)
+
+This document describes a single 60 Myr run from an earlier session. **Subsequent testing has shown that this exact configuration does NOT reliably produce 60 Myr runs in fresh sessions.** The 60 Myr result is one lucky draw from a broad distribution (3.9-47.3 Myr across 5 fresh-session tests with seed=42).
+
+**For the paper's main narrative:** See T215K_FRESH_SESSION_TEST_2026-09-26.md and T215HI_RNG_SEED_RESPONSE_2026-09-26.md for the framing: "qualitative gravothermal signature present in runs that survive past ~40 Myr, but the endpoint is not reproducible."
+
+**This document is preserved for reference:** the 11 snapshots and 2.88× density ratio are real measurements, but they describe ONE trajectory, not the canonical KiSS-SIDM behavior.
 
 ## Key result
 
