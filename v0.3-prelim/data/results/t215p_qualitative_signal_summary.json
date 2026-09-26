@@ -1,0 +1,16 @@
+{
+  "test": "T215p — 5x fresh-session runs with per-run density analysis",
+  "t_max_pc_per_kms": [71.59, 59.42, 30.93, 43.57, 71.59],
+  "t_max_myr": [69.99, 58.10, 30.24, 42.61, 69.99],
+  "snapshots": [12, 10, 6, 8, 12],
+  "density_ratios": {
+    "r_287_pc_last_over_first": [3.151, 4.424, 3.568, 3.483, 3.127],
+    "r_444_pc_last_over_first": [2.984, 2.986, 1.756, 2.867, 2.563],
+    "r_rs_last_over_first": [0.399, 0.339, 0.631, 0.456, 0.418]
+  },
+  "qualitative_signal_present": [true, true, true, true, true],
+  "n_signal_present": 5,
+  "n_total_runs": 5,
+  "conclusion": "Qualitative gravothermal signature (interior up + outer down) is present in 5/5 fresh-session runs. Reviewer rec #2 Option A SUCCEEDED.",
+  "timestamp": "2026-09-26"
+}

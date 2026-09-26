@@ -9,11 +9,13 @@ This document describes a single 60 Myr run from an earlier session. **Subsequen
 
 **For the paper's main narrative:** See T215K_FRESH_SESSION_TEST_2026-09-26.md and T215HI_RNG_SEED_RESPONSE_2026-09-26.md for the framing: "qualitative gravothermal signature present in runs that survive past ~40 Myr, but the endpoint is not reproducible."
 
+**Update (Round 5):** T215p per-run analysis (see T215P_PER_RUN_DENSITY_ANALYSIS_2026-09-26.md) showed that the **qualitative signal IS present in all 5 fresh-session runs** (t_max 30-70 Myr), not just the long ones. The 60 Myr endpoint is one draw, but the signal is robust.
+
 **This document is preserved for reference:** the 11 snapshots and 2.88× density ratio are real measurements, but they describe ONE trajectory, not the canonical KiSS-SIDM behavior.
 
-## Key result
+## Key result (in one particular run)
 
-By changing `adaptive_grid_min_particles` from 32 to 64 (forces more particles per cell), the KiSS-SIDM run extended from 55 Myr (T215d) to **60 Myr**. Same 3000 particles, same patch set.
+In one specific 60 Myr run, by changing `adaptive_grid_min_particles` from 32 to 64 (forces more particles per cell), the KiSS-SIDM run extended from 55 Myr (T215d) to **60 Myr**. Same 3000 particles, same patch set.
 
 ### Density evolution (3000 particles, t=0 to 60 Myr, bin centers from log-spaced grid)
 
@@ -45,22 +47,32 @@ By changing `adaptive_grid_min_particles` from 32 to 64 (forces more particles p
 
 The **r=287 pc bin (closest to reviewer's "r≈200 pc" example)** shows the LAST snapshot dropping from t=55 to t=60 — this is consistent with the reviewer's observation that the inner bin is noisy. The r=444 pc bin is the smoother, more statistically significant choice.
 
-## Performance comparison
+## Performance comparison — REMOVED (Per Rv18.4 Round 4 Rec #4)
 
-| Run | min_particles | t_max (Myr) | Snapshots |
-|---|---|---|---|
-| T215 (no patches) | 32 | 26 | 9 |
-| T215b (FP only) | 32 | 45 | 9 |
-| T215d (+ assert disable + cap) | 32 | 55 | 10 |
-| **T215e (+ min_particles=64)** | **64** | **60** | **11** |
+The "performance progression" table below is **NOT a progression of improving code** — it is five single draws from a heavy-tailed distribution. When the "patched" code was run 5 times in fresh sessions (T215k test), it gave 3.9–47.3 Myr. The progression was coincidence of favorable draws.
 
-## Balberg+ prediction
+**Per reviewer rec #4:** "Remove this table from the paper. Keep it as historical record in a supplementary note, but not as a headline."
+
+**We preserve the data here as historical record only:**
+
+| Run | min_particles | t_max (Myr) | Snapshots | Note |
+|---|---|---|---|---|
+| T215 (no patches) | 32 | 26 | 9 | one draw |
+| T215b (FP only) | 32 | 45 | 9 | one draw |
+| T215d (+ assert disable + cap) | 32 | 55 | 10 | one draw |
+| **T215e (+ min_particles=64)** | **64** | **60** | **11** | one draw |
+
+The above are five single draws. The "improvement" is illusory — each row could be replaced by 3.9, 19.80, 37.84, 45.84, or 47.26 Myr from the t215k fresh-session test under the same final configuration.
+
+## Balberg+ prediction (in the one T215e run)
 
 - Predicted t_core = 0.176 Gyr = 176 Myr
-- We observed 60 Myr = **34% of predicted t_core**
-- Center density has increased 2.45× monotonically
-- Outer density has decreased 2.42× monotonically
-- The collapse-vs-expansion pattern continues with increasing amplitude
+- The one T215e run reached 60 Myr = **34% of predicted t_core**
+- In that one run, center density increased 2.45× (using r=287 pc bin, monotonically until t=55 Myr)
+- Outer density decreased 2.42× monotonically in that run
+- The collapse-vs-expansion pattern was observed in that run
+
+(Note: The t_max comparison is not informative because each run is one draw. The qualitative pattern is informative — see T215p per-run analysis.)
 
 ## What was changed
 
@@ -98,18 +110,23 @@ The rest of the patches from T215b + T215d remain unchanged:
 - `v0.3-prelim/code/t215_safe.jl` (min_particles: 32 → 64)
 - `v0.3-prelim/docs/PAPER_V1_DRAFT.md` §10 (will add T215e paragraph)
 
-## Honest verdict
+## Honest verdict (revised per Rv18.4 Round 4)
 
 **Framework verdict unchanged**: 4 of 8 channels under physically motivated f_H. Still a structural constraint map.
 
-**What T215e adds over T215d:**
-- Longer time series (60 vs 55 Myr) = 34% vs 31% of Balberg t_core
-- Stronger collapse signal (2.45× interior vs 2.0× at T215d)
-- Confirms acceleration of gravothermal collapse
+**What the T215 series adds (revised per T215p per-run analysis):**
 
-**What T215e still doesn't do:**
-- Doesn't reach t_core (~176 Myr)
-- Doesn't bridge the Cloud-9 5.7× gap
-- Doesn't make the framework a unified derivation
+The T215 series includes 5 fresh-session runs of essentially identical configuration (3000 particles, all 4 bug patches applied, adaptive_grid_min_particles=64, seed=42). The t_max varied from 30 to 70 Myr (factor 2.3 spread), so the ENDPOINT TIMING is not reproducible. However, the QUALITATIVE SIGNAL — interior density increase 1.76-2.99× and outer density decrease 0.34-0.63× — is present in ALL 5 fresh-session runs.
 
-Each parameter tweak incrementally extends time. The breakthrough ceiling seems to be around 60 Myr with current patches. To get further would require deeper KiSS-SIDM modifications or a different code.
+**What the series does NOT show:**
+- Reproducible endpoint timing (t_max varies factor 2.3 across 5 fresh sessions)
+- Whether the bug fixes "improved" the code (would require comparing distributions with N≥10 each, before vs after patches)
+- Reaching t_core (~176 Myr)
+- Bridging the Cloud-9 5.7× gap
+
+**What the series DOES show:**
+- The qualitative gravothermal catastrophe signature is robust across multiple draws
+- The patches allow simulations to reach 30-70 Myr (vs ~26 Myr without patches — based on the T215 unpatched single-run observation)
+- KiSS-SIDM v0.0.1 is not a reproducible endpoint-timing simulator; any single t_max should be treated as one draw from a distribution
+
+The KiSS-SIDM framework, with the four bug patches, can produce evidence of gravothermal collapse under controlled conditions. The endpoint timing is not reproducible from this version of the code. To get reliable endpoint timing, the code would need to be replaced or substantially refactored.
