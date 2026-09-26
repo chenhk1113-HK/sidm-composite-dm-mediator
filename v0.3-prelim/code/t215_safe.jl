@@ -98,7 +98,7 @@ params = CBEParams{1, SphericalGrid{1, Float64}, SelfGravity}(;
     N=1,
     Grav=SelfGravity,
     adaptive_grid=true,
-    adaptive_grid_min_particles=32,
+    adaptive_grid_min_particles=64,
     n_phys_per_tracer,
     t_end=t_end_Gyr * u"Gyr",
     density_grid=grid,

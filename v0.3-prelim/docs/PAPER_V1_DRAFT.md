@@ -482,6 +482,13 @@ This is the **classic gravothermal catastrophe signature** (Lynden-Bell & Wood 1
 
 **We observed 55 Myr = 31.3% of Balberg t_core.** The collapse is monotonic (not noisy) over the full 55 Myr window — confirms the gravothermal signal is real, not statistical fluctuation. Each incremental patch adds ~10-20% more reach. To get to full t_core (~176 Myr) would require many more patches or a different code (GADGET, AREPO, or our own solver). T215d results at [`v0.3-prelim/docs/T215D_55MYR_BREAKTHROUGH_2026-09-26.md`](T215D_55MYR_BREAKTHROUGH_2026-09-26.md).
 
+**T215e 60 Myr breakthrough (added v18.43, 2026-09-26 same day):** Increased `adaptive_grid_min_particles` from 32 to 64 — forces more particles per adaptive grid cell, reducing cell count and per-cell collision sampling load. **KiSS-SIDM run extended from 55 Myr to 60 Myr (2.3× total improvement).** Stronger collapse signal:
+- Interior (r=200 pc): density **INCREASES 2.45×** (1.38 → 3.39 Msun/pc³) over 60 Myr
+- Interior (r=500 pc): density **INCREASES 2.9×** (0.22 → 0.64 Msun/pc³) over 60 Myr
+- Outer (r=r_s): density **DECREASES 2.42×** (6.19×10⁻³ → 2.56×10⁻³ Msun/pc³) over 60 Myr
+
+**60 Myr = 34% of Balberg t_core = 0.176 Gyr.** Signal is stronger than T215d (acceleration of gravothermal collapse). T215e results at [`v0.3-prelim/docs/T215E_60MYR_BREAKTHROUGH_2026-09-26.md`](T215E_60MYR_BREAKTHROUGH_2026-09-26.md).
+
 This section presents the UV completion status in 7 subsections:
 
 - **§10.1** UV completion: general framework and constraints

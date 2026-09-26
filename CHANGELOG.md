@@ -8,6 +8,42 @@
 
 
 
+## [KiSS-SIDM-Cloud9-v18.43-T215e-60Myr] - 2026-09-26
+
+**v18.43 final** — KiSS-SIDM extended from 55 Myr to 60 Myr with `adaptive_grid_min_particles=64`.
+
+**Single parameter change:** `adaptive_grid_min_particles=32` → `64` in t215_safe.jl
+
+**Performance:**
+| Run | min_particles | t_max (Myr) | Snapshots |
+|---|---|---|---|
+| T215 (no patches) | 32 | 26 | 9 |
+| T215b (FP only) | 32 | 45 | 9 |
+| T215d (+ assert disable + cap) | 32 | 55 | 10 |
+| **T215e (+ min_particles=64)** | **64** | **60** | **11** |
+
+**Stronger gravothermal signal at 60 Myr:**
+
+| t (Myr) | ρ at r=200 pc | ρ at r=500 pc | ρ at r=r_s |
+|---|---|---|---|
+| 0 | 1.38 | 0.22 | 6.19×10⁻³ |
+| **60** | **3.39** | **0.64** | **2.56×10⁻³** |
+| Factor | **2.45× ↑** | **2.9× ↑** | **2.42× ↓** |
+
+**60 Myr = 34% of Balberg t_core = 0.176 Gyr.** Signal is stronger than T215d — collapse is accelerating as the system evolves.
+
+**Files added:**
+- `v0.3-prelim/data/snapshots_t215e/snap_000-010.jld2` (NEW, 11 snapshots)
+- `v0.3-prelim/data/results/t215_density_profiles_t215e.json` (NEW)
+- `v0.3-prelim/code/t215_analyze_t215e.jl` (NEW)
+- `v0.3-prelim/docs/T215E_60MYR_BREAKTHROUGH_2026-09-26.md` (NEW)
+
+**Files modified:**
+- `v0.3-prelim/code/t215_safe.jl` (min_particles: 32 → 64)
+- `v0.3-prelim/docs/PAPER_V1_DRAFT.md` §10 (added T215e paragraph)
+
+**Wall time:** ~15 min for this round
+
 ## [KiSS-SIDM-Cloud9-v18.43-T215d-55Myr] - 2026-09-26
 
 **v18.43 final** — KiSS-SIDM run extended from 45 Myr to 55 Myr (T215d breakthrough).
