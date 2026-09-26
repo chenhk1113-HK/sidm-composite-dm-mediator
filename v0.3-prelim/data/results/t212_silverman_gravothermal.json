@@ -1,0 +1,34 @@
+{
+  "silverman_fiducial": {
+    "M_halo_M_sun": 10000000000.0,
+    "c": 12.0,
+    "v_max_km_s": 31.18877995895353,
+    "r_vir_pc": 44214.2815208259,
+    "r_s_pc": 3684.523460068825,
+    "rho_s_M_sun_pc3": 0.009689620013605302,
+    "sigma_m_cm2_g": 70.0,
+    "t_core_Gyr": 0.221198345626031,
+    "t_cross_Gyr": 1.3861881325835672,
+    "t_core_over_Hubble": 0.01602886562507471,
+    "t_core_over_t_cross": 0.1595731058624511,
+    "phase_runs": true,
+    "causality_ok": false
+  },
+  "cloud9_host_at_sigma70": {
+    "M_halo_M_sun": 5000000000.0,
+    "c": 12.0,
+    "v_max_km_s": 24.754551058223765,
+    "r_vir_pc": 35092.89849908858,
+    "r_s_pc": 2924.408208257382,
+    "rho_s_M_sun_pc3": 0.009689620013605297,
+    "sigma_m_cm2_g": 70.0,
+    "t_core_Gyr": 0.22119834562603113,
+    "t_cross_Gyr": 1.3861881325835672,
+    "t_core_over_Hubble": 0.016028865625074717,
+    "t_core_over_t_cross": 0.15957310586245121,
+    "phase_runs": true,
+    "causality_ok": false
+  },
+  "threshold_5e9_cm2_g": 10.0,
+  "threshold_1e10_cm2_g": 10.0
+}
