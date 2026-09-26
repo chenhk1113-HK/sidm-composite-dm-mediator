@@ -2,7 +2,46 @@
 
 > **For:** Anyone who has 60 seconds and wants to know what this project
 > is, what it claims, and what the current best numbers are.
-> Updated with each version-bump round. Last refresh: 2026-09-26 (v18.41).
+> Updated with each version-bump round. Last refresh: 2026-09-26 (v18.42).
+
+---
+
+## Standing: v0.4-prelim+v18.42 (2026-09-26, T175 verification + T213 KK tower + Silverman+ combined test)
+
+**v18.42** — combined KK tower + Silverman+ test answering the deferred v18.41 §10 scope-statement question.
+
+- **T175 verification (already-existed, now formalized):** T175 was run on 2026-09-21 and confirms all 4 no-go verdicts hold at T163 KK-tower best-fit parameters (α_D = 0.3, m₀ = 0.3 GeV, r = 1.5, n_modes = 2, RMSE = 1.408). The failure mechanisms (LZ direct detection, kinematic forbiddance, unitarity violation, flat velocity dependence) are independent of the specific σ/m value. The v18.41 §10 scope statement said "T163 re-test deferred to v19.0" — this is now obsolete. See `v0.3-prelim/data/results/t175_nogo_retest_t163.json`.
+
+- **T213 KK tower + Silverman+ combined test:** NEW script `v0.3-prelim/code/t213_kk_tower_silverman_combined.py` computes T163 best-fit KK tower σ/m(v) at v = 5-500 km/s using sidmkit 0.3.0. Result:
+
+  | v (km/s) | σ/m (cm²/g) |
+  |---|---|
+  | 5.00 | 0.1742 |
+  | 10.00 | 0.1742 |
+  | **31.12** (Cloud-9 host V_max) | **0.1741** |
+  | 100.00 | 0.1739 |
+  | 500.00 | 0.1688 |
+
+  **T163 σ/m(V_max = 31.12 km/s) = 0.174 cm²/g, which is 5.7× BELOW the Silverman+ 2026 gravothermal threshold of 1.0 cm²/g.**
+
+- **Structural implication:** The Cloud-9 spike (σ/m ≥ 50 cm²/g) cannot be reproduced by T163 KK tower alone, and Path F1 three-term σ_eff decomposition cannot bridge the 5.7× gap because the σ_HL peak is at v_HL ≈ 100 km/s (SPARC scale), not v = 31 km/s (Cloud-9 host V_max). The combined T163 + T212 + T213 result reinforces the **structural constraint map verdict**: single KK tower is the wrong tool for Cloud-9 scale, Silverman+ gravothermal is the right mechanism but wrong mass scale, and no published 2026 SIDM mechanism bridges the gap.
+
+- **Velocity dependence:** T163 KK tower is in the Born regime where σ ∝ α²/m_med² (no Sommerfeld enhancement at low v). Velocity dependence is FLAT (factor < 1.04 across 5-500 km/s). This is structurally different from the resonance/peak σ/m(v) shapes that would be needed for Cloud-9.
+
+**Files modified:**
+- `v0.3-prelim/code/t213_kk_tower_silverman_combined.py` (NEW, 122 lines)
+- `v0.3-prelim/data/results/t213_kk_tower_silverman_combined.json` (NEW)
+- `v0.3-prelim/docs/T213_KK_TOWER_SILVERMAN_COMBINED_2026-09-26.md` (NEW, 80 lines)
+- `v0.3-prelim/docs/PAPER_V1_DRAFT.md` (§10 scope statement updated to reflect T175 + T213)
+- `VERSION`, `README.md`, `v0.3-prelim/README.md` — bumped to v18.42
+
+**Honest verdict (unchanged):**
+- 4 of 8 channels under physically motivated f_H (the honest number)
+- 7 of 8 channels only under borrowed (hand-picked) f_H
+- Framework is a structural constraint map + no-go catalogue, not a unified derivation
+- **NEW (T213):** Cloud-9 spike cannot be reproduced by T163 KK tower + Path F1 — both fail at Cloud-9 host V_max
+
+**Status:** v18.42 ships at commit `pending`, tag `v18.42-kk-tower-silverman-combined`.
 
 ---
 
