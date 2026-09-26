@@ -29,12 +29,24 @@ from T208_path_b_cloud9_host_halo_gravothermal import (
     V_REF,
 )
 
-def t_cross_Gyr_from_r_vir_vmax(r_vir_pc, v_max_kms):
-    """Halo crossing time: t_cross = r_vir / v_max in Gyr."""
-    # r_vir in pc, v_max in km/s
-    # pc / (km/s) = 3.0857e13 s
-    # Gyr = 3.1557e16 s
-    return (r_vir_pc / v_max_kms * 3.0857e13) / 3.1557e16
+def t_cross_Gyr_from_r_vir_vmax(r_vir_pc, v_max_kms, c=12.0):
+    """Halo crossing time at the SCALE RADIUS (where V_max occurs), in Gyr.
+
+    Per Reviewer 2 (2review.docx §2.4): the previous definition used r_vir,
+    overestimating t_cross by a factor of ~c ≈ 12. The CORRECT definition
+    for the causality check is t_cross = r_s / v_max, where r_s is the scale
+    radius where V_max occurs (NFW 1997 ApJ 490, 493 §3: r_max = 2.1626 * r_s).
+
+    Default c=12 corresponds to standard Lambda-CDM concentration at
+    M_halo ~ 10^9-10^10 M_sun; pass c explicitly for other halo masses.
+
+    Conversion: r_s in pc, v_max in km/s:
+        1 pc / (1 km/s) = 3.0857e13 s
+        1 Gyr = 3.1557e16 s
+        t_cross = r_s / v_max * 3.0857e13 / 3.1557e16  Gyr
+    """
+    r_s_pc = r_vir_pc / c
+    return (r_s_pc / v_max_kms * 3.0857e13) / 3.1557e16
 
 
 def evaluate(params):

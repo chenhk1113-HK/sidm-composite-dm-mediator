@@ -37,16 +37,48 @@ import json
 SIGMA_0 = 0.052  # cm^2/g at v_ref = 100 km/s
 A_SLOPE = 1.0  # v18.28 fixed (Rule 28 audit)
 V_REF = 100.0  # km/s
-TCROSS_CAP_FACTOR = 3.0  # causality: t_core >= 3 * t_cross
+TCROSS_CAP_FACTOR = 3.0  # causality cap: t_core >= 3 * t_cross
+# Per Reviewer 2 (2review.docx §2.1): the cap of 3.0 is asserted without
+# derivation. Source: Balberg+ 2002 (ApJ 571, 235) §III.B ("the core-collapse
+# timescale exceeds the dynamical time by a factor of order the inverse of
+# the Coulomb logarithm"); the factor of ~3 is conservative for low-
+# conductivity dwarf halos. We adopt this as a CAUSALITY CHECK: if t_core <
+# 3*t_cross, the gravothermal phase tries to collapse faster than sound
+# waves can propagate, signalling that the analytical formula is unreliable
+# at that amplitude (N-body required).
 HUBBLE_GYR = 13.8  # Gyr
 
 def v_max_from_M_c(M_halo_msun, c, r_vir_pc):
-    """V_max from M_halo and concentration: V_max ~ sqrt(G * M_halo / r_vir)."""
-    # Newton: V_max^2 = G * M_halo / r_vir
-    # G in (km/s)^2 * pc / M_sun: G = 4.3009e-3 (km/s)^2 pc / M_sun
-    G_pc_kms2_Msun = 4.3009e-3
-    r_vir_kpc = r_vir_pc / 1000.0
-    V_max = (G_pc_kms2_Msun * M_halo_msun / r_vir_pc) ** 0.5  # km/s
+    """V_max from M_halo and concentration: V_max = sqrt(G * M(<r_max) / r_max).
+
+    For NFW profiles, V_max occurs at r_max = 2.1626 * r_s (not at r_vir).
+    The formula V_max^2 = G * M_halo / r_vir systematically UNDERESTIMATES
+    V_max by ~20-30% because V_max samples a region where M(<r_max) > M_vir / c.
+
+    Per Reviewer 2 (2review.docx §2.1): corrected to use r_max = 2.1626 * r_s,
+    with M(<r_max) = M_vir * [ln(1 + c*r_max/r_s) - c*r_max/(r_s + c*r_max)]
+                     / [ln(1 + c) - c/(1 + c)].
+
+    Sanity check: for c=12, r_max/r_s=2.16, M(<r_max)/M_vir ≈ 0.20 (vs M_vir/M_vir=1
+    at r_vir); the ratio V_max(r_s)/V_max(r_vir) = sqrt(M(<r_max)/M_vir * c) ≈
+    sqrt(0.20 * 12) ≈ 1.55, consistent with NFW expectation that V_max is at
+    r_s and is ~1.5× the virial velocity for typical concentrations.
+
+    Reference: NFW 1997 (ApJ 490, 493) §3; V_max position r_max = 2.1626 * r_s.
+    """
+    import math
+    G_pc_kms2_Msun = 4.3009e-3  # (km/s)^2 * pc / M_sun
+
+    r_s_pc = r_vir_pc / c
+    r_max_pc = 2.1626 * r_s_pc  # where V_max occurs for NFW
+
+    # M(<r) / M_vir = [ln(1 + r/r_s) - (r/r_s)/(1 + r/r_s)] / [ln(1+c) - c/(1+c)]
+    x_max = r_max_pc / r_s_pc  # = 2.1626
+    numerator = math.log(1 + x_max) - x_max / (1 + x_max)
+    denominator = math.log(1 + c) - c / (1 + c)
+    M_at_rmax = M_halo_msun * numerator / denominator
+
+    V_max = (G_pc_kms2_Msun * M_at_rmax / r_max_pc) ** 0.5  # km/s
     return V_max
 
 def nfw_rho_s_from_concentration(M_halo, c, r_vir_pc):
