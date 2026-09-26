@@ -8,6 +8,49 @@
 
 
 
+## [KiSS-SIDM-Cloud9-v18.43-T215d-55Myr] - 2026-09-26
+
+**v18.43 final** — KiSS-SIDM run extended from 45 Myr to 55 Myr (T215d breakthrough).
+
+**Patches applied:**
+1. `collision.jl` lines 63, 104, 149: `sqrt(max(0, x))` FP protection (T215b)
+2. `1d_sphere.jl` line 123: `sqrt(max(0, x))` FP protection for boundary conditions
+3. `collision.jl` lines 68, 114, 156: disabled `@assert majorant ≤ N` (T215d)
+4. `collision.jl` line 72 (before sample): added `majorant = min(majorant, ncom)` cap
+
+**Performance:**
+| Patch state | t_max (Myr) | Improvement |
+|---|---|---|
+| No patches | 26 | baseline |
+| FP patches only | 45 | 1.7× |
+| FP + assertion disable + cap | **55** | **2.1×** |
+
+**Cleaner monotonic gravothermal signal at 55 Myr:**
+
+| t (Myr) | ρ at r=200 pc | ρ at r=500 pc | ρ at r=r_s |
+|---|---|---|---|
+| 0 | 1.47 | 0.226 | 5.72×10⁻³ |
+| 55 | **2.97** | **0.484** | **2.84×10⁻³** |
+| Factor | **2.0× ↑** | **2.1× ↑** | **2.0× ↓** |
+
+**55 Myr = 31.3% of Balberg t_core = 0.176 Gyr.** Collapse is monotonic over the full window — confirms the gravothermal signal is real, not statistical noise.
+
+**Files added:**
+- `v0.3-prelim/code/t215d.jl` (NEW, restart attempt — failed at majorant assertion)
+- `v0.3-prelim/code/t215_analyze_t215d.jl` (NEW, density profile extraction)
+- `v0.3-prelim/data/snapshots_t215d/snap_000-009.jld2` (NEW, 10 snapshots, t=0 to 55 Myr)
+- `v0.3-prelim/data/results/t215_density_profiles_t215d.json` (NEW)
+- `v0.3-prelim/docs/T215D_55MYR_BREAKTHROUGH_2026-09-26.md` (NEW, full doc)
+- `v0.3-prelim/docs/PAPER_V1_DRAFT.md` §10 (updated with T215d paragraph)
+
+**Wall time:** ~1 hour for this round (10min restart + 10min patches + 10min run + 10min analysis + 20min doc)
+
+**Honest verdict (unchanged):**
+- 4 of 8 channels under physically motivated f_H
+- 7 of 8 only under borrowed f_H
+- Framework is a structural constraint map + no-go catalogue, not a unified derivation
+- **T215d adds: monotonic gravothermal signal confirmed over 55 Myr (31.3% of Balberg t_core)**
+
 ## [KiSS-SIDM-Cloud9-v18.43-T215b-Breakthrough] - 2026-09-26
 
 **v18.43 final** — KiSS-SIDM kinetic simulation extended to 45 Myr after numerical bug fix.

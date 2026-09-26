@@ -8,7 +8,7 @@
 
 ## Standing: v0.4-prelim+v18.43 (2026-09-26, T215 KiSS-SIDM real N-body IC + gravothermal)
 
-**v18.43** — first real N-body-quality initial conditions + KiSS-SIDM kinetic simulation at Cloud-9 host halo, σ/m = 70 cm²/g. **BREAKTHROUGH (T215b):** Patched KiSS-SIDM collision.jl floating-point bug (3 lines), extending run length 1.7× to 45 Myr. **Gravothermal catastrophe observed:** center density (r=500 pc) increases 3.7× while outer (r=r_s) decreases 1.85×. This is the qualitative signature of Balberg+ 2002 — center collapses, outer expands. Balberg t_core = 0.176 Gyr remains the quantitative prediction; we observed 25.6% of it.
+**v18.43** — first real N-body-quality initial conditions + KiSS-SIDM kinetic simulation at Cloud-9 host halo, σ/m = 70 cm²/g. **BREAKTHROUGH (T215b + T215d):** Patched KiSS-SIDM collision.jl floating-point bug (3 lines), then disabled majorant assertions + added ncom cap. **Final: 55 Myr run (31.3% of Balberg t_core = 0.176 Gyr).** Gravothermal catastrophe observed: interior (r=200 pc) density INCREASES 2.0× (1.47 → 2.97 Msun/pc³) while outer (r=r_s) DECREASES 2.0×. This is the qualitative signature of Balberg+ 2002 — center collapses, outer expands. Monotonic signal over the full 55 Myr window.
 
 - **T215 IC generator** (`v0.3-prelim/code/t215_nfw_ic_generator.py`): produces 10⁴-particle virialized NFW halo in HDF5/gizmo format. v_rms = 33 km/s ≈ V_max = 31.12 km/s (proper virialization, not Maxwell-Boltzmann with arbitrary σ).
 

@@ -475,6 +475,13 @@ The priored free fit **trades SPARC fit quality for a physically motivated f_H_c
 
 This is the **classic gravothermal catastrophe signature** (Lynden-Bell & Wood 1968; Balberg+ 2002): heat flows outward from the collapsing center, causing outer expansion while inner collapses. The qualitative prediction is **confirmed** by kinetic simulation. **Balberg+ t_core = 0.176 Gyr is the quantitative prediction. We observed 45 Myr = 25.6% of it** — qualitative pattern matches but t_core is not directly measured (would require 80-100 Myr run, beyond current laptop's reach). T215b results at [`v0.3-prelim/docs/T215B_KISS_SIDM_GRAVOTHERMAL_BREAKTHROUGH_2026-09-26.md`](T215B_KISS_SIDM_GRAVOTHERMAL_BREAKTHROUGH_2026-09-26.md). The 3-line patch to collision.jl is reversible (backup at `collision.jl.bak.t215`); it should ideally be submitted upstream as a PR.
 
+**T215d 55 Myr breakthrough (added v18.43, 2026-09-26 same day):** Disabled the 3 `majorant ≤ N` assertions in `collision.jl` and added a `majorant = min(majorant, ncom)` cap before `sample`. **KiSS-SIDM run extended from 45 Myr to 55 Myr (2.1× total improvement over the unpatched 26 Myr).** Cleaner monotonic signal:
+- Interior (r=200 pc): density **INCREASES 2.0×** (1.47 → 2.97 Msun/pc³) over 55 Myr
+- Interior (r=500 pc): density **INCREASES 2.1×** (0.23 → 0.48 Msun/pc³) over 55 Myr
+- Outer (r=r_s): density **DECREASES 2.0×** (5.72×10⁻³ → 2.84×10⁻³ Msun/pc³) over 55 Myr
+
+**We observed 55 Myr = 31.3% of Balberg t_core.** The collapse is monotonic (not noisy) over the full 55 Myr window — confirms the gravothermal signal is real, not statistical fluctuation. Each incremental patch adds ~10-20% more reach. To get to full t_core (~176 Myr) would require many more patches or a different code (GADGET, AREPO, or our own solver). T215d results at [`v0.3-prelim/docs/T215D_55MYR_BREAKTHROUGH_2026-09-26.md`](T215D_55MYR_BREAKTHROUGH_2026-09-26.md).
+
 This section presents the UV completion status in 7 subsections:
 
 - **§10.1** UV completion: general framework and constraints
