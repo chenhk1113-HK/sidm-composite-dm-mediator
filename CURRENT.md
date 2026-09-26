@@ -24,14 +24,15 @@ Cloud-9 vs dSph tension discussion without changing the headline verdict
   (arXiv:2606.02566, "Mergers Matter") runs the gravothermal cascade at σ/m = 70
   cm²/g in M_halo = 10¹⁰ M_☉ halos via N-body; **3 of 6 halos collapse** (those
   with quiescent merger histories). **Threshold σ/m for collapse at Cloud-9 host
-  halo = ~10 cm²/g**, which is **50× above** the Phase 44 baseline σ/m = 0.052
-  cm²/g at v = 100 km/s extrapolated to V_max = 24.75 km/s. A N-body simulation
-  at Silverman+ parameters is recommended as future work; until that test is
-  done, the Silverman+ trim remains a theoretical possibility, not a confirmed
-  mechanism.
+  halo = ~1 cm²/g** (corrected from earlier ~10 cm²/g estimate after V_max +
+  t_cross fixes per 2review.docx Reviewer 2 §2.1, §2.4), which is **5× above** the
+  Phase 44 baseline σ/m = 0.052 cm²/g at v = 100 km/s extrapolated to V_max =
+  31.12 km/s. A N-body simulation at Silverman+ parameters is recommended as
+  future work; until that test is done, the Silverman+ trim remains a
+  theoretical possibility, not a confirmed mechanism.
 - **§11 v18.40 refinement paragraph**: acknowledges both refinements; the Cloud-9
   vs dSph tension is **structural at Phase 44 parameters** but might be
-  **resolvable at σ/m ≥ 10 cm²/g with environmental-correction systematics**.
+  **resolvable at σ/m ≥ ~1 cm²/g with environmental-correction systematics**.
   The paper remains honest that no current UV completion of the standard Yukawa
   framework achieves this regime.
 

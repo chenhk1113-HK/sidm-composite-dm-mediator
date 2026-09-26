@@ -1007,11 +1007,17 @@ This reframe does not change the framework's verdict that the standard Yukawa ca
 
 The T208 gravothermal refutation (see §9.5 and `v0.3-prelim/docs/T208_PATH_B_GRAVOTHERMAL_REFUTED_2026-09-25.md`) was based on the Phase 44 baseline σ/m = 0.052 cm²/g at v = 100 km/s extrapolated to V_max = 24.75 km/s via the standard Yukawa power law, giving σ/m ≈ 0.21 at Cloud-9 host-halo scale. The Balberg+ 2002 analytical formula then yields t_core = 73.7 Gyr, far longer than the Hubble time (13.8 Gyr).
 
-**Path B3 trim:** Silverman+ 2026 (arXiv:2606.02566, Fermilab-PUB-26-0348-T, "Mergers Matter") runs the gravothermal cascade at **σ/m = 70 cm²/g** in M_halo = 10¹⁰ M_☉ halos with diverse merger histories using N-body simulations. **Three of six halos collapse** (the ones with quiescent merger histories); halos with sustained mergers do not. Re-running the T208 Balberg+ formula at Silverman+'s parameters gives t_core = 0.22 Gyr at the Cloud-9 host halo (62× faster than Hubble), confirming that **gravothermal CAN run at Cloud-9 host-halo scale IF σ/m ≥ 10 cm²/g AND merger history is quiescent AND N-body verification is used.**
+**Path B3 trim:** Silverman+ 2026 (arXiv:2606.02566, Fermilab-PUB-26-0348-T, "Mergers Matter") runs the gravothermal cascade at **σ/m = 70 cm²/g** in M_halo = 10¹⁰ M_☉ halos with diverse merger histories using N-body simulations. **Three of six halos collapse** (the ones with quiescent merger histories); halos with sustained mergers do not. Re-running the T208 Balberg+ formula at Silverman+'s parameters gives t_core = 0.18 Gyr at the Cloud-9 host halo (76× faster than Hubble), confirming that **gravothermal CAN run at Cloud-9 host-halo scale IF σ/m ≥ ~1 cm²/g AND merger history is quiescent AND N-body verification is used.**
 
-**Caveat — analytical formula unphysical at large σ/m:** At σ/m = 70, the simple Balberg+ 2002 t_core formula gives t_core / t_cross = 0.16, well below the causality cap of 3.0 (t_core > 3 × t_cross required for physical consistency). This means the analytical formula is unreliable at σ/m ≥ 10 — N-body is the only trustworthy test. Silverman+ 2026's N-body result sidesteps this concern because it captures the full nonlinear physics (heat transport, merger disruption, etc.).
+**Note on numerical corrections (per 2review.docx Reviewer 2 §2.1, §2.4):** Earlier v18.40 versions used V_max = √(G·M_vir/r_vir) which underestimates NFW V_max by ~25%, and t_cross = r_vir/v_max which overestimates by factor of c ≈ 12. The corrected definitions are V_max = √(G·M(<r_max)/r_max) at r_max = 2.1626·r_s (NFW 1997 §3), and t_cross = r_s/v_max (at the scale radius where V_max occurs). These corrections change:
+- Cloud-9 host V_max: 24.75 → 31.12 km/s (+25%)
+- Threshold σ/m for collapse: ~10 → **~1 cm²/g**
+- Phase 44 baseline σ/m = 0.21 at V_max = 31.12 km/s: **5× below threshold** (not 50× as previously stated)
+- t_core / t_cross at σ/m = 70: 0.16 → **1.91** (closer to physical but still violates the strict 3.0 cap)
 
-**Threshold σ/m for gravothermal collapse at Cloud-9 host halo (M = 5×10⁹ M_☉, V_max = 24.75 km/s):**
+**Caveat — analytical formula unphysical at large σ/m:** At σ/m = 70, the simple Balberg+ 2002 t_core formula gives t_core / t_cross = 1.91, below the strict causality cap of 3.0 (t_core > 3 × t_cross required for physical consistency, per Balberg+ 2002 ApJ 571, 235 §III.B — the core-collapse timescale exceeds the dynamical time by a factor of order the inverse of the Coulomb logarithm). This means the analytical formula is unreliable at large σ/m — N-body is the only trustworthy test. Silverman+ 2026's N-body result sidesteps this concern because it captures the full nonlinear physics (heat transport, merger disruption, etc.).
+
+**Threshold σ/m for gravothermal collapse at Cloud-9 host halo (M = 5×10⁹ M_☉, V_max = 31.12 km/s):**
 
 | σ/m (cm²/g) | t_core (Gyr) | t_core / t_Hubble | Phase runs? |
 |---|---|---|---|
@@ -1019,9 +1025,9 @@ The T208 gravothermal refutation (see §9.5 and `v0.3-prelim/docs/T208_PATH_B_GR
 | 1.0 | 15.5 | 1.12 | marginally NO |
 | 10.0 | 1.55 | 0.11 | **YES** |
 | 50.0 | 0.31 | 0.022 | **YES** |
-| 70.0 (Silverman+ value) | 0.22 | 0.016 | **YES** |
+| 70.0 (Silverman+ value) | 0.18 | 0.013 | **YES** |
 
-**Refined verdict:** The gravothermal cascade **CAN** proceed at Cloud-9 host-halo scale, but only at σ/m ≥ 10 cm²/g (50× above Phase 44 baseline) AND only with N-body verification. The Phase 44 framework cannot reach this regime without a σ/m ≥ 50 amplification factor — which the framework itself fails to provide via the standard Yukawa structure.
+**Refined verdict:** The gravothermal cascade **CAN** proceed at Cloud-9 host-halo scale, but only at σ/m ≥ ~1 cm²/g (5× above Phase 44 baseline) AND only with N-body verification. The Phase 44 framework cannot reach this regime without a σ/m ≥ 5 amplification factor — which the framework itself fails to provide via the standard Yukawa structure.
 
 **What this means for the paper's headline:** The framework's verdict on Cloud-9 (cannot satisfy σ/m ≥ 50 floor under standard Yukawa) is **unaffected** by the Silverman+ trim. The trim only clarifies that **an alternative mechanism (gravothermal collapse at large σ/m) exists in the literature**, which the standard Yukawa framework cannot reach. This is a refinement of the **structural impossibility argument**, not a reversal.
 
@@ -1332,9 +1338,9 @@ Two structural refinements are added without changing the headline verdict:
 
 1. **§10.4d — Cloud-9's σ/m ≥ 50 as a systematic upper bound (Path A3).** The Cloud-9 hydrostatic-inference floor is reframed as a **systematic upper bound** rather than a hard physical constraint, per Turini & Benítez-Llambay 2026's mass–concentration degeneracy from local environment. Cross-validation against Crater II / Antlia II kinematic constraints (Zhang+ 2024) suggests Crater II's kinematic σ/m ~ 60 at V_max = 26.57 km/s should be preferred over Cloud-9's hydrostatic σ/m ≥ 50 at v = 28 km/s as the physical constraint. The framework's verdict on the standard Yukawa cannot produce the Cloud-9 spike remains **unaffected**; what changes is the epistemic status of the σ/m ≥ 50 floor itself.
 
-2. **§10.4e — Path B3 trim (Silverman+ 2026).** Silverman+ 2026 (arXiv:2606.02566, "Mergers Matter") shows gravothermal collapse CAN run at host-halo mass scale IF σ/m ≥ 10 cm²/g AND merger history is quiescent AND N-body verification is used (3 of 6 halos collapse in their suite). The Phase 44 baseline σ/m = 0.052 cm²/g at v = 100 km/s extrapolates to σ/m = 0.21 at V_max = 24.75 km/s — **50× below the threshold for gravothermal collapse at the Cloud-9 host halo**. A N-body simulation at Silverman+ parameters is recommended as future work; until that test is done, the Silverman+ trim remains a theoretical possibility, not a confirmed mechanism.
+2. **§10.4e — Path B3 trim (Silverman+ 2026).** Silverman+ 2026 (arXiv:2606.02566, "Mergers Matter") shows gravothermal collapse CAN run at host-halo mass scale IF σ/m ≥ ~1 cm²/g (5× above Phase 44 baseline; corrected from earlier ~10 cm²/g estimate after V_max and t_cross fixes per 2review.docx Reviewer 2 §2.1, §2.4) AND merger history is quiescent AND N-body verification is used (3 of 6 halos collapse in their suite). The Phase 44 baseline σ/m = 0.052 cm²/g at v = 100 km/s extrapolates to σ/m = 0.21 at V_max = 31.12 km/s — **5× below the threshold for gravothermal collapse at the Cloud-9 host halo**. A N-body simulation at Silverman+ parameters is recommended as future work; until that test is done, the Silverman+ trim remains a theoretical possibility, not a confirmed mechanism.
 
-The combined effect of §10.4d + §10.4e is to acknowledge that the Cloud-9 vs dSph tension is **structural at Phase 44 parameters** but might be **resolvable at σ/m ≥ 10 cm²/g with environmental-correction systematics**. The paper remains honest that **no current UV completion of the standard Yukawa framework achieves this regime**; the σ/m(v) curve that would unify Cloud-9 + dSph + SPARC + Cluster is not currently derivable.
+**The combined effect of §10.4d + §10.4e is to acknowledge that the Cloud-9 vs dSph tension is **structural at Phase 44 parameters** but might be **resolvable at σ/m ≥ ~1 cm²/g with environmental-correction systematics**. The paper remains honest that **no current UV completion of the standard Yukawa framework achieves this regime**; the σ/m(v) curve that would unify Cloud-9 + dSph + SPARC + Cluster is not currently derivable.
 
 ---
 

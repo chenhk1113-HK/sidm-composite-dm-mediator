@@ -1,7 +1,7 @@
 # v0.3-prelim — Multi-resonance SIDM research workspace
 
 > **Branch:** `wip/cloud-9-relhic` (working) + `wip/multi-component-SIDM-core-collapse` (publication)
-> **Status:** v18.40 (2026-09-25) — **T212 Path A3 + Path B3 trim**. Cloud-9's σ/m ≥ 50 floor reframed as systematic upper bound (Turini & Benítez-Llambay 2026); Silverman+ 2026 gravothermal threshold σ/m = 10 cm²/g at Cloud-9 host halo (50× above Phase 44 baseline). See [`docs/PAPER_V1_DRAFT.md`](docs/PAPER_V1_DRAFT.md) §10.4d, §10.4e for the full refinements.
+> **Status:** v18.40 (2026-09-25) — **T212 Path A3 + Path B3 trim**. Cloud-9's σ/m ≥ 50 floor reframed as systematic upper bound (Turini & Benítez-Llambay 2026); Silverman+ 2026 gravothermal threshold σ/m ~ 1 cm²/g at Cloud-9 host halo (5× above Phase 44 baseline; corrected from earlier 10× estimate after V_max + t_cross fixes per 2review.docx Reviewer 2). See [`docs/PAPER_V1_DRAFT.md`](docs/PAPER_V1_DRAFT.md) §10.4d, §10.4e for the full refinements.
 > **Final verdict:** Multi-resonance SIDM is a **phenomenological interpolation** through 8 observational channels + structural constraint map, not a first-principles derivation. See [`docs/PAPER_V1_DRAFT.md`](docs/PAPER_V1_DRAFT.md) §11 conclusions (v18.40) for the honest framing.
 
 This is a research workspace for the multi-resonance SIDM model. The investigation ran from Phase 32 to Phase 41D, covering 9 sub-tasks across multiple sub-phases.
