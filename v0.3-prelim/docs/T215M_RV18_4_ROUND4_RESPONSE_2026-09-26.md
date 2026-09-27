@@ -1,5 +1,8 @@
 # T215m — Rv18.4 Round 4 Response: Threading Test Refuted + Framing Update
 
+> **⚠️ SUPERSEDED by `T215_CANONICAL_FRAMING_2026-09-26.md`** — this document is historical archive. The canonical document supersedes the framing and numbers here. Per-batch and combined-batch statistics from 3 batches (T215k + T215p + T215r) are in the canonical doc.
+
+
 **Date:** 2026-09-26
 **Reviewer:** Rv18.4.docx (Round 4)
 **Status:** Reviewer's threading hypothesis REFUTED. Multiple recs acknowledged as correct, applied.

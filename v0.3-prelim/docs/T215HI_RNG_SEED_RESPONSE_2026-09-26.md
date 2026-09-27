@@ -1,5 +1,8 @@
 # T215h/i — Rv18.4 RNG-seed response + characterization of full non-determinism
 
+> **⚠️ SUPERSEDED by `T215_CANONICAL_FRAMING_2026-09-26.md`** — this document is historical archive. The canonical document supersedes the framing and numbers here. Per-batch and combined-batch statistics from 3 batches (T215k + T215p + T215r) are in the canonical doc.
+
+
 **Date:** 2026-09-26
 **Reviewer:** Rv18.4.docx
 **Status:** Reviewer's RNG-seed hypothesis verified as **partially correct but not sufficient**. Additional non-determinism sources identified.

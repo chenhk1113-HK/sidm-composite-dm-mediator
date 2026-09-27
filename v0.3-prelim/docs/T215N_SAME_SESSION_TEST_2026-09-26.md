@@ -1,5 +1,8 @@
 # T215n — Same-Session Reproducibility Test + RNG Seeding Verification
 
+> **⚠️ SUPERSEDED by `T215_CANONICAL_FRAMING_2026-09-26.md`** — this document is historical archive. The canonical document supersedes the framing and numbers here. Per-batch and combined-batch statistics from 3 batches (T215k + T215p + T215r) are in the canonical doc.
+
+
 **Date:** 2026-09-26
 **Reviewer:** Round 4.docx rec #1 — "If KiSS-SIDM's collision sampling is unseeded, then every run draws different collision candidates, and the trajectory diverges from the first timestep."
 

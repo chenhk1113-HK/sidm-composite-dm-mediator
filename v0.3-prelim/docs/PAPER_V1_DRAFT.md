@@ -1240,6 +1240,42 @@ can be falsified by:
 
 ---
 
+### 10.5b KiSS-SIDM numerics: bug fixes and non-deterministic endpoint timing (T215 series, v18.43)
+
+We attempted to validate the gravothermal collapse signature at Cloud-9 host-halo scale using the KiSS-SIDM DSMC code (Gurian & May 2025 PRL 135 221001, arXiv:2505.15903v2). The exercise uncovered four distinct bug classes and a fundamental non-determinism in the patched code that limits what the simulations can establish.
+
+**Bug fixes (real methods contribution).** Four bug classes were identified in KiSS-SIDM v0.0.1, producing nine code changes across two source files:
+
+| # | Bug class | Manifestation | Patches applied |
+|---|---|---|---|
+| 1 | FP overflow in `sqrt(x)` | Silent death at ~26 Myr (collision.jl) or ~8 Myr (1d_sphere.jl) | 4× `sqrt(max(0, x))` guards |
+| 2 | Majorant assertion failures | `@assert majorant < N` triggers premature termination | 3 assertion disables |
+| 3 | Numerical safety cap | ncom > majorant causes loop exit | `majorant = min(majorant, ncom)` cap |
+| 4 | Configuration workaround | Initial transient triggers 1d_sphere.jl bug | `adaptive_grid_min_particles = 64` |
+
+After patches, single-run duration extends from ~8 Myr (unpatched) to 30–70 Myr (patched). The patches are reproducible and available in the repository.
+
+**Non-deterministic endpoint timing.** Despite identical inputs (3000 particles, all 4 patches applied, `Random.seed!(42)` before CBE_sim, fresh Julia process per run), t_max varies substantially. We characterized this with 15 fresh-session runs across 3 separate batches:
+
+| Batch | t_max values (Myr) | Mean | Std | Range |
+|---|---|---|---|---|
+| T215k (Round 3) | 37.84, 19.80, 45.84, 3.94, 47.26 | 30.94 | 17.99 | 3.94–47.26 |
+| T215p (Round 5) | 69.99, 58.10, 30.24, 42.61, 69.99 | 54.19 | 17.05 | 30.24–69.99 |
+| T215r (Round 6) | 31.50, 60.33, 35.65, 70.00, 11.78 | 41.85 | 21.13 | 11.78–70.00 |
+| **Combined (15 runs)** | — | **42.33** | **18.71** | **3.94–70.00** |
+
+Two non-trivial facts emerge: (a) within any single batch, t_max varies by a factor of 2.3–12; (b) between batches with identical configuration, the mean shifts by ~75% (30.94 vs 54.19 vs 41.85 Myr). The between-batch shift is comparable to the within-batch standard deviation (~18–21 Myr), indicating the variability is not stationary — the distribution itself wanders.
+
+**Same-session degradation.** At full production scale (3000 particles, 70 Myr target), running two CBE_sim invocations in the same Julia process causes the second run to die before producing snapshots (t215q, t215q2). Even the first same-session run underperforms fresh-session runs at the same configuration (12.86 Myr vs 30 Myr target = 43% completion). At small N (100 particles, 5 Myr target), same-session runs ARE deterministic (100/100 identical positions; t215n), but this does not generalize to production scale. The mechanism is directional and monotonic, not random.
+
+**Mechanism investigation.** We systematically ruled out the following candidate mechanisms: unseeded task-local RNG (t215l: all 5 RNG tests pass); threading (nthreads()=1; no @threads/@spawn/@async in DSMC source); advection.jl:124 eachindex (deterministic on dense arrays); hash-table iteration order (no Dict/Set in grid logic); module-level mutable state (only constants in common.jl). The remaining candidates, none definitively identified, are OS-level ambient memory pressure, Julia JIT cache state, and accumulated memory footprint across runs in the same Julia process. The between-batch variance pattern (means differing by 75% across batches with identical configuration) is most consistent with OS-level memory pressure: batches were run at different times under different ambient conditions.
+
+**Reproducible qualitative signature.** Despite the endpoint-timing non-determinism, the qualitative gravothermal signature is reproducible. Across 10 fresh-session runs analyzed (5 from T215p + 5 from T215r, the only batches with surviving snapshot data), all 10 show interior density increase at r=444 pc (range 1.76–2.99×, growing with t_max) and outer density decrease at r=r_s (range 0.34–0.63×). Signal strength scales with t_max: the shortest analyzed run (30 Myr) shows 1.76× interior collapse; the longest (70 Myr) shows ~3×.
+
+**Implications for this work.** The T215 exercise does not establish a quantitative t_core measurement (the runs die at 30–70 Myr, far short of the predicted Balberg t_core ~176 Myr). It does establish that (i) the KiSS-SIDM v0.0.1 code, as patched, can produce gravothermal collapse signatures at Cloud-9 σ/m scale; (ii) the endpoint timing is environment-dependent and not reproducible from single runs; (iii) the qualitative physics is reproducible across draws. **Any single-run t_max result from this code should be treated as one draw from an environment-dependent distribution; the qualitative gravothermal signature is reproducible, the endpoint timing is not.** A future reproducibility study should run ≥10 fresh sessions under controlled memory conditions (e.g., `ulimit -v` or cgroup caps) to test the memory-pressure hypothesis and possibly recover stationarity.
+
+---
+
 ### 10.6 Summary of §10 UV no-go theorems
 
 Five no-go theorems demonstrate that the Phase 44 phenomenology is

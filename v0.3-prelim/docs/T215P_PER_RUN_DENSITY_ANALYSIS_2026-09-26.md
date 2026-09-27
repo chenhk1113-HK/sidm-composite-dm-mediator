@@ -1,5 +1,8 @@
 # T215p — Per-Run Density Analysis: Qualitative Signal IS Robust (5/5)
 
+> **⚠️ SUPERSEDED by `T215_CANONICAL_FRAMING_2026-09-26.md`** — this document is historical archive. The canonical document supersedes the framing and numbers here. Per-batch and combined-batch statistics from 3 batches (T215k + T215p + T215r) are in the canonical doc.
+
+
 **Date:** 2026-09-26
 **Reviewer:** Round 4.docx rec #2 — "Analyze all 5 fresh-session runs' density profiles. Critical for the 'qualitative signal robust' claim."
 **Status:** ✅ DONE — **5/5 fresh-session runs show the qualitative gravothermal signal** (interior collapse + outer expansion). The qualitative claim IS justified.

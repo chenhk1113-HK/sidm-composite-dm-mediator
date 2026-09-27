@@ -1,5 +1,8 @@
 # T215e — v18.43 Pushed to 60 Myr with adaptive_grid_min_particles=64
 
+> **⚠️ SUPERSEDED by `T215_CANONICAL_FRAMING_2026-09-26.md`** — this document is historical archive. The canonical document supersedes the framing and numbers here. Per-batch and combined-batch statistics from 3 batches (T215k + T215p + T215r) are in the canonical doc.
+
+
 **Date:** 2026-09-26
 **Status:** T215e is **ONE specific run that reached 60 Myr**. Per Rv18.4 review (Round 4), this is **not reproducible** — the same script gives t_max ranging from 3.9 to 47.3 Myr across fresh-session runs (see T215K_FRESH_SESSION_TEST_2026-09-26.md). The "60 Myr" result should be treated as **indicative, not canonical**.
 

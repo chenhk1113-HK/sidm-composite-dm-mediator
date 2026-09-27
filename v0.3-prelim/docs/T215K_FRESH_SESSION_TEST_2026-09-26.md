@@ -1,5 +1,8 @@
 # T215k — 5x Fresh-Session Reproducibility Test
 
+> **⚠️ SUPERSEDED by `T215_CANONICAL_FRAMING_2026-09-26.md`** — this document is historical archive. The canonical document supersedes the framing and numbers here. Per-batch and combined-batch statistics from 3 batches (T215k + T215p + T215r) are in the canonical doc.
+
+
 **Date:** 2026-09-26
 **Reviewer:** 18.4.docx rec #1 — "Run the same script 5× in one session, and 5× in separate fresh sessions. If the pattern holds (fresh→47, same-session→68), you have a reproducibility protocol, not a non-determinism problem."
 

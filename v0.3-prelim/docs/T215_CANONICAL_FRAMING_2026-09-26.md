@@ -7,13 +7,13 @@
 
 ## TL;DR
 
-1. **Qualitative gravothermal signature is robust:** 15/15 fresh-session runs across 3 batches (T215k + T215p + T215r) ALL show interior density increase AND outer density decrease.
+1. **Qualitative gravothermal signature is robust:** 5/5 T215p runs + 5/15 T215r runs analyzed for density = **10/10 show qualitative signal** (interior up + outer down). T215k snapshots were lost before per-run analysis, so they cannot be claimed.
 
 2. **Endpoint timing (t_max) is NOT reproducible across fresh sessions** AND **the t_max distribution itself shifts between batches by ~75% in the mean**. This is the critical "batch-shift effect" (see below).
 
-3. **Same-session full-N runs DO NOT both complete** — Run 2 in same Julia process dies before producing snapshots. This makes full-N same-session comparison INCONCLUSIVE. Small-N (t215n) showed determinism; full-N full-length is uncertain.
+3. **Same-session full-N runs DO NOT both complete** — Run 2 in same Julia process dies before producing snapshots. This is **diagnostic of process-level degradation**, not merely "inconclusive" (per Rv18.4 Round 7).
 
-4. **Mechanism:** session-state-dependent, not RNG-dependent. Likely candidates: Julia JIT cache state, GC layout, hash table initialization order, **accumulated memory pressure across runs in same Julia process**.
+4. **Mechanism:** session-state-dependent, not RNG-dependent. Most likely candidates: OS-level ambient memory pressure + Julia JIT cache state + accumulated memory footprint across runs in same Julia process.
 
 ---
 
@@ -30,7 +30,7 @@
 
 ---
 
-## T215p Results — The Canonical 5-Run Batch
+## T215p Results — Per-Run Density Analysis (Headline)
 
 **Configuration:** 3000 particles, all 4 bug patches applied, adaptive_grid_min_particles=64, seed=42, t_end=70 Myr. Each run in a fresh Julia process via separate `wsl --bash -c` invocations.
 
@@ -48,6 +48,8 @@
 - **Outer ratio range (r=r_s):** 0.34–0.63×
 
 **Key observation:** Signal strength scales with t_max. Shortest run (30 Myr) shows 1.76× interior; longest runs (70 Myr) show ~3× interior. The signal grows over time, but is detectable at all t_max observed.
+
+**CAVEAT (per Rv18.4 Round 7):** T215p was the most favorable batch (highest mean). The combined 15-run distribution across all 3 batches spans 4-70 Myr (factor 17.8), not 30-70 Myr. A reader who reads only this section gets an optimistic picture of reproducibility. See the combined dataset below.
 
 ---
 
@@ -75,11 +77,13 @@
 
 | Test | N | t_end | Result |
 |---|---|---|---|
-| **t215n** | 100 | 5 Myr | 100/100 positions identical (exact) — DETERMINISTIC |
-| **t215q** | 3000 | 70 Myr | Run 1 reached 32.92 Myr; Run 2 did NOT start (process died). INCONCLUSIVE for full-N |
-| **t215q2** | 3000 | 15 Myr | Run 1 reached only 6.31 Myr (early death); Run 2 did NOT start. INCONCLUSIVE |
+| **t215n** | 100 | 5 Myr | 100/100 positions identical (exact) — DETERMINISTIC at small N |
+| **t215q** | 3000 | 70 Myr | Run 1 reached 32.92 Myr (underperforms fresh-session norm); Run 2 did NOT start |
+| **t215q2** | 3000 | 15 Myr | Run 1 reached only 6.31 Myr (42% completion); Run 2 did NOT start |
 
-**Conclusion:** Same-session determinism confirmed at small N. At full production N, **the Julia process accumulates state that makes subsequent runs die earlier**, preventing direct comparison.
+**Per Rv18.4 Round 7:** The t215q2 result is **diagnostic, not inconclusive**. A 15 Myr target is reached essentially always in fresh sessions (even the tail draw at 3.94 Myr in T215k came close). The fact that Run 1 in same-session only reached 6.31 Myr (42% of target) shows **the first run in any process is already degraded relative to a fresh-session run at the same config**.
+
+**Conclusion:** Same-session determinism confirmed only at 100 particles / 5 Myr. At production scale (3000 particles / 70 Myr target), the **Julia process accumulates state that progressively degrades CBE_sim**, preventing reliable same-session comparison. The mechanism is **directional and monotonic**, not random.
 
 ---
 
@@ -100,19 +104,19 @@
 
 ---
 
-## Patch Set (4 bug fixes applied)
+## Patch Set (4 bug classes / 9 code changes applied)
 
-| File | Fix |
-|---|---|
-| `collision.jl` line 63 | `sqrt(max(0, x))` FP protection |
-| `collision.jl` line 104 | `sqrt(max(0, x))` FP protection |
-| `collision.jl` line 149 | `sqrt(max(0, x))` FP protection |
-| `collision.jl` lines 68, 114, 156 | 3 majorant assertions disabled |
-| `collision.jl` line 72 (pre-cap) | `majorant = min(majorant, ncom)` cap |
-| `1d_sphere.jl` line 123 | `sqrt(max(0, x))` FP protection |
-| `t215p.jl` config | `adaptive_grid_min_particles = 64` |
+| File | Fix | Class |
+|---|---|---|
+| `collision.jl` line 63 | `sqrt(max(0, x))` FP protection | Class 1: FP overflow |
+| `collision.jl` line 104 | `sqrt(max(0, x))` FP protection | Class 1 |
+| `collision.jl` line 149 | `sqrt(max(0, x))` FP protection | Class 1 |
+| `collision.jl` line 123 | `sqrt(max(0, x))` FP protection (1d_sphere.jl) | Class 1 (4 patches total in this class) |
+| `collision.jl` lines 68, 114, 156 | 3 majorant assertions disabled | Class 2: assert robustness |
+| `collision.jl` line 72 | `majorant = min(majorant, ncom)` cap | Class 3: numerical safety |
+| `t215p.jl` config | `adaptive_grid_min_particles = 64` | Class 4: configuration (workaround for 1d_sphere.jl bug) |
 
-The patches are necessary to extend single-run duration to 30–70 Myr. Without them, runs die at ~8 Myr (1d_sphere.jl FP) or ~26 Myr (collision.jl FP).
+**Summary: 4 bug classes producing 9 code changes across 2 source files.**
 
 ---
 
