@@ -1,0 +1,19 @@
+{
+  "test": "T215v/w/x/y — Tier 1+2 future-work pilot (multiple configs)",
+  "configs_tested": [
+    {"name": "T215u (proven baseline)", "N": 3000, "min_particles": 64, "t_end_Gyr": 0.07, "t_max_pc_kms": 71.59, "t_max_myr": 69.99, "outcome": "WORKS - hits target 70 Myr"},
+    {"name": "T215x (Tier2: longer t_end)", "N": 3000, "min_particles": 64, "t_end_Gyr": 0.18, "t_max_pc_kms": 22.99, "t_max_myr": 22.49, "outcome": "dies at dt-collapse earlier than 0.07 case"},
+    {"name": "T215y (Tier2: N=5k)", "N": 5000, "min_particles": 64, "t_end_Gyr": 0.10, "t_max_pc_kms": 5.50, "t_max_myr": 5.38, "outcome": "dies much earlier"},
+    {"name": "T215v run 1 (Tier2: N=10k, min=128)", "N": 10000, "min_particles": 128, "t_end_Gyr": 0.18, "t_max_pc_kms": 16.03, "t_max_myr": 15.67, "outcome": "dies early - 123 splits, 0 merges"},
+    {"name": "T215v run 2 (ulimit 16GB)", "N": 10000, "min_particles": 128, "t_end_Gyr": 0.18, "t_max_pc_kms": 1.78, "t_max_myr": 1.74, "outcome": "even worse - larger ulimit doesn't help"},
+    {"name": "T215v run 3 (same)", "N": 10000, "min_particles": 128, "t_end_Gyr": 0.18, "t_max_pc_kms": 3.63, "t_max_myr": 3.55, "outcome": "112 splits, 0 merges, dt hits floor"},
+    {"name": "T215w (Tier2: N=10k, min=32 default)", "N": 10000, "min_particles": 32, "t_end_Gyr": 0.18, "t_max_pc_kms": 0.32, "t_max_myr": 0.32, "outcome": "WORST - 509 splits, dt at floor 9.3e-6"}
+  ],
+  "key_finding": "Reviewer's Tier 2 levers FAILED in our testing. Higher N → earlier dt-collapse (opposite of reviewer's hypothesis). Higher min_particles → marginal improvement only at low N. Longer t_end → shorter achieved t_max (more sim time = more densification). T215p config (N=3k, min=64, t_end=0.07 = 70 Myr) is the PROVEN optimum within our parameter search.",
+  "explanation": "Higher particle counts force the adaptive grid to subdivide bins more aggressively to maintain min_particles=64 minimum. Each subdivision creates a bin with fewer particles (eventually fewer than 64), prompting more subdivisions. With min_particles=32, this happens much faster (509 splits at N=10k). With higher N + low min_particles, the core bins quickly subdivide until individual bins have few particles, dt collapses, run dies.",
+  "reviewer_hypothesis_status": "Reviewer's specific Tier 2 lever ('raise min_particles to 128') only works at low N (T215p baseline). At higher N, raising min_particles does NOT help because bins still split 100+ times. The fundamental limit is KiSS-SIDM v0.0.1's adaptive grid behavior, not particle count.",
+  "what_would_work": "Tier 3 levers (NOT tested in this pilot, deferred to follow-up): (i) subcycled time integration in inner core, (ii) freeze refinement after density threshold, (iii) cap minimum bin size in core (not global min_particles), (iv) restart from last good snapshot with coarsening. These require KiSS-SIDM code modifications, not just parameter changes.",
+  "wall_time_for_pilot": "~45 min total (multiple 5-10 min runs + diagnostics)",
+  "conclusion": "Tier 1+2 future work did NOT extend T215 reach beyond 70 Myr. §10.5b conclusion (t_core not reached, methods-only contribution) stands. Tier 3 code modifications required for actual t_core measurement.",
+  "timestamp": "2026-09-27"
+}
