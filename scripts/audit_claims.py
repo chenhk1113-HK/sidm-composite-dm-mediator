@@ -92,7 +92,7 @@ CLAIM_MAP = [
     # Phase 1.2 devplan — T215 standing numbers
     {
         "label": "T215u: mean t_max = 69.57 Myr (memory-capped)",
-        "regex": r"69\.57\s*Myr",
+        "regex": r"mean\s*69\.57|69\.57\s*Myr|69\.57,\s*std",
         "ref_json": "t215u_memory_cap_summary.json",
         "ref_key": "mean_myr",
         "expected": 69.57,
