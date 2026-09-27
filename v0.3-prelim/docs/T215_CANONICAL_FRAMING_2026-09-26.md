@@ -104,19 +104,19 @@
 
 ---
 
-## Patch Set (4 bug classes / 9 code changes applied)
+## Patch Set (3 numerical bugs + 1 parameter tuning / 8 code changes applied)
 
-| File | Fix | Class |
+| File | Fix | Type |
 |---|---|---|
-| `collision.jl` line 63 | `sqrt(max(0, x))` FP protection | Class 1: FP overflow |
-| `collision.jl` line 104 | `sqrt(max(0, x))` FP protection | Class 1 |
-| `collision.jl` line 149 | `sqrt(max(0, x))` FP protection | Class 1 |
-| `collision.jl` line 123 | `sqrt(max(0, x))` FP protection (1d_sphere.jl) | Class 1 (4 patches total in this class) |
-| `collision.jl` lines 68, 114, 156 | 3 majorant assertions disabled | Class 2: assert robustness |
-| `collision.jl` line 72 | `majorant = min(majorant, ncom)` cap | Class 3: numerical safety |
-| `t215p.jl` config | `adaptive_grid_min_particles = 64` | Class 4: configuration (workaround for 1d_sphere.jl bug) |
+| `collision.jl` line 63 | `sqrt(max(0, x))` FP protection | Numerical bug |
+| `collision.jl` line 104 | `sqrt(max(0, x))` FP protection | Numerical bug |
+| `collision.jl` line 149 | `sqrt(max(0, x))` FP protection | Numerical bug |
+| `1d_sphere.jl` line 123 | `sqrt(max(0, x))` FP protection | Numerical bug |
+| `collision.jl` lines 68, 114, 156 | 3 majorant assertions disabled | Numerical bug |
+| `collision.jl` line 72 | `majorant = min(majorant, ncom)` cap | Numerical bug |
+| `t215p.jl` config | `adaptive_grid_min_particles = 64` | Parameter tuning (workaround for 1d_sphere.jl bug) |
 
-**Summary: 4 bug classes producing 9 code changes across 2 source files.**
+**Summary: 3 numerical bugs + 1 parameter tuning = 4 classes producing 8 code changes across 2 source files.** Per R18.4 Round 8 review, the parameter tuning is counted separately because it is a workaround for the underlying 1d_sphere.jl bug, not an independent fix.
 
 ---
 
