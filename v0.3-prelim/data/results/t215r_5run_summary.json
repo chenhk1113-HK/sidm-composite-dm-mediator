@@ -1,0 +1,15 @@
+{
+  "test": "T215r — 5x fresh-session runs (Round 6 batch)",
+  "t_max_pc_per_kms": [32.21, 61.71, 36.47, 71.59, 12.05],
+  "t_max_myr": [31.50, 60.33, 35.65, 70.00, 11.78],
+  "snapshots": [6, 11, 7, 12, 3],
+  "mean_myr": 41.85,
+  "std_myr": 21.13,
+  "min_myr": 11.78,
+  "max_myr": 70.00,
+  "range_myr": 58.22,
+  "median_myr": 35.65,
+  "pc_per_kms_to_myr": 0.97779,
+  "conclusion": "T215r batch confirms batch-shift effect. Mean 41.85 vs T215k 30.94 vs T215p 54.19 — three batches with identical config give means differing by 75%.",
+  "timestamp": "2026-09-26"
+}
