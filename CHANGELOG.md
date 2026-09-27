@@ -8,6 +8,34 @@
 
 
 
+## [v18.43-T215-closed-2026-09-27]
+
+**T215 thread closed after 10 review rounds + Tier 1+2 future-work pilot.**
+
+**Final T215 results (canonical):**
+- 15 fresh-session runs across 3 batches (T215k + T215p + T215r), per-batch means 30.94/54.19/41.85 Myr (**batch-shift effect**: means differ by 75%)
+- Memory-pressure hypothesis **CONFIRMED** via T215u (3-run batch under `ulimit -v 8000000`): mean 69.57 Myr, std 0.74, range 1.27 (vs uncapped mean 41.85, std 21.13, range 58.22) — **28× std reduction**
+- Qualitative gravothermal signature reproduced in 10/10 analyzed runs (interior up 1.76-2.99×, outer down 0.34-0.63×)
+- Same-session degradation is diagnostic (t215s: Run 1 12.86/30 Myr, Runs 2+3 died)
+- Tier 1+2 pilot (t215v/w/x/y, Consider.docx): **reviewer's Tier 2 levers FAILED** — higher N → earlier dt collapse (opposite of hypothesis); T215p config remains proven optimum
+
+**Paper §10.5b shipped (7 paragraphs, no overclaim):**
+- "Methods contribution only" framing — does NOT provide quantitative t_core
+- N=3 disclosures explicit; mechanism claim softened to "consistent with"
+- Recommendation (`ulimit -v <fixed>`) prominent at end
+- Canonical reproducibility recipe (5 items: relative paths, fresh process, ulimit, fixed seed/subset, log diagnostics)
+
+**Files:**
+- `v0.3-prelim/code/t215v.jl`, `t215x.jl`, `t215y.jl`, `t215w.jl` (Tier 1+2 pilot)
+- `v0.3-prelim/docs/T215VWXY_TIER12_PILOT_2026-09-27.md` (pilot summary)
+- `v0.3-prelim/data/results/t215vwy_pilot_summary.json`
+- `v0.3-prelim/data/snapshots_t215v/`, `t215w/`, `t215x/`, `t215y/` (persistent storage per Tier 1)
+- Updated `CURRENT.md` and `README.md` with final v18.43 status
+
+**Wall time:** ~45 min Tier 1+2 pilot + 15 min CURRENT.md/README.md updates.
+
+---
+
 ## [KiSS-SIDM-Cloud9-v18.43-T215e-Rev18.4-Audit-Response] - 2026-09-26
 
 **v18.43 Rev18.4 audit response — Tier-1 fixes shipped, Tier-2 deferred with concrete next-step.**

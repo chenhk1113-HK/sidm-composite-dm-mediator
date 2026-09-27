@@ -6,40 +6,78 @@
 
 ---
 
-## Standing: v0.4-prelim+v18.43 (2026-09-26, T215 KiSS-SIDM real N-body IC + gravothermal)
+## Standing: v0.4-prelim+v18.43 (2026-09-27, T215 closed: 10-round review + Tier 1+2 pilot)
 
-**v18.43** — first real N-body-quality initial conditions + KiSS-SIDM kinetic simulation at Cloud-9 host halo, σ/m = 70 cm²/g. **BREAKTHROUGH (T215b + T215d):** Patched KiSS-SIDM collision.jl floating-point bug (3 lines), then disabled majorant assertions + added ncom cap. **Final: 55 Myr run (31.3% of Balberg t_core = 0.176 Gyr).** Gravothermal catastrophe observed: interior (r=200 pc) density INCREASES 2.0× (1.47 → 2.97 Msun/pc³) while outer (r=r_s) DECREASES 2.0×. This is the qualitative signature of Balberg+ 2002 — center collapses, outer expands. Monotonic signal over the full 55 Myr window.
+**v18.43 final (2026-09-27)** — T215 investigation closed after **10 review rounds** + Tier 1+2 future-work pilot. **Methods contribution only** — no quantitative t_core measurement.
 
-- **T215 IC generator** (`v0.3-prelim/code/t215_nfw_ic_generator.py`): produces 10⁴-particle virialized NFW halo in HDF5/gizmo format. v_rms = 33 km/s ≈ V_max = 31.12 km/s (proper virialization, not Maxwell-Boltzmann with arbitrary σ).
+**What we did (T215 series):**
+- Ran KiSS-SIDM DSMC simulation of Cloud-9 host halo at σ/m = 70 cm²/g
+- 15 fresh-session runs across 3 batches (T215k, T215p, T215r)
+- Identified 3 numerical bugs in KiSS-SIDM v0.0.1 + 1 parameter tuning (8 code changes total)
+- Discovered environment-dependent non-determinism: same-session runs degrade, ambient memory pressure drives variance
+- Found reproducibility recipe: `ulimit -v 8000000` reduces endpoint-timing std by 28× (from 21.13 Myr to 0.74 Myr)
 
-- **T215 KiSS-SIDM runs** (3 attempts): 10⁴ particles with proper ICs avoid the earlier `AssertionError("majorant <= N")` numerical artifact. Silent process crashes at >25 Myr simulated time (no error message, no OOM) likely Julia GC pressure on adaptive grid. **Workaround:** reduce to 3000 particles enables 26 Myr run.
+**Final §10.5b paper section (shipped):**
+- Title: "KiSS-SIDM numerics: bug fixes and non-deterministic endpoint timing (T215 series, v18.43)"
+- 7 paragraphs, no overclaim, N=3 disclosures explicit
+- "Methods contribution only" framing — does NOT provide quantitative t_core
 
-- **Density evolution observed at r = r_s:**
-  - t=0 Myr: ρ = 1.83×10⁻³ Msun/pc³
-  - t=24 Myr: ρ = 1.41×10⁻³ Msun/pc³ (23% decrease)
-  - Consistent with gravothermal core expansion (isothermal core formation), NOT collapse
-  - Kaplinghat+ 2016 prediction for high-σ/m SIDM
+**Tier 1+2 pilot (Consider.docx future work, 2026-09-27):**
+- 5 new configs tested to extend t_core reach beyond 70 Myr
+- **All Tier 2 levers FAILED**: higher N → earlier dt collapse (opposite of reviewer's hypothesis)
+- T215p config (N=3000, min_particles=64, t_end=70 Myr) remains the proven optimum
+- Reaching Balberg t_core = 176 Myr requires Tier 3 **code modifications** (subcycled time integration, freeze refinement after density threshold), not parameter tuning — deferred to future work
 
-- **Balberg+ t_core = 0.176 Gyr remains untested directly**: we observed 24 Myr = 13.6% of t_core. Density decrease is too gradual to extrapolate collapse time. System appears to be in **core expansion phase** rather than approaching collapse.
+**Bug classes found in KiSS-SIDM v0.0.1 (3 numerical bugs + 1 parameter tuning):**
+1. FP overflow in `sqrt(x)` — silent death at ~26 Myr (collision.jl) or ~8 Myr (1d_sphere.jl); 4× `sqrt(max(0, x))` guards
+2. Majorant assertion failures — `@assert majorant < N` triggers premature termination; 3 assertion disables (production workaround; diagnostics should be logged)
+3. ncom > majorant causes loop exit — `majorant = min(majorant, ncom)` cap
+4. Parameter tuning: `adaptive_grid_min_particles = 64` (default 32) as runtime workaround
 
-**Files created:**
-- `v0.3-prelim/code/t215_nfw_ic_generator.py` (250 lines)
-- `v0.3-prelim/code/t215_run_kiss_sidm.jl` (132 lines)
-- `v0.3-prelim/code/t215_debug.jl` (130 lines, memory monitoring)
-- `v0.3-prelim/code/t215_small.jl` (110 lines, 3000-particle run)
-- `v0.3-prelim/code/t215_analyze.jl` (110 lines, density profile extraction)
-- `v0.3-prelim/data/ics/t215_nfw_halo_cloud9.hdf5`
-- `v0.3-prelim/data/snapshots_t215_small/snap_000.jld2` through `snap_012.jld2` (13 snapshots)
-- `v0.3-prelim/data/results/t215_density_profiles_small.json`
-- `v0.3-prelim/docs/T215_KISS_SIDM_CLOUD9_GRAVOTHERMAL_2026-09-26.md`
+**Combined 15-run dataset (3 batches):**
+- T215k: mean 30.94 Myr, std 17.99, range 3.94-47.26
+- T215p: mean 54.19 Myr, std 17.05, range 30.24-69.99
+- T215r: mean 41.85 Myr, std 21.13, range 11.78-70.00
+- Combined: mean 42.33 Myr, std 18.71, range 3.94-70.00
+
+**Qualitative signal (10/10 analyzed runs):**
+- Interior density increase at r=444 pc: 1.76-2.99× (consistent across all runs analyzed)
+- Outer density decrease at r=r_s: 0.34-0.63× (consistent across all runs analyzed)
+- Consistent with onset of gravothermal evolution (predicted direction of Balberg+ 2002)
+- **NOT a measured core-collapse time** — runs stop at 30-70 Myr, far short of Balberg t_core ≈ 176 Myr
+
+**Mechanism investigation:**
+- REFUTED: unseeded RNG, threading, hash-table order, module mutable state
+- CONSISTENT WITH: OS-level ambient memory pressure (28× std reduction under `ulimit -v 8000000`)
+- NOT TRACED: microscopic path from memory pressure → code path selection
+
+**Canonical reproducibility recipe (for any future KiSS-SIDM use):**
+1. Use relative paths (avoid Windows `/mnt/c/Users/...` and `/tmp`); write snapshots to `data/snapshots_<run_label>/`
+2. Run one fresh Julia process per realization (avoids same-session degradation)
+3. Apply `ulimit -v <fixed>` before Julia invocation (recommended cap: 8 GB)
+4. Use fixed seed (`Random.seed!(42)`) and fixed particle subset
+5. Store majorant/ncom diagnostics (do not silently bypass)
+
+**Files (T215 series):**
+- `v0.3-prelim/code/t215r.jl` (Round 6 5-run batch driver)
+- `v0.3-prelim/code/t215q.jl`, `t215q2.jl`, `t215s.jl` (same-session degradation tests)
+- `v0.3-prelim/code/t215p.jl`, `t215n.jl`, `t215l.jl` (earlier rounds)
+- `v0.3-prelim/code/t215v.jl`, `t215w.jl`, `t215x.jl`, `t215y.jl` (Tier 1+2 pilot)
+- `v0.3-prelim/code/t215_nfw_ic_generator.py`, `t215_run_kiss_sidm.jl`, `t215_small.jl`, etc. (IC + early runs)
+- `v0.3-prelim/patches/0001-collision-jl-sqrt-max.patch`, `0002-1d-sphere-jl-sqrt-max.patch`
+- `v0.3-prelim/docs/PAPER_V1_DRAFT.md` §10.5b (the paper section)
+- `v0.3-prelim/docs/T215_CANONICAL_FRAMING_2026-09-26.md` (canonical doc)
+- `v0.3-prelim/docs/T215VWXY_TIER12_PILOT_2026-09-27.md` (pilot summary)
+- `v0.3-prelim/data/results/t215r_5run_summary.json`, `t215u_memory_cap_summary.json`, `t215p_qualitative_signal_summary.json`, `t215vwy_pilot_summary.json`
+- `v0.3-prelim/data/snapshots_t215v/`, `t215w/`, `t215x/`, `t215y/`, `snapshots_sanity/` (persistent storage per Tier 1)
 
 **Honest verdict (unchanged):**
 - 4 of 8 channels under physically motivated f_H (the honest number)
 - 7 of 8 only under borrowed (hand-picked) f_H
 - Framework is a structural constraint map + no-go catalogue, not a unified derivation
-- **NEW (T215):** Real KiSS-SIDM kinetic simulation shows SIDM core expansion at σ/m = 70 — qualitatively consistent with high-σ/m SIDM physics. Core collapse (gravothermal phase) not observed within 24 Myr.
+- **NEW (T215 closed):** Methods contribution: 3 KiSS-SIDM bug fixes + reproducibility recipe. Qualitatively shows gravothermal direction at Cloud-9 σ/m scale. **Does NOT provide quantitative t_core** (parameter tuning cannot extend beyond 70 Myr at tested N).
 
-**Status:** v18.43 ships at commit `pending`, tag `v18.43-kiss-sidm-cloud9-gravothermal`.
+**Status:** v18.43 ships at commit `8358c85`, branch `wip/cloud-9-relhic`. T215 thread closed.
 
 ---
 
