@@ -1096,6 +1096,21 @@ The T208 gravothermal refutation (see §9.5 and `v0.3-prelim/docs/T208_PATH_B_GR
 
 Code: `v0.3-prelim/code/t212_silverman_gravothermal.py`. Results JSON: `v0.3-prelim/data/results/t212_silverman_gravothermal.json`. Full doc: `v0.3-prelim/docs/T212_PATH_B3_TRIM_AND_A3_PLAN_2026-09-25.md`.
 
+### 10.4f Population-level σ_eff map (Phase 4A extension)
+
+Figure 5 shows the population-level σ_eff map across the V_max × M_halo plane using the paper's canonical Phase 44 prescription (5-peak Gaussian Breit-Wigner resonance + Yukawa background, with two-component f_H correction at the observation radius). The 8 standing observables from §10.4d are overlaid:
+
+- **Bright yellow band at V_max ≈ 30 km/s**: the v₁ resonance peak where σ_eff ≈ 100-200 cm²/g — Cloud-9 is in this band, and the map predicts this strong cross-section is **unique** to host-halo scales, not galaxies.
+- **Green region at V_max = 5-25 km/s** (UFDs and dSphs): σ_eff ≈ 1-10 cm²/g, in tension with observed <1 cm²/g upper limits (Fornax in particular; t_cross cannot be measured; see §9.5).
+- **Blue region at V_max > 50 km/s** (LMC, SPARC, cluster): σ_eff < 0.1 cm²/g, consistent with all cluster/LMC bounds.
+- **Dark blue tail at V_max > 200 km/s** (cluster scale): σ_eff ≈ 0.001-0.01 cm²/g, well below the <1 cm²/g bound.
+
+**Honest verdict:** the map shows the multi-resonance model **predicts** σ_eff at any (V_max, M_halo) point, but the Cloud-9 resonance creates an unavoidable σ_eff = 100-200 cm²/g region that the dSph constraint says should be < 1 cm²/g. This is the v=28 km/s tension that cannot be eliminated without either: (a) a sharper resonance (w₁ < 1 km/s, which the Phase 44 fit prefers but Cloud-9 orbit physics cannot guarantee), or (b) additional suppression in the v = 15-25 km/s range (e.g. gravothermal core formation effect; see §10.4e).
+
+![Population-level σ_eff map](figures/fig5_population_sigma_eff_map.png)
+
+See `v0.3-prelim/data/results/phase4a_population_sigma_eff_map.json` for the full 60×60 grid and `phase4a_population_sigma_eff_summary.txt` for the text summary.
+
 ### 10.5 EFT target map for future UV completions
 
 The five no-go theorems above define what any future UV completion must
