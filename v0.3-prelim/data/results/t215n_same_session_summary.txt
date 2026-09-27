@@ -1,0 +1,16 @@
+T215n same-session reproducibility test (n_tracer=100, t_end=5 Myr)
+================================================================
+Both runs: same Julia process, Random.seed!(42) before each CBE_sim
+Both runs: same ICs (loaded fresh for run 2)
+Both runs: same params, same patches, same Julia version
+
+snap_001 comparison: 100 / 100 positions identical (EXACT)
+pos1[1] = pos2[1] = Reconstruct@SArray((1405.908729160073 pc,))
+
+CONCLUSION: Runs ARE reproducible when Random.seed!(42) is used in
+the same Julia session with same scripts.
+
+This confirms reviewer's Round 3 hypothesis: non-determinism is
+session-state-dependent. The 5 fresh-session runs (Round 3) showed
+factor-12 variance because each fresh Julia session starts with
+different compilation state, JIT cache, GC layout, etc.

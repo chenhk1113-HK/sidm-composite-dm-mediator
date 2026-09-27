@@ -1,0 +1,343 @@
+{
+  "phase": "7a",
+  "date": "2026-09-13",
+  "title": "Composite-mediator LZ forward prediction at v0.3-prelim MAP",
+  "v03_MAP": {
+    "sigma_m_0": 0.72,
+    "a": 1.31,
+    "log_epsilon": -56.113,
+    "log_alpha": -28.047,
+    "log_Z": -2.941,
+    "epsilon": 7.709034690644308e-57,
+    "alpha_chi": 8.974287945007473e-29
+  },
+  "composite_inputs": {
+    "m_chi_GeV": 200.0,
+    "m_phi_MeV": 50.0
+  },
+  "sweep_results": [
+    {
+      "operating_point": "v0.3-prelim MAP",
+      "v03_MAP_inputs": {
+        "sigma_m_0": 0.72,
+        "a": 1.31,
+        "epsilon": 7.709034690644308e-57,
+        "alpha_chi": 8.974287945007473e-29,
+        "log_epsilon": -56.113,
+        "log_alpha": -28.047,
+        "log_Z_T39_tier3": -2.941
+      },
+      "composite_inputs": {
+        "m_chi_GeV": 200.0,
+        "m_phi_MeV": 50.0
+      },
+      "delta_keV": 50,
+      "form_factor_ansatz": "gaussian",
+      "sigma_inel_at_target_cm2": 4.813636450949329e-164,
+      "N_predicted": 1.9172249367086854e-121,
+      "N_observed": 1,
+      "ratio_pred_over_observed": 1.9172249367086854e-121,
+      "log10_ratio": -120.71732693091927,
+      "poisson_p_value": 0.0,
+      "v_min_at_target_kms": 212.3293496624404,
+      "verdict": "DOES NOT EXPLAIN LZ EVENT (predicted \u226a observed)"
+    },
+    {
+      "operating_point": "v0.3-prelim MAP",
+      "v03_MAP_inputs": {
+        "sigma_m_0": 0.72,
+        "a": 1.31,
+        "epsilon": 7.709034690644308e-57,
+        "alpha_chi": 8.974287945007473e-29,
+        "log_epsilon": -56.113,
+        "log_alpha": -28.047,
+        "log_Z_T39_tier3": -2.941
+      },
+      "composite_inputs": {
+        "m_chi_GeV": 200.0,
+        "m_phi_MeV": 50.0
+      },
+      "delta_keV": 50,
+      "form_factor_ansatz": "dipole",
+      "sigma_inel_at_target_cm2": 4.501109694379041e-164,
+      "N_predicted": 1.7893003355354695e-121,
+      "N_observed": 1,
+      "ratio_pred_over_observed": 1.7893003355354695e-121,
+      "log10_ratio": -120.74731675662747,
+      "poisson_p_value": 0.0,
+      "v_min_at_target_kms": 212.3293496624404,
+      "verdict": "DOES NOT EXPLAIN LZ EVENT (predicted \u226a observed)"
+    },
+    {
+      "operating_point": "v0.3-prelim MAP",
+      "v03_MAP_inputs": {
+        "sigma_m_0": 0.72,
+        "a": 1.31,
+        "epsilon": 7.709034690644308e-57,
+        "alpha_chi": 8.974287945007473e-29,
+        "log_epsilon": -56.113,
+        "log_alpha": -28.047,
+        "log_Z_T39_tier3": -2.941
+      },
+      "composite_inputs": {
+        "m_chi_GeV": 200.0,
+        "m_phi_MeV": 50.0
+      },
+      "delta_keV": 100,
+      "form_factor_ansatz": "gaussian",
+      "sigma_inel_at_target_cm2": 4.804592080845548e-164,
+      "N_predicted": 2.2876355343588876e-121,
+      "N_observed": 1,
+      "ratio_pred_over_observed": 2.2876355343588876e-121,
+      "log10_ratio": -120.6406131660788,
+      "poisson_p_value": 0.0,
+      "v_min_at_target_kms": 300.0358506327465,
+      "verdict": "DOES NOT EXPLAIN LZ EVENT (predicted \u226a observed)"
+    },
+    {
+      "operating_point": "v0.3-prelim MAP",
+      "v03_MAP_inputs": {
+        "sigma_m_0": 0.72,
+        "a": 1.31,
+        "epsilon": 7.709034690644308e-57,
+        "alpha_chi": 8.974287945007473e-29,
+        "log_epsilon": -56.113,
+        "log_alpha": -28.047,
+        "log_Z_T39_tier3": -2.941
+      },
+      "composite_inputs": {
+        "m_chi_GeV": 200.0,
+        "m_phi_MeV": 50.0
+      },
+      "delta_keV": 100,
+      "form_factor_ansatz": "dipole",
+      "sigma_inel_at_target_cm2": 4.49265253265349e-164,
+      "N_predicted": 2.1349970792931765e-121,
+      "N_observed": 1,
+      "ratio_pred_over_observed": 2.1349970792931765e-121,
+      "log10_ratio": -120.67060271475967,
+      "poisson_p_value": 0.0,
+      "v_min_at_target_kms": 300.0358506327465,
+      "verdict": "DOES NOT EXPLAIN LZ EVENT (predicted \u226a observed)"
+    },
+    {
+      "operating_point": "v0.3-prelim MAP",
+      "v03_MAP_inputs": {
+        "sigma_m_0": 0.72,
+        "a": 1.31,
+        "epsilon": 7.709034690644308e-57,
+        "alpha_chi": 8.974287945007473e-29,
+        "log_epsilon": -56.113,
+        "log_alpha": -28.047,
+        "log_Z_T39_tier3": -2.941
+      },
+      "composite_inputs": {
+        "m_chi_GeV": 200.0,
+        "m_phi_MeV": 50.0
+      },
+      "delta_keV": 200,
+      "form_factor_ansatz": "gaussian",
+      "sigma_inel_at_target_cm2": 4.786528854894086e-164,
+      "N_predicted": 2.858663440063722e-121,
+      "N_observed": 1,
+      "ratio_pred_over_observed": 2.858663440063722e-121,
+      "log10_ratio": -120.54383697256335,
+      "poisson_p_value": 0.0,
+      "v_min_at_target_kms": 424.14269949935186,
+      "verdict": "DOES NOT EXPLAIN LZ EVENT (predicted \u226a observed)"
+    },
+    {
+      "operating_point": "v0.3-prelim MAP",
+      "v03_MAP_inputs": {
+        "sigma_m_0": 0.72,
+        "a": 1.31,
+        "epsilon": 7.709034690644308e-57,
+        "alpha_chi": 8.974287945007473e-29,
+        "log_epsilon": -56.113,
+        "log_alpha": -28.047,
+        "log_Z_T39_tier3": -2.941
+      },
+      "composite_inputs": {
+        "m_chi_GeV": 200.0,
+        "m_phi_MeV": 50.0
+      },
+      "delta_keV": 200,
+      "form_factor_ansatz": "dipole",
+      "sigma_inel_at_target_cm2": 4.475762066937939e-164,
+      "N_predicted": 2.6679277549847113e-121,
+      "N_observed": 1,
+      "ratio_pred_over_observed": 2.6679277549847113e-121,
+      "log10_ratio": -120.57382593488903,
+      "poisson_p_value": 0.0,
+      "v_min_at_target_kms": 424.14269949935186,
+      "verdict": "DOES NOT EXPLAIN LZ EVENT (predicted \u226a observed)"
+    },
+    {
+      "operating_point": "v0.3-prelim MAP",
+      "v03_MAP_inputs": {
+        "sigma_m_0": 0.72,
+        "a": 1.31,
+        "epsilon": 7.709034690644308e-57,
+        "alpha_chi": 8.974287945007473e-29,
+        "log_epsilon": -56.113,
+        "log_alpha": -28.047,
+        "log_Z_T39_tier3": -2.941
+      },
+      "composite_inputs": {
+        "m_chi_GeV": 200.0,
+        "m_phi_MeV": 50.0
+      },
+      "delta_keV": 297,
+      "form_factor_ansatz": "gaussian",
+      "sigma_inel_at_target_cm2": 4.7690400291824856e-164,
+      "N_predicted": 3.231088921535844e-121,
+      "N_observed": 1,
+      "ratio_pred_over_observed": 3.231088921535844e-121,
+      "log10_ratio": -120.49065108976913,
+      "poisson_p_value": 0.0,
+      "v_min_at_target_kms": 516.7942355290631,
+      "verdict": "DOES NOT EXPLAIN LZ EVENT (predicted \u226a observed)"
+    },
+    {
+      "operating_point": "v0.3-prelim MAP",
+      "v03_MAP_inputs": {
+        "sigma_m_0": 0.72,
+        "a": 1.31,
+        "epsilon": 7.709034690644308e-57,
+        "alpha_chi": 8.974287945007473e-29,
+        "log_epsilon": -56.113,
+        "log_alpha": -28.047,
+        "log_Z_T39_tier3": -2.941
+      },
+      "composite_inputs": {
+        "m_chi_GeV": 200.0,
+        "m_phi_MeV": 50.0
+      },
+      "delta_keV": 297,
+      "form_factor_ansatz": "dipole",
+      "sigma_inel_at_target_cm2": 4.459408708358427e-164,
+      "N_predicted": 3.015508327883879e-121,
+      "N_observed": 1,
+      "ratio_pred_over_observed": 3.015508327883879e-121,
+      "log10_ratio": -120.52063946780684,
+      "poisson_p_value": 0.0,
+      "v_min_at_target_kms": 516.7942355290631,
+      "verdict": "DOES NOT EXPLAIN LZ EVENT (predicted \u226a observed)"
+    },
+    {
+      "operating_point": "v0.3-prelim MAP",
+      "v03_MAP_inputs": {
+        "sigma_m_0": 0.72,
+        "a": 1.31,
+        "epsilon": 7.709034690644308e-57,
+        "alpha_chi": 8.974287945007473e-29,
+        "log_epsilon": -56.113,
+        "log_alpha": -28.047,
+        "log_Z_T39_tier3": -2.941
+      },
+      "composite_inputs": {
+        "m_chi_GeV": 200.0,
+        "m_phi_MeV": 50.0
+      },
+      "delta_keV": 371,
+      "form_factor_ansatz": "gaussian",
+      "sigma_inel_at_target_cm2": 4.755719562259873e-164,
+      "N_predicted": 0.0,
+      "N_observed": 1,
+      "ratio_pred_over_observed": 0.0,
+      "log10_ratio": -Infinity,
+      "poisson_p_value": 0.0,
+      "v_min_at_target_kms": 577.5674550237342,
+      "verdict": "DOES NOT EXPLAIN LZ EVENT (predicted \u226a observed)"
+    },
+    {
+      "operating_point": "v0.3-prelim MAP",
+      "v03_MAP_inputs": {
+        "sigma_m_0": 0.72,
+        "a": 1.31,
+        "epsilon": 7.709034690644308e-57,
+        "alpha_chi": 8.974287945007473e-29,
+        "log_epsilon": -56.113,
+        "log_alpha": -28.047,
+        "log_Z_T39_tier3": -2.941
+      },
+      "composite_inputs": {
+        "m_chi_GeV": 200.0,
+        "m_phi_MeV": 50.0
+      },
+      "delta_keV": 371,
+      "form_factor_ansatz": "dipole",
+      "sigma_inel_at_target_cm2": 4.446953076652546e-164,
+      "N_predicted": 0.0,
+      "N_observed": 1,
+      "ratio_pred_over_observed": 0.0,
+      "log10_ratio": -Infinity,
+      "poisson_p_value": 0.0,
+      "v_min_at_target_kms": 577.5674550237342,
+      "verdict": "DOES NOT EXPLAIN LZ EVENT (predicted \u226a observed)"
+    },
+    {
+      "operating_point": "v0.3-prelim MAP",
+      "v03_MAP_inputs": {
+        "sigma_m_0": 0.72,
+        "a": 1.31,
+        "epsilon": 7.709034690644308e-57,
+        "alpha_chi": 8.974287945007473e-29,
+        "log_epsilon": -56.113,
+        "log_alpha": -28.047,
+        "log_Z_T39_tier3": -2.941
+      },
+      "composite_inputs": {
+        "m_chi_GeV": 200.0,
+        "m_phi_MeV": 50.0
+      },
+      "delta_keV": 500,
+      "form_factor_ansatz": "gaussian",
+      "sigma_inel_at_target_cm2": 4.7325432910884816e-164,
+      "N_predicted": 0.0,
+      "N_observed": 1,
+      "ratio_pred_over_observed": 0.0,
+      "log10_ratio": -Infinity,
+      "poisson_p_value": 0.0,
+      "v_min_at_target_kms": 670.4651990667695,
+      "verdict": "DOES NOT EXPLAIN LZ EVENT (predicted \u226a observed)"
+    },
+    {
+      "operating_point": "v0.3-prelim MAP",
+      "v03_MAP_inputs": {
+        "sigma_m_0": 0.72,
+        "a": 1.31,
+        "epsilon": 7.709034690644308e-57,
+        "alpha_chi": 8.974287945007473e-29,
+        "log_epsilon": -56.113,
+        "log_alpha": -28.047,
+        "log_Z_T39_tier3": -2.941
+      },
+      "composite_inputs": {
+        "m_chi_GeV": 200.0,
+        "m_phi_MeV": 50.0
+      },
+      "delta_keV": 500,
+      "form_factor_ansatz": "dipole",
+      "sigma_inel_at_target_cm2": 4.4252815316756635e-164,
+      "N_predicted": 0.0,
+      "N_observed": 1,
+      "ratio_pred_over_observed": 0.0,
+      "log10_ratio": -Infinity,
+      "poisson_p_value": 0.0,
+      "v_min_at_target_kms": 670.4651990667695,
+      "verdict": "DOES NOT EXPLAIN LZ EVENT (predicted \u226a observed)"
+    }
+  ],
+  "max_N_predicted": 3.231088921535844e-121,
+  "min_log10_ratio": -Infinity,
+  "kill_triggered": true,
+  "decision": "KILL \u2014 composite-mediator sub-task abandons LZ event interpretation at v0.3-prelim MAP",
+  "comparison_to_v07": {
+    "v07_epsilon": 1.12e-37,
+    "v07_N_predicted_at_delta297_gaussian": 3.63e-73,
+    "v03_epsilon": 7.709034690644308e-57,
+    "v03_N_predicted_at_delta297_gaussian": 3.231088921535844e-121,
+    "ratio_v03_over_v07": 8.901071409189652e-49
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "description": "T177 \u2014 Proper Bayesian evidence via dynesty (2026-09-21)",
+  "method": "dynesty 3.1.0 nested sampling with one-sided floor/ceiling likelihoods for Cloud-9/dSph/UFD/Cluster and Gaussian likelihood for SPARC. Replaces scoring-rule BIC with proper Bayesian log-evidence.",
+  "model_A_multi_resonance": {
+    "label": "multi-resonance",
+    "logZ": -8.123124941758261,
+    "logZerr": 0.42350869318306844,
+    "n_iter": 772
+  },
+  "model_B_constant": {
+    "label": "constant",
+    "logZ": -11.180100389351649,
+    "logZerr": 0.11776644762016782,
+    "n_iter": 198
+  },
+  "log_bayes_factor": 3.0569754475933877,
+  "bayes_factor": 21.263148300774056,
+  "verdict": "Strong evidence for multi-resonance over constant",
+  "observation_channels": [
+    {
+      "v_kms": 3.0,
+      "sigma_obs_cm2_per_g": 0.155,
+      "kind": "ceiling",
+      "label": "UFD v=3"
+    },
+    {
+      "v_kms": 5.0,
+      "sigma_obs_cm2_per_g": 0.093,
+      "kind": "ceiling",
+      "label": "UFD v=5"
+    },
+    {
+      "v_kms": 7.0,
+      "sigma_obs_cm2_per_g": 0.067,
+      "kind": "ceiling",
+      "label": "UFD v=7"
+    },
+    {
+      "v_kms": 10.0,
+      "sigma_obs_cm2_per_g": 0.047,
+      "kind": "ceiling",
+      "label": "UFD v=10"
+    },
+    {
+      "v_kms": 15.0,
+      "sigma_obs_cm2_per_g": 0.032,
+      "kind": "ceiling",
+      "label": "dSph v=15"
+    },
+    {
+      "v_kms": 28.0,
+      "sigma_obs_cm2_per_g": 128.0,
+      "kind": "floor",
+      "label": "Cloud-9 v=28"
+    },
+    {
+      "v_kms": 100.0,
+      "sigma_obs_cm2_per_g": 0.193,
+      "kind": "gaussian",
+      "label": "SPARC v=100"
+    },
+    {
+      "v_kms": 500.0,
+      "sigma_obs_cm2_per_g": 0.00025,
+      "kind": "ceiling",
+      "label": "Cluster v=500"
+    }
+  ]
+}

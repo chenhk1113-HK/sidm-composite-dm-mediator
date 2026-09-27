@@ -300,6 +300,47 @@ the gas, which re-formed into a 2-Mpc-long chain of DM-free galaxies.
 The observed rate of such systems (~0.4% of UDGs) is consistent with the
 SIDM model at the v0.3-prelim MAP.
 
+### `Buzzo-FCC224-2025` — DM-deficient UDG in the Fornax Cluster
+
+**Reference**: Buzzo, M. L., et al. (2025), "A new class of dark matter-free
+dwarf galaxies? I. Clues from FCC 224, NGC 1052-DF2 and NGC 1052-DF4",
+*Astronomy & Astrophysics* **695**, A124.
+arXiv: [2502.05405](https://arxiv.org/abs/2502.05405).
+
+**Citation key**: `Buzzo-FCC224-2025`.
+**Used by**: Channel 11 (per user upload 2026-09-12 'UDG dark matter.docx').
+**Channel-11 role**: Establishes that the DM-deficient phenomenon extends
+beyond the NGC 1052 field — FCC 224 in the Fornax Cluster shares key
+traits with DF2 and DF4 (slow rotation, overluminous globular clusters).
+
+### `Keim-DF9-2026` — Third DM-deficient galaxy in the NGC 1052 trail
+
+**Reference**: Keim, M. A., et al. (2026), "A Third Galaxy Missing Dark
+Matter along a Trail of Galaxies in the NGC 1052 Field", *The Astrophysical
+Journal* **1004**, 210.
+arXiv: [2603.15860](https://arxiv.org/abs/2603.15860).
+
+**Citation key**: `Keim-DF9-2026`.
+**Used by**: Channel 11 (per user upload 2026-09-12 'UDG dark matter.docx').
+**Channel-11 role**: Strengthens the bullet-dwarf formation scenario by
+providing a third DM-free galaxy (DF9, σ = 6.5^{+3.9}_{-4.3} km/s) along
+the ~2.45 Mpc linear trail first reported by van Dokkum+ 2022.
+
+### `Buzzo-FCC224-FCC240-pair-2026` — DM-deficient twins bound pair
+
+**Reference**: Buzzo, M. L., et al. (2026), "Dark matter-deficient twins:
+FCC 224 and FCC 240 as possible analogues of NGC 1052-DF2 and DF4",
+*Astrophysical Journal* (accepted).
+arXiv: [2605.24099](https://arxiv.org/abs/2605.24099).
+
+**Citation key**: `Buzzo-FCC224-FCC240-pair-2026`.
+**Used by**: Channel 11 (per user upload 2026-09-12 'UDG dark matter.docx').
+**Channel-11 role**: Establishes a second environment (Fornax cluster)
+where the DM-deficient phenomenon occurs in a **bound pair configuration**
+(~75 kpc separation), with predicted DM remnant candidates flanking the
+pair. This complements the linear-trail configuration of the NGC 1052
+field (DF2/DF4/DF9) and shows the formation channel generalizes.
+
 ### `Pinetti-2025-cosmicWeb` — 40× cosmic-web radio synchrotron excess
 
 **Reference**: Pinetti, E., et al (2025-26), theoretical interpretation of the

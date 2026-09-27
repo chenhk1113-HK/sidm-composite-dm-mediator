@@ -1,0 +1,11 @@
+{
+  "status": "RUN_INCOMPLETE_DT_COLLAPSE",
+  "n_particles": 3000,
+  "t_end_Gyr": 0.07,
+  "t_max_reached_pcs_per_kms": 8.314,
+  "t_max_reached_myr": 8.13,
+  "snapshots_written": 2,
+  "rng_seed_task_local": 42,
+  "note": "Died at 8.3 Myr with seed 42, dt collapsed to 4.8e-5 pc*s/km. Indicates pathological sampling branch with seed 42 alone. Reviewer hypothesis (RNG seeding alone) NOT sufficient.",
+  "timestamp": "2026-09-26"
+}

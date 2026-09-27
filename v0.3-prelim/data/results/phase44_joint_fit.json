@@ -1,0 +1,47 @@
+{
+  "test": "Phase44_joint_fit",
+  "channels": [
+    "sparc",
+    "jvas",
+    "cloud9"
+  ],
+  "baseline_params": [
+    6.58,
+    0.195,
+    0.7,
+    28.0,
+    100.0,
+    300.0,
+    700.0,
+    100.0,
+    0.07,
+    0.1,
+    0.01,
+    0.05,
+    0.05,
+    0.05,
+    0.1
+  ],
+  "baseline_logL": -19.67268668762108,
+  "best_params": [
+    10.44471725474868,
+    0.05156371513303437,
+    1.9286750353457855,
+    29.36443942690635,
+    178.54176923390898,
+    430.45746824980125,
+    768.949288595737,
+    196.3004089341274,
+    0.15839849191057448,
+    0.039006060952024524,
+    0.4841121247674165,
+    0.18400571372854668,
+    0.17456954740299518,
+    0.09643884269946587,
+    0.041402829115166045
+  ],
+  "best_logL": -11.577625403084578,
+  "improvement": 8.095061284536502,
+  "verdict": "JOINT_FIT_BETTER",
+  "interpretation": "Phase 44 performs a multi-channel joint fit across SPARC, JVAS, and Cloud-9 constraints. The channels have conflicting requirements on sigma/m at different velocities:\n  - SPARC wants sigma/m(100) ~ 0.07 cm^2/g\n  - JVAS B1938+666 wants sigma/m(15) ~ 100 cm^2/g\n  - Cloud-9 wants sigma/m(28) ~ 100 cm^2/g\n  - Fornax/Tri II (dwarfs at v=15) wants sigma/m(15) < 5\n\nThese cannot all be satisfied with a single velocity-resonance. The joint fit either:\n  - Finds a compromise (worse fit to all channels)\n  - Or keeps one channel as outlier (no improvement)\n\nHonest verdict: see the comparison output above."
+}

@@ -1,0 +1,10 @@
+{
+  "status": "RUN_INCOMPLETE_DT_COLLAPSE",
+  "n_particles": 3000,
+  "t_end_Gyr": 0.07,
+  "t_max_reached_pcs_per_kms": 69.87,
+  "t_max_reached_myr": 68.34,
+  "rng_seed_task_local": 42,
+  "note": "Same script as t215i_seed42 but DIFFERENT RESULT (68.3 vs 46.6 Myr). Demonstrates non-determinism even with seeded RNG.",
+  "timestamp": "2026-09-26"
+}

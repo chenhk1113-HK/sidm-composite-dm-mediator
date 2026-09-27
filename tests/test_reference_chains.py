@@ -140,8 +140,11 @@ class TestReferenceDataBudget:
 
     def test_manifest_total_matches_disk(self):
         manifest = json.loads((REF_DIR / "MANIFEST.json").read_text())
+        # Exclude both MANIFEST.json (self-referential) and README.md (documentation,
+        # not a data file). 2026-09-12: README.md was added per R13 M2 suggestion
+        # (REVIEWER_AUDIT_R13.md) but the manifest tracks only data files.
         disk_total = sum(p.stat().st_size for p in REF_DIR.iterdir()
-                         if p.is_file() and p.name != "MANIFEST.json")
+                         if p.is_file() and p.name not in ("MANIFEST.json", "README.md"))
         manifest_total = sum(f["reference_bytes"] for f in manifest["files"])
         assert disk_total == manifest_total, (
             f"Disk total {disk_total} != manifest total {manifest_total}"

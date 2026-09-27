@@ -1,0 +1,107 @@
+{
+  "test": "Phase15_annihilation_channels",
+  "direction": "Find max g_D per annihilation channel",
+  "results": {
+    "e+e-": {
+      "fermi_limit": 3e-26,
+      "g_D_max": 0.15121059867114062,
+      "sigma_v_at_gD_0.7": 1.377794616122294e-23,
+      "sigma_v_at_gD_0.16": 3.7607308605660434e-26,
+      "verdict": "CONSTRAINED"
+    },
+    "\u03bc+\u03bc-": {
+      "fermi_limit": 5e-26,
+      "g_D_max": 0.17180852911226036,
+      "sigma_v_at_gD_0.7": 1.3777908153672243e-23,
+      "sigma_v_at_gD_0.16": 3.760720486293479e-26,
+      "verdict": "CONSTRAINED"
+    },
+    "\u03c4+\u03c4-": {
+      "fermi_limit": 5e-26,
+      "g_D_max": 0.17184192919046098,
+      "sigma_v_at_gD_0.7": 1.3767199496850858e-23,
+      "sigma_v_at_gD_0.16": 3.757797526970504e-26,
+      "verdict": "CONSTRAINED"
+    },
+    "uu": {
+      "fermi_limit": 1e-25,
+      "g_D_max": 0.2043157843963342,
+      "sigma_v_at_gD_0.7": 1.3777946144114886e-23,
+      "sigma_v_at_gD_0.16": 3.760730855896349e-26,
+      "verdict": "CONSTRAINED"
+    },
+    "dd": {
+      "fermi_limit": 1e-25,
+      "g_D_max": 0.20431578462019873,
+      "sigma_v_at_gD_0.7": 1.377794608373006e-23,
+      "sigma_v_at_gD_0.16": 3.760730839414134e-26,
+      "verdict": "CONSTRAINED"
+    },
+    "ss": {
+      "fermi_limit": 1e-25,
+      "g_D_max": 0.20431589815397283,
+      "sigma_v_at_gD_0.7": 1.3777915459369868e-23,
+      "sigma_v_at_gD_0.16": 3.760722480405097e-26,
+      "verdict": "CONSTRAINED"
+    },
+    "cc": {
+      "fermi_limit": 1e-25,
+      "g_D_max": 0.20433613548118323,
+      "sigma_v_at_gD_0.7": 1.3772458044546098e-23,
+      "sigma_v_at_gD_0.16": 3.75923286300447e-26,
+      "verdict": "CONSTRAINED"
+    },
+    "bb": {
+      "fermi_limit": 5e-26,
+      "g_D_max": 0.17199461830797874,
+      "sigma_v_at_gD_0.7": 1.3718376946669708e-23,
+      "sigma_v_at_gD_0.16": 3.744471268542049e-26,
+      "verdict": "CONSTRAINED"
+    },
+    "tt": {
+      "fermi_limit": 1e-23,
+      "g_D_max": 5.0,
+      "sigma_v_at_gD_0.7": 0.0,
+      "sigma_v_at_gD_0.16": 0.0,
+      "verdict": "OK"
+    },
+    "gg": {
+      "fermi_limit": 1e-25,
+      "g_D_max": 0.20431578432961628,
+      "sigma_v_at_gD_0.7": 1.3777946162111267e-23,
+      "sigma_v_at_gD_0.16": 3.760730860808514e-26,
+      "verdict": "CONSTRAINED"
+    },
+    "WW": {
+      "fermi_limit": 1e-25,
+      "g_D_max": 5.0,
+      "sigma_v_at_gD_0.7": 0.0,
+      "sigma_v_at_gD_0.16": 0.0,
+      "verdict": "OK"
+    },
+    "ZZ": {
+      "fermi_limit": 1e-25,
+      "g_D_max": 5.0,
+      "sigma_v_at_gD_0.7": 0.0,
+      "sigma_v_at_gD_0.16": 0.0,
+      "verdict": "OK"
+    },
+    "hh": {
+      "fermi_limit": 1e-25,
+      "g_D_max": 5.0,
+      "sigma_v_at_gD_0.7": 0.0,
+      "sigma_v_at_gD_0.16": 0.0,
+      "verdict": "OK"
+    },
+    "\u03bd\u03bd": {
+      "fermi_limit": 1e-25,
+      "g_D_max": 0.20431578432961628,
+      "sigma_v_at_gD_0.7": 1.3777946162111267e-23,
+      "sigma_v_at_gD_0.16": 3.760730860808514e-26,
+      "verdict": "CONSTRAINED"
+    }
+  },
+  "best_channel": "tt",
+  "best_g_D_max": 5.0,
+  "verdict": "SWITCH_CHANNEL_OK"
+}

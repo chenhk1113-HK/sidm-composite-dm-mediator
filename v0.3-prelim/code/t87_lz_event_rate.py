@@ -193,8 +193,8 @@ def N_events_in_lz_window(
         is_compatible_with_1: bool — whether N_events_at_target is Poisson-consistent with 1
         poisson_p_value: probability of observing ≥1 event given predicted N
     """
-    # Convert exposure to kg × days
-    M_T_kg_days = exposure_tonne_years * 1000 * DAYS_PER_YEAR  # 1 tonne = 1e3 kg
+    # Convert exposure to kg (target mass)
+    M_T_kg = exposure_tonne_years * 1000  # 1 tonne = 1e3 kg
 
     # DM number density per unit volume: ρ_DM / m_χ (GeV/cm³ / GeV = 1/cm³)
     n_DM_per_cm3 = RHO_DM_GEV_CM3 / m_chi_GeV
@@ -240,7 +240,7 @@ def N_events_in_lz_window(
     # Multiply by exposure in seconds, integrate over E_R, get dimensionless N.
 
     # Number of target nuclei: N_T = (M_T / M_target) × N_A, where M_target = 131 g/mol (Xe)
-    N_T = M_T_kg_days * 1000 / 131 * 6.022e23  # dimensionless
+    N_T = M_T_kg * 1000 / 131 * 6.022e23  # dimensionless (# of Xe nuclei)
 
     # Exposure time (the rate has units of s⁻¹)
     exposure_seconds = exposure_tonne_years * DAYS_PER_YEAR * SECONDS_PER_DAY

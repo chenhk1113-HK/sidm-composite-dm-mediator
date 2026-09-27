@@ -1,0 +1,120 @@
+{
+  "part_a": {
+    "test": "part_a_sigma_v_compare",
+    "model_matched": {
+      "m_chi_gev": 6.58,
+      "m_med_mev": 100,
+      "alpha": 0.01
+    },
+    "results": [
+      {
+        "v_kms": 10,
+        "t70_sigma_m": 1.0594906316631676,
+        "sidmkit_born": 0.018060797399437774,
+        "sidmkit_classical": 1.8944130648343094,
+        "sidmkit_hulthen": 0.04052361967130822,
+        "ratio_born_over_t70": 0.017046679658777434
+      },
+      {
+        "v_kms": 15,
+        "t70_sigma_m": 0.8587397594552687,
+        "sidmkit_born": 0.018060652391761443,
+        "sidmkit_classical": 1.6725768936944896,
+        "sidmkit_hulthen": 0.040523281111827625,
+        "ratio_born_over_t70": 0.021031578185244388
+      },
+      {
+        "v_kms": 28,
+        "t70_sigma_m": 100.47550153570141,
+        "sidmkit_born": 0.018060003941825095,
+        "sidmkit_classical": 1.3578836801572756,
+        "sidmkit_hulthen": 0.04052176713353988,
+        "ratio_born_over_t70": 0.00017974534753039209
+      },
+      {
+        "v_kms": 50,
+        "t70_sigma_m": 0.3299917025177167,
+        "sidmkit_born": 0.018058013594774963,
+        "sidmkit_classical": 1.094640824775994,
+        "sidmkit_hulthen": 0.040517120181440894,
+        "ratio_born_over_t70": 0.05472262925703551
+      },
+      {
+        "v_kms": 100,
+        "t70_sigma_m": 0.26555732246462693,
+        "sidmkit_born": 0.018049318868008615,
+        "sidmkit_classical": 0.8167088004398364,
+        "sidmkit_hulthen": 0.04049682085597103,
+        "ratio_born_over_t70": 0.06796769413282829
+      },
+      {
+        "v_kms": 150,
+        "t70_sigma_m": 0.14706292875595267,
+        "sidmkit_born": 0.018034843346228135,
+        "sidmkit_classical": 0.6726784780396302,
+        "sidmkit_hulthen": 0.04046302758967449,
+        "ratio_born_over_t70": 0.12263351137360058
+      },
+      {
+        "v_kms": 200,
+        "t70_sigma_m": 0.12029806580928723,
+        "sidmkit_born": 0.01801461050045448,
+        "sidmkit_classical": 0.5460790254604959,
+        "sidmkit_hulthen": 0.04041579862734176,
+        "ratio_born_over_t70": 0.14974979339246966
+      },
+      {
+        "v_kms": 250,
+        "t70_sigma_m": 0.10338719195545124,
+        "sidmkit_born": 0.01798865306381038,
+        "sidmkit_classical": 0.4671021364612372,
+        "sidmkit_hulthen": 0.04035521517414348,
+        "ratio_born_over_t70": 0.1739930519784458
+      },
+      {
+        "v_kms": 300,
+        "t70_sigma_m": 0.19041818150325507,
+        "sidmkit_born": 0.017957012906309883,
+        "sidmkit_classical": 0.4111255612936544,
+        "sidmkit_hulthen": 0.04028138106117696,
+        "ratio_born_over_t70": 0.09430303747545725
+      },
+      {
+        "v_kms": 500,
+        "t70_sigma_m": 0.06332920853167369,
+        "sidmkit_born": 0.017774772410626485,
+        "sidmkit_classical": 0.28746054367835744,
+        "sidmkit_hulthen": 0.0398563802721428,
+        "ratio_born_over_t70": 0.2806725809898058
+      },
+      {
+        "v_kms": 700,
+        "t70_sigma_m": 0.059945349563130766,
+        "sidmkit_born": 0.0175071974595785,
+        "sidmkit_classical": 0.22700404848978437,
+        "sidmkit_hulthen": 0.039233195587993756,
+        "ratio_born_over_t70": 0.2920526377303212
+      },
+      {
+        "v_kms": 1000,
+        "t70_sigma_m": 0.038931293944714035,
+        "sidmkit_born": 0.016960626035298586,
+        "sidmkit_classical": 0.1765020074695114,
+        "sidmkit_hulthen": 0.03796324375620184,
+        "ratio_born_over_t70": 0.4356553383348679
+      },
+      {
+        "v_kms": 3000,
+        "t70_sigma_m": 0.018032332034516756,
+        "sidmkit_born": 0.011092602628423227,
+        "sidmkit_classical": 0.07412372788794386,
+        "sidmkit_hulthen": 0.024569102812308174,
+        "ratio_born_over_t70": 0.6151507529469965
+      }
+    ],
+    "median_ratio_galactic": 0.13619165238303513,
+    "max_ratio": 0.2920526377303212,
+    "verdict": "DISAGREES",
+    "interpretation": "sidmkit and T90.70 disagree by more than factor 5 (median 0.14)"
+  }
+}

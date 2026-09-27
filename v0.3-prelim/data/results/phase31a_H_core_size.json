@@ -1,0 +1,51 @@
+{
+  "test": "Phase31a_H_core_size",
+  "median_params": {
+    "m_chi_GeV": 6.091783883158755,
+    "E_R_eV": 42.30202214765859,
+    "Gamma_R_eV": 0.5568654618091413,
+    "sigma_0": 0.00036381577094072947,
+    "alpha_Y": 0.0074603904375728225
+  },
+  "halo_predictions": [
+    {
+      "name": "Fornax-like dwarf",
+      "M_200_Msun": 4000000000.0,
+      "r_200_kpc": 50,
+      "v_0_kms": 18.551549800488367,
+      "sigma_m_v0": 96.61988441344565,
+      "core_radius_kpc": 40.114985852949275,
+      "verdict": "OVERSHOOT_DWARF_CORES"
+    },
+    {
+      "name": "Sculptor-like UFD",
+      "M_200_Msun": 1000000000.0,
+      "r_200_kpc": 30,
+      "v_0_kms": 11.974973903938164,
+      "sigma_m_v0": 465.1738429800348,
+      "core_radius_kpc": 88.01993218445189,
+      "verdict": "OVERSHOOT_DWARF_CORES"
+    },
+    {
+      "name": "Milky Way",
+      "M_200_Msun": 1000000000000.0,
+      "r_200_kpc": 200,
+      "v_0_kms": 146.6628787389638,
+      "sigma_m_v0": 0.017746821972446494,
+      "core_radius_kpc": 0.543667889217529,
+      "verdict": "CONSISTENT"
+    },
+    {
+      "name": "A1689-like cluster",
+      "M_200_Msun": 1000000000000000.0,
+      "r_200_kpc": 1500,
+      "v_0_kms": 1693.5170504013238,
+      "sigma_m_v0": 0.0015095065642041204,
+      "core_radius_kpc": 0.15855899685988759,
+      "verdict": "CONSISTENT"
+    }
+  ],
+  "n_overshoot": 2,
+  "n_consistent": 2,
+  "aggregate": "OVERSHOOTS_DWARF_CORES"
+}

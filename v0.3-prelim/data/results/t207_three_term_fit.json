@@ -1,0 +1,123 @@
+{
+  "prescription_borrowed": {
+    "prescription": "borrowed",
+    "f_H_cf": 0.85,
+    "f_H_cc": 0.3,
+    "f_H_int": 0.575,
+    "best_params": {
+      "sigma_0": 0.001,
+      "sigma_peak_HH_1": 104.8083457524701,
+      "sigma_0_HL": 1e-05,
+      "sigma_peak_HL": 0.3432782307837696,
+      "v_HL": 100.61300126193342,
+      "sigma_0_LL": 1e-05,
+      "a_slope": 0.8443693737207815,
+      "f_H_cf": 0.85,
+      "f_H_cc": 0.3
+    },
+    "log_L_peak": -6.0427897759681395,
+    "per_channel_log_L": {
+      "UFD v=3": 0.0,
+      "UFD v=5": -0.00047059199304399374,
+      "UFD v=7": -0.21226275827426283,
+      "UFD v=10": -0.8475593325482604,
+      "dSph v=15": 0.0,
+      "Cloud-9 v=28": -4.461650194275223,
+      "SPARC v=100": -0.09190591069850636,
+      "Cluster v=500": -0.4289409881788428
+    },
+    "de_result_success": true,
+    "de_result_message": "Optimization terminated successfully.",
+    "de_elapsed_sec": 256.74691367149353
+  },
+  "prescription_yang": {
+    "prescription": "yang",
+    "f_H_cf": 0.85,
+    "f_H_cc": 0.45,
+    "f_H_int": 0.65,
+    "best_params": {
+      "sigma_0": 0.0010000023115075724,
+      "sigma_peak_HH_1": 34.114680878821325,
+      "sigma_0_HL": 1.0000026769186649e-05,
+      "sigma_peak_HL": 0.3418309599989508,
+      "v_HL": 99.44002167891655,
+      "sigma_0_LL": 1.0000811767881468e-05,
+      "a_slope": 1.108316617839932,
+      "f_H_cf": 0.85,
+      "f_H_cc": 0.45
+    },
+    "log_L_peak": -9.091415468063039,
+    "per_channel_log_L": {
+      "UFD v=3": 0.0,
+      "UFD v=5": 0.0,
+      "UFD v=7": -0.03897810441781929,
+      "UFD v=10": -0.35767362007413844,
+      "dSph v=15": 0.0,
+      "Cloud-9 v=28": -7.410805043258955,
+      "SPARC v=100": -0.24264943377509,
+      "Cluster v=500": -1.0413092665370363
+    },
+    "de_result_success": false,
+    "de_result_message": "Maximum number of iterations has been exceeded.",
+    "de_elapsed_sec": 261.433144569397
+  },
+  "prescription_t202": {
+    "prescription": "t202",
+    "f_H_cf": 0.92,
+    "f_H_cc": 0.61,
+    "f_H_int": 0.765,
+    "best_params": {
+      "sigma_0": 0.001,
+      "sigma_peak_HH_1": 14.134553879636496,
+      "sigma_0_HL": 1e-05,
+      "sigma_peak_HL": 0.37622171120335585,
+      "v_HL": 98.97649637462487,
+      "sigma_0_LL": 1e-05,
+      "a_slope": 1.2973509051903676,
+      "f_H_cf": 0.92,
+      "f_H_cc": 0.61
+    },
+    "log_L_peak": -11.074708972720378,
+    "per_channel_log_L": {
+      "UFD v=3": 0.0,
+      "UFD v=5": 0.0,
+      "UFD v=7": -0.010849799563318573,
+      "UFD v=10": -0.1862471204743897,
+      "dSph v=15": 0.0,
+      "Cloud-9 v=28": -8.258842631717485,
+      "SPARC v=100": -0.6068216487406486,
+      "Cluster v=500": -2.0119477722245365
+    },
+    "de_result_success": false,
+    "de_result_message": "Maximum number of iterations has been exceeded.",
+    "de_elapsed_sec": 257.7076196670532
+  },
+  "free_f_H": {
+    "prescription": "free_f_H",
+    "best_params": {
+      "sigma_0": 0.3482569413317962,
+      "sigma_peak_HH_1": 580.6755490517571,
+      "sigma_0_HL": 0.06539979609741861,
+      "sigma_peak_HL": 0.8177970166491924,
+      "v_HL": 149.04964112468966,
+      "sigma_0_LL": 0.00023987269020298675,
+      "a_slope": 1.4466001432785676,
+      "f_H_cf": 0.8815701738565896,
+      "f_H_cc": 0.004114332360390603
+    },
+    "log_L_peak": -6.628784915763357e-16,
+    "per_channel_log_L": {
+      "UFD v=3": 0.0,
+      "UFD v=5": 0.0,
+      "UFD v=7": 0.0,
+      "UFD v=10": 0.0,
+      "dSph v=15": 0.0,
+      "Cloud-9 v=28": 0.0,
+      "SPARC v=100": -6.628784915763357e-16,
+      "Cluster v=500": 0.0
+    },
+    "de_result_success": false,
+    "de_result_message": "Maximum number of iterations has been exceeded.",
+    "de_elapsed_sec": 520.8120574951172
+  }
+}

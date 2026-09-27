@@ -1,0 +1,36 @@
+# .dockerignore — exclude files that shouldn't be in the Docker context
+# Speeds up `docker build` by skipping large directories and dev-only files.
+
+# Git metadata (not needed in image)
+.git/
+.gitignore
+
+# Python cache + venv (will be rebuilt in image)
+.venv-sidm-bench/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Outputs (re-runnable, not needed in image)
+v0.3-prelim/outputs/
+v0.1-prelim/outputs/
+outputs/
+
+# IDE / editor configs
+.vscode/
+.idea/
+*.swp
+
+# OS-specific junk
+.DS_Store
+Thumbs.db
+
+# Local-only docs (don't ship with image)
+node_modules/
+*.log
+
+# Documentation build artifacts
+docs/_build/

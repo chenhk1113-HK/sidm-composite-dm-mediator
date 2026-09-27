@@ -1,5 +1,5 @@
 --- src/DSMC.jl/src/collision.jl.bak.t215	2026-09-26 18:27:07.638800474 +0800
-+++ src/DSMC.jl/src/collision.jl	2026-09-26 19:34:58.744760100 +0800
++++ src/DSMC.jl/src/collision.jl	2026-09-26 22:10:40.508078922 +0800
 @@ -60,15 +60,16 @@
      N = length(velocities)
      counter = 0
@@ -15,7 +15,7 @@
          # collision candidates
          # number of pairs
          ncom = N * (N - 1) ÷ 2
-+majorant = min(majorant, ncom)
++        majorant = min(majorant, ncom)
          combinations = sample(1:ncom, majorant; replace=false)
          for k in combinations
              # https://stackoverflow.com/q/27086195

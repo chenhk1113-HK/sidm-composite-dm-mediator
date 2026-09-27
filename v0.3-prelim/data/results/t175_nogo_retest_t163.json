@@ -1,0 +1,76 @@
+{
+  "description": "T175 \u2014 Re-test 4 no-go theorems with T163 best-fit parameters (2026-09-21)",
+  "T163_best_fit": {
+    "alpha_D": 0.3,
+    "m_0_GeV": 0.3,
+    "r": 1.5,
+    "n_modes": 2,
+    "RMSE": 1.408
+  },
+  "method": "Each no-go is re-tested with the T163 parameters. The failure mechanisms (LZ direct detection, kinematic forbiddance, unitarity violation, flat velocity dependence) are independent of the specific cross-section values used in the phenomenology. This script verifies the qualitative verdicts are preserved.",
+  "no_go_1_magnetic_dipole": {
+    "no_go": "magnetic_dipole",
+    "tested_params": {
+      "alpha_D": 0.3,
+      "m_0_GeV": 0.3,
+      "r": 1.5,
+      "n_modes": 2,
+      "RMSE": 1.408
+    },
+    "sigma_at_v28_cm2_per_g": 0.18571428571428572,
+    "cloud9_floor": 50.0,
+    "sigma_SI_cm2": 1.1467070583670848e-33,
+    "LZ_limit_cm2": 9.436806646964151e-47,
+    "LZ_violation": 12151431106580.783,
+    "verdict_phase44": "ruled out",
+    "verdict_t163": "ruled out (same verdict)"
+  },
+  "no_go_2_hidden_u1": {
+    "no_go": "hidden_u1_pseudo_dirac",
+    "tested_params": {
+      "alpha_D": 0.3,
+      "m_0_GeV": 0.3,
+      "r": 1.5,
+      "n_modes": 2,
+      "RMSE": 1.408
+    },
+    "KE_CM_MeV": 4.09248e-05,
+    "required_Delta_m_MeV": 0.1,
+    "attempted_Delta_m_MeV": 10.0,
+    "zhang_allowed_Delta_m_MeV": 0.024,
+    "verdict_phase44": "ruled out",
+    "verdict_t163": "ruled out (same verdict)"
+  },
+  "no_go_3_inelastic_dm": {
+    "no_go": "inelastic_dm",
+    "tested_params": {
+      "alpha_D": 0.3,
+      "m_0_GeV": 0.3,
+      "r": 1.5,
+      "n_modes": 2,
+      "RMSE": 1.408
+    },
+    "m_chi_threshold_GeV": 46000,
+    "delta_m_window_keV": 0.3,
+    "alpha_D_for_thermal_relic": 404,
+    "unitarity_violation": 400,
+    "sommerfeld_at_v10": 1884,
+    "verdict_phase44": "ruled out",
+    "verdict_t163": "ruled out (same verdict)"
+  },
+  "no_go_4_pwave": {
+    "no_go": "pwave_p1",
+    "tested_params": {
+      "alpha_D": 0.3,
+      "m_0_GeV": 0.3,
+      "r": 1.5,
+      "n_modes": 2,
+      "RMSE": 1.408
+    },
+    "P1_sigma_at_v28_cm2_per_g": 0.1,
+    "cloud9_floor": 50.0,
+    "P1_deficit": 500,
+    "verdict_phase44": "ruled out",
+    "verdict_t163": "ruled out (same verdict)"
+  }
+}

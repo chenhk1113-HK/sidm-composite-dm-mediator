@@ -94,16 +94,22 @@ COSMIC_WEB_EPSILON_FIXED = 1e-35
 
 
 def loglike_11channel(sigma_m_0, a):
-    """10-channel + NGC 1052-DF2/DF4 + FCC 224/240 DM-free UDG consistency check.
+    """10-channel + NGC 1052-DF2/DF4/DF9 + FCC 224/240 DM-free UDG consistency check.
 
     Channel 11 is a CONSISTENCY CHECK, not an exclusion. It allows σ/m_0 → 0
     (DF2/DF4 themselves) within ~6σ of the MAP and softly penalizes
     σ/m_0 > 100 cm²/g (where stripping would be too efficient).
 
-    Per user upload 2026-08-25 ('暗物质竟是量子波.docx'):
+    Six confirmed DM-free UDGs (verified arXiv HTTP 200, 2026-09-12):
+      NGC 1052 field (linear trail ~2.45 Mpc):
         arXiv:1803.10237 - van Dokkum+ 2018 (NGC 1052-DF2, Nature)
         arXiv:1901.05973 - van Dokkum+ 2019 (NGC 1052-DF4)
-        arXiv:2205.08552 - van Dokkum+ 2022 (bullet dwarf collision)
+        arXiv:2603.15860 - Keim et al. 2026 (NGC 1052-DF9, ApJ 1004, 210)
+      Fornax cluster (bound pair ~75 kpc):
+        arXiv:2502.05405 - Buzzo et al. 2025 (FCC 224, A&A 695, A124)
+        arXiv:2605.24099 - Buzzo et al. 2026 (FCC 224 + FCC 240 pair, ApJ)
+      Formation scenario:
+        arXiv:2205.08552 - van Dokkum+ 2022 (bullet dwarf collision, Nature 605, 435)
     """
     return (loglike_10channel(sigma_m_0, a) +
             loglike_dm_free_udg(sigma_m_0, a))
@@ -202,7 +208,7 @@ def main():
         "channel_8_citation": "arXiv:2508.20179 (O'Donnell et al. 2026, PRD 113, 063531)",
         "channel_9_citation": "Read+ 2018 (Draco dSph, 99% CL upper limit)",
         "channel_10_citation": "arXiv:2605.00093 (Lee et al. 2026, 11-cluster radio relic, 68% upper limit)",
-        "channel_11_citation": "arXiv:1803.10237 + 1901.05973 + 2205.08552 (van Dokkum+ 2018-2026, DM-free UDGs)",
+        "channel_11_citation": "arXiv:1803.10237 + 1901.05973 + 2205.08552 + 2502.05405 + 2603.15860 + 2605.24099 (van Dokkum+ 2018-2026 + Buzzo+ 2025-2026 + Keim+ 2026, DM-free UDGs — six confirmed examples)",
         "channel_11_status": "experimental — NOT in primary production (R16 #12, T71.4)",  # DM-free UDGs tagged as exploratory
         "channel_12_citation": "arXiv:2504.08025 (Pinetti et al. 2025-26, cosmic-web radio, eps_upper=-11)",
         "channel_12_status": "experimental — NOT in primary production (R16 #12, T71.4)",  # cosmic-web radio tagged as exploratory

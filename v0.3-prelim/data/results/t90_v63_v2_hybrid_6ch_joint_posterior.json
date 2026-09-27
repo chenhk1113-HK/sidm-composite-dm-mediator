@@ -1,0 +1,55 @@
+{
+  "label": "T90.63 v2 hybrid 6ch (LRD on, KSFR off)",
+  "log_Z": -16.155085045217277,
+  "log_Z_err": 0.2990761282198363,
+  "n_samples": 575,
+  "posterior_medians": {
+    "log_m_chi_GeV": 1.5008641757580283,
+    "log_m_phi_A_MeV": 2.709506760146,
+    "g_chi_A": 0.4175464394029388,
+    "log_m_phi_B_MeV": 0.9633701614115999,
+    "g_chi_B": 0.09973690010835395,
+    "log_E_R_eV": 1.419695601018537,
+    "log_Gamma_R_eV": -1.4448558916672012,
+    "log_sigma_0": -3.7003958929523395,
+    "log_alpha_Y": -2.246994548483176,
+    "log_mu_x": -10.405122436122655
+  },
+  "posterior_p16": {
+    "log_p16_0": 0.6521522301712391,
+    "log_p16_1": 2.2671815320062434,
+    "log_p16_2": 0.09688611924080306,
+    "log_p16_3": 0.27627426841887615,
+    "log_p16_4": 0.04988061682001592,
+    "log_p16_5": 0.8054978189359353,
+    "log_p16_6": -2.209231070081736,
+    "log_p16_7": -4.385110426499917,
+    "log_p16_8": -4.119694457514801,
+    "log_p16_9": -13.181036079058853
+  },
+  "posterior_p84": {
+    "log_p84_0": 2.61631989451911,
+    "log_p84_1": 3.5877776271861035,
+    "log_p84_2": 1.1937300016119399,
+    "log_p84_3": 1.6231541421404831,
+    "log_p84_4": 0.280038007999128,
+    "log_p84_5": 3.8346705912317285,
+    "log_p84_6": 0.8901141462763533,
+    "log_p84_7": -1.7621115489867551,
+    "log_p84_8": -1.1837337418511709,
+    "log_p84_9": -6.739941764130574
+  },
+  "derived_at_median": {
+    "sigma_m_Cloud9_cm2_per_g": 0.016637120041680574,
+    "sigma_m_Galaxy_cm2_per_g": 0.9184969249335504,
+    "sigma_m_Bullet_cm2_per_g": 3.2916961420828486,
+    "sigma_m_v30_cm2_per_g": 3.6386121846846393,
+    "mu_x": 3.934391416174644e-11,
+    "m_phi_A_MeV": 512.2792442445812
+  },
+  "lrd_enabled": true,
+  "ksfr_enabled": false,
+  "lrds_obs_bins": 10,
+  "provenance": "Jiang et al. 2026 ApJL 996 L19 (arXiv:2503.23710) -- SIDM gravothermal core collapse -> LRD seeds; refined with UV LF data from Matthee+2024, Taylor+2025, Greene+2024/2026, and bolometric correction from arXiv:2509.05434 (Sept 2025).",
+  "wall_seconds": 105.34883999824524
+}

@@ -1,0 +1,91 @@
+{
+  "description": "T192 - Proper thermal-averaged BW annihilation cross-section (2026-09-21)",
+  "addresses": "DeepSeek Review 3 Priority #1 (thermal averaging)",
+  "method": "Gondolo-Gelmini (1991) thermal integration of BW sigma(s) over Maxwell-Boltzmann at T_F = m_chi/x_F",
+  "freeze_out": {
+    "x_F": 22,
+    "T_F_GeV": 0.4681818181818182,
+    "v_thermal_c": 0.30151134457776363
+  },
+  "all_results": [
+    {
+      "delta": 0.001,
+      "m_Phi_GeV": 20.6206,
+      "g_h_SM": 0.0001313305792693368,
+      "sigma_v_thermal_cm3_per_s": 2.7086105308704396e-26,
+      "Omega_h2": 0.11518821050279814,
+      "Gamma_total_GeV": 0.0020511831633968415,
+      "BR_chi": 0.9999931009591766,
+      "BR_SM": 6.8990408233951645e-06,
+      "CHARM_compliant": true
+    },
+    {
+      "delta": 0.002,
+      "m_Phi_GeV": 20.6412,
+      "g_h_SM": 0.00013133504251222112,
+      "sigma_v_thermal_cm3_per_s": 2.692395720414278e-26,
+      "Omega_h2": 0.11588192539245036,
+      "Gamma_total_GeV": 0.0020532322983890373,
+      "BR_chi": 0.9999931004902469,
+      "BR_SM": 6.899509753111496e-06,
+      "CHARM_compliant": true
+    },
+    {
+      "delta": 0.0043,
+      "m_Phi_GeV": 20.68858,
+      "g_h_SM": 0.00040113568902148283,
+      "sigma_v_thermal_cm3_per_s": 2.628350110517663e-26,
+      "Omega_h2": 0.11870564684343003,
+      "Gamma_total_GeV": 0.0020580635643920246,
+      "BR_chi": 0.999935640206047,
+      "BR_SM": 6.435979395301101e-05,
+      "CHARM_compliant": true
+    },
+    {
+      "delta": 0.0112,
+      "m_Phi_GeV": 20.830720000000003,
+      "g_h_SM": 0.0006468984335380102,
+      "sigma_v_thermal_cm3_per_s": 2.607542309666557e-26,
+      "Omega_h2": 0.11965290029748257,
+      "Gamma_total_GeV": 0.0020724168810463033,
+      "BR_chi": 0.9998326369817431,
+      "BR_SM": 0.000167363018257006,
+      "CHARM_compliant": true
+    },
+    {
+      "delta": 0.02,
+      "m_Phi_GeV": 21.012,
+      "g_h_SM": 0.0011688487001780675,
+      "sigma_v_thermal_cm3_per_s": 2.609716234777016e-26,
+      "Omega_h2": 0.11955322798789214,
+      "Gamma_total_GeV": 0.002091244495343485,
+      "BR_chi": 0.9994538155668972,
+      "BR_SM": 0.0005461844331028382,
+      "CHARM_compliant": true
+    },
+    {
+      "delta": 0.05,
+      "m_Phi_GeV": 21.630000000000003,
+      "g_h_SM": 0.0029894207160713615,
+      "sigma_v_thermal_cm3_per_s": 2.6029485250208365e-26,
+      "Omega_h2": 0.11986406838279771,
+      "Gamma_total_GeV": 0.002159267027322025,
+      "BR_chi": 0.9964380781528429,
+      "BR_SM": 0.0035619218471571092,
+      "CHARM_compliant": true
+    }
+  ],
+  "best_configuration": {
+    "delta": 0.0043,
+    "m_Phi_GeV": 20.68858,
+    "g_h_SM": 0.00040113568902148283,
+    "sigma_v_thermal_cm3_per_s": 2.628350110517663e-26,
+    "Omega_h2": 0.11870564684343003,
+    "Gamma_total_GeV": 0.0020580635643920246,
+    "BR_chi": 0.999935640206047,
+    "BR_SM": 6.435979395301101e-05,
+    "CHARM_compliant": true
+  },
+  "verdict": "Two-mediator UV completion IS VIABLE at delta = 0.430%, g_h_SM = 0.00040, with proper thermal averaging. Omega_h^2 = 0.1187, CHARM-compliant.",
+  "replaces": "T185/T190 single-velocity BW calculation (which had off-resonance error)"
+}

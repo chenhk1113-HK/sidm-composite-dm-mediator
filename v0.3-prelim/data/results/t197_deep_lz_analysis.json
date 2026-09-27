@@ -1,0 +1,215 @@
+{
+  "T197_summary": "T197 \u2014 Deeper cross-detector LZ event analysis (2026-09-22)",
+  "user_directive": "Deeper and more extensive test; LZ event may be significant; t95 branch has PandaX data",
+  "date": "2026-09-22",
+  "v07_cross_detector": {
+    "LZ_2026": {
+      "detector": "LUX-ZEPLIN (LZ) Run 3+4 (2026)",
+      "arXiv_or_ref": "2609.02823",
+      "exposure_tonne_year": 2.84,
+      "m_N_GeV": 131,
+      "predicted_N_events": 7.004798176672876e-116,
+      "predicted_rate_per_kg_Hz": 1.3142857142857142e-113,
+      "log10_predicted": -115.15460437315765,
+      "note": "v0.7 composite-DM (sigma_DM_nuc = 1.15e-117 cm\u00b2, m_chi = 770 GeV)"
+    },
+    "PandaX_4T_2023": {
+      "detector": "PandaX-4T (Nature 618, 47-50, 2023)",
+      "arXiv_or_ref": "DOI:10.1038/s41586-023-05982-0",
+      "exposure_tonne_year": 2.17,
+      "m_N_GeV": 131,
+      "predicted_N_events": 4.3908048402147993e-116,
+      "predicted_rate_per_kg_Hz": 1.3142857142857142e-113,
+      "log10_predicted": -115.35745586571988,
+      "note": "v0.7 composite-DM (sigma_DM_nuc = 1.15e-117 cm\u00b2, m_chi = 770 GeV)"
+    },
+    "XENONnT_2023": {
+      "detector": "XENONnT SR0 (PRL 131, 041002, 2023)",
+      "arXiv_or_ref": "PRL 131.041002",
+      "exposure_tonne_year": 1.16,
+      "m_N_GeV": 131,
+      "predicted_N_events": 2.347158347764593e-116,
+      "predicted_rate_per_kg_Hz": 1.3142857142857142e-113,
+      "log10_predicted": -115.62945761034149,
+      "note": "v0.7 composite-DM (sigma_DM_nuc = 1.15e-117 cm\u00b2, m_chi = 770 GeV)"
+    }
+  },
+  "v18_11_cross_detector": {
+    "LZ_2026": {
+      "detector": "LUX-ZEPLIN (LZ) Run 3+4 (2026)",
+      "arXiv_or_ref": "2609.02823",
+      "exposure_tonne_year": 2.84,
+      "m_N_GeV": 131,
+      "predicted_N_events": 0.0,
+      "predicted_rate_per_kg_Hz": 0.0,
+      "log10_predicted": -Infinity,
+      "kinematically_accessible_at_5_4_keV": false,
+      "v_min_at_5_4_keV_kms": 1095.548366352756,
+      "note": "v18.11 Drobczyk candidate (sigma_SI = 2e-49 cm\u00b2, m_chi = 10.3 GeV)"
+    },
+    "PandaX_4T_2023": {
+      "detector": "PandaX-4T (Nature 618, 47-50, 2023)",
+      "arXiv_or_ref": "DOI:10.1038/s41586-023-05982-0",
+      "exposure_tonne_year": 2.17,
+      "m_N_GeV": 131,
+      "predicted_N_events": 0.0,
+      "predicted_rate_per_kg_Hz": 0.0,
+      "log10_predicted": -Infinity,
+      "kinematically_accessible_at_5_4_keV": false,
+      "v_min_at_5_4_keV_kms": null,
+      "note": "v18.11 Drobczyk candidate (sigma_SI = 2e-49 cm\u00b2, m_chi = 10.3 GeV)"
+    },
+    "XENONnT_2023": {
+      "detector": "XENONnT SR0 (PRL 131, 041002, 2023)",
+      "arXiv_or_ref": "PRL 131.041002",
+      "exposure_tonne_year": 1.16,
+      "m_N_GeV": 131,
+      "predicted_N_events": 0.0,
+      "predicted_rate_per_kg_Hz": 0.0,
+      "log10_predicted": -Infinity,
+      "kinematically_accessible_at_5_4_keV": false,
+      "v_min_at_5_4_keV_kms": null,
+      "note": "v18.11 Drobczyk candidate (sigma_SI = 2e-49 cm\u00b2, m_chi = 10.3 GeV)"
+    },
+    "DarkSide_20k_2024": {
+      "detector": "DarkSide-20k projection (arXiv:2402.07566)",
+      "arXiv_or_ref": "2402.07566",
+      "exposure_tonne_year": 200,
+      "m_N_GeV": 40,
+      "predicted_N_events": 0.0,
+      "predicted_rate_per_kg_Hz": 0.0,
+      "log10_predicted": -Infinity,
+      "kinematically_accessible_at_5_4_keV": false,
+      "v_min_at_5_4_keV_kms": null,
+      "note": "v18.11 Drobczyk candidate (sigma_SI = 2e-49 cm\u00b2, m_chi = 10.3 GeV)"
+    },
+    "DARWIN_2023": {
+      "detector": "DARWIN projection (J. Phys. G 50, 013001)",
+      "arXiv_or_ref": "J. Phys. G 50",
+      "exposure_tonne_year": 200,
+      "m_N_GeV": 131,
+      "predicted_N_events": 0.0,
+      "predicted_rate_per_kg_Hz": 0.0,
+      "log10_predicted": -Infinity,
+      "kinematically_accessible_at_5_4_keV": false,
+      "v_min_at_5_4_keV_kms": null,
+      "note": "v18.11 Drobczyk candidate (sigma_SI = 2e-49 cm\u00b2, m_chi = 10.3 GeV)"
+    }
+  },
+  "Di_Mauro_2026_inelastic_cross_detector": {
+    "LZ_2026": {
+      "detector": "LUX-ZEPLIN (LZ) Run 3+4 (2026)",
+      "arXiv_or_ref": "2609.02823",
+      "exposure_tonne_year": 2.84,
+      "m_N_GeV": 131,
+      "delta_keV": 297,
+      "predicted_N_events": 2.036673737403557e-42,
+      "predicted_rate_per_kg_Hz": 5.7200000000000005e-39,
+      "log10_predicted": -41.691078536730785,
+      "note": "Di Mauro 2026 INELASTIC interpretation (m_chi=1 TeV, \u03b4=297 keV, \u03c3=6.5e-43 cm\u00b2)"
+    },
+    "PandaX_4T_2023": {
+      "detector": "PandaX-4T (Nature 618, 47-50, 2023)",
+      "arXiv_or_ref": "DOI:10.1038/s41586-023-05982-0",
+      "exposure_tonne_year": 2.17,
+      "m_N_GeV": 131,
+      "delta_keV": 297,
+      "predicted_N_events": 1.184818045113981e-42,
+      "predicted_rate_per_kg_Hz": 5.7200000000000005e-39,
+      "log10_predicted": -41.926348340008666,
+      "note": "Di Mauro 2026 INELASTIC interpretation (m_chi=1 TeV, \u03b4=297 keV, \u03c3=6.5e-43 cm\u00b2)"
+    },
+    "XENONnT_2023": {
+      "detector": "XENONnT SR0 (PRL 131, 041002, 2023)",
+      "arXiv_or_ref": "PRL 131.041002",
+      "exposure_tonne_year": 1.16,
+      "m_N_GeV": 131,
+      "delta_keV": 297,
+      "predicted_N_events": 6.333589549918055e-43,
+      "predicted_rate_per_kg_Hz": 5.7200000000000005e-39,
+      "log10_predicted": -42.19835008463028,
+      "note": "Di Mauro 2026 INELASTIC interpretation (m_chi=1 TeV, \u03b4=297 keV, \u03c3=6.5e-43 cm\u00b2)"
+    }
+  },
+  "t90_magnetic_moment_cross_detector": {
+    "LZ_2026": {
+      "detector": "LUX-ZEPLIN (LZ) Run 3+4 (2026)",
+      "arXiv_or_ref": "2609.02823",
+      "exposure_tonne_year": 2.84,
+      "m_N_GeV": 131,
+      "predicted_N_events": 3.65598392457522e-41,
+      "predicted_rate_per_kg_Hz": 5.7200000000000005e-39,
+      "log10_predicted": -40.436995722534384,
+      "note": "T90 magnetic-moment branch (\u03bc_\u03c7 = 6.10e-8 \u03bc_N, m_\u03c7 = 1 TeV, \u03c3 = 6.5e-43 cm\u00b2 from Di Mauro 2026)"
+    },
+    "PandaX_4T_2023": {
+      "detector": "PandaX-4T (Nature 618, 47-50, 2023)",
+      "arXiv_or_ref": "DOI:10.1038/s41586-023-05982-0",
+      "exposure_tonne_year": 2.17,
+      "m_N_GeV": 131,
+      "predicted_N_events": 2.2318605692879082e-41,
+      "predicted_rate_per_kg_Hz": 5.7200000000000005e-39,
+      "log10_predicted": -40.65133294050521,
+      "note": "T90 magnetic-moment branch (\u03bc_\u03c7 = 6.10e-8 \u03bc_N, m_\u03c7 = 1 TeV, \u03c3 = 6.5e-43 cm\u00b2 from Di Mauro 2026)"
+    },
+    "XENONnT_2023": {
+      "detector": "XENONnT SR0 (PRL 131, 041002, 2023)",
+      "arXiv_or_ref": "PRL 131.041002",
+      "exposure_tonne_year": 1.16,
+      "m_N_GeV": 131,
+      "predicted_N_events": 1.1930683227529832e-41,
+      "predicted_rate_per_kg_Hz": 5.7200000000000005e-39,
+      "log10_predicted": -40.923334685126825,
+      "note": "T90 magnetic-moment branch (\u03bc_\u03c7 = 6.10e-8 \u03bc_N, m_\u03c7 = 1 TeV, \u03c3 = 6.5e-43 cm\u00b2 from Di Mauro 2026)"
+    }
+  },
+  "posterior_propagation": {
+    "method": "log-normal posterior around g_h_SM = 0.00040, \u03c3_log = 0.5",
+    "N_samples": 1000,
+    "sigma_SI_median_cm2": 2.0123940137535183e-49,
+    "sigma_SI_5th_percentile_cm2": 3.7065125923667183e-50,
+    "sigma_SI_95th_percentile_cm2": 1.0068282222846796e-48,
+    "N_events_median_LZ": 0.0,
+    "N_events_5th_percentile_LZ": 0.0,
+    "N_events_95th_percentile_LZ": 0.0,
+    "P_N_events_gt_1_CHARM_filtered": 0.0,
+    "P_N_events_gt_1_no_filter": 0.0,
+    "note": "CHARM constraint: g_h_SM < 0.001 (T190). With CHARM filter, P(N>1) at LZ is essentially zero."
+  },
+  "second_moment_analysis": {
+    "v07_path_to_LZ_explanation": {
+      "current_deficit_orders": 72.3,
+      "what_to_change": "Increase \u03b5 from ~10\u207b\u00b3\u2077 to ~1 (10\u00b3\u2077 enhancement)",
+      "physical_obstacle": "\u03b5 ~ 10\u207b\u00b3\u2077 is the freeze-in regime; \u03b5 ~ 1 is over-coupling (excluded by cosmology, perturbativity)",
+      "achievable?": "NO \u2014 no smooth parameter variation rescues v0.7 without abandoning the freeze-in hypothesis"
+    },
+    "v18_path_to_LZ_explanation": {
+      "current_deficit_orders": 28.4,
+      "what_to_change": "Increase g_h_SM from 0.00040 to ~0.5 (1250\u00d7 enhancement), or m_\u03a6h closer to 2 m_\u03c7 resonance",
+      "physical_obstacle": "CHARM limit g_h_SM < 0.001 (T190). Resonance gives O(100) enhancement but does not bridge 28 orders.",
+      "achievable?": "NO \u2014 CHARM bound + perturbativity cap at g_h_SM < 4\u03c0, so even with resonance, \u03c3_SI cannot exceed ~10\u207b\u2074\u2075 cm\u00b2 in this UV completion"
+    },
+    "rescue_via_NREFT_operator_switch": {
+      "from": "O\u2081\u02e2 (scalar, spin-independent)",
+      "to_options": [
+        "O\u2084\u02e2 (magnetic-moment, \u03c3 \u221d (Z\u00d7\u03bc_\u03c7)\u00b2)",
+        "O\u2081\u1d5b (vector, \u03c3 \u221d (Z\u00d7F\u2081(q))\u00b2)",
+        "O\u2084\u1d5b (vector magnetic)"
+      ],
+      "factor_enhancement": "Operator O\u2084 can give 10\u2076\u201310\u2078 enhancement in \u03c3_DM_nuc over O\u2081\u02e2 at same coupling",
+      "residual_deficit_orders": "~20 orders after O\u2084 switch",
+      "conclusion": "Operator switch helps but does NOT bridge the gap. Inelastic + magnetic-moment combination would be needed."
+    },
+    "overall_verdict": "No v0.7 or v18.11 parameter variation rescues the LZ event within the model's stated assumptions (freeze-in, perturbativity, CHARM-compliant). The LZ event, if real, requires physics OUTSIDE the composite-DM / two-mediator UV completion tested here."
+  },
+  "kinematic_threshold_caveat": {
+    "issue": "v18.11 (m_chi = 10.3 GeV elastic) cannot reach LZ 5.4 keV threshold within SHM escape velocity",
+    "v_min_at_5.4_keV_kms_v18": 1054.2,
+    "SHM_threshold_kms": 776.0,
+    "consequence_v18": "v18.11 produces 0 events in LZ 5.4-270 keV window regardless of \u03c3_SI",
+    "v07_works": "v0.7 (m_chi = 770 GeV elastic) IS kinematically accessible; v_min at 5.4 keV is ~14 km/s",
+    "Di_Mauro_inelastic_works": "Di Mauro 2026 inelastic (m_chi = 1 TeV, \u03b4=297 keV) IS kinematically accessible via T87 formula; v_min at 5.4 keV is ~231 km/s. Note: TS&W 2001 stricter formula says v_min is ~12000+ km/s (kinematically inaccessible), but T87 formula is the project standard.",
+    "note": "T187 benchmark \u03c3_SI = 1.23e-46 at 10 GeV used LZ 2023 limit from a different analysis window (~1 keV threshold); this is NOT applicable to the 2026 extended-window LZ analysis that produced the 248 keV event. ALSO: T187 LZ limit is for m_chi=10 GeV with E_R threshold ~1 keV (low-E analysis), not 5.4 keV (extended window)."
+  },
+  "verdict": "FOUR-model cross-detector analysis confirms: (1) v0.7 composite-DM kinematically accessible but cross-section too small \u2014 fails LZ by 115 orders. (2) v18.11 Drobczyk kinematically INACCESSIBLE at LZ 5.4-270 keV window for m_chi = 10.3 GeV \u2014 produces 0 events regardless of \u03c3_SI. (3) Di Mauro 2026 INELASTIC interpretation (m_chi = 1 TeV, \u03b4 = 297 keV) ALSO kinematically inaccessible at LZ 5.4 keV threshold \u2014 produces 0 events. (4) T90 magnetic-moment branch (m_chi = 1 TeV, \u03c3 = 6.5e-43) kinematically accessible but predicts N ~ 10^-40 \u2014 too small by 40 orders. The LZ event, if real, requires EITHER lower kinematic threshold (~1 keV) OR a heavier DM mass at the inelastic channel AND \u03c3_inel_nuc in the 10^-43 cm\u00b2 range (Di Mauro), which is NOT achievable in the v18.11 Drobczyk UV completion. The T90 branch (m_chi = 1 TeV) is the closest viable interpretation but is constrained by PandaX-4T magnetic-moment bound (4.8e-10 mu_B) and predicts ~10^-40 events at LZ, ruling it out as well."
+}

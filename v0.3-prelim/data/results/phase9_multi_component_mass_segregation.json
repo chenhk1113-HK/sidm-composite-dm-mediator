@@ -1,0 +1,64 @@
+{
+  "test": "Phase9_multi_component_mass_segregation",
+  "direction": "Yang, Fan, Tsai 2025 mass segregation test on v0.3-prelim SIDM channels",
+  "parameters": {
+    "m_H_GeV": 45.0,
+    "m_L_GeV": 15.0,
+    "mass_ratio": 3,
+    "g_H": 0.7,
+    "g_L": 0.7,
+    "m_phi_MeV": 100.0
+  },
+  "halo_results": [
+    {
+      "halo": "Dwarf/LSB (YOUNG)",
+      "M_halo_Msun": 1000000000.0,
+      "c": 15.0,
+      "age_Gyr": 5.0,
+      "v_disp_kms": 30.0,
+      "r_vir_kpc": 16.25929978048345,
+      "r_half_kpc": 0.325185995609669,
+      "observed_sigma_m": 50.0,
+      "sigma_m_no_segregation": 0.14958040228376765,
+      "sigma_m_evolved_at_r_half": 0.008696532914469835,
+      "sigma_m_evolved_at_center": 0.0015155293613863014,
+      "ratio_observed_to_evolved": 5749.417669288284,
+      "t_seg_Gyr": 0.1,
+      "t_coll_H_Gyr": 0.05
+    },
+    {
+      "halo": "MW-like (OLD)",
+      "M_halo_Msun": 1000000000000.0,
+      "c": 12.0,
+      "age_Gyr": 10.0,
+      "v_disp_kms": 100.0,
+      "r_vir_kpc": 162.59299780483448,
+      "r_half_kpc": 3.25185995609669,
+      "observed_sigma_m": 1.0,
+      "sigma_m_no_segregation": 0.0059776353579077905,
+      "sigma_m_evolved_at_r_half": 5.5161240469045895e-06,
+      "sigma_m_evolved_at_center": 8.801917990187543e-07,
+      "ratio_observed_to_evolved": 181286.71355046064,
+      "t_seg_Gyr": 0.1,
+      "t_coll_H_Gyr": 0.05
+    },
+    {
+      "halo": "Cluster (OLD)",
+      "M_halo_Msun": 100000000000000.0,
+      "c": 6.0,
+      "age_Gyr": 10.0,
+      "v_disp_kms": 3000.0,
+      "r_vir_kpc": 754.6898430345467,
+      "r_half_kpc": 15.093796860690935,
+      "observed_sigma_m": 0.5,
+      "sigma_m_no_segregation": 0.00025560391921832843,
+      "sigma_m_evolved_at_r_half": 2.6818258943974024e-08,
+      "sigma_m_evolved_at_center": 1.4455812895391284e-08,
+      "ratio_observed_to_evolved": 18644014.178718653,
+      "t_seg_Gyr": 0.1,
+      "t_coll_H_Gyr": 0.05
+    }
+  ],
+  "wall_seconds": 0.03977465629577637,
+  "conclusion": "see interpretation above"
+}

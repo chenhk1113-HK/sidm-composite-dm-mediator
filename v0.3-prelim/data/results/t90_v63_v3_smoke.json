@@ -1,0 +1,55 @@
+{
+  "label": "T90.63 v3 hybrid 6ch (LRD on, KSFR off)",
+  "log_Z": -23.99645043722498,
+  "log_Z_err": 0.436504324497755,
+  "n_samples": 719,
+  "posterior_medians": {
+    "log_m_chi_GeV": 1.2691812720489917,
+    "log_m_phi_A_MeV": 2.307612141478691,
+    "g_chi_A": 0.4350991573406464,
+    "log_m_phi_B_MeV": 1.6298098140868054,
+    "g_chi_B": 0.3264005339618243,
+    "log_E_R_eV": 1.5149829102864565,
+    "log_Gamma_R_eV": -1.5328152029169293,
+    "log_sigma_0": -3.7872496458807303,
+    "log_alpha_Y": -1.8616962075474515,
+    "log_mu_x": -9.510076313160877
+  },
+  "posterior_p16": {
+    "log_p16_0": 0.8430933135440631,
+    "log_p16_1": 1.701197784046613,
+    "log_p16_2": 0.10615960569954383,
+    "log_p16_3": 0.677767625262378,
+    "log_p16_4": 0.07030549368809881,
+    "log_p16_5": 1.16976276738179,
+    "log_p16_6": -2.3025565405081885,
+    "log_p16_7": -4.527844522870861,
+    "log_p16_8": -4.35890308176687,
+    "log_p16_9": -12.429923278083374
+  },
+  "posterior_p84": {
+    "log_p84_0": 2.5410286949574004,
+    "log_p84_1": 3.4702433553936523,
+    "log_p84_2": 1.5253625074288368,
+    "log_p84_3": 1.7730173541999368,
+    "log_p84_4": 0.43445737011469227,
+    "log_p84_5": 3.8947415797965856,
+    "log_p84_6": 0.9214037919552558,
+    "log_p84_7": -1.8108593397946273,
+    "log_p84_8": -0.5559752129540124,
+    "log_p84_9": -7.092894211483597
+  },
+  "derived_at_median": {
+    "sigma_m_Cloud9_cm2_per_g": 0.2636114919770878,
+    "sigma_m_Galaxy_cm2_per_g": 0.5460304413461642,
+    "sigma_m_Bullet_cm2_per_g": 0.5988794405395158,
+    "sigma_m_v30_cm2_per_g": 0.6376003830964132,
+    "mu_x": 3.0897524610880166e-10,
+    "m_phi_A_MeV": 203.05427693767
+  },
+  "lrd_enabled": true,
+  "ksfr_enabled": false,
+  "lrds_obs_bins": 10,
+  "provenance": "Jiang+2026 ApJL 996 L19 (arXiv:2503.23710) SIDM core collapse -> LRD seeds; v3 uses Cardelli+1989 extinction law with variable A_V (lognormal distribution), bolometric correction from arXiv:2509.05434 (Sept 2025).",
+  "wall_seconds": 161.09042978286743
+}

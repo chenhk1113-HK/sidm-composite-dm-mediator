@@ -141,3 +141,45 @@ class TestDmFreeUdg:
         assert loglike_dm_free_udg(sigma_m_0=np.nan, a=0.0) == -np.inf
         assert loglike_dm_free_udg(sigma_m_0=np.inf, a=0.0) == -np.inf
         assert loglike_dm_free_udg(sigma_m_0=1.0, a=np.nan) == -np.inf
+
+    def test_channel_docstring_references_six_confirmed_udgs(self):
+        """Regression guard (added 2026-09-12 per UDG-evidence refresh).
+
+        Channel 11's docstring in channels_extended.py must reference all six
+        confirmed DM-free UDGs by their arXiv IDs:
+          NGC 1052 field (linear trail):
+            1803.10237 (DF2), 1901.05973 (DF4), 2603.15860 (DF9)
+          Fornax cluster (bound pair):
+            2502.05405 (FCC 224), 2605.24099 (FCC 224/240 pair)
+          Formation scenario:
+            2205.08552 (bullet dwarf collision)
+
+        If a new confirmed DM-free UDG is added, update this test AND the
+        docstring simultaneously. See DATA_SOURCES.md for full citations.
+        """
+        from pathlib import Path
+        ch_path = (
+            Path(__file__).resolve().parents[1]
+            / "v0.3-prelim"
+            / "code"
+            / "channels_extended.py"
+        )
+        docstring_text = ch_path.read_text(encoding="utf-8")
+        required_ids = [
+            "1803.10237",  # van Dokkum+ 2018 (DF2)
+            "1901.05973",  # van Dokkum+ 2019 (DF4)
+            "2205.08552",  # van Dokkum+ 2022 (bullet dwarf)
+            "2502.05405",  # Buzzo+ 2025 (FCC 224)
+            "2603.15860",  # Keim+ 2026 (DF9)
+            "2605.24099",  # Buzzo+ 2026 (FCC 224/240 pair)
+        ]
+        # All six IDs must appear within the Channel 11 docstring block.
+        # We locate the Channel 11 header and check IDs are within 60 lines.
+        ch11_start = docstring_text.find("Channel 11 (Tier-1 PATCH 2026-08-25")
+        assert ch11_start >= 0, "Channel 11 header not found in channels_extended.py"
+        ch11_block = docstring_text[ch11_start:ch11_start + 5000]
+        for arxiv_id in required_ids:
+            assert arxiv_id in ch11_block, (
+                f"arXiv:{arxiv_id} missing from Channel 11 docstring. "
+                f"Update both the docstring and DATA_SOURCES.md together."
+            )

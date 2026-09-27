@@ -1,0 +1,87 @@
+{
+  "description": "T184 \u2014 UV completion for SIDM + relic density (2026-09-21)",
+  "method": "Computed <sigma*v>_ann and sigma_HH for dark photon + Higgs portal UV completions. Tested thermal relic, non-thermal relic, and forbidden-channel scenarios.",
+  "phase_44_params": {
+    "m_chi_heavy_GeV": 10.3,
+    "m_chi_light_GeV": 3.4,
+    "sigma_HH_target_cm2_per_g": 0.05,
+    "omega_h2_target": 0.12
+  },
+  "dark_photon_scan": [
+    {
+      "g_D": 0.03,
+      "sigma_v_cm3_per_s": 7.094693126974602e-27,
+      "omega_h2": 0.5074215241688899,
+      "sigma_HH_cm2_per_g": 1.5904611527696837e-12
+    },
+    {
+      "g_D": 0.1,
+      "sigma_v_cm3_per_s": 8.75888040367235e-25,
+      "omega_h2": 0.004110114345768007,
+      "sigma_HH_cm2_per_g": 1.9635322873699805e-10
+    },
+    {
+      "g_D": 0.135,
+      "sigma_v_cm3_per_s": 2.9092676003800244e-24,
+      "omega_h2": 0.0012374248417470254,
+      "sigma_HH_cm2_per_g": 6.521884764576187e-10
+    },
+    {
+      "g_D": 0.3,
+      "sigma_v_cm3_per_s": 7.094693126974604e-23,
+      "omega_h2": 5.0742152416888975e-05,
+      "sigma_HH_cm2_per_g": 1.590461152769684e-08
+    },
+    {
+      "g_D": 1.0,
+      "sigma_v_cm3_per_s": 8.75888040367235e-21,
+      "omega_h2": 4.1101143457680073e-07,
+      "sigma_HH_cm2_per_g": 1.9635322873699804e-06
+    },
+    {
+      "g_D": 3.0,
+      "sigma_v_cm3_per_s": 7.094693126974604e-19,
+      "omega_h2": 5.0742152416888974e-09,
+      "sigma_HH_cm2_per_g": 0.0001590461152769684
+    }
+  ],
+  "higgs_portal_scan": [
+    {
+      "lambda_hs": 1e-05,
+      "sigma_v_cm3_per_s": 1.6968876192409348e-30,
+      "omega_h2": 2121.5311840217096,
+      "sigma_HH_cm2_per_g": 6.514528881744627e-27
+    },
+    {
+      "lambda_hs": 0.0001,
+      "sigma_v_cm3_per_s": 1.6968876192409347e-28,
+      "omega_h2": 21.215311840217094,
+      "sigma_HH_cm2_per_g": 6.514528881744626e-25
+    },
+    {
+      "lambda_hs": 0.001,
+      "sigma_v_cm3_per_s": 1.6968876192409345e-26,
+      "omega_h2": 0.21215311840217096,
+      "sigma_HH_cm2_per_g": 6.514528881744627e-23
+    },
+    {
+      "lambda_hs": 0.01,
+      "sigma_v_cm3_per_s": 1.6968876192409348e-24,
+      "omega_h2": 0.002121531184021709,
+      "sigma_HH_cm2_per_g": 6.514528881744626e-21
+    },
+    {
+      "lambda_hs": 0.1,
+      "sigma_v_cm3_per_s": 1.6968876192409349e-22,
+      "omega_h2": 2.1215311840217093e-05,
+      "sigma_HH_cm2_per_g": 6.514528881744627e-19
+    },
+    {
+      "lambda_hs": 1.0,
+      "sigma_v_cm3_per_s": 1.6968876192409345e-20,
+      "omega_h2": 2.1215311840217096e-07,
+      "sigma_HH_cm2_per_g": 6.514528881744626e-17
+    }
+  ],
+  "verdict": "THERMAL RELIC IS INCOMPATIBLE with SIDM phenomenology at m_chi=10.3 GeV, m_phi=300 MeV, sigma_HH=0.05. Dark photon requires g_D~0.135 for relic but gives sigma_HH ~10^-10 cm^2/g (10^8x too small). Solutions: (1) non-thermal relic, (2) forbidden channel, (3) co-annihilation. A purely thermal WIMP UV completion is NOT viable at our SIDM parameters."
+}

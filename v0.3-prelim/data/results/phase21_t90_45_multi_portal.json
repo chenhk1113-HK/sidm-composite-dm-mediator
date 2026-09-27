@@ -1,0 +1,154 @@
+{
+  "test": "Phase21_t90_45_multi_portal",
+  "map_params": {
+    "m_phi_A_MeV": 1979.5167090201578,
+    "m_chi_A_GeV": 3.3901429348939707,
+    "g_chi_A": 1.926174620064537,
+    "m_phi_B_MeV": 65.88743366179632,
+    "m_chi_B_GeV": 216.56316362454515,
+    "g_chi_B": 0.4372890435438157,
+    "epsilon_A": 1.1624404815155232e-30,
+    "alpha_A": 0.023884179167265932,
+    "xi": 2.087504876191463,
+    "sigma_m_28": 3.4869254135098338,
+    "sigma_m_100": 2.2393288270565246,
+    "sigma_m_1000": 0.01712461807028697,
+    "sigma_m_3000": 0.000521006159280139
+  },
+  "median_params": {
+    "m_phi_A_MeV": 365.8191084345798,
+    "m_chi_A_GeV": 41.39101146100893,
+    "g_chi_A": 1.1866198418249745,
+    "m_phi_B_MeV": 20.505207924646257,
+    "m_chi_B_GeV": 302.29484504617363,
+    "g_chi_B": 0.27552076533644126,
+    "epsilon_A": 1.4858770652782045e-32,
+    "alpha_A": 5.337910119441256e-16,
+    "xi": 0.4545006388115437,
+    "sigma_m_28": 42.40906112108399,
+    "sigma_m_100": 3.914586970138978,
+    "sigma_m_1000": 0.040113750817384705,
+    "sigma_m_3000": 0.023841010969050818
+  },
+  "map_results": {
+    "lz_elastic": {
+      "loglike": 0.0
+    },
+    "fermi_dwarf": {
+      "loglike": 0.0
+    },
+    "cmb_distortion": {
+      "loglike": 0.0
+    },
+    "delta_N_eff": {
+      "loglike": 0.0
+    },
+    "lss_assembly_bias": {
+      "loglike": 0.0
+    },
+    "dampe_cre": {
+      "loglike": -19.73514076932373
+    },
+    "xrism_perseus": {
+      "loglike": -75.39161496495171
+    },
+    "erosita": {
+      "loglike": -3.8387402539541307
+    },
+    "xrism_phi_decay": {
+      "loglike": 0.0
+    },
+    "euclid_q1_lensing": {
+      "loglike": -2.3555196891920938
+    },
+    "euclid_subhalo": {
+      "loglike": -10.12676813980808
+    },
+    "ksfr_pcac": {
+      "loglike": -Infinity
+    },
+    "cloud9_relhic": {
+      "loglike": -10.0,
+      "available": true
+    },
+    "sparc": {
+      "loglike": -290064.51044515823,
+      "saturated_proxy": true
+    },
+    "competitor_dd": {
+      "loglike": 0.0
+    },
+    "dsph": {
+      "loglike": -3.225235741682903
+    },
+    "ufd": {
+      "loglike": -0.08651650091488106
+    },
+    "bullet": {
+      "loglike": -0.0
+    }
+  },
+  "map_failures": [],
+  "map_total_loglike": -290189.26998121804,
+  "median_results": {
+    "lz_elastic": {
+      "loglike": 0.0
+    },
+    "fermi_dwarf": {
+      "loglike": 0.0
+    },
+    "cmb_distortion": {
+      "loglike": 0.0
+    },
+    "delta_N_eff": {
+      "loglike": 0.0
+    },
+    "lss_assembly_bias": {
+      "loglike": 0.0
+    },
+    "dampe_cre": {
+      "loglike": -19.73514076932373
+    },
+    "xrism_perseus": {
+      "loglike": -76.58223314423856
+    },
+    "erosita": {
+      "loglike": -20.43599241161066
+    },
+    "xrism_phi_decay": {
+      "loglike": 0.0
+    },
+    "euclid_q1_lensing": {
+      "loglike": -4.437378804139346
+    },
+    "euclid_subhalo": {
+      "loglike": -14.092491795715546
+    },
+    "ksfr_pcac": {
+      "loglike": -Infinity
+    },
+    "cloud9_relhic": {
+      "loglike": -13.208113938300684,
+      "available": true
+    },
+    "sparc": {
+      "loglike": -325921.05388393736,
+      "saturated_proxy": true
+    },
+    "competitor_dd": {
+      "loglike": 0.0
+    },
+    "dsph": {
+      "loglike": -3.7103718924036473
+    },
+    "ufd": {
+      "loglike": -0.028540276470189037
+    },
+    "bullet": {
+      "loglike": -0.0
+    }
+  },
+  "median_failures": [],
+  "median_total_loglike": -326073.28414696956,
+  "verdict": "MAP (non-Cloud-9 mode) is preferred: total = -290189.27"
+}

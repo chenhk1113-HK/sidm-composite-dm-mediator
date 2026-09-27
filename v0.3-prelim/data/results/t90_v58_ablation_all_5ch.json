@@ -1,0 +1,21 @@
+{
+  "label": "All 5 channels (baseline)",
+  "enabled_channels": [
+    "Bullet",
+    "Cloud9",
+    "Galaxy",
+    "KSFR",
+    "LZ"
+  ],
+  "log_Z": -7.9680705872809705,
+  "log_Z_err": 0.2042745090114124,
+  "wall_seconds": 502.1715741157532,
+  "n_samples": 1917,
+  "posterior_median_sigma_m": {
+    "Cloud9_cm2_per_g": 94.91311411453934,
+    "Galaxy_cm2_per_g": 2.5042348843891706,
+    "Bullet_cm2_per_g": 0.049631466478829614
+  },
+  "wimpy_available": true,
+  "ksfr_enabled": true
+}

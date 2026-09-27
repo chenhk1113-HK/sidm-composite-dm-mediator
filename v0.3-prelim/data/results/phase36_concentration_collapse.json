@@ -1,0 +1,104 @@
+{
+  "test": "Phase36_concentration_dependent_collapse",
+  "n_systems": 7,
+  "results": [
+    {
+      "name": "Fornax",
+      "M_200": 1000000000.0,
+      "c_200": 10.0,
+      "v_obs": 15.0,
+      "sigma_m_initial": 100.63931899264642,
+      "t_c_Gyr": 39.43256212267968,
+      "collapsed": false,
+      "sigma_eff": 100.63931899264642,
+      "target_low": 1.0,
+      "target_high": 5.0,
+      "pass": false
+    },
+    {
+      "name": "Tri II",
+      "M_200": 100000000.0,
+      "c_200": 10.0,
+      "v_obs": 15.0,
+      "sigma_m_initial": 100.63931899264642,
+      "t_c_Gyr": 84.95487975393837,
+      "collapsed": false,
+      "sigma_eff": 100.63931899264642,
+      "target_low": 1.0,
+      "target_high": 5.0,
+      "pass": false
+    },
+    {
+      "name": "Sculptor",
+      "M_200": 1000000000.0,
+      "c_200": 10.0,
+      "v_obs": 12.0,
+      "sigma_m_initial": 0.8444942977984204,
+      "t_c_Gyr": 39.68466198161707,
+      "collapsed": false,
+      "sigma_eff": 0.8444942977984204,
+      "target_low": 1.0,
+      "target_high": 5.0,
+      "pass": false
+    },
+    {
+      "name": "Segue 1",
+      "M_200": 100000000.0,
+      "c_200": 10.0,
+      "v_obs": 10.0,
+      "sigma_m_initial": 0.7874779527374892,
+      "t_c_Gyr": 85.49801243538523,
+      "collapsed": false,
+      "sigma_eff": 0.7874779527374892,
+      "target_low": 1.0,
+      "target_high": 5.0,
+      "pass": false
+    },
+    {
+      "name": "Cloud-9",
+      "M_200": 100000000.0,
+      "c_200": 10.0,
+      "v_obs": 28.0,
+      "sigma_m_initial": 100.38174961438179,
+      "t_c_Gyr": 85.17286535035237,
+      "collapsed": false,
+      "sigma_eff": 100.38174961438179,
+      "target_low": 30.0,
+      "target_high": 500.0,
+      "pass": true
+    },
+    {
+      "name": "JVAS perturber",
+      "M_200": 150000000.0,
+      "c_200": 50.0,
+      "v_obs": 7.3,
+      "sigma_m_initial": 0.8508795987207063,
+      "t_c_Gyr": 0.745859397475967,
+      "collapsed": true,
+      "sigma_eff": 100.0,
+      "target_low": 50.0,
+      "target_high": 200.0,
+      "pass": true
+    },
+    {
+      "name": "SPARC galaxy",
+      "M_200": 100000000000.0,
+      "c_200": 12.0,
+      "v_obs": 100.0,
+      "sigma_m_initial": 0.2705692434998291,
+      "t_c_Gyr": 5.230874799391622,
+      "collapsed": true,
+      "sigma_eff": 0.2705692434998291,
+      "target_low": 0.05,
+      "target_high": 0.5,
+      "pass": true
+    }
+  ],
+  "n_pass": 3,
+  "n_fail": 4,
+  "verdict": "TENSION_REMAINS",
+  "interpretation": {
+    "fornax_jvas_resolution": "Fornax and JVAS both have v ~ 15 km/s but require opposite sigma/m. The resolution is concentration-dependent collapse time: Fornax (c~10) doesn't have time to collapse (t_c > Hubble time), while JVAS (c~50) does (t_c < Hubble time). Both observations are consistent with sigma/m(15) ~ 100 cm^2/g.",
+    "physical_mechanism": "Core-collapse timescale scales as t_c ~ 1/(sigma/m * rho_s * r_s). High-concentration halos have smaller r_s and higher rho_s, making collapse much faster."
+  }
+}

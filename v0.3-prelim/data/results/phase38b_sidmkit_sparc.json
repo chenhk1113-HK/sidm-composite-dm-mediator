@@ -1,0 +1,9 @@
+{
+  "n_sidmkit_fits": 127,
+  "n_sidmkit_success": 127,
+  "n_vflat_data": 127,
+  "n_cross_matched": 93,
+  "n_cross_matched_success": 93,
+  "chi2r_median": 1.5023068795289518,
+  "n_good_fit_chi2_lt_2": 76
+}

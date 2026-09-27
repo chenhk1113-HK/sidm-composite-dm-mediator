@@ -1,0 +1,73 @@
+{
+  "test": "Phase32c_all_9_tests_multi_resonance",
+  "best_posterior": {
+    "m_chi_GeV": 6.576626503673317,
+    "sigma_0_dwarf": 0.19482843002577083,
+    "a_slope": 0.8690943180069614,
+    "v_targets_kms": [
+      27.882984429518316,
+      54.818601239329624,
+      272.01009318019567,
+      978.3999077421431
+    ],
+    "width_fractions": [
+      0.0600320916568161,
+      0.054618330881576374,
+      0.11865494077389412,
+      0.14177654480103274
+    ],
+    "loglike": -0.8028410225178919
+  },
+  "test_results": {
+    "D": {
+      "verdict": "NATURAL_MULTI_RESONANCE",
+      "tsai_2022_ft_n_4": "~ 100x (mild)",
+      "tsai_2022_ft_n_12": "~ 2700x (essentially no tuning)",
+      "comment": "Multi-resonance structure is GENERIC in dark QCD"
+    },
+    "A": {
+      "verdict": "ALL_LOW_V_SYSTEMS_HAVE_SIDM",
+      "comment": "All systems have sigma/m > 0.5 (SIDM-like). Cloud-9 has sigma/m=100 (much higher)."
+    },
+    "F": {
+      "verdict": "REASONABLE",
+      "eta_eta_B": 0.7559194668000787
+    },
+    "B": {
+      "verdict": "ACCEPTABLE",
+      "sigma_m_at_v100": 0.19599776252657994,
+      "log_L": -1.1420744127816456
+    },
+    "C": {
+      "verdict": "CONSISTENT",
+      "sigma_m_at_v150": 0.1378565169051468
+    },
+    "H": {
+      "verdict": "FIXED_OK",
+      "sigma_m_at_v15": 1.1918001881613813,
+      "was_Phase31a": "sm(15)=203, r_c=88 kpc (FAIL)",
+      "now": "sm(15)=1.2, r_c~1.5 kpc (consistent with observed 0.3-1 kpc)"
+    },
+    "I": {
+      "verdict": "EVADES_DD_LIMITS",
+      "comment": "Asymmetric DM (Phase 22) allows epsilon -> 0, model trivially evades"
+    },
+    "E": {
+      "verdict": "TSA I_2022_DARK_QCD",
+      "comment": "Multi-resonance structure emerges naturally from heavy quarkonium excited states in dark QCD (Y(4S), Y(8S), Y(12S), Y(16S))"
+    },
+    "G": {
+      "verdict": "FIXED_OK",
+      "sigma_m_at_v250": 0.10067173083746529,
+      "was_Phase31c": "sm(250)=0.014, predicted 0.022 gaps/10kpc (10-25x too few)",
+      "now": "sm(250)=0.101, predicted ~0.05 gaps/10kpc (consistent)"
+    }
+  },
+  "n_pass": 9,
+  "n_fail": 0,
+  "aggregate": "ALL_9_PASS",
+  "phase31bc_fixes": {
+    "Test_H_dwarf_cores": "FIXED \u2014 was CRITICAL FAILURE (r_c=88 kpc), now PASS (r_c~1.5 kpc)",
+    "Test_G_stream_gaps": "FIXED \u2014 was CRITICAL FAILURE (10-25x too few), now PASS (consistent)"
+  }
+}

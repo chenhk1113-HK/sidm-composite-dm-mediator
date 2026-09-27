@@ -76,6 +76,56 @@ CHECKS_PER_DOC: dict[str, list[tuple[str, str]]] = {
         ("m_φ claim", "m_φ = 453"),
         ("ε_γ", "1.12 × 10⁻³⁷"),
         ("α_X", "6.84 × 10⁻¹⁷"),
+        # T90 (2026-09-08) magnetic-moment "Door B" section cross-checks
+        ("T90 Door B section heading", "Magnetic-moment Ls₁₀ channel"),
+        ("T90 8D log Z", "-162.78"),
+        ("T90 8D delta log Z", "+0.51"),
+        ("T90 8D MAP m_chi", "138 GeV"),
+        ("T90 8D MAP delta", "98 keV"),
+        ("T90 8D MAP sigma_PortalB", "1.4×10⁻⁴²"),
+        # T110 (2026-09-08) 7D dynesty magnetic-moment fit
+        ("T110 7D log Z", "-174.014"),
+        ("T110 7D delta log Z", "-10.72"),
+        ("T110 7D MAP m_chi", "712.6 GeV"),
+        ("T110 7D MAP mu_x", "1.08×10⁻⁷"),
+        # Tier A (2026-09-08) Door B as best current LZ candidate
+        ("Tier A Door B best door heading", "Best current LZ door — Door B"),
+        ("Tier A Door B status text", "Door B (Portal B inelastic, T108) is the"),
+        ("Tier A Door B Delta log Z", "+0.51"),
+        ("Tier A Door C closed marker", "Door C CLOSED"),
+        # Tier B + D (2026-09-08) Multi-component DM (T111) and closure
+        ("Tier B Door D delta log Z", "-5.72"),
+        ("Tier D all doors closed heading", "All remaining doors closed for this model"),
+        ("Tier D Door D closed marker", "Door D CLOSED"),
+        # Door B references (2026-09-08) - 5 papers + future data
+        ("Door B Di Mauro 2026 ref", "Di Mauro et al. (2026)"),
+        ("Door B Berlin Ferraro 2025 ref", "Berlin & Ferraro (2025)"),
+        ("Door B Cline 2024 ref", "Cline et al. (2024)"),
+        ("Door B DIAMX 2026 ref", "DIAMX Collaboration (2026)"),
+        ("Door B XENONnT 2025 ref", "XENONnT (2025)"),
+        ("Door B LZ Run 4 future data", "LZ Run 4 (2027-2028)"),
+        # T112/T113/T114 reviewer-driven actions (2026-09-08)
+        ("T112 high-res dynesty nlive", "nlive=2000"),
+        ("T112 tight delta prior", "[50, 200] keV"),
+        ("T113 LZ Run 4 forecast", "LZ Run 4 (2027-2028)"),
+        ("T113 DarkSide-20k forecast", "DarkSide-20k (2028+)"),
+        ("T114 Xe124 DEC systematic", "¹²⁴Xe DEC charge-yield systematic"),
+        # T112 breakthrough (2026-09-08) - T90 merge criterion #5 satisfied
+        ("T112 breakthrough delta log Z", "+2.13"),
+        ("T112 breakthrough log Z uncertainty", "± 0.09"),
+        ("T112 breakthrough MAP delta keV", "δ = 116 keV"),
+        ("T112 breakthrough criterion 5 status", "T90 merge rule criterion #5: SATISFIED"),
+        ("T112 breakthrough 3 of 5 status", "3 of 5 T90 criteria satisfied"),
+        ("T112 breakthrough merge eligible", "ELIGIBLE for merge to master"),
+        # T115 sequential confirmation (2026-09-08) - HONEST FAILURE finding
+        ("T115 sequential v07 log Z drift", "1.49"),
+        ("T115 sequential LZ N_pred at MAP", "0.0086"),
+        ("T115 sequential verdict", "Both sequential"),
+        ("T115 interpretation update", "data compatible with Portal B"),
+        # T116 sequential confirmation of T90 value (2026-09-08)
+        ("T116 T90 value mu_chi", "6.10"),
+        ("T116 T90 value m_chi", "1000"),
+        ("T116 sequential LZ event at T90", "in [0.5, 5.0]"),
     ],
     "EXTRACT.md": [
         ("Channels 22", "Channels: **22 effective**"),

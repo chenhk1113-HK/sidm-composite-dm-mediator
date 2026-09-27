@@ -1,0 +1,414 @@
+{
+  "sweep_id": "ch04_width_resolution_2026_09_12",
+  "date": "2026-09-12",
+  "method": "Parametric sweep over ch04_lens_subhalo Gaussian width",
+  "widths_tested": [
+    0.3,
+    0.5,
+    0.7,
+    1.0,
+    1.3
+  ],
+  "rstate_seed": 20260912,
+  "results_per_width": {
+    "0.3": {
+      "full_log_Z": -7.878469912827151,
+      "loo_results": [
+        {
+          "channel": "ch01_dsph",
+          "log_Z_minus_held": -6.224723935794586,
+          "log_l_predictive": -1.715743181663008,
+          "wall_seconds": 1.9762980937957764,
+          "in_sample": -1.6917042012813241,
+          "diff": 0.02403898038168384
+        },
+        {
+          "channel": "ch02_ufd",
+          "log_Z_minus_held": -7.879314806081365,
+          "log_l_predictive": -0.09425363413270274,
+          "wall_seconds": 1.9640021324157715,
+          "in_sample": -0.08893811213140304,
+          "diff": 0.0053155220012996995
+        },
+        {
+          "channel": "ch03_bullet",
+          "log_Z_minus_held": -7.88704868811157,
+          "log_l_predictive": -0.01849767235058636,
+          "wall_seconds": 1.92684006690979,
+          "in_sample": -0.0038362322094443718,
+          "diff": 0.014661440141141987
+        },
+        {
+          "channel": "ch04_lens_subhalo",
+          "log_Z_minus_held": -2.755325562249969,
+          "log_l_predictive": -32.76899691432829,
+          "wall_seconds": 1.415302038192749,
+          "in_sample": -0.9648883865597798,
+          "diff": 31.804108527768513
+        },
+        {
+          "channel": "ch05_mw_satellite",
+          "log_Z_minus_held": -6.823887093090199,
+          "log_l_predictive": -1.124412655568082,
+          "wall_seconds": 1.9799883365631104,
+          "in_sample": -1.0393950273639894,
+          "diff": 0.08501762820409264
+        },
+        {
+          "channel": "ch06_cluster_upper",
+          "log_Z_minus_held": -7.847457663404956,
+          "log_l_predictive": -0.0042252338388742375,
+          "wall_seconds": 1.9952986240386963,
+          "in_sample": -0.0031251144485483994,
+          "diff": 0.0011001193903258382
+        },
+        {
+          "channel": "ch07_draco",
+          "log_Z_minus_held": -6.647592399081315,
+          "log_l_predictive": -1.3040413549141439,
+          "wall_seconds": 1.9724187850952148,
+          "in_sample": -1.2161591445891786,
+          "diff": 0.08788221032496524
+        },
+        {
+          "channel": "ch08_radio_relic",
+          "log_Z_minus_held": -7.826150280147675,
+          "log_l_predictive": -0.09144768380038878,
+          "wall_seconds": 1.9398138523101807,
+          "in_sample": -0.05628003014953842,
+          "diff": 0.03516765365085037
+        },
+        {
+          "channel": "ch09_dm_free_udg",
+          "log_Z_minus_held": -7.80322876991568,
+          "log_l_predictive": -0.10215794318492427,
+          "wall_seconds": 1.9142200946807861,
+          "in_sample": -0.0982050855993046,
+          "diff": 0.003952857585619668
+        }
+      ],
+      "wall_seconds": 20.391945838928223
+    },
+    "0.5": {
+      "full_log_Z": -6.6572063467921625,
+      "loo_results": [
+        {
+          "channel": "ch01_dsph",
+          "log_Z_minus_held": -5.079216966295421,
+          "log_l_predictive": -1.609201424831572,
+          "wall_seconds": 1.718928575515747,
+          "in_sample": -1.5420477258907859,
+          "diff": 0.06715369894078616
+        },
+        {
+          "channel": "ch02_ufd",
+          "log_Z_minus_held": -6.616900978848313,
+          "log_l_predictive": -0.05817986201283047,
+          "wall_seconds": 1.7878751754760742,
+          "in_sample": -0.05098684930524473,
+          "diff": 0.007193012707585739
+        },
+        {
+          "channel": "ch03_bullet",
+          "log_Z_minus_held": -6.657406989334778,
+          "log_l_predictive": -0.01177062079626278,
+          "wall_seconds": 1.7821941375732422,
+          "in_sample": -0.0020780767483293008,
+          "diff": 0.00969254404793348
+        },
+        {
+          "channel": "ch04_lens_subhalo",
+          "log_Z_minus_held": -2.755325562249969,
+          "log_l_predictive": -11.796838889158185,
+          "wall_seconds": 1.3998901844024658,
+          "in_sample": -1.2928226008215762,
+          "diff": 10.504016288336608
+        },
+        {
+          "channel": "ch05_mw_satellite",
+          "log_Z_minus_held": -5.974801476275959,
+          "log_l_predictive": -0.8345272930477526,
+          "wall_seconds": 1.7466678619384766,
+          "in_sample": -0.6635526442002928,
+          "diff": 0.17097464884745983
+        },
+        {
+          "channel": "ch06_cluster_upper",
+          "log_Z_minus_held": -6.6689446967478325,
+          "log_l_predictive": -0.002016386720691004,
+          "wall_seconds": 1.8445348739624023,
+          "in_sample": -0.0015812322033991286,
+          "diff": 0.00043515451729187545
+        },
+        {
+          "channel": "ch07_draco",
+          "log_Z_minus_held": -5.794786432691023,
+          "log_l_predictive": -1.012561340812791,
+          "wall_seconds": 1.761366844177246,
+          "in_sample": -0.8332635070493672,
+          "diff": 0.17929783376342368
+        },
+        {
+          "channel": "ch08_radio_relic",
+          "log_Z_minus_held": -6.638183899994172,
+          "log_l_predictive": -0.05305596897461656,
+          "wall_seconds": 1.8262715339660645,
+          "in_sample": -0.03252421807973238,
+          "diff": 0.020531750894884182
+        },
+        {
+          "channel": "ch09_dm_free_udg",
+          "log_Z_minus_held": -6.6107351277214565,
+          "log_l_predictive": -0.05232900711158826,
+          "wall_seconds": 1.7662343978881836,
+          "in_sample": -0.04874739273163119,
+          "diff": 0.0035816143799570765
+        }
+      ],
+      "wall_seconds": 17.713767528533936
+    },
+    "0.7": {
+      "full_log_Z": -5.705486608771671,
+      "loo_results": [
+        {
+          "channel": "ch01_dsph",
+          "log_Z_minus_held": -4.252913255112017,
+          "log_l_predictive": -1.5108898003928295,
+          "wall_seconds": 1.5988945960998535,
+          "in_sample": -1.3623951678559136,
+          "diff": 0.14849463253691586
+        },
+        {
+          "channel": "ch02_ufd",
+          "log_Z_minus_held": -5.59405275330388,
+          "log_l_predictive": -0.11343303572318435,
+          "wall_seconds": 1.628025770187378,
+          "in_sample": -0.09455794810864918,
+          "diff": 0.01887508761453517
+        },
+        {
+          "channel": "ch03_bullet",
+          "log_Z_minus_held": -5.703758083820992,
+          "log_l_predictive": -0.015140831262585896,
+          "wall_seconds": 1.6549594402313232,
+          "in_sample": -0.002001542129778692,
+          "diff": 0.013139289132807205
+        },
+        {
+          "channel": "ch04_lens_subhalo",
+          "log_Z_minus_held": -2.755325562249969,
+          "log_l_predictive": -6.018795351611319,
+          "wall_seconds": 1.446234941482544,
+          "in_sample": -1.43436170311301,
+          "diff": 4.584433648498308
+        },
+        {
+          "channel": "ch05_mw_satellite",
+          "log_Z_minus_held": -5.2217202413784785,
+          "log_l_predictive": -0.5684329015050159,
+          "wall_seconds": 1.7274925708770752,
+          "in_sample": -0.3712561559758412,
+          "diff": 0.1971767455291747
+        },
+        {
+          "channel": "ch06_cluster_upper",
+          "log_Z_minus_held": -5.709985768090315,
+          "log_l_predictive": -0.0014737304105991323,
+          "wall_seconds": 1.6557941436767578,
+          "in_sample": -0.0011462155064863636,
+          "diff": 0.0003275149041127687
+        },
+        {
+          "channel": "ch07_draco",
+          "log_Z_minus_held": -5.07613453116975,
+          "log_l_predictive": -0.7430983797523358,
+          "wall_seconds": 1.6901886463165283,
+          "in_sample": -0.5079605584551974,
+          "diff": 0.23513782129713845
+        },
+        {
+          "channel": "ch08_radio_relic",
+          "log_Z_minus_held": -5.689141604681287,
+          "log_l_predictive": -0.034061362628381775,
+          "wall_seconds": 1.6439149379730225,
+          "in_sample": -0.020603170396837962,
+          "diff": 0.013458192231543813
+        },
+        {
+          "channel": "ch09_dm_free_udg",
+          "log_Z_minus_held": -5.679848932460174,
+          "log_l_predictive": -0.038031440292447094,
+          "wall_seconds": 1.6370296478271484,
+          "in_sample": -0.0352081046883744,
+          "diff": 0.002823335604072691
+        }
+      ],
+      "wall_seconds": 16.62786602973938
+    },
+    "1.0": {
+      "full_log_Z": -4.7286781853030515,
+      "loo_results": [
+        {
+          "channel": "ch01_dsph",
+          "log_Z_minus_held": -3.4675128159600646,
+          "log_l_predictive": -1.380648325513869,
+          "wall_seconds": 1.5753824710845947,
+          "in_sample": -1.0646862488790079,
+          "diff": 0.3159620766348612
+        },
+        {
+          "channel": "ch02_ufd",
+          "log_Z_minus_held": -4.468898341959973,
+          "log_l_predictive": -0.3156136204613778,
+          "wall_seconds": 1.5486295223236084,
+          "in_sample": -0.22838258680807452,
+          "diff": 0.08723103365330329
+        },
+        {
+          "channel": "ch03_bullet",
+          "log_Z_minus_held": -4.750126406136551,
+          "log_l_predictive": -0.030325935698303715,
+          "wall_seconds": 1.600428581237793,
+          "in_sample": -0.0024590056597563305,
+          "diff": 0.027866930038547386
+        },
+        {
+          "channel": "ch04_lens_subhalo",
+          "log_Z_minus_held": -2.755325562249969,
+          "log_l_predictive": -2.949209722289546,
+          "wall_seconds": 1.4332129955291748,
+          "in_sample": -1.2779295774941033,
+          "diff": 1.6712801447954428
+        },
+        {
+          "channel": "ch05_mw_satellite",
+          "log_Z_minus_held": -4.487060700781802,
+          "log_l_predictive": -0.3061934394202436,
+          "wall_seconds": 1.5183007717132568,
+          "in_sample": -0.18068320379275482,
+          "diff": 0.12551023562748875
+        },
+        {
+          "channel": "ch06_cluster_upper",
+          "log_Z_minus_held": -4.7127941149079575,
+          "log_l_predictive": -0.0012476225863675837,
+          "wall_seconds": 1.601327657699585,
+          "in_sample": -0.0009168959907875115,
+          "diff": 0.0003307265955800722
+        },
+        {
+          "channel": "ch07_draco",
+          "log_Z_minus_held": -4.36907168458153,
+          "log_l_predictive": -0.45339762698681896,
+          "wall_seconds": 1.5802500247955322,
+          "in_sample": -0.26630479856722356,
+          "diff": 0.1870928284195954
+        },
+        {
+          "channel": "ch08_radio_relic",
+          "log_Z_minus_held": -4.701272217763782,
+          "log_l_predictive": -0.022004759315017434,
+          "wall_seconds": 1.5926129817962646,
+          "in_sample": -0.013397341208825353,
+          "diff": 0.008607418106192082
+        },
+        {
+          "channel": "ch09_dm_free_udg",
+          "log_Z_minus_held": -4.674578392768962,
+          "log_l_predictive": -0.0618734604460929,
+          "wall_seconds": 1.572209119796753,
+          "in_sample": -0.05498110528064977,
+          "diff": 0.006892355165443127
+        }
+      ],
+      "wall_seconds": 15.893470287322998
+    },
+    "1.3": {
+      "full_log_Z": -4.15736764016714,
+      "loo_results": [
+        {
+          "channel": "ch01_dsph",
+          "log_Z_minus_held": -3.0667476148062622,
+          "log_l_predictive": -1.242535507785549,
+          "wall_seconds": 1.469456672668457,
+          "in_sample": -0.8697206288119376,
+          "diff": 0.37281487897361154
+        },
+        {
+          "channel": "ch02_ufd",
+          "log_Z_minus_held": -3.6636564285064233,
+          "log_l_predictive": -0.5424976783254873,
+          "wall_seconds": 1.5071971416473389,
+          "in_sample": -0.35594311079226115,
+          "diff": 0.1865545675332262
+        },
+        {
+          "channel": "ch03_bullet",
+          "log_Z_minus_held": -4.13045570103449,
+          "log_l_predictive": -0.05172653700776261,
+          "wall_seconds": 1.5942466259002686,
+          "in_sample": -0.0035891181563619664,
+          "diff": 0.048137418851400646
+        },
+        {
+          "channel": "ch04_lens_subhalo",
+          "log_Z_minus_held": -2.755325562249969,
+          "log_l_predictive": -1.7450945102305004,
+          "wall_seconds": 1.4213893413543701,
+          "in_sample": -1.0147406665559426,
+          "diff": 0.7303538436745578
+        },
+        {
+          "channel": "ch05_mw_satellite",
+          "log_Z_minus_held": -3.9911063874572053,
+          "log_l_predictive": -0.2057471387197918,
+          "wall_seconds": 1.5576128959655762,
+          "in_sample": -0.11499261107340736,
+          "diff": 0.09075452764638445
+        },
+        {
+          "channel": "ch06_cluster_upper",
+          "log_Z_minus_held": -4.148765522673128,
+          "log_l_predictive": -0.0014862213602348535,
+          "wall_seconds": 1.574608325958252,
+          "in_sample": -0.0011153513982347708,
+          "diff": 0.0003708699620000827
+        },
+        {
+          "channel": "ch07_draco",
+          "log_Z_minus_held": -3.9102345654198647,
+          "log_l_predictive": -0.31524222256099244,
+          "wall_seconds": 1.5269322395324707,
+          "in_sample": -0.1757729426183034,
+          "diff": 0.13946927994268904
+        },
+        {
+          "channel": "ch08_radio_relic",
+          "log_Z_minus_held": -4.129291970119292,
+          "log_l_predictive": -0.01850285333630381,
+          "wall_seconds": 1.5452454090118408,
+          "in_sample": -0.012569776254790088,
+          "diff": 0.005933077081513723
+        },
+        {
+          "channel": "ch09_dm_free_udg",
+          "log_Z_minus_held": -4.048911143602322,
+          "log_l_predictive": -0.09095571476873818,
+          "wall_seconds": 1.5575814247131348,
+          "in_sample": -0.0820036851347133,
+          "diff": 0.008952029634024875
+        }
+      ],
+      "wall_seconds": 15.586678743362427
+    }
+  },
+  "best_width": 0.7,
+  "best_ch04_diff": 4.584433648498308,
+  "best_other_regression": 0.04653702589629016,
+  "wall_total_seconds": 86.21440601348877,
+  "honest_caveats": [
+    "Width sweep only - did not test peak shifts or kernel shape changes",
+    "No-regression criterion is heuristic (0.05 nats threshold)",
+    "Other channels unaffected because their likelihoods are unchanged"
+  ]
+}

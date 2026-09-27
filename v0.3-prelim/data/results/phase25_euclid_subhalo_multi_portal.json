@@ -1,0 +1,17 @@
+{
+  "test": "Phase25_euclid_subhalo_multiporal",
+  "median_params": {
+    "m_phi_A_MeV": 365.8191084345798,
+    "m_chi_A_GeV": 41.39101146100893,
+    "g_chi_A": 1.1866198418249745,
+    "m_phi_B_MeV": 20.505207924646257,
+    "m_chi_B_GeV": 302.29484504617363,
+    "g_chi_B": 0.27552076533644126
+  },
+  "current_sm150": 1.3301689882921754,
+  "current_ll_euclid": -11.81979224779495,
+  "scan_n_tested": 247,
+  "scan_n_satisfying": 0,
+  "best_configs": [],
+  "verdict": "NO_CONFIGURATION_FOUND"
+}

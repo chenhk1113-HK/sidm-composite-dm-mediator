@@ -1,0 +1,148 @@
+{
+  "test": "T41_mediator_mass_joint_fit",
+  "direction": "User ship direction #1: add m_phi to posterior; v0.6: add xi as free (R14 Rec #8)",
+  "ndim": 6,
+  "parameters": [
+    "log_m_phi_MeV",
+    "log_m_chi_GeV",
+    "g_chi",
+    "log_epsilon",
+    "log_alpha",
+    "log_xi"
+  ],
+  "priors": {
+    "log_m_phi_MeV": [
+      -1.0,
+      4.0
+    ],
+    "log_m_chi_GeV": [
+      0.5,
+      3.0
+    ],
+    "g_chi": [
+      0.01,
+      2.0
+    ],
+    "log_epsilon": [
+      -60.0,
+      -1.0
+    ],
+    "log_alpha": [
+      -30.0,
+      -1.0
+    ],
+    "log_xi": [
+      -1.0,
+      0.7
+    ]
+  },
+  "log_Z": -171.81342800753131,
+  "log_Z_err": 0.22938272846900726,
+  "MAP": [
+    2.7250329683674535,
+    2.797584332711892,
+    1.3952660263938157,
+    -44.154032530511984,
+    -3.3679505338615563,
+    -0.926337676822464
+  ],
+  "MAP_physical": {
+    "m_phi_MeV": 530.9247465109017,
+    "m_chi_GeV": 627.4575258936287,
+    "g_chi": 1.3952660263938157,
+    "log_epsilon": -44.154032530511984,
+    "log_alpha": -3.3679505338615563,
+    "log_xi": -0.926337676822464,
+    "xi": 0.11848471361825073,
+    "sigma_m_0_derived": 0.24123668898167547,
+    "a_derived": 0.18572786009723546
+  },
+  "median": {
+    "log_m_phi_MeV": 1.7374699497738226,
+    "log_m_chi_GeV": 1.4625196955544149,
+    "g_chi": 0.3278329157836906,
+    "log_epsilon": -36.66941718971159,
+    "log_alpha": -15.315048869049154,
+    "log_xi": -0.730710862083233
+  },
+  "quantiles_16_50_84": {
+    "log_m_phi_MeV": [
+      1.2963601706885162,
+      1.7371692656427093,
+      2.628368590152078
+    ],
+    "log_m_chi_GeV": [
+      0.7639501305953028,
+      1.462497653816172,
+      2.633304120489494
+    ],
+    "g_chi": [
+      0.15288086180577615,
+      0.3275818765487544,
+      1.2573910640397803
+    ],
+    "log_epsilon": [
+      -52.64114570355154,
+      -36.68841359953616,
+      -20.971618957851973
+    ],
+    "log_alpha": [
+      -25.09755410098769,
+      -15.324104226542868,
+      -5.70434552737297
+    ],
+    "log_xi": [
+      -0.9336662284959978,
+      -0.7308896171272138,
+      -0.3558744340502629
+    ]
+  },
+  "median_physical": {
+    "m_phi_MeV": 54.634874495441785,
+    "m_chi_GeV": 29.008127495699057,
+    "g_chi": 0.3278329157836906,
+    "epsilon": 2.1408330970632395e-37,
+    "alpha": 4.841178890838307e-16,
+    "xi": 0.18590417274578597
+  },
+  "yukawa_tension": {
+    "T39_sigma_m_0": 1.57,
+    "T39_a": 0.94,
+    "Yukawa_a_at_MAP": 0.18572786009723546,
+    "a_difference": 0.7542721399027645,
+    "significant": false
+  },
+  "wall_seconds": 279.0715227127075,
+  "verdict": "TIER-3 EXTENSION: m_phi + xi parameterized posterior (v0.6: xi promoted from fixed to free)",
+  "interpretation": "log Z = -171.813, posterior medians: m_phi = 54.63 MeV, m_chi = 29.01 GeV, g_chi = 0.3278, eps = 2.14e-37, alpha = 4.84e-16, xi = 0.186. Derived sigma/m_0 = 0.241 cm^2/g, a = +0.186. Yukawa velocity index = +0.186; T39 data-preferred = +0.94. |Tension| = 0.75 (threshold 1.0). R12 P0-B (2026-08-17): the pre-fix '1.3 sigma tension' claim was a sign-flip artifact in derived_a; this re-run uses the corrected sign. v0.6 (R14 Rec #8, 2026-08-26): log_xi promoted from fixed-1 to free with prior log_xi in [-1.0, 0.7] (xi in [0.1, 5.0], matching H4.1 sweep range). v0.5 baseline log Z = -254.24 at nlive=500; v0.6 should be within ~0.5 of that since xi only enters via the Fermi-dwarf sigma_v scaling (sigma_v * xi^2), a subdominant channel.",
+  "t41_version": {
+    "suffix": "",
+    "ksfr_mask_enabled": false,
+    "ksfr_mask_max_at_runtime": 9.5,
+    "nlive": 200,
+    "ndim": 6,
+    "dlogz": 0.1,
+    "inelastic_on": false,
+    "r_inelastic": 0.3,
+    "xi_promotion": "v0.6: log_xi now a free parameter (R14 Rec #8). Prior log_xi in [-1.0, 0.7].",
+    "config_hash": "2f4df19e3643",
+    "config_hash_components": [
+      "ksfr_mask_enabled=False",
+      "ksfr_mask_max=9.5",
+      "nlive=200",
+      "ndim=6",
+      "dlogz=0.1",
+      "inelastic_on=False",
+      "r_inelastic=0.3",
+      "form_factor=default_dipole",
+      "sparc_treatment=hierarchical",
+      "bullet_variant=default",
+      "relic_solver=calibrated_inv_proportional"
+    ]
+  },
+  "t9042_label": "L_LZ_MAGNETIC (no LZ mm)",
+  "t9042_env": {
+    "T41_LEAVE_OUT_LZ_MAGNETIC": "1"
+  },
+  "t9042_wall_seconds": 280.5644636154175
+}

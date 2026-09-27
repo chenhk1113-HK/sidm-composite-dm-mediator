@@ -83,6 +83,26 @@ from channels_extended import (
     loglike_lz_magnetic_moment,
     loglike_lz_magnetic_moment_binned,
 )
+# T90.29 (wip/tier3-magnetic-moment-LZ branch): RELHIC (Cloud-9 + M51) channel.
+# T90.29 v3 uses the Yukawa velocity-dependent σ/m from t40_yukawa_sigma_m.py
+# (replacing the power-law approximation used by T90.28 v2). The Yukawa
+# form naturally gives Cloud-9's σ/m ~ 50-500 cm²/g at v=28 km/s for
+# m_phi = 1-10 MeV and g_chi = 0.13-0.4, resolving the v0.7 master tension.
+# Per arXiv:2608.04362 (Cloud-9) and arXiv:2607.21034 (M51 Cloud S/N).
+# Off by default on master; activated by T90_RELHIC_V27=1.
+try:
+    from t90_v29_relhic_yukawa import loglike_relhic_t90v29
+    _T90_RELHIC_AVAILABLE = True
+except ImportError:
+    try:
+        from t90_v28_relhic_likelihood import loglike_relhic as loglike_relhic_t90v29
+        _T90_RELHIC_AVAILABLE = True
+    except ImportError:
+        try:
+            from t90_v27_relhic_likelihood import loglike_relhic as loglike_relhic_t90v29
+            _T90_RELHIC_AVAILABLE = True
+        except ImportError:
+            _T90_RELHIC_AVAILABLE = False
 from xrism_phi_decay_forward_model import XRISM_PHI_DECAY_ARXIV_ID as _XRISM_PHI_ARXIV
 
 
@@ -205,21 +225,91 @@ def loglike_joint(theta):
     if not np.isfinite(ll_ksfr):
         return -np.inf
 
-    # Derived: sigma_m_0 at v_ref = 100 km/s
+    # T90.38: Per-channel velocity-corrected sigma_m_0 (reviewer Point 2).
+    # When env var T41_VDEP_CORRECTION=1, the channels receive sigma_m_0
+    # evaluated DIRECTLY at their characteristic velocity (not at V_REF=100),
+    # and a is the LOCAL derivative at that velocity (not the global
+    # power-law fit). This makes the velocity dependence of the Yukawa
+    # form (T90.29 v3) propagate correctly through each channel.
+    #
+    # Default: T41_VDEP_CORRECTION=0 (use V_REF=100 + global a, the original
+    # behavior). Set T41_VDEP_CORRECTION=1 for the "honest unification"
+    # test where the velocity dependence does the work automatically.
+    vdep_correction = os.environ.get("T41_VDEP_CORRECTION", "0").strip() == "1"
+
+    def sigma_m_at_v_channel(v_channel: float) -> float:
+        """sigma/m at the channel's characteristic velocity."""
+        return sigma_m_at_v_yukawa(v_channel, m_phi_MeV, m_chi_GeV, g_chi)
+
+    def a_at_v_channel(v_channel: float) -> float:
+        """Local velocity power-law index at v_channel."""
+        v_lo = v_channel / 1.1
+        v_hi = v_channel * 1.1
+        s_lo = sigma_m_at_v_yukawa(v_lo, m_phi_MeV, m_chi_GeV, g_chi)
+        s_hi = sigma_m_at_v_yukawa(v_hi, m_phi_MeV, m_chi_GeV, g_chi)
+        if s_lo <= 0 or s_hi <= 0:
+            return -2.0
+        return -((np.log10(s_lo) - np.log10(s_hi)) /
+                 (np.log10(v_lo) - np.log10(v_hi)))
+
+    # Derived: sigma_m_0 at v_ref = 100 km/s (default behavior)
     sigma_m_0 = sigma_m_at_v_yukawa(V_REF, m_phi_MeV, m_chi_GeV, g_chi)
     if sigma_m_0 <= 0 or not np.isfinite(sigma_m_0):
         return -np.inf
 
-    # Derived velocity power-law index
+    # Derived velocity power-law index (global, for default behavior)
     a = derived_a(m_phi_MeV, m_chi_GeV, g_chi)
 
+    # T90.38: per-channel velocity-corrected sigma_m_0 + a.
+    # When T41_VDEP_CORRECTION=1, these OVERRIDE the global sigma_m_0, a
+    # for each channel that has a known characteristic velocity.
+    # Channel velocities per channels_v03.py: V_DSPH=30, V_UFD=10,
+    # V_CLUSTER=1500. We use these for the per-channel override.
+    # T90.41: When T41_VDEP_CHANNELS=1, use the velocity-dependent (vdep)
+    # channel variants from channels_vdep_t90v41.py instead of channels_v03.
+    # The vdep variants evaluate sigma/m(v_channel) DIRECTLY from the Yukawa
+    # form, bypassing the power-law approximation in channels_v03.
+    # This is the proper implementation of reviewer Point 2 (T90.38).
+    #
+    # Default: T41_VDEP_CHANNELS=0 (use channels_v03 power-law channels,
+    # the original T41 behavior). Set T41_VDEP_CHANNELS=1 for the
+    # T90.41 "honest unification" mode where channels see the full
+    # Yukawa velocity dependence.
+    use_vdep_channels = os.environ.get("T41_VDEP_CHANNELS", "0").strip() == "1"
+    if use_vdep_channels:
+        from channels_vdep_t90v41 import (
+            loglike_dsph_vdep,
+            loglike_ufd_vdep,
+            loglike_bullet_vdep,
+            loglike_bullet_vdep_sensitivity_0p2,
+        )
+
+    if vdep_correction:
+        sigma_m_0_dsph = sigma_m_at_v_channel(30.0)
+        a_dsph = a_at_v_channel(30.0)
+        sigma_m_0_ufd = sigma_m_at_v_channel(10.0)
+        a_ufd = a_at_v_channel(10.0)
+        sigma_m_0_bullet = sigma_m_at_v_channel(1500.0)
+        a_bullet = a_at_v_channel(1500.0)
+    else:
+        sigma_m_0_dsph = sigma_m_0_ufd = sigma_m_0_bullet = sigma_m_0
+        a_dsph = a_ufd = a_bullet = a
+
     # 1. dSph (channel 2) — bimodal posterior. NO xi dependence.
-    ll_dsph = ch_v03.loglike_dsph_v03(sigma_m_0, a)
+    # T90.41: when use_vdep_channels, use channels_vdep_t90v41 (direct Yukawa).
+    if use_vdep_channels:
+        ll_dsph = loglike_dsph_vdep(m_phi_MeV, m_chi_GeV, g_chi)
+    else:
+        ll_dsph = ch_v03.loglike_dsph_v03(sigma_m_0_dsph, a_dsph)
     if not np.isfinite(ll_dsph):
         return -np.inf
 
     # 2. UFD (channel 3). NO xi dependence.
-    ll_ufd = ch_v03.loglike_ufd_v03(sigma_m_0, a)
+    # T90.41: vdep variant when enabled.
+    if use_vdep_channels:
+        ll_ufd = loglike_ufd_vdep(m_phi_MeV, m_chi_GeV, g_chi)
+    else:
+        ll_ufd = ch_v03.loglike_ufd_v03(sigma_m_0_ufd, a_ufd)
     if not np.isfinite(ll_ufd):
         return -np.inf
 
@@ -229,9 +319,15 @@ def loglike_joint(theta):
     # is the published Cha+ 2025 0.5 cm^2/g constraint.
     bullet_variant = os.environ.get("T41_BULLET_VARIANT", "default").strip()
     if bullet_variant == "sensitivity_0p2":
-        ll_bullet = ch_v03.loglike_bullet_v03_sensitivity_0p2(sigma_m_0, a)
+        if use_vdep_channels:
+            ll_bullet = loglike_bullet_vdep_sensitivity_0p2(m_phi_MeV, m_chi_GeV, g_chi)
+        else:
+            ll_bullet = ch_v03.loglike_bullet_v03_sensitivity_0p2(sigma_m_0_bullet, a_bullet)
     else:
-        ll_bullet = ch_v03.loglike_bullet_v03(sigma_m_0, a)
+        if use_vdep_channels:
+            ll_bullet = loglike_bullet_vdep(m_phi_MeV, m_chi_GeV, g_chi)
+        else:
+            ll_bullet = ch_v03.loglike_bullet_v03(sigma_m_0_bullet, a_bullet)
     if not np.isfinite(ll_bullet):
         return -np.inf
 
@@ -256,6 +352,11 @@ def loglike_joint(theta):
     if not np.isfinite(ll_lz):
         return -np.inf
 
+    # T90.42 (revised): leave-one-out profiling. When T41_LEAVE_OUT_LZ=1,
+    # disable LZ direct-detection channel (set ll_lz = 0).
+    if os.environ.get("T41_LEAVE_OUT_LZ", "0").strip() == "1":
+        ll_lz = 0.0
+
     # 5. Fermi dwarf (T32) — gamma-ray from annihilation.
     # R12 P1-C: replaced `alpha * sigma_m_at_v^2` (units cm^4/g^2, NOT
     # cm^3/s) with the proper dark-photon portal form.
@@ -274,6 +375,10 @@ def loglike_joint(theta):
     ll_fermi = loglike_fermi_dwarf(m_chi_GeV, sigma_v)
     if not np.isfinite(ll_fermi):
         return -np.inf
+
+    # T90.42: FERMI LOO
+    if os.environ.get("T41_LEAVE_OUT_FERMI", "0").strip() == "1":
+        ll_fermi = 0.0
 
     # KSFR/PCAC validity mask (T70.3 / Channel 15) is applied earlier
     # in this function (before any of the expensive likelihood calls);
@@ -294,6 +399,10 @@ def loglike_joint(theta):
     ll_cmb = loglike_cmb_distortion(m_chi_GeV * 1e9, m_phi_MeV * 1e6, epsilon)
     if not np.isfinite(ll_cmb):
         return -np.inf
+
+    # T90.42: CMB LOO
+    if os.environ.get("T41_LEAVE_OUT_CMB", "0").strip() == "1":
+        ll_cmb = 0.0
 
     # 7. DAMPE cosmic-ray electron+positron spectrum (T73, v0.4-prelim)
     # Per REVIEWER_CONSIDER_DATA.md (T71.9 input) and T72 POC:
@@ -317,6 +426,10 @@ def loglike_joint(theta):
     else:
         ll_dampe = 0.0
 
+    # T90.42: DAMPE LOO
+    if os.environ.get("T41_LEAVE_OUT_DAMPE", "0").strip() == "1":
+        ll_dampe = 0.0
+
     # 8. Zhang+2025 LSS / assembly-bias (T74, v0.4-prelim)
     # Direct observational constraint on sigma/m (not sigma_v).
     # Note: this is a different observable from the indirect-detection
@@ -330,6 +443,10 @@ def loglike_joint(theta):
         if not np.isfinite(ll_lss):
             return -np.inf
     else:
+        ll_lss = 0.0
+
+    # T90.42: LSS LOO
+    if os.environ.get("T41_LEAVE_OUT_LSS", "0").strip() == "1":
         ll_lss = 0.0
 
     # 9. T81: XENONnT + PandaX-4T direct-detection competitor watch.
@@ -536,7 +653,126 @@ def loglike_joint(theta):
     else:
         ll_magnetic_moment = 0.0
 
-    return ll_dsph + ll_ufd + ll_bullet + ll_lz + ll_fermi + ll_sparc + ll_cmb + ll_dampe + ll_lss + ll_competitor_dd + ll_xrism + ll_erosita + ll_phi_decay + ll_euclid_q1 + ll_euclid_subhalo + ll_goldstein_hill + ll_magnetic_moment
+    # T90.42: LZ magnetic-moment LOO
+    if os.environ.get("T41_LEAVE_OUT_LZ_MAGNETIC", "0").strip() == "1":
+        ll_magnetic_moment = 0.0
+
+    # Channel 27 (T90.29, wip/tier3-magnetic-moment-LZ branch): RELHIC joint likelihood
+    # (Cloud-9 + M51 Cloud S/N). Off by default; activated by T90_RELHIC_V27=1.
+    # T90.29 v3 uses the Yukawa velocity-dependent σ/m form (light mediator)
+    # which naturally gives Cloud-9's σ/m ~ 50-500 cm²/g at v=28 km/s for
+    # m_phi = 1-10 MeV and g_chi = 0.13-0.4, resolving the v0.7 master tension.
+    if _T90_RELHIC_AVAILABLE and os.environ.get("T90_RELHIC_V27", "").strip() == "1":
+        ll_relhic = loglike_relhic_t90v29(theta)
+        if not np.isfinite(ll_relhic):
+            return -np.inf
+    else:
+        ll_relhic = 0.0
+
+    # T90.32: Population-level RELHIC survival likelihood using Monaci+ 2026
+    # 70-candidate catalog (arXiv:2604.14699). Activated by T90_RELHIC_POP=1.
+    # Penalizes sigma_m above the RELHIC survival bound (~100 cm^2/g).
+    # This is a SIMPLIFIED back-of-envelope likelihood; a production version
+    # would use the full APOSTLE simulation stack and per-candidate likelihood.
+    if os.environ.get("T90_RELHIC_POP", "").strip() == "1":
+        try:
+            from t90_v32_relhic_population import loglike_relhic_population_t90v32
+            ll_relhic_pop = loglike_relhic_population_t90v32(theta)
+            if not np.isfinite(ll_relhic_pop):
+                return -np.inf
+        except ImportError:
+            ll_relhic_pop = 0.0
+    else:
+        ll_relhic_pop = 0.0
+
+    # T90.35: Yang+ 2024 parametric SIDM Cloud-9 likelihood. Activated by
+    # T90_YANG_CLOUD9=1. This is the canonical cosmological-simulation-
+    # calibrated velocity-dependent SIDM form (Eq. 2.24 of arXiv:2403.16633,
+    # used in Zhou+ 2026 Cloud-9 paper and Ms.Marvel DMO 2026).
+    # Penalizes sigma_eff(28) far from the Cloud-9 target (50 cm^2/g,
+    # Zhou+ 2026 lower bound). Uses the T90.29 v3 physical Yukawa form
+    # as the "sigma_eff(v)" — Yang+ 2024 is empirically fitting this
+    # physical form.
+    if os.environ.get("T90_YANG_CLOUD9", "").strip() == "1":
+        try:
+            from t90_v35_yang2024_cloud9 import loglike_yang2024_t90v35
+            ll_yang_cloud9 = loglike_yang2024_t90v35(theta)
+            if not np.isfinite(ll_yang_cloud9):
+                return -np.inf
+        except ImportError:
+            ll_yang_cloud9 = 0.0
+    else:
+        ll_yang_cloud9 = 0.0
+
+    # T90.36: Tuned Yukawa parameterization with sigma/m(28) ~ 100+ cm^2/g.
+    # Activated by T90_YUKAWA_TUNED=1. Pushes g_chi into the perturbative
+    # high end (~1.3) which gives sigma/m(28) ~ 100+ cm^2/g — comfortably
+    # in Cloud-9's range (50-500 cm^2/g) without KSFR violation in the
+    # sense that g_chi stays perturbative (g_chi < 4*pi).
+    # This is a "Cloud-9-aggressive" variant of T90.29 v3.
+    if os.environ.get("T90_YUKAWA_TUNED", "").strip() == "1":
+        try:
+            from t90_v36_yukawa_tuned import loglike_yukawa_tuned_t90v36_wrapper
+            ll_yukawa_tuned = loglike_yukawa_tuned_t90v36_wrapper(theta)
+            if not np.isfinite(ll_yukawa_tuned):
+                return -np.inf
+        except ImportError:
+            ll_yukawa_tuned = 0.0
+    else:
+        ll_yukawa_tuned = 0.0
+
+    # T90.37: Anand+ 2025 stellar mass upper limit cross-validation.
+    # Activated by T90_ANAND_MSTAR=1. Adds a Gaussian penalty that
+    # disfavors Cloud-9 models requiring significant baryonic
+    # contamination (i.e., extreme low-sigma/m regions that would
+    # imply Cloud-9's gas couldn't be supported by pure DM gravity).
+    if os.environ.get("T90_ANAND_MSTAR", "").strip() == "1":
+        try:
+            from t90_v37_anand_mstar import loglike_anand_mstar_t90v37_wrapper
+            ll_anand_mstar = loglike_anand_mstar_t90v37_wrapper(theta)
+            if not np.isfinite(ll_anand_mstar):
+                return -np.inf
+        except ImportError:
+            ll_anand_mstar = 0.0
+    else:
+        ll_anand_mstar = 0.0
+
+    # T90.31: Cloud-9-dominated fit. Downweight all non-RELHIC channels by a
+    # factor (env var T41_CHANNEL_WEIGHT_NONRELHIC). This lets the MCMC see
+    # what the model says if Cloud-9 is treated as a primary discovery rather
+    # than a marginal cross-check. The default value (1.0 = no downweight)
+    # gives the standard master fit. Set to 0.01 for a Cloud-9-dominated
+    # fit (the other channels contribute ~1/100 of their usual weight).
+    # Rationale: the master posterior at nlive=200 with the standard channel
+    # weights converges to heavy-mediator MAPs because the cumulative weight
+    # of 20+ channels outweighs a single RELHIC candidate. A Cloud-9-dominated
+    # fit asks: "if we treat RELHIC as the primary signal, what does the
+    # model prefer?"
+    channel_weight_nonrelhic = float(
+        os.environ.get("T41_CHANNEL_WEIGHT_NONRELHIC", "1.0")
+    )
+    nonrelhic = (
+        ll_dsph + ll_ufd + ll_bullet + ll_lz + ll_fermi + ll_sparc + ll_cmb
+        + ll_dampe + ll_lss + ll_competitor_dd + ll_xrism + ll_erosita
+        + ll_phi_decay + ll_euclid_q1 + ll_euclid_subhalo + ll_goldstein_hill
+        + ll_magnetic_moment
+    )
+
+    # T90.43b — multiplier on T90 (RELHIC) channels. Default 1.0. Set to
+    # higher values to weight the T90 channels more strongly against the
+    # legacy SIDM channels (dSph/UFD/Bullet). At T90_WEIGHT_MULTIPLIER=10,
+    # the T90 channels contribute 10x their log-likelihood, allowing them
+    # to overpower the dSph upper limit at sigma/m(28) ~ 50 cm^2/g.
+    t90_weight_multiplier = float(
+        os.environ.get("T90_WEIGHT_MULTIPLIER", "1.0").strip()
+    )
+
+    return (
+        t90_weight_multiplier * (
+            ll_relhic + ll_relhic_pop + ll_yang_cloud9 + ll_yukawa_tuned
+            + ll_anand_mstar
+        ) + channel_weight_nonrelhic * nonrelhic
+    )
 
 
 def prior_transform_5(u):

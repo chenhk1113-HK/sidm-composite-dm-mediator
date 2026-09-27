@@ -16,6 +16,7 @@
 
 # Core scientific stack (required)
 numpy==2.4.6
+WIMpy==1.1.1   # approved by user 2026-09-22 for T90 cross-detector analysis
 scipy==1.18.0
 matplotlib==3.11.0
 pandas==3.0.3

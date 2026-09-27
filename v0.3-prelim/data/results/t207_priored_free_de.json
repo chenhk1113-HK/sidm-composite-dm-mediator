@@ -1,0 +1,41 @@
+{
+  "metadata": {
+    "description": "free_f_H DE with v18.38 prior (f_H_cc >= 0.05 per Yang+ 2025 Fig. 2)",
+    "bounds_change": "BOUNDS[8] from (0.0, 1.0) to (0.05, 1.0)",
+    "expected_outcome": "no boundary peak; f_H_cc at or above the Yang+ lower limit",
+    "elapsed_s": 1214.3583815097809
+  },
+  "best_params": {
+    "sigma_0": 0.11881741168761592,
+    "sigma_peak_HH_1": 388.626296383232,
+    "sigma_0_HL": 0.0029617832628005335,
+    "sigma_peak_HL": 0.3253991424780003,
+    "v_HL": 103.29191310045292,
+    "sigma_0_LL": 5.632524121944116e-05,
+    "a_slope": 1.2770158102244116,
+    "f_H_cf": 0.8738192833564739,
+    "f_H_cc": 0.05327438167678383
+  },
+  "log_L_peak": -9.148620514364959e-16,
+  "per_channel_log_L": {
+    "UFD v=3": 0.0,
+    "UFD v=5": 0.0,
+    "UFD v=7": 0.0,
+    "UFD v=10": 0.0,
+    "dSph v=15": 0.0,
+    "Cloud-9 v=28": 0.0,
+    "SPARC v=100": -9.148620514364959e-16,
+    "Cluster v=500": 0.0
+  },
+  "de_result_success": false,
+  "de_result_message": "Maximum number of iterations has been exceeded.",
+  "comparison_to_v18_37": {
+    "v18_37_free_f_H_log_L": -6.51e-16,
+    "v18_37_free_f_H_f_H_cc": 0.00411,
+    "v18_37_ci68_f_H_cc": [
+      0.0,
+      0.061
+    ],
+    "note": "v18.37 was T206 re-run; T207 free_f_H was at boundary. v18.38 expects f_H_cc in [0.05, ~0.20] (Yang+ 2025 lower portion)."
+  }
+}

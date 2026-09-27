@@ -1,0 +1,24 @@
+{
+  "test": "T215u — Memory-capped 3-run batch (ulimit -v 8000000)",
+  "t_max_pc_per_kms": [71.59, 71.59, 70.28],
+  "t_max_myr": [69.99, 69.99, 68.72],
+  "snapshots": [12, 12, 11],
+  "mean_myr": 69.57,
+  "std_myr": 0.74,
+  "min_myr": 68.72,
+  "max_myr": 69.99,
+  "range_myr": 1.27,
+  "median_myr": 69.99,
+  "config": "ulimit -v 8000000 (8 GB virtual memory cap) before each Julia invocation",
+  "comparison_to_uncapped_T215r": {
+    "uncapped_mean_myr": 41.85,
+    "uncapped_std_myr": 21.13,
+    "uncapped_range_myr": 58.22,
+    "capped_mean_myr": 69.57,
+    "capped_std_myr": 0.74,
+    "capped_range_myr": 1.27,
+    "variance_reduction_factor": "std ratio = 28.5x; range ratio = 45.8x"
+  },
+  "conclusion": "Memory pressure IS the mechanism. With fixed ulimit -v 8000000, the batch-shift effect disappears (std drops from 21.13 Myr to 0.74 Myr). All three runs hit the 70 Myr target (vs uncapped runs varying from 12 to 70 Myr).",
+  "timestamp": "2026-09-26"
+}

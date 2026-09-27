@@ -1,0 +1,91 @@
+{
+  "all_8_points": {
+    "excluded": null,
+    "best_rmse": 1.1663939180924987,
+    "best_params": [
+      0.3,
+      0.3,
+      100
+    ]
+  },
+  "exclude_v_3.0": {
+    "excluded": 3.0,
+    "best_rmse": 1.246475293238125,
+    "best_params": [
+      0.3,
+      0.3,
+      100
+    ],
+    "delta_from_full": 0.08008137514562619
+  },
+  "exclude_v_5.0": {
+    "excluded": 5.0,
+    "best_rmse": 1.2459428453752224,
+    "best_params": [
+      0.3,
+      0.3,
+      100
+    ],
+    "delta_from_full": 0.07954892728272367
+  },
+  "exclude_v_7.0": {
+    "excluded": 7.0,
+    "best_rmse": 1.2426069716278139,
+    "best_params": [
+      0.3,
+      0.3,
+      100
+    ],
+    "delta_from_full": 0.07621305353531516
+  },
+  "exclude_v_10.0": {
+    "excluded": 10.0,
+    "best_rmse": 1.2366225362627192,
+    "best_params": [
+      0.3,
+      0.3,
+      100
+    ],
+    "delta_from_full": 0.07022861817022052
+  },
+  "exclude_v_15.0": {
+    "excluded": 15.0,
+    "best_rmse": 1.2274210158100327,
+    "best_params": [
+      0.3,
+      0.3,
+      100
+    ],
+    "delta_from_full": 0.06102709771753401
+  },
+  "exclude_v_28.0": {
+    "excluded": 28.0,
+    "best_rmse": 0.4589352959954805,
+    "best_params": [
+      0.3,
+      0.3,
+      100
+    ],
+    "delta_from_full": -0.7074586220970183
+  },
+  "exclude_v_100.0": {
+    "excluded": 100.0,
+    "best_rmse": 1.22065229741331,
+    "best_params": [
+      0.3,
+      0.3,
+      100
+    ],
+    "delta_from_full": 0.054258379320811345
+  },
+  "exclude_v_500.0": {
+    "excluded": 500.0,
+    "best_rmse": 1.1621849350354503,
+    "best_params": [
+      0.1,
+      0.1,
+      30
+    ],
+    "delta_from_full": -0.004208983057048421
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "phase": "6b",
+  "date": "2026-09-12",
+  "v03_map": {
+    "sigma_m_0": 0.72,
+    "a": 1.31
+  },
+  "scope_of_empirical_rule": {
+    "sparc_loglike_grid (Ch8 helper)": {},
+    "loglike_sparc_hierarchical (Ch8 main)": {
+      "actual_rule": "Kaplinghat+ 2016: r_c ~ 1/(sigma/m * V_max)"
+    },
+    "loglike_dsph_v03 (Ch2)": {
+      "actual_form": "log10(sigma/m_v_DSPH) in log-space"
+    },
+    "loglike_ufd_v03 (Ch3)": {
+      "actual_form": "log10(sigma/m_v_UFD) in log-space"
+    },
+    "loglike_dm_free_udg (Ch9)": {
+      "actual_form": "log10(sigma/m_v_30) in log-space"
+    },
+    "loglike_dm_dominated_udg (Ch10)": {
+      "actual_form": "log10(sigma/m_v_20) in log-space"
+    }
+  },
+  "dwarf_r_core_comparison": {
+    "sigma_m_v_cm2_per_g": 3.485809528759289,
+    "r_core_empirical_kpc": 1.8670322784460072,
+    "r_core_gravothermal_kpc": 0.05,
+    "ratio_empirical_over_gravothermal": 37.34064556892014
+  },
+  "decision": "KILL",
+  "decision_reason": "Empirical rule is wrong at MAP, but main likelihoods (SPARC main, dSph, UFD, Ch9, Ch10) don't use it. Gravothermal correction is narrowly scoped to sparc_loglike_grid helper (rarely used). MAP does not shift.",
+  "kill_criterion": {
+    "triggered": true,
+    "reason": "Empirical rule is wrong but not used in main pipeline"
+  }
+}

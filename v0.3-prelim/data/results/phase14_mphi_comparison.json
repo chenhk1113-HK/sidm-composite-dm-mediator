@@ -1,0 +1,68 @@
+{
+  "test": "Phase14_mphi_comparison",
+  "direction": "Quantify \u03c3/m dependence on m_phi choice",
+  "results": {
+    "100": {
+      "m_phi_MeV": 100.0,
+      "log_Z": -206.41198342277303,
+      "MAP_log_sigma_m": -1.2103153875160206,
+      "MAP_sigma_m": 0.06161473890553349,
+      "MAP_g_D": 0.1458691227522034,
+      "MAP_f_H": 0.20231547870677516,
+      "posterior_sigma_m_16_50_84": [
+        0.06031850269108019,
+        0.06476213857910562,
+        0.06712093293144045
+      ],
+      "wall_seconds": 15.299954652786255
+    },
+    "150": {
+      "m_phi_MeV": 150.0,
+      "log_Z": -206.26927570325208,
+      "MAP_log_sigma_m": -1.218428172942804,
+      "MAP_sigma_m": 0.06047443604809542,
+      "MAP_g_D": 0.15853986057746727,
+      "MAP_f_H": 0.015228244383369761,
+      "posterior_sigma_m_16_50_84": [
+        0.060764917826123456,
+        0.06524174566115805,
+        0.06733109501252242
+      ],
+      "wall_seconds": 18.37126612663269
+    },
+    "200": {
+      "m_phi_MeV": 200.0,
+      "log_Z": -207.08750325150774,
+      "MAP_log_sigma_m": -1.173692766655038,
+      "MAP_sigma_m": 0.06703586741664407,
+      "MAP_g_D": 0.14539873794702862,
+      "MAP_f_H": 0.03995134789143348,
+      "posterior_sigma_m_16_50_84": [
+        0.060307449808763805,
+        0.06513965888449023,
+        0.06734355110744429
+      ],
+      "wall_seconds": 17.13919472694397
+    },
+    "500": {
+      "m_phi_MeV": 500.0,
+      "log_Z": -206.46848266211498,
+      "MAP_log_sigma_m": -1.2316608792949029,
+      "MAP_sigma_m": 0.05865960317491568,
+      "MAP_g_D": 0.1388181300792222,
+      "MAP_f_H": 0.7194504159677817,
+      "posterior_sigma_m_16_50_84": [
+        0.060349793576477295,
+        0.06495706903197143,
+        0.0672797225098978
+      ],
+      "wall_seconds": 15.303303718566895
+    }
+  },
+  "comparison": {
+    "sigma_m_ratio_100_vs_200": 0.9191309261739398,
+    "t39_baseline_sigma_m": 0.72,
+    "phase_8d_reframe_sigma_m": 0.065,
+    "bimodal_verdict": "Phase 13 showed bimodality: SIDM-channel m_phi ~ 10 MeV (median), DD-channel m_phi ~ 200 MeV. The \u03c3/m drop from 0.72 \u2192 0.065 is the natural consequence of switching m_phi from SIDM-channel to DD-channel."
+  }
+}

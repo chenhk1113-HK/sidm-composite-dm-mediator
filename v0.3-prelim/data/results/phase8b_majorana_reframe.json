@@ -1,0 +1,33 @@
+{
+  "phase": "8b",
+  "verdict": "PROCEED (Pathway 7B) with structural caveats",
+  "pathway_7A_delima_exact": {
+    "g_D_reframed": 0.0227,
+    "eps_reframed": 1.3e-06,
+    "sigma_SI_Dirac_cm2": 2.133516353717317e-34,
+    "sigma_SI_Majorana_cm2": 1.8579515948228245e-49,
+    "lz_elastic_limit_cm2": 1e-46,
+    "lz_elastic_margin": 538.2271544568204,
+    "sigma_inel_normalized_cm2": 7e-47,
+    "sigma_inel_target_cm2": 7e-47,
+    "lz_inel_match_ratio": 1.0,
+    "sidm_sigma_m_100": 1.1058883136193256e-06
+  },
+  "pathway_7B_sidm_gD": {
+    "g_D_reframed": 0.7,
+    "eps_reframed": 4.2157142857142865e-08,
+    "sigma_SI_Dirac_cm2": 2.133516353717317e-34,
+    "sigma_SI_Majorana_cm2": 1.8579515948228245e-49,
+    "lz_elastic_limit_cm2": 1e-46,
+    "lz_elastic_margin": 538.2271544568204,
+    "sigma_inel_normalized_cm2": 7e-47,
+    "sigma_inel_target_cm2": 7e-47,
+    "lz_inel_match_ratio": 1.0,
+    "sidm_sigma_m_100": 1.0
+  },
+  "caveats": [
+    "Freeze-out consistency at g_D=0.7 unresolved (Phase 8c)",
+    "f_H must be re-fit under new prior",
+    "Multi-portal SIDM (T90.45) still required for Cloud-9"
+  ]
+}

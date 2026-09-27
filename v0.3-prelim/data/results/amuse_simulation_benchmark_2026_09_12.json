@@ -1,0 +1,27 @@
+{
+  "benchmark_id": "amuse_bullet_dwarf_validation_2026_09_12",
+  "date": "2026-09-12",
+  "n_particles_per_halo": 1024,
+  "halo_mass_msun": 1000000000.0,
+  "tests": {
+    "test1_static_halo_surv_frac": 1.0,
+    "test2_collisionless_collision_surv_frac_A": 1.0,
+    "test2_collisionless_collision_surv_frac_B": 1.0,
+    "test3_sidm_0p1_surv_frac_A": 0.999,
+    "test3_sidm_0p1_surv_frac_B": 0.994
+  },
+  "verdict": {
+    "test1_pass": true,
+    "test2_pass": true,
+    "test3_pass": true,
+    "overall_pass": true
+  },
+  "honest_caveats": [
+    "Tests at TRIVIAL level: t < 500 Myr, low sigma/m - original sweep showed disruption at t > 320 Myr",
+    "Benchmarks run with N=1024 particles per halo (~100x below publication-grade)",
+    "SIDM kernel is uniform Gaussian perturbation, not Rutherford-like pairwise",
+    "Static halo test depends on Ph4 integrator stability over 1 Gyr",
+    "These benchmarks PASS but don't yet validate in the disrupting regime where sigma/m_peak = 3.07 was derived"
+  ],
+  "interpretation": "All 3 benchmarks PASS at the trivial level. The simulation: (1) has a stable integrator, (2) preserves collisionless halos through fly-through encounters, (3) gives the right monotonic SIDM vs collisionless ordering. These are NECESSARY conditions for validity but not SUFFICIENT. The original sweep (which found sigma/m_peak = 3.07 cm^2/g) operates in the regime where halos ARE disrupted at t > 320 Myr; that regime needs separate validation against analytic tidal-stripping predictions or against SASHIMI published results."
+}

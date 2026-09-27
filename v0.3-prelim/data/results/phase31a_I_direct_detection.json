@@ -1,0 +1,18 @@
+{
+  "test": "Phase31a_I_direct_detection",
+  "median_params": {
+    "m_chi_GeV": 6.091783883158755,
+    "m_phi_MeV": 8.399862339152445,
+    "m_phi_GeV": 0.008399862339152445
+  },
+  "lz_limit_cm2": 1e-45,
+  "sigma_DM_n_scan": {
+    "epsilon_1e-07": 5.150560371159266e-34,
+    "epsilon_1e-06": 5.150560371159267e-32,
+    "epsilon_1e-05": 5.150560371159267e-30,
+    "epsilon_1e-04": 5.150560371159267e-28,
+    "epsilon_1e-03": 5.1505603711592664e-26,
+    "epsilon_1e-02": 5.1505603711592664e-24
+  },
+  "verdict": "EXCLUDED_BY_DD"
+}

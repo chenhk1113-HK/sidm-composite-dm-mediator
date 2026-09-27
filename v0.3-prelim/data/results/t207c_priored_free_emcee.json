@@ -1,0 +1,90 @@
+{
+  "metadata": {
+    "description": "free_f_H emcee with v18.38 prior (f_H_cc >= 0.05)",
+    "n_walkers": 32,
+    "n_steps": 50000,
+    "n_burn": 2000,
+    "elapsed_s": 4887.2048263549805,
+    "init_source": "C:\\Users\\lamkuenai\\projects\\sidm-composite-dm-mediator\\v0.3-prelim\\data\\results\\t207_priored_free_de.json",
+    "convergence_ratio_fix": "v18.38 fix: stored value 54.4443 was n_steps/tau_max (BUG: missing factor of 50). Correct value is n_steps/(50*tau_max) = 1.0889. converged_50tau = True."
+  },
+  "mode": "free_f_H_priored",
+  "posterior_medians": {
+    "sigma_0": 0.17045511783121847,
+    "sigma_peak_HH_1": 625.4265367274897,
+    "sigma_0_HL": 0.005646906883871575,
+    "sigma_peak_HL": 0.522601932831181,
+    "v_HL": 105.2385618011314,
+    "sigma_0_LL": 0.0008047099191008148,
+    "a_slope": 0.9601922759794541,
+    "f_H_cf": 0.8273805112705062,
+    "f_H_cc": 0.060431280100529915
+  },
+  "posterior_stds": {
+    "sigma_0": 0.16056345025437335,
+    "sigma_peak_HH_1": 250.08205717021218,
+    "sigma_0_HL": 0.006335115719106963,
+    "sigma_peak_HL": 0.3631992416202612,
+    "v_HL": 38.60286767503894,
+    "sigma_0_LL": 0.0008592081678567535,
+    "a_slope": 0.19629569491454563,
+    "f_H_cf": 0.1492205110510325,
+    "f_H_cc": 0.011875572413052975
+  },
+  "posterior_q16": {
+    "sigma_0": 0.04381129629572734,
+    "sigma_peak_HH_1": 374.2095127358717,
+    "sigma_0_HL": 0.0014835912664851823,
+    "sigma_peak_HL": 0.261709210751121,
+    "v_HL": 66.96794821854002,
+    "sigma_0_LL": 0.00021731668533955798,
+    "a_slope": 0.750337199725147,
+    "f_H_cf": 0.6511417023160013,
+    "f_H_cc": 0.05270297922487631
+  },
+  "posterior_q84": {
+    "sigma_0": 0.36493819680447404,
+    "sigma_peak_HH_1": 874.3736270762961,
+    "sigma_0_HL": 0.014153822704699108,
+    "sigma_peak_HL": 0.9881076939916434,
+    "v_HL": 144.1736835686179,
+    "sigma_0_LL": 0.0019357330210530651,
+    "a_slope": 1.1429285895542383,
+    "f_H_cf": 0.9495827244180663,
+    "f_H_cc": 0.07645412405098226
+  },
+  "per_channel_log_L_at_median": {
+    "UFD v=3": 0.0,
+    "UFD v=5": 0.0,
+    "UFD v=7": 0.0,
+    "UFD v=10": 0.0,
+    "dSph v=15": 0.0,
+    "Cloud-9 v=28": 0.0,
+    "SPARC v=100": -2.0253849146749574,
+    "Cluster v=500": -0.34159425510421376
+  },
+  "acceptance": 0.21848812499999998,
+  "autocorr_times": [
+    550.9195778362304,
+    526.3505261558726,
+    562.8109807541175,
+    705.7863659444549,
+    918.3697065006311,
+    510.86287659237837,
+    458.3799553028042,
+    556.1704525324221,
+    646.7215633722149
+  ],
+  "tau_max": 918.3697065006311,
+  "convergence_ratio_n_steps_over_50tau": 1.0888860912131064,
+  "converged_50tau": true,
+  "log_L_at_median": -2.0253849146749574,
+  "log_L_total_at_median": -2.3669791697791713,
+  "comparison_to_v18_37": {
+    "v18_37_emcee": "t207c_extended_free_emcee.json",
+    "v18_37_f_H_cc_median": 0.00501,
+    "v18_37_convergence_ratio": 0.58,
+    "v18_37_log_L_at_median": -0.113,
+    "note": "v18.37 hit f_H_cc -> 0 boundary; v18.38 should sit at f_H_cc ~ 0.05-0.20"
+  }
+}

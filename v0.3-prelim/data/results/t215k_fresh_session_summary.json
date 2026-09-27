@@ -1,0 +1,15 @@
+{
+  "test": "5x fresh-session runs of t215k.jl with Random.seed!(42)",
+  "t_max_pc_per_kms": [38.70, 20.25, 46.88, 4.03, 48.34],
+  "t_max_myr": [37.84, 19.80, 45.84, 3.94, 47.26],
+  "snapshots_written": [7, 4, 8, 1, 8],
+  "mean_myr": 30.94,
+  "std_myr": 17.99,
+  "min_myr": 3.94,
+  "max_myr": 47.26,
+  "range_myr": 43.32,
+  "median_myr": 37.84,
+  "pc_per_kms_to_myr": 0.97779,
+  "conclusion": "Genuine non-determinism: spread of 3.9-47.3 Myr across 5 fresh-session runs with identical inputs. Reviewer bimodal hypothesis REFUTED.",
+  "timestamp": "2026-09-26"
+}

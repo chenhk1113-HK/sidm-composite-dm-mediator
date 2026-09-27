@@ -1,0 +1,37 @@
+{
+  "description": "T213 \u2014 Combined test: T163 KK-tower sigma/m(V_max) at Cloud-9 host halo + Silverman+ gravothermal threshold",
+  "source_papers": [
+    "T163 (KK tower best fit, RMSE=1.408, alpha_D=0.3, m_0=0.3 GeV, r=1.5, n_modes=2)",
+    "T212 (Silverman+ 2026 arXiv:2606.02566 gravothermal threshold sigma/m = 1.0 cm^2/g at V_max)",
+    "T208 V_max fix (V_max at r_max = 2.1626*r_s, gives V_max=31.12 km/s at Cloud-9 host)"
+  ],
+  "T163_best_fit": {
+    "alpha_D": 0.3,
+    "m_0_GeV": 0.3,
+    "r": 1.5,
+    "n_modes": 2,
+    "RMSE": 1.408
+  },
+  "cloud9_host_halo": {
+    "M_halo_M_sun": 5000000000.0,
+    "c": 12.0,
+    "v_max_kms": 31.12,
+    "r_vir_pc": 35092.9,
+    "r_s_pc": 2924.4,
+    "rho_s_M_sun_pc3": 0.00969
+  },
+  "silverman_threshold_cm2_g": 1.0,
+  "sigma_m_at_reference_velocities": {
+    "5.00": 0.17415977460521145,
+    "10.00": 0.17415811181952723,
+    "15.00": 0.17415534058312607,
+    "28.00": 0.17414294872981959,
+    "31.12": 0.17413886016430768,
+    "50.00": 0.17410492001395728,
+    "100.00": 0.17393891202932332,
+    "200.00": 0.17327814176168638,
+    "500.00": 0.1687942361718848
+  },
+  "verdict": "FAIL: T163 KK tower gives sigma/m(V_max) = 0.1741 cm^2/g, which is 0.174x BELOW the Silverman+ threshold of 1.0 cm^2/g. KK tower alone cannot drive gravothermal at Cloud-9 host halo.",
+  "sigma_m_at_cloud9_v_max_cm2_g": 0.17413886016430768
+}

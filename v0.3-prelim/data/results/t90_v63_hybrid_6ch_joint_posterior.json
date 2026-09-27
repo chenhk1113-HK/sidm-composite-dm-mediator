@@ -1,0 +1,86 @@
+{
+  "framework": "T90.63 hybrid 10D (multi-portal + resonance + Sommerfeld + LZ + KSFR/PCAC + LRD/Jiang2026)",
+  "log_Z": -9.018231830618873,
+  "log_Z_err": 0.09419363758206631,
+  "wall_seconds": 316.03043699264526,
+  "nlive": 500,
+  "dlogz_target": 0.1,
+  "ndim": 10,
+  "n_samples": 5042,
+  "posterior_medians": {
+    "log_m_chi_GeV": {
+      "median": 2.032010507050532,
+      "p16": 1.0258073874354403,
+      "p84": 2.7453645480510263
+    },
+    "log_m_phi_A_MeV": {
+      "median": 2.9545353030939543,
+      "p16": 2.260531979661142,
+      "p84": 3.647322054625557
+    },
+    "g_chi_A": {
+      "median": 0.8604348581889475,
+      "p16": 0.27281573252802704,
+      "p84": 1.6295182944509892
+    },
+    "log_m_phi_B_MeV": {
+      "median": 1.405214478534125,
+      "p16": 0.4549270690400732,
+      "p84": 1.816195104311009
+    },
+    "g_chi_B": {
+      "median": 0.14711524879579763,
+      "p16": 0.03980978392858465,
+      "p84": 0.3403344129427608
+    },
+    "log_E_R_eV": {
+      "median": 2.67870039026367,
+      "p16": 1.154070835818219,
+      "p84": 4.2194886291683655
+    },
+    "log_Gamma_R_eV": {
+      "median": -0.06836857218102355,
+      "p16": -2.054704029181001,
+      "p84": 1.8947752914994538
+    },
+    "log_sigma_0": {
+      "median": -2.8276647151988112,
+      "p16": -4.306584071676899,
+      "p84": -1.145982076002358
+    },
+    "log_alpha_Y": {
+      "median": -2.8547339674929777,
+      "p16": -4.28683893438613,
+      "p84": -1.1868737627731325
+    },
+    "log_mu_x": {
+      "median": -9.350723885587856,
+      "p16": -13.180715668244996,
+      "p84": -5.653949630381788
+    }
+  },
+  "posterior_median_predictions": {
+    "sigma_m_Cloud9_cm2_per_g": 1.0434650104579903,
+    "sigma_m_Galaxy_cm2_per_g": 0.5251254076980786,
+    "sigma_m_Bullet_cm2_per_g": 0.0026431603778885727,
+    "sigma_m_at_v30_cm2_per_g": 1.0283464262148434,
+    "log10_sigma_m_at_v30": 0.012139443111504517,
+    "mu_x_at_median": 4.459396764476219e-10,
+    "m_phi_A_MeV_at_median": 900.6069686547988,
+    "in_KSFR_box": true,
+    "LRD_log10_n_at_z5": -4.079181246047625,
+    "LRD_log10_n_at_z7": -4.204119982655925,
+    "LRD_log10_n_at_z8.5": -4.278753600952829,
+    "LRD_loglike_at_median": -2.5589025362060136
+  },
+  "channel_satisfaction_at_median": {
+    "Cloud9": false,
+    "Galaxy": true,
+    "Bullet": true,
+    "n_satisfied_3ch": 2
+  },
+  "channel_likelihood_match": "T90.57 (C9 + Gal + Bul + LZ + KSFR) + LRD (Channel 16, Jiang et al. 2026 ApJL 996 L19, arXiv:2503.23710)",
+  "lrd_provenance": "Jiang et al. 2026 ApJL 996 L19 (arXiv:2503.23710) -- SIDM gravothermal core collapse -> LRD seeds",
+  "ksfr_enabled": false,
+  "lrd_enabled": true
+}

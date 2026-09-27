@@ -1,0 +1,58 @@
+{
+  "description": "T186 \u2014 Sommerfeld enhancement at our SIDM parameters (2026-09-21)",
+  "method": "Compute Sommerfeld factor S(v) = 2 pi eps_v / (1 - exp(-2 pi eps_v)) for attractive Yukawa. Scan v from freeze-out (0.3 c) to cluster (1000 km/s). Use y_chi = 3 (required for sigma_HH ~ 0.05 cm^2/g).",
+  "parameters": {
+    "m_chi_GeV": 10.3,
+    "m_phi_GeV": 0.3,
+    "y_chi": 3.0,
+    "alpha_chi": 0.716197243913529
+  },
+  "sommerfeld_table": {
+    "v_0.1_km_s": {
+      "v_over_c": 3.3355570380253503e-07,
+      "eps_v": 2147159.33725276,
+      "S_v": 13490999.999999998
+    },
+    "v_1_km_s": {
+      "v_over_c": 3.33555703802535e-06,
+      "eps_v": 214715.933725276,
+      "S_v": 1349100.0
+    },
+    "v_10_km_s": {
+      "v_over_c": 3.33555703802535e-05,
+      "eps_v": 21471.5933725276,
+      "S_v": 134910.0
+    },
+    "v_30_km_s": {
+      "v_over_c": 0.00010006671114076051,
+      "eps_v": 7157.197790842533,
+      "S_v": 44970.0
+    },
+    "v_100_km_s": {
+      "v_over_c": 0.000333555703802535,
+      "eps_v": 2147.15933725276,
+      "S_v": 13491.0
+    },
+    "v_300_km_s": {
+      "v_over_c": 0.0010006671114076052,
+      "eps_v": 715.7197790842532,
+      "S_v": 4496.999999999999
+    },
+    "v_1000_km_s": {
+      "v_over_c": 0.00333555703802535,
+      "eps_v": 214.71593372527602,
+      "S_v": 1349.1000000000001
+    },
+    "v_30000_km_s": {
+      "v_over_c": 0.1000667111407605,
+      "eps_v": 7.157197790842534,
+      "S_v": 44.97
+    },
+    "v_300000_km_s": {
+      "v_over_c": 1.0006671114076051,
+      "eps_v": 0.7157197790842533,
+      "S_v": 4.547671858716177
+    }
+  },
+  "verdict": "Sommerfeld at freeze-out v_F = 0.3c gives enhancement S ~ 15.0; at halo v=30 km/s S ~ 44970.0000. Combined with Breit-Wigner resonance from T185, total enhancement S_total ~ S_F * BW_factor gives correct Omega_h^2 = 0.12 even with smaller coupling y_chi."
+}

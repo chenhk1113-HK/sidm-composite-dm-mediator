@@ -1,0 +1,66 @@
+{
+  "test": "Phase9b_multi_component_mass_segregation_vdisp",
+  "direction": "Yang+ 2025 mass segregation at v_disp (corrected from v_escape)",
+  "parameters": {
+    "m_H_GeV": 45.0,
+    "m_L_GeV": 15.0,
+    "mass_ratio": 3,
+    "g_H": 0.7,
+    "g_L": 0.7,
+    "m_phi_MeV": 100.0
+  },
+  "halo_results": [
+    {
+      "halo": "Dwarf/LSB (YOUNG)",
+      "M_halo_Msun": 1000000000.0,
+      "c": 15.0,
+      "age_Gyr": 5.0,
+      "v_disp_kms": 30.0,
+      "r_vir_kpc": 16.25929978048345,
+      "r_half_kpc": 0.325185995609669,
+      "observed_sigma_m": 30.0,
+      "sigma_H_at_v_disp": 0.9380556935522522,
+      "sigma_L_at_v_disp": 0.31296703237759405,
+      "f_H_at_r_half_initial": 0.75,
+      "f_H_at_r_half_evolved": 0.9999999999999837,
+      "sigma_m_no_segregation": 0.7817835282585875,
+      "sigma_m_evolved": 0.9380556935522419,
+      "ratio_data_to_evolved": 31.98104356298462
+    },
+    {
+      "halo": "MW-like (OLD)",
+      "M_halo_Msun": 1000000000000.0,
+      "c": 12.0,
+      "age_Gyr": 10.0,
+      "v_disp_kms": 100.0,
+      "r_vir_kpc": 162.59299780483448,
+      "r_half_kpc": 3.25185995609669,
+      "observed_sigma_m": 1.0,
+      "sigma_H_at_v_disp": 0.9285365461219783,
+      "sigma_L_at_v_disp": 0.3126109445401445,
+      "f_H_at_r_half_initial": 0.75,
+      "f_H_at_r_half_evolved": 1.0,
+      "sigma_m_no_segregation": 0.77455514572652,
+      "sigma_m_evolved": 0.9285365461219783,
+      "ratio_data_to_evolved": 1.0769635338280308
+    },
+    {
+      "halo": "Cluster (OLD)",
+      "M_halo_Msun": 100000000000000.0,
+      "c": 6.0,
+      "age_Gyr": 10.0,
+      "v_disp_kms": 3000.0,
+      "r_vir_kpc": 754.6898430345467,
+      "r_half_kpc": 15.093796860690935,
+      "observed_sigma_m": 0.5,
+      "sigma_H_at_v_disp": 0.05307309397661837,
+      "sigma_L_at_v_disp": 0.1403990833384229,
+      "f_H_at_r_half_initial": 0.75,
+      "f_H_at_r_half_evolved": 1.0,
+      "sigma_m_no_segregation": 0.0749045913170695,
+      "sigma_m_evolved": 0.05307309397661837,
+      "ratio_data_to_evolved": 9.420969507077873
+    }
+  ],
+  "wall_seconds": 0.040496826171875
+}

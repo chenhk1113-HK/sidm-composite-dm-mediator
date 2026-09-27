@@ -1,0 +1,106 @@
+{
+  "phase": 3,
+  "shared_nuisances": {
+    "eta_baryon": {
+      "width_dex": 0.15,
+      "applies_to": [
+        "ch02_dsph",
+        "ch03_ufd"
+      ],
+      "rationale": "Baryonic feedback can mimic SIDM cores (Pontzen & Governato 2012)"
+    },
+    "eta_feedback": {
+      "width_dex": 0.25,
+      "applies_to": [
+        "ch08_sparc"
+      ],
+      "rationale": "SPARC diverse morphologies have larger feedback effect"
+    }
+  },
+  "rationale": "Baryonic feedback masquerade (Pontzen+ 2012, Read+ 2016, Amorisco+ 2023)",
+  "channels_affected": [
+    "ch02_dsph",
+    "ch03_ufd",
+    "ch08_sparc"
+  ],
+  "test_points": [
+    {
+      "label": "v0.3-prelim MAP (T39)",
+      "sigma_m_0": 0.72443596007499,
+      "a": 1.31,
+      "ll_independent": -279557.79755609913,
+      "ll_marginalized": -279557.8002977906,
+      "delta_nats": -0.0027416914817877114
+    },
+    {
+      "label": "Ch9 anchor (sigma/m_0=0.78, a=0)",
+      "sigma_m_0": 0.78,
+      "a": 0.0,
+      "ll_independent": -248705.92388791393,
+      "ll_marginalized": -248705.90673997425,
+      "delta_nats": 0.017147939681308344
+    },
+    {
+      "label": "Ch10 anchor (sigma/m_0=0.7, a=0)",
+      "sigma_m_0": 0.7,
+      "a": 0.0,
+      "ll_independent": -241934.86370433698,
+      "ll_marginalized": -241934.84734188786,
+      "delta_nats": 0.016362449125153944
+    },
+    {
+      "label": "MAP 6D (sigma/m_0=1.57, a=0.94)",
+      "sigma_m_0": 1.57,
+      "a": 0.94,
+      "ll_independent": -285703.5134621059,
+      "ll_marginalized": -285703.51641145046,
+      "delta_nats": -0.0029493445763364434
+    },
+    {
+      "label": "dSph peak (sigma/m_0=0.05, a=1)",
+      "sigma_m_0": 0.05,
+      "a": 1.0,
+      "ll_independent": -228331.3659976598,
+      "ll_marginalized": -228331.30490145207,
+      "delta_nats": 0.061096207733498886
+    },
+    {
+      "label": "UFD peak (sigma/m_0=8.3, a=0)",
+      "sigma_m_0": 8.3,
+      "a": 0.0,
+      "ll_independent": -365107.7007447641,
+      "ll_marginalized": -365107.6630313109,
+      "delta_nats": 0.03771345323184505
+    },
+    {
+      "label": "sigma/m_0=0.1, a=0.5",
+      "sigma_m_0": 0.1,
+      "a": 0.5,
+      "ll_independent": -240335.1795257476,
+      "ll_marginalized": -240335.12147557017,
+      "delta_nats": 0.05805017743841745
+    },
+    {
+      "label": "sigma/m_0=5.0, a=0.5",
+      "sigma_m_0": 5.0,
+      "a": 0.5,
+      "ll_independent": -326498.6874288634,
+      "ll_marginalized": -326498.6429841625,
+      "delta_nats": 0.04444470093585551
+    }
+  ],
+  "t39_kill_criterion": {
+    "current_log_z": -2.94,
+    "kill_threshold": -13.0,
+    "marginalization_penalty_nats": 0.2291238927282393
+  },
+  "honest_framing": [
+    "Reviewer 1 said 'baryonic feedback is the first thing to fix' -- this Phase 3",
+    "  addresses it with a 2-parameter nuisance, per R2's '1-2 weeks' minimal version.",
+    "Real baryonic feedback is multi-parameter (stellar winds, SNe, gas fraction, ...).",
+    "This is a SURROGATE, not a full hydrodynamic model.",
+    "0.15-0.30 dex widths from typical feedback-vs-SIDM scatter (Amorisco+ 2023).",
+    "Does NOT resolve the deeper 'are SIDM cores distinguishable from feedback cores'",
+    "  question -- only allows likelihood to absorb a systematic shift."
+  ]
+}

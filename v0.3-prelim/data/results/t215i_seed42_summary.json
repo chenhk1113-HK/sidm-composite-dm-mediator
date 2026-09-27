@@ -1,0 +1,11 @@
+{
+  "status": "RUN_INCOMPLETE_DT_COLLAPSE",
+  "n_particles": 3000,
+  "t_end_Gyr": 0.07,
+  "t_max_reached_pcs_per_kms": 46.61,
+  "t_max_reached_myr": 45.59,
+  "snapshots_written": 9,
+  "rng_seed_task_local": 42,
+  "note": "Died at 46.6 Myr with seed 42, dt collapsed to 9.9e-4 pc*s/km. Same seed as t215h (8.3 Myr) — demonstrates non-determinism even with seeded RNG.",
+  "timestamp": "2026-09-26"
+}

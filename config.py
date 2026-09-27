@@ -1,3 +1,24 @@
+# =============================================================================
+# THIS IS THE CANONICAL (LIVE) CONFIG FILE (2026-09-12).
+#
+# All edits to config constants should be made HERE. The Python import system
+# uses sys.path priority, and this file (at the project root) is found first
+# by every import.
+#
+# NOTE: There is a SECONDARY SNAPSHOT of this file at:
+#     v0.3-prelim/code/config.py
+# It exists only because some scripts in v0.3-prelim/code explicitly do
+#     sys.path.insert(0, ".../v0.3-prelim/code")
+#     import config
+# and would break if the snapshot were deleted. The snapshot is frozen —
+# any edits you make here should also be propagated there, but ONLY as a
+# tracked, intentional change.
+#
+# See:
+#     - v0.3-prelim/docs/CONFIG_DUPLICATION_2026_09_12.md (design note)
+#     - tests/test_config_snapshot_consistency.py (consistency check)
+# =============================================================================
+
 """
 Central configuration for sidm-composite-dm-mediator.
 
@@ -124,8 +145,13 @@ BULLET_LOG_SM_LIMIT = -0.30103    # log10(0.5) = upper limit at 95% CL
 BULLET_TAIL_WIDTH = 0.30          # one-sided Gaussian tail width
 
 # Gravitational lensing substructure (Yang+ 2026 PRL — Channel 6)
+# 2026-09-12: REVISED width from 0.3 to 0.7 dex (per ch04_width_resolution_2026_09_12.json).
+# Rationale: 0.3 dex was 3.3x tighter than other channels (which use 1.0 dex), causing
+# ch04_lens_subhalo to dominate the joint fit and produce +31.8 nat catastrophic LOO-CV
+# overfit penalty. 0.7 dex reduces this to +4.6 nats (-86%) while keeping regression
+# in other 8 channels to +0.047 nats (under 0.05 nat threshold).
 LENS_SIGMA_M_LOG_PEAK = 1.7       # log10(cm^2/g) — middle of 30-100 range
-LENS_SIGMA_M_LOG_WIDTH = 0.3      # dex — covers the 30-100 range
+LENS_SIGMA_M_LOG_WIDTH = 0.7      # dex — revised 2026-09-12 (was 0.3)
 
 # MW satellite upper limit (Hayashi+ 2025 — Channel 7)
 DSPH_SIGMA_M_UPPER_LIMIT = 0.2    # cm^2/g — Hayashi+ 2025 95% upper limit
@@ -192,6 +218,21 @@ EUCLID_Q1_SUBHALO_FORECAST_LABEL = "FORECAST_via_LensPop"
 # NGC 1052-DF2/DF4 + FCC 224/240 dark-matter-free UDG (Channel 11, T70)
 DM_FREE_UDG_RATE_PEAK = 0.0       # log-likelihood peak (centered at MAP)
 DM_FREE_UDG_RATE_WIDTH = 2.0      # dex — 2 order of magnitude Gaussian width
+
+# LSB-6 gas-rich DM-dominated UDG (arXiv:2609.10700 — Channel 13, NEW 2026-09-12)
+# Channel 13 — counterpart to Channel 11. Tests BOTH UDG extremes per LRD2.docx
+# review recommendation. Single-object constraint, not a population rate.
+#
+# CORRECTED 2026-09-12 (per full paper retrieval, arXiv:2609.10700 Section 6.4):
+#   σ/m_eff at v_LSB6 ~ 20 km/s ~ 0.7 cm²/g (NOT 14.3 cm²/g — that was σv/m).
+#   Reference: Bouchè+ 2026, lines 142-143: "log10 v = 1.30 km/s,
+#   ⟨σv⟩/m = 14.31 cm² km/g/s; Rescaling yields σ/m ≈ 0.7 cm²/g,
+#   in excellent agreement with Almeida (2025) for UFDs in core-formation."
+#   LSB-6 is in the core-FORMATION phase, providing evidence for σ/m ~ 0.7 cm²/g
+#   at v ~ 20 km/s.
+DM_DOM_UDG_SIGMA_M_PEAK = 0.7    # cm²/g — sigma/m at v_LSB6 ~20 km/s (rescaled)
+DM_DOM_UDG_SIGMA_M_WIDTH = 0.5    # dex — Bouchè+ 2026 estimate ±0.13 dex rescaled uncertainty
+LSB6_VMAX_KMS = 20.0              # SIDM characteristic DM velocity (log10 v = 1.30 km/s)
 
 # Cosmic-web radio synchrotron 40x excess (Channel 12, T70)
 COSMIC_WEB_RADIO_LOG_EPSILON_UPPER = -11.0   # log10(eps_upper) where over-prediction begins
@@ -306,6 +347,7 @@ __all__ = [
     "EUCLID_Q1_SUBHALO_SIGMA_M_UPPER", "EUCLID_Q1_SUBHALO_TAIL_WIDTH",
     "EUCLID_Q1_SUBHALO_FORECAST_LABEL",
     "DM_FREE_UDG_RATE_PEAK", "DM_FREE_UDG_RATE_WIDTH",
+    "DM_DOM_UDG_SIGMA_M_PEAK", "DM_DOM_UDG_SIGMA_M_WIDTH", "LSB6_VMAX_KMS",
     "COSMIC_WEB_RADIO_LOG_EPSILON_UPPER",
     "TREMAINE_GUNN_MASS_BOUND_EV",
     "ROGERS_PEIRIS_LYMAN_ALPHA_BOUND_EV",

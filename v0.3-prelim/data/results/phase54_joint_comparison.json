@@ -1,0 +1,24 @@
+{
+  "test": "Phase54_joint_channel_comparison",
+  "model_A_constant_sigmam": {
+    "best_sigma_const_cm2_per_g": 0.07027775685525438,
+    "logL_3channel": -17.65897744772491,
+    "logL_2channel": -7.791107264065005,
+    "n_params": 1
+  },
+  "model_B_multiresonance": {
+    "logL_3channel": -11.577625403084578,
+    "logL_2channel": -2.2434747265062356,
+    "sigma_m_v15": 4.998807528111916,
+    "sigma_m_v28": 100.07387966519718,
+    "sigma_m_v100": 0.06919526509752101,
+    "n_params": 15
+  },
+  "headline": {
+    "logL_delta_3channel": 6.081352044640333,
+    "logL_delta_2channel": 5.547632537558769,
+    "bic_delta_3channel": 3.217867952072872,
+    "bic_delta_2channel": -1.3912045472783028
+  },
+  "interpretation": "Per Paper1.docx reviewer Issue #5: does the multi-resonance model win on the joint SPARC + Cloud-9 likelihood against a constant sigma/m baseline? If yes, the multi-resonance is a clean positive on joint channels; if no, the claim should be softened."
+}

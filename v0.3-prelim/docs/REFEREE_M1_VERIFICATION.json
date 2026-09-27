@@ -1,0 +1,47 @@
+{
+  "referee_M1_verdict": "VALID \u2014 and deeper than first identified",
+  "kinetic_energy_check": {
+    "Cloud-9 (v=28)": {
+      "KE_CM_eV": 23.3,
+      "Delta_m_over_KE": 429000.0,
+      "verdict": "FORBIDDEN"
+    },
+    "dSph (v=15)": {
+      "KE_CM_eV": 6.7,
+      "Delta_m_over_KE": 1490000.0,
+      "verdict": "FORBIDDEN"
+    },
+    "UFD (v=7)": {
+      "KE_CM_eV": 1.46,
+      "Delta_m_over_KE": 6860000.0,
+      "verdict": "FORBIDDEN"
+    },
+    "UFD (v=3)": {
+      "KE_CM_eV": 0.27,
+      "Delta_m_over_KE": 37300000.0,
+      "verdict": "FORBIDDEN"
+    },
+    "SPARC (v=100)": {
+      "KE_CM_eV": 297,
+      "Delta_m_over_KE": 33600.0,
+      "verdict": "FORBIDDEN"
+    },
+    "Cluster (v=500)": {
+      "KE_CM_eV": 7440,
+      "Delta_m_over_KE": 1340.0,
+      "verdict": "FORBIDDEN"
+    }
+  },
+  "well_depth_check": {
+    "our_claim_V_max_formula": "alpha_D * m_chi = 0.0015 * 10.7 GeV = 16.05 MeV (WRONG)",
+    "referee_correction_V_max": "alpha_D * m_phi = 0.0015 * 30 MeV = 0.045 MeV (closer but still wrong)",
+    "zhang2016_actual_V_max": "alpha_D^2 * m_chi = 0.0015^2 * 10.7 GeV = 0.0241 MeV (Zhang's actual formula)",
+    "zhang2016_allowed_Delta_m_MeV": 0.0241,
+    "our_Delta_m_MeV": 10.0,
+    "ratio_our_Delta_m_over_zhang_allowed": 415,
+    "verdict": "Our Delta_m = 10 MeV is 415x beyond Zhang 2016's allowed regime"
+  },
+  "key_finding": "Zhang 2016's actual claim: self-interaction preserved when Delta_m < alpha_D^2 * m_chi = 24 keV (for our params). Our Delta_m = 10 MeV is 415x beyond. Even referee's correction is wrong about the formula but right about the conclusion.",
+  "conclusion": "The Hidden U(1) + pseudo-Dirac UV completion with Delta_m = 10 MeV CANNOT preserve self-interaction at galactic velocities. Three options: (a) drop Delta_m to keV scale (but then DD evasion breaks), (b) use different UV mechanism, (c) retire UV claim.",
+  "additional_finding": "Zhang 2016's actual paper presents a non-perturbative analysis in the regime Delta_m ~ alpha_D^2 * m_chi. The regime Delta_m >> alpha_D^2 * m_chi is exactly where Zhang says 'up-scattering is forbidden everywhere and the dark matter self-interaction potential becomes genuinely loop suppressed.'"
+}

@@ -2,11 +2,346 @@
 
 > **For:** Anyone who has 60 seconds and wants to know what this project
 > is, what it claims, and what the current best numbers are.
-> Updated with each version-bump round. Last refresh: 2026-09-04 (T88.E).
+> Updated with each version-bump round. Last refresh: 2026-09-26 (v18.43).
 
 ---
 
-## Standing: v0.4-prelim+T88E (Tier-1 milestone)
+## Standing: v0.4-prelim+v18.43 (2026-09-27, T215 closed: 10-round review + Tier 1+2 pilot)
+
+**v18.43 final (2026-09-27)** — T215 investigation closed after **10 review rounds** + Tier 1+2 future-work pilot. **Methods contribution only** — no quantitative t_core measurement.
+
+**What we did (T215 series):**
+- Ran KiSS-SIDM DSMC simulation of Cloud-9 host halo at σ/m = 70 cm²/g
+- 15 fresh-session runs across 3 batches (T215k, T215p, T215r)
+- Identified 3 numerical bugs in KiSS-SIDM v0.0.1 + 1 parameter tuning (8 code changes total)
+- Discovered environment-dependent non-determinism: same-session runs degrade, ambient memory pressure drives variance
+- Found reproducibility recipe: `ulimit -v 8000000` reduces endpoint-timing std by 28× (from 21.13 Myr to 0.74 Myr)
+
+**Final §10.5b paper section (shipped):**
+- Title: "KiSS-SIDM numerics: bug fixes and non-deterministic endpoint timing (T215 series, v18.43)"
+- 7 paragraphs, no overclaim, N=3 disclosures explicit
+- "Methods contribution only" framing — does NOT provide quantitative t_core
+
+**Tier 1+2 pilot (Consider.docx future work, 2026-09-27):**
+- 5 new configs tested to extend t_core reach beyond 70 Myr
+- **All Tier 2 levers FAILED**: higher N → earlier dt collapse (opposite of reviewer's hypothesis)
+- T215p config (N=3000, min_particles=64, t_end=70 Myr) remains the proven optimum
+- Reaching Balberg t_core = 176 Myr requires Tier 3 **code modifications** (subcycled time integration, freeze refinement after density threshold), not parameter tuning — deferred to future work
+
+**Bug classes found in KiSS-SIDM v0.0.1 (3 numerical bugs + 1 parameter tuning):**
+1. FP overflow in `sqrt(x)` — silent death at ~26 Myr (collision.jl) or ~8 Myr (1d_sphere.jl); 4× `sqrt(max(0, x))` guards
+2. Majorant assertion failures — `@assert majorant < N` triggers premature termination; 3 assertion disables (production workaround; diagnostics should be logged)
+3. ncom > majorant causes loop exit — `majorant = min(majorant, ncom)` cap
+4. Parameter tuning: `adaptive_grid_min_particles = 64` (default 32) as runtime workaround
+
+**Combined 15-run dataset (3 batches):**
+- T215k: mean 30.94 Myr, std 17.99, range 3.94-47.26
+- T215p: mean 54.19 Myr, std 17.05, range 30.24-69.99
+- T215r: mean 41.85 Myr, std 21.13, range 11.78-70.00
+- Combined: mean 42.33 Myr, std 18.71, range 3.94-70.00
+
+**Qualitative signal (10/10 analyzed runs):**
+- Interior density increase at r=444 pc: 1.76-2.99× (consistent across all runs analyzed)
+- Outer density decrease at r=r_s: 0.34-0.63× (consistent across all runs analyzed)
+- Consistent with onset of gravothermal evolution (predicted direction of Balberg+ 2002)
+- **NOT a measured core-collapse time** — runs stop at 30-70 Myr, far short of Balberg t_core ≈ 176 Myr
+
+**Mechanism investigation:**
+- REFUTED: unseeded RNG, threading, hash-table order, module mutable state
+- CONSISTENT WITH: OS-level ambient memory pressure (28× std reduction under `ulimit -v 8000000`)
+- NOT TRACED: microscopic path from memory pressure → code path selection
+
+**Canonical reproducibility recipe (for any future KiSS-SIDM use):**
+1. Use relative paths (avoid Windows `/mnt/c/Users/...` and `/tmp`); write snapshots to `data/snapshots_<run_label>/`
+2. Run one fresh Julia process per realization (avoids same-session degradation)
+3. Apply `ulimit -v <fixed>` before Julia invocation (recommended cap: 8 GB)
+4. Use fixed seed (`Random.seed!(42)`) and fixed particle subset
+5. Store majorant/ncom diagnostics (do not silently bypass)
+
+**Files (T215 series):**
+- `v0.3-prelim/code/t215r.jl` (Round 6 5-run batch driver)
+- `v0.3-prelim/code/t215q.jl`, `t215q2.jl`, `t215s.jl` (same-session degradation tests)
+- `v0.3-prelim/code/t215p.jl`, `t215n.jl`, `t215l.jl` (earlier rounds)
+- `v0.3-prelim/code/t215v.jl`, `t215w.jl`, `t215x.jl`, `t215y.jl` (Tier 1+2 pilot)
+- `v0.3-prelim/code/t215_nfw_ic_generator.py`, `t215_run_kiss_sidm.jl`, `t215_small.jl`, etc. (IC + early runs)
+- `v0.3-prelim/patches/0001-collision-jl-sqrt-max.patch`, `0002-1d-sphere-jl-sqrt-max.patch`
+- `v0.3-prelim/docs/PAPER_V1_DRAFT.md` §10.5b (the paper section)
+- `v0.3-prelim/docs/T215_CANONICAL_FRAMING_2026-09-26.md` (canonical doc)
+- `v0.3-prelim/docs/T215VWXY_TIER12_PILOT_2026-09-27.md` (pilot summary)
+- `v0.3-prelim/data/results/t215r_5run_summary.json`, `t215u_memory_cap_summary.json`, `t215p_qualitative_signal_summary.json`, `t215vwy_pilot_summary.json`
+- `v0.3-prelim/data/snapshots_t215v/`, `t215w/`, `t215x/`, `t215y/`, `snapshots_sanity/` (persistent storage per Tier 1)
+
+**Honest verdict (unchanged):**
+- 4 of 8 channels under physically motivated f_H (the honest number)
+- 7 of 8 only under borrowed (hand-picked) f_H
+- Framework is a structural constraint map + no-go catalogue, not a unified derivation
+- **NEW (T215 closed):** Methods contribution: 3 KiSS-SIDM bug fixes + reproducibility recipe. Qualitatively shows gravothermal direction at Cloud-9 σ/m scale. **Does NOT provide quantitative t_core** (parameter tuning cannot extend beyond 70 Myr at tested N).
+
+**Status:** v18.43 ships at commit `8358c85`, branch `wip/cloud-9-relhic`. T215 thread closed.
+
+---
+
+## Standing: v0.4-prelim+v18.42 (2026-09-26, T175 verification + T213 KK tower + Silverman+ combined test)
+
+**v18.42** — combined KK tower + Silverman+ test answering the deferred v18.41 §10 scope-statement question.
+
+- **T175 verification (already-existed, now formalized):** T175 was run on 2026-09-21 and confirms all 4 no-go verdicts hold at T163 KK-tower best-fit parameters (α_D = 0.3, m₀ = 0.3 GeV, r = 1.5, n_modes = 2, RMSE = 1.408). The failure mechanisms (LZ direct detection, kinematic forbiddance, unitarity violation, flat velocity dependence) are independent of the specific σ/m value. The v18.41 §10 scope statement said "T163 re-test deferred to v19.0" — this is now obsolete. See `v0.3-prelim/data/results/t175_nogo_retest_t163.json`.
+
+- **T213 KK tower + Silverman+ combined test:** NEW script `v0.3-prelim/code/t213_kk_tower_silverman_combined.py` computes T163 best-fit KK tower σ/m(v) at v = 5-500 km/s using sidmkit 0.3.0. Result:
+
+  | v (km/s) | σ/m (cm²/g) |
+  |---|---|
+  | 5.00 | 0.1742 |
+  | 10.00 | 0.1742 |
+  | **31.12** (Cloud-9 host V_max) | **0.1741** |
+  | 100.00 | 0.1739 |
+  | 500.00 | 0.1688 |
+
+  **T163 σ/m(V_max = 31.12 km/s) = 0.174 cm²/g, which is 5.7× BELOW the Silverman+ 2026 gravothermal threshold of 1.0 cm²/g.**
+
+- **Structural implication:** The Cloud-9 spike (σ/m ≥ 50 cm²/g) cannot be reproduced by T163 KK tower alone, and Path F1 three-term σ_eff decomposition cannot bridge the 5.7× gap because the σ_HL peak is at v_HL ≈ 100 km/s (SPARC scale), not v = 31 km/s (Cloud-9 host V_max). The combined T163 + T212 + T213 result reinforces the **structural constraint map verdict**: single KK tower is the wrong tool for Cloud-9 scale, Silverman+ gravothermal is the right mechanism but wrong mass scale, and no published 2026 SIDM mechanism bridges the gap.
+
+- **Velocity dependence:** T163 KK tower is in the Born regime where σ ∝ α²/m_med² (no Sommerfeld enhancement at low v). Velocity dependence is FLAT (factor < 1.04 across 5-500 km/s). This is structurally different from the resonance/peak σ/m(v) shapes that would be needed for Cloud-9.
+
+**Files modified:**
+- `v0.3-prelim/code/t213_kk_tower_silverman_combined.py` (NEW, 122 lines)
+- `v0.3-prelim/data/results/t213_kk_tower_silverman_combined.json` (NEW)
+- `v0.3-prelim/docs/T213_KK_TOWER_SILVERMAN_COMBINED_2026-09-26.md` (NEW, 80 lines)
+- `v0.3-prelim/docs/PAPER_V1_DRAFT.md` (§10 scope statement updated to reflect T175 + T213)
+- `VERSION`, `README.md`, `v0.3-prelim/README.md` — bumped to v18.42
+
+**Honest verdict (unchanged):**
+- 4 of 8 channels under physically motivated f_H (the honest number)
+- 7 of 8 channels only under borrowed (hand-picked) f_H
+- Framework is a structural constraint map + no-go catalogue, not a unified derivation
+- **NEW (T213):** Cloud-9 spike cannot be reproduced by T163 KK tower + Path F1 — both fail at Cloud-9 host V_max
+
+**Status:** v18.42 ships at commit `pending`, tag `v18.42-kk-tower-silverman-combined`.
+
+---
+
+## Standing: v0.4-prelim+v18.41 (2026-09-26, 2review.docx paper polish)
+
+**v18.41 paper polish** — response to 2review.docx (2 reviewers: constructive feedback on v18.40 review bundle). Per Rule 29 (reviewer checklist as literal TODO list), 5 of 5 immediate fixes applied; medium-term items deferred.
+
+- **Abstract compressed**: 1,200 → 282 words (Reviewer 2 §3.4). Cut LZ event digression, three-observational-anchors elaboration, detailed Drobczyk parameter numbers. Core messages retained: framework = constraint map + no-go catalogue; 4 of 8 channels under physically motivated f_H; Cloud-9 vs dSph tension unresolved; Path F1 structural fix; five no-go theorems; two-mediator Drobczyk candidate.
+
+- **"6-7 of 8" headline retired → "4 of 8 under physically motivated f_H"** (Reviewer 2 §1.2, §3.2). §11 lead paragraph and honest-headline-results section now lead with 4 of 8 under physically motivated f_H. 7 of 8 under borrowed f_H is mentioned but explicitly flagged as not self-consistently derived at Phase 44.
+
+- **§10 scope statement added** (Reviewer 2 §1.3): explicit statement that the five no-go theorems apply to the Phase 44 single-component σ/m = 0.052 cm²/g baseline. T163 KK-tower best-fit parameters have NOT been independently re-tested; re-running the no-gos against T163 is deferred to v19.0. T184 systematic distinguished from the four specific no-gos.
+
+- **LZ section compressed** (Reviewer 2 §1.5): §11 LZ paragraph compressed from 2 paragraphs (~700 words) to 1 paragraph (~120 words). Detailed audit trail preserved in supplementary §S6.
+
+- **T209 NFW sampling bug fixed** (Reviewer 2 §2.2): the previous `nfw_sample_r` had `if rand() < rho_proportional * (x * (1 + x)^2) / 1.0` which simplifies to `rand() < 1.0` (always true) — the function was uniform sampling, not NFW sampling. Fixed to proper rejection sampling with f_max = 4 normalization. (T209 was never executed; bug noted, code kept for archive.)
+
+- **T210 justifications added** (Reviewer 2 §2.3): explicit comments for width_HL = 50.0 (intentionally broader than Path A2 narrow-resonance scan) and σ_unc = 10.0 for Crater II/Antlia II (kinematic-inference systematic, not observational scatter).
+
+**Honest verdict (unchanged from v18.40):**
+- 4 of 8 channels under physically motivated f_H (the honest number)
+- 7 of 8 channels only under borrowed (hand-picked) f_H
+- Framework is a structural constraint map + no-go catalogue, not a unified derivation
+
+**Status:** paper is now polished per Reviewer 2's "honesty is strong, presentation needs tightening" guidance. v18.41 ships at commit `pending`, tag `v18.41-paper-polish-2review-response`.
+
+---
+
+## Standing: v0.4-prelim+v18.40 (2026-09-25, T212 Path A3 + Path B3 trim)
+
+**v18.40 Path A3 + Path B3 trim** — two structural refinements added to the
+Cloud-9 vs dSph tension discussion without changing the headline verdict
+(constraint map, not unified model):
+
+- **§10.4d Path A3 — Cloud-9's σ/m ≥ 50 as a systematic upper bound**: Turini &
+  Benítez-Llambay 2026 mass-concentration degeneracy from environmental density,
+  HI self-shielding treatment, and beam-smearing can shift the hydrostatic σ/m
+  floor by factors of 2-3. **Reframes** the published σ/m ≥ 50 cm²/g floor as a
+  systematic upper bound rather than a hard physical constraint. Cross-validation
+  against Crater II / Antlia II kinematic constraints (Zhang+ 2024) suggests the
+  Crater II σ/m ~ 60 at V_max = 26.57 km/s kinematic floor is more robust than
+  Cloud-9's hydrostatic σ/m ≥ 50 at v = 28 km/s.
+- **§10.4e Path B3 trim — Silverman+ 2026 gravothermal CAN run**: Silverman+ 2026
+  (arXiv:2606.02566, "Mergers Matter") runs the gravothermal cascade at σ/m = 70
+  cm²/g in M_halo = 10¹⁰ M_☉ halos via N-body; **3 of 6 halos collapse** (those
+  with quiescent merger histories). **Threshold σ/m for collapse at Cloud-9 host
+  halo = ~1 cm²/g** (corrected from earlier ~10 cm²/g estimate after V_max +
+  t_cross fixes per 2review.docx Reviewer 2 §2.1, §2.4), which is **5× above** the
+  Phase 44 baseline σ/m = 0.052 cm²/g at v = 100 km/s extrapolated to V_max =
+  31.12 km/s. A N-body simulation at Silverman+ parameters is recommended as
+  future work; until that test is done, the Silverman+ trim remains a
+  theoretical possibility, not a confirmed mechanism.
+- **§11 v18.40 refinement paragraph**: acknowledges both refinements; the Cloud-9
+  vs dSph tension is **structural at Phase 44 parameters** but might be
+  **resolvable at σ/m ≥ ~1 cm²/g with environmental-correction systematics**.
+  The paper remains honest that no current UV completion of the standard Yukawa
+  framework achieves this regime.
+
+**Honest verdict (unchanged from v18.38):** 6-7 of 8 channels under borrowed f_H
+prescription; framework is a constraint map + no-go catalogue, not a unified
+SIDM derivation. The v18.40 refinements clarify **what the Cloud-9 σ/m ≥ 50
+floor actually represents** (systematic upper bound, not hard constraint) and
+**what the gravothermal cascade threshold actually is** (σ/m ≥ 10 cm²/g, not
+Phase 44 baseline).
+
+---
+
+## Standing: v0.4-prelim+v18.38 (2026-09-25, T207 Path F1 three-term σ_eff decomposition)
+
+**v18.38 Path F1** — three-term σ_eff = f_H² σ_HH + 2 f_H f_L σ_HL + f_L² σ_LL decomposition added to resolve the v18.34 structural SPARC limitation (heavy-channel-only σ_eff = f_H² × σ_HH(v) could not match SPARC's σ/m ≈ 0.193 at v = 100 km/s for any f_H — max achievable σ_eff = 0.069):
+
+- **§9.9 Path F1 motivation**: introduces the three-term mixture rule; documents v18.37 boundary-peak pathology (f_H_cc → 0.004, same retraction pattern as v18.31 T206)
+- **§9.10 v18.38 results**: free fit with Yang+ 2025 Fig. 2 prior (f_H_cc ≥ 0.05 conservative floor)
+  - DE peak: f_H_cc = 0.053, v_HL = 103.3 km/s, σ_peak_HL = 0.325 (Mechanism A on-peak)
+  - emcee 50k posterior median (32 walkers × 50000 steps, burn-in 2000, Gaussian init from DE):
+    - f_H_cc = **0.060 ± 0.012** (narrow, at floor — boundary pathology eliminated)
+    - v_HL = **105 ± 39 km/s** (Mechanism A on-peak)
+    - σ_peak_HL = 0.52 ± 0.36, σ_peak_HH_1 = 625 ± 250
+    - a_slope = 0.96 ± 0.20, f_H_cf = 0.83 ± 0.15
+  - 50τ convergence marginally achieved: ratio = 50000 / (50 × 918) = **1.089** vs v18.37's 0.576 (1.89× improvement; not 94× — see RT207 erratum)
+  - τ_max dropped 1737 → 918 (prior removed slow direction)
+  - Smart_de cross-check: all 3 prescription modes (borrowed, yang, t202) reproduce v18.37 results to 4 sig figs — prior change does not disturb prescription baselines
+- **§9.11 honest verdict split**:
+  | Mode | SPARC log L | z | F1 verdict |
+  |---|---|---|---|
+  | borrowed (hand-picked f_H) | -0.09 | 0.42 | **RESOLVED** |
+  | yang (Yang+ 2025-derived f_H) | -0.24 | 0.69 | **MARGINAL** |
+  | t202 (N-body f_H) | -0.60 | 1.10 | **NOT RESOLVED** |
+  | free_f_H priored (v18.38) | -2.03 | 2.01 | **CLEAR FAIL** |
+
+**Honest framing**: Path F1 is a **structural fix**, not an automatic data-resolution. The free fit trades SPARC fit quality for physically motivated f_H_cc (standard prior-vs-likelihood tradeoff). Mechanism A vs B remains observationally degenerate at SPARC; the prior (not causality) selects A in v18.38. Cloud-9 vs dSph tension unchanged from v18.37.
+
+**Abstract + §1 caveat + §10.1 + §11 conclusions updated**. Standing paper verdict (6–7 of 8 channels, five no-go theorems) unchanged. **RT207 final review signed off** — "the report can go into the paper as-is."
+
+**Code shipped**: `v0.3-prelim/code/two_component_three_term.py` (165 LoC), `T207_three_term_fit.py` (250 LoC), `T207_priored_free_de.py` (90 LoC), `T207c_priored_free_emcee.py` (147 LoC with n/50τ bug fix). **Results**: `t207_priored_free_de.json`, `t207c_priored_free_emcee.json` (ratio corrected 54.44→1.089), `t207c_smart_de.json`.
+
+## Standing: v0.4-prelim+v18.37 (2026-09-23, stellar streams and stellar halo substructure consolidated as §3.3b)
+
+**v18.37 stellar streams and stellar halo substructure** — new §3.3b "Stellar streams and stellar halo substructure (Yu 2026 PRL 136, 141001 [23])" consolidates the Yu+ 2026 "three birds with one stone" dataset into one observation section:
+
+- **GD-1 stellar stream perturber** (Bonaca+ 2019, 2020; Price-Whelan & Bonaca 2018; Malhan+ 2019; Erkal+ 2019): M_sub ≈ 10⁶–10⁷ M☉ at ~10–20 kpc from GC, off-stream spur + gap structure
+- **JVAS B1938+666 strong-lensing perturber** (already in §3.3): (1.13±0.04)×10⁶ M☉ within 80 pc at z = 0.881
+- **Fornax 6 cluster** (Pace+ 2021, Peñarrubia+ 2024): M★ ≈ 7.2×10³ M☉, r_h ≈ 11 pc, σ ≈ 5.6 km/s, anomalous M/L ≈ 15-258
+
+Mechanism: Yu 2026 [23] N-body demonstrates all three explained by single ~10⁶ M☉ core-collapsed SIDM halo. T204 numerical check: σ/m(v=1.69 km/s) = 3.07 cm²/g, t_core = 560 Myr (25× faster than Hubble), t_core/t_cross = 9.3 (no causality violation). Verdict: consistent with framework as **complementary substructure predictions**, not bulk σ/m channels. Honest caveat (v18.32 audit): contingent on gravothermal cascade being operative at ~10⁶ M☉, which Yu+ 2026 confirms via N-body but our T202 N-body check cannot independently validate at Phase 44.
+
+## Standing: v0.4-prelim+v18.36 (2026-09-23, residual clean-up per review 5.docx)
+
+**v18.36 residual clean-up** — 5 short edits per review 5.docx:
+
+1. §10 intro: "four independent no-go theorems" → "**five** independent no-go theorems" (lists all 5 explicitly).
+2. §10 scope caveat: "All four no-gos were tested" → "All **four specific UV-construction** no-gos (magnetic dipole, Hidden U(1) + pseudo-Dirac, GeV-scale inelastic DM, Chu+ 2019 P1 p-wave) were tested; the fifth (T184 systematic) is separate".
+3. §10.4c: "headline 7-of-8 channel satisfaction" → "headline **6–7 of 8 channel coverage depending on the f_H prescription (§9.3, §9.7)**".
+4. §11 final caveat: "three independent UV completion no-go theorems" → "**five** independent UV completion no-go theorems".
+5. §9.6 σ_unc convention note added: T206 uses σ_unc = obs (self-normalized) vs T205 published error budgets (Cloud-9 σ_unc ≈ 30 vs T206's 128). Qualitative conclusion (SPARC-dominated, boundary peak) unchanged under either choice.
+
+After this pass, every "four/three no-go" and "7 of 8" residual from earlier drafts is removed. Rule 29 (reviewer-checklist processing) followed end-to-end.
+
+## Standing: v0.4-prelim+v18.35 (2026-09-23, copy-edit pass per review4.docx)
+
+**v18.35 copy-edit pass** — applies Rule 29 (reviewer-checklist processing) end-to-end. 11 residual inconsistencies cleaned up:
+
+1. **Status line**: v1.14.1, four no-go, 7/8, self-consistent → v18.34, five no-go, 6-7/8, phenomenological constraint map.
+2. **§10.1**: "works — 7/8, self-consistent" → "6-7/8 depending on f_H, constraint map, not self-consistent derivation".
+3. **§10.3 Paper impact**: "7 of 8 channels" → "6-7 of 8 channels depending on f_H prescription".
+4. **§10.5**: "four no-go theorems" → "five no-go theorems".
+5. **§10.4b**: log B = 3.06 (T177) → log B = 2.41 (T205, published error budgets); T177 demoted to upper estimate.
+6. **§9.3 table**: "σ/m_eff (borrowed f_H)" column relabelled "σ/m_eff (hand-picked placeholder f_H, retracted v18.29; shown for reference only)".
+7. **§3.6**: residual "Status (v1.12 — RESOLVED)" confirmed already removed in v18.33.
+8. **Abstract five-no-go parenthetical**: now correctly lists all 5 (magnetic dipole / Hidden U(1) / GeV-scale inelastic / Chu+ p-wave / T184).
+9. **§9.6 T206 numbers refreshed**: f_H_cc = 0.041 (was 0.05); 68% CI = [0.0, 0.061] (was [0.05, 0.069]); per-channel contribution table added (SPARC dominates at -0.408).
+10. **§3.6 v1.13 ✓ PASS column relabelled**: "v1.13 multi-component" → "v1.13 with hand-picked placeholder f_H, retracted v18.29 — shown for reference only"; dSph fails with Yang+-derived caveat added.
+11. **END marker**: "v1.14.1 (2026-09-21)" → "v18.34 (2026-09-23)".
+
+After this pass, the paper's status line, abstract, §1, §3.4, §3.6, §9, §10, §11, and END marker are **mutually consistent**. The honest phenomenological framing now appears in **all** parts of the paper, not just the abstract.
+
+## Standing: v0.4-prelim+v18.34 (2026-09-23, body reconciled to abstract)
+
+**v18.34 body reconciliation** (per review.docx §3 full checklist):
+
+The paper body is now consistent with the abstract. Specific changes:
+1. §1 introduction: "self-consistent framework satisfying 7 of 8" → "phenomenological framework describing 6-7 of 8 depending on f_H prescription".
+2. §3.4 parameter table: f_H source row clarified (placeholder/T206 boundary, not derived).
+3. §3.6 dSph status: "v1.12 RESOLVED" → "v18.33 HONEST PHENOMENOLOGICAL"; per-prescription table replaces single PASS column.
+4. §9 entire rewrite: "Self-Consistent Two-Component Model..." → "Two-Component Interpretation: Phenomenological Status and Open Issues". §9.3 per-prescription; §9.4 mechanism decomposition; §9.5 why it works and why it doesn't; §9.6 known limitations; §9.7 per-prescription summary.
+5. §11 conclusions: "self-consistent picture" → "phenomenological framework"; Four → Five no-go theorems (added T184 dark Higgs); T205 log B = 2.41 moderate (was T177 log B = 3.06 strong); Cloud-9 vs dSph tension unresolved stated explicitly.
+6. §3.5a LZ section compressed 60→18 lines; details moved to Supplementary §S6.
+7. Abstract phenomenological paragraph rewritten with explicit per-prescription breakdown.
+
+**T206 extended**: grid extended to f_H_cc ∈ [0.0, 1.0]; per-channel log L contribution at peak now reported. **SPARC dominates penalty (log L = -0.408)**; Cloud-9 contributes -0.024; all other channels 0. Peak at f_H_cf=1.0, f_H_cc=0.041 — boundary sliver, structural SPARC failure.
+
+The honest phenomenological framing now appears in **all** parts of the paper (abstract, §1, §3.4, §3.6, §9, §11), not just the abstract.
+
+**v18.33 honest phenomenological framing** (per Comment2.docx reviewer):
+
+The paper distinguishes three epistemic statuses for f_H:
+- (a) Derive from external simulation (Yang+ 2025) → f_H is an input
+- (b) Fit to the same 8 channels → f_H is a phenomenological parameter
+- (c) Hand-pick from placeholder → retracted
+
+**Abstract statement (v18.33):** "We have a phenomenological σ/m(v) parameterization
+that can describe 6–7 of 8 channels when σ_eff ≈ f_H² × σ_HH(v) (heavy-channel-only
+regime). The two-component + gravothermal interpretation requires f_H values that
+are not derived from first principles and not reproduced by our own N-body check at
+Phase 44 parameters (T202 finds f_H ≈ 0.92 uniform, T183 finds f_H ≈ 0.61). The
+σ_eff = f_H² × σ_HH(v) decomposition cannot match SPARC's σ/m ≈ 0.193 at v = 100
+km/s regardless of f_H (max σ_eff = 0.069), so a full σ_eff = f_H² σ_HH + 2 f_H f_L
+σ_HL + f_L² σ_LL decomposition with separate heavy-light cross-sections is required
+but not currently implemented. The Cloud-9 4000× spike is not explained by any UV
+completion we tested. The model is a constraint map, not a unified derivation."
+
+This is stronger science than the original "7/8 self-consistent" claim because
+it tells the reader what the model actually establishes.
+
+## Standing: v0.4-prelim+v18.32 (2026-09-23, retraction of v18.31 T206 Path D)
+
+**v18.32 retraction:** v18.31 T206 "data prefer extreme segregation" finding
+**retracted**. T206's likelihood was inverted for one-sided constraints
+(penalized σ_eff for being BELOW ceiling instead of above), AND the
+σ_eff = f_H² × σ_HH(v) decomposition cannot match SPARC's σ/m ≈ 0.193 at
+v = 100 km/s regardless of f_H (max σ_eff = 0.069). T206 was structurally
+degenerate. Paper framing reverts to v18.30: constraint map + no-go
+catalogue, Cloud-9 vs dSph tension unresolved at Phase 44.
+
+**v18.31 (T206 Path C, retracted):** Fit f_H_at_r as free parameter on joint
+8-channel likelihood. Result: data prefer extreme segregation in core-collapsed
+halos (f_H_core_collapsed ≤ 0.07, complete core-collapse picture). **This was
+later shown to be an artifact of the inverted likelihood + structurally
+insufficient σ_eff formula.**
+
+## Standing: v0.4-prelim+v18.31 (2026-09-23, Tier-2 arithmetic-audit milestone, T206 Path C empirical finding, retracted in v18.32)
+
+**v18.31 (T206 Path C check):** Fit f_H_at_r as free parameter on joint 8-channel likelihood.
+Result: data prefer extreme segregation in core-collapsed halos (f_H_core_collapsed ≤ 0.07,
+complete core-collapse picture) — stronger than both the placeholder (0.30) and Yang+ 2025
+Fig. 2 (0.4-0.7). This is a legitimate empirical finding. v18.30's "no-go" framing superseded.
+
+**v18.28–v18.30 (Rule 28 arithmetic audit):**
+
+Three arithmetic errors caught by applying the three-check sanity rule
+(known-system sanity / unit consistency / physics consistency):
+
+1. **v18.28 — T204 causality violation:** t_core was 13 Myr (raw Balberg+
+   2002 with v1.13-canonical a_slope=1.0), which is < t_cross = 60 Myr.
+   Collapse cannot proceed faster than orbital crossing time. Fixed by
+   enforcing t_core ≥ 3 × t_cross and reconciling a_slope with v1.13
+   canonical. New t_core = 560 Myr (physical, < Hubble).
+
+2. **v18.29 — phase44 f_H_at_r placeholder:** the function returned
+   hand-picked piecewise constants (0.95/0.30/0.10) labeled "Based on
+   Yang+ 2025" but NOT actually derived from Yang+ Fig. 2. Yang+ Fig. 2
+   actually shows modest segregation (f_L ∈ 0.3-0.6), ~10× less extreme
+   than the placeholder. New function is Yang+ 2025-derived and σ/m-
+   parameterized.
+
+3. **v18.30 — Two-regime framing:** Phase 44 (σ/m = 0.052) vs Yang+ 2025
+   (σ₀/m = 147) explicitly distinguished. At Phase 44, gravothermal
+   cascade timescale ≫ Hubble time → no significant two-component
+   segregation. "7 of 8 channels pass" headline retired; honest verdict
+   is "0/8 channels pass simultaneously at Phase 44; Yang+ regime is a
+   different parameter point."
+
+**Standing version:** v0.4-prelim+T88E+T90-Paper-v18.1+...+T120.3aFix-v18.29+TwoRegime-v18.30
+
+## Standing: v0.4-prelim+T88E (Tier-1 milestone) (historical)
 
 The project is a joint-fit framework for self-interacting dark matter
 (SIDM), grounded in published astrophysical data. The standing version

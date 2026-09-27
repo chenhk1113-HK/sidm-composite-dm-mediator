@@ -80,12 +80,15 @@ from config import (
     RADIO_RELIC_VMAX_KMS,
     DM_FREE_UDG_RATE_PEAK,
     DM_FREE_UDG_RATE_WIDTH,
+    DM_DOM_UDG_SIGMA_M_PEAK,
+    DM_DOM_UDG_SIGMA_M_WIDTH,
     COSMIC_WEB_RADIO_LOG_EPSILON_UPPER,
     TREMAINE_GUNN_MASS_BOUND_EV,
     ROGERS_PEIRIS_LYMAN_ALPHA_BOUND_EV,
     SIDM_MASS_CLASSICAL_FLOOR_EV,
 )
 from sidm_velocity_dependent import sigma_m_effective
+from mediator_registry import sigma_m_at_v as _sigma_m_at_v_mediator
 
 # LZ 2024 results (arXiv 2410.17034 / WS2024 dataset, 220 days + 60 days)
 # World-leading spin-independent WIMP-nucleon cross-section limits.
@@ -627,19 +630,25 @@ def loglike_radio_relic(sigma_m_0: float, a: float) -> float:
 
 
 # ---------------------------------------------------------------------------
-# Channel 11 (Tier-1 PATCH 2026-08-25): Dark-matter-free UDGs (NGC 1052-DF2/DF4)
+# Channel 11 (Tier-1 PATCH 2026-08-25; UDG-evidence refresh 2026-09-12):
+# Dark-matter-free UDGs (NGC 1052-DF2 / DF4 / DF9 / FCC 224 / FCC 240).
 #
-# Per user upload 2026-08-25 ('暗物质竟是量子波.docx' § 1 + 'darkm.pdf' § 1):
+# Per user upload 2026-08-25 ('暗物质竟是量子波.docx' § 1 + 'darkm.pdf' § 1)
+# + user upload 2026-09-12 ('UDG dark matter.docx'):
 # Empirical observations of ultra-diffuse galaxies (UDGs) with negligible
-# dark matter. The NGC 1052 field has yielded 4 confirmed examples
-# (NGC 1052-DF2, NGC 1052-DF4, FCC 224, FCC 240), all consistent with
-# a 'bullet dwarf' tidal-stripping formation scenario (arXiv:2205.08552).
+# dark matter. Six confirmed examples across two environments:
+#   - NGC 1052 field: DF2 (2018), DF4 (2019), DF9 (2026) — linear trail
+#     ~2.45 Mpc long, consistent with bullet-dwarf collision formation
+#   - Fornax cluster: FCC 224 (2025), FCC 240 (2026) — tight bound pair
+#     ~75 kpc apart, with predicted DM remnants
 #
-# References (all verified HTTP 200):
+# References (all verified HTTP 200 against arXiv 2026-09-12):
 #   arXiv:1803.10237 - van Dokkum et al. 2018 (NGC 1052-DF2, Nature)
 #   arXiv:1901.05973 - van Dokkum et al. 2019 (NGC 1052-DF4)
 #   arXiv:2205.08552 - van Dokkum et al. 2022 (bullet dwarf collision)
-#   2025 paper (FCC 224) + 2026 paper (FCC 240 + third galaxy)
+#   arXiv:2502.05405 - Buzzo et al. 2025 (FCC 224, A&A 695, A124)
+#   arXiv:2603.15860 - Keim et al. 2026 (NGC 1052-DF9, ApJ 1004, 210)
+#   arXiv:2605.24099 - Buzzo et al. 2026 (FCC 224/240 bound pair, ApJ)
 #
 # Physics interpretation:
 #   This is NOT an exclusion channel. It is a CONSISTENCY CHECK on the
@@ -672,7 +681,7 @@ NGC1052_DF2_VMAX_KMS = 30.0        # UDG internal velocity scale (typical)
 # Channel 11: DM_FREE_UDG_RATE_PEAK, DM_FREE_UDG_RATE_WIDTH imported from config.py
 
 
-def loglike_dm_free_udg(sigma_m_0: float, a: float) -> float:
+def loglike_dm_free_udg(sigma_m_0: float, a: float, mediator_class: str = "power_law") -> float:
     """Channel 11: Dark-matter-free UDG existence constraint (van Dokkum+ 2018-2026).
 
     CONSISTENCY CHECK on SIDM model: NGC 1052-DF2/DF4 + FCC 224/240 establish
@@ -701,10 +710,10 @@ def loglike_dm_free_udg(sigma_m_0: float, a: float) -> float:
     """
     if sigma_m_0 <= 0 or not np.isfinite(sigma_m_0) or not np.isfinite(a):
         return -np.inf
-    # σ/m_eff at NGC 1052 UDG velocity (v=30 km/s):
-    # log10(σ/m_eff) = log10(σ/m_0) + a * log10(V_REF/v) = log10(σ/m_0) + a * log10(100/30)
-    # ~ log10(σ/m_0) + 0.523 * a
-    log_sm_eff = np.log10(sigma_m_0) + 0.523 * a
+    # σ/m_eff at NGC 1052 UDG velocity (v=30 km/s).
+    # Phase 5b: use mediator registry instead of inline power-law linearization.
+    sigma_m_eff_udg = _sigma_m_at_v_mediator(sigma_m_0, a, 30.0, mediator_class=mediator_class)
+    log_sm_eff = np.log10(sigma_m_eff_udg)
     # Distance from peak (in dex)
     chi = ((log_sm_eff - np.log10(NGC1052_DF2_SIGMA_M_TYPICAL)) / DM_FREE_UDG_RATE_WIDTH) ** 2
     return -0.5 * chi
@@ -717,6 +726,77 @@ def loglike_dm_free_udg_placeholder(sigma_m: float) -> float:
     Assumes a=0 (velocity-independent) for backwards compatibility.
     """
     return loglike_dm_free_udg(sigma_m, 0.0)
+
+
+# ---------------------------------------------------------------------------
+# Channel 13 (NEW 2026-09-12): DM-dominated UDG existence (LSB-6 anchor)
+#
+# Per LRD2.docx reviewer recommendation: test BOTH UDG extremes. Channel 11
+# constrains the DM-FREE tail (NGC 1052-DF2/DF4). Channel 13 constrains the
+# DM-DOMINATED tail (LSB-6, a gas-rich UDG with a cuspless SIDM halo).
+#
+# Reference: Bouchè et al. 2026 (arXiv:2609.10700), "Probing dynamics of
+# extreme galaxies I. Dark matter content in ultra-diffuse galaxies", 26 pages,
+# accepted A&A. Verified via full PDF retrieval 2026-09-12.
+#
+# CORRECTION (2026-09-12): Initial implementation used σ/m_eff ~ 14.3 cm²/g
+# from abstract only. Full paper Section 6.4 (lines 142-143) clarifies:
+#   "log10 v = 1.30 +0.03/-0.04 km/s, ⟨σv⟩/m = 14.31 +2.01/-1.94 cm² km/g/s.
+#    Rescaling yields an approximate self-interaction cross section of
+#    σ/m ≈ 0.7 cm²/g, in excellent agreement with Almeida (2025) for UFDs
+#    in the core-formation phase."
+# So the 14.3 value is σv/m (velocity-weighted), not σ/m. The CORRECT σ/m
+# value is 0.7 cm²/g at v ~ 20 km/s.
+#
+# Physics: σ/m_eff at v_LSB6 = σ/m_0 * (v_LSB6 / V_REF)^a
+# log10(σ/m_eff) = log10(σ/m_0) + a * log10(V_LSB6 / V_REF)
+# At v_LSB6 = 20, V_REF = 100: log10(20/100) = -0.699
+# So σ/m_eff = σ/m_0 * (0.2)^a (in cm²/g).
+#
+# LSB-6 is in the core-FORMATION phase (not collapse), providing evidence for
+# σ/m ~ 0.7 cm²/g. Almeida (2025) shows UFDs in core-formation phase have
+# similar σ/m, supporting a velocity-dependent cross section consistent across
+# dwarf and LSB scales (per Kaplinghat+ 2016, Tulin & Yu 2018).
+def loglike_dm_dominated_udg(sigma_m_0: float, a: float, mediator_class: str = "power_law") -> float:
+    """Channel 13: DM-dominated UDG existence constraint (LSB-6 anchor, arXiv:2609.10700).
+
+    Tests whether the model can produce a DM-DOMINATED UDG by requiring σ/m_eff
+    at v_LSB6 ~ 20 km/s to be ~0.7 cm²/g (Bouchè+ 2026, line 143). Counterpart
+    to Channel 11 (DM-free).
+
+    Gaussian log-likelihood centered at log10(0.7) = -0.155 with width 0.5 dex.
+    At σ/m_0 → 100 cm²/g: loglike ~ -3.5 (~3 sigma; over-predicts σ/m_eff).
+    At σ/m_0 → 0.001: loglike ~ -3.5 (3 sigma; under-predicts).
+
+    Parameters
+    ----------
+    sigma_m_0 : float
+        σ/m at V_REF = 100 km/s (cm²/g)
+    a : float
+        velocity power-law index (positive → sigma decreases at low v)
+
+    Returns
+    -------
+    float : log likelihood (relative units)
+    """
+    if sigma_m_0 <= 0 or not np.isfinite(sigma_m_0) or not np.isfinite(a):
+        return -np.inf
+    # σ/m_eff at LSB-6 velocity (v=20 km/s).
+    # Phase 5b: use mediator registry instead of inline power-law linearization.
+    sigma_m_eff_lsb6 = _sigma_m_at_v_mediator(sigma_m_0, a, 20.0, mediator_class=mediator_class)
+    log_sm_eff = np.log10(sigma_m_eff_lsb6)
+    # Distance from peak (in dex)
+    chi = ((log_sm_eff - np.log10(DM_DOM_UDG_SIGMA_M_PEAK)) / DM_DOM_UDG_SIGMA_M_WIDTH) ** 2
+    return -0.5 * chi
+
+
+# Backward-compatible alias
+def loglike_dm_dominated_udg_placeholder(sigma_m: float) -> float:
+    """Backward-compatible alias. New code should use loglike_dm_dominated_udg().
+
+    Assumes a=0 (velocity-independent) for backwards compatibility.
+    """
+    return loglike_dm_dominated_udg(sigma_m, 0.0)
 
 
 # ---------------------------------------------------------------------------
