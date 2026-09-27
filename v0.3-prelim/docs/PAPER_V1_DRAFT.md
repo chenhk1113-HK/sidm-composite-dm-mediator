@@ -475,6 +475,24 @@ The priored free fit **trades SPARC fit quality for a physically motivated f_H_c
 
 **Net effect on paper verdict:** The σ_eff = f_H² σ_HH + 2 f_H f_L σ_HL + f_L² σ_LL decomposition is **structurally sufficient** (it can reach SPARC's σ/m ≈ 0.193 via the σ_HL term), but the free fit cannot simultaneously satisfy SPARC and the Yang+ 2025-derived f_H_cc ≥ 0.05 prior. **Path F1 is resolved under borrowed prescription mode; the honest phenomenological verdict per f_H prescription (§9.3 / §9.7) is unchanged.** Cloud-9 vs dSph tension remains the unresolved structural issue.
 
+### 9.12 Host-halo gravothermal cascade closed at Phase 44 (T208 + T212)
+
+The gravothermal cascade can in principle modify the post-collapse σ/m signature by an order of magnitude (Balberg+ 2002). We tested whether it runs at Cloud-9 host-halo parameters at the Phase 44 σ/m baseline, and what σ/m threshold would be required.
+
+**T208 (Phase 44 σ/m):** At M_halo = 5×10⁹ M☉, c = 12, V_max = 24.75 km/s (the correct NFW V_max, post v18.40 correction), the standard Yukawa extrapolation from σ/m = 0.052 cm²/g at v = 100 km/s gives σ/m(V_max) ≈ 0.21 cm²/g. The Balberg+ 2002 analytical t_core formula then yields **t_core = 73.7 Gyr, vs t_Hubble = 13.8 Gyr** — gravothermal **DOES NOT run** at Phase 44 σ/m. Path B is refuted at the Phase 44 baseline.
+
+**T212 (Silverman+ 2026, σ/m = 70 cm²/g):** Silverman+ 2026 (arXiv:2606.02566) demonstrates via N-body that **3 of 6** host halos at M = 10¹⁰ M☉ with σ/m = 70 cm²/g collapse within a Hubble time (quiescent merger histories). Re-running the Balberg+ formula at Cloud-9's parameters gives t_core = **0.176 Gyr** at σ/m = 70, t_core/t_Hubble = 0.0128 — gravothermal **DOES run** at σ/m = 70, but causality fails (t_core/t_cross = 1.91 < 3.0 cap), so the analytical formula is unreliable at large σ/m. The N-body result from Silverman+ 2026 is the trustworthy test.
+
+**Threshold:** Gravothermal runs at Cloud-9 host-halo scale IF σ/m ≥ **~1 cm²/g** (Silverman+ 2026 threshold, 5× above Phase 44 baseline), AND the merger history is quiescent, AND the analytic Balberg+ formula is supplemented by N-body verification.
+
+**Honest framing:** Phase 44 σ/m is structurally too low for host-halo gravothermal collapse to run at Cloud-9's parameters. Subhalo gravothermal collapse (Silverman+ tested at sub-halo scale) remains the regime where the framework's gravothermal selection effect operates.
+
+| Scenario | σ/m (cm²/g) | t_core (Gyr) | Runs at Cloud-9 host? |
+|---|---|---|---|
+| Phase 44 baseline | 0.21 | 73.7 | ❌ (T208 REFUTED) |
+| Silverman+ tested | 70 | 0.176 | ✅ (T212) |
+| Threshold (analytic) | ~1 | < 13.8 | ⚠ marginal (N-body needed) |
+
 ## 10. UV Completion: No-Go Theorems, Two-Mediator Candidate, Cloud-9 Robustness
 
 **Scope (added in v18.41 per 2review.docx Reviewer 2 §1.3; updated in v18.42 per T175/T213 verification):** The five no-go theorems below apply specifically to the **Phase 44 single-component σ/m = 0.052 cm²/g at v = 100 km/s baseline** with standard Yukawa physics. The T163 KK-tower best-fit parameters (α_D = 0.3, m₀ = 0.3 GeV, r = 1.5, n_modes = 2, RMSE = 1.408) are a finer-grained realization within the same Phase 44 framework. **T175 was run on 2026-09-21 and confirms all 4 no-go verdicts hold at T163 parameters** (see `v0.3-prelim/data/results/t175_nogo_retest_t163.json`). The failure mechanisms (LZ direct detection, kinematic forbiddance, unitarity violation, flat velocity dependence) are independent of the specific σ/m value. **T213 (KK tower + Silverman+ combined, 2026-09-26) confirms T163 KK tower σ/m(V_max = 31.12 km/s) = 0.174 cm²/g, which is 5.7× below the Silverman+ 2026 gravothermal threshold of 1.0 cm²/g.** The KK tower is in the Born regime where σ ∝ α²/m_med² (no Sommerfeld enhancement at low v); the velocity dependence is flat across 5-500 km/s (factor < 1.04). T184 one-mediator UV systematic is qualitatively different from the other four: it is a general scaling argument rather than a specific UV construction.
