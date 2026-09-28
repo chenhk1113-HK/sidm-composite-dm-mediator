@@ -1,0 +1,20 @@
+{
+  "test": "T215b \u2014 Phase 4B Scenario B (ulimit 16 GB)",
+  "config": {
+    "N_PARTICLES": 3000,
+    "MIN_PARTICLES": 64,
+    "T_END_GYR": 0.07,
+    "ulimit_GB": 16
+  },
+  "t_max_myr": 71.59,
+  "n_snapshots": 12,
+  "comparison_to_t215u": {
+    "t215u_mean_myr": 69.57,
+    "t215u_std_myr": 0.74,
+    "delta_myr": 2.02,
+    "extended": false
+  },
+  "verdict": "EQUAL_TO_BASELINE",
+  "interpretation": "ulimit 16 GB gives same result as ulimit 8 GB (T215u mean = 69.57 Myr, std = 0.74). Memory pressure was NOT the bottleneck for N=3000 baseline. ulimit does not help Phase 4B goal of extending beyond 70 Myr.",
+  "timestamp": "2026-09-27"
+}

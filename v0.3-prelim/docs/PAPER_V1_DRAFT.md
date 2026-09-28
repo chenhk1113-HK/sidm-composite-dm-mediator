@@ -1353,6 +1353,9 @@ The qualitative signal was verified in 10 of 15 fresh-session runs (5 T215p + 5 
 
 ---
 
+
+**Phase 4B higher-N pilot (post-freeze):** We attempted two escape routes to extend beyond the 70 Myr baseline: (i) T215b — bumping ulimit from 8 GB to 16 GB, which gave an identical 71.6 Myr result (no improvement, no harm); (ii) T215c — lowering N from 3000 to 1000 with t_end extended to 0.20 Gyr, which **died at 3.89 Myr** (dt collapsed to floor 1.13e-5). Combined with the earlier Tier 2 pilot (T215v/w/x/y, N=5000–10000, all died earlier than baseline), the data establish that **N=3000 with min=64 is a strict optimum within this parameter envelope**. Deviations of ±10% on N or ±3× on t_end cause earlier failure. Tier 3 levers (subcycled time integration, freeze adaptive refinement, manual particle redistribution) remain as future-work options requiring source-code modification; per the devplan recommendation they are held in reserve for reviewer-driven work. See `v0.3-prelim/docs/PHASE4B_KISS_SIDM_HIGHER_N_PILOT_2026-09-27.md` for full results.
+
 ### 10.6 Summary of §10 UV no-go theorems
 
 Five no-go theorems demonstrate that the Phase 44 phenomenology is

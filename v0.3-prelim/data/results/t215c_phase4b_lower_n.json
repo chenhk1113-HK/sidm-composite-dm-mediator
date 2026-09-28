@@ -1,0 +1,20 @@
+{
+  "test": "T215c \u2014 Phase 4B lower-N longer-t_end attempt",
+  "config": {
+    "N_PARTICLES": 1000,
+    "MIN_PARTICLES": 32,
+    "T_END_GYR": 0.2
+  },
+  "outcome": "DIED_EARLY",
+  "t_max_myr": 3.89,
+  "n_snapshots": 1,
+  "comparison_to_t215u": {
+    "t215u_mean_myr": 69.57,
+    "t215u_std_myr": 0.74,
+    "delta_myr": -65.68,
+    "extended": false
+  },
+  "verdict": "BELOW_BASELINE",
+  "interpretation": "Lower N hypothesis REFUTED. N=1000 dies at 3.89 Myr vs N=3000 baseline of 70 Myr. Combined with Tier 2 (higher N also dies early), this establishes that N=3000 is a STRICT optimum within this parameter envelope. Phase 4B Scenario A-lite FAILS.",
+  "timestamp": "2026-09-27"
+}
