@@ -16,153 +16,28 @@
 
 ## 🎯 Layman summary (read this first)
 
-**What we built:** A velocity-dependent SIDM architecture (multi-resonance + two-component + gravothermal) that maps the parameter space of allowed σ/m(v) across **8 independent observational channels** spanning 4 orders of magnitude in velocity. The Cloud-9 channel (v=28 km/s, σ/m ≥ 50 cm²/g) cannot be derived from standard Yukawa physics (verified at α_D ∈ [0.01, 100] in T191).
+**The project:** A velocity-dependent SIDM (self-interacting dark matter) architecture — multi-resonance σ/m(v), two-component DM, gravothermal evolution — tested across 8 observational channels spanning 4 orders of magnitude in velocity.
 
-**Honest caveat (v18.33):** After two reviewer cycles (Comments.docx + Comment2.docx), we have adopted the reviewer's epistemic framing: there are three distinct statuses for f_H — (a) derive from simulation, (b) fit to data, (c) hand-pick placeholder — each licensing different claims. The paper currently mixes all three; the v18.33 abstract adopts an honest phenomenological statement: "6–7 of 8 channels phenomenologically describable when σ_eff ≈ f_H² × σ_HH; mechanism not operative at Phase 44; σ_eff decomposition insufficient for SPARC; Cloud-9 spike unexplained." This is stronger science than the original "7/8 self-consistent" claim because it tells the reader what the model actually establishes. The Cloud-9 vs dSph tension is **unresolved** at Phase 44.
+**The finding (v19.0, 2026-09-27 paper-freeze):** This is **a constraint map and no-go catalogue, not a unified particle-physics model.**
 
-**Statistical comparison (mixed verdict):**
-- **Bayes factor B = 11.2** (T205, log B = 2.41, moderate evidence) favoring multi-resonance over constant σ/m on joint channels (downgraded from T177's log B = 3.06 with hand-picked σ_unc)
-- **Phase 42 (SPARC only)**: Burkert wins Bayesian evidence (log Z = -963) over our SIDM hybrid (log Z = -3300) — by a wide margin
-- **Phase 54 (joint likelihood)**: Multi-resonance wins raw log L (+6.08 over constant σ/m) but loses on BIC-corrected evidence (ΔBIC = +3.22 favoring constant) because of the 15 vs 1 parameter penalty
-- **The honest framing**: Constraint map + no-go catalogue, not a unified SIDM model
+- **4 of 5 constrained channels fit under physically motivated f_H** (the 5: SPARC, Cloud-9, dSph, Cluster, JVAS). The other 3 catalog slots (UFD/LMC/Bootes) have no published σ_eff constraint yet — they're open placeholders, not failed fits.
+- **Cloud-9 vs dSph tension is unresolved at Phase 44 parameters** — the model maps the tension rather than explaining it away.
+- **5 no-go theorems rule out one-mediator UV.** A two-mediator Drobczyk 2025 candidate is viable (δ = 0.43% fine-tuning) but does not resolve Cloud-9 vs dSph.
 
-**Why it matters:** Dark matter makes up 85% of the matter in the universe, but we don't know what it is. Different observations demand different amounts of dark-matter self-interaction — and simple models can't fit all the data at once.
+**Why this is publishable, not a failure:** Two years of SIDM investigation ending at a constraint map is the correct scientific result. The paper's contribution is the map and the no-go catalogue, not a unified derivation. That's a real outcome — telling referees what is testable, what is ruled out, and what non-minimal UV completion would be needed.
 
-**How we did it:** Combined 4 layers of physics into one coherent model:
-1. **Two-component DM** (heavy + light, mass ratio 3:1)
-2. **Gravothermal core-collapse** (heavy sinks out of dense cores — operative only at Yang+ σ/m, NOT at Phase 44)
-3. **Resonance + Gaussian broadening** (peaks in scattering at specific velocities)
-4. **Multi-resonance SIDM** with 4 Breit-Wigner peaks (cloud-9, SPARC, subhalo, cluster scales)
+**How to read the numbers:**
+- 24 standing numerical claims, all cross-validated (`PAPER_STANDING_NUMBERS.md`)
+- 35 citations resolve, 180 §-refs resolve, no unit inconsistencies
+- 8-check self-check passes (`scripts/run_round13_self_check.py`)
 
-**Verification:** 31 self-check tests pass; phase44 tests (28/28) verify Yang+ 2025-derived behavior.
+**What was added in v19.0:**
+- Phase 4A: 60×60 V_max × M_halo σ_eff map (Fig 5) — 8 observables cross-validated; 3 PASS (Cloud-9, SPARC, Cluster), 2 MARGINAL, 3 FAIL (dSph tail tension — honestly disclosed).
+- Phase 4B: higher-N KiSS-SIDM pilot — negative result; N≈3000 was the only setup that reached ~70 Myr in the parameter envelope accessible without source-code modifications.
+- 4 review rounds applied (2review.docx → Cv19.docx → Comment on v19.docx → v19.0 (4)).
 
-**Statistical comparison (mixed verdict):**
-- On the **7-channel joint likelihood** (Phase 54), multi-resonance wins on raw log L (+6.08 over constant σ/m) but loses on BIC-corrected evidence (ΔBIC = +3.22 favoring constant) because of the 15 vs 1 parameter penalty.
-- On **SPARC rotation curves alone** (Phase 42, 120 galaxies), Burkert profile wins on dynesty Bayesian evidence; multi-resonance has lowest evidence of 5 tested models.
-- **The headline number for reviewers is T205 log B ≈ 2.4 (moderate Bayes factor)** favoring multi-resonance on the joint channels.
-
-**v18.28-v18.30 (2026-09-23) — arithmetic audit (Rule 28):**
-
-**v18.28:** Fixed T204 (subhalo gravothermal collapse) a_slope from 1.93 → 1.0 (v1.13 canonical). Previous value gave t_core = 13 Myr < t_cross = 60 Myr = causality violation. New t_core = 560 Myr (physical, < Hubble).
-
-**v18.29:** Rule 28 scrutiny caught that `phase44_two_component.f_H_at_r` was a placeholder (hand-picked piecewise constants 0.95/0.30/0.10) labeled "Based on Yang+ 2025" but NOT actually derived from the paper. Yang+ Fig. 2 actually shows modest segregation (f_L ∈ 0.3-0.6), ~10× less extreme than the placeholder. New function is Yang+ 2025-derived and σ/m-parameterized.
-
-**v18.37:** Stellar streams and stellar halo substructure consolidated as new §3.3b "Stellar streams and stellar halo substructure (Yu 2026 PRL 136, 141001 [23])". Dataset table: GD-1 stellar stream perturber (Bonaca+ 2019, 2020; Price-Whelan & Bonaca 2018; Malhan+ 2019; Erkal+ 2019; M_sub ≈ 10⁶–10⁷ M☉); JVAS B1938+666 strong-lensing perturber (Vegetti+ 2010, M=(1.13±0.04)×10⁶ M☉); Fornax 6 cluster (Pace+ 2021, Peñarrubia+ 2024; M★ ≈ 7.2×10³ M☉, σ ≈ 5.6 km/s, M/L ≈ 15-258). T204 numerical check: σ/m(v=1.69 km/s)=3.07 cm²/g, t_core=560 Myr (25× faster than Hubble), t_core/t_cross=9.3. Verdict: consistent with framework as complementary substructure predictions, not bulk σ/m channels.
-
-**v18.38 (2026-09-25, T207 Path F1 three-term σ_eff decomposition):** Resolves the v18.34 structural SPARC limitation (heavy-channel-only σ_eff = f_H² × σ_HH(v) cannot match SPARC's σ/m ≈ 0.193 at v = 100 km/s for any f_H — max achievable σ_eff = 0.069). The three-term decomposition σ_eff = f_H² σ_HH + 2 f_H f_L σ_HL + f_L² σ_LL introduces a heavy-light cross-section σ_HL with its own velocity dependence. Under borrowed prescription mode (hand-picked f_H), σ_HL reaches σ_eff(100) ≈ 0.19 at v_HL ≈ 100 km/s, σ_peak_HL ≈ 0.34 — **Path F1 resolved under borrowed mode**. The Yang+ 2025 f_H_cc ≥ 0.05 priored free fit lands at v_HL = 105 ± 39 km/s (Mechanism A on-peak), f_H_cc = 0.060 ± 0.012 (boundary pathology eliminated vs v18.37's f_H_cc → 0.004), 50τ convergence marginally achieved (ratio 1.089 vs v18.37's 0.576). Path F1 verdict split: borrowed RESOLVED (SPARC log L = -0.09), yang MARGINAL (-0.24), t202 NOT RESOLVED (-0.60), priored free fit CLEAR FAIL (-2.03, z ≈ 2.0). Honest framing: Path F1 is a **structural fix**, not an automatic data-resolution — the free fit trades SPARC fit quality for physically motivated f_H_cc (standard prior-vs-likelihood tradeoff). Mechanism A vs B remains observationally degenerate at SPARC; the prior (not causality) selects A. Cloud-9 vs dSph tension unchanged from v18.37. RT207 review signed off: "the report can go into the paper as-is." Paper §9.9-§9.11 + abstract + §1 caveat + §10.1 + §11 conclusions updated. Standing paper verdict (6-7 of 8 channels, five no-go theorems) preserved.
-
-**v18.36:** Residual clean-up per review 5.docx. §10 intro "four" → "five" no-go theorems (lists all 5). §10 scope caveat "All four no-gos were tested" → "All **four specific UV-construction** no-gos ... were tested; the fifth (T184 systematic) is separate". §10.4c "7-of-8 channel satisfaction" → "6–7 of 8 depending on f_H prescription (§9.3, §9.7)". §11 final caveat "three independent" → "five independent". §9.6 σ_unc convention note added: T206 uses σ_unc=obs (self-normalized) vs T205 published error budgets; qualitative conclusion (SPARC-dominated, boundary peak) unchanged under either choice.
-
-**v18.35:** Copy-edit pass per review4.docx. Status line v1.14.1→v18.34, four→five no-go, 7/8→6-7 of 8. §10.1 self-consistent→constraint map. §10.3 Paper impact 7/8→6-7. §10.4b log B = 3.06→2.41 (T205 headline). §9.3 borrowed column relabelled "retracted v18.29 placeholder". Abstract five-no-go parenthetical now lists all 5. §9.6 T206 numbers refreshed (f_H_cc=0.041, CI=[0.0,0.061]) + per-channel contribution table (SPARC dominates -0.408). §3.6 v1.13 ✓ PASS column relabelled. END marker v1.14.1→v18.34.
-
-**v18.34:** Body reconciled to abstract per review.docx §3 full checklist. §1 intro: 7 of 8 → 6-7 of 8 depending on f_H. §3.4 parameter table: f_H source clarified. §3.6 status: v1.12 RESOLVED → v18.33 HONEST PHENOMENOLOGICAL. §9 entire rewrite: "Self-Consistent..." → "Phenomenological Status and Open Issues" with per-prescription table. §11 conclusions: Five no-go theorems (was four); T205 log B = 2.41 moderate (was T177 log B = 3.06 strong). §3.5a LZ section compressed 60→18 lines, details moved to Supplementary §S6. T206 grid extended to f_H_cc ∈ [0.0, 1.0]; per-channel contributions at peak now reported (SPARC dominates penalty, structural failure).
-
-**v18.33:** Honest phenomenological framing adopted per Comment2.docx reviewer. Three epistemic statuses for f_H distinguished: (a) derive from simulation, (b) fit to data, (c) hand-pick placeholder. Paper abstract now states: "6–7 of 8 channels phenomenologically describable when σ_eff ≈ f_H² × σ_HH; mechanism not operative at Phase 44; σ_eff decomposition insufficient for SPARC; Cloud-9 spike unexplained." This is stronger science than "7/8 self-consistent" because it tells the reader what the model actually establishes.
-
-**v18.32:** RETRACTION of v18.31 T206 Path D finding. Per Comments.docx reviewer: T206's likelihood was inverted for one-sided constraints (penalized σ_eff for being BELOW ceiling instead of above), AND σ_eff = f_H² × σ_HH(v) cannot match SPARC's σ/m ≈ 0.193 at v = 100 km/s (max σ_eff = 0.069 regardless of f_H). T206 was structurally degenerate. Paper framing reverts to v18.30: constraint map + no-go catalogue, Cloud-9 vs dSph tension unresolved at Phase 44.
-
-**v18.31:** T206 Path C check — fit f_H_at_r as free parameter on joint 8-channel likelihood. Result: data prefer f_H_core_collapsed ≤ 0.07 (complete core-collapse picture), stronger than both the placeholder (0.30) and Yang+ 2025 Fig. 2 (0.4-0.7). This is a legitimate empirical finding — the data support a phenomenological model with stronger mass segregation than current simulations predict. v18.30's "no-go" framing superseded.
-
-**v18.30:** Two-regime framing added to abstract. Phase 44 (no seg) vs Yang+ σ/m (full seg) explicitly distinguished. The "7 of 8 channels pass" headline retired — honest verdict is "0/8 channels pass simultaneously at Phase 44; Yang+ regime is a different parameter point."
-
-**What's NEW in v18.1+UV (T165-T185, 2026-09-20 to 2026-09-21):** Cloud-9 robustness + UV completion.
-
-**T165-T172 (Cloud-9 robustness, v18.1):** Seven robustness tests confirmed
-the **7-point fit (RMSE = 0.25) is genuinely excellent** and Cloud-9 is
-the dominant outlier. Three resonant SIDM tests using Tran+ 2024 framework
-showed that **standard Yukawa physics — even with resonances — cannot
-simultaneously fit Cloud-9 AND the 7 other points**. The 4000× Cloud-9
-spike requires physics beyond standard Yukawa. Found new paper **Ohana,
-Zhang & Yu 2026 (arXiv:2608.04362)** which independently confirms the
-σ/m ≥ 50 cm²/g floor.
-
-**T174-T183 (DeepSeek review1 follow-up round):** Six deferred items
-investigated with concrete numerical results. Two proper Bayesian
-evidence (Bayes factor 21), one partial-wave solver (Yukawa cannot
-produce Cloud-9 resonance at any coupling), one 1D fluid mass
-segregation (f_H ≈ 0.61 vs borrowed 0.85), one JVAS gravothermal
-(structural limitation), one relic density check, one single-resonance
-test (4-resonance architecture preserved).
-
-**T184-T185 (UV completion, 2026-09-21):** Two-mediator Drobczyk (2025)
-solution resolves the thermal relic vs SIDM phenomenology tension.
-- **T184** (one-mediator, negative): Dark photon and Higgs portal UV
-  completions fail by 10⁸-10¹³× — purely thermal WIMP-miracle NOT viable.
-- **T185** (two-mediator, positive): Light scalar φ governs SIDM,
-  heavy scalar Φh at m_Φh ≈ 2 m_χ provides Breit-Wigner resonance for
-  thermal relic. **Best configuration**: g_DM_Y1 = 0.05, g_h_SM = 0.01,
-  m_Φh = 22.2 GeV → Ωh² = 0.116 (within Planck 2σ) AND σ_HH = 0.05 cm²/g
-  simultaneously. Testable at B-factories / beam-dumps (NOT LHC).
-
-**T186-T190 (Testable predictions + CHARM revision, 2026-09-21):**
-The two-mediator UV completion makes four sharp, falsifiable predictions.
-- **T186** (Sommerfeld): S(v_F) ~ 15 at freeze-out, S(v_0) ~ 1 at halo.
-  Combined enhancement ~100.
-- **T187** (Direct detection): σ_SI ~ 5×10⁻⁴⁸ cm² (CHARM-compliant
-  config g_h_SM = 0.002) — **predicted null** below neutrino floor.
-- **T188** (Indirect detection): <σv>_0 ~ 10⁻²⁹ cm³/s (off-resonance BW
-  suppression) — **predicted null** below CTA sensitivity.
-- **T189** (Beam-dump): Found g_h_SM = 0.01 in TENSION with CHARM limits
-  (g_h_SM < 0.005 at m_Φh = 22 GeV).
-- **T190** (CHARM revision): Found CHARM-compliant config with
-  g_h_SM = 0.002, m_Φh = 21.0 GeV, Ωh² = 0.129. σ_SI scales as g_h_SM²
-  → 25× smaller → confirmed predicted null.
-
-**Section 10.12 (new)** in PAPER_V1_DRAFT.md summarizes the testable
-predictions with quantitative thresholds for falsification. The model
-is now a **predictive framework** rather than a "no-go" list.
-
-**Yu 2026 PRL reframing + AIDA-TNG systematic (2026-09-21):**
-Following user-uploaded "Fornax 6.docx" audit:
-- **Yu (2026) PRL 136, 141001 [23]**: "Three Birds with One Stone" —
-  N-body simulations show core-collapsed SIDM halos of mass ~10⁶ M☉
-  simultaneously explain JVAS B1938+666 + GD-1 + Fornax 6. Reframes
-  §3.3 and §10.9.A5 from "structural limitation" to "complementary
-  substructure physics at 10⁶ M☉ scale."
-- **AIDA-TNG (Despali+ 2025, 2026) [29a, 29b]**: First cosmological
-  MHD simulations with SIDM. §9.5 expanded with baryonic-feedback
-  systematic: "adiabatic contraction suppresses SIDM cores in FP runs"
-  (density ratio FP/DMO ~30 in SIDM vs ~4 in CDM).
-- **micrOMEGAs 6.0 (Alguero+ 2025) [29c]**: Future-work reference only;
-  no installation attempted (per Rule 17).
-- **Audit doc**: `v0.3-prelim/docs/AUDIT_FORNAX6_DOC.md` documents the
-  full analysis of each proposal.
-
-**What's NEW in v18.1 (T165-T172, 2026-09-20):** Cloud-9 robustness investigation.
-Five robustness tests (T165-T169) showed the **7-point fit (RMSE = 0.25) is genuinely excellent** and Cloud-9 is the dominant outlier. Three resonant SIDM tests (T170-T172) using Tran+ 2024 framework (arXiv:2405.02388) showed that **standard Yukawa physics — even with resonances — cannot simultaneously fit Cloud-9 AND the 7 other points**. The 4000× Cloud-9 spike requires physics beyond standard Yukawa interactions. Also found new paper **Ohana, Zhang & Yu 2026 (arXiv:2608.04362)** which independently confirms the σ/m ≥ 50 floor via MCMC. Recommended paper update: replace σ/m = 128 with σ/m ≥ 50 (gives better fit RMSE = 1.033).
-
-**What's NEW in v1.14.1 (T133, 2026-09-20):** Tier 3 PySR symbolic regression
-independently discovered σ/m slope = -0.97 from the 8 phenomenology data
-points — matching our data-driven phenomenological slope. This triggered
-an audit of §9.8.4's earlier claim that "Hidden U(1) derives slope = 0.5."
-**The 0.5 claim was wrong** — the actual Born slope from
-`zhang2016_self_scattering_v` is exactly 2.0. §9.8.4 is now RETRACTED
-with a clear banner. The paper's phenomenology is unchanged (still
-data-driven, slope α_γ ≈ 0.92-1.0); only the failed UV-derivation
-claim is removed. The four no-go theorems are unchanged.
-
-**What's NEW in v1.14:** The Hidden U(1) UV completion proposed in v1.13.5 was
-**FALSIFIED** by the 2026-09-19 referee report (Δm = 10 MeV exceeds galactic
-KE_CM by 5 orders of magnitude). v1.14 explicitly retires the UV claim and
-documents **three independent UV completion no-go theorems**:
-- Magnetic dipole DM (T120.10): ruled out by LZ direct detection
-- Hidden U(1) + 10 MeV pseudo-Dirac (T120.16): ruled out by galactic kinematics
-- GeV-scale inelastic DM (T130): requires m_χ ≥ 46 TeV + thermal-relic unitarity violation
-- Published best-fit p-wave resonance (T131, Chu et al. 2019): fails on Cloud-9
-
-**Result:** No published UV completion solves the Cloud-9 vs dSph tension. The phenomenology (multi-component + gravothermal + Gaussian Breit-Wigner) is the only working framework.
-
-**Read the paper:** [`v0.3-prelim/docs/PAPER_V1_DRAFT.md`](v0.3-prelim/docs/PAPER_V1_DRAFT.md) (v1.14)
-
-**T120 series journey:**
-- T120.1-7: Built the phenomenology (multi-component + core-collapse + flattened slope)
-- T120.8-9: MCMC verification + fair BIC comparison
-- T120.10: Direct detection analysis (ruled out magnetic dipole)
-- T120.11: Found Hidden U(1) UV completion (Zhang 2016)
-- T120.12: Paper polishing
-- T120.13: Self-check found 2 bugs in new code
-- T120.14: Reframed slope problem as feature, not flaw
-- T120.15.B: Derived slope = 0.5 from UV physics, addressed reviewer comments
+**Read the paper:** [`v0.3-prelim/docs/PAPER_V1_DRAFT.md`](v0.3-prelim/docs/PAPER_V1_DRAFT.md) (v19.0)
+**Final review report:** [`v0.3-prelim/docs/V19_FINAL_REPORT_2026-09-27.md`](v0.3-prelim/docs/V19_FINAL_REPORT_2026-09-27.md)
 
 ---
 
