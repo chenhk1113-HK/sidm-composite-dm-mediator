@@ -144,37 +144,27 @@ This addresses the most prominent "soft spot" identified by the Phase 50 reviewe
 
 ## 🎯 Key findings (TL;DR) — focus on the most promising model
 
-**The most promising track (T90 multi-component SIDM, Paper v1.14.9 on `wip/multi-component-SIDM-core-collapse` @ `5e3c692`):**
+**The most promising track (T90 multi-component SIDM, Paper v19.0 on `wip/cloud-9-relhic`):**
 
-1. **Multi-resonance SIDM architecture satisfies 7 of 8 observational constraints simultaneously** with RMSE = 0.25. The architecture: ONE dominant Breit-Wigner resonance (v₁ = 28 km/s, Cloud-9 channel) + THREE clockwork-UV-derived nodes (v₃ = 178, v₄ = 430 km/s) + phenomenological peak heights (optimized for smooth σ/m(v)) on a Yukawa tail (α = 1.93, data-driven). Cloud-9 is the variance-absorbing 8th point — its σ/m ≥ 50 cm²/g floor cannot be derived from standard Yukawa physics (verified at α_D ∈ [0.01, 100] in T191).
+1. **Multi-resonance SIDM architecture describes 4 of 5 constrained channels** under physically motivated f_H (SPARC, Cloud-9, dSph, Cluster, JVAS). RMSE = 0.25 on the 4 PASS channels. Cloud-9 vs dSph tension is unresolved at Phase 44 parameters — the model maps the tension rather than explaining it away. *(See full stats in the next section.)*
 
-2. **Burkert wins on rotation curves alone.** Phase 42 dynesty on SPARC 120 galaxies: Burkert log Z = **-963** (BEST of 5), PISO log Z = -1409, Einasto log Z = -1595, NFW log Z = -2654, SIDM hybrid log Z = **-3300** (WORST). The 15-vs-1 parameter penalty means BIC disfavors multi-resonance once Occam is applied. **The paper is honest about this** — it presents the work as a **constraint map + no-go catalogue**, not a unified SIDM model.
+2. **5 no-go theorems rule out one-mediator UV.** v19.0 documents: (a) magnetic dipole DM (T120.10, LZ), (b) Hidden U(1) + pseudo-Dirac (T120.16, galactic kinematics), (c) GeV-scale inelastic DM (T130), (d) Chu 2019 p-wave (T131), (e) one-mediator UV systematic (T184, fails by 10⁸-10¹³×). Two-mediator Drobczyk 2025 candidate viable (δ = 0.43% fine-tuning) but does not resolve Cloud-9 vs dSph.
 
-3. **Bayes factor B = 21.3 favors multi-resonance on joint channels** (T177, log B = 3.06, semi-informative). On joint channels (Phase 54), multi-resonance wins raw log L (+6.08 over constant σ/m) but loses BIC-corrected (+3.22 favoring constant). The T195 figure (`t195_model_comparison.png`) shows all three comparisons side-by-side.
+3. **Path F1 (T207, v18.38) verdict split into §3.7.** The three-term σ_eff = f_H² σ_HH + 2 f_H f_L σ_HL + f_L² σ_LL decomposition resolves the structural SPARC limitation. RESOLVED under borrowed mode (SPARC log L = −0.09); MARGINAL under yang (−0.24); NOT RESOLVED under t202 (−0.60) or priored free fit (−2.03). **Honest framing:** Path F1 is a structural fix, not automatic data-resolution.
 
-4. **UV completion: 4 no-go theorems + 1 candidate.** v1.14 documents four independent UV completion no-gos: (a) Magnetic dipole DM (T120.10) — ruled out by LZ; (b) Hidden U(1) + 10 MeV pseudo-Dirac (T120.16) — ruled out by galactic kinematics; (c) GeV-scale inelastic DM (T130) — requires m_χ ≥ 46 TeV + thermal-relic unitarity violation; (d) Chu 2019 best-fit p-wave resonance (T131) — fails on Cloud-9. One-mediator UV (T184) ruled out by 10⁸-10¹³×. Two-mediator Drobczyk candidate (T185/T190/T192) viable at δ=0.43%, g_h_SM=0.00040, Ωh²=0.119 — but 5× broader than Drobczyk's 0.083%, requires composite UV or fine-tuning.
-
-5. **Testable predictions (CHARM-compliant config):**
-   - σ_SI ≈ **2×10⁻⁴⁹ cm²** (predicted null, 25× smaller than pre-T192 due to g_h_SM² scaling; below LZ/XENONnT/PandaX sensitivity)
-   - <σv>_0 ≈ 10⁻²⁹ cm³/s (off-resonance BW suppression; predicted null below CTA)
+4. **Testable predictions (CHARM-compliant Drobczyk config):**
+   - σ_SI ≈ 2×10⁻⁴⁹ cm² (predicted null, below LZ/XENONnT/PandaX sensitivity)
+   - <σv>_0 ≈ 10⁻²⁹ cm³/s (off-resonance BW suppression; below CTA)
    - S(v_F) ~ 15 at freeze-out, S(v_0) ~ 1 at halo (Sommerfeld combined enhancement ~100)
    - Beam-dump signal at g_h_SM = 0.00040 < 0.005 (CHARM-compliant)
 
-6. **50 tests pass** (31 existing + 19 new for T191-T194):
-   - **19 new tests** lock down: Ωh² = 0.119, g_h_SM = 0.00040, δ = 0.43% (T192 thermal-avg); δ_0(v=28) < π/2 at all α_D ∈ [0.01, 100] (T191); v_res = 0.185c (T193); σ_0 = 0.052, α = 1.93, RMSE = 0.250 (T194)
-   - **8 audits** processed: Fornax 6, DeepSeek Review 2-6, Grok Review, References
+5. **Phase 4A (Fig 5):** 60×60 V_max × M_halo σ_eff map; 8 observables cross-validated (3 PASS / 2 MARGINAL / 3 FAIL — Cloud-9 tail tension honestly disclosed).
 
-7. **8 references web-verified real** (Tier 1): Benitez-Llambay 2024 [15b], Ohana 2026 [15f], Drobczyk 2025 [15e], Yu 2026 [23], Horigome 2025 [27], AIDA-TNG 2026 [29b], micrOMEGAs 6.0 [29c], Engelhardt 2026 [49]. Audit doc: `v0.3-prelim/docs/AUDIT_REFERENCES.md`.
+6. **Phase 4B:** higher-N KiSS-SIDM pilot — negative result. N≈3000 was the only setup that reached ~70 Myr in the parameter envelope accessible without source-code modifications; both ±N break the run.
 
-**Tier-1 (master) findings (for context):**
+7. **24 standing numerical claims, all cross-validated** (`PAPER_STANDING_NUMBERS.md`); 35 citations resolve; 180 §-refs resolve; 8-check self-check passes (`scripts/run_round13_self_check.py`).
 
-8. **v0.7 supersedes v0.6 by adding DAMPE + Zhang+2025 LSS channels** — the velocity-slope tension dropped from 0.91σ to **0.60σ** (now below the 1.0 threshold). m_χ shifted from 364 GeV → **770 GeV**; σ/m₀ from 0.06 → **0.27 cm²/g**.
-
-9. **T87 forward prediction: composite-DM *cannot* claim the LZ event at v0.7 MAP** — composite-DM inelastic σ_DM-nucleon at 248 keV is **1.15 × 10⁻¹⁷ cm²**, predicting only **4.8 × 10⁻⁷³ events** in 2.84 tonne-years (vs 1 observed). **71 orders of magnitude below LZ sensitivity.**
-
-> **Full interpretation:** the v0.7 posterior is genuinely well-constrained within its scope (Benchmark A: composite dark pion + elementary A'). The standing posture (σ/m unchanged at current LZ precision) was developed honestly in T77-T79 and verified by an external `Updated review1.docx` reviewer on 2026-09-03. The T95.9 multi-stream result further reinforces that the SIDM model is robust against 9/10 independent stream probes — the GD-1 case is now formally separated as an "interpretation problem", not a "model problem".
->
-> **WIP-branch interpretation (T90, Paper v1.7):** the multi-resonance SIDM architecture satisfies Cloud-9 + SPARC + JVAS through 4 Breit-Wigner resonances (v²-space form, canonical) on top of a Yukawa background. **The +8.10 log-unit gain (Phase 44) is SPARC-dominated** (Phase 47 LOO): SPARC is the only channel whose removal hurts the joint fit; JVAS and Cloud-9 are variance-absorbing. The framework does NOT claim the JVAS signal — JVAS lies outside the reliable domain of the present multi-resonance model and is better described by complementary core-collapse SIDM (Zhang & Yu 2026; Tran+ 2025, PRD 112, 083003). Honest mixed result: multi-resonance wins RAW likelihood (+6.08 log-units vs constant σ/m in Phase 54) but LOSES BIC (+3.22 favoring constant σ/m). 5 independent UV embeddings (clockwork q^k, Secluded U(1) n², power-law, integer, dark-SU(N_c)) achieve MINIMAL fine-tuning (RMS 0.016–0.061) for the required resonance spectrum — robustness across UV completions, not a single special model. Self-check harness (50 tests + 7 audit claims pass) provides regression gate; action 2 (shared σ/m module across phase scripts) deferred until paper freeze per reviewer.
+> **WIP-branch interpretation (Paper v19.0):** this is a **constraint map + no-go catalogue**, not a unified SIDM model. Statistical comparisons are mixed (raw likelihood wins, BIC loses, SPARC alone loses to Burkert). All mixed verdicts are honestly disclosed. The 5 no-go theorems + Path F1 verdict split establish what the model rules out; Phase 4A shows where it works (Cloud-9) and where it doesn't (dSph tail); Phase 4B documents the KiSS-SIDM boundary. Submission-ready.
 
 ---
 
@@ -432,49 +422,30 @@ performed.
 
 ---
 
-## 📊 Statistical methodology notes (R12)
+## 📊 Statistical comparisons — key findings
 
-Three honest disclosures about how the headline numbers were produced.
-These matter for any reader who would otherwise read the headline table
-as "a measurement":
+**Three mixed-verdict comparisons honestly disclosed. Full data in `v0.3-prelim/docs/REFEREE_RESPONSES.md` (O1-O10).**
 
-1. **The "0.60σ tension" is not a conventional significance calculation.**
-   T41 computes the absolute difference between its derived velocity
-   index and a fixed comparison value (T39's a = +0.94), and calls it
-   significant only above an arbitrary threshold of 1.0. Read this as
-   "no obvious discrepancy within this pipeline," not "a formal
-   0.60-standard-deviation measurement."
+1. **Joint channels (Phase 54): multi-resonance wins RAW, loses BIC.**
+   - Raw log L: multi-resonance +6.08 over constant σ/m
+   - BIC: constant σ/m +3.22 (15 vs 1 parameter penalty)
+   - **Verdict:** raw likelihood favours the model; Occam penalised it back.
 
-2. **The headline table mixes different types of estimate.** The masses
-   (m_φ = 453 MeV, m_χ = 770 GeV for v0.8) are **MAP** values. The
-   cross-section σ/m₀ = 0.06 cm²/g and velocity index a = +0.13 are
-   calculated at the **MAP point**, not as posterior medians.
-   (Pre-T88.E v0.7: σ/m₀ = 0.27, a = +0.34.)
-   These numbers should NOT be read as one jointly determined particle;
-   the median and the MAP can disagree substantially when the posterior
-   is multimodal or skewed. The 68% intervals are very broad.
+2. **SPARC alone (Phase 42, 120 galaxies): Burkert wins decisively.**
+   - Burkert log Z = −963 (best of 5) vs SIDM hybrid log Z = −3300 (worst)
+   - **Verdict:** the multi-resonance architecture is over-parameterised for rotation curves alone. The +8.10 log-unit joint gain is **SPARC-dominated** (Phase 47 LOO).
 
-3. **One sampled coupling (α) is not currently connected to the
-   likelihood.** T41 reads `log_alpha` as a parameter, but the
-   annihilation calculation instead uses α_D = g²_χ/(4π) derived from
-   g_chi (the dark-Yukawa coupling). The displayed posterior for α is
-   therefore not an independently data-constrained result, and the
-   quoted Bayesian evidence (log Z = −164.87 at v0.8; was −163.29 at v0.7) inherits this
-   incompleteness. The ε (kinetic-mixing) posterior, by contrast, IS
-   data-constrained by LZ.
+3. **Bayes factor on joint channels: moderate evidence (T205).**
+   - log B = 2.41 favoring multi-resonance (downgraded from T177's log B = 3.06 with hand-picked σ_unc)
+   - **Verdict:** suggestive, not decisive. Not a "BIC winner."
 
-4. **The SPARC contribution is a calibrated saturation score, not a
-   galaxy-by-galaxy observational likelihood.** A hierarchical forward
-   model with per-galaxy likelihoods is the V0_6 ROADMAP item #2,
-   not yet shipped.
+**Three honest disclosure notes** (from R12, applicable to all numbers):
 
-5. **Quantitative bottleneck statement.** The v0.7 posterior predicts
-   σ_DM-nucleon ~**10⁻¹¹⁷ cm²** at the v0.7 MAP (ε ~10⁻³⁷, α_X ~10⁻¹⁷,
-   m_φ = 453 MeV), while the LZ WS2024 limit near 770 GeV is ~10⁻⁴⁶ cm².
-   The model prediction is ~**10⁻⁷¹ below** the LZ limit — kinetic-mixing
-   suppression at the v0.7 posterior puts the model **deep in the
-   evade-by-construction regime**, the same posture as v0.6 but
-   quantitatively confirmed at the new σ/m MAP.
+- **MAP vs median:** headline masses and σ/m₀ are MAP values, not posterior medians. They can disagree substantially when posteriors are multimodal. Read as "MAP at this likelihood," not "measurement."
+- **α sampling is disconnected from likelihood:** T41 samples log_α but the annihilation uses α_D from g_χ. Quoted Bayesian evidence inherits this gap. ε (kinetic-mixing) IS data-constrained by LZ.
+- **SPARC contribution is a calibrated saturation score, not a galaxy-by-galaxy likelihood.** A hierarchical forward model is on the v0.6 roadmap but not yet shipped.
+
+**Verdict pattern:** this paper is a **constraint map + no-go catalogue**, not a unified model. Statistical comparisons show where it wins (raw joint log L), where it loses (BIC, SPARC alone), and where it's marginal (Bayes factor). All three are honestly disclosed.
 
 ---
 
