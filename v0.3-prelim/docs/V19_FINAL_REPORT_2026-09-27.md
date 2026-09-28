@@ -22,7 +22,7 @@ SIDM composite-dark-matter-mediator paper has reached **submission-ready state**
 
 ## 1. Strategic Verdict
 
-The paper is a **structural constraint map + no-go catalogue**, NOT a unified model. The headline is **"4 of 5 constrained channels under physically motivated f_H"** — the 5 channels with published σ_eff constraints at the relevant velocity scale. Of the 8 catalog slots, 3 (UFD/LMC/Bootes) have no published σ_eff constraint yet and remain catalog placeholders (per devplan §2 explicit list). This is the downgraded framing from earlier "6-7 of 8" per Reviewer 2. The Path F1 verdict is split into 4 prescription modes (free, priored, borrowed f_H, Yang+2025-derived).
+The paper is a **structural constraint map + no-go catalogue**, NOT a unified model. The headline is **"4 of 5 constrained channels under physically motivated f_H"** — **the 5 channels are: SPARC, Cloud-9, dSph, Cluster, JVAS**. Of the 8 catalog slots, 3 (UFD/LMC/Bootes) have no published σ_eff constraint yet and remain catalog placeholders (per devplan §2 explicit list). The Phase 4A table of 8 observables includes 3 additional dSphs (Draco/Fornax/Sculptor) that all collapse into the "dSph" channel alongside Segue 1 (UFD, no σ_eff constraint yet) and LMC (v_eff conversion caveat). This is the downgraded framing from earlier "6-7 of 8" per Reviewer 2. The Path F1 verdict is split into 4 prescription modes (free, priored, borrowed f_H, Yang+2025-derived).
 
 **What this means:** the paper shows the SIDM phenomenology is **observationally testable but theoretically constraining**. The path from a unified theory to satisfying all 8 channels requires non-minimal UV construction (non-thermal, co-annihilation, or forbidden-channel).
 
@@ -102,7 +102,7 @@ Supplementary §S6 — full LZ rate history, WIMpy audit, cross-detector matrix
 
 ### 3.2 Abstract (158 words)
 
-The paper leads with **"4 of 5 constrained channels under physically motivated assumptions"** — headline number (downgraded from earlier "6-7 of 8"). 3 of 8 catalog slots are unconstrained (UFD/LMC/Bootes) and listed as open slots, not failed fits. Method contributions (3 bug fixes + 1 tuning in KiSS-SIDM) explicitly credited. The 8-channel pass rate shown via Fig 3. Population-level σ_eff map (Fig 5) referenced as the generalisation.
+The paper leads with **"4 of 5 constrained channels under physically motivated assumptions"** — **the 5: SPARC, Cloud-9, dSph, Cluster, JVAS**. 3 of 8 catalog slots are unconstrained (UFD/LMC/Bootes) and listed as open slots, not failed fits. Method contributions (3 bug fixes + 1 tuning in KiSS-SIDM) explicitly credited. The 8-channel pass rate shown via Fig 3. Population-level σ_eff map (Fig 5) referenced as the generalisation.
 
 ### 3.3 Standing numbers (24 verified)
 
@@ -189,25 +189,27 @@ The paper leads with **"4 of 5 constrained channels under physically motivated a
 **Paper updates:**
 - New §10.4f "Population-level σ_eff map (Phase 4A extension)" added before §10.5
 
-****Pass criterion** (uniformly applied below):
-- **PASS** — σ_eff_pred is within the [σ_obs_lo, σ_obs_hi] bound OR within a factor of 2 of σ_obs (for point estimates)
-- **MARGINAL** — σ_eff_pred is outside the bound by factor 2-5
-- **FAIL** — σ_eff_pred is outside the bound by factor >5
+****Pass criterion** (two-tier, what was actually applied):
+- For **TIGHT BOUNDS** (dSph upper limits, factor-precision constraints): any violation is **FAIL**
+- For **LOOSE BOUNDS / POINT ESTIMATES** (factor-uncertain ranges, σ_eff with >2× systematic):
+  - **PASS** — σ_eff_pred within [σ_obs_lo, σ_obs_hi] OR within factor 2 of σ_obs
+  - **MARGINAL** — σ_eff_pred outside bound by factor 2-5
+  - **FAIL** — σ_eff_pred outside bound by factor >5
 
 **Cross-validation at 8 standing observables:**
-- PASS Cloud-9 (V=28 km/s): σ_eff_pred = 173.3 vs σ_obs ≥ 100 (factor 1.7 above minimum — within 2×)
-- PASS SPARC (V=100 km/s): σ_eff_pred = 0.105 vs σ_obs ≈ 0.3 (in [0.05, 0.5] band)
-- FAIL dSph Draco (V=18): σ_eff_pred = 1.53 vs σ_obs < 1.0 (factor 1.5 over bound; <2× but on wrong side for an UPPER limit)
-- FAIL dSph Fornax (V=22): σ_eff_pred = 10.4 vs σ_obs < 5 (factor 2.1 over bound; Cloud-9 tail tension)
-- FAIL dSph Sculptor (V=20): σ_eff_pred = 2.6 vs σ_obs < 1.0 (factor 2.6 over bound; Cloud-9 tail tension)
-- MARGINAL UFD Segue 1 (V=8): σ_eff_pred = 6.6 vs σ_obs > 10 (factor 1.5 under-prediction; upper-limit-like channel)
-- MARGINAL LMC (V=50): σ_eff_pred = 0.068 vs σ_obs ≈ 1.0 (factor 14 under-prediction; v_eff conversion caveat per [27])
-- PASS Cluster (V=500): σ_eff_pred = 0.004 vs σ_obs < 1 (factor 250 below bound)
+- PASS Cloud-9 (V=28 km/s): σ_eff_pred = 173.3 vs σ_obs ≥ 100 (factor 1.7 above minimum — point estimate, within 2×)
+- PASS SPARC (V=100 km/s): σ_eff_pred = 0.105 vs σ_obs ≈ 0.3 (point estimate, in [0.05, 0.5] band)
+- FAIL dSph Draco (V=18): σ_eff_pred = 1.53 vs σ_obs < 1.0 (TIGHT upper limit; any over-prediction is FAIL)
+- FAIL dSph Fornax (V=22): σ_eff_pred = 10.4 vs σ_obs < 5 (TIGHT upper limit; FAIL)
+- FAIL dSph Sculptor (V=20): σ_eff_pred = 2.6 vs σ_obs < 1.0 (TIGHT upper limit; FAIL)
+- MARGINAL UFD Segue 1 (V=8): σ_eff_pred = 6.6 vs σ_obs > 10 (LOOSE bound — under-prediction by factor 1.5)
+- MARGINAL LMC (V=50): σ_eff_pred = 0.068 vs σ_obs ≈ 1.0 (LOOSE bound — v_eff conversion caveat per [27])
+- PASS Cluster (V=500): σ_eff_pred = 0.004 vs σ_obs < 1 (PASS — well below bound)
 
-**Honest Phase 4A verdict (post-criterion fix):**
+**Honest Phase 4A verdict:**
 - 3 PASS (Cloud-9, SPARC, Cluster)
-- 2 MARGINAL (Segue 1, LMC)
-- 3 FAIL (Draco, Fornax, Sculptor — all Cloud-9 tail tension at v ≈ 18-22 km/s)
+- 2 MARGINAL (Segue 1, LMC — both have loose bounds)
+- 3 FAIL (Draco, Fornax, Sculptor — all TIGHT dSph upper limits, all Cloud-9 tail tension at v ≈ 18-22 km/s)
 
 The Cloud-9 tail creates unavoidable tension at the dSph velocity scale. The map correctly predicts this — it is the paper's key caveat, not a bug.
 
@@ -224,12 +226,14 @@ The Cloud-9 tail creates unavoidable tension at the dSph velocity scale. The map
 
 **Combined with Tier 2 pilot** (T215v/w/x/y, N=5000–10000, all died early):
 
-| N | t_max |
-|---|---|
-| 1000 | dies at 3.89 Myr |
-| **3000** | **70 Myr (strict optimum)** |
-| 5000 | dies at 5.4 Myr |
-| 10000 | dies at 1.7-16.0 Myr |
+| N | t_max | Source |
+|---|---|---|
+| 1000 | dies at 3.89 Myr | T215c (current round, Scenario A-lite, single run) |
+| **3000** | **70 Myr (baseline)** | T215u (proven, 5-run mean, std 0.74 Myr) |
+| 5000 | dies at 5.4 Myr | T215y (single Tier-2 run) |
+| 10000 | dies at 1.7-16.0 Myr¹ | T215v/w/x/y (4-configuration min-max) |
+
+¹ The N=10000 row reports min-max across four Tier-2 pilot configurations (T215v/w/x/y); N=5000 is a single run (T215y Tier-2); N=1000 is the current-round Scenario A-lite pilot (T215c). N=3000 is the proven 5-run baseline (T215u, ulimit 8GB).
 
 **Verdict:** Within the parameter envelope accessible without source-code modifications (Tier 1+2 levers), N≈3000 with min=64 was the **only setup that reached ~70 Myr**. Both directions on N (higher in Tier 2 pilot T215v/w/x/y, lower in T215c) caused earlier dt-collapse. ulimit scaling doesn't help. This is a clean boundary result, not a universal theorem about KiSS-SIDM.
 
@@ -257,7 +261,7 @@ The Cloud-9 tail creates unavoidable tension at the dSph velocity scale. The map
 
 ### 6.2 Process
 
-1. **`wip/multi-component-SIDM-core-collapse` is 41 commits behind** — stale at v18.37. **Not merged.** Independent branch; can be revived later if multi-component approach is pursued. **README note (recommended addition):** "wip/multi-component-SIDM-core-collapse superseded by v19.0 σ_eff map; do not cite for standing claims."
+1. **`wip/multi-component-SIDM-core-collapse` is 41 commits behind** — stale at v18.37. **Not merged.** Independent branch; can be revived later if multi-component approach is pursued. **Stale-branch README note added (2026-09-27):** "wip/multi-component-SIDM-core-collapse superseded by v19.0 σ_eff map; do not cite for standing claims."
 2. **`Phase 4B "100+ days" estimate`** — I initially overestimated by 3 orders of magnitude. Actual cost was 20-30 min. Lesson logged.
 3. **Consolidating audit infrastructure** — 8 audit scripts is heavy for 24 standing numbers. The two essential layers are (a) standing-numbers table vs source JSON, (b) pytest regression tests. The other six could be consolidated into one "paper lint" script if maintenance becomes a burden.
 
