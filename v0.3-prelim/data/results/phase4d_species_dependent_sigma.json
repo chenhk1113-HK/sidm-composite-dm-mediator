@@ -1,0 +1,113 @@
+{
+  "metadata": {
+    "description": "Path 3: independent HH/HL/LL resonance peaks",
+    "model": "sigma_eff = f_H^2 sigma_HH + 2 f_H f_L sigma_HL + f_L^2 sigma_LL",
+    "free_params": [
+      "HL_offset (km/s)",
+      "LL_offset (km/s)"
+    ],
+    "in_sample": [
+      "Cloud-9 (RELHIC)",
+      "Draco (field dSph)",
+      "Sculptor (field dSph)",
+      "Fornax (satellite)",
+      "Cluster (Bullet)"
+    ],
+    "held_out": [
+      "Leo T (classical dSph)",
+      "Segue 1 (UFD)"
+    ]
+  },
+  "best_fit": {
+    "HL_offset": -113.472900390625,
+    "LL_offset": 1.318359375,
+    "loss": 0.0
+  },
+  "in_sample": {
+    "Cloud-9 (RELHIC)": {
+      "V_max": 28,
+      "sigma_pred": 106.71479080348799,
+      "sigma_obs": 100,
+      "bound": "lower",
+      "ratio": 1.0671479080348798,
+      "PASS": true,
+      "f_H": 0.05,
+      "log_E": 0.015,
+      "delta": 0.0
+    },
+    "Draco (field dSph)": {
+      "V_max": 18,
+      "sigma_pred": 0.9536051250600974,
+      "sigma_obs": 1.0,
+      "bound": "upper",
+      "ratio": 0.9536051250600974,
+      "PASS": true,
+      "f_H": 0.2,
+      "log_E": 0.06,
+      "delta": 0.0
+    },
+    "Sculptor (field dSph)": {
+      "V_max": 20,
+      "sigma_pred": 0.09028958364790848,
+      "sigma_obs": 1.0,
+      "bound": "upper",
+      "ratio": 0.09028958364790848,
+      "PASS": true,
+      "f_H": 0.2,
+      "log_E": 0.3610299956639812,
+      "delta": 0.0
+    },
+    "Fornax (satellite)": {
+      "V_max": 22,
+      "sigma_pred": 1.3379516234671439e-05,
+      "sigma_obs": 5.0,
+      "bound": "upper",
+      "ratio": 2.6759032469342877e-06,
+      "PASS": true,
+      "f_H": 0.3,
+      "log_E": 1.59,
+      "delta": 0.0
+    },
+    "Cluster (Bullet)": {
+      "V_max": 500,
+      "sigma_pred": 1.7899420505171695e-10,
+      "sigma_obs": 0.1,
+      "bound": "upper",
+      "ratio": 1.7899420505171694e-09,
+      "PASS": true,
+      "f_H": 0.5,
+      "log_E": 2.3,
+      "delta": 0.0
+    }
+  },
+  "held_out": {
+    "Leo T (classical dSph)": {
+      "V_max": 15,
+      "sigma_pred": 0.039637109283817265,
+      "sigma_obs": 0.5,
+      "bound": "upper",
+      "ratio": 0.07927421856763453,
+      "PASS": true,
+      "f_H": 0.2,
+      "log_E": 0.5071212547196624,
+      "delta": 0.0
+    },
+    "Segue 1 (UFD)": {
+      "V_max": 12,
+      "sigma_pred": 2.481412211131559,
+      "sigma_obs": 1.0,
+      "bound": "upper",
+      "ratio": 2.481412211131559,
+      "PASS": false,
+      "f_H": 0.1,
+      "log_E": 0.03,
+      "delta": 0.0
+    }
+  },
+  "verdict": {
+    "in_sample_pass": 5,
+    "in_sample_total": 5,
+    "held_out_pass": 1,
+    "held_out_total": 2
+  }
+}

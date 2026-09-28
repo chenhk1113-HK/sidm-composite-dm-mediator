@@ -1196,6 +1196,54 @@ RELHIC (Cloud-9) anchors log_E = 0 by construction; higher log_E corresponds to 
 
 Code: `scripts/build_continuous_E_predictive.py` (2-parameter fit with `scipy.optimize.minimize` Nelder-Mead; ~6 starting points). Results: `v0.3-prelim/data/results/phase4c_continuous_E_predictive.json` (in-sample + held-out). Plot: `v0.3-prelim/docs/figures/fig7_continuous_E_predictive.png`.
 
+### 10.4i Species-dependent σ_ij(v) — Path 3 follow-up
+
+§10.4g (categorical ℰ) and §10.4h (continuous ℰ-proxy) both fail to *predict* a held-out system. We now ask: does the missing parameter live in σ-v *shape* (independent resonance peaks per species)?
+
+**Model:** the two-component SIDM model has three species-pair cross sections σ_HH(v), σ_HL(v), σ_LL(v), each with Yukawa background + 5 Gaussian peaks. Currently only σ_HH is implemented (Phase 44); σ_HL = σ_LL = 0 reduces the model to σ_eff = f_H² × σ_HH(v). Path 3 introduces σ_HL and σ_LL with **independent peak positions** (HL_offset, LL_offset) while keeping peak amplitudes shared:
+
+σ_eff = f_H² × σ_HH(v) + 2 f_H f_L × σ_HL(v) + f_L² × σ_LL(v)
+
+where the Gaussian peaks of σ_HL are at v_targets + HL_offset and σ_LL peaks are at v_targets + LL_offset.
+
+**Fit:** 2 free parameters (HL_offset, LL_offset) + Path 2's β = -3.40 (continuous ℰ-proxy). Nelder-Mead, 35 starting points.
+
+**In-sample fit (5/5 PASS):**
+
+| Observable | f_H | σ_eff_fit | σ_obs | Bound | Verdict |
+|------------|----:|----------:|------:|-------|---------|
+| Cloud-9 (RELHIC) | 0.05 | 106.7 | 100 | ≥100 | PASS (7% margin) |
+| Draco (field dSph) | 0.20 | 0.954 | 1.0 | <1.0 | PASS (4.6% margin) |
+| Sculptor (field dSph) | 0.20 | 0.090 | 1.0 | <1.0 | PASS (91% margin) |
+| Fornax (satellite) | 0.30 | ~0 | 5.0 | <5 | PASS (oversuppressed) |
+| Cluster (Bullet) | 0.50 | ~0 | 0.1 | <0.1 | PASS (oversuppressed) |
+
+**Best-fit:** HL_offset = -113.47 km/s, LL_offset = +1.32 km/s.
+
+![Species-dependent σ(v) and σ_eff for in-sample + held-out](figures/fig8_species_dependent_sigma.png)
+
+**Held-out prediction (1/2 PASS):**
+
+| System | f_H | σ_eff_fit | σ_obs | Bound | Verdict |
+|--------|----:|----------:|------:|-------|---------|
+| Leo T (classical dSph) | 0.20 | 0.040 | 0.5 | <1 | PASS |
+| Segue 1 (UFD) | 0.10 | 2.481 | 1.0 | <1 | **FAIL (2.5× over)** |
+
+**Result: species-dependent σ_ij does NOT improve held-out predictions.** Segue 1 still fails by ~2.5× — essentially identical to Path 2's continuous-ℰ result.
+
+**What this tells us about the missing parameter:**
+
+1. **The missing parameter is NOT σ-v shape.** Independent resonance peaks per species (Path 3) and continuous ℰ-proxy (Path 2) both fail Segue 1 in the same way: σ_pred ≈ 2.4 vs σ_obs < 1. This is a robust negative result — two independent microphysics extensions converge on the same failure mode.
+2. **Segue 1 is the critical discriminator.** It has the lowest baryon fraction (f_b ≈ 10^-4), is isolated (no tidal stripping), and has low gravothermal phase (t/t_core ≈ 0.1). Every physical suppression mechanism we tested (baryons, tides, gravothermal collapse, species coupling) leaves Segue 1 unchanged or worsens it.
+3. **The categorical ℰ-rescaling (§10.4g) wins because it's a free parameter.** With field ×0.35 and satellite ×0.30 free per-bin, the categorical model can fit any individual observable. Continuous ℰ (§10.4h) and species-dependent σ (§10.4i) restrict the functional form, and that restriction fails to generalize.
+
+**Implication for the paper:** none of the three missing-parameter hypotheses (categorical ℰ-rescaling, continuous ℰ-proxy, species-dependent σ) is sufficient to *predict* a held-out system. The paper should:
+1. Keep §10.4g (categorical) as the strongest empirical statement — 5/5 PASS in-sample but no held-out test.
+2. Report §10.4h and §10.4i as **negative results** — these microphysics extensions do not generalize beyond the fit set.
+3. State the open question honestly: the "missing parameter" remains unidentified. Possible candidates not yet tested: (a) Cloud-9 floor systematics (Turini & Benítez-Llambay), (b) data-side σ/m constraints that move the dSph upper bounds, (c) genuinely novel σ(v) structure (e.g. velocity-derivative σ'(v) terms).
+
+Code: `scripts/build_species_dependent_sigma.py` (~360 lines). Results: `v0.3-prelim/data/results/phase4d_species_dependent_sigma.json` (in-sample + held-out). Plot: `v0.3-prelim/docs/figures/fig8_species_dependent_sigma.png`.
+
 ### 10.5 EFT target map for future UV completions
 
 The five no-go theorems above define what any future UV completion must
