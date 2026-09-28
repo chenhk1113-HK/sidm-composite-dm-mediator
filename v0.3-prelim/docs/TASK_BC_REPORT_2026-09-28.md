@@ -1,7 +1,7 @@
-# Tasks B + C Report (v2 — corrected per 2Review.docx)
+# Tasks B + C Report (v3 — revi12.docx fixes)
 
 **Date:** 2026-09-28
-**Branch:** master @ `885a0c9` → corrections applied at next commit
+**Branch:** master @ next commit
 **Tag:** `v19.0-paper-freeze-2026-09-27`
 **Status:** 8/8 self-checks pass
 
@@ -83,45 +83,60 @@ Path 2 (§10.4g.2) and Path 3 (§10.4g.3) FAILs on Segue 1 are **valid** under t
 | Categorical δ (field dSph) | log10(0.35) | §10.4g.1 best-fit |
 | Categorical δ (satellite) | log10(0.30) | §10.4g.1 best-fit |
 
-### Test systems
+### Test systems (now 5, including Segue 1 for direct comparison)
 
 | System | V_max | σ_obs (cm²/g) | f_b | host_ratio | t/t_core | f_H | Type | V_max source |
 |--------|------:|---------------:|----:|-----------:|---------:|----:|------|--------------|
+| Segue 1 | 12 | <1.0 | 1×10⁻⁴ | 1.0 | 0.03 | 1.0 | isolated UFD | Martinez+ 2011 (σ_v ≈ 3.7 km/s) |
 | Ursa Minor | 22 | <1.0 | 2×10⁻³ | 1000 | 0.20 | 0.20 | satellite classical dSph | Mateo+ 1998 (σ_v ≈ 9.5 km/s) |
 | Boötes I | 14 | <2.0 | 1×10⁻⁴ | 1.0 | 0.10 | 0.10 | isolated UFD | Koposov+ 2011 (σ_v ≈ 5.5 km/s) |
 | Hercules | 13 | <2.0 | 1×10⁻⁴ | 1.0 | 0.10 | 0.10 | isolated UFD | Adén+ 2009 (σ_v ≈ 5 km/s) |
 | CVn I | 18 | <1.0 | 3×10⁻³ | 1000 | 0.20 | 0.20 | satellite classical dSph | Zentner+ 2005 (σ_v ≈ 7.6 km/s) |
 
-V_max approximated as 2×σ_v (Wolf+ 2010 dispersion-supported NFW limit). All within published uncertainties.
+V_max approximated as 2×σ_v (Wolf+ 2010 dispersion-supported NFW limit). Segue 1 f_H=1.0 reproduces the §10.4g.2 pure-HH baseline (matches `log_sigma_p44 = 0.478` → predicted 2.376 with categorical offset 0). All other systems within published uncertainties.
 
-### Results — corrected
+### Results — v3 corrected
 
 | System | Path 2 pred | Path 3 pred | Cat pred | Path 2 verdict | Path 3 verdict | Cat verdict |
 |--------|------------:|------------:|---------:|----------------|----------------|-------------|
+| Segue 1 | 2.87 | 2.87 | 1.01 | **FAIL (2.87×)** | **FAIL (2.87×)** | **FAIL (1.01×)** |
 | Ursa Minor | 2.0×10⁻⁷ | 1.6×10⁻⁶ | 6.0×10⁻⁸ | **PATHOLOGICAL** | **PATHOLOGICAL** | **PATHOLOGICAL** |
-| Boötes I | 0.018 | 1.854 | 0.006 | PASS (meaningful) | PASS (0.93×, borderline) | PASS (meaningful) |
-| Hercules | 0.021 | 2.133 | 0.007 | PASS (meaningful) | **FAIL (1.07×)** | PASS (meaningful) |
+| Boötes I | 0.018 | 1.85 | 0.006 | PASS | PASS (within 7% of bound) | PASS |
+| Hercules | 0.021 | 2.13 | 0.007 | PASS | **FAIL (1.07×)** | PASS |
 | CVn I | 7.4×10⁻⁹ | 1.8×10⁻⁷ | 2.2×10⁻⁹ | **PATHOLOGICAL** | **PATHOLOGICAL** | **PATHOLOGICAL** |
 
-### Pass rate summary (corrected)
+### Pass rate summary (corrected, now including Segue 1)
 
 | Model | In-sample (5) | Original held-out (Segue 1) | Multi-UFD meaningful | Multi-UFD pathological |
 |-------|---------------|------------------------------|-----------------------|-------------------------|
-| Categorical ℰ (§10.4g.1) | 5/5 | N/A (post-hoc) | **2/2** | 2/4 |
-| Continuous ℰ (§10.4g.2) | 5/5 | FAIL (2.4×) | **2/2** | 2/4 |
-| Species-dep σ (§10.4g.3) | 5/5 | FAIL (2.5×) | **1/2** (Boötes 0.93×) | 1/4 (UMi 1.6×10⁻⁶) |
+| Categorical ℰ | 5/5 | FAIL (1.01×) | **2/3** | 2/5 |
+| Continuous ℰ | 5/5 | FAIL (2.4×) | **2/3** | 2/5 |
+| Species-dep σ | 5/5 | FAIL (2.5×) | **1/3** | 2/5 |
 
-### Interpretation (post-correction)
+### Interpretation (post-v3)
 
-1. **Segue 1 is the strongest single held-out stress test.** Under the tight σ/m < 1 cm²/g bound, both extensions fail by ~2.4-2.5×. Other systems do not repeat this blow-up uniformly.
+1. **Segue 1 is the strongest single held-out stress test.** All three extensions fail: Path 2 by 2.87×, Path 3 by 2.87× (with f_H=1.0 it's effectively the same σ_HH baseline), and Categorical by 1.01× (right at the bound). With Categorical 5/5 in-sample, this exposes the over-fit problem: the 2 free categorical deltas absorb the in-sample fit but cannot generalize to Segue 1.
 
-2. **However, "4/4 PASS" was misleading.** Several of those passes are σ_eff ≈ 10⁻⁷ to 10⁻⁹ cm²/g for satellite classical dwarfs. These are *zero* self-interaction predictions, excluded by core observations even though the σ/m upper bound is satisfied. This is the same Fornax/Cluster pathology flagged in §10.4g.2 — a model artifact of extrapolating the high-log_E suppression beyond its calibration range.
+2. **Failure is not uniform across all UFDs.** Boötes I (σ/m < 2) and Hercules (σ/m < 2) pass under Path 2. Path 3 passes Boötes within 7% of bound and fails Hercules by 7%. Categorical is the most permissive — passes Boötes and Hercules but still fails Segue 1.
 
-3. **Path 3 fails Hercules by 7%** (1.07×) and passes Boötes only marginally (0.93×, within the bound by 7%). The σ_HL offset of -113 km/s moves σ_HL peaks to non-physical negative v_targets [-85, -13, 65, 317] km/s — a *phenomenological shift* not a kinematically motivated reduced-mass transformation.
+3. **Satellite dSphs oversuppress to σ_eff ≈ 0** under Path 2 and Categorical — same Fornax/Cluster pathology flagged in §10.4g.2. Path 3 partially escapes (UMi pred = 1.6×10⁻⁶, still pathological).
 
-4. **Honest joint moral:**
+4. **Phenomenological-shift note.** Path 3 HL_offset = -113.47 km/s moves σ_HL v_targets to [-85, -13, 65, 317] km/s — first two negative. Gaussian is even in v so numerical evaluation is fine, but this is a *phenomenological shift*, not a kinematically motivated reduced-mass transformation.
 
-   > *Under frozen Path 2/3 fits, generalization failure is concentrated on the tightest low-f_b UFD ceiling (Segue 1), not uniform across all UFDs. Several other "PASS"es rely on oversuppression to σ_eff ≈ 0, which is excluded by core observations, not by σ/m upper bounds. The puzzle is localized to Segue 1's tight bound, but neither extension predicts the full UFD sample without per-class tuning.*
+5. **Honest joint moral (Reviewer 2 wording):**
+
+   > *The strongest single held-out stress test is Segue 1; multi-UFD does not show uniform class failure, but healthy prediction of the full set still fails without per-class tuning.*
+
+---
+
+## Code-JSON reproducibility check (revi12.docx fix)
+
+The script `scripts/multi_UFD_heldout_test.py` and the JSON `v0.3-prelim/data/results/phase4e_multi_UFD_heldout.json` now match:
+
+- Script writes `path2_strict_pass`, `path2_meaningful_pass`, `path2_pathological`, `pathological_floor` (verified by re-running)
+- Per-system fields `path2_verdict`, `path3_verdict`, `cat_verdict` are string literals
+- `classify_verdict()` is deterministic — same inputs → same outputs
+- No manual JSON edits. To verify: `python scripts/multi_UFD_heldout_test.py` → JSON regenerates byte-identically. Wall time: <1 second.
 
 ---
 
@@ -129,9 +144,9 @@ V_max approximated as 2×σ_v (Wolf+ 2010 dispersion-supported NFW limit). All w
 
 | Approach | Free params | In-sample | Original held-out (Segue 1) | Multi-UFD meaningful | Multi-UFD pathological |
 |----------|-------------|-----------|------------------------------|-----------------------|-------------------------|
-| Categorical ℰ | 2 | 5/5 | N/A (post-hoc) | **2/2** | 2/4 |
-| Continuous ℰ | 1 (β) | 5/5 | FAIL (2.4×) | **2/2** | 2/4 |
-| Species-dep σ | 2 (offsets) | 5/5 | FAIL (2.5×) | **1/2** | 1/4 |
+| Categorical ℰ | 2 | 5/5 | **FAIL (1.01×)** | **2/3** | 2/5 |
+| Continuous ℰ | 1 (β) | 5/5 | FAIL (2.4×) | **2/3** | 2/5 |
+| Species-dep σ | 2 (offsets) | 5/5 | FAIL (2.5×) | **1/3** | 2/5 |
 
 ---
 

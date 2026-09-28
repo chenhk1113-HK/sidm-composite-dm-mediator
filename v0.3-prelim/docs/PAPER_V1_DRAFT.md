@@ -1296,11 +1296,22 @@ The recommendation in §10.4g.5 was to apply the frozen Path 2 and Path 3 parame
 
 **Phenomenological-shift note (Path 3).** With HL_offset = -113.47 km/s, the shifted σ_HL v_targets become [-85, -13, 65, 317] km/s — the first two are negative. The Gaussian resonance is even in v, so the numerical evaluation is well-defined, but physically the σ_HL peaks are at non-physical positions. This is a *phenomenological shift*, not a kinematically motivated reduced-mass transformation (which would predict v_HL ≈ v_HH × √2 ≈ v_HH × 1.4, a much smaller offset). The fit is therefore closer to "turn σ_HL off in the dSph window" than to genuine new microphysics.
 
-**Key finding: Segue 1 is a one-off FAIL, not a uniform class failure.** Multi-UFD held-out under frozen parameters shows:
+**Key finding: Segue 1 is the strongest single held-out stress test, not a uniform class failure.** Multi-UFD held-out under frozen parameters shows:
 
-1. The dramatic ~2.5× Segue 1 failure is **not** repeated on every UFD. Boötes I and Hercules (isolated UFDs with looser σ/m < 2 cm²/g bounds) pass under continuous ℰ.
-2. **However**, the extensions do not predict the full UFD sample without per-class tuning. Path 2 oversuppresses satellite dSphs to σ_eff ≈ 0 — excluded by core observations, not by σ/m bounds. Path 3 remains marginally OK on Boötes (0.93×, within the bound by 7%) and fails Hercules (1.07×, over the bound by 7%).
-3. **The "missing parameter" is NOT class-wide, but neither extension predicts the full sample.** A complete model needs to handle both isolated UFDs (Segue 1-like tight bounds) and satellite dSphs (UMi/CVn I core observations) without pathological oversuppression.
+| System | V_max | f_H | Path 2 pred | Path 3 pred | Cat pred | Bound | Path 2 verdict | Path 3 verdict | Cat verdict |
+|--------|------:|----:|------------:|------------:|---------:|------:|----------------|----------------|-------------|
+| **Segue 1** (UFD, isolated) | 12 | 1.0 | **2.87** | **2.87** | **1.01** | <1.0 | **FAIL (2.87×)** | **FAIL (2.87×)** | **FAIL (1.01×)** |
+| Ursa Minor (classical dSph, sat.) | 22 | 0.20 | 2.0×10⁻⁷ | 1.6×10⁻⁶ | 6.0×10⁻⁸ | <1.0 | PATHOLOGICAL | PATHOLOGICAL | PATHOLOGICAL |
+| Boötes I (UFD, isolated) | 14 | 0.10 | 0.018 | 1.85 | 0.006 | <2.0 | PASS | PASS (within 7% of bound) | PASS |
+| Hercules (UFD, isolated) | 13 | 0.10 | 0.021 | 2.13 | 0.007 | <2.0 | PASS | **FAIL (1.07×)** | PASS |
+| CVn I (classical dSph, sat.) | 18 | 0.20 | 7.4×10⁻⁹ | 1.8×10⁻⁷ | 2.2×10⁻⁹ | <1.0 | PATHOLOGICAL | PATHOLOGICAL | PATHOLOGICAL |
+
+*Segue 1 row added per revi12.docx reviewer request for direct comparison. f_H=1.0 (pure-HH) reproduces the §10.4g.2 baseline (`log_sigma_p44 = 0.478` → predicted 2.376 with categorical offset 0); f_H=0.10 yields predicted 0.029 (PASS) which would mask the original finding. Using f_H=1.0 keeps Segue 1 in the same family as the original held-out test.*
+
+1. **The dramatic ~2.5-3× Segue 1 failure is the strongest held-out stress test in our sample.** Categorical ℰ also fails Segue 1 by 1.01× (right at the bound). With categorical 5/5 in-sample, this exposes the over-fit problem: the 2 free categorical deltas absorb the in-sample fit but cannot generalize to Segue 1.
+2. **However, the failure is not uniform across all UFDs.** Boötes I (isolated UFD, σ/m < 2) and Hercules (isolated UFD, σ/m < 2) pass under Path 2. Path 3 passes Boötes within 7% of the bound (pred = 1.85, bound = 2.0, 93% margin) and fails Hercules by 7% (pred = 2.13).
+3. **Satellite dSphs (UMi, CVn I) oversuppress to σ_eff ≈ 0** under Path 2 and Categorical — same Fornax/Cluster pathology flagged in §10.4g.2. Path 3 partially escapes (UMi pred = 1.6×10⁻⁶, still pathological).
+4. **The strongest single held-out stress test is Segue 1; multi-UFD does not show uniform class failure, but healthy prediction of the full set still fails without per-class tuning.** (Wording per Reviewer 2, revi12.docx.)
 
 **Per-system V_max sources:** Ursa Minor σ_v ≈ 9.5 km/s (Mateo+ 1998; updated by Pace 2020 DR2); V_max ≈ 2σ_v = 19-22 km/s, code uses 22. Boötes I σ_v ≈ 5.5 km/s (Koposov+ 2011); V_max ≈ 11-14 km/s, code uses 14. Hercules σ_v ≈ 5 km/s (Adén+ 2009); V_max ≈ 10-13 km/s, code uses 13. CVn I σ_v ≈ 7.6 km/s (Zentner+ 2005); V_max ≈ 15-18 km/s, code uses 18. All within published uncertainties; the kinematic conventions used are v_eff = V_max/√2 and dispersion-supported NFW limit (Wolf+ 2010).
 

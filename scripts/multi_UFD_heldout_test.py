@@ -68,6 +68,12 @@ UFD_DATASET = [
     # sigma_obs_upper: sigma/m < X cm^2/g from published SIDM constraints
     # f_b from Read+ 2019 stellar-to-halo mass relation
     # host_ratio: 1.0 for isolated UFDs, 1000+ for satellites
+    # Segue 1 included for direct comparison with §10.4g.2 (continuous) and §10.4g.3 (species-dep).
+    # Values from Martinez+ 2011 (sigma_v ~3.7 km/s), Read+ 2019 (sigma/m < 1), Fritz+ 2018 (orbit).
+    # (V_max, sigma_obs, f_b, host_ratio, t_tc, f_H) match build_continuous_E_predictive.py held-out row:
+    # V_max=12, f_b=1e-4, host_ratio=1.0, t_tc=0.03, f_H=1.0 (treated as pure-HH, matches the
+    # log_sigma_p44=0.478 baseline used in §10.4g.2 → predicted 2.376 → FAIL).
+    ("Segue 1 (UFD, isolated, V_max from Martinez 2011)", 12.0, 1.0, 1e-4, 1.0, 0.03, 1.0),
     ("Ursa Minor (classical dSph, satellite)", 22.0, 1.0, 2e-3, 1000.0, 0.20, 0.20),
     ("Bootes I (UFD, isolated)", 14.0, 2.0, 1e-4, 1.0, 0.10, 0.10),
     ("Hercules (UFD, isolated)", 13.0, 2.0, 1e-4, 1.0, 0.10, 0.10),
@@ -90,6 +96,22 @@ DELTAS_CATEGORICAL = {
     "satellite": np.log10(0.30),   # satellite dSph x 0.30
     "cluster": 0.0,
 }
+
+# Three-state verdict scheme (per 2Review.docx, revi12.docx):
+#   PASS        — pred <= bound AND pred >= PATHOLOGICAL_FLOOR
+#   FAIL        — pred > bound (model predicts too much self-interaction)
+#   PATHOLOGICAL — pred < PATHOLOGICAL_FLOOR (zero SIDM, excluded by cores)
+# Reporting threshold, not a measured lower bound.
+PATHOLOGICAL_FLOOR = 0.001  # cm^2/g
+
+
+def classify_verdict(pred, bound):
+    """Three-state verdict (PASS / FAIL / PATHOLOGICAL)."""
+    if pred > bound:
+        return "FAIL"
+    if pred < PATHOLOGICAL_FLOOR:
+        return "PATHOLOGICAL"
+    return "PASS"
 
 
 p44 = load_phase44_params()
@@ -168,6 +190,9 @@ def main():
     path2_pass = 0
     path3_pass = 0
     cat_pass = 0
+    path2_pathological = 0
+    path3_pathological = 0
+    cat_pathological = 0
 
     for name, V, sigma_obs, f_b, host_ratio, t_tc, f_H in UFD_DATASET:
         is_satellite = host_ratio > 10.0
@@ -176,30 +201,60 @@ def main():
         p3 = compute_path3_prediction(V, f_b, host_ratio, t_tc, f_H)
         cat = compute_categorical_prediction(V, f_b, host_ratio, t_tc, f_H, is_satellite)
 
-        # Apply sigma_obs upper bound check
-        p2_ok = p2 <= sigma_obs
-        p3_ok = p3 <= sigma_obs
-        cat_ok = cat <= sigma_obs
+        # Three-state verdicts
+        v2 = classify_verdict(p2, sigma_obs)
+        v3 = classify_verdict(p3, sigma_obs)
+        vc = classify_verdict(cat, sigma_obs)
 
-        if p2_ok: path2_pass += 1
-        if p3_ok: path3_pass += 1
-        if cat_ok: cat_pass += 1
+        # Strict pass counter (pred <= bound, includes pathological)
+        if v2 == "PASS" or v2 == "PATHOLOGICAL":
+            path2_pass += 1
+        if v3 == "PASS" or v3 == "PATHOLOGICAL":
+            path3_pass += 1
+        if vc == "PASS" or vc == "PATHOLOGICAL":
+            cat_pass += 1
 
-        print(f"{name:<35} {V:>6.1f} {f_H:>5.2f} {p2:>10.3f} {p3:>10.3f} "
-              f"{cat:>10.3f} {sigma_obs:>7.2f}")
+        if v2 == "PATHOLOGICAL":
+            path2_pathological += 1
+        if v3 == "PATHOLOGICAL":
+            path3_pathological += 1
+        if vc == "PATHOLOGICAL":
+            cat_pathological += 1
+
+        print(f"{name:<35} {V:>6.1f} {f_H:>5.2f} {p2:>10.3g} {p3:>10.3g} "
+              f"{cat:>10.3g} {sigma_obs:>7.2f} {v2:>11} {v3:>11} {vc:>11}")
 
         results[name] = {
             "V_max": V, "f_H": f_H, "f_b": f_b, "host_ratio": host_ratio,
             "t_tc": t_tc, "sigma_obs_upper_bound": sigma_obs,
-            "path2_pred": float(p2), "path2_pass": bool(p2_ok),
-            "path3_pred": float(p3), "path3_pass": bool(p3_ok),
-            "cat_pred": float(cat), "cat_pass": bool(cat_ok),
+            "path2_pred": float(p2), "path2_pass": bool(v2 != "FAIL"),
+            "path2_pathological": bool(v2 == "PATHOLOGICAL"),
+            "path2_verdict": v2,
+            "path3_pred": float(p3), "path3_pass": bool(v3 != "FAIL"),
+            "path3_pathological": bool(v3 == "PATHOLOGICAL"),
+            "path3_verdict": v3,
+            "cat_pred": float(cat), "cat_pass": bool(vc != "FAIL"),
+            "cat_pathological": bool(vc == "PATHOLOGICAL"),
+            "cat_verdict": vc,
         }
 
     print()
-    print(f"Path 2 (continuous E, beta = -3.40): {path2_pass}/{len(UFD_DATASET)} PASS")
-    print(f"Path 3 (species-dep sigma): {path3_pass}/{len(UFD_DATASET)} PASS")
-    print(f"Categorical E (§10.4g.1, post-hoc): {cat_pass}/{len(UFD_DATASET)} PASS")
+    # Strict (includes pathological)
+    print(f"Path 2 strict pass (incl. pathological): {path2_pass}/{len(UFD_DATASET)}")
+    print(f"Path 3 strict pass (incl. pathological): {path3_pass}/{len(UFD_DATASET)}")
+    print(f"Categorical strict pass (incl. pathological): {cat_pass}/{len(UFD_DATASET)}")
+    print()
+    # Meaningful (excludes pathological)
+    p2_meaningful = path2_pass - path2_pathological
+    p3_meaningful = path3_pass - path3_pathological
+    cat_meaningful = cat_pass - cat_pathological
+    n_test = len(UFD_DATASET)
+    print(f"Path 2 meaningful pass: {p2_meaningful}/{n_test - path2_pathological} "
+          f"({path2_pathological}/{n_test} PATHOLOGICAL)")
+    print(f"Path 3 meaningful pass: {p3_meaningful}/{n_test - path3_pathological} "
+          f"({path3_pathological}/{n_test} PATHOLOGICAL)")
+    print(f"Categorical meaningful pass: {cat_meaningful}/{n_test - cat_pathological} "
+          f"({cat_pathological}/{n_test} PATHOLOGICAL)")
     print()
     print("=" * 70)
     print("VERDICT")
@@ -216,12 +271,24 @@ def main():
         print("in a specific subset of UFDs (segregation by another variable).")
 
     results["verdict"] = {
-        "path2_pass": path2_pass,
-        "path2_total": len(UFD_DATASET),
-        "path3_pass": path3_pass,
-        "path3_total": len(UFD_DATASET),
-        "cat_pass": cat_pass,
-        "cat_total": len(UFD_DATASET),
+        # Strict counts (pred <= bound, includes pathological as PASS)
+        "path2_strict_pass": path2_pass,
+        "path2_strict_total": n_test,
+        "path3_strict_pass": path3_pass,
+        "path3_strict_total": n_test,
+        "cat_strict_pass": cat_pass,
+        "cat_strict_total": n_test,
+        # Meaningful counts (excludes pathological)
+        "path2_meaningful_pass": p2_meaningful,
+        "path2_meaningful_fail": n_test - p2_meaningful - path2_pathological,
+        "path2_pathological": path2_pathological,
+        "path3_meaningful_pass": p3_meaningful,
+        "path3_meaningful_fail": n_test - p3_meaningful - path3_pathological,
+        "path3_pathological": path3_pathological,
+        "cat_meaningful_pass": cat_meaningful,
+        "cat_meaningful_fail": n_test - cat_meaningful - cat_pathological,
+        "cat_pathological": cat_pathological,
+        "pathological_floor": PATHOLOGICAL_FLOOR,
     }
 
     def _convert(o):
