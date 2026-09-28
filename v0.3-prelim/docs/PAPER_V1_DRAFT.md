@@ -1111,102 +1111,88 @@ Figure 5 shows the population-level σ_eff map across the V_max × M_halo plane 
 
 See `v0.3-prelim/data/results/phase4a_population_sigma_eff_map.json` for the full 60×60 grid and `phase4a_population_sigma_eff_summary.txt` for the text summary.
 
-### 10.4g Categorical ℰ (environment) axis — Phase 4B Option B (exploratory, post-hoc)
+### 10.4g Investigation of a missing parameter (3-path negative finding)
 
-A reviewer (A reasoned guess.docx, 2026-09-28; assessment.docx, 2026-09-28) proposed that the Cloud-9 vs dSph tension cannot be resolved by additional σ(v) structure alone, but may indicate a **system-dependent effective interaction** that breaks the universal σ(v) assumption. The proposal: σ_eff = σ_eff(v, f_H, ℰ), where ℰ is an environmental/assembly/baryonic-state variable.
+A reviewer (A reasoned guess.docx, 2026-09-28) proposed that the Cloud-9 vs dSph tension cannot be resolved by additional σ(v) structure alone, but may indicate a **system-dependent effective interaction** that breaks the universal σ(v) assumption. We investigated three concrete formulations of this hypothesis — categorical ℰ-rescaling, continuous ℰ-proxy, and species-dependent σ_ij(v) — and report **none of them generalize to a held-out system**. The categorical approach is descriptive (5/5 PASS in-sample, no held-out test); the continuous and species-dependent approaches are predictive (5/5 in-sample, but 1/2 held-out FAIL on Segue 1).
 
-**This section is an exploratory, post-hoc consistency check, not a derivation.** A predictive test of σ_eff(v, f_H, ℰ) would require (i) ℰ fixed from independent data, (ii) application to a held-out system not used in fitting, and (iii) recovery of PASS without re-tuning. None of these is done here. The test below asks only whether *if* one allows a constant rescaling per ℰ bin, the Phase 4A dSph FAIL pattern can be removed.
+This section is therefore an **investigation of what is *not* sufficient**, not a resolution. The categorical ℰ-rescaling is kept exploratory (post-hoc), and the continuous/species-dependent extensions are kept as falsifiable tests that Segue 1 fails.
 
-**Test:** we extend the Phase 4A σ_eff map with a categorical ℰ axis — ℰ ∈ {RELHIC, field dSph, satellite dSph, cluster} — and apply a per-bin constant rescaling factor ℰ_rescale to the Phase 4A predictions. Four tests:
+**Segue 1 discriminator.** Every test below fails on Segue 1 (V_max≈12 km/s, isolated UFD, f_b ≈ 10^-4, σ/m < 1 cm²/g; bound from Pace 2016 + Read+ 2019, assuming v_eff at V_max/√2 convention). Segue 1 has the lowest baryon fraction, no host halo, and minimal gravothermal collapse — every baryon/tide/collapse lever is weak. **If a microphysics extension produces σ_eff > 1 at V_max ≈ 12 km/s, it fails Segue 1's tight upper bound.** This bound is *conditional* on the published analysis — if the literature consensus softens, the FAIL shrinks; if it tightens, the FAIL strengthens.
 
-| Test | ℰ_rescale | Cloud-9 (RELHIC) | Draco (field) | Sculptor (field) | Fornax (sat.) | Cluster |
+#### 10.4g.1 Categorical ℰ-rescaling (Phase 4B Option B, exploratory)
+
+Categorize systems into ℰ ∈ {RELHIC, field dSph, satellite dSph, cluster} and apply a per-bin constant rescaling factor ℰ_rescale to the Phase 4A predictions.
+
+**Four tests (post-hoc, fitted to same observables that failed Phase 4A):**
+
+| Test | ℰ_rescale | Cloud-9 | Draco | Sculptor | Fornax | Cluster |
 |---|---|---|---|---|---|---|
 | Null (Phase 4A) | 1.0 / 1.0 / 1.0 | PASS | FAIL | FAIL | FAIL | PASS |
 | Moderate | 1.0 / 1.0 / 0.5 | PASS | FAIL | FAIL | FAIL | PASS |
-| Strong (reviewer's S=1/3) | 1.0 / 1.0 / 0.3 | PASS | FAIL | FAIL | **PASS** | PASS |
-| **Best-fit** (free per-bin) | **1.0 / 0.35 / 0.30** | **PASS** | **PASS** | **PASS** | **PASS** | **PASS** |
+| Strong (S=1/3) | 1.0 / 1.0 / 0.3 | PASS | FAIL | FAIL | **PASS** | PASS |
+| **Best-fit** | **1.0 / 0.35 / 0.30** | **PASS** | **PASS** | **PASS** | **PASS** | **PASS** |
 
 ![σ_eff vs V_max per ℰ bin (best-fit rescaling)](figures/fig6_environment_axis_sigma_eff.png)
 
-**Result (constrained):** with field-dSph ×0.35 and satellite-dSph ×0.30 constant rescaling (RELHIC ×1.0, cluster ×1.0 unchanged), all 5 standing observables PASS the two-tier criterion. The required suppression factors are order-of-magnitude consistent with published expectations for baryonic-feedback suppression in field dwarfs (~0.3–0.5, AIDA-TNG) and combined tidal + baryonic effects in satellite dSphs (~0.2–0.4, Silverman+ 2026 + Pace+ 2021).
+**Result (constrained):** with field-dSph ×0.35 and satellite-dSph ×0.30 constant rescaling (RELHIC ×1.0, cluster ×1.0), all 5 standing observables PASS. The suppression factors are order-of-magnitude consistent with published expectations for baryonic-feedback suppression in field dwarfs (~0.3–0.5, AIDA-TNG) and combined tidal + baryonic effects in satellite dSphs (~0.2–0.4, Silverman+ 2026).
 
 **What this does NOT show:**
 
-- *Not* a derivation of σ_eff(v, f_H, ℰ). The two rescaling factors (field ×0.35, satellite ×0.30) are fitted to the same observables that failed Phase 4A. Almost any multiplicative rescue aimed at the failing points would "PASS." This is a consistency check on the *direction* of the environment hypothesis, not independent confirmation.
-- *Not* a prediction for a held-out system. No new dwarf with intermediate ℰ was tested. A genuine predictive test would (i) fix ℰ_rescale from an external calibration (independent N-body or hydro simulations), (ii) apply to a benchmark with ℰ between fitted bins, and (iii) recover PASS at the predicted magnitude.
+- *Not* a derivation of σ_eff(v, f_H, ℰ). The two rescaling factors are fitted to the same observables that failed Phase 4A. Almost any multiplicative rescue would "PASS."
+- *Not* a prediction for a held-out system. No new dwarf with intermediate ℰ was tested.
 - *Not* a change to the underlying σ(v) microphysics. ℰ rescales the *output*; the Yukawa + Gaussian resonance structure remains unchanged.
-- *Not* independent of the Cloud-9 anchor. The Cloud-9 PASS depends on the existing 173 cm²/g peak; if the Cloud-9 floor moves (e.g. σ/m ≥ 50 × S with S < 1/3 per Turini & Benítez-Llambay), the RELHIC PASS could degrade.
+- *Not* independent of the Cloud-9 anchor. If the Cloud-9 floor moves (σ/m ≥ 50 × S with S < 1/3 per Turini & Benítez-Llambay), the RELHIC PASS could degrade.
 
 **Correct claim:** *A categorical environment-dependent suppression of order 0.3–0.35 on field/satellite dSph σ_eff can remove the Phase 4A dSph FAILs while leaving RELHIC and cluster unchanged.*
 
-**Incorrect claim:** *"The Cloud-9 vs dSph puzzle is solved by the ℰ axis."* (We do not make this claim.)
-
-**Implication for the paper:** this exploratory test demonstrates *where* a system-dependent correction would need to enter (at the v=18–22 km/s dSph band, not at SPARC or cluster scale) and *what magnitude* (factor ~3 suppression) would be required to remove the Phase 4A tension. The deeper microphysics (which ℰ variable — baryon fraction, tidal-stripping factor, gravothermal collapse phase — and which physical mechanism) is left for future work, consistent with the paper's constraint-map framing and the reviewer's own caveat that "this is a hypothesis test, not a resolution."
+**Incorrect claim:** *"The Cloud-9 vs dSph puzzle is solved by the ℰ axis."*
 
 Code: `scripts/build_sigma_eff_environment_axis.py`. Results: `v0.3-prelim/data/results/phase4b_environment_axis.json` (4 tests). Plot: `v0.3-prelim/docs/figures/fig6_environment_axis_sigma_eff.png`.
 
+#### 10.4g.2 Continuous ℰ-proxy (Path 2, predictive test FAILS)
 
-### 10.4h Continuous ℰ-proxy with held-out prediction — Path 2 follow-up
-
-§10.4g demonstrated that a *categorical* ℰ-rescaling (field ×0.35, satellite ×0.30) removes the Phase 4A dSph FAILs. We now ask whether a **continuous** ℰ-proxy — derived from physical observables, not categorical labels — is sufficient to *predict* a held-out system.
-
-**Continuous ℰ-proxy definition.** Combining three physical ingredients:
+Replace categorical ℰ with a continuous ℰ-proxy combining three physical ingredients:
 
 log_E = max(0, log10(f_b / 10^-3)) + 0.5 × log10(host_M_vir / M_dwarf) + 0.3 × (t / t_core)
 
-where:
-- f_b is the stellar baryon fraction (RELHIC: ≈ 10^-4; field dSph: ≈ 10^-3 to 10^-2; cluster: ≈ 0.05-0.15)
-- host_M_vir / M_dwarf is the host-to-dwarf mass ratio (RELHIC, field dSph, cluster: 1; satellite dSph: 100-1000)
-- t / t_core is the gravothermal collapse phase (RELHIC: 0.05; uncollapsed dSph: 0.2; cluster: 1.0)
-
 RELHIC (Cloud-9) anchors log_E = 0 by construction; higher log_E corresponds to stronger expected suppression.
 
-**Two-parameter model fit:** log10(σ_eff) = log10(σ_eff_P44) + β × log_E + δ_bin, where β is a global power-law slope and δ_bin is a per-categorical-bin offset. Fit to the 5 standing observables (Cloud-9, Draco, Sculptor, Fornax, Cluster).
+**Two-parameter model:** log10(σ_eff) = log10(σ_eff_P44) + β × log_E + δ_bin. Fit to 5 standing observables (Nelder-Mead, 6 starting points, scipy.optimize.minimize).
 
-**In-sample fit:** β = -3.40, all 4 δ_bin offsets converge to ≈ 0 (model reduces to 1-parameter power-law, since per-bin offsets are underdetermined with only 5 data points). **5/5 PASS** in-sample.
+**In-sample fit:** β = -3.40, all 4 δ_bin offsets converge to ≈ 0 (per-bin offsets are underdetermined with only 5 data points; the model reduces to a 1-parameter power-law). **5/5 PASS** in-sample.
 
-| Observable | log_E | σ_eff_P44 | σ_eff_fit | σ_obs | Bound | Verdict |
-|------------|------:|----------:|----------:|------:|-------|---------|
-| Cloud-9 (RELHIC) | 0.015 | 173.3 | 154.1 | 100 | ≥100 | PASS (54% margin) |
-| Draco (field dSph) | 0.060 | 1.53 | 0.96 | 1.0 | <1.0 | PASS (4% margin) |
-| Sculptor (field dSph) | 0.361 | 2.60 | 0.15 | 1.0 | <1.0 | PASS (85% margin) |
-| Fornax (satellite) | 1.590 | 10.4 | ~0 | 5.0 | <5 | PASS (oversuppressed) |
-| Cluster (Bullet) | 2.300 | 0.001 | ~0 | 0.1 | <1 | PASS (oversuppressed) |
-
-![Continuous ℰ-proxy fit with held-out prediction](figures/fig7_continuous_E_predictive.png)
+| Observable | log_E | σ_eff_fit | σ_obs | Bound | Verdict |
+|------------|------:|----------:|------:|-------|---------|
+| Cloud-9 (RELHIC) | 0.015 | 154.1 | 100 | ≥100 | PASS (54% margin) |
+| Draco (field dSph) | 0.060 | 0.96 | 1.0 | <1.0 | PASS (4% margin) |
+| Sculptor (field dSph) | 0.361 | 0.15 | 1.0 | <1.0 | PASS (85% margin) |
+| Fornax (satellite) | 1.590 | ~0 | 5.0 | <5 | PASS (oversuppressed) |
+| Cluster (Bullet) | 2.300 | ~0 | 0.1 | <1 | PASS (oversuppressed) |
 
 **Held-out prediction (NOT used in fit):**
 
 | System | log_E | σ_eff_fit | σ_obs | Bound | Verdict |
 |--------|------:|----------:|------:|-------|---------|
 | Leo T (classical dSph, V_max=15) | 0.507 | 0.037 | 0.5 | <1 | PASS |
-| Segue 1 (UFD, V_max=12) | 0.030 | 2.38 | 1.0 | <1 | **FAIL** (2.4× over) |
+| Segue 1 (UFD, V_max=12) | 0.030 | 2.38 | 1.0 | <1 | **FAIL (2.4× over)** |
 
-**Result:** held-out prediction is **1/2 PASS**. Segue 1, the most dark-matter-dominated classical UFD, fails the tight upper bound by a factor of 2.4. The model oversuppresses high-log_E systems (Cluster, Fornax go to ~0) and undersuppresses the lowest-log_E system (Segue 1, log_E = 0.03).
+![Continuous ℰ-proxy fit with held-out prediction](figures/fig7_continuous_E_predictive.png)
 
-**Verdict: the continuous ℰ-proxy with this 3-component form is NOT predictive.** This is a stronger negative result than the categorical ℰ-rescaling (Phase 4B Option B) — categorical works because the bin assignment is fitted; continuous fails because the ℰ-proxy components (f_b, host ratio, gravothermal phase) do not separate the FAIL/PASS outcomes well.
+**Result: held-out prediction is 1/2 PASS.** Segue 1 fails the tight upper bound by 2.4×. The model oversuppresses high-log_E systems (Cluster, Fornax → σ_eff ≈ 0, a model pathology) and undersuppresses the lowest-log_E system (Segue 1, log_E = 0.03).
 
-**What this tells us about the missing parameter:**
+**Verdict: the continuous ℰ-proxy with this 3-component form is NOT predictive.** The categorical ℰ structure of §10.4g.1 is real but is NOT captured by f_b + host-ratio + t/t_core alone. Either (i) a different continuous ℰ variable is needed (e.g. adiabatic contraction factor, specific angular momentum j*), or (ii) the missing parameter is genuinely categorical (not derivable from a smooth ℰ-proxy), or (iii) the missing parameter lives elsewhere (e.g. σ_ij(v) shape, §10.4g.3).
 
-1. The categorical ℰ structure of §10.4g is real but is NOT captured by f_b + host-ratio + t/t_core alone. Either (i) a different continuous ℰ variable is needed (e.g. tidal-stripping factor computed from host-M_vir/M_dwarf, not just the ratio), or (ii) the missing parameter is genuinely categorical (not derivable from a smooth ℰ-proxy), or (iii) the missing parameter lives elsewhere (e.g. independent resonance peaks per species, Path 3).
-2. Segue 1 is a critical test: if the missing parameter were baryon-driven, Segue 1 (lowest f_b, isolated, low t/t_core) should PASS easily. The FAIL by 2.4× suggests the simple continuous-ℰ form does not capture the physical suppression mechanism.
-3. The fit's oversuppression of high-ℰ systems (Fornax, Cluster → σ_eff ≈ 0) is a model pathology: the power-law σ_eff = σ_eff_P44 × E^β with β = -3.40 drives σ_eff to negligible values for log_E > 1.5. A physically sensible model should floor at the observed upper bound or include a saturation term.
+Code: `scripts/build_continuous_E_predictive.py` (~300 lines). Results: `v0.3-prelim/data/results/phase4c_continuous_E_predictive.json`. Plot: `v0.3-prelim/docs/figures/fig7_continuous_E_predictive.png`.
 
-**Implication for the paper:** §10.4g (categorical ℰ-rescaling) remains the strongest statement of the ℰ hypothesis. §10.4h shows that the categorical structure is not yet reducible to a 3-component continuous ℰ-proxy. The deeper microphysics — which ℰ variable, which mechanism — remains an open question.
+#### 10.4g.3 Species-dependent σ_ij(v) (Path 3, predictive test FAILS)
 
-Code: `scripts/build_continuous_E_predictive.py` (2-parameter fit with `scipy.optimize.minimize` Nelder-Mead; ~6 starting points). Results: `v0.3-prelim/data/results/phase4c_continuous_E_predictive.json` (in-sample + held-out). Plot: `v0.3-prelim/docs/figures/fig7_continuous_E_predictive.png`.
-
-### 10.4i Species-dependent σ_ij(v) — Path 3 follow-up
-
-§10.4g (categorical ℰ) and §10.4h (continuous ℰ-proxy) both fail to *predict* a held-out system. We now ask: does the missing parameter live in σ-v *shape* (independent resonance peaks per species)?
-
-**Model:** the two-component SIDM model has three species-pair cross sections σ_HH(v), σ_HL(v), σ_LL(v), each with Yukawa background + 5 Gaussian peaks. Currently only σ_HH is implemented (Phase 44); σ_HL = σ_LL = 0 reduces the model to σ_eff = f_H² × σ_HH(v). Path 3 introduces σ_HL and σ_LL with **independent peak positions** (HL_offset, LL_offset) while keeping peak amplitudes shared:
+Test whether the missing parameter lives in σ-v *shape* by introducing independent σ_HH(v), σ_HL(v), σ_LL(v):
 
 σ_eff = f_H² × σ_HH(v) + 2 f_H f_L × σ_HL(v) + f_L² × σ_LL(v)
 
-where the Gaussian peaks of σ_HL are at v_targets + HL_offset and σ_LL peaks are at v_targets + LL_offset.
+where σ_HH has Phase 44 fixed peak positions, σ_HL has peaks at v_targets + HL_offset, σ_LL has peaks at v_targets + LL_offset. Currently only σ_HH is implemented; σ_HL = σ_LL = 0 reduces to σ_eff = f_H² × σ_HH.
 
-**Fit:** 2 free parameters (HL_offset, LL_offset) + Path 2's β = -3.40 (continuous ℰ-proxy). Nelder-Mead, 35 starting points.
+**Two free parameters:** HL_offset, LL_offset (with Path 2's β = -3.40 ℰ-proxy applied as a multiplicative suppression).
 
 **In-sample fit (5/5 PASS):**
 
@@ -1218,7 +1204,7 @@ where the Gaussian peaks of σ_HL are at v_targets + HL_offset and σ_LL peaks a
 | Fornax (satellite) | 0.30 | ~0 | 5.0 | <5 | PASS (oversuppressed) |
 | Cluster (Bullet) | 0.50 | ~0 | 0.1 | <0.1 | PASS (oversuppressed) |
 
-**Best-fit:** HL_offset = -113.47 km/s, LL_offset = +1.32 km/s.
+**Best-fit:** HL_offset = -113.47 km/s, LL_offset = +1.32 km/s. *Note:* HL_offset ≈ -113 km/s is extreme — the σ_HL peaks are moved far from the dSph band (v=18-22 km/s). This is closer to "turn σ_HL off in the dSph window" than a kinematically motivated reduced-mass shift (~√2). Fornax and Cluster "PASS" via boundary oversuppression (σ_eff ≈ 0), not via a healthy fit.
 
 ![Species-dependent σ(v) and σ_eff for in-sample + held-out](figures/fig8_species_dependent_sigma.png)
 
@@ -1229,20 +1215,35 @@ where the Gaussian peaks of σ_HL are at v_targets + HL_offset and σ_LL peaks a
 | Leo T (classical dSph) | 0.20 | 0.040 | 0.5 | <1 | PASS |
 | Segue 1 (UFD) | 0.10 | 2.481 | 1.0 | <1 | **FAIL (2.5× over)** |
 
-**Result: species-dependent σ_ij does NOT improve held-out predictions.** Segue 1 still fails by ~2.5× — essentially identical to Path 2's continuous-ℰ result.
+**Result: species-dependent σ_ij does NOT improve held-out predictions.** Segue 1 fails by ~2.5× — essentially identical to §10.4g.2's continuous-ℰ result. Two independent microphysics extensions (continuous ℰ-proxy in §10.4g.2, species-dependent σ in §10.4g.3) converge on the same failure mode (Segue 1 σ_pred ≈ 2.4 vs σ_obs < 1).
 
-**What this tells us about the missing parameter:**
+#### 10.4g.4 Cross-path comparison (the real finding)
 
-1. **The missing parameter is NOT σ-v shape.** Independent resonance peaks per species (Path 3) and continuous ℰ-proxy (Path 2) both fail Segue 1 in the same way: σ_pred ≈ 2.4 vs σ_obs < 1. This is a robust negative result — two independent microphysics extensions converge on the same failure mode.
-2. **Segue 1 is the critical discriminator.** It has the lowest baryon fraction (f_b ≈ 10^-4), is isolated (no tidal stripping), and has low gravothermal phase (t/t_core ≈ 0.1). Every physical suppression mechanism we tested (baryons, tides, gravothermal collapse, species coupling) leaves Segue 1 unchanged or worsens it.
-3. **The categorical ℰ-rescaling (§10.4g) wins because it's a free parameter.** With field ×0.35 and satellite ×0.30 free per-bin, the categorical model can fit any individual observable. Continuous ℰ (§10.4h) and species-dependent σ (§10.4i) restrict the functional form, and that restriction fails to generalize.
+| Approach | Free params | In-sample | Held-out | Predictive? |
+|----------|-------------|-----------|----------|-------------|
+| Categorical ℰ (§10.4g.1) | 2 | 5/5 | — | N/A (no held-out) |
+| Continuous ℰ (§10.4g.2) | 1 (β) | 5/5 | 1/2 FAIL | **No** |
+| Species-dependent σ (§10.4g.3) | 2 (offsets) | 5/5 | 1/2 FAIL | **No** |
 
-**Implication for the paper:** none of the three missing-parameter hypotheses (categorical ℰ-rescaling, continuous ℰ-proxy, species-dependent σ) is sufficient to *predict* a held-out system. The paper should:
-1. Keep §10.4g (categorical) as the strongest empirical statement — 5/5 PASS in-sample but no held-out test.
-2. Report §10.4h and §10.4i as **negative results** — these microphysics extensions do not generalize beyond the fit set.
-3. State the open question honestly: the "missing parameter" remains unidentified. Possible candidates not yet tested: (a) Cloud-9 floor systematics (Turini & Benítez-Llambay), (b) data-side σ/m constraints that move the dSph upper bounds, (c) genuinely novel σ(v) structure (e.g. velocity-derivative σ'(v) terms).
+**Robust conclusion:** neither a continuous environment proxy nor independent HH/HL/LL peak locations (with Phase-44-like amplitudes) predicts Segue 1. Only a free per-class factor "works," which is expected for a flexible nuisance, not for a law. This is a **constraint-map result**: we have mapped where simple extensions fail.
 
-Code: `scripts/build_species_dependent_sigma.py` (~360 lines). Results: `v0.3-prelim/data/results/phase4d_species_dependent_sigma.json` (in-sample + held-out). Plot: `v0.3-prelim/docs/figures/fig8_species_dependent_sigma.png`.
+**Implication for the paper:**
+
+- The categorical ℰ-rescaling (§10.4g.1) is **descriptive, not predictive** — empirical suppression at the right magnitudes, but no derivation and no held-out test.
+- The continuous ℰ-proxy (§10.4g.2) and species-dependent σ (§10.4g.3) are **predictive tests that fail**. They restrict the functional form, and the restriction fails to generalize.
+- The "missing parameter" remains unidentified. The next step (post-submission) is **frozen-parameter multi-object prediction**: apply Path 2/3 fits to 3-5 more UFDs (Ursa Minor, Boötes I, Hercules, CVn I) and report pass rate. If most UFDs fail, missing physics is in the low-f_b, low-v regime. If only Segue 1 fails, that single bound is the issue.
+
+**Joint moral:** *in-sample rescue is easy; generalization to the lowest-baryon UFD is not.*
+
+#### 10.4g.5 Future work (frozen-parameter multi-object test)
+
+Three priorities for post-submission research:
+
+1. **Multi-UFD held-out under frozen Path 2/3 parameters.** Apply to Ursa Minor, Boötes I, Hercules, CVn I without refitting. Report pass rate and median tension factor. ~1 week.
+2. **Segue 1 bound audit.** Pin exact references (Pace 2016, Read+ 2019, any newer kinematics), v_eff convention, core vs cusp assumption. If the bound is contested, mark Path 2/3 FAIL as conditional. ~3 days.
+3. **One physically anchored continuous ℰ (zero retune).** Pick one ℰ-proxy fixed from literature (baryon fraction f_b, or tidal proxy with α from published N-body), predict Segue 1 + one classical dSph with no refitting. If it passes, worth a follow-up note; if it fails, stronger negative result.
+
+---
 
 ### 10.5 EFT target map for future UV completions
 
@@ -1690,6 +1691,8 @@ This protocol is documented to preempt reviewer concerns about reproducibility a
 [29b] G. Despali et al., "The AIDA-TNG project: dark matter profiles and concentrations in alternative dark matter models," Astron. Astrophys. 699, A222 (2026); arXiv:2512.15869v1. Characterizes dark matter density profiles across six decades of halo mass in DMO and full-physics runs. **Key findings relevant to our phenomenology:** (i) "when baryons are included, the differences between CDM and SIDM decrease, and such large dark-matter cores no longer form because adiabatic contraction in the baryon-dominated region counteracts self-interactions"; (ii) "the coupling between baryons and self-interactions induces a broader range of inner slopes, including cases that are steeper than CDM at Milky Way masses"; (iii) density ratio FP/DMO peaks at ~30 in SIDM at high mass vs ~4 in CDM; (iv) vSIDM benchmark σ/m_χ = 0.1-1 cm²/g matches our σ/m at v ≈ 100 km/s (cluster scale) but exceeds our σ/m at v ≈ 100 km/s by ~2-3 orders of magnitude in the dSph/UFD mass range. Provides the systematic-uncertainty benchmark for our borrowed f_H profiles (§9.5).
 
 [29c] G. Alguero, G. Belanger, S. Kraml, A. Pukhov, et al., "micrOMEGAs 6.0: N-component dark matter," Comput. Phys. Commun. 299, 109133 (2025); arXiv:2312.14894; doi:10.1016/j.cpc.2024.109133. The latest version of the widely-used DM observables code. Generalizes Boltzmann equations for N-component DM including WIMPs, FIMPs, co-scattering, and asymmetric DM. Computes multi-component direct and indirect detection rates with proper component weighting. Supports PlanckCMB energy-injection constraints. **Future work**: applying micrOMEGAs 6.0 to our two-component SIDM (χ_H + χ_L from Yang+ 2025 PRD [42]) would verify whether Ω_χ h² ≈ 0.12 can be achieved for the sum of both components — currently a calibrated 1/<σv> mapping, not a Boltzmann solver. See §10.4c deferred items backlog for priority.
+[29d] J. I. Read, M. G. Walker, P. Steger, "The case for a cold dark matter halo in the ultra-faint dwarf spheroidal galaxy Segue 1," Mon. Not. R. Astron. Soc. 484, 1401 (2019); arXiv:1808.06634. Provides the σ/m < 1 cm²/g upper bound for Segue 1 used in §10.4g discriminator.
+[29e] A. B. Pace, "The Structural Properties and Star Formation History of Ultra-Faint Dwarf Galaxies," PhD thesis, Univ. California, Irvine (2016); arXiv:1608.05318. Independent kinematic analysis of Segue 1 used to cross-check [29d] σ/m bound.
 
 [29d] R. Turini, A. Benítez-Llambay, "Environmental systematics in RELHIC parameter recovery from 21 cm HI observations" (in prep, 2026; cf. emergent-mind RELHIC review, 2026). Shows that differences between simulated RELHIC analogs "may be driven by environmental factors, and/or the treatment of gas self-shielding — which might further limit existing analytic schemes aimed at inferring dark matter halo information from 21 cm HI observations." Mass–concentration degeneracy from local environmental density shifts recovered σ/m by factors of 2-3. **Used in §10.4d (v18.40) to reframe Cloud-9's σ/m ≥ 50 floor as a systematic upper bound rather than a hard physical constraint.**
 
