@@ -56,7 +56,11 @@
 
 ## 3. The result
 
-**Best-fit rescaling (field ×0.35, satellite ×0.30): all 5 observables PASS.** Reviewer's ℰ hypothesis is empirically supported at the categorical ℰ-rescaling level.
+**Best-fit rescaling (field ×0.35, satellite ×0.30): all 5 observables PASS.**
+
+This is a **post-hoc consistency check on the direction of the ℰ hypothesis**, not a derivation or independent confirmation. The two rescaling factors are fitted to the same observables that failed Phase 4A. A genuine predictive test would require (i) ℰ fixed from independent data and (ii) application to a held-out system not used in fitting. None of that is done here.
+
+Reviewer's own assessment (Assessment.docx, 2026-09-28): "Empirically: ℰ-rescaling *can* align the five anchors; the figure is consistent with 'the system matters.' Scientifically: it does *not* yet identify the missing parameter; it shows *where* (dSph band) and *how large* a suppression would need to be."
 
 **Phase 4A σ_eff vs best-fit σ_eff_env:**
 

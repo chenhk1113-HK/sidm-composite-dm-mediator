@@ -1111,11 +1111,13 @@ Figure 5 shows the population-level σ_eff map across the V_max × M_halo plane 
 
 See `v0.3-prelim/data/results/phase4a_population_sigma_eff_map.json` for the full 60×60 grid and `phase4a_population_sigma_eff_summary.txt` for the text summary.
 
-### 10.4g Categorical ℰ (environment) axis — Phase 4B Option B extension
+### 10.4g Categorical ℰ (environment) axis — Phase 4B Option B (exploratory, post-hoc)
 
-A reviewer (A reasoned guess.docx, 2026-09-28) proposed that the Cloud-9 vs dSph tension cannot be resolved by additional σ(v) structure alone, but may require a **system-dependent effective interaction** that breaks the universal σ(v) assumption. The proposal: σ_eff = σ_eff(v, f_H, ℰ), where ℰ is an environmental/assembly/baryonic-state variable. Concrete ℰ candidates the reviewer named: baryon coupling (AIDA-TNG), tidal/merger history (Silverman+), core-collapse phase tag, species-dependent resonances.
+A reviewer (A reasoned guess.docx, 2026-09-28; assessment.docx, 2026-09-28) proposed that the Cloud-9 vs dSph tension cannot be resolved by additional σ(v) structure alone, but may indicate a **system-dependent effective interaction** that breaks the universal σ(v) assumption. The proposal: σ_eff = σ_eff(v, f_H, ℰ), where ℰ is an environmental/assembly/baryonic-state variable.
 
-**Test:** we extend the Phase 4A σ_eff map with a categorical ℰ axis — ℰ ∈ {RELHIC, field dSph, satellite dSph, cluster} — and apply a per-bin rescaling factor ℰ_rescale to the Phase 4A predictions. Four tests:
+**This section is an exploratory, post-hoc consistency check, not a derivation.** A predictive test of σ_eff(v, f_H, ℰ) would require (i) ℰ fixed from independent data, (ii) application to a held-out system not used in fitting, and (iii) recovery of PASS without re-tuning. None of these is done here. The test below asks only whether *if* one allows a constant rescaling per ℰ bin, the Phase 4A dSph FAIL pattern can be removed.
+
+**Test:** we extend the Phase 4A σ_eff map with a categorical ℰ axis — ℰ ∈ {RELHIC, field dSph, satellite dSph, cluster} — and apply a per-bin constant rescaling factor ℰ_rescale to the Phase 4A predictions. Four tests:
 
 | Test | ℰ_rescale | Cloud-9 (RELHIC) | Draco (field) | Sculptor (field) | Fornax (sat.) | Cluster |
 |---|---|---|---|---|---|---|
@@ -1124,22 +1126,25 @@ A reviewer (A reasoned guess.docx, 2026-09-28) proposed that the Cloud-9 vs dSph
 | Strong (reviewer's S=1/3) | 1.0 / 1.0 / 0.3 | PASS | FAIL | FAIL | **PASS** | PASS |
 | **Best-fit** (free per-bin) | **1.0 / 0.35 / 0.30** | **PASS** | **PASS** | **PASS** | **PASS** | **PASS** |
 
-**Result:** with ℰ_rescale = {1.0, 0.35, 0.30} for {RELHIC, field dSph, satellite dSph}, all 5 standing observables at v ≤ 500 km/s PASS the two-tier criterion. **Reviewer's hypothesis is confirmed at the categorical ℰ-rescaling level.**
-
 ![σ_eff vs V_max per ℰ bin (best-fit rescaling)](figures/fig6_environment_axis_sigma_eff.png)
 
-**Interpretation:** the Phase 4A failure pattern (3 FAILs at v=18-22 km/s) is fully consistent with a model in which σ_eff depends on the system's ℰ-bin:
+**Result (constrained):** with field-dSph ×0.35 and satellite-dSph ×0.30 constant rescaling (RELHIC ×1.0, cluster ×1.0 unchanged), all 5 standing observables PASS the two-tier criterion. The required suppression factors are order-of-magnitude consistent with published expectations for baryonic-feedback suppression in field dwarfs (~0.3–0.5, AIDA-TNG) and combined tidal + baryonic effects in satellite dSphs (~0.2–0.4, Silverman+ 2026 + Pace+ 2021).
 
-- **RELHIC (Cloud-9, no baryons):** unsuppressed; σ_eff ≈ 173 cm²/g hits the Cloud-9 anchor at v=28.
-- **Field dSph (Draco, Sculptor):** factor ~0.35 suppression (consistent with AIDA-TNG baryonic-feedback suppression of SIDM cores in field dwarfs).
-- **Satellite dSph (Fornax, stripped):** factor ~0.30 suppression (consistent with combined tidal + baryonic effects; cf. Silverman+ 2026 "Mergers Matter" and Pace+ 2021 + Peñarrubia+ 2024 for Fornax's quiescent-but-stripped status).
-- **Cluster:** unsuppressed; σ_eff ≈ 0.001 cm²/g at v=500 km/s, well below the <1 cm²/g bound.
+**What this does NOT show:**
 
-**Caveats:** (i) The two free parameters (field ×0.35, satellite ×0.30) are fitted to the same data being tested — this is a **post-hoc** test, not a predictive fit. (ii) The ℰ-rescaling is *categorical*, not derived from first principles; a real theory would need a continuous ℰ variable with a physical mechanism (e.g. adiabatic contraction factor from stellar potential, tidal-stripping factor from host-halo mass ratio, or gravothermal collapse phase from core-collapse time). (iii) The Cloud-9 PASS depends on the existing 173.3 cm²/g peak; if the Cloud-9 floor is moved (e.g. σ/m ≥ 50 × S with S < 1/3 per Turini & Benítez-Llambay), this PASS could degrade.
+- *Not* a derivation of σ_eff(v, f_H, ℰ). The two rescaling factors (field ×0.35, satellite ×0.30) are fitted to the same observables that failed Phase 4A. Almost any multiplicative rescue aimed at the failing points would "PASS." This is a consistency check on the *direction* of the environment hypothesis, not independent confirmation.
+- *Not* a prediction for a held-out system. No new dwarf with intermediate ℰ was tested. A genuine predictive test would (i) fix ℰ_rescale from an external calibration (independent N-body or hydro simulations), (ii) apply to a benchmark with ℰ between fitted bins, and (iii) recover PASS at the predicted magnitude.
+- *Not* a change to the underlying σ(v) microphysics. ℰ rescales the *output*; the Yukawa + Gaussian resonance structure remains unchanged.
+- *Not* independent of the Cloud-9 anchor. The Cloud-9 PASS depends on the existing 173 cm²/g peak; if the Cloud-9 floor moves (e.g. σ/m ≥ 50 × S with S < 1/3 per Turini & Benítez-Llambay), the RELHIC PASS could degrade.
 
-**Implication for the paper:** this categorical ℰ-test does NOT replace the constraint-map identity of the paper — it strengthens it. The paper now demonstrates *where* a system-dependent correction must enter (at the v=18-22 km/s dSph band, not at SPARC or cluster scale), and what magnitude (factor ~3 suppression for field dSph, ~3-4 for satellite). This is the cleanest directional finding we have on the Cloud-9 vs dSph tension. **The deeper microphysics (which ℰ variable, which mechanism) is left for future work**, consistent with the paper's constraint-map framing.
+**Correct claim:** *A categorical environment-dependent suppression of order 0.3–0.35 on field/satellite dSph σ_eff can remove the Phase 4A dSph FAILs while leaving RELHIC and cluster unchanged.*
+
+**Incorrect claim:** *"The Cloud-9 vs dSph puzzle is solved by the ℰ axis."* (We do not make this claim.)
+
+**Implication for the paper:** this exploratory test demonstrates *where* a system-dependent correction would need to enter (at the v=18–22 km/s dSph band, not at SPARC or cluster scale) and *what magnitude* (factor ~3 suppression) would be required to remove the Phase 4A tension. The deeper microphysics (which ℰ variable — baryon fraction, tidal-stripping factor, gravothermal collapse phase — and which physical mechanism) is left for future work, consistent with the paper's constraint-map framing and the reviewer's own caveat that "this is a hypothesis test, not a resolution."
 
 Code: `scripts/build_sigma_eff_environment_axis.py`. Results: `v0.3-prelim/data/results/phase4b_environment_axis.json` (4 tests). Plot: `v0.3-prelim/docs/figures/fig6_environment_axis_sigma_eff.png`.
+
 
 ### 10.5 EFT target map for future UV completions
 
