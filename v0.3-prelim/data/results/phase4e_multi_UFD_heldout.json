@@ -1,0 +1,82 @@
+{
+  "metadata": {
+    "description": "Multi-UFD held-out test under frozen Path 2 and Path 3 parameters",
+    "frozen_params": {
+      "path2_beta": -3.4,
+      "path3_HL_offset_km_s": -113.47,
+      "path3_LL_offset_km_s": 1.32
+    },
+    "tested_systems": [
+      "Ursa Minor (classical dSph, satellite)",
+      "Bootes I (UFD, isolated)",
+      "Hercules (UFD, isolated)",
+      "CVn I (classical dSph, satellite)"
+    ],
+    "source_for_kinematics": "Simon 2019 review (arXiv:1901.05465) + Pace 2020 (DR2)",
+    "frozen_no_refit": true
+  },
+  "Ursa Minor (classical dSph, satellite)": {
+    "V_max": 22.0,
+    "f_H": 0.2,
+    "f_b": 0.002,
+    "host_ratio": 1000.0,
+    "t_tc": 0.2,
+    "sigma_obs_upper_bound": 1.0,
+    "path2_pred": 2.0043231289534493e-07,
+    "path2_pass": true,
+    "path3_pred": 1.573440660038158e-06,
+    "path3_pass": true,
+    "cat_pred": 6.01296938686035e-08,
+    "cat_pass": true
+  },
+  "Bootes I (UFD, isolated)": {
+    "V_max": 14.0,
+    "f_H": 0.1,
+    "f_b": 0.0001,
+    "host_ratio": 1.0,
+    "t_tc": 0.1,
+    "sigma_obs_upper_bound": 2.0,
+    "path2_pred": 0.018134574733915235,
+    "path2_pass": true,
+    "path3_pred": 1.8544586441295503,
+    "path3_pass": true,
+    "cat_pred": 0.006347101156870333,
+    "cat_pass": true
+  },
+  "Hercules (UFD, isolated)": {
+    "V_max": 13.0,
+    "f_H": 0.1,
+    "f_b": 0.0001,
+    "host_ratio": 1.0,
+    "t_tc": 0.1,
+    "sigma_obs_upper_bound": 2.0,
+    "path2_pred": 0.02090510109850714,
+    "path2_pass": true,
+    "path3_pred": 2.1327200240836697,
+    "path3_pass": false,
+    "cat_pred": 0.0073167853844774994,
+    "cat_pass": true
+  },
+  "CVn I (classical dSph, satellite)": {
+    "V_max": 18.0,
+    "f_H": 0.2,
+    "f_b": 0.003,
+    "host_ratio": 1000.0,
+    "t_tc": 0.2,
+    "sigma_obs_upper_bound": 1.0,
+    "path2_pred": 7.4377984795110055e-09,
+    "path2_pass": true,
+    "path3_pred": 1.8077844242196994e-07,
+    "path3_pass": true,
+    "cat_pred": 2.2313395438533025e-09,
+    "cat_pass": true
+  },
+  "verdict": {
+    "path2_pass": 4,
+    "path2_total": 4,
+    "path3_pass": 3,
+    "path3_total": 4,
+    "cat_pass": 4,
+    "cat_total": 4
+  }
+}
