@@ -1,0 +1,61 @@
+{
+  "metadata": {
+    "description": "Smoke test of continuous E-proxy fit on 5 standing observables",
+    "approach": "sigma_eff = sigma_eff_P44 * 10^(beta * log_E)",
+    "E_proxy_definition": "log_E = log10(f_b/0.1) - 0.5*log10(host_ratio) + 0.3*(t/t_core)"
+  },
+  "best_fit_beta": -2.73,
+  "residuals": {
+    "Cloud-9 (RELHIC)": {
+      "log_E": 0.015,
+      "log_sigma_p44": 2.238752324886454,
+      "predicted_log10": 2.197802324886454,
+      "predicted_lin": 157.68933616019723,
+      "sigma_obs": 100,
+      "bound": "lower",
+      "ratio": 1.5768933616019722,
+      "PASS": true
+    },
+    "Draco (field dSph)": {
+      "log_E": 0.06,
+      "log_sigma_p44": 0.18452989712298115,
+      "predicted_log10": 0.02072989712298115,
+      "predicted_lin": 1.048889884571774,
+      "sigma_obs": 1.0,
+      "bound": "upper",
+      "ratio": 1.048889884571774,
+      "PASS": false
+    },
+    "Sculptor (field dSph)": {
+      "log_E": 0.3610299956639812,
+      "log_sigma_p44": 0.41564335262010055,
+      "predicted_log10": -0.5699685355425681,
+      "predicted_lin": 0.2691729811585686,
+      "sigma_obs": 1.0,
+      "bound": "upper",
+      "ratio": 0.2691729811585686,
+      "PASS": true
+    },
+    "Fornax (satellite)": {
+      "log_E": 1.59,
+      "log_sigma_p44": 1.0163429470292762,
+      "predicted_log10": -3.324357052970724,
+      "predicted_lin": 0.00047385224988687067,
+      "sigma_obs": 5.0,
+      "bound": "upper",
+      "ratio": 9.477044997737413e-05,
+      "PASS": true
+    },
+    "Cluster (Bullet)": {
+      "log_E": 2.3,
+      "log_sigma_p44": -2.40309021746644,
+      "predicted_log10": -8.68209021746644,
+      "predicted_lin": 2.079264709523377e-09,
+      "sigma_obs": 0.1,
+      "bound": "upper",
+      "ratio": 2.079264709523377e-08,
+      "PASS": true
+    }
+  },
+  "verdict": "4 PASS, 1 FAIL"
+}
