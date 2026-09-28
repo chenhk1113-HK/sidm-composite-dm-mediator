@@ -354,7 +354,7 @@ cat v0.3-prelim/data/results/t215c_phase4b_lower_n.json
 - [x] KiSS-SIDM license/attribution note (Appendix C) — Journal requirement
 - [x] Commit hash reconciled to `11f62ae` (was 80241d3 in §2.1/§2.2)
 - [x] "4 of 8" denominator fixed → "4 of 5 constrained channels" (in abstract, §1, §6, §9, §10, §11)
-- [x] Phase 4A uniform PASS/MARGINAL/FAIL criterion (factor 2/5 cutoff)
+- [x] Phase 4A two-tier PASS/MARGINAL/FAIL criterion (tight bounds FAIL on any violation; loose bounds use factor-2/5 cutoffs)
 - [x] §3.5a LZ analysis + Supplementary §S6 in layout
 - [x] §10.3 two-mediator Drobczyk UV candidate in layout
 - [x] GitHub updated (master + wip/cloud-9-relhic synced)
@@ -426,7 +426,7 @@ The paper is **submission-ready**. It has:
 **Reviewer-catch fixes applied in this revision:**
 - Issue 1: Commit hash reconciled to `11f62ae` everywhere in report
 - Issue 2: "4 of 8" → "4 of 5 constrained channels" (denominator clarified)
-- Issue 3: Phase 4A cross-validation uses uniform PASS/MARGINAL/FAIL criterion (factor ≤2, 2-5, >5)
+- Issue 3: Phase 4A criterion rewritten as two-tier — tight bounds (dSph upper limits) FAIL on any violation; loose bounds / point estimates use factor-2/5 cutoffs
 - Issue 4: §3.5a LZ analysis + Supplementary §S6 added to layout
 - Issue 5: §10.3 two-mediator Drobczyk UV candidate added to layout
 - Issue 6, 7, 8: Data availability + per-figure reproducibility + KiSS-SIDM license added as Appendix C
