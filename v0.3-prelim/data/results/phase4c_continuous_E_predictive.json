@@ -1,0 +1,114 @@
+{
+  "metadata": {
+    "description": "Path 2 full: continuous E with 2 parameters (beta + per-bin delta) + held-out prediction",
+    "model": "log10(sigma_eff) = log10(sigma_eff_P44) + beta * log_E + delta_bin",
+    "in_sample": [
+      "Cloud-9 (RELHIC)",
+      "Draco (field dSph)",
+      "Sculptor (field dSph)",
+      "Fornax (satellite)",
+      "Cluster (Bullet)"
+    ],
+    "held_out": [
+      "Leo T (classical dSph)",
+      "Segue 1 (UFD)"
+    ]
+  },
+  "best_fit": {
+    "beta": -3.404182574954344,
+    "deltas": {
+      "RELHIC": -1.457069515960941e-07,
+      "cluster": -1.5168749627227114e-09,
+      "field_dSph": -9.989421933957335e-08,
+      "satellite": 3.830023354831972e-07
+    },
+    "loss": 1.878813157535882e-15
+  },
+  "in_sample_residuals": {
+    "Cloud-9 (RELHIC)": {
+      "log_E": 0.015,
+      "bin": "RELHIC",
+      "log_sigma_p44": 2.238752324886454,
+      "predicted_log10": 2.1876894405551877,
+      "predicted_lin": 154.05983931520166,
+      "sigma_obs": 100,
+      "bound": "lower",
+      "ratio": 1.5405983931520166,
+      "PASS": true
+    },
+    "Draco (field dSph)": {
+      "log_E": 0.06,
+      "bin": "field_dSph",
+      "log_sigma_p44": 0.18452989712298115,
+      "predicted_log10": -0.019721157268498823,
+      "predicted_lin": 0.9556059446029734,
+      "sigma_obs": 1.0,
+      "bound": "upper",
+      "ratio": 0.9556059446029734,
+      "PASS": true
+    },
+    "Sculptor (field dSph)": {
+      "log_E": 0.3610299956639812,
+      "bin": "field_dSph",
+      "log_sigma_p44": 0.41564335262010055,
+      "predicted_log10": -0.8133687675492861,
+      "predicted_lin": 0.15368491188430292,
+      "sigma_obs": 1.0,
+      "bound": "upper",
+      "ratio": 0.15368491188430292,
+      "PASS": true
+    },
+    "Fornax (satellite)": {
+      "log_E": 1.59,
+      "bin": "satellite",
+      "log_sigma_p44": 1.0163429470292762,
+      "predicted_log10": -4.396306964145796,
+      "predicted_lin": 4.015069209976e-05,
+      "sigma_obs": 5.0,
+      "bound": "upper",
+      "ratio": 8.030138419952e-06,
+      "PASS": true
+    },
+    "Cluster (Bullet)": {
+      "log_E": 2.3,
+      "bin": "cluster",
+      "log_sigma_p44": -2.40309021746644,
+      "predicted_log10": -10.232710141378307,
+      "predicted_lin": 5.851805174420924e-11,
+      "sigma_obs": 0.1,
+      "bound": "upper",
+      "ratio": 5.851805174420924e-10,
+      "PASS": true
+    }
+  },
+  "held_out_predictions": {
+    "Leo T (classical dSph)": {
+      "log_E": 0.5071212547196624,
+      "bin": "field_dSph",
+      "log_sigma_p44": 0.2923433903918406,
+      "predicted_log10": -1.433990048208037,
+      "predicted_lin": 0.03681374093585928,
+      "sigma_obs": 0.5,
+      "bound": "upper",
+      "ratio": 0.07362748187171855,
+      "PASS": true
+    },
+    "Segue 1 (UFD)": {
+      "log_E": 0.03,
+      "bin": "field_dSph",
+      "log_sigma_p44": 0.4780023987039845,
+      "predicted_log10": 0.37587682156113483,
+      "predicted_lin": 2.3761662417721845,
+      "sigma_obs": 1.0,
+      "bound": "upper",
+      "ratio": 2.3761662417721845,
+      "PASS": false
+    }
+  },
+  "verdict": {
+    "in_sample_pass": 5,
+    "in_sample_total": 5,
+    "held_out_pass": 1,
+    "held_out_total": 2
+  }
+}

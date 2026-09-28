@@ -1146,6 +1146,56 @@ A reviewer (A reasoned guess.docx, 2026-09-28; assessment.docx, 2026-09-28) prop
 Code: `scripts/build_sigma_eff_environment_axis.py`. Results: `v0.3-prelim/data/results/phase4b_environment_axis.json` (4 tests). Plot: `v0.3-prelim/docs/figures/fig6_environment_axis_sigma_eff.png`.
 
 
+### 10.4h Continuous ℰ-proxy with held-out prediction — Path 2 follow-up
+
+§10.4g demonstrated that a *categorical* ℰ-rescaling (field ×0.35, satellite ×0.30) removes the Phase 4A dSph FAILs. We now ask whether a **continuous** ℰ-proxy — derived from physical observables, not categorical labels — is sufficient to *predict* a held-out system.
+
+**Continuous ℰ-proxy definition.** Combining three physical ingredients:
+
+log_E = max(0, log10(f_b / 10^-3)) + 0.5 × log10(host_M_vir / M_dwarf) + 0.3 × (t / t_core)
+
+where:
+- f_b is the stellar baryon fraction (RELHIC: ≈ 10^-4; field dSph: ≈ 10^-3 to 10^-2; cluster: ≈ 0.05-0.15)
+- host_M_vir / M_dwarf is the host-to-dwarf mass ratio (RELHIC, field dSph, cluster: 1; satellite dSph: 100-1000)
+- t / t_core is the gravothermal collapse phase (RELHIC: 0.05; uncollapsed dSph: 0.2; cluster: 1.0)
+
+RELHIC (Cloud-9) anchors log_E = 0 by construction; higher log_E corresponds to stronger expected suppression.
+
+**Two-parameter model fit:** log10(σ_eff) = log10(σ_eff_P44) + β × log_E + δ_bin, where β is a global power-law slope and δ_bin is a per-categorical-bin offset. Fit to the 5 standing observables (Cloud-9, Draco, Sculptor, Fornax, Cluster).
+
+**In-sample fit:** β = -3.40, all 4 δ_bin offsets converge to ≈ 0 (model reduces to 1-parameter power-law, since per-bin offsets are underdetermined with only 5 data points). **5/5 PASS** in-sample.
+
+| Observable | log_E | σ_eff_P44 | σ_eff_fit | σ_obs | Bound | Verdict |
+|------------|------:|----------:|----------:|------:|-------|---------|
+| Cloud-9 (RELHIC) | 0.015 | 173.3 | 154.1 | 100 | ≥100 | PASS (54% margin) |
+| Draco (field dSph) | 0.060 | 1.53 | 0.96 | 1.0 | <1.0 | PASS (4% margin) |
+| Sculptor (field dSph) | 0.361 | 2.60 | 0.15 | 1.0 | <1.0 | PASS (85% margin) |
+| Fornax (satellite) | 1.590 | 10.4 | ~0 | 5.0 | <5 | PASS (oversuppressed) |
+| Cluster (Bullet) | 2.300 | 0.001 | ~0 | 0.1 | <1 | PASS (oversuppressed) |
+
+![Continuous ℰ-proxy fit with held-out prediction](figures/fig7_continuous_E_predictive.png)
+
+**Held-out prediction (NOT used in fit):**
+
+| System | log_E | σ_eff_fit | σ_obs | Bound | Verdict |
+|--------|------:|----------:|------:|-------|---------|
+| Leo T (classical dSph, V_max=15) | 0.507 | 0.037 | 0.5 | <1 | PASS |
+| Segue 1 (UFD, V_max=12) | 0.030 | 2.38 | 1.0 | <1 | **FAIL** (2.4× over) |
+
+**Result:** held-out prediction is **1/2 PASS**. Segue 1, the most dark-matter-dominated classical UFD, fails the tight upper bound by a factor of 2.4. The model oversuppresses high-log_E systems (Cluster, Fornax go to ~0) and undersuppresses the lowest-log_E system (Segue 1, log_E = 0.03).
+
+**Verdict: the continuous ℰ-proxy with this 3-component form is NOT predictive.** This is a stronger negative result than the categorical ℰ-rescaling (Phase 4B Option B) — categorical works because the bin assignment is fitted; continuous fails because the ℰ-proxy components (f_b, host ratio, gravothermal phase) do not separate the FAIL/PASS outcomes well.
+
+**What this tells us about the missing parameter:**
+
+1. The categorical ℰ structure of §10.4g is real but is NOT captured by f_b + host-ratio + t/t_core alone. Either (i) a different continuous ℰ variable is needed (e.g. tidal-stripping factor computed from host-M_vir/M_dwarf, not just the ratio), or (ii) the missing parameter is genuinely categorical (not derivable from a smooth ℰ-proxy), or (iii) the missing parameter lives elsewhere (e.g. independent resonance peaks per species, Path 3).
+2. Segue 1 is a critical test: if the missing parameter were baryon-driven, Segue 1 (lowest f_b, isolated, low t/t_core) should PASS easily. The FAIL by 2.4× suggests the simple continuous-ℰ form does not capture the physical suppression mechanism.
+3. The fit's oversuppression of high-ℰ systems (Fornax, Cluster → σ_eff ≈ 0) is a model pathology: the power-law σ_eff = σ_eff_P44 × E^β with β = -3.40 drives σ_eff to negligible values for log_E > 1.5. A physically sensible model should floor at the observed upper bound or include a saturation term.
+
+**Implication for the paper:** §10.4g (categorical ℰ-rescaling) remains the strongest statement of the ℰ hypothesis. §10.4h shows that the categorical structure is not yet reducible to a 3-component continuous ℰ-proxy. The deeper microphysics — which ℰ variable, which mechanism — remains an open question.
+
+Code: `scripts/build_continuous_E_predictive.py` (2-parameter fit with `scipy.optimize.minimize` Nelder-Mead; ~6 starting points). Results: `v0.3-prelim/data/results/phase4c_continuous_E_predictive.json` (in-sample + held-out). Plot: `v0.3-prelim/docs/figures/fig7_continuous_E_predictive.png`.
+
 ### 10.5 EFT target map for future UV completions
 
 The five no-go theorems above define what any future UV completion must
