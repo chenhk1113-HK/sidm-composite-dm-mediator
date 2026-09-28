@@ -1273,38 +1273,50 @@ Three priorities for post-submission research:
 
 #### 10.4g.6 Multi-UFD held-out test under frozen parameters
 
-The recommendation in §10.4g.5 was to apply the frozen Path 2 and Path 3 parameters to additional ultra-faint dwarfs. We did so for 4 additional systems under the canonical convention of v_eff = V_max/√2:
+The recommendation in §10.4g.5 was to apply the frozen Path 2 and Path 3 parameters to additional ultra-faint dwarfs. We did so for 4 additional systems under the canonical convention of v_eff = V_max/√2. **Three verdicts are reported per system:** *PASS* (pred ≤ bound, meaningful fit), *FAIL* (pred > bound), and *PATHOLOGICAL* (pred ≪ physical floor ≈ 0.01 cm²/g; the model predicts near-zero self-interaction, excluded by core observations even though the σ/m upper bound is satisfied).
 
-| System | V_max | f_H | σ_eff (Path 2) | σ_eff (Path 3) | σ_eff (Categorical) | σ/m bound | Verdict |
-|--------|------:|----:|---------------:|---------------:|--------------------:|----------:|---------|
-| Ursa Minor (classical dSph) | 22 | 0.20 | ~0 | ~0 | ~0 | <1.0 | PASS (oversuppressed) |
-| Boötes I (UFD, isolated) | 14 | 0.10 | 0.018 | 1.854 | 0.006 | <2.0 | Path 2 PASS, Path 3 **FAIL (1.07×)** |
-| Hercules (UFD, isolated) | 13 | 0.10 | 0.021 | 2.133 | 0.007 | <2.0 | Path 2 PASS, Path 3 FAIL |
-| CVn I (classical dSph) | 18 | 0.20 | ~0 | ~0 | ~0 | <1.0 | PASS (oversuppressed) |
+| System | V_max | f_H | Path 2 pred | Path 3 pred | Cat pred | Bound | Path 2 verdict | Path 3 verdict | Cat verdict |
+|--------|------:|----:|------------:|------------:|---------:|------:|----------------|----------------|-------------|
+| Ursa Minor (classical dSph, sat.) | 22 | 0.20 | 2.0×10⁻⁷ | 1.6×10⁻⁶ | 6.0×10⁻⁸ | <1.0 | PATHOLOGICAL (oversuppressed) | PATHOLOGICAL (oversuppressed) | PATHOLOGICAL (oversuppressed) |
+| Boötes I (UFD, isolated) | 14 | 0.10 | 0.018 | 1.85 | 0.006 | <2.0 | PASS (meaningful) | PASS (0.93×, borderline) | PASS (meaningful) |
+| Hercules (UFD, isolated) | 13 | 0.10 | 0.021 | 2.13 | 0.007 | <2.0 | PASS (meaningful) | **FAIL (1.07×)** | PASS (meaningful) |
+| CVn I (classical dSph, sat.) | 18 | 0.20 | 7.4×10⁻⁹ | 1.8×10⁻⁷ | 2.2×10⁻⁹ | <1.0 | PATHOLOGICAL (oversuppressed) | PATHOLOGICAL (oversuppressed) | PATHOLOGICAL (oversuppressed) |
 
-**Pass rate under frozen parameters (no refit):**
+**Pass rate under frozen parameters (no refit), excluding PATHOLOGICAL:**
 
-- Path 2 (continuous ℰ): **4/4 PASS** (Boötes I 0.018, Hercules 0.021, Ursa Minor/CVn I oversuppressed to ~0)
-- Path 3 (species-dependent σ): **2/4 PASS** (Boötes I 1.854 FAIL, Hercules 2.133 FAIL)
-- Categorical ℰ (§10.4g.1, post-hoc): **4/4 PASS**
+| Model | Meaningful PASS | FAIL | PATHOLOGICAL (oversuppressed, excluded from pass count) |
+|-------|----------------|------|---------------------------------------------------|
+| Path 2 (continuous ℰ) | **2/2** (Boötes, Hercules) | 0/2 | 2/4 (UMi, CVn I) |
+| Path 3 (species-dep σ) | **1/2** (Boötes 0.93× borderline) | 1/2 (Hercules 1.07×) | 1/4 (UMi 1.6×10⁻⁶) |
+| Categorical ℰ | **2/2** (Boötes, Hercules) | 0/2 | 2/4 (UMi, CVn I) |
 
-**Key finding: Segue 1 is a one-off FAIL, not a class-wide pattern.** Four additional UFDs (Ursa Minor, Boötes I, Hercules, CVn I) do NOT exhibit the Segue 1 σ_pred ≈ 2.4 failure mode. The "missing parameter" is **not in the UFD class as a whole.**
+*Note on the Path 3 strict vs meaningful count:* the JSON raw verdict is `path3_pass: 3` (Boötes, UMi, CVn I all satisfy `pred ≤ bound` numerically), but UMi and CVn I satisfy that only because Path 3 also oversuppresses them to σ_eff ≈ 10⁻⁶, which is a pathological prediction. The **meaningful** count for Path 3 is 1/2 (Boötes 0.93× is borderline-PASS). Hercules is the only clear FAIL (1.07× over bound).
 
-**Interpretation:**
+**Pathological oversuppression:** Path 2 and the Categorical model produce σ_eff ≈ 2×10⁻⁷ to 7×10⁻⁹ cm²/g for Ursa Minor and CVn I — both satellite classical dwarfs with high host_ratio. These values are 7-9 orders of magnitude below the physical σ_eff ~ 0.1-1 cm²/g needed to explain observed cores. The σ/m upper bound is technically satisfied, but the prediction is excluded by core observations. This is the **same pathology** as the Fornax/Cluster σ_eff ≈ 0 fits in §10.4g.2 — a model artifact of extrapolating the high-log_E suppression beyond its calibration range. Path 3 partially escapes this for UMi (σ_eff = 1.6×10⁻⁶, still pathological) but fails Hercules outright (1.07× over bound).
 
-- The Path 2 continuous ℰ-proxy fits all 4 UFDs by *oversuppressing* them (σ_eff ≈ 0 for satellites, σ_eff ≈ 0.02 for isolated UFDs). This is the same pathology as Fornax and Cluster in §10.4g.2 — a model artifact of fitting high log_E systems.
-- The Path 3 species-dependent σ fails Boötes I and Hercules by ~10% (1.07-2.13× over the bound). It still passes the two classical dSphs (Ursa Minor, CVn I) by oversuppression. **The Segue 1 FAIL of 2.5× is therefore the worst case in the UFD sample; Boötes I and Hercules fail at ~1.1× and are borderline.**
-- The categorical ℰ (§10.4g.1) is the only model that handles all 4 UFDs without pathological oversuppression (because the categorical satellite ×0.30 factor is calibrated to the in-sample data).
+**Phenomenological-shift note (Path 3).** With HL_offset = -113.47 km/s, the shifted σ_HL v_targets become [-85, -13, 65, 317] km/s — the first two are negative. The Gaussian resonance is even in v, so the numerical evaluation is well-defined, but physically the σ_HL peaks are at non-physical positions. This is a *phenomenological shift*, not a kinematically motivated reduced-mass transformation (which would predict v_HL ≈ v_HH × √2 ≈ v_HH × 1.4, a much smaller offset). The fit is therefore closer to "turn σ_HL off in the dSph window" than to genuine new microphysics.
 
-**What this tells us about Segue 1:**
+**Key finding: Segue 1 is a one-off FAIL, not a uniform class failure.** Multi-UFD held-out under frozen parameters shows:
 
-- The Segue 1 σ/m < 1 cm²/g bound is the **single tightest** bound in our UFD sample. Other UFDs have bounds of 2.0 cm²/g (Boötes I, Hercules) or 1.0 cm²/g (classical dSphs).
-- If the Segue 1 bound is **tightened by newer kinematics**, the FAIL strengthens. If **softened** by environmental considerations (core-vs-cusp, triaxiality), the FAIL may shrink to within 1σ of the bound.
-- The Segue 1 result is **conditional** on the published convention (Read+ 2019 [29d], v_eff = V_max/√2). Mark Path 2/3 FAILs as **conditional on the Segue 1 bound**.
+1. The dramatic ~2.5× Segue 1 failure is **not** repeated on every UFD. Boötes I and Hercules (isolated UFDs with looser σ/m < 2 cm²/g bounds) pass under continuous ℰ.
+2. **However**, the extensions do not predict the full UFD sample without per-class tuning. Path 2 oversuppresses satellite dSphs to σ_eff ≈ 0 — excluded by core observations, not by σ/m bounds. Path 3 remains marginally OK on Boötes (0.93×, within the bound by 7%) and fails Hercules (1.07×, over the bound by 7%).
+3. **The "missing parameter" is NOT class-wide, but neither extension predicts the full sample.** A complete model needs to handle both isolated UFDs (Segue 1-like tight bounds) and satellite dSphs (UMi/CVn I core observations) without pathological oversuppression.
 
-**Code:** `scripts/multi_UFD_heldout_test.py` (~280 lines). Results: `v0.3-prelim/data/results/phase4e_multi_UFD_heldout.json`.
+**Per-system V_max sources:** Ursa Minor σ_v ≈ 9.5 km/s (Mateo+ 1998; updated by Pace 2020 DR2); V_max ≈ 2σ_v = 19-22 km/s, code uses 22. Boötes I σ_v ≈ 5.5 km/s (Koposov+ 2011); V_max ≈ 11-14 km/s, code uses 14. Hercules σ_v ≈ 5 km/s (Adén+ 2009); V_max ≈ 10-13 km/s, code uses 13. CVn I σ_v ≈ 7.6 km/s (Zentner+ 2005); V_max ≈ 15-18 km/s, code uses 18. All within published uncertainties; the kinematic conventions used are v_eff = V_max/√2 and dispersion-supported NFW limit (Wolf+ 2010).
 
+**Honest joint moral:**
 
+> *Under frozen Path 2/3 fits, generalization failure is concentrated on the tightest low-f_b UFD ceiling (Segue 1), not uniform across all UFDs. Several other "PASS"es rely on oversuppression to σ_eff ≈ 0, which is excluded by core observations, not by σ/m upper bounds. The puzzle is localized to Segue 1's tight bound, but neither extension predicts the full UFD sample without per-class tuning.*
+
+**Updated cross-path comparison:**
+
+| Approach | In-sample | Original held-out (Segue 1) | Multi-UFD meaningful | Multi-UFD pathological |
+|----------|-----------|------------------------------|-----------------------|-------------------------|
+| Categorical ℰ (§10.4g.1) | 5/5 | N/A (post-hoc) | **2/2** | 2/4 |
+| Continuous ℰ (§10.4g.2) | 5/5 | FAIL (2.4×) | **2/2** | 2/4 |
+| Species-dep σ (§10.4g.3) | 5/5 | FAIL (2.5×) | **1/2** | 1/4 |
+
+**Code:** `scripts/multi_UFD_heldout_test.py` (~280 lines). Results: `v0.3-prelim/data/results/phase4e_multi_UFD_heldout.json` (Path 3 raw count is 3/4, but excluding the pathological UMi entry the meaningful count is 1/2 + 1 PATHOLOGICAL = 2 entries where Boötes 0.93× is borderline-PASS and Hercules 1.07× is FAIL). Plot: `v0.3-prelim/docs/figures/fig9_multi_UFD_oversuppression.png` (regenerated below).
 
 ---
 

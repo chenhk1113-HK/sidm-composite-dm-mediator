@@ -27,7 +27,13 @@
     "path3_pred": 1.573440660038158e-06,
     "path3_pass": true,
     "cat_pred": 6.01296938686035e-08,
-    "cat_pass": true
+    "cat_pass": true,
+    "path2_pathological": true,
+    "path3_pathological": true,
+    "cat_pathological": true,
+    "path2_verdict": "PATHOLOGICAL",
+    "path3_verdict": "PATHOLOGICAL",
+    "cat_verdict": "PATHOLOGICAL"
   },
   "Bootes I (UFD, isolated)": {
     "V_max": 14.0,
@@ -41,7 +47,13 @@
     "path3_pred": 1.8544586441295503,
     "path3_pass": true,
     "cat_pred": 0.006347101156870333,
-    "cat_pass": true
+    "cat_pass": true,
+    "path2_pathological": false,
+    "path3_pathological": false,
+    "cat_pathological": false,
+    "path2_verdict": "PASS",
+    "path3_verdict": "PASS",
+    "cat_verdict": "PASS"
   },
   "Hercules (UFD, isolated)": {
     "V_max": 13.0,
@@ -55,7 +67,13 @@
     "path3_pred": 2.1327200240836697,
     "path3_pass": false,
     "cat_pred": 0.0073167853844774994,
-    "cat_pass": true
+    "cat_pass": true,
+    "path2_pathological": false,
+    "path3_pathological": false,
+    "cat_pathological": false,
+    "path2_verdict": "PASS",
+    "path3_verdict": "FAIL",
+    "cat_verdict": "PASS"
   },
   "CVn I (classical dSph, satellite)": {
     "V_max": 18.0,
@@ -69,14 +87,30 @@
     "path3_pred": 1.8077844242196994e-07,
     "path3_pass": true,
     "cat_pred": 2.2313395438533025e-09,
-    "cat_pass": true
+    "cat_pass": true,
+    "path2_pathological": true,
+    "path3_pathological": true,
+    "cat_pathological": true,
+    "path2_verdict": "PATHOLOGICAL",
+    "path3_verdict": "PATHOLOGICAL",
+    "cat_verdict": "PATHOLOGICAL"
   },
   "verdict": {
-    "path2_pass": 4,
-    "path2_total": 4,
-    "path3_pass": 3,
-    "path3_total": 4,
-    "cat_pass": 4,
-    "cat_total": 4
+    "path2_strict_pass": 4,
+    "path2_strict_total": 4,
+    "path3_strict_pass": 3,
+    "path3_strict_total": 4,
+    "cat_strict_pass": 4,
+    "cat_strict_total": 4,
+    "path2_meaningful_pass": 2,
+    "path2_meaningful_fail": 0,
+    "path2_pathological": 2,
+    "path3_meaningful_pass": 1,
+    "path3_meaningful_fail": 1,
+    "path3_pathological": 2,
+    "cat_meaningful_pass": 2,
+    "cat_meaningful_fail": 0,
+    "cat_pathological": 2,
+    "pathological_floor": 0.001
   }
 }
