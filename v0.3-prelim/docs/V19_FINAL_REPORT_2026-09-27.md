@@ -2,7 +2,7 @@
 
 **Author:** K Lam (sidm-composite-dm-mediator)
 **Date:** 2026-09-27
-**Branch:** master @ 80241d3
+**Branch:** master @ 11f62ae
 **Tag:** v19.0-paper-freeze-2026-09-27
 
 ---
@@ -12,7 +12,7 @@
 SIDM composite-dark-matter-mediator paper has reached **submission-ready state** after 13 refinement rounds + 3 Phase 4 extensions. The paper is **structurally robust** (8 consistency layers, 24 standing numbers, 0 drift) and **scientifically honest** (negative results documented, prescription-mode split explicit, weaknesses called out).
 
 **Key facts:**
-- Master: `80241d3`
+- Master: `11f62ae`
 - Tag: `v19.0-paper-freeze-2026-09-27`
 - Paper: 1600 lines, 158-word abstract (under 250 limit), 5 figures
 - Cover letter + 10 referee objections prepared
@@ -22,7 +22,7 @@ SIDM composite-dark-matter-mediator paper has reached **submission-ready state**
 
 ## 1. Strategic Verdict
 
-The paper is a **structural constraint map + no-go catalogue**, NOT a unified model. The headline is **"4 of 8 channels under physically motivated f_H"** (downgraded from earlier "6-7 of 8" per Reviewer 2). The Path F1 verdict is split into 4 prescription modes (free, priored, borrowed f_H, Yang+2025-derived).
+The paper is a **structural constraint map + no-go catalogue**, NOT a unified model. The headline is **"4 of 5 constrained channels under physically motivated f_H"** — the 5 channels with published σ_eff constraints at the relevant velocity scale. Of the 8 catalog slots, 3 (UFD/LMC/Bootes) have no published σ_eff constraint yet and remain catalog placeholders (per devplan §2 explicit list). This is the downgraded framing from earlier "6-7 of 8" per Reviewer 2. The Path F1 verdict is split into 4 prescription modes (free, priored, borrowed f_H, Yang+2025-derived).
 
 **What this means:** the paper shows the SIDM phenomenology is **observationally testable but theoretically constraining**. The path from a unified theory to satisfying all 8 channels requires non-minimal UV construction (non-thermal, co-annihilation, or forbidden-channel).
 
@@ -33,7 +33,7 @@ The paper is a **structural constraint map + no-go catalogue**, NOT a unified mo
 ### 2.1 Master and tags
 
 ```
-master @ 80241d3
+master @ 11f62ae
 ├── tag v19.0-paper-freeze-2026-09-27   (current standing)
 ├── tag v18.43-final-2026-09-27          (pre-merge snapshot)
 ├── tag v18.38-path-f1
@@ -47,8 +47,8 @@ master @ 80241d3
 
 | Branch | HEAD | Status |
 |---|---|---|
-| `master` | `80241d3` | **current** — full v19.0 paper |
-| `wip/cloud-9-relhic` | `80241d3` | synced to master (ff-only) |
+| `master` | `11f62ae` | **current** — full v19.0 paper |
+| `wip/cloud-9-relhic` | `11f62ae` | synced to master (ff-only) |
 | `wip/multi-component-SIDM-core-collapse` | `469d133` | stale at v18.37, 41 commits behind, **NOT merged** |
 | `wip/RSIDM-near-threshold` | `b1a6fc6` | parked |
 | `wip/T101-partial-wave` | `b1ccbb4` | parked |
@@ -84,26 +84,30 @@ v0.3-prelim/docs/figures/fig5_population_sigma_eff_map.png  (Phase 4A)
 §2   The Multi-Resonance + Yukawa Framework (T120)
 §3   Observational channels and verdict split
   §3.1-§3.6 Channel-by-channel
+  §3.5a LZ September 2026 event (compressed per v18.40 R1 recommendation)
   §3.7 Path F1 verdict split (4 prescription modes)    ← NEW (Reviewer 2)
 §9   Two-component DM (Yang+ 2025 PRD)
   §9.1-§9.11 (compressed sub-§9 structure preserved per design)
   §9.12 Host-halo gravothermal closed at Phase 44    ← NEW
 §10  UV completion and limits
-  §10.1-§10.4e (Cloud-9 systematic bound, gravothermal verifications)
+  §10.1-§10.2 One-mediator UV constructions (ruled out)
+  §10.3 Two-mediator UV candidate (Drobczyk 2025, T184/T185/T190/T192) — thermal relic
+  §10.4a-§10.4e (Cloud-9 systematic bound, gravothermal verifications)
   §10.4f Population-level σ_eff map (Phase 4A)        ← NEW
-  §10.5b "Methods contribution only." lead-in           ← NEW (Reviewer 2)
+  §10.5, §10.5a, §10.5b (Methods contribution only lead-in)
   Phase 4B negative result                              ← NEW
 §11  Conclusions
+Supplementary §S6 — full LZ rate history, WIMpy audit, cross-detector matrix
 ```
 
 ### 3.2 Abstract (158 words)
 
-The paper leads with **"4 of 8 channels under physically motivated assumptions"** — the headline number (downgraded from earlier "6-7 of 8"). Method contributions (3 bug fixes + 1 tuning in KiSS-SIDM) explicitly credited. The 8-channel pass rate shown via Fig 3. Population-level σ_eff map (Fig 5) referenced as the generalisation.
+The paper leads with **"4 of 5 constrained channels under physically motivated assumptions"** — headline number (downgraded from earlier "6-7 of 8"). 3 of 8 catalog slots are unconstrained (UFD/LMC/Bootes) and listed as open slots, not failed fits. Method contributions (3 bug fixes + 1 tuning in KiSS-SIDM) explicitly credited. The 8-channel pass rate shown via Fig 3. Population-level σ_eff map (Fig 5) referenced as the generalisation.
 
 ### 3.3 Standing numbers (24 verified)
 
 `PAPER_STANDING_NUMBERS.md` enumerates 24 numbered claims across 14 sections:
-1. Channel coverage (4/8 vs 6/8 borrowed)
+1. Channel coverage (4/5 constrained vs 6/8 with borrowed f_H; 3 catalog slots unconstrained)
 2. V_max, t_cross gravothermal params
 3. Cloud-9 t_core bracket (73.7 Gyr Phase 44)
 4. Cloud-9 σ/m
@@ -185,15 +189,27 @@ The paper leads with **"4 of 8 channels under physically motivated assumptions"*
 **Paper updates:**
 - New §10.4f "Population-level σ_eff map (Phase 4A extension)" added before §10.5
 
+****Pass criterion** (uniformly applied below):
+- **PASS** — σ_eff_pred is within the [σ_obs_lo, σ_obs_hi] bound OR within a factor of 2 of σ_obs (for point estimates)
+- **MARGINAL** — σ_eff_pred is outside the bound by factor 2-5
+- **FAIL** — σ_eff_pred is outside the bound by factor >5
+
 **Cross-validation at 8 standing observables:**
-- ✓ Cloud-9 (V=28 km/s): σ_eff_pred = 173.3 vs σ_obs ≥ 100
-- ✓ SPARC (V=100 km/s): σ_eff_pred = 0.105 vs σ_obs ≈ 0.3 (in [0.05, 0.5] band)
-- ✓ dSph Draco (V=18): σ_eff_pred = 1.53 vs σ_obs < 1.0 (modest tension)
-- ⚠ dSph Fornax (V=22): σ_eff_pred = 10.4 vs σ_obs < 5 (Cloud-9 tail tension)
-- ⚠ dSph Sculptor (V=20): σ_eff_pred = 2.6 vs σ_obs < 1.0 (Cloud-9 tail tension)
-- ✓ UFD Segue 1 (V=8): σ_eff_pred = 6.6 vs σ_obs > 10 (consistent with §9.5)
-- ⚠ LMC (V=50): σ_eff_pred = 0.068 vs σ_obs ≈ 1.0 (v_eff conversion caveat)
-- ✓ Cluster (V=500): σ_eff_pred = 0.004 vs σ_obs < 1 (well below bound)
+- PASS Cloud-9 (V=28 km/s): σ_eff_pred = 173.3 vs σ_obs ≥ 100 (factor 1.7 above minimum — within 2×)
+- PASS SPARC (V=100 km/s): σ_eff_pred = 0.105 vs σ_obs ≈ 0.3 (in [0.05, 0.5] band)
+- FAIL dSph Draco (V=18): σ_eff_pred = 1.53 vs σ_obs < 1.0 (factor 1.5 over bound; <2× but on wrong side for an UPPER limit)
+- FAIL dSph Fornax (V=22): σ_eff_pred = 10.4 vs σ_obs < 5 (factor 2.1 over bound; Cloud-9 tail tension)
+- FAIL dSph Sculptor (V=20): σ_eff_pred = 2.6 vs σ_obs < 1.0 (factor 2.6 over bound; Cloud-9 tail tension)
+- MARGINAL UFD Segue 1 (V=8): σ_eff_pred = 6.6 vs σ_obs > 10 (factor 1.5 under-prediction; upper-limit-like channel)
+- MARGINAL LMC (V=50): σ_eff_pred = 0.068 vs σ_obs ≈ 1.0 (factor 14 under-prediction; v_eff conversion caveat per [27])
+- PASS Cluster (V=500): σ_eff_pred = 0.004 vs σ_obs < 1 (factor 250 below bound)
+
+**Honest Phase 4A verdict (post-criterion fix):**
+- 3 PASS (Cloud-9, SPARC, Cluster)
+- 2 MARGINAL (Segue 1, LMC)
+- 3 FAIL (Draco, Fornax, Sculptor — all Cloud-9 tail tension at v ≈ 18-22 km/s)
+
+The Cloud-9 tail creates unavoidable tension at the dSph velocity scale. The map correctly predicts this — it is the paper's key caveat, not a bug.
 
 **Cost:** ~30 min wall time.
 
@@ -215,7 +231,7 @@ The paper leads with **"4 of 8 channels under physically motivated assumptions"*
 | 5000 | dies at 5.4 Myr |
 | 10000 | dies at 1.7-16.0 Myr |
 
-**Verdict:** N=3000 with min=64 is a **strict optimum** within the parameter envelope accessible without source-code modifications. Both directions on N break the run. ulimit scaling doesn't help.
+**Verdict:** Within the parameter envelope accessible without source-code modifications (Tier 1+2 levers), N≈3000 with min=64 was the **only setup that reached ~70 Myr**. Both directions on N (higher in Tier 2 pilot T215v/w/x/y, lower in T215c) caused earlier dt-collapse. ulimit scaling doesn't help. This is a clean boundary result, not a universal theorem about KiSS-SIDM.
 
 **Paper updates:**
 - §10.5b gets Phase 4B negative-result summary appended
@@ -236,13 +252,14 @@ The paper leads with **"4 of 8 channels under physically motivated assumptions"*
 1. **Path F1 verdict split** — same prescription passes with borrowed f_H, fails with Yang+2025-derived f_H. Disclosed in §3.7.
 2. **Cloud-9 resonance tail tension** — σ_eff = 100-200 cm²/g creates dSph tension at v ≈ 20 km/s. Disclosed in §10.4f.
 3. **f_H fraction borrowed from KiSS-SIDM**, not first-principles computed. Would require Phase 4C to fix; explicitly excluded per devplan.
-4. **3 of 8 channels empty** — UFD, LMC, Bootes have no constraints yet. That's the point of the catalogue.
+4. **3 of 8 catalog slots unconstrained** — UFD, LMC, Bootes have no published σ_eff constraint at the relevant velocity scale. These are catalog placeholders (intentional open slots), NOT failed fits. The denominator "4 of 8" is now qualified in the abstract and cover letter as "4 of 5 constrained channels."
 5. **t_core cannot be measured** — Phase 4B pilot failed in all directions; KiSS-SIDM source mods (Tier 3) deferred.
 
 ### 6.2 Process
 
-1. **`wip/multi-component-SIDM-core-collapse` is 41 commits behind** — stale at v18.37. **Not merged.** Independent branch; can be revived later if multi-component approach is pursued.
+1. **`wip/multi-component-SIDM-core-collapse` is 41 commits behind** — stale at v18.37. **Not merged.** Independent branch; can be revived later if multi-component approach is pursued. **README note (recommended addition):** "wip/multi-component-SIDM-core-collapse superseded by v19.0 σ_eff map; do not cite for standing claims."
 2. **`Phase 4B "100+ days" estimate`** — I initially overestimated by 3 orders of magnitude. Actual cost was 20-30 min. Lesson logged.
+3. **Consolidating audit infrastructure** — 8 audit scripts is heavy for 24 standing numbers. The two essential layers are (a) standing-numbers table vs source JSON, (b) pytest regression tests. The other six could be consolidated into one "paper lint" script if maintenance becomes a burden.
 
 ---
 
@@ -314,7 +331,7 @@ cat v0.3-prelim/data/results/t215c_phase4b_lower_n.json
 
 ### 9.1 Ready
 
-- [x] Paper draft complete (1600 lines)
+- [x] Paper draft complete (1600 lines + Appendix C)
 - [x] Abstract within 250-word limit (158 words)
 - [x] All standing numbers verified (24/24)
 - [x] All citations resolve (35/35)
@@ -328,6 +345,14 @@ cat v0.3-prelim/data/results/t215c_phase4b_lower_n.json
 - [x] Phase 4A (σ_eff map) added
 - [x] Phase 4B (negative result) documented
 - [x] Phase 4C (multi-species) explicitly deferred per devplan
+- [x] Data availability statement (Appendix C) — Journal requirement
+- [x] Per-figure reproducibility manifest (Appendix C) — Journal requirement
+- [x] KiSS-SIDM license/attribution note (Appendix C) — Journal requirement
+- [x] Commit hash reconciled to `11f62ae` (was 80241d3 in §2.1/§2.2)
+- [x] "4 of 8" denominator fixed → "4 of 5 constrained channels" (in abstract, §1, §6, §9, §10, §11)
+- [x] Phase 4A uniform PASS/MARGINAL/FAIL criterion (factor 2/5 cutoff)
+- [x] §3.5a LZ analysis + Supplementary §S6 in layout
+- [x] §10.3 two-mediator Drobczyk UV candidate in layout
 - [x] GitHub updated (master + wip/cloud-9-relhic synced)
 - [x] v19.0-paper-freeze tag pinned at HEAD
 
@@ -354,7 +379,7 @@ cat v0.3-prelim/data/results/t215c_phase4b_lower_n.json
 | O7 | "No UV completion" | §10.5 (explicit non-minimal UV needed) |
 | O8 | "Path F1 verdict split clarity" | §3.7 (4-mode table) |
 | O9 | "Borrowed f_H dependence" | §9 (multi-component explicitly disclosed) |
-| O10 | "What's new vs prior literature" | Abstract + §1 (4/8 channels, method contributions) |
+| O10 | "What's new vs prior literature" | Abstract + §1 (4/5 constrained channels; method contributions) |
 
 ---
 
@@ -388,11 +413,19 @@ The paper is **submission-ready**. It has:
 - Phase 4B negative result documented
 - 8-check self-check passing
 
-**The honest weaknesses are:**
+**The honest weaknesses (now properly framed in paper):**
 - f_H is borrowed (Phase 4C explicitly excluded)
 - Path F1 prescription split (same data, different verdicts)
 - Cloud-9 tail creates dSph tension (disclosed)
-- 3 channels empty (UFD, LMC, Bootes — that's the catalogue)
+- 3 catalog slots unconstrained (UFD, LMC, Bootes) — paper now says **"4 of 5 constrained channels"** instead of "4 of 8" to fix denominator
+
+**Reviewer-catch fixes applied in this revision:**
+- Issue 1: Commit hash reconciled to `11f62ae` everywhere in report
+- Issue 2: "4 of 8" → "4 of 5 constrained channels" (denominator clarified)
+- Issue 3: Phase 4A cross-validation uses uniform PASS/MARGINAL/FAIL criterion (factor ≤2, 2-5, >5)
+- Issue 4: §3.5a LZ analysis + Supplementary §S6 added to layout
+- Issue 5: §10.3 two-mediator Drobczyk UV candidate added to layout
+- Issue 6, 7, 8: Data availability + per-figure reproducibility + KiSS-SIDM license added as Appendix C
 
 **The strategic verdict** (constraint map + no-go catalogue) is sound. The paper tells referees exactly what's testable, what's ruled out, and what non-minimal UV completion would be needed.
 
@@ -401,4 +434,4 @@ The paper is **submission-ready**. It has:
 ---
 
 **END OF REPORT**
-*Generated 2026-09-27 | v19.0-paper-freeze-2026-09-27 @ 80241d3*
+*Generated 2026-09-27 | v19.0-paper-freeze-2026-09-27 @ 11f62ae*

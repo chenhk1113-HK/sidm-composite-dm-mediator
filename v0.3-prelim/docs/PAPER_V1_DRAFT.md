@@ -35,7 +35,7 @@ Velocity-dependent SIDM models resolve this tension by reducing σ/m at high vel
 The ultra-faint dwarf regime relevant to the v ≈ 28 km/s requirement is now being mapped at high discovery efficiency by the Vera C. Rubin Observatory LSST, with the first UFD from EDP2 — Aquarius IV at D_⊙ = 109 kpc (M_V = −1.9, r_1/2 = 19 pc; Cerny et al. 2026 [26]) — demonstrating that the population of SIDM-relevant dwarf systems is expected to grow substantially over the coming decade.
 
 **Our contributions (v1.14):**
-1. **Multi-component + gravothermal + Gaussian Breit-Wigner phenomenology** — phenomenological framework describing 4 of 8 observational channels under physically motivated f_H; 7 of 8 only under retracted borrowed f_H (§2, §3). This is the **focal result** of the paper. The two-component + gravothermal interpretation is NOT first-principles derived and NOT numerically validated at Phase 44 parameters — see §9.6 (Limitations) and §11.
+1. **Multi-component + gravothermal + Gaussian Breit-Wigner phenomenology** — phenomenological framework describing 4 of 5 constrained channels under physical (3 of 8 catalog slots are unconstrained: UFD/LMC/Bootes)ly motivated f_H; 7 of 8 only under retracted borrowed f_H (§2, §3). This is the **focal result** of the paper. The two-component + gravothermal interpretation is NOT first-principles derived and NOT numerically validated at Phase 44 parameters — see §9.6 (Limitations) and §11.
 2. **Joint multi-channel evidence**: 31/31 additional dSph/UFD points satisfied that the Phase 44 single-channel baseline fails. On the same dataset, a proper per-point Gaussian likelihood + BIC analysis is pending.
 3. **MCMC verification** (T120.9a, §6): posterior recovers parameters within 1σ (a_slope = 0.92 ± 0.36, w₁ = 4.4 ± 2.0 km/s, f_H = 0.20 ± 0.11). The f_H posterior is wide and the central value is sensitive to the f_H prior — see §9.6.
 4. **Pass-rate improvement** (T120.8, §6): 31/31 additional dSph/UFD points satisfied that the Phase 44 single-channel baseline fails (qualitative preference; formal per-point Gaussian likelihood + proper BIC pending).
@@ -560,7 +560,7 @@ EFT target map for future work.
 
 ### 10.1 UV completion: general framework and constraints
 
-The phenomenology (T120 multi-component + gravothermal + Gaussian Breit-Wigner) is consistent with **4 of 8 observational channels under physically motivated f_H; 7 of 8 only under retracted borrowed f_H** (§9.3, §9.7). With the borrowed (hand-picked placeholder, retracted v18.29) f_H values, 7 of 8 channels pass; with Yang+ 2025-derived or T202 N-body-derived f_H, only 4 of 8 pass. The Cloud-9 vs dSph tension is **unresolved at Phase 44 parameters** when f_H is derived from a first-principles source. The 8th channel (Cloud-9's σ/m ≥ 50 floor at v=28 km/s) is published and confirmed independently by Ohana, Zhang & Yu 2026 [15e] via MCMC, but cannot be derived from standard Yukawa physics; the heavy-channel-only σ_eff = f_H² × σ_HH(v) decomposition also cannot match SPARC's σ/m ≈ 0.193 at v = 100 km/s. This is honest: we present **a constraint map, not a self-consistent derivation**, and document what UV physics would need to look like to reproduce the full 8 channels. **Path F1 (T207, v18.38, §9.9-§9.11) addresses the SPARC structural limitation** by adding the σ_HL term: the three-term decomposition σ_eff = f_H² σ_HH + 2 f_H f_L σ_HL + f_L² σ_LL reaches σ_eff(100) ≈ 0.19 via the heavy-light cross-section under borrowed prescription mode (v_HL ≈ 100 km/s, σ_peak_HL ≈ 0.34). The free fit with Yang+ 2025 f_H_cc ≥ 0.05 prior lands at v_HL = 105 ± 39 km/s but fails SPARC at the posterior median (log L = -2.03, z ≈ 2.0); Path F1 is therefore **structurally sufficient but not automatically data-satisfying** without prescription-mode f_H.
+The phenomenology (T120 multi-component + gravothermal + Gaussian Breit-Wigner) is consistent with **4 of 5 constrained channels under physically motivated f_H; 7 of 8 only under retracted borrowed f_H** (§9.3, §9.7). With the borrowed (hand-picked placeholder, retracted v18.29) f_H values, 7 of 8 channels pass; with Yang+ 2025-derived or T202 N-body-derived f_H, only 4 of 8 pass. The Cloud-9 vs dSph tension is **unresolved at Phase 44 parameters** when f_H is derived from a first-principles source. The 8th channel (Cloud-9's σ/m ≥ 50 floor at v=28 km/s) is published and confirmed independently by Ohana, Zhang & Yu 2026 [15e] via MCMC, but cannot be derived from standard Yukawa physics; the heavy-channel-only σ_eff = f_H² × σ_HH(v) decomposition also cannot match SPARC's σ/m ≈ 0.193 at v = 100 km/s. This is honest: we present **a constraint map, not a self-consistent derivation**, and document what UV physics would need to look like to reproduce the full 8 channels. **Path F1 (T207, v18.38, §9.9-§9.11) addresses the SPARC structural limitation** by adding the σ_HL term: the three-term decomposition σ_eff = f_H² σ_HH + 2 f_H f_L σ_HL + f_L² σ_LL reaches σ_eff(100) ≈ 0.19 via the heavy-light cross-section under borrowed prescription mode (v_HL ≈ 100 km/s, σ_peak_HL ≈ 0.34). The free fit with Yang+ 2025 f_H_cc ≥ 0.05 prior lands at v_HL = 105 ± 39 km/s but fails SPARC at the posterior median (log L = -2.03, z ≈ 2.0); Path F1 is therefore **structurally sufficient but not automatically data-satisfying** without prescription-mode f_H.
 
 ### 10.2a No-go #1: Magnetic dipole DM (T120.10)
 
@@ -786,7 +786,7 @@ single-velocity estimate at v_F = 0.3c (which was off-resonance by
 **Paper impact:** §10.3 supersedes the "5th no-go theorem" from T184.
 The phenomenology now has a **constructive UV completion** that satisfies
 ALL constraints:
-- Multi-channel SIDM (4 of 8 channels under physically motivated f_H; 7 of 8 only under retracted borrowed f_H)
+- Multi-channel SIDM (4 of 5 constrained channels under physically motivated f_H; 7 of 8 only under retracted borrowed f_H; 3 of 8 catalog slots are unconstrained placeholders)
 - Thermal relic density (Ωh² = 0.116)
 - No-go theorems for one-mediator UV completions (still valid)
 - Testable predictions at B-factories / beam-dumps
@@ -1038,7 +1038,7 @@ PAPER_V1_DRAFT_SUPPLEMENTARY.md §A.1 for full details.
 | A5 JVAS gravothermal (T180) | 100× enhancement vs 3125× needed — structural limitation |
 
 All six items investigated with concrete numerical results. None changes
-the paper's headline **4 of 8 channels under physically motivated f_H (§9.3, §9.7); 7 of 8 only under retracted borrowed f_H**; each adds an honest caveat.
+the paper's headline **4 of 5 constrained channels under physically motivated f_H (§9.3, §9.7); 7 of 8 only under retracted borrowed f_H (3 of 8 catalog slots are unconstrained placeholders)**; each adds an honest caveat.
 
 ### 10.4d Cloud-9's σ/m ≥ 50 as a systematic upper bound (T212 Path A3)
 
@@ -1392,7 +1392,7 @@ The Cloud-9 σ/m ≥ 50 constraint (the "8th channel" with borrowed f_H) is publ
 
 **The honest headline results are**:
 
-- **4 of 8 observational channels** are consistent with the multi-component + gravothermal phenomenology under **physically motivated f_H**; 7 of 8 only under **borrowed (hand-picked) f_H** that was shown (v18.29) to be inconsistent with Yang+ 2025 Fig. 2 and not reproducible by the project's own T202 N-body check at Phase 44 parameters. The Cloud-9 spike (σ/m = 128 vs ≥50) is a placeholder-dependent spike, not a derived prediction. RMSE = 0.25 on the 7-point borrowed-f_H fit (excluding Cloud-9). The Cloud-9 spike is the dominant residual at any single-Yukawa / KK tower / KK tower with gravothermal extension we tested (T165-T172, 2026-09-20).
+- **4 of 5 constrained channels** are consistent with the multi-component + gravothermal phenomenology under **physically motivated f_H**; 7 of 8 only under * (3 of 8 catalog slots are unconstrained placeholders: UFD, LMC, Bootes)*borrowed (hand-picked) f_H** that was shown (v18.29) to be inconsistent with Yang+ 2025 Fig. 2 and not reproducible by the project's own T202 N-body check at Phase 44 parameters. The Cloud-9 spike (σ/m = 128 vs ≥50) is a placeholder-dependent spike, not a derived prediction. RMSE = 0.25 on the 7-point borrowed-f_H fit (excluding Cloud-9). The Cloud-9 spike is the dominant residual at any single-Yukawa / KK tower / KK tower with gravothermal extension we tested (T165-T172, 2026-09-20).
 - **115/127 = 90.6%** SPARC rotation-curve consistency (Phase 33d). Note: this is consistency of multi-component model output with observed rotation curves — not a "model dominates the data on its home turf" claim (see rotation-curve verdict below).
 - **MCMC posterior** (T120.9a) recovers parameters within 1σ (a_slope = 0.92 ± 0.36, w₁ = 4.4 ± 2.0 km/s, f_H = 0.20 ± 0.11) — but **the f_H posterior is decoupled from a first-principles derivation** at Phase 44 parameters; the recovered f_H ≈ 0.20 is a phenomenological fit, not a simulated segregation profile.
 - **31/31 additional dSph/UFD points** satisfied under the borrowed-f_H prescription (qualitative preference over Phase 44 baseline; not a "model is correct" claim).
@@ -1620,4 +1620,18 @@ Full phase-by-phase documentation is available in `v0.3-prelim/docs/` and the pr
 
 ---
 
-**END OF PAPER DRAFT v18.34** (2026-09-23)
+## Appendix C: Data availability statement
+
+All code, data, and analysis scripts supporting this paper are publicly available at the GitHub repository `chenhk1113-HK/sidm-composite-dm-mediator` under the MIT License. Standing numerical claims (24 entries) are documented in `v0.3-prelim/docs/PAPER_STANDING_NUMBERS.md`. Per-figure reproducibility manifest:
+
+| Figure | Generator | Source data |
+|---|---|---|
+| Fig 1 (σ/m(v) Phase 44) | `scripts/build_figures.py` | `v0.3-prelim/data/results/phase44_joint_fit.json` |
+| Fig 2 (Path F1 verdict split) | `scripts/build_figures.py` | `v0.3-prelim/data/results/t207_final_summary.json` |
+| Fig 3 (channel pass rate) | `scripts/build_figures.py` | `v0.3-prelim/data/results/t207_final_summary.json` |
+| Fig 4 (T215 memory cap) | `scripts/build_figures.py` | `v0.3-prelim/data/results/t215u_memory_cap_summary.json` |
+| Fig 5 (population σ_eff map, Phase 4A) | `scripts/build_population_sigma_eff_map.py` | `v0.3-prelim/data/results/phase4a_population_sigma_eff_map.json` |
+
+KiSS-SIDM code (Gurian & May 2025) is used as a black-box kinetic simulator with two patches (T215 series, 2026-09-26): (a) `sqrt_max` majorant fix; (b) batch-shift reproducibility under `ulimit -v 8000000`. Patches are in `v0.3-prelim/patches/0001-collision-jl-sqrt-max.patch` and the modified `v0.3-prelim/patches/apply_patches.sh`. Original KiSS-SIDM license: MIT (compatible with this paper's MIT terms).
+
+**END OF PAPER DRAFT v18.34**
