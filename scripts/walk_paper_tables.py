@@ -82,8 +82,9 @@ def check_table_for_issues(line_num, rows):
                 issues.append(f"Line {line_num} row {i+1} col {j+1}: TODO/TBD/XXX found")
 
     # Issue 2: contradictory "OK" vs "FAIL" in same row (heuristic)
-    # Skip rows that are EXPLICITLY showing prescription-mode comparison
-    prescription_markers = re.compile(r"(borrowed|yang\+|t202|n.body|prescription)", re.IGNORECASE)
+    # Skip rows that are EXPLICITLY showing prescription-mode or environment-axis comparison
+    # (multi-PASS/FAIL rows are EXPECTED in summary tables of mixed verdicts)
+    prescription_markers = re.compile(r"(borrowed|yang\+|t202|n.body|prescription|satellite|field\s*dSph|RELHIC|cluster|reviewer|ℰ_rescale|env_rescale|phase\s*4a|null\s*\(phase|moderate|strong\s*\(reviewer|best.fit)", re.IGNORECASE)
     for i, row in enumerate(parsed[2:], 2):  # skip header + separator
         row_text = " ".join(row)
         # If row is showing prescription comparison, it's expected to have mixed pass/fail

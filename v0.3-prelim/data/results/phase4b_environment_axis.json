@@ -1,0 +1,384 @@
+{
+  "metadata": {
+    "description": "Phase 4B (Option B): categorical \u2130 (environment) axis for sigma_eff map",
+    "reviewer_hypothesis": "sigma_eff = sigma_eff(v, f_H, \u2130) where \u2130 \u2208 {RELHIC, field dSph, satellite dSph, cluster}",
+    "p44_params": {
+      "sigma_0": 0.05156371513303437,
+      "a_slope": 1.9286750353457855,
+      "v_targets": [
+        29.36,
+        100.0,
+        178.5,
+        430.5,
+        768.9
+      ],
+      "sigma_peaks": [
+        196.3,
+        0.4,
+        0.158,
+        0.039,
+        0.484
+      ],
+      "w_list": [
+        3.0,
+        30.0,
+        30.0,
+        50.0,
+        50.0
+      ]
+    },
+    "tests": {
+      "null": {
+        "rescale": {},
+        "summary": {
+          "RELHIC": {
+            "PASS": 1,
+            "MARGINAL": 0,
+            "FAIL": 0,
+            "?": 0
+          },
+          "field dSph": {
+            "PASS": 0,
+            "MARGINAL": 0,
+            "FAIL": 2,
+            "?": 0
+          },
+          "satellite dSph": {
+            "PASS": 0,
+            "MARGINAL": 0,
+            "FAIL": 1,
+            "?": 0
+          },
+          "cluster": {
+            "PASS": 1,
+            "MARGINAL": 0,
+            "FAIL": 0,
+            "?": 0
+          }
+        },
+        "rows": [
+          {
+            "environment": "RELHIC",
+            "name": "Cloud-9 (Ergo)",
+            "V_max": 28,
+            "sigma_phase4a": 173.28155033211488,
+            "sigma_obs": 100,
+            "bound": ">=100",
+            "rescale": 1.0,
+            "sigma_env": 173.28155033211488,
+            "label": "PASS"
+          },
+          {
+            "environment": "field dSph",
+            "name": "dSph Draco (field analog)",
+            "V_max": 18,
+            "sigma_phase4a": 1.5294310298512008,
+            "sigma_obs": 1.0,
+            "bound": "<1.0",
+            "rescale": 1.0,
+            "sigma_env": 1.5294310298512008,
+            "label": "FAIL"
+          },
+          {
+            "environment": "field dSph",
+            "name": "dSph Sculptor (field analog)",
+            "V_max": 20,
+            "sigma_phase4a": 2.604014226729308,
+            "sigma_obs": 1.0,
+            "bound": "<1.0",
+            "rescale": 1.0,
+            "sigma_env": 2.604014226729308,
+            "label": "FAIL"
+          },
+          {
+            "environment": "satellite dSph",
+            "name": "dSph Fornax (stripped)",
+            "V_max": 22,
+            "sigma_phase4a": 10.383480389723305,
+            "sigma_obs": 5.0,
+            "bound": "<5",
+            "rescale": 0.5,
+            "sigma_env": 5.191740194861652,
+            "label": "FAIL"
+          },
+          {
+            "environment": "cluster",
+            "name": "Galaxy cluster (Bullet)",
+            "V_max": 500,
+            "sigma_phase4a": 0.003952844977485921,
+            "sigma_obs": 0.1,
+            "bound": "<1",
+            "rescale": 1.0,
+            "sigma_env": 0.003952844977485921,
+            "label": "PASS"
+          }
+        ]
+      },
+      "moderate": {
+        "rescale": {
+          "satellite dSph": 0.5
+        },
+        "summary": {
+          "RELHIC": {
+            "PASS": 1,
+            "MARGINAL": 0,
+            "FAIL": 0,
+            "?": 0
+          },
+          "field dSph": {
+            "PASS": 0,
+            "MARGINAL": 0,
+            "FAIL": 2,
+            "?": 0
+          },
+          "satellite dSph": {
+            "PASS": 0,
+            "MARGINAL": 0,
+            "FAIL": 1,
+            "?": 0
+          },
+          "cluster": {
+            "PASS": 1,
+            "MARGINAL": 0,
+            "FAIL": 0,
+            "?": 0
+          }
+        },
+        "rows": [
+          {
+            "environment": "RELHIC",
+            "name": "Cloud-9 (Ergo)",
+            "V_max": 28,
+            "sigma_phase4a": 173.28155033211488,
+            "sigma_obs": 100,
+            "bound": ">=100",
+            "rescale": 1.0,
+            "sigma_env": 173.28155033211488,
+            "label": "PASS"
+          },
+          {
+            "environment": "field dSph",
+            "name": "dSph Draco (field analog)",
+            "V_max": 18,
+            "sigma_phase4a": 1.5294310298512008,
+            "sigma_obs": 1.0,
+            "bound": "<1.0",
+            "rescale": 1.0,
+            "sigma_env": 1.5294310298512008,
+            "label": "FAIL"
+          },
+          {
+            "environment": "field dSph",
+            "name": "dSph Sculptor (field analog)",
+            "V_max": 20,
+            "sigma_phase4a": 2.604014226729308,
+            "sigma_obs": 1.0,
+            "bound": "<1.0",
+            "rescale": 1.0,
+            "sigma_env": 2.604014226729308,
+            "label": "FAIL"
+          },
+          {
+            "environment": "satellite dSph",
+            "name": "dSph Fornax (stripped)",
+            "V_max": 22,
+            "sigma_phase4a": 10.383480389723305,
+            "sigma_obs": 5.0,
+            "bound": "<5",
+            "rescale": 0.5,
+            "sigma_env": 5.191740194861652,
+            "label": "FAIL"
+          },
+          {
+            "environment": "cluster",
+            "name": "Galaxy cluster (Bullet)",
+            "V_max": 500,
+            "sigma_phase4a": 0.003952844977485921,
+            "sigma_obs": 0.1,
+            "bound": "<1",
+            "rescale": 1.0,
+            "sigma_env": 0.003952844977485921,
+            "label": "PASS"
+          }
+        ]
+      },
+      "strong": {
+        "rescale": {
+          "satellite dSph": 0.3
+        },
+        "summary": {
+          "RELHIC": {
+            "PASS": 1,
+            "MARGINAL": 0,
+            "FAIL": 0,
+            "?": 0
+          },
+          "field dSph": {
+            "PASS": 0,
+            "MARGINAL": 0,
+            "FAIL": 2,
+            "?": 0
+          },
+          "satellite dSph": {
+            "PASS": 1,
+            "MARGINAL": 0,
+            "FAIL": 0,
+            "?": 0
+          },
+          "cluster": {
+            "PASS": 1,
+            "MARGINAL": 0,
+            "FAIL": 0,
+            "?": 0
+          }
+        },
+        "rows": [
+          {
+            "environment": "RELHIC",
+            "name": "Cloud-9 (Ergo)",
+            "V_max": 28,
+            "sigma_phase4a": 173.28155033211488,
+            "sigma_obs": 100,
+            "bound": ">=100",
+            "rescale": 1.0,
+            "sigma_env": 173.28155033211488,
+            "label": "PASS"
+          },
+          {
+            "environment": "field dSph",
+            "name": "dSph Draco (field analog)",
+            "V_max": 18,
+            "sigma_phase4a": 1.5294310298512008,
+            "sigma_obs": 1.0,
+            "bound": "<1.0",
+            "rescale": 1.0,
+            "sigma_env": 1.5294310298512008,
+            "label": "FAIL"
+          },
+          {
+            "environment": "field dSph",
+            "name": "dSph Sculptor (field analog)",
+            "V_max": 20,
+            "sigma_phase4a": 2.604014226729308,
+            "sigma_obs": 1.0,
+            "bound": "<1.0",
+            "rescale": 1.0,
+            "sigma_env": 2.604014226729308,
+            "label": "FAIL"
+          },
+          {
+            "environment": "satellite dSph",
+            "name": "dSph Fornax (stripped)",
+            "V_max": 22,
+            "sigma_phase4a": 10.383480389723305,
+            "sigma_obs": 5.0,
+            "bound": "<5",
+            "rescale": 0.3,
+            "sigma_env": 3.1150441169169913,
+            "label": "PASS"
+          },
+          {
+            "environment": "cluster",
+            "name": "Galaxy cluster (Bullet)",
+            "V_max": 500,
+            "sigma_phase4a": 0.003952844977485921,
+            "sigma_obs": 0.1,
+            "bound": "<1",
+            "rescale": 1.0,
+            "sigma_env": 0.003952844977485921,
+            "label": "PASS"
+          }
+        ]
+      },
+      "best_fit": {
+        "rescale": {
+          "field dSph": 0.35,
+          "satellite dSph": 0.3
+        },
+        "summary": {
+          "RELHIC": {
+            "PASS": 1,
+            "MARGINAL": 0,
+            "FAIL": 0,
+            "?": 0
+          },
+          "field dSph": {
+            "PASS": 2,
+            "MARGINAL": 0,
+            "FAIL": 0,
+            "?": 0
+          },
+          "satellite dSph": {
+            "PASS": 1,
+            "MARGINAL": 0,
+            "FAIL": 0,
+            "?": 0
+          },
+          "cluster": {
+            "PASS": 1,
+            "MARGINAL": 0,
+            "FAIL": 0,
+            "?": 0
+          }
+        },
+        "rows": [
+          {
+            "environment": "RELHIC",
+            "name": "Cloud-9 (Ergo)",
+            "V_max": 28,
+            "sigma_phase4a": 173.28155033211488,
+            "sigma_obs": 100,
+            "bound": ">=100",
+            "rescale": 1.0,
+            "sigma_env": 173.28155033211488,
+            "label": "PASS"
+          },
+          {
+            "environment": "field dSph",
+            "name": "dSph Draco (field analog)",
+            "V_max": 18,
+            "sigma_phase4a": 1.5294310298512008,
+            "sigma_obs": 1.0,
+            "bound": "<1.0",
+            "rescale": 0.35,
+            "sigma_env": 0.5353008604479202,
+            "label": "PASS"
+          },
+          {
+            "environment": "field dSph",
+            "name": "dSph Sculptor (field analog)",
+            "V_max": 20,
+            "sigma_phase4a": 2.604014226729308,
+            "sigma_obs": 1.0,
+            "bound": "<1.0",
+            "rescale": 0.35,
+            "sigma_env": 0.9114049793552578,
+            "label": "PASS"
+          },
+          {
+            "environment": "satellite dSph",
+            "name": "dSph Fornax (stripped)",
+            "V_max": 22,
+            "sigma_phase4a": 10.383480389723305,
+            "sigma_obs": 5.0,
+            "bound": "<5",
+            "rescale": 0.3,
+            "sigma_env": 3.1150441169169913,
+            "label": "PASS"
+          },
+          {
+            "environment": "cluster",
+            "name": "Galaxy cluster (Bullet)",
+            "V_max": 500,
+            "sigma_phase4a": 0.003952844977485921,
+            "sigma_obs": 0.1,
+            "bound": "<1",
+            "rescale": 1.0,
+            "sigma_env": 0.003952844977485921,
+            "label": "PASS"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+Phase 4B (Option B): Categorical ℰ-axis test
+============================================================
+
+Reviewer hypothesis (A reasoned guess.docx):
+sigma_eff = sigma_eff(v, f_H, ℰ) where ℰ is an
+environment/assembly/baryonic-state variable.
+
+Test: apply a categorical rescaling factor to satellite dSph
+(Fornax) — the FAIL system at v=22 km/s — and re-evaluate.
+
+=== NULL (no rescale) ===
+  RELHIC             PASS=1 MARGINAL=0 FAIL=0
+  field dSph         PASS=0 MARGINAL=0 FAIL=2
+  satellite dSph     PASS=0 MARGINAL=0 FAIL=1
+  cluster            PASS=1 MARGINAL=0 FAIL=0
+
+=== MODERATE (sat ×0.5) ===
+  RELHIC             PASS=1 MARGINAL=0 FAIL=0
+  field dSph         PASS=0 MARGINAL=0 FAIL=2
+  satellite dSph     PASS=0 MARGINAL=0 FAIL=1
+  cluster            PASS=1 MARGINAL=0 FAIL=0
+
+=== STRONG (sat ×0.3, reviewer's S=1/3) ===
+  RELHIC             PASS=1 MARGINAL=0 FAIL=0
+  field dSph         PASS=0 MARGINAL=0 FAIL=2
+  satellite dSph     PASS=1 MARGINAL=0 FAIL=0
+  cluster            PASS=1 MARGINAL=0 FAIL=0
+
+Verdict:
+  Fornax (satellite dSph):
+    Phase 4A sigma_eff = 10.38 cm²/g (FAIL on tight <5 bound)
+    After ×0.3 rescale: sigma_eff = 3.12 cm²/g → PASS
+    σ_obs bound: <5, σ_obs point: 5.00
+
+If reviewer's ℰ hypothesis is correct at the categorical level:
+  - The v~22 km/s satellite dSph FAIL moves to PASS or MARGINAL
+  - Other bins remain unchanged
+If reviewer's hypothesis is NOT sufficient at the categorical level:
+  - The FAIL pattern persists even with ×0.3 suppression
+  - Deeper ℰ structure (species-dependent σ_ij shape, baryonic
+    coupling) is required, beyond a simple categorical rescaling
