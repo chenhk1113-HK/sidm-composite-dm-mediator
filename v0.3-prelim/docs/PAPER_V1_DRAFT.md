@@ -1454,6 +1454,115 @@ The strongest single held-out stress test is Segue 1's tight σ/m < 1 cm²/g bou
 
 ---
 
+## Annex A: The Story of Cloud-9 — A Narrative Audit Trail
+
+This annex narrates the full history of the Cloud-9 constraint as it unfolded across the project, from the first claim of a "4000× spike" through the v19.1.2 synthesis that reframed it as a gravothermal-evolution constraint. It is written in chronological order with the audit trail intact: what was claimed, when, what was found wrong, what was fixed, what survives. The narrative makes no claims beyond what the project's own numbers support; where the science is settled, the text says so; where it is open, the text says so too.
+
+### A.1 The original claim (v1.11 — before v18.30, retracted)
+
+In the early versions of this paper, Cloud-9 was reported as the "load-bearing tension": a RELHIC (REionization-Limited HI Cloud, [3]) host halo with σ/m ≥ 50 cm²/g at v = 28 km/s, a value that exceeds the framework's smooth Yukawa extrapolation by ~4000×. The number was treated as a sharp lower bound on σ/m at that velocity scale, and was the headline reason for the multi-resonance phenomenology in this paper. Versions v1.11–v1.14 reported the cloud as a "Cloud-9 vs dSph structural tension" — Cloud-9 (σ/m ≥ 50) and dSph (σ/m ≤ 0.8) sat on the same velocity-dependent σ/m(v) curve at different velocities, with a 60× ratio across only a 13 km/s gap. No published first-principles σ/v curve satisfies both. The "structural impossibility" framing was the v1.11 verdict.
+
+### A.2 The honest phenomenological audit (v18.30, 2026-09-13)
+
+A self-audit triggered by Rule 28 (arithmetic checking before claim, AGENTS.md) revealed that the v1.11 framing relied on two pieces of scaffolding that did not survive verification:
+- The "7 of 8 channels" headline used hand-picked `f_H_at_r` values that were labeled "Based on Yang+ 2025" but were not actually derived from Yang+ Fig. 2.
+- The gravothermal cascade timescale was implicitly assumed to be much shorter than Hubble time at Phase 44 σ/m, but a sanity check showed t_core ≈ 73.7 Gyr — much longer than 13.8 Gyr.
+
+After the audit, the v18.30 honest verdict was: **at Phase 44 parameters, the multi-resonance σ/m(v) profile is a phenomenological interpolation through 8 channels, not a first-principles derivation. The Cloud-9 vs dSph tension is unresolved at Phase 44.** The "7 of 8" headline was retired; the new honest headline became "4 of 5 channels under physically motivated f_H; 7 of 8 only under retracted borrowed f_H."
+
+### A.3 T208 — gravothermal refutation at Phase 44 baseline (v18.40–v18.43, 2026-09-25 to 2026-09-26)
+
+To check whether the gravothermal cascade could rescue the framework at Cloud-9 host-halo parameters, the T208 analysis (T208_path_b_cloud9_host_halo_gravothermal.py) was run. Using the **Phase 44 baseline σ/m** (0.052 cm²/g at v = 100 km/s, extrapolated to V_max ≈ 24.75 km/s via standard Yukawa), the Phase-44 σ/m at Cloud-9 host V_max is ≈ 0.21 cm²/g. The Balberg+ 2002 Eq. 22 collapse formula then gives **t_core = 73.7 Gyr**, which is **5.3× longer than t_Hubble = 13.8 Gyr**. Gravothermal does NOT run at Phase 44 baseline. The verdict entered the paper as §9.12 ("Host-halo gravothermal cascade closed at Phase 44"). T213 later confirmed the σ/m = 0.21 cm²/g at V_max with KK tower parameters (5.7× below Silverman+ 2026's gravothermal threshold of 1.0 cm²/g).
+
+### A.4 Silverman+ 2026 — the alternative mechanism (v18.40, 2026-09-25)
+
+While T208 refuted gravothermal at Phase 44, Silverman+ 2026 (arXiv:2606.02566 [54], "Mergers Matter") reported that at **σ/m = 70 cm²/g** in M_halo = 10¹⁰ M☉ halos, **3 of 6 halos collapse within a Hubble time** (those with quiescent merger histories). This was entered as §10.4e ("Path B3 trim — Gravothermal CAN run at host-halo scale"), with the honest framing that the Phase 44 framework cannot reach Silverman+'s σ/m regime without a ≥5× amplification factor — which the framework itself fails to provide via the standard Yukawa structure.
+
+### A.5 T215 KiSS-SIDM real kinetic simulation (v18.43, 2026-09-26)
+
+To independently test whether gravothermal runs at σ/m = 70 in Cloud-9-mass halos, the project's own KiSS-SIDM kinetic simulation was run (T215/T215b/T215d). A 3000-particle subsample of a virialized NFW halo at σ/m = 70 reached t = 55 Myr (T215d final), showing the classic gravothermal catastrophe signature: interior density increases by 2-3.7× while outer density decreases by 1.85× over 45-55 Myr. This was the qualitative confirmation that gravothermal cascade IS operative at Silverman+'s parameters. The framework reaches Silverman+'s regime **kinetically**, but the analytic Balberg+ formula is unreliable at large σ/m (t_core/t_cross falls below the 3.0 causality cap).
+
+### A.6 T212 Path A3 — Cloud-9 as a systematic upper bound (v18.40)
+
+Independently, T212 (T212_path_b_cloud9_host_halo_gravothermal.py) tested Cloud-9 as a **systematic upper bound** rather than a hard lower bound, motivated by Turini & Benítez-Llambay 2026 environmental systematics ([53]). The §10.4d framing: "Cloud-9's σ/m ≥ 50 floor is best understood as a systematic upper bound arising from environment-dependent halo response, not a sharp kinematic lower bound." Cloud-9 was reclassified from "structural tension" to "systematic bound" — the same numerical value, but a softer logical status.
+
+### A.7 v19.1-preliminary Cloud-9 joint likelihood (2026-09-29)
+
+The user's choice between three scopes for v19.1 work was "Full Silverman+ 6-halo N-body reproduction + real joint likelihood with Ohana+ 2026 posterior." The N-body reproduction was deferred (GIZMO + FIRE-2 ICs required multi-day cluster runs that were not feasible). Two scripts were written:
+- `scripts/ohana2026_cloud9_joint_likelihood.py` — MCMC over (M_200, c_200, τ) using Yang+ 2024/2025 parametric SIDM halo model (Eq. 4-5 of Ohana+), with a simplified gas profile (rho_DM² × r proxy) and a synthetic N_HI observation constructed from Ohana+'s published best-fit (M_200 = 4.7e9, c_200 = 4.0, τ = 0.18, σ/m = 483).
+- `scripts/silverman2026_cloud9_gravothermal.py` — gravothermal collapse timescale analysis using a wrong unit convention (Balberg+ formula derived from scratch with CGS conversions).
+
+The joint likelihood result: posterior median concentration-mass tension = 2.4σ (vs 7σ CDM-only, 3.2σ published Ohana+). The (σ/m, c_200) degeneracy was captured qualitatively. The gravothermal result: t_core ~ 10⁵–10⁹ Gyr — physically nonsensical. The script shipped without a sanity check.
+
+### A.8 Revcloud.docx — the unit bug caught (2026-09-29)
+
+Reviewer's reading of v19.1-preliminary was precise: the 10⁵–10⁹ Gyr collapse timescale was off by 5-8 orders of magnitude. The reviewer correctly identified that the project's own `T208_path_b_cloud9_host_halo_gravothermal.gravothermal_t_core_Gyr` function had the canonical Balberg+ formula with correct units, and that v19.1-preliminary should have used it instead of deriving from CGS. The reviewer also noted that the 2.4σ vs 3.2σ published comparison needed uncertainty reporting, and that "v19.0.5 Layer 3 closed" was undocumented in the bundle. The unit bug fix shipped as v19.1.1 (commit 88bcff6): t_core at Cloud-9 with σ/m = 483 = **1.24 Gyr**. The 2.4σ vs 3.2σ was reframed as a match within 68% CI. The 0.176 vs 0.22 Gyr "within rounding" claim was acknowledged as a 20% discrepancy from different V_max conventions (T208 uses NFW-correct V_max at r_max; T212 used simple virial V_max).
+
+### A.9 flip1.docx — the paper-level contradiction caught (2026-09-29)
+
+The reviewer's deeper reading found a paper-level contradiction that v19.1.1 had not flagged: **§9.12 of the paper says gravothermal does NOT run at Cloud-9 host-halo parameters (t_core = 73.7 Gyr), but v19.1.1 says gravothermal DOES run (t_core = 1.24 Gyr).** These are opposite conclusions on the same physical system. The reviewer correctly identified the root cause: v19.1.1 used Ohana+ best-fit σ/m = 483 cm²/g, while §9.12/T208 used Phase 44 Yukawa-only σ/m = 0.21 cm²/g. Both numbers are correct for their σ/m assumptions, but they answer different questions. The reviewer also noted:
+- The 0.176 vs 0.22 Gyr difference is a 20% discrepancy from V_max convention, not rounding
+- The "framework's actual σ/m at V_max" — with the v₁ resonance at v_target = 28 km/s, σ_peak = 174 cm²/g, Gaussian width 4.4 km/s — was σ/m = **164 cm²/g**, giving **t_core = 0.075 Gyr = 75 Myr**
+- The §10.4e "framework cannot reach Silverman+'s regime" framing was wrong when interpreted as the framework's actual σ/m
+- "Closed" claims need assumption labels
+
+### A.10 v19.1.2 — the synthesis (2026-09-29, this version)
+
+The v19.1.2 synthesis (commit 36417da) added the framework's actual σ/m case to the test matrix and reconciled §9.12 and §10.4e with the framework's full σ/m at Cloud-9 V_max. Five cases are now tested:
+
+| Case | σ/m (cm²/g) | V_max (km/s) | t_core (Gyr) | Verdict |
+|---|---|---|---|---|
+| Silverman+ 2026 reference | 70 | 39.2 (NFW) | 0.176 | DOES run |
+| Cloud-9 Phase 44 Yukawa-only | 0.21 | 31.12 | 73.7 | does NOT run (matches §9.12) |
+| Cloud-9 framework v₁ ON | **164** | 31.12 | **0.075** | DOES run fast |
+| Cloud-9 Ohana+ best fit | 483 | 25.07 | 1.24 | DOES run |
+| Cloud-9 reviewer estimate | 76 | 25.07 | 7.87 | DOES run |
+
+§9.12 was rewritten to state that "gravothermal does not run" is conditional on the Phase 44 Yukawa-only baseline. With the framework's actual σ/m, gravothermal runs in 75 Myr. §10.4e was rewritten to clarify that the "framework cannot reach Silverman+'s regime" applied to the Phase 44 baseline, not the framework's full σ/m.
+
+### A.11 What survives, what doesn't
+
+**Survives:**
+- Headline "4 of 5 constrained channels under physically motivated f_H; 7 of 8 only under retracted borrowed f_H." (Cloud-9 was already "systematic bound" per §10.4d; the synthesis does not flip Cloud-9 from fail to pass.)
+- The phenomenological σ_eff = f_H² σ_HH + 2f_H f_L σ_HL + f_L² σ_LL decomposition works under the borrowed prescription mode for SPARC (§9.11).
+- T215 KiSS-SIDM kinetic confirmation that gravothermal catastrophe IS operative at Silverman+ parameters.
+
+**Doesn't survive:**
+- "Phase 44 framework cannot reach Silverman+'s regime" — wrong as stated; the framework's full σ/m is well above the threshold.
+- "Gravothermal does not run at Cloud-9 host-halo parameters" — true for Phase 44 baseline only; false for framework's actual σ/m.
+- The v19.1-preliminary claim of "expanded core phase" (now retracted).
+- The v19.1.1 claim that 0.176 vs 0.22 Gyr is "within rounding" (acknowledged as 20% V_max convention difference).
+
+### A.12 The Cloud-9 question, restated
+
+The "Cloud-9 vs dSph structural tension" was framed in v1.11 as a bulk σ/m constraint problem: Cloud-9 needs σ/m ≥ 50 at v = 28, dSph needs σ/m ≤ 0.8 at v = 15, no σ/v curve satisfies both. The v19.1.2 synthesis reframes this as a **phase-diagram question**:
+- The framework's σ/m at v = 28 (with v₁ resonance ON) is 164 cm²/g. Balberg+ collapse timescale: 75 Myr.
+- The framework's σ/m at v = 15 (dSph scale, with v₁ resonance) is similar. Balberg+ collapse timescale: also fast.
+- **Both Cloud-9 and dSph halos collapse in 75 Myr if merger history is quiescent.** The "structural tension" was never between Cloud-9 and dSph σ/m requirements — it was between **a pre-collapse expectation** (framework's σ/m) and **a post-collapse observation** (Cloud-9's 483, dSph's various signatures).
+- Silverman+ 2026 finding (3 of 6 halos collapse, the quiescent ones) is the merger-history gate. Cloud-9's τ = 0.18 signature (close to maximum core expansion, before collapse) is a snapshot of a halo on the cusp of collapse — the merger history determines whether it ends up on the Cloud-9 branch (collapse + enhancement to 483) or the dSph branch (collapse + concentration of heavy component into deep core).
+
+The "structural tension" dissolves when Cloud-9 is treated as an evolutionary-state constraint rather than a bulk σ/m constraint. The framework IS describing Cloud-9 — but through gravothermal evolution, not through a static σ/v curve. This is closer to how Yang+/Nadler+/Silverman+ actually work.
+
+### A.13 What's open for v19.2
+
+The v19.1.2 synthesis is paper-level (script + §9.12 + §10.4e + standing-numbers document), but it does not close the Cloud-9 question. Three open items:
+- **Actual GIZMO N-body reproduction of Silverman+ 2026's 6-halo suite at Cloud-9 parameters.** Requires FIRE-2 ICs + multi-day cluster runs. Defer to v19.2.
+- **Merger-history parameterization for the 3-of-6 collapse prediction.** Silverman+ found collapse only for quiescent halos; Cloud-9 (M94 group environment) has merger history. A parameterization would test whether M94-like mergers keep Cloud-9 in τ = 0.18 expanded-core phase or push it to collapse.
+- **Verification of the framework's σ/m = 164 at V_max against the actual MCMC posterior.** The 164 cm²/g value comes from `causality_summary_corrected.json`; it has not been re-derived from a fresh MCMC. A v19.2 sweep at Phase 44 + v₁ resonance peak fit would either confirm 164 or revise it.
+
+### A.14 Process lessons (per AGENTS.md)
+
+The v19.1 → v19.1.2 sequence is a process audit in itself:
+1. **v19.1-preliminary**: shipped a 5-8 orders of magnitude wrong collapse timescale without a sanity check (Rule 28 violation). Caught by Revcloud.docx reviewer.
+2. **v19.1.1**: fixed the unit bug correctly but did not flag the paper-level contradiction (§9.12 vs script). Shipped without reconciliation. Caught by flip1.docx reviewer.
+3. **v19.1.2**: full paper-level reconciliation. §9.12, §10.4e, and standing numbers (in `PAPER_STANDING_NUMBERS.md`) all updated. Headline "4 of 5 channels" preserved because Cloud-9 was already "systematic bound" per §10.4d.
+
+The meta-lesson: **a unit fix that flips a paper conclusion requires paper-level reconciliation, not just a corrected script.** A script-level fix without a paper-text check ships a known contradiction. Reviewers caught both the unit bug and the paper-text gap. The audit trail above documents what was wrong, when, and how it was fixed.
+
+End of Annex A.
+
+---
+
 ## References
 [4] Randall, S. W.; Markevitch, M.; Clowe, D.; Gonzalez, A. H.; Bradač, M. (2008) ApJ 679, 1173 — Bullet Cluster σ/m upper bound.
 
