@@ -38,7 +38,10 @@
   "concentration_mass_tension": {
     "median_sigma_below": 2.419341271917336,
     "q16_sigma_below": 1.0748435743189007,
-    "q84_sigma_below": 3.4813912787880277
+    "q84_sigma_below": 3.4813912787880277,
+    "published_ohana": 3.2,
+    "match_check": "MATCH within 1 sigma",
+    "published_in_68CI": true
   },
   "ohana_published": {
     "sigma_m_best_fit_cm2_per_g": 483,

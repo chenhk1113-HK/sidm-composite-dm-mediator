@@ -326,6 +326,15 @@ def main():
             "median_sigma_below": float(np.median(sigma_below)),
             "q16_sigma_below": float(np.percentile(sigma_below, 16)),
             "q84_sigma_below": float(np.percentile(sigma_below, 84)),
+            "published_ohana": ohana_published["sigma_below_cosmological"],
+            "match_check": (
+                "MATCH within 1 sigma" if abs(np.median(sigma_below) - ohana_published["sigma_below_cosmological"]) <= 1.0
+                else "DISCREPANCY > 1 sigma"
+            ),
+            "published_in_68CI": (
+                bool(ohana_published["sigma_below_cosmological"] >= np.percentile(sigma_below, 16)
+                     and ohana_published["sigma_below_cosmological"] <= np.percentile(sigma_below, 84))
+            ),
         },
         "ohana_published": ohana_published,
     }
@@ -342,6 +351,14 @@ def main():
         print("  Cloud-9 tension is PARTIALLY resolved by SIDM joint likelihood.")
     else:
         print(f"SIDM joint fit still leaves {median_sigma:.1f} sigma tension. Not resolved.")
+    # Check whether published value is within our 68% CI
+    q16, q84 = np.percentile(sigma_below, [16, 84])
+    published = ohana_published["sigma_below_cosmological"]
+    in_ci = q16 <= published <= q84
+    print(f"\nMatch check vs Ohana+ published 3.2 sigma:")
+    print(f"  Our posterior: {median_sigma:.2f} sigma ({q16:.2f} - {q84:.2f})")
+    print(f"  Ohana+ published: {published} sigma")
+    print(f"  Inside 68% CI? {'YES (match)' if in_ci else 'NO (discrepancy)'}")
     print(f"\nPosterior median c_200: {summary['c_200']['median']:.2f} ({summary['c_200']['q16']:.2f} - {summary['c_200']['q84']:.2f})")
     print(f"Posterior median M_200: {summary['M_200_Msun']['median']:.2e} Msun")
     print(f"\nThis is a QUALITATIVE reproduction. Full quantitative reproduction")
