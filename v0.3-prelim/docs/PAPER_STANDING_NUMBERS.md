@@ -69,18 +69,21 @@
 | **Verdict at Phase 44 Yukawa-only baseline** | **gravothermal DOES NOT run** | same |
 | Path 2 | **REFUTED** at Phase 44 Yukawa-only baseline | same |
 
-**v19.1.2 addendum (post-flip1.docx framework-σ/m synthesis):**
+**v19.1.3 addendum (post-flip2.docx σ/m derivation):**
 
 | Parameter | Value | Source |
 |---|---|---|
-| Framework σ/m(V_max = 31.12 km/s) with v₁ resonance ON | **164 cm²/g** | `causality_summary_corrected.json` (σ_peak = 174, width 4.4 km/s) |
-| **t_core (framework σ/m = 164)** | **0.075 Gyr (75 Myr)** | `scripts/silverman2026_cloud9_gravothermal.py` |
-| t_core/t_Hubble (framework σ/m) | 0.0054 | same |
-| t_core/t_cross (framework σ/m) | 0.8 (causality FAIL at large σ/m) | same |
-| **Verdict at framework σ/m** | **gravothermal DOES run (faster than Hubble)** | same |
+| Framework σ/m at V_max = 31.12 km/s with v₁ resonance ON | **135.3 cm²/g** | Computed: 174 × exp(-(31.12-28)² / (2 × 4.4²)) = 174 × 0.778 |
+| Framework σ/m at v_target = 28 km/s (resonance peak) | 164 cm²/g | `causality_summary_corrected.json` (sigma_v28) |
+| **t_core (framework σ/m at V_max = 135.3)** | **0.091 Gyr (91 Myr)** | `scripts/silverman2026_cloud9_gravothermal.py` |
+| t_core/t_Hubble (framework σ/m at V_max) | 0.0066 | same |
+| t_core/t_cross (framework σ/m at V_max) | 1.0 (causality FAIL at large σ/m) | same |
+| **Verdict at framework σ/m at V_max** | **gravothermal DOES run (faster than Hubble)** | same |
 | Path 2 at framework σ/m | **NOT REFUTED** | same |
 
-**Honest synthesis:** The two verdicts are both correct for their respective σ/m assumptions. The §9.12/T208 verdict ("does not run") applies to the Phase 44 Yukawa-only baseline (σ/m = 0.21, excludes the v₁ resonance). The framework's actual σ/m at Cloud-9 V_max (164 cm²/g, with v₁ resonance included) drives gravothermal collapse in 75 Myr. Cloud-9 is a **gravothermal-evolution constraint** (does the host halo have a quiescent merger history?), not a **bulk σ/m constraint**.
+**Note on σ/m values:** v19.1.2 paper text said "framework σ/m at V_max = 164 cm²/g, t_core = 75 Myr." flip2.docx review caught that this was a labeling error: 164 is σ/m at the resonance peak v=28 (from causality_summary_corrected.json's sigma_v28_cm2_g), not at V_max. The correct framework σ/m at V_max = 31.12 km/s, computed via Gaussian fall-off, is **135.3 cm²/g, giving t_core = 91 Myr**. The flip from §9.12/T208 holds either way (gravothermal runs much faster than Hubble); the corrected number is 91 Myr instead of 75 Myr.
+
+**Honest synthesis:** The two verdicts are both correct for their respective σ/m assumptions. The §9.12/T208 verdict ("does not run") applies to the Phase 44 Yukawa-only baseline (σ/m = 0.21, excludes the v₁ resonance). The framework's actual σ/m at Cloud-9 V_max (135.3 cm²/g, with v₁ resonance included, evaluated at V_max with Gaussian fall-off) drives gravothermal collapse in 91 Myr. Cloud-9 is a **gravothermal-evolution constraint** (does the host halo have a quiescent merger history?), not a **bulk σ/m constraint**.
 
 ## §6. Host-halo gravothermal at σ/m=70 (T212 Silverman+)
 

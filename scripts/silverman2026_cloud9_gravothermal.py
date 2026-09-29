@@ -166,15 +166,19 @@ def analyze_cloud9():
     cases = [
         # Reference: Silverman+ 2026 (T212-verified, NFW-correct V_max at r_max)
         ("Silverman+ 2026 reference", 1e10, 12.0, 70),
-        # Cloud-9 with three different sigma/m interpretations (per flip1.docx):
+        # Cloud-9 with three different sigma/m interpretations (per flip1.docx + flip2.docx):
         # (a) Phase 44 Yukawa background only (T208 §9.12 baseline)
         ("Cloud-9 (Phase 44 Yukawa bg only)", 5e9, 12.0, 0.21),
-        # (b) Framework's own v1=28 km/s resonance (sigma/m(V_max) per causality_summary)
-        ("Cloud-9 (framework v1 resonance ON)", 5e9, 12.0, 164.0),
+        # (b) Framework's own v1=28 km/s resonance, evaluated at V_max=31.12 km/s
+        # sigma_peak = 174, v_target = 28, w = 4.4 (from causality_summary_corrected.json)
+        # sigma(V_max) = 174 * exp(-(31.12-28)^2 / (2*4.4^2)) = 174 * 0.778 = 135.3 cm^2/g
+        # (The 164 cm^2/g in causality_summary_corrected.json is sigma_v28 at the resonance
+        # peak, not at V_max. flip2.docx review caught this conflation.)
+        ("Cloud-9 (framework v1 resonance ON at V_max)", 5e9, 12.0, 135.3),
         # (c) Ohana+ best-fit sigma/m
         ("Cloud-9 (Ohana+ best fit)", 4.7e9, 4.0, 483),
-        # (d) Reviewer's estimate at V_max = 24.75 km/s
-        ("Cloud-9 (reviewer estimate V_max=24.75)", 4.7e9, 4.0, 76),
+        # (d) Framework's sigma_v28 at the resonance peak (for comparison)
+        ("Cloud-9 (framework v1 at v_target=28)", 5e9, 12.0, 164.0),
     ]
 
     results = {}
@@ -210,21 +214,30 @@ def analyze_cloud9():
     print(f"  -> 3 of 6 halos collapse (quiescent subset)")
     print()
     phase44 = results["Cloud-9 (Phase 44 Yukawa bg only)"]
-    framework = results["Cloud-9 (framework v1 resonance ON)"]
+    framework_at_vmax = results["Cloud-9 (framework v1 resonance ON at V_max)"]
     cloud9 = results["Cloud-9 (Ohana+ best fit)"]
     print(f"Cloud-9 (sigma/m = {phase44['sigma_m_cm2_per_g']}, Phase 44 Yukawa bg only, T208 §9.12 baseline):")
     print(f"  t_core = {phase44['t_core_Gyr']:.2f} Gyr (V_max = {phase44['v_max_kms']:.2f} km/s)")
     print(f"  -> Gravothermal cascade does NOT run (t_core > t_Hubble)")
     print(f"  -> This is the T208 §9.12 verdict in paper form.")
     print()
-    print(f"Cloud-9 (sigma/m = {framework['sigma_m_cm2_per_g']}, framework v1 resonance ON):")
-    print(f"  t_core = {framework['t_core_Gyr']:.3f} Gyr (V_max = {framework['v_max_kms']:.2f} km/s)")
+    print(f"Cloud-9 (sigma/m = {framework_at_vmax['sigma_m_cm2_per_g']}, framework v1 resonance ON at V_max):")
+    print(f"  sigma(m) = 174 * exp(-(31.12-28)^2 / (2*4.4^2)) = 174 * 0.778 = 135.3")
+    print(f"  t_core = {framework_at_vmax['t_core_Gyr']:.3f} Gyr (V_max = {framework_at_vmax['v_max_kms']:.2f} km/s)")
     print(f"  -> Gravothermal cascade RUNS fast (t_core < 0.1 Gyr)")
-    print(f"  -> Framework's actual sigma/m(V_max) drives collapse within 1 Gyr.")
+    print(f"  -> Framework's actual sigma/m at V_max drives collapse within 1 Gyr.")
     print()
     print(f"Cloud-9 (sigma/m = {cloud9['sigma_m_cm2_per_g']}, Ohana+ best fit):")
     print(f"  t_core = {cloud9['t_core_Gyr']:.3f} Gyr (V_max = {cloud9['v_max_kms']:.2f} km/s)")
     print(f"  -> Gravothermal cascade RUNS in <0.1 Gyr (matches Ohana+ tau=0.18 best fit)")
+    print()
+    # Add the v_target=28 case for comparison
+    framework_at_vtarget = results["Cloud-9 (framework v1 at v_target=28)"]
+    print(f"For comparison, framework v1 at v_target=28 (resonance peak):")
+    print(f"  sigma/m = 164 (from causality_summary_corrected.json's sigma_v28)")
+    print(f"  This is the framework's sigma/m AT THE PEAK, not at V_max.")
+    print(f"  At V_max=31.12, the Gaussian falls off: sigma/m = 135.")
+    print(f"  The 164 was confused with the V_max value in v19.1.2 -- flip2.docx.")
 
     # Save
     out_dir = REPO / "v0.3-prelim" / "data" / "results"

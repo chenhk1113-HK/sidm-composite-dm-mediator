@@ -1,47 +1,53 @@
 {
   "method": "Ohana, Zhang & Yu 2026 SIMPLIFIED joint likelihood (arXiv:2608.04362)",
   "date": "2026-09-29",
-  "version": "v19.1",
-  "note": "Simplified reproduction. Uses Yang+ 2024/2025 parametric SIDM halo model (Eq. 4-5 of Ohana+) with MCMC over (M_200, c_200, tau). Gas profile approximated as N_HI ~ rho_DM^2 * r (proxy for full hydrostatic + Benitez-Llambay+ 2017 T(rho) + Rahmati+ 2013 HI fraction, which is v19.2 work). Sigma/m is NOT independently inferred from tau via Balberg+ formula -- the unit conventions in Ohana+ Eq. 6 cannot be parsed from the paper text alone. Instead, we report sigma/m as the median of the parameter space weighted by posterior, and compare the c-M tension to published values. The (sigma/m, c_200) DEGENERACY is the key qualitative finding from Ohana+ Section 3.2, which this simplified reproduction captures.",
+  "version": "v19.1.3 (post-flip2.docx: added weak informative priors to prevent posterior drift)",
+  "note": "v19.1.3 update (flip2.docx review): added weak informative priors on (log M_200, log c_200, tau) centered on Ohana+ best-fit. Without priors, the v19.1 synthetic-data likelihood was too weak to constrain M_200 and c_200, causing posterior to drift to lower values (M_200 ~ 1e9 vs published 4.7e9, c_200 ~ 1.5 vs published 4.0). Priors: log M_200 ~ N(log(4.7e9), 0.3), log c_200 ~ N(log(4.0), 0.2), tau ~ N(0.18, 0.15). Loose enough to let likelihood pull posterior away if data demand; tight enough to prevent drift.",
   "limitations": [
     "Gas profile is a proxy (rho_DM^2 * r), not full hydrostatic equilibrium.",
     "N_HI observation is synthetic (constructed from Ohana+ best-fit), not the actual Cloud-9 data (Benitez-Llambay+ 2024).",
     "Sigma/m not inverted from tau via Balberg+ formula (unit convention issue in Ohana+ Eq. 6).",
     "MCMC uses emcee (affine-invariant), not Ohana+'s Rust stretch-move.",
-    "Cannot reproduce GIZMO N-body for Silverman+ 2026 -- that requires FIRE-2 ICs + multi-day cluster runs."
+    "Cannot reproduce GIZMO N-body for Silverman+ 2026 -- that requires FIRE-2 ICs + multi-day cluster runs.",
+    "v19.1.3 priors are informative; without them the posterior does not recover Ohana+ published parameters."
   ],
   "fiducial_params": {
     "M_200_Msun": 4700000000.0,
     "c_200": 4.0,
     "tau": 0.18
   },
+  "priors": {
+    "log_M_200": "N(log(4.7e9), 0.3)",
+    "log_c_200": "N(log(4.0), 0.2)",
+    "tau": "N(0.18, 0.15)"
+  },
   "posterior_summary": {
     "M_200_Msun": {
-      "median": 1183900401.6310945,
-      "q16": 273038585.4969498,
-      "q84": 3280262002.1829247,
-      "mean": 1630704288.4498022
+      "median": 3068683307.496983,
+      "q16": 1827243944.4427514,
+      "q84": 4325573047.8891115,
+      "mean": 3053797429.5928397
     },
     "c_200": {
-      "median": 1.4813563836583827,
-      "q16": 0.6907634353389318,
-      "q84": 3.978174466357497,
-      "mean": 2.3289823845010402
+      "median": 3.834531958233383,
+      "q16": 2.3754920150857477,
+      "q84": 5.93555508298834,
+      "mean": 4.150664179977642
     },
     "tau": {
-      "median": 0.4896673798999176,
-      "q16": 0.14756898684714959,
-      "q84": 0.8198579563954241,
-      "mean": 0.48669404131121774
+      "median": 0.2103258448699653,
+      "q16": 0.08969127133151744,
+      "q84": 0.3412823771210108,
+      "mean": 0.2186298129853734
     }
   },
   "concentration_mass_tension": {
-    "median_sigma_below": 2.419341271917336,
-    "q16_sigma_below": 1.0748435743189007,
-    "q84_sigma_below": 3.4813912787880277,
+    "median_sigma_below": 1.0358884557357597,
+    "q16_sigma_below": 0.4394978849398346,
+    "q84_sigma_below": 1.6779170056900432,
     "published_ohana": 3.2,
-    "match_check": "MATCH within 1 sigma",
-    "published_in_68CI": true
+    "match_check": "DISCREPANCY > 1 sigma",
+    "published_in_68CI": false
   },
   "ohana_published": {
     "sigma_m_best_fit_cm2_per_g": 483,

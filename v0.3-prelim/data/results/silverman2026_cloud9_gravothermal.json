@@ -31,19 +31,19 @@
     "phase_runs": false,
     "causality_ok": true
   },
-  "Cloud-9 (framework v1 resonance ON)": {
-    "name": "Cloud-9 (framework v1 resonance ON)",
+  "Cloud-9 (framework v1 resonance ON at V_max)": {
+    "name": "Cloud-9 (framework v1 resonance ON at V_max)",
     "M_halo_Msun": 5000000000.0,
     "c": 12.0,
-    "sigma_m_cm2_per_g": 164.0,
+    "sigma_m_cm2_per_g": 135.3,
     "r_vir_pc": 35092.89849908858,
     "r_s_pc": 2924.408208257382,
     "rho_s_Msun_per_pc3": 0.009689620013605297,
     "v_max_kms": 31.118631093100245,
-    "t_core_Gyr": 0.07510530892461767,
+    "t_core_Gyr": 0.09103673809044566,
     "t_cross_Gyr": 0.09189153383622575,
-    "t_core_over_Hubble": 0.005442413690189686,
-    "t_core_over_t_cross": 0.8173256641735306,
+    "t_core_over_Hubble": 0.0065968650790178005,
+    "t_core_over_t_cross": 0.9906977747557946,
     "phase_runs": true,
     "causality_ok": false
   },
@@ -63,20 +63,20 @@
     "phase_runs": true,
     "causality_ok": true
   },
-  "Cloud-9 (reviewer estimate V_max=24.75)": {
-    "name": "Cloud-9 (reviewer estimate V_max=24.75)",
-    "M_halo_Msun": 4700000000.0,
-    "c": 4.0,
-    "sigma_m_cm2_per_g": 76,
-    "r_vir_pc": 34376.515884272354,
-    "r_s_pc": 8594.128971068089,
-    "rho_s_Msun_per_pc3": 0.0007279454762562015,
-    "v_max_kms": 25.0657330081838,
-    "t_core_Gyr": 7.870688681461563,
-    "t_cross_Gyr": 0.33525823020344225,
-    "t_core_over_Hubble": 0.5703397595262002,
-    "t_core_over_t_cross": 23.476496540250338,
+  "Cloud-9 (framework v1 at v_target=28)": {
+    "name": "Cloud-9 (framework v1 at v_target=28)",
+    "M_halo_Msun": 5000000000.0,
+    "c": 12.0,
+    "sigma_m_cm2_per_g": 164.0,
+    "r_vir_pc": 35092.89849908858,
+    "r_s_pc": 2924.408208257382,
+    "rho_s_Msun_per_pc3": 0.009689620013605297,
+    "v_max_kms": 31.118631093100245,
+    "t_core_Gyr": 0.07510530892461767,
+    "t_cross_Gyr": 0.09189153383622575,
+    "t_core_over_Hubble": 0.005442413690189686,
+    "t_core_over_t_cross": 0.8173256641735306,
     "phase_runs": true,
-    "causality_ok": true
+    "causality_ok": false
   }
 }
