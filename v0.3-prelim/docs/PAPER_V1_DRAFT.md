@@ -539,7 +539,7 @@ The CLEAR FAIL of the priored free fit and the RESOLVED/MARGINAL/NOT RESOLVED sp
 
 The gravothermal cascade can in principle modify the post-collapse σ/m signature by an order of magnitude (Balberg+ 2002). We tested whether it runs at Cloud-9 host-halo parameters under several σ/m interpretations.
 
-**T208 (Phase 44 σ/m baseline, single-component Yukawa):** At M_halo = 5×10⁹ M☉, c = 12, V_max = 31.12 km/s (the correct NFW V_max at r_max = 2.16 r_s, post v18.43 T215 IC generator correction), the standard Yukawa extrapolation from σ/m = 0.052 cm²/g at v = 100 km/s gives σ/m(V_max) ≈ 0.21 cm²/g. The Balberg+ 2002 analytical t_core formula then yields **t_core = 73.7 Gyr (NFW-correct V_max; 58.7 Gyr with canonical T208 V_max convention), vs t_Hubble = 13.8 Gyr** — gravothermal **DOES NOT run** at Phase 44 σ/m. Path B is refuted at the Phase 44 baseline.
+**T208 (Phase 44 σ/m baseline, single-component Yukawa):** At M_halo = 5×10⁹ M☉, c = 12, V_max = 31.12 km/s (the correct NFW V_max at r_max = 2.16 r_s, post v18.43 T215 IC generator correction), the standard Yukawa extrapolation from σ/m = 0.052 cm²/g at v = 100 km/s gives σ/m(V_max) = 0.052 × (100/31.12)^1.0 = **0.174 cm²/g** at V_max (a_slope = 1.0 per v18.28 Rule-28 audit; the 0.21 used by v19.1.3 was the Phase 44 value at v=28 km/s, not at V_max — re196.docx review caught this convention drift). The Balberg+ 2002 analytical t_core formula then yields **t_core = 70.8 Gyr (NFW-correct V_max; was 73.7 Gyr in v19.1.x with virial-approx rounding)** — gravothermal **DOES NOT run** at Phase 44 σ/m. Path B is refuted at the Phase 44 baseline.
 
 **Framework's actual σ/m at Cloud-9 V_max (v19.1.3, post-flip2.docx σ/m derivation):** When the framework's v₁ resonance at v_target = 28 km/s is included (with σ_peak ≈ 174 cm²/g, Gaussian width ~4.4 km/s per causality_summary_corrected.json), the framework's σ/m evaluated at V_max = 31.12 km/s is **135.3 cm²/g** (NOT 164 — that was σ/m at the resonance peak v=28, not at V_max; the v19.1.2 paper text conflated these two values). The Balberg+ formula then yields **t_core ≈ 0.091 Gyr = 91 Myr** — gravothermal **DOES run** within the framework's full parameter space, much faster than Hubble time. The flip from §9.12/T208 holds: at the framework's actual σ/m at Cloud-9 V_max, gravothermal collapse is operative. The numerical value is corrected from 75 Myr (v19.1.2, wrong) to 91 Myr (v19.1.3, correct).
 
@@ -555,12 +555,16 @@ The v19.1.2 paper said 164 cm²/g at V_max. The correct value is 164 at v=28 (th
 
 | Scenario | σ/m (cm²/g) | t_core (Gyr) | Runs at Cloud-9 host? |
 |---|---|---|---|
-| Phase 44 Yukawa bg only | 0.21 | 73.7 | ❌ (T208 REFUTED at this baseline) |
-| Framework v₁ resonance ON at V_max | 135.3 | 0.091 | ✅ (v19.1.3, post-flip2.docx) |
-| Framework v₁ at v_target=28 | 164 | 0.075 | ✅ (for reference; not at V_max) |
-| Ohana+ best-fit σ/m | 483 | 1.24 | ✅ (matches Ohana+ τ=0.18 best fit) |
-| Silverman+ tested | 70 | 0.18 | ✅ (T212) |
+| Phase 44 Yukawa bg only (c=12) | 0.174 | 70.8 | ❌ (T208 REFUTED at this baseline) |
+| Phase 44 Yukawa bg only (c=4, same-halo) | 0.174 | 3438 | ❌ (low ρ_s at c=4 makes t_core very long) |
+| Framework v₁ resonance ON at V_max (c=12) | 135.3 | 0.091 | ⚠ analytical only — causality FAIL (t_core/t_cross=0.99) |
+| Framework v₁ resonance ON at V_max (c=4) | 135.3 | 4.42 | ✅ (causality OK at c=4) |
+| Framework v₁ at v_target=28 (c=12) | 164 | 0.075 | ⚠ analytical only — causality FAIL |
+| Ohana+ best-fit σ/m (c=4) | 483 | 1.24 | ✅ (causality OK at c=4) |
+| Silverman+ tested (c=12) | 70 | 0.176 | ✅ (causality OK) |
 | Threshold (analytic) | ~1 | < 13.8 | ⚠ marginal (N-body needed) |
+
+**CAUSALITY CAVEAT (added per re196.docx):** At σ/m ≥ ~10 cm²/g, the analytical Balberg+ t_core formula violates the causality cap (t_core/t_cross ≥ 3.0). The "0.091 Gyr" number for σ/m = 135.3 at c=12 is **indicative, not physical** — at this σ/m the gravothermal phase tries to collapse faster than sound waves can propagate, signalling that the analytical formula is unreliable in this regime (N-body required). At c=4 (Ohana+ inferred concentration), the same σ/m gives t_core = 4.42 Gyr with causality OK (lower ρ_s → longer t_core → larger t_core/t_cross). The c=4 result is the physical anchor; the c=12 result is a sensitivity probe showing the formula's failure mode at high σ/m. **N-body (KiSS-SIDM / Silverman-style) is required before claiming collapse.** This also strengthens A.12.3's argument that the N-body test is the discriminator.
 
 ## 10. UV Completion: No-Go Theorems, Two-Mediator Candidate, Cloud-9 Robustness
 
@@ -1553,45 +1557,47 @@ The "structural tension" dissolves when Cloud-9 is treated as an evolutionary-st
 
 #### A.12.1 Extended analysis: Cloud-9 is an evolutionary-state constraint (not bulk σ/m)
 
-Five implications for Cloud-9 itself, derived from the v19.1.3 synthesis (post-flip2.docx σ/m derivation):
+Five implications for Cloud-9 itself, derived from the v19.1.4 reconciliation (post-flip2.docx + re196.docx):
 
-1. **Cloud-9 is gravothermally evolved** (not pristine). A halo with t_core = 91 Myr vs halo age ~10 Gyr has had hundreds of collapse timescales. The τ = 0.18 "expanded core" signature is a snapshot of a halo on the cusp of collapse, not a stable equilibrium.
+1. **Cloud-9 is gravothermally evolved at the framework's full σ/m** (not pristine). At framework σ/m = 135.3 cm²/g evaluated at V_max, the analytical t_core is 91 Myr at c=12 (causality-indicative) or 4.42 Gyr at c=4 (causality-OK) — both much shorter than the ~10 Gyr halo age. The τ = 0.18 "expanded core" signature is a snapshot of a halo either on the cusp of collapse (c=4 case, sustained mergers gate) or in early collapse (c=12 case, N-body required to confirm). Not a stable equilibrium.
 
-2. **Its σ/m = 483 is post-collapse enhancement**, not pre-collapse input. The framework's intrinsic σ/m at V_max is 135.3 cm²/g; the observed 483 is the gravothermal amplification of an already-collapsed halo (or a collapsing one observed near peak enhancement).
+2. **Its σ/m = 483 is post-collapse enhancement**, not pre-collapse input. The framework's intrinsic σ/m at V_max is 135.3 cm²/g (or 164 at the resonance peak); the observed 483 is the gravothermal amplification of an already-collapsed halo (or a collapsing one observed near peak enhancement). At c=4 (Ohana+ inferred concentration), this is consistent with the framework — gravothermal amplification factor 483/135.3 = 3.6× at c=4.
 
-3. **The τ = 0.18 signature is a merger-history constraint**, not a bulk σ/m fingerprint. Silverman+ 2026 mechanism: halos with quiescent merger histories collapse (Cloud-9 branch); halos with sustained mergers do not (dSph branch). Cloud-9's M94 group environment keeps it in the expanded-core phase against the framework's natural tendency to collapse.
+3. **τ = 0.18 is merger-history constraint**, not bulk σ/m fingerprint (Silverman+ mechanism: halos with quiescent mergers collapse, sustained mergers suppress). At framework σ/m = 135.3 cm²/g with c=4, t_core = 4.42 Gyr; with sustained mergers over ~10 Gyr, the halo stays in expanded-core phase (τ ~ 0.2), consistent with Ohana+ observation. **But scenario (c) "leading" is over-argued**: at framework σ/m, the analytical formula already gives t_core ≈ 4 Gyr (causality OK); N-body needed to determine whether sustained mergers prevent collapse or delay it by ~6 Gyr.
 
-4. **A follow-up N-body at framework σ/m = 135.3 with M94-like merger history** would directly test this. If the N-body shows Cloud-9 collapsing, the post-collapse interpretation is correct and the 4000× "spike" dissolves. If the N-body shows Cloud-9 staying expanded, σ/m = 135.3 is too high and needs revision (probably closer to 76, the reviewer's estimate).
+4. **A follow-up N-body at framework σ/m = 135.3 with c=4 (M94-like) and sustained mergers** would directly test this. If the N-body shows Cloud-9 staying in τ ~ 0.18 expanded-core phase: scenario (c) is correct (sustained mergers suppress collapse against σ/m = 135.3). If the N-body shows Cloud-9 collapsing: the framework's σ/m is too high (σ_peak > 174 is wrong; reviewer's 76 estimate is more likely correct). **N-body is the discriminator; scenario (c) is a viable hypothesis but not "leading" until demonstrated.**
 
-5. **Cloud-9 is the wrong place to look for a bulk σ/m signature. It's the right place to look for gravothermal evolution in action.** The "4000× Cloud-9 problem" (σ/m = 483 vs framework smooth Yukawa ~0.001) dissolves when treated as a phase-diagram question: σ/m at V_max is 135.3 (post-collapse enhancement gives 483), merger history gates whether collapse runs, the framework IS describing Cloud-9 but through evolution not through a static curve.
+5. **Cloud-9 is the wrong place to look for a bulk σ/m signature. It's the right place to look for gravothermal evolution in action.** The "4000× Cloud-9 problem" (σ/m = 483 vs framework smooth Yukawa ~0.001) dissolves when treated as a phase-diagram question: σ/m at V_max is 135.3 (post-collapse enhancement gives 483), merger history gates whether collapse runs, the framework IS describing Cloud-9 but through evolution not through a static curve. The "4000× problem" is reframed, not yet fully dissolved.
 
-#### A.12.2 The Ohana+ τ = 0.18 vs framework σ/m = 135.3 discrepancy (v19.1.3 weighted)
+#### A.12.2 The Ohana+ τ = 0.18 vs framework σ/m = 135.3 discrepancy (v19.1.4 weighted)
 
-Ohana+ found τ = 0.18 (close to max core expansion, before collapse). But the framework's σ/m at V_max (135.3 cm²/g) gives collapse timescale 91 Myr — vastly shorter than the ~10 Gyr halo age. **Weighting the three explanations** (v19.1.3, post-flip2.docx):
+Ohana+ found τ = 0.18 (close to max core expansion, before collapse). But the framework's σ/m at V_max (135.3 cm²/g) gives collapse timescale 4.42 Gyr at c=4 (causality-OK) — much shorter than the ~10 Gyr halo age. **Weighting the three explanations** (v19.1.4, post-flip2.docx + re196.docx):
 
-**Scenario (c): merger-suppressed collapse — LEADING HYPOTHESIS (most likely).** Silverman+ 2026 found that 3 of 6 halos at σ/m = 70 cm²/g collapsed (the quiescent-merger subset); the other 3 did not (sustained mergers). At framework σ/m = 135.3 cm²/g (much higher than 70), collapse should run in 91 Myr for any halo. But Cloud-9's observed τ = 0.18 means it has NOT collapsed — meaning sustained mergers suppressed collapse for ~10 Gyr of halo age. This is a strong claim, but it's consistent with Silverman+'s mechanism and with Cloud-9's M94 group environment (which has had merger activity over its history). **Scenario (c) requires no errors in the framework's σ/m estimation or Ohana+'s τ inference; it just requires sustained mergers, which is consistent with M94.**
+**Scenario (c): merger-suppressed collapse — VIABLE HYPOTHESIS** (not "leading"; not yet demonstrated). Silverman+ 2026 found that 3 of 6 halos at σ/m = 70 cm²/g collapsed (the quiescent-merger subset); the other 3 did not (sustained mergers). At framework σ/m = 135.3 cm²/g (almost 2× higher), collapse should run in 4.42 Gyr for a c=4, quiescent-merger halo. Sustained mergers over ~10 Gyr could keep it in expanded-core phase (τ ~ 0.2), consistent with Ohana+ observation. **Plausibility arguments**: consistent with Silverman+ mechanism; consistent with M94 group environment. **Counter-arguments**: not yet demonstrated with N-body at framework σ/m = 135.3; the analytical formula gives 4.42 Gyr at c=4, not 10+ Gyr, so sustained mergers need to suppress ~6 Gyr of collapse — possible but not shown.
 
 **Scenario (a): τ = 0.18 is wrong — UNLIKELY.** Ohana+ fit is a published MCMC with reported posteriors; their τ = 0.18 is the published value. If Ohana+ got τ wrong by 5.5× (to τ = 1.0 = past max collapse), the gas profile would look different. Possible but unsupported by the published evidence.
 
-**Scenario (b): framework's σ/m is wrong — POSSIBLE BUT LESS LIKELY.** The 135.3 cm²/g comes from `causality_summary_corrected.json` (σ_peak = 174, width = 4.4 km/s, evaluated at V_max via Gaussian fall-off). If σ_peak is closer to the reviewer's estimate of 76 (4.4× lower), the framework's σ/m at V_max would be ~59 cm²/g, giving t_core ≈ 0.21 Gyr. Still faster than 10 Gyr, but more plausible. **However**: causality_summary_corrected.json's σ_peak = 174 is from the Phase 44 fit's posterior, and the framework's actual code (sigma_m_at_v in phase44_joint_fit.py) would give this value. Lowering σ_peak to 76 would require a re-fit of Phase 44, which would change other constraints (SPARC, dSph). Not a free parameter.
+**Scenario (b): framework's σ/m is wrong — POSSIBLE.** The 135.3 cm²/g comes from `causality_summary_corrected.json` (σ_peak = 174, width = 4.4 km/s, evaluated at V_max via Gaussian fall-off). If σ_peak is closer to the reviewer's estimate of 76 (2.3× lower), the framework's σ/m at V_max would be ~59 cm²/g, giving t_core ≈ 9.7 Gyr at c=4 — comparable to halo age. This is more consistent with τ = 0.18 as a stable equilibrium. However: σ_peak = 174 is from the Phase 44 fit's posterior, and the framework's actual code (sigma_m_at_v in phase44_joint_fit.py) gives this value. Lowering σ_peak to 76 would require a re-fit of Phase 44, which would change other constraints (SPARC, dSph).
 
-**Leading hypothesis: (c).** N-body at framework σ/m = 135.3 cm²/g with M94-like sustained-merger history would directly test this. If the halo stays in τ ~ 0.18 expanded-core phase despite high σ/m, scenario (c) is confirmed. If it collapses anyway, then the framework's σ/m is too high (scenario b).
+**Better wording (v19.1.4 honest framing):** Three open explanations; scenario (c) is **viable but not leading** until demonstrated; scenario (b) is **possible** and would resolve the τ-discrepancy without invoking mergers; scenario (a) is **unlikely**. **N-body with M94-like sustained mergers is the discriminator.** The framework's σ_peak = 174 is a fixed parameter; scenario (b) requires a Phase 44 re-fit, which is v19.2 work. The "leading" language in v19.1.3 was over-argued — reviewer 1 of re196.docx and reviewer 2 both flagged it.
 
-The three scenarios have **different implications for the paper**: (c) keeps the framework intact and adds merger-history as a discriminating axis; (b) requires a re-fit of Phase 44; (a) questions Ohana+'s inference. Of these, (c) is the most consistent with the available evidence.
+The three scenarios have **different implications for the paper**: (c) keeps the framework intact and adds merger-history as a discriminating axis; (b) requires a re-fit of Phase 44 (SPARC + dSph impacts); (a) questions Ohana+'s inference. Of these, (c) and (b) are both open, with (b) potentially simpler to test analytically once the σ_peak sensitivity is checked. **Honest framing: scenarios (c) and (b) are co-leads; neither is "leading" yet.**
 
 #### A.12.3 Testable predictions of the new framing
 
-The phase-diagram framing makes three predictions that v19.2 N-body can test:
+The phase-diagram framing makes three predictions that v19.2 N-body can test. **Predictions are written with the corrected c=4 same-halo framework (re196.docx review):**
 
-1. **At framework σ/m = 164 with quiescent merger history**, Cloud-9 should collapse within 100 Myr, producing inner density enhancement of ~3-5× (consistent with T215b KiSS-SIDM at σ/m = 70).
+1. **At framework σ/m = 135.3 cm²/g with sustained M94-like merger history**, Cloud-9 should remain in expanded-core phase with τ ~ 0.18 (matching Ohana+ observation). Sustained mergers inject orbital kinetic energy that counteracts gravothermal collapse. If N-body confirms, scenario (c) is correct.
 
-2. **At framework σ/m = 164 with sustained M94-like merger history**, Cloud-9 should remain in expanded-core phase with τ ~ 0.18 (matching Ohana+ observation). Sustained mergers inject orbital kinetic energy that counteracts gravothermal collapse.
+2. **At framework σ/m = 135.3 cm²/g with quiescent merger history**, Cloud-9 should collapse within ~4-5 Gyr at c=4 (consistent with the analytical t_core = 4.42 Gyr at c=4), producing inner density enhancement of ~3-5×. If N-body confirms, sustained mergers are necessary to suppress collapse — i.e., scenario (c) requires the merger history to do real work, not just be present.
 
 3. **The Ohana+ observed σ/m = 483** is consistent with two scenarios:
-   - **Scenario A**: post-collapse enhancement of framework σ/m = 164 (3.0× amplification factor)
-   - **Scenario B**: pre-collapse framework σ/m closer to the reviewer's estimate of 76, with Ohana+ observation at peak enhancement (6.3× amplification factor)
+   - **Scenario A**: framework σ/m = 135.3 at V_max, post-collapse enhancement of 3.6× amplification factor
+   - **Scenario B**: framework σ/m closer to the reviewer's estimate of 76 (σ_peak ≈ 96), with Ohana+ observation at peak enhancement (6.3× amplification factor)
 
-N-body at framework σ/m = 164 with M94-like merger history would distinguish these: if collapse runs, scenario A is correct; if not, scenario B (with σ/m = 76) is the framework's true σ/m and the reviewer's estimate is closer to truth than causality_summary_corrected.json's 164.
+N-body at framework σ/m = 135.3 with c=4 and sustained M94-like merger history would distinguish these: if collapse runs, scenario A is wrong (mergers didn't prevent it) and the framework's σ/m needs revision; if not, scenario A is correct and sustained mergers are the gating mechanism.
+
+**Per re196.docx Reviewer 1 Item 5: the prediction direction was backwards in v19.1.x.** Scenario (c) (merger-suppressed) predicts **expansion maintained**, not collapse, at framework σ/m with M94-like mergers. v19.1.4 corrects this.
 
 #### A.12.4 Why this matters for the paper's headline
 
@@ -1601,15 +1607,19 @@ But the **interpretation** of the headline has shifted. Before: "the framework m
 - Before: Cloud-9 is an outlier, framework can't reach it
 - Now: Cloud-9 is on the framework's natural trajectory, merger history is the discriminating axis
 
+**Honest framing (v19.1.4 per re196.docx Reviewer 2 piece 5):** The "4000× Cloud-9 problem" is **reframed** (not yet dissolved). The framework's σ/m at V_max (135.3 cm²/g, derived explicitly) drives gravothermal collapse in 4.42 Gyr at c=4 (causality-OK). This moves the question from "can gravothermal run" to "can sustained mergers prevent collapse for ~10 Gyr against σ/m = 135.3". That question is open. N-body required to dissolve it. The "permanent exception" framing of Cloud-9 is gone; the "merger-history axis" framing replaces it. The "4000× spike" is no longer a problem to be solved — it's a question about merger history.
+
 This is closer to how SIDM literature (Yang+/Nadler+/Silverman+) actually treats Cloud-9-like systems. The paper moves from "constraint map with one outlier" to "constraint map with one merger-history-dependent axis."
 
 #### A.12.5 Open questions for v19.2+
 
 The phase-diagram framing opens three concrete v19.2 questions:
 
-1. **What is the framework's actual σ/m at Cloud-9 V_max?** The 164 cm²/g from `causality_summary_corrected.json` has not been re-derived from a fresh MCMC. A v19.2 sweep at Phase 44 + v₁ resonance peak fit would either confirm 164 or revise it (possibly to the reviewer's 76 cm²/g estimate).
+1. **What is the framework's actual σ/m at Cloud-9 V_max?** The 164 cm²/g (or 135.3 at V_max) from `causality_summary_corrected.json` has not been re-derived from a fresh MCMC. A v19.2 sweep at Phase 44 + v₁ resonance peak fit would either confirm 164 (then 135.3 at V_max is the anchor) or revise it (possibly to the reviewer's 76 cm²/g estimate, then ~59 at V_max would be the anchor). **The c=4 anchor at 135.3 gives t_core = 4.42 Gyr; at 59 it gives 9.7 Gyr — both within ~halo age; N-body needed to distinguish.**
 
-2. **Does Cloud-9 collapse under M94-like merger history?** A GIZMO N-body at framework σ/m = 164 with sustained mergers (matching M94 group environment) would test whether the merger history keeps the halo in expanded-core phase (matching Ohana+) or pushes it to collapse.
+2. **Does Cloud-9 collapse under M94-like merger history?** A GIZMO N-body at framework σ/m = 135.3 (or 76) with sustained mergers (matching M94 group environment) would test whether the merger history keeps the halo in expanded-core phase (matching Ohana+) or pushes it to collapse. **This is the v19.2 N-body test that re196.docx Reviewer 1 explicitly requested be added to A.12.3.**
+
+3. **Is τ = 0.18 transient or steady-state?** This is the question of whether Ohana+ observed a halo on the cusp of collapse (transient) or in a stable equilibrium (steady-state). Without N-body, both are consistent with the τ = 0.18 observation. The merger-history constraint is the discriminator: sustained mergers + framework σ/m → transient (collapse soon); quiescent mergers + framework σ/m → steady-state (already collapsed).
 
 3. **Is the τ = 0.18 signature transient or steady-state?** If Cloud-9 is on the cusp of collapse (collapse timescale ~75 Myr vs halo age ~10 Gyr), the τ = 0.18 expanded-core phase is transient. The observed τ value tells us where Cloud-9 is in its collapse evolution. A v19.2 simulation at higher time resolution could show the τ trajectory.
 

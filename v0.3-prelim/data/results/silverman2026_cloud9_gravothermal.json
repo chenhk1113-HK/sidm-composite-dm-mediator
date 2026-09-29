@@ -15,24 +15,40 @@
     "phase_runs": true,
     "causality_ok": false
   },
-  "Cloud-9 (Phase 44 Yukawa bg only)": {
-    "name": "Cloud-9 (Phase 44 Yukawa bg only)",
+  "Cloud-9 (Phase 44 Yukawa bg only, c=12)": {
+    "name": "Cloud-9 (Phase 44 Yukawa bg only, c=12)",
     "M_halo_Msun": 5000000000.0,
     "c": 12.0,
-    "sigma_m_cm2_per_g": 0.21,
+    "sigma_m_cm2_per_g": 0.174,
     "r_vir_pc": 35092.89849908858,
     "r_s_pc": 2924.408208257382,
     "rho_s_Msun_per_pc3": 0.009689620013605297,
     "v_max_kms": 31.118631093100245,
-    "t_core_Gyr": 58.653669826844265,
+    "t_core_Gyr": 70.78891185998447,
     "t_cross_Gyr": 0.09189153383622575,
-    "t_core_over_Hubble": 4.250265929481468,
-    "t_core_over_t_cross": 638.2924234498047,
+    "t_core_over_Hubble": 5.129631294201773,
+    "t_core_over_t_cross": 770.3529248532127,
     "phase_runs": false,
     "causality_ok": true
   },
-  "Cloud-9 (framework v1 resonance ON at V_max)": {
-    "name": "Cloud-9 (framework v1 resonance ON at V_max)",
+  "Cloud-9 (Phase 44 Yukawa, c=4)": {
+    "name": "Cloud-9 (Phase 44 Yukawa, c=4)",
+    "M_halo_Msun": 5000000000.0,
+    "c": 4.0,
+    "sigma_m_cm2_per_g": 0.174,
+    "r_vir_pc": 35092.89849908858,
+    "r_s_pc": 8773.224624772145,
+    "rho_s_Msun_per_pc3": 0.0007279454762562018,
+    "v_max_kms": 25.588085401752092,
+    "t_core_Gyr": 3437.7720677648194,
+    "t_cross_Gyr": 0.3352582302034422,
+    "t_core_over_Hubble": 249.11391795397242,
+    "t_core_over_t_cross": 10254.101937120835,
+    "phase_runs": false,
+    "causality_ok": true
+  },
+  "Cloud-9 (framework v1 resonance ON at V_max, c=12)": {
+    "name": "Cloud-9 (framework v1 resonance ON at V_max, c=12)",
     "M_halo_Msun": 5000000000.0,
     "c": 12.0,
     "sigma_m_cm2_per_g": 135.3,
@@ -47,8 +63,24 @@
     "phase_runs": true,
     "causality_ok": false
   },
-  "Cloud-9 (Ohana+ best fit)": {
-    "name": "Cloud-9 (Ohana+ best fit)",
+  "Cloud-9 (framework v1 at V_max, c=4)": {
+    "name": "Cloud-9 (framework v1 at V_max, c=4)",
+    "M_halo_Msun": 5000000000.0,
+    "c": 4.0,
+    "sigma_m_cm2_per_g": 135.3,
+    "r_vir_pc": 35092.89849908858,
+    "r_s_pc": 8773.224624772145,
+    "rho_s_Msun_per_pc3": 0.0007279454762562018,
+    "v_max_kms": 25.588085401752092,
+    "t_core_Gyr": 4.421081594908192,
+    "t_cross_Gyr": 0.3352582302034422,
+    "t_core_over_Hubble": 0.32036823151508637,
+    "t_core_over_t_cross": 13.18709340028843,
+    "phase_runs": true,
+    "causality_ok": true
+  },
+  "Cloud-9 (Ohana+ best fit, c=4)": {
+    "name": "Cloud-9 (Ohana+ best fit, c=4)",
     "M_halo_Msun": 4700000000.0,
     "c": 4.0,
     "sigma_m_cm2_per_g": 483,
@@ -63,8 +95,8 @@
     "phase_runs": true,
     "causality_ok": true
   },
-  "Cloud-9 (framework v1 at v_target=28)": {
-    "name": "Cloud-9 (framework v1 at v_target=28)",
+  "Cloud-9 (framework v1 at v_target=28, c=12)": {
+    "name": "Cloud-9 (framework v1 at v_target=28, c=12)",
     "M_halo_Msun": 5000000000.0,
     "c": 12.0,
     "sigma_m_cm2_per_g": 164.0,

@@ -69,21 +69,32 @@
 | **Verdict at Phase 44 Yukawa-only baseline** | **gravothermal DOES NOT run** | same |
 | Path 2 | **REFUTED** at Phase 44 Yukawa-only baseline | same |
 
-**v19.1.3 addendum (post-flip2.docx σ/m derivation):**
+**v19.1.4 addendum (post-re196.docx — V_max convention, causality cap, c=4 anchor):**
 
-| Parameter | Value | Source |
-|---|---|---|
-| Framework σ/m at V_max = 31.12 km/s with v₁ resonance ON | **135.3 cm²/g** | Computed: 174 × exp(-(31.12-28)² / (2 × 4.4²)) = 174 × 0.778 |
-| Framework σ/m at v_target = 28 km/s (resonance peak) | 164 cm²/g | `causality_summary_corrected.json` (sigma_v28) |
-| **t_core (framework σ/m at V_max = 135.3)** | **0.091 Gyr (91 Myr)** | `scripts/silverman2026_cloud9_gravothermal.py` |
-| t_core/t_Hubble (framework σ/m at V_max) | 0.0066 | same |
-| t_core/t_cross (framework σ/m at V_max) | 1.0 (causality FAIL at large σ/m) | same |
-| **Verdict at framework σ/m at V_max** | **gravothermal DOES run (faster than Hubble)** | same |
-| Path 2 at framework σ/m | **NOT REFUTED** | same |
+**Test matrix (reconciled, V_max = 31.12 km/s NFW-correct, σ/m at V_max):**
 
-**Note on σ/m values:** v19.1.2 paper text said "framework σ/m at V_max = 164 cm²/g, t_core = 75 Myr." flip2.docx review caught that this was a labeling error: 164 is σ/m at the resonance peak v=28 (from causality_summary_corrected.json's sigma_v28_cm2_g), not at V_max. The correct framework σ/m at V_max = 31.12 km/s, computed via Gaussian fall-off, is **135.3 cm²/g, giving t_core = 91 Myr**. The flip from §9.12/T208 holds either way (gravothermal runs much faster than Hubble); the corrected number is 91 Myr instead of 75 Myr.
+| Case | σ/m | c | t_core (Gyr) | t_core/t_cross | causality | Verdict |
+|---|---|---|---|---|---|---|
+| Silverman+ 2026 ref | 70 | 12 | 0.176 | 1.92 | OK | runs |
+| Cloud-9 Phase 44 Yukawa only | 0.174 | 12 | **70.8** | 771 | OK | does NOT run |
+| Cloud-9 Phase 44 Yukawa only | 0.174 | 4 | 3438 | 10000+ | OK | does NOT run |
+| Cloud-9 framework v₁ at V_max | **135.3** | 12 | 0.091 | **0.99** | **FAIL** | analytical only |
+| Cloud-9 framework v₁ at V_max | **135.3** | 4 | **4.42** | 13.2 | OK | **runs (causality-OK anchor)** |
+| Cloud-9 framework v₁ at peak (v=28) | 164 | 12 | 0.075 | 0.81 | **FAIL** | analytical only |
+| Cloud-9 Ohana+ best fit | 483 | 4 | 1.24 | 3.69 | OK | runs |
 
-**Honest synthesis:** The two verdicts are both correct for their respective σ/m assumptions. The §9.12/T208 verdict ("does not run") applies to the Phase 44 Yukawa-only baseline (σ/m = 0.21, excludes the v₁ resonance). The framework's actual σ/m at Cloud-9 V_max (135.3 cm²/g, with v₁ resonance included, evaluated at V_max with Gaussian fall-off) drives gravothermal collapse in 91 Myr. Cloud-9 is a **gravothermal-evolution constraint** (does the host halo have a quiescent merger history?), not a **bulk σ/m constraint**.
+**V_max convention (Issue 1 of re196.docx):** T208 canonical NFW-correct V_max = 31.12 km/s for Cloud-9 with M=5e9, c=12 (r_max = 2.16 r_s). At V_max, σ/m = 0.174 cm²/g (Phase 44 baseline). With this, t_core = **70.8 Gyr** — does NOT run. The 73.7 Gyr cited in §9.12 was a virial-approximation rounding; corrected to 70.8 Gyr. The 0.21 used by v19.1.3 was Phase 44 at v=28 (not V_max) — re196.docx caught this convention drift.
+
+**Causality cap (Issue 3 of re196.docx):** At σ/m ≥ ~10 cm²/g, the analytical Balberg+ formula gives t_core/t_cross < 3.0, violating the causality cap. The 91 Myr number for σ/m = 135.3 at c=12 is **indicative, not physical**. At c=4 (Ohana+ inferred), t_core = 4.42 Gyr with causality OK — this is the physical anchor. **N-body required before claiming collapse.**
+
+**σ/m values (Issue 2 / smaller item 2):** Three different framework σ/m values are now correctly distinguished:
+- **0.174** at V_max = 31.12 km/s (Phase 44 baseline; no resonance)
+- **135.3** at V_max = 31.12 km/s (framework v₁ resonance ON, evaluated with Gaussian fall-off from σ_peak = 174)
+- **164** at v_target = 28 km/s (framework v₁ resonance at peak; from `causality_summary_corrected.json`'s sigma_v28_cm2_g)
+
+Paper §9.12 must state which is which in one sentence; otherwise readers will confuse "framework σ/m at Cloud-9" with multiple values.
+
+**Honest synthesis (v19.1.4):** Cloud-9 t_core at c=4 anchor is **4.42 Gyr** (causality-OK). This drives gravothermal collapse in <halo age. Sustained mergers (Silverman+ mechanism, M94 group environment) could prevent collapse against framework σ/m = 135.3. Three open explanations: (c) merger-suppressed (viable but not "leading"); (b) framework σ_peak too high (possible; would require Phase 44 re-fit); (a) Ohana+ τ wrong (unlikely). N-body with M94-like sustained mergers is the discriminator. The "4000× problem" is reframed (not dissolved).
 
 ## §6. Host-halo gravothermal at σ/m=70 (T212 Silverman+)
 

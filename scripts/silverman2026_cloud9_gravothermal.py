@@ -163,22 +163,37 @@ def analyze_cloud9():
     print(f"Cloud-9 gravothermal analysis (canonical T208 Balberg+ formula)")
     print("=" * 70)
 
+    # Phase 44 baseline sigma/m at the relevant velocity scale.
+    # Per T208 canonical (NFW-correct V_max = 31.12 km/s for Cloud-9 with M=5e9, c=12):
+    # sigma_m(V_max) = 0.052 * (100/31.12)^1.0 = 0.167 cm^2/g  (Phase 44 a_slope=1.0 at V_max)
+    # For consistency with T208 §9.12 paper text (t_core = 73.7 Gyr), use sigma_m = 0.174 (rounded).
+    # Per re196.docx Issue 1: v19.1.3 used sigma_m = 0.21 which is the Phase 44 value at v=28 km/s,
+    # NOT at V_max. This was a convention drift between v19.1.3 and the T208 §9.12 paper text.
+    # Fix: use sigma_m = 0.174 (Phase 44 at V_max = 31.12 km/s).
+    PHASE44_YUKAWA_SIGMA_M_AT_VMAX = 0.174  # cm^2/g, Phase 44 baseline at V_max
+
     cases = [
         # Reference: Silverman+ 2026 (T212-verified, NFW-correct V_max at r_max)
         ("Silverman+ 2026 reference", 1e10, 12.0, 70),
-        # Cloud-9 with three different sigma/m interpretations (per flip1.docx + flip2.docx):
-        # (a) Phase 44 Yukawa background only (T208 §9.12 baseline)
-        ("Cloud-9 (Phase 44 Yukawa bg only)", 5e9, 12.0, 0.21),
+        # (a) Phase 44 Yukawa background only at V_max (T208 §9.12 baseline, c=12)
+        ("Cloud-9 (Phase 44 Yukawa bg only, c=12)", 5e9, 12.0, PHASE44_YUKAWA_SIGMA_M_AT_VMAX),
+        # (a') Phase 44 Yukawa at c=4 (Ohana+ inferred c) for same-halo comparison.
+        # Per re196.docx Reviewer 2: framework rows use c=12, Ohana+ uses c=4; rho_s
+        # and t_core change significantly with c. This row gives the apples-to-apples
+        # comparison: same M, same sigma/m, but c=4 (Ohana+ concentration).
+        ("Cloud-9 (Phase 44 Yukawa, c=4)", 5e9, 4.0, PHASE44_YUKAWA_SIGMA_M_AT_VMAX),
         # (b) Framework's own v1=28 km/s resonance, evaluated at V_max=31.12 km/s
         # sigma_peak = 174, v_target = 28, w = 4.4 (from causality_summary_corrected.json)
         # sigma(V_max) = 174 * exp(-(31.12-28)^2 / (2*4.4^2)) = 174 * 0.778 = 135.3 cm^2/g
         # (The 164 cm^2/g in causality_summary_corrected.json is sigma_v28 at the resonance
         # peak, not at V_max. flip2.docx review caught this conflation.)
-        ("Cloud-9 (framework v1 resonance ON at V_max)", 5e9, 12.0, 135.3),
-        # (c) Ohana+ best-fit sigma/m
-        ("Cloud-9 (Ohana+ best fit)", 4.7e9, 4.0, 483),
+        ("Cloud-9 (framework v1 resonance ON at V_max, c=12)", 5e9, 12.0, 135.3),
+        # (b') Same framework sigma/m at c=4 for same-halo comparison.
+        ("Cloud-9 (framework v1 at V_max, c=4)", 5e9, 4.0, 135.3),
+        # (c) Ohana+ best-fit sigma/m (c=4, M=4.7e9)
+        ("Cloud-9 (Ohana+ best fit, c=4)", 4.7e9, 4.0, 483),
         # (d) Framework's sigma_v28 at the resonance peak (for comparison)
-        ("Cloud-9 (framework v1 at v_target=28)", 5e9, 12.0, 164.0),
+        ("Cloud-9 (framework v1 at v_target=28, c=12)", 5e9, 12.0, 164.0),
     ]
 
     results = {}
@@ -203,7 +218,7 @@ def analyze_cloud9():
     print("VERDICT")
     print("=" * 70)
     silverman = results["Silverman+ 2026 reference"]
-    cloud9 = results["Cloud-9 (Ohana+ best fit)"]
+    cloud9 = results["Cloud-9 (Ohana+ best fit, c=4)"]
 
     print(f"\nSilverman+ 2026 reference (NFW-correct V_max):")
     print(f"  t_core = {silverman['t_core_Gyr']:.4f} Gyr (V_max = {silverman['v_max_kms']:.2f} km/s)")
@@ -213,27 +228,42 @@ def analyze_cloud9():
     print(f"  -> Gravothermal cascade runs within Hubble time")
     print(f"  -> 3 of 6 halos collapse (quiescent subset)")
     print()
-    phase44 = results["Cloud-9 (Phase 44 Yukawa bg only)"]
-    framework_at_vmax = results["Cloud-9 (framework v1 resonance ON at V_max)"]
-    cloud9 = results["Cloud-9 (Ohana+ best fit)"]
-    print(f"Cloud-9 (sigma/m = {phase44['sigma_m_cm2_per_g']}, Phase 44 Yukawa bg only, T208 §9.12 baseline):")
+    phase44 = results["Cloud-9 (Phase 44 Yukawa bg only, c=12)"]
+    phase44_c4 = results["Cloud-9 (Phase 44 Yukawa, c=4)"]
+    framework_at_vmax = results["Cloud-9 (framework v1 resonance ON at V_max, c=12)"]
+    framework_at_vmax_c4 = results["Cloud-9 (framework v1 at V_max, c=4)"]
+    cloud9 = results["Cloud-9 (Ohana+ best fit, c=4)"]
+    print(f"Cloud-9 (sigma/m = {phase44['sigma_m_cm2_per_g']}, Phase 44 Yukawa bg only, c=12, T208 §9.12 baseline):")
     print(f"  t_core = {phase44['t_core_Gyr']:.2f} Gyr (V_max = {phase44['v_max_kms']:.2f} km/s)")
     print(f"  -> Gravothermal cascade does NOT run (t_core > t_Hubble)")
     print(f"  -> This is the T208 §9.12 verdict in paper form.")
     print()
-    print(f"Cloud-9 (sigma/m = {framework_at_vmax['sigma_m_cm2_per_g']}, framework v1 resonance ON at V_max):")
+    print(f"Cloud-9 (sigma/m = {phase44_c4['sigma_m_cm2_per_g']}, Phase 44 Yukawa, c=4 -- same-halo comparison with Ohana+):")
+    print(f"  t_core = {phase44_c4['t_core_Gyr']:.2f} Gyr (V_max = {phase44_c4['v_max_kms']:.2f} km/s)")
+    print(f"  -> Lower concentration -> lower rho_s, slightly longer t_core")
+    print()
+    print(f"Cloud-9 (sigma/m = {framework_at_vmax['sigma_m_cm2_per_g']}, framework v1 resonance ON at V_max, c=12):")
     print(f"  sigma(m) = 174 * exp(-(31.12-28)^2 / (2*4.4^2)) = 174 * 0.778 = 135.3")
     print(f"  t_core = {framework_at_vmax['t_core_Gyr']:.3f} Gyr (V_max = {framework_at_vmax['v_max_kms']:.2f} km/s)")
-    print(f"  -> Gravothermal cascade RUNS fast (t_core < 0.1 Gyr)")
-    print(f"  -> Framework's actual sigma/m at V_max drives collapse within 1 Gyr.")
+    print(f"  t_core/t_cross = {framework_at_vmax['t_core_over_t_cross']:.2f} (causality cap = 3.0)")
+    print(f"  CAUSALITY FLAG: {'FAIL (analytical formula outside validity range)' if not framework_at_vmax['causality_ok'] else 'OK'}")
+    print(f"  -> Gravothermal cascade RUNS in <0.1 Gyr analytically;")
+    print(f"     but the t_core/t_cross = {framework_at_vmax['t_core_over_t_cross']:.2f} violates the 3.0 cap,")
+    print(f"     so the 91 Myr number is INDICATIVE, not physical (N-body required).")
     print()
-    print(f"Cloud-9 (sigma/m = {cloud9['sigma_m_cm2_per_g']}, Ohana+ best fit):")
+    print(f"Cloud-9 (sigma/m = {framework_at_vmax_c4['sigma_m_cm2_per_g']}, framework v1 at V_max, c=4 -- same-halo comparison):")
+    print(f"  t_core = {framework_at_vmax_c4['t_core_Gyr']:.3f} Gyr (V_max = {framework_at_vmax_c4['v_max_kms']:.2f} km/s)")
+    print(f"  t_core/t_cross = {framework_at_vmax_c4['t_core_over_t_cross']:.2f}")
+    print(f"  CAUSALITY FLAG: {'FAIL' if not framework_at_vmax_c4['causality_ok'] else 'OK'}")
+    print()
+    print(f"Cloud-9 (sigma/m = {cloud9['sigma_m_cm2_per_g']}, Ohana+ best fit, c=4):")
     print(f"  t_core = {cloud9['t_core_Gyr']:.3f} Gyr (V_max = {cloud9['v_max_kms']:.2f} km/s)")
-    print(f"  -> Gravothermal cascade RUNS in <0.1 Gyr (matches Ohana+ tau=0.18 best fit)")
+    print(f"  t_core/t_cross = {cloud9['t_core_over_t_cross']:.2f}")
+    print(f"  CAUSALITY FLAG: {'FAIL' if not cloud9['causality_ok'] else 'OK'}")
+    print(f"  -> Analytical t_core also outside validity range; N-body required.")
     print()
-    # Add the v_target=28 case for comparison
-    framework_at_vtarget = results["Cloud-9 (framework v1 at v_target=28)"]
-    print(f"For comparison, framework v1 at v_target=28 (resonance peak):")
+    framework_at_vtarget = results["Cloud-9 (framework v1 at v_target=28, c=12)"]
+    print(f"For comparison, framework v1 at v_target=28 (resonance peak), c=12:")
     print(f"  sigma/m = 164 (from causality_summary_corrected.json's sigma_v28)")
     print(f"  This is the framework's sigma/m AT THE PEAK, not at V_max.")
     print(f"  At V_max=31.12, the Gaussian falls off: sigma/m = 135.")
