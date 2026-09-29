@@ -129,15 +129,17 @@ The closest existing work is **Yang & Yu 2023** [11] (single-breathing-mode medi
 
 ### 3.2c Cloud-9 as a concentration-mass tension (Ohana, Zhang & Yu 2026 [15e])
 
-**Reframing (added v19.0, post-paper-freeze, per the "way forward" review):** The σ/m ≥ 50 cm²/g floor at v ≈ 28 km/s is a **necessary** constraint, but Ohana, Zhang & Yu 2026 [15e] (arXiv:2608.04362, Aug 2026) show that Cloud-9's *primary* tension is with the cosmological concentration–mass (c-M) relation, not solely with σ/m magnitude. Their MCMC analysis finds:
+**Reframing (added v19.0, post-paper-freeze, per the "way forward" review; v19.0.1 cross-link added per rev19.docx Reviewer 2 §Smaller Issues 4):** The σ/m ≥ 50 cm²/g floor at v ≈ 28 km/s is a **necessary** constraint, but Ohana, Zhang & Yu 2026 [15e] (arXiv:2608.04362, Aug 2026) show that Cloud-9's *primary* tension is with the cosmological concentration–mass (c-M) relation, not solely with σ/m magnitude. Their MCMC analysis finds:
 
 - **Best-fit SIDM**: σ/m = 483 cm²/g, M_200 = 4.7×10⁹ M☉, c_200 = 4.0 — **3.2σ below median** of the c-M relation.
 - **Extreme case**: σ/m = 2.1×10⁴ cm²/g (gravothermal core-collapse phase).
 - **CDM alternative**: requires 7σ below the c-M median — **strongly disfavored** versus SIDM.
 
+**Cross-link to §10.4d (Cloud-9 systematic upper bound):** the c-M reframing here (a *cosmological* tension with the c-M relation per Ohana+ 2026) is **complementary to** the environmental-systematic reframing in §10.4d (a *systematic-uncertainty upper bound* per Turini & Benítez-Llambay 2026). Together, these two reframings frame Cloud-9 as a **(σ/m, c_200, environment) joint tension** rather than a σ/m-only constraint. Neither reframing alone is sufficient; both are honest characterizations of the current state of the data.
+
 **Implication for our framework:** Our adopted σ/m ≈ 100 cm²/g at v = 28 km/s sits *below* the Ohana+ best-fit (483 cm²/g) and well below the extreme (2.1×10⁴ cm²/g). The factor-of-5 gap between our value and the Ohana+ best-fit does NOT necessarily mean our phenomenology is wrong — it means our phenomenology **under-shoots Cloud-9's gas profile by a factor of 5× in σ/m**, which Ohana+ resolves by allocating additional tension to the c-M relation. **A full c-M tension analysis is out of scope for v19.0** (it requires marginalizing over c_200, M_200, σ/m jointly, which we do not do) but is the natural next step in §11 future-work.
 
-**Concentration–mass corroboration from Silverman+ 2026 [29d]:** Silverman+ 2026 (arXiv:2606.02566, "Mergers Matter") shows via N-body that **3 of 6** host halos at M = 10¹⁰ M☉ with σ/m = 70 cm²/g collapse within a Hubble time. This is consistent with the Ohana+ picture: a moderately-elevated σ/m (70 vs our 100) can drive gravothermal core-formation that brings c_200 closer to the observed value (3.2σ tension is reasonable for a host-halo on the cusp of collapse).
+**Concentration–mass corroboration from Silverman+ 2026 [54]:** Silverman+ 2026 (arXiv:2606.02566, "Mergers Matter") shows via N-body that **3 of 6** host halos at M = 10¹⁰ M☉ with σ/m = 70 cm²/g collapse within a Hubble time. This is consistent with the Ohana+ picture: a moderately-elevated σ/m (70 vs our 100) can drive gravothermal core-formation that brings c_200 closer to the observed value (3.2σ tension is reasonable for a host-halo on the cusp of collapse).
 
 **Honest framing:** the σ/m ≥ 50 floor remains our primary Cloud-9 constraint. The Ohana+ c-M reframing is **complementary**: it suggests that the next paper version should treat Cloud-9 as a joint (σ/m, c_200) tension rather than a σ/m-only constraint. This is **not** an automatic upgrade — it requires implementing the c-M likelihood alongside the σ/m likelihood, which is non-trivial and deferred to v19.1.
 
@@ -312,7 +314,7 @@ This section now states honestly what the three mechanisms can and cannot do, wi
 
 ### 9.1 Motivation
 
-The Horigome+ 2025 [27] constraint at v_eff ≈ 15 km/s (σ/m < 0.8 cm²/g for w=10 km/s) and the Cloud-9 σ/m ≈ 100 cm²/g requirement at v ≈ 28 km/s, combined with the SPARC band [0.05, 0.5] cm²/g at v ≈ 100 km/s and the cluster limit σ/m < 1 cm²/g at v ≈ 500 km/s, cannot be simultaneously satisfied by any single-component smooth σ(v) function (see v1.11 §8.5 / T110 closed investigations — historical reference). The Lorentzian Breit-Wigner form has an irreducible tail σ_BW(v=15) ≈ 5 cm²/g given the v₁ peak at v ≈ 29 km/s.
+The Horigome+ 2025 [27] constraint at v_eff ≈ 15 km/s (σ/m < 0.8 cm²/g for w=10 km/s) and the Cloud-9 σ/m ≈ 100 cm²/g requirement at v ≈ 28 km/s, combined with the SPARC band [0.05, 0.5] cm²/g at v ≈ 100 km/s and the cluster limit σ/m < 1 cm²/g at v ≈ 500 km/s (per Adhikari+ 2025 [53], σ/m < 1.05 cm²/g at 95% CL from cluster weak lensing), cannot be simultaneously satisfied by any single-component smooth σ(v) function (see v1.11 §8.5 / T110 closed investigations — historical reference). The Lorentzian Breit-Wigner form has an irreducible tail σ_BW(v=15) ≈ 5 cm²/g given the v₁ peak at v ≈ 29 km/s.
 
 ### 9.2 The Three Mechanisms (phenomenological)
 
@@ -404,7 +406,7 @@ The fit is **dominated by a single residual (SPARC)**; the boundary peak reflect
 
 2. **f_H profile not derived**: placeholder borrowed from Yang+ 2025 at 2800× larger σ/m; T202 N-body finds uniform at Phase 44; T183 fluid gives f_H ≈ 0.61. Three inconsistent values, none derived from our parameters. **Forward work**: SIDM Concerto [51] (Nadler+ 2025, arXiv:2503.10748, public 14-zoom-in data release at Zenodo 14933624) provides a public source of data-derived f_H(r) profiles; re-deriving f_H from Concerto is deferred to v19.1.
 
-**Layer 2 honest negative result (added v19.0, 2026-09-29, post-paper-freeze, per the "way forward" review):** A direct probe of the Nadler+ 2025 SIDM Concerto MW_Halo004 zoom-in (parametric, single-component SIDM, 2171 SIDM subhalos matched to 2367 CDM halos by Lagrangian order) gives **suppression_mean = 1.091** (i.e., SIDM halos have *higher* vmax than matched CDM halos at the same Lagrangian position). The interpretation across vmax bins:
+**Layer 2 single-component-only data-availability finding (added v19.0, 2026-09-29, post-paper-freeze; reframed v19.0.1 per rev19.docx Reviewer 2):** A direct probe of the Nadler+ 2025 SIDM Concerto MW_Halo004 zoom-in (parametric, single-component SIDM, 2171 SIDM subhalos matched to 2367 CDM halos by Lagrangian order) gives **suppression_mean = 1.091** at the matched-Lagrangian level (the [vmax(SIDM) / vmax(CDM)] ratio). The interpretation across vmax bins:
 
 | vmax range (km/s) | n_subhalos | f_H_proxy (clipped to [0,1]) | suppression (vmax ratio) |
 |---|---|---|---|
@@ -414,9 +416,9 @@ The fit is **dominated by a single residual (SPARC)**; the boundary peak reflect
 | [50, 100) | 21 | 0.003 | 1.249 |
 | [100, 1000) | 1 | 0.014 | 0.986 |
 
-**Honest verdict:** SIDM Concerto is **single-component parametric SIDM, not two-component**, so the vmax(SIDM)/vmax(CDM) ratio is NOT a clean f_H proxy. For v-independent SIDM, core-collapse enhancement can RAISE vmax rather than suppress it, giving negative f_H_proxy (the [10, 30) and [30, 50) km/s bins have suppression > 1). The paper's two-component f_H concept (heavy + light, mass ratio 3:1) requires two-component SIDM Concerto runs that are **not in the current public release**. **The paper's three independent f_H prescriptions (borrowed, Yang+ 2025, T202 N-body, T183 fluid) remain the available estimates with no new data-derived value** from SIDM Concerto. Re-deriving f_H from two-component Concerto runs is deferred to v19.1 (requires new data release from Nadler+ 2026+).
+**Honest verdict (v19.0.1 reframing per Reviewer 2):** SIDM Concerto is **single-component parametric SIDM, not two-component**. The vmax-ratio proxy `f_H_proxy = max(0, 1 - suppression)` is a category error in two-component models — for two-component SIDM, heavy-in-center segregation can RAISE or LOWER vmax depending on whether the observed radius is inside or outside the heavy-light crossover. The suppression > 1 in the [10, 30) and [30, 50) km/s bins (SIDM halos have higher vmax than CDM at the same Lagrangian position) reflects **parametric-SIDM core-collapse enhancement**, not a measurement of f_H. **The honest finding is:** *the public SIDM Concerto release is single-component-only; two-component runs required for f_H derivation are not available.* **The paper's three independent f_H prescriptions (borrowed, Yang+ 2025, T202 N-body, T183 fluid) remain the available estimates with no new data-derived value from SIDM Concerto.** Re-deriving f_H from two-component Concerto runs is deferred to v19.1 (requires new data release from Nadler+ 2026+).
 
-**Why this is still progress:** the Layer 2 negative result is informative — it documents that the framework's two-component structure cannot be naively tested against single-component SIDM Concerto. The paper's f_H prescriptions are thus the **only available estimates**, and the [51] citation now points readers to the data release as future infrastructure (with the caveat that two-component runs are needed).
+**Why this is still progress:** documenting the data-release limitation in §9.6 is informative — it tells readers that the framework's two-component structure cannot be naively tested against the current single-component public release. The paper's f_H prescriptions are the **only available estimates**, and the [51] citation now points readers to the data release as future infrastructure (with the caveat that two-component runs are needed).
 
 3. **Cloud-9 4000× spike unexplained**: the published σ/m ≥ 50 cm²/g floor is satisfied only with borrowed f_H. The specific spike (σ/m = 128 vs ≥50) is a free parameter, not derived.
 
@@ -596,19 +598,18 @@ EFT target map for future work.
 
 The phenomenology (T120 multi-component + gravothermal + Gaussian Breit-Wigner) is consistent with **4 of 5 constrained channels (SPARC, Cloud-9, dSph, Cluster, JVAS) under physically motivated f_H; 7 of 8 only under retracted borrowed f_H** (§9.3, §9.7). With the borrowed (hand-picked placeholder, retracted v18.29) f_H values, 7 of 8 channels pass; with Yang+ 2025-derived or T202 N-body-derived f_H, only 4 of 8 pass. The Cloud-9 vs dSph tension is **unresolved at Phase 44 parameters** when f_H is derived from a first-principles source. The 8th channel (Cloud-9's σ/m ≥ 50 floor at v=28 km/s) is published and confirmed independently by Ohana, Zhang & Yu 2026 [15e] via MCMC, but cannot be derived from standard Yukawa physics; the heavy-channel-only σ_eff = f_H² × σ_HH(v) decomposition also cannot match SPARC's σ/m ≈ 0.193 at v = 100 km/s. This is honest: we present **a constraint map, not a self-consistent derivation**, and document what UV physics would need to look like to reproduce the full 8 channels. **Path F1 (T207, v18.38, §9.9-§9.11) addresses the SPARC structural limitation** by adding the σ_HL term: the three-term decomposition σ_eff = f_H² σ_HH + 2 f_H f_L σ_HL + f_L² σ_LL reaches σ_eff(100) ≈ 0.19 via the heavy-light cross-section under borrowed prescription mode (v_HL ≈ 100 km/s, σ_peak_HL ≈ 0.34). The free fit with Yang+ 2025 f_H_cc ≥ 0.05 prior lands at v_HL = 105 ± 39 km/s but fails SPARC at the posterior median (log L = -2.03, z ≈ 2.0); Path F1 is therefore **structurally sufficient but not automatically data-satisfying** without prescription-mode f_H.
 
-**Layer 3 quick verification (added v19.0, 2026-09-29, post-paper-freeze, per the "way forward" review):** An independent σ/m-only single-point likelihood at v = 100 km/s (per Jia 2026 [52] convention, σ_unc = 0.05 from SPARC measurement) gives:
+**Layer 3 verification — paper verdict-split reproduction (added v19.0.1, 2026-09-29, post-rev19.docx Reviewer 2):** An independent re-evaluation of the §9.11 verdict split table — using the paper's ACTUAL four prescriptions (f_H = 0.06, 0.79, 0.85, 0.92) and the paper's implicit threshold convention (RESOLVED log L >= -0.10, MARGINAL -0.30 <= log L < -0.10, NOT RESOLVED -2.00 < log L < -0.30, CLEAR FAIL log L <= -2.00) — produces an exact match to the §9.11 reported verdicts:
 
-| f_H prescription | σ/m(v=100) | log L (single point) | Verdict |
-|---|---|---|---|
-| f_H = 0.20 (Phase 44 canonical) | 0.131 | -0.777 | **PASS** |
-| f_H = 0.85 (borrowed, retracted) | 0.162 | -0.187 | **PASS** |
-| f_H = 0.92 (T202 N-body) | 0.137 | -0.618 | **PASS** |
-| f_H = 0.61 (T183 fluid) | 0.206 | -0.034 | **PASS** |
-| f_H = 1.00 (heavy-only) | 0.102 | -1.651 | MARGINAL |
+| Mode | f_H | log L | z | Reported | Computed |
+|---|---|---|---|---|---|
+| borrowed (hand-picked) | 0.85 | -0.09 | 0.42 | RESOLVED | RESOLVED ✓ |
+| yang (Yang+ 2025) | 0.79 | -0.24 | 0.69 | MARGINAL | MARGINAL ✓ |
+| t202 (N-body) | 0.92 | -0.60 | 1.10 | NOT RESOLVED | NOT RESOLVED ✓ |
+| priored free fit | 0.06 | -2.03 | 2.01 | CLEAR FAIL | CLEAR FAIL ✓ |
 
-**Honest interpretation:** All four physically motivated f_H prescriptions (Phase 44 canonical, Yang+ 2025, T202 N-body, T183 fluid) achieve σ/m ≈ 0.13-0.21 at v = 100 km/s under the σ_HL structural term — *within factor of 1.5 of the SPARC target 0.193*. The earlier "log L = -2.03, z ≈ 2.0" verdict from §9.10 used T206's internal σ_unc convention (σ_unc = obs, self-normalized), which is 4× larger for some and smaller for others; under T205's published σ_unc (= 0.05 for SPARC), **the framework is consistent with the SPARC target at the σ/m-only single-point level for all physically motivated f_H prescriptions except heavy-only**. The full SPARC likelihood analysis (per-galaxy point-by-point, with rotation curve modelling) is **deferred to v19.1** via the Jia 2026 framework — the [52] citation here points readers to that independent verification path.
+**Honest interpretation:** The §9.11 verdict split is **self-consistent under the paper's own threshold convention**. The "log L = -2.03 CLEAR FAIL" verdict is robust under T205 σ_unc (= 0.05 from SPARC measurement); the earlier v19.0 claim that "this was a T206 self-normalization artifact" was incorrect — see [Reviewer 2 rev19.docx]. The single-point σ/m-only check at v = 100 is NOT sufficient to overturn the verdict split; the full Path F1 joint likelihood across all 8 channels remains the controlling test. **Headline verdict is unchanged.** The Layer 3 verification serves to document that the §9.11 result is reproducible under the paper's stated conventions, not to introduce a new claim.
 
-**Why this matters:** The headline verdict is unchanged — Path F1's σ_HL structural fix is *necessary but not sufficient* for full per-point SPARC satisfaction. What changes is the framing: at the σ/m anchor level (single point at v=100), the framework is *consistent with* SPARC. The failure mode reported in §9.10 (log L = -2.03) reflects the joint likelihood across all 8 channels and the Yang+ 2025 f_H_cc ≥ 0.05 prior — not the σ/m-only prediction. The single-point σ/m-level result here corroborates the §3.6 statement that the σ/m(v) parameterization "can describe" 7 of 8 channels under prescription mode.
+**Note on Jia 2026 integration:** Per the v19.0.1 review (Reviewer 2 §Smaller Issues 5), Jia's `ZixiangJia/SIDM_Jeans_model` repository does NOT include a LICENSE file. Per GitHub ToS, code without an explicit license is all-rights-reserved and cannot be integrated into a public paper repository without author permission. The [52] citation remains valid as a reference to Jia's published MNRAS paper, but Jia's code will NOT be forked or integrated into this project. A re-implementation of the Enhanced Isothermal Jeans approach per [52] from scratch (using the paper's mathematical description) is deferred to v19.1.
 
 ### 10.2a No-go #1: Magnetic dipole DM (T120.10)
 
@@ -1094,6 +1095,8 @@ The Cloud-9 hydrostatic-equilibrium inference (Zhou+ 2023 FAST detection; Benít
 
 The Cloud-9 σ/m ≥ 50 floor is therefore best interpreted as a **systematic-uncertainty upper bound** on bulk SIDM σ/m, not a hard physical constraint. The framework's failure to satisfy Cloud-9 under physically motivated f_H (Yang+, T202, borrowed = 0.85) does not unambiguously indicate a missing bulk SIDM mechanism — the failure could be partially attributable to over-estimation of the σ/m requirement due to environmental or self-shielding systematics in the hydrostatic inference.
 
+**Cross-link to §3.2c (Cloud-9 as concentration-mass tension):** the environmental-systematic reframing here is **complementary to** the cosmological c-M reframing in §3.2c (per Ohana, Zhang & Yu 2026 [15e]). Together, these two reframings frame Cloud-9 as a **(σ/m, c_200, environment) joint tension** rather than a σ/m-only constraint. Neither reframing alone is sufficient; both are honest characterizations of the current state of the data.
+
 Three observational systematic effects could shift the σ/m ≥ 50 floor by factors of 2-3:
 
 | Systematic | Direction | Magnitude |
@@ -1383,6 +1386,16 @@ The strongest single held-out stress test is Segue 1's tight σ/m < 1 cm²/g bou
 
 **Supplementary material.** Sections 4–8 (Simpler Halo Profiles, Mass-Spectrum Embeddings, UV-Prior Joint Fit, JVAS Tension, Discussion) are in `PAPER_V1_DRAFT_SUPPLEMENTARY.md`.
 
+**v19.1 plan (added v19.0.1, 2026-09-29, post-rev19.docx).** Three high-priority items:
+
+1. **Reconciliation step (per Reviewer 2 §v19.1 plan — missing a step):** Before running any full SPARC likelihood, reproduce the paper's §9.11 verdict split with the same pipeline (T207 + T205 + T206 conventions). If the two don't match on the four prescriptions that ARE in the paper, the full Jia run will produce numbers that conflict with the paper again. One-day task. **Layer 3 v19.0.1 reproduces the verdict split exactly** (see section 13 of `PAPER_STANDING_NUMBERS.md`).
+
+2. **Full per-galaxy SPARC likelihood via Jia 2026 framework (re-implementation):** Jia's `ZixiangJia/SIDM_Jeans_model` repository does NOT include a LICENSE file. Per GitHub ToS, code without an explicit license is all-rights-reserved; **Jia's code will NOT be forked or integrated into this repository**. A re-implementation of the Enhanced Isothermal Jeans approach per [52] from scratch (using the paper's mathematical description only) is the alternative. Effort estimate: 8-12 hours. cosmolopy unmaintained since ~2015; replacing with astropy.cosmology requires careful API translation of `cosmo.distance.luminosity_distance`, `cosmo.density.omega_M`, `cosmo.constants.G/c`, `cosmo.perturbation.fgrowth`. May require rewriting Jia's cosmology calls — not a trivial dependency swap.
+
+3. **Cloud-9 (σ/m, c_200, environment) joint likelihood:** Per §3.2c + §10.4d cross-link (v19.0.1), Cloud-9 is a joint tension. Implement c-M likelihood from Ohana+ 2026 [15e] + environmental-systematic likelihood from Turini & Benítez-Llambay 2026. Marginalize over (σ/m, c_200, M_200, environment). Update Cloud-9 constraint from "σ/m >= 50" to "(σ/m, c_200, environment) joint posterior." Effort estimate: 4-6 hours.
+
+**Lower priority (defer to v19.2+):** Two-component SIDM Concerto runs (waiting on Nadler+ 2026+); FRB/21cm/ICL probes (already cited, no integration needed).
+
 ---
 
 ## References
@@ -1445,6 +1458,8 @@ The strongest single held-out stress test is Segue 1's tight σ/m < 1 cm²/g bou
 [52] Jia, Z. (2026) arXiv:2601.17118; MNRAS 549 stag969 — "An enhanced isothermal jeans approach to constraining dark matter self-interactions from galactic kinematics." Public GitHub: ZixiangJia/SIDM_Jeans_model. Alternative SPARC fitting framework (§9.10).
 
 [53] Adhikari, S.; et al. (2025) ApJ 983, 50A — "Constraints on Dark Matter Self-interactions from Weak Lensing of Galaxies from the Dark Energy Survey around Clusters from the Atacama Cosmology Telescope Survey." σ/m < 1.05 cm²/g at 95% CL from cluster weak lensing.
+
+[54] Silverman, M.; et al. (2026) arXiv:2606.02566; Fermilab-PUB-26-0348-T — "Mergers Matter: N-body gravothermal cascade at σ/m = 70 cm²/g in M_halo = 10^10 M_☉ halos." 3 of 6 host halos collapse within a Hubble time (quiescent merger histories). Used in §3.2c concentration-mass corroboration and §10.4e gravothermal threshold.
 
 ## References
 

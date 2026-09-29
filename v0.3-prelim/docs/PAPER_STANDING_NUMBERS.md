@@ -156,6 +156,25 @@
 | "Cloud-9 tension resolved" | t_core=73.7 Gyr > t_Hubble at Phase 44 σ/m; unresolved |
 | "8/8 channel pass as headline" | 8/8 only under priored free fit with SPARC log L=-2.03 (clear fail); honest headline is 4/8 |
 
+## §13. Layer 3 paper-verdict-split reproduction (v19.0.1)
+
+| Prescription | f_H | log L | z | Reported | Computed (under paper threshold convention) |
+|---|---|---|---|---|---|
+| **borrowed** | 0.85 | -0.09 | 0.42 | RESOLVED | RESOLVED ✓ |
+| **yang** | 0.79 | -0.24 | 0.69 | MARGINAL | MARGINAL ✓ |
+| **t202** | 0.92 | -0.60 | 1.10 | NOT RESOLVED | NOT RESOLVED ✓ |
+| **priored free fit** | 0.06 | -2.03 | 2.01 | CLEAR FAIL | CLEAR FAIL ✓ |
+
+**Source:** `scripts/jia2026_sparc_check.py` (verbatim reproduction of §9.11 verdict split under paper's own threshold convention).
+
+**Threshold convention (paper's implicit):**
+- RESOLVED      log L >= -0.10
+- MARGINAL      -0.30 <= log L < -0.10
+- NOT RESOLVED  -2.00 <  log L < -0.30
+- CLEAR FAIL    log L <= -2.00
+
+**Honest framing:** §9.11 verdict split is self-consistent under the paper's stated threshold convention. The "log L = -2.03 CLEAR FAIL" verdict is robust under T205 σ_unc (= 0.05 from SPARC measurement); the earlier v19.0 claim that "this was a T206 self-normalization artifact" was incorrect (rev19.docx Reviewer 2). The single-point σ/m-only check is NOT sufficient to overturn the verdict split; full Path F1 joint likelihood remains the controlling test. **Headline verdict unchanged.**
+
 ---
 
 ## Verification
