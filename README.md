@@ -24,7 +24,7 @@
 - **Cloud-9 vs dSph tension is unresolved at Phase 44 parameters** — the model maps the tension rather than explaining it away.
 - **5 no-go theorems rule out one-mediator UV.** A two-mediator Drobczyk 2025 candidate is viable (δ = 0.43% fine-tuning) but does not resolve Cloud-9 vs dSph.
 
-**Why this is publishable, not a failure:** Two years of SIDM investigation ending at a constraint map is the correct scientific result. The paper's contribution is the map and the no-go catalogue, not a unified derivation. That's a real outcome — telling referees what is testable, what is ruled out, and what non-minimal UV completion would be needed.
+**Why this is publishable, not a failure:** Six weeks of focused SIDM investigation (Aug 2026 → Sep 2026) ending at a constraint map is a legitimate early-stage scientific result. The paper's contribution is the map and the no-go catalogue, not a unified derivation. That's a real outcome — telling referees what is testable, what is ruled out, and what non-minimal UV completion would be needed.
 
 **How to read the numbers:**
 - 24 standing numerical claims, all cross-validated (`PAPER_STANDING_NUMBERS.md`)
