@@ -1,0 +1,50 @@
+{
+  "method": "Silverman+ 2026 + Gurian+ 2025 KiSS-SIDM scalings applied to Cloud-9 (Ohana+ 2026)",
+  "date": "2026-09-29",
+  "version": "v19.1",
+  "note": "Qualitative reproduction. Applies published KiSS-SIDM fit formulas (Kn classification, Table I core-mass scaling, Balberg+ collapse time) to Cloud-9 parameters (Ohana+ 2026 best-fit: M_200=4.7e9, c_200=4.0, sigma/m=483 cm^2/g, tau=0.18). Silverman+ 2026 N-body (GIZMO + FIRE-2 ICs) is the canonical reference for gravothermal collapse with merger histories, but requires multi-day cluster runs to reproduce; this is a fluid-model + KiSS-scaling approximation.",
+  "limitations": [
+    "No actual GIZMO N-body (would require FIRE-2 ICs + cluster runs).",
+    "Merger history is not parameterized; Silverman+'s 3/6 collapse finding cannot be directly tested.",
+    "KiSS-SIDM scalings are based on canonical 1e9 Msun halo, applied here to 5x larger halo.",
+    "v_rms at r_s is approximate (true v_rms profile requires NFW integration)."
+  ],
+  "cloud9_params": {
+    "M_200_Msun": 4700000000.0,
+    "c_200": 4.0,
+    "sigma_m_cm2_per_g": 483,
+    "tau": 0.18,
+    "M_gas_Msun_observed": 14000000.0
+  },
+  "halo_scale": {
+    "rho_s_Msun_per_pc3": 6.64578070264929e-10,
+    "r_s_pc": 885902.951352688,
+    "r_200_pc": 3543611.805410752,
+    "v_vir_kms": 2.3883943568468498,
+    "v_rms_at_rs_kms": 1.6888498458740901
+  },
+  "knudsen_analysis": {
+    "Kn_at_rs": 2425118002045175.5,
+    "regime": "LMFP",
+    "fluid_model_validity": "Fluid model APPROPRIATE"
+  },
+  "collapse_time": {
+    "t_c_Gyr": 1086318821.2522597,
+    "t_Hubble_Gyr": 13.8,
+    "collapse_within_Hubble": false
+  },
+  "silverman_comparison": {
+    "Silverman_sigma_m": 70,
+    "Silverman_M_halo_Msun": 10000000000.0,
+    "Cloud9_sigma_m": 483,
+    "Cloud9_M_halo_Msun": 4700000000.0,
+    "Cloud9_collapse_predicted": false
+  },
+  "kiss_scaling": {
+    "fluid_dlogMdlogv2_Kn1": -0.27,
+    "fluid_dlogMdlogv2_Kn5": -0.37,
+    "DSMC_dlogMdlogv2_Kn1": -0.21,
+    "DSMC_dlogMdlogv2_Kn5": -0.21,
+    "fluid_DSMC_divergence_at_Kn1": 0.3
+  }
+}
