@@ -156,7 +156,7 @@
 | "Cloud-9 tension resolved" | t_core=73.7 Gyr > t_Hubble at Phase 44 σ/m; unresolved |
 | "8/8 channel pass as headline" | 8/8 only under priored free fit with SPARC log L=-2.03 (clear fail); honest headline is 4/8 |
 
-## §13. Layer 3 paper-verdict-split reproduction (v19.0.1)
+## §13. Layer 3 paper §9.11 self-consistency check (v19.0.1)
 
 | Prescription | f_H | log L | z | Reported | Computed (under paper threshold convention) |
 |---|---|---|---|---|---|
@@ -165,7 +165,16 @@
 | **t202** | 0.92 | -0.60 | 1.10 | NOT RESOLVED | NOT RESOLVED ✓ |
 | **priored free fit** | 0.06 | -2.03 | 2.01 | CLEAR FAIL | CLEAR FAIL ✓ |
 
-**Source:** `scripts/jia2026_sparc_check.py` (verbatim reproduction of §9.11 verdict split under paper's own threshold convention).
+**Source:** `scripts/jia2026_sparc_check.py` (consistency check, NOT verification).
+
+**SCOPE — this is a consistency check, NOT a verification** (per rev192.docx Reviewer 1):
+- Takes the paper's reported log L values from §9.11 as inputs.
+- Applies the paper's implicit threshold convention.
+- Confirms the four reported verdicts land in the intended bins.
+- Does NOT compute σ_pred(v=100) from the three-term Path F1 model.
+- Does NOT independently derive log L.
+
+A true verification would compute σ_pred(v=100) from the paper's parameters (σ_peak_HL, v_HL, widths) for each f_H prescription, then compare computed log L to the paper's reported values. That requires full Path F1 pipeline reproduction and is deferred to v19.1.
 
 **Threshold convention (paper's implicit):**
 - RESOLVED      log L >= -0.10
@@ -174,6 +183,8 @@
 - CLEAR FAIL    log L <= -2.00
 
 **Honest framing:** §9.11 verdict split is self-consistent under the paper's stated threshold convention. The "log L = -2.03 CLEAR FAIL" verdict is robust under T205 σ_unc (= 0.05 from SPARC measurement); the earlier v19.0 claim that "this was a T206 self-normalization artifact" was incorrect (rev19.docx Reviewer 2). The single-point σ/m-only check is NOT sufficient to overturn the verdict split; full Path F1 joint likelihood remains the controlling test. **Headline verdict unchanged.**
+
+**T183 (f_H = 0.61) is NOT in §9.11 verdict split.** T183 is a separate result (v18.32 fluid approximation) and is not part of the paper's headline table. If T183 appears elsewhere in the draft, it should be labeled non-canonical for the §9.11 verdict split.
 
 ---
 
