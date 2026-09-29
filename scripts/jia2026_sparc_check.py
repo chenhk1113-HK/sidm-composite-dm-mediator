@@ -1,22 +1,44 @@
-"""Layer 3 v19.0.3 -- REAL verification per rev192.docx Reviewer 1.
+"""Layer 3 v19.0.5 -- REAL sigma_pred verification per rev192/rev193/rev194.
 
 This script computes sigma_pred(v=100) from the paper's three-term Path F1
 model using each prescription's fitted parameters, then compares to the
 paper's reported per-channel log L values.
 
-Per Reviewer 1 (rev192.docx): a real verification requires:
+Per rev192.docx Reviewer 1: a real verification requires:
   1. Take the paper's three-term Path F1 model
   2. Compute sigma_pred(v=100) for each f_H prescription
   3. Compute log L = -0.5 * ((sigma_pred - 0.193) / sigma_unc)^2
-  4. Compare computed log L to paper's reported values (-0.09, -0.24, -0.60, -2.03)
+  4. Compare computed log L to paper's reported values (-0.09, -0.24, -0.61, -2.03)
 
 This script does exactly that. The fitted parameters come from
-v0.3-prelim/data/results/t207_final_summary.json (canonical T207 fit result).
+v0.3-prelim/data/results/t207_final_summary.json (canonical T207 fit result)
+and v0.3-prelim/data/results/t207c_priored_free_emcee.json (priored free fit
+posterior medians).
 
 Source data path: the SPARC v=100 per-channel log L is the paper's primary
 anchor; sigma_unc = 0.05 is from T205 published SPARC measurement convention.
 The "borrowed" / "yang" / "t202" / "priored free fit" rows are taken directly
 from the paper's section 9.11 verdict split table.
+
+Per rev194.docx Reviewer 1 Issue 1: t202 paper value was -0.60 (truncated)
+historically; updated to -0.61 (rounded from -0.607) per paper convention
+(2 decimal places). The script's computed value -0.607 is unchanged. The
+reference value change is a paper-text edit for rounding consistency, NOT a
+script-side adjustment of the verification target.
+
+Per rev194.docx Reviewer 1 Issue 2: the paper's section 9.11 table reports
+"yang (Yang+ 2025-derived f_H) = 0.79" referring to Yang+ 2025's published
+observation-radius f_H (line 370 of PAPER_V1_DRAFT.md). The T207 fit's
+"yang mode" uses f_H_cf = 0.85 (a T207 internal convention, not the
+per-radius Yang+ value). The SPARC verification uses f_H_int = 0.5 * (0.85 +
+0.45) = 0.650, which is the f_H that goes into the three-term mixture. The
+verification produces log L = -0.243, matching the paper's -0.24. **All four
+prescriptions verify under their respective fit's f_H_int, which is the
+quantity that actually enters the mixture rule.** The other three
+prescriptions (borrowed, t202, priored) happen to have paper-stated f_H
+that matches the fit's f_H_cf or f_H_cc directly; yang is the only case
+where the paper's stated f_H is the Yang+ 2025 published value rather than
+the fit's internal f_H_cf.
 
 Honest framing:
   - sigma_HH uses Phase 44's energy-space Breit-Wigner (sigma_m_at_v from
@@ -27,6 +49,10 @@ Honest framing:
   - sigma_LL is pure Yukawa background: sigma_0_LL * (v_ref/v)^a_slope.
   - width_HL = 50 km/s default from T207 (not fitted per prescription).
   - sigma_unc at v=100 = 0.05 cm^2/g from SPARC T205 published value.
+  - f_H_int = 0.5 * (f_H_cf + f_H_cc) for SPARC v=100 (intermediate halo class).
+  - Tolerance = 0.05 log-units (chosen to accommodate paper's 2-decimal
+    rounding: -0.607 rounds to -0.61 with delta <= 0.005; -0.60 truncation
+    would give delta = 0.007, still within tolerance).
 
 If this script reproduces the paper's per-channel log L, the paper is verified.
 If it doesn't, the paper has a parameter-convention gap that needs explanation.
@@ -217,7 +243,7 @@ def compute_prescription_paper_fH(name, prescription_entry, f_H_paper):
 
 # Compute for each prescription mode
 results = {
-    "method": "Layer 3 v19.0.4 -- real sigma_pred verification per rev193.docx",
+    "method": "Layer 3 v19.0.5 -- real sigma_pred verification per rev192/rev193/rev194",
     "date": "2026-09-29",
     "note": (
         "VERIFICATION SCOPE: SPARC single-channel log L at v=100 only, under Path F1 "
@@ -263,34 +289,19 @@ for name, prescription_entry in t207_data["t207_de_prescription_modes"].items():
     deltas.append(abs(delta_log_L))
 
 # Now add the priored free fit (from T207c emcee posterior median)
-priored_params = priored_data["posterior_medians"]
-v = 100.0
-f_H_cf_p = priored_params["f_H_cf"]
-f_H_cc_p = priored_params["f_H_cc"]
-f_H_int_p = 0.5 * (f_H_cf_p + f_H_cc_p)
-f_L_p = 1.0 - f_H_int_p
-s_HH_p = sigma_HH_at_v(v, priored_params["sigma_0"], priored_params["a_slope"], priored_params["sigma_peak_HH_1"])
-s_HL_p = sigma_HL_at_v(v, priored_params["sigma_0_HL"], priored_params["a_slope"],
-                          priored_params["sigma_peak_HL"], priored_params["v_HL"])
-s_LL_p = sigma_LL_at_v(v, priored_params["sigma_0_LL"], priored_params["a_slope"])
-sigma_pred_priored = f_H_int_p**2 * s_HH_p + 2 * f_H_int_p * f_L_p * s_HL_p + f_L_p**2 * s_LL_p
-log_L_priored = log_L_SPARC(sigma_pred_priored)
-breakdown_priored = {
-    "sigma_HH": float(s_HH_p),
-    "sigma_HL": float(s_HL_p),
-    "sigma_LL": float(s_LL_p),
-    "f_L": float(f_L_p),
-    "contrib_fH2_HH": float(f_H_int_p**2 * s_HH_p),
-    "contrib_2fHfL_HL": float(2 * f_H_int_p * f_L_p * s_HL_p),
-    "contrib_fL2_LL": float(f_L_p**2 * s_LL_p),
-}
+# Use compute_prescription() to avoid duplicating the three-term formula
+# (refactor per rev194.docx Reviewer 1 Polish 3: avoid two code paths).
+priored_entry = {"best_params": priored_data["posterior_medians"]}
+sigma_pred_priored, log_L_priored, f_H_int_p, breakdown_priored = compute_prescription(
+    "priored free fit", priored_entry
+)
 paper_per_channel_log_L_priored = priored_data["per_channel_log_L_at_median"]["SPARC v=100"]
 paper_priored = paper_reported["priored free fit"]
 delta_log_L_priored = log_L_priored - paper_priored["log_L_paper"]
 results["paper_verification"]["priored free fit"] = {
     "f_H_int_used_for_SPARC": float(f_H_int_p),
-    "f_H_cf_params": float(f_H_cf_p),
-    "f_H_cc_params": float(f_H_cc_p),
+    "f_H_cf_params": float(priored_entry["best_params"]["f_H_cf"]),
+    "f_H_cc_params": float(priored_entry["best_params"]["f_H_cc"]),
     "f_H_paper_reported": paper_priored["f_H_in_paper"],
     "sigma_pred_at_v100": float(sigma_pred_priored),
     "log_L_at_v100": float(log_L_priored),
@@ -301,7 +312,7 @@ results["paper_verification"]["priored free fit"] = {
 }
 sigma_pred_paper_fH_p, log_L_paper_fH_p = compute_prescription_paper_fH(
     "priored free fit",
-    {"best_params": priored_params},
+    priored_entry,
     paper_priored["f_H_in_paper"],
 )
 results["paper_verification"]["priored free fit"]["sigma_pred_at_v100_paper_fH"] = float(sigma_pred_paper_fH_p)
@@ -323,9 +334,7 @@ results["verification_summary"] = {
     ),
 }
 
-out = Path(
-    r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\data\results\jia2026_sparc_subset.json"
-)
+out = REPO / "v0.3-prelim" / "data" / "results" / "jia2026_sparc_subset.json"
 out.parent.mkdir(parents=True, exist_ok=True)
 with open(out, "w") as f:
     json.dump(results, f, indent=2)
@@ -355,7 +364,7 @@ print()
 
 # Contrast: what happens if we use paper's "headline" f_H directly (not f_H_int)?
 print("Contrast: what if you used the paper's headline f_H directly (without f_H_int convention)?")
-print(f"  {'Prescription':22s} {'paper_f_H':>10s} {'sigma_pred':>12s} {'log_L_paper_fH':>15s} {'log_L_int':>10s} {'gap':>10s}")
+print(f"  {'Prescription':22s} {'paper_f_H':>10s} {'sigma_pred':>12s} {'log_L_paper_fH':>15s} {'log_L_int':>10s} {'gap (log-units)':>16s}")
 for name, r in results["paper_verification"].items():
     log_L_paper_fH = r['log_L_at_v100_paper_fH']
     log_L_int = r['log_L_at_v100']

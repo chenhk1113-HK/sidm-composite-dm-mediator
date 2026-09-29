@@ -1,5 +1,5 @@
 {
-  "method": "Layer 3 v19.0.4 -- real sigma_pred verification per rev193.docx",
+  "method": "Layer 3 v19.0.5 -- real sigma_pred verification per rev192/rev193/rev194",
   "date": "2026-09-29",
   "note": "VERIFICATION SCOPE: SPARC single-channel log L at v=100 only, under Path F1 three-term decomposition with T207 fitted parameters and T205 sigma_unc = 0.05. Does NOT re-verify Cloud-9, dSph, clusters, or the full 8-channel joint log L. Does NOT run full SPARC per-galaxy likelihood (175 galaxies, baryons, full V(r)) -- that work stays in v19.1 (Jia-style re-implementation). The f_H_int = 0.5*(f_H_cf+f_H_cc) convention for SPARC v=100 is documented in T207_three_term_fit.py:124 and the CHANNELS table line 74, and is now stated explicitly in PAPER_V1_DRAFT.md section 9.11 (v19.0.3+).",
   "paper_verification": {
