@@ -15,6 +15,38 @@
     "phase_runs": true,
     "causality_ok": false
   },
+  "Cloud-9 (Phase 44 Yukawa bg only)": {
+    "name": "Cloud-9 (Phase 44 Yukawa bg only)",
+    "M_halo_Msun": 5000000000.0,
+    "c": 12.0,
+    "sigma_m_cm2_per_g": 0.21,
+    "r_vir_pc": 35092.89849908858,
+    "r_s_pc": 2924.408208257382,
+    "rho_s_Msun_per_pc3": 0.009689620013605297,
+    "v_max_kms": 31.118631093100245,
+    "t_core_Gyr": 58.653669826844265,
+    "t_cross_Gyr": 0.09189153383622575,
+    "t_core_over_Hubble": 4.250265929481468,
+    "t_core_over_t_cross": 638.2924234498047,
+    "phase_runs": false,
+    "causality_ok": true
+  },
+  "Cloud-9 (framework v1 resonance ON)": {
+    "name": "Cloud-9 (framework v1 resonance ON)",
+    "M_halo_Msun": 5000000000.0,
+    "c": 12.0,
+    "sigma_m_cm2_per_g": 164.0,
+    "r_vir_pc": 35092.89849908858,
+    "r_s_pc": 2924.408208257382,
+    "rho_s_Msun_per_pc3": 0.009689620013605297,
+    "v_max_kms": 31.118631093100245,
+    "t_core_Gyr": 0.07510530892461767,
+    "t_cross_Gyr": 0.09189153383622575,
+    "t_core_over_Hubble": 0.005442413690189686,
+    "t_core_over_t_cross": 0.8173256641735306,
+    "phase_runs": true,
+    "causality_ok": false
+  },
   "Cloud-9 (Ohana+ best fit)": {
     "name": "Cloud-9 (Ohana+ best fit)",
     "M_halo_Msun": 4700000000.0,
@@ -31,19 +63,19 @@
     "phase_runs": true,
     "causality_ok": true
   },
-  "Cloud-9 with sigma=70": {
-    "name": "Cloud-9 with sigma=70",
+  "Cloud-9 (reviewer estimate V_max=24.75)": {
+    "name": "Cloud-9 (reviewer estimate V_max=24.75)",
     "M_halo_Msun": 4700000000.0,
     "c": 4.0,
-    "sigma_m_cm2_per_g": 70,
+    "sigma_m_cm2_per_g": 76,
     "r_vir_pc": 34376.515884272354,
     "r_s_pc": 8594.128971068089,
     "rho_s_Msun_per_pc3": 0.0007279454762562015,
     "v_max_kms": 25.0657330081838,
-    "t_core_Gyr": 8.545319139872554,
+    "t_core_Gyr": 7.870688681461563,
     "t_cross_Gyr": 0.33525823020344225,
-    "t_core_over_Hubble": 0.6192260246284459,
-    "t_core_over_t_cross": 25.48876767227179,
+    "t_core_over_Hubble": 0.5703397595262002,
+    "t_core_over_t_cross": 23.476496540250338,
     "phase_runs": true,
     "causality_ok": true
   }
