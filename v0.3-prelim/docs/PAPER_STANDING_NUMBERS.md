@@ -156,35 +156,36 @@
 | "Cloud-9 tension resolved" | t_core=73.7 Gyr > t_Hubble at Phase 44 σ/m; unresolved |
 | "8/8 channel pass as headline" | 8/8 only under priored free fit with SPARC log L=-2.03 (clear fail); honest headline is 4/8 |
 
-## §13. Layer 3 paper §9.11 self-consistency check (v19.0.1)
+## §13. Layer 3 real σ_pred re-derivation at v=100 (v19.0.3)
 
-| Prescription | f_H | log L | z | Reported | Computed (under paper threshold convention) |
-|---|---|---|---|---|---|
-| **borrowed** | 0.85 | -0.09 | 0.42 | RESOLVED | RESOLVED ✓ |
-| **yang** | 0.79 | -0.24 | 0.69 | MARGINAL | MARGINAL ✓ |
-| **t202** | 0.92 | -0.60 | 1.10 | NOT RESOLVED | NOT RESOLVED ✓ |
-| **priored free fit** | 0.06 | -2.03 | 2.01 | CLEAR FAIL | CLEAR FAIL ✓ |
+| Prescription | f_H_cf | f_H_cc | f_H_int = (cf+cc)/2 | σ_pred computed | log L computed | log L paper §9.11 | Delta |
+|---|---|---|---|---|---|---|---|
+| **borrowed** | 0.85 | 0.30 | 0.575 | 0.1716 | -0.092 | -0.09 | -0.002 |
+| **yang** | 0.85 | 0.45 | 0.650 | 0.1582 | -0.243 | -0.24 | -0.003 |
+| **t202** | 0.92 | 0.61 | 0.765 | 0.1379 | -0.607 | -0.60 | -0.007 |
+| **priored free fit** | 0.827 | 0.060 | 0.444 | 0.2936 | -2.025 | -2.03 | 0.005 |
 
-**Source:** `scripts/jia2026_sparc_check.py` (consistency check, NOT verification).
+**Source:** `scripts/jia2026_sparc_check.py` (real σ_pred re-derivation per rev192.docx Reviewer 1).
 
-**SCOPE — this is a consistency check, NOT a verification** (per rev192.docx Reviewer 1):
-- Takes the paper's reported log L values from §9.11 as inputs.
-- Applies the paper's implicit threshold convention.
-- Confirms the four reported verdicts land in the intended bins.
-- Does NOT compute σ_pred(v=100) from the three-term Path F1 model.
-- Does NOT independently derive log L.
+**Methodology (per rev192.docx Reviewer 1):**
+1. Take the paper's three-term Path F1 model from `two_component_three_term.sigma_eff_three_term`
+2. Load T207 fitted parameters from `t207_final_summary.json` (borrowed/yang/t202) and `t207c_priored_free_emcee.json` (priored free fit)
+3. SPARC v=100 channel uses `halo_class='intermediate'`, so f_H_int = 0.5 × (f_H_cf + f_H_cc)
+4. Compute σ_pred(v=100) using Phase 44's energy-space Breit-Wigner for σ_HH and a velocity-space Lorentzian for σ_HL
+5. Compute log L = -0.5 × ((σ_pred - 0.193) / 0.05)² (T205 SPARC published σ_unc = 0.05)
+6. Compare computed log L to paper's §9.11 reported values
 
-A true verification would compute σ_pred(v=100) from the paper's parameters (σ_peak_HL, v_HL, widths) for each f_H prescription, then compare computed log L to the paper's reported values. That requires full Path F1 pipeline reproduction and is deferred to v19.1.
+**Verification: ALL 4 prescriptions reproduce paper's §9.11 values within 0.007 log-units** (max delta = 0.007, well below the 0.05 tolerance).
 
-**Threshold convention (paper's implicit):**
-- RESOLVED      log L >= -0.10
-- MARGINAL      -0.30 <= log L < -0.10
-- NOT RESOLVED  -2.00 <  log L < -0.30
-- CLEAR FAIL    log L <= -2.00
+**What changed vs v19.0/v19.0.1/v19.0.2:**
+- v19.0 was a "surprise positive finding" using wrong prescriptions (flagged by Reviewer 2).
+- v19.0.1 was a circular "verification" that re-read §9.11 numbers and reclassified them with thresholds chosen to match (flagged by Reviewer 1).
+- v19.0.2 reframed v19.0.1 as a "consistency check" but did NOT compute σ_pred (flagged by Reviewer 1).
+- **v19.0.3 actually computes σ_pred(v=100) from the paper's three-term Path F1 model** and reproduces the §9.11 per-channel log L values within 0.007 log-units for all 4 prescriptions. This is the real verification Reviewer 1 asked for.
 
-**Honest framing:** §9.11 verdict split is self-consistent under the paper's stated threshold convention. The "log L = -2.03 CLEAR FAIL" verdict is robust under T205 σ_unc (= 0.05 from SPARC measurement); the earlier v19.0 claim that "this was a T206 self-normalization artifact" was incorrect (rev19.docx Reviewer 2). The single-point σ/m-only check is NOT sufficient to overturn the verdict split; full Path F1 joint likelihood remains the controlling test. **Headline verdict unchanged.**
+**Key insight:** the paper's three-term mixture uses **f_H_int = 0.5 × (f_H_cf + f_H_cc)** for SPARC v=100 (the `intermediate` halo class), NOT just f_H_cf (cluster fraction) or f_H_cc (core fraction). This is documented in `T207_three_term_fit.py:124` and `CHANNELS` table line 74.
 
-**T183 (f_H = 0.61) is NOT in §9.11 verdict split.** T183 is a separate result (v18.32 fluid approximation) and is not part of the paper's headline table. If T183 appears elsewhere in the draft, it should be labeled non-canonical for the §9.11 verdict split.
+**Honest framing:** the §9.11 verdict split is **reproducible from the paper's own parameters**. The "log L = -2.03 CLEAR FAIL" verdict is robust under T205 σ_unc (= 0.05 from SPARC measurement), and the three prescription modes (RESOLVED, MARGINAL, NOT RESOLVED) match exactly. **Headline verdict unchanged.**
 
 ---
 
