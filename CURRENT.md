@@ -2,11 +2,29 @@
 
 > **For:** Anyone who has 60 seconds and wants to know what this project
 > is, what it claims, and what the current best numbers are.
-> Updated with each version-bump round. Last refresh: 2026-09-26 (v18.43).
+> Updated with each version-bump round. Last refresh: 2026-09-29 (v19.0 + future-work).
 
 ---
 
-## Standing: v0.4-prelim+v18.43 (2026-09-27, T215 closed: 10-round review + Tier 1+2 pilot)
+## Standing: v0.4-prelim+v19.0 (2026-09-29, post-paper-freeze rounds complete)
+
+**v19.0 + post-freeze rounds (2026-09-27 → 2026-09-29)** — paper-freeze maintained through **7 post-freeze commits** (`47c1a12` ReviPath merge → `fd4e4d0` future-work round). **ALL 8/8 self-checks PASS** at master `fd4e4d0`.
+
+**Post-freeze activity (chronological):**
+1. `47c1a12` ReviPath merge: §10.4g/h/i → single §10.4g with 7 subsections.
+2. `885a0c9` Multi-UFD held-out test: Segue 1 bound audit + 4-system held-out under frozen parameters (first attempt: "4/4 PASS" headline).
+3. `0342e5b` + `c6e8a95` Tasks B+C report + combined single-md report (sent to Telegram msgs 77319/77320/77321, 77335).
+4. `20c0823` 2Review.docx fix: Path 3 count consistency + pathological-oversuppression flag (3-state PASS/FAIL/PATHOLOGICAL); sent msg 77375.
+5. `0ceb8d2` revi12.docx fix: code-vs-JSON drift via `classify_verdict()` in script; Segue 1 row added to multi-UFD table; "borderline" → "within 7% of bound"; sent msg 77503.
+6. `3bd4520` Sanity-check round: §10.4g.6 deduplication; §11 Conclusions added; References stub; 5 sanity checks run.
+7. `fd4e4d0` Future-work round: T215 numbers in body; 27 missing References [4-50] added; Phase 53 v2 +7.93 log-units clockwork UV prior added to §2.2.
+
+**§10.4g.6 multi-UFD final counts** (5 systems, 3-state verdict):
+- Path 2: 2/3 meaningful PASS + 2/5 PATHOLOGICAL + 1/5 FAIL (Segue 1 2.87x).
+- Path 3: 1/3 meaningful PASS + 2/5 PATHOLOGICAL + 2/5 FAIL (Segue 1 2.87x, Hercules 1.07x).
+- Categorical: 2/3 meaningful PASS + 2/5 PATHOLOGICAL + 1/5 FAIL (Segue 1 1.01x).
+
+## Standing (historic): v0.4-prelim+v18.43 (2026-09-27, T215 closed: 10-round review + Tier 1+2 pilot)
 
 **v18.43 final (2026-09-27)** — T215 investigation closed after **10 review rounds** + Tier 1+2 future-work pilot. **Methods contribution only** — no quantitative t_core measurement.
 

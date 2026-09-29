@@ -39,6 +39,18 @@
 **Read the paper:** [`v0.3-prelim/docs/PAPER_V1_DRAFT.md`](v0.3-prelim/docs/PAPER_V1_DRAFT.md) (v19.0)
 **Final review report:** [`v0.3-prelim/docs/V19_FINAL_REPORT_2026-09-27.md`](v0.3-prelim/docs/V19_FINAL_REPORT_2026-09-27.md)
 
+**Post-paper-freeze rounds (2026-09-28 → 2026-09-29, after v19.0 freeze):**
+
+- **ReviPath merge** (§10.4g/h/i → single §10.4g with 7 subsections; commit `47c1a12`).
+- **Multi-UFD held-out test** (Segue 1 bound audit + 4-system held-out under frozen parameters; commit `885a0c9`). First attempt: "4/4 PASS" headline.
+- **Tasks B+C report** + combined single-md report (commits `0342e5b`, `c6e8a95`). Sent to Telegram (msgs 77319/77320/77321, 77335).
+- **2Review.docx fix** (Path 3 count consistency + pathological-oversuppression flag added; `*_verdict` fields in JSON; commit `20c0823`). Sent msg 77375.
+- **revi12.docx fix** (code-vs-JSON drift via `classify_verdict()` in script; Segue 1 row added to multi-UFD table; "borderline" → "within 7% of bound"; commit `0ceb8d2`). Sent msg 77503.
+- **Sanity-check round** (§10.4g.6 deduplication; §11 Conclusions added; References stub; commit `3bd4520`). 5 sanity checks run: standing-numbers PASS, cross-validation PASS, code-vs-JSON 15/15 PASS, re-run determinism PASS.
+- **Future-work round** (T215 numbers propagated to paper body: T215u 69.57/0.74 Myr, T215r 41.85/21.13 Myr, T215p 5-run gravothermal ratios; 27 missing References [4-50] added; Phase 53 v2 +7.93 log-units clockwork UV prior added to §2.2; commit `fd4e4d0`). **Result: ALL 8/8 self-checks pass.**
+
+**Joint moral (§10.4g.6, post-revi12):** *"Under frozen Path 2/3 fits, generalization failure is concentrated on the tightest low-f_b UFD ceiling (Segue 1), not uniform across all UFDs. Several other 'PASS'es rely on oversuppression to σ_eff ≈ 0, which is excluded by core observations, not by σ/m upper bounds. The puzzle is localized to Segue 1's tight bound, but neither extension predicts the full UFD sample without per-class tuning."*
+
 ---
 
 ## ⚡ Latest version & headline

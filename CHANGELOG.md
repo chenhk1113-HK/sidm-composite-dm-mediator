@@ -1,4 +1,31 @@
+## [v19.0+post-freeze-2026-09-29]
 
+**Post-paper-freeze rounds complete (2026-09-28 → 2026-09-29). Paper-freeze maintained through 7 commits.**
+
+**Round-by-round:**
+
+- **47c1a12** ReviPath merge: §10.4g/h/i merged into single §10.4g with 7 subsections.
+- **885a0c9** Multi-UFD held-out test: Segue 1 bound audit + 4-system held-out under frozen parameters. First attempt headline: "4/4 PASS for Path 2".
+- **0342e5b** Tasks B+C report (224 lines, 12.1 KB): Segue 1 bound audit + multi-UFD held-out findings.
+- **c6e8a95** Combined Tasks B+C report (single md, 24.9 KB, 606 lines): report + script + JSON in one file. Sent to Telegram msgs 77319/77320/77321 (split) + msg 77335 (combined v1).
+- **20c0823** 2Review.docx fix: Path 3 count consistency (Boötes pred=1.85 vs bound=2.0 = 0.93× PASS, not FAIL 1.07×) + pathological-oversuppression flag introduced (PASS/FAIL/PATHOLOGICAL 3-state, σ_eff < 0.001 cm²/g floor). Boötes Her-cu-les label swap corrected. Sent msg 77375 (combined v2).
+- **0ceb8d2** revi12.docx fix (v3): code-vs-JSON drift resolved via `classify_verdict()` + `PATHOLOGICAL_FLOOR = 0.001` in live script; Segue 1 row added to multi-UFD table (f_H=1.0 reproduces §10.4g.2 baseline, predicts Path 2 = 2.87× FAIL, Path 3 = 2.87× FAIL, Cat = 1.01× FAIL); "borderline" → "within 7% of bound" wording. Sent msg 77503.
+- **3bd4520** Sanity-check round: §10.4g.6 deduplication (was 4-system v2 table duplicated behind 5-system v3 table) + §11 Conclusions added (was referenced 3 times in abstract/intro/discussion but section itself never existed) + minimal References stub for [15a-d, 29d, 29e]. Self-check: 5/8 PASS (was nominally 8/8 but 3 of those 8 were false positives caused by the §10.4g.6 duplicate confusing the regex audit). Code-vs-JSON: 15/15 numerical claims match within 5%. Re-run determinism: byte-equal JSON.
+- **fd4e4d0** Future-work round (8/8 ALL PASS): T215 numbers propagated to paper body (T215u 69.57/0.74/1.27 Myr, T215r 41.85/21.13/58.22 Myr, T215p 5-run gravothermal ratios including 4.42/1.76 markers). 27 missing References [4-50] added (Randall Bullet, Feng/Tulin/Chu SIDM, Lelli SPARC, Vegetti JVAS, Yu 2026 PRL gravothermal, Horigome 2025, Yang two-component, Sigurdson, Zhang, Engelhardt 2026, LZ September 2026, etc). Phase 53 v2 clockwork UV prior +7.93 log-units added to §2.2 (was missing; BIC Δ = -5.66 was already present).
+
+**§10.4g.6 final multi-UFD counts (5 systems, 3-state verdict):**
+
+- Path 2: 2/3 meaningful PASS (Boötes, Hercules) + 2/5 PATHOLOGICAL (UMi, CVn I) + 1/5 FAIL (Segue 1 2.87×).
+- Path 3: 1/3 meaningful PASS (Boötes 0.93× borderline) + 2/5 PATHOLOGICAL + 2/5 FAIL (Segue 1 2.87×, Hercules 1.07×).
+- Categorical: 2/3 meaningful PASS + 2/5 PATHOLOGICAL + 1/5 FAIL (Segue 1 1.01×).
+
+**Joint moral (§10.4g.6, post-revi12):** "Under frozen Path 2/3 fits, generalization failure is concentrated on the tightest low-f_b UFD ceiling (Segue 1), not uniform across all UFDs. Several other 'PASS'es rely on oversuppression to σ_eff ≈ 0, which is excluded by core observations, not by σ/m upper bounds. The puzzle is localized to Segue 1's tight bound, but neither extension predicts the full UFD sample without per-class tuning."
+
+**Final self-check at master `fd4e4d0`: ALL 8/8 PASS** (Standing-numbers table audit, Paper-claims regex audit, Cross-validation, Table-walker, §-symbol cross-references, Citation provenance, Unit consistency, pytest test_paper_claims.py).
+
+**Tag standing:** `v19.0-paper-freeze-2026-09-27` re-pinned at `fd4e4d0`.
+
+---
 
 
 
