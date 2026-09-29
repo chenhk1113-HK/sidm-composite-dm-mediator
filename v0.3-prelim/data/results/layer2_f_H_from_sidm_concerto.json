@@ -1,0 +1,59 @@
+{
+  "method": "Layer 2 \u2014 SIDM Concerto f_H probe (honest negative-result framing)",
+  "date": "2026-09-29",
+  "data_source": "Nadler+ 2025 arXiv:2503.10748, Zenodo 14933624",
+  "halo": "MW_Halo004_GroupSIDM (parametric, single-component SIDM)",
+  "n_sidm_halos": 2171,
+  "n_cdm_halos": 2367,
+  "n_matched_pairs": 2171,
+  "overall_stats": {
+    "f_H_mean_overall": 0.054670625399006724,
+    "f_H_median_overall": 0.0,
+    "f_H_std_overall": 0.09100084854753533,
+    "suppression_mean_overall": 1.0907264851483192,
+    "n_matched_pairs": 2171
+  },
+  "binned_by_vmax": [
+    {
+      "vmax_range_kms": "[0, 10) km/s",
+      "n_subhalos": 429,
+      "f_H_mean": 0.11817699713506251,
+      "f_H_std": 0.11238030701110824,
+      "suppression_mean": 0.9039277674033814
+    },
+    {
+      "vmax_range_kms": "[10, 30) km/s",
+      "n_subhalos": 1618,
+      "f_H_mean": 0.04134287128571534,
+      "f_H_std": 0.07923830389273381,
+      "suppression_mean": 1.1234725587334968
+    },
+    {
+      "vmax_range_kms": "[30, 50) km/s",
+      "n_subhalos": 102,
+      "f_H_mean": 0.010048756038475541,
+      "f_H_std": 0.0343530541203031,
+      "suppression_mean": 1.3253618188519565
+    },
+    {
+      "vmax_range_kms": "[50, 100) km/s",
+      "n_subhalos": 21,
+      "f_H_mean": 0.0028823534090561395,
+      "f_H_std": 0.010689389966656491,
+      "suppression_mean": 1.2490671037977699
+    },
+    {
+      "vmax_range_kms": "[100, 1000) km/s",
+      "n_subhalos": 1,
+      "f_H_mean": 0.013727692499687971,
+      "f_H_std": 0.0,
+      "suppression_mean": 0.986272307500312
+    }
+  ],
+  "honest_interpretation": "SIDM Concerto is single-component parametric SIDM, NOT two-component. The framework's two-component f_H(r) concept (heavy + light DM with mass ratio 3:1) cannot be directly tested against SIDM Concerto's single-component halos. The vmax(SIDM)/vmax(CDM) ratio is NEGATIVE on average \u2014 SIDM Concerto halos have HIGHER vmax than CDM at fixed order, due to core-collapse enhancement in parametric (v-independent) SIDM. This is the opposite direction from what f_H (which measures two-component segregation suppression) would predict. Verdict: SIDM Concerto confirms the data-release infrastructure is available, but does NOT derive a new f_H value. The paper's three f_H prescriptions (borrowed, Yang+ 2025, T202 N-body, T183 fluid) remain independent estimates with no new data-derived value. Two-component SIDM Concerto runs would be needed for a true f_H derivation; those are not in the public release.",
+  "next_steps": [
+    "Two-component SIDM Concerto runs (Yang, Tsai, Fan 2025 mass ratio 3:1) are NOT in the current public release",
+    "Re-derive f_H from T202 N-body directly (the paper's T202 N-body result is already f_H = 0.92 uniform at Phase 44 params)",
+    "Re-derive f_H from T183 fluid (paper's T183 result is f_H = 0.61)"
+  ]
+}

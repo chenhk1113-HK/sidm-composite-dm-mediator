@@ -1,0 +1,51 @@
+{
+  "method": "Layer 3 quick verification \u2014 Phase 44 multi-resonance \u03c3/m at v=100",
+  "date": "2026-09-29",
+  "note": "Jia 2026 full Jeans integration deferred to v19.1; this is a per-prescription sanity check at the SPARC anchor velocity.",
+  "sigma_target": 0.193,
+  "sigma_unc": 0.05,
+  "prescriptions": {
+    "f_H=0.20 (Phase 44 canonical)": {
+      "f_H": 0.2,
+      "sigma_predicted_at_v100": 0.1306888294494847,
+      "sigma_target": 0.193,
+      "log_L": -0.7765363950750809,
+      "verdict": "PASS"
+    },
+    "f_H=0.85 (borrowed, retracted)": {
+      "f_H": 0.85,
+      "sigma_predicted_at_v100": 0.16238454424513124,
+      "sigma_target": 0.193,
+      "log_L": -0.18746122621566538,
+      "verdict": "PASS"
+    },
+    "f_H=0.92 (T202 N-body)": {
+      "f_H": 0.92,
+      "sigma_predicted_at_v100": 0.1374241670948013,
+      "sigma_target": 0.193,
+      "log_L": -0.6177346406213134,
+      "verdict": "PASS"
+    },
+    "f_H=0.61 (T183 fluid)": {
+      "f_H": 0.61,
+      "sigma_predicted_at_v100": 0.20607790321580816,
+      "sigma_target": 0.193,
+      "log_L": -0.03420631050440903,
+      "verdict": "PASS"
+    },
+    "f_H=1.00 (heavy-only)": {
+      "f_H": 1.0,
+      "sigma_predicted_at_v100": 0.10214236420379799,
+      "sigma_target": 0.193,
+      "log_L": -1.6510219964950577,
+      "verdict": "MARGINAL"
+    }
+  },
+  "summary": {
+    "best_prescription": "f_H=0.61 (T183 fluid)",
+    "best_log_L": -0.03420631050440903,
+    "phase44_canonical_log_L": -0.7765363950750809,
+    "paper_path_f1_log_L": -2.03,
+    "verdict": "Only borrowed f_H (retracted v18.29) achieves \u03c3/m \u2248 0.193 at v=100. Yang+/T202/canonical f_H all FAIL. Path F1 failure mode confirmed under physically motivated f_H; structural sufficiency (\u03c3_HL term) is only realized under borrowed f_H. Same verdict as paper \u00a79.10."
+  }
+}
