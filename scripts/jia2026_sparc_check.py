@@ -39,7 +39,9 @@ import sys
 
 # Make sure the project code dir is on path so we can import the canonical
 # sigma_m_at_v from phase44_joint_fit
-REPO = Path(r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator")
+# Use Path(__file__) so the script works from any cwd / CI environment.
+SCRIPT_DIR = Path(__file__).resolve().parent
+REPO = SCRIPT_DIR.parent  # scripts/ -> repo root
 sys.path.insert(0, str(REPO / "v0.3-prelim" / "code"))
 
 # Import the canonical machinery
@@ -127,7 +129,7 @@ paper_reported = {
         "f_H_in_paper": 0.79,
     },
     "t202": {
-        "log_L_paper": -0.60,
+        "log_L_paper": -0.61,
         "verdict_paper": "NOT RESOLVED",
         "f_H_in_paper": 0.92,
     },
@@ -167,25 +169,33 @@ def compute_prescription(name, prescription_entry):
     For core_forming channels (Cloud-9), use f_H_cf.
     For core_collapsed channels (UFD, dSph, Cluster), use f_H_cc.
     See T207_three_term_fit.py CHANNELS table.
+
+    Returns (sigma_pred, log_L, f_H, breakdown) where breakdown is a dict with
+    sigma_HH, sigma_HL, sigma_LL components (debug + transparency).
     """
     params = prescription_entry["best_params"]
     f_H_cf = params["f_H_cf"]
     f_H_cc = params["f_H_cc"]
     # SPARC v=100 uses intermediate halo_class
     f_H = 0.5 * (f_H_cf + f_H_cc)
-    sigma_pred = sigma_eff_three_term(
-        v_kms=100.0,
-        f_H=f_H,
-        sigma_0=params["sigma_0"],
-        a_slope=params["a_slope"],
-        sigma_peak_HH_1=params["sigma_peak_HH_1"],
-        sigma_0_HL=params["sigma_0_HL"],
-        sigma_peak_HL=params["sigma_peak_HL"],
-        v_HL=params["v_HL"],
-        sigma_0_LL=params["sigma_0_LL"],
-    )
+    v = 100.0
+    s_HH = sigma_HH_at_v(v, params["sigma_0"], params["a_slope"], params["sigma_peak_HH_1"])
+    s_HL = sigma_HL_at_v(v, params["sigma_0_HL"], params["a_slope"],
+                          params["sigma_peak_HL"], params["v_HL"])
+    s_LL = sigma_LL_at_v(v, params["sigma_0_LL"], params["a_slope"])
+    f_L = 1.0 - f_H
+    sigma_pred = f_H**2 * s_HH + 2 * f_H * f_L * s_HL + f_L**2 * s_LL
     log_L = log_L_SPARC(sigma_pred)
-    return sigma_pred, log_L, f_H
+    breakdown = {
+        "sigma_HH": float(s_HH),
+        "sigma_HL": float(s_HL),
+        "sigma_LL": float(s_LL),
+        "f_L": float(f_L),
+        "contrib_fH2_HH": float(f_H**2 * s_HH),
+        "contrib_2fHfL_HL": float(2 * f_H * f_L * s_HL),
+        "contrib_fL2_LL": float(f_L**2 * s_LL),
+    }
+    return sigma_pred, log_L, f_H, breakdown
 
 
 def compute_prescription_paper_fH(name, prescription_entry, f_H_paper):
@@ -207,12 +217,17 @@ def compute_prescription_paper_fH(name, prescription_entry, f_H_paper):
 
 # Compute for each prescription mode
 results = {
-    "method": "Layer 3 v19.0.3 -- real sigma_pred verification per rev192.docx Reviewer 1",
+    "method": "Layer 3 v19.0.4 -- real sigma_pred verification per rev193.docx",
     "date": "2026-09-29",
     "note": (
-        "Computes sigma_pred(v=100) from paper's three-term Path F1 model using "
-        "T207 prescription-mode fitted parameters, then computes log L and "
-        "compares to paper's reported per-channel log L values."
+        "VERIFICATION SCOPE: SPARC single-channel log L at v=100 only, under Path F1 "
+        "three-term decomposition with T207 fitted parameters and T205 sigma_unc = 0.05. "
+        "Does NOT re-verify Cloud-9, dSph, clusters, or the full 8-channel joint log L. "
+        "Does NOT run full SPARC per-galaxy likelihood (175 galaxies, baryons, full V(r)) "
+        "-- that work stays in v19.1 (Jia-style re-implementation). "
+        "The f_H_int = 0.5*(f_H_cf+f_H_cc) convention for SPARC v=100 is documented in "
+        "T207_three_term_fit.py:124 and the CHANNELS table line 74, and is now stated "
+        "explicitly in PAPER_V1_DRAFT.md section 9.11 (v19.0.3+)."
     ),
     "paper_verification": {},
     "verification_summary": {},
@@ -221,7 +236,7 @@ results = {
 deltas = []
 
 for name, prescription_entry in t207_data["t207_de_prescription_modes"].items():
-    sigma_pred, log_L, f_H_used = compute_prescription(name, prescription_entry)
+    sigma_pred, log_L, f_H_used, breakdown = compute_prescription(name, prescription_entry)
     paper = paper_reported[name]
     paper_per_channel_log_L = prescription_entry["per_channel_log_L"]["SPARC v=100"]
     delta_log_L = log_L - paper["log_L_paper"]
@@ -243,26 +258,54 @@ for name, prescription_entry in t207_data["t207_de_prescription_modes"].items():
         "log_L_paper_section_9_11": paper["log_L_paper"],
         "log_L_paper_per_channel_json": paper_per_channel_log_L,
         "delta_log_L_vs_9_11": float(delta_log_L),
+        "breakdown_at_v100": breakdown,
     }
     deltas.append(abs(delta_log_L))
 
 # Now add the priored free fit (from T207c emcee posterior median)
 priored_params = priored_data["posterior_medians"]
-sigma_pred_priored, log_L_priored, f_H_used_priored = compute_from_params(priored_params)
+v = 100.0
+f_H_cf_p = priored_params["f_H_cf"]
+f_H_cc_p = priored_params["f_H_cc"]
+f_H_int_p = 0.5 * (f_H_cf_p + f_H_cc_p)
+f_L_p = 1.0 - f_H_int_p
+s_HH_p = sigma_HH_at_v(v, priored_params["sigma_0"], priored_params["a_slope"], priored_params["sigma_peak_HH_1"])
+s_HL_p = sigma_HL_at_v(v, priored_params["sigma_0_HL"], priored_params["a_slope"],
+                          priored_params["sigma_peak_HL"], priored_params["v_HL"])
+s_LL_p = sigma_LL_at_v(v, priored_params["sigma_0_LL"], priored_params["a_slope"])
+sigma_pred_priored = f_H_int_p**2 * s_HH_p + 2 * f_H_int_p * f_L_p * s_HL_p + f_L_p**2 * s_LL_p
+log_L_priored = log_L_SPARC(sigma_pred_priored)
+breakdown_priored = {
+    "sigma_HH": float(s_HH_p),
+    "sigma_HL": float(s_HL_p),
+    "sigma_LL": float(s_LL_p),
+    "f_L": float(f_L_p),
+    "contrib_fH2_HH": float(f_H_int_p**2 * s_HH_p),
+    "contrib_2fHfL_HL": float(2 * f_H_int_p * f_L_p * s_HL_p),
+    "contrib_fL2_LL": float(f_L_p**2 * s_LL_p),
+}
 paper_per_channel_log_L_priored = priored_data["per_channel_log_L_at_median"]["SPARC v=100"]
 paper_priored = paper_reported["priored free fit"]
 delta_log_L_priored = log_L_priored - paper_priored["log_L_paper"]
 results["paper_verification"]["priored free fit"] = {
-    "f_H_int_used_for_SPARC": float(f_H_used_priored),
-    "f_H_cf_params": float(priored_params["f_H_cf"]),
-    "f_H_cc_params": float(priored_params["f_H_cc"]),
+    "f_H_int_used_for_SPARC": float(f_H_int_p),
+    "f_H_cf_params": float(f_H_cf_p),
+    "f_H_cc_params": float(f_H_cc_p),
     "f_H_paper_reported": paper_priored["f_H_in_paper"],
     "sigma_pred_at_v100": float(sigma_pred_priored),
     "log_L_at_v100": float(log_L_priored),
     "log_L_paper_section_9_11": paper_priored["log_L_paper"],
     "log_L_paper_per_channel_json": paper_per_channel_log_L_priored,
     "delta_log_L_vs_9_11": float(delta_log_L_priored),
+    "breakdown_at_v100": breakdown_priored,
 }
+sigma_pred_paper_fH_p, log_L_paper_fH_p = compute_prescription_paper_fH(
+    "priored free fit",
+    {"best_params": priored_params},
+    paper_priored["f_H_in_paper"],
+)
+results["paper_verification"]["priored free fit"]["sigma_pred_at_v100_paper_fH"] = float(sigma_pred_paper_fH_p)
+results["paper_verification"]["priored free fit"]["log_L_at_v100_paper_fH"] = float(log_L_paper_fH_p)
 deltas.append(abs(delta_log_L_priored))
 
 # Summary
@@ -297,6 +340,40 @@ for name, r in results["paper_verification"].items():
         f"{r['delta_log_L_vs_9_11']:>8.3f}"
     )
 print()
-print(f"Max delta: {results['verification_summary']['max_delta_log_L']:.3f}")
+
+# Per-prescription breakdown: sigma_HH, sigma_HL, sigma_LL + contributions
+print("Per-prescription breakdown at v=100 (debug + transparency):")
+print(f"  {'Prescription':22s} {'sigma_HH':>10s} {'sigma_HL':>10s} {'sigma_LL':>10s} "
+      f"{'f_H^2*HH':>10s} {'2fHfL*HL':>10s} {'f_L^2*LL':>10s}")
+for name, r in results["paper_verification"].items():
+    bd = r["breakdown_at_v100"]
+    print(
+        f"  {name:22s} {bd['sigma_HH']:>10.4f} {bd['sigma_HL']:>10.4f} {bd['sigma_LL']:>10.6f} "
+        f"{bd['contrib_fH2_HH']:>10.4f} {bd['contrib_2fHfL_HL']:>10.4f} {bd['contrib_fL2_LL']:>10.6f}"
+    )
+print()
+
+# Contrast: what happens if we use paper's "headline" f_H directly (not f_H_int)?
+print("Contrast: what if you used the paper's headline f_H directly (without f_H_int convention)?")
+print(f"  {'Prescription':22s} {'paper_f_H':>10s} {'sigma_pred':>12s} {'log_L_paper_fH':>15s} {'log_L_int':>10s} {'gap':>10s}")
+for name, r in results["paper_verification"].items():
+    log_L_paper_fH = r['log_L_at_v100_paper_fH']
+    log_L_int = r['log_L_at_v100']
+    gap = log_L_paper_fH - log_L_int
+    print(
+        f"  {name:22s} {r['f_H_paper_reported']:>10.3f} {r['sigma_pred_at_v100_paper_fH']:>12.4f} "
+        f"{log_L_paper_fH:>15.3f} {log_L_int:>10.3f} {gap:>10.3f}"
+    )
+print()
+print(f"Max delta vs paper section 9.11: {results['verification_summary']['max_delta_log_L']:.3f}")
 print(f"Verifies paper (delta < 0.05): {results['verification_summary']['verifies_paper']}")
 print(f"Interpretation: {results['verification_summary']['interpretation'][:200]}")
+
+# Regression-test assert (rev193.docx Reviewer 2 §Polish 1): exit non-zero on failure
+max_delta = results["verification_summary"]["max_delta_log_L"]
+TOLERANCE = 0.05
+if max_delta > TOLERANCE:
+    raise SystemExit(
+        f"REGRESSION TEST FAILED: max delta log L = {max_delta:.4f} > {TOLERANCE}. "
+        f"Paper section 9.11 verdict split NOT reproducible within tolerance."
+    )

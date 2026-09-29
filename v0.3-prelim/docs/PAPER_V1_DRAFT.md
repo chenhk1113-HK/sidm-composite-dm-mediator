@@ -285,9 +285,11 @@ The Path F1 three-term σ_eff decomposition (T207, v18.38, §9.9–§9.11) is **
 |---|---|---|---|
 | borrowed (hand-picked f_H) | -0.09 | 0.42 | **RESOLVED** |
 | yang (Yang+ 2025-derived f_H) | -0.24 | 0.69 | **MARGINAL** |
-| t202 (N-body f_H) | -0.60 | 1.10 | **NOT RESOLVED** |
+| t202 (N-body f_H) | -0.61 | 1.10 | **NOT RESOLVED** |
 | free_f_H priored (v18.38) | -2.03 | 2.01 | **CLEAR FAIL** |
 | free_f_H boundary (v18.37) | ≈ 0 (saturated, pathological) | — | (pathology, not a measurement) |
+
+*Note: SPARC log L values rounded to 2 decimal places (paper convention). Full-precision computed values shown in verification table below.*
 
 **Why this matters here (§3.7 location):** A reader should know the σ_eff ceiling exists before they read §9. The priored free fit **trades SPARC fit quality for a physically motivated f_H_cc — standard prior-vs-likelihood tradeoff, not a bug**. Path F1 is a **structural fix**, not an automatic data-resolution. **Full detail in §9.11.**
 
@@ -492,9 +494,29 @@ The priored free fit **trades SPARC fit quality for a physically motivated f_H_c
 |---|---|---|---|
 | borrowed (hand-picked f_H) | -0.09 | 0.42 | **RESOLVED** |
 | yang (Yang+ 2025-derived f_H) | -0.24 | 0.69 | **MARGINAL** |
-| t202 (N-body f_H) | -0.60 | 1.10 | **NOT RESOLVED** |
+| t202 (N-body f_H) | -0.61 | 1.10 | **NOT RESOLVED** |
 | free_f_H priored (v18.38) | -2.03 | 2.01 | **CLEAR FAIL** |
 | free_f_H boundary (v18.37) | ≈ 0 (saturated, pathological) | — | (pathology, not a measurement) |
+
+*Note: SPARC log L values rounded to 2 decimal places (paper convention). Full-precision computed values shown in verification table below.*
+
+**Convention footnote (added v19.0.3, post-rev193.docx):** For the SPARC v=100 channel, the mixture rule uses the `intermediate` halo class (see `T207_three_term_fit.py:124` and the `CHANNELS` table line 74), i.e. **f_H_int = 0.5 · (f_H_cf + f_H_cc)**. Other channels use f_H_cf (Cloud-9) or f_H_cc (UFD, dSph, Cluster) directly. The borrowed/yang/t202/priored f_H values quoted elsewhere in the paper are f_H_cf or f_H_cc for their respective channels; the SPARC channel uses the intermediate mixture. **Without this convention, σ_pred(v=100) is off by 1.8–3.0 log-units, and a reader reproducing §9.11 with f_H = 0.85 (borrowed) directly would compute log L ≈ -1.88, not -0.09.** The convention is documented in the canonical fit code (`T207_three_term_fit.py`); this footnote makes it explicit in the paper text.
+
+**Verification (added v19.0.3, post-rev193.docx Reviewer 2 acceptance):** Independent evaluation of Path F1 with T207 fitted parameters (loaded from `t207_final_summary.json` and `t207c_priored_free_emcee.json`) reproduces the §9.11 SPARC-channel log L values for all four f_H prescriptions within **0.007 log-units**:
+
+| Prescription | f_H_cf | f_H_cc | f_H_int = (cf+cc)/2 | σ_pred computed | log L computed | log L paper | Delta |
+|---|---|---|---|---|---|---|---|
+| borrowed | 0.85 | 0.30 | 0.575 | 0.1716 | -0.092 | -0.09 | -0.002 |
+| yang | 0.85 | 0.45 | 0.650 | 0.1582 | -0.243 | -0.24 | -0.003 |
+| t202 | 0.92 | 0.61 | 0.765 | 0.1379 | -0.607 | -0.60 | -0.007 |
+| priored free fit | 0.827 | 0.060 | 0.444 | 0.2936 | -2.025 | -2.03 | 0.005 |
+
+The CLEAR FAIL of the priored free fit and the RESOLVED/MARGINAL/NOT RESOLVED split under borrowed/Yang/T202 are therefore **pipeline-consistent under T205 σ_unc = 0.05**. Implementation: `scripts/jia2026_sparc_check.py` (filename is historical from an abandoned Jia-framework attempt; see v19.0.1 review — no Jia code is invoked). Source: `v0.3-prelim/data/results/jia2026_sparc_subset.json`.
+
+**Scope limits (per rev193.docx Reviewer 2 §Caveats, must remain visible):**
+1. **One channel, one velocity** — SPARC at v=100 only. Does not re-verify Cloud-9, dSph, clusters, or the full 8-channel joint log L.
+2. **Per-channel Gaussian at the anchor** — Still not full SPARC (175 galaxies, baryons, full V(r)). Jia-style per-galaxy work stays in v19.1.
+3. **width_HL = 50 km/s** — Fixed default from T207 (held fixed across prescriptions). If any prescription had a per-prescription fitted width, it would be documented separately.
 
 **Summary of Path F1 v18.38:**
 - ✅ **Boundary-peak pathology eliminated** (f_H_cc = 0.060 ± 0.012, not 0.004)
