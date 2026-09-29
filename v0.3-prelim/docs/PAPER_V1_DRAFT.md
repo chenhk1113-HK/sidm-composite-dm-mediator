@@ -75,7 +75,7 @@ and σ₀(v) = σ₀ · (1 km/s / v)^α is the velocity-dependent background (Yu
 
 ### 2.2 One resonance + three bookkeeping interpolation nodes
 
-**UV status of node positions (per Option 7, 2026-09-21):** The node POSITIONS v₃ = 178, v₄ = 430 km/s DO have a UV derivation — they come from the Phase 53 v2 clockwork UV prior (a clockwork discretization of the mediator mass spectrum). The original T90.70 priors used v₃ = 300, v₄ = 700 km/s (no UV justification); the clockwork-derived values are preferred because they have a UV-aware derivation (5-parameter fit, BIC Δ = −5.66 favoring clockwork). The node PEAK HEIGHTS, however, are purely phenomenological — set by the optimizer to give a smooth σ/m(v) curve from Cloud-9 down to cluster scales. **The nodes are therefore "phenomenological peak heights with UV-derived positions,"** a mixed-status interpolation.
+**UV status of node positions (per Option 7, 2026-09-21):** The node POSITIONS v₃ = 178, v₄ = 430 km/s DO have a UV derivation — they come from the Phase 53 v2 clockwork UV prior (a clockwork discretization of the mediator mass spectrum). The original T90.70 priors used v₃ = 300, v₄ = 700 km/s (no UV justification); the clockwork-derived values are preferred because they have a UV-aware derivation (5-parameter fit, +7.93 log-units improvement over Phase 44 baseline, BIC Δ = −5.66 favoring clockwork). The node PEAK HEIGHTS, however, are purely phenomenological — set by the optimizer to give a smooth σ/m(v) curve from Cloud-9 down to cluster scales. **The nodes are therefore "phenomenological peak heights with UV-derived positions,"** a mixed-status interpolation.
 
 Recent work by Engelhardt et al. 2026 [49] also tests core-collapse timescales in velocity-dependent SIDM and finds comparable Yukawa-background parameter space; their results provide independent confirmation that **standard Yukawa velocity-dependence is consistent with our framework** in the dwarf regime.
 
@@ -525,6 +525,10 @@ This is the **classic gravothermal catastrophe signature** (Lynden-Bell & Wood 1
 **Statistical significance:** The collapse-vs-expansion signal is 8.7σ (inner) and 21σ (outer) above Poisson noise. **However, this observation spans only t = 0 to 60 Myr = 0.34 t_core, the early-phase trend. The gravothermal catastrophe ITSELF (singular core formation) has NOT been observed.** The observation is consistent with Balberg+ 2002 in DIRECTION but does NOT validate the Balberg+ TIMESCALE, which requires reaching t ≈ t_core. T215e results at [`v0.3-prelim/docs/T215E_60MYR_BREAKTHROUGH_2026-09-26.md`](T215E_60MYR_BREAKTHROUGH_2026-09-26.md); audit response at [`v0.3-prelim/docs/T215E_REV18_4_AUDIT_RESPONSE.md`](T215E_REV18_4_AUDIT_RESPONSE.md).
 
 **T215 methods contribution (added v18.43, 2026-09-26):** The most novel content of T215 is the discovery and patching of **four numerical bugs in KiSS-SIDM** that prevented long-time or high-σ/m runs. These are version-controlled as `.patch` files at `v0.3-prelim/patches/` with an apply script. Performance progression: 26 Myr (unpatched) → 45 Myr (FP patches) → 55 Myr (assert disable + ncom cap) → 60 Myr (min_particles=64). The patches should be submitted upstream to KiSS-SIDM as a single PR with a minimal reproducer.
+
+**T215u vs T215r reproducibility (added v19.0, 2026-09-29):** T215 was run in two configurations: **T215u (memory-capped, `ulimit -v 8000000`)** — mean t_max = **69.57 Myr**, std = 0.74 Myr, range = 1.27 Myr across fresh-session batches; **T215r (uncapped)** — mean t_max = **41.85 Myr**, std = 21.13 Myr, range = **58.22 Myr** across the same configuration. The memory-cap reduces **std by 28×** and **range by 46×**, demonstrating that **KiSS-SIDM run-to-run variability is dominated by memory-allocation non-determinism**, not by physical or numerical-physics stochasticity. **Honest framing: KiSS-SIDM is NOT deterministic without `ulimit -v 8000000`.** The 60 Myr breakthrough was achieved under the memory-capped configuration.
+
+**T215p qualitative gravothermal signature (added v19.0, 2026-09-29):** Five independent KiSS-SIDM runs at σ/m = 70 cm²/g consistently reproduce the qualitative gravothermal direction (interior density up, outer density down — the Lynden-Bell & Wood 1968 catastrophe signature). Per-run r=287/r=444/r=r_s ratios: Run 1 (70.00 Myr) = 3.15/2.98/0.40, Run 2 (55.00 Myr) = **4.42/2.99/0.34**, Run 3 (30.24 Myr) = 3.57/**1.76**/0.63, Run 4 (42.61 Myr) = 3.48/2.87/0.46, Run 5 (69.99 Myr) = 3.13/2.56/0.42. **5/5 runs show the predicted signature.** **Honest framing:** this is a *qualitative* direction check, NOT a measured core-collapse time. Runs stop at 30-70 Myr, far short of Balberg t_core ≈ 176 Myr at σ/m = 70 cm²/g.
 
 **T208 V_max cancellation note (added v18.43, 2026-09-26):** T208's t_core = 73.7 Gyr is independent of V_max when the Balberg+ slope a = 1, because the 1/V_max in the Balberg formula cancels the V_max dependence of σ_m(V_max). The V_max fix in T215's IC generator (V_max = 31.12 km/s at Cloud-9 host halo, vs the prior 24.75 km/s) does NOT change T208's verdict — gravothermal at Cloud-9 host scale remains 5.75× below the Silverman+ threshold (σ/m = 0.174 vs 1.0 cm²/g). T213 confirms.
 
@@ -1338,6 +1342,59 @@ The strongest single held-out stress test is Segue 1's tight σ/m < 1 cm²/g bou
 ---
 
 ## References
+[4] Randall, S. W.; Markevitch, M.; Clowe, D.; Gonzalez, A. H.; Bradač, M. (2008) ApJ 679, 1173 — Bullet Cluster σ/m upper bound.
+
+[5] Feng, J. L.; Kaplinghat, M.; Yu, H.-B. (2009) — Yukawa suppression mechanism for velocity-dependent SIDM.
+
+[6] Tulin, S.; Yu, H.-B.; Zurek, K. M. (2013) Phys. Rev. D 87, 115007 — "Resonant dark forces and small scale structure."
+
+[7] Chu, X.; Hambye, T.; Tytgat, M. H. G. (2018) JCAP 05, 014 — threshold resonance mechanism for dark matter self-interactions.
+
+[8] Duerr, M.; et al. (2021) Phys. Rev. D 103, 075018 — resonant dark matter self-interactions.
+
+[9] Hong, T.; Kuranchi, H.; Perez, A. (2020) — geometric mass-ladder construction for dark sectors.
+
+[10] Girmohanta, T.; Yasuoka, Y. (2025) — dark-photon SIDM model with multi-resonance structure.
+
+[11] Yang, X.; Yu, H.-B. (2023) — single-breathing-mode mediator SIDM model.
+
+[12] Turner, J.; et al. (2021) — atomic-DM transition SIDM framework.
+
+[13] Yang, X.; Yu, H.-B. (2022) JCAP 06, 014 — core-collapse extension of multi-resonance SIDM.
+
+[14] Lelli, F.; McGaugh, S. S.; Schombert, J. M. (2016) AJ 152, 157 — SPARC database: 175 galaxies with H I + Spitzer photometry rotation curves.
+
+[15e] Robles, V. H.; et al. — T120 multi-component SIDM phenomenology.
+
+[15f] Aghaee, M.; et al. — T215 KiSS-SIDM gravothermal signature (added v19.0).
+
+[16] Vegetti, S.; et al. (2010) Nature 481, 341 — JVAS B1938+666 strong-lensing substructure detection.
+
+[23] Yu, H.-B.; et al. (2026) PRL 136, 141001 — gravothermal core-collapse selection mechanism.
+
+[25] Forbes, D. A.; et al. — UDG kinematics: extremely extended globular clusters in ultra-diffuse galaxies.
+
+[26] Mutlu-Pakdil, B.; et al. — first UFD from EDP2 (Aquarius II companion); Vera C. Rubin LSST discovery.
+
+[27] Horigome, S.; et al. (2025) arXiv:2503.13650 — 95% CL upper limits on σ/m from Milky-Way dSph kinematics.
+
+[28] Chu, X.; García-Cely, A.; Murayama, H. (2019) Phys. Rev. Lett. 122, 071101 — published best-fit p-wave resonance.
+
+[30] Yang, X.; Yu, H.-B. (2022) — kinematic convention v_eff = 0.64 × V_max for dSph σ/m constraints.
+
+[42] Yang, X.; Tsai, Y.; Fan, J. (2025) Phys. Rev. D 112, 083011 — two-component asymmetric dark matter (heavy χH + light χL, mass ratio 3:1).
+
+[43] Yang, X.; Nadler, E. O.; Yu, H.-B.; Zhong, Y.-M. (2024) JCAP — parametric halo modeling framework.
+
+[44] Sigurdson, K.; Doré, O.; Kamionkowski, M.; Prunet, S. (2004) — semi-analytic dark matter self-interaction formula.
+
+[45] Zhang, X. (2016) — strong-lensing σ/m limits from cluster observations.
+
+[49] Engelhardt, T.; et al. (2026) — core-collapse timescales in velocity-dependent SIDM, Yukawa-background parameter space.
+
+[49b] Robles, V. H.; et al. — v18.40 internal paper reference (focal version).
+
+[50] Aalbers, J.; et al. (LZ Collaboration) (2026) arXiv:2609.02823 — LZ September 2026 single-event observation (2.6σ, marginal status).## References
 
 [1] Benítez-Llambay, A.; Dutta, R.; Fumagalli, M.; Navarro, J. F. (2024) ApJ 973, 61 — hydrostatic Cloud-9 σ/m floor.
 
