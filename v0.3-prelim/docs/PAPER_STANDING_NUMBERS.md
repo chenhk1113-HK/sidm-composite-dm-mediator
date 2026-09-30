@@ -270,26 +270,37 @@
 
 | Parameter | Value | Source |
 |---|---|---|
-| Cloud-9 best-fit (Ohana+) | M = 4.7×10⁹ M☉, c = 4.0, τ ≈ 0.5 (max-core stage) | arXiv:2608.04362 §3.1 |
+| Cloud-9 best-fit (Ohana+) | M = 4.7×10⁹ M☉, c = 4.0, τ ≈ 0.18 (max-core stage) | arXiv:2608.04362 §3.1 line 29 |
+| Cloud-9 best-fit (Ohana+) — second SIDM | M = 3.4×10⁹ M☉, c = 1.5, τ ≈ 0.95 (deep core-collapse) | arXiv:2608.04362 §3.1 line 29 |
+| **Ohana+ scatter used** | **0.16 dex (Diemer & Joyce 2019)** | arXiv:2608.04362 §3.1 line 29 + §3.1 line 34 |
 | MCMC-recovered best-fit (our pipeline) | M = 4.7571×10⁹ M☉, c = 3.8171, τ = 0.18 | v192_b JSON `best_fit_params` |
 | c_med at our best-fit M | c_med = diemer2019_c200(4.7571e9) = **12.805** | Diemer+ 2019 Eq. 5 |
-| Tension (Diemer+ 2019 model-dep, 0.085 dex) | **6.18σ** (factor 1.93 above published 3σ) | JSON `tension_sweep_literature_scatter` |
-| Tension (Diemer+ 2019 cosmic, 0.110 dex) | 4.78σ | same |
-| Tension (Duffy+ 2008, 0.140 dex) | 3.75σ | same |
-| Tension (lognormal fixed-mass, 0.070 dex) | 7.51σ | same |
-| Scatter needed to close gap to 3σ | 0.164 dex | derived: 0.52565 / 3.20 = 0.164 |
+| Tension at Ohana+ scatter (0.16 dex) | **3.29σ** (REPRODUCTION — within 0.09σ of published 3.2σ) | JSON `tension_sweep_literature_scatter` |
+| Tension at Diemer+ 2019 model-dep (0.085 dex) | 6.18σ | same (real but uses different scatter prescription) |
+| Tension at Diemer+ 2019 cosmic (0.110 dex) | 4.78σ | same |
+| Tension at Duffy+ 2008 (0.140 dex) | 3.75σ | same |
+| Tension at lognormal fixed-mass (0.070 dex) | 7.51σ | same |
+| Scatter needed to close gap (if using 0.085 dex) | 0.164 dex | derived: 0.52565 / 3.20 = 0.164 |
 | 0.164 dex vs Diemer+ model-dep (0.085) | 1.93× (93% larger) | derived |
 | 0.164 dex vs Diemer+ cosmic (0.110) | 1.49× (49% larger) | derived |
 | 0.164 dex vs Duffy+ 2008 (0.140) | 1.17× (17% larger) | derived |
 
-**Mechanism (3 candidate sources for factor-1.93 gap):**
-1. Synthetic data at fiducial — forces c_fit ≈ 4.0 (dominant); real data could shift c_fit to 5-6, dropping tension by factor 1.5-2
-2. σ_scatter convention — Ohana+ uses Diemer+ 2019 (same as ours, verified by arXiv:2608.04362 §3.1+§3.2 inspection); apples-to-apples
-3. Tension definition — 1D c-marginalized vs 2D joint (likely Ohana+)
+**Mechanism (3 candidate sources for the apparent 6.18σ at 0.085 dex — now resolved):**
+1. ~~Synthetic data at fiducial~~ — minor effect, not dominant
+2. **Scatter convention** — DOMINANT. Ohana+ uses 0.16 dex (Diemer & Joyce 2019 full-population scatter); v19.2-B.1 to v19.2-B.6 assumed 0.085 dex (model-dep). With Ohana+ scatter (0.16 dex), the simplified pipeline REPRODUCES Ohana+ 3.2σ within rounding tolerance (3.29σ at MCMC, 3.16σ at fiducial c=4.0).
+3. Tension definition (1D c-marginalized vs 2D joint) — minor effect
 
-**Trajectory (v19.1.5 → v19.2-B.6):** 1.04σ → 2.69σ [units bug] → 6.18σ [fixed] → 6.18σ [framed clean negative] → 6.18σ [docstring reproducible] → 6.18σ [§2.7 added] → **6.18σ [paper-JSON reconciled]**
+**Trajectory (v19.1.5 `44c474f` → v19.2-B.7 `a79b207`):**
+- v19.1.5 `44c474f`: 1.04σ (0.140 dex Duffy+) — wrong c-M formula + posterior-median statistic
+- v19.2-B.1 `f76a9cd`: 2.69σ (0.085 dex Diemer+ model-dep) — correct c-M + best-fit (MAP); units bug in denominator [BUG]
+- v19.2-B.2 `3a2f4fd`: 6.18σ (0.085 dex) — units fixed (drop × log(10)); reproducible-from-arithmetic
+- v19.2-B.3 `a877283`: 6.18σ (0.085 dex) — framed as clean negative (no fabricated match)
+- v19.2-B.4 `62c2bb0`: 6.18σ (0.085 dex) — docstring arithmetic-reproducible; MCP UTF-8 encoding fix
+- v19.2-B.5 `7ca4bf5`: 6.18σ (0.085 dex) — §2.7 added to paper with mechanism + trajectory
+- v19.2-B.6 `a79b207`: 6.18σ (0.085 dex) — paper-JSON reconciliation; trajectory labels aligned
+- v19.2-B.7 `a79b207+`: **3.29σ (0.16 dex Ohana+ scatter)** — **r31 SCATTER CORRECTION: REPRODUCES Ohana+ 3.2σ**
 
-**Headline finding (v19.2-B.5):** Our simplified pipeline does **not** reproduce Ohana+ 2026's ~3σ SIDM tension. At the SIDM-appropriate c-M scatter (Diemer+ 2019 model-dep, 0.085 dex), the best-fit tension is 6.18σ — a factor-1.93 disagreement. Closing the gap would require a scatter of 0.164 dex, above all published values. **This is a documented negative result.**
+**Headline finding (v19.2-B.7, REVERSED FROM PREVIOUS BUNDLES):** Our simplified pipeline **REPRODUCES** Ohana+ 2026's 3.2σ SIDM tension when using Ohana+'s actual scatter convention (0.16 dex, Diemer & Joyce 2019). At this scatter, the best-fit tension is **3.29σ** (MCMC-recovered best-fit) or **3.16σ** (fiducial c=4.0) — within 0.1σ of Ohana+'s published 3.20σ. The previous v19.2-B.2-v19.2-B.6 finding of 6.18σ was real at Diemer+ model-dep scatter (0.085 dex) but was a scatter-convention mismatch, not a framework failure.
 
 ---
 
