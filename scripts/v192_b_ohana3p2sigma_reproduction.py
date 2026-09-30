@@ -193,7 +193,7 @@ def main():
     out = out_dir / "v192_b_ohana3p2sigma_reproduction.json"
 
     # Pick the best literature value (Diemer+ 2019 model-dep is canonical)
-    # NOTE (per r31): Ohana+ 2026 actually use 0.16 dex (Diemer & Joyce 2019),
+    # NOTE (per r31 + r33 verification): Ohana+ 2026 actually use 0.16 dex (DK14, NOT Diemer & Joyce 2019).
     # not 0.085 dex. With 0.16 dex, our pipeline reproduces Ohana+'s 3.2 sigma
     # essentially exactly (3.16 sigma at M=4.7e9, c=4.0).
     canonical_tension = bf_tension["ohana2026"]
@@ -202,7 +202,7 @@ def main():
         "method": "Ohana+ 2026 SIDM tension via corrected Diemer+ 2019 c-M relation",
         "paper": "Ohana, Zhang & Yu 2026, arXiv:2608.04362",
         "date": "2026-09-30",
-        "version": "v19.2-B.9 (r32 polish: wording + 3.16σ fiducial + scatter attribution; 'is consistent with Ohana+ at the fiducial under 0.16 dex convention')",
+        "version": "v19.2-B.10 (r33 polish: 0.13σ attribution corrected; 0.16 dex = DK14 verified (NOT DJ19); 0.085 dex = UNVERIFIED source; lead with 3.16σ fiducial)",
         "fix_summary": (
             "Five rounds of fixes from r26.docx through r31.docx reviewer feedback:\n\n"
             "r26.docx Issue 1 (units bug): v19.2-B v2 multiplied denominator by log(10) "
@@ -220,7 +220,12 @@ def main():
             "r31.docx CORRECTION (Issue 2 -- THE KEY FIX): The Ohana+ PDF "
             "(arXiv:2608.04362 §3.1 line 29) explicitly states 'a 3.2 sigma "
             "deviation below the cosmological median concentration, assuming a "
-            "scatter of 0.16 dex (Diemer and Joyce, 2019)'. Ohana+ does NOT "
+            "scatter of 0.16 dex (Diemer and Joyce, 2019)'. Ohana+ cites DJ19 "
+            "but per r33 Issue 2 verification the actual 0.16 dex scatter is from "
+            "DK14 (Diemer & Kravtsov 2014, arXiv:1407.4730 Table 1) — DJ19 "
+            "focuses on the c-M MEDIAN, not the scatter. The 0.16 dex value is "
+            "the DK14 full-population simulation scatter (an upper limit due to "
+            "measurement error, per DK14 §5.1). Ohana+ does NOT "
             "use Diemer+ model-dep (0.085 dex); they use a 0.16 dex scatter "
             "(which is the upper range of literature, consistent with the "
             "cosmic-variance scatter from Diemer+ 2019).\n\n"
@@ -282,16 +287,24 @@ def main():
                 abs((np.log10(diemer2019_c200(4.7e9)) - np.log10(4.0)) / 0.16 - 3.2)
             ),
             "note": (
-                "Per r32.docx Issue 4: 3.16 sigma at (M=4.7e9, c=4.0, tau=0.18) is "
-                "the fiducial tension at Ohana+'s published best-fit. The 3.29 sigma "
-                "value in match_check uses our MCMC-recovered best-fit (c=3.8171, "
-                "M=4.7571e9), which differs slightly from the published fiducial due "
-                "to MCMC sampling around the input. Both are within 0.1 sigma of "
-                "Ohana+'s published 3.20 sigma."
+                "Per r33.docx Issue 4 (arithmetic correction): 3.161 sigma at "
+                "(M=4.7e9, c=4.0, tau=0.18) is the fiducial tension. Arithmetic: "
+                "(log10(12.819) - log10(4.0)) / 0.16 = 0.505794 / 0.16 = 3.1612.\n\n"
+                "Per r33.docx Issue 1 (0.13 sigma attribution correction): the "
+                "MCMC tension (3.285 sigma) is HIGHER than fiducial (3.161 sigma) "
+                "by 0.124 sigma. Decomposition: c_best-fit 4.0 -> 3.8171 contributes "
+                "+0.128 sigma (larger because c_best-fit is smaller, so "
+                "log10(c_med) - log10(c_fit) is larger); c_med change "
+                "12.819 -> 12.805 contributes only -0.002 sigma (since smaller c_med "
+                "REDUCES the log difference). The 0.13 sigma difference is "
+                "dominated by the MCMC sampling of c_best-fit, not by the change "
+                "in c_med from the slightly-larger MCMC mass.\n\n"
+                "Both 3.161 (fiducial) and 3.285 (MCMC) are within 0.1-0.13 sigma "
+                "of Ohana+'s published 3.20 sigma."
             ),
         },
         "match_check": (
-            f"BEST-FIT tension at OHANA+ SCATTER (0.16 dex, Diemer & Joyce 2019): "
+            f"BEST-FIT tension at OHANA+ SCATTER (0.16 dex, DK14 verified -- NOT DJ19): "
             f"{canonical_tension:.2f} sigma vs Ohana+ 3.20 sigma. "
             f"Delta: {abs(canonical_tension - 3.20):.2f} sigma. "
             f"CONSISTENCY CHECK: pipeline matches Ohana+ within rounding tolerance at the fiducial. "
@@ -306,9 +319,9 @@ def main():
     print(f"\nSaved: {out}")
 
     print("\n" + "=" * 70)
-    print("VERDICT (v19.2-B.9 -- r32 polish: 'is consistent with Ohana+ at the fiducial under 0.16 dex convention')")
+    print("VERDICT (v19.2-B.10 -- r33 polish: 0.13σ attribution corrected; 0.16 dex = DK14 verified; 0.085 dex = UNVERIFIED source; lead with 3.16σ fiducial)")
     print("=" * 70)
-    print(f"\nBest-fit tension at OHANA+ SCATTER (0.16 dex, Diemer & Joyce 2019):")
+    print(f"\nBest-fit tension at OHANA+ SCATTER (0.16 dex, DK14 Diemer & Kravtsov 2014):")
     print(f"  Pipeline result: {canonical_tension:.2f} sigma")
     print(f"  Ohana+ 2026 published: 3.20 sigma")
     print(f"  Delta: {abs(canonical_tension - 3.20):.2f} sigma")
@@ -319,7 +332,7 @@ def main():
         print(f"  {label:30s} (scatter={SIGMA_SCATTER_LITERATURE[label]:.3f} dex): {t:.2f} sigma{marker}")
     print()
     print("REVERSED VERDICT (per r31.docx Issue 2):")
-    print("  - Ohana+ 2026 uses 0.16 dex scatter (not 0.085 dex Diemer+ model-dep)")
+    print("  - Ohana+ 2026 uses 0.16 dex scatter (DK14 Diemer & Kravtsov 2014, NOT DJ19; verified per r33 Issue 2)")
     print(f"  - At Ohana+ scatter: pipeline reproduces {canonical_tension:.2f} sigma")
     print(f"  - Within {abs(canonical_tension - 3.20):.2f} sigma of published 3.20 sigma (CONSISTENCY CHECK at fiducial)")
     print("  - The previous '6.18 sigma clean negative' (v19.2-B.2 to B.6) was a")
@@ -332,12 +345,13 @@ def main():
     print("    number at the Ohana+ fiducial under correct scatter, not the analysis that")
     print("    led to c=4.0. Full reproduction requires real BLN24 N_HI + hydrostatic (v19.2-B v3, deferred).")
     print()
-    print("HONEST INTERPRETATION (per r31):")
-    print("  - At SIDM-appropriate Diemer+ 2019 model-dep (0.085 dex): 6.18 sigma")
-    print("  - At Ohana+'s actual scatter (0.16 dex, same Diemer & Joyce 2019): 3.16 sigma")
-    print("  - Diemer+ 2019 has multiple scatter prescriptions; Ohana+ chose 0.16")
+    print("HONEST INTERPRETATION (per r31 + r33 Issue 2):")
+    print("  - At 0.085 dex scatter (source UNVERIFIED per r33 Issue 2): 6.18 sigma")
+    print("  - At Ohana+'s actual scatter (0.16 dex, DK14 Diemer & Kravtsov 2014 -- verified per r33 Issue 2): 3.16 sigma")
+    print("  - The 0.16 dex scatter is from DK14 (arXiv:1407.4730 Table 1), NOT DJ19 (arXiv:1809.07326)")
+    print("  - DJ19 focuses on the c-M MEDIAN, not the scatter. Ohana+ likely miscited")
     print("  - The 'factor-1.93 disagreement' was a convention difference, not a failure")
-    print("  - With Ohana+'s convention, the simplified pipeline CONSISTENTLY REPRODUCES the 3.2 sigma tension at the fiducial")
+    print("  - With Ohana+'s convention, the simplified pipeline IS CONSISTENT WITH the 3.2 sigma tension at the fiducial")
     print()
     print("Trajectory (full history per r27.docx Issue 4):")
     print("  v19.1.5     Duffy+ 2008 (wrong)  posterior-median  0.140 dex  1.04 sigma")
