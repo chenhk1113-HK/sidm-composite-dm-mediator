@@ -125,20 +125,27 @@ def classify_knudsen(Kn):
         return "SMFP"
 
 
-def balberg_collapse_time(sigma_m_cgs, M_200, c_200):
-    """DEPRECATED in v19.1.1. Use analyze_case() below which uses the canonical
-    T208 gravothermal_t_core_Gyr function with clean units.
-    """
-    # Keep for backward compatibility but mark as broken
-    return None
+# balberg_collapse_time() was DEPRECATED in v19.1.1 and is removed in v19.1.6
+# (per r199.docx smaller item 2). Use analyze_case() which uses the canonical
+# T208 gravothermal_t_core_Gyr function with clean units.
 
 
 def cloud9_parameters():
-    """Cloud-9 RELHIC host halo parameters (Ohana+ 2026 best fit)."""
+    """Cloud-9 RELHIC host halo parameters (Ohana+ 2026 best fit).
+
+    NOTE: The sigma/m = 483 is Ohana+'s INFERRED BULK sigma/m at the halo,
+    not the framework's intrinsic sigma/m at V_max (= 135.3 cm^2/g).
+    The factor 483/135.3 = 3.6x is the post-collapse enhancement, NOT the
+    pre-collapse input. This distinction matters because the gravothermal
+    cascade runs in <halo age at the framework's intrinsic sigma/m, so
+    Ohana+ observed 483 is consistent with the framework being at the
+    amplification regime (i.e. Cloud-9 has already collapsed or is
+    collapsing).
+    """
     return {
         "M_200_Msun": 4.7e9,
         "c_200": 4.0,
-        "sigma_m_cm2_per_g": 483,  # best-fit at tau=0.18
+        "sigma_m_cm2_per_g": 483,  # Ohana+ best-fit BULK sigma/m (post-collapse amplified); NOT framework intrinsic
         "tau": 0.18,
         "M_gas_Msun_observed": 1.4e7,  # approximate from Anand+ 2025
     }
