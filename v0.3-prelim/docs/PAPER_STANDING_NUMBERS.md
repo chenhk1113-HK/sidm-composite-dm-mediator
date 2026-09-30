@@ -266,7 +266,7 @@
 
 **Source**: `scripts/v192_b_ohana3p2sigma_reproduction.py`, output `v192_b_ohana3p2sigma_reproduction.json` (v19.2-B.5).
 
-**Reference**: Ohana, Zhang & Yu 2026, arXiv:2608.04362 — SIDM core-forming halos reduce the c-M tension to ~3σ; CDM requires ~7σ. Uses Diemer & Joyce 2019 c-M median relation (DJ19, arXiv:1809.07326) and Diemer & Kravtsov 2014 0.16 dex scatter (DK14, arXiv:1407.4730).
+**Reference**: Ohana, Zhang & Yu 2026, arXiv:2608.04362 — SIDM core-forming halos reduce the c-M tension to ~3σ; CDM requires ~7σ. Uses Diemer & Joyce 2019 c-M median relation (DJ19, arXiv:1809.07326, ApJ 871, 168) and **DK14/DK15 0.16 dex scatter** (Diemer & Kravtsov 2014, arXiv:1407.4730, ApJ 799, 108 — "DK15" = same paper as DK14, ApJ publication year 2015; the arXiv preprint was 2014).
 
 | Parameter | Value | Source |
 |---|---|---|
