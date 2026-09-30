@@ -412,6 +412,8 @@ Leave-one-out analysis (Phase 47) shows:
 
 **CHARM-ceiling quantification:** The current v18.11 benchmark sits at g_h_SM = 0.00040 (T192 thermal-averaged config, §10.5a), well below the CHARM bound g_h_SM < 0.005. Since σ_SI ∝ g_h_SM², the maximum allowed enhancement from the benchmark is (0.005/0.00040)² ≈ 156×, giving σ_SI ≈ 3×10⁻⁴⁷ cm² and N ≈ 0.55 events at LZ — consistent with the observed 1 event at ~32% Poisson probability. **v18.11 at the CHARM ceiling of its own UV completion is consistent with the LZ observation; the current σ_SI benchmark is ~300× below that ceiling.** This makes v18.11 "falsifiable in real time" but not currently excluded by the LZ null.
 
+**Position vs concurrent work (arXiv:2609.06825, Das et al. 2026, "Inelastic SIDM and LZ 248 keV Event in a Dirac Modular Inverse Seesaw"):** Our §3.5a and Das+ are complementary, not competing. The LZ paper itself (arXiv:2609.02823) tests NREFT operators and inelastic SI/SD (Higgsino-like) — **not SIDM as a category**. Das+ proposes an inelastic-SIDM UV completion (A₄ modular symmetry + Dirac inverse seesaw + scalar mediator) that explains LZ230616 via endothermic kinematics; that paper's contribution is the UV completion. **Our contribution is the phenomenological constraint map (multi-resonance + multi-component + gravothermal) that any such UV completion must satisfy.** Specifically: (a) our framework's σ/m(v) parameterization gives quantitative predictions at the velocity nodes v = 28, 100, 178, 430 km/s; (b) the heavy-channel-only decomposition σ_eff = f_H² × σ_HH(v) is bounded by σ_eff ≤ 0.069 at SPARC (v=100), which constrains the σ_HH term of any Yukawa-mediated SIDM; (c) the Cloud-9 σ/m ≥ 50 cm²/g floor at v=28 km/s sets a lower bound on σ_HH in the dwarf regime that any inelastic endothermic scenario must preserve at v below the mass-splitting threshold. **In short: Das+ provides the UV; we provide the phenomenological constraints on σ/v and σ_eff/v that the UV must reproduce.** A full joint SIDM+LZ fit (Insight Part 2 path) requires specifying m_φ (or equivalently v_trans) in our parameterization, which is deferred to v19.2-D future work.
+
 ### 3.6 dSph upper-limit tension (Horigome+ 2025)
 
 **Data:** Horigome+ 2025 [27] (arXiv:2503.13650) reports 95% CL upper limits on σ/m for both velocity-independent and velocity-dependent SIDM, based on the combined Milky-Way dSph kinematic analysis of 8 classical dSphs and 23 UFDs using the SASHIMI-SIDM framework:
@@ -1889,6 +1891,8 @@ End of Annex A.
 [49b] Robles, V. H.; et al. — v18.40 internal paper reference (focal version).
 
 [50] Aalbers, J.; et al. (LZ Collaboration) (2026) arXiv:2609.02823 — LZ September 2026 single-event observation (2.6σ, marginal status).
+
+[50b] Das, P.; Karmakar, B.; Mahapatra, S.; Paul, P. K. (2026) arXiv:2609.06825 [hep-ph] — "Inelastic Self-interacting Dark Matter and LUX-ZEPLIN 248 keV Event in a Dirac Modular Inverse Seesaw." 35+12 pages, 12 figures, 4 tables. A₄ modular symmetry + Dirac inverse seesaw; scalar mediator serves dual role for SIDM (light) and DM pseudo-Dirac Majorana mass splitting (inelastic). Explains LZ230616 via endothermic scattering kinematics. Predicts stochastic GW background from domain wall annihilation.
 
 [51] Nadler, E. O.; et al. (2025) arXiv:2503.10748 — "SIDM Concerto: Compilation and Data Release of Self-interacting Dark Matter Zoom-in Simulations." 14 cosmological zoom-ins, public data release at Zenodo 14933624. Used in §9.6 Limitations as available source for data-derived f_H(r) profiles.
 
