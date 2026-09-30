@@ -27,6 +27,8 @@ emcee==3.1.6
 
 # Testing (required)
 pytest==9.1.1
+hypothesis==6.103.1   # property-based tests (v0.3-prelim/tests/test_autocheck_hypothesis.py)
+sympy==1.13.3        # symbolic math checks (v0.3-prelim/tests/test_autocheck_sympy.py)
 
 # Documentation & delivery (required for the Telegram PDF pipeline)
 fpdf2==2.8.7

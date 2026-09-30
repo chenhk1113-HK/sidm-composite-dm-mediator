@@ -238,7 +238,7 @@ class SIDM_cross_section(units_and_constants):
 
 
     def dsigmadcostheta(self, sigma0_m, w, v, costheta):
-        """ Returns Eq. (1.2) of Yang et al. (2023) divided by m.
+        r""" Returns Eq. (1.2) of Yang et al. (2023) divided by m.
         Eq. (1.2) is given by
 
         $$
@@ -307,7 +307,7 @@ class SIDM_cross_section(units_and_constants):
 
     
     def sigma_eff_m_interpolate(self, sigma0_m, w):
-        """ Returns the interpolation function of the effective cross section of SIDM divided by m.
+        r""" Returns the interpolation function of the effective cross section of SIDM divided by m.
         The effective cross section is defined by Eq. (1.1) of Yang et al. (2023) [arXiv:2305.16176]:
 
         $$

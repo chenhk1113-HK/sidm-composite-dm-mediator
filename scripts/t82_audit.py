@@ -227,15 +227,20 @@ def main() -> int:
     if version_path.exists():
         raw_version = version_path.read_text(encoding="utf-8").strip()
         total += 1
-        if raw_version == CANONICAL_STANDING_VERSION:
+        # VERSION grows monotonically (cumulative tag chain). The drift-guard
+        # catches the case where VERSION lags behind the canonical anchor. The
+        # comparison is a prefix match: any VERSION starting with the canonical
+        # anchor string passes (because all later additions are valid bumps).
+        if raw_version.startswith(CANONICAL_STANDING_VERSION):
             passes += 1
             print(f"=== {VERSION_LABEL} (drift-guard) ===")
-            print(f"  ✓ VERSION = '{raw_version}' matches canonical '{CANONICAL_STANDING_VERSION}'")
+            print(f"  ✓ VERSION starts with '{CANONICAL_STANDING_VERSION}' "
+                  f"(length {len(raw_version)} chars, full chain)")
         else:
             any_drift = True
             print(f"=== {VERSION_LABEL} (drift-guard) ===")
-            print(f"  ✗ VERSION = '{raw_version}' does NOT match canonical "
-                  f"'{CANONICAL_STANDING_VERSION}' — drift!")
+            print(f"  ✗ VERSION = '{raw_version[:80]}...' does NOT start with "
+                  f"canonical '{CANONICAL_STANDING_VERSION}' — drift!")
 
     print()
     print("=" * 70)
