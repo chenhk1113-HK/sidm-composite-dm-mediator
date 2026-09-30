@@ -204,6 +204,40 @@ The c = 12 vs c = 4 distinction is itself the c-M tension against ΛCDM (Ohana+ 
 
 **Footnote — V_max = 31.12 derivation:** V_max = 31.12 at c = 12 is **derived** from the canonical NFW profile at M_200 = 5×10⁹ M☉, ρ_crit = 1.381×10⁻⁷ M☉/pc³, evaluated at r_max = 2.1626 r_s. This is the same derivation §9.12 used (r_max = 2.16 r_s, post v18.43 T215 IC correction). The match is a consistency check, not a coincidence. At c = 4, the same derivation gives V_max = 25.59 km/s — §9.12 implicitly holds σ/m(V_max) constant across c rather than re-deriving V_max, which is the source of the 11% t_core discrepancy this sweep corrects.
 
+### 2.7 External Consistency Checks (v19.2-B, v19.2-C)
+
+**Question:** Does the framework's Cloud-9 c-M tension and core-radius prediction agree with external observations (Ohana+ 2026 SIDM tension; Nadler+ 2025 SIDM Concerto)?
+
+**Method:** Two independent consistency checks, both at Cloud-9 mass scale (~5×10⁹ M☉).
+
+**Check 1 — v19.2-B: Ohana+ 2026 c-M tension reproduction** (`scripts/v192_b_ohana3p2sigma_reproduction.py`).
+
+- **Reference:** Ohana, Zhang & Yu 2026, arXiv:2608.04362 (SIDM best-fit at Cloud-9: M = 4.7×10⁹ M☉, c = 4.0, τ = 0.18, tension = 3.2σ below cosmological c-M median).
+- **Our pipeline (corrected Diemer+ 2019 c-M relation, best-fit tension, σ_scatter literature sweep):**
+  - Diemer+ 2019 model-dep (0.085 dex): **6.18σ** (factor 1.93 above published)
+  - Diemer+ 2019 cosmic (0.110 dex): 4.78σ
+  - Duffy+ 2008 CDM (0.140 dex): 3.75σ
+  - Lognormal fixed-mass (0.070 dex): 7.51σ
+- **Closing the gap** would require a scatter of 0.164 dex (above all published values: 0.085 dex Diemer+ model-dep, 0.110 dex Diemer+ cosmic, 0.140 dex Duffy+ 2008).
+
+**Verdict (v19.2-B.3, per r27/r28 reviewer feedback):** Our simplified pipeline does **not** reproduce Ohana+ 2026's 3.2σ SIDM tension. At the SIDM-appropriate c-M scatter (Diemer+ 2019 model-dep, 0.085 dex), the best-fit tension is 6.18σ — a factor-1.93 disagreement. None of the standard literature scatter values reproduces 3.2σ. **This is a documented negative result, not a partial match.** Full reproduction requires real BLN24 N_HI data + full hydrostatic equilibrium + correct Balberg+ unit inversion for σ/m (deferred to v19.2-B v3).
+
+**Honest interpretation:** The framework is internally consistent at Cloud-9 (within §2.6 constraints), but the simplified synthetic-data pipeline cannot fully reproduce Ohana+ 2026's published tension. The framework's predictions are **testable** (a real-data pipeline with hydrostatic equilibrium could in principle achieve 3.2σ if systematic effects close the factor-1.93 gap), but they are not yet **fully reproduced** by our pipeline.
+
+**Check 2 — v19.2-C: SIDM Concerto subhalo consistency** (`scripts/v192_c_concerto_subhalo_cloud9.py`).
+
+- **Reference:** Nadler+ 2025, arXiv:2503.10748 (SIDM Concerto cosmological N-body simulation; public release at Zenodo 10.5281/zenodo.14933624).
+- **Data:** MW-mass host (MW_Halo416) parametric catalog (2.8 MB). 2489 SIDM subhalos total; 267 in Cloud-9-mass range (1×10⁹–1×10¹⁰ M☉); 264 with valid parametric fits.
+- **Result:** Median SIDM core radius rc₁ = **0.82 kpc** [16-84: 0.53–1.20 kpc]; median rc₁/R_max = 0.216; median R_max = 3.65 kpc.
+- **Cloud-9 expectation** (Yang+ 2024 SIDM parametric model for τ = 0.18): rc ≈ 0.5 ± 0.3 kpc.
+- **Match:** 1.07σ — within 2σ.
+
+**Verdict (v19.2-C.3, per r27/r28 reviewer feedback):** **What this establishes:** At M = 1×10⁹–1×10¹⁰ M☉ mass scale, SIDM N-body halos from Nadler+ 2025 Concerto have median core radii consistent with the Yang+ 2024 parametric model for τ ≈ 0.18. **What this does not establish:** That this is the correct core radius for Cloud-9 specifically, because (a) Concerto subhalos are MW satellites with tidal stripping, (b) Cloud-9 is a RELHIC near M94 (different environment), (c) single-host statistics. **Conclusion:** The core-radius scaling is consistent across **mass scale**, but environmental differences (tidal vs isolated) prevent cross-validation for Cloud-9 specifically.
+
+**Cross-check synthesis (r28 Bottom Line):**
+
+We document two consistency checks on the framework's Cloud-9 parameters. **First**, our simplified pipeline does not reproduce Ohana+ 2026's 3.2σ SIDM tension: at the Diemer+ 2019 model-dependent c-M scatter (0.085 dex), the best-fit tension is 6.18σ — a factor-1.93 disagreement. Closing the gap would require a scatter of 0.164 dex, above all published values; full reproduction requires real BLN24 N_HI data (deferred to future work). **Second**, the framework's core-radius prediction (rc ≈ 0.5 ± 0.3 kpc) is consistent with the median core radius of Cloud-9-mass SIDM subhalos in the Nadler+ 2025 SIDM Concerto (0.82 kpc, 16-84: 0.53–1.20), though environmental differences (tidal MW satellites vs isolated RELHIC) prevent cross-validation for Cloud-9 specifically. **Both checks are consistent with the constraint-map framing — the framework's predictions are testable, but not yet fully reproduced by our simplified pipeline.**
+
 ---
 
 ## 3. Multi-Channel Observational Constraints

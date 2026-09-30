@@ -55,15 +55,26 @@ except ImportError:
 
 def _run_script(script_name: str, extra_args: list[str] | None = None,
                 timeout: int = 300) -> dict:
-    """Run a Python script in the venv, return parsed JSON or stderr."""
+    """Run a Python script in the venv, return parsed JSON or stderr.
+
+    NOTE (per r28.docx Issue 3): Adds PYTHONIOENCODING=utf-8 to the subprocess
+    environment so scripts that print Unicode checkmarks (e.g. audit_claims.py
+    uses U+2713 PASS / U+2717 FAIL) don't crash on Windows cp1252 default
+    codec. Without this, audit_claims.py exits non-zero on a UnicodeEncodeError
+    on its first Unicode print, silently returning ok: false from the MCP
+    wrapper. With it, scripts print UTF-8 and the wrapper correctly reports
+    the actual audit result.
+    """
     cmd = [str(VENV_PYTHON), str(REPO / "scripts" / script_name)]
     if extra_args:
         cmd.extend(extra_args)
+    # Force UTF-8 encoding so Unicode prints (U+2713 etc.) don't crash on Windows
+    sub_env = {**os.environ, "PYTHONUNBUFFERED": "1", "PYTHONIOENCODING": "utf-8"}
     try:
         proc = subprocess.run(
-            cmd, capture_output=True, text=True,
+            cmd, capture_output=True, text=True, encoding="utf-8",
             cwd=str(REPO), timeout=timeout,
-            env={**os.environ, "PYTHONUNBUFFERED": "1"},
+            env=sub_env,
         )
         # Try parsing stdout as JSON
         out = proc.stdout.strip()

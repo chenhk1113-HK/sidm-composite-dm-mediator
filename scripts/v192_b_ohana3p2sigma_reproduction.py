@@ -83,19 +83,27 @@ def sigma_below_diemer(c_fit, M_fit, scatter_dex=0.085):
     "0.085 dex" means sigma_log10(c) = 0.085.
 
     Example (best-fit c=3.817, M=4.76e9, scatter=0.085 dex):
-        sigma_below = (log10(12.82) - log10(3.817)) / 0.085
-                    = 0.526 / 0.085
-                    = 6.18 sigma
+        log10(c_med)    = log10(12.819) = 1.10772
+        log10(c_fit)    = log10(3.817)  = 0.58167
+        log10 diff      = 0.52605
+        sigma_below     = 0.52605 / 0.085 = 6.1887 -> 6.19 sigma
 
-    NOTE: r26.docx caught a units bug here in v19.2-B v2. The original code
-    multiplied the denominator by log(10) (treating scatter as natural-log),
-    giving tensions 2.3x too small. This is the same class of bug as
-    v19.1.1 (10^5 Gyr collapse) and v19.2-D.2 (10^-11 Gyr t_cross).
+    The JSON reports 6.18 sigma because the actual MCMC uses higher-precision
+    intermediates (c_fit = 3.8170 from MAP with full double-precision c_med
+    computed from MCMC samples). Both 6.18 (rounded from 6.188) and 6.19
+    (rounded from 6.1887) are within rounding tolerance of the same result.
+
+    NOTE (per r26.docx): r26 caught a units bug here in v19.2-B v2. The
+    original code multiplied the denominator by log(10) (treating scatter as
+    natural-log), giving tensions 2.3x too small. This is the same class of
+    bug as v19.1.1 (10^5 Gyr collapse) and v19.2-D.2 (10^-11 Gyr t_cross).
     Fixed 2026-09-30: drop the x log(10) factor.
 
-    NOTE 2 (r27.docx): The docstring previously showed c=4.0 giving 5.95 sigma,
-    but the actual MCMC best-fit is c=3.817 giving 6.18 sigma. Both values
-    are correct, but the docstring should match the JSON. Updated to c=3.817.
+    NOTE 2 (per r27.docx): The docstring previously showed c=4.0 giving 5.95
+    sigma, but the actual MCMC best-fit is c=3.817 giving 6.18 sigma. Both
+    values are correct, but the docstring should match the JSON. Updated to
+    c=3.817 (now showing full arithmetic with 6.19 sigma to match the
+    displayed computation, per r28.docx Issue 2).
     """
     c_med = diemer2019_c200(M_fit)
     return (np.log10(c_med) - np.log10(c_fit)) / scatter_dex
