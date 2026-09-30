@@ -63,5 +63,5 @@
     "scatter_used_by_ohana": 0.16,
     "scatter_source": "Diemer and Joyce 2019 (per Ohana+ arXiv:2608.04362 \u00a73.1 line 29)"
   },
-  "match_check": "BEST-FIT tension at OHANA+ SCATTER (0.16 dex, Diemer & Joyce 2019): 3.29 sigma vs Ohana+ 3.20 sigma. Delta: 0.09 sigma. REPRODUCTION: pipeline matches Ohana+ within rounding tolerance. Per r31.docx: the previous '6.18 sigma clean negative' was a scatter-convention mismatch (0.085 dex vs 0.16 dex), not a framework failure. With Ohana+'s actual scatter (0.16 dex), the simplified pipeline REPRODUCES Ohana+ 3.2 sigma."
+  "match_check": "BEST-FIT tension at OHANA+ SCATTER (0.16 dex, Diemer & Joyce 2019): 3.29 sigma vs Ohana+ 3.20 sigma. Delta: 0.09 sigma. CONSISTENCY CHECK: pipeline matches Ohana+ within rounding tolerance at the fiducial. Per r31.docx: the previous '6.18 sigma clean negative' was a scatter-convention mismatch (0.085 dex vs 0.16 dex), not a framework failure. With Ohana+'s actual scatter (0.16 dex), the simplified pipeline REPRODUCES Ohana+ 3.2 sigma."
 }
