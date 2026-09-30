@@ -175,7 +175,7 @@ def main():
         "method": "SIDM Concerto MW416 subhalo parametric fit analysis (consistency check at Cloud-9 mass scale)",
         "paper": "Nadler+ 2025, arXiv:2503.10748 (Zenodo: 10.5281/zenodo.14933624)",
         "date": "2026-09-30",
-        "version": "v19.2-C.2 (reframed per r26.docx Issue 3: consistency check, not independent validation)",
+        "version": "v19.2-C.3 (r27.docx Issue 5: sharpened consistency check framing)",
         "data_source": {
             "file": "MW_Halo416_MilkyWaySIDM_parametric.tar",
             "size_bytes": TAR_FILE.stat().st_size if TAR_FILE.exists() else None,
@@ -203,13 +203,20 @@ def main():
                 "Concerto SIDM subhalos in Cloud-9 mass range have median core "
                 f"radius {rc_median:.2f} kpc, which matches Cloud-9 expectation "
                 f"({rc_c9_bench} +/- {rc_c9_unc} kpc) within {delta:.2f} sigma. "
-                "Per r26.docx Issue 3: this is a CONSISTENCY CHECK at similar "
-                "mass scale, NOT an independent validation. Concerto subhalos "
-                "are MW satellites (tidal stripping environment); Cloud-9 is a "
-                "RELHIC near M94 (more isolated). The environmental mismatch "
-                "prevents a definitive cross-validation. The match to within 1 "
-                "sigma is consistent with -- not proof of -- the framework's "
-                "core-size scaling for tau=0.18 SIDM halos."
+                "Per r27.docx Issue 5 (sharpened from r26 Issue 3):\n"
+                "  WHAT THIS ESTABLISHES: At M = 1e9-1e10 Msun mass scale, "
+                "SIDM N-body halos from Nadler+ 2025 Concerto have median core "
+                f"radii {rc_median:.2f} kpc (16-84: {rc_q16:.2f}-{rc_q84:.2f}), "
+                "consistent with the Yang+ 2024 parametric model for tau ~ 0.18 "
+                "at this mass scale.\n"
+                "  WHAT THIS DOES NOT ESTABLISH: That this is the correct core "
+                "radius for Cloud-9 specifically, because (a) Concerto subhalos "
+                "are MW satellites with tidal stripping, (b) Cloud-9 is a "
+                "RELHIC near M94 (different environment), (c) single-host "
+                "statistics.\n"
+                "  CONCLUSION: The core-radius scaling is consistent across "
+                "MASS SCALE, but environmental differences (tidal vs isolated) "
+                "prevent cross-validation for Cloud-9 specifically."
             ),
         },
         "limitations_remaining": [
@@ -228,7 +235,7 @@ def main():
 
     # Verdict
     print("\n" + "=" * 70)
-    print("VERDICT (v19.2-C.2 -- reframed per r26.docx Issue 3)")
+    print("VERDICT (v19.2-C.3 -- sharpened per r27.docx Issue 5)")
     print("=" * 70)
     print(f"\nConcerto MW416 SIDM subhalos in Cloud-9-mass range:")
     print(f"  N halos: {n_c9}")
@@ -236,11 +243,14 @@ def main():
     print(f"  Median rc1/Rmax: {ratio_median:.3f}")
     print(f"\nCloud-9 benchmark (Yang+ 2024 SIDM tau=0.18): rc ~ 0.5 +/- 0.3 kpc")
     print(f"\nMatch: {delta:.2f} sigma -- {match}")
-    print(f"\nPer r26.docx Issue 3: this is a CONSISTENCY CHECK, not independent")
-    print(f"validation. Concerto subhalos experience MW tidal stripping;")
-    print(f"Cloud-9 (RELHIC near M94) is more isolated. The match to within 1")
-    print(f"sigma is consistent with but does not prove the framework's core-size")
-    print(f"scaling for tau=0.18 SIDM halos.")
+    print(f"\nPer r27.docx Issue 5 (sharpened):")
+    print(f"  ESTABLISHES: At M = 1e9-1e10 Msun, SIDM N-body core radius scaling")
+    print(f"    is consistent with Yang+ 2024 parametric model for tau ~ 0.18.")
+    print(f"  DOES NOT ESTABLISH: Correct core radius for Cloud-9 specifically,")
+    print(f"    due to (a) tidal stripping in Concerto MW host, (b) Cloud-9 is")
+    print(f"    RELHIC near M94 (different env), (c) single-host statistics.")
+    print(f"  CONCLUSION: Consistent across MASS SCALE; environmental differences")
+    print(f"    (tidal vs isolated) prevent cross-validation for Cloud-9.")
 
 
 if __name__ == "__main__":

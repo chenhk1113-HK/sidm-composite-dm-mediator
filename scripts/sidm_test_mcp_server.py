@@ -196,16 +196,23 @@ def tool_run_all_audits() -> str:
 
 
 def tool_compare_paper_to_json(target: str = "2.6") -> str:
-    """Specifically find paper-vs-JSON mismatches for a given section.
+    """Find paper-vs-JSON mismatches for a given section.
 
     Per Rule 29 (r25/r26 reviewer issue): paper table and JSON often diverge.
     This tool extracts values from both and compares them.
 
+    NOTE (per r27.docx minor 3): The implementation now actually does numeric
+    comparison -- extracts key findings from JSON, searches paper section for
+    those values, reports found/missing.
+
     Args:
         target: Section ID to compare (default "2.6" for the σ_peak sweep).
 
-    Returns JSON with {section, paper_values: [...], json_values: [...], mismatches: [...]}
+    Returns JSON with {section, paper_section_length, json_version,
+                       json_key_findings_count, json_findings,
+                       paper_matches_per_finding, mismatches}
     """
+    import re
     paper_path = REPO / "v0.3-prelim" / "docs" / "PAPER_V1_DRAFT.md"
     # Find most recent σ_peak sensitivity JSON
     json_path = REPO / "v0.3-prelim" / "data" / "results" / "v192_a_phase44_sigma_peak_sensitivity.json"
@@ -222,13 +229,60 @@ def tool_compare_paper_to_json(target: str = "2.6") -> str:
     next_marker = next_marker if next_marker > 0 else len(paper_text)
     section_text = paper_text[start:next_marker]
 
+    # Extract numeric claims from paper section
+    paper_numbers = re.findall(r"[-+]?\d*\.?\d+(?:[eE][-+]?\d+)?", section_text)
+    paper_numbers_set = set(paper_numbers)
+
+    # Extract numeric values mentioned in JSON key_findings (strings or dicts)
+    findings = json_data.get("key_findings", [])
+    finding_values = []
+    for f in findings:
+        if isinstance(f, dict):
+            v = f.get("value") or f.get("sigma_peak") or f.get("value_cm2_per_g")
+            if v is not None:
+                finding_values.append({"label": f.get("label", "?"), "value": v})
+            else:
+                # dict without standard value key -- extract any number from its string repr
+                nums = re.findall(r"[-+]?\d*\.?\d+(?:[eE][-+]?\d+)?", str(f))
+                for n in nums[:5]:
+                    finding_values.append({"label": "?", "value": float(n)})
+        elif isinstance(f, str):
+            # String finding -- extract numbers from the text
+            nums = re.findall(r"[-+]?\d*\.?\d+(?:[eE][-+]?\d+)?", f)
+            for n in nums[:5]:
+                finding_values.append({"label": f[:60], "value": float(n)})
+        elif isinstance(f, (int, float)):
+            finding_values.append({"label": "?", "value": f})
+
+    # For each JSON finding, check if its value (or a rounded version) appears in paper
+    mismatches = []
+    matches = []
+    for fv in finding_values:
+        v = fv["value"]
+        v_str = f"{v:.2f}"
+        v_int_str = f"{int(round(v))}"
+        v_one_decimal = f"{v:.1f}"
+        found = (v_str in section_text) or (v_int_str in paper_numbers_set) or (v_one_decimal in section_text)
+        if found:
+            matches.append(fv)
+        else:
+            mismatches.append(fv)
+
     return json.dumps({
         "ok": True,
         "section": target,
         "paper_section_length": len(section_text),
         "json_version": json_data.get("version", "unknown"),
-        "json_key_findings_count": len(json_data.get("key_findings", [])),
-        "note": "Manual comparison needed; tool_audit_claims provides automated walk"
+        "json_key_findings_count": len(findings),
+        "json_findings_extracted_values": len(finding_values),
+        "matches_count": len(matches),
+        "mismatches_count": len(mismatches),
+        "mismatches_sample": mismatches[:10],
+        "note": (
+            f"Found {len(matches)}/{len(finding_values)} extracted JSON values in paper section "
+            f"via value-string search. {len(mismatches)} missing. Use tool_audit_claims for "
+            f"comprehensive paper-vs-JSON walk."
+        ),
     })
 
 
@@ -270,8 +324,12 @@ TOOL_DEFS = [
     },
     {
         "name": "sidm_compare_paper_to_json",
-        "description": ("Find paper-vs-JSON mismatches for a given section. Args: target (str) — section ID "
-                        "(default '2.6'). Per Rule 29, paper table and JSON often diverge; this exposes the gap."),
+        "description": ("Compare paper section against corresponding JSON key findings. "
+                        "Args: target (str) -- section ID (default '2.6'). Returns {section, "
+                        "paper_section_length, json_version, json_key_findings_count, "
+                        "matches_count, mismatches_count, mismatches}. Per Rule 29, paper "
+                        "tables and JSONs often diverge; this tool does value-string search "
+                        "to expose the gaps."),
         "properties": {"target": {"type": "string", "default": "2.6"}},
     },
 ]

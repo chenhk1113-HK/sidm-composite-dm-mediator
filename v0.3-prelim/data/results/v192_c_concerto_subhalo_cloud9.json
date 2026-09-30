@@ -2,7 +2,7 @@
   "method": "SIDM Concerto MW416 subhalo parametric fit analysis (consistency check at Cloud-9 mass scale)",
   "paper": "Nadler+ 2025, arXiv:2503.10748 (Zenodo: 10.5281/zenodo.14933624)",
   "date": "2026-09-30",
-  "version": "v19.2-C.2 (reframed per r26.docx Issue 3: consistency check, not independent validation)",
+  "version": "v19.2-C.3 (r27.docx Issue 5: sharpened consistency check framing)",
   "data_source": {
     "file": "MW_Halo416_MilkyWaySIDM_parametric.tar",
     "size_bytes": 2816000,
@@ -36,7 +36,7 @@
   "match_check": {
     "delta_sigma": 1.0706538085364024,
     "verdict": "WITHIN 2 sigma",
-    "interpretation": "Concerto SIDM subhalos in Cloud-9 mass range have median core radius 0.82 kpc, which matches Cloud-9 expectation (0.5 +/- 0.3 kpc) within 1.07 sigma. Per r26.docx Issue 3: this is a CONSISTENCY CHECK at similar mass scale, NOT an independent validation. Concerto subhalos are MW satellites (tidal stripping environment); Cloud-9 is a RELHIC near M94 (more isolated). The environmental mismatch prevents a definitive cross-validation. The match to within 1 sigma is consistent with -- not proof of -- the framework's core-size scaling for tau=0.18 SIDM halos."
+    "interpretation": "Concerto SIDM subhalos in Cloud-9 mass range have median core radius 0.82 kpc, which matches Cloud-9 expectation (0.5 +/- 0.3 kpc) within 1.07 sigma. Per r27.docx Issue 5 (sharpened from r26 Issue 3):\n  WHAT THIS ESTABLISHES: At M = 1e9-1e10 Msun mass scale, SIDM N-body halos from Nadler+ 2025 Concerto have median core radii 0.82 kpc (16-84: 0.53-1.20), consistent with the Yang+ 2024 parametric model for tau ~ 0.18 at this mass scale.\n  WHAT THIS DOES NOT ESTABLISH: That this is the correct core radius for Cloud-9 specifically, because (a) Concerto subhalos are MW satellites with tidal stripping, (b) Cloud-9 is a RELHIC near M94 (different environment), (c) single-host statistics.\n  CONCLUSION: The core-radius scaling is consistent across MASS SCALE, but environmental differences (tidal vs isolated) prevent cross-validation for Cloud-9 specifically."
   },
   "limitations_remaining": [
     "Concerto subhalos experience tidal stripping from MW-mass host; Cloud-9 (RELHIC near M94) likely doesn't. rc1 here may be slightly underestimated due to environment effects.",
