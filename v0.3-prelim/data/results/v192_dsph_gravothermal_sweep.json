@@ -1,7 +1,7 @@
 {
   "method": "Paper sigma/m convention (Gaussian) + three-term mixture + canonical T212 t_cross",
   "date": "2026-09-30",
-  "version": "v19.2-D.5",
+  "version": "v19.2-D.6",
   "framework_parameters": {
     "Phase44_sigma_0_cm2_per_g": 0.052,
     "Phase44_a_slope": 1.0,
@@ -209,7 +209,7 @@
     "all_dSphs_pass_observational": true,
     "all_dSphs_pass_gravothermal_no_collapse": false,
     "all_dSphs_pass_causality": true,
-    "interpretation": "Per r20.docx Bug 1 fix: paper convention (Gaussian w=4.4) gives sigma/m ~0.5-2.5 cm^2/g at dSph scale (not 5-18 cm^2/g from phase44_sigma_HH_at_v). This is closer to published sigma_eff. Per r20.docx Bug 2 fix: t_cross now uses canonical T212 function (r_s = r_vir/c), giving physically meaningful values (~0.05-0.5 Gyr). Causality verdict is now meaningful. Per r20.docx recommendation 5: 'NEW DISCOVERY' marked as PROVISIONAL. After Bug fixes, the 100x microphysical-vs-observational inconsistency shrinks significantly. The picture is now: framework sigma/m and sigma_eff_published are within ~10x at dSph scale, not 100x. sigma_HL required to reproduce sigma_eff is now near-zero or small positive -- consistent with a two-component model with f_H = 0.30."
+    "interpretation": "Per r21.docx: For 7 of 8 halos, |sigma_HL| < 0.05 cm^2/g (consistent with f_H = 0.30). Fornax requires sigma_HL = -0.47 cm^2/g -- an internal inconsistency between the framework's sigma/m(v) and sigma_eff(v) curves at v=15 km/s. The framework still passes the Fornax observational bound (sigma_eff = 0.032 < 1 cm^2/g). Gravothermal prediction: all 8 halos collapse in t_core = 0.7-6.3 Gyr (well below Hubble), contradicting dSph observations showing no dense cores. The framework's only mechanism to prevent collapse at dSph scale is the width of the v1 resonance: a narrower Gaussian (w <= 3 km/s instead of 4.4) would suppress the v1 tail at v=15 while still reaching Cloud-9's V_max=31.12. The current w=4.4 was chosen to fit sigma/m(V_max) = 135.3 in section 9.12; a re-fit with the dSph constraint included would test whether a narrower width is consistent with all channels. Both findings (Fornax internal inconsistency + gravothermal prediction) require N-body resolution."
   },
   "limitations": [
     "Analytical Balberg+ formula; no N-body at dSph scale.",
