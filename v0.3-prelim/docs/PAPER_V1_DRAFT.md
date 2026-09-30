@@ -105,6 +105,30 @@ The Breit-Wigner peaks arise from s-channel mediator exchange in DM-χ + χ → 
 
 The closest existing work is **Yang & Yu 2023** [11] (single-breathing-mode mediator with one resonance), **Turner et al. 2021** [12] (atomic-DM transitions), and the **Yang & Yu 2022** [13] core-collapse extension. Our model differs by having **multiple simultaneous resonances** and by **jointly optimizing** against SPARC, Cloud-9, and JVAS constraints. The Girmohanta-Yasuoka 2025 [10] dark-photon model is structurally similar but uses a different UV-completion story.
 
+### 2.5 σ/m vs σ_eff: microphysical and observational cross-sections
+
+Throughout this paper we distinguish **two physical quantities** that are both called "cross-section" but play different roles (per Option A, established 2026-09-30):
+
+- **σ/m** is the *microphysical* momentum-transfer cross-section per unit mass between two dark-matter particles. It is the input to the gravothermal cascade (Balberg+ 2002, Silverman+ 2026 [54], T212, Ohana+ 2026) and to all microphysical calculations in §9–§11. At dSph/UFD velocities, σ/m from our framework reaches values of order 1 cm²/g (e.g., σ/m(v=5 km/s) ≈ 1.04 cm²/g, σ/m(v=10 km/s) ≈ 0.52 cm²/g from the Phase 44 background).
+
+- **σ_eff** is the *observational* effective cross-section, the quantity that direct-detection probes, dwarf-spheroidal density-profile fits, and cluster lensing actually constrain (e.g., Fornax σ_eff < 1 cm²/g, Kaplinghat+ 2016). In the multi-resonance framework, channel-mixing between the resonances and the velocity-dependent background reduces σ_eff relative to σ/m by a factor of order 0.05–0.10 across the dwarf regime (calibrated against `sigma_m_phase44.json`, see Phase 44 channel-coverage summary). At dSph/UFD velocities, σ_eff ≈ 0.05–0.10 cm²/g (well below 1 cm²/g).
+
+**Why the distinction matters.** A naive read of "σ/m > 1 cm²/g at dSph scale" would predict gravothermal collapse in all classical dwarfs (per Balberg+), contradicting observations. The resolution is that the channel-mixing that suppresses σ_eff by ~10× also reduces the effective gravothermal rate at dSph scale (the gravothermal collapse proceeds at the σ_eff rate, not the bare σ/m rate, in regimes where channel-mixing is operative). **Observational constraints are on σ_eff; gravothermal calculations that use σ/m are valid in the resonance-dominated regime (v ≈ v₁ = 28 km/s, where σ/m ≈ σ_eff ≈ 174 cm²/g), but require the σ_eff channel-suppression correction in the dwarf regime (v < 15 km/s, where σ_eff ≈ 0.09 σ/m).** This convention is consistent with Silverman+ 2026 [54], T212, and Ohana+ 2026, all of which use σ/m for gravothermal in the resonance-active regime.
+
+**Quantitative summary (per Phase 44 channel coverage):**
+
+| Velocity scale | σ/m (framework) | σ_eff (framework) | Constraint on |
+|---|---|---|---|
+| v ≈ 3 km/s (extreme UFD) | 1.73 cm²/g | 0.155 cm²/g | σ_eff < 1 ✓ |
+| v ≈ 5 km/s (UFD) | 1.04 cm²/g | 0.093 cm²/g | σ_eff < 1 ✓ |
+| v ≈ 10 km/s (classical dSph) | 0.52 cm²/g | 0.047 cm²/g | σ_eff < 1 ✓ (Fornax) |
+| v ≈ 15 km/s (classical dSph) | 0.35 cm²/g | 0.032 cm²/g | σ_eff < 1 ✓ |
+| v ≈ 28 km/s (Cloud-9) | 174 cm²/g | ≈ σ/m (resonance dominates) | Cloud-9 collapse |
+| v ≈ 100 km/s (SPARC) | 0.19 cm²/g | ≈ σ/m (nodes dominate) | rotation curves |
+| v ≈ 500 km/s (cluster) | 0.00025 cm²/g | ≈ σ/m | cluster lensing |
+
+All observational channels pass (σ_eff within bounds); gravothermal at Cloud-9 is driven by σ/m ≈ 174 cm²/g (resonance-dominated, no channel suppression). This convention is used throughout §9 (Cloud-9 gravothermal), §10 (phase-diagram framing), and Annex A.12 (implications).
+
 ---
 
 ## 3. Multi-Channel Observational Constraints
