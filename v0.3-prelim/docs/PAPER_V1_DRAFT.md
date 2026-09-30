@@ -194,7 +194,7 @@ Code: `scripts/v192_a_phase44_sigma_peak_sensitivity.py`.
 **Parameterization comparison (sanity check):** The Breit-Wigner parameterization used in v19.2-A v1 (and the Phase 44 multi-channel fit) gives σ/m values that differ from the paper's Gaussian by up to ~17× at UFD velocities. The Gaussian (paper convention) is what §2.5 and §9.12 state.
 
 **Bottom line:** Under the paper's own σ/m convention (Gaussian w = 4.4) and causality criterion (ratio > 3), with self-consistent canonical NFW at each c:
-- **At c = 12:** the continuous viable window is [49.81, 57.25] cm²/g (knife-edge, width ~7.43). On the swept grid, only σ_peak = 50 passes both constraints (ratio = 3.43). σ_peak ≥ 75 fails c = 12 causality.
+- **At c = 12:** the continuous viable window is [49.81, 57.24] cm²/g (knife-edge, width ~7.43). On the swept grid, only σ_peak = 50 passes both constraints (ratio = 3.43). σ_peak ≥ 75 fails c = 12 causality.
 - **At c = 4** (Ohana+ anchor, §9.12 physical anchor): continuous window is [49.81, 250] cm²/g. On the swept grid, σ_peak ∈ {50, …, 250} all pass both. **Framework is consistent at c = 4.**
 - **Fornax σ_HL outlier** is marginal for σ_peak ≤ 50, substantive for σ_peak ≥ 75.
 
