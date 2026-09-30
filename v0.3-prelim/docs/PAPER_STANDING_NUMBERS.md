@@ -218,6 +218,50 @@
 
 ---
 
+## §14. σ_peak sensitivity sweep (v19.2-A, canonical NFW)
+
+**Source**: `scripts/v192_a_phase44_sigma_peak_sensitivity.py`, output `v192_a_phase44_sigma_peak_sensitivity.json` v7.
+
+| Parameter | Value | Source |
+|---|---|---|
+| Sweep range | σ_peak ∈ {30, 50, 75, 100, 125, 150, 174, 200, 250} cm²/g | §2.6 sweep |
+| Cloud-9 σ/m floor (BLN24) | σ/m(v=28) ≥ 50 cm²/g | BLN24 / Ohana+ |
+| Cloud-9 floor velocity | v = 28 km/s (resonance peak) | BLN24 |
+| Causality criterion | t_core > 3 × t_cross | §9.12 |
+| Paper σ/m convention | Gaussian w=4.4, peak at v=28 | §2.5 |
+
+**Canonical NFW (M_200 = 5×10⁹ M☉, ρ_crit = 1.381×10⁻⁷ M☉/pc³, self-consistent at each c):**
+
+| Concentration | V_max (km/s) | r_vir (kpc) | r_s (kpc) | ρ_s (M☉/pc³) | t_cross (Gyr) |
+|---|---|---|---|---|---|
+| c = 12 (ΛCDM-conservative) | **31.12** | 35.09 | 2.92 | 9.69×10⁻³ | 0.092 |
+| c = 4 (Ohana+ physical anchor) | **25.59** | 35.09 | 8.77 | 7.28×10⁻⁴ | 0.335 |
+
+**K constant** (ratio × σ_m(V_max) at c=12): K ≈ 134.0. At σ_peak=50: 3.432 × 39.036 = 133.97. At σ_peak=75: 2.292 × 58.471 = 134.01. K varies ~0.03% across the grid (limited by JSON rounding precision, ~4 sig figs).
+
+**Continuous intersection at c=12:**
+- Floor crossing: σ_m(28) = 0.052 × (100/28) + σ_peak = 50 → **σ_peak ≥ 49.814**
+- Causality crossing: ratio = 3.0 when σ_m(V_max) = K/3.0 = 44.66 → **σ_peak ≤ 57.24**
+- **Window: [49.81, 57.24] cm²/g (width ~7.43)** — knife-edge. On swept grid, only σ_peak = 50 falls inside (3.43 ≥ 3.0 cap).
+
+**Continuous intersection at c=4:** [49.81, 250] cm²/g (limited by sweep range).
+
+**§9.12 reconciliation:**
+- At c=12: t_core = 0.091 Gyr (matches §9.12's 91 Myr exactly); σ/m(V_max=31.12) = 135.43 (matches §9.12's 135.3 within 0.1%).
+- At c=4: t_core = 3.98 Gyr (11% discrepancy from §9.12's 4.42 Gyr; §9.12 used σ/m=135.3 from c=12 V_max, canonical c=4 σ/m(V_max=25.59) = 150.0).
+
+**Fornax σ_HL characterization:**
+- σ_peak ≤ 50: marginal (|σ_HL| ≤ 0.15, e.g. -0.08 to -0.13)
+- σ_peak ≥ 75: substantive (|σ_HL| ≥ 0.20, e.g. -0.20 to -0.68)
+- At σ_peak = 174 (canonical): σ_HL = -0.47 (substantive).
+
+**Headline finding (v19.2-A.7):**
+- c=12: knife-edge window ~7.43 cm²/g wide; framework's canonical σ_peak=174 is OUTSIDE this window (3.5× too high).
+- c=4: open interval [49.81, 250]; framework's canonical σ_peak=174 is INSIDE this window.
+- The c=12 vs c=4 distinction is the c-M tension against ΛCDM (Ohana+ 2026).
+
+---
+
 ## Verification
 
 Run `python scripts/audit_claims.py` to re-verify every number against its source JSON.
