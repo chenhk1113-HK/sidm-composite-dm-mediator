@@ -79,12 +79,22 @@ def diemer2019_c200(M_200):
 def sigma_below_diemer(c_fit, M_fit, scatter_dex=0.085):
     """How many sigma below Diemer+ 2019 median is (c_fit, M_fit)?
 
-    sigma_log_c = scatter_dex * log(10)
-    sigma_below = (log10(c_med) - log10(c_fit)) / sigma_log_c
+    The Diemer+ 2019 paper expresses scatter in units of "dex" (i.e. log10).
+    "0.085 dex" means sigma_log10(c) = 0.085.
+
+    sigma_below = (log10(c_med) - log10(c_fit)) / scatter_dex
+                = (log10(12.82) - log10(4.0)) / 0.085
+                = 0.506 / 0.085
+                = 5.95 sigma
+
+    NOTE: r26.docx caught a units bug here in v19.2-B v2. The original code
+    multiplied the denominator by log(10) (treating scatter as natural-log),
+    giving tensions 2.3x too small. This is the same class of bug as
+    v19.1.1 (10^5 Gyr collapse) and v19.2-D.2 (10^-11 Gyr t_cross).
+    Fixed 2026-09-30: drop the x log(10) factor.
     """
     c_med = diemer2019_c200(M_fit)
-    sigma_log = scatter_dex * np.log(10)
-    return (np.log10(c_med) - np.log10(c_fit)) / sigma_log
+    return (np.log10(c_med) - np.log10(c_fit)) / scatter_dex
 
 
 # ----- Best-fit (MAP) from posterior -----
@@ -168,17 +178,37 @@ def main():
         "method": "Ohana+ 2026 SIDM tension via corrected Diemer+ 2019 c-M relation",
         "paper": "Ohana, Zhang & Yu 2026, arXiv:2608.04362",
         "date": "2026-09-30",
-        "version": "v19.2-B.1 (corrected Diemer+ 2019 c-M, best-fit + sigma_scatter sweep)",
+        "version": "v19.2-B.2 (units bug fixed per r26.docx: drop x log(10) in denominator)",
         "fix_summary": (
-            "v19.1.5 used wrong c-M formula (Duffy+ 2008 CDM approximation), giving "
-            "c_med = 4.81 at M=4.7e9 (3x too low). Correct Diemer+ 2019 gives c_med = 12.82. "
-            "v19.1.5 also reported posterior-MEDIAN tension (1.04 sigma, pulled by prior); "
-            "v19.2-B.1 reports best-fit (MAP) tension, which is what Ohana+ quotes. "
-            "Under Diemer+ 2019 model-dep scatter (0.085 dex), best-fit tension = "
-            f"{canonical_tension:.2f} sigma, which matches Ohana+'s 3.2 sigma within "
-            f"{abs(canonical_tension - 3.2):.2f} sigma. Under lognormal-fixed-mass scatter "
-            f"(0.07 dex), tension = {bf_tension['lognormal_fixed_mass']:.2f} sigma -- "
-            "essentially matches Ohana+ exactly without any tuning outside literature range."
+            "r26.docx (reviewer feedback) caught a CRITICAL units bug in v19.2-B.1: "
+            "the original sigma_below_diemer multiplied the denominator by log(10), "
+            "treating the 0.085 dex scatter as natural-log scatter. Diemer+ 2019 "
+            "expresses scatter in log10 (dex). Fixed: drop the x log(10) factor. "
+            "\n\n"
+            "v19.2-B.2 CORRECTED TENSIONS (best-fit c=3.82, M=4.76e9):\n"
+            "  Diemer+ 2019 model-dep (0.085 dex): 6.18 sigma  [delta=2.98]\n"
+            "  Diemer+ 2019 cosmic    (0.110 dex): 4.78 sigma  [delta=1.58]\n"
+            "  Duffy+ 2008            (0.140 dex): 3.75 sigma  [delta=0.55]  CLOSEST\n"
+            "  lognormal fixed-mass  (0.070 dex): 7.51 sigma  [delta=4.31]\n"
+            "\n"
+            "HONEST VERDICT (per r26.docx Issue 2):\n"
+            "The 'reproduction' of Ohana+ 3.2 sigma is PARTIAL. The simplified "
+            "pipeline (synthetic N_HI, N_HI ~ rho_DM^2 * r proxy, tau as free MCMC "
+            "parameter) gives tensions of 3.75-7.51 sigma across the literature "
+            "scatter. Ohana+'s published 3.2 sigma sits BETWEEN Duffy+ 2008 (3.75) "
+            "and Diemer+ cosmic (4.78). The discrepancy is real: at Ohana+'s "
+            "published (M=4.7e9, c=4.0) best-fit, our pipeline gives 5.95 sigma "
+            "under Diemer+ model-dep scatter -- a factor-1.86 disagreement with "
+            "Ohana+'s 3.2.\n"
+            "\n"
+            "This is consistent with r26.docx Issue 2 (tautological reasoning): "
+            "synthetic data is constructed AT the fiducial, MCMC recovers the "
+            "fiducial, and tension is computed at the fiducial. We are checking "
+            "the pipeline, not reproducing Ohana+'s full analysis (which uses "
+            "real N_HI + hydrostatic equilibrium).\n"
+            "\n"
+            "Real reproduction requires v19.2-B v3 (deferred): real BLN24 N_HI "
+            "+ full hydrostatic + correct Balberg+ unit inversion for sigma/m."
         ),
         "limitations_remaining": [
             "Best-fit c=4.0 is forced by synthetic data at fiducial (same as v19.1.5).",
@@ -201,10 +231,13 @@ def main():
             "tau_SIDM_best_fit": 0.18,
         },
         "match_check": (
-            f"Best-fit tension at canonical Diemer+ 2019 model-dep scatter: "
+            f"BEST-FIT tension at canonical Diemer+ 2019 model-dep scatter: "
             f"{canonical_tension:.2f} sigma vs Ohana+ 3.2 sigma. "
             f"Delta = {abs(canonical_tension - 3.2):.2f} sigma. "
-            f"Within 1 sigma of published value."
+            f"NOT A MATCH -- factor-1.86 discrepancy. "
+            f"Closest literature match: Duffy+ 2008 (3.75 sigma, delta=0.55). "
+            f"Per r26.docx Issue 2: simplified pipeline gives synthetic-data-recovered "
+            f"best-fit, not a true reproduction. v3 deferred."
         ),
     }
 
@@ -212,21 +245,25 @@ def main():
     print(f"\nSaved: {out}")
 
     print("\n" + "=" * 70)
-    print("VERDICT (v19.2-B.1)")
+    print("VERDICT (v19.2-B.2 -- units bug fixed per r26.docx)")
     print("=" * 70)
-    print(f"\nUnder corrected Diemer+ 2019 c-M relation:")
+    print(f"\nUnder corrected Diemer+ 2019 c-M relation (units bug fixed):")
     print(f"  SIDM best-fit c={bf['c_200']:.2f}, M={bf['M_200_Msun']:.2e}")
     print(f"  Diemer+ c_med = {diemer2019_c200(bf['M_200_Msun']):.2f}")
-    print(f"  Best-fit tension (model-dep scatter 0.085 dex): {canonical_tension:.2f} sigma")
+    print(f"  Best-fit tension (Diemer model-dep scatter 0.085 dex): {canonical_tension:.2f} sigma")
     print(f"  Ohana+ 2026 published: 3.20 sigma")
-    print(f"  Delta: {abs(canonical_tension - 3.2):.2f} sigma  -> WITHIN 1 sigma")
+    print(f"  Delta: {abs(canonical_tension - 3.2):.2f} sigma  -> NOT A MATCH (factor-1.86 off)")
     print()
-    print(f"Under lognormal-fixed-mass scatter (0.07 dex): "
-          f"{bf_tension['lognormal_fixed_mass']:.2f} sigma -- matches Ohana+ within "
-          f"{abs(bf_tension['lognormal_fixed_mass'] - 3.2):.2f} sigma.")
+    print(f"Closest literature match: Duffy+ 2008 (0.140 dex): {bf_tension['duffy2008']:.2f} sigma")
+    print(f"  Delta from Ohana+: {abs(bf_tension['duffy2008'] - 3.2):.2f} sigma")
     print()
-    print("v19.2-B v2 REPRODUCES the Ohana+ 3.2 sigma SIDM tension within the "
-          "literature range of c-M scatter, with no tuning outside published values.")
+    print("HONEST VERDICT (per r26.docx Issues 1+2):")
+    print("  1. Units bug FIXED: tensions are 2.3x larger than v19.2-B v1 reported.")
+    print("  2. Reproduction is PARTIAL: simplified pipeline (synthetic N_HI,")
+    print("     rho_DM^2 * r proxy, tau as free parameter) does not fully reproduce")
+    print("     Ohana+'s 3.2 sigma -- gives 3.75 to 7.51 sigma across scatter.")
+    print("  3. Real reproduction requires v19.2-B v3 (real BLN24 data + full")
+    print("     hydrostatic equilibrium + correct Balberg+ unit inversion).")
 
 
 if __name__ == "__main__":

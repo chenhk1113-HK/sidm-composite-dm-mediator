@@ -242,31 +242,37 @@ TOOL_DEFS = [
         "description": ("Run the 8-layer Round 13 self-check pipeline (standing-numbers, paper-claims regex, "
                         "cross-validation, table-walker, §-symbol refs, citation provenance, unit consistency, "
                         "pytest test_paper_claims). Returns {ok, layers, summary}."),
+        "properties": {},
     },
     {
         "name": "sidm_audit_claims",
         "description": ("Walk PAPER_STANDING_NUMBERS.md claim registry against source JSONs. "
                         "Args: table_only (bool) — if true, just print claims table."),
+        "properties": {"table_only": {"type": "boolean", "default": False}},
     },
     {
         "name": "sidm_drift_guard",
         "description": ("Check VERSION drift via t82_audit.py drift-guard. Args: expected_version (str) — "
                         "optional version prefix to verify against (e.g. '0.4-prelim')."),
+        "properties": {"expected_version": {"type": "string", "default": ""}},
     },
     {
         "name": "sidm_validate_paper_section",
         "description": ("Audit one paper section by ID (e.g. '2.6', '9.12'). Returns numeric claims extracted "
                         "from the section for cross-validation. Args: section_id (str)."),
+        "properties": {"section_id": {"type": "string"}},
     },
     {
         "name": "sidm_run_all_audits",
         "description": ("Chain all three audit scripts (audit_claims + t82_audit + self_check) and return summary. "
                         "Use for a one-shot paper-state snapshot."),
+        "properties": {},
     },
     {
         "name": "sidm_compare_paper_to_json",
         "description": ("Find paper-vs-JSON mismatches for a given section. Args: target (str) — section ID "
                         "(default '2.6'). Per Rule 29, paper table and JSON often diverge; this exposes the gap."),
+        "properties": {"target": {"type": "string", "default": "2.6"}},
     },
 ]
 
@@ -289,7 +295,7 @@ def _build_server():
     async def list_tools_handler(ctx, params):
         tools = [
             Tool(name=t["name"], description=t["description"],
-                 inputSchema={"type": "object", "properties": {}})
+                 inputSchema={"type": "object", "properties": t.get("properties", {})})
             for t in TOOL_DEFS
         ]
         return ListToolsResult(tools=tools)
