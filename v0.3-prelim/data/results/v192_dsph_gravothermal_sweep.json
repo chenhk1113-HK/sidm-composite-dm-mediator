@@ -1,7 +1,7 @@
 {
   "method": "Paper sigma/m convention (Gaussian) + three-term mixture + canonical T212 t_cross",
   "date": "2026-09-30",
-  "version": "v19.2-D.3",
+  "version": "v19.2-D.5",
   "framework_parameters": {
     "Phase44_sigma_0_cm2_per_g": 0.052,
     "Phase44_a_slope": 1.0,
