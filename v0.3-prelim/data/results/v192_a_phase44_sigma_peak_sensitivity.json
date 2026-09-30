@@ -1,7 +1,7 @@
 {
-  "version": "v19.2-A.5",
+  "version": "v19.2-A.7",
   "date": "2026-09-30",
-  "description": "Phase 44 sigma_peak_HH_1 sensitivity sweep -- canonical NFW (self-consistent V_max at each c)",
+  "description": "Phase 44 sigma_peak_HH_1 sensitivity sweep -- canonical NFW + exact 1/sigma_m scaling for continuous intersection",
   "parameterization": "Gaussian (paper section 2.5): baseline + sigma_peak*exp(-(v-28)^2/(2*4.4^2))",
   "cloud9_canonical_nfw": "rho_crit = 1.381e-7 M_sun/pc^3, M_200 = 5e9 M_sun, c=12 or c=4, V_max self-consistent",
   "causality_criterion": "t_core > 3.0 * t_cross (paper section 9.12)",
@@ -347,6 +347,6 @@
     "Fornax sigma_HL required: marginal (within 0.15 of zero) for sigma_peak in [30, 50]; substantive (more negative) for [75, 100, 125, 150, 174, 200, 250]. The Fornax outlier ranges from small (-0.08) at sigma_peak=30 to large (-0.68) at sigma_peak=250.",
     "Phase 44 free fit (sigma_peak=196.3): sigma/m(28) = 200.19, sigma/m(c=12 V_max) = 155.64, sigma/m(c=4 V_max) = 172.37. Meets floor. At c=12: ratio=0.861 (below cap). At c=4: ratio=10.321 (OK).",
     "section 9.12 reconciliation: section 9.12 reports t_core = 4.42 Gyr at c=4 with sigma/m = 135.3 (the c=12 V_max sigma/m value). This sweep uses canonical self-consistent NFW at each c: at c=4, V_max = 25.59 km/s, sigma/m(V_max) = 149.99 cm^2/g (NOT 135.3, which was computed at V_max = 31.12, the c=12 value). With canonical sigma/m(V_max) = 149.99, the sweep computes t_core = 3.976 Gyr -- an 11% discrepancy from section 9.12's 4.42 Gyr. This 11% gap is NOT a match -- it is section 9.12's sigma/m being held constant at the c=12 value when applied to c=4, an internal inconsistency in section 9.12 that this sweep corrects. At c=12, the match IS exact (sweep t_core = 0.091 Gyr vs section 9.12's 91 Myr; sweep sigma/m(V_max=31.12) = 135.43 vs section 9.12's 135.3).",
-    "Continuous intersection at c=12: [49.81, 59.49] cm^2/g (width ~9.67). The 'only sigma_peak = 50 on the swept grid' claim is grid-specific; interpolating the c=12 ratio between grid points, the continuous intersection is an interval of width ~9.67 cm^2/g. This is the c-M tension at LambdaCDM-standard concentration in its most precise form: knife-edge window, not a single point."
+    "Continuous intersection at c=12: [49.81, 57.25] cm^2/g (width ~7.43). Computed using exact 1/sigma_m scaling (ratio = K/sigma_m(V_max) with K constant, NOT linear interpolation). Linear interpolation between grid points overestimates the crossing (gave [49.81, 59.49] = 9.67 wide); exact 1/sigma_m scaling gives [49.81, 57.25] = 7.43 wide. The qualitative finding (knife-edge window, not a single point) is unchanged. The window is NARROWER than my prior linear estimate: 7.43 cm^2/g wide instead of 9.67. This is the c-M tension at LambdaCDM-standard concentration in its sharpest form."
   ]
 }

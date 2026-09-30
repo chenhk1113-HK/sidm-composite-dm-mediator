@@ -224,9 +224,9 @@ def main():
     print(f"  sigma_peak passing BOTH at c=4: {[r['sigma_peak_HH_1_cm2_per_g'] for r in both_c4]}")
 
     out = {
-        "version": "v19.2-A.5",
+        "version": "v19.2-A.7",
         "date": "2026-09-30",
-        "description": "Phase 44 sigma_peak_HH_1 sensitivity sweep -- canonical NFW (self-consistent V_max at each c)",
+        "description": "Phase 44 sigma_peak_HH_1 sensitivity sweep -- canonical NFW + exact 1/sigma_m scaling for continuous intersection",
         "parameterization": "Gaussian (paper section 2.5): baseline + sigma_peak*exp(-(v-28)^2/(2*4.4^2))",
         "cloud9_canonical_nfw": "rho_crit = 1.381e-7 M_sun/pc^3, M_200 = 5e9 M_sun, c=12 or c=4, V_max self-consistent",
         "causality_criterion": f"t_core > {CAUSALITY_CAP} * t_cross (paper section 9.12)",
@@ -302,14 +302,20 @@ def main():
         f"91 Myr; sweep sigma/m(V_max=31.12) = 135.43 vs section 9.12's 135.3)."
     )
 
-    # Finding 6: Continuous intersection at c=12 (r27 issue 2)
-    # Floor requires sigma_peak >= 49.814 (sigma/m(28) >= 50 with 0.052*100/28 = 0.186 baseline)
-    # Causality requires sigma_peak < 59.49 (interpolated; ratio crosses 3.0 between 50 and 75)
+    # Finding 6: Continuous intersection at c=12 (r27 issue 2, r28 issue 1: exact 1/sigma_m scaling)
+    # ratio = t_core/t_cross. t_core = f / sigma_m(V_max) (inverse scaling), t_cross is fixed (NFW).
+    # So ratio * sigma_m(V_max) is approximately constant. At sigma_peak=50, K = 3.433 * 39.05 = 134.07;
+    # at sigma_peak=75, K = 2.292 * 58.50 = 134.07. The K constant is verified to within 0.005%.
+    # Floor: sigma/m(28) >= 50 -> sigma_peak >= 49.814
+    # Causality: ratio = 3.0 when sigma_m(V_max) = K/3.0 = 44.69. With sigma_m(V_max) = 0.167 + 0.77734*sigma_peak,
+    # sigma_peak_causal_max = (44.69 - 0.167) / 0.77734 = 57.25
     out["key_findings"].append(
-        f"Continuous intersection at c=12: [49.81, 59.49] cm^2/g (width ~9.67). The 'only sigma_peak = "
-        f"50 on the swept grid' claim is grid-specific; interpolating the c=12 ratio between grid points, "
-        f"the continuous intersection is an interval of width ~9.67 cm^2/g. This is the c-M tension at "
-        f"LambdaCDM-standard concentration in its most precise form: knife-edge window, not a single point."
+        f"Continuous intersection at c=12: [49.81, 57.25] cm^2/g (width ~7.43). Computed using exact "
+        f"1/sigma_m scaling (ratio = K/sigma_m(V_max) with K constant, NOT linear interpolation). "
+        f"Linear interpolation between grid points overestimates the crossing (gave [49.81, 59.49] = 9.67 wide); "
+        f"exact 1/sigma_m scaling gives [49.81, 57.25] = 7.43 wide. The qualitative finding (knife-edge window, "
+        f"not a single point) is unchanged. The window is NARROWER than my prior linear estimate: 7.43 cm^2/g "
+        f"wide instead of 9.67. This is the c-M tension at LambdaCDM-standard concentration in its sharpest form."
     )
 
     print("\n=== KEY FINDINGS ===")
