@@ -202,7 +202,7 @@ def main():
         "method": "Ohana+ 2026 SIDM tension via corrected Diemer+ 2019 c-M relation",
         "paper": "Ohana, Zhang & Yu 2026, arXiv:2608.04362",
         "date": "2026-09-30",
-        "version": "v19.2-B.7 (r31 correction: Ohana+ uses 0.16 dex, not 0.085; pipeline reproduces 3.16 sigma)",
+        "version": "v19.2-B.9 (r32 polish: wording + 3.16σ fiducial + scatter attribution; 'is consistent with Ohana+ at the fiducial under 0.16 dex convention')",
         "fix_summary": (
             "Five rounds of fixes from r26.docx through r31.docx reviewer feedback:\n\n"
             "r26.docx Issue 1 (units bug): v19.2-B v2 multiplied denominator by log(10) "
@@ -269,6 +269,27 @@ def main():
             "scatter_used_by_ohana": 0.16,
             "scatter_source": "Diemer and Joyce 2019 (per Ohana+ arXiv:2608.04362 §3.1 line 29)",
         },
+        "tension_at_fiducial": {
+            "M_Msun": 4.7e9,
+            "c_200": 4.0,
+            "tau": 0.18,
+            "scatter_dex": 0.16,
+            "tension_sigma": float(
+                (np.log10(diemer2019_c200(4.7e9)) - np.log10(4.0)) / 0.16
+            ),
+            "ohana_published_sigma": 3.2,
+            "delta_sigma": float(
+                abs((np.log10(diemer2019_c200(4.7e9)) - np.log10(4.0)) / 0.16 - 3.2)
+            ),
+            "note": (
+                "Per r32.docx Issue 4: 3.16 sigma at (M=4.7e9, c=4.0, tau=0.18) is "
+                "the fiducial tension at Ohana+'s published best-fit. The 3.29 sigma "
+                "value in match_check uses our MCMC-recovered best-fit (c=3.8171, "
+                "M=4.7571e9), which differs slightly from the published fiducial due "
+                "to MCMC sampling around the input. Both are within 0.1 sigma of "
+                "Ohana+'s published 3.20 sigma."
+            ),
+        },
         "match_check": (
             f"BEST-FIT tension at OHANA+ SCATTER (0.16 dex, Diemer & Joyce 2019): "
             f"{canonical_tension:.2f} sigma vs Ohana+ 3.20 sigma. "
@@ -285,7 +306,7 @@ def main():
     print(f"\nSaved: {out}")
 
     print("\n" + "=" * 70)
-    print("VERDICT (v19.2-B.7 -- r31 SCATTER CORRECTION: CONSISTENCY CHECK at fiducial)")
+    print("VERDICT (v19.2-B.9 -- r32 polish: 'is consistent with Ohana+ at the fiducial under 0.16 dex convention')")
     print("=" * 70)
     print(f"\nBest-fit tension at OHANA+ SCATTER (0.16 dex, Diemer & Joyce 2019):")
     print(f"  Pipeline result: {canonical_tension:.2f} sigma")

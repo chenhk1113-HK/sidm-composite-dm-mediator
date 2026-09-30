@@ -275,7 +275,9 @@
 | **Ohana+ scatter used** | **0.16 dex (Diemer & Joyce 2019)** | arXiv:2608.04362 §3.1 line 29 + §3.1 line 34 |
 | MCMC-recovered best-fit (our pipeline) | M = 4.7571×10⁹ M☉, c = 3.8171, τ = 0.18 | v192_b JSON `best_fit_params` |
 | c_med at our best-fit M | c_med = diemer2019_c200(4.7571e9) = **12.805** | Diemer+ 2019 Eq. 5 |
-| Tension at Ohana+ scatter (0.16 dex) | **3.29σ** (CONSISTENCY CHECK at fiducial — matches Ohana+ 3.2σ within 0.09σ; synthetic-data caveat applies) | JSON `tension_sweep_literature_scatter` |
+| Tension at Ohana+ scatter (0.16 dex) | **3.29σ (MCMC), 3.16σ (fiducial)** (CONSISTENCY CHECK at fiducial — matches Ohana+ 3.2σ within 0.1σ; synthetic-data caveat applies) | JSON `tension_sweep_literature_scatter` + `tension_at_fiducial` |
+| Tension at fiducial (M=4.7×10⁹ M☉, c=4.0, τ=0.18) at 0.16 dex | **3.16σ** (reproduce-from-arithmetic: (log10(12.819)−log10(4.0))/0.16 = 0.50532/0.16) | v192_b JSON `tension_at_fiducial` |
+| Difference: MCMC vs fiducial | 3.29σ − 3.16σ = 0.13σ (MCMC best-fit M=4.7571×10⁹ slightly larger than fiducial M=4.7×10⁹, so c_med is slightly smaller: 12.805 vs 12.819) | derived |
 | Tension at Diemer+ 2019 model-dep (0.085 dex) | 6.18σ | same (real but uses different scatter prescription) |
 | Tension at Diemer+ 2019 cosmic (0.110 dex) | 4.78σ | same |
 | Tension at Duffy+ 2008 (0.140 dex) | 3.75σ | same |
@@ -285,14 +287,16 @@
 | 0.164 dex vs Diemer+ cosmic (0.110) | 1.49× (49% larger) | derived |
 | 0.164 dex vs Duffy+ 2008 (0.140) | 1.17× (17% larger) | derived |
 
-**Mechanism (3 candidate sources for the apparent 6.18σ at 0.085 dex — now resolved):**
+**Mechanism (3 candidate sources for the apparent 6.18σ vs Ohana+ 3.20σ gap — now resolved, per r32 Issue 2 wording):**
 1. ~~Synthetic data at fiducial~~ — minor effect, not dominant
 2. **Scatter convention** — DOMINANT. Ohana+ uses 0.16 dex (Diemer & Joyce 2019 full-population scatter); v19.2-B.1 to v19.2-B.6 assumed 0.085 dex (model-dep). With Ohana+ scatter (0.16 dex), the simplified pipeline CONSISTENTLY REPRODUCES Ohana+ 3.2σ at the fiducial within rounding tolerance (3.29σ at MCMC, 3.16σ at fiducial c=4.0).
 3. Tension definition (1D c-marginalized vs 2D joint) — minor effect
 
-**The two scatter conventions serve different purposes (per r31 Issue 2):**
-- **0.16 dex (Ohana+ choice) — used for reproducing Ohana+'s number.** Includes cosmic and measurement scatter beyond pure halo-shape noise.
-- **0.085 dex (Diemer+ 2019 model-dependent) — used for estimating the framework's intrinsic tension.** Appropriate for "how anomalous is Cloud-9 within a pure SIDM N-body population?" without observational scatter.
+**The two scatter conventions serve different purposes (per r31 Issue 2, refined per r32 Issue 3):**
+- **0.16 dex (Ohana+ choice) — used for matching Ohana+'s number.** This is the **Diemer & Joyce 2019 full-population scatter**, which includes cosmic variance, measurement scatter, and intrinsic scatter beyond pure halo-shape noise. Ohana+ 2026 use this prescription (arXiv:2608.04362 §3.1 line 29). Comparing at a different scatter is apples-to-oranges; matching Ohana+'s tension requires using their scatter.
+- **0.085 dex (Diemer+ 2019 model-dependent scatter) — used for the framework's intrinsic tension.** This is the **Diemer & Joyce 2019 model-dependent scatter**, which captures only the halo-shape scatter for SIDM-only halos in pure N-body (no observational scatter). The 0.085 dex value is appropriate for the question "how anomalous is Cloud-9 within a pure SIDM N-body population?" — i.e., the framework's intrinsic c-M tension before observational scatter inflates the comparison.
+
+**Source attribution (per r32 Issue 3):** Both 0.085 dex and 0.16 dex are prescriptions from the same paper (Diemer & Joyce 2019, ApJ 871, 168). Diemer+ 2019 Table 2 / Eq. 5 provides the c-M median; the scatter prescriptions differ in how they include cosmic variance (cosmic ~0.11 dex), model-dependent shape noise only (~0.085 dex), and full-population scatter (~0.16 dex). Ohana+ chose the full-population prescription; the framework's intrinsic-tension comparison uses the model-dependent prescription.
 
 **Trajectory (v19.1.5 `44c474f` → v19.2-B.7 `a79b207`):**
 - v19.1.5 `44c474f`: 1.04σ (0.140 dex Duffy+) — wrong c-M formula + posterior-median statistic
@@ -302,9 +306,9 @@
 - v19.2-B.4 `62c2bb0`: 6.18σ (0.085 dex) — docstring arithmetic-reproducible; MCP UTF-8 encoding fix
 - v19.2-B.5 `7ca4bf5`: 6.18σ (0.085 dex) — §2.7 added to paper with mechanism + trajectory
 - v19.2-B.6 `a79b207`: 6.18σ (0.085 dex) — paper-JSON reconciliation; trajectory labels aligned
-- v19.2-B.7 `a79b207+`: **3.29σ (0.16 dex Ohana+ scatter)** — **r31 SCATTER CORRECTION: CONSISTENCY CHECK at fiducial under Ohana+ scatter**
+- v19.2-B.7 `a79b207+`: **3.29σ (MCMC) / 3.16σ (fiducial)** (0.16 dex Ohana+ scatter) — **r31 SCATTER CORRECTION: CONSISTENCY CHECK at fiducial under Ohana+ scatter; is consistent with Ohana+ 3.2σ**
 
-**Headline finding (v19.2-B.7, REVERSED FROM PREVIOUS BUNDLES):** Our simplified pipeline **CONSISTENTLY REPRODUCES** Ohana+ 2026's 3.2σ SIDM tension at the fiducial, when using Ohana+'s actual scatter convention (0.16 dex, Diemer & Joyce 2019). At this scatter, the best-fit tension is **3.29σ** (MCMC-recovered best-fit) or **3.16σ** (fiducial c=4.0) — within 0.1σ of Ohana+'s published 3.20σ. **This is a consistency check at the fiducial under the correct scatter, not a full reproduction of Ohana+'s analysis** (synthetic-data caveat applies; v19.2-B v3 with real data deferred). The previous v19.2-B.2-v19.2-B.6 finding of 6.18σ was real at Diemer+ model-dep scatter (0.085 dex) but was a scatter-convention mismatch, not a framework failure.
+**Headline finding (v19.2-B.7, REVERSED FROM PREVIOUS BUNDLES):** Our simplified pipeline **is consistent with Ohana+ 2026's 3.2σ SIDM tension at the fiducial under the 0.16 dex convention** (per r32 Issue 5 wording — avoids residual overclaim while preserving the positive consistency check). At this scatter, the best-fit tension is **3.29σ** (MCMC-recovered best-fit, c=3.8171) or **3.16σ** (fiducial c=4.0, M=4.7×10⁹ M☉) — both within 0.1σ of Ohana+'s published 3.20σ. **This is a consistency check at the fiducial, not a full reproduction of Ohana+'s analysis** (synthetic-data caveat applies; v19.2-B v3 with real data deferred). The previous v19.2-B.2-v19.2-B.6 finding of 6.18σ was real at Diemer+ model-dep scatter (0.085 dex); the gap to Ohana+'s 3.20σ is the scatter-convention difference (0.085 vs 0.16 dex), not an internal disagreement among B.2-B.6.
 
 ---
 

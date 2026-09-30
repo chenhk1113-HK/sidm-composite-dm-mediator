@@ -2,7 +2,7 @@
   "method": "Ohana+ 2026 SIDM tension via corrected Diemer+ 2019 c-M relation",
   "paper": "Ohana, Zhang & Yu 2026, arXiv:2608.04362",
   "date": "2026-09-30",
-  "version": "v19.2-B.7 (r31 correction: Ohana+ uses 0.16 dex, not 0.085; pipeline reproduces 3.16 sigma)",
+  "version": "v19.2-B.9 (r32 polish: wording + 3.16\u03c3 fiducial + scatter attribution; 'is consistent with Ohana+ at the fiducial under 0.16 dex convention')",
   "fix_summary": "Five rounds of fixes from r26.docx through r31.docx reviewer feedback:\n\nr26.docx Issue 1 (units bug): v19.2-B v2 multiplied denominator by log(10) treating 0.085 dex scatter as natural-log. FIXED in v19.2-B.2: drop x log(10).\n\nr26.docx Issue 2 (tautology): simplified pipeline is partly circular because synthetic data is constructed AT the fiducial. v3 deferred for real BLN24 data.\n\nr27.docx Issue 2 (overclaim): 'closest match: Duffy+ 2008' was a selection effect from CDM approximation. Initially reported as CLEAN NEGATIVE at Diemer+ model-dep scatter (0.085 dex, 6.18 sigma).\n\nr27.docx Issue 1 (arithmetic slip): Ohana+ 3.2 sigma is BELOW all four computed tensions at 0.085 dex, not 'between' Duffy+ and Diemer+ cosmic.\n\nr27.docx Issue 3 (docstring mismatch): docstring used c=4.0 (5.95 sigma) but JSON used c=3.817 (6.18 sigma). Unified to c=3.817.\n\nr30.docx regression fix: paper reconciled to 6.18 sigma matching JSON.\n\nr31.docx CORRECTION (Issue 2 -- THE KEY FIX): The Ohana+ PDF (arXiv:2608.04362 \u00a73.1 line 29) explicitly states 'a 3.2 sigma deviation below the cosmological median concentration, assuming a scatter of 0.16 dex (Diemer and Joyce, 2019)'. Ohana+ does NOT use Diemer+ model-dep (0.085 dex); they use a 0.16 dex scatter (which is the upper range of literature, consistent with the cosmic-variance scatter from Diemer+ 2019).\n\n  At Ohana+ scatter (0.16 dex), our pipeline reproduces Ohana+'s 3.2 sigma essentially exactly:\n    At (M=4.7e9, c=4.0) [Ohana+ tau=0.18 best-fit]:\n      (log10(12.819) - log10(4.0)) / 0.16 = 0.50532 / 0.16 = 3.16 sigma\n      MATCHES Ohana+ published 3.2 sigma within 0.04 sigma\n    At (M=3.4e9, c=1.5) [Ohana+ tau=0.95 best-fit]:\n      (log10(12.76) - log10(1.5)) / 0.16 = 5.81 sigma\n      MATCHES Ohana+ published 6.0 sigma within 0.2 sigma\n\nREVERSED VERDICT (v19.2-B.7):\n  The v19.2-B.2 to v19.2-B.6 'clean negative' was a SCATTER-CONVENTION MISMATCH, not a fundamental failure of the framework. Ohana+ uses a LARGER scatter (0.16 dex) than Diemer+ model-dep (0.085 dex), which shrinks the tension by ~2x. With the correct Ohana+ scatter, our simplified pipeline REPRODUCES Ohana+ 2026's 3.2 sigma within rounding tolerance (3.16 sigma at best-fit).\n\nThe factor-1.93 disagreement at 0.085 dex was real, but it was a DIFFERENCE-OF-CONVENTION artifact (Diemer+ 2019 has multiple scatter prescriptions: model-dep ~0.085, cosmic ~0.110, and Ohana+ chose 0.16), not a failure of the framework's c-M tension prediction.",
   "limitations_remaining": [
     "Best-fit c=4.0 is forced by synthetic data at fiducial (same as v19.1.5).",
@@ -62,6 +62,16 @@
     "tau_SIDM_best_fit": 0.18,
     "scatter_used_by_ohana": 0.16,
     "scatter_source": "Diemer and Joyce 2019 (per Ohana+ arXiv:2608.04362 \u00a73.1 line 29)"
+  },
+  "tension_at_fiducial": {
+    "M_Msun": 4700000000.0,
+    "c_200": 4.0,
+    "tau": 0.18,
+    "scatter_dex": 0.16,
+    "tension_sigma": 3.160957303582997,
+    "ohana_published_sigma": 3.2,
+    "delta_sigma": 0.039042696417002976,
+    "note": "Per r32.docx Issue 4: 3.16 sigma at (M=4.7e9, c=4.0, tau=0.18) is the fiducial tension at Ohana+'s published best-fit. The 3.29 sigma value in match_check uses our MCMC-recovered best-fit (c=3.8171, M=4.7571e9), which differs slightly from the published fiducial due to MCMC sampling around the input. Both are within 0.1 sigma of Ohana+'s published 3.20 sigma."
   },
   "match_check": "BEST-FIT tension at OHANA+ SCATTER (0.16 dex, Diemer & Joyce 2019): 3.29 sigma vs Ohana+ 3.20 sigma. Delta: 0.09 sigma. CONSISTENCY CHECK: pipeline matches Ohana+ within rounding tolerance at the fiducial. Per r31.docx: the previous '6.18 sigma clean negative' was a scatter-convention mismatch (0.085 dex vs 0.16 dex), not a framework failure. With Ohana+'s actual scatter (0.16 dex), the simplified pipeline REPRODUCES Ohana+ 3.2 sigma."
 }
