@@ -64,37 +64,39 @@
 | Cloud-9 r_vir | 35,093 pc | same |
 | Cloud-9 r_s | 2,924 pc | same |
 | ρ_s | 9.69×10⁻³ M☉/pc³ | same |
-| **t_core (Phase 44 Yukawa-only σ/m = 0.21)** | **73.71 Gyr** | same |
+| **t_core (Phase 44 Yukawa-only σ/m = 0.167 at V_max = 31.12)** | **73.71 Gyr** | same (matches the §9.12 paper value of 73.7 Gyr; legacy σ/m = 0.21 at v = 24.75 km/s also gives 73.71 Gyr because the (σ/m, v_max) ratio is constant for the Phase 44 a_slope = 1.0 scaling) |
 | t_Hubble | 13.8 Gyr | (Planck) |
 | **Verdict at Phase 44 Yukawa-only baseline** | **gravothermal DOES NOT run** | same |
 | Path 2 | **REFUTED** at Phase 44 Yukawa-only baseline | same |
 
-**v19.1.4 addendum (post-re196.docx — V_max convention, causality cap, c=4 anchor):**
+**v19.1.5 addendum (post-r197.docx — Phase 44 σ/m via canonical channels_v03.sigma_m_at_v):**
 
-**Test matrix (reconciled, V_max = 31.12 km/s NFW-correct, σ/m at V_max):**
+**Phase 44 baseline σ/m (corrected per r197.docx Issue 1):**
+- σ₀ = 0.052 cm²/g at v = 100 km/s (T208 source)
+- a_slope = 1.0 (v18.28 Rule-28 audit fixed value)
+- σ/m(V_max = 31.12 km/s) = 0.052 × (100/31.12)^1.0 = **0.167 cm²/g** (NOT 0.174 as v19.1.4 had hardcoded)
+- σ/m(v = 28 km/s) = 0.052 × (100/28)^1.0 = **0.186 cm²/g**
+- σ/m(v = 24.75 km/s) = 0.052 × (100/24.75)^1.0 = 0.210 cm²/g
+
+**Test matrix (reconciled, V_max = 31.12 km/s NFW-correct):**
 
 | Case | σ/m | c | t_core (Gyr) | t_core/t_cross | causality | Verdict |
 |---|---|---|---|---|---|---|
-| Silverman+ 2026 ref | 70 | 12 | 0.176 | 1.92 | OK | runs |
-| Cloud-9 Phase 44 Yukawa only | 0.174 | 12 | **70.8** | 771 | OK | does NOT run |
-| Cloud-9 Phase 44 Yukawa only | 0.174 | 4 | 3438 | 10000+ | OK | does NOT run |
-| Cloud-9 framework v₁ at V_max | **135.3** | 12 | 0.091 | **0.99** | **FAIL** | analytical only |
+| Silverman+ 2026 ref | 70 | 12 | 0.176 | **1.91** | **FAIL** | N-body found 3/6 collapse; analytical Balberg+ unreliable |
+| Cloud-9 Phase 44 Yukawa only | **0.167** | 12 | **73.71** | 802 | OK | does NOT run |
+| Cloud-9 Phase 44 Yukawa only | 0.167 | 4 | 3580 | 10678 | OK | does NOT run |
+| Cloud-9 framework v₁ at V_max | **135.3** | 12 | 0.091 | 1.0 | **FAIL** | analytical only |
 | Cloud-9 framework v₁ at V_max | **135.3** | 4 | **4.42** | 13.2 | OK | **runs (causality-OK anchor)** |
-| Cloud-9 framework v₁ at peak (v=28) | 164 | 12 | 0.075 | 0.81 | **FAIL** | analytical only |
+| Cloud-9 framework v₁ at peak (v=28) | 164 | 12 | 0.075 | 0.8 | **FAIL** | analytical only |
 | Cloud-9 Ohana+ best fit | 483 | 4 | 1.24 | 3.69 | OK | runs |
 
-**V_max convention (Issue 1 of re196.docx):** T208 canonical NFW-correct V_max = 31.12 km/s for Cloud-9 with M=5e9, c=12 (r_max = 2.16 r_s). At V_max, σ/m = 0.174 cm²/g (Phase 44 baseline). With this, t_core = **70.8 Gyr** — does NOT run. The 73.7 Gyr cited in §9.12 was a virial-approximation rounding; corrected to 70.8 Gyr. The 0.21 used by v19.1.3 was Phase 44 at v=28 (not V_max) — re196.docx caught this convention drift.
+**Phase 44 reconciliation (Issue 1 of r197.docx):** v19.1.4 had hardcoded σ/m = 0.174 for Phase 44 at V_max. The canonical value from `channels_v03.sigma_m_at_v(0.052, 1.0, 31.12)` is **0.167 cm²/g**, giving t_core = **73.71 Gyr** — which matches the §9.12 paper value of 73.7 Gyr exactly. The 0.174 was a 4% drift from the actual value, traced to rounding-error in v19.1.4's hardcoded value. v19.1.5 imports the canonical function directly.
 
-**Causality cap (Issue 3 of re196.docx):** At σ/m ≥ ~10 cm²/g, the analytical Balberg+ formula gives t_core/t_cross < 3.0, violating the causality cap. The 91 Myr number for σ/m = 135.3 at c=12 is **indicative, not physical**. At c=4 (Ohana+ inferred), t_core = 4.42 Gyr with causality OK — this is the physical anchor. **N-body required before claiming collapse.**
+**Causality cap (Issue 3 of r197.docx):** Per the r197.docx review, Silverman+ reference case ALSO violates the causality cap (t_core/t_cross = 1.91 < 3.0). The Silverman+ 3/6 collapse finding is from N-body, where the analytical Balberg+ formula is unreliable in this regime. The 0.176 Gyr number is INDICATIVE; the N-body timescale is physical. **N-body is required across the board, not just for the framework case.**
 
-**σ/m values (Issue 2 / smaller item 2):** Three different framework σ/m values are now correctly distinguished:
-- **0.174** at V_max = 31.12 km/s (Phase 44 baseline; no resonance)
-- **135.3** at V_max = 31.12 km/s (framework v₁ resonance ON, evaluated with Gaussian fall-off from σ_peak = 174)
-- **164** at v_target = 28 km/s (framework v₁ resonance at peak; from `causality_summary_corrected.json`'s sigma_v28_cm2_g)
+**Silverman+ ref causality: previously reported as "OK" in v19.1.4 report text but JSON said `causality_ok: false`. v19.1.5 fixes the report text and the script's verdict section.**
 
-Paper §9.12 must state which is which in one sentence; otherwise readers will confuse "framework σ/m at Cloud-9" with multiple values.
-
-**Honest synthesis (v19.1.4):** Cloud-9 t_core at c=4 anchor is **4.42 Gyr** (causality-OK). This drives gravothermal collapse in <halo age. Sustained mergers (Silverman+ mechanism, M94 group environment) could prevent collapse against framework σ/m = 135.3. Three open explanations: (c) merger-suppressed (viable but not "leading"); (b) framework σ_peak too high (possible; would require Phase 44 re-fit); (a) Ohana+ τ wrong (unlikely). N-body with M94-like sustained mergers is the discriminator. The "4000× problem" is reframed (not dissolved).
+**Honest synthesis (v19.1.5):** Cloud-9 t_core at c=4 anchor is **4.42 Gyr** (causality-OK). This drives gravothermal collapse in <halo age. Sustained mergers (Silverman+ mechanism, M94 group environment) could prevent collapse against framework σ/m = 135.3. Three open explanations: (c) merger-suppressed (viable but not "leading"); (b) framework σ_peak too high (possible; would require Phase 44 re-fit); (a) Ohana+ τ wrong (unlikely). N-body with M94-like sustained mergers is the discriminator. The "4000× problem" is reframed (not dissolved). **σ/m = 0.167 cm²/g is the canonical Phase 44 baseline at V_max, computed from channels_v03.sigma_m_at_v(0.052, 1.0, 31.12).**
 
 ## §6. Host-halo gravothermal at σ/m=70 (T212 Silverman+)
 

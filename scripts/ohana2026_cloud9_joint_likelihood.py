@@ -338,15 +338,17 @@ def main():
     results = {
         "method": "Ohana, Zhang & Yu 2026 SIMPLIFIED joint likelihood (arXiv:2608.04362)",
         "date": "2026-09-29",
-        "version": "v19.1.3 (post-flip2.docx: added weak informative priors to prevent posterior drift)",
+        "version": "v19.1.5 (re196.docx honest 'failed validation' framing; r197.docx version bump)",
         "note": (
-            "v19.1.3 update (flip2.docx review): added weak informative priors on "
-            "(log M_200, log c_200, tau) centered on Ohana+ best-fit. Without priors, "
-            "the v19.1 synthetic-data likelihood was too weak to constrain M_200 and "
-            "c_200, causing posterior to drift to lower values (M_200 ~ 1e9 vs published "
-            "4.7e9, c_200 ~ 1.5 vs published 4.0). Priors: log M_200 ~ N(log(4.7e9), 0.3), "
-            "log c_200 ~ N(log(4.0), 0.2), tau ~ N(0.18, 0.15). Loose enough to let "
-            "likelihood pull posterior away if data demand; tight enough to prevent drift."
+            "v19.1.5 update (re196.docx Reviewer 1 Issue 2 + r197.docx version bump): "
+            "added weak informative priors on (log M_200, log c_200, tau) centered on "
+            "Ohana+ best-fit (v19.1.3); reframed as 'failed validation' rather than "
+            "'qualitative reproduction' (v19.1.4); version bumped to v19.1.5 to match "
+            "the print/verdict block update. Without priors, the v19.1 synthetic-data "
+            "likelihood was too weak to constrain M_200 and c_200, causing posterior to "
+            "drift. With priors: posterior recovers published M, c, but c-M tension falls "
+            "out at 1.04 sigma (Ohana+ 3.2 sigma outside 68% CI). The joint likelihood "
+            "script does NOT validate Ohana+."
         ),
         "limitations": [
             "Gas profile is a proxy (rho_DM^2 * r), not full hydrostatic equilibrium.",

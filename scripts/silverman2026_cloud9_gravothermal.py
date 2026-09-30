@@ -54,6 +54,23 @@ from T208_path_b_cloud9_host_halo_gravothermal import (
 from t212_silverman_gravothermal import (
     t_cross_Gyr_from_r_vir_vmax as t_cross_Gyr,
 )
+# Per r197.docx Issue 1: import the canonical Phase 44 sigma_m function rather than
+# hardcoding the value. The hardcoded 0.174 in v19.1.4 was a 4% drift from the
+# actual computation. Now we call channels_v03.sigma_m_at_v directly.
+from channels_v03 import sigma_m_at_v as canonical_sigma_m_at_v
+
+# Phase 44 baseline parameters (canonical, from T208 source code):
+PHASE44_SIGMA_0 = 0.052  # cm^2/g at v=100 km/s
+PHASE44_A_SLOPE = 1.0     # v18.28 Rule-28 audit fixed value
+
+
+def phase44_sigma_m_at_v(v_kms: float) -> float:
+    """Phase 44 baseline sigma/m evaluated at velocity v (km/s).
+
+    Per T208 source: sigma_0 = 0.052 at v=100, a_slope = 1.0.
+    Returns sigma_m(v) in cm^2/g.
+    """
+    return canonical_sigma_m_at_v(PHASE44_SIGMA_0, PHASE44_A_SLOPE, v_kms)
 
 
 def nfw_initial(M_200, c_200):
@@ -164,24 +181,21 @@ def analyze_cloud9():
     print("=" * 70)
 
     # Phase 44 baseline sigma/m at the relevant velocity scale.
-    # Per T208 canonical (NFW-correct V_max = 31.12 km/s for Cloud-9 with M=5e9, c=12):
-    # sigma_m(V_max) = 0.052 * (100/31.12)^1.0 = 0.167 cm^2/g  (Phase 44 a_slope=1.0 at V_max)
-    # For consistency with T208 §9.12 paper text (t_core = 73.7 Gyr), use sigma_m = 0.174 (rounded).
-    # Per re196.docx Issue 1: v19.1.3 used sigma_m = 0.21 which is the Phase 44 value at v=28 km/s,
-    # NOT at V_max. This was a convention drift between v19.1.3 and the T208 §9.12 paper text.
-    # Fix: use sigma_m = 0.174 (Phase 44 at V_max = 31.12 km/s).
-    PHASE44_YUKAWA_SIGMA_M_AT_VMAX = 0.174  # cm^2/g, Phase 44 baseline at V_max
+    # Per r197.docx Issue 1: sigma_m(V_max) is now computed via channels_v03.sigma_m_at_v
+    # rather than hardcoded. The 0.174 in v19.1.4 was a 4% drift from the actual value.
+    # Cloud-9 host-halo params (M=5e9, c=12) give V_max = 31.12 km/s (NFW-correct).
+    PHASE44_SIGMA_M_AT_VMAX = phase44_sigma_m_at_v(31.12)  # = 0.167 cm^2/g
 
     cases = [
         # Reference: Silverman+ 2026 (T212-verified, NFW-correct V_max at r_max)
         ("Silverman+ 2026 reference", 1e10, 12.0, 70),
-        # (a) Phase 44 Yukawa background only at V_max (T208 §9.12 baseline, c=12)
-        ("Cloud-9 (Phase 44 Yukawa bg only, c=12)", 5e9, 12.0, PHASE44_YUKAWA_SIGMA_M_AT_VMAX),
+        # (a) Phase 44 Yukawa background only at V_max (T208 §9.12 baseline)
+        ("Cloud-9 (Phase 44 Yukawa bg only, c=12)", 5e9, 12.0, PHASE44_SIGMA_M_AT_VMAX),
         # (a') Phase 44 Yukawa at c=4 (Ohana+ inferred c) for same-halo comparison.
         # Per re196.docx Reviewer 2: framework rows use c=12, Ohana+ uses c=4; rho_s
         # and t_core change significantly with c. This row gives the apples-to-apples
         # comparison: same M, same sigma/m, but c=4 (Ohana+ concentration).
-        ("Cloud-9 (Phase 44 Yukawa, c=4)", 5e9, 4.0, PHASE44_YUKAWA_SIGMA_M_AT_VMAX),
+        ("Cloud-9 (Phase 44 Yukawa, c=4)", 5e9, 4.0, PHASE44_SIGMA_M_AT_VMAX),
         # (b) Framework's own v1=28 km/s resonance, evaluated at V_max=31.12 km/s
         # sigma_peak = 174, v_target = 28, w = 4.4 (from causality_summary_corrected.json)
         # sigma(V_max) = 174 * exp(-(31.12-28)^2 / (2*4.4^2)) = 174 * 0.778 = 135.3 cm^2/g
@@ -222,11 +236,17 @@ def analyze_cloud9():
 
     print(f"\nSilverman+ 2026 reference (NFW-correct V_max):")
     print(f"  t_core = {silverman['t_core_Gyr']:.4f} Gyr (V_max = {silverman['v_max_kms']:.2f} km/s)")
+    print(f"  t_core/t_cross = {silverman['t_core_over_t_cross']:.2f} (causality cap = 3.0)")
+    print(f"  Causality: {'FAIL (analytical formula outside validity range)' if not silverman['causality_ok'] else 'OK'}")
     print(f"  Reference: T212 published 0.22 Gyr used simple virial V_max approximation;")
     print(f"  T208's NFW-correct V_max at r_max gives 0.18 Gyr (20% lower due to higher V_max)")
     print(f"  Both are 'correct' but for different V_max definitions. NFW-correct is canonical.")
-    print(f"  -> Gravothermal cascade runs within Hubble time")
-    print(f"  -> 3 of 6 halos collapse (quiescent subset)")
+    print(f"  Per r197.docx Issue 3: Silverman+ ref ALSO violates causality cap (t_core/t_cross = 1.91 < 3.0).")
+    print(f"  Silverman+'s 3/6 collapse finding is from N-body, where the analytical Balberg+")
+    print(f"  formula is unreliable. The 0.176 Gyr is INDICATIVE; the N-body timescale is physical.")
+    print(f"  This is the strongest argument for N-body being required across the board.")
+    print(f"  -> Gravothermal cascade runs within Hubble time (analytical indication)")
+    print(f"  -> 3 of 6 halos collapse in Silverman+'s N-body (quiescent subset)")
     print()
     phase44 = results["Cloud-9 (Phase 44 Yukawa bg only, c=12)"]
     phase44_c4 = results["Cloud-9 (Phase 44 Yukawa, c=4)"]
