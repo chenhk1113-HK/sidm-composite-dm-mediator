@@ -94,6 +94,17 @@ R36 added single-source-of-truth numbers file + drift check. **§2.7 is frozen. 
 - **§2.7 FROZEN — no more iteration**
 - Status: closed
 
+### R37 (pending) — Simon 2019 anchor + 0.085 dex wording refinement
+- Added Simon 2019 (arXiv:1901.05465, ARA&A 57, 375) as reference [26a] in paper §1 Introduction
+- Added anchor sentence: "UFDs are known dark-matter-dominated systems whose kinematics are sensitive to the inner DM profile (Simon 2019, ARA&A 57, 375 [26a])."
+- Corrected [26] from "Mutlu-Pakdil et al." (incorrect, was "Aquarius II companion") to "Cerny et al. 2026 (Aquarius IV discovery, arXiv:2608.02601, RNAAS)"
+- Refined 0.085 dex wording in §2.7 to user's exact phrasing: "a value adopted as a sensitivity choice in the v19.2-B pipeline; no literature source reports this exact value"
+- Refined 6.18σ framing: "This is a sensitivity result, not a literature-based prediction"
+- Applied in two locations: §2.7 Closure Status OPEN block (line 234) + Mechanism paragraph (line 249)
+- standing_numbers.json changelog updated
+- script version bumped to v19.2-B.12 (R37)
+- Status: closed
+
 ---
 
 ## §2.7 Final Status (frozen)

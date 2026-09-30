@@ -202,7 +202,7 @@ def main():
         "method": "Ohana+ 2026 SIDM tension via corrected Diemer+ 2019 c-M relation",
         "paper": "Ohana, Zhang & Yu 2026, arXiv:2608.04362",
         "date": "2026-09-30",
-        "version": "v19.2-B.12 (r35 polish: 0.07 dex sibling reframed; 6.18σ/7.51σ as sensitivity results not literature predictions; 'chain is valid' softened from 'citation chain fully verified'; DK14/DK15 identity explicit (arXiv:1407.4730 published ApJ 799, 108)",
+        "version": "v19.2-B.12 (R37: 0.085 dex wording refined to user's exact phrasing 'a value adopted as a sensitivity choice in the v19.2-B pipeline; no literature source reports this exact value'; 6.18σ framed as 'sensitivity result, not a literature-based prediction'; Simon 2019 [26a] + Cerny+ 2026 [26] added to paper §1 introduction as observational anchor for UFD regime)",
         "fix_summary": (
             "Five rounds of fixes from r26.docx through r31.docx reviewer feedback:\n\n"
             "r26.docx Issue 1 (units bug): v19.2-B v2 multiplied denominator by log(10) "

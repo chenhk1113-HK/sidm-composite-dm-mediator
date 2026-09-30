@@ -1,7 +1,7 @@
 {
   "_meta": {
     "purpose": "Single source of truth for paper standing numbers. PAPER_V1_DRAFT.md, PAPER_STANDING_NUMBERS.md, and v192 scripts all read from this file. Drift between paper text and JSON is the upstream verification gap that produced the 11-bundle loop in §2.7. If you change a number here, re-run the v192 script AND regenerate PAPER_STANDING_NUMBERS.md.",
-    "freeze_status": "§2.7 frozen per user directive 2026-09-30 (R35-POLISH = c9f6b4c). No more §2.7 iteration.",
+    "freeze_status": "§2.7 frozen per user directive 2026-09-30 (R35-POLISH = c9f6b4c). No more §2.7 iteration. R37 added user-exact phrasing for 0.085 dex sensitivity framing + Simon 2019 [26a] / Cerny+ 2026 [26] observational anchor in §1 Introduction.",
     "next_action": "Decide paper thesis before any new section work."
   },
 
@@ -97,6 +97,7 @@
   },
 
   "_changelog": [
+    {"commit": "pending-R37", "bundle": "R37", "date": "2026-09-30", "change": "User-exact phrasing for 0.085 dex sensitivity framing: 'a value adopted as a sensitivity choice in the v19.2-B pipeline; no literature source reports this exact value.' 6.18σ/7.51σ framed as 'sensitivity result, not a literature-based prediction.' Simon 2019 [26a] + Cerny+ 2026 [26] added to paper §1 Introduction as observational anchor for UFD regime."},
     {"commit": "c9f6b4c", "bundle": "R35-POLISH", "date": "2026-09-30", "change": "Created standing_numbers.json as single source of truth. §2.7 frozen. 0.07/0.085 dex reframed as sensitivity results. DK14/DK15 identity explicit. Citation chain softened to 'chain is valid'."},
     {"commit": "da610fe", "bundle": "R31-VERIFICATION", "date": "2026-09-30", "change": "REPRODUCTION → CONSISTENCY CHECK framing"},
     {"commit": "8677c71", "bundle": "R31", "date": "2026-09-30", "change": "SCATTER CORRECTION: 6.18σ → 3.29σ (Ohana+ uses 0.16 dex, not 0.085)"},
