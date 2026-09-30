@@ -262,6 +262,65 @@
 
 ---
 
+## §15. v19.2-B Ohana+ 2026 c-M tension reproduction
+
+**Source**: `scripts/v192_b_ohana3p2sigma_reproduction.py`, output `v192_b_ohana3p2sigma_reproduction.json` (v19.2-B.5).
+
+**Reference**: Ohana, Zhang & Yu 2026, arXiv:2608.04362 — SIDM core-forming halos reduce the c-M tension to ~3σ; CDM requires ~7σ. Uses Diemer & Joyce 2019 c-M relation.
+
+| Parameter | Value | Source |
+|---|---|---|
+| Cloud-9 best-fit (Ohana+) | M = 4.7×10⁹ M☉, c = 4.0, τ ≈ 0.5 (max-core stage) | arXiv:2608.04362 §3.1 |
+| MCMC-recovered best-fit (our pipeline) | M = 4.7571×10⁹ M☉, c = 3.8171, τ = 0.18 | v192_b JSON `best_fit_params` |
+| c_med at our best-fit M | c_med = diemer2019_c200(4.7571e9) = **12.805** | Diemer+ 2019 Eq. 5 |
+| Tension (Diemer+ 2019 model-dep, 0.085 dex) | **6.18σ** (factor 1.93 above published 3σ) | JSON `tension_sweep_literature_scatter` |
+| Tension (Diemer+ 2019 cosmic, 0.110 dex) | 4.78σ | same |
+| Tension (Duffy+ 2008, 0.140 dex) | 3.75σ | same |
+| Tension (lognormal fixed-mass, 0.070 dex) | 7.51σ | same |
+| Scatter needed to close gap to 3σ | 0.164 dex | derived: 0.52565 / 3.20 = 0.164 |
+| 0.164 dex vs Diemer+ model-dep (0.085) | 1.93× (93% larger) | derived |
+| 0.164 dex vs Diemer+ cosmic (0.110) | 1.49× (49% larger) | derived |
+| 0.164 dex vs Duffy+ 2008 (0.140) | 1.17× (17% larger) | derived |
+
+**Mechanism (3 candidate sources for factor-1.93 gap):**
+1. Synthetic data at fiducial — forces c_fit ≈ 4.0 (dominant); real data could shift c_fit to 5-6, dropping tension by factor 1.5-2
+2. σ_scatter convention — Ohana+ uses Diemer+ 2019 (same as ours, verified by arXiv:2608.04362 §3.1+§3.2 inspection); apples-to-apples
+3. Tension definition — 1D c-marginalized vs 2D joint (likely Ohana+)
+
+**Trajectory (v19.1.5 → v19.2-B.6):** 1.04σ → 2.69σ [units bug] → 6.18σ [fixed] → 6.18σ [framed clean negative] → 6.18σ [docstring reproducible] → 6.18σ [§2.7 added] → **6.18σ [paper-JSON reconciled]**
+
+**Headline finding (v19.2-B.5):** Our simplified pipeline does **not** reproduce Ohana+ 2026's ~3σ SIDM tension. At the SIDM-appropriate c-M scatter (Diemer+ 2019 model-dep, 0.085 dex), the best-fit tension is 6.18σ — a factor-1.93 disagreement. Closing the gap would require a scatter of 0.164 dex, above all published values. **This is a documented negative result.**
+
+---
+
+## §16. v19.2-C SIDM Concerto subhalo consistency (Nadler+ 2025)
+
+**Source**: `scripts/v192_c_concerto_subhalo_cloud9.py`, output `v192_c_concerto_subhalo_cloud9.json` (v19.2-C.5).
+
+**Reference**: Nadler+ 2025, arXiv:2503.10748 — SIDM Concerto cosmological N-body simulation; Zenodo 10.5281/zenodo.14933624.
+
+| Parameter | Value | Source |
+|---|---|---|
+| MW_Halo416 catalog | 2,489 SIDM subhalos | Nadler+ 2025 parametric |
+| Cloud-9-mass halos (1e9-1e10 M☉) | 267 | filter on `mint` |
+| Halos with valid rc1 fits | 264 | rc1 > 0 |
+| Median SIDM core radius rc1 | **0.82 kpc** | JSON `concerto_subhalo_stats_cloud9_mass` |
+| rc1 16-84 percentile | 0.53 - 1.20 kpc | same |
+| Median CDM Rmax | 3.65 kpc | same |
+| Median rc1/Rmax | 0.216 | same |
+| Cloud-9 expectation (Yang+ 2024 τ=0.18) | rc ≈ 0.5 ± 0.3 kpc | Yang+ 2024 Eq. 5 |
+| Match Cloud-9 (rc=0.5±0.3) | **1.07σ** | derived: \|0.82-0.5\|/0.3 = 1.07 |
+
+**Caveat (per r30 Ohana+ 2026 inspection):** Ohana+ 2026 use the **Halo004 (GroupSIDM-147 model)** subset of Concerto. Our v19.2-C v1 uses **Halo416 (MilkyWaySIDM model)** — different host and different SIDM model. Framework-level conclusion (Concerto SIDM halos at Cloud-9 mass have rc ≈ 0.5-1 kpc) is robust to host choice; precise median varies by host and model.
+
+**Mechanism (what v19.2-C v1 establishes vs not):**
+- ✔ ESTABLISHES: At M = 1e9-1e10 M☉, SIDM N-body core radius scaling is consistent with Yang+ 2024 for τ ≈ 0.18.
+- ✘ DOES NOT ESTABLISH: Correct core radius for Cloud-9 specifically (tidal stripping, isolated RELHIC env, single host, single model).
+
+**Headline finding (v19.2-C.5):** Consistent across mass scale; environmental and model differences prevent cross-validation for Cloud-9 specifically. This is a **consistency check**, not independent validation.
+
+---
+
 ## Verification
 
 Run `python scripts/audit_claims.py` to re-verify every number against its source JSON.

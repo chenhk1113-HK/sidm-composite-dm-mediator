@@ -82,16 +82,18 @@ def sigma_below_diemer(c_fit, M_fit, scatter_dex=0.085):
     The Diemer+ 2019 paper expresses scatter in units of "dex" (i.e. log10).
     "0.085 dex" means sigma_log10(c) = 0.085.
 
-    Example (best-fit c=3.817, M=4.76e9, scatter=0.085 dex):
-        log10(c_med)    = log10(12.819) = 1.10772
-        log10(c_fit)    = log10(3.817)  = 0.58167
-        log10 diff      = 0.52605
-        sigma_below     = 0.52605 / 0.085 = 6.1887 -> 6.19 sigma
+    Example (MCMC-recovered best-fit c=3.8171, M=4.7571e9, scatter=0.085 dex):
+        log10(c_med)    = log10(12.805) = 1.10738
+        log10(c_fit)    = log10(3.8171) = 0.58173
+        log10 diff      = 0.52565
+        sigma_below     = 0.52565 / 0.085 = 6.1841 -> 6.18 sigma
 
-    The JSON reports 6.18 sigma because the actual MCMC uses higher-precision
-    intermediates (c_fit = 3.8170 from MAP with full double-precision c_med
-    computed from MCMC samples). Both 6.18 (rounded from 6.188) and 6.19
-    (rounded from 6.1887) are within rounding tolerance of the same result.
+    This reproduces the JSON's value exactly. The docstring earlier showed
+    approximate c_med=12.819 (from M=4.7e9) giving 6.19; that was at the
+    fiducial, not the MCMC best-fit. The MCMC recovers c_fit=3.8171 and
+    M=4.7571e9 (slightly larger than fiducial 4.7e9, so c_med is slightly
+    smaller: 12.805 vs 12.819). Both 6.18 and 6.19 are within rounding
+    tolerance of the same result; we report 6.18 to match the JSON.
 
     NOTE (per r26.docx): r26 caught a units bug here in v19.2-B v2. The
     original code multiplied the denominator by log(10) (treating scatter as
@@ -102,8 +104,14 @@ def sigma_below_diemer(c_fit, M_fit, scatter_dex=0.085):
     NOTE 2 (per r27.docx): The docstring previously showed c=4.0 giving 5.95
     sigma, but the actual MCMC best-fit is c=3.817 giving 6.18 sigma. Both
     values are correct, but the docstring should match the JSON. Updated to
-    c=3.817 (now showing full arithmetic with 6.19 sigma to match the
-    displayed computation, per r28.docx Issue 2).
+    c=3.8171 (now showing full arithmetic that reproduces the JSON's 6.18).
+
+    NOTE 3 (per r30.docx): JSON says 6.18, paper §2.7 previously said 6.19
+    (with footnote). This is the paper-JSON-drift pattern Rule 29 is designed
+    to prevent. Resolution: JSON 6.18 is the AUTHORITATIVE number (it uses
+    the actual MCMC best-fit c=3.8171, M=4.7571e9). Docstring now reproduces
+    6.18 from arithmetic. Paper §2.7 will be updated to 6.18 in v19.2-B.6
+    (to match the JSON).
     """
     c_med = diemer2019_c200(M_fit)
     return (np.log10(c_med) - np.log10(c_fit)) / scatter_dex
