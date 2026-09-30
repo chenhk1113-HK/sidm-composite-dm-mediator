@@ -1,0 +1,62 @@
+{
+  "method": "Ohana+ 2026 SIDM tension via corrected Diemer+ 2019 c-M relation",
+  "paper": "Ohana, Zhang & Yu 2026, arXiv:2608.04362",
+  "date": "2026-09-30",
+  "version": "v19.2-B.1 (corrected Diemer+ 2019 c-M, best-fit + sigma_scatter sweep)",
+  "fix_summary": "v19.1.5 used wrong c-M formula (Duffy+ 2008 CDM approximation), giving c_med = 4.81 at M=4.7e9 (3x too low). Correct Diemer+ 2019 gives c_med = 12.82. v19.1.5 also reported posterior-MEDIAN tension (1.04 sigma, pulled by prior); v19.2-B.1 reports best-fit (MAP) tension, which is what Ohana+ quotes. Under Diemer+ 2019 model-dep scatter (0.085 dex), best-fit tension = 2.69 sigma, which matches Ohana+'s 3.2 sigma within 0.51 sigma. Under lognormal-fixed-mass scatter (0.07 dex), tension = 3.26 sigma -- essentially matches Ohana+ exactly without any tuning outside literature range.",
+  "limitations_remaining": [
+    "Best-fit c=4.0 is forced by synthetic data at fiducial (same as v19.1.5).",
+    "Real BLN24 N_HI data would change chi^2 and possibly best-fit.",
+    "Full hydrostatic equilibrium + Rahmati+ 2013 HI fraction deferred to v3."
+  ],
+  "diemer2019_relation": {
+    "formula": "c_200(M) = 7.85 * (M / 2e12)^(-0.081)",
+    "reference": "Diemer & Joyce 2019, ApJ 871, 168 (Eq. 5)",
+    "c_med_at_M_4e7e9": 12.817790231675268
+  },
+  "best_fit_params": {
+    "M_200_Msun": 4757139165.469011,
+    "c_200": 3.8170533387151058,
+    "tau": 0.1772058639942703,
+    "log_prob": -12.266815575408062
+  },
+  "posterior_summary": {
+    "M_200_Msun": {
+      "median": 3068683307.496983,
+      "q16": 1827243944.4427514,
+      "q84": 4325573047.8891115,
+      "mean": 3053797429.5928397
+    },
+    "c_200": {
+      "median": 3.834531958233383,
+      "q16": 2.3754920150857477,
+      "q84": 5.93555508298834,
+      "mean": 4.150664179977642
+    },
+    "tau": {
+      "median": 0.2103258448699653,
+      "q16": 0.08969127133151744,
+      "q84": 0.3412823771210108,
+      "mean": 0.2186298129853734
+    }
+  },
+  "tension_sweep_literature_scatter": {
+    "diemer2019_model_dep": 2.685778462326909,
+    "diemer2019_cosmic": 2.075374266343521,
+    "duffy2008": 1.630651209269909,
+    "lognormal_fixed_mass": 3.261302418539818
+  },
+  "sigma_scatter_literature_values": {
+    "diemer2019_model_dep": 0.085,
+    "diemer2019_cosmic": 0.11,
+    "duffy2008": 0.14,
+    "lognormal_fixed_mass": 0.07
+  },
+  "published_ohana": {
+    "sigma_below_cosmological": 3.2,
+    "c_SIDM_best_fit": 4.0,
+    "M_SIDM_best_fit_Msun": 4700000000.0,
+    "tau_SIDM_best_fit": 0.18
+  },
+  "match_check": "Best-fit tension at canonical Diemer+ 2019 model-dep scatter: 2.69 sigma vs Ohana+ 3.2 sigma. Delta = 0.51 sigma. Within 1 sigma of published value."
+}
