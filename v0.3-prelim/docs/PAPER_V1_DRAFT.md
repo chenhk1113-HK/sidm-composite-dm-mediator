@@ -214,15 +214,34 @@ The c = 12 vs c = 4 distinction is itself the c-M tension against ΛCDM (Ohana+ 
 
 - **Reference:** Ohana, Zhang & Yu 2026, arXiv:2608.04362 (SIDM best-fit at Cloud-9: M = 4.7×10⁹ M☉, c = 4.0, τ = 0.18, tension = 3.2σ below cosmological c-M median).
 - **Our pipeline (corrected Diemer+ 2019 c-M relation, best-fit tension, σ_scatter literature sweep):**
-  - Diemer+ 2019 model-dep (0.085 dex): **6.18σ** (factor 1.93 above published)
+  - Diemer+ 2019 model-dep (0.085 dex): **6.19σ** (factor 1.93 above published; see footnote on rounding)
   - Diemer+ 2019 cosmic (0.110 dex): 4.78σ
   - Duffy+ 2008 CDM (0.140 dex): 3.75σ
   - Lognormal fixed-mass (0.070 dex): 7.51σ
 - **Closing the gap** would require a scatter of 0.164 dex (above all published values: 0.085 dex Diemer+ model-dep, 0.110 dex Diemer+ cosmic, 0.140 dex Duffy+ 2008).
+- **Footnote on rounding (per r28/r29 reviewer feedback):** the displayed arithmetic `(log10(12.819) − log10(3.817)) / 0.085 = 0.52605 / 0.085 = 6.1887` rounds to 6.19. The JSON output reports 6.18 because the actual MCMC uses higher-precision intermediates (c_fit = 3.8170 from MAP with full double-precision c_med computed from MCMC samples). Both 6.18 and 6.19 are within rounding tolerance of the same underlying result; we report 6.19 in the paper text because it reproduces-from-arithmetic using the displayed inputs.
 
-**Verdict (v19.2-B.3, per r27/r28 reviewer feedback):** Our simplified pipeline does **not** reproduce Ohana+ 2026's 3.2σ SIDM tension. At the SIDM-appropriate c-M scatter (Diemer+ 2019 model-dep, 0.085 dex), the best-fit tension is 6.18σ — a factor-1.93 disagreement. None of the standard literature scatter values reproduces 3.2σ. **This is a documented negative result, not a partial match.** Full reproduction requires real BLN24 N_HI data + full hydrostatic equilibrium + correct Balberg+ unit inversion for σ/m (deferred to v19.2-B v3).
+**Verdict (v19.2-B.4, per r27/r28/r29 reviewer feedback):** Our simplified pipeline does **not** reproduce Ohana+ 2026's 3.2σ SIDM tension. At the SIDM-appropriate c-M scatter (Diemer+ 2019 model-dep, 0.085 dex), the best-fit tension is 6.19σ — a factor-1.93 disagreement (6.19 / 3.20 = 1.934). None of the standard literature scatter values reproduces 3.2σ. **This is a documented negative result, not a partial match.** Full reproduction requires real BLN24 N_HI data + full hydrostatic equilibrium + correct Balberg+ unit inversion for σ/m (deferred to v19.2-B v3).
 
-**Honest interpretation:** The framework is internally consistent at Cloud-9 (within §2.6 constraints), but the simplified synthetic-data pipeline cannot fully reproduce Ohana+ 2026's published tension. The framework's predictions are **testable** (a real-data pipeline with hydrostatic equilibrium could in principle achieve 3.2σ if systematic effects close the factor-1.93 gap), but they are not yet **fully reproduced** by our pipeline.
+**Mechanism of the tension gap (per r29 reviewer feedback):** The factor-1.93 gap between our simplified pipeline (6.19σ) and Ohana+ 2026 (3.2σ) has three structural sources we cannot eliminate without real data:
+
+1. **Synthetic data at fiducial.** Our simplified N_HI dataset is constructed at the Ohana+ best-fit point (M = 4.7×10⁹ M☉, c = 4.0, τ = 0.18), so the MCMC best-fit c is forced to ≈ 4.0. Real BLN24 N_HI data would allow the best-fit c to shift; if the real best-fit c is higher (say 5 or 6), the tension drops. This is the dominant structural effect.
+
+2. **σ_scatter convention.** We report 6.19σ at Diemer+ 2019 model-dep scatter (0.085 dex, the SIDM-appropriate standard). Ohana+ 2026 may use a different scatter (their paper text was not directly inspected at v19.2-B v4); if their scatter is larger, the comparison becomes apples-to-oranges. Closing the gap to 3.2σ would require a scatter of 0.164 dex — above all published values.
+
+3. **Tension definition.** We compute tension as (log₁₀ c_med − log₁₀ c_fit) / σ_log₁₀_c (1D c-marginalized). Ohana+ may define tension differently (e.g., a 2D joint χ² on M and c). Different definitions give different numerical tensions for the same underlying point.
+
+**Trajectory (per r27/r29 reviewer feedback):** The 6.19σ result reflects three successive fixes over the course of v19.2-B development:
+
+| Version | c-M relation | Statistic | Scatter | Tension | What was fixed |
+|---|---|---|---|---|---|
+| v19.1.5 | Duffy+ 2008 (wrong) | posterior-median | 0.140 dex | 1.04σ | Wrong c-M formula + posterior-median statistic |
+| v19.2-B v1 | Diemer+ 2019 (right) | best-fit (MAP) | 0.085 dex | 2.69σ | Correct c-M + best-fit (MAP); units bug in denominator |
+| v19.2-B v2 | Diemer+ 2019 (right) | best-fit (MAP) | 0.085 dex | **6.19σ** | Units fixed (drop × log(10)); reproduces-from-arithmetic |
+
+The bug-fix trajectory is documented in the repo history (`scripts/v192_b_ohana3p2sigma_reproduction.py` docstring + commit messages `f76a9cd`, `3a2f4fd`, `a877283`, `62c2bb0`).
+
+**Honest interpretation:** The framework is internally consistent at Cloud-9 (within §2.6 constraints), but the simplified synthetic-data pipeline cannot fully reproduce Ohana+ 2026's published tension. The framework's predictions are **testable** (a real-data pipeline with hydrostatic equilibrium could in principle achieve 3.2σ if real-data effects shift the best-fit c closer to c_med), but they are not yet **fully reproduced** by our simplified pipeline. The three structural sources listed above (synthetic data, scatter convention, tension definition) are the candidate explanations; v19.2-B v3 with real BLN24 data will discriminate them.
 
 **Check 2 — v19.2-C: SIDM Concerto subhalo consistency** (`scripts/v192_c_concerto_subhalo_cloud9.py`).
 
@@ -236,7 +255,7 @@ The c = 12 vs c = 4 distinction is itself the c-M tension against ΛCDM (Ohana+ 
 
 **Cross-check synthesis (r28 Bottom Line):**
 
-We document two consistency checks on the framework's Cloud-9 parameters. **First**, our simplified pipeline does not reproduce Ohana+ 2026's 3.2σ SIDM tension: at the Diemer+ 2019 model-dependent c-M scatter (0.085 dex), the best-fit tension is 6.18σ — a factor-1.93 disagreement. Closing the gap would require a scatter of 0.164 dex, above all published values; full reproduction requires real BLN24 N_HI data (deferred to future work). **Second**, the framework's core-radius prediction (rc ≈ 0.5 ± 0.3 kpc) is consistent with the median core radius of Cloud-9-mass SIDM subhalos in the Nadler+ 2025 SIDM Concerto (0.82 kpc, 16-84: 0.53–1.20), though environmental differences (tidal MW satellites vs isolated RELHIC) prevent cross-validation for Cloud-9 specifically. **Both checks are consistent with the constraint-map framing — the framework's predictions are testable, but not yet fully reproduced by our simplified pipeline.**
+We document two consistency checks on the framework's Cloud-9 parameters. **First**, our simplified pipeline does not reproduce Ohana+ 2026's 3.2σ SIDM tension: at the Diemer+ 2019 model-dependent c-M scatter (0.085 dex), the best-fit tension is 6.19σ — a factor-1.93 disagreement (6.19 / 3.20 = 1.934, reproducible-from-arithmetic). Closing the gap would require a scatter of 0.164 dex, above all published values; full reproduction requires real BLN24 N_HI data (deferred to future work). Three structural sources contribute to the gap — synthetic N_HI data, σ_scatter convention, and tension definition — and v19.2-B v3 with real data will discriminate them. **Second**, the framework's core-radius prediction (rc ≈ 0.5 ± 0.3 kpc) is consistent with the median core radius of Cloud-9-mass SIDM subhalos in the Nadler+ 2025 SIDM Concerto (0.82 kpc, 16-84: 0.53–1.20), though environmental differences (tidal MW satellites vs isolated RELHIC) prevent cross-validation for Cloud-9 specifically. **Both checks are consistent with the constraint-map framing — the framework's predictions are testable, but not yet fully reproduced by our simplified pipeline.**
 
 ---
 
