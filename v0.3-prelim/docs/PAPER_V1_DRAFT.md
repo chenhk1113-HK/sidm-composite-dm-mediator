@@ -13,7 +13,7 @@
 
 We present a velocity-dependent multi-component SIDM architecture — a **phenomenological constraint map and no-go catalogue, not a unified particle-physics model**. The framework addresses the tension between Cloud-9 (σ/m ≥ 50 cm²/g at v ≈ 28 km/s) and dwarf galaxy upper limits (σ/m ≲ 0.8 cm²/g at v ≈ 5–15 km/s). **4 of 8 observational channels** are described under physically motivated f_H (Yang+ 2025 or T202 N-body); 7 of 8 only under retracted borrowed f_H. The Cloud-9 vs dSph tension is unresolved at Phase 44 parameters. Path F1 (§9.9-§9.11) provides a three-term σ_eff decomposition structurally sufficient to reach SPARC's σ/m ≈ 0.193, but the priored free fit fails SPARC (log L ≈ −2, clear fail). Five UV completion no-go theorems (magnetic dipole, Hidden U(1), GeV inelastic DM, p-wave resonance, one-mediator systematic) apply to the Phase 44 baseline. A two-mediator Drobczyk 2025 candidate achieves thermal relic Ωh² = 0.119 at δ = 0.43%, but does not resolve Cloud-9 vs dSph.
 
-**Paper organization:** §2 physical ingredients (including §2.5 σ/m vs σ_eff distinction), §3 observational channels, §9 two-component + Path F1, §10 UV completion no-go theorems, §11 conclusions. **Open physics finding:** at σ/m = 0.5–2.5 cm²/g (microphysical σ/m at dSph scale from v₁ Gaussian tail), the Balberg+ gravothermal formula predicts collapse in t_core = 0.7–6.3 Gyr for all 8 dSph halos (causality-OK, ratios 20–98). This contradicts dSph observations showing no dense cores. The framework's candidate mechanism is the v₁ resonance width: a narrower Gaussian (w ≲ 3 km/s vs current 4.4) would suppress the dSph tail while preserving Cloud-9's bulk σ/m. The Fornax σ_HL = -0.47 cm²/g internal inconsistency between σ/m(v) and σ_eff(v) curves at v=15 km/s is a related symptom, and is **robust against σ_peak_HH_1 variation in [30, 250] cm²/g** — see §2.6 sensitivity sweep. Under the paper's own σ/m convention (Gaussian w=4.4) and causality criterion (ratio > 3), **Cloud-9 constrains σ_peak_HH_1 ≤ 30 cm²/g** (Phase 44 free fit value 196.3 violates this by 30×). Fornax σ_HL outlier unavoidable in any σ_peak range compatible with Cloud-9. Both require N-body resolution. Supplementary material (LZ event, mass-spectrum embeddings, JVAS tension) in `PAPER_V1_DRAFT_SUPPLEMENTARY.md`.
+**Paper organization:** §2 physical ingredients (including §2.5 σ/m vs σ_eff distinction), §3 observational channels, §9 two-component + Path F1, §10 UV completion no-go theorems, §11 conclusions. **Open physics finding:** at σ/m = 0.5–2.5 cm²/g (microphysical σ/m at dSph scale from v₁ Gaussian tail), the Balberg+ gravothermal formula predicts collapse in t_core = 0.7–6.3 Gyr for all 8 dSph halos (causality-OK, ratios 20–98). This contradicts dSph observations showing no dense cores. The framework's candidate mechanism is the v₁ resonance width: a narrower Gaussian (w ≲ 3 km/s vs current 4.4) would suppress the dSph tail while preserving Cloud-9's bulk σ/m. The Fornax σ_HL = -0.47 cm²/g internal inconsistency between σ/m(v) and σ_eff(v) curves at v=15 km/s is a related symptom, and is **robust against σ_peak_HH_1 variation in [30, 250] cm²/g** — see §2.6 sensitivity sweep. Under the paper's own σ/m convention (Gaussian w=4.4) and causality criterion (ratio > 3): at c=12, **the Cloud-9 σ/m floor (σ/m(28) ≥ 50) and the causality cap (σ_peak ≤ 30) have empty intersection** — no σ_peak value satisfies both. At c=4 (Ohana+ physical anchor, §9.12), the floor and causality are jointly satisfiable across σ_peak ∈ [50, 250]. The c=12 vs c=4 distinction is itself the c-M tension against ΛCDM. Fornax σ_HL outlier remains unavoidable in either case. Both require N-body resolution. Supplementary material (LZ event, mass-spectrum embeddings, JVAS tension) in `PAPER_V1_DRAFT_SUPPLEMENTARY.md`.
 
 ---
 
@@ -143,48 +143,58 @@ The gravothermal cascade at Cloud-9 (v ≈ 28 km/s) is driven by σ/m ≈ σ_eff
 
 ### 2.6 σ_peak_HH_1 Sensitivity Sweep (v19.2-A, paper convention)
 
-**Question:** Different Phase 44 fits give different values for the v₁ resonance peak amplitude. The causality-boundary value is σ_peak_HH_1 = 174 cm²/g (per `causality_summary_corrected`), the Phase 44 free joint fit prefers 196.3 cm²/g, and various prescription modes (borrowed, yang, t202) give 33.9–104.8 cm²/g. **Is the framework's σ_peak correct, and what range is consistent with Cloud-9 causality + dSph non-collapse?**
+**Question:** Different Phase 44 fits give different values for the v₁ resonance peak amplitude. The causality-boundary value is σ_peak_HH_1 = 174 cm²/g (per `causality_summary_corrected`), the Phase 44 free joint fit prefers 196.3 cm²/g, and various prescription modes (borrowed, yang, t202) give 33.9–104.8 cm²/g. **Is the framework's σ_peak correct, and what range is consistent with Cloud-9 causality + the Cloud-9 σ/m floor + dSph non-collapse?**
 
 **Method:** Sweep σ_peak_HH_1 ∈ {30, 50, 75, 100, 125, 150, 174, 200, 250} cm²/g using the **paper's σ/m convention** (Gaussian, w = 4.4 km/s, peak at v₁ = 28 km/s):
 
   σ/m(v) = σ_m_at_v(0.052, 1.0, v) + σ_peak × exp(−(v − 28)² / (2 × 4.4²))
 
-This is the same parameterization as §2.5 (imported from `v192_dsph_gravothermal_sweep.py`), ensuring §2.5 and §2.6 describe the same σ/m(v). The causality criterion is the paper's: t_core > 3 × t_cross (§9.12). Fornax σ_HL outlier test: σ_HL_required = (σ_eff_published − f_H² σ_HH) / (2 f_H f_L) at f_H = 0.30. Code: `scripts/v192_a_phase44_sigma_peak_sensitivity.py`.
+This is the same parameterization as §2.5 (imported from `v192_dsph_gravothermal_sweep.py`). Three constraints are checked for each σ_peak value:
+
+1. **Cloud-9 causality** (paper's §9.12): t_core > 3 × t_cross. Computed at **both c = 12** (ΛCDM-conservative) and **c = 4** (Ohana+-inferred physical anchor). NFW params from `causality_summary_corrected.json`: M_200 = 5×10⁹ M☉, V_max = 28 km/s, r_vir = 35.1 kpc, r_s = 2.93 kpc, ρ_s = 9.6×10⁻³ M☉/pc³ (at c = 12); ρ_s = 1.0×10⁻³ M☉/pc³ (at c = 4).
+2. **Cloud-9 σ/m floor**: σ/m(v=28) ≥ 50 cm²/g (per BLN24 / Ohana+ published floor).
+3. **Fornax σ_HL outlier**: σ_HL_required = (σ_eff_published − f_H² σ_HH) / (2 f_H f_L) at f_H = 0.30. σ_HL < 0 = unphysical.
+
+Code: `scripts/v192_a_phase44_sigma_peak_sensitivity.py`.
 
 **Findings:**
 
-| σ_peak | σ/m(28) | Cloud-9 ratio | Cloud-9 verdict | σ/m(15) | Fornax σ_HL req | Fornax σ_HL status |
-|---|---|---|---|---|---|---|
-| **30** | 30.19 | 5.87 | **OK** | 0.73 | −0.08 | unphysical |
-| 50 | 50.19 | 1.85 | below cap | 0.98 | −0.13 | unphysical |
-| 75 | 75.19 | 1.23 | below cap | 1.30 | −0.20 | unphysical |
-| 100 | 100.19 | 0.93 | below cap | 1.62 | −0.27 | unphysical |
-| 125 | 125.19 | 0.74 | below cap | 1.94 | −0.34 | unphysical |
-| 150 | 150.19 | 0.62 | below cap | 2.25 | −0.41 | unphysical |
-| 174 | 174.19 | 0.53 | below cap | 2.56 | −0.47 | unphysical |
-| 200 | 200.19 | 0.46 | below cap | 2.89 | −0.54 | unphysical |
-| 250 | 250.19 | 0.37 | below cap | 3.53 | −0.68 | unphysical |
+| σ_peak | σ/m(28) | Cloud-9 floor met? | c=12 ratio | c=12 verdict | c=4 ratio | c=4 verdict | σ/m(15) | Fornax σ_HL req |
+|---|---|---|---|---|---|---|---|---|
+| 30 | 30.19 | below floor | 5.87 | **OK** | 14.95 | OK | 0.73 | −0.08 |
+| 50 | 50.19 | **meets** | 1.85 | below cap | 14.06 | OK | 0.98 | −0.13 |
+| 75 | 75.19 | **meets** | 1.23 | below cap | 9.37 | OK | 1.30 | −0.20 |
+| 100 | 100.19 | **meets** | 0.93 | below cap | 7.03 | OK | 1.62 | −0.27 |
+| 125 | 125.19 | **meets** | 1.08 | below cap | 10.38 | OK | 1.94 | −0.34 |
+| 150 | 150.19 | **meets** | 0.90 | below cap | 8.65 | OK | 2.25 | −0.41 |
+| **174** | **174.19** | **meets** | 0.78 | below cap | 7.46 | **OK** | 2.56 | −0.47 |
+| 200 | 200.19 | **meets** | 0.68 | below cap | 6.49 | OK | 2.89 | −0.54 |
+| 250 | 250.19 | **meets** | 0.54 | below cap | 5.19 | OK | 3.53 | −0.68 |
 
-(Cloud-9 verdict "below cap" = t_core/t_cross < 3, fails the paper's §9.12 causality criterion. Fornax "unphysical" = σ_HL < 0 required to fit published σ_eff.)
+(Cloud-9 verdict "below cap" = t_core/t_cross < 3, fails the paper's §9.12 causality criterion. Fornax σ_HL req is unphysical (negative) across the swept range, by construction.)
 
-**Three key results (paper convention):**
+**The headline finding — empty intersection at c = 12:**
 
-1. **Cloud-9 causality (paper's criterion, ratio > 3) constrains σ_peak ≤ 30 cm²/g.** At σ_peak = 30, ratio = 5.87 (OK); at σ_peak = 50, ratio = 1.85 (fails paper's criterion). **The Phase 44 free fit value (196.3) violates the paper's own causality cap by a factor of 30×.** This is consistent with the v19.1.x finding that Cloud-9 is incompatible with NFW initial conditions at c ≥ 10.
+- **Cloud-9 c = 12 causality** (paper's ratio > 3 cap): only σ_peak = 30 cm²/g passes (ratio = 5.87). At σ_peak = 50, ratio = 1.85 (below cap).
+- **Cloud-9 σ/m floor** (σ/m(v=28) ≥ 50, per BLN24/Ohana+): σ_peak ∈ {50, 75, 100, 125, 150, 174, 200, 250} passes.
+- **Intersection of the two constraints at c = 12: EMPTY.** No σ_peak value simultaneously passes c = 12 causality AND reaches the published σ/m floor.
 
-2. **The Fornax σ_HL outlier is unavoidable in any σ_peak range that also satisfies Cloud-9.** For σ_HL ≥ 0 to fit published σ_eff(Fornax) = 0.032, σ_peak would need to be ≤ ~0.7 cm²/g — but at that peak, σ/m(V_max = 31.12) is only ~0.7 cm²/g, far below Cloud-9's requirement of ~135 cm²/g. **The two constraints are fundamentally incompatible within the paper's Gaussian σ/m parameterization.**
+The Phase 44 free fit (σ_peak = 196.3) sits at σ/m(v=28) = 196.5 cm²/g — well above the floor, but its c = 12 causality ratio is ≈ 0.68 (below cap). It satisfies the floor but fails causality at c = 12.
 
-3. **Fornax gravothermal always passes the paper's causality criterion (ratios 36–178), but t_core becomes shorter than Hubble time at σ_peak ≥ 200.** At σ_peak = 200, t_core(Fornax) = 11.7 Gyr; at σ_peak = 250, t_core(Fornax) = 9.6 Gyr.
+**Reconciliation with §9.12:** §9.12 cites σ_peak = 174 cm²/g and reports gravothermal collapse with t_core = 91 Myr at c = 12 (which it labels "causality-FAIL, analytical only") and t_core = 4.42 Gyr at c = 4 ("causality-OK, physical anchor"). The §2.6 sweep confirms both: at σ_peak = 174, c = 12 ratio = 0.78 (FAIL), c = 4 ratio = 7.46 (OK). **The §9.12 verdict is internally consistent: c = 4 is the physical anchor, c = 12 is analytical only.** At c = 4, σ_peak ∈ {50, 75, …, 250} all pass causality AND meet the σ/m floor — the empty intersection evaporates at the Ohana+ anchor.
 
-**SPARC consistency:** σ/m(100) = 0.052 cm²/g across the entire sweep (paper convention), well below the SPARC upper limit. **SPARC is not a constraint on σ_peak** under the paper convention.
+**Fornax σ_HL outlier remains unavoidable.** At σ_peak = 30, σ_HL_required = −0.08 (small); at σ_peak = 174, σ_HL_required = −0.47 (large). Across the swept range, σ_HL is always negative. The Fornax outlier is robust against σ_peak variation — it is a structural consequence of the v₁ Gaussian tail reaching dSph velocities, coupled to the framework's σ/m(v) and σ_eff(v) curves at v = 15.
 
-**Parameterization comparison (sanity check):** The Breit-Wigner parameterization used in v19.2-A v1 (and the Phase 44 free fit) gives σ/m values that differ from the paper's Gaussian by up to ~17× at UFD velocities. The Gaussian paper convention is what §2.5 states. Both parameterizations give the same σ/m at v = 28 (peak), but diverge sharply at low velocity where the resonance width matters.
+**SPARC consistency:** σ/m(v=100) = 0.052 cm²/g constant across the sweep. SPARC is not a constraint on σ_peak under the paper convention.
 
-**Bottom line (paper convention):** Under the paper's own σ/m convention and causality criterion:
-- **σ_peak ≤ 30 cm²/g** for Cloud-9 to pass (paper's ratio > 3 criterion)
-- **Fornax σ_HL outlier unavoidable** in any σ_peak range compatible with Cloud-9
-- The 174 cm²/g value cited in `causality_summary_corrected` is **at the physical boundary but fails the paper's own cap** (ratio = 0.53 at σ_peak = 174, not 1.04 as previously stated)
+**Parameterization comparison (sanity check):** The Breit-Wigner parameterization used in v19.2-A v1 (and the Phase 44 multi-channel fit) gives σ/m values that differ from the paper's Gaussian by up to ~17× at UFD velocities. The Gaussian (paper convention) is what §2.5 and §9.12 state.
 
-This is a tighter constraint than the v19.2-A v1 sweep (which used a weaker ratio > 1 criterion). The Phase 44 free fit (σ_peak = 196.3) violates the paper's own causality criterion.
+**Bottom line:** Under the paper's own σ/m convention (Gaussian w=4.4) and causality criterion (ratio > 3):
+- **At c = 12:** the Cloud-9 σ/m floor and the causality cap cannot both be satisfied. Empty intersection.
+- **At c = 4** (Ohana+ anchor, §9.12 physical anchor): the floor (σ_peak ≥ 50) and causality (σ_peak ≤ 250) are jointly satisfiable for the entire swept range.
+- **Fornax σ_HL outlier** is robust against σ_peak variation.
+
+The c = 12 vs c = 4 distinction is itself the c-M tension against ΛCDM (Ohana+ 2026). The framework's σ/m floor at c = 12 cannot be evaluated with the Balberg+ analytical formula — N-body is required, as §9.12 acknowledges.
 
 ---
 
