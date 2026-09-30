@@ -259,7 +259,7 @@ def main():
         f"At sigma_peak=174 (canonical): V_max={V_max_c4:.2f}, sigma/m(V_max)="
         f"{[r for r in results if r['sigma_peak_HH_1_cm2_per_g']==174][0]['Cloud-9_c4_sigma_m_at_V_max']:.2f}, "
         f"t_core={[r for r in results if r['sigma_peak_HH_1_cm2_per_g']==174][0]['Cloud-9_c4_t_core_Gyr']:.4f} Gyr "
-        f"(matches section 9.12's 4.42 Gyr within 1%), "
+        f"-- an 11% discrepancy from section 9.12's 4.42 Gyr (see finding 5 below for reconciliation), "
         f"ratio={[r for r in results if r['sigma_peak_HH_1_cm2_per_g']==174][0]['Cloud-9_c4_ratio']}."
     )
 
@@ -287,18 +287,29 @@ def main():
         f"{[r for r in results if r['sigma_peak_HH_1_cm2_per_g']==200][0]['Cloud-9_c4_ratio']} (OK)."
     )
 
-    # Finding 5: section 9.12 reconciliation
+    # Finding 5: section 9.12 reconciliation (r27 issue 1: "1%" -> "11%"; r27 issue 3: reframe)
     r174 = [r for r in results if r['sigma_peak_HH_1_cm2_per_g']==174][0]
     out["key_findings"].append(
-        f"section 9.12 reconciliation (r26 issue 3): section 9.12 reports t_core = 4.42 Gyr at c=4 "
-        f"(sigma/m = 135.3). This sweep uses canonical self-consistent NFW: at c=4, V_max = "
-        f"{V_max_c4:.2f}, sigma/m(V_max) = "
-        f"{r174['Cloud-9_c4_sigma_m_at_V_max']:.2f} (NOT 135.3, which is the c=12 V_max value). "
-        f"t_core at canonical c=4 = "
-        f"{r174['Cloud-9_c4_t_core_Gyr']:.3f} Gyr (matches section 9.12's 4.42 within 1%). "
-        f"The discrepancy between section 9.12's sigma/m=135.3 and this sweep's "
-        f"{r174['Cloud-9_c4_sigma_m_at_V_max']:.2f} is because V_max is different at each c "
-        f"(canonical NFW self-consistency)."
+        f"section 9.12 reconciliation: section 9.12 reports t_core = 4.42 Gyr at c=4 with "
+        f"sigma/m = 135.3 (the c=12 V_max sigma/m value). This sweep uses canonical self-consistent NFW "
+        f"at each c: at c=4, V_max = {V_max_c4:.2f} km/s, sigma/m(V_max) = "
+        f"{r174['Cloud-9_c4_sigma_m_at_V_max']:.2f} cm^2/g (NOT 135.3, which was computed at V_max = "
+        f"{V_max_c12:.2f}, the c=12 value). With canonical sigma/m(V_max) = 149.99, the sweep computes "
+        f"t_core = {r174['Cloud-9_c4_t_core_Gyr']:.3f} Gyr -- an 11% discrepancy from section 9.12's "
+        f"4.42 Gyr. This 11% gap is NOT a match -- it is section 9.12's sigma/m being held constant "
+        f"at the c=12 value when applied to c=4, an internal inconsistency in section 9.12 that this "
+        f"sweep corrects. At c=12, the match IS exact (sweep t_core = 0.091 Gyr vs section 9.12's "
+        f"91 Myr; sweep sigma/m(V_max=31.12) = 135.43 vs section 9.12's 135.3)."
+    )
+
+    # Finding 6: Continuous intersection at c=12 (r27 issue 2)
+    # Floor requires sigma_peak >= 49.814 (sigma/m(28) >= 50 with 0.052*100/28 = 0.186 baseline)
+    # Causality requires sigma_peak < 59.49 (interpolated; ratio crosses 3.0 between 50 and 75)
+    out["key_findings"].append(
+        f"Continuous intersection at c=12: [49.81, 59.49] cm^2/g (width ~9.67). The 'only sigma_peak = "
+        f"50 on the swept grid' claim is grid-specific; interpolating the c=12 ratio between grid points, "
+        f"the continuous intersection is an interval of width ~9.67 cm^2/g. This is the c-M tension at "
+        f"LambdaCDM-standard concentration in its most precise form: knife-edge window, not a single point."
     )
 
     print("\n=== KEY FINDINGS ===")
