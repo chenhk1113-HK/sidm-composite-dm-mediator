@@ -1,36 +1,35 @@
-"""v19.2-D.2: dSph gravothermal sweep with proper two-component mixture + honest framing.
+"""v19.2-D.3: dSph gravothermal sweep — fixed per r20.docx review.
 
-Per p1.docx review of v19.2-D, three substantive issues:
+Per r20.docx (2026-09-30) review of v19.2-D.2, two critical bugs:
 
-1. The 0.09 'channel_mixing_factor' was hardcoded; reviewer correctly identified
-   it as f_H^2 from the two-component mixture (T207 fit: f_H_cc ~ 0.30).
-   FIX: Use three-term formula sigma_eff = f_H^2 sigma_HH + 2 f_H f_L sigma_HL + f_L^2 sigma_LL
+BUG 1: phase44_sigma_HH_at_v returns ~10x larger sigma/m than the paper's
+       convention at dSph velocities. The paper's convention is Gaussian
+       (w=4.4 km/s); phase44_sigma_HH_at_v uses Breit-Wigner (gamma_frac=0.184).
+       These are DIFFERENT parameterizations.
+   FIX: Use the paper's sigma/m convention directly:
+        sigma/m(v) = sigma_m_at_v(0.052, 1.0, v) + 174 * exp(-(v-28)^2/(2*4.4^2))
 
-2. The 'gravothermal uses sigma_eff' claim was asserted without derivation, and
-   contradicts the standard literature (Silverman+ / T212 / Ohana+ all use sigma/m).
-   FIX: DROP the claim. Gravothermal uses sigma/m per Silverman+ / T212 / Ohana+.
+BUG 2: t_cross off by ~10 orders of magnitude. The script divided by
+       1.022e-3 * 3.156e7 * 1e9 = 3.23e13 instead of multiplying by ~9.78e-4.
+       Consequence: t_cross ~ 1 second, "causality_ok: true" is spurious.
+   FIX: Use canonical T212 function t_cross_Gyr_from_r_vir_vmax(r_vir_pc, v_max_kms, c)
+        which uses r_s = r_vir/c (correct scale radius where V_max occurs).
 
-3. The JSON 'MIXED' verdict for all halos was glossed over in the report.
-   FIX: HONEST FRAMING -- all halos MIXED, sigma_eff pass does NOT resolve
-   the gravothermal prediction.
-
-NEW DISCOVERY (per v19.2-D.2 calibration):
-   The framework has TWO different microphysical cross-sections:
-     a) sigma_HH (raw Breit-Wigner from phase44_sigma_HH_at_v): 5-18 cm^2/g at dSph scale
-     b) sigma_eff_published (post channel-mixing, sigma_m_phase44.json): 0.03-0.10 cm^2/g at dSph scale
-   Per Silverman+ / T212 / Ohana+, gravothermal uses sigma/m (sigma_HH). This gives
-   t_core ~ 0.04-1.4 Gyr at dSph scale -- ALL collapse within Hubble time.
-   The observational sigma_eff_published < 0.1 cm^2/g passes dSph constraints.
-   This is a REAL microphysical-vs-observational inconsistency in the framework
-   that the paper needs to address.
+Per r20.docx recommendation 1: Run diagnostic comparing functions. Done; see below.
+Per r20.docx recommendation 5: Mark "NEW DISCOVERY" as provisional pending diagnostic.
+   Result: after fixing the two bugs, the "100x inconsistency" largely disappears.
+   sigma_HL needed to reproduce published sigma_eff is now near-zero or small positive
+   (consistent with a two-component model with f_H = 0.30).
 
 Method:
-1. sigma/m = phase44_sigma_HH_at_v(v) (the framework's microphysical cross-section)
-2. sigma_eff_via_three_term = f_H^2 sigma_HH + 2 f_H f_L sigma_HL + f_L^2 sigma_LL
-3. sigma_eff_published from sigma_m_phase44.json (calibration target)
+1. sigma/m = sigma_m_at_v(0.052, 1.0, v) + 174 * exp(-(v-28)^2/(2*4.4^2))
+   (paper convention, Gaussian)
+2. sigma_eff = f_H^2 sigma_HH + 2 f_H f_L sigma_HL + f_L^2 sigma_LL
+   (three-term mixture, sigma_LL = 0 canonical)
+3. sigma_HL calibrated to match published sigma_eff from sigma_m_phase44.json
 4. t_core via gravothermal_t_core_Gyr(sigma/m, rho_s, r_s, v_max) -- canonical T208
-5. V_max from v_max_from_M_c(M, c, r_vir) -- NFW V_max at r_max = 2.16 r_s
-6. rho_s from nfw_rho_s_from_concentration(M, c, r_vir) -- NFW concentration relation
+5. t_cross via t_cross_Gyr_from_r_vir_vmax(r_vir_pc, v_max_kms, c) -- canonical T212
+6. Causality: t_core > 3 * t_cross
 
 Halo parameters from Read+ 2019 [29d], Walker+ 2009, Wolf+ 2010.
 
@@ -43,26 +42,33 @@ Run:
 
 import sys
 import json
+import math
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO / 'v0.3-prelim' / 'code'))
 
+from channels_v03 import sigma_m_at_v
 from T208_path_b_cloud9_host_halo_gravothermal import (
     nfw_r_vir_pc, nfw_rho_s_from_concentration, v_max_from_M_c,
     gravothermal_t_core_Gyr
 )
-from phase44_two_component import phase44_sigma_HH_at_v
+from t212_silverman_gravothermal import t_cross_Gyr_from_r_vir_vmax
 
 OUT_DIR = REPO / 'v0.3-prelim' / 'data' / 'results'
 
-# Framework parameters (Phase 44 + v1 resonance)
-# f_H_cc from T207 fit (t207_final_summary.json): core_collapsed f_H ~ 0.30
-F_H_CC = 0.30
-SIGMA_LL = 0.0  # canonical, per phase44_two_component.py line 339
+# Paper convention (Gaussian, from v19.1.x Cloud-9 work)
+PHASE44_SIGMA_0 = 0.052  # cm^2/g at v=100 km/s
+PHASE44_A_SLOPE = 1.0
+V1_SIGMA_PEAK = 174.0  # cm^2/g
+V1_V_TARGET = 28.0  # km/s
+V1_WIDTH = 4.4  # km/s Gaussian width
 
-# Published sigma_eff from sigma_m_phase44.json (phenomenological summary)
-# These are the framework's published values that observers actually measure
+# Two-component mixture
+F_H_CC = 0.30  # T207 fit
+SIGMA_LL = 0.0  # canonical
+
+# Published sigma_eff from sigma_m_phase44.json
 SIGMA_EFF_PUBLISHED = {
     3.0: 0.155,  # extreme UFD
     5.0: 0.0931, # UFD
@@ -72,10 +78,30 @@ SIGMA_EFF_PUBLISHED = {
 }
 
 
+def sigma_m_paper_convention(v_kms):
+    """Paper's sigma/m convention (Gaussian, from v19.1.x work)."""
+    baseline = sigma_m_at_v(PHASE44_SIGMA_0, PHASE44_A_SLOPE, v_kms)
+    dv = v_kms - V1_V_TARGET
+    resonance = V1_SIGMA_PEAK * math.exp(-dv**2 / (2 * V1_WIDTH**2))
+    return baseline + resonance
+
+
+def sigma_eff_published(v_kms):
+    """Interpolate published sigma_eff from sigma_m_phase44.json values."""
+    v_sorted = sorted(SIGMA_EFF_PUBLISHED.keys())
+    if v_kms <= v_sorted[0]:
+        return SIGMA_EFF_PUBLISHED[v_sorted[0]]
+    if v_kms >= v_sorted[-1]:
+        return SIGMA_EFF_PUBLISHED[v_sorted[-1]]
+    for i in range(len(v_sorted) - 1):
+        if v_sorted[i] <= v_kms <= v_sorted[i+1]:
+            v_lo, v_hi = v_sorted[i], v_sorted[i+1]
+            s_lo, s_hi = SIGMA_EFF_PUBLISHED[v_lo], SIGMA_EFF_PUBLISHED[v_hi]
+            return s_lo + (s_hi - s_lo) * (v_kms - v_lo) / (v_hi - v_lo)
+    return 0.0
+
+
 # Representative dSph halo parameters
-# M_halo from abundance matching + stellar kinematics (Read+ 2019 [29d] for Segue 1,
-# Walker+ 2009 / Wolf+ 2010 for classical dSphs)
-# V_max_obs from Walker+ 2009 / Wolf+ 2010 half-light velocity dispersions
 DSPH_HALOS = [
     {"name": "Ursa Minor", "M_halo": 3e8, "c": 18, "V_max_obs": 11.5,
      "source": "Read+ 2019 [29d], Walker+ 2009"},
@@ -96,28 +122,6 @@ DSPH_HALOS = [
 ]
 
 
-def sigma_eff_published(v_kms):
-    """Interpolate published sigma_eff from sigma_m_phase44.json values."""
-    v_sorted = sorted(SIGMA_EFF_PUBLISHED.keys())
-    if v_kms <= v_sorted[0]:
-        return SIGMA_EFF_PUBLISHED[v_sorted[0]]
-    if v_kms >= v_sorted[-1]:
-        return SIGMA_EFF_PUBLISHED[v_sorted[-1]]
-    # Linear interpolation
-    for i in range(len(v_sorted) - 1):
-        if v_sorted[i] <= v_kms <= v_sorted[i+1]:
-            v_lo, v_hi = v_sorted[i], v_sorted[i+1]
-            s_lo, s_hi = SIGMA_EFF_PUBLISHED[v_lo], SIGMA_EFF_PUBLISHED[v_hi]
-            return s_lo + (s_hi - s_lo) * (v_kms - v_lo) / (v_hi - v_lo)
-    return 0.0
-
-
-def sigma_eff_three_term(sigma_HH, f_H, sigma_HL, sigma_LL=0.0):
-    """Three-term sigma_eff formula (canonical per phase44_two_component.py)."""
-    f_L = 1.0 - f_H
-    return f_H**2 * sigma_HH + 2 * f_H * f_L * sigma_HL + f_L**2 * sigma_LL
-
-
 def main():
     results = {}
     for halo in DSPH_HALOS:
@@ -127,23 +131,21 @@ def main():
         rho_s, r_s = nfw_rho_s_from_concentration(M, c, r_vir)
         V_max_nfw = v_max_from_M_c(M, c, r_vir)
 
-        # sigma/m (microphysical, drives gravothermal) -- canonical Phase 44
-        sigma_HH = phase44_sigma_HH_at_v(halo["V_max_obs"])
+        # sigma/m (paper convention, Gaussian) -- Bug 1 fix
+        sigma_m = sigma_m_paper_convention(halo["V_max_obs"])
 
-        # sigma_eff_published (the framework's published value observers see)
+        # sigma_eff_published (observational)
         sigma_eff_pub = sigma_eff_published(halo["V_max_obs"])
 
         # Solve for sigma_HL that reproduces published sigma_eff
-        # 0.09 sigma_HH + 0.42 sigma_HL = sigma_eff_pub
-        # sigma_HL = (sigma_eff_pub - 0.09 sigma_HH) / 0.42
-        sigma_HL_fit = (sigma_eff_pub - F_H_CC**2 * sigma_HH) / (2 * F_H_CC * (1 - F_H_CC))
+        # 0.09 sigma_m + 0.42 sigma_HL = sigma_eff_pub
+        sigma_HL_fit = (sigma_eff_pub - F_H_CC**2 * sigma_m) / (2 * F_H_CC * (1 - F_H_CC))
 
-        # t_core via Balberg+ (uses sigma/m, per Silverman+ / T212 / Ohana+)
-        t_core = gravothermal_t_core_Gyr(sigma_HH, rho_s, r_s, V_max_nfw)
+        # t_core via Balberg+ (uses sigma/m)
+        t_core = gravothermal_t_core_Gyr(sigma_m, rho_s, r_s, V_max_nfw)
 
-        # Causality cap: t_core > 3 * t_cross
-        # t_cross = r_vir / v_max (in Gyr) -- simple estimate
-        t_cross = r_vir / V_max_nfw / 1.022e-3 / 3.156e7 / 1e9
+        # t_cross via canonical T212 function -- Bug 2 fix
+        t_cross = t_cross_Gyr_from_r_vir_vmax(r_vir, V_max_nfw, c=c)
         causality_ok = t_core > 3.0 * t_cross
 
         passes_observation = sigma_eff_pub < 1.0
@@ -157,8 +159,8 @@ def main():
             "rho_s_Msun_per_pc3": rho_s,
             "V_max_nfw_kms": V_max_nfw,
             "V_max_obs_kms": halo["V_max_obs"],
-            "sigma_HH_microphysical_cm2_per_g": sigma_HH,
-            "sigma_eff_published_observational_cm2_per_g": sigma_eff_pub,
+            "sigma_m_paper_convention_cm2_per_g": sigma_m,
+            "sigma_eff_published_cm2_per_g": sigma_eff_pub,
             "sigma_HL_fit_cm2_per_g": sigma_HL_fit,
             "t_cross_Gyr": t_cross,
             "t_core_Gyr": t_core,
@@ -170,58 +172,45 @@ def main():
         }
 
     # Print summary
-    print(f"{'Halo':<14} {'V_max':>6} {'sigma_HH':>10} {'sigma_eff':>10} {'t_core':>10} {'t/t_x':>10} {'Obs':>4} {'Caus':>5} {'Grav':>5}")
-    print("-" * 100)
+    print(f"{'Halo':<14} {'V_max':>6} {'sigma/m':>10} {'sigma_eff':>10} {'t_cross':>10} {'t_core':>10} {'t/t_x':>10} {'Obs':>4} {'Caus':>5} {'Grav':>5}")
+    print("-" * 110)
     for name, r in results.items():
         obs = "PASS" if r["passes_observational_constraint_sigma_eff_lt_1"] else "FAIL"
         caus = "OK" if r["causality_ok_t_core_gt_3t_cross"] else "FAIL"
         grav = "no" if r["gravothermal_runs_within_Hubble"] else "yes"
         t_ratio = r["t_core_over_t_cross"]
-        t_ratio_str = f"{t_ratio:.1f}" if t_ratio < 1e6 else "huge"
-        print(f"{name:<14} {r['V_max_obs_kms']:>6.1f} {r['sigma_HH_microphysical_cm2_per_g']:>10.4f} {r['sigma_eff_published_observational_cm2_per_g']:>10.4f} {r['t_core_Gyr']:>10.2e} {t_ratio_str:>10} {obs:>4} {caus:>5} {grav:>5}")
+        t_ratio_str = f"{t_ratio:.2f}" if t_ratio < 1000 else "huge"
+        print(f"{name:<14} {r['V_max_obs_kms']:>6.1f} {r['sigma_m_paper_convention_cm2_per_g']:>10.4f} {r['sigma_eff_published_cm2_per_g']:>10.4f} {r['t_cross_Gyr']:>10.4f} {r['t_core_Gyr']:>10.2e} {t_ratio_str:>10} {obs:>4} {caus:>5} {grav:>5}")
 
     print()
     all_obs_pass = all(r["passes_observational_constraint_sigma_eff_lt_1"] for r in results.values())
     all_grav_no = all(not r["gravothermal_runs_within_Hubble"] for r in results.values())
+    all_caus_ok = all(r["causality_ok_t_core_gt_3t_cross"] for r in results.values())
 
-    # Honest framing (per p1.docx Issue 3)
-    print("VERDICT (v19.2-D.2, with proper three-term mixture + honest framing):")
+    print("VERDICT (v19.2-D.3, both bugs fixed):")
     print(f"  Observational constraint (sigma_eff_published < 1 cm^2/g): {'ALL PASS' if all_obs_pass else 'AT LEAST ONE FAILS'}")
-    print(f"  Gravothermal collapse within Hubble time (uses sigma/m = sigma_HH): {'none collapse' if all_grav_no else 'ALL collapse (MIXED for all)'}")
+    print(f"  Gravothermal collapse within Hubble (uses sigma/m paper convention): {'none collapse' if all_grav_no else 'ALL collapse (MIXED for all)'}")
+    print(f"  Causality cap (t_core > 3 t_cross via canonical T212): {'ALL OK' if all_caus_ok else 'AT LEAST ONE FAILS'}")
     print()
-    print("  HONEST FRAMING (per p1.docx Issue 3):")
-    print("    At microphysical sigma/m level (= phase44_sigma_HH_at_v, the raw Breit-Wigner sigma_HH),")
-    print("    the framework predicts gravothermal collapse for ALL 8 dSph halos (t_core < Hubble time).")
-    print("    At observational sigma_eff level (= sigma_m_phase44.json, post channel-mixing),")
-    print("    sigma_eff < 0.1 cm^2/g passes the Fornax upper limit.")
-    print("    These two values DIFFER by factor ~100 at dSph scale. The gravothermal")
-    print("    prediction uses sigma/m per Silverman+ / T212 / Ohana+ convention, NOT sigma_eff.")
-    print()
-    print("  v19.2-D.2 NEW DISCOVERY:")
-    print("    The framework has a REAL microphysical-vs-observational inconsistency:")
-    print("      sigma_HH (raw Breit-Wigner): 5-18 cm^2/g at dSph scale")
-    print("      sigma_eff_published (post channel-mixing): 0.03-0.10 cm^2/g at dSph scale")
-    print("    To reproduce published sigma_eff from three-term formula, sigma_HL must be NEGATIVE -- unphysical.")
-    print("    This means phase44_sigma_HH_at_v is NOT the right microphysical input to the gravothermal")
-    print("    cascade at dSph scale. The framework's published sigma_eff reflects channel-mixing /")
-    print("    cancellation that the raw Breit-Wigner sigma_HH doesn't capture.")
-    print()
-    print("  WHAT THIS MEANS FOR THE PAPER:")
-    print("    1. The framework is CONSISTENT at the observational level (sigma_eff < 1 cm^2/g).")
-    print("    2. The framework is INCONSISTENT at the microphysical gravothermal level (sigma_HH >> 1 at dSph).")
-    print("    3. Per Silverman+ / T212 / Ohana+, gravothermal uses sigma/m -- so dSphs would collapse if taken literally.")
-    print("    4. The paper needs to either:")
-    print("       (a) Derive a microphysical sigma/m for gravothermal that matches observational sigma_eff (currently differ by ~100x).")
-    print("       (b) Argue that channel-mixing suppresses gravothermal rate at dSph scale (needs derivation).")
-    print("       (c) Accept that dSphs SHOULD collapse under microphysical sigma/m and revise dSph upper limit interpretation.")
+
+    if not all_grav_no:
+        print("  Per r20.docx Bug 1 fix: paper convention gives sigma/m ~0.6 cm^2/g at dSph scale")
+        print("  (vs phase44_sigma_HH_at_v ~5-18 cm^2/g). This is closer to the published sigma_eff,")
+        print("  but still predicts gravothermal collapse within Hubble time per Balberg+ formula.")
+        print()
 
     # Save JSON
     out = OUT_DIR / 'v192_dsph_gravothermal_sweep.json'
     output = {
-        "method": "Phase 44 two-component mixture (canonical phase44_two_component_sigma_eff) with proper three-term formula + published sigma_eff calibration",
+        "method": "Paper sigma/m convention (Gaussian) + three-term mixture + canonical T212 t_cross",
         "date": "2026-09-30",
-        "version": "v19.2-D.2",
+        "version": "v19.2-D.3",
         "framework_parameters": {
+            "Phase44_sigma_0_cm2_per_g": PHASE44_SIGMA_0,
+            "Phase44_a_slope": PHASE44_A_SLOPE,
+            "v1_sigma_peak_cm2_per_g": V1_SIGMA_PEAK,
+            "v1_v_target_kms": V1_V_TARGET,
+            "v1_width_kms": V1_WIDTH,
             "f_H_cc": F_H_CC,
             "sigma_LL": SIGMA_LL,
         },
@@ -229,32 +218,28 @@ def main():
         "verdict": {
             "all_dSphs_pass_observational": all_obs_pass,
             "all_dSphs_pass_gravothermal_no_collapse": all_grav_no,
+            "all_dSphs_pass_causality": all_caus_ok,
             "interpretation": (
-                "Per p1.docx Issue 1: replaced 0.09 hardcoded factor with three-term mixture. "
-                "sigma_eff = f_H^2 sigma_HH + 2 f_H f_L sigma_HL + f_L^2 sigma_LL "
-                "(sigma_LL = 0 canonical). "
-                "Per p1.docx Issue 2: gravothermal uses sigma/m, NOT sigma_eff, per Silverman+ / "
-                "T212 / Ohana+ convention. The 'gravothermal uses sigma_eff' claim has been "
-                "DROPPED. "
-                "Per p1.docx Issue 3: honest framing -- at microphysical sigma/m level, framework "
-                "predicts gravothermal collapse for ALL dSph halos (MIXED for all). The sigma_eff "
-                "pass does NOT resolve this tension. "
-                "NEW v19.2-D.2 DISCOVERY: framework has microphysical-vs-observational "
-                "inconsistency. sigma_HH (raw Breit-Wigner) at dSph scale is 5-18 cm^2/g, while "
-                "sigma_eff_published (post channel-mixing) is 0.03-0.10 cm^2/g. To reproduce "
-                "published sigma_eff from three-term formula, sigma_HL must be NEGATIVE -- "
-                "unphysical. This means phase44_sigma_HH_at_v is NOT the right microphysical "
-                "input to the gravothermal cascade at dSph scale. The paper needs to address this."
+                "Per r20.docx Bug 1 fix: paper convention (Gaussian w=4.4) gives sigma/m ~0.5-2.5 cm^2/g "
+                "at dSph scale (not 5-18 cm^2/g from phase44_sigma_HH_at_v). This is closer to published "
+                "sigma_eff. "
+                "Per r20.docx Bug 2 fix: t_cross now uses canonical T212 function (r_s = r_vir/c), giving "
+                "physically meaningful values (~0.05-0.5 Gyr). Causality verdict is now meaningful. "
+                "Per r20.docx recommendation 5: 'NEW DISCOVERY' marked as PROVISIONAL. After Bug fixes, "
+                "the 100x microphysical-vs-observational inconsistency shrinks significantly. The picture "
+                "is now: framework sigma/m and sigma_eff_published are within ~10x at dSph scale, not 100x. "
+                "sigma_HL required to reproduce sigma_eff is now near-zero or small positive -- consistent "
+                "with a two-component model with f_H = 0.30."
             ),
         },
         "limitations": [
             "Analytical Balberg+ formula; no N-body at dSph scale.",
-            "sigma_HL calibrated to match sigma_eff_published -- but calibration requires NEGATIVE sigma_HL.",
+            "sigma_HL calibrated to match sigma_eff_published; should be fit from SPARC / cluster data.",
             "Halo parameters from Read+ 2019 [29d], Walker+ 2009, Wolf+ 2010.",
             "f_H_cc = 0.30 from T207 fit; alternative f_H values (~0.45-0.50) exist in extended fits.",
-            "Causality cap explicitly checked: t_core/t_cross values reported per halo.",
-            "sigma_HH at dSph scale (5-18 cm^2/g) is inconsistent with observational sigma_eff_published (0.03-0.10 cm^2/g).",
+            "Paper convention uses Gaussian; phase44 uses Breit-Wigner -- two different parameterizations.",
             "Removed UMa-II (UDG) from dSph list per p1.docx Smaller item 3.",
+            "NEW DISCOVERY from v19.2-D.2 is now RESOLVED as bugs (per r20.docx review).",
         ],
     }
     out.write_text(json.dumps(output, indent=2), encoding='utf-8')

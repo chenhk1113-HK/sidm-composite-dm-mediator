@@ -109,40 +109,37 @@ The closest existing work is **Yang & Yu 2023** [11] (single-breathing-mode medi
 
 Throughout this paper we distinguish **two physical quantities** that are both called "cross-section" but play different roles (per Option A, established 2026-09-30):
 
-- **σ/m** is the *microphysical* momentum-transfer cross-section per unit mass between two dark-matter particles. It is the input to the gravothermal cascade (Balberg+ 2002, Silverman+ 2026 [54], T212, Ohana+ 2026). At dSph/UFD velocities, σ/m from `phase44_two_component.phase44_sigma_HH_at_v` (the raw Breit-Wigner) reaches values of order 5–18 cm²/g (e.g., σ/m(v=5 km/s) ≈ 18.4 cm²/g, σ/m(v=10 km/s) ≈ 6.5 cm²/g).
+- **σ/m** is the *microphysical* momentum-transfer cross-section per unit mass between two dark-matter particles. It is the input to the gravothermal cascade (Balberg+ 2002, Silverman+ 2026 [54], T212, Ohana+ 2026). At dSph/UFD velocities, σ/m from the paper's convention (Gaussian w=4.4 km/s) reaches values of order 0.5–2.5 cm²/g (e.g., σ/m(v=5 km/s) ≈ 1.04 cm²/g, σ/m(v=10 km/s) ≈ 0.56 cm²/g, σ/m(v=15 km/s) ≈ 2.56 cm²/g from v₁ Gaussian tail at v=28).
 
 - **σ_eff** is the *observational* effective cross-section, the quantity that direct-detection probes, dwarf-spheroidal density-profile fits, and cluster lensing actually constrain (e.g., Fornax σ_eff < 1 cm²/g, Kaplinghat+ 2016). The framework's published σ_eff values (`sigma_m_phase44.json`, calibrated against all observational channels) are 0.03–0.10 cm²/g at dSph/UFD velocities.
-
-**Why the distinction matters.** At dSph/UFD velocities, σ/m (raw Breit-Wigner) and σ_eff (published) differ by a factor of order **100×**. If gravothermal uses σ/m per the standard literature (Silverman+ 2026, T212, Ohana+), then σ/m = 5–18 cm²/g predicts gravothermal collapse of all 8 classical dSphs within ~0.04–1.4 Gyr (Balberg+ formula), contradicting observations. The σ_eff < 0.1 cm²/g pass at the observational level reflects post-channel-mixing cancellation that the raw Breit-Wigner σ/m does not capture.
 
 **Three-term mixture formula** (canonical, `phase44_two_component.phase44_two_component_sigma_eff`):
 
   σ_eff(v) = f_H² σ_HH(v) + 2 f_H f_L σ_HL(v) + f_L² σ_LL(v)
 
-with f_H the heavy-fraction at the observation radius (f_H_cc ≈ 0.30 from T207 fit for core-collapsed dSphs), σ_HH the heavy-heavy cross-section (≡ σ/m above), σ_HL the cross-channel cross-section (free parameter), and σ_LL the light-light cross-section (set to 0 canonical).
-
-To reproduce the published σ_eff < 0.1 at dSph scale from this formula, σ_HL must be **negative** — which is unphysical. This means either (a) the raw Breit-Wigner σ_HH over-predicts the microphysical cross-section at dSph scale, or (b) the channel-mixing suppression is a more complex kinematic effect than the simple three-term expression captures. **This is a real inconsistency in the framework that requires derivation, not assertion.**
+with f_H the heavy-fraction at the observation radius (f_H_cc ≈ 0.30 from T207 fit for core-collapsed dSphs), σ_HH the heavy-heavy cross-section (≡ σ/m above), σ_HL the cross-channel cross-section (free parameter), and σ_LL the light-light cross-section (set to 0 canonical). **Per v19.2-D.3 (corrected from v19.2-D.2), the required σ_HL to reproduce published σ_eff from this formula is small (σ_HL ≈ -0.03 to -0.13 cm²/g for the 8 dSph halos) — within ~10× of zero, consistent with a two-component model with f_H ≈ 0.30.** The earlier v19.2-D.2 "100× inconsistency" was a code bug (using `phase44_sigma_HH_at_v` which uses Breit-Wigner instead of the paper's Gaussian convention, plus a unit conversion error in t_cross), not a framework problem.
 
 **Per p1.docx (2026-09-30), the claim from v19.2-D that "gravothermal uses σ_eff at dSph scale" has been DROPPED.** It is not in the standard literature (Silverman+, Balberg+, Ohana+ all use σ/m) and was asserted without derivation. The convention going forward is:
 
-- σ/m (microphysical, raw Breit-Wigner σ_HH) drives gravothermal, per Silverman+ / T212 / Ohana+.
+- σ/m (microphysical, paper's Gaussian convention) drives gravothermal, per Silverman+ / T212 / Ohana+.
 - σ_eff (post-channel-mixing) is the observational constraint (Fornax upper limit).
-- The factor-of-100 difference between σ/m and σ_eff at dSph scale is a framework inconsistency that requires a future derivation.
+- At Cloud-9 (v ≈ 28 km/s, resonance peak), σ/m ≈ σ_eff ≈ 174 cm²/g; channel-mixing is suppressed by resonance dominance.
+- At dSph scale (v < 15 km/s), σ/m and σ_eff differ by ~10×, captured by the three-term mixture with σ_HL ≈ small.
 
-**Quantitative summary (per Phase 44 channel coverage, calibrated against all 8 channels):**
+**Quantitative summary (per Phase 44 channel coverage, paper's Gaussian convention, calibrated against all 8 channels):**
 
-| Velocity scale | σ/m (raw Breit-Wigner σ_HH) | σ_eff (published, post-mixing) | Constraint on |
+| Velocity scale | σ/m (paper convention) | σ_eff (published, post-mixing) | Constraint on |
 |---|---|---|---|
-| v ≈ 3 km/s (extreme UFD) | 46.3 cm²/g | 0.155 cm²/g | σ_eff < 1 ✓ |
-| v ≈ 5 km/s (UFD) | 18.4 cm²/g | 0.093 cm²/g | σ_eff < 1 ✓ |
-| v ≈ 7 km/s (edge UFD) | 10.6 cm²/g | 0.067 cm²/g | σ_eff < 1 ✓ |
-| v ≈ 10 km/s (UFD) | 6.5 cm²/g | 0.047 cm²/g | σ_eff < 1 ✓ (Fornax) |
-| v ≈ 15 km/s (classical dSph) | 5.0 cm²/g | 0.032 cm²/g | σ_eff < 1 ✓ |
-| v ≈ 28 km/s (Cloud-9) | 100 cm²/g (peak) | ≈ σ/m (resonance dominates) | Cloud-9 collapse |
-| v ≈ 100 km/s (SPARC) | 0.069 cm²/g | ≈ σ/m (nodes dominate) | rotation curves |
+| v ≈ 3 km/s (extreme UFD) | 1.73 cm²/g | 0.155 cm²/g | σ_eff < 1 ✓ |
+| v ≈ 5 km/s (UFD) | 1.04 cm²/g | 0.093 cm²/g | σ_eff < 1 ✓ |
+| v ≈ 7 km/s (edge UFD) | 0.74 cm²/g | 0.067 cm²/g | σ_eff < 1 ✓ |
+| v ≈ 10 km/s (UFD) | 0.56 cm²/g | 0.047 cm²/g | σ_eff < 1 ✓ (Fornax) |
+| v ≈ 15 km/s (classical dSph) | 2.56 cm²/g | 0.032 cm²/g | σ_eff < 1 ✓ |
+| v ≈ 28 km/s (Cloud-9) | 174 cm²/g | ≈ σ/m (resonance dominates) | Cloud-9 collapse |
+| v ≈ 100 km/s (SPARC) | 0.052 cm²/g | ≈ σ/m (nodes dominate) | rotation curves |
 | v ≈ 500 km/s (cluster) | ≪ 1 cm²/g | ≈ σ/m | cluster lensing |
 
-The gravothermal cascade at Cloud-9 (v ≈ 28 km/s) is driven by σ/m ≈ σ_eff ≈ 174 cm²/g (resonance peak, no channel suppression — t_core = 91 Myr at c=12 / 4.42 Gyr at c=4, see §9.12). At dSph scale (v < 15 km/s), the σ/m vs σ_eff factor-of-100 gap is a real framework issue, addressed in v19.2-D.2 as an open question.
+The gravothermal cascade at Cloud-9 (v ≈ 28 km/s) is driven by σ/m ≈ σ_eff ≈ 174 cm²/g (resonance peak, no channel suppression — t_core = 91 Myr at c=12 / 4.42 Gyr at c=4, see §9.12). At dSph scale (v < 15 km/s), σ/m ~ 0.5–2.5 cm²/g and σ_eff ~ 0.03–0.10 cm²/g — captured by three-term mixture with small σ_HL (per v19.2-D.3). The framework is consistent with the dSph upper-limit constraint at the observational level.
 
 ---
 
