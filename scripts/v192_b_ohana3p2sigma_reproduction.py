@@ -202,7 +202,7 @@ def main():
         "method": "Ohana+ 2026 SIDM tension via corrected Diemer+ 2019 c-M relation",
         "paper": "Ohana, Zhang & Yu 2026, arXiv:2608.04362",
         "date": "2026-09-30",
-        "version": "v19.2-B.10 (r33 polish: 0.13σ attribution corrected; 0.16 dex = DK14 verified (NOT DJ19); 0.085 dex = UNVERIFIED source; lead with 3.16σ fiducial)",
+        "version": "v19.2-B.11 (r34 polish: 0.085 dex source UNVERIFIED, 6.18σ relegated to footnote; DJ19 → DK14/DK15 citation chain verified; 0.09σ bound corrected from 0.13σ)",
         "fix_summary": (
             "Five rounds of fixes from r26.docx through r31.docx reviewer feedback:\n\n"
             "r26.docx Issue 1 (units bug): v19.2-B v2 multiplied denominator by log(10) "
@@ -272,7 +272,7 @@ def main():
             "M_SIDM_best_fit_Msun": 4.7e9,
             "tau_SIDM_best_fit": 0.18,
             "scatter_used_by_ohana": 0.16,
-            "scatter_source": "Diemer and Joyce 2019 (per Ohana+ arXiv:2608.04362 §3.1 line 29)",
+            "scatter_source": "DJ19 §2.1 endorses DK14 (Diemer & Kravtsov 2014, ApJ 799, 108, arXiv:1407.4730 Table 1, σ = 0.16 dex). Citation chain Ohana+ → DJ19 → DK14 verified per r34 Issue 2. Ohana+ cites DJ19 in arXiv:2608.04362 §3.1 line 29 + line 34.",
         },
         "tension_at_fiducial": {
             "M_Msun": 4.7e9,
@@ -304,7 +304,7 @@ def main():
             ),
         },
         "match_check": (
-            f"BEST-FIT tension at OHANA+ SCATTER (0.16 dex, DK14 verified -- NOT DJ19): "
+            f"BEST-FIT tension at OHANA+ SCATTER (0.16 dex, citation chain Ohana+ → DJ19 §2.1 → DK14/DK15 -- NOT DJ19 alone; VERIFIED per r34 Issue 2): "
             f"{canonical_tension:.2f} sigma vs Ohana+ 3.20 sigma. "
             f"Delta: {abs(canonical_tension - 3.20):.2f} sigma. "
             f"CONSISTENCY CHECK: pipeline matches Ohana+ within rounding tolerance at the fiducial. "
@@ -319,9 +319,9 @@ def main():
     print(f"\nSaved: {out}")
 
     print("\n" + "=" * 70)
-    print("VERDICT (v19.2-B.10 -- r33 polish: 0.13σ attribution corrected; 0.16 dex = DK14 verified; 0.085 dex = UNVERIFIED source; lead with 3.16σ fiducial)")
+    print("VERDICT (v19.2-B.11 -- r34 polish: 0.085 dex UNVERIFIED, 6.18σ FOOTNOTE-ONLY; DJ19 §2.1 endorses DK14/DK15 0.16 dex, citation chain Ohana+ → DJ19 → DK14 verified; 0.09σ bound corrected from 0.13σ)")
     print("=" * 70)
-    print(f"\nBest-fit tension at OHANA+ SCATTER (0.16 dex, DK14 Diemer & Kravtsov 2014):")
+    print(f"\nBest-fit tension at OHANA+ SCATTER (0.16 dex, citation chain Ohana+ → DJ19 §2.1 → DK14/DK15 Diemer & Kravtsov 2014 Table 1):")
     print(f"  Pipeline result: {canonical_tension:.2f} sigma")
     print(f"  Ohana+ 2026 published: 3.20 sigma")
     print(f"  Delta: {abs(canonical_tension - 3.20):.2f} sigma")
@@ -345,11 +345,12 @@ def main():
     print("    number at the Ohana+ fiducial under correct scatter, not the analysis that")
     print("    led to c=4.0. Full reproduction requires real BLN24 N_HI + hydrostatic (v19.2-B v3, deferred).")
     print()
-    print("HONEST INTERPRETATION (per r31 + r33 Issue 2):")
-    print("  - At 0.085 dex scatter (source UNVERIFIED per r33 Issue 2): 6.18 sigma")
-    print("  - At Ohana+'s actual scatter (0.16 dex, DK14 Diemer & Kravtsov 2014 -- verified per r33 Issue 2): 3.16 sigma")
-    print("  - The 0.16 dex scatter is from DK14 (arXiv:1407.4730 Table 1), NOT DJ19 (arXiv:1809.07326)")
-    print("  - DJ19 focuses on the c-M MEDIAN, not the scatter. Ohana+ likely miscited")
+    print("HONEST INTERPRETATION (per r31 + r33 + r34 Issue 2 verification):")
+    print("  - At 0.085 dex scatter (source UNVERIFIED per r34 Issue 1, FOOTNOTE-ONLY): 6.18 sigma")
+    print("  - At Ohana+'s actual scatter (0.16 dex, citation chain Ohana+ → DJ19 §2.1 → DK14/DK15 Table 1 -- verified per r34 Issue 2): 3.16 sigma")
+    print("  - DJ19 endorses the DK14 0.16 dex scatter via §2.1 ('DK15' citation)")
+    print("  - The 0.16 dex scatter is from DK14 (arXiv:1407.4730 Table 1), endorsed by DJ19 §2.1")
+    print("  - Ohana+ citation is CORRECT (not miscited — DJ19 endorses DK14)")
     print("  - The 'factor-1.93 disagreement' was a convention difference, not a failure")
     print("  - With Ohana+'s convention, the simplified pipeline IS CONSISTENT WITH the 3.2 sigma tension at the fiducial")
     print()
