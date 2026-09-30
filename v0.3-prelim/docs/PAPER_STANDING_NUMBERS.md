@@ -1,5 +1,14 @@
 # Paper Standing Numbers — Single Source of Truth (v19.0)
 
+**Per R36 directive (2026-09-30):** The authoritative single source of truth for §2.5/§2.6/§2.7 standing numbers is now `v0.3-prelim/data/standing_numbers.json`. This document is a *human-readable rendering* of that JSON. **Do not edit numbers in this document directly** — edit the JSON, then regenerate this document.
+
+To check for drift between this document and the source JSON:
+```bash
+python scripts/load_standing_numbers.py
+```
+
+The 11-bundle §2.7 loop ended in R35-POLISH (`c9f6b4c`) with §2.7 marked PARTIALLY CLOSED. **§2.7 is frozen. No more §2.7 iteration.** Next phase: decide paper thesis before any new section work.
+
 > **Rule:** No number appears in `PAPER_V1_DRAFT.md` unless it's in this table.
 > Re-verified by `scripts/audit_claims.py` against its source JSON before each commit.
 >

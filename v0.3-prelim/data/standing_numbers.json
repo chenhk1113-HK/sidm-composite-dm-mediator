@@ -1,0 +1,105 @@
+{
+  "_meta": {
+    "purpose": "Single source of truth for paper standing numbers. PAPER_V1_DRAFT.md, PAPER_STANDING_NUMBERS.md, and v192 scripts all read from this file. Drift between paper text and JSON is the upstream verification gap that produced the 11-bundle loop in §2.7. If you change a number here, re-run the v192 script AND regenerate PAPER_STANDING_NUMBERS.md.",
+    "freeze_status": "§2.7 frozen per user directive 2026-09-30 (R35-POLISH = c9f6b4c). No more §2.7 iteration.",
+    "next_action": "Decide paper thesis before any new section work."
+  },
+
+  "section_2_5": {
+    "title": "σ/m vs σ_eff distinction",
+    "source_json": "v192_a_phase44_sigma_peak_sensitivity.json",
+    "channel_count_convention": "v18.30: '7 of 8 channels' framing dropped; verdict is 'phenomenological interpolation through 8 channels, not first-principles derivation'",
+    "key_values": {
+      "cloud9_floor_sigma_m_cm2_per_g": 50.0,
+      "cloud9_floor_velocity_km_per_s": 28,
+      "dsph_ceiling_sigma_m_cm2_per_g": 0.8,
+      "fornax_target_sigma_m_cm2_per_g": 10.0
+    }
+  },
+
+  "section_2_6": {
+    "title": "σ_peak sensitivity window at Cloud-9 scale",
+    "source_json": "v192_a_phase44_sigma_peak_sensitivity.json",
+    "causality_criterion": "t_core > 3.0 * t_cross (paper section 9.12)",
+    "causality_cap_factor": 3.0,
+    "cloud_9_nfw_c12": {
+      "name": "Cloud-9 c=12 (ΛCDM-conservative, §9.12 anchor)",
+      "M_200_Msun": 5.0e9,
+      "c_200": 12,
+      "v_max_kms": 31.123,
+      "r_vir_kpc": 35.093,
+      "r_s_kpc": 2.924,
+      "rho_s_Msun_per_pc3": 9.69e-3
+    },
+    "cloud_9_nfw_c4": {
+      "name": "Cloud-9 c=4 (Ohana+ inferred, §9.12 physical anchor)",
+      "M_200_Msun": 5.0e9,
+      "c_200": 4,
+      "v_max_kms": 25.591,
+      "r_vir_kpc": 35.093,
+      "r_s_kpc": 8.773,
+      "rho_s_Msun_per_pc3": 7.30e-4
+    },
+    "sensitivity_window": {
+      "c_12_knife_edge_cm2_per_g": [49.81, 57.24],
+      "c_4_open_interval_cm2_per_g": [49.81, 250.0]
+    }
+  },
+
+  "section_2_7": {
+    "title": "External consistency checks (Ohana+, Concerto)",
+    "closure_status": "PARTIALLY CLOSED per R34/r35 (2026-09-30). 0.16 dex closed; 0.07/0.085 dex open and reframed as sensitivity results.",
+
+    "check_1_ohana": {
+      "source_json": "v192_b_ohana3p2sigma_reproduction.json",
+      "version": "v19.2-B.12",
+      "headline_finding": "is consistent with Ohana+ 2026's 3.2σ SIDM tension at the fiducial under the 0.16 dex convention",
+      "best_fit_M_Msun": 4.7571e9,
+      "best_fit_c_200": 3.8171,
+      "best_fit_tau": 0.18,
+      "tension_at_fiducial_sigma": 3.16,
+      "tension_at_mcmc_sigma": 3.29,
+      "ohana_published_sigma": 3.2,
+      "delta_from_published_max_sigma": 0.09,
+      "pipeline_spread_sigma": 0.13,
+      "citation_chain": "Ohana+ → DJ19 → DK14/DK15 (chain is valid; DJ19 endorses DK14 via 'DK15' citation)",
+      "dk14_identity": "arXiv:1407.4730 (2014 preprint) published as ApJ 799, 108 (2015); 'DK15' in some citations refers to the same paper, ApJ publication year"
+    },
+
+    "check_2_concerto": {
+      "source_json": "v192_c_concerto_subhalo_cloud9.json",
+      "headline_finding": "Concerto SIDM subhalos in Cloud-9 mass range have median core radius 0.82 kpc, which matches Cloud-9 expectation (0.5 ± 0.3 kpc) within 1.07σ",
+      "concerto_rc1_median_kpc": 0.82,
+      "concerto_rc1_q16_kpc": 0.53,
+      "concerto_rc1_q84_kpc": 1.20,
+      "cloud9_rc_expected_kpc": 0.5,
+      "cloud9_rc_uncertainty_kpc": 0.3,
+      "delta_sigma": 1.07,
+      "verdict": "WITHIN 2σ",
+      "caveats": [
+        "Concerto subhalos are MW satellites with tidal stripping; Cloud-9 is a RELHIC near M94 (different environment)",
+        "Single-host statistics (Halo416 vs Ohana+'s Halo004)",
+        "Single SIDM model (MilkyWaySIDM vs Ohana+'s GroupSIDM-147)"
+      ]
+    }
+  },
+
+  "sensitivity_sweep_NOT_literature": {
+    "title": "0.07/0.085 dex values — reframed per r34/r35",
+    "explanation": "The [0.07, 0.085] dex range in v19.2-B.1 commit f76a9cd was framed as 'Diemer+ 2019 model-dep scatter values' — a citation attempt without verification. Neither 0.07 nor 0.085 dex is in any Diemer+ paper. Per r34 reviewer, the correct framing is SENSITIVITY RESULT, not literature-based prediction.",
+    "values": {
+      "tension_at_0.07_dex": 7.51,
+      "tension_at_0.085_dex": 6.18,
+      "tension_at_0.110_dex": 4.78,
+      "tension_at_0.140_dex": 3.75
+    },
+    "status": "Sensitivity sweep values, NOT literature predictions. Per r34 Issue 1, kept in footnotes only with explicit UNVERIFIED marker."
+  },
+
+  "_changelog": [
+    {"commit": "c9f6b4c", "bundle": "R35-POLISH", "date": "2026-09-30", "change": "Created standing_numbers.json as single source of truth. §2.7 frozen. 0.07/0.085 dex reframed as sensitivity results. DK14/DK15 identity explicit. Citation chain softened to 'chain is valid'."},
+    {"commit": "da610fe", "bundle": "R31-VERIFICATION", "date": "2026-09-30", "change": "REPRODUCTION → CONSISTENCY CHECK framing"},
+    {"commit": "8677c71", "bundle": "R31", "date": "2026-09-30", "change": "SCATTER CORRECTION: 6.18σ → 3.29σ (Ohana+ uses 0.16 dex, not 0.085)"},
+    {"commit": "f76a9cd", "bundle": "v19.2-B.1", "date": "2026-09-30", "change": "Initial calculation with [0.07, 0.085] sweep labelled as 'Diemer+ 2019 model-dep' (citation attempt, not verified)"}
+  ]
+}
