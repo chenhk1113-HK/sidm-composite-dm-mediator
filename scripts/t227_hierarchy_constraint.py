@@ -96,7 +96,8 @@ def main():
     ratio_sq = LZ_bound / sigma_SI_baseline
     ratio_max = math.sqrt(ratio_sq)
     print(f"  Required g_N/g_chi < {ratio_max:.3e}")
-    print(f"  This is a HIERARCHY of order 10^-{int(-math.log10(ratio_max))}")
+    order = math.floor(math.log10(ratio_max))
+    print(f"  This is a HIERARCHY of order 10^{order}")
     print(f"  Equivalent: g_chi/g_N > {1/ratio_max:.3e}")
 
     # Step 3: Extended sweep g_N/g_chi in [10^-15, 10]

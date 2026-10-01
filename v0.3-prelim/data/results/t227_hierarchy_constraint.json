@@ -8,7 +8,7 @@
   "required_g_N_over_g_chi_for_LZ": 2.739135132841484e-11,
   "required_g_chi_over_g_N_for_LZ": 36507873890.93267,
   "hierarchy_constraint": "g_N/g_chi < 2.74e-11",
-  "hierarchy_order_of_magnitude": 10,
+  "hierarchy_order_of_magnitude": -11,
   "consistency_check": {
     "earlier_dark_sector_estimate": "g_chi/g_portal ~ 10^11",
     "R57_constraint": "g_N/g_chi < 2.74e-11",
@@ -72,5 +72,6 @@
       "ratio_to_LZ": 1.33282485603624e+23
     }
   ],
-  "paper_reclassification": "R57 catalogue: 5 no-go + 1 hierarchy constraint. The DD constraint is on g_N/g_chi < 3e-11, not on sigma_peak."
+  "paper_reclassification": "R57 catalogue: 5 no-go + 1 hierarchy constraint. The DD constraint is on g_N/g_chi < 3e-11, not on sigma_peak.",
+  "hierarchy_order_text": "10^-11"
 }

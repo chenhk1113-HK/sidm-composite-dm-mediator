@@ -1696,7 +1696,18 @@ The framework's σ_peak = 174 cm²/g with m_φ = 200 eV:
 - **Works** for relic density (Ωh² ~ 0.78 via Drobczyk 2025)
 - **Works** for direct-detection ONLY IF g_N/g_χ < 3 × 10⁻¹¹
 
-**Per reviewer: "Once done, this is the last numerical bundle needed for the paper. No further DD corrections."**
+**Derived dark fine-structure constant (per R58 reviewer's recommendation):**
+
+From g_χ = 2.93 × 10⁻³, the framework's dark-sector fine-structure constant is:
+- α_χ = g_χ² / (4π) ≈ 6.8 × 10⁻⁷
+
+This is **smaller than typical dark-sector models** (α_D ~ 10⁻² to 10⁻¹). The framework requires α_χ ~ 10⁻⁶ to produce σ_peak = 174 at v = 29.4 km/s with m_φ = 200 eV. The bound-state calculation (T221) confirms that λ = α_χ m_χ / m_φ = 3.4 > 0.84 threshold, so bound states form, but the small α_χ is a constraint on the UV completion.
+
+The paper should state: "the framework requires α_χ ~ 10⁻⁶ to produce σ_peak = 174 at v = 29.4 km/s with m_φ = 200 eV." This is honest about the model parameter; whether α_χ ~ 10⁻⁶ is "natural" depends on the UV completion (e.g., extra-dim compactification can give small couplings, but they are tuned).
+
+**Per reviewer: "The 'natural' range for a dark sector is not well-defined, but the paper should at least say: 'the framework requires α_χ ~ 10⁻⁶ to produce σ_peak = 174 at v = 29.4 km/s with m_φ = 200 eV.' Done above.**
+
+**Per reviewer: 'Once done, this is the last numerical bundle needed for the paper. No further DD corrections.'**
 
 **The R57 result is the correct answer to the question R51–R52 asked.** The correct answer is a hierarchy constraint, not an exclusion.
 
@@ -1704,11 +1715,23 @@ The framework's σ_peak = 174 cm²/g with m_φ = 200 eV:
 
 Not "we predict Cloud-9's structure." Not "σ_peak = 174 is excluded." But: "We systematically explore SIDM parameter space against Cloud-9, UFD cores, dSph, SPARC, and cluster constraints. The framework's distinguishing feature (σ_peak = 174 cm²/g at v = 29.4 km/s) requires a dark-sector hierarchy of order 10⁻¹¹ between the DM self-coupling and the DM-nucleon coupling to survive LZ. No single-mediator Yukawa model satisfies this; non-minimal or multi-sector completions are required."
 
-That's a real result. It has content. It doesn't overclaim. And it's consistent with the dark-sector picture developed earlier in the conversation.
+That's a real result. It has content. It doesn't overclaim.
+
+**Per reviewer on the post-diction vs prediction distinction (R58):** "This is a post-diction. σ_peak = 174 was fixed first (causality cap); the hierarchy was then derived as a requirement. That's not a prediction of the framework — it's an accommodation. But accommodations are still informative: many dark-sector models would fail this test, and the framework passes it by a specific ratio. Stating that distinction (post-diction vs prediction) is honest and would strengthen the paper."
 
 **Code (R57):**
 - T227: `scripts/t227_hierarchy_constraint.py` (215 lines)
 - Data: `v0.3-prelim/data/results/t227_hierarchy_constraint.json`
+
+**Pending items (per R58 reviewer's recommendation):**
+1. Re-check the 5 earlier no-go theorems against the same error checklist used in R54–R56:
+   - T120.10 (magnetic dipole)
+   - T120.16 (hidden U(1) + pseudo-Dirac)
+   - T130 (GeV inelastic)
+   - T131 (Chu+ p-wave)
+   - T184 (one-mediator systematic)
+2. Finalize abstract framing: "systematic exploration + no-go catalogue" vs "constraint map with hierarchy constraint"
+3. Write thesis sentence (refined from R49 abstract by R57 hierarchy constraint)
 
 ---
 
