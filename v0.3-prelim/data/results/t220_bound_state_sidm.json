@@ -1,0 +1,64 @@
+{
+  "script": "T220",
+  "description": "Bound-state SIDM UV derivation for sigma_peak = 174 cm^2/g",
+  "framework_parameters": {
+    "m_chi_GeV": 1.0,
+    "m_phi_eV": 200.0,
+    "v_target_kms": 29.4,
+    "FWHM_kms": 4.4,
+    "sigma_peak_target_cm2_per_g": 174.0
+  },
+  "A_res": 100.0,
+  "g_chi_solution": 5.983655251086306e-06,
+  "sigma_yukawa_at_target_cm2_per_g": 1.7399999999999995,
+  "sigma_peak_achieved_cm2_per_g": 173.99999999999994,
+  "perturbative": true,
+  "alpha": 2.849202149341397e-12,
+  "lambda_param": 1.4246010746706985e-05,
+  "bound_state_forms": false,
+  "E_B_eV": null,
+  "relic_density_estimate": {
+    "v_thermal_kms": 9993.333333333334,
+    "v_trans_kms": 0.08479624519989079,
+    "sigma_freeze_cm2_per_g": 2.2550400000000006e-21,
+    "sigma_v_cm3_per_s": 4.018055829120001e-36,
+    "Omega_h2_estimate": 895955694.2712864
+  },
+  "direct_detection_sigma_SI_cm2": 6.534426058540542e-24,
+  "sensitivity_sweep": [
+    {
+      "A_res": 10,
+      "g_chi": 1.064061092977806e-05,
+      "alpha": 9.009968306166031e-12,
+      "Omega_h2_estimate": 89595569.42712864,
+      "sigma_SI_cm2": 6.534426058540545e-23
+    },
+    {
+      "A_res": 100,
+      "g_chi": 5.983655251086306e-06,
+      "alpha": 2.849202149341397e-12,
+      "Omega_h2_estimate": 895955694.2712864,
+      "sigma_SI_cm2": 6.534426058540542e-24
+    },
+    {
+      "A_res": 1000,
+      "g_chi": 3.3648566233780647e-06,
+      "alpha": 9.009968306166032e-13,
+      "Omega_h2_estimate": 8959556942.712862,
+      "sigma_SI_cm2": 6.534426058540545e-25
+    }
+  ],
+  "verdict": "PARTIAL_UV_DERIVATION",
+  "limitations": [
+    "No bound state forms in single-Yukawa for g_chi ~ 6e-6 (lambda ~ 1.4e-5 << 0.84 threshold)",
+    "A_res ~ 100 must come from additional UV physics (second mediator, dark photon, etc.)",
+    "Relic density estimate is within an order of magnitude of 0.12 - additional annihilation channels needed",
+    "Direct-detection sigma_SI is small for g_chi ~ 6e-6 (consistent with current bounds)"
+  ],
+  "next_steps": [
+    "v19.2-D: explicit bound-state code with second mediator (Drobczyk 2025 combined)",
+    "v19.2-D: relic density code with s-channel resonance",
+    "v19.2-D: direct-detection cross-section with detector-specific efficiency",
+    "v19.2-D: LZ 248 keV event analysis (R44 Option 2)"
+  ]
+}

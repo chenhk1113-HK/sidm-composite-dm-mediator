@@ -1,0 +1,80 @@
+{
+  "script": "T221",
+  "description": "Drobczyk 2025 combined BS SIDM with s-channel annihilation",
+  "framework_parameters": {
+    "m_chi_GeV": 1.0,
+    "m_phi_eV": 200.0,
+    "m_Phi_h_GeV": 2.0,
+    "v_target_kms": 29.4,
+    "FWHM_kms": 4.4,
+    "sigma_peak_target_cm2_per_g": 174.0
+  },
+  "self_scattering": {
+    "g_chi_corrected": 0.002933947037724106,
+    "sigma_yukawa_v_target_cm2_per_g": 1.7400000000000002,
+    "A_res": 100.0,
+    "sigma_peak_cm2_per_g": 174.00000000000003,
+    "v_trans_kms": 0.08479624519989079,
+    "high_v_regime": true
+  },
+  "bound_state_check": {
+    "alpha": 6.850064735743136e-07,
+    "lambda_param": 3.4250323678715677,
+    "bound_state_forms": true,
+    "note": "BS does NOT form in single-Yukawa; A_res ~ 100 from additional UV physics"
+  },
+  "s_channel_annihilation": {
+    "g_chi_h": 0.001,
+    "Gamma_Phi_h_MeV": 7.957747154594766e-05,
+    "sigma_v_ann_cm3_per_s": 4.607289856856131e-25,
+    "Omega_h2_estimate": 0.007813704177180913
+  },
+  "relic_density_sweep": [
+    {
+      "g_chi_h": 0.0001,
+      "Gamma_MeV": 7.957747154594768e-07,
+      "Omega_h2": 7.813704177180914e-05
+    },
+    {
+      "g_chi_h": 0.001,
+      "Gamma_MeV": 7.957747154594766e-05,
+      "Omega_h2": 0.007813704177180913
+    },
+    {
+      "g_chi_h": 0.01,
+      "Gamma_MeV": 0.007957747154594767,
+      "Omega_h2": 0.7813704177180913
+    },
+    {
+      "g_chi_h": 0.1,
+      "Gamma_MeV": 0.7957747154594769,
+      "Omega_h2": 78.13704177180915
+    },
+    {
+      "g_chi_h": 1.0,
+      "Gamma_MeV": 79.57747154594767,
+      "Omega_h2": 7813.7041771809145
+    }
+  ],
+  "direct_detection": {
+    "sigma_SI_phi_cm2": 6.534621532200472e-24,
+    "sigma_SI_Phih_cm2": 5.097311722428738e-43,
+    "sigma_SI_total_cm2": 6.534621532200472e-24,
+    "LZ_bound_cm2": 9e-48,
+    "consistent": false
+  },
+  "verdict": "PARTIAL_UV_DERIVATION_WITH_RELIC_DENSITY",
+  "limitations": [
+    "BS enhancement factor 100x is asserted without citation (R42 rule)",
+    "s-channel annihilation formula is approximate (no proper phase space integral)",
+    "Direct-detection sigma_SI uses naive amplitude-squared, no form factor",
+    "Coannihilation, Sommerfeld enhancement at freeze-out, and 2->2 annihilation channels not included",
+    "Mediator mass m_Phi_h = 2*m_chi is on-shell resonance; off-resonance would need fine-tuning"
+  ],
+  "next_steps": [
+    "v19.2-D: compute s-channel annihilation with proper phase space (Griest-Secdel 1991)",
+    "v19.2-D: compute sigma_v at freeze-out temperature T_f ~ m_chi/20",
+    "v19.2-D: include Sommerfeld enhancement at freeze-out",
+    "v19.2-D: explicit relic density code with micrOMEGAs-like accuracy"
+  ]
+}

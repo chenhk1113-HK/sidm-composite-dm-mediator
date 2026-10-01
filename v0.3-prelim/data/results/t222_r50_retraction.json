@@ -1,0 +1,44 @@
+{
+  "script": "T222",
+  "description": "Numerical RETRACTION of R50 bound-state SIDM UV derivation",
+  "R50_overclaim": "sigma_peak = 174 cm^2/g achievable via bound-state SIDM at g_chi ~ 6e-6",
+  "R50_correction": {
+    "g_chi_corrected": 0.00293,
+    "reason": "v_target = 29.4 km/s >> v_trans = 0.085 km/s (high-v regime)",
+    "bound_state_forms": true,
+    "lambda_param": 3.424922546914298,
+    "E_B_eV": 4.8
+  },
+  "direct_detection_check": {
+    "sigma_SI_proper_cm2": 4.387648289809418e-08,
+    "LZ_bound_cm2": 9e-48,
+    "excluded": true,
+    "exclusion_factor": 4.8751647664549093e+39
+  },
+  "inelastic_DM_check": {
+    "compatible_with_v_resonance": false,
+    "reason": "v_resonance = 29.4 km/s requires E_B ~ 5 eV (delta ~ eV), but DD suppression needs delta ~ 100 keV"
+  },
+  "pseudoscalar_check": {
+    "sigma_SI_estimate_cm2": 0.0012204178730364991,
+    "works": false
+  },
+  "form_factor_check": {
+    "improves_DD": false,
+    "reason": "Finite-q enhancement, not suppression, for superlight mediator"
+  },
+  "verdict": "R50_RETRACTED",
+  "no_go_added": "Bound-state SIDM with v_resonance = 29.4 km/s (R50 retracted)",
+  "new_no_go_six": {
+    "id": "No-go #6",
+    "description": "Bound-state SIDM UV derivation fails direct-detection",
+    "mechanism": "m_phi ~ 200 eV requires g_chi ~ 3e-3 for sigma_peak = 174; gives sigma_SI ~ 4e-8 cm^2 >> LZ bound",
+    "inelastic_DM_does_not_save": true,
+    "pseudoscalar_insufficient": true
+  },
+  "next_steps": [
+    "v19.2-D: explicit dark photon mediator (vector, not scalar) for DD compatibility",
+    "v19.2-D: pseudo-Dirac splitting at keV scale for inelastic DD suppression (but conflicts with v_resonance)",
+    "v19.2-D: explore COMPLETELY DIFFERENT UV mechanism (geometric mass ladder, hidden gauge, etc.)"
+  ]
+}

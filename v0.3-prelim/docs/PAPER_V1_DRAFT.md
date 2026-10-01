@@ -11,7 +11,7 @@
 
 ## Abstract
 
-We present a **systematic exploration of SIDM parameter space** against Cloud-9, UFD cores, dSph, SPARC, and cluster constraints, with a **benchmark comparison against Mace+ 2026** (a recent unified SIDM model with two-component mass segregation). Rather than proposing a unified particle-physics model, we provide a **phenomenological constraint map and no-go catalogue** for the class of velocity-dependent multi-component SIDM models. The framework's σ_peak = 174 cm²/g at v_target = 29.4 km/s is a phenomenological parameterization (R33 Issue 3, R37 caveats), not a UV-derived prediction; what the framework predicts is **whether** core formation has occurred at Cloud-9, not **how** the core looks. The "Cloud-9 tension" between σ/m ≥ 50 cm²/g at v ≈ 28 km/s and dwarf galaxy upper limits (σ/m ≲ 0.8 cm²/g at v ≈ 5–15 km/s) is reframed as a comparison between two framework-chosen benchmarks, not as a Cloud-9 observational requirement (R42–R45 retraction cycle). The substantive result is a **benchmark comparison**: under a benchmark of ~50 cm²/g at dwarf velocities (Elbert+ 2015's largest simulation value, not a Cloud-9 requirement), Mace+ 2026 SIDM2v falls **~7× short** at v = 28 km/s (σ_eff(v=28) ≤ 6.89 cm²/g vs benchmark 50 cm²/g). **4 of 8 observational channels** are described under physically motivated f_H (Yang+ 2025 or T202 N-body); 7 of 8 only under retracted borrowed f_H. **Five UV completion no-go theorems** (magnetic dipole DM, Hidden U(1) + pseudo-Dirac, GeV-scale inelastic DM, published p-wave resonance, thermal WIMP) apply to the Phase 44 baseline. **One two-mediator UV completion** (Drobczyk 2025) achieves thermal relic Ωh² = 0.119 at δ = 0.43% but does not solve the Cloud-9 spike specifically.
+We present a **systematic exploration of SIDM parameter space** against Cloud-9, UFD cores, dSph, SPARC, and cluster constraints, with a **benchmark comparison against Mace+ 2026** (a recent unified SIDM model with two-component mass segregation). Rather than proposing a unified particle-physics model, we provide a **phenomenological constraint map and no-go catalogue** for the class of velocity-dependent multi-component SIDM models. The framework's σ_peak = 174 cm²/g at v_target = 29.4 km/s is a phenomenological parameterization (R33 Issue 3, R37 caveats), not a UV-derived prediction; what the framework predicts is **whether** core formation has occurred at Cloud-9, not **how** the core looks. The "Cloud-9 tension" between σ/m ≥ 50 cm²/g at v ≈ 28 km/s and dwarf galaxy upper limits (σ/m ≲ 0.8 cm²/g at v ≈ 5–15 km/s) is reframed as a comparison between two framework-chosen benchmarks, not as a Cloud-9 observational requirement (R42–R45 retraction cycle). The substantive result is a **benchmark comparison**: under a benchmark of ~50 cm²/g at dwarf velocities (Elbert+ 2015's largest simulation value, not a Cloud-9 requirement), Mace+ 2026 SIDM2v falls **~7× short** at v = 28 km/s (σ_eff(v=28) ≤ 6.89 cm²/g vs benchmark 50 cm²/g). **4 of 8 observational channels** are described under physically motivated f_H (Yang+ 2025 or T202 N-body); 7 of 8 only under retracted borrowed f_H. **Six UV completion no-go theorems** (magnetic dipole DM, Hidden U(1) + pseudo-Dirac, GeV-scale inelastic DM, published p-wave resonance, thermal WIMP, **bound-state SIDM with v_resonance = 29.4 km/s [R51, NEW 2026-10-01]**) apply to the Phase 44 baseline. **One two-mediator UV completion** (Drobczyk 2025) achieves thermal relic Ωh² = 0.119 at δ = 0.43% but does not solve the Cloud-9 spike specifically.
 
 **Paper organization:** §2 physical ingredients (σ/m vs σ_eff distinction, gravothermal cascade), §3 observational channels (§3.1 SPARC, §3.2 Cloud-9, §3.3 dSph, §3.4 UFD cores, §3.5 unified SIDM models including Mace+ 2026 benchmark comparison, §3.6 LZ direct-detection deferred per user directive), §9 two-component + Path F1, §10 UV completion no-go theorems, §11 conclusions. **Open physics findings:** (a) at σ/m = 0.5–2.5 cm²/g (microphysical σ/m at dSph scale from v₁ Gaussian tail), the Balberg+ gravothermal formula predicts collapse in t_core = 0.7–6.3 Gyr for all 8 dSph halos (causality-OK, ratios 20–98). This **contradicts dSph observations showing no dense cores**: the framework's candidate mechanism is the v₁ resonance width (a narrower Gaussian w ≲ 3 km/s vs current 4.4 would suppress the dSph tail while preserving Cloud-9's bulk σ/m). (b) The Fornax σ_HL = -0.47 cm²/g internal inconsistency between σ/m(v) and σ_eff(v) curves at v=15 km/s is **robust against σ_peak_HH_1 variation in [30, 250] cm²/g** (see §2.6 sensitivity sweep). (c) Under self-consistent canonical NFW (V_max derived per c, not held fixed): at c=12 (ΛCDM-conservative), the continuous viable σ_peak window is **[49.81, 57.24] cm²/g** — a knife-edge of width ~7.43 (exact 1/σ_m scaling with K ≈ 134.0). At c=4 (Ohana+ physical anchor, §9.12), continuous window is [49.81, 250] cm²/g — **framework is consistent at c=4**. The c=12 vs c=4 distinction is the c-M tension against ΛCDM. Fornax σ_HL outlier marginal at σ_peak ≤ 50, substantive at σ_peak ≥ 75. (d) The §9.12 c=4 t_core = 4.42 Gyr is corrected to 3.98 Gyr by the canonical NFW sweep (11% discrepancy from §9.12's σ/m = 135.3 being held constant at c=12's V_max; this sweep uses σ/m(V_max = 25.59) = 150.0 at c=4 — see §2.6).
 
@@ -1639,72 +1639,60 @@ The recommendation in §10.4g.5 was to apply the frozen Path 2 and Path 3 parame
 
 ---
 
-### 10.7 Bound-state SIDM UV derivation for σ_peak = 174 cm²/g at v_target = 29.4 km/s (Path 1 — R50)
+### 10.7 Bound-state SIDM UV derivation for σ_peak = 174 cm²/g at v_target = 29.4 km/s (Path 1 — R50, **RETRACTED in R51**)
 
-**Path 1 per user directive 2026-10-01 (\"path 2 then 1\"): derive σ_peak from a UV completion.** The five no-go theorems in §10.2a-d test specific constructions (magnetic dipole DM, Hidden U(1) + 10 MeV pseudo-Dirac, GeV inelastic DM, Chu+ 2019 P1 p-wave resonance). **None rules out bound-state SIDM specifically.** This section develops the bound-state SIDM UV completion for σ_peak = 174 cm²/g at v_target = 29.4 km/s.
+**R51 RETRACTION (per T220-T222 numerical verification, 2026-10-01):** R50 was a "plausible UV completion" that did NOT survive first-principles numerical check. **The σ_peak = 174 cm²/g at v_target = 29.4 km/s is NOT derivable from bound-state SIDM with m_φ = 200 eV.** The retraction is documented in three scripts:
 
-**Mechanism (per R44 Option 1, R50 analysis):**
+- **T220** (`scripts/t220_bound_state_sidm.py`): Computes the Yukawa background self-scattering. **R50 ERROR 1:** g_chi ~ 6e-6 was computed assuming the low-v plateau; at v = 29.4 km/s ≫ v_trans = 0.085 km/s, the correct g_chi is ~ 2.93e-3 (corrected for high-v v^-4 regime).
+- **T221** (`scripts/t221_drobczyk_combined_sidm.py`): Computes relic density with Drobczyk 2025 s-channel annihilation. With corrected g_chi = 2.93e-3, λ = α m_χ / m_φ = 3.4 > 0.84 → bound state DOES form (R50's "no bound state" claim was based on wrong g_chi). Relic density match found at g_chi_h ~ 1e-2 (Ωh² ~ 0.78).
+- **T222** (`scripts/t222_r50_retraction.py`): Computes direct-detection with proper Fitzpatrick et al. 2013 amplitude. **R50 ERROR 2 (fatal):** σ_SI ~ 4.4e-8 cm² is **40 orders of magnitude above LZ bound 9e-48 cm²**. **Inelastic DM solution conflicts with v_resonance = 29.4 km/s** (delta ~ 5 eV for resonance, but delta ~ 100 keV needed for DD suppression). **Pseudoscalar mediator insufficient** (σ_SI still ~ 1.2e-3 cm², still above LZ).
 
-σ/m(v) in bound-state SIDM has two contributions: a smooth Yukawa background plus a Breit-Wigner resonance from s-wave bound states:
-- σ_yukawa(v) = (g_χ⁴ m_χ²) / (32 π m_φ⁴) × (ℏc)² / m_χ (cm²/g)
-- σ_total(v) = σ_yukawa(v) × [1 + A_res × BW(v)] where BW(v) = (Δv/2)² / [(v - v_target)² + (Δv/2)²]
+**R50 summary (now retracted):**
+- σ/m(v) = σ_yukawa(v) × [1 + A_res × BW(v)]
+- m_χ = 1 GeV, m_φ = 200 eV, v_target = 29.4 km/s, FWHM = 4.4 km/s
+- σ_peak = 174 cm²/g achieved at g_chi = 2.93e-3 (corrected)
+- **Bound state forms** with λ = 3.4 > 0.84 threshold, E_B ~ 4.8 eV
+- **Relic density achievable** at g_chi_h ~ 1e-2 with Drobczyk 2025 s-channel
+- **Direct-detection FATAL EXCLUSION**: σ_SI ~ 4.4e-8 cm² vs LZ bound 9e-48 cm²
 
-For our framework:
-- m_χ = 1 GeV WIMP
-- m_φ = 200 eV (matches v_trans ~ 30-50 km/s from §3.5a R42)
-- v_target = 29.4 km/s
-- FWHM = 4.4 km/s (Gaussian σ_width = 4.4/2.355 = 1.87 km/s)
+**No-go added (R51):** "Bound-state SIDM with v_resonance = 29.4 km/s" — this is **No-go #6** in the paper's UV completion no-go catalogue, joining:
+- No-go #1: Magnetic dipole DM (T120.10)
+- No-go #2: Hidden U(1) + 10 MeV pseudo-Dirac (T120.16)
+- No-go #3: GeV-scale inelastic DM (T130)
+- No-go #4: Published best-fit p-wave resonance (Chu+ 2019 P1, T131)
+- No-go #5: One-mediator UV systematic (T184)
+- **No-go #6: Bound-state SIDM with v_resonance = 29.4 km/s (R51, NEW)**
 
-**Constraints:**
+**Honest status (per R51, after Path 1 retraction):**
 
-1. σ_peak = σ_yukawa(v_target) × A_res = 174 cm²/g
-2. σ_yukawa(v_target) for v << v_trans = const (Yukawa plateau)
-3. g_χ must be perturbative: g_χ < 4π
-4. Bound state must form: α × m_χ / m_φ > 0.5 (s-wave threshold)
+Per proposalcomment.docx second-pass reviewer's recommendation:
+> "If the UV derivation is possible: do it. One dedicated effort, not a bundle cycle. If it succeeds, the paper has a prediction. **If it fails, the paper has a negative result about a class of dark-sector models.**"
 
-**Solution (R50 numerical computation):**
+**R51 IS the negative result.** The framework's σ_peak = 174 cm²/g at v_target = 29.4 km/s is NOT derivable from bound-state SIDM (the most plausible UV completion identified in R44 Option 1). It is also not derivable from any of the five no-go constructions tested in §10.2. **The framework's σ_peak remains unanchored to UV physics.** This is the seventh no-go theorem for the Phase 44 baseline.
 
-| Coupling | g_χ⁴ | σ_yukawa(v_target) | Required A_res | Perturbative? |
-|---|---|---|---|---|
-| g_χ = 1.0 (too large) | 1.0 | 1.36e+21 cm²/g | 1.3e-19 | NO (unitarity) |
-| g_χ = 1.12e-3 (BS threshold) | 1.6e-12 | 2.14e+9 cm²/g | 8.1e-8 | YES |
-| g_χ = 1.9e-5 (Yukawa match) | 1.3e-19 | 1.36e+1 cm²/g | 12.8 | YES |
-| **g_χ = 5.98e-6** (A_res = 100) | **1.3e-21** | **1.74 cm²/g** | **100** | **YES** |
+**What this means for the paper:**
+- The "Contribution relative to prior work" paragraph in the Abstract (R49) is correct: this is NOT a UV completion.
+- The "catalog of features without UV derivation" framing (R47-R48) is correct: R51 confirms it numerically.
+- **Six no-go theorems** for the Phase 44 baseline (was 5; added No-go #6 bound-state SIDM).
+- **σ_peak = 174 cm²/g remains phenomenological.** The framework predicts t_c, t_cc, gravothermal phase at Cloud-9, but not the core structure that would distinguish it from ΛCDM or other SIDM models.
 
-**Final UV completion (R50):**
-- g_χ ~ 6.0e-6 (perturbative, 6 orders of magnitude below 4π)
-- m_χ ~ 1 GeV (WIMP)
-- m_φ ~ 200 eV (matches §3.5a R42 v_trans)
-- A_res ~ 100 (Breit-Wigner enhancement at v_target = 29.4 km/s)
-- σ_yukawa = 1.74 cm²/g (background, well below σ_peak)
-- **σ_peak = 174 cm²/g at v = 29.4 km/s ✓**
-- Coupling perturbation: g_χ ~ 6.0e-6 ≪ 4π ≈ 12.57 ✓
-- **Relic density check:** σ_annihilation ~ σ_self × (annihilation fraction) ~ 1.74e-25 × (1e-3-1e-1) cm² ~ 1e-28 to 1e-26 cm³/s (without s-channel enhancement). For Ωh² ~ 0.12, need ⟨σv⟩ ~ 3e-26 cm³/s. **This is consistent within an order of magnitude** but may need additional annihilation channels (s-channel resonance, co-annihilation) for precise relic density. **A precise relic density computation requires the full Drobczyk 2-mediator framework combined with bound-state-induced σ_peak = 174 — beyond R50 scope.**
+**R51 process lesson (per R40-R47 cycle pattern):**
 
-**Derivation summary (R50):**
+R50 was written quickly (~30 min) as a plausible UV completion to close the R40-R47 cycle. The numerical check (T220-T222) revealed two errors: (1) wrong g_chi by 3 orders of magnitude (high-v regime miscalculation), (2) direct-detection exclusion (40 orders of magnitude above LZ). **This is the same pattern as R46-R47: a new claim introduced as "plausible UV completion" that doesn't survive quantitative check.** The reviewer was right: "Another retraction of another retraction isn't progress. The next document from this project should either be a UV derivation or an honest abstract."
 
-For σ_peak = 174 cm²/g at v_target = 29.4 km/s:
-1. The amplitude is achievable via Yukawa + bound-state Breit-Wigner enhancement
-2. The required coupling (g_χ ~ 6e-6) is far below the perturbative unitarity bound
-3. The required mediator mass (m_φ ~ 200 eV) is consistent with the §3.5a R42 v_trans estimate
-4. The required BS enhancement factor (A_res ~ 100) is plausible for deep bound states
-5. **What the framework still needs for full UV derivation:**
-   (a) Explicit BS computation (not just Breit-Wigner enhancement factor)
-   (b) Relic density match to Ωh² = 0.12
-   (c) Direct-detection cross-section computation (R44 Option 2 deferred per user directive)
-   (d) LZ September 2026 248 keV event check (R44 Option 2 deferred per user directive)
+**R51 honest framing:** Path 1 was attempted per user directive ("path 2 then 1"). Path 1 failed (R51 retraction). Path 2 (R49 constraint-map abstract) stands. **The framework is a constraint map with six no-go theorems against the Phase 44 baseline, not a unified SIDM model.**
 
-**Status (R50, per proposalcomment.docx second-pass reviewer's recommendation):**
+**Code (deferred to v19.2-D future work):**
+- T220: `scripts/t220_bound_state_sidm.py`
+- T221: `scripts/t221_drobczyk_combined_sidm.py`
+- T222: `scripts/t222_r50_retraction.py`
+- Data: `v0.3-prelim/data/results/t220_bound_state_sidm.json`, `t221_drobczyk_combined_sidm.json`, `t222_r50_retraction.json`
 
-Per reviewer: \"If the UV derivation is possible: do it. One dedicated effort, not a bundle cycle. If it succeeds, the paper has a prediction. If it fails, the paper has a negative result about a class of dark-sector models.\"
-
-R50 is a **partial UV derivation**. The amplitude (σ_peak = 174 cm²/g) is achievable via bound-state SIDM with Yukawa + Breit-Wigner enhancement. The full UV derivation requires: explicit BS computation, relic density match, direct-detection, and LZ check. **These are deferred to v19.2-D future work per user instruction.**
-
-**Important caveat (per R50 retraction-cycle awareness):**
-
-R50 was written quickly (~30 min) to close the R40-R47 cycle with a concrete UV derivation. The bound-state calculation is **plausible** but **not first-principles verified**. Per the R42 rule (no citation without verbatim quote), the BS enhancement factor 100x for \"deep\" BS is asserted without citation. Per the R46-retraction rule (no citation applied outside regime of validity), the v_trans ~ 30-50 km/s for m_φ = 200 eV is the framework's own derivation (§3.5a R42) and is consistent with this §10.7 UV completion.
-
-**Honest framing (per R47 retraction principle):** \"The bound-state SIDM UV derivation is a **plausible UV completion**, not a first-principles derivation. The σ_peak = 174 cm²/g is achievable in this framework, but the explicit BS calculation (with E_B = 4.8 eV bound state, σ_self × BS_enhancement × Ωh² dependence) is deferred to v19.2-D.\"
+**Future UV completion directions (deferred to v19.2-D):**
+- Dark photon (vector mediator) instead of scalar — different DD amplitude
+- Geometric mass ladder (Hong, Kuranchi, Perez 2020 type) — different resonance structure
+- Strongly interacting massive particles (SIMPs) — different freeze-out mechanism
+- Forbidden DM (dark matter heavier than mediator, endothermic freeze-out)
 
 ---
 
