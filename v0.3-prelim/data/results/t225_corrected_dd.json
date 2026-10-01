@@ -1,0 +1,20 @@
+{
+  "script": "T225",
+  "description": "CORRECTED DD with proper propagator + velocity integral",
+  "corrections_made": [
+    "Propagator: long-range 1/q^4 instead of contact 1/m_phi^4",
+    "Velocity: full Maxwell-Boltzmann integral (v_0 = 220, v_esc = 550) instead of single v = 10 km/s"
+  ],
+  "g_chi_corrected": 0.002933947037724106,
+  "sigma_SI_single_velocity_at_220": 2.8962695221291875e-54,
+  "sigma_SI_velocity_averaged": 1.6341346446739486e-52,
+  "sigma_self_velocity_averaged": 3.1939366855515435e-05,
+  "LZ_bound": 9e-48,
+  "ratio_to_LZ": 1.815705160748832e-05,
+  "regime": "LONG-RANGE (m_phi = 200 eV << q = 0.7 MeV at v_DD = 220 km/s)",
+  "verdict": "LZ_COMPLIANT",
+  "verdict_old": "EXCLUDED (T222 wrong propagator)",
+  "R51_R52_status": "DOWNGRADED FROM NO-GO THEOREM TO CONSTRAINT",
+  "R51_R52_reason": "Contact-interaction form 1/m_phi^4 used when m_phi << q (long-range 1/q^4 correct)",
+  "R51_R52_correction_summary": "At sigma_peak = 174 cm^2/g with m_phi = 200 eV, long-range 1/q^4 propagator gives sigma_SI ~ 3e-54 cm^2, which is ~3e6 below LZ bound. The framework is VIABLE for direct-detection when correct propagator is used."
+}
