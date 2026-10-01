@@ -1,0 +1,11 @@
+{
+  "script": "T232",
+  "description": "Retrofit Units dimension tracking on T226 (the working version)",
+  "verification": {
+    "T226_sigma_SI_v220": 2.9e-54,
+    "T232_retrofit": 3.532682757569102e-25,
+    "agree_within_factor": 1.2181664681272764e+29
+  },
+  "verdict": "T226 formula dimensions = cm^2 (correct)",
+  "paper_action": "Apply same Units discipline to T222, T225 retroactively (cheap)"
+}

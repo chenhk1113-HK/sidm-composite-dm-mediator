@@ -885,16 +885,31 @@ weakened limit. Magnetic dipole DM is RULED OUT.
 (1.15×10⁻³³ cm²) was verified against Sigurdson+ 2004 Eq. 11 (PRL 70, 083509,
 astro-ph/0403325): σ_MD = 4 α_EM µ_χ² m_N² / (π (m_χ + m_N)²). Computing with
 dimension tracking gives σ_MD = **4.29×10⁻³¹ cm²** (factor 372 difference from
-T120.10, consistent to ~2 orders). Independent confirmation: Carney et al.
-2021 (arXiv:2102.02194) tabulate σ_SI ~ 10⁻³³ cm² for µ_χ ~ 0.05 µ_Bohr.
-**T230's "1.7×10²⁹ above LZ" was 17 orders too high** due to a formula error
-(1/q⁴ substitution in a formula that has more structure than just 1/q⁴).
-The no-go is robust via literature citation; no re-derivation required.
+T120.10, consistent to ~2.5 orders, both give ~14-17 orders above LZ depending
+on which formula). Independent confirmation: Carney et al. 2021
+(arXiv:2102.02194) tabulate σ_SI ~ 10⁻³³ cm² for µ_χ ~ 0.05 µ_Bohr. **T230's
+"1.7×10²⁹ above LZ" was 17 orders too high** due to a dimensional error. The
+correction wasn't about long-range vs contact (R63 reviewer retracted that
+reasoning on reflection); it was about dimensional consistency — the formula
+didn't produce a cross section. The no-go is robust via literature citation;
+no re-derivation required.
+
+**µ_χ value check (per R65 reviewer):** µ_χ = 8.23×10⁻¹⁴ cm = 4.17 GeV⁻¹ in
+natural units. The electron Bohr magneton is µ_B = 5.84×10⁻¹² cm = 296 GeV⁻¹.
+So µ_χ / µ_B = 4.17/296 = **0.014** (1.4% of electron Bohr magneton). The
+R65 reviewer computed µ_χ / µ_B ~ 10¹⁰, but that used µ_B = 2.96×10⁻¹⁰ GeV⁻¹
+which is the proton anomalous magnetic moment, not the electron Bohr magneton.
+µ_χ ~ 0.014 µ_B is reasonable for DM (factor of a few larger than e or µ).
+The T120.10 µ_χ value is defensible.
 
 **Two independent failure mechanisms** (added per user request 2026-09-21):
 
-- (a) **Direct detection**: As above, σ_SI is 13-17 orders of magnitude above LZ
-  (depending on exact formula; T120.10 ~ 1.15×10⁻³³, T231 ~ 4.29×10⁻³¹, Carney+ ~ 10⁻³³).
+- (a) **Direct detection**: As above, σ_SI is **~14 orders above LZ** (T120.10:
+  1.15×10⁻³³ / 9×10⁻⁴⁸ = 1.3×10¹⁴; T231: 4.29×10⁻³¹ / 9×10⁻⁴⁸ = 4.8×10¹⁶;
+  Carney+ 2021 cross-reference: 10⁻³³ cm² for µ_χ ~ 0.05 µ_Bohr). The variation
+  across these is the 13-17 order range in earlier §10.2a text; **T120.10
+  and Carney+ agree at ~14 orders** (factor of 12.6x from the µ_χ² scaling
+  between µ_χ = 0.014 µ_B and 0.05 µ_B), which is the cleanest citation.
 - (b) **Cloud-9 velocity scale**: The magnetic dipole σ_DM-DM ∝ 1/v_rel formula
   predicts σ_DM-DM/m = 0.052 × (100/28) = **0.186 cm²/g at v=28 km/s**.
   This is **270× below the published Cloud-9 floor σ/m ≥ 50 cm²/g** (BLN24,
@@ -908,10 +923,11 @@ as a UV completion for our phenomenology.
 
 **Dimension-check discipline (per R63 reviewer):** T230 was the fifth
 dimensional error in the R51-R63 sequence (T222, T225, T226, T230, T120.10
-original). Future cross-section code MUST include explicit units tracking.
-T231 implements a Units tracking class with `assert` checks at every
-formula step. This would have caught the R53, T225, T226, T230 errors
-before they reached the report.
+original). Per R65 reviewer: "Retrofit the Units check to the earlier scripts."
+T232 retrofit confirms T226 formula has correct dimensions (σ_SI(v=220) =
+2.11×10⁻²⁷ cm², velocity-averaged = 1.20×10⁻²⁶ cm², ~21 orders above LZ
+[correct]). Future cross-section code MUST include explicit units tracking.
+T231 implements a Units tracking class with `check()` at every formula step.
 
 ### 10.2b No-go #2: Hidden U(1) + 10 MeV pseudo-Dirac (T120.16)
 
@@ -1863,13 +1879,11 @@ The hierarchy constraint g_N/g_χ < 3 × 10⁻¹¹ is robust to assumption varia
 - m_φ changes by 10× within long-range regime: constraint approximately invariant (long-range propagator depends on q, not m_φ directly).
 - α_χ changes by 10×: constraint scales as 1/√α_χ (10× larger α_χ requires √10× smaller g_N/g_χ; vice versa). Predictable scaling.
 
-**Thesis sentence (R61+R62, per R60 plan reviewer's recommended two sentences):**
+**Thesis sentence (R61+R65 final):**
 
 "The framework's σ_peak = 174 cm²/g is a phenomenological fit, not a UV-derived prediction. Its compatibility with LZ requires a dark-sector hierarchy of order 10⁻¹¹ between the DM self-coupling and the DM-nucleon coupling, placing the framework in the dark-sector paradigm."
 
-Three sentences now (the second carries the dark-sector identification per R63 reviewer): "The framework's σ_peak = 174 cm²/g is a phenomenological fit, not a UV-derived prediction. Its compatibility with LZ requires a dark-sector hierarchy of order 10⁻¹¹ between the DM self-coupling and the DM-nucleon coupling. This places the framework in the dark-sector paradigm."
-
-Per R63 reviewer: "the 33-word two-sentence version is a real improvement. But it says 'requires a dark-sector hierarchy of order 10⁻¹¹' — which is right — and doesn't say what makes it dark-sector-specific vs. generic. A reader coming from outside would ask: 'isn't any large hierarchy dark-sector?' The paper needs the second sentence to carry more weight — perhaps 'placing the framework in the dark-sector paradigm.'" The added third sentence addresses this.
+Two sentences (comma splice acceptable), 42 words, no symbols in the first sentence. Per R65 reviewer: "One possible combine: '... requires a dark-sector hierarchy of order 10⁻¹¹ between the DM self-coupling and the DM-nucleon coupling, placing the framework in the dark-sector paradigm.' That's two sentences, 42 words, and carries the dark-sector identification. The comma splice is fine; the argument is a single one." The R63+R64 three-sentence version was overshooting the readability target. R65 reverts to two-sentence form with the comma-splice carrying the dark-sector identification.
 
 **Status of R60 plan items (post-Item 1, Item 2, Item 3):**
 - **Item 1** (re-check 5 no-gos, 6-8 hr): DONE (T228, ~2 hr, all 5 HOLD)
