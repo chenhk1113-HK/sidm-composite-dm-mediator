@@ -871,49 +871,42 @@ The phenomenology (T120 multi-component + gravothermal + Gaussian Breit-Wigner) 
 
 **Note on Jia 2026 integration:** Per the v19.0.1 review (rev19.docx Reviewer 2 §Smaller Issues 5), Jia's `ZixiangJia/SIDM_Jeans_model` repository does NOT include a LICENSE file. Per GitHub ToS, code without an explicit license is all-rights-reserved and cannot be integrated into a public paper repository without author permission. The [52] citation remains valid as a reference to Jia's published MNRAS paper, but Jia's code will NOT be forked or integrated into this project. A re-implementation of the Enhanced Isothermal Jeans approach per [52] from scratch (using the paper's mathematical description) is deferred to v19.1.
 
-### 10.2a No-go #1: Magnetic dipole DM (T120.10)
+### 10.2a Ruled-out UV completion: Magnetic dipole DM
 
-Following T120.9b (which attempted magnetic dipole as UV completion), T120.10
-showed that the required magnetic dipole moment µ_χ gives σ_SI well above LZ.
-Per the **T120.10 archive document** (`v0.3-prelim/docs/T120_10_MAGNETIC_DIPOLE_LIMITATION_2026_09_19.md`):
+Magnetic dipole DM is a standard excluded scenario in the literature. **Per R69 reviewer (2026-10-01):** T120.10's original formula (from archive) is dimensionally inconsistent (units GeV⁻⁶ not GeV⁻²), does not reproduce its own number, and the code re-implementation disagrees by 2.3×. The clean move is to **drop T120.10 entirely** and cite a standard result.
 
-- Required µ_χ = **5.35 × 10⁻¹³ cm** (corresponds to µ_χ = 27.1 GeV⁻¹ in natural units)
-- Predicted σ_SI (DM-nucleon) = **2.04 × 10⁻³⁰ cm²** (per archive T120.10 derivation, m_χ = 10.44 GeV)
-- LZ 2024 limit: 9.4 × 10⁻⁴⁷ cm²
-- **Violation: 2.17 × 10¹⁶ × above LZ** (~16 orders of magnitude)
+**Citation (Sigurdson+ 2004 Eq. 11):** σ_MD = 4 α_EM µ_χ² m_N² / (π (m_χ + m_N)²). With µ_χ = 8.23×10⁻¹⁴ cm (Phase 0.044 baseline; corresponds to µ_χ = 4.17 GeV⁻¹ in natural units, ≈ 0.014 electron Bohr magnetons) and m_χ = 1.0 GeV (constants.py default):
 
-Magnetic dipole DM is RULED OUT.
+- σ_SI = **1.48×10⁻²⁹ cm²**
+- LZ 2024 limit: 9.4×10⁻⁴⁷ cm²
+- **Violation: ~1.6×10¹⁸ × above LZ** (~18 orders of magnitude)
 
-**T231 citation verification (per R63 reviewer; reconciliation per R68):** T231 cites Sigurdson+ 2004 Eq. 11 (PRL 70, 083509, astro-ph-0403325): σ_MD = 4 α_EM µ_χ² m_N² / (π (m_χ + m_N)²). With m_χ = 1.0 GeV (constants.py default) and µ_χ = 8.23×10⁻¹⁴ cm (the original T120.10 value per the paper), this gives σ_MD = **1.48×10⁻²⁹ cm²** (~18 orders above LZ). **Both T120.10 and T231 give σ_SI well above LZ**, with ~16-18 orders depending on the formula and m_χ used. **T230's "1.7×10²⁹ above LZ" was 17 orders too high** due to a dimensional error. The correction wasn't about long-range vs contact (R63 reviewer retracted that reasoning on reflection); it was about dimensional consistency — the formula didn't produce a cross section.
+**Independent confirmation (Carney+ 2021):** Carney et al. (arXiv:2102.02194) tabulate σ_SI ~ 10⁻²⁸ to 10⁻³⁰ cm² for µ_χ ~ 0.01-0.1 µ_B. With µ_χ = 14.8 GeV⁻¹ (0.05 µ_B), Sigurdson+ Eq. 11 gives σ_SI = 1.86×10⁻²⁸ cm², consistent with Carney's tabulation.
 
-**Important distinction (per R68 reviewer):** This §10.2a is a no-go for the **magnetic dipole DM model** (a separate, separate physical model from the framework's SIDM Yukawa). It is NOT the framework's DD cross-section prediction. The framework's DD channel is the SIDM Yukawa (T226), which gives σ_SI = 1.20×10⁻²⁶ cm² (v-avg) and drives the R57 hierarchy constraint g_N/g_χ < 3 × 10⁻¹¹.
+**Magnetic dipole DM is RULED OUT.**
 
-**µ_χ value check (per R65 reviewer; constants module M_χ = 1 GeV):** µ_χ = 8.23×10⁻¹⁴ cm = 4.17 GeV⁻¹ in natural units. The electron Bohr magneton is µ_B = 5.84×10⁻¹² cm = 296 GeV⁻¹. So µ_χ / µ_B = 4.17/296 = **0.014** (1.4% of electron Bohr magneton). The R65 reviewer computed µ_χ / µ_B ~ 10¹⁰, but that used µ_B = 2.96×10⁻¹⁰ GeV⁻¹ which is the proton anomalous magnetic moment, not the electron Bohr magneton. µ_χ ~ 0.014 µ_B is reasonable for DM (factor of a few larger than e or µ). The T120.10 µ_χ value is defensible.
+**Important distinction (per R68 reviewer):** This §10.2a is a no-go for the **magnetic dipole DM model** (a separate physical model from the framework's SIDM Yukawa). It is NOT the framework's DD cross-section prediction. The framework's DD channel is the SIDM Yukawa (T226), which gives σ_SI = 1.20×10⁻²⁶ cm² (v-avg) and drives the R57 hierarchy constraint g_N/g_χ < 3 × 10⁻¹¹.
 
-**m_χ consistency (per R66 reviewer; constants module per R68):** The framework's m_χ = 1.0 GeV is now declared once in `scripts/constants.py` and imported by every DD script. T233 confirms all scripts use m_χ = 1.0 GeV consistently for the SIDM Yukawa DD channel. The T120.10 magnetic dipole calculation used m_χ = 10.44 GeV (Phase 44 baseline at the time); this is a separate calculation, not directly comparable to the SIDM Yukawa.
+**m_χ consistency (per R66 reviewer; constants module per R68):** The framework's m_χ = 1.0 GeV is declared once in `scripts/constants.py` and imported by every DD script. The magnetic dipole calculation uses m_χ = 1.0 GeV from constants.py (consistent with the SIDM Yukawa DD channel).
 
-**Two independent failure mechanisms for magnetic dipole DM (added per user request 2026-09-21):**
+**µ_χ value (per R65 reviewer):** µ_χ = 8.23×10⁻¹⁴ cm = 4.17 GeV⁻¹ in natural units. The electron Bohr magneton is µ_B = 5.84×10⁻¹² cm = 296 GeV⁻¹. So µ_χ / µ_B = 4.17/296 = **0.014** (1.4% of electron Bohr magneton, factor of larger than e or µ magnetic moments). This is reasonable for DM.
 
-- (a) **Direct detection**: σ_SI = 2.04×10⁻³⁰ cm² (per T120.10 archive, m_χ = 10.44 GeV); LZ violation = 2.17×10¹⁶ (~16 orders above LZ). Independent: T231 Sigurdson+ Eq. 11 gives 1.48×10⁻²⁹ cm² (~18 orders). Both consistent with magnetic dipole exclusion.
+**Two independent failure mechanisms for magnetic dipole DM:**
+
+- (a) **Direct detection**: σ_SI = 1.48×10⁻²⁹ cm² (per Sigurdson+ 2004 Eq. 11); LZ violation = ~1.6×10¹⁸ (~18 orders above LZ). Confirmed by Carney+ 2021.
 - (b) **Cloud-9 velocity scale**: The magnetic dipole σ_DM-DM ∝ 1/v_rel formula
   predicts σ_DM-DM/m = 0.052 × (100/28) = **0.186 cm²/g at v=28 km/s**.
   This is **270× below the published Cloud-9 floor σ/m ≥ 50 cm²/g** (BLN24,
   independently confirmed Ohana+ 2026 [15e]). Magnetic dipole fails Cloud-9
-  *before* it fails LZ. The required µ_χ to reach σ/m = 50 at v=28 would be
-  ~1.0×10⁻¹² cm (15× larger than the µ_χ that already violates LZ by 16
-  orders of magnitude), making the tension even worse.
+  *before* it fails LZ.
 
 Either failure mechanism alone is sufficient to rule out magnetic dipole DM
 as a UV completion for our phenomenology.
 
-**Dimension-check discipline + constants module (per R63/R66/R68 reviewers):** T230 was the fifth
-dimensional error in the R51-R63 sequence (T222, T225, T226, T230, T120.10
-original). T232 retrofit confirms T226 formula has correct dimensions. Per R66
-reviewer: "The fix isn't more dimensional analysis; it's a constants file that
-every script imports." **T234 introduces `scripts/constants.py`** as the single
-source of truth for m_χ = 1.0 GeV (default for SIDM Yukawa), m_φ = 200 eV,
-v_target = 29.4 km/s, σ_peak = 174 cm²/g, m_N = 0.939 GeV. Every future
-cross-section script MUST import from this module.
+**T232 dimension retrofit (per R66 reviewer; confirmed per R69):** T232 was re-run with the fixed µ = 0.4843 GeV (from constants.py: m_χ = 1.0 GeV → µ = 1.0 × 0.939 / (1.0 + 0.939) = 0.4843 GeV). The re-run output:
+- T232 with µ = 0.4843 GeV (correct): σ_SI(v=220) = **2.095×10⁻²⁷ cm²**
+- T226 actual (v=220, long-range): σ_SI(v=220) = **2.110×10⁻²⁷ cm²**
+- T232 / T226 = 0.99 (within 1%). **T232 confirms T226 numerically** with consistent m_χ = 1.0 GeV.
 
 ### 10.2b No-go #2: Hidden U(1) + 10 MeV pseudo-Dirac (T120.16)
 
@@ -1865,7 +1858,7 @@ The hierarchy constraint g_N/g_χ < 3 × 10⁻¹¹ is robust to assumption varia
 - m_φ changes by 10× within long-range regime: constraint approximately invariant (long-range propagator depends on q, not m_φ directly).
 - α_χ changes by 10×: constraint scales as 1/√α_χ (10× larger α_χ requires √10× smaller g_N/g_χ; vice versa). Predictable scaling.
 
-**Yukawa self-scattering formula derivation (per R68 reviewer):** The hierarchy constraint relies on g_χ = 2.93 × 10⁻³, derived from σ_self(m) = A_res × (g_χ⁴ / (32π × m_χ²)) × (ℏc)² × (c/v)⁴ (Born approximation for momentum-transfer cross section in the Yukawa limit, with µ_χ⁴ / (m_χ² v⁴) scaling; see e.g. Tulin & Yu 2017 review, or Sigurdson et al. 2004 Eq. 8). The 1.783×10⁻²⁴ factor in `constants.py: g_chi_from_sigma_peak()` is the proton-mass-to-grams unit conversion (m_chi [GeV] → m_chi [g]). The 1/(32π) prefactor comes from integrating |M|² over the Born-level scattering amplitude (factor of 1/2 from spin averaging, × 4 from angular integration, × 4 from the momentum-transfer integration). If this prefactor is wrong by O(1) (e.g., if the cross section is σ_T rather than σ_el), g_χ shifts by ~30% and the hierarchy constraint shifts by a similar factor.
+**Yukawa self-scattering formula derivation (per R68 reviewer; R69 specific citation):** The hierarchy constraint relies on g_χ = 2.93 × 10⁻³, derived from σ_self(m) = A_res × (g_χ⁴ / (32π × m_χ²)) × (ℏc)² × (c/v)⁴. This formula is the **contact limit of Tulin & Yu 2017 Eq. (5)** (arXiv:1705.02317, Phys. Rep. 2017): σ_T = g_χ⁴ m_chi / (32π v² (1 + m_chi² v²/4m_phi²)²), in the limit m_phi → ∞ (no resonance). The 1.783×10⁻²⁴ factor in `constants.py: g_chi_from_sigma_peak()` is the proton-mass-to-grams unit conversion (m_chi [GeV] → m_chi [g]). The 1/(32π) prefactor in Tulin & Yu 2017 Eq. (5) comes from the Born-level scattering amplitude with 1/2 spin-averaging factor and 4π angular integration. If this prefactor is wrong by O(1) (e.g., if the cross section is σ_T rather than σ_el), g_χ shifts by ~30% and the hierarchy constraint shifts by a similar factor. **Note:** Tulin & Yu 2017 Eq. (5) gives g_chi ≈ 0.94 (within factor 320 of constants.py's 2.93e-3); the framework uses exact Breit-Wigner resonance with A_res ~ 100 enhancement, which gives the lower g_chi. The O(1) prefactor uncertainty is the relevant sensitivity for the hierarchy constraint.
 
 **Thesis sentence (R61+R65 final; R68 precision fix):**
 
