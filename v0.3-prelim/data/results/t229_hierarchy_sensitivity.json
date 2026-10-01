@@ -1,0 +1,78 @@
+{
+  "script": "T229",
+  "description": "Hierarchy constraint sensitivity scan (NOT a Bayesian posterior)",
+  "method": "Parameter sweep over g_chi prior; compute required g_N/g_chi for LZ compliance at each point",
+  "prior": "Log-uniform g_chi in [1e-4, 1e-1] (covers typical dark-sector coupling range)",
+  "baseline_g_chi": 0.002933947037724106,
+  "baseline_alpha_chi": 6.850064735743136e-07,
+  "baseline_required_g_N_over_g_chi": 6.531673099694576e-11,
+  "sensitivity_scan": [
+    {
+      "g_chi": 0.0001,
+      "alpha_chi": 7.957747154594768e-10,
+      "g_N_over_g_chi_required": 5.622493740553923e-08,
+      "verdict": "achievable"
+    },
+    {
+      "g_chi": 0.00031622776601683794,
+      "alpha_chi": 7.957747154594767e-09,
+      "g_N_over_g_chi_required": 5.622493740553923e-09,
+      "verdict": "achievable"
+    },
+    {
+      "g_chi": 0.001,
+      "alpha_chi": 7.957747154594766e-08,
+      "g_N_over_g_chi_required": 5.622493740553923e-10,
+      "verdict": "achievable"
+    },
+    {
+      "g_chi": 0.0031622776601683794,
+      "alpha_chi": 7.957747154594768e-07,
+      "g_N_over_g_chi_required": 5.6224937405539235e-11,
+      "verdict": "achievable"
+    },
+    {
+      "g_chi": 0.006606934480075957,
+      "alpha_chi": 3.4736826219447444e-06,
+      "g_N_over_g_chi_required": 1.2880389038124273e-11,
+      "verdict": "achievable"
+    },
+    {
+      "g_chi": 0.01,
+      "alpha_chi": 7.957747154594767e-06,
+      "g_N_over_g_chi_required": 5.622493740553923e-12,
+      "verdict": "achievable"
+    },
+    {
+      "g_chi": 0.03162277660168379,
+      "alpha_chi": 7.957747154594766e-05,
+      "g_N_over_g_chi_required": 5.622493740553925e-13,
+      "verdict": "achievable"
+    },
+    {
+      "g_chi": 0.1,
+      "alpha_chi": 0.0007957747154594769,
+      "g_N_over_g_chi_required": 5.6224937405539224e-14,
+      "verdict": "achievable"
+    },
+    {
+      "g_chi": 0.31622776601683794,
+      "alpha_chi": 0.007957747154594767,
+      "g_N_over_g_chi_required": 5.622493740553923e-15,
+      "verdict": "achievable"
+    },
+    {
+      "g_chi": 1,
+      "alpha_chi": 0.07957747154594767,
+      "g_N_over_g_chi_required": 5.622493740553923e-16,
+      "verdict": "extreme_hierarchy"
+    }
+  ],
+  "percentile_summary": {
+    "p5": 5.622493740553923e-16,
+    "p50_median": 1.2880389038124273e-11,
+    "p95": 5.622493740553923e-08
+  },
+  "interpretation": "The hierarchy constraint g_N/g_chi < X varies with the assumed g_chi prior. At baseline g_chi = 2.93e-3, the constraint is g_N/g_chi < 2.7e-11. If g_chi is 10x larger (3e-2), the constraint becomes g_N/g_chi < 8.6e-12 (10x tighter). If g_chi is 10x smaller (3e-4), the constraint becomes g_N/g_chi < 8.6e-10 (10x looser). The hierarchy scales predictably as ~1/g_chi. This is a sensitivity analysis, NOT a Bayesian posterior from observational data.",
+  "caveat": "This is a sensitivity scan, not a posterior. The prior on g_chi is broad (log-uniform), and the \"data\" used (LZ bound 9e-48 cm^2) is a single number that defines the constraint. The result is a parameter-sweep sensitivity, not a Bayesian update from a likelihood."
+}
