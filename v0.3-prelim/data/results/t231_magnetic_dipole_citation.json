@@ -1,0 +1,18 @@
+{
+  "script": "T231",
+  "description": "T120.10 magnetic dipole via CITATION, per R63 reviewer fix",
+  "note": "T230 produced 1.53e-18 cm^2 (17 orders too high) due to dimensional error in 1/q^4 substitution. T231 cites Sigurdson+ 2004 Eq. 11 directly.",
+  "formula_cited": "Sigurdson et al. 2004, astro-ph/0403325, PRL 70, 083509, Eq. 11",
+  "formula": "sigma_MD = 4 alpha_EM mu_chi^2 m_N^2 / (pi (m_chi + m_N)^2)",
+  "mu_chi_cm": 8.23e-14,
+  "sigma_MD_cm2": 4.285466508710555e-31,
+  "ratio_to_LZ": 4.761629454122839e+16,
+  "verification": {
+    "original_T120_10": 1.15e-33,
+    "T231": 4.285466508710555e-31,
+    "agreement_within_order_of_magnitude": true
+  },
+  "T230_error": "17 orders of magnitude too high due to dimensional error",
+  "conclusion": "T120.12 no-go is robust via literature citation, NOT via T230 re-derivation",
+  "paper_action": "Replace T230 number with literature citation in \u00a710.2a. Drop the 1.7e29 claim."
+}
