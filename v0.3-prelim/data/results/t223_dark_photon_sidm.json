@@ -1,0 +1,38 @@
+{
+  "script": "T223",
+  "description": "Dark photon (vector mediator) UV completion attempt",
+  "parameters": {
+    "m_chi_GeV": 1.0,
+    "m_Aprime_GeV": 2e-07,
+    "v_target_kms": 29.4,
+    "sigma_peak_target_cm2_per_g": 174.0
+  },
+  "self_scattering": {
+    "g_D_solution": 0.002933947037724106,
+    "sigma_self_cm2_per_g": 174.00000000000003,
+    "v_trans_kms": 0.08479624519989079
+  },
+  "direct_detection": {
+    "sigma_SI_no_kin_cm2": 1.2640690456792369e-08,
+    "epsilon_required_for_LZ": 2.668307374306686e-20,
+    "LZ_bound_cm2": 9e-48,
+    "kinetic_mixing_viable": false
+  },
+  "relic_density": {
+    "Omega_h2_estimate": 7.813704177180914e-16,
+    "g_D_h": 0.01,
+    "m_Phi_h_GeV": 2.0
+  },
+  "bound_state": {
+    "alpha_D": 6.850064735743136e-07,
+    "lambda_param": 3.425032367871568,
+    "BS_forms": true
+  },
+  "verdict": "INSUFFICIENT",
+  "limitations": [
+    "sigma_SI formula is tree-level only; full computation requires loop corrections",
+    "Kinetic mixing epsilon ~ 1e-3 is at the upper end of allowed range",
+    "BS enhancement factor 100x asserted without citation (per R42 rule)",
+    "Relic density needs Drobczyk 2025 combination (not standalone)"
+  ]
+}

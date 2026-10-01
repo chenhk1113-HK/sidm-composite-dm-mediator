@@ -1,0 +1,67 @@
+{
+  "script": "T224",
+  "description": "Sigma_peak / DD tension sweep across m_phi",
+  "results_table": [
+    {
+      "m_phi_MeV": 0.2,
+      "v_trans_kms": 84.79624519989078,
+      "g_chi": 0.005983655251086306,
+      "sigma_SI_cm2": 1.8250481239557088e-19,
+      "ratio_to_LZ": 2.0278312488396767e+28
+    },
+    {
+      "m_phi_MeV": 1.0,
+      "v_trans_kms": 423.98122599945395,
+      "g_chi": 0.02991827625543153,
+      "sigma_SI_cm2": 7.300192495822835e-21,
+      "ratio_to_LZ": 8.111324995358706e+26
+    },
+    {
+      "m_phi_MeV": 10.0,
+      "v_trans_kms": 4239.812259994539,
+      "g_chi": 0.2991827625543153,
+      "sigma_SI_cm2": 7.300192495822838e-23,
+      "ratio_to_LZ": 8.111324995358709e+24
+    },
+    {
+      "m_phi_MeV": 50.0,
+      "v_trans_kms": 21199.061299972698,
+      "g_chi": 1.4959138127715765,
+      "sigma_SI_cm2": 2.9200769983291344e-24,
+      "ratio_to_LZ": 3.2445299981434825e+23
+    },
+    {
+      "m_phi_MeV": 100.0,
+      "v_trans_kms": 42398.122599945396,
+      "g_chi": 2.991827625543153,
+      "sigma_SI_cm2": 7.300192495822836e-25,
+      "ratio_to_LZ": 8.111324995358706e+22
+    },
+    {
+      "m_phi_MeV": 500.0,
+      "v_trans_kms": 211990.61299972696,
+      "g_chi": 14.959138127715764,
+      "sigma_SI_cm2": 2.920076998329134e-26,
+      "ratio_to_LZ": 3.244529998143482e+21
+    },
+    {
+      "m_phi_MeV": 1000.0,
+      "v_trans_kms": 423981.2259994539,
+      "g_chi": 29.91827625543153,
+      "sigma_SI_cm2": 7.300192495822835e-27,
+      "ratio_to_LZ": 8.111324995358706e+20
+    },
+    {
+      "m_phi_MeV": 10000.0,
+      "v_trans_kms": 4239812.259994539,
+      "g_chi": 299.18276255431533,
+      "sigma_SI_cm2": 7.300192495822836e-29,
+      "ratio_to_LZ": 8.111324995358707e+18
+    }
+  ],
+  "critical_m_phi_for_LZ_compliance_GeV": 240,
+  "verdict": "NO_GO_7_FOUND",
+  "new_no_go": "Sigma_peak = 174 cm^2/g at v=29.4 km/s with any Yukawa mediator",
+  "framework_status": "Seven no-go theorems against the Phase 44 baseline",
+  "conclusion": "sigma_peak = 174 cm^2/g is INCOMPATIBLE with LZ for any mediator mass in Yukawa framework"
+}
