@@ -894,19 +894,18 @@ Magnetic dipole DM is a standard excluded scenario in the literature. **Per R69 
 **Two independent failure mechanisms for magnetic dipole DM:**
 
 - (a) **Direct detection**: σ_SI = 1.48×10⁻²⁹ cm² (per Sigurdson+ 2004 Eq. 11); LZ violation = ~1.6×10¹⁸ (~18 orders above LZ). Confirmed by Carney+ 2021.
-- (b) **Cloud-9 velocity scale**: The magnetic dipole σ_DM-DM ∝ 1/v_rel formula
-  predicts σ_DM-DM/m = 0.052 × (100/28) = **0.186 cm²/g at v=28 km/s**.
-  This is **270× below the published Cloud-9 floor σ/m ≥ 50 cm²/g** (BLN24,
-  independently confirmed Ohana+ 2026 [15e]). Magnetic dipole fails Cloud-9
-  *before* it fails LZ.
+- (b) **Cloud-9 velocity scale (per R70 reviewer):** Magnetic dipole self-scattering in the Born limit scales as σ ∝ 1/v² (not 1/v as previously stated; this is the standard result from Sigurdson+ 2004). With σ_DM-DM/m(v=100 km/s) = 0.052 cm²/g (Phase 44 baseline), extrapolating to v=28 km/s gives σ_DM-DM/m(v=28) = 0.052 × (100/28)² = **0.664 cm²/g**. This is **75× below the Elbert+ 2015 benchmark σ/m ~ 50 cm²/g** (NOT a Cloud-9 observational floor; per R45-R46 retraction, σ/m ≥ 50 was the framework's working benchmark, not a Cloud-9 observational requirement). Magnetic dipole underperforms at Cloud-9 by a factor of 75-270× depending on whether 1/v or 1/v² scaling is used. **Note:** This (b) argument is weak; the strong exclusion is via (a). The (b) argument is kept here for completeness but should not be cited as the primary exclusion mechanism.
 
 Either failure mechanism alone is sufficient to rule out magnetic dipole DM
 as a UV completion for our phenomenology.
 
-**T232 dimension retrofit (per R66 reviewer; confirmed per R69):** T232 was re-run with the fixed µ = 0.4843 GeV (from constants.py: m_χ = 1.0 GeV → µ = 1.0 × 0.939 / (1.0 + 0.939) = 0.4843 GeV). The re-run output:
-- T232 with µ = 0.4843 GeV (correct): σ_SI(v=220) = **2.095×10⁻²⁷ cm²**
+**T232 dimension retrofit (per R66 reviewer; CONFIRMED per R70):** T232 had a 4π bug (R65 multiplied by 4π instead of dividing, giving factor-(4π)² ≈ 158× overestimate). **R70 fix:** T232 now divides by 4π (matching T226's formula). T232 re-run with the fixed µ = 0.4843 GeV (from constants.py: m_χ = 1.0 GeV → µ = 1.0 × 0.939 / (1.0 + 0.939) = 0.4843 GeV):
+
+- T232 with µ = 0.4843 GeV (correct, / 4π): σ_SI(v=220) = **2.109×10⁻²⁷ cm²**
 - T226 actual (v=220, long-range): σ_SI(v=220) = **2.110×10⁻²⁷ cm²**
-- T232 / T226 = 0.99 (within 1%). **T232 confirms T226 numerically** with consistent m_χ = 1.0 GeV.
+- T232 / T226 = 1.000 (within 0.05%). **T232 confirms T226 numerically** with consistent m_χ = 1.0 GeV.
+
+The R67 "fix" that only changed µ from 0.469 to 0.4843 (3% change) did NOT explain the factor-168 discrepancy. The actual fix was correcting the 4π division/multiplication direction. R69's "T232 confirms T226 within 1%" was correct in its OUTPUT but did not explain the CHANGE. R70 explicitly notes the 4π fix.
 
 ### 10.2b No-go #2: Hidden U(1) + 10 MeV pseudo-Dirac (T120.16)
 
@@ -1858,7 +1857,7 @@ The hierarchy constraint g_N/g_χ < 3 × 10⁻¹¹ is robust to assumption varia
 - m_φ changes by 10× within long-range regime: constraint approximately invariant (long-range propagator depends on q, not m_φ directly).
 - α_χ changes by 10×: constraint scales as 1/√α_χ (10× larger α_χ requires √10× smaller g_N/g_χ; vice versa). Predictable scaling.
 
-**Yukawa self-scattering formula derivation (per R68 reviewer; R69 specific citation):** The hierarchy constraint relies on g_χ = 2.93 × 10⁻³, derived from σ_self(m) = A_res × (g_χ⁴ / (32π × m_χ²)) × (ℏc)² × (c/v)⁴. This formula is the **contact limit of Tulin & Yu 2017 Eq. (5)** (arXiv:1705.02317, Phys. Rep. 2017): σ_T = g_χ⁴ m_chi / (32π v² (1 + m_chi² v²/4m_phi²)²), in the limit m_phi → ∞ (no resonance). The 1.783×10⁻²⁴ factor in `constants.py: g_chi_from_sigma_peak()` is the proton-mass-to-grams unit conversion (m_chi [GeV] → m_chi [g]). The 1/(32π) prefactor in Tulin & Yu 2017 Eq. (5) comes from the Born-level scattering amplitude with 1/2 spin-averaging factor and 4π angular integration. If this prefactor is wrong by O(1) (e.g., if the cross section is σ_T rather than σ_el), g_χ shifts by ~30% and the hierarchy constraint shifts by a similar factor. **Note:** Tulin & Yu 2017 Eq. (5) gives g_chi ≈ 0.94 (within factor 320 of constants.py's 2.93e-3); the framework uses exact Breit-Wigner resonance with A_res ~ 100 enhancement, which gives the lower g_chi. The O(1) prefactor uncertainty is the relevant sensitivity for the hierarchy constraint.
+**Yukawa self-scattering formula derivation (per R68 reviewer; R69 specific citation; R70 bug fix):** The hierarchy constraint relies on g_χ = 2.93 × 10⁻³, derived from `constants.py: g_chi_from_sigma_peak()` using σ_self(m) = A_res × (g_χ⁴ / (32π × m_χ²)) × (ℏc)² × (c/v)⁴ (Born approximation for momentum-transfer cross section in the Yukawa limit). **Caveat (per R70 reviewer):** The Tulin & Yu 2017 Eq. (5) formula has units `g⁴ m_chi / (32π v²)` in the long-range limit (giving GeV⁻¹ not GeV⁻²), which doesn't match `constants.py`'s `g⁴ / (32π m_chi² v⁴)` (GeV⁻²). The two formulas are not directly comparable as cited; the factor-320 difference in g_χ reported in R69 is due to different formulas, different limits (long-range vs contact), and Breit-Wigner resonance enhancement with A_res ~ 100. If the prefactor is wrong by O(1), g_χ shifts by ~30% and the hierarchy constraint shifts by a similar factor.
 
 **Thesis sentence (R61+R65 final; R68 precision fix):**
 
