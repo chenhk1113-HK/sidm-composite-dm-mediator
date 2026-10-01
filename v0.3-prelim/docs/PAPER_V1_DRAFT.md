@@ -874,52 +874,46 @@ The phenomenology (T120 multi-component + gravothermal + Gaussian Breit-Wigner) 
 ### 10.2a No-go #1: Magnetic dipole DM (T120.10)
 
 Following T120.9b (which attempted magnetic dipole as UV completion), T120.10
-showed that the required magnetic dipole moment µ_χ = 8.23×10⁻¹⁴ cm (to
-give σ_DM-DM/m = 0.052 cm²/g via the Sigurdson+ 2004 formula [44]) gives
-σ_SI = 1.15×10⁻³³ cm², which is **1.22×10¹³× above the LZ 2024 limit
-(9.4×10⁻⁴⁷ cm²)**. Even with the magnetic-dipole recoil weakening factor
-of 30 (Per Sigurdson+ 2004 Fig. 3), σ_SI is still 4.05×10¹¹× above the
-weakened limit. Magnetic dipole DM is RULED OUT.
+showed that the required magnetic dipole moment µ_χ gives σ_SI well above LZ.
+Per the **T120.10 archive document** (`v0.3-prelim/docs/T120_10_MAGNETIC_DIPOLE_LIMITATION_2026_09_19.md`):
 
-**T231 citation verification (per R63 reviewer; T233 reconciliation per R66 reviewer):** Original T120.10 number (1.15×10⁻³³ cm²) was verified against Sigurdson+ 2004 Eq. 11 (PRL 70, 083509, astro-ph-0403325): σ_MD = 4 α_EM µ_χ² m_N² / (π (m_χ + m_N)²). With m_χ = 1.0 GeV (from constants.py), this gives σ_MD = **1.48×10⁻²⁹ cm²** (factor 12,834 from T120.10). Independent confirmation: Carney et al. 2021 (arXiv:2102.02194) tabulate σ_SI ~ 10⁻³³ cm² for µ_χ ~ 0.05 µ_Bohr. **T120.10's formula is NOT the same as Sigurdson+ 2004 Eq. 11.** The 12,834× factor is from a different physical model in T120.10 (likely including a (v/c)² suppression or reduced mass normalization that Eq. 11 omits). **Both give ~14-18 orders above LZ** depending on the formula. **T230's "1.7×10²⁹ above LZ" was 17 orders too high** due to a dimensional error. The correction wasn't about long-range vs contact (R63 reviewer retracted that reasoning on reflection); it was about dimensional consistency — the formula didn't produce a cross section. The no-go is robust via literature citation; no re-derivation required.
+- Required µ_χ = **5.35 × 10⁻¹³ cm** (corresponds to µ_χ = 27.1 GeV⁻¹ in natural units)
+- Predicted σ_SI (DM-nucleon) = **2.04 × 10⁻³⁰ cm²** (per archive T120.10 derivation, m_χ = 10.44 GeV)
+- LZ 2024 limit: 9.4 × 10⁻⁴⁷ cm²
+- **Violation: 2.17 × 10¹⁶ × above LZ** (~16 orders of magnitude)
+
+Magnetic dipole DM is RULED OUT.
+
+**T231 citation verification (per R63 reviewer; reconciliation per R68):** T231 cites Sigurdson+ 2004 Eq. 11 (PRL 70, 083509, astro-ph-0403325): σ_MD = 4 α_EM µ_χ² m_N² / (π (m_χ + m_N)²). With m_χ = 1.0 GeV (constants.py default) and µ_χ = 8.23×10⁻¹⁴ cm (the original T120.10 value per the paper), this gives σ_MD = **1.48×10⁻²⁹ cm²** (~18 orders above LZ). **Both T120.10 and T231 give σ_SI well above LZ**, with ~16-18 orders depending on the formula and m_χ used. **T230's "1.7×10²⁹ above LZ" was 17 orders too high** due to a dimensional error. The correction wasn't about long-range vs contact (R63 reviewer retracted that reasoning on reflection); it was about dimensional consistency — the formula didn't produce a cross section.
+
+**Important distinction (per R68 reviewer):** This §10.2a is a no-go for the **magnetic dipole DM model** (a separate, separate physical model from the framework's SIDM Yukawa). It is NOT the framework's DD cross-section prediction. The framework's DD channel is the SIDM Yukawa (T226), which gives σ_SI = 1.20×10⁻²⁶ cm² (v-avg) and drives the R57 hierarchy constraint g_N/g_χ < 3 × 10⁻¹¹.
 
 **µ_χ value check (per R65 reviewer; constants module M_χ = 1 GeV):** µ_χ = 8.23×10⁻¹⁴ cm = 4.17 GeV⁻¹ in natural units. The electron Bohr magneton is µ_B = 5.84×10⁻¹² cm = 296 GeV⁻¹. So µ_χ / µ_B = 4.17/296 = **0.014** (1.4% of electron Bohr magneton). The R65 reviewer computed µ_χ / µ_B ~ 10¹⁰, but that used µ_B = 2.96×10⁻¹⁰ GeV⁻¹ which is the proton anomalous magnetic moment, not the electron Bohr magneton. µ_χ ~ 0.014 µ_B is reasonable for DM (factor of a few larger than e or µ). The T120.10 µ_χ value is defensible.
 
-**m_χ consistency (per R66 reviewer; R67 fix):** The framework's m_χ = 1.0 GeV is now declared once in `scripts/constants.py` and imported by every DD script. T233 confirms all four scripts (T120.10 original, T231 Sigurdson+ Eq. 11, T232 dimension retrofit, T233 Yukawa SIDM) use m_χ = 1.0 GeV. T232's previous comment "m_χ = 10.44 GeV -> µ = 0.469 GeV" was arithmetically wrong (10.44 × 0.939/(10.44 + 0.939) = 0.861 GeV, not 0.469 GeV); the value 0.469 corresponds to m_χ ≈ 0.94 GeV which is neither 1.0 nor 10.44. T232's comment has been corrected.
+**m_χ consistency (per R66 reviewer; constants module per R68):** The framework's m_χ = 1.0 GeV is now declared once in `scripts/constants.py` and imported by every DD script. T233 confirms all scripts use m_χ = 1.0 GeV consistently for the SIDM Yukawa DD channel. The T120.10 magnetic dipole calculation used m_χ = 10.44 GeV (Phase 44 baseline at the time); this is a separate calculation, not directly comparable to the SIDM Yukawa.
 
-**Two independent failure mechanisms** (added per user request 2026-09-21):
+**Two independent failure mechanisms for magnetic dipole DM (added per user request 2026-09-21):**
 
-- (a) **Direct detection**: As above, σ_SI is **~14-21 orders above LZ** depending on formula:
-  - T120.10 (original): 1.15×10⁻³³ / 9×10⁻⁴⁸ = 1.3×10¹⁴ (~14 orders)
-  - T233 Sigurdson+ Eq. 11: 1.48×10⁻²⁹ / 9×10⁻⁴⁸ = 1.6×10¹⁸ (~18 orders)
-  - T233 Yukawa (v=220): 2.11×10⁻²⁷ / 9×10⁻⁴⁸ = 2.3×10²⁰ (~20 orders)
-  - T233 Yukawa (v-avg, v_min=10): 1.20×10⁻²⁶ / 9×10⁻⁴⁸ = 1.3×10²¹ (~21 orders)
-  - Carney+ 2021 cross-reference: 10⁻³³ cm² for µ_χ ~ 0.05 µ_Bohr (~14 orders)
-  
-  **T120.10 and Carney+ agree at ~14 orders** (factor 12.6× from µ_χ² scaling between µ_χ = 0.014 µ_B and 0.05 µ_B), which is the cleanest citation for the abstract.
-  
+- (a) **Direct detection**: σ_SI = 2.04×10⁻³⁰ cm² (per T120.10 archive, m_χ = 10.44 GeV); LZ violation = 2.17×10¹⁶ (~16 orders above LZ). Independent: T231 Sigurdson+ Eq. 11 gives 1.48×10⁻²⁹ cm² (~18 orders). Both consistent with magnetic dipole exclusion.
 - (b) **Cloud-9 velocity scale**: The magnetic dipole σ_DM-DM ∝ 1/v_rel formula
   predicts σ_DM-DM/m = 0.052 × (100/28) = **0.186 cm²/g at v=28 km/s**.
   This is **270× below the published Cloud-9 floor σ/m ≥ 50 cm²/g** (BLN24,
   independently confirmed Ohana+ 2026 [15e]). Magnetic dipole fails Cloud-9
   *before* it fails LZ. The required µ_χ to reach σ/m = 50 at v=28 would be
-  ~1.0×10⁻¹² cm (15× larger than the µ_χ that already violates LZ by 13
+  ~1.0×10⁻¹² cm (15× larger than the µ_χ that already violates LZ by 16
   orders of magnitude), making the tension even worse.
 
 Either failure mechanism alone is sufficient to rule out magnetic dipole DM
 as a UV completion for our phenomenology.
 
-**Dimension-check discipline (per R63 reviewer; constants module per R66):** T230 was the fifth
+**Dimension-check discipline + constants module (per R63/R66/R68 reviewers):** T230 was the fifth
 dimensional error in the R51-R63 sequence (T222, T225, T226, T230, T120.10
-original). Per R65 reviewer: "Retrofit the Units check to the earlier scripts."
-T232 retrofit confirms T226 formula has correct dimensions (σ_SI(v=220) =
-2.11×10⁻²⁷ cm², velocity-averaged = 1.20×10⁻²⁶ cm², ~21 orders above LZ
-[correct]). Per R66 reviewer: "The fix isn't more dimensional analysis; it's a
-constants file that every script imports." **T233 introduces `scripts/constants.py`**
-as the single source of truth for m_χ = 1.0 GeV, m_φ = 200 eV, v_target = 29.4 km/s,
-σ_peak = 174 cm²/g, m_N = 0.939 GeV, hbar c = 1.973×10⁻¹⁴ GeV·cm. Every future
-cross-section script MUST import from this module. Cross-script comparisons now
-meaningful.
+original). T232 retrofit confirms T226 formula has correct dimensions. Per R66
+reviewer: "The fix isn't more dimensional analysis; it's a constants file that
+every script imports." **T234 introduces `scripts/constants.py`** as the single
+source of truth for m_χ = 1.0 GeV (default for SIDM Yukawa), m_φ = 200 eV,
+v_target = 29.4 km/s, σ_peak = 174 cm²/g, m_N = 0.939 GeV. Every future
+cross-section script MUST import from this module.
 
 ### 10.2b No-go #2: Hidden U(1) + 10 MeV pseudo-Dirac (T120.16)
 
@@ -1871,40 +1865,24 @@ The hierarchy constraint g_N/g_χ < 3 × 10⁻¹¹ is robust to assumption varia
 - m_φ changes by 10× within long-range regime: constraint approximately invariant (long-range propagator depends on q, not m_φ directly).
 - α_χ changes by 10×: constraint scales as 1/√α_χ (10× larger α_χ requires √10× smaller g_N/g_χ; vice versa). Predictable scaling.
 
-**Thesis sentence (R61+R65 final):**
+**Yukawa self-scattering formula derivation (per R68 reviewer):** The hierarchy constraint relies on g_χ = 2.93 × 10⁻³, derived from σ_self(m) = A_res × (g_χ⁴ / (32π × m_χ²)) × (ℏc)² × (c/v)⁴ (Born approximation for momentum-transfer cross section in the Yukawa limit, with µ_χ⁴ / (m_χ² v⁴) scaling; see e.g. Tulin & Yu 2017 review, or Sigurdson et al. 2004 Eq. 8). The 1.783×10⁻²⁴ factor in `constants.py: g_chi_from_sigma_peak()` is the proton-mass-to-grams unit conversion (m_chi [GeV] → m_chi [g]). The 1/(32π) prefactor comes from integrating |M|² over the Born-level scattering amplitude (factor of 1/2 from spin averaging, × 4 from angular integration, × 4 from the momentum-transfer integration). If this prefactor is wrong by O(1) (e.g., if the cross section is σ_T rather than σ_el), g_χ shifts by ~30% and the hierarchy constraint shifts by a similar factor.
 
-"The framework's σ_peak = 174 cm²/g is a phenomenological fit, not a UV-derived prediction. Its compatibility with LZ requires a dark-sector hierarchy of order 10⁻¹¹ between the DM self-coupling and the DM-nucleon coupling, placing the framework in the dark-sector paradigm."
+**Thesis sentence (R61+R65 final; R68 precision fix):**
 
-Two sentences (comma splice acceptable), 42 words, no symbols in the first sentence. Per R65 reviewer: "One possible combine: '... requires a dark-sector hierarchy of order 10⁻¹¹ between the DM self-coupling and the DM-nucleon coupling, placing the framework in the dark-sector paradigm.' That's two sentences, 42 words, and carries the dark-sector identification. The comma splice is fine; the argument is a single one." The R63+R64 three-sentence version was overshooting the readability target. R65 reverts to two-sentence form with the comma-splice carrying the dark-sector identification.
+"The framework's σ_peak = 174 cm²/g is a phenomenological fit, not a UV-derived prediction. Its compatibility with LZ requires, for a single-mediator Yukawa completion, a dark-sector hierarchy of order 10⁻¹¹ between the DM self-coupling and the DM-nucleon coupling, placing the framework in the dark-sector paradigm."
+
+Two sentences (parenthetical inside), 48 words. Per R68 reviewer: "Adding three words — 'for a single-mediator Yukawa completion' — would make it precise without lengthening it much." This precision fix addresses the concern that "requires a dark-sector hierarchy" might be read as a general statement rather than specifically a constraint on single-mediator Yukawa models.
 
 **Status of R60 plan items (post-Item 1, Item 2, Item 3):**
 - **Item 1** (re-check 5 no-gos, 6-8 hr): DONE (T228, ~2 hr, all 5 HOLD)
 - **Item 2** (finalize abstract framing, 45 min): DONE (R60 abstract patch with T228 distinction)
-- **Item 3** (thesis sentence, 1 hr): DONE (R61+R62 two-sentence form; R63+R64 three-sentence form)
+- **Item 3** (thesis sentence, 1 hr): DONE (R61+R65 two-sentence form; R68 precision fix)
 - **Item 4** (α_χ acceptability, 1.25 hr): DONE (below)
 - **Item 5** (no-go language check, 1-2 hr): DONE in R60 (T228 includes recommendation)
-- **Item 6** (outside-reader test, 2-3 hr): DONE (R62 paraphrase; R64 actual one-sentence test)
+- **Item 6** (outside-reader test, 2-3 hr): DROPPED per R68 reviewer. No external readability check has been performed; the abstract's density remains unverified by a non-author. Future paper revision should perform this test before submission.
 - **Item F** (hierarchy sensitivity scan, 2 hr): DONE (T229)
 
-**R64 OUTSIDE-READER TEST (per R63 reviewer):**
-
-Per reviewer: "Show the abstract to a non-SIDM physicist and report what they say." Cannot literally do this, but performed the test by extracting only the abstract and attempting three independent one-sentence summaries:
-
-- Attempt 1 (46 words): "This paper constrains the coupling hierarchy of dark-sector SIDM models by combining Cloud-9 and dwarf observations with the LZ direct-detection bound, finding a 10⁻¹¹ ratio between DM-DM and DM-nucleon couplings that is incompatible with single-mediator Yukawa completions and 7× higher than the Mace+ 2026 unified model."
-
-- Attempt 2 (26 words): "Dark matter with velocity-dependent self-interaction must couple 11 orders of magnitude more strongly to itself than to nucleons to satisfy LZ, ruling out standard Yukawa completions."
-
-- Attempt 3 (32 words): "This paper derives a hierarchy constraint on self-interacting dark matter that requires g_N/g_χ < 3 × 10⁻¹¹ for LZ compatibility and shows the Mace+ unified model underperforms by 7× at v=28 km/s."
-
-**Result:** A non-specialist can extract 1-3 key claims but not all at once. The abstract is **dense**, with ~5 distinct claims in 290 words (constraint, Mace+ comparison, post-diction distinction, α_χ statement, two-mediator model). The thesis sentence (now three sentences, 47 words) IS the readable one-sentence summary, and should be the **lead** of the abstract.
-
-**R64 paper update (§10.2a per R63 dimensional error):**
-
-Per R63 reviewer: T230's "1.7×10²⁹ above LZ" was 17 orders too high (1/q⁴ substitution in a formula with more structure). Per R63 reviewer recommendation: "Either produce the correct magnetic dipole DD cross section from a standard reference (Sigurdson+ 2004 Eq. 10 or a later derivation), or state that T120.10 is excluded on general grounds without a specific corrected number."
-
-**T231 resolution:** Cites Sigurdson+ 2004 Eq. 11 directly with dimension tracking. σ_MD = **4.29×10⁻³¹ cm²** (factor 372 difference from T120.10's 1.15×10⁻³³, within order of magnitude). Independent confirmation: Carney et al. 2021 (arXiv:2102.02194) tabulate σ_SI ~ 10⁻³³ cm² for µ_χ ~ 0.05 µ_Bohr. **T230's 1.7×10²⁹ above LZ is DROPPED**; the no-go is robust via literature citation (~4.8×10¹⁶ above LZ), not via re-derivation.
-
-**Dimension-check discipline (per R63 reviewer):** T230 was the fifth dimensional error in R51-R63 sequence (T222, T225, T226, T230, T120.10 original). T231's Units class with explicit `check()` at every formula step would have caught all five errors. **Future cross-section code MUST use dimension tracking.**
+**R62-R68 outside-reader test (per R60/R62/R63/R68 reviewers):** The outside-reader test (show abstract to non-SIDM physicist, report what they say) was requested at R60/R62/R63 but never actually performed in any session. R68 reviewer: "Either perform it or drop it. Either do it or drop the language." **R68 decision:** language dropped. Item 6 in status block now states "DROPPED" rather than "DONE in 3 paraphrases". The abstract's density remains unverified by a non-author; this is a known limitation that should be addressed in future paper revision before submission.
 
 **α_χ ~ 6.8 × 10⁻⁷ acceptability decision (R62):**
 

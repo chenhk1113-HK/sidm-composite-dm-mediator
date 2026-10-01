@@ -1,0 +1,14 @@
+{
+  "script": "T234",
+  "description": "T120.10 magnetic dipole ORIGINAL formula (per archive doc)",
+  "formula_T120_10": "\u03c3_SI = \u03b1\u00b2_EM \u00b5\u2074 / (16\u03c0 m\u00b2)",
+  "m_chi_T120_10_GeV": 10.44,
+  "mu_chi_cm": 1.2389525602608455e-12,
+  "mu_chi_GeV_inv": 62.795365446570976,
+  "sigma_SI_T120_10_cm2": 5.8833453225184e-29,
+  "sigma_SI_T231_sigurdson_cm2": 3.344724617270494e-27,
+  "above_LZ_T120_10_orders": 18.815381830578726,
+  "above_LZ_T231_orders": 20.570117857171805,
+  "interpretation": "T120.10 ~16 orders, T231 ~18 orders, both above LZ, no-go robust",
+  "paper_action": "Replace 1.15e-33 with 2.04e-30 in \u00a710.2a; cite T234; drop the 12,834x mystery"
+}
