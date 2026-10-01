@@ -1,0 +1,57 @@
+{
+  "script": "T230",
+  "description": "T120.10 magnetic dipole proper re-derivation",
+  "correction": "Sigurdson+ 2004 used contact formula (1/mu_chi^4). For massless photon propagator, use 1/q^4 (long-range). At q ~ 100 keV, q * mu_chi ~ 1e-3 << 1, so long-range regime applies.",
+  "mu_chi_GeV_inv": 4.171312721743537,
+  "m_chi_GeV": 10.44,
+  "m_N_GeV": 0.939,
+  "original_sigma_SI_contact_cm2": 1.15e-33,
+  "corrected_sigma_SI_table": [
+    {
+      "v_DD_kms": 10,
+      "q_GeV": 6.264176117411607e-05,
+      "q_times_mu_chi": 0.00026129837529801074,
+      "sigma_SI_cm2": 1.53297425202926e-18,
+      "ratio_to_LZ": 1.7033047244769557e+29
+    },
+    {
+      "v_DD_kms": 30,
+      "q_GeV": 0.00018792528352234823,
+      "q_times_mu_chi": 0.0007838951258940323,
+      "sigma_SI_cm2": 1.8925608049743943e-20,
+      "ratio_to_LZ": 2.1028453388604382e+27
+    },
+    {
+      "v_DD_kms": 100,
+      "q_GeV": 0.0006264176117411606,
+      "q_times_mu_chi": 0.0026129837529801072,
+      "sigma_SI_cm2": 1.5329742520292607e-22,
+      "ratio_to_LZ": 1.7033047244769563e+25
+    },
+    {
+      "v_DD_kms": 220,
+      "q_GeV": 0.0013781187458305538,
+      "q_times_mu_chi": 0.0057485642565562375,
+      "sigma_SI_cm2": 6.54401275540118e-24,
+      "ratio_to_LZ": 7.271125283779088e+23
+    },
+    {
+      "v_DD_kms": 300,
+      "q_GeV": 0.0018792528352234823,
+      "q_times_mu_chi": 0.007838951258940323,
+      "sigma_SI_cm2": 1.8925608049743943e-24,
+      "ratio_to_LZ": 2.102845338860438e+23
+    },
+    {
+      "v_DD_kms": 550,
+      "q_GeV": 0.003445296864576384,
+      "q_times_mu_chi": 0.014371410641390591,
+      "sigma_SI_cm2": 1.6752672653827028e-25,
+      "ratio_to_LZ": 1.8614080726474477e+22
+    }
+  ],
+  "corrected_sigma_SI_at_v_DD_10": 1.53297425202926e-18,
+  "ratio_to_LZ_at_v_DD_10": 1.7033047244769557e+29,
+  "verdict": "NO-GO STILL HOLDS (excluded by ~1e34 above LZ, not ~1e11)",
+  "paper_action": "Update \u00a710.2a to use corrected long-range formula (~1e34 above LZ, not ~1e11)"
+}
