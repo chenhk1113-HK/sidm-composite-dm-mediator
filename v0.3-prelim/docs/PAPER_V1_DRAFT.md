@@ -11,7 +11,7 @@
 
 ## Abstract
 
-We present a **systematic exploration of SIDM parameter space** against Cloud-9, UFD cores, dSph, SPARC, and cluster constraints, with a **benchmark comparison against Mace+ 2026** (a recent unified SIDM model with two-component mass segregation). Rather than proposing a unified particle-physics model, we provide a **phenomenological constraint map and no-go catalogue** for the class of velocity-dependent multi-component SIDM models. The framework's σ_peak = 174 cm²/g at v_target = 29.4 km/s is a phenomenological parameterization (R33 Issue 3, R37 caveats), not a UV-derived prediction; what the framework predicts is **whether** core formation has occurred at Cloud-9, not **how** the core looks. The "Cloud-9 tension" between σ/m ≥ 50 cm²/g at v ≈ 28 km/s and dwarf galaxy upper limits (σ/m ≲ 0.8 cm²/g at v ≈ 5–15 km/s) is reframed as a comparison between two framework-chosen benchmarks, not as a Cloud-9 observational requirement (R42–R45 retraction cycle). The substantive result is a **benchmark comparison**: under a benchmark of ~50 cm²/g at dwarf velocities (Elbert+ 2015's largest simulation value, not a Cloud-9 requirement), Mace+ 2026 SIDM2v falls **~7× short** at v = 28 km/s (σ_eff(v=28) ≤ 6.89 cm²/g vs benchmark 50 cm²/g). **4 of 8 observational channels** are described under physically motivated f_H (Yang+ 2025 or T202 N-body); 7 of 8 only under retracted borrowed f_H. **Five UV completion no-go theorems** (magnetic dipole DM, Hidden U(1) + pseudo-Dirac, GeV-scale inelastic DM, published p-wave resonance, thermal WIMP) apply to the Phase 44 baseline. **Two constraints** on σ_peak = 174 cm²/g per R53: (i) m_φ ≲ 0.7 MeV for DD long-range regime compatibility, (ii) BW resonance FWHM ~ 4.4 km/s at v_target = 29.4 km/s. **One two-mediator UV completion** (Drobczyk 2025) achieves thermal relic Ωh² = 0.119 at δ = 0.43% but does not solve the Cloud-9 spike specifically.
+We present a **systematic exploration of SIDM parameter space** against Cloud-9, UFD cores, dSph, SPARC, and cluster constraints, with a **benchmark comparison against Mace+ 2026** (a recent unified SIDM model with two-component mass segregation). Rather than proposing a unified particle-physics model, we provide a **phenomenological constraint map and no-go catalogue** for the class of velocity-dependent multi-component SIDM models. The framework's σ_peak = 174 cm²/g at v_target = 29.4 km/s is a phenomenological parameterization (R33 Issue 3, R37 caveats), not a UV-derived prediction; what the framework predicts is **whether** core formation has occurred at Cloud-9, not **how** the core looks. The "Cloud-9 tension" between σ/m ≥ 50 cm²/g at v ≈ 28 km/s and dwarf galaxy upper limits (σ/m ≲ 0.8 cm²/g at v ≈ 5–15 km/s) is reframed as a comparison between two framework-chosen benchmarks, not as a Cloud-9 observational requirement (R42–R45 retraction cycle). The substantive result is a **benchmark comparison**: under a benchmark of ~50 cm²/g at dwarf velocities (Elbert+ 2015's largest simulation value, not a Cloud-9 requirement), Mace+ 2026 SIDM2v falls **~7× short** at v = 28 km/s (σ_eff(v=28) ≤ 6.89 cm²/g vs benchmark 50 cm²/g). **4 of 8 observational channels** are described under physically motivated f_H (Yang+ 2025 or T202 N-body); 7 of 8 only under retracted borrowed f_H. **Five UV completion no-go theorems** (magnetic dipole DM, Hidden U(1) + pseudo-Dirac, GeV-scale inelastic DM, published p-wave resonance, thermal WIMP) apply to the Phase 44 baseline. **One σ_peak constraint** per R55: Yukawa with m_φ = 200 eV is excluded by LZ by ~21 orders — framework requires m_φ ≪ 200 eV (BS resonance) or non-Yukawa UV. **One two-mediator UV completion** (Drobczyk 2025) achieves thermal relic Ωh² = 0.119 at δ = 0.43% but does not solve the Cloud-9 spike specifically.
 
 **Paper organization:** §2 physical ingredients (σ/m vs σ_eff distinction, gravothermal cascade), §3 observational channels (§3.1 SPARC, §3.2 Cloud-9, §3.3 dSph, §3.4 UFD cores, §3.5 unified SIDM models including Mace+ 2026 benchmark comparison, §3.6 LZ direct-detection deferred per user directive), §9 two-component + Path F1, §10 UV completion no-go theorems, §11 conclusions. **Open physics findings:** (a) at σ/m = 0.5–2.5 cm²/g (microphysical σ/m at dSph scale from v₁ Gaussian tail), the Balberg+ gravothermal formula predicts collapse in t_core = 0.7–6.3 Gyr for all 8 dSph halos (causality-OK, ratios 20–98). This **contradicts dSph observations showing no dense cores**: the framework's candidate mechanism is the v₁ resonance width (a narrower Gaussian w ≲ 3 km/s vs current 4.4 would suppress the dSph tail while preserving Cloud-9's bulk σ/m). (b) The Fornax σ_HL = -0.47 cm²/g internal inconsistency between σ/m(v) and σ_eff(v) curves at v=15 km/s is **robust against σ_peak_HH_1 variation in [30, 250] cm²/g** (see §2.6 sensitivity sweep). (c) Under self-consistent canonical NFW (V_max derived per c, not held fixed): at c=12 (ΛCDM-conservative), the continuous viable σ_peak window is **[49.81, 57.24] cm²/g** — a knife-edge of width ~7.43 (exact 1/σ_m scaling with K ≈ 134.0). At c=4 (Ohana+ physical anchor, §9.12), continuous window is [49.81, 250] cm²/g — **framework is consistent at c=4**. The c=12 vs c=4 distinction is the c-M tension against ΛCDM. Fornax σ_HL outlier marginal at σ_peak ≤ 50, substantive at σ_peak ≥ 75. (d) The §9.12 c=4 t_core = 4.42 Gyr is corrected to 3.98 Gyr by the canonical NFW sweep (11% discrepancy from §9.12's σ/m = 135.3 being held constant at c=12's V_max; this sweep uses σ/m(V_max = 25.59) = 150.0 at c=4 — see §2.6).
 
@@ -1641,69 +1641,70 @@ The recommendation in §10.4g.5 was to apply the frozen Path 2 and Path 3 parame
 
 ### 10.7 Bound-state SIDM UV derivation for σ_peak = 174 cm²/g at v_target = 29.4 km/s (Path 1 — R50, **RETRACTED in R51**)
 
-**R51+R52 RETRACTION (per T225 numerical re-verification, 2026-10-01):** R51 and R52 were based on direct-detection calculations that used the wrong propagator form and an incorrect single-velocity evaluation. **Per proposalcomment.docx third-pass reviewer (2026-10-01) — T225 corrections:**
+**R51+R52+R53 RETRACTION (per T226 numerical re-verification, 2026-10-01):** R51, R52, and R53 were all based on direct-detection calculations with errors. **Per proposalcomment.docx fourth-pass reviewer (2026-10-01):**
 
-The reviewer caught two critical errors in T222 (and propagated to R51-R52):
+The reviewer caught **two new errors** in T225 (R53):
+- **Error 1 (R53):** Used `(hbar c)^4` instead of `(hbar c)^2` in the σ_SI formula. Dimensional analysis: the result had units GeV⁴ cm⁴, not cm². Off by factor (ℏc)² ≈ 3.9 × 10⁻²⁸, making R53's number ~50 orders too small.
+- **Error 2 (R53):** Did not handle the v → 0 divergence properly. σ_SI ∝ v⁻⁴ diverges as v → 0, so a proper MB average is dominated by the low-v tail. R53 used 1000 linear points from 0 to 550 with no lower cutoff, missing the divergence.
 
-**Error 1: PROPAGATOR SCALING.** T222 used the contact-interaction form σ_SI ~ 1/m_φ⁴, valid when m_φ >> q (momentum transfer). But for the framework's m_φ = 200 eV and DD momentum transfer q ~ μv ~ 0.7 MeV (at v_DD = 220 km/s), **m_φ << q by 10⁹**. The correct regime is **long-range** (1/q⁴ propagator, Rutherford-like). The contact form gave σ_SI ~ 4.4 × 10⁻⁸ cm²; the correct form gives σ_SI ~ 3 × 10⁻⁵⁴ cm² — a **50-order-of-magnitude difference**.
+**The full sequence of corrections (R51 → R53 → R55):**
+- R51-R52: contact-interaction form 1/m_φ⁴ (wrong for m_φ << q); single-velocity v_DD ~ 10 km/s (wrong; should be Maxwell-Boltzmann integral at v ~ 220 km/s)
+- R53: fixed propagator (long-range 1/q⁴) and velocity integral, but introduced new dimensional error ((ℏc)^4 instead of (ℏc)^2)
+- R55 (T226): all corrections applied, proper (ℏc)^2 units, v_min = 10 km/s cutoff for divergence
 
-**Error 2: DD VELOCITY.** T222 used v_DD ~ 10 km/s (incorrect). The local galactic DM velocity distribution peaks at v₀ = 220 km/s with tail to v_esc = 550 km/s. At v = 220 km/s, the Breit-Wigner factor is BW(220) ~ 1/1875 ~ 5×10⁻⁴, so σ_self at v_DD ~ 0.09 cm²/g, NOT 174 (1900× suppression).
+**T226 correct result:**
+- σ_SI at v = 220 km/s (single velocity, proper units): **2.1 × 10⁻²⁷ cm²** (LZ excluded by 2.3 × 10²⁰)
+- σ_SI velocity-averaged (v_min = 10 km/s cutoff): **1.2 × 10⁻²⁶ cm²** (LZ excluded by 1.3 × 10²¹)
+- Per reviewer: "roughly 15–25 orders above LZ for m_φ = 200 eV" — T226 gives 21 orders, matches.
 
-**T225 correction result:**
-- σ_SI (single v = 220 km/s, long-range propagator): **2.9 × 10⁻⁵⁴ cm²** (LZ compliant by factor ~3 × 10⁶)
-- σ_SI (velocity-averaged with Maxwell-Boltzmann, v₀ = 220 km/s, v_esc = 550 km/s): **1.6 × 10⁻⁵² cm²** (LZ compliant by factor ~5 × 10⁴)
+**R55 revised catalogue: 5 no-go + 1 constraint (or 6 no-go depending on framing):**
 
-**The framework's σ_peak = 174 cm²/g IS compatible with LZ when the correct propagator form and full velocity integral are used.** Per reviewer: "Either (a) the tension survives correction, in which case it's a genuine no-go for Yukawa completions of σ_peak = 174; or (b) the tension is relieved, in which case the model is viable but the parameter space is now constrained by LZ. Either is a result." **This is case (b): the tension is RELIEVED.**
+The 7 no-go theorems (R51-R52 added #6, #7; R53 downgraded #6, #7 to constraints) are now updated:
+- No-go #1: Magnetic dipole DM (T120.10)
+- No-go #2: Hidden U(1) + 10 MeV pseudo-Dirac (T120.16)
+- No-go #3: GeV-scale inelastic DM (T130)
+- No-go #4: Published best-fit p-wave resonance (Chu+ 2019 P1, T131)
+- No-go #5: One-mediator UV systematic (T184)
+- **Constraint #6 (R55):** Yukawa with m_φ = 200 eV is excluded by LZ by ~21 orders. Either choose m_φ ≪ 200 eV (where σ_self plateau moves below 174) or m_φ ≫ 0.7 MeV (where unitarity is violated at g_chi ~ 7180).
 
-**R51+R52 status: DOWNGRADED FROM "NO-GO THEOREM" TO "CONSTRAINT."**
+**Per reviewer:** "R51–R52 were too pessimistic: contact propagator and single-velocity evaluation gave '40 orders above LZ.' R53 is too optimistic: using (ℏc)⁴ and assuming away the low-v divergence gave '5 × 10⁴ below LZ.' The actual answer is likely somewhere in between — roughly 15–25 orders above LZ for m_φ = 200 eV. That's still a real constraint, but it's a 'constraint' and not a 'no-go theorem,' which is exactly what I suggested downgrading to two rounds ago."
 
-Per reviewer: "'No-go theorem' is too strong. A 'no-go theorem' requires that the analysis is airtight — that no choice of parameters, no matter how contrived, evades the conclusion. The R51–R52 analysis establishes: at the parameter values the framework currently uses, direct detection is 40 orders above LZ. That's a strong statement, but it depends on: (a) the contact-interaction form of σ_SI (potentially wrong, see above), (b) DD probing v ~ 10 km/s (likely wrong, see above), (c) a specific relationship between g_χ and g_portal (assumed equal, not derived), (d) a specific resonance shape at DD velocities. Change any of these and the number changes by orders of magnitude. Calling it a theorem overstates the robustness."
+**Honest status (per R55, after T226 corrections):**
 
-**Correct reframing (per R53):**
+The framework's σ_peak = 174 cm²/g with m_φ = 200 eV is **EXCLUDED** by LZ direct-detection by ~21 orders of magnitude. This is a **real constraint** on the framework:
+- m_φ ≪ 200 eV: σ_self plateau moves below σ_peak (need BS resonance, not Yukawa)
+- m_φ ~ 200 eV: σ_SI ~ 10⁻²⁶ cm² >> LZ (excluded)
+- m_φ ~ 0.7 MeV: σ_SI < LZ (regime change), but g_chi ~ 7180 violates unitarity
+- m_φ ≫ 0.7 MeV: σ_SI < LZ via 1/m_φ⁴, but g_chi unitarity-violating
 
-The framework's σ_peak = 174 cm²/g with m_φ = 200 eV:
-- **Works** for Cloud-9 (gives t_c = 4.42 Gyr, core formation)
-- **Works** for relic density (via Drobczyk 2025 s-channel at g_chi_h ~ 1e-2)
-- **Works** for direct-detection (long-range 1/q⁴ propagator: σ_SI ~ 3e-54 cm² ≪ LZ)
-- **Requires** ultra-light mediator (m_φ << q_MeV ~ 0.7 MeV at DD)
-- **Requires** BW resonance at v_target = 29.4 km/s with FWHM ~ 4.4 km/s
+**The framework's σ_peak = 174 cm²/g requires either:**
+- A non-Yukawa UV completion (geometric mass ladder, dark photon with non-standard coupling)
+- A modified σ_self(v) shape with stronger v-dependence than Yukawa
+- An explicit suppression mechanism at DD velocities
 
-**The framework is LZ-compatible with the following constraint:**
-m_φ ≲ 0.7 MeV (for DD kinematics at v = 220 km/s to be in long-range regime)
+**R55 process lesson (per R40-R55 cycle pattern):**
 
-**R53 revised no-go catalogue (downgraded from 7 to 5):**
+This is the third bundle in a row where the direction of correction flipped:
+- R51-R52: too pessimistic (40 orders above LZ)
+- R53: too optimistic (5×10⁴ below LZ)
+- R55: correctly in between (~21 orders above LZ)
 
-The 7 no-go theorems (R51+R52 added No-go #6 and No-go #7) are reduced back to the original 5 (T120.10, T120.16, T130, T131, T184). No-go #6 (bound-state SIDM, R51) and No-go #7 (σ_peak + LZ, R52) were based on wrong propagator form and incorrect velocity evaluation. They are downgraded to CONSTRAINTS:
-- **Constraint #6:** σ_peak = 174 requires ultra-light mediator (m_φ ≲ 0.7 MeV) for DD compatibility
-- **Constraint #7:** σ_peak = 174 requires narrow BW resonance (FWHM ~ 4.4 km/s) at v_target = 29.4 km/s
+Per reviewer: "The truth is usually in the middle, and the middle is where the paper's actual result lives. R53's instinct to correct the propagator and add velocity averaging is exactly what I asked for. The execution overcorrects because of a single dimensional error."
 
-Both constraints are achievable in the framework's parameter space.
+The reviewer is right: the framework IS excluded by LZ at m_φ = 200 eV, but by ~21 orders (a constraint) not 40 orders (a no-go). The "no-go theorem" label was too strong; the correct framing is a real, quantified constraint.
 
-**Honest status (per R53, after T225 corrections):**
+**This IS paper-worthy.** The paper's contribution is now:
+1. **Constraint map + Mace+ comparison** (R49 abstract)
+2. **5 UV no-go theorems** (T120.10, T120.16, T130, T131, T184)
+3. **1 σ_peak constraint** (R55: m_φ ~ 200 eV excluded by ~21 orders; need m_φ ≪ 200 eV or non-Yukawa UV)
+4. **§2.7 Ohana+ consistency check at 0.16 dex** (R31-R35)
+5. **standing_numbers.json infrastructure** (R36)
 
-The framework's σ_peak = 174 cm²/g with m_φ = 200 eV is a **VIABLE** UV construction when:
-1. Yukawa background gives σ_self(v_target = 29.4 km/s) = 1.74 cm²/g at g_chi = 2.93e-3
-2. Bound-state Breit-Wigner enhancement A_res ~ 100 gives σ_peak = 174 cm²/g
-3. Drobczyk 2025 s-channel gives Ωh² ~ 0.78 (within factor 4-7 of 0.12)
-4. Long-range propagator (1/q⁴) gives σ_SI ~ 3e-54 cm² ≪ LZ
+**Per reviewer on the paper:** "The paper's substantive contribution is still the constraint map plus the Mace+ comparison plus the honest no-go catalogue. R53 doesn't change that contribution — it changes one entry from 'constraint' to 'no-go' or keeps it as 'constraint' depending on which way the corrected number falls. Either is fine as long as the number is right."
 
-**Per reviewer: "The bigger picture: This bundle actually does the work. It's not a retraction of a retraction; it's a numerical investigation that changes the state of the project. The framework went from 'we have σ_peak = 174 and need to check if it has a UV completion' to 'the obvious UV completion fails, and the failure mode is the mediator-mass tension with direct detection.' That's a real step."**
-
-**R53 process lesson:**
-
-The R51-R52 → R53 transition is exactly the kind of honest self-correction the project needs. The reviewer caught two real errors that changed the verdict from "EXCLUDED" to "VIABLE with constraint." Per reviewer: "If the conclusion doesn't survive, the paper has a different result: the framework's σ_peak is consistent with LZ for a narrow window of mediator masses, and this constrains the model's parameter space. Also paper-worthy."
-
-**This IS paper-worthy.** The framework now has:
-- A specific σ_peak value (174 cm²/g) with a VIABLE UV construction
-- A relic density match via Drobczyk 2025 (Ωh² ~ 0.78)
-- A direct-detection constraint (m_φ ≲ 0.7 MeV for long-range regime)
-- One surviving substantive result (Mace+ ~7× short, R39)
-- 5 UV no-go theorems (the original 5)
-- 2 constraints on σ_peak (R53)
-
-**Code:**
-- T225: `scripts/t225_corrected_dd.py`
-- Data: `v0.3-prelim/data/results/t225_corrected_dd.json`
+**Code (R55):**
+- T226: `scripts/t226_proper_dd.py` (215 lines)
+- Data: `v0.3-prelim/data/results/t226_proper_dd.json`
 
 ---
 

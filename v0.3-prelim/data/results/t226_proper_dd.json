@@ -1,0 +1,18 @@
+{
+  "script": "T226",
+  "description": "Corrected DD with proper (hbar c)^2 and v_min cutoff (per R54 reviewer)",
+  "corrections_from_T225": [
+    "Replace (hbar c)^4 with (hbar c)^2 (R53 dimensional error)",
+    "Add v_min = 10 km/s cutoff to handle v->0 divergence",
+    "Add explicit g_N coupling (was implicit g_N = g_chi)"
+  ],
+  "g_chi": 0.002933947037724106,
+  "sigma_SI_single_v_at_220": 2.1095684796693757e-27,
+  "sigma_SI_velocity_averaged_vmin10": 1.1995423704326187e-26,
+  "LZ_bound": 9e-48,
+  "ratio_to_LZ": 1.3328248560362431e+21,
+  "verdict": "EXCLUDED",
+  "verdict_R53": "LZ_COMPLIANT (WRONG due to (hbar c)^4 dimensional error)",
+  "R53_status": "DOWNGRADED FURTHER - dimensional error made number too small",
+  "R54_reviewer_note": "R53 used (hbar c)^4 which is dimensionally wrong (units GeV^4 cm^4 instead of cm^2). Correct formula uses (hbar c)^2. Corrected sigma_SI ~ 1e-25 to 1e-26 cm^2, which is 20+ orders above LZ. The framework IS excluded by LZ at m_phi = 200 eV."
+}
