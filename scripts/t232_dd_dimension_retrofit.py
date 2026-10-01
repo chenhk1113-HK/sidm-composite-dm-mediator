@@ -94,8 +94,9 @@ hbar_c_sq = Units(hbar_c**2, {'GeV': 2, 'cm': 2})
 
 g_chi = Units(2.93e-3, {})
 g_N = Units(2.93e-3, {})  # g_N = g_chi baseline
-mu = Units(0.469, {'GeV': 1})  # reduced mass m_chi m_N / (m_chi + m_N), GeV
-# m_chi = 10.44 GeV, m_N = 0.939 GeV -> mu = 0.469
+mu = Units(0.4843, {'GeV': 1})  # reduced mass m_chi m_N / (m_chi + m_N), GeV (m_chi = 1.0 from constants.py)
+# For m_chi = 1.0 GeV: mu = 1.0 * 0.939 / (1.0 + 0.939) = 0.484 GeV
+# Note: T232's previous comment "m_chi = 10.44 -> mu = 0.469" was arithmetically wrong (R66 reviewer caught it)
 
 # q at v = 220 km/s
 v_test = 220  # km/s

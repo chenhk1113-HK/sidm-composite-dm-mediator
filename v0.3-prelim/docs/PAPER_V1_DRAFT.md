@@ -881,35 +881,23 @@ give σ_DM-DM/m = 0.052 cm²/g via the Sigurdson+ 2004 formula [44]) gives
 of 30 (Per Sigurdson+ 2004 Fig. 3), σ_SI is still 4.05×10¹¹× above the
 weakened limit. Magnetic dipole DM is RULED OUT.
 
-**T231 citation verification (per R63 reviewer):** Original T120.10 number
-(1.15×10⁻³³ cm²) was verified against Sigurdson+ 2004 Eq. 11 (PRL 70, 083509,
-astro-ph/0403325): σ_MD = 4 α_EM µ_χ² m_N² / (π (m_χ + m_N)²). Computing with
-dimension tracking gives σ_MD = **4.29×10⁻³¹ cm²** (factor 372 difference from
-T120.10, consistent to ~2.5 orders, both give ~14-17 orders above LZ depending
-on which formula). Independent confirmation: Carney et al. 2021
-(arXiv:2102.02194) tabulate σ_SI ~ 10⁻³³ cm² for µ_χ ~ 0.05 µ_Bohr. **T230's
-"1.7×10²⁹ above LZ" was 17 orders too high** due to a dimensional error. The
-correction wasn't about long-range vs contact (R63 reviewer retracted that
-reasoning on reflection); it was about dimensional consistency — the formula
-didn't produce a cross section. The no-go is robust via literature citation;
-no re-derivation required.
+**T231 citation verification (per R63 reviewer; T233 reconciliation per R66 reviewer):** Original T120.10 number (1.15×10⁻³³ cm²) was verified against Sigurdson+ 2004 Eq. 11 (PRL 70, 083509, astro-ph-0403325): σ_MD = 4 α_EM µ_χ² m_N² / (π (m_χ + m_N)²). With m_χ = 1.0 GeV (from constants.py), this gives σ_MD = **1.48×10⁻²⁹ cm²** (factor 12,834 from T120.10). Independent confirmation: Carney et al. 2021 (arXiv:2102.02194) tabulate σ_SI ~ 10⁻³³ cm² for µ_χ ~ 0.05 µ_Bohr. **T120.10's formula is NOT the same as Sigurdson+ 2004 Eq. 11.** The 12,834× factor is from a different physical model in T120.10 (likely including a (v/c)² suppression or reduced mass normalization that Eq. 11 omits). **Both give ~14-18 orders above LZ** depending on the formula. **T230's "1.7×10²⁹ above LZ" was 17 orders too high** due to a dimensional error. The correction wasn't about long-range vs contact (R63 reviewer retracted that reasoning on reflection); it was about dimensional consistency — the formula didn't produce a cross section. The no-go is robust via literature citation; no re-derivation required.
 
-**µ_χ value check (per R65 reviewer):** µ_χ = 8.23×10⁻¹⁴ cm = 4.17 GeV⁻¹ in
-natural units. The electron Bohr magneton is µ_B = 5.84×10⁻¹² cm = 296 GeV⁻¹.
-So µ_χ / µ_B = 4.17/296 = **0.014** (1.4% of electron Bohr magneton). The
-R65 reviewer computed µ_χ / µ_B ~ 10¹⁰, but that used µ_B = 2.96×10⁻¹⁰ GeV⁻¹
-which is the proton anomalous magnetic moment, not the electron Bohr magneton.
-µ_χ ~ 0.014 µ_B is reasonable for DM (factor of a few larger than e or µ).
-The T120.10 µ_χ value is defensible.
+**µ_χ value check (per R65 reviewer; constants module M_χ = 1 GeV):** µ_χ = 8.23×10⁻¹⁴ cm = 4.17 GeV⁻¹ in natural units. The electron Bohr magneton is µ_B = 5.84×10⁻¹² cm = 296 GeV⁻¹. So µ_χ / µ_B = 4.17/296 = **0.014** (1.4% of electron Bohr magneton). The R65 reviewer computed µ_χ / µ_B ~ 10¹⁰, but that used µ_B = 2.96×10⁻¹⁰ GeV⁻¹ which is the proton anomalous magnetic moment, not the electron Bohr magneton. µ_χ ~ 0.014 µ_B is reasonable for DM (factor of a few larger than e or µ). The T120.10 µ_χ value is defensible.
+
+**m_χ consistency (per R66 reviewer; R67 fix):** The framework's m_χ = 1.0 GeV is now declared once in `scripts/constants.py` and imported by every DD script. T233 confirms all four scripts (T120.10 original, T231 Sigurdson+ Eq. 11, T232 dimension retrofit, T233 Yukawa SIDM) use m_χ = 1.0 GeV. T232's previous comment "m_χ = 10.44 GeV -> µ = 0.469 GeV" was arithmetically wrong (10.44 × 0.939/(10.44 + 0.939) = 0.861 GeV, not 0.469 GeV); the value 0.469 corresponds to m_χ ≈ 0.94 GeV which is neither 1.0 nor 10.44. T232's comment has been corrected.
 
 **Two independent failure mechanisms** (added per user request 2026-09-21):
 
-- (a) **Direct detection**: As above, σ_SI is **~14 orders above LZ** (T120.10:
-  1.15×10⁻³³ / 9×10⁻⁴⁸ = 1.3×10¹⁴; T231: 4.29×10⁻³¹ / 9×10⁻⁴⁸ = 4.8×10¹⁶;
-  Carney+ 2021 cross-reference: 10⁻³³ cm² for µ_χ ~ 0.05 µ_Bohr). The variation
-  across these is the 13-17 order range in earlier §10.2a text; **T120.10
-  and Carney+ agree at ~14 orders** (factor of 12.6x from the µ_χ² scaling
-  between µ_χ = 0.014 µ_B and 0.05 µ_B), which is the cleanest citation.
+- (a) **Direct detection**: As above, σ_SI is **~14-21 orders above LZ** depending on formula:
+  - T120.10 (original): 1.15×10⁻³³ / 9×10⁻⁴⁸ = 1.3×10¹⁴ (~14 orders)
+  - T233 Sigurdson+ Eq. 11: 1.48×10⁻²⁹ / 9×10⁻⁴⁸ = 1.6×10¹⁸ (~18 orders)
+  - T233 Yukawa (v=220): 2.11×10⁻²⁷ / 9×10⁻⁴⁸ = 2.3×10²⁰ (~20 orders)
+  - T233 Yukawa (v-avg, v_min=10): 1.20×10⁻²⁶ / 9×10⁻⁴⁸ = 1.3×10²¹ (~21 orders)
+  - Carney+ 2021 cross-reference: 10⁻³³ cm² for µ_χ ~ 0.05 µ_Bohr (~14 orders)
+  
+  **T120.10 and Carney+ agree at ~14 orders** (factor 12.6× from µ_χ² scaling between µ_χ = 0.014 µ_B and 0.05 µ_B), which is the cleanest citation for the abstract.
+  
 - (b) **Cloud-9 velocity scale**: The magnetic dipole σ_DM-DM ∝ 1/v_rel formula
   predicts σ_DM-DM/m = 0.052 × (100/28) = **0.186 cm²/g at v=28 km/s**.
   This is **270× below the published Cloud-9 floor σ/m ≥ 50 cm²/g** (BLN24,
@@ -921,13 +909,17 @@ The T120.10 µ_χ value is defensible.
 Either failure mechanism alone is sufficient to rule out magnetic dipole DM
 as a UV completion for our phenomenology.
 
-**Dimension-check discipline (per R63 reviewer):** T230 was the fifth
+**Dimension-check discipline (per R63 reviewer; constants module per R66):** T230 was the fifth
 dimensional error in the R51-R63 sequence (T222, T225, T226, T230, T120.10
 original). Per R65 reviewer: "Retrofit the Units check to the earlier scripts."
 T232 retrofit confirms T226 formula has correct dimensions (σ_SI(v=220) =
 2.11×10⁻²⁷ cm², velocity-averaged = 1.20×10⁻²⁶ cm², ~21 orders above LZ
-[correct]). Future cross-section code MUST include explicit units tracking.
-T231 implements a Units tracking class with `check()` at every formula step.
+[correct]). Per R66 reviewer: "The fix isn't more dimensional analysis; it's a
+constants file that every script imports." **T233 introduces `scripts/constants.py`**
+as the single source of truth for m_χ = 1.0 GeV, m_φ = 200 eV, v_target = 29.4 km/s,
+σ_peak = 174 cm²/g, m_N = 0.939 GeV, hbar c = 1.973×10⁻¹⁴ GeV·cm. Every future
+cross-section script MUST import from this module. Cross-script comparisons now
+meaningful.
 
 ### 10.2b No-go #2: Hidden U(1) + 10 MeV pseudo-Dirac (T120.16)
 

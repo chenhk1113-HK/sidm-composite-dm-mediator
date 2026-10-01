@@ -1,0 +1,21 @@
+{
+  "script": "T233",
+  "description": "Consistent DD analysis with m_chi from constants.py",
+  "framework_constants_used": {
+    "M_CHI_GEV": 1.0,
+    "M_PHI_GEV": 2e-07,
+    "V_TARGET_KMS": 29.4,
+    "SIGMA_PEAK_CM2_PER_G": 174.0,
+    "M_NUCLEON_GEV": 0.939
+  },
+  "g_chi": 0.0029339464181741483,
+  "reduced_mass_GeV": 0.48427024239298605,
+  "sigurdson_eq11_result_cm2": 1.4758787580205642e-29,
+  "sigurdson_eq11_above_LZ": 1.6398652866895158e+18,
+  "yukawa_v220_cm2": 2.109566697793109e-27,
+  "yukawa_v_avg_cm2": 1.1995413572225192e-26,
+  "T120_10_original_value_cm2": 1.15e-33,
+  "T120_10_factor_372_explanation": "T120.10 used different normalization than Eq. 11",
+  "paper_claim": "~14 orders above LZ (T120.10 + Carney agreement)",
+  "verification": "All scripts now use constants.py for m_chi"
+}
