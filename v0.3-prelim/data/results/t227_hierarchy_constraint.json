@@ -1,0 +1,76 @@
+{
+  "script": "T227",
+  "description": "Hierarchy constraint derivation and extended g_N sweep",
+  "g_chi_self_coupling": 0.002933947037724106,
+  "sigma_SI_at_g_N_equals_g_chi": 1.1995423704326187e-26,
+  "LZ_bound": 9e-48,
+  "ratio_sigma_SI_to_LZ": 1.3328248560362431e+21,
+  "required_g_N_over_g_chi_for_LZ": 2.739135132841484e-11,
+  "required_g_chi_over_g_N_for_LZ": 36507873890.93267,
+  "hierarchy_constraint": "g_N/g_chi < 2.74e-11",
+  "hierarchy_order_of_magnitude": 10,
+  "consistency_check": {
+    "earlier_dark_sector_estimate": "g_chi/g_portal ~ 10^11",
+    "R57_constraint": "g_N/g_chi < 2.74e-11",
+    "consistent": true
+  },
+  "verdict_R55_correction": "The framework is NOT excluded by LZ. The framework requires a dark-sector hierarchy of order 10^-11 between g_N and g_chi. This is a UV STRUCTURE constraint, not an exclusion of sigma_peak.",
+  "extended_sweep": [
+    {
+      "g_N_over_g_chi": 1e-15,
+      "sigma_SI_cm2": 1.1995423704326222e-56,
+      "ratio_to_LZ": 1.332824856036247e-09
+    },
+    {
+      "g_N_over_g_chi": 1e-13,
+      "sigma_SI_cm2": 1.199542370432618e-52,
+      "ratio_to_LZ": 1.3328248560362424e-05
+    },
+    {
+      "g_N_over_g_chi": 1e-11,
+      "sigma_SI_cm2": 1.199542370432618e-48,
+      "ratio_to_LZ": 0.13328248560362424
+    },
+    {
+      "g_N_over_g_chi": 1e-10,
+      "sigma_SI_cm2": 1.1995423704326174e-46,
+      "ratio_to_LZ": 13.328248560362416
+    },
+    {
+      "g_N_over_g_chi": 1e-09,
+      "sigma_SI_cm2": 1.1995423704326202e-44,
+      "ratio_to_LZ": 1332.8248560362447
+    },
+    {
+      "g_N_over_g_chi": 1e-08,
+      "sigma_SI_cm2": 1.1995423704326164e-42,
+      "ratio_to_LZ": 133282.48560362405
+    },
+    {
+      "g_N_over_g_chi": 1e-06,
+      "sigma_SI_cm2": 1.1995423704326143e-38,
+      "ratio_to_LZ": 1332824856.0362382
+    },
+    {
+      "g_N_over_g_chi": 0.0001,
+      "sigma_SI_cm2": 1.1995423704326185e-34,
+      "ratio_to_LZ": 13328248560362.428
+    },
+    {
+      "g_N_over_g_chi": 0.01,
+      "sigma_SI_cm2": 1.199542370432622e-30,
+      "ratio_to_LZ": 1.3328248560362466e+17
+    },
+    {
+      "g_N_over_g_chi": 1,
+      "sigma_SI_cm2": 1.1995423704326187e-26,
+      "ratio_to_LZ": 1.3328248560362431e+21
+    },
+    {
+      "g_N_over_g_chi": 10,
+      "sigma_SI_cm2": 1.1995423704326159e-24,
+      "ratio_to_LZ": 1.33282485603624e+23
+    }
+  ],
+  "paper_reclassification": "R57 catalogue: 5 no-go + 1 hierarchy constraint. The DD constraint is on g_N/g_chi < 3e-11, not on sigma_peak."
+}
