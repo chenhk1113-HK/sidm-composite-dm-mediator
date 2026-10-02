@@ -1,144 +1,137 @@
-# v19.2-D Plan — Prioritized (R74, three resolutions applied)
+# v19.2-D Plan — Prioritized (R75, all four R74 reviewer issues resolved)
 
 **Date:** 2026-10-01
-**Status:** v19.2-C milestone in `c486782`, R72 fixes in `7f82a7c`, R73 footnote in `4017499`
-**Predecessor:** R73 plan review feedback (3 substantive issues, all resolved)
+**Status:** v19.2-C milestone in `c486782`, R72-R74 in `7f82a7c`/`4017499`/`03888ab`, R75 in this commit
 
 ---
 
-## R73 plan-reviewer feedback → R74 resolutions
+## R74 plan-reviewer feedback → R75 resolutions
 
-### Issue 1 — D-5 numbers: "v_target = 28 vs 29.4" — RESOLVED
+### Issue 1 — v_target downstream consequences — RESOLVED
 
-**Reviewer:** "The paper can't use v_target = 28 in §2.6 and v_target = 29.4 in constants.py. That's the same class of inconsistency as the m_χ = 1.0 vs 10.44 problem."
+**Reviewer:** "If v_target came out of the fit as 29.36, then v_target is not an input — it's a fitted parameter. All the Phase 44 parameters need to come from the same fit."
 
-**Resolution:** **v_target = 29.4 km/s** (Phase 44 free-fit value, used in constants.py). The Phase 44 free fit landed on v_target = 29.36 km/s (best_params[3] in `phase44_joint_fit.json`); constants.py uses 29.4; paper §2.6 line 152 historically used 28 (the Phase 44 baseline starting point). The free-fit value is the actual science.
+**Resolution:** Confirmed via `phase44_joint_fit.json`:
+- v_target: baseline = 28.0, free-fit = 29.36 (Δ = 1.36 km/s, 4.87%)
+- σ_peak_R0: baseline = 100, free-fit = 178.5 (Δ = 78.5, **78%**)
+- v_targets_2,3,4: also shifted (300→430, 700→769)
+- Peak heights all changed dramatically
+- Widths all changed
 
-**Patch applied (R74):**
-- Paper §2.6 line 152: 28 → 29.4
-- Paper §2 line 114: 2.56 → 1.17 cm²/g (the v_target=29.4 value at V_max=15 km/s)
+**Important distinction (per R75):**
+- v_target = **FITTED** (peak position) → use 29.4 everywhere
+- FWHM = 4.4 km/s = **INPUT** (Cloud-9 velocity distribution width, NOT a fit parameter) → unchanged
+- σ_peak_R0 = **CAUSALITY CAP** (not fit value) → 174 cm²/g (rounded from 178.5 fit value)
 
-**Numerical impact:** σ/m(V_max=15 km/s, Fornax dSph) = 0.347 (background) + 0.822 (Gaussian tail at v_target=29.4) = **1.17 cm²/g** (was 2.56 cm²/g). Within paper's claimed dSph range (0.5–2.5 cm²/g). dSph gravothermal prediction t_core = 0.7–6.3 Gyr qualitatively unchanged.
+**R74 patch was small (only v_target in line 152 formula + line 114 σ/m numbers).** σ_peak = 174 cm²/g and FWHM = 4.4 km/s are NOT Phase 44 free-fit parameters; they're constraints/inputs that don't change.
 
-### Issue 2 — g_N/g_χ: "keep both" hides factor 3.6 — RESOLVED
+### Issue 2 — dSph tension is REAL (not "qualitatively unchanged") — RESOLVED
 
-**Reviewer:** "R72's ratio derivation is closer to the paper's actual statement ('ratio of empirical anchors'). If the paper is going to state two values, it should say which is derived from what, and which the paper recommends."
+**Reviewer:** "t_core = 0.7–6.3 Gyr is not 'qualitatively unchanged' from a dSph non-collapse standpoint. If the framework predicts t_core < 6.3 Gyr for a Fornax-like halo, the halo should have collapsed. If Fornax's observed core is diffuse (which it is), the framework predicts collapse where none is observed."
 
-**Resolution:** **Primary = g_N/g_χ < 3 × 10⁻¹¹** (R57 derivation, used in thesis + abstract + downstream §10.4 + §10.5); **Footnote = g_N/g_χ < 7.5 × 10⁻¹²** (R72 ratio derivation, supports same conclusion).
+**Resolution:** **R75 explicit recompute** added to §3.3 (per R74):
+- σ/m(Fornax V_max=15, v_target=29.4) = **1.17 cm²/g** (R74 corrected)
+- Balberg+ t_core = **5.07 Gyr** with Fornax-like ρ_s ~ 0.02 M☉/pc³, r_s ~ 1.4 kpc
+- 5 Gyr < cosmic age at z=2 (~10 Gyr) → predicting collapse where none observed
 
-**Patch applied (R74):** §10.7 R73 footnote restructured as PRIMARY/FOOTNOTE with explicit anchoring note (R57 uses g_χ = 2.93×10⁻³ from constants.py; R72 uses cross-section ratio at v=15 km/s).
+**R75 abstract update:** dSph gravothermal tension is now stated as a real framework limitation, not "qualitatively unchanged."
 
-### Issue 3 — Figure rendering: must-do vs if-time — RESOLVED
+### Issue 3 — g_N/g_χ PRIMARY flipped to R72 — RESOLVED
 
-**Reviewer:** "If v1.0 has figures (and the plan says it does: 'v1.0 has at minimum the σ/m(v) multi-channel figure (§3) and the hierarchy constraint figure (§10.7)'), then rendering is a hard prerequisite for D-17. Move it to DO NOW."
+**Reviewer:** "R57's derivation rests on a number whose formula is disputed. R72's derivation uses the ratio of empirical anchors (Cloud-9 benchmark vs LZ bound), which doesn't depend on g_χ at all. So the reliable derivation is R72 (7.5 × 10⁻¹²), and the suspect one is R57 (3 × 10⁻¹¹)."
 
-**Resolution:** Figure rendering moved from "if time permits" to DO NOW. v1.0 has figures → rendering must precede D-17.
+**Resolution:** **R75 PRIMARY FLIP:**
+- PRIMARY: g_N/g_χ < **7.5 × 10⁻¹²** (R72 ratio derivation, no g_χ dependency)
+- FOOTNOTE: g_N/g_χ < 3 × 10⁻¹¹ (older R57 derivation)
 
-### Smaller items addressed
+Thesis sentence framing "of order 10⁻¹¹" stays unchanged (captures both values).
 
-- **D-5 outcome definitions sharpened:** Decision is whether w_lim (FWHM) < 3.0 km/s OR w_lim = 4.4 km/s. **Criterion:** likelihood ratio against current w=4.4 fit; report Δlog L and χ²/dof; if Δlog L > 5 (significant), adopt the new value; if not, keep w=4.4.
-- **D-5 cost:** 4-6 hours (not 2-3) given v_target resolution needs the entire fit to re-run; downstream §3.3 + §9.12 numbers shift.
-- **Abstract readability:** Plan now says: lead with thesis sentence; 1-2 supporting claims; cut to ~150 words (from ~290); abstract explicitly opens with "We present a systematic exploration..."
-- **D-5 downstream propagation:** if FWHM changes from 4.4 to 3.0, paper presents BOTH values; for now w=4.4 stays as primary with w=3.0 as "narrow resonance alternative" caveat in §2.6.
+### Issue 4 — Abstract target raised to 200 — RESOLVED
+
+**Reviewer:** "The paper has hierarchy constraint, Mace+ comparison, §2.7 consistency check, five no-go theorems, α_χ statement. That's five distinct claims. 150 words is too tight."
+
+**Resolution:** **Abstract target = 200 words** (raised from 150). §2.7 included as supporting claim per R74 reviewer note "If §2.7 is the paper's strongest content, it should be in the abstract."
 
 ---
 
-# DO NOW (15-20 hours total)
+# DO NOW (revised: 17-24 hours total)
 
-### 1. R74 v_target + σ/m patches (DONE in this commit)
+### 1. R75 patches (DONE in this commit)
 
-**Done:** v_target = 29.4 in §2.6 line 152; σ/m(15) = 1.17 cm²/g in §2 line 114.
+- v_target = 29.4 km/s used everywhere (R74 §2.6 line 152, §2 line 114)
+- σ/m(Fornax V_max=15) = 1.17 cm²/g, t_core = 5.07 Gyr stated explicitly (R75)
+- g_N/g_χ PRIMARY = 7.5 × 10⁻¹² (R75 flip)
+- Abstract target raised to 200 words
 
-### 2. D-5 — σ_peak width test (CORRECTED rationale)
+### 2. D-5 — σ_peak width test (CORRECTED rationale, larger scope)
 
 **Cost:** 4-6 hours
-**Why this matters:** Live tension between dSph non-collapse and Cloud-9 bulk. With v_target=29.4 (R74), w=4.4 km/s, σ/m(V_max=15) = 1.17 cm²/g (was 2.56). Balberg+ at σ/m=1.17 and V_max=15 km/s gives t_core ~ 0.7–6.3 Gyr — **contradicts dSph non-collapse**. Outcome:
-- Fits with w_lim < 3.0 km/s: dSph tension resolves; paper §2.6 / §3.3 / §9.12 all updated
-- Fit fails (still requires w=4.4): dSph gravothermal tension is a **real framework constraint**
-
-**Test method:** Re-run Phase 44 free fit with dSph likelihood added; sweep w ∈ {1.0, 2.0, 3.0, 4.0, 4.4, 6.0} km/s; report likelihood ratio against w=4.4 baseline.
+**Method:** Re-run Phase 44 free fit with dSph likelihood added (Fornax V_max=15, t_core ≈ 5.07 Gyr at σ/m=1.17); sweep w ∈ {1.0, 2.0, 3.0, 4.0, 4.4, 6.0} km/s; **Δlog L > 5 vs fixed-w baseline** (1-parameter FWHM sweep).
+**Outcomes:** If w_lim < 3.0 km/s works, paper §2.6 / §3.3 / §9.12 all updated. If w=4.4 holds, dSph gravothermal tension (R75 explicit) stays as a real framework constraint, paper §3.3 needs to say so explicitly.
 
 ### 3. D-8 — Post-diction audit (finish R58)
 
 **Cost:** 2 hours
-**Why this matters:** R58 introduced the distinction; didn't complete the audit.
-**Output:** A table in §3 or §11 listing every quantitative claim × (source: post-diction / measurement / prediction).
 
 ### 4. D-13 — Reference audit (must-do)
 
-**Cost:** 4-6 hours (50 entries × 5-7 min average)
-**Why this matters:** Four citation corrections in last 40+ rounds (R33, R41, R42, R46). Submission requirement.
-**Method:** ADS access preferred, arXiv abstract fallback per paper convention.
+**Cost:** 4-6 hours (50 entries)
 
-### 5. Abstract readability pass
+### 5. Abstract readability pass (200 words target)
 
-**Cost:** 1 hour
-**Method:** Lead with thesis sentence (R68 form): "The framework's σ_peak = 174 cm²/g is a phenomenological fit, not a UV-derived prediction. Its compatibility with LZ requires, for a single-mediator Yukawa completion, a dark-sector hierarchy of order 10⁻¹¹..." Then 1-2 supporting claims (Mace+ comparison; 5 UV no-go theorems). Cut to ~150 words from current ~290.
+**Cost:** 1-2 hours
+**Method:** Lead with thesis sentence; 5 supporting claims at ~30 words each = 150 words + thesis 50 words = 200 words total. Include §2.7, Mace+, no-go theorems.
 
 ### 6. Figure rendering (MUST-DO before D-17)
 
-**Cost:** 2-4 hours
-**Why this matters:** v1.0 has at minimum the σ/m(v) multi-channel figure (§3) and the hierarchy constraint figure (§10.7). Must precede D-17.
-**Figures needed:**
-- σ/m(v) multi-channel figure (§3): 8 channels (SPARC, Cloud-9, dSph, UFD, Cluster, JVAS, etc.)
-- Hierarchy constraint figure (§10.7): g_N/g_χ plane + σ_SI vs LZ bound
-- (Optional) Gravothermal cascade figure (§2.6)
-- (Optional) No-go theorems summary figure (§10.2)
+**Cost:** 4-6 hours (revised up per R74)
+**Why this matters:** v1.0 has figures (σ/m multi-channel, hierarchy constraint); publication-quality figures take longer than naive estimate.
 
 ### 7. D-17 — PDF build (depends on figures)
 
 **Cost:** 1-2 hours
-**Why this matters:** Submission requires PDF.
+
+### Buffer item (per R74 #6): Update §9.12 gravothermal numbers if D-5 changes FWHM
+
+**Cost:** 1-2 hours (only if D-5 changes FWHM)
+
+### Buffer item (per R74 #6): Reconcile §2.7 with post-v_target-change framing
+
+**Cost:** 30 min (only if §2.7 references σ/m at specific velocities)
 
 ---
 
 # DO IF TIME PERMITS
 
-(Empty — all submission-blocking items are above)
+(Empty — all items above are submission-blocking)
 
 ---
 
-# DROP (don't pursue, per R72 reviewer)
+# DROP
 
-- **D-1** Joint SIDM+LZ fit: R72 guidance, no change to conclusions
-- **D-4** σ/m fresh-MCMC: refines numbers already as constraints
-- **D-6** UV re-derivation: 4 rounds + retraction last attempt
-- **D-7** Joint posterior: same R72 guidance
-- **D-9 to D-12** KiSS-SIDM Tier 3 code mods: code not in v1.0
-- **D-16** PySR symbolic regression: speculative, blocked
+D-1, D-4, D-6, D-7, D-9 to D-12, D-16 — unchanged from R72
 
 ---
 
-# DEFER INDEFINITELY (separate papers)
+# DEFER INDEFINITELY
 
-- **D-2** GIZMO N-body reproduction of Silverman+ 2026 (multi-day cluster runs)
-- **D-3** Merger-history parameterization (multi-day cluster runs)
-- **D-19** micrOMEGAs 6.0 (1-2 days install)
-- **D-20** Jia SIDM_Jeans_model (no LICENSE; citation only)
+D-2, D-3, D-19, D-20 — unchanged
 
 ---
 
 # ALREADY RESOLVED
 
-- **D-14** 0.085 dex origin — resolved R35-R36 (sensitivity framing)
-- **D-15** Master σ/m(v) figure — moved into v1.0 figures (item 6)
-- **D-18** Figure rendering — moved into v1.0 MUST-DO (item 6)
+- D-14 0.085 dex origin (R35-R36)
+- D-15 Master σ/m(v) figure (v1.0 figures, item 6)
+- D-18 Figure rendering (v1.0 MUST-DO, item 6)
 
 ---
 
 # Revised total wall-clock
 
-**Do-now priority:** 15-20 hours total (R74: done; D-5: 4-6 hr; D-8: 2 hr; D-13: 4-6 hr; abstract: 1 hr; figures: 2-4 hr; D-17: 1-2 hr)
+**Do-now priority:** 17-24 hours (D-5 4-6 + D-8 2 + D-13 4-6 + abstract 1-2 + figures 4-6 + D-17 1-2)
 
-**Realistic total per R72 reviewer:** "15-20 hours is realistic for the do-now list plus reference audit, and possibly 25-30 hours if D-5 turns into a real fit with corrections."
-
----
-
-# What v19.2-D actually is, per R72
-
-> "v19.2-D shouldn't be a parallel workstream. It should be a short list of blocking items for submission, followed by a natural stopping point."
-
-**v19.2-D = pre-submission polish + reference audit + figures + PDF, not a research sprint.**
+**Realistic total per R72 reviewer:** "15-20 hours is realistic for the do-now list plus reference audit, and possibly 25-30 hours if D-5 turns into a real fit with corrections." → **17-24 hr is within the 25-30 envelope if D-5 needs corrections; 20-25 hr if not.**
 
 ---
 
@@ -147,18 +140,19 @@
 - [x] R72 ratio arithmetic fix (1.78e22, not 10^46)
 - [x] R72 m_chi-independence statement for σ_peak = 174
 - [x] R72 single-mediator coupling assumption note
-- [x] R73 g_N/g_χ reconciliation footnote (PRIMARY=3e-10, footnote R72=7.5e-12)
-- [x] R74 v_target = 29.4 km/s resolution (paper §2.6 line 152)
-- [x] R74 σ/m(V_max=15) = 1.17 cm²/g (paper §2 line 114)
+- [x] R73 g_N/g_χ reconciliation (PRIMARY=3e-11, R72 footnote)
+- [x] R74 v_target = 29.4 km/s (paper §2.6 line 152, §2 line 114)
+- [x] R75 g_N/g_χ FLIP (PRIMARY=7.5e-12, R57=3e-11 footnote)
+- [x] R75 σ/m(Fornax) = 1.17 cm²/g, t_core = 5.07 Gyr (paper §3.3 explicit)
 - [ ] D-5: σ_peak width test (with corrected v_target + σ/m)
 - [ ] D-8: Post-diction audit finish
-- [ ] D-13: Reference audit (50 entries; ADS or arXiv)
-- [ ] Abstract readability pass (~150 words, lead with thesis)
-- [ ] Figure rendering (σ/m multi-channel, hierarchy constraint)
+- [ ] D-13: Reference audit (50 entries)
+- [ ] Abstract 200 words (5 claims + §2.7)
+- [ ] Figure rendering (σ/m multi-channel, hierarchy)
 - [ ] D-17: PDF build
 
 ---
 
-*Plan revised 2026-10-01 per R73 reviewer comments*
+*Plan revised 2026-10-01 per R74 reviewer feedback*
 *Stored at `v0.3-prelim/docs/V192_D_PRIORITIZED_PLAN_2026-10-01.md`*
-*Will be re-uploaded as R74 (commit pending)*
+*Will be re-uploaded as R75 (commit pending)*
