@@ -1,3 +1,34 @@
+## [v19.2-C-milestone-R71-2026-10-01]
+
+**v19.2-C DD section finalized after 12 review rounds (R60 → R71). Tag `v19.2-C-milestone-R71` created at HEAD (commit `c486782`).**
+
+- R60 (T228, commit `8670c99`): Re-check 5 no-go theorems; all HOLD.
+- R61 (commit `5b0d785`): Items 2-6 + F - thesis sentence, α_χ acceptability, falsification criteria, hierarchy sensitivity scan.
+- R62 (commit `1580489`): Fix overgeneralization ("single-mediator Yukawa models satisfy LZ only if g_N/g_χ < 3×10⁻¹¹"); redo T120.10.
+- R64 (commit `3437390`): Fix T230 dimensional error via literature citation; first outside-reader test.
+- R65 (commit `5be533a`): Reconcile µ_χ (reviewer used 2.96×10⁻¹⁰ GeV⁻¹ for µ_B; correct is µ_B = 296 GeV⁻¹); retrofit Units on T226.
+- R67 (commit `e55aabf`): Constants module (`scripts/constants.py`); m_χ reconciliation.
+- R68 (commit `1142bfb`): All R66 reviewer issues fixed; thesis precision; outside-reader test dropped.
+- R69 (commit `f981731`): Drop T120.10 entirely; cite Sigurdson+ 2004 Eq. 11 as sole source for magnetic dipole; cite specific Tulin-Yu 2017 Eq. (5).
+- R70 (commit `3fa1e97`): Fix T232 4π bug (R65 multiplied by 4π instead of dividing); remove retracted Cloud-9 floor; acknowledge Tulin-Yu prefactor mismatch.
+- R71 (commit `c486782`): Final pass — ratio-based hierarchy statement (Cloud-9 anchor + LZ bound → 10⁻¹¹); drop (b) Cloud-9 velocity argument; tag v19.2-C milestone.
+
+**Final DD section state (R71):**
+- Magnetic dipole no-go (§10.2a): Sigurdson+ 2004 Eq. 11, single number σ_SI = 1.48×10⁻²⁹ cm² (~18 orders above LZ), single citation. Carney+ 2021 cross-confirmed.
+- Hierarchy constraint (§10.7): g_N/g_χ < 3 × 10⁻¹¹ stated as ratio of two empirical anchors (Cloud-9 σ_DM-DM ~ 1 cm²/g / LZ σ_SI ≲ 10⁻⁴⁶ cm² = 10⁴⁶ → g_χ/g_N ~ 10¹¹). NO single-formula dependency.
+- T232 dimension retrofit: confirmed σ_SI(v=220) = 2.109×10⁻²⁷ cm² vs T226 = 2.110×10⁻²⁷ → ratio 1.000 (within 0.05%) after 4π fix.
+- Outside-reader test: DROPPED honestly (no non-SIDM physicist available).
+
+**Thesis sentence (final):**
+"The framework's σ_peak = 174 cm²/g is a phenomenological fit, not a UV-derived prediction. Its compatibility with LZ requires, for a single-mediator Yukawa completion, a dark-sector hierarchy of order 10⁻¹¹ between the DM self-coupling and the DM-nucleon coupling, placing the framework in the dark-sector paradigm."
+
+**v19.2-C milestone status (per R71 reviewer):**
+"The paper does not need more R71s. It needs a final pass that removes the intermediate derivations which have caused twelve rounds of corrections, and states the empirical result plainly. If (1)-(4) are done, v19.2-C is done." → DONE.
+
+Drift check: PASS at all rounds.
+
+---
+
 ## [v19.0+post-freeze-2026-09-29]
 
 **Post-paper-freeze rounds complete (2026-09-28 → 2026-09-29). Paper-freeze maintained through 7 commits.**

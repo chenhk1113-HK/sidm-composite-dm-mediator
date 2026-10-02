@@ -1,3 +1,54 @@
+# Layman Summary — v0.4-prelim+v19.2-C-milestone-R71 (v19.2-C final, 2026-10-01)
+
+> **For:** Non-experts + users preferring quick summaries over
+> technical detail. Covers the **v19.2-C milestone** shipped
+> 2026-10-01 (tag `v19.2-C-milestone-R71`, commit `c486782`): DD section finalized after **12 review rounds** (R60 → R71).
+> Hierarchy constraint **g_N/g_χ < 3 × 10⁻¹¹** (R57) + **α_χ ~ 6.8 × 10⁻⁷** (R58) + **5 UV no-go theorems** (1 general theorem from Chu+ 2019 p-wave literature + 4 ruled-out completions) + **§2.7 Ohana+ consistency at 0.16 dex** + **Mace+ ~7× deficit** at v=28 (R39) + **standing_numbers.json infrastructure**.
+
+## What this milestone is, in one sentence
+
+**The DD section is now defensible** — magnetic dipole no-go cites one equation (Sigurdson+ 2004 Eq. 11), hierarchy constraint is stated as a ratio of empirical anchors (Cloud-9 σ_DM-DM ~ 1 cm²/g / LZ σ_SI ≲ 10⁻⁴⁶ cm² = 10⁴⁶ → g_χ/g_N ~ 10¹¹), and the T232 dimension retrofit confirms σ_SI(v=220) = 2.109×10⁻²⁷ cm² vs T226 = 2.110×10⁻²⁷ → ratio 1.000 (within 0.05%) after fixing the R65 4π bug.
+
+## What changed in v19.2-C (vs v19.2-B)
+
+| Aspect | v19.2-B (R57) | **v19.2-C (R71)** | Status |
+|---|---|---|---|
+| **Hierarchy constraint** g_N/g_χ < 3 × 10⁻¹¹ | stated with g_χ = 2.93 × 10⁻³ (had 4π bug + Tulin-Yu citation mismatch) | stated as ratio of empirical anchors (no formula dependency) | **Fixed** |
+| **Magnetic dipole no-go** (§10.2a) | T120.10 archive formula (dimensionally wrong GeV⁻⁶) | Sigurdson+ 2004 Eq. 11 (σ_SI = 1.48×10⁻²⁹ cm², ~18 orders above LZ) | **Fixed** |
+| **T232 vs T226** | factor-168 discrepancy (4π bug in T232) | T232/T226 = 1.000 within 0.05% (after 4π fix) | **Confirmed** |
+| **Constants module** | scripts hardcoded m_chi, m_phi, etc. | `scripts/constants.py` as single source of truth | **Added** |
+| **Outside-reader test** | "done" (R62) then "self-administered" (R64) then "dropped" (R68) | honestly DROPPED (no non-SIDM physicist available) | **Honest** |
+| **Cloud-9 σ/m ≥ 50** | "floor" (R45-R46 retraction) | "Elbert+ 2015 benchmark" (no Cloud-9 floor) | **Corrected** |
+| **Velocity scaling (b)** | 1/v scaling (wrong) | 1/v² (Born limit) or removed (R71) | **Corrected/Removed** |
+
+## What's in the final DD section (R71)
+
+- **Magnetic dipole no-go (§10.2a):** Sigurdson+ 2004 Eq. 11 → σ_SI = 1.48×10⁻²⁹ cm² (~18 orders above LZ). Confirmed by Carney+ 2021 tabulation.
+- **Hierarchy constraint (§10.7):** g_N/g_χ < 3 × 10⁻¹¹ as ratio: σ_DM-DM ~ 1 cm²/g / σ_SI ≲ 10⁻⁴⁶ cm² = 10⁴⁶ → g_χ/g_N ~ 10¹¹. NO single-formula dependency.
+- **T232 dimension retrofit:** σ_SI(v=220) = 2.109×10⁻²⁷ cm² vs T226 = 2.110×10⁻²⁷ → ratio 1.000 (within 0.05%).
+- **Constants module:** `scripts/constants.py` exports M_CHI_GEV=1.0, M_PHI_GEV=200e-9, V_TARGET_KMS=29.4, SIGMA_PEAK=174, M_NUCLEON=0.939, HBAR_C, LZ_BOUND. Every cross-section script imports from this module.
+
+## Thesis sentence (final, R68 precision):
+
+> "The framework's σ_peak = 174 cm²/g is a phenomenological fit, not a UV-derived prediction. Its compatibility with LZ requires, for a single-mediator Yukawa completion, a dark-sector hierarchy of order 10⁻¹¹ between the DM self-coupling and the DM-nucleon coupling, placing the framework in the dark-sector paradigm."
+
+## R60-R71 review-round history
+
+| Round | Commit | What |
+|---|---|---|
+| R60 | `8670c99` | Re-check 5 no-gos (T228). All HOLD. |
+| R61 | `5b0d785` | Thesis sentence, α_χ acceptability, falsification criteria, hierarchy sensitivity scan |
+| R62 | `1580489` | Fix overgeneralization; redo T120.10 |
+| R64 | `3437390` | Fix T230 dimensional error via literature citation |
+| R65 | `5be533a` | Reconcile µ_χ (reviewer µ_B error); retrofit Units on T226 |
+| R67 | `e55aabf` | Constants module; m_χ reconciliation |
+| R68 | `1142bfb` | All R66 issues; thesis precision; outside-reader dropped |
+| R69 | `f981731` | Drop T120.10; cite Sigurdson+ 2004 Eq. 11 |
+| R70 | `3fa1e97` | Fix T232 4π bug; remove retracted Cloud-9 floor |
+| **R71** | `c486782` | **Final pass — ratio-based hierarchy statement; tag v19.2-C milestone** |
+
+---
+
 # Layman Summary — v0.4-prelim+T88E Tier-1 Milestone (T72 → T89)
 
 > **For:** Non-experts + users preferring quick summaries over

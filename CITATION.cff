@@ -50,8 +50,8 @@ message: >-
   2026-11-01 (60 days after the LZ announcement).
 title: "sidm-composite-dm-mediator"
 type: software
-version: 0.4-prelim+T88E
-date-released: 2026-08-28
+version: 0.4-prelim+v19.2-C-milestone-R71
+date-released: 2026-10-01
 authors:
   - family-names: Lam
     given-names: K.

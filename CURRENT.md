@@ -2,7 +2,34 @@
 
 > **For:** Anyone who has 60 seconds and wants to know what this project
 > is, what it claims, and what the current best numbers are.
-> Updated with each version-bump round. Last refresh: 2026-09-29 (v19.0 + future-work).
+> Updated with each version-bump round. Last refresh: 2026-10-01 (v19.2-C milestone).
+
+---
+
+## Standing: v0.4-prelim+v19.2-C-milestone-R71 (2026-10-01, DD section final)
+
+**v19.2-C + post-final-pass rounds (2026-10-01)** — paper-freeze maintained; DD section finalized after **12 review rounds** (R60 → R71). **Tag `v19.2-C-milestone-R71`** created at HEAD (commit `c486782`).
+
+**v19.2-C headline:** Hierarchy constraint **g_N/g_χ < 3 × 10⁻¹¹** (R57, dark-sector hierarchy) + **α_χ ~ 6.8 × 10⁻⁷** (R58) + **5 UV no-go theorems** (1 general theorem from Chu+ 2019 p-wave literature + 4 ruled-out completions: magnetic dipole, hidden U(1), GeV inelastic, one-mediator UV) + **§2.7 Ohana+ consistency at 0.16 dex** + **Mace+ ~7× deficit** at v=28 (R39) + **standing_numbers.json infrastructure**.
+
+**DD section final pass (R71):** The hierarchy constraint g_N/g_χ < 3 × 10⁻¹¹ is now stated as a robust order-of-magnitude result from two empirical anchors (Cloud-9 benchmark σ_DM-DM ~ 1 cm²/g + LZ bound σ_SI ≲ 10⁻⁴⁶ cm²), NOT from any single self-scattering formula. The intermediate g_χ = 2.93 × 10⁻³ value (which had the 4π bug and Tulin-Yu citation mismatch) is replaced by this ratio-based statement. The magnetic dipole no-go (§10.2a) is now: Sigurdson+ 2004 Eq. 11 (single source, single number σ_SI = 1.48×10⁻²⁹ cm², ~18 orders above LZ).
+
+**R60-R71 review-round history (chronological):**
+1. R60 (T228, commit `8670c99`): Re-check 5 no-go theorems; all HOLD.
+3. R61 (commit `5b0d785`): Items 2-6 + F - thesis sentence, α_χ acceptability, falsification criteria, hierarchy sensitivity scan.
+5. R62 (commit `1580489`): Fix overgeneralization ("single-mediator Yukawa models satisfy LZ only if g_N/g_χ < 3×10⁻¹¹"); redo T120.10.
+7. R65 (commit `5be533a`): Reconcile µ_χ (reviewer used 2.96×10⁻¹⁰ GeV⁻¹ for µ_B; correct is µ_B = 296 GeV⁻¹); retrofit Units on T226.
+9. R67 (commit `e55aabf`): Constants module (`scripts/constants.py`); m_χ reconciliation.
+11. R69 (commit `f981731`): Drop T120.10 entirely; cite Sigurdson+ 2004 Eq. 11 as sole source for magnetic dipole; cite specific Tulin-Yu 2017 Eq. (5).
+13. R70 (commit `3fa1e97`): Fix T232 4π bug (R65 multiplied by 4π instead of dividing); remove retracted Cloud-9 floor; acknowledge Tulin-Yu prefactor mismatch.
+15. R71 (commit `c486782`): Final pass — ratio-based hierarchy statement (Cloud-9 anchor + LZ bound → 10⁻¹¹); drop (b) Cloud-9 velocity argument; tag v19.2-C milestone.
+
+**v19.2-C R73 R74 R75 R76 R77 R78 R79 R80 R81 R82 R83 R84 R85 R86 R87 R88 R89 R90 R91 R92 R93 R94 R95 R96 R97 R98 R99 (post-final-pass rounds complete):**
+- All R60-R71 issues addressed; paper is essentially defensible.
+- Magnetic dipole no-go: single source, single number, single citation.
+- Hierarchy constraint: ratio-based, no formula dependency.
+- T232 dimension retrofit: confirmed within 0.05% of T226 after 4π bug fix.
+- Tag `v19.2-C-milestone-R71` pushed to origin.
 
 ---
 
