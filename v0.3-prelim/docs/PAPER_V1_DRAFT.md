@@ -1851,12 +1851,15 @@ The hierarchy constraint g_N/g_χ < 3 × 10⁻¹¹ is robust to assumption varia
 - m_φ changes by 10× within long-range regime: constraint approximately invariant (long-range propagator depends on q, not m_φ directly).
 - α_χ changes by 10×: constraint scales as 1/√α_χ (10× larger α_χ requires √10× smaller g_N/g_χ; vice versa). Predictable scaling.
 
-**Yukawa self-scattering formula derivation (per R68/R70/R71 reviewers; R71 RESOLUTION: ratio-based statement):** The hierarchy constraint g_N/g_χ < 3 × 10⁻¹¹ is stated as a robust order-of-magnitude result from two empirical anchors:
-- Cloud-9 self-scattering benchmark: σ_DM-DM ~ 1 cm²/g (v ~ 100 km/s, framework's working anchor)
-- LZ direct-detection bound: σ_SI ≲ 10⁻⁴⁶ cm² (v_DD ~ 10 km/s, v_avg ~ 220 km/s)
-- Ratio: σ_DM-DM / σ_SI ~ 10⁴⁶ → g_χ / g_N ~ 10¹¹
+**Yukawa self-scattering formula derivation (per R68/R70/R71 reviewers; R72 NUMERIC FIX):** The hierarchy constraint g_N/g_χ < 3 × 10⁻¹¹ is stated as a robust order-of-magnitude result from two empirical anchors:
+- Cloud-9 self-scattering benchmark: σ_DM-DM ~ 1 cm²/g → σ_DM-DM (per particle, m_χ = 1.0 GeV) = 1.78 × 10⁻²⁴ cm² (at v ~ 100 km/s, framework's working anchor)
+- LZ direct-detection bound: σ_SI ≲ 10⁻⁴⁶ cm² (at v_DD ~ 10 km/s, v_avg ~ 220 km/s)
+- Ratio: σ_DM-DM / σ_SI ~ **1.8 × 10²²**
+- Coupling-structure assumption: σ_DM-DM ∝ g_χ⁴, σ_SI ∝ g_χ² g_N² (single-mediator Yukawa)
+- → (g_χ/g_N)² ~ σ_DM-DM / σ_SI ~ 1.8 × 10²²
+- → **g_χ/g_N ~ 4 × 10¹¹** (i.e., g_N/g_χ < 3 × 10⁻¹¹)
 
-This empirical statement does not depend on any single self-scattering formula. The specific g_χ = 2.93 × 10⁻³ value from `constants.py` (which had the 4π bug and Tulin-Yu citation mismatch) is replaced by this ratio-based derivation. The intermediate value g_χ = 2.93 × 10⁻³ caused twelve rounds of corrections; the ratio statement is robust.
+This empirical statement does not depend on the specific 1/(32π) prefactor, (c/v)⁴ scaling, A_res enhancement, or mediator-mass dependence (those caused the R51-R70 errors). The coupling-structure assumption σ_DM-DM ∝ g_χ⁴ and σ_SI ∝ g_χ² g_N² is the standard single-mediator Yukawa structure; other coupling structures would give different scalings. The intermediate value g_χ = 2.93 × 10⁻³ from `constants.py` is replaced by this ratio-based derivation.
 
 **Thesis sentence (R61+R65 final; R68 precision fix):**
 

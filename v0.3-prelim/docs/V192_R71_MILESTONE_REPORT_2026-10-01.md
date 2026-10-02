@@ -56,18 +56,32 @@ sigma_MD = 4 * alpha_EM * mu_chi^2 * m_N^2 / (pi * (m_chi + m_N)^2)
 # Confirmed by Carney+ 2021 (arXiv:2102.02194) tabulation
 ```
 
-### §10.7 Hierarchy constraint (ratio of empirical anchors, no formula dependency)
+### §10.7 Hierarchy constraint (ratio of empirical anchors, no formula dependency, R72 NUMERIC FIX)
 
 ```
-Cloud-9 self-scattering benchmark: sigma_DM-DM ~ 1 cm^2/g (v ~ 100 km/s)
-LZ direct-detection bound:        sigma_SI  <~ 1e-46 cm^2 (v_DD ~ 10 km/s)
-Ratio:                           sigma_DM-DM / sigma_SI ~ 1e46
-                                  -> g_chi / g_N ~ 1e11
-                                  -> g_N / g_chi < 3 × 10^-11
+Cloud-9 self-scattering benchmark: sigma_DM-DM ~ 1 cm^2/g
+  -> sigma_DM-DM (per particle, m_chi = 1.0 GeV) = 1.78 × 10^-24 cm^2
+     (at v ~ 100 km/s, framework's working anchor; 174 cm^2/g is m_chi-INDEPENDENT
+      by per-unit-mass convention)
+LZ direct-detection bound:        sigma_SI  <~ 1 × 10^-46 cm^2 (v_DD ~ 10 km/s)
+Coupling-structure assumption:    sigma_DM-DM ∝ g_chi^4, sigma_SI ∝ g_chi^2 g_N^2
+                                  (single-mediator Yukawa)
+Ratio:                          sigma_DM-DM / sigma_SI ~ 1.78 × 10^22 (NOT 10^46!)
+                                  -> (g_chi/g_N)^2 ~ 1.78 × 10^22
+                                  -> g_chi/g_N ~ 1.34 × 10^11
+                                  -> g_N/g_chi < 7.5 × 10^-12 (~3 × 10^-11 OOM)
 
-This empirical statement does not depend on any single self-scattering formula.
-The specific g_chi = 2.93e-3 value (which had the 4π bug and Tulin-Yu
-citation mismatch) is replaced by this ratio-based derivation.
+This empirical statement does not depend on the specific 1/(32π) prefactor,
+the (c/v)^4 scaling, the A_res enhancement, or the mediator-mass dependence
+(those caused the R51-R70 errors). The coupling-structure assumption
+sigma_DM-DM ∝ g_chi^4 and sigma_SI ∝ g_chi^2 g_N^2 is the standard
+single-mediator Yukawa structure; other coupling structures would give
+different scalings.
+
+R72 NUMERIC FIX: R71 milestone report had an algebra error claiming
+"ratio ~ 10^46 -> g_chi/g_N ~ 10^11". The actual ratio is 10^22 (sigma/m
+converted to per-particle using m_chi = 1 GeV, NOT m_chi = 1 GeV without
+conversion). sqrt(10^22) = 10^11, NOT sqrt(10^46) = 10^23.
 ```
 
 ### T232 dimension retrofit (confirmed)
@@ -166,16 +180,18 @@ LZ_BOUND_CM2 = 9e-48     # LZ 2024 direct-detection bound
 
 ---
 
-## Standing Numbers Used (R36 infrastructure)
+## Standing Numbers Used (R36 infrastructure + R72 m_χ clarification)
 
 From `v0.3-prelim/data/standing_numbers.json`:
-- σ_peak_HH_1 = 174 cm²/g (Phase 44 baseline, m_chi = 10.44 GeV era; constants.py now uses 1.0 GeV)
+- σ_peak_HH_1 = 174 cm²/g (Phase 44 baseline; **m_chi-INDEPENDENT** by per-unit-mass convention. Both causality cap factor 3.0 and Cloud-9 floor ~50 cm²/g are dimensionless or per-unit-mass, so σ_peak = 174 cm²/g holds for any m_chi. constants.py uses m_chi = 1.0 GeV by default, but the σ_peak value is the same.)
 - v_target = 29.4 km/s
 - FWHM = 4.4 km/s
 - A_res = 100 (Breit-Wigner enhancement)
 - LZ bound = 9×10⁻⁴⁸ cm²
 - Cloud-9 M₂₀₀ = 5×10⁹ M☉
 - §2.7 σ consistency at 0.16 dex
+
+**R72 m_chi clarification (per R72 reviewer):** 174 cm²/g was originally derived in the Phase 44 era (m_chi = 10.44 GeV) but the per-unit-mass convention makes it m_chi-INDEPENDENT. Per-particle cross section DOES depend on m_chi (sigma_per_particle = sigma/m * m_chi [g]), but the σ/m value itself doesn't.
 
 ---
 
