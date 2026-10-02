@@ -23,15 +23,23 @@ M_CHI_GEV = 1.0
 M_PHI_GEV = 200e-9
 
 # Target velocity at Cloud-9 resonance: 29.4 km/s
+# Per Phase 44 free fit (phase44_joint_fit.json best_params[3] = 29.36)
+# Constants.py uses 29.4 (rounded); paper §2.6 line 152 used 28 (baseline, FIXED R74)
 V_TARGET_KMS = 29.4
 
-# Resonance FWHM: 4.4 km/s (Cloud-9 velocity distribution width)
-FWHM_KMS = 4.4
+# R76: RESOLVED σ vs FWHM. The Gaussian σ width used in all formulas is 4.4 km/s.
+# (Previously labelled FWHM_KMS = 4.4 but used as Gaussian σ in exp(-Δ²/(2*4.4²))).
+# The numerical value is unchanged; only the variable name is corrected.
+# Equivalent FWHM = 4.4 × 2.355 = 10.36 km/s.
+SIGMA_KMS = 4.4  # Gaussian σ width (R76 renamed from FWHM_KMS)
 
 # Resonance amplitude A_res ~ 100 (Breit-Wigner peak height enhancement)
 A_RES = 100.0
 
 # Target sigma_peak at Cloud-9 resonance: 174 cm^2/g
+# R76 RESOLUTION: 174 is the CAUSALITY CAP (paper §9.12), NOT a rounded fit value.
+# Phase 44 free fit gave σ_peak_R0 = 178.5 unconstrained (best_params[4]).
+# Causality cap truncates to 174. See §2.6 sensitivity sweep.
 SIGMA_PEAK_CM2_PER_G = 174.0
 
 # Nucleon mass (for reduced mass calc): 0.939 GeV
@@ -81,7 +89,8 @@ if __name__ == '__main__':
     print(f"M_CHI_GEV = {M_CHI_GEV}")
     print(f"M_PHI_GEV = {M_PHI_GEV}")
     print(f"V_TARGET_KMS = {V_TARGET_KMS}")
-    print(f"SIGMA_PEAK_CM2_PER_G = {SIGMA_PEAK_CM2_PER_G}")
+    print(f"SIGMA_KMS = {SIGMA_KMS} (Gaussian sigma; equivalent FWHM = {SIGMA_KMS * 2.355:.2f} km/s)")
+    print(f"SIGMA_PEAK_CM2_PER_G = {SIGMA_PEAK_CM2_PER_G} (causality cap from §9.12)")
     print(f"M_NUCLEON_GEV = {M_NUCLEON_GEV}")
     print()
     print("Derived:")
