@@ -1861,6 +1861,12 @@ The hierarchy constraint g_N/g_χ < 3 × 10⁻¹¹ is robust to assumption varia
 
 This empirical statement does not depend on the specific 1/(32π) prefactor, (c/v)⁴ scaling, A_res enhancement, or mediator-mass dependence (those caused the R51-R70 errors). The coupling-structure assumption σ_DM-DM ∝ g_χ⁴ and σ_SI ∝ g_χ² g_N² is the standard single-mediator Yukawa structure; other coupling structures would give different scalings. The intermediate value g_χ = 2.93 × 10⁻³ from `constants.py` is replaced by this ratio-based derivation.
 
+**R73 g_N/g_χ reconciliation footnote (per R72 plan-reviewer):** Two derivations give slightly different OOM bounds:
+- R57 derivation (g_χ = 2.93 × 10⁻³ → g_N/g_χ < **3 × 10⁻¹¹**)
+- R72 ratio derivation (σ_DM-DM/σ_SI ~ 1.78 × 10²² → g_χ/g_N = 1.34 × 10¹¹ → g_N/g_χ < **7.5 × 10⁻¹²**)
+
+Both are OOM-consistent (factor ~3.6 spread from different anchoring assumptions; the R72 derivation is anchored in the ratio of cross sections at v=15 km/s, the R57 derivation is anchored in the specific g_χ value at fixed σ_peak=174). The paper's primary statement is **g_N/g_χ < 3 × 10⁻¹¹** (used in thesis sentence and abstract); the R72-derived 7.5 × 10⁻¹² is the same constraint stated more tightly via the ratio approach.
+
 **Thesis sentence (R61+R65 final; R68 precision fix):**
 
 "The framework's σ_peak = 174 cm²/g is a phenomenological fit, not a UV-derived prediction. Its compatibility with LZ requires, for a single-mediator Yukawa completion, a dark-sector hierarchy of order 10⁻¹¹ between the DM self-coupling and the DM-nucleon coupling, placing the framework in the dark-sector paradigm."
