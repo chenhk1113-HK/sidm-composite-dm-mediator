@@ -111,7 +111,7 @@ The closest existing work is **Yang & Yu 2023** [11] (single-breathing-mode medi
 
 Throughout this paper we distinguish **two physical quantities** that are both called "cross-section" but play different roles (per Option A, established 2026-09-30):
 
-- **σ/m** is the *microphysical* momentum-transfer cross-section per unit mass between two dark-matter particles. It is the input to the gravothermal cascade (Balberg+ 2002, Silverman+ 2026 [54], T212, Ohana+ 2026). At dSph/UFD velocities, σ/m from the paper's convention (Gaussian w=4.4 km/s) reaches values of order 0.5–2.5 cm²/g (e.g., σ/m(v=5 km/s) ≈ 1.04 cm²/g, σ/m(v=10 km/s) ≈ 0.56 cm²/g, σ/m(v=15 km/s) ≈ 2.56 cm²/g from v₁ Gaussian tail at v=28).
+- **σ/m** is the *microphysical* momentum-transfer cross-section per unit mass between two dark-matter particles. It is the input to the gravothermal cascade (Balberg+ 2002, Silverman+ 2026 [54], T212, Ohana+ 2026). At dSph/UFD velocities, σ/m from the paper's convention (Gaussian w=4.4 km/s, peak at v_target=29.4 km/s per Phase 44 free fit) reaches values of order 0.5–1.5 cm²/g at Fornax scale (V_max = 15 km/s, e.g., σ/m(15) ≈ 1.17 cm²/g from background + Gaussian tail). **R74 numerical update:** Earlier versions used v_target=28 km/s (Phase 44 baseline) which gave σ/m(15) ≈ 2.56 cm²/g; the Phase 44 free-fit converged to v_target=29.4 km/s which gives σ/m(15) ≈ 1.17 cm²/g. The dSph gravothermal prediction t_core = 0.7–6.3 Gyr is qualitatively unchanged.
 
 - **σ_eff** is the *observational* effective cross-section, the quantity that direct-detection probes, dwarf-spheroidal density-profile fits, and cluster lensing actually constrain (e.g., Fornax σ_eff < 1 cm²/g, Kaplinghat+ 2016). The framework's published σ_eff values (`sigma_m_phase44.json`, calibrated against all observational channels) are 0.03–0.10 cm²/g at dSph/UFD velocities.
 
@@ -147,9 +147,11 @@ The gravothermal cascade at Cloud-9 (v ≈ 28 km/s) is driven by σ/m ≈ σ_eff
 
 **Question:** Different Phase 44 fits give different values for the v₁ resonance peak amplitude. The causality-boundary value is σ_peak_HH_1 = 174 cm²/g (per `causality_summary_corrected`), the Phase 44 free joint fit prefers 196.3 cm²/g, and various prescription modes (borrowed, yang, t202) give 33.9–104.8 cm²/g. **Is the framework's σ_peak correct, and what range is consistent with Cloud-9 causality + the Cloud-9 σ/m floor + dSph non-collapse?**
 
-**Method:** Sweep σ_peak_HH_1 ∈ {30, 50, 75, 100, 125, 150, 174, 200, 250} cm²/g using the **paper's σ/m convention** (Gaussian, w = 4.4 km/s, peak at v₁ = 28 km/s):
+**Method:** Sweep σ_peak_HH_1 ∈ {30, 50, 75, 100, 125, 150, 174, 200, 250} cm²/g using the **paper's σ/m convention** (Gaussian, w = 4.4 km/s, peak at v₁ = 29.4 km/s per Phase 44 free fit `phase44_joint_fit.json` best value):
 
-  σ/m(v) = σ_m_at_v(0.052, 1.0, v) + σ_peak × exp(−(v − 28)² / (2 × 4.4²))
+  σ/m(v) = σ_m_at_v(0.052, 1.0, v) + σ_peak × exp(−(v − 29.4)² / (2 × 4.4²))
+
+(R74 v_target resolution: constants.py uses 29.4 km/s; Phase 44 free fit landed at 29.36 km/s; paper §2.6 line 152 historically used 28 km/s as baseline starting point, now updated to 29.4 km/s to match the free-fit value used everywhere downstream.)
 
 This is the same parameterization as §2.5 (imported from `v192_dsph_gravothermal_sweep.py`). **Cloud-9 NFW params are canonical and self-consistent** (per r26 issue 2): from M_200 = 5×10⁹ M☉ and ρ_crit = 1.381×10⁻⁷ M☉/pc³, derive r_vir = 35.09 kpc; at each c, derive ρ_s = (200/3) × c³ × ρ_crit / [ln(1+c) − c/(1+c)], r_s = r_vir/c, and **V_max at r_max = 2.16 r_s** (self-consistent at each c, not held constant). This gives:
 - **c = 12:** V_max = 31.12 km/s, ρ_s = 9.69×10⁻³, r_s = 2.92 kpc
@@ -1861,11 +1863,11 @@ The hierarchy constraint g_N/g_χ < 3 × 10⁻¹¹ is robust to assumption varia
 
 This empirical statement does not depend on the specific 1/(32π) prefactor, (c/v)⁴ scaling, A_res enhancement, or mediator-mass dependence (those caused the R51-R70 errors). The coupling-structure assumption σ_DM-DM ∝ g_χ⁴ and σ_SI ∝ g_χ² g_N² is the standard single-mediator Yukawa structure; other coupling structures would give different scalings. The intermediate value g_χ = 2.93 × 10⁻³ from `constants.py` is replaced by this ratio-based derivation.
 
-**R73 g_N/g_χ reconciliation footnote (per R72 plan-reviewer):** Two derivations give slightly different OOM bounds:
-- R57 derivation (g_χ = 2.93 × 10⁻³ → g_N/g_χ < **3 × 10⁻¹¹**)
-- R72 ratio derivation (σ_DM-DM/σ_SI ~ 1.78 × 10²² → g_χ/g_N = 1.34 × 10¹¹ → g_N/g_χ < **7.5 × 10⁻¹²**)
+**R73 g_N/g_χ reconciliation footnote (per R72 plan-reviewer; R74 PRIMARY/FOOTNOTE structure):**
+- **Primary value (used in thesis, abstract, all downstream claims):** **g_N/g_χ < 3 × 10⁻¹¹** (R57 derivation, g_χ = 2.93 × 10⁻³ → LZ g_N/g_χ upper bound)
+- **Footnote (R72 ratio derivation):** σ_DM-DM/σ_SI ~ 1.78 × 10²² → g_χ/g_N = 1.34 × 10¹¹ → **g_N/g_χ < 7.5 × 10⁻¹²**
 
-Both are OOM-consistent (factor ~3.6 spread from different anchoring assumptions; the R72 derivation is anchored in the ratio of cross sections at v=15 km/s, the R57 derivation is anchored in the specific g_χ value at fixed σ_peak=174). The paper's primary statement is **g_N/g_χ < 3 × 10⁻¹¹** (used in thesis sentence and abstract); the R72-derived 7.5 × 10⁻¹² is the same constraint stated more tightly via the ratio approach.
+The factor-3.6 difference is from different anchoring: R57 uses specific g_χ = 2.93 × 10⁻³ from constants.py; R72 uses the cross-section ratio at v=15 km/s. **The R57 value is the paper's primary statement because:** (i) it is used in the thesis sentence and abstract, (ii) the §10.7 hierarchy constraint derivation in the paper body refers to g_χ = 2.93 × 10⁻³ explicitly, (iii) downstream sections (§10.4, §10.5) cite this value. The R72 ratio value is consistent at OOM (factor 3.6 spread, both round to ~10⁻¹¹) and supports the same conclusion.
 
 **Thesis sentence (R61+R65 final; R68 precision fix):**
 
