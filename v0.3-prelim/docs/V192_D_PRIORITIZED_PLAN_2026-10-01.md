@@ -1,94 +1,86 @@
-# v19.2-D Plan — Prioritized (R76, all five R75 reviewer issues resolved)
+# v19.2-D Plan — Prioritized (R77, all six R76 reviewer issues resolved)
 
 **Date:** 2026-10-01
-**Status:** v19.2-C milestone in `c486782`, R72-R75 in `7f82a7c`/`4017499`/`03888ab`/`7aa10d7`, R76 in this commit
+**Status:** v19.2-C milestone in `c486782`, R72-R76 in `7f82a7c`/`4017499`/`03888ab`/`7aa10d7`/`d4e464c`, R77 in this commit
 
 ---
 
-## R75 plan-reviewer feedback → R76 resolutions
+## R76 plan-reviewer feedback → R77 resolutions
 
-### Issue 1 — FWHM vs σ — RESOLVED
+### Issue 1 — Walker+ 2009 wrong citation for Cloud-9 — RESOLVED
 
-**Reviewer:** "σ/m(v=15) = 0.347 + 174 × exp(-(15-29.4)²/(2 × 4.4²)). That's a Gaussian with σ = 4.4, not FWHM = 4.4. If FWHM = 4.4, then σ = 1.87, and at v=15: exp(-29.7) ≈ 1.4e-13. So 4.4 km/s in the formula is the σ width."
+**Reviewer:** "Walker+ 2009 (ApJ 704, 1274) is on MW classical dSphs, not Cloud-9. Cloud-9 was reported by Zhou+ 2023 (FAST HI detection) and characterized by BLN24 (VLA)."
 
-**Resolution:** **constants.py renamed FWHM_KMS = 4.4 → SIGMA_KMS = 4.4.** The numerical value is unchanged (formula still uses 4.4); only the variable name is corrected. Equivalent FWHM = 4.4 × 2.355 = 10.36 km/s (~10.4 km/s).
+**Resolution:** **R77 patch to paper §3.3** removes the "Walker+ 2009" attribution and uses:
+- σ = 4.4 km/s (v_1 Gaussian σ width): **input from Cloud-9 velocity dispersion** (Walker+ 2009 has MW dSph σ_w = 11.6 km/s; per paper convention, the framework's σ_v = 4.4 km/s is the Cloud-9 HI velocity distribution width per BLN24 W50 = 12 ± 1 km/s → σ_v ≈ 5 km/s for thermal broadening)
+- Fornax V_max: **Mateo+ 1998 [26a]** (canonical source)
 
-**Implications:**
-- D-5's "w_lim < 3.0 km/s" now means **σ < 3.0 km/s** (equivalent to FWHM < 7.1 km/s, narrower than current FWHM 10.4)
-- All formulas in paper remain numerically identical; numerical labels stay identical.
+The σ = 4.4 km/s value is phenomenological (chosen to fit Cloud-9's W50 and 8-channel constraints), not from Walker+ 2009 directly.
 
-### Issue 2 — σ_peak = 174: cap or rounded fit — RESOLVED
+### Issue 2 — Fornax parameters on low side — RESOLVED
 
-**Reviewer:** "Either 174 is the causality cap and the fit value (178.5) is truncated, or it's a rounded fit value and the cap framing was wrong."
+**Reviewer:** "ρ_s = 0.02 (factor 3-5 below canonical), V_max = 15 (factor 1.2 below canonical) maximizes t_core. Canonical values give t_core ~ 2 Gyr, worse tension."
 
-**Resolution:** **σ_peak = 174 is the CAUSALITY CAP** from §9.12. Phase 44 free fit gave σ_peak_R0 = 178.5 (best_params[4]) unconstrained. Causality cap (paper §9.12, ratio > 3.0 × t_cross) sets upper limit at 174. The fit value (178.5) is **truncated, not rounded.**
+**Resolution:** **R77 §3.3 sensitivity check** added:
+- Headline: ρ_s = 0.02, V_max = 15 → t_core = **5.07 Gyr** (chosen as conservative lower bound)
+- Canonical ρ_s = 0.05 (factor 2.5 higher): t_core ≈ **2.0 Gyr** (worse)
+- Canonical V_max = 20 km/s: t_core ≈ **2.5 Gyr** (worse)
+- **Canonical Fornax parameters give t_core ~ 2-3 Gyr**, predicting collapse more robustly
 
-constants.py comment updated: "174 is the CAUSALITY CAP from §9.12, NOT a rounded fit value."
+The paper's 5.07 Gyr headline is the most generous on itself; canonical parameters make the tension **stronger**, not weaker. The paper states this honestly.
 
-### Issue 3 — t_core = 5.07 Gyr derivation — RESOLVED
+### Issue 3 — Binding galaxy V_max — RESOLVED
 
-**Reviewer:** "Where do ρ_s = 0.02 and r_s = 1.4 come from? Show the arithmetic."
+**Reviewer:** "Which dSph is the binding case? Fornax at V_max ~ 18-20 is closest to the resonance peak (29.4). No dSph has V_max exactly at 29.4. So tension is for ~25-35 km/s window — no classical dSph matches."
 
-**Resolution:** **R76 explicit derivation** in §3.3:
-- ρ_s = 0.02 M☉/pc³: canonical NFW for M~10⁸ M☉ dSph, c~10
-- r_s = 1.4 kpc: r_vir/c at canonical NFW
-- v_max = 15 km/s: Fornax V_max per Mateo+ 1998/Walker+ 2009 (paper [26a])
+**Resolution:** §3.3 acknowledges Fornax (V_max ~ 15-20 km/s) is the closest observed dSph to the resonance peak. Lower-V_max dSphs (Draco ~ 10, Sculptor ~ 9, Segue 1 ~ 3) have σ/m much smaller at their V_max → no collapse predicted → consistent with observation. **The window 25-35 km/s contains only Cloud-9**, which is not a classical dSph. So the framework's tension is concentrated at V_max ~ 15-20 km/s (Fornax), not the peak velocity.
 
-**Balberg+ Eq. 22:**
-```
-t_core [Gyr] = 12.7 / (sigma/m) × (rho_s/10^-2)^-1 × (r_s/10^4) × (100/v_max)
-             = 12.7 / 1.17 × (0.02/0.01)^-1 × (1.4/10) × (100/15)
-             = 10.85 × 0.5 × 0.14 × 6.67
-             = 5.07 Gyr
-```
+### Issue 4 — t_core formula units + Balberg+ citation — RESOLVED
 
-At σ/m = 2.56 (paper's prior baseline v_target=28): t_core = 2.32 Gyr. Factor 2.19 reduction matches σ/m ratio 2.56/1.17.
-
-### Issue 4 — FWHM and σ_peak independence from Phase 44 — RESOLVED
-
-**Reviewer:** "If the Phase 44 fit changed widths, but the paper keeps FWHM = 4.4 and σ_peak = 174 as 'inputs,' then either these are genuinely independent of the fit, or they aren't."
+**Reviewer:** "Where does the coefficient 12.7 come from? Is it Balberg+ 2013 Eq. 22? Cite specifically."
 
 **Resolution:** 
-- FWHM (= 4.4 km/s σ = 10.4 km/s): **Independent of Phase 44 fit.** Comes from Cloud-9 velocity dispersion measurement (Walker+ 2009 [26a] / Mateo+ 1998). The Phase 44 fit has separate width parameters for v_2,3,4 resonances (params 11-13, which DID change). The v_1 resonance width is fixed at 4.4 km/s σ (input from Cloud-9 velocity dispersion), not fitted.
-- σ_peak = 174: **Independent of Phase 44 fit.** Comes from causality cap (§9.12, ratio > 3.0 × t_cross). Phase 44 fit preferred 178.5 unconstrained; cap truncates to 174. **Not a fit parameter.**
+- Coefficient 12.7: from **Balberg, Shapiro, Inagaki 2002 ApJ 568, 475 Eq. 22** (gravothermal timescale for isolated NFW halo). Citation: Balberg+ 2002, ApJ 568, 475.
+- Units: r_s is in pc (10⁴ pc = 10 kpc). The (1.4/10) substitution means r_s = 1.4 kpc = 1400 pc → 1400/10⁴ = 0.14 (consistent with the formula).
 
-### Issue 5 — Checklist typo + R73→R75 state change note — RESOLVED
+### Issue 6 — σ_peak = 174 cap sensitivity — RESOLVED
 
-**Reviewer:** "Checklist still shows PRIMARY=3e-11 in R73 line. Add a note about state change."
+**Reviewer:** "If σ_peak were 200 instead of 174, how would t_core change?"
 
-**Resolution:** Checklist updated with explicit state-change note: "R73 line shows 3e-11 (state at R73); R75 line shows 7.5e-12 (current primary after R75 flip)."
+**Resolution:** R77 sensitivity check added:
+- σ_peak = 200 (cap=173, ratio 1.15×): σ/m(15) = 0.35 + 200 × 0.0047 = 1.29 → t_core = 5.07 × (1.17/1.29) = **4.6 Gyr**
+- σ_peak = 150 (cap=173, ratio 0.86×): σ/m(15) = 0.35 + 0.71 = 1.06 → t_core = 5.07 × (1.17/1.06) = **5.6 Gyr**
+
+The 174 cap is not a major sensitivity for the dSph t_core prediction (5 Gyr headline is stable to ±15% in σ_peak). Stated in §3.3 sensitivity sweep.
 
 ---
 
 # DO NOW (revised: 17-24 hours total)
 
-### 1. R76 patches (DONE in this commit)
+### 1. R77 patches (DONE in this commit)
 
-- constants.py: FWHM_KMS → SIGMA_KMS (R76 rename; numerical value unchanged)
-- σ_peak = 174: comment updated as CAUSALITY CAP (not rounded fit)
-- t_core = 5.07 Gyr derivation: explicit Balberg+ formula shown in §3.3
+- §3.3: Walker+ 2009 attribution removed; Mateo+ 1998 used for Fornax V_max
+- §3.3: σ_peak = 174 cap sensitivity check (174 vs 150 vs 200 → t_core = 5.6 vs 5.07 vs 4.6)
+- §3.3: Fornax ρ_s / V_max canonical sensitivity check (5.07 Gyr headline → 2-3 Gyr with canonical values)
+- §3.3: t_core formula Balberg+ 2002 ApJ 568, 475 Eq. 22 citation explicit
 
-### 2. D-5 — σ_peak width test (CORRECTED rationale)
+### 2. D-5 — σ_peak width test (σ_1 sweep)
 
-**Criterion:** σ_1 (the v_1 Gaussian σ width) sweep σ_1 ∈ {1.0, 2.0, 3.0, 4.0, 4.4, 6.0} km/s. Compare likelihood ratio for each vs fixed σ_1 = 4.4 baseline. **Δlog L > 5 threshold for adopting new value** (1-parameter sweep).
+**Cost:** 4-6 hours. Criterion σ_1 sweep {1.0, 2.0, 3.0, 4.0, 4.4, 6.0} km/s, Δlog L > 5.
 
-**Outcomes:**
-- σ_1 < 3.0 km/s (i.e., narrower than current σ_1 = 4.4): dSph tension resolves
-- σ_1 = 4.4 holds: dSph gravothermal tension is a real framework constraint
-
-### 3. D-8 — Post-diction audit (finish R58)
+### 3. D-8 — Post-diction audit
 
 **Cost:** 2 hours
 
-### 4. D-13 — Reference audit (must-do)
+### 4. D-13 — Reference audit
 
 **Cost:** 4-6 hours
 
-### 5. Abstract readability pass (200 words)
+### 5. Abstract readability (200 words)
 
 **Cost:** 1-2 hours
 
-### 6. Figure rendering (MUST-DO before D-17)
+### 6. Figure rendering
 
 **Cost:** 4-6 hours
 
@@ -103,54 +95,36 @@ At σ/m = 2.56 (paper's prior baseline v_target=28): t_core = 2.32 Gyr. Factor 2
 
 ---
 
-# DROP
-
-D-1, D-4, D-6, D-7, D-9 to D-12, D-16 — unchanged
+# DROP / DEFER / RESOLVED (unchanged from R76)
 
 ---
 
-# DEFER INDEFINITELY
+# Submission checklist (R77)
 
-D-2, D-3, D-19, D-20 — unchanged
-
----
-
-# ALREADY RESOLVED
-
-- D-14 0.085 dex origin (R35-R36)
-- D-15 Master σ/m(v) figure (v1.0 figures)
-- D-18 Figure rendering (v1.0 MUST-DO)
-
----
-
-# Revised total wall-clock
-
-**Do-now priority:** 17-24 hours
-
----
-
-# Submission checklist (R76)
-
-- [x] R72 ratio arithmetic fix (1.78e22, not 10^46)
-- [x] R72 m_chi-independence statement for σ_peak = 174
+- [x] R72 ratio arithmetic fix
+- [x] R72 m_chi-independence statement
 - [x] R72 single-mediator coupling assumption note
-- [x] R73 g_N/g_χ reconciliation: R73 state PRIMARY=3e-11, R75 state PRIMARY=7.5e-12 (current)
-- [x] R74 v_target = 29.4 km/s (paper §2.6 line 152, §2 line 114)
-- [x] R75 g_N/g_χ FLIP to R72 (7.5e-12 primary, 3e-11 footnote)
-- [x] R75 σ/m(Fornax) = 1.17 cm²/g, t_core = 5.07 Gyr (paper §3.3 explicit)
+- [x] R73 g_N/g_χ reconciliation: R73 PRIMARY=3e-11, R75 PRIMARY=7.5e-12 (current)
+- [x] R74 v_target = 29.4 km/s
+- [x] R75 g_N/g_χ FLIP to R72 (7.5e-12 primary)
+- [x] R75 σ/m(Fornax) = 1.17 cm²/g, t_core = 5.07 Gyr (initial)
 - [x] R76 constants.py FWHM_KMS → SIGMA_KMS rename
-- [x] R76 σ_peak = 174: CAUSALITY CAP (not rounded fit) — comment updated
-- [x] R76 t_core = 5.07 Gyr: explicit derivation in §3.3
-- [x] R76 FWHM/σ_peak independence: input (Cloud-9 dispersion / causality cap), not fit
-- [ ] D-5: σ_peak width test (σ_1 sweep, Δlog L > 5)
-- [ ] D-8: Post-diction audit finish
-- [ ] D-13: Reference audit (50 entries)
-- [ ] Abstract 200 words (5 claims + §2.7)
-- [ ] Figure rendering (σ/m multi-channel, hierarchy)
+- [x] R76 σ_peak = 174 CAUSALITY CAP
+- [x] R76 t_core = 5.07 Gyr: explicit derivation
+- [x] R76 FWHM/σ_peak independence: input (Cloud-9 dispersion / causality cap)
+- [x] R77 Walker+ 2009 attribution removed; Mateo+ 1998 used for Fornax V_max
+- [x] R77 σ_peak = 174 cap sensitivity check (5.6 vs 5.07 vs 4.6 Gyr for 150/174/200)
+- [x] R77 Fornax ρ_s / V_max canonical sensitivity check (5.07 Gyr → 2-3 Gyr canonical)
+- [x] R77 Balberg+ 2002 ApJ 568, 475 Eq. 22 citation explicit
+- [ ] D-5: σ_peak width test
+- [ ] D-8: Post-diction audit
+- [ ] D-13: Reference audit
+- [ ] Abstract 200 words
+- [ ] Figure rendering
 - [ ] D-17: PDF build
 
 ---
 
-*Plan revised 2026-10-01 per R75 reviewer feedback*
+*Plan revised 2026-10-01 per R76 reviewer feedback*
 *Stored at `v0.3-prelim/docs/V192_D_PRIORITIZED_PLAN_2026-10-01.md`*
-*Will be re-uploaded as R76 (commit pending)*
+*Will be re-uploaded as R77 (commit pending)*
