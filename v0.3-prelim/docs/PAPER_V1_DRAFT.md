@@ -144,11 +144,43 @@ with f_H the heavy-fraction at the observation radius (f_H_cc ≈ 0.30 from T207
 The gravothermal cascade at Cloud-9 (v ≈ 28 km/s) is driven by σ/m ≈ σ_eff ≈ 174 cm²/g (resonance peak, no channel suppression — t_core = 91 Myr at c=12 / 4.42 Gyr at c=4, see §9.12). **Note: the 4.42 Gyr value at c=4 holds σ/m at the c=12 V_max value (135.3) rather than the canonical self-consistent σ/m(V_max=25.59) = 150.0 at c=4; see §2.6 for the canonical calculation giving t_core = 3.98 Gyr (an 11% correction).** At dSph scale (v < 15 km/s), σ/m ~ 0.5–2.5 cm²/g and σ_eff ~ 0.03–0.10 cm²/g — captured by three-term mixture with σ_HL typically small (|σ_HL| < 0.05 cm²/g for 7 of 8 halos). **Fornax (V_max = 15 km/s) is the outlier, with σ_HL = -0.47 cm²/g (required to fit published σ_eff).** This is an internal inconsistency between the framework's σ/m(v) and σ_eff(v) curves (see paragraph above). **The gravothermal prediction is the strongest constraint on the framework from dSph data:** at microphysical σ/m = 0.5–2.5 cm²/g, t_core = 0.7–6.3 Gyr (well below Hubble time of 13.8 Gyr) for all 8 halos. **R77 explicit recompute** (per R74 reviewer; V_max = 15 km/s is paper convention; canonical Fornax values 18-20 km/s would give HIGHER σ/m, WORSE tension): σ/m(Fornax V_max=15, v_target=29.4) = 1.17 cm²/g (R74), Balberg+ t_core = **5.07 Gyr** with canonical Fornax halo ρ_s ~ 0.02 M☉/pc³ and r_s ~ 1.4 kpc (per Mateo+ 1998 [26a] stellar velocity dispersion σ_w = 11.6 km/s; V_max ≈ 2σ_w = 23 km/s per Wolf+ 2010 dispersion-supported NFW limit). The paper's V_max = 15 km/s value is **chosen as a conservative lower bound** (the framework's σ/m(v) decreases with decreasing v; lower v → lower σ/m → higher t_core → reduced contradiction). **This is a real framework tension:** t_core ~ 5 Gyr is half the cosmic age at dSph formation (~ 10 Gyr at z=2), predicting collapse where none is observed. **R79 framework tension range statement (per R78 reviewer):** The framework predicts collapse for Fornax-like halos in **t_core = 0.25–5.07 Gyr**, depending on the choice of V_max and ρ_s. **Canonical Fornax parameters** (V_max = 18 km/s per Mateo+ 1998 [26a] stellar velocity dispersion σ_w = 11.6 km/s → V_max ≈ 2σ_w = 23 km/s per Wolf+ 2010; per R78 reviewer's correction, V_max = 18 km/s is canonical) give σ/m(Fornax) = 6.35 cm²/g, **t_core ≈ 0.78 Gyr** (factor 6.5× more collapse-prone than the V_max=15 headline). Per R78: this is the **representative** result, not the headline V_max = 15 km/s which is the most generous self-assessment. **Since Fornax is observed to have a diffuse DM core (M_c ~ 10⁷ M☉, r_c ~ 1 kpc per Walker+ 2009 / Read+ 2019 / Hayashi+ 2020 kinematic decomposition, NOT stellar core per Mateo+ 1998; Peñarrubia+ 2008 gives a dynamical mass profile), the framework's prediction of collapse in <1 Gyr is a real tension.**
 
 **R80 implication (per R79 reviewer):** The dSph tension has three possible outcomes:
-- **Resolution by narrower width (D-5):** If σ_1 ≤ 3.0 km/s (FWHM ≤ 7.1 km/s) is consistent with the eight-channel dataset, the dSph gravothermal tail is suppressed while preserving the Cloud-9 bulk σ/m (σ_1 = 3.0 km/s gives exp(-(15-29.4)²/(2×3.0²)) ≈ 8×10⁻⁵ ≈ 0 contribution at V_max = 15 km/s). **R81 D-5 FIT RESULT (T236, full likelihood): σ_1 = 1.0 km/s is the maximum-likelihood value.** Likelihood ratio vs baseline σ_1 = 4.4: Δlog L = **+346** (PREFERRED, >5σ criterion). Per-channel breakdown (T236): the Fornax dSph channel is the **only discriminating channel** in the 8-channel fit. σ_1 = 4.4 baseline gives σ/m(Fornax V_max=18) = 6.07 cm²/g with log L = -344; σ_1 = 1.0 gives σ/m(Fornax V_max=18) = 0 cm²/g with log L = 0 (no penalty). Cloud-9 log L changes from -2.4 to -0.7 (factor 2.4); all other channels (SPARC, JVAS, Draco, Sculptor, UFD, Cluster) are essentially unchanged.
+- **Resolution by narrower width (D-5):** If σ_1 ≤ 3.0 km/s (FWHM ≤ 7.1 km/s) is consistent with the eight-channel dataset, the dSph gravothermal tail is suppressed while preserving the Cloud-9 bulk σ/m (σ_1 = 3.0 km/s gives exp(-(15-29.4)²/(2×3.0²)) ≈ 8×10⁻⁵ ≈ 0 contribution at V_max = 15 km/s). **R81 D-5 FIT RESULT (T236, full likelihood, 8 channels): The 8-channel likelihood is dominated by Fornax's non-collapse constraint; the other seven channels do not discriminate σ_1 in the range 1–6 km/s. Per-channel breakdown:**
 
-**Per R81 reviewer observation:** "σ_1 is currently unconstrained by the 7 non-Fornax channels; the choice between 3.0 and 4.4 is a Fornax question, not an 8-channel question." The T236 fit confirms this: 7 of 8 channels give Δlog L < 1 between σ_1 = 4.4 and σ_1 = 1.0; only Fornax gives Δlog L = +344.
+| Channel | σ_1 = 4.4 baseline log L | σ_1 = 1.0 log L | Δlog L |
+|---------|--------------------------|-----------------|---------|
+| Cloud-9 (V_max=28) | -2.4 | -0.7 | +1.7 |
+| JVAS (V_max=15) | -2.0 | -2.0 | 0 |
+| SPARC (V_max=100) | -1.0 | -1.0 | 0 |
+| **Fornax (V_max=18)** | **-344** | **0** | **+344** |
+| Draco (V_max=10) | 0 | 0 | 0 |
+| Sculptor (V_max=9) | 0 | 0 | 0 |
+| UFD (V_max=3) | 0 | 0 | 0 |
+| Cluster (V_max=500) | 0 | 0 | 0 |
+| **Total** | **-349.5** | **-3.6** | **+346** |
 
-**Outcome (R81):** The framework's σ_1 = 4.4 km/s was **not derived from the 8-channel fit**; it was a phenomenological input chosen to fit Cloud-9. The 8-channel fit prefers σ_1 ≤ 1.0 km/s, which would suppress Fornax's predicted σ/m to zero (no collapse). The framework's current phenomenological width σ_1 = 4.4 km/s is **NOT consistent with the 8-channel dataset** if Fornax is added as a dSph no-collapse constraint. The framework is **falsified at dSph scales** under the current σ_1 = 4.4 km/s unless either: (a) σ_1 is reduced to ≤ 1.0 km/s, OR (b) N-body merger-history resolution (Silverman+ 2026) applies.
+The Δlog L ≈ +346 is almost entirely one channel (Fornax); the other seven pass trivially. The "8-channel fit" is a 1-channel constraint with seven channels that pass at any σ_1 in {1.0, 2.0, 3.0, 4.0, 4.4, 6.0}. The σ_1 = 4.4 km/s baseline fails Fornax's no-collapse constraint by a large margin (log L = -344 from σ/m = 6.07 cm²/g). σ_1 ≤ 3.0 km/s suppresses the Fornax tail to t_core ≥ 10 Gyr (consistent with no-collapse).
+
+**Maximum-likelihood σ_1 ≈ 1.0 km/s** (log L flat between 1.0 and 3.0 within Δlog L < 1; flat near-peak). This narrows the resonance to a delta-function-like window near v = 29.4 km/s. Per-channel effects at σ_1 = 1.0:
+- Cloud-9 (V_max=28): σ/m = 65.49 cm²/g (substantial; Cloud-9 remains consistent)
+- Fornax (V_max=18): σ/m = 0 cm²/g (no collapse; consistent)
+- Draco, Sculptor, UFD, Cluster, SPARC, JVAS: σ/m ≤ 0.5 cm²/g (essentially no resonance contribution)
+
+**R82 framework scope statement (per R81 reviewer):** The framework's primary supported prediction is Cloud-9 itself. At σ_1 ≲ 3.0 km/s, the resonance acts essentially only on Cloud-9 (V_max ~ 28 km/s, near v_target = 29.4) and essentially nothing outside a ±2 km/s window. The framework goes from "predicts a resonance that acts over a range of dwarf velocities" to "predicts a resonance that acts on Cloud-9 specifically and essentially nothing else." Whether this is a feature (Cloud-9 as unique prediction) or a limitation (framework has no explanatory reach beyond Cloud-9) is a judgment call, but it needs to be stated in §3.3.
+
+**R82 hierarchy constraint update (per R81 reviewer):** Under σ_1 = 1.0, the R72 ratio derivation changes. R72 anchored σ_DM-DM ~ 1 cm²/g at the "Cloud-9 benchmark"; under σ_1 = 4.4 this held at v ~ 100 (Gaussian tail extends that far). Under σ_1 = 1.0, σ/m at v = 100 is 0.052 cm²/g (background only); σ/m at v = 28 is 65.49 cm²/g.
+- Using σ_DM-DM at v = 100 (background only): ratio σ_DM-DM/σ_SI = 5.2×10⁴⁴ → g_N/g_χ < 4.4×10⁻²³
+- Using σ_DM-DM at v = 28 (Cloud-9): ratio σ_DM-DM/σ_SI = 6.5×10⁴⁷ → g_N/g_χ < 1.2×10⁻²⁴
+- **R72's 7.5×10⁻¹² was anchored to σ_DM-DM ~ 1 cm²/g; under σ_1 = 1.0, the anchor shifts.** The hierarchy constraint becomes much more restrictive (~10⁻²⁴ instead of ~10⁻¹¹).
+
+**R82 §10.7 hierarchy constraint update (per R81):**
+- **Primary value (used in thesis, abstract, all downstream claims):** **g_N/g_χ < 7.5×10⁻¹²** (R72 ratio derivation, σ_1 = 4.4 baseline)
+- **R82 update under σ_1 = 1.0:** g_N/g_χ < **~4×10⁻²³** (using σ_DM-DM = 0.052 cm²/g at v = 100) or g_N/g_χ < **~1×10⁻²⁴** (using σ_DM-DM = 65 cm²/g at v = 28)
+
+Both new values are more restrictive than the σ_1 = 4.4 headline by factor 10¹¹-10¹². The single-mediator Yukawa framework with σ_1 ≲ 3.0 km/s requires an even deeper dark-sector hierarchy than the σ_1 = 4.4 baseline indicated.
+
+**R82 paper §10.7 PATCH:** The R72 footnote (R75 PRIMARY/FOOTNOTE) needs to note that the hierarchy constraint **depends on σ_1**: under σ_1 = 1.0 (the D-5 fit maximum-likelihood), the ratio derivation changes and g_N/g_χ < 10⁻²³. The σ_1 = 4.4 baseline headline value 7.5×10⁻¹² holds under the σ_1 = 4.4 phenomenological width; under σ_1 ≲ 3.0, the constraint is tighter.
+
+**Outcome (R81):** **Per R82 reviewer correction: this is a parameter constraint, not framework falsification.** The framework with σ_1 ≲ 3.0 km/s is **NOT falsified** — it's consistent with the 8-channel dataset if Fornax is added as a no-collapse constraint. What's falsified (or constrained) is the parameter combination (σ_peak = 174 cm²/g, σ_1 = 4.4 km/s, m_χ = 1 GeV). Under the D-5 fit's preferred σ_1 ≲ 3.0 km/s, the framework is consistent.
 - **Open question (N-body resolution):** Silverman+ 2026 merger-history mechanism (sustained mergers suppress gravothermal collapse in roughly half of halos) may apply at dSph scale. Requires N-body with realistic merger histories.
 - **Falsification:** If no narrower width is consistent with the eight-channel dataset AND no merger-history correction applies, the framework is falsified at dSph scales. **R80 D-5 partial result: σ_1 = 3.0 km/s is a viable resolution; whether the eight-channel fit prefers 3.0 over 4.4 requires a full likelihood refit (deferred to v19.2-D; sensitivity analysis above shows the dSph channel strongly prefers 3.0).**
 
@@ -1885,11 +1917,18 @@ The hierarchy constraint g_N/g_χ < 3 × 10⁻¹¹ is robust to assumption varia
 
 This empirical statement does not depend on the specific 1/(32π) prefactor, (c/v)⁴ scaling, A_res enhancement, or mediator-mass dependence (those caused the R51-R70 errors). The coupling-structure assumption σ_DM-DM ∝ g_χ⁴ and σ_SI ∝ g_χ² g_N² is the standard single-mediator Yukawa structure; other coupling structures would give different scalings. The intermediate value g_χ = 2.93 × 10⁻³ from `constants.py` is replaced by this ratio-based derivation.
 
-**R73 g_N/g_χ reconciliation footnote (per R72 plan-reviewer; R75 PRIMARY/FOOTNOTE FLIP):**
+**R73 g_N/g_χ reconciliation footnote (per R72 plan-reviewer; R75 PRIMARY/FOOTNOTE FLIP; R82 σ_1-DEPENDENT update):**
 - **Primary value (used in thesis, abstract, all downstream claims):** **g_N/g_χ < 7.5 × 10⁻¹²** (R72 ratio derivation: σ_DM-DM/σ_SI ~ 1.78 × 10²² → g_χ/g_N = 1.34 × 10¹¹ → g_N/g_χ < 7.5 × 10⁻¹²)
 - **Footnote (older R57 derivation):** g_χ = 2.93 × 10⁻³ → g_N/g_χ < **3 × 10⁻¹¹**
 
-**R75 FLIP (per R74 reviewer):** The R72 ratio derivation is more reliable because it does not depend on the disputed g_χ formula. R70 acknowledged that constants.py's `g_chi_from_sigma_peak()` has a factor-320 mismatch with its Tulin-Yu citation, which propagates into R57's 3 × 10⁻¹¹. R72's derivation uses only the cross-section ratio (Cloud-9 σ_DM-DM ~ 1 cm²/g vs LZ σ_SI ~ 10⁻⁴⁶ cm²), no g_χ formula dependency. **The R72 value is the paper's primary statement;** R57 goes in the footnote. Both round to ~10⁻¹¹ at OOM.
+**R75 FLIP (per R74 reviewer):** The R72 ratio derivation is more reliable because it does not depend on the disputed g_χ formula. R70 acknowledged that constants.py's `g_chi_from_sigma_peak()` has a factor-320 mismatch with its Tulin-Yu citation, which propagates into R57's 3 × 10⁻¹¹. R72's derivation uses only the cross-section ratio (Cloud-9 σ_DM-DM ~ 1 cm²/g vs LZ σ_SI ~ 10⁻⁴⁶ cm²²), no g_χ formula dependency. **The R72 value is the paper's primary statement;** R57 goes in the footnote. Both round to ~10⁻¹¹ at OOM.
+
+**R82 σ_1-DEPENDENT update:** The R72 ratio derivation was anchored to σ_DM-DM ~ 1 cm²/g as the "Cloud-9 benchmark." Under σ_1 = 4.4 km/s (paper baseline), this holds at v ~ 100 km/s (Gaussian tail extends that far). Under σ_1 = 1.0 km/s (R81 D-5 fit maximum-likelihood), the resonance is concentrated at v = 29.4 km/s; σ/m at v = 100 is 0.052 cm²/g (background only). The hierarchy constraint shifts:
+- σ_1 = 4.4: g_N/g_χ < 7.5 × 10⁻¹² (R72 baseline)
+- σ_1 = 1.0, using σ_DM-DM at v = 100: g_N/g_χ < 4.4 × 10⁻²³
+- σ_1 = 1.0, using σ_DM-DM at v = 28 (Cloud-9): g_N/g_χ < 1.2 × 10⁻²⁴
+
+The headline 7.5×10⁻¹² holds under the σ_1 = 4.4 phenomenological width; under the D-5 preferred σ_1 ≲ 3.0 km/s, the hierarchy constraint becomes much more restrictive (~10⁻²³ to ~10⁻²⁴).
 
 **Thesis sentence (R61+R65 final; R68 precision fix):**
 
