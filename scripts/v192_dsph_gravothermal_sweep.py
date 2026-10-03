@@ -59,9 +59,9 @@ OUT_DIR = REPO / 'v0.3-prelim' / 'data' / 'results'
 
 # Paper convention (Gaussian, from v19.1.x Cloud-9 work)
 PHASE44_SIGMA_0 = 0.052  # cm^2/g at v=100 km/s
-PHASE44_A_SLOPE = 1.0
+PHASE44_A_SLOPE = 1.93  # R88 fix: Phase 44 free fit best_params[2] = 1.93 (was 1.0; R86 audit caught mismatch)
 V1_SIGMA_PEAK = 174.0  # cm^2/g
-V1_V_TARGET = 28.0  # km/s
+V1_V_TARGET = 29.4  # km/s (R74 fix: Phase 44 free fit = 29.36; constants.py = 29.4)
 V1_WIDTH = 4.4  # km/s Gaussian width
 
 # Two-component mixture

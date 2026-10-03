@@ -61,7 +61,7 @@ from channels_v03 import sigma_m_at_v as canonical_sigma_m_at_v
 
 # Phase 44 baseline parameters (canonical, from T208 source code):
 PHASE44_SIGMA_0 = 0.052  # cm^2/g at v=100 km/s
-PHASE44_A_SLOPE = 1.0     # v18.28 Rule-28 audit fixed value
+PHASE44_A_SLOPE = 1.93    # R88 fix: Phase 44 free fit best_params[2] = 1.92868 (was 1.0 in v18.28; R86 audit caught mismatch)
 
 
 def phase44_sigma_m_at_v(v_kms: float) -> float:
