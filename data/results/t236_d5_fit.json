@@ -1,0 +1,302 @@
+{
+  "script": "T236 (D-5 FIT)",
+  "description": "Full likelihood fit over sigma_1 (v_1 Gaussian width) with 8 channels",
+  "framework_constants": {
+    "M_CHI_GEV": 1.0,
+    "V_TARGET_KMS": 29.4,
+    "SIGMA_KMS_BASELINE": 4.4,
+    "SIGMA_PEAK_CM2_PER_G": 174.0
+  },
+  "channels": {
+    "Cloud-9 (V_max=28, sigma/m=100 cm^2/g)": {
+      "v": 28.0,
+      "target": 100.0,
+      "width": 30.0,
+      "type": "target"
+    },
+    "JVAS B1938+666 (V_max=15, sigma/m=100)": {
+      "v": 15.0,
+      "target": 100.0,
+      "width": 50.0,
+      "type": "target"
+    },
+    "SPARC (V_max=100, sigma/m=0.07)": {
+      "v": 100.0,
+      "target": 0.07,
+      "width": 0.05,
+      "type": "target"
+    },
+    "Fornax (V_max=18, no-collapse)": {
+      "v": 18.0,
+      "target": 0.5,
+      "width": 0.3,
+      "type": "upper"
+    },
+    "Draco (V_max=10, no-collapse)": {
+      "v": 10.0,
+      "target": 0.5,
+      "width": 0.3,
+      "type": "upper"
+    },
+    "Sculptor (V_max=9, no-collapse)": {
+      "v": 9.0,
+      "target": 0.5,
+      "width": 0.3,
+      "type": "upper"
+    },
+    "UFD Segue 1 (V_max=3, sigma/m<1)": {
+      "v": 3.0,
+      "target": 0.5,
+      "width": 0.5,
+      "type": "upper"
+    },
+    "Cluster (V_max=500, sigma/m<0.001)": {
+      "v": 500.0,
+      "target": 0.001,
+      "width": 0.001,
+      "type": "upper"
+    }
+  },
+  "sigma_1_values": [
+    1.0,
+    2.0,
+    3.0,
+    4.0,
+    4.4,
+    6.0
+  ],
+  "baseline_log_L": -349.5136541214304,
+  "preferred_sigma_1": 1.0,
+  "results_by_sigma_1": {
+    "1.0": {
+      "log_L": -3.6487796176538025,
+      "delta_log_L": 345.8648745037766,
+      "per_channel": {
+        "Cloud-9 (V_max=28, sigma/m=100 cm^2/g)": {
+          "sigma_m": 65.30413120014366,
+          "log_L": -0.6687796176538027
+        },
+        "JVAS B1938+666 (V_max=15, sigma/m=100)": {
+          "sigma_m": 1.632666059472575e-43,
+          "log_L": -2.0
+        },
+        "SPARC (V_max=100, sigma/m=0.07)": {
+          "sigma_m": 0.0,
+          "log_L": -0.98
+        },
+        "Fornax (V_max=18, no-collapse)": {
+          "sigma_m": 1.0473547681660833e-26,
+          "log_L": 0.0
+        },
+        "Draco (V_max=10, no-collapse)": {
+          "sigma_m": 3.2735097872532402e-80,
+          "log_L": 0.0
+        },
+        "Sculptor (V_max=9, no-collapse)": {
+          "sigma_m": 7.456816464034544e-89,
+          "log_L": 0.0
+        },
+        "UFD Segue 1 (V_max=3, sigma/m<1)": {
+          "sigma_m": 7.899656269380823e-150,
+          "log_L": 0.0
+        },
+        "Cluster (V_max=500, sigma/m<0.001)": {
+          "sigma_m": 0.0,
+          "log_L": 0.0
+        }
+      }
+    },
+    "2.0": {
+      "log_L": -3.707643766356131,
+      "delta_log_L": 345.8060103550743,
+      "per_channel": {
+        "Cloud-9 (V_max=28, sigma/m=100 cm^2/g)": {
+          "sigma_m": 136.19058965408513,
+          "log_L": -0.727643766394652
+        },
+        "JVAS B1938+666 (V_max=15, sigma/m=100)": {
+          "sigma_m": 9.630221524759833e-10,
+          "log_L": -1.9999999999614788
+        },
+        "SPARC (V_max=100, sigma/m=0.07)": {
+          "sigma_m": 4.524220579145836e-269,
+          "log_L": -0.98
+        },
+        "Fornax (V_max=18, no-collapse)": {
+          "sigma_m": 1.5326231801841426e-05,
+          "log_L": 0.0
+        },
+        "Draco (V_max=10, no-collapse)": {
+          "sigma_m": 6.444145641115126e-19,
+          "log_L": 0.0
+        },
+        "Sculptor (V_max=9, no-collapse)": {
+          "sigma_m": 4.451950221024713e-21,
+          "log_L": 0.0
+        },
+        "UFD Segue 1 (V_max=3, sigma/m<1)": {
+          "sigma_m": 2.539884600184694e-36,
+          "log_L": 0.0
+        },
+        "Cluster (V_max=500, sigma/m<0.001)": {
+          "sigma_m": 0.0,
+          "log_L": 0.0
+        }
+      }
+    },
+    "3.0": {
+      "log_L": -4.725167863386064,
+      "delta_log_L": 344.7884862580444,
+      "per_channel": {
+        "Cloud-9 (V_max=28, sigma/m=100 cm^2/g)": {
+          "sigma_m": 156.04843039595522,
+          "log_L": -1.7452369721390206
+        },
+        "JVAS B1938+666 (V_max=15, sigma/m=100)": {
+          "sigma_m": 0.0017277337492180914,
+          "log_L": -1.999930891247044
+        },
+        "SPARC (V_max=100, sigma/m=0.07)": {
+          "sigma_m": 9.561957606137136e-119,
+          "log_L": -0.98
+        },
+        "Fornax (V_max=18, no-collapse)": {
+          "sigma_m": 0.12733362088520236,
+          "log_L": 0.0
+        },
+        "Draco (V_max=10, no-collapse)": {
+          "sigma_m": 1.4452207257511414e-07,
+          "log_L": 0.0
+        },
+        "Sculptor (V_max=9, no-collapse)": {
+          "sigma_m": 1.5836559130209064e-08,
+          "log_L": 0.0
+        },
+        "UFD Segue 1 (V_max=3, sigma/m<1)": {
+          "sigma_m": 2.6586851448199105e-15,
+          "log_L": 0.0
+        },
+        "Cluster (V_max=500, sigma/m<0.001)": {
+          "sigma_m": 0.0,
+          "log_L": 0.0
+        }
+      }
+    },
+    "4.0": {
+      "log_L": -74.53101076889908,
+      "delta_log_L": 274.98264335253134,
+      "per_channel": {
+        "Cloud-9 (V_max=28, sigma/m=100 cm^2/g)": {
+          "sigma_m": 163.66232302539555,
+          "log_L": -2.2516063183276716
+        },
+        "JVAS B1938+666 (V_max=15, sigma/m=100)": {
+          "sigma_m": 0.26688305820245706,
+          "log_L": -1.9893389229852532
+        },
+        "SPARC (V_max=100, sigma/m=0.07)": {
+          "sigma_m": 3.9291433963643254e-66,
+          "log_L": -0.98
+        },
+        "Fornax (V_max=18, no-collapse)": {
+          "sigma_m": 2.997580008224512,
+          "log_L": -69.31006552758615
+        },
+        "Draco (V_max=10, no-collapse)": {
+          "sigma_m": 0.0013573857106020885,
+          "log_L": 0.0
+        },
+        "Sculptor (V_max=9, no-collapse)": {
+          "sigma_m": 0.00039133573826362827,
+          "log_L": 0.0
+        },
+        "UFD Segue 1 (V_max=3, sigma/m<1)": {
+          "sigma_m": 6.048050829357486e-08,
+          "log_L": 0.0
+        },
+        "Cluster (V_max=500, sigma/m<0.001)": {
+          "sigma_m": 0.0,
+          "log_L": 0.0
+        }
+      }
+    },
+    "4.4": {
+      "log_L": -349.5136541214304,
+      "delta_log_L": 0.0,
+      "per_channel": {
+        "Cloud-9 (V_max=28, sigma/m=100 cm^2/g)": {
+          "sigma_m": 165.41136037872957,
+          "log_L": -2.377025592553351
+        },
+        "JVAS B1938+666 (V_max=15, sigma/m=100)": {
+          "sigma_m": 0.8217520254731737,
+          "log_L": -1.9672649742593469
+        },
+        "SPARC (V_max=100, sigma/m=0.07)": {
+          "sigma_m": 2.1605104987143198e-54,
+          "log_L": -0.98
+        },
+        "Fornax (V_max=18, no-collapse)": {
+          "sigma_m": 6.065702356389137,
+          "log_L": -344.1893635546177
+        },
+        "Draco (V_max=10, no-collapse)": {
+          "sigma_m": 0.010451748195793104,
+          "log_L": 0.0
+        },
+        "Sculptor (V_max=9, no-collapse)": {
+          "sigma_m": 0.003739218730061258,
+          "log_L": 0.0
+        },
+        "UFD Segue 1 (V_max=3, sigma/m<1)": {
+          "sigma_m": 2.650016475580007e-06,
+          "log_L": 0.0
+        },
+        "Cluster (V_max=500, sigma/m<0.001)": {
+          "sigma_m": 0.0,
+          "log_L": 0.0
+        }
+      }
+    },
+    "6.0": {
+      "log_L": -8792.423068403721,
+      "delta_log_L": -8442.90941428229,
+      "per_channel": {
+        "Cloud-9 (V_max=28, sigma/m=100 cm^2/g)": {
+          "sigma_m": 169.32722357210088,
+          "log_L": -2.6701466267867
+        },
+        "JVAS B1938+666 (V_max=15, sigma/m=100)": {
+          "sigma_m": 9.767448733139274,
+          "log_L": -1.6283826616253299
+        },
+        "SPARC (V_max=100, sigma/m=0.07)": {
+          "sigma_m": 1.4981270293900938e-28,
+          "log_L": -0.98
+        },
+        "Fornax (V_max=18, no-collapse)": {
+          "sigma_m": 28.618555444424963,
+          "log_L": -8785.035114235563
+        },
+        "Draco (V_max=10, no-collapse)": {
+          "sigma_m": 0.9341045370240573,
+          "log_L": -2.0938527673874567
+        },
+        "Sculptor (V_max=9, no-collapse)": {
+          "sigma_m": 0.5374364810331983,
+          "log_L": -0.015572112357211289
+        },
+        "UFD Segue 1 (V_max=3, sigma/m<1)": {
+          "sigma_m": 0.010878741656818725,
+          "log_L": 0.0
+        },
+        "Cluster (V_max=500, sigma/m<0.001)": {
+          "sigma_m": 0.0,
+          "log_L": 0.0
+        }
+      }
+    }
+  },
+  "verdict": "PREFERRED: sigma_1 = 1.0 km/s (delta log L = +345.9 vs baseline)",
+  "outcome": "dSph tension RESOLVED by narrower width"
+}
