@@ -2235,7 +2235,7 @@ End of Annex A.
 
 **R86 framework status (per R85 reviewer Path B; Horigome assumes velocity-independence but framework is velocity-dependent):** The framework's BACKGROUND at all dSph velocities (v < 30 km/s) exceeds Horigome's 0.2 cm²/g threshold, even with a_slope = 1.93. **However, Horigome's Eq. 2 is dσ/dcosθ = (σ0/2) × [1 + (v/w)² sin²(θ/2)]² — this IS velocity-dependent.** The "velocity-independent case" cited in the abstract is the limit w → ∞. The framework's σ/m is velocity-dependent (a_slope = 1.93 + resonance). **Path B (per R85 reviewer):** The comparison is approximate because Horigome's bound is derived for a specific functional form (constant σ/m). The direct σ/m comparison "framework exceeds Horigome's threshold at v < 28 km/s" is true, but the velocity-dependent comparison requires re-running Horigome's analysis with the framework's σ/m(v) profile.
 
-**R87 PATH A (analytic per R86 reviewer; framework's σ/m(v) exceeds Horigome's threshold at all dSph velocities):**
+**R87 PATH B (per R86 reviewer; framework's σ/m(v) is above threshold at all dSph velocities, but no rigorous likelihood comparison):**
 
 Framework's total σ/m(v) = σ_0 × (100/v)^1.93 [Phase 44 best fit a_slope] + 174 × exp(-(v-29.4)²/(2×4.4²)) [resonance]:
 
@@ -2250,11 +2250,13 @@ Framework's total σ/m(v) = σ_0 × (100/v)^1.93 [Phase 44 best fit a_slope] + 1
 | 25 | | 0.75 | 105.5 | **106.3** | **531× above** |
 | 28 | Cloud-9 | 0.60 | 165.4 | **166.0** | **830× above** |
 
-**Path A conclusion:** Framework's σ/m(v) at all dSph velocities (v < 30 km/s) exceeds Horigome's 0.2 cm²/g threshold by factor 14-830× (resonance-dominated at v > 20). Per R86 reviewer: "If the framework's σ/m at those velocities is uniformly higher than 0.2, then the framework's profile is more constrained than the constant case, not less." **The framework is excluded by Horigome at all dSph velocities, regardless of σ_1.**
+**R87 Path B conclusion (per R86 reviewer):** "The framework's σ/m exceeds Horigome+ 2025's CDM-preference threshold by 10–27× at all dSph velocities (v < 28 km/s), and exceeds it by a factor of 830× at Cloud-9's velocity. Because Horigome's bound is derived for a different functional form (their Eq. 2 is the Rutherford-like form dσ/dcosθ = (σ0/2)[1 + (v/w)² sin²(θ/2)]², not the framework's v⁻¹·⁹³ Yukawa tail), we do not claim a rigorous likelihood exclusion; the magnitude of the excess, however, makes it unlikely that the velocity-dependence rescues the framework. A definitive exclusion requires re-running Horigome's SASHIMI likelihood with the framework's σ/m(v) profile."
+
+**R87 important note (per R86 reviewer):** "R86 defined Path A as re-running Horigome's SASHIMI likelihood. R87's analysis is **Path B**, not Path A — it is a direct σ/m comparison, not a likelihood comparison. The label 'Path A confirmed analytically' is incorrect; the actual claim is 'Path B with framework's σ/m well above threshold, so we expect exclusion, but we do not claim a rigorous likelihood comparison.'"
 
 **T192 Ωh² caveat (per R86 reviewer):** T192 used **m_χ = 10.3 GeV, m_Φh ≈ 20.7 GeV** — these do NOT match the framework's m_χ = 1 GeV, m_Φh ≈ 2 GeV (per Drobczyk-style two-mediator construction in T221). **R86 finding:** the framework's Ωh² = 0.119 claim (cited from T192) is at the wrong m_χ. The T221 framework at m_χ = 1 GeV, m_Φh = 2 GeV gives a different (lower) Ωh² — needs re-evaluation. **Per R86 reviewer: remove the Ωh² claim or recompute it at m_χ = 1 GeV.**
 
-**R87 systematic parameter audit (per R86 reviewer "the paper was built with 'convenient' values"):** R66 (m_χ), R74 (v_target), R76 (σ vs FWHM), R85/R86 (a_slope) are all the same class of error — paper used one value, Phase 44 fit produced another, paper was tighter on framework than the actual fit. **Pre-submission: re-run every parameter in the paper against Phase 44 best_params.**
+**R87 systematic parameter audit (per R86 reviewer "the paper was built with 'convenient' values"):** R66 (m_χ), R74 (v_target), R76 (σ vs FWHM), R85/R86 (a_slope), R87 (T192 m_χ) are all the same class of error — paper used one value, Phase 44 fit produced another, paper was tighter on framework than the actual fit. **Pre-submission systematic audit (~1 hr): list every numerical parameter in the paper, cross-check against phase44_joint_fit.json best_params, flag any mismatches.** This is the right response to the pattern, per R86 reviewer.
 
 [28] Chu, X.; García-Cely, A.; Murayama, H. (2019) Phys. Rev. Lett. 122, 071101 — published best-fit p-wave resonance. arXiv:1810.04709 (R60 verified).
 
