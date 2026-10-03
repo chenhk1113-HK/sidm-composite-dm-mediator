@@ -1923,18 +1923,28 @@ This empirical statement does not depend on the specific 1/(32π) prefactor, (c/
 
 **R75 FLIP (per R74 reviewer):** The R72 ratio derivation is more reliable because it does not depend on the disputed g_χ formula. R70 acknowledged that constants.py's `g_chi_from_sigma_peak()` has a factor-320 mismatch with its Tulin-Yu citation, which propagates into R57's 3 × 10⁻¹¹. R72's derivation uses only the cross-section ratio (Cloud-9 σ_DM-DM ~ 1 cm²/g vs LZ σ_SI ~ 10⁻⁴⁶ cm²²), no g_χ formula dependency. **The R72 value is the paper's primary statement;** R57 goes in the footnote. Both round to ~10⁻¹¹ at OOM.
 
-**R82 σ_1-DEPENDENT update:** The R72 ratio derivation was anchored to σ_DM-DM ~ 1 cm²/g as the "Cloud-9 benchmark." Under σ_1 = 4.4 km/s (paper baseline), this holds at v ~ 100 km/s (Gaussian tail extends that far). Under σ_1 = 1.0 km/s (R81 D-5 fit maximum-likelihood), the resonance is concentrated at v = 29.4 km/s; σ/m at v = 100 is 0.052 cm²/g (background only). The hierarchy constraint shifts:
-- σ_1 = 4.4: g_N/g_χ < 7.5 × 10⁻¹² (R72 baseline)
-- σ_1 = 1.0, using σ_DM-DM at v = 100: g_N/g_χ < 4.4 × 10⁻²³
-- σ_1 = 1.0, using σ_DM-DM at v = 28 (Cloud-9): g_N/g_χ < 1.2 × 10⁻²⁴
+**R82 σ_1-DEPENDENT update (R83 ARITHMETIC FIX, 1/√ratio not 1/ratio):** The R72 ratio derivation was anchored to σ_DM-DM ~ 1 cm²/g as the "Cloud-9 benchmark." Under σ_1 = 4.4 km/s (paper baseline), this held at v ~ 100 km/s (Gaussian tail extends that far). Under σ_1 = 1.0 km/s (R81 D-5 fit maximum-likelihood), the resonance is concentrated at v = 29.4 km/s; σ/m at v = 100 is 0.052 cm²/g (background only). The hierarchy constraint shifts depending on which velocity you anchor at:
 
-The headline 7.5×10⁻¹² holds under the σ_1 = 4.4 phenomenological width; under the D-5 preferred σ_1 ≲ 3.0 km/s, the hierarchy constraint becomes much more restrictive (~10⁻²³ to ~10⁻²⁴).
+| σ_1 (km/s) | Anchor velocity | σ/m at anchor | σ_DM-DM per particle | ratio | √ratio | g_N/g_χ |
+|------------|-----------------|----------------|------------------------|--------|---------|---------|
+| 4.4 | v = 100 (R72 convention) | 0.052 | 9.27×10⁻²⁶ | 9.27×10²⁰ | 3.04×10¹⁰ | **< 3.3×10⁻¹¹** |
+| 4.4 | v = 28 (Cloud-9) | 165.6 | 2.95×10⁻²² | 2.95×10²⁴ | 1.72×10¹² | **< 5.8×10⁻¹³** |
+| 1.0 | v = 100 | 0.052 | 9.27×10⁻²⁶ | 9.27×10²⁰ | 3.04×10¹⁰ | < 3.3×10⁻¹¹ |
+| 1.0 | v = 28 (Cloud-9) | 65.5 | 1.17×10⁻²² | 1.17×10²⁴ | 1.08×10¹² | **< 9.3×10⁻¹³** |
+| 3.0 | v = 28 (Cloud-9) | 156.2 | 2.79×10⁻²² | 2.79×10²⁴ | 1.67×10¹² | < 6.0×10⁻¹³ |
+
+**R83 CORRECTED VALUE (per R83 reviewer; using σ/m at v = 28 Cloud-9 anchor):**
+- **g_N/g_χ < 1×10⁻¹²** (under σ_1 = 4.4, σ_1 = 3.0, OR σ_1 = 1.0; all give values in the 6-9×10⁻¹³ range)
+- The R72 headline **7.5×10⁻¹² was anchored to σ_DM-DM ~ 1 cm²/g** which under σ_1 = 4.4 km/s was approximately sigma/m at v = 100 (Gaussian tail extends that far)
+- **The revised headline (R83) is g_N/g_χ < ~10⁻¹³ to 10⁻¹²** (using the Cloud-9 velocity v = 28 anchor)
+
+The hierarchy constraint is now correctly stated: under the σ_1 ≲ 3.0 km/s preferred width from R81 D-5 fit, **g_N/g_χ < ~10⁻¹²** is the paper's primary value. R57's 3×10⁻¹¹ and R72's 7.5×10⁻¹² are footnotes (R72 used the v = 100 anchor; the v = 28 anchor tightens by factor ~2). Thesis sentence framing should be updated to "of order 10⁻¹³ to 10⁻¹²" (R83).
 
 **Thesis sentence (R61+R65 final; R68 precision fix):**
 
 "The framework's σ_peak = 174 cm²/g is a phenomenological fit, not a UV-derived prediction. Its compatibility with LZ requires, for a single-mediator Yukawa completion, a dark-sector hierarchy of order 10⁻¹¹ between the DM self-coupling and the DM-nucleon coupling, placing the framework in the dark-sector paradigm."
 
-**R75 thesis update (per R74 reviewer; R72 ratio as primary):** The precise constraint from the ratio derivation is **g_N/g_χ < 7.5 × 10⁻¹²** (factor ~4 tighter than the 3 × 10⁻¹¹ OOM form). The "of order 10⁻¹¹" framing in the thesis sentence captures both values without committing to either; the precise 7.5×10⁻¹² is in §10.7 (R75 primary).
+**R83 thesis update (per R83 reviewer; R72 ratio + R83 v = 28 anchor as primary):** The precise constraint from the ratio derivation (using σ/m at v = 28 Cloud-9 anchor) is **g_N/g_χ < ~10⁻¹³ to 10⁻¹²** (factor ~2 tighter than the R72 7.5×10⁻¹² headline). The "of order 10⁻¹¹" framing in the thesis sentence is loose; the precise value is **of order 10⁻¹²** under σ_1 = 4.4 km/s baseline or σ_1 ≲ 3.0 km/s from R81 D-5 fit.
 
 Two sentences (parenthetical inside), 48 words. Per R68 reviewer: "Adding three words — 'for a single-mediator Yukawa completion' — would make it precise without lengthening it much." This precision fix addresses the concern that "requires a dark-sector hierarchy" might be read as a general statement rather than specifically a constraint on single-mediator Yukawa models.
 
