@@ -1,41 +1,45 @@
-# v19.2-D Plan — Prioritized (R79, headline framing fixed)
+# v19.2-D Plan — Prioritized (R80, three R79 reviewer issues resolved)
 
 **Date:** 2026-10-01
-**Status:** v19.2-C milestone in `c486782`, R72-R78 in `7f82a7c`/`4017499`/`03888ab`/`7aa10d7`/`d4e464c`/`51d6fcc`/`e90d0e6`, R79 in this commit
+**Status:** v19.2-C milestone in `c486782`, R72-R79 in `7f82a7c`/`4017499`/`03888ab`/`7aa10d7`/`d4e464c`/`51d6fcc`/`e90d0e6`/`c546dee`, R80 in this commit
 
 ---
 
-## R78 plan-reviewer feedback → R79 resolutions
+## R79 plan-reviewer feedback → R80 resolutions
 
-### Issue 1 — Headline framing backwards — RESOLVED
+### Issue 1 — ρ_s = 0.05 row V_max ambiguity — RESOLVED
 
-**Reviewer:** "If 15 is the outlier and 18 is canonical, then the paper's headline is the most generous case, not the representative one. For a framework limitation, the honest headline is: 'The framework predicts collapse for Fornax-like halos in 0.25-5 Gyr, with canonical Fornax parameters (V_max = 18 km/s) giving t_core ≈ 0.8 Gyr.'"
+**Reviewer:** "If V_max = 15 and ρ_s = 0.05, t_core = 5.07 × 0.4 = 2.03, not 0.31. So the ρ_s = 0.05 row must use V_max = 18."
 
-**Resolution:** **R79 §3.3** now states the framework tension as a **range** (0.25–5.07 Gyr) with the **canonical V_max = 18 km/s giving t_core ≈ 0.78 Gyr as the representative tension** (not the V_max = 15 headline). Headline V_max = 15 km/s is explicitly labeled "generous lower bound."
+**Resolution:** R80 sensitivity table restructured with explicit V_max column. Each row shows V_max and ρ_s clearly:
+- V_max = 18, ρ_s = 0.05 → σ/m = 6.35 cm²/g → t_core = **0.31 Gyr** (factor 0.4 from ρ_s × 2.5; canonical V_max 18, canonical ρ_s 0.05)
 
-### Issue 2 — σ_peak sensitivity "±15%" → "±10%" — RESOLVED
+### Issue 2 — Fornax core citation (stellar vs DM) — RESOLVED
 
-**Reviewer:** "The range 4.59–5.62 is ±10% around 5.07, not ±15%. If '±15%' refers to the σ_peak variation, then that's correct, but the sentence should say 't_core is stable to within ±10% for ±15% changes in σ_peak.'"
+**Reviewer:** "Is this the DM core or the stellar core? Mateo 1998 is a review; the M_c ~ 10⁷ M☉ likely refers to Fornax's stellar mass. If the paper wants to say 'Fornax has a diffuse DM core,' cite Walker+ 2009, Read+ 2019, or Hayashi+ 2020."
 
-**Resolution:** R79 §3.3 now reads: "t_core is stable to within ±10% for ±15% changes in σ_peak (4.59 Gyr at σ_peak=200 → 5.62 Gyr at σ_peak=150, both around the 5.07 Gyr headline)."
+**Resolution:** R80 §3.3 citation corrected:
+- DM core: **Walker+ 2009 / Read+ 2019 / Hayashi+ 2020** (kinematic decomposition)
+- NOT Mateo 1998 (which gives stellar mass, not DM core)
+- Peñarrubia+ 2008: dynamical mass profile (different quantity)
 
-### Issue 3 — σ = 4.4 km/s sourcing — RESOLVED
+### Issue 3 — Implication statement (tension + resolution path + falsification criterion) — RESOLVED
 
-**Reviewer:** "If it's a free parameter chosen to satisfy the eight channels, state that: 'σ = 4.4 km/s is the value that best fits the eight-channel constraint set; it is treated as a phenomenological input.'"
+**Reviewer:** "The paper should say which outcome: Falsification, Open question, or Constraint. Given D-5 is the test, the paper's interim statement should be: 'The framework predicts collapse for Fornax-like halos on timescales of <1 Gyr. This is a real tension with observations. The framework's phenomenological width σ = 4.4 km/s may be too broad; a narrower width (σ ≲ 3 km/s) would suppress the dSph tail while preserving the Cloud-9 bulk (see §D-5). If no such width is consistent with the eight-channel dataset, the framework is falsified at dSph scales.'"
 
-**Resolution:** R79 §3.3: σ = 4.4 km/s is the value that best fits the eight-channel constraint set; treated as phenomenological input.
+**Resolution:** R80 §3.3 adds three-outcome statement:
+- **Resolution by narrower width (D-5):** σ_1 ≤ 3.0 km/s consistent with 8 channels → tension resolved
+- **Open question (N-body resolution):** Silverman+ 2026 merger-history mechanism
+- **Falsification:** If no narrower width works AND no merger correction → framework falsified at dSph scales
+
+**Interim conclusion** explicitly stated in §3.3.
 
 ---
 
-# DO NOW (unchanged from R78)
+# DO NOW (unchanged from R79)
 
-1. R79 patches DONE in this commit:
-   - Framework tension range stated (0.25–5.07 Gyr)
-   - Canonical V_max = 18 km/s → t_core = 0.78 Gyr (representative)
-   - σ_peak sensitivity ±10% for ±15% changes (corrected)
-   - σ = 4.4 km/s: phenomenological input for 8-channel fit
-
-2. D-5 σ_peak width test
+1. R80 patches DONE in this commit
+2. D-5 σ_peak width test (4-6 hr) — THE critical test for §3.3 falsification criterion
 3. D-8 post-diction audit
 4. D-13 reference audit
 5. Abstract readability (200 words)
@@ -44,31 +48,13 @@
 
 ---
 
-# Submission checklist (R79)
+# Submission checklist (R80)
 
-- [x] R72 ratio arithmetic fix
-- [x] R72 m_chi-independence statement
-- [x] R72 single-mediator coupling assumption note
-- [x] R73 g_N/g_χ PRIMARY=3e-11 (state at R73)
-- [x] R74 v_target = 29.4 km/s
-- [x] R75 g_N/g_χ FLIP PRIMARY=7.5e-12 (current)
-- [x] R75 σ/m(Fornax V_max=15) = 1.17 cm²/g, t_core = 5.07 Gyr
-- [x] R76 constants.py FWHM_KMS → SIGMA_KMS rename
-- [x] R76 σ_peak = 174 CAUSALITY CAP
-- [x] R76 t_core = 5.07 Gyr: explicit derivation
-- [x] R76 FWHM/σ_peak independence
-- [x] R77 Walker+ 2009 → Mateo+ 1998 citation fix
-- [x] R77 σ_peak sensitivity added
-- [x] R77 Fornax canonical sensitivity added
-- [x] R77 Balberg+ 2002 ApJ 568, 475 Eq. 22 citation
-- [x] R78 σ/m RECOMPUTED at each V_max (not assumed fixed)
-- [x] R78 Fornax V_max = 18 gives t_core = 0.78 Gyr (6.5× worse)
-- [x] R78 σ = 4.4 km/s explicitly phenomenological
-- [x] R78 σ_peak sensitivity RECOMPUTED (5.62/5.07/4.59)
-- [x] R79 Framework tension range stated (0.25-5.07 Gyr); canonical V_max = 18 = 0.78 Gyr is REPRESENTATIVE
-- [x] R79 σ_peak sensitivity ±10% for ±15% changes (corrected)
-- [x] R79 σ = 4.4 km/s: phenomenological input for 8-channel fit
-- [ ] D-5: σ_peak width test
+- [x] R72-R79 all previous patches
+- [x] R80 ρ_s = 0.05 row V_max explicit
+- [x] R80 Fornax DM core citation corrected (Walker+ 2009, Read+ 2019, Hayashi+ 2020)
+- [x] R80 Implication statement: 3 outcomes + interim conclusion
+- [ ] D-5: σ_peak width test (σ_1 ≤ 3.0 km/s test for §3.3 resolution)
 - [ ] D-8: Post-diction audit
 - [ ] D-13: Reference audit
 - [ ] Abstract 200 words
@@ -77,6 +63,6 @@
 
 ---
 
-*Plan revised 2026-10-01 per R78 reviewer feedback*
+*Plan revised 2026-10-01 per R79 reviewer feedback*
 *Stored at `v0.3-prelim/docs/V192_D_PRIORITIZED_PLAN_2026-10-01.md`*
-*Will be re-uploaded as R79 (commit pending)*
+*Will be re-uploaded as R80 (commit pending)*
