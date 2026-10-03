@@ -2194,7 +2194,7 @@ End of Annex A.
 
 [15e] Robles, V. H.; et al. — T120 multi-component SIDM phenomenology.
 
-[15f] Drobczyk, M. (2025) Class. Quantum Grav. 42 225006; arXiv:2506.22997 — "Naturally resonant two-mediator model of self-interacting dark matter with decoupled relic abundance." Two-mediator UV completion with optional walking SU(3)_H N_f = 10 (Section 10.3).
+[15f] Drobczyk, M. (2025) Class. Quantum Grav. 42 225006; arXiv:2506.22997 — "Naturally resonant two-mediator model of self-interacting dark matter with decoupled relic abundance." Two-mediator UV completion with optional walking SU(3)_H N_f = 10 (Section 10.3). **R84 attribution correction:** arXiv abstract states corrected σ_SI ~ 6.7×10⁻⁵¹ cm² (below xenon neutrino floor). Paper's claim "Ωh² = 0.119 at δ = 0.43%" needs verification against Drobczyk's specific equation; the v3 abstract does not directly state Ωh² in this form.
 
 [16] Vegetti, S.; et al. (2010) Nature 481, 341 — JVAS B1938+666 strong-lensing substructure detection.
 
@@ -2206,9 +2206,11 @@ End of Annex A.
 
 [26a] Simon, J. D. (2019) Annual Review of Astronomy and Astrophysics 57, 375–420; arXiv:1901.05465 — "The Faintest Dwarf Galaxies." Comprehensive UFD observational review: stellar kinematics, mass modeling, chemical abundances, structural properties, tidal stripping constraints. 311+ citations.
 
-[27] Horigome, S.; et al. (2025) arXiv:2503.13650 — 95% CL upper limits on σ/m from Milky-Way dSph kinematics.
+[27] Horigome, S.; Hayashi, K.; Ando, S.; Ibe, M.; Shirai, S. (2025) arXiv:2503.13650 — "Stringent Constraints on Self-Interacting Dark Matter Using Milky-Way Satellite Galaxies Kinematics." **R84 attribution correction:** Abstract verbatim: "the combined analysis decisively prefers CDM to SIDM when σ/m exceeds ~0.2 cm²/g." This is a **decisive SIDM exclusion** at σ/m > 0.2 cm²/g, in tension with the framework's σ_peak = 174 cm²/g — NOT a "95% CL upper limit" claim as previously cited. The framework would need σ_peak ≲ 0.2 cm²/g to be consistent with this analysis.
 
-[28] Chu, X.; García-Cely, A.; Murayama, H. (2019) Phys. Rev. Lett. 122, 071101 — published best-fit p-wave resonance.
+[28] Chu, X.; García-Cely, A.; Murayama, H. (2019) Phys. Rev. Lett. 122, 071101 — published best-fit p-wave resonance. arXiv:1810.04709 (R60 verified).
+
+[52] Jia, Z.; et al. (2026) arXiv:2601.17118, MNRAS 549 stag969 — "SIDM Jeans Model: Adiabatic Contraction Semi-analytical Halo Profiles." Public GitHub: ZixiangJia/SIDM_Jeans_model. **R84 added:** cited in §10 but previously missing from References. Provides independent semi-analytical SIDM halo profile with adiabatic contraction; applicable to SPARC but **NOT integrated** (no LICENSE file in repo; cited as reference only per R52 user directive).
 
 [30] Yang, X.; Yu, H.-B. (2022) — kinematic convention v_eff = 0.64 × V_max for dSph σ/m constraints.
 
@@ -2228,11 +2230,11 @@ End of Annex A.
 
 [50b] Das, P.; Karmakar, B.; Mahapatra, S.; Paul, P. K. (2026) arXiv:2609.06825 [hep-ph] — "Inelastic Self-interacting Dark Matter and LUX-ZEPLIN 248 keV Event in a Dirac Modular Inverse Seesaw." 35+12 pages, 12 figures, 4 tables. A₄ modular symmetry + Dirac inverse seesaw; scalar mediator serves dual role for SIDM (light) and DM pseudo-Dirac Majorana mass splitting (inelastic). Explains LZ230616 via endothermic scattering kinematics. Predicts stochastic GW background from domain wall annihilation.
 
-[50c] Mace, C.; Yang, S.; Zeng, Z. C.; et al. (2026) arXiv:2506.14898v3 — "Self-interacting dark matter with mass segregation: a unified explanation of dwarf cores and small-scale lenses." Two-component SIDM (SIDM2v): σ_H/m_H = 6.89 cm²/g, w_H = 275 km/s, σ_x/m_H = 1.125 cm²/g, w_x = 2200 km/s, m_H/m_L = 3. **Per our §3 R39 computation:** σ_eff at v=28 km/s (Cloud-9) is at most 6.89 cm²/g (f_H=1), ~7× short of Cloud-9's σ/m ≥ 50 floor. Provides the unification framework that addresses all three of our model tensions.
+[50c] Yang, D.; Fan, Y.-Z.; Hou, S.; Tsai, Y.-L. S. (2026) arXiv:2506.14898v3, Science Bulletin 71, 1349-1356 — "Self-interacting dark matter with mass segregation: a unified explanation of dwarf cores and small-scale lenses." Two-component SIDM (SIDM2v): σ_H/m_H = 6.89 cm²/g, w_H = 275 km/s, σ_x/m_H = 1.125 cm²/g, w_x = 2200 km/s, m_H/m_L = 3. **R84 attribution correction:** arXiv:2506.14898 is by Yang, Fan, Hou, Tsai (2026), NOT Mace, Yang, Zeng as previously cited. **Per our §3 R39 computation:** σ_eff at v=28 km/s (Cloud-9) is at most 6.89 cm²/g (f_H=1), ~7× short of Cloud-9's σ/m ≥ 50 floor. Provides the unification framework that addresses all three of our model tensions.
 
 [50d] Kaplinghat, M.; Tulin, S.; Yu, H.-B. (2016) Phys. Rev. Lett. 116, 041302; arXiv:1508.03339 — "Dark Matter Halos as Particle Colliders: Unified Solution to Small-Scale Structure Puzzles from Dwarfs to Clusters." Foundational unified SIDM fit: σ/m ≈ 2 cm²/g on galaxy scales, σ/m ≈ 0.1 cm²/g on cluster scales; mildly velocity-dependent cross section inferred from fits to 12 dwarf/LSB galaxies and 6 clusters. Illustrates dark photon model as concrete UV completion.
 
-[51] Nadler, E. O.; et al. (2025) arXiv:2503.10748 — "SIDM Concerto: Compilation and Data Release of Self-interacting Dark Matter Zoom-in Simulations." 14 cosmological zoom-ins, public data release at Zenodo 14933624. Used in §9.6 Limitations as available source for data-derived f_H(r) profiles.
+[51] Nadler, E. O.; et al. (2025) arXiv:2503.10748 — "SIDM Concerto: Compilation and Data Release of Self-interacting Dark Matter Zoom-in Simulations." 14 cosmological zoom-ins, public data release at Zenodo 14933624. Published as ApJ 991, 69 (2025). **R84 attribution correction:** paper text says ApJ 983, 50A which is incorrect; that ApJ vol corresponds to a different paper (Adhikari+ 2025 [53]). Used in §9.6 Limitations as available source for data-derived f_H(r) profiles.
 
 [55a] Elbert, O. D.; Bullock, J. S.; Garrison-Kimmel, S.; Rocha, M.; Oñorbe, J.; Boylan-Kolchin, M. (2015) Mon. Not. R. Astron. Soc. 453, 29–37; arXiv:1412.1477 — "Core formation in dwarf haloes with self-interacting dark matter: no fine-tuning necessary." **This is the actual source of the Cloud-9 σ/m ≥ 50 cm²/g "floor" used in the framework.** Elbert+ 2015 used σ/m = 50 cm²/g as **the largest SIDM cross-section in their dwarf-galaxy simulation suite**, showing it remains viable at v_rms ~ 40 km/s. Per their abstract: "Our work suggests that SIDM cross-sections as large or larger than 50 cm²/g remain viable on velocity scales of dwarf galaxies." This is a **simulation upper end**, NOT a clean observational lower bound. Per R41 (r34.docx Issue 1): the framework's adoption of 50 cm²/g as a "Cloud-9 floor" was previously miscited as Benítez-Llambay+ 2024 (ApJ 973, 61) [1a]; correct attribution is Elbert+ 2015.
 
