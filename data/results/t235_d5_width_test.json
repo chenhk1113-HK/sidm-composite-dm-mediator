@@ -1,0 +1,100 @@
+{
+  "script": "T235 (D-5)",
+  "description": "Sigma peak width test: sigma_1 sweep over 8-channel dataset",
+  "framework_constants": {
+    "M_CHI_GEV": 1.0,
+    "V_TARGET_KMS": 29.4,
+    "SIGMA_KMS": 4.4,
+    "SIGMA_PEAK_CM2_PER_G": 174.0
+  },
+  "sigma_1_values": [
+    1.0,
+    2.0,
+    3.0,
+    4.0,
+    4.4,
+    6.0
+  ],
+  "results_by_sigma_1": {
+    "1.0": {
+      "per_channel_sigma_m_cm2_per_g": {
+        "Cloud-9": 65.48984548585794,
+        "Fornax (V_max=15)": 0.3466666666666667,
+        "Fornax (V_max=18)": 0.28888888888888886,
+        "Draco (V_max=10)": 0.52,
+        "Sculptor (V_max=9)": 0.5777777777777777,
+        "SPARC (V_max=100)": 0.052,
+        "Cluster (V_max=500)": 0.0104
+      },
+      "t_core_Fornax_canonical_Gyr": 17.096153846153843
+    },
+    "2.0": {
+      "per_channel_sigma_m_cm2_per_g": {
+        "Cloud-9": 136.3763039397994,
+        "Fornax (V_max=15)": 0.34666666762968884,
+        "Fornax (V_max=18)": 0.2889042151206907,
+        "Draco (V_max=10)": 0.52,
+        "Sculptor (V_max=9)": 0.5777777777777777,
+        "SPARC (V_max=100)": 0.052,
+        "Cluster (V_max=500)": 0.0104
+      },
+      "t_core_Fornax_canonical_Gyr": 17.095246903288174
+    },
+    "3.0": {
+      "per_channel_sigma_m_cm2_per_g": {
+        "Cloud-9": 156.2341446816695,
+        "Fornax (V_max=15)": 0.34839440041588476,
+        "Fornax (V_max=18)": 0.41622250977409125,
+        "Draco (V_max=10)": 0.5200001445220725,
+        "Sculptor (V_max=9)": 0.5777777936143369,
+        "SPARC (V_max=100)": 0.052,
+        "Cluster (V_max=500)": 0.0104
+      },
+      "t_core_Fornax_canonical_Gyr": 11.86598219199994
+    },
+    "4.0": {
+      "per_channel_sigma_m_cm2_per_g": {
+        "Cloud-9": 163.84803731110983,
+        "Fornax (V_max=15)": 0.6135497248691237,
+        "Fornax (V_max=18)": 3.2864688971134006,
+        "Draco (V_max=10)": 0.5213573857106021,
+        "Sculptor (V_max=9)": 0.5781691135160414,
+        "SPARC (V_max=100)": 0.052,
+        "Cluster (V_max=500)": 0.0104
+      },
+      "t_core_Fornax_canonical_Gyr": 1.5027949582078366
+    },
+    "4.4": {
+      "per_channel_sigma_m_cm2_per_g": {
+        "Cloud-9": 165.59707466444385,
+        "Fornax (V_max=15)": 1.1684186921398405,
+        "Fornax (V_max=18)": 6.3545912452780255,
+        "Draco (V_max=10)": 0.5304517481957931,
+        "Sculptor (V_max=9)": 0.581516996507839,
+        "SPARC (V_max=100)": 0.052,
+        "Cluster (V_max=500)": 0.0104
+      },
+      "t_core_Fornax_canonical_Gyr": 0.77721582683369
+    },
+    "6.0": {
+      "per_channel_sigma_m_cm2_per_g": {
+        "Cloud-9": 169.51293785781516,
+        "Fornax (V_max=15)": 10.11411539980594,
+        "Fornax (V_max=18)": 28.90744433331385,
+        "Draco (V_max=10)": 1.4541045370240573,
+        "Sculptor (V_max=9)": 1.1152142588109761,
+        "SPARC (V_max=100)": 0.052,
+        "Cluster (V_max=500)": 0.0104
+      },
+      "t_core_Fornax_canonical_Gyr": 0.17085179969358816
+    }
+  },
+  "interpretation": {
+    "current_sigma_1": 4.4,
+    "current_t_core_Fornax_Gyr": 0.77721582683369,
+    "narrow_sigma_1_3km_s_t_core_Fornax_Gyr": 11.86598219199994,
+    "dSph_tension_at_sigma_1_4_4": "t_core ~ 0.78 Gyr (collapse predicted <1 Gyr)",
+    "dSph_tension_at_sigma_1_3_0": "t_core ~ 11.87 Gyr",
+    "resolution": "sigma_1 = 3.0 km/s resolves tension"
+  }
+}
