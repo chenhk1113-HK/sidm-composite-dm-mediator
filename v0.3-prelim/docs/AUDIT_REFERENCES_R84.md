@@ -239,23 +239,55 @@
 
 ## Audit log statistics
 
-- **Total references in paper:** 45
-- **arXiv-verified (Tier A):** 12/15 (80%)
-- **Verified quantitative claims verbatim from abstract:** 6 (BLN24, Yang+ 2026 SIDM2v, Sánchez Almeida+, Silverman+, Kaplinghat+ 2016, Das+ 2026)
-- **Wrong attribution:** 1 ([50c] Mace+ → Yang+)
-- **Contradictory abstract:** 2 ([27] Horigome, [15f] Drobczyk)
-- **Missing from references:** 1 ([52] Jia SIDM_Jeans)
-- **Time spent:** ~25 minutes for 15 Tier A + 5 Tier B/C verifications (1.5 min/ref average)
-- **Estimated remaining:** ~30-45 minutes for remaining Tier B/C checks
+- **Total references in paper:** 45 (excluding missing [52] Jia which was added in R85)
+- **Coverage at audit time:**
+  - **Tier A (15 refs):** 15 verified via arXiv abstract pages (~25 minutes, ~1.5 min/ref average for arXiv-fetch + abstract-comparison)
+  - **Tier B (20 refs):** Not audited; flagged as "not yet verified" — R85 follow-up
+  - **Tier C (10 refs):** Not audited; flagged as "not yet verified" — R85 follow-up
+- **R84 audit timing was Tier A only** (~25 min for 15 Tier A refs). The "45 refs × 1.5 min" calculation in the original report was a projected full-coverage target, not the actual audit work.
+- **R85 escalation:** Tier B/C still not audited. Estimated ~30-45 min remaining for full coverage at minimal depth (Tier B: 20 refs × 2-3 min; Tier C: 10 refs × 1-2 min).
 
 ---
 
-## Next actions
+## R85 escalation (per R84 reviewer follow-up)
 
-1. **R85 patch:** Fix [50c], [27], [15f], [51] citation/claim issues
-2. **Add [52] Jia SIDM_Jeans** to References section
-3. **Continue Tier B/C checks** if time permits (~30 min for remaining 25 refs)
-4. **D-13 audit log** stored at `v0.3-prelim/docs/AUDIT_REFERENCES_R84.md`
+### Critical: Horigome [27] is a framework-level falsification, not σ_1-dependent tension
+
+Per R84 reviewer: "Check what this means at dSph velocities under the framework's background (not the resonance)."
+
+The framework's background Yukawa tail at dSph velocities (σ_m_at_v(0.052, 1.0, v)):
+
+| v (km/s) | channel | background σ/m (cm²/g) | Horigome threshold |
+|----------|---------|-------------------------|---------------------|
+| 9 | Sculptor | 0.578 | **3× above** |
+| 10 | Draco | 0.520 | **2.6× above** |
+| 12 | (typical UFD) | 0.433 | **2.2× above** |
+| 15 | Fornax (paper convention) | 0.347 | **1.7× above** |
+| 18 | Fornax canonical | 0.289 | **1.4× above** |
+| 20 | (canonical upper) | 0.260 | **1.3× above** |
+| 25 | | 0.208 | **1.04× above** |
+| 28 | Cloud-9 | 0.186 | below (but σ/m = 174 at resonance peak, far above) |
+
+**Conclusion:** Even at σ_1 → 0 (no resonance contribution), the framework's BACKGROUND σ/m at all dSph velocities (v < 28 km/s) exceeds Horigome's 0.2 cm²/g threshold. This means Horigome excludes the framework's **background** — not just the resonance component — across the entire dSph velocity range.
+
+**Framework status changes from "falsified at dSph under σ_1 = 4.4" to "falsified at dSph regardless of σ_1 unless Horigome's constraint is evaded"** (per R84 reviewer).
+
+**§3.3 of the paper now states this explicitly** (R85 patch).
+
+### Drobczyk [15f] qualifier → replacement (per R84)
+
+The R84 patch was a hedge (added qualifier "needs verification"). Per R84 reviewer: "A qualifier is a hedge, not a fix — remove it."
+
+Per R85 abstract fetch of arXiv:2506.22997:
+- **m_χ = 600 GeV** (not 1 GeV)
+- **m_φ = 15 MeV** (not 200 eV)
+- **m_Φh = 1201 GeV**
+- **σ_SI ~ 7×10⁻⁵¹ cm²** (below xenon neutrino floor; predicted LZ null)
+- **Ωh² = 0.120 ± 0.001** is the Planck constraint cited, not Drobczyk's prediction
+- **σ_T/m_χ ~ 0.1-1 cm²/g at dwarf velocities** is the framework's relevant number
+- **"δ = 0.43%"** is the FRAMEWORK's own detuning value (from T192 thermal-avg), NOT from Drobczyk. Drobczyk's analogous value is **δ = 0.083%**.
+
+**R85 fix:** [15f] citation replaced with verbatim benchmark parameters from abstract. Abstract "achieves thermal relic Ωh² = 0.119 at δ = 0.43%" rephrased to clarify framework's T192 calculation, with Drobczyk's actual benchmark (δ = 0.083%) noted as comparison.
 
 ---
 
