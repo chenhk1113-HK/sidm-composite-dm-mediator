@@ -718,7 +718,7 @@ The Cloud-9 σ/m ≥ 50 cm²/g floor at v ≈ 28 km/s (Benítez-Llambay+ 2024, A
 - Extreme: σ/m = 2.1×10⁴ cm²/g (gravothermal core-collapse phase)
 - CDM requires 7σ below median — strongly disfavored
 
-**Tests on standard Yukawa and resonant SIDM (T165–T172):**
+**Standard Yukawa and resonant SIDM fits:**
 
 | Test | Finding |
 |---|---|
@@ -728,7 +728,7 @@ The Cloud-9 σ/m ≥ 50 cm²/g floor at v ≈ 28 km/s (Benítez-Llambay+ 2024, A
 | T168 Lower-bound treatment | 7-pt fit (excluding Cloud-9) is excellent (RMSE=0.25) |
 | T169 Published range [50, 21000] | All RMSE < 2.0, model is moderately robust |
 
-**Resonant SIDM (T170–T172):**
+**Resonant SIDM tests:**
 
 | Test | Finding |
 |---|---|
@@ -756,13 +756,13 @@ The Cloud-9 σ/m ≥ 50 cm²/g floor at v ≈ 28 km/s (Benítez-Llambay+ 2024, A
 
 ### 10.4b verifications
 
-**T174 — Unitarity bound on Cloud-9 resonance.** The s-wave unitarity bound for equal-mass 2→2 scattering at non-zero CM velocity is:
+**Unitarity bound on the Cloud-9 resonance.** The s-wave unitarity bound for equal-mass 2→2 scattering at non-zero CM velocity is:
 
 σ_max(ℓ=0) = 4π / k_CM² = 16π / (m_χ² v²)
 
 For m_χ = 10.44 GeV and v = 28 km/s (Cloud-9 channel): σ_max/m (s-wave) = 1,106 cm²/g. The Phase 44 Cloud-9 peak (σ/m = 197 cm²/g) is at 18% of the s-wave unitarity bound; the v1.13 multi-component peak (σ/m = 128 cm²/g) is at 12%. The resonance is therefore perturbative, not non-perturbative, and the standard Breit-Wigner parameterization is self-consistent.
 
-**T175 — Re-test of no-go theorems at T163 best-fit parameters.** All four no-gos re-run with T163 parameters give qualitatively invariant verdicts because the failure mechanisms are independent of the specific (α, m_A, m_χ) point.
+**Re-test of no-go theorems at T163 best-fit parameters.** All four no-gos re-run with T163 parameters give qualitatively invariant verdicts because the failure mechanisms are independent of the specific (α, m_A, m_χ) point.
 
 The remaining two verifications from the original §10.4b list — M94 tidal distortion and Yoon+ 2026 N-body comparison — are deferred to a future version of this paper; the calculations exist as exploratory notebooks but have not been brought to the level of the verifications above (no proper citation chain for Yoon+ 2026, no full M94 tidal-stripping simulation). The two verifications presented here are the load-bearing ones for the framework's status.
 
