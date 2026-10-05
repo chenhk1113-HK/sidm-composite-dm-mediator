@@ -512,7 +512,7 @@ This section presents the UV completion status in 7 subsections:
  - §10.3 T184, T185, T190, T192 details
 -**§10.4a-e**Cloud-9 robustness: what standard Yukawa cannot do
  - §10.4a T165-T172 robustness investigation
- - §10.4b T174-T177 verifications
+ - §10.4b T174-T175 verifications (T176-T177 deferred)
  - §10.4c T178-T183 deferred items summary
 -**§10.5**EFT target map for future UV completions
 -**§10.5a**Testable predictions of the two-mediator UV completion 
