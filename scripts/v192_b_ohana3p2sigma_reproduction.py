@@ -187,16 +187,29 @@ def main():
         print(f"  {label:30s} (sigma_scatter={SIGMA_SCATTER_LITERATURE[label]:.3f} dex): "
               f"{t:.2f} sigma  [{match}, delta={delta:.2f}]")
 
+    # Compute tension at the fiducial point (c=4.0, M=4.7e9). The paper text
+    # quotes 3.16 sigma at the fiducial (matching Ohana+ 3.2 within 0.04) and
+    # 3.29 sigma at the MCMC best-fit. Print both for verification.
+    fiducial_c = 4.0
+    fiducial_M = 4.7e9
+    fiducial_tension = tension_sweep(fiducial_c, fiducial_M)
+    print()
+    print("--- Fiducial (c=4.0, M=4.7e9) tensions ---")
+    for label, t in fiducial_tension.items():
+        delta = abs(t - published_tension)
+        match = "MATCH" if delta < 0.5 else "CLOSE" if delta < 1.0 else "DISCREPANCY"
+        print(f"  {label:30s} (sigma_scatter={SIGMA_SCATTER_LITERATURE[label]:.3f} dex): "
+              f"{t:.2f} sigma  [{match}, delta={delta:.2f}]")
+
     # Save
     out_dir = REPO / "v0.3-prelim" / "data" / "results"
     out_dir.mkdir(parents=True, exist_ok=True)
     out = out_dir / "v192_b_ohana3p2sigma_reproduction.json"
 
-    # Pick the best literature value (Diemer+ 2019 model-dep is canonical)
-    # NOTE (per r31 + r33 verification): Ohana+ 2026 actually use 0.16 dex (DK14, NOT Diemer & Joyce 2019).
-    # not 0.085 dex. With 0.16 dex, our pipeline reproduces Ohana+'s 3.2 sigma
-    # essentially exactly (3.16 sigma at M=4.7e9, c=4.0).
-    canonical_tension = bf_tension["ohana2026"]
+    # Paper match_check uses the fiducial tension (3.16 sigma at c=4.0, M=4.7e9),
+    # NOT the MCMC best-fit (3.29 sigma). The "MATCHES Ohana+ 3.2 within 0.04 sigma"
+    # claim in the paper is verified against the fiducial.
+    canonical_tension = fiducial_tension["ohana2026"]  # 3.16 sigma at fiducial
 
     results = {
         "method": "Ohana+ 2026 SIDM tension via corrected Diemer+ 2019 c-M relation",

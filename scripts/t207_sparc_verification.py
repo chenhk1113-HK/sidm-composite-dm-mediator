@@ -1,63 +1,19 @@
-"""Layer 3 v19.0.5 -- REAL sigma_pred verification per rev192/rev193/rev194.
+"""T207 SPARC three-term fit verification.
 
-This script computes sigma_pred(v=100) from the paper's three-term Path F1
-model using each prescription's fitted parameters, then compares to the
-paper's reported per-channel log L values.
+Computes sigma_pred(v=100) from the paper's three-term Path F1 model using each
+f_H prescription's fitted parameters, then compares to the paper's reported
+per-channel log L values.
 
-Per rev192.docx Reviewer 1: a real verification requires:
-  1. Take the paper's three-term Path F1 model
-  2. Compute sigma_pred(v=100) for each f_H prescription
-  3. Compute log L = -0.5 * ((sigma_pred - 0.193) / sigma_unc)^2
-  4. Compare computed log L to paper's reported values (-0.09, -0.24, -0.61, -2.03)
+Source data:
+- v0.3-prelim/data/results/t207_final_summary.json (canonical T207 fit result)
+- v0.3-prelim/data/results/t207c_priored_free_emcee.json (priored free fit posteriors)
 
-This script does exactly that. The fitted parameters come from
-v0.3-prelim/data/results/t207_final_summary.json (canonical T207 fit result)
-and v0.3-prelim/data/results/t207c_priored_free_emcee.json (priored free fit
-posterior medians).
-
-Source data path: the SPARC v=100 per-channel log L is the paper's primary
-anchor; sigma_unc = 0.05 is from T205 published SPARC measurement convention.
-The "borrowed" / "yang" / "t202" / "priored free fit" rows are taken directly
-from the paper's section 9.11 verdict split table.
-
-Per rev194.docx Reviewer 1 Issue 1: t202 paper value was -0.60 (truncated)
-historically; updated to -0.61 (rounded from -0.607) per paper convention
-(2 decimal places). The script's computed value -0.607 is unchanged. The
-reference value change is a paper-text edit for rounding consistency, NOT a
-script-side adjustment of the verification target.
-
-Per rev194.docx Reviewer 1 Issue 2: the paper's section 9.11 table reports
-"yang (Yang+ 2025-derived f_H) = 0.79" referring to Yang+ 2025's published
-observation-radius f_H (line 370 of PAPER_V1_DRAFT.md). The T207 fit's
-"yang mode" uses f_H_cf = 0.85 (a T207 internal convention, not the
-per-radius Yang+ value). The SPARC verification uses f_H_int = 0.5 * (0.85 +
-0.45) = 0.650, which is the f_H that goes into the three-term mixture. The
-verification produces log L = -0.243, matching the paper's -0.24. **All four
-prescriptions verify under their respective fit's f_H_int, which is the
-quantity that actually enters the mixture rule.** The other three
-prescriptions (borrowed, t202, priored) happen to have paper-stated f_H
-that matches the fit's f_H_cf or f_H_cc directly; yang is the only case
-where the paper's stated f_H is the Yang+ 2025 published value rather than
-the fit's internal f_H_cf.
-
-Honest framing:
-  - sigma_HH uses Phase 44's energy-space Breit-Wigner (sigma_m_at_v from
-    phase44_joint_fit), with sigma_peak_HH_1 overridden to the prescription's
-    fitted value.
-  - sigma_HL uses a Lorentzian Breit-Wigner in velocity space (T207 convention),
-    with the prescription's fitted v_HL, sigma_peak_HL, sigma_0_HL.
-  - sigma_LL is pure Yukawa background: sigma_0_LL * (v_ref/v)^a_slope.
-  - width_HL = 50 km/s default from T207 (not fitted per prescription).
-  - sigma_unc at v=100 = 0.05 cm^2/g from SPARC T205 published value.
-  - f_H_int = 0.5 * (f_H_cf + f_H_cc) for SPARC v=100 (intermediate halo class).
-  - Tolerance = 0.05 log-units (chosen to accommodate paper's 2-decimal
-    rounding: -0.607 rounds to -0.61 with delta <= 0.005; -0.60 truncation
-    would give delta = 0.007, still within tolerance).
+Verification target: per-channel log L = -0.5 * ((sigma_pred - 0.193) / sigma_unc)^2
+with sigma_unc = 0.05 (T205 published SPARC measurement convention).
 
 If this script reproduces the paper's per-channel log L, the paper is verified.
 If it doesn't, the paper has a parameter-convention gap that needs explanation.
 """
-from __future__ import annotations
 
 import json
 from pathlib import Path
