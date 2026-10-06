@@ -46,9 +46,9 @@ from constants import (
 
 # Phase 44 parameters (now imported from constants.py as CONST_SIGMA_0, CONST_A_SLOPE, CONST_V_REF)
 # Module-level aliases kept for backward compatibility (per R88(23) constants SSoT enforcement).
-SIGMA_0 = CONST_SIGMA_0  # cm^2/g
-A_SLOPE = CONST_A_SLOPE  # Phase 44 canonical (was 1.0 in v1.13 under Option A flattening)
-V_REF = CONST_V_REF  # km/s reference velocity
+SIGMA_0 = CONST_SIGMA_0  # cm^2/g  # R88(26) fix: 0.052 canonical Phase 44
+A_SLOPE = CONST_A_SLOPE  # Phase 44 canonical (was 1.0 in v1.13 under Option A flattening)  # R88(26) fix: 1.93 Phase 44 free-fit
+V_REF = CONST_V_REF  # km/s reference velocity  # R88(26) fix: 100.0 from constants.py
 TCROSS_CAP_FACTOR = 3.0  # enforce causality: t_core >= 3 * r_s / v_max
 
 # Subhalo parameters (Yu+ 2026)

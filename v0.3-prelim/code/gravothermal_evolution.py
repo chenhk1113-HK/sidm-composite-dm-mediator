@@ -282,7 +282,7 @@ def phase_aware_density_profile(
 # Cloud-9 vs. dSph phase-aware diagnostic table (Phase G4 SCAFFOLD)
 PHASE_DIAGNOSTIC_TABLE = {
     "Cloud-9": {"phase": "core-expansion", "sigma_m_at_v28_cm2_per_g": 166.0, "expected_central_density": "low"},
-    "Fornax": {"phase": "collapse" if False else "near-collapse", "sigma_m_at_v15_cm2_per_g": 2.85, "expected_central_density": "high"},
+    "Fornax": {"phase": "near-collapse", "sigma_m_at_v15_cm2_per_g": 2.85, "expected_central_density": "high"},
     "Sculptor": {"phase": "max-core-expansion", "sigma_m_at_v9_cm2_per_g": 5.43, "expected_central_density": "moderate"},
     "Draco": {"phase": "max-core-expansion", "sigma_m_at_v10_cm2_per_g": 4.44, "expected_central_density": "moderate"},
     "MW UFDs": {"phase": "collapse (per Fischer & Yu 2026)", "sigma_m_at_v15_cm2_per_g": 2.85, "expected_central_density": "high (varied)"},

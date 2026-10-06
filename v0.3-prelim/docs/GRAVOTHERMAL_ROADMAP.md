@@ -159,3 +159,9 @@ This is a stronger scientific claim than the current "constraint map" framing, b
 | G6 (KiSS-SIDM validation) | NOT STARTED | — |
 
 **Total estimated effort**: 12-16 weeks for full G1-G5 implementation; G6 is ongoing.
+
+**CRITICAL PATH (R88(26))**: Phase G1 is the gate for everything else. The Yang+ 2024 parametric density model must be implemented, calibrated against their Table 1, and validated against their simulation suite before any of G3-G5 can produce quantitative phase predictions. Without G1, the phase-diversity hypothesis is an assertion (the PHASE_DIAGNOSTIC_TABLE in `gravothermal_evolution.py` is currently an assertion, not a calculation). G2 (merger history) requires G1's predictions as input; G3 (Cloud-9 re-analysis) requires G1's phase priors; G4 (phase-diversity fit) requires G1's free σ/m(v; phase) within a single likelihood; G5 (UFD validation) requires G1's phase distribution to compare against observations.
+
+**Priority order**: G1 (3-4 weeks of focused work) → G2 → G3 → G4 → G5. G6 (KiSS-SIDM) is ongoing throughout G2-G5 and not on the critical path.
+
+**Why this matters for the paper's headline tension:** The σ_peak = 174 cm²/g viability at c = 12 (elevated to §2.6a in R88(26)) cannot be resolved by additional σ/m parameter tuning. It requires either (a) N-body verification at c = 12, or (b) the phase-aware framework in which Cloud-9 and Fornax are at different gravothermal phases. Both routes require the G1 calibration. Until G1 is done, the roadmap remains a plan, not a result.

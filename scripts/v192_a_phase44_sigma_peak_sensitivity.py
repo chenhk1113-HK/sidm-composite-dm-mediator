@@ -227,7 +227,7 @@ def main():
         "version": "v19.2-A.8",
         "date": "2026-09-30",
         "description": "Phase 44 sigma_peak_HH_1 sensitivity sweep -- canonical NFW + exact 1/sigma_m scaling; K=134.0 (r29 polish)",
-        "parameterization": "Gaussian (paper section 2.5): baseline + sigma_peak*exp(-(v-28)^2/(2*4.4^2))",
+        "parameterization": "Gaussian (paper section 2.5): baseline + sigma_peak*exp(-(v-29.4)^2/(2*4.4^2))  # R88(26) fix: 28 -> 29.4 canonical",
         "cloud9_canonical_nfw": "rho_crit = 1.381e-7 M_sun/pc^3, M_200 = 5e9 M_sun, c=12 or c=4, V_max self-consistent",
         "causality_criterion": f"t_core > {CAUSALITY_CAP} * t_cross (paper section 9.12)",
         "causality_cap": CAUSALITY_CAP,

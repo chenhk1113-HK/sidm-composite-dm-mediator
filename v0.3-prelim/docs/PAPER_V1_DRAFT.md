@@ -168,6 +168,31 @@ Code: `scripts/v192_a_phase44_sigma_peak_sensitivity.py`.**Findings table:**| σ
 
 The c = 12 vs c = 4 distinction is itself the c-M tension against ΛCDM (Ohana+ 2026). At c = 12, the Balberg+ analytical formula is unreliable for σ_peak ≥ 75; N-body is required, as §9.12 acknowledges.**Synthesis — what σ_peak reconciles Cloud-9 with the framework's causality criterion?**The framework is asking: given the published σ/m ≥ 50 cm²/g working benchmark (BLN24) and the paper's own causality criterion (ratio > 3), what σ_peak values satisfy both? At ΛCDM-standard concentration (c = 12), the answer is a knife-edge continuous window**[49.81, 57.24] cm²/g**(width ~7.43) — a narrow viable band centered at σ_peak ≈ 53.5 cm²/g. On the swept grid, only σ_peak = 50 falls inside this band (ratio = 3.43, just above the 3.0 cap). At Ohana+ concentration (c = 4), the answer is an open interval**[49.81, 250] cm²/g**across the entire swept range. The framework's canonical σ_peak = 174 satisfies the floor and passes causality only at c = 4 (Ohana+ physical anchor) — not at c = 12 (ΛCDM-conservative).**The synthesis: the σ_peak is not a free parameter once both the Cloud-9 floor and the causality criterion are imposed; at c = 12, it is constrained to ~50 cm²/g (a factor of 3.5× below the canonical framework value of 174); at c = 4, it is constrained to σ_peak ≥ ~50 cm²/g (consistent with the canonical framework value).**Footnote — V_max = 31.12 derivation:**V_max = 31.12 at c = 12 is**derived**from the canonical NFW profile at M_200 = 5×10⁹ M☉, ρ_crit = 1.381×10⁻⁷ M☉/pc³, evaluated at r_max = 2.1626 r_s. This is the same derivation §9.12 used (r_max = 2.16 r_s, post v18.43 T215 IC correction). The match is a consistency check, not a coincidence. At c = 4, the same derivation gives V_max = 25.59 km/s — §9.12 implicitly holds σ/m(V_max) constant across c rather than re-deriving V_max, which is the source of the 11% t_core discrepancy this sweep corrects.
 
+### 2.6a σ_peak viability at ΛCDM-standard concentration (headline tension)
+
+**First-class result (R88(26)) — the paper's most important internal tension, elevated from §2.6.**
+
+At ΛCDM-standard concentration (c = 12), the framework's canonical σ_peak = 174 cm²/g fails the paper's own causality criterion (t_core >= 3 × t_cross) by a factor of ~3.5. This is a structural circularity: the framework claims to explain the Cloud-9 c-M tension, but the headline parameter works only if Cloud-9 has an anomalously low concentration (c ~ 4), which is itself the c-M tension the framework is trying to explain.
+
+**Quantitative summary of the tension:**
+
+| Quantity | c = 12 (ΛCDM-standard) | c = 4 (Ohana+ inferred) |
+|---|---|---|
+| Continuous viable σ_peak window | [49.81, 57.24] cm²/g (knife-edge, ~7.43 wide) | [49.81, 250] cm²/g |
+| Canonical σ_peak = 174 cm²/g | **fails causality** (factor ~3.5 above window) | passes (interior of window) |
+| t_core at canonical σ_peak | 91 Myr (causality violated) | 3.98 Gyr |
+| Verdict at headline parameter | framework incompatible with ΛCDM | framework internally consistent |
+
+**Implications for the paper's central claims:**
+
+1. **Cloud-9 c-M tension:** The paper's headline (Cloud-9 c-M tension at 3.16σ against Ohana+ 2026's 3.2σ at the 0.16 dex DK14 convention) is itself the tension whose resolution would normally require σ_peak ≈ 174 cm²/g at the Ohana+ inferred c ~ 4. At c = 12 (the Ohana+ paper's population-median concentration), the framework cannot sustain σ_peak = 174 cm²/g.
+
+2. **dSph non-collapse:** Fornax σ_HL outlier (σ_HL_required = −0.47 cm²/g, unphysical negative) is a consequence of the v₁ Gaussian tail (σ₁ = 4.4 km/s) reaching v = 15. This is robust against c = 12 vs c = 4 selection. The Fornax tension is independent of the σ_peak viability tension at c = 12.
+
+3. **Path forward (gravothermal roadmap):** The c = 12 tension may resolve under phase-aware gravothermal modeling (G1-G6 in §A.10b and `GRAVOTHERMAL_ROADMAP.md`). The phase-diversity hypothesis predicts that halos at the same σ/m(v) but different gravothermal phases (core-expansion vs. collapse) should have different central densities. If Cloud-9 is in core-expansion phase and Fornax is in collapse phase, the same canonical σ_peak can satisfy both observations without requiring σ_HL_required < 0.
+
+**Honest framing:** This tension is not fatal for a constraint map + no-go catalogue paper. It does, however, imply that the framework's headline σ_peak = 174 cm²/g value is conditional on Cloud-9 having c ~ 4. A reader should encounter this before the dSph tension discussion in §3.6, because the dSph prediction depends on the same canonical σ_peak.
+
 ### 2.7 External Consistency Checks**Question:**Does the framework's Cloud-9 c-M tension and core-radius prediction agree with external observations (Ohana+ 2026 SIDM tension; Nadler+ 2025 SIDM Concerto)?**Method:**Two independent consistency checks, both at Cloud-9 mass scale (~5×10⁹ M☉).**Check 1 — v19.2-B: Ohana+ 2026 c-M tension reproduction**(`scripts/v192_b_ohana3p2sigma_reproduction.py`).
 
 **Scatter conventions used in this paper:**
