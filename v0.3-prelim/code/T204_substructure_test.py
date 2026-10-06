@@ -1,4 +1,5 @@
 """
+
 T204 — Substructure Test: Cloud-9 + JVAS + GD-1 + Fornax 6 as Core-Collapsed SIDM
                        (per Yu+ 2026 PRL 136, 141001 [23])
 
@@ -27,7 +28,7 @@ from pathlib import Path
 
 # Phase 44 parameters
 SIGMA_0 = 0.052  # cm^2/g
-A_SLOPE = 1.0  # v1.13 canonical (flattened from Phase 44's 1.93 via Option A)
+A_SLOPE = 1.93  # Phase 44 canonical (per constants.py and the paper's §3.6 canonical σ/m(v) table; was 1.0 in v1.13 under Option A flattening)
 TCROSS_CAP_FACTOR = 3.0  # enforce causality: t_core >= 3 * r_s / v_max
 V_REF = 100.0  # km/s reference velocity
 

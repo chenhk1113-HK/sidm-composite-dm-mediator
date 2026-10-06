@@ -3,7 +3,7 @@ T175 — Re-test 4 no-go theorems on T163 best-fit parameters.
 
 Per DeepSeek review1 (2026-09-21), all 4 no-gos in §10 were tested against
 the Phase 44 single-component baseline (sigma_0/m = 0.052 cm^2/g at v=100 km/s,
-m_chi = 10.44 GeV). The reviewer correctly noted that the project should
+m_chi = 1.0 GeV per constants.py canonical). The reviewer correctly noted that the project should
 verify the no-gos against the Phase 6+ T163 best fit (KK tower, alpha_D=0.3,
 m_0=0.3 GeV, r=1.5, n_modes=2, RMSE=1.408).
 
@@ -28,6 +28,12 @@ import sys
 import json
 sys.path.insert(0, r'C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\code')
 
+# Import M_CHI_GEV from constants.py (single source of truth)
+# Per reviewer (R88 v6 §3.4): constants.py declares m_chi = 1.0 GeV;
+# this script hardcoded 10.44 in 4 places. Import the canonical value.
+from constants import M_CHI_GEV as M_CHI_GEV_CANONICAL
+M_CHI_GEV_PHASE44 = M_CHI_GEV_CANONICAL  # alias for clarity
+
 # T163 best-fit parameters
 T163_BEST_FIT = {
     'alpha_D': 0.3,        # dark fine-structure constant
@@ -49,7 +55,10 @@ def magnetic_dipole_t163():
 
     The KEY argument is that the magnetic dipole moment mu_chi that gives
     sigma_DM-DM/m at v=100 also gives sigma_SI proportional to mu_chi^4/m_chi^2.
-    The ratio sigma_SI/LZ is INDEPENDENT of the specific sigma_DM-DM target.
+    The numerical VALUE of sigma_SI (and thus the ratio sigma_SI/LZ) DEPENDS
+    on the specific sigma_DM-DM target through the mu_chi that the target
+    requires. The SCALING of the verdict (i.e., whether sigma_SI is above or
+    below LZ) is invariant across the 0.05-0.2 cm^2/g target range.
 
     At v=100, sigma_DM-DM/m = 0.05-0.2 cm^2/g, but at v=28 km/s (Cloud-9),
     sigma_DM-DM/m = (0.05-0.2) × (100/28) = 0.18-0.71 cm^2/g -- still 70-280x
@@ -75,7 +84,7 @@ def magnetic_dipole_t163():
     print()
 
     # For completeness, also check LZ:
-    m_chi = 10.44
+    m_chi = M_CHI_GEV_PHASE44
     mu_chi_GeV = required_mu_chi_for_sigma_DM_DM(sigma0_at_v100, 100.0, m_chi)
     sigma_SI = sigma_SI_magnetic_dipole(m_chi, mu_chi_GeV)
     lz = lz_limit_2024(m_chi)
@@ -103,7 +112,7 @@ def magnetic_dipole_t163():
 def hidden_u1_t163():
     """Re-test Hidden U(1) kinematic forbiddance with T163 parameters.
 
-    KE_CM(28) for m_chi = 10.44 GeV: KE = 1/2 m_chi v^2 = 0.5 * 10.44 * (28/3e5)^2 GeV
+    KE_CM(28) for m_chi = M_CHI_GEV_PHASE44 GeV: KE = 1/2 m_chi v^2 = 0.5 * 10.44 * (28/3e5)^2 GeV
     = 0.5 * 10.44 * 8.7e-9 GeV = 4.55e-8 GeV = 0.0455 MeV
 
     For pseudo-Dirac splitting Delta m = 10 MeV:
@@ -111,7 +120,7 @@ def hidden_u1_t163():
 
     The kinematic forbiddance argument is INDEPENDENT of cross-section value.
     """
-    m_chi = 10.44  # GeV (Phase 44 default; T163 also uses m_chi ~ 10 GeV)
+    m_chi = M_CHI_GEV_PHASE44  # GeV (Phase 44 default; T163 also uses m_chi ~ 10 GeV)
     v_kms = 28.0
     c_kms = 2.998e5  # km/s
     v_ms = v_kms * 1e3  # m/s
@@ -122,7 +131,7 @@ def hidden_u1_t163():
     KE_CM_MeV = KE_CM_GeV * 1000
 
     print(f"No-go #2 (Hidden U(1) + 10 MeV pseudo-Dirac, T163 parameters):")
-    print(f"  KE_CM(v=28 km/s, m_chi=10.44 GeV) = {KE_CM_MeV:.4f} MeV")
+    print(f"  KE_CM(v=28 km/s, m_chi = M_CHI_GEV_PHASE44 GeV) = {KE_CM_MeV:.4f} MeV")
     print(f"  Required Delta m (DD evasion) = 100 keV = 0.1 MeV")
     print(f"  v1.13.5 attempted Delta m = 10 MeV = 100x above KE_CM")
     print(f"  Zhang 2016 allowed Delta m < alpha_D^2 m_chi = 24 keV at alpha_D=0.3")

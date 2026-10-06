@@ -290,7 +290,7 @@ results["verification_summary"] = {
     ),
 }
 
-out = REPO / "v0.3-prelim" / "data" / "results" / "jia2026_sparc_subset.json"
+out = REPO / "v0.3-prelim" / "data" / "results" / "t207_sparc_verification_subset.json"
 out.parent.mkdir(parents=True, exist_ok=True)
 with open(out, "w") as f:
     json.dump(results, f, indent=2)

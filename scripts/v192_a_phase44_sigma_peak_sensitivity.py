@@ -7,7 +7,7 @@ Per r26.docx (problem.docx) review:
   V_max at r_max = 2.16 r_s self-consistent at each c).
 - Issue 3: t_core at c=4 doesn't match §9.12's 4.42 Gyr. FIX: use canonical
   V_max at each c (not 31.12 constant). At canonical NFW c=4: V_max=25.59,
-  sigma/m(V_max)=150, t_core = 4.42 Gyr (matches §9.12 exactly).
+  sigma/m(V_max)=150, t_core = 3.98 Gyr (per the §10.4b Phase 44 re-verification; supersedes the §9.12 historical 4.42 Gyr).
 
 NFW self-consistent means each c has its own V_max. This is correct physics:
 - c=12 (LCDM-conservative): V_max=31.12, sigma/m(V_max)=135.5, t_core=0.091Gyr
