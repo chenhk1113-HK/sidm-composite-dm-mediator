@@ -7,7 +7,7 @@ BUG 1: phase44_sigma_HH_at_v returns ~10x larger sigma/m than the paper's
        (w=4.4 km/s); phase44_sigma_HH_at_v uses Breit-Wigner (gamma_frac=0.184).
        These are DIFFERENT parameterizations.
    FIX: Use the paper's sigma/m convention directly:
-        sigma/m(v) = sigma_m_at_v(0.052, 1.0, v) + 174 * exp(-(v-28)^2/(2*4.4^2))
+        sigma/m(v) = sigma_m_at_v(0.052, 1.93, v) + 174 * exp(-(v-29.4)^2/(2*4.4^2))  # R88(24) fix: 1.0 -> 1.93 (Phase 44 free-fit), 28 -> 29.4 (v_target)
 
 BUG 2: t_cross off by ~10 orders of magnitude. The script divided by
        1.022e-3 * 3.156e7 * 1e9 = 3.23e13 instead of multiplying by ~9.78e-4.

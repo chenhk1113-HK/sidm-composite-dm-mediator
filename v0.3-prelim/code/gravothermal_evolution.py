@@ -135,6 +135,40 @@ def phase_diagnostic(
         return "collapse"
 
 
+def parametric_density_yang2024_full(
+    v_max_kms: float,
+    r_s_pc: float,
+    sigma_m_cm2_per_g: float,
+    z_form: float = 3.0,
+    merger_flag: str = "quiescent",
+    phase: str = "core-expansion",
+) -> Tuple[float, float]:
+    """FULL Yang, Nadler, Yu & Zhong (2024) parametric density model.
+
+    **Phase G1 not yet implemented (R88(24)).**
+    This is the canonical-target function. It should:
+    1. Read the parametric fit parameters from Yang+ 2024 Table 1 (arXiv:2305.16176)
+    2. Return (central density, core radius) using their analytic density profile
+    3. Be validated against their published simulation output
+
+    See GRAVOTHERMAL_ROADMAP.md Phase G1 for the full implementation plan.
+
+    Per reviewer (Review_ SIDM2.docx §3.3): the placeholder implementation below
+    uses hard-coded density values and CANNOT be used to make quantitative
+    phase predictions. The PHASE_DIAGNOSTIC_TABLE is therefore an assertion,
+    not a calculation. Use parametric_density_yang2024_full() once it is
+    implemented; the placeholder below is retained for the simple sanity check
+    only and is clearly labelled as a SCAFFOLD.
+    """
+    raise NotImplementedError(
+        "Phase G1 not yet implemented. This function should implement the "
+        "Yang+ 2024 parametric density model (arXiv:2305.16176, Table 1). "
+        "See GRAVOTHERMAL_ROADMAP.md Phase G1. "
+        "For now, use parametric_density_yang2024() placeholder; the full model "
+        "is NOT usable for G3-G5 phase predictions."
+    )
+
+
 def parametric_density_yang2024(
     v_max_kms: float,
     r_s_pc: float,
@@ -143,7 +177,12 @@ def parametric_density_yang2024(
     merger_flag: str = "quiescent",
     phase: str = "core-expansion",
 ) -> Tuple[float, float]:
-    """Yang, Nadler, Yu & Zhong (2024) parametric density model.
+    """PLACEHOLDER Scaffolding for Yang, Nadler, Yu & Zhong (2024) parametric density model.
+
+    !! SCAFFOLD WARNING (R88(24)) !! This is NOT the actual Yang+ 2024 model.
+    It uses hard-coded density placeholders. For quantitative phase predictions,
+    use parametric_density_yang2024_full() (raises NotImplementedError until
+    Phase G1 is complete per GRAVOTHERMAL_ROADMAP.md).
 
     Returns (rho_central_msun_per_pc3, r_core_pc).
 

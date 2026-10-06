@@ -50,7 +50,6 @@ SIGMA_0 = CONST_SIGMA_0  # cm^2/g
 A_SLOPE = CONST_A_SLOPE  # Phase 44 canonical (was 1.0 in v1.13 under Option A flattening)
 V_REF = CONST_V_REF  # km/s reference velocity
 TCROSS_CAP_FACTOR = 3.0  # enforce causality: t_core >= 3 * r_s / v_max
-V_REF = 100.0  # km/s reference velocity
 
 # Subhalo parameters (Yu+ 2026)
 SUBHALO_MASS = 1e6  # M_sun (matches JVAS perturber)
