@@ -129,13 +129,12 @@ def main():
     # Cross time: use canonical T212 function for clarity and unit consistency.
     # Previously this was an opaque inline formula (r_s_pc / v_max) * (3.156e13 * 1e5) / (3.086e18).
     # Now imported from t212_silverman_gravothermal.
-    try:
-        from t212_silverman_gravothermal import t_cross_Gyr_from_r_vir_vmax
-        t_cross_Gyr = t_cross_Gyr_from_r_vir_vmax(r_s_pc, v_max_kms)
-        t_cross_Myr = t_cross_Gyr * 1000.0  # Gyr -> Myr
-    except ImportError:
-        # Fallback to inline formula (preserved for back-compat)
-        t_cross_Myr = (r_s_pc / v_max) * (3.156e13 * 1e5) / (3.086e18)
+# Now imported from t212_silverman_gravothermal.
+# Signature: t_cross_Gyr_from_r_vir_vmax(r_vir_pc, v_max_kms, c)
+    SUBHALO_C = 12  # NFW concentration for ΛCDM-conservative subhalos
+    r_vir_pc = SUBHALO_C * r_s_pc  # r_vir = c × r_s
+    t_cross_Gyr = t_cross_Gyr_from_r_vir_vmax(r_vir_pc, v_max_kms, c=SUBHALO_C)
+    t_cross_Myr = t_cross_Gyr * 1000.0  # Gyr -> Myr
     t_cross_cap_Gyr = TCROSS_CAP_FACTOR * t_cross_Myr / 1000.0
     t_core_capped = max(t_core, t_cross_cap_Gyr)
     t_core_for_verdict = t_core_capped  # use capped value for collapse check
