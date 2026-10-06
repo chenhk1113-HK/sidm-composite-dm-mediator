@@ -1,24 +1,24 @@
 """
 
-T204 — Substructure Test: Cloud-9 + JVAS + GD-1 + Fornax 6 as Core-Collapsed SIDM
+T204 — Substructure Test: Gravothermal Core-Collapse for a 10^6 M_sun SIDM Subhalo
                        (per Yu+ 2026 PRL 136, 141001 [23])
 
-Goal: Quantitatively test the Yu+ 2026 substructure framing at Phase 44 parameters.
-For each of the three "birds" (JVAS B1938+666, GD-1 stream, Fornax 6 cluster),
-compute the predicted subhalo density profile under Yu+ 2026's core-collapse model
-and compare to observations.
+Goal: Compute the gravothermal core-collapse timescale for a 10^6 M_sun SIDM subhalo
+under Phase 44 parameters, and check causality (t_core >= 3 × t_cross).
 
-Yu+ 2026 key result: a core-collapsed SIDM subhalo of M_halo ~ 10^6 M_sun produces
-a dense inner core (rho_core ~ 10^8 M_sun/pc^3) that simultaneously:
-  (a) matches the JVAS B1938+666 perturber (M = 1.13e6 M_sun within 80 pc)
-  (b) perturbs the GD-1 stellar stream
-  (c) explains Fornax 6 (M* = 7.2e3 M_sun, r_h = 11 pc, sigma = 5.6 km/s)
+What this script does (R88-corrected):
+- Computes sigma/m(V_max) using the Phase 44 canonical power-law form (A_SLOPE=1.93)
+- Computes the gravothermal core-collapse timescale t_core via Balberg+ 2002 Eq. 22
+- Computes the crossing time t_cross via the canonical T212 function
+  (t_cross_Gyr_from_r_vir_vmax)
+- Applies the causality cap (t_core >= 3 × t_cross)
+- Reports whether core-collapse completes within Hubble time at Phase 44 conditions
 
-The required condition is: gravothermal core-collapse is COMPLETE at z = 0
-for the subhalo, AND the cross-section at v ~ 1-5 km/s is high enough to drive
-collapse in a Hubble time.
+Outputs: t_core (Balberg+), t_cross, capped t_core, causality verdict.
 
-This script tests whether Phase 44 parameters satisfy this condition.
+Connection to Yu+ 2026: the script's verdict (YES/NO core-collapse in Hubble time)
+tests whether Phase 44 sigma/m drives the substructure channel described in
+Yu+ 2026 [23] (JVAS perturber, GD-1 stream, Fornax 6 — see Tests 2-4 below).
 """
 from __future__ import annotations
 import json
