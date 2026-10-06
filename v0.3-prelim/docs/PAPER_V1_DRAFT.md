@@ -6,8 +6,16 @@
 
 ## Abstract
 
-We show that a**velocity-dependent SIDM framework**constructed to explain Cloud-9's c-M tension is**in severe tension with Horigome+ 2025 [27] dSph preference thresholds (arXiv:2503.13650), while remaining consistent with Cloud-9 at the 0.16 dex scatter convention (matching Ohana+ 2026's 3.2σ within 0.04σ). The framework's σ_peak = 174 cm²/g at v_target = 29.4 km/s (Phase 44 free fit) exceeds Horigome+ 2025's CDM-preference threshold (σ/m > 0.2 cm²/g) by**10–27× at all dSph velocities (v < 28 km/s), and 830× at Cloud-9's velocity**. The exclusion is robust to the resonance width σ_1: the background Yukawa tail alone (a_slope = 1.93) exceeds the threshold. The comparison is approximate (Horigome+'s bound assumes a different σ(v,θ) form); a definitive exclusion (deferred to dedicated SASHIMI likelihood) requires re-running their SASHIMI likelihood with our σ(v,θ) form, which we do not perform here. Substantive result: the framework is**in tension with dSph observations**and**consistent with Cloud-9**— it cannot be the full SIDM solution. A hierarchy constraint follows: g_N/g_χ ≲ 10⁻¹³ for LZ compliance (anchored at v = 28, σ/m = 166 cm²/g). The derived dark fine-structure constant is α_χ ≈ 6.8×10⁻⁷. This is a post-diction, not a prediction: σ_peak was fixed first (causality cap), then the hierarchy was derived.**Five UV completion no-go theorems**(magnetic dipole, Hidden U(1) + pseudo-Dirac, GeV inelastic, Chu+ 2019 p-wave, thermal WIMP) apply. Under the ~50 cm²/g benchmark at dwarf velocities (Elbert+ 2015), Mace+ 2026 SIDM2v falls ~7× short at v = 28 km/s.
+We report a phenomenological study of a multi-resonance, velocity-dependent self-interacting dark matter (SIDM) parameterization constructed to match Cloud-9's c-M concentration-mass tension at the Ohana+ 2026 [15e] 0.16 dex scatter convention. Using the Gaussian resonance form σ/m(v) = σ₀ × (100/v)^a + σ_peak × exp(-(v-v_target)²/(2σ₁²)) with Phase 44 free-fit parameters (σ₀ = 0.052 cm²/g, a = 1.93, v_target = 29.4 km/s, σ_peak = 174 cm²/g, σ₁ = 4.4 km/s), we find:
 
+- The framework's σ/m(v) exceeds the Horigome+ 2025 [27] dSph preference threshold (σ/m > 0.2 cm²/g for a velocity-independent cross-section) by factors of 10–27× at v < 28 km/s and 830× at v = 29.4 km/s. The comparison is approximate — Horigome+'s bound assumes a different σ(v,θ) form than ours; a definitive exclusion requires re-running their SASHIMI likelihood with our σ(v,θ), which we do not perform here.
+- The framework is consistent with Cloud-9 at the 0.16 dex convention (3.16σ at the fiducial c = 4.0, M = 4.7 × 10⁹ M☉ point; 3.29σ at the MCMC-recovered best-fit; matching Ohana+ 2026's 3.2σ within 0.04σ). This is a c-M tension consistency check, not an SIDM model prediction.
+- At a_slope = 1.93 (Phase 44), substructure predictions for JVAS B1938+666, GD-1, and Fornax 6 fail a causality test: t_core = 13 Myr < t_cross = 58 Myr. The Yu+ 2026 [23] substructure mechanism does NOT operate at Phase 44 parameters. Under Option A flattening (a_slope = 1.0), the mechanism is operative but Option A is not the paper's parameter set.
+- A post-diction hierarchy constraint g_N/g_χ ≲ 10⁻¹³ is required for LZ compliance, anchored at the Cloud-9 velocity. σ_peak was fixed first (causality cap); the hierarchy was derived.
+- Five UV completion no-go theorems (magnetic dipole, Hidden U(1) + pseudo-Dirac, GeV inelastic, Chu+ 2019 p-wave, thermal WIMP) apply to the Phase 44 single-component baseline. Re-verification at the current a_slope = 1.93 + σ_peak = 174 point is deferred.
+- Under the Elbert+ 2015 working benchmark σ/m ≥ 50 cm²/g at v_rms ≈ 40 km/s (not an observational lower bound), Mace+ 2026 SIDM2v falls ~7× short at v = 28 km/s.
+
+The framework's quantitative success at Cloud-9 depends on the choice of hidrodynamic-to-thermal fraction f_H. With retracted borrowed f_H values the 8-channel fit passes 7/8; with any first-principles derived f_H (Yang+ 2025, T202 N-body), only 4/8 pass and Cloud-9 itself fails. The paper is best read as a constraint map and no-go catalogue, not a unified SIDM model. The contribution is the tension map between Cloud-9-scale and dSph-scale SIDM requirements.
 ## 1. Introduction
 
 **Note on internal references.** Numerical results in this paper are identified by internal test IDs (T-numbers, e.g., T174 for the unitarity bound verification, T207 for the SPARC three-term fit) that refer to specific calculations documented in `v0.3-prelim/code/` and the supplementary material. Literature citations are identified by author + year + reference number (e.g., [27] = Horigome+ 2025). The paper's revision history is denoted by vXX.Y format.
@@ -184,6 +192,31 @@ The c = 12 vs c = 4 distinction is itself the c-M tension against ΛCDM (Ohana+ 
 - v ∈ [20, 40] km/s: σ_eff = 6.89 cm²/g (saturated at low-v plateau; 7.26× short)
 - w_H ∈ [200, 350] km/s: σ_HH = 6.4-19.5 cm²/g (note: published Mace+ value is 6.89; >10 requires different σ_H_0)
 - σ_H_0 ∈ [5, 20] cm²/g: σ_HH = 5.0-20.0 cm²/g (at w_H=275)**Even at σ_H_0 = 20 cm²/g (3× the Mace+ value), σ_eff is 2.6× short of 50.**The σ_peak gap to Elbert+ 2015's benchmark is**structural to multi-component Yukawa fits**, not a fine-tuned artifact of Mace+ parameters. Reaching the benchmark needs σ_H_0 > 50 cm²/g (single-component heavy species with σ/m ~ 50 at v ~ 0), not multi-component SIDM2v.**Synthesis:**All three options converge. Option 1: σ_peak amplitude is Yukawa-feasible; resonance position/width needs additional UV physics. Option 2: shared-mediator requires g_portal ≲ 10⁻¹⁰ — testable. Option 3: σ_eff gap to Elbert+ 2015 is robust.**Open question for v19.2-D future work:**what UV physics produces the v = 29.4 km/s Breit-Wigner resonance AND admits a portal coupling g_portal satisfying LZ bounds?
+
+
+**Table: Canonical σ/m(v) — Gaussian form, Phase 44 free fit.**
+
+This is the SINGLE canonical σ/m(v) used throughout this paper for Horigome+ comparisons, substructure tests, and the hierarchy derivation. The form is:
+
+```
+σ/m(v) = σ₀ × (100/v)^a + σ_peak × exp(-(v-v_target)²/(2σ₁²))
+        = 0.052 × (100/v)^1.93 + 174 × exp(-(v-29.4)²/(2 × 4.4²))   cm²/g
+```
+
+| v (km/s) | Channel / regime          | σ/m (cm²/g) | vs Horigome threshold (0.2 cm²/g) |
+|----------|---------------------------|-------------|-----------------------------------|
+| 9        | Sculptor (dSph)           | 5.43        | **27× above** |
+| 10       | Draco (dSph)              | 4.44        | **22× above** |
+| 15       | Fornax (dSph)             | 2.85        | **14× above** |
+| 18       | Fornax canonical V_max    | 7.49        | **37× above** |
+| 28       | Cloud-9 anchor            | 166.0       | **830× above** |
+| 29.4     | v_target (resonance peak) | 174.6       | **873× above** |
+| 40       | Cluster LMC               | 9.86        | **49× above** |
+| 100      | Cluster v_ref (background)| 0.052       | 0.26× (below threshold) |
+
+**Convention:** All σ/m(v) values in this paper are computed with the Gaussian form above. The v²-space Breit–Wigner and v-space Breit–Wigner forms were cross-checked at §2 and produce the same qualitative verdict (>10× excess at dSph velocities); specific numbers quoted above use the Gaussian convention.
+
+**Horigome threshold caveat:** The 0.2 cm²/g threshold is from Horigome+ 2025's velocity-INDEPENDENT analysis. The framework's σ/m(v) is velocity-dependent (Gaussian resonance + power-law background). A proper comparison requires re-running Horigome+'s SASHIMI likelihood with our σ(v,θ) form; the 10–27× factors above are therefore an approximate upper bound on the true tension.
 
 ### 3.1 SPARC rotation curves**Data:**127 galaxies from the Spitzer Photometry and Accurate Rotation Curves (SPARC) sample [14].**Constraint:**σ/m at v ≈ 100 km/s should be ≈ 0.07 cm²/g for the rotation curves to be consistent with the observed V_flat in the inner core. Phase 33d tested all 127 SPARC galaxies;**115/127 = 90.6% pass the V_flat test**with the multi-resonance σ/m(v) architecture. This is consistent with, but not better than, single-Yukawa SIDM.**Result:**Multi-resonance architecture is consistent with SPARC.
 
@@ -769,4 +802,97 @@ For m_χ = 10.44 GeV and v = 28 km/s (Cloud-9 channel): σ_max/m (s-wave) = 1,10
 **Re-test of no-go theorems at T163 best-fit parameters.** All four no-gos re-run with T163 parameters give qualitatively invariant verdicts because the failure mechanisms are independent of the specific (α, m_A, m_χ) point.
 
 The remaining two verifications from the original §10.4b list — M94 tidal distortion and Yoon+ 2026 N-body comparison — are deferred to a future version of this paper; the calculations exist as exploratory notebooks but have not been brought to the level of the verifications above (no proper citation chain for Yoon+ 2026, no full M94 tidal-stripping simulation). The two verifications presented here are the load-bearing ones for the framework's status.
+
+---
+
+## Appendix A: Change Log
+
+This appendix consolidates the paper's revision history. The main text states only final numbers and verdicts; this appendix records what changed and why.
+
+### A.1 Parameter audit (R88, October 2026)
+
+Phase 44 free-fit parameters are the canonical reference throughout this paper. Earlier "convenient values" (m_χ = 10.44 GeV, σ_0 = 0.052 at a_slope = 1.0, σ_peak = 174 with v_target = 28) were corrected to:
+
+- m_χ = 1.0 GeV (constants.py)
+- σ_0 = 0.0516 cm²/g, a_slope = 1.93, v_target = 29.4 km/s, σ_peak = 178.5 cm²/g (Phase 44 best-fit)
+- σ_peak = 174 cm²/g retained as the **causality cap** (post-diction)
+- σ_1 = 4.4 km/s (Gaussian width, single Gaussian)
+
+### A.2 σ/m(v) convention convergence (R88)
+
+Three historical forms were used at different points:
+
+- v²-space Breit–Wigner (phase44_joint_fit, T207, two_component_three_term)
+- v-space Breit–Wigner (independent_sigma_m)
+- Gaussian (constants.py SIGMA_KMS = 4.4, v192_dsph_gravothermal_sweep, §2.5, §9.12)
+
+The Gaussian form is the **canonical convention** for Horigome+ comparisons in this paper. The BW forms differ from the Gaussian by factors of up to ~30× at resonance peaks; both BW forms were cross-checked at the §2 level and produce the same qualitative verdict (>10× excess at dSph velocities). Specific numerical values quoted in the abstract, §3, §9.12, and the canonical σ/m(v) table above use the Gaussian form.
+
+### A.3 Hierarchy derivation (R88, single worked example)
+
+Working with the canonical parameters:
+
+```
+σ_peak = 174 cm²/g          (causality cap)
+m_χ = 1.0 GeV = 1.78 × 10⁻²⁴ g
+σ_DM-DM (per particle) = σ_peak × m_χ = 174 × 1.78 × 10⁻²⁴ = 3.10 × 10⁻²² cm²
+σ_SI < 9.4 × 10⁻⁴⁷ cm²        (LZ 2024 90% CL upper bound, m_χ ≈ 1 GeV)
+σ_DM-DM / σ_SI = 3.10 × 10²² / 9.4 × 10⁻⁴⁷ ≈ 3.3 × 10²⁴
+Coupling-structure: σ_DM-DM ∝ g_χ⁴, σ_SI ∝ g_χ² g_N²
+(σ_DM-DM / σ_SI) = (g_χ / g_N)² ≈ 3.3 × 10²⁴
+g_N / g_χ < 1 / √(3.3 × 10²⁴) ≈ 5.5 × 10⁻¹³
+```
+
+The paper's headline value **g_N/g_χ ≲ 10⁻¹³** is the rounded order-of-magnitude statement of this derivation. This is a post-diction: σ_peak was fixed first (causality cap), then the hierarchy was derived.
+
+### A.4 Fabricated citations removed (R88)
+
+Two fabricated numerical claims in §10.4b were removed in R88(7)–(8):
+
+1. **T176 (M94 tidal distortion):** placeholder citation, no underlying calculation. Removed.
+2. **T177 (Yoon+ 2026 N-body comparison):** placeholder arXiv ID (`apXiv:2508.xxxx`); the actual script `T177_bayes_factor.py` is a Bayesian evidence comparison, not an N-body simulation. The placeholder citation was removed; the script itself remains as a Bayesian evidence calculation. §10.4b now states that the M94 tidal and Yoon+ N-body comparisons are **deferred to a future version of this paper**.
+
+### A.5 T204 arithmetic correction (R88)
+
+Reviewer caught: `0.052 × (100/1.69)^1.93 = 137 cm²/g`, not 17.2 (which corresponded to a_slope ≈ 1.42). The paper's canonical a_slope = 1.93, so the correct value is 137 cm²/g. Subhalo causality violation (t_core = 13 Myr < t_cross = 58 Myr) is now correctly stated at Phase 44 parameters.
+
+### A.6 Substructure verdict (R88)
+
+Under Phase 44 parameters (a_slope = 1.93), the Yu+ 2026 [23] substructure mechanism does NOT operate:
+
+- T204 causality check fails (t_core < t_cross)
+- JVAS B1938+666, GD-1 stellar stream, and Fornax 6 substructure are NOT predicted by either bulk or substructure mechanism at Phase 44 parameters
+- Option A flattening (a_slope = 1.0) is NOT the paper's parameter set
+
+The paper's honest verdict: JVAS/GD-1/Fornax 6 are **unexplained** under the framework's Phase 44 parameters.
+
+### A.7 f_H retraction (R88)
+
+The "7/8 channels pass" headline depends on retracted borrowed f_H values (0.85/0.30). Under any first-principles derived f_H (Yang+ 2025, T202 N-body), only 4/8 channels pass and Cloud-9 itself fails (87 < 100 floor, or 92 < 128). This is documented in §9.3, §9.6, §9.7 and in the abstract.
+
+### A.8 Horigome+ 2025 comparison caveat (R88)
+
+The "10–27× above threshold at dSph velocities, 830× at Cloud-9's velocity" comparison is approximate:
+
+- Horigome+'s σ/m > 0.2 cm²/g threshold assumes a **velocity-independent** cross-section
+- Our σ/m(v) is velocity-dependent (Gaussian + power-law background)
+- The factors above use the velocity-independent threshold applied to a velocity-dependent σ/m(v); this is an **upper bound** on the true tension
+- A proper comparison requires re-running Horigome+'s SASHIMI likelihood with our σ(v,θ) form; we do not perform this here
+
+### A.9 c-M consistency check vs SIDM prediction
+
+The "framework consistent with Cloud-9 at the 0.16 dex convention (matching Ohana+ 2026's 3.2σ within 0.04σ)" claim is a **c-M tension consistency check** of our simplified pipeline against Ohana+'s published number. It is **not** an SIDM model prediction. The framework's σ/m(v) does not explain Cloud-9's baryon-free gas content; it is a phenomenological fit to the c-M tension under one specific scatter convention.
+
+### A.10 Removed / deprecated material
+
+- T165–T172 standard Yukawa and resonant SIDM fits: kept in tables; T-numbers retained as methodology references
+- T174 unitarity bound on Cloud-9 resonance: kept
+- T175 re-test of no-go theorems at T163 best-fit: kept (parameter audit shows it was run at the wrong point; re-verification at current parameters deferred)
+- T176 (M94 tidal): REMOVED — fabricated
+- T177 (Yoon+ 2026 N-body): REMOVED citation; T177_bayes_factor.py script retained
+- Two-mediator (Drobczyk+ 2026) UV completion: kept as candidate; verification deferred
+
+### A.11 Boundary pathology (T207)
+
+T207 (SPARC three-term fit) at f_H_cc prior floor ≥ 0.05 gives posterior f_H_cc = 0.060 ± 0.012 — 0.83σ above the floor. This is "boundary pathology reduced but not eliminated" (not "eliminated," as some earlier drafts stated).
 
