@@ -26,6 +26,12 @@ import math
 import numpy as np
 from pathlib import Path
 
+# Cross-time canonical function (T212 Silverman gravothermal).
+# Signature: t_cross_Gyr_from_r_vir_vmax(r_vir_pc, v_max_kms, c)
+# Imported here so the t_cross calculation inside main() is the canonical T212 form
+# rather than an opaque inline formula.
+from t212_silverman_gravothermal import t_cross_Gyr_from_r_vir_vmax
+
 # Phase 44 parameters
 SIGMA_0 = 0.052  # cm^2/g
 A_SLOPE = 1.93  # Phase 44 canonical (per constants.py and the paper's §3.6 canonical σ/m(v) table; was 1.0 in v1.13 under Option A flattening)
@@ -128,12 +134,10 @@ def main():
     # (Reviewer Scrutiny.docx: t_core = 13 Myr < t_cross = 60 Myr is unphysical.)
     # Cross time: use canonical T212 function for clarity and unit consistency.
     # Previously this was an opaque inline formula (r_s_pc / v_max) * (3.156e13 * 1e5) / (3.086e18).
-    # Now imported from t212_silverman_gravothermal.
-# Now imported from t212_silverman_gravothermal.
-# Signature: t_cross_Gyr_from_r_vir_vmax(r_vir_pc, v_max_kms, c)
-    SUBHALO_C = 12  # NFW concentration for ΛCDM-conservative subhalos
-    r_vir_pc = SUBHALO_C * r_s_pc  # r_vir = c × r_s
-    t_cross_Gyr = t_cross_Gyr_from_r_vir_vmax(r_vir_pc, v_max_kms, c=SUBHALO_C)
+    # The module-level SUBHALO_C = 15.0 (from Yu+ 2026) is used; r_vir_pc was computed
+    # at line 99 as SUBHALO_C * SUBHALO_R_S_PC = 1500 pc. We do NOT reassign either
+    # SUBHALO_C or r_vir_pc here — the V_max used above is consistent with this r_vir_pc.
+    t_cross_Gyr = t_cross_Gyr_from_r_vir_vmax(r_vir_pc, v_max, c=SUBHALO_C)
     t_cross_Myr = t_cross_Gyr * 1000.0  # Gyr -> Myr
     t_cross_cap_Gyr = TCROSS_CAP_FACTOR * t_cross_Myr / 1000.0
     t_core_capped = max(t_core, t_cross_cap_Gyr)

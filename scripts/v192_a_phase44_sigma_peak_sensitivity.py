@@ -31,8 +31,8 @@ v192_dsph = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(v192_dsph)
 
 PHASE44_SIGMA_0 = v192_dsph.PHASE44_SIGMA_0     # 0.052
-PHASE44_A_SLOPE = v192_dsph.PHASE44_A_SLOPE      # 1.0
-V1_V_TARGET = v192_dsph.V1_V_TARGET              # 28.0
+PHASE44_A_SLOPE = v192_dsph.PHASE44_A_SLOPE      # 1.93 (Phase 44 canonical; was 1.0 in v1.13)
+V1_V_TARGET = v192_dsph.V1_V_TARGET              # 29.4 km/s (Phase 44 free fit; was 28.0 in v1.13)
 V1_SIGMA_PEAK_DEFAULT = v192_dsph.V1_SIGMA_PEAK  # 174.0
 V1_WIDTH = v192_dsph.V1_WIDTH                    # 4.4
 sigma_m_at_v = v192_dsph.sigma_m_at_v
