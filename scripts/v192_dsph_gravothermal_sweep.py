@@ -22,8 +22,8 @@ Per r20.docx recommendation 5: Mark "NEW DISCOVERY" as provisional pending diagn
    (consistent with a two-component model with f_H = 0.30).
 
 Method:
-1. sigma/m = sigma_m_at_v(0.052, 1.0, v) + 174 * exp(-(v-28)^2/(2*4.4^2))
-   (paper convention, Gaussian)
+1. sigma/m = sigma_m_at_v(0.052, 1.93, v) + 174 * exp(-(v-29.4)^2/(2*4.4^2))
+   (paper convention, Gaussian, canonical Phase 44)
 2. sigma_eff = f_H^2 sigma_HH + 2 f_H f_L sigma_HL + f_L^2 sigma_LL
    (three-term mixture, sigma_LL = 0 canonical)
 3. sigma_HL calibrated to match published sigma_eff from sigma_m_phase44.json
@@ -58,8 +58,12 @@ from t212_silverman_gravothermal import t_cross_Gyr_from_r_vir_vmax
 OUT_DIR = REPO / 'v0.3-prelim' / 'data' / 'results'
 
 # Paper convention (Gaussian, from v19.1.x Cloud-9 work)
-PHASE44_SIGMA_0 = 0.052  # cm^2/g at v=100 km/s
-PHASE44_A_SLOPE = 1.93  # R88 fix: Phase 44 free fit best_params[2] = 1.93 (was 1.0; R86 audit caught mismatch)
+# Phase 44 canonical parameters - now imported from constants.py (R88(23) SSoT enforcement)
+from constants import (
+    SIGMA_0_CM2_PER_G as PHASE44_SIGMA_0,  # 0.052 cm^2/g at v=100 km/s
+    A_SLOPE as PHASE44_A_SLOPE,             # 1.93 Phase 44 free fit (was 1.0; R86 audit caught mismatch)
+    V_REF_KMS as PHASE44_V_REF,            # 100 km/s reference velocity
+)
 V1_SIGMA_PEAK = 174.0  # cm^2/g
 V1_V_TARGET = 29.4  # km/s (R74 fix: Phase 44 free fit = 29.36; constants.py = 29.4)
 V1_WIDTH = 4.4  # km/s Gaussian width

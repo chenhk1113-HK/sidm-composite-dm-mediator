@@ -28,13 +28,21 @@ from __future__ import annotations
 import numpy as np
 from typing import Tuple, Optional
 
-# Phase 44 canonical SIDM parameters (canonical Gaussian form)
-PHASE44_SIGMA_PEAK_CM2_PER_G = 174.0  # cm^2/g at v_target = 29.4 km/s
-PHASE44_V_TARGET_KMS = 29.4  # km/s
-PHASE44_SIGMA_1_KMS = 4.4  # km/s (Gaussian width)
-PHASE44_SIGMA_0_CM2_PER_G = 0.052  # cm^2/g (background at v = 100 km/s)
-PHASE44_A_SLOPE = 1.93  # Phase 44 free-fit
-PHASE44_V_REF_KMS = 100.0  # km/s reference for power-law background
+# Phase 44 canonical SIDM parameters (canonical Gaussian form).
+# Imported from scripts/constants.py (single source of truth, R88(23)).
+import sys
+import os
+_SCRIPTS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'scripts')
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.insert(0, _SCRIPTS_DIR)
+from constants import (
+    SIGMA_PEAK_CM2_PER_G as PHASE44_SIGMA_PEAK_CM2_PER_G,  # 174.0 cm^2/g (causality cap)
+    V_TARGET_KMS as PHASE44_V_TARGET_KMS,                  # 29.4 km/s
+    SIGMA_KMS as PHASE44_SIGMA_1_KMS,                        # 4.4 km/s (Gaussian sigma width)
+    SIGMA_0_CM2_PER_G as PHASE44_SIGMA_0_CM2_PER_G,         # 0.052 cm^2/g
+    A_SLOPE as PHASE44_A_SLOPE,                             # 1.93 (Phase 44 free-fit)
+    V_REF_KMS as PHASE44_V_REF_KMS,                         # 100 km/s reference
+)
 
 
 def sigma_m_canonical_gaussian(v_kms: float) -> float:

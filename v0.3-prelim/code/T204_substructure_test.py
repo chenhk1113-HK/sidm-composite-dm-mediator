@@ -24,6 +24,8 @@ from __future__ import annotations
 import json
 import math
 import numpy as np
+import os
+import sys
 from pathlib import Path
 
 # Cross-time canonical function (T212 Silverman gravothermal).
@@ -32,9 +34,21 @@ from pathlib import Path
 # rather than an opaque inline formula.
 from t212_silverman_gravothermal import t_cross_Gyr_from_r_vir_vmax
 
-# Phase 44 parameters
-SIGMA_0 = 0.052  # cm^2/g
-A_SLOPE = 1.93  # Phase 44 canonical (per constants.py and the paper's §3.6 canonical σ/m(v) table; was 1.0 in v1.13 under Option A flattening)
+# Constants.py (single source of truth, R88(23))
+_SCRIPTS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'scripts')
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.insert(0, _SCRIPTS_DIR)
+from constants import (
+    SIGMA_0_CM2_PER_G as CONST_SIGMA_0,  # 0.052
+    A_SLOPE as CONST_A_SLOPE,             # 1.93
+    V_REF_KMS as CONST_V_REF,             # 100.0
+)
+
+# Phase 44 parameters (now imported from constants.py as CONST_SIGMA_0, CONST_A_SLOPE, CONST_V_REF)
+# Module-level aliases kept for backward compatibility (per R88(23) constants SSoT enforcement).
+SIGMA_0 = CONST_SIGMA_0  # cm^2/g
+A_SLOPE = CONST_A_SLOPE  # Phase 44 canonical (was 1.0 in v1.13 under Option A flattening)
+V_REF = CONST_V_REF  # km/s reference velocity
 TCROSS_CAP_FACTOR = 3.0  # enforce causality: t_core >= 3 * r_s / v_max
 V_REF = 100.0  # km/s reference velocity
 

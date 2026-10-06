@@ -45,6 +45,21 @@ SIGMA_PEAK_CM2_PER_G = 174.0
 # Nucleon mass (for reduced mass calc): 0.939 GeV
 M_NUCLEON_GEV = 0.939
 
+# ====== PHASE 44 POWER-LAW BACKGROUND CONSTANTS (R88, R88(23)) ======
+# Background sigma/m(v) = sigma_0 * (v_ref/v)^a_slope
+
+# Background amplitude at v_ref = 100 km/s
+SIGMA_0_CM2_PER_G = 0.052  # cm^2/g (Phase 44 free-fit background)
+
+# Background velocity exponent (Phase 44 free fit, NOT v1.13 Option A flattening)
+A_SLOPE = 1.93
+
+# Reference velocity for background normalization
+V_REF_KMS = 100.0
+
+# Legacy v1.13 Option A flattening (kept for comparison, NOT canonical)
+A_SLOPE_OPTION_A = 1.0
+
 # Speed of light
 C_KMS = 2.998e5
 
