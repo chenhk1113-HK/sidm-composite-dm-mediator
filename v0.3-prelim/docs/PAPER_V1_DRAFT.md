@@ -15,7 +15,7 @@ We report a phenomenological study of a multi-resonance, velocity-dependent self
 - Five UV completion no-go theorems (magnetic dipole, Hidden U(1) + pseudo-Dirac, GeV inelastic, Chu+ 2019 p-wave, T184 one-mediator UV systematic) apply to the Phase 44 single-component baseline. Re-verification at the current a_slope = 1.93 + σ_peak = 174 point is deferred.
 - Under the Elbert+ 2015 working benchmark σ/m ≥ 50 cm²/g at v_rms ≈ 40 km/s (not an observational lower bound), Mace+ 2026 SIDM2v falls ~7× short at v = 28 km/s.
 
-The framework's quantitative success at Cloud-9 depends on the choice of hidrodynamic-to-thermal fraction f_H. With retracted borrowed f_H values the 8-channel fit passes 7/8; with any first-principles derived f_H (Yang+ 2025, T202 N-body), only 4/8 pass and Cloud-9 itself fails. The paper is best read as a constraint map and no-go catalogue, not a unified SIDM model. The contribution is the tension map between Cloud-9-scale and dSph-scale SIDM requirements.
+The framework's quantitative success at Cloud-9 depends on the choice of hidrodynamic-to-thermal fraction f_H. With retracted borrowed f_H values the 8-channel fit passes 7/8; with any first-principles derived f_H (Yang+ 2025, T202 N-body), only 4/8 pass and Cloud-9 itself fails. (3 of the 8 channels — UFD, LMC, Boötes — have no published σ_eff constraint and are not part of the 5-channel judgment; the meaningful comparison is therefore 4 of 5 constrained channels pass, not 4 of 8.) The paper is best read as a constraint map and no-go catalogue, not a unified SIDM model. The contribution is the tension map between Cloud-9-scale and dSph-scale SIDM requirements.
 ## 1. Introduction
 
 **Note on internal references.** Numerical results in this paper are identified by internal test IDs (T-numbers, e.g., T174 for the unitarity bound verification, T207 for the SPARC three-term fit) that refer to specific calculations documented in `v0.3-prelim/code/` and the supplementary material. Literature citations are identified by author + year + reference number (e.g., [27] = Horigome+ 2025). The paper's revision history is denoted by vXX.Y format.
@@ -914,6 +914,28 @@ The "framework consistent with Cloud-9 at the 0.16 dex convention (matching Ohan
 - T176 (M94 tidal): REMOVED — fabricated
 - T177 (Yoon+ 2026 N-body): REMOVED citation; T177_bayes_factor.py script retained
 - Two-mediator (Drobczyk+ 2026) UV completion: kept as candidate; verification deferred
+
+
+
+### A.10b Future work: Gravothermal Evolution Pipeline (G1-G6)
+
+The Cloud-9 vs. dSph tension presented in §2 (this paper) may be resolvable through a phase-aware gravothermal pipeline rather than through additional σ/m parameter tuning. Halos at the same σ/m(v) show diverse central densities because they are at different gravothermal phases (core-expansion vs. collapse), driven by merger history and formation redshift.
+
+**Phase G1 (scaffold complete in `gravothermal_evolution.py`):** Calibrated conducting-fluid model (Balberg+ 2002, Koda-Shapiro 2011) with velocity-dependent conductivity from Yang & Yu (2022), calibrated against Yang, Nadler, Yu & Zhong (2024) parametric density model (arXiv:2305.16176). Returns (central density, core radius) given CDM halo (M, c, z_form) and σ/m(v).
+
+**Phase G2 (scaffold):** Merger history as a stochastic variable (Silverman et al. 2026, arXiv:2606.02566). Active mergers suppress collapse by heat transport; quiescent merger histories allow collapse to proceed.
+
+**Phase G3 (planned):** Re-analyze Cloud-9 with phase-aware priors via the Ohana+ 2026 framework, replacing the static SIDM halo profile with the gravothermal-evolved profile from G1.
+
+**Phase G4 (planned):** Reframe the 8-channel fit as a phase-diversity fit. The new fit has σ/m(v) AND a phase distribution as free parameters; the artificial Cloud-9 vs. Fornax tension disappears if Cloud-9 is core-expanding and Fornax is collapsed at the same σ/m(v).
+
+**Phase G5 (planned):** Validate against UFD density diversity (Fischer & Yu 2026).
+
+**Phase G6 (planned):** Interface with patched KiSS-SIDM (T215: FP protection, assertion disable, min_particles increase) for late-stage validation in the kinetic regime.
+
+**Expected impact on paper claim:** Headline shifts from "4 of 5 constrained channels fit; Cloud-9 vs. dSph tension unresolved" to "Observed density diversity naturally explained by gravothermal evolution at a single σ/m(v), with Cloud-9 in core-expansion phase and classical dSphs in or near collapse."
+
+**Full roadmap**: See `v0.3-prelim/docs/GRAVOTHERMAL_ROADMAP.md` for detailed phase-by-phase deliverables, methods, and reference papers.
 
 ### A.11 Boundary pathology (T207)
 
