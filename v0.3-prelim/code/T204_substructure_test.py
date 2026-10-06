@@ -40,7 +40,7 @@ HUBBLE_TIME_GYR = 13.8
 
 
 def sigma_m_at_v(v_kms, sigma_0=0.052, a_slope=A_SLOPE, v_ref=100.0):
-    """Phase 44 sigma/m(v) = sigma_0 * (v_ref/v)^a_slope. a_slope uses A_SLOPE global (v1.13 canonical = 1.0)."""
+    """Phase 44 sigma/m(v) = sigma_0 * (v_ref/v)^a_slope. a_slope uses A_SLOPE global (Phase 44 canonical = 1.93 per constants.py; was 1.0 in v1.13 under Option A flattening)."""
     return sigma_0 * (v_ref / v_kms) ** a_slope
 
 
@@ -126,7 +126,16 @@ def main():
     t_core = gravothermal_t_core_Gyr(sigma_m_at_v(v_max), rho_s, r_s_pc, v_max)
     # Enforce causality: collapse cannot proceed faster than ~few t_cross.
     # (Reviewer Scrutiny.docx: t_core = 13 Myr < t_cross = 60 Myr is unphysical.)
-    t_cross_Myr = (r_s_pc / v_max) * (3.156e13 * 1e5) / (3.086e18)  # Myr
+    # Cross time: use canonical T212 function for clarity and unit consistency.
+    # Previously this was an opaque inline formula (r_s_pc / v_max) * (3.156e13 * 1e5) / (3.086e18).
+    # Now imported from t212_silverman_gravothermal.
+    try:
+        from t212_silverman_gravothermal import t_cross_Gyr_from_r_vir_vmax
+        t_cross_Gyr = t_cross_Gyr_from_r_vir_vmax(r_s_pc, v_max_kms)
+        t_cross_Myr = t_cross_Gyr * 1000.0  # Gyr -> Myr
+    except ImportError:
+        # Fallback to inline formula (preserved for back-compat)
+        t_cross_Myr = (r_s_pc / v_max) * (3.156e13 * 1e5) / (3.086e18)
     t_cross_cap_Gyr = TCROSS_CAP_FACTOR * t_cross_Myr / 1000.0
     t_core_capped = max(t_core, t_cross_cap_Gyr)
     t_core_for_verdict = t_core_capped  # use capped value for collapse check
