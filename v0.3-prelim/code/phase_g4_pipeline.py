@@ -117,21 +117,46 @@ def classify_phase(tau):
         return "deeply-collapsed"
 
 
-def predict_phase(V_max, rho_eff, t_lookback=T_LOOKBACK_GYR):
+def predict_phase(V_max, rho_eff, t_lookback=T_LOOKBACK_GYR, sigma_hh_mode=False):
     """
     Predict gravothermal phase for a halo at V_max with effective density rho_eff.
 
-    Returns: dict with σ_mb, σ_eff, t_c, tau, phase, in_calibration_range
+    Parameters
+    ----------
+    V_max : float
+        Halo's maximum circular velocity (km/s)
+    rho_eff : float
+        Effective core density (M☉/pc³)
+    t_lookback : float
+        Lookback time at halo formation (Gyr)
+    sigma_hh_mode : bool
+        If True (R88(49), Suggestion 1), feed σ_HH = ⟨σ/m⟩_MB directly into Yang+ 2024.
+        If False (R88(40) default), feed σ_eff = f_H² · ⟨σ/m⟩_MB (carries f_H² suppression).
+        The two modes give different predictions:
+        - σ_eff mode: τ very small (cascade inactive everywhere)
+        - σ_HH mode: τ of order unity (cascade can fire)
+
+    Returns
+    -------
+    dict with sigma_mb, sigma_eff, sigma_hh, t_c, tau, phase, in_calibration
     """
     sigma_mb = mb_weighted_sigma_m(V_max)
-    sigma_eff = F_H ** 2 * sigma_mb
-    t_c = t_c_yang2024(sigma_eff, rho_eff)
+    sigma_eff = F_H ** 2 * sigma_mb  # observable (used by kinematics)
+    sigma_hh = sigma_mb              # microphysical (used by gravothermal cascade)
+    if sigma_hh_mode:
+        # Correct (R88(49), Suggestion 1): gravothermal driven by σ_HH, not σ_eff
+        sigma_for_tc = sigma_hh
+    else:
+        # Legacy (R88(40)): σ_eff with f_H² suppression
+        sigma_for_tc = sigma_eff
+    t_c = t_c_yang2024(sigma_for_tc, rho_eff)
     tau = t_lookback / t_c
     phase = classify_phase(tau)
-    in_cal = 1.0 <= sigma_eff <= 15.0  # Yang+ 2024 validity range
+    in_cal = 1.0 <= sigma_eff <= 15.0  # Yang+ 2024 validity range (on σ_eff)
     return {
         "sigma_mb": sigma_mb,
         "sigma_eff": sigma_eff,
+        "sigma_hh": sigma_hh,
         "t_c": t_c,
         "tau": tau,
         "phase": phase,
