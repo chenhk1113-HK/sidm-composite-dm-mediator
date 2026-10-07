@@ -31,7 +31,7 @@ V_TARGET_KMS = 29.4
 # (Previously labelled FWHM_KMS = 4.4 but used as Gaussian σ in exp(-Δ²/(2*4.4²))).
 # The numerical value is unchanged; only the variable name is corrected.
 # Equivalent FWHM = 4.4 × 2.355 = 10.36 km/s.
-SIGMA_KMS = 4.4  # Gaussian σ width (R76 renamed from FWHM_KMS)
+SIGMA_KMS = 4.4  # Gaussian σ (NOT FWHM) — historical rename in R76 from FWHM_KMS; see C.2 in R88(45) audit  # Gaussian σ width (R76 renamed from FWHM_KMS)
 
 # Resonance amplitude A_res ~ 100 (Breit-Wigner peak height enhancement)
 A_RES = 100.0

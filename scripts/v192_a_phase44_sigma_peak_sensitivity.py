@@ -302,7 +302,7 @@ def main():
         f"91 Myr; sweep sigma/m(V_max=31.12) = 135.43 vs section 9.12's 135.3)."
     )
 
-    # Finding 6: Continuous intersection at c=12 (r27 issue 2, r28 issue 1: exact 1/sigma_m scaling)
+    # Finding 6 (DEPRECATED R88(45), legacy a_slope=1.0 form — superseded by Finding 1's canonical 1.93 form): Continuous intersection at c=12 (r27 issue 2, r28 issue 1: exact 1/sigma_m scaling)
     # ratio = t_core/t_cross. t_core = f / sigma_m(V_max) (inverse scaling), t_cross is fixed (NFW).
     # So ratio * sigma_m(V_max) is approximately constant. At sigma_peak=50, K = 3.432 * 39.036 = 133.97.
     # At sigma_peak=75, K = 2.292 * 58.471 = 134.01. K varies by ~0.03% across the grid.
