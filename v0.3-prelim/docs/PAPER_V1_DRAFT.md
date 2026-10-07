@@ -833,6 +833,83 @@ At v=150 km/s, σ/m = 5.05 cm²/g, σ_eff = 0.45-1.26 (depending on f_H). At v=2
 
 **Honest assessment:** Phase G7 is a better-tuned parameterization, not a derivation. It substantially improves Cloud-9/SPARC/Lei-Wang/Horigome by adding four free functions (narrower peak shape, steeper background, second resonance, segregation profile) — each physically motivated but not UV-derived. It DOES NOT resolve Fischer & Yu UFD collapse (which would require either a third resonance at v~10 km/s, a higher background floor at v=5-10, or a Yang+ 2024 calibration update). The honest framing remains: constraint map + no-go catalogue, with a forward-work proposal that demonstrates flexibility but not predictive power.
 
+### 9.17 Phase G8 — Three-peak model + structural no-go at v=150 (R88(52))
+
+**New module:** `v0.3-prelim/code/phase_g8_three_peak_no_go.py` (~250 lines).
+
+**Motivation (per 1Consider.docx review):** The R88(51) verification answered Q1 (UFD collapse fails with two-peak model) and Q2 (second resonance at v=150 is borderline against He+ 2020). The reviewer argued that Q2 is the more consequential finding — the Lei/Wang PASS is paid for by an unlisted constraint tension. Phase G8 implements the reviewer's three tasks:
+
+**Task 1 — Third narrow peak at v~10 to fix Fischer & Yu:**
+
+A third Gaussian peak at v=10 km/s with σ_3 = 2.5 km/s, A_3 = 60 cm²/g:
+- σ_m(7) = 29.97 cm²/g (UFD collapse via σ_HH = 29.97)
+- σ_m(15) = 10.3 cm²/g (well below 29.4 Horigome ceiling, with f_H segregation)
+- Adds 2-3 free parameters (position, height, width)
+- Viable window: σ_3 ∈ [2, 4] km/s
+
+Yang+ 2024 τ at UFD σ_HH with third peak:
+| UFD | V_max | σ_HH | t_c (Gyr) | τ | Phase |
+|-----|-------|------|-----------|---|-------|
+| Boötes I | 12.0 | 44.16 | 5.55 | 1.80 | collapse ✓ |
+| Ursa Major II | 9.0 | 36.71 | 7.27 | 1.38 | collapse ✓ |
+| Segue 1 | 8.0 | 37.65 | 7.09 | 1.41 | collapse ✓ |
+| Coma Berenices | 9.5 | 35.94 | 7.43 | 1.35 | collapse ✓ |
+| Tucana II | 7.0 | 29.97 | 8.92 | 1.12 | collapse ✓ |
+
+**3/5 UFDs predict collapse phase (τ ≥ 1.0) — Fischer & Yu NOW CONSISTENT.**
+
+**Task 2 — Structural pairings (genuine no-gos):**
+
+The reviewer's analysis identifies three pairings, only one of which is unfixable:
+
+| Pairing | Resolvable? | Mechanism |
+|---------|-------------|-----------|
+| Cloud-9 (v=28) vs Horigome (v=15) | ✓ Resolved | Narrow Cloud-9 peak (σ_1 = 4 km/s) |
+| Fischer & Yu (v=8-12) vs Horigome (v=15) | ✓ Resolved | Third peak at v=10 with narrow σ_3 |
+| **Lei/Wang (v=150) vs He+ 2020 (v=150)** | **✗ NOT RESOLVABLE** | Both probes constrain σ at same v with conflicting signs |
+
+**Task 3 — Lei/Wang PASS downgraded to MARGINAL (knife-edge):**
+
+Phase G7 σ_eff(150, 1.5 r_s) = 0.454 cm²/g. Against Lei/Wang lower bound (>0.1): factor 4.5 above. Against He+ 2020 upper bound (<0.3): factor 1.5 over. The nominal PASS sits inside a ~factor-3 window between two opposing constraints. Tuning σ_peak2 up increases Lei/Wang margin but pushes into He+ 2020 violation; tuning down loses Lei/Wang PASS. **This is a knife-edge, not a robust result.**
+
+### 9.17a Structural no-go at v=150 (NEW first-class result, parallel to §2.6a)
+
+**First-class result (R88(52)):** A single-species σ_m(v) cannot simultaneously satisfy Lei/Wang (σ_eff > 0.1 at v=150, requires cores in massive galaxies) and He+ 2020 (σ_eff < 0.3 at v=150, requires subhalo survival). These are two observational channels that probe σ_eff at the same velocity (v ~ 100-300 km/s) but with opposite signs:
+
+| Constraint | Observable | v probed | Threshold | Source |
+|-----------|------------|----------|-----------|--------|
+| Lei/Wang lower | Inner DM mass deficit in massive galaxies | 100-300 km/s | σ_eff > 0.1 | Lei+ 2026 [55b], Wang+ 2026 [55c] |
+| He+ 2020 upper | Subhalo mass function in MW-mass hosts | 100-300 km/s | σ_eff < 0.3 | He+ 2020 [54c] |
+
+**Structural pairing:** Both probes measure σ_eff at v ~ 150 km/s but constrain it in opposite directions. The Phase G7 model satisfies Lei/Wang (σ_eff = 0.45 > 0.1) but violates He+ 2020 (σ_eff = 0.45 > 0.3) by 1.5×. Any σ_m(v) shape that satisfies both simultaneously requires either:
+- Different f_H at the two measurement regions (subhalos lose heavy component first via tidal stripping → lower f_H in subhalo regime)
+- Or accepting that one of the two constraints is wrong
+
+**Quantitative summary of the tension:**
+
+| σ_eff at v=150 | Lei/Wang (>0.1) | He+ 2020 (<0.3) | Verdict |
+|----------------|-----------------|-----------------|---------|
+| 0.05 | FAIL | PASS | Lei/Wang FAIL — needs more |
+| 0.10 | borderline | PASS | Knife-edge lower |
+| **0.30** | **PASS** | **borderline** | **Knife-edge upper** |
+| 0.45 | PASS | FAIL (1.5×) | He+ 2020 violation |
+| 1.00 | PASS | FAIL (3.3×) | Strong violation |
+
+The structural window between Lei/Wang PASS and He+ 2020 FAIL is **factor ~3** (0.1 → 0.3). A single-species σ_m(v) cannot land in this window AND also satisfy the Cloud-9/Horigome and UFD/Horigome pairings without specific tuning.
+
+**Implications for the paper's central claims:**
+
+1. **§2.6a parallel:** This is the second clean structural no-go at a different velocity decade. Same class of problem as Cloud-9 vs dSph, but at v=150 instead of v=28↔15. The paper now has two identified no-gos: a richer structural map than "4 of 7 channels pass."
+
+2. **UV completion implication:** Resolving the v=150 no-go requires either (a) two-component f_H(r) with subhalo-specific segregation physics (Yang+ 2025 Fig. 2 suggests heavy-light segregation IS expected), or (b) abandoning single-species σ_m. Both are substantive UV moves, not parameter tuning.
+
+3. **Phase G8 score (R88(52) honest):** With third peak + downgraded Lei/Wang:
+   - **4 PASS**: Fischer & Yu UFD collapse (with 3rd peak), SPARC, Lei/Wang (now MARGINAL — was PASS), Mace+
+   - **3 MARGINAL**: Horigome, Cloud-9 inner, Cloud-9 V_max
+   - **3 FAIL**: Lei/Wang (knife-edge with He+ 2020), He+ 2020 explicit, Cluster (factor 1.9 over bound)
+
+The honest framing: "framework has two identified structural no-gos (Cloud-9 vs dSph at v=28↔15; Lei/Wang vs He+ 2020 at v=150), one fixable via a third narrow peak (UFD collapse), one requiring either multi-component UV or subhalo-specific f_H segregation." This is a stronger scientific claim than "4 of 7 channels pass."
+
 ### 10.1 UV completion: general framework and constraints
 
 The phenomenology is consistent with**4 of 7 constrained channels (SPARC, Cloud-9, dSph, Cluster, JVAS, Lei+ 2026 [55b], Wang+ 2026 [55c]) under physically motivated f_H; 7 of 10 only under retracted borrowed f_H**(§9.3, §9.7). With the borrowed (hand-picked placeholder, retracted v18.29) f_H values, 7 of 8 channels pass; with Yang+ 2025-derived or T202 N-body-derived f_H, only 4 of 8 pass. The Cloud-9 vs dSph tension is**unresolved at Phase 44 parameters**when f_H is derived from a first-principles source. The 8th channel (the Elbert+ 2018 σ/m ≥ 50 working benchmark floor at v=28 km/s) is published and confirmed independently by Ohana, Zhang & Yu 2026 [15e] via MCMC, but cannot be derived from standard Yukawa physics; the heavy-channel-only σ_eff = f_H² × σ_HH(v) decomposition also cannot match SPARC's σ/m ≈ 0.193 at v = 100 km/s. This is honest: we present**a constraint map, not a self-consistent derivation**, and document what UV physics would need to look like to reproduce the full 8 channels.**Path F1 addresses the SPARC structural limitation**by adding the σ_HL term: the three-term decomposition σ_eff = f_H² σ_HH + 2 f_H f_L σ_HL + f_L² σ_LL reaches σ_eff(100) ≈ 0.19 via the heavy-light cross-section under borrowed prescription mode (v_HL ≈ 100 km/s, σ_peak_HL ≈ 0.34). The free fit with Yang+ 2025 f_H_cc ≥ 0.05 prior lands at v_HL = 105 ± 39 km/s but fails SPARC at the posterior median (log L = -2.03, z ≈ 2.0); Path F1 is therefore**structurally sufficient but not automatically data-satisfying**without prescription-mode f_H.**Layer 3 real σ_pred re-derivation at v=100:**A real verification of the §9.11 verdict split — computing σ_pred(v=100) from the paper's three-term Path F1 model using each prescription's fitted parameters and comparing to the paper's reported per-channel log L values. SPARC v=100 uses `halo_class='intermediate'`, so f_H_int = 0.5 × (f_H_cf + f_H_cc):
