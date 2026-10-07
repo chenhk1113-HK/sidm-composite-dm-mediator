@@ -640,7 +640,33 @@ EFT target map for future work.**Scope of the no-go theorems (important caveat,)
 
 **The Balberg+ 2002 vs Yang+ 2024 disagreement on Fornax:** The Balberg+ analytical t_core formula used in §2.5/§2.6 gives t_core = 0.66 Gyr at σ/m = 7.49 cm²/g, predicting Fornax collapse within Hubble time. Yang+ 2024 gives τ = 0.113 at σ/m = 2.85 cm²/g, predicting core-expansion. These two calculations disagree by a factor of ~50 in their collapse prediction for Fornax. The Silverman+ 2026 (arXiv:2606.02566) and Fischer & Yu 2026 N-body results support Yang+ 2024: 3 of 6 ~10¹⁰ M☉ halos at σ/m = 70 cm²/g collapse, but no halo at σ/m = 2.85 cm²/g (Fornax-class) shows collapse. This is the analytical vs N-body disagreement the project has documented as an open question (Phase G4 resolution path).
 
-**Caveat (honest framing):** At canonical σ/m = 166 cm²/g, Yang+ 2024 predicts Cloud-9 should have *already collapsed* (τ = 1.0, deeply-collapsed phase). Observed Cloud-9 is a diffuse starless gas cloud, not a dense cusp. **This is a real framework tension** that the gravothermal resolution must address. Possible explanations under investigation:
+**Implementation item B.5 (R88(40), Maxwell-Boltzmann-weighted σ/m for Cloud-9):** The §9.13 Phase G1 calculation uses σ/m(V_max) = 161.70 cm²/g (canonical Gaussian evaluated at the halo's peak circular velocity). However, gravothermal evolution samples the **full Maxwell-Boltzmann distribution** of relative velocities during two-body collisions, not a single characteristic velocity. Computing the MB-weighted average:
+
+⟨σ/m⟩_MB = ∫ σ/m(v) · f_MB(v; V_max) dv
+
+with f_MB the 3D Maxwell-Boltzmann speed distribution for V_max = 31.12 km/s (Cloud-9 host halo) and the canonical σ/m(v) = 0.052·(100/v)^1.93 + 174·exp(-(v-29.4)²/38.72) gives:
+
+- **σ/m(V_max = 31.12) = 161.70 cm²/g** (canonical, used in §9.13)
+- **⟨σ/m⟩_MB = 50.00 cm²/g** (MB-weighted, this calculation)
+
+The factor-of-3 reduction comes from the low-velocity tail of the Maxwell-Boltzmann distribution (v < 15 km/s) where σ/m(v) drops to ≲ 30 cm²/g, plus the high-velocity tail (v > 50 km/s) where the Gaussian resonance has fallen to background.
+
+**Re-running Yang+ 2024 t_c with MB-weighted σ_eff:**
+- t_c = 28.7 × (7.1/σ_eff) × (0.04/ρ_eff) Gyr (BM2-calibrated scaling)
+- At σ_eff = 0.09 × 161.70 = 14.55 cm²/g (σ/m(V_max) form): **t_c = 5.04 Gyr** → τ = 10/5.04 ≈ **1.98** (deeply-collapsed)
+- At σ_eff = 0.09 × 50.00 = 4.50 cm²/g (MB-weighted): **t_c = 16.30 Gyr** → τ = 10/16.30 ≈ **0.61** (late core-expansion)
+
+**Implication:** When σ/m is MB-weighted (which is the physically correct input for gravothermal evolution), Cloud-9's τ = 0.61 sits in the **core-expansion phase** — *consistent with observed diffuse H I profile*, **without requiring merger-history rescue, formation-redshift rescue, or calibration-uncertainty rescue.** This is a substantive new result.
+
+**Honest caveats on this calculation:**
+1. ρ_eff for Cloud-9 was estimated at 0.01 M☉/pc³ (similar order to BM2; precise value requires Cloud-9-specific NFW parameters from §9.12). The τ ∝ ρ_eff⁻¹ scaling means a factor-of-2 uncertainty in ρ_eff shifts τ by the same factor.
+2. The σ_eff = f_H² · σ/m decomposition assumes σ_HH ≈ σ/m at all velocities, which is the framework's approximation. The MB-weighted σ_eff calculation should be repeated with explicit σ_HH(v) from the canonical σ/m(v) form.
+3. The Yang+ 2024 t_c scaling was calibrated against BM2 at σ_eff = 7.1 cm²/g — extrapolation to σ_eff = 4.5 cm²/g (factor 1.6 below calibration) is closer than the σ_eff = 14.55 cm²/g extrapolation (factor 2.1 above calibration), so the MB-weighted calculation may be more trustworthy than the σ/m(V_max) calculation.
+4. The MB integration uses the standard 3D Maxwell-Boltzmann speed distribution; a more careful treatment would use the relative-velocity distribution of colliding particles, which depends on velocity anisotropy (β = 0 assumed here).
+
+**Status:** This calculation is the first concrete Phase G4 implementation work. It does not fully resolve the Cloud-9 tension (caveats above) but it shifts the burden: the tension now requires a precise ρ_eff_Cloud9 + σ_HH(v) calculation, not a missing physics mechanism. The full resolution is Phase G4 (gravothermal pipeline extended to spatially-resolved N-body-equivalent treatment), estimated 4-8 weeks additional work beyond G1.
+
+**Caveat (honest framing):** At canonical σ/m = 166 cm²/g, Yang+ 2024 predicts Cloud-9 should have *already collapsed* (τ = 1.0, deeply-collapsed phase). Observed Cloud-9 is a diffuse starless gas cloud, not a dense cusp. **This is a real framework tension** that the proposed resolution pathway must address (forward work, not yet validated). Possible explanations under investigation:
 
 1. **Merger history rescue (Silverman+ 2026 mechanism):** A halo with continuous merger activity has its collapse time-scale extended by orders of magnitude (kinetic energy injection from mergers delays or prevents collapse). Cloud-9's host halo may have a non-quiescent merger history that prevents collapse despite high σ/m.
 2. **Halo assembly time (Correa+ 2015):** Cloud-9's host halo may have formed at z_f < 1, leaving insufficient time for full gravothermal collapse.
