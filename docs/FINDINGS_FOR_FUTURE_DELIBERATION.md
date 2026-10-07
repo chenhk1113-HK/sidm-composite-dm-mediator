@@ -280,10 +280,103 @@ The framework has been systematically tested across 10 observational channels. H
 
 ---
 
-## 10. Bottom Line for Future Work
+## 10. Direction D (R88(53)) — Revise observational interpretation
+
+The reviewer (2suggestion.docx) flagged a fourth direction not previously listed:
+
+**Direction D: revise the He+ 2020 or Lei/Wang interpretation.**
+
+Both observations involve significant modeling assumptions:
+- Lei/Wang uses stellar kinematics + gas dynamics + Jeans modeling to infer inner DM profile
+- He+ 2020 uses lensing + satellite kinematics to constrain subhalo mass function
+- Both have baryonic feedback effects that could shift the inferred σ_eff by factor ~2
+
+If either observation has a systematic that shifts the inferred σ_eff by factor ~2,
+the v=150 no-go may dissolve WITHOUT any new physics. This is the "let the field
+fight it out" path — appropriate if the underlying data are uncertain.
+
+**Why Direction D matters:**
+- Cheapest path: 0 additional computation
+- Reversible: if observations are refined, the paper can be updated
+- Honest: doesn't pretend to solve physics that's actually observational uncertainty
+- The paper's §9.17a already discloses the knife-edge; publishing as-is is legitimate
+
+**Specific test for Direction D:** Wait for He+ 2020 follow-up with updated modeling
+assumptions, or redo Lei/Wang with explicit f_H(r) treatment in the Jeans modeling.
+
+---
+
+## 11. Tidal-stripping-driven heavy-loss asymmetry (Direction A mechanism, R88(53))
+
+If Direction A is to be pursued, the specific physical mechanism is:
+
+**Heavy dark matter particles have larger σ_HH than light particles, so they experience
+greater dynamical friction heating during subhalo pericenter passages and preferentially
+migrate to larger radii. Under tidal stripping, the heavy component is lost first
+because it carries more momentum and is more easily heated out.**
+
+This produces a subhalo-specific f_H that drops by ≥2× relative to central halos.
+
+**Testable claim (the discriminator):**
+Run two-component N-body simulations for a subhalo with a specific tidal history.
+Measure f_H at r_obs both before and after stripping.
+- If f_H drops by ≥2×: Direction A works, proceed to re-derive profiles
+- If f_H drops by <1.5×: Direction A fails, the v=150 no-go stands
+
+**Timeline:** 2-3 weeks of simulation work for someone with existing SIDM N-body infrastructure.
+
+**Risk:** May conflict with the existing Cloud-9 vs dSph resolution (§2.6a), which also
+uses f_H segregation. The new tidal-specific f_H may break the dSph resolution.
+
+---
+
+## 12. Failure mode to resist (R88(53) — reviewer warning)
+
+Per 2suggestion.docx: "The thing I'd resist is the temptation to 'solve' the v=150
+no-go with more parameters. That's the failure mode this project has already
+successfully avoided 10 rounds running."
+
+The framework's strength is that it has been tested honestly across 13 rounds (R88(40)
+through R88(53)). Each round added complexity only when physically motivated, and each
+addition was tested for what it would do. The v=150 no-go is precisely the kind of
+structural result that SURVIVES the addition of more parameters — Phase G7's three
+peaks and segregation profile did not dissolve it; only a structural change in the
+underlying physics (multi-species UV, subhalo-specific f_H, or revised observations)
+could resolve it.
+
+The paper should NOT claim that future work will resolve the v=150 no-go. The honest
+framing (two unresolvable no-gos at the current parameter point) is the correct final
+answer, not a placeholder.
+
+---
+
+## 13. Bottom Line for Future Work
 
 The model is **honestly bounded**: it works for some channels, fails for others, and
 the failures have specific structural reasons that parameter tuning cannot fix.
+
+The two structural no-gos (v=28↔15 and v=150) are the most important findings. They
+point to specific velocity windows where σ_m(v) cannot satisfy all probes simultaneously,
+which is exactly the kind of map the field needs to design the next round of theoretical
+and observational work.
+
+**Forward paths in priority order (R88(53) synthesis):**
+
+1. **Direction D (cheapest):** Wait for observational refinement of He+ 2020 or
+   Lei/Wang with explicit f_H(r) treatment. The v=150 no-go may dissolve.
+
+2. **Direction A discriminator (most testable):** Two-component N-body simulation of
+   tidal-stripping with f_H measurement. If f_H drops ≥2×, proceed; if <1.5×, stop.
+
+3. **Direction B (most uncertain):** Fresh UV construction for multi-species DM with
+   environment-dependent σ_m(v). High-risk, high-effort, uncertain payoff.
+
+4. **Ship as-is (the current state):** The two no-gos are the findings. Publishing
+   without promising "solutions" is the correct scientific move.
+
+**The paper's contribution is the structural map, not a unified theory.** The map
+shows where velocity-dependent SIDM with the Phase 44 parameter point cannot work.
+Solutions are for the next generation, who will have better data and better tools.
 
 The two structural no-gos (v=28↔15 and v=150) are the most important findings. They
 point to specific velocity windows where σ_m(v) cannot satisfy all probes simultaneously,

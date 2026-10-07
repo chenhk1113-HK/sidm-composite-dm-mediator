@@ -897,6 +897,26 @@ Phase G7 σ_eff(150, 1.5 r_s) = 0.454 cm²/g. Against Lei/Wang lower bound (>0.1
 
 The structural window between Lei/Wang PASS and He+ 2020 FAIL is **factor ~3** (0.1 → 0.3). A single-species σ_m(v) cannot land in this window AND also satisfy the Cloud-9/Horigome and UFD/Horigome pairings without specific tuning.
 
+**R88(53) — Specific physical mechanism for Direction A (per 2suggestion.docx review):**
+
+If the v=150 no-go is to be resolved within the existing two-component structure, the candidate mechanism is **tidal-stripping-driven heavy-loss asymmetry**: heavy dark matter particles (the component that drives σ_HH) have a larger scattering cross-section than light particles, so they experience greater dynamical friction heating during subhalo pericenter passages and preferentially migrate to larger radii. Under tidal stripping, the heavy component is lost first because it carries more momentum and is more easily heated out. This produces a subhalo-specific f_H that drops by ≥2× relative to central halos.
+
+Testable claim: **measure f_H at r_obs both before and after stripping in two-component N-body simulations.** If f_H drops by ≥2× in stripped subhalos, Direction A works. If f_H drops by <1.5×, Direction A fails and the v=150 no-go stands.
+
+**R88(53) — Forward-work discriminator:**
+
+A single two-component N-body simulation with a specific tidal history is the discriminator. This is bounded, testable, and could be done in 2-3 weeks by someone with existing SIDM N-body infrastructure. The paper identifies this as the concrete forward-work item.
+
+**R88(53) — Direction D (revise observational interpretation):**
+
+Both Lei/Wang and He+ 2020 involve significant modeling assumptions (Jeans modeling, lensing+satellite kinematics, baryonic feedback effects). If either observation has a systematic that shifts the inferred σ_eff by factor ~2, the no-go may dissolve without any new physics. This is a legitimate "let the field fight it out" path: the paper's §9.17a already discloses the knife-edge nature of the window; publishing as-is and letting the observational community respond is appropriate scientific practice.
+
+**R88(53) — Honest synthesis (per 2suggestion.docx):**
+
+1. The v=150 no-go is best treated as a finding, not a flag for future "solutions." The paper should NOT claim that Direction A or B will resolve it. The honest framing (two unresolvable no-gos at the current parameter point) is the correct final answer, not a placeholder for future work.
+2. The failure mode to resist: solving the v=150 no-go with more parameters. The project has successfully avoided this trap across 10 rounds; the v=150 finding is precisely the kind of structural result that survives the addition of more degrees of freedom.
+3. The paper's existing two structural no-gos (Cloud-9 vs dSph at v=28↔15; Lei/Wang vs He+ 2020 at v=150) constitute a quantitative map of where velocity-dependent SIDM with the Phase 44 parameter point cannot work. That map is the contribution. Solutions are for the next generation.
+
 **Implications for the paper's central claims:**
 
 1. **§2.6a parallel:** This is the second clean structural no-go at a different velocity decade. Same class of problem as Cloud-9 vs dSph, but at v=150 instead of v=28↔15. The paper now has two identified no-gos: a richer structural map than "4 of 7 channels pass."
