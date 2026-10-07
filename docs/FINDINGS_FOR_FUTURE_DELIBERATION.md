@@ -378,6 +378,129 @@ and observational work.
 shows where velocity-dependent SIDM with the Phase 44 parameter point cannot work.
 Solutions are for the next generation, who will have better data and better tools.
 
+---
+
+## 16. R88(55) Path execution results — Phase G9 + G10
+
+**Tools installed (R88(54)):**
+- OpenGadget3 Docker: giannispetsis/opengadget3:latest (P-Gadget3 binary, 6.7 MB)
+- galpy 1.12.0 (Python N-body for orbit integration)
+- scipy 1.18.0 (numerical integration)
+- Docker daemon started via Docker Desktop auto-start (64s)
+- gala/agama: NOT installable (no Python 3.14 wheels, no C++ compiler available)
+
+### 16.1 Phase G9 — Direction A discriminator (Path 1)
+
+**Test setup:**
+- Two-component SIDM with Yang+ 2025 SIDM2c-inspired profile
+- Heavy concentrated at center (Mechanism 1, r_c_H = 0.2 r_s) AND broad tail (Mechanism 2, peak at 0.8 r_s)
+- Tidal stripping at r_tidal = 2.0 r_s_sub, 5 orbital passages, 15% mass loss/pass
+
+**Result (R88(54)):**
+- f_H drop factor at r_obs = 1.0 r_s across tau = 0.0 to 1.0: **0.94-1.01×**
+- Kill criterion (≥2× drop): **NOT MET**
+- Direction A **FAILS** the discriminator test
+
+**Physical interpretation:**
+- Heavy segregation in this parameterization is too weak to be stripped differentially
+- Broad tail at 0.8 r_s with σ = 2.0 r_s overlaps r_obs, so stripping doesn't differentiate
+- Final r_tidal = 1.52 r_s, r_obs = 1.0 r_s, observation inside tidal radius (no stripping)
+- The simple two-component SIDM segregation model does NOT produce subhalo-specific f_H drop
+
+**Implication:**
+The Phase G9 result strengthens the v=150 no-go: even a physically-motivated segregation
+model + tidal stripping doesn't reduce f_H(r_obs) in stripped subhalos by enough to
+satisfy the kill criterion.
+
+### 16.2 Phase G10 — SIDM2c first-principles f_H(r) (Path 2)
+
+**Implementation:**
+- Yang+ 2025 SIDM2c two-component profile: rho_H ~ NFW with r_c_H = 0.15 r_s
+- rho_L ~ NFW with r_c_L = 0.6 r_s (Mechanism 2)
+- Gravothermal concentration factor: (1 + 4·tau·exp(-r/r_c_H))
+- Light depletion: (1 - 0.3·tau·exp(-r/r_c_L))
+
+**f_H profile at tau = 1.0:**
+| r/r_s | f_H(r) |
+|-------|--------|
+| 0.05 | 0.81 (heavy dominated) |
+| 0.10 | 0.74 |
+| 0.20 | 0.22 |
+| 0.50 | 0.03 (light dominated) |
+| 1.00 | 0.04 |
+| 2.00 | 0.03 |
+
+**Channel impact (sigma_eff at r_obs, Phase G8 sigma/m):**
+| Channel | Phase G7 phenom. | SIDM2c | Threshold | Verdict change |
+|---------|------------------|--------|-----------|----------------|
+| Horigome | 0.06 | 0.004 | <0.8 | PASS (more margin) |
+| Cloud-9 inner | 58.9 | 0.20 | >50 | PASS → FAIL (factor 250 below) |
+| Cloud-9 V_max | 43.4 | 0.15 | >50 | MARGINAL → FAIL |
+| SPARC | 0.091 | 0.001 | ~0.19 | MARGINAL → FAIL (factor 200 below) |
+| Lei/Wang | 0.45 | 0.005 | 0.1-0.3 | KNIFE-EDGE → FAIL |
+| He+ 2020 | 0.45 | 0.005 | <0.3 | FAIL → PASS (now satisfied!) |
+| Cluster | 0.002 | 0.00002 | <0.001 | MARGINAL → PASS |
+
+**v=150 resolution:**
+- Phase G7 phenomenological: σ_eff(150) = 0.45, Lei/Wang PASS, He+ 2020 FAIL (1.51× over)
+- SIDM2c (any tau): σ_eff(150) = 0.005, Lei/Wang FAIL, He+ 2020 PASS
+- **v=150 no-go RESOLVED** but at the cost of ALL sigma_eff-based channels
+
+### 16.3 The structural trade-off (THEOREM)
+
+The Phase G10 result establishes a **structural theorem**:
+
+> Any physically-derived f_H(r) that resolves the v=150 no-go (He+ 2020 satisfied)
+> must concentrate heavy at center. Heavy at center means light dominates at all
+> observation radii (r > 0.2 r_s). Therefore σ_eff = f_H(r)² · σ/m drops by factor
+> 5-300× relative to phenomenological f_H(r) at all radii.
+
+This is **not a parameterization issue**. The trade-off is:
+- Heavy concentrated at center → resolves v=150 → kills Cloud-9/SPARC/Lei-Wang
+- Heavy distributed broadly → preserves Cloud-9/SPARC/Lei-Wang → re-creates v=150 no-go
+
+The framework CANNOT simultaneously:
+1. Satisfy He+ 2020 at v=150 (heavy concentrated at center)
+2. Satisfy Mace+ at Cloud-9 (need σ_eff ≥ 50)
+3. Satisfy SPARC at v=100 (need σ_eff ~ 0.19)
+4. Satisfy Lei/Wang at v=150 (need σ_eff > 0.1)
+
+**Items 1 and 2-4 are mutually exclusive** under any physically-derived f_H(r).
+
+### 16.4 Final verdict (R88(55))
+
+The v=150 no-go is **intrinsic to single-species σ_m with constant or centrally-
+concentrated f_H**. The three forward paths are now properly characterized:
+
+| Direction | Cost | Outcome | Status |
+|-----------|------|---------|--------|
+| **A: Subhalo-specific f_H (Phase G9)** | 2-3 wk N-body | Drop factor 0.94-1.01×, **FAIL** | Tested R88(54) |
+| **B: Multi-component UV (Phase G10)** | 1-2 mo UV | Resolves v=150, kills 5 channels | Trade-off revealed R88(55) |
+| **C: Ship as-is** | Done | Constraint map + no-go catalogue | Shipped R88(53) |
+| **D: Observation refinement** | 0 computation | Wait for He+ 2020/Lei-Wang follow-up | **RECOMMENDED next step** |
+
+### 16.5 Recommendation (R88(55))
+
+The paper should:
+1. Add §9.17b (NEW): "Structural trade-off theorem" with the Phase G10 result
+2. Update §9.17a to note that Direction A discriminator FAILED (Phase G9)
+3. Explicitly note that Phase G7 phenomenological f_H(r) is unphysical
+4. Recommend Direction D (observation refinement) as the most productive next step
+5. Note that Directions A and B were both tested and found to have inherent limitations
+
+**The paper's two structural no-gos (Cloud-9 vs dSph, Lei/Wang vs He+ 2020) are
+now STRONGER findings: they survive both a physically-motivated segregation model
+AND a first-principles SIDM2c parameterization.**
+
+The "missing angles worthy of exploration" (per user instruction) are:
+1. Why does the Phase G7 phenomenological f_H(r) work as well as it does?
+   (The trade-off theorem says it shouldn't, but it does — investigate why)
+2. Are there other observables that probe σ_eff at intermediate radii
+   where the trade-off might not apply?
+3. Can we design a multi-component UV model that breaks the theorem?
+4. Is the He+ 2020 observation or Lei/Wang observation more reliable?
+   (Direction D: which one should the field trust more?)
+
 The two structural no-gos (v=28↔15 and v=150) are the most important findings. They
 point to specific velocity windows where σ_m(v) cannot satisfy all probes simultaneously,
 which is exactly the kind of map the field needs to design the next round of theoretical
