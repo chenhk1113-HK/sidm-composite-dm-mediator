@@ -640,6 +640,14 @@ EFT target map for future work.**Scope of the no-go theorems (important caveat,)
 
 **The Balberg+ 2002 vs Yang+ 2024 disagreement on Fornax:** The Balberg+ analytical t_core formula used in §2.5/§2.6 gives t_core = 0.66 Gyr at σ/m = 7.49 cm²/g, predicting Fornax collapse within Hubble time. Yang+ 2024 gives τ = 0.113 at σ/m = 2.85 cm²/g, predicting core-expansion. These two calculations disagree by a factor of ~50 in their collapse prediction for Fornax. The Silverman+ 2026 (arXiv:2606.02566) and Fischer & Yu 2026 N-body results support Yang+ 2024: 3 of 6 ~10¹⁰ M☉ halos at σ/m = 70 cm²/g collapse, but no halo at σ/m = 2.85 cm²/g (Fornax-class) shows collapse. This is the analytical vs N-body disagreement the project has documented as an open question (Phase G4 resolution path).
 
+**Implementation item B.4 (R88(41), Yang+ 2024 validity range check):** The Phase G1 calculation extrapolates Yang+ 2024's parametric density model to σ/m values far from calibration. The Yang+ 2024 t_c formula was calibrated against BM2 at σ_eff = 7.1 cm²/g, t_c = 28.7 Gyr; the published Table 1 typically spans σ_eff ∈ [1, 15] cm²/g based on Draco/UFD-like calibrations. **At Cloud-9:**
+- σ_eff(V_max form) = 0.09 × 161.70 = **14.55 cm²/g** — at the upper edge of calibration (factor 2× above BM2); extrapolation risk **moderate to high**
+- σ_eff(MB-weighted form) = 0.09 × 50.00 = **4.50 cm²/g** — well inside calibration (factor 0.6× of BM2); extrapolation risk **low**
+
+**Interpretation:** The MB-weighted σ_eff calculation (item B.5 below) is more trustworthy than the σ/m(V_max) form, because it stays inside Yang+ 2024's empirically-calibrated regime. The σ/m(V_max) form's τ = 1.98 "deeply-collapsed" prediction is at the edge of the model's regime of validity and may not be reliable. The MB-weighted τ = 0.61 "core-expansion" prediction is more trustworthy and aligns with Cloud-9's observed diffuse H I profile.
+
+**Forward work:** Re-run Yang+ 2024's full Table 1 with MB-weighted σ_eff at each halo to check whether their published τ values change substantially. If they do, the entire Phase G1 quantitative anchor needs re-calibration; if they don't, the MB-weighted approach is validated.
+
 **Implementation item B.5 (R88(40), Maxwell-Boltzmann-weighted σ/m for Cloud-9):** The §9.13 Phase G1 calculation uses σ/m(V_max) = 161.70 cm²/g (canonical Gaussian evaluated at the halo's peak circular velocity). However, gravothermal evolution samples the **full Maxwell-Boltzmann distribution** of relative velocities during two-body collisions, not a single characteristic velocity. Computing the MB-weighted average:
 
 ⟨σ/m⟩_MB = ∫ σ/m(v) · f_MB(v; V_max) dv
