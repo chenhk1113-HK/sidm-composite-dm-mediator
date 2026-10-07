@@ -61,11 +61,11 @@ This roadmap implements the central insight from the Cloud-9 vs. dSph tension an
 
 ---
 
-## Phase G4 — Reframe 8-Channel Fit as Phase-Diversity Fit (Weeks 9-12)
+## Phase G4 — Reframe 8-Channel Fit as Phase-Diversity Fit (Weeks 9-12) [IMPLEMENTED R88(42)]
 
-**Status**: NOT STARTED.
+**Status**: IMPLEMENTED (R88(42), corrected framing R88(43)).
 
-**Deliverable**: Revised joint likelihood where each channel is assigned a phase prior based on observed density and kinematics. The fit then constrains σ/m(v) AND the phase distribution, not σ/m alone.
+**Deliverable**: Apply Yang+ 2024 gravothermal model to all 8 constrained halos at canonical σ/m(v) and compute τ = t/t_c. Revised joint likelihood where each channel is assigned a phase prior based on observed density and kinematics. The fit then constrains σ/m(v) AND the phase distribution, not σ/m alone.
 
 **Method**:
 - For each observed halo (SPARC galaxies, dSphs, UFDs, clusters), compute phase diagnostic — e.g., central density to maximum core-expansion density ratio.
@@ -84,19 +84,33 @@ This roadmap implements the central insight from the Cloud-9 vs. dSph tension an
 | Draco | max-core-expansion | 4.44 cm²/g at v=10 | moderate |
 | MW UFDs | varied (per Fischer & Yu 2026) | 2.85 cm²/g at v=15 | varied (pericentric-distance dependent) |
 
+**ACTUAL RESULTS (R88(42)/(43)):** When Phase G4 pipeline (`phase_g4_pipeline.py`) runs with MB-weighted ⟨σ/m⟩ at canonical σ/m(v):
+- All 8 halos predict τ < 0.15 (early core-expansion or NFW-like phase)
+- **No halo predicts collapse** at canonical parameters under MB averaging
+- The "Phase assignment" table above is incorrect — the framework's gravothermal cascade is INACTIVE at the canonical σ/m(v) point
+
+**Honest interpretation (R88(43)):** This is a **null result, not a positive discriminator**. The gravothermal channel does not currently explain the observed density diversity (Cloud-9 diffuse, dSph cores, etc.) because it doesn't fire anywhere. The §2.6a circularity is NOT resolved by Phase G4; it remains as an open tension requiring different physics (higher σ/m at dSph velocities, or merger-history modulation).
+
 ---
 
-## Phase G5 — Validate Against UFD Diversity (Weeks 12-16)
+## Phase G5 — Validate Against UFD Diversity (Weeks 12-16) [IMPLEMENTED R88(42)]
 
-**Status**: NOT STARTED.
+**Status**: IMPLEMENTED (R88(42)).
 
-**Deliverable**: Comparison of phase-aware predictions to observed UFD density diversity and dwarf rotation-curve scatter.
+**Deliverable**: Apply Phase G4 pipeline to 5 MW UFD halos; compare predicted τ to Fischer & Yu 2026 expectation that most UFDs are in collapse. Comparison of phase-aware predictions to observed UFD density diversity and dwarf rotation-curve scatter.
 
 **Method**:
 - Fischer & Yu (2026) provide simulation suite of MW UFDs; compare phase-aware density distribution.
 - Also compare to "Gravothermal collapse and the diversity of galactic rotation curves" framework, σ/m ≈ 20-40 cm²/g in dwarf halos.
 
-**Success criterion**: Phase-aware model should reproduce observed bimodality or broad scatter in dwarf central densities without requiring bimodal σ/m(v).
+**Success criterion**: Phase-aware model should reproduce observed bimodality or broad scatter in dwarf central densitie
+
+**ACTUAL RESULTS (R88(42)):** When Phase G5 pipeline (`phase_g5_ufd_diversity.py`) runs on 5 MW UFDs:
+- 0/5 UFDs predict collapse (all τ < 0.2, early core-expansion)
+- **Framework UNDER-PREDICTS collapse at UFD mass scale**
+- This **contradicts Fischer & Yu 2026** N-body finding that most MW UFDs should be in collapse phase
+
+**Interpretation:** The canonical σ/m(v) is too low at UFD velocities to drive gravothermal collapse on a Hubble timescale. Possible resolutions (forward work): higher background floor at v ~ 5-10 km/s, second resonance shifted to lower velocity, or Yang+ 2024 t_c underestimates collapse time at high concentration.s without requiring bimodal σ/m(v).
 
 ---
 
@@ -117,7 +131,7 @@ This roadmap implements the central insight from the Cloud-9 vs. dSph tension an
 
 ## Expected Impact on Project Verdict
 
-If the phase-aware pipeline (G1-G6) is implemented, the paper's headline verdict should shift from:
+**UPDATE (R88(43)):** Phase G4 has been implemented; the headline verdict did NOT shift to 'phase-diversity resolves the tension' — Phase G4 returned a null result. The original hypothesis framing should be replaced with: 'Phase G4 may or may not produce a positive discriminator; if it does not, the paper's headline remains 4 of 7 constrained channels pass with the gravothermal channel being an additional null result.' That is what happened. Original speculative paragraph preserved below for the historical record:
 
 > "4 of 5 constrained channels fit; Cloud-9 vs. dSph tension unresolved"
 
@@ -154,9 +168,9 @@ This is a stronger scientific claim than the current "constraint map" framing, b
 | G1 (Calibrated gravothermal model) | SCAFFOLD | `v0.3-prelim/code/gravothermal_evolution.py` |
 | G2 (Merger history) | SCAFFOLD | `v0.3-prelim/code/gravothermal_evolution.py` |
 | G3 (Cloud-9 re-analysis) | NOT STARTED | — |
-| G4 (Phase-diversity fit) | NOT STARTED | — |
-| G5 (UFD diversity validation) | NOT STARTED | — |
-| G6 (KiSS-SIDM validation) | NOT STARTED | — |
+| **G4 (Phase-diversity fit)** | **IMPLEMENTED (R88(42))** | phase_g4_pipeline.py — 8 halos run, **null result** (τ < 0.15 everywhere). NOT a positive discriminator. |
+| **G5 (UFD diversity validation)** | **IMPLEMENTED (R88(42))** | phase_g5_ufd_diversity.py — 5 MW UFDs run, **0/5 predict collapse**. Framework under-predicts collapse vs Fischer & Yu 2026. |
+| **G6 (Lei/Wang massive-galaxy validation)** | **NOT STARTED** | Forward work — extend Phase G4 to v=100-300 km/s Lei/Wang regime. Expected null result (σ_eff at these velocities 2-3 orders of magnitude below core-formation threshold). |
 
 **Total estimated effort**: 12-16 weeks for full G1-G5 implementation; G6 is ongoing.
 

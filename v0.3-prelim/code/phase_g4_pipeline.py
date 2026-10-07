@@ -1,5 +1,5 @@
 """
-Phase G4 — Massive-halo gravothermal pipeline (R88(42))
+Phase G4 — Massive-halo gravothermal pipeline (R88(43), corrected framing)
 
 Computes τ = t/t_c at canonical σ/m(v) using MB-weighted ⟨σ/m⟩ for each constrained
 halo, then compares predicted gravothermal phase to observed density state.
@@ -9,18 +9,29 @@ This module implements the Phase G4 deliverable identified in §9.13 of the pape
 
 Inputs
 ------
+-------
 - v0.3-prelim/code/gravothermal_yang2024.py (Phase G1 — Yang+ 2024 parametric model)
 - scripts/constants.py (Phase 44 SSoT)
 - scripts/v192_dsph_gravothermal_sweep.py (canonical halo parameters)
 
 Outputs
 -------
+---------
 - Per-halo: ⟨σ/m⟩_MB, σ_eff = f_H²·⟨σ/m⟩_MB, t_c, τ, predicted phase, observed state, consistency flag
 
-Status (R88(42))
+Status (R88(43))
 ----------------
-Phase G1 + G4 implemented. Phase G2 (merger history stochastic modulator) scaffolded.
-Phase G5 (UFD diversity validation) implemented separately in phase_g5_ufd_diversity.py.
+- Implementation: complete (8 constrained halos run)
+- Result (R88(43) honest framing): NULL result. Gravothermal cascade is INACTIVE at the
+  canonical σ/m(v) point under MB-weighted averaging. Nothing collapses. The "consistency"
+  between predicted phase and observed state is trivially satisfied because nothing was
+  ever predicted to collapse; this is NOT the same as reproducing observed density
+  diversity. The gravothermal channel does NOT currently supply a positive discriminator.
+- The §2.6a circularity is NOT resolved by Phase G4. The R88(42) headline claim
+  "8/8 consistent, circularity resolved" was an overclaim, corrected in R88(43).
+- Phase G2 (merger history stochastic modulator) scaffolded but not yet used to modulate.
+- Phase G5 (UFD diversity validation) implemented separately in phase_g5_ufd_diversity.py
+  (real negative result: 0/5 MW UFDs predict collapse, contradicts Fischer & Yu 2026).
 """
 from __future__ import annotations
 import math
@@ -163,7 +174,7 @@ def consistency_check(phase, observed):
 
 
 def main():
-    print("Phase G4: Massive-halo gravothermal pipeline (R88(42))")
+    print("Phase G4: Massive-halo gravothermal pipeline (R88(43), corrected framing)")
     print("=" * 100)
     print(f"{'Halo':<22} {'⟨σ/m⟩_MB':<10} {'σ_eff':<8} {'t_c':<8} {'τ':<6} {'Phase':<20} {'In-cal':<6} {'Observed':<25} {'✓?'}")
     print("-" * 100)
@@ -183,19 +194,23 @@ def main():
     print()
     print(f"Consistency: {n_consistent}/{n_total} halos show predicted phase matching observed state")
     print()
-    print("Key finding (R88(42)):")
-    print("  At canonical σ/m(v) with MB-weighted averaging, the framework's gravothermal")
-    print("  prediction is consistent with the OBSERVED DENSITY DIVERSITY across all 8 halos")
-    print("  (Cloud-9 diffuse, dSph extended cores, SPARC rotation curves, clusters lensing).")
-    print("  No halo predicts deeply-collapsed at the canonical parameter point under MB averaging.")
-    print("  This is the Phase G4 result: the §2.6a circularity is resolved by MB-weighted σ/m,")
-    print("  not by requiring merger-history rescue or formation-redshift rescue.")
+    print("Key finding (R88(43) honest framing — NULL result):")
+    print("  Under MB-weighting, the framework's gravothermal cascade is INACTIVE across all")
+    print("  8 constrained halos — t_c = 95-5000 Gyr, τ < 0.15 everywhere, NOTHING COLLAPSES")
+    print("  at the canonical parameter point.")
+    print()
+    print("  This is consistent with the average observed state (no halo observed collapsed)")
+    print("  but does NOT reproduce the observed density diversity. The gravothermal channel")
+    print("  therefore does not currently supply a positive discriminator for the framework.")
+    print()
+    print("  The §2.6a circularity is NOT resolved by Phase G4. The R88(42) headline claim")
+    print("  '8/8 consistent, circularity resolved' was an overclaim; R88(43) corrects it.")
     print()
     print("Caveats:")
     print("  - ρ_eff values are approximate (Cloud-9 NFW parameters from §9.12; others from literature)")
     print("  - σ_eff = f_H² · σ/m uses framework's heavy-channel-only decomposition")
     print("  - Yang+ 2024 t_c formula calibrated at σ_eff=7.1; in-calibration range is [1, 15] cm²/g")
-    print("  - All halo σ_eff values from this pipeline fall within [1, 15] cm²/g range")
+    print("  - 6 of 8 halo σ_eff values fall in [1, 15] cm²/g; SPARC (0.315) and Cluster (0.022) below floor")
 
 
 if __name__ == "__main__":
