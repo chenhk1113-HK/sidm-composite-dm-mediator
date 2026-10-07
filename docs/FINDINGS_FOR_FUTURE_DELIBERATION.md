@@ -391,3 +391,166 @@ Future deliberation should focus on:
 The honest answer for now: **ship Direction C**, with this findings document as the
 research record. Future work can revisit any of the open questions when new observational
 or theoretical developments warrant.
+---
+
+## 14. R88(54) — regravo.docx review + prioritized paths forward
+
+**Reviewer summary (Chinese-language, regravo.docx):**
+The reviewer evaluates the project as a "mature, methodologically rigorous SIDM constraint map project." Key observations:
+
+**Strengths acknowledged:**
+- Honest disclosure of all negative results (Phase G4 null, Phase G5 negative, f_H prescription dependence)
+- Single-source-of-truth (constants.py) eliminates version drift
+- Complete R88 audit trail from R88(7) through R88(53)
+- Causality checks (t_core > 3×t_cross) prevent non-physical outputs
+- External calibration to Yang+ 2024 BM2 (2.6% deviation, range noted)
+- Open science practice: code, data, MIT license, full documentation
+
+**Concerns raised:**
+- f_H(r) and σ/m(v) are phenomenological, not first-principles
+- KiSS-SIDM memory allocation issue (mitigated by ulimit -v, still fragile)
+- Phase G4/G5 null result doesn't supply positive discriminator
+- v=150 Lei/Wang vs He+ 2020 no-go needs multi-component UV or subhalo f_H
+- Re-confirm Horigome+ 2025 limits and Ohana+ 2026 3.2σ tension haven't updated
+
+**Submission recommendation:**
+"PRD, JCAP, or JHEP — journals valuing negative results and methodological contributions."
+Avoid framing as "discovered working SIDM model"; maintain "systematic test identifying structural no-gos."
+
+### 14.1 Path 1 (R88(54) Priority 1) — Direction A discriminating N-body simulation
+
+**Timeline:** 2-3 weeks
+**Tools:** OpenGadget3 (or similar SIDM N-body infrastructure)
+**Goal:** Convert the Direction A "testable claim" into a concrete yes/no result
+
+**Simulation design:**
+- Two-component SIDM with the Phase 44 σ/m decomposition
+- Subhalo on a controlled orbit around a central halo
+- Parameters: orbital pericenter (r_p / r_s ∈ [0.5, 2.0]), mass ratio (M_sub / M_host ∈ [0.001, 0.1])
+- Track f_H(r) at r_obs both before and after N orbital periods
+
+**Measurement protocol:**
+- f_H(r) = ρ_H(r) / (ρ_H(r) + ρ_L(r)) via particle tagging
+- r_obs = observation radius (typical: 1.0 r_s for subhalos)
+- Tidal stripping quantified via M_bound(t) / M_initial
+
+**Kill criteria (per R88(53) review):**
+- f_H drops by ≥2× after stripping → Direction A works → proceed to re-derive profiles
+- f_H drops by <1.5× after stripping → Direction A fails → v=150 no-go stands
+
+**Expected outcome:**
+The result, regardless of which side of the criterion it falls on, is a definitive scientific conclusion. The simulation is bounded, testable, and does not require new UV physics.
+
+**Implementation status:** Not started. Forward work item.
+
+### 14.2 Path 2 (R88(54) Priority 2) — SIDM2c parameterization for f_H(r)
+
+**Timeline:** 1-2 months
+**Tools:** Yang, Fan, Hou & Tsai (2025) SIDM2c parameterization
+**Goal:** Derive f_H(r) from first principles (mass segregation physics) instead of phenomenological
+
+**Physics basis:**
+In two-component SIDM, heavy particles (H) and light particles (L) exchange energy via collisions.
+This drives energy transfer from H to L, causing:
+- Heavy particles sink to halo center (higher phase-space density)
+- Light particles migrate outward (lower phase-space density)
+- Net effect: f_H(r) increases toward center, decreases outward
+
+Yang+ 2025 provides a parameterization ("SIDM2c") that captures this with few calibrated equations:
+- Cosmological simulations and controlled-isolated simulations both validate
+- Density profile shape depends on σ/m(v_target), mass ratio, integration time
+- Heavy-light segregation IS the natural outcome of gravothermal evolution
+
+**Implementation plan:**
+1. Adopt or adapt the SIDM2c parameterization from Yang+ 2025
+2. Express f_H(r, M_200, c, τ) as function of halo mass, concentration, gravothermal phase
+3. Replace the phenomenological f_H(r) = 0.6/(1+(r/r_s/1.5)^0.7) in phase_g7_three_peak
+4. Re-run Phase G4 (8 halos) and Phase G5 (5 UFDs) with new f_H(r)
+5. Check if natural phase diversity emerges — i.e., do different halos end up in different τ regimes?
+
+**Expected outcome:**
+If SIDM2c produces f_H(r) that varies with τ (gravothermal phase), then halos at different stages of evolution will have different observable σ_eff profiles. This could:
+- Resolve UFD collapse prediction (Fischer & Yu): high-c, low-τ UFDs would have high f_H at center, driving collapse
+- Resolve the v=150 no-go if f_H differs between centrals and subhalos due to different τ
+- Make the model genuinely predictive (no longer phenomenological f_H)
+
+**Risk:** SIDM2c was calibrated at σ/m ~ 147 cm²/g (Yang+ 2025); the framework operates at σ/m ~ 50 cm²/g at the peak but ~0.05 cm²/g at UFD velocities. The parameterization may not extrapolate cleanly to these regimes.
+
+**Implementation status:** Not started. Forward work item.
+
+### 14.3 Path 3 (R88(54) Priority 3) — Cosmological merger histories + gravothermal phase
+
+**Timeline:** 3+ months (long-term)
+**Goal:** Replace hand-classified halo histories (quiescent/active/mixed) with empirical merger trees from cosmological simulations
+
+**Current state:**
+Phase G2 (R88(49)) implemented a two-sided merger modulator with hand-classified histories:
+- Quiescent halos: t_c × 0.7 (faster collapse)
+- Active halos: t_c × 8.0 (slower collapse)
+- Mixed halos: t_c × 1.0
+- f_active ~ 0.5
+
+This is a parameterization, not a derivation.
+
+**Path 3 implementation:**
+1. Extract merger histories from public cosmological simulations (IllustrisTNG, EAGLE, FIRE)
+2. For each constrained halo (Cloud-9, Fornax, Sculptor, Draco, etc.), identify its host halo in the simulation
+3. Pull the full merger history (mass assembly history + pericenter passages + tidal events)
+4. Use this empirical history to compute gravothermal phase τ at each epoch
+5. Couple this to the σ_m(v) and f_H(r) from Paths 1 and 2
+
+**Expected outcome:**
+A genuinely predictive gravothermal pipeline:
+- Input: halo mass, concentration, accretion history
+- Output: predicted τ, expected core-collapse status, observable σ_eff(r)
+- No hand-classification of merger history; emerges from cosmology
+- Testable against the actual observed core-collapse/non-collapse status of each halo
+
+**Expected timeline:**
+- 1 month: literature review + simulation data acquisition
+- 1-2 months: pipeline development + testing on simulated halos
+- 1 month: application to observed halo sample + paper draft
+- Total: 3-4 months for full Phase G6 implementation
+
+**Implementation status:** Not started. Forward work item.
+
+### 14.4 Priority ordering (R88(54) synthesis)
+
+| Priority | Path | Timeline | Kill criterion | Risk |
+|----------|------|----------|----------------|------|
+| 1 | N-body Direction A | 2-3 wk | f_H drops <1.5× | Low (bounded sim) |
+| 2 | SIDM2c f_H(r) | 1-2 mo | SIDM2c doesn't apply at low σ/m | Medium (extrapolation) |
+| 3 | Cosmological merger histories | 3-4 mo | No cosmological sim covers relevant regime | High (resource-intensive) |
+
+**Recommended sequence:**
+1. Start Path 1 immediately (2-3 weeks, bounded)
+2. Begin Path 2 in parallel (1-2 months)
+3. After Paths 1 and 2 results are in, decide whether Path 3 is worth pursuing
+4. If Paths 1 and 2 both succeed, Path 3 becomes a Phase G6 paper-worthy effort
+5. If either Path 1 or 2 fails, Path 3 may not be worth the investment
+
+**The paper's current state is final** (Direction C, constraint map + no-go catalogue, R88(53) shipped).
+These three paths are for the next paper, not the current one.
+
+---
+
+## 15. Final status (R88(54))
+
+**What is shipped (commit 8cf5f05):**
+- 40-page paper with §9.17a structural no-go at v=150
+- 19 KB findings document (13 sections + 1 R88(54) section)
+- 20 referenced scripts in single .md bundle (601 KB)
+- Two structural no-gos identified (Cloud-9 vs dSph at v=28↔15; Lei/Wang vs He+ 2020 at v=150)
+- Honest disclosure of all negative results
+
+**What is NOT shipped (forward work, per R88(54) prioritization):**
+- Path 1: Direction A N-body discriminator (2-3 weeks, can start immediately)
+- Path 2: SIDM2c f_H(r) derivation (1-2 months, parallel work possible)
+- Path 3: Cosmological merger histories + gravothermal phase (3-4 months, depends on P1+P2)
+
+**Next concrete step:**
+Begin Path 1 (Direction A N-body) — this is the bounded, testable, kill-criterion-equipped experiment that converts the v=150 no-go from "unsolved tension" to "tested and resolved either way." Result is a definitive scientific conclusion regardless of outcome.
+
+**The paper is ready for submission as Direction C.**
+The future work has clear paths with kill criteria.
+The project state is honest, complete, and ready to hand off.
