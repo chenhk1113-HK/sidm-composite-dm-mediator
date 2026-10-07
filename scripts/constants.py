@@ -94,7 +94,7 @@ def g_chi_from_sigma_peak(sigma_peak=SIGMA_PEAK_CM2_PER_G, v_target=V_TARGET_KMS
 
 # ====== EXPERIMENTAL BOUNDS ======
 
-LZ_BOUND_CM2 = 9e-48  # LZ 2024 direct-detection bound
+LZ_BOUND_CM2 = 9.4e-48  # LZ 2024 90% CL for m_chi ~ 1 GeV (R88(46): updated from 9e-48)  # LZ 2024 direct-detection bound
 
 
 if __name__ == '__main__':
