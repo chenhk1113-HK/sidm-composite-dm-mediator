@@ -796,7 +796,15 @@ The factor-of-3 reduction comes from the low-velocity tail of the Maxwell-Boltzm
 | Cluster (r~1 r_s) | 1.0 | 0.342 | 0.0019 | <0.001 | MARGINAL |
 | Mace+ SIDM2v (v=28) | 0.5 | 0.410 | 58.9 | >50 | MARGINAL |
 
-**Score: 3 PASS, 5 MARGINAL, 1 FAIL out of 9 channels.**
+**Score (R88(51) corrected, σ_HH vs σ_eff distinction applied):**
+- Cloud-9 inner H I: σ_eff = 58.9 vs 50 (MARGINAL, factor 1.2)
+- Cloud-9 V_max: σ_eff = 43.4 vs 50 (MARGINAL, factor 0.87)
+- SPARC typical: σ_eff = 0.091 vs 0.19 (MARGINAL, factor 0.48)
+- Lei/Wang massive: σ_eff = 0.454 vs 0.1 (PASS, factor 4.5 — but threshold is soft, framework's own interpretation)
+- Horigome dSph: σ_eff = 0.059 vs <0.8 (PASS, solid — Horigome+ 2025 published)
+- Cluster: σ_eff = 0.0019 vs <0.001 (MARGINAL, factor 1.9 — solid Newman+ 2013 constraint)
+- Mace+ SIDM2v: σ_eff = 58.9 vs ≥50 (MARGINAL, working benchmark)
+- Fischer&Yu UFD collapse: σ_HH = 0.59-0.77 at v=8-12 km/s → Yang+ t_c ~ 150-350 Gyr → τ < 0.07 → **FAIL (real, not marginal)**
 
 **Improvement over R88(49) canonical:**
 - Horigome: was 9.4× ceiling violation → now σ_eff = 0.059 (PASS, 13× below ceiling)
@@ -814,6 +822,16 @@ The factor-of-3 reduction comes from the low-velocity tail of the Maxwell-Boltzm
 - Estimated 4-6 weeks of joint-fit work
 
 **Honest framing (R88(50)):** This is a forward-work proposal, not a final fit. The two-resonance + segregation model substantially improves the channel-by-channel score (was 1 PASS of 8 in R88(40) baseline; now 3 PASS of 9 with narrower peak + segregation). It demonstrates that the framework CAN be made to satisfy most observational channels with the right physical additions, but the joint fit has not been performed yet. The model is parametric, not derived — neither the segregation profile shape nor the σ/m(v) form is a first-principles prediction.
+
+**R88(51) verification (σ_HH vs σ_eff corrected):** Reviewer demanded two specific checks. NEW module: `v0.3-prelim/code/phase_g7_verification.py` (~150 lines).
+
+**Q1 — Does Phase G7 predict UFD collapse under Yang+ τ (σ_HH mode)?**
+At v=8-12 km/s (UFD V_max), σ_HH = σ_m(V_max) = 0.59-0.77 cm²/g (background floor only; the Cloud-9 peak has dropped to ~10⁻⁵ at these velocities, the second resonance is at v=150). Yang+ 2024 t_c = 28.7·(7.1/0.6-0.8)·(0.04/ρ_eff) ≈ 150-350 Gyr. τ = 10/t_c ≈ 0.03-0.07 → **NONE of the 5 UFDs predict collapse phase (τ ≥ 1.0).** Fischer & Yu 2026 is a **REAL FAILURE** under Phase G7, not marginal. The narrower peak + steeper background steal σ_eff budget from UFD velocities, eliminating any gravothermal cascade there.
+
+**Q2 — Does the second resonance at v=150 violate intermediate-v constraints?**
+At v=150 km/s, σ/m = 5.05 cm²/g, σ_eff = 0.45-1.26 (depending on f_H). At v=200 km/s, σ/m drops to 0.98 cm²/g, σ_eff = 0.09-0.25. At v=300+ km/s (group/cluster lensing), σ_eff < 0.01 (well below bounds). **The second resonance is BORDERLINE at v=150** — sits right at the edge of He+ 2020 galaxy-halo mapping sensitivity (~0.1-0.3 cm²/g). Reducing σ_peak2 below 3 loses Lei/Wang PASS; keeping σ_peak2=5 may over-produce cores in MW-mass halos. Cluster and group lensing are fine.
+
+**Honest assessment:** Phase G7 is a better-tuned parameterization, not a derivation. It substantially improves Cloud-9/SPARC/Lei-Wang/Horigome by adding four free functions (narrower peak shape, steeper background, second resonance, segregation profile) — each physically motivated but not UV-derived. It DOES NOT resolve Fischer & Yu UFD collapse (which would require either a third resonance at v~10 km/s, a higher background floor at v=5-10, or a Yang+ 2024 calibration update). The honest framing remains: constraint map + no-go catalogue, with a forward-work proposal that demonstrates flexibility but not predictive power.
 
 ### 10.1 UV completion: general framework and constraints
 
