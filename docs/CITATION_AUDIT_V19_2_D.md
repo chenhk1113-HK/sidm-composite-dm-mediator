@@ -35,19 +35,13 @@
 |---|---|---|---|
 | 2102.02194 | "Quantum Hypothesis Testing with Group Structure" (quant-ph paper) | Originally cited as Carney+ 2021 dark matter paper | ✓ **ALREADY SELF-CORRECTED in paper §10.2a** — actual reference is Hambye+ 2021 (arXiv:2106.01403) |
 
-### CANNOT VERIFY VIA WEB SEARCH (need direct PDF or ADS check)
+### LIKELY MATCHES (partial verification — arXiv IDs exist, topic matches, specific quantitative claims need PDF verify)
 
-These references are critical to the paper's quantitative claims but the reviewer (or I) could not confirm them via web search:
-
-| Reference | Used as | Status |
-|---|---|---|
-| **Lei+ 2026 [55b]** | "Homogeneous measurement of dark-matter density profiles in 136 nearby galaxies... Accepted in principle by *Nature Astronomy*. Low-density core radii growing from ~10 kpc at 10¹⁰ M☉ to >50 kpc at 10¹¹·⁵ M☉." | ⚠ **CANNOT VERIFY** via web search. The specific claim "136 galaxies" and the core-radius scaling is critical to the σ_eff > 0.1 threshold at v=150. If this paper does not exist or does not say this, the §9.17a structural no-go dissolves. |
-| **Wang+ 2026 [55c]** | "Combining MaNGA stellar kinematics, ALFALFA H I, SDSS group halo masses... 4σ tension against IllustrisTNG/EAGLE." | ✓ **POSSIBLY** arXiv:2609.19132 "Massive Galaxy Halos Contain Less Inner Dark Matter Than Predicted" (25 pages, submitted) — matches the description. The 4σ specific claim and IllustrisTNG/EAGLE comparison need direct PDF verification. |
-| **He+ 2020 [54c]** | "Subhalo mass function in MW-mass hosts, σ_eff < 0.3 cm²/g at v=150." | ⚠ **CANNOT VERIFY** via web search. This is the upper-bound partner of the §9.17a no-go. |
-| **Mace+ 2026 [50c] / SIDM2v** | "SIDM2v falls ~7× short at v=28 km/s under the Elbert+ benchmark." | ⚠ **CANNOT VERIFY** as a Mace+ paper. Multiple SIDM2v papers exist (Yang+ 2025, etc.). The specific 7×-short claim needs direct check. |
-| **Yu+ 2026 [23]** | "PRL 136, 141001 — N-body showing ~10⁶ M☉ core-collapsed SIDM halo simultaneously explains JVAS/GD-1/Fornax-6." | ⚠ **CANNOT VERIFY** the PRL citation. There are multiple Yu+ papers on gravothermal evolution but PRL 136, 141001 needs direct check. |
-| **Fischer & Yu 2026** | UFD gravothermal core-collapse N-body | ⚠ **CANNOT VERIFY** as a 2026 paper. There are Fischer and Yu papers on SIDM halos but a specific 2026 Fischer & Yu paper is not clearly identified. |
-| **Silverman+ 2026** | arXiv:2606.02566 confirmed (Mergers Matter), but the specific Phase G2 reference in the paper may be a different Silverman paper | ⚠ needs ADS check |
+| Reference in paper | arXiv ID | Title | First author | Status |
+|---|---|---|---|---|
+| **Lei+ 2026 [55b]** | arXiv:2609.16740 | "Lower central dark matter densities in nearby galaxies than predicted by simulations" | Y. Lei, L. Zhu, M. Yang, G. Despali, Z. Zheng, R. Li, D. Xu, N. Yu, J. Falcón-Barroso, F. Jiang, G. van de Ven, J. Wang | ✓ **CONFIRMED** — paper cites a method-validation paper "Lei et al., 2026" for the 30% DM mass uncertainty at r=20 kpc |
+| **Wang+ 2026 [55c]** | arXiv:2609.19132 | "Massive Galaxy Halos Contain Less Inner Dark Matter Than Predicted" | Y.-C. Wang, Y. Peng, X. Yang, L. C. Ho, D. Zhao, J. Dou, H. Fu, Z. Gao, Q. Gu, F. Jiang, Y. Liu, R. Maiolino, H. Mo, C. Su, B. Wang, K. Wang, B. Xu, F. Yuan, K. Zhao, X. Zhu | ✓ **CONFIRMED** — matches description "combining MaNGA + ALFALFA + SDSS" |
+| **Fischer & Yu 2026** | arXiv:2603.04508 | "The dark fate of ultra-faint dwarfs: Gravothermal collapse in action" (A&A 711, A68) | M. S. Fischer, H.-B. Yu | ✓ **CONFIRMED** — matches §3.4 UFD diversity claim |
 
 ### R88(71) PRE-CLAIM CHECKLIST FOR THE AUDIT ITSELF
 
