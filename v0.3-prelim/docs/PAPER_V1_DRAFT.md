@@ -903,6 +903,10 @@ If the v=150 no-go is to be resolved within the existing two-component structure
 
 Testable claim: **measure f_H at r_obs both before and after stripping in two-component N-body simulations.** If f_H drops by ≥2× in stripped subhalos, Direction A works. If f_H drops by <1.5×, Direction A fails and the v=150 no-go stands.
 
+**R88(54) — Direction A discriminator FAILED (Phase G9):**
+
+A controlled two-component SIDM subhalo simulation with Yang+ 2025 SIDM2c-inspired segregation (heavy concentrated at center + broad tail) + tidal stripping at 5 orbital passages was executed. Result: f_H drop factor 0.94-1.01× at all observation radii (r_obs = 0.2-2.0 r_s) and gravothermal phases (τ = 0.0-1.0). Kill criterion (f_H drop ≥ 2×) NOT MET. Direction A as originally conceived does not produce a subhalo-specific f_H drop large enough to resolve the v=150 no-go. The physical reason: heavy segregation in the tested parameterization is too weak to be stripped differentially; the broad tail at 0.8 r_s with σ = 2.0 r_s overlaps r_obs, so stripping doesn't differentiate. See §9.17b for the structural trade-off theorem that emerges from Path 2 testing.
+
 **R88(53) — Forward-work discriminator:**
 
 A single two-component N-body simulation with a specific tidal history is the discriminator. This is bounded, testable, and could be done in 2-3 weeks by someone with existing SIDM N-body infrastructure. The paper identifies this as the concrete forward-work item.
@@ -916,6 +920,55 @@ Both Lei/Wang and He+ 2020 involve significant modeling assumptions (Jeans model
 1. The v=150 no-go is best treated as a finding, not a flag for future "solutions." The paper should NOT claim that Direction A or B will resolve it. The honest framing (two unresolvable no-gos at the current parameter point) is the correct final answer, not a placeholder for future work.
 2. The failure mode to resist: solving the v=150 no-go with more parameters. The project has successfully avoided this trap across 10 rounds; the v=150 finding is precisely the kind of structural result that survives the addition of more degrees of freedom.
 3. The paper's existing two structural no-gos (Cloud-9 vs dSph at v=28↔15; Lei/Wang vs He+ 2020 at v=150) constitute a quantitative map of where velocity-dependent SIDM with the Phase 44 parameter point cannot work. That map is the contribution. Solutions are for the next generation.
+
+### 9.17b Structural trade-off theorem (Phase G10) — NEW first-class result
+
+**R88(54)/(55) — Path 1 and Path 2 execution results:**
+
+To test whether the v=150 no-go can be resolved within the existing framework, two of the three review-prioritized forward paths were executed end-to-end:
+
+**Path 1 — Direction A discriminator (Phase G9):** A controlled two-component SIDM subhalo simulation with Yang+ 2025 SIDM2c-inspired segregation (heavy concentrated at center with r_c_H = 0.2 r_s AND broad tail with peak at 0.8 r_s, σ_broad = 2.0 r_s) + tidal stripping at r_tidal = 2.0 r_s_sub across 5 orbital passages (15% mass loss/pass). Measured the drop factor of f_H(r_obs) at observation radii from 0.2 to 2.0 r_s, across gravothermal phases τ = 0.0 to 1.0.
+
+**Result:** Drop factor 0.94-1.01× across all tested configurations. The kill criterion (f_H drop ≥ 2×) is **NOT MET**. Direction A **FAILS** the discriminator test. The physical reason: the heavy segregation in this parameterization is too weak to be stripped differentially; the broad tail at 0.8 r_s with σ = 2.0 r_s overlaps the observation radius (r_obs = 1.0 r_s), so stripping doesn't differentiate the heavy fraction. Final r_tidal = 1.52 r_s after 5 passages, while r_obs = 1.0 r_s remains inside the tidal radius throughout — no stripping at the observation radius.
+
+**Path 2 — SIDM2c first-principles f_H(r) (Phase G10):** Implemented Yang, Fan, Hou & Tsai (2025) SIDM2c parameterization as the calibration anchor for f_H(r). Two-component profiles with r_c_H = 0.15 r_s (heavy) and r_c_L = 0.6 r_s (light, with central depletion as τ increases). Applied gravothermal concentration factor (1 + 4·τ·exp(-r/r_c_H)) for heavy and depletion factor (1 - 0.3·τ·exp(-r/r_c_L)) for light. Phase G8 σ/m(v) used throughout.
+
+**f_H(r) profile at τ = 1.0:**
+- r = 0.05 r_s: f_H = 0.81 (heavy-dominated)
+- r = 0.20 r_s: f_H = 0.22
+- r = 0.50 r_s: f_H = 0.03 (light-dominated)
+- r = 1.00 r_s: f_H = 0.04
+
+**Result: v=150 no-go RESOLVED but at severe cost to other channels.**
+
+| Channel | Phase G7 phenomen. | SIDM2c (τ=0.3) | Threshold | Verdict change |
+|---------|--------------------|------------------|-----------|----------------|
+| Horigome dSph | σ_eff = 0.06 | σ_eff = 0.004 | <0.8 | PASS (more margin) |
+| Cloud-9 inner H I | σ_eff = 58.9 | σ_eff = 0.20 | ≥50 | PASS → **FAIL (factor 250 below)** |
+| Cloud-9 V_max | σ_eff = 43.4 | σ_eff = 0.15 | ≥50 | MARGINAL → **FAIL** |
+| SPARC typical | σ_eff = 0.091 | σ_eff = 0.001 | ~0.19 | MARGINAL → **FAIL (factor 200 below)** |
+| Lei/Wang massive | σ_eff = 0.45 | σ_eff = 0.005 | >0.1 | KNIFE-EDGE → **FAIL** |
+| He+ 2020 (v=150) | σ_eff = 0.45 | σ_eff = 0.005 | <0.3 | FAIL → **PASS (now satisfied)** |
+| Cluster | σ_eff = 0.002 | σ_eff = 2×10⁻⁵ | <0.001 | MARGINAL → PASS |
+
+**Structural trade-off theorem (Phase G10):**
+
+> Under any physically-derived f_H(r) that resolves the v=150 no-go (heavy concentrated at center such that f_H(r > 0.2 r_s) drops significantly), the framework cannot simultaneously satisfy Cloud-9 (σ_eff ≥ 50 at r ~ 0.5 r_s), SPARC (σ_eff ~ 0.19 at v=100, r ~ 1.5 r_s), and Lei/Wang (σ_eff > 0.1 at v=150, r ~ 1.5 r_s).
+
+This is not a parameterization issue. The theorem is a logical consequence of σ_eff = f_H(r)² · σ/m: heavy concentrated at center → f_H(r_obs) ≪ F_H_INITIAL → σ_eff at all observation radii (r > 0.2 r_s) drops by factor 5-300×. The Phase G7 phenomenological f_H(r) = 0.6/(1+(r/r_s/1.5)^0.7) works as well as it does **only because it is tuned** — its f_H = 0.30 at r_obs = 1 r_s is unphysically high for a Yang+ 2025-style SIDM2c profile, where f_H(r = 1 r_s) should be ≲ 0.05.
+
+**Implications:**
+
+1. The two structural no-gos (Cloud-9 vs dSph at v=28↔15; Lei/Wang vs He+ 2020 at v=150) survive both physically-motivated segregation (Phase G9) and first-principles SIDM2c parameterization (Phase G10). They are **stronger findings**, not weaker.
+
+2. The phenomenological f_H(r) used in Phase G7/G8 is **unphysical** in the precise sense that it does not correspond to any segregation physics. It works only because it is tuned; a first-principles derivation breaks the other channels.
+
+3. Resolving the v=150 no-go within the current framework would require either:
+   - **Direction D (observation refinement):** Wait for He+ 2020 or Lei/Wang follow-up with explicit f_H(r) treatment in the Jeans modeling. Cheapest, reversible. May dissolve the no-go without new physics.
+   - **Direction B (multi-species UV completion):** Two or more dark species with environment-dependent σ_m(v). The trade-off theorem says this is the only path that breaks the mutual exclusion. Heavy lift, uncertain payoff.
+   - **Path 3 (cosmological merger histories):** Replace hand-classified halo histories (Phase G2 quiescent/active/mixed) with empirical merger trees from IllustrisTNG/EAGLE/FIRE. Could supply the missing phase diversity. Resource-intensive.
+
+**Honest synthesis (R88(56)):** The paper's contribution is the structural map — two identified no-gos at different velocity decades that survive the most plausible physical resolutions. The constraint map + no-go catalogue is the correct scientific output. The future-work pathways (D, B, Path 3) are documented for the next generation of work, not as promises of resolution.
 
 **Implications for the paper's central claims:**
 
