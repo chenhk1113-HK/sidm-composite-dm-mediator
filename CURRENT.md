@@ -2,13 +2,43 @@
 
 > **For:** Anyone who has 60 seconds and wants to know what this project
 > is, what it claims, and what the current best numbers are.
-> Updated with each version-bump round. Last refresh: 2026-10-01 (v19.2-C milestone).
+> Updated with each version-bump round. Last refresh: 2026-10-08 (v19.2-D milestone, R88(80)).
 
 ---
 
-## Standing: v0.4-prelim+v19.2-C-milestone-R71 (2026-10-01, DD section final)
+## Standing: v0.4-prelim+v19.2-D-R88(80) (2026-10-08, four-path exploration complete)
 
-**v19.2-C + post-final-pass rounds (2026-10-01)** — paper-freeze maintained; DD section finalized after **12 review rounds** (R60 → R71). **Tag `v19.2-C-milestone-R71`** created at HEAD (commit `c486782`).
+**v19.2-D (R88(80))** — paper-freeze maintained. **Three first-class structural results**: (1) §2.6a Cloud-9 vs dSph tension at v=28↔15; (2) §9.17a Lei/Wang vs He+ 2020 tension at v=150; (3) §9.17b structural trade-off theorem. §9.18 (R88(79)) added: four forward paths tested, **all four FAILED** to break the trade-off. R88(71) pre-claim checklist caught 3 errors during exploration (R88(75, 76, 78).
+
+**Headline (v19.2-D):** Phase 44 multi-resonance σ/m(v) framework achieves **4 of 8 constrained channels** under physically motivated f_H (Phase G10 SIDM2c first-principles). Cloud-9 vs dSph tension **partially resolved** by third narrow peak at v=10 km/s (Phase G8: 3/5 UFDs now predict collapse). **§9.17b structural trade-off stands as the framework's fundamental limit.** Paper is a constraint map + no-go catalogue, submission-ready as Direction C.
+
+**v19.2-D + R88(80) history (chronological):**
+1. R88(56): Honest synthesis (R88(43)→R88(56) corrections) — 4/8 PASS, three first-class no-gos documented.
+2. R88(57)–(58): Future-work plan and refinements.
+3. R88(59)–(61): Three forward paths tested, all FAILED (Path 3, Direction A, Direction B).
+4. R88(67) retracted in R88(68): "8/8 channels pass" was overclaim; R88(71) pre-claim checklist established.
+5. R88(70): CDG-2 (arXiv:2506.15644) added as acknowledged but non-constraining.
+6. R88(72): Research note on two forward directions beyond Phase 44.
+7. R88(73): Direction A (IDE-2cSIDM) FAILED — all three sub-strategies negative.
+8. R88(74)–(76): Direction B (ULDM) FAILED — overclaim (R88(75) at Lyman-alpha-excluded m_φ) + calc bug (R88(76) NFW normalization).
+9. R88(77)–(78): Direction D FAILED — numerical error in σ_m(150) caught, framework FAILS Lei/Wang at v=150 by factor 6.
+10. R88(79): Final review and §9.18 added to paper.
+11. R88(80): Bundle drift fix (paper not byte-identical to R88(56); §9.18 added).
+
+**Forward paths to break the structural trade-off (all FAILED):**
+- Path A (IDE-2cSIDM, R88(73)): 4/8 → 4/8 — IDE modifications are too weak within Planck+DESI bounds.
+- Path B (ULDM, R88(74)-(76)): 4/8 → 2-3/8 — ULDM at physical m_φ is WORSE than SIDM.
+- Path C (N-body + exotic UV): DEFERRED to v19.2-E (per FUTURE_WORK_PLAN_V19_2_E.md).
+- Path D (Observation refinement, R88(77)-(78)): numerical error caught, framework FAILS Lei/Wang.
+
+**R88(71) Pre-claim checklist (3 successful catches in this round):**
+- R88(75): ULDM 7/8 overclaim at Lyman-alpha-excluded m_φ
+- R88(76): NFW normalization bug in ULDM
+- R88(78): σ_m(150) numerical error in Direction D (10× wrong)
+
+**Process findings (R88(80)):** Bundle directory is NOT under git version control. R88(71) checklist item (6) added: if paper text or findings document changed, the bundle directory and single .md MUST be rebuilt in the same R88 round.
+
+**Tag pending:** `v19.2-D-milestone-R88(80)` (will be created on next user request).
 
 **v19.2-C headline:** Hierarchy constraint **g_N/g_χ < 3 × 10⁻¹¹** (R57, dark-sector hierarchy) + **α_χ ~ 6.8 × 10⁻⁷** (R58) + **5 UV no-go theorems** (1 general theorem from Chu+ 2019 p-wave literature + 4 ruled-out completions: magnetic dipole, hidden U(1), GeV inelastic, one-mediator UV) + **§2.7 Ohana+ consistency at 0.16 dex** + **Mace+ ~7× deficit** at v=28 (R39) + **standing_numbers.json infrastructure**.
 
