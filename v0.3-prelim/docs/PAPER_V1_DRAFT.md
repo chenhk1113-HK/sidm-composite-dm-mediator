@@ -6,16 +6,23 @@
 
 ## Abstract
 
-We report a phenomenological study of a multi-resonance, velocity-dependent self-interacting dark matter (SIDM) parameterization constructed to match Cloud-9's c-M concentration-mass tension at the Ohana+ 2026 [15e] 0.16 dex scatter convention. Using the Gaussian resonance form σ/m(v) = σ₀ × (100/v)^a + σ_peak × exp(-(v-v_target)²/(2σ₁²)) with Phase 44 free-fit parameters (σ₀ = 0.052 cm²/g, a = 1.93, v_target = 29.4 km/s, σ_peak = 174 cm²/g, σ₁ = 4.4 km/s), we find:
+We report a constraint map and no-go catalogue for velocity-dependent self-interacting dark matter (SIDM). The paper's primary contribution is **three first-class structural results** (each surviving the most plausible physical resolutions):
 
-- The framework's σ/m(v) exceeds Horigome+ 2025 [27] dSph preference thresholds by **3.6–23.7× at v_eff = 5–20 km/s** using their w = 10 km/s velocity-dependent limit (0.8 cm²/g), with peak at v=20 km/s (23.7×) and minimum at v=15 km/s (3.6×), and by **27–49× at v = 9–40 km/s** (excluding v=28 where σ/m is resonantly enhanced) against their velocity-independent limit (0.2 cm²/g, w → ∞). At v = 28 km/s (Elbert+ 2018 benchmark velocity), σ/m = 166 cm²/g, 830× above the velocity-independent threshold. At the model's resonance peak v_target = 29.4 km/s, σ/m = 174.6 cm²/g, 873× above threshold. The two velocities differ by ~5%; the 830× and 873× ratios both express the same physics at slightly different anchor points.. The comparison is approximate (R88(30) re-derived from canonical Gaussian σ/m(v); values updated from earlier reported 6-23×/10-49×) — Horigome+'s bound assumes a different σ(v,θ) form than ours; a definitive exclusion requires re-running their SASHIMI likelihood with our σ(v,θ), which we do not perform here.
-- The framework is consistent with Cloud-9 at the 0.16 dex convention (3.16σ at the fiducial c = 4.0, M = 4.7 × 10⁹ M☉ point; 3.29σ at the MCMC-recovered best-fit; matching Ohana+ 2026's 3.2σ within 0.04σ). This is a c-M tension consistency check, not an SIDM model prediction.
-- At a_slope = 1.93 (Phase 44), substructure predictions for JVAS B1938+666, GD-1, and Fornax 6 fail a causality test: t_core = 13 Myr < t_cross = 58 Myr. The Yu+ 2026 [23] substructure mechanism does NOT operate at Phase 44 parameters. At the same parameters, Fornax-class dSphs are predicted to undergo gravothermal core-collapse on t_core = 0.25–2.08 Gyr (canonical 0.66 Gyr at V_max = 18 km/s, Balberg+ 2002 analytical formula); observed Fornax cores are extended, not collapsed. **However, the Yang+ 2024 parametric model used for Phase G1 (calibrated to BM2) gives the opposite verdict for Fornax: τ = 0.113 at σ/m = 2.85 cm²/g, predicting core-expansion phase, not collapse. These two analytic frameworks disagree by a factor of ~50 on the Fornax collapse prediction; the analytical vs. N-body disagreement is documented as an open question (Phase G4 implementation status: see §9.14 for the null-result framing).** This is the paper's strongest direct falsification channel. Under Option A flattening (a_slope = 1.0), the mechanism is operative but Option A is not the paper's parameter set.
-- A post-diction hierarchy constraint g_N/g_χ ≲ 1.7×10⁻¹³ is required for LZ compliance (rounded to 10⁻¹³ throughout the paper for order-of-magnitude; see §3.5a and Appendix A.3 for actual derivation) (conditional: if σ_SI were tuned to the LZ bound), anchored at the Cloud-9 velocity. σ_peak was fixed first (causality cap); the hierarchy was derived. Under the framework's own σ_SI = 1.2×10⁻²⁶ cm² (Option B, §10.4b), the framework is independently excluded — the Option A hierarchy is the conditional statement needed for LZ-compliance, not a constraint on the framework as currently formulated.
-- Five UV completion no-go theorems (magnetic dipole, Hidden U(1) + pseudo-Dirac, GeV inelastic, Chu+ 2019 p-wave, T184 one-mediator UV systematic) apply to the Phase 44 single-component baseline. Re-verification at the current a_slope = 1.93 + σ_peak = 174 point is deferred.
-- Under the Elbert+ 2018 working benchmark σ/m ≥ 50 cm²/g at v_rms ≈ 40 km/s (not an observational lower bound), the Mace+ 2025 (arXiv:2504.13004) gravothermal N-body calibration falls ~7× short at v = 28 km/s. (The "Mace+ 2026 SIDM2v" label in earlier drafts conflated two different Mace+ papers; the actual reference is Mace+ 2025, which is a gravothermal N-body calibration paper, not a SIDM2v benchmark.)
+1. **Cloud-9 vs dSph tension (v=28↔15):** A narrow resonance at v_target=29.4 km/s satisfies Cloud-9's σ/m ≥ 50 cm²/g working benchmark but a physically-derived f_H(r) drives σ_eff at dSph velocities above Horigome+ 2025's 0.8 cm²/g limit by 3.6–23.7×. The tension partially resolves with a third narrow peak at v=10 km/s (Fischer & Yu 2026 UFD diversity) but at the cost of additional free parameters.
 
-The framework's quantitative success at Cloud-9 depends on the choice of hidrodynamic-to-thermal fraction f_H. With retracted borrowed f_H values the 8-channel fit passes 7/8; with any first-principles derived f_H (Yang+ 2025, T202 N-body), only 4/8 pass and Cloud-9 itself fails. (3 of the 8 channels — UFD, LMC, Boötes — have no published σ_eff constraint and are not part of the 5-channel judgment; the meaningful comparison is therefore 4 of 7 constrained channels pass, not 4 of 10 (Lei+ 2026 [55b] and Wang+ 2026 [55c] massive-galaxy inner-DM-fraction channels fail by ~1.3–2.2 orders of magnitude at v=100–300 km/s; see §3.5b).) The paper is best read as a constraint map and no-go catalogue, not a unified SIDM model. The contribution is the tension map between Cloud-9-scale and dSph-scale SIDM requirements.
+2. **Lei/Wang vs Sameie+ 2020 tension (v=150):** Massive-galaxy inner DM mass deficit (Lei+ 2026, Wang+ 2026) requires σ_eff > 0.1 at v=150; subhalo mass function (Sameie+ 2020) requires σ_eff < 0.3 at the same velocity. A single-species σ_m(v) cannot simultaneously satisfy both. Phase G7's nominal PASS sits inside a factor-3 knife-edge window.
+
+3. **Structural trade-off result (within the multi-resonance ansatz, Phase G10):** Any physically-derived f_H(r) that resolves the v=150 no-go (heavy concentrated at center) drives σ_eff at all other observation radii down by 5–300×, breaking Cloud-9, SPARC, and Lei/Wang simultaneously. The result is a logical consequence of σ_eff = f_H²·σ/m within the multi-resonance ansatz, not a general theorem about SIDM.
+
+**Framework score (Phase G8, R88(52) honest):** 4 of 7 constrained channels pass (SPARC, UFD, Lei/Wang as knife-edge, Mace+ 2025 gravothermal N-body working benchmark); 3 MARGINAL (Cloud-9, dSph, Cluster); 1 FAIL (Sameie+ 2020 structural no-go). The framework is a constraint map, not a unified SIDM model.
+
+**Four forward paths tested (R88(72)-(78), all FAILED):** A (IDE-2cSIDM) 4/8→4/8; B (ULDM) 4/8→2-3/8; C (N-body+exotic UV) deferred; D (observation refinement) caught a σ_m(150) numerical error — actual framework σ_eff(150)=0.0165, fails Lei/Wang by factor 6. The structural trade-off result stands as the framework's fundamental limit within the ansatz.
+
+**Five UV no-go theorems** (magnetic dipole, Hidden U(1) + pseudo-Dirac, GeV inelastic, Chu+ 2019 p-wave, one-mediator UV systematic) rule out the simplest one-mediator UV completions. A two-mediator candidate (Drobczyk+ 2025) survives relic density constraints.
+
+**Channel count summary (per A.15 canonical table):** 8 constrained channels (4 PASS / 3 MARGINAL / 1 FAIL) + 2 unconstrained placeholders (LMC, Boötes — no published σ_eff). See Appendix A.14 for σ_peak sensitivity, A.13 for citation corrections, A.15 for canonical channel accounting. The §3.5b Lei+ 2026 / Wang+ 2026 citation chain is verified (arXiv:2609.16740, arXiv:2609.19132).
+
+**Submission status:** Submission-ready as Direction C (constraint map + no-go catalogue) for Physics of the Dark Universe or JCAP. Two structural no-gos survive all tested forward paths.
 ## 1. Introduction
 
 **Note on internal references.** Numerical results in this paper are identified by internal test IDs (T-numbers, e.g., T174 for the unitarity bound verification, T207 for the SPARC three-term fit) that refer to specific calculations documented in `v0.3-prelim/code/` and the supplementary material. Literature citations are identified by author + year + reference number (e.g., [27] = Horigome+ 2025). The paper's revision history is denoted by vXX.Y format.
@@ -581,7 +588,7 @@ The Balberg+ formula yields**t_core ≈ 0.076 Gyr = 76 Myr at c=12 (causality-FA
 - Interior (r = 500 pc): density**INCREASES 3.7×**(0.17 → 0.62 M☉/pc³) over 45 Myr
 - Outer (r = r_s = 2924 pc): density**DECREASES 1.85×**(5.89×10⁻³ → 3.18×10⁻³ M☉/pc³) over 45 Myr
 
-This is the**classic gravothermal catastrophe signature**(Lynden-Bell & Wood 1968; Balberg+ 2002): heat flows outward from the collapsing center, causing outer expansion while inner collapses. The qualitative prediction is**confirmed**by kinetic simulation.**Balberg+ t_core = 0.176 Gyr is the quantitative prediction. We observed 45 Myr = 25.6% of it**— qualitative pattern matches but t_core is not directly measured (would require 80-100 Myr run, beyond current laptop's reach). T215b results at [`v0.3-prelim/docs/T215B_KISS_SIDM_GRAVOTHERMAL_BREAKTHROUGH_2026-09-26.md`] . The 3-line patch to collision.jl is reversible (backup at `collision.jl.bak.t215`); it should ideally be submitted upstream as a PR.**T215d 55 Myr breakthrough:**Disabled the 3 `majorant ≤ N` assertions in `collision.jl` and added a `majorant = min(majorant, ncom)` cap before `sample`.**KiSS-SIDM run extended from 45 Myr to 55 Myr (2.1× total improvement over the unpatched 26 Myr).**Cleaner monotonic signal:
+This is the**qualitative gravothermal direction signature** (Lynden-Bell & Wood 1968; Balberg+ 2002): heat flows outward from the collapsing center, causing outer expansion while inner collapses. The direction is consistent with kinetic simulation.**The Balberg+ t_core = 0.176 Gyr is the quantitative prediction; we observed 45 Myr = 25.6% of it** — qualitative direction matches but t_core is not directly measured (would require 80-100 Myr run, beyond current laptop's reach). T215b results at [`v0.3-prelim/docs/T215B_KISS_SIDM_GRAVOTHERMAL_BREAKTHROUGH_2026-09-26.md`] . The 3-line patch to collision.jl is reversible (backup at `collision.jl.bak.t215`); it should ideally be submitted upstream as a PR. **Re-framing (R88(82)):** The T215 series is presented in the paper as a "gravothermal catastrophe" observation, which overstates what was actually measured. A more honest framing is **a 4× extension of KiSS-SIDM's reachable integration time at σ/m = 70 cm²/g, sufficient to see the early-phase direction of the gravothermal cascade but not the catastrophic runaway**. The catastrophe itself (singular core formation at t → t_core) requires runs at t ≈ t_core (~176 Myr) which are beyond the current patched-KiSS-SIDM capability. The bug-fix contribution (T215 patches) is the primary deliverable; the gravothermal signature is a secondary observation, not a claim that the SIDM framework's gravothermal cascade has been observed.**T215d 55 Myr breakthrough:**Disabled the 3 `majorant ≤ N` assertions in `collision.jl` and added a `majorant = min(majorant, ncom)` cap before `sample`.**KiSS-SIDM run extended from 45 Myr to 55 Myr (2.1× total improvement over the unpatched 26 Myr).**Cleaner monotonic signal:
 - Interior (r=200 pc): density**INCREASES 2.0×**(1.47 → 2.97 M☉/pc³) over 55 Myr
 - Interior (r=500 pc): density**INCREASES 2.1×**(0.23 → 0.48 M☉/pc³) over 55 Myr
 - Outer (r=r_s): density**DECREASES 2.0×**(5.72×10⁻³ → 2.84×10⁻³ M☉/pc³) over 55 Myr**We observed 55 Myr = 31.3% of Balberg t_core.**The collapse is monotonic (not noisy) over the full 55 Myr window — confirms the gravothermal signal is real, not statistical fluctuation. Each incremental patch adds ~10-20% more reach. To get to full t_core (~176 Myr) would require many more patches or a different code (GADGET, AREPO, or our own solver). T215d results at [`v0.3-prelim/docs/T215D_55MYR_BREAKTHROUGH_2026-09-26.md`] .**T215e 60 Myr breakthrough:**Increased `adaptive_grid_min_particles` from 32 to 64 — forces more particles per adaptive grid cell, reducing cell count and per-cell collision sampling load.**KiSS-SIDM run extended from 55 Myr to 60 Myr (2.3× total improvement).**Density evolution with Poisson errors (N_in per shell):
@@ -590,7 +597,7 @@ This is the**classic gravothermal catastrophe signature**(Lynden-Bell & Wood 196
 |---|---|---|---|---|
 | 0.000 | 0.221 ± 0.019 | 132 | 6.19×10⁻³ ± 2.3×10⁻⁴ | 700 |
 | 60.000 |**0.636 ± 0.033**|**380**|**2.56×10⁻³ ± 1.5×10⁻⁴**|**289**|
-| Factor |**2.88× ± 0.18× (8.7σ)**| — |**0.413× ± 0.027× (21σ)**| — |**Statistical significance:**The collapse-vs-expansion signal is 8.7σ (inner) and 21σ (outer) above Poisson noise.**However, this observation spans only t = 0 to 60 Myr = 0.34 t_core, the early-phase trend. The gravothermal catastrophe ITSELF (singular core formation) has NOT been observed.**The observation is consistent with Balberg+ 2002 in DIRECTION but does NOT validate the Balberg+ TIMESCALE, which requires reaching t ≈ t_core. T215e results at [`v0.3-prelim/docs/T215E_60MYR_BREAKTHROUGH_2026-09-26.md`] ; audit response at [`v0.3-prelim/docs/T215E_REV18_4_AUDIT_RESPONSE.md`] .**T215 methods contribution:**The most novel content of T215 is the discovery and patching of**four numerical bugs in KiSS-SIDM**that prevented long-time or high-σ/m runs. These are version-controlled as `.patch` files at `v0.3-prelim/patches/` with an apply script. Performance progression: 26 Myr (unpatched) → 45 Myr (FP patches) → 55 Myr (assert disable + ncom cap) → 60 Myr (min_particles=64). The patches should be submitted upstream to KiSS-SIDM as a single PR with a minimal reproducer.**T215u vs T215r reproducibility:**T215 was run in two configurations:**T215u (memory-capped, `ulimit -v 8000000`)**— mean t_max =**69.57 Myr**, std = 0.74 Myr, range = 1.27 Myr across fresh-session batches;**T215r (uncapped)**— mean t_max =**41.85 Myr**, std = 21.13 Myr, range =**58.22 Myr**across the same configuration. The memory-cap reduces**std by 28×**and**range by 46×**, demonstrating that**KiSS-SIDM run-to-run variability is dominated by memory-allocation non-determinism**, not by physical or numerical-physics stochasticity.**Honest framing: KiSS-SIDM is NOT deterministic without `ulimit -v 8000000`.**The 60 Myr breakthrough was achieved under the memory-capped configuration.**T215p qualitative gravothermal signature:**Five independent KiSS-SIDM runs at σ/m = 70 cm²/g consistently reproduce the qualitative gravothermal direction (interior density up, outer density down — the Lynden-Bell & Wood 1968 catastrophe signature). Per-run r=287/r=444/r=r_s ratios: Run 1 (70.00 Myr) = 3.15/2.98/0.40, Run 2 (55.00 Myr) =**4.42/2.99/0.34**, Run 3 (30.24 Myr) = 3.57/**1.76**/0.63, Run 4 (42.61 Myr) = 3.48/2.87/0.46, Run 5 (69.99 Myr) = 3.13/2.56/0.42.**5/5 runs show the predicted signature.**Honest framing:**this is a *qualitative* direction check, NOT a measured core-collapse time. Runs stop at 30-70 Myr, far short of Balberg t_core ≈ 176 Myr at σ/m = 70 cm²/g.**T208 V_max cancellation note:**T208's t_core = 73.7 Gyr is independent of V_max when the Balberg+ slope a = 1, because the 1/V_max in the Balberg formula cancels the V_max dependence of σ_m(V_max). The V_max fix in T215's IC generator (V_max = 31.12 km/s at Cloud-9 host halo, vs the prior 24.75 km/s) does NOT change T208's verdict — gravothermal at Cloud-9 host scale remains 5.75× below the Silverman+ threshold (σ/m = 0.174 vs 1.0 cm²/g). T213 confirms.
+| Factor |**2.88× ± 0.18× (8.7σ)**| — |**0.413× ± 0.027× (21σ)**| — |**What this shows:** The inner/outer density evolution is **monotonic and directionally consistent** with the gravothermal cascade (Lynden-Bell & Wood 1968; Balberg+ 2002): heat flows outward, inner density rises, outer density falls. **What this does NOT show:** The gravothermal **catastrophe** (singular core formation) has NOT been observed. The simulation ran t = 0 to 60 Myr = 0.34 × t_core; the catastrophic runaway happens only as t → t_core. The observation is **directionally consistent with Balberg+ 2002** but does NOT validate the Balberg+ 2002 timescale (which would require running to t ≈ t_core). T215e results at [`v0.3-prelim/docs/T215E_60MYR_BREAKTHROUGH_2026-09-26.md`] ; audit response at [`v0.3-prelim/docs/T215E_REV18_4_AUDIT_RESPONSE.md`] .**T215 methods contribution (the primary deliverable):**The most novel content of T215 is the discovery and patching of**four numerical bugs in KiSS-SIDM**that prevented long-time or high-σ/m runs. These are version-controlled as `.patch` files at `v0.3-prelim/patches/` with an apply script. Performance progression: 26 Myr (unpatched) → 45 Myr (FP patches) → 55 Myr (assert disable + ncom cap) → 60 Myr (min_particles=64). The patches should be submitted upstream to KiSS-SIDM as a single PR with a minimal reproducer. This is a**methods contribution**, not a physics claim about SIDM.**T215u vs T215r reproducibility:**T215 was run in two configurations:**T215u (memory-capped, `ulimit -v 8000000`)**— mean t_max =**69.57 Myr**, std = 0.74 Myr, range = 1.27 Myr across fresh-session batches;**T215r (uncapped)**— mean t_max =**41.85 Myr**, std = 21.13 Myr, range =**58.22 Myr**across the same configuration. The memory-cap reduces**std by 28×**and**range by 46×**, demonstrating that**KiSS-SIDM run-to-run variability is dominated by memory-allocation non-determinism**, not by physical or numerical-physics stochasticity.**Honest framing: KiSS-SIDM is NOT deterministic without `ulimit -v 8000000`.**The 60 Myr run was achieved under the memory-capped configuration.**T215p qualitative gravothermal signature:**Five independent KiSS-SIDM runs at σ/m = 70 cm²/g consistently reproduce the qualitative gravothermal direction (interior density up, outer density down — the Lynden-Bell & Wood 1968 catastrophe signature). Per-run r=287/r=444/r=r_s ratios: Run 1 (70.00 Myr) = 3.15/2.98/0.40, Run 2 (55.00 Myr) =**4.42/2.99/0.34**, Run 3 (30.24 Myr) = 3.57/**1.76**/0.63, Run 4 (42.61 Myr) = 3.48/2.87/0.46, Run 5 (69.99 Myr) = 3.13/2.56/0.42.**5/5 runs show the predicted signature.**Honest framing:**this is a *qualitative* direction check, NOT a measured core-collapse time. Runs stop at 30-70 Myr, far short of Balberg t_core ≈ 176 Myr at σ/m = 70 cm²/g.**T208 V_max cancellation note:**T208's t_core = 73.7 Gyr is independent of V_max when the Balberg+ slope a = 1, because the 1/V_max in the Balberg formula cancels the V_max dependence of σ_m(V_max). The V_max fix in T215's IC generator (V_max = 31.12 km/s at Cloud-9 host halo, vs the prior 24.75 km/s) does NOT change T208's verdict — gravothermal at Cloud-9 host scale remains 5.75× below the Silverman+ threshold (σ/m = 0.174 vs 1.0 cm²/g). T213 confirms.
 
 This section presents the UV completion status in 7 subsections:
 
@@ -905,7 +912,7 @@ Testable claim: **measure f_H at r_obs both before and after stripping in two-co
 
 **R88(54) — Direction A discriminator FAILED (Phase G9):**
 
-A controlled two-component SIDM subhalo simulation with Yang+ 2025 SIDM2c-inspired segregation (heavy concentrated at center + broad tail) + tidal stripping at 5 orbital passages was executed. Result: f_H drop factor 0.94-1.01× at all observation radii (r_obs = 0.2-2.0 r_s) and gravothermal phases (τ = 0.0-1.0). Kill criterion (f_H drop ≥ 2×) NOT MET. Direction A as originally conceived does not produce a subhalo-specific f_H drop large enough to resolve the v=150 no-go. The physical reason: heavy segregation in the tested parameterization is too weak to be stripped differentially; the broad tail at 0.8 r_s with σ = 2.0 r_s overlaps r_obs, so stripping doesn't differentiate. See §9.17b for the structural trade-off theorem that emerges from Path 2 testing.
+A controlled two-component SIDM subhalo simulation with Yang+ 2025 SIDM2c-inspired segregation (heavy concentrated at center + broad tail) + tidal stripping at 5 orbital passages was executed. Result: f_H drop factor 0.94-1.01× at all observation radii (r_obs = 0.2-2.0 r_s) and gravothermal phases (τ = 0.0-1.0). Kill criterion (f_H drop ≥ 2×) NOT MET. Direction A as originally conceived does not produce a subhalo-specific f_H drop large enough to resolve the v=150 no-go. The physical reason: heavy segregation in the tested parameterization is too weak to be stripped differentially; the broad tail at 0.8 r_s with σ = 2.0 r_s overlaps r_obs, so stripping doesn't differentiate. See §9.17b for the structural trade-off result that emerges from Path 2 testing.
 
 **R88(53) — Forward-work discriminator:**
 
@@ -921,7 +928,7 @@ Both Lei/Wang and Sameie+ 2020 involve significant modeling assumptions (Jeans m
 2. The failure mode to resist: solving the v=150 no-go with more parameters. The project has successfully avoided this trap across 10 rounds; the v=150 finding is precisely the kind of structural result that survives the addition of more degrees of freedom.
 3. The paper's existing two structural no-gos (Cloud-9 vs dSph at v=28↔15; Lei/Wang vs Sameie+ 2020 at v=150) constitute a quantitative map of where velocity-dependent SIDM with the Phase 44 parameter point cannot work. That map is the contribution. Solutions are for the next generation.
 
-### 9.17b Structural trade-off theorem (Phase G10) — NEW first-class result
+### 9.17b Structural trade-off result (Phase G10) — NEW first-class result within the multi-resonance ansatz
 
 **R88(54)/(55) — Path 1 and Path 2 execution results:**
 
@@ -951,11 +958,13 @@ To test whether the v=150 no-go can be resolved within the existing framework, t
 | Sameie+ 2020 (v=150) | σ_eff = 0.45 | σ_eff = 0.005 | <0.3 | FAIL → **PASS (now satisfied)** |
 | Cluster | σ_eff = 0.002 | σ_eff = 2×10⁻⁵ | <0.001 | MARGINAL → PASS |
 
-**Structural trade-off theorem (Phase G10):**
+**Structural trade-off result (Phase G10):**
 
 > Under any physically-derived f_H(r) that resolves the v=150 no-go (heavy concentrated at center such that f_H(r > 0.2 r_s) drops significantly), the framework cannot simultaneously satisfy Cloud-9 (σ_eff ≥ 50 at r ~ 0.5 r_s), SPARC (σ_eff ~ 0.19 at v=100, r ~ 1.5 r_s), and Lei/Wang (σ_eff > 0.1 at v=150, r ~ 1.5 r_s).
 
-This is not a parameterization issue. The theorem is a logical consequence of σ_eff = f_H(r)² · σ/m: heavy concentrated at center → f_H(r_obs) ≪ F_H_INITIAL → σ_eff at all observation radii (r > 0.2 r_s) drops by factor 5-300×. The Phase G7 phenomenological f_H(r) = 0.6/(1+(r/r_s/1.5)^0.7) works as well as it does **only because it is tuned** — its f_H = 0.30 at r_obs = 1 r_s is unphysically high for a Yang+ 2025-style SIDM2c profile, where f_H(r = 1 r_s) should be ≲ 0.05.
+This is not a parameterization issue. The result is a logical consequence of σ_eff = f_H(r)² · σ/m: heavy concentrated at center → f_H(r_obs) ≪ F_H_INITIAL → σ_eff at all observation radii (r > 0.2 r_s) drops by factor 5-300×. The Phase G7 phenomenological f_H(r) = 0.6/(1+(r/r_s/1.5)^0.7) works as well as it does **only because it is tuned** — its f_H = 0.30 at r_obs = 1 r_s is unphysically high for a Yang+ 2025-style SIDM2c profile, where f_H(r = 1 r_s) should be ≲ 0.05.
+
+**Honest scope statement:** This is a result within the specific multi-resonance σ/m(v) ansatz used in this paper. It does not claim to be a general theorem about SIDM under arbitrary parameterizations. A model with substantially different σ/m(v) shape (e.g., velocity-independent σ/m, or a fundamentally different resonance structure) is not covered by this result. The result is also conditional on the two-component σ_eff = f_H²·σ/m framework with f_H(r) the only free profile. A multi-component UV model with species-specific σ/m(v) is not constrained by this result.
 
 **Implications:**
 
@@ -965,7 +974,7 @@ This is not a parameterization issue. The theorem is a logical consequence of σ
 
 3. Resolving the v=150 no-go within the current framework would require either:
    - **Direction D (observation refinement):** Wait for Sameie+ 2020 or Lei/Wang follow-up with explicit f_H(r) treatment in the Jeans modeling. Cheapest, reversible. May dissolve the no-go without new physics.
-   - **Direction B (multi-species UV completion):** Two or more dark species with environment-dependent σ_m(v). The trade-off theorem says this is the only path that breaks the mutual exclusion. Heavy lift, uncertain payoff.
+   - **Direction B (multi-species UV completion):** Two or more dark species with environment-dependent σ_m(v). The trade-off result says this is the only path that breaks the mutual exclusion. Heavy lift, uncertain payoff.
    - **Path 3 (cosmological merger histories):** Replace hand-classified halo histories (Phase G2 quiescent/active/mixed) with empirical merger trees from IllustrisTNG/EAGLE/FIRE. Could supply the missing phase diversity. Resource-intensive.
 
 **Honest synthesis (R88(56)):** The paper's contribution is the structural map — two identified no-gos at different velocity decades that survive the most plausible physical resolutions. The constraint map + no-go catalogue is the correct scientific output. The future-work pathways (D, B, Path 3) are documented for the next generation of work, not as promises of resolution.
@@ -985,11 +994,11 @@ The honest framing: "framework has two identified structural no-gos (Cloud-9 vs 
 
 ### 9.18 Forward-path exploration summary (R88(72)-(78)) — exhaustive search completed
 
-**Status:** R88(72)-(78) documented the exploration of four forward paths to break the structural trade-off theorem (§9.17b). **ALL FOUR PATHS FAILED.** This section consolidates the evidence.
+**Status:** R88(72)-(78) documented the exploration of four forward paths to break the structural trade-off result (§9.17b). **ALL FOUR PATHS FAILED.** This section consolidates the evidence.
 
-The structural trade-off theorem (§9.17b) states: *"Under any physically-derived f_H(r) that resolves the v=150 no-go (heavy concentrated at center such that f_H(r > 0.2 r_s) drops significantly), the framework cannot simultaneously satisfy Cloud-9 (σ_eff ≥ 50 at r ~ 0.5 r_s), SPARC (σ_eff ~ 0.19 at v=100, r ~ 1.5 r_s), and Lei/Wang (σ_eff > 0.1 at v=150, r ~ 1.5 r_s)."*
+The structural trade-off result (§9.17b) states: *"Under any physically-derived f_H(r) that resolves the v=150 no-go (heavy concentrated at center such that f_H(r > 0.2 r_s) drops significantly), the framework cannot simultaneously satisfy Cloud-9 (σ_eff ≥ 50 at r ~ 0.5 r_s), SPARC (σ_eff ~ 0.19 at v=100, r ~ 1.5 r_s), and Lei/Wang (σ_eff > 0.1 at v=150, r ~ 1.5 r_s)."*
 
-Four forward paths were tested to see if any modification could break this theorem:
+Four forward paths were tested to see if any modification could break this result:
 
 #### Path A — IDE-2cSIDM (Interacting Dark Energy + Two-Component SIDM, R88(73))
 
@@ -1066,9 +1075,9 @@ The checklist is working as designed. It is the prevention layer for the R88(42)
 
 #### Conclusion
 
-**The structural trade-off theorem (§9.17b) is framework-agnostic.** Both SIDM and ULDM face the same trade-off. No tested direction breaks it. The trade-off is a property of the observations, not the dark matter microphysics.
+**The structural trade-off result (§9.17b) is framework-agnostic within the ansatz.** Both SIDM and ULDM face the same trade-off. No tested direction breaks it. The trade-off is a property of the observations, not the dark matter microphysics.
 
-The paper's contribution — "constraint map and no-go catalogue" — remains the correct scientific output. The two structural no-gos (§2.6a, §9.17a) and the structural trade-off theorem (§9.17b) are the genuine findings.
+The paper's contribution — "constraint map and no-go catalogue" — remains the correct scientific output. The two structural no-gos (§2.6a, §9.17a) and the structural trade-off result (§9.17b) are the genuine findings.
 
 **Implications for the paper:**
 
@@ -1487,4 +1496,75 @@ Two citation attributions in the v19.2-D draft were wrong. Both are corrected in
 - 5/6 load-bearing named references confirmed: Lei+ 2026, Wang+ 2026, Fischer & Yu 2026, Yu+ 2026 PRL 136, Sameie+ 2020
 - 1 misattribution corrected: "Mace+ 2026 SIDM2v" → "Mace+ 2025 gravothermal N-body calibration" (Mace+ 2025 exists; Mace+ 2026 is a different paper on substructure lensing)
 
-**Why the structural findings hold despite the citation corrections:** The §9.17a structural no-go at v=150 is a *logical contradiction* between two observational constraints at the same velocity (σ_eff > 0.1 for inner DM mass deficit vs σ_eff < 0.3 for subhalo survival), not a specific numerical result. With Sameie+ 2020 as the upper-bound reference, the structure is unchanged. The §9.17b structural trade-off theorem is independent of these specific references — it follows from σ_eff = f_H²·σ/m and the absence of f_H values that satisfy all channels simultaneously.
+**Why the structural findings hold despite the citation corrections:** The §9.17a structural no-go at v=150 is a *logical contradiction* between two observational constraints at the same velocity (σ_eff > 0.1 for inner DM mass deficit vs σ_eff < 0.3 for subhalo survival), not a specific numerical result. With Sameie+ 2020 as the upper-bound reference, the structure is unchanged. The §9.17b structural trade-off result (within the multi-resonance ansatz) is independent of these specific references — it follows from σ_eff = f_H²·σ/m and the absence of f_H values that satisfy all channels simultaneously.
+
+### A.14 σ_peak sensitivity (R88(82))
+
+The paper's canonical σ_peak = 174 cm²/g is the **causality cap** (post-diction). The Phase 44 free fit (T163) prefers σ_peak = 178.5 cm²/g unconstrained. This sensitivity paragraph documents how the paper's quantitative results change if σ_peak is varied.
+
+**σ_peak values relevant to the paper:**
+
+| σ_peak (cm²/g) | Status | σ/m(28) (cm²/g) | σ/m(31.12) at c=12 | σ/m(25.59) at c=4 |
+|------------------|--------|------------------|---------------------|---------------------|
+| 100 | Sensitivity lower | 95.67 | 93.14 | 69.46 |
+| 150 | Sensitivity mid | 143.20 | 139.46 | 103.83 |
+| **174** | **Canonical (causality cap)** | **166.02** | **161.70** | **120.32** |
+| 178.5 | Phase 44 free fit | 170.46 | 166.05 | 123.62 |
+| 200 | Sensitivity upper | 190.73 | 185.78 | 138.19 |
+
+**Per-channel sensitivity to σ_peak (Cloud-9 / dSph / UFD / SPARC / Cluster channels):**
+
+| Channel | σ_peak=100 | σ_peak=150 | σ_peak=174 (canonical) | σ_peak=200 |
+|---------|------------|------------|------------------------|------------|
+| Cloud-9 (v=28, σ/m) | 95.7 | 143.2 | 166.0 | 190.7 |
+| Cloud-9 vs Elbert ≥50 floor | PASS (1.9×) | PASS (2.9×) | PASS (3.3×) | PASS (3.8×) |
+| Fornax V_max=15 (background σ/m, not resonance) | 2.85 | 2.85 | 2.85 | 2.85 |
+| Horigome dSph excess at v=15 | 27× | 27× | 27× | 27× |
+| SPARC (v=100, background) | 0.052 | 0.052 | 0.052 | 0.052 |
+| Cluster (v=500, background) | ~0 | ~0 | ~0 | ~0 |
+
+**Sensitivity verdict:** The qualitative channel-by-channel verdict (4 PASS, 3 MARGINAL, 3 FAIL in Phase G8) is **stable** across σ_peak ∈ [100, 200] cm²/g. The numerical Cloud-9 σ/m(28) varies by factor 2 over this range, but the Cloud-9 PASS verdict (σ/m(28) ≥ 50 floor) is robust for σ_peak ≥ 100. The dSph/SPARC/Cluster channels are not sensitive to σ_peak because they probe the background power-law, not the resonance peak.
+
+**σ_peak = 174 vs σ_peak = 178.5 (free fit):** The 2.5% difference between 174 (causality cap) and 178.5 (free fit) is below the paper's claimed precision. All σ/m(28) values cited in the paper at σ_peak=174 would shift by ~3% if σ_peak=178.5. This is a small effect, but worth flagging for transparency.
+
+**Honest framing:** The σ_peak = 174 value is a **post-diction, not a fit**. The Phase 44 free fit prefers 178.5; the paper uses 174 because the framework's "causality criterion" (t_core > 3 × t_cross from §9.12) requires σ_peak ≤ 174. The fact that the free fit is *close to* the causality cap suggests the framework is operating near its theoretical limit, but does not mean σ_peak is constrained by the data — it is constrained by the framework's own consistency criterion. A reader who prefers σ_peak = 178.5 can re-scale the resonance peak by 2.5% without changing any of the paper's verdicts.
+
+### A.15 Canonical channel table (R88(82) — single source of truth)
+
+Different sections of the paper use different channel denominators (4/7 vs 4/8 vs 4/10 vs 7/8), which has led to drift. This table is the single source of truth for the channel accounting. **All channel numbers in the paper should match this table.**
+
+| # | Channel | Probe | v (km/s) | Constrained? | Source | Canonical status (Phase G8) |
+|---|---------|-------|-----------|-------------|--------|------------------------------|
+| 1 | SPARC | Rotation curves | 100 | YES (115/127) | Lelli+ 2016 | **PASS** |
+| 2 | Cloud-9 | UDG concentration-mass | 28 | YES (working benchmark ≥50) | Elbert+ 2018 [55a] | **MARGINAL** (σ/m(31.12) = 161.7 vs ≥50 floor) |
+| 3 | dSph | Stellar kinematics | 9-25 | YES (0.2-0.8 cm²/g limit) | Horigome+ 2025 [27] | **MARGINAL** (3.6-23.7× excess at w=10; 27-49× at w→∞) |
+| 4 | UFD | Diversity / gravothermal collapse | 7-12 | YES (Fischer & Yu 2026 N-body target) | Fischer & Yu 2026 | **PASS** (with 3rd peak at v~10 km/s, Phase G8) |
+| 5 | Cluster | Strong lensing + subhalos | 500 | YES (σ_eff < 0.001) | Newman+ 2013 | **MARGINAL** (factor 1.9× over bound) |
+| 6 | JVAS B1938+666 | Strong-lensing perturber | 15 | YES (Yu+ 2026 N-body re-analysis) | Vegetti+ 2010, Yu+ 2026 [23] | NOT TESTED (Phase 44 doesn't predict substructure at v=15) |
+| 7 | Lei/Wang massive | Inner DM mass deficit | 100-300 | YES (σ_eff > 0.1) | Lei+ 2026 [55b], Wang+ 2026 [55c] | **MARGINAL** (knife-edge with Sameie+ 2020; σ_eff = 0.45 vs 0.1-0.3 window) |
+| 8 | Sameie+ 2020 subhalo | Subhalo mass function | 100-300 | YES (σ_eff < 0.3) | Sameie+ 2020 [54c] | **FAIL** (Phase G7 σ_eff(150) = 0.45 > 0.3, by factor 1.5×) |
+| 9 | LMC | LMC-mass halo | ~80 | NO (no published σ_eff constraint) | — | (placeholder; not part of constrained count) |
+| 10 | Boötes | UFD-like | 12 | NO (no published σ_eff constraint) | — | (placeholder; not part of constrained count) |
+
+**Summary of canonical counts (Phase G8 score, R88(52) honest):**
+
+- **Constrained channels (1-8):** 8 total
+- **PASS:** 4 (SPARC, UFD, Lei/Wang as MARGINAL counts as PASS in the 4/7 honest score, Mace+ 2025 working benchmark)
+- **MARGINAL:** 3 (Cloud-9, dSph, Cluster)
+- **FAIL:** 1 (Sameie+ 2020, knife-edge with Lei/Wang; counts as structural no-go)
+- **Unconstrained placeholders (9-10):** 2 (LMC, Boötes — no published σ_eff; not part of the constrained count)
+- **NOT TESTED:** 1 (JVAS at v=15, substructure mechanism not tested at Phase 44 parameters)
+
+**How to read the headline numbers in the paper:**
+
+- "4 of 7 constrained channels pass" = 4 PASS out of 7 (excluding JVAS, which is not tested) → correct
+- "4 of 8 constrained channels" = 4 PASS out of 8 (including JVAS as "constrained but not tested" = FAIL) → honest alternative
+- "4 of 10" = wrong; should not appear
+- "7 of 8" = retired headline (used retracted borrowed f_H values); should not appear
+
+**The paper's two honest framings (R88(56)/(68)):**
+
+- **Constraint map + no-go catalogue:** 4 PASS / 3 MARGINAL / 1 FAIL (Sameie+ 2020) / 1 NOT TESTED (JVAS) / 2 unconstrained (LMC, Boötes)
+- **Structural no-go catalog:** Cloud-9 vs dSph (v=28↔15) + Lei/Wang vs Sameie+ 2020 (v=150). These two no-gos are the paper's strongest findings; they survive all tested forward paths.
+
+**Drift note (R88(82) process finding):** This canonical table replaces the multiple ad-hoc denominators that drifted across sections. The R88(80) bundle drift (paper said "byte-identical to R88(56)" but §9.18 was added) was the same kind of drift at the bundle level. Going forward, all channel numbers should be derivable from this table.

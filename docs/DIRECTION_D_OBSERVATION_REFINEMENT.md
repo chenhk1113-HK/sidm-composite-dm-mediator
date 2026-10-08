@@ -80,7 +80,7 @@ But wait — what if one of these observations has a systematic shift? Let me ex
 
 ## The Critical Insight: Overlapping Constraints
 
-The trade-off theorem assumes Lei/Wang and Sameie+ 2020 are **mutually exclusive**:
+The trade-off result assumes Lei/Wang and Sameie+ 2020 are **mutually exclusive**:
 - Lei/Wang: 0.1 < σ_eff(150) < 0.3 (centrals)
 - Sameie+ 2020: σ_eff(150) < 0.3 (subhalos)
 
@@ -92,7 +92,7 @@ A model where centrals have f_H ~ 0.6 and subhalos have f_H ~ 0.05 (Phase G7) gi
 - σ_eff(150, central) = 0.36 * 0.5 = 0.18 cm²/g (within Lei/Wang range)
 - σ_eff(150, subhalo) = 0.0025 * 0.5 = 0.001 cm²/g (well below Sameie+ 2020 upper bound)
 
-**The model actually satisfies both observations.** The trade-off theorem was derived from an overly-strict reading of Sameie+ 2020 as "essentially zero" rather than "< 0.3".
+**The model actually satisfies both observations.** The trade-off result was derived from an overly-strict reading of Sameie+ 2020 as "essentially zero" rather than "< 0.3".
 
 ## What Direction D Actually Shows (R88(78) Corrected)
 
@@ -152,7 +152,7 @@ Neither is possible within the current framework. The trade-off is fundamental.
 | C | N-body + exotic UV | Not tested (too expensive) | FUTURE_WORK_PLAN |
 | D | Observation refinement (numerical error caught) | No trade-off dissolution | R88(78) |
 
-**The structural trade-off theorem stands.** No tested direction breaks it.
+**The structural trade-off result stands.** No tested direction breaks it.
 
 ## What This Means for the Project
 

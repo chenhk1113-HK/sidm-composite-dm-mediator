@@ -2,7 +2,7 @@
 
 **Status:** Research note. Not part of v19.2-D paper. Two adjacent research directions that could provide a path forward if the SIDM Phase 44 framework is genuinely at its structural limit.
 
-**Context:** R88(56) honest synthesis establishes the structural trade-off theorem as a fundamental limit of the SIDM Phase 44 framework. R88(70) confirms CDG-2 is non-constraining. R88(71) tightens the pre-claim checklist. The user has asked whether the trade-off could be relaxed by introducing (a) dark energy-dark matter coupling or (b) ultra-light scalar field dark matter (chameleon / soliton). This note assesses both.
+**Context:** R88(56) honest synthesis establishes the structural trade-off result as a fundamental limit of the SIDM Phase 44 framework. R88(70) confirms CDG-2 is non-constraining. R88(71) tightens the pre-claim checklist. The user has asked whether the trade-off could be relaxed by introducing (a) dark energy-dark matter coupling or (b) ultra-light scalar field dark matter (chameleon / soliton). This note assesses both.
 
 ---
 
@@ -20,7 +20,7 @@ If ξ_H > 0 (heavy species dilutes FASTER than standard matter), the heavy fract
 
 ### Why this could break the trade-off
 
-The structural trade-off theorem (R88(56) §9.17b) is derived under ΛCDM background — f_H evolves only via gravothermal segregation and tidal stripping. With IDE:
+The structural trade-off result (R88(56) §9.17b) is derived under ΛCDM background — f_H evolves only via gravothermal segregation and tidal stripping. With IDE:
 
 - Different halos at different redshifts see different f_H
 - The "saturation cap" at f_H = 0.95 from gravothermal evolution is *not* the only limit
@@ -30,7 +30,7 @@ Specifically: if heavy species drains into DE at high z, then low-z clusters (Pe
 - Reduce σ_eff(150) for subhalos (Sameie+ 2020 satisfied)
 - Keep σ_eff(150) moderate for centrals (Lei/Wang satisfied)
 
-Because the f_H profile is no longer determined by gravothermal segregation alone, the trade-off theorem's geometric argument (heavy concentrates at center → light dominates at r>0.2 r_s) may not apply.
+Because the f_H profile is no longer determined by gravothermal segregation alone, the trade-off result's geometric argument (heavy concentrates at center → light dominates at r>0.2 r_s) may not apply.
 
 ### What the literature says
 
@@ -82,7 +82,7 @@ The soliton-halo relation (Bar+ 2018, Blum+ 2025): soliton mass M_sol ∝ M_halo
 
 ### Why this could break the trade-off
 
-The structural trade-off theorem is specific to SIDM with two species and gravothermal evolution. ULDM is a fundamentally different framework:
+The structural trade-off result is specific to SIDM with two species and gravothermal evolution. ULDM is a fundamentally different framework:
 
 - **No σ_eff vs σ_HH distinction:** ULDM is a wave equation, not a Boltzmann equation. The "observable cross-section" concept doesn't apply.
 - **No gravothermal cascade:** The soliton is the ground state, not a phase. There's no "core formation → core collapse" sequence.

@@ -482,7 +482,7 @@ concentrated f_H**. The three forward paths are now properly characterized:
 ### 16.5 Recommendation (R88(55))
 
 The paper should:
-1. Add §9.17b (NEW): "Structural trade-off theorem" with the Phase G10 result
+1. Add §9.17b (NEW): "Structural trade-off result" with the Phase G10 result
 2. Update §9.17a to note that Direction A discriminator FAILED (Phase G9)
 3. Explicitly note that Phase G7 phenomenological f_H(r) is unphysical
 4. Recommend Direction D (observation refinement) as the most productive next step
@@ -494,7 +494,7 @@ AND a first-principles SIDM2c parameterization.**
 
 The "missing angles worthy of exploration" (per user instruction) are:
 1. Why does the Phase G7 phenomenological f_H(r) work as well as it does?
-   (The trade-off theorem says it shouldn't, but it does — investigate why)
+   (The trade-off result says it shouldn't, but it does — investigate why)
 2. Are there other observables that probe σ_eff at intermediate radii
    where the trade-off might not apply?
 3. Can we design a multi-component UV model that breaks the theorem?
@@ -704,13 +704,13 @@ The project state is honest, complete, and ready to hand off.
 
 1. **Start Path 3** in parallel with **Direction D monitoring**
 2. After 3-4 months, decide on Direction B based on Path 3 results
-3. **If Path 3 fails:** trade-off theorem stands as final word
+3. **If Path 3 fails:** trade-off result stands as final word
 4. **If Path 3 succeeds:** framework salvageable with empirical phase diversity
 5. **If Direction D updates first:** v=150 no-go dissolves, defer Direction B
 
 ### Single most important future path
 
-**Path 3 (cosmological merger histories)** is the only untested forward direction. It tests whether empirical phase diversity from real merger trees can break the structural trade-off theorem. If it doesn't work, the framework is at its fundamental limit and Direction B becomes the only remaining path.
+**Path 3 (cosmological merger histories)** is the only untested forward direction. It tests whether empirical phase diversity from real merger trees can break the structural trade-off result. If it doesn't work, the framework is at its fundamental limit and Direction B becomes the only remaining path.
 
 ---
 
@@ -726,7 +726,7 @@ The project state is honest, complete, and ready to hand off.
 **Path 3 v2/v3 (R88(60)):** Tested with smaller cap and longer τ_seg.
 - cap=0.60, τ_seg=0.3: still saturates, σ_eff diversity 1.00×
 - cap=0.60, τ_seg=100: f_H varies from 0.46 to 0.60, σ_eff diversity 1.30× (still < 2×)
-- **Path 3 negative result: phase diversity does NOT break the trade-off theorem.**
+- **Path 3 negative result: phase diversity does NOT break the trade-off result.**
 
 **Path 3 v4 (R88(63)):** CRITICAL BUG FIX from v1-v3.
 - v1-v3 had a bug: used σ_eff = f_H² · σ_m(v_target = 29.4 km/s) for all halos
@@ -739,7 +739,7 @@ The project state is honest, complete, and ready to hand off.
 - Constrained halo σ_eff(150) range: all 1.82
 - Constrained halo σ_eff diversity: **1.00×**
 
-The corrected Phase G11 shows that even with proper per-halo calculations, the structural trade-off theorem holds:
+The corrected Phase G11 shows that even with proper per-halo calculations, the structural trade-off result holds:
 - τ diversity is genuinely large (23586×)
 - But ALL halos map to the same σ_eff (1.82) because f_H is saturated at 0.60 cap for all
 - σ_eff = f_H² · σ_m = 0.36 · 5.05 = 1.82 (constant across all halos)
@@ -748,7 +748,7 @@ The corrected Phase G11 shows that even with proper per-halo calculations, the s
 - Phase diversity exists (23586×, real physical variation)
 - But σ_eff diversity is zero (1.00×, all halos give same answer)
 - This directly demonstrates the f_H saturation barrier
-- Phase diversity alone CANNOT overcome the trade-off theorem
+- Phase diversity alone CANNOT overcome the trade-off result
 
 **Why σ_eff is constant despite τ diversity:**
 - All constrained halos have τ >> τ_seg = 100
@@ -763,9 +763,9 @@ The corrected Phase G11 shows that even with proper per-halo calculations, the s
 - v=150 Lei/Wang: max σ_eff = 0.0695 (BELOW 0.1 threshold).
 - **Direction B verdict: FAILURE. Simple two-species model does not break trade-off.**
 
-### 18.1 Final verdict on the structural trade-off theorem
+### 18.1 Final verdict on the structural trade-off result
 
-**All three forward paths tested within the scope of this work FAILED to break the structural trade-off theorem:**
+**All three forward paths tested within the scope of this work FAILED to break the structural trade-off result:**
 
 | Path | Result | Why it failed |
 |------|--------|---------------|
@@ -774,7 +774,7 @@ The corrected Phase G11 shows that even with proper per-halo calculations, the s
 | Direction B (multi-species, Phase G12) | FAILED | σ_eff bounded by f_H² · σ_m at v=150 |
 | Direction D (observation refinement) | **NOT TESTED** | Requires waiting for new observations |
 
-**The structural trade-off theorem stands as the fundamental limit of single-species or simple two-species SIDM with Phase 44 parameters.** Resolving the v=150 no-go requires either:
+**The structural trade-off result stands as the fundamental limit of single-species or simple two-species SIDM with Phase 44 parameters.** Resolving the v=150 no-go requires either:
 1. Observation refinement (Direction D): Sameie+ 2020 or Lei/Wang updates with explicit f_H(r)
 2. Exotic UV construction: σ_H(v) shape that overcomes the σ_eff = f_H² · σ_m bound
 
@@ -782,14 +782,14 @@ The corrected Phase G11 shows that even with proper per-halo calculations, the s
 
 The Minimum Publishable Unit is now ready:
 
-**Title:** "Phase diversity and multi-species UV in SIDM halos: a test of the structural trade-off theorem"
+**Title:** "Phase diversity and multi-species UV in SIDM halos: a test of the structural trade-off result"
 
 **Sections:**
 1. Review of v19.2-D three first-class results (§2.6a, §9.17a, §9.17b)
 2. Direction A discriminator (Phase G9, R88(54)): drop factor 0.94-1.01×, FAIL
 3. Path 3 cosmological synthesis (Phase G11, R88(59)/(60)): τ diversity 1478× but σ_eff diversity 1.00×
 4. Direction B multi-species UV (Phase G12, R88(61)): σ_eff bounded by f_H² · σ_m
-5. Structural trade-off theorem stands
+5. Structural trade-off result stands
 6. Path forward: Direction D (observation refinement) + exotic UV
 
 **Estimated length:** 30 pages
@@ -815,13 +815,13 @@ The Minimum Publishable Unit is now ready:
 ### 18.4 What we learned
 
 **Three negative results are positive scientific findings:**
-1. The structural trade-off theorem is ROBUST — it survives Direction A (Phase G9), Path 3 (Phase G11), and Direction B (Phase G12) testing
+1. The structural trade-off result is ROBUST — it survives Direction A (Phase G9), Path 3 (Phase G11), and Direction B (Phase G12) testing
 2. Simple parameterizations of σ_m(v) and f_H(r) cannot break the mutual exclusion
 3. Resolution requires either:
    - Observation refinement (Direction D, cheapest)
    - Exotic UV construction (e.g., σ_H(150) >> σ_L(150), specific velocity-dependent couplings)
 
-**The MPU paper would establish this as a first-class result: the trade-off theorem is the fundamental limit of the framework.**
+**The MPU paper would establish this as a first-class result: the trade-off result is the fundamental limit of the framework.**
 
 ---
 
@@ -891,7 +891,7 @@ This is what makes the Cluster channel pass. But there is no physical derivation
 
 The honest position is:
 
-> The framework CAN satisfy all channels if environment-dependent σ_m(v) with independently tuned shapes for centrals and subhalos is allowed. However, this requires a f_H drop of 12× that is inconsistent with the Phase G9 N-body discriminator (0.94-1.01×). The "breakthrough" is therefore a parameter-fitting result, not a physical resolution. The structural trade-off theorem stands as the fundamental limit of single-species or simple two-species SIDM with Phase 44 parameters.
+> The framework CAN satisfy all channels if environment-dependent σ_m(v) with independently tuned shapes for centrals and subhalos is allowed. However, this requires a f_H drop of 12× that is inconsistent with the Phase G9 N-body discriminator (0.94-1.01×). The "breakthrough" is therefore a parameter-fitting result, not a physical resolution. The structural trade-off result stands as the fundamental limit of single-species or simple two-species SIDM with Phase 44 parameters.
 
 This preserves the project's strongest scientific asset: honesty about what the framework can and cannot do.
 
@@ -904,7 +904,7 @@ Instead of "8/8 channels pass" (overclaim), R88(67) should have reported:
 - BUT the required f_H drop (12×) contradicts Phase G9 discriminator (0.94-1.01×)
 - AND the high-v cutoff is unmotivated
 - AND the optimization is overfitting to 8 channel thresholds
-- Therefore: the structural trade-off theorem stands; the "breakthrough" is a fitting artifact
+- Therefore: the structural trade-off result stands; the "breakthrough" is a fitting artifact
 
 ### 19.5 Restoration of R88(56) honest synthesis
 
@@ -921,7 +921,7 @@ Phase G13-G16 do NOT overturn this. They show:
 ### 19.6 What this means for the paper
 
 The paper should:
-1. Keep §9.17b (structural trade-off theorem) as the authoritative synthesis
+1. Keep §9.17b (structural trade-off result) as the authoritative synthesis
 2. NOT claim "8/8 channels pass" as a result
 3. Phase G13-G16 should be documented as "explored but did not provide physical resolution"
 4. The "constraint map + no-go catalogue" framing (Direction C) remains correct
@@ -935,7 +935,7 @@ The paper does not need a new section; R88(68) simply restores the R88(56) hones
 - Phase G13-G16 framing as "breakthrough"
 
 **Retained (R88(56) synthesis):**
-- Structural trade-off theorem
+- Structural trade-off result
 - Constraint map + no-go catalogue
 - Two structural no-gos survive all tests
 
@@ -1006,7 +1006,7 @@ CDG-2 is acknowledged as a notable observational extreme (most DM-dominated gala
 
 ## 21. Final Project Status (R88(72)-(79)) — Four-Direction Exploration Summary
 
-**Status:** The project has completed its exploratory phase. Four forward paths were tested to see if any modification could break the structural trade-off theorem (§9.17b of paper). **ALL FOUR FAILED.** This section consolidates the evidence and the final project state.
+**Status:** The project has completed its exploratory phase. Four forward paths were tested to see if any modification could break the structural trade-off result (§9.17b of paper). **ALL FOUR FAILED.** This section consolidates the evidence and the final project state.
 
 ### 21.1 The Structural Trade-off Theorem (R88(56) §9.17b)
 
@@ -1064,13 +1064,13 @@ The checklist is working as designed. It is the prevention layer for the R88(42)
 
 ### 21.5 Final Project State
 
-**The structural trade-off theorem stands as the framework's fundamental limit.**
+**The structural trade-off result stands as the framework's fundamental limit.**
 
 Both SIDM and ULDM face the same trade-off. The trade-off is a property of the observations, not the dark matter microphysics.
 
 **The paper is submission-ready as a constraint map + no-go catalogue:**
 - Two structural no-gos documented (§2.6a, §9.17a)
-- One structural trade-off theorem (§9.17b, reinforced by §9.18)
+- One structural trade-off result (§9.17b, reinforced by §9.18)
 - Honest framing throughout
 - Submission-ready for PRD/JCAP/JHEP
 
@@ -1120,9 +1120,9 @@ Both SIDM and ULDM face the same trade-off. The trade-off is a property of the o
 
 ### 21.9 Conclusion
 
-The project is complete in its exploratory phase. The structural trade-off theorem is the framework's strongest result. The paper is submission-ready.
+The project is complete in its exploratory phase. The structural trade-off result is the framework's strongest result. The paper is submission-ready.
 
-**The honest contribution:** A constraint map and no-go catalogue with two structural no-gos and one structural trade-off theorem, supported by four tested forward paths that all failed to break the trade-off. The framework is at its fundamental limit.
+**The honest contribution:** A constraint map and no-go catalogue with two structural no-gos and one structural trade-off result, supported by four tested forward paths that all failed to break the trade-off. The framework is at its fundamental limit.
 
 **The process contribution:** R88(71) pre-claim checklist is now an established part of the project's methodology, with three successful catches in this round alone. The project's self-correction reputation is its most valuable asset.
 

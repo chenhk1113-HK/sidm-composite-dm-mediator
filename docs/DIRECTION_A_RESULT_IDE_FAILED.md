@@ -18,10 +18,10 @@
 ## R88(71) Pre-Claim Checklist Applied to Negative Result
 
 **1. Does this contradict prior results? NO.**
-- This is a NEW test of the trade-off theorem under cosmological modifications
+- This is a NEW test of the trade-off result under cosmological modifications
 - The geometric argument (R88(55) Phase G10) is unchanged: within-halo segregation
 - The IDE modification is at the BACKGROUND level; it does NOT change within-halo physics
-- Therefore the trade-off theorem still applies within each halo
+- Therefore the trade-off result still applies within each halo
 
 **2. Are the parameters physical? YES.**
 - w in [-0.99, -0.85]: DESI 2025 allowed range
@@ -42,7 +42,7 @@
 - No double-counting, no unmotivated features
 
 **5. Is there a "prior claim that would need to be wrong"?**
-- The trade-off theorem (R88(56) §9.17b) does NOT need to be wrong
+- The trade-off result (R88(56) §9.17b) does NOT need to be wrong
 - The result is consistent with the geometric argument
 - We did not "break" anything; we tested an extension and it didn't work
 
@@ -50,7 +50,7 @@
 
 ## What This Result Means
 
-The structural trade-off theorem is **even more robust** than initially thought:
+The structural trade-off result is **even more robust** than initially thought:
 
 1. **R88(55) Phase G10** showed: any physically-derived f_H(r) that resolves v=150 fails other channels
 2. **R88(56) §9.17b** elevated this to a first-class result
@@ -62,7 +62,7 @@ The reason: the trade-off is a **geometric** property of within-halo structure, 
 ## Implications for the Project
 
 1. **Direction A is now a documented negative result** — three sub-strategies all failed cleanly
-2. **The trade-off theorem stands** as a fundamental limit of the framework
+2. **The trade-off result stands** as a fundamental limit of the framework
 3. **The paper's R88(56) honest synthesis is correct** — no IDE modification breaks the trade-off
 4. **Direction B (ULDM) is the remaining unexplored alternative** — a different framework, not a parameter extension
 
@@ -82,8 +82,8 @@ Compared to the 2-3 month estimate for Direction A, this is dramatically faster 
 
 ## Next Steps
 
-- **Direction B (ULDM)**: Not yet tested. Different framework; trade-off theorem doesn't apply. Would require 3-4 months to implement and test all 8 channels.
-- **Stay with R88(56) honest synthesis**: The trade-off theorem is the result. The framework is a constraint map + no-go catalogue.
+- **Direction B (ULDM)**: Not yet tested. Different framework; trade-off result doesn't apply. Would require 3-4 months to implement and test all 8 channels.
+- **Stay with R88(56) honest synthesis**: The trade-off result is the result. The framework is a constraint map + no-go catalogue.
 
 ## Code Modules
 

@@ -12,11 +12,11 @@
 The current paper (v19.2-D, R88(56)) establishes a constraint map + no-go catalogue with three first-class results:
 1. §2.6a: Cloud-9 vs dSph tension at v=28↔15
 2. §9.17a: Lei/Wang vs Sameie+ 2020 tension at v=150
-3. §9.17b: Structural trade-off theorem (Phase G10)
+3. §9.17b: Structural trade-off result (Phase G10)
 
 These three results are robust. They survive:
 - A physically-motivated segregation model (Phase G9: drop factor 0.94-1.01×, kill criterion NOT met)
-- A first-principles SIDM2c parameterization (Phase G10: trade-off theorem)
+- A first-principles SIDM2c parameterization (Phase G10: trade-off result)
 
 The current paper's contribution is the structural map. The next paper (v19.2-E) would pursue one or more of the six forward paths below.
 
@@ -70,7 +70,7 @@ The current paper's contribution is the structural map. The next paper (v19.2-E)
 
 Phase G2 (R88(49)) currently uses hand-classified merger histories (quiescent/active/mixed). Replacing these with empirical merger trees from cosmological simulations could supply the missing phase diversity.
 
-The structural trade-off theorem (Phase G10) says single-species σ_m(v) with any physically-derived f_H(r) cannot satisfy all channels. Path 3 tests whether **phase diversity from real merger histories** changes this — if different halos end up at different τ, the trade-off may not bind uniformly.
+The structural trade-off result (Phase G10) says single-species σ_m(v) with any physically-derived f_H(r) cannot satisfy all channels. Path 3 tests whether **phase diversity from real merger histories** changes this — if different halos end up at different τ, the trade-off may not bind uniformly.
 
 ### 2.2 Implementation steps
 
@@ -107,9 +107,9 @@ The structural trade-off theorem (Phase G10) says single-species σ_m(v) with an
 
 ### 2.4 Success / Failure criteria (R88(58) sharpened)
 
-**Success:** Empirical merger histories produce τ values that differ by ≥ factor 2 across the constrained halos (Cloud-9 vs Fornax vs Sculptor vs Draco), allowing phase diversity to break the trade-off theorem. Specifically: at least one halo must be at τ < 0.5 and another at τ > 1.0, with the spread distributed across the full sample.
+**Success:** Empirical merger histories produce τ values that differ by ≥ factor 2 across the constrained halos (Cloud-9 vs Fornax vs Sculptor vs Draco), allowing phase diversity to break the trade-off result. Specifically: at least one halo must be at τ < 0.5 and another at τ > 1.0, with the spread distributed across the full sample.
 
-**Failure:** All constrained halos end up at τ < 0.5 or τ > 2.0 (uniform phase), meaning merger history doesn't supply the missing diversity. The trade-off theorem stands.
+**Failure:** All constrained halos end up at τ < 0.5 or τ > 2.0 (uniform phase), meaning merger history doesn't supply the missing diversity. The trade-off result stands.
 
 **Ambiguous:** τ spread is factor 1.5-2.0 — marginal; requires follow-up with larger sample.
 
@@ -117,11 +117,11 @@ The structural trade-off theorem (Phase G10) says single-species σ_m(v) with an
 
 ### 2.6 Why this matters
 
-Path 3 is the **only untested forward path**. All others (Direction A, Direction B) have been tested and found to have inherent limitations (Phase G9, Phase G10). If Path 3 doesn't work either, the structural trade-off theorem is genuinely binding, and the framework is at its fundamental limit.
+Path 3 is the **only untested forward path**. All others (Direction A, Direction B) have been tested and found to have inherent limitations (Phase G9, Phase G10). If Path 3 doesn't work either, the structural trade-off result is genuinely binding, and the framework is at its fundamental limit.
 
 ### 2.6 Why this matters
 
-Path 3 is the **only untested forward path**. All others (Direction A, Direction B) have been tested and found to have inherent limitations (Phase G9, Phase G10). If Path 3 doesn't work either, the structural trade-off theorem is genuinely binding, and the framework is at its fundamental limit.
+Path 3 is the **only untested forward path**. All others (Direction A, Direction B) have been tested and found to have inherent limitations (Phase G9, Phase G10). If Path 3 doesn't work either, the structural trade-off result is genuinely binding, and the framework is at its fundamental limit.
 
 ---
 
@@ -134,7 +134,7 @@ Path 3 is the **only untested forward path**. All others (Direction A, Direction
 
 ### 3.1 Motivation
 
-Direction B is the **only path that breaks the trade-off theorem by construction**. A multi-species model with environment-dependent cross-sections could, in principle, satisfy Sameie+ 2020 (subhalos) and Lei/Wang (centrals) simultaneously without killing Cloud-9/SPARC.
+Direction B is the **only path that breaks the trade-off result by construction**. A multi-species model with environment-dependent cross-sections could, in principle, satisfy Sameie+ 2020 (subhalos) and Lei/Wang (centrals) simultaneously without killing Cloud-9/SPARC.
 
 ### 3.2 Implementation requirements
 
@@ -168,7 +168,7 @@ Direction B is the **only path that breaks the trade-off theorem by construction
 - Verify LZ still satisfied
 
 **Step 3 (2 weeks): Re-derive structural trade-off**
-- Does the new σ_m(v) break the trade-off theorem?
+- Does the new σ_m(v) break the trade-off result?
 - If yes: paper-worthy result
 - If no: Direction B also fails
 
@@ -182,13 +182,13 @@ Direction B is the **only path that breaks the trade-off theorem by construction
 
 **Success:** A concrete Lagrangian with two dark species and mediator(s) produces σ_central(v) and σ_sub(v) that satisfy all 10 channels simultaneously, including both Sameie+ 2020 (v=150) and Lei/Wang (v=150). The model must also preserve LZ bound (σ_SI < 9.4×10⁻⁴⁸ cm²) and have a consistent UV completion (no symmetry breaking violations, no Lorentz invariance violations).
 
-**Failure:** Any two-species model that satisfies Sameie+ 2020 also kills Cloud-9/SPARC/Lei-Wang (the trade-off theorem generalizes to multi-species). Document the failure mode.
+**Failure:** Any two-species model that satisfies Sameie+ 2020 also kills Cloud-9/SPARC/Lei-Wang (the trade-off result generalizes to multi-species). Document the failure mode.
 
 **Ambiguous:** A model satisfies some channels but not all — requires further tuning. Document which channels pass and which fail, and identify the bottleneck.
 
 **Decision gate:** Only pursue Direction B if Path 3 fails. If Path 3 produces phase diversity, Direction B is deferred (not needed). This is the R88(58) sequencing recommendation.
 
-This is a high-risk path. The trade-off theorem says single-species σ_m(v) is fundamentally limited; multi-species is the only escape. But constructing a consistent UV model is hard, and the result may simply be that no such model exists at the relevant parameter point.
+This is a high-risk path. The trade-off result says single-species σ_m(v) is fundamentally limited; multi-species is the only escape. But constructing a consistent UV model is hard, and the result may simply be that no such model exists at the relevant parameter point.
 
 ---
 
@@ -204,14 +204,14 @@ This is a high-risk path. The trade-off theorem says single-species σ_m(v) is f
 The four open questions are NOT equal priority. Suggested ordering:
 
 1. **Q3 (Sameie+ 2020 vs Lei/Wang reliability)** — directly informs Direction D; if one observation is unreliable, the v=150 no-go dissolves. **Highest priority.**
-2. **Q1 (why Phase G7 f_H(r) works)** — could reveal a loophole in the trade-off theorem. **High priority.**
+2. **Q1 (why Phase G7 f_H(r) works)** — could reveal a loophole in the trade-off result. **High priority.**
 3. **Q4 (multi-component UV feasibility)** — overlaps with Direction B; pursue only if Direction B is started. **Medium priority.**
 4. **Q2 (intermediate-radius observables)** — speculative; useful as background for Direction D and Path 3. **Lowest priority.**
 
 ### 4.1 Four bounded investigations
 
 **Q1 — Why does Phase G7 phenomenological f_H(r) work as well as it does?**
-- The trade-off theorem says it shouldn't (heavy should be too concentrated at center for SIDM2c)
+- The trade-off result says it shouldn't (heavy should be too concentrated at center for SIDM2c)
 - But empirically, Phase G7 f_H(r) makes Cloud-9/SPARC/Lei-Wang all consistent
 - Investigate: what property of Phase G7 f_H(r) makes it more permissive than SIDM2c?
 - Method: Compare Phase G7 f_H(r) to SIDM2c at intermediate radii (r ~ 0.5-2 r_s); identify which channels are insensitive to the difference
@@ -230,7 +230,7 @@ The four open questions are NOT equal priority. Suggested ordering:
 - Method: Reproduce both analyses with explicit f_H(r) treatment; compare residuals
 - Deliverable: Comparative analysis paper (~15 pages)
 
-**Q4 — Can a multi-component UV model break the trade-off theorem?**
+**Q4 — Can a multi-component UV model break the trade-off result?**
 - Same as Priority 3 but with smaller scope
 - Investigate: minimum UV requirements to break the theorem
 - Method: Derive necessary conditions; check if any published UV model satisfies them
@@ -392,7 +392,7 @@ Path 3 result?
 ├── Success (τ diversity ≥ factor 2)
 │   → Ship v19.2-E with phase-diversity paper (~30 pages)
 │   → Title: "Cosmological phase diversity in SIDM halos:
-│            a test of the structural trade-off theorem"
+│            a test of the structural trade-off result"
 │   → Direction B DEFERRED (not needed)
 │   → Open questions shift focus (Q1 becomes less critical)
 │
@@ -400,7 +400,7 @@ Path 3 result?
 │   → Direction B becomes MANDATORY
 │   → Path 3 negative result documented as paper (~25 pages)
 │   → Title: "Phase uniformity in cosmological merger histories:
-│            the structural trade-off theorem as fundamental limit"
+│            the structural trade-off result as fundamental limit"
 │   → Direction B starts immediately after
 │
 └── Ambiguous (τ spread 1.5-2.0)
@@ -415,7 +415,7 @@ If the full program can't be funded, the smallest publishable contribution is:
 
 **MPU = Path 3 result + Direction D update + SASHIMI re-run**
 
-This produces one paper (~30 pages) titled **"Cosmological phase diversity in SIDM halos: a test of the structural trade-off theorem"** regardless of whether Path 3 succeeds or fails.
+This produces one paper (~30 pages) titled **"Cosmological phase diversity in SIDM halos: a test of the structural trade-off result"** regardless of whether Path 3 succeeds or fails.
 
 - If Path 3 succeeds: positive result + SASHIMI confirmation + observational status
 - If Path 3 fails: negative result + SASHIMI confirmation + observational status
@@ -429,15 +429,15 @@ The plan currently frames Path 3 as a search for a resolution. But a negative re
 
 **Negative result paper (Path 3 fails):**
 
-> "We tested whether cosmological merger histories supply the phase diversity needed to resolve the v=150 no-go. Across 5-10 RELHIC-like halos in IllustrisTNG-300, all constrained halos ended up at gravothermal phase τ < 0.5 or τ > 2.0 (uniform distribution). Merger history does not produce the phase diversity required to break the structural trade-off theorem. The trade-off therefore stands as the fundamental limit of single-species SIDM with the Phase 44 parameter point."
+> "We tested whether cosmological merger histories supply the phase diversity needed to resolve the v=150 no-go. Across 5-10 RELHIC-like halos in IllustrisTNG-300, all constrained halos ended up at gravothermal phase τ < 0.5 or τ > 2.0 (uniform distribution). Merger history does not produce the phase diversity required to break the structural trade-off result. The trade-off therefore stands as the fundamental limit of single-species SIDM with the Phase 44 parameter point."
 
-This is a **stronger scientific claim** than "we tried and it didn't work." It establishes the trade-off theorem as the boundary of what single-species SIDM can achieve.
+This is a **stronger scientific claim** than "we tried and it didn't work." It establishes the trade-off result as the boundary of what single-species SIDM can achieve.
 
 ## 12. Bottom Line
 
 The current paper (v19.2-D, R88(56)) is **submission-ready as Direction C**. The future-work plan above represents the explicit roadmap for v19.2-E.
 
-**The single most important future path is Path 3 (cosmological merger histories)** — it's the only untested forward direction, and it tests whether empirical phase diversity can break the structural trade-off theorem.
+**The single most important future path is Path 3 (cosmological merger histories)** — it's the only untested forward direction, and it tests whether empirical phase diversity can break the structural trade-off result.
 
 **The cheapest future path is Direction D** (observation monitoring) — zero computation, fully reversible, may dissolve v=150 no-go.
 
