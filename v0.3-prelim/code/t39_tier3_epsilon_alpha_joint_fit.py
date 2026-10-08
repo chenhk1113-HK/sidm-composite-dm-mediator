@@ -57,8 +57,17 @@ from sidm_velocity_dependent import sigma_m_effective
 from t30_lz_real_posterior import loglike_lz_real, LZ_REAL
 from t32_fermi_dwarf_channel import loglike_fermi_dwarf, FERMI_95CL_LIMITS
 
-RESULTS_DIR = Path("/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/data/results")
-RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+# Lazily-initialized results directory (created in main(), not at import time,
+# so importing this module is side-effect-free on the filesystem).
+RESULTS_DIR = None
+
+def _get_results_dir():
+    global RESULTS_DIR
+    if RESULTS_DIR is None:
+        _dir = Path(config.RESULTS_DIR_V03)
+        _dir.mkdir(parents=True, exist_ok=True)
+        RESULTS_DIR = _dir
+    return RESULTS_DIR
 
 # Tier-3 new priors: epsilon, alpha in [10^-60, 10^-1]
 # (epsilon must go down to 10^-50 to satisfy LZ; wider prior catches the
@@ -377,12 +386,9 @@ def main():
         ),
     }
 
-    out_path = RESULTS_DIR / "t39_tier3_epsilon_alpha_joint_fit.json"
+    out_path = _get_results_dir() / "t39_tier3_epsilon_alpha_joint_fit.json"
     out_path.write_text(json.dumps(out, indent=2, default=str))
-    win_path = Path("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/data/results/t39_tier3_epsilon_alpha_joint_fit.json")
-    win_path.write_text(json.dumps(out, indent=2, default=str))
     print(f"\noutput -> {out_path}")
-    print(f"        -> {win_path}")
 
 
 if __name__ == "__main__":
