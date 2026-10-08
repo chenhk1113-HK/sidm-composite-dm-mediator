@@ -1,5 +1,5 @@
 """
-Phase G16 — Multi-parameter optimization (R88(67))
+Phase G16 — Multi-parameter optimization (R88(67) + R88(68) self-correction)
 
 Phase G13: 2/15 simple shapes break v=150 trade-off, but fail other channels
 Phase G14: even tuned versions of trade-off-breaking shapes fail Cloud-9
@@ -13,6 +13,49 @@ This phase does EXHAUSTIVE multi-parameter optimization:
 
 The goal: find ANY parameter combination that passes ≥6/8 channels
 including the v=150 trade-off.
+
+============================================================================
+R88(68) SELF-CORRECTION
+============================================================================
+The "8/8 channels pass" result reported in R88(67) does NOT survive scrutiny:
+
+1. DOUBLE-COUNTING: Phase G16 reduces both the v=150 peak amplitude (0.3x)
+   AND applies a separate f_H_sub = 0.05. But the physical mechanism is
+   tidal stripping which reduces f_H, not sigma_m itself. The 0.3x peak
+   reduction and the f_H reduction are not independent effects.
+
+2. CONTRADICTS PHASE G9: The required f_H drop from 0.6 to 0.05 is a
+   factor of 12x. Phase G9 (R88(54)) measured the tidal-stripping f_H
+   drop factor as 0.94-1.01x (FAIL of the >=2x kill criterion). Phase G16
+   requires 12x more f_H reduction than the N-body discriminator found.
+
+3. UNMOTIVATED HIGH-v CUTOFF: The v_cutoff=300 km/s parameter is an
+   additional free function with no physical derivation. The paper's
+   canonical sigma/m(v) (Gaussian resonance + power-law background) has
+   no such feature.
+
+4. OVERFITTING: With 6 parameters and 8 channels, a brute-force search
+   over ~11,000 combinations will find some combination that passes all
+   thresholds by chance. This is fitting, not physical prediction.
+
+CORRECT FRAMING (R88(68)):
+The structural trade-off theorem stands as the fundamental limit of
+single-species or simple two-species SIDM with Phase 44 parameters.
+
+The framework CAN satisfy all channels if environment-dependent sigma_m(v)
+with independently tuned shapes for centrals and subhalos is allowed.
+However, this requires a f_H drop of 12x that is inconsistent with the
+Phase G9 N-body discriminator (0.94-1.01x). The "breakthrough" is
+therefore a parameter-fitting result, not a physical resolution.
+
+The R88(56) honest synthesis remains authoritative:
+"The two structural no-gos survive both physically-motivated segregation
+(Phase G9) and first-principles SIDM2c parameterization (Phase G10).
+They are stronger findings, not weaker."
+
+This module is retained for documentation purposes only. The
+"8/8 channels pass" claim is hereby retracted.
+============================================================================
 """
 from __future__ import annotations
 import math

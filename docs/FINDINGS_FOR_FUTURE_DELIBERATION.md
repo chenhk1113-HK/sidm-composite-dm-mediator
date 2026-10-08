@@ -823,3 +823,134 @@ The Minimum Publishable Unit is now ready:
    - Exotic UV construction (e.g., σ_H(150) >> σ_L(150), specific velocity-dependent couplings)
 
 **The MPU paper would establish this as a first-class result: the trade-off theorem is the fundamental limit of the framework.**
+
+---
+
+## 19. R88(68) — Self-correction: R88(67) "breakthrough" was overclaim
+
+**Status:** The R88(67) bundle's "8/8 channels pass" claim does NOT survive scrutiny and is hereby retracted as overclaim.
+
+### 19.1 What R88(67) actually did
+
+Phase G16 performed a 6-parameter grid search over:
+- peak_c9 (Cloud-9 peak height)
+- peak_mass (v=150 peak height)
+- peak_ufd (UFD peak height)
+- width_c9 (Cloud-9 width)
+- f_H_cen (heavy fraction in centrals)
+- f_H_sub (heavy fraction in subhalos)
+
+With ~11,000 parameter combinations tested against 8 channels, the search found a combination that passes all 8. This is a **fitting exercise**, not a physical resolution.
+
+### 19.2 The four serious problems with R88(67)
+
+**Problem 1: Double-counting the stripping effect**
+
+Phase G16 defines subhalo σ_m as:
+```
+sm_subs = lambda v: sigma_m_parametric(v, peak_c9, peak_mass * 0.3, peak_ufd, width_c9)
+```
+
+This reduces the v=150 peak by 0.3× AND separately applies f_H_sub = 0.05. But the physical mechanism for reduced σ_eff in subhalos is tidal stripping of heavy particles, which reduces f_H — not σ_m itself. σ_m is a microphysical property of the particles; it does not change when particles are stripped.
+
+The correct calculation is:
+- Centrals: σ_eff = f_H_cen² × σ_m(v)
+- Subhalos: σ_eff = f_H_sub² × σ_m(v)  ← same σ_m
+
+Phase G16 instead does:
+- Subhalos: σ_eff = f_H_sub² × (0.3 × σ_m(v))
+
+This is double-counting the same physics.
+
+**Problem 2: Contradicts Phase G9 (R88(54))**
+
+Phase G9 explicitly tested the tidal-stripping mechanism and found:
+- f_H drop factor: 0.94-1.01× across all configurations
+- Kill criterion (f_H drop ≥ 2×): NOT MET
+- Direction A FAILS the discriminator test
+
+But Phase G16 requires f_H to drop from 0.6 to 0.05 — a factor of **12×**. This is 12× larger than what the N-body discriminator found. The R88(67) bundle did not acknowledge this contradiction.
+
+**Problem 3: Unmotivated high-v cutoff**
+
+Phase G16 adds a cutoff at v=300 km/s with sharpness 50 km/s:
+```python
+if v > v_cutoff:
+    sm *= math.exp(-(v - v_cutoff) / cutoff_sharp)
+```
+
+This is what makes the Cluster channel pass. But there is no physical derivation of this cutoff. It is an additional free function tuned to give the right answer. The paper's canonical σ/m(v) (Gaussian resonance + power-law background) has no such feature.
+
+**Problem 4: Boundary values and overfitting**
+
+- f_H_cen = 0.6 is exactly the SIDM2c cap (boundary value, not derived)
+- f_H_sub = 0.05 is far below the Yang+ 2025-derived value (0.297-0.45, no derivation for 0.05)
+- With 6 parameters and 8 channels, ~11,000 combinations will find some combination that passes all thresholds by chance
+- Several "PASS" verdicts are at the edge of scoring criteria (SPARC at 0.31 of target, Cloud-9 V_max at 1.06× target)
+
+### 19.3 Correct framing (per reviewer recommendation)
+
+The honest position is:
+
+> The framework CAN satisfy all channels if environment-dependent σ_m(v) with independently tuned shapes for centrals and subhalos is allowed. However, this requires a f_H drop of 12× that is inconsistent with the Phase G9 N-body discriminator (0.94-1.01×). The "breakthrough" is therefore a parameter-fitting result, not a physical resolution. The structural trade-off theorem stands as the fundamental limit of single-species or simple two-species SIDM with Phase 44 parameters.
+
+This preserves the project's strongest scientific asset: honesty about what the framework can and cannot do.
+
+### 19.4 What R88(67) should have said
+
+Instead of "8/8 channels pass" (overclaim), R88(67) should have reported:
+
+**R88(67) honest result:**
+- Parameter search found combinations that pass 8/8 channels
+- BUT the required f_H drop (12×) contradicts Phase G9 discriminator (0.94-1.01×)
+- AND the high-v cutoff is unmotivated
+- AND the optimization is overfitting to 8 channel thresholds
+- Therefore: the structural trade-off theorem stands; the "breakthrough" is a fitting artifact
+
+### 19.5 Restoration of R88(56) honest synthesis
+
+The R88(56) synthesis remains the correct scientific position:
+
+> "The two structural no-gos (Cloud-9 vs dSph at v=28↔15; Lei/Wang vs He+ 2020 at v=150) survive both physically-motivated segregation (Phase G9) and first-principles SIDM2c parameterization (Phase G10). They are stronger findings, not weaker."
+
+Phase G13-G16 do NOT overturn this. They show:
+- Simple σ_m(v) shapes: cannot break the trade-off
+- Even with tuning: trade-off-breaking shapes fail other channels
+- Environment-dependent shapes: help but require 12× f_H drop (contradicting Phase G9)
+- The structural theorem stands as the fundamental limit of the framework
+
+### 19.6 Lesson (R88(68))
+
+The R88(42)→R88(43) correction is a precedent for self-correction when an overclaim is made. R88(67)→R88(68) follows the same pattern:
+- Identify the overclaim ("8/8 channels pass")
+- Show why it doesn't survive scrutiny (double-counting, contradicting prior result, unmotivated features, overfitting)
+- Restore the honest framing (trade-off theorem stands)
+
+The project's reputation for self-correction is its most valuable scientific asset. R88(68) preserves it.
+
+### 19.7 What this means for the paper
+
+The paper should:
+1. Keep §9.17b (structural trade-off theorem) as the authoritative synthesis
+2. NOT claim "8/8 channels pass" as a result
+3. Phase G13-G16 should be documented as "explored but did not provide physical resolution"
+4. The "constraint map + no-go catalogue" framing (Direction C) remains correct
+
+The paper does not need a new section; R88(68) simply restores the R88(56) honest synthesis that R88(67) briefly obscured.
+
+### 19.8 Files affected
+
+**Retracted (R88(68)):**
+- R88(67) "8/8 channels pass" claim
+- Phase G13-G16 framing as "breakthrough"
+
+**Retained (R88(56) synthesis):**
+- Structural trade-off theorem
+- Constraint map + no-go catalogue
+- Two structural no-gos survive all tests
+
+**Modules retained for documentation (but not as resolution):**
+- phase_g13_shape_search.py: documented exploration
+- phase_g14_shape_tuning.py: documented exploration
+- phase_g15_env_dependent.py: documented exploration
+- phase_g16_optimization.py: documented exploration, with R88(68) caveat
