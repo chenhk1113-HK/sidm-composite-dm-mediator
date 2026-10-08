@@ -1125,3 +1125,23 @@ The project is complete in its exploratory phase. The structural trade-off theor
 **The honest contribution:** A constraint map and no-go catalogue with two structural no-gos and one structural trade-off theorem, supported by four tested forward paths that all failed to break the trade-off. The framework is at its fundamental limit.
 
 **The process contribution:** R88(71) pre-claim checklist is now an established part of the project's methodology, with three successful catches in this round alone. The project's self-correction reputation is its most valuable asset.
+
+**R88(80) process finding (after-the-fact):**
+
+The R88(79) bundle README claimed the paper was "byte-identical to R88(56); only bundle metadata and findings document changed." This was **drift** — R88(79) had in fact added §9.18 to the paper text. The bundle README was never refreshed to reflect this.
+
+**Root cause:** The bundle directory at `C:\Users\lamkuenai\sidm-v19_2-D-bundle\` is **not under git version control**. It's a separate deliverable directory maintained manually. Changes to the project repo (e.g., R88(79) adding §9.18) do not automatically sync to the bundle directory or the single .md deliverable.
+
+**Why the R88(71) checklist missed it:** R88(71) caught three errors during exploration (R88(75, 76, 78)), but it doesn't check doc-vs-artifact drift in the deliverable directory. The checklist applies to claim-level checks, not directory-level sync.
+
+**Fix applied (R88(80)):**
+- Bundle README updated to reflect R88(56) + R88(79) and §9.18
+- Audit trail range updated from R88(57)–R88(70) to R88(57)–R88(79)
+- Updated paper (with §9.18) and findings (with §21) copied into bundle directory
+- Single .md rebuilt with R88(80) header noting the drift fix
+- Project repo (git) unchanged at R88(79) — R88(80) is bundle-metadata-only
+
+**Process improvement for future bundle builds:** Any R88(N) that modifies the paper text or findings document MUST also rebuild the bundle directory and single .md. This should be added to the R88(71) pre-claim checklist as a new item: "(6) If the paper text or findings document changed, the bundle directory and single .md have been rebuilt."
+
+This is a process-level finding, not a physics result. It documents a structural gap that allowed the drift to happen.
+
