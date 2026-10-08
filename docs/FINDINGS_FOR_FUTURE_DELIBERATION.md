@@ -678,7 +678,6 @@ Begin Path 1 (Direction A N-body) — this is the bounded, testable, kill-criter
 The future work has clear paths with kill criteria.
 The project state is honest, complete, and ready to hand off.
 
-
 ---
 
 ## 17. Future Work Plan — v19.2-E Roadmap (R88(57))
@@ -919,16 +918,7 @@ Phase G13-G16 do NOT overturn this. They show:
 - Environment-dependent shapes: help but require 12× f_H drop (contradicting Phase G9)
 - The structural theorem stands as the fundamental limit of the framework
 
-### 19.6 Lesson (R88(68))
-
-The R88(42)→R88(43) correction is a precedent for self-correction when an overclaim is made. R88(67)→R88(68) follows the same pattern:
-- Identify the overclaim ("8/8 channels pass")
-- Show why it doesn't survive scrutiny (double-counting, contradicting prior result, unmotivated features, overfitting)
-- Restore the honest framing (trade-off theorem stands)
-
-The project's reputation for self-correction is its most valuable scientific asset. R88(68) preserves it.
-
-### 19.7 What this means for the paper
+### 19.6 What this means for the paper
 
 The paper should:
 1. Keep §9.17b (structural trade-off theorem) as the authoritative synthesis
@@ -938,7 +928,7 @@ The paper should:
 
 The paper does not need a new section; R88(68) simply restores the R88(56) honest synthesis that R88(67) briefly obscured.
 
-### 19.8 Files affected
+### 19.7 Files affected
 
 **Retracted (R88(68)):**
 - R88(67) "8/8 channels pass" claim
@@ -954,7 +944,6 @@ The paper does not need a new section; R88(68) simply restores the R88(56) hones
 - phase_g14_shape_tuning.py: documented exploration
 - phase_g15_env_dependent.py: documented exploration
 - phase_g16_optimization.py: documented exploration, with R88(68) caveat
-
 
 ---
 
