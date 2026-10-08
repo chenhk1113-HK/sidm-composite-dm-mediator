@@ -74,7 +74,7 @@ CHANNELS = [
     ("SPARC typical (annulus avg, r~1.5 r_s)", 100, 1.5, 0.19, "≈"),
     ("Lei/Wang massive (v=150, r~1.5)", 150, 1.5, 0.1, ">"),
     ("Cluster (r~1 r_s)", 500, 1.0, 0.001, "<"),
-    ("Mace+ SIDM2v (v=28)", 28, 0.5, 50, ">"),
+    ("Mace+ 2025 gravothermal N-body (v=28)", 28, 0.5, 50, ">"),
 ]
 
 

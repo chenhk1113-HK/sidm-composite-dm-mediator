@@ -90,7 +90,7 @@ def evaluate_channels(params):
         ("Cloud-9 V_max (central)", 31.12, 0.5, ">", 50, False),
         ("SPARC typical (central)", 100, 1.5, "~", 0.19, False),
         ("Lei/Wang (central)", 150, 1.5, "range", (0.1, 0.3), False),
-        ("He+ 2020 (subhalo)", 150, 1.5, "<", 0.3, True),
+        ("Sameie+ 2020 (subhalo)", 150, 1.5, "<", 0.3, True),
         ("Cluster (central)", 500, 1.0, "<", 0.001, False),
     ]
 

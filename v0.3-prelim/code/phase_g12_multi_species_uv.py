@@ -3,7 +3,7 @@ Phase G12 — Multi-species UV completion (R88(61), Direction B)
 
 The only forward path that can break the structural trade-off theorem.
 Tests whether a two-species SIDM model with environment-dependent sigma(v)
-can satisfy He+ 2020 (subhalos) and Lei/Wang (centrals) simultaneously.
+can satisfy Sameie+ 2020 (subhalos) and Lei/Wang (centrals) simultaneously.
 
 Setup:
 - Species 1: heavy (H), sigma_H(v) - drives gravothermal cascade
@@ -77,7 +77,7 @@ def run_phase_g12():
         ("Cloud-9 V_max (v=31.12)", 31.12, 0.5, "central", ">", 50),
         ("SPARC typical (annulus avg)", 100, 1.5, "central", "~", 0.19),
         ("Lei/Wang massive (v=150)", 150, 1.5, "central", "range", (0.1, 0.3)),
-        ("He+ 2020 galaxy lensing (v=150)", 150, 1.5, "subhalo", "<", 0.3),
+        ("Sameie+ 2020 galaxy lensing (v=150)", 150, 1.5, "subhalo", "<", 0.3),
         ("Cluster (r~1 r_s)", 500, 1.0, "central", "<", 0.001),
     ]
 
@@ -185,22 +185,22 @@ def run_phase_g12():
 
     print("v=150 trade-off test:")
     print(f"  Lei/Wang (central, f_H=0.4): sigma_eff = {lei_se:.4f}")
-    print(f"  He+ 2020 (subhalo, f_H=0.1): sigma_eff = {he_se:.4f}")
+    print(f"  Sameie+ 2020 (subhalo, f_H=0.1): sigma_eff = {he_se:.4f}")
     print()
 
     if 0.1 < lei_se < 0.3 and he_se < 0.3:
         print("✓ Trade-off theorem BROKEN by multi-species UV:")
         print(f"  Lei/Wang: {lei_se:.4f} within [0.1, 0.3] window")
-        print(f"  He+ 2020: {he_se:.4f} below 0.3 ceiling")
+        print(f"  Sameie+ 2020: {he_se:.4f} below 0.3 ceiling")
         print("  Environment-dependent f_H resolves v=150 no-go")
         trade_off_verdict = "BROKEN"
     elif lei_se > 0.3 and he_se < 0.3:
-        print("⚠ Lei/Wang passes, He+ 2020 passes, but Lei/Wang overshoots:")
+        print("⚠ Lei/Wang passes, Sameie+ 2020 passes, but Lei/Wang overshoots:")
         print(f"  Lei/Wang sigma_eff = {lei_se:.4f} > 0.3 (over both bounds)")
         trade_off_verdict = "PARTIAL"
     else:
         print(f"✗ Trade-off theorem NOT broken:")
-        print(f"  Either Lei/Wang ({lei_se:.4f}) or He+ 2020 ({he_se:.4f}) constraint violated")
+        print(f"  Either Lei/Wang ({lei_se:.4f}) or Sameie+ 2020 ({he_se:.4f}) constraint violated")
         trade_off_verdict = "STANDS"
 
     print()
@@ -210,7 +210,7 @@ def run_phase_g12():
     print()
     if trade_off_verdict == "BROKEN":
         print("SUCCESS: Two-species UV with environment-dependent f_H breaks trade-off")
-        print("Both He+ 2020 and Lei/Wang constraints can be satisfied simultaneously.")
+        print("Both Sameie+ 2020 and Lei/Wang constraints can be satisfied simultaneously.")
     elif trade_off_verdict == "PARTIAL":
         print("PARTIAL: One constraint satisfied, but other overshoots")
         print("Need finer tuning of f_H values or sigma shapes")
@@ -227,4 +227,4 @@ if __name__ == "__main__":
     print()
     print("Final:", verdict)
     print("  Lei/Wang sigma_eff(150) =", round(lei, 4))
-    print("  He+ 2020 sigma_eff(150) =", round(he, 4))
+    print("  Sameie+ 2020 sigma_eff(150) =", round(he, 4))

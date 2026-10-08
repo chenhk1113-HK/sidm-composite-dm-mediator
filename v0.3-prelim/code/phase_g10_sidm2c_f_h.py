@@ -232,7 +232,7 @@ def run_phase_g10_sidm2c():
     print("  - sigma_eff values factor 2-3 BELOW Phase G7 phenomenological (because f_H^2 = 0.06^2 vs 0.3^2)")
     print("  - This would REDUCE sigma_eff at all radii, making Lei/Wang PASS -> FAIL")
     print("  - Horigome would still PASS (sigma_eff << 0.8)")
-    print("  - v=150 tension would be RESOLVED (sigma_eff << He+ 2020 upper bound)")
+    print("  - v=150 tension would be RESOLVED (sigma_eff << Sameie+ 2020 upper bound)")
     print()
     print("But also:")
     print("  - Fischer & Yu UFD collapse would FAIL MORE (sigma_HH needs to drive tau, not sigma_eff)")
@@ -244,7 +244,7 @@ def run_phase_g10_sidm2c():
     print("v=150 tension test: SIDM2c vs Phase G7 phenomenological")
     print("=" * 90)
     print()
-    print(f"{'Method':<30} {'f_H(1.5 r_s)':<14} {'sigma_eff(150)':<16} {'Lei/Wang (>0.1)':<18} {'He+ 2020 (<0.3)'}")
+    print(f"{'Method':<30} {'f_H(1.5 r_s)':<14} {'sigma_eff(150)':<16} {'Lei/Wang (>0.1)':<18} {'Sameie+ 2020 (<0.3)'}")
     print("-" * 100)
 
     # Phase G7 phenomenological

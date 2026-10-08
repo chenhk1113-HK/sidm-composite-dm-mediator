@@ -153,7 +153,7 @@ the channel observations.
 - Yang+ 2025 (arXiv:2504.02303): Multi-component SIDM with mass segregation
 - Balberg+ 2002 (Phys Rev Lett 88, 101301): Gravothermal catastrophe
 - Essig+ 2019 (Phys Rev Lett 123, 121102): N_relax calibration
-- Mace+ 2026 (arXiv:2504.13004): Heat transfer factor β calibration
+- Mace+ 2025 (arXiv:2504.13004): Heat transfer factor β calibration
 
 ## Forward Plan (T90.49+)
 

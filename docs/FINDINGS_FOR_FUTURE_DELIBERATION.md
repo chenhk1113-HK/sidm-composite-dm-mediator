@@ -13,7 +13,7 @@ The Phase 44 SIDM composite DM mediator model — at the parameter point (m_χ =
 
 The paper ships as a **constraint map + no-go catalogue** with two identified structural no-gos:
 1. Cloud-9 vs dSph at v=28↔15 km/s (resolvable with narrow peak)
-2. Lei/Wang vs He+ 2020 at v=150 km/s (NOT resolvable with single-species σ_m)
+2. Lei/Wang vs Sameie+ 2020 at v=150 km/s (NOT resolvable with single-species σ_m)
 
 The framework has been systematically tested across 10 observational channels. Honest accounting: 4 PASS, 3 MARGINAL, 3 FAIL (R88(52) score with three-peak model).
 
@@ -31,7 +31,7 @@ The framework has been systematically tested across 10 observational channels. H
 ### 2.2 Cloud-9 anchor (PASS)
 - At canonical σ_peak = 174 cm²/g, σ/m(V_max=31.12) = 161.70 cm²/g
 - Consistent with Elbert+ 2018 working benchmark of σ/m(28) ≥ 50 cm²/g
-- Mace+ 2026 SIDM2v satisfied
+- Mace+ 2025 (arXiv:2504.13004) gravothermal N-body calibration satisfied
 
 ### 2.3 Horigome+ 2025 dSph limit (PASS)
 - Narrower peak (σ_1 = 4 km/s) plus f_H segregation reduces σ_eff at v=15 to 0.06 cm²/g
@@ -51,7 +51,7 @@ The framework has been systematically tested across 10 observational channels. H
 
 ### 2.6 Two structural no-gos identified (the strongest scientific claim)
 - Cloud-9 vs dSph tension at v=28↔15 (§2.6a first-class)
-- Lei/Wang vs He+ 2020 tension at v=150 (§9.17a first-class, NEW R88(52))
+- Lei/Wang vs Sameie+ 2020 tension at v=150 (§9.17a first-class, NEW R88(52))
 - Both pairings probe σ_m(v) at same velocity with opposing signs
 - Neither can be resolved by single-species σ/m tuning alone
 
@@ -64,15 +64,15 @@ The framework has been systematically tested across 10 observational channels. H
 - Newman+ 2013 bound: σ_eff < 0.001 cm²/g
 - Marginal violation; would need steeper A_SLOPE or second high-v cut
 
-### 3.2 Lei/Wang vs He+ 2020 knife-edge (FAIL when both probes applied)
+### 3.2 Lei/Wang vs Sameie+ 2020 knife-edge (FAIL when both probes applied)
 - Phase G7 σ_eff(150) = 0.454 cm²/g
 - Lei/Wang lower: >0.1 (PASS, factor 4.5)
-- He+ 2020 upper: <0.3 (FAIL, factor 1.5 over)
-- Window between Lei/Wang PASS and He+ 2020 PASS is only factor ~3
+- Sameie+ 2020 upper: <0.3 (FAIL, factor 1.5 over)
+- Window between Lei/Wang PASS and Sameie+ 2020 PASS is only factor ~3
 
 ### 3.3 Cloud-9 V_max (FAIL by 13%)
 - σ_eff(31.12, 0.5 r_s) = 43.4 cm²/g
-- Mace+ ≥ 50 target (working benchmark)
+- Mace+ 2025 (arXiv:2504.13004) ≥ 50 target (working benchmark)
 - Phase G8 σ_eff(28, 0.5 r_s) = 58.9 cm²/g (PASS at v=28, but FAIL at v=31.12)
 
 ### 3.4 f_H prescription dependence
@@ -132,7 +132,7 @@ The framework has been systematically tested across 10 observational channels. H
 - Subhalos lose heavy component first via tidal stripping
 - Could naturally resolve the v=150 no-go:
   - Lei/Wang sees centrals with f_H ~ 0.4 (high σ_eff at v=150)
-  - He+ 2020 sees subhalos with f_H ~ 0.1 (low σ_eff at v=150)
+  - Sameie+ 2020 sees subhalos with f_H ~ 0.1 (low σ_eff at v=150)
   - Both can be satisfied with different f_H(r) in different environments
 - Requires:
   - Derive f_H(r) profile from two-component gravothermal physics (~2 weeks)
@@ -140,7 +140,7 @@ The framework has been systematically tested across 10 observational channels. H
   - Cross-check against Yang+ 2025 Fig. 2 quantitatively
 
 ### 5.2 Multi-component UV (Direction B from reviewer)
-- Lei/Wang vs He+ 2020 conflict may signal we need MORE than one dark matter species
+- Lei/Wang vs Sameie+ 2020 conflict may signal we need MORE than one dark matter species
 - Two-species model: heavy + light with different σ/m(v) shapes
 - Different heavy fractions at different scales naturally emerge from
   component interactions, not just gravity
@@ -180,7 +180,7 @@ The framework has been systematically tested across 10 observational channels. H
 - Trade-off: tighter SPARC fit may break Cloud-9 / Horigome balance
 
 ### 5.7 Lei/Wang massive-galaxy channels (Lei+ 2026, Wang+ 2026)
-- Phase G8 σ_eff(150) = 0.45 — at Lei/Wang lower bound (0.1) but 1.5× over He+ 2020 upper (0.3)
+- Phase G8 σ_eff(150) = 0.45 — at Lei/Wang lower bound (0.1) but 1.5× over Sameie+ 2020 upper (0.3)
 - Need either subhalo f_H difference (Direction A) or second UV species (Direction B)
 - Forward work: derive expected f_H variation between central and satellite galaxies
 
@@ -210,7 +210,7 @@ The framework has been systematically tested across 10 observational channels. H
 |---------|-------------|-----------|--------|
 | Cloud-9 vs dSph (v=28↔15) | ✓ YES | Narrow peak (σ_1 ≤ 4 km/s) + f_H segregation | §2.6a documented |
 | Fischer & Yu UFD (v=8-12) | ✓ YES | Third narrow peak at v~10 (Phase G8) | Resolved |
-| Lei/Wang vs He+ 2020 (v=150) | ✗ NO | Same v, conflicting signs | §9.17a NEW |
+| Lei/Wang vs Sameie+ 2020 (v=150) | ✗ NO | Same v, conflicting signs | §9.17a NEW |
 | Cluster (v=500) | ⚠ Marginal | σ_eff 1.9× over bound | Need steeper slope |
 | f_H prescription | ✗ NO | Borrowed values retracted; no derived alternative | §9.6 admits gap |
 | Cloud-9 c-M (c=12) | ⚠ Partial | Works only at c ~ 4 (Ohana+ anchor) | §2.6a circularity |
@@ -284,11 +284,11 @@ The framework has been systematically tested across 10 observational channels. H
 
 The reviewer (2suggestion.docx) flagged a fourth direction not previously listed:
 
-**Direction D: revise the He+ 2020 or Lei/Wang interpretation.**
+**Direction D: revise the Sameie+ 2020 or Lei/Wang interpretation.**
 
 Both observations involve significant modeling assumptions:
 - Lei/Wang uses stellar kinematics + gas dynamics + Jeans modeling to infer inner DM profile
-- He+ 2020 uses lensing + satellite kinematics to constrain subhalo mass function
+- Sameie+ 2020 uses lensing + satellite kinematics to constrain subhalo mass function
 - Both have baryonic feedback effects that could shift the inferred σ_eff by factor ~2
 
 If either observation has a systematic that shifts the inferred σ_eff by factor ~2,
@@ -301,7 +301,7 @@ fight it out" path — appropriate if the underlying data are uncertain.
 - Honest: doesn't pretend to solve physics that's actually observational uncertainty
 - The paper's §9.17a already discloses the knife-edge; publishing as-is is legitimate
 
-**Specific test for Direction D:** Wait for He+ 2020 follow-up with updated modeling
+**Specific test for Direction D:** Wait for Sameie+ 2020 follow-up with updated modeling
 assumptions, or redo Lei/Wang with explicit f_H(r) treatment in the Jeans modeling.
 
 ---
@@ -362,7 +362,7 @@ and observational work.
 
 **Forward paths in priority order (R88(53) synthesis):**
 
-1. **Direction D (cheapest):** Wait for observational refinement of He+ 2020 or
+1. **Direction D (cheapest):** Wait for observational refinement of Sameie+ 2020 or
    Lei/Wang with explicit f_H(r) treatment. The v=150 no-go may dissolve.
 
 2. **Direction A discriminator (most testable):** Two-component N-body simulation of
@@ -438,19 +438,19 @@ satisfy the kill criterion.
 | Cloud-9 V_max | 43.4 | 0.15 | >50 | MARGINAL → FAIL |
 | SPARC | 0.091 | 0.001 | ~0.19 | MARGINAL → FAIL (factor 200 below) |
 | Lei/Wang | 0.45 | 0.005 | 0.1-0.3 | KNIFE-EDGE → FAIL |
-| He+ 2020 | 0.45 | 0.005 | <0.3 | FAIL → PASS (now satisfied!) |
+| Sameie+ 2020 | 0.45 | 0.005 | <0.3 | FAIL → PASS (now satisfied!) |
 | Cluster | 0.002 | 0.00002 | <0.001 | MARGINAL → PASS |
 
 **v=150 resolution:**
-- Phase G7 phenomenological: σ_eff(150) = 0.45, Lei/Wang PASS, He+ 2020 FAIL (1.51× over)
-- SIDM2c (any tau): σ_eff(150) = 0.005, Lei/Wang FAIL, He+ 2020 PASS
+- Phase G7 phenomenological: σ_eff(150) = 0.45, Lei/Wang PASS, Sameie+ 2020 FAIL (1.51× over)
+- SIDM2c (any tau): σ_eff(150) = 0.005, Lei/Wang FAIL, Sameie+ 2020 PASS
 - **v=150 no-go RESOLVED** but at the cost of ALL sigma_eff-based channels
 
 ### 16.3 The structural trade-off (THEOREM)
 
 The Phase G10 result establishes a **structural theorem**:
 
-> Any physically-derived f_H(r) that resolves the v=150 no-go (He+ 2020 satisfied)
+> Any physically-derived f_H(r) that resolves the v=150 no-go (Sameie+ 2020 satisfied)
 > must concentrate heavy at center. Heavy at center means light dominates at all
 > observation radii (r > 0.2 r_s). Therefore σ_eff = f_H(r)² · σ/m drops by factor
 > 5-300× relative to phenomenological f_H(r) at all radii.
@@ -460,8 +460,8 @@ This is **not a parameterization issue**. The trade-off is:
 - Heavy distributed broadly → preserves Cloud-9/SPARC/Lei-Wang → re-creates v=150 no-go
 
 The framework CANNOT simultaneously:
-1. Satisfy He+ 2020 at v=150 (heavy concentrated at center)
-2. Satisfy Mace+ at Cloud-9 (need σ_eff ≥ 50)
+1. Satisfy Sameie+ 2020 at v=150 (heavy concentrated at center)
+2. Satisfy Mace+ 2025 (arXiv:2504.13004) gravothermal N-body at Cloud-9 (need σ_eff ≥ 50)
 3. Satisfy SPARC at v=100 (need σ_eff ~ 0.19)
 4. Satisfy Lei/Wang at v=150 (need σ_eff > 0.1)
 
@@ -477,7 +477,7 @@ concentrated f_H**. The three forward paths are now properly characterized:
 | **A: Subhalo-specific f_H (Phase G9)** | 2-3 wk N-body | Drop factor 0.94-1.01×, **FAIL** | Tested R88(54) |
 | **B: Multi-component UV (Phase G10)** | 1-2 mo UV | Resolves v=150, kills 5 channels | Trade-off revealed R88(55) |
 | **C: Ship as-is** | Done | Constraint map + no-go catalogue | Shipped R88(53) |
-| **D: Observation refinement** | 0 computation | Wait for He+ 2020/Lei-Wang follow-up | **RECOMMENDED next step** |
+| **D: Observation refinement** | 0 computation | Wait for Sameie+ 2020/Lei-Wang follow-up | **RECOMMENDED next step** |
 
 ### 16.5 Recommendation (R88(55))
 
@@ -488,7 +488,7 @@ The paper should:
 4. Recommend Direction D (observation refinement) as the most productive next step
 5. Note that Directions A and B were both tested and found to have inherent limitations
 
-**The paper's two structural no-gos (Cloud-9 vs dSph, Lei/Wang vs He+ 2020) are
+**The paper's two structural no-gos (Cloud-9 vs dSph, Lei/Wang vs Sameie+ 2020) are
 now STRONGER findings: they survive both a physically-motivated segregation model
 AND a first-principles SIDM2c parameterization.**
 
@@ -498,7 +498,7 @@ The "missing angles worthy of exploration" (per user instruction) are:
 2. Are there other observables that probe σ_eff at intermediate radii
    where the trade-off might not apply?
 3. Can we design a multi-component UV model that breaks the theorem?
-4. Is the He+ 2020 observation or Lei/Wang observation more reliable?
+4. Is the Sameie+ 2020 observation or Lei/Wang observation more reliable?
    (Direction D: which one should the field trust more?)
 
 The two structural no-gos (v=28↔15 and v=150) are the most important findings. They
@@ -533,7 +533,7 @@ The reviewer evaluates the project as a "mature, methodologically rigorous SIDM 
 - f_H(r) and σ/m(v) are phenomenological, not first-principles
 - KiSS-SIDM memory allocation issue (mitigated by ulimit -v, still fragile)
 - Phase G4/G5 null result doesn't supply positive discriminator
-- v=150 Lei/Wang vs He+ 2020 no-go needs multi-component UV or subhalo f_H
+- v=150 Lei/Wang vs Sameie+ 2020 no-go needs multi-component UV or subhalo f_H
 - Re-confirm Horigome+ 2025 limits and Ohana+ 2026 3.2σ tension haven't updated
 
 **Submission recommendation:**
@@ -663,7 +663,7 @@ These three paths are for the next paper, not the current one.
 - 40-page paper with §9.17a structural no-go at v=150
 - 19 KB findings document (13 sections + 1 R88(54) section)
 - 20 referenced scripts in single .md bundle (601 KB)
-- Two structural no-gos identified (Cloud-9 vs dSph at v=28↔15; Lei/Wang vs He+ 2020 at v=150)
+- Two structural no-gos identified (Cloud-9 vs dSph at v=28↔15; Lei/Wang vs Sameie+ 2020 at v=150)
 - Honest disclosure of all negative results
 
 **What is NOT shipped (forward work, per R88(54) prioritization):**
@@ -775,7 +775,7 @@ The corrected Phase G11 shows that even with proper per-halo calculations, the s
 | Direction D (observation refinement) | **NOT TESTED** | Requires waiting for new observations |
 
 **The structural trade-off theorem stands as the fundamental limit of single-species or simple two-species SIDM with Phase 44 parameters.** Resolving the v=150 no-go requires either:
-1. Observation refinement (Direction D): He+ 2020 or Lei/Wang updates with explicit f_H(r)
+1. Observation refinement (Direction D): Sameie+ 2020 or Lei/Wang updates with explicit f_H(r)
 2. Exotic UV construction: σ_H(v) shape that overcomes the σ_eff = f_H² · σ_m bound
 
 ### 18.2 MPU paper ready to ship (R88(58) section 10)
@@ -910,7 +910,7 @@ Instead of "8/8 channels pass" (overclaim), R88(67) should have reported:
 
 The R88(56) synthesis remains the correct scientific position:
 
-> "The two structural no-gos (Cloud-9 vs dSph at v=28↔15; Lei/Wang vs He+ 2020 at v=150) survive both physically-motivated segregation (Phase G9) and first-principles SIDM2c parameterization (Phase G10). They are stronger findings, not weaker."
+> "The two structural no-gos (Cloud-9 vs dSph at v=28↔15; Lei/Wang vs Sameie+ 2020 at v=150) survive both physically-motivated segregation (Phase G9) and first-principles SIDM2c parameterization (Phase G10). They are stronger findings, not weaker."
 
 Phase G13-G16 do NOT overturn this. They show:
 - Simple σ_m(v) shapes: cannot break the trade-off
@@ -1048,7 +1048,7 @@ Resource estimate: 3-4 months. Not tested within v19.2-D timeframe. Recommended 
 
 #### Path D — Observation refinement (R88(77)-(78))
 
-R88(77) initial Direction D analysis claimed the v=150 trade-off was over-stated (He+ 2020 as upper bound vs Lei/Wang as 0.1-0.3 range).
+R88(77) initial Direction D analysis claimed the v=150 trade-off was over-stated (Sameie+ 2020 as upper bound vs Lei/Wang as 0.1-0.3 range).
 
 R88(78) R88(71) pre-claim checklist caught a numerical error: σ_m(150) = 0.046 cm²/g (computed), not 0.5 (assumed). The framework actually FAILS Lei/Wang at v=150 by factor 6, not passes it. The v=150 trade-off is REAL.
 

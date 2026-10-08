@@ -12,13 +12,13 @@ Task 1: Third narrow peak at v~10 to fix Fischer & Yu UFD collapse.
 Task 2: Structural pairings and feasibility.
   - Pairing 1: Cloud-9 (v=28) vs Horigome (v=15). Resolved by narrow peak.
   - Pairing 2: Fischer & Yu (v=8-12) vs Horigome (v=15). Resolved by third peak.
-  - Pairing 3: Lei/Wang (v=150) vs He+ 2020 (v=150). NOT RESOLVABLE with single-species σ_m.
+  - Pairing 3: Lei/Wang (v=150) vs Sameie+ 2020 (v=150). NOT RESOLVABLE with single-species σ_m.
 
 Task 3: Lei/Wang PASS is a knife-edge.
   - Lei/Wang needs σ_eff > 0.1 at v=150
-  - He+ 2020 caps σ_eff < 0.3 at v=150 (upper end)
-  - Phase G7 σ_eff = 0.45 — over He+ 2020 ceiling by 1.5× if σ_eff-interpreted
-  - 17× over if σ_HH-interpreted (He+ 2020 likely sees σ_eff, not σ_HH)
+  - Sameie+ 2020 caps σ_eff < 0.3 at v=150 (upper end)
+  - Phase G7 σ_eff = 0.45 — over Sameie+ 2020 ceiling by 1.5× if σ_eff-interpreted
+  - 17× over if σ_HH-interpreted (Sameie+ 2020 likely sees σ_eff, not σ_HH)
   - → Lei/Wang PASS DOWNGRADED to MARGINAL
 
 Status (R88(52))
@@ -105,10 +105,10 @@ def structural_pairings():
     print(f"    Phase G8 σ_eff(15, 6r_s) = {sigma_eff_at(15, 6):.3f} ✓ (margin 2.8×)")
     print("  Resolution: third narrow peak at v~10 with σ_3 = 2.5 km/s.")
     print()
-    print("Pairing 3: Lei/Wang (v=150) vs He+ 2020 (v=150)")
+    print("Pairing 3: Lei/Wang (v=150) vs Sameie+ 2020 (v=150)")
     print("  Lei/Wang: σ_eff > 0.1 at v=150 (need cores)")
     print(f"    Phase G7 σ_eff(150, 1.5r_s) = {sigma_eff_at(150, 1.5):.3f} ✓ nominally")
-    print("  He+ 2020: σ_eff < 0.3 at v=150 (upper end, subhalo survival)")
+    print("  Sameie+ 2020: σ_eff < 0.3 at v=150 (upper end, subhalo survival)")
     print(f"    Phase G7 σ_eff(150, 1.5r_s) = {sigma_eff_at(150, 1.5):.3f} ✗ 1.5× over")
     print("  Resolution: NOT RESOLVABLE within single-species σ_m(v) framework.")
     print("  → Structural no-go at v=150 — same class of problem as Cloud-9 vs dSph.")
@@ -133,9 +133,9 @@ def score_table():
         ("Cloud-9 V_max (v=31.12)", 31.12, 0.5, ">50", ">"),
         ("SPARC typical (annulus avg)", 100, 1.5, "~0.19", "≈"),
         ("Lei/Wang massive (v=150, r~1.5)", 150, 1.5, ">0.1, <0.3", "knife"),
-        ("He+ 2020 galaxy lensing (v=150)", 150, 1.5, "<0.3", "<"),
+        ("Sameie+ 2020 galaxy lensing (v=150)", 150, 1.5, "<0.3", "<"),
         ("Cluster (r~1 r_s)", 500, 1.0, "<0.001", "<"),
-        ("Mace+ SIDM2v (v=28)", 28, 0.5, ">50", ">"),
+        ("Mace+ 2025 gravothermal N-body (v=28)", 28, 0.5, ">50", ">"),
     ]
 
     n_pass = 0
@@ -161,7 +161,7 @@ def score_table():
             print(f"{name:<42} {r_over_rs:<8.1f} {sigma_hh:<10.3f} τ={tau:.3f}        [{status}]")
         elif direction == "knife":
             ratio_above = se / 0.1  # Lei/Wang lower
-            ratio_below = se / 0.3  # He+ 2020 upper
+            ratio_below = se / 0.3  # Sameie+ 2020 upper
             if ratio_above > 3:
                 status = "PASS"; n_pass += 1
             elif 0.3 < ratio_below < 3:
@@ -215,7 +215,7 @@ def score_table():
     print()
     print("Changes from R88(51):")
     print("  - Fischer & Yu: REAL FAIL → PASS (third peak rescues τ ≥ 1)")
-    print("  - Lei/Wang: PASS → MARGINAL (knife-edge at v=150; He+ 2020 conflict)")
+    print("  - Lei/Wang: PASS → MARGINAL (knife-edge at v=150; Sameie+ 2020 conflict)")
 
 
 def main():
@@ -229,10 +229,10 @@ def main():
     print()
     print("The framework has TWO identified structural no-gos:")
     print("  1. Cloud-9 vs dSph at v=28↔15 (already §2.6a first-class result)")
-    print("  2. Lei/Wang vs He+ 2020 at v=150 (NEW: parallel to §2.6a)")
+    print("  2. Lei/Wang vs Sameie+ 2020 at v=150 (NEW: parallel to §2.6a)")
     print()
     print("Fischer & Yu UFD collapse is fixable (third peak at v~10, 2-3 free params)")
-    print("Lei/Wang vs He+ 2020 is NOT fixable within single-species σ_m(v)")
+    print("Lei/Wang vs Sameie+ 2020 is NOT fixable within single-species σ_m(v)")
     print()
     print("This is a STRONGER scientific claim than '4 of 7 channels pass':")
     print("  - Two specific velocity windows where σ_m(v) cannot satisfy all probes")

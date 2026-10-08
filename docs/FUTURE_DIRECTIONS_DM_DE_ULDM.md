@@ -27,7 +27,7 @@ The structural trade-off theorem (R88(56) §9.17b) is derived under ΛCDM backgr
 - The f_H vs radius profile could be modified by ξ_H ≠ ξ_L
 
 Specifically: if heavy species drains into DE at high z, then low-z clusters (Perseus, etc.) have lower f_H than the Phase 44 baseline. This could simultaneously:
-- Reduce σ_eff(150) for subhalos (He+ 2020 satisfied)
+- Reduce σ_eff(150) for subhalos (Sameie+ 2020 satisfied)
 - Keep σ_eff(150) moderate for centrals (Lei/Wang satisfied)
 
 Because the f_H profile is no longer determined by gravothermal segregation alone, the trade-off theorem's geometric argument (heavy concentrates at center → light dominates at r>0.2 r_s) may not apply.
@@ -88,7 +88,7 @@ The structural trade-off theorem is specific to SIDM with two species and gravot
 - **No gravothermal cascade:** The soliton is the ground state, not a phase. There's no "core formation → core collapse" sequence.
 - **Halo mass diversity comes from the soliton relation, not gravothermal timing:** All halos have solitons, but the soliton size scales as M^(-1/2). Massive halos have small dense solitons; dwarf halos have large diffuse solitons.
 
-If ULDM successfully explains the same channels as SIDM (Horigome cores, Cloud-9, SPARC, etc.) and additionally explains the channels SIDM fails (Lei/Wang vs He+ 2020 at v=150), it would be a more successful framework. The "trade-off" only applies within the SIDM parameter space; ULDM is a different parameter space.
+If ULDM successfully explains the same channels as SIDM (Horigome cores, Cloud-9, SPARC, etc.) and additionally explains the channels SIDM fails (Lei/Wang vs Sameie+ 2020 at v=150), it would be a more successful framework. The "trade-off" only applies within the SIDM parameter space; ULDM is a different parameter space.
 
 ### What the literature says
 
@@ -102,7 +102,7 @@ If ULDM successfully explains the same channels as SIDM (Horigome cores, Cloud-9
 
 1. **Soliton at all mass scales:** The soliton-halo relation must hold from M_h ~ 10⁸ M☉ (dSphs) to M_h ~ 10¹⁴ M☉ (clusters). Current literature: well-tested for M_h ~ 10⁹-10¹², extrapolated to cluster scale. Cluster scale is the gap.
 
-2. **He+ 2020 subhalo prediction:** Subhalos in ULDM should not have enhanced scattering (no σ_m concept). The relevant prediction is the projected soliton density at the subhalo center. If subhalos have less concentrated solitons (because they're tidally stripped), this would satisfy He+ 2020's "low σ_eff" prediction naturally.
+2. **Sameie+ 2020 subhalo prediction:** Subhalos in ULDM should not have enhanced scattering (no σ_m concept). The relevant prediction is the projected soliton density at the subhalo center. If subhalos have less concentrated solitons (because they're tidally stripped), this would satisfy Sameie+ 2020's "low σ_eff" prediction naturally.
 
 3. **Lei/Wang prediction:** The 0.1-0.3 cm²/g prediction at v=150 km/s doesn't directly map to ULDM. The ULDM prediction would be: soliton size at M_h corresponding to v_max ~ 150 km/s. The soliton-halo relation gives r_sol ~ M_h^(-1/2) ~ 0.5-1 kpc for these masses. This is consistent with the observed core sizes of massive galaxies.
 

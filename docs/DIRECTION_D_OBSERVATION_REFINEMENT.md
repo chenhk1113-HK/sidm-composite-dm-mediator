@@ -12,7 +12,7 @@
 
 Per R88(56) §9.17a, the structural no-go at v=150 km/s arises from two observations:
 - **Lei & Wang (2024):** Massive galaxy cores (M_h ~ 10^11-12) show σ_eff(v=150) ~ 0.1-0.3 cm²/g
-- **He+ 2020:** Cluster subhalos (M_h ~ 10^10) show σ_eff(v=150) < 0.3 cm²/g (essentially zero)
+- **Sameie+ 2020:** Cluster subhalos (M_h ~ 10^10) show σ_eff(v=150) < 0.3 cm²/g (essentially zero)
 
 The trade-off: the framework cannot simultaneously satisfy both at v=150.
 
@@ -46,53 +46,53 @@ But wait — what if one of these observations has a systematic shift? Let me ex
 
 **Verdict on Lei/Wang:** Multiple systematic effects would push the inferred σ_eff LOWER, making the constraint EASIER to satisfy. The observation may be over-constraining the model.
 
-## He+ 2020 — Cluster Subhalo Suppression
+## Sameie+ 2020 — Cluster Subhalo Suppression
 
 **The claim:** Cluster subhalos (M_h ~ 10^10) have σ_eff(v=150) < 0.3 cm²/g (essentially zero).
 
 **Possible systematic uncertainties:**
 
 1. **"Subhalo" identification is uncertain**
-   - He+ 2020 identifies subhalos via weak lensing
+   - Sameie+ 2020 identifies subhalos via weak lensing
    - Some "subhalos" may be projection effects or line-of-sight alignments
    - If a fraction of the "subhalos" are spurious, the inferred suppression is artificially strong
-   - Effect: would push He+ 2020 σ_eff UPPER bound UP (favorable)
+   - Effect: would push Sameie+ 2020 σ_eff UPPER bound UP (favorable)
 
 2. **Tidal stripping is the dominant effect, not σ_eff**
    - In cluster environments, subhalos are heavily tidally stripped
    - The observed subhalo mass function reflects stripping, not σ_eff
    - If we control for stripping, the "σ_eff" at the original subhalo is much higher
-   - Effect: would push He+ 2020 σ_eff UPPER bound UP (favorable)
+   - Effect: would push Sameie+ 2020 σ_eff UPPER bound UP (favorable)
 
 3. **Velocity dependence matters**
-   - He+ 2020 measures at cluster velocity scale (~1000 km/s)
+   - Sameie+ 2020 measures at cluster velocity scale (~1000 km/s)
    - Extrapolating to v=150 km/s requires the velocity-dependence model
    - Different velocity-dependence models give different σ_eff(150)
    - Effect: could go either way (uncertain)
 
 4. **"Essentially zero" claim has threshold dependence**
-   - The He+ 2020 result is consistent with σ_eff(150) < 0.3 cm²/g
+   - The Sameie+ 2020 result is consistent with σ_eff(150) < 0.3 cm²/g
    - This upper bound, not a precise measurement
-   - The 0.1-0.3 cm²/g range for Lei/Wang overlaps with He+ 2020's UPPER bound
+   - The 0.1-0.3 cm²/g range for Lei/Wang overlaps with Sameie+ 2020's UPPER bound
    - **CRITICAL OBSERVATION:** The two constraints are NOT necessarily contradictory!
 
-**Verdict on He+ 2020:** Multiple systematic effects could push the upper bound UP. The "essentially zero" claim may be over-interpreted; the data is consistent with σ_eff(150) ~ 0.1-0.3 cm²/g, which OVERLAPS with Lei/Wang.
+**Verdict on Sameie+ 2020:** Multiple systematic effects could push the upper bound UP. The "essentially zero" claim may be over-interpreted; the data is consistent with σ_eff(150) ~ 0.1-0.3 cm²/g, which OVERLAPS with Lei/Wang.
 
 ## The Critical Insight: Overlapping Constraints
 
-The trade-off theorem assumes Lei/Wang and He+ 2020 are **mutually exclusive**:
+The trade-off theorem assumes Lei/Wang and Sameie+ 2020 are **mutually exclusive**:
 - Lei/Wang: 0.1 < σ_eff(150) < 0.3 (centrals)
-- He+ 2020: σ_eff(150) < 0.3 (subhalos)
+- Sameie+ 2020: σ_eff(150) < 0.3 (subhalos)
 
-But the upper bound of Lei/Wang (0.3) is IDENTICAL to the upper bound of He+ 2020 (0.3). The two observations are consistent IF:
+But the upper bound of Lei/Wang (0.3) is IDENTICAL to the upper bound of Sameie+ 2020 (0.3). The two observations are consistent IF:
 - Centrals have σ_eff ~ 0.1-0.3 cm²/g (Lei/Wang)
-- Subhalos have σ_eff < 0.3 cm²/g (He+ 2020 upper bound)
+- Subhalos have σ_eff < 0.3 cm²/g (Sameie+ 2020 upper bound)
 
 A model where centrals have f_H ~ 0.6 and subhalos have f_H ~ 0.05 (Phase G7) gives:
 - σ_eff(150, central) = 0.36 * 0.5 = 0.18 cm²/g (within Lei/Wang range)
-- σ_eff(150, subhalo) = 0.0025 * 0.5 = 0.001 cm²/g (well below He+ 2020 upper bound)
+- σ_eff(150, subhalo) = 0.0025 * 0.5 = 0.001 cm²/g (well below Sameie+ 2020 upper bound)
 
-**The model actually satisfies both observations.** The trade-off theorem was derived from an overly-strict reading of He+ 2020 as "essentially zero" rather than "< 0.3".
+**The model actually satisfies both observations.** The trade-off theorem was derived from an overly-strict reading of Sameie+ 2020 as "essentially zero" rather than "< 0.3".
 
 ## What Direction D Actually Shows (R88(78) Corrected)
 
@@ -130,12 +130,12 @@ The checklist is working as designed. Three independent catches in three directi
 
 ## The v=150 Trade-off IS Real
 
-R88(56) §9.17a is correct: the v=150 trade-off is a structural no-go. The framework cannot explain both Lei/Wang (requires σ_eff(150) ~ 0.1-0.3) and He+ 2020 (requires σ_eff(150) < 0.3) with the Phase 44 parameters.
+R88(56) §9.17a is correct: the v=150 trade-off is a structural no-go. The framework cannot explain both Lei/Wang (requires σ_eff(150) ~ 0.1-0.3) and Sameie+ 2020 (requires σ_eff(150) < 0.3) with the Phase 44 parameters.
 
 Specifically:
 - Lei/Wang needs σ_eff(150, central) > 0.1
-- He+ 2020 needs σ_eff(150, subhalo) < 0.3
-- Framework gives σ_eff(150, central) = 0.0165 (FAIL Lei/Wang) and σ_eff(150, subhalo) = 0.000115 (PASS He+ 2020)
+- Sameie+ 2020 needs σ_eff(150, subhalo) < 0.3
+- Framework gives σ_eff(150, central) = 0.0165 (FAIL Lei/Wang) and σ_eff(150, subhalo) = 0.000115 (PASS Sameie+ 2020)
 
 The framework FAILS Lei/Wang. To satisfy Lei/Wang, the framework would need either:
 - A v=150 peak in σ_m(v) that doesn't exist in Phase 44

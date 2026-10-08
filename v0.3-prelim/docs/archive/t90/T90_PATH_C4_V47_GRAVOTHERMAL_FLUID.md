@@ -31,7 +31,7 @@ This is the **gravothermal catastrophe signature** (Balberg+ 2002) plus
 ## Architecture (Level A1 Toy Implementation)
 
 Per Balberg, Shapiro, Socrate (2002, Phys Rev Lett 88, 101301) and
-Mace+ 2026 (arXiv:2504.13004), the gravothermal fluid equations describe
+Mace+ 2025 (arXiv:2504.13004), the gravothermal fluid equations describe
 SIDM halo evolution:
 
 **Single-species (test of method)**:
@@ -48,7 +48,7 @@ SIDM halo evolution:
 - Effective σ/m_observed = (ρ_H σ_HH + ρ_L σ_LL) / (ρ_H + ρ_L)
 
 **Calibration**:
-- Heat transfer factor β = 0.75 (Mace+ 2026 N-body calibration)
+- Heat transfer factor β = 0.75 (Mace+ 2025 N-body calibration)
 - N_relax ~ 1000 (Essig+ 2019)
 - Initial equal number densities (n_H = n_L)
 - 100 radial bins, 200 time steps
@@ -158,7 +158,7 @@ To make T90.47 Cloud-9 compatible:
 
 - **Balberg, Shapiro, Socrate 2002** (Phys Rev Lett 88, 101301): Original gravothermal catastrophe for SIDM
 - **Essig, McDermott, Yu, Zhong 2019** (Phys Rev Lett 123, 121102): Calibrated N_relax values
-- **Mace+ 2026** (arXiv:2504.13004): Calibrated heat transfer factor β
+- **Mace+ 2025** (arXiv:2504.13004): Calibrated heat transfer factor β
 - **Yang, Fan, Tsai 2025** (arXiv:2504.02303, Phys Rev D 112, 083011): Multi-component SIDM with mass segregation
 - **Koda-Shapiro 2011** (MNRAS 415, 1125): Gravothermal fluid vs N-body comparison
 

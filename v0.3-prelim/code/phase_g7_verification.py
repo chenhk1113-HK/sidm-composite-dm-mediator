@@ -155,14 +155,14 @@ def question_2_intermediate_v():
     print()
     print("Analysis:")
     print()
-    print("At v=150 (peak): σ/m=5.05, σ_eff=0.45-1.26 — ABOVE He+ 2020 galaxy-halo mapping")
+    print("At v=150 (peak): σ/m=5.05, σ_eff=0.45-1.26 — ABOVE Sameie+ 2020 galaxy-halo mapping")
     print("  (~0.1-0.3 cm²/g). Borderline: would over-predict cores in MW-mass halos.")
     print()
     print("At v=300+: σ_eff << 0.01 — well below cluster/group lensing bounds.")
     print()
     print("Verdict: BORDERLINE at v=150. The second resonance is right at the edge of")
     print("galaxy-halo mapping data. If you reduce σ_peak2 below 3, Lei/Wang PASS goes away.")
-    print("If you keep σ_peak2=5, you may over-produce cores in galaxy-mass halos (He+ 2020).")
+    print("If you keep σ_peak2=5, you may over-produce cores in galaxy-mass halos (Sameie+ 2020).")
 
 
 def honest_summary():
@@ -186,7 +186,7 @@ def honest_summary():
     print()
     print("Forward work:")
     print("  - Derive the segregation profile from two-component gravothermal physics")
-    print("  - Constrain the second resonance via He+ 2020 galaxy-halo mapping (or similar)")
+    print("  - Constrain the second resonance via Sameie+ 2020 galaxy-halo mapping (or similar)")
     print("  - Investigate whether Yang+ 2024 t_c underestimates UFD collapse at high concentration")
     print("  - OR accept that Phase G7 is the most this framework can do, and reframe accordingly")
 

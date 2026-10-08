@@ -18,7 +18,7 @@
 
 **Critical findings (3 citation errors requiring correction before submission):**
 
-1. **[50c] Mace+ 2026 attribution is WRONG** — arXiv:2506.14898 is by **Yang, Fan, Hou, Tsai (2026)**, not Mace, Yang, Zeng. The paper attributes the unified SIDM2v framework to Mace+ but the actual authors are Yang+. **MUST FIX before submission.**
+1. **[50c] Mace+ 2026 attribution is WRONG** — RESOLVED in R88(82). The actual reference is **Mace, C., Yang, S., Zeng, Z. C., et al. 2025, Phys. Rev. D, arXiv:2504.13004** "Calibrating the SIDM Gravothermal Catastrophe with N-body Simulations." A separate **Mace+ 2026 (arXiv:2605.24174)** paper exists on substructure lensing but is not the SIDM2v framework. The paper has been updated throughout. **RESOLVED 2026-10-08 in commit following R88(82).**
 2. **[15f] Drobczyk+ 2025 σ_SI claim is WRONG** — Abstract states σ_SI ~ 6.7×10⁻⁵¹ cm² (below xenon neutrino floor), not the value the paper cites. **MUST FIX.**
 3. **[27] Horigome+ 2025 bound attribution is oversimplified** — Abstract says "decisively prefers CDM to SIDM when σ/m > 0.2 cm²/g," which is **directly contradictory** to the framework's σ_peak = 174 cm²/g. The paper cites "95% CL upper limits" but the abstract makes a decisive exclusion claim. **MUST ADDRESS.**
 

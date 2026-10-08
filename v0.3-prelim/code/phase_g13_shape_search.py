@@ -6,7 +6,7 @@ Goal: Test as many σ_m(v) shapes as feasible to see if ANY breaks the trade-off
 Approach:
 - Test 10+ different σ_m(v) functional forms
 - For each, compute σ_eff(150) at observation radius
-- Check if it satisfies both He+ 2020 (<0.3) and Lei/Wang (>0.1)
+- Check if it satisfies both Sameie+ 2020 (<0.3) and Lei/Wang (>0.1)
 - Check all other channels too
 
 Shapes tested:
@@ -37,7 +37,7 @@ CHANNELS = [
     ("Cloud-9 V_max (v=31.12, r=0.5)", 31.12, 0.5, ">", 50),
     ("SPARC typical (v=100, r=1.5)", 100, 1.5, "~", 0.19),
     ("Lei/Wang (v=150, r=1.5, central)", 150, 1.5, "range", (0.1, 0.3)),
-    ("He+ 2020 (v=150, r=1.5, subhalo)", 150, 1.5, "<", 0.3),
+    ("Sameie+ 2020 (v=150, r=1.5, subhalo)", 150, 1.5, "<", 0.3),
     ("Cluster (v=500, r=1)", 500, 1.0, "<", 0.001),
 ]
 
@@ -229,7 +229,7 @@ def run_phase_g13():
 
         print(f"  σ_eff(v=150) at observation radius: {sigma_eff_150:.4f}")
         print(f"  Lei/Wang (>0.1): {'PASS' if lei_ok else 'FAIL'}")
-        print(f"  He+ 2020 (<0.3): {'PASS' if he_ok else 'FAIL'}")
+        print(f"  Sameie+ 2020 (<0.3): {'PASS' if he_ok else 'FAIL'}")
         print(f"  v=150 trade-off satisfied: {'YES' if trade_off_satisfied else 'NO'}")
         print(f"  Total channels passing: {n_pass}/{len(ch_results)}")
 

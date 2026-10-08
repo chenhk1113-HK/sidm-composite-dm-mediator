@@ -63,7 +63,7 @@ The 8 channels (from R88(56) §9.16):
 4. Cloud-9 Vmax: Vmax-based mass estimate
 5. SPARC: spiral galaxy rotation curves
 6. Lei/Wang v=150: massive galaxy cores
-7. He+ 2020: cluster subhalo cores
+7. Sameie+ 2020: cluster subhalo cores
 8. Cluster: cluster-scale cores
 
 R88(71) PRE-CLAIM CHECKLIST
@@ -257,7 +257,7 @@ CHANNELS_ULDM = {
         "direction": "center",  # want ~150 km/s
         "halo_type": "massive",
     },
-    "He+ 2020": {
+    "Sameie+ 2020": {
         "m_halo": 1e10, "r_obs": 1.0,  # subhalo in cluster
         "threshold": 30.0,  # low rotation speed (essentially cored)
         "direction": "upper",

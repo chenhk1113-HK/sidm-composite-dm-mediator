@@ -93,7 +93,7 @@ def test_environment_dependent():
     ]
 
     subhalo_channels = [
-        ("He+ 2020 (subhalo)", 150, 1.5, "<", 0.3),
+        ("Sameie+ 2020 (subhalo)", 150, 1.5, "<", 0.3),
         ("Horigome dSph (subhalo or isolated)", 15, 6.0, "<", 0.8),
         ("Fischer&Yu UFD (subhalo)", 7, 1.0, "tau_proxy", None),
     ]
@@ -179,10 +179,10 @@ def test_environment_dependent():
     lei_pass = 0.1 < f_H_sidm2c(1.5)**2 * sigma_m_central(150) < 0.3
     print(f"    Lei/Wang constraint (0.1-0.3): {'PASS' if lei_pass else 'FAIL'}")
     print()
-    print(f"  He+ 2020 (SUBHALO, σ_m_subhalo at v=150):")
+    print(f"  Sameie+ 2020 (SUBHALO, σ_m_subhalo at v=150):")
     print(f"    σ_eff = {f_H_sidm2c(1.5)**2 * sigma_m_subhalo(150):.4f}")
     he_pass = f_H_sidm2c(1.5)**2 * sigma_m_subhalo(150) < 0.3
-    print(f"    He+ 2020 constraint (<0.3): {'PASS' if he_pass else 'FAIL'}")
+    print(f"    Sameie+ 2020 constraint (<0.3): {'PASS' if he_pass else 'FAIL'}")
     print()
 
     trade_off_broken = lei_pass and he_pass
@@ -199,11 +199,11 @@ def test_environment_dependent():
         print("SUCCESS: Environment-dependent σ_m(v) BREAKS the structural trade-off")
         print(f"  v=150 trade-off satisfied: YES")
         print(f"  Lei/Wang: {f_H_sidm2c(1.5)**2 * sigma_m_central(150):.4f}")
-        print(f"  He+ 2020: {f_H_sidm2c(1.5)**2 * sigma_m_subhalo(150):.4f}")
+        print(f"  Sameie+ 2020: {f_H_sidm2c(1.5)**2 * sigma_m_subhalo(150):.4f}")
         print(f"  Other channels passing: {n_pass_total}/{n_total}")
         print()
         print("This is the FIRST shape that breaks the trade-off while satisfying")
-        print("both Lei/Wang AND He+ 2020 simultaneously.")
+        print("both Lei/Wang AND Sameie+ 2020 simultaneously.")
         print()
         print("Mechanism: heavy species carry the v=150 resonance peak.")
         print("In centrals, both species present -> high σ_eff(150) for Lei/Wang.")

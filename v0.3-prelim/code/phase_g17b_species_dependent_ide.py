@@ -85,7 +85,7 @@ KILL CRITERION
 --------------
 Sub-strategy B succeeds if: any combination of (beta_H, w, f_H_0) in
 the Planck+DESI allowed range produces >= 5/8 channels passing AND
-does not contradict any existing PASS (Horigome, Lei/Wang, He+ 2020,
+does not contradict any existing PASS (Horigome, Lei/Wang, Sameie+ 2020,
 Cluster at the baseline).
 
 If Sub-strategy B fails, we proceed to Sub-strategy C (full MCMC
@@ -177,7 +177,7 @@ CHANNELS = {
                "is_subhalo": False, "threshold": 0.19, "direction": "center"},
     "Lei/Wang v=150": {"v_kms": 150.0, "f_h_form_cen": 0.6, "f_h_form_sub": 0.6,
                         "is_subhalo": False, "threshold": 0.3, "direction": "upper"},
-    "He+ 2020": {"v_kms": 150.0, "f_h_form_cen": 0.6, "f_h_form_sub": 0.05,
+    "Sameie+ 2020": {"v_kms": 150.0, "f_h_form_cen": 0.6, "f_h_form_sub": 0.05,
                   "is_subhalo": True, "threshold": 0.3, "direction": "upper"},
     "Cluster": {"v_kms": 300.0, "f_h_form_cen": 0.05, "f_h_form_sub": 0.05,
                  "is_subhalo": True, "threshold": 0.001, "direction": "upper"},
@@ -257,7 +257,7 @@ def main_test():
 
             # Show f_H at v=150 for both centrals and subhalos
             f_h_cen = results["Lei/Wang v=150"]["f_h_obs"]
-            f_h_sub = results["He+ 2020"]["f_h_obs"]
+            f_h_sub = results["Sameie+ 2020"]["f_h_obs"]
 
             print(f"{w:6.2f} {beta_H:8.3f} {xi_H:8.4f} {n_pass:>4d}/8 {f_h_cen:15.4f} "
                   f"{f_h_sub:15.4f}")

@@ -86,7 +86,7 @@ This is the FIRST real test of the R88(71) checklist. It worked:
 
 2. **No alternative framework tested so far breaks the trade-off.** The trade-off is a property of the OBSERVATIONS, not of the dark matter model.
 
-3. **Direction D (observation refinement) is now the most promising path.** The trade-off may dissolve if one of the conflicting observations (Lei/Wang vs He+ 2020 at v=150) has a systematic shift.
+3. **Direction D (observation refinement) is now the most promising path.** The trade-off may dissolve if one of the conflicting observations (Lei/Wang vs Sameie+ 2020 at v=150) has a systematic shift.
 
 4. **The R88(56) honest synthesis is the correct final state.** Both SIDM and ULDM achieve ~3-4/8 channels, neither breaks the trade-off, the framework is at its fundamental limit.
 

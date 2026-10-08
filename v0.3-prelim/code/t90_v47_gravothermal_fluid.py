@@ -2,7 +2,7 @@
 """
 T90.47 — Gravothermal fluid model for multi-component SIDM.
 
-Per Balberg, Shapiro, Socrate (2002) and Mace+ 2026 (arXiv:2504.13004),
+Per Balberg, Shapiro, Socrate (2002) and Mace+ 2025 (arXiv:2504.13004),
 the gravothermal fluid equations describe the time evolution of an SIDM
 halo. This module solves the 1D spherically-symmetric version for a
 TWO-COMPONENT SIDM halo (chi_H heavy + chi_L light).
@@ -22,7 +22,7 @@ The gravothermal fluid equations (per Balberg+ 2002):
     where u = (3/2)*k_B*T/m_chi is thermal energy per unit mass
   Effective conductivity:
     kappa = beta * kappa_smfp
-    beta ~ 0.75 (N-body calibrated, Mace+ 2026)
+    beta ~ 0.75 (N-body calibrated, Mace+ 2025)
 
 Multi-component extension (per Yang, Fan, Tsai 2025):
   - Two coupled fluid systems, one per species
@@ -69,7 +69,7 @@ M_PROTON_GEV = 0.938  # proton mass in GeV
 CM2_PER_G = 1.0       # cross-section units cm^2/g
 YR_TO_GYR = 1e-9
 
-# Mace+ 2026 calibrated heat transfer factor (N-body)
+# Mace+ 2025 calibrated heat transfer factor (N-body)
 BETA_DEFAULT = 0.75
 
 

@@ -43,7 +43,7 @@ def evaluate_all_channels(sigma_m_func, name):
         ("Cloud-9 V_max (v=31.12, r=0.5)", 31.12, 0.5, ">", 50, "sigma_eff"),
         ("SPARC typical (v=100, r=1.5)", 100, 1.5, "~", 0.19, "sigma_eff"),
         ("Lei/Wang (v=150, r=1.5)", 150, 1.5, "range", (0.1, 0.3), "sigma_eff"),
-        ("He+ 2020 (v=150, r=1.5)", 150, 1.5, "<", 0.3, "sigma_eff"),
+        ("Sameie+ 2020 (v=150, r=1.5)", 150, 1.5, "<", 0.3, "sigma_eff"),
         ("Cluster (v=500, r=1)", 500, 1.0, "<", 0.001, "sigma_eff"),
     ]
 

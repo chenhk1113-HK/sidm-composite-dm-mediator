@@ -8,7 +8,7 @@
 
 ## Standing: v0.4-prelim+v19.2-D-R88(80) (2026-10-08, four-path exploration complete)
 
-**v19.2-D (R88(80))** — paper-freeze maintained. **Three first-class structural results**: (1) §2.6a Cloud-9 vs dSph tension at v=28↔15; (2) §9.17a Lei/Wang vs He+ 2020 tension at v=150; (3) §9.17b structural trade-off theorem. §9.18 (R88(79)) added: four forward paths tested, **all four FAILED** to break the trade-off. R88(71) pre-claim checklist caught 3 errors during exploration (R88(75, 76, 78).
+**v19.2-D (R88(80))** — paper-freeze maintained. **Three first-class structural results**: (1) §2.6a Cloud-9 vs dSph tension at v=28↔15; (2) §9.17a Lei/Wang vs Sameie+ 2020 tension at v=150; (3) §9.17b structural trade-off theorem. §9.18 (R88(79)) added: four forward paths tested, **all four FAILED** to break the trade-off. R88(71) pre-claim checklist caught 3 errors during exploration (R88(75, 76, 78).
 
 **Headline (v19.2-D):** Phase 44 multi-resonance σ/m(v) framework achieves **4 of 8 constrained channels** under physically motivated f_H (Phase G10 SIDM2c first-principles). Cloud-9 vs dSph tension **partially resolved** by third narrow peak at v=10 km/s (Phase G8: 3/5 UFDs now predict collapse). **§9.17b structural trade-off stands as the framework's fundamental limit.** Paper is a constraint map + no-go catalogue, submission-ready as Direction C.
 

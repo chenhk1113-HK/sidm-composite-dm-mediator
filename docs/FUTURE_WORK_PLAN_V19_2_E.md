@@ -11,7 +11,7 @@
 
 The current paper (v19.2-D, R88(56)) establishes a constraint map + no-go catalogue with three first-class results:
 1. §2.6a: Cloud-9 vs dSph tension at v=28↔15
-2. §9.17a: Lei/Wang vs He+ 2020 tension at v=150
+2. §9.17a: Lei/Wang vs Sameie+ 2020 tension at v=150
 3. §9.17b: Structural trade-off theorem (Phase G10)
 
 These three results are robust. They survive:
@@ -31,8 +31,8 @@ The current paper's contribution is the structural map. The next paper (v19.2-E)
 
 ### 1.1 Specific actions
 
-1. **Monitor He+ 2020 follow-up publications**
-   - Track arXiv submissions citing He+ 2020 (subhalo mass function in MW-mass hosts)
+1. **Monitor Sameie+ 2020 follow-up publications**
+   - Track arXiv submissions citing Sameie+ 2020 (subhalo mass function in MW-mass hosts)
    - Watch for revisions with explicit f_H(r) treatment in the Jeans/lensing modeling
    - If a revision shifts σ_eff(150) by factor ~2, the v=150 no-go dissolves
 
@@ -42,7 +42,7 @@ The current paper's contribution is the structural map. The next paper (v19.2-E)
    - If either shifts σ_eff(150) by factor ~2, the v=150 no-go dissolves
 
 3. **Systematic comparison of modeling assumptions**
-   - Document the modeling assumptions in He+ 2020 (lensing + satellite kinematics + baryonic feedback)
+   - Document the modeling assumptions in Sameie+ 2020 (lensing + satellite kinematics + baryonic feedback)
    - Document the modeling assumptions in Lei/Wang (Jeans modeling + stellar kinematics + gas dynamics)
    - Identify which is more sensitive to the f_H(r) assumption
    - Determine which observation should be trusted more
@@ -134,7 +134,7 @@ Path 3 is the **only untested forward path**. All others (Direction A, Direction
 
 ### 3.1 Motivation
 
-Direction B is the **only path that breaks the trade-off theorem by construction**. A multi-species model with environment-dependent cross-sections could, in principle, satisfy He+ 2020 (subhalos) and Lei/Wang (centrals) simultaneously without killing Cloud-9/SPARC.
+Direction B is the **only path that breaks the trade-off theorem by construction**. A multi-species model with environment-dependent cross-sections could, in principle, satisfy Sameie+ 2020 (subhalos) and Lei/Wang (centrals) simultaneously without killing Cloud-9/SPARC.
 
 ### 3.2 Implementation requirements
 
@@ -150,7 +150,7 @@ Direction B is the **only path that breaks the trade-off theorem by construction
 
 **Requirement 3: Re-derive all scaling relations**
 - σ_m(v) for central halos (used by Lei/Wang, Cloud-9, SPARC)
-- σ_m(v) for subhalos (used by He+ 2020)
+- σ_m(v) for subhalos (used by Sameie+ 2020)
 - Gravothermal evolution for both populations
 - LZ direct-detection cross-section (must remain < 9.4×10⁻⁴⁸ cm²)
 
@@ -164,7 +164,7 @@ Direction B is the **only path that breaks the trade-off theorem by construction
 **Step 2 (3 weeks): Channel-by-channel test**
 - Apply new σ_m(v) to all 10 channels
 - Verify Cloud-9, SPARC, Lei/Wang still pass (centrals)
-- Verify He+ 2020 now passes (subhalos with light-only σ)
+- Verify Sameie+ 2020 now passes (subhalos with light-only σ)
 - Verify LZ still satisfied
 
 **Step 3 (2 weeks): Re-derive structural trade-off**
@@ -180,9 +180,9 @@ Direction B is the **only path that breaks the trade-off theorem by construction
 
 ### 3.5 Success / Failure criteria (R88(58) sharpened)
 
-**Success:** A concrete Lagrangian with two dark species and mediator(s) produces σ_central(v) and σ_sub(v) that satisfy all 10 channels simultaneously, including both He+ 2020 (v=150) and Lei/Wang (v=150). The model must also preserve LZ bound (σ_SI < 9.4×10⁻⁴⁸ cm²) and have a consistent UV completion (no symmetry breaking violations, no Lorentz invariance violations).
+**Success:** A concrete Lagrangian with two dark species and mediator(s) produces σ_central(v) and σ_sub(v) that satisfy all 10 channels simultaneously, including both Sameie+ 2020 (v=150) and Lei/Wang (v=150). The model must also preserve LZ bound (σ_SI < 9.4×10⁻⁴⁸ cm²) and have a consistent UV completion (no symmetry breaking violations, no Lorentz invariance violations).
 
-**Failure:** Any two-species model that satisfies He+ 2020 also kills Cloud-9/SPARC/Lei-Wang (the trade-off theorem generalizes to multi-species). Document the failure mode.
+**Failure:** Any two-species model that satisfies Sameie+ 2020 also kills Cloud-9/SPARC/Lei-Wang (the trade-off theorem generalizes to multi-species). Document the failure mode.
 
 **Ambiguous:** A model satisfies some channels but not all — requires further tuning. Document which channels pass and which fail, and identify the bottleneck.
 
@@ -203,7 +203,7 @@ This is a high-risk path. The trade-off theorem says single-species σ_m(v) is f
 
 The four open questions are NOT equal priority. Suggested ordering:
 
-1. **Q3 (He+ 2020 vs Lei/Wang reliability)** — directly informs Direction D; if one observation is unreliable, the v=150 no-go dissolves. **Highest priority.**
+1. **Q3 (Sameie+ 2020 vs Lei/Wang reliability)** — directly informs Direction D; if one observation is unreliable, the v=150 no-go dissolves. **Highest priority.**
 2. **Q1 (why Phase G7 f_H(r) works)** — could reveal a loophole in the trade-off theorem. **High priority.**
 3. **Q4 (multi-component UV feasibility)** — overlaps with Direction B; pursue only if Direction B is started. **Medium priority.**
 4. **Q2 (intermediate-radius observables)** — speculative; useful as background for Direction D and Path 3. **Lowest priority.**
@@ -224,7 +224,7 @@ The four open questions are NOT equal priority. Suggested ordering:
 - Method: Identify which intermediate-radius observables have published σ_eff constraints
 - Deliverable: Survey paper (~20 pages) listing all intermediate-radius probes
 
-**Q3 — Is He+ 2020 or Lei/Wang more reliable?**
+**Q3 — Is Sameie+ 2020 or Lei/Wang more reliable?**
 - Direction D hinges on which observation the field should trust more
 - Compare: modeling assumptions, systematic uncertainties, statistical methodology
 - Method: Reproduce both analyses with explicit f_H(r) treatment; compare residuals

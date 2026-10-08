@@ -179,7 +179,7 @@ CHANNELS = {
                "is_subhalo": False, "threshold": 0.19, "direction": "center"},
     "Lei/Wang v=150": {"v_kms": 150.0, "f_h_cen": 0.6, "f_h_sub": 0.6,
                         "is_subhalo": False, "threshold": 0.3, "direction": "upper"},
-    "He+ 2020": {"v_kms": 150.0, "f_h_cen": 0.6, "f_h_sub": 0.05,
+    "Sameie+ 2020": {"v_kms": 150.0, "f_h_cen": 0.6, "f_h_sub": 0.05,
                   "is_subhalo": True, "threshold": 0.3, "direction": "upper"},
     "Cluster": {"v_kms": 300.0, "f_h_cen": 0.05, "f_h_sub": 0.05,
                  "is_subhalo": True, "threshold": 0.001, "direction": "upper"},
@@ -271,7 +271,7 @@ def main_test():
 
         # Show key channels
         sig_150_cen = results["Lei/Wang v=150"]["sigma_eff"]
-        sig_150_sub = results["He+ 2020"]["sigma_eff"]
+        sig_150_sub = results["Sameie+ 2020"]["sigma_eff"]
 
         print(f"{beta:6.3f} {xi:8.4f} {n_pass:>4d}/8 {sig_150_cen:20.4f} "
               f"{sig_150_sub:20.4f}")
