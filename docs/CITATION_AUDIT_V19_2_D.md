@@ -42,6 +42,19 @@
 | **Lei+ 2026 [55b]** | arXiv:2609.16740 | "Lower central dark matter densities in nearby galaxies than predicted by simulations" | Y. Lei, L. Zhu, M. Yang, G. Despali, Z. Zheng, R. Li, D. Xu, N. Yu, J. Falcón-Barroso, F. Jiang, G. van de Ven, J. Wang | ✓ **CONFIRMED** — paper cites a method-validation paper "Lei et al., 2026" for the 30% DM mass uncertainty at r=20 kpc |
 | **Wang+ 2026 [55c]** | arXiv:2609.19132 | "Massive Galaxy Halos Contain Less Inner Dark Matter Than Predicted" | Y.-C. Wang, Y. Peng, X. Yang, L. C. Ho, D. Zhao, J. Dou, H. Fu, Z. Gao, Q. Gu, F. Jiang, Y. Liu, R. Maiolino, H. Mo, C. Su, B. Wang, K. Wang, B. Xu, F. Yuan, K. Zhao, X. Zhu | ✓ **CONFIRMED** — matches description "combining MaNGA + ALFALFA + SDSS" |
 | **Fischer & Yu 2026** | arXiv:2603.04508 | "The dark fate of ultra-faint dwarfs: Gravothermal collapse in action" (A&A 711, A68) | M. S. Fischer, H.-B. Yu | ✓ **CONFIRMED** — matches §3.4 UFD diversity claim |
+| **He+ 2020 [54c]** | arXiv:1904.07872 (PRL 124, 141102) | "Self-Interacting Dark Matter Subhalos in the Milky Way's Tides" | **O. Sameie** et al. (NOT He — first author is Sameie) | ⚠ **CORRECTION NEEDED** — paper's "He+ 2020" is misattributed. The actual first author is Sameie. Sameie+ 2020 is the standard subhalo-tidal-survival paper. The σ_eff < 0.3 cm²/g specific claim needs PDF verification. |
+| **Yu+ 2026 [23]** | PRL 136, 141001 (2026) | "Core-Collapsed SIDM Halos as the Common Origin of Dense Perturbers in Lenses, Streams, and Satellites" | **H.-B. Yu** (single author) | ✓ **CONFIRMED** — paper's claim "Yu+ 2026 PRL 136, 141001" matches exactly. "Three birds with one stone" is the published paper. |
+| **Mace+ 2026 [50c] / SIDM2v** | None found | "SIDM2v falls ~7× short at v=28 km/s under the Elbert+ benchmark" | Unknown | ✗ **PROBABLE FABRICATION** — no "Mace+ 2026" SIDM2v paper found. The closest published SIDM2v benchmark is **Yang+ 2025 mass-segregation (arXiv:2506.14898)** with σ_0/m ≈ 0.4-0.5 cm²/g and the Kim group at UC Riverside. The "7× short at v=28" specific claim has no clear source. **RECOMMEND REPLACING this citation with Yang+ 2025 (arXiv:2506.14898) as the SIDM2v benchmark**, and removing the "7×" specific number unless a verified source can be found. |
+
+### R88(82)-update CORRECTIONS
+
+The citation audit identified the following errors in the paper:
+
+1. **He+ 2020 → Sameie+ 2020.** The paper cites "He+ 2020 [54c]" for "subhalo mass function in MW-mass hosts, σ_eff < 0.3 cm²/g at v=150." The actual paper is **Sameie, O. et al. 2020, PRL 124, 141102, arXiv:1904.07872** "Self-Interacting Dark Matter Subhalos in the Milky Way's Tides." First author is Omid Sameie, not He. The specific σ_eff < 0.3 cm²/g value at v=150 should be checked against the paper.
+
+2. **Mace+ 2026 → likely Yang+ 2025.** The paper cites "Mace+ 2026 [50c] / SIDM2v" for "SIDM2v falls ~7× short at v=28 km/s under the Elbert+ benchmark." No paper by "Mace+ 2026" was found. The closest published SIDM2v (velocity-dependent two-component) benchmark is **Yang+ 2025 (arXiv:2506.14898)** "Self-Interacting Dark Matter with Mass Segregation." The "7× short at v=28" specific number has no clear verified source and should either be sourced to Yang+ 2025 or removed.
+
+3. **Yu+ 2026 PRL 136, 141001 ✓ CONFIRMED.** H.-B. Yu, PRL 136, 141001 (2026) "Core-Collapsed SIDM Halos as the Common Origin of Dense Perturbers in Lenses, Streams, and Satellites" — single-author paper, exactly as the paper claims.
 
 ### R88(71) PRE-CLAIM CHECKLIST FOR THE AUDIT ITSELF
 
