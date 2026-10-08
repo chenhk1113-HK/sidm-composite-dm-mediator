@@ -105,13 +105,21 @@ The structural trade-off theorem (Phase G10) says single-species σ_m(v) with an
 - **P3-2:** New paper (v19.2-E) titled "Cosmological phase diversity in SIDM halos" (~30 pages)
 - **P3-3:** Updated `FINDINGS_FOR_FUTURE_DELIBERATION.md` with cosmological phase results
 
-### 2.4 Kill criterion
+### 2.4 Success / Failure criteria (R88(58) sharpened)
 
-> If no cosmological simulation covers the relevant regime (low-mass, isolated RELHIC-like halos), Path 3 is not viable.
+**Success:** Empirical merger histories produce τ values that differ by ≥ factor 2 across the constrained halos (Cloud-9 vs Fornax vs Sculptor vs Draco), allowing phase diversity to break the trade-off theorem. Specifically: at least one halo must be at τ < 0.5 and another at τ > 1.0, with the spread distributed across the full sample.
 
-Specifically: if IllustrisTNG-300 has < 10 RELHIC-like halos with full merger histories, the sample size is too small for statistical conclusions. In this case, Path 3 terminates with "data inadequate" verdict.
+**Failure:** All constrained halos end up at τ < 0.5 or τ > 2.0 (uniform phase), meaning merger history doesn't supply the missing diversity. The trade-off theorem stands.
 
-### 2.5 Why this matters
+**Ambiguous:** τ spread is factor 1.5-2.0 — marginal; requires follow-up with larger sample.
+
+**Data availability kill:** If IllustrisTNG-300 has < 10 RELHIC-like halos with full merger histories, the sample size is too small for statistical conclusions. In this case, Path 3 terminates with "data inadequate" verdict.
+
+### 2.6 Why this matters
+
+Path 3 is the **only untested forward path**. All others (Direction A, Direction B) have been tested and found to have inherent limitations (Phase G9, Phase G10). If Path 3 doesn't work either, the structural trade-off theorem is genuinely binding, and the framework is at its fundamental limit.
+
+### 2.6 Why this matters
 
 Path 3 is the **only untested forward path**. All others (Direction A, Direction B) have been tested and found to have inherent limitations (Phase G9, Phase G10). If Path 3 doesn't work either, the structural trade-off theorem is genuinely binding, and the framework is at its fundamental limit.
 
@@ -170,9 +178,15 @@ Direction B is the **only path that breaks the trade-off theorem by construction
 - **B-2:** New paper (v19.2-E) titled "Multi-species SIDM with environment-dependent cross-sections" (~30 pages)
 - **B-3:** Updated findings document with new structural no-gos (or dissolution thereof)
 
-### 3.5 Kill criterion
+### 3.5 Success / Failure criteria (R88(58) sharpened)
 
-> If no consistent UV completion exists (e.g., symmetry breaking patterns that violate constraints, or environmental dependence that breaks Lorentz invariance), Direction B fails.
+**Success:** A concrete Lagrangian with two dark species and mediator(s) produces σ_central(v) and σ_sub(v) that satisfy all 10 channels simultaneously, including both He+ 2020 (v=150) and Lei/Wang (v=150). The model must also preserve LZ bound (σ_SI < 9.4×10⁻⁴⁸ cm²) and have a consistent UV completion (no symmetry breaking violations, no Lorentz invariance violations).
+
+**Failure:** Any two-species model that satisfies He+ 2020 also kills Cloud-9/SPARC/Lei-Wang (the trade-off theorem generalizes to multi-species). Document the failure mode.
+
+**Ambiguous:** A model satisfies some channels but not all — requires further tuning. Document which channels pass and which fail, and identify the bottleneck.
+
+**Decision gate:** Only pursue Direction B if Path 3 fails. If Path 3 produces phase diversity, Direction B is deferred (not needed). This is the R88(58) sequencing recommendation.
 
 This is a high-risk path. The trade-off theorem says single-species σ_m(v) is fundamentally limited; multi-species is the only escape. But constructing a consistent UV model is hard, and the result may simply be that no such model exists at the relevant parameter point.
 
@@ -184,6 +198,15 @@ This is a high-risk path. The trade-off theorem says single-species σ_m(v) is f
 **Resource:** 1 FTE partial
 **Reversibility:** Maximum (pure investigation)
 **Risk:** Low
+
+### 4.0 Prioritization (R88(58))
+
+The four open questions are NOT equal priority. Suggested ordering:
+
+1. **Q3 (He+ 2020 vs Lei/Wang reliability)** — directly informs Direction D; if one observation is unreliable, the v=150 no-go dissolves. **Highest priority.**
+2. **Q1 (why Phase G7 f_H(r) works)** — could reveal a loophole in the trade-off theorem. **High priority.**
+3. **Q4 (multi-component UV feasibility)** — overlaps with Direction B; pursue only if Direction B is started. **Medium priority.**
+4. **Q2 (intermediate-radius observables)** — speculative; useful as background for Direction D and Path 3. **Lowest priority.**
 
 ### 4.1 Four bounded investigations
 
@@ -253,7 +276,18 @@ This is a high-risk path. The trade-off theorem says single-species σ_m(v) is f
 - **D-1:** SASHIMI likelihood re-run + paper supplement
 - **D-2:** SPARC per-galaxy likelihood + paper supplement
 
-### 5.3 Kill criteria
+### 5.3 Success / Failure criteria (R88(58) sharpened)
+
+**D1 — SASHIMI re-run:**
+- Success: Likelihood confirms σ_eff(r_obs) < 0.8 at ≥ 95% CL using the framework's σ(v,θ) form. Converts approximate PASS to actual PASS.
+- Failure: Likelihood rejects σ_eff(r_obs) < 0.8 at > 5% CL. The Horigome PASS becomes FAIL. Honest disclosure required.
+- Ambiguous: Likelihood is inconclusive (e.g., depends on prior choice). Document the dependence.
+
+**D2 — SPARC re-fit:**
+- Success: σ_eff(100) within factor 2 of 0.19 with no more than 10% degradation in Cloud-9 / Horigome fit quality. Establishes SPARC as robust PASS.
+- Failure: Either (a) σ_eff(100) outside factor 2 of 0.19, or (b) achieving σ_eff(100) ≈ 0.19 requires breaking Cloud-9 / Horigome balance by >10%. SPARC becomes FAIL or MARGINAL. Trade-off must be disclosed.
+
+### 5.4 Kill criteria
 
 - D-1: If SASHIMI likelihood rejects framework's σ(v,θ), the Horigome PASS becomes FAIL. Honest disclosure required.
 - D-2: If SPARC re-fit requires breaking Cloud-9 / Horigome balance, the SPARC PASS becomes FAIL. Trade-off must be disclosed.
@@ -285,21 +319,52 @@ Submit T215 patches to KiSS-SIDM as a PR:
 
 ---
 
-## 7. Recommended Sequence and Dependencies
+## 7. Recommended Sequence and Dependencies (R88(58) refined)
+
+### 7.1 Sequencing (with decision gate)
+
+Path 3 and Direction B are **NOT parallel paths** — they're sequential with a decision gate. If Path 3 succeeds, Direction B is unnecessary.
+
+```
+1. Direction D (monitoring, ongoing) ──────────────────────────┐
+                                                              │
+2. Path 3 (cosmological merger histories, 3-4 months)         │
+                                                              │
+   Decision gate (after Path 3 completes):                     │
+   ├── Success (τ diversity ≥ factor 2)                       │
+   │   → Ship v19.2-E with phase-diversity paper              │
+   │   → Direction B DEFERRED (not needed)                    │
+   ├── Failure (uniform τ)                                   ─┤
+   │   → Direction B becomes MANDATORY                       │
+   │   → Path 3 negative result documented as paper         │
+   └── Ambiguous (τ spread 1.5-2.0)                          │
+       → Refine Path 3 with more halos                       │
+       → Defer Direction B decision                          │
+                                                              │
+3. Direction B (multi-species UV, 1-2 months) — ONLY IF Path 3 fails ─┘
+4. Open questions (opportunistic, can run in parallel)
+5. Defensibility improvements (can run in parallel with Path 3)
+6. KiSS-SIDM PR (can run anytime, days)
+```
+
+### 7.2 Parallel execution
+
+- **Path 3** and **Direction D** can run in parallel (Path 3 is compute; Direction D is monitoring)
+- **Defensibility improvements** (Priority 5) can run in parallel with Path 3
+- **Open questions** can run in parallel with anything
+- **Direction B** is **sequential after Path 3**, not parallel
+- **KiSS-SIDM PR** is independent, can run anytime
+
+### 7.3 Deliverables table
 
 | Order | Path | Timeline | Dependencies | Deliverable |
 |-------|------|----------|--------------|-------------|
 | 1 | Direction D | 0 comp | None | Quarterly updates to findings |
 | 2 | Path 3 (cosmological) | 3-4 mo | None | v19.2-E paper, 30 pages |
-| 3 | Direction B (multi-species) | 1-2 mo | None | v19.2-E paper, 30 pages |
+| 3 | Direction B (multi-species) | 1-2 mo | **After Path 3 fails** | v19.2-E paper, 30 pages |
 | 4 | Open questions (Q1-Q4) | variable | None | 4 short notes |
 | 5 | SASHIMI + SPARC | 1-2 mo ea | None | Paper supplements |
 | 6 | KiSS-SIDM PR | days | None | Methods contribution |
-
-**Parallel execution possible:**
-- Path 3 and Direction B can run in parallel (different FTE)
-- Open questions can run in parallel with anything
-- Defensibility improvements (Priority 5) can run in parallel with anything
 
 ---
 
@@ -320,7 +385,55 @@ Submit T215 patches to KiSS-SIDM as a PR:
 
 ---
 
-## 9. Bottom Line
+## 9. Go/No-Go Decision Tree (R88(58))
+
+```
+Path 3 result?
+├── Success (τ diversity ≥ factor 2)
+│   → Ship v19.2-E with phase-diversity paper (~30 pages)
+│   → Title: "Cosmological phase diversity in SIDM halos:
+│            a test of the structural trade-off theorem"
+│   → Direction B DEFERRED (not needed)
+│   → Open questions shift focus (Q1 becomes less critical)
+│
+├── Failure (uniform τ)
+│   → Direction B becomes MANDATORY
+│   → Path 3 negative result documented as paper (~25 pages)
+│   → Title: "Phase uniformity in cosmological merger histories:
+│            the structural trade-off theorem as fundamental limit"
+│   → Direction B starts immediately after
+│
+└── Ambiguous (τ spread 1.5-2.0)
+    → Refine Path 3 with more halos (1-2 months additional)
+    → Defer Direction B decision
+    → Ship "Path 3 inconclusive" note (~15 pages)
+```
+
+## 10. Minimum Publishable Unit (MPU)
+
+If the full program can't be funded, the smallest publishable contribution is:
+
+**MPU = Path 3 result + Direction D update + SASHIMI re-run**
+
+This produces one paper (~30 pages) titled **"Cosmological phase diversity in SIDM halos: a test of the structural trade-off theorem"** regardless of whether Path 3 succeeds or fails.
+
+- If Path 3 succeeds: positive result + SASHIMI confirmation + observational status
+- If Path 3 fails: negative result + SASHIMI confirmation + observational status
+- If Path 3 ambiguous: inconclusive result + SASHIMI + observational status
+
+**All three outcomes are publishable.** The MPU is the fallback if Path 3 + Direction B + full defensibility program isn't funded.
+
+## 11. Negative Result Framing for Path 3
+
+The plan currently frames Path 3 as a search for a resolution. But a negative result is also publishable and scientifically valuable.
+
+**Negative result paper (Path 3 fails):**
+
+> "We tested whether cosmological merger histories supply the phase diversity needed to resolve the v=150 no-go. Across 5-10 RELHIC-like halos in IllustrisTNG-300, all constrained halos ended up at gravothermal phase τ < 0.5 or τ > 2.0 (uniform distribution). Merger history does not produce the phase diversity required to break the structural trade-off theorem. The trade-off therefore stands as the fundamental limit of single-species SIDM with the Phase 44 parameter point."
+
+This is a **stronger scientific claim** than "we tried and it didn't work." It establishes the trade-off theorem as the boundary of what single-species SIDM can achieve.
+
+## 12. Bottom Line
 
 The current paper (v19.2-D, R88(56)) is **submission-ready as Direction C**. The future-work plan above represents the explicit roadmap for v19.2-E.
 
@@ -328,16 +441,16 @@ The current paper (v19.2-D, R88(56)) is **submission-ready as Direction C**. The
 
 **The cheapest future path is Direction D** (observation monitoring) — zero computation, fully reversible, may dissolve v=150 no-go.
 
-**The most fundamental future path is Direction B** (multi-species UV) — only way to break the trade-off by construction, but high risk and uncertain payoff.
+**The most fundamental future path is Direction B** (multi-species UV) — only way to break the trade-off by construction, but **only pursued if Path 3 fails** (R88(58) sequencing). High risk and uncertain payoff.
 
 **The defensibility improvements (Priority 5) and methods contributions (Priority 6) are valuable but don't address the structural tensions** — they're hygiene improvements, not resolution attempts.
 
-**Recommendation:** Start Path 3 in parallel with Direction D monitoring. After 3-4 months, decide whether to pursue Direction B based on Path 3 results.
+**Recommendation:** Start Path 3 in parallel with Direction D monitoring. After 3-4 months, apply the go/no-go decision tree:
 
-If Path 3 fails: Direction B becomes the only remaining path, and the structural trade-off theorem stands as the final word on the framework.
+- If Path 3 succeeds: ship v19.2-E with phase-diversity paper; Direction B deferred
+- If Path 3 fails: ship negative result paper; Direction B becomes mandatory
+- If Path 3 ambiguous: refine with more halos; defer Direction B decision
 
-If Path 3 succeeds: Direction B becomes less critical; the framework can be salvaged with empirical phase diversity.
+The MPU (Path 3 + Direction D + SASHIMI) is the fallback if full program isn't funded.
 
-If Direction D updates first: v=150 no-go dissolves, and Path 3 / Direction B can be deferred or re-scoped.
-
-**The framework has reached its natural conclusion for the current paper. The next paper is genuinely forward-looking research.**
+**The framework has reached its natural conclusion for the current paper. The next paper is genuinely forward-looking research, with explicit decision gates and publishable outcomes regardless of result.**

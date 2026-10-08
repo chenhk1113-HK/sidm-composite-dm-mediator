@@ -677,3 +677,38 @@ Begin Path 1 (Direction A N-body) — this is the bounded, testable, kill-criter
 **The paper is ready for submission as Direction C.**
 The future work has clear paths with kill criteria.
 The project state is honest, complete, and ready to hand off.
+
+
+---
+
+## 17. Future Work Plan — v19.2-E Roadmap (R88(57))
+
+**See `docs/FUTURE_WORK_PLAN_V19_2_E.md` for the complete 10-section plan with concrete deliverables, kill criteria, and resource estimates.**
+
+### Quick reference (six priorities)
+
+| Priority | Path | Timeline | Deliverable | Kill criterion |
+|----------|------|----------|-------------|----------------|
+| 1 | Direction D (observational refinement) | 0 comp | Quarterly findings updates | None (monitoring) |
+| 2 | Path 3 (cosmological merger histories) | 3-4 mo | v19.2-E paper, 30 pages | No sim covers relevant regime |
+| 3 | Direction B (multi-species UV) | 1-2 mo | v19.2-E paper, 30 pages | No consistent UV completion |
+| 4 | Open questions Q1-Q4 (4 investigations) | variable | 4 short notes (~10-20 pages each) | None (exploration) |
+| 5 | SASHIMI + SPARC re-fits | 1-2 mo ea | Paper supplements | Likelihood rejects / breaks other channels |
+| 6 | KiSS-SIDM upstream PR | days | GitHub PR + methods note | None (methods contribution) |
+
+### Resource estimates
+
+- **Full program:** ~10 FTE-months, 650 GB disk, 1800 CPU-hr
+- **Minimum viable:** Path 3 + Direction D + Defensibility (~7 FTE-months)
+
+### Recommendation
+
+1. **Start Path 3** in parallel with **Direction D monitoring**
+2. After 3-4 months, decide on Direction B based on Path 3 results
+3. **If Path 3 fails:** trade-off theorem stands as final word
+4. **If Path 3 succeeds:** framework salvageable with empirical phase diversity
+5. **If Direction D updates first:** v=150 no-go dissolves, defer Direction B
+
+### Single most important future path
+
+**Path 3 (cosmological merger histories)** is the only untested forward direction. It tests whether empirical phase diversity from real merger trees can break the structural trade-off theorem. If it doesn't work, the framework is at its fundamental limit and Direction B becomes the only remaining path.
