@@ -729,6 +729,34 @@ The project state is honest, complete, and ready to hand off.
 - cap=0.60, τ_seg=100: f_H varies from 0.46 to 0.60, σ_eff diversity 1.30× (still < 2×)
 - **Path 3 negative result: phase diversity does NOT break the trade-off theorem.**
 
+**Path 3 v4 (R88(63)):** CRITICAL BUG FIX from v1-v3.
+- v1-v3 had a bug: used σ_eff = f_H² · σ_m(v_target = 29.4 km/s) for all halos
+- This applied Phase 44's high σ_m (174 cm²/g) at v_target to halos that wouldn't have such high σ_m at their actual V_max
+- v4 fixes: per-halo σ_m(V_max), per-halo V_max from NFW, per-halo ρ_eff from NFW inner density
+
+**Result (R88(63) corrected):**
+- Constrained halo τ range: 5569 to 1.3×10⁸
+- Constrained halo τ diversity: **23586×**
+- Constrained halo σ_eff(150) range: all 1.82
+- Constrained halo σ_eff diversity: **1.00×**
+
+The corrected Phase G11 shows that even with proper per-halo calculations, the structural trade-off theorem holds:
+- τ diversity is genuinely large (23586×)
+- But ALL halos map to the same σ_eff (1.82) because f_H is saturated at 0.60 cap for all
+- σ_eff = f_H² · σ_m = 0.36 · 5.05 = 1.82 (constant across all halos)
+
+**The Phase G11 v4 result is the STRONGEST negative result:**
+- Phase diversity exists (23586×, real physical variation)
+- But σ_eff diversity is zero (1.00×, all halos give same answer)
+- This directly demonstrates the f_H saturation barrier
+- Phase diversity alone CANNOT overcome the trade-off theorem
+
+**Why σ_eff is constant despite τ diversity:**
+- All constrained halos have τ >> τ_seg = 100
+- f_H(1.5 r_s) saturates at 0.60 cap for ALL halos
+- σ_eff = f_H² · σ_m(v=150) = 0.36 · 5.05 = 1.82 (constant)
+- Even with τ varying by 4+ orders of magnitude, σ_eff doesn't differentiate
+
 **Direction B (Phase G12, R88(61)):** Multi-species UV completion test.
 - Two-species model: heavy (Cloud-9 resonance + background) + light (background only).
 - f_H(central) = 0.4 (both species present), f_H(subhalo) = 0.1 (heavy stripped).
