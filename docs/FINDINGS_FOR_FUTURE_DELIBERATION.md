@@ -712,3 +712,86 @@ The project state is honest, complete, and ready to hand off.
 ### Single most important future path
 
 **Path 3 (cosmological merger histories)** is the only untested forward direction. It tests whether empirical phase diversity from real merger trees can break the structural trade-off theorem. If it doesn't work, the framework is at its fundamental limit and Direction B becomes the only remaining path.
+
+---
+
+## 18. R88(59)–(61): All three forward paths tested — all FAIL
+
+**Path 3 (Phase G11, R88(59)):** Cosmological phase diversity test.
+- Halo population synthesis using Dutton & Maccio (2014) and Ludlow et al. (2016) c-M-z relations.
+- Per-halo τ = 13.8 Gyr / t_c where t_c from Yang+ 2024 calibration.
+- Constrained halo τ diversity: 1478× (PASSES Path 3 success criterion).
+- **σ_eff(150) diversity: 1.00× (all halos give same value).**
+- Path 3 verdict: PARTIAL → FAILURE. Phase diversity exists but doesn't translate to σ_eff diversity because f_H saturates.
+
+**Path 3 v2/v3 (R88(60)):** Tested with smaller cap and longer τ_seg.
+- cap=0.60, τ_seg=0.3: still saturates, σ_eff diversity 1.00×
+- cap=0.60, τ_seg=100: f_H varies from 0.46 to 0.60, σ_eff diversity 1.30× (still < 2×)
+- **Path 3 negative result: phase diversity does NOT break the trade-off theorem.**
+
+**Direction B (Phase G12, R88(61)):** Multi-species UV completion test.
+- Two-species model: heavy (Cloud-9 resonance + background) + light (background only).
+- f_H(central) = 0.4 (both species present), f_H(subhalo) = 0.1 (heavy stripped).
+- Channel test: 2 PASS, 1 MARGINAL, 5 FAIL of 8 channels.
+- v=150 Lei/Wang: max σ_eff = 0.0695 (BELOW 0.1 threshold).
+- **Direction B verdict: FAILURE. Simple two-species model does not break trade-off.**
+
+### 18.1 Final verdict on the structural trade-off theorem
+
+**All three forward paths tested within the scope of this work FAILED to break the structural trade-off theorem:**
+
+| Path | Result | Why it failed |
+|------|--------|---------------|
+| Direction A (subhalo f_H, Phase G9) | FAILED | drop factor 0.94-1.01×, kill criterion not met |
+| Path 3 (cosmological, Phase G11) | FAILED | σ_eff diversity 1.00× (saturated) |
+| Direction B (multi-species, Phase G12) | FAILED | σ_eff bounded by f_H² · σ_m at v=150 |
+| Direction D (observation refinement) | **NOT TESTED** | Requires waiting for new observations |
+
+**The structural trade-off theorem stands as the fundamental limit of single-species or simple two-species SIDM with Phase 44 parameters.** Resolving the v=150 no-go requires either:
+1. Observation refinement (Direction D): He+ 2020 or Lei/Wang updates with explicit f_H(r)
+2. Exotic UV construction: σ_H(v) shape that overcomes the σ_eff = f_H² · σ_m bound
+
+### 18.2 MPU paper ready to ship (R88(58) section 10)
+
+The Minimum Publishable Unit is now ready:
+
+**Title:** "Phase diversity and multi-species UV in SIDM halos: a test of the structural trade-off theorem"
+
+**Sections:**
+1. Review of v19.2-D three first-class results (§2.6a, §9.17a, §9.17b)
+2. Direction A discriminator (Phase G9, R88(54)): drop factor 0.94-1.01×, FAIL
+3. Path 3 cosmological synthesis (Phase G11, R88(59)/(60)): τ diversity 1478× but σ_eff diversity 1.00×
+4. Direction B multi-species UV (Phase G12, R88(61)): σ_eff bounded by f_H² · σ_m
+5. Structural trade-off theorem stands
+6. Path forward: Direction D (observation refinement) + exotic UV
+
+**Estimated length:** 30 pages
+**Status:** Code modules complete, results documented in findings, ready for writeup
+**Timeline to submission:** 2-4 weeks (writeup + figures)
+
+### 18.3 Resource accounting
+
+**Computed:**
+- Phase G9 (Direction A): ~50 lines code, 1 day
+- Phase G11 (Path 3): ~150 lines code, 1 day
+- Phase G11 v2/v3 (refinement): ~100 lines code, 1 day
+- Phase G12 (Direction B): ~250 lines code, 1 day
+- All under OpenGadget3 Docker + galpy + yt environment
+
+**Tools installed (cumulative):**
+- OpenGadget3 Docker (giannispetsis/opengadget3, P-Gadget3 binary)
+- galpy 1.12.0 (Python N-body)
+- scipy 1.18.0 (integration)
+- yt-astro-analysis 4.4.2 (cosmological sim analysis, attempted TNG API)
+- astropy 8.0.1 (units, cosmology)
+
+### 18.4 What we learned
+
+**Three negative results are positive scientific findings:**
+1. The structural trade-off theorem is ROBUST — it survives Direction A (Phase G9), Path 3 (Phase G11), and Direction B (Phase G12) testing
+2. Simple parameterizations of σ_m(v) and f_H(r) cannot break the mutual exclusion
+3. Resolution requires either:
+   - Observation refinement (Direction D, cheapest)
+   - Exotic UV construction (e.g., σ_H(150) >> σ_L(150), specific velocity-dependent couplings)
+
+**The MPU paper would establish this as a first-class result: the trade-off theorem is the fundamental limit of the framework.**
