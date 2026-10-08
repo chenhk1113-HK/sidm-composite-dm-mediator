@@ -954,3 +954,60 @@ The paper does not need a new section; R88(68) simply restores the R88(56) hones
 - phase_g14_shape_tuning.py: documented exploration
 - phase_g15_env_dependent.py: documented exploration
 - phase_g16_optimization.py: documented exploration, with R88(68) caveat
+
+
+---
+
+## 20. CDG-2 (Candidate Dark Galaxy-2): Acknowledged, Not Constraining
+
+**Status:** CDG-2 (arXiv:2506.15644, Li+ 2025) is noted as a notable recent observational discovery but does NOT add a new constraint to the framework as currently understood.
+
+### 20.1 What CDG-2 is
+
+CDG-2 is a candidate almost-completely-dark galaxy in the Perseus cluster:
+- 4 globular clusters, M_h ~ 2-6 × 10^10 M_sun (empirical, GC-count based)
+- L_V,gal = 6.2 ± 3.0 × 10^6 L_sun
+- 99.94-99.99% dark matter (empirical, not dynamical)
+- ⟨μ⟩_V ~ 27.5 mag/arcsec^2 (extremely low surface brightness)
+- Position: α = 3h17m12s.61, δ = +41°20′51″.5 (J2000, ~75 Mpc)
+- Halo mass derived from GC-to-halo scaling relations (Harris+ 2017, Burkert+ 2020)
+
+### 20.2 Why CDG-2 is NOT a useful test of the framework
+
+CDG-2 sits at V_max ~ 50 km/s (from halo mass). At this V_max, the framework's Phase 44 σ/m(v) is in the "background-only" tail (~0.5 cm²/g, no resonance contribution).
+
+Under the framework's gravothermal cascade:
+- t_c = 28.7 × (7.1/σ_HH) × (0.04/ρ_eff) Gyr
+- At V_max ~ 50 km/s: σ_HH ~ 0.5 cm²/g, ρ_eff ~ 0.04 → t_c ~ 400 Gyr
+- τ = 10 Gyr / 400 Gyr ~ 0.025 → very early phase
+- **No gravothermal core formation expected**
+
+The framework predicts σ_V(GCs) ~ 30-50 km/s (V_circ consistent with halo mass).
+
+**ΛCDM prediction:** σ_V ~ 22 km/s (point-mass halo at this mass).
+
+**Discrimination:** At V_max ~ 50 km/s, the SIDM Phase44 prediction is within the ΛCDM uncertainty. The two are not distinguishable at this mass scale.
+
+### 20.3 What would make CDG-2 useful for the framework
+
+A GC velocity dispersion measurement (σ_V) — currently unavailable, requires JWST or 30-m class telescope spectroscopy.
+
+If σ_V is measured:
+- σ_V ~ 22 km/s: consistent with both SIDM Phase44 and ΛCDM → no discrimination
+- σ_V > 50 km/s: possible SIDM signature (but other explanations exist: tides, projection effects)
+- σ_V < 20 km/s: hints at unusual dynamics (UDG-like behavior)
+
+### 20.4 Raw data accessible (for completeness)
+
+- **HST PIPER (Harris PI, program 15235)**: 150 obs within 0.01° via MAST DOI 10.17909/t87p-g529
+- **Euclid ERO Perseus**: ESA archive (Marleau+ 2024, A&A 697 A12)
+- **Subaru HSC g-band**: 20,000s exposure (Miyazaki+ 2018)
+- **CFHT/MegaCam g-band**: archival
+
+All publicly accessible. No need to download for current framework analysis.
+
+### 20.5 Conclusion
+
+CDG-2 is acknowledged as a notable observational extreme (most DM-dominated galaxy known), but at V_max ~ 50 km/s it sits in a regime where the framework's Phase44 parameters do not produce distinguishable predictions from ΛCDM. The framework's "constraint map + no-go catalogue" framing already covers null results at this V_max scale, so no addition to the paper is needed.
+
+**Action:** Note in the findings document only. Do NOT add to the paper's constraint map (would be a null result that doesn't discriminate). Monitor for σ_V measurement (future spectroscopy).
