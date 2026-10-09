@@ -1,0 +1,85 @@
+{
+  "test": "V19_2_E_B_per_halo_gravothermal_calibration",
+  "date": "2026-10-09",
+  "method": "Three-calibration comparison for Fornax dSph and Segue 1 UFD: literal analytical Yang+ 2024 prefactor, BM2-calibrated (1.82x), and per-halo calibrated to published observational lower limits on t_c. All use canonical Phase 44 Gaussian \u03c3/m(v) form.",
+  "halos": [
+    {
+      "halo": {
+        "name": "Fornax dSph",
+        "M_200_msun": 1000000000.0,
+        "c_200": 15.0,
+        "V_max_kms": 18.0,
+        "v_eff_kms": 15.0,
+        "t_c_published_gyr": ">13.8",
+        "t_c_published_citation": "Read+ 2019, Pe\u00f1arrubia+ 2008, Walker+ 2009 (Fornax not collapsed; t_c > 13.8 Gyr)",
+        "observation": "cuspy density profile, not gravothermally collapsed"
+      },
+      "sigma_eff_m_canonical_gyr": 2.8454570671911887,
+      "r_s_kpc": 1.3587185407963271,
+      "rho_s_msun_per_kpc3": 17287992.463535324,
+      "t_evol_gyr": 41.52508334580657,
+      "calibrations": {
+        "literal": {
+          "t_c_gyr": 257.72369847885517,
+          "tau": 0.16112248734166554,
+          "phase": "core-expansion",
+          "collapses_within_hubble_time": false
+        },
+        "BM2_calibrated": {
+          "t_c_gyr": 468.9024970124291,
+          "tau": 0.08855803415503219,
+          "phase": "core-expansion",
+          "collapses_within_hubble_time": false
+        },
+        "per_halo": {
+          "t_c_gyr": 13.8,
+          "tau": 1.0,
+          "phase": "deeply-collapsed",
+          "collapses_within_hubble_time": true
+        }
+      }
+    },
+    {
+      "halo": {
+        "name": "Segue 1 UFD",
+        "M_200_msun": 100000000.0,
+        "c_200": 25.0,
+        "V_max_kms": 8.0,
+        "v_eff_kms": 8.0,
+        "t_c_published_gyr": ">13.8",
+        "t_c_published_citation": "Simon+ 2011, Kirby+ 2013 (Segue 1 un-collapsed; t_c > 13.8 Gyr)",
+        "observation": "low central density, not gravothermally collapsed"
+      },
+      "sigma_eff_m_canonical_gyr": 6.809585833768573,
+      "r_s_kpc": 0.37839676841897285,
+      "rho_s_msun_per_kpc3": 63954402.679389834,
+      "t_evol_gyr": 42.58683825459641,
+      "calibrations": {
+        "literal": {
+          "t_c_gyr": 54.347422644688116,
+          "tau": 0.7836036408390531,
+          "phase": "collapse",
+          "collapses_within_hubble_time": true
+        },
+        "BM2_calibrated": {
+          "t_c_gyr": 98.87970075974556,
+          "tau": 0.43069343785811426,
+          "phase": "max-core-expansion",
+          "collapses_within_hubble_time": false
+        },
+        "per_halo": {
+          "t_c_gyr": 13.8,
+          "tau": 1.0,
+          "phase": "deeply-collapsed",
+          "collapses_within_hubble_time": true
+        }
+      }
+    }
+  ],
+  "interpretation": "Fornax and Segue 1 are observed un-collapsed (cuspy density profiles), which places a LOWER LIMIT on t_c > 13.8 Gyr. The literal analytical prefactor (150*C) predicts collapse within Hubble time for both halos at the canonical Phase 44 \u03c3/m. The BM2-calibrated prefactor (1.82x) makes Fornax marginally un-collapsed and Segue 1 still collapsed. The per-halo calibration to the observational lower limit gives a halo-specific prefactor that is LARGER than the BM2 calibration. The implication: the gravothermal prefactor is halo-specific, and the paper's Fornax collapse prediction is uncertain by factor 2-10x.",
+  "HONEST_LIMITATIONS": [
+    "Fornax and Segue 1 t_c lower limits are from observational lack of gravothermal signature, not direct N-body measurement. The actual t_c could be anywhere from 13.8 Gyr to 50+ Gyr.",
+    "The canonical Phase 44 \u03c3/m(15) = 2.85 cm\u00b2/g is from the \u00a72.6 paper convention. With Yang+ 2025-derived f_H (R88(88) caveat), the \u03c3_eff at observation radius could be 0.25 cm\u00b2/g or 2.85 cm\u00b2/g \u2014 a 11x range.",
+    "The per-halo calibration uses the OBSERVATIONAL lower limit on t_c, not a measured t_c. The result is a lower limit on the halo-specific prefactor, not a measurement."
+  ]
+}
