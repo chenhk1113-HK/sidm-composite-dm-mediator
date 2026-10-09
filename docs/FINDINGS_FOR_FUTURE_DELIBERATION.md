@@ -224,7 +224,7 @@ The framework has been systematically tested across 10 observational channels. H
 ### Short-term (1-2 weeks):
 1. **Re-run SASHIMI likelihood for Horigome+** to convert approximate PASS into actual
 2. **Re-fit SPARC at σ_eff = 0.19 target** to make that channel robust PASS instead of MARGINAL
-3. **Reframe headline** from "4 of 7 channels pass" to "two structural no-gos identified"
+3. **Reframe headline** from "4 of 7 channels pass" to "one structural no-go (Cloud-9 vs dSph) and one structural trade-off result; the v=150 entry is a tuning statement (R88(87))"
 
 ### Medium-term (1-2 months):
 1. **Direction A:** Derive f_H(r) profile from Yang+ 2025 segregation physics
@@ -256,7 +256,7 @@ The framework has been systematically tested across 10 observational channels. H
 - Best suited for: PRD, JCAP, JHEP — journals that value negative results
 - Avoid framing as: "We have discovered a working SIDM model"
 - Preferred framing: "We systematically tested a specific SIDM model against 8-10 observational
-  channels and identified two structural no-gos at different velocity decades"
+  channels and identified one structural no-go at v=28↔15 and one structural trade-off result within the multi-resonance ansatz; the v=150 entry is a tuning statement (R88(87))"
 
 ---
 
@@ -355,7 +355,7 @@ answer, not a placeholder.
 The model is **honestly bounded**: it works for some channels, fails for others, and
 the failures have specific structural reasons that parameter tuning cannot fix.
 
-The two structural no-gos (v=28↔15 and v=150) are the most important findings. They
+The one structural no-go (v=28↔15) plus the structural trade-off result within the multi-resonance ansatz; the v=150 entry is a tuning statement (R88(87)) are the most important findings. They
 point to specific velocity windows where σ_m(v) cannot satisfy all probes simultaneously,
 which is exactly the kind of map the field needs to design the next round of theoretical
 and observational work.
@@ -488,7 +488,7 @@ The paper should:
 4. Recommend Direction D (observation refinement) as the most productive next step
 5. Note that Directions A and B were both tested and found to have inherent limitations
 
-**The paper's two structural no-gos (Cloud-9 vs dSph, Lei/Wang vs Sameie+ 2020) are
+**The paper's two structural findings: (1) Cloud-9 vs dSph structural no-go (§2.6a, ratio argument), and (2) structural trade-off within the multi-resonance ansatz (§9.17b). The v=150 Lei/Wang vs Sameie+ entry is a TUNING STATEMENT (R88(87)), not a structural no-go — Phase G7's σ_peak2 = 5.0 cm²/g overshoots Sameie+ by 1.5×, but σ_peak2 ∈ (1.11, 3.33) cm²/g sits in the (0.1, 0.3) σ_eff window and satisfies both constraints are
 now STRONGER findings: they survive both a physically-motivated segregation model
 AND a first-principles SIDM2c parameterization.**
 
@@ -501,7 +501,7 @@ The "missing angles worthy of exploration" (per user instruction) are:
 4. Is the Sameie+ 2020 observation or Lei/Wang observation more reliable?
    (Direction D: which one should the field trust more?)
 
-The two structural no-gos (v=28↔15 and v=150) are the most important findings. They
+The one structural no-go (v=28↔15) plus the structural trade-off result within the multi-resonance ansatz; the v=150 entry is a tuning statement (R88(87)) are the most important findings. They
 point to specific velocity windows where σ_m(v) cannot satisfy all probes simultaneously,
 which is exactly the kind of map the field needs to design the next round of theoretical
 and observational work.
@@ -660,7 +660,7 @@ These three paths are for the next paper, not the current one.
 ## 15. Final status (R88(54))
 
 **What is shipped (commit 8cf5f05):**
-- 40-page paper with §9.17a structural no-go at v=150
+- 40-page paper with §9.17a v=150 tuning statement (R88(87), demoted from structural no-go) at v=150
 - 19 KB findings document (13 sections + 1 R88(54) section)
 - 20 referenced scripts in single .md bundle (601 KB)
 - Two structural no-gos identified (Cloud-9 vs dSph at v=28↔15; Lei/Wang vs Sameie+ 2020 at v=150)
@@ -910,7 +910,7 @@ Instead of "8/8 channels pass" (overclaim), R88(67) should have reported:
 
 The R88(56) synthesis remains the correct scientific position:
 
-> "The two structural no-gos (Cloud-9 vs dSph at v=28↔15; Lei/Wang vs Sameie+ 2020 at v=150) survive both physically-motivated segregation (Phase G9) and first-principles SIDM2c parameterization (Phase G10). They are stronger findings, not weaker."
+> "The two structural findings: (1) Cloud-9 vs dSph no-go at v=28↔15 (§2.6a, ratio argument), and (2) the structural trade-off within the multi-resonance ansatz (§9.17b). The v=150 entry is a TUNING STATEMENT (R88(87)) survive both physically-motivated segregation (Phase G9) and first-principles SIDM2c parameterization (Phase G10). They are stronger findings, not weaker."
 
 Phase G13-G16 do NOT overturn this. They show:
 - Simple σ_m(v) shapes: cannot break the trade-off
@@ -1122,7 +1122,7 @@ Both SIDM and ULDM face the same trade-off. The trade-off is a property of the o
 
 The project is complete in its exploratory phase. The structural trade-off result is the framework's strongest result. The paper is submission-ready.
 
-**The honest contribution:** A constraint map and no-go catalogue with two structural no-gos and one structural trade-off result, supported by four tested forward paths that all failed to break the trade-off. The framework is at its fundamental limit.
+**The honest contribution:** A constraint map and no-go catalogue with one structural no-go (Cloud-9 vs dSph) and one structural trade-off result (within the multi-resonance ansatz); the v=150 entry is a tuning statement (R88(87)), supported by four tested forward paths that all failed to break the trade-off. The framework is at its fundamental limit.
 
 **The process contribution:** R88(71) pre-claim checklist is now an established part of the project's methodology, with three successful catches in this round alone. The project's self-correction reputation is its most valuable asset.
 

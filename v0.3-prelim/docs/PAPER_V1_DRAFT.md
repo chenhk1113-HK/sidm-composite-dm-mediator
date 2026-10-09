@@ -6,23 +6,23 @@
 
 ## Abstract
 
-We report a constraint map and no-go catalogue for velocity-dependent self-interacting dark matter (SIDM). The paper's primary contribution is **three first-class structural results** (each surviving the most plausible physical resolutions):
+We report a constraint map and no-go catalogue for velocity-dependent self-interacting dark matter (SIDM). The paper's primary contribution is **two first-class structural results** (each surviving the most plausible physical resolutions):
 
-1. **Cloud-9 vs dSph tension (v=28↔15):** A narrow resonance at v_target=29.4 km/s satisfies Cloud-9's σ/m ≥ 50 cm²/g working benchmark but a physically-derived f_H(r) drives σ_eff at dSph velocities above Horigome+ 2025's 0.8 cm²/g limit by 3.6–23.7×. The tension partially resolves with a third narrow peak at v=10 km/s (Fischer & Yu 2026 UFD diversity) but at the cost of additional free parameters.
+1. **Cloud-9 vs dSph tension (v=28↔15):** A narrow resonance at v_target=29.4 km/s satisfies Cloud-9's σ/m ≥ 50 cm²/g working benchmark but a physically-derived f_H(r) drives σ_eff at dSph velocities above Horigome+ 2025's 0.8 cm²/g limit by 3.6–23.7×. The tension partially resolves with a third narrow peak at v=10 km/s (Fischer & Yu 2026 UFD diversity) but at the cost of additional free parameters. This is a **ratio argument** (σ_m(28)/σ_m(15) ratio) that is robust under the multi-resonance σ/m(v) parameterization.
 
-2. **Lei/Wang vs Sameie+ 2020 tension (v=150):** Massive-galaxy inner DM mass deficit (Lei+ 2026, Wang+ 2026) requires σ_eff > 0.1 at v=150; subhalo mass function (Sameie+ 2020) requires σ_eff < 0.3 at the same velocity. A single-species σ_m(v) cannot simultaneously satisfy both. Phase G7's nominal PASS sits inside a factor-3 knife-edge window.
+2. **Structural trade-off result (within the multi-resonance ansatz, Phase G10):** Any physically-derived f_H(r) that resolves the v=150 tension (heavy concentrated at center) drives σ_eff at all other observation radii down by 5–300×, breaking Cloud-9, SPARC, and Lei/Wang simultaneously. The result is a logical consequence of σ_eff = f_H²·σ/m within the multi-resonance ansatz, not a general theorem about SIDM.
 
-3. **Structural trade-off result (within the multi-resonance ansatz, Phase G10):** Any physically-derived f_H(r) that resolves the v=150 no-go (heavy concentrated at center) drives σ_eff at all other observation radii down by 5–300×, breaking Cloud-9, SPARC, and Lei/Wang simultaneously. The result is a logical consequence of σ_eff = f_H²·σ/m within the multi-resonance ansatz, not a general theorem about SIDM.
+**Note (R88(87) demotion):** The v=150 Lei/Wang vs Sameie+ tension is **a tuning statement, not a first-class result**. Phase G7's σ_peak2 = 5.0 cm²/g at v=150 (chosen to pass Lei/Wang by 4.5×) overshoots Sameie+ 2020 by 1.5×. A smaller peak σ_peak2 ∈ (1.11, 3.33) cm²/g sits in the (0.1, 0.3) σ_eff window and satisfies both constraints simultaneously. See §9.17a for the full window analysis and the σ_peak2 PASS range.
 
-**Framework score (Phase G8, R88(52) honest):** 4 of 7 constrained channels pass (SPARC, UFD, Lei/Wang as knife-edge, Mace+ 2025 gravothermal N-body working benchmark); 3 MARGINAL (Cloud-9, dSph, Cluster); 1 FAIL (Sameie+ 2020 structural no-go). The framework is a constraint map, not a unified SIDM model.
+**Framework score (Phase G8, R88(52) honest):** 4 of 7 constrained channels pass (SPARC, UFD, Lei/Wang as knife-edge, Mace+ 2025 gravothermal N-body working benchmark); 3 MARGINAL (Cloud-9, dSph, Cluster); 1 MARGINAL/FAIL depending on σ_peak2 choice (Sameie+ 2020 — see §9.17a R88(87) tuning statement). The framework is a constraint map, not a unified SIDM model.
 
-**Four forward paths tested (R88(72)-(78), all FAILED):** A (IDE-2cSIDM) 4/8→4/8; B (ULDM) 4/8→2-3/8; C (N-body+exotic UV) deferred; D (observation refinement) caught a σ_m(150) numerical error — initial Direction D analysis used σ_m(150) = 0.5 cm²/g (assumed) instead of the computed value 0.046 cm²/g. The Phase 44 baseline (no v=150 resonance) gives σ_eff(150, 1.5 r_s) = 0.0041 cm²/g, which **fails Lei/Wang by factor 24** at observation radius. Phase G7 (with v=150 peak, σ_peak=5) gives σ_eff(150, 1.5 r_s) = 0.454 cm²/g, which **passes Lei/Wang by 4.5× but fails Sameie+ 2020 by 1.5×** — the v=150 structural no-go. The structural trade-off result stands as the framework's fundamental limit within the ansatz.
+**Four forward paths tested (R88(72)-(78), all FAILED):** A (IDE-2cSIDM) 4/8→4/8; B (ULDM) 4/8→2-3/8; C (N-body+exotic UV) deferred; D (observation refinement) caught a σ_m(150) numerical error — initial Direction D analysis used σ_m(150) = 0.5 cm²/g (assumed) instead of the computed value 0.046 cm²/g. The Phase 44 baseline (no v=150 resonance) gives σ_eff(150, 1.5 r_s) = 0.0041 cm²/g, which **fails Lei/Wang by factor 24** at observation radius. Phase G7 (with v=150 peak, σ_peak=5) gives σ_eff(150, 1.5 r_s) = 0.454 cm²/g, which **passes Lei/Wang by 4.5× but fails Sameie+ 2020 by 1.5×** — a v=150 tuning statement (R88(87), not a structural no-go). The structural trade-off result stands as the framework's fundamental limit within the ansatz.
 
 **Five UV completion no-gos** (magnetic dipole, Hidden U(1) + pseudo-Dirac, GeV inelastic, Chu+ 2019 p-wave, one-mediator UV systematic) rule out the simplest one-mediator UV completions at the Phase 44 baseline. A two-mediator candidate (Drobczyk+ 2025) survives relic density constraints. Each no-go is an order-of-magnitude exclusion at one parameter point (the Phase 44 baseline); see §10 for full scope statements.
 
 **Channel count summary (per A.15 canonical table):** 8 constrained channels (4 PASS / 3 MARGINAL / 1 FAIL) + 2 unconstrained placeholders (LMC, Boötes — no published σ_eff). See Appendix A.14 for σ_peak sensitivity, A.13 for citation corrections, A.15 for canonical channel accounting. The §3.5b Lei+ 2026 / Wang+ 2026 citation chain is verified (arXiv:2609.16740, arXiv:2609.19132).
 
-**Submission status:** Submission-ready as Direction C (constraint map + no-go catalogue) for Physics of the Dark Universe or JCAP. Two structural no-gos survive all tested forward paths.
+**Submission status:** Submission-ready as Direction C (constraint map + no-go catalogue) for Physics of the Dark Universe or JCAP. The Cloud-9 vs dSph structural no-go (§2.6a) and the structural trade-off result (§9.17b) are the two first-class structural results. The v=150 entry (§9.17a) is demoted to a tuning statement (R88(87)) — Phase G7's σ_peak2 = 5.0 cm²/g overshoots Sameie+ by 1.5×, but a smaller peak in (1.11, 3.33) cm²/g satisfies both constraints.
 ## 1. Introduction
 
 **Note on internal references.** Numerical results in this paper are identified by internal test IDs (T-numbers, e.g., T174 for the unitarity bound verification, T207 for the SPARC three-term fit) that refer to specific calculations documented in `v0.3-prelim/code/` and the supplementary material. Literature citations are identified by author + year + reference number (e.g., [27] = Horigome+ 2025). The paper's revision history is denoted by vXX.Y format.
@@ -840,7 +840,7 @@ At v=150 km/s, σ/m = 5.05 cm²/g, σ_eff = 0.45-1.26 (depending on f_H). At v=2
 
 **Honest assessment:** Phase G7 is a better-tuned parameterization, not a derivation. It substantially improves Cloud-9/SPARC/Lei-Wang/Horigome by adding four free functions (narrower peak shape, steeper background, second resonance, segregation profile) — each physically motivated but not UV-derived. It DOES NOT resolve Fischer & Yu UFD collapse (which would require either a third resonance at v~10 km/s, a higher background floor at v=5-10, or a Yang+ 2024 calibration update). The honest framing remains: constraint map + no-go catalogue, with a forward-work proposal that demonstrates flexibility but not predictive power.
 
-### 9.17 Phase G8 — Three-peak model + structural no-go at v=150 (R88(52))
+### 9.17 Phase G8 — Three-peak model + v=150 tuning statement (R88(52), R88(87) demoted from "structural no-go")
 
 **New module:** `v0.3-prelim/code/phase_g8_three_peak_no_go.py` (~250 lines).
 
@@ -877,32 +877,43 @@ The reviewer's analysis identifies three pairings, only one of which is unfixabl
 
 **Task 3 — Lei/Wang PASS downgraded to MARGINAL (knife-edge):**
 
-Phase G7 σ_eff(150, 1.5 r_s) = 0.454 cm²/g. Against Lei/Wang lower bound (>0.1): factor 4.5 above. Against Sameie+ 2020 upper bound (<0.3): factor 1.5 over. The nominal PASS sits inside a ~factor-3 window between two opposing constraints. Tuning σ_peak2 up increases Lei/Wang margin but pushes into Sameie+ 2020 violation; tuning down loses Lei/Wang PASS. **This is a knife-edge, not a robust result.**
+Phase G7 σ_eff(150, 1.5 r_s) = 0.454 cm²/g. Against Lei/Wang lower bound (>0.1): factor 4.5 above. Against Sameie+ 2020 upper bound (<0.3): factor 1.5 over. The nominal PASS sits inside a ~factor-3 window between two opposing constraints. **The no-go is a tuning statement (R88(87)), not a structural constraint: a single f_H(r) with a smaller v=150 peak (σ_peak2 ∈ (1.11, 3.33) cm²/g) lands in the (0.1, 0.3) cm²/g σ_eff window and satisfies both constraints simultaneously.** Phase G7 with σ_peak2 = 5.0 is just outside the window on the high side. See §9.17a for the full window analysis.
 
-### 9.17a Structural no-go at v=150 (NEW first-class result, parallel to §2.6a)
+### 9.17a v=150 tuning statement (was: "structural no-go", demoted R88(87))
 
-**First-class result (R88(52)), with R88(85) scope correction:** Within the two-component σ_eff = f_H²·σ/m framework, **no single f_H(r) profile** (under physically motivated monotonic or peaked radial distributions) **can simultaneously satisfy** Lei/Wang (σ_eff > 0.1 at v=150, requires cores in massive galaxies) and Sameie+ 2020 (σ_eff < 0.3 at v=150, requires subhalo survival). These are two observational channels that probe σ_eff at the same velocity (v ~ 100-300 km/s) but with opposite signs:
+**R88(87) status (per ClawsGO comment #3):** The v=150 claim is **downgraded from "first-class structural result" to a "tuning statement"**. The σ_peak2 = 5.0 cm²/g v=150 peak in Phase G7 is a specific (tuned) parameter choice. A different choice satisfies both Lei/Wang and Sameie+ 2020 simultaneously. The "no-go" lives only in this specific choice, not in the framework as a whole.
+
+**Tuning statement (R88(87)):** Within the two-component σ_eff = f_H²·σ/m framework, **the Phase G7 choice of σ_peak2 = 5.0 cm²/g (tuned to pass Lei/Wang by 4.5×) overshoots Sameie+ 2020 by 1.5×**. A smaller peak (σ_peak2 ≈ 3 cm²/g, inside the PASS window σ_peak2 ∈ (1.11, 3.33)) would sit in the (0.1, 0.3) cm²/g σ_eff window and satisfy both constraints.
+
+**σ_eff(150) PASS window (R88(87) honest computation):**
+
+| Quantity | Value |
+|---|---|
+| Lei/Wang lower bound | σ_eff(150) > 0.1 cm²/g (inner DM mass deficit in massive galaxies) |
+| Sameie+ 2020 upper bound | σ_eff(150) < 0.3 cm²/g (subhalo survival) |
+| f_H(1.5 r_s) under Phase G7 | 0.30 |
+| **σ_m(150) lower bound** (Lei/Wang floor) | 0.1 / 0.30² = **1.11 cm²/g** |
+| **σ_m(150) upper bound** (Sameie+ ceiling) | 0.3 / 0.30² = **3.33 cm²/g** |
+| **σ_peak2 PASS window** | **(1.11, 3.33) cm²/g** |
+| Phase G7 σ_peak2 | **5.0 cm²/g** (outside window, overshoots Sameie+ by 1.5×) |
+| Phase G7 σ_peak2 = 3.0 cm²/g | 0.30² × 3.0 = 0.27 cm²/g (**PASS both**: 2.7× above Lei/Wang, 0.9× of Sameie+) |
+| Phase G7 σ_peak2 = 3.33 cm²/g | 0.30² × 3.33 = 0.30 cm²/g (**borderline**: 3.0× above Lei/Wang, at Sameie+ ceiling) |
+
+**Conclusion (R88(87)):** The v=150 "no-go" is a **statement about the specific Phase G7 choice σ_peak2 = 5.0 cm²/g**, not a structural constraint of the framework. The PASS window σ_peak2 ∈ (1.11, 3.33) cm²/g is non-empty. A model with σ_peak2 inside this window satisfies both Lei/Wang and Sameie+ 2020 at the same observation radius. The paper's honest finding is: **the framework's Lei/Wang PASS requires a v=150 peak large enough to overshoot Sameie+ by ~1.5×** (which is what σ_peak2 = 5.0 does).
+
+**What this means for the paper's first-class results:**
+
+1. The v=150 "no-go" is **NOT a first-class result** (R88(87) demoted from R88(52) "first-class" claim). It is a **tuning statement** about a specific parameter choice.
+2. The Cloud-9 vs dSph no-go (§2.6a) **remains a first-class structural result** because it is a ratio argument (σ_m(28)/σ_m(15) ratio), not dependent on a specific tuning.
+3. The §9.17b structural trade-off result (within multi-resonance ansatz) **remains a first-class result** because it is conditional on the framework structure, not on a specific σ_peak2 value.
+4. The paper's first-class result count is therefore **2, not 3**: §2.6a (Cloud-9 vs dSph) + §9.17b (structural trade-off). The v=150 entry is a **map entry**, not a no-go.
+
+**The structural pairing (for completeness, kept as the original framing):**
 
 | Constraint | Observable | v probed | Threshold | Source |
 |-----------|------------|----------|-----------|--------|
 | Lei/Wang lower | Inner DM mass deficit in massive galaxies | 100-300 km/s | σ_eff > 0.1 | Lei+ 2026 [55b], Wang+ 2026 [55c] |
 | Sameie+ 2020 upper | Subhalo mass function in MW-mass hosts | 100-300 km/s | σ_eff < 0.3 | Sameie+ 2020 [54c] |
-
-**Structural pairing:** Both probes measure σ_eff at v ~ 150 km/s but constrain it in opposite directions. The Phase G7 model satisfies Lei/Wang (σ_eff = 0.45 > 0.1) but violates Sameie+ 2020 (σ_eff = 0.45 > 0.3) by 1.5×. Any σ_m(v) shape that satisfies both simultaneously requires either:
-- Different f_H at the two measurement regions (subhalos lose heavy component first via tidal stripping → lower f_H in subhalo regime)
-- Or accepting that one of the two constraints is wrong
-
-**Quantitative summary of the tension:**
-
-| σ_eff at v=150 | Lei/Wang (>0.1) | Sameie+ 2020 (<0.3) | Verdict |
-|----------------|-----------------|-----------------|---------|
-| 0.05 | FAIL | PASS | Lei/Wang FAIL — needs more |
-| 0.10 | borderline | PASS | Knife-edge lower |
-| **0.30** | **PASS** | **borderline** | **Knife-edge upper** |
-| 0.45 | PASS | FAIL (1.5×) | Sameie+ 2020 violation |
-| 1.00 | PASS | FAIL (3.3×) | Strong violation |
-
-The structural window between Lei/Wang PASS and Sameie+ 2020 FAIL is **factor ~3** (0.1 → 0.3). A single-species σ_m(v) cannot land in this window AND also satisfy the Cloud-9/Horigome and UFD/Horigome pairings without specific tuning.
 
 **R88(53) — Specific physical mechanism for Direction A (per 2suggestion.docx review):**
 
@@ -926,7 +937,7 @@ Both Lei/Wang and Sameie+ 2020 involve significant modeling assumptions (Jeans m
 
 1. The v=150 no-go is best treated as a finding, not a flag for future "solutions." The paper should NOT claim that Direction A or B will resolve it. The honest framing (two unresolvable no-gos at the current parameter point) is the correct final answer, not a placeholder for future work.
 2. The failure mode to resist: solving the v=150 no-go with more parameters. The project has successfully avoided this trap across 10 rounds; the v=150 finding is precisely the kind of structural result that survives the addition of more degrees of freedom.
-3. The paper's existing two structural no-gos (Cloud-9 vs dSph at v=28↔15; Lei/Wang vs Sameie+ 2020 at v=150) constitute a quantitative map of where velocity-dependent SIDM with the Phase 44 parameter point cannot work. That map is the contribution. Solutions are for the next generation.
+3. The paper's structural findings are: (1) Cloud-9 vs dSph no-go at v=28↔15 (§2.6a), (2) the structural trade-off result within the multi-resonance ansatz (§9.17b). The v=150 entry is a tuning statement, not a no-go (R88(87)). These two structural findings constitute a quantitative map of where velocity-dependent SIDM with the Phase 44 parameter point cannot work. That map is the contribution. Solutions are for the next generation.
 
 ### 9.17b Structural trade-off result (Phase G10) — NEW first-class result within the multi-resonance ansatz
 
@@ -968,7 +979,7 @@ This is not a parameterization issue. The result is a logical consequence of σ_
 
 **Implications:**
 
-1. The two structural no-gos (Cloud-9 vs dSph at v=28↔15; Lei/Wang vs Sameie+ 2020 at v=150) survive both physically-motivated segregation (Phase G9) and first-principles SIDM2c parameterization (Phase G10). They are **stronger findings**, not weaker.
+1. The **Cloud-9 vs dSph structural no-go (§2.6a)** remains the paper's strongest structural result, because it is a ratio argument (σ_m(28)/σ_m(15) ratio) that is robust under the multi-resonance σ/m(v) parameterization. The v=150 entry is now a **tuning statement** (R88(87)), not a structural no-go — see §9.17a for the σ_peak2 window analysis.
 
 2. The phenomenological f_H(r) used in Phase G7/G8 is **unphysical** in the precise sense that it does not correspond to any segregation physics. It works only because it is tuned; a first-principles derivation breaks the other channels.
 
@@ -985,12 +996,13 @@ This is not a parameterization issue. The result is a logical consequence of σ_
 
 2. **UV completion implication:** Resolving the v=150 no-go requires either (a) two-component f_H(r) with subhalo-specific segregation physics (Yang+ 2025 Fig. 2 suggests heavy-light segregation IS expected), or (b) abandoning single-species σ_m. Both are substantive UV moves, not parameter tuning.
 
-3. **Phase G8 score (R88(52) honest):** With third peak + downgraded Lei/Wang:
-   - **4 PASS**: Fischer & Yu UFD collapse (with 3rd peak), SPARC, Lei/Wang (now MARGINAL — was PASS), Mace+ 2025 gravothermal N-body
+3. **Phase G8 score (R88(52) honest, R88(87) updated):** With third peak + downgraded Lei/Wang:
+   - **4 PASS**: Fischer & Yu UFD collapse (with 3rd peak), SPARC, Lei/Wang (now MARGINAL/FAIL — see §9.17a tuning statement), Mace+ 2025 gravothermal N-body
    - **3 MARGINAL**: Horigome, Cloud-9 inner, Cloud-9 V_max
-   - **3 FAIL**: Lei/Wang (knife-edge with Sameie+ 2020), Sameie+ 2020 explicit, Cluster (factor 1.9 over bound)
+   - **MARGINAL/FAIL** (R88(87)): Lei/Wang AND Sameie+ 2020 both in this state, depending on σ_peak2 choice. At σ_peak2 = 5.0 (Phase G7), Lei/Wang PASS by 4.5× but Sameie+ FAIL by 1.5×. At σ_peak2 ∈ (1.11, 3.33) cm²/g, both PASS.
+   - **1 FAIL**: Cluster (factor 1.9 over bound) — independent of the v=150 question.
 
-The honest framing: "framework has two identified structural no-gos (Cloud-9 vs dSph at v=28↔15; Lei/Wang vs Sameie+ 2020 at v=150), one fixable via a third narrow peak (UFD collapse), one requiring either multi-component UV or subhalo-specific f_H segregation." This is a stronger scientific claim than "4 of 7 channels pass."
+The honest framing: "framework has one structural no-go (Cloud-9 vs dSph at v=28↔15) plus the structural trade-off result within the multi-resonance ansatz. The v=150 entry is a tuning statement (R88(87)) — a smaller σ_peak2 lands in the (0.1, 0.3) σ_eff window and satisfies both Lei/Wang and Sameie+ 2020." This is a more accurate scientific claim than "4 of 7 channels pass" or "two structural no-gos".
 
 ### 9.18 Forward-path exploration summary (R88(72)-(78)) — exhaustive search completed
 
@@ -1051,9 +1063,9 @@ Four forward paths were tested to see if any modification could break this resul
 | Lei/Wang lower bound | 0.1 | 0.1 | 0.1 |
 | Framework at v=150 (observation radius) | PASS (wrong) | FAIL by factor 1.5× over Sameie+ upper | **FAIL by factor 1.5× over Sameie+ upper, PASS Lei/Wang by 4.5×** |
 
-The Phase 44 framework has NO v=150 resonance (v_target = 29.4 km/s, not 150). So σ_m(150) is just the background power-law tail. The σ_eff value at observation radius (1.5 r_s) under Phase 44 is **0.0041 cm²/g** (f_H = 0.30 at 1.5 r_s, σ_m = 0.046), which **fails Lei/Wang by factor 24** at the observation radius. The original Path D claim "fails Lei/Wang by factor 6" was based on the central-radius Phase G7 evaluation (σ_eff = 0.6² × 0.046 = 0.0166, factor 6 below 0.1) which used the wrong σ_m(150) — Phase 44 background only, not Phase G7. R88(86) corrected the verdict: under both Phase 44 baseline and Phase G7 at observation radius, the framework does not pass Lei/Wang at v=150 (factor 24 under P44, or passes by 4.5× but fails Sameie+ 2020 by 1.5× under P-G7). The structural no-go at observation radii is the **Phase G7 1.5× over Sameie+ upper** boundary.
+The Phase 44 framework has NO v=150 resonance (v_target = 29.4 km/s, not 150). So σ_m(150) is just the background power-law tail. The σ_eff value at observation radius (1.5 r_s) under Phase 44 is **0.0041 cm²/g** (f_H = 0.30 at 1.5 r_s, σ_m = 0.046), which **fails Lei/Wang by factor 24** at the observation radius. The original Path D claim "fails Lei/Wang by factor 6" was based on the central-radius Phase G7 evaluation (σ_eff = 0.6² × 0.046 = 0.0166, factor 6 below 0.1) which used the wrong σ_m(150) — Phase 44 background only, not Phase G7. R88(86) corrected the verdict: under both Phase 44 baseline and Phase G7 at observation radius, the framework does not pass Lei/Wang at v=150 (factor 24 under P44, or passes by 4.5× but fails Sameie+ 2020 by 1.5× under P-G7). **R88(87) demoted the v=150 entry from "structural no-go" to "tuning statement"** — see §9.17a for the σ_peak2 window analysis. The structural no-gos at v=28↔15 (§2.6a) remain first-class results.
 
-**Verdict:** FAILED. The v=150 trade-off is REAL at observation radii. R88(56) §9.17a is correct.
+**Verdict:** The v=150 trade-off is a **tuning statement** (R88(87)). Phase G7's σ_peak2 = 5.0 overshoots Sameie+ by 1.5×, but σ_peak2 ∈ (1.11, 3.33) cm²/g sits in the (0.1, 0.3) σ_eff window and satisfies both constraints. R88(56) §9.17a is updated to reflect this.
 
 #### Summary table
 
@@ -1078,7 +1090,7 @@ The checklist is working as designed. It is the prevention layer for the R88(42)
 
 **The structural trade-off result (§9.17b) holds across all four tested forward paths within the multi-resonance σ/m(v) ansatz.** No tested direction (IDE, ULDM, observation refinement) breaks the trade-off within the two-component f_H(r) framework. Caveat (R88(85)): Path B (ULDM, 2-3/8 channels) does NOT use the two-component f_H(r) mechanism — its failures are soliton-scale, not f_H-concentration failures. ULDM has no f_H to differentiate observation regions, so the v=150 no-go (which requires radius-dependent f_H) does not apply to ULDM in the same sense. The trade-off is **a property of the two-component σ_eff = f_H²·σ/m framework with multi-resonance σ/m(v)**, not a universal statement about all SIDM/ULDM theories.
 
-The paper's contribution — "constraint map and no-go catalogue" — remains the correct scientific output. The two structural no-gos (§2.6a, §9.17a) and the structural trade-off result (§9.17b) are the genuine findings.
+The paper's contribution — "constraint map and no-go catalogue" — remains the correct scientific output. The structural no-go (§2.6a Cloud-9 vs dSph) and the structural trade-off result (§9.17b) are the genuine structural findings. The v=150 entry (§9.17a) is a tuning statement, not a structural no-go (R88(87)).
 
 **Implications for the paper:**
 
@@ -1497,7 +1509,7 @@ Two citation attributions in the v19.2-D draft were wrong. Both are corrected in
 - 5/6 load-bearing named references confirmed: Lei+ 2026, Wang+ 2026, Fischer & Yu 2026, Yu+ 2026 PRL 136, Sameie+ 2020
 - 1 misattribution corrected: "Mace+ 2026 SIDM2v" → "Mace+ 2025 gravothermal N-body calibration" (Mace+ 2025 exists; Mace+ 2026 is a different paper on substructure lensing)
 
-**Why the structural findings hold despite the citation corrections:** The §9.17a structural no-go at v=150 is a *logical contradiction* between two observational constraints at the same velocity (σ_eff > 0.1 for inner DM mass deficit vs σ_eff < 0.3 for subhalo survival), not a specific numerical result. With Sameie+ 2020 as the upper-bound reference, the structure is unchanged. The §9.17b structural trade-off result (within the multi-resonance ansatz) is independent of these specific references — it follows from σ_eff = f_H²·σ/m and the absence of f_H values that satisfy all channels simultaneously.
+**Why the structural findings hold despite the citation corrections:** The §2.6a Cloud-9 vs dSph structural no-go is a *ratio argument* (σ_m(28)/σ_m(15) ratio) that is robust under the multi-resonance σ/m(v) parameterization. The §9.17b structural trade-off result (within the multi-resonance ansatz) is independent of these specific references. The §9.17a v=150 entry is a **tuning statement** (R88(87)) — it is conditional on Phase G7's σ_peak2 = 5.0 cm²/g choice; a smaller peak lands in the (0.1, 0.3) σ_eff window and satisfies both constraints. — it follows from σ_eff = f_H²·σ/m and the absence of f_H values that satisfy all channels simultaneously.
 
 ### A.14 σ_peak sensitivity (R88(82))
 
@@ -1542,8 +1554,8 @@ Different sections of the paper use different channel denominators (4/7 vs 4/8 v
 | 4 | UFD | Diversity / gravothermal collapse | 7-12 | YES (Fischer & Yu 2026 N-body target) | Fischer & Yu 2026 | **PASS** (with 3rd peak at v~10 km/s, Phase G8) |
 | 5 | Cluster | Strong lensing + subhalos | 500 | YES (σ_eff < 0.001) | Newman+ 2013 | **MARGINAL** (factor 1.9× over bound) |
 | 6 | JVAS B1938+666 | Strong-lensing perturber | 15 | YES (Yu+ 2026 N-body re-analysis) | Vegetti+ 2010, Yu+ 2026 [23] | NOT TESTED (Phase 44 doesn't predict substructure at v=15) |
-| 7 | Lei/Wang massive | Inner DM mass deficit | 100-300 | YES (σ_eff > 0.1) | Lei+ 2026 [55b], Wang+ 2026 [55c] | **MARGINAL** (knife-edge with Sameie+ 2020; σ_eff(150, 1.5 r_s) = 0.454 vs 0.1-0.3 window, **PASS Lei/Wang by 4.5×, FAIL Sameie+ by 1.5×** — see §9.17a and §9.18 Path D) |
-| 8 | Sameie+ 2020 subhalo | Subhalo mass function | 100-300 | YES (σ_eff < 0.3) | Sameie+ 2020 [54c] | **FAIL** (Phase G7 σ_eff(150, 1.5 r_s) = 0.45 > 0.3, by factor 1.5× — R88(85) radius disambiguation; the central-radius value 0.0165 from §9.18 Path D is at f_H→0 and NOT observationally relevant) |
+| 7 | Lei/Wang massive | Inner DM mass deficit | 100-300 | YES (σ_eff > 0.1) | Lei+ 2026 [55b], Wang+ 2026 [55c] | **MARGINAL/FAIL** (Phase G7 σ_eff(150, 1.5 r_s) = 0.454 vs 0.1-0.3 window, **PASS Lei/Wang by 4.5×, FAIL Sameie+ by 1.5×** at σ_peak2 = 5.0; smaller σ_peak2 ∈ (1.11, 3.33) cm²/g satisfies both — see §9.17a R88(87) tuning statement) |
+| 8 | Sameie+ 2020 subhalo | Subhalo mass function | 100-300 | YES (σ_eff < 0.3) | Sameie+ 2020 [54c] | **MARGINAL/FAIL** (Phase G7 σ_eff(150, 1.5 r_s) = 0.45 > 0.3, by factor 1.5× — but σ_peak2 ∈ (1.11, 3.33) cm²/g lands in the (0.1, 0.3) σ_eff window and satisfies both Lei/Wang and Sameie+; the "no-go" is a tuning statement, R88(87)) |
 | 9 | LMC | LMC-mass halo | ~80 | NO (no published σ_eff constraint) | — | (placeholder; not part of constrained count) |
 | 10 | Boötes | UFD-like | 12 | NO (no published σ_eff constraint) | — | (placeholder; not part of constrained count) |
 
@@ -1552,7 +1564,7 @@ Different sections of the paper use different channel denominators (4/7 vs 4/8 v
 - **Constrained channels (1-8):** 8 total
 - **PASS:** 4 (SPARC, UFD, Lei/Wang as MARGINAL counts as PASS in the 4/7 honest score, Mace+ 2025 working benchmark)
 - **MARGINAL:** 3 (Cloud-9, dSph, Cluster)
-- **FAIL:** 1 (Sameie+ 2020, knife-edge with Lei/Wang; counts as structural no-go)
+- **MARGINAL/FAIL** (tuning statement R88(87)): 1 — Lei/Wang AND Sameie+ 2020 simultaneously depend on σ_peak2 choice (PASS both at σ_peak2 ∈ (1.11, 3.33) cm²/g, see §9.17a)
 - **Unconstrained placeholders (9-10):** 2 (LMC, Boötes — no published σ_eff; not part of the constrained count)
 - **NOT TESTED:** 1 (JVAS at v=15, substructure mechanism not tested at Phase 44 parameters)
 
@@ -1681,4 +1693,4 @@ At every observationally relevant radius, **Phase G7 fails Sameie+ 2020 by a fac
 - `CURRENT.md`, `FINDINGS…md`, `TRANSITION…md` similarly carry the "factor 6" claim — to be updated to "factor 24" (Phase 44 baseline) or replaced with the Phase G7 "0.454" value (since Phase G7 is the canonical model in the paper).
 - §A.15 Lei/Wang entry: σ_eff(150, 1.5 r_s) = 0.454 is correct under Phase G7; the central value 0.0166 was a Phase 44 baseline evaluation, not Phase G7. The §A.15 entry should be updated to clarify the model.
 
-**Verdict:** The v=150 structural no-go stands, but the wording in R88(85) was wrong about the cause. The actual cause is the **presence or absence of the v=150 resonance in σ/m(v)**, not the radius.
+**Verdict:** R88(85) was correct that the 0.0165 (§9.18) and 0.454 (§9.17a) values are from two different models. R88(86) confirmed this. **R88(87) demoted the v=150 entry** from "structural no-go" to "tuning statement": the v=150 "no-go" is not a structural constraint of the framework, but a statement about a specific parameter choice (σ_peak2 = 5.0). A smaller peak in (1.11, 3.33) cm²/g sits in the (0.1, 0.3) σ_eff window and satisfies both Lei/Wang and Sameie+ 2020. The paper's first-class result at v=150 is therefore not a no-go, but a **map entry** documenting Phase G7's σ_peak2 = 5.0 choice. The two genuine first-class results are §2.6a (Cloud-9 vs dSph, ratio argument) and §9.17b (structural trade-off within the multi-resonance ansatz).

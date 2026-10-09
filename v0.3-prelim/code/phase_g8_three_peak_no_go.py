@@ -1,5 +1,5 @@
 """
-Phase G8 — Three-peak model with structural no-go at v=150 (R88(52))
+Phase G8 — Three-peak model with v=150 tuning statement (R88(52), R88(87) demoted from "structural no-go")
 
 Implements the reviewer's three tasks from 1Consider.docx:
 
@@ -28,7 +28,7 @@ Status (R88(52))
 - Lei/Wang: MARGINAL (knife-edge at v=150)
 - Score (R88(52) honest): 1 PASS (Horigome), 6 MARGINAL, 1 FAIL (Fischer & Yu → resolved by 3rd peak)
   - With 3rd peak: 2 PASS, 5 MARGINAL, 1 FAIL (Lei/Wang→MARGINAL)
-- NEW structural no-go: §"no-go at v=150" subsection (parallel to §2.6a Cloud-9 vs dSph tension)
+- NEW structural no-go: §"no-go at v=150" subsection (parallel to §2.6a Cloud-9 vs dSph tension) — R88(87) demoted to tuning statement
 """
 from __future__ import annotations
 import math

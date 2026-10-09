@@ -81,7 +81,7 @@ The citation audit identified the following errors in the paper:
 **Of 16 arXiv IDs checked, 16 exist on arXiv, 1 has a known self-corrected mismatch (already documented in paper), 0 are fabricated.**
 
 **The 7 named references that could not be confirmed via web search are the critical risk.** Specifically:
-- Lei+ 2026 [55b], Wang+ 2026 [55c], He+ 2020 [54c] carry the §9.17a structural no-go
+- Lei+ 2026 [55b], Wang+ 2026 [55c], He+ 2020 [54c] carry the §9.17a v=150 tuning statement (R88(87), demoted from structural no-go)
 - Mace+ 2026 [50c] / SIDM2v carries the §3.5b massive-galaxy comparison
 - Yu+ 2026 [23] carries the §3.3 substructure "three birds with one stone" claim
 - Fischer & Yu 2026 carries the §3.4 UFD diversity claim
