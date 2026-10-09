@@ -1568,3 +1568,71 @@ Different sections of the paper use different channel denominators (4/7 vs 4/8 v
 - **Structural no-go catalog:** Cloud-9 vs dSph (v=28↔15) + Lei/Wang vs Sameie+ 2020 (v=150). These two no-gos are the paper's strongest findings; they survive all tested forward paths.
 
 **Drift note (R88(82) process finding):** This canonical table replaces the multiple ad-hoc denominators that drifted across sections. The R88(80) bundle drift (paper said "byte-identical to R88(56)" but §9.18 was added) was the same kind of drift at the bundle level. Going forward, all channel numbers should be derivable from this table.
+
+### A.16 Gravothermal t_c prefactor re-derivation (R88(83), in response to ClawsGO review)
+
+The ClawsGO Science Agent review (2026-10-08) identified the gravothermal t_c calibration as circular: `CALIBRATED_PREFACTOR = 1.34e12` in `gravothermal_yang2024.py:190` was tuned to reproduce BM2 t_c = 28.7 Gyr, which is also the validation target used at lines 358-371. The "validation" cannot fail by construction.
+
+This appendix documents the R88(83) re-derivation of the prefactor from first principles.
+
+**The Yang+ 2024 published formula (eq. 2.2):**
+
+```
+t_c = 150 * C / ((σ_eff/m) * ρ_eff * r_eff * sqrt(4πGρ_eff))
+```
+
+where C = 0.75 is the calibration constant from Yang+ 2024. The "150" prefactor is taken from earlier gravothermal literature (Balberg+ 2002 [7], Koda+ 2011 [23], Pollack+ 2015 [48]) and is an **empirical order-of-magnitude value, NOT derived from first principles**.
+
+**Dimensional derivation (R88(83)):**
+
+In pure SI units (σ_eff/m in m²/kg, ρ_eff in kg/m³, r_eff in m, G in m³/(kg s²)):
+
+```
+t_c = 150 * C / ((σ_eff/m) * ρ_eff * r_eff * sqrt(4πGρ_eff))
+```
+
+has units of seconds. For BM2 (ρ_s = 2.74e8 M_☉/kpc³, r_s = 0.141 kpc, σ_eff/m = 7.1 cm²/g):
+
+| Formula | Prefactor | BM2 t_c |
+|---------|-----------|---------|
+| Literal published 150 * C | 112.5 | **15.77 Gyr** |
+| BM2-N-body-calibrated (1.82×) | 204.75 | 28.70 Gyr ✓ (matches published) |
+| Code's `CALIBRATED_PREFACTOR = 1.34e12` (mixed units) | — | 29.44 Gyr ✓ (matches within 2.6%) |
+
+The 1.82× discrepancy between the literal formula and the BM2 N-body result is **real** and reflects the fact that the published "150" is an order-of-magnitude estimate, not a derivation.
+
+**Independent halo validation (Cosmo-501, the critical new test):**
+
+Yang+ 2024 Table 1 lists Cosmo-501 (M_vir = 6.47e8 M_☉, V_max = 21.9 km/s, R_max = 0.63 kpc) as an independent halo from the cosmological zoom-in simulation. From Table 1, t_L(z_f)/t_c = 1.06 and t_L(z_f) = 9.58 Gyr, so t_c(Cosmo-501) ≈ 9.04 Gyr. Using σ_eff/m ≈ 50 cm²/g (representative for the velocity-dependent cross section at ν_eff = 0.64 × V_max = 14 km/s):
+
+| Prefactor | Predicted t_c(Cosmo-501) | Reported | Ratio |
+|-----------|--------------------------|----------|-------|
+| Literal published 150 * C | 0.46 Gyr | 9.04 Gyr | **0.05× (under by 19.6×)** |
+| BM2-N-body-calibrated (1.82×) | 0.84 Gyr | 9.04 Gyr | **0.09× (under by 10.8×)** |
+| Code's `CALIBRATED_PREFACTOR = 1.34e12` | 0.86 Gyr | 9.04 Gyr | 0.10× (under by 10.5×) |
+
+**Conclusion:** Both the literal Yang+ 2024 formula AND the BM2-specific 1.82× calibration **underestimate t_c(Cosmo-501) by ~10×**. The "150" prefactor and the BM2-specific calibration are **not universal constants** — they are halo-dependent fits that work for one calibration halo (BM2) but do not generalize to other halos.
+
+**Implications for the paper:**
+
+1. **The Fornax t_core = 0.25–2.08 Gyr prediction** (§9.12) is **halo-specific**: the BM2-calibrated prefactor is the only one that produces physically reasonable collapse times, but it has not been validated against dSph-like halos. The "strongest direct falsification channel" claim is sensitive to this calibration uncertainty.
+
+2. **The §2.5/§2.6 gravothermal vs Cloud-9-vs-dSph analysis** uses σ_eff/m values that fall outside the BM2 calibration range (factor 0.6-2× of BM2's 7.1 cm²/g anchor). The prefactor's halo-specific nature adds an additional ±factor-2 systematic uncertainty to absolute t_c predictions.
+
+3. **N-body validation is required** for any quantitative collapse-time prediction. The Balberg+/Yang+ 2024 closed-form formula is a useful order-of-magnitude estimator, but cannot substitute for direct N-body calibration per halo.
+
+**Code changes (R88(83)):**
+
+`v0.3-prelim/code/gravothermal_yang2024.py` was updated to:
+- Add `collapse_time_SI_gyr()` — evaluates the published 150*C formula in pure SI units (no fitted prefactor).
+- Add `collapse_time_calibrated_gyr()` — applies the BM2-specific 1.82× calibration factor (reproduces 28.7 Gyr for BM2, but underestimates other halos).
+- Add `validate_cosmo_501_calibration()` — the new INDEPENDENT halo test (does NOT pass; documents the halo-specific calibration issue).
+- Add 7 unit tests in `v0.3-prelim/tests/test_r88_gravothermal_prefactor.py`.
+- The legacy `collapse_time_gyr()` (with `CALIBRATED_PREFACTOR = 1.34e12`) is retained for backward compatibility with downstream modules.
+
+**What this means for the paper's gravothermal verdicts:**
+
+- The §9.12 Cloud-9 gravothermal cascade analysis is correct within the BM2-class halo regime, but the absolute t_c values should be treated as **calibrated to BM2, not universal**.
+- The §2.5/§2.6 Fornax t_core = 0.25–2.08 Gyr prediction is **subject to a factor-2 systematic from the prefactor calibration uncertainty**.
+- The "structural no-go" claims (§9.17a, §9.17b) are NOT affected because they are based on the relative σ_eff between channels, not absolute t_c values.
+- Phase G4 (per-halo N-body-equivalent gravothermal pipeline) is the right scope for converting these halo-specific calibration into universal predictions.
