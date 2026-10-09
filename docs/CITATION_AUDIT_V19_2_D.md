@@ -13,7 +13,7 @@
 | arXiv ID | Title (verified) | Author | Year | Used as | Verdict |
 |---|---|---|---|---|---|
 | 1407.4730 | A universal model for halo concentrations | Diemer & Kravtsov | 2014 | DK14 c-M relation | ✓ Confirmed |
-| 1412.1477 | Core formation in dwarf haloes with SIDM | Elbert et al. | 2015 | Elbert+ 2018 working benchmark | ✓ Confirmed (note: paper says 2018, actual is 2015) |
+| 1412.1477 | Core formation in dwarf haloes with SIDM | Elbert et al. | 2015 | Elbert+ 2015 working benchmark | ✓ Confirmed |
 | 1508.03339 | Dark Matter Halos as Particle Colliders | Kaplinghat et al. | 2015 | Kaplinghat+ 2016 SIDM review | ✓ Confirmed |
 | 2106.01403 | Dark matter electromagnetic dipoles (Hambye) | Hambye et al. | 2021 | Magnetic dipole cross-section tabulation | ✓ Confirmed |
 | 2305.16176 | Parametric model for SIDM halos | Yang, Nadler, Yu & Zhong | 2024 | Gravothermal parametric model | ✓ Confirmed |

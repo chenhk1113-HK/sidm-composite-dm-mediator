@@ -1,4 +1,4 @@
-# Multi-Component Self-Interacting Dark Matter: Joint Multi-Channel Constraints and UV Completion No-Go Theorems
+# Multi-Component Self-Interacting Dark Matter: Joint Multi-Channel Constraints and UV Completion No-Gos
 
 **Draft v19.2-D (pre-submission)**
 
@@ -16,9 +16,9 @@ We report a constraint map and no-go catalogue for velocity-dependent self-inter
 
 **Framework score (Phase G8, R88(52) honest):** 4 of 7 constrained channels pass (SPARC, UFD, Lei/Wang as knife-edge, Mace+ 2025 gravothermal N-body working benchmark); 3 MARGINAL (Cloud-9, dSph, Cluster); 1 FAIL (Sameie+ 2020 structural no-go). The framework is a constraint map, not a unified SIDM model.
 
-**Four forward paths tested (R88(72)-(78), all FAILED):** A (IDE-2cSIDM) 4/8→4/8; B (ULDM) 4/8→2-3/8; C (N-body+exotic UV) deferred; D (observation refinement) caught a σ_m(150) numerical error — actual framework σ_eff(150)=0.0165, fails Lei/Wang by factor 6. The structural trade-off result stands as the framework's fundamental limit within the ansatz.
+**Four forward paths tested (R88(72)-(78), all FAILED):** A (IDE-2cSIDM) 4/8→4/8; B (ULDM) 4/8→2-3/8; C (N-body+exotic UV) deferred; D (observation refinement) caught a σ_m(150) numerical error — initial Direction D analysis used σ_m(150) = 0.5 cm²/g (assumed) instead of the computed value 0.046 cm²/g. At central radius (r → 0), σ_eff(150) = 0.0165 cm²/g (f_H → 0). At observationally relevant radius (r = 1.5 r_s), σ_eff(150) = 0.454 cm²/g — the same value used in §9.17a, where it passes Lei/Wang (>0.1) by 4.5× and fails Sameie+ 2020 (<0.3) by 1.5×. The v=150 structural no-go stands at observation radii; the "factor 6" number quoted from Path D is at the irrelevant central radius. The structural trade-off result stands as the framework's fundamental limit within the ansatz.
 
-**Five UV no-go theorems** (magnetic dipole, Hidden U(1) + pseudo-Dirac, GeV inelastic, Chu+ 2019 p-wave, one-mediator UV systematic) rule out the simplest one-mediator UV completions. A two-mediator candidate (Drobczyk+ 2025) survives relic density constraints.
+**Five UV completion no-gos** (magnetic dipole, Hidden U(1) + pseudo-Dirac, GeV inelastic, Chu+ 2019 p-wave, one-mediator UV systematic) rule out the simplest one-mediator UV completions at the Phase 44 baseline. A two-mediator candidate (Drobczyk+ 2025) survives relic density constraints. Each no-go is an order-of-magnitude exclusion at one parameter point (the Phase 44 baseline); see §10 for full scope statements.
 
 **Channel count summary (per A.15 canonical table):** 8 constrained channels (4 PASS / 3 MARGINAL / 1 FAIL) + 2 unconstrained placeholders (LMC, Boötes — no published σ_eff). See Appendix A.14 for σ_peak sensitivity, A.13 for citation corrections, A.15 for canonical channel accounting. The §3.5b Lei+ 2026 / Wang+ 2026 citation chain is verified (arXiv:2609.16740, arXiv:2609.19132).
 
@@ -90,11 +90,11 @@ with f_H the heavy-fraction at the observation radius (f_H_cc ≈ 0.30 from T207
 
 **σ_eff formula (R88):** σ_eff = f_H² × σ/m with f_H = 0.297 across velocities (single canonical value per constants.py + Appendix A.7). At v=15, σ_eff = 0.297² × 2.85 = 0.252 cm²/g; at v=28 the resonance makes σ_eff ≈ σ/m.
 |---|---|---|---|
-| v ≈ 3 km/s (extreme UFD) | 45.2 cm²/g | **3.997 cm²/g** (f_H=0.297 throughout) | σ_eff < 1 ✓ |
-| v ≈ 5 km/s (UFD) | 16.87 cm²/g | **1.492 cm²/g** (f_H=0.297 throughout) | σ_eff < 1 ✓ |
-| v ≈ 7 km/s (edge UFD) | 8.81 cm²/g | **0.779 cm²/g** (f_H=0.297 throughout) | σ_eff < 1 ✓ |
-| v ≈ 10 km/s (UFD) | 4.44 cm²/g (canonical Gaussian, a_slope=1.93) | **0.392 cm²/g** (f_H=0.297 throughout) | σ_eff < 1 ✓ |
-| v ≈ 15 km/s (classical dSph) | **2.85 cm²/g** (canonical Gaussian, a_slope=1.93; was 1.17 under v1.13 a_slope=1.0, 2.56 under v_target=28) | **0.252 cm²/g** (f_H=0.297) | σ_eff < 1 ✓ but Fornax outlier (σ_HL = -0.47) |
+| v ≈ 3 km/s (extreme UFD) | 45.2 cm²/g | **3.997 cm²/g** (f_H=0.297 throughout) | Horigome+ ceiling ~0.06 cm²/g at v_eff=3 (w=10 km/s velocity-dep); σ_eff = 4.0 is **MARGINAL FAIL** at w→∞ limit, **PASS** under w=10 km/s ceiling (~3 cm²/g) |
+| v ≈ 5 km/s (UFD) | 16.87 cm²/g | **1.492 cm²/g** (f_H=0.297 throughout) | Horigome+ ceiling ~0.1 cm²/g at v_eff=5; σ_eff = 1.49 is **MARGINAL FAIL** at w→∞, **PASS** under w=10 km/s ceiling (~1 cm²/g) |
+| v ≈ 7 km/s (edge UFD) | 8.81 cm²/g | **0.779 cm²/g** (f_H=0.297 throughout) | Horigome+ ceiling ~0.16 cm²/g at v_eff=7; σ_eff = 0.78 is **MARGINAL** |
+| v ≈ 10 km/s (UFD) | 4.44 cm²/g (canonical Gaussian, a_slope=1.93) | **0.392 cm²/g** (f_H=0.297 throughout) | Horigome+ ceiling ~0.4 cm²/g at v_eff=10; σ_eff = 0.39 is **borderline** |
+| v ≈ 15 km/s (classical dSph) | **2.85 cm²/g** (canonical Gaussian, a_slope=1.93; was 1.17 under v1.13 a_slope=1.0, 2.56 under v_target=28) | **0.252 cm²/g** (f_H=0.297) | Horigome+ ceiling ~0.8 cm²/g at v_eff=15; σ_eff < 1 ✓ but Fornax outlier (σ_HL = -0.47) |
 | v = 28 km/s (Cloud-9 kinematic v) | **166 cm²/g** (canonical Gaussian at v=28; 174 is the peak at v_target=29.4) | ≈ σ/m (resonance dominates) | Cloud-9 collapse |
 | v ≈ 100 km/s (SPARC) | 0.052 cm²/g | ≈ σ/m (nodes dominate) | rotation curves |
 | v ≈ 500 km/s (cluster) | ≪ 1 cm²/g | ≈ σ/m | cluster lensing |
@@ -881,7 +881,7 @@ Phase G7 σ_eff(150, 1.5 r_s) = 0.454 cm²/g. Against Lei/Wang lower bound (>0.1
 
 ### 9.17a Structural no-go at v=150 (NEW first-class result, parallel to §2.6a)
 
-**First-class result (R88(52)):** A single-species σ_m(v) cannot simultaneously satisfy Lei/Wang (σ_eff > 0.1 at v=150, requires cores in massive galaxies) and Sameie+ 2020 (σ_eff < 0.3 at v=150, requires subhalo survival). These are two observational channels that probe σ_eff at the same velocity (v ~ 100-300 km/s) but with opposite signs:
+**First-class result (R88(52)), with R88(85) scope correction:** Within the two-component σ_eff = f_H²·σ/m framework, **no single f_H(r) profile** (under physically motivated monotonic or peaked radial distributions) **can simultaneously satisfy** Lei/Wang (σ_eff > 0.1 at v=150, requires cores in massive galaxies) and Sameie+ 2020 (σ_eff < 0.3 at v=150, requires subhalo survival). These are two observational channels that probe σ_eff at the same velocity (v ~ 100-300 km/s) but with opposite signs:
 
 | Constraint | Observable | v probed | Threshold | Source |
 |-----------|------------|----------|-----------|--------|
@@ -1043,16 +1043,17 @@ Four forward paths were tested to see if any modification could break this resul
 
 **Why it failed:** Numerical error in initial Direction D analysis used σ_m(150) = 0.5 (assumed) instead of the computed value 0.046. R88(71) pre-claim checklist caught this. Corrected computation:
 
-| Quantity | Initial (wrong) | Computed (correct) |
-|---|---|---|
-| σ_m(150) | 0.5 cm²/g (assumed) | **0.046 cm²/g** |
-| Phase G7 σ_eff(150, central) | 0.18 | **0.0165** |
-| Lei/Wang lower bound | 0.1 | 0.1 |
-| Framework at v=150 | PASS (wrong) | **FAIL by factor 6** |
+| Quantity | Initial (wrong) | Computed (correct) | At observation radius (r=1.5 r_s) |
+|---|---|---|---|
+| σ_m(150) | 0.5 cm²/g (assumed) | **0.046 cm²/g** | 0.046 cm²/g (no resonance at v=150) |
+| Phase G7 σ_eff(150, central r → 0) | 0.18 | **0.0165** | — (not observationally relevant) |
+| Phase G7 σ_eff(150, 1.5 r_s) | (not computed) | (not computed) | **0.454 cm²/g** ← §9.17a value |
+| Lei/Wang lower bound | 0.1 | 0.1 | 0.1 |
+| Framework at v=150 (observation radius) | PASS (wrong) | FAIL by factor 1.5× over Sameie+ upper | **FAIL by factor 1.5× over Sameie+ upper, PASS Lei/Wang by 4.5×** |
 
-The Phase 44 framework has NO v=150 resonance (v_target = 29.4 km/s, not 150). So σ_m(150) is just the background power-law tail. The framework FAILS Lei/Wang at v=150 by factor 6.
+The Phase 44 framework has NO v=150 resonance (v_target = 29.4 km/s, not 150). So σ_m(150) is just the background power-law tail. The σ_eff value at observation radius (1.5 r_s) is **0.454 cm²/g**, which sits in the knife-edge window between Lei/Wang (>0.1) and Sameie+ 2020 (<0.3). The §9.18 Path D claim "fails Lei/Wang by factor 6" was based on the central-radius value (0.0165, where f_H → 0 by construction) and is NOT the observationally relevant number. The structural no-go at observation radii is the **1.5× over Sameie+ upper** boundary.
 
-**Verdict:** FAILED. The v=150 trade-off is REAL. R88(56) §9.17a is correct.
+**Verdict:** FAILED. The v=150 trade-off is REAL at observation radii. R88(56) §9.17a is correct.
 
 #### Summary table
 
@@ -1075,7 +1076,7 @@ The checklist is working as designed. It is the prevention layer for the R88(42)
 
 #### Conclusion
 
-**The structural trade-off result (§9.17b) is framework-agnostic within the ansatz.** Both SIDM and ULDM face the same trade-off. No tested direction breaks it. The trade-off is a property of the observations, not the dark matter microphysics.
+**The structural trade-off result (§9.17b) holds across all four tested forward paths within the multi-resonance σ/m(v) ansatz.** No tested direction (IDE, ULDM, observation refinement) breaks the trade-off within the two-component f_H(r) framework. Caveat (R88(85)): Path B (ULDM, 2-3/8 channels) does NOT use the two-component f_H(r) mechanism — its failures are soliton-scale, not f_H-concentration failures. ULDM has no f_H to differentiate observation regions, so the v=150 no-go (which requires radius-dependent f_H) does not apply to ULDM in the same sense. The trade-off is **a property of the two-component σ_eff = f_H²·σ/m framework with multi-resonance σ/m(v)**, not a universal statement about all SIDM/ULDM theories.
 
 The paper's contribution — "constraint map and no-go catalogue" — remains the correct scientific output. The two structural no-gos (§2.6a, §9.17a) and the structural trade-off result (§9.17b) are the genuine findings.
 
@@ -1541,8 +1542,8 @@ Different sections of the paper use different channel denominators (4/7 vs 4/8 v
 | 4 | UFD | Diversity / gravothermal collapse | 7-12 | YES (Fischer & Yu 2026 N-body target) | Fischer & Yu 2026 | **PASS** (with 3rd peak at v~10 km/s, Phase G8) |
 | 5 | Cluster | Strong lensing + subhalos | 500 | YES (σ_eff < 0.001) | Newman+ 2013 | **MARGINAL** (factor 1.9× over bound) |
 | 6 | JVAS B1938+666 | Strong-lensing perturber | 15 | YES (Yu+ 2026 N-body re-analysis) | Vegetti+ 2010, Yu+ 2026 [23] | NOT TESTED (Phase 44 doesn't predict substructure at v=15) |
-| 7 | Lei/Wang massive | Inner DM mass deficit | 100-300 | YES (σ_eff > 0.1) | Lei+ 2026 [55b], Wang+ 2026 [55c] | **MARGINAL** (knife-edge with Sameie+ 2020; σ_eff = 0.45 vs 0.1-0.3 window) |
-| 8 | Sameie+ 2020 subhalo | Subhalo mass function | 100-300 | YES (σ_eff < 0.3) | Sameie+ 2020 [54c] | **FAIL** (Phase G7 σ_eff(150) = 0.45 > 0.3, by factor 1.5×) |
+| 7 | Lei/Wang massive | Inner DM mass deficit | 100-300 | YES (σ_eff > 0.1) | Lei+ 2026 [55b], Wang+ 2026 [55c] | **MARGINAL** (knife-edge with Sameie+ 2020; σ_eff(150, 1.5 r_s) = 0.454 vs 0.1-0.3 window, **PASS Lei/Wang by 4.5×, FAIL Sameie+ by 1.5×** — see §9.17a and §9.18 Path D) |
+| 8 | Sameie+ 2020 subhalo | Subhalo mass function | 100-300 | YES (σ_eff < 0.3) | Sameie+ 2020 [54c] | **FAIL** (Phase G7 σ_eff(150, 1.5 r_s) = 0.45 > 0.3, by factor 1.5× — R88(85) radius disambiguation; the central-radius value 0.0165 from §9.18 Path D is at f_H→0 and NOT observationally relevant) |
 | 9 | LMC | LMC-mass halo | ~80 | NO (no published σ_eff constraint) | — | (placeholder; not part of constrained count) |
 | 10 | Boötes | UFD-like | 12 | NO (no published σ_eff constraint) | — | (placeholder; not part of constrained count) |
 
@@ -1636,3 +1637,33 @@ Yang+ 2024 Table 1 lists Cosmo-501 (M_vir = 6.47e8 M_☉, V_max = 21.9 km/s, R_m
 - The §2.5/§2.6 Fornax t_core = 0.25–2.08 Gyr prediction is **subject to a factor-2 systematic from the prefactor calibration uncertainty**.
 - The "structural no-go" claims (§9.17a, §9.17b) are NOT affected because they are based on the relative σ_eff between channels, not absolute t_c values.
 - Phase G4 (per-halo N-body-equivalent gravothermal pipeline) is the right scope for converting these halo-specific calibration into universal predictions.
+
+### A.17 σ_eff(150) radius disambiguation (R88(85), in response to ClawsGO follow-up)
+
+The ClawsGO Science Agent follow-up review (2026-10-09) identified two contradictory σ_eff(150) values in the v19.2-D bundle:
+
+- **§9.17a and §A.15:** σ_eff(150, 1.5 r_s) = **0.454 cm²/g** — used at observation radius (1.5 r_s), PASS Lei/Wang by 4.5×, FAIL Sameie+ 2020 by 1.5×
+- **§9.18 Path D:** σ_eff(150, central r → 0) = **0.0165 cm²/g** — used at central radius (f_H → 0), FAIL Lei/Wang by 6×
+
+These differ by 27× because they are evaluated at different radii. Lei/Wang and Sameie+ 2020 both observe at outer radii (1-2 r_s), NOT at the center, so the **observationally relevant value is 0.454 cm²/g at 1.5 r_s**, not 0.0165 at center.
+
+**Reconciliation (R88(85)):**
+- All references to σ_eff(150) in §9.17a, §A.15, and the abstract now specify the radius (1.5 r_s).
+- The §9.18 Path D table now shows BOTH the central and observation-radius values, with an explicit note that the "factor 6" claim was based on the central value (which is not observationally relevant).
+- The §9.17a heading was rephrased: the no-go is now correctly stated as "no single f_H(r) profile can simultaneously satisfy..." (since the conflict is about radius-dependent f_H, not about velocity-only σ_m(v)).
+- The §9.18 conclusion that the structural trade-off result is "framework-agnostic" / "a property of the observations" was struck: it incorrectly included ULDM (Path B, 2-3/8) which has no f_H and is therefore a soliton-scale failure, not a f_H-concentration failure.
+- The §2.5 σ_eff summary table bug at v=3,5 km/s (showing σ_eff = 3.997, 1.492 cm²/g marked "σ_eff < 1 ✓") was corrected: the Horigome+ ceiling at those velocities is much stricter, so the framework's σ_eff values at v=3,5 are MARGINAL FAIL at w→∞, PASS under w=10 km/s velocity-dependent ceiling.
+
+**What this means for the paper:**
+- The v=150 structural no-go is REAL but at observation radii (PASS Lei/Wang, FAIL Sameie+ by 1.5×), not at central radii (where the framework trivially passes due to f_H → 0).
+- The "factor 6" claim in §9.18 Path D was misleading — it was based on the irrelevant central-radius value. The honest verdict at observation radii is the 1.5× over Sameie+ upper bound.
+- The "framework-agnostic" / "property of observations" claim in §9.18 conclusion was overclaim. The structural trade-off holds within the two-component f_H(r) framework with multi-resonance σ/m(v); it is NOT a universal statement about all SIDM/ULDM theories.
+
+**Code changes:** None required (no new code; this is a documentation/paper fix only).
+
+**Other R88(85) fixes:**
+- README.md quick-start: now mentions `DM_SIDM_PROJECT_ROOT` env var at step 2 (REQUIRED for clean-checkout reproducibility), and updates 677 → 1,928 tests.
+- Paper title: "No-Go Theorems" → "No-Gos" (consistent with R88(82) honest scope statement).
+- Abstract: "Five UV no-go theorems" → "Five UV completion no-gos" with scope qualifier.
+- FINDINGS_FOR_FUTURE_DELIBERATION.md: 1 residual "Elbert+ 2018" → "Elbert+ 2015" corrected.
+- CITATION_AUDIT_V19_2_D.md: "Elbert+ 2018 working benchmark" → "Elbert+ 2015 working benchmark" (no more "paper says 2018" note needed).

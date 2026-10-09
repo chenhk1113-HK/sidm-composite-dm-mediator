@@ -195,20 +195,23 @@ This addresses the most prominent "soft spot" identified by the Phase 50 reviewe
 git clone https://github.com/chenhk1113-HK/sidm-composite-dm-mediator.git
 cd sidm-composite-dm-mediator
 
-# 2. Set up the Python environment (matches the v0.3-prelim pinned versions)
+# 2. Set the project root (REQUIRED — R88(82) fix; config.py detects from this env var)
+export DM_SIDM_PROJECT_ROOT="$(pwd)"
+
+# 3. Set up the Python environment (matches the v0.3-prelim pinned versions)
 python3.11 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 # or use the WSL wimpy venv that includes Julia + KiSS-SIDM:
 #   /home/lamkuenai/wimpy/bin/python
 
-# 3. Verify — should print "ALL CLEAR: 44/44 checks passed — no drift"
+# 4. Verify — should print "ALL CLEAR: 44/44 checks passed — no drift"
 python scripts/t82_audit.py
 
-# 4. Run the test suite (677 tests, expect ~0 failures)
+# 5. Run the test suite (1928 tests collected, expect ~0 failures — R88(82))
 pytest v0.3-prelim/tests/ --ignore=v0.3-prelim/tests/test_sparc_hierarchical.py \
                          --ignore=v0.3-prelim/tests/test_t32_real_likelihood.py -q
 
-# 5. Reproduce the v0.7 headline — T41 v0.7 rerun at nlive=2000 with DAMPE+LSS
+# 6. Reproduce the v0.7 headline — T41 v0.7 rerun at nlive=2000 with DAMPE+LSS
 #    (loads the existing JSON result in data/results/ for fast verification;
 #     to re-run from scratch, see scripts/parallel_run_nl2000.sh — ~7 min wall)
 python -c "import json; r = json.load(open('v0.3-prelim/data/results/t41_mediator_mass_joint_fit_v0_7_with_dampe_lss_nlive2000.json')); print('log Z =', round(r['log_Z'], 2), 'MAP m_chi =', round(r['MAP_physical']['m_chi_GeV']), 'GeV'); print('sigma/m =', round(r['MAP_physical']['sigma_m_0_derived'], 2), 'cm^2/g')"
@@ -216,6 +219,8 @@ python -c "import json; r = json.load(open('v0.3-prelim/data/results/t41_mediato
 # Expect: log Z = -164.87 MAP m_chi = 770 GeV (post-T88.E; pre-T88.E was -163.29)
 #         sigma/m = 0.27 cm^2/g
 ```
+
+> **R88(82) note:** Without `DM_SIDM_PROJECT_ROOT` set, `v0.3-prelim/code/config.py` falls through to the hard-coded Windows path and the test suite will fail to collect. Step 2 is required for clean-checkout reproducibility.
 
 ---
 

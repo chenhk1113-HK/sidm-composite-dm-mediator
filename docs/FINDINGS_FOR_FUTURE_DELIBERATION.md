@@ -30,7 +30,7 @@ The framework has been systematically tested across 10 observational channels. H
 
 ### 2.2 Cloud-9 anchor (PASS)
 - At canonical σ_peak = 174 cm²/g, σ/m(V_max=31.12) = 161.70 cm²/g
-- Consistent with Elbert+ 2018 working benchmark of σ/m(28) ≥ 50 cm²/g
+- Consistent with Elbert+ 2015 working benchmark of σ/m(28) ≥ 50 cm²/g
 - Mace+ 2025 (arXiv:2504.13004) gravothermal N-body calibration satisfied
 
 ### 2.3 Horigome+ 2025 dSph limit (PASS)
