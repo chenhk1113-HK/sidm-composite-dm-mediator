@@ -30,8 +30,20 @@ from t90_v70_multi_resonant_darkqcd import (
 )
 from t90_v50_resonant_sidm import kinetic_energy_eV
 
-RESULTS_DIR = Path(r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\data\results")
-RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+# Lazy-initialized results directory (created in main(), not at import time,
+# so importing this module is side-effect-free on the filesystem).
+RESULTS_DIR = None
+
+
+def _get_results_dir():
+    """Lazy-initialize RESULTS_DIR from config on first call (R88(82) P0 fix)."""
+    global RESULTS_DIR
+    if RESULTS_DIR is None:
+        from config import RESULTS_DIR_V03
+        _dir = Path(RESULTS_DIR_V03)
+        _dir.mkdir(parents=True, exist_ok=True)
+        RESULTS_DIR = _dir
+    return RESULTS_DIR
 
 
 def part_a_sigma_compare():
@@ -223,7 +235,7 @@ def main():
         out["part_b"] = result_b
 
     # Save combined results
-    out_path = RESULTS_DIR / "phase38_sidmkit_crosscheck.json"
+    out_path = _get_results_dir() / "phase38_sidmkit_crosscheck.json"
     with open(out_path, "w") as f:
         json.dump(out, f, indent=2, default=float)
     print(f"\nResults written to: {out_path}")

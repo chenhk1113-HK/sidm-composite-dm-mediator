@@ -38,8 +38,20 @@ except ImportError:
     HAS_DYNESTY = False
 
 SPARC_DIR = Path(r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\data\external\sparc")
-RESULTS_DIR = Path(r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\data\results")
-RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+# Lazy-initialized results directory (created in main(), not at import time,
+# so importing this module is side-effect-free on the filesystem).
+RESULTS_DIR = None
+
+
+def _get_results_dir():
+    """Lazy-initialize RESULTS_DIR from config on first call (R88(82) P0 fix)."""
+    global RESULTS_DIR
+    if RESULTS_DIR is None:
+        from config import RESULTS_DIR_V03
+        _dir = Path(RESULTS_DIR_V03)
+        _dir.mkdir(parents=True, exist_ok=True)
+        RESULTS_DIR = _dir
+    return RESULTS_DIR
 
 G = 4.5e-6  # kpc^3 / (M_sun Gyr^2)
 
@@ -593,7 +605,7 @@ def main():
         ),
     }
 
-    out_path = RESULTS_DIR / "phase41_extended_comparison.json"
+    out_path = _get_results_dir() / "phase41_extended_comparison.json"
     with open(out_path, "w") as f:
         json.dump(out, f, indent=2, default=float)
     print(f"\nResults written to: {out_path}")
