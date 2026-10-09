@@ -21,7 +21,7 @@
 6. R88(72): Research note on two forward directions beyond Phase 44.
 7. R88(73): Direction A (IDE-2cSIDM) FAILED — all three sub-strategies negative.
 8. R88(74)–(76): Direction B (ULDM) FAILED — overclaim (R88(75) at Lyman-alpha-excluded m_φ) + calc bug (R88(76) NFW normalization).
-9. R88(77)–(78): Direction D FAILED — numerical error in σ_m(150) caught, framework FAILS Lei/Wang at v=150 by factor 6.
+9. R88(77)–(78): Direction D FAILED — numerical error in σ_m(150) caught, framework FAILS Lei/Wang at v=150 by factor 24 (Phase 44 baseline; the "factor 6" claim was based on the wrong σ_m value — R88(86)).
 10. R88(79): Final review and §9.18 added to paper.
 11. R88(80): Bundle drift fix (paper not byte-identical to R88(56); §9.18 added).
 

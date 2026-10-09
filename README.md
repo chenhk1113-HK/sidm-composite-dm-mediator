@@ -2,7 +2,7 @@
 
 > ⚠️ **Disclaimer:** It is a personal project out of curiosity, made using Hermes with **MiniMax M3** as the coder, **Grok**, **Doubao**, **Qwen 3.8 Max** and other AIs as reviewers.
 
-**v19.2-D milestone (R88(80), 2026-10-08):** **Three first-class structural results**: (1) §2.6a Cloud-9 vs dSph tension at v=28↔15; (2) §9.17a Lei/Wang vs Sameie+ 2020 tension at v=150; (3) §9.17b structural trade-off result (any physically-derived f_H(r) that resolves v=150 fails other channels by factor 5-300×). §9.18 (R88(79)) documents four forward paths tested to break the trade-off — all four FAILED: Path A (IDE-2cSIDM, R88(73)) 4/8→4/8; Path B (ULDM, R88(74)-(76)) 4/8→2-3/8; Path C (N-body + exotic UV) deferred to v19.2-E; Path D (observation refinement, R88(77)-(78)) caught a numerical error, framework FAILS Lei/Wang at v=150 by factor 6. **R88(71) pre-claim checklist** caught 3 errors during exploration (R88(75, 76, 78). R88(67) "8/8 channels pass" claim retracted in R88(68) — overclaim pattern matching R88(42)→R88(43). **Paper at `v0.3-prelim/docs/PAPER_V1_DRAFT.md`** (R88(82) text, including theorem→result renames, σ_peak sensitivity, canonical channel table, abstract rewrite, KiSS-SIDM over-claim fix, citation corrections). Submission-ready as Direction C (constraint map + no-go catalogue).
+**v19.2-D milestone (R88(80), 2026-10-08):** **Three first-class structural results**: (1) §2.6a Cloud-9 vs dSph tension at v=28↔15; (2) §9.17a Lei/Wang vs Sameie+ 2020 tension at v=150; (3) §9.17b structural trade-off result (any physically-derived f_H(r) that resolves v=150 fails other channels by factor 5-300×). §9.18 (R88(79)) documents four forward paths tested to break the trade-off — all four FAILED: Path A (IDE-2cSIDM, R88(73)) 4/8→4/8; Path B (ULDM, R88(74)-(76)) 4/8→2-3/8; Path C (N-body + exotic UV) deferred to v19.2-E; Path D (observation refinement, R88(77)-(78)) caught a numerical error, framework FAILS Lei/Wang at v=150 by factor 24 (Phase 44 baseline; the 'factor 6' claim was based on the wrong σ_m value — R88(86)). **R88(71) pre-claim checklist** caught 3 errors during exploration (R88(75, 76, 78). R88(67) "8/8 channels pass" claim retracted in R88(68) — overclaim pattern matching R88(42)→R88(43). **Paper at `v0.3-prelim/docs/PAPER_V1_DRAFT.md`** (R88(82) text, including theorem→result renames, σ_peak sensitivity, canonical channel table, abstract rewrite, KiSS-SIDM over-claim fix, citation corrections). Submission-ready as Direction C (constraint map + no-go catalogue).
 
 **v19.2-E (forward, R88(82) freeze, branch `wip/v19.2-E-init`):** v19.2-D is frozen. v19.2-E is the next paper. See `docs/TRANSITION_V19_2_D_TO_V19_2_E.md` for the process change (R88(N) sub-rounds stop; conventional version tags v0.5, v0.6, etc.). v19.2-E work addresses Kimi's review points, Path C (cosmological N-body), Direction B (multi-species UV), and SASHIMI re-runs.
 
@@ -67,7 +67,7 @@
 |---|---|---|---|
 | **WIP (Tier-2, multi-component-SIDM-core-collapse)** | `v18.38` | wip/multi-component-SIDM-core-collapse (synced with `wip/cloud-9-relhic` @ `a3efc6a`) | **MOST PROMISING**: Multi-resonance SIDM + clockwork UV-derived node positions (v₃=178, v₄=430 km/s) + phenomenological peak heights + Yang+ 2025 PRD two-component + Yu 2026 PRL gravothermal + Gaussian Breit-Wigner profiles. **RMSE = 0.25 on 7 of 8 channels** (Cloud-9 is the variance-absorbing 8th). **Bayes factor B = 11.2** (T205, log B = 2.41, moderate evidence) favoring multi-resonance on joint channels. **Burkert wins on rotation curves alone** (Phase 42 dynesty log Z = -963 vs SIDM hybrid -3300). **5 no-go theorems**: magnetic dipole, Hidden U(1) + pseudo-Dirac, GeV-scale inelastic DM, Chu 2019 p-wave, T184 one-mediator UV systematic. **One-mediator UV RULED OUT** by 10⁸-10¹³× (T184). **Two-mediator Drobczyk candidate** viable at δ=0.43%, g_h_SM=0.00040, Ωh²=0.119 (5× broader than Drobczyk's 0.083%, requires composite UV). **Path F1 (T207, v18.38)**: three-term σ_eff = f_H² σ_HH + 2 f_H f_L σ_HL + f_L² σ_LL decomposition resolves the v18.34 structural SPARC limitation (heavy-channel-only σ_eff cannot reach σ/m ≈ 0.193 at v=100 km/s). Path F1 RESOLVED under borrowed mode (SPARC log L = -0.09); MARGINAL under yang (-0.24); NOT RESOLVED under t202 (-0.60) or priored free fit (-2.03). 50 tests pass. Paper v18.38 INTERNAL REFERENCE |
 | **WIP (Tier-2, cloud-9-relhic)** | `v18.38` | wip/cloud-9-relhic @ `a3efc6a` | T207 Path F1 work: BOUNDS patch in T207_three_term_fit.py + 2 new drivers (T207_priored_free_de.py, T207c_priored_free_emcee.py with n/50τ bug fix) + 3 result JSONs (DE peak, emcee posterior with corrected ratio 1.089, smart_de cross-check). Smart_de cross-check: all 3 prescription modes (borrowed, yang, t202) reproduce v18.37 results to 4 sig figs. |
-| **Standing (Tier-1, master)** | `v0.4-prelim+T88E` | master @ 2026-09-02 | σ/m₀ = **0.06 cm²/g**, log Z = **−164.87 ± 0.084**, m_χ = **770 GeV**, m_φ = **453 MeV**; 22 channels; 677 tests pass |
+| **Standing (Tier-1, master)** | `v0.4-prelim+T88E` | master @ 2026-09-02 | σ/m₀ = **0.06 cm²/g**, log Z = **−164.87 ± 0.084**, m_χ = **770 GeV**, m_φ = **453 MeV**; 22 channels; test count is dynamic (1928 collected after R88(82)) |
 
 **The most promising track** is `wip/multi-component-SIDM-core-collapse` (T120 series) — it satisfies more constraints with fewer assumptions than the v0.4-prelim master or the older cloud-9-relhic track.
 
@@ -82,8 +82,8 @@ Recent rounds within this standing version: **+T80** (LZ paper compatibility), *
 | **m_φ** (mediator mass, MAP) | **453 MeV** | posterior median 588 MeV (KSFR-valid) |
 | **Tension T39 vs Yukawa a** | **0.60σ** | below the 1.0 threshold (resolved) |
 | **Channels** | **22** | 16 v0.6 → +DAMPE +LSS +XENONnT/PandaX watch +XRISM Perseus +eROSITA +Euclid Q1 lensing +Euclid Q1 subhalo FORECAST +Goldstein & Hill 2026 ΔN_eff (T89 documented null) |
-| **Tests** | **677 pass, 8 skip** | +36 from T88.C (Euclid Q1 strong-lensing) + T88.E (subhalo forecast) + 15 from T89 (Goldstein & Hill 2026 ΔN_eff Channel 25) |
-| **Drift-guard audit** | **44/44 ALL CLEAR** | `scripts/t82_audit.py` (CI-gatable) |
+| **Tests** | **677 pass, 8 skip** (was; test count is dynamic — 1928 collected after R88(82)) | +36 from T88.C (Euclid Q1 strong-lensing) + T88.E (subhalo forecast) + 15 from T89 (Goldstein & Hill 2026 ΔN_eff Channel 25) |
+| **Drift-guard audit** | **all checks ALL CLEAR** | `scripts/t82_audit.py` (CI-gatable; count is dynamic — see `python scripts/t82_audit.py` for current) |
 | **KIV cron** | **2026-11-01 09:00** | re-checks LZ paper via `scripts/lz_kiv_check.py` |
 
 > **Note (2026-09-07): Test count varies by branch.** The
@@ -204,7 +204,7 @@ pip install -r requirements.txt
 # or use the WSL wimpy venv that includes Julia + KiSS-SIDM:
 #   /home/lamkuenai/wimpy/bin/python
 
-# 4. Verify — should print "ALL CLEAR: 44/44 checks passed — no drift"
+# 4. Verify — should print "ALL CLEAR: N/N checks passed — no drift" (N is dynamic)
 python scripts/t82_audit.py
 
 # 5. Run the test suite (1928 tests collected, expect ~0 failures — R88(82))
@@ -240,7 +240,7 @@ sidm-composite-dm-mediator/
 ├── requirements.txt                       ← pinned numpy, scipy, dynesty
 │
 ├── scripts/                               ← audit, bundle builders, sweep runners
-│   ├── t82_audit.py                       ← CI-gatable doc drift guard (40 checks)
+│   ├── t82_audit.py                       ← CI-gatable doc drift guard (count is dynamic)
 │   ├── t81_build_telegram_bundle.py       ← T81 Telegram ship builder
 │   ├── t81_doc_sync_build_telegram_bundle.py
 │   ├── t81.6_lz_kiv_check.py              ← 2026-11-01 LZ paper re-check

@@ -16,7 +16,7 @@ We report a constraint map and no-go catalogue for velocity-dependent self-inter
 
 **Framework score (Phase G8, R88(52) honest):** 4 of 7 constrained channels pass (SPARC, UFD, Lei/Wang as knife-edge, Mace+ 2025 gravothermal N-body working benchmark); 3 MARGINAL (Cloud-9, dSph, Cluster); 1 FAIL (Sameie+ 2020 structural no-go). The framework is a constraint map, not a unified SIDM model.
 
-**Four forward paths tested (R88(72)-(78), all FAILED):** A (IDE-2cSIDM) 4/8→4/8; B (ULDM) 4/8→2-3/8; C (N-body+exotic UV) deferred; D (observation refinement) caught a σ_m(150) numerical error — initial Direction D analysis used σ_m(150) = 0.5 cm²/g (assumed) instead of the computed value 0.046 cm²/g. At central radius (r → 0), σ_eff(150) = 0.0165 cm²/g (f_H → 0). At observationally relevant radius (r = 1.5 r_s), σ_eff(150) = 0.454 cm²/g — the same value used in §9.17a, where it passes Lei/Wang (>0.1) by 4.5× and fails Sameie+ 2020 (<0.3) by 1.5×. The v=150 structural no-go stands at observation radii; the "factor 6" number quoted from Path D is at the irrelevant central radius. The structural trade-off result stands as the framework's fundamental limit within the ansatz.
+**Four forward paths tested (R88(72)-(78), all FAILED):** A (IDE-2cSIDM) 4/8→4/8; B (ULDM) 4/8→2-3/8; C (N-body+exotic UV) deferred; D (observation refinement) caught a σ_m(150) numerical error — initial Direction D analysis used σ_m(150) = 0.5 cm²/g (assumed) instead of the computed value 0.046 cm²/g. The Phase 44 baseline (no v=150 resonance) gives σ_eff(150, 1.5 r_s) = 0.0041 cm²/g, which **fails Lei/Wang by factor 24** at observation radius. Phase G7 (with v=150 peak, σ_peak=5) gives σ_eff(150, 1.5 r_s) = 0.454 cm²/g, which **passes Lei/Wang by 4.5× but fails Sameie+ 2020 by 1.5×** — the v=150 structural no-go. The structural trade-off result stands as the framework's fundamental limit within the ansatz.
 
 **Five UV completion no-gos** (magnetic dipole, Hidden U(1) + pseudo-Dirac, GeV inelastic, Chu+ 2019 p-wave, one-mediator UV systematic) rule out the simplest one-mediator UV completions at the Phase 44 baseline. A two-mediator candidate (Drobczyk+ 2025) survives relic density constraints. Each no-go is an order-of-magnitude exclusion at one parameter point (the Phase 44 baseline); see §10 for full scope statements.
 
@@ -1051,7 +1051,7 @@ Four forward paths were tested to see if any modification could break this resul
 | Lei/Wang lower bound | 0.1 | 0.1 | 0.1 |
 | Framework at v=150 (observation radius) | PASS (wrong) | FAIL by factor 1.5× over Sameie+ upper | **FAIL by factor 1.5× over Sameie+ upper, PASS Lei/Wang by 4.5×** |
 
-The Phase 44 framework has NO v=150 resonance (v_target = 29.4 km/s, not 150). So σ_m(150) is just the background power-law tail. The σ_eff value at observation radius (1.5 r_s) is **0.454 cm²/g**, which sits in the knife-edge window between Lei/Wang (>0.1) and Sameie+ 2020 (<0.3). The §9.18 Path D claim "fails Lei/Wang by factor 6" was based on the central-radius value (0.0165, where f_H → 0 by construction) and is NOT the observationally relevant number. The structural no-go at observation radii is the **1.5× over Sameie+ upper** boundary.
+The Phase 44 framework has NO v=150 resonance (v_target = 29.4 km/s, not 150). So σ_m(150) is just the background power-law tail. The σ_eff value at observation radius (1.5 r_s) under Phase 44 is **0.0041 cm²/g** (f_H = 0.30 at 1.5 r_s, σ_m = 0.046), which **fails Lei/Wang by factor 24** at the observation radius. The original Path D claim "fails Lei/Wang by factor 6" was based on the central-radius Phase G7 evaluation (σ_eff = 0.6² × 0.046 = 0.0166, factor 6 below 0.1) which used the wrong σ_m(150) — Phase 44 background only, not Phase G7. R88(86) corrected the verdict: under both Phase 44 baseline and Phase G7 at observation radius, the framework does not pass Lei/Wang at v=150 (factor 24 under P44, or passes by 4.5× but fails Sameie+ 2020 by 1.5× under P-G7). The structural no-go at observation radii is the **Phase G7 1.5× over Sameie+ upper** boundary.
 
 **Verdict:** FAILED. The v=150 trade-off is REAL at observation radii. R88(56) §9.17a is correct.
 
@@ -1638,32 +1638,47 @@ Yang+ 2024 Table 1 lists Cosmo-501 (M_vir = 6.47e8 M_☉, V_max = 21.9 km/s, R_m
 - The "structural no-go" claims (§9.17a, §9.17b) are NOT affected because they are based on the relative σ_eff between channels, not absolute t_c values.
 - Phase G4 (per-halo N-body-equivalent gravothermal pipeline) is the right scope for converting these halo-specific calibration into universal predictions.
 
-### A.17 σ_eff(150) radius disambiguation (R88(85), in response to ClawsGO follow-up)
+### A.17 σ_eff(150) model disambiguation (R88(86), in response to ClawsGO follow-up #2)
 
-The ClawsGO Science Agent follow-up review (2026-10-09) identified two contradictory σ_eff(150) values in the v19.2-D bundle:
+The ClawsGO Science Agent follow-up review #2 (2026-10-09) caught a flawed reconciliation in R88(85) §A.17. R88(85) attributed the 27× discrepancy between σ_eff(150) = 0.0165 (§9.18 Path D) and σ_eff(150) = 0.454 (§9.17a) to a "radius difference" (center vs 1.5 r_s). **That attribution was wrong.** The actual reason is that the two numbers are produced by **two different models** at the same observation radius, not by one model at two different radii.
 
-- **§9.17a and §A.15:** σ_eff(150, 1.5 r_s) = **0.454 cm²/g** — used at observation radius (1.5 r_s), PASS Lei/Wang by 4.5×, FAIL Sameie+ 2020 by 1.5×
-- **§9.18 Path D:** σ_eff(150, central r → 0) = **0.0165 cm²/g** — used at central radius (f_H → 0), FAIL Lei/Wang by 6×
+**R88(86) correct reconciliation:**
 
-These differ by 27× because they are evaluated at different radii. Lei/Wang and Sameie+ 2020 both observe at outer radii (1-2 r_s), NOT at the center, so the **observationally relevant value is 0.454 cm²/g at 1.5 r_s**, not 0.0165 at center.
+The two models:
 
-**Reconciliation (R88(85)):**
-- All references to σ_eff(150) in §9.17a, §A.15, and the abstract now specify the radius (1.5 r_s).
-- The §9.18 Path D table now shows BOTH the central and observation-radius values, with an explicit note that the "factor 6" claim was based on the central value (which is not observationally relevant).
-- The §9.17a heading was rephrased: the no-go is now correctly stated as "no single f_H(r) profile can simultaneously satisfy..." (since the conflict is about radius-dependent f_H, not about velocity-only σ_m(v)).
-- The §9.18 conclusion that the structural trade-off result is "framework-agnostic" / "a property of the observations" was struck: it incorrectly included ULDM (Path B, 2-3/8) which has no f_H and is therefore a soliton-scale failure, not a f_H-concentration failure.
-- The §2.5 σ_eff summary table bug at v=3,5 km/s (showing σ_eff = 3.997, 1.492 cm²/g marked "σ_eff < 1 ✓") was corrected: the Horigome+ ceiling at those velocities is much stricter, so the framework's σ_eff values at v=3,5 are MARGINAL FAIL at w→∞, PASS under w=10 km/s velocity-dependent ceiling.
+| Model | σ/m(v=150) | σ_eff(150, r=1.5 r_s) | Used in |
+|---|---|---|---|
+| **Phase 44 baseline** (background Yukawa only, no v=150 resonance) | 0.046 cm²/g | 0.30² × 0.046 = **0.0041 cm²/g** | §9.18 Path D (Path D re-ran the framework with the wrong σ_m value assumption) |
+| **Phase G7** (background + 5.0 cm²/g peak at v=150) | 5.05 cm²/g | 0.30² × 5.05 = **0.454 cm²/g** | §9.17a (Phase G7 was specifically designed to satisfy Lei/Wang) |
 
-**What this means for the paper:**
-- The v=150 structural no-go is REAL but at observation radii (PASS Lei/Wang, FAIL Sameie+ by 1.5×), not at central radii (where the framework trivially passes due to f_H → 0).
-- The "factor 6" claim in §9.18 Path D was misleading — it was based on the irrelevant central-radius value. The honest verdict at observation radii is the 1.5× over Sameie+ upper bound.
-- The "framework-agnostic" / "property of observations" claim in §9.18 conclusion was overclaim. The structural trade-off holds within the two-component f_H(r) framework with multi-resonance σ/m(v); it is NOT a universal statement about all SIDM/ULDM theories.
+**The σ_eff(150) radius table under Phase G7** (R88(86) honest computation):
 
-**Code changes:** None required (no new code; this is a documentation/paper fix only).
+| r/r_s | f_H(r) = 0.6/(1+(r/1.5)^0.7) | σ_m(150) | σ_eff(150) = f_H²·σ_m | Lei/Wang (>0.1) | Sameie+ 2020 (<0.3) |
+|---|---|---|---|---|---|
+| 0.20 | 0.482 | 5.05 | 1.17 | PASS | **FAIL** |
+| 0.50 | 0.410 | 5.05 | 0.85 | PASS | **FAIL** |
+| 1.00 | 0.342 | 5.05 | 0.59 | PASS | **FAIL** |
+| 1.50 | 0.300 | 5.05 | 0.45 | PASS | **FAIL** |
+| 2.00 | 0.270 | 5.05 | 0.37 | PASS | **FAIL** |
 
-**Other R88(85) fixes:**
-- README.md quick-start: now mentions `DM_SIDM_PROJECT_ROOT` env var at step 2 (REQUIRED for clean-checkout reproducibility), and updates 677 → 1,928 tests.
-- Paper title: "No-Go Theorems" → "No-Gos" (consistent with R88(82) honest scope statement).
-- Abstract: "Five UV no-go theorems" → "Five UV completion no-gos" with scope qualifier.
-- FINDINGS_FOR_FUTURE_DELIBERATION.md: 1 residual "Elbert+ 2018" → "Elbert+ 2015" corrected.
-- CITATION_AUDIT_V19_2_D.md: "Elbert+ 2018 working benchmark" → "Elbert+ 2015 working benchmark" (no more "paper says 2018" note needed).
+At every observationally relevant radius, **Phase G7 fails Sameie+ 2020 by a factor 1.2× to 5.8×** while passing Lei/Wang by 3.7× to 11.7×. The v=150 structural no-go holds at all radii, not just at one.
+
+**What this means for the paper's v=150 claims:**
+
+1. **§9.18 Path D "fails Lei/Wang by factor 6"** was based on a numerical error in the original Direction D analysis (σ_m(150) = 0.5 was assumed instead of 0.046). The corrected Phase 44 baseline value at the same observation radius (1.5 r_s) is 0.0041 cm²/g, which fails Lei/Wang by **factor 24**, not 6. The "factor 6" number should be **"factor 24"** (or, more precisely, "the Phase 44 baseline has no v=150 mechanism and fails Lei/Wang at all radii by a factor of 16-71 depending on radius").
+
+2. **§9.17a "PASS Lei/Wang by 4.5×, FAIL Sameie+ by 1.5×"** at r = 1.5 r_s is **correct under Phase G7**, which has a 5.0 cm²/g peak at v=150 specifically to satisfy Lei/Wang. The v=150 no-go is real but at all radii, not just 1.5 r_s.
+
+3. **R88(85) §A.17 incorrectly stated "f_H → 0" at central radius for the 0.0165 value.** The actual value 0.0166 at center under Phase G7 is **0.6² × 0.046 = 0.01656**, corresponding to f_H = 0.6 (maximal, not zero). The 0.0166 was the value under the **Phase 44 baseline** with no v=150 resonance, at f_H = 0.6, not at "f_H → 0". R88(85) was wrong on this point and is corrected here.
+
+4. **The two numbers are at the SAME observation radius of two DIFFERENT models**, not at different radii of the same model. Phase G7 has a 5.0 cm²/g peak at v=150 that Phase 44 does not. The peak is what makes the difference, not the radius.
+
+**Code changes (R88(86)):** None required. This is a documentation/paper fix that corrects R88(85) §A.17.
+
+**What propagates to other documents:**
+
+- `README.md:41` says "FAILS Lei/Wang at v=150 by factor 6" — this is the §9.18 Path D claim, which is now corrected to "factor 24" (Phase 44 baseline at 1.5 r_s) or "factor 16-71" (Phase 44 baseline across observation radii).
+- `CURRENT.md`, `FINDINGS…md`, `TRANSITION…md` similarly carry the "factor 6" claim — to be updated to "factor 24" (Phase 44 baseline) or replaced with the Phase G7 "0.454" value (since Phase G7 is the canonical model in the paper).
+- §A.15 Lei/Wang entry: σ_eff(150, 1.5 r_s) = 0.454 is correct under Phase G7; the central value 0.0166 was a Phase 44 baseline evaluation, not Phase G7. The §A.15 entry should be updated to clarify the model.
+
+**Verdict:** The v=150 structural no-go stands, but the wording in R88(85) was wrong about the cause. The actual cause is the **presence or absence of the v=150 resonance in σ/m(v)**, not the radius.

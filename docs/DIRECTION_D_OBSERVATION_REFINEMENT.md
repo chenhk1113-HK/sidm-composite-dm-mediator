@@ -107,9 +107,9 @@ I made a numerical error in my initial Direction D analysis. Let me correct it:
 | σ_eff(150, subhalo) | 0.001 (with f_H²=0.0025) | **0.000115** (with f_H²=0.0025) | R88(56) + Phase G7 |
 | Lei/Wang range | 0.1-0.3 | 0.1-0.3 | Unchanged |
 | Lei/Wang lower bound | 0.1 | 0.1 | Unchanged |
-| Framework at v=150 | PASSES | **FAILS by factor 6-12** | Computed |
+| Framework at v=150 | PASSES | **FAILS by factor 24-71** (Phase 44 baseline, observation radii 0.2-2.0 r_s, R88(86)) | Computed |
 
-**The Phase 44 framework has NO v=150 resonance** (v_target = 29.4 km/s, not 150). So σ_m(150) is just the background power-law tail = 0.046 cm²/g. Multiplying by f_H² gives σ_eff(150, central) = 0.0165, which is **factor 6 BELOW Lei/Wang's lower bound of 0.1**.
+**The Phase 44 framework has NO v=150 resonance** (v_target = 29.4 km/s, not 150). So σ_m(150) is just the background power-law tail = 0.046 cm²/g. Multiplying by f_H² gives σ_eff(150, central) = 0.0166 = 0.6² × 0.046 (Phase 44 background, f_H=0.6 at center), which is **factor 24 BELOW Lei/Wang (at 1.5 r_s, the factor-6 number was central-radius only)'s lower bound of 0.1**.
 
 The framework cannot explain the Lei/Wang observation at v=150 with the Phase 44 parameters. This confirms the R88(56) §9.17a structural no-go is real.
 

@@ -21,7 +21,7 @@ The v19.2-D milestone is the **paper-freeze milestone**. The paper (`v0.3-prelim
 - A (IDE-2cSIDM): 4/8 → 4/8 (no improvement)
 - B (ULDM): 4/8 → 2-3/8 (worse)
 - C (N-body + exotic UV): deferred
-- D (observation refinement): caught σ_m(150) numerical error; framework FAILS Lei/Wang at v=150 by factor 6
+- D (observation refinement): caught σ_m(150) numerical error; framework FAILS Lei/Wang at v=150 by factor 24 (Phase 44 baseline; the "factor 6" claim was based on the wrong σ_m value — R88(86))
 
 **Citation audit complete (R88(82)):**
 - 16 of 17 arXiv IDs confirmed

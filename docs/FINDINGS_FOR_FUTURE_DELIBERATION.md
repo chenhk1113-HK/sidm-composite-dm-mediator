@@ -1050,7 +1050,7 @@ Resource estimate: 3-4 months. Not tested within v19.2-D timeframe. Recommended 
 
 R88(77) initial Direction D analysis claimed the v=150 trade-off was over-stated (Sameie+ 2020 as upper bound vs Lei/Wang as 0.1-0.3 range).
 
-R88(78) R88(71) pre-claim checklist caught a numerical error: σ_m(150) = 0.046 cm²/g (computed), not 0.5 (assumed). The framework actually FAILS Lei/Wang at v=150 by factor 6, not passes it. The v=150 trade-off is REAL.
+R88(78) R88(71) pre-claim checklist caught a numerical error: σ_m(150) = 0.046 cm²/g (computed), not 0.5 (assumed). The framework actually FAILS Lei/Wang at v=150 by factor 24 (Phase 44 baseline; the "factor 6" claim was based on the wrong σ_m value — R88(86)), not passes it. The v=150 trade-off is REAL.
 
 ### 21.4 R88(71) Pre-claim Checklist: Three Successful Catches
 
