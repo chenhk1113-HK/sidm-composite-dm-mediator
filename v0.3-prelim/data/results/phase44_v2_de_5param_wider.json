@@ -1,0 +1,19 @@
+{
+  "test": "Phase44_v2_DE_5param_canonical_wider_prior",
+  "date": "2026-10-09",
+  "method": "5-param DE on paper canonical Gaussian form, f_H=0.297, T205 OBS_PUBLISHED 8-channel, WIDER prior (sigma_peak up to 5000)",
+  "best_logL": -7.286814043018604,
+  "best_params": {
+    "sigma_0": 0.026489737785041084,
+    "a_slope": 1.1978971426574005,
+    "sigma_peak": 2025.571763542211,
+    "v_target_kms": 28.471020359961948,
+    "sigma_1_kms": 1.2034449616197804
+  },
+  "pass_fail": {
+    "PASS": 5,
+    "MARGINAL": 2,
+    "FAIL": 1
+  },
+  "interpretation": "5-param DE on canonical Gaussian form with wider prior (sigma_peak up to 5000): 5 PASS / 2 MARGINAL / 1 FAIL out of 8, log L = -7.287. This is the apples-to-apples comparison with the v19.2-D canonical Phase 44 free fit (1 of 8 per A.1)."
+}

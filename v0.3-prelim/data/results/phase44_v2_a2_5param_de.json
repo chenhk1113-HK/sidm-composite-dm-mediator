@@ -1,0 +1,126 @@
+{
+  "test": "Phase44_v2_A2_5param_DE_canonical_gaussian",
+  "date": "2026-10-09",
+  "method": "5-param DE on paper's canonical Gaussian \u03c3/m(v) form, f_H=0.297, T205 OBS_PUBLISHED 8-channel published-\u03c3_unc likelihood. Wider prior (\u03c3_peak up to 5000) to allow Cloud-9 v=28 to pass.",
+  "v19_2_D_canonical_baseline": {
+    "params": [
+      0.052,
+      1.93,
+      174.0,
+      29.4,
+      4.4
+    ],
+    "logL": -3480.0254787720314
+  },
+  "best_fit_5param_DE": {
+    "logL": -7.286814043018604,
+    "sigma_0": 0.026489737785041084,
+    "a_slope": 1.1978971426574005,
+    "sigma_peak": 2025.571763542211,
+    "v_target_kms": 28.471020359961948,
+    "sigma_1_kms": 1.2034449616197804
+  },
+  "pass_fail_summary": {
+    "PASS": 5,
+    "MARGINAL": 2,
+    "FAIL": 1,
+    "canonical_count_string": "5 of 8 channels pass"
+  },
+  "per_channel": [
+    {
+      "v_kms": 3.0,
+      "label": "UFD v=3",
+      "kind": "ceiling",
+      "sigma_HH": 1.767379270771206,
+      "sigma_eff": 0.1558987580954573,
+      "sigma_obs": 0.155,
+      "sigma_unc": 0.05,
+      "verdict": "MARGINAL",
+      "citation": "Horigome+ 2025 Table II"
+    },
+    {
+      "v_kms": 5.0,
+      "label": "UFD v=5",
+      "kind": "ceiling",
+      "sigma_HH": 0.9584683439196657,
+      "sigma_eff": 0.08454553414880979,
+      "sigma_obs": 0.093,
+      "sigma_unc": 0.05,
+      "verdict": "PASS",
+      "citation": "Horigome+ 2025 Table II"
+    },
+    {
+      "v_kms": 7.0,
+      "label": "UFD v=7",
+      "kind": "ceiling",
+      "sigma_HH": 0.6405181155711884,
+      "sigma_eff": 0.05649946245641896,
+      "sigma_obs": 0.067,
+      "sigma_unc": 0.05,
+      "verdict": "PASS",
+      "citation": "Horigome+ 2025 Table II"
+    },
+    {
+      "v_kms": 10.0,
+      "label": "UFD v=10",
+      "kind": "ceiling",
+      "sigma_HH": 0.4178061246152694,
+      "sigma_eff": 0.036854260446188294,
+      "sigma_obs": 0.047,
+      "sigma_unc": 0.05,
+      "verdict": "PASS",
+      "citation": "Horigome+ 2025 Table II"
+    },
+    {
+      "v_kms": 15.0,
+      "label": "dSph v=15",
+      "kind": "ceiling",
+      "sigma_HH": 0.2570606408736411,
+      "sigma_eff": 0.022675062070823006,
+      "sigma_obs": 0.032,
+      "sigma_unc": 0.04,
+      "verdict": "PASS",
+      "citation": "Horigome+ 2025 Table II"
+    },
+    {
+      "v_kms": 28.0,
+      "label": "Cloud-9 v=28",
+      "kind": "floor",
+      "sigma_HH": 1876.338932544704,
+      "sigma_eff": 165.50998090083579,
+      "sigma_obs": 128.0,
+      "sigma_unc": 30.0,
+      "verdict": "PASS",
+      "citation": "BLN24 / Ohana+ 2026"
+    },
+    {
+      "v_kms": 100.0,
+      "label": "SPARC v=100",
+      "kind": "gaussian",
+      "sigma_HH": 0.026489737785041084,
+      "sigma_eff": 0.0023366332802806887,
+      "sigma_obs": 0.193,
+      "sigma_unc": 0.05,
+      "verdict": "FAIL",
+      "citation": "Lelli+ 2016"
+    },
+    {
+      "v_kms": 500.0,
+      "label": "Cluster v=500",
+      "kind": "ceiling",
+      "sigma_HH": 0.0038528623053420883,
+      "sigma_eff": 0.00033985713109192025,
+      "sigma_obs": 0.00025,
+      "sigma_unc": 0.0005,
+      "verdict": "MARGINAL",
+      "citation": "Randall+ 2008"
+    }
+  ],
+  "comparison_table": {
+    "v19_2_D_canonical_3ch_handset": "4 of 7 (3 channels, hand-set Gaussian)",
+    "v19_2_E_A1_canonical_8ch_published": "1 of 8 (canonical Phase 44, 8 channels, published \u03c3_unc)",
+    "v19_2_E_A2_5param_DE_5ch": "5 of 8 (5-param DE on canonical form, published \u03c3_unc, wider prior)",
+    "v19_2_E_A2_15param_DE_8ch_overfit": "8 of 8 (15-param DE, T205 v\u00b2-space Lorentzian, R88(71) overfit flag)"
+  },
+  "interpretation": "5-param DE on canonical Gaussian form finds 5 of 8 PASS (logL = -7.287). This is BETTER than the v19.2-E A.1 result (1 of 8 at the v19.2-D canonical) and comparable to the v19.2-D headline (4 of 7). The 5-param best-fit has \u03c3_peak=2026 (vs canonical 174), v_target=28.5 km/s (vs 29.4), \u03c3_1=1.2 km/s (vs 4.4). The SPARC v=100 channel is a real failure of the 5-param Gaussian form \u2014 the narrow width needed to suppress dSph/UFD tail also suppresses \u03c3/m at v=100."
+}

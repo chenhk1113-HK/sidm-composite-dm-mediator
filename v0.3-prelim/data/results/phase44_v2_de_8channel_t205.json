@@ -1,0 +1,24 @@
+{
+  "test": "Phase44_v2_DE_best_fit_8channel_T205",
+  "date": "2026-10-09",
+  "method": "differential_evolution on 8-channel T205 published-\u03c3_unc likelihood",
+  "best_logL": -4.402249744592949e-12,
+  "best_params": [
+    9.324802167659428,
+    5.0,
+    129.28449722339602,
+    56.5428183510013,
+    406.13691424264283,
+    27.999667083790065,
+    -2.652251898688923,
+    -4.5678800349073025,
+    -5.116170325401161,
+    -4.637075116734267,
+    4.047361489895964,
+    -0.2898342055167248,
+    1.3066783053815418,
+    3.731724598916806,
+    0.5355744505721186
+  ],
+  "interpretation": "Best-fit log L = -0.000 found by DE on 8-channel T205 likelihood. Compare to dynesty result log Z = -14.285 and to Phase 44 v1 (3-channel hand-set) best logL = -11.578."
+}
