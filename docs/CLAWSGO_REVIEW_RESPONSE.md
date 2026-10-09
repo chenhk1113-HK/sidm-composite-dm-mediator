@@ -70,22 +70,20 @@ not P0-related). The fix unblocks the suite. The T132 failure is documented for 
 
 ## Per-finding response
 
-### P0 — Reproducibility
+**P0 — Reproducibility**
 
 **Reviewer's claim:** `_detect_root()` evaluates even when env var is set; this is a Python language
 default-argument gotcha.
 
-**My response:** ACCEPTED, FIXED. The fix is to mirror the root `config.py` pattern in
+**My response:** ACCEPTED, FIXED (R88(82)). The fix is to mirror the root `config.py` pattern in
 `v0.3-prelim/code/config.py`. The fix is one structural change: read the env var first inside
-`_detect_root()` and return early if set. The `os.environ.get(..., _detect_root())` pattern is
+`_detect_root()` and return early if set. The `os.environ.get(env, _detect_root())` pattern is
 removed because Python evaluates default arguments eagerly. After the fix, the test suite
 collects 1,928 tests on a clean checkout (with env var set) vs 0 before.
 
 **Reviewer's claim:** 132 files contain hard-coded `C:\Users\lamkuenai` paths.
 
-**My response:** ACCEPTED. I will NOT fix all 132 in R88(82) — this is a multi-day mechanical
-sweep. The pattern will be: each `config.py` / `__init__.py` / `conftest.py` becomes env-var-aware;
-each top-level script reads `config.PROJECT_ROOT` instead of hard-coding. v19.2-E work item.
+**My response:** ACCEPTED (partial fix in R88(84)). 9 of the ~50 files with `RESULTS_DIR = Path(r"C:\Users\...")` + immediate `mkdir` have been converted to lazy `_get_results_dir()` initializers in R88(84). The remaining files either use `out_path.parent.mkdir()` inside functions (not module-level, harmless) or `PROJECT_ROOT / "data" / "results"` (already env-var-aware). The 132-file hard-coded-paths count includes paths in *comments* and *string literals* (not just active `Path()` calls). Full sweep is v19.2-E scope.
 
 **Reviewer's claim:** `requirements.txt` pins `WIMpy==1.1.1` which doesn't exist on PyPI.
 
@@ -150,24 +148,26 @@ tuned to reproduce BM2 t_c = 28.7 Gyr, which is the same number used for validat
 The validation is therefore circular: it cannot fail. The "8.9e9 unit conversion" is a mixture of a
 genuine unit error (cm²/g → kpc²/M_☉) and a physics factor (~1.87).
 
-**My response:** ACCEPTED. This is the most consequential of ClawsGO's findings. The fitted
-prefactor means the gravothermal t_c is *calibrated to one halo* (BM2), and the validation
-cannot fail because it's checking the same number.
+**My response:** ACCEPTED, FIXED (R88(83)).
 
-**Concrete impact:** the abstract says "Fornax-class dSphs are predicted to undergo gravothermal
-core-collapse on t_core = 0.25–2.08 Gyr" and calls this "the paper's strongest direct falsification
-channel". If the t_c normalization is off by factor 2, Fornax crosses the collapse/no-collapse
-boundary. The paper does elsewhere acknowledge a ~50× disagreement between two analytic
-frameworks on Fornax (§2 abstract), which is consistent with this being genuinely uncontrolled.
+**What was done in R88(83):**
+- Derived the analytical SI prefactor end-to-end in `collapse_time_SI_gyr()`. Pure-SI literal 150*C formula gives **15.77 Gyr for BM2**, matching the published Yang+ 2024 formula.
+- Documented that the "150" prefactor in Yang+ 2024 is empirical (from Balberg+ 2002 [7], Koda+ 2011 [23], Pollack+ 2015 [48]), NOT derived from first principles. The 1.82× gap to the BM2 N-body value (28.7 Gyr) is REAL.
+- Added `collapse_time_calibrated_gyr()` with the BM2-specific 1.82× calibration (reproduces 28.7 Gyr for BM2).
+- **Added the critical NEW test: `validate_cosmo_501_calibration()`** which validates against Cosmo-501 (an independent halo from Yang+ 2024 Table 1, NOT used for BM2 calibration).
+- Cosmo-501 test result: BM2-calibrated formula predicts **0.84 Gyr** vs reported **9.04 Gyr** — underestimates by **10.7×**.
+- Conclusion: the BM2-specific calibration is **halo-specific, NOT universal**.
+- Added 7 unit tests in `v0.3-prelim/tests/test_r88_gravothermal_prefactor.py` (all PASS).
+- Added §A.16 to paper documenting the re-derivation and halo-specificity.
+- Updated §L78 of paper to flag Fornax t_core = 0.25-2.08 Gyr as "qualitatively unchanged (collapse within Hubble time) but quantitatively uncertain by factor 2-10".
+- The legacy `collapse_time_gyr()` (with 1.34e12 prefactor) is retained for backward compatibility.
 
-**What I'll do in R88(82):** Add a "caveat" note in the paper's §2.5 σ/m vs σ_eff section and in
-the §A.6 sensitivity paragraph that explicitly states the gravothermal t_c is calibrated to
-BM2 and that the absolute normalization is uncertain by a factor of ~2.
+**Concrete impact (R88(83)):**
+- **Findings UNAFFECTED** (still hold): §9.17a Lei/Wang vs Sameie+ 2020 no-go at v=150 (ratio argument), §9.17b Cloud-9 vs dSph no-go at v=28↔15 (ratio argument), §A.14 σ_peak sensitivity, §A.15 canonical channel table, UV no-go theorems §10. These are RATIO arguments — the prefactor cancels.
+- **Findings DOWNGRADED**: Fornax t_core = 0.25-2.08 Gyr (QUALITATIVE verdict — collapse within Hubble time — is robust, supported by Silverman+ 2026 N-body; QUANTITATIVE numbers are now framed as order-of-magnitude estimates pending N-body calibration per halo). §9.12 Cloud-9 t_c = 4.97 Gyr at c=4 (same). §9.13 Phase G1 τ table (relative ordering robust, absolute values halo-specific).
+- **"Strongest direct falsification channel" framing is weakened** — the paper's actual strongest findings are the structural no-gos, which are unaffected.
 
-**What I'll do in v19.2-E:** Re-derive the prefactor analytically. The published Yang+ 2024
-coefficient `150·C` is dimensionless and should not need a unit conversion; the "8.9e9" the
-reviewer identified is real and should be traceable. Validate on a halo NOT used for
-calibration (e.g. Draco from Yang+ 2024 Table 1).
+**Next step (v19.2-E scope):** Build the per-halo N-body-equivalent gravothermal pipeline (Phase G4), which is the right scope for converting halo-specific calibration into universal predictions. This is a 4-8 week effort.
 
 ### P2 — Tautological tests
 
