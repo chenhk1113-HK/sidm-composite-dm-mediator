@@ -499,7 +499,7 @@ The "missing angles worthy of exploration" (per user instruction) are:
    (The trade-off result says it shouldn't, but it does — investigate why)
 2. Are there other observables that probe σ_eff at intermediate radii
    where the trade-off might not apply?
-3. Can we design a multi-component UV model that breaks the theorem?
+3. Can we design a multi-component UV model that breaks the trade-off result?
 4. Is the Sameie+ 2020 observation or Lei/Wang observation more reliable?
    (Direction D: which one should the field trust more?)
 
@@ -1014,7 +1014,7 @@ CDG-2 is acknowledged as a notable observational extreme (most DM-dominated gala
 
 > Under any physically-derived centre-peaked f_H(r) (e.g. Yang+ 2025 SIDM2c, R88(88) restated §9.17b) (heavy concentrated at center such that f_H(r > 0.2 r_s) drops significantly), the framework cannot simultaneously satisfy Cloud-9 (σ_eff ≥ 50 at r ~ 0.5 r_s), SPARC (σ_eff ~ 0.19 at v=100, r ~ 1.5 r_s), and Lei/Wang (σ_eff > 0.1 at v=150, r ~ 1.5 r_s).
 
-This theorem is the framework's strongest result. It is a geometric property of within-halo structure, not a parameter tuning issue.
+This trade-off result is the framework's strongest result. It is a geometric property of within-halo structure, not a parameter tuning issue.
 
 ### 21.2 Four Forward Paths Tested
 
