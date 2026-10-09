@@ -10,7 +10,7 @@ We report a constraint map and no-go catalogue for velocity-dependent self-inter
 
 1. **Cloud-9 vs dSph tension (v=28↔15):** A narrow resonance at v_target=29.4 km/s satisfies Cloud-9's σ/m ≥ 50 cm²/g working benchmark but a physically-derived f_H(r) drives σ_eff at dSph velocities above Horigome+ 2025's 0.8 cm²/g limit by 3.6–23.7×. The tension partially resolves with a third narrow peak at v=10 km/s (Fischer & Yu 2026 UFD diversity) but at the cost of additional free parameters. This is a **ratio argument** (σ_m(28)/σ_m(15) ratio) that is robust under the multi-resonance σ/m(v) parameterization.
 
-2. **Structural trade-off result (within the multi-resonance ansatz, Phase G10):** Any physically-derived f_H(r) that resolves the v=150 tension (heavy concentrated at center) drives σ_eff at all other observation radii down by 5–300×, breaking Cloud-9, SPARC, and Lei/Wang simultaneously. The result is a logical consequence of σ_eff = f_H²·σ/m within the multi-resonance ansatz, not a general theorem about SIDM.
+2. **Structural trade-off result (within the multi-resonance ansatz, Phase G10, R88(88) honest restatement):** A physically-derived centre-peaked f_H(r) profile — specifically the Yang+ 2025 SIDM2c parameterization with f_H(0.05 r_s) = 0.81, f_H(0.5 r_s) = 0.03, f_H(1.0 r_s) = 0.04 — is incompatible with Cloud-9 and SPARC at observation radii: σ_eff(Cloud-9) ≈ 0.15 ≪ 50 (fails by ~300×), σ_eff(SPARC) ≈ 0.0001 ≪ 130 (fails by ~1000×). The result is a logical consequence of σ_eff = f_H²·σ/m with f_H(r_obs) ≪ F_H_INITIAL for centre-peaked profiles, not a general theorem about SIDM. The original (R88(56)) conditional statement "any f_H(r) that resolves the v=150 no-go" was vacuous after R88(87) demoted the v=150 entry to a tuning statement; the trade-off now stands on the f_H(r) compatibility argument alone.
 
 **Note (R88(87) demotion):** The v=150 Lei/Wang vs Sameie+ tension is **a tuning statement, not a first-class result**. Phase G7's σ_peak2 = 5.0 cm²/g at v=150 (chosen to pass Lei/Wang by 4.5×) overshoots Sameie+ 2020 by 1.5×. A smaller peak σ_peak2 ∈ (1.11, 3.33) cm²/g sits in the (0.1, 0.3) σ_eff window and satisfies both constraints simultaneously. See §9.17a for the full window analysis and the σ_peak2 PASS range.
 
@@ -917,13 +917,13 @@ Phase G7 σ_eff(150, 1.5 r_s) = 0.454 cm²/g. Against Lei/Wang lower bound (>0.1
 
 **R88(53) — Specific physical mechanism for Direction A (per 2suggestion.docx review):**
 
-If the v=150 no-go is to be resolved within the existing two-component structure, the candidate mechanism is **tidal-stripping-driven heavy-loss asymmetry**: heavy dark matter particles (the component that drives σ_HH) have a larger scattering cross-section than light particles, so they experience greater dynamical friction heating during subhalo pericenter passages and preferentially migrate to larger radii. Under tidal stripping, the heavy component is lost first because it carries more momentum and is more easily heated out. This produces a subhalo-specific f_H that drops by ≥2× relative to central halos.
+If the v=150 entry's tuning-statement tension is to be resolved within the existing two-component structure (R88(87) demoted the v=150 entry from "structural no-go" to "tuning statement about Phase G7's σ_peak2 = 5.0 choice"), the candidate mechanism is **tidal-stripping-driven heavy-loss asymmetry**: heavy dark matter particles (the component that drives σ_HH) have a larger scattering cross-section than light particles, so they experience greater dynamical friction heating during subhalo pericenter passages and preferentially migrate to larger radii. Under tidal stripping, the heavy component is lost first because it carries more momentum and is more easily heated out. This produces a subhalo-specific f_H that drops by ≥2× relative to central halos.
 
-Testable claim: **measure f_H at r_obs both before and after stripping in two-component N-body simulations.** If f_H drops by ≥2× in stripped subhalos, Direction A works. If f_H drops by <1.5×, Direction A fails and the v=150 no-go stands.
+Testable claim: **measure f_H at r_obs both before and after stripping in two-component N-body simulations.** If f_H drops by ≥2× in stripped subhalos, Direction A works. If f_H drops by <1.5×, Direction A fails and the v=150 entry's tuning statement stands (Phase G7's σ_peak2 = 5.0 remains the documented choice).
 
 **R88(54) — Direction A discriminator FAILED (Phase G9):**
 
-A controlled two-component SIDM subhalo simulation with Yang+ 2025 SIDM2c-inspired segregation (heavy concentrated at center + broad tail) + tidal stripping at 5 orbital passages was executed. Result: f_H drop factor 0.94-1.01× at all observation radii (r_obs = 0.2-2.0 r_s) and gravothermal phases (τ = 0.0-1.0). Kill criterion (f_H drop ≥ 2×) NOT MET. Direction A as originally conceived does not produce a subhalo-specific f_H drop large enough to resolve the v=150 no-go. The physical reason: heavy segregation in the tested parameterization is too weak to be stripped differentially; the broad tail at 0.8 r_s with σ = 2.0 r_s overlaps r_obs, so stripping doesn't differentiate. See §9.17b for the structural trade-off result that emerges from Path 2 testing.
+A controlled two-component SIDM subhalo simulation with Yang+ 2025 SIDM2c-inspired segregation (heavy concentrated at center + broad tail) + tidal stripping at 5 orbital passages was executed. Result: f_H drop factor 0.94-1.01× at all observation radii (r_obs = 0.2-2.0 r_s) and gravothermal phases (τ = 0.0-1.0). Kill criterion (f_H drop ≥ 2×) NOT MET. Direction A as originally conceived does not produce a subhalo-specific f_H drop large enough to alter the v=150 tuning statement. The physical reason: heavy segregation in the tested parameterization is too weak to be stripped differentially; the broad tail at 0.8 r_s with σ = 2.0 r_s overlaps r_obs, so stripping doesn't differentiate. See §9.17b for the structural trade-off result that emerges from Path 2 testing.
 
 **R88(53) — Forward-work discriminator:**
 
@@ -935,9 +935,9 @@ Both Lei/Wang and Sameie+ 2020 involve significant modeling assumptions (Jeans m
 
 **R88(53) — Honest synthesis (per 2suggestion.docx):**
 
-1. The v=150 no-go is best treated as a finding, not a flag for future "solutions." The paper should NOT claim that Direction A or B will resolve it. The honest framing (two unresolvable no-gos at the current parameter point) is the correct final answer, not a placeholder for future work.
-2. The failure mode to resist: solving the v=150 no-go with more parameters. The project has successfully avoided this trap across 10 rounds; the v=150 finding is precisely the kind of structural result that survives the addition of more degrees of freedom.
-3. The paper's structural findings are: (1) Cloud-9 vs dSph no-go at v=28↔15 (§2.6a), (2) the structural trade-off result within the multi-resonance ansatz (§9.17b). The v=150 entry is a tuning statement, not a no-go (R88(87)). These two structural findings constitute a quantitative map of where velocity-dependent SIDM with the Phase 44 parameter point cannot work. That map is the contribution. Solutions are for the next generation.
+1. The v=150 entry is best treated as a tuning statement documenting Phase G7's specific σ_peak2 = 5.0 choice (R88(87)), not a flag for future "solutions." The honest framing is that the framework's Lei/Wang PASS requires a v=150 peak large enough to overshoot Sameie+ by ~1.5×; a smaller peak in (1.11, 3.33) cm²/g satisfies both. This is the correct final answer, not a placeholder for future work. The v=150 entry is a map entry, not a no-go.
+2. The failure mode to resist: solving the v=150 tension with more parameters. The project has successfully avoided this trap across 10 rounds; the v=150 entry is precisely the kind of result that documents Phase G7's specific σ_peak2 choice, not a structural no-go.
+3. The paper's structural findings are: (1) Cloud-9 vs dSph no-go at v=28↔15 (§2.6a, ratio argument), and (2) the structural trade-off within the multi-resonance ansatz (§9.17b, R88(88) restated as a f_H(r) compatibility result independent of v=150). The v=150 entry is a tuning statement, not a no-go (R88(87)). These two structural findings constitute a quantitative map of where velocity-dependent SIDM with the Phase 44 parameter point cannot work. That map is the contribution. Solutions are for the next generation.
 
 ### 9.17b Structural trade-off result (Phase G10) — NEW first-class result within the multi-resonance ansatz
 
@@ -971,20 +971,22 @@ To test whether the v=150 no-go can be resolved within the existing framework, t
 
 **Structural trade-off result (Phase G10):**
 
-> Under any physically-derived f_H(r) that resolves the v=150 no-go (heavy concentrated at center such that f_H(r > 0.2 r_s) drops significantly), the framework cannot simultaneously satisfy Cloud-9 (σ_eff ≥ 50 at r ~ 0.5 r_s), SPARC (σ_eff ~ 0.19 at v=100, r ~ 1.5 r_s), and Lei/Wang (σ_eff > 0.1 at v=150, r ~ 1.5 r_s).
+> **R88(88) honest restatement (per ClawsGO comment #4):** A physically-derived centre-peaked f_H(r) profile — specifically the Yang+ 2025 SIDM2c parameterization with f_H(0.05 r_s) = 0.81, f_H(0.5 r_s) = 0.03, f_H(1.0 r_s) = 0.04 — is **incompatible with Cloud-9 and SPARC at observation radii**. The result is independent of the v=150 entry: at r ~ 0.5 r_s, σ_eff(Cloud-9) ≈ 0.03² × 166 ≈ 0.15 ≪ 50, failing the Cloud-9 working benchmark by factor ~300×. At r ~ 1.5 r_s, σ_eff(SPARC) ≈ 0.04² × 0.052 ≈ 0.0001 ≪ 130, failing SPARC by factor ~1000×. The Phase G7 phenomenological f_H(r) = 0.6/(1+(r/r_s/1.5)^0.7) works as well as it does **only because it is tuned** — its f_H = 0.30 at r_obs = 1 r_s is unphysically high for a SIDM2c profile, where f_H(r = 1 r_s) should be ≲ 0.05.
 
-This is not a parameterization issue. The result is a logical consequence of σ_eff = f_H(r)² · σ/m: heavy concentrated at center → f_H(r_obs) ≪ F_H_INITIAL → σ_eff at all observation radii (r > 0.2 r_s) drops by factor 5-300×. The Phase G7 phenomenological f_H(r) = 0.6/(1+(r/r_s/1.5)^0.7) works as well as it does **only because it is tuned** — its f_H = 0.30 at r_obs = 1 r_s is unphysically high for a Yang+ 2025-style SIDM2c profile, where f_H(r = 1 r_s) should be ≲ 0.05.
+> **Original (R88(56)) conditional statement, now superseded:** "Under any physically-derived f_H(r) that resolves the v=150 no-go (heavy concentrated at center such that f_H(r > 0.2 r_s) drops significantly), the framework cannot simultaneously satisfy Cloud-9 (σ_eff ≥ 50 at r ~ 0.5 r_s), SPARC (σ_eff ~ 0.19 at v=100, r ~ 1.5 r_s), and Lei/Wang (σ_eff > 0.1 at v=150, r ~ 1.5 r_s)."
 
-**Honest scope statement:** This is a result within the specific multi-resonance σ/m(v) ansatz used in this paper. It does not claim to be a general theorem about SIDM under arbitrary parameterizations. A model with substantially different σ/m(v) shape (e.g., velocity-independent σ/m, or a fundamentally different resonance structure) is not covered by this result. The result is also conditional on the two-component σ_eff = f_H²·σ/m framework with f_H(r) the only free profile. A multi-component UV model with species-specific σ/m(v) is not constrained by this result.
+> **Why the original conditional was vacuous (R88(88)):** R88(87) established that the v=150 entry is resolvable by changing σ_peak2 ∈ (1.11, 3.33) cm²/g inside the σ/m(v) parameterization — no f_H(r) surgery required. So the trigger "any f_H(r) that resolves the v=150 no-go" no longer gates the trade-off. The trade-off result now stands on the f_H(r) compatibility argument alone, not on the v=150 premise.
+
+> **What this means for the trade-off's scope:** The result is conditional on (a) the multi-resonance σ/m(v) ansatz used in this paper, and (b) the two-component σ_eff = f_H²·σ/m framework with f_H(r) the only free profile. A model with substantially different σ/m(v) shape (e.g., velocity-independent σ/m, or a fundamentally different resonance structure) is not covered. A multi-component UV model with species-specific σ/m(v) is not constrained. A model where the observation radii are different from the assumed r ~ 0.5 r_s (Cloud-9) and r ~ 1.5 r_s (SPARC) may also escape.
 
 **Implications:**
 
 1. The **Cloud-9 vs dSph structural no-go (§2.6a)** remains the paper's strongest structural result, because it is a ratio argument (σ_m(28)/σ_m(15) ratio) that is robust under the multi-resonance σ/m(v) parameterization. The v=150 entry is now a **tuning statement** (R88(87)), not a structural no-go — see §9.17a for the σ_peak2 window analysis.
 
-2. The phenomenological f_H(r) used in Phase G7/G8 is **unphysical** in the precise sense that it does not correspond to any segregation physics. It works only because it is tuned; a first-principles derivation breaks the other channels.
+2. The phenomenological f_H(r) used in Phase G7/G8 is **unphysical** in the precise sense that it does not correspond to any segregation physics. It works only because it is tuned; a first-principles derivation (Yang+ 2025 SIDM2c) gives a centre-peaked f_H(r) that fails Cloud-9 and SPARC at observation radii (factor 200-1000× below their thresholds).
 
-3. Resolving the v=150 no-go within the current framework would require either:
-   - **Direction D (observation refinement):** Wait for Sameie+ 2020 or Lei/Wang follow-up with explicit f_H(r) treatment in the Jeans modeling. Cheapest, reversible. May dissolve the no-go without new physics.
+3. Resolving the f_H(r) compatibility trade-off within the current framework would require either:
+   - **Direction D (observation refinement):** Wait for Cloud-9/SPARC follow-up with explicit f_H(r) treatment in the Jeans modeling. Cheapest, reversible. May dissolve the trade-off without new physics.
    - **Direction B (multi-species UV completion):** Two or more dark species with environment-dependent σ_m(v). The trade-off result says this is the only path that breaks the mutual exclusion. Heavy lift, uncertain payoff.
    - **Path 3 (cosmological merger histories):** Replace hand-classified halo histories (Phase G2 quiescent/active/mixed) with empirical merger trees from IllustrisTNG/EAGLE/FIRE. Could supply the missing phase diversity. Resource-intensive.
 
@@ -1006,11 +1008,11 @@ The honest framing: "framework has one structural no-go (Cloud-9 vs dSph at v=28
 
 ### 9.18 Forward-path exploration summary (R88(72)-(78)) — exhaustive search completed
 
-**Status:** R88(72)-(78) documented the exploration of four forward paths to break the structural trade-off result (§9.17b). **ALL FOUR PATHS FAILED.** This section consolidates the evidence.
+**Status:** R88(72)-(78) documented the exploration of four forward paths to test the trade-off's f_H(r) compatibility result (§9.17b, R88(88) restated). **ALL FOUR PATHS FAILED** — the trade-off holds because no tested modification can give a physically-derived centre-peaked f_H(r) the high f_H(r_obs) needed at Cloud-9 and SPARC observation radii. This section consolidates the evidence.
 
-The structural trade-off result (§9.17b) states: *"Under any physically-derived f_H(r) that resolves the v=150 no-go (heavy concentrated at center such that f_H(r > 0.2 r_s) drops significantly), the framework cannot simultaneously satisfy Cloud-9 (σ_eff ≥ 50 at r ~ 0.5 r_s), SPARC (σ_eff ~ 0.19 at v=100, r ~ 1.5 r_s), and Lei/Wang (σ_eff > 0.1 at v=150, r ~ 1.5 r_s)."*
+The structural trade-off result (§9.17b, R88(88) restated) states: *"A physically-derived centre-peaked f_H(r) profile — specifically the Yang+ 2025 SIDM2c parameterization with f_H(0.05 r_s) = 0.81, f_H(0.5 r_s) = 0.03, f_H(1.0 r_s) = 0.04 — is incompatible with Cloud-9 and SPARC at observation radii: σ_eff(Cloud-9) ≈ 0.15 ≪ 50, σ_eff(SPARC) ≈ 0.0001 ≪ 130."* (The original R88(56) conditional statement "any f_H(r) that resolves the v=150 no-go" was vacuous after R88(87) demoted the v=150 entry to a tuning statement.)
 
-Four forward paths were tested to see if any modification could break this result:
+Four forward paths were tested to see if any modification could change the trade-off's f_H(r) compatibility result (R88(88) restated — see §9.17b):
 
 #### Path A — IDE-2cSIDM (Interacting Dark Energy + Two-Component SIDM, R88(73))
 
@@ -1088,7 +1090,7 @@ The checklist is working as designed. It is the prevention layer for the R88(42)
 
 #### Conclusion
 
-**The structural trade-off result (§9.17b) holds across all four tested forward paths within the multi-resonance σ/m(v) ansatz.** No tested direction (IDE, ULDM, observation refinement) breaks the trade-off within the two-component f_H(r) framework. Caveat (R88(85)): Path B (ULDM, 2-3/8 channels) does NOT use the two-component f_H(r) mechanism — its failures are soliton-scale, not f_H-concentration failures. ULDM has no f_H to differentiate observation regions, so the v=150 no-go (which requires radius-dependent f_H) does not apply to ULDM in the same sense. The trade-off is **a property of the two-component σ_eff = f_H²·σ/m framework with multi-resonance σ/m(v)**, not a universal statement about all SIDM/ULDM theories.
+**The structural trade-off result (§9.17b, R88(88) restated as a f_H(r) compatibility result) holds across all four tested forward paths within the multi-resonance σ/m(v) ansatz.** No tested direction (IDE, ULDM, observation refinement) changes the fact that a physically-derived centre-peaked f_H(r) (Yang+ 2025 SIDM2c) gives σ_eff(Cloud-9) ≈ 0.15 ≪ 50 and σ_eff(SPARC) ≈ 0.0001 ≪ 130. Caveat (R88(85)): Path B (ULDM, 2-3/8 channels) does NOT use the two-component f_H(r) mechanism — its failures are soliton-scale, not f_H-concentration failures. ULDM has no f_H at all, so the f_H(r) compatibility trade-off does not apply to ULDM in the same sense. The trade-off is **a property of the two-component σ_eff = f_H²·σ/m framework with multi-resonance σ/m(v)**, not a universal statement about all SIDM/ULDM theories.
 
 The paper's contribution — "constraint map and no-go catalogue" — remains the correct scientific output. The structural no-go (§2.6a Cloud-9 vs dSph) and the structural trade-off result (§9.17b) are the genuine structural findings. The v=150 entry (§9.17a) is a tuning statement, not a structural no-go (R88(87)).
 
@@ -1679,7 +1681,7 @@ At every observationally relevant radius, **Phase G7 fails Sameie+ 2020 by a fac
 
 1. **§9.18 Path D "fails Lei/Wang by factor 6"** was based on a numerical error in the original Direction D analysis (σ_m(150) = 0.5 was assumed instead of 0.046). The corrected Phase 44 baseline value at the same observation radius (1.5 r_s) is 0.0041 cm²/g, which fails Lei/Wang by **factor 24**, not 6. The "factor 6" number should be **"factor 24"** (or, more precisely, "the Phase 44 baseline has no v=150 mechanism and fails Lei/Wang at all radii by a factor of 16-71 depending on radius").
 
-2. **§9.17a "PASS Lei/Wang by 4.5×, FAIL Sameie+ by 1.5×"** at r = 1.5 r_s is **correct under Phase G7**, which has a 5.0 cm²/g peak at v=150 specifically to satisfy Lei/Wang. The v=150 no-go is real but at all radii, not just 1.5 r_s.
+2. **§9.17a "PASS Lei/Wang by 4.5×, FAIL Sameie+ by 1.5×"** at r = 1.5 r_s is **correct under Phase G7**, which has a 5.0 cm²/g peak at v=150 specifically to satisfy Lei/Wang. **R88(87) updated:** this is a tuning statement (Phase G7's σ_peak2 = 5.0 choice), not a structural no-go. The PASS window σ_peak2 ∈ (1.11, 3.33) cm²/g satisfies both constraints simultaneously.
 
 3. **R88(85) §A.17 incorrectly stated "f_H → 0" at central radius for the 0.0165 value.** The actual value 0.0166 at center under Phase G7 is **0.6² × 0.046 = 0.01656**, corresponding to f_H = 0.6 (maximal, not zero). The 0.0166 was the value under the **Phase 44 baseline** with no v=150 resonance, at f_H = 0.6, not at "f_H → 0". R88(85) was wrong on this point and is corrected here.
 

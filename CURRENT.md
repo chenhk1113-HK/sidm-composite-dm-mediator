@@ -8,12 +8,12 @@
 
 ## Standing: v0.4-prelim+v19.2-D-R88(80) (2026-10-08, four-path exploration complete)
 
-**v19.2-D (R88(80))** — paper-freeze maintained. **Three first-class structural results**: (1) §2.6a Cloud-9 vs dSph tension at v=28↔15; (2) §9.17a Lei/Wang vs Sameie+ 2020 tension at v=150; (3) §9.17b structural trade-off result. §9.18 (R88(79)) added: four forward paths tested, **all four FAILED** to break the trade-off. R88(71) pre-claim checklist caught 3 errors during exploration (R88(75, 76, 78).
+**v19.2-D (R88(80))** — paper-freeze maintained. **Two first-class structural results (R88(82)+(87)+(88))**: (1) §2.6a Cloud-9 vs dSph tension at v=28↔15 (ratio argument); (2) §9.17b structural trade-off result (R88(88) restated as f_H(r) compatibility result independent of v=150). The v=150 entry (§9.17a) is a tuning statement (R88(87)). §9.18 (R88(79)) added: four forward paths tested, **all four FAILED** to break the trade-off. R88(71) pre-claim checklist caught 3 errors during exploration (R88(75, 76, 78).
 
 **Headline (v19.2-D):** Phase 44 multi-resonance σ/m(v) framework achieves **4 of 8 constrained channels** under physically motivated f_H (Phase G10 SIDM2c first-principles). Cloud-9 vs dSph tension **partially resolved** by third narrow peak at v=10 km/s (Phase G8: 3/5 UFDs now predict collapse). **§9.17b structural trade-off stands as the framework's fundamental limit.** Paper is a constraint map + no-go catalogue, submission-ready as Direction C.
 
 **v19.2-D + R88(80) history (chronological):**
-1. R88(56): Honest synthesis (R88(43)→R88(56) corrections) — 4/8 PASS, three first-class no-gos documented.
+1. R88(56): Honest synthesis (R88(43)→R88(56) corrections) — 4/8 PASS, two first-class structural results documented (R88(82)+(87); the v=150 entry was demoted from structural no-go to tuning statement in R88(87)).
 2. R88(57)–(58): Future-work plan and refinements.
 3. R88(59)–(61): Three forward paths tested, all FAILED (Path 3, Direction A, Direction B).
 4. R88(67) retracted in R88(68): "8/8 channels pass" was overclaim; R88(71) pre-claim checklist established.

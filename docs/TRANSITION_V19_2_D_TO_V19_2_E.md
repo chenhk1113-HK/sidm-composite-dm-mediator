@@ -7,13 +7,13 @@
 
 The v19.2-D milestone is the **paper-freeze milestone**. The paper (`v0.3-prelim/docs/PAPER_V1_DRAFT.md`) is submission-ready as Direction C (constraint map + no-go catalogue) for Physics of the Dark Universe or JCAP.
 
-**Three first-class structural results survive R88(82) review:**
+**Two first-class structural results survive R88(82)+(87)+(88) review (v=150 entry demoted to tuning statement):**
 
 1. **§2.6a Cloud-9 vs dSph tension (v=28↔15):** A narrow resonance at v_target=29.4 km/s satisfies Cloud-9's σ/m ≥ 50 cm²/g working benchmark but a physically-derived f_H(r) drives σ_eff at dSph velocities above Horigome+ 2025's 0.8 cm²/g limit by 3.6-23.7×. The tension partially resolves with a third narrow peak at v=10 km/s (Fischer & Yu 2026 UFD diversity).
 
 2. **§9.17a Lei/Wang vs Sameie+ 2020 tension (v=150):** Single-species σ_m(v) cannot simultaneously satisfy Lei/Wang (σ_eff > 0.1, cores in massive galaxies) and Sameie+ 2020 (σ_eff < 0.3, subhalo survival) at v=150. Phase G7's nominal PASS sits inside a factor-3 knife-edge window.
 
-3. **§9.17b Structural trade-off result (within the multi-resonance ansatz):** Any physically-derived f_H(r) that resolves the v=150 no-go (heavy concentrated at center) drives σ_eff at all other observation radii down by 5-300×, breaking Cloud-9, SPARC, and Lei/Wang simultaneously.
+3. **§9.17b Structural trade-off result (within the multi-resonance ansatz):** Any physically-derived f_H(r) that resolves the v=150 no-go (heavy concentrated at center) drives σ_eff at Cloud-9 and SPARC observation radii down by factor 200-1000×, breaking Cloud-9, SPARC, and Lei/Wang simultaneously.
 
 **Framework score (Phase G8):** 4 of 7 constrained channels pass; 3 MARGINAL; 1 FAIL (Sameie+ 2020 structural no-go). The framework is a constraint map, not a unified SIDM model.
 

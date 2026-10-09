@@ -52,7 +52,7 @@
 
 The structural trade-off result is **even more robust** than initially thought:
 
-1. **R88(55) Phase G10** showed: any physically-derived f_H(r) that resolves v=150 fails other channels
+1. **R88(55) Phase G10** showed: any physically-derived centre-peaked f_H(r) (R88(88) restated §9.17b) fails other channels
 2. **R88(56) §9.17b** elevated this to a first-class result
 3. **R88(72) Direction A** asked: can cosmological background effects change f_H enough to break the trade-off?
 4. **R88(73) Phase G17-A/B/C** answer: NO, the cosmological background is too well-constrained to break the trade-off

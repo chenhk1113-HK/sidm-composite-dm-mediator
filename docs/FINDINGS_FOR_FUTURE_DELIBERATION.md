@@ -785,7 +785,7 @@ The Minimum Publishable Unit is now ready:
 **Title:** "Phase diversity and multi-species UV in SIDM halos: a test of the structural trade-off result"
 
 **Sections:**
-1. Review of v19.2-D three first-class results (§2.6a, §9.17a, §9.17b)
+1. Review of v19.2-D two first-class structural results (§2.6a, §9.17b; the v=150 entry §9.17a was demoted to tuning statement in R88(87))
 2. Direction A discriminator (Phase G9, R88(54)): drop factor 0.94-1.01×, FAIL
 3. Path 3 cosmological synthesis (Phase G11, R88(59)/(60)): τ diversity 1478× but σ_eff diversity 1.00×
 4. Direction B multi-species UV (Phase G12, R88(61)): σ_eff bounded by f_H² · σ_m
@@ -1010,7 +1010,7 @@ CDG-2 is acknowledged as a notable observational extreme (most DM-dominated gala
 
 ### 21.1 The Structural Trade-off Theorem (R88(56) §9.17b)
 
-> Under any physically-derived f_H(r) that resolves the v=150 no-go (heavy concentrated at center such that f_H(r > 0.2 r_s) drops significantly), the framework cannot simultaneously satisfy Cloud-9 (σ_eff ≥ 50 at r ~ 0.5 r_s), SPARC (σ_eff ~ 0.19 at v=100, r ~ 1.5 r_s), and Lei/Wang (σ_eff > 0.1 at v=150, r ~ 1.5 r_s).
+> Under any physically-derived centre-peaked f_H(r) (e.g. Yang+ 2025 SIDM2c, R88(88) restated §9.17b) (heavy concentrated at center such that f_H(r > 0.2 r_s) drops significantly), the framework cannot simultaneously satisfy Cloud-9 (σ_eff ≥ 50 at r ~ 0.5 r_s), SPARC (σ_eff ~ 0.19 at v=100, r ~ 1.5 r_s), and Lei/Wang (σ_eff > 0.1 at v=150, r ~ 1.5 r_s).
 
 This theorem is the framework's strongest result. It is a geometric property of within-halo structure, not a parameter tuning issue.
 
