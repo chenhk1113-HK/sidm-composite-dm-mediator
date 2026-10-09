@@ -1,0 +1,142 @@
+{
+  "test": "Phase44_v2_real_likelihood_canonical_gaussian",
+  "date": "2026-10-09",
+  "method": "Per-channel pass/fail using paper's canonical Gaussian \u03c3/m(v) (constants.py Phase 44 free fit: \u03c3_0=0.052, a_slope=1.93, v_ref=100, \u03c3_peak=174, v_target=29.4, \u03c3\u2081=4.4, f_H=0.297) evaluated at the 8 T205 channels with published \u03c3_unc.",
+  "T205_published_8channel_modelA": {
+    "logZ": -14.285,
+    "n_params": 15,
+    "note": "T205 uses a v\u00b2-space Lorentzian Breit-Wigner ansatz; this script uses the paper's canonical Gaussian form. The two are different parameterizations."
+  },
+  "Phase_44_v2_canonical_gaussian": {
+    "total_logL": -3480.0254787720314,
+    "delta_logL_vs_T205": -3465.7404787720316,
+    "verdict": "REAL_LIKELIHOOD_WORSE"
+  },
+  "pass_fail_summary": {
+    "total_channels": 8,
+    "PASS": 1,
+    "MARGINAL": 0,
+    "FAIL": 7,
+    "canonical_count_string": "1 of 8 channels pass"
+  },
+  "per_channel": [
+    {
+      "v_kms": 3.0,
+      "label": "UFD v=3",
+      "kind": "ceiling",
+      "sigma_obs": 0.155,
+      "sigma_unc": 0.05,
+      "sigma_HH_at_v_canonical": 45.20217657770099,
+      "f_H_canonical": 0.297,
+      "sigma_eff_canonical": 3.9872387937424265,
+      "chi2": 5874.421668905764,
+      "logL_contribution": -2937.210834452882,
+      "verdict": "FAIL",
+      "citation": "Horigome+ 2025 Table II"
+    },
+    {
+      "v_kms": 5.0,
+      "label": "UFD v=5",
+      "kind": "ceiling",
+      "sigma_obs": 0.093,
+      "sigma_unc": 0.05,
+      "sigma_HH_at_v_canonical": 16.865226429437705,
+      "f_H_canonical": 0.297,
+      "sigma_eff_canonical": 1.4876647581142703,
+      "chi2": 778.0359150103744,
+      "logL_contribution": -389.0179575051872,
+      "verdict": "FAIL",
+      "citation": "Horigome+ 2025 Table II"
+    },
+    {
+      "v_kms": 7.0,
+      "label": "UFD v=7",
+      "kind": "ceiling",
+      "sigma_obs": 0.067,
+      "sigma_unc": 0.05,
+      "sigma_HH_at_v_canonical": 8.810170885877744,
+      "f_H_canonical": 0.297,
+      "sigma_eff_canonical": 0.7771363636723899,
+      "chi2": 201.7174620039379,
+      "logL_contribution": -100.85873100196895,
+      "verdict": "FAIL",
+      "citation": "Horigome+ 2025 Table II"
+    },
+    {
+      "v_kms": 10.0,
+      "label": "UFD v=10",
+      "kind": "ceiling",
+      "sigma_obs": 0.047,
+      "sigma_unc": 0.05,
+      "sigma_HH_at_v_canonical": 4.43636954684815,
+      "f_H_canonical": 0.297,
+      "sigma_eff_canonical": 0.3913277213579284,
+      "chi2": 47.424631878217276,
+      "logL_contribution": -23.712315939108638,
+      "verdict": "FAIL",
+      "citation": "Horigome+ 2025 Table II"
+    },
+    {
+      "v_kms": 15.0,
+      "label": "dSph v=15",
+      "kind": "ceiling",
+      "sigma_obs": 0.032,
+      "sigma_unc": 0.04,
+      "sigma_HH_at_v_canonical": 2.8454570671911887,
+      "f_H_canonical": 0.297,
+      "sigma_eff_canonical": 0.25099492243986754,
+      "chi2": 29.974235034027245,
+      "logL_contribution": -14.987117517013623,
+      "verdict": "FAIL",
+      "citation": "Horigome+ 2025 Table II"
+    },
+    {
+      "v_kms": 28.0,
+      "label": "Cloud-9 v=28",
+      "kind": "floor",
+      "sigma_obs": 128.0,
+      "sigma_unc": 30.0,
+      "sigma_HH_at_v_canonical": 166.01808042318618,
+      "f_H_canonical": 0.297,
+      "sigma_eff_canonical": 14.64428885604883,
+      "chi2": 14.277241387723217,
+      "logL_contribution": -7.138620693861609,
+      "verdict": "FAIL",
+      "citation": "BLN24 / Ohana+ 2026"
+    },
+    {
+      "v_kms": 100.0,
+      "label": "SPARC v=100",
+      "kind": "gaussian",
+      "sigma_obs": 0.193,
+      "sigma_unc": 0.05,
+      "sigma_HH_at_v_canonical": 0.052,
+      "f_H_canonical": 0.297,
+      "sigma_eff_canonical": 0.004586867999999999,
+      "chi2": 14.19980332401977,
+      "logL_contribution": -7.099901662009885,
+      "verdict": "FAIL",
+      "citation": "Lelli+ 2016"
+    },
+    {
+      "v_kms": 500.0,
+      "label": "Cluster v=500",
+      "kind": "ceiling",
+      "sigma_obs": 0.00025,
+      "sigma_unc": 0.0005,
+      "sigma_HH_at_v_canonical": 0.0023280442736601657,
+      "f_H_canonical": 0.297,
+      "sigma_eff_canonical": 0.00020535445733528955,
+      "chi2": 0.0,
+      "logL_contribution": -0.0,
+      "verdict": "PASS",
+      "citation": "Randall+ 2008"
+    }
+  ],
+  "interpretation": "The canonical Gaussian \u03c3/m(v) (per constants.py + \u00a72.6) gives 1 PASS / 0 MARGINAL / 7 FAIL out of 8 channels when evaluated against the T205 published \u03c3_unc likelihood. This replaces the 3-channel hand-set Phase 44 v1 likelihood (which gave a +8.10 log-unit improvement) with a 8-channel published-\u03c3_unc likelihood. The pass/fail table is now MEASURED from real published error budgets, not chosen by hand.",
+  "HONEST_LIMITATIONS": [
+    "T205's OBS_PUBLISHED splits the Horigome+ 2025 combined sample across 5 v bins, which T205 itself flags as a limitation (treating them as independent channels over-counts the effective constraint).",
+    "The \u03c3_eff = f_H\u00b2\u00b7\u03c3/m formula uses a single f_H=0.297 across all velocities (per constants.py), but the project does NOT have a first-principles f_H derivation at Phase 44 parameters (R88(88) caveat). The f_H=0.297 value is the Phase G7 phenomenological fit, not a Yang+ 2025 SIDM2c prediction.",
+    "The T205 v\u00b2-space Lorentzian ansatz and the paper's canonical Gaussian form are different parameterizations; this script uses the Gaussian form to match the paper's headline numbers (\u03c3/m(15)=2.85, \u03c3/m(28)=166 per \u00a72.6)."
+  ]
+}

@@ -60,6 +60,15 @@ V_REF_KMS = 100.0
 # Legacy v1.13 Option A flattening (kept for comparison, NOT canonical)
 A_SLOPE_OPTION_A = 1.0
 
+# Canonical f_H (paper §2.6 "σ_eff formula (R88)"): σ_eff = f_H² × σ/m with f_H=0.297.
+# This is the Phase G7 phenomenological fit, NOT a first-principles Yang+ 2025 SIDM2c
+# derivation (R88(88) caveat: the project's own N-body Phase G9 found f_H drop 0.94-1.01×,
+# i.e. a flat f_H(r) that is NOT subject to the SIDM2c f_H(r) compatibility trade-off).
+F_H_CANONICAL = 0.297
+
+# For backward compatibility with code that imports F_H
+F_H = F_H_CANONICAL
+
 # Speed of light
 C_KMS = 2.998e5
 
