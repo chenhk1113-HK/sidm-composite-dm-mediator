@@ -13,7 +13,7 @@ The v19.2-D milestone is the **paper-freeze milestone**. The paper (`v0.3-prelim
 
 2. **§9.17a Lei/Wang vs Sameie+ 2020 tension (v=150):** Single-species σ_m(v) cannot simultaneously satisfy Lei/Wang (σ_eff > 0.1, cores in massive galaxies) and Sameie+ 2020 (σ_eff < 0.3, subhalo survival) at v=150. Phase G7's nominal PASS sits inside a factor-3 knife-edge window.
 
-3. **§9.17b Structural trade-off result (within the multi-resonance ansatz):** Any physically-derived f_H(r) that resolves the v=150 no-go (heavy concentrated at center) drives σ_eff at Cloud-9 and SPARC observation radii down by factor 200-1000×, breaking Cloud-9, SPARC, and Lei/Wang simultaneously.
+3. **§9.17b Structural trade-off result (within the multi-resonance ansatz):** Any physically-derived f_H(r) that resolves the v=150 no-go (heavy concentrated at center) drives σ_eff at Cloud-9 and SPARC observation radii down by factor 300-1900×, breaking Cloud-9, SPARC, and Lei/Wang simultaneously.
 
 **Framework score (Phase G8):** 4 of 7 constrained channels pass; 3 MARGINAL; 1 FAIL (Sameie+ 2020 structural no-go). The framework is a constraint map, not a unified SIDM model.
 

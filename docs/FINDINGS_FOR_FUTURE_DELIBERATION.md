@@ -446,11 +446,13 @@ satisfy the kill criterion.
 - SIDM2c (any tau): σ_eff(150) = 0.005, Lei/Wang FAIL, Sameie+ 2020 PASS
 - **v=150 no-go RESOLVED** but at the cost of ALL sigma_eff-based channels
 
-### 16.3 The structural trade-off (THEOREM)
+### 16.3 The structural trade-off (RESULT, R88(88) restated)
 
-The Phase G10 result establishes a **structural theorem**:
+The Phase G10 result establishes a **structural result (R88(88) honest restatement, was theorem)**:
 
-> Any physically-derived f_H(r) that resolves the v=150 no-go (Sameie+ 2020 satisfied)
+> A physically-derived centre-peaked f_H(r) profile — specifically the Yang+ 2025 SIDM2c parameterization with f_H(0.05 r_s) = 0.81, f_H(0.5 r_s) = 0.03, f_H(1.0 r_s) = 0.04 — is incompatible with Cloud-9 and SPARC at observation radii. The result is independent of the v=150 entry (R88(88)). The Phase G9 N-body showed f_H drop 0.94-1.01× between subhalos and centrals — i.e. Phase G9 did NOT produce a centre-peaked segregated profile. The §9.17b result is therefore a statement about the SIDM2c *parameterization*, not a statement about the project's own N-body (which produced a flat f_H(r) and is therefore NOT subject to the trade-off).
+
+> **Original (R88(56)) conditional statement, now superseded:** "Under any physically-derived f_H(r) that resolves the v=150 no-go (Sameie+ 2020 satisfied)
 > must concentrate heavy at center. Heavy at center means light dominates at all
 > observation radii (r > 0.2 r_s). Therefore σ_eff = f_H(r)² · σ/m drops by factor
 > 5-300× relative to phenomenological f_H(r) at all radii.
@@ -916,7 +918,7 @@ Phase G13-G16 do NOT overturn this. They show:
 - Simple σ_m(v) shapes: cannot break the trade-off
 - Even with tuning: trade-off-breaking shapes fail other channels
 - Environment-dependent shapes: help but require 12× f_H drop (contradicting Phase G9)
-- The structural theorem stands as the fundamental limit of the framework
+- The structural trade-off result (R88(88) restated) stands as the fundamental limit of the SIDM2c parameterization. The project's own N-body (Phase G9) produced f_H drop 0.94-1.01× (flat), which is NOT subject to the trade-off.
 
 ### 19.6 What this means for the paper
 
@@ -1008,7 +1010,7 @@ CDG-2 is acknowledged as a notable observational extreme (most DM-dominated gala
 
 **Status:** The project has completed its exploratory phase. Four forward paths were tested to see if any modification could break the structural trade-off result (§9.17b of paper). **ALL FOUR FAILED.** This section consolidates the evidence and the final project state.
 
-### 21.1 The Structural Trade-off Theorem (R88(56) §9.17b)
+### 21.1 The Structural Trade-off Result (R88(88) §9.17b, was "Theorem" in R88(56))
 
 > Under any physically-derived centre-peaked f_H(r) (e.g. Yang+ 2025 SIDM2c, R88(88) restated §9.17b) (heavy concentrated at center such that f_H(r > 0.2 r_s) drops significantly), the framework cannot simultaneously satisfy Cloud-9 (σ_eff ≥ 50 at r ~ 0.5 r_s), SPARC (σ_eff ~ 0.19 at v=100, r ~ 1.5 r_s), and Lei/Wang (σ_eff > 0.1 at v=150, r ~ 1.5 r_s).
 
