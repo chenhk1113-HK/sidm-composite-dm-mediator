@@ -1,0 +1,139 @@
+{
+  "test": "V19_2_E_C_data_only_sigma_m_constraint",
+  "date": "2026-10-09",
+  "method": "5-param DE on log10(sigma/m) at 5 anchor velocities [10, 28, 50, 100, 200] km/s. log-log linear interpolation between anchors. f_H = 0.297 canonical. Evaluated against 4 channels in the 10-200 km/s window: UFD v=10, dSph v=15, Cloud-9 v=28, SPARC v=100. Uses T205 published sigma_unc (Horigome+ 2025, BLN24/Ohana+ 2026, Lelli+ 2016). NO multi-resonance ansatz assumed.",
+  "anchor_velocities_km_per_s": [
+    10.0,
+    28.0,
+    50.0,
+    100.0,
+    200.0
+  ],
+  "best_fit_log10_sigma_m_at_anchors": [
+    -1.9999999998914253,
+    3.124922922652577,
+    2.44500724116204,
+    0.3400444172087921,
+    2.7478890533990383
+  ],
+  "best_fit_sigma_m_at_anchors_cm2_per_g": [
+    0.010000000002500025,
+    1333.2847835789814,
+    278.61676231068077,
+    2.1879853874056336,
+    559.6146218489364
+  ],
+  "best_logL": -1.1844009367569686,
+  "per_channel": [
+    {
+      "v_kms": 10.0,
+      "label": "UFD v=10",
+      "kind": "ceiling",
+      "sigma_m_at_v": 0.010000000002500025,
+      "sigma_eff": 0.0008820900002205246,
+      "sigma_obs": 0.047,
+      "sigma_unc": 0.05,
+      "verdict": "PASS",
+      "citation": "Horigome+ 2025 Table II"
+    },
+    {
+      "v_kms": 15.0,
+      "label": "dSph v=15",
+      "kind": "ceiling",
+      "sigma_m_at_v": 1.0427964235801699,
+      "sigma_eff": 0.0919840297275832,
+      "sigma_obs": 0.032,
+      "sigma_unc": 0.04,
+      "verdict": "FAIL",
+      "citation": "Horigome+ 2025 Table II"
+    },
+    {
+      "v_kms": 28.0,
+      "label": "Cloud-9 v=28",
+      "kind": "floor",
+      "sigma_m_at_v": 1333.2847835789814,
+      "sigma_eff": 117.60771747471837,
+      "sigma_obs": 128.0,
+      "sigma_unc": 30.0,
+      "verdict": "MARGINAL",
+      "citation": "BLN24 / Ohana+ 2026"
+    },
+    {
+      "v_kms": 100.0,
+      "label": "SPARC v=100",
+      "kind": "gaussian",
+      "sigma_m_at_v": 2.1879853874056336,
+      "sigma_eff": 0.19300000303766354,
+      "sigma_obs": 0.193,
+      "sigma_unc": 0.05,
+      "verdict": "PASS",
+      "citation": "Lelli+ 2016"
+    }
+  ],
+  "pass_fail_summary": {
+    "PASS": 2,
+    "MARGINAL": 1,
+    "FAIL": 1,
+    "channels_in_window": 4
+  },
+  "sampled_velocities": [
+    {
+      "v_kms": 10.0,
+      "sigma_m_cm2_per_g": 0.010000000002500025,
+      "sigma_eff": 0.0008820900002205246
+    },
+    {
+      "v_kms": 15.0,
+      "sigma_m_cm2_per_g": 1.0427964235801699,
+      "sigma_eff": 0.0919840297275832
+    },
+    {
+      "v_kms": 20.0,
+      "sigma_m_cm2_per_g": 28.1925844372908,
+      "sigma_eff": 2.486839680628984
+    },
+    {
+      "v_kms": 28.0,
+      "sigma_m_cm2_per_g": 1333.2847835789814,
+      "sigma_eff": 117.60771747471837
+    },
+    {
+      "v_kms": 35.0,
+      "sigma_m_cm2_per_g": 729.8891361812199,
+      "sigma_eff": 64.38279081340923
+    },
+    {
+      "v_kms": 50.0,
+      "sigma_m_cm2_per_g": 278.61676231068077,
+      "sigma_eff": 24.576505986662838
+    },
+    {
+      "v_kms": 75.0,
+      "sigma_m_cm2_per_g": 16.356219258826226,
+      "sigma_eff": 1.4427657446018025
+    },
+    {
+      "v_kms": 100.0,
+      "sigma_m_cm2_per_g": 2.1879853874056336,
+      "sigma_eff": 0.19300000303766354
+    },
+    {
+      "v_kms": 150.0,
+      "sigma_m_cm2_per_g": 56.04582119790623,
+      "sigma_eff": 4.94374584204611
+    },
+    {
+      "v_kms": 200.0,
+      "sigma_m_cm2_per_g": 559.6146218489364,
+      "sigma_eff": 49.363046178672825
+    }
+  ],
+  "comparison_to_paper_canonical": "Paper canonical Gaussian sigma/m(v) (per constants.py + section 2.6): sigma_0=0.052, a_slope=1.93, sigma_peak=174, v_target=29.4, sigma_1=4.4. At v=28: sigma/m = 166 cm^2/g. At v=100: sigma/m = 0.052 cm^2/g. The data-only result should agree with the canonical form IF the data constrains the multi-resonance Gaussian. If the data-only result differs, the canonical form is over-fit to the data.",
+  "interpretation": "5-param DE on log10(sigma/m) at 5 anchor velocities, evaluated against 4 T205 channels in the 10-200 km/s window: 2 PASS / 1 MARGINAL / 1 FAIL, log L = -1.184. This is a data-only constraint that does NOT assume the paper's canonical multi-resonance Gaussian form. The result at the anchor velocities is the data-preferred sigma/m(v) profile.",
+  "HONEST_LIMITATIONS": [
+    "5 free parameters (sigma/m at 5 anchors) is a smooth interpolation. The 'true' sigma/m(v) could have more structure between the anchors (e.g., narrow resonance peaks narrower than the bin width).",
+    "The 4 channels in [10, 200] km/s are not all independent \u2014 UFD v=10 and dSph v=15 come from the same Horigome+ 2025 combined analysis.",
+    "f_H = 0.297 is canonical per R88(88), but the project's own N-body (Phase G9) found f_H is flat (0.94-1.01x). With f_H=1, the sigma_eff values are 11x higher, which would change some PASS/FAIL verdicts.",
+    "T205's sigma_unc for Horigome+ 2025 are approximate extractions from Table II, not full posterior chains. The constraint is approximate."
+  ]
+}
