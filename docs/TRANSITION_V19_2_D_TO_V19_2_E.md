@@ -15,7 +15,7 @@ The v19.2-D milestone is the **paper-freeze milestone**. The paper (`v0.3-prelim
 
 3. **§9.17b Structural trade-off result (within the multi-resonance ansatz):** Any physically-derived f_H(r) that resolves the v=150 no-go (heavy concentrated at center) drives σ_eff at Cloud-9 and SPARC observation radii down by factor 300-1900×, breaking Cloud-9, SPARC, and Lei/Wang simultaneously.
 
-**Framework score (Phase G8):** 4 of 7 constrained channels pass; 3 MARGINAL; 1 FAIL (Sameie+ 2020 structural no-go). The framework is a constraint map, not a unified SIDM model.
+**Framework score (per A.15 canonical, R88(52) honest + v19.2-E A.1 caveat):** 8 constrained channels (**4 PASS / 3 MARGINAL / 1 FAIL**; canonical, machine-generated from `scripts/canonical_numbers.py`). PASS = Cluster v=500, dSph v=10, Cloud-9 v=28, SPARC v=100. MARGINAL = UFD v=3, UFD v=5, UFD v=15. FAIL = dSph v=7. **v19.2-E A.1 caveat:** under the promoted real likelihood (T205 8-channel published-σ_unc), the canonical Phase 44 parameters pass **1 of 8** (Cluster only); the 5-parameter DE best-fit (v19.2-E A.2) passes **5 of 8**. The "4 of 7" framing is RETIRED (ClawsGO #7 §4: Lei/Wang double-counted in old table; the v=150 entry is a TUNING statement, not a separate PASS). The framework is a constraint map, not a unified SIDM model.
 
 **Four forward paths tested (R88(72)-(78), ALL FAILED):**
 - A (IDE-2cSIDM): 4/8 → 4/8 (no improvement)

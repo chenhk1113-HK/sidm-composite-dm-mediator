@@ -138,4 +138,4 @@ Full partial-wave, m_φ = 1-10 MeV (α m_χ/m_φ = 2-300):
 - v19.2-F track: branch `wip/v19.2-F-init`
 - §2.1 of PAPER_V1_DRAFT.md: σ/m(v) parameterization (now annotated with Phase 2 background caveat)
 - §2.8 of PAPER_V1_DRAFT.md (NEW): UV status of σ/m(v) (this Phase 1+2 result)
-- §10 of PAPER_V1_DRAFT.md: five existing UV completion no-gos (now joined by a sixth from this result)
+- §10 of PAPER_V1_DRAFT.md: five existing UV completion no-gos (the §2.8 v19.2-F result is an **open requirement**, NOT a sixth no-go — per ClawsGO #6 Fix 3)

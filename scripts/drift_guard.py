@@ -214,6 +214,131 @@ def check_first_class_count_in_doc(doc_text, canonical_count, doc_name):
     return drifts
 
 
+def check_abstract_channel_count(doc_text, canonical_count_string, doc_name):
+    """ClawsGO #7 §4: detect denominator self-inconsistency in the abstract.
+
+    The canonical convention is: 8 channels (4 PASS / 3 MARGINAL / 1 FAIL).
+    The retired '4 of 7' framing should not appear in headline docs.
+    """
+    drifts = []
+    # Search for "4 of 7" with surrounding context
+    for match in re.finditer(r'\b4\s+of\s+7\b', doc_text, re.IGNORECASE):
+        start = max(0, match.start() - 300)
+        end = min(len(doc_text), match.end() + 300)
+        context = doc_text[start:end].lower()
+        # Skip in retraction / overclaim / historical context
+        skip_keywords = [
+            "retired", "retract", "overclaim", "double-count", "clawsgo #7",
+            "r88(82) process finding", "r88(80)", "r88(56)", "r88(68)",
+            "current claim", "reframe headline", "reviewer", "channel count pruning",
+            "short-term", "long-term", "future work",
+            "honest framing", "more accurate", "honest limit",
+            "result: 4 of 7", "verdict from 4 of 5",
+        ]
+        if any(kw in context for kw in skip_keywords):
+            continue
+        drifts.append({
+            "type": "retired_4_of_7_framing",
+            "doc": doc_name,
+            "context": match.group(0),
+            "canonical": canonical_count_string,
+            "severity": "WARN",
+        })
+    return drifts
+
+
+def check_no_go_catalogue_membership(doc_text, doc_name):
+    """ClawsGO #7 §2: detect stale no-go catalogue membership.
+
+    The v=150 Lei/Wang entry is a TUNING statement (R88(87)), NOT a structural
+    no-go. The §2.8 background UV derivation is an OPEN requirement, NOT a
+    sixth no-go. These phrases should not appear in headline docs.
+    """
+    drifts = []
+    # Stale: "two structural no-gos" (the abstract's two are STRUCTURAL +
+    # STRUCTURAL, but old framing said "two no-gos including v=150")
+    start = 0
+    for match in re.finditer(r'two\s+(?:identified\s+|clean\s+structural\s+)?no-gos?\s+at\s+different\s+velocity', doc_text, re.IGNORECASE):
+        start = max(0, match.start() - 200)
+        end = min(len(doc_text), match.end() + 200)
+        context = doc_text[start:end].lower()
+        skip_keywords = ["retired", "r88(56)", "r88(82)", "r88(80)", "r88(68)", "r88(87) demoted"]
+        if any(kw in context for kw in skip_keywords):
+            continue
+        drifts.append({
+            "type": "stale_two_no_gos_at_different_velocity",
+            "doc": doc_name,
+            "context": match.group(0),
+            "canonical": "Per R88(87)+(88): one structural no-go + one structural trade-off (v=150 is TUNING)",
+            "severity": "WARN",
+        })
+
+    # Stale: "second clean structural no-go at v=150" (the §9.17b implication
+    # block reinstates the v=150 premise that the rest of the paper retired)
+    for match in re.finditer(r'second\s+clean\s+structural\s+no-go\s+at\s+v=150', doc_text, re.IGNORECASE):
+        start = max(0, match.start() - 300)
+        end = min(len(doc_text), match.end() + 300)
+        context = doc_text[start:end].lower()
+        skip_keywords = ["not", "retired", "clawsgo #7", "r88(87)", "r88(88)"]
+        if any(kw in context for kw in skip_keywords):
+            continue
+        drifts.append({
+            "type": "stale_second_structural_no_go_v150",
+            "doc": doc_name,
+            "context": match.group(0),
+            "canonical": "v=150 is a TUNING statement (R88(87)), not a structural no-go",
+            "severity": "WARN",
+        })
+
+    # Stale: "sixth UV no-go" or "fifth no-go" with §2.8
+    for match in re.finditer(r'sixth\s+(?:uv\s+)?(?:completion\s+)?no-go', doc_text, re.IGNORECASE):
+        start = max(0, match.start() - 200)
+        end = min(len(doc_text), match.end() + 200)
+        context = doc_text[start:end].lower()
+        skip_keywords = ["retired", "open requirement", "not a no-go", "not as a sixth no-go", "clawsgo #6", "r88(88)"]
+        if any(kw in context for kw in skip_keywords):
+            continue
+        drifts.append({
+            "type": "stale_sixth_no_go",
+            "doc": doc_name,
+            "context": match.group(0),
+            "canonical": "Per ClawsGO #6 Fix 3: the §2.8 v19.2-F result is an OPEN requirement, not a sixth no-go",
+            "severity": "WARN",
+        })
+
+    return drifts
+
+
+def check_tradeoff_factor_scatter(doc_text, doc_name):
+    """ClawsGO #7 §5: detect trade-off factor drift.
+
+    The canonical bare-SIDM2c values are Cloud-9 factor ~300x and SPARC factor
+    ~1900x. The 250x/200x in the §9.17b Phase G10 table are the SIDM2c-with-
+    gravothermal-at-tau=0.3 variant and should be annotated as such.
+    """
+    drifts = []
+    # Search for "factor 250 below" or "factor 200 below" without the SIDM2c annotation
+    for match in re.finditer(r'factor\s+(250|200)\s+below', doc_text, re.IGNORECASE):
+        start = max(0, match.start() - 200)
+        end = min(len(doc_text), match.end() + 200)
+        context = doc_text[start:end].lower()
+        # Skip if annotated as SIDM2c tau=0.3 column
+        if "sidm2c" in context and ("τ=0.3" in context or "tau=0.3" in context or "gravothermal" in context):
+            continue
+        # Skip if explicitly retired
+        skip_keywords = ["retired", "clawsgo #7", "§a.15"]
+        if any(kw in context for kw in skip_keywords):
+            continue
+        drifts.append({
+            "type": "tradeoff_factor_scatter",
+            "doc": doc_name,
+            "context": match.group(0),
+            "canonical": "Annotate as SIDM2c (τ=0.3) column, not bare SIDM2c",
+            "severity": "WARN",
+        })
+    return drifts
+
+
 def main():
     print("=" * 70)
     print("V19.2-E D — Drift-guard (ClawsGO B.2)")
@@ -252,6 +377,11 @@ def main():
         ("TRANSITION.md", _REPO / "docs" / "TRANSITION_V19_2_D_TO_V19_2_E.md"),
     ]
 
+    # Canonical abstract channel count (ClawsGO #7 §4)
+    canonical_abstract_count = canonical.get(
+        "canonical_abstract_channel_count", {}
+    ).get("canonical_count_string", "8 constrained channels (4 PASS / 3 MARGINAL / 1 FAIL)")
+
     all_drifts = []
     for doc_name, doc_path in headline_docs:
         doc_text = load_doc(doc_path)
@@ -262,6 +392,10 @@ def main():
         drifts += check_sparc_factor_in_doc(doc_text, canonical_sparc_factor, doc_name)
         drifts += check_halo_prefactors_in_doc(doc_text, doc_name)
         drifts += check_first_class_count_in_doc(doc_text, canonical_first_class, doc_name)
+        # ClawsGO #7 checks
+        drifts += check_abstract_channel_count(doc_text, canonical_abstract_count, doc_name)
+        drifts += check_no_go_catalogue_membership(doc_text, doc_name)
+        drifts += check_tradeoff_factor_scatter(doc_text, doc_name)
         all_drifts += drifts
 
     # Also check the v19.2-E round docs for halo-prefactor drift only.

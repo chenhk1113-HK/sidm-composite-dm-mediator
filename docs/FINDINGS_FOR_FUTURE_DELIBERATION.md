@@ -431,12 +431,15 @@ satisfy the kill criterion.
 | 2.00 | 0.03 |
 
 **Channel impact (sigma_eff at r_obs, Phase G8 sigma/m):**
-| Channel | Phase G7 phenom. | SIDM2c | Threshold | Verdict change |
-|---------|------------------|--------|-----------|----------------|
+
+*Note (R88(88) per ClawsGO comment #7 §5): the SIDM2c column reflects the SIDM2c f_H(r) parameterization with gravothermal evolution at τ=0.3. The numerical factor (250/200 below) is the SIDM2c τ=0.3 variant, NOT bare SIDM2c. The bare-SIDM2c values at observation radii (used in the abstract and §9.17b prose) are factor ~300 below for Cloud-9 and ~1900 below for SPARC (canonical, machine-generated from `scripts/canonical_numbers.py`). The trade-off's existence is the same; the numerical factor is column-dependent.*
+
+| Channel | Phase G7 phenom. | SIDM2c (τ=0.3) | Threshold | Verdict change |
+|---------|------------------|------------------|-----------|----------------|
 | Horigome | 0.06 | 0.004 | <0.8 | PASS (more margin) |
-| Cloud-9 inner | 58.9 | 0.20 | >50 | PASS → FAIL (factor 250 below) |
+| Cloud-9 inner | 58.9 | 0.20 | >50 | PASS → FAIL (factor 250 below, SIDM2c τ=0.3 column; bare-SIDM2c factor ~300 below — see note above) |
 | Cloud-9 V_max | 43.4 | 0.15 | >50 | MARGINAL → FAIL |
-| SPARC | 0.091 | 0.001 | ~0.19 | MARGINAL → FAIL (factor 200 below) |
+| SPARC | 0.091 | 0.001 | ~0.19 | MARGINAL → FAIL (factor 200 below, SIDM2c τ=0.3 column; bare-SIDM2c factor ~1900 below — see note above) |
 | Lei/Wang | 0.45 | 0.005 | 0.1-0.3 | KNIFE-EDGE → FAIL |
 | Sameie+ 2020 | 0.45 | 0.005 | <0.3 | FAIL → PASS (now satisfied!) |
 | Cluster | 0.002 | 0.00002 | <0.001 | MARGINAL → PASS |

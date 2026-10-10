@@ -269,6 +269,165 @@
     ],
     "tuning_statement": [
       "section 9.17a: v=150 entry demoted from structural no-go to tuning statement (R88(87)). Phase G7 sigma_peak2 = 5.0 overshoots Sameie+ 2020 by 1.5x; smaller sigma_peak2 in (1.11, 3.33) cm^2/g satisfies both constraints."
+    ],
+    "open_requirement": [
+      "section 2.8: Background UV derivation (ClawsGO #6 Fix 3 - NOT a no-go; v19.2-F Phase 3 will test whether any two/three-mediator UV sector produces the phenomenological sigma/m(v))."
+    ],
+    "UV_completion_no_gos_S10_five": [
+      "10.2a: Magnetic dipole DM (CONSTRAINT)",
+      "10.2b: Hidden U(1) + 10 MeV pseudo-Dirac (CONSTRAINT)",
+      "10.2c: GeV-scale inelastic DM (CONSTRAINT)",
+      "10.2d: Published best-fit p-wave resonance (CONSTRAINT)",
+      "10 (T184): One-mediator UV systematic (SCALING_ARGUMENT; per ClawsGO #7, this is the LEAST specific of the five - rename to 'no-go constraints/exclusions at the Phase-44 baseline' or state which are theorems and which are arguments)."
     ]
+  },
+  "no_go_catalogue": {
+    "_meta": {
+      "description": "Canonical no-go catalogue for v19.2-D-FREEZE + v19.2-F. Per ClawsGO #5 B.2 + #7, this is the single source of truth for the paper's structural findings. The 'structural_findings' block (in compute_canonical_numbers) is the summary; this block is the detailed version with per-entry status, affected channels, and trade-off factors.",
+      "v19_2_D_FINAL": "v19.2-D-milestone-R88-final (commit 53ce85e)",
+      "v19_2_F_P1_plus_2": "0ef4def (ClawsGO #6 fixes applied)",
+      "status_legend": {
+        "STRUCTURAL": "Survives all tested forward paths. First-class result.",
+        "TUNING": "Specific parameter choice that fails, but the framework has a parameter region that passes (PASS window exists). Not a no-go.",
+        "OPEN": "Open requirement, NOT a no-go. UV-status question pending Phase 3.",
+        "PASS": "Framework passes the channel under all canonical choices."
+      }
+    },
+    "entries": [
+      {
+        "id": "ng-c9-dsph",
+        "name": "Cloud-9 vs dSph tension (v=28<->15)",
+        "status": "STRUCTURAL",
+        "section": "2.6a",
+        "affected_channels": [
+          "Cloud-9 v=28 (BLN24/Ohana+ 2026 floor 128)",
+          "dSph v=15 (Horigome+ 2025 ceiling 0.032)"
+        ],
+        "argument": "sigma_m(28)/sigma_m(15) ratio; the framework's resonance at v=29.4 necessarily overproduces sigma/m at v=15 by 7.8-25.7x (R88(82)).",
+        "factor_vs_constraint": {
+          "dsph_v15_factor_above_ceiling": 7.8
+        },
+        "R88_reference": "R88(82), R88(88)"
+      },
+      {
+        "id": "ng-tradeoff-fH",
+        "name": "f_H(r) compatibility result (structural trade-off, R88(88) restated)",
+        "status": "STRUCTURAL",
+        "section": "9.17b (R88(88) restatement)",
+        "affected_channels": [
+          "Cloud-9 v=28 (sigma_eff target 50)",
+          "SPARC v=100 (sigma_eff target 0.19)"
+        ],
+        "argument": "A physically-derived centre-peaked f_H(r) profile (Yang+ 2025 SIDM2c parameterization: f_H(0.05 r_s)=0.81, f_H(0.5 r_s)=0.03, f_H(1.0 r_s)=0.04) is incompatible with Cloud-9 and SPARC at observation radii: sigma_eff(Cloud-9) ~0.15 << 50 (fails by ~300x), sigma_eff(SPARC) ~0.0001 << 0.19 (fails by ~1900x).",
+        "factor_vs_constraint": {
+          "cloud9_factor_below_50": 300.0,
+          "sparc_factor_below_0p19": 1900.0
+        },
+        "R88_reference": "R88(88), R88(82), R88(86)",
+        "caveat": "Statement about SIDM2c parameterization, not the project's own N-body (Phase G9 found f_H drop 0.94-1.01x, which is NOT subject to the trade-off)."
+      },
+      {
+        "id": "ng-v150",
+        "name": "v=150 Lei/Wang vs Sameie+ 2020 (demoted R88(87))",
+        "status": "TUNING",
+        "section": "9.17a (R88(87) demotion)",
+        "affected_channels": [
+          "Lei/Wang v=150 (floor 0.1)",
+          "Sameie+ 2020 v=150 (ceiling 0.3)"
+        ],
+        "argument": "Phase G7's sigma_peak2 = 5.0 overshoots Sameie+ 2020 by 1.5x. But the PASS window sigma_peak2 in (1.11, 3.33) cm^2/g satisfies both constraints simultaneously. The 'no-go' is a tuning statement about Phase G7's specific choice, NOT a structural constraint of the framework.",
+        "factor_vs_constraint": {
+          "pass_window_sigma_peak2_cm2_per_g_min": 1.11,
+          "pass_window_sigma_peak2_cm2_per_g_max": 3.33
+        },
+        "R88_reference": "R88(87)"
+      },
+      {
+        "id": "ng-uv-background",
+        "name": "Background UV derivation (open requirement, NOT a no-go)",
+        "status": "OPEN",
+        "section": "2.8 (v19.2-F Phase 1+2)",
+        "affected_channels": [
+          "all channels (background sigma/m)"
+        ],
+        "argument": "The background sigma/m = 0.052*(100/v)^1.93 is a phenomenological fit. The framework's named 200 eV Yukawa at alpha_chi = 6.8e-7 fails at v=100 by 55x and overproduces at v=10 by ~4300x; the fitted slope is closer to a Sommerfeld v^-2 near a t-channel bound-state resonance (M2 mechanism, Chu+ 2018 [7]). A first-principles derivation is open (v19.2-F Phase 3). NOT a UV completion no-go while M2 is open.",
+        "factor_vs_constraint": {
+          "yukawa_at_alpha_chi_v100_factor_over_fitted": 55.0,
+          "yukawa_at_alpha_chi_v10_factor_over_fitted": 4300.0
+        },
+        "R88_reference": "ClawsGO Phase 1+2 (v19.2-F P1+2)"
+      }
+    ],
+    "UV_completion_no_gos_S10": [
+      {
+        "id": "uv-ng-magnetic-dipole",
+        "name": "Magnetic dipole DM",
+        "section": "10.2a",
+        "status": "CONSTRAINT",
+        "note": "Cross-section ~18 orders above LZ limit; not a UV completion theorem but a constraint exclusion at the Phase 44 baseline."
+      },
+      {
+        "id": "uv-ng-hidden-U1-pseudo-Dirac",
+        "name": "Hidden U(1) + 10 MeV pseudo-Dirac",
+        "section": "10.2b",
+        "status": "CONSTRAINT",
+        "note": "Same as 10.2a - constraint exclusion at the Phase 44 baseline."
+      },
+      {
+        "id": "uv-ng-GeV-inelastic",
+        "name": "GeV-scale inelastic DM",
+        "section": "10.2c",
+        "status": "CONSTRAINT"
+      },
+      {
+        "id": "uv-ng-pwave-resonance",
+        "name": "Published best-fit p-wave resonance (Chu+ 2019)",
+        "section": "10.2d",
+        "status": "CONSTRAINT"
+      },
+      {
+        "id": "uv-ng-one-mediator-systematic",
+        "name": "One-mediator UV systematic (T184 scaling argument)",
+        "section": "10 (T184)",
+        "status": "SCALING_ARGUMENT",
+        "note": "T184 is a general scaling argument rather than a specific UV construction. Per the abstract's 'five UV completion no-go theorems' framing, this entry is the LEAST specific of the five. Per ClawsGO #7, the abstract should either rename to 'no-go constraints/exclusions at the Phase-44 baseline' or state which are theorems and which are arguments."
+      }
+    ]
+  },
+  "canonical_abstract_channel_count": {
+    "n_channels_total": 8,
+    "n_PASS": 4,
+    "n_MARGINAL": 3,
+    "n_FAIL": 1,
+    "canonical_count_string": "8 constrained channels (4 PASS / 3 MARGINAL / 1 FAIL)",
+    "retired_conventions": [
+      "4 of 7 constrained channels pass (RETIRED: Lei/Wang double-counted in old table; see ClawsGO #7 \u00a74)",
+      "two structural no-gos (RETIRED R88(87): v=150 demoted to tuning statement)"
+    ],
+    "PASS_channels": [
+      "Cluster v=500 (Randall+ 2008 strong lensing)",
+      "dSph v=10 (Horigome+ 2025 ceiling)",
+      "Cloud-9 v=28 (BLN24/Ohana+ 2026 floor 128, canonical Phase 44)",
+      "SPARC v=100 (Lelli+ 2016, canonical Phase 44)"
+    ],
+    "MARGINAL_channels": [
+      "UFD v=3 (Horigome+ 2025 ceiling)",
+      "UFD v=5 (Horigome+ 2025 ceiling)",
+      "UFD v=15 (Horigome+ 2025 ceiling, within 1sigma)"
+    ],
+    "FAIL_channels": [
+      "dSph v=7 (Horigome+ 2025 ceiling, factor 11.6x over)"
+    ],
+    "note_on_lei_wang": "Lei/Wang+ 2026 v=150 mass bound is the SAME constraint as Sameie+ 2020 v=150 (see ClawsGO #7 \u00a72b Lei/Wang double-count). It is the SAME channel counted under different names; the v=150 entry is the R88(87) TUNING statement, not a separate PASS. In the 8-channel count above, Lei/Wang is folded into the v=150 TUNING entry and NOT counted in the 4 PASS / 3 MARGINAL / 1 FAIL."
+  },
+  "canonical_tradeoff_factors": {
+    "cloud9_factor_below_50": 300.0,
+    "sparc_factor_below_0p19": 1900.0,
+    "canonical_text": "sigma_eff(Cloud-9) ~ 0.15 vs 50 (factor ~300x), sigma_eff(SPARC) ~ 0.0001 vs 0.19 (factor ~1900x)",
+    "retired_values": [
+      "250x / 200x in \u00a79.17b table (:1245, :1247) - RETIRED (different calc: SIDM2c with gravothermal at tau=0.3, not bare SIDM2c)",
+      "5-300 / 200-1000 / 250 / '130' range in older drafts - RETIRED per ClawsGO #5"
+    ],
+    "R88_reference": "R88(88), ClawsGO #5+#7"
   }
 }
