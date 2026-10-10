@@ -109,15 +109,19 @@ Full partial-wave, m_φ = 1-10 MeV (α m_χ/m_φ = 2-300):
 **A single light Yukawa does NOT reproduce the fitted background at the framework's parameters.** The background σ/m = 0.052·(100/v)^1.93 wants either:
 
 1. A mediator of **m_φ ≈ 86 keV** (428× the framework's 200 eV) — reproducing the shape to ~2×; **OR**
-2. A **resonant (t-channel Sommerfeld)** account of the slope, whose near-threshold v⁻² behaviour is naturally close to −1.93 — the M2 mechanism, to be tested in Phase 3.
+2. A **resonant (t-channel Sommerfeld)** account of the slope, whose near-threshold v⁻² behaviour is *closer to* −1.93 — the M2 mechanism, to be tested in Phase 3.
 
 **Per the plan:** the Phase-2 gate fails at the Born level — **exactly the condition for pivoting to paper (A) UNLESS Phase 3 passes.** Phase 3 is the kill/continue: scan (α_χ, m_φ/m_χ) for resonant poles, locate v_res, peak height (unitarity-capped), and width. If any (α_χ, m_φ/m_χ) with m_χ = 1 GeV places a resonance at v ≈ 29 km/s with σ_peak ≈ 174 cm²/g and Γ/v ≈ 0.05-0.10, AND the required α_χ is consistent with the hierarchy, paper (B) is alive. If not, paper (A) wins: "the Cloud-9 feature requires either ~10⁻⁹ s-channel tuning or a coupling/scale outside the range compatible with the background and hierarchy."
 
 **Consequences for the v19.2-D-FREEZE paper:**
 - The background σ/m(v) of §2.1 is **phenomenological**, not derived from the framework's named 200 eV Yukawa.
 - The "Yukawa-type suppression, Feng+ 2009 [5]" label in §2.1 is a placeholder for the family of velocity-dependent suppression mechanisms; the specific Feng+ 2009 [5] formula is NOT the framework's background (which has slope −1.93, not Feng's −3.83 at m_φ = 200 eV).
-- The fitted slope a = 1.93 is consistent with the M2 (Sommerfeld/t-channel resonance) mechanism, Chu, Hambye & Tytgat 2018 [7].
+- The fitted slope a = 1.93 is *closer to* (not "is") the M2 (Sommerfeld/t-channel resonance) mechanism, Chu, Hambye & Tytgat 2018 [7] — a hypothesis to be tested in Phase 3, not a stated property of the fit.
 - This is a **paper update**, not a paper retraction: the σ(v) phenomenology is correct as a fit; what's wrong is the claim that it's *the* model's 200 eV Yukawa. The honest limit is added to §2.8 of the paper.
+
+**Coupling attribution (ClawsGO #6).** The 78× overproduction at v = 10 km/s is at the **norm-matched** coupling α = 9.2×10⁻⁸ (which makes σ/m(100) = 0.052 by construction). The framework's *derived* coupling is α_χ = 6.8×10⁻⁷, which is 7.4× larger in α and 54.6× larger in σ_T ∝ α². At α_χ, the 200 eV Yukawa fails at v = 100 by 55× (σ/m(100) = 2.84 vs fitted 0.052) and overproduces at v = 10 by ~4300×, not 78×. Both couplings make the Horigome low-v tension *worse*, not better; the framework's α_χ is a sharper statement because it shows the 200 eV Yukawa is already inconsistent with the SPARC normalization.
+
+**Caveat (v19.2-E A.1, ClawsGO #6).** Under the promoted real likelihood (T205 8-channel published-σ_unc, see §9.17), the canonical Phase 44 parameters (σ₀ = 0.052, a = 1.93, σ_peak = 174, v_target = 29.4, σ₁ = 4.4) pass **1 of 8 channels** (Cluster v=500 only). The 5-parameter DE best-fit (v19.2-E A.2) at the same likelihood passes **5 of 8** (sigma_peak=2026, sigma_1=1.2). The data prefer a *different* (5-param DE) point at 5/8. The "canonical" σ(v) presented in the v19.2-D paper is the v1 free-fit result; v19.2-E shows the data prefer a different point. This caveat belongs wherever "canonical" appears in the paper, including §2.1 and §2.8.
 
 ## Caveats
 
