@@ -70,7 +70,7 @@ The Yukawa potential V(r) = -α_D exp(-m_A' r) / r has range 1/m_A', which is **
      ≈ 4,000 fm
 ```
 
-For a resonance to appear, the potential range must be at least comparable to the de Broglie wavelength. This requires **m_A' ≲ 50 keV** (i.e., m_A'/m_χ ≲ 5 × 10⁻⁵). At the framework's named 200 eV Yukawa (m_A'/m_χ = 2 × 10⁻⁷), the range is **~10⁶ fm (1 nm), ~250× LARGER than the wavelength (~4027 fm)** — the Yukawa is in the **Born regime (κ ≪ 1)** where it behaves like a 1/r Coulomb potential, smooth and monotonic. The framework's coupling α_χ = 6.8 × 10⁻⁷ gives σ/m(29.4) ~ 0.05 cm²/g (way below target), so the framework's coupling is too small by factor ~10⁴ to reach σ/m(29.4) = 174 cm²/g. **(The "~4000× smaller than the wavelength" sentence in the original v19.2-F Phase 3 doc was wrong by ~10⁹ — ClawsGO #8 §5.)**
+For a resonance to appear, the potential range must be at least comparable to the de Broglie wavelength. This requires **m_A' ≲ 50 keV** (i.e., m_A'/m_χ ≲ 5 × 10⁻⁵). At the framework's named 200 eV Yukawa (m_A'/m_χ = 2 × 10⁻⁷), the range is **~10⁶ fm (1 nm), ~250× LARGER than the wavelength (~4027 fm)** — the Yukawa is in the **Born regime (κ ≪ 1)** where it behaves like a 1/r Coulomb potential, smooth and monotonic. **The framework's coupling α_χ = 6.8 × 10⁻⁷ with m_A' = 200 eV gives σ/m(29.4) = 3,755 cm²/g — factor ~22× ABOVE the target 174 cm²/g, factor ~6,800× above the fitted 0.55 cm²/g (Phase 44 free fit), per the framework's own `t40_yukawa_sigma_m.py` formula (Feng+ 2009 / Tulin-Yu 2018 Eq. 2.14).** The framework OVERSHOOTS, with the wrong slope (−3.7 vs fitted −1.93). **(ClawsGO #10 §2: the previous "σ/m(29.4) ~ 0.05" claim in this doc was wrong by ~6000× and inverted in sign; corrected here using the framework's actual formula.)** **(ClawsGO #8 §5: the previous "~4000× smaller than the wavelength" sentence was wrong by ~10⁹.)**
 
 This means **no resonance can appear at v = 29.4 km/s from any Yukawa with m_A' ≳ 50 keV**. The Phase 3 scan went down to m_A'/m_χ = 0.01 (m_A' = 10 MeV), still 200× above the 50 keV bound, and the closest resonance was at v = **2934 km/s (CORRECTED)** — the resonance only appears when v is large enough that λ_dB ~ 1/m_A'.
 
@@ -155,7 +155,7 @@ ClawsGO correctly identified that the project's Phase-3 scan did NOT cover m_A' 
 
 2. **The framework's coupling-mediator pairing is incompatible.** The framework's derived α_χ = 6.8e-7 with m_A' = 200 eV. The Born-fit result requires α_D ~ 10⁻⁶ AND m_A' ~ 10 keV (a factor ~10⁵ in m_A' from the framework's 200 eV). The product α_D × (m_A'/m_χ)² must be ~10⁻⁵ for the Born fit; the framework's product is α_D × (200 eV / 1 GeV)² ~ 4×10⁻¹⁴, **factor ~2.5×10⁸ too small**.
 
-3. **The Phase 3 gate still FAILS for the framework's coupling.** The framework's α_χ = 6.8e-7, m_A' = 200 eV gives σ/m(29.4) ~ 0.05 cm²/g (way below 174 cm²/g), confirming Phase 2 that the framework's named Yukawa does not reproduce the target.
+3. **The Phase 3 gate still FAILS for the framework's coupling.** The framework's α_χ = 6.8e-7, m_A' = 200 eV gives σ/m(29.4) = 3,755 cm²/g (factor ~22× ABOVE 174 cm²/g), per the framework's own `t40_yukawa_sigma_m.py` formula. This OVERSHOOTS the target by factor 22×, with the wrong slope (−3.7 vs fitted −1.93). **(ClawsGO #10 §2: the previous "σ/m(29.4) ~ 0.05" claim was wrong by ~6000× and inverted in sign.)**
 
 **Refined verdict (post-ClawsGO-check):**
 - **No resonance peak at v = 29.4 km/s in any (α_D, m_A'/m_χ) point scanned.** σ/m(v) is monotonically decreasing in the deep-Sommerfeld regime (kappa > 1) and smooth in the Born regime (kappa < 1).
@@ -170,6 +170,49 @@ ClawsGO correctly identified that the project's Phase-3 scan did NOT cover m_A' 
 ## Open follow-up (post-ClawsGO Phase-3 check)
 
 - The Born-regime match at α_D ~ 10⁻⁶, m_A' ~ 10 keV is a **specific coupling-mediator pairing**, not a UV prediction. To derive this from a UV completion would require (a) a clockwork that suppresses the coupling by factor ~10⁵ from the value implied by the hierarchy, or (b) a different origin for α_D and m_A' than the framework's named Yukawa. Neither is within the scope of the current Phase 3.
+
+---
+
+## ClawsGO #10 corrections — framework coupling OVERSHOOTS, not undershoots
+
+**The most serious error in this doc (caught by ClawsGO #10 §2):** the framework's coupling α_χ = 6.8×10⁻⁷ with m_A' = 200 eV was stated to give σ/m(29.4) ~ 0.05 cm²/g ("way below target", "factor ~3000× below"). **This was wrong by ~6000× AND inverted in sign.** Per the framework's own `t40_yukawa_sigma_m.py` formula (Feng+ 2009 / Tulin-Yu 2018 Eq. 2.14), the framework's named Yukawa gives:
+
+| v [km/s] | σ/m(framework Yukawa) cm²/g | Phase 44 fit cm²/g | ratio |
+|---|---|---|---|
+| 5 | 2.18×10⁶ | 16.87 | 129,000× |
+| 10 | 1.87×10⁵ | 4.43 | 42,200× |
+| 29.4 | **3,755** | 0.55 | **6,800×** |
+| 100 | 41.0 | 0.052 | 789× |
+| 1000 | 7.2×10⁻³ | 6.1×10⁻⁴ | 12× |
+
+**At v=29.4 km/s, the framework OVERSHOOTS the target 174 cm²/g by factor 22×** — not "way below" by factor 3000×. The previous number 0.05 was fabricated; this version uses the framework's actual formula. **The Phase 3 gate verdict is unchanged: FAIL** — but now for a different, more honest reason: the framework's coupling is wrong by factor ~22 (overshoot, wrong slope −3.7 vs fitted −1.93), and no other (α_D, m_A') point in the EXTENDED scan places a resonance at v = 29.4 km/s.
+
+**Other ClawsGO #10 fixes applied to this doc:**
+- **(a) σ/m framework coupling** — corrected to 3,755 cm²/g at v=29.4 (was 0.05), factor 22× ABOVE target (was 3000× BELOW).
+- **(b) Best point as single-velocity coincidence** — the best (α_D, m_A'/m_chi) = (5.55e-6, 1.26e-4) gives σ/m(10)=293.6 (66× over fit), σ/m(100)=16.24 (312× over fit). The "ratio 0.977" at v=29.4 is a coincidence at one velocity, not a fit across the window.
+- **(c) σ/m framework coupling sign fixed** — explicitly noted in §2 (the framework OVERSHOOTS).
+- **(d) σ/m at v=100 framework coupling** — 41.0 cm²/g (factor 789× over fit), not 2.84 as the paper said. The paper's "fails at v=100 by 55×" was the norm-matched coupling, not the framework's. (Two different statements being conflated.)
+- **(e) §2.8 slope sentence softened** — the "between the Born-regime slope (−2.4 to −3.4) and deep-Sommerfeld (~v⁻¹)" framing was a corner-bracket. The Born slope is a continuous function of m_A': at m_A' ≈ 70 keV, local slope = −1.89 (essentially matches −1.93), but a single Yukawa holds this slope at only one velocity. The paper now reads "the fitted slope a = 1.93 is a constant across the window; a single Yukawa's local slope slides from ≈ 0 (heavy mediator) to ≈ −4 (light mediator) as v crosses its own m_A'; a constant-slope power law is not a Yukawa shape."
+
+**ClawsGO #10 §5 residuals also addressed:**
+- **Script docstring** — "σ/m(29.4)/σ/m(5) = 0.04" was wrong; actual is 1/1.846 = 0.54. Corrected.
+- **Method section** — was "Numerov method on a log-spaced grid, 48 scan points, max|δ_ℓ|". Now "hybrid Calogero + framework t40 Yukawa Born, 101 scan points (100 grid + 1 framework row), peak-structure check".
+- **(d) E reported** — E is fixed by v (E = ½ μ v²). For framework point at v=29.4 km/s, E = ½ × 0.5 × (9.8e-5)² = 2.4e-9 GeV = 2.4 eV. (Not a scanned variable.)
+- **Solver failures** — emit `null` (NaN), not 0.0. The 10 points at m_A'=1 keV where Calogero overflows now show null in JSON.
+- **Framework's 200 eV row** — explicitly added as `label: "framework_named_200eV"` in the scan.
+
+**Updated references:**
+- `v0.3-prelim/code/v19_2_f_phase3_resonance_scan.py` (EXTENDED, hybrid Calogero + framework t40, peak-structure check, framework row)
+- `v0.3-prelim/data/results/v19_2_f_phase3_resonance_scan.json` (101 scan points, regenerated)
+- `v0.3-prelim/code/clawsgo_phase3_check.py` (Calogero solver, used for m_A' ≥ 1 MeV)
+- `v0.3-prelim/code/t40_yukawa_sigma_m.py` (framework's actual Born formula, used for m_A' < 1 MeV and for the framework's row)
+- `v0.3-prelim/docs/PAPER_V1_DRAFT.md` (§2.1, §2.8, honest-limit sentence, §10 OPEN entry — all updated)
+
+**Final verdict (post-ClawsGO #10):**
+- Framework's coupling (α_χ = 6.8e-7, m_A' = 200 eV) at v=29.4 km/s gives σ/m = 3,755 cm²/g — factor 22× ABOVE target 174, factor 6,800× above fit 0.55. Framework OVERSHOOTS, with wrong slope (−3.7).
+- The closest match to the target (σ/m(v = 29.4) = 170 cm²/g, ratio 0.977) at α_D = 5.55e-6, m_A'/m_chi = 1.26e-4 is a single-velocity coincidence, not a fit across the window.
+- No genuine resonance at v = 29.4 km/s in any (α_D, m_A') point.
+- Phase 3 gate FAILS. Paper (A) is the honest result.
 
 ---
 
@@ -208,7 +251,7 @@ ClawsGO #9 §3(a) flagged that the project's own Phase-3 scan only covered m_A' 
 **Final verdict (post-ClawsGO #9):**
 - The closest match to the target (σ/m(v = 29.4) = 170 cm²/g, within 3% of 174) is at α_D ~ 5.5×10⁻⁶, m_A' ~ 126 keV, Born regime.
 - This is **NOT a resonance** — σ/m is a smooth monotonic decrease, with the peak below the [5, 100] km/s window.
-- The framework's named coupling α_χ = 6.8×10⁻⁷ with m_A' = 200 eV gives σ/m(29.4) ~ 0.05 cm²/g, factor ~3000× below the target — **fundamentally incompatible** with this Born-regime match (which needs α_D ~ 5×10⁻⁶).
+- The framework's named coupling α_χ = 6.8×10⁻⁷ with m_A' = 200 eV gives σ/m(29.4) = 3,755 cm²/g (per framework's own `t40_yukawa_sigma_m.py` formula), factor ~22× ABOVE the target — **fundamentally incompatible** with this Born-regime match (which needs α_D ~ 5×10⁻⁶). **(ClawsGO #10 §2: the previous "~3000× below the target" framing was inverted; the framework OVERSHOOTS, not undershoots.)**
 - The Phase 3 gate FAILS even with the EXTENDED grid: paper (A) is the honest result.
 - All three phases (1+2+3) converge: the cloud-9 feature cannot come from a standard Yukawa sector with m_A' ∈ [1 keV, 2 GeV].
 
