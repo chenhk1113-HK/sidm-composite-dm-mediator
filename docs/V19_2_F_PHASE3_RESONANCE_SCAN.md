@@ -1,12 +1,12 @@
 # v19.2-F Phase 3 — Resonance scan RESULT (ClawsGO kill/continue gate)
 
-**Date:** 2026-10-09 (initial) / 2026-10-10 (ClawsGO #8 velocity-conversion correction)
+**Date:** 2026-10-09 (initial) / 2026-10-10 (ClawsGO #8 velocity fix) / 2026-10-10 (ClawsGO #9 §3 EXTENDED scan + softening of §2.8 v⁻² wording)
 **Status:** Phase 3 COMPLETE — Kill/continue gate FAILS
-**Verdict:** Paper (A) is the honest result. The peak stays phenomenological by necessity. **No resonance** at v = 29.4 km/s in any (α_D, m_A'/m_chi) point scanned.
+**Verdict:** Paper (A) is the honest result. The peak stays phenomenological by necessity. **No resonance** at v = 29.4 km/s in any (α_D, m_A'/m_chi) point scanned over the EXTENDED grid (m_A' ∈ [1 keV, 2 GeV]).
 **Scripts:**
-- `v0.3-prelim/code/v19_2_f_phase3_resonance_scan.py` (project's original scan, 48 points, m_A' ∈ [10 MeV, 2 GeV]; CORRECTED per ClawsGO #8)
-- `v0.3-prelim/code/clawsgo_phase3_check.py` (ClawsGO's check, m_A' ∈ [1, 100] keV, Born-regime Goldilocks at α_D ~ 10⁻⁶)
-**Result:** (CORRECTED) Best (α_D, m_A'/m_chi) point at v_res = **2934 km/s** (factor ~100× off from target 29.4), not 146,719 km/s as originally reported. **The ClawsGO #8 velocity-conversion bug fix moved v_res by factor 50× but did NOT change the gate verdict — paper (A) still wins.**
+- `v0.3-prelim/code/v19_2_f_phase3_resonance_scan.py` (project's EXTENDED scan, 100 points, m_A' ∈ [1 keV, 2 GeV]; Calogero solver; peak-structure check)
+- `v0.3-prelim/code/clawsgo_phase3_check.py` (ClawsGO's check, used as the underlying solver)
+**Result (EXTENDED):** Best (α_D, m_A'/m_chi) point at α_D = 5.55×10⁻⁶, m_A'/m_chi = 1.26×10⁻⁴ (m_A' = 126 keV, Born regime), giving σ/m(v=29.4) = 170.0 cm²/g (target 174, ratio **0.977**) — but σ/m is **monotonically decreasing** in [5, 100] km/s (peak at v = 5 km/s = 314 cm²/g), so v = 29.4 is **NOT a peak**. The Phase 3 gate still FAILS: paper (A) wins.
 
 ## Gate definition (ClawsGO plan)
 
@@ -97,7 +97,7 @@ The v19.2-D-FREEZE paper is **already in paper (A) form** (constraint map + no-g
 The honest scientific claims:
 
 1. **The phenomenological σ/m(v) of v19.2-D is correct as a fit** to the channels. Its UV derivation is an open question, with three converging pieces of evidence (Phase 1: 10⁻⁹ tuning; Phase 2: wrong slope; Phase 3: no Yukawa resonance at 29.4 km/s).
-2. **The peak stays phenomenological by necessity.** Any UV completion that reproduces the cloud-9 feature at v = 29.4 km/s must either (a) accept 1.2 × 10⁻⁹ near-threshold tuning, (b) use a mediator with m_A' ≲ 10⁻⁵ eV (excluded), or (c) abandon single-mediator Yukawa and use a more complex UV structure (e.g., clockwork, two-component).
+2. **The peak stays phenomenological by necessity.** Any UV completion that reproduces the cloud-9 feature at v = 29.4 km/s must either (a) accept 1.2 × 10⁻⁹ near-threshold tuning, (b) use a mediator with m_A' ≲ 50 keV (subject to ΔN_eff / fifth-force / stellar-cooling constraints the project has not computed), or (c) abandon single-mediator Yukawa and use a more complex UV structure (e.g., clockwork, two-component). **ClawsGO #9 §3(b): the previous "m_A' ≲ 10⁻⁵ eV" was a typo (10⁻⁵ eV is 10⁹ lighter than 50 keV and would correspond to a range ~2 × 10¹³ fm = 2 cm, vastly exceeding the dark-matter halo); corrected to "m_A' ≲ 50 keV" everywhere.**
 3. **Paper (B) is not viable in this scan.** A concrete dark sector that reproduces σ(v) AND passes Cloud-9 + Horigome + LZ + relic + ΔN_eff would require (a)-(c) above, none of which is achievable with a simple Yukawa.
 
 ## Open follow-ups (NOT Phase 4 — that's deferred until paper (A) is written)
@@ -170,4 +170,52 @@ ClawsGO correctly identified that the project's Phase-3 scan did NOT cover m_A' 
 ## Open follow-up (post-ClawsGO Phase-3 check)
 
 - The Born-regime match at α_D ~ 10⁻⁶, m_A' ~ 10 keV is a **specific coupling-mediator pairing**, not a UV prediction. To derive this from a UV completion would require (a) a clockwork that suppresses the coupling by factor ~10⁵ from the value implied by the hierarchy, or (b) a different origin for α_D and m_A' than the framework's named Yukawa. Neither is within the scope of the current Phase 3.
+
+---
+
+## ClawsGO #9 EXTENDED scan (m_A' ∈ [1 keV, 2 GeV])
+
+ClawsGO #9 §3(a) flagged that the project's own Phase-3 scan only covered m_A' ∈ [10 MeV, 2 GeV] — the decade that *cannot* contain a 29.4 km/s resonance — while the gate verdict was implicitly relying on the reviewer's external `clawsgo_phase3_check.py` to cover the lower decade. ClawsGO recommended extending the project's own scan to m_A' ∈ [1 keV, 100 keV] (or wider).
+
+**Fix applied:** The scan grid was extended to **m_A'/m_chi ∈ [1e-6, 2.0]** (m_A' from 1 keV to 2 GeV). The Numerov solver was replaced with ClawsGO's variable-phase (Calogero) solver because the project's own Numerov was returning garbage phase shifts for small α_D × small m_A' (the phase extraction failed when r_max = 50/m_A' became huge). The script now does a peak-structure check: for each (α_D, m_A') point, compute σ/m at v = [5, 10, 20, 29.4, 50, 100] km/s and ask whether v = 29.4 km/s is a **local maximum** (peak) or just a smooth monotonic value.
+
+**EXTENDED scan result (100 scan points, m_A' ∈ [1 keV, 2 GeV], α_D ∈ [10⁻⁶, 5.0]):**
+
+**Best (α_D, m_A'/m_chi) point:**
+
+| Quantity | Value |
+|---|---|
+| α_D | 5.55 × 10⁻⁶ |
+| m_A'/m_chi | 1.26 × 10⁻⁴ |
+| m_A' | 1.26 × 10⁻⁴ GeV (126 keV) |
+| kappa = α_D m_χ / m_A' | 0.044 (Born regime) |
+| σ/m(v = 29.4) | **170.0 cm²/g** (target 174, ratio **0.977**) |
+| v_peak | 5.0 km/s (NOT 29.4; factor 0.17× from target) |
+| σ/m(v = 5) | 313.9 cm²/g |
+| is_peak_at_v_29 | **False** |
+| is_monotonic_decreasing | **True** |
+| σ/m(v=5)/σ/m(v=29.4) | 1.846 (modest, characteristic of Born regime) |
+| log₁₀ distance to target | 0.78 |
+
+**Phase 3 gate verdict:** FAIL. The closest match to the target 174 cm²/g is at α_D ~ 5.5×10⁻⁶, m_A' ~ 126 keV (Born regime), giving σ/m(v = 29.4) = 170 cm²/g within 3% of target — but σ/m is monotonically decreasing in [5, 100] km/s, so v = 29.4 is NOT a peak. At this point σ/m(v = 5)/σ/m(v = 29.4) = 1.85, characteristic of the Born/Coulomb-like regime (no resonance).
+
+**Other ClawsGO #9 §3 fixes applied:**
+- **(b) 10⁻⁵ eV typo** → corrected to "m_A' ≲ 50 keV" everywhere in this doc.
+- **(c) Resonance criterion** → "peak-structure check" replaces "max |δ_ℓ|" criterion. The script explicitly tests whether σ/m has a local maximum at v = 29.4 km/s, not just whether a large phase shift exists.
+- **(d) E reported explicitly** → script prints E_GeV per scan point; result dict includes E_GeV; σ_unitarity / σ_actual ratio included for diagnostic clarity.
+- **(e) §2.8 v⁻² wording softened** → paper now says "the fitted slope a = 1.93 lies between the Born-regime slope (−2.4 to −3.4, per ClawsGO #9 §4) and the deep-Sommerfeld slope (~v⁻¹) — neither corner of single-Yukawa parameter space reproduces the fitted a = 1.93 cleanly." This is more accurate than the previous "*closer to* a Sommerfeld v⁻²" phrasing.
+
+**Final verdict (post-ClawsGO #9):**
+- The closest match to the target (σ/m(v = 29.4) = 170 cm²/g, within 3% of 174) is at α_D ~ 5.5×10⁻⁶, m_A' ~ 126 keV, Born regime.
+- This is **NOT a resonance** — σ/m is a smooth monotonic decrease, with the peak below the [5, 100] km/s window.
+- The framework's named coupling α_χ = 6.8×10⁻⁷ with m_A' = 200 eV gives σ/m(29.4) ~ 0.05 cm²/g, factor ~3000× below the target — **fundamentally incompatible** with this Born-regime match (which needs α_D ~ 5×10⁻⁶).
+- The Phase 3 gate FAILS even with the EXTENDED grid: paper (A) is the honest result.
+- All three phases (1+2+3) converge: the cloud-9 feature cannot come from a standard Yukawa sector with m_A' ∈ [1 keV, 2 GeV].
+
+**Updated references:**
+- `v0.3-prelim/code/v19_2_f_phase3_resonance_scan.py` (EXTENDED, Calogero, peak-structure check)
+- `v0.3-prelim/data/results/v19_2_f_phase3_resonance_scan.json` (100 scan points, regenerated)
+- `v0.3-prelim/code/clawsgo_phase3_check.py` (ClawsGO's solver, imported into the EXTENDED scan)
+- `v0.3-prelim/docs/PAPER_V1_DRAFT.md` (§2.1, §2.8, honest-limit sentence, §10 OPEN entry — all updated to reflect the EXTENDED result and softened v⁻² wording)
+- ClawsGO #9 §4 slope measurements (−2.4 to −3.4 in Born regime, ~v⁻¹ in deep-Sommerfeld regime)
 - **Phase 5 (clockwork for hierarchy only)** remains the natural next step: a clockwork Lagrangian that produces α_D ~ 10⁻⁶, m_A' ~ 10 keV would NOT solve the problem (the framework's hierarchy needs α_χ ~ 6.8e-7 with m_A' = 200 eV for LZ direct-detection compliance). The Phase 1+2+3 result is that the framework's σ/m(v) is fundamentally a phenomenological peak, not a UV-derivable feature.
