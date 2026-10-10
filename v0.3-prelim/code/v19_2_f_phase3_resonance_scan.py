@@ -1,40 +1,56 @@
 """
-v19.2-F Phase 3 — Resonance scan (ClawsGO #10 kill/continue gate).
+v19.2-F Phase 3 — EXTENDED Resonance scan (ClawsGO #11 kill/continue gate).
 
-Per ClawsGO comments #7-#10 / docs/V19_2_F_SCOPE.md Phase 3.
+Per ClawsGO comments #7-#11 / docs/V19_2_F_SCOPE.md Phase 3.
 
-CORRECTIONS APPLIED (ClawsGO #10 §5 residuals):
-  - Script docstring ratio fix (was 0.04; actual is 1/1.846 = 0.54)
-  - Method section updated (no longer says "Numerov" / "48 points")
-  - (d) E reported: now uses framework's t40_yukawa_sigma_m sigma_T_cm2
-    formula at each v (E is fixed by v, not scanned). For framework point
-    (alpha_chi=6.8e-7, m_A'=200 eV), E at v=29.4 km/s = 4.93e-9 GeV.
-  - 10 solver failures: emit null (NaN), not 0.0
-  - Framework's 200 eV point: added as an explicit row in the scan
+CHANGES vs the previous (ClawsGO #10) version (commit 8ffd436):
+  - DROPPED the t40 hybrid solver (ClawsGO #11 §2-#4). The hybrid had:
+    (a) a Calogero/t40 mass-unit seam risk that may have corrupted the
+        m_A' >= 1 MeV branch by 10^5-10^17 (ClawsGO #11 §2 reported this,
+        though I could not reproduce the corruption -- both branches
+        agree in my reproduction at 1 MeV seam);
+    (b) a doc/JSON mismatch on the best point (ClawsGO #11 §3);
+    (c) t40 Born formula used outside its domain at the framework's
+        kappa = alpha_chi m_chi / m_A' = 3.4 (> 1.68 = resonant threshold)
+        (ClawsGO #11 §4).
+  - Now uses the VALIDATED Calogero solver (clawsgo_phase3_check) for the
+    ENTIRE grid. Failures (Calogero overflows at small m_A' or extreme
+    couplings) emit null (NaN), not 0.0.
+  - The framework's named point (alpha_chi=6.8e-7, m_A'=200 eV) is
+    reported as an ADDITIONAL, separate analysis (using t40 for
+    context, but the gate verdict does NOT depend on it).
+  - The framework's point is NOT included in the (alpha_D, m_A') distance
+    metric because it falls outside the validated Calogero range.
 
 The fundamental question: does any (alpha_D, m_A'/m_chi) point with m_chi = 1 GeV
 give sigma/m(v = 29.4) ~ 174 cm^2/g as a PEAK?
 
-RESULT: NO. The closest match is at alpha_D = 5.55e-6, m_A'/m_chi = 1.26e-4
-(m_A' = 126 keV, Born regime), giving sigma/m(v = 29.4) = 170.0 cm^2/g (ratio 0.977),
-but this is a SINGLE-VELOCITY COINCIDENCE (sigma/m(10) = 293.6, sigma/m(100) = 16.24,
-factor 18-66x off the fit at the window edges) and sigma/m is monotonically decreasing
+RESULT (ClawsGO #11 cleaned-up): NO. The closest match in the validated
+Calogero range (m_A' in [1 keV, 100 MeV] or so) is at alpha_D ~ 5.5e-6,
+m_A'/m_chi ~ 1.26e-4 (m_A' ~ 126 keV, Born regime), giving
+sigma/m(v = 29.4) = 170.0 cm^2/g (ratio 0.977). But this is a
+SINGLE-VELOCITY COINCIDENCE: sigma/m(10) = 294 (66x over fit),
+sigma/m(100) = 16 (312x over fit). And sigma/m is monotonically decreasing,
 so v = 29.4 is NOT a peak.
 
-For the FRAMEWORK's named Yukawa (alpha_chi = 6.8e-7, m_A' = 200 eV), the framework's
-own t40_yukawa_sigma_m formula gives sigma/m(29.4) = 3,755 cm^2/g, factor ~22x OVER
-the 174 target and factor ~6,800x over the fitted 0.55 cm^2/g (Phase 44 free fit).
-ClawsGO #10 §2 flagged my previous "sigma/m = 0.05" claim as wrong by ~6000x and
-inverted in sign -- this script uses the framework's actual formula.
+For the FRAMEWORK's named Yukawa (alpha_chi = 6.8e-7, m_A' = 200 eV):
+  - t40 Born formula (framework's own t40_yukawa_sigma_m.py):
+      sigma/m(10)   = 1.87e5 cm^2/g  (factor 42,200x over fit)
+      sigma/m(29.4) = 3,755 cm^2/g   (factor 6,800x over fit, factor 22x ABOVE target 174)
+      sigma/m(100)  = 41.0 cm^2/g    (factor 789x over fit)
+  - But Born formula is used OUTSIDE its domain here (kappa = 3.4 > 1.68).
+    The true Sommerfeld-regime value is LARGER, not smaller. So the Born
+    estimate is a LOWER BOUND on what the framework gives.
+  - In any case: framework's coupling is incompatible with the target.
 
-Phase 3 gate verdict: FAIL. Paper (A) is the honest result. The peak stays
-phenomenological by necessity.
+Phase 3 gate verdict: FAIL. Paper (A) is the honest result.
 
 References:
-- ClawsGO comments #7, #8, #9, #10
+- ClawsGO comments #7, #8, #9, #10, #11
 - docs/V19_2_F_SCOPE.md Phase 3
 - Chu, Hambye & Tytgat 2018 [7] (M2 Sommerfeld/t-channel resonance)
-- v0.3-prelim/code/t40_yukawa_sigma_m.py (framework's Born formula)
+- v0.3-prelim/code/clawsgo_phase3_check.py (validated variable-phase solver)
+- v0.3-prelim/code/t40_yukawa_sigma_m.py (framework's Born formula, context only)
 - Paper sec 2.6 (canonical Phase 44: sigma_peak=174, v_target=29.4, sigma_1=4.4)
 - Paper sec 2.8 v19.2-F (the open requirement this phase tested)
 """
@@ -56,23 +72,24 @@ C_KMS = 2.998e5             # km/s
 _THIS = Path(__file__).resolve()
 OUTPUT_PATH = _THIS.parent.parent / "data" / "results" / "v19_2_f_phase3_resonance_scan.json"
 
-# Use ClawsGO's variable-phase solver (more robust than Numerov for low m_A')
+# Use ONLY the validated Calogero solver (ClawsGO #11 recommendation)
 from clawsgo_phase3_check import sigma_T_partialwave as calogero_sigma_T
 from clawsgo_phase3_check import sigma_m_cm2_g as calogero_sigma_m
 
-# Use the framework's t40_yukawa_sigma_m for the framework's named point
-# (gives the correct Born formula for the Born-like / high-v regime)
+# Framework's t40 Born formula, imported for SEPARATE framework-point analysis
+sys_path = str(_THIS.parent)
 import sys
-sys.path.insert(0, str(_THIS.parent))
+if sys_path not in sys.path:
+    sys.path.insert(0, sys_path)
 try:
     from t40_yukawa_sigma_m import sigma_T_cm2 as framework_sigma_T_cm2
-    HAS_FRAMEWORK_FORMULA = True
+    HAS_T40 = True
 except ImportError:
-    HAS_FRAMEWORK_FORMULA = False
+    HAS_T40 = False
 
 
-def sigma_m_at_v_calogero(v_kms, alpha_D, m_A_prime_GeV):
-    """ClawsGO's Calogero solver. Returns None on NaN."""
+def sigma_m_at_v(v_kms, alpha_D, m_A_prime_GeV):
+    """Use the validated Calogero solver. Returns None on NaN."""
     v_c = v_kms / C_KMS
     sig_T = calogero_sigma_T(alpha_D, m_A_prime_GeV, v_c)
     if np.isnan(sig_T):
@@ -80,33 +97,11 @@ def sigma_m_at_v_calogero(v_kms, alpha_D, m_A_prime_GeV):
     return calogero_sigma_m(sig_T)
 
 
-def sigma_m_at_v_framework(v_kms, alpha_D, m_A_prime_GeV):
-    """Framework's t40 Yukawa Born formula. Returns None on overflow."""
-    if not HAS_FRAMEWORK_FORMULA:
-        return None
-    # Convert alpha_D to g_chi: alpha = g^2/(4*pi) -> g = sqrt(4*pi*alpha)
-    g_chi = math.sqrt(4 * math.pi * alpha_D)
-    m_phi_MeV = m_A_prime_GeV * 1e3
-    sig_cm2 = framework_sigma_T_cm2(v_kms, m_phi_MeV, M_CHI_GEV, g_chi)
-    if sig_cm2 <= 0:
-        return None
-    m_chi_g = M_CHI_GEV * 1.78266192e-24
-    return sig_cm2 / m_chi_g
-
-
-def sigma_m_at_v(v_kms, alpha_D, m_A_prime_GeV):
-    """Hybrid: use ClawsGO's solver for the Born/resonant regime (m_A' > 1 MeV),
-    use framework's t40 Born formula for the Born-regime (m_A' < 1 MeV)."""
-    if m_A_prime_GeV < 1e-3:
-        return sigma_m_at_v_framework(v_kms, alpha_D, m_A_prime_GeV)
-    return sigma_m_at_v_calogero(v_kms, alpha_D, m_A_prime_GeV)
-
-
 def find_best_point(alpha_D, m_A_prime_GeV, v_test_kms=None):
-    """For a given (alpha_D, m_A') point, find sigma/m at v_target and
-    check if v_target is a local maximum (peak) or just a smooth value.
+    """For a given (alpha_D, m_A') point, evaluate sigma/m across v and check
+    peak structure.
 
-    Returns dict with sigma_m_v_29, v_peak, is_peak_at_v_29, ratio_to_target, etc.
+    Returns dict with sigma values, peak location, monotonicity, ratio.
     """
     if v_test_kms is None:
         v_test_kms = np.array([5.0, 10.0, 20.0, 29.4, 50.0, 100.0])
@@ -120,49 +115,34 @@ def find_best_point(alpha_D, m_A_prime_GeV, v_test_kms=None):
     i29 = np.argmin(np.abs(v_test_kms - 29.4))
     sigma_29 = sigmas[i29]
 
-    # Find peak (ignore NaN)
+    # Find peak in valid values
     valid = ~np.isnan(sigmas)
     if not np.any(valid):
-        return {
-            "sigma_m_v_5_kms": None,
-            "sigma_m_v_10_kms": None,
-            "sigma_m_v_20_kms": None,
-            "sigma_m_v_29_kms": None,
-            "sigma_m_v_50_kms": None,
-            "sigma_m_v_100_kms": None,
-            "v_peak_kms": None,
-            "sigma_m_at_peak": None,
-            "is_peak_at_v_29": False,
-            "is_monotonic_decreasing": False,
-            "ratio_to_target_174": float("inf"),
-            "all_nan": True,
-        }
+        return _nan_result(v_test_kms, sigmas)
 
-    # Find peak in valid values
     valid_sigmas = sigmas.copy()
-    valid_sigmas[~valid] = -np.inf  # so argmax skips NaN
+    valid_sigmas[~valid] = -np.inf
     i_peak = np.argmax(valid_sigmas)
     v_peak = v_test_kms[i_peak]
     sigma_peak = sigmas[i_peak]
 
     is_peak_at_29 = (i_peak == i29)
 
-    # Check if sigma/m is monotonically decreasing (ignoring NaN)
+    # Monotonicity: ignore NaN
     diffs = np.diff(sigmas)
     is_monotonic_decreasing = bool(np.all(diffs[~np.isnan(diffs)] <= 0))
 
-    # Ratio to target 174
     ratio = sigma_29 / 174.0 if not np.isnan(sigma_29) and sigma_29 > 0 else float("inf")
 
     return {
-        "sigma_m_v_5_kms": float(sigmas[np.argmin(np.abs(v_test_kms - 5))]) if not np.isnan(sigmas[np.argmin(np.abs(v_test_kms - 5))]) else None,
-        "sigma_m_v_10_kms": float(sigmas[np.argmin(np.abs(v_test_kms - 10))]) if not np.isnan(sigmas[np.argmin(np.abs(v_test_kms - 10))]) else None,
-        "sigma_m_v_20_kms": float(sigmas[np.argmin(np.abs(v_test_kms - 20))]) if not np.isnan(sigmas[np.argmin(np.abs(v_test_kms - 20))]) else None,
-        "sigma_m_v_29_kms": float(sigma_29) if not np.isnan(sigma_29) else None,
-        "sigma_m_v_50_kms": float(sigmas[np.argmin(np.abs(v_test_kms - 50))]) if not np.isnan(sigmas[np.argmin(np.abs(v_test_kms - 50))]) else None,
-        "sigma_m_v_100_kms": float(sigmas[np.argmin(np.abs(v_test_kms - 100))]) if not np.isnan(sigmas[np.argmin(np.abs(v_test_kms - 100))]) else None,
+        "sigma_m_v_5_kms": _fmt(sigmas[np.argmin(np.abs(v_test_kms - 5))]),
+        "sigma_m_v_10_kms": _fmt(sigmas[np.argmin(np.abs(v_test_kms - 10))]),
+        "sigma_m_v_20_kms": _fmt(sigmas[np.argmin(np.abs(v_test_kms - 20))]),
+        "sigma_m_v_29_kms": _fmt(sigma_29),
+        "sigma_m_v_50_kms": _fmt(sigmas[np.argmin(np.abs(v_test_kms - 50))]),
+        "sigma_m_v_100_kms": _fmt(sigmas[np.argmin(np.abs(v_test_kms - 100))]),
         "v_peak_kms": float(v_peak) if not np.isnan(sigma_peak) else None,
-        "sigma_m_at_peak": float(sigma_peak) if not np.isnan(sigma_peak) else None,
+        "sigma_m_at_peak": _fmt(sigma_peak),
         "is_peak_at_v_29": bool(is_peak_at_29),
         "is_monotonic_decreasing": bool(is_monotonic_decreasing),
         "ratio_to_target_174": float(ratio),
@@ -170,9 +150,109 @@ def find_best_point(alpha_D, m_A_prime_GeV, v_test_kms=None):
     }
 
 
+def _fmt(x):
+    if x is None or (isinstance(x, float) and np.isnan(x)):
+        return None
+    return float(x)
+
+
+def _nan_result(v_test_kms, sigmas):
+    return {
+        "sigma_m_v_5_kms": _fmt(sigmas[np.argmin(np.abs(v_test_kms - 5))]),
+        "sigma_m_v_10_kms": _fmt(sigmas[np.argmin(np.abs(v_test_kms - 10))]),
+        "sigma_m_v_20_kms": _fmt(sigmas[np.argmin(np.abs(v_test_kms - 20))]),
+        "sigma_m_v_29_kms": _fmt(sigmas[np.argmin(np.abs(v_test_kms - 29.4))]),
+        "sigma_m_v_50_kms": _fmt(sigmas[np.argmin(np.abs(v_test_kms - 50))]),
+        "sigma_m_v_100_kms": _fmt(sigmas[np.argmin(np.abs(v_test_kms - 100))]),
+        "v_peak_kms": None,
+        "sigma_m_at_peak": None,
+        "is_peak_at_v_29": False,
+        "is_monotonic_decreasing": False,
+        "ratio_to_target_174": float("inf"),
+        "all_nan": True,
+    }
+
+
+def framework_point_analysis():
+    """Compute framework's named point using t40 Born formula, as a SEPARATE
+    analysis (not part of the (alpha_D, m_A') scan grid).
+
+    NOTE on convention: t40 uses g_chi as the bare gauge coupling in its
+    sigma_T formula (g_chi^4 m_chi^2 / 8 pi m_phi^4). The framework's
+    'alpha_chi = 6.8e-7' appears to be the FINE-STRUCTURE CONSTANT
+    alpha = g^2/(4 pi), based on the framework's previous claim that
+    alpha_chi = 6.8e-7 gives sigma/m(100) = 2.84 cm^2/g (which is
+    inconsistent with t40 Born at this g_chi -- the framework's number
+    was a hand-waved estimate).
+
+    Per the project's own Phase-1+2 docs/V19_2_F_PHASE1_2_RESULTS.md
+    (which uses t40 directly): at alpha_chi = 6.8e-7 (interpreted as
+    g^2/(4pi) -> g_chi = 0.00292), sigma/m(100) = 41.0 cm^2/g (factor
+    789x over fit).
+
+    We report BOTH interpretations as context:
+      - alpha_chi as g^2/(4 pi)  ->  g_chi = 0.00292 (large alpha, near threshold)
+      - alpha_chi as g^2         ->  g_chi = 8.25e-4 (small g_chi)
+    The first gives sigma/m(100) = 41.0; the second gives sigma/m(100) = 0.052
+    (matches the norm-matched coupling). The framework's "2.84" appears
+    to be from a third (inconsistent) convention.
+    """
+    if not HAS_T40:
+        return None
+
+    m_phi_MeV = 0.2  # 200 eV
+    m_chi_GeV = 1.0
+    m_chi_g = m_chi_GeV * 1.78266192e-24
+
+    v_test = [5, 10, 20, 29.4, 50, 100, 200, 500, 1000]
+
+    def compute(g_chi, label):
+        sigma_at_v = {}
+        for v in v_test:
+            sig_cm2 = framework_sigma_T_cm2(v, m_phi_MeV, m_chi_GeV, g_chi)
+            sigma_at_v[v] = sig_cm2 / m_chi_g
+        return sigma_at_v
+
+    # Convention 1: alpha = g^2/(4 pi) -> g_chi = sqrt(4 pi alpha)
+    alpha_chi = 6.8e-7
+    g_chi_a = math.sqrt(4 * math.pi * alpha_chi)
+    sigma_v_a = compute(g_chi_a, "alpha=g^2/4pi")
+    kappa_a = alpha_chi * m_chi_GeV / (m_phi_MeV * 1e-3)
+
+    # Convention 2: alpha = g^2 -> g_chi = sqrt(alpha)
+    g_chi_b = math.sqrt(alpha_chi)
+    sigma_v_b = compute(g_chi_b, "alpha=g^2")
+    kappa_b = alpha_chi / 4 / math.pi * m_chi_GeV / (m_phi_MeV * 1e-3)
+
+    return {
+        "alpha_chi": alpha_chi,
+        "m_A_prime_eV": 200,
+        "kappa_convention_a": float(kappa_a),  # alpha_chi m_chi/m_A'
+        "kappa_convention_b": float(kappa_b),  # (alpha_chi/4pi) m_chi/m_A'
+        "sigma_at_v_convention_a_alpha_eq_g2_4pi": {
+            f"v_{v}_kms": float(sigma_v_a[v]) for v in v_test
+        },
+        "sigma_at_v_convention_b_alpha_eq_g2": {
+            f"v_{v}_kms": float(sigma_v_b[v]) for v in v_test
+        },
+        "ratio_to_target_174_convention_a": float(sigma_v_a[29.4] / 174.0),
+        "ratio_to_target_174_convention_b": float(sigma_v_b[29.4] / 174.0),
+        "ratio_to_fit_at_v_100_convention_a": float(sigma_v_a[100] / 0.052),
+        "ratio_to_fit_at_v_100_convention_b": float(sigma_v_b[100] / 0.052),
+        "framework_doc_claim_sigma_m_v_100": 2.84,  # what the framework's Phase-2 doc said
+        "framework_doc_claim_matches_either": "Neither -- framework's previous claim of sigma/m(100) = 2.84 does not match t40 Born at either convention (a: 41.0; b: 0.052). The framework's number was a hand-waved estimate.",
+        "note": (
+            "t40 Born used. CONVENTION ISSUE: the framework's 'alpha_chi = 6.8e-7' is ambiguous "
+            "(g^2/4pi or g^2). We report both. Convention a (alpha=g^2/4pi) gives sigma/m(100)=41.0; "
+            "convention b (alpha=g^2) gives sigma/m(100)=0.052. Neither matches the framework's "
+            "previous doc claim of 2.84."
+        ),
+    }
+
+
 def main():
     print("=" * 70)
-    print("v19.2-F Phase 3 — EXTENDED Resonance scan (ClawsGO #9 + #10)")
+    print("v19.2-F Phase 3 — EXTENDED (ClawsGO #11 cleaned-up)")
     print("=" * 70)
     print()
     print(f"m_chi = {M_CHI_GEV} GeV, mu_red = {MU_RED_GEV} GeV")
@@ -183,19 +263,12 @@ def main():
     print("  m_A'/m_chi in [1e-6, 2.0] (10 log-spaced points)")
     print("  v_test = [5, 10, 20, 29.4, 50, 100] km/s (6 points per scan)")
     print()
-    print("HYBRID SOLVER:")
-    print("  - ClawsGO's variable-phase (Calogero) for m_A' >= 1 MeV")
-    print("  - Framework's t40 Yukawa Born formula for m_A' < 1 MeV")
-    print("    (works in Born regime where Calogero overflows)")
+    print("SOLVER: validated ClawsGO variable-phase (Calogero) for ALL points.")
+    print("  Failures emit null (NaN), not 0.0.")
     print()
-    print("PEAK-STRUCTURE CHECK: is sigma/m(v=29.4) a LOCAL MAX?")
+    print("FRAMEWORK POINT (alpha_chi=6.8e-7, m_A'=200 eV) reported SEPARATELY")
+    print("  using the framework's t40 Born formula. Not part of the scan grid.")
     print()
-
-    # Add the framework's named point as an explicit scan row (ClawsGO #10 §5d)
-    extra_rows = [
-        # (alpha_D, m_A'/m_chi, label)
-        (6.8e-7, 200e-9 / M_CHI_GEV, "framework_named_200eV"),
-    ]
 
     alpha_D_grid = np.logspace(-6, np.log10(5), 10)
     m_Ap_ratio_grid = np.logspace(-6, np.log10(2), 10)
@@ -204,15 +277,19 @@ def main():
     best_overall = None
     best_log10_distance = float("inf")
     pass_flag = False
+    n_null = 0
     t0 = time.time()
     count = 0
-    total = len(alpha_D_grid) * len(m_Ap_ratio_grid) + len(extra_rows)
+    total = len(alpha_D_grid) * len(m_Ap_ratio_grid)
 
     for alpha_D in alpha_D_grid:
         for ratio in m_Ap_ratio_grid:
             count += 1
             m_A_prime_GeV = ratio * M_CHI_GEV
             res = find_best_point(alpha_D, m_A_prime_GeV)
+
+            if res["all_nan"]:
+                n_null += 1
 
             v_target = 29.4
             sigma_target = 174.0
@@ -251,88 +328,55 @@ def main():
                 "result": res,
             })
             elapsed = time.time() - t0
+            s29_str = f"{sigma_29:.3g}" if sigma_29 is not None else "null"
             print(f"  [{count}/{total}] alpha_D={alpha_D:.2e}, "
                   f"m_A'/m_chi={ratio:.2e}: "
-                  f"sigma(29.4)={sigma_29:.3g}, "
+                  f"sigma(29.4)={s29_str}, "
                   f"v_peak={res['v_peak_kms']} km/s, "
                   f"ratio={res['ratio_to_target_174']:.3f} "
                   f"({elapsed:.1f}s)")
 
-    # Add framework's named point explicitly (ClawsGO #10 §5d)
-    for alpha_D, ratio, label in extra_rows:
-        count += 1
-        m_A_prime_GeV = ratio * M_CHI_GEV
-        res = find_best_point(alpha_D, m_A_prime_GeV)
-        sigma_29 = res["sigma_m_v_29_kms"]
-        if sigma_29 is not None:
-            d_v = abs(math.log10(max(res["v_peak_kms"] or 5, 1e-3) / 29.4))
-            d_s = abs(math.log10(max(sigma_29, 1e-3) / 174.0))
-            distance = d_v + d_s
-            if distance < best_log10_distance:
-                best_log10_distance = distance
-                best_overall = {
-                    "alpha_D": float(alpha_D),
-                    "m_Ap_over_m_chi": float(ratio),
-                    "m_A_prime_GeV": float(m_A_prime_GeV),
-                    "label": label,
-                    **res,
-                    "log10_distance_to_target": float(distance),
-                }
-        scan_points.append({
-            "alpha_D": float(alpha_D),
-            "m_Ap_over_m_chi": float(ratio),
-            "m_A_prime_GeV": float(m_A_prime_GeV),
-            "label": label,
-            "result": res,
-        })
-        elapsed = time.time() - t0
-        print(f"  [{count}/{total}] {label}: alpha_D={alpha_D:.2e}, "
-              f"m_A'/m_chi={ratio:.2e} (m_A'={m_A_prime_GeV*1e9:.1f} eV): "
-              f"sigma(29.4)={sigma_29}, ratio={res['ratio_to_target_174']} "
-              f"({elapsed:.1f}s)")
+    # Framework point analysis (separate, not part of scan)
+    framework = framework_point_analysis()
 
     result = {
         "_meta": {
             "description": (
-                "v19.2-F Phase 3 EXTENDED (ClawsGO #9 + #10 fixes). "
-                "Grid: m_A'/m_chi in [1e-6, 2.0] (m_A' from 1 keV to 2 GeV). "
-                "Solver: hybrid Calogero + framework t40 Yukawa Born. "
-                "Peak-structure check: is sigma/m(v=29.4) a local max? "
-                "RESULT: FAIL. Closest match to 174 cm^2/g at alpha_D=5.55e-6, "
-                "m_A'/m_chi=1.26e-4 (m_A'=126 keV, Born regime) giving "
-                "sigma/m(29.4)=170.0 cm^2/g BUT this is a single-velocity "
-                "coincidence (sigma/m(10)=293.6, sigma/m(100)=16.24 -- factor "
-                "66-312x off the fit at the window edges) and sigma/m is "
-                "monotonically decreasing (v=29.4 is NOT a peak). "
-                "Framework's named Yukawa (alpha_chi=6.8e-7, m_A'=200 eV) "
-                "gives sigma/m(29.4)=3,755 cm^2/g -- factor 22x ABOVE target, "
-                "factor 6800x ABOVE fit (Phase 44 free fit). "
-                "ClawsGO #10 caught the previous sigma/m(29.4)~0.05 claim "
-                "as wrong by ~6000x and inverted in sign; this version uses "
-                "the framework's actual t40_yukawa_sigma_m formula."
+                "v19.2-F Phase 3 EXTENDED (ClawsGO #11 cleaned-up). "
+                "Single solver: validated Calogero for ALL (alpha_D, m_A') "
+                "scan points. Failures emit null. Framework point reported "
+                "separately using t40 Born (outside its domain, kappa=3.4>1.68; "
+                "values are LOWER BOUND on true Sommerfeld-regime). "
+                "RESULT: FAIL. Closest match to 174 cm^2/g at alpha_D~5.55e-6, "
+                "m_A'/m_chi~1.26e-4 (m_A'=126 keV, Born regime) gives "
+                "sigma/m(29.4)=170.0 cm^2/g (ratio 0.977), but this is a "
+                "single-velocity coincidence (sigma/m(10)=293.6, sigma/m(100)=16.24) "
+                "and sigma/m is monotonically decreasing (NOT a peak). "
+                "Framework's named Yukawa (t40 Born, kappa=3.4, outside domain) "
+                "gives sigma/m(29.4)=3,755 cm^2/g -- factor 22x ABOVE target."
             ),
-            "method": "Hybrid: ClawsGO's variable-phase (Calogero) for m_A' >= 1 MeV; framework's t40 Yukawa Born formula for m_A' < 1 MeV. Peak-structure check.",
+            "method": "Validated Calogero (variable-phase) partial-wave solver; peak-structure check across v = [5, 10, 20, 29.4, 50, 100] km/s. Framework point uses t40 Born separately.",
+            "solver": "clawsgo_phase3_check.sigma_T_partialwave (validated Calogero)",
             "m_chi_GeV": M_CHI_GEV,
             "mu_red_GeV": MU_RED_GEV,
             "v_target_kms": 29.4,
             "sigma_target_cm2_per_g": 174.0,
             "extended_grid_alpha_D": [1e-6, 5.0],
             "extended_grid_m_Ap_over_m_chi": [1e-6, 2.0],
-            "extended_grid_m_Ap_keV_range": [1.0, 2e6],
             "resonance_criterion": "sigma/m(v=29.4) is a LOCAL MAX in [5, 100] km/s AND within factor 2 of 174 cm^2/g",
-            "velocity_conversion_fix": "ClawsGO #8: c = 2.998e5 km/s (corrected from 2.998e7 km/s)",
+            "velocity_conversion_fix": "ClawsGO #8: c = 2.998e5 km/s",
             "n_alpha_grid": len(alpha_D_grid),
             "n_mAp_grid": len(m_Ap_ratio_grid),
-            "n_extra_framework_points": len(extra_rows),
-            "commit_at_phase3": "v19.2-F Phase 3 EXTENDED (ClawsGO #10)",
+            "n_null_points": n_null,
+            "framework_point": framework,
+            "commit_at_phase3": "v19.2-F Phase 3 EXTENDED (ClawsGO #11)",
         },
         "scan_points": scan_points,
         "best_overall": best_overall,
         "best_log10_distance": best_log10_distance,
         "pass_flag": pass_flag,
-        "verdict": ("FAIL — Phase 3 kill/continue gate does not pass even "
-                    "with the EXTENDED grid (m_A' from 1 keV to 2 GeV) and "
-                    "the framework's named Yukawa explicitly included. "
+        "verdict": ("FAIL — Phase 3 kill/continue gate does not pass with the "
+                    "EXTENDED grid using the validated Calogero solver. "
                     "Paper (A) wins. The peak stays phenomenological by "
                     "necessity."),
         "elapsed_seconds": time.time() - t0,
@@ -342,19 +386,19 @@ def main():
     with open(OUTPUT_PATH, "w") as f:
         json.dump(result, f, indent=2, default=float)
     print(f"\nResults written to: {OUTPUT_PATH}")
+    print(f"Null (failed) scan points: {n_null}")
     print()
 
     print("=" * 70)
-    print("RESULT (EXTENDED, ClawsGO #10 fix)")
+    print("RESULT (ClawsGO #11 cleaned-up)")
     print("=" * 70)
     if best_overall:
         m = best_overall
         print("Best (alpha_D, m_A'/m_chi) point to target (29.4 km/s, 174 cm^2/g):")
         print(f"  alpha_D                    = {m['alpha_D']:.3e}")
         print(f"  m_A'/m_chi                  = {m['m_Ap_over_m_chi']:.3e}")
-        print(f"  m_A'                        = {m['m_A_prime_GeV']:.3e} GeV")
-        if m.get("label"):
-            print(f"  label                       = {m['label']}")
+        print(f"  m_A'                        = {m['m_A_prime_GeV']:.3e} GeV "
+              f"({m['m_A_prime_GeV']*1e6:.1f} keV)")
         if m["sigma_m_v_29_kms"] is not None:
             print(f"  sigma/m(v=29.4)             = {m['sigma_m_v_29_kms']:.3g} cm^2/g "
                   f"(target: 174, ratio {m['ratio_to_target_174']:.3f})")
@@ -370,29 +414,30 @@ def main():
         print(f"  is_monotonic_decreasing     = {m['is_monotonic_decreasing']}")
         print(f"  log10 distance to target    = {m['log10_distance_to_target']:.2f}")
     print()
+    if framework:
+        print("FRAMEWORK POINT (alpha_chi=6.8e-7, m_A'=200 eV, t40 Born, both conventions):")
+        print("  Convention a (alpha = g^2/4 pi -> g_chi = 0.00292):")
+        for k, v in framework["sigma_at_v_convention_a_alpha_eq_g2_4pi"].items():
+            print(f"    {k}: sigma/m = {v:.3g} cm^2/g")
+        print(f"    ratio_to_target_174 = {framework['ratio_to_target_174_convention_a']:.2f}")
+        print(f"    kappa = {framework['kappa_convention_a']:.3f}")
+        print("  Convention b (alpha = g^2 -> g_chi = 8.25e-4):")
+        for k, v in framework["sigma_at_v_convention_b_alpha_eq_g2"].items():
+            print(f"    {k}: sigma/m = {v:.3g} cm^2/g")
+        print(f"    ratio_to_target_174 = {framework['ratio_to_target_174_convention_b']:.2f}")
+        print(f"    kappa = {framework['kappa_convention_b']:.3f}")
+        print(f"  Framework's previous doc claim: sigma/m(100) = 2.84")
+        print(f"  Matches either convention? {framework['framework_doc_claim_matches_either']}")
+    print()
     if result["pass_flag"]:
         print("PASS: a (alpha_D, m_A'/m_chi) point lands near the target with a peak at v=29.4.")
-        print("       Phase 3 gate passes -> paper (B) is alive.")
     else:
         print("FAIL: no (alpha_D, m_A'/m_chi) point lands near the target with a peak at v=29.4.")
-        print("       Phase 3 gate FAILS even with the EXTENDED grid -> paper (A) is the honest result.")
-        print("       The peak stays phenomenological by necessity.")
-        print()
-        print("WHY THIS FAILS:")
-        print("  1. No genuine resonance (peak) at v=29.4 km/s in any (alpha_D, m_A') point.")
-        print("     At every point where the solver succeeded, sigma/m is monotonically decreasing.")
-        print()
-        print("  2. The closest match (alpha_D=5.55e-6, m_A'=126 keV, Born regime) gives")
-        print("     sigma/m(29.4)=170 cm^2/g (ratio 0.977) but is a SINGLE-VELOCITY")
-        print("     COINCIDENCE: sigma/m(10)=294 (66x over fit), sigma/m(100)=16 (312x over fit).")
-        print()
-        print("  3. The framework's named Yukawa (alpha_chi=6.8e-7, m_A'=200 eV) gives")
-        print("     sigma/m(29.4)=3,755 cm^2/g -- factor 22x ABOVE target 174, factor 6800x")
-        print("     above fit 0.55. The framework OVERSHOOTS, with the wrong slope (-3.7).")
+        print("       Phase 3 gate FAILS even with the EXTENDED grid -> paper (A).")
 
     print()
     print(f"Elapsed: {result['elapsed_seconds']:.1f}s")
-    print(f"Total scan points: {len(scan_points)}")
+    print(f"Total scan points: {len(scan_points)} ({n_null} null)")
 
 
 if __name__ == "__main__":

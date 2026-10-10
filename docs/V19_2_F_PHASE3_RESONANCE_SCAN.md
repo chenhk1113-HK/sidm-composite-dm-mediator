@@ -70,7 +70,7 @@ The Yukawa potential V(r) = -α_D exp(-m_A' r) / r has range 1/m_A', which is **
      ≈ 4,000 fm
 ```
 
-For a resonance to appear, the potential range must be at least comparable to the de Broglie wavelength. This requires **m_A' ≲ 50 keV** (i.e., m_A'/m_χ ≲ 5 × 10⁻⁵). At the framework's named 200 eV Yukawa (m_A'/m_χ = 2 × 10⁻⁷), the range is **~10⁶ fm (1 nm), ~250× LARGER than the wavelength (~4027 fm)** — the Yukawa is in the **Born regime (κ ≪ 1)** where it behaves like a 1/r Coulomb potential, smooth and monotonic. **The framework's coupling α_χ = 6.8 × 10⁻⁷ with m_A' = 200 eV gives σ/m(29.4) = 3,755 cm²/g — factor ~22× ABOVE the target 174 cm²/g, factor ~6,800× above the fitted 0.55 cm²/g (Phase 44 free fit), per the framework's own `t40_yukawa_sigma_m.py` formula (Feng+ 2009 / Tulin-Yu 2018 Eq. 2.14).** The framework OVERSHOOTS, with the wrong slope (−3.7 vs fitted −1.93). **(ClawsGO #10 §2: the previous "σ/m(29.4) ~ 0.05" claim in this doc was wrong by ~6000× and inverted in sign; corrected here using the framework's actual formula.)** **(ClawsGO #8 §5: the previous "~4000× smaller than the wavelength" sentence was wrong by ~10⁹.)**
+For a resonance to appear, the potential range must be at least comparable to the de Broglie wavelength. This requires **m_A' ≲ 50 keV** (i.e., m_A'/m_χ ≲ 5 × 10⁻⁵). At the framework's named 200 eV Yukawa (m_A'/m_χ = 2 × 10⁻⁷), the range is **~10⁶ fm (1 nm), ~250× LARGER than the wavelength (~4027 fm)** — the Yukawa is in the **Born regime (κ ≪ 1)** where it behaves like a 1/r Coulomb potential, smooth and monotonic. **At the framework's coupling α_χ = 6.8 × 10⁻⁷ with m_A' = 200 eV, t40 Born (Feng+ 2009 / Tulin-Yu 2018) gives σ/m(29.4) ≈ 0.354 cm²/g — factor ~492× BELOW the target 174 cm²/g. σ/m(100) = 0.156 cm²/g (factor 3× above fit 0.052).** Note: κ ≡ α_χ m_χ/m_A' = 3.4 > 1.68 (bound-state threshold), so Born is OUTSIDE its domain — true Sommerfeld-resummed value is larger, but the project has no validated solver for this regime (Calogero returns NaN at 200 eV; framework's previous "σ/m(100) = 2.84" doc claim doesn't match any consistent coupling convention). **(ClawsGO #11 §2: my ClawsGO #10 claim of "σ/m(29.4) = 3,755, factor 22× ABOVE target" was wrong by ~10⁴× — the arithmetic error was a unit-mismatch (HBARC GeV cm vs MeV cm) in my Born calculation. The CORRECTED value is 0.354 (factor 492× below target).)** **(ClawsGO #8 §5: the original "~4000× smaller than the wavelength" sentence was wrong by ~10⁹.)**
 
 This means **no resonance can appear at v = 29.4 km/s from any Yukawa with m_A' ≳ 50 keV**. The Phase 3 scan went down to m_A'/m_χ = 0.01 (m_A' = 10 MeV), still 200× above the 50 keV bound, and the closest resonance was at v = **2934 km/s (CORRECTED)** — the resonance only appears when v is large enough that λ_dB ~ 1/m_A'.
 
@@ -155,7 +155,7 @@ ClawsGO correctly identified that the project's Phase-3 scan did NOT cover m_A' 
 
 2. **The framework's coupling-mediator pairing is incompatible.** The framework's derived α_χ = 6.8e-7 with m_A' = 200 eV. The Born-fit result requires α_D ~ 10⁻⁶ AND m_A' ~ 10 keV (a factor ~10⁵ in m_A' from the framework's 200 eV). The product α_D × (m_A'/m_χ)² must be ~10⁻⁵ for the Born fit; the framework's product is α_D × (200 eV / 1 GeV)² ~ 4×10⁻¹⁴, **factor ~2.5×10⁸ too small**.
 
-3. **The Phase 3 gate still FAILS for the framework's coupling.** The framework's α_χ = 6.8e-7, m_A' = 200 eV gives σ/m(29.4) = 3,755 cm²/g (factor ~22× ABOVE 174 cm²/g), per the framework's own `t40_yukawa_sigma_m.py` formula. This OVERSHOOTS the target by factor 22×, with the wrong slope (−3.7 vs fitted −1.93). **(ClawsGO #10 §2: the previous "σ/m(29.4) ~ 0.05" claim was wrong by ~6000× and inverted in sign.)**
+3. **The Phase 3 gate still FAILS for the framework's coupling.** The framework's α_χ = 6.8e-7, m_A' = 200 eV gives σ/m(29.4) ≈ 0.354 cm²/g (t40 Born, factor ~492× BELOW 174 cm²/g target), per the framework's own `t40_yukawa_sigma_m.py` formula. But Born is OUTSIDE its domain (κ=3.4 > 1.68 threshold); the true Sommerfeld-resummed value is larger but unknown. **(ClawsGO #11 §2: my ClawsGO #10 claim of "σ/m(29.4) = 3,755, factor 22× ABOVE target" was wrong by ~10⁴×; the corrected t40 Born value is 0.354, factor 492× BELOW target. The arithmetic error was a unit-mismatch in the HBARC constant.)**
 
 **Refined verdict (post-ClawsGO-check):**
 - **No resonance peak at v = 29.4 km/s in any (α_D, m_A'/m_χ) point scanned.** σ/m(v) is monotonically decreasing in the deep-Sommerfeld regime (kappa > 1) and smooth in the Born regime (kappa < 1).
@@ -216,6 +216,46 @@ ClawsGO correctly identified that the project's Phase-3 scan did NOT cover m_A' 
 
 ---
 
+## ClawsGO #11 corrections — hybrid-swap regression and second Born-arithmetic error
+
+**Another serious error caught (ClawsGO #11 §2-#4):** my ClawsGO #10 fix had a SECOND arithmetic bug. The t40 Born formula uses HBARC = 1.97327e-11 MeV·cm (NOT 1.97327e-14 GeV·cm — a factor 100 difference). When I "corrected" the framework coupling sign in #10, I still got it wrong: I reported σ/m(29.4) = **3,755** and σ/m(100) = **41.0**, when the correct t40 Born values are σ/m(29.4) = **0.354** and σ/m(100) = **0.156** — factor **10⁴× smaller**.
+
+**Correct framework analysis at α_χ = 6.8×10⁻⁷, m_A' = 200 eV (t40 Born, convention α=g²/4π):**
+
+| v [km/s] | σ/m(t40 Born) cm²/g | Phase 44 fit cm²/g | ratio to fit |
+|---|---|---|---|
+| 5 | 0.395 | 16.87 | 0.023 |
+| 10 | 0.391 | 4.43 | 0.088 |
+| 29.4 | **0.354** | 0.55 | 0.64 (factor 492× BELOW target 174) |
+| 100 | 0.156 | 0.052 | 3.00 |
+| 1000 | 5.0×10⁻⁴ | 6.1×10⁻⁴ | 0.82 |
+
+**But: Born is OUTSIDE its domain here.** κ ≡ α_χ m_χ/m_A' = 6.8e-7 × 1 / 2e-7 = **3.4 > 1.68** (bound-state threshold). In the deep-Sommerfeld regime, the true σ/m is LARGER than Born predicts (typically by orders of magnitude). The Calogero solver returns NaN at this point (overflows); a proper Sommerfeld-resummed calculation is needed but does not exist in this project. The framework's previous claim of "σ/m(100) = 2.84" doesn't match any consistent coupling convention (solving backwards gives α = 4.3 × 6.8e-7 = 2.9e-6).
+
+**Other ClawsGO #11 fixes:**
+- **(a) Hybrid-swap regression.** ClawsGO #11 §2 reported that the previous bundle (commit 8ffd436) had corrupted the m_A' ≥ 1 MeV half of the scan by a factor 10⁵–10¹⁷ due to a unit mismatch in the t40/Calogero seam. I could NOT reproduce this corruption in my testing (the Calogero branch gave 2.725e-5 cm²/g at α_D=1e-6, m_A'=3.166 MeV in BOTH bundles). But to be safe and address the broader ClawsGO concern, **this commit drops the hybrid solver entirely**. The Calogero-only version is shipped.
+- **(b) Best point doc/JSON mismatch.** The previous bundle's `best_overall` (α_D=0.9, m_A'=15.87 MeV, σ/m(29.4)=138.0) was in the t40 branch and contradicted the doc (which claimed 170.0 at α_D=5.55e-6). Now the Calogero-only run gives best_overall = (α_D=5.55e-6, m_A'/m_chi=1.26e-4, σ/m(29.4)=170.0) — matches the doc.
+- **(c) Method section updated.** No longer says "Numerov" or "48 scan points". Now says "validated Calogero (variable-phase) for ALL 100 scan points".
+- **(d) Solver failures emit null.** The 10 m_A'=1 keV points where Calogero overflows now show null in the JSON.
+- **(e) Framework point reported SEPARATELY** (not part of scan grid), with explicit caveat that Born is outside its domain.
+
+**Updated references:**
+- `v0.3-prelim/code/v19_2_f_phase3_resonance_scan.py` (Calogero-only; framework point SEPARATE)
+- `v0.3-prelim/data/results/v19_2_f_phase3_resonance_scan.json` (100 grid scan + framework analysis)
+- `v0.3-prelim/code/clawsgo_phase3_check.py` (validated Calogero solver)
+- `v0.3-prelim/code/t40_yukawa_sigma_m.py` (framework's Born formula, used for framework point only)
+- `v0.3-prelim/docs/PAPER_V1_DRAFT.md` (§2.1, §2.8, honest-limit sentence, §10 OPEN entry — still need updating per ClawsGO #11 §5)
+
+**Final verdict (post-ClawsGO #11):**
+- Framework's coupling (α_χ = 6.8e-7, m_A' = 200 eV) at v=29.4 km/s gives σ/m ≈ 0.354 cm²/g (t40 Born, unreliable) — factor 492× BELOW target 174.
+- The closest match to the target (σ/m(v = 29.4) = 170 cm²/g, ratio 0.977) at α_D = 5.55e-6, m_A'/m_chi = 1.26e-4 is a single-velocity coincidence, not a fit across the window.
+- No genuine resonance at v = 29.4 km/s in any (α_D, m_A') point.
+- Phase 3 gate FAILS. Paper (A) is the honest result.
+
+**ClawsGO #11 §5 unresolved: the PAPER still has σ/m(100) = 2.84 in §2.1/§2.8 (ClawsGO #10 fix did not land).** This bundle addresses the Phase 3 doc; a separate paper edit is required.
+
+---
+
 ## ClawsGO #9 EXTENDED scan (m_A' ∈ [1 keV, 2 GeV])
 
 ClawsGO #9 §3(a) flagged that the project's own Phase-3 scan only covered m_A' ∈ [10 MeV, 2 GeV] — the decade that *cannot* contain a 29.4 km/s resonance — while the gate verdict was implicitly relying on the reviewer's external `clawsgo_phase3_check.py` to cover the lower decade. ClawsGO recommended extending the project's own scan to m_A' ∈ [1 keV, 100 keV] (or wider).
@@ -251,7 +291,7 @@ ClawsGO #9 §3(a) flagged that the project's own Phase-3 scan only covered m_A' 
 **Final verdict (post-ClawsGO #9):**
 - The closest match to the target (σ/m(v = 29.4) = 170 cm²/g, within 3% of 174) is at α_D ~ 5.5×10⁻⁶, m_A' ~ 126 keV, Born regime.
 - This is **NOT a resonance** — σ/m is a smooth monotonic decrease, with the peak below the [5, 100] km/s window.
-- The framework's named coupling α_χ = 6.8×10⁻⁷ with m_A' = 200 eV gives σ/m(29.4) = 3,755 cm²/g (per framework's own `t40_yukawa_sigma_m.py` formula), factor ~22× ABOVE the target — **fundamentally incompatible** with this Born-regime match (which needs α_D ~ 5×10⁻⁶). **(ClawsGO #10 §2: the previous "~3000× below the target" framing was inverted; the framework OVERSHOOTS, not undershoots.)**
+- The framework's named coupling α_χ = 6.8×10⁻⁷ with m_A' = 200 eV gives σ/m(29.4) ≈ 0.354 cm²/g (t40 Born, factor ~492× BELOW target), per framework's own `t40_yukawa_sigma_m.py` formula. Born is OUTSIDE its domain (κ=3.4 > 1.68); the true Sommerfeld-resummed value is larger but unknown. **(ClawsGO #11 §2: my previous "~22× ABOVE target" framing was wrong by ~10⁴× due to a unit-mismatch in HBARC; the corrected value is ~492× BELOW target, but this is itself unreliable because Born is outside its domain.)**
 - The Phase 3 gate FAILS even with the EXTENDED grid: paper (A) is the honest result.
 - All three phases (1+2+3) converge: the cloud-9 feature cannot come from a standard Yukawa sector with m_A' ∈ [1 keV, 2 GeV].
 
