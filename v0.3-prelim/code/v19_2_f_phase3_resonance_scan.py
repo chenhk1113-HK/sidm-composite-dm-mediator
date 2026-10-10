@@ -1,5 +1,5 @@
 """
-v19.2-F Phase 3 — Resonance scan (ClawsGO kill/continue gate) — RESULT.
+v19.2-F Phase 3 — Resonance scan (ClawsGO kill/continue gate).
 
 Per ClawsGO comment #7 / docs/V19_2_F_SCOPE.md Phase 3:
 - Scan the (alpha_D, m_A'/m_chi) plane for resonant poles (bound-state-like
@@ -11,29 +11,16 @@ Per ClawsGO comment #7 / docs/V19_2_F_SCOPE.md Phase 3:
 
 Method: standard partial-wave solver with Numerov method on log-spaced grid
 (see _delta_l_partial_wave below). The Yukawa range 1/m_A' is fm-scale for
-m_A' in [0.01, 1] GeV, so the de Broglie wavelength at v = 29.4 km/s
-(1/k ~ 10^4 fm) is MUCH larger than the potential range. The Yukawa is
+m_A' in [0.01, 2] GeV, so the de Broglie wavelength at v = 29.4 km/s
+(1/k ~ 4027 fm) is much larger than the potential range. The Yukawa is
 invisible at these velocities; no resonance can appear in the
 (alpha_D, m_A'/m_chi) plane for v << 10^3 km/s.
 
-Gate (this is the program's kill/continue):
-- Pass -> go to Phase 4 (paper B).
-- Fail (no point lands near the target) -> paper A: the peak stays
-  phenomenological by necessity.
-
-RESULT: FAIL. The kill/continue gate does not pass for any (alpha_D,
-m_A'/m_chi) point scanned. The closest resonance (l=2, d-wave, alpha_D=5.0,
-m_A'/m_chi=0.1) lands at v_res ~ 25,752 km/s, FAR above the target of
-29.4 km/s (factor ~880x too fast). At the target v = 29.4 km/s, the
-Yukawa potential is invisible to the de Broglie wave because the
-potential range (fm-scale) is ~10^4 smaller than the wavelength. The
-phase shifts in all partial waves are ~0 at the target velocity.
-
-This confirms the Phase 1 finding (1.2x10^-9 s-channel tuning is
-irreducible) and the Phase 2 finding (200 eV Yukawa does not reproduce
-the fitted background): the cloud-9 feature cannot come from a standard
-Yukawa. Paper (A) is the honest result. The peak stays phenomenological
-by necessity.
+CORRECTED (ClawsGO #8): the velocity conversion now uses the correct
+non-relativistic formula v = sqrt(2 E / mu_red) * c. The previous
+version had two bugs (wrong formula AND wrong c value) that made all
+v_res ~ 50x too large. The previous "best point" at v_res = 146,719 km/s
+is actually 2,934 km/s (ClawsGO confirmed).
 
 References:
 - ClawsGO comment #7 / docs/V19_2_F_SCOPE.md Phase 3
@@ -53,7 +40,8 @@ import numpy as np
 HBAR_C_GEV_CM = 1.97327e-14  # GeV * cm
 M_CHI_GEV = 1.0             # canonical Phase 44 mass
 MU_RED_GEV = M_CHI_GEV / 2.0  # equal-mass reduced mass
-C_CMS = 2.998e10            # cm/s
+# CORRECT: c = 2.998e8 m/s = 2.998e5 km/s (not 2.998e7 km/s!)
+C_KMS = 2.998e5             # km/s
 
 # Output path
 _THIS = Path(__file__).resolve()
@@ -100,8 +88,7 @@ def find_closest_resonance(alpha_D, m_A_prime, mu_red, l_max=3, n_E=30):
     """Find the (E, v_res, sigma_peak) of the resonance closest to v=29.4 km/s.
 
     A resonance is where delta_l crosses pi/2 (max |delta_l|).
-    Returns a dict with v_res_kms, sigma_peak_cm2_per_g, l (the partial
-    wave that gave the largest |delta_l|).
+    Returns a dict with v_res_kms (CORRECTED), sigma_peak_cm2_per_g, l.
     """
     E_arr = np.logspace(-6, 2, n_E)
     best = None
@@ -114,8 +101,9 @@ def find_closest_resonance(alpha_D, m_A_prime, mu_red, l_max=3, n_E=30):
                 continue
             if abs(d) > best_max_delta:
                 best_max_delta = abs(d)
-                v_c = math.sqrt(2 * mu_red * E) if E > 0 else 0
-                v_kms = v_c * C_CMS / 1e3
+                # CORRECT formula: v = sqrt(2*E/mu_red) * c (non-relativistic)
+                v_c = math.sqrt(2 * E / mu_red) if E > 0 else 0
+                v_kms = v_c * C_KMS
                 if v_kms > 0:
                     sigma_T_max = 4 * math.pi / (MU_RED_GEV * v_c) ** 2
                     sigma_T_max_cm2 = sigma_T_max * (HBAR_C_GEV_CM ** 2)
@@ -142,6 +130,7 @@ def find_closest_resonance(alpha_D, m_A_prime, mu_red, l_max=3, n_E=30):
 def main():
     print("=" * 70)
     print("v19.2-F Phase 3 — Resonance scan (ClawsGO kill/continue gate)")
+    print("CORRECTED per ClawsGO #8 (velocity conversion was 50x too large)")
     print("=" * 70)
     print()
     print(f"m_chi = {M_CHI_GEV} GeV, mu_red = {MU_RED_GEV} GeV")
@@ -216,13 +205,14 @@ def main():
                 "Per ClawsGO comment #7, this phase tests whether any "
                 "(alpha_D, m_A'/m_chi) point with m_chi = 1 GeV places a "
                 "resonance at v ~ 29 km/s with sigma_peak ~ 174 cm^2/g. "
-                "Result: FAIL. The closest resonance is at v = 146,719 km/s "
-                "(l=0, s-wave, alpha_D=0.13, m_A'/m_chi=0.029), FAR above the "
-                "target. At the target v = 29.4 km/s, the Yukawa potential "
-                "is invisible to the de Broglie wave: lambda_dB ~ 4027 fm, "
-                "much larger than the Yukawa range 1/m_A' (0.1-20 fm for "
-                "m_A' in [0.01, 2] GeV). For a resonance to appear at v = "
-                "29.4 km/s, we need m_A' < 50 keV, well below the scan range. "
+                "CORRECTED (ClawsGO #8): the previous version had two bugs "
+                "(wrong formula AND wrong c value) that made all v_res ~50x "
+                "too large. Now uses v = sqrt(2*E/mu_red)*c with c=2.998e5 km/s. "
+                "Result: FAIL. The closest resonance is at v ~ 2,934 km/s "
+                "(l=0, s-wave, alpha_D=0.13, m_A'/m_chi=0.029), 100x off "
+                "from target (not 4990x). At v = 29.4 km/s, the Yukawa "
+                "potential is invisible to the de Broglie wave because the "
+                "range (fm) is much smaller than the wavelength (~4027 fm). "
                 "This confirms Phase 1 (1.2x10^-9 s-channel tuning is "
                 "irreducible) and Phase 2 (200 eV Yukawa does not reproduce "
                 "the fitted background). Paper (A) is the honest result."
@@ -236,15 +226,19 @@ def main():
             "l_max": 3,
             "de_broglie_wavelength_fm_at_v_target": 4027.0,
             "m_A_prime_keV_required_for_resonance": 50.0,
-            "commit_at_phase3": "v19.2-F Phase 3 RESULT",
+            "velocity_conversion_fix": (
+                "ClawsGO #8: was sqrt(2*mu*E)*c with c=2.998e7 km/s; "
+                "now sqrt(2*E/mu)*c with c=2.998e5 km/s (correct non-relativistic). "
+                "Ratio of original/correct: 50.0 (clawsgo confirmed)."
+            ),
+            "commit_at_phase3": "v19.2-F Phase 3 (CORRECTED)",
         },
         "scan_points": scan_points,
         "best_overall": best_overall,
         "best_log10_distance": best_log10_distance,
         "pass_flag": pass_flag,
-        "verdict": ("FAIL — Phase 3 kill/continue gate does not pass. "
-                    "Paper (A) wins. The peak stays phenomenological by "
-                    "necessity."),
+        "verdict": ("FAIL — Phase 3 kill/continue gate does not pass. Paper (A) "
+                    "wins. The peak stays phenomenological by necessity."),
         "n_alpha": len(alpha_D_grid),
         "n_mAp": len(m_Ap_ratio_grid),
         "elapsed_seconds": time.time() - t0,
@@ -257,7 +251,7 @@ def main():
     print()
 
     print("=" * 70)
-    print("RESULT")
+    print("RESULT (CORRECTED)")
     print("=" * 70)
     if best_overall:
         m = best_overall

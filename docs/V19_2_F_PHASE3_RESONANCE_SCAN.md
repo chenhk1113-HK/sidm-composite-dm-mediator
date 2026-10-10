@@ -1,11 +1,12 @@
 # v19.2-F Phase 3 — Resonance scan RESULT (ClawsGO kill/continue gate)
 
-**Date:** 2026-10-09
-**Status:** Phase 3 COMPLETE — Kill/continue gate FAILS (nuanced)
-**Verdict:** Paper (A) is the honest result. The peak stays phenomenological by necessity. **No resonance** at v = 29.4 km/s in any (α_D, m_A'/m_chi) point; **Born-regime Yukawa CAN reach the target 174 cm²/g** but requires α_D ~ 10⁻⁶ with m_A' ~ 10 keV (a fine-tuned point, not a natural peak), incompatible with the framework's coupling-mediator pairing.
+**Date:** 2026-10-09 (initial) / 2026-10-10 (ClawsGO #8 velocity-conversion correction)
+**Status:** Phase 3 COMPLETE — Kill/continue gate FAILS
+**Verdict:** Paper (A) is the honest result. The peak stays phenomenological by necessity. **No resonance** at v = 29.4 km/s in any (α_D, m_A'/m_chi) point scanned.
 **Scripts:**
-- `v0.3-prelim/code/v19_2_f_phase3_resonance_scan.py` (project's original scan, 48 points, m_A' ∈ [10 MeV, 2 GeV])
-- `v0.3-prelim/code/clawsgo_phase3_check.py` (ClawsGO's corrected scan, m_A' ∈ [1, 100] keV)
+- `v0.3-prelim/code/v19_2_f_phase3_resonance_scan.py` (project's original scan, 48 points, m_A' ∈ [10 MeV, 2 GeV]; CORRECTED per ClawsGO #8)
+- `v0.3-prelim/code/clawsgo_phase3_check.py` (ClawsGO's check, m_A' ∈ [1, 100] keV, Born-regime Goldilocks at α_D ~ 10⁻⁶)
+**Result:** (CORRECTED) Best (α_D, m_A'/m_chi) point at v_res = **2934 km/s** (factor ~100× off from target 29.4), not 146,719 km/s as originally reported. **The ClawsGO #8 velocity-conversion bug fix moved v_res by factor 50× but did NOT change the gate verdict — paper (A) still wins.**
 
 ## Gate definition (ClawsGO plan)
 
@@ -25,24 +26,37 @@ For each (α_D, m_A'/m_chi) point, scan E from 10⁻⁶ to 10² GeV (30 log-spac
 
 Scan grid: 8 α_D points in [10⁻³, 5.0] (log-spaced) × 6 m_A'/m_chi points in [0.01, 2.0] (log-spaced) = 48 scan points.
 
-## RESULT
+## RESULT (CORRECTED per ClawsGO #8)
 
 **Best (α_D, m_A'/m_chi) point to target (v_res = 29.4 km/s, σ_peak = 174 cm²/g):**
 
-| Quantity | Value |
-|---|---|
-| α_D | 1.299 × 10⁻¹ |
-| m_A'/m_chi | 2.885 × 10⁻² |
-| m_A' | 2.885 × 10⁻² GeV |
-| ℓ (partial wave) | 0 (s-wave) |
-| v_res | **146,719 km/s** (target: 29.4, **factor 4990× off**) |
-| σ_actual | 114.5 cm²/g (target: 174) |
-| σ_peak (unitarity) | 458.4 cm²/g |
-| log₁₀ distance to target | 3.88 |
+| Quantity | Original (wrong) | **CORRECTED** |
+|---|---|---|
+| α_D | 1.299 × 10⁻¹ | 1.299 × 10⁻¹ |
+| m_A'/m_chi | 2.885 × 10⁻² | 2.885 × 10⁻² |
+| m_A' | 2.885 × 10⁻² GeV | 2.885 × 10⁻² GeV |
+| ℓ (partial wave) | 0 (s-wave) | 0 (s-wave) |
+| **v_res** | **146,719 km/s** (factor 4990× off) | **2934.4 km/s** (factor **99.8×** off) |
+| σ_actual | 114.5 cm²/g | 114.5 cm²/g (unchanged) |
+| σ_peak (unitarity) | 458.4 cm²/g | 114.6 cm²/g |
+| log₁₀ distance to target | 3.88 | **2.18** |
 
 **No scan point lands within the target tolerance (factor 1.5 in v_res, factor 2 in σ_peak).**
 
 **Pass flag: False. Phase 3 kill/continue gate FAILS.**
+
+### Velocity conversion bug (ClawsGO #8)
+
+The original version had **two compounding bugs** in the v_res formula:
+
+1. **Wrong formula**: `v = sqrt(2 * mu_red * E) * c` instead of `v = sqrt(2 * E / mu_red) * c`. Factor error: mu_red = 0.5.
+2. **Wrong c value**: `C_CMS / 1e3` = 2.998e7 km/s instead of c = 2.998e5 km/s. Factor error: 100.
+
+Combined factor: 0.5 × 100 = **50× too large**. All v_res values in the original scan were 50× too large; most were superluminal (>c).
+
+**Fix:** `v = sqrt(2 * E / mu_red) * 2.998e5 km/s` (correct non-relativistic formula).
+
+**ClawsGO #8 confirmed:** the ratio (original/correct) is exactly **50.00** at every scan point (verified independently).
 
 ## Why this fails (the fundamental physics)
 
@@ -56,9 +70,9 @@ The Yukawa potential V(r) = -α_D exp(-m_A' r) / r has range 1/m_A', which is **
      ≈ 4,000 fm
 ```
 
-For a resonance to appear, the potential range must be at least comparable to the de Broglie wavelength. This requires **m_A' ≲ 50 keV** (i.e., m_A'/m_χ ≲ 5 × 10⁻⁵). At the framework's named 200 eV Yukawa (m_A'/m_χ = 2 × 10⁻⁷), the range is 1 fm, **~4000× smaller than the wavelength** — the Yukawa is invisible to the wave at v = 29.4 km/s.
+For a resonance to appear, the potential range must be at least comparable to the de Broglie wavelength. This requires **m_A' ≲ 50 keV** (i.e., m_A'/m_χ ≲ 5 × 10⁻⁵). At the framework's named 200 eV Yukawa (m_A'/m_χ = 2 × 10⁻⁷), the range is **~10⁶ fm (1 nm), ~250× LARGER than the wavelength (~4027 fm)** — the Yukawa is in the **Born regime (κ ≪ 1)** where it behaves like a 1/r Coulomb potential, smooth and monotonic. The framework's coupling α_χ = 6.8 × 10⁻⁷ gives σ/m(29.4) ~ 0.05 cm²/g (way below target), so the framework's coupling is too small by factor ~10⁴ to reach σ/m(29.4) = 174 cm²/g. **(The "~4000× smaller than the wavelength" sentence in the original v19.2-F Phase 3 doc was wrong by ~10⁹ — ClawsGO #8 §5.)**
 
-This means **no resonance can appear at v = 29.4 km/s from any Yukawa with m_A' ≳ 50 keV**. The Phase 3 scan went down to m_A'/m_χ = 0.01 (m_A' = 10 MeV), still 200× above the 50 keV bound, and the closest resonance was at v = 146,719 km/s — the resonance only appears when v is large enough that λ_dB ~ 1/m_A'.
+This means **no resonance can appear at v = 29.4 km/s from any Yukawa with m_A' ≳ 50 keV**. The Phase 3 scan went down to m_A'/m_χ = 0.01 (m_A' = 10 MeV), still 200× above the 50 keV bound, and the closest resonance was at v = **2934 km/s (CORRECTED)** — the resonance only appears when v is large enough that λ_dB ~ 1/m_A'.
 
 To get a resonance at v = 29.4 km/s would require a mediator with **m_A' ≲ 50 keV**, corresponding to a range ≥ 4 × 10³ fm = 4 pm. Such a light mediator has its own experimental constraints (ΔN_eff, fifth-force experiments, stellar cooling) that the project has not addressed.
 
@@ -68,7 +82,7 @@ This result **confirms** the Phase 1 finding (1.2 × 10⁻⁹ near-threshold s-c
 
 - **Phase 1**: An s-channel pole at v_res = 29.4 km/s requires the mediator to be 2.40 eV above the 2m_χ threshold, with fractional precision 1.2 × 10⁻⁹. This is a tuning requirement, not a UV prediction.
 - **Phase 2**: The 200 eV Yukawa (m_φ/m_χ = 2 × 10⁻⁷) has slope −3.83 (Born), not the fitted −1.93. A single Yukawa at the framework's parameters cannot reproduce the background.
-- **Phase 3 (this)**: No (α_D, m_A'/m_chi) point with m_A' in [10⁻², 2] GeV places a resonance at v = 29.4 km/s. The closest point is at v = 146,719 km/s (factor 4990× too fast). A resonance at 29.4 km/s would require m_A' ≲ 50 keV (range ~4 × 10³ fm), well below the scan range.
+- **Phase 3 (this, CORRECTED)**: No (α_D, m_A'/m_chi) point with m_A' in [10⁻², 2] GeV places a resonance at v = 29.4 km/s. The closest point is at v = **2934 km/s** (factor ~100× too fast; was incorrectly reported as 146,719 km/s / 4990× off due to a velocity-conversion bug fixed by ClawsGO #8). A resonance at 29.4 km/s would require m_A' ≲ 50 keV (range ~4 × 10³ fm), well below the scan range.
 
 **All three phases point to the same conclusion: the cloud-9 feature cannot come from a standard Yukawa sector with mediator masses in the [10⁻², 2] GeV window.**
 

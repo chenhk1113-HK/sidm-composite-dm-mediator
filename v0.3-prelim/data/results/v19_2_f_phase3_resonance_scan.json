@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "description": "v19.2-F Phase 3 \u2014 Resonance scan (ClawsGO kill/continue gate). Per ClawsGO comment #7, this phase tests whether any (alpha_D, m_A'/m_chi) point with m_chi = 1 GeV places a resonance at v ~ 29 km/s with sigma_peak ~ 174 cm^2/g. Result: FAIL. The closest resonance is at v = 146,719 km/s (l=0, s-wave, alpha_D=0.13, m_A'/m_chi=0.029), FAR above the target. At the target v = 29.4 km/s, the Yukawa potential is invisible to the de Broglie wave: lambda_dB ~ 4027 fm, much larger than the Yukawa range 1/m_A' (0.1-20 fm for m_A' in [0.01, 2] GeV). For a resonance to appear at v = 29.4 km/s, we need m_A' < 50 keV, well below the scan range. This confirms Phase 1 (1.2x10^-9 s-channel tuning is irreducible) and Phase 2 (200 eV Yukawa does not reproduce the fitted background). Paper (A) is the honest result.",
+    "description": "v19.2-F Phase 3 \u2014 Resonance scan (ClawsGO kill/continue gate). Per ClawsGO comment #7, this phase tests whether any (alpha_D, m_A'/m_chi) point with m_chi = 1 GeV places a resonance at v ~ 29 km/s with sigma_peak ~ 174 cm^2/g. CORRECTED (ClawsGO #8): the previous version had two bugs (wrong formula AND wrong c value) that made all v_res ~50x too large. Now uses v = sqrt(2*E/mu_red)*c with c=2.998e5 km/s. Result: FAIL. The closest resonance is at v ~ 2,934 km/s (l=0, s-wave, alpha_D=0.13, m_A'/m_chi=0.029), 100x off from target (not 4990x). At v = 29.4 km/s, the Yukawa potential is invisible to the de Broglie wave because the range (fm) is much smaller than the wavelength (~4027 fm). This confirms Phase 1 (1.2x10^-9 s-channel tuning is irreducible) and Phase 2 (200 eV Yukawa does not reproduce the fitted background). Paper (A) is the honest result.",
     "method": "Partial-wave solver with Numerov method on log-spaced grid",
     "m_chi_GeV": 1.0,
     "mu_red_GeV": 0.5,
@@ -10,7 +10,8 @@
     "l_max": 3,
     "de_broglie_wavelength_fm_at_v_target": 4027.0,
     "m_A_prime_keV_required_for_resonance": 50.0,
-    "commit_at_phase3": "v19.2-F Phase 3 RESULT"
+    "velocity_conversion_fix": "ClawsGO #8: was sqrt(2*mu*E)*c with c=2.998e7 km/s; now sqrt(2*E/mu)*c with c=2.998e5 km/s (correct non-relativistic). Ratio of original/correct: 50.0 (clawsgo confirmed).",
+    "commit_at_phase3": "v19.2-F Phase 3 (CORRECTED)"
   },
   "scan_points": [
     {
@@ -20,9 +21,9 @@
       "best_resonance": {
         "l": 2,
         "E_GeV": 0.007278953843983146,
-        "v_res_kms": 2557797.221547007,
+        "v_res_kms": 51155.944430940144,
         "delta_l_rad": -1.5444190623305403,
-        "sigma_peak_unitarity_cm2_per_g": 1.5083597291328965,
+        "sigma_peak_unitarity_cm2_per_g": 0.3770899322832241,
         "sigma_actual_cm2_per_g": 1.8841381450169323
       }
     },
@@ -33,9 +34,9 @@
       "best_resonance": {
         "l": 0,
         "E_GeV": 0.02592943797404667,
-        "v_res_kms": 4827565.558627696,
+        "v_res_kms": 96551.3111725539,
         "delta_l_rad": 1.4788815621305282,
-        "sigma_peak_unitarity_cm2_per_g": 0.423429187299419,
+        "sigma_peak_unitarity_cm2_per_g": 0.10585729682485474,
         "sigma_actual_cm2_per_g": 0.10496549574467902
       }
     },
@@ -46,9 +47,9 @@
       "best_resonance": {
         "l": 2,
         "E_GeV": 2.395026619987486e-05,
-        "v_res_kms": 146719.14953595528,
+        "v_res_kms": 2934.3829907191057,
         "delta_l_rad": 1.4522492225894097,
-        "sigma_peak_unitarity_cm2_per_g": 458.419992364788,
+        "sigma_peak_unitarity_cm2_per_g": 114.604998091197,
         "sigma_actual_cm2_per_g": 565.0096851779781
       }
     },
@@ -59,9 +60,9 @@
       "best_resonance": {
         "l": 2,
         "E_GeV": 0.00016102620275609394,
-        "v_res_kms": 380434.5087497431,
+        "v_res_kms": 7608.690174994862,
         "delta_l_rad": -1.5293028324388633,
-        "sigma_peak_unitarity_cm2_per_g": 68.1831941669243,
+        "sigma_peak_unitarity_cm2_per_g": 17.045798541731074,
         "sigma_actual_cm2_per_g": 85.08233728835073
       }
     },
@@ -72,9 +73,9 @@
       "best_resonance": {
         "l": 1,
         "E_GeV": 1e-06,
-        "v_res_kms": 29980.0,
+        "v_res_kms": 599.6,
         "delta_l_rad": 1.549582554769653,
-        "sigma_peak_unitarity_cm2_per_g": 10979.280848481276,
+        "sigma_peak_unitarity_cm2_per_g": 2744.820212120319,
         "sigma_actual_cm2_per_g": 8230.755486282596
       }
     },
@@ -85,9 +86,9 @@
       "best_resonance": {
         "l": 1,
         "E_GeV": 1e-06,
-        "v_res_kms": 29980.0,
+        "v_res_kms": 599.6,
         "delta_l_rad": 1.5634459038296278,
-        "sigma_peak_unitarity_cm2_per_g": 10979.280848481276,
+        "sigma_peak_unitarity_cm2_per_g": 2744.820212120319,
         "sigma_actual_cm2_per_g": 8234.015747023614
       }
     },
@@ -98,9 +99,9 @@
       "best_resonance": {
         "l": 2,
         "E_GeV": 0.007278953843983146,
-        "v_res_kms": 2557797.221547007,
+        "v_res_kms": 51155.944430940144,
         "delta_l_rad": -1.541460299069989,
-        "sigma_peak_unitarity_cm2_per_g": 1.5083597291328965,
+        "sigma_peak_unitarity_cm2_per_g": 0.3770899322832241,
         "sigma_actual_cm2_per_g": 1.8838275041054569
       }
     },
@@ -111,9 +112,9 @@
       "best_resonance": {
         "l": 0,
         "E_GeV": 0.02592943797404667,
-        "v_res_kms": 4827565.558627696,
+        "v_res_kms": 96551.3111725539,
         "delta_l_rad": 1.488370337993377,
-        "sigma_peak_unitarity_cm2_per_g": 0.423429187299419,
+        "sigma_peak_unitarity_cm2_per_g": 0.10585729682485474,
         "sigma_actual_cm2_per_g": 0.10513972501362501
       }
     },
@@ -124,9 +125,9 @@
       "best_resonance": {
         "l": 2,
         "E_GeV": 2.395026619987486e-05,
-        "v_res_kms": 146719.14953595528,
+        "v_res_kms": 2934.3829907191057,
         "delta_l_rad": 1.4522492383177712,
-        "sigma_peak_unitarity_cm2_per_g": 458.419992364788,
+        "sigma_peak_unitarity_cm2_per_g": 114.604998091197,
         "sigma_actual_cm2_per_g": 565.0096872948833
       }
     },
@@ -137,9 +138,9 @@
       "best_resonance": {
         "l": 2,
         "E_GeV": 0.00016102620275609394,
-        "v_res_kms": 380434.5087497431,
+        "v_res_kms": 7608.690174994862,
         "delta_l_rad": -1.5293028283354964,
-        "sigma_peak_unitarity_cm2_per_g": 68.1831941669243,
+        "sigma_peak_unitarity_cm2_per_g": 17.045798541731074,
         "sigma_actual_cm2_per_g": 85.08233725936134
       }
     },
@@ -150,9 +151,9 @@
       "best_resonance": {
         "l": 1,
         "E_GeV": 1e-06,
-        "v_res_kms": 29980.0,
+        "v_res_kms": 599.6,
         "delta_l_rad": 1.5495825640260277,
-        "sigma_peak_unitarity_cm2_per_g": 10979.280848481276,
+        "sigma_peak_unitarity_cm2_per_g": 2744.820212120319,
         "sigma_actual_cm2_per_g": 8230.755489515506
       }
     },
@@ -163,9 +164,9 @@
       "best_resonance": {
         "l": 1,
         "E_GeV": 1e-06,
-        "v_res_kms": 29980.0,
+        "v_res_kms": 599.6,
         "delta_l_rad": 1.563445904941216,
-        "sigma_peak_unitarity_cm2_per_g": 10979.280848481276,
+        "sigma_peak_unitarity_cm2_per_g": 2744.820212120319,
         "sigma_actual_cm2_per_g": 8234.015747158172
       }
     },
@@ -176,9 +177,9 @@
       "best_resonance": {
         "l": 2,
         "E_GeV": 0.0038566204211634724,
-        "v_res_kms": 1861808.7917909017,
+        "v_res_kms": 37236.17583581804,
         "delta_l_rad": 1.5348450943744076,
-        "sigma_peak_unitarity_cm2_per_g": 2.8468658176033372,
+        "sigma_peak_unitarity_cm2_per_g": 0.7117164544008343,
         "sigma_actual_cm2_per_g": 3.5539848172795634
       }
     },
@@ -189,9 +190,9 @@
       "best_resonance": {
         "l": 0,
         "E_GeV": 0.02592943797404667,
-        "v_res_kms": 4827565.558627696,
+        "v_res_kms": 96551.3111725539,
         "delta_l_rad": 1.5209675005413494,
-        "sigma_peak_unitarity_cm2_per_g": 0.423429187299419,
+        "sigma_peak_unitarity_cm2_per_g": 0.10585729682485474,
         "sigma_actual_cm2_per_g": 0.10559467993964228
       }
     },
@@ -202,9 +203,9 @@
       "best_resonance": {
         "l": 2,
         "E_GeV": 2.395026619987486e-05,
-        "v_res_kms": 146719.14953595528,
+        "v_res_kms": 2934.3829907191057,
         "delta_l_rad": 1.4522492914656067,
-        "sigma_peak_unitarity_cm2_per_g": 458.419992364788,
+        "sigma_peak_unitarity_cm2_per_g": 114.604998091197,
         "sigma_actual_cm2_per_g": 565.0096944481332
       }
     },
@@ -215,9 +216,9 @@
       "best_resonance": {
         "l": 2,
         "E_GeV": 0.00016102620275609394,
-        "v_res_kms": 380434.5087497431,
+        "v_res_kms": 7608.690174994862,
         "delta_l_rad": -1.5293028144776497,
-        "sigma_peak_unitarity_cm2_per_g": 68.1831941669243,
+        "sigma_peak_unitarity_cm2_per_g": 17.045798541731074,
         "sigma_actual_cm2_per_g": 85.08233716145865
       }
     },
@@ -228,9 +229,9 @@
       "best_resonance": {
         "l": 1,
         "E_GeV": 1e-06,
-        "v_res_kms": 29980.0,
+        "v_res_kms": 599.6,
         "delta_l_rad": 1.5495825953004427,
-        "sigma_peak_unitarity_cm2_per_g": 10979.280848481276,
+        "sigma_peak_unitarity_cm2_per_g": 2744.820212120319,
         "sigma_actual_cm2_per_g": 8230.755500438494
       }
     },
@@ -241,9 +242,9 @@
       "best_resonance": {
         "l": 1,
         "E_GeV": 1e-06,
-        "v_res_kms": 29980.0,
+        "v_res_kms": 599.6,
         "delta_l_rad": 1.5634459086950852,
-        "sigma_peak_unitarity_cm2_per_g": 10979.280848481276,
+        "sigma_peak_unitarity_cm2_per_g": 2744.820212120319,
         "sigma_actual_cm2_per_g": 8234.015747612573
       }
     },
@@ -254,9 +255,9 @@
       "best_resonance": {
         "l": 2,
         "E_GeV": 0.007278953843983146,
-        "v_res_kms": 2557797.221547007,
+        "v_res_kms": 51155.944430940144,
         "delta_l_rad": -1.4908510625086464,
-        "sigma_peak_unitarity_cm2_per_g": 1.5083597291328965,
+        "sigma_peak_unitarity_cm2_per_g": 0.3770899322832241,
         "sigma_actual_cm2_per_g": 1.8734249405892585
       }
     },
@@ -267,9 +268,9 @@
       "best_resonance": {
         "l": 0,
         "E_GeV": 0.013738237958832637,
-        "v_res_kms": 3513962.6880053743,
+        "v_res_kms": 70279.25376010749,
         "delta_l_rad": -1.5515480354823055,
-        "sigma_peak_unitarity_cm2_per_g": 0.7991767853622331,
+        "sigma_peak_unitarity_cm2_per_g": 0.19979419634055828,
         "sigma_actual_cm2_per_g": 0.19972018238776745
       }
     },
@@ -280,9 +281,9 @@
       "best_resonance": {
         "l": 0,
         "E_GeV": 4.520353656360241e-05,
-        "v_res_kms": 201566.25894425006,
+        "v_res_kms": 4031.325178885001,
         "delta_l_rad": 1.518845484300245,
-        "sigma_peak_unitarity_cm2_per_g": 242.88543957248072,
+        "sigma_peak_unitarity_cm2_per_g": 60.72135989312018,
         "sigma_actual_cm2_per_g": 60.557626998506876
       }
     },
@@ -293,9 +294,9 @@
       "best_resonance": {
         "l": 2,
         "E_GeV": 0.00016102620275609394,
-        "v_res_kms": 380434.5087497431,
+        "v_res_kms": 7608.690174994862,
         "delta_l_rad": -1.5293027676437287,
-        "sigma_peak_unitarity_cm2_per_g": 68.1831941669243,
+        "sigma_peak_unitarity_cm2_per_g": 17.045798541731074,
         "sigma_actual_cm2_per_g": 85.08233683058688
       }
     },
@@ -306,9 +307,9 @@
       "best_resonance": {
         "l": 1,
         "E_GeV": 1e-06,
-        "v_res_kms": 29980.0,
+        "v_res_kms": 599.6,
         "delta_l_rad": 1.5495827011554244,
-        "sigma_peak_unitarity_cm2_per_g": 10979.280848481276,
+        "sigma_peak_unitarity_cm2_per_g": 2744.820212120319,
         "sigma_actual_cm2_per_g": 8230.755537409574
       }
     },
@@ -319,9 +320,9 @@
       "best_resonance": {
         "l": 1,
         "E_GeV": 1e-06,
-        "v_res_kms": 29980.0,
+        "v_res_kms": 599.6,
         "delta_l_rad": 1.5634459213798642,
-        "sigma_peak_unitarity_cm2_per_g": 10979.280848481276,
+        "sigma_peak_unitarity_cm2_per_g": 2744.820212120319,
         "sigma_actual_cm2_per_g": 8234.015749148053
       }
     },
@@ -332,9 +333,9 @@
       "best_resonance": {
         "l": 0,
         "E_GeV": 0.007278953843983146,
-        "v_res_kms": 2557797.221547007,
+        "v_res_kms": 51155.944430940144,
         "delta_l_rad": 1.5385725641794359,
-        "sigma_peak_unitarity_cm2_per_g": 1.5083597291328965,
+        "sigma_peak_unitarity_cm2_per_g": 0.3770899322832241,
         "sigma_actual_cm2_per_g": 0.3766985085886234
       }
     },
@@ -345,9 +346,9 @@
       "best_resonance": {
         "l": 0,
         "E_GeV": 2.395026619987486e-05,
-        "v_res_kms": 146719.14953595528,
+        "v_res_kms": 2934.3829907191057,
         "delta_l_rad": 1.5359321042133507,
-        "sigma_peak_unitarity_cm2_per_g": 458.419992364788,
+        "sigma_peak_unitarity_cm2_per_g": 114.604998091197,
         "sigma_actual_cm2_per_g": 114.4657505425228
       }
     },
@@ -358,9 +359,9 @@
       "best_resonance": {
         "l": 0,
         "E_GeV": 0.17433288221999874,
-        "v_res_kms": 12517606.17180808,
+        "v_res_kms": 250352.1234361616,
         "delta_l_rad": 1.5446105851085186,
-        "sigma_peak_unitarity_cm2_per_g": 0.06297882940193698,
+        "sigma_peak_unitarity_cm2_per_g": 0.015744707350484246,
         "sigma_actual_cm2_per_g": 0.015733913781165176
       }
     },
@@ -371,9 +372,9 @@
       "best_resonance": {
         "l": 2,
         "E_GeV": 0.00016102620275609394,
-        "v_res_kms": 380434.5087497431,
+        "v_res_kms": 7608.690174994862,
         "delta_l_rad": -1.5293026089765536,
-        "sigma_peak_unitarity_cm2_per_g": 68.1831941669243,
+        "sigma_peak_unitarity_cm2_per_g": 17.045798541731074,
         "sigma_actual_cm2_per_g": 85.08233570963401
       }
     },
@@ -384,9 +385,9 @@
       "best_resonance": {
         "l": 2,
         "E_GeV": 14.873521072935118,
-        "v_res_kms": 115621480.2264809,
+        "v_res_kms": 2312429.604529618,
         "delta_l_rad": 1.550445761147433,
-        "sigma_peak_unitarity_cm2_per_g": 0.0007381763063797939,
+        "sigma_peak_unitarity_cm2_per_g": 0.00018454407659494848,
         "sigma_actual_cm2_per_g": 0.0009223382952109316
       }
     },
@@ -397,9 +398,9 @@
       "best_resonance": {
         "l": 1,
         "E_GeV": 1e-06,
-        "v_res_kms": 29980.0,
+        "v_res_kms": 599.6,
         "delta_l_rad": 1.563445964332775,
-        "sigma_peak_unitarity_cm2_per_g": 10979.280848481276,
+        "sigma_peak_unitarity_cm2_per_g": 2744.820212120319,
         "sigma_actual_cm2_per_g": 8234.015754347442
       }
     },
@@ -410,9 +411,9 @@
       "best_resonance": {
         "l": 1,
         "E_GeV": 0.0038566204211634724,
-        "v_res_kms": 1861808.7917909017,
+        "v_res_kms": 37236.17583581804,
         "delta_l_rad": -1.569092027009411,
-        "sigma_peak_unitarity_cm2_per_g": 2.8468658176033372,
+        "sigma_peak_unitarity_cm2_per_g": 0.7117164544008343,
         "sigma_actual_cm2_per_g": 2.1351431613730467
       }
     },
@@ -423,9 +424,9 @@
       "best_resonance": {
         "l": 3,
         "E_GeV": 0.007278953843983146,
-        "v_res_kms": 2557797.221547007,
+        "v_res_kms": 51155.944430940144,
         "delta_l_rad": 1.5666991124905572,
-        "sigma_peak_unitarity_cm2_per_g": 1.5083597291328965,
+        "sigma_peak_unitarity_cm2_per_g": 0.3770899322832241,
         "sigma_actual_cm2_per_g": 2.6395852143339864
       }
     },
@@ -436,9 +437,9 @@
       "best_resonance": {
         "l": 1,
         "E_GeV": 0.09236708571873865,
-        "v_res_kms": 9111507.756174967,
+        "v_res_kms": 182230.15512349934,
         "delta_l_rad": -1.552218359330105,
-        "sigma_peak_unitarity_cm2_per_g": 0.11886572758085719,
+        "sigma_peak_unitarity_cm2_per_g": 0.029716431895214297,
         "sigma_actual_cm2_per_g": 0.08911853015943791
       }
     },
@@ -449,9 +450,9 @@
       "best_resonance": {
         "l": 1,
         "E_GeV": 2.21221629107045,
-        "v_res_kms": 44590816.17665949,
+        "v_res_kms": 891816.3235331897,
         "delta_l_rad": 1.5617397023729502,
-        "sigma_peak_unitarity_cm2_per_g": 0.004963023232763829,
+        "sigma_peak_unitarity_cm2_per_g": 0.0012407558081909572,
         "sigma_actual_cm2_per_g": 0.003721962123441659
       }
     },
@@ -462,9 +463,9 @@
       "best_resonance": {
         "l": 1,
         "E_GeV": 1e-06,
-        "v_res_kms": 29980.0,
+        "v_res_kms": 599.6,
         "delta_l_rad": 1.5495843161087208,
-        "sigma_peak_unitarity_cm2_per_g": 10979.280848481276,
+        "sigma_peak_unitarity_cm2_per_g": 2744.820212120319,
         "sigma_actual_cm2_per_g": 8230.756101427878
       }
     },
@@ -475,9 +476,9 @@
       "best_resonance": {
         "l": 1,
         "E_GeV": 1e-06,
-        "v_res_kms": 29980.0,
+        "v_res_kms": 599.6,
         "delta_l_rad": 1.5634461108247235,
-        "sigma_peak_unitarity_cm2_per_g": 10979.280848481276,
+        "sigma_peak_unitarity_cm2_per_g": 2744.820212120319,
         "sigma_actual_cm2_per_g": 8234.015772079849
       }
     },
@@ -488,9 +489,9 @@
       "best_resonance": {
         "l": 0,
         "E_GeV": 0.007278953843983146,
-        "v_res_kms": 2557797.221547007,
+        "v_res_kms": 51155.944430940144,
         "delta_l_rad": -1.5368053002504425,
-        "sigma_peak_unitarity_cm2_per_g": 1.5083597291328965,
+        "sigma_peak_unitarity_cm2_per_g": 0.3770899322832241,
         "sigma_actual_cm2_per_g": 0.3766544141593674
       }
     },
@@ -501,9 +502,9 @@
       "best_resonance": {
         "l": 3,
         "E_GeV": 0.3290344562312671,
-        "v_res_kms": 17196985.226325147,
+        "v_res_kms": 343939.70452650293,
         "delta_l_rad": -1.4654981277087913,
-        "sigma_peak_unitarity_cm2_per_g": 0.03336817965582399,
+        "sigma_peak_unitarity_cm2_per_g": 0.008342044913955998,
         "sigma_actual_cm2_per_g": 0.05774924454350657
       }
     },
@@ -514,9 +515,9 @@
       "best_resonance": {
         "l": 1,
         "E_GeV": 0.013738237958832637,
-        "v_res_kms": 3513962.6880053743,
+        "v_res_kms": 70279.25376010749,
         "delta_l_rad": -1.5227922842476076,
-        "sigma_peak_unitarity_cm2_per_g": 0.7991767853622331,
+        "sigma_peak_unitarity_cm2_per_g": 0.19979419634055828,
         "sigma_actual_cm2_per_g": 0.5980024395377773
       }
     },
@@ -527,9 +528,9 @@
       "best_resonance": {
         "l": 1,
         "E_GeV": 0.6210169418915616,
-        "v_res_kms": 23625627.521378394,
+        "v_res_kms": 472512.5504275679,
         "delta_l_rad": -1.5599598321004677,
-        "sigma_peak_unitarity_cm2_per_g": 0.01767951904023645,
+        "sigma_peak_unitarity_cm2_per_g": 0.004419879760059113,
         "sigma_actual_cm2_per_g": 0.013258082266759555
       }
     },
@@ -540,9 +541,9 @@
       "best_resonance": {
         "l": 1,
         "E_GeV": 1e-06,
-        "v_res_kms": 29980.0,
+        "v_res_kms": 599.6,
         "delta_l_rad": 1.549589084563656,
-        "sigma_peak_unitarity_cm2_per_g": 10979.280848481276,
+        "sigma_peak_unitarity_cm2_per_g": 2744.820212120319,
         "sigma_actual_cm2_per_g": 8230.757766548131
       }
     },
@@ -553,9 +554,9 @@
       "best_resonance": {
         "l": 1,
         "E_GeV": 1e-06,
-        "v_res_kms": 29980.0,
+        "v_res_kms": 599.6,
         "delta_l_rad": 1.563446623424395,
-        "sigma_peak_unitarity_cm2_per_g": 10979.280848481276,
+        "sigma_peak_unitarity_cm2_per_g": 2744.820212120319,
         "sigma_actual_cm2_per_g": 8234.015834125705
       }
     },
@@ -566,9 +567,9 @@
       "best_resonance": {
         "l": 1,
         "E_GeV": 0.001082636733874054,
-        "v_res_kms": 986445.2997813378,
+        "v_res_kms": 19728.905995626756,
         "delta_l_rad": 1.5555663221370999,
-        "sigma_peak_unitarity_cm2_per_g": 10.141241752617754,
+        "sigma_peak_unitarity_cm2_per_g": 2.5353104381544385,
         "sigma_actual_cm2_per_g": 7.604167231959716
       }
     },
@@ -579,9 +580,9 @@
       "best_resonance": {
         "l": 1,
         "E_GeV": 0.0038566204211634724,
-        "v_res_kms": 1861808.7917909017,
+        "v_res_kms": 37236.17583581804,
         "delta_l_rad": -1.5182213540567844,
-        "sigma_peak_unitarity_cm2_per_g": 2.8468658176033372,
+        "sigma_peak_unitarity_cm2_per_g": 0.7117164544008343,
         "sigma_actual_cm2_per_g": 2.129252973375619
       }
     },
@@ -592,9 +593,9 @@
       "best_resonance": {
         "l": 0,
         "E_GeV": 0.17433288221999874,
-        "v_res_kms": 12517606.17180808,
+        "v_res_kms": 250352.1234361616,
         "delta_l_rad": -1.5525747173338047,
-        "sigma_peak_unitarity_cm2_per_g": 0.06297882940193698,
+        "sigma_peak_unitarity_cm2_per_g": 0.015744707350484246,
         "sigma_actual_cm2_per_g": 0.015739480260278455
       }
     },
@@ -605,9 +606,9 @@
       "best_resonance": {
         "l": 2,
         "E_GeV": 0.00016102620275609394,
-        "v_res_kms": 380434.5087497431,
+        "v_res_kms": 7608.690174994862,
         "delta_l_rad": -1.5292743324026268,
-        "sigma_peak_unitarity_cm2_per_g": 68.1831941669243,
+        "sigma_peak_unitarity_cm2_per_g": 17.045798541731074,
         "sigma_actual_cm2_per_g": 85.0821358728206
       }
     },
@@ -618,9 +619,9 @@
       "best_resonance": {
         "l": 1,
         "E_GeV": 1e-06,
-        "v_res_kms": 29980.0,
+        "v_res_kms": 599.6,
         "delta_l_rad": 1.5496399987500058,
-        "sigma_peak_unitarity_cm2_per_g": 10979.280848481276,
+        "sigma_peak_unitarity_cm2_per_g": 2744.820212120319,
         "sigma_actual_cm2_per_g": 8230.7755221995
       }
     },
@@ -631,9 +632,9 @@
       "best_resonance": {
         "l": 1,
         "E_GeV": 1e-06,
-        "v_res_kms": 29980.0,
+        "v_res_kms": 599.6,
         "delta_l_rad": 1.563448623056105,
-        "sigma_peak_unitarity_cm2_per_g": 10979.280848481276,
+        "sigma_peak_unitarity_cm2_per_g": 2744.820212120319,
         "sigma_actual_cm2_per_g": 8234.01607612286
       }
     }
@@ -644,16 +645,16 @@
     "m_A_prime_GeV": 0.02885399811814427,
     "l": 0,
     "E_GeV": 2.395026619987486e-05,
-    "v_res_kms": 146719.14953595528,
+    "v_res_kms": 2934.3829907191057,
     "delta_l_rad": 1.5359321042133507,
-    "sigma_peak_unitarity_cm2_per_g": 458.419992364788,
+    "sigma_peak_unitarity_cm2_per_g": 114.604998091197,
     "sigma_actual_cm2_per_g": 114.4657505425228,
-    "log10_distance_to_target": 3.880013158543788
+    "log10_distance_to_target": 2.181043154207769
   },
-  "best_log10_distance": 3.880013158543788,
+  "best_log10_distance": 2.181043154207769,
   "pass_flag": false,
   "verdict": "FAIL \u2014 Phase 3 kill/continue gate does not pass. Paper (A) wins. The peak stays phenomenological by necessity.",
   "n_alpha": 8,
   "n_mAp": 6,
-  "elapsed_seconds": 41.8584098815918
+  "elapsed_seconds": 43.01204800605774
 }
