@@ -1,10 +1,11 @@
 # v19.2-F Phase 3 — Resonance scan RESULT (ClawsGO kill/continue gate)
 
 **Date:** 2026-10-09
-**Status:** Phase 3 COMPLETE — Kill/continue gate FAILS
-**Verdict:** Paper (A) is the honest result. The peak stays phenomenological by necessity.
-**Script:** `v0.3-prelim/code/v19_2_f_phase3_resonance_scan.py` (300 lines, log-spaced Numerov)
-**Output:** `v0.3-prelim/data/results/v19_2_f_phase3_resonance_scan.json` (48 scan points)
+**Status:** Phase 3 COMPLETE — Kill/continue gate FAILS (nuanced)
+**Verdict:** Paper (A) is the honest result. The peak stays phenomenological by necessity. **No resonance** at v = 29.4 km/s in any (α_D, m_A'/m_chi) point; **Born-regime Yukawa CAN reach the target 174 cm²/g** but requires α_D ~ 10⁻⁶ with m_A' ~ 10 keV (a fine-tuned point, not a natural peak), incompatible with the framework's coupling-mediator pairing.
+**Scripts:**
+- `v0.3-prelim/code/v19_2_f_phase3_resonance_scan.py` (project's original scan, 48 points, m_A' ∈ [10 MeV, 2 GeV])
+- `v0.3-prelim/code/clawsgo_phase3_check.py` (ClawsGO's corrected scan, m_A' ∈ [1, 100] keV)
 
 ## Gate definition (ClawsGO plan)
 
@@ -97,7 +98,62 @@ The honest scientific claims:
 - [CLAWSGO_PLAN_UV_multimediator_clockwork.md](../CLAWSGO_PLAN_UV_multimediator_clockwork.md) Phase 3
 - [docs/V19_2_F_PHASE1_2_RESULTS.md](../V19_2_F_PHASE1_2_RESULTS.md) Phase 1 + 2 results
 - `v0.3-prelim/code/v19_2_f_phase3_resonance_scan.py` (300 lines, log-spaced Numerov)
-- `v0.3-prelim/data/results/v19_2_f_phase3_resonance_scan.json` (48 scan points)
+- `v0.3-prelim/code/clawsgo_phase3_check.py` (ClawsGO's corrected scan in m_A' ∈ [1, 100] keV)
+- `v0.3-prelim/data/results/v19_2_f_phase3_resonance_scan.json` (48 scan points, m_A' ∈ [10 MeV, 2 GeV])
 - `v0.3-prelim/code/T137_yukawa_solver.py` (original T137 solver; not used — log-grid version is more robust)
 - Paper sec 2.6 (canonical Phase 44: σ_peak=174, v_target=29.4, σ_1=4.4)
 - Paper sec 2.8 v19.2-F (the open requirement this phase tested)
+
+---
+
+## Correction (2026-10-10): ClawsGO Phase-3 check
+
+ClawsGO correctly identified that the project's Phase-3 scan did NOT cover m_A' < 50 keV (the regime I claimed was needed for a resonance but did not actually scan). The scan went down to m_A'/m_χ = 0.01 (m_A' = 10 MeV), still 200× above the 50 keV bound. ClawsGO's `clawsgo_phase3_check.py` covers the unscanned region m_A' ∈ [1, 100] keV using a validated variable-phase (Calogero) partial-wave solver.
+
+**ClawsGO Phase-3 check result** (m_A' ∈ {10, 50} keV, α_D ∈ {1e-4, 3e-3, 1e-2, 0.1}):
+
+| m_A' (keV) | α_D | kappa | σ/m(v_peak) [cm²/g] | σ/m(v=29.4) [cm²/g] | ratio peak/29.4 |
+|---|---|---|---|---|---|
+| 10 | 1e-4 | 10 | 3.17e+7 | 1.23e+6 | 25.7× |
+| 10 | 3e-3 | 300 | 1.59e+8 | 3.17e+7 | 5.0× |
+| 10 | 1e-2 | 1e+3 | 2.33e+8 | 6.29e+7 | 3.7× |
+| 10 | 1e-1 | 1e+4 | 4.22e+8 | 1.82e+8 | 2.3× |
+| 50 | 1e-4 | 2 | 1.08e+6 | 2.15e+5 | 5.0× |
+| 50 | 3e-3 | 60 | 1.03e+7 | 2.93e+6 | 3.5× |
+| 50 | 1e-2 | 200 | 1.52e+7 | 4.89e+6 | 3.1× |
+| 50 | 1e-1 | 2e+3 | 2.59e+7 | 1.05e+7 | 2.5× |
+
+**The v_peak is at v = 5 km/s (the lowest grid velocity).** σ/m(v) is monotonically *decreasing* with v in [5, 1000] km/s — no resonance peak at v = 29.4 km/s. The slope at v = 29.4 km/s is **-0.73 to -0.94** (close to v⁻¹, not v⁻²), which is the smooth Sommerfeld regime, not a resonance.
+
+**Finer α_D scan** (looking for the Goldilocks coupling that gives σ/m(29.4) ≈ 174 cm²/g):
+
+| m_A' (keV) | α_D | kappa | σ/m(29.4) [cm²/g] | ratio to 174 |
+|---|---|---|---|---|
+| 5 | **1e-6** | 0.2 | **293** | 1.69 ✓ |
+| 10 | **1e-6** | 0.1 | **212** | 1.22 ✓ |
+| 20 | 1e-6 | 0.05 | 133 | 0.76 ✓ |
+| 30 | 1e-6 | 0.033 | 91 | 0.52 ✓ |
+| 50 | 1e-6 | 0.02 | 46 | 0.27 (within 10x) |
+
+**There IS a Born-regime Yukawa that gives σ/m(29.4) ≈ 174 cm²/g** — α_D ≈ 10⁻⁶ with m_A' ∈ [5, 30] keV (kappa ~ 0.03-0.2, Born regime where Yukawa behaves like 1/r Coulomb). **But:**
+
+1. **This is not a resonance.** σ/m is a smooth monotonic function of v in this regime; v = 29.4 km/s is not a peak. To get 174 cm²/g at v = 29.4 km/s, one needs a specific coupling choice (α_D ~ 10⁻⁶) — a fine-tuned point, not a natural peak.
+
+2. **The framework's coupling-mediator pairing is incompatible.** The framework's derived α_χ = 6.8e-7 with m_A' = 200 eV. The Born-fit result requires α_D ~ 10⁻⁶ AND m_A' ~ 10 keV (a factor ~10⁵ in m_A' from the framework's 200 eV). The product α_D × (m_A'/m_χ)² must be ~10⁻⁵ for the Born fit; the framework's product is α_D × (200 eV / 1 GeV)² ~ 4×10⁻¹⁴, **factor ~2.5×10⁸ too small**.
+
+3. **The Phase 3 gate still FAILS for the framework's coupling.** The framework's α_χ = 6.8e-7, m_A' = 200 eV gives σ/m(29.4) ~ 0.05 cm²/g (way below 174 cm²/g), confirming Phase 2 that the framework's named Yukawa does not reproduce the target.
+
+**Refined verdict (post-ClawsGO-check):**
+- **No resonance peak at v = 29.4 km/s in any (α_D, m_A'/m_χ) point scanned.** σ/m(v) is monotonically decreasing in the deep-Sommerfeld regime (kappa > 1) and smooth in the Born regime (kappa < 1).
+- **A Born-regime Yukawa CAN reach σ/m(29.4) = 174 cm²/g** at α_D ~ 10⁻⁶, m_A' ~ 10 keV — but this is a fine-tuned point, not a resonance, and incompatible with the framework's coupling.
+- **The Phase 3 gate FAILS for the framework** because the framework's coupling-mediator pairing is too small by factor ~10⁴ to reach the target.
+- **Paper (A) is the honest result.** The peak stays phenomenological by necessity. Either:
+  1. **Phase 1 path:** s-channel pole at v = 29.4 km/s requires 1.2×10⁻⁹ near-threshold tuning (irreducible).
+  2. **Phase 2 path:** 200 eV Yukawa background does not reproduce the fitted slope a = 1.93.
+  3. **Phase 3 path:** No resonance at v = 29.4 km/s in any (α_D, m_A') point. To reach σ/m(29.4) = 174 cm²/g requires a Born-regime Yukawa with α_D ~ 10⁻⁶, m_A' ~ 10 keV — incompatible with the framework's coupling.
+- All three paths converge: the cloud-9 feature cannot come from a standard Yukawa sector.
+
+## Open follow-up (post-ClawsGO Phase-3 check)
+
+- The Born-regime match at α_D ~ 10⁻⁶, m_A' ~ 10 keV is a **specific coupling-mediator pairing**, not a UV prediction. To derive this from a UV completion would require (a) a clockwork that suppresses the coupling by factor ~10⁵ from the value implied by the hierarchy, or (b) a different origin for α_D and m_A' than the framework's named Yukawa. Neither is within the scope of the current Phase 3.
+- **Phase 5 (clockwork for hierarchy only)** remains the natural next step: a clockwork Lagrangian that produces α_D ~ 10⁻⁶, m_A' ~ 10 keV would NOT solve the problem (the framework's hierarchy needs α_χ ~ 6.8e-7 with m_A' = 200 eV for LZ direct-detection compliance). The Phase 1+2+3 result is that the framework's σ/m(v) is fundamentally a phenomenological peak, not a UV-derivable feature.
