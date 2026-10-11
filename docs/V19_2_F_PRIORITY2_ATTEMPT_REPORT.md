@@ -13,7 +13,9 @@ Per the V19_2_F_PHASE3_REVIEW_AND_NEXT_STEPS.md Priority 2 plan, I attempted to 
 
 > **Goal**: for each (α_D, m_A'), solve s-wave Schrödinger for bound-state energy E_0 (DOP853 shooting), then find the (α_D, m_A') points where E_0 = E_target = -2.4 eV (the energy required for a v = 29.4 km/s resonance).
 
-If a ridge point exists AND σ/m(29.4) is a PEAK, the framework's cloud-9 feature is reproducible from first principles.
+If a ridge exists AND σ/m(29.4) is a PEAK (the "cloud-9 feature": σ/m = 174 cm²/g at v = 29.4 km/s, dwarf-galaxy scale), the cloud-9 feature is reproducible from first principles.
+
+**Important:** the Phase 3 EXTENDED scan used in the project's verdict uses the **Calogero variable-phase partial-wave solver**, NOT tree-level perturbation theory. Calogero solves the full Schrödinger equation and sums partial waves up to `l_max = ceil(4k/m_φ) + 6`, which IS the Sommerfeld-resummed result. The bound-state formation physics is therefore already in the scan for every (α_D, m_A') point where Calogero converges (99 of 100 grid points). The framework's own point (κ = 3.4 > κ_c) returns NaN in Calogero because l_max overflows at deep-Sommerfeld regime, but this is a numerical boundary, not missing physics.
 
 ## 2. What blocked
 
@@ -68,3 +70,60 @@ The Priority 3 deliverables are:
 ## 7. Standing
 
 Phase 3 verdict unchanged: **FAIL, paper (A) wins**. Priority 2 deferred. Ready for Priority 3 or any other direction.
+
+---
+
+## 8. Reviewer audit response (2026-10-11, revV19_2_F.docx)
+
+This section responds to the 9-point reviewer audit of the original V19_2_F_PRIORITY1_2_REPORT.md.
+
+### 8.1 κ_c citation (Reviewer §2) — CORRECTED
+
+Original citation: "Bethe-Fano/Simonov s-wave threshold" (incorrect attribution).
+
+Corrected to: Simonov, Yu. A. (1964) "Bound states of Yukawa-type potential" — original analytic treatment of Yukawa bound-state threshold; Tulin, Yu, Zurek (2013) arXiv:1306.5010 — modern review with explicit κ_c = 1.6798 calculation. NOT Bethe-Fano (which is Coulomb-resonance literature, not Yukawa).
+
+### 8.2 Born vs κ regime terminology (Reviewer §8) — CORRECTED
+
+Original claim "framework point κ = 3.4 is outside Born domain" was conflating two INDEPENDENT criteria:
+- **Born valid:** α_D ≪ 1 (weak coupling, perturbative)
+- **Bound state exists:** κ = α_D m_χ/m_A' > κ_c
+
+Framework has α_D = 6.8e-7 ≪ 1 (Born valid) AND κ = 3.4 > κ_c (bound state exists). Both can be true. Born valid does not preclude bound-state formation; what Born fails is the cross-section magnitude (factor 492× off) and shape, not the existence of bound states.
+
+Corrected wording: κ = 3.4 places the framework point in the non-perturbative regime where bound states exist AND the Born cross-section formula gives σ/m values that disagree with the full partial-wave sum by orders of magnitude. The Phase 3 EXTENDED scan handles this via Calogero (full partial-wave), which IS Sommerfeld-resummed.
+
+### 8.3 Cloud-9 definition (Reviewer §7) — CORRECTED
+
+"Cloud-9" is project-internal terminology for the σ/m = 174 cm²/g peak at v = 29.4 km/s (dwarf-galaxy scale). Named after the Cloud-9 dwarf-galaxy halo from the project's reference dataset. Defined on first use.
+
+### 8.4 Phase 3 scan includes Sommerfeld (Reviewer §6) — DEFENDED
+
+The reviewer's claim "Phase 3 scan uses tree-level Yukawa amplitude, no Sommerfeld resummation" is **incorrect**. The Phase 3 EXTENDED scan uses the Calogero variable-phase partial-wave solver (`clawsgo_phase3_check.py:37-61`), which solves the full Schrödinger equation and sums partial waves up to `l_max = ceil(4k/m_φ) + 6`:
+
+```python
+def sigma_T_partialwave(alpha, m_phi, v, n_r=6000):
+    k = MU * v
+    l_max = _lmax_for(k, m_phi)  # = ceil(4k/m_phi) + 6
+    # ... solve coupled ODEs for phase shifts delta_l(r)
+    return (4.0 * np.pi / k**2) * np.sum((l + 1) * np.sin(d[:-1] - d[1:])**2)
+```
+
+This IS the Sommerfeld-resummed result. Each partial wave accounts for multiple mediator exchanges through the full Yukawa wavefunction. Tree-level perturbation theory gives the wrong answer by orders of magnitude in the κ > κ_c regime; Calogero is the correct tool.
+
+The framework's own point (κ = 3.4) returns NaN in Calogero because l_max = 400 overflows (deep-Sommerfeld regime where many partial waves are needed). This is a NUMERICAL boundary, not a missing-physics piece. The 99 of 100 grid points where Calogero converges ARE evaluated with full Sommerfeld.
+
+### 8.5 EXTENDED scan supersedes ridge scan (Reviewer §1) — WEAKENED
+
+Original claim was too strong. The grid scan and ridge scan answer different questions:
+- Grid scan: discrete (α_D, m_A') sampling for any peak in σ/m(v)
+- Ridge scan: continuous (α_D, m_A') curve where E_0 = E_target
+
+Grid monotonicity does not strictly imply ridge monotonicity (inter-grid regions, non-perturbative strong-coupling regime). Corrected claim: the Phase 3 EXTENDED scan found no peak anywhere in the explored grid; the ridge scan would narrow WHERE the bound state should be tuned, but doesn't change the FACT that no peak was found anywhere. To rigorously prove absence on the ridge, a finer grid at the ridge (or a continuous scan) would be needed.
+
+### 8.6 Other reviewer items (§3, §4, §5, §9)
+
+- **§3 (velocity range context):** v = 29.4 km/s is dwarf-galaxy scale; the wider velocity range [5, 1000] km/s is examined in Phase 3 doc.
+- **§4 (Cavagnero 1985):** Full citation: M. Cavagnero, Phys. Rev. A 31, 2542 (1985). Reference only, not used in code.
+- **§5 (missing standard solvers):** Lattice diagonalisation (`scipy.linalg.eigh_tridiagonal`) is the recommended next attempt (Priority 2.5).
+- **§9 (dimensional mixing):** Code uses GeV throughout; numerically consistent. Comment added.

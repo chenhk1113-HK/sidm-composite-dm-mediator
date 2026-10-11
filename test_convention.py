@@ -79,7 +79,15 @@ def test_compute_kappa():
 # ============================================================
 
 def test_kappa_c_analytic():
-    """Verify kappa_c is the standard Bethe-Fano/Simonov threshold."""
+    """Verify kappa_c is the standard s-wave Yukawa bound-state threshold.
+
+    Standard references (per reviewer revV19_2_F.docx, 2026-10-11):
+      - Simonov, Yu. A. (1964)  original analytic treatment
+      - Tulin, Yu, Zurek (2013)  arXiv:1306.5010  modern review
+    The value 1.6798 is NOT from Bethe-Fano (Coulomb potential) or Simonov
+    (1964) as a "Bethe-Fano/Simonov" derivation; the threshold is for the
+    Yukawa potential specifically, not Coulomb.
+    """
     # The analytic value should be ~1.6798 (not 1.68*4π or 1.68/(4π))
     assert abs(constants.KAPPA_C_ANALYTIC - 1.6798) < 0.001
     assert constants.KAPPA_C == 1.68

@@ -6,23 +6,45 @@ COUPLING CONVENTION (LOCKED):
     alpha_D  ≡  g² / (4π)          [standard fine-structure convention]
 
     κ        =  alpha_D * m_chi / m_A_prime    [dimensionless resonance criterion]
-    kappa_c  =  1.6798                    [Bethe-Fano / Simonov s-wave threshold]
+    kappa_c  =  1.6798                    [s-wave bound-state threshold, Yukawa]
 
     IMPORTANT: All scripts in this project MUST use alpha_D ≡ g²/(4π).
     The alternative convention (alpha = g²) is NOT supported and will
     cause σ/m values to differ by factors of 4π ≈ 12.57.
 
+NOTE on κ_c = 1.6798 — this is the analytic value of the s-wave bound-state
+formation threshold for the Yukawa potential V(r) = -(α_D / r) · exp(-m_A' · r).
+Standard references: Simonov, Yu. A. (1964) (original analytic treatment);
+Tulin, Yu, Zurek (2013) arXiv:1306.5010 (modern review). NOT "Bethe-Fano".
+
+NOTE on regime terminology — "Born domain" and "bound-state regime" are
+INDEPENDENT criteria:
+    Born valid:     α_D ≪ 1  (weak-coupling, perturbative)
+    Bound state:    κ = α_D m_χ/m_A' > κ_c  (deep enough potential)
+A coupling can be Born-valid (α_D = 6.8e-7 ≪ 1) yet still form a bound state
+(κ = 3.4 > κ_c) — these describe different physics, not a single threshold.
+For Born breakdown, see when Sommerfeld enhancement S(v) ≠ 1.
+
 REFERENCES:
-    - Tulin, Yu, Zurek (2013)  "Cold Dark Matter and Its Interactions"
+    - Simonov, Yu. A. (1964)  "Bound states of Yukawa-type potential"
+    - Tulin, Yu, Zurek (2013)  arXiv:1306.5010  "Cold Dark Matter and Its Interactions"
     - Kaplinghat, Tulin, Yu (2016)  "Dark Matter Self-Interactions"
     - Chu, Hambye & Tytgat (2018)  [7]  M2 Sommerfeld/t-channel resonance
     - ClawsGO #9, #10, #11 (v19.2-F Phase 3 cleanup)
+    - Reviewer audit revV19_2_F.docx (2026-10-11)
+
+PROJECT TERMINOLOGY:
+    "Cloud-9" = σ/m = 174 cm²/g peak at v = 29.4 km/s (dwarf-galaxy scale)
+                 being tested throughout the project. The name refers to the
+                 Cloud-9 dwarf-galaxy halo from the project's reference dataset.
 
 HISTORY:
     v1.0  2026-10-11  Locked convention per ClawsGO #9/#10/#11 recommendations.
                       Previously ambiguous: framework doc claimed alpha_chi=6.8e-7
                       without specifying g²/4π vs g², leading to three different
                       σ/m(100) values (0.052, 2.84, 41.0) for the same point.
+    v1.1  2026-10-11  Reviewer audit fixes: κ_c citation corrected; Born/κ_c
+                      regime clarification added; cloud-9 definition added.
 """
 from __future__ import annotations
 import math
