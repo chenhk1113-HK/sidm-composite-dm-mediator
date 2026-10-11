@@ -275,6 +275,38 @@ def test_lattice_convergence():
     print("PASS: test_lattice_convergence")
 
 
+def test_hulthen_framework_fails():
+    """
+    Hulthen solver test (Priority 2): framework point at (alpha_D=6.8e-7, m_A=200 eV)
+    gives sigma/m(29.4) FAR BELOW target 174 cm^2/g. This is the deep-Sommerfeld
+    verdict: framework point definitively FAILS even with Hulthen enhancement.
+    """
+    print("\n=== Test G: Hulthen framework-point verdict ===")
+    sys.path.insert(0, r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\code")
+    from v19_2_f_priority2_hulthen_solver import sigma_m_hulthen_cm2_g
+
+    # Framework point: alpha_D=6.8e-7, m_A=200 eV, v=29.4 km/s
+    alpha_D = 6.8e-7
+    m_chi = M_CHI_GEV
+    m_ap = 200e-9  # GeV
+    v_test = 29.4  # km/s
+
+    sig = sigma_m_hulthen_cm2_g(v_test, m_ap, alpha_D, m_chi)
+    print(f"  Hulthen sigma/m(29.4) = {sig:.4e} cm^2/g")
+    print(f"  Target = 174 cm^2/g, ratio = {sig/174:.3e}")
+    # Should be far below target (negative test for framework)
+    assert sig < 1.0, f"Hulthen sigma/m too large: {sig}"
+
+    # Phase 3 best-fit point: should be much larger than framework
+    alpha_best = 5.55e-6
+    m_ap_best = 1.26e-4  # GeV = 126 keV
+    sig_best = sigma_m_hulthen_cm2_g(v_test, m_ap_best, alpha_best, m_chi)
+    print(f"  Hulthen sigma/m(29.4) at best fit = {sig_best:.4e} cm^2/g")
+    assert sig_best > sig * 100, f"Best-fit should be >> framework: {sig_best} vs {sig}"
+
+    print("PASS: test_hulthen_framework_fails")
+
+
 def test_calogero_sommerfeld_deviation():
     """
     Calogero vs Born deviation test (per reviewer rev1 §1).
@@ -336,6 +368,7 @@ if __name__ == "__main__":
         test_structural_sanity,
         test_hbarc_unit_consistency,
         test_lattice_convergence,
+        test_hulthen_framework_fails,
         test_calogero_sommerfeld_deviation,
     ]
 

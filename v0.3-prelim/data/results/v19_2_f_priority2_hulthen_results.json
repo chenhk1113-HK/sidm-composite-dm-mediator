@@ -1,0 +1,50 @@
+{
+  "_meta": {
+    "description": "v19.2-F Priority 2: Hulthen deep-Sommerfeld solver, framework point + best fit",
+    "date": "2026-10-11",
+    "convention": "alpha_D = g\u00b2/(4\u03c0) (locked per constants.py)"
+  },
+  "framework_point": {
+    "alpha_D": 6.8e-07,
+    "m_chi_GeV": 1.0,
+    "m_A_prime_eV": 200.0,
+    "kappa": 3.4,
+    "kappa_over_kappa_c": 2.024050482200262,
+    "sigma_m_at_29_4_kms_cm2_g": 5.27910527431719e-21,
+    "ratio_to_target_174": 3.033968548458155e-23,
+    "scan": {
+      "3": 5.070053071797644e-19,
+      "5": 1.8252190571557915e-19,
+      "10": 4.563047529872432e-20,
+      "15": 2.0280211044730872e-20,
+      "20": 1.1407618651173e-20,
+      "29.4": 5.27910527431719e-21,
+      "50": 1.8252189640685443e-21,
+      "100": 4.563047390302125e-22,
+      "150": 2.0280210590957392e-22
+    }
+  },
+  "best_fit_point": {
+    "alpha_D": 5.55e-06,
+    "m_chi_GeV": 1.0,
+    "m_A_prime_keV": 126.0,
+    "kappa": 0.04404761904761905,
+    "kappa_over_kappa_c": 0.026221942521501996,
+    "scan": {
+      "5": 0.8706626808799616,
+      "10": 3.4826930997264043,
+      "29.4": 30.13180543561709,
+      "100": 1.2064374796021722e-14
+    }
+  },
+  "binding_energies": {
+    "framework": {
+      "E_1s_Yukawa_eV": -4.973756706364299e-06,
+      "E_1s_Hulthen_eV": -5.779999999999999e-05
+    },
+    "best-fit": {
+      "E_1s_Yukawa_eV": -0.0017721991631053325,
+      "E_1s_Hulthen_eV": -0.0038503125
+    }
+  }
+}
