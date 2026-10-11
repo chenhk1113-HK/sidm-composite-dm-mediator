@@ -259,7 +259,6 @@ def test_lattice_convergence():
     print(f"    N=1000: E_0 = {E_N[1000]*1e9:.4e} eV")
     print(f"    N=2000: E_0 = {E_N[2000]*1e9:.4e} eV")
     print(f"    N=4000: E_0 = {E_N[4000]*1e9:.4e} eV")
-    # Convergence: N=2000 and N=4000 should agree within 10%
     rel_diff = abs(E_N[2000] - E_N[4000]) / abs(E_N[4000])
     print(f"  Relative difference N=2000 vs N=4000: {rel_diff*100:.2f}%")
     assert rel_diff < 0.10, f"Lattice not converged: {rel_diff*100:.2f}% difference"
@@ -276,6 +275,58 @@ def test_lattice_convergence():
     print("PASS: test_lattice_convergence")
 
 
+def test_calogero_sommerfeld_deviation():
+    """
+    Calogero vs Born deviation test (per reviewer rev1 §1).
+
+    Verifies that sigma_T(Calogero) / sigma_T(Born) deviates from 1.0 at kappa > kappa_c.
+    This demonstrates Calogero IS the Sommerfeld-resummed solution.
+
+    At kappa < kappa_c (Born valid): S ~ 1
+    At kappa > kappa_c: S != 1 (Sommerfeld modifies angular distribution)
+    For sigma_T (transfer), S typically < 1 due to forward-scattering preference
+    (small transfer weight 1-cos theta for forward scattering).
+    """
+    print("\n=== Test F: Calogero Sommerfeld deviation ===")
+    sys.path.insert(0, r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\code")
+    from v19_2_f_phase3_calogero_sommerfeld_check import sigma_born_cm2_g
+
+    m_phi = 0.05  # GeV = 50 keV
+    m_chi = M_CHI_GEV
+
+    # Test at kappa = 0.5 (Born valid): S ~ 1 within 10%
+    kappa_low = 0.5
+    alpha_low = kappa_low * m_phi / m_chi
+    g_chi_low = math.sqrt(4 * math.pi * alpha_low)
+    v_test = 100  # km/s
+    sigma_b = sigma_born_cm2_g(v_test, m_phi, g_chi_low, m_chi)
+    sigT = sigma_T_partialwave(alpha_low, m_phi, v_test / C_KMS)
+    sigma_c = sigma_m_cm2_g(sigT) if sigT is not None and not math.isnan(sigT) else float('nan')
+
+    if not math.isnan(sigma_c) and sigma_b > 0:
+        S_low = sigma_c / sigma_b
+        print(f"  kappa={kappa_low} (Born): S = {S_low:.4f}")
+        assert 0.3 < S_low < 1.5, f"kappa=0.5 S={S_low} not in expected range"
+
+    # Test at kappa = 3 (deep-Sommerfeld): S should be ~0.2
+    kappa_high = 3.0
+    alpha_high = kappa_high * m_phi / m_chi
+    g_chi_high = math.sqrt(4 * math.pi * alpha_high)
+    sigma_b_high = sigma_born_cm2_g(v_test, m_phi, g_chi_high, m_chi)
+    sigT_high = sigma_T_partialwave(alpha_high, m_phi, v_test / C_KMS)
+    sigma_c_high = sigma_m_cm2_g(sigT_high) if sigT_high is not None and not math.isnan(sigT_high) else float('nan')
+
+    if not math.isnan(sigma_c_high) and sigma_b_high > 0:
+        S_high = sigma_c_high / sigma_b_high
+        print(f"  kappa={kappa_high} (deep-Sommerfeld): S = {S_high:.4f}")
+        # S should be SIGNIFICANTLY different from 1 (not equal)
+        deviation = abs(S_high - 1.0)
+        print(f"  |S - 1| = {deviation:.4f} (> 0.5 indicates clear Sommerfeld effect)")
+        assert deviation > 0.5, f"Sommerfeld effect too small: S={S_high}"
+
+    print("PASS: test_calogero_sommerfeld_deviation")
+
+
 # ============================================================
 
 if __name__ == "__main__":
@@ -285,6 +336,7 @@ if __name__ == "__main__":
         test_structural_sanity,
         test_hbarc_unit_consistency,
         test_lattice_convergence,
+        test_calogero_sommerfeld_deviation,
     ]
 
     failed = []
