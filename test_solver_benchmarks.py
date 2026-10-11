@@ -307,6 +307,35 @@ def test_hulthen_framework_fails():
     print("PASS: test_hulthen_framework_fails")
 
 
+def test_born_formula_tulin_yu_match():
+    """
+    Born formula dimensional verification (REVIEWER 4rV19_2_F §1).
+
+    Verifies sigma_born_cm2_g (numerical quadrature) matches Tulin-Yu 2013 Fig 2.
+    Reviewer claimed missing mu^2 factor would cause factor-4 error.
+    Numerical verification: matches Fig 2 within 10%, NOT a factor of 4.
+    """
+    print("\n=== Test H: Born formula Tulin-Yu match ===")
+    sys.path.insert(0, r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\code")
+    from v19_2_f_phase3_calogero_sommerfeld_check import sigma_born_cm2_g
+
+    # Tulin-Yu Fig 2 reference: alpha=1e-3, m_phi=100 MeV, v=100 km/s -> 2.7e-5 cm^2/g
+    g_chi = math.sqrt(4 * math.pi * 1e-3)
+    sigma_my = sigma_born_cm2_g(100, 0.1, g_chi, 1.0)
+    print(f"  My quadrature: sigma/m(100) = {sigma_my:.4e} cm^2/g")
+    print(f"  Tulin-Yu Fig 2: ~2.7e-5 cm^2/g")
+    # Within 10%
+    assert abs(sigma_my - 2.7e-5) / 2.7e-5 < 0.10, f"Born off by >10%: {sigma_my}"
+
+    # Second reference: alpha=1e-3, m_phi=10 MeV, v=100 km/s -> 0.27 cm^2/g
+    sigma_my2 = sigma_born_cm2_g(100, 0.01, g_chi, 1.0)
+    print(f"  My quadrature (10 MeV): sigma/m(100) = {sigma_my2:.4e} cm^2/g")
+    print(f"  Tulin-Yu Fig 2: ~0.27 cm^2/g")
+    assert abs(sigma_my2 - 0.27) / 0.27 < 0.10, f"Born off by >10%: {sigma_my2}"
+
+    print("PASS: test_born_formula_tulin_yu_match")
+
+
 def test_calogero_sommerfeld_deviation():
     """
     Calogero vs Born deviation test (per reviewer rev1 §1).
@@ -369,6 +398,7 @@ if __name__ == "__main__":
         test_hbarc_unit_consistency,
         test_lattice_convergence,
         test_hulthen_framework_fails,
+        test_born_formula_tulin_yu_match,
         test_calogero_sommerfeld_deviation,
     ]
 
