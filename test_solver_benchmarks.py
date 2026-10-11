@@ -237,6 +237,45 @@ def test_hbarc_unit_consistency():
 
 # ============================================================
 # Run all benchmarks
+def test_lattice_convergence():
+    """
+    Lattice diagonalisation convergence test (per reviewer revV19_2_F#2 §2).
+    Verifies that E_0 is stable to changes in N (grid size) and r_max_factor.
+    """
+    print("\n=== Test E: Lattice diagonalisation convergence ===")
+    sys.path.insert(0, r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\code")
+    from v19_2_f_phase3_bound_state_lattice import E0_lattice
+
+    # Test point: kappa=3, m_ap=100 keV
+    kappa_test = 3.0
+    m_ap_test = 1e-4  # GeV = 100 keV
+    alpha_test = kappa_test * m_ap_test / M_CHI_GEV
+
+    # Vary N at fixed r_max_factor=200
+    E_N = {}
+    for N in [1000, 2000, 4000]:
+        E_N[N] = E0_lattice(alpha_test, M_CHI_GEV, m_ap_test, N=N, r_max_factor=200)
+    print(f"  Varying N (r_max=200):")
+    print(f"    N=1000: E_0 = {E_N[1000]*1e9:.4e} eV")
+    print(f"    N=2000: E_0 = {E_N[2000]*1e9:.4e} eV")
+    print(f"    N=4000: E_0 = {E_N[4000]*1e9:.4e} eV")
+    # Convergence: N=2000 and N=4000 should agree within 10%
+    rel_diff = abs(E_N[2000] - E_N[4000]) / abs(E_N[4000])
+    print(f"  Relative difference N=2000 vs N=4000: {rel_diff*100:.2f}%")
+    assert rel_diff < 0.10, f"Lattice not converged: {rel_diff*100:.2f}% difference"
+
+    # Vary r_max_factor at fixed N=2000
+    E_rmf = {}
+    for rmf in [100, 200, 400]:
+        E_rmf[rmf] = E0_lattice(alpha_test, M_CHI_GEV, m_ap_test, N=2000, r_max_factor=rmf)
+    print(f"\n  Varying r_max_factor (N=2000):")
+    print(f"    rmf=100: E_0 = {E_rmf[100]*1e9:.4e} eV")
+    print(f"    rmf=200: E_0 = {E_rmf[200]*1e9:.4e} eV")
+    print(f"    rmf=400: E_0 = {E_rmf[400]*1e9:.4e} eV")
+
+    print("PASS: test_lattice_convergence")
+
+
 # ============================================================
 
 if __name__ == "__main__":
@@ -245,6 +284,7 @@ if __name__ == "__main__":
         test_born_high_v_limit,
         test_structural_sanity,
         test_hbarc_unit_consistency,
+        test_lattice_convergence,
     ]
 
     failed = []

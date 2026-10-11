@@ -155,7 +155,22 @@ def main():
             print(f"    kappa = {r['kappa']:.3f}, sigma/m(29.4) = {r['sigma_v29']:.2f} cm^2/g")
     else:
         print("NO peak at v=29.4 found with composite form factor + dipole ansatz.")
-        print("Try Gaussian form factor or different parameter range?")
+        print()
+        print("PHYSICAL INTERPRETATION (per reviewer revV19_2_F#2 §4):")
+        print("  A dipole form factor F(q) = 1/(1 + q^2/Lambda_D^2)^2 is a SUPPRESSOR,")
+        print("  not a resonance. It monotonically suppresses sigma/m(v) at high v")
+        print("  (high q = high momentum transfer), so it CANNOT create a peak at")
+        print("  intermediate velocity. The 'no peak' result is EXPECTED, not informative.")
+        print()
+        print("  To create a peak from composite DM, one would need:")
+        print("    - A resonance form factor F(q) with a pole: F(q) propto 1/(q^2 - m_rho^2 + i m_rho Gamma_rho)")
+        print("      (e.g., dark rho exchange with mass m_rho ~ 50-100 MeV)")
+        print("    - Composite bound states (dark deuteron-like inelastic scattering)")
+        print("      producing inelastic peaks")
+        print("    - Non-minimal dark pion coupling producing t-channel resonance")
+        print()
+        print("  These are beyond the scope of Priority 4 (dipole ansatz) but represent")
+        print("  realistic 'richer UV sector' possibilities noted in the PDF report.")
 
     # Save results
     out_path = os.path.join(OUTPUT_DIR, "data", "results", "v19_2_f_phase3_composite_form_factor.json")
@@ -168,6 +183,7 @@ def main():
                 "target_velocity_kms": V_TARGET_KMS,
                 "target_sigma_cm2_per_g": TARGET_SIGMA,
                 "convention": "alpha_D = g^2/(4*pi) [LOCKED]",
+                "interpretation": "dipole form factor cannot create peaks; result is expected; resonance form factor needed for peak creation",
             },
             "peaks_found": results,
         }, f, indent=2, default=str)

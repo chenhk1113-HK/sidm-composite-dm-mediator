@@ -281,14 +281,21 @@ Per reviewer audit (revV19_2_F.docx §5), implemented **lattice diagonalisation*
 
 ### Validation at known depths
 
-| (m_A', κ) | E_0 lattice | E_0 Coulomb approx |
-|---|---|---|
-| (100 MeV, 3.0) | -3.56 MeV | -90 MeV (Yukawa cuts long-range tail) |
-| (10 MeV, 3.0) | -35.6 keV | -900 keV |
-| (100 keV, 3.0) | -3.56×10⁻⁶ eV | -9×10⁻⁵ eV |
-| (1 keV, 3.0) | -3.56×10⁻¹⁰ eV | -9×10⁻⁹ eV |
+The Coulomb reference for V = -α_D/r is the s-wave n=1 bound state:
+E_C = -α_D² × μ / 2 = -α_D² × m_χ / 4
+    = -(κ m_A'/m_χ)² × m_χ / 4 = -κ² m_A'² / (4 m_χ)
 
-E_0 scales as m_A'² (factor of 100 between 1 keV and 10 MeV at same κ), as expected. Yukawa values are systematically smaller than Coulomb (factor ~25-90×) because the mass term cuts off the long-range Coulomb tail.
+(Reviewer revV19_2_F#2 caught a factor-4 error in the original doc: I had E_C = -κ²m_A'²/m_χ, missing the /4 from s-wave n=1.)
+
+| (m_A', κ) | E_0 lattice | E_C (corrected) | Yukawa/Coulomb |
+|---|---|---|---|
+| (100 MeV, 3.0) | -3.56 MeV | -22.5 MeV | **0.158** (Yukawa 6.3× shallower) |
+| (10 MeV, 3.0) | -35.6 keV | -225 keV | **0.158** |
+| (100 keV, 3.0) | -3.56×10⁻⁶ eV | -2.25 eV | 1.58×10⁻⁶ (Yukawa 6.3×10⁵× shallower) |
+| (100 keV, 5.0) | -2.36×10⁻⁵ eV | -6.25 eV | 3.8×10⁻⁶ |
+| (100 keV, 10.0) | -1.47×10⁻⁴ eV | -25.0 eV | 5.9×10⁻⁶ |
+
+At high m_A' (100 MeV, 10 MeV), the Yukawa bound state is **6.3× shallower** than the Coulomb limit because the mass term cuts off the long-range Coulomb tail within the wavefunction. At low m_A' (100 keV), the wavefunction extends ~6000× past the Yukawa cutoff, so the Yukawa is much shallower than Coulomb (factor 6.3×10⁵). The original "25-90×" claim was overstated; the correct factors are 6.3× (high m_A') to 10⁶× (low m_A').
 
 ### RIDGE SCAN RESULT
 
@@ -875,10 +882,41 @@ The bound-state ridge points (m_A' = 3-43 eV, κ = 10⁵-10⁷) would need ultra
 
 **Phase 3 verdict: CONFIRMED FAIL, paper (A) wins.**
 
-Backed by **three independent numerical scans:**
-1. **Calogero partial-wave** (Phase 3 EXTENDED, 100 points): no peak anywhere in [1 keV, 2 GeV] × [10⁻⁶, 10⁻²]
-2. **Lattice diagonalisation** (Priority 2.5): framework 9127× off the bound-state ridge for v=29.4 km/s
-3. **Composite form factor** (Priority 4, 245 combos): no peak with dipole F(q)
+Backed by **three complementary numerical paths** (not three independent scans — see clarification below):
+1. **Calogero partial-wave** (Phase 3 EXTENDED, 100 points): no peak anywhere in [1 keV, 2 GeV] × [10⁻⁶, 10⁻²]. Computes σ/m(v).
+2. **Lattice diagonalisation** (Priority 2.5): framework 9127× off the bound-state ridge for v=29.4 km/s. Computes E_0(α_D, m_A').
+3. **Composite form factor** (Priority 4, 245 combos): no peak with dipole F(q). NOTE: dipole form factor is a SUPPRESSOR not a resonance; "no peak" is expected, not informative. Resonance form factor needed for real test.
+
+### Breit-Wigner connection (per reviewer revV19_2_F#2 §7)
+
+The bound-state pole (E_0 < 0 on real axis) is related to the scattering cross-section peak via:
+- Bound state: E_0 < 0 (below continuum), pole of S-matrix on physical sheet
+- Scattering resonance: pole of S-matrix on unphysical sheet, manifests as σ/m peak near E_R
+- For a Yukawa potential with κ > κ_c, bound states exist but σ/m(v) is monotonically decreasing UNLESS the bound state is barely bound (E_0 ≈ 0⁻) where the scattering length is large.
+- For our framework, the v=29.4 km/s "resonance" would require E_0 = -2.4 eV (deeply bound, not barely bound). This doesn't directly correspond to a scattering peak. The Phase 3 EXTENDED scan's monotonic σ/m(v) is consistent with this: no resonance peak.
+
+### Three-scan independence clarification (per reviewer §9)
+
+The three scans are NOT redundant. They probe DIFFERENT physical quantities:
+- Scans 1 and 3 compute σ/m(v) with different physics: point-like Yukawa (1) vs composite form factor (3)
+- Scan 2 computes E_0(α_D, m_A'): a different physical quantity entirely
+- Together they constrain: (1,3) "Does any mechanism produce a peak in σ/m(v)?" + (2) "Does any (α_D, m_A') place a bound state where v_target resonance would live?"
+
+### Cloud-9 definition (per reviewer §8)
+
+Cloud-9 = the σ/m = 174 cm²/g peak at v = 29.4 km/s phenomenologically inferred from the project's reference dataset (SPARC rotation curves + Cloud-9 dwarf-galaxy halo N-body fits). The "cloud" refers to the velocity-distribution-weighted cross-section in dwarf halos; "9" is a project-internal label. **This is INPUT to the project, not OUTPUT.**
+
+### Key references (per reviewer §10)
+
+- Tulin, Yu, Zurek (2013), arXiv:1306.5010 — SIDM Sommerfeld enhancement foundational paper
+- Tulin, Yu (2018), Annu. Rev. Nucl. Part. Sci. 68, 383 — SIDM review with Yukawa numerical methods
+- Beneke et al. (2014), JHEP 1403, 110 — DM Sommerfeld enhancement systematic treatment
+- Kaplinghat, Tulin, Yu (2016), PRL 116, 041302 — iDM (inelastic DM) peak mechanism
+- Griest, Kamionkowski (1990), PRL 64, 615 — early Sommerfeld enhancement calculation
+- Itzykson, Zuber, "Quantum Field Theory" — lattice diagonalisation standard reference
+- Simonov, Yu. A. (1964) — Yukawa bound-state threshold (cited in constants.py)
+- Feng, Kaplinghat, Yu (2009), JCAP 0907, 034 — dark-photon Yukawa Born formula (Eq. 2.14)
+- Chu, Hambye, Tytgat (2018) [7] — M2 Sommerfeld/t-channel resonance
 
 **Test suite:** 12 tests passing total (8 convention + 4 solver benchmarks).
 

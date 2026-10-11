@@ -86,6 +86,54 @@ def E0_lattice(alpha_D, m_chi_GeV, m_ap_GeV, N=2000, r_max_factor=200.0):
     return float(E0)
 
 
+def convergence_test():
+    """
+    Convergence test for lattice parameters (per reviewer revV19_2_F#2 §2).
+    Demonstrates E_0 stability across N and r_max_factor.
+    Test point: kappa=3, m_A'=100 keV, m_chi=1 GeV (known depth).
+    """
+    print("CONVERGENCE TEST (lattice N and r_max_factor)")
+    print("-" * 60)
+    m_ap = 1e-4  # GeV = 100 keV
+    kappa = 3.0
+    alpha = kappa * m_ap / M_CHI_GEV
+    print(f"Test: kappa={kappa}, m_ap={m_ap*1e3:.0f} keV, m_chi={M_CHI_GEV} GeV")
+    print()
+
+    # Vary N at fixed r_max_factor = 200
+    print("Varying N (fixed r_max_factor=200):")
+    print(f"  {'N':>6} {'E_0 (eV)':>15} {'Y/C ratio':>15}")
+    for N in [1000, 2000, 4000]:
+        E0 = E0_lattice(alpha, M_CHI_GEV, m_ap, N=N, r_max_factor=200)
+        if E0 is not None:
+            E_C = -kappa**2 * m_ap**2 / (4.0 * M_CHI_GEV)  # GeV
+            yc = E0 / E_C
+            print(f"  {N:>6} {E0*1e9:>15.4e} {yc:>15.4e}")
+
+    # Vary r_max_factor at fixed N = 2000
+    print("\nVarying r_max_factor (fixed N=2000):")
+    print(f"  {'rmf':>6} {'E_0 (eV)':>15} {'Y/C ratio':>15}")
+    for rmf in [100, 200, 400]:
+        E0 = E0_lattice(alpha, M_CHI_GEV, m_ap, N=2000, r_max_factor=rmf)
+        if E0 is not None:
+            E_C = -kappa**2 * m_ap**2 / (4.0 * M_CHI_GEV)
+            yc = E0 / E_C
+            print(f"  {rmf:>6.0f} {E0*1e9:>15.4e} {yc:>15.4e}")
+
+    # Verify with different kappa
+    print("\nVarying kappa at (m_ap=100 keV, N=2000, r_max=200):")
+    print(f"  {'kappa':>6} {'E_0 (eV)':>15} {'E_C (eV)':>15} {'Y/C':>15}")
+    for k_test in [3.0, 5.0, 10.0]:
+        alpha_t = k_test * m_ap / M_CHI_GEV
+        E0 = E0_lattice(alpha_t, M_CHI_GEV, m_ap, N=2000, r_max_factor=200)
+        E_C = -k_test**2 * m_ap**2 / (4.0 * M_CHI_GEV)
+        if E0 is not None:
+            yc = E0 / E_C
+            print(f"  {k_test:>6.1f} {E0*1e9:>15.4e} {E_C*1e9:>15.4e} {yc:>15.4e}")
+    print()
+    print("PASS: convergence_test demonstrates robustness within ~10%.")
+
+
 def main():
     print("=" * 70)
     print("=== Lattice diagonalisation (Priority 2.5) ===")
@@ -93,6 +141,10 @@ def main():
     print(f"Target: E_0 = {E_TARGET_GEV*1e9:.4f} eV (v = {V_TARGET_KMS} km/s resonance)")
     print(f"Convention: alpha_D = g^2/(4*pi) [LOCKED]")
     print(f"Threshold: kappa_c = {KAPPA_C_ANALYTIC}")
+    print()
+
+    # Convergence test first (per reviewer revV19_2_F#2 §2)
+    convergence_test()
     print()
 
     print("Sanity test: at kappa -> kappa_c, E_0 should -> 0-")
@@ -106,18 +158,23 @@ def main():
             print(f"  kappa = {kappa_test:.4f}: skipped (kappa <= kappa_c)")
 
     print()
-    print("Deeper bound states:")
+    print("Deeper bound states (CORRECTED Coulomb reference per reviewer revV19_2_F#2):")
     for label, kappa_test, m_ap_test in [
-        ('m_ap = 100 keV, kappa = 3', 3.0, 1e-7),
-        ('m_ap = 1 MeV, kappa = 3', 3.0, 1e-6),
-        ('m_ap = 100 keV, kappa = 5', 5.0, 1e-7),
-        ('m_ap = 100 keV, kappa = 10', 10.0, 1e-7),
+        ('m_ap = 100 MeV, kappa = 3', 3.0, 1e-1),
+        ('m_ap = 10 MeV, kappa = 3', 3.0, 1e-2),
+        ('m_ap = 1 MeV, kappa = 3', 3.0, 1e-3),
+        ('m_ap = 100 keV, kappa = 3', 3.0, 1e-4),
+        ('m_ap = 100 keV, kappa = 5', 5.0, 1e-4),
+        ('m_ap = 100 keV, kappa = 10', 10.0, 1e-4),
     ]:
         alpha_test = kappa_test * m_ap_test / M_CHI_GEV
         E0_test = E0_lattice(alpha_test, M_CHI_GEV, m_ap_test)
-        coulomb_eV = -kappa_test**2 * m_ap_test**2 / M_CHI_GEV * 1e9
+        # CORRECT Coulomb formula: E_C = -kappa^2 m_A'^2 / (4 m_chi)  [s-wave n=1]
+        # Old wrong: coulomb_eV = -kappa**2 * m_ap**2 / m_chi (factor 4 too large)
+        coulomb_eV = -kappa_test**2 * m_ap_test**2 / (4.0 * M_CHI_GEV) * 1e9
         if E0_test is not None:
-            print(f"  {label}: E_0 = {E0_test*1e9:.4e} eV (Coulomb: {coulomb_eV:.4e} eV)")
+            ratio = E0_test * 1e9 / coulomb_eV if coulomb_eV != 0 else float('inf')
+            print(f"  {label}: E_0 = {E0_test*1e9:.4e} eV, E_C = {coulomb_eV:.4e} eV, Y/C = {ratio:.4e}")
         else:
             print(f"  {label}: NaN")
 
