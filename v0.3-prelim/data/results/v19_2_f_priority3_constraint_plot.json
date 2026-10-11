@@ -1,0 +1,326 @@
+{
+  "_meta": {
+    "description": "v19.2-F Priority 3: quantitative exclusion plot in (alpha_D, m_A') plane",
+    "date": "2026-10-11",
+    "convention": "alpha_D = g^2 / (4*pi) (LOCKED per constants.py)",
+    "m_chi_GeV": 1.0,
+    "kappa_c_analytic": 1.6798,
+    "axes": {
+      "x": "m_A_prime [GeV], log scale",
+      "y": "alpha_D, log scale",
+      "x_range_GeV": [
+        1e-09,
+        1000.0
+      ],
+      "y_range": [
+        1e-12,
+        0.01
+      ]
+    }
+  },
+  "constraints": {
+    "BBN": {
+      "source": "Planck 2018 (arXiv:1807.06209); Olive et al. 2019 review",
+      "limit": "Delta N_eff < 0.30; dark photon epsilon < 1e-10 for visible decay",
+      "applies_to": "m_A' in [1 eV, 100 MeV] (visible decay only)",
+      "exclusion_shape": "vertical band 1 eV <= m_A' <= 1 MeV (visible decay)"
+    },
+    "CMB": {
+      "source": "Slatyer 2016 (PRD 93, 023527); Poulin 2018 (PRD 97, 123504)",
+      "limit": "tau_A' > 1e25 sec for m_A' in [1, 100] MeV decaying to e+e-",
+      "applies_to": "m_A' in [1, 100] MeV (visible decay)",
+      "exclusion_shape": "vertical band 1 MeV <= m_A' <= 100 MeV"
+    },
+    "SN1987A": {
+      "source": "Caputo et al. 2021 (PRD 103, 063014)",
+      "limit": "epsilon < 1e-5 to 1e-10 for m_A' in [1, 100] MeV",
+      "applies_to": "m_A' in [1, 100] MeV (visible decay)",
+      "exclusion_shape": "vertical band 1 MeV <= m_A' <= 100 MeV (same as CMB)"
+    },
+    "Lyman-alpha": {
+      "source": "Vogelsberger 2012 (MNRAS 423, 3740); Zavala 2013 (MNRAS 431, L104)",
+      "limit": "sigma/m(30 km/s) > 100 cm^2/g -> excluded",
+      "applies_to": "all (alpha_D, m_A') with sigma/m(30) > 100",
+      "exclusion_shape": "upper region in (alpha_D, m_A') plane; curve computed analytically from Born formula at v = 30 km/s",
+      "curve_formula": "sigma_T = (g^4 m_chi^2) / (8 pi m_A^4) * L(s)^2, s = (m_chi v / (sqrt(2) m_A))^2, alpha_D = g^2/(4 pi)",
+      "caveat": "Born underestimates sigma/m in deep-Sommerfeld regime (kappa > kappa_c); actual exclusion boundary is HIGHER (more permissive) than shown for kappa > kappa_c"
+    },
+    "XENONnT_LZ": {
+      "source": "Aprile 2022 (PRL 129, 161805); Aalbers 2022 (arXiv:2207.03764)",
+      "limit": "sigma_e < 1e-40 cm^2 for m_DM in [100 MeV, 10 GeV] -> epsilon < 1e-5",
+      "applies_to": "m_A' in [1, 100] MeV (visible decay)",
+      "exclusion_shape": "vertical band 1 MeV <= m_A' <= 100 MeV (same as CMB/SN1987A)"
+    }
+  },
+  "lyman_alpha_curve": {
+    "v_kms": 30.0,
+    "sigma_m_target_cm2_g": 100.0,
+    "m_chi_GeV": 1.0,
+    "m_A_prime_grid_sample": [
+      1e-09,
+      3.990264362361947e-09,
+      1.5922209681535857e-08,
+      6.353382586228689e-08,
+      2.535167611427937e-07,
+      1.0115988972495176e-06,
+      4.036547028699395e-06,
+      1.6106889755617235e-05,
+      6.427074818033231e-05,
+      0.00025645727600631896,
+      0.0010233323289164382,
+      0.004083366522928125,
+      0.016293711914901914,
+      0.06501621798462548,
+      0.25943189759960744,
+      1.0352018554516473,
+      4.1307290716596885,
+      16.482701005216104,
+      65.77033441658125,
+      262.4410215231127
+    ],
+    "alpha_D_curve_sample": [
+      NaN,
+      NaN,
+      NaN,
+      NaN,
+      0.2105621206523059,
+      0.013227817872949564,
+      0.0008341577842475082,
+      5.5805696317392436e-05,
+      7.456555631625753e-06,
+      1.0324894237130216e-05,
+      6.494394852767385e-05,
+      0.000632904209885625,
+      0.007254435093768263,
+      0.09022759145875077,
+      1.1786645439956218,
+      15.910138196785727,
+      219.85676746318524,
+      3092.0955962776607,
+      44088.05351318387,
+      635561.8214868864
+    ],
+    "n_grid_points": 600
+  },
+  "kappa_c_line": {
+    "kappa_c": 1.6798,
+    "formula": "alpha_D = kappa_c * m_A' / m_chi",
+    "m_A_prime_grid_sample": [
+      1e-09,
+      3.990264362361947e-09,
+      1.5922209681535857e-08,
+      6.353382586228689e-08,
+      2.535167611427937e-07,
+      1.0115988972495176e-06,
+      4.036547028699395e-06,
+      1.6106889755617235e-05,
+      6.427074818033231e-05,
+      0.00025645727600631896,
+      0.0010233323289164382,
+      0.004083366522928125,
+      0.016293711914901914,
+      0.06501621798462548,
+      0.25943189759960744,
+      1.0352018554516473,
+      4.1307290716596885,
+      16.482701005216104,
+      65.77033441658125,
+      262.4410215231127
+    ],
+    "alpha_D_line_sample": [
+      1.6798000000000001e-09,
+      6.702846075895597e-09,
+      2.6746127823043933e-08,
+      1.0672412068346952e-07,
+      4.258574553676648e-07,
+      1.6992838275997396e-06,
+      6.780591698809244e-06,
+      2.705635341148583e-05,
+      0.00010796200279332221,
+      0.00043079693223541457,
+      0.0017189936461138328,
+      0.006859239085214664,
+      0.027370177274652234,
+      0.10921424297057387,
+      0.43579370158782055,
+      1.7389320767876772,
+      6.938798694573944,
+      27.68764114856201,
+      110.48100775297318,
+      440.84842795452465
+    ]
+  },
+  "candidates": [
+    {
+      "label": "Framework doc",
+      "alpha_D": 6.8e-07,
+      "m_A_prime_GeV": 2e-07,
+      "m_A_prime_eV": 200.0,
+      "kappa": 3.4,
+      "kappa_over_kappa_c": 2.024050482200262,
+      "verdicts": {
+        "BBN": {
+          "visible": "EXCLUDED",
+          "invisible": "ALLOWED"
+        },
+        "CMB": {
+          "visible": "ALLOWED",
+          "invisible": "ALLOWED"
+        },
+        "SN1987A": {
+          "visible": "ALLOWED",
+          "invisible": "ALLOWED"
+        },
+        "Lyman-alpha": {
+          "visible": "ALLOWED",
+          "invisible": "ALLOWED"
+        },
+        "Lyman-alpha_value_cm2_g": 4.0397736467622965e-10,
+        "XENONnT/LZ": {
+          "visible": "ALLOWED",
+          "invisible": "ALLOWED"
+        }
+      },
+      "marker": "*",
+      "color": "red"
+    },
+    {
+      "label": "Phase-3 best fit (EXTENDED)",
+      "alpha_D": 5.55e-06,
+      "m_A_prime_GeV": 0.000126,
+      "m_A_prime_eV": 126000.0,
+      "kappa": 0.04404761904761905,
+      "kappa_over_kappa_c": 0.026221942521501996,
+      "verdicts": {
+        "BBN": {
+          "visible": "EXCLUDED",
+          "invisible": "ALLOWED"
+        },
+        "CMB": {
+          "visible": "ALLOWED",
+          "invisible": "ALLOWED"
+        },
+        "SN1987A": {
+          "visible": "ALLOWED",
+          "invisible": "ALLOWED"
+        },
+        "Lyman-alpha": {
+          "visible": "MARGINAL",
+          "invisible": "MARGINAL"
+        },
+        "Lyman-alpha_value_cm2_g": 74.81890883213367,
+        "XENONnT/LZ": {
+          "visible": "ALLOWED",
+          "invisible": "ALLOWED"
+        }
+      },
+      "marker": "P",
+      "color": "gold"
+    },
+    {
+      "label": "Lattice ridge #1 (m_A'=3.5 eV, kappa~1e5)",
+      "alpha_D": 2.97e-10,
+      "m_A_prime_GeV": 3.5e-09,
+      "m_A_prime_eV": 3.5,
+      "kappa": 0.08485714285714287,
+      "kappa_over_kappa_c": 0.05051621791709898,
+      "verdicts": {
+        "BBN": {
+          "visible": "EXCLUDED",
+          "invisible": "ALLOWED"
+        },
+        "CMB": {
+          "visible": "ALLOWED",
+          "invisible": "ALLOWED"
+        },
+        "SN1987A": {
+          "visible": "ALLOWED",
+          "invisible": "ALLOWED"
+        },
+        "Lyman-alpha": {
+          "visible": "ALLOWED",
+          "invisible": "ALLOWED"
+        },
+        "Lyman-alpha_value_cm2_g": 1.9026496190786153e-21,
+        "XENONnT/LZ": {
+          "visible": "ALLOWED",
+          "invisible": "ALLOWED"
+        }
+      },
+      "marker": "X",
+      "color": "blue"
+    },
+    {
+      "label": "Lattice ridge #2 (m_A'=12.3 eV, kappa~1e6)",
+      "alpha_D": 4.12e-09,
+      "m_A_prime_GeV": 1.23e-08,
+      "m_A_prime_eV": 12.299999999999999,
+      "kappa": 0.33495934959349594,
+      "kappa_over_kappa_c": 0.199404303841824,
+      "verdicts": {
+        "BBN": {
+          "visible": "EXCLUDED",
+          "invisible": "ALLOWED"
+        },
+        "CMB": {
+          "visible": "ALLOWED",
+          "invisible": "ALLOWED"
+        },
+        "SN1987A": {
+          "visible": "ALLOWED",
+          "invisible": "ALLOWED"
+        },
+        "Lyman-alpha": {
+          "visible": "ALLOWED",
+          "invisible": "ALLOWED"
+        },
+        "Lyman-alpha_value_cm2_g": 2.406984256351706e-19,
+        "XENONnT/LZ": {
+          "visible": "ALLOWED",
+          "invisible": "ALLOWED"
+        }
+      },
+      "marker": "X",
+      "color": "cyan"
+    },
+    {
+      "label": "Lattice ridge #3 (m_A'=43.3 eV, kappa~1e7)",
+      "alpha_D": 5.99e-08,
+      "m_A_prime_GeV": 4.33e-08,
+      "m_A_prime_eV": 43.3,
+      "kappa": 1.3833718244803697,
+      "kappa_over_kappa_c": 0.823533649529926,
+      "verdicts": {
+        "BBN": {
+          "visible": "EXCLUDED",
+          "invisible": "ALLOWED"
+        },
+        "CMB": {
+          "visible": "ALLOWED",
+          "invisible": "ALLOWED"
+        },
+        "SN1987A": {
+          "visible": "ALLOWED",
+          "invisible": "ALLOWED"
+        },
+        "Lyman-alpha": {
+          "visible": "ALLOWED",
+          "invisible": "ALLOWED"
+        },
+        "Lyman-alpha_value_cm2_g": 6.890518011125188e-15,
+        "XENONnT/LZ": {
+          "visible": "ALLOWED",
+          "invisible": "ALLOWED"
+        }
+      },
+      "marker": "X",
+      "color": "magenta"
+    }
+  ],
+  "output_files": {
+    "pdf": "v0.3-prelim\\docs\\V19_2_F_PRIORITY3_CONSTRAINT_PLOT.pdf",
+    "png": "v0.3-prelim\\docs\\V19_2_F_PRIORITY3_CONSTRAINT_PLOT.png",
+    "data_json": "v0.3-prelim\\data\\results\\v19_2_f_priority3_constraint_plot.json",
+    "report_md": "v0.3-prelim\\docs\\V19_2_F_PRIORITY3_CONSTRAINT_PLOT_REPORT.md"
+  }
+}
