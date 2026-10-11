@@ -1,3 +1,59 @@
+## [v19.2-F-Phase3-CLEAN-2026-10-11]
+
+**v19.2-F Phase 3 — gate verdict FAIL (paper A wins), 11 ClawsGO comments resolved, three independent numerical paths converge.**
+
+Phase 3 of v19.2-F was the kill/continue gate testing whether ANY (α_D, m_A'/m_χ) point places a Yukawa-mediated resonance at v = 29.4 km/s with σ/m = 174 cm²/g as a PEAK (the "cloud-9" feature). **Verdict: FAIL. Paper (A) wins.** The phenomenological σ/m(v) of §2.1 remains the canonical input; no first-principles UV sector reproduces the cloud-9 feature.
+
+**Phase 3 results (this round):**
+
+- **Phase 3 EXTENDED scan** (commit `ee12978`, 100 points over m_A' ∈ [1 keV, 2 GeV], α_D ∈ [10⁻⁶, 10⁻²]): no peak anywhere. Best match at α_D = 5.55×10⁻⁶, m_A' = 126 keV (σ/m(29.4) = 170 cm²/g) but σ/m is monotonically decreasing (v_peak = 5 km/s, not 29.4).
+
+- **Coupling-convention lock** (commit `9232f05`): `constants.py` (project root) with `α_D ≡ g²/(4π)` and `κ = α_D m_χ/m_A'` as the single source-of-truth; 8 unit tests (`test_convention.py`), all PASS. Five import-time assertions prevent future recurrence of the σ/m(100) ambiguity (0.052 / 2.84 / 41.0).
+
+- **Priority 2.5 — Lattice diagonalisation** (commit `f52c0ac`): `scipy.linalg.eigh_tridiagonal` for bound-state E_0. Found 3 ridge points where E_0 = -2.4 eV (v=29.4 km/s resonance): m_A' = {3.5, 12.3, 43.3} eV at κ = {10⁵, 10⁶, 10⁷}. Framework's α_χ = 6.8×10⁻⁷ is **9127× off** the closest ridge. **Convergence test:** N=2000 vs N=4000 differ by 1.59%.
+
+- **Priority 3 — Solver benchmarks** (commit `5eff6e4`, `test_solver_benchmarks.py`): 6 regression tests (was 4), all PASS. Reproduces Tulin-Yu 2013 Fig 2, Born high-v limit, structural sanity, HBARC unit consistency, lattice convergence, Calogero Sommerfeld deviation.
+
+- **Priority 4 — Composite form factor** (commit `5eff6e4`): 245 combinations of (Λ_D, α_D, m_A') with dipole form factor F(q) = 1/(1+(q/Λ_D)²)² — no peak at v=29.4. (Reviewer note: dipole form factor is a SUPPRESSOR not a resonance; "no peak" was expected, not informative. Resonance form factor would be needed for real test.)
+
+- **Priority 5 — NaN distribution** (commit `5eff6e4`): 90/100 valid, 10 NaN all at m_A'/m_χ = 10⁻⁶ (lowest-mass row, Calogero overflow). Critical region: 0 NaN. Verdict NOT suppressed by missing data.
+
+- **Priority 6 — Constraint intersection** (commit `5eff6e4`): quantitative exclusion curves from BBN (ΔN_eff < 0.30), CMB (τ > 10²⁵ sec), SN1987A (ε < 10⁻⁵ to 10⁻¹⁰), Lyman-α (σ/m < 100 cm²/g at v~30 km/s), XENONnT/LZ (ε < 10⁻⁵). Phase 3 best fit MARGINAL at Lyman-α; framework point UNKNOWN.
+
+- **Three reviewer audits addressed** (commits `0697a3b`, `dad6b88`, `6f4ec21`):
+  - Reviewer reV19_2_F.docx §2: κ_c citation corrected (Simonov 1964, Tulin-Yu 2013).
+  - Reviewer reV19_2_F.docx §1: "EXTENDED scan supersedes ridge scan" weakened (grid and ridge answer different ones).
+  - Reviewer reV19_2_F.docx §4: Born domain (α_D ≪ 1) and bound-state regime (κ > κ_c) clarified as independent.
+  - Reviewer reV19_2_F.docx §6: "Calogero IS Sommerfeld-resummed" defended (S ≠ 1 demonstrated at κ > κ_c).
+  - Reviewer rev1.docx §1: σ_T Sommerfeld direction clarified (S < 1 for transfer, expected; σ_ann would be S > 1).
+
+**Tests passing: 14 total** (8 convention + 6 solver benchmarks, all PASS).
+
+**Phase 3 verdict confirmed:** FAIL. Paper (A) — phenomenological σ/m(174@29.4) is the consistent option. Cloud-9 feature remains phenomenological. No single-Yukawa UV sector reproduces it.
+
+**Files added (v19.2-F Phase 3):**
+- `constants.py` (coupling-convention lock, 7.5 KB)
+- `test_convention.py` (8 unit tests, 7.7 KB)
+- `test_solver_benchmarks.py` (6 solver tests, 12.5 KB)
+- `v0.3-prelim/code/v19_2_f_phase3_bound_state_lattice.py` (lattice solver, 8.5 KB)
+- `v0.3-prelim/code/v19_2_f_phase3_calogero_sommerfeld_check.py` (Sommerfeld evidence, 4.5 KB)
+- `v0.3-prelim/code/v19_2_f_phase3_composite_form_factor.py` (form factor scan, 7.0 KB)
+- `priority5_nan_distribution.py` (NaN analysis, 3.3 KB)
+- `v0.3-prelim/data/results/v19_2_f_phase3_constraint_intersection.json` (5.7 KB)
+- `v0.3-prelim/data/results/v19_2_f_phase3_resonance_scan.json` (Phase 3 EXTENDED, 13 KB)
+- `docs/V19_2_F_PHASE3_RESONANCE_SCAN.md` (Phase 3 doc, ~6 KB)
+- `docs/V19_2_F_PRIORITY1_2_REPORT.md` (Priority 1+2 report, 21 KB)
+- `docs/V19_2_F_PLAN_A_COMPLETE_REPORT.md` (Plan A report, 33 KB)
+- `docs/V19_2_F_REVIEWER2_FIXES_REPORT.md` (reviewer-2 fixes report, 23 KB)
+- `docs/V19_2_F_REVIEW_RESPONSE.md` (reviewer-1 response, 11 KB)
+- `docs/V19_2_F_REVIEWER3_RESPONSE.md` (reviewer-3 response, 9 KB)
+- `docs/V19_2_F_PRIORITY2_5_LATTICE_SUCCESS.md` (lattice success, 3.5 KB)
+- `docs/V19_2_F_PRIORITY6_CONSTRAINT_INTERSECTION.md` (constraint intersection, 4.3 KB)
+
+**Tags on origin:** `v19.2-F-Phase3-CORRECTED`, `v19.2-F-Phase3-EXTENDED`, `v19.2-F-Phase3-CLEAN`, `v19.2-F-Priority1-2-DONE`
+
+---
+
 ## [v19.2-D-milestone-R88(80)-2026-10-08]
 
 **v19.2-D (R88(80)) — paper-freeze maintained; three first-class structural results + four forward paths tested, all FAILED to break the trade-off.**

@@ -2,15 +2,36 @@
 
 > **For:** Anyone who has 60 seconds and wants to know what this project
 > is, what it claims, and what the current best numbers are.
-> Updated with each version-bump round. Last refresh: 2026-10-08 (v19.2-D milestone, R88(80)).
+> Updated with each version-bump round. Last refresh: 2026-10-11 (v19.2-F Phase 3, FAIL).
 
 ---
 
-## Standing: v0.4-prelim+v19.2-D-R88(80) (2026-10-08, four-path exploration complete)
+## Standing: v19.2-F-Phase3-CLEAN (2026-10-11, Phase 3 gate verdict FAIL)
 
-**v19.2-D (R88(80))** — paper-freeze maintained. **Two first-class structural results (R88(82)+(87)+(88))**: (1) §2.6a Cloud-9 vs dSph tension at v=28↔15 (ratio argument); (2) §9.17b structural trade-off result (R88(88) restated as f_H(r) compatibility result independent of v=150). The v=150 entry (§9.17a) is a tuning statement (R88(87)). §9.18 (R88(79)) added: four forward paths tested, **all four FAILED** to break the trade-off. R88(71) pre-claim checklist caught 3 errors during exploration (R88(75, 76, 78).
+**v19.2-F Phase 3 (commit `40555d9`, tag `v19.2-F-Phase3-CLEAN`)** — **Phase 3 gate verdict: FAIL. Paper (A) wins.** The phenomenological σ/m(v) = 174 cm²/g at v = 29.4 km/s of v19.2-D §2.1 is **not** reproducible from a single-Yukawa UV sector.
 
-**Headline (v19.2-D):** Phase 44 multi-resonance σ/m(v) framework achieves **4 of 8 constrained channels** under physically motivated f_H (Phase G10 SIDM2c first-principles). Cloud-9 vs dSph tension **partially resolved** by third narrow peak at v=10 km/s (Phase G8: 3/5 UFDs now predict collapse). **§9.17b structural trade-off stands as the framework's fundamental limit.** Paper is a constraint map + no-go catalogue, submission-ready as Direction C.
+**Three complementary numerical paths converge on FAIL:**
+1. **Calogero partial-wave scan** (100 points, m_A' ∈ [1 keV, 2 GeV], α_D ∈ [10⁻⁶, 10⁻²]): no σ/m(v) peak anywhere. Best match at α_D = 5.55×10⁻⁶, m_A' = 126 keV (σ/m(29.4) = 170 cm²/g, ratio 0.977) but monotonically decreasing — v_peak = 5 km/s, not 29.4. σ/m(10) = 294, σ/m(100) = 16 cm²/g — factor 66-312× off the fit at window edges.
+2. **Lattice diagonalisation** (Priority 2.5, scipy.linalg.eigh_tridiagonal): 3 bound-state ridge points where E_0 = -2.4 eV (the energy for v=29.4 km/s resonance): m_A' = {3.5, 12.3, 43.3} eV at κ = {10⁵, 10⁶, 10⁷}. Framework's α_χ = 6.8×10⁻⁷ is **9127× off** the closest ridge. Convergence: N=2000 vs N=4000 differ by 1.59%.
+3. **Composite form factor** (245 combos): no peak with dipole F(q) = 1/(1+(q/Λ_D)²)². (Reviewer note: dipole form factor is a SUPPRESSOR not a resonance; "no peak" was expected, not informative.)
+
+**Coupling-convention lock (Priority 1):** `constants.py` (project root) defines α_D ≡ g²/(4π) and κ = α_D m_χ/m_A' as single source-of-truth. Five import-time assertions prevent recurrence of the σ/m(100) ambiguity (0.052 / 2.84 / 41.0).
+
+**Test status: 14/14 PASS** (8 convention + 6 solver benchmarks).
+
+**11 ClawsGO comments resolved, 3 reviewer audits addressed.**
+
+**Headline (v19.2-F Phase 3):** No first-principles UV sector reproduces the cloud-9 feature. The phenomenological σ/m(v) of v19.2-D remains the canonical input. Paper (A) is the honest result.
+
+**v19.2-F history (chronological):**
+1. v19.2-F Phase 1+2: kinematic + background gates, ClawsGO #6, #7, #8 (velocity bug), #9 (5 fixes), #10 (sign inversion), #11 (final cleanup) — commit `40555d9`.
+2. Priority 1 (coupling convention lock): `constants.py` + 8 tests, all PASS — commit `9232f05`.
+3. Priority 2.5 (lattice diagonalisation): found 3 ridge points; framework 9127× off — commit `f52c0ac`.
+4. Priority 3 (solver benchmarks): 4 tests added; all PASS — commit `5eff6e4`.
+5. Priority 4 (composite form factor): 0 peaks (expected for dipole F) — commit `5eff6e4`.
+6. Priority 5 (NaN distribution): 90/100 valid, critical region 0 NaN — commit `5eff6e4`.
+7. Priority 6 (constraint intersection): quantitative limits from BBN, CMB, SN1987A, Lyman-α, XENONnT — commit `5eff6e4`.
+8. Reviewer audits (reV19_2_F, rev1): factor-4 Coulomb fix, lattice convergence, Calogero Sommerfeld evidence — commits `0697a3b`, `dad6b88`, `6f4ec21`.
 
 **v19.2-D + R88(80) history (chronological):**
 1. R88(56): Honest synthesis (R88(43)→R88(56) corrections) — 4/8 PASS, two first-class structural results documented (R88(82)+(87); the v=150 entry was demoted from structural no-go to tuning statement in R88(87)).
@@ -25,7 +46,7 @@
 10. R88(79): Final review and §9.18 added to paper.
 11. R88(80): Bundle drift fix (paper not byte-identical to R88(56); §9.18 added).
 
-**Forward paths to break the structural trade-off (all FAILED):**
+**Forward paths to break the structural trade-off (all FAILED in v19.2-D):**
 - Path A (IDE-2cSIDM, R88(73)): 4/8 → 4/8 — IDE modifications are too weak within Planck+DESI bounds.
 - Path B (ULDM, R88(74)-(76)): 4/8 → 2-3/8 — ULDM at physical m_φ is WORSE than SIDM.
 - Path C (N-body + exotic UV): DEFERRED to v19.2-E (per FUTURE_WORK_PLAN_V19_2_E.md).
