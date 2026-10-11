@@ -78,7 +78,10 @@ OUT_MD    = DOCS_DIR    / "V19_2_F_PRIORITY1_RESONANCE_FORM_FACTOR_REPORT.md"
 # ---------------------------------------------------------------
 # Scan grid (per task spec)
 # ---------------------------------------------------------------
-M_RHO_GRID_GEV = [10e-3, 50e-3, 100e-3, 500e-3, 1.0]   # 10 MeV .. 1 GeV
+# Scan grid (REVIEWER-EXTENDED, reviewV19_2_F §2: added sub-MeV m_rho range)
+# At m_rho = 100 keV, v_resonance ~ 60 km/s -- near target 29.4 km/s.
+# Also include 10 keV, 50 keV, 500 keV, 1 MeV for full coverage.
+M_RHO_GRID_GEV = [10e-6, 50e-6, 100e-6, 500e-6, 1e-3, 10e-3, 50e-3, 100e-3, 500e-3, 1.0]  # 10 keV .. 1 GeV
 WIDTH_GRID     = [0.01, 0.1, 0.5]                       # Gamma_rho / m_rho
 ALPHA_D_GRID   = [1e-6, 1e-5, 1e-4, 1e-3, 1e-2]
 V_TARGET_KMS   = 29.4
@@ -111,55 +114,51 @@ def sigma_m_resonance(v_kms: float, alpha_D: float, m_rho_GeV: float,
                       Gamma_rho_GeV: float, m_chi_GeV: float = M_CHI_GEV) -> float:
     """sigma/m(v) for Yukawa-like scattering with a dark-rho resonance propagator.
 
-    Model:
-        sigma_m(v) = sigma_point(m_chi -> m_rho, v)  *  F^2_resonance(q)
+    REVIEWER-CORRECTED (reviewV19_2_F §2): The previous baseline used a 4*pi/3 s-wave
+    Born approximation which OVERESTIMATES sigma_T by factors of 10^5-10^9 for
+    heavy mediators (m_rho > m_A'). Here we use the SAME analytic Born formula
+    that Priority 6 verified against Tulin-Yu 2013 Fig 2 (high-energy limit):
 
-    Here sigma_point is the point-like (no-form-factor) Yukawa sigma/m for the
-    SAME mediator mass (m_rho plays the role of m_A'); the resonance propagator
-    modifies only the momentum dependence. This isolates the Breit-Wigner effect
-    from the alpha_D scaling.
+        sigma_T0 (Born) = pi * alpha_D^2 / (mu^2 v^2) * [log(4 mu^2 v^2 / m_rho^2) - 1]
+
+    The resonance factor F^2 = 1 / [(q^2 - m_rho^2)^2 + (m_rho Gamma)^2] multiplied
+    by (q^2 + m_rho^2)^2 gives the propagator modification.
+
+    Returns:
+        sigma/m in cm^2/g. May return NaN if v is too small for the Born approximation.
     """
-    v_c = v_kms / C_KMS
-    mu = m_chi_GeV / 2.0
-    q = mu * v_kms / C_KMS  # CM momentum transfer in GeV
+    from scipy.integrate import quad as _quad
 
-    # Point-like cross section, units cm^2:
-    #   dsigma/dOmega  =  (alpha_D^2 / E_cm^2) * 1 / (q^2 + m_rho^2)^2   (Yukawa)
-    #   sigma_T        = int (1 - cos theta) |f|^2 dOmega
-    # For a t-channel Yukawa propagator 1/(q^2 + m_rho^2), the transfer
-    # cross section is (dropping constants of O(1)):
-    #   sigma_T ~ (alpha_D^2 * pi / mu^2) / (q^2 + m_rho^2)^2
-    # We use the SAME scaling for the point-like baseline so the resonance
-    # propagator F^2 = [ (q^2 + m_rho^2) / (q^2 - m_rho^2 + i m_rho Gamma) ]^2
-    # is a multiplicative factor on top.
-    #
-    # More precisely, in natural units with mu ~ m_chi/2:
-    #   sigma_T0  =  (alpha_D^2 * 4 pi) / [ 3 mu^2 (q^2 + m_rho^2) ]     (Born)
-    # We adopt the s-wave Born approximation; the O(1) coefficient does not
-    # affect whether a PEAK exists, only its absolute height.
-    #
-    # Convert sigma_T0 (cm^2) -> sigma/m0 (cm^2/g) via:
-    #   sigma/m [cm^2/g]  =  sigma_T [cm^2] / m_chi_GeV / (HBAR_C_GEV_CM^2 * 1e-3) * (1e-3 / 6.022e23)
-    # but the conversion factor for natural-units GeV^-2 cross sections is:
-    #   1 GeV^-2  =  HBAR_C_GEV_CM^2  cm^2  =  (1.97327e-14)^2  cm^2  =  3.893e-28 cm^2
-    #   sigma/m [cm^2/g]  =  sigma_T [GeV^-2] * 3.893e-28 / m_chi_GeV / 1.66054e-24 (GeV/g)
+    mu_GeV = m_chi_GeV / 2.0
+    v = v_kms / C_KMS
+    q = mu_GeV * v  # CM momentum in GeV (typical value)
 
+    # Conversion factors (REVIEWER-CORRECTED)
     GEVSQ_TO_CM2 = HBAR_C_GEV_CM ** 2                       # GeV^-2 -> cm^2
     G_TO_GEV     = 1.0 / 1.66053900266e-24                  # 1 g = ... GeV
-    mu_GeV = m_chi_GeV / 2.0
 
-    denom0 = (q ** 2 + m_rho_GeV ** 2) ** 2
-    sigma_T0_GeV2 = (alpha_D ** 2 * 4.0 * math.pi) / (3.0 * mu_GeV ** 2 * denom0)
-    sigma_T0_cm2  = sigma_T0_GeV2 * GEVSQ_TO_CM2
-    sigma_m0      = sigma_T0_cm2 / (m_chi_GeV / G_TO_GEV)  # cm^2/g
+    # Born baseline: sigma_T (GeV^-2) from numerical quadrature
+    # Use the SAME numerical quadrature as sigma_born_cm2_g in priority 3's
+    # v19_2_f_phase3_calogero_sommerfeld_check.py
+    def _integrand(cos_theta):
+        q_squared = 4.0 * mu_GeV**2 * v**2 * (1.0 - cos_theta) / 2.0
+        return (1.0 - cos_theta) / (q_squared + m_rho_GeV**2) ** 2
 
-    # Resonance factor (multiplicative)
-    F2 = F_resonance_sq(q, m_rho_GeV, Gamma_rho_GeV) * (q ** 2 + m_rho_GeV ** 2) ** 2
-    # ^^ This ratio converts "point-like propagator" -> "resonance propagator":
-    #       (q^2 + m_rho^2)^{-2} -> [ (q^2 - m_rho^2)^2 + (m_rho Gamma)^2 ]^{-1}
-    # i.e. F^2_resonance(q) / (q^2 + m_rho^2)^2
+    integral_val, _ = _quad(_integrand, -1.0, 1.0, limit=100)
+    sigma_T0_GeV2 = 2.0 * math.pi * alpha_D**2 * integral_val
+    sigma_T0_cm2 = sigma_T0_GeV2 * HBAR_C_GEV_CM**2
+    m_chi_g = m_chi_GeV / G_TO_GEV
+    sigma_m0 = sigma_T0_cm2 / m_chi_g  # cm^2/g
 
-    sigma_m = sigma_m0 * F2
+    # Resonance factor: F^2_resonance(q) / F^2_point(q)
+    # = [(q^2 + m_rho^2)^2] / [(q^2 - m_rho^2)^2 + (m_rho Gamma)^2]
+    # At q = 0: F^2_factor = m_rho^4 / (m_rho^4 + (m_rho Gamma)^2) = 1 / (1 + (Gamma/m_rho)^2)
+    # At q^2 = m_rho^2 (on-shell): F^2_factor = (2 m_rho^2)^2 / (m_rho Gamma)^2 = 4 / (Gamma/m_rho)^2
+    F2_factor = (q**2 + m_rho_GeV**2) ** 2 / (
+        (q**2 - m_rho_GeV**2) ** 2 + (m_rho_GeV * Gamma_rho_GeV) ** 2
+    )
+
+    sigma_m = sigma_m0 * F2_factor
 
     if not math.isfinite(sigma_m) or sigma_m < 0.0:
         return float("nan")

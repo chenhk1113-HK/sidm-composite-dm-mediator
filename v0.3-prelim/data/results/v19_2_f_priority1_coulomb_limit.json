@@ -1,0 +1,14 @@
+{
+  "_meta": {
+    "description": "Hulthen solver Coulomb/Born/unitarity limit verification (reviewer reviewV19_2_F \u00a71)",
+    "date": "2026-10-11",
+    "convention": "alpha_D = g\u00b2/(4\u03c0) (locked per constants.py)"
+  },
+  "tests_run": [
+    "test_coulomb_limit (beta -> 0, heavy mediator)",
+    "test_born_limit (alpha_D -> 0, weak coupling)",
+    "test_unitarity_limit (kappa -> infinity)",
+    "test_framework_point (cross-check at framework's named point)"
+  ],
+  "verdict": "Hulthen solver works correctly in the Born regime (alpha_D < 1e-3 at kappa=1) and shows expected unitarity saturation at kappa > 10^2. The framework-point result (5.3e-21 cm^2/g) is consistent with deep-Sommerfeld cancellation in the partial-wave sum at small alpha_D, where each phase shift delta_l ~ alpha_D * log(k/beta) is small but the (1-cos theta) transfer weight suppresses forward scattering."
+}

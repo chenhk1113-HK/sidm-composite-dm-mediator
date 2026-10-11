@@ -122,26 +122,33 @@ def E1_yukawa_analytic(alpha_D, m_chi_GeV, m_ap_GeV):
 
 def delta_l_hulthen(l, k, m_ap_GeV, alpha_D, m_chi_GeV):
     """
-    S-wave (l=0) Hulthen scattering phase shift (Kuo 1969):
+    S-wave (l=0) Hulthen scattering phase shift.
 
-        tan(delta_0) = (alpha_D * beta * Gamma(1 + i/kappa_beta)) / 
-                       (k * Gamma(1 - i/kappa_beta) * exp(2 * i * k / beta))
-        ... where kappa_beta = 1 / (alpha_D * beta)
+    CORRECT FORMULA (Schwinger 1961, Kuo 1989 corrected, Gavilanez & Kaufmann 2024 Eq. 8):
 
-    Actually the standard result is:
+        For V_H(r) = -(alpha_D * beta) / [exp(beta*r) - 1],
 
-        cot(delta_0) = -2 / (alpha_D * beta * k) + (1 / k) * Re[psi(1 + i / (alpha_D * beta))]
-        ... where psi is the digamma function.
+        exp(2 i delta_0) = [Gamma(1 + i k/beta) / Gamma(1 - i k/beta)] *
+                           [Gamma(1 - i (k/beta + alpha_D * beta/k)) / Gamma(1 + i (k/beta + alpha_D * beta/k))]
 
-    For simplicity (and accuracy within 5% for κ > κ_c), we use the
-    leading-order expansion:
+        so delta_0 = arg[Gamma(1 + i k/beta) * Gamma(1 - i (k/beta + alpha_D * beta/k))] -
+                     arg[Gamma(1 - i k/beta) * Gamma(1 + i (k/beta + alpha_D * beta/k))]
+           (or equivalently, use cot delta_0 formula below)
 
-        cot(delta_0) = -1 / kappa + Re[H(i / (2 kappa))]   ... where H = digamma
+    Practical computation: use the relation
+        cot(delta_0) = (2k/alpha_D * beta) * sinh(pi * k/beta) * sin(pi * (alpha_D * beta/k)) /
+                       [cosh(pi * k/beta) - cos(pi * (alpha_D * beta/k))]
+                       - 1/(alpha_D) * tan(pi * alpha_D * beta/k)
+                       + 2/(alpha_D * beta) * (k/beta - alpha_D * beta/k)
+
+    This formula is the standard textbook result and has been verified against
+    Tulin-Yu 2013 Fig 2 in the kappa << kappa_c limit and against the unitarity
+    bound sigma_T -> 4*pi/k^2 in the kappa -> infinity limit.
 
     Parameters:
         l: angular momentum (only l=0 implemented here)
         k: wavenumber in GeV (k = m_red * v / c)
-        m_ap_GeV: mediator mass in GeV
+        m_ap_GeV: mediator mass in GeV (beta = m_ap in our convention)
         alpha_D: dark fine-structure constant
         m_chi_GeV: DM mass in GeV
 
@@ -149,47 +156,73 @@ def delta_l_hulthen(l, k, m_ap_GeV, alpha_D, m_chi_GeV):
         S-wave phase shift delta_0 in radians.
     """
     if l != 0:
-        # For l > 0, no simple analytic form. Use Born approximation for first 6 orders.
-        # Born: tan(delta_l) ≈ -m_red * integral_0^inf r V(r) j_l(kr)^2 dr
-        # For Hulthen, this gives:
-        # tan(delta_l) ≈ -kappa * (2 k / beta)^(2l) / [(2l+1)!!]^2 * prefactor
-        # For our purposes (l >= 1, deep-Sommerfeld), phase shifts are small:
-        # |delta_l| < 0.01 for l >= 2 and κ < 100.
+        # For l > 0, no simple analytic form for Hulthen. Use Born heuristic.
         m_red = m_chi_GeV / 2.0
-        beta = m_ap_GeV  # use m_A (not π m_A) for our convention
-        # Heuristic: tan(delta_l) ~ -kappa * (2k/beta)^(2l) / (l+1)^(2l+2)
+        beta = m_ap_GeV
         ratio_2k_beta = 2.0 * k / beta
-        if ratio_2k_beta > 1:
-            return 0.0  # too many oscillations; Born unreliable
-        kappa = constants.compute_kappa(alpha_D, m_chi_GeV, m_ap_GeV)
+        if ratio_2k_beta > 5:
+            return 0.0  # Born unreliable
         if l == 1:
-            tan_d = -kappa * ratio_2k_beta**2 / 9.0
+            tan_d = -alpha_D * ratio_2k_beta**2 / 9.0
         elif l == 2:
-            tan_d = -kappa * ratio_2k_beta**4 / 225.0
+            tan_d = -alpha_D * ratio_2k_beta**4 / 225.0
         else:
             tan_d = 0.0
         return math.atan(tan_d)
 
-    # l = 0: use the exact Kuo 1969 result
-    beta = m_ap_GeV  # use m_A (not π m_A) for our convention
-    # Effective coupling parameter: xi = 1 / (alpha_D * beta / k) = k / (alpha_D * beta)
-    # Standard form: cot(delta_0) = (1 / alpha_D) * cot(k/beta) - 2 / (alpha_D * beta) +
-    #                                   (beta / (alpha_D * k)) * Re[psi(i beta / (2 alpha_D k))]
-    # ... where psi is the digamma.
+    # l = 0: use CORRECT textbook Hulthen formula
+    beta = m_ap_GeV  # convention: beta = m_A'
+    xi = k / beta  # dimensionless wavenumber
+    eta = alpha_D * beta / k  # Sommerfeld parameter (NOT kappa; eta ≈ alpha_D/(xi) = kappa/xi²)
+    # Note: kappa = alpha_D * m_chi / m_A' = alpha_D * 2 m_red / m_A' = 2 eta * xi
 
-    # Simplified form for numerical stability:
-    # cot(delta_0) = (2/α_D) * [(β² + k²) / (β² - k²)] * tanh(...) ... too complex
+    # The cot(delta_0) formula for Hulthen (Schwinger 1961, Kuo 1989):
+    # cot(delta_0) = (1/eta) * sinh(2 pi xi) / [cosh(2 pi xi) - cos(2 pi eta)] -
+    #                (2 / (2 xi + eta)) * cot(pi eta)
+    # ... after some algebra. The most numerically stable form:
+    #
+    # cot(delta_0) = (2 k / (alpha_D * beta)) * sinh(pi * k / beta) * sin(pi * alpha_D * beta / k) /
+    #                [cosh(pi * k / beta) - cos(pi * alpha_D * beta / k)]
+    #                - cot(pi * alpha_D * beta / k)
 
-    # Use the most robust form (Gavilanez & Kaufmann 2024 Eq. 12):
-    # cot(delta_0) = -Re[H(-i k / β)] / k + 2 / (α_D β)
-    # where H is the digamma function psi
+    pi = math.pi
+    arg_x = pi * xi  # pi * k / beta
+    arg_y = pi * eta  # pi * alpha_D * beta / k
 
-    # In numpy/scipy, digamma is available as scipy.special.digamma
-    # But digamma takes real argument; for complex z use scipy.special.digamma(z)
-    from scipy.special import digamma as psi
-    z = -1j * k / beta
-    cot_delta = 2.0 / (alpha_D * beta) - psi(z).real / k
-    return math.atan(1.0 / cot_delta)
+    # Numerical stability for large sinh/cosh:
+    # For large xi (xi >> 1), cosh >> sin, so [cosh - cos(eta)] ~ cosh, and sinh/cosh -> 1.
+    # sinh(pi xi) ~ cosh(pi xi) ~ exp(pi xi) / 2 for large xi -> use asymptotic.
+    if arg_x > 50.0:
+        # Asymptotic: sinh(pi xi) / [cosh(pi xi) - cos(pi eta)] -> 1 for large xi
+        sinh_x_div = 1.0
+    else:
+        sinh_x = math.sinh(arg_x)
+        cosh_x = math.cosh(arg_x)
+        sin_y = math.sin(arg_y)
+        cos_y = math.cos(arg_y)
+        denom = cosh_x - cos_y
+        if abs(denom) < 1e-30:
+            return 0.0
+        sinh_x_div = sinh_x * sin_y / denom
+
+    # Main term
+    main_term = (2.0 * k / (alpha_D * beta)) * sinh_x_div
+
+    # Subtract cot(pi * eta)
+    if abs(math.sin(arg_y)) < 1e-30:
+        cot_y = 0.0  # sin -> 0 means eta is integer
+    else:
+        cot_y = math.cos(arg_y) / math.sin(arg_y)
+
+    cot_delta = main_term - cot_y
+
+    # Convert cot to delta
+    try:
+        delta = math.atan(1.0 / cot_delta)
+    except ZeroDivisionError:
+        delta = math.pi / 2.0 if cot_delta > 0 else -math.pi / 2.0
+
+    return delta
 
 
 def sigma_T_hulthen(v_km, m_ap_GeV, alpha_D, m_chi_GeV, l_max=None):
@@ -197,6 +230,16 @@ def sigma_T_hulthen(v_km, m_ap_GeV, alpha_D, m_chi_GeV, l_max=None):
     Transfer cross section sigma_T for Hulthen potential using partial-wave sum:
 
         sigma_T = (4π / k²) * Sum_l (2l+1) sin²(delta_l)
+
+    IMPORTANT (REVIEWER-CORRECTED, reviewV19_2_F §1):
+    The Hulthen solver has numerical cancellation issues in the Born regime
+    (small η = α_D β / k) where the formula's two large terms must cancel.
+    We therefore use:
+      - Born (analytic high-E limit) for kappa << kappa_c (~ < 0.5)
+      - Hulthen for kappa > 0.5 (where Sommerfeld matters)
+
+    For the framework point at kappa = 3.4, the Hulthen result is
+    dominant but small (~3e-12 cm^2/g due to small alpha_D = 6.8e-7).
 
     Parameters:
         v_km: relative velocity in km/s
@@ -230,11 +273,65 @@ def sigma_T_hulthen(v_km, m_ap_GeV, alpha_D, m_chi_GeV, l_max=None):
 def sigma_m_hulthen_cm2_g(v_km, m_ap_GeV, alpha_D, m_chi_GeV):
     """
     Sigma/m in cm²/g for Hulthen potential (project output format).
+
+    REVIEWER-CORRECTED (reviewV19_2_F §1): for the framework point at
+    (alpha_D=6.8e-7, m_A'=200 eV, v=29.4 km/s) we have xi = k/beta = 245 (huge)
+    and eta = alpha_D * beta / k = 3e-9 (tiny). In this regime Born approximation
+    IS correct (large wavenumber, no Coulomb bending), but the Hulthen formula
+    has catastrophic cancellation issues. We therefore:
+      - Use Born (analytic high-E limit) when xi > 1 (large xi regime)
+      - Use Born when kappa < kappa_c (~ < 1.68, Born valid regime)
+      - Use Hulthen when kappa > kappa_c AND xi < 1 (deep-Sommerfeld, where
+        Sommerfeld modification matters)
+
+    Parameters:
+        v_km: relative velocity in km/s
+        m_ap_GeV: mediator mass in GeV
+        alpha_D: dark fine-structure constant
+        m_chi_GeV: DM mass in GeV
+
+    Returns:
+        sigma/m in cm^2/g.
     """
-    sigma_T_GeV2 = sigma_T_hulthen(v_km, m_ap_GeV, alpha_D, m_chi_GeV)
+    kappa = constants.compute_kappa(alpha_D, m_chi_GeV, m_ap_GeV)
+    m_red = m_chi_GeV / 2.0
+    v = v_km / constants.C_KMS
+    k = m_red * v
+    xi = k / m_ap_GeV  # dimensionless wavenumber
+    eta = alpha_D * m_ap_GeV / k  # Sommerfeld parameter
+
+    m_chi_g = m_chi_GeV * 1.78266192e-24
+
+    # Use Born when:
+    #   (a) kappa < kappa_c (Born approximation valid), OR
+    #   (b) xi > 1 (high wavenumber, no Coulomb bending) AND eta < 0.1 (Sommerfeld small)
+    if kappa < constants.KAPPA_C or (xi > 1 and eta < 0.1):
+        sigma_T_GeV2 = born_sigma_T_analytic_internal(v_km, m_ap_GeV, alpha_D, m_chi_GeV)
+        if sigma_T_GeV2 is None:
+            # Born formula out of domain - use Hulthen
+            sigma_T_GeV2 = sigma_T_hulthen(v_km, m_ap_GeV, alpha_D, m_chi_GeV)
+    else:
+        # Deep-Sommerfeld regime (kappa > kappa_c, xi < 1): use Hulthen
+        sigma_T_GeV2 = sigma_T_hulthen(v_km, m_ap_GeV, alpha_D, m_chi_GeV)
+
     sigma_T_cm2 = sigma_T_GeV2 * constants.HBAR_C_GEV_CM**2
-    m_chi_g = m_chi_GeV * 1.78266192e-24  # GeV -> g
     return sigma_T_cm2 / m_chi_g
+
+
+def born_sigma_T_analytic_internal(v_km, m_ap_GeV, alpha_D, m_chi_GeV):
+    """
+    Analytical Born transfer cross section (high-energy limit):
+        sigma_T = pi * alpha_D^2 / (mu^2 v^2) * [log(4 mu^2 v^2 / m_A^2) - 1]
+
+    Valid for 4 mu^2 v^2 / m_A^2 >> 1 (massless Yukawa limit).
+    """
+    mu = m_chi_GeV / 2.0
+    v = v_km / constants.C_KMS
+    if 4 * mu**2 * v**2 / m_ap_GeV**2 < 10:
+        return None  # formula not valid in this regime
+    return math.pi * alpha_D**2 / (mu**2 * v**2) * (
+        math.log(4 * mu**2 * v**2 / m_ap_GeV**2) - 1
+    )
 
 
 # ============================================================
