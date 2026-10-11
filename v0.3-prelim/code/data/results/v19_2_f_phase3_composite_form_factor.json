@@ -1,0 +1,10 @@
+{
+  "_meta": {
+    "description": "v19.2-F Phase 3 composite form factor scan (Priority 4)",
+    "form": "dipole F(q) = 1/(1 + q^2/Lambda_D^2)",
+    "target_velocity_kms": 29.4,
+    "target_sigma_cm2_per_g": 174.0,
+    "convention": "alpha_D = g^2/(4*pi) [LOCKED]"
+  },
+  "peaks_found": []
+}

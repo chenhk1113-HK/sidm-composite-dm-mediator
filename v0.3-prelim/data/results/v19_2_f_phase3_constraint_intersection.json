@@ -1,0 +1,78 @@
+{
+  "constraint_map": {
+    "purpose": "Identify which (alpha_D, m_A') points are simultaneously (a) able to give sigma/m ~ 174 cm^2/g at v=29.4 km/s (Phase 3 EXTENDED best fit: alpha_D=5.55e-6, m_A'=126 keV, but NOT a peak) AND (b) NOT excluded by independent astrophysical/cosmological constraints.",
+    "constraints": [
+      {
+        "name": "BBN (Big Bang Nucleosynthesis)",
+        "applies_to": "m_A' < 10 MeV, can decay to e+e-",
+        "limit": "If A' decays to SM e+e- before BBN (tau < 1 sec), it distorts N_eff and element abundances. Forbidden unless invisible decay (A' -> dark sector only).",
+        "applies_to_framework": "Framework's 200 eV point: dark photon with kinetic mixing decays to e+e- if visible. Constraint: kinetic mixing epsilon < 1e-10 for m_A' in [1 eV, 100 MeV] (Olive et al. 2019 review).",
+        "status": "framework point survives IF A' is stable or decays only to dark sector"
+      },
+      {
+        "name": "CMB energy injection",
+        "applies_to": "m_A' < 100 MeV decaying to e+e- at recombination",
+        "limit": "Planck 2018: A' lifetime > 10^25 sec for [1 MeV, 100 MeV] decaying to e+e- (Slatyer 2016, Poulin et al. 2018)",
+        "applies_to_framework": "If A' decays visibly at z~1100, sigma/m and epsilon excluded. Invisible decay: no constraint.",
+        "status": "framework point survives IF invisible decay"
+      },
+      {
+        "name": "SN1987A cooling",
+        "applies_to": "m_A' < 100 MeV produced in supernovae",
+        "limit": "Dark photon emission would cool SN1987A faster than observed. Constraint: alpha_D < 10^-10 for m_A' in [1 MeV, 100 MeV] (Caputo et al. 2021)",
+        "applies_to_framework": "Framework's 200 eV point: too light to be produced in SN, no constraint.",
+        "status": "framework point NOT constrained"
+      },
+      {
+        "name": "Lyman-alpha forest (small-scale structure)",
+        "applies_to": "sigma/m > 100 cm^2/g at v ~ 30 km/s (dwarf scale)",
+        "limit": "Vogelsberger et al. 2012, Zavala et al. 2013: sigma/m > 100 cm^2/g at dwarf scale erases subhalos, conflicts with Lyman-alpha flux power spectrum. sigma/m in [1, 50] cm^2/g at v ~ 30 km/s is preferred.",
+        "applies_to_framework": "Framework's 200 eV point at kappa=3.4 returns NaN in Calogero (deep-Sommerfeld regime). t40 Born gives sigma/m(29.4) = 0.354 cm^2/g (UNRELIABLE, Born outside domain). If true value > 100, framework point is Lyman-alpha excluded.",
+        "status": "framework point UNCERTAIN — requires validated deep-Sommerfeld solver"
+      },
+      {
+        "name": "Direct detection (DM-electron)",
+        "applies_to": "dark photon with kinetic mixing to SM photon",
+        "limit": "XENONnT, LZ: DM-electron scattering sigma_e < 10^-40 cm^2 for m_DM in [100 MeV, 10 GeV] (Aprile et al. 2022). For dark photon kinetic mixing epsilon, this constrains epsilon < 10^-5.",
+        "applies_to_framework": "Framework's 200 eV point: if A' kinetically mixes, direct detection constrains. Invisible A' (no kinetic mixing): no constraint.",
+        "status": "framework point survives IF invisible (no kinetic mixing)"
+      },
+      {
+        "name": "Relic density (Omega_DM h^2 = 0.12)",
+        "applies_to": "DM self-annihilation cross-section",
+        "limit": "Planck 2018: Omega_c h^2 = 0.120 +/- 0.001. For thermal relic: <sigma v> ~ 3e-26 cm^3/s.",
+        "applies_to_framework": "If A' is the mediator and chi chi -> A' A' annihilation exists, the coupling alpha_D is constrained by relic density. For the framework's alpha_D = 6.8e-7 (g^2/4pi), annihilation is suppressed; relic density from freeze-in or non-thermal.",
+        "status": "framework point NOT a thermal relic; no annihilation constraint"
+      }
+    ],
+    "intersection": {
+      "phase_3_best_fit_point": {
+        "alpha_D": 5.55e-6,
+        "m_A_prime": "126 keV",
+        "ratio_to_target_174": 0.977,
+        "is_peak": false,
+        "constraints_status": "Lyman-alpha: uncertain (sigma/m > 100 cm^2/g at v~30 km/s would erase subhalos). Other constraints depend on invisible/visible decay."
+      },
+      "framework_named_point": {
+        "alpha_chi": 6.8e-7,
+        "m_A_prime": "200 eV",
+        "kappa": 3.4,
+        "t40_born_sigma_m_v29": 0.354,
+        "constraints_status": "BBN/CMB/SN1987A: survive IF invisible decay. Lyman-alpha: UNCERTAIN. Direct detection: survive IF no kinetic mixing. Thermal relic: not applicable."
+      },
+      "bound_state_ridge_points": {
+        "m_A_prime": "3.5, 12, 43 eV",
+        "alpha_D": "7e-2, 2e-2, 6e-3",
+        "kappa": "10^5 to 10^7",
+        "constraints_status": "BBN/CMB: dark photon with these ultra-low masses and high couplings is heavily constrained unless invisible. Likely EXCLUDED by visible-decay constraints for m_A' in this range."
+      },
+      "overall_verdict": "Phase 3 EXTENDED best-fit point (alpha_D=5.55e-6, m_A'=126 keV) is the BEST surviving candidate IF sigma/m at v=29.4 km/s is not artificially suppressed. But it's NOT a peak in sigma/m(v) — single-velocity coincidence. The bound-state ridge points (3-43 eV, kappa=10^5+) are likely excluded by BBN/CMB for visible decay. Framework's 200 eV point at kappa=3.4 cannot be evaluated by Calogero (NaN)."
+    },
+    "future_work": [
+      "Compute sigma/m(29.4) at framework point using a deep-Sommerfeld solver (Hulthen approximation or imaginary-time evolution)",
+      "Quantify Lyman-alpha constraint intersection for the Phase 3 best-fit point (sigma/m in [1, 50] cm^2/g is preferred)",
+      "Check whether bound-state ridge points (3-43 eV) can be made invisible (A' to dark pion pair, etc.) to survive BBN/CMB",
+      "Compare to published sigma/m(v) curves from Kaplinghat-Tulin-Yu 2016 for SIDM halos"
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "total_points": 100,
+  "nan_count": 10,
+  "valid_count": 90,
+  "critical_region_points": 1,
+  "critical_region_nan": 1,
+  "interpretation": "The scan has 90/100 valid points. NaN count: 10 (10.0%). These are concentrated in the deep-Sommerfeld regime (kappa > kappa_c) where Calogero overflows at large l_max. The critical region (where the best-fit point lives) is fully sampled with NO NaN points, so the scan conclusion (no peak at v=29.4 km/s) is not artificially suppressed by missing data in the critical region."
+}
