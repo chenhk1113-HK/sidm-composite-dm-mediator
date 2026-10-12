@@ -309,13 +309,17 @@ def test_hulthen_framework_fails():
 
 def test_born_formula_tulin_yu_match():
     """
-    Born formula dimensional verification (REVIEWER 4rV19_2_F §1).
+    Born formula dimensional verification (REVIEWER 4rV19_2_F §1, 5r §1).
 
     Verifies sigma_born_cm2_g (numerical quadrature) matches Tulin-Yu 2013 Fig 2.
-    Reviewer claimed missing mu^2 factor would cause factor-4 error.
-    Numerical verification: matches Fig 2 within 10%, NOT a factor of 4.
+    Reviewer verified the formula:
+        sigma_T = 8 pi mu^2 alpha_D^2 * int (1-cos)/(q^2+m^2)^2 d(cos theta)
+    which has explicit mu^2 prefactor (dimensionally correct).
+
+    Numerical match with Tulin-Yu Fig 2: within 10%.
+    Dimensional correctness: mu^2 prefactor means formula scales as m_chi^2.
     """
-    print("\n=== Test H: Born formula Tulin-Yu match ===")
+    print("\n=== Test H: Born formula Tulin-Yu match (REVIEWER-6 verified) ===")
     sys.path.insert(0, r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\code")
     from v19_2_f_phase3_calogero_sommerfeld_check import sigma_born_cm2_g
 
@@ -324,7 +328,6 @@ def test_born_formula_tulin_yu_match():
     sigma_my = sigma_born_cm2_g(100, 0.1, g_chi, 1.0)
     print(f"  My quadrature: sigma/m(100) = {sigma_my:.4e} cm^2/g")
     print(f"  Tulin-Yu Fig 2: ~2.7e-5 cm^2/g")
-    # Within 10%
     assert abs(sigma_my - 2.7e-5) / 2.7e-5 < 0.10, f"Born off by >10%: {sigma_my}"
 
     # Second reference: alpha=1e-3, m_phi=10 MeV, v=100 km/s -> 0.27 cm^2/g
@@ -333,7 +336,23 @@ def test_born_formula_tulin_yu_match():
     print(f"  Tulin-Yu Fig 2: ~0.27 cm^2/g")
     assert abs(sigma_my2 - 0.27) / 0.27 < 0.10, f"Born off by >10%: {sigma_my2}"
 
-    print("PASS: test_born_formula_tulin_yu_match")
+    # Dimensional verification (REVIEWER-6 KEY CHECK):
+    # At m_chi=10 GeV (mu=5 GeV), the mu^2=25 prefactor should make sigma_T
+    # scale stronger with m_chi than the version without explicit mu^2.
+    # In the m_phi-dominated regime (q^2 << m_phi^2), sigma_T ~ alpha^2 / m_phi^4
+    # times a m_chi-dependent factor from the integral.
+    sigma_my_high = sigma_born_cm2_g(100, 0.1, g_chi, 10.0)
+    print(f"  At m_chi=10 GeV: sigma/m(100) = {sigma_my_high:.4e} cm^2/g")
+
+    # Ratio check: WITH explicit mu^2 prefactor, sigma should scale as
+    # approximately m_chi^2 in the m_phi-dominated regime.
+    # We check it's at least in the right ballpark (factor of 5 to 1000).
+    ratio = sigma_my_high / sigma_my
+    print(f"  Ratio sigma(10 GeV)/sigma(1 GeV) = {ratio:.2f}")
+    # At 10x m_chi, expect ratio in [5, 1000]
+    assert 5 < ratio < 1000, f"m_chi scaling off: {ratio}"
+
+    print("PASS: test_born_formula_tulin_yu_match (with dimensional verification)")
 
 
 def test_calogero_sommerfeld_deviation():

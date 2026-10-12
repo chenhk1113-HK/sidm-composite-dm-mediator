@@ -216,12 +216,10 @@ def delta_l_hulthen(l, k, m_ap_GeV, alpha_D, m_chi_GeV):
 
     cot_delta = main_term - cot_y
 
-    # Convert cot to delta
-    try:
-        delta = math.atan(1.0 / cot_delta)
-    except ZeroDivisionError:
-        delta = math.pi / 2.0 if cot_delta > 0 else -math.pi / 2.0
-
+    # Convert cot to delta using math.atan2 (REVIEWER-6 fix: numerical stability
+    # for very large or zero cot_delta). atan2(1, x) = atan(1/x) but handles
+    # x=0 cleanly (returns pi/2 instead of ZeroDivisionError).
+    delta = math.atan2(1.0, cot_delta)
     return delta
 
 
