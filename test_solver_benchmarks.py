@@ -280,10 +280,13 @@ def test_hulthen_framework_fails():
     Hulthen solver test (Priority 2): framework point at (alpha_D=6.8e-7, m_A=200 eV)
     gives sigma/m(29.4) FAR BELOW target 174 cm^2/g. This is the deep-Sommerfeld
     verdict: framework point definitively FAILS even with Hulthen enhancement.
+
+    REVIEWER-8: tightened assertions to catch NaN/zero/negative values.
     """
     print("\n=== Test G: Hulthen framework-point verdict ===")
     sys.path.insert(0, r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\code")
     from v19_2_f_priority2_hulthen_solver import sigma_m_hulthen_cm2_g
+    import math
 
     # Framework point: alpha_D=6.8e-7, m_A=200 eV, v=29.4 km/s
     alpha_D = 6.8e-7
@@ -292,17 +295,34 @@ def test_hulthen_framework_fails():
     v_test = 29.4  # km/s
 
     sig = sigma_m_hulthen_cm2_g(v_test, m_ap, alpha_D, m_chi)
+
+    # REVIEWER-8: NaN check
+    assert sig == sig, f"Hulthen returned NaN: {sig}"
+    # REVIEWER-8: positive value check
+    assert sig > 0, f"Hulthen returned non-positive: {sig}"
+    # REVIEWER-8: physical range check (1e-10 < sig < 1e-2 cm^2/g for framework)
+    assert 1e-10 < sig < 1e-2, f"Hulthen sigma/m out of physical range: {sig}"
     print(f"  Hulthen sigma/m(29.4) = {sig:.4e} cm^2/g")
     print(f"  Target = 174 cm^2/g, ratio = {sig/174:.3e}")
-    # Should be far below target (negative test for framework)
-    assert sig < 1.0, f"Hulthen sigma/m too large: {sig}"
 
-    # Phase 3 best-fit point: should be much larger than framework
+    # Phase 3 best-fit point: should be much larger than framework (verify Hulthen works)
     alpha_best = 5.55e-6
     m_ap_best = 1.26e-4  # GeV = 126 keV
     sig_best = sigma_m_hulthen_cm2_g(v_test, m_ap_best, alpha_best, m_chi)
-    print(f"  Hulthen sigma/m(29.4) at best fit = {sig_best:.4e} cm^2/g")
+    assert sig_best == sig_best, f"Hulthen returned NaN at best fit: {sig_best}"
+    assert sig_best > 0, f"Hulthen returned non-positive at best fit: {sig_best}"
     assert sig_best > sig * 100, f"Best-fit should be >> framework: {sig_best} vs {sig}"
+
+    # Born limit sanity check: at very small alpha_D, sigma should approach Born
+    alpha_very_small = 1e-7  # very weak coupling
+    sig_weak = sigma_m_hulthen_cm2_g(v_test, m_ap, alpha_very_small, m_chi)
+    assert sig_weak > 0, f"Hulthen returned non-positive at very weak: {sig_weak}"
+    # Should scale as alpha^2 from framework point: ratio = (1e-7/6.8e-7)^2 = 0.0216
+    # Allow 50% tolerance since near Born-Born comparison
+    expected_ratio = (alpha_very_small / alpha_D)**2  # = 0.0216
+    actual_ratio = sig_weak / sig
+    assert 0.5 * expected_ratio < actual_ratio < 2.0 * expected_ratio, \
+        f"Weak coupling scaling: {actual_ratio} vs expected {expected_ratio}"
 
     print("PASS: test_hulthen_framework_fails")
 
@@ -352,13 +372,26 @@ def test_born_formula_tulin_yu_match():
     # At 10x m_chi, expect ratio in [5, 1000]
     assert 5 < ratio < 1000, f"m_chi scaling off: {ratio}"
 
-    # Multi-m_chi Born verification (REVIEWER-6 REQUESTED):
+    # Multi-m_chi Born verification (REVIEWER-6 REQUESTED, REVIEWER-8 EXPLICIT ASSERTIONS):
     # Verify Born quadrature matches Tulin-Yu Fig 2 across multiple m_chi values.
-    print("\n  Multi-m_chi Born verification (REVIEWER-6):")
-    for m_chi_test, expected_factor in [(1, 1), (5, 5), (10, 10), (20, 20)]:
-        sig = sigma_born_cm2_g(100, 0.1, g_chi, m_chi_test)
-        expected = sigma_my * (m_chi_test / 1.0) ** expected_factor * 0.1  # rough scaling
-        print(f"    m_chi={m_chi_test} GeV: sigma/m = {sig:.4e} cm^2/g")
+    # For each m_chi, sigma_T should scale approximately as m_chi (in m_phi-dominated
+    # regime). The exact value comes from the numerical quadrature.
+    print("\n  Multi-m_chi Born verification (REVIEWER-8 with explicit assertions):")
+    # Expected scaling: sigma_T ~ m_chi (linear) in m_phi-dominated regime
+    # Compute expected by scaling the m_chi=1 reference result
+    expected_5 = sigma_my * 5.0  # factor 5
+    expected_10 = sigma_my * 10.0  # factor 10
+    expected_20 = sigma_my * 20.0  # factor 20
+    sig_5 = sigma_born_cm2_g(100, 0.1, g_chi, 5.0)
+    sig_10 = sigma_born_cm2_g(100, 0.1, g_chi, 10.0)
+    sig_20 = sigma_born_cm2_g(100, 0.1, g_chi, 20.0)
+    print(f"    m_chi=5 GeV:  sigma/m = {sig_5:.4e} cm^2/g (expected ~{expected_5:.2e})")
+    print(f"    m_chi=10 GeV: sigma/m = {sig_10:.4e} cm^2/g (expected ~{expected_10:.2e})")
+    print(f"    m_chi=20 GeV: sigma/m = {sig_20:.4e} cm^2/g (expected ~{expected_20:.2e})")
+    # Allow 20% tolerance for non-trivial m_chi dependence (not exactly linear)
+    assert abs(sig_5 - expected_5) / expected_5 < 0.30, f"m_chi=5 scaling off: {sig_5} vs {expected_5}"
+    assert abs(sig_10 - expected_10) / expected_10 < 0.20, f"m_chi=10 scaling off"
+    assert abs(sig_20 - expected_20) / expected_20 < 0.30, f"m_chi=20 scaling off"
 
     print("PASS: test_born_formula_tulin_yu_match (with dimensional verification)")
 

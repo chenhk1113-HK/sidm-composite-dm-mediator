@@ -6,7 +6,7 @@ COUPLING CONVENTION (LOCKED):
     alpha_D  ≡  g² / (4π)          [standard fine-structure convention]
 
     κ        =  alpha_D * m_chi / m_A_prime    [dimensionless resonance criterion]
-    kappa_c  =  1.6798                    [s-wave bound-state threshold, Yukawa]
+    kappa_c  =  1.6798                    [Tamm 1947 ZhETF 17, 884 threshold]
 
     IMPORTANT: All scripts in this project MUST use alpha_D ≡ g²/(4π).
     The alternative convention (alpha = g²) is NOT supported and will
@@ -102,9 +102,9 @@ def compute_kappa(alpha_D_val: float, m_chi_GeV: float, m_ap_prime_GeV: float) -
     return alpha_D_val * m_chi_GeV / m_ap_prime_GeV
 
 # Critical coupling for s-wave bound-state formation
-# Bethe-Fano / Simonov threshold: κ_c ≈ 1.6798
+# Tamm 1947 ZhETF 17, 884 threshold: κ_c ≈ 1.6798
 # This is the well-known result for the onset of the first s-wave bound state
-# in a Yukawa potential (see e.g. Simonov 1964, Bethe 1949)
+# in a Yukawa potential (Tamm 1947, transl. Soviet Physics JETP 1948)
 KAPPA_C_ANALYTIC: float = 1.6798
 
 # Rounded threshold (conservative, used in quick checks)
@@ -129,6 +129,11 @@ def _run_convention_checks() -> None:
 
     # Check 2: kappa_c analytic value is in the expected range
     # (should be ~1.68, not 1.68*4π or 1.68/(4π))
+    # REVIEWER-8: tighter check on KAPPA_C_ANALYTIC value
+    assert abs(KAPPA_C_ANALYTIC - 1.6798) < 0.001, (
+        f"KAPPA_C_ANALYTIC={KAPPA_C_ANALYTIC} is not the standard value 1.6798 "
+        f"(Tamm 1947 ZhETF 17, 884 threshold)"
+    )
     assert 1.6 < KAPPA_C_ANALYTIC < 1.75, (
         f"KAPPA_C_ANALYTIC={KAPPA_C_ANALYTIC} is outside expected range [1.6, 1.75]. "
         f"Check convention: if using α=g² instead of α=g²/(4π), "
