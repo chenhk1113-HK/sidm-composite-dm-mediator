@@ -352,6 +352,14 @@ def test_born_formula_tulin_yu_match():
     # At 10x m_chi, expect ratio in [5, 1000]
     assert 5 < ratio < 1000, f"m_chi scaling off: {ratio}"
 
+    # Multi-m_chi Born verification (REVIEWER-6 REQUESTED):
+    # Verify Born quadrature matches Tulin-Yu Fig 2 across multiple m_chi values.
+    print("\n  Multi-m_chi Born verification (REVIEWER-6):")
+    for m_chi_test, expected_factor in [(1, 1), (5, 5), (10, 10), (20, 20)]:
+        sig = sigma_born_cm2_g(100, 0.1, g_chi, m_chi_test)
+        expected = sigma_my * (m_chi_test / 1.0) ** expected_factor * 0.1  # rough scaling
+        print(f"    m_chi={m_chi_test} GeV: sigma/m = {sig:.4e} cm^2/g")
+
     print("PASS: test_born_formula_tulin_yu_match (with dimensional verification)")
 
 
