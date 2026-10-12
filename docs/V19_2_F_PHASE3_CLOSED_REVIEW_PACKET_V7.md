@@ -348,7 +348,7 @@ Reference: Schwinger 1961 Lectures on Particles and Field Theory, Ch. 5.
 
 ## 9. Cloud-9 Observational Reference
 
-**Yang+ 2024 MNRAS 533, 4007 (REVIEWER-7 VERIFIED, DOI: 10.1093/mnares/stae2038):**
+**Yang+ 2024 MNRAS 533, 4007 (REVIEWER-7 VERIFIED, DOI: 10.1093/mnras/stae2038):**
 
 The Cloud-9 target σ/m = 174 cm²/g at v = 29.4 km/s is fitted to:
 - Cluster scale (v ~ 1000 km/s): σ/m ~ 0.1-0.5 cm²/g (Markevitch+ 2004, Randall+ 2008)
