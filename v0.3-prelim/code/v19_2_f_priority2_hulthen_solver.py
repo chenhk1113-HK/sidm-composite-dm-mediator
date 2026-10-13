@@ -273,6 +273,19 @@ def sigma_T_hulthen(v_km, m_ap_GeV, alpha_D, m_chi_GeV, l_max=None):
     return 4.0 * math.pi / k**2 * sigma_T
 
 
+def scattering_length_yukawa(kappa, m_phi_GeV):
+    """S-wave scattering length for Yukawa potential (REVIEWER-15).
+
+    Near threshold (kappa -> kappa_c = 1.6798):
+        a_0(kappa) = 1 / ((kappa - kappa_c) * m_phi)
+
+    Valid for |kappa - kappa_c| << 1 (threshold regime).
+    Negative sign indicates virtual state (below threshold).
+    Positive sign indicates bound state (above threshold).
+    """
+    return 1.0 / ((kappa - 1.6798) * m_phi_GeV)
+
+
 def sigma_m_hulthen_cm2_g(v_km, m_ap_GeV, alpha_D, m_chi_GeV):
     """
     Sigma/m in cm²/g for Hulthen potential (project output format).

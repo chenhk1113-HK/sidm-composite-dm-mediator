@@ -327,6 +327,53 @@ def test_hulthen_framework_fails():
     print("PASS: test_hulthen_framework_fails")
 
 
+def test_hulthen_asymptotic():
+    """Hulthen asymptotic behavior at large xi (REVIEWER-14/15).
+
+    At large xi (xi > 50/pi), the code uses sinh_x_div = sin(pi*eta) asymptotic.
+    This test verifies the asymptotic doesn't break the result at large xi.
+
+    At small eta, the cot(pi*eta) term dominates cot_delta, so the
+    wrong sinh_x_div=1.0 didn't matter at framework point, but
+    the corrected form (sin(pi*eta)) is more robust for all test points.
+    """
+    print("\n=== Test H: Hulthen asymptotic at large xi ===")
+    sys.path.insert(0, r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\code")
+    from v19_2_f_priority2_hulthen_solver import delta_l_hulthen, scattering_length_yukawa
+    import math
+
+    # Test 1: Large xi, small eta (deep-Sommerfeld or bound state regime)
+    # At large xi, asymptotic sinh_x_div = sin(pi*eta) is triggered.
+    # Phase shift is large (approaches pi for bound state).
+    k = 1e-3  # GeV
+    m_ap = 200e-9  # GeV (200 eV)
+    xi = k / m_ap  # = 5000 (very large)
+    eta = 1e-7 * m_ap / k  # = 2e-11 (very small)
+    assert xi > 50 / math.pi, f"Test should trigger asymptotic: xi = {xi}"
+    delta = delta_l_hulthen(0, k, m_ap, 1e-7, 1.0)
+    # Should be near pi (Levinson's theorem for bound state, large xi)
+    # Note: kappa = alpha_D * m_chi / m_ap = 1e-7 * 1.0 / 200e-9 = 0.5, so this is BELOW threshold
+    # At kappa=0.5, no bound state, but cot_delta may still give large delta for numerical reasons
+    # The asymptotic should give a FINITE (not NaN/inf) result
+    assert math.isfinite(delta), f"delta_l is not finite: {delta}"
+    print(f"  Large xi ({xi:.0f}), small eta ({eta:.2e}): delta_l = {delta:.4f} (finite, OK)")
+
+    # Test 2: a_0(kappa) scattering length (REVIEWER-15)
+    m_phi_GeV = 50e-6  # 50 keV
+    for kappa, expected_sign in [(0.5, -1), (1.0, -1), (1.5, -1), (2.0, +1)]:
+        a_0 = scattering_length_yukawa(kappa, m_phi_GeV)
+        # Sign should match expected (negative below threshold, positive above)
+        if kappa < 1.6798:
+            assert a_0 < 0, f"a_0(kappa={kappa}) should be negative (virtual state)"
+        else:
+            assert a_0 > 0, f"a_0(kappa={kappa}) should be positive (bound state)"
+        # Magnitude
+        a_0_fm = a_0 * 1e-13 / 1.97327e-14  # GeV^-1 to fm
+        print(f"  kappa={kappa}: a_0 = {a_0_fm:+.2f} fm (virtual={'below' if a_0<0 else 'bound'})")
+
+    print("PASS: test_hulthen_asymptotic")
+
+
 def test_born_formula_tulin_yu_match():
     """
     Born formula dimensional verification (REVIEWER 4rV19_2_F §1, 5r §1).
@@ -486,6 +533,7 @@ if __name__ == "__main__":
         test_hbarc_unit_consistency,
         test_lattice_convergence,
         test_hulthen_framework_fails,
+        test_hulthen_asymptotic,  # REVIEWER-14/15
         test_born_formula_tulin_yu_match,
         test_calogero_sommerfeld_deviation,
     ]
