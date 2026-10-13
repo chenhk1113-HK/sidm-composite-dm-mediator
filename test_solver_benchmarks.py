@@ -6,13 +6,16 @@ Split into:
   - test_calogero.py
   - test_hulthen.py
   - test_misc.py
-This file just imports and runs all of them.
+
+REVIEWER-16 item 13: distinguish AssertionError (test failure) from other
+exceptions (code bug) to avoid silently swallowing real errors.
 
 Run:  python test_solver_benchmarks.py
 """
 from __future__ import annotations
 import sys
 import os
+import traceback
 
 _TEST_DIR = os.path.dirname(os.path.abspath(__file__))
 if _TEST_DIR not in sys.path:
@@ -36,17 +39,28 @@ if __name__ == "__main__":
         test_calogero_sommerfeld_deviation,
     ]
 
-    failed = []
+    # REVIEWER-16 item 13: separate test failures from code bugs
+    test_failures = []  # AssertionError: test logic failed
+    code_bugs = []     # Other exceptions: code crashed unexpectedly
+
     for test in tests:
         try:
             test()
+        except AssertionError as e:
+            test_failures.append((test.__name__, str(e)))
         except Exception as e:
-            print(f"FAIL: {test.__name__}: {e}")
-            failed.append(test.__name__)
+            code_bugs.append((test.__name__, type(e).__name__, str(e)))
 
     print()
-    if failed:
-        print(f"FAILED: {len(failed)} test(s) failed: {failed}")
+    if test_failures:
+        print(f"TEST FAILURES (assertions): {len(test_failures)}")
+        for name, msg in test_failures:
+            print(f"  ASSERT FAIL: {name}: {msg}")
+    if code_bugs:
+        print(f"CODE BUGS (unexpected exceptions): {len(code_bugs)}")
+        for name, etype, msg in code_bugs:
+            print(f"  EXCEPTION: {name}: {etype}: {msg}")
+    if test_failures or code_bugs:
         sys.exit(1)
     else:
         print("ALL BENCHMARKS PASSED (orchestrator)")

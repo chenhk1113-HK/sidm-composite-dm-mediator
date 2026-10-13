@@ -286,6 +286,25 @@ def scattering_length_yukawa(kappa, m_phi_GeV):
     return 1.0 / ((kappa - 1.6798) * m_phi_GeV)
 
 
+def scattering_length_yukawa_numerical(alpha_D, m_phi_GeV, m_chi_GeV):
+    """Extract a_0 from numerical Hulthen phase shift (REVIEWER-16).
+
+    a_0 = -lim(k->0) tan(delta_0(k)) / k
+
+    Uses small v to approximate the k->0 limit.
+    """
+    from constants import C_KMS
+    v_test = 1e-3  # km/s (very small, near k=0 limit)
+    v_c = v_test / C_KMS
+    mu_GeV = m_chi_GeV / 2.0
+    k = mu_GeV * v_c
+    delta_0 = delta_l_hulthen(0, k, m_phi_GeV, alpha_D, m_chi_GeV)
+    if abs(math.cos(delta_0)) < 1e-10:
+        return float("inf") if math.sin(delta_0) > 0 else float("-inf")
+    a_0 = -math.tan(delta_0) / k
+    return a_0
+
+
 def sigma_m_hulthen_cm2_g(v_km, m_ap_GeV, alpha_D, m_chi_GeV):
     """
     Sigma/m in cm²/g for Hulthen potential (project output format).
