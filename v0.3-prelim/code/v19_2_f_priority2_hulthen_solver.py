@@ -190,11 +190,16 @@ def delta_l_hulthen(l, k, m_ap_GeV, alpha_D, m_chi_GeV):
     arg_y = pi * eta  # pi * alpha_D * beta / k
 
     # Numerical stability for large sinh/cosh:
-    # For large xi (xi >> 1), cosh >> sin, so [cosh - cos(eta)] ~ cosh, and sinh/cosh -> 1.
-    # sinh(pi xi) ~ cosh(pi xi) ~ exp(pi xi) / 2 for large xi -> use asymptotic.
+    # For large xi (xi >> 1), cosh >> sin, so [cosh - cos(eta)] ~ cosh,
+    # and sinh(pi*xi)*sin(pi*eta)/[cosh(pi*xi) - cos(pi*eta)] -> sin(pi*eta).
+    # REVIEWER-14 FIX: sinh_x_div -> sin(pi*eta) in large-xi limit, not 1.0
     if arg_x > 50.0:
-        # Asymptotic: sinh(pi xi) / [cosh(pi xi) - cos(pi eta)] -> 1 for large xi
-        sinh_x_div = 1.0
+        # REVIEWER-14: Correct asymptotic is sin(pi*eta), not 1.0
+        # (For framework point eta=2.78e-9 -> sin(pi*eta) ~ 8.7e-9)
+        # Note: at small eta, the cot(pi*eta) term dominates cot_delta, so the
+        # wrong sinh_x_div=1.0 didn't matter at the framework point.
+        # The corrected form is more robust for all test points.
+        sinh_x_div = math.sin(arg_y)
     else:
         sinh_x = math.sinh(arg_x)
         cosh_x = math.cosh(arg_x)
