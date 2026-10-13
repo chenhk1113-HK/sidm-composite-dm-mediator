@@ -99,7 +99,10 @@ def lyman_alpha_alpha_D_curve(m_ap_GeV_arr, v_kms=30.0, sigma_m_target=100.0,
     #   alpha_D^2 = sigma_m_target * m_chi_g / [(hbarc)^2 * 2 pi m_chi^2 / m_A^4 * L(s)^2]
     #             = sigma_m_target * m_chi_g * m_A^4 / [(hbarc)^2 * 2 pi m_chi^2 * L(s)^2]
     v_c = v_kms / constants.C_KMS
-    s_arr = (m_chi_GeV * v_c / (np.sqrt(2.0) * m_ap_GeV_arr)) ** 2
+    # TYL 2013 standard: s = (mu v)^2 / m_phi^2 = m_chi^2 v^2 / (4 m_phi^2)
+    # (REVIEWER-16 FIX: removed sqrt(2) factor for consistency with test_born.py)
+    mu_GeV = m_chi_GeV / 2.0
+    s_arr = (mu_GeV * v_c / m_ap_GeV_arr) ** 2
     L_arr = np.where(s_arr > 0,
                      np.log(1.0 + 1.0 / s_arr) - 1.0 / (1.0 + s_arr),
                      0.0)

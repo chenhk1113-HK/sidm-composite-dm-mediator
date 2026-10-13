@@ -51,7 +51,10 @@ def sigma_T_born_GeV2(alpha_D, m_chi_GeV, m_ap_GeV, v_kms):
     if alpha_D <= 0 or m_chi_GeV <= 0 or m_ap_GeV <= 0:
         return 0.0
     v_c = v_kms / constants.C_KMS
-    s = (m_chi_GeV * v_c / (math.sqrt(2.0) * m_ap_GeV)) ** 2
+    # TYL 2013 standard: s = (mu v)^2 / m_phi^2 = m_chi^2 v^2 / (4 m_phi^2)
+    # (REVIEWER-16 FIX: removed sqrt(2) factor that was inconsistent with test_born.py)
+    mu_GeV = m_chi_GeV / 2.0
+    s = (mu_GeV * v_c / m_ap_GeV) ** 2
     L = L_function(s)
     g4 = (4.0 * math.pi * alpha_D) ** 2
     prefactor = g4 * m_chi_GeV ** 2 / (8.0 * math.pi * m_ap_GeV ** 4)
