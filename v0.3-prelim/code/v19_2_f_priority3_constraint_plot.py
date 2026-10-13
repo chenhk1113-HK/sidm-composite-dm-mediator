@@ -52,63 +52,18 @@ _PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent  # code/ -> v0.3-p
 sys.path.insert(0, str(_PROJECT_ROOT))
 import constants
 
+# Born helpers (REVIEWER-15 item 11: extracted)
+from v19_2_f_priority3_born_helpers import (
+    L_function, sigma_T_born_GeV2, sigma_m_born_cm2_g,
+)
+
 
 # ============================================================
 # Born transfer cross section (analytical, s-wave)
 # ============================================================
-
-def L_function(s):
-    """
-    Auxiliary function L(s) in the Born transfer cross section.
-
-        L(s) = ln(1 + 1/s) - 1/(1 + s)
-
-    This is the standard form from Tulin-Yu-Zurek (2013) Eq. (3).
-    """
-    if s <= 0:
-        return 0.0
-    return math.log(1.0 + 1.0 / s) - 1.0 / (1.0 + s)
-
-
-def sigma_T_born_GeV2(alpha_D, m_chi_GeV, m_ap_GeV, v_kms):
-    """
-    Born-approximation s-wave transfer cross section (Tulin-Yu-Zurek 2013, Eq. 3).
-
-        sigma_T = (g^4 m_chi^2) / (8 pi m_A^4) * L(s)^2
-        s = (m_chi v / (sqrt(2) m_A))^2
-
-    With alpha_D = g^2 / (4 pi):
-        g^4 = (4 pi)^2 alpha_D^2 = 16 pi^2 alpha_D^2
-
-    Returns sigma_T in GeV^-2.
-
-    NOTE: Born is valid for alpha_D << 1 (weak coupling), independent of kappa.
-    For kappa > kappa_c, the actual sigma/m can be enhanced by the Sommerfeld
-    factor S(v) > 1. The Lyman-alpha exclusion computed here therefore
-    *underestimates* the true exclusion in the deep-Sommerfeld regime -- this
-    is a CONSERVATIVE (more permissive) limit. The Lyman-alpha exclusion curve
-    should be drawn as the LOWER bound; above it we cannot rule out exclusion.
-    """
-    if alpha_D <= 0 or m_chi_GeV <= 0 or m_ap_GeV <= 0:
-        return 0.0
-    v_c = v_kms / constants.C_KMS  # natural units (c = 1)
-    s = (m_chi_GeV * v_c / (math.sqrt(2.0) * m_ap_GeV)) ** 2
-    L = L_function(s)
-    g4 = (4.0 * math.pi * alpha_D) ** 2  # = 16 pi^2 alpha_D^2
-    prefactor = g4 * m_chi_GeV ** 2 / (8.0 * math.pi * m_ap_GeV ** 4)
-    return prefactor * L ** 2
-
-
-def sigma_m_born_cm2_g(alpha_D, m_chi_GeV, m_ap_GeV, v_kms):
-    """
-    sigma/m in cm^2/g (project output format), Born approximation.
-    """
-    sigma_T_GeV2 = sigma_T_born_GeV2(alpha_D, m_chi_GeV, m_ap_GeV, v_kms)
-    sigma_T_cm2 = sigma_T_GeV2 * constants.HBAR_C_GEV_CM ** 2
-    m_chi_g = m_chi_GeV * 1.78266192e-24  # GeV -> g
-    if m_chi_g <= 0:
-        return 0.0
-    return sigma_T_cm2 / m_chi_g
+# Extracted to v19_2_f_priority3_born_helpers.py (REVIEWER-15 item 11).
+# The functions L_function, sigma_T_born_GeV2, sigma_m_born_cm2_g
+# are imported from there. See that module for derivation and references.
 
 
 # ============================================================
