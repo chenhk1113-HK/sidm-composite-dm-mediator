@@ -124,7 +124,7 @@ def delta_l_hulthen(l, k, m_ap_GeV, alpha_D, m_chi_GeV):
     """
     S-wave (l=0) Hulthen scattering phase shift.
 
-    CORRECT FORMULA (Schwinger 1961, Kuo 1989 corrected, Gavilanez & Kaufmann 2024 Eq. 8):
+    CORRECT FORMULA (Schwinger 1961, Kuo 1969, Gavilanez & Kaufmann 2024 Eq. 8):
 
         For V_H(r) = -(alpha_D * beta) / [exp(beta*r) - 1],
 
@@ -176,7 +176,7 @@ def delta_l_hulthen(l, k, m_ap_GeV, alpha_D, m_chi_GeV):
     eta = alpha_D * beta / k  # Sommerfeld parameter (NOT kappa; eta ≈ alpha_D/(xi) = kappa/xi²)
     # Note: kappa = alpha_D * m_chi / m_A' = alpha_D * 2 m_red / m_A' = 2 eta * xi
 
-    # The cot(delta_0) formula for Hulthen (Schwinger 1961, Kuo 1989):
+    # The cot(delta_0) formula for Hulthen (Schwinger 1961, Kuo 1969):
     # cot(delta_0) = (1/eta) * sinh(2 pi xi) / [cosh(2 pi xi) - cos(2 pi eta)] -
     #                (2 / (2 xi + eta)) * cot(pi eta)
     # ... after some algebra. The most numerically stable form:

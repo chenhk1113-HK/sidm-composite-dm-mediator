@@ -149,7 +149,7 @@ def test_born_formula_tulin_yu_match():
 
 ```python
 def delta_l_hulthen(l, k, m_ap_GeV, alpha_D, m_chi_GeV):
-    """Hulthen s-wave phase shift (Schwinger 1961 / Kuo 1989)."""
+    """Hulthen s-wave phase shift (Schwinger 1961 / Kuo 1969)."""
     xi = k / m_ap_GeV
     eta = alpha_D * m_ap_GeV / k
     arg_x = math.pi * xi

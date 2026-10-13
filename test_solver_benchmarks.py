@@ -417,8 +417,8 @@ def test_born_formula_tulin_yu_match():
         ratio_to_tulin_yu = sig / tulin_yu_value
         print(f"    m_chi={m_chi_test} GeV: sigma/m = {sig:.4e} cm^2/g, "
               f"Tulin-Yu Fig 2: {tulin_yu_value:.2e}, ratio: {ratio_to_tulin_yu:.3f}")
-        # Within 30% of Tulin-Yu Fig 2 published value (REVIEWER-9 INDEPENDENT)
-        assert abs(sig - tulin_yu_value) / tulin_yu_value < 0.30, \
+        # REVIEWER-12: tighter 10% tolerance (was 30%)
+        assert abs(sig - tulin_yu_value) / tulin_yu_value < 0.10, \
             f"m_chi={m_chi_test} off Tulin-Yu Fig 2: {sig} vs {tulin_yu_value}"
 
     print("PASS: test_born_formula_tulin_yu_match (REVIEWER-10 Tulin-Yu Eq. 2.14 direct)")
