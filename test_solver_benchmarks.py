@@ -396,8 +396,9 @@ def test_born_formula_tulin_yu_match():
     print(f"    My quadrature (sigma_T):     {sigma_my_per_g:.4e} cm^2/g")
     print(f"    Tulin-Yu Eq. 2.14:            {sigma_TY_per_g:.4e} cm^2/g")
     print(f"    Ratio (my/TY):                {ratio:.3f}")
-    # Factor of 2-4 expected (REVIEWER-9 explained factor 2, REVIEWER-10 showed factor 4)
-    assert 1.5 < ratio < 5.0, f"Factor 2-4 expected between my quadrature and TY Eq 2.14: {ratio}"
+    # Factor of 2 expected within 5% (REVIEWER-11 TIGHTENED)
+    # Verifies "ratio = 2.000 exactly" claim
+    assert abs(ratio - 2.0) / 2.0 < 0.05, f"Factor 2 expected, got ratio = {ratio:.3f}"
     # Both are positive
     assert sigma_TY_per_g > 0
     assert sigma_my_per_g > 0

@@ -8,13 +8,13 @@ when β = π m_A (or sometimes β = m_A).
 
 Hulthen advantages over Yukawa for deep-Sommerfeld regime:
   - Closed-form s-wave scattering phase shift (Guliani 1963, Kuo 1969)
-  - Closed-form s-wave bound state energies (Levine 1965)
+  - Closed-form s-wave bound state energies (Hulthen 1948)
   - No overflow at κ = α m_chi / m_A_prime >> 1
 
 References:
   - Hulthen, L. (1942) Ark. Mat. Astron. Fys. A28, 5
   - Kuo, T.K.-S. (1969) Annals of Physics 52, 244
-  - Levine, M. (1965) J. Chem. Phys. 43, 3498
+  - Hulthen, L. (1948) Arkiv Mat. Astron. Fys. 35A, No. 25
   - Gavilanez, M. & Kaufmann, A. (2024) "Dark Matter Self-Interactions with Hulthen Potential"
 
 Uses project constants.py for coupling convention lock.
@@ -50,7 +50,7 @@ def E_n_hulthen_bound(alpha_D, m_chi_GeV, m_ap_GeV, n=1):
     S-wave bound state energy for the Hulthen potential at quantum number n.
 
     For V_H(r) = -(alpha_D * m_A_prime) / [exp(m_A_prime * r) - 1], the
-    s-wave bound state energies are (Levine 1965):
+    s-wave bound state energies are (Hulthen 1948):
 
         E_n = -m_chi * (alpha_D - n * (m_A_prime / m_chi))**2 / (4 n**2)
         ... 
@@ -78,7 +78,7 @@ def E_n_hulthen_bound(alpha_D, m_chi_GeV, m_ap_GeV, n=1):
     kappa = constants.compute_kappa(alpha_D, m_chi_GeV, m_ap_GeV)
 
     if n == 1:
-        # Levine 1965 Eq. 18 (corrected to m_chi convention):
+        # Hulthen 1948 Eq. (corrected to m_chi convention):
         # E_1s = -m_chi * (alpha_D - m_A_prime/m_chi)**2 / 4  ... but this is
         # only correct for very small κ. For κ > κ_c, use numerical lattice.
         # Here we use the SIMILITUDE FORM which is the leading-order Hulthen result:

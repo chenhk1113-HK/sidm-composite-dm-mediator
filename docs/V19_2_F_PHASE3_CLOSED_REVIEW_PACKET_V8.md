@@ -322,7 +322,7 @@ The Cloud-9 target σ/m = 174 cm²/g at v = 29.4 km/s is fitted to:
 - L* galaxy scale (v ~ 200 km/s): σ/m ~ 1-3 cm²/g
 - Cloud-9 dwarf scale (v ~ 29 km/s): σ/m ~ 50-200 cm²/g
 
-**Uncertainty:** factor ~5 multiplicative. Range **35-870 cm²/g**.
+**Uncertainty:** factor ~5 (i.e., 174⁺⁶⁹⁶₋₁₃⁹, range 35-870 cm²/g, centered on 174 cm²/g).
 
 ---
 
