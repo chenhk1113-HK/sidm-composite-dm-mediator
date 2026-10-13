@@ -168,10 +168,8 @@ def _run_convention_checks() -> None:
     print("[constants.py] All convention checks PASSED.")
 
 
-# Run checks on import
-_run_convention_checks()
-
-
+# Run checks only when called as __main__ (REVIEWER-15: prevent side effects on import)
+# Tests should call _run_convention_checks() explicitly.
 # ============================================================
 # Helper: convert between conventions (for reference only)
 # ============================================================
@@ -195,15 +193,17 @@ def alpha_g24pi_to_g2(alpha_D: float) -> float:
 
 
 # ============================================================
-# Summary print on import
+# Summary print on import (REVIEWER-15: moved inside __main__ guard)
 # ============================================================
 
-print("=" * 60)
-print("constants.py — Coupling convention: α_D ≡ g²/(4π) [LOCKED]")
-print(f"  ALPHA_D    = {ALPHA_D:.2e}")
-print(f"  G_CHI      = {G_CHI:.6e}")
-print(f"  KAPPA_C    = {KAPPA_C} (analytic: {KAPPA_C_ANALYTIC})")
-print(f"  M_CHI      = {M_CHI_GEV} GeV")
-print(f"  C_KMS      = {C_KMS:.3e} km/s")
-print(f"  HBAR_C     = {HBAR_C_GEV_CM:.5e} GeV*cm")
-print("=" * 60)
+if __name__ == "__main__":
+    _run_convention_checks()
+    print("=" * 60)
+    print("constants.py — Coupling convention: α_D ≡ g²/(4π) [LOCKED]")
+    print(f"  ALPHA_D    = {ALPHA_D:.2e}")
+    print(f"  G_CHI      = {G_CHI:.6e}")
+    print(f"  KAPPA_C    = {KAPPA_C} (analytic: {KAPPA_C_ANALYTIC})")
+    print(f"  M_CHI      = {M_CHI_GEV} GeV")
+    print(f"  C_KMS      = {C_KMS:.3e} km/s")
+    print(f"  HBAR_C     = {HBAR_C_GEV_CM:.5e} GeV*cm")
+    print("=" * 60)

@@ -110,6 +110,13 @@ def main():
             sigma_c = float('nan')
             if sigT is not None and not math.isnan(sigT):
                 sigma_c = sigma_m_cm2_g(sigT)
+            else:
+                # REVIEWER-15: warn on NaN (partial-wave non-convergence signal)
+                import warnings
+                warnings.warn(
+                    f"Calogero returned NaN at alpha_D={alpha_D}, m_phi={m_phi}, v={v} km/s "
+                    f"(possible partial-wave non-convergence at kappa > kappa_c)"
+                )
 
             sigma_b = sigma_born_cm2_g(v, m_phi, g_chi, m_chi)
 
