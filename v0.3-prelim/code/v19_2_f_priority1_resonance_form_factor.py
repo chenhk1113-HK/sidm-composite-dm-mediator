@@ -69,11 +69,15 @@ from constants import (
 # Resonance helpers (REVIEWER-15 item 11: extracted)
 from v19_2_f_priority1_resonance_helpers import (
     F_resonance_sq, sigma_m_resonance, velocity_at_resonance,
+    detect_peak_at_target,  # REVIEWER-16 item 8: extracted
 )
 
-# Output paths (per task spec)
-RESULTS_DIR = _PROJECT_ROOT / "v0.3-prelim" / "data" / "results"
-DOCS_DIR    = _PROJECT_ROOT / "docs"
+# Output paths (per task spec) - REVIEWER-16 item 9: configurable via env var
+import os
+_DEFAULT_RESULTS_DIR = _PROJECT_ROOT / "v0.3-prelim" / "data" / "results"
+_DEFAULT_DOCS_DIR    = _PROJECT_ROOT / "docs"
+RESULTS_DIR = Path(os.environ.get("SIDM_RESULTS_DIR", str(_DEFAULT_RESULTS_DIR)))
+DOCS_DIR    = Path(os.environ.get("SIDM_DOCS_DIR",    str(_DEFAULT_DOCS_DIR)))
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 DOCS_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -103,29 +107,6 @@ PEAK_TOLERANCE = 0.5   # peak within 50% of target absolute height is "interesti
 # Extracted to v19_2_f_priority1_resonance_helpers.py (REVIEWER-15 item 11).
 # The functions F_resonance_sq, sigma_m_resonance, velocity_at_resonance
 # are imported from there. See that module for derivation and references.
-
-
-def detect_peak_at_target(sigma_v: np.ndarray, v_grid: np.ndarray,
-                           v_target: float = V_TARGET_KMS) -> bool:
-    """True if sigma/m(v_target) is strictly greater than at BOTH neighbors
-    in the velocity grid AND is a local maximum (greater than all other
-    sampled velocities).
-    """
-    if v_target not in v_grid:
-        return False
-    idx = int(np.where(v_grid == v_target)[0][0])
-    if idx == 0 or idx == len(v_grid) - 1:
-        return False
-    left  = sigma_v[idx - 1]
-    here  = sigma_v[idx]
-    right = sigma_v[idx + 1]
-    if not (math.isfinite(left) and math.isfinite(here) and math.isfinite(right)):
-        return False
-    if here <= left or here <= right:
-        return False
-    if not all(here >= sigma_v[i] for i in range(len(v_grid)) if i != idx):
-        return False
-    return True
 
 
 def main() -> None:

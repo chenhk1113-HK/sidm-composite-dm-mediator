@@ -14,8 +14,10 @@ Reference: Chu, Hambye, Tytgat (2018) M2 model, arXiv:1712.02521
 """
 from __future__ import annotations
 import math
-from pathlib import Path
 import sys
+from pathlib import Path
+
+import numpy as np
 
 _THIS_DIR = Path(__file__).resolve().parent
 _PROJECT_ROOT = _THIS_DIR.parent.parent
@@ -75,3 +77,27 @@ def velocity_at_resonance(m_rho_GeV: float, m_chi_GeV: float = M_CHI_GEV) -> flo
     """Solve q^2 = m_rho^2 for v_rel: (mu*v)^2 = m_rho^2 -> v_kms = C_KMS * m_rho / mu."""
     mu_GeV = m_chi_GeV / 2.0
     return C_KMS * m_rho_GeV / mu_GeV
+
+
+def detect_peak_at_target(sigma_v, v_grid, v_target):
+    """True if sigma/m(v_target) is strictly greater than at BOTH neighbors
+    in the velocity grid AND is a local maximum (greater than all other
+    sampled velocities).
+
+    Extracted from v19_2_f_priority1_resonance_form_factor.py (REVIEWER-16 item 8).
+    """
+    if v_target not in v_grid:
+        return False
+    idx = int(np.where(v_grid == v_target)[0][0])
+    if idx == 0 or idx == len(v_grid) - 1:
+        return False
+    left  = sigma_v[idx - 1]
+    here  = sigma_v[idx]
+    right = sigma_v[idx + 1]
+    if not (math.isfinite(left) and math.isfinite(here) and math.isfinite(right)):
+        return False
+    if here <= left or here <= right:
+        return False
+    if not all(here >= sigma_v[i] for i in range(len(v_grid)) if i != idx):
+        return False
+    return True

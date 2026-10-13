@@ -82,39 +82,8 @@ from v19_2_f_priority3_born_helpers import (
 #
 # Below we compute the exclusion curve by direct inversion on a fine grid.
 
-def lyman_alpha_alpha_D_curve(m_ap_GeV_arr, v_kms=30.0, sigma_m_target=100.0,
-                                m_chi_GeV=1.0):
-    """
-    Compute alpha_D(m_A') such that sigma/m(v_kms, m_A', alpha_D) = sigma_m_target.
-
-    Returns array of alpha_D values (NaN where the curve is undefined or
-    where Born gives no real solution).
-    """
-    m_chi_g = m_chi_GeV * 1.78266192e-24
-    # sigma/m = sigma_T_GeV2 * (hbarc)^2 / m_chi_g
-    # sigma_T_GeV2 = (16 pi^2 alpha_D^2 m_chi^2) / (8 pi m_A^4) * L(s)^2
-    #             = 2 pi alpha_D^2 m_chi^2 / m_A^4 * L(s)^2
-    #
-    # Setting sigma/m = sigma_m_target:
-    #   alpha_D^2 = sigma_m_target * m_chi_g / [(hbarc)^2 * 2 pi m_chi^2 / m_A^4 * L(s)^2]
-    #             = sigma_m_target * m_chi_g * m_A^4 / [(hbarc)^2 * 2 pi m_chi^2 * L(s)^2]
-    v_c = v_kms / constants.C_KMS
-    # TYL 2013 standard: s = (mu v)^2 / m_phi^2 = m_chi^2 v^2 / (4 m_phi^2)
-    # (REVIEWER-16 FIX: removed sqrt(2) factor for consistency with test_born.py)
-    mu_GeV = m_chi_GeV / 2.0
-    s_arr = (mu_GeV * v_c / m_ap_GeV_arr) ** 2
-    L_arr = np.where(s_arr > 0,
-                     np.log(1.0 + 1.0 / s_arr) - 1.0 / (1.0 + s_arr),
-                     0.0)
-    L_abs = np.abs(L_arr)
-    # Avoid division by zero where L=0 (very large m_A' / very small v)
-    safe = L_abs > 1e-12
-    alpha_D_sq = np.full_like(L_arr, np.nan)
-    alpha_D_sq[safe] = (
-        sigma_m_target * m_chi_g * m_ap_GeV_arr[safe] ** 4
-        / (constants.HBAR_C_GEV_CM ** 2 * 2.0 * np.pi * m_chi_GeV ** 2 * L_abs[safe] ** 2)
-    )
-    return np.sqrt(alpha_D_sq)
+# Lyman-alpha exclusion curve (extracted)
+from v19_2_f_priority3_lyman_alpha_helpers import lyman_alpha_alpha_D_curve
 
 
 # ============================================================
@@ -464,11 +433,14 @@ def main():
     ax.grid(True, which="minor", linestyle=":", linewidth=0.2, alpha=0.2)
 
     # ============================================================
-    # Save outputs
+    # Save outputs (REVIEWER-16 item 9: configurable via env var)
     # ============================================================
-    docs_dir = _PROJECT_ROOT / "v0.3-prelim" / "docs"
+    import os
+    _default_docs_dir = _PROJECT_ROOT / "v0.3-prelim" / "docs"
+    _default_data_dir = _PROJECT_ROOT / "v0.3-prelim" / "data" / "results"
+    docs_dir = Path(os.environ.get("SIDM_DOCS_DIR",    str(_default_docs_dir)))
+    data_dir = Path(os.environ.get("SIDM_RESULTS_DIR", str(_default_data_dir)))
     docs_dir.mkdir(parents=True, exist_ok=True)
-    data_dir = _PROJECT_ROOT / "v0.3-prelim" / "data" / "results"
     data_dir.mkdir(parents=True, exist_ok=True)
 
     pdf_path = docs_dir / "V19_2_F_PRIORITY3_CONSTRAINT_PLOT.pdf"
