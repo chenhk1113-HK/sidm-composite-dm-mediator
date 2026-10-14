@@ -88,9 +88,9 @@ def test_born_formula_tulin_yu_match():
     sigma_TY_per_g = sigma_TY_GeV2 * HBAR_C_GEV_CM**2 / (m_chi * 1.78266192e-24)
     sigma_my_per_g = sigma_born_cm2_g(v_kms, m_phi, g_chi, m_chi)
     ratio2 = sigma_my_per_g / sigma_TY_per_g
-    print(f"  My: {sigma_my_per_g:.4e}, TYL Eq A1: {sigma_TY_per_g:.4e}, ratio: {ratio2:.4f}")
-    # With TYL Eq A1 exact formula (LINEAR bracket), ratio should be ~1.0
-    assert 0.5 < ratio2 < 2.0, f"Ratio out of range (expected ~1.0): {ratio2}"
+    print(f"  My: {sigma_my_per_g:.4e}, TYL Eq A1: {sigma_TY_per_g:.4e}, ratio: {ratio2:.6f}")
+    # REVIEWER-21: tightened to 1% tolerance (machine precision for closed-form vs quadrature)
+    assert abs(ratio2 - 1.0) < 0.01, f"Ratio out of range (expected ~1.0): {ratio2}"
 
     # Multi-m_chi
     for m_chi_test, tulin_yu_value in [(1, 2.7e-5), (5, 1.35e-4), (10, 2.7e-4), (20, 5.4e-4)]:
