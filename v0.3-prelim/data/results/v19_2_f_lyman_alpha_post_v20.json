@@ -1,0 +1,221 @@
+{
+  "exclusion_curve_v29_4": [
+    {
+      "m_phi_GeV": 0.005,
+      "alpha_D_excl": 0.006296062573949654,
+      "kappa_excl": 1.259212514789931,
+      "regime": "pre-bound (Sommerfeld)",
+      "sigma_m_cm2_g_at_excl": 174.0,
+      "born_valid": false
+    },
+    {
+      "m_phi_GeV": 0.01,
+      "alpha_D_excl": 0.025179407954620606,
+      "kappa_excl": 2.5179407954620605,
+      "regime": "BOUND-STATE (Born breaks)",
+      "sigma_m_cm2_g_at_excl": 174.00000000000006,
+      "born_valid": false
+    },
+    {
+      "m_phi_GeV": 0.02,
+      "alpha_D_excl": 0.10071277918334505,
+      "kappa_excl": 5.035638959167253,
+      "regime": "BOUND-STATE (Born breaks)",
+      "sigma_m_cm2_g_at_excl": 174.00000000000006,
+      "born_valid": false
+    },
+    {
+      "m_phi_GeV": 0.03,
+      "alpha_D_excl": 0.22660185350592799,
+      "kappa_excl": 7.553395116864267,
+      "regime": "BOUND-STATE (Born breaks)",
+      "sigma_m_cm2_g_at_excl": 174.00000000000006,
+      "born_valid": false
+    },
+    {
+      "m_phi_GeV": 0.05,
+      "alpha_D_excl": 0.6294449257838374,
+      "kappa_excl": 12.588898515676746,
+      "regime": "BOUND-STATE (Born breaks)",
+      "sigma_m_cm2_g_at_excl": 174.0,
+      "born_valid": false
+    },
+    {
+      "m_phi_GeV": 0.075,
+      "alpha_D_excl": 0.9999999999999999,
+      "kappa_excl": 13.333333333333332,
+      "regime": "BOUND-STATE (Born breaks)",
+      "sigma_m_cm2_g_at_excl": 86.75502011665544,
+      "born_valid": false
+    },
+    {
+      "m_phi_GeV": 0.1,
+      "alpha_D_excl": 0.9999999999999999,
+      "kappa_excl": 9.999999999999998,
+      "regime": "BOUND-STATE (Born breaks)",
+      "sigma_m_cm2_g_at_excl": 27.451996972733696,
+      "born_valid": false
+    },
+    {
+      "m_phi_GeV": 0.15,
+      "alpha_D_excl": 0.9999999999999999,
+      "kappa_excl": 6.666666666666666,
+      "regime": "BOUND-STATE (Born breaks)",
+      "sigma_m_cm2_g_at_excl": 5.426495167705024,
+      "born_valid": false
+    },
+    {
+      "m_phi_GeV": 0.2,
+      "alpha_D_excl": 0.9999999999999999,
+      "kappa_excl": 4.999999999999999,
+      "regime": "BOUND-STATE (Born breaks)",
+      "sigma_m_cm2_g_at_excl": 1.7164695947094106,
+      "born_valid": false
+    },
+    {
+      "m_phi_GeV": 0.3,
+      "alpha_D_excl": 0.9999999999999999,
+      "kappa_excl": 3.333333333333333,
+      "regime": "BOUND-STATE (Born breaks)",
+      "sigma_m_cm2_g_at_excl": 0.3334343472981584,
+      "born_valid": false
+    },
+    {
+      "m_phi_GeV": 0.5,
+      "alpha_D_excl": 0.9999999999999999,
+      "kappa_excl": 1.9999999999999998,
+      "regime": "BOUND-STATE (Born breaks)",
+      "sigma_m_cm2_g_at_excl": 0.04986960211541122,
+      "born_valid": false
+    },
+    {
+      "m_phi_GeV": 1.0,
+      "alpha_D_excl": 0.9999999999999999,
+      "kappa_excl": 0.9999999999999999,
+      "regime": "transitional",
+      "sigma_m_cm2_g_at_excl": 0.007527985235830222,
+      "born_valid": false
+    }
+  ],
+  "candidate_points": [
+    {
+      "name": "Cloud-9",
+      "m_chi": 1.0,
+      "m_phi": 0.1,
+      "alpha_D": 0.001,
+      "v_kms": 29.4,
+      "sigma_m_born_cm2_g": 2.7451996972733704e-05,
+      "unitarity_bound_cm2_g": 1141674.998649557,
+      "above_unitarity": false,
+      "factor_above_unitarity": 2.4045369308433316e-11
+    },
+    {
+      "name": "SPARC",
+      "m_chi": 1.0,
+      "m_phi": 0.1,
+      "alpha_D": 0.001,
+      "v_kms": 100.0,
+      "sigma_m_born_cm2_g": 2.7447843950406633e-05,
+      "unitarity_bound_cm2_g": 98681.8201832731,
+      "above_unitarity": false,
+      "factor_above_unitarity": 2.781448892960239e-10
+    },
+    {
+      "name": "Resonance1",
+      "m_chi": 1.0,
+      "m_phi": 0.05,
+      "alpha_D": 0.02,
+      "v_kms": 200.0,
+      "sigma_m_born_cm2_g": 0.1756268063178998,
+      "unitarity_bound_cm2_g": 24670.455045818275,
+      "above_unitarity": false,
+      "factor_above_unitarity": 7.118912318063186e-06
+    },
+    {
+      "name": "Resonance2",
+      "m_chi": 1.0,
+      "m_phi": 0.5,
+      "alpha_D": 0.0001,
+      "v_kms": 200.0,
+      "sigma_m_born_cm2_g": 4.391480124738344e-10,
+      "unitarity_bound_cm2_g": 24670.455045818275,
+      "above_unitarity": false,
+      "factor_above_unitarity": 1.780056394007501e-14
+    },
+    {
+      "name": "Bound state",
+      "m_chi": 1.0,
+      "m_phi": 0.02,
+      "alpha_D": 0.01,
+      "v_kms": 10.0,
+      "sigma_m_born_cm2_g": 1.7154692859605258,
+      "unitarity_bound_cm2_g": 9868182.018327309,
+      "above_unitarity": false,
+      "factor_above_unitarity": 1.7383843171665613e-07
+    }
+  ],
+  "resonance_exclusion": [
+    {
+      "name": "Resonance A",
+      "m_phi_GeV": 0.05,
+      "v_res_kms": 100,
+      "sigma_m_resonance_cm2_g": 10000000.0,
+      "unitarity_bound_cm2_g": 98681.8201832731,
+      "above_unitarity": true,
+      "factor_above_unitarity": 101.33578790326197
+    },
+    {
+      "name": "Resonance B",
+      "m_phi_GeV": 0.1,
+      "v_res_kms": 50,
+      "sigma_m_resonance_cm2_g": 5000000000.0,
+      "unitarity_bound_cm2_g": 394727.2807330924,
+      "above_unitarity": true,
+      "factor_above_unitarity": 12666.973487907748
+    },
+    {
+      "name": "Resonance C",
+      "m_phi_GeV": 0.2,
+      "v_res_kms": 200,
+      "sigma_m_resonance_cm2_g": 100000000000.0,
+      "unitarity_bound_cm2_g": 24670.455045818275,
+      "above_unitarity": true,
+      "factor_above_unitarity": 4053431.516130479
+    },
+    {
+      "name": "Resonance D",
+      "m_phi_GeV": 0.03,
+      "v_res_kms": 30,
+      "sigma_m_resonance_cm2_g": 10000000000000.0,
+      "unitarity_bound_cm2_g": 1096464.6687030343,
+      "above_unitarity": true,
+      "factor_above_unitarity": 9120220.91129358
+    },
+    {
+      "name": "Resonance E",
+      "m_phi_GeV": 0.5,
+      "v_res_kms": 500,
+      "sigma_m_resonance_cm2_g": 1000000000000000.0,
+      "unitarity_bound_cm2_g": 3947.272807330924,
+      "above_unitarity": true,
+      "factor_above_unitarity": 253339469758.15494
+    }
+  ],
+  "hulthen_vs_yukawa_binding": {
+    "framework": {
+      "E_Yukawa_eV": 4.973756706364299e-06,
+      "E_Hulthen_eV": 5.78e-05,
+      "ratio_Hulthen_over_Yukawa": 11.620994634908563
+    },
+    "best_fit": {
+      "E_Yukawa_eV": 0.0017721991631053325,
+      "E_Hulthen_eV": 0.0038503125,
+      "ratio_Hulthen_over_Yukawa": 2.172618394229065
+    },
+    "honest_caveat": "v19 fabricated '9127x off' - actual ratio is 11.6x (framework) or 2.2x (best-fit). Hulthen is APPROXIMATE, not exact; well-known limitation in TYL literature."
+  },
+  "target_sigma_m_cm2_g": 174.0,
+  "coupling_convention": "alpha_D = g^2 / (4 pi)",
+  "Tyl_formula": "sigma_T = 8 pi alpha^2 m^2 / v^4 * [log(1+s) - s/(1+s)], s = m_chi^2 v^2 / m_phi^2",
+  "version": "v20 (REVIEWER-22 fixes: velocity-dep unitarity, Born-validity annotation, 9127x retracted)"
+}
