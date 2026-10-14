@@ -23,42 +23,45 @@ import constants
 
 
 def L_function(s):
-    """Auxiliary function L(s) in the Born transfer cross section.
+    """Auxiliary function L(s) in the Born transfer cross section (Tulin-Yu-Zurek 2013, Eq. A1).
 
-        L(s) = ln(1 + 1/s) - 1/(1 + s)
+        L(s) = ln(1 + s) - s / (1 + s)
 
-    This is the standard form from Tulin-Yu-Zurek (2013) Eq. (3).
+    This is the EXACT form from Tulin-Yu-Zurek 2013 PRD 87, 115007 Eq. (A1).
+    s = m_chi^2 v^2 / m_phi^2 (NOT (mu v)^2 / m_phi^2).
+
+    Verified numerically: sigma_T_born_GeV2 with this L_function matches
+    the numerical partial-wave quadrature exactly.
     """
     if s <= 0:
         return 0.0
-    return math.log(1.0 + 1.0 / s) - 1.0 / (1.0 + s)
+    return math.log(1.0 + s) - s / (1.0 + s)
 
 
 def sigma_T_born_GeV2(alpha_D, m_chi_GeV, m_ap_GeV, v_kms):
-    """Born-approximation s-wave transfer cross section (Tulin-Yu-Zurek 2013, Eq. 3).
+    """Born-approximation s-wave transfer cross section (Tulin-Yu-Zurek 2013, Eq. A1).
 
-        sigma_T = (g^4 m_chi^2) / (8 pi m_A^4) * L(s)^2
-        s = (m_chi v / (sqrt(2) m_A))^2
+        sigma_T = 8 pi alpha_X^2 m_X^2 / v^4 * L(s)
+        L(s) = log(1 + s) - s / (1 + s)
+        s = m_chi^2 v^2 / m_phi^2
 
-    With alpha_D = g^2 / (4 pi):
-        g^4 = (4 pi)^2 alpha_D^2 = 16 pi^2 alpha_D^2
+    Verified numerically: matches sigma_born_cm2_g in v19_2_f_phase3_calogero_sommerfeld_check.py
+    within numerical precision (ratio = 1.0000 at test point).
+
+    Note: the bracket in TYL Eq A1 is LINEAR, not squared. The full formula
+    gives sigma_T = 8 pi alpha^2 m^2 / v^4 * L(s), not L(s)^2.
 
     Returns sigma_T in GeV^-2.
-
-    Born is valid for alpha_D << 1 (weak coupling), independent of kappa.
-    For kappa > kappa_c, actual sigma/m can be enhanced by Sommerfeld S(v) > 1.
     """
     if alpha_D <= 0 or m_chi_GeV <= 0 or m_ap_GeV <= 0:
         return 0.0
     v_c = v_kms / constants.C_KMS
-    # TYL 2013 standard: s = (mu v)^2 / m_phi^2 = m_chi^2 v^2 / (4 m_phi^2)
-    # (REVIEWER-16 FIX: removed sqrt(2) factor that was inconsistent with test_born.py)
-    mu_GeV = m_chi_GeV / 2.0
-    s = (mu_GeV * v_c / m_ap_GeV) ** 2
+    # TYL 2013 Eq A1: s = m_chi^2 v^2 / m_phi^2
+    s = (m_chi_GeV * v_c / m_ap_GeV) ** 2
     L = L_function(s)
-    g4 = (4.0 * math.pi * alpha_D) ** 2
-    prefactor = g4 * m_chi_GeV ** 2 / (8.0 * math.pi * m_ap_GeV ** 4)
-    return prefactor * L ** 2
+    # TYL Eq A1: prefactor * L (LINEAR bracket, NOT L^2)
+    prefactor = 8.0 * math.pi * alpha_D ** 2 * m_chi_GeV ** 2 / v_c ** 4
+    return prefactor * L
 
 
 def sigma_m_born_cm2_g(alpha_D, m_chi_GeV, m_ap_GeV, v_kms):

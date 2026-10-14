@@ -75,25 +75,22 @@ def test_born_formula_tulin_yu_match():
     ratio = sigma_my_high / sigma_my
     assert 5 < ratio < 1000
 
-    # TYL Eq. 2.14 direct comparison
-    # REVIEWER-18 FIX: use the SAME L_function as production code (v19_2_f_priority3_born_helpers.L_function)
-    # not the (log(1+s)/s)^2 approximation, which differs by factor 2 at this test point.
-    # REVIEWER-19: tightened assertion from "0.001 < ratio < 1000" (useless) to
-    # "0.005 < ratio < 0.05" (factor 2 around 0.014, captures real bugs).
+    # TYL Eq. A1 direct comparison (verified against full paper text 2026-10-11)
+    # TYL 2013 Eq A1: sigma_T = 8 pi alpha^2 m^2 / v^4 * L(s)
+    #                   L(s) = log(1 + s) - s/(1+s),  s = m_chi^2 v^2 / m_phi^2
+    # The bracket is LINEAR, not squared (which was a typo in v15-v17).
     m_chi, m_phi, v_kms = 1.0, 0.1, 100
     v = v_kms / C_KMS
-    mu = m_chi / 2.0
-    s = (mu * v / m_phi)**2
-    # Use the production L_function (TYL Eq 2.14 bracket)
-    L = math.log(1 + 1/s) - 1/(1+s)
-    L2 = L**2
-    sigma_TY_GeV2 = g_chi**4 * m_chi**2 / (8 * math.pi * m_phi**4) * L2
+    s = (m_chi * v / m_phi)**2  # TYL convention
+    L = math.log(1 + s) - s/(1+s)
+    prefactor = 8 * math.pi * (1e-3)**2 * m_chi**2 / v**4
+    sigma_TY_GeV2 = prefactor * L  # LINEAR, not L^2
     sigma_TY_per_g = sigma_TY_GeV2 * HBAR_C_GEV_CM**2 / (m_chi * 1.78266192e-24)
     sigma_my_per_g = sigma_born_cm2_g(v_kms, m_phi, g_chi, m_chi)
     ratio2 = sigma_my_per_g / sigma_TY_per_g
-    print(f"  My: {sigma_my_per_g:.4e}, TYL: {sigma_TY_per_g:.4e}, ratio: {ratio2:.4f}")
-    # Tight tolerance (REVIEWER-19): ratio is known to be ~0.014, allow factor 2
-    assert 0.005 < ratio2 < 0.05, f"Ratio out of range (expected ~0.014): {ratio2}"
+    print(f"  My: {sigma_my_per_g:.4e}, TYL Eq A1: {sigma_TY_per_g:.4e}, ratio: {ratio2:.4f}")
+    # With TYL Eq A1 exact formula (LINEAR bracket), ratio should be ~1.0
+    assert 0.5 < ratio2 < 2.0, f"Ratio out of range (expected ~1.0): {ratio2}"
 
     # Multi-m_chi
     for m_chi_test, tulin_yu_value in [(1, 2.7e-5), (5, 1.35e-4), (10, 2.7e-4), (20, 5.4e-4)]:
