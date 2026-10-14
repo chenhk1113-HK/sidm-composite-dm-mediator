@@ -287,22 +287,80 @@ def scattering_length_yukawa(kappa, m_phi_GeV):
 
 
 def scattering_length_yukawa_numerical(alpha_D, m_phi_GeV, m_chi_GeV):
-    """Extract a_0 from numerical Hulthen phase shift (REVIEWER-16).
+    """Extract a_0 from numerical Hulthen phase shift (REVIEWER-16/17).
 
     a_0 = -lim(k->0) tan(delta_0(k)) / k
 
-    Uses small v to approximate the k->0 limit.
+    Note (REVIEWER-17): delta_l_hulthen uses atan2(1, cot_delta) which
+    always returns delta in (0, pi). This means the SIGN of a_0 from
+    -tan(delta)/k is WRONG for virtual states (kappa < kappa_c):
+    atan2(1, cot) returns +1.5865 but the physical phase shift is
+    -1.5865, so the signs of tan differ.
+
+    Fix: For virtual states (kappa < kappa_c), use the small-k
+    asymptotic form: cot_delta = -1/(a_0 * k) - ik + r_0 k / 2 + ...
+    At lowest order, cot_delta = -1/(a_0 k). We can solve:
+    a_0 = -1 / (k * cot_delta_physical)
+
+    The physical cot_delta is found by checking the sign:
+    - If kappa < kappa_c, cot_delta is small and positive -> a_0 < 0
+    - If kappa > kappa_c, cot_delta is small and negative -> a_0 > 0
+
+    Returns:
+        (a_0, a_0_uncertainty) tuple in GeV^-1.
     """
     from constants import C_KMS
-    v_test = 1e-3  # km/s (very small, near k=0 limit)
-    v_c = v_test / C_KMS
     mu_GeV = m_chi_GeV / 2.0
-    k = mu_GeV * v_c
-    delta_0 = delta_l_hulthen(0, k, m_phi_GeV, alpha_D, m_chi_GeV)
-    if abs(math.cos(delta_0)) < 1e-10:
-        return float("inf") if math.sin(delta_0) > 0 else float("-inf")
-    a_0 = -math.tan(delta_0) / k
-    return a_0
+
+    def _cot_delta(v_test_km_s):
+        """Compute cot(delta_0) at given v_test, with proper sign convention."""
+        v_c = v_test_km_s / C_KMS
+        k = mu_GeV * v_c
+        if k < 1e-20:
+            return float("nan"), float("nan")
+        # Recompute cot_delta directly (Schwinger 1961 form)
+        xi = k / m_phi_GeV
+        eta = alpha_D * m_phi_GeV / k
+        arg_x = math.pi * xi
+        arg_y = math.pi * eta
+        if arg_x > 50.0:
+            sinh_x_div = math.sin(arg_y)
+        else:
+            sinh_x = math.sinh(arg_x)
+            cosh_x = math.cosh(arg_x)
+            sin_y = math.sin(arg_y)
+            cos_y = math.cos(arg_y)
+            denom = cosh_x - cos_y
+            if abs(denom) < 1e-30:
+                return float("nan"), float("nan")
+            sinh_x_div = sinh_x * sin_y / denom
+        main_term = (2.0 * k / (alpha_D * m_phi_GeV)) * sinh_x_div
+        cot_y = math.cos(arg_y) / math.sin(arg_y) if abs(math.sin(arg_y)) > 1e-30 else 0.0
+        cot_delta = main_term - cot_y
+        return cot_delta, k
+
+    # Use smallest v for k->0 extraction
+    v_test = 1e-4
+    cot_d, k = _cot_delta(v_test)
+    if not math.isfinite(cot_d) or abs(cot_d) < 1e-30:
+        # cot_delta = 0: tan(delta) = inf, a_0 = 0 (resonance)
+        return float("inf") if cot_d > 0 else float("-inf"), float("inf")
+    # a_0 = -1 / (k * cot_delta)
+    a_0 = -1.0 / (k * cot_d)
+    if not math.isfinite(a_0) or abs(a_0) > 1e20:
+        return float("inf") if a_0 > 0 else float("-inf"), float("inf")
+
+    # Rough uncertainty: change v by 10x and recompute
+    cot_d2, k2 = _cot_delta(1e-3)
+    if math.isfinite(cot_d2) and abs(cot_d2) > 1e-30:
+        a_02 = -1.0 / (k2 * cot_d2)
+        if math.isfinite(a_02) and abs(a_02) < 1e20:
+            a_0_unc = abs(a_02 - a_0)
+        else:
+            a_0_unc = 0.0
+    else:
+        a_0_unc = 0.0
+    return a_0, a_0_unc
 
 
 def sigma_m_hulthen_cm2_g(v_km, m_ap_GeV, alpha_D, m_chi_GeV):

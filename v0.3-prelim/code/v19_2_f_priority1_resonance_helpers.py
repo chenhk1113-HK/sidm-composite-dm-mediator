@@ -79,16 +79,18 @@ def velocity_at_resonance(m_rho_GeV: float, m_chi_GeV: float = M_CHI_GEV) -> flo
     return C_KMS * m_rho_GeV / mu_GeV
 
 
-def detect_peak_at_target(sigma_v, v_grid, v_target):
+def detect_peak_at_target(sigma_v, v_grid, v_target, rtol=1e-6):
     """True if sigma/m(v_target) is strictly greater than at BOTH neighbors
     in the velocity grid AND is a local maximum (greater than all other
     sampled velocities).
 
-    Extracted from v19_2_f_priority1_resonance_form_factor.py (REVIEWER-16 item 8).
+    REQUIRES numpy to be imported.
+    Uses np.isclose for v_target match (REVIEWER-17: floating point precision).
     """
-    if v_target not in v_grid:
+    close_indices = np.where(np.isclose(v_grid, v_target, rtol=rtol))[0]
+    if len(close_indices) == 0:
         return False
-    idx = int(np.where(v_grid == v_target)[0][0])
+    idx = int(close_indices[0])
     if idx == 0 or idx == len(v_grid) - 1:
         return False
     left  = sigma_v[idx - 1]
