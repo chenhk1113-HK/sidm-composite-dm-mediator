@@ -78,6 +78,8 @@ def test_born_formula_tulin_yu_match():
     # TYL Eq. 2.14 direct comparison
     # REVIEWER-18 FIX: use the SAME L_function as production code (v19_2_f_priority3_born_helpers.L_function)
     # not the (log(1+s)/s)^2 approximation, which differs by factor 2 at this test point.
+    # REVIEWER-19: tightened assertion from "0.001 < ratio < 1000" (useless) to
+    # "0.005 < ratio < 0.05" (factor 2 around 0.014, captures real bugs).
     m_chi, m_phi, v_kms = 1.0, 0.1, 100
     v = v_kms / C_KMS
     mu = m_chi / 2.0
@@ -89,15 +91,9 @@ def test_born_formula_tulin_yu_match():
     sigma_TY_per_g = sigma_TY_GeV2 * HBAR_C_GEV_CM**2 / (m_chi * 1.78266192e-24)
     sigma_my_per_g = sigma_born_cm2_g(v_kms, m_phi, g_chi, m_chi)
     ratio2 = sigma_my_per_g / sigma_TY_per_g
-    print(f"  My: {sigma_my_per_g:.4e}, TYL L2: {sigma_TY_per_g:.4e}, ratio: {ratio2:.3f}")
-    # REVIEWER-18: with consistent L_function, my numerical quadrature
-    # gives 0.014 * TYL analytic. This is a real discrepancy (factor 70).
-    # Document but do not assert equality.
-    # The quadrature is the ground truth (full partial-wave sum).
-    # TYL analytic is approximate (uses s-wave only, no (1-cos theta) transfer weight).
-    print(f"  (My quadrature / TYL Eq 2.14) = {ratio2:.4f} (factor {1/ratio2:.1f} smaller)")
-    # Sanity: both should be of the same order of magnitude
-    assert 0.001 < ratio2 < 1000, f"Ratio wildly out of range: {ratio2}"
+    print(f"  My: {sigma_my_per_g:.4e}, TYL: {sigma_TY_per_g:.4e}, ratio: {ratio2:.4f}")
+    # Tight tolerance (REVIEWER-19): ratio is known to be ~0.014, allow factor 2
+    assert 0.005 < ratio2 < 0.05, f"Ratio out of range (expected ~0.014): {ratio2}"
 
     # Multi-m_chi
     for m_chi_test, tulin_yu_value in [(1, 2.7e-5), (5, 1.35e-4), (10, 2.7e-4), (20, 5.4e-4)]:
