@@ -14,16 +14,24 @@ Tests verify:
   6. No g² vs g²/(4π) confusion anywhere
 """
 from __future__ import annotations
+import importlib.util
 import math
-import sys
 import os
+import sys
 
-# Ensure we import from the same directory as this test file
+# v36 r38 Code-3: use importlib instead of sys.path.insert to match the
+# pattern used in test_v31_post_sweep.py (v33 Code-1 fix).
 _TEST_DIR = os.path.dirname(os.path.abspath(__file__))
-if _TEST_DIR not in sys.path:
-    sys.path.insert(0, _TEST_DIR)
 
-import constants
+
+def _load_module_from_path(module_name, file_path):
+    spec = importlib.util.spec_from_file_location(module_name, file_path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+constants = _load_module_from_path("constants", os.path.join(_TEST_DIR, "constants.py"))
 
 
 # ============================================================
