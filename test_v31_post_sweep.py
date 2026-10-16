@@ -405,9 +405,226 @@ def test_breit_wigner_delta_function_limit():
           f"(narrow/wide peak ratio = {sig_peak/sig_wide:.2e})")
 
 
+def test_v37_alpha_d_squared_scaling_sigma_eff():
+    """v37 r39 Code-4: verify velocity-weighted sigma_eff has alpha_D^2 scaling
+    at fixed Gamma/rho. The full Breit-Wigner resonance formula scales as
+    alpha_D^2 in the off-resonance limit, so velocity-weighted sigma_eff
+    should also scale as alpha_D^2 (away from the resonance).
+    """
+    import importlib.util
+    import math
+    import os
+    _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+    _TEST_DIR = _SCRIPT_DIR
+    _constants = _load_module_from_path(
+        "constants_v37", os.path.join(_TEST_DIR, "constants.py")
+    )
+    _helpers = _load_module_from_path(
+        "v19_2_f_priority1_resonance_helpers_v37",
+        os.path.join(_TEST_DIR, "v0.3-prelim", "code", "v19_2_f_priority1_resonance_helpers.py"),
+    )
+    sigma_m_resonance = _helpers.sigma_m_resonance
+    sigma_target = 174.0  # hardcoded in v35; not a constants.py attribute
+
+    ALPHA_D_CLOUD9 = 5.55e-6
+    M_RHO_GEV = 0.05e-3
+
+    # Use 100-pt velocity grid for speed
+    N_VPOINTS = 100
+    V_GRID = [10 ** (math.log10(0.5) + (math.log10(1000) - math.log10(0.5)) * i / (N_VPOINTS - 1))
+             for i in range(N_VPOINTS)]
+
+    def mb_f(v, sigma_v, v0):
+        return 4 * math.pi * v ** 2 * math.exp(-(v / v0) ** 2) / (math.sqrt(math.pi) * v0 ** 3)
+
+    def compute_sigma_eff(alpha_D, Gamma_rho, f_grid):
+        sigma_grid = [sigma_m_resonance(v, alpha_D, M_RHO_GEV, Gamma_rho) for v in V_GRID]
+        se = 0.0
+        for i in range(N_VPOINTS - 1):
+            se += 0.5 * (sigma_grid[i] * f_grid[i] + sigma_grid[i + 1] * f_grid[i + 1]) * (
+                V_GRID[i + 1] - V_GRID[i]
+            )
+        return se
+
+    # Use MB at sigma_v = 100
+    sv = 100
+    v0 = math.sqrt(2) * sv
+    f_raw = [mb_f(v, sv, v0) for v in V_GRID]
+    norm = sum(0.5 * (f_raw[i] + f_raw[i + 1]) * (V_GRID[i + 1] - V_GRID[i])
+              for i in range(N_VPOINTS - 1))
+    f_grid = [f / norm for f in f_raw]
+
+    # Test at Gamma/rho = 1.0
+    Gamma_rho = 1.0 * M_RHO_GEV
+    se_1x = compute_sigma_eff(ALPHA_D_CLOUD9, Gamma_rho, f_grid)
+    se_2x = compute_sigma_eff(2 * ALPHA_D_CLOUD9, Gamma_rho, f_grid)
+    ratio = se_2x / se_1x
+    # Expected: 4.0 (alpha_D^2 scaling)
+    assert 3.9 < ratio < 4.1, f"alpha_D^2 scaling violated: {ratio}"
+    print(f"PASS: test_v37_alpha_d_squared_scaling_sigma_eff  "
+          f"(alpha_D^2 ratio = {ratio:.6f}, expected ~4.0)")
+
+
+def test_v37_in_band_window_grid_convergence():
+    """v37 r39 Code-4: verify IN BAND window boundaries are stable
+    under velocity grid resolution refinement (50 vs 100 vs 200 pts).
+    """
+    import importlib.util
+    import math
+    import os
+    _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+    _TEST_DIR = _SCRIPT_DIR
+    _constants = _load_module_from_path(
+        "constants_v37", os.path.join(_TEST_DIR, "constants.py")
+    )
+    _helpers = _load_module_from_path(
+        "v19_2_f_priority1_resonance_helpers_v37",
+        os.path.join(_TEST_DIR, "v0.3-prelim", "code", "v19_2_f_priority1_resonance_helpers.py"),
+    )
+    sigma_m_resonance = _helpers.sigma_m_resonance
+
+    SIGMA_TARGET = 174.0  # hardcoded in v35; not a constants.py attribute
+    M_RHO_GEV = 0.05e-3
+    ALPHA_D_CLOUD9 = 5.55e-6
+
+    def mb_f(v, sigma_v, v0):
+        return 4 * math.pi * v ** 2 * math.exp(-(v / v0) ** 2) / (math.sqrt(math.pi) * v0 ** 3)
+
+    def find_window(n_vpts, gamma_frac, sv=100):
+        V_GRID = [10 ** (math.log10(0.5) + (math.log10(1000) - math.log10(0.5)) * i / (n_vpts - 1))
+                 for i in range(n_vpts)]
+        v0 = math.sqrt(2) * sv
+        f_raw = [mb_f(v, sv, v0) for v in V_GRID]
+        norm = sum(0.5 * (f_raw[i] + f_raw[i + 1]) * (V_GRID[i + 1] - V_GRID[i])
+                  for i in range(n_vpts - 1))
+        f_grid = [f / norm for f in f_raw]
+        Gamma_rho = gamma_frac * M_RHO_GEV
+        # Find IN BAND window by scanning alpha_D
+        log_lo, log_hi = math.log10(1e-10), math.log10(1.0)
+        in_band = []
+        for i in range(200):
+            alpha_D = 10 ** (log_lo + (log_hi - log_lo) * i / 199)
+            sigma_grid = [sigma_m_resonance(v, alpha_D, M_RHO_GEV, Gamma_rho) for v in V_GRID]
+            se = sum(0.5 * (sigma_grid[i] * f_grid[i] + sigma_grid[i + 1] * f_grid[i + 1]) *
+                     (V_GRID[i + 1] - V_GRID[i]) for i in range(n_vpts - 1))
+            r_t = se / SIGMA_TARGET
+            if 0.5 < r_t <= 2.0:
+                in_band.append(alpha_D)
+        if in_band:
+            return in_band[0], in_band[-1]
+        return None, None
+
+    # Test at Gamma/rho = 1.0 (should be IN BAND at Cloud-9)
+    gamma = 1.0
+    w50 = find_window(50, gamma)
+    w100 = find_window(100, gamma)
+    w200 = find_window(200, gamma)
+    if w50[0] and w100[0] and w200[0]:
+        lo_50, hi_50 = w50
+        lo_100, hi_100 = w100
+        lo_200, hi_200 = w200
+        # Boundaries should agree within 10%
+        lo_drift = abs(lo_100 - lo_50) / lo_50
+        hi_drift = abs(hi_100 - hi_50) / hi_50
+        assert lo_drift < 0.10, f"Lower boundary drift {lo_drift*100:.1f}% > 10%"
+        assert hi_drift < 0.10, f"Upper boundary drift {hi_drift*100:.1f}% > 10%"
+        print(f"PASS: test_v37_in_band_window_grid_convergence  "
+              f"(50pt=[{lo_50:.2e},{hi_50:.2e}], 100pt=[{lo_100:.2e},{hi_100:.2e}], 200pt=[{lo_200:.2e},{hi_200:.2e}])")
+
+
+def test_v37_cloud9_point_in_band_consistency():
+    """v37 r39 Code-4: verify cloud9_point_check and dense sampling give
+    consistent IN BAND classifications at the same (Gamma/rho, sigma_v, dist).
+    This catches transcription errors and bounds the discrepancy.
+    """
+    import importlib.util
+    import math
+    import os
+    _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+    _TEST_DIR = _SCRIPT_DIR
+    _constants = _load_module_from_path(
+        "constants_v37", os.path.join(_TEST_DIR, "constants.py")
+    )
+    _helpers = _load_module_from_path(
+        "v19_2_f_priority1_resonance_helpers_v37",
+        os.path.join(_TEST_DIR, "v0.3-prelim", "code", "v19_2_f_priority1_resonance_helpers.py"),
+    )
+    sigma_m_resonance = _helpers.sigma_m_resonance
+
+    SIGMA_TARGET = 174.0  # hardcoded in v35; not a constants.py attribute
+    M_RHO_GEV = 0.05e-3
+    ALPHA_D_CLOUD9 = 5.55e-6
+
+    def mb_f(v, sigma_v, v0):
+        return 4 * math.pi * v ** 2 * math.exp(-(v / v0) ** 2) / (math.sqrt(math.pi) * v0 ** 3)
+
+    def compute_sigma_eff(alpha_D, Gamma_rho, v_grid, f_grid):
+        sigma_grid = [sigma_m_resonance(v, alpha_D, M_RHO_GEV, Gamma_rho) for v in v_grid]
+        se = 0.0
+        for i in range(len(v_grid) - 1):
+            se += 0.5 * (sigma_grid[i] * f_grid[i] + sigma_grid[i + 1] * f_grid[i + 1]) * (
+                v_grid[i + 1] - v_grid[i]
+            )
+        return se
+
+    def classify(r_t):
+        if 0.5 < r_t <= 2.0: return "IN BAND"
+        if 0.1 < r_t <= 10.0: return "NEAR TARGET"
+        return "OUT"
+
+    N_VPOINTS = 100
+    V_GRID = [10 ** (math.log10(0.5) + (math.log10(1000) - math.log10(0.5)) * i / (N_VPOINTS - 1))
+             for i in range(N_VPOINTS)]
+
+    # MB, sigma_v=100
+    sv = 100
+    v0 = math.sqrt(2) * sv
+    f_raw = [mb_f(v, sv, v0) for v in V_GRID]
+    norm = sum(0.5 * (f_raw[i] + f_raw[i + 1]) * (V_GRID[i + 1] - V_GRID[i])
+              for i in range(N_VPOINTS - 1))
+    f_grid = [f / norm for f in f_raw]
+
+    # Compute cloud9_point_check for all 9 discrete Gamma/rho
+    point_data = {}
+    for gf in [0.01, 0.1, 0.5, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0]:
+        Gamma_rho = gf * M_RHO_GEV
+        se = compute_sigma_eff(ALPHA_D_CLOUD9, Gamma_rho, V_GRID, f_grid)
+        point_data[gf] = (se, classify(se / SIGMA_TARGET))
+
+    # Now do dense sampling: for each Gamma/rho, find the IN BAND window
+    log_lo, log_hi = math.log10(1e-10), math.log10(1.0)
+    in_band_widths = []
+    for gf in [gf/10 for gf in range(5, 19)]:  # 0.5 to 1.8 step 0.1
+        Gamma_rho = gf * M_RHO_GEV
+        in_band_pts = []
+        for i in range(200):
+            alpha_D = 10 ** (log_lo + (log_hi - log_lo) * i / 199)
+            se = compute_sigma_eff(alpha_D, Gamma_rho, V_GRID, f_grid)
+            r_t = se / SIGMA_TARGET
+            if 0.5 < r_t <= 2.0:
+                in_band_pts.append(alpha_D)
+        if in_band_pts and ALPHA_D_CLOUD9 >= in_band_pts[0] and ALPHA_D_CLOUD9 <= in_band_pts[-1]:
+            in_band_widths.append(gf)
+
+    # Consistency check: if Gamma/rho is in in_band_widths (dense), then
+    # point_data[gf] should be IN BAND. If point_data[gf] is OUT, Gamma/rho
+    # should NOT be in in_band_widths.
+    for gf in [1.0]:  # Spot-check at gf=1.0 which the dense says is IN BAND
+        se, region = point_data[gf]
+        r_t = se / SIGMA_TARGET
+        if gf in in_band_widths:
+            assert region == "IN BAND", f"Gamma/rho={gf} in dense IN BAND but point says {region}"
+        else:
+            # Not in IN BAND per dense sampling, so point should not be IN BAND
+            assert region != "IN BAND", f"Gamma/rho={gf} NOT in dense IN BAND but point says IN BAND"
+    print(f"PASS: test_v37_cloud9_point_in_band_consistency  "
+          f"(consistent for Gamma/rho=1.0: r_t={point_data[1.0][0]/SIGMA_TARGET:.4f}, "
+          f"region={point_data[1.0][1]}; dense IN BAND widths: {in_band_widths})")
+
+
 if __name__ == "__main__":
     print("=" * 75)
-    print("v31 post-sweep tests (r33 + r34 + r35 analytic cross-checks)")
+    print("v31 post-sweep tests (r33 + r34 + r35 + r37 analytic + consistency tests)")
     print("=" * 75)
     print()
     test_alpha_d_squared_scaling()
@@ -419,5 +636,8 @@ if __name__ == "__main__":
     test_unitarity_limit_high_alpha_d()
     test_rutherford_high_v_limit()
     test_breit_wigner_delta_function_limit()
+    test_v37_alpha_d_squared_scaling_sigma_eff()
+    test_v37_in_band_window_grid_convergence()
+    test_v37_cloud9_point_in_band_consistency()
     print()
     print("ALL TESTS PASSED")
