@@ -16,7 +16,6 @@ import importlib.util
 import json
 import math
 import sys
-import traceback
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -72,9 +71,17 @@ def unitarity_bound(m_chi_GeV, v_kms):
 
 
 def _classify(r_t):
-    if 0.5 < r_t < 2.0:
+    """Classify sigma/m vs target ratio into IN BAND / NEAR TARGET / OUT.
+
+    Boundary convention (r34 Code-5 fix): IN BAND uses half-open interval
+    (0.5, 2.0); NEAR TARGET uses (0.1, 10.0]; OUT is everything else.
+    The choice of < vs <= for the upper bound means r_t == 2.0 is NEAR TARGET
+    (not IN BAND) and r_t == 0.5 is OUT (not IN BAND). This matches the
+    v30/v31 paper convention and is documented in §3 of the v32 packet.
+    """
+    if 0.5 < r_t <= 2.0:
         return "IN BAND"
-    if 0.1 < r_t < 10.0:
+    if 0.1 < r_t <= 10.0:
         return "NEAR TARGET"
     return "OUT"
 

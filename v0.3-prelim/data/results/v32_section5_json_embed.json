@@ -1,0 +1,224 @@
+{
+  "fixed_parameters": {
+    "m_chi_GeV": 1.0,
+    "m_rho_GeV": 5e-05,
+    "v_resonance_kms": 29.98,
+    "v_target_kms": 29.4,
+    "sigma_target_cm2_g": 174.0,
+    "sigma_max_unitarity_cm2_g": 1141674.998649557,
+    "coupling_convention": "alpha_D = g^2/(4 pi), LOCKED"
+  },
+  "metadata": {
+    "function_version": "sigma_m_resonance v1.0 (16-point Gauss-Legendre, TYL Eq A1 LINEAR bracket)",
+    "precision": "limit=100 (scipy.integrate.quad) per sigma_m_resonance",
+    "generated_at": "2026-10-16T02:39:32+00:00",
+    "script_sha256": "bd992f2ece417988",
+    "total_computed": 126,
+    "filtered_out": 0,
+    "alpha_D_grid_size": 14,
+    "gamma_rho_grid_size": 9,
+    "expected_entries": 126
+  },
+  "alpha_D_grid": [
+    1e-10,
+    1e-08,
+    1e-07,
+    3e-07,
+    1e-06,
+    3e-06,
+    5.55e-06,
+    1e-05,
+    3e-05,
+    0.0001,
+    0.001,
+    0.01,
+    0.1,
+    1.0
+  ],
+  "Gamma_rho_over_m_rho_grid": [
+    0.01,
+    0.1,
+    0.5,
+    1.0,
+    2.0,
+    3.0,
+    4.0,
+    5.0,
+    6.0
+  ],
+  "all_scan_results": {
+    "5.0": [
+      {
+        "alpha_D": 1e-10,
+        "sigma_m_29.4": 7.695851567168733e-08,
+        "ratio_target": 4.4229031995222604e-10,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 1e-08,
+        "sigma_m_29.4": 0.0007695851567168732,
+        "ratio_target": 4.42290319952226e-06,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 1e-07,
+        "sigma_m_29.4": 0.07695851567168732,
+        "ratio_target": 0.000442290319952226,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 3e-07,
+        "sigma_m_29.4": 0.6926266410451858,
+        "ratio_target": 0.003980612879570034,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 1e-06,
+        "sigma_m_29.4": 7.695851567168732,
+        "ratio_target": 0.044229031995222594,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 3e-06,
+        "sigma_m_29.4": 69.26266410451859,
+        "ratio_target": 0.3980612879570034,
+        "region": "NEAR TARGET"
+      },
+      {
+        "alpha_D": 5.55e-06,
+        "sigma_m_29.4": 237.0514678977149,
+        "ratio_target": 1.3623647580328442,
+        "region": "IN BAND"
+      },
+      {
+        "alpha_D": 1e-05,
+        "sigma_m_29.4": 769.5851567168734,
+        "ratio_target": 4.422903199522261,
+        "region": "NEAR TARGET"
+      },
+      {
+        "alpha_D": 3e-05,
+        "sigma_m_29.4": 6926.266410451858,
+        "ratio_target": 39.80612879570033,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 0.0001,
+        "sigma_m_29.4": 76958.51567168732,
+        "ratio_target": 442.29031995222596,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 0.001,
+        "sigma_m_29.4": 7695851.567168731,
+        "ratio_target": 44229.03199522259,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 0.01,
+        "sigma_m_29.4": 769585156.7168732,
+        "ratio_target": 4422903.19952226,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 0.1,
+        "sigma_m_29.4": 76958515671.68733,
+        "ratio_target": 442290319.95222604,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 1.0,
+        "sigma_m_29.4": 7695851567168.73,
+        "ratio_target": 44229031995.22259,
+        "region": "OUT"
+      }
+    ],
+    "6.0": [
+      {
+        "alpha_D": 1e-10,
+        "sigma_m_29.4": 5.344437270043474e-08,
+        "ratio_target": 3.071515672438778e-10,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 1e-08,
+        "sigma_m_29.4": 0.0005344437270043475,
+        "ratio_target": 3.0715156724387786e-06,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 1e-07,
+        "sigma_m_29.4": 0.053444372700434735,
+        "ratio_target": 0.00030715156724387777,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 3e-07,
+        "sigma_m_29.4": 0.4809993543039126,
+        "ratio_target": 0.0027643641051949,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 1e-06,
+        "sigma_m_29.4": 5.344437270043474,
+        "ratio_target": 0.030715156724387783,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 3e-06,
+        "sigma_m_29.4": 48.09993543039126,
+        "ratio_target": 0.27643641051949003,
+        "region": "NEAR TARGET"
+      },
+      {
+        "alpha_D": 5.55e-06,
+        "sigma_m_29.4": 164.62202901051413,
+        "ratio_target": 0.9461036150029547,
+        "region": "IN BAND"
+      },
+      {
+        "alpha_D": 1e-05,
+        "sigma_m_29.4": 534.4437270043475,
+        "ratio_target": 3.0715156724387787,
+        "region": "NEAR TARGET"
+      },
+      {
+        "alpha_D": 3e-05,
+        "sigma_m_29.4": 4809.993543039125,
+        "ratio_target": 27.643641051948997,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 0.0001,
+        "sigma_m_29.4": 53444.37270043473,
+        "ratio_target": 307.15156724387776,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 0.001,
+        "sigma_m_29.4": 5344437.270043473,
+        "ratio_target": 30715.156724387776,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 0.01,
+        "sigma_m_29.4": 534443727.0043473,
+        "ratio_target": 3071515.6724387775,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 0.1,
+        "sigma_m_29.4": 53444372700.43474,
+        "ratio_target": 307151567.2438778,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 1.0,
+        "sigma_m_29.4": 5344437270043.473,
+        "ratio_target": 30715156724.387775,
+        "region": "OUT"
+      }
+    ]
+  },
+  "version": "v31 (REVIEWER-33: programmatic table rendering, sys.path\u2192importlib, JSON metadata, ERROR region)"
+}

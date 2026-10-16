@@ -516,6 +516,26 @@ A 100-point log-spaced scan in α_D ∈ [1e-10, 1.0] at Γ/ρ = 5.0 was added to
 
 For the full 100-row table, see `v0.3-prelim/data/results/v31_continuous_curve_appendix.md`.
 
+### 9.1 v32 CORRECTION: Multi-Γ/ρ continuous scan (REVIEWER-34 Sci-3/4)
+
+**File:** `v0.3-prelim/data/results/v19_2_f_lyman_alpha_post_v32_multi_curve.json` (4 × 100 = 400 points)
+**Script:** `v0.3-prelim/code/v19_2_f_lyman_alpha_post_v32_multi_curve.py`
+
+The v31 §9 continuous scan was only at Γ/ρ = 5.0. r34 reviewer requested multi-Γ/ρ. Result: **IN BAND IS achievable at Γ/ρ ∈ {1.0, 3.0, 5.0, 6.0}**, but the α_D range required shifts to lower values as Γ/ρ decreases:
+
+| Γ/ρ | IN BAND count | α_D range |
+|---:|---:|:---|
+| 1.0 | 3 pts | [6.89e-7, 1.10e-6] |
+| 3.0 | 3 pts | [2.21e-6, 3.51e-6] |
+| 5.0 | 3 pts | [3.51e-6, 5.59e-6] |
+| 6.0 | 3 pts | [4.43e-6, 7.05e-6] |
+
+**At the Cloud-9 α_D = 5.55e-6 specifically, only Γ/ρ = 5.0 and 6.0 are IN BAND** (this is the v31 §8 discrete verdict, still correct). But the v31 §9 overgeneralization — "IN BAND only at Γ/ρ = 5.0/6.0" — was wrong. The corrected claim:
+
+> IN BAND exists at all 4 tested Γ/ρ values, but the α_D range required shifts with Γ/ρ. The Yukawa mechanism is consistent with σ/m ≈ 174 cm²/g only in narrow α_D × Γ/ρ windows; outside these windows, σ/m is OUT. **At the Cloud-9 calibration (α_D = 5.55e-6), the only IN BAND widths are Γ/ρ = 5.0 and 6.0** (the discrete-scan verdict that motivated Phase 3 FAIL is preserved).
+
+The FAIL verdict is now more precisely stated: the Cloud-9 paper's empirical fit σ/m = 0.052 × (100/v)^1.93 specifies σ/m vs v at the SINGLE v = 29.4 km/s anchor point. The Yukawa mechanism achieves σ/m ≈ 174 at this anchor only for Γ/ρ ∈ {5, 6} (the widest widths). For all other Γ/ρ, the same α_D gives σ/m 34×-21,720× off. So the mechanism fails at the Cloud-9 calibration by a structural fact about the σ/m vs α_D scaling at the specific Cloud-9 α_D.
+
 ---
 
 ## 10. σ/m(v) curve with denser v sampling (REVIEWER-32 item 5, MED) + v=1 km/s physics note (REVIEWER-33 item 5)
