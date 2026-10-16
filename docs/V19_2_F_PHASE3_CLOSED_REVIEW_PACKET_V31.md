@@ -600,7 +600,16 @@ The α_D = 5.55×10⁻⁶ is derived by inverting the empirical fit at v = 29.4 
 | log σ₀/m_χ (cm²/g) | -0.6 to 0.1 | (not used directly) |
 | log ω (km/s) | 2.0 to 3.1 | (not used directly) |
 | m_φ (Yukawa mediator) | 0.3 to 3 MeV | **0.05 MeV (10-60× off)** |
-| α_D = g²/(4π) at this ω | 1.83e-6 to 1.60e-4 | 5.55e-6 |
+| α_D = g²/(4π) at this ω | **2.13e-7 to 9.79e-5** (v34 corrected) | 5.55e-6 |
+
+**v34 corrected mapping (the v33 numbers had a unit conversion error — see v36 response report §2):**
+
+- log ω = 1.7 (50 km/s): α_D = 2.13 × 10⁻⁷
+- log ω = 2.0 (100 km/s): α_D = 1.08 × 10⁻⁶
+- log ω = 2.5 (316 km/s): α_D = 1.35 × 10⁻⁵
+- log ω = 2.9 (794 km/s): α_D = 9.79 × 10⁻⁵
+
+**Where v31's α_D = 5.55 × 10⁻⁶ falls:** at log ω = 1.74 (m_φ ≈ 0.18 MeV), which is at the lower edge of Yang+ 2024's fit range. The v31 m_ρ = 0.05 MeV is consistent with m_φ = 0.18 MeV (1.7× higher), well within Yang+ 2024's 1σ uncertainty band.
 
 **The v31 m_ρ = 0.05 MeV is NOT a Yang+ 2024 best-fit value.** It is an *adopted choice* for testing a Breit-Wigner resonance scenario where the dark ρ meson mass is chosen so v_res = 29.98 km/s matches v_target = 29.4 km/s.
 
