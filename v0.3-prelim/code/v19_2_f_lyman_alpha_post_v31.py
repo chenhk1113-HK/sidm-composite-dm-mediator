@@ -78,6 +78,7 @@ def _classify(r_t):
     The choice of < vs <= for the upper bound means r_t == 2.0 is NEAR TARGET
     (not IN BAND) and r_t == 0.5 is OUT (not IN BAND). This matches the
     v30/v31 paper convention and is documented in §3 of the v32 packet.
+    Updated in v35 (r37) for version tracking; convention unchanged.
     """
     if 0.5 < r_t <= 2.0:
         return "IN BAND"
@@ -202,8 +203,18 @@ def main():
     script_text = Path(__file__).read_text(encoding="utf-8")
     script_sha = hashlib.sha256(script_text.encode("utf-8")).hexdigest()[:16]
 
-    # Save JSON
-    output_path = _SCRIPT_DIR.parent / "data" / "results" / "v19_2_f_lyman_alpha_post_v31.json"
+    # Save JSON (v35 r37 Code-5: support --output-path CLI arg)
+    import argparse
+    parser = argparse.ArgumentParser(description="v31 Lyman-alpha post-sweep")
+    parser.add_argument(
+        "--output-path", type=str, default=None,
+        help="Output JSON path (default: data/results/v19_2_f_lyman_alpha_post_v31.json)",
+    )
+    args = parser.parse_args()
+    if args.output_path:
+        output_path = Path(args.output_path)
+    else:
+        output_path = _SCRIPT_DIR.parent / "data" / "results" / "v19_2_f_lyman_alpha_post_v31.json"
     output_path.parent.mkdir(parents=True, exist_ok=True)
     payload = {
         "fixed_parameters": {
