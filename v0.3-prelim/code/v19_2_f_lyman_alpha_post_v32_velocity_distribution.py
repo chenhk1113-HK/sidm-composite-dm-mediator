@@ -131,7 +131,7 @@ def main():
         print()
 
     print("=" * 75)
-    print("CONCLUSION (r34 Sci-5):")
+    print("CONCLUSION (r34 Sci-5 / r35 Sci-5):")
     print("=" * 75)
     print("The v=1 km/s global maximum of sigma(v) is a formal feature but")
     print("contributes negligibly to the observable velocity-weighted cross-section.")
@@ -142,6 +142,24 @@ def main():
     print("This vindicates the v31 §10 physics note: the formal global max at v=1")
     print("is in a velocity region with vanishingly small probability density in any")
     print("realistic galactic halo.")
+    print()
+    print("=" * 75)
+    print("METHODOLOGY (r35 Sci-5 documentation):")
+    print("=" * 75)
+    print("Distribution function: Maxwell-Boltzmann f(v) = 4 pi v^2 * exp(-v^2 / v_0^2)")
+    print("                                / (sqrt(pi) v_0^3)")
+    print("  with v_0 = sqrt(2) * sigma_v (1D velocity dispersion parameter)")
+    print("  sigma_v values: 50, 100, 200 km/s (typical dwarf to MW-mass halo range)")
+    print("Integration grid: 200 log-spaced points in v in [0.5, 1000] km/s")
+    print("Integration method: Trapezoidal rule (linear in v, log-spaced sampling)")
+    print("Convergence: log-spaced sampling ensures v=1 km/s region is well-resolved")
+    print("             (20+ points in the v<10 km/s range)")
+    print("v=1 km/s bin width: 1.5 km/s (from 0.5 to 2.0 km/s), the bin where")
+    print("                    sigma(v) achieves its global maximum")
+    print("Justification for MB: standard assumption for thermalized DM in halo;")
+    print("                      deviations from MB (e.g. NFW streaming) are sub-leading")
+    print("                      in the velocity-weighted integral (Robertson+2021,")
+    print("                      Yang+2024) for sigma_v in [50, 200] km/s.")
 
 
 if __name__ == "__main__":

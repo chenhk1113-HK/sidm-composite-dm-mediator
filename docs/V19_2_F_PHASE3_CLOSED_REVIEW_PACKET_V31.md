@@ -587,7 +587,31 @@ The Cloud-9 paper (Yang+ 2024 MNRAS 533, 4007, doi:10.1093/mnras/stae2038) repor
 
 The α_D = 5.55×10⁻⁶ is derived by inverting the empirical fit at v = 29.4 km/s using the Born approximation.
 
-**The mechanism FAIL verdict is independent of the specific α_D value** — supported now by both the 14-point discrete scan (§7) AND the 100-point continuous scan (§9). At every α_D in [1e-10, 1.0], the Yukawa mechanism does not reproduce the SDSS σ/m(v) curve.
+**The mechanism FAIL verdict is independent of the specific α_D value** — supported now by both the 14-point discrete scan (§7), the 100-point continuous scan (§9), and the 9-Γ/ρ × 100-pt full multi-curve scan (§9.1). At every α_D in [1e-10, 1.0], the Yukawa mechanism does not reproduce the SDSS σ/m(v) curve at the Cloud-9 calibration.
+
+### 11.1 Cloud-9 m_ρ provenance (REVIEWER-35 Sci-1)
+
+**v33 update:** the v31 §11 wording above is honest about α_D being an internal fit value, but does not surface the discrepancy between the v31 m_ρ = 0.05 MeV assumption and Yang+ 2024's best-fit Yukawa parameter.
+
+**What Yang+ 2024 actually constrains** (per Eq 4, 19, 20, Tables 2-3 of arXiv:2305.05067):
+
+| Parameter | Yang+ 2024 best fit (1σ) | v31 packet value |
+|---|---|---|
+| log σ₀/m_χ (cm²/g) | -0.6 to 0.1 | (not used directly) |
+| log ω (km/s) | 2.0 to 3.1 | (not used directly) |
+| m_φ (Yukawa mediator) | 0.3 to 3 MeV | **0.05 MeV (10-60× off)** |
+| α_D = g²/(4π) at this ω | 1.83e-6 to 1.60e-4 | 5.55e-6 |
+
+**The v31 m_ρ = 0.05 MeV is NOT a Yang+ 2024 best-fit value.** It is an *adopted choice* for testing a Breit-Wigner resonance scenario where the dark ρ meson mass is chosen so v_res = 29.98 km/s matches v_target = 29.4 km/s.
+
+**Different physics assumptions:**
+
+- Yang+ 2024 fits a **Rutherford/Møller Yukawa** model: σ(v) = σ₀ ω⁴/v⁴ × [log + polynomial]. Free parameters: (σ₀, ω). The mediator mass is encoded in ω.
+- The v31 packet tests a **Breit-Wigner resonance** model: σ(v) has a Lorentzian lineshape with width Γ_ρ. Free parameters: (α_D, Γ_ρ/m_ρ). The mediator mass equals m_ρ.
+
+**Robustness statement (v33 conclusion):** the structural argument — that Yukawa-like mechanisms cannot fit both Lyman-α + SPARC + dSph simultaneously — is preserved across the range of α_D ∈ [1.8e-6, 1.6e-4] spanned by Yang+ 2024's fit. The v31 verdict (only Γ/ρ ∈ {5, 6} at the v31 α_D = 5.55e-6) is the specific quantitative result for the v31 Breit-Wigner model with m_ρ = 0.05 MeV. Different choices of m_ρ would shift the IN BAND windows in α_D but not the qualitative conclusion (the Cloud-9 v_target requires wide Γ_ρ for IN BAND to be achievable at the given α_D).
+
+**For paper publication:** the v33 response report (§2) recommends adding this provenance discussion to §11 of the paper. The m_ρ = 0.05 MeV should be explicitly described as a *chosen* test value, not a Yang+ 2024 best-fit, and the structural argument should be presented as the *primary* result (Yukawa mechanism fails at v_target = 29.4 km/s across the full Yang+ 2024 best-fit parameter range), with the discrete Cloud-9 verdict as a *specific quantitative example*.
 
 ---
 

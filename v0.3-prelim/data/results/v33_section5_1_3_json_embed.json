@@ -1,0 +1,224 @@
+{
+  "fixed_parameters": {
+    "m_chi_GeV": 1.0,
+    "m_rho_GeV": 5e-05,
+    "v_resonance_kms": 29.98,
+    "v_target_kms": 29.4,
+    "sigma_target_cm2_g": 174.0,
+    "sigma_max_unitarity_cm2_g": 1141674.998649557,
+    "coupling_convention": "alpha_D = g^2/(4 pi), LOCKED"
+  },
+  "metadata": {
+    "function_version": "sigma_m_resonance v1.0 (16-point Gauss-Legendre, TYL Eq A1 LINEAR bracket)",
+    "precision": "limit=100 (scipy.integrate.quad) per sigma_m_resonance",
+    "generated_at": "2026-10-16T02:39:32+00:00",
+    "script_sha256": "bd992f2ece417988",
+    "total_computed": 126,
+    "filtered_out": 0,
+    "alpha_D_grid_size": 14,
+    "gamma_rho_grid_size": 9,
+    "expected_entries": 126
+  },
+  "alpha_D_grid": [
+    1e-10,
+    1e-08,
+    1e-07,
+    3e-07,
+    1e-06,
+    3e-06,
+    5.55e-06,
+    1e-05,
+    3e-05,
+    0.0001,
+    0.001,
+    0.01,
+    0.1,
+    1.0
+  ],
+  "Gamma_rho_over_m_rho_grid": [
+    0.01,
+    0.1,
+    0.5,
+    1.0,
+    2.0,
+    3.0,
+    4.0,
+    5.0,
+    6.0
+  ],
+  "all_scan_results": {
+    "1.0": [
+      {
+        "alpha_D": 1e-10,
+        "sigma_m_29.4": 1.921254942146645e-06,
+        "ratio_target": 1.1041695069808306e-08,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 1e-08,
+        "sigma_m_29.4": 0.01921254942146645,
+        "ratio_target": 0.00011041695069808305,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 1e-07,
+        "sigma_m_29.4": 1.9212549421466447,
+        "ratio_target": 0.011041695069808302,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 3e-07,
+        "sigma_m_29.4": 17.291294479319802,
+        "ratio_target": 0.09937525562827472,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 1e-06,
+        "sigma_m_29.4": 192.12549421466449,
+        "ratio_target": 1.1041695069808304,
+        "region": "IN BAND"
+      },
+      {
+        "alpha_D": 3e-06,
+        "sigma_m_29.4": 1729.1294479319804,
+        "ratio_target": 9.937525562827474,
+        "region": "NEAR TARGET"
+      },
+      {
+        "alpha_D": 5.55e-06,
+        "sigma_m_29.4": 5917.945535547204,
+        "ratio_target": 34.011181238777034,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 1e-05,
+        "sigma_m_29.4": 19212.54942146645,
+        "ratio_target": 110.41695069808304,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 3e-05,
+        "sigma_m_29.4": 172912.94479319802,
+        "ratio_target": 993.7525562827473,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 0.0001,
+        "sigma_m_29.4": 1921254.9421466447,
+        "ratio_target": 11041.695069808304,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 0.001,
+        "sigma_m_29.4": 192125494.21466446,
+        "ratio_target": 1104169.5069808303,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 0.01,
+        "sigma_m_29.4": 19212549421.466446,
+        "ratio_target": 110416950.69808303,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 0.1,
+        "sigma_m_29.4": 1921254942146.645,
+        "ratio_target": 11041695069.808304,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 1.0,
+        "sigma_m_29.4": 192125494214664.44,
+        "ratio_target": 1104169506980.83,
+        "region": "OUT"
+      }
+    ],
+    "3.0": [
+      {
+        "alpha_D": 1e-10,
+        "sigma_m_29.4": 2.1375133790839588e-07,
+        "ratio_target": 1.228455964990781e-09,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 1e-08,
+        "sigma_m_29.4": 0.002137513379083959,
+        "ratio_target": 1.228455964990781e-05,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 1e-07,
+        "sigma_m_29.4": 0.21375133790839584,
+        "ratio_target": 0.0012284559649907807,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 3e-07,
+        "sigma_m_29.4": 1.9237620411755625,
+        "ratio_target": 0.011056103684917025,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 1e-06,
+        "sigma_m_29.4": 21.375133790839588,
+        "ratio_target": 0.12284559649907809,
+        "region": "NEAR TARGET"
+      },
+      {
+        "alpha_D": 3e-06,
+        "sigma_m_29.4": 192.37620411755628,
+        "ratio_target": 1.1056103684917027,
+        "region": "IN BAND"
+      },
+      {
+        "alpha_D": 5.55e-06,
+        "sigma_m_29.4": 658.4075585923364,
+        "ratio_target": 3.7839514861628527,
+        "region": "NEAR TARGET"
+      },
+      {
+        "alpha_D": 1e-05,
+        "sigma_m_29.4": 2137.513379083959,
+        "ratio_target": 12.284559649907811,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 3e-05,
+        "sigma_m_29.4": 19237.620411755623,
+        "ratio_target": 110.56103684917025,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 0.0001,
+        "sigma_m_29.4": 213751.33790839583,
+        "ratio_target": 1228.4559649907806,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 0.001,
+        "sigma_m_29.4": 21375133.790839583,
+        "ratio_target": 122845.59649907806,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 0.01,
+        "sigma_m_29.4": 2137513379.0839584,
+        "ratio_target": 12284559.649907807,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 0.1,
+        "sigma_m_29.4": 213751337908.39587,
+        "ratio_target": 1228455964.9907808,
+        "region": "OUT"
+      },
+      {
+        "alpha_D": 1.0,
+        "sigma_m_29.4": 21375133790839.582,
+        "ratio_target": 122845596499.07806,
+        "region": "OUT"
+      }
+    ]
+  },
+  "version": "v33 - Gamma/rho=1.0 and 3.0 (r35 Sci-3 embed)"
+}
