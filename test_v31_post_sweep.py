@@ -622,9 +622,108 @@ def test_v37_cloud9_point_in_band_consistency():
           f"region={point_data[1.0][1]}; dense IN BAND widths: {in_band_widths})")
 
 
+def test_v40_1_cloud9_sigma_v_derivation():
+    """v40.1 r40 Sci item 6 + re-baseline: verify sigma_v = W50 / 2.355 derivation
+    for Cloud-9 (W50 = 12 km/s, Anand+ 2025 ApJL 993 L55).
+
+    This is the arithmetic check (Rule 28) that should have caught the
+    10x error in v33-v39 verdicts: the project used sigma_v = 50 km/s
+    for a halo with W50 = 12 km/s. The correct sigma_v is 5.1 km/s.
+    """
+    import math
+    W50 = 12.0  # km/s, from Anand+ 2025
+    fwhm_to_sigma = 2 * math.sqrt(2 * math.log(2))  # = 2.3548
+    sigma_v_correct = W50 / fwhm_to_sigma
+    # Expected: 5.1 km/s
+    assert 4.9 < sigma_v_correct < 5.2, f"sigma_v derivation wrong: {sigma_v_correct}"
+    # Project's value was 50 km/s — verify it's > 5x the correct value
+    sigma_v_project = 50.0
+    assert sigma_v_project / sigma_v_correct > 5, \
+        f"Project's sigma_v should be >5x the correct value, got {sigma_v_project / sigma_v_correct}"
+    print(f"PASS: test_v40_1_cloud9_sigma_v_derivation  "
+          f"(W50=12 km/s -> sigma_v={sigma_v_correct:.3f} km/s, "
+          f"project's 50 km/s is {sigma_v_project/sigma_v_correct:.1f}x too high)")
+
+
+def test_v40_1_rebaselined_in_band_set():
+    """v40.1 re-baseline: verify the corrected IN BAND set for actual Cloud-9.
+
+    At sigma_v = 5.1 km/s (W50-derived), Cloud-9 alpha_D = 5.55e-6:
+    - IN BAND widths: {6, 7, 8, 10} (4 widths)
+    - vs v33-v34 pointwise {5, 6, 7, 8}
+    - vs v35 vel-weighted (at wrong sigma_v=50): {3, 4, 5, 6}
+    - vs v37 vel-weighted (at MW sigma_v=100): {1.0}
+    """
+    import importlib.util
+    import math
+    import os
+    _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+    _TEST_DIR = _SCRIPT_DIR
+    _constants = _load_module_from_path(
+        "constants_v401b", os.path.join(_TEST_DIR, "constants.py")
+    )
+    _helpers = _load_module_from_path(
+        "v19_2_f_priority1_resonance_helpers_v401b",
+        os.path.join(_TEST_DIR, "v0.3-prelim", "code", "v19_2_f_priority1_resonance_helpers.py"),
+    )
+    sigma_m_resonance = _helpers.sigma_m_resonance
+    SIGMA_TARGET = 174.0
+    M_RHO_GEV = 0.05e-3
+    ALPHA_D_CLOUD9 = 5.55e-6
+
+    # 100-pt velocity grid for speed
+    N_VPOINTS = 100
+    V_GRID = [10 ** (math.log10(0.5) + (math.log10(1000) - math.log10(0.5)) * i / (N_VPOINTS - 1))
+             for i in range(N_VPOINTS)]
+
+    def mb_f(v, sigma_v, v0):
+        return 4 * math.pi * v ** 2 * math.exp(-(v / v0) ** 2) / (math.sqrt(math.pi) * v0 ** 3)
+
+    def compute_sigma_eff(alpha_D, Gamma_rho, f_grid):
+        sigma_grid = [sigma_m_resonance(v, alpha_D, M_RHO_GEV, Gamma_rho) for v in V_GRID]
+        se = 0.0
+        for i in range(N_VPOINTS - 1):
+            se += 0.5 * (sigma_grid[i] * f_grid[i] + sigma_grid[i + 1] * f_grid[i + 1]) * (
+                V_GRID[i + 1] - V_GRID[i]
+            )
+        return se
+
+    # Cloud-9 sigma_v = 5.1 km/s (corrected)
+    sv = 5.1
+    v0 = math.sqrt(2) * sv
+    f_raw = [mb_f(v, sv, v0) for v in V_GRID]
+    norm = sum(0.5 * (f_raw[i] + f_raw[i + 1]) * (V_GRID[i + 1] - V_GRID[i])
+              for i in range(N_VPOINTS - 1))
+    f_grid = [f / norm for f in f_raw]
+
+    # Compute for each Gamma/rho
+    # At 100-pt grid, the IN BAND set is {6, 7, 8, 9, 10} (Γ/ρ=9 is borderline IN).
+    # At 200-pt grid (used in the v40.1 rebaseline script), the set is {6, 7, 8, 10}.
+    # The committed set for the 200-pt analysis is {6, 7, 8, 10}; the 100-pt test
+    # is permissive (subset check) to allow grid resolution differences.
+    expected_minimum_in_band = {6, 7, 8, 10}  # must all be IN BAND
+    forbidden_in_band = {1, 2, 3, 4, 5}  # these should be NOT IN BAND
+    actual_in_band = set()
+    for gf in range(1, 11):
+        Gamma_rho = gf * M_RHO_GEV
+        se = compute_sigma_eff(ALPHA_D_CLOUD9, Gamma_rho, f_grid)
+        r_t = se / SIGMA_TARGET
+        if 0.5 < r_t <= 2.0:
+            actual_in_band.add(gf)
+    for gf in expected_minimum_in_band:
+        assert gf in actual_in_band, \
+            f"Gamma/rho={gf} should be IN BAND at Cloud-9 (sigma_v=5.1), but isn't"
+    for gf in forbidden_in_band:
+        assert gf not in actual_in_band, \
+            f"Gamma/rho={gf} should NOT be IN BAND at Cloud-9 (sigma_v=5.1), but is"
+    print(f"PASS: test_v40_1_rebaselined_in_band_set  "
+          f"(Cloud-9 at sigma_v=5.1 km/s: IN BAND at Gamma/rho = {sorted(actual_in_band)}; "
+          f"v40.1 200-pt committed set: {{6, 7, 8, 10}})")
+
+
 if __name__ == "__main__":
     print("=" * 75)
-    print("v31 post-sweep tests (r33 + r34 + r35 + r37 analytic + consistency tests)")
+    print("v31 post-sweep tests (r33 + r34 + r35 + r37 analytic + consistency + v40.1 rebaseline)")
     print("=" * 75)
     print()
     test_alpha_d_squared_scaling()
@@ -639,5 +738,7 @@ if __name__ == "__main__":
     test_v37_alpha_d_squared_scaling_sigma_eff()
     test_v37_in_band_window_grid_convergence()
     test_v37_cloud9_point_in_band_consistency()
+    test_v40_1_cloud9_sigma_v_derivation()
+    test_v40_1_rebaselined_in_band_set()
     print()
     print("ALL TESTS PASSED")
