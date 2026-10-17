@@ -1,0 +1,230 @@
+{
+  "halos_tested": [
+    {
+      "name": "Segue 1 (v40.4)",
+      "sigma_v_1d_kms": 3.7,
+      "citation": "Simon+ 2011 (stellar)",
+      "M_halo_approx_M_sun": 100000000.0,
+      "is_ufd": true,
+      "in_band_set_Gamma_over_m_rho": [
+        6.5,
+        7.0,
+        7.5,
+        8.0,
+        8.5,
+        9.0,
+        9.5,
+        10.0,
+        10.5,
+        11.0,
+        11.5
+      ],
+      "n_in_band_widths": 11
+    },
+    {
+      "name": "Tucana II",
+      "sigma_v_1d_kms": 8.2,
+      "citation": "Walker+ 2016 (stellar)",
+      "M_halo_approx_M_sun": 10000000.0,
+      "is_ufd": true,
+      "in_band_set_Gamma_over_m_rho": [
+        5.5,
+        6.0,
+        6.5,
+        7.0,
+        7.5,
+        8.0,
+        8.5,
+        9.0,
+        9.5,
+        10.0,
+        10.5
+      ],
+      "n_in_band_widths": 11
+    },
+    {
+      "name": "Triangulum II",
+      "sigma_v_1d_kms": 5.6,
+      "citation": "Kirby+ 2017 (stellar, may have binary contamination)",
+      "M_halo_approx_M_sun": 10000000.0,
+      "is_ufd": true,
+      "in_band_set_Gamma_over_m_rho": [
+        6.0,
+        6.5,
+        7.0,
+        7.5,
+        8.0,
+        8.5,
+        9.0,
+        9.5,
+        10.0,
+        10.5,
+        11.0
+      ],
+      "n_in_band_widths": 11
+    },
+    {
+      "name": "Hercules",
+      "sigma_v_1d_kms": 3.7,
+      "citation": "Ad\u00e9n+ 2009 (stellar)",
+      "M_halo_approx_M_sun": 10000000.0,
+      "is_ufd": true,
+      "in_band_set_Gamma_over_m_rho": [
+        6.0,
+        6.5,
+        7.0,
+        7.5,
+        8.0,
+        8.5,
+        9.0,
+        9.5,
+        10.0,
+        10.5,
+        11.0,
+        11.5,
+        12.0
+      ],
+      "n_in_band_widths": 13
+    },
+    {
+      "name": "Leo T",
+      "sigma_v_1d_kms": 7.5,
+      "citation": "Ryan-Weber+ 2008 (HI gas + stellar)",
+      "M_halo_approx_M_sun": 100000000.0,
+      "is_ufd": true,
+      "in_band_set_Gamma_over_m_rho": [
+        5.5,
+        6.0,
+        6.5,
+        7.0,
+        7.5,
+        8.0,
+        8.5,
+        9.0,
+        9.5,
+        10.0,
+        10.5
+      ],
+      "n_in_band_widths": 11
+    },
+    {
+      "name": "Bootes I",
+      "sigma_v_1d_kms": 6.5,
+      "citation": "Koposov+ 2011 (stellar)",
+      "M_halo_approx_M_sun": 10000000.0,
+      "is_ufd": true,
+      "in_band_set_Gamma_over_m_rho": [
+        6.0,
+        6.5,
+        7.0,
+        7.5,
+        8.0,
+        8.5,
+        9.0,
+        9.5,
+        10.0,
+        10.5,
+        11.0
+      ],
+      "n_in_band_widths": 11
+    },
+    {
+      "name": "Draco",
+      "sigma_v_1d_kms": 10.6,
+      "citation": "Walker+ 2007 (stellar)",
+      "M_halo_approx_M_sun": 1000000000.0,
+      "is_ufd": false,
+      "in_band_set_Gamma_over_m_rho": [
+        5.0,
+        5.5,
+        6.0,
+        6.5,
+        7.0,
+        7.5,
+        8.0,
+        8.5,
+        9.0,
+        9.5
+      ],
+      "n_in_band_widths": 10
+    },
+    {
+      "name": "Ursa Minor",
+      "sigma_v_1d_kms": 9.5,
+      "citation": "Walker+ 2007 (stellar)",
+      "M_halo_approx_M_sun": 1000000000.0,
+      "is_ufd": false,
+      "in_band_set_Gamma_over_m_rho": [
+        5.5,
+        6.0,
+        6.5,
+        7.0,
+        7.5,
+        8.0,
+        8.5,
+        9.0,
+        9.5,
+        10.0
+      ],
+      "n_in_band_widths": 10
+    },
+    {
+      "name": "Sculptor",
+      "sigma_v_1d_kms": 9.2,
+      "citation": "Walker+ 2007 (stellar)",
+      "M_halo_approx_M_sun": 1000000000.0,
+      "is_ufd": false,
+      "in_band_set_Gamma_over_m_rho": [
+        5.5,
+        6.0,
+        6.5,
+        7.0,
+        7.5,
+        8.0,
+        8.5,
+        9.0,
+        9.5,
+        10.0
+      ],
+      "n_in_band_widths": 10
+    },
+    {
+      "name": "Carina",
+      "sigma_v_1d_kms": 6.6,
+      "citation": "Walker+ 2007 (stellar)",
+      "M_halo_approx_M_sun": 100000000.0,
+      "is_ufd": false,
+      "in_band_set_Gamma_over_m_rho": [
+        5.5,
+        6.0,
+        6.5,
+        7.0,
+        7.5,
+        8.0,
+        8.5,
+        9.0,
+        9.5,
+        10.0,
+        10.5,
+        11.0
+      ],
+      "n_in_band_widths": 12
+    }
+  ],
+  "canonical_params": {
+    "alpha_D": 5.55e-06,
+    "sigma_target_cm2_per_g": 174.0,
+    "m_rho_GeV": 5e-05
+  },
+  "cloud9_reference": {
+    "name": "Cloud-9 (Anand+ 2025)",
+    "in_band_set": [
+      6,
+      7,
+      8,
+      9,
+      10
+    ]
+  },
+  "conclusion": "Multiple UFDs and dSphs are IN BAND at canonical alpha_D=5.55e-6, with IN BAND sets spanning Gamma/m_rho in [6, 12] roughly. The exact IN BAND set depends on sigma_v (lower sigma_v -> narrower widths)."
+}
