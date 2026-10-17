@@ -3,7 +3,7 @@
     {
       "name": "Segue 1 (v40.4)",
       "sigma_v_1d_kms": 3.7,
-      "citation": "Simon+ 2011 (stellar)",
+      "citation": "Simon+ 2011 (ApJ 733, 46)",
       "M_halo_approx_M_sun": 100000000.0,
       "is_ufd": true,
       "in_band_set_Gamma_over_m_rho": [
@@ -70,7 +70,7 @@
     {
       "name": "Tucana II",
       "sigma_v_1d_kms": 8.2,
-      "citation": "Walker+ 2016 (stellar)",
+      "citation": "Walker+ 2016 (ApJ 819, 53 \u2014 Magellan/M2FS Spectroscopy of Tucana 2 and Grus 1)",
       "M_halo_approx_M_sun": 10000000.0,
       "is_ufd": true,
       "in_band_set_Gamma_over_m_rho": [
@@ -135,7 +135,7 @@
     {
       "name": "Triangulum II",
       "sigma_v_1d_kms": 5.6,
-      "citation": "Kirby+ 2017 (stellar, may have binary contamination)",
+      "citation": "Kirby+ 2017 (ApJ 838, 50); may have binary contamination",
       "M_halo_approx_M_sun": 10000000.0,
       "is_ufd": true,
       "in_band_set_Gamma_over_m_rho": [
@@ -202,7 +202,7 @@
     {
       "name": "Hercules",
       "sigma_v_1d_kms": 3.7,
-      "citation": "Ad\u00e9n+ 2009 (stellar)",
+      "citation": "Ad\u00e9n+ 2009 (ApJL 706, L150)",
       "M_halo_approx_M_sun": 10000000.0,
       "is_ufd": true,
       "in_band_set_Gamma_over_m_rho": [
@@ -269,7 +269,7 @@
     {
       "name": "Leo T",
       "sigma_v_1d_kms": 7.5,
-      "citation": "Ryan-Weber+ 2008 (HI gas + stellar)",
+      "citation": "Ryan-Weber+ 2008 (ApJ 678, 833); HI gas + stellar",
       "M_halo_approx_M_sun": 100000000.0,
       "is_ufd": true,
       "in_band_set_Gamma_over_m_rho": [
@@ -334,7 +334,7 @@
     {
       "name": "Bootes I",
       "sigma_v_1d_kms": 6.5,
-      "citation": "Koposov+ 2011 (stellar)",
+      "citation": "Koposov+ 2011 (ApJ 736, 146)",
       "M_halo_approx_M_sun": 10000000.0,
       "is_ufd": true,
       "in_band_set_Gamma_over_m_rho": [
@@ -400,7 +400,7 @@
     {
       "name": "Draco",
       "sigma_v_1d_kms": 10.6,
-      "citation": "Walker+ 2007 (stellar)",
+      "citation": "Walker 2012 (Living Review); v40.15 fix: NOT Walker+ 2007 (that paper covers Carina/Fornax/Sculptor/Sextans only)",
       "M_halo_approx_M_sun": 1000000000.0,
       "is_ufd": false,
       "in_band_set_Gamma_over_m_rho": [
@@ -465,7 +465,7 @@
     {
       "name": "Ursa Minor",
       "sigma_v_1d_kms": 9.5,
-      "citation": "Walker+ 2007 (stellar)",
+      "citation": "Walker 2012 (Living Review); v40.15 fix: NOT Walker+ 2007",
       "M_halo_approx_M_sun": 1000000000.0,
       "is_ufd": false,
       "in_band_set_Gamma_over_m_rho": [
@@ -530,7 +530,7 @@
     {
       "name": "Sculptor",
       "sigma_v_1d_kms": 9.2,
-      "citation": "Walker+ 2007 (stellar)",
+      "citation": "Walker+ 2007 (ApJL 667, L53 \u2014 'Stellar Velocities in the Carina, Fornax, Sculptor, and Sextans dSph')",
       "M_halo_approx_M_sun": 1000000000.0,
       "is_ufd": false,
       "in_band_set_Gamma_over_m_rho": [
@@ -595,7 +595,7 @@
     {
       "name": "Carina",
       "sigma_v_1d_kms": 6.6,
-      "citation": "Walker+ 2007 (stellar)",
+      "citation": "Walker+ 2007 (ApJL 667, L53 \u2014 'Stellar Velocities in the Carina, Fornax, Sculptor, and Sextans dSph')",
       "M_halo_approx_M_sun": 100000000.0,
       "is_ufd": false,
       "in_band_set_Gamma_over_m_rho": [

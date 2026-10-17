@@ -41,9 +41,9 @@ Halo σ_v values from literature (stellar kinematics unless noted):
 - Hercules: σ_v = 3.7 km/s, Adén+ 2009
 - Leo T: σ_v = 7.5 km/s, Ryan-Weber+ 2008 (HI gas + stellar)
 - Bootes I: σ_v = 6.5 km/s, Koposov+ 2011
-- Draco: σ_v = 10.6 km/s, Walker+ 2007
-- Ursa Minor: σ_v = 9.5 km/s, Walker+ 2007
-- Sculptor: σ_v = 9.2 km/s, Walker+ 2007
+- Draco: σ_v = 10.6 km/s, **Walker 2012 (Living Review)** — NOT Walker+ 2007 (that paper covers Carina/Fornax/Sculptor/Sextans only)
+- Ursa Minor: σ_v = 9.5 km/s, **Walker 2012 (Living Review)** — NOT Walker+ 2007
+- Sculptor: σ_v = 9.2 km/s, Walker+ 2007 (ApJL 667, L53 — correct)
 - Carina: σ_v = 6.6 km/s, Walker+ 2007
 
 ---

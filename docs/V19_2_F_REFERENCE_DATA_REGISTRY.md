@@ -72,17 +72,17 @@ This is the canonical source for paper authentication. When a new loop uses a va
 ### Halo catalogue (from v40.x JSONs)
 | Halo | σ_v (km/s) | Citation | Status |
 |---|---|---|---|
-| Segue 1 | 3.7 | Simon+ 2011 | TO VERIFY (DOI 10.1088/0004-637X/733/1/46 likely) |
-| Tucana II | 8.2 | Walker+ 2016 | TO VERIFY |
-| Hercules | 3.7 | Adén+ 2009 | TO VERIFY |
-| Draco | 10.6 | Walker+ 2007 | TO VERIFY |
-| Ursa Minor | 9.5 | Walker+ 2007 | TO VERIFY |
-| Sculptor | 9.2 | Walker+ 2007 | TO VERIFY |
-| Carina | 6.6 | Walker+ 2007 | TO VERIFY |
-| Bootes I | 6.5 | (not cited explicitly) | TO VERIFY |
-| Triangulum II | 5.6 | (not cited explicitly) | TO VERIFY |
-| Leo T | 7.5 | (not cited explicitly) | TO VERIFY |
-| Cloud-9 | 5.1 (= 12/2.355) | Anand+ 2025 | TO VERIFY |
+| Segue 1 | 3.7 | Simon+ 2011 (ApJ 733, 46) | TO VERIFY (DOI 10.1088/0004-637X/733/1/46 likely) |
+| Tucana II | 8.2 | Walker+ 2016 (ApJ 819, 53) | TO VERIFY (no arXiv) |
+| Hercules | 3.7 | Adén+ 2009 (ApJL 706, L150) | TO VERIFY (likely thesis-only) |
+| Draco | 10.6 | Walker 2012 (Living Review) — NOT Walker+ 2007 (ApJL 667, L53) | **BUG (v40.15)**: v40.5 doc said "Walker+ 2007" but that paper covers Carina, Fornax, Sculptor, Sextans — NOT Draco |
+| Ursa Minor | 9.5 | Walker 2012 (Living Review) — NOT Walker+ 2007 (ApJL 667, L53) | **BUG (v40.15)**: same as Draco |
+| Sculptor | 9.2 | Walker+ 2007 (ApJL 667, L53) | OK |
+| Carina | 6.6 | Walker+ 2007 (ApJL 667, L53) | OK |
+| Bootes I | 6.5 | Koposov+ 2011 (ApJ 736, 146) | TO VERIFY |
+| Triangulum II | 5.6 | Kirby+ 2017 (ApJ 838, 50) | TO VERIFY (may have binary contamination) |
+| Leo T | 7.5 | Ryan-Weber+ 2008 (ApJ 678, 833) — HI gas + stellar | TO VERIFY |
+| Cloud-9 | 5.1 (= 12/2.355) | Anand+ 2025 (ApJL 993, L55, arXiv:2508.20157) | TO VERIFY |
 
 **WARNING**: Bootes I, Triangulum II, Leo T σ_v values are used in v40.5 / v40.10 IN BAND analysis but no specific citation is given. **TO VERIFY** which Walker paper / Martin paper these come from.
 
@@ -152,10 +152,10 @@ f_MB(v) = 4π v² exp(-(v/v_0)²) / (sqrt(π) v_0³)
 | Wrong author list for Yang+ 2024 ("Nadler, Yu, Zhong" vs "Jiang, Benson, Zhong, Mace, Du, Zeng, Peter, Fischer") | HIGH | v40.4 Loop 1 code | Fixed in v40.13 |
 | "Yang+ 2024 eq. 2.2" citation likely wrong (v31 says eqs. 4, 19, 20) | MED | v40.4, v40.7, v40.9, v40.12 | Patch in v40.13 to "eq. 19 or 20" |
 | Bootes I, Tri II, Leo T σ_v have no explicit citation | MED | v40.5, v40.10, v40.12 | Add citation in v40.13 |
-| F_H_CANONICAL = 0.297 is anomalous (standard Y_p ≈ 0.75) | MED | scripts/constants.py | Verify in v40.13 |
+| F_H_CANONICAL = 0.297 in scripts/constants.py | NOT A BUG (v40.15) | verified | This is a **project-internal phenomenological fit** (Phase G7), not the standard cosmological Y_p ≈ 0.75. The docstring says: "σ_eff = f_H² × σ/m with f_H=0.297" (paper §2.6 "σ_eff formula (R88)"). The discrepancy with Y_p is because they're different quantities: F_H is an empirical f_H that modulates σ_eff vs σ_HH, not a BBN mass fraction. R88(88) caveat: project's own N-body Phase G9 found f_H drop 0.94-1.01×, a flat f_H(r). |
 | v_0 = sqrt(2)·σ_v_los convention: standard is v_0² = 2·σ_v² (consistent) | OK | (no fix needed) | — |
 | Andrade+ 2022 MNRAS 510, 54 — no arXiv ID, no DOI | LOW | v40.11 doc | Add in v40.13 |
-| Kaplinghat+ 2016 — no arXiv ID, no DOI; possibly conflated with Tulin+ 2013/2018 | LOW | v40.11 doc, constants.py | Add in v40.13 |
+| Kaplinghat+ 2016 — no arXiv ID, no DOI; possibly conflated with Tulin+ 2013/2018 | LOW (v40.15) | v40.11 doc, constants.py | VERIFIED: Kaplinghat, Tulin, Yu 2016 is PRL 116, 041302, arXiv:1508.03339 ("Dark Matter Halos as Particle Colliders"). 797 citations (close to v40.11's "~600" claim, off by 200). The other key review is Tulin & Yu 2018, Phys. Rep. 730, 1-57, arXiv:1705.02358 (1100+ citations, already downloaded). Both references are real and worth citing; the v40.11 doc's "~600 citations" should be updated to ~800 for the PRL or to ~1100 for the Phys. Rep. |
 | KAPPA_C_ANALYTIC = 1.6798 cited to Tamm 1947 ZhETF 17, 884 — modern review should cross-check | LOW | constants.py | Verify in v40.13 |
 
 ---
