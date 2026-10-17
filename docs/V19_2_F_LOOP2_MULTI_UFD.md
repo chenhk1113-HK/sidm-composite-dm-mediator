@@ -1,8 +1,20 @@
-# v40.5 — Multi-UFD σ/m IN BAND check at canonical α_D (Loop 2)
+# v40.10 — Loop 2 boundary sensitivity fix (regenerates v40.5 IN BAND JSON, qualifies "all 10 IN BAND" claim)
 
 **Date:** 2026-10-17
 **Branch:** `wip/v19.2-F-init`
-**Tag:** `v19.2-F-Phase3-CLOSED-r40.5` (pending)
+**Tag:** `v19.2-F-Phase3-CLOSED-r40.10` (pending)
+**Supersedes:** `v40.5` for IN BAND numerical sets (qualitative conclusion unchanged)
+
+---
+
+## v40.10 fix (Nemotron 120B review from v40.9 framework)
+
+The v40.5 JSON's IN BAND sets had boundary sensitivity at the upper edge (σ_eff/174 = 2.0): 9/10 halos differed by 1 element from independent recomputation. v40.10:
+1. Regenerates the JSON with controller's exact IN BAND sets (avoiding human transcription)
+2. Adds `min_boundary_margin` per halo (so future ±0.1 dex α_D shifts are visible before flipping a set)
+3. Qualifies the "all 10 IN BAND" headline: every halo has ≥5 non-boundary IN widths, robust to boundary shifts
+
+**Qualitative conclusion unchanged:** all 10 UFD/dSph halos are IN BAND at SOME Γ/ρ window in [5, 12]. The "look-elsewhere" concern is unchanged: 10 halos × ~10 non-boundary IN widths = ~100 opportunities, so the "always succeeds" result is expected and not surprising.
 
 ---
 
