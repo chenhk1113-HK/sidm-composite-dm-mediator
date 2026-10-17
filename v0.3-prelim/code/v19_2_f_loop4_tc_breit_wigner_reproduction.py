@@ -31,7 +31,10 @@ Method (per LOOP4 doc):
   - rho_eff = rho_s, r_eff = r_s (Nemotron Q2 MEDIUM: sensitivity tested
     below via rho(<r_s)).
 
-Reference: Yang+ 2024 (arXiv:2405.10393) eq. 2.2.
+Reference: Yang+ 2024 (arXiv:2305.05067) MNRAS 533, 4007 (doi:10.1093/mnras/stae2038).
+Note: this script originally cited (arXiv:2405.10393) which is a Navier-Stokes
+math paper — fixed in v40.14. See v40.4 → v40.13 for the prior wrong citation
+(arXiv:2305.16176 = "Parametric SIDM Halo Model").
 """
 from __future__ import annotations
 import json

@@ -1,0 +1,13 @@
+# Papers directory — local-only, not tracked in git
+# These PDFs are downloaded from arXiv and live in:
+#   docs/papers/verified/*.pdf  (5 files, ~28 MB)
+#   docs/papers/to_verify/*.pdf (8 files, ~34 MB)
+# Total: ~62 MB
+#
+# Re-run `bash docs/papers/download_papers.sh` to re-download.
+#
+# The markdown summaries (docs/papers/**/*.md) ARE tracked in git.
+
+*.pdf
+!download_papers.sh
+!00_HOME.md

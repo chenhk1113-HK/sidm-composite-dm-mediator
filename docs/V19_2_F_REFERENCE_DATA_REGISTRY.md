@@ -147,8 +147,9 @@ f_MB(v) = 4π v² exp(-(v/v_0)²) / (sqrt(π) v_0³)
 
 | Bug | Severity | Location | Fix |
 |---|---|---|---|
-| Wrong arXiv ID for Yang+ 2024 (2305.16176 vs 2305.05067) | HIGH | v40.4 Loop 1 code | Patch in v40.13 |
-| Wrong author list for Yang+ 2024 ("Nadler, Yu, Zhong" vs "Jiang, Benson, Zhong, Mace, Du, Zeng, Peter, Fischer") | HIGH | v40.4 Loop 1 code | Patch in v40.13 |
+| Wrong arXiv ID for Yang+ 2024 (2305.16176 vs 2305.05067) | HIGH | v40.4 Loop 1 code | Fixed in v40.13 |
+| Wrong arXiv ID for Yang+ 2024 (2405.10393 vs 2305.05067) — 2405.10393 is a Navier-Stokes math paper | HIGH | v40.9 Loop 4 reproduction script | Fixed in v40.14 |
+| Wrong author list for Yang+ 2024 ("Nadler, Yu, Zhong" vs "Jiang, Benson, Zhong, Mace, Du, Zeng, Peter, Fischer") | HIGH | v40.4 Loop 1 code | Fixed in v40.13 |
 | "Yang+ 2024 eq. 2.2" citation likely wrong (v31 says eqs. 4, 19, 20) | MED | v40.4, v40.7, v40.9, v40.12 | Patch in v40.13 to "eq. 19 or 20" |
 | Bootes I, Tri II, Leo T σ_v have no explicit citation | MED | v40.5, v40.10, v40.12 | Add citation in v40.13 |
 | F_H_CANONICAL = 0.297 is anomalous (standard Y_p ≈ 0.75) | MED | scripts/constants.py | Verify in v40.13 |
