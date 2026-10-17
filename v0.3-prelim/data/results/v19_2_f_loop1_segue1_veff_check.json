@@ -1,0 +1,114 @@
+{
+  "halo": "Segue 1 UFD",
+  "sigma_v_1d_kms_lit": 3.7,
+  "sigma_v_citation": "Simon+ 2011 (Segue 1 stellar kinematics)",
+  "alpha_D_used": 5.55e-06,
+  "alpha_D_citation": "Project-internal dynesty fit (Lyman-alpha + SPARC posterior), NOT from Cloud-9 paper",
+  "sigma_target_cm2_per_g": 174.0,
+  "m_rho_GeV": 5e-05,
+  "m_chi_GeV": 1.0,
+  "Gamma_over_m_rho_sweep": [
+    0.5,
+    20.0
+  ],
+  "in_band_criterion": "0.5 < ratio <= 2.0",
+  "methodologies": {
+    "V_max_pointwise": {
+      "in_band_set_Gamma_over_m_rho": [
+        6.0,
+        6.5,
+        7.0,
+        7.5,
+        8.0,
+        8.5,
+        9.0,
+        9.5,
+        10.0,
+        10.5,
+        11.0,
+        11.5
+      ]
+    },
+    "sqrt2sigma_pointwise": {
+      "in_band_set_Gamma_over_m_rho": [
+        6.5,
+        7.0,
+        7.5,
+        8.0,
+        8.5,
+        9.0,
+        9.5,
+        10.0,
+        10.5,
+        11.0,
+        11.5,
+        12.0
+      ]
+    },
+    "sigma_v_los_pointwise": {
+      "in_band_set_Gamma_over_m_rho": [
+        6.5,
+        7.0,
+        7.5,
+        8.0,
+        8.5,
+        9.0,
+        9.5,
+        10.0,
+        10.5,
+        11.0,
+        11.5,
+        12.0,
+        12.5
+      ]
+    },
+    "velocity_weighted_mb": {
+      "in_band_set_Gamma_over_m_rho": [
+        6.0,
+        6.5,
+        7.0,
+        7.5,
+        8.0,
+        8.5,
+        9.0,
+        9.5,
+        10.0,
+        10.5,
+        11.0,
+        11.5,
+        12.0
+      ]
+    }
+  },
+  "common_in_band_set_all_methods": [
+    6.5,
+    7.0,
+    7.5,
+    8.0,
+    8.5,
+    9.0,
+    9.5,
+    10.0,
+    10.5,
+    11.0,
+    11.5
+  ],
+  "cloud9_reference_v40_2_in_band_set": [
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "cloud9_segue1_overlap": [
+    7,
+    8,
+    9,
+    10
+  ],
+  "verdict_consistency": {
+    "all_methods_agree_on_at_least_one_\u0393/\u03c1": true,
+    "in_band_sets_identical": false
+  },
+  "conclusion": "CRITICAL FINDING: At the canonical alpha_D=5.55e-6 (project-internal dynesty fit), Segue 1 IS IN BAND at the full Gamma/m_rho sweep. IN BAND set is consistent across all v_eff methodologies: roughly Gamma/m_rho in {6, 7, 8, 9, 10, 11, 12}. This OVERLAPS with the Cloud-9 v40.2 IN BAND set {6, 7, 8, 9, 10} at Gamma/m_rho in [7, 8, 9, 10]. The existing project analysis in v19_2_e_b_per_halo_gravothermal.py uses pointwise sigma_m at v_eff = V_max = 8.0 km/s WITHOUT a Gamma/m_rho sweep, so it does NOT test the full resonance window and would miss this IN BAND verdict. Implication: Segue 1 and Cloud-9 are BOTH consistent with the canonical alpha_D at the SAME resonance widths \u2014 a non-trivial cross-check. (Note: per v40.3 the verdict is fragile to alpha_D shifts of +/- 0.1 dex, so the IN BAND set shifts correspondingly.)"
+}
