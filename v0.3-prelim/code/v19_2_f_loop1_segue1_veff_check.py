@@ -55,7 +55,13 @@ Canonical values (locked, not modified):
 References:
   Simon+ 2011 (Segue 1 stellar kinematics, sigma_v = 3.7 km/s)
   Chu, Hambye, Tytgat 2018 (M2 model, arXiv:1712.02521)
-  Yang, Nadler, Yu, Zhong 2024 (gravothermal model, arXiv:2305.16176)
+  Yang, Jiang, Benson, Zhong, Mace, Du, Zeng, Peter, Fischer 2024
+    (gravothermal/isothermal cross-section comparison, MNRAS 533, 4007,
+    arXiv:2305.05067, doi:10.1093/mnras/stae2038).
+    NOTE: v40.4 originally cited arXiv:2305.16176 with author list
+    "Yang, Nadler, Yu, Zhong" — both are wrong. 2305.16176 is
+    "A Parametric Model for SIDM Halos" (Yang+ 2024, JCAP 02 (2024) 032),
+    a different paper. Correct citation is 2305.05067 (Cloud-9).
 """
 from __future__ import annotations
 import importlib.util
@@ -421,7 +427,10 @@ def main():
             "references": [
                 "Simon+ 2011 (Segue 1 stellar kinematics, sigma_v = 3.7 km/s)",
                 "Chu, Hambye, Tytgat 2018 (M2 model, arXiv:1712.02521)",
-                "Yang, Nadler, Yu, Zhong 2024 (gravothermal model, arXiv:2305.16176)",
+                "Yang, Jiang, Benson, Zhong, Mace, Du, Zeng, Peter, Fischer 2024 "
+                "(gravothermal/isothermal cross-section comparison, MNRAS 533, 4007, "
+                "arXiv:2305.05067, doi:10.1093/mnras/stae2038; "
+                "v40.4 incorrectly cited 2305.16176)",
                 "v19.2-F v40.1/v40.2 Cloud-9 re-baseline (sigma_v correction lesson)",
             ],
         },
