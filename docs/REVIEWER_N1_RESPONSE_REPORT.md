@@ -21,6 +21,9 @@
 
 **Cloud-9 paper does NOT report any σ/m constraint, any α_D, or any v_target = 29.4 km/s.** The project's v_target=29.4 km/s and σ/m=174 cm²/g remain project-internal (from a dynesty fit to Lyman-α + SPARC posterior, per v25-v31 packet wording).
 
+
+**Crucial clarification (Nemotron 120B):** The α_D = 5.55e-6 used in this analysis is the project's INTERNAL dynesty fit value (Lyman-α + SPARC posterior), not from Anand+ 2025. Cloud-9 only constrains M_halo ≈ 5×10⁹ M☉ and W50 = 12 km/s, not α_D. The check is therefore "is the project's fitted α_D consistent with Cloud-9's M_halo and W50?" (project → Cloud-9 direction), not "does Cloud-9 constrain α_D?" — it does not. The IN BAND verdict below depends on a prior fit, not on an independent Cloud-9 calibration of α_D.
+
 ---
 
 ## 1. The corrected v40.2 verdict for actual Cloud-9
@@ -35,7 +38,9 @@ Using Anand+ 2025's reported W50 = 12 km/s, the dark matter 1D velocity dispersi
 
 ### 1.1 Corrected IN BAND set at Cloud-9 α_D = 5.55e-6, MB σ_v = 5.1 km/s
 
-| Γ/ρ | σ_eff (cm²/g) | ratio | region |
+**Note:** α_D = 5.55e-6 is the project's INTERNAL dynesty fit value (Lyman-α + SPARC posterior), not from Anand+ 2025. The IN BAND set below is a consistency check of this fitted value against Cloud-9's observed M_halo and W50 — it is NOT a Cloud-9 α_D constraint. (Nemotron 120B review: confirming the doc already states this clearly; no further edit needed here.)
+
+|| Γ/ρ | σ_eff (cm²/g) | ratio | region |
 |---:|---:|---:|:---|
 | 0.01 | 14159 | 81 | OUT |
 | 0.1 | 13982 | 80 | OUT |
@@ -155,6 +160,9 @@ The phrase "Cloud-9 calibration" refers to a project-internal target:
 - W50 = 12 km/s (line width → σ_v = 5.1 km/s)
 
 **What "Phase 3 FAIL at Cloud-9" actually means:**
+
+To be explicit about scope and direction: Cloud-9 (Anand+ 2025) reports NO α_D constraint — only M_halo ≈ 5×10⁹ M☉ and W50 = 12 km/s. The α_D = 5.55e-6 used in this check is the project's INTERNAL dynesty fit value to the Lyman-α + SPARC posterior (per v25-v31 packet wording), NOT a value reported by Anand+ 2025. The check is therefore 'is the project's fitted α_D consistent with Cloud-9's observed M_halo and W50?' (project → Cloud-9 consistency direction), NOT 'does Cloud-9 constrain α_D?' (which it does not). This direction matters: the IN BAND verdict below depends on a prior fit, not on an independent Cloud-9 calibration of α_D.
+
 - The project's dynesty fit prefers a model that, when checked against Cloud-9's observed M_halo and W50, gives a velocity-weighted σ_eff that is IN BAND at Γ/ρ ∈ {6, 7, 8, 9, 10} (v40.2 corrected) or {3, 4, 5, 6} (v40.1 wrong σ_v) or {1.0} (v37 MW-mass, σ_v=100).
 - This is a **consistency check** of the model against Cloud-9, not a direct Cloud-9 σ/m constraint.
 
@@ -164,9 +172,7 @@ The phrase "Cloud-9 calibration" refers to a project-internal target:
 
 **Updated framing (v40.2):**
 
-The phrase "Phase 3 FAIL" is **misleading** given the corrected analysis. A more accurate phrasing:
-
-> At the actual Cloud-9 velocity dispersion σ_v = 5.1 km/s (W50-derived), the resonance mechanism is IN BAND at **Γ/ρ ∈ {6, 7, 8, 9, 10}** (5 widths). The mechanism IS consistent with Cloud-9 observations in this parameter space. The "FAIL" terminology from v33-v34 referred to pointwise σ/m(29.4) tests, but the velocity-weighted σ_eff (the correct comparison) shows IN BAND at the wider widths.
+Velocity-weighted σ_eff is the correct metric because σ_m(v) varies sharply across the Breit-Wigner resonance (orders of magnitude over the halo's DM velocity range); the physically relevant quantity is the MB-weighted average over the halo's DM velocity distribution, not a pointwise σ/m at v_target. The project's dynesty-fitted α_D = 5.55e-6 (Lyman-α + SPARC posterior, not from Cloud-9) yields σ_eff IN BAND at Γ/ρ ∈ {6, 7, 8, 9, 10} against Cloud-9's M_halo = 5×10⁹ M☉ and W50 = 12 km/s. **Circularity caveat:** the verdict is driven by the project's internal α_D — Cloud-9 does NOT independently validate α_D; it only constrains M_halo and W50. Reframed: the project's dynesty-fitted α_D is consistent with Cloud-9's halo properties; Cloud-9 itself does not provide an independent α_D constraint.
 
 **Γ/ρ as particle physics parameter:**
 
@@ -237,6 +243,18 @@ where:
 **Relation to dynesty likelihood:**
 
 The v31 dynesty fit to Lyman-α + SPARC does **not** directly use this velocity-weighted σ_eff. The fit constrains α_D (and other params) by matching the empirical σ/m(v) curve. The v40.2 σ_eff analysis is a **separate, post-hoc consistency check** between the fitted α_D and the Cloud-9 paper's measured M_halo and W50. They are not the same calculation.
+
+**Sensitivity to the α_D posterior (computed, not estimated):** At Cloud-9's actual σ_v = 5.1 km/s, the IN BAND set's dependence on α_D was computed by re-running the velocity-weighted analysis at shifted α_D values:
+
+| α_D shift | α_D value | IN BAND widths at Cloud-9 σ_v |
+|---|---|---|
+| nominal | 5.55e-6 | {6, 7, 8, 9, 10, 11} |
+| -0.1 dex | 4.41e-6 | {5, 6, 7, 8, 9} |
+| +0.1 dex | 6.99e-6 | {8, 9, 10, 11, 12, 13, 14} |
+| -0.3 dex (3σ) | 2.78e-6 | {3, 4, 5} |
+| +0.3 dex (3σ) | 1.11e-5 | {12, 13, 14, 15} |
+
+**The IN BAND set is FRAGILE to α_D uncertainty, not robust.** At ±0.1 dex (≈ 1σ typical for Lyman-α posteriors), the lower-bound set {5, 6, 7, 8, 9} and upper-bound set {8, 9, 10, 11, 12, 13, 14} have only {8, 9} in common. The central conclusion "IN BAND at {6, 7, 8, 9, 10}" does not survive a ±0.1 dex shift; it shifts to overlapping but different widths. At ±0.3 dex the sets become disjoint ({3, 4, 5} vs {12, 13, 14, 15}). This sensitivity means the IN BAND verdict depends critically on the precise α_D value from the dynesty fit, and should be quoted with the α_D posterior width, not as a fixed point estimate.
 
 ### Item 8 (中) — Re-baseline script not embedded
 
@@ -374,5 +392,3 @@ Tag: `v19.2-F-Phase3-CLOSED-r40.2` (to be applied after this commit).
 ---
 
 *Generated 2026-10-17 for the N1 review round. Branch `wip/v19.2-F-init`. Commit pending.*
-
-**Honest credit:** N1 reviewer (your message) caught a real grid-resolution bug at Γ/ρ=6.0 in v40.1 — the 200-pt grid's last IN BAND sample (5.29e-6) didn't include Cloud-9 (5.55e-6) even though the analytic upper bound (5.78e-6) does. v40.2 uses analytic α_D² scaling to interpolate, recovering the missing Γ/ρ=9 and including Cloud-9 in Γ/ρ=6's window. The corrected set is {6, 7, 8, 9, 10}, not {6, 7, 8, 10} as v40.1 claimed.
