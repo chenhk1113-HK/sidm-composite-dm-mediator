@@ -721,9 +721,69 @@ def test_v40_1_rebaselined_in_band_set():
           f"v40.1 200-pt committed set: {{6, 7, 8, 10}})")
 
 
+def test_v40_2_window_boundary_no_undersampling():
+    """v40.2 N1 item 1: verify the window boundary at Gamma/rho=6.0 does NOT
+    exclude Cloud-9 (5.55e-6) due to grid undersampling.
+
+    v40.1 used 200-pt grid which gave upper bound 5.29e-6 (last IN BAND
+    sample), excluding Cloud-9. The analytic alpha_D^2 scaling gives
+    true upper bound 5.79e-6, which INCLUDES Cloud-9.
+
+    This test fails if v40.1's 200-pt grid behavior is reproduced.
+    """
+    import importlib.util
+    import math
+    import os
+    _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+    _TEST_DIR = _SCRIPT_DIR
+    _helpers = _load_module_from_path(
+        "v19_2_f_priority1_resonance_helpers_v402b",
+        os.path.join(_TEST_DIR, "v0.3-prelim", "code", "v19_2_f_priority1_resonance_helpers.py"),
+    )
+    sigma_m_resonance = _helpers.sigma_m_resonance
+    M_RHO_GEV = 0.05e-3
+    SIGMA_TARGET = 174.0
+    ALPHA_D_CLOUD9 = 5.55e-6
+
+    N_V = 50
+    V_GRID = [10 ** (math.log10(0.5) + (math.log10(1000) - math.log10(0.5)) * i / (N_V - 1))
+             for i in range(N_V)]
+
+    def mb_f(v, sigma_v, v0):
+        return 4 * math.pi * v ** 2 * math.exp(-(v / v0) ** 2) / (math.sqrt(math.pi) * v0 ** 3)
+
+    sv = 5.1
+    v0 = math.sqrt(2) * sv
+    f_raw = [mb_f(v, sv, v0) for v in V_GRID]
+    norm = sum(0.5 * (f_raw[i] + f_raw[i + 1]) * (V_GRID[i + 1] - V_GRID[i])
+              for i in range(N_V - 1))
+    f_grid = [f / norm for f in f_raw]
+
+    def sigma_eff(a, gf):
+        Gamma_rho = gf * M_RHO_GEV
+        sg = [sigma_m_resonance(v, a, M_RHO_GEV, Gamma_rho) for v in V_GRID]
+        return sum(0.5 * (sg[i] * f_grid[i] + sg[i + 1] * f_grid[i + 1]) * (
+            V_GRID[i + 1] - V_GRID[i]
+        ) for i in range(N_V - 1))
+
+    # At Gamma/rho=6.0, ratio at 5.55e-6 must be 1.84 (IN BAND)
+    se_c9 = sigma_eff(ALPHA_D_CLOUD9, 6.0)
+    r_c9 = se_c9 / SIGMA_TARGET
+    assert 0.5 < r_c9 <= 2.0, f"Gamma/rho=6.0 at 5.55e-6 should be IN BAND, got r={r_c9}"
+    # And the analytic upper bound (via alpha^2 scaling) must be > 5.55e-6
+    se_ref = sigma_eff(1e-5, 6.0)
+    r_ref = se_ref / SIGMA_TARGET
+    alpha_hi_analytic = 1e-5 * math.sqrt(2.0 / r_ref)
+    assert alpha_hi_analytic > ALPHA_D_CLOUD9, \
+        f"Analytic upper bound {alpha_hi_analytic} should be > 5.55e-6 (Cloud-9)"
+    print(f"PASS: test_v40_2_window_boundary_no_undersampling  "
+          f"(Gamma/rho=6.0: r(5.55e-6)={r_c9:.4f} (IN BAND), "
+          f"analytic upper bound={alpha_hi_analytic:.3e} > 5.55e-6)")
+
+
 if __name__ == "__main__":
     print("=" * 75)
-    print("v31 post-sweep tests (r33 + r34 + r35 + r37 analytic + consistency + v40.1 rebaseline)")
+    print("v31 post-sweep tests (r33 + r34 + r35 + r37 analytic + consistency + v40.1 + v40.2)")
     print("=" * 75)
     print()
     test_alpha_d_squared_scaling()
@@ -740,5 +800,6 @@ if __name__ == "__main__":
     test_v37_cloud9_point_in_band_consistency()
     test_v40_1_cloud9_sigma_v_derivation()
     test_v40_1_rebaselined_in_band_set()
+    test_v40_2_window_boundary_no_undersampling()
     print()
     print("ALL TESTS PASSED")

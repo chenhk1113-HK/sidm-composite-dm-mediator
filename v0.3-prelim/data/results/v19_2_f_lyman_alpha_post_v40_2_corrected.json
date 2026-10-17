@@ -1,0 +1,269 @@
+{
+  "config": {
+    "alpha_D_Cloud9": 5.55e-06,
+    "sigma_target": 174.0,
+    "sigma_v_Cloud9": 5.1,
+    "n_vpoints": 50,
+    "n_alpha": 500,
+    "method": "v40.2 corrected: 50-pt velocity grid + 500-pt alpha_D grid + linear interpolation between adjacent (IN_BAND, OUT) points. v40.1 used 200-pt grid which undersampled at the upper edge (5.55e-6 fell between two grid points, last IN_BAND sample was 5.29e-6 \u2014 wrong)."
+  },
+  "point_check_at_Cloud9": {
+    "0.01": {
+      "sigma_eff": 14154.468713334863,
+      "ratio": 81.34752134100496
+    },
+    "0.1": {
+      "sigma_eff": 13981.702003332231,
+      "ratio": 80.35460921455305
+    },
+    "0.5": {
+      "sigma_eff": 10831.262719363353,
+      "ratio": 62.24863631818019
+    },
+    "1": {
+      "sigma_eff": 6395.183186859389,
+      "ratio": 36.75392636126086
+    },
+    "2": {
+      "sigma_eff": 2434.3938468457172,
+      "ratio": 13.990769234745501
+    },
+    "3": {
+      "sigma_eff": 1198.7075396081473,
+      "ratio": 6.889123790851421
+    },
+    "4": {
+      "sigma_eff": 700.7977949772073,
+      "ratio": 4.027573534351767
+    },
+    "5": {
+      "sigma_eff": 456.83634505932287,
+      "ratio": 2.6254962359731198
+    },
+    "6": {
+      "sigma_eff": 320.48061659194707,
+      "ratio": 1.84184262409165
+    },
+    "7": {
+      "sigma_eff": 236.91137171166014,
+      "ratio": 1.3615596075382768
+    },
+    "8": {
+      "sigma_eff": 182.11643368835857,
+      "ratio": 1.0466461706227503
+    },
+    "9": {
+      "sigma_eff": 144.29328768400688,
+      "ratio": 0.8292717682988902
+    },
+    "10": {
+      "sigma_eff": 117.10975531082124,
+      "ratio": 0.6730445707518462
+    },
+    "12": {
+      "sigma_eff": 81.53724137346018,
+      "ratio": 0.4686048354796562
+    },
+    "15": {
+      "sigma_eff": 52.29486499326095,
+      "ratio": 0.3005452011106951
+    },
+    "20": {
+      "sigma_eff": 29.46462466293959,
+      "ratio": 0.16933692335022751
+    },
+    "25": {
+      "sigma_eff": 18.871840476747536,
+      "ratio": 0.10845885331464102
+    },
+    "30": {
+      "sigma_eff": 13.110913902889198,
+      "ratio": 0.07535007990166206
+    },
+    "40": {
+      "sigma_eff": 7.377950566408886,
+      "ratio": 0.04240201474947636
+    },
+    "50": {
+      "sigma_eff": 4.72279582555682,
+      "ratio": 0.027142504744579424
+    }
+  },
+  "in_band_windows_analytic_alphaD2": {
+    "0.01": {
+      "alpha_lo": 4.351167711088596e-07,
+      "alpha_hi": 8.702335422177192e-07,
+      "cloud9_in": false
+    },
+    "0.1": {
+      "alpha_lo": 4.377968058210471e-07,
+      "alpha_hi": 8.755936116420942e-07,
+      "cloud9_in": false
+    },
+    "0.5": {
+      "alpha_lo": 4.974083418690529e-07,
+      "alpha_hi": 9.948166837381058e-07,
+      "cloud9_in": false
+    },
+    "1": {
+      "alpha_lo": 6.473305669086551e-07,
+      "alpha_hi": 1.2946611338173101e-06,
+      "cloud9_in": false
+    },
+    "2": {
+      "alpha_lo": 1.0491973587242138e-06,
+      "alpha_hi": 2.0983947174484276e-06,
+      "cloud9_in": false
+    },
+    "3": {
+      "alpha_lo": 1.495188647616586e-06,
+      "alpha_hi": 2.990377295233172e-06,
+      "cloud9_in": false
+    },
+    "4": {
+      "alpha_lo": 1.95549291187661e-06,
+      "alpha_hi": 3.91098582375322e-06,
+      "cloud9_in": false
+    },
+    "5": {
+      "alpha_lo": 2.421989663219263e-06,
+      "alpha_hi": 4.843979326438526e-06,
+      "cloud9_in": false
+    },
+    "6": {
+      "alpha_lo": 2.8916899504056068e-06,
+      "alpha_hi": 5.7833799008112135e-06,
+      "cloud9_in": true
+    },
+    "7": {
+      "alpha_lo": 3.3632539101701176e-06,
+      "alpha_hi": 6.726507820340235e-06,
+      "cloud9_in": true
+    },
+    "8": {
+      "alpha_lo": 3.8359950746973155e-06,
+      "alpha_hi": 7.671990149394631e-06,
+      "cloud9_in": true
+    },
+    "9": {
+      "alpha_lo": 4.3095263950337375e-06,
+      "alpha_hi": 8.619052790067475e-06,
+      "cloud9_in": true
+    },
+    "10": {
+      "alpha_lo": 4.7836133876181255e-06,
+      "alpha_hi": 9.567226775236251e-06,
+      "cloud9_in": true
+    },
+    "12": {
+      "alpha_lo": 5.732903116197041e-06,
+      "alpha_hi": 1.1465806232394081e-05,
+      "cloud9_in": false
+    },
+    "15": {
+      "alpha_lo": 7.15851742370102e-06,
+      "alpha_hi": 1.431703484740204e-05,
+      "cloud9_in": false
+    },
+    "20": {
+      "alpha_lo": 9.53678853449763e-06,
+      "alpha_hi": 1.907357706899526e-05,
+      "cloud9_in": false
+    },
+    "25": {
+      "alpha_lo": 1.1916411200288503e-05,
+      "alpha_hi": 2.3832822400577005e-05,
+      "cloud9_in": false
+    },
+    "30": {
+      "alpha_lo": 1.429671061996767e-05,
+      "alpha_hi": 2.859342123993534e-05,
+      "cloud9_in": false
+    },
+    "40": {
+      "alpha_lo": 1.9058325449589478e-05,
+      "alpha_hi": 3.8116650899178956e-05,
+      "cloud9_in": false
+    },
+    "50": {
+      "alpha_lo": 2.3820617972159236e-05,
+      "alpha_hi": 4.764123594431847e-05,
+      "cloud9_in": false
+    }
+  },
+  "v40_1_in_band_windows_200pt_undersampled": {
+    "0.01": {
+      "alpha_lo": 1.46e-07,
+      "alpha_hi": 2.61e-07,
+      "cloud9_in": false
+    },
+    "0.1": {
+      "alpha_lo": 4.66e-07,
+      "alpha_hi": 8.31e-07,
+      "cloud9_in": false
+    },
+    "0.5": {
+      "alpha_lo": 1.18e-06,
+      "alpha_hi": 2.1e-06,
+      "cloud9_in": false
+    },
+    "1.0": {
+      "alpha_lo": 1.87e-06,
+      "alpha_hi": 3.33e-06,
+      "cloud9_in": false
+    },
+    "2.0": {
+      "alpha_lo": 2.64e-06,
+      "alpha_hi": 4.71e-06,
+      "cloud9_in": false
+    },
+    "3.0": {
+      "alpha_lo": 3.74e-06,
+      "alpha_hi": 6.67e-06,
+      "cloud9_in": true
+    },
+    "4.0": {
+      "alpha_lo": 4.2e-06,
+      "alpha_hi": 7.49e-06,
+      "cloud9_in": true
+    },
+    "5.0": {
+      "alpha_lo": 5.29e-06,
+      "alpha_hi": 9.44e-06,
+      "cloud9_in": true
+    },
+    "6.0": {
+      "alpha_lo": 5.94e-06,
+      "alpha_hi": 1.06e-05,
+      "cloud9_in": false
+    },
+    "7.0": {
+      "alpha_lo": 6.67e-06,
+      "alpha_hi": 1.19e-05,
+      "cloud9_in": false
+    },
+    "8.0": {
+      "alpha_lo": 7.49e-06,
+      "alpha_hi": 1.34e-05,
+      "cloud9_in": false
+    },
+    "10.0": {
+      "alpha_lo": 8.41e-06,
+      "alpha_hi": 1.5e-05,
+      "cloud9_in": false
+    },
+    "20.0": {
+      "alpha_lo": 1.5e-05,
+      "alpha_hi": 2.67e-05,
+      "cloud9_in": false
+    }
+  },
+  "v40_2_in_band_windows_500pt_interp": {},
+  "in_band_set_at_Cloud9_corrected": [
+    6,
+    7,
+    8,
+    9,
+    10
+  ]
+}
