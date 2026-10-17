@@ -34,6 +34,8 @@ This is the canonical source for paper authentication. When a new loop uses a va
 - **Sánchez Almeida+ 2025** — "Constraints on dark matter models from the stellar cores observed in ultra-faint dwarf galaxies: Self-interacting dark matter." arXiv:2510.05682. A&A 704, A210 (2025). DOI: 10.1051/0004-6361/202557040. **STATUS: VERIFIED**.
 - **Jee, Park, Lee 2026** — "A New Robust Constraint on the Self-interaction Cross-section of Dark Matter with Double Radio Relic Clusters." arXiv:2605.00093. Accepted ApJ. **STATUS: VERIFIED** (PDF read; abstract gives σ/m < 0.22 cm²/g at 68% CL, σ/m < 0.63 at 95% CL).
 - **Andrade+ 2022** — MNRAS 510, 54. "Stringent upper limit on dark matter self-interaction cross-section" (149 citations per v40.11 doc). **STATUS: TO VERIFY** (no arXiv ID in v40.11 doc; need full citation).
+- **SASHIMI-SIDM (Ando+ 2024)** — arXiv:2403.16633, JCAP02(2025)053. "Semi-analytical subhalo modelling for self-interacting dark matter at sub-galactic scales." GitHub: shinichiroando/sashimi-si. **STATUS: TO VERIFY (v40.16 added)** — relevance LOW for current v40.x (no substructure analysis); MEDIUM if scope expands to streams/JVAS/substructure.
+- **parametricSIDM (Yang et al.)** — github.com/DanengYang/parametricSIDM, accompanying arXiv:2305.16176. "A Parametric Model for SIDM Halos." **STATUS: NOT TO DOWNLOAD** — same paper as the v40.4 wrong-citation bug (arXiv:2305.16176, fixed in v40.13). Real paper but NOT the gravothermal/isothermal Cloud-9 reference (that's arXiv:2305.05067). Could supplement v40.7 gravothermal work; would need re-validation.
 
 ---
 
