@@ -27,9 +27,9 @@ For Born breakdown, see when Sommerfeld enhancement S(v) ≠ 1.
 
 REFERENCES:
     - Simonov, Yu. A. (1964)  "Bound states of Yukawa-type potential"
-    - Tulin, Yu, Zurek (2013)  arXiv:1306.5010  "Cold Dark Matter and Its Interactions"
+    - Tulin, Yu, Zurek (2013)  arXiv:1302.3898  "Beyond Collisionless Dark Matter" (v40.20 fix: was arXiv:1306.5010 = comet paper)
     - Kaplinghat, Tulin, Yu (2016)  "Dark Matter Self-Interactions"
-    - Chu, Hambye & Tytgat (2018)  [7]  M2 Sommerfeld/t-channel resonance
+    - Chu, Hambye & Tytgat (2012)  [7]  M2 Sommerfeld/t-channel resonance, arXiv:1112.0493 JCAP 05, 034 (v40.20 fix: was '2018' + arXiv:1712.02521)
     - ClawsGO #9, #10, #11 (v19.2-F Phase 3 cleanup)
     - Reviewer audit revV19_2_F.docx (2026-10-11)
 

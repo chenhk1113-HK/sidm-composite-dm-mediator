@@ -36,7 +36,7 @@ Same as v40.4 (Loop 1): velocity-weighted σ_eff = ∫f_MB(v; σ_v)·σ_m(v)dv o
 
 Halo σ_v values from literature (stellar kinematics unless noted):
 - Segue 1: σ_v = 3.7 km/s, Simon+ 2011
-- Tucana II: σ_v = 8.2 km/s, Walker+ 2016 (may have binary contamination)
+- Tucana II: σ_v = 8.6 km/s (Walker+ 2016, ApJ 819, 53; v40.20 corrected from "8.2" which was a small numerical slip)
 - Triangulum II: σ_v = 5.6 km/s, Kirby+ 2017 (binary contamination uncertain)
 - Hercules: σ_v = 3.7 km/s, Adén+ 2009
 - Leo T: σ_v = 7.5 km/s, Ryan-Weber+ 2008 (HI gas + stellar)

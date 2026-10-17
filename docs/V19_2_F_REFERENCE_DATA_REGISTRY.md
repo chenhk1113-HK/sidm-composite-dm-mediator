@@ -26,7 +26,15 @@ This is the canonical source for paper authentication. When a new loop uses a va
 - **Adén+ 2009** (Hercules σ_v = 3.7 km/s) — D. Adén et al. 2009, ApJL 706, L150. **STATUS: TO VERIFY DOI** (Hercules kinematics).
 - **Walker+ 2016** (Tucana II σ_v = 8.2 km/s) — M. G. Walker et al. 2016, ApJ 819, 53. **STATUS: TO VERIFY DOI** (Tucana II kinematics).
 - **Anand+ 2025** (Cloud-9 σ_v = 5.1 km/s) — cited in v40.1 re-baseline. **STATUS: TO VERIFY DOI** (Cloud-9 discovery paper).
-- **Read+ 2019** (M_halo for Segue 1) — J. I. Read et al. 2019, MNRAS 484, 1401 (CORE-NFW profile). **STATUS: TO VERIFY DOI**.
+- **Chu, Hambye, Tytgat 2012** (M2 model, vector portal) — arXiv:1112.0493, JCAP 05, 034. "The Four Basic Ways of Creating Dark Matter Through a Portal." **STATUS: VERIFIED (v40.20)** — previously v40.13/v40.14 docs had wrong year (2018) and wrong arXiv (1712.02521, which is a microscopy paper). Correct attribution: 2012, 1112.0493. ~499 citations.
+- **Tulin, Yu, Zurek 2013** (SIDM foundational review) — arXiv:1302.3898, PRD 87, 115007. "Beyond Collisionless Dark Matter: Particle Physics Dynamics for Dark Matter Halo Structure." **STATUS: VERIFIED (v40.20)** — previously v40.13/v40.14 had wrong arXiv (1306.5010, which is a comet paper). Correct attribution: 1302.3898.
+- **Tulin & Yu 2018** (Phys. Rep. 730) — arXiv:1705.02358. Comprehensive SIDM review, 1100+ citations. **STATUS: VERIFIED (v40.20)** — abstract confirms small-scale structure issues, N-body simulations, particle physics models, light mediator.
+- **Read+ 2019** (M_halo for Segue 1) — J. I. Read et al. 2019, MNRAS 484, 1401 (CORE-NFW profile). arXiv:1808.06634. **STATUS: VERIFIED (v40.20)** — abstract confirms ρDM(150 pc) = 10^8 M☉ kpc−3 dichotomy threshold.
+- **Andrade+ 2022** — MNRAS 510, 54. "Stringent upper limit on dark matter self-interaction cross-section." arXiv:2012.06611. **STATUS: VERIFIED (v40.20)** — abstract gives σ/m = 0.082+0.027/-0.021 cm²/g at v_rel = 1458+80/-81 km/s, 8 clusters analyzed.
+- **Benítez-Llambay, Navarro 2023** (Cloud-9 precursor) — arXiv:2309.03253, ApJ 956, 1. **STATUS: VERIFIED (v40.20)** — abstract gives M_200 ~ 5×10^9 M☉, c_NFW ~ 13, d ~ 4.7 Mpc, v ~ 300 km/s.
+- **Anand+ 2025** (Cloud-9 discovery) — arXiv:2508.20157, ApJL 993, L55. **STATUS: VERIFIED (v40.20)** — abstract confirms W_50 = 12 km/s, HI mass ~ 10^6 M☉, d ~ 4.4 Mpc, "leading RELHIC candidate".
+- **Walker+ 2016** (Tucana II) — arXiv:1511.06296, ApJ 819, 53. **STATUS: VERIFIED (v40.20)** — abstract gives σ_v = 8.6+4.4/-2.7 km/s (v19.2-F previously had 8.2, corrected in v40.20).
+- **Adén+ 2009** (Hercules) — arXiv:0910.1348, ApJL 706, L150. **STATUS: VERIFIED (v40.20)** — abstract gives σ_v = 3.72 km/s (v19.2-F uses 3.7, close enough).
 
 ### External SIDM literature (LOOP3)
 - **Gilman+ 2023** — D. Gilman, J. Zhong, J. Bovy (2023). "Constraining resonant dark matter self-interactions with strong gravitational lenses." arXiv:2207.13111. PRD 107, 103008. **STATUS: VERIFIED** (arXiv 2207.13111 retrieved 2026-10-17; title and abstract quote match).
@@ -74,9 +82,9 @@ This is the canonical source for paper authentication. When a new loop uses a va
 ### Halo catalogue (from v40.x JSONs)
 | Halo | σ_v (km/s) | Citation | Status |
 |---|---|---|---|
-| Segue 1 | 3.7 | Simon+ 2011 (ApJ 733, 46) | TO VERIFY (DOI 10.1088/0004-637X/733/1/46 likely) |
-| Tucana II | 8.2 | Walker+ 2016 (ApJ 819, 53) | TO VERIFY (no arXiv) |
-| Hercules | 3.7 | Adén+ 2009 (ApJL 706, L150) | TO VERIFY (likely thesis-only) |
+| Segue 1 | 3.7 | Simon+ 2011 (ApJ 733, 46, arXiv:1007.4198) | **VERIFIED (v40.20)** — paper abstract gives "3.7+1.4/-1.1 km/s" |
+| Tucana II | **8.6** (was 8.2) | Walker+ 2016 (ApJ 819, 53, arXiv:1511.06296) | **VERIFIED (v40.20)** — paper abstract gives "8.6+4.4/-2.7 km/s"; v40.20 corrected numerical slip |
+| Hercules | 3.7 (= 3.72) | Adén+ 2009 (ApJL 706, L150, arXiv:0910.1348) | **VERIFIED (v40.20)** — paper ADS gives "3.72 km/s"; KB had wrong "no arXiv" claim |
 | Draco | 10.6 | Walker 2012 (Living Review) — NOT Walker+ 2007 (ApJL 667, L53) | **BUG (v40.15)**: v40.5 doc said "Walker+ 2007" but that paper covers Carina, Fornax, Sculptor, Sextans — NOT Draco |
 | Ursa Minor | 9.5 | Walker 2012 (Living Review) — NOT Walker+ 2007 (ApJL 667, L53) | **BUG (v40.15)**: same as Draco |
 | Sculptor | 9.2 | Walker+ 2007 (ApJL 667, L53) | OK |

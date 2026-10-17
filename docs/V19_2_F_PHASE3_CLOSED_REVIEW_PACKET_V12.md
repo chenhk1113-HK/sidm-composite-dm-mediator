@@ -363,7 +363,7 @@ $$a_0(\kappa) = \frac{1}{(\kappa - 1.6798) \cdot m_\phi}$$
 
 1. Tulin, S.; Yu, H.-B.; Zurek, K. M. (2013). *Phys. Rev. D* **87**, 115007. arXiv:1302.3898. **Eq. 2.14**
 2. Kaplinghat, M.; Tulin, S.; Yu, H.-B. (2016). *Phys. Rev. D* **89**, 035009
-3. Chu, X.; Hambye, T.; Tytgat, M. (2018). *JCAP* 05, 034 (M2 model, vector ρ → Dirac fermion pair, Γ_ρ = α_D m_ρ/6)
+3. Chu, X.; Hambye, T.; Tytgat, M. (2012). *JCAP* 05, 034 (M2 model, vector ρ → Dirac fermion pair, Γ_ρ = α_D m_ρ/6; arXiv:1112.0493; v40.20 fix: was 2018)
 4. Schwinger, J. (1961). *Lectures on Particles and Field Theory* (Brandeis, Ch. 5: static-limit formula)
 5. **Kuo, T. K.-S. (1969).** *Annals of Physics* **52**, 244
 6. **Hulthen, L. (1948).** *Arkiv Mat. Astron. Fys.* **35A**, No. 25
