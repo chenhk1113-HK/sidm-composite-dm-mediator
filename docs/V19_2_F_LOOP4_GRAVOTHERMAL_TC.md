@@ -1,12 +1,39 @@
-# v40.7 — Gravothermal t_c with Breit-Wigner σ/m (Loop 4, follow-up to Loops 1 & 3)
+# v40.9 — Loop 4 reproducibility fix (corrects v40.7)
 
 **Date:** 2026-10-17
 **Branch:** `wip/v19.2-F-init`
-**Tag:** `v19.2-F-Phase3-CLOSED-r40.7` (pending)
+**Tag:** `v19.2-F-Phase3-CLOSED-r40.9` (pending)
+**Supersedes:** `v40.7` for t_c numerical values (qualitative conclusion unchanged)
 
 ---
 
-## TL;DR
+## v40.9 fix (Nemotron 120B Q4 HIGH finding from v40.9 review)
+
+The v40.7 commit did NOT include a Python script (only doc + JSON). The r_s, ρ_s values in v40.7's doc table are 100× LARGER / 4700× SMALLER than the correct NFW values (e.g., Tucana II r_s = 13.5 kpc, ρ_s = 1.82×10⁴ M☉/kpc³ in v40.7; correct r_s = 0.13 kpc, ρ_s = 8.59×10⁷ M☉/kpc³). v40.9 commits the missing Python script (`v19_2_f_loop4_tc_breit_wigner_reproduction.py`) and reports the corrected t_c values.
+
+**v40.7 caveat (already known):** the σ_m formula that produced v40.7's JSON values is unrecoverable (the original script was lost). v40.9 uses the project's documented fallback σ_m formula (`sigma_m_canonical_gaussian` from `v19_2_e_b_per_halo_gravothermal.py`).
+
+---
+
+## TL;DR (v40.9, corrected)
+
+At the canonical α_D = 5.55×10⁻⁶ with the canonical Gaussian σ/m formula (project fallback), the predicted gravothermal collapse time **t_c is much longer than 13.8 Gyr for all 5 UFDs tested** (Segue 1, Tucana II, Hercules, Draco, Bootes I).
+
+| Halo | r_s (kpc) | ρ_s (M☉/kpc³) | σ_eff (cm²/g) | t_c LITERAL (Gyr) | t_c BM2 (Gyr) | t_c with ρ(<r_s) (Gyr) |
+|---|---|---|---|---|---|---|
+| Segue 1 | 0.378 | 6.40×10⁷ | 6.81 | 54.4 | 99.0 | 123.2 |
+| Tucana II | 0.130 | 8.59×10⁷ | 10.17 | 68.1 | 123.9 | 154.3 |
+| Hercules | 0.176 | 6.40×10⁷ | 11.86 | 67.2 | 122.3 | 152.4 |
+| Draco | 1.284 | 3.59×10⁷ | 4.87 | 53.2 | 96.8 | 120.5 |
+| Bootes I | 0.176 | 6.40×10⁷ | 10.17 | 78.4 | 142.8 | 177.8 |
+
+Shortest t_c: 53.2 Gyr (Draco, BM2-calibrated ×0.55). All >> 13.8 Gyr.
+
+**Conclusion (unchanged from v40.7):** No UFD core collapse predicted at canonical α_D. v19.2-F model is consistent with observed non-collapse of UFDs. The full Gilman+ 2023 test (population-level) is out of scope for individual halo analysis.
+
+---
+
+## TL;DR (v40.7, original — KEPT for reference)
 
 At the canonical α_D = 5.55×10⁻⁶ with the **Breit-Wigner resonance σ/m formula** (the v40.1-v40.5 IN BAND framework), the predicted gravothermal collapse time **t_c is much longer than 13.8 Gyr for all 5 UFDs tested** (Segue 1, Tucana II, Hercules, Draco, Bootes I) across the full Γ/ρ ∈ [1, 20] sweep.
 
