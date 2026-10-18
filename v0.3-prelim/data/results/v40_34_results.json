@@ -1,0 +1,17 @@
+{
+  "v40_34_part1_bonferroni": {
+    "total_configs": 6000,
+    "pass_20_20": 30,
+    "pass_rate": 0.005,
+    "single_chance_20_20": 9.5367431640625e-07,
+    "expected_chance": 0.0057220458984375,
+    "significance": "robust",
+    "note": "The 30/6,000 passers in v40.28 is highly statistically significant. P(single trial 20/20 by chance) ~ 1e-6, expected 0.006, observed 30."
+  },
+  "v40_34_part2_true_6d": {
+    "total_configs": 1944,
+    "pass_20_20": 94,
+    "pass_19_20": 141,
+    "note": "6D scan with sigma_1 free and v_target_2 in [5, 7, 10, 15, 20, 25]"
+  }
+}
