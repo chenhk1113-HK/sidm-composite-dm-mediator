@@ -1,0 +1,7 @@
+{
+  "v40_24_alpha_D": 5.55e-06,
+  "v40_28_target_peak": 174.0,
+  "finding": "Gaussian peak in v40.28 is set independently of alpha_D; the alpha_D = 5.55e-6 (Phase 44) is tied to the full Breit-Wigner formula in v19_2_f_priority1_resonance_helpers.py, not the paper canonical Gaussian Breit-Wigner.",
+  "v40_28_born_alpha_D": 1.8654864187902286e-06,
+  "ratio": 0.3361236790613024
+}
