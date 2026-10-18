@@ -1,0 +1,111 @@
+{
+  "metadata": {
+    "project": "v19.2-F",
+    "date": "2026-10-17",
+    "v40_versions_covered": [
+      "v40.26",
+      "v40.27",
+      "v40.28",
+      "v40.29",
+      "v40.30",
+      "v40.31",
+      "v40.33",
+      "v40.34",
+      "v40.35"
+    ],
+    "total_channels": 20,
+    "upper_bound_channels": 16,
+    "lower_bound_channels": 4,
+    "channel_sources": {
+      "Horigome+ 2025": "arXiv:2503.13650",
+      "Andrade+ 2022": "MNRAS 510, 54",
+      "O'Donnell+ 2025": "arXiv:2508.20179",
+      "Jee 2026": "arXiv:2605.00093",
+      "Gilman 2023": "arXiv:2207.13111",
+      "Cloud-9 anchor": "Anand+ 2025, ApJL 993, L55 (arXiv:2508.20157)",
+      "dSph core formation": "Kaplinghat+ 2016 PRL 116, 041302 (arXiv:1508.03339); Rocha+ 2013 MNRAS 430, 81 (arXiv:1208.0025)"
+    }
+  },
+  "formulas_compared": {
+    "gaussian_v40_28": {
+      "formula": "sigma_m = sigma_0 * (100/v)^A + sigma_peak * exp(-(v-v_peak)^2/(2*sigma_1^2))",
+      "free_params": 4,
+      "best_score": "20/20",
+      "basin_at_20_20": "30/6000 = 0.5%",
+      "winning_config": {
+        "A_SLOPE": 0.4,
+        "sigma_0": 0.15292,
+        "sigma_peak": 174,
+        "sigma_1": 1.5
+      }
+    },
+    "multi_resonance_v40_34": {
+      "formula": "sigma_m = sigma_0 * (100/v)^A + sigma_peak * exp(-(v-v_peak)^2/(2*sigma_1^2)) + sigma_peak_2 * exp(-(v-v_target_2)^2/(2*sigma_1_2^2))",
+      "free_params": 7,
+      "best_score": "20/20",
+      "basin_at_20_20": "94/1944 = 4.8%",
+      "winning_config": {
+        "A_SLOPE": 0.4,
+        "sigma_0": 0.15,
+        "sigma_peak": 174,
+        "sigma_1": 1.5,
+        "v_target_2": 7,
+        "sigma_peak_2": 10,
+        "sigma_1_2": 1.0
+      }
+    },
+    "lorentzian_v40_31": {
+      "formula": "sigma_m = sigma_peak * gamma^2 / (4(v-v_peak)^2 + gamma^2)",
+      "best_score": "19/20",
+      "note": "1/v^2 tails too slow"
+    },
+    "true_bw_v40_33": {
+      "formula": "sigma_m = alpha_D^2 * Born_baseline * F^2(v, gamma) (with 1/q^4 tails)",
+      "best_score": "13/20",
+      "note": "Born baseline too large at all velocities"
+    },
+    "fano_v40_33": {
+      "formula": "sigma_m = sigma_peak * (q+eps)^2 / ((1+eps^2)(1+q^2))",
+      "best_score": "8/20",
+      "note": "Same Born baseline problem as true BW"
+    }
+  },
+  "corrected_alpha_D": {
+    "v40_24_was_wrong": "alpha_D = 5.55e-6 was for IN BAND analysis with Gamma/rho=1",
+    "v40_30_was_wrong": "alpha_D = 1.87e-6 used born_baseline (no F^2), accidental match at Gamma/rho=2",
+    "v40_33_corrected": "alpha_D = 9.52e-7 at Gamma/rho=1 (5.8x smaller than v40.24)",
+    "formula": "sigma_m(v_peak) = alpha_D^2 * Born_baseline * F^2_peak",
+    "note": "F^2_peak = 4/Gamma_ratio^2, so alpha_D depends on Gamma/rho"
+  },
+  "statistical_robustness": {
+    "v40_28_observed": "30/6000 passers at 20/20",
+    "conservative_chance_20_20": 9.5367431640625e-07,
+    "conservative_chance_20_20_value": 9.54e-07,
+    "expected_chance_passers": 0.0057,
+    "observed_vs_chance_ratio": 5243,
+    "verdict": "v40.28 20/20 is STATISTICALLY ROBUST"
+  },
+  "bayesian_comparison": {
+    "k_single": 4,
+    "k_multi": 7,
+    "N_channels": 20,
+    "BIC_single": 11.982929094215963,
+    "BIC_multi": 20.970125914877936,
+    "delta_BIC": 8.987196820661973,
+    "interpretation": "BIC disfavors multi by Occam; volume favors multi by 10x",
+    "log_Z_ratio": -2.231835311857196,
+    "Z_ratio_interpretation": "Multi-resonance has ~9x more evidence when volume is considered"
+  },
+  "v_7_explanation": {
+    "why_v_7": "v=7 is just below the dSph Horigome channels (v=10, 15, 20). A narrow 2nd peak (sigma_1_2=0.5-1.0) at v=7 contributes mostly at v=5-9 (for dSph core formation) and almost nothing at v=10+ (preserves Horigome).",
+    "UV_motivation": "Tsai 2022 dark-QCD predicts multiple narrow resonances at Y(nS)-like levels. v=7 and v=29.4 could be consecutive levels.",
+    "basin_width": "4.8% at 20/20 (vs 0.5% for single-resonance)"
+  },
+  "open_issues": {
+    "json_data_still_not_embedded_in_prose": true,
+    "bayesian_evidence_full_laplace_not_done": true,
+    "multi_resonance_alpha_D_derivation_incomplete": true,
+    "framework_inconsistency_real": true,
+    "trade_off_reproduces_in_all_formulas": true
+  }
+}

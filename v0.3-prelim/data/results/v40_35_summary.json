@@ -1,0 +1,13 @@
+{
+  "k_single": 4,
+  "k_multi": 7,
+  "N_channels": 20,
+  "basin_single": 0.005,
+  "basin_multi": 0.04835390946502058,
+  "V_working_single": 0.0256025,
+  "V_working_multi": 5.512345679012345,
+  "BIC_single": 11.982929094215963,
+  "BIC_multi": 20.970125914877936,
+  "delta_BIC": 8.987196820661973,
+  "log_Z_ratio": 0.8784571113278101
+}
