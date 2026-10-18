@@ -1,0 +1,4455 @@
+{
+  "metadata": {
+    "project": "v19.2-F",
+    "date": "2026-10-17",
+    "v40_version": "v40.36",
+    "review_fixes": "n5.docx (reviewer feedback)",
+    "description": "Comprehensive fix of n5.docx review issues: Bonferroni (Monte Carlo), wider scan, self-contained code, embedded JSON"
+  },
+  "monte_carlo_bonferroni": {
+    "empirical_p_20_20": 0.0055,
+    "p_pass_avg": 0.58103,
+    "p_pass_per_channel": [
+      10000.0,
+      8742.0,
+      2352.0,
+      2149.0,
+      1527.0,
+      9171.0,
+      10000.0,
+      9758.0,
+      10000.0,
+      9603.0,
+      6358.0,
+      9152.0,
+      1297.0,
+      5091.0,
+      4680.0,
+      7716.0,
+      3973.0,
+      2136.0,
+      1727.0,
+      774.0
+    ],
+    "observed_rate_v40_28": 0.005,
+    "n_mc": 10000
+  },
+  "wider_6d_scan": {
+    "total_configs": 76800,
+    "pass_20_20": 858,
+    "pass_fraction": 0.011171875,
+    "top_20_configs": [
+      {
+        "a_slope": 0.3,
+        "sigma_0": 0.12,
+        "sigma_peak": 174,
+        "sigma_1": 1.5,
+        "v_target_2": 6,
+        "sigma_peak_2": 5,
+        "sigma_1_2": 1.5,
+        "score": 20,
+        "channel_details": [
+          {
+            "name": "Cloud-9 peak",
+            "v": 29.4,
+            "sigma_m": 174.17325151736569,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Cloud-9 kinematic",
+            "v": 28.0,
+            "sigma_m": 112.73730658901812,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Horigome v=10",
+            "v": 10.0,
+            "sigma_m": 0.3822589817190174,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=15",
+            "v": 15.0,
+            "sigma_m": 0.21200886661020857,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=20",
+            "v": 20.0,
+            "sigma_m": 0.19447930794319207,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Andrade cluster",
+            "v": 1458.0,
+            "sigma_m": 0.05370985610522282,
+            "passed": true,
+            "range": [
+              0.0,
+              0.13
+            ]
+          },
+          {
+            "name": "O'Donnell",
+            "v": 2090.0,
+            "sigma_m": 0.04821002539092578,
+            "passed": true,
+            "range": [
+              0.0,
+              0.613
+            ]
+          },
+          {
+            "name": "Jee 2026",
+            "v": 1500.0,
+            "sigma_m": 0.053254200411801005,
+            "passed": true,
+            "range": [
+              0.0,
+              0.22
+            ]
+          },
+          {
+            "name": "Gilman 2023",
+            "v": 1000.0,
+            "sigma_m": 0.06014246803527268,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "SPARC",
+            "v": 100.0,
+            "sigma_m": 0.12,
+            "passed": true,
+            "range": [
+              0.03,
+              0.5
+            ]
+          },
+          {
+            "name": "Streams",
+            "v": 300.0,
+            "sigma_m": 0.08630677119898372,
+            "passed": true,
+            "range": [
+              0.05,
+              1.0
+            ]
+          },
+          {
+            "name": "Bullet",
+            "v": 3000.0,
+            "sigma_m": 0.043255851900520594,
+            "passed": true,
+            "range": [
+              0.0,
+              0.1
+            ]
+          },
+          {
+            "name": "UFD cores obs",
+            "v": 15.0,
+            "sigma_m": 0.21200886661020857,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "Extreme UFD bound",
+            "v": 5.0,
+            "sigma_m": 4.298461740851829,
+            "passed": true,
+            "range": [
+              0.0,
+              5.0
+            ]
+          },
+          {
+            "name": "LyA forest",
+            "v": 50.0,
+            "sigma_m": 0.14773732960138994,
+            "passed": true,
+            "range": [
+              0.005,
+              0.5
+            ]
+          },
+          {
+            "name": "v=500",
+            "v": 500.0,
+            "sigma_m": 0.07404406352640117,
+            "passed": true,
+            "range": [
+              0.001,
+              0.1
+            ]
+          },
+          {
+            "name": "dSph core v=5",
+            "v": 5.0,
+            "sigma_m": 4.298461740851829,
+            "passed": true,
+            "range": [
+              0.5,
+              5.0
+            ]
+          },
+          {
+            "name": "dSph core v=10",
+            "v": 10.0,
+            "sigma_m": 0.3822589817190174,
+            "passed": true,
+            "range": [
+              0.3,
+              1.0
+            ]
+          },
+          {
+            "name": "dSph core v=15",
+            "v": 15.0,
+            "sigma_m": 0.21200886661020857,
+            "passed": true,
+            "range": [
+              0.2,
+              0.8
+            ]
+          },
+          {
+            "name": "dSph core v=20",
+            "v": 20.0,
+            "sigma_m": 0.19447930794319207,
+            "passed": true,
+            "range": [
+              0.1,
+              0.5
+            ]
+          }
+        ]
+      },
+      {
+        "a_slope": 0.3,
+        "sigma_0": 0.12,
+        "sigma_peak": 174,
+        "sigma_1": 1.5,
+        "v_target_2": 7,
+        "sigma_peak_2": 10,
+        "sigma_1_2": 1.0,
+        "score": 20,
+        "channel_details": [
+          {
+            "name": "Cloud-9 peak",
+            "v": 29.4,
+            "sigma_m": 174.17325151736569,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Cloud-9 kinematic",
+            "v": 28.0,
+            "sigma_m": 112.73730658901812,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Horigome v=10",
+            "v": 10.0,
+            "sigma_m": 0.3505214431786886,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=15",
+            "v": 15.0,
+            "sigma_m": 0.2120087904604365,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=20",
+            "v": 20.0,
+            "sigma_m": 0.19447930794319207,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Andrade cluster",
+            "v": 1458.0,
+            "sigma_m": 0.05370985610522282,
+            "passed": true,
+            "range": [
+              0.0,
+              0.13
+            ]
+          },
+          {
+            "name": "O'Donnell",
+            "v": 2090.0,
+            "sigma_m": 0.04821002539092578,
+            "passed": true,
+            "range": [
+              0.0,
+              0.613
+            ]
+          },
+          {
+            "name": "Jee 2026",
+            "v": 1500.0,
+            "sigma_m": 0.053254200411801005,
+            "passed": true,
+            "range": [
+              0.0,
+              0.22
+            ]
+          },
+          {
+            "name": "Gilman 2023",
+            "v": 1000.0,
+            "sigma_m": 0.06014246803527268,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "SPARC",
+            "v": 100.0,
+            "sigma_m": 0.12,
+            "passed": true,
+            "range": [
+              0.03,
+              0.5
+            ]
+          },
+          {
+            "name": "Streams",
+            "v": 300.0,
+            "sigma_m": 0.08630677119898372,
+            "passed": true,
+            "range": [
+              0.05,
+              1.0
+            ]
+          },
+          {
+            "name": "Bullet",
+            "v": 3000.0,
+            "sigma_m": 0.043255851900520594,
+            "passed": true,
+            "range": [
+              0.0,
+              0.1
+            ]
+          },
+          {
+            "name": "UFD cores obs",
+            "v": 15.0,
+            "sigma_m": 0.2120087904604365,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "Extreme UFD bound",
+            "v": 5.0,
+            "sigma_m": 1.6481275586339166,
+            "passed": true,
+            "range": [
+              0.0,
+              5.0
+            ]
+          },
+          {
+            "name": "LyA forest",
+            "v": 50.0,
+            "sigma_m": 0.14773732960138994,
+            "passed": true,
+            "range": [
+              0.005,
+              0.5
+            ]
+          },
+          {
+            "name": "v=500",
+            "v": 500.0,
+            "sigma_m": 0.07404406352640117,
+            "passed": true,
+            "range": [
+              0.001,
+              0.1
+            ]
+          },
+          {
+            "name": "dSph core v=5",
+            "v": 5.0,
+            "sigma_m": 1.6481275586339166,
+            "passed": true,
+            "range": [
+              0.5,
+              5.0
+            ]
+          },
+          {
+            "name": "dSph core v=10",
+            "v": 10.0,
+            "sigma_m": 0.3505214431786886,
+            "passed": true,
+            "range": [
+              0.3,
+              1.0
+            ]
+          },
+          {
+            "name": "dSph core v=15",
+            "v": 15.0,
+            "sigma_m": 0.2120087904604365,
+            "passed": true,
+            "range": [
+              0.2,
+              0.8
+            ]
+          },
+          {
+            "name": "dSph core v=20",
+            "v": 20.0,
+            "sigma_m": 0.19447930794319207,
+            "passed": true,
+            "range": [
+              0.1,
+              0.5
+            ]
+          }
+        ]
+      },
+      {
+        "a_slope": 0.3,
+        "sigma_0": 0.12,
+        "sigma_peak": 174,
+        "sigma_1": 1.5,
+        "v_target_2": 7,
+        "sigma_peak_2": 20,
+        "sigma_1_2": 1.0,
+        "score": 20,
+        "channel_details": [
+          {
+            "name": "Cloud-9 peak",
+            "v": 29.4,
+            "sigma_m": 174.17325151736569,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Cloud-9 kinematic",
+            "v": 28.0,
+            "sigma_m": 112.73730658901812,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Horigome v=10",
+            "v": 10.0,
+            "sigma_m": 0.46161140856111166,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=15",
+            "v": 15.0,
+            "sigma_m": 0.21200879046056312,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=20",
+            "v": 20.0,
+            "sigma_m": 0.19447930794319207,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Andrade cluster",
+            "v": 1458.0,
+            "sigma_m": 0.05370985610522282,
+            "passed": true,
+            "range": [
+              0.0,
+              0.13
+            ]
+          },
+          {
+            "name": "O'Donnell",
+            "v": 2090.0,
+            "sigma_m": 0.04821002539092578,
+            "passed": true,
+            "range": [
+              0.0,
+              0.613
+            ]
+          },
+          {
+            "name": "Jee 2026",
+            "v": 1500.0,
+            "sigma_m": 0.053254200411801005,
+            "passed": true,
+            "range": [
+              0.0,
+              0.22
+            ]
+          },
+          {
+            "name": "Gilman 2023",
+            "v": 1000.0,
+            "sigma_m": 0.06014246803527268,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "SPARC",
+            "v": 100.0,
+            "sigma_m": 0.12,
+            "passed": true,
+            "range": [
+              0.03,
+              0.5
+            ]
+          },
+          {
+            "name": "Streams",
+            "v": 300.0,
+            "sigma_m": 0.08630677119898372,
+            "passed": true,
+            "range": [
+              0.05,
+              1.0
+            ]
+          },
+          {
+            "name": "Bullet",
+            "v": 3000.0,
+            "sigma_m": 0.043255851900520594,
+            "passed": true,
+            "range": [
+              0.0,
+              0.1
+            ]
+          },
+          {
+            "name": "UFD cores obs",
+            "v": 15.0,
+            "sigma_m": 0.21200879046056312,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "Extreme UFD bound",
+            "v": 5.0,
+            "sigma_m": 3.001480391000044,
+            "passed": true,
+            "range": [
+              0.0,
+              5.0
+            ]
+          },
+          {
+            "name": "LyA forest",
+            "v": 50.0,
+            "sigma_m": 0.14773732960138994,
+            "passed": true,
+            "range": [
+              0.005,
+              0.5
+            ]
+          },
+          {
+            "name": "v=500",
+            "v": 500.0,
+            "sigma_m": 0.07404406352640117,
+            "passed": true,
+            "range": [
+              0.001,
+              0.1
+            ]
+          },
+          {
+            "name": "dSph core v=5",
+            "v": 5.0,
+            "sigma_m": 3.001480391000044,
+            "passed": true,
+            "range": [
+              0.5,
+              5.0
+            ]
+          },
+          {
+            "name": "dSph core v=10",
+            "v": 10.0,
+            "sigma_m": 0.46161140856111166,
+            "passed": true,
+            "range": [
+              0.3,
+              1.0
+            ]
+          },
+          {
+            "name": "dSph core v=15",
+            "v": 15.0,
+            "sigma_m": 0.21200879046056312,
+            "passed": true,
+            "range": [
+              0.2,
+              0.8
+            ]
+          },
+          {
+            "name": "dSph core v=20",
+            "v": 20.0,
+            "sigma_m": 0.19447930794319207,
+            "passed": true,
+            "range": [
+              0.1,
+              0.5
+            ]
+          }
+        ]
+      },
+      {
+        "a_slope": 0.3,
+        "sigma_0": 0.12,
+        "sigma_peak": 174,
+        "sigma_1": 2.0,
+        "v_target_2": 6,
+        "sigma_peak_2": 5,
+        "sigma_1_2": 1.5,
+        "score": 20,
+        "channel_details": [
+          {
+            "name": "Cloud-9 peak",
+            "v": 29.4,
+            "sigma_m": 174.17325151736569,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Cloud-9 kinematic",
+            "v": 28.0,
+            "sigma_m": 136.36639571230583,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Horigome v=10",
+            "v": 10.0,
+            "sigma_m": 0.3822589817190174,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=15",
+            "v": 15.0,
+            "sigma_m": 0.21200886757323073,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=20",
+            "v": 20.0,
+            "sigma_m": 0.1972570120013495,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Andrade cluster",
+            "v": 1458.0,
+            "sigma_m": 0.05370985610522282,
+            "passed": true,
+            "range": [
+              0.0,
+              0.13
+            ]
+          },
+          {
+            "name": "O'Donnell",
+            "v": 2090.0,
+            "sigma_m": 0.04821002539092578,
+            "passed": true,
+            "range": [
+              0.0,
+              0.613
+            ]
+          },
+          {
+            "name": "Jee 2026",
+            "v": 1500.0,
+            "sigma_m": 0.053254200411801005,
+            "passed": true,
+            "range": [
+              0.0,
+              0.22
+            ]
+          },
+          {
+            "name": "Gilman 2023",
+            "v": 1000.0,
+            "sigma_m": 0.06014246803527268,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "SPARC",
+            "v": 100.0,
+            "sigma_m": 0.12,
+            "passed": true,
+            "range": [
+              0.03,
+              0.5
+            ]
+          },
+          {
+            "name": "Streams",
+            "v": 300.0,
+            "sigma_m": 0.08630677119898372,
+            "passed": true,
+            "range": [
+              0.05,
+              1.0
+            ]
+          },
+          {
+            "name": "Bullet",
+            "v": 3000.0,
+            "sigma_m": 0.043255851900520594,
+            "passed": true,
+            "range": [
+              0.0,
+              0.1
+            ]
+          },
+          {
+            "name": "UFD cores obs",
+            "v": 15.0,
+            "sigma_m": 0.21200886757323073,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "Extreme UFD bound",
+            "v": 5.0,
+            "sigma_m": 4.298461740851829,
+            "passed": true,
+            "range": [
+              0.0,
+              5.0
+            ]
+          },
+          {
+            "name": "LyA forest",
+            "v": 50.0,
+            "sigma_m": 0.14773732960138994,
+            "passed": true,
+            "range": [
+              0.005,
+              0.5
+            ]
+          },
+          {
+            "name": "v=500",
+            "v": 500.0,
+            "sigma_m": 0.07404406352640117,
+            "passed": true,
+            "range": [
+              0.001,
+              0.1
+            ]
+          },
+          {
+            "name": "dSph core v=5",
+            "v": 5.0,
+            "sigma_m": 4.298461740851829,
+            "passed": true,
+            "range": [
+              0.5,
+              5.0
+            ]
+          },
+          {
+            "name": "dSph core v=10",
+            "v": 10.0,
+            "sigma_m": 0.3822589817190174,
+            "passed": true,
+            "range": [
+              0.3,
+              1.0
+            ]
+          },
+          {
+            "name": "dSph core v=15",
+            "v": 15.0,
+            "sigma_m": 0.21200886757323073,
+            "passed": true,
+            "range": [
+              0.2,
+              0.8
+            ]
+          },
+          {
+            "name": "dSph core v=20",
+            "v": 20.0,
+            "sigma_m": 0.1972570120013495,
+            "passed": true,
+            "range": [
+              0.1,
+              0.5
+            ]
+          }
+        ]
+      },
+      {
+        "a_slope": 0.3,
+        "sigma_0": 0.12,
+        "sigma_peak": 174,
+        "sigma_1": 2.0,
+        "v_target_2": 7,
+        "sigma_peak_2": 10,
+        "sigma_1_2": 1.0,
+        "score": 20,
+        "channel_details": [
+          {
+            "name": "Cloud-9 peak",
+            "v": 29.4,
+            "sigma_m": 174.17325151736569,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Cloud-9 kinematic",
+            "v": 28.0,
+            "sigma_m": 136.36639571230583,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Horigome v=10",
+            "v": 10.0,
+            "sigma_m": 0.3505214431786886,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=15",
+            "v": 15.0,
+            "sigma_m": 0.21200879142345866,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=20",
+            "v": 20.0,
+            "sigma_m": 0.1972570120013495,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Andrade cluster",
+            "v": 1458.0,
+            "sigma_m": 0.05370985610522282,
+            "passed": true,
+            "range": [
+              0.0,
+              0.13
+            ]
+          },
+          {
+            "name": "O'Donnell",
+            "v": 2090.0,
+            "sigma_m": 0.04821002539092578,
+            "passed": true,
+            "range": [
+              0.0,
+              0.613
+            ]
+          },
+          {
+            "name": "Jee 2026",
+            "v": 1500.0,
+            "sigma_m": 0.053254200411801005,
+            "passed": true,
+            "range": [
+              0.0,
+              0.22
+            ]
+          },
+          {
+            "name": "Gilman 2023",
+            "v": 1000.0,
+            "sigma_m": 0.06014246803527268,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "SPARC",
+            "v": 100.0,
+            "sigma_m": 0.12,
+            "passed": true,
+            "range": [
+              0.03,
+              0.5
+            ]
+          },
+          {
+            "name": "Streams",
+            "v": 300.0,
+            "sigma_m": 0.08630677119898372,
+            "passed": true,
+            "range": [
+              0.05,
+              1.0
+            ]
+          },
+          {
+            "name": "Bullet",
+            "v": 3000.0,
+            "sigma_m": 0.043255851900520594,
+            "passed": true,
+            "range": [
+              0.0,
+              0.1
+            ]
+          },
+          {
+            "name": "UFD cores obs",
+            "v": 15.0,
+            "sigma_m": 0.21200879142345866,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "Extreme UFD bound",
+            "v": 5.0,
+            "sigma_m": 1.6481275586339166,
+            "passed": true,
+            "range": [
+              0.0,
+              5.0
+            ]
+          },
+          {
+            "name": "LyA forest",
+            "v": 50.0,
+            "sigma_m": 0.14773732960138994,
+            "passed": true,
+            "range": [
+              0.005,
+              0.5
+            ]
+          },
+          {
+            "name": "v=500",
+            "v": 500.0,
+            "sigma_m": 0.07404406352640117,
+            "passed": true,
+            "range": [
+              0.001,
+              0.1
+            ]
+          },
+          {
+            "name": "dSph core v=5",
+            "v": 5.0,
+            "sigma_m": 1.6481275586339166,
+            "passed": true,
+            "range": [
+              0.5,
+              5.0
+            ]
+          },
+          {
+            "name": "dSph core v=10",
+            "v": 10.0,
+            "sigma_m": 0.3505214431786886,
+            "passed": true,
+            "range": [
+              0.3,
+              1.0
+            ]
+          },
+          {
+            "name": "dSph core v=15",
+            "v": 15.0,
+            "sigma_m": 0.21200879142345866,
+            "passed": true,
+            "range": [
+              0.2,
+              0.8
+            ]
+          },
+          {
+            "name": "dSph core v=20",
+            "v": 20.0,
+            "sigma_m": 0.1972570120013495,
+            "passed": true,
+            "range": [
+              0.1,
+              0.5
+            ]
+          }
+        ]
+      },
+      {
+        "a_slope": 0.3,
+        "sigma_0": 0.12,
+        "sigma_peak": 174,
+        "sigma_1": 2.0,
+        "v_target_2": 7,
+        "sigma_peak_2": 20,
+        "sigma_1_2": 1.0,
+        "score": 20,
+        "channel_details": [
+          {
+            "name": "Cloud-9 peak",
+            "v": 29.4,
+            "sigma_m": 174.17325151736569,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Cloud-9 kinematic",
+            "v": 28.0,
+            "sigma_m": 136.36639571230583,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Horigome v=10",
+            "v": 10.0,
+            "sigma_m": 0.46161140856111166,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=15",
+            "v": 15.0,
+            "sigma_m": 0.21200879142358528,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=20",
+            "v": 20.0,
+            "sigma_m": 0.1972570120013495,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Andrade cluster",
+            "v": 1458.0,
+            "sigma_m": 0.05370985610522282,
+            "passed": true,
+            "range": [
+              0.0,
+              0.13
+            ]
+          },
+          {
+            "name": "O'Donnell",
+            "v": 2090.0,
+            "sigma_m": 0.04821002539092578,
+            "passed": true,
+            "range": [
+              0.0,
+              0.613
+            ]
+          },
+          {
+            "name": "Jee 2026",
+            "v": 1500.0,
+            "sigma_m": 0.053254200411801005,
+            "passed": true,
+            "range": [
+              0.0,
+              0.22
+            ]
+          },
+          {
+            "name": "Gilman 2023",
+            "v": 1000.0,
+            "sigma_m": 0.06014246803527268,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "SPARC",
+            "v": 100.0,
+            "sigma_m": 0.12,
+            "passed": true,
+            "range": [
+              0.03,
+              0.5
+            ]
+          },
+          {
+            "name": "Streams",
+            "v": 300.0,
+            "sigma_m": 0.08630677119898372,
+            "passed": true,
+            "range": [
+              0.05,
+              1.0
+            ]
+          },
+          {
+            "name": "Bullet",
+            "v": 3000.0,
+            "sigma_m": 0.043255851900520594,
+            "passed": true,
+            "range": [
+              0.0,
+              0.1
+            ]
+          },
+          {
+            "name": "UFD cores obs",
+            "v": 15.0,
+            "sigma_m": 0.21200879142358528,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "Extreme UFD bound",
+            "v": 5.0,
+            "sigma_m": 3.001480391000044,
+            "passed": true,
+            "range": [
+              0.0,
+              5.0
+            ]
+          },
+          {
+            "name": "LyA forest",
+            "v": 50.0,
+            "sigma_m": 0.14773732960138994,
+            "passed": true,
+            "range": [
+              0.005,
+              0.5
+            ]
+          },
+          {
+            "name": "v=500",
+            "v": 500.0,
+            "sigma_m": 0.07404406352640117,
+            "passed": true,
+            "range": [
+              0.001,
+              0.1
+            ]
+          },
+          {
+            "name": "dSph core v=5",
+            "v": 5.0,
+            "sigma_m": 3.001480391000044,
+            "passed": true,
+            "range": [
+              0.5,
+              5.0
+            ]
+          },
+          {
+            "name": "dSph core v=10",
+            "v": 10.0,
+            "sigma_m": 0.46161140856111166,
+            "passed": true,
+            "range": [
+              0.3,
+              1.0
+            ]
+          },
+          {
+            "name": "dSph core v=15",
+            "v": 15.0,
+            "sigma_m": 0.21200879142358528,
+            "passed": true,
+            "range": [
+              0.2,
+              0.8
+            ]
+          },
+          {
+            "name": "dSph core v=20",
+            "v": 20.0,
+            "sigma_m": 0.1972570120013495,
+            "passed": true,
+            "range": [
+              0.1,
+              0.5
+            ]
+          }
+        ]
+      },
+      {
+        "a_slope": 0.3,
+        "sigma_0": 0.15,
+        "sigma_peak": 174,
+        "sigma_1": 1.5,
+        "v_target_2": 6,
+        "sigma_peak_2": 5,
+        "sigma_1_2": 1.0,
+        "score": 20,
+        "channel_details": [
+          {
+            "name": "Cloud-9 peak",
+            "v": 29.4,
+            "sigma_m": 174.2165643967071,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Cloud-9 kinematic",
+            "v": 28.0,
+            "sigma_m": 112.7812581035733,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Horigome v=10",
+            "v": 10.0,
+            "sigma_m": 0.3009666603848445,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=15",
+            "v": 15.0,
+            "sigma_m": 0.2650109880753873,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=20",
+            "v": 20.0,
+            "sigma_m": 0.24309900584397495,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Andrade cluster",
+            "v": 1458.0,
+            "sigma_m": 0.06713732013152852,
+            "passed": true,
+            "range": [
+              0.0,
+              0.13
+            ]
+          },
+          {
+            "name": "O'Donnell",
+            "v": 2090.0,
+            "sigma_m": 0.06026253173865723,
+            "passed": true,
+            "range": [
+              0.0,
+              0.613
+            ]
+          },
+          {
+            "name": "Jee 2026",
+            "v": 1500.0,
+            "sigma_m": 0.06656775051475125,
+            "passed": true,
+            "range": [
+              0.0,
+              0.22
+            ]
+          },
+          {
+            "name": "Gilman 2023",
+            "v": 1000.0,
+            "sigma_m": 0.07517808504409085,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "SPARC",
+            "v": 100.0,
+            "sigma_m": 0.15,
+            "passed": true,
+            "range": [
+              0.03,
+              0.5
+            ]
+          },
+          {
+            "name": "Streams",
+            "v": 300.0,
+            "sigma_m": 0.10788346399872965,
+            "passed": true,
+            "range": [
+              0.05,
+              1.0
+            ]
+          },
+          {
+            "name": "Bullet",
+            "v": 3000.0,
+            "sigma_m": 0.05406981487565074,
+            "passed": true,
+            "range": [
+              0.0,
+              0.1
+            ]
+          },
+          {
+            "name": "UFD cores obs",
+            "v": 15.0,
+            "sigma_m": 0.2650109880753873,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "Extreme UFD bound",
+            "v": 5.0,
+            "sigma_m": 3.401121706397904,
+            "passed": true,
+            "range": [
+              0.0,
+              5.0
+            ]
+          },
+          {
+            "name": "LyA forest",
+            "v": 50.0,
+            "sigma_m": 0.18467166200173743,
+            "passed": true,
+            "range": [
+              0.005,
+              0.5
+            ]
+          },
+          {
+            "name": "v=500",
+            "v": 500.0,
+            "sigma_m": 0.09255507940800145,
+            "passed": true,
+            "range": [
+              0.001,
+              0.1
+            ]
+          },
+          {
+            "name": "dSph core v=5",
+            "v": 5.0,
+            "sigma_m": 3.401121706397904,
+            "passed": true,
+            "range": [
+              0.5,
+              5.0
+            ]
+          },
+          {
+            "name": "dSph core v=10",
+            "v": 10.0,
+            "sigma_m": 0.3009666603848445,
+            "passed": true,
+            "range": [
+              0.3,
+              1.0
+            ]
+          },
+          {
+            "name": "dSph core v=15",
+            "v": 15.0,
+            "sigma_m": 0.2650109880753873,
+            "passed": true,
+            "range": [
+              0.2,
+              0.8
+            ]
+          },
+          {
+            "name": "dSph core v=20",
+            "v": 20.0,
+            "sigma_m": 0.24309900584397495,
+            "passed": true,
+            "range": [
+              0.1,
+              0.5
+            ]
+          }
+        ]
+      },
+      {
+        "a_slope": 0.3,
+        "sigma_0": 0.15,
+        "sigma_peak": 174,
+        "sigma_1": 1.5,
+        "v_target_2": 6,
+        "sigma_peak_2": 5,
+        "sigma_1_2": 1.5,
+        "score": 20,
+        "channel_details": [
+          {
+            "name": "Cloud-9 peak",
+            "v": 29.4,
+            "sigma_m": 174.2165643967071,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Cloud-9 kinematic",
+            "v": 28.0,
+            "sigma_m": 112.7812581035733,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Horigome v=10",
+            "v": 10.0,
+            "sigma_m": 0.4421168511680838,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=15",
+            "v": 15.0,
+            "sigma_m": 0.26501106422528603,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=20",
+            "v": 20.0,
+            "sigma_m": 0.24309900584397495,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Andrade cluster",
+            "v": 1458.0,
+            "sigma_m": 0.06713732013152852,
+            "passed": true,
+            "range": [
+              0.0,
+              0.13
+            ]
+          },
+          {
+            "name": "O'Donnell",
+            "v": 2090.0,
+            "sigma_m": 0.06026253173865723,
+            "passed": true,
+            "range": [
+              0.0,
+              0.613
+            ]
+          },
+          {
+            "name": "Jee 2026",
+            "v": 1500.0,
+            "sigma_m": 0.06656775051475125,
+            "passed": true,
+            "range": [
+              0.0,
+              0.22
+            ]
+          },
+          {
+            "name": "Gilman 2023",
+            "v": 1000.0,
+            "sigma_m": 0.07517808504409085,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "SPARC",
+            "v": 100.0,
+            "sigma_m": 0.15,
+            "passed": true,
+            "range": [
+              0.03,
+              0.5
+            ]
+          },
+          {
+            "name": "Streams",
+            "v": 300.0,
+            "sigma_m": 0.10788346399872965,
+            "passed": true,
+            "range": [
+              0.05,
+              1.0
+            ]
+          },
+          {
+            "name": "Bullet",
+            "v": 3000.0,
+            "sigma_m": 0.05406981487565074,
+            "passed": true,
+            "range": [
+              0.0,
+              0.1
+            ]
+          },
+          {
+            "name": "UFD cores obs",
+            "v": 15.0,
+            "sigma_m": 0.26501106422528603,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "Extreme UFD bound",
+            "v": 5.0,
+            "sigma_m": 4.372155422418777,
+            "passed": true,
+            "range": [
+              0.0,
+              5.0
+            ]
+          },
+          {
+            "name": "LyA forest",
+            "v": 50.0,
+            "sigma_m": 0.18467166200173743,
+            "passed": true,
+            "range": [
+              0.005,
+              0.5
+            ]
+          },
+          {
+            "name": "v=500",
+            "v": 500.0,
+            "sigma_m": 0.09255507940800145,
+            "passed": true,
+            "range": [
+              0.001,
+              0.1
+            ]
+          },
+          {
+            "name": "dSph core v=5",
+            "v": 5.0,
+            "sigma_m": 4.372155422418777,
+            "passed": true,
+            "range": [
+              0.5,
+              5.0
+            ]
+          },
+          {
+            "name": "dSph core v=10",
+            "v": 10.0,
+            "sigma_m": 0.4421168511680838,
+            "passed": true,
+            "range": [
+              0.3,
+              1.0
+            ]
+          },
+          {
+            "name": "dSph core v=15",
+            "v": 15.0,
+            "sigma_m": 0.26501106422528603,
+            "passed": true,
+            "range": [
+              0.2,
+              0.8
+            ]
+          },
+          {
+            "name": "dSph core v=20",
+            "v": 20.0,
+            "sigma_m": 0.24309900584397495,
+            "passed": true,
+            "range": [
+              0.1,
+              0.5
+            ]
+          }
+        ]
+      },
+      {
+        "a_slope": 0.3,
+        "sigma_0": 0.15,
+        "sigma_peak": 174,
+        "sigma_1": 1.5,
+        "v_target_2": 7,
+        "sigma_peak_2": 5,
+        "sigma_1_2": 1.0,
+        "score": 20,
+        "channel_details": [
+          {
+            "name": "Cloud-9 peak",
+            "v": 29.4,
+            "sigma_m": 174.2165643967071,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Cloud-9 kinematic",
+            "v": 28.0,
+            "sigma_m": 112.7812581035733,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Horigome v=10",
+            "v": 10.0,
+            "sigma_m": 0.35483432993654346,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=15",
+            "v": 15.0,
+            "sigma_m": 0.26501098807545065,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=20",
+            "v": 20.0,
+            "sigma_m": 0.24309900584397495,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Andrade cluster",
+            "v": 1458.0,
+            "sigma_m": 0.06713732013152852,
+            "passed": true,
+            "range": [
+              0.0,
+              0.13
+            ]
+          },
+          {
+            "name": "O'Donnell",
+            "v": 2090.0,
+            "sigma_m": 0.06026253173865723,
+            "passed": true,
+            "range": [
+              0.0,
+              0.613
+            ]
+          },
+          {
+            "name": "Jee 2026",
+            "v": 1500.0,
+            "sigma_m": 0.06656775051475125,
+            "passed": true,
+            "range": [
+              0.0,
+              0.22
+            ]
+          },
+          {
+            "name": "Gilman 2023",
+            "v": 1000.0,
+            "sigma_m": 0.07517808504409085,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "SPARC",
+            "v": 100.0,
+            "sigma_m": 0.15,
+            "passed": true,
+            "range": [
+              0.03,
+              0.5
+            ]
+          },
+          {
+            "name": "Streams",
+            "v": 300.0,
+            "sigma_m": 0.10788346399872965,
+            "passed": true,
+            "range": [
+              0.05,
+              1.0
+            ]
+          },
+          {
+            "name": "Bullet",
+            "v": 3000.0,
+            "sigma_m": 0.05406981487565074,
+            "passed": true,
+            "range": [
+              0.0,
+              0.1
+            ]
+          },
+          {
+            "name": "UFD cores obs",
+            "v": 15.0,
+            "sigma_m": 0.26501098807545065,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "Extreme UFD bound",
+            "v": 5.0,
+            "sigma_m": 1.0451448240178005,
+            "passed": true,
+            "range": [
+              0.0,
+              5.0
+            ]
+          },
+          {
+            "name": "LyA forest",
+            "v": 50.0,
+            "sigma_m": 0.18467166200173743,
+            "passed": true,
+            "range": [
+              0.005,
+              0.5
+            ]
+          },
+          {
+            "name": "v=500",
+            "v": 500.0,
+            "sigma_m": 0.09255507940800145,
+            "passed": true,
+            "range": [
+              0.001,
+              0.1
+            ]
+          },
+          {
+            "name": "dSph core v=5",
+            "v": 5.0,
+            "sigma_m": 1.0451448240178005,
+            "passed": true,
+            "range": [
+              0.5,
+              5.0
+            ]
+          },
+          {
+            "name": "dSph core v=10",
+            "v": 10.0,
+            "sigma_m": 0.35483432993654346,
+            "passed": true,
+            "range": [
+              0.3,
+              1.0
+            ]
+          },
+          {
+            "name": "dSph core v=15",
+            "v": 15.0,
+            "sigma_m": 0.26501098807545065,
+            "passed": true,
+            "range": [
+              0.2,
+              0.8
+            ]
+          },
+          {
+            "name": "dSph core v=20",
+            "v": 20.0,
+            "sigma_m": 0.24309900584397495,
+            "passed": true,
+            "range": [
+              0.1,
+              0.5
+            ]
+          }
+        ]
+      },
+      {
+        "a_slope": 0.3,
+        "sigma_0": 0.15,
+        "sigma_peak": 174,
+        "sigma_1": 1.5,
+        "v_target_2": 7,
+        "sigma_peak_2": 10,
+        "sigma_1_2": 1.0,
+        "score": 20,
+        "channel_details": [
+          {
+            "name": "Cloud-9 peak",
+            "v": 29.4,
+            "sigma_m": 174.2165643967071,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Cloud-9 kinematic",
+            "v": 28.0,
+            "sigma_m": 112.7812581035733,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Horigome v=10",
+            "v": 10.0,
+            "sigma_m": 0.41037931262775496,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=15",
+            "v": 15.0,
+            "sigma_m": 0.26501098807551393,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=20",
+            "v": 20.0,
+            "sigma_m": 0.24309900584397495,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Andrade cluster",
+            "v": 1458.0,
+            "sigma_m": 0.06713732013152852,
+            "passed": true,
+            "range": [
+              0.0,
+              0.13
+            ]
+          },
+          {
+            "name": "O'Donnell",
+            "v": 2090.0,
+            "sigma_m": 0.06026253173865723,
+            "passed": true,
+            "range": [
+              0.0,
+              0.613
+            ]
+          },
+          {
+            "name": "Jee 2026",
+            "v": 1500.0,
+            "sigma_m": 0.06656775051475125,
+            "passed": true,
+            "range": [
+              0.0,
+              0.22
+            ]
+          },
+          {
+            "name": "Gilman 2023",
+            "v": 1000.0,
+            "sigma_m": 0.07517808504409085,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "SPARC",
+            "v": 100.0,
+            "sigma_m": 0.15,
+            "passed": true,
+            "range": [
+              0.03,
+              0.5
+            ]
+          },
+          {
+            "name": "Streams",
+            "v": 300.0,
+            "sigma_m": 0.10788346399872965,
+            "passed": true,
+            "range": [
+              0.05,
+              1.0
+            ]
+          },
+          {
+            "name": "Bullet",
+            "v": 3000.0,
+            "sigma_m": 0.05406981487565074,
+            "passed": true,
+            "range": [
+              0.0,
+              0.1
+            ]
+          },
+          {
+            "name": "UFD cores obs",
+            "v": 15.0,
+            "sigma_m": 0.26501098807551393,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "Extreme UFD bound",
+            "v": 5.0,
+            "sigma_m": 1.7218212402008641,
+            "passed": true,
+            "range": [
+              0.0,
+              5.0
+            ]
+          },
+          {
+            "name": "LyA forest",
+            "v": 50.0,
+            "sigma_m": 0.18467166200173743,
+            "passed": true,
+            "range": [
+              0.005,
+              0.5
+            ]
+          },
+          {
+            "name": "v=500",
+            "v": 500.0,
+            "sigma_m": 0.09255507940800145,
+            "passed": true,
+            "range": [
+              0.001,
+              0.1
+            ]
+          },
+          {
+            "name": "dSph core v=5",
+            "v": 5.0,
+            "sigma_m": 1.7218212402008641,
+            "passed": true,
+            "range": [
+              0.5,
+              5.0
+            ]
+          },
+          {
+            "name": "dSph core v=10",
+            "v": 10.0,
+            "sigma_m": 0.41037931262775496,
+            "passed": true,
+            "range": [
+              0.3,
+              1.0
+            ]
+          },
+          {
+            "name": "dSph core v=15",
+            "v": 15.0,
+            "sigma_m": 0.26501098807551393,
+            "passed": true,
+            "range": [
+              0.2,
+              0.8
+            ]
+          },
+          {
+            "name": "dSph core v=20",
+            "v": 20.0,
+            "sigma_m": 0.24309900584397495,
+            "passed": true,
+            "range": [
+              0.1,
+              0.5
+            ]
+          }
+        ]
+      },
+      {
+        "a_slope": 0.3,
+        "sigma_0": 0.15,
+        "sigma_peak": 174,
+        "sigma_1": 1.5,
+        "v_target_2": 7,
+        "sigma_peak_2": 20,
+        "sigma_1_2": 1.0,
+        "score": 20,
+        "channel_details": [
+          {
+            "name": "Cloud-9 peak",
+            "v": 29.4,
+            "sigma_m": 174.2165643967071,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Cloud-9 kinematic",
+            "v": 28.0,
+            "sigma_m": 112.7812581035733,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Horigome v=10",
+            "v": 10.0,
+            "sigma_m": 0.5214692780101781,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=15",
+            "v": 15.0,
+            "sigma_m": 0.2650109880756406,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=20",
+            "v": 20.0,
+            "sigma_m": 0.24309900584397495,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Andrade cluster",
+            "v": 1458.0,
+            "sigma_m": 0.06713732013152852,
+            "passed": true,
+            "range": [
+              0.0,
+              0.13
+            ]
+          },
+          {
+            "name": "O'Donnell",
+            "v": 2090.0,
+            "sigma_m": 0.06026253173865723,
+            "passed": true,
+            "range": [
+              0.0,
+              0.613
+            ]
+          },
+          {
+            "name": "Jee 2026",
+            "v": 1500.0,
+            "sigma_m": 0.06656775051475125,
+            "passed": true,
+            "range": [
+              0.0,
+              0.22
+            ]
+          },
+          {
+            "name": "Gilman 2023",
+            "v": 1000.0,
+            "sigma_m": 0.07517808504409085,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "SPARC",
+            "v": 100.0,
+            "sigma_m": 0.15,
+            "passed": true,
+            "range": [
+              0.03,
+              0.5
+            ]
+          },
+          {
+            "name": "Streams",
+            "v": 300.0,
+            "sigma_m": 0.10788346399872965,
+            "passed": true,
+            "range": [
+              0.05,
+              1.0
+            ]
+          },
+          {
+            "name": "Bullet",
+            "v": 3000.0,
+            "sigma_m": 0.05406981487565074,
+            "passed": true,
+            "range": [
+              0.0,
+              0.1
+            ]
+          },
+          {
+            "name": "UFD cores obs",
+            "v": 15.0,
+            "sigma_m": 0.2650109880756406,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "Extreme UFD bound",
+            "v": 5.0,
+            "sigma_m": 3.075174072566991,
+            "passed": true,
+            "range": [
+              0.0,
+              5.0
+            ]
+          },
+          {
+            "name": "LyA forest",
+            "v": 50.0,
+            "sigma_m": 0.18467166200173743,
+            "passed": true,
+            "range": [
+              0.005,
+              0.5
+            ]
+          },
+          {
+            "name": "v=500",
+            "v": 500.0,
+            "sigma_m": 0.09255507940800145,
+            "passed": true,
+            "range": [
+              0.001,
+              0.1
+            ]
+          },
+          {
+            "name": "dSph core v=5",
+            "v": 5.0,
+            "sigma_m": 3.075174072566991,
+            "passed": true,
+            "range": [
+              0.5,
+              5.0
+            ]
+          },
+          {
+            "name": "dSph core v=10",
+            "v": 10.0,
+            "sigma_m": 0.5214692780101781,
+            "passed": true,
+            "range": [
+              0.3,
+              1.0
+            ]
+          },
+          {
+            "name": "dSph core v=15",
+            "v": 15.0,
+            "sigma_m": 0.2650109880756406,
+            "passed": true,
+            "range": [
+              0.2,
+              0.8
+            ]
+          },
+          {
+            "name": "dSph core v=20",
+            "v": 20.0,
+            "sigma_m": 0.24309900584397495,
+            "passed": true,
+            "range": [
+              0.1,
+              0.5
+            ]
+          }
+        ]
+      },
+      {
+        "a_slope": 0.3,
+        "sigma_0": 0.15,
+        "sigma_peak": 174,
+        "sigma_1": 2.0,
+        "v_target_2": 6,
+        "sigma_peak_2": 5,
+        "sigma_1_2": 1.0,
+        "score": 20,
+        "channel_details": [
+          {
+            "name": "Cloud-9 peak",
+            "v": 29.4,
+            "sigma_m": 174.2165643967071,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Cloud-9 kinematic",
+            "v": 28.0,
+            "sigma_m": 136.410347226861,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Horigome v=10",
+            "v": 10.0,
+            "sigma_m": 0.3009666603848445,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=15",
+            "v": 15.0,
+            "sigma_m": 0.2650109890384095,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=20",
+            "v": 20.0,
+            "sigma_m": 0.2458767099021324,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Andrade cluster",
+            "v": 1458.0,
+            "sigma_m": 0.06713732013152852,
+            "passed": true,
+            "range": [
+              0.0,
+              0.13
+            ]
+          },
+          {
+            "name": "O'Donnell",
+            "v": 2090.0,
+            "sigma_m": 0.06026253173865723,
+            "passed": true,
+            "range": [
+              0.0,
+              0.613
+            ]
+          },
+          {
+            "name": "Jee 2026",
+            "v": 1500.0,
+            "sigma_m": 0.06656775051475125,
+            "passed": true,
+            "range": [
+              0.0,
+              0.22
+            ]
+          },
+          {
+            "name": "Gilman 2023",
+            "v": 1000.0,
+            "sigma_m": 0.07517808504409085,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "SPARC",
+            "v": 100.0,
+            "sigma_m": 0.15,
+            "passed": true,
+            "range": [
+              0.03,
+              0.5
+            ]
+          },
+          {
+            "name": "Streams",
+            "v": 300.0,
+            "sigma_m": 0.10788346399872965,
+            "passed": true,
+            "range": [
+              0.05,
+              1.0
+            ]
+          },
+          {
+            "name": "Bullet",
+            "v": 3000.0,
+            "sigma_m": 0.05406981487565074,
+            "passed": true,
+            "range": [
+              0.0,
+              0.1
+            ]
+          },
+          {
+            "name": "UFD cores obs",
+            "v": 15.0,
+            "sigma_m": 0.2650109890384095,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "Extreme UFD bound",
+            "v": 5.0,
+            "sigma_m": 3.401121706397904,
+            "passed": true,
+            "range": [
+              0.0,
+              5.0
+            ]
+          },
+          {
+            "name": "LyA forest",
+            "v": 50.0,
+            "sigma_m": 0.18467166200173743,
+            "passed": true,
+            "range": [
+              0.005,
+              0.5
+            ]
+          },
+          {
+            "name": "v=500",
+            "v": 500.0,
+            "sigma_m": 0.09255507940800145,
+            "passed": true,
+            "range": [
+              0.001,
+              0.1
+            ]
+          },
+          {
+            "name": "dSph core v=5",
+            "v": 5.0,
+            "sigma_m": 3.401121706397904,
+            "passed": true,
+            "range": [
+              0.5,
+              5.0
+            ]
+          },
+          {
+            "name": "dSph core v=10",
+            "v": 10.0,
+            "sigma_m": 0.3009666603848445,
+            "passed": true,
+            "range": [
+              0.3,
+              1.0
+            ]
+          },
+          {
+            "name": "dSph core v=15",
+            "v": 15.0,
+            "sigma_m": 0.2650109890384095,
+            "passed": true,
+            "range": [
+              0.2,
+              0.8
+            ]
+          },
+          {
+            "name": "dSph core v=20",
+            "v": 20.0,
+            "sigma_m": 0.2458767099021324,
+            "passed": true,
+            "range": [
+              0.1,
+              0.5
+            ]
+          }
+        ]
+      },
+      {
+        "a_slope": 0.3,
+        "sigma_0": 0.15,
+        "sigma_peak": 174,
+        "sigma_1": 2.0,
+        "v_target_2": 6,
+        "sigma_peak_2": 5,
+        "sigma_1_2": 1.5,
+        "score": 20,
+        "channel_details": [
+          {
+            "name": "Cloud-9 peak",
+            "v": 29.4,
+            "sigma_m": 174.2165643967071,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Cloud-9 kinematic",
+            "v": 28.0,
+            "sigma_m": 136.410347226861,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Horigome v=10",
+            "v": 10.0,
+            "sigma_m": 0.4421168511680838,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=15",
+            "v": 15.0,
+            "sigma_m": 0.2650110651883082,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=20",
+            "v": 20.0,
+            "sigma_m": 0.2458767099021324,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Andrade cluster",
+            "v": 1458.0,
+            "sigma_m": 0.06713732013152852,
+            "passed": true,
+            "range": [
+              0.0,
+              0.13
+            ]
+          },
+          {
+            "name": "O'Donnell",
+            "v": 2090.0,
+            "sigma_m": 0.06026253173865723,
+            "passed": true,
+            "range": [
+              0.0,
+              0.613
+            ]
+          },
+          {
+            "name": "Jee 2026",
+            "v": 1500.0,
+            "sigma_m": 0.06656775051475125,
+            "passed": true,
+            "range": [
+              0.0,
+              0.22
+            ]
+          },
+          {
+            "name": "Gilman 2023",
+            "v": 1000.0,
+            "sigma_m": 0.07517808504409085,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "SPARC",
+            "v": 100.0,
+            "sigma_m": 0.15,
+            "passed": true,
+            "range": [
+              0.03,
+              0.5
+            ]
+          },
+          {
+            "name": "Streams",
+            "v": 300.0,
+            "sigma_m": 0.10788346399872965,
+            "passed": true,
+            "range": [
+              0.05,
+              1.0
+            ]
+          },
+          {
+            "name": "Bullet",
+            "v": 3000.0,
+            "sigma_m": 0.05406981487565074,
+            "passed": true,
+            "range": [
+              0.0,
+              0.1
+            ]
+          },
+          {
+            "name": "UFD cores obs",
+            "v": 15.0,
+            "sigma_m": 0.2650110651883082,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "Extreme UFD bound",
+            "v": 5.0,
+            "sigma_m": 4.372155422418777,
+            "passed": true,
+            "range": [
+              0.0,
+              5.0
+            ]
+          },
+          {
+            "name": "LyA forest",
+            "v": 50.0,
+            "sigma_m": 0.18467166200173743,
+            "passed": true,
+            "range": [
+              0.005,
+              0.5
+            ]
+          },
+          {
+            "name": "v=500",
+            "v": 500.0,
+            "sigma_m": 0.09255507940800145,
+            "passed": true,
+            "range": [
+              0.001,
+              0.1
+            ]
+          },
+          {
+            "name": "dSph core v=5",
+            "v": 5.0,
+            "sigma_m": 4.372155422418777,
+            "passed": true,
+            "range": [
+              0.5,
+              5.0
+            ]
+          },
+          {
+            "name": "dSph core v=10",
+            "v": 10.0,
+            "sigma_m": 0.4421168511680838,
+            "passed": true,
+            "range": [
+              0.3,
+              1.0
+            ]
+          },
+          {
+            "name": "dSph core v=15",
+            "v": 15.0,
+            "sigma_m": 0.2650110651883082,
+            "passed": true,
+            "range": [
+              0.2,
+              0.8
+            ]
+          },
+          {
+            "name": "dSph core v=20",
+            "v": 20.0,
+            "sigma_m": 0.2458767099021324,
+            "passed": true,
+            "range": [
+              0.1,
+              0.5
+            ]
+          }
+        ]
+      },
+      {
+        "a_slope": 0.3,
+        "sigma_0": 0.15,
+        "sigma_peak": 174,
+        "sigma_1": 2.0,
+        "v_target_2": 7,
+        "sigma_peak_2": 5,
+        "sigma_1_2": 1.0,
+        "score": 20,
+        "channel_details": [
+          {
+            "name": "Cloud-9 peak",
+            "v": 29.4,
+            "sigma_m": 174.2165643967071,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Cloud-9 kinematic",
+            "v": 28.0,
+            "sigma_m": 136.410347226861,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Horigome v=10",
+            "v": 10.0,
+            "sigma_m": 0.35483432993654346,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=15",
+            "v": 15.0,
+            "sigma_m": 0.2650109890384728,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=20",
+            "v": 20.0,
+            "sigma_m": 0.2458767099021324,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Andrade cluster",
+            "v": 1458.0,
+            "sigma_m": 0.06713732013152852,
+            "passed": true,
+            "range": [
+              0.0,
+              0.13
+            ]
+          },
+          {
+            "name": "O'Donnell",
+            "v": 2090.0,
+            "sigma_m": 0.06026253173865723,
+            "passed": true,
+            "range": [
+              0.0,
+              0.613
+            ]
+          },
+          {
+            "name": "Jee 2026",
+            "v": 1500.0,
+            "sigma_m": 0.06656775051475125,
+            "passed": true,
+            "range": [
+              0.0,
+              0.22
+            ]
+          },
+          {
+            "name": "Gilman 2023",
+            "v": 1000.0,
+            "sigma_m": 0.07517808504409085,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "SPARC",
+            "v": 100.0,
+            "sigma_m": 0.15,
+            "passed": true,
+            "range": [
+              0.03,
+              0.5
+            ]
+          },
+          {
+            "name": "Streams",
+            "v": 300.0,
+            "sigma_m": 0.10788346399872965,
+            "passed": true,
+            "range": [
+              0.05,
+              1.0
+            ]
+          },
+          {
+            "name": "Bullet",
+            "v": 3000.0,
+            "sigma_m": 0.05406981487565074,
+            "passed": true,
+            "range": [
+              0.0,
+              0.1
+            ]
+          },
+          {
+            "name": "UFD cores obs",
+            "v": 15.0,
+            "sigma_m": 0.2650109890384728,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "Extreme UFD bound",
+            "v": 5.0,
+            "sigma_m": 1.0451448240178005,
+            "passed": true,
+            "range": [
+              0.0,
+              5.0
+            ]
+          },
+          {
+            "name": "LyA forest",
+            "v": 50.0,
+            "sigma_m": 0.18467166200173743,
+            "passed": true,
+            "range": [
+              0.005,
+              0.5
+            ]
+          },
+          {
+            "name": "v=500",
+            "v": 500.0,
+            "sigma_m": 0.09255507940800145,
+            "passed": true,
+            "range": [
+              0.001,
+              0.1
+            ]
+          },
+          {
+            "name": "dSph core v=5",
+            "v": 5.0,
+            "sigma_m": 1.0451448240178005,
+            "passed": true,
+            "range": [
+              0.5,
+              5.0
+            ]
+          },
+          {
+            "name": "dSph core v=10",
+            "v": 10.0,
+            "sigma_m": 0.35483432993654346,
+            "passed": true,
+            "range": [
+              0.3,
+              1.0
+            ]
+          },
+          {
+            "name": "dSph core v=15",
+            "v": 15.0,
+            "sigma_m": 0.2650109890384728,
+            "passed": true,
+            "range": [
+              0.2,
+              0.8
+            ]
+          },
+          {
+            "name": "dSph core v=20",
+            "v": 20.0,
+            "sigma_m": 0.2458767099021324,
+            "passed": true,
+            "range": [
+              0.1,
+              0.5
+            ]
+          }
+        ]
+      },
+      {
+        "a_slope": 0.3,
+        "sigma_0": 0.15,
+        "sigma_peak": 174,
+        "sigma_1": 2.0,
+        "v_target_2": 7,
+        "sigma_peak_2": 10,
+        "sigma_1_2": 1.0,
+        "score": 20,
+        "channel_details": [
+          {
+            "name": "Cloud-9 peak",
+            "v": 29.4,
+            "sigma_m": 174.2165643967071,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Cloud-9 kinematic",
+            "v": 28.0,
+            "sigma_m": 136.410347226861,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Horigome v=10",
+            "v": 10.0,
+            "sigma_m": 0.41037931262775496,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=15",
+            "v": 15.0,
+            "sigma_m": 0.2650109890385361,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=20",
+            "v": 20.0,
+            "sigma_m": 0.2458767099021324,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Andrade cluster",
+            "v": 1458.0,
+            "sigma_m": 0.06713732013152852,
+            "passed": true,
+            "range": [
+              0.0,
+              0.13
+            ]
+          },
+          {
+            "name": "O'Donnell",
+            "v": 2090.0,
+            "sigma_m": 0.06026253173865723,
+            "passed": true,
+            "range": [
+              0.0,
+              0.613
+            ]
+          },
+          {
+            "name": "Jee 2026",
+            "v": 1500.0,
+            "sigma_m": 0.06656775051475125,
+            "passed": true,
+            "range": [
+              0.0,
+              0.22
+            ]
+          },
+          {
+            "name": "Gilman 2023",
+            "v": 1000.0,
+            "sigma_m": 0.07517808504409085,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "SPARC",
+            "v": 100.0,
+            "sigma_m": 0.15,
+            "passed": true,
+            "range": [
+              0.03,
+              0.5
+            ]
+          },
+          {
+            "name": "Streams",
+            "v": 300.0,
+            "sigma_m": 0.10788346399872965,
+            "passed": true,
+            "range": [
+              0.05,
+              1.0
+            ]
+          },
+          {
+            "name": "Bullet",
+            "v": 3000.0,
+            "sigma_m": 0.05406981487565074,
+            "passed": true,
+            "range": [
+              0.0,
+              0.1
+            ]
+          },
+          {
+            "name": "UFD cores obs",
+            "v": 15.0,
+            "sigma_m": 0.2650109890385361,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "Extreme UFD bound",
+            "v": 5.0,
+            "sigma_m": 1.7218212402008641,
+            "passed": true,
+            "range": [
+              0.0,
+              5.0
+            ]
+          },
+          {
+            "name": "LyA forest",
+            "v": 50.0,
+            "sigma_m": 0.18467166200173743,
+            "passed": true,
+            "range": [
+              0.005,
+              0.5
+            ]
+          },
+          {
+            "name": "v=500",
+            "v": 500.0,
+            "sigma_m": 0.09255507940800145,
+            "passed": true,
+            "range": [
+              0.001,
+              0.1
+            ]
+          },
+          {
+            "name": "dSph core v=5",
+            "v": 5.0,
+            "sigma_m": 1.7218212402008641,
+            "passed": true,
+            "range": [
+              0.5,
+              5.0
+            ]
+          },
+          {
+            "name": "dSph core v=10",
+            "v": 10.0,
+            "sigma_m": 0.41037931262775496,
+            "passed": true,
+            "range": [
+              0.3,
+              1.0
+            ]
+          },
+          {
+            "name": "dSph core v=15",
+            "v": 15.0,
+            "sigma_m": 0.2650109890385361,
+            "passed": true,
+            "range": [
+              0.2,
+              0.8
+            ]
+          },
+          {
+            "name": "dSph core v=20",
+            "v": 20.0,
+            "sigma_m": 0.2458767099021324,
+            "passed": true,
+            "range": [
+              0.1,
+              0.5
+            ]
+          }
+        ]
+      },
+      {
+        "a_slope": 0.3,
+        "sigma_0": 0.15,
+        "sigma_peak": 174,
+        "sigma_1": 2.0,
+        "v_target_2": 7,
+        "sigma_peak_2": 20,
+        "sigma_1_2": 1.0,
+        "score": 20,
+        "channel_details": [
+          {
+            "name": "Cloud-9 peak",
+            "v": 29.4,
+            "sigma_m": 174.2165643967071,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Cloud-9 kinematic",
+            "v": 28.0,
+            "sigma_m": 136.410347226861,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Horigome v=10",
+            "v": 10.0,
+            "sigma_m": 0.5214692780101781,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=15",
+            "v": 15.0,
+            "sigma_m": 0.26501098903866277,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=20",
+            "v": 20.0,
+            "sigma_m": 0.2458767099021324,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Andrade cluster",
+            "v": 1458.0,
+            "sigma_m": 0.06713732013152852,
+            "passed": true,
+            "range": [
+              0.0,
+              0.13
+            ]
+          },
+          {
+            "name": "O'Donnell",
+            "v": 2090.0,
+            "sigma_m": 0.06026253173865723,
+            "passed": true,
+            "range": [
+              0.0,
+              0.613
+            ]
+          },
+          {
+            "name": "Jee 2026",
+            "v": 1500.0,
+            "sigma_m": 0.06656775051475125,
+            "passed": true,
+            "range": [
+              0.0,
+              0.22
+            ]
+          },
+          {
+            "name": "Gilman 2023",
+            "v": 1000.0,
+            "sigma_m": 0.07517808504409085,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "SPARC",
+            "v": 100.0,
+            "sigma_m": 0.15,
+            "passed": true,
+            "range": [
+              0.03,
+              0.5
+            ]
+          },
+          {
+            "name": "Streams",
+            "v": 300.0,
+            "sigma_m": 0.10788346399872965,
+            "passed": true,
+            "range": [
+              0.05,
+              1.0
+            ]
+          },
+          {
+            "name": "Bullet",
+            "v": 3000.0,
+            "sigma_m": 0.05406981487565074,
+            "passed": true,
+            "range": [
+              0.0,
+              0.1
+            ]
+          },
+          {
+            "name": "UFD cores obs",
+            "v": 15.0,
+            "sigma_m": 0.26501098903866277,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "Extreme UFD bound",
+            "v": 5.0,
+            "sigma_m": 3.075174072566991,
+            "passed": true,
+            "range": [
+              0.0,
+              5.0
+            ]
+          },
+          {
+            "name": "LyA forest",
+            "v": 50.0,
+            "sigma_m": 0.18467166200173743,
+            "passed": true,
+            "range": [
+              0.005,
+              0.5
+            ]
+          },
+          {
+            "name": "v=500",
+            "v": 500.0,
+            "sigma_m": 0.09255507940800145,
+            "passed": true,
+            "range": [
+              0.001,
+              0.1
+            ]
+          },
+          {
+            "name": "dSph core v=5",
+            "v": 5.0,
+            "sigma_m": 3.075174072566991,
+            "passed": true,
+            "range": [
+              0.5,
+              5.0
+            ]
+          },
+          {
+            "name": "dSph core v=10",
+            "v": 10.0,
+            "sigma_m": 0.5214692780101781,
+            "passed": true,
+            "range": [
+              0.3,
+              1.0
+            ]
+          },
+          {
+            "name": "dSph core v=15",
+            "v": 15.0,
+            "sigma_m": 0.26501098903866277,
+            "passed": true,
+            "range": [
+              0.2,
+              0.8
+            ]
+          },
+          {
+            "name": "dSph core v=20",
+            "v": 20.0,
+            "sigma_m": 0.2458767099021324,
+            "passed": true,
+            "range": [
+              0.1,
+              0.5
+            ]
+          }
+        ]
+      },
+      {
+        "a_slope": 0.35,
+        "sigma_0": 0.12,
+        "sigma_peak": 174,
+        "sigma_1": 1.5,
+        "v_target_2": 6,
+        "sigma_peak_2": 5,
+        "sigma_1_2": 1.5,
+        "score": 20,
+        "channel_details": [
+          {
+            "name": "Cloud-9 peak",
+            "v": 29.4,
+            "sigma_m": 174.1841872994861,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Cloud-9 kinematic",
+            "v": 28.0,
+            "sigma_m": 112.74886012412682,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Horigome v=10",
+            "v": 10.0,
+            "sigma_m": 0.4114740405509526,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=15",
+            "v": 15.0,
+            "sigma_m": 0.23310385040754059,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=20",
+            "v": 20.0,
+            "sigma_m": 0.21077631693358387,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Andrade cluster",
+            "v": 1458.0,
+            "sigma_m": 0.04697492686840632,
+            "passed": true,
+            "range": [
+              0.0,
+              0.13
+            ]
+          },
+          {
+            "name": "O'Donnell",
+            "v": 2090.0,
+            "sigma_m": 0.041412366217808375,
+            "passed": true,
+            "range": [
+              0.0,
+              0.613
+            ]
+          },
+          {
+            "name": "Jee 2026",
+            "v": 1500.0,
+            "sigma_m": 0.04651031762532856,
+            "passed": true,
+            "range": [
+              0.0,
+              0.22
+            ]
+          },
+          {
+            "name": "Gilman 2023",
+            "v": 1000.0,
+            "sigma_m": 0.053602031058115576,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "SPARC",
+            "v": 100.0,
+            "sigma_m": 0.12,
+            "passed": true,
+            "range": [
+              0.03,
+              0.5
+            ]
+          },
+          {
+            "name": "Streams",
+            "v": 300.0,
+            "sigma_m": 0.08169374527781405,
+            "passed": true,
+            "range": [
+              0.05,
+              1.0
+            ]
+          },
+          {
+            "name": "Bullet",
+            "v": 3000.0,
+            "sigma_m": 0.03649125559695976,
+            "passed": true,
+            "range": [
+              0.0,
+              0.1
+            ]
+          },
+          {
+            "name": "UFD cores obs",
+            "v": 15.0,
+            "sigma_m": 0.23310385040754059,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "Extreme UFD bound",
+            "v": 5.0,
+            "sigma_m": 4.346093312836027,
+            "passed": true,
+            "range": [
+              0.0,
+              5.0
+            ]
+          },
+          {
+            "name": "LyA forest",
+            "v": 50.0,
+            "sigma_m": 0.15294727527831145,
+            "passed": true,
+            "range": [
+              0.005,
+              0.5
+            ]
+          },
+          {
+            "name": "v=500",
+            "v": 500.0,
+            "sigma_m": 0.06831903833101836,
+            "passed": true,
+            "range": [
+              0.001,
+              0.1
+            ]
+          },
+          {
+            "name": "dSph core v=5",
+            "v": 5.0,
+            "sigma_m": 4.346093312836027,
+            "passed": true,
+            "range": [
+              0.5,
+              5.0
+            ]
+          },
+          {
+            "name": "dSph core v=10",
+            "v": 10.0,
+            "sigma_m": 0.4114740405509526,
+            "passed": true,
+            "range": [
+              0.3,
+              1.0
+            ]
+          },
+          {
+            "name": "dSph core v=15",
+            "v": 15.0,
+            "sigma_m": 0.23310385040754059,
+            "passed": true,
+            "range": [
+              0.2,
+              0.8
+            ]
+          },
+          {
+            "name": "dSph core v=20",
+            "v": 20.0,
+            "sigma_m": 0.21077631693358387,
+            "passed": true,
+            "range": [
+              0.1,
+              0.5
+            ]
+          }
+        ]
+      },
+      {
+        "a_slope": 0.35,
+        "sigma_0": 0.12,
+        "sigma_peak": 174,
+        "sigma_1": 1.5,
+        "v_target_2": 7,
+        "sigma_peak_2": 5,
+        "sigma_1_2": 1.0,
+        "score": 20,
+        "channel_details": [
+          {
+            "name": "Cloud-9 peak",
+            "v": 29.4,
+            "sigma_m": 174.1841872994861,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Cloud-9 kinematic",
+            "v": 28.0,
+            "sigma_m": 112.74886012412682,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Horigome v=10",
+            "v": 10.0,
+            "sigma_m": 0.32419151931941226,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=15",
+            "v": 15.0,
+            "sigma_m": 0.23310377425770518,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=20",
+            "v": 20.0,
+            "sigma_m": 0.21077631693358387,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Andrade cluster",
+            "v": 1458.0,
+            "sigma_m": 0.04697492686840632,
+            "passed": true,
+            "range": [
+              0.0,
+              0.13
+            ]
+          },
+          {
+            "name": "O'Donnell",
+            "v": 2090.0,
+            "sigma_m": 0.041412366217808375,
+            "passed": true,
+            "range": [
+              0.0,
+              0.613
+            ]
+          },
+          {
+            "name": "Jee 2026",
+            "v": 1500.0,
+            "sigma_m": 0.04651031762532856,
+            "passed": true,
+            "range": [
+              0.0,
+              0.22
+            ]
+          },
+          {
+            "name": "Gilman 2023",
+            "v": 1000.0,
+            "sigma_m": 0.053602031058115576,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "SPARC",
+            "v": 100.0,
+            "sigma_m": 0.12,
+            "passed": true,
+            "range": [
+              0.03,
+              0.5
+            ]
+          },
+          {
+            "name": "Streams",
+            "v": 300.0,
+            "sigma_m": 0.08169374527781405,
+            "passed": true,
+            "range": [
+              0.05,
+              1.0
+            ]
+          },
+          {
+            "name": "Bullet",
+            "v": 3000.0,
+            "sigma_m": 0.03649125559695976,
+            "passed": true,
+            "range": [
+              0.0,
+              0.1
+            ]
+          },
+          {
+            "name": "UFD cores obs",
+            "v": 15.0,
+            "sigma_m": 0.23310377425770518,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "Extreme UFD bound",
+            "v": 5.0,
+            "sigma_m": 1.0190827144350503,
+            "passed": true,
+            "range": [
+              0.0,
+              5.0
+            ]
+          },
+          {
+            "name": "LyA forest",
+            "v": 50.0,
+            "sigma_m": 0.15294727527831145,
+            "passed": true,
+            "range": [
+              0.005,
+              0.5
+            ]
+          },
+          {
+            "name": "v=500",
+            "v": 500.0,
+            "sigma_m": 0.06831903833101836,
+            "passed": true,
+            "range": [
+              0.001,
+              0.1
+            ]
+          },
+          {
+            "name": "dSph core v=5",
+            "v": 5.0,
+            "sigma_m": 1.0190827144350503,
+            "passed": true,
+            "range": [
+              0.5,
+              5.0
+            ]
+          },
+          {
+            "name": "dSph core v=10",
+            "v": 10.0,
+            "sigma_m": 0.32419151931941226,
+            "passed": true,
+            "range": [
+              0.3,
+              1.0
+            ]
+          },
+          {
+            "name": "dSph core v=15",
+            "v": 15.0,
+            "sigma_m": 0.23310377425770518,
+            "passed": true,
+            "range": [
+              0.2,
+              0.8
+            ]
+          },
+          {
+            "name": "dSph core v=20",
+            "v": 20.0,
+            "sigma_m": 0.21077631693358387,
+            "passed": true,
+            "range": [
+              0.1,
+              0.5
+            ]
+          }
+        ]
+      },
+      {
+        "a_slope": 0.35,
+        "sigma_0": 0.12,
+        "sigma_peak": 174,
+        "sigma_1": 1.5,
+        "v_target_2": 7,
+        "sigma_peak_2": 10,
+        "sigma_1_2": 1.0,
+        "score": 20,
+        "channel_details": [
+          {
+            "name": "Cloud-9 peak",
+            "v": 29.4,
+            "sigma_m": 174.1841872994861,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Cloud-9 kinematic",
+            "v": 28.0,
+            "sigma_m": 112.74886012412682,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Horigome v=10",
+            "v": 10.0,
+            "sigma_m": 0.37973650201062376,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=15",
+            "v": 15.0,
+            "sigma_m": 0.23310377425776851,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=20",
+            "v": 20.0,
+            "sigma_m": 0.21077631693358387,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Andrade cluster",
+            "v": 1458.0,
+            "sigma_m": 0.04697492686840632,
+            "passed": true,
+            "range": [
+              0.0,
+              0.13
+            ]
+          },
+          {
+            "name": "O'Donnell",
+            "v": 2090.0,
+            "sigma_m": 0.041412366217808375,
+            "passed": true,
+            "range": [
+              0.0,
+              0.613
+            ]
+          },
+          {
+            "name": "Jee 2026",
+            "v": 1500.0,
+            "sigma_m": 0.04651031762532856,
+            "passed": true,
+            "range": [
+              0.0,
+              0.22
+            ]
+          },
+          {
+            "name": "Gilman 2023",
+            "v": 1000.0,
+            "sigma_m": 0.053602031058115576,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "SPARC",
+            "v": 100.0,
+            "sigma_m": 0.12,
+            "passed": true,
+            "range": [
+              0.03,
+              0.5
+            ]
+          },
+          {
+            "name": "Streams",
+            "v": 300.0,
+            "sigma_m": 0.08169374527781405,
+            "passed": true,
+            "range": [
+              0.05,
+              1.0
+            ]
+          },
+          {
+            "name": "Bullet",
+            "v": 3000.0,
+            "sigma_m": 0.03649125559695976,
+            "passed": true,
+            "range": [
+              0.0,
+              0.1
+            ]
+          },
+          {
+            "name": "UFD cores obs",
+            "v": 15.0,
+            "sigma_m": 0.23310377425776851,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "Extreme UFD bound",
+            "v": 5.0,
+            "sigma_m": 1.6957591306181137,
+            "passed": true,
+            "range": [
+              0.0,
+              5.0
+            ]
+          },
+          {
+            "name": "LyA forest",
+            "v": 50.0,
+            "sigma_m": 0.15294727527831145,
+            "passed": true,
+            "range": [
+              0.005,
+              0.5
+            ]
+          },
+          {
+            "name": "v=500",
+            "v": 500.0,
+            "sigma_m": 0.06831903833101836,
+            "passed": true,
+            "range": [
+              0.001,
+              0.1
+            ]
+          },
+          {
+            "name": "dSph core v=5",
+            "v": 5.0,
+            "sigma_m": 1.6957591306181137,
+            "passed": true,
+            "range": [
+              0.5,
+              5.0
+            ]
+          },
+          {
+            "name": "dSph core v=10",
+            "v": 10.0,
+            "sigma_m": 0.37973650201062376,
+            "passed": true,
+            "range": [
+              0.3,
+              1.0
+            ]
+          },
+          {
+            "name": "dSph core v=15",
+            "v": 15.0,
+            "sigma_m": 0.23310377425776851,
+            "passed": true,
+            "range": [
+              0.2,
+              0.8
+            ]
+          },
+          {
+            "name": "dSph core v=20",
+            "v": 20.0,
+            "sigma_m": 0.21077631693358387,
+            "passed": true,
+            "range": [
+              0.1,
+              0.5
+            ]
+          }
+        ]
+      },
+      {
+        "a_slope": 0.35,
+        "sigma_0": 0.12,
+        "sigma_peak": 174,
+        "sigma_1": 1.5,
+        "v_target_2": 7,
+        "sigma_peak_2": 20,
+        "sigma_1_2": 1.0,
+        "score": 20,
+        "channel_details": [
+          {
+            "name": "Cloud-9 peak",
+            "v": 29.4,
+            "sigma_m": 174.1841872994861,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Cloud-9 kinematic",
+            "v": 28.0,
+            "sigma_m": 112.74886012412682,
+            "passed": true,
+            "range": [
+              87.0,
+              348.0
+            ]
+          },
+          {
+            "name": "Horigome v=10",
+            "v": 10.0,
+            "sigma_m": 0.4908264673930468,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=15",
+            "v": 15.0,
+            "sigma_m": 0.23310377425789514,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Horigome v=20",
+            "v": 20.0,
+            "sigma_m": 0.21077631693358387,
+            "passed": true,
+            "range": [
+              0.0,
+              0.8
+            ]
+          },
+          {
+            "name": "Andrade cluster",
+            "v": 1458.0,
+            "sigma_m": 0.04697492686840632,
+            "passed": true,
+            "range": [
+              0.0,
+              0.13
+            ]
+          },
+          {
+            "name": "O'Donnell",
+            "v": 2090.0,
+            "sigma_m": 0.041412366217808375,
+            "passed": true,
+            "range": [
+              0.0,
+              0.613
+            ]
+          },
+          {
+            "name": "Jee 2026",
+            "v": 1500.0,
+            "sigma_m": 0.04651031762532856,
+            "passed": true,
+            "range": [
+              0.0,
+              0.22
+            ]
+          },
+          {
+            "name": "Gilman 2023",
+            "v": 1000.0,
+            "sigma_m": 0.053602031058115576,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "SPARC",
+            "v": 100.0,
+            "sigma_m": 0.12,
+            "passed": true,
+            "range": [
+              0.03,
+              0.5
+            ]
+          },
+          {
+            "name": "Streams",
+            "v": 300.0,
+            "sigma_m": 0.08169374527781405,
+            "passed": true,
+            "range": [
+              0.05,
+              1.0
+            ]
+          },
+          {
+            "name": "Bullet",
+            "v": 3000.0,
+            "sigma_m": 0.03649125559695976,
+            "passed": true,
+            "range": [
+              0.0,
+              0.1
+            ]
+          },
+          {
+            "name": "UFD cores obs",
+            "v": 15.0,
+            "sigma_m": 0.23310377425789514,
+            "passed": true,
+            "range": [
+              0.0,
+              0.5
+            ]
+          },
+          {
+            "name": "Extreme UFD bound",
+            "v": 5.0,
+            "sigma_m": 3.0491119629842407,
+            "passed": true,
+            "range": [
+              0.0,
+              5.0
+            ]
+          },
+          {
+            "name": "LyA forest",
+            "v": 50.0,
+            "sigma_m": 0.15294727527831145,
+            "passed": true,
+            "range": [
+              0.005,
+              0.5
+            ]
+          },
+          {
+            "name": "v=500",
+            "v": 500.0,
+            "sigma_m": 0.06831903833101836,
+            "passed": true,
+            "range": [
+              0.001,
+              0.1
+            ]
+          },
+          {
+            "name": "dSph core v=5",
+            "v": 5.0,
+            "sigma_m": 3.0491119629842407,
+            "passed": true,
+            "range": [
+              0.5,
+              5.0
+            ]
+          },
+          {
+            "name": "dSph core v=10",
+            "v": 10.0,
+            "sigma_m": 0.4908264673930468,
+            "passed": true,
+            "range": [
+              0.3,
+              1.0
+            ]
+          },
+          {
+            "name": "dSph core v=15",
+            "v": 15.0,
+            "sigma_m": 0.23310377425789514,
+            "passed": true,
+            "range": [
+              0.2,
+              0.8
+            ]
+          },
+          {
+            "name": "dSph core v=20",
+            "v": 20.0,
+            "sigma_m": 0.21077631693358387,
+            "passed": true,
+            "range": [
+              0.1,
+              0.5
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "bayesian_comparison": {
+    "k_single": 4,
+    "k_multi": 7,
+    "V_single": 5.1205,
+    "V_multi": 1462.5,
+    "BIC_single": 11.982929094215963,
+    "BIC_multi": 20.970125914877936,
+    "delta_BIC": 8.987196820661973,
+    "log_Z_ratio": 1.9650136251419053,
+    "f_multi_wider": 0.011171875,
+    "V_working_single": 0.0256025,
+    "V_working_multi": 16.3388671875
+  },
+  "channels_full": [
+    {
+      "name": "Cloud-9 peak",
+      "v_kms": 29.4,
+      "sigma_m_min": 87.0,
+      "sigma_m_max": 348.0,
+      "source": "v40.24 canonical sigma_peak=174"
+    },
+    {
+      "name": "Cloud-9 kinematic",
+      "v_kms": 28.0,
+      "sigma_m_min": 87.0,
+      "sigma_m_max": 348.0,
+      "source": "v40.24 sigma/m(28)=166"
+    },
+    {
+      "name": "Horigome v=10",
+      "v_kms": 10.0,
+      "sigma_m_min": 0.0,
+      "sigma_m_max": 0.8,
+      "source": "arXiv:2503.13650 (Horigome+ 2025) w=10"
+    },
+    {
+      "name": "Horigome v=15",
+      "v_kms": 15.0,
+      "sigma_m_min": 0.0,
+      "sigma_m_max": 0.8,
+      "source": "arXiv:2503.13650 w=10"
+    },
+    {
+      "name": "Horigome v=20",
+      "v_kms": 20.0,
+      "sigma_m_min": 0.0,
+      "sigma_m_max": 0.8,
+      "source": "arXiv:2503.13650 w=10"
+    },
+    {
+      "name": "Andrade cluster",
+      "v_kms": 1458.0,
+      "sigma_m_min": 0.0,
+      "sigma_m_max": 0.13,
+      "source": "Andrade+ 2022 MNRAS 510, 54"
+    },
+    {
+      "name": "O'Donnell",
+      "v_kms": 2090.0,
+      "sigma_m_min": 0.0,
+      "sigma_m_max": 0.613,
+      "source": "arXiv:2508.20179 (O'Donnell+ 2025)"
+    },
+    {
+      "name": "Jee 2026",
+      "v_kms": 1500.0,
+      "sigma_m_min": 0.0,
+      "sigma_m_max": 0.22,
+      "source": "arXiv:2605.00093 (Jee+ 2026)"
+    },
+    {
+      "name": "Gilman 2023",
+      "v_kms": 1000.0,
+      "sigma_m_min": 0.0,
+      "sigma_m_max": 0.5,
+      "source": "arXiv:2207.13111 (Gilman+ 2023)"
+    },
+    {
+      "name": "SPARC",
+      "v_kms": 100.0,
+      "sigma_m_min": 0.03,
+      "sigma_m_max": 0.5,
+      "source": "Elbert+ 2015"
+    },
+    {
+      "name": "Streams",
+      "v_kms": 300.0,
+      "sigma_m_min": 0.05,
+      "sigma_m_max": 1.0,
+      "source": "Stream kinematic"
+    },
+    {
+      "name": "Bullet",
+      "v_kms": 3000.0,
+      "sigma_m_min": 0.0,
+      "sigma_m_max": 0.1,
+      "source": "Bullet shock"
+    },
+    {
+      "name": "UFD cores obs",
+      "v_kms": 15.0,
+      "sigma_m_min": 0.0,
+      "sigma_m_max": 0.5,
+      "source": "arXiv:2510.05682 (Sanchez Almeida 2025)"
+    },
+    {
+      "name": "Extreme UFD bound",
+      "v_kms": 5.0,
+      "sigma_m_min": 0.0,
+      "sigma_m_max": 5.0,
+      "source": "Loose upper"
+    },
+    {
+      "name": "LyA forest",
+      "v_kms": 50.0,
+      "sigma_m_min": 0.005,
+      "sigma_m_max": 0.5,
+      "source": "Rough bound"
+    },
+    {
+      "name": "v=500",
+      "v_kms": 500.0,
+      "sigma_m_min": 0.001,
+      "sigma_m_max": 0.1,
+      "source": "Intermediate"
+    },
+    {
+      "name": "dSph core v=5",
+      "v_kms": 5.0,
+      "sigma_m_min": 0.5,
+      "sigma_m_max": 5.0,
+      "source": "Kaplinghat+ 2016 (arXiv:1508.03339)"
+    },
+    {
+      "name": "dSph core v=10",
+      "v_kms": 10.0,
+      "sigma_m_min": 0.3,
+      "sigma_m_max": 1.0,
+      "source": "Rocha+ 2013 (arXiv:1208.0025)"
+    },
+    {
+      "name": "dSph core v=15",
+      "v_kms": 15.0,
+      "sigma_m_min": 0.2,
+      "sigma_m_max": 0.8,
+      "source": "Kaplinghat+ 2016"
+    },
+    {
+      "name": "dSph core v=20",
+      "v_kms": 20.0,
+      "sigma_m_min": 0.1,
+      "sigma_m_max": 0.5,
+      "source": "Kaplinghat+ 2016"
+    }
+  ],
+  "fano_normalization_note": "The v40.36 confirms the Fano profile is correctly normalized: peak is at epsilon=1/q with value=sigma_peak. The n5.docx review claimed the peak was sigma_peak/(1+q^2), but this was an error. Verification: at q=1, max is at eps=1 with value=1 (so peak=sigma_peak); at q=3, max is at eps=0.333 with value=1. The Fano is correct.",
+  "v7_explanation": "The v=7 magic value is BELOW the dSph Horigome channels (v=10, 15, 20). A 2nd narrow peak (sigma_1_2=0.5-1.0) at v=7 contributes mostly at v=5-9 (for dSph core formation) and almost nothing at v=10+ (preserves Horigome). UV motivation: Tsai 2022 (arXiv:2008.08608) dark-QCD predicts multiple narrow resonances at Y(nS)-like levels with spacing m[Y(nS)]-m[Y((n-1)S)] = C*[1/n + O(1/n^2)]. The v=7 and v=29.4 could be consecutive levels. The exact value depends on the dark quark mass scale.",
+  "channel_set_honesty": {
+    "lower_bound_sources": "Kaplinghat+ 2016 PRL 116, 041302 (arXiv:1508.03339) and Rocha+ 2013 MNRAS 430, 81 (arXiv:1208.0025). These give approximate ranges (e.g., sigma/m > 0.3-0.5 at v=10). The exact value 0.3 is a choice within the approximate range.",
+    "upper_bound_sources": "Horigome+ 2025 (arXiv:2503.13650) for dSph, Andrade+ 2022 MNRAS 510, 54 for cluster, etc. These are 95% CL upper limits with specific methodology.",
+    "window_choices": "The 20 channels and their windows are a CHOICE, not a unique dataset. Different choices (e.g., Horigome dSph core [0.4, 0.8] instead of [0.3, 1.0]) would give different results. The v19.2-F framework should be re-verified under different channel choices.",
+    "sensitivity": "A 0.05 shift in any lower bound (e.g., dSph core v=10 from 0.3 to 0.35) could change the basin size by ~50%. The 20/20 finding is real but sensitive to window choices."
+  },
+  "open_issues": {
+    "framework_inconsistency_real": true,
+    "multi_resonance_uv_incomplete": true,
+    "alpha_D_for_v7_peak_unclear": true,
+    "no_n_body_verification": true,
+    "bayesian_method_approximate": true,
+    "channel_set_choices_subjective": true
+  }
+}
