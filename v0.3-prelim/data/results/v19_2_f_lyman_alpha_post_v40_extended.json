@@ -1,0 +1,511 @@
+{
+  "config": {
+    "alpha_D_Cloud9": 5.55e-06,
+    "v_target_kms": 29.4,
+    "sigma_target_cm2_g": 174.0,
+    "m_chi_GeV": 1.0,
+    "m_rho_GeV": 5e-05,
+    "extended_gammas": [
+      0.01,
+      0.1,
+      0.5,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      7.5,
+      8,
+      9,
+      10,
+      12,
+      15,
+      20,
+      25,
+      30,
+      40,
+      50
+    ],
+    "description": "v40 r40 Sci items 5, 6: extended Gamma/rho scan + convergence tests"
+  },
+  "extended_scan_MB_sigma50_dwarf": {
+    "Gamma_rho_0.01": {
+      "sigma_eff_at_cloud9": 131989.97877648688,
+      "ratio_target": 758.5630964165913,
+      "region": "OUT",
+      "in_band_window": [
+        1.4649713983072877e-07,
+        2.6126752255633264e-07
+      ],
+      "window_factor": 1.7834308769319058,
+      "cloud9_in_window": false
+    },
+    "Gamma_rho_0.1": {
+      "sigma_eff_at_cloud9": 12771.281495459723,
+      "ratio_target": 73.39816951413634,
+      "region": "OUT",
+      "in_band_window": [
+        4.659525668664687e-07,
+        8.309941949353386e-07
+      ],
+      "window_factor": 1.7834308769319056,
+      "cloud9_in_window": false
+    },
+    "Gamma_rho_0.5": {
+      "sigma_eff_at_cloud9": 2205.9632406086134,
+      "ratio_target": 12.677949658670192,
+      "region": "OUT",
+      "in_band_window": [
+        1.1758495540521558e-06,
+        2.097046401323231e-06
+      ],
+      "window_factor": 1.7834308769319094,
+      "cloud9_in_window": false
+    },
+    "Gamma_rho_1": {
+      "sigma_eff_at_cloud9": 951.3829307160064,
+      "ratio_target": 5.467717992620726,
+      "region": "NEAR TARGET",
+      "in_band_window": [
+        1.867913599020781e-06,
+        3.33129478793467e-06
+      ],
+      "window_factor": 1.7834308769319092,
+      "cloud9_in_window": false
+    },
+    "Gamma_rho_2": {
+      "sigma_eff_at_cloud9": 391.3982921004882,
+      "ratio_target": 2.2494154718418864,
+      "region": "NEAR TARGET",
+      "in_band_window": [
+        2.643081486974103e-06,
+        4.7137531341167196e-06
+      ],
+      "window_factor": 1.7834308769319096,
+      "cloud9_in_window": false
+    },
+    "Gamma_rho_3": {
+      "sigma_eff_at_cloud9": 228.85226315573232,
+      "ratio_target": 1.315242891699611,
+      "region": "IN BAND",
+      "in_band_window": [
+        3.739937302478794e-06,
+        6.669919663030115e-06
+      ],
+      "window_factor": 1.7834308769319094,
+      "cloud9_in_window": true
+    },
+    "Gamma_rho_4": {
+      "sigma_eff_at_cloud9": 154.6799730059923,
+      "ratio_target": 0.888965362103404,
+      "region": "IN BAND",
+      "in_band_window": [
+        4.198707084443905e-06,
+        7.4881038575900155e-06
+      ],
+      "window_factor": 1.7834308769319096,
+      "cloud9_in_window": true
+    },
+    "Gamma_rho_5": {
+      "sigma_eff_at_cloud9": 113.15521771826438,
+      "ratio_target": 0.6503173432084159,
+      "region": "IN BAND",
+      "in_band_window": [
+        5.291978735958436e-06,
+        9.437878277775371e-06
+      ],
+      "window_factor": 1.7834308769319094,
+      "cloud9_in_window": true
+    },
+    "Gamma_rho_6": {
+      "sigma_eff_at_cloud9": 87.03837284479171,
+      "ratio_target": 0.5002205335907569,
+      "region": "IN BAND",
+      "in_band_window": [
+        5.941133984965027e-06,
+        1.059560179277617e-05
+      ],
+      "window_factor": 1.7834308769319132,
+      "cloud9_in_window": false
+    },
+    "Gamma_rho_7": {
+      "sigma_eff_at_cloud9": 69.32978819799663,
+      "ratio_target": 0.39844705860917606,
+      "region": "NEAR TARGET",
+      "in_band_window": [
+        6.669919663030115e-06,
+        1.1895340673703208e-05
+      ],
+      "window_factor": 1.7834308769319132,
+      "cloud9_in_window": false
+    },
+    "Gamma_rho_7.5": {
+      "sigma_eff_at_cloud9": 62.50628164463266,
+      "ratio_target": 0.3592315037047854,
+      "region": "NEAR TARGET",
+      "in_band_window": [
+        6.669919663030115e-06,
+        1.1895340673703208e-05
+      ],
+      "window_factor": 1.7834308769319132,
+      "cloud9_in_window": false
+    },
+    "Gamma_rho_8": {
+      "sigma_eff_at_cloud9": 56.67293406291929,
+      "ratio_target": 0.3257065176029844,
+      "region": "NEAR TARGET",
+      "in_band_window": [
+        7.4881038575900155e-06,
+        1.3354515629299001e-05
+      ],
+      "window_factor": 1.783430876931913,
+      "cloud9_in_window": false
+    },
+    "Gamma_rho_9": {
+      "sigma_eff_at_cloud9": 47.26619233026034,
+      "ratio_target": 0.2716447835072433,
+      "region": "NEAR TARGET",
+      "in_band_window": [
+        8.406652885618316e-06,
+        1.4992684327860471e-05
+      ],
+      "window_factor": 1.7834308769319132,
+      "cloud9_in_window": false
+    },
+    "Gamma_rho_10": {
+      "sigma_eff_at_cloud9": 40.060404086374454,
+      "ratio_target": 0.23023220739295663,
+      "region": "NEAR TARGET",
+      "in_band_window": [
+        8.406652885618316e-06,
+        1.4992684327860471e-05
+      ],
+      "window_factor": 1.7834308769319132,
+      "cloud9_in_window": false
+    },
+    "Gamma_rho_12": {
+      "sigma_eff_at_cloud9": 29.87949602010421,
+      "ratio_target": 0.17172124149485177,
+      "region": "NEAR TARGET",
+      "in_band_window": [
+        1.059560179277617e-05,
+        1.8896523396912115e-05
+      ],
+      "window_factor": 1.7834308769319092,
+      "cloud9_in_window": false
+    },
+    "Gamma_rho_15": {
+      "sigma_eff_at_cloud9": 20.616990377254417,
+      "ratio_target": 0.11848845044399091,
+      "region": "NEAR TARGET",
+      "in_band_window": [
+        1.1895340673703208e-05,
+        2.121451784910632e-05
+      ],
+      "window_factor": 1.7834308769319092,
+      "cloud9_in_window": false
+    },
+    "Gamma_rho_20": {
+      "sigma_eff_at_cloud9": 12.533572589315387,
+      "ratio_target": 0.07203202637537579,
+      "region": "OUT",
+      "in_band_window": [
+        1.4992684327860471e-05,
+        2.6738416158399493e-05
+      ],
+      "window_factor": 1.7834308769319094,
+      "cloud9_in_window": false
+    },
+    "Gamma_rho_25": {
+      "sigma_eff_at_cloud9": 8.401785577572833,
+      "ratio_target": 0.04828612400903927,
+      "region": "OUT",
+      "in_band_window": [
+        1.8896523396912115e-05,
+        3.370064329271932e-05
+      ],
+      "window_factor": 1.7834308769319094,
+      "cloud9_in_window": false
+    },
+    "Gamma_rho_30": {
+      "sigma_eff_at_cloud9": 6.011250943567627,
+      "ratio_target": 0.0345474192159059,
+      "region": "OUT",
+      "in_band_window": [
+        2.121451784910632e-05,
+        3.783462617131933e-05
+      ],
+      "window_factor": 1.7834308769319094,
+      "cloud9_in_window": false
+    },
+    "Gamma_rho_40": {
+      "sigma_eff_at_cloud9": 3.500727357376618,
+      "ratio_target": 0.020119122743543782,
+      "region": "OUT",
+      "in_band_window": [
+        3.001835813575592e-05,
+        5.35356667741073e-05
+      ],
+      "window_factor": 1.7834308769319094,
+      "cloud9_in_window": false
+    },
+    "Gamma_rho_50": {
+      "sigma_eff_at_cloud9": 2.2823802571191196,
+      "ratio_target": 0.0131171279144777,
+      "region": "OUT",
+      "in_band_window": [
+        3.783462617131933e-05,
+        6.7475440531107e-05
+      ],
+      "window_factor": 1.7834308769319094,
+      "cloud9_in_window": false
+    }
+  },
+  "convergence_MB_sigma50": {
+    "n50_Gamma1": {
+      "sigma_eff": 951.3825924414213,
+      "drift_pct_vs_1000pt": 3.555597474151504e-05
+    },
+    "n50_Gamma2": {
+      "sigma_eff": 391.3982924124061,
+      "drift_pct_vs_1000pt": 7.982975572038748e-08
+    },
+    "n50_Gamma3": {
+      "sigma_eff": 228.85226317803424,
+      "drift_pct_vs_1000pt": 9.867805670885278e-09
+    },
+    "n50_Gamma4": {
+      "sigma_eff": 154.67997301613389,
+      "drift_pct_vs_1000pt": 6.66500962151815e-09
+    },
+    "n50_Gamma5": {
+      "sigma_eff": 113.15521772279129,
+      "drift_pct_vs_1000pt": 4.098327010714604e-09
+    },
+    "n50_Gamma6": {
+      "sigma_eff": 87.03837284846321,
+      "drift_pct_vs_1000pt": 4.3077948473513565e-09
+    },
+    "n100_Gamma1": {
+      "sigma_eff": 951.3829307216507,
+      "drift_pct_vs_1000pt": 7.100117753667722e-10
+    },
+    "n100_Gamma2": {
+      "sigma_eff": 391.3982921030347,
+      "drift_pct_vs_1000pt": 7.871555304255142e-10
+    },
+    "n100_Gamma3": {
+      "sigma_eff": 228.85226315703738,
+      "drift_pct_vs_1000pt": 6.929562763428043e-10
+    },
+    "n100_Gamma4": {
+      "sigma_eff": 154.67997300676234,
+      "drift_pct_vs_1000pt": 6.063409317110405e-10
+    },
+    "n100_Gamma5": {
+      "sigma_eff": 113.1552177187659,
+      "drift_pct_vs_1000pt": 5.409169243640352e-10
+    },
+    "n100_Gamma6": {
+      "sigma_eff": 87.03837284514213,
+      "drift_pct_vs_1000pt": 4.92148209669053e-10
+    },
+    "n200_Gamma1": {
+      "sigma_eff": 951.3829307160064,
+      "drift_pct_vs_1000pt": 1.1673603570624564e-10
+    },
+    "n200_Gamma2": {
+      "sigma_eff": 391.3982921004882,
+      "drift_pct_vs_1000pt": 1.365467951487211e-10
+    },
+    "n200_Gamma3": {
+      "sigma_eff": 228.85226315573232,
+      "drift_pct_vs_1000pt": 1.2268966170207293e-10
+    },
+    "n200_Gamma4": {
+      "sigma_eff": 154.6799730059923,
+      "drift_pct_vs_1000pt": 1.0851994129171809e-10
+    },
+    "n200_Gamma5": {
+      "sigma_eff": 113.15521771826438,
+      "drift_pct_vs_1000pt": 9.770689493051458e-11
+    },
+    "n200_Gamma6": {
+      "sigma_eff": 87.03837284479171,
+      "drift_pct_vs_1000pt": 8.95378954259724e-11
+    },
+    "n500_Gamma1": {
+      "sigma_eff": 951.3829307150155,
+      "drift_pct_vs_1000pt": 1.2582971194459686e-11
+    },
+    "n500_Gamma2": {
+      "sigma_eff": 391.39829210001346,
+      "drift_pct_vs_1000pt": 1.5249323006398335e-11
+    },
+    "n500_Gamma3": {
+      "sigma_eff": 228.85226315548297,
+      "drift_pct_vs_1000pt": 1.3735678291577352e-11
+    },
+    "n500_Gamma4": {
+      "sigma_eff": 154.67997300584318,
+      "drift_pct_vs_1000pt": 1.2108811600278058e-11
+    },
+    "n500_Gamma5": {
+      "sigma_eff": 113.15521771816627,
+      "drift_pct_vs_1000pt": 1.1001444724824008e-11
+    },
+    "n500_Gamma6": {
+      "sigma_eff": 87.03837284472257,
+      "drift_pct_vs_1000pt": 1.0106483819962969e-11
+    },
+    "n1000_Gamma1": {
+      "sigma_eff": 951.3829307148958,
+      "drift_pct_vs_1000pt": 0.0
+    },
+    "n1000_Gamma2": {
+      "sigma_eff": 391.3982920999538,
+      "drift_pct_vs_1000pt": 0.0
+    },
+    "n1000_Gamma3": {
+      "sigma_eff": 228.85226315545154,
+      "drift_pct_vs_1000pt": 0.0
+    },
+    "n1000_Gamma4": {
+      "sigma_eff": 154.67997300582445,
+      "drift_pct_vs_1000pt": 0.0
+    },
+    "n1000_Gamma5": {
+      "sigma_eff": 113.15521771815382,
+      "drift_pct_vs_1000pt": 0.0
+    },
+    "n1000_Gamma6": {
+      "sigma_eff": 87.03837284471378,
+      "drift_pct_vs_1000pt": 0.0
+    }
+  },
+  "convergence_NFW_sigma100": {
+    "n100_Gamma1_nfw": {
+      "sigma_eff": 412.9722335207053,
+      "ratio": 2.3734036409235935,
+      "region": "NEAR TARGET"
+    },
+    "n100_Gamma2_nfw": {
+      "sigma_eff": 187.0747605862754,
+      "ratio": 1.0751423022199735,
+      "region": "IN BAND"
+    },
+    "n100_Gamma3_nfw": {
+      "sigma_eff": 117.96800421257795,
+      "ratio": 0.677977035704471,
+      "region": "IN BAND"
+    },
+    "n100_Gamma4_nfw": {
+      "sigma_eff": 84.78628482460948,
+      "ratio": 0.4872774989920085,
+      "region": "NEAR TARGET"
+    },
+    "n100_Gamma5_nfw": {
+      "sigma_eff": 65.31272628955739,
+      "ratio": 0.3753604959169965,
+      "region": "NEAR TARGET"
+    },
+    "n100_Gamma6_nfw": {
+      "sigma_eff": 52.52235168504479,
+      "ratio": 0.301852595891062,
+      "region": "NEAR TARGET"
+    },
+    "n200_Gamma1_nfw": {
+      "sigma_eff": 412.9754446066933,
+      "ratio": 2.373422095440766,
+      "region": "NEAR TARGET"
+    },
+    "n200_Gamma2_nfw": {
+      "sigma_eff": 187.07621278352826,
+      "ratio": 1.075150648181197,
+      "region": "IN BAND"
+    },
+    "n200_Gamma3_nfw": {
+      "sigma_eff": 117.96891832962656,
+      "ratio": 0.6779822892507273,
+      "region": "IN BAND"
+    },
+    "n200_Gamma4_nfw": {
+      "sigma_eff": 84.78694058213648,
+      "ratio": 0.48728126771342806,
+      "region": "NEAR TARGET"
+    },
+    "n200_Gamma5_nfw": {
+      "sigma_eff": 65.31323042264361,
+      "ratio": 0.375363393233584,
+      "region": "NEAR TARGET"
+    },
+    "n200_Gamma6_nfw": {
+      "sigma_eff": 52.52275623072351,
+      "ratio": 0.30185492086622706,
+      "region": "NEAR TARGET"
+    },
+    "n500_Gamma1_nfw": {
+      "sigma_eff": 412.9796043313621,
+      "ratio": 2.37344600190438,
+      "region": "NEAR TARGET"
+    },
+    "n500_Gamma2_nfw": {
+      "sigma_eff": 187.07809198328388,
+      "ratio": 1.0751614481797924,
+      "region": "IN BAND"
+    },
+    "n500_Gamma3_nfw": {
+      "sigma_eff": 117.97009987302904,
+      "ratio": 0.677989079730052,
+      "region": "IN BAND"
+    },
+    "n500_Gamma4_nfw": {
+      "sigma_eff": 84.78778714904192,
+      "ratio": 0.4872861330404708,
+      "region": "NEAR TARGET"
+    },
+    "n500_Gamma5_nfw": {
+      "sigma_eff": 65.31388040442286,
+      "ratio": 0.37536712876105094,
+      "region": "NEAR TARGET"
+    },
+    "n500_Gamma6_nfw": {
+      "sigma_eff": 52.5232770987151,
+      "ratio": 0.3018579143604316,
+      "region": "NEAR TARGET"
+    },
+    "n1000_Gamma1_nfw": {
+      "sigma_eff": 412.9787562530001,
+      "ratio": 2.373441127890805,
+      "region": "NEAR TARGET"
+    },
+    "n1000_Gamma2_nfw": {
+      "sigma_eff": 187.07770886233521,
+      "ratio": 1.07515924633526,
+      "region": "IN BAND"
+    },
+    "n1000_Gamma3_nfw": {
+      "sigma_eff": 117.96985899147374,
+      "ratio": 0.6779876953532974,
+      "region": "IN BAND"
+    },
+    "n1000_Gamma4_nfw": {
+      "sigma_eff": 84.78761456306206,
+      "ratio": 0.4872851411670234,
+      "region": "NEAR TARGET"
+    },
+    "n1000_Gamma5_nfw": {
+      "sigma_eff": 65.31374789853402,
+      "ratio": 0.37536636723295413,
+      "region": "NEAR TARGET"
+    },
+    "n1000_Gamma6_nfw": {
+      "sigma_eff": 52.52317091673463,
+      "ratio": 0.3018573041191645,
+      "region": "NEAR TARGET"
+    }
+  },
+  "generated_at": "2026-10-16T16:48:52+00:00"
+}
