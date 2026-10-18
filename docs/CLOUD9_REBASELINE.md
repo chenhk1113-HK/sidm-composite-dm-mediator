@@ -45,11 +45,19 @@ Cloud-9 measured properties (Anand+ 2025):
 
 For a Gaussian line profile, W50 ≈ 2√(2 ln 2) × σ_1D = 2.355 × σ_1D:
 
-**σ_v (1D) = W50 / 2.355 = 12 / 2.355 = 5.1 km/s**
+**Verdict:** σ_v (gas) = 5.096 km/s = W_50/2.355 ✓
+**Critical caveat:** This is the **gas velocity dispersion** (from HI line width), NOT the DM circular velocity. The gas is in hydrostatic equilibrium in the DM halo, so the gas σ_v is set by the gas temperature (~2×10⁴ K), not the DM V_max. The actual NFW V_max for the 5×10⁹ M☉ halo with c=15 is **~36 km/s** (not 10 km/s — see v40.21 fix below).
 
 This is the dark matter particle velocity dispersion that should enter the v35 MB distribution. The project's σ_v = 50 km/s is **10× too high**.
 
-For comparison, NFW v_max for M_halo = 5×10⁹ M☉, c=15 is ~10 km/s, and σ_1D ≈ v_max / √3 ≈ 5.8 km/s. The W50-derived σ_v = 5.1 km/s is consistent with the NFW expectation.
+For comparison, NFW v_max for M_halo = 5×10⁹ M☉, c=15:
+  R_200 = (3*5e9 / (4π*200*277.5))^(1/3) = 27.81 kpc
+  r_s = 27.81/15 = 1.854 kpc
+  r_max = 2.163*r_s = 4.01 kpc
+  M(<r_max) = 5e9 * 0.2549 = 1.275e9 M_sun (using f(c=15) = 0.2549)
+  v_max = sqrt(G*M_enc/r_max) with G = 4.3009e-6 (km/s)² kpc / M_sun
+  v_max = sqrt(4.3009e-6 * 1.275e9 / 4.01) = **~36 km/s** (v40.21 fix)
+The W50-derived σ_v = 5.1 km/s is the **gas line width** (T~2×10⁴ K, hydrostatic equilibrium in the DM halo), NOT the DM 1D velocity dispersion. The 1D DM velocity dispersion at r_max would be ~36/sqrt(3) = ~21 km/s, which is the DM velocity.
 
 The project's v_target = 29.4 km/s is not the velocity dispersion — it's likely the peak circular velocity of a larger (MW-mass) halo used in the original dynesty fit, not from Cloud-9.
 

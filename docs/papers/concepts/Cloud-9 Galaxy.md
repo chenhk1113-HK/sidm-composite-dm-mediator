@@ -9,7 +9,7 @@ A **Reionization-Limited HI Cloud (RELHIC)** near M94, discovered by Anand+ 2025
 - **M_halo:** 5×10⁹ M☉
 - **Distance:** 4.4 Mpc (M94 distance)
 - **v_recession:** 304 km/s
-- **NFW v_max:** ~10 km/s
+- **NFW v_max:** ~36 km/s (M_halo=5×10⁹ M☉, c=15, R_200≈28 kpc, r_s≈1.85 kpc; v40.21 fix: was previously incorrectly stated as ~10 km/s; see CLOUD9_REBASELINE.md for full derivation)
 
 ## Why it's the v19.2-F target
 The v19.2-F project targets σ/m = 174 cm²/g at v = 29.4 km/s. This peak velocity comes from the Cloud-9 galaxy's velocity scale (the 29.4 km/s value, plus 4.4 km/s width, gives a Gaussian peak).
