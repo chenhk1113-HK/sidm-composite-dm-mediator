@@ -1,0 +1,88 @@
+{
+  "v40_33_part1_corrected_alpha_D": {
+    "v40_24_alpha_D": 5.55e-06,
+    "v40_30_wrong_alpha_D": 1.87e-06,
+    "v40_33_correct_alpha_D_gamma_over_rho_1": 9.52e-07,
+    "ratio": 5.83,
+    "note": "Reviewer caught: v40.30 used born_baseline (no F^2)"
+  },
+  "fano_top_5": [
+    {
+      "q": 3.0,
+      "gamma": 5.0,
+      "sigma_peak": 150,
+      "score": 8
+    },
+    {
+      "q": 4.0,
+      "gamma": 3.0,
+      "sigma_peak": 100,
+      "score": 8
+    },
+    {
+      "q": 4.0,
+      "gamma": 3.0,
+      "sigma_peak": 150,
+      "score": 8
+    },
+    {
+      "q": 4.0,
+      "gamma": 3.0,
+      "sigma_peak": 174,
+      "score": 8
+    },
+    {
+      "q": 5.0,
+      "gamma": 2.0,
+      "sigma_peak": 100,
+      "score": 8
+    }
+  ],
+  "fano_score_dist": {
+    "8": 9,
+    "7": 8,
+    "6": 5,
+    "5": 16,
+    "4": 15,
+    "3": 29,
+    "2": 130,
+    "1": 142,
+    "0": 42
+  },
+  "true_bw_top_5": [
+    {
+      "alpha_D": 1e-07,
+      "gamma_over_rho": 2.0,
+      "score": 13
+    },
+    {
+      "alpha_D": 1e-07,
+      "gamma_over_rho": 5.0,
+      "score": 11
+    },
+    {
+      "alpha_D": 1e-07,
+      "gamma_over_rho": 0.01,
+      "score": 8
+    },
+    {
+      "alpha_D": 1e-07,
+      "gamma_over_rho": 0.05,
+      "score": 8
+    },
+    {
+      "alpha_D": 1e-07,
+      "gamma_over_rho": 0.1,
+      "score": 8
+    }
+  ],
+  "true_bw_score_dist": {
+    "13": 1,
+    "11": 1,
+    "8": 6,
+    "7": 8,
+    "6": 12,
+    "5": 14,
+    "2": 7
+  }
+}
