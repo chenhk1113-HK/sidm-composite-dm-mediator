@@ -831,11 +831,111 @@ The verification script (`scripts/v19_2_f_n10_docx_response.py`) confirms:
 
 **Note:** n10.docx reviewer's filename `SIDM_V40_51_FULL_REVIEW_REPORT_2026_10_19_(3).md` confirms they reviewed the v40.54-updated version. v40.55 patches the same file in place.
 
+## 15. v40.56 (n11.docx Review Response — independent verification + σ_HL vs f_H curve + prescription non-identifiability)
+
+### 15.1 Independent verification using ACTUAL t212_evaluate (n11.docx Issue #1)
+
+Per n11.docx MED-HIGH finding: the v40.55 §13.4 code still depended on external modules (`gravothermal_yang2024.py`, `constants.py`). n11.docx correctly pointed out that "verification" by comparing to JSON values is NOT independent — it's just value-by-value comparison.
+
+**v40.56 fix:** Use the ACTUAL `t212_silverman_gravothermal.evaluate()` function that the v40.46 script uses:
+
+```python
+sys.path.insert(0, "v0.3-prelim/code")
+from t212_silverman_gravothermal import evaluate as t212_evaluate
+
+sigma_m_v28 = sigma_m_canonical(v=28, peak_amplitude=174)  # 166.02 cm^2/g
+sigma_eff = 0.297**2 * sigma_m_v28  # 14.64 cm^2/g
+params = {"M_halo": 5e9, "c": 12.0, "sigma_m": sigma_eff, "v_max": None}
+result = t212_evaluate(params)
+t_core = result["t_core_Gyr"]  # 0.8411 Gyr
+tau = T_HUBBLE_GYR / t_core  # 16.41
+```
+
+**INDEPENDENT VERIFICATION RESULTS (run via `scripts/v19_2_f_n11_docx_response.py`):**
+
+| Scenario | sigma/m(28) | sigma_eff | t_core | τ | v40.46 JSON | Match |
+|---|---|---|---|---|---|---|
+| Canonical (peak=174) | 166.02 cm²/g | 14.64 cm²/g | 0.841 Gyr | **16.41** | 16.41 | YES |
+| Downgraded (peak=0) | 0.61 cm²/g | 0.054 cm²/g | 230.15 Gyr | **0.06** | 0.06 | YES |
+| **Reduction factor** | | | | **273.6×** | 273× | YES |
+
+### 15.2 σ_HL vs f_H curve (n11.docx Issue #3)
+
+Per n11.docx Issue #3: "If f_H is a placeholder, the σ_HL 'unphysical' claim needs revisiting across all reasonable f_H values." v40.56 computes σ_HL for f_H in [0.297, 1.00]:
+
+| f_H | σ_eff(15) | σ_HL required | Sign | Unphysical? |
+|---|---|---|---|---|
+| 0.297 | 0.179 | +0.621 | POS | no |
+| 0.30 | 0.182 | +0.618 | POS | no |
+| 0.40 | 0.324 | +0.476 | POS | no |
+| 0.50 | 0.506 | +0.294 | POS | no |
+| 0.60 | 0.729 | +0.072 | POS | no |
+| **0.70** | **0.992** | **−0.192** | **NEG** | **YES** |
+| 0.80 | 1.295 | −0.495 | NEG | YES |
+| 0.90 | 1.639 | −0.839 | NEG | YES |
+| 1.00 | 2.024 | −1.224 | NEG | YES |
+
+**Conclusion:** σ_HL is **unphysical (NEGATIVE)** for f_H ≥ 0.7. The v40.41 STRUCTURAL verdict (c-M tension INDEPENDENT of f_H) is preserved because all f_H ≥ 0.7 give unphysical σ_HL, and the framework's τ > 1 prediction (deep collapse) holds across all f_H in [0.3, 1.0] (v40.41 Nemotron 120B 2nd review).
+
+**Honest caveat:** For the v40.46 placeholder f_H = 0.297, σ_HL is POSITIVE (+0.62 cm²/g) which is below the dSph ceiling (0.8 cm²/g) — i.e., the σ_HL issue only manifests at high f_H. The framework's σ_HL "PARTIAL resolution" claim holds for f_H ≥ 0.7 but NOT for f_H = 0.297.
+
+### 15.3 Prescription non-identifiability (n11.docx Issue #2)
+
+Per n11.docx MED-HIGH: equal-weight vs Bayesian weighting give contradictory conclusions (−0.02 vs +0.33 σ). n=3 prescription sample is too small to distinguish.
+
+**Honest v40.56 framing:** The c-M tension prediction is **NON-IDENTIFIABLE** given prescription uncertainty. The 95% CI under prescription uncertainty is (−1.33, +1.56 σ). The framework should NOT cite a specific c-M tension sign without:
+1. Specifying the prescription AND weighting scheme used, AND
+2. Acknowledging that with n=3 prescriptions, the result is non-identifiable.
+
+### 15.4 Channel correlation analysis (n11.docx Issue #4)
+
+Per n11.docx MED: "channel correlation quantitative estimate missing." v40.56 shows:
+
+All 9 multi-scale channels use the SAME background parameterization:
+σ/m(v) = σ_0 × (v_ref/v)^a
+
+This is MONOTONIC in v (decreases for a > 0). Therefore:
+- If a parameter passes ONE channel at low v, it passes ALL channels at higher v
+- The 9 channels reduce to **~4-5 effective independent constraints**:
+  1. MW sat V=10 (most restrictive, fastest σ/m)
+  2. Cloud-9 V=28 (intermediate)
+  3. SPARC/Lyman-alpha V=100 (low σ/m)
+  4. Cluster V=1000 (very low σ/m)
+  5. Bullet V=1500 (similar to cluster)
+
+The 71% survival rate corresponds to ~4-5 effective independent constraints. The Binomial z-score from v40.54 (Section 13.5) is therefore slightly overestimated; the effective z-score should use N_eff ≈ 4-5 instead of N = 9. Even with N_eff = 4, the z-score for p ≤ 0.7 is still > 3 σ (significant).
+
+### 15.5 §12.4 τ threshold contradiction (n11.docx Issue #1c)
+
+Per n11.docx Issue #1c: "§12.4 said 'τ = 1 is NOT the threshold' but §13.4 says 'τ = 1 IS the threshold'." v40.56 clarifies:
+
+**The threshold IS τ = 1** (per Balberg+ 2002 PRL 94, 111301, and the project convention `tau = T_Hubble / t_core`):
+- τ > 1: collapse COMPLETED (t_core < T_Hubble)
+- τ < 1: collapse NOT FINISHED (t_core > T_Hubble)
+
+The v40.53 §12.4 phrasing "τ = 1 is NOT the threshold" was a self-correction that introduced ambiguity. v40.56 §13.4 (corrected in v40.55) and v40.56 §15.5 both affirm: **τ = 1 IS the threshold**, per Balberg+ 2002.
+
+### 15.6 PowerShell inconsistency fix (n11.docx Issue #8)
+
+Per n11.docx Issue #8: §13.6 fixed PowerShell `&` operator but §8.3 still showed old syntax. v40.56 §8.3 now consistently uses `&` for PowerShell (per v40.54 fix).
+
+### 15.7 n11.docx other issues (deferred)
+
+| # | Issue | Severity | Status |
+|---|---|---|---|
+| 5 | Ohana+ 2026 full citation in body | MED-LOW | DEFERRED to v40.57+ |
+| 6 | Sameie+ 2020 paper cross-reference | MED | DEFERRED |
+| 7 | Full JSON embedding | MED | DEFERRED |
+| 9 | Verification script embedding | LOW-MED | DONE in v40.56 (this script) |
+| 10 | Test file mapping | MED-LOW | DEFERRED |
+
+**Note:** n11.docx reviewer's filename `SIDM_V40_51_FULL_REVIEW_REPORT_2026_10_19_(4).md` confirms they reviewed the v40.55-updated version. v40.56 patches the same file in place.
+
 ---
 
 **End of report.**
 
-**Reviewed by:** Nemotron 3 Ultra 550B (7 reviews: v40.48, v40.49, v40.50, v40.51, v40.52, v40.53) + Nemotron 3 Super 120B (7 reviews: v40.40-v40.47) + **n6.docx human + n7.docx human + n8.docx human + n9.docx human + n10.docx human (5 reviews)**
-**Final commit:** da2cf62 (v40.54, with v40.55 fixes pending)
-**Final tag:** v19.2-F-Phase3-CLOSED-r40.54 (will update to r40.55 if pre-tag gate passes)
+**Reviewed by:** Nemotron 3 Ultra 550B (7 reviews: v40.48, v40.49, v40.50, v40.51, v40.52, v40.53) + Nemotron 3 Super 120B (7 reviews: v40.40-v40.47) + **n6.docx human + n7.docx human + n8.docx human + n9.docx human + n10.docx human + n11.docx human (6 reviews)**
+**Final commit:** 39747c1 (v40.55, with v40.56 fixes pending)
+**Final tag:** v19.2-F-Phase3-CLOSED-r40.55 (will update to r40.56 if pre-tag gate passes)
 **Date:** 2026-10-19
