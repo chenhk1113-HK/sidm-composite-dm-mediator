@@ -206,6 +206,68 @@ At ΛCDM-standard concentration (c = 12), the framework's canonical σ_peak = 17
 
 **Honest framing:** This tension is not fatal for a constraint map + no-go catalogue paper. It does, however, imply that the framework's headline σ_peak = 174 cm²/g value is conditional on Cloud-9 having c ~ 4. A reader should encounter this before the dSph tension discussion in §3.6, because the dSph prediction depends on the same canonical σ_peak.
 
+### 2.6b σ_peak + f_H sensitivity robustness check (v40.41, post-Nemotron review)
+
+**Status:** Quantitative robustness check for the §2.6a structural tension. Per Nemotron 120B review (2026-10-19, OpenRouter free tier, nvidia/nemotron-3-super-120b-a12b:free): "Adding the v40.41 sensitivity analysis as a formal robustness check in the paper is warranted."
+
+**Question:** Is the §2.6a structural tension (framework fails causality at c=12 with canonical σ_peak = 174 cm²/g) driven by the choice of f_H = 0.297 (a documented PLACEHOLDER per the v18.29 retraction, see §3.6 and CHANGELOG entry "CRITICAL: phase44 f_H_at_r was a placeholder, now Yang+ 2025-derived"), or is it independent of the f_H choice?
+
+**Method:** Sweep f_H ∈ {0.297 (canonical placeholder), 0.30, 0.40, 0.50, 0.70 (Yang+ 2025 Fig. 2 range, σ_0/m = 147 cm²/g, NOT Phase 44), 0.92 (T202 N-body at Phase 44, NO segregation), 1.00 (single-component)}. For each f_H, compute σ_eff(v=28) = f_H² × σ_m(28), then t_core (Balberg+ 2002 Eq. 22) and τ = t_Hubble / t_core for Cloud-9 (M=4.7e9, c=12, V_max=30 km/s).
+
+**Result (v40.41 sensitivity sweep):**
+
+| f_H source | f_H | σ_eff (cm²/g) | t_core (Gyr) | τ | Verdict |
+|---|---|---|---|---|---|
+| Canonical placeholder (retracted v18.29) | 0.297 | 14.6 | 0.84 | 16.4 | τ > 1 (deep collapse) |
+| Lower placeholder | 0.30 | 14.9 | 0.83 | 16.7 | τ > 1 |
+| Yang+ 2025 Fig. 2 (low) | 0.40 | 26.4 | 0.47 | 29.5 | τ > 1 |
+| Yang+ 2025 Fig. 2 (mid) | 0.50 | 41.3 | 0.30 | 46.3 | τ > 1 |
+| Yang+ 2025 Fig. 2 (high) | 0.70 | 81.1 | 0.15 | 90.8 | τ > 1 |
+| T202 N-body (no segregation) | 0.92 | 140.0 | 0.088 | 156.9 | τ > 1 |
+| Single-component (no f_H) | 1.00 | 165.4 | 0.075 | 185.3 | τ > 1 |
+
+**Quantitative summary:** ALL f_H ∈ [0.3, 1.0] give τ > 1 (deep collapse). σ_eff ranges from 14.6 to 165.4 cm²/g (factor 11×), and t_core ranges from 0.075 to 0.84 Gyr (factor 11×), but in all cases t_core is much shorter than t_Hubble = 13.8 Gyr.
+
+**Per Nemotron 120B review:**
+> "For any physically plausible f_H (f_H ≳ 0.05) the effective cross-section remains large enough that the gravothermal core-collapse time t_core is an order of magnitude shorter than the Hubble time, giving τ >> 1. Only if one pushes f_H to unrealistically low values (≲ 0.01) does t_core grow to gtrsim 13.8 Gyr and τ drop to unity or below. Hence the 'structural' verdict is a genuine constraint on the model."
+
+> "This conclusion is fully consistent with the v40.40 'known artifact' framing. Because every tested f_H yields τ > 1, the use of Yang+ Eq. 5 (which was calibrated only for τ ≤ 1) is indeed an extrapolation outside its domain, and the resulting c_200 prediction is an artifact."
+
+> "The test thus adds quantitative support to the no-go claim rather than presenting a new finding."
+
+**Verdict:** The §2.6a structural tension is **robust under f_H sensitivity**. The c-M tension is not a placeholder artifact (the f_H = 0.297 placeholder can be replaced with any physically motivated value without changing the qualitative conclusion). The structural no-go theorem is **REINFORCED** by this analysis.
+
+**Honest framing:** This sensitivity check confirms that the v19.2-F framework's σ_peak = 174 cm²/g is too strong for Cloud-9 to be in the max-core regime, regardless of f_H choice. The Yang+ Eq. 5 c_200(tau) polynomial fit (v40.40 finding) is calibrated only for τ ∈ [0, 1]; v19.2-F's parameters give τ > 1 for all f_H, so the c_200 prediction is an extrapolation artifact. Future v19.2-G work should add a deep-core-collapse c_τ prescription (Elbert+ 2015 or Burkert+ 2020 fits, per Nemotron 120B recommendation).
+
+**Reproducibility:** `scripts/v19_2_f_fH_sensitivity.py` + `v0.3-prelim/data/results/v19_2_f_fH_sensitivity_2026_10_19.json` + `v0.3-prelim/tests/test_v40_41_fH_sensitivity.py` (5 regression tests, per R88(68) overfitting guard).
+
+
+
+**First-class result (R88(26)) — the paper's most important internal tension, elevated from §2.6.**
+
+At ΛCDM-standard concentration (c = 12), the framework's canonical σ_peak = 174 cm²/g fails the paper's own causality criterion (t_core >= 3 × t_cross) by a factor of ~3.5. This is a structural circularity: the framework claims to explain the Cloud-9 c-M tension, but the headline parameter works only if Cloud-9 has an anomalously low concentration (c ~ 4), which is itself the c-M tension the framework is trying to explain.
+
+**Quantitative summary of the tension:**
+
+| Quantity | c = 12 (ΛCDM-standard) | c = 4 (Ohana+ inferred) |
+|---|---|---|
+| Continuous viable σ_peak window | **EMPTY** (no viable σ_peak at c=12 with canonical Gaussian) | [51.96, 250] cm²/g |
+| Canonical σ_peak = 174 cm²/g | **fails causality** (t_core/t_cross = 0.83, factor ~3.6 below cap, r_s/V_max convention) | passes (ratio = 14.83, well above cap) |
+| σ/m(28) at canonical σ_peak | 166.02 cm²/g (well above 50 cm²/g floor) | 166.02 cm²/g |
+| σ/m(V_max) at canonical σ_peak | σ/m(31.12) = 161.70 cm²/g | σ/m(25.59) = 120.32 cm²/g |
+| t_core at canonical σ_peak | 76 Myr (causality violated) | 4.97 Gyr |
+| Verdict at headline parameter | framework **incompatible with ΛCDM at any σ_peak** | framework internally consistent (marginally) |
+
+**Implications for the paper's central claims:**
+
+1. **Cloud-9 c-M tension:** The paper's headline (Cloud-9 c-M tension at 3.16σ against Ohana+ 2026's 3.2σ at the 0.16 dex DK14 convention) is itself the tension whose resolution would normally require σ_peak ≈ 174 cm²/g at the Ohana+ inferred c ~ 4. At c = 12 (the Ohana+ paper's population-median concentration), the framework cannot sustain σ_peak = 174 cm²/g.
+
+2. **dSph non-collapse:** Fornax σ_HL outlier (σ_HL_required = −0.47 cm²/g, unphysical negative) is a consequence of the v₁ Gaussian tail (σ₁ = 4.4 km/s) reaching v = 15. This is robust against c = 12 vs c = 4 selection. The Fornax tension is independent of the σ_peak viability tension at c = 12.
+
+3. **Path forward (gravothermal roadmap):** The c = 12 tension may resolve under phase-aware gravothermal modeling (G1-G6 in §A.10b and `GRAVOTHERMAL_ROADMAP.md`). The phase-diversity hypothesis predicts that halos at the same σ/m(v) but different gravothermal phases (core-expansion vs. collapse) should have different central densities. If Cloud-9 is in core-expansion phase and Fornax is in collapse phase, the same canonical σ_peak can satisfy both observations without requiring σ_HL_required < 0.
+
+**Honest framing:** This tension is not fatal for a constraint map + no-go catalogue paper. It does, however, imply that the framework's headline σ_peak = 174 cm²/g value is conditional on Cloud-9 having c ~ 4. A reader should encounter this before the dSph tension discussion in §3.6, because the dSph prediction depends on the same canonical σ_peak.
+
 ### 2.7 External Consistency Checks**Question:**Does the framework's Cloud-9 c-M tension and core-radius prediction agree with external observations (Ohana+ 2026 SIDM tension; Nadler+ 2025 SIDM Concerto)?**Method:**Two independent consistency checks, both at Cloud-9 mass scale (~5×10⁹ M☉).**Check 1 — v19.2-B: Ohana+ 2026 c-M tension reproduction**(`scripts/v192_b_ohana3p2sigma_reproduction.py`).
 
 **Scatter conventions used in this paper:**

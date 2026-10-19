@@ -1,0 +1,40 @@
+Nemotron 120B review prompt for v40.41 f_H sensitivity test (2026-10-19):
+
+Context:
+- v40.39: v19.2-F c-M tension analysis gave tau = 16.3 (deep collapse) with
+  f_H = 0.297 (placeholder), framed as "structural constraint"
+- v40.40: Nemotron 120B review found the c_200 prediction is a "KNOWN ARTIFACT"
+  of using Yang+ Eq. 5 outside its calibrated domain (tau > 1)
+- v40.41: Sensitivity test sweeps f_H in [0.3, 1.0] including:
+  - 0.297 (canonical placeholder, retracted v18.29)
+  - 0.30 (lower placeholder)
+  - 0.40, 0.50, 0.70 (Yang+ 2025 Fig. 2 range, but for sigma_0/m = 147,
+    NOT Phase 44)
+  - 0.92 (T202 N-body at Phase 44: NO segregation develops, gravothermal
+    cascade timescale >> Hubble)
+  - 1.00 (single-component SIDM, no f_H suppression)
+
+Result (v40.41): ALL f_H in [0.3, 1.0] give tau > 1 (deep collapse).
+The c-M tension is STRUCTURAL, not a placeholder artifact.
+
+Question for review:
+1. Is the v40.41 "structural" verdict a real constraint, or is there a
+   f_H value (perhaps < 0.05) that would put Cloud-9 in max-core?
+2. Is the structural verdict consistent with the v40.40 "known artifact"
+   framing (Yang+ Eq. 5 invalid for tau > 1) or does it contradict it?
+3. Per the v19.2-F paper §2.6a (Cloud-9 vs dSph structural tension): does
+   the v40.41 sensitivity test REINFORCE the §2.6a no-go, or is it a
+   different finding?
+4. Is the Yang+ Eq. 5 polynomial fit really the limiting factor, or is
+   the t_core formula (Balberg+ 2002 Eq. 22) also a concern?
+
+Please respond with a brief qualitative review (1-2 paragraphs) addressing
+the structural-vs-placeholder question, the consistency with v40.40's
+known-artifact framing, and whether this should be added to the paper
+as a sensitivity check.
+
+The full results are in:
+- scripts/v19_2_f_fH_sensitivity.py
+- v0.3-prelim/data/results/v19_2_f_fH_sensitivity_2026_10_19.json
+- v0.3-prelim/tests/test_v40_41_fH_sensitivity.py (5 regression tests)
+- v0.3-prelim/docs/PAPER_STANDING_NUMBERS.md (constant F_H_CANONICAL = 0.297)

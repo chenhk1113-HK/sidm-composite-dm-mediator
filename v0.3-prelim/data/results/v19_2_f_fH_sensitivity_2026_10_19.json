@@ -1,0 +1,72 @@
+{
+  "method": "v19.2-F Cloud-9 gravothermal sensitivity to f_H choice",
+  "date": "2026-10-19",
+  "framework": "v19.2-F Phase 44 (sigma_peak=174, sigma_kms=4.4)",
+  "reference": "Ohana+ 2026 arXiv:2608.04362 (tau=0.18 published)",
+  "f_H_cases": [
+    {
+      "name": "canonical_placeholder (v40.39)",
+      "f_H": 0.297,
+      "note": "v19.2-F scripts/constants.py F_H_CANONICAL; documented as placeholder (retracted v18.29)",
+      "sigma_eff_cm2_g": 14.590770687647355,
+      "t_core_Gyr": 0.8441823209561636,
+      "tau": 16.3471795812656,
+      "tau_yang_validity": "OUTSIDE (deep collapse)"
+    },
+    {
+      "name": "lower_placeholder (v18.30)",
+      "f_H": 0.3,
+      "note": "lower-bound of placeholder range",
+      "sigma_eff_cm2_g": 14.88702243408566,
+      "t_core_Gyr": 0.827383092769136,
+      "tau": 16.679093542766655,
+      "tau_yang_validity": "OUTSIDE (deep collapse)"
+    },
+    {
+      "name": "yang_2025_low",
+      "f_H": 0.4,
+      "note": "Yang+ 2025 Fig. 2 low f_H (sigma_0/m = 147 regime, NOT Phase 44)",
+      "sigma_eff_cm2_g": 26.465817660596738,
+      "t_core_Gyr": 0.46540298968263877,
+      "tau": 29.651721853807402,
+      "tau_yang_validity": "OUTSIDE (deep collapse)"
+    },
+    {
+      "name": "yang_2025_mid",
+      "f_H": 0.5,
+      "note": "Yang+ 2025 Fig. 2 mid f_H",
+      "sigma_eff_cm2_g": 41.35284009468239,
+      "t_core_Gyr": 0.2978579133968889,
+      "tau": 46.33081539657405,
+      "tau_yang_validity": "OUTSIDE (deep collapse)"
+    },
+    {
+      "name": "yang_2025_high",
+      "f_H": 0.7,
+      "note": "Yang+ 2025 Fig. 2 high f_H (modest segregation)",
+      "sigma_eff_cm2_g": 81.05156658557748,
+      "t_core_Gyr": 0.15196832316167805,
+      "tau": 90.80839817728511,
+      "tau_yang_validity": "OUTSIDE (deep collapse)"
+    },
+    {
+      "name": "t202_nbody_no_segregation",
+      "f_H": 0.92,
+      "note": "T202 N-body at Phase 44 sigma/m: f_H ~= 0.92 (gravothermal cascade timescale >> Hubble; NO segregation develops)",
+      "sigma_eff_cm2_g": 140.0041754245567,
+      "t_core_Gyr": 0.08797788084737976,
+      "tau": 156.8576086066411,
+      "tau_yang_validity": "OUTSIDE (deep collapse)"
+    },
+    {
+      "name": "single_component (no f_H)",
+      "f_H": 1.0,
+      "note": "single-component SIDM: f_H = 1.0, no f_H suppression",
+      "sigma_eff_cm2_g": 165.41136037872957,
+      "t_core_Gyr": 0.07446447834922222,
+      "tau": 185.3232615862962,
+      "tau_yang_validity": "OUTSIDE (deep collapse)"
+    }
+  ],
+  "verdict": "see interpretation above (printed to stdout)"
+}
