@@ -1,9 +1,9 @@
 # v19.2-F Reference Data Registry
 
-**Date:** 2026-10-17
+**Date:** 2026-10-19 (v40.44 update)
 **Branch:** `wip/v19.2-F-init`
-**Tag:** `v19.2-F-Phase3-CLOSED-r40.12` (current head)
-**Purpose:** Authoritative list of every paper cited and every numerical value used by the v19.2-F project, with verification status. Cross-checked against arXiv/DOI as of 2026-10-17.
+**Tag:** `v19.2-F-Phase3-CLOSED-r40.44` (current head)
+**Purpose:** Authoritative list of every paper cited and every numerical value used by the v19.2-F project, with verification status. Cross-checked against arXiv/DOI as of 2026-10-19.
 
 This is the canonical source for paper authentication. When a new loop uses a value, add it here with citation. When a value is re-derived, update the registry.
 
@@ -190,3 +190,74 @@ Before adding a new paper/parameter to the project:
 - `v0.3-prelim/code/v19_2_f_priority1_resonance_helpers.py` (σ/m formula)
 - `v0.3-prelim/code/v19_2_f_loop4_tc_breit_wigner_reproduction.py` (Loop 4 reproduction, v40.9)
 - `v0.3-prelim/code/v19_2_f_loop2_multi_ufd_regenerator.py` (Loop 2 generator, v40.12)
+
+---
+
+## 7. v40.44 update — 4 new papers added (2026-10-19)
+
+Per user directive ("I want you to do it auto, no need for my reminder"), all papers used in v40.39-v40.44 are now saved locally with .md summaries.
+
+### 7.1 Elbert+ 2015 — Core formation in dwarf haloes with SIDM
+- **arXiv:** 1412.1477v1
+- **Authors:** O. D. Elbert, J. S. Bullock, S. Garrison-Kimmel, M. Rocha, J. Oñorbe, A. H. G. Peter
+- **Year:** 2015 (MNRAS 453, 29)
+- **Local PDF:** `docs/papers/verified/1412.1477_elbert_2015.pdf` (6.2 MB)
+- **Local .md:** `docs/papers/verified/1412.1477_elbert_2015.md`
+- **STATUS: VERIFIED 2026-10-19**
+- **Key findings:** σ/m ∈ [0.5, 50] cm²/g alleviates TBTF, largest cores at σ/m = 5-10, mild core-collapse at σ/m = 50
+- **Used in v40.42:** c-τ prescription (c_200 decreases, slope=0.10, floor=50% NFW)
+
+### 7.2 Sameie+ 2020 — Self-Interacting Dark Matter Subhalos in the Milky Way's Tides
+- **arXiv:** 1904.07872v2
+- **Authors:** Omid Sameie, Hai-Bo Yu, Laura V. Sales, Mark Vogelsberger, Jesús Zavala
+- **Year:** 2020 (Physical Review Letters 124, 141102)
+- **Local PDF:** `docs/papers/verified/1904.07872_sameie_2020.pdf` (490 KB)
+- **Local .md:** `docs/papers/verified/1904.07872_sameie_2020.md`
+- **STATUS: VERIFIED 2026-10-19**
+- **Key findings:** σ/m = 3 cm²/g fits diverse rotation curves, σ/m > 5 cm²/g triggers core collapse (c_200 INCREASES)
+- **Used in v40.43a:** 3rd c-τ prescription (c_200 INCREASES, slope=+0.40, ceiling=2x NFW)
+
+### 7.3 Silverman+ 2026 — Mergers Matter: Gravothermal Collapse in Dwarf Halos with SIDM
+- **arXiv:** 2606.02566v1
+- **Authors:** Maya Silverman, Abdelaziz Hussein, Arpit Arora, Mariangela Lisanti, Manoj Kaplinghat, Lina Necib, Andreas Thoyas, Stephanie O'Neil, Robyn E. Sanderson, Xuejian Shen, Jorge Moreno
+- **Year:** 2026 (FERMILAB-PUB-26-0348-T, June 2026)
+- **Local PDF:** `docs/papers/verified/2606.02566_silverman_2026.pdf` (1.0 MB)
+- **Local .md:** `docs/papers/verified/2606.02566_silverman_2026.md`
+- **STATUS: VERIFIED 2026-10-19**
+- **Key findings:** 100% collapse fraction among quiescent halos (3/3), 0% among sustained (0/3); 1:3 merger caused ρ_c drop by factor 8.7
+- **Used in v40.44:** merger history analysis (Cloud-9 QUIESCENT → collapse expected)
+
+### 7.4 Anand+ 2025 — The First RELHIC? Cloud-9 is a Starless Gas Cloud
+- **arXiv:** 2508.20157v2
+- **Authors:** Gagandeep S. Anand, Alejandro Benítez-Llambay, Rachael Beaton, Andrew J. Fox, Julio F. Navarro, Elena D'Onghia
+- **Year:** 2025 (in press at ApJL)
+- **Local PDF:** `docs/papers/verified/2508.20157_anand_2025.pdf` (15.4 MB)
+- **Local .md:** `docs/papers/verified/2508.20157_anand_2025.md`
+- **STATUS: VERIFIED 2026-10-19**
+- **Key findings:** Cloud-9 is compact H I cloud in M94 group (d=4.4 Mpc), non-rotating, W50=12 km/s, RELHIC candidate
+- **Used in v40.44:** Cloud-9 morphology (compact, non-rotating, dynamically cold → QUIESCENT merger history inference)
+- **CORRECTION:** Earlier v19.2-F notes referenced NGC 1023 as Cloud-9's host. Correct host is M94 (NGC 4736). Some scripts/notes may need updating.
+
+### 7.5 Burkert 1995 (cited but no local PDF — journal article)
+- **Burkert 1995** (ApJ 447, L25) — cored dark matter profile, foundational
+- **STATUS: TO ADD LOCAL PDF (not on arXiv)** — for now, citation only
+- **Used in v40.43:** Burkert-style c-τ prescription (placeholder anchored to Burkert 1995 + Balberg 2002)
+
+### 7.6 Citation count update
+- **Total verified papers in registry: 9** (5 from v40.14 + 4 new in v40.44)
+- **Local PDFs in docs/papers/verified/: 14 PDFs** (10 from prior + 4 new in v40.44)
+- **Pending local PDFs: 1** (Burkert 1995 — not on arXiv, journal only)
+
+---
+
+## 8. Standing rule for future sessions (locked 2026-10-19)
+
+Per user directive "I want you to do it auto, no need for my reminder":
+
+**AUTO-SAVE rule:** Every time a paper is used in v19.2-F analysis (via web_extract, web_search, or direct citation), IMMEDIATELY:
+1. Download the PDF to `docs/papers/verified/<arxiv_id>_<author>_<year>.pdf` (or to `<journal>_<author>_<year>.pdf` for non-arXiv papers)
+2. Write a `.md` summary to `docs/papers/verified/<arxiv_id>_<author>_<year>.md` with: arXiv ID, authors, year, local PDF path, key findings, how v19.2-F uses it, key numbers
+3. Update this registry with the new paper entry
+4. Commit the docs update as part of the v40.x release
+
+**NEVER cite a paper without local PDF + .md summary + registry entry.** This rule is per R88(68) lesson (M3 has fabricated arXiv IDs in the past) and the project knowledge base rule (always refer to KB before citing).
