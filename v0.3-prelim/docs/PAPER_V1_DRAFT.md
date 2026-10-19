@@ -343,6 +343,61 @@ At ΛCDM-standard concentration (c = 12), the framework's canonical σ_peak = 17
 
 **Next-session candidate (v40.44):** Investigate the gravothermal τ reset mechanism (merger-driven per Silverman+ 2026). This would put Cloud-9 in max-core despite strong σ_peak by resetting τ via merger history. This is the remaining qualitative tension: v19.2-F predicts deep collapse (τ >> 1) while Ohana+ finds max-core (τ = 0.18).
 
+### 2.6e v19.2-F Cloud-9 c-M tension v5.0: 3-prescription marginalization including Sameie+ 2020 (v40.43a, post-Nemotron 4th review)
+
+**Status:** v40.43a implementation of the user's directive: "replace Burkert-style with Sameie+ 2020." I asked Nemotron 120B for the full paper name "Burkert+ 2020" was referring to, and Nemotron honestly admitted: "I do not recall a specific 'Burkert+ 2020' paper... The reference I gave in the v40.40 review was likely a shorthand or approximate allusion... I should not fabricate a citation for it." The v40.43 Burkert-style prescription is a justified placeholder, but the user requested a real paper as the 3rd prescription.
+
+**Real paper found:** Sameie, O., Yu, H.-B., Sales, L. V., Vogelsberger, M., Zavala, J. 2020, Physical Review Letters, 124, 141102 ("Self-Interacting Dark Matter Subhalos in the Milky Way's Tides"), arXiv:1904.07872. This is the same paper Nemotron cited in v40.40 for the Yang+ fit breakdown at τ > 1.
+
+**Critical finding from Sameie+ 2020:** "For σ/m > 5 cm²/g, subhalos could experience SIDM core collapse, resulting in high central densities." In deep collapse, halo becomes **CUSPIER (c_200 > NFW)**, not MORE CORED. This is the OPPOSITE direction to Elbert+ 2015 / Burkert-style (which assume c_200 < NFW in deep collapse).
+
+**Three prescriptions in v40.43a marginalization:**
+
+| Prescription | Direction in deep collapse | Floor/Ceiling | c_200 at τ=10 |
+|---|---|---|---|
+| Elbert+ 2015 (real paper) | DECREASES (cored) | 50% NFW floor | 6.0 |
+| Burkert-style (placeholder) | DECREASES (cored) | 30% NFW floor | 3.6 |
+| Sameie+ 2020 (real paper) | **INCREASES (cuspy)** | **2x NFW ceiling** | **24.0** |
+
+**Result (v40.43a 3-prescription marginalization, all f_H in [0.3, 1.0]):**
+
+| f_H source | τ | Elbert+ c-M | Burkert c-M | **Sameie c-M** | max\|c-M\| |
+|---|---|---|---|---|---|
+| Placeholder (retracted v18.29) | 16.3 | +0.32σ | +0.93σ | **-1.31σ** | 1.31σ |
+| Yang+ 2025 Fig. 2 (low) | 29.7 | +0.32σ | +0.93σ | **-1.31σ** | 1.31σ |
+| Yang+ 2025 Fig. 2 (mid) | 46.3 | +0.32σ | +0.93σ | **-1.31σ** | 1.31σ |
+| Yang+ 2025 Fig. 2 (high) | 90.8 | +0.32σ | +0.93σ | **-1.31σ** | 1.31σ |
+| T202 N-body (no segregation) | 156.9 | +0.32σ | +0.93σ | **-1.31σ** | 1.31σ |
+| Single-component (no f_H) | 185.3 | +0.32σ | +0.93σ | **-1.31σ** | 1.31σ |
+
+**Quantitative summary:**
+- c-M tension RANGE: -1.31σ to +0.93σ (range = 2.24σ)
+- Max |c-M tension|: 1.31σ (Sameie+ 2020)
+- v40.43 ROBUST verdict (all < 1σ) is **REFUTED**
+
+**Per Nemotron 120B review (v40.43a, 22.5s response):**
+> "The v40.43 'ROBUST' verdict is indeed refuted by the Sameie+ 2020 prescription: the absolute c-M tension reaches 1.31σ (with a negative sign), exceeding the 1σ threshold used for robustness."
+
+> "Because the three prescriptions give tensions of +0.32σ (Elbert+ 2015), +0.93σ (Burkert-style) and -1.31σ (Sameie+ 2020), the result is not merely 'marginal' in a simple sense; it is **strongly prescription-dependent and even flips sign** depending on whether deep-collapse SIDM is assumed to lower or raise c_200."
+
+> "Observationally, there is currently **no decisive discriminant** between c_200 > NFW and c_200 < NFW in the deep-collapse regime; existing rotation-curve and strong-lensing data have uncertainties that encompass both possibilities, so the community relies on theoretical priors."
+
+> "**The Sameie+ 2020 prescription is a far more appropriate third prescription than the ad-hoc Burkert-style placeholder**—it is anchored to an actual, peer-reviewed paper that makes a specific, physically motivated prediction for cuspy collapse."
+
+> "The paper should therefore report the c-M tension as a range that captures both magnitude and sign, e.g. 'c-M tension = 0.32-1.31σ (absolute value), with the sign flipping from positive (Elbert+/Burkert-style) to negative (Sameie+ 2020) depending on whether deep-collapse SIDM lowers or raises c_200,' and note that **the robustness claim is marginal at best and highly sensitive to the assumed collapse physics**."
+
+**Verdict (per Nemotron recommendation):** Report c-M tension as **range with sign information**: "c-M tension = 0.32-1.31σ (|tension|), with sign flipping from positive to negative across prescriptions depending on deep-collapse physics (cored vs cuspy)."
+
+**Honest framing (per Nemotron review):**
+- The c-M tension is **PRESCRIPTION-DEPENDENT, not ROBUST**. The result depends on whether deep-collapse SIDM is "core-cusp" (c_200 decreases, Elbert+/Burkert-style) or "cusp-core" (c_200 increases, Sameie+ 2020).
+- Both directions are physically motivated by the SIDM literature, with no decisive observational discriminant.
+- The v40.43 ROBUST verdict was an over-claim based on 2 prescriptions that happened to agree (both cored-collapse). Adding Sameie+ 2020 (cuspy-collapse) reveals the prescription-dependence.
+- The qualitative verdict (Cloud-9 in deep collapse, τ >> 1, vs Ohana+ max-core, τ = 0.18) is **UNCHANGED across all prescriptions**. The c-M tension is at the c_200 level, not the gravothermal phase level.
+
+**Reproducibility:** `scripts/v19_2_f_cloud9_cM_three_prescriptions.py` + `scripts/sameie2020_c_tau_prescription.py` + `v0.3-prelim/data/results/v19_2_f_cloud9_cM_three_prescriptions_2026_10_19.json` + `v0.3-prelim/tests/test_v40_43a_three_prescriptions.py` (5 regression tests).
+
+**Next-session candidate (v40.44):** Investigate the gravothermal τ reset mechanism (merger-driven per Silverman+ 2026). This is the only way to put Cloud-9 in max-core (τ = 0.18) despite strong σ_peak — by RESETTING τ via merger history. The c-M tension at the c_200 level is prescription-dependent (v40.43a), but the gravothermal phase discrepancy (deep vs max-core) requires a τ reset mechanism, not a c-τ prescription.
+
 
 
 **First-class result (R88(26)) — the paper's most important internal tension, elevated from §2.6.**
