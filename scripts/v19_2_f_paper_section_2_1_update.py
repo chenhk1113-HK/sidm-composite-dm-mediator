@@ -63,33 +63,35 @@ def main():
     print("PROPOSED SECTION 2.1 UPDATE TEXT (for paper draft):")
     print("=" * 70)
     print()
-    print("""
-**§2.1 UPDATE (v40.50, per Nemotron 3 Ultra 550B 10th review):**
+    # v40.51 FIX: Use f-string interpolation to use ACTUAL ranges from data
+    # (was hardcoded in v40.50 - transcription error per n6.docx review)
+    print(f"""
+**§2.1 UPDATE (v40.51, per Nemotron 3 Ultra 550B 10th review + n6.docx review):**
 
 The background parameterization σ/m(v) = σ_0 × (v_ref/v)^a is now constrained
-to a multi-scale passing region after refit with peak=0. The 10/14 = 71% of
-{σ_0, a, v_ref} combinations from the v40.48 background sweep that pass
+to a multi-scale passing region after refit with peak=0. The {n_all_pass}/{n_total} = {survival_rate*100:.0f}% of
+{{σ_0, a, v_ref}} combinations from the v40.48 background sweep that pass
 Cloud-9/Fornax/SPARC also pass the additional 6 multi-scale channels
 (Milky Way satellites at v=10, 20, 30 km/s, Lyman-α, galaxy cluster, and
 Bullet Cluster).
 
-**The passing region is NOT a single point but a RANGE:**
-- σ_0 ∈ [0.010, 0.030] cm²/g (low background, σ_0=0.052 from Phase 44
-  is OUTSIDE the passing region)
-- a ∈ [1.50, 1.93] (slope between 1.5 and 2.0)
-- v_ref ∈ [50, 100] km/s (reference velocity between 50 and 100)
+**The passing region is NOT a single point but a RANGE (v40.51 FIX per n6.docx review):**
+- σ_0 ∈ [{sigma_0_range[0]:.3f}, {sigma_0_range[1]:.3f}] cm²/g (FROM v40.49 DATA, not hand-written)
+  - NOTE: Phase 44's σ_0 = 0.052 IS WITHIN this range (per v40.49 data, NOT "OUTSIDE" as v40.50 claimed)
+- a ∈ [{a_range[0]:.2f}, {a_range[1]:.2f}] (slope, FROM v40.49 DATA)
+- v_ref ∈ [{v_ref_range[0]:.1f}, {v_ref_range[1]:.1f}] km/s (reference velocity, FROM v40.49 DATA)
 
 **Binding constraint: Milky Way satellites at v=10 km/s.** The Yukawa
 background σ_0 × (v_ref/v)^a overproduces σ/m at v=10 when σ_0 is high
-or a is low, causing 4/14 combinations to fail the dSph ceiling
+or a is low, causing {n_total - n_all_pass}/{n_total} combinations to fail the dSph ceiling
 (σ/m < 1.0 cm²/g). Fornax (v=15) is the second-most restrictive
-channel (12/14 pass).
+channel ({n_per_channel['fornax']}/{n_total} pass).
 
-**The 71% survival rate IS the result** -- a precise, falsifiable
+**The {survival_rate*100:.0f}% survival rate IS the result** -- a precise, falsifiable
 prediction for future Milky Way satellite surveys. If future surveys
 constrain σ/m at v=10 km/s to a value < 1.0 cm²/g, the framework's
 passing region survives. If the constraint loosens to > 1.0 cm²/g,
-additional background parameter space opens (currently 4/14 = 29% of
+additional background parameter space opens (currently {n_total - n_all_pass}/{n_total} = {(n_total - n_all_pass)/n_total*100:.0f}% of
 combinations would re-enter the viable region).
 
 **Per-channel pass rates (v40.49 multi-scale refit):**
@@ -111,7 +113,7 @@ combinations would re-enter the viable region).
         print(f"  {names[key]:<25} {n}/{n_total} {bar}{flag}")
     print()
     print("=" * 70)
-    print("The 71% partial robustness becomes a TESTABLE PREDICTION when")
+    print(f"The {survival_rate*100:.0f}% partial robustness becomes a TESTABLE PREDICTION when")
     print("future MW satellite surveys measure σ/m at v=10. Framework's")
     print("background parameters occupy a RANGE (not a point) that future")
     print("data can either validate or constrain further.")

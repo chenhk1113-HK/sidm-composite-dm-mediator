@@ -53,13 +53,15 @@ The 71% partial robustness becomes the framework's **TESTABLE PREDICTION**: futu
 
 ### 3.1 The Multi-Scale Passing Region (v40.49 + v40.50 result)
 
-The framework's background parameters σ₀, a, v_ref are constrained to a RANGE (not a single point):
+The framework's background parameters σ₀, a, v_ref are constrained to a RANGE (not a single point), computed from min/max of the 10 v40.49-surviving combinations:
 
 | Parameter | Range | Notes |
 |---|---|---|
-| σ₀ | [0.010, 0.030] cm²/g | Low background; Phase 44's σ₀ = 0.052 is OUTSIDE |
-| a (slope) | [1.50, 1.93] | Between 1.5 and 2.0 |
-| v_ref | [50, 100] km/s | Reference velocity |
+| σ₀ | [0.010, 0.052] cm²/g | **v40.51 FIX**: Phase 44's σ₀ = 0.052 IS WITHIN this range (v40.50 erroneously claimed OUTSIDE) |
+| a (slope) | [1.50, 2.50] | **v40.51 FIX**: wider than v40.50's [1.50, 1.93] |
+| v_ref | [50, 150] km/s | **v40.51 FIX**: wider than v40.50's [50, 100] |
+
+**Note (n6.docx review):** The v40.50 report contained hand-written ranges that did not match the actual data. v40.51 uses f-string interpolation to ensure script output matches the v40.49 result file. The previous v40.50 ranges were the result of a transcription error, not a data error.
 
 ### 3.2 Per-Channel Pass Rates (v40.49 multi-scale refit)
 
