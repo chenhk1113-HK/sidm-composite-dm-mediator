@@ -1,0 +1,156 @@
+{
+  "method": "v19.2-F Cloud-9 c-M tension v4.0 (marginalize over Elbert+ 2015 + Burkert-style)",
+  "date": "2026-10-19",
+  "framework": "v19.2-F Phase 44 (sigma_peak=174, sigma_kms=4.4)",
+  "reference": "Ohana+ 2026 arXiv:2608.04362 (3.2 sigma published)",
+  "prescriptions": [
+    {
+      "name": "elbert_2015",
+      "description": "Elbert+ 2015: anchored to sigma/m=50 N-body, slope=0.10, floor=50% NFW"
+    },
+    {
+      "name": "burkert_style",
+      "description": "Burkert-style: anchored to Burkert 1995 + Balberg 2002, slope=0.15, floor=30% NFW"
+    }
+  ],
+  "f_H_cases": [
+    {
+      "name": "placeholder_g7 (retracted v18.29)",
+      "f_H": 0.297,
+      "sigma_eff_cm2_g": 14.590770687647355,
+      "t_core_Gyr": 0.8441823209561636,
+      "tau": 16.3471795812656,
+      "c_med_cosmological": 7.8964393482434705,
+      "prescription_results": {
+        "elbert_2015": {
+          "c_200": 6.0,
+          "c_M_tension_sigma": 0.3237666816521463
+        },
+        "burkert_style": {
+          "c_200": 3.5999999999999996,
+          "c_M_tension_sigma": 0.9259397302491446
+        }
+      },
+      "tension_min": 0.3237666816521463,
+      "tension_max": 0.9259397302491446,
+      "tension_mean": 0.6248532059506454,
+      "tension_range": 0.6021730485969983
+    },
+    {
+      "name": "yang_plus_low (Fig. 2 low)",
+      "f_H": 0.4,
+      "sigma_eff_cm2_g": 26.465817660596738,
+      "t_core_Gyr": 0.46540298968263877,
+      "tau": 29.651721853807402,
+      "c_med_cosmological": 7.8964393482434705,
+      "prescription_results": {
+        "elbert_2015": {
+          "c_200": 6.0,
+          "c_M_tension_sigma": 0.3237666816521463
+        },
+        "burkert_style": {
+          "c_200": 3.5999999999999996,
+          "c_M_tension_sigma": 0.9259397302491446
+        }
+      },
+      "tension_min": 0.3237666816521463,
+      "tension_max": 0.9259397302491446,
+      "tension_mean": 0.6248532059506454,
+      "tension_range": 0.6021730485969983
+    },
+    {
+      "name": "yang_plus_mid (Fig. 2 mid)",
+      "f_H": 0.5,
+      "sigma_eff_cm2_g": 41.35284009468239,
+      "t_core_Gyr": 0.2978579133968889,
+      "tau": 46.33081539657405,
+      "c_med_cosmological": 7.8964393482434705,
+      "prescription_results": {
+        "elbert_2015": {
+          "c_200": 6.0,
+          "c_M_tension_sigma": 0.3237666816521463
+        },
+        "burkert_style": {
+          "c_200": 3.5999999999999996,
+          "c_M_tension_sigma": 0.9259397302491446
+        }
+      },
+      "tension_min": 0.3237666816521463,
+      "tension_max": 0.9259397302491446,
+      "tension_mean": 0.6248532059506454,
+      "tension_range": 0.6021730485969983
+    },
+    {
+      "name": "yang_plus_high (Fig. 2 high)",
+      "f_H": 0.7,
+      "sigma_eff_cm2_g": 81.05156658557748,
+      "t_core_Gyr": 0.15196832316167805,
+      "tau": 90.80839817728511,
+      "c_med_cosmological": 7.8964393482434705,
+      "prescription_results": {
+        "elbert_2015": {
+          "c_200": 6.0,
+          "c_M_tension_sigma": 0.3237666816521463
+        },
+        "burkert_style": {
+          "c_200": 3.5999999999999996,
+          "c_M_tension_sigma": 0.9259397302491446
+        }
+      },
+      "tension_min": 0.3237666816521463,
+      "tension_max": 0.9259397302491446,
+      "tension_mean": 0.6248532059506454,
+      "tension_range": 0.6021730485969983
+    },
+    {
+      "name": "t202_nbody (no segregation)",
+      "f_H": 0.92,
+      "sigma_eff_cm2_g": 140.0041754245567,
+      "t_core_Gyr": 0.08797788084737976,
+      "tau": 156.8576086066411,
+      "c_med_cosmological": 7.8964393482434705,
+      "prescription_results": {
+        "elbert_2015": {
+          "c_200": 6.0,
+          "c_M_tension_sigma": 0.3237666816521463
+        },
+        "burkert_style": {
+          "c_200": 3.5999999999999996,
+          "c_M_tension_sigma": 0.9259397302491446
+        }
+      },
+      "tension_min": 0.3237666816521463,
+      "tension_max": 0.9259397302491446,
+      "tension_mean": 0.6248532059506454,
+      "tension_range": 0.6021730485969983
+    },
+    {
+      "name": "single_component (no f_H)",
+      "f_H": 1.0,
+      "sigma_eff_cm2_g": 165.41136037872957,
+      "t_core_Gyr": 0.07446447834922222,
+      "tau": 185.3232615862962,
+      "c_med_cosmological": 7.8964393482434705,
+      "prescription_results": {
+        "elbert_2015": {
+          "c_200": 6.0,
+          "c_M_tension_sigma": 0.3237666816521463
+        },
+        "burkert_style": {
+          "c_200": 3.5999999999999996,
+          "c_M_tension_sigma": 0.9259397302491446
+        }
+      },
+      "tension_min": 0.3237666816521463,
+      "tension_max": 0.9259397302491446,
+      "tension_mean": 0.6248532059506454,
+      "tension_range": 0.6021730485969983
+    }
+  ],
+  "marginalization_summary": {
+    "tension_max_across_prescriptions": 0.9259397302491446,
+    "tension_min_across_prescriptions": 0.3237666816521463,
+    "ohana_published": 3.2,
+    "robustness_verdict": "ROBUST"
+  }
+}
