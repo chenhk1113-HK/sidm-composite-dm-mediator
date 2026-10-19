@@ -1,0 +1,37 @@
+{
+  "method": "v19.2-F Cloud-9 c-M tension test (multi-resonance + f_H)",
+  "date": "2026-10-19",
+  "framework": "v19.2-F Phase 44 (sigma_peak=174, sigma_kms=4.4, f_H=0.297)",
+  "reference": "Ohana+ 2026 arXiv:2608.04362 (3.2 sigma published)",
+  "params": {
+    "M_halo_Msun": 4700000000.0,
+    "V_max_kms": 30.483378741045147,
+    "c_0_NFW": 12.0,
+    "f_H": 0.297,
+    "sigma_peak_cm2_g": 174.0,
+    "sigma_m_at_v28_cm2_g": 165.41136037872957,
+    "sigma_eff_cm2_g": 14.590770687647355
+  },
+  "halo": {
+    "r_vir_pc": 34376.515884272354,
+    "r_s_pc": 2864.7096570226963,
+    "r_s_kpc": 2.864709657022696,
+    "rho_s_Msun_pc3": 0.009689620013605295,
+    "V_max_kms": 30.483378741045147
+  },
+  "gravothermal": {
+    "t_core_Gyr": 0.8441823209561636,
+    "t_cross_Gyr": 0.09189153383622577,
+    "tau": 16.3471795812656,
+    "tau_yang_plus_validity": "OUTSIDE (tau > 1 = deep core collapse)"
+  },
+  "c_M_result": {
+    "c_200_sidm": 26.393397187247693,
+    "c_200_sidm_interpretation": "v19.2-F predicts tau > 1 (deep core collapse), Yang+ Eq. 5 invalid",
+    "c_med_cosmological": 7.8964393482434705,
+    "tension_sigma_below": -1.4224881173733166,
+    "ohana_published_sigma": 3.2,
+    "delta_vs_ohana": -4.622488117373317,
+    "verdict": "v19.2-F in deep core collapse (tau > 1, Yang+ invalid) -- c-M tension estimate uncertain"
+  }
+}

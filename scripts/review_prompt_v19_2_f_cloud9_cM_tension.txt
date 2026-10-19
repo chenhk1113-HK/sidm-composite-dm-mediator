@@ -1,0 +1,34 @@
+Nemotron review prompt for v19.2-F Cloud-9 c-M tension test (v40.39):
+
+Context:
+- v19.2-F Phase 44: sigma_peak=174 cm^2/g at v=29.4 km/s (Breit-Wigner resonance)
+- f_H = 0.297 (canonical, from constants.py)
+- sigma_eff(v=28) = f_H^2 * sigma_m = 0.088 * 165 = 14.6 cm^2/g
+- Cloud-9 (M=4.7e9, c=12, V_max=30 km/s): t_core = 0.84 Gyr, tau = 16.3 (deep collapse)
+- Ohana+ 2026 (arXiv:2608.04362) finds tau = 0.18 for Cloud-9 (max-core), c = 4
+- v19.2-F canonical parameters are INCONSISTENT with Cloud-9 being in max-core
+
+The new script is `scripts/v19_2_f_cloud9_cM_tension.py` with results in
+`v0.3-prelim/data/results/v19_2_f_cloud9_cM_tension.json`. Locked as a
+NEGATIVE result by `v0.3-prelim/tests/test_v19_2_f_cloud9_cM_negative.py`
+(5 regression tests).
+
+Question for review:
+1. Is the negative result a real physical constraint, or an artifact of
+   (a) the simplified Yang+ c_200(tau) polynomial fit, or (b) the Balberg
+   t_core formula's domain of validity?
+2. Should v19.2-F adopt a smaller f_H (e.g., < 0.05) for the Cloud-9 channel
+   to be consistent with the observed max-core? Or is the multi-resonance
+   + f_H(r) framework fundamentally inconsistent with the c=4 observation?
+3. Is there a published mechanism (e.g., merger-driven τ reset per
+   Silverman+ 2026) that could put Cloud-9 in the max-core regime despite
+   v19.2-F's τ = 16 prediction?
+
+Please respond with a brief qualitative review (1-2 paragraphs) of the
+script's assumptions, limitations, and whether the negative result is a
+publishable structural constraint or a known artifact of the simplified
+Yang+ model.
+
+The script's full output is in `v0.3-prelim/data/results/v19_2_f_cloud9_cM_tension.json`.
+The R88(71) pre-claim checklist at the end of the script's main() output
+already includes the honest framing.
