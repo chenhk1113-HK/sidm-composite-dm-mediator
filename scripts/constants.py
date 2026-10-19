@@ -60,14 +60,60 @@ V_REF_KMS = 100.0
 # Legacy v1.13 Option A flattening (kept for comparison, NOT canonical)
 A_SLOPE_OPTION_A = 1.0
 
-# Canonical f_H (paper §2.6 "σ_eff formula (R88)"): σ_eff = f_H² × σ/m with f_H=0.297.
-# This is the Phase G7 phenomenological fit, NOT a first-principles Yang+ 2025 SIDM2c
-# derivation (R88(88) caveat: the project's own N-body Phase G9 found f_H drop 0.94-1.01×,
-# i.e. a flat f_H(r) that is NOT subject to the SIDM2c f_H(r) compatibility trade-off).
-F_H_CANONICAL = 0.297
+# f_H(Cloud-9 core) -- Phase G7 phenomenological placeholder (R88(88) caveat)
+# ============================================================================
+# IMPORTANT: This value is a DOCUMENTED PLACEHOLDER, NOT a first-principles
+# Yang+ 2025 SIDM2c derivation. The original v1.13 hand-picked f_H values
+# were RETRACTED in v18.29 (per CHANGELOG and paper section 3.6):
+#
+#   "v1.13 with hand-picked placeholder f_H, retracted v18.29 --
+#    shown for reference only"
+#
+# The actual Yang+ 2025 Fig. 2 f_H range is f_L in [0.3, 0.6] (i.e. f_H in
+# [0.4, 0.7]), but for sigma_0/m = 147 cm^2/g, NOT Phase 44's 0.052 cm^2/g.
+# At Phase 44 sigma/m, T202 N-body (T202 path B validation, see V18.40
+# review bundle) found f_H(r) ~= 0.92 (NO segregation; gravothermal cascade
+# timescale >> Hubble at weak sigma/m).
+#
+# v40.41 sensitivity sweep (scripts/v19_2_f_fH_sensitivity.py): ALL
+# physically motivated f_H in [0.3, 1.0] give tau > 1 (deep core collapse)
+# for v19.2-F canonical parameters. The c-M tension is STRUCTURAL, not
+# driven by this placeholder value. Section 2.6b of the paper documents
+# this finding.
+#
+# Per Nemotron 120B review (2026-10-19, v40.41): "Adding the v40.41
+# sensitivity analysis as a formal robustness check in the paper is
+# warranted." The c-M tension is a real structural constraint, and the
+# placeholder f_H value is not the limiting factor.
+#
+# Use F_H_PLACEHOLDER_G7 (= 0.297) for backward compatibility with v1.13
+# code that imported F_H_CANONICAL. New code should use F_H_PHYSICAL_RANGES
+# to acknowledge the f_H is a placeholder, not a first-principles value.
+F_H_CANONICAL = 0.297  # DEPRECATED: use F_H_PLACEHOLDER_G7 instead
+F_H_PLACEHOLDER_G7 = 0.297  # v1.13 / Phase G7 placeholder (retracted v18.29)
+F_H = F_H_PLACEHOLDER_G7  # backward-compat alias
 
-# For backward compatibility with code that imports F_H
-F_H = F_H_CANONICAL
+# Yang+ 2025 Fig. 2 segregation range (for sigma_0/m = 147 cm^2/g, NOT Phase 44)
+F_H_YANG_PLUS_LOW = 0.40  # f_L = 0.6 (heavy fraction at low end)
+F_H_YANG_PLUS_MID = 0.50  # f_L = 0.5 (mid segregation)
+F_H_YANG_PLUS_HIGH = 0.70  # f_L = 0.3 (heavy fraction at high end)
+
+# T202 N-body at Phase 44 sigma/m (gravothermal cascade timescale >> Hubble,
+# NO segregation develops)
+F_H_T202_NBODY = 0.92
+
+# Single-component SIDM (no f_H suppression)
+F_H_SINGLE_COMPONENT = 1.00
+
+# Documented physically motivated ranges (per v40.41 sensitivity sweep)
+F_H_PHYSICAL_RANGES = {
+    "placeholder_g7_retracted": F_H_PLACEHOLDER_G7,
+    "yang_plus_low": F_H_YANG_PLUS_LOW,
+    "yang_plus_mid": F_H_YANG_PLUS_MID,
+    "yang_plus_high": F_H_YANG_PLUS_HIGH,
+    "t202_nbody": F_H_T202_NBODY,
+    "single_component": F_H_SINGLE_COMPONENT,
+}
 
 # Speed of light
 C_KMS = 2.998e5
