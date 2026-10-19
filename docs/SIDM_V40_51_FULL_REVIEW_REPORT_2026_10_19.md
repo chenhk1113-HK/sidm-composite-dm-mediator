@@ -18,11 +18,19 @@ The v19.2-F SIDM framework went through a **14-version investigation** (v40.39 �
 
 | Tension | Status |
 |---|---|
-| Cloud-9 c-M tension (vs Ohana+ 2026 3.2σ) | **FULLY RESOLVED** by setting Gaussian peak = 0 (v40.46) |
+| Cloud-9 c-M tension (vs Ohana+ 2026 3.2σ) | **ADDRESSED via MODEL DOWNGRADE** (v40.46 + v40.52 reframing): setting Gaussian peak = 0 IS a model replacement, not a tension resolution within the original architecture |
 | Fornax σ_HL internal inconsistency | **PARTIALLY RESOLVED** (v40.47, 1.4× σ_HL reduction, still 2.5× above dSph ceiling) |
 | Background parameterization (multi-scale) | **PARTIALLY ROBUST**: 10/14 = 71% of (σ₀, a, v_ref) combinations pass all 9 multi-scale channels (v40.49) |
 | **Framework final downgrade** | **COMPLETE** (v40.50, per Nemotron 550B 11th review) |
 | **v40.51 bug fix (n6.docx review)** | **APPLIED** — corrected parameter ranges, removed transcription error |
+| **v40.52 reframing (n7.docx review)** | **APPLIED** — "FULLY RESOLVED" reframed as "ADDRESSED via MODEL DOWNGRADE" |
+
+**CRITICAL CAVEAT (per n7.docx Issue #2, MED-HIGH severity):** The c-M tension sign is **NOT robust to prescription choice**:
+- Elbert+ 2015: c-M = +0.32σ (RELIEVED)
+- Burkert-style: c-M = +0.93σ (RELIEVED)
+- Sameie+ 2020: c-M = -1.31σ (AGGRAVATED, opposite sign!)
+
+The framework should NOT be cited as "predicting" the c-M tension sign without specifying the prescription used.
 
 The 71% partial robustness becomes the framework's **TESTABLE PREDICTION**: future Milky Way satellite surveys (DESI, LSST, Euclid) can either validate the passing region (if σ/m(v=10) < 1.0 cm²/g) or expand it (if the constraint loosens).
 
@@ -423,13 +431,23 @@ docs/REVIEW_N6_V40_51_FIX.md  (NEW: documents the v40.51 bug fix)
 docs/SIDM_V40_50_FULL_REVIEW_REPORT_2026_10_19.md  (this report's prior version)
 ```
 
-### 8.3 Run the tests
+### 8.3 Run the tests (CROSS-PLATFORM per v40.52 fix for n7.docx Issue #7)
 
 ```bash
-cd C:\Users\lamkuenai\projects\sidm-composite-dm-mediator
-.venv-sidm-bench/Scripts/python.exe -m pytest v0.3-prelim/tests/ 2>&1 | tail -3
-# Expected: 92 passed in ~4s
+# PowerShell (Windows native):
+.venv-sidm-bench\Scripts\python.exe -m pytest v0.3-prelim\tests\
 
+# Git Bash / WSL / Linux / macOS (POSIX):
+.venv-sidm-bench/Scripts/python.exe -m pytest v0.3-prelim/tests/
+
+# Or with venv activated (any platform):
+python -m pytest v0.3-prelim/tests/
+```
+
+**Expected:** 92 passed in ~4s (after v40.51 bug fix; 97 expected after v40.52 n7.docx fixes add 5 more tests).
+
+```bash
+# Pre-tag gate (any platform, with venv activated):
 python scripts/verify_release_gate.py --quick
 # Expected: ALL GATES PASSED
 ```

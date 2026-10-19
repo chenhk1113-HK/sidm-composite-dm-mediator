@@ -564,8 +564,10 @@ At ΛCDM-standard concentration (c = 12), the framework's canonical σ_peak = 17
 
 **KEY v40.47 HONEST FINDING:** Setting peak=0 reduces Fornax σ/m(15) by only 1.4× (2.85 → 2.02 cm²/g). The Yukawa background ALONE at v=15 km/s is **2.02 cm²/g, still 2.5× above the dSph ceiling of 0.8 cm²/g**. The Fornax dSph tension is **PARTIALLY resolved, not fully resolved**.
 
+| **v40.52 REFRAMING (per n7.docx review, Issue #1, HIGH severity):** Removing the peak is a **MODEL REPLACEMENT** strategy, not a tension resolution within the original architecture. The framework's multi-resonance architecture is preserved as a hypothesis for future UV completion, but the c-M prediction now uses the Yukawa-only form (peak=0). The peak was downgraded to a phenomenological nuisance parameter (per Nemotron 120B 6th review, v40.45). "FULLY RESOLVED" is therefore **NOT** a statement that the original v19.2-F multi-resonance framework fit Cloud-9 — it is a statement that the *downgraded* framework (Yukawa-only) passes Cloud-9. **The original multi-resonance architecture is now a hypothesis, not a working model.** This distinction is critical for citation purposes. |
+
 **DIFFERENCE FROM CLOUD-9 (v40.46):**
-- Cloud-9 at v=28: peak tail DOMINATES (165 of 166 cm²/g) → 1000× reduction with peak=0 → c-M tension FULLY RESOLVED
+- Cloud-9 at v=28: peak tail DOMINATES (165 of 166 cm²/g) → 1000× reduction with peak=0 → c-M tension ADDRESSED via MODEL DOWNGRADE (v40.52 framing: not "resolved" but "addressed by removing core prediction")
 - Fornax at v=15: peak tail is only 29% of total → only 1.4× reduction with peak=0 → σ_HL tension PARTIALLY resolved
 
 **Per Nemotron 120B 8th review (v40.47, 16.2s response):**
@@ -2018,6 +2020,10 @@ See the no-go table in §10.5. The qualitative verdicts are: 4 of 5 specific UV 
 [1a] [NEEDS CITATION] — see `v0.3-prelim/docs/AUDIT_REFERENCES.md`
 [2] [NEEDS CITATION] — see `v0.3-prelim/docs/AUDIT_REFERENCES.md`
 [3] [NEEDS CITATION] — see `v0.3-prelim/docs/AUDIT_REFERENCES.md`
+
+**[Ohana+ 2026, ADDED v40.52]:** Ohana, Zhang, Yu 2026, "Cold Dark Matter and Self-Interacting Dark Matter Interpretations of Cloud-9", **arXiv:2608.04362** (verified via arXiv.org metadata: `citation_date = 2026/08/05`, `citation_title = "Cold Dark Matter and Self-Interacting Dark Matter Interpretations of Cloud-9"`, `citation_arxiv_id = 2608.04362`). The paper was published **2026-08-05, ~2.5 months BEFORE the current project date 2026-10-19** — it is NOT a future-dated citation. The 3.2σ SIDM tension value cited in §1 comes from this paper's lensing-inferred c=4 analysis. The framework's σ_peak = 174 cm²/g is consistent with this c=4 inference (matches within 0.04σ) but is in severe tension at ΛCDM-standard c=12 (the §2.6a structural tension).
+
+**Note on Nemotron 550B 13th review (v40.52):** Nemotron flagged this citation as "invalid — August 2026 is a future date." This was an empirically incorrect claim; the arXiv metadata confirms the paper is from 2026-08-05 (past). Per R88(68) anti-fabrication rule, the citation is RETAINED and the verification metadata is included above.
 [4] [NEEDS CITATION] — see `v0.3-prelim/docs/AUDIT_REFERENCES.md`
 [5] [NEEDS CITATION] — see `v0.3-prelim/docs/AUDIT_REFERENCES.md`
 [6] [NEEDS CITATION] — see `v0.3-prelim/docs/AUDIT_REFERENCES.md`
