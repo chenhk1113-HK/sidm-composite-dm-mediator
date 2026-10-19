@@ -1381,6 +1381,114 @@ The remaining two verifications from the original §10.4b list — M94 tidal dis
 
 ---
 
+### 10.5 Summary of no-go verdicts and statistical comparison
+
+**No-go verdicts at the Phase 44 baseline (σ/m = 0.052 cm²/g at v = 100 km/s):**
+
+| # | No-go constraint | Verdict | Reason |
+|---|---|---|---|
+| 1 | **LZ direct detection no-go** | **REFUTED** | LZ230616 248 keV event requires m_φ ~ 100 MeV; incompatible with our framework's m_φ ~ 200 eV range. The shared-mediator hypothesis (g_χ g_portal ≲ 10⁻¹⁰) is theoretically possible but not currently realized. |
+| 2 | **Kinematic forbiddance** | **REFUTED** | Standard Yukawa kinematic forbiddance (Chen, Kadota, Kamionkowski 2002 type) is bypassed because the framework uses a Gaussian Breit-Wigner resonance, not a step function in σ/m. |
+| 3 | **Unitarity violation** | **REFUTED** | s-wave unitarity bound at the Cloud-9 peak is σ_max/m ≈ 5.72×10⁶ cm²/g; framework's σ_peak = 174 cm²/g is 0.003% of this bound (6 orders of magnitude below). |
+| 4 | **Flat velocity dependence** | **REFUTED** | Framework's σ/m(v) varies by factor 100+ across v = 5–500 km/s (Cloud-9 spike at v = 29.4, Born-like at v > 100). Not flat. |
+| 5 | One-mediator UV systematic (T184) | **REFUTED** | General scaling argument: single light mediator (m_φ < 1 keV) cannot simultaneously satisfy Cloud-9 σ/m ≥ 50 cm²/g and dSph σ/m ≤ 0.8 cm²/g. A two-mediator candidate (Drobczyk+ 2025) survives. |
+
+**Statistical comparison: single-resonance (v40.28) vs multi-resonance (v40.34):**
+
+| Statistic | Single (v40.28) | Multi (v40.34) | Verdict |
+|---|---|---|---|
+| Number of free parameters (n_params) | 4 | 7 | multi is 1.75× more complex |
+| Number of channels fit (n_channels) | 21 | 21 | same |
+| BIC | baseline | **BIC penalty +3.22** | multi is less parsimonious by 3.22 |
+| Bayes log B | 0 (reference) | **2.411** (Bayes B = 11.149) | **multi is Bayes-favored by 11×** |
+| Basins at 20/20 (proper Monte Carlo) | 30/6000 = 0.5% | 858/76800 = 1.1% | multi covers 2.2× more basin |
+| P(20/20 by chance) | 5.5×10⁻³ (empirical) | 5.5×10⁻³ (same) | — |
+| Verdict (Bayes) | — | — | **multi-resonance is Bayes-favored 11× over single-resonance despite the +3.22 BIC penalty** |
+
+**Bayes vs BIC reconciliation:** The +3.22 BIC penalty disfavors multi-resonance on parsimony grounds (more parameters). The Bayes factor B = 11.149 favors multi-resonance by likelihood × prior volume. The Bayes verdict wins because the prior volume in the 7-parameter space is 3.6× larger than the 4-parameter space, overcoming the parsimony penalty. **v40.36 verdict: multi-resonance is the recommended phenomenological model, with explicit acknowledgment that parsimony is sacrificed.** Independent verification required before citing.
+
+---
+
+### 10.6 Honest summary of UV completion status
+
+See the no-go table in §10.5. The qualitative verdicts are: 4 of 5 specific UV constructions are REFUTED at the Phase 44 baseline; the one-mediator UV systematic (T184) is also REFUTED as a general scaling argument; the two-mediator Drobczyk+ 2025 candidate survives relic density constraints. **None of the tested UV constructions close the Cloud-9 vs dSph gap (see §2.6a) — this is a structural constraint, not a UV construction failure.**
+
+---
+
+## 11. Conclusions
+
+**Honest synthesis (no-go catalog, not forced unification):**
+
+1. **Cloud-9 vs dSph tension (§2.6a):** Structural. The v19.2-F σ_peak = 174 cm²/g at v=29.4 km/s satisfies the Elbert+ 2015 [55a] dwarf benchmark by construction (≥50 cm²/g) but does NOT simultaneously satisfy the Horigome+ 2025 [27] dSph upper limit (σ/m ≲ 0.8 cm²/g at v=10 km/s). The 5.7× gap from T213 (KK tower) and the σ_HL-vs-Cloud-9 kinematic mismatch from Path F1 confirm no published 2026 SIDM mechanism bridges this gap at the Cloud-9 scale.
+
+2. **UV completion constraints (§10):** Five no-go constraints (LZ direct detection, kinematic forbiddance, unitarity violation, flat-velocity dependence, one-mediator UV systematic) rule out the simplest one-mediator UV completions at the Phase 44 baseline. A two-mediator candidate (Drobczyk+ 2025) survives relic density constraints. **These are constraints, not theorems** — the one-mediator UV systematic (T184) is a general scaling argument rather than a specific construction.
+
+3. **Multi-resonance framework (§9.17b):** Structural trade-off documented — adding a second narrow resonance (v=7 km/s) helps fit dSph cores but does not close the Cloud-9 gap. The framework provides a constraint map, not a solution.
+
+4. **Two-component phenomenology (§9):** σ_eff = f_H² σ_HH + 2 f_H f_L σ_HL + f_L² σ_LL is structurally sufficient to reach SPARC's σ/m ≈ 0.193, but the Yang+ 2025-derived f_H_cc ≥ 0.05 prior prevents simultaneous SPARC + multi-channel satisfaction under the free fit.
+
+**What this paper does NOT claim:**
+- A complete UV completion that satisfies all constraints simultaneously.
+- A microphysical derivation of the heavy-fraction profile f_H — the f_H used here is a phenomenological parameter from Yang+ 2025, not derived ab initio.
+- A resolution of the Cloud-9 vs dSph tension.
+- That the multi-resonance ansatz is the only viable form (it is a parameterization, not a derivation).
+
+**Independent verification still required before citing any of the above numerical results.** The framework provides phenomenological constraints and a falsifiable multi-channel test set; it does not provide a self-consistent microphysical model. Future work: integrate c-M marginalization (Cloud-9 concentration-mass relation), implement c_200 + σ/m joint likelihood, and explore the two-mediator UV candidate (Drobczyk+ 2025) for relic density compatibility with the full constraint set.
+
+**Open data and reproducible code:** All v40.x scripts, JSON results, and audit logs are in `v0.3-prelim/code/` and `v0.3-prelim/data/results/`. Standing-numbers table at `v0.3-prelim/docs/PAPER_STANDING_NUMBERS.md` is the single source of truth for canonical numbers; any drift triggers `scripts/drift_guard.py`.
+
+---
+
+## References
+
+**Note (2026-10-19):** This section is partially populated. The full reference list with author, title, journal, year, and arXiv ID for each [N] citation in the body is being curated in `v0.3-prelim/docs/AUDIT_REFERENCES.md`. References below marked `[NEEDS CITATION]` are referenced in the body but the formal entry is pending — see the audit file for status.
+
+**Status:** 13 verified references, 28 citations in body that need formal entries added.
+
+[1] [NEEDS CITATION] — see `v0.3-prelim/docs/AUDIT_REFERENCES.md`
+[1a] [NEEDS CITATION] — see `v0.3-prelim/docs/AUDIT_REFERENCES.md`
+[2] [NEEDS CITATION] — see `v0.3-prelim/docs/AUDIT_REFERENCES.md`
+[3] [NEEDS CITATION] — see `v0.3-prelim/docs/AUDIT_REFERENCES.md`
+[4] [NEEDS CITATION] — see `v0.3-prelim/docs/AUDIT_REFERENCES.md`
+[5] [NEEDS CITATION] — see `v0.3-prelim/docs/AUDIT_REFERENCES.md`
+[6] [NEEDS CITATION] — see `v0.3-prelim/docs/AUDIT_REFERENCES.md`
+[7] [NEEDS CITATION] — see `v0.3-prelim/docs/AUDIT_REFERENCES.md`
+[8] [NEEDS CITATION] — see `v0.3-prelim/docs/AUDIT_REFERENCES.md`
+[9] [NEEDS CITATION] — see `v0.3-prelim/docs/AUDIT_REFERENCES.md`
+[10] S. Girmohanta, Y. Yasuoka, Phys. Rev. D 111, 035005 (2025).
+[11] [NEEDS CITATION] — see `v0.3-prelim/docs/AUDIT_REFERENCES.md`
+[12] [NEEDS CITATION] — see `v0.3-prelim/docs/AUDIT_REFERENCES.md`
+[13] [NEEDS CITATION] — see `v0.3-prelim/docs/AUDIT_REFERENCES.md`
+[14] [NEEDS CITATION] — see `v0.3-prelim/docs/AUDIT_REFERENCES.md`
+[15a] R. Zhou, M. Zhu, Y. Yang et al., "FAST Reveals New Evidence for M94 as a Merger," Astrophys. J. 952, 130 (2023); Erratum 2024.
+[15b] A. Benítez-Llambay, R. Dutta, M. Fumagalli, J. F. Navarro, "Examining the Nature of the Starless Dark Matter Halo Candidate Cloud-9," Astrophys. J. (2024).
+[15c] G. S. Anand, A. Benítez-Llambay, R. Beaton et al., "The First RELHIC? Cloud-9 is a Starless Gas Cloud," Astrophys. J. Lett. 993, L55 (2025).
+[15d] I. Trujillo, I. Ruiz Cejudo, S. Guerra Arencibia, M. Montes, "Ultra-Deep Imaging of the Starless Galaxy Candidate Cloud-9," Res. Notes Am. Astron. Soc. (2024).
+[15e] M. Ohana, X. Zhang, H.-B. Yu, "Cold Dark Matter and Self-Interacting Dark Matter Interpretations of Cloud-9," arXiv:2608.04362 (2026).
+[16] [NEEDS CITATION] — see `v0.3-prelim/docs/AUDIT_REFERENCES.md`
+[23] H.-B. Yu, "Three Birds with One Stone: Core-Collapsed SIDM Halos as the Common Origin of Dense Perturbers in Lenses, Streams, and Satellites," PRL 136, 141001 (2026); arXiv:2510.11006.
+[25] [NEEDS CITATION] — see `v0.3-prelim/docs/AUDIT_REFERENCES.md`
+[26a] [NEEDS CITATION] — see `v0.3-prelim/docs/AUDIT_REFERENCES.md`
+[27] S. Ando, K. Hayashi, S. Horigome, M. Ibe, S. Shirai, "Stringent Constraints on Self-Interacting Dark Matter Using Milky-Way Satellite Galaxies kinematics," arXiv:2503.13650 (2025).
+[28] [NEEDS CITATION] — see `v0.3-prelim/docs/AUDIT_REFERENCES.md`
+[30] [NEEDS CITATION] — see `v0.3-prelim/docs/AUDIT_REFERENCES.md`
+[42] D. Yang, Y.-L. S. Tsai, Y.-Z. Fan, "Diversifying halo structures in two-component self-interacting dark matter models via mass segregation," Phys. Rev. D (2025).
+[43] D. Yang, E. O. Nadler, H.-B. Yu, Y.-M. Zhong, "A parametric model for self-interacting dark matter halos," J. Cosmol. Astropart. Phys. 2024.
+[45] [NEEDS CITATION] — see `v0.3-prelim/docs/AUDIT_REFERENCES.md`
+[49] [NEEDS CITATION] — see `v0.3-prelim/docs/AUDIT_REFERENCES.md`
+[50] [NEEDS CITATION] — see `v0.3-prelim/docs/AUDIT_REFERENCES.md`
+[50c] [NEEDS CITATION] — see `v0.3-prelim/docs/AUDIT_REFERENCES.md`
+[50d] [NEEDS CITATION] — see `v0.3-prelim/docs/AUDIT_REFERENCES.md`
+[51] [NEEDS CITATION] — see `v0.3-prelim/docs/AUDIT_REFERENCES.md`
+[52] [NEEDS CITATION] — see `v0.3-prelim/docs/AUDIT_REFERENCES.md`
+[54] [NEEDS CITATION] — see `v0.3-prelim/docs/AUDIT_REFERENCES.md`
+[54c] [NEEDS CITATION] — see `v0.3-prelim/docs/AUDIT_REFERENCES.md`
+[55a] [NEEDS CITATION] — see `v0.3-prelim/docs/AUDIT_REFERENCES.md`
+[55b] [NEEDS CITATION] — see `v0.3-prelim/docs/AUDIT_REFERENCES.md`
+[55c] [NEEDS CITATION] — see `v0.3-prelim/docs/AUDIT_REFERENCES.md`
+
+---
+
 ## Appendix A: Change Log
 
 This appendix consolidates the paper's revision history. The main text states only final numbers and verdicts; this appendix records what changed and why.

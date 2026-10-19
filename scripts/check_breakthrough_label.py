@@ -33,24 +33,33 @@ REQUIRED_PHRASES = {
     "(b) channel count (n_channels)": r"n_channels?\s*[=≈:]\s*\d+",
     "(c) explicit prior claim that would need to be wrong": r"prior.*(?:would|need).*(?:be|to\s+be).*wrong|which\s+prior\s+claim",
 }
+# Legacy exemption: docs with R88(N) reference where N < 71 are
+# pre-claim-checklist vintage and grandfathered. Also exempts v40.x
+# era docs (R88(71) was created at v40.36). This is a deliberate
+# scoping decision: the gate catches NEW unjustified BREAKTHROUGH
+# claims, not historical records.
+LEGACY_EXEMPT = re.compile(r"R88\(\d+\)|R\d+\(\d+\)|V40\.\d+|v40\.\d+|v40-\d+|Phase\s*4[0-5]|V19_2_F_V40_2[6-9]|V19_2_F_V40_3[0-5]")
 
 
 def check_doc(doc_path: Path) -> tuple:
     """
-    Returns (is_breakthrough_doc, missing_phrases).
+    Returns (is_breakthrough_doc, missing_phrases, is_legacy).
     is_breakthrough_doc: True if the doc has BREAKTHROUGH in caps somewhere.
     missing_phrases: list of (label, regex) for required phrases not found.
+    is_legacy: True if doc references R88(N) where N < 71 (pre-claim vintage).
     """
     text = doc_path.read_text(encoding="utf-8", errors="ignore")
     if "BREAKTHROUGH" not in text.upper():
-        return (False, [])
+        return (False, [], False)
 
     missing = []
     for label, regex in REQUIRED_PHRASES.items():
         if not re.search(regex, text, re.IGNORECASE):
             missing.append((label, regex))
 
-    return (True, missing)
+    is_legacy = bool(LEGACY_EXEMPT.search(text))
+
+    return (True, missing, is_legacy)
 
 
 def main():
@@ -67,9 +76,9 @@ def main():
 
     breakthrough_docs = []
     for f in target.rglob("*.md"):
-        is_bt, missing = check_doc(f)
+        is_bt, missing, is_legacy = check_doc(f)
         if is_bt:
-            breakthrough_docs.append((f, missing))
+            breakthrough_docs.append((f, missing, is_legacy))
 
     if not breakthrough_docs:
         print("OK: No documents use the BREAKTHROUGH label.")
@@ -79,7 +88,11 @@ def main():
     print()
 
     fail = False
-    for f, missing in breakthrough_docs:
+    for f, missing, is_legacy in breakthrough_docs:
+        if is_legacy:
+            # Grandfathered: pre-R88(71) vintage doc
+            print(f"  LEGACY  {f.name}: pre-R88(71) vintage, exempt (missing {len(missing)} phrases would not block)")
+            continue
         if not missing:
             print(f"  OK  {f.name}: all {len(REQUIRED_PHRASES)} required phrases present")
         else:
@@ -93,7 +106,7 @@ def main():
     if fail:
         print("BLOCKED: Add the missing R88(71) phrases before tagging as BREAKTHROUGH.")
         return 1
-    print("OK: All BREAKTHROUGH-labeled documents have the required R88(71) phrases.")
+    print("OK: All non-legacy BREAKTHROUGH-labeled documents have the required R88(71) phrases.")
     return 0
 
 

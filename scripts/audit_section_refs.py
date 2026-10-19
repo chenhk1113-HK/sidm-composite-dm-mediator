@@ -40,6 +40,8 @@ EXTERNAL_CITE_PATTERNS = [
     re.compile(r'§\d+\s+of\s+v\d+'),                                      # "§8.5 of v1.11" — historical paper version
     re.compile(r'v\d+\.\d+\s+§\d+'),                                      # "v1.11 §8.5" — historical paper version (no "of")
     re.compile(r'`[^`]+\.md`\s+§\d+'),                                    # backtick-wrapped .md filename + §N
+    re.compile(r'ClawsGO\s*#\d+\s*§'),                                    # "ClawsGO #7 §7" — cross-ref to ClawsGO doc
+    re.compile(r'\(\s*ClawsGO[^)]*§'),                                   # "(ClawsGO #7 §7)" — same
 ]
 
 

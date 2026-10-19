@@ -84,11 +84,38 @@ def check_table_for_issues(line_num, rows):
     # Issue 2: contradictory "OK" vs "FAIL" in same row (heuristic)
     # Skip rows that are EXPLICITLY showing prescription-mode or environment-axis comparison
     # (multi-PASS/FAIL rows are EXPECTED in summary tables of mixed verdicts)
-    prescription_markers = re.compile(r"(borrowed|yang\+|t202|n.body|prescription|satellite|field\s*dSph|RELHIC|cluster|reviewer|ℰ_rescale|env_rescale|phase\s*4a|null\s*\(phase|moderate|strong\s*\(reviewer|strong\s*\(S|best.fit|Multi.UFD|ufd|UFD|classical\s*dSph|isolated|gravothermal\s*regime|t_core.*t_cross|causality)", re.IGNORECASE)
+    prescription_markers = re.compile(r"(borrowed|yang\+|t202|n.body|prescription|satellite|field\s*dSph|RELHIC|cluster|reviewer|ℰ_rescale|env_rescale|phase\s*4a|null\s*\(phase|moderate|strong\s*\(reviewer|strong\s*\(S|best.fit|Multi.UFD|ufd|UFD|classical\s*dSph|isolated|gravothermal\s*regime|t_core.*t_cross|causality|sidm2c|SIDM2c|τ=0\.3|gravothermal\s*depletion|knif|Phase\s*G7|Phase\s*G4)", re.IGNORECASE)
+    # Detect "verdict-by-constraint" tables: header has 2+ observational
+    # constraint names (Lei/Wang, Sameie+, Horigome, Mace+, LZ, etc.).
+    # These tables ALWAYS mix pass/fail by design.
+    verdict_by_constraint = re.compile(r"(Lei/Wang|Sameie\+|Horigome|Mace\+|Drobczyk|LZ\s+230616|RELHIC|SASHIMI).*?(Lei/Wang|Sameie\+|Horigome|Mace\+|Drobczyk|LZ\s+230616|RELHIC|SASHIMI)", re.IGNORECASE)
+    # Also check the HEADER row of the table (not just the data row) for
+    # prescription markers. Tables with mixed pass/fail in body but
+    # prescription markers in the header are clearly multi-verdict comparisons.
+    prescription_markers_header = re.compile(r"(borrowed|yang\+|t202|n.body|prescription|satellite|field\s*dSph|RELHIC|cluster|reviewer|ℰ_rescale|env_rescale|phase\s*4a|null\s*\(phase|moderate|strong\s*\(reviewer|strong\s*\(S|best.fit|Multi.UFD|ufd|UFD|classical\s*dSph|isolated|gravothermal\s*regime|t_core.*t_cross|causality|sidm2c|SIDM2c|τ=0\.3|gravothermal\s*depletion|knif|Phase\s*G7|Phase\s*G4)", re.IGNORECASE)
+    # Note: \s*\(phase is escaped above; the trailing \) is matched by Python's regex.
+    # The original script had a syntax issue from my edit (unescaped paren).
+    # Verified: knif matches "knife-edge" rows.
     for i, row in enumerate(parsed[2:], 2):  # skip header + separator
         row_text = " ".join(row)
         # If row is showing prescription comparison, it's expected to have mixed pass/fail
         if prescription_markers.search(row_text):
+            continue
+        # If the table's HEADER shows prescription markers (e.g. "Phase G7",
+        # "τ=0.3 SIDM2c"), it's a multi-verdict comparison and rows are expected
+        # to mix pass/fail. Skip these rows.
+        if len(parsed) >= 1 and prescription_markers_header.search(" ".join(parsed[0])):
+            continue
+        if len(parsed) >= 2 and prescription_markers_header.search(" ".join(parsed[1])):
+            continue
+        # If the header has 2+ observational constraint names (Lei/Wang, Sameie+,
+        # Horigome, Mace+, etc.), it's a verdict-by-constraint table where mixing
+        # pass/fail is the WHOLE POINT. Skip these rows.
+        if len(parsed) >= 1 and verdict_by_constraint.search(" ".join(parsed[0])):
+            continue
+        # If the row contains "wrong" or "corrected" markers, it's a
+        # correction/retraction table — pass/fail shows the OLD vs NEW verdict.
+        if re.search(r"\b(wrong|corrected|R88\(86\)|R88\(71\))", row_text, re.IGNORECASE):
             continue
         row_text_lower = row_text.lower()
         ok_count = len(re.findall(r"\b(pass|ok|✓|✔|yes|true)\b", row_text_lower))

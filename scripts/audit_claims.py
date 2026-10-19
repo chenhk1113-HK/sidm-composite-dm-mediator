@@ -35,7 +35,7 @@ DEFAULT_TABLE = REPO_ROOT / "v0.3-prelim" / "docs" / "PAPER_STANDING_NUMBERS.md"
 CLAIM_MAP = [
     {
         "label": "Phase 44: +8.10 log-units (free joint fit)",
-        "regex": r"\+8\.10\s+log-units",
+        "regex": r"\+8\.10\s+log-?units?",
         "ref_json": "phase44_joint_fit.json",
         "ref_key": "improvement",
         "expected": 8.10,

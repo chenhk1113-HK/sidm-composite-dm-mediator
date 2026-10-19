@@ -92,13 +92,17 @@ def main():
 
     # Forbidden phrases — MUST NOT appear (strict regex, not loose match)
     forbidden = [
-        ("'6-7 of 8'", r"6[–-]7\s+of\s+8"),
+        ("'6-7 of 8'", r"6[–-]\s*7\s+of\s+8"),
         ("'Cloud-9 t_core measured'", r"t_core\s+(?:was|has\s+been|is|are)\s+measured"),
         ("'multi-resonance BIC-favored'", r"multi-resonance.*BIC.favored"),
         ("'KiSS-SIDM runs are deterministic'", r"KiSS-SIDM.*runs?\s+are\s+deterministic|runs?\s+are\s+deterministic.*KiSS"),
         ("'first-principles f_H from N-body'", r"first.principles.*f_H.*from.*N.body"),
-        # Note: "Cloud-9 tension" is OK; only flag "tension is RESOLVED" / "is now resolved" / "we resolved"
-        ("'Cloud-9 tension resolved (positive)'", r"Cloud.9.*tension.*(is|has\s+been|was)\s+(?:now\s+)?resolved"),
+        # "Cloud-9 tension" is OK; only flag "tension is/was resolved" — and
+        # require the same statement window (≤200 chars between "tension"
+        # and "is/has been/was resolved") to avoid false positives like
+        # "Cloud-9 tension UNCHANGED ... Path F1 is resolved" where these
+        # are two separate claims.
+        ("'Cloud-9 tension resolved (positive)'", r"Cloud.?\s*9[\s\S]{0,200}?tension[\s\S]{0,200}?(?:is|has\s+been|was)\s+(?:now\s+)?resolved"),
         ("'8/8 channel pass as headline'", r"8\s*/\s*8.*(?:headline|all\s+channels\s+pass)"),
     ]
 
