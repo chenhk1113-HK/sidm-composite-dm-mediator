@@ -75,7 +75,7 @@ SIGMA_KMS = 4.4
 # Halo catalogue
 HALOS = [
     {"halo": "Segue 1",   "M_200": 1.0e8, "c_200": 25.0, "V_max": 8.0,  "sigma_v_los": 3.7},
-    {"halo": "Tucana II", "M_200": 5.7e6, "c_200": 28.0, "V_max": 6.5,  "sigma_v_los": 8.2},
+    {"halo": "Tucana II", "M_200": 5.7e6, "c_200": 28.0, "V_max": 6.5,  "sigma_v_los": 8.6},
     {"halo": "Hercules",  "M_200": 1.0e7, "c_200": 25.0, "V_max": 6.0,  "sigma_v_los": 3.7},
     {"halo": "Draco",     "M_200": 2.0e9, "c_200": 20.0, "V_max": 17.0, "sigma_v_los": 10.6},
     {"halo": "Bootes I",  "M_200": 1.0e7, "c_200": 25.0, "V_max": 6.5,  "sigma_v_los": 6.5},

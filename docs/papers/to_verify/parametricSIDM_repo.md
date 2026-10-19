@@ -1,9 +1,9 @@
 # parametricSIDM (github.com/DanengYang/parametricSIDM)
 
-**Status:** TO VERIFY (GitHub repo inspected 2026-10-17, no local install)
+**Status:** TO VERIFY (GitHub repo inspected 2026-10-17, no local install; **LICENSE verified 2026-10-19 as GPL-3.0**)
 **Repo:** [github.com/DanengYang/parametricSIDM](https://github.com/DanengYang/parametricSIDM)
 **Paper:** arXiv:2305.16176 (Yang et al. — *the paper incorrectly cited in v40.4 as if it were the gravothermal Cloud-9 paper*)
-**License:** Has LICENSE file (need to read to confirm terms)
+**License:** **GPL-3.0** (CONFIRMED 2026-10-19 via `web_extract` of repo's LICENSE tab)
 
 ## Authorship
 - **Daneng Yang** (UCR) — same author as the v19.2-F canonical Cloud-9 paper arXiv:2305.05067
@@ -46,8 +46,12 @@
 4. Update KB entries + registry
 5. Possibly archive `gravothermal_yang2024.py` if parametricSIDM replaces it
 
-## TO VERIFY
-- LICENSE terms (BSD? MIT? GPL?)
-- Last commit / maintenance status
-- Read full paper to confirm core-collapse formula matches v19.2-F use case
+## VERIFICATION STATUS (updated 2026-10-19)
+- **LICENSE confirmed: GPL-3.0** (via web_extract of repo LICENSE tab 2026-10-19)
+- **Last commit: 32 commits on main (per repo Activity panel 2026-10-19)**
+- **Stars/forks: 6 stars, 2 forks (modest community engagement)**
+- **VERDICT: CITATION ONLY (not for code integration).** GPL-3.0 is copyleft — integrating this code into v19.2-F would force the entire v19.2-F codebase to be GPL-3.0 (or compatible). Per the user's standing practice (matches Jia SIDM_Jeans_model rule), external SIDM repos with restrictive licenses are CITED, never INTEGRATED.
+
+## TO VERIFY (remaining)
+- Read full paper to confirm core-collapse formula matches v19.2-F use case (citation only)
 - Cross-check V_max–R_max conversion against Cloud-9 (5×10⁹ M☉, V_max ~ 10 km/s)
