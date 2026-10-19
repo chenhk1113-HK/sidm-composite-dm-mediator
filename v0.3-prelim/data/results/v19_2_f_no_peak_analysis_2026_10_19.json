@@ -1,0 +1,31 @@
+{
+  "method": "v40.46: v19.2-F Cloud-9 analysis with Gaussian peak DOWNGRADED to 0",
+  "date": "2026-10-19",
+  "framework": "v19.2-F Phase 44 (canonical peak=174) vs DOWNGRADED (peak=0)",
+  "reference": "Ohana+ 2026 arXiv:2608.04362 (tau=0.18 max-core)",
+  "cases": [
+    {
+      "name": "CANONICAL (peak=174)",
+      "peak_amplitude": 174.0,
+      "sigma_m_at_28_kms": 166.01808042318618,
+      "sigma_eff_cm2_g": 14.64428885604883,
+      "t_core_Gyr": 0.8410972212248905,
+      "tau": 16.407140163776848,
+      "ohana_consistent": false
+    },
+    {
+      "name": "DOWNGRADED (peak=0, Nemotron recommendation)",
+      "peak_amplitude": 0.0,
+      "sigma_m_at_28_kms": 0.6067200444566195,
+      "sigma_eff_cm2_g": 0.05351816840147395,
+      "t_core_Gyr": 230.1511997054457,
+      "tau": 0.059960582511243254,
+      "ohana_consistent": true
+    }
+  ],
+  "verdict": {
+    "c_M_tension_resolved_by_peak_downgrade": true,
+    "cloud9_in_max_core_with_peak_zero": true,
+    "caveats": "Other v19.2-F components (multi-resonance architecture, Fornax sigma_HL) need separate re-evaluation with peak=0. Full framework downgrade is a v40.47+ task."
+  }
+}

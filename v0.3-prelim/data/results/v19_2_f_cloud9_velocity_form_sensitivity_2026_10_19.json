@@ -1,0 +1,47 @@
+{
+  "method": "v40.45: velocity-dependent sigma/m form sensitivity",
+  "date": "2026-10-19",
+  "framework": "v19.2-F Phase 44 (canonical Gaussian peak at v=29.4)",
+  "reference": "Ohana+ 2026 arXiv:2608.04362 (tau=0.18 max-core)",
+  "forms_tested": [
+    {
+      "name": "v19.2-F canonical (Yukawa + Gaussian peak at v=29.4)",
+      "sigma_m_at_28_kms": 166.01808042318618,
+      "sigma_eff_cm2_g": 14.64428885604883,
+      "t_core_Gyr": 0.8410972212248905,
+      "tau": 16.407140163776848,
+      "ohana_consistent": false
+    },
+    {
+      "name": "Yukawa-only (no Gaussian peak)",
+      "sigma_m_at_28_kms": 0.6067200444566195,
+      "sigma_eff_cm2_g": 0.05351816840147395,
+      "t_core_Gyr": 230.1511997054457,
+      "tau": 0.059960582511243254,
+      "ohana_consistent": true
+    },
+    {
+      "name": "Resonance at v=50 (peak at SPARC scale)",
+      "sigma_m_at_28_kms": 0.6175987861134382,
+      "sigma_eff_cm2_g": 0.05447777132428027,
+      "t_core_Gyr": 226.09718357086317,
+      "tau": 0.061035700587021326,
+      "ohana_consistent": true
+    },
+    {
+      "name": "Resonance at v=100 (peak far from Cloud-9)",
+      "sigma_m_at_28_kms": 0.6067200454196416,
+      "sigma_eff_cm2_g": 0.053518168486421165,
+      "t_core_Gyr": 230.151199340136,
+      "tau": 0.05996058260641626,
+      "ohana_consistent": true
+    }
+  ],
+  "verdict": {
+    "v19_2_f_canonical_drives_tension": true,
+    "yukawa_only_resolves_tension": true,
+    "resonance_at_v50_resolves_tension": true,
+    "resonance_at_v100_resolves_tension": true,
+    "key_insight": "The c-M tension is entirely driven by the Gaussian peak assumption. Only the v=29.4 peak (the Cloud-9 anchor) drives deep collapse. If the peak is a real dark-QCD resonance, the tension is structural. If the peak is a placeholder, the tension is an artifact of the framework's resonance assumption."
+  }
+}

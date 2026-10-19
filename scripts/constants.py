@@ -42,6 +42,16 @@ A_RES = 100.0
 # Causality cap truncates to 174. See §2.6 sensitivity sweep.
 SIGMA_PEAK_CM2_PER_G = 174.0
 
+# v40.46 DOWNGRADE: per Nemotron 120B 6th review (v40.45), the Gaussian
+# peak is more likely a phenomenological placeholder than a real resonance.
+# Framework should downgrade peak status to a nuisance parameter that
+# can be set to zero, which alleviates the c-M tension without invoking
+# new baryonic physics. The following two values allow switching:
+# - SIGMA_PEAK_CM2_PER_G = 174.0  (canonical, used in v40.0-v40.45)
+# - SIGMA_PEAK_CM2_PER_G_NUISANCE = 0.0  (Nemotron-recommended downgrade)
+# See scripts/v19_2_f_no_peak_analysis.py for the no-peak re-analysis.
+SIGMA_PEAK_CM2_PER_G_NUISANCE = 0.0  # Nemotron v40.45 downgrade option
+
 # Nucleon mass (for reduced mass calc): 0.939 GeV
 M_NUCLEON_GEV = 0.939
 

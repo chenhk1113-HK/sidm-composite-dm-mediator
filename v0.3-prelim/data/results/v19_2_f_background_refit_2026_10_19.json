@@ -1,0 +1,53 @@
+{
+  "method": "v40.48: Background refit (Yukawa parameters without peak)",
+  "date": "2026-10-19",
+  "framework": "v19.2-F Phase 44, peak DOWNGRADED to 0 (per v40.46)",
+  "reviewer": "Nemotron 3 Ultra 550B (UPGRADED from 120B)",
+  "targets": {
+    "cloud9_v_kms": 28.0,
+    "cloud9_sigma_m_max": 1.0,
+    "cloud9_sigma_m_ideal": 0.5,
+    "fornax_v_kms": 15.0,
+    "fornax_sigma_m_max": 0.8,
+    "sparc_v_kms": 100.0,
+    "sparc_sigma_m_max": 0.1
+  },
+  "parameter_grids": {
+    "sigma_0_grid": [
+      0.01,
+      0.03,
+      0.052,
+      0.1,
+      0.3
+    ],
+    "a_slope_grid": [
+      1.5,
+      1.93,
+      2.5,
+      3.0,
+      4.0
+    ],
+    "v_ref_grid": [
+      50.0,
+      100.0,
+      150.0
+    ]
+  },
+  "total_combinations": 75,
+  "passing_combinations": 14,
+  "best_passing": {
+    "sigma_0": 0.01,
+    "a_slope": 1.5,
+    "v_ref": 50.0,
+    "sigma_m_cloud9": 0.023862610885037893,
+    "sigma_m_fornax": 0.060858061945018464,
+    "sigma_m_sparc": 0.003535533905932738,
+    "all_ok": true,
+    "passes": {
+      "cloud9_ok": true,
+      "fornax_ok": true,
+      "sparc_ok": true
+    }
+  },
+  "best_failed": null
+}

@@ -1,0 +1,839 @@
+{
+  "method": "v40.49: Full multi-scale background refit",
+  "date": "2026-10-19",
+  "framework": "v19.2-F Phase 44, peak=0 (per v40.46)",
+  "reviewer": "Nemotron 3 Ultra 550B (UPGRADED from 120B)",
+  "input_from_v40_48": "14 passing combinations (sigma_0, a_slope, v_ref)",
+  "constraints": {
+    "cloud9": {
+      "v_kms": 28.0,
+      "sigma_m_max": 1.0,
+      "name": "Cloud-9 (V_max=28 km/s)"
+    },
+    "fornax": {
+      "v_kms": 15.0,
+      "sigma_m_max": 0.8,
+      "name": "Fornax (v=15 km/s, dSph ceiling)"
+    },
+    "sparc": {
+      "v_kms": 100.0,
+      "sigma_m_max": 0.1,
+      "name": "SPARC (v=100 km/s)"
+    },
+    "mw_sat_10": {
+      "v_kms": 10.0,
+      "sigma_m_max": 1.0,
+      "name": "MW satellite (v=10 km/s)"
+    },
+    "mw_sat_20": {
+      "v_kms": 20.0,
+      "sigma_m_max": 1.0,
+      "name": "MW satellite (v=20 km/s)"
+    },
+    "mw_sat_30": {
+      "v_kms": 30.0,
+      "sigma_m_max": 1.0,
+      "name": "MW satellite (v=30 km/s)"
+    },
+    "lyman_alpha": {
+      "v_kms": 100.0,
+      "sigma_m_max": 0.1,
+      "name": "Lyman-alpha (v=100 km/s)"
+    },
+    "cluster_1000": {
+      "v_kms": 1000.0,
+      "sigma_m_max": 0.5,
+      "name": "Cluster (v=1000 km/s)"
+    },
+    "bullet_cluster": {
+      "v_kms": 1500.0,
+      "sigma_m_max": 0.7,
+      "name": "Bullet Cluster (v=1500 km/s)"
+    }
+  },
+  "n_combinations": 14,
+  "n_all_pass": 10,
+  "n_per_channel": {
+    "cloud9": 14,
+    "fornax": 12,
+    "sparc": 14,
+    "mw_sat_10": 10,
+    "mw_sat_20": 14,
+    "mw_sat_30": 14,
+    "lyman_alpha": 14,
+    "cluster_1000": 14,
+    "bullet_cluster": 14
+  },
+  "results": [
+    {
+      "combo": {
+        "sigma_0": 0.01,
+        "a_slope": 1.5,
+        "v_ref": 50.0
+      },
+      "per_channel": {
+        "cloud9": {
+          "sigma_m": 0.023862610885037893,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "fornax": {
+          "sigma_m": 0.060858061945018464,
+          "ceiling": 0.8,
+          "passes": true
+        },
+        "sparc": {
+          "sigma_m": 0.003535533905932738,
+          "ceiling": 0.1,
+          "passes": true
+        },
+        "mw_sat_10": {
+          "sigma_m": 0.1118033988749895,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "mw_sat_20": {
+          "sigma_m": 0.03952847075210474,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "mw_sat_30": {
+          "sigma_m": 0.02151657414559676,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "lyman_alpha": {
+          "sigma_m": 0.003535533905932738,
+          "ceiling": 0.1,
+          "passes": true
+        },
+        "cluster_1000": {
+          "sigma_m": 0.0001118033988749895,
+          "ceiling": 0.5,
+          "passes": true
+        },
+        "bullet_cluster": {
+          "sigma_m": 6.0858061945018456e-05,
+          "ceiling": 0.7,
+          "passes": true
+        }
+      },
+      "all_pass": true
+    },
+    {
+      "combo": {
+        "sigma_0": 0.01,
+        "a_slope": 1.93,
+        "v_ref": 50.0
+      },
+      "per_channel": {
+        "cloud9": {
+          "sigma_m": 0.03061943043051167,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "fornax": {
+          "sigma_m": 0.10213062235689979,
+          "ceiling": 0.8,
+          "passes": true
+        },
+        "sparc": {
+          "sigma_m": 0.0026242917090576684,
+          "ceiling": 0.1,
+          "passes": true
+        },
+        "mw_sat_10": {
+          "sigma_m": 0.22336344969181052,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "mw_sat_20": {
+          "sigma_m": 0.05861708491327379,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "mw_sat_30": {
+          "sigma_m": 0.026802054549211186,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "lyman_alpha": {
+          "sigma_m": 0.0026242917090576684,
+          "ceiling": 0.1,
+          "passes": true
+        },
+        "cluster_1000": {
+          "sigma_m": 3.0832739124199344e-05,
+          "ceiling": 0.5,
+          "passes": true
+        },
+        "bullet_cluster": {
+          "sigma_m": 1.409795040355641e-05,
+          "ceiling": 0.7,
+          "passes": true
+        }
+      },
+      "all_pass": true
+    },
+    {
+      "combo": {
+        "sigma_0": 0.01,
+        "a_slope": 1.5,
+        "v_ref": 100.0
+      },
+      "per_channel": {
+        "cloud9": {
+          "sigma_m": 0.06749365589450487,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "fornax": {
+          "sigma_m": 0.17213259316477408,
+          "ceiling": 0.8,
+          "passes": true
+        },
+        "sparc": {
+          "sigma_m": 0.01,
+          "ceiling": 0.1,
+          "passes": true
+        },
+        "mw_sat_10": {
+          "sigma_m": 0.31622776601683794,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "mw_sat_20": {
+          "sigma_m": 0.1118033988749895,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "mw_sat_30": {
+          "sigma_m": 0.060858061945018464,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "lyman_alpha": {
+          "sigma_m": 0.01,
+          "ceiling": 0.1,
+          "passes": true
+        },
+        "cluster_1000": {
+          "sigma_m": 0.000316227766016838,
+          "ceiling": 0.5,
+          "passes": true
+        },
+        "bullet_cluster": {
+          "sigma_m": 0.00017213259316477408,
+          "ceiling": 0.7,
+          "passes": true
+        }
+      },
+      "all_pass": true
+    },
+    {
+      "combo": {
+        "sigma_0": 0.03,
+        "a_slope": 1.5,
+        "v_ref": 50.0
+      },
+      "per_channel": {
+        "cloud9": {
+          "sigma_m": 0.07158783265511368,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "fornax": {
+          "sigma_m": 0.18257418583505539,
+          "ceiling": 0.8,
+          "passes": true
+        },
+        "sparc": {
+          "sigma_m": 0.010606601717798213,
+          "ceiling": 0.1,
+          "passes": true
+        },
+        "mw_sat_10": {
+          "sigma_m": 0.33541019662496846,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "mw_sat_20": {
+          "sigma_m": 0.11858541225631422,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "mw_sat_30": {
+          "sigma_m": 0.06454972243679027,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "lyman_alpha": {
+          "sigma_m": 0.010606601717798213,
+          "ceiling": 0.1,
+          "passes": true
+        },
+        "cluster_1000": {
+          "sigma_m": 0.0003354101966249685,
+          "ceiling": 0.5,
+          "passes": true
+        },
+        "bullet_cluster": {
+          "sigma_m": 0.00018257418583505534,
+          "ceiling": 0.7,
+          "passes": true
+        }
+      },
+      "all_pass": true
+    },
+    {
+      "combo": {
+        "sigma_0": 0.01,
+        "a_slope": 2.5,
+        "v_ref": 50.0
+      },
+      "per_channel": {
+        "cloud9": {
+          "sigma_m": 0.04261180515185339,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "fornax": {
+          "sigma_m": 0.20286020648339487,
+          "ceiling": 0.8,
+          "passes": true
+        },
+        "sparc": {
+          "sigma_m": 0.001767766952966369,
+          "ceiling": 0.1,
+          "passes": true
+        },
+        "mw_sat_10": {
+          "sigma_m": 0.5590169943749475,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "mw_sat_20": {
+          "sigma_m": 0.09882117688026186,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "mw_sat_30": {
+          "sigma_m": 0.03586095690932794,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "lyman_alpha": {
+          "sigma_m": 0.001767766952966369,
+          "ceiling": 0.1,
+          "passes": true
+        },
+        "cluster_1000": {
+          "sigma_m": 5.5901699437494744e-06,
+          "ceiling": 0.5,
+          "passes": true
+        },
+        "bullet_cluster": {
+          "sigma_m": 2.0286020648339486e-06,
+          "ceiling": 0.7,
+          "passes": true
+        }
+      },
+      "all_pass": true
+    },
+    {
+      "combo": {
+        "sigma_0": 0.03,
+        "a_slope": 1.93,
+        "v_ref": 50.0
+      },
+      "per_channel": {
+        "cloud9": {
+          "sigma_m": 0.091858291291535,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "fornax": {
+          "sigma_m": 0.3063918670706993,
+          "ceiling": 0.8,
+          "passes": true
+        },
+        "sparc": {
+          "sigma_m": 0.007872875127173004,
+          "ceiling": 0.1,
+          "passes": true
+        },
+        "mw_sat_10": {
+          "sigma_m": 0.6700903490754315,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "mw_sat_20": {
+          "sigma_m": 0.17585125473982136,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "mw_sat_30": {
+          "sigma_m": 0.08040616364763355,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "lyman_alpha": {
+          "sigma_m": 0.007872875127173004,
+          "ceiling": 0.1,
+          "passes": true
+        },
+        "cluster_1000": {
+          "sigma_m": 9.249821737259802e-05,
+          "ceiling": 0.5,
+          "passes": true
+        },
+        "bullet_cluster": {
+          "sigma_m": 4.229385121066922e-05,
+          "ceiling": 0.7,
+          "passes": true
+        }
+      },
+      "all_pass": true
+    },
+    {
+      "combo": {
+        "sigma_0": 0.01,
+        "a_slope": 1.5,
+        "v_ref": 150.0
+      },
+      "per_channel": {
+        "cloud9": {
+          "sigma_m": 0.12399376336239527,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "fornax": {
+          "sigma_m": 0.31622776601683794,
+          "ceiling": 0.8,
+          "passes": true
+        },
+        "sparc": {
+          "sigma_m": 0.018371173070873836,
+          "ceiling": 0.1,
+          "passes": true
+        },
+        "mw_sat_10": {
+          "sigma_m": 0.5809475019311126,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "mw_sat_20": {
+          "sigma_m": 0.2053959590644373,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "mw_sat_30": {
+          "sigma_m": 0.1118033988749895,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "lyman_alpha": {
+          "sigma_m": 0.018371173070873836,
+          "ceiling": 0.1,
+          "passes": true
+        },
+        "cluster_1000": {
+          "sigma_m": 0.0005809475019311125,
+          "ceiling": 0.5,
+          "passes": true
+        },
+        "bullet_cluster": {
+          "sigma_m": 0.000316227766016838,
+          "ceiling": 0.7,
+          "passes": true
+        }
+      },
+      "all_pass": true
+    },
+    {
+      "combo": {
+        "sigma_0": 0.052,
+        "a_slope": 1.5,
+        "v_ref": 50.0
+      },
+      "per_channel": {
+        "cloud9": {
+          "sigma_m": 0.12408557660219705,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "fornax": {
+          "sigma_m": 0.316461922114096,
+          "ceiling": 0.8,
+          "passes": true
+        },
+        "sparc": {
+          "sigma_m": 0.018384776310850236,
+          "ceiling": 0.1,
+          "passes": true
+        },
+        "mw_sat_10": {
+          "sigma_m": 0.5813776741499453,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "mw_sat_20": {
+          "sigma_m": 0.20554804791094464,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "mw_sat_30": {
+          "sigma_m": 0.11188618555710315,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "lyman_alpha": {
+          "sigma_m": 0.018384776310850236,
+          "ceiling": 0.1,
+          "passes": true
+        },
+        "cluster_1000": {
+          "sigma_m": 0.0005813776741499454,
+          "ceiling": 0.5,
+          "passes": true
+        },
+        "bullet_cluster": {
+          "sigma_m": 0.00031646192211409594,
+          "ceiling": 0.7,
+          "passes": true
+        }
+      },
+      "all_pass": true
+    },
+    {
+      "combo": {
+        "sigma_0": 0.01,
+        "a_slope": 3.0,
+        "v_ref": 50.0
+      },
+      "per_channel": {
+        "cloud9": {
+          "sigma_m": 0.0569424198250729,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "fornax": {
+          "sigma_m": 0.37037037037037046,
+          "ceiling": 0.8,
+          "passes": true
+        },
+        "sparc": {
+          "sigma_m": 0.00125,
+          "ceiling": 0.1,
+          "passes": true
+        },
+        "mw_sat_10": {
+          "sigma_m": 1.25,
+          "ceiling": 1.0,
+          "passes": false
+        },
+        "mw_sat_20": {
+          "sigma_m": 0.15625,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "mw_sat_30": {
+          "sigma_m": 0.04629629629629631,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "lyman_alpha": {
+          "sigma_m": 0.00125,
+          "ceiling": 0.1,
+          "passes": true
+        },
+        "cluster_1000": {
+          "sigma_m": 1.2500000000000003e-06,
+          "ceiling": 0.5,
+          "passes": true
+        },
+        "bullet_cluster": {
+          "sigma_m": 3.7037037037037036e-07,
+          "ceiling": 0.7,
+          "passes": true
+        }
+      },
+      "all_pass": false
+    },
+    {
+      "combo": {
+        "sigma_0": 0.01,
+        "a_slope": 1.93,
+        "v_ref": 100.0
+      },
+      "per_channel": {
+        "cloud9": {
+          "sigma_m": 0.116676931626273,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "fornax": {
+          "sigma_m": 0.38917404648423365,
+          "ceiling": 0.8,
+          "passes": true
+        },
+        "sparc": {
+          "sigma_m": 0.01,
+          "ceiling": 0.1,
+          "passes": true
+        },
+        "mw_sat_10": {
+          "sigma_m": 0.8511380382023763,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "mw_sat_20": {
+          "sigma_m": 0.22336344969181052,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "mw_sat_30": {
+          "sigma_m": 0.10213062235689979,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "lyman_alpha": {
+          "sigma_m": 0.01,
+          "ceiling": 0.1,
+          "passes": true
+        },
+        "cluster_1000": {
+          "sigma_m": 0.00011748975549395299,
+          "ceiling": 0.5,
+          "passes": true
+        },
+        "bullet_cluster": {
+          "sigma_m": 5.3720972995866786e-05,
+          "ceiling": 0.7,
+          "passes": true
+        }
+      },
+      "all_pass": true
+    },
+    {
+      "combo": {
+        "sigma_0": 0.03,
+        "a_slope": 1.5,
+        "v_ref": 100.0
+      },
+      "per_channel": {
+        "cloud9": {
+          "sigma_m": 0.2024809676835146,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "fornax": {
+          "sigma_m": 0.5163977794943222,
+          "ceiling": 0.8,
+          "passes": true
+        },
+        "sparc": {
+          "sigma_m": 0.03,
+          "ceiling": 0.1,
+          "passes": true
+        },
+        "mw_sat_10": {
+          "sigma_m": 0.9486832980505138,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "mw_sat_20": {
+          "sigma_m": 0.33541019662496846,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "mw_sat_30": {
+          "sigma_m": 0.18257418583505539,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "lyman_alpha": {
+          "sigma_m": 0.03,
+          "ceiling": 0.1,
+          "passes": true
+        },
+        "cluster_1000": {
+          "sigma_m": 0.0009486832980505139,
+          "ceiling": 0.5,
+          "passes": true
+        },
+        "bullet_cluster": {
+          "sigma_m": 0.0005163977794943222,
+          "ceiling": 0.7,
+          "passes": true
+        }
+      },
+      "all_pass": true
+    },
+    {
+      "combo": {
+        "sigma_0": 0.03,
+        "a_slope": 2.5,
+        "v_ref": 50.0
+      },
+      "per_channel": {
+        "cloud9": {
+          "sigma_m": 0.12783541545556015,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "fornax": {
+          "sigma_m": 0.6085806194501846,
+          "ceiling": 0.8,
+          "passes": true
+        },
+        "sparc": {
+          "sigma_m": 0.005303300858899107,
+          "ceiling": 0.1,
+          "passes": true
+        },
+        "mw_sat_10": {
+          "sigma_m": 1.6770509831248421,
+          "ceiling": 1.0,
+          "passes": false
+        },
+        "mw_sat_20": {
+          "sigma_m": 0.29646353064078557,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "mw_sat_30": {
+          "sigma_m": 0.10758287072798381,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "lyman_alpha": {
+          "sigma_m": 0.005303300858899107,
+          "ceiling": 0.1,
+          "passes": true
+        },
+        "cluster_1000": {
+          "sigma_m": 1.6770509831248423e-05,
+          "ceiling": 0.5,
+          "passes": true
+        },
+        "bullet_cluster": {
+          "sigma_m": 6.0858061945018455e-06,
+          "ceiling": 0.7,
+          "passes": true
+        }
+      },
+      "all_pass": false
+    },
+    {
+      "combo": {
+        "sigma_0": 0.01,
+        "a_slope": 2.5,
+        "v_ref": 100.0
+      },
+      "per_channel": {
+        "cloud9": {
+          "sigma_m": 0.2410487710518031,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "fornax": {
+          "sigma_m": 1.147550621098494,
+          "ceiling": 0.8,
+          "passes": false
+        },
+        "sparc": {
+          "sigma_m": 0.01,
+          "ceiling": 0.1,
+          "passes": true
+        },
+        "mw_sat_10": {
+          "sigma_m": 3.1622776601683795,
+          "ceiling": 1.0,
+          "passes": false
+        },
+        "mw_sat_20": {
+          "sigma_m": 0.5590169943749475,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "mw_sat_30": {
+          "sigma_m": 0.20286020648339487,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "lyman_alpha": {
+          "sigma_m": 0.01,
+          "ceiling": 0.1,
+          "passes": true
+        },
+        "cluster_1000": {
+          "sigma_m": 3.16227766016838e-05,
+          "ceiling": 0.5,
+          "passes": true
+        },
+        "bullet_cluster": {
+          "sigma_m": 1.1475506210984938e-05,
+          "ceiling": 0.7,
+          "passes": true
+        }
+      },
+      "all_pass": false
+    },
+    {
+      "combo": {
+        "sigma_0": 0.01,
+        "a_slope": 1.93,
+        "v_ref": 150.0
+      },
+      "per_channel": {
+        "cloud9": {
+          "sigma_m": 0.2551767662437942,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "fornax": {
+          "sigma_m": 0.8511380382023763,
+          "ceiling": 0.8,
+          "passes": false
+        },
+        "sparc": {
+          "sigma_m": 0.021870369976916177,
+          "ceiling": 0.1,
+          "passes": true
+        },
+        "mw_sat_10": {
+          "sigma_m": 1.8614703796912588,
+          "ceiling": 1.0,
+          "passes": false
+        },
+        "mw_sat_20": {
+          "sigma_m": 0.48850412840802004,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "mw_sat_30": {
+          "sigma_m": 0.22336344969181052,
+          "ceiling": 1.0,
+          "passes": true
+        },
+        "lyman_alpha": {
+          "sigma_m": 0.021870369976916177,
+          "ceiling": 0.1,
+          "passes": true
+        },
+        "cluster_1000": {
+          "sigma_m": 0.0002569544421150171,
+          "ceiling": 0.5,
+          "passes": true
+        },
+        "bullet_cluster": {
+          "sigma_m": 0.00011748975549395299,
+          "ceiling": 0.7,
+          "passes": true
+        }
+      },
+      "all_pass": false
+    }
+  ]
+}
