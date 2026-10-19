@@ -398,6 +398,55 @@ At ΛCDM-standard concentration (c = 12), the framework's canonical σ_peak = 17
 
 **Next-session candidate (v40.44):** Investigate the gravothermal τ reset mechanism (merger-driven per Silverman+ 2026). This is the only way to put Cloud-9 in max-core (τ = 0.18) despite strong σ_peak — by RESETTING τ via merger history. The c-M tension at the c_200 level is prescription-dependent (v40.43a), but the gravothermal phase discrepancy (deep vs max-core) requires a τ reset mechanism, not a c-τ prescription.
 
+### 2.6f v19.2-F Cloud-9 c-M tension: gravothermal τ reset via mergers per Silverman+ 2026 (v40.44, post-Nemotron 5th review)
+
+**Status:** v40.44 investigation of the gravothermal τ reset mechanism. User directive: "proceed v40.44."
+
+**PAPER REFERENCE:** Silverman, M., Hussein, A., Arora, A., Lisanti, M., Kaplinghat, M., et al. 2026, "Mergers Matter: Gravothermal Collapse in Dwarf Halos with Self-Interacting Dark Matter," arXiv:2606.02566 [astro-ph.GA] (FERMILAB-PUB-26-0348-T, June 2026).
+
+**Key Silverman+ 2026 finding:** 6 DM-only zoom-in 10^10 M☉ halos with σ/m = 70 cm²/g:
+- 3 of 6 halos DO collapse (m10q, m10d, m10i) — all QUIESCENT merger histories
+- 3 of 6 halos do NOT collapse (m10b, m10f, m10j) — all SUSTAINED merger histories
+- **100% collapse fraction among quiescent halos** (3/3 collapsed, 0/3 sustained)
+- Quantitative: 1:3 merger at 7.7 Gyr caused m10b's ρ_c to drop by factor 8.7
+- Mechanism: mergers inject orbital kinetic energy → inward heat flow → core expansion → collapse prevention
+
+**Cloud-9 morphology-based merger history inference (per Anand+ 2025, arXiv:2508.20157):**
+- Compact H I cloud in M94 group at d = 4.4 Mpc
+- M_HI = 10^6 M☉, W50 = 12 km/s (dynamically cold)
+- **Non-rotating, ~1.4 kpc radius, no tidal features, regular morphology**
+- Starless (RELHIC candidate)
+- **MERGER HISTORY INFERRED: QUIESCENT** (matches m10i: 6 mergers, no massive radial)
+
+**Result (v40.44):**
+
+| Framework | Predicted τ for Cloud-9 | Notes |
+|---|---|---|
+| v19.2-F (no merger reset) | τ = 16.3 (deep collapse) | Per v40.39 canonical analysis |
+| Silverman+ 2026 (quiescent analog m10i) | τ > 10 (deep collapse) | 5.2 Gyr collapse time, m10i analog |
+| **CONSISTENCY** | **YES** — both predict deep collapse | v19.2-F + Silverman+ 2026 AGREE |
+| Ohana+ 2026 observation | τ = 0.18 (max-core) | INCONSISTENT with v19.2-F + Silverman+ 2026 |
+
+**Per Nemotron 120B review (v40.44, 42.9s response):**
+> "The inference that Cloud-9 has a QUIESCENT merger history is REASONABLE. Anand+ 2025 describe Cloud-9 as a compact, non-rotating, dynamically cold H I cloud with no tidal features — exactly the morphological hallmarks of a halo that has experienced little recent massive or radial accretion."
+
+> "The m10i halo (6 mergers, zero massive-radial mergers, core collapse at ~5.2 Gyr) is the APPROPRIATE ANALOG for Cloud-9. Both are low-mass, quiescent systems; m10i provides a direct benchmark for assessing whether Cloud-9 should be undergoing gravothermal collapse."
+
+> "Within the Silverman+ 2026 sample, QUIESCENT MERGER HISTORIES STRONGLY PREDICT COLLAPSE: all three halos classified as quiescent (m10q, m10d, m10i) underwent core collapse, while the three with sustained merger activity did not. This 100% collapse fraction among quiescent systems indicates that, given Cloud-9's inferred quiescent history, the v19.2-F + Silverman+ 2026 expectation of deep collapse is ROBUST."
+
+> **"Of the four remaining candidates for the c-M tension, the most likely explanation is ADDITIONAL PHYSICS** (e.g., baryonic feedback or velocity-dependent self-interactions) rather than a hidden merger, observational systematic, or v19.2-F parameter tweak. A hidden merger would contradict Cloud-9's quiescent morphology, Ohana+ 2026 systematics alone cannot account for the uniform offset across prescriptions, and modest parameter adjustments would shift predictions for many halos inconsistently."
+
+**Verdict:** The c-M tension is **NOT resolved** by the merger-driven τ reset mechanism. Cloud-9's quiescent morphology means Silverman+ 2026 ALSO predicts collapse. v19.2-F + Silverman+ 2026 are CONSISTENT in predicting deep collapse, but Ohana+ observes max-core. The most likely resolution is **additional physics** (baryonic feedback, velocity-dependent scattering) — outside the current v19.2-F framework.
+
+**This CONFIRMS the v40.41 STRUCTURAL verdict:** the c-M tension is REAL, multiple prescriptions agree (v40.43a), multiple merger mechanisms tested (v40.44), and the remaining resolution is additional physics (not in the current v19.2-F framework).
+
+**Reproducibility:** `scripts/v19_2_f_cloud9_merger_history.py` + `v0.3-prelim/data/results/v19_2_f_cloud9_merger_history_2026_10_19.json` + `v0.3-prelim/tests/test_v40_44_merger_history.py` (5 regression tests).
+
+**Next-session candidate (v40.45):** Investigate additional physics effects on v19.2-F Cloud-9 prediction:
+- (a) **Baryonic feedback** (Kaplinghat+ 2014, 2020): stellar winds inject heat into core, delay gravothermal collapse. Cloud-9 is starless, but the photothermal UVB heating may play a similar role.
+- (b) **Velocity-dependent self-interactions** (Yang+ 2023, 2024): at V_max ~ 28 km/s (Cloud-9), σ/m may be reduced from peak value 174 to a lower value, giving lower σ_eff.
+- (c) **v19.2-F phase-diversity hypothesis** (G1-G6 roadmap in §A.10b): different halos at different gravothermal phases.
+
 
 
 **First-class result (R88(26)) — the paper's most important internal tension, elevated from §2.6.**

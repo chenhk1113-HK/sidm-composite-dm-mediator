@@ -1,0 +1,81 @@
+{
+  "method": "v40.44: gravothermal tau reset via Silverman+ 2026 merger analysis",
+  "date": "2026-10-19",
+  "framework": "v19.2-F Phase 44 (sigma_peak=174, sigma_kms=4.4, f_H=0.297 placeholder)",
+  "reference_paper": "Silverman+ 2026 arXiv:2606.02566",
+  "reference_cloud9": "Anand+ 2025 arXiv:2508.20157",
+  "cloud9_properties": {
+    "M_halo_Msun": 4700000000.0,
+    "V_max_kms": 28.0,
+    "M_HI_Msun": 1000000.0,
+    "W50_kms": 12.0,
+    "distance_Mpc": 4.4,
+    "host_galaxy": "M94",
+    "morphology": "compact, non-rotating, dynamically cold",
+    "is_RELHIC_candidate": true,
+    "merger_history_inferred": "quiescent (per Silverman+ 2026 diagnostics)"
+  },
+  "v19_2_f_prediction": {
+    "sigma_eff_cm2_g": 14.590770687647355,
+    "t_core_Gyr": 0.8441823209561636,
+    "tau": 16.3471795812656,
+    "verdict": "deep core collapse"
+  },
+  "silverman_2026_halos": [
+    {
+      "name": "m10i (most quiescent, 6 mergers, no massive radial)",
+      "n_mergers": 6,
+      "massive_radial_mergers": 0,
+      "outcome": "COLLAPSED (followed fluid model exactly)",
+      "t_coll_Gyr": 5.2,
+      "tau_at_z0": "10+ (deep collapse)"
+    },
+    {
+      "name": "m10q (18 mergers, 2 massive radial, 2 early infall)",
+      "n_mergers": 18,
+      "massive_radial_mergers": 2,
+      "outcome": "COLLAPSED (mergers too early/circular to prevent)",
+      "t_coll_Gyr": 10.4,
+      "tau_at_z0": "10+ (deep collapse)"
+    },
+    {
+      "name": "m10d (18 mergers, no massive radial)",
+      "n_mergers": 18,
+      "massive_radial_mergers": 0,
+      "outcome": "COLLAPSED",
+      "t_coll_Gyr": 9.5,
+      "tau_at_z0": "10+ (deep collapse)"
+    },
+    {
+      "name": "m10b (15 mergers, 4 massive radial, 1:3 at 7.7 Gyr)",
+      "n_mergers": 15,
+      "massive_radial_mergers": 4,
+      "outcome": "DID NOT COLLAPSE (rho_c dropped by factor 8.7)",
+      "t_coll_Gyr": Infinity,
+      "tau_at_z0": "< 1 (max-core, merger-reset)"
+    },
+    {
+      "name": "m10f (17 mergers, sustained 1:30 mergers, 1 massive radial)",
+      "n_mergers": 17,
+      "massive_radial_mergers": 1,
+      "outcome": "DID NOT COLLAPSE (sustained decline in rho_c)",
+      "t_coll_Gyr": Infinity,
+      "tau_at_z0": "< 1 (max-core, sustained-merger-reset)"
+    },
+    {
+      "name": "m10j (12 mergers, early collapse onset)",
+      "n_mergers": 12,
+      "massive_radial_mergers": 0,
+      "outcome": "DID NOT FULLY COLLAPSE (early phase)",
+      "t_coll_Gyr": Infinity,
+      "tau_at_z0": "1-5 (transition)"
+    }
+  ],
+  "verdict": {
+    "v19_2_f_consistent_with_silverman_2026": true,
+    "ohana_observation_consistent_with_silverman_2026": false,
+    "c_M_tension_resolved_by_merger_reset": false,
+    "v40_41_structural_verdict_confirmed": true,
+    "explanation": "Cloud-9's quiescent morphology (compact, non-rotating, dynamically cold, no tidal features) suggests a quiescent merger history. Per Silverman+ 2026, quiescent halos (e.g., m10i with 6 mergers, no massive radial) undergo gravothermal core collapse. v19.2-F's deep collapse prediction is CONSISTENT with Silverman+ 2026. The c-M tension with Ohana+ 2026's max-core observation is NOT resolved by the merger-driven tau reset mechanism."
+  }
+}
