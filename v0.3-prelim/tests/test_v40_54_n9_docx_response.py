@@ -88,20 +88,40 @@ def test_v40_54_sigma_hl_definition_added():
 
 
 def test_v40_54_collapse_time_gyr_implementation():
-    """Section 13.4 must contain collapse_time_gyr full implementation."""
+    """Section 13.4 must contain collapse_time_gyr full implementation.
+
+    v40.55 NOTE: The v40.54 code was FABRICATED and has been corrected in v40.55.
+    The test now checks for the ACTUAL project constants (T_HUBBLE_GYR=13.8) and
+    the correct sigma_m_canonical formula (Yukawa + Gaussian).
+    """
     report_text = REPORT.read_text(encoding="utf-8")
-    # Check the function is fully implemented
-    assert "def collapse_time_gyr" in report_text, (
-        f"v40.54 fix: section 13.4 must contain collapse_time_gyr function definition."
+    # Check the actual project constants are now present (v40.55 correction)
+    assert "T_HUBBLE_GYR = 13.8" in report_text, (
+        f"v40.55 fix: section 13.4 must contain the actual project constant "
+        f"T_HUBBLE_GYR = 13.8 (from constants.py)."
     )
-    assert "rho_s_si" in report_text, (
-        f"v40.54 fix: collapse_time_gyr must convert rho_s to SI units."
+    assert "SIGMA_0_CM2_PER_G = 0.052" in report_text, (
+        f"v40.55 fix: section 13.4 must contain the actual Yukawa amplitude "
+        f"SIGMA_0_CM2_PER_G = 0.052 (from constants.py)."
     )
+    assert "SIGMA_PEAK_CM2_PER_G = 174.0" in report_text, (
+        f"v40.55 fix: section 13.4 must contain the actual peak amplitude "
+        f"SIGMA_PEAK_CM2_PER_G = 174.0."
+    )
+    assert "sigma_m_canonical" in report_text, (
+        f"v40.55 fix: section 13.4 must contain sigma_m_canonical function "
+        f"(Yukawa + Gaussian sum, per project implementation)."
+    )
+    assert "tau = T_Hubble / t_core" in report_text or "tau = T_HUBBLE_GYR / t_core" in report_text, (
+        f"v40.55 fix: section 13.4 must use the correct tau definition "
+        f"(INVERSE: tau = T_Hubble / t_core, per project convention)."
+    )
+    # References must include Yang+ 2024 + Balberg+ 2002
     assert "Yang+ 2024" in report_text, (
-        f"v40.54 fix: collapse_time_gyr must cite Yang+ 2024 reference."
+        f"v40.55 fix: section 13.4 must cite Yang+ 2024 reference."
     )
     assert "Balberg+ 2002" in report_text, (
-        f"v40.54 fix: collapse_time_gyr must cite Balberg+ 2002 reference."
+        f"v40.55 fix: section 13.4 must cite Balberg+ 2002 reference."
     )
 
 
