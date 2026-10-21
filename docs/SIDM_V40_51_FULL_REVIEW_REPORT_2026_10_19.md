@@ -7,8 +7,8 @@
 **Final commit:** `0d64890` (v40.63, n16.docx review response)
 **Final tag:** `v40.63-N16ReviewResponse`
 **Project status:** Phase 3 CLOSED (framework final downgrade complete + n6-n16 reviews addressed + Defects E/F1/F2/G resolved)
-**Test count:** 1877 passed, 22 skipped, 33 deselected (216 test files across 42 suites)
-**Pre-tag gate:** 7/7 PASS (full run, 1108 s)
+**Test count:** 1884 passed, 22 skipped, 33 deselected (216 test files across 42 suites)
+**Pre-tag gate:** 7/7 PASS (full run, 1131 s)
 
 ---
 
@@ -319,7 +319,7 @@ def c_200_sameie(tau, sigma_m):
         )))
 ```
 
-**v40.63 full-gate result:** `1877 passed, 22 skipped, 33 deselected, 3 warnings in 1108.62s (0:18:28)` — all 7 layers PASS.
+**v40.63 full-gate result:** `1884 passed, 22 skipped, 33 deselected, 3 warnings in 1131.46s (0:18:51)` — all 7 layers PASS.
 
 *(v40.61 gate: 1836 passed, 22 skipped, 33 deselected in 1148.67s — before the 19 v40.62 tests were added.)*
 
@@ -549,7 +549,7 @@ The first v40.59 commit shipped the **smoke** values because the verification ru
 `scripts/verify_release_gate.py` L2 timeout raised 600 s → 1800 s (the suite needs 1149 s, so the old timeout was a guaranteed hang), and 13 legacy test files excluded with documented rationale. Full gate result:
 
 ```
-1877 passed, 22 skipped, 33 deselected, 3 warnings in 1108.62s (0:18:28)
+1884 passed, 22 skipped, 33 deselected, 3 warnings in 1131.46s (0:18:51)
 
   [PASS] audit_units.py
   [PASS] pytest
@@ -977,7 +977,7 @@ The 71% partial robustness is the framework's **TESTABLE PREDICTION**:
 - **Final tag:** `v40.59-DefectsEFG12`
 - **Repository:** github.com/chenhk1113-HK/sidm-composite-dm-mediator
 
-### 8.2 Code structure (216 test files across 42 suites; 1877 passed) [v40.63 update]
+### 8.2 Code structure (216 test files across 42 suites; 1884 passed) [v40.63 update]
 
 ```
 scripts/
@@ -1005,7 +1005,7 @@ scripts/
 
 sameie2020_implementation_audit.md  (v40.59 — Defect F1 audit)
 
-v0.3-prelim/tests/  (216 test files, 42 suites; 1877 passed, 22 skipped, 33 deselected)  [v40.63 update]
+v0.3-prelim/tests/  (216 test files, 42 suites; 1884 passed, 22 skipped, 33 deselected)  [v40.63 update]
 ├── test_v40_41_fH_sensitivity.py
 ├── test_v40_42_elbert_c_tau.py
 ├── test_v40_43_marginalization.py
@@ -1055,7 +1055,7 @@ python -m pytest v0.3-prelim/tests/
 **Expected (v40.61, n14.docx Item 3 — corrected):** the **full** suite is
 
 ```
-1877 passed, 22 skipped, 33 deselected, 3 warnings in 1108.62s (0:18:28)
+1884 passed, 22 skipped, 33 deselected, 3 warnings in 1131.46s (0:18:51)
 ```
 
 That is the number quoted in the report header and in §8.2, and it is what `scripts/verify_release_gate.py` produces (L2 layer; the 33 deselected come from the `-k` filter for the pre-v40 T131–T135/T220 tolerance-boundary tests).
@@ -1105,7 +1105,7 @@ python scripts/v19_2_f_paper_section_2_1_update.py
 - The 71% partial robustness is a **testable prediction** for future surveys
 - The framework's passing region is a **RANGE** (not a single point), documented and reproducible
 - The v40.51 bug fix (per n6.docx review) ensures the documented ranges MATCH the data
-- The investigation (**25 sequential versions**, v40.39 → v40.63; **26 arc rows** counting the v40.43a sub-version — see the §2 counting rule; **31 review rounds**; **1,877 tests**) was **methodically executed** with R88(68)/(71) gates
+- The investigation (**25 sequential versions**, v40.39 → v40.63; **26 arc rows** counting the v40.43a sub-version — see the §2 counting rule; **31 review rounds**; **1,884 tests**) was **methodically executed** with R88(68)/(71) gates
 
 *v40.62 note (n15.docx Item 1, MED-HIGH):* the v40.61 version of this line read *"The investigation (14 versions, 13 reviews, 92 tests) was methodically executed"* — counts from the v40.51 era that were never updated. Every one of the three numbers contradicted the rest of the report (title "23-version", §2 arc table 24 rows, header "28 review rounds", §8.2 "214 test files / 1836 passed"). Now updated to the current values and, like §8.3, the exact scope is stated.
 
@@ -3489,7 +3489,7 @@ n16.docx Item 8 proposed that the scatter assumption (0.12–0.20 dex) could mak
 ### 20.2 v40.63 gate result
 
 ```
-1877 passed, 22 skipped, 33 deselected, 3 warnings in 1108.62s (0:18:28)
+1884 passed, 22 skipped, 33 deselected, 3 warnings in 1131.46s (0:18:51)
 
   [PASS] audit_units.py
   [PASS] pytest
@@ -3502,7 +3502,7 @@ n16.docx Item 8 proposed that the scatter assumption (0.12–0.20 dex) could mak
 ALL GATES PASSED — safe to tag a new release.
 ```
 
-**Test suite:** 1877 passed, 22 skipped, 33 deselected, 3 warnings in 1108.62s (0:18:28) — 216 test files across 42 suites. (The v40.63 suite adds 27 tests in `test_v40_63_n16_docx_response.py`; the v40.62-era figures of 1855 passed / 215 files are the historical values and remain in sections 17-19, which document their own rounds.)
+**Test suite:** 1884 passed, 22 skipped, 33 deselected, 3 warnings in 1131.46s (0:18:51) — 216 test files across 42 suites. (The v40.63 suite adds 29 tests in `test_v40_63_n16_docx_response.py`; the v40.62-era figures of 1855 passed / 215 files are the historical values and remain in sections 17-19, which document their own rounds.)
 
 **Legacy-bucket size (current):** 174 of the 216 test files (81%) are legacy pre-v40 files with no suite tag. (The v40.62-era figure was 174 of 215.)
 

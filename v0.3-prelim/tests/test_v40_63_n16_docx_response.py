@@ -519,7 +519,7 @@ def test_report_headline_no_longer_claims_ci_excludes_zero():
         "self-found item 9 fix: the Executive Summary must record the "
         "correction explicitly rather than silently changing the number."
     )
-    assert "(−3.25, +4.50) σ" in sec1 or "(-3.25, +4.50) σ" in sec1, (
+    assert "(-3.25, +4.50) σ" in sec1 or "(−3.25, +4.50) σ" in sec1, (
         "self-found item 9 fix: the Executive Summary must quote the "
         "corrected t-based 2-branch CI."
     )

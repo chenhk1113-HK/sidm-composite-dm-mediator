@@ -52,10 +52,21 @@ def test_v40_53_cm_marginalization_computed():
     """
     report_text = REPORT.read_text(encoding="utf-8")
     # Check the calculation result is in the report
-    assert "−0.02 ± 1.16 σ" in report_text or "-0.02 +/- 1.16 sigma" in report_text, (
+    # v40.63: the assertion is glyph-agnostic. The report's minus sign may be
+    # U+2212 (unicode) or ASCII hyphen-minus -- AGENTS.md rule 27 prefers
+    # ASCII for cross-render fidelity, and the report was normalized in
+    # v40.63. The NUMBERS are what matter and are still asserted exactly.
+    minus_variants = ("\u2212", "-")
+    found = any(
+        f"{m}0.02 ± 1.16 σ" in report_text
+        or f"{m}0.02 +/- 1.16 sigma" in report_text
+        for m in minus_variants
+    )
+    assert found, (
         f"v40.53 fix: section 12.2 must contain quantitative c-M prescription "
         f"marginalization result. The n8.docx MED-HIGH issue (no quantitative "
-        f"marginalization) requires explicit numbers."
+        f"marginalization) requires explicit numbers. Looked for "
+        f"'-0.02 +/- 1.16 sigma' (ASCII and U+2212 minus forms)."
     )
     assert "INDISTINGUISHABLE FROM ZERO" in report_text, (
         f"v40.53 fix: section 12.2 must interpret the marginalization result."
