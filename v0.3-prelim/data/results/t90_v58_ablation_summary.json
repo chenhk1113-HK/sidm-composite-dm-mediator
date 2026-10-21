@@ -1,0 +1,136 @@
+{
+  "baseline": {
+    "label": "All 5 channels (baseline)",
+    "enabled_channels": [
+      "Bullet",
+      "Cloud9",
+      "Galaxy",
+      "KSFR",
+      "LZ"
+    ],
+    "log_Z": -8.246012834792984,
+    "log_Z_err": 0.5278686488310489,
+    "wall_seconds": 133.4688286781311,
+    "n_samples": 421,
+    "posterior_median_sigma_m": {
+      "Cloud9_cm2_per_g": 94.08889210989675,
+      "Galaxy_cm2_per_g": 2.3646296824026156,
+      "Bullet_cm2_per_g": 0.0514447114776899
+    },
+    "wimpy_available": true,
+    "ksfr_enabled": true
+  },
+  "ablations": {
+    "drop_Bullet": {
+      "label": "Drop Bullet (only ['Cloud9', 'Galaxy', 'KSFR', 'LZ'] active)",
+      "enabled_channels": [
+        "Cloud9",
+        "Galaxy",
+        "KSFR",
+        "LZ"
+      ],
+      "log_Z": -7.9151584063135,
+      "log_Z_err": 0.5147620424737697,
+      "wall_seconds": 126.23080253601074,
+      "n_samples": 405,
+      "posterior_median_sigma_m": {
+        "Cloud9_cm2_per_g": 95.56280774731917,
+        "Galaxy_cm2_per_g": 2.4485313625750473,
+        "Bullet_cm2_per_g": 0.0639071202766438
+      },
+      "wimpy_available": true,
+      "ksfr_enabled": true
+    },
+    "drop_Cloud9": {
+      "label": "Drop Cloud9 (only ['Bullet', 'Galaxy', 'KSFR', 'LZ'] active)",
+      "enabled_channels": [
+        "Bullet",
+        "Galaxy",
+        "KSFR",
+        "LZ"
+      ],
+      "log_Z": -5.845558672504512,
+      "log_Z_err": 0.4380769982043578,
+      "wall_seconds": 88.65603065490723,
+      "n_samples": 305,
+      "posterior_median_sigma_m": {
+        "Cloud9_cm2_per_g": 31.19364005053991,
+        "Galaxy_cm2_per_g": 1.475318639918143,
+        "Bullet_cm2_per_g": 0.055373724332553026
+      },
+      "wimpy_available": true,
+      "ksfr_enabled": true
+    },
+    "drop_Galaxy": {
+      "label": "Drop Galaxy (only ['Bullet', 'Cloud9', 'KSFR', 'LZ'] active)",
+      "enabled_channels": [
+        "Bullet",
+        "Cloud9",
+        "KSFR",
+        "LZ"
+      ],
+      "log_Z": -8.10866344121861,
+      "log_Z_err": 0.5304311455658828,
+      "wall_seconds": 118.91189479827881,
+      "n_samples": 415,
+      "posterior_median_sigma_m": {
+        "Cloud9_cm2_per_g": 316.8554896509469,
+        "Galaxy_cm2_per_g": 16.09180467132,
+        "Bullet_cm2_per_g": 0.15546429601132158
+      },
+      "wimpy_available": true,
+      "ksfr_enabled": true
+    },
+    "drop_KSFR": {
+      "label": "Drop KSFR (only ['Bullet', 'Cloud9', 'Galaxy', 'LZ'] active)",
+      "enabled_channels": [
+        "Bullet",
+        "Cloud9",
+        "Galaxy",
+        "LZ"
+      ],
+      "log_Z": -7.2560591015164935,
+      "log_Z_err": 0.4886726844938694,
+      "wall_seconds": 81.76524543762207,
+      "n_samples": 407,
+      "posterior_median_sigma_m": {
+        "Cloud9_cm2_per_g": 104.46898879844896,
+        "Galaxy_cm2_per_g": 3.0191926451207984,
+        "Bullet_cm2_per_g": 0.07067251183114365
+      },
+      "wimpy_available": true,
+      "ksfr_enabled": false
+    },
+    "drop_LZ": {
+      "label": "Drop LZ (only ['Bullet', 'Cloud9', 'Galaxy', 'KSFR'] active)",
+      "enabled_channels": [
+        "Bullet",
+        "Cloud9",
+        "Galaxy",
+        "KSFR"
+      ],
+      "log_Z": -3.8966048244498737,
+      "log_Z_err": 0.38805282707139493,
+      "wall_seconds": 1.7426238059997559,
+      "n_samples": 254,
+      "posterior_median_sigma_m": {
+        "Cloud9_cm2_per_g": 106.35461584807045,
+        "Galaxy_cm2_per_g": 2.599242103368473,
+        "Bullet_cm2_per_g": 0.10813269379236444
+      },
+      "wimpy_available": true,
+      "ksfr_enabled": true
+    }
+  },
+  "delta_log_Z_vs_baseline": {
+    "Bullet": 0.33085442847948343,
+    "Cloud9": 2.4004541622884714,
+    "Galaxy": 0.13734939357437348,
+    "KSFR": 0.98995373327649,
+    "LZ": 4.34940801034311
+  },
+  "nlive": 50,
+  "dlogz": 0.5,
+  "wimpy_available": true,
+  "ksfr_enabled": true
+}

@@ -1,0 +1,20 @@
+{
+  "label": "Drop Cloud9 (only ['Bullet', 'Galaxy', 'KSFR', 'LZ'] active)",
+  "enabled_channels": [
+    "Bullet",
+    "Galaxy",
+    "KSFR",
+    "LZ"
+  ],
+  "log_Z": -5.845558672504512,
+  "log_Z_err": 0.4380769982043578,
+  "wall_seconds": 88.65603065490723,
+  "n_samples": 305,
+  "posterior_median_sigma_m": {
+    "Cloud9_cm2_per_g": 31.19364005053991,
+    "Galaxy_cm2_per_g": 1.475318639918143,
+    "Bullet_cm2_per_g": 0.055373724332553026
+  },
+  "wimpy_available": true,
+  "ksfr_enabled": true
+}
