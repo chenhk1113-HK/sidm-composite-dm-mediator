@@ -689,7 +689,7 @@ PRODUCTION_RESULTS = (
 )
 
 
-def test_smoke_tests_do_not_write_into_the_production_results_dir():
+def test_smoke_tests_do_not_write_into_the_production_results_dir(tmp_path):
     """A smoke run must not be able to overwrite a production artifact.
 
     The fix has two halves: the writers' default output_dir is now
@@ -699,16 +699,28 @@ def test_smoke_tests_do_not_write_into_the_production_results_dir():
     """
     import glob
     offenders = []
+    # v40.63: cover ALL FIVE writer entry points. The first version of this
+    # guard only matched run_dynesty / run_multi_portal, so the three
+    # hybrid writers (run_hybrid_joint_fit, _4ch, _5ch) were unchecked --
+    # and the v5 gate still clobbered 3 of the 5 production JSONs.
+    WRITERS = (
+        "run_dynesty",
+        "run_multi_portal",
+        "run_hybrid_joint_fit",
+        "run_hybrid_joint_fit_4ch",
+        "run_hybrid_joint_fit_5ch",
+    )
+    pat = re.compile(r"^.*\b(" + "|".join(WRITERS) + r")\(.*$", re.M)
     for tp in (Path(__file__).resolve().parent).glob("test_t90_v5*.py"):
         src = tp.read_text(encoding="utf-8")
-        for m in re.finditer(r"^.*\b(run_dynesty|run_multi_portal)\(.*$", src, re.M):
+        for m in pat.finditer(src):
             line = m.group(0)
             if "output_dir" not in line:
                 offenders.append(f"{tp.name}: {line.strip()}")
     assert not offenders, (
         "v40.63 fix: these smoke-test calls would write into the PRODUCTION "
         "results directory and overwrite the artifact with a lower-quality "
-        "posterior (v40.60 Defect G class). Pass output_dir=str(tmp_path):\n"
+        "posterior (v40.60 Defect E class). Pass output_dir=str(tmp_path):\n"
         + "\n".join(offenders)
     )
 

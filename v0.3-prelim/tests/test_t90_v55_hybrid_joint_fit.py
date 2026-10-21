@@ -100,20 +100,36 @@ def test_prior_transform_corners():
         assert abs(theta_hi[i] - hi) < 1e-9
 
 
-def test_smoke_run():
-    """Short dynesty run -- should complete and produce finite log Z."""
-    s = run_hybrid_joint_fit(nlive=50, dlogz=0.5)
+def test_smoke_run(tmp_path):
+    """
+    Short dynesty run -- should complete and produce finite log Z.
+
+    v40.63 (Defect E class): output_dir is redirected to tmp_path so this
+    smoke run CANNOT overwrite the production
+    t90_v5x_*_joint_posterior.json artifact. Before the fix it wrote a
+    nlive=50 posterior over the nlive=500 production one on every pytest
+    run, silently degrading the repo's evidence (v40.60 Defect E).
+    """
+    s = run_hybrid_joint_fit(nlive=50, dlogz=0.5, output_dir=str(tmp_path))
     assert np.isfinite(s["log_Z"])
     p = s["posterior_median_predictions"]
     assert all(v > 0 for v in p.values()), \
         f"sigma/m predictions not all positive: {p}"
 
 
-def test_smoke_run_at_pure_resonant_reduces_log_z():
-    """At nlive=50, hybrid run with portals forced off should give log Z
-    close to T90.51's smoke-run log Z (~ -2.5 to -2.7)."""
+def test_smoke_run_at_pure_resonant_reduces_log_z(tmp_path):
+    """
+    At nlive=50, hybrid run with portals forced off should give log Z
+    close to T90.51's smoke-run log Z (~ -2.5 to -2.7).
+
+    v40.63 (Defect E class): output_dir is redirected to tmp_path so this
+    smoke run CANNOT overwrite the production
+    t90_v5x_*_joint_posterior.json artifact. Before the fix it wrote a
+    nlive=50 posterior over the nlive=500 production one on every pytest
+    run, silently degrading the repo's evidence (v40.60 Defect E).
+    """
     # Smoke run; just check that the framework doesn't crash and gives finite result
-    s = run_hybrid_joint_fit(nlive=50, dlogz=0.5)
+    s = run_hybrid_joint_fit(nlive=50, dlogz=0.5, output_dir=str(tmp_path))
     assert np.isfinite(s["log_Z"])
     # T90.51 at nlive=50 gave log Z ~ -2.39 to -2.49 (varies by random seed)
     # The hybrid has wider priors but with portals/resonance both at 0 it
@@ -121,10 +137,18 @@ def test_smoke_run_at_pure_resonant_reduces_log_z():
     assert -10 < s["log_Z"] < 0, f"log Z = {s['log_Z']} unexpectedly off"
 
 
-def test_compare_returns_3_way_verdict():
-    """compare_with_resonant_and_mp returns a verdict for the hybrid vs
-    T90.51 (resonant) vs T90.52 (multi-portal)."""
-    s = run_hybrid_joint_fit(nlive=50, dlogz=0.5)
+def test_compare_returns_3_way_verdict(tmp_path):
+    """
+    compare_with_resonant_and_mp returns a verdict for the hybrid vs
+    T90.51 (resonant) vs T90.52 (multi-portal).
+
+    v40.63 (Defect E class): output_dir is redirected to tmp_path so this
+    smoke run CANNOT overwrite the production
+    t90_v5x_*_joint_posterior.json artifact. Before the fix it wrote a
+    nlive=50 posterior over the nlive=500 production one on every pytest
+    run, silently degrading the repo's evidence (v40.60 Defect E).
+    """
+    s = run_hybrid_joint_fit(nlive=50, dlogz=0.5, output_dir=str(tmp_path))
     cmp = compare_with_resonant_and_mp(s)
     assert "log_Z_hybrid" in cmp
     assert "log_Z_resonant" in cmp

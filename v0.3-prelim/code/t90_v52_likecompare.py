@@ -254,10 +254,11 @@ def run_multi_portal(nlive: int = 200, dlogz: float = 0.1, output_dir: str = Non
 def compare_with_resonant(mp_summary: dict, res_summary_path: str = None) -> dict:
     """Load T90.51 summary and compute Δlog Z + verdict."""
     if res_summary_path is None:
-        if os.name == "nt":
-            base = Path("C:/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/data/results")
-        else:
-            base = Path("/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/data/results")
+        # v40.63: path-relative instead of a hard-coded absolute path, so the
+        # script works in any checkout and cannot silently read a stale file
+        # from a relocated copy. Reading the PRODUCTION summary is correct
+        # here -- only the path derivation changes.
+        base = Path(__file__).resolve().parents[1] / "data" / "results"
         res_summary_path = base / "t90_v51_resonant_joint_posterior.json"
 
     with open(res_summary_path) as f:

@@ -122,14 +122,21 @@ def test_out_of_prior_rejected():
     assert loglike_hybrid_4ch(bad) == -np.inf
 
 
-def test_smoke_run():
-    """Smoke run completes and gives finite log Z.
+def test_smoke_run(tmp_path):
+    """
+    Smoke run completes and gives finite log Z.
 
     Note: without WIMpy, the LZ channel is silent and log Z should be
     similar to T90.55's 3-channel value. With WIMpy, the LZ channel adds
     a 4th constraint.
+
+    v40.63 (Defect E class): output_dir is redirected to tmp_path so this
+    smoke run CANNOT overwrite the production
+    t90_v5x_*_joint_posterior.json artifact. Before the fix it wrote a
+    nlive=50 posterior over the nlive=500 production one on every pytest
+    run, silently degrading the repo's evidence (v40.60 Defect E).
     """
-    s = run_hybrid_joint_fit_4ch(nlive=50, dlogz=0.5)
+    s = run_hybrid_joint_fit_4ch(nlive=50, dlogz=0.5, output_dir=str(tmp_path))
     assert np.isfinite(s["log_Z"])
     p = s["posterior_median_predictions"]
     # Sigma/m values should be positive
@@ -138,8 +145,15 @@ def test_smoke_run():
         assert p[k] > 0, f"{k} = {p[k]} not positive"
 
 
-def test_compare_4ch_returns_verdict():
-    s = run_hybrid_joint_fit_4ch(nlive=50, dlogz=0.5)
+def test_compare_4ch_returns_verdict(tmp_path):
+    """
+    v40.63 (Defect E class): output_dir is redirected to tmp_path so this
+    smoke run CANNOT overwrite the production
+    t90_v5x_*_joint_posterior.json artifact. Before the fix it wrote a
+    nlive=50 posterior over the nlive=500 production one on every pytest
+    run, silently degrading the repo's evidence (v40.60 Defect E).
+    """
+    s = run_hybrid_joint_fit_4ch(nlive=50, dlogz=0.5, output_dir=str(tmp_path))
     cmp = compare_4ch(s)
     assert "log_Z_hybrid_4ch" in cmp
     assert "verdict" in cmp

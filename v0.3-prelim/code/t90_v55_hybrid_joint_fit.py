@@ -222,10 +222,11 @@ def compare_with_resonant_and_mp(hybrid_summary: dict,
                                   mp_path: str = None) -> dict:
     """Load T90.51 (resonant) and T90.52 (multi-portal) JSONs and compute
     3-way log Z comparison + verdict."""
-    if os.name == "nt":
-        base = Path("C:/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/data/results")
-    else:
-        base = Path("/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/data/results")
+    # v40.63: path-relative instead of a hard-coded absolute path, so the
+    # script works in any checkout and cannot silently read a stale file
+    # from a relocated copy. Reading the PRODUCTION summaries is correct
+    # here -- only the path derivation changes.
+    base = Path(__file__).resolve().parents[1] / "data" / "results"
     if res_path is None:
         res_path = base / "t90_v51_resonant_joint_posterior.json"
     if mp_path is None:

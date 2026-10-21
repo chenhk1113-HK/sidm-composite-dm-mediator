@@ -3386,7 +3386,7 @@ n16.docx is the **11th human review** (n6–n16) of the v40.62 report, written i
 | 7 | Burkert-style "anchored" status is weaker than Elbert+ | MED | ✓ §20.1.7 | report §1 caveat 1, §13.2, §9.3 |
 | 8 | The +0.62 σ signal may vanish under scatter uncertainty | MED | ⚠ **premise corrected** — see §20.1.8 | report §13.2, §9.3 |
 | — | *(self-found)* The "CI EXCLUDES ZERO" headline used the **normal approximation at n = 2** | **HIGH** | ✓ §20.1.9 | report §1, §13.2, §9.3 + script |
-| — | *(self-found)* Five t90_v5x writers still default to the **production** results dir, so a smoke run degrades the artifact (v40.60 Defect G class) | **MED** | ✓ §20.1.10 | 5 scripts + 2 tests + guard |
+| — | *(self-found)* Five t90_v5x writers still default to the **production** results dir, so a smoke run degrades the artifact (**Defect E's class**, fixed for one script in v40.60) | **MED** | ✓ §20.1.10 | 5 scripts + 2 tests + guard |
 
 ### 20.1.1 Item 1 [MED] — `collapse_time_gyr_implementation()` printed a stale v40.54 fabrication
 
@@ -3487,14 +3487,16 @@ n16.docx Item 8 proposed that the scatter assumption (0.12–0.20 dex) could mak
 
 **Why this survived v40.62's own audit:** v40.62 introduced the 2-branch result and its "CI excludes zero" claim, and n15's checklist did not question the CI convention. The v40.62 test asserted *"CI excludes zero: True"* — i.e. it **locked in the artefact**. A regression test that pins a statistical convention cannot detect that the convention is wrong; it only checks that the code still does what it did. **v40.63's test asserts the CI against `scipy.stats.t.ppf`**, so the convention itself is now pinned to an external authority rather than to itself.
 
-### 20.1.10 SELF-FOUND [MED] — the v40.60 smoke-test-clobbering defect was still live in five writers
+### 20.1.10 SELF-FOUND [MED] — Defect E's class (smoke-test clobbering) was still live in five writers
 
-**The v40.60 round fixed this defect for ONE script. The same pattern was still live in five more.** It surfaced here because the v40.63 commit swept in five *modified* result JSONs that the test suite had rewritten during the gate run — with measurably worse statistics:
+**The v40.60 round fixed Defect E for ONE script (the t90_v58 ablation test, which DELETED the production files). The same CLASS of defect was still live in five more writers, which OVERWRITE them.** It surfaced here because the v40.63 commit swept in five *modified* result JSONs that the test suite had rewritten during the gate run — with measurably worse statistics:
 
 | artifact | committed | after the gate run |
 |---|---|---|
 | `t90_v51_resonant_joint_posterior.json` | n = 226 | n = 215 |
 | `t90_v55_hybrid_joint_posterior.json` | n = 256 | n = 233 |
+
+(A second, later occurrence: the v5 gate rewrote `t90_v55_hybrid_joint_posterior.json` from n = 256 to n = 241, after the writer-side fix but before the caller-side fix. That is the partial-application event described below.)
 
 **Root cause.** The `run_*` functions default `output_dir` to the **production** results directory:
 
@@ -3513,14 +3515,20 @@ So the smoke test `run_dynesty(nlive=50, dlogz=0.5)` — with no `output_dir` �
 
 **Fix — the generator, not the instance (the v40.60 fix was applied to one script; this applies to the class):**
 
-1. **Every writer's default `output_dir` is now env-overridable and path-relative** (`SIDM_RESULTS_DIR`, falling back to `Path(__file__).resolve().parents[1] / "data" / "results"`). This also removes the hard-coded absolute paths — the same portability defect as n16 Item 2.
-2. **Every smoke-test call site passes `output_dir=str(tmp_path)`**, so a test run cannot reach the production namespace at all.
-3. **A guard test asserts no smoke-test call site omits `output_dir`** — a caller that forgets it would otherwise silently re-create the defect.
+1. **Every writer's default `output_dir` is now env-overridable and path-relative** (`SIDM_RESULTS_DIR`, falling back to `Path(__file__).resolve().parents[1] / "data" / "results"`). This also removes the hard-coded absolute paths — the same portability defect as n16 Item 2. The two remaining hard-coded **read** paths (in `t90_v52_likecompare.py` and `t90_v55_hybrid_joint_fit.py`, which load the production summaries to compute a verdict) were made path-relative too; reading production is still correct, but the path must not depend on the checkout location.
+2. **Every smoke-test call site passes `output_dir=str(tmp_path)`** — all **10** call sites across the five test files (`test_t90_v51_resonant_joint_fit.py` 1, `test_t90_v52_likecompare.py` 2, `test_t90_v55_hybrid_joint_fit.py` 3, `test_t90_v56_hybrid_lz.py` 2, `test_t90_v57_hybrid_ksfr.py` 2). A test run can no longer reach the production namespace at all.
+3. **A guard test asserts no smoke-test call site omits `output_dir`** — a caller that forgets it would otherwise silently re-create the defect. **The guard itself was part of the defect until v40.63 fixed it:** its first version matched only `run_dynesty | run_multi_portal`, so the three hybrid entry points (`run_hybrid_joint_fit`, `run_hybrid_joint_fit_4ch`, `run_hybrid_joint_fit_5ch`) were unchecked — the guard passed while the defect it was written to prevent was still live in three writers. It now covers all five entry points.
 4. A second guard asserts the five production artifacts exist and are non-trivial.
 
-**Verified by measurement, not assertion:** the md5 checksums of all five production artifacts were taken before and after running the two smoke-test files — **all five identical**, and `git status --short v0.3-prelim/data/results/` is **empty**. (Before the fix, the same run left five modified files with 11 and 23 fewer samples.)
+**The guard was fault-injected.** Removing `output_dir` from one hybrid smoke call (`test_t90_v57_hybrid_ksfr.py`) makes the widened guard fail with the offending line named; restoring it makes the guard pass. The pre-fix guard would have stayed silent on that injection — the same blind spot that let three writers through.
+
+**Verified by measurement, not assertion:** the md5 checksums of all five production artifacts were taken before and after running the five smoke-test files — **all five identical**, and `git status --short v0.3-prelim/data/results/` is **empty**. (Before the fix, the same run left five modified files with 11 and 23 fewer samples.)
+
+**The measurement caught a partially-applied fix.** The first v40.63 pass fixed only the v51 and v52 callers; the three hybrid writers still wrote into production. The v5 gate therefore still rewrote `t90_v55_hybrid_joint_posterior.json` from n = 256 down to n = 241 — and the guard test passed throughout, because it did not look at the hybrid entry points. The md5 before/after comparison is what surfaced this; the guard test alone did not. Both halves are now fixed, and the guard is fault-injected to prove it can see the hybrid writers.
 
 **The generalisable lesson: `git status` after a test run is itself a test.** If tracked artifacts show as modified after running the suite, the suite is writing into the production namespace. This check now runs before every commit.
+
+**A note on the defect numbering (v40.63):** this is **Defect E** (smoke-test clobbering), fixed for one script in v40.60 — **not** "Defect G", which in this project is the unrelated v40.59 release-gate timeout and legacy exclusions (report section 4.8 / section 17.10). The v40.63 finding is that Defect E's *class* was still live: v40.60 fixed the instance, v40.63 fixes the class. A reviewer must be able to look up the right defect by name.
 
 ### 20.2 v40.63 gate result
 

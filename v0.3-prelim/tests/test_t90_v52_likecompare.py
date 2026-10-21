@@ -87,13 +87,14 @@ def test_prior_transform_corners():
 
 def test_smoke_run(tmp_path):
     """
-    v40.63 (Defect G class): output_dir is redirected to tmp_path so this
+    Short dynesty run -- should complete and produce finite log Z.
+
+    v40.63 (Defect E class): output_dir is redirected to tmp_path so this
     smoke run CANNOT overwrite the production
     t90_v5x_*_joint_posterior.json artifact. Before the fix it wrote a
     nlive=50 posterior over the nlive=500 production one on every pytest
-    run, silently degrading the repo's evidence (v40.60 defect class).
+    run, silently degrading the repo's evidence (v40.60 Defect E).
     """
-    """Short dynesty run -- should complete and produce finite log Z."""
     s = run_multi_portal(nlive=50, dlogz=0.5, output_dir=str(tmp_path))
     assert np.isfinite(s["log_Z"])
     # Sigma/m predictions should be positive
@@ -105,13 +106,14 @@ def test_smoke_run(tmp_path):
 
 def test_compare_returns_verdict(tmp_path):
     """
-    v40.63 (Defect G class): output_dir is redirected to tmp_path so this
+    compare_with_resonant loads the T90.51 JSON and returns a verdict string.
+
+    v40.63 (Defect E class): output_dir is redirected to tmp_path so this
     smoke run CANNOT overwrite the production
     t90_v5x_*_joint_posterior.json artifact. Before the fix it wrote a
     nlive=50 posterior over the nlive=500 production one on every pytest
-    run, silently degrading the repo's evidence (v40.60 defect class).
+    run, silently degrading the repo's evidence (v40.60 Defect E).
     """
-    """compare_with_resonant loads the T90.51 JSON and returns a verdict string."""
     s = run_multi_portal(nlive=50, dlogz=0.5, output_dir=str(tmp_path))
     cmp = compare_with_resonant(s)
     assert "delta_log_Z_resonant_minus_mp" in cmp

@@ -138,14 +138,14 @@ def test_prior_transform_corners():
 # ---------------------------------------------------------------------------
 def test_smoke_run(tmp_path):
     """
-    v40.63 (Defect G class): output_dir is redirected to tmp_path so this
+    Short dynesty run (nlive=50, dlogz=0.5) -- should complete and find a posterior
+    that includes the T90.50 best-fit neighborhood.
+
+    v40.63 (Defect E class): output_dir is redirected to tmp_path so this
     smoke run CANNOT overwrite the production
     t90_v5x_*_joint_posterior.json artifact. Before the fix it wrote a
     nlive=50 posterior over the nlive=500 production one on every pytest
-    run, silently degrading the repo's evidence (v40.60 defect class).
-    """
-    """Short dynesty run (nlive=50, dlogz=0.5) -- should complete and find a posterior
-    that includes the T90.50 best-fit neighborhood.
+    run, silently degrading the repo's evidence (v40.60 Defect E).
     """
     from t90_v51_resonant_joint_fit import run_dynesty
     s = run_dynesty(nlive=50, dlogz=0.5, output_dir=str(tmp_path))

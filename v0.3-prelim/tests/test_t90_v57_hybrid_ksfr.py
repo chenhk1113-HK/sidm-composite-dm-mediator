@@ -117,9 +117,17 @@ def test_prior_transform_in_range():
                 f"param {i} ({PARAM_NAMES_10[i]}): {theta_log[i]} outside [{lo},{hi}]"
 
 
-def test_smoke_run():
-    """Smoke run completes and gives finite log Z."""
-    s = run_hybrid_joint_fit_5ch(nlive=50, dlogz=0.5)
+def test_smoke_run(tmp_path):
+    """
+    Smoke run completes and gives finite log Z.
+
+    v40.63 (Defect E class): output_dir is redirected to tmp_path so this
+    smoke run CANNOT overwrite the production
+    t90_v5x_*_joint_posterior.json artifact. Before the fix it wrote a
+    nlive=50 posterior over the nlive=500 production one on every pytest
+    run, silently degrading the repo's evidence (v40.60 Defect E).
+    """
+    s = run_hybrid_joint_fit_5ch(nlive=50, dlogz=0.5, output_dir=str(tmp_path))
     assert np.isfinite(s["log_Z"])
     p = s["posterior_median_predictions"]
     for k in ("sigma_m_Cloud9_cm2_per_g", "sigma_m_Galaxy_cm2_per_g",
@@ -127,8 +135,15 @@ def test_smoke_run():
         assert p[k] > 0, f"{k} = {p[k]} not positive"
 
 
-def test_compare_5ch_returns_verdict():
-    s = run_hybrid_joint_fit_5ch(nlive=50, dlogz=0.5)
+def test_compare_5ch_returns_verdict(tmp_path):
+    """
+    v40.63 (Defect E class): output_dir is redirected to tmp_path so this
+    smoke run CANNOT overwrite the production
+    t90_v5x_*_joint_posterior.json artifact. Before the fix it wrote a
+    nlive=50 posterior over the nlive=500 production one on every pytest
+    run, silently degrading the repo's evidence (v40.60 Defect E).
+    """
+    s = run_hybrid_joint_fit_5ch(nlive=50, dlogz=0.5, output_dir=str(tmp_path))
     cmp = compare_5ch(s)
     assert "log_Z_hybrid_5ch" in cmp
     assert "verdict" in cmp
