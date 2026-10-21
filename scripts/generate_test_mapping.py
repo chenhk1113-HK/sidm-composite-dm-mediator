@@ -2,8 +2,14 @@
 """Generate test file → suite mapping table for the report."""
 import os
 import re
+from pathlib import Path
 
-TEST_DIR = r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\tests"
+# v40.63 (n16.docx Item 2, MED-LOW): this was a hard-coded ABSOLUTE Windows
+# path, which made the script unrunnable on Linux/macOS and contradicted the
+# cross-platform run instructions in report section 8.3. Derive it from this
+# file's own location instead, so it works wherever the repo is checked out.
+REPO_ROOT = Path(__file__).resolve().parent.parent
+TEST_DIR = str(REPO_ROOT / "v0.3-prelim" / "tests")
 
 def categorize_test(filename):
     """Return suite category based on filename."""

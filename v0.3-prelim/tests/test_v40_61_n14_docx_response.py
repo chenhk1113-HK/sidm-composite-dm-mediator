@@ -427,11 +427,36 @@ def test_section_6_review_count_correct():
     """v40.61 self-check: section 6's review count must match the evidence."""
     text = _report()
     sec6 = _section(text, "## 6. Reviews", "## 7.")
-    # v40.62 added n15 human round → 10 human = 30 total (was 28 in v40.61)
-    assert "30 rounds" in sec6, (
-        "v40.61/v40.62 fix: section 6 must state the correct total "
-        "(30 review rounds: 9x120B + 6x550B COMPLETE + 5x550B DEFERRED + 10x human). "
-        "The v40.59 header said 'all 13: 7x120B + 5x550B + 1x human', wrong on all three terms."
+    # v40.63 (n16.docx): the total is DERIVED from the section 6 table, not
+    # frozen. Every version bump that adds a human review round changes the
+    # number, so a literal here breaks on every legitimate bump -- the exact
+    # defect class n6->n16 have flagged repeatedly.
+    row = [ln for ln in sec6.splitlines() if ln.startswith("| Human (")]
+    assert row, "v40.61 fix: section 6 must have a Human review row."
+    m = re.search(r"\|\s*(\d+)\s*\|", row[0])
+    assert m, f"v40.61 fix: could not read the human round count from: {row[0]}"
+    n_human = int(m.group(1))
+
+    # The other three rows of the table.
+    def _rounds(label: str) -> int:
+        r = [ln for ln in sec6.splitlines() if ln.startswith(f"| {label}")]
+        assert r, f"v40.61 fix: section 6 must have a {label} row."
+        mm = re.search(r"\|\s*(\d+)\s*\|", r[0])
+        assert mm, f"v40.61 fix: could not read the count from {label}."
+        return int(mm.group(1))
+
+    n_120b = _rounds("Nemotron 3 Super 120B")
+    n_550c = _rounds("Nemotron 3 Ultra 550B (COMPLETE)")
+    n_550d = _rounds("Nemotron 3 Ultra 550B (DEFERRED)")
+    total = n_120b + n_550c + n_550d + n_human
+
+    # The heading must state the SAME total the table implies.
+    assert f"{total} rounds" in sec6, (
+        f"v40.61/v40.63 fix: section 6's heading must state {total} rounds, "
+        f"which is what its own table implies "
+        f"({n_120b}x120B + {n_550c}x550B COMPLETE + {n_550d}x550B DEFERRED "
+        f"+ {n_human}x human). The v40.59 header said "
+        f"'all 13: 7x120B + 5x550B + 1x human', wrong on all three terms."
     )
     assert "DEFERRED" in sec6, (
         "v40.61 fix: section 6 must separate DEFERRED 550B rounds (which "

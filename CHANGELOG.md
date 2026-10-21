@@ -4127,3 +4127,58 @@ collapsed section — only the top 5 full-fidelity entries +
 - Parallelization (Issue 2.2.5) — single-threaded fits only.
 - requirements.txt (Issue 2.2.6) — manual `dynesty 3.0.0, numpy 2.4.6` etc.
 - CHANGELOG (Issue 2.3.1) — **this file**, created 2026-08-10 in response to review.
+
+## [v40.63-N16ReviewResponse-2026-10-21] — v40.63 — n16.docx review response (11th human review)
+
+n16.docx is the **11th human review** (n6–n16, written in Chinese) of the v40.62 report. Verdict: v40.62 is a **substantive improvement** over v40.61 — version and test counts unified throughout, Sameie+ correctly relabelled a qualitative test, the 2-branch marginalization promoted to the primary quantitative result, the Ohana+ 2026 paper read and page-anchored, hard-coded literals removed, scatter and prior-sensitivity limitations added, the 19-test n15 suite embedded. **Eight items raised; all eight addressed. One self-found HIGH-severity defect surfaced in the process.**
+
+### The headline: the "CI EXCLUDES ZERO" claim was wrong
+
+**This is the substantive change of the round, and it was not on n16's list.** While auditing n16's Item 8, the confidence intervals themselves were checked — and they use the **normal approximation** (z = 1.96) on samples of n = 2 and n = 3 whose variance is **estimated from the data**. That requires the **t-distribution**. With the correct critical value (verified against `scipy.stats.t.ppf`):
+
+| Branch set | Mean | SE | 95% CI (t — correct) | excludes 0? | 95% CI (z — shipped in v40.62) |
+|---|---|---|---|---|---|
+| 2-branch anchored (n=2), t(0.975, df=1) = 12.706 | +0.62 σ | 0.30 σ | **(−3.25, +4.50) σ** | **no** | (+0.03, +1.22) σ |
+| 3-branch Bayesian (n=3), t(0.975, df=2) = 4.303 | +0.33 σ | 0.12 σ | **(−0.18, +0.83) σ** | **no** | (+0.10, +0.56) σ |
+| 3-branch equal-weight (n=3), t(0.975, df=2) = 4.303 | −0.02 σ | 0.67 σ | (−2.90, +2.86) σ | no | (−1.33, +1.29) σ |
+
+**So the v40.62 Executive Summary headline — "2-branch anchored-only mean: +0.62 ± 0.30 σ, 95% CI (+0.03, +1.22) σ — CI EXCLUDES ZERO (marginally)" — was wrong.** Under correct small-n inference, **no branch set and no weighting scheme produces a 95% CI that excludes zero.**
+
+- **The magnitude survives.** +0.62 σ over the anchored branches, sign positive and robust to the scatter assumption and to the weighting scheme (3-branch Bayesian gives +0.33 σ). The framework over-predicts c₂₀₀ by roughly +0.6 σ.
+- **The significance does not survive.** The tension must be reported as a **magnitude with an explicit uncertainty, never as a detection**.
+- **Nothing else in the framework's framing changes.** The framework was already downgraded (v40.50); this touches no channel verdict, no no-go theorem, and no model-downgrade framing. The tension values (+0.32, +0.93, −1.31 σ) are unchanged and independently sourced.
+
+**Why it survived v40.62's own audit:** v40.62's test asserted *"CI excludes zero: True"* — it **locked in the artefact**. A regression test that pins a statistical convention cannot detect that the convention is wrong; it only checks that the code still does what it did. **v40.63's test asserts the CI against `scipy.stats.t.ppf`**, so the convention is now pinned to an external authority.
+
+### n16 action table — all 8 items
+
+| # | Issue | Severity | Status | Where fixed |
+|---|---|---|---|---|
+| 1 | `collapse_time_gyr_implementation()` prints a wrong unit conversion | MED | ✓ §20.1.1 | `scripts/v19_2_f_n9_docx_response.py` |
+| 2 | `generate_test_mapping.py` has a Windows hard-coded `TEST_DIR` | MED-LOW | ✓ §20.1.2 | `scripts/generate_test_mapping.py` |
+| 3 | `monte_carlo_71_percent()` is an analytic binomial, not a Monte Carlo | LOW-MED | ✓ §20.1.3 | `scripts/v19_2_f_n9_docx_response.py` |
+| 4 | §4.9 code listing incomplete | LOW | ✓ §20.1.4 | report §4.9 |
+| 5 | Bayesian `sigma_u` provenance undocumented | LOW-MED | ✓ §20.1.5 | script docstring + report §13.2 |
+| 6 | `test_pdf_page_anchors_are_correct()` lacks a `pdftotext` check | LOW | ✓ §20.1.6 | `test_v40_62_n15_docx_response.py` |
+| 7 | Burkert-style's "anchored" status is weaker than Elbert+ | MED | ✓ §20.1.7 | report §1, §13.2, §9.3 |
+| 8 | The +0.62 σ signal may vanish under scatter uncertainty | MED | ⚠ **premise corrected** — §20.1.8 | report §13.2, §9.3 |
+| — | *(self-found)* The "CI EXCLUDES ZERO" headline used z at n=2 | **HIGH** | ✓ §20.1.9 | report §1, §13.2, §9.3 + script |
+
+### Item-by-item notes
+
+- **Item 1 — broader than reported.** The printed block was the **stale v40.54 fabrication in its entirety**: the ~10⁹⁵ unit conversion n16 flagged, *plus* a non-existent source filename (`v19_2_f_gravothermal_yang2024.py` — the real file is `v0.3-prelim/code/gravothermal_yang2024.py`), *plus* the inverted τ (`0.35/13.8 = 16.4`; 0.35/13.8 = 0.0254), *plus* wrong `t_core` values (printed 0.35 / 0.0008 Gyr; the stored JSON says 0.8411 / 230.151 Gyr), *plus* a placeholder `arXiv:2405.XXXXX`. The print block now shows the **actual current implementation** (Yang+ 2024 eq. 2.2, R88(29)-calibrated prefactor 1.34e12, G in kpc³/(M☉ Gyr²), no SI conversion), the correct τ direction, and the true `t_core` values — plus the correct SI conversion documented for reference. **Root cause: the v40.54→v40.55 fix corrected the *report* but not the *script* that prints the code. Shipping the changed scripts as a companion MD is what surfaced it.**
+- **Item 8 — the premise is corrected, not absorbed.** n16 proposed the scatter assumption (0.12–0.20 dex) could make the +0.62 σ signal "completely vanish". **It does not, and the reason is structural:** σ scales as 1/scatter **uniformly** across branches, so the mean *and* the SE rescale together and the CI lower bound stays proportional to the mean. Recomputed at 0.08/0.12/0.16/0.20/0.24 dex, the mean moves +1.25 → +0.42 σ and the CI lower bound never crosses zero. **The reason the tension is not significant is the sample size (n=2), not the scatter.** §9.3 now states the scatter as a *magnitude* uncertainty and says so explicitly.
+- **Item 7 — the selection bias is disclosed, not hidden.** "2-branch anchored" is **"1 paper-anchored (Elbert+, Eq. 5) + 1 project prescription (Burkert-style)"**. Excluding Sameie+ for being unanchored while retaining Burkert-style — which the report itself labels unanchored — means the two retained branches are the two that **agree in sign**. The honest options are (a) report the 2-branch result *with* the selection disclosed, or (b) report only the 1-branch Elbert+ value (+0.32 σ, no computable CI at n=1). **v40.63 takes (a)** and keeps the 3-branch coverage envelope visible, because (b) would hide the sign-flip possibility that number exists to reveal.
+
+### Incidental: a recurrence caught
+
+The v40.62 count reconciliation I shipped that morning fixed the *quoted* count locations but the version-count drift had **three more live locations** (§1's opening line, §2's heading, §2's counting rule) — the same class n6→n16 have flagged repeatedly. v40.63 enumerated and fixed all of them, and the counting rule now states that the counts are **derived from the range, never typed independently**.
+
+### New tests
+
+`v0.3-prelim/tests/test_v40_63_n16_docx_response.py` — **27 tests**: one per n16 item + the self-found CI-convention defect + report-wide consistency checks (all JSON blocks strict, review counts consistent across header/§6/footer, version counts consistent across §1/§2/§9.2). Includes a `scipy.stats.t.ppf` cross-check of the hard-coded t critical values and a byte-identity check that the §4.9 listing equals the live script.
+
+### Front-matter
+- VERSION: appended `+v40.63-N16ReviewResponse`
+- CHANGELOG.md, CURRENT.md: updated
+- Report: title → v40.39 → v40.63; §2 → 25-Version Arc (26 rows); §20 added; header/footer/§6 counts reconciled to 11 human / 31 rounds

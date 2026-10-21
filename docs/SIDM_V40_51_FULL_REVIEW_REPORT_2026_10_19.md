@@ -1,20 +1,20 @@
-# SIDM v19.2-F Framework Final Downgrade Report (v40.39 → v40.62)
+# SIDM v19.2-F Framework Final Downgrade Report (v40.39 → v40.63)
 
 **Date:** 2026-10-21
 **Author:** K Lam (sidm-composite-dm-mediator project)
-**Reviewer:** Nemotron 3 Ultra 550B (6 COMPLETE + 5 DEFERRED) + Nemotron 3 Super 120B (9) + **n6.docx through n15.docx human reviewers (10 reviews)** — 30 review rounds total (§6)
+**Reviewer:** Nemotron 3 Ultra 550B (6 COMPLETE + 5 DEFERRED) + Nemotron 3 Super 120B (9) + **n6.docx through n16.docx human reviewers (11 reviews)** — 31 review rounds total (§6)
 **Branch:** `wip/v19.2-F-init`
-**Final commit:** `5026fdb` (v40.62, n15.docx review response)
-**Final tag:** `v40.62-N15ReviewResponse`
-**Project status:** Phase 3 CLOSED (framework final downgrade complete + n6-n15 reviews addressed + Defects E/F1/F2/G resolved)
-**Test count:** 1855 passed, 22 skipped, 33 deselected (215 test files across 42 suites)
-**Pre-tag gate:** 7/7 PASS (full run, 1149 s)
+**Final commit:** `PENDING-v40.63` (v40.63, n16.docx review response)
+**Final tag:** `v40.63-N16ReviewResponse`
+**Project status:** Phase 3 CLOSED (framework final downgrade complete + n6-n16 reviews addressed + Defects E/F1/F2/G resolved)
+**Test count:** 1877 passed, 22 skipped, 33 deselected (216 test files across 42 suites)
+**Pre-tag gate:** 7/7 PASS (full run, 1108 s)
 
 ---
 
 ## 1. Executive Summary
 
-The v19.2-F SIDM framework went through a **24-version investigation** (v40.39 → v40.62; 25 table rows counting the v40.43a sub-version — see the §2 counting rule) of the **Cloud-9 c-M concentration-mass tension** measured against the **Ohana+ 2026** posterior inference of the concentration deviation below the cosmological c-M relation. The investigation ended with the framework's central claims in their **FINAL DOWNGRADED FORM**:
+The v19.2-F SIDM framework went through a **25-version investigation** (v40.39 → v40.63; 26 table rows counting the v40.43a sub-version — see the §2 counting rule) of the **Cloud-9 c-M concentration-mass tension** measured against the **Ohana+ 2026** posterior inference of the concentration deviation below the cosmological c-M relation. The investigation ended with the framework's central claims in their **FINAL DOWNGRADED FORM**:
 
 | Tension | Status |
 |---|---|
@@ -30,27 +30,35 @@ The v19.2-F SIDM framework went through a **24-version investigation** (v40.39 �
 | **v40.56 independent verification (n11.docx review)** | **APPLIED** — t212_evaluate verification, σ_HL vs f_H curve, prescription non-identifiability |
 | **v40.57 pure-Python + title fix (n12.docx review)** | **APPLIED** — title updated, pure-Python verification, channel correlation matrix |
 
-**CRITICAL CAVEATS (per n9/n11.docx reviews + n14.docx Item 1):**
+**CRITICAL CAVEATS (per n9/n11/n14/n15/n16.docx reviews):**
 
 1. **c-M tension prescription dependence (MED-HIGH):** The c-M tension sign is **NOT robust to prescription choice**:
    - Elbert+ 2015: c-M = +0.32 σ (RELIEVED) — quantitatively anchored to the paper's Eq. 5
    - Burkert-style: c-M = +0.93 σ (RELIEVED) — project prescription (see §17.9 caveat)
    - Sameie+ 2020: c-M = -1.31 σ (AGGRAVATED, opposite sign) — **QUALITATIVE SIGN-FLIP TEST ONLY, NOT QUANTITATIVELY VALIDATED** (v40.59 audit, §17.9)
-   - **2-branch anchored-only mean (THE QUANTITATIVE RESULT, v40.62): +0.62 ± 0.30 σ, 95% CI (+0.03, +1.22) σ — CI EXCLUDES ZERO (marginally; lower bound nearly touches 0)**
+   - **2-branch anchored-only mean (THE QUANTITATIVE RESULT): +0.62 ± 0.30 σ — a MAGNITUDE, not a detection**
    - 3-branch equal-weight mean: -0.02 ± 1.16 σ (INDISTINGUISHABLE FROM ZERO) — **this is a worst-case-coverage envelope, NOT the tension**
    - 3-branch Bayesian mean: +0.33 ± 0.12 σ (mild positive) — down-weights Sameie+ to 10% via an *assumed* fit uncertainty
-   - 3-branch equal-weight 95% CI: (-1.33, +1.29) σ
-   - **Framework should NOT be cited as "predicting" a specific c-M tension sign without specifying (a) the branch set, (b) the weighting scheme, and (c) the assumed scatter.**
+   - **⚠ v40.63 CORRECTION (n16.docx Item 8 audit, MED): the v40.62 headline "95% CI (+0.03, +1.22) σ — CI EXCLUDES ZERO" was WRONG.** Those CIs used the **normal approximation** (z = 1.96) on a sample whose variance is **estimated from the data**, which requires the **t-distribution**. Corrected (t, the primary number now):
+     - 2-branch anchored (n=2), t(0.975, df=1) = 12.706 → **95% CI (-3.25, +4.50) σ — INCLUDES zero**
+     - 3-branch Bayesian (n=3), t(0.975, df=2) = 4.303 → **95% CI (-0.18, +0.83) σ — INCLUDES zero**
+     - 3-branch equal-weight (n=3), t(0.975, df=2) = 4.303 → **95% CI (-2.90, +2.86) σ — INCLUDES zero**
+     **Under correct small-n inference, NO branch set and NO weighting scheme yields a 95% CI that excludes zero.** The point estimates are unchanged (the sign and the ~+0.6 σ magnitude do not depend on the CI convention) — what was wrong was the **significance claim**. The tension must be reported as a **magnitude with an explicit uncertainty, never as a detection.** (Verified against `scipy.stats.t.ppf`; see the v40.63 regression test.)
+   - **⚠ n16.docx Item 7 (MED) — selection bias in the branch set.** "2-branch anchored" is more precisely **"1 paper-anchored + 1 project prescription"**: Elbert+ 2015 is anchored to the paper's Eq. 5, but **Burkert-style is the project's own prescription, not paper-derived** (§5.4 `quantitative_status`). Excluding the unanchored Sameie+ branch while retaining the equally-unanchored Burkert-style branch is a **selection bias** — the two retained branches are the two that **agree in sign**, and the excluded one disagrees. This is why the 3-branch number is retained as the coverage envelope rather than discarded.
+   - **⚠ n16.docx Item 8 — the scatter assumption does NOT threaten the signal (the reviewer's proposed mechanism does not apply).** σ scales as 1/scatter **uniformly** across branches, so the mean *and* the SE rescale together and the CI lower bound stays proportional to the mean. Recomputed at 0.08/0.12/0.16/0.20/0.24 dex: the mean moves +1.25 → +0.42 σ and the CI lower bound never crosses zero. **Scatter changes the MAGNITUDE, not the SIGN, and is not the reason the CI is wide — the sample size (n=2) is.**
+   - **Framework should NOT be cited as "predicting" a specific c-M tension sign, and must NOT be cited as DETECTING one, without specifying (a) the branch set, (b) the weighting scheme, (c) the assumed scatter, (d) that only one of the two retained branches is paper-anchored, and (e) the CI convention (t, not z).**
 
    **⚠ n14.docx Item 1 caveat (v40.61):** The v40.59 Sameie+ audit (§17.9) established that the Sameie+ quantitative prescription (slope = 0.40, saturation τ = 5, ceiling = 2×NFW) is **not derived from the paper** and that its implementation has a **sign-flip bug** (§4.10). The -1.31 σ value is therefore reported **as a qualitative demonstration that the c-M tension sign flips under a cuspy-collapse framework**, NOT as a calibrated physical prediction. It carries **no empirical anchor** in Sameie+ 2020. It must not be read as one of three equally-trustworthy quantitative branches.
 
-2. **Sameie+ extrapolation uncertainty (n14.docx Item 6, MED):** Even if the quantitative prescription *were* derived from the paper, applying it to Cloud-9 is an **extrapolation beyond the paper's calibration regime**: Sameie+ 2020 simulates **high-concentration dwarfs** (c_200 = 22–29: Dwarf 1 = 29.5, Draco = 28, Dwarf 2 = 22.9), whereas Cloud-9 has **c₀ = 12** — and the paper stresses that collapse is *"extremely sensitive to initial halo concentration"* (§4). This extrapolation uncertainty is **not** currently reflected in the marginalization weights (§13.2), which treat the three prescriptions as equally informative. **Consequence:** the equal-weight mean (-0.02 ± 1.16 σ) is itself conditional on an un-modelled weighting assumption; the Bayesian mean (+0.33 ± 0.12 σ) is *more* robust to this because a Bayesian weighting scheme can in principle down-weight an unanchored branch — but that down-weighting was applied using the audit's qualitative judgement, not a calibrated likelihood for extrapolation error. Both numbers should be read as **conditional on the weighting scheme**, with the Sameie+ branch's down-weighting being the main lever.
+2. **c-M tension is PRIOR-SENSITIVE, not likelihood-sensitive (n16.docx Item 2b, MED — promoted from §9.3 into this summary):** Ohana+ 2026's own text says the fit *"loses sensitivity to c₂₀₀ once the core becomes large enough to encompass all the data points"* (Eq. 7 has no c₂₀₀ dependence in that limit), so its concentration constraint comes **almost entirely from the cosmological c-M prior**, not from the H I likelihood. **Consequence:** comparing our inferred c₂₀₀ against Ohana+ 2026's is comparing **our prior against their prior**, not our prediction against their data. The "tension" therefore reflects **prior-choice sensitivity** — which cosmological c-M relation, which scatter, which mass — at least as much as it reflects a model failure. **The honest position: the tension is a statement about priors, not a measurement of the model.** It is not evidence that the SIDM model fails, and it is not evidence that it succeeds. (Full discussion in §9.3.)
+
+3. **Sameie+ extrapolation uncertainty (n14.docx Item 6, MED):** Even if the quantitative prescription *were* derived from the paper, applying it to Cloud-9 is an **extrapolation beyond the paper's calibration regime**: Sameie+ 2020 simulates **high-concentration dwarfs** (c_200 = 22–29: Dwarf 1 = 29.5, Draco = 28, Dwarf 2 = 22.9), whereas Cloud-9 has **c₀ = 12** — and the paper stresses that collapse is *"extremely sensitive to initial halo concentration"* (§4). This extrapolation uncertainty is **not** currently reflected in the marginalization weights (§13.2), which treat the three prescriptions as equally informative. **Consequence:** the equal-weight mean (-0.02 ± 1.16 σ) is itself conditional on an un-modelled weighting assumption; the Bayesian mean (+0.33 ± 0.12 σ) is *more* robust to this because a Bayesian weighting scheme can in principle down-weight an unanchored branch — but that down-weighting was applied using the audit's qualitative judgement, not a calibrated likelihood for extrapolation error. Both numbers should be read as **conditional on the weighting scheme**, with the Sameie+ branch's down-weighting being the main lever.
 
    **v40.62 resolution (n15.docx Item 3, MED):** the reviewer's point was that keeping Sameie+ at 1/3 equal weight is methodologically inconsistent with calling it a qualitative test. **Accepted and acted on.** The marginalization is now computed over the **2 quantitatively-anchored branches only** (Elbert+ 2015, Burkert-style), giving **+0.62 +/- 0.30 sigma, 95% CI (+0.03, +1.22) sigma**, and the 3-branch equal-weight number is **reclassified explicitly as a worst-case-coverage envelope** (it answers "can any prescription flip the sign?", not "what is the tension?"). See 13.2. The scatter assumption -- a third source of sigma-scale sensitivity, on top of the Sameie+ extrapolation uncertainty -- is now also recorded as a limitation in 9.3.
 
-3. **σ_HL vs f_H (MED):** σ_HL is **unphysical (NEGATIVE) only for f_H ≥ 0.7**. For the placeholder f_H = 0.297, σ_HL is POSITIVE (+0.62 cm²/g, below dSph ceiling 0.8). The framework's σ_HL "PARTIAL resolution" claim depends on f_H.
+4. **σ_HL vs f_H (MED):** σ_HL is **unphysical (NEGATIVE) only for f_H ≥ 0.7**. For the placeholder f_H = 0.297, σ_HL is POSITIVE (+0.62 cm²/g, below dSph ceiling 0.8). The framework's σ_HL "PARTIAL resolution" claim depends on f_H.
 
-4. **Pure-Python verification (n12.docx MED-HIGH fix):** v40.57 provides a fully independent verification using the published Balberg+ 2002 formula `t_core = 12.7 / sigma_m * (rho_s / 1e-2)^-1 * (r_s / 1e4) * (100/v_max) Gyr`. No project modules, no sys.path.insert. Verified τ values: 16.0 (canonical) / 0.05 (downgraded) ≈ 273× reduction.
+5. **Pure-Python verification (n12.docx MED-HIGH fix):** v40.57 provides a fully independent verification using the published Balberg+ 2002 formula `t_core = 12.7 / sigma_m * (rho_s / 1e-2)^-1 * (r_s / 1e4) * (100/v_max) Gyr`. No project modules, no sys.path.insert. Verified τ values: 16.0 (canonical) / 0.05 (downgraded) ≈ 273× reduction.
 
 The 71% partial robustness becomes the framework's **TESTABLE PREDICTION**: future Milky Way satellite surveys (DESI, LSST, Euclid) can either validate the passing region (if σ/m(v=10) < 1.0 cm²/g) or expand it (if the constraint loosens).
 
@@ -60,9 +68,9 @@ The 71% partial robustness becomes the framework's **TESTABLE PREDICTION**: futu
 
 ---
 
-## 2. The 24-Version Arc (v40.39 → v40.62)
+## 2. The 25-Version Arc (v40.39 → v40.63)
 
-**Version-counting rule (v40.61, n14.docx Item 2; extended v40.62 — made explicit):** the arc below contains **25 rows**: **24 sequential version numbers** (v40.39 → v40.62, inclusive) **plus 1 lettered sub-version** (v40.43a, an additional round between v40.43 and v40.44). The phrase "24-version" everywhere in this report therefore means **24 sequential version numbers**, and the table has **25 rows** because v40.43a is counted as a sub-version rather than a sequential number. Both numbers are correct under this rule; they are not in conflict.
+**Version-counting rule (v40.61, n14.docx Item 2; extended v40.62; extended again v40.63 — made explicit):** the arc below contains **26 rows**: **25 sequential version numbers** (v40.39 → v40.63) plus **1 lettered sub-version** (v40.43a). The two counts are always stated together, because the discrepancy between them (25 vs 26) is what n13/n14 flagged as an inconsistency. **A count is derived from the range, never typed independently:** the sequential count is (end - start + 1) and the row count is that plus the number of lettered sub-versions.
 
 | Version | Date | Topic | Result | Reviewer |
 |---|---|---|---|---|
@@ -91,6 +99,7 @@ The 71% partial robustness becomes the framework's **TESTABLE PREDICTION**: futu
 | **v40.60** | **2026-10-21** | **Defect E root-cause fix (smoke-test clobbering)** | **`--out-dir` added; smoke test writes to tmp_path; md5 before/after identical** | **self-audit** |
 | **v40.61** | **2026-10-21** | **n14.docx review (9th human review)** | **Sameie+ relabelled qualitative-only; version/test counts reconciled; §5.3 JSON strict; Ohana+ PDF verified + read; PowerShell parity; version-locked tests made version-agnostic** | **n14.docx human** |
 | **v40.62** | **2026-10-21** | **n15.docx review (10th human review)** | **2-branch anchored marginalization +0.62 σ (CI excludes 0) is now the primary quantitative result; 3-branch relabelled worst-case-coverage; §9.2 counts fixed; prior-sensitivity + scatter limitations added; PDF page anchors verified; categorization guard added** | **n15.docx human** |
+| **v40.63** | **2026-10-21** | **n16.docx review (11th human review)** | **CI convention corrected (t not z at n=2): no tension CI excludes zero; Burkert-style anchoring disclosed; collapse_time print block de-fabricated; cross-platform TEST_DIR; binomial rename** | **self-audit** |
 
 ---
 
@@ -310,15 +319,32 @@ def c_200_sameie(tau, sigma_m):
         )))
 ```
 
-**v40.62 full-gate result:** `1855 passed, 22 skipped, 33 deselected, 3 warnings in 1123.26s (0:18:43)` — all 7 layers PASS.
+**v40.63 full-gate result:** `1877 passed, 22 skipped, 33 deselected, 3 warnings in 1108.62s (0:18:28)` — all 7 layers PASS.
 
 *(v40.61 gate: 1836 passed, 22 skipped, 33 deselected in 1148.67s — before the 19 v40.62 tests were added.)*
 
 *(v40.59 gate: 1816 passed, 22 skipped, 33 deselected in 1149.01s — before the 20 v40.61 tests were added.)*
 
-### 4.9 `scripts/generate_test_mapping.py` (v40.59 — Defect F2: test → suite mapping)
+### 4.9 `scripts/generate_test_mapping.py` (v40.59 — Defect F2: test → suite mapping; v40.63 — n16.docx Item 4: COMPLETE listing)
+
+**The complete file, verbatim.** v40.63 regenerated this listing directly from `scripts/generate_test_mapping.py` so it can no longer drift from the script. (The v40.59–v40.62 version started at `def categorize_test(filename):` and omitted the file header — the `os` / `pathlib` imports and the `TEST_DIR` assignment — so a reader of the report alone saw an incomplete listing. n16.docx Item 4.)
+
+**Note (v40.63, n16.docx Item 2):** `TEST_DIR` is now derived from this file's own location (`Path(__file__).resolve().parent.parent / "v0.3-prelim" / "tests"`) instead of the hard-coded absolute Windows path it carried before. That path made the script unrunnable on Linux/macOS and contradicted the cross-platform run instructions in §8.3.
 
 ```python
+#!/usr/bin/env python3
+"""Generate test file → suite mapping table for the report."""
+import os
+import re
+from pathlib import Path
+
+# v40.63 (n16.docx Item 2, MED-LOW): this was a hard-coded ABSOLUTE Windows
+# path, which made the script unrunnable on Linux/macOS and contradicted the
+# cross-platform run instructions in report section 8.3. Derive it from this
+# file's own location instead, so it works wherever the repo is checked out.
+REPO_ROOT = Path(__file__).resolve().parent.parent
+TEST_DIR = str(REPO_ROOT / "v0.3-prelim" / "tests")
+
 def categorize_test(filename):
     """Return suite category based on filename."""
     f = filename.lower()
@@ -326,24 +352,96 @@ def categorize_test(filename):
     if f.startswith("test_v40_"):
         if "fH_sensitivity" in f: return "v40.41 f_H sensitivity"
         if "elbert_c_tau" in f: return "v40.42 Elbert c-τ"
-        # ... one branch per v40.4x-v40.5x version ...
+        if "marginalization" in f: return "v40.43 marginalization"
+        if "three_prescriptions" in f: return "v40.43a three prescriptions"
+        if "merger_history" in f: return "v40.44 merger history"
+        if "velocity_form" in f: return "v40.45 velocity form"
+        if "no_peak" in f and "fornax" not in f: return "v40.46 no-peak"
+        if "fornax_no_peak" in f: return "v40.47 Fornax no-peak"
+        if "background_refit" in f: return "v40.48 background refit"
+        if "multiscale_refit" in f: return "v40.49 multiscale refit"
+        if "paper_section_2_1_update" in f: return "v40.50 §2.1 update"
+        if "paper_section_2_1_ranges" in f: return "v40.51 ranges fix"
+        if "n7_docx" in f: return "v40.52 n7 response"
+        if "n8_docx" in f: return "v40.53 n8 response"
+        if "n9_docx" in f: return "v40.54 n9 response"
+        if "n10_docx" in f: return "v40.55 n10 response"
+        if "n11_docx" in f: return "v40.56 n11 response"
+        if "n12_docx" in f: return "v40.57 n12 response"
         if "n13_docx" in f: return "v40.58 n13 response"
+        if "n14_docx" in f: return "v40.61 n14 response"
+        if "n15_docx" in f: return "v40.62 n15 response"
         return "v40-era"
+    # Core v40 tests (pre-response)
+    if f.startswith("test_v19_2_f_"):
+        if "cloud9_cM_tension" in f: return "v40.39 Cloud-9 c-M"
+        if "cloud9_cM_elbert" in f: return "v40.42 Elbert"
+        if "cloud9_cM_marginalized" in f: return "v40.43 marginalized"
+        if "cloud9_cM_three_prescriptions" in f: return "v40.43a 3 prescriptions"
+        if "cloud9_merger_history" in f: return "v40.44 merger history"
+        if "cloud9_velocity_form" in f: return "v40.45 velocity form"
+        if "fH_sensitivity" in f: return "v40.41 f_H sensitivity"
+        if "fornax_no_peak" in f: return "v40.47 Fornax"
+        if "multiscale_refit" in f: return "v40.49 multiscale"
+        if "no_peak_analysis" in f: return "v40.46 no-peak"
+        if "paper_section_2_1_update" in f: return "v40.50 §2.1 update"
+        return "v40 scripts"
     # Legacy/other
     if "sparc_hierarchical" in f: return "LEGACY: SPARC hierarchical (sys.exit)"
     if "t32_real_likelihood" in f: return "LEGACY: T32 likelihood (sys.exit)"
-    # ... 15 LEGACY branches, matching the gate exclusions in §4.8 ...
+    if "phase42_summary" in f: return "LEGACY: Phase 42 (deleted doc)"
+    if "phase46_three_items" in f: return "LEGACY: Phase 46 (deleted doc)"
+    if "phase47_50" in f: return "LEGACY: Phase 47/50 (deleted doc)"
+    if "t90_v60_naturalness" in f: return "LEGACY: T90 naturalness (cwd path)"
+    if "t87_inelastic_nucleon" in f: return "LEGACY: T87 inelastic (cwd path)"
+    if "t82_audit_version_drift" in f: return "LEGACY: T82 version drift (stale assert)"
+    if "t120_4_joint_fit" in f: return "LEGACY: T120.4 joint fit (cwd path)"
+    if "t120_11_hidden_u1" in f: return "LEGACY: T120.11 hidden U(1) (cwd path)"
+    if "t120_13_integration" in f: return "LEGACY: T120.13 integration (cwd path)"
+    if "t120_15_uv_slope" in f: return "LEGACY: T120.15 UV slope (cwd path)"
+    if "phase7e_unit_conversion" in f: return "LEGACY: Phase 7e unit conversion"
+    if "config_split_brain" in f: return "LEGACY: Config split brain"
+    if "paper_v19_regression" in f: return "LEGACY: Paper v19 regression"
     # Known physics limits
     if "known_physics_limits" in f: return "v40 core: Known physics limits"
+    if "ohana2026_baseline" in f: return "v40 core: Ohana 2026 baseline"
+    if "tucana_ii_sigma_v" in f: return "v40 core: Tucana II σ_v"
     if "paper_claims" in f: return "v40 core: Paper claims"
-    # v40.62 (n15.docx Item 7): the fallback is NAMED so it reads as a
-    # deliberate legacy bucket, not a silent catch-all.
+    if "v19_2_f_cloud9_cM_negative" in f: return "v40.39 Cloud-9 negative"
+    # Other — legacy pre-v40 test files (T-series, forward models, physics
+    # limits) that predate the v40-era naming. v40.62 (n15.docx Item 7):
+    # these are grouped into an EXPLICIT "Legacy: uncategorized" bucket
+    # rather than a bare "Other", so a reviewer can see at a glance that
+    # they are deliberately unclassified legacy files and not a silent
+    # catch-all hiding a mis-categorized NEW file.
     return "Legacy: uncategorized (pre-v40)"
 
 
-# v40.62 (n15.docx Item 7): a NEW v40-era file landing in the legacy
-# catch-all is a BUG -- raise on exactly that case, and print the legacy
-# count so the bucket is never silent.
+files = [f for f in os.listdir(TEST_DIR) if f.startswith("test_") and f.endswith(".py")]
+files.sort()
+
+# Group by suite
+suites = {}
+for f in files:
+    s = categorize_test(f)
+    suites.setdefault(s, []).append(f)
+
+# v40.62 (n15.docx Item 7): the reviewer asked for `raise ValueError` on an
+# uncategorized file so a newly-added test cannot silently fall through.
+# That is NOT what we did, and the reason matters: 174 of the 214 test files
+# are legacy pre-v40 files that have no meaningful suite tag. A hard raise
+# would make this script unusable.
+#
+# What we did instead, which preserves the reviewer's intent (no NEW file
+# can hide in a catch-all) without breaking the tool:
+#   1. The fallback bucket is now NAMED ("Legacy: uncategorized (pre-v40)")
+#      and its contents are PRINTED with a count, so it is visible in the
+#      output rather than looking like a normal suite.
+#   2. NEW test files (anything added after this rule shipped) are detected
+#      by name convention: a file matching the v40-era prefixes
+#      (test_v40_*, test_v19_2_f_*) that lands in the legacy bucket is a
+#      BUG, and we raise on exactly that case.
+#   3. The report §17.8 mapping table states the legacy count explicitly.
 UNCATEGORIZED = "Legacy: uncategorized (pre-v40)"
 _v40_prefixed = (lambda f: f.startswith("test_v40_") or f.startswith("test_v19_2_f_"))
 _new_in_catchall = [f for f in suites.get(UNCATEGORIZED, [])
@@ -354,237 +452,20 @@ if _new_in_catchall:
         + ", ".join(sorted(_new_in_catchall))
     )
 
+# Print markdown table
+print("| Test File | Suite / Category |")
+print("|---|---|")
+for s in sorted(suites.keys()):
+    for f in sorted(suites[s]):
+        print(f"| `{f}` | {s} |")
 
-files = [f for f in os.listdir(TEST_DIR) if f.startswith("test_") and f.endswith(".py")]
-files.sort()
-
-suites = {}
-for f in files:
-    suites.setdefault(categorize_test(f), []).append(f)
-
-print("| Test File | Suite / Category |
-|---|---|
-| `test_config_split_brain.py` | LEGACY: Config split brain |
-| `test_paper_v19_regression.py` | LEGACY: Paper v19 regression |
-| `test_phase42_summary.py` | LEGACY: Phase 42 (deleted doc) |
-| `test_phase46_three_items.py` | LEGACY: Phase 46 (deleted doc) |
-| `test_phase47_50.py` | LEGACY: Phase 47/50 (deleted doc) |
-| `test_phase7e_unit_conversion_audit.py` | LEGACY: Phase 7e unit conversion |
-| `test_sparc_hierarchical.py` | LEGACY: SPARC hierarchical (sys.exit) |
-| `test_t120_11_hidden_u1.py` | LEGACY: T120.11 hidden U(1) (cwd path) |
-| `test_t120_13_integration.py` | LEGACY: T120.13 integration (cwd path) |
-| `test_t120_15_uv_slope.py` | LEGACY: T120.15 UV slope (cwd path) |
-| `test_t120_4_joint_fit.py` | LEGACY: T120.4 joint fit (cwd path) |
-| `test_t32_real_likelihood.py` | LEGACY: T32 likelihood (sys.exit) |
-| `test_t82_audit_version_drift.py` | LEGACY: T82 version drift (stale assert) |
-| `test_t87_inelastic_nucleon.py` | LEGACY: T87 inelastic (cwd path) |
-| `test_t90_v60_naturalness.py` | LEGACY: T90 naturalness (cwd path) |
-| `test_T130_inelastic_kinematic_scan.py` | Legacy: uncategorized (pre-v40) |
-| `test_T131_chu_pwave_verification.py` | Legacy: uncategorized (pre-v40) |
-| `test_T132_eft_target_map_sanity.py` | Legacy: uncategorized (pre-v40) |
-| `test_T133_hidden_u1_slope_audit.py` | Legacy: uncategorized (pre-v40) |
-| `test_autocheck_hypothesis.py` | Legacy: uncategorized (pre-v40) |
-| `test_autocheck_sympy.py` | Legacy: uncategorized (pre-v40) |
-| `test_channel_19_competitor_dd.py` | Legacy: uncategorized (pre-v40) |
-| `test_cmb_distortion.py` | Legacy: uncategorized (pre-v40) |
-| `test_d15_corrected3_review5.py` | Legacy: uncategorized (pre-v40) |
-| `test_dampe_cre_forward_model.py` | Legacy: uncategorized (pre-v40) |
-| `test_dampe_cre_spectrum.py` | Legacy: uncategorized (pre-v40) |
-| `test_delta_n_eff_goldstein_hill_2026.py` | Legacy: uncategorized (pre-v40) |
-| `test_dsph_upper_limit_p0d.py` | Legacy: uncategorized (pre-v40) |
-| `test_erosita_erass1_forward_model.py` | Legacy: uncategorized (pre-v40) |
-| `test_euclid_q1_lensing_forward_model.py` | Legacy: uncategorized (pre-v40) |
-| `test_euclid_q1_subhalo_forecast_forward_model.py` | Legacy: uncategorized (pre-v40) |
-| `test_euclid_q1_subhalo_real_data.py` | Legacy: uncategorized (pre-v40) |
-| `test_independent_and_robustness.py` | Legacy: uncategorized (pre-v40) |
-| `test_inelastic_wrapper_regression.py` | Legacy: uncategorized (pre-v40) |
-| `test_kiss_sidm_dsmc.py` | Legacy: uncategorized (pre-v40) |
-| `test_kiss_sidm_julia_bridge.py` | Legacy: uncategorized (pre-v40) |
-| `test_kiss_sidm_scalings.py` | Legacy: uncategorized (pre-v40) |
-| `test_lz_magnetic_moment.py` | Legacy: uncategorized (pre-v40) |
-| `test_nc_nf_scan.py` | Legacy: uncategorized (pre-v40) |
-| `test_pandax_magnetic_moment_real.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase11_majorana_freeze_out.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase12_sigma_m_drop_mystery.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase13_mediator_mass_survey.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase14_mphi_comparison.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase15_16_17_probes.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase18_mchi_comparison.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase19_full_fit_mchi_5GeV.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase20_full_space_conditions.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase21_t90_45_multi_portal.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase22_reviewer_driven_refit.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase23_cloud9_nuisance.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase24_25_sparc_euclid.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase27_three_portal.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase28_resonant.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase29_full_resonant.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase29b_full_scorecard.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase30_critical_review.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase31a_three_tests.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase31bc_remaining_tests.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase32a_multi_resonant.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase32b_joint_fit.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase32c_all_tests.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase33a_bayes_factor.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase33bc_external_probes.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase33d_real_sparc.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase34a_jvas_lensing.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase36_concentration_collapse.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase38_sidmkit_crosscheck.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase39_nfw_vs_sidm.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase40_corrected_comparison.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase41_extended_comparison.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase41d_parametric_sidm.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase51_smoke.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase52_smoke.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase53_v2_smoke.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase7a_composite_mediator.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase7b_magnetic_moment.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase7c_di_mauro.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase7d_t95_stream.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase8a_exothermic.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase8b_majorana.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase8c_majorana_joint_fit.py` | Legacy: uncategorized (pre-v40) |
-| `test_phase9b_mass_segregation.py` | Legacy: uncategorized (pre-v40) |
-| `test_physical_constraints.py` | Legacy: uncategorized (pre-v40) |
-| `test_physical_invariants.py` | Legacy: uncategorized (pre-v40) |
-| `test_r88_gravothermal_prefactor.py` | Legacy: uncategorized (pre-v40) |
-| `test_solar_8b_cevns_real_data.py` | Legacy: uncategorized (pre-v40) |
-| `test_t101_t102_portal_b.py` | Legacy: uncategorized (pre-v40) |
-| `test_t103_joint_4d_fit.py` | Legacy: uncategorized (pre-v40) |
-| `test_t105_uv_consistency.py` | Legacy: uncategorized (pre-v40) |
-| `test_t106_multi_experiment_joint.py` | Legacy: uncategorized (pre-v40) |
-| `test_t107_full_8d_joint.py` | Legacy: uncategorized (pre-v40) |
-| `test_t108_full_8d_dynesty.py` | Legacy: uncategorized (pre-v40) |
-| `test_t110_full_7d_dynesty.py` | Legacy: uncategorized (pre-v40) |
-| `test_t111_multicomponent_dm.py` | Legacy: uncategorized (pre-v40) |
-| `test_t112_t113_t114.py` | Legacy: uncategorized (pre-v40) |
-| `test_t115_sequential_confirmation.py` | Legacy: uncategorized (pre-v40) |
-| `test_t116_sequential_t90_value.py` | Legacy: uncategorized (pre-v40) |
-| `test_t120_10_direct_detection.py` | Legacy: uncategorized (pre-v40) |
-| `test_t120_16_kinematic_threshold.py` | Legacy: uncategorized (pre-v40) |
-| `test_t120_9_mcmc_and_uv.py` | Legacy: uncategorized (pre-v40) |
-| `test_t120_two_component_phase44.py` | Legacy: uncategorized (pre-v40) |
-| `test_t17_kiss_sidm_corrected_fit.py` | Legacy: uncategorized (pre-v40) |
-| `test_t191_t194_uv_completion.py` | Legacy: uncategorized (pre-v40) |
-| `test_t21_real_kiss_sidm.py` | Legacy: uncategorized (pre-v40) |
-| `test_t22_t23_real_kiss_sidm.py` | Legacy: uncategorized (pre-v40) |
-| `test_t24_t25_systematics.py` | Legacy: uncategorized (pre-v40) |
-| `test_t26_t27_t28_systematics.py` | Legacy: uncategorized (pre-v40) |
-| `test_t29_beta_seg.py` | Legacy: uncategorized (pre-v40) |
-| `test_t30_lz_real.py` | Legacy: uncategorized (pre-v40) |
-| `test_t31_halo_mass.py` | Legacy: uncategorized (pre-v40) |
-| `test_t32_fermi.py` | Legacy: uncategorized (pre-v40) |
-| `test_t36_sashimi_config_matrix.py` | Legacy: uncategorized (pre-v40) |
-| `test_t37_beta_seg_robustness.py` | Legacy: uncategorized (pre-v40) |
-| `test_t38_dwarf_kiss_sidm.py` | Legacy: uncategorized (pre-v40) |
-| `test_t39_prior_robustness.py` | Legacy: uncategorized (pre-v40) |
-| `test_t39_tier3_epsilon_alpha.py` | Legacy: uncategorized (pre-v40) |
-| `test_t40_t41_t42.py` | Legacy: uncategorized (pre-v40) |
-| `test_t43_t44_t45.py` | Legacy: uncategorized (pre-v40) |
-| `test_t46_sommerfeld.py` | Legacy: uncategorized (pre-v40) |
-| `test_t47_t48_t49.py` | Legacy: uncategorized (pre-v40) |
-| `test_t50_t51_t52.py` | Legacy: uncategorized (pre-v40) |
-| `test_t53_t54_t55.py` | Legacy: uncategorized (pre-v40) |
-| `test_t53b_lattice_input.py` | Legacy: uncategorized (pre-v40) |
-| `test_t55_wimp_relic_calibration.py` | Legacy: uncategorized (pre-v40) |
-| `test_t56_t57_t58_t59.py` | Legacy: uncategorized (pre-v40) |
-| `test_t57_dwarf_dsmc.py` | Legacy: uncategorized (pre-v40) |
-| `test_t60_t61_t62_t63.py` | Legacy: uncategorized (pre-v40) |
-| `test_t64_t65_t66_t67.py` | Legacy: uncategorized (pre-v40) |
-| `test_t68_cross_validation.py` | Legacy: uncategorized (pre-v40) |
-| `test_t69_feedback_nuisance.py` | Legacy: uncategorized (pre-v40) |
-| `test_t69_t70_t71_t72.py` | Legacy: uncategorized (pre-v40) |
-| `test_t73_t74_t75_t76.py` | Legacy: uncategorized (pre-v40) |
-| `test_t82_audit_readme_drift.py` | Legacy: uncategorized (pre-v40) |
-| `test_t83_ksfr_lattice_promotion.py` | Legacy: uncategorized (pre-v40) |
-| `test_t84_rho_sensitivity.py` | Legacy: uncategorized (pre-v40) |
-| `test_t90_v10_cross_detector.py` | Legacy: uncategorized (pre-v40) |
-| `test_t90_v11_v12_v13.py` | Legacy: uncategorized (pre-v40) |
-| `test_t90_v14_calibrated.py` | Legacy: uncategorized (pre-v40) |
-| `test_t90_v15_indirect_signals.py` | Legacy: uncategorized (pre-v40) |
-| `test_t90_v16_uv_completion.py` | Legacy: uncategorized (pre-v40) |
-| `test_t90_v17_lz_time_series.py` | Legacy: uncategorized (pre-v40) |
-| `test_t90_v18_composite_dm_lattice.py` | Legacy: uncategorized (pre-v40) |
-| `test_t90_v21_lz_mixture.py` | Legacy: uncategorized (pre-v40) |
-| `test_t90_v22_master_recalibration.py` | Legacy: uncategorized (pre-v40) |
-| `test_t90_v23_dry_run.py` | Legacy: uncategorized (pre-v40) |
-| `test_t90_v24_pandax_fold.py` | Legacy: uncategorized (pre-v40) |
-| `test_t90_v25_pandax_efficiency_background_fold.py` | Legacy: uncategorized (pre-v40) |
-| `test_t90_v25_pandax_public_response.py` | Legacy: uncategorized (pre-v40) |
-| `test_t90_v26_pandax_event_scorecard.py` | Legacy: uncategorized (pre-v40) |
-| `test_t90_v27_relhic.py` | Legacy: uncategorized (pre-v40) |
-| `test_t90_v28_relhic.py` | Legacy: uncategorized (pre-v40) |
-| `test_t90_v29_relhic_yukawa.py` | Legacy: uncategorized (pre-v40) |
-| `test_t90_v32_relhic_population.py` | Legacy: uncategorized (pre-v40) |
-| `test_t90_v35_v36_v37.py` | Legacy: uncategorized (pre-v40) |
-| `test_t90_v38_vdep_correction.py` | Legacy: uncategorized (pre-v40) |
-| `test_t90_v41_vdep_channels.py` | Legacy: uncategorized (pre-v40) |
-| `test_t90_v42_loo_profiling.py` | Legacy: uncategorized (pre-v40) |
-| `test_t90_v44_multi_portal.py` | Legacy: uncategorized (pre-v40) |
-| `test_t90_v45_multi_portal_joint_fit.py` | Legacy: uncategorized (pre-v40) |
-| `test_t90_v46_multi_component_sidm.py` | Legacy: uncategorized (pre-v40) |
-| `test_t90_v47_gravothermal_fluid.py` | Legacy: uncategorized (pre-v40) |
-| `test_t90_v48_parameter_scan.py` | Legacy: uncategorized (pre-v40) |
-| `test_t90_v49_inelastic_sidm.py` | Legacy: uncategorized (pre-v40) |
-| `test_t90_v50_resonant_sidm.py` | Legacy: uncategorized (pre-v40) |
-| `test_t90_v51_resonant_joint_fit.py` | Legacy: uncategorized (pre-v40) |
-| `test_t90_v52_likecompare.py` | Legacy: uncategorized (pre-v40) |
-| `test_t90_v54_hybrid_sigma_m.py` | Legacy: uncategorized (pre-v40) |
-| `test_t90_v55_hybrid_joint_fit.py` | Legacy: uncategorized (pre-v40) |
-| `test_t90_v56_hybrid_lz.py` | Legacy: uncategorized (pre-v40) |
-| `test_t90_v57_hybrid_ksfr.py` | Legacy: uncategorized (pre-v40) |
-| `test_t90_v58_ablation.py` | Legacy: uncategorized (pre-v40) |
-| `test_t90_v61_kahlhoefer_audit.py` | Legacy: uncategorized (pre-v40) |
-| `test_t90_v63_lrd_channel.py` | Legacy: uncategorized (pre-v40) |
-| `test_t95_two_component_sidm_yang2026.py` | Legacy: uncategorized (pre-v40) |
-| `test_t95_v11_gaia_cross_match.py` | Legacy: uncategorized (pre-v40) |
-| `test_t95_v12_gmm_cross_match.py` | Legacy: uncategorized (pre-v40) |
-| `test_t95_v14_chemodynamic.py` | Legacy: uncategorized (pre-v40) |
-| `test_t95_v23_two_component_sidm_gravothermal.py` | Legacy: uncategorized (pre-v40) |
-| `test_t95_v24_multi_stream_analysis.py` | Legacy: uncategorized (pre-v40) |
-| `test_t95_v25_multi_stream_real_galstreams.py` | Legacy: uncategorized (pre-v40) |
-| `test_t95_v26_pilot_113_streams.py` | Legacy: uncategorized (pre-v40) |
-| `test_t98_di_mauro_cross_check.py` | Legacy: uncategorized (pre-v40) |
-| `test_two_component_sidm.py` | Legacy: uncategorized (pre-v40) |
-| `test_unit_conversion.py` | Legacy: uncategorized (pre-v40) |
-| `test_xrism_perseus_icm_forward_model.py` | Legacy: uncategorized (pre-v40) |
-| `test_xrism_phi_decay_forward_model.py` | Legacy: uncategorized (pre-v40) |
-| `test_yang2026_likelihood.py` | Legacy: uncategorized (pre-v40) |
-| `test_zhang_lss_channel.py` | Legacy: uncategorized (pre-v40) |
-| `test_known_physics_limits.py` | v40 core: Known physics limits |
-| `test_ohana2026_baseline.py` | v40 core: Ohana 2026 baseline |
-| `test_paper_claims.py` | v40 core: Paper claims |
-| `test_tucana_ii_sigma_v.py` | v40 core: Tucana II σ_v |
-| `test_v19_2_f_cloud9_cM_negative.py` | v40 scripts |
-| `test_v40_41_fH_sensitivity.py` | v40-era |
-| `test_v40_42_elbert_c_tau.py` | v40.42 Elbert c-τ |
-| `test_v40_43_marginalization.py` | v40.43 marginalization |
-| `test_v40_43a_three_prescriptions.py` | v40.43a three prescriptions |
-| `test_v40_44_merger_history.py` | v40.44 merger history |
-| `test_v40_45_velocity_form.py` | v40.45 velocity form |
-| `test_v40_46_no_peak.py` | v40.46 no-peak |
-| `test_v40_47_fornax_no_peak.py` | v40.47 Fornax no-peak |
-| `test_v40_48_background_refit.py` | v40.48 background refit |
-| `test_v40_49_multiscale_refit.py` | v40.49 multiscale refit |
-| `test_v40_50_paper_section_2_1_update.py` | v40.50 §2.1 update |
-| `test_v40_51_paper_section_2_1_ranges.py` | v40.51 ranges fix |
-| `test_v40_52_n7_docx_response.py` | v40.52 n7 response |
-| `test_v40_53_n8_docx_response.py` | v40.53 n8 response |
-| `test_v40_54_n9_docx_response.py` | v40.54 n9 response |
-| `test_v40_55_n10_docx_response.py` | v40.55 n10 response |
-| `test_v40_56_n11_docx_response.py` | v40.56 n11 response |
-| `test_v40_57_n12_docx_response.py` | v40.57 n12 response |
-| `test_v40_58_n13_docx_response.py` | v40.58 n13 response |
-| `test_v40_61_n14_docx_response.py` | v40.61 n14 response |
-| `test_v40_62_n15_docx_response.py` | v40.62 n15 response |
-
-Total: 215 test files across 42 suites.
-NOTE: 174 legacy pre-v40 files are grouped under 'Legacy: uncategorized (pre-v40)' (no suite tag). They are listed above so the catch-all is explicit, not silent.
-
-**Summary: 215 test files across 42 suites.**
-**Note:** n13.docx reviewer's filename `SIDM_V40_51_FULL_REVIEW_REPORT_2026_10_19_(6).md` confirms they reviewed the v40.57-updated version. v40.58 patches the same file in place.
+print(f"\nTotal: {len(files)} test files across {len(suites)} suites.")
+_legacy_n = len(suites.get(UNCATEGORIZED, []))
+if _legacy_n:
+    print(f"NOTE: {_legacy_n} legacy pre-v40 files are grouped under "
+          f"'{UNCATEGORIZED}' (no suite tag). They are listed above so the "
+          f"catch-all is explicit, not silent.")
+```
 
 ### 17.9 Sameie+ 2020 implementation physical reasonableness audit (v40.59 — n13.docx Item 1)
 
@@ -668,7 +549,7 @@ The first v40.59 commit shipped the **smoke** values because the verification ru
 `scripts/verify_release_gate.py` L2 timeout raised 600 s → 1800 s (the suite needs 1149 s, so the old timeout was a guaranteed hang), and 13 legacy test files excluded with documented rationale. Full gate result:
 
 ```
-1855 passed, 22 skipped, 33 deselected, 3 warnings in 1123.26s (0:18:43)
+1877 passed, 22 skipped, 33 deselected, 3 warnings in 1108.62s (0:18:28)
 
   [PASS] audit_units.py
   [PASS] pytest
@@ -999,16 +880,16 @@ if __name__ == "__main__":
 
 ---
 
-## 6. Reviews (all 30 rounds: 9× 120B + 6× 550B COMPLETE + 5× 550B DEFERRED + 10× human)
+## 6. Reviews (all 31 rounds: 9× 120B + 6× 550B COMPLETE + 5× 550B DEFERRED + 11× human)
 
-**Counting rule (v40.61, n14.docx Item 2; extended v40.62, n15.docx Item 2 — made explicit to stop drift):** a "review round" = one Nemotron or human review **completed** for one version. A human round counts as completed once the report version **responding to it** is committed — so **n15.docx counts in v40.62**, which is the version that responds to it. The 5 DEFERRED 550B rounds (v40.54–v40.58) are counted separately because they never completed (OpenRouter API timeout) and produced no verdict.
+**Counting rule (v40.61, n14.docx Item 2; extended v40.62, n15.docx Item 2; extended again v40.63, n16.docx — made explicit to stop drift):** a "review round" = one Nemotron or human review **completed** for one version. A human round counts as completed once the report version **responding to it** is committed — so **n15.docx counts in v40.62** and **n16.docx counts in v40.63**, each in the version that responds to it. The 5 DEFERRED 550B rounds (v40.54–v40.58) are counted separately because they never completed (OpenRouter API timeout) and produced no verdict.
 
 | Reviewer | Rounds | Versions | Evidence |
 |---|---|---|---|
 | Nemotron 3 Super 120B | 9 | v40.40–v40.47 (incl. v40.43a) | 9 `docs/NEMOTRON_120B_REVIEW_*.md` files |
 | Nemotron 3 Ultra 550B (COMPLETE) | 6 | v40.48–v40.53 | 3 review docs (v40.48/49/50) + commit-message verdicts (v40.51/52/53) |
 | Nemotron 3 Ultra 550B (DEFERRED) | 5 | v40.54–v40.58 | commit messages: "DEFERRED (OpenRouter API timeout)" — no verdict produced |
-| Human (n6.docx–n15.docx) | 10 | v40.50–v40.62 | `docs/REVIEW_N6_V40_51_FIX.md`, `docs/REVIEW_N7_V40_52_FIX.md`, §17–§19 of this report |
+| Human (n6.docx–n16.docx) | 11 | v40.50–v40.63 | `docs/REVIEW_N6_V40_51_FIX.md`, `docs/REVIEW_N7_V40_52_FIX.md`, §17–§20 of this report |
 
 *v40.61 note (self-found, same family as n14 Item 2):* the v40.59 header said "all 13: 7× 120B + 5× 550B + 1× human n6.docx" — wrong on all three terms and stale by 15 rounds. Corrected here against the on-disk review documents and the commit-message verdict trail.
 
@@ -1096,7 +977,7 @@ The 71% partial robustness is the framework's **TESTABLE PREDICTION**:
 - **Final tag:** `v40.59-DefectsEFG12`
 - **Repository:** github.com/chenhk1113-HK/sidm-composite-dm-mediator
 
-### 8.2 Code structure (215 test files across 42 suites; 1855 passed) [v40.62 update]
+### 8.2 Code structure (216 test files across 42 suites; 1877 passed) [v40.63 update]
 
 ```
 scripts/
@@ -1124,7 +1005,7 @@ scripts/
 
 sameie2020_implementation_audit.md  (v40.59 — Defect F1 audit)
 
-v0.3-prelim/tests/  (215 test files, 42 suites; 1855 passed, 22 skipped, 33 deselected)  [v40.62 update]
+v0.3-prelim/tests/  (216 test files, 42 suites; 1877 passed, 22 skipped, 33 deselected)  [v40.63 update]
 ├── test_v40_41_fH_sensitivity.py
 ├── test_v40_42_elbert_c_tau.py
 ├── test_v40_43_marginalization.py
@@ -1174,7 +1055,7 @@ python -m pytest v0.3-prelim/tests/
 **Expected (v40.61, n14.docx Item 3 — corrected):** the **full** suite is
 
 ```
-1855 passed, 22 skipped, 33 deselected, 3 warnings in 1123.26s (0:18:43)
+1877 passed, 22 skipped, 33 deselected, 3 warnings in 1108.62s (0:18:28)
 ```
 
 That is the number quoted in the report header and in §8.2, and it is what `scripts/verify_release_gate.py` produces (L2 layer; the 33 deselected come from the `-k` filter for the pre-v40 T131–T135/T220 tolerance-boundary tests).
@@ -1224,7 +1105,7 @@ python scripts/v19_2_f_paper_section_2_1_update.py
 - The 71% partial robustness is a **testable prediction** for future surveys
 - The framework's passing region is a **RANGE** (not a single point), documented and reproducible
 - The v40.51 bug fix (per n6.docx review) ensures the documented ranges MATCH the data
-- The investigation (**24 sequential versions**, v40.39 → v40.62; **25 arc rows** counting the v40.43a sub-version — see the §2 counting rule; **30 review rounds**; **1,855 tests**) was **methodically executed** with R88(68)/(71) gates
+- The investigation (**25 sequential versions**, v40.39 → v40.63; **26 arc rows** counting the v40.43a sub-version — see the §2 counting rule; **31 review rounds**; **1,877 tests**) was **methodically executed** with R88(68)/(71) gates
 
 *v40.62 note (n15.docx Item 1, MED-HIGH):* the v40.61 version of this line read *"The investigation (14 versions, 13 reviews, 92 tests) was methodically executed"* — counts from the v40.51 era that were never updated. Every one of the three numbers contradicted the rest of the report (title "23-version", §2 arc table 24 rows, header "28 review rounds", §8.2 "214 test files / 1836 passed"). Now updated to the current values and, like §8.3, the exact scope is stated.
 
@@ -1235,8 +1116,22 @@ python scripts/v19_2_f_paper_section_2_1_update.py
 - The 4/14 failing combinations at MW v=10 are an OPEN ISSUE — pending future observations
 - The 9 lower-severity n6.docx issues are DEFERRED to v40.52 (per Nemotron 550B: "avoid scope creep")
 - **The c-M tension is PRIOR-SENSITIVE, not likelihood-sensitive (v40.62, n15.docx Item 4, MED).** Reading the Ohana+ 2026 paper body (v40.61 §16.5) surfaces its own central caveat: *"the fit loses sensitivity to c₂₀₀ once the core is large enough to encompass the data (Eq. 7 has no c₂₀₀ dependence in that limit)" — so the paper's concentration constraint comes **almost entirely from the cosmological c-M prior**, not from the H I likelihood. **Consequence for this project:** comparing our inferred c₂₀₀ against Ohana+ 2026's is comparing *our prior against their prior*, not *our prediction against their data*. The "tension" therefore reflects **prior-choice sensitivity** (which cosmological c-M relation, which scatter, which mass) at least as much as it reflects a model failure. The framework's honest position is: **the tension is a statement about priors, not a measurement of the model.** This does not weaken the framework's own downgraded claims — it *sharpens* them: it is not evidence that the SIDM model fails, and it is not evidence that it succeeds.
-- **The σ-scale of every c-M tension value is set by an assumed scatter (v40.62, n15.docx Item 8, MED-LOW).** All quoted σ values (ours and Ohana+ 2026's) convert a logarithmic concentration offset into σ using an assumed scatter: **0.16 dex (Diemer & Joyce 2019)** for Ohana+, and the project's own assumed scatter in `c_M_tension_sigma()`. Because the conversion is linear in `log(c_offset)`, **σ scales as 1/scatter**: a 0.20 dex scatter would shrink every quoted σ by 20%, a 0.12 dex scatter would inflate every one by 33%. The **sign** of the tension is robust to this choice; the **magnitude** is not. Any comparison of σ values across papers with different scatter assumptions is therefore only valid at the sign level unless the scatter is matched. **This is an additional, un-modelled source of uncertainty in the marginalization weights** — of the same kind as the Sameie+ extrapolation uncertainty (§1 caveat 2) and the same kind of prior-sensitivity as the limitation above.
+- **The σ-scale of every c-M tension value is set by an assumed scatter (v40.62, n15.docx Item 8, MED-LOW; QUANTIFIED v40.63 per n16.docx Item 8).** All quoted σ values (ours and Ohana+ 2026's) convert a logarithmic concentration offset into σ using an assumed scatter: **0.16 dex (Diemer & Joyce 2019)** for Ohana+, and the project's own assumed scatter in `c_M_tension_sigma()`. Because the conversion is linear in `log(c_offset)`, **σ scales as 1/scatter**: a 0.20 dex scatter would shrink every quoted σ by 20%, a 0.12 dex scatter would inflate every one by 33%. The **sign** of the tension is robust to this choice; the **magnitude** is not. Any comparison of σ values across papers with different scatter assumptions is therefore only valid at the sign level unless the scatter is matched. **This is an additional, un-modelled source of uncertainty in the marginalization weights** — of the same kind as the Sameie+ extrapolation uncertainty (§1 caveat 3) and the same kind of prior-sensitivity as the limitation above.
+
+  **Quantification (v40.63, n16.docx Item 8).** n16.docx proposed that this scatter range could make the +0.62 σ signal "completely vanish". **It does not, and the reason is structural rather than accidental.** Because σ scales as 1/scatter **uniformly** across all branches, the mean *and* the standard error rescale together, so the CI lower bound stays proportional to the mean. Recomputed at five scatter values:
+
+  | scatter (dex) | scale | 2-branch mean | SE | 95% CI (z) | excludes 0? |
+  |---|---|---|---|---|---|
+  | 0.08 | ×2.000 | +1.25 σ | 0.61 σ | (+0.05, +2.45) σ | yes |
+  | 0.12 | ×1.333 | +0.83 σ | 0.41 σ | (+0.04, +1.63) σ | yes |
+  | **0.16 (fiducial)** | **×1.000** | **+0.62 σ** | **0.30 σ** | **(+0.03, +1.22) σ** | **yes** |
+  | 0.20 | ×0.800 | +0.50 σ | 0.24 σ | (+0.02, +0.98) σ | yes |
+  | 0.24 | ×0.667 | +0.42 σ | 0.20 σ | (+0.02, +0.82) σ | yes |
+
+  So the scatter assumption moves the **magnitude** over a factor ~3 (from +1.25 σ down to +0.42 σ) but never the **sign**, and it does not change the CI-excludes-zero verdict — which fails for the entirely different reason documented in §13.2 (the required t-distribution at n = 2). **The reason the tension is not statistically significant is the sample size, not the scatter.** This is a correction to n16's proposed mechanism, and it matters for how the limitation should be read: the scatter uncertainty is a *magnitude* uncertainty, and the significance problem is a *sampling* problem.
 - **The Sameie+ branch's weight in the 3-branch marginalization is a judgement call, not a measurement (v40.62, n15.docx Item 3, MED).** See §13.2 — the 2-branch anchored-only marginalization is now reported as the quantitative result, and the 3-branch number is explicitly a worst-case-coverage envelope.
+- **No c-M tension value in this report is statistically significant (v40.63, n16.docx Item 8 audit, MED — the substantive correction of this round).** The confidence intervals quoted for every branch set were computed with the **normal approximation** (z = 1.96) on samples of n = 2 and n = 3 whose variance is **estimated from the data**. The **t-distribution** is required there. With the correct critical value — t(0.975, df = 1) = 12.706 for the 2-branch set, t(0.975, df = 2) = 4.303 for the 3-branch sets — **every CI includes zero**: 2-branch (-3.25, +4.50) σ, 3-branch Bayesian (-0.18, +0.83) σ, 3-branch equal-weight (-2.90, +2.86) σ. **Consequence for the framework's claims:** the c-M tension is a **magnitude** (+0.62 σ over the anchored branches, robust in sign to the scatter assumption) and **not a detection**. Nothing else in the framework's final-downgrade framing changes — the framework was already downgraded — but any citation of this report must not present the tension as statistically established. This is a **statistical-convention error in the reporting**, not a change to the underlying physics: the tension values themselves (+0.32, +0.93, -1.31 σ) are unchanged and independently sourced.
+- **The branch set is selected on agreement, and the selection is disclosed rather than corrected (v40.63, n16.docx Item 7, MED).** "2-branch anchored" is **1 paper-anchored branch (Elbert+ 2015, Eq. 5) + 1 project prescription (Burkert-style)**. The branch that disagrees with the other two on sign (Sameie+) is the one excluded for being unanchored — but Burkert-style is unanchored too and is retained. There is no defensible rule that excludes Sameie+ and keeps Burkert-style on anchoring grounds alone; the honest options are (a) report the 2-branch result *with* the selection disclosed, or (b) report only the 1-branch Elbert+ value (+0.32 σ, with no computable CI at n = 1). **v40.63 takes option (a)** and keeps the 3-branch envelope visible alongside it, because option (b) would hide the sign-flip possibility that the 3-branch number exists to reveal.
 
 ### 9.4 R88(71) Pre-claim Checklist (for v40.51 "bug fix")
 
@@ -1354,7 +1249,7 @@ mean = statistics.mean(tensions)  # -0.02 sigma
 std = statistics.stdev(tensions)   # 1.16 sigma
 ```
 
-**Result:** c-M tension = **−0.02 ± 1.16 σ** (equal-weight marginalization). The signal is INDISTINGUISHABLE FROM ZERO within 1σ.
+**Result:** c-M tension = **-0.02 ± 1.16 σ** (equal-weight marginalization). The signal is INDISTINGUISHABLE FROM ZERO within 1σ.
 
 **Interpretation:** The framework's c-M tension prediction is **NOT robust** to prescription choice. Future c-M tension surveys must marginalize over multiple c-τ prescriptions. The framework should NOT be cited as "predicting" a specific c-M tension sign without specifying the prescription used.
 
@@ -1427,21 +1322,54 @@ Per n9.docx Issue #2: equal-weight assumption lacks justification; n=3 sample si
 
 **v40.62 revision (n15.docx Item 3, MED):** the v40.59 audit established that the Sameie+ branch is a **QUALITATIVE SIGN-FLIP TEST ONLY** — its quantitative prescription is not derived from the paper and its implementation has a sign-flip bug (§4.10). Giving it **1/3 equal weight in a quantitative marginalization** is therefore methodologically inconsistent: it mixes a calibrated branch with an uncalibrated one. v40.62 now computes the marginalization over **only the quantitatively-anchored branches** and reclassifies the 3-branch number as a **worst-case-coverage envelope**.
 
-| Branch set | Mean | SE | 95% CI | CI excludes 0? | Role |
+**v40.63 revision (n16.docx Item 8 audit, MED — the substantive change):** the CIs above used the **normal approximation** (z = 1.96) on samples whose variance is **estimated from the data**. That requires the **t-distribution**. The point estimates are unaffected — the sign and magnitude of the tension do not depend on the CI convention — but the **statistical-significance claim was wrong**, and it was the headline of v40.62.
+
+| Branch set | Mean | SE | 95% CI (t — correct) | CI excludes 0? | 95% CI (z — anti-conservative, as shipped in v40.62) | Role |
+|---|---|---|---|---|---|---|
+| **2-branch anchored only** (Elbert+ 2015, Burkert-style) | **+0.62 σ** | 0.30 σ | **(-3.25, +4.50) σ** [t(0.975, df=1) = 12.706] | **no** | (+0.03, +1.22) σ | **THE QUANTITATIVE RESULT** |
+| 3-branch equal-weight (incl. Sameie+) | -0.02 σ | 0.67 σ | (-2.90, +2.86) σ [t(0.975, df=2) = 4.303] | no | (-1.33, +1.29) σ | worst-case coverage envelope |
+| 3-branch Bayesian (inverse-variance) | +0.33 σ | 0.12 σ | (-0.18, +0.83) σ [t(0.975, df=2) = 4.303] | no | (+0.10, +0.56) σ | alternative weighting |
+
+**Under correct small-n inference, NO branch set and NO weighting scheme produces a 95% CI that excludes zero.** The v40.62 headline *"2-branch anchored: 95% CI (+0.03, +1.22) σ — CI EXCLUDES ZERO (marginally)"* was an artefact of applying z = 1.96 at n = 2, where the correct critical value is t(0.975, df = 1) = 12.706. Verified against `scipy.stats.t.ppf` in the v40.63 regression test.
+
+**What survives, and what does not:**
+
+- **The magnitude survives.** The 2-branch point estimate is **+0.62 σ**, and it is robust to the scatter assumption (see below) and to the choice of weighting. The framework **over-predicts c₂₀₀** relative to the cosmological median by roughly +0.6 σ. That is a statement about the *size* of the disagreement, and it is the honest headline.
+- **The significance does not survive.** At n = 2 (2-branch) and n = 3 (3-branch) with an estimated variance, the confidence interval is wide enough to include zero in every case. **The tension must be reported as a magnitude with an explicit uncertainty, never as a detection.**
+
+**Scatter sensitivity (n16.docx Item 8 — the reviewer's proposed mechanism does not apply, and here is why).** n16 suggested that the 0.12–0.20 dex scatter range could make the +0.62 σ signal "completely vanish". **It does not, and the reason is structural:** σ scales as 1/scatter, but it does so **uniformly** across all branches, so the mean *and* the standard error rescale together and the CI lower bound stays proportional to the mean. Recomputed at five scatter values:
+
+| scatter (dex) | scale factor | mean | SE | 95% CI (z) | excludes 0? |
 |---|---|---|---|---|---|
-| **2-branch anchored only** (Elbert+ 2015, Burkert-style) | **+0.62 σ** | 0.30 σ | **(+0.03, +1.22) σ** | **YES** | **THE QUANTITATIVE RESULT** |
-| 3-branch equal-weight (incl. Sameie+) | -0.02 σ | 0.67 σ | (-1.33, +1.29) σ | no | worst-case coverage envelope |
-| 3-branch Bayesian (inverse-variance) | +0.33 σ | 0.12 σ | (+0.10, +0.56) σ | yes | alternative weighting |
+| 0.08 | ×2.000 | +1.25 σ | 0.61 σ | (+0.05, +2.45) σ | yes |
+| 0.12 | ×1.333 | +0.83 σ | 0.41 σ | (+0.04, +1.63) σ | yes |
+| **0.16 (fiducial)** | **×1.000** | **+0.62 σ** | **0.30 σ** | **(+0.03, +1.22) σ** | **yes** |
+| 0.20 | ×0.800 | +0.50 σ | 0.24 σ | (+0.02, +0.98) σ | yes |
+| 0.24 | ×0.667 | +0.42 σ | 0.20 σ | (+0.02, +0.82) σ | yes |
+
+So the scatter assumption changes the **magnitude** of the tension (from +1.25 σ down to +0.42 σ over that range) but never its **sign**, and it does not change the CI-excludes-zero verdict (which fails for the unrelated n = 2 reason above). **The problem with the signal is the sample size, not the scatter.** This corrects n16's Item 8 mechanism, and it is the reason §9.3's scatter limitation is stated as a magnitude-uncertainty rather than a significance-uncertainty.
+
+**Selection bias in the branch selection (n16.docx Item 7, MED).** The branch set is called "2-branch anchored", but §5.4's own `quantitative_status` fields say:
+
+| branch | `quantitative_status` | paper-anchored? |
+|---|---|---|
+| Elbert+ 2015 | `anchored to paper Eq. 5` | **yes** |
+| Burkert-style | `project prescription, not paper-derived` | **no** |
+| Sameie+ 2020 | `QUALITATIVE SIGN-FLIP TEST ONLY - not quantitatively validated` | **no** |
+
+So "2-branch anchored" more precisely means **"1 paper-anchored + 1 project prescription"**. Excluding Sameie+ for being unanchored while retaining Burkert-style — which the report itself labels unanchored — is a **selection bias**: the two retained branches are the two that **agree in sign**, and the excluded branch is the one that disagrees. That is precisely why the 3-branch number must be kept as the **coverage envelope** rather than discarded, and why the 2-branch number must be reported as a magnitude with its selection disclosed rather than as the settled answer. The report's own §5.4 labelling is the source of the tension; v40.63 states it rather than smoothing it over.
 
 **What each number means:**
 
-- **2-branch anchored only (+0.62 σ, CI +0.03 to +1.22):** the quantitative answer. Over the two prescriptions that are anchored to a published c-τ relation, the Cloud-9 c-M tension is **positive and mild** — i.e. the framework **over-predicts c₂₀₀** relative to the cosmological median, by +0.62 σ, with the CI just excluding zero. Note the CI **lower bound (+0.03) nearly touches zero** — this is a *marginal* exclusion, not a strong detection, and it is fragile to the assumed scatter (§9.3).
+- **2-branch anchored only (+0.62 σ):** the quantitative answer. Over the two prescriptions that are *closest* to anchored (see the selection-bias table above), the Cloud-9 c-M tension is **positive and mild** — i.e. the framework **over-predicts c₂₀₀** relative to the cosmological median, by +0.62 σ. **This is a magnitude, not a detection.** The v40.62 version of this bullet claimed the CI "just excludes zero"; v40.63 corrects that — under the required t-distribution at n = 2 the CI is (-3.25, +4.50) σ and **includes** zero. What is robust is the sign and the order of magnitude; what is not established is statistical significance.
 - **3-branch equal-weight (-0.02 σ, CI -1.33 to +1.29):** the **worst-case coverage** envelope. It answers *"can any prescription flip the sign?"* — yes, the Sameie+ branch does. It does **not** answer *"what is the tension?"*, because one of its three members is not a calibrated model. **This is why the -0.02 σ must not be read as "the tension is zero".**
-- **3-branch Bayesian (+0.33 σ):** the inverse-variance weighting (Elbert 62%, Burkert 28%, Sameie 10%) already down-weights Sameie+ to 10% — but that down-weighting derives from an **assumed fit uncertainty** (σ_u = 0.50 for Sameie+), which is itself a judgement call for a branch with no empirical anchor. So this number is *not* independent evidence; it is the same judgement with a different arithmetic.
+- **3-branch Bayesian (+0.33 σ):** the inverse-variance weighting (Elbert 62%, Burkert 28%, Sameie 10%) already down-weights Sameie+ to 10% — but that down-weighting derives from an **assumed fit uncertainty** (σ_u = 0.50 for Sameie+), which is itself a judgement call for a branch with no empirical anchor. So this number is *not* independent evidence; it is the same judgement with a different arithmetic. Under the t-distribution its CI is (-0.18, +0.83) σ and also includes zero.
+
+**Provenance of the σ_u values (n16.docx Item 5, LOW-MED).** Only **Elbert's σ_u = 0.20** has a published basis (Elbert+ 2015's own quoted fit uncertainty). **Burkert's 0.30 and Sameie's 0.50 are ASSUMED by this project** — they are judgement calls about how well a project prescription and a qualitative sign-flip test constrain c₂₀₀. Since the Bayesian weights are w_i = 1/σ_u,i², two of the three weights rest on assumptions rather than on data. This is now documented in the script's docstring as well as here.
 
 **Bayesian weights** (Elbert 62%, Burkert 28%, Sameie 10%) favor Elbert+ 2015 (smallest fit uncertainty 0.20 σ).
 
-**Conclusion (revised v40.62):** The c-M tension signal **depends on prescription choice**, and specifically on **whether the unanchored Sameie+ branch is admitted as a quantitative input**. Admitting it (equal weight) → no signal. Excluding it (anchored only) → a marginal +0.62 σ signal. **The framework should NOT be cited as "predicting" a specific c-M tension sign without specifying (a) the branch set, (b) the weighting scheme, and (c) the assumed scatter** (§9.3).
+**Conclusion (revised v40.63):** The c-M tension **magnitude** depends on prescription choice: admitting the unanchored Sameie+ branch at equal weight gives -0.02 σ, excluding it gives +0.62 σ. The **sign** of the tension over the anchored branches is positive and robust to the scatter assumption. But under correct small-n inference **no branch set yields a statistically significant tension**, so the framework should NOT be cited as "predicting" a c-M tension, and must NOT be cited as detecting one. Any citation must specify (a) the branch set, (b) the weighting scheme, (c) the assumed scatter (§9.3), (d) that only one of the two retained branches is paper-anchored, and (e) the CI convention (t, not z).
 
 ### 13.3 σ_HL definition + f_H source (n9.docx Issue #3)
 
@@ -1653,10 +1581,10 @@ Per n11.docx Issue #3: "If f_H is a placeholder, the σ_HL 'unphysical' claim ne
 | 0.40 | 0.324 | +0.476 | POS | no |
 | 0.50 | 0.506 | +0.294 | POS | no |
 | 0.60 | 0.729 | +0.072 | POS | no |
-| **0.70** | **0.992** | **−0.192** | **NEG** | **YES** |
-| 0.80 | 1.295 | −0.495 | NEG | YES |
-| 0.90 | 1.639 | −0.839 | NEG | YES |
-| 1.00 | 2.024 | −1.224 | NEG | YES |
+| **0.70** | **0.992** | **-0.192** | **NEG** | **YES** |
+| 0.80 | 1.295 | -0.495 | NEG | YES |
+| 0.90 | 1.639 | -0.839 | NEG | YES |
+| 1.00 | 2.024 | -1.224 | NEG | YES |
 
 **Conclusion:** σ_HL is **unphysical (NEGATIVE)** for f_H ≥ 0.7. The v40.41 STRUCTURAL verdict (c-M tension INDEPENDENT of f_H) is preserved because all f_H ≥ 0.7 give unphysical σ_HL, and the framework's τ > 1 prediction (deep collapse) holds across all f_H in [0.3, 1.0] (v40.41 Nemotron 120B 2nd review).
 
@@ -1664,9 +1592,9 @@ Per n11.docx Issue #3: "If f_H is a placeholder, the σ_HL 'unphysical' claim ne
 
 ### 15.3 Prescription non-identifiability (n11.docx Issue #2)
 
-Per n11.docx MED-HIGH: equal-weight vs Bayesian weighting give contradictory conclusions (−0.02 vs +0.33 σ). n=3 prescription sample is too small to distinguish.
+Per n11.docx MED-HIGH: equal-weight vs Bayesian weighting give contradictory conclusions (-0.02 vs +0.33 σ). n=3 prescription sample is too small to distinguish.
 
-**Honest v40.56 framing:** The c-M tension prediction is **NON-IDENTIFIABLE** given prescription uncertainty. The 95% CI under prescription uncertainty is (−1.33, +1.29 σ). The framework should NOT cite a specific c-M tension sign without:
+**Honest v40.56 framing:** The c-M tension prediction is **NON-IDENTIFIABLE** given prescription uncertainty. The 95% CI under prescription uncertainty is (-1.33, +1.29 σ). The framework should NOT cite a specific c-M tension sign without:
 1. Specifying the prescription AND weighting scheme used, AND
 2. Acknowledging that with n=3 prescriptions, the result is non-identifiable.
 
@@ -3187,7 +3115,7 @@ The stale strings in §17.1 are now annotated as historical (*"as of v40.58; sup
 
 **Fix applied.** The inline comment is removed; the information is preserved as prose immediately below the block.
 
-**Extended by v40.61 — the same defect was found in a SECOND place, which the reviewer did not flag.** A new regression test (`test_all_json_blocks_in_report_are_strict_json`) parses **every** ```json fenced block in the report with `json.loads()`. It found:
+**Extended by v40.61 — the same defect was found in a SECOND place, which the reviewer did not flag.** A new regression test (`test_all_json_blocks_in_report_are_strict_json`) parses **every** `json`-fenced block in the report with `json.loads()`. It found:
 
 | Block | Section | Status |
 |---|---|---|
@@ -3441,9 +3369,148 @@ ALL GATES PASSED — safe to tag a new release.
 
 ---
 
+## 20. v40.63 (n16.docx Review Response — CI convention, anchoring disclosure, code-hygiene items)
+
+n16.docx is the **11th human review** (n6–n16) of the v40.62 report, written in Chinese. Verdict: v40.62 is a **substantive improvement** over v40.61 (version and test counts unified throughout, Sameie+ correctly relabelled a qualitative test, the 2-branch marginalization promoted to the primary quantitative result, the Ohana+ 2026 paper read and page-anchored, hard-coded literals removed, the scatter and prior-sensitivity limitations added, and the 19-test n15 regression suite embedded). **Eight items raised; all eight addressed. One self-found defect of HIGH importance surfaced in the process** — see §20.1.4.
+
+### 20.1 Action table — all 8 items + 1 self-found
+
+| # | Issue | Severity | Status | Where fixed |
+|---|---|---|---|---|
+| 1 | `collapse_time_gyr_implementation()` prints a wrong unit-conversion formula | MED | ✓ §20.1.1 | `scripts/v19_2_f_n9_docx_response.py` |
+| 2 | `generate_test_mapping.py` has a Windows hard-coded `TEST_DIR` | MED-LOW | ✓ §20.1.2 | `scripts/generate_test_mapping.py` |
+| 3 | `monte_carlo_71_percent()` is an analytic binomial, not a Monte Carlo | LOW-MED | ✓ §20.1.3 | `scripts/v19_2_f_n9_docx_response.py` |
+| 4 | §4.9 code listing is incomplete (omits imports + `TEST_DIR`) | LOW | ✓ §20.1.4 | report §4.9 |
+| 5 | Bayesian `sigma_u` provenance undocumented | LOW-MED | ✓ §20.1.5 | script docstring + report §13.2 |
+| 6 | `test_pdf_page_anchors_are_correct()` lacks a `pdftotext` availability check | LOW | ✓ §20.1.6 | `test_v40_62_n15_docx_response.py` |
+| 7 | Burkert-style "anchored" status is weaker than Elbert+ | MED | ✓ §20.1.7 | report §1 caveat 1, §13.2, §9.3 |
+| 8 | The +0.62 σ signal may vanish under scatter uncertainty | MED | ⚠ **premise corrected** — see §20.1.8 | report §13.2, §9.3 |
+| — | *(self-found)* The "CI EXCLUDES ZERO" headline used the **normal approximation at n = 2** | **HIGH** | ✓ §20.1.9 | report §1, §13.2, §9.3 + script |
+
+### 20.1.1 Item 1 [MED] — `collapse_time_gyr_implementation()` printed a stale v40.54 fabrication
+
+n16.docx Item 1 correctly identified that `scripts/v19_2_f_n9_docx_response.py::collapse_time_gyr_implementation()` prints a unit conversion that is off by ~10⁹⁵:
+
+```
+rho_s_si = rho_s * 1e9 * (3.086e19)**3  # M_sun/kpc^3 -> kg/m^3
+```
+
+The correct conversion is `rho_s * 1.989e30 / (3.086e19)**3` (verified: the printed form is 4.343 × 10⁹⁵ times too large). **The audit went further and found the printed block was the stale v40.54 fabrication in its entirety** — the same defect report §13.4 already fixed in v40.55. Four separate errors:
+
+| # | Defect in the printed block | Evidence |
+|---|---|---|
+| a | wrong unit conversion (≈10⁹⁵) | report §13.4 already lists this as v40.54 bug #1 |
+| b | names a **non-existent file**: `v19_2_f_gravothermal_yang2024.py` | the real file is `v0.3-prelim/code/gravothermal_yang2024.py` |
+| c | **inverted τ**: prints `tau = 0.35 / 13.8 = 16.4`; the project convention is `τ = T_Hubble / t_core`, and 0.35/13.8 = 0.0254, not 16.4 | report §13.4 already lists this as v40.54 bug #2 |
+| d | **wrong `t_core` values**: printed 0.35 Gyr and 0.0008 Gyr; the stored v40.46 JSON says **0.8411 Gyr** and **230.151 Gyr** | `v19_2_f_no_peak_analysis_2026_10_19.json` |
+| e | placeholder citation `arXiv:2405.XXXXX` | not a resolvable ID |
+
+**Fix (v40.63):** the print block now shows the **actual current implementation** from `v0.3-prelim/code/gravothermal_yang2024.py` — Yang+ 2024 eq. 2.2 with the R88(29)-calibrated prefactor `1.34e12`, `G` in kpc³/(M☉ Gyr²), and **no SI conversion at all** (the units are natively self-consistent) — plus the correct τ direction and the true `t_core` values from the stored JSON.
+
+**Root-cause note (the recurrence pattern):** the v40.54→v40.55 fix corrected the **report** but not the **script** that prints the code. The reviewer found the script because v40.62 shipped the changed scripts as a companion MD. **Shipping the code is what surfaced this.** Under the skill's "find the generator" rule: the generator here is a hand-copied code block, and the durable fix is to make the report's §4.9-style listings **generated from disk** — which v40.63 does for §4.9 (Item 4) so that listing can never drift again.
+
+### 20.1.2 Item 2 [MED-LOW] — cross-platform `TEST_DIR`
+
+`scripts/generate_test_mapping.py` hard-coded an absolute Windows path, which made the script unrunnable on Linux/macOS and contradicted the cross-platform run instructions in §8.3. Now derived from the file's own location:
+
+```python
+REPO_ROOT = Path(__file__).resolve().parent.parent
+TEST_DIR = str(REPO_ROOT / "v0.3-prelim" / "tests")
+```
+
+### 20.1.3 Item 3 [LOW-MED] — `monte_carlo_71_percent()` renamed
+
+The function performs **no sampling** — it computes an analytic Binomial tail under the null hypothesis — yet was named `monte_carlo_71_percent()` with a docstring saying "Run Monte Carlo simulation" and a printed METHOD block describing a sampling procedure that is never executed. (v40.55 had already corrected the *report's* wording to "analytic estimate" but missed the script.) Renamed to **`binomial_null_71_percent()`**, with the docstring and the printed METHOD block rewritten to describe what the code actually does.
+
+### 20.1.4 Item 4 [LOW] — §4.9 code listing completed
+
+The §4.9 listing started at `def categorize_test(filename):`, omitting `import os`, `from pathlib import Path` and the `TEST_DIR` assignment — so a reader of the report alone saw an incomplete file. **v40.63 regenerates §4.9 verbatim from the live script**, and the report's listing is now byte-identical to `scripts/generate_test_mapping.py` (asserted by a regression test). It cannot drift again.
+
+### 20.1.5 Item 5 [LOW-MED] — `sigma_u` provenance
+
+Only **Elbert's σ_u = 0.20** has a published basis (Elbert+ 2015's own quoted fit uncertainty). **Burkert's 0.30 and Sameie's 0.50 are assumed by this project** — judgement calls, not paper-derived. Since the Bayesian weights are w_i = 1/σ_u,i², **two of the three weights rest on assumptions rather than data.** Now documented in the script's docstring and in report §13.2.
+
+### 20.1.6 Item 6 [LOW] — `pdftotext` availability check
+
+`test_pdf_page_anchors_are_correct()` called `subprocess.run(["pdftotext", ...])` with no availability check: on a host without poppler that raises `FileNotFoundError` — a hard **error**, not a skip — even though the PDF itself is optional (gitignored). Now guarded with `shutil.which("pdftotext")` + `pytest.skip()`.
+
+### 20.1.7 Item 7 [MED] — the "2-branch anchored" selection bias
+
+n16.docx Item 7 points out that §5.4's own `quantitative_status` fields label the retained branches as:
+
+| branch | `quantitative_status` | paper-anchored? |
+|---|---|---|
+| Elbert+ 2015 | `anchored to paper Eq. 5` | **yes** |
+| Burkert-style | `project prescription, not paper-derived` | **no** |
+| Sameie+ 2020 | `QUALITATIVE SIGN-FLIP TEST ONLY` | **no** |
+
+So "2-branch anchored" means **"1 paper-anchored + 1 project prescription"**. Excluding Sameie+ for being unanchored while retaining Burkert-style — which the report itself labels unanchored — is a **selection bias**: the two retained branches are the two that **agree in sign**, and the excluded branch is the one that disagrees. There is no anchoring-based rule that excludes one and keeps the other.
+
+**v40.63 does not hide this.** The honest options are (a) report the 2-branch result *with* the selection disclosed, or (b) report only the 1-branch Elbert+ value (+0.32 σ, with **no computable CI** at n = 1). **v40.63 takes option (a)** and keeps the 3-branch coverage envelope visible alongside it, because option (b) would hide exactly the sign-flip possibility the 3-branch number exists to reveal. The disclosure now appears in §1 caveat 1, §13.2 and §9.3.
+
+### 20.1.8 Item 8 [MED] — the reviewer's premise is corrected, and the real problem is named
+
+n16.docx Item 8 proposed that the scatter assumption (0.12–0.20 dex) could make the +0.62 σ signal "completely vanish", and asked for it to be quantified in §9.3.
+
+**The quantification is done, and it contradicts the proposed mechanism.** Because σ scales as 1/scatter **uniformly** across branches, the mean *and* the standard error rescale together, so the CI lower bound stays proportional to the mean:
+
+| scatter (dex) | scale | 2-branch mean | SE | 95% CI (z) | excludes 0? |
+|---|---|---|---|---|---|
+| 0.08 | ×2.000 | +1.25 σ | 0.61 σ | (+0.05, +2.45) σ | yes |
+| 0.12 | ×1.333 | +0.83 σ | 0.41 σ | (+0.04, +1.63) σ | yes |
+| **0.16 (fiducial)** | **×1.000** | **+0.62 σ** | **0.30 σ** | **(+0.03, +1.22) σ** | **yes** |
+| 0.20 | ×0.800 | +0.50 σ | 0.24 σ | (+0.02, +0.98) σ | yes |
+| 0.24 | ×0.667 | +0.42 σ | 0.20 σ | (+0.02, +0.82) σ | yes |
+
+**The scatter changes the magnitude (a factor ~3 over that range) but never the sign, and it is not why the CI is wide.** The reason the tension is not significant is the **sample size** — see §20.1.9. The scatter limitation is accordingly restated in §9.3 as a *magnitude* uncertainty rather than a *significance* uncertainty, and n16's proposed mechanism is explicitly corrected rather than silently absorbed.
+
+### 20.1.9 SELF-FOUND [HIGH] — the "CI EXCLUDES ZERO" headline was a z-at-n=2 artefact
+
+**This is the substantive finding of the round, and it was not on n16's list.** While auditing n16's Item 8, the confidence intervals themselves were checked, and they use the **normal approximation** (z = 1.96) on samples of n = 2 and n = 3 whose variance is **estimated from the data**. That requires the **t-distribution**. With the correct critical value (verified against `scipy.stats.t.ppf`):
+
+| Branch set | Mean | SE | 95% CI (t — correct) | excludes 0? | 95% CI (z — as shipped in v40.62) |
+|---|---|---|---|---|---|
+| 2-branch anchored (n=2), t(0.975, df=1) = 12.706 | +0.62 σ | 0.30 σ | **(-3.25, +4.50) σ** | **no** | (+0.03, +1.22) σ |
+| 3-branch Bayesian (n=3), t(0.975, df=2) = 4.303 | +0.33 σ | 0.12 σ | **(-0.18, +0.83) σ** | **no** | (+0.10, +0.56) σ |
+| 3-branch equal-weight (n=3), t(0.975, df=2) = 4.303 | -0.02 σ | 0.67 σ | (-2.90, +2.86) σ | no | (-1.33, +1.29) σ |
+
+**So the v40.62 Executive Summary headline — "2-branch anchored-only mean: +0.62 ± 0.30 σ, 95% CI (+0.03, +1.22) σ — CI EXCLUDES ZERO (marginally; lower bound nearly touches 0)" — was wrong.** Under correct small-n inference, **no branch set and no weighting scheme produces a 95% CI that excludes zero.**
+
+**What survives and what does not:**
+
+- **The magnitude survives.** +0.62 σ over the anchored branches, with a positive sign robust to the scatter assumption and to the weighting scheme (the 3-branch Bayesian gives +0.33 σ). The framework over-predicts c₂₀₀ by roughly +0.6 σ. That is the honest headline.
+- **The significance does not survive.** The tension must be reported as a **magnitude with an explicit uncertainty, never as a detection**.
+- **Nothing else in the framework's framing changes.** The framework was already downgraded to "structural constraint map + no-go catalogue" (v40.50), and this finding does not touch any channel verdict, no-go theorem, or the model-downgrade framing. The tension values themselves (+0.32, +0.93, -1.31 σ) are unchanged and independently sourced.
+
+**Correction applied in v40.63:** the script now computes and prints the t-based CI as the primary number (with the z-based CI retained and labelled as the anti-conservative normal approximation it is); §1, §13.2 and §9.3 carry the corrected CIs; and the reporting rule is stated explicitly: **cite the branch set, the weighting scheme, the scatter, the anchoring status of each branch, and the CI convention.**
+
+**Why this survived v40.62's own audit:** v40.62 introduced the 2-branch result and its "CI excludes zero" claim, and n15's checklist did not question the CI convention. The v40.62 test asserted *"CI excludes zero: True"* — i.e. it **locked in the artefact**. A regression test that pins a statistical convention cannot detect that the convention is wrong; it only checks that the code still does what it did. **v40.63's test asserts the CI against `scipy.stats.t.ppf`**, so the convention itself is now pinned to an external authority rather than to itself.
+
+### 20.2 v40.63 gate result
+
+```
+1877 passed, 22 skipped, 33 deselected, 3 warnings in 1108.62s (0:18:28)
+
+  [PASS] audit_units.py
+  [PASS] pytest
+  [PASS] drift_guard.py
+  [PASS] t82_audit.py
+  [PASS] audit_claims.py
+  [PASS] check_fabrication.py
+  [PASS] check_breakthrough_label.py
+
+ALL GATES PASSED — safe to tag a new release.
+```
+
+**Test suite:** 1877 passed, 22 skipped, 33 deselected, 3 warnings in 1108.62s (0:18:28) — 216 test files across 42 suites. (The v40.63 suite adds 27 tests in `test_v40_63_n16_docx_response.py`; the v40.62-era figures of 1855 passed / 215 files are the historical values and remain in sections 17-19, which document their own rounds.)
+
+**Legacy-bucket size (current):** 174 of the 216 test files (81%) are legacy pre-v40 files with no suite tag. (The v40.62-era figure was 174 of 215.)
+
+---
+
 **End of report.**
 
-**Reviewed by:** Nemotron 3 Ultra 550B (6 COMPLETE: v40.48–v40.53; 5 DEFERRED: v40.54–v40.58) + Nemotron 3 Super 120B (9: v40.40–v40.47) + **n6.docx through n15.docx human reviewers (10 reviews)** — 30 review rounds total (§6)
-**Final commit:** `5026fdb` (v40.62, n15.docx review response)
-**Final tag:** `v40.62-N15ReviewResponse`
+**Reviewed by:** Nemotron 3 Ultra 550B (6 COMPLETE: v40.48–v40.53; 5 DEFERRED: v40.54–v40.58) + Nemotron 3 Super 120B (9: v40.40–v40.47) + **n6.docx through n16.docx human reviewers (11 reviews)** — 31 review rounds total (§6)
+**Final commit:** `PENDING-v40.63` (v40.63, n16.docx review response)
+**Final tag:** `v40.63-N16ReviewResponse`
 **Date:** 2026-10-21
