@@ -1583,6 +1583,80 @@ This is why the v40.59 commit shipped smoke values despite the restore: **the ve
 - VERSION: appended `+v40.60-SmokeTestClobberFix`
 - CHANGELOG.md: added v40.60 entry
 
+## [v40.61-N14ReviewResponse-2026-10-21] — v40.61 — n14.docx review response (9th human review)
+
+n14.docx is the **9th human review** (n6–n14) of the v40.59/v40.60 report. Verdict from the reviewer: substantive improvement, but two items need priority fix and eight items are listed in an action table. **All 8 addressed, plus 3 self-found issues.**
+
+### n14 action table — all 8 items DONE
+
+| # | Issue | Severity | Status |
+|---|---|---|---|
+| 1 | Sameie+ audit conclusion vs marginalization framing | MED-HIGH | ✓ §1 caveat 1, §5.4 `quantitative_status`, §18.1.1 |
+| 2 | Version-count inconsistency (21 vs 19 vs 22 rows) | MED | ✓ §2 counting rule, §17.1 historical annotation, §18.1.2 |
+| 3 | §8.3 "121 passed" vs header "1816 passed" | MED-HIGH | ✓ §8.3, §18.1.3 |
+| 4 | Non-standard `//` comment in §5.3 JSON | MED | ✓ §5.3 **+ a second instance found in §17.4**, §18.1.4 |
+| 5 | Ohana+ 2026 citation not independently verifiable | MED-LOW | ✓ PDF downloaded + read + registry entry, §16.5, §18.1.5 |
+| 6 | Sameie+ extrapolation uncertainty not in marginalization weights | MED | ✓ §1 caveat 2, §5.4, §18.1.6 |
+| 7 | §8.4 missing PowerShell variant | LOW | ✓ §8.4, §18.1.7 |
+| 8 | Defect E fix: full fixed test code not shown | MED-LOW | ✓ §4.11 + tmp_path lifetime answered, §18.1.8 |
+
+### Item 1 — Sameie+ branch relabelled (MED-HIGH)
+
+The v40.59 audit established that the Sameie+ quantitative prescription (slope 0.40, saturation τ=5, ceiling 2×NFW) is **not derived from the paper** and that its implementation has a **sign-flip bug** (§4.10: ceiling 24.000 < Yang+ τ=1 value 26.3934 ⇒ negative slope ⇒ every τ>1 pinned to 24.000). n14 correctly notes that reporting "-1.31 σ" as one of three equal marginalization branches is then misleading.
+
+**Fix:** §1 caveat 1 labels the branch **"QUALITATIVE SIGN-FLIP TEST ONLY, NOT QUANTITATIVELY VALIDATED"** and states it carries no empirical anchor. §5.4's JSON gained a per-branch `quantitative_status` field so the qualification travels with the number.
+
+### Item 2 — version-count rule (MED)
+
+n14's arithmetic verified: v40.39→v40.59 = 21 sequential + v40.43a = 22 rows. **Fix:** the counting rule is now stated explicitly at §2 ("N sequential version numbers plus 1 lettered sub-version = N+1 table rows"). The stale "19-Version Arc" / "18-version" strings in the historical §17.1 are annotated as superseded.
+
+### Item 3 — test counts reconciled (MED-HIGH)
+
+**Fix:** §8.3 now leads with the full-suite figure (1816 passed, 22 skipped, 33 deselected) and explains that the old "121 passed" was the **v40-era regression subset only** (19 `test_v40_*.py` + 5 core files, now collecting 125 tests, ~5 s) — the fast inner loop, not the project count.
+
+### Item 4 — JSON syntax, extended (MED)
+
+n14 quoted one instance (the `//` comment in §5.3). **A new regression test parses EVERY ```json block in the report with `json.loads()`** — and found a **second** instance the reviewer did not flag: §17.4's "FULL JSON EMBEDDED" block elided 3 combinations with a `...` line (also invalid JSON) and showed 1 of 14 combos. v40.61 embeds the **complete verbatim** file (839 lines, 19,819 bytes) so the section title is now literally true. A third instance — a bare object fragment in v40.61's own new §18.1.1 — was caught and fixed by the same test.
+
+### Item 5 — Ohana+ 2026 now independently checkable (MED-LOW)
+
+**Fix (better than a screenshot — the paper is now in the repo):**
+1. Live arXiv API query: title, all 3 authors, 2026-08-05 date — all match the citation.
+2. PDF downloaded → `docs/papers/verified/2608.04362_ohana_2026_cloud9_cdm_sidm.pdf` (2,654,775 B, 10 pp).
+3. Full text read → `docs/papers/verified/2608.04362_ohana_2026_cloud9_cdm_sidm.md` (7.2 KB summary with key-value table).
+4. Registry entry added, status **VERIFIED (v40.61)**.
+
+**The "3.2σ" attribution was checked against the paper body and is CORRECT.** §3.1: *"For the halo with τ = 0.18, we obtain M₂₀₀ = 4.7 × 10⁹ M☉ and c₂₀₀ = 4.0, corresponding to a 3.2σ deviation below the cosmological median concentration, assuming a scatter of 0.16 dex… Using Eq. 8, we infer a self-interacting cross section of σ/m = 483 cm²/g."* — matches the project's `scripts/ohana2026_cloud9_joint_likelihood.py` fiducial exactly. **No citation drift.**
+
+**New caveats surfaced by reading the paper:** CDM best-fit is **7σ** below the c-M relation (posterior peak 7.3σ, still >6.7σ with fit uncertainty); SIDM marginalized peak is **3.3σ**; the 3.2σ is τ- and model-dependent; the 0.16 dex scatter is load-bearing; and the fit **loses c₂₀₀ sensitivity** once the core envelops the data, so the concentration is constrained only via the cosmological prior.
+
+### Item 6 — extrapolation uncertainty (MED)
+
+**Fix:** §1 caveat 2 states the Cloud-9 c₀ = 12 vs paper c₂₀₀ = 22–29 mismatch explicitly, and its consequence: the equal-weight mean (-0.02 ± 1.16 σ) is **itself conditional on an un-modelled weighting assumption**, and the Bayesian mean (+0.33 ± 0.12 σ) is more robust but its down-weighting of the Sameie+ branch used the audit's **qualitative judgement**, not a calibrated extrapolation-error likelihood.
+
+### Items 7 & 8 — PowerShell parity, full fixed test code
+
+§8.4 now offers PowerShell + POSIX + venv-activated forms. §4.11 shows the **complete** fixed `test_smoke_ablation_writes_jsons(tmp_path)`, the `--out-dir` addition, the md5 before/after evidence, and answers the reviewer's `tmp_path`-lifetime concern directly.
+
+### Self-found (not in n14's list)
+
+1. **§6 review count was wrong on all three terms.** Header said *"all 13: 7× 120B + 5× 550B + 1× human"*. Ground truth: **28 rounds** — 9× 120B (9 review docs on disk), 6× 550B COMPLETE (v40.48–v40.53), 5× 550B DEFERRED (v40.54–v40.58, OpenRouter timeouts, no verdict), 8× human (n6–n13). DEFERRED rounds are now separated because a deferred review produced no verdict.
+2. **"Ohana+ 2026 upper limit" was a mischaracterisation.** The paper is a **posterior inference of the concentration deviation**, not an upper limit. Corrected in §1 and §16.5.
+3. **The version-locked test assertions were the root cause of the recurring count-inconsistency pattern.** `test_v40_57_...::test_v40_57_title_updated` asserted the literal `v40.39 → v40.57` — bumping the title to v40.59 **broke it**. `test_v40_58_...::test_v40_58_version_arc_table_includes_all_versions` was matching a *historical* §17.2 string, i.e. a **false pass**. Both are now **version-agnostic** and assert internal consistency (range-vs-range, count-vs-count). **Fault-injection verified** — all three injected faults are caught:
+   - title range vs §2 arc range mismatch → FAILS
+   - §8.3 summary line count changed → FAILS
+   - §8.2 count vs header count mismatch → FAILS
+
+### New tests
+
+`v0.3-prelim/tests/test_v40_61_n14_docx_response.py` — **20 tests**, one per n14 item + the 3 self-found issues. Includes a whole-report JSON-block sweep and a guard that the v40.57/v40.58 tests cannot regress to literal version matching.
+
+### Front-matter
+- VERSION: appended `+v40.61-N14ReviewResponse`
+- CHANGELOG.md, CURRENT.md: updated
+- Report: title → v40.39 → v40.61; §2 → 23-Version Arc (24 rows); §18 added; header/footer review counts corrected
+
+
 
 
 

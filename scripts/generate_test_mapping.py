@@ -29,6 +29,7 @@ def categorize_test(filename):
         if "n11_docx" in f: return "v40.56 n11 response"
         if "n12_docx" in f: return "v40.57 n12 response"
         if "n13_docx" in f: return "v40.58 n13 response"
+        if "n14_docx" in f: return "v40.61 n14 response"
         return "v40-era"
     # Core v40 tests (pre-response)
     if f.startswith("test_v19_2_f_"):

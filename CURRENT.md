@@ -2,7 +2,7 @@
 
 > **For:** Anyone who has 60 seconds and wants to know what this project
 > is, what it claims, and what the current best numbers are.
-> Updated with each version-bump round. Last refresh: 2026-10-21 (v40.58 + v40.59 + v40.60).
+> Updated with each version-bump round. Last refresh: 2026-10-21 (v40.58 + v40.59 + v40.60 + v40.61).
 
 ---
 

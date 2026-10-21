@@ -18,6 +18,7 @@ v40.57 FIX:
 """
 from __future__ import annotations
 
+import re
 import sys
 from pathlib import Path
 
@@ -27,14 +28,36 @@ SCRIPT = REPO / "scripts" / "v19_2_f_n12_docx_response.py"
 
 
 def test_v40_57_title_updated():
-    """Title must be updated to 'v40.39 -> v40.57' (n12.docx Issue #1)."""
+    """Title must declare a version range consistent with the §2 arc header.
+
+    v40.61 (n14.docx Item 2) fix: this assertion was originally hard-coded to
+    the literal 'v40.39 -> v40.57'. Every title bump therefore broke it,
+    which is the root cause of the recurring "version/count inconsistency"
+    pattern flagged in n13/n14 reviews. It is now version-agnostic: the title
+    range must MATCH the §2 arc header range, whatever the version numbers are.
+    """
     report_text = REPORT.read_text(encoding="utf-8")
-    # The first line of the report should have the new title
     first_line = report_text.split("\n")[0]
-    assert "v40.39 → v40.57" in first_line or "v40.39 -> v40.57" in first_line, (
-        f"v40.57 fix: title must be updated to 'v40.39 -> v40.57'. "
-        f"Per n12.docx MED-HIGH, the old title 'v40.39 -> v40.51' was misleading. "
-        f"Current first line: {first_line!r}"
+
+    # Extract the version range from the title, e.g. "(v40.39 -> v40.57)"
+    title_range = re.search(r"\(v40\.(\d+)\s*(?:→|->)\s*v40\.(\d+)\)", first_line)
+    assert title_range is not None, (
+        f"v40.57 fix: title must declare a version range like "
+        f"'(v40.39 -> v40.57)'. Current first line: {first_line!r}"
+    )
+
+    # Extract the §2 arc header range
+    sec2 = report_text[report_text.find("## 2. The"):report_text.find("## 3.")]
+    arc_range = re.search(r"v40\.(\d+)\s*(?:→|->)\s*v40\.(\d+)", sec2)
+    assert arc_range is not None, (
+        "v40.61 fix: section 2 header must declare a version range."
+    )
+
+    assert title_range.groups() == arc_range.groups(), (
+        f"v40.61 fix: title version range {title_range.groups()} must match "
+        f"section 2 arc header range {arc_range.groups()}. "
+        f"Per n14.docx Item 2, a mismatch between the two is the recurring "
+        f"'21 vs 19 vs 22' inconsistency pattern."
     )
 
 
