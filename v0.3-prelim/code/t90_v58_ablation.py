@@ -134,8 +134,13 @@ def _loglike_subset(theta_log, enabled_channels):
     return total
 
 
-def run_subset(name, enabled_channels, nlive=200, dlogz=0.1, label=None):
-    """Run dynesty on a channel subset. Returns summary dict."""
+def run_subset(name, enabled_channels, nlive=200, dlogz=0.1, label=None, out_dir=None):
+    """Run dynesty on a channel subset. Returns summary dict.
+
+    out_dir: directory for the per-subset JSON. Defaults to the canonical
+    data/results/ directory. Passing a scratch dir (as the smoke test does)
+    avoids overwriting production-grade result files.
+    """
     import dynesty
 
     label = label or name
@@ -200,7 +205,8 @@ def run_subset(name, enabled_channels, nlive=200, dlogz=0.1, label=None):
         "ksfr_enabled": "KSFR" in enabled_channels,
     }
 
-    out_path = Path(__file__).parent.parent / "data" / "results" / f"t90_v58_ablation_{name}.json"
+    out_path = Path(out_dir) / f"t90_v58_ablation_{name}.json" if out_dir else \
+        Path(__file__).parent.parent / "data" / "results" / f"t90_v58_ablation_{name}.json"
     with open(out_path, "w") as f:
         json.dump(summary, f, indent=2)
     print(f"[T90.58] Wrote {out_path}")
@@ -208,15 +214,19 @@ def run_subset(name, enabled_channels, nlive=200, dlogz=0.1, label=None):
     return summary
 
 
-def run_ablation_sweep(nlive=200, dlogz=0.1):
-    """Run all 6 ablations: full + 5 single-channel drops."""
+def run_ablation_sweep(nlive=200, dlogz=0.1, out_dir=None):
+    """Run all 6 ablations: full + 5 single-channel drops.
+
+    out_dir: directory for output JSONs. Defaults to the canonical
+    data/results/ directory.
+    """
     ALL_CHANNELS = {"Cloud9", "Galaxy", "Bullet", "LZ", "KSFR"}
 
     sweep = {}
 
     # Baseline: all channels enabled
     sweep["all_5ch"] = run_subset("all_5ch", ALL_CHANNELS, nlive=nlive, dlogz=dlogz,
-                                  label="All 5 channels (baseline)")
+                                  label="All 5 channels (baseline)", out_dir=out_dir)
 
     # Drop each channel in turn
     for dropped in sorted(ALL_CHANNELS):
@@ -224,6 +234,7 @@ def run_ablation_sweep(nlive=200, dlogz=0.1):
         sweep[f"drop_{dropped}"] = run_subset(
             f"drop_{dropped}", remaining, nlive=nlive, dlogz=dlogz,
             label=f"Drop {dropped} (only {sorted(remaining)} active)",
+            out_dir=out_dir,
         )
 
     # Compute deltas vs baseline
@@ -241,7 +252,8 @@ def run_ablation_sweep(nlive=200, dlogz=0.1):
         "ksfr_enabled": True,
     }
 
-    out_path = Path(__file__).parent.parent / "data" / "results" / "t90_v58_ablation_summary.json"
+    out_path = Path(out_dir) / "t90_v58_ablation_summary.json" if out_dir else \
+        Path(__file__).parent.parent / "data" / "results" / "t90_v58_ablation_summary.json"
     with open(out_path, "w") as f:
         json.dump(summary, f, indent=2)
     print(f"\n[T90.58] === SUMMARY ===")
@@ -258,5 +270,11 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="T90.58 channel-set ablation sweep")
     parser.add_argument("--nlive", type=int, default=200, help="Number of live points")
     parser.add_argument("--dlogz", type=float, default=0.1, help="Evidence convergence threshold")
+    parser.add_argument("--out-dir", type=str, default=None,
+                        help="Directory for output JSONs (default: data/results/). "
+                             "Use a scratch dir for smoke runs so production "
+                             "result files are not overwritten.")
     args = parser.parse_args()
-    run_ablation_sweep(nlive=args.nlive, dlogz=args.dlogz)
+    if args.out_dir:
+        Path(args.out_dir).mkdir(parents=True, exist_ok=True)
+    run_ablation_sweep(nlive=args.nlive, dlogz=args.dlogz, out_dir=args.out_dir)

@@ -138,21 +138,28 @@ def test_out_of_prior_returns_neginf():
     assert ll == -np.inf, f"Out-of-prior theta should return -inf: {ll}"
 
 
-def test_smoke_ablation_writes_jsons():
-    """Tiny ablation (nlive=50) writes all 6 JSONs."""
+def test_smoke_ablation_writes_jsons(tmp_path):
+    """Tiny ablation (nlive=50) writes all 6 JSONs to a SCRATCH dir.
+
+    v40.59 (Defect E) fix: the smoke run previously deleted and overwrote the
+    production-grade t90_v58_ablation_*.json files in data/results/, silently
+    replacing n_samples 1255-1926 / log_Z_err 0.14-0.20 with smoke values
+    (n_samples 254-421 / log_Z_err 0.39-0.53). The production artifacts are now
+    written to a temporary directory instead.
+    """
     code_dir = Path(__file__).resolve().parent.parent / "code"
     venv_python = code_dir.parent.parent / ".venv-sidm-bench" / "Scripts" / "python.exe"
     if not venv_python.exists():
         pytest.skip(f"venv-sidm-bench not at {venv_python}")
-    results_dir = code_dir.parent / "data" / "results"
-    # Cleanup any stale t90_v58 files
-    for f in results_dir.glob("t90_v58_ablation_*.json"):
-        f.unlink()
+    # SCRATCH dir — do NOT write into data/results/ (would clobber production)
+    smoke_dir = tmp_path / "smoke_results"
+    smoke_dir.mkdir(parents=True, exist_ok=True)
     cmd = [
         str(venv_python), "-u",
         str(code_dir / "t90_v58_ablation.py"),
         "--nlive", "50",
         "--dlogz", "0.5",  # relax convergence for smoke
+        "--out-dir", str(smoke_dir),
     ]
     env = os.environ.copy()
     env["SIDM_DISABLE_KSFR_MASK"] = "0"
@@ -166,7 +173,15 @@ def test_smoke_ablation_writes_jsons():
     # Check all expected JSONs were written
     expected = ["all_5ch", "drop_Cloud9", "drop_Galaxy", "drop_Bullet", "drop_LZ", "drop_KSFR"]
     for name in expected:
-        json_path = results_dir / f"t90_v58_ablation_{name}.json"
+        json_path = smoke_dir / f"t90_v58_ablation_{name}.json"
         assert json_path.exists(), f"Missing JSON: {json_path}"
-    summary_path = results_dir / "t90_v58_ablation_summary.json"
+    summary_path = smoke_dir / "t90_v58_ablation_summary.json"
     assert summary_path.exists(), f"Missing summary: {summary_path}"
+
+    # v40.59 (Defect E) regression guard: the smoke run must NOT have touched
+    # the production result files in data/results/.
+    prod_dir = code_dir.parent / "data" / "results"
+    for prod in prod_dir.glob("t90_v58_ablation_*.json"):
+        smoke = smoke_dir / prod.name
+        if smoke.exists() and prod.exists():
+            assert prod.stat().st_size > 0, f"Production JSON emptied: {prod}"

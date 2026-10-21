@@ -1544,6 +1544,46 @@ Saved JSON: `v0.3-prelim/data/results/t196_v18_lz_event_rate.json`
 - CURRENT.md: updated with v40.58/v40.59 status
 - README.md: updated with current branch status
 
+## [v40.60-SmokeTestClobberFix-2026-10-21] — v40.60 — Defect E root-cause fix
+
+### The bug
+`v0.3-prelim/tests/test_t90_v58_ablation.py::test_smoke_ablation_writes_jsons` deleted the production-grade `t90_v58_ablation_*.json` files from `v0.3-prelim/data/results/` and then overwrote them with **smoke-grade** output (nlive=50, dlogz=0.5).
+
+**Every pytest run silently replaced production evidence with smoke values:**
+
+| | n_samples | log_Z_err |
+|---|---|---|
+| Production (branch `wip/cloud-9-relhic`) | 1255–1926 | 0.147–0.204 |
+| Smoke (what pytest wrote) | 254–421 | 0.388–0.530 |
+
+This is why the v40.59 commit shipped smoke values despite the restore: **the verification run itself overwrote the restored production files.** Caught by re-reading the committed JSONs after the full gate run — not by the gate, which passed on the clobbered files.
+
+### The fix
+- `v0.3-prelim/code/t90_v58_ablation.py` — added `--out-dir` argument. `run_subset()` and `run_ablation_sweep()` now accept `out_dir`; default remains the canonical `data/results/` path, so production runs are unaffected.
+- `v0.3-prelim/tests/test_t90_v58_ablation.py` — the smoke test now writes to a pytest `tmp_path` scratch directory and no longer deletes or overwrites the production JSONs. Added a regression guard asserting the production files remain non-empty after the smoke run.
+
+### Report updates (v40.59 → v40.60)
+- Title: `v40.39 → v40.57` → `v40.39 → v40.59`
+- §2: arc header 19-Version → 21-Version; added v40.58 + v40.59 rows
+- §4.8: `scripts/verify_release_gate.py` code listing (timeout + 13 legacy exclusions)
+- §4.9: `scripts/generate_test_mapping.py` code listing (213 → 40 suites)
+- §4.10: `scripts/sameie2020_c_tau_prescription.py` — the Sameie+ ceiling bug, with the verified c_200(τ) curve
+- §8.1/§8.2: git + code structure updated (213 test files / 40 suites / 1816 passed)
+- §17.9: Sameie+ 2020 physical reasonableness audit (Defect F1) — verdict PARTIALLY REASONABLE / NOT VERIFIABLE
+- §17.10: Defect E (incl. the smoke-test clobber root cause) + Defect G (full gate result)
+- Footer: commit / tag / date updated
+
+### Sameie+ 2020 audit — key findings (Defect F1)
+- **Qualitative match:** c_200 INCREASES in deep collapse (cuspy) — matches paper.
+- **Quantitative NOT verifiable:** slope = 0.40, saturation τ = 5, ceiling = 2×NFW are project-invented placeholders; the paper provides no quantitative c-τ formula.
+- **Critical bug:** `c_ceiling (24.000) < c_200_at_tau_1 (Yang+ = 26.3934)` ⇒ slope = -0.5983 ⇒ the `min()` clamp pins every τ > 1 to exactly 24.000. The prescription **drops** 9.1% at τ = 1⁺ then stays flat — the opposite of its stated "c_200 INCREASES" intent. The self-test checks continuity and the ceiling cap but never the slope sign.
+- **Recommendation:** do NOT cite Sameie+ 2020 as a quantitatively validated prescription. Frame it as a qualitative sign-flip test only. The marginalization conclusion ("c-M tension is prescription-dependent") remains valid.
+
+### Front-matter
+- VERSION: appended `+v40.60-SmokeTestClobberFix`
+- CHANGELOG.md: added v40.60 entry
+
+
 
 
 
