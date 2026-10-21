@@ -182,6 +182,6 @@
     "tension_range": 2.236368873649834,
     "robustness_verdict": "MARGINAL",
     "v40_43_robust_verdict_refuted": true,
-    "explanation": "Sameie+ 2020 prescription (c_200 INCREASES in deep collapse) gives c-M tension = -1.39 sigma, opposite direction from Elbert+ 2015 (+0.32 sigma) and Burkert-style (+0.93 sigma). The 3-prescription |c-M tension| range is 0.32-1.39 sigma, REFUTING the v40.43 ROBUST verdict."
+    "explanation": "Sameie+ 2020 prescription (c_200 INCREASES in deep collapse) gives c-M tension = -1.31 sigma, opposite direction from Elbert+ 2015 (+0.32 sigma) and Burkert-style (+0.93 sigma). The 3-prescription |c-M tension| range is 0.32-1.31 sigma, REFUTING the v40.43 ROBUST verdict."
   }
 }

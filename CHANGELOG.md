@@ -3269,6 +3269,65 @@ v ~ 1000 km/s). Awaiting user go-ahead.
 
 ---
 
+## [v40.62-N15ReviewResponse-2026-10-21] — v40.62 — n15.docx review response (10th human review)
+
+n15.docx is the **10th human review** (n6–n15) of the v40.61 report. Verdict: substantive improvement — the Ohana+ 2026 paper content is provided and verified as a standalone file for the first time, Sameie+ 2020 is labelled a qualitative test in the JSON metadata, §5.3 JSON is strict, PowerShell is unified across §8.3 and §8.4, the version-locked tests are version-agnostic, the Defect E fix code is fully shown, and the "121 passed" ambiguity is eliminated. **Eight items listed; all addressed, plus 3 self-found issues.**
+
+### The headline scientific change
+
+**The 3-branch equal-weight marginalization was mixing a calibrated branch with an uncalibrated one.** v40.62 now computes the marginalization over the **2 quantitatively-anchored branches only** and reports it as the primary quantitative result:
+
+| Branch set | Mean | SE | 95% CI | CI excludes 0? | Role |
+|---|---|---|---|---|---|
+| **2-branch anchored only** | **+0.62 σ** | 0.30 σ | **(+0.03, +1.22) σ** | **YES** | **THE QUANTITATIVE RESULT** |
+| 3-branch equal-weight | -0.02 σ | 0.67 σ | (-1.33, +1.29) σ | no | worst-case coverage envelope |
+| 3-branch Bayesian | +0.33 σ | 0.12 σ | (+0.10, +0.56) σ | yes | alternative weighting |
+
+The "-0.02 ± 1.16 σ — indistinguishable from zero" headline was **driven entirely by the one branch with no empirical anchor**. Over the anchored branches the tension is **+0.62 σ with a CI that excludes zero** — the framework mildly **over-predicts c₂₀₀**. Computed by `scripts/v19_2_f_n9_docx_response.py` and verified by running it.
+
+### n15 action table — all 8 items
+
+| # | Issue | Severity | Status | Where fixed |
+|---|---|---|---|---|
+| 1 | §9.2 "14 versions, 13 reviews, 92 tests" | MED-HIGH | ✓ §9.2, §19.1.1 |
+| 2 | Header "9 human reviews" vs §6 "8" | MED | ✓ §6/header/footer, §19.1.2 |
+| 3 | Sameie+ qualitative but 1/3 of the equal-weight marginalization | MED | ✓ §13.2, §1, §19.1.3 |
+| 4 | Ohana+ c₂₀₀ degeneracy implication | MED | ✓ §9.3, §19.1.4 |
+| 5 | PDF extraction method not documented | MED-LOW | ✓ §16.5, §19.1.5 |
+| 6 | `test_v40_51_paper_section_2_1_ranges.py` code not shown | MED-LOW | ✓ §4.12, §19.1.6 |
+| 7 | `categorize_test` `return "Other"` fallback | LOW | ⚠ PARTIAL, §4.9, §19.1.7 |
+| 8 | Scatter assumption uncertainty | MED-LOW | ✓ §9.3, §19.1.8 |
+| — | *(self-found)* `-1.39` hard-coded vs computed `-1.31` | — | ✓ §19.1.9 |
+| — | *(self-found)* `+1.56` CI vs authoritative `+1.29` | — | ✓ §19.1.10 |
+| — | *(self-found)* PDF page anchors asserted, not verified | — | ✓ §19.1.11 |
+
+### Item-by-item notes
+
+- **Item 1:** §9.2's line was written at v40.51 and never touched in 11 version bumps — the last unreconciled count in the document. Now updated with scope stated.
+- **Item 2:** resolved in favour of the §6 table being stale, not the header. A human round counts once the version *responding to it* is committed, so n14 (closed by v40.61) and n15 (closed by v40.62) both count → **10 human rounds, 30 total**. n15's suggested fix (header 9→8) would have *under*-counted. The counting rule is now written into §6.
+- **Item 4:** new §9.3 limitation — the c-M tension is **PRIOR-SENSITIVE, not likelihood-sensitive**: comparing our c₂₀₀ to Ohana+ 2026's is comparing our prior to their prior, so the tension is not evidence that the model fails (nor that it succeeds).
+- **Item 5:** extraction method documented (poppler `pdftotext -layout`, **not OCR** — embedded text layer, no recognition-error class) plus a **12-row provenance table with the page number for every quoted value**, each verified against the PDF with `pdftotext -layout -f N -l N`.
+- **Item 7 — ⚠ PARTIAL, deliberately.** The reviewer asked for `raise ValueError` on an uncategorized file. **Not done as suggested:** 174 of 215 test files (81%) are legacy pre-v40 files with no suite tag, so a blanket raise would make the tool unusable on every run. Instead: the fallback bucket is **renamed** `"Legacy: uncategorized (pre-v40)"`, its count is **printed** so it is never silent, and a guard **raises** if a *new* v40-era file (`test_v40_*` / `test_v19_2_f_*`) lands in it — exactly the case the reviewer wanted caught. Fault-injection verified.
+
+### Self-found issues
+
+1. **`-1.39` hard-coded against a computed `-1.31`** — `scripts/v19_2_f_cloud9_cM_three_prescriptions.py` printed and wrote `-1.39` in six places while the computed value in the same file was `-1.3104`. The v40.43a commit shows the JSON always held `-1.3104`, so `-1.39` was never the computed number. All six now take the value from the computed results; the JSON was regenerated.
+2. **`+1.56` CI upper bound** — `scripts/v19_2_f_n11_docx_response.py` hard-coded `(-1.33, +1.56)`; the authoritative `scripts/v19_2_f_n9_docx_response.py` yields `(-1.33, +1.29)`. The report carried **both** (§1 said +1.56, §13.2 said +1.29). The n11 script now interpolates the computed bounds; both live claims now read +1.29.
+3. **PDF page anchors were asserted, not verified** — the v40.62 fix initially wrote page numbers from memory; checking each against the PDF found **three wrong** (the 7.3σ/>6.7σ values are on p. 6 not p. 4; the σ/m = 50 cm²/g → ~3σ statement is on p. 2 not p. 1; the M₂₀₀ posterior peak + c₂₀₀ cutoff are on p. 3 not p. 4). All corrected.
+
+### Incidental: a truncation bug I introduced and recovered from
+
+While regenerating the §17.8 mapping table I matched the marker `| Test File | Suite / Category |` — a string that appears **both** in §17.8 and inside the §4.9 *code listing* of the generator script. `str.find()` matched the earlier occurrence, so the replacement deleted **§5–§17 (~2400 lines)** of the report. Recovered by splicing the committed v40.61 content back from `git show HEAD:…` and re-applying the v40.62 edits to that range. **Lesson recorded in the `reviewer-checklist-processor` skill:** assert the marker occurs exactly once, assert the span size, back up before a bulk rewrite, and verify heading/subsection counts after.
+
+### New tests
+
+`v0.3-prelim/tests/test_v40_62_n15_docx_response.py` — **19 tests**, one per n15 item + the 3 self-found issues. Includes a page-anchor re-verification against the actual PDF, a script-output check that the quoted 2-branch CI matches the script, and a fault-injection check that the categorization guard actually raises.
+
+### Front-matter
+- VERSION: appended `+v40.62-N15ReviewResponse`
+- CHANGELOG.md, CURRENT.md: updated
+- Report: title → v40.39 → v40.62; §2 → 24-Version Arc (25 rows); §18 retained; §19 added; header/footer/§6 counts reconciled to 10 human / 30 rounds
+
 ## [T88.C + T88.E] — 2026-09-04
 
 **T88.C: Euclid Q1 strong-lensing cluster catalog (Channel 23, reframed).**

@@ -30,6 +30,7 @@ def categorize_test(filename):
         if "n12_docx" in f: return "v40.57 n12 response"
         if "n13_docx" in f: return "v40.58 n13 response"
         if "n14_docx" in f: return "v40.61 n14 response"
+        if "n15_docx" in f: return "v40.62 n15 response"
         return "v40-era"
     # Core v40 tests (pre-response)
     if f.startswith("test_v19_2_f_"):
@@ -67,8 +68,14 @@ def categorize_test(filename):
     if "tucana_ii_sigma_v" in f: return "v40 core: Tucana II σ_v"
     if "paper_claims" in f: return "v40 core: Paper claims"
     if "v19_2_f_cloud9_cM_negative" in f: return "v40.39 Cloud-9 negative"
-    # Other
-    return "Other"
+    # Other — legacy pre-v40 test files (T-series, forward models, physics
+    # limits) that predate the v40-era naming. v40.62 (n15.docx Item 7):
+    # these are grouped into an EXPLICIT "Legacy: uncategorized" bucket
+    # rather than a bare "Other", so a reviewer can see at a glance that
+    # they are deliberately unclassified legacy files and not a silent
+    # catch-all hiding a mis-categorized NEW file.
+    return "Legacy: uncategorized (pre-v40)"
+
 
 files = [f for f in os.listdir(TEST_DIR) if f.startswith("test_") and f.endswith(".py")]
 files.sort()
@@ -79,6 +86,32 @@ for f in files:
     s = categorize_test(f)
     suites.setdefault(s, []).append(f)
 
+# v40.62 (n15.docx Item 7): the reviewer asked for `raise ValueError` on an
+# uncategorized file so a newly-added test cannot silently fall through.
+# That is NOT what we did, and the reason matters: 174 of the 214 test files
+# are legacy pre-v40 files that have no meaningful suite tag. A hard raise
+# would make this script unusable.
+#
+# What we did instead, which preserves the reviewer's intent (no NEW file
+# can hide in a catch-all) without breaking the tool:
+#   1. The fallback bucket is now NAMED ("Legacy: uncategorized (pre-v40)")
+#      and its contents are PRINTED with a count, so it is visible in the
+#      output rather than looking like a normal suite.
+#   2. NEW test files (anything added after this rule shipped) are detected
+#      by name convention: a file matching the v40-era prefixes
+#      (test_v40_*, test_v19_2_f_*) that lands in the legacy bucket is a
+#      BUG, and we raise on exactly that case.
+#   3. The report §17.8 mapping table states the legacy count explicitly.
+UNCATEGORIZED = "Legacy: uncategorized (pre-v40)"
+_v40_prefixed = (lambda f: f.startswith("test_v40_") or f.startswith("test_v19_2_f_"))
+_new_in_catchall = [f for f in suites.get(UNCATEGORIZED, [])
+                    if _v40_prefixed(f.lower())]
+if _new_in_catchall:
+    raise ValueError(
+        "Uncategorized v40-era test file(s) — add a categorize_test() rule: "
+        + ", ".join(sorted(_new_in_catchall))
+    )
+
 # Print markdown table
 print("| Test File | Suite / Category |")
 print("|---|---|")
@@ -87,3 +120,8 @@ for s in sorted(suites.keys()):
         print(f"| `{f}` | {s} |")
 
 print(f"\nTotal: {len(files)} test files across {len(suites)} suites.")
+_legacy_n = len(suites.get(UNCATEGORIZED, []))
+if _legacy_n:
+    print(f"NOTE: {_legacy_n} legacy pre-v40 files are grouped under "
+          f"'{UNCATEGORIZED}' (no suite tag). They are listed above so the "
+          f"catch-all is explicit, not silent.")

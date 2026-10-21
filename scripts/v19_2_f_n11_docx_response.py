@@ -142,8 +142,10 @@ def prescription_non_identifiability():
     print("is NON-IDENTIFIABLE. Equal-weight mean (-0.02 +/- 1.16 sigma) and Bayesian")
     print("mean (+0.33 +/- 0.12 sigma) give contradictory conclusions.")
     print()
-    print("More honest framing: 'c-M tension has 95% CI of (-1.33, +1.56) sigma under")
-    print("prescription uncertainty, depending on weighting scheme and prescription choice.'")
+    print("More honest framing: 'c-M tension has 95% CI of "
+          f"({eq_ci_low:+.2f}, {eq_ci_high:+.2f}) sigma under "
+          "prescription uncertainty, depending on weighting scheme and "
+          "prescription choice.'")
     print()
 
 

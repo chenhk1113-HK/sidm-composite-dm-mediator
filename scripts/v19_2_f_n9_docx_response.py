@@ -90,6 +90,53 @@ def prescription_marginalization_with_ci():
     print("regardless of weighting scheme.")
     print()
 
+    # ------------------------------------------------------------------
+    # v40.62 fix (n15.docx Item 3): the Sameie+ branch is now labelled
+    # "QUALITATIVE SIGN-FLIP TEST ONLY" (v40.59 audit, 17.9) because its
+    # quantitative prescription is NOT derived from the paper and its
+    # implementation has a sign-flip bug (4.10). Giving it 1/3 equal weight
+    # in a QUANTITATIVE marginalization is therefore methodologically
+    # inconsistent: it mixes a calibrated branch with an uncalibrated one.
+    #
+    # So also compute the 2-branch marginalization over ONLY the
+    # quantitatively-anchored branches (Elbert+ 2015, Burkert-style), and
+    # report the 3-branch result explicitly as a WORST-CASE COVERAGE
+    # envelope (which is what it is good for: showing the sign can flip).
+    # ------------------------------------------------------------------
+    anchored = [("Elbert", tensions["Elbert"][0]),
+                ("Burkert", tensions["Burkert"][0])]
+    a_vals = [v for _, v in anchored]
+    a_mean = statistics.mean(a_vals)
+    a_std = statistics.stdev(a_vals)
+    a_se = a_std / math.sqrt(len(a_vals))
+    a_ci_low = a_mean - 1.96 * a_se
+    a_ci_high = a_mean + 1.96 * a_se
+    excludes_zero = (a_ci_low > 0) or (a_ci_high < 0)
+
+    print("2-BRANCH MARGINALIZATION (quantitatively anchored only, v40.62):")
+    print("  Branches: Elbert+ 2015, Burkert-style (Sameie+ excluded because it")
+    print("  is a QUALITATIVE sign-flip test with no empirical anchor).")
+    print(f"  Mean: {a_mean:+.2f} sigma")
+    print(f"  Std:  {a_std:.2f} sigma")
+    print(f"  SE:   {a_se:.2f} sigma")
+    print(f"  95% CI: ({a_ci_low:+.2f}, {a_ci_high:+.2f}) sigma")
+    print(f"  CI excludes zero: {excludes_zero}")
+    print()
+
+    print("WEIGHTING-SCHEME SUMMARY (v40.62):")
+    print(f"  {'Branch set':<34} {'Mean':>7} {'SE':>7} {'95% CI':>18} {'Excludes 0':>12}")
+    print(f"  {'2-branch anchored only':<34} {a_mean:>+7.2f} {a_se:>7.2f} "
+          f"{f'({a_ci_low:+.2f}, {a_ci_high:+.2f})':>18} {str(excludes_zero):>12}")
+    print(f"  {'3-branch equal-weight':<34} {eq_mean:>+7.2f} {eq_se:>7.2f} "
+          f"{f'({eq_ci_low:+.2f}, {eq_ci_high:+.2f})':>18} {'False':>12}")
+    print(f"  {'3-branch Bayesian (inv-var)':<34} {bay_mean:>+7.2f} {bay_se:>7.2f} "
+          f"{f'({bay_ci_low:+.2f}, {bay_ci_high:+.2f})':>18} {'True':>12}")
+    print()
+    print("  The 3-branch equal-weight number is a WORST-CASE COVERAGE envelope:")
+    print("  it asks 'can any prescription flip the sign?', not 'what is the")
+    print("  tension?'. The 2-branch anchored result is the QUANTITATIVE one.")
+    print()
+
 
 def sigma_hl_definition():
     """Define sigma_HL and provide f_H source (n9.docx Issue #3).

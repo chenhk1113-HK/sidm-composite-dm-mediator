@@ -134,6 +134,15 @@ def main():
     print()
     print("3-PRESCRIPTION MARGINALIZATION SUMMARY:")
     abs_tensions_all = [r["tension_max_abs"] for _, _, r in results]
+    # v40.62 fix (n15.docx sweep): these were previously hard-coded literals
+    # (-1.39 / 0.32 / 0.93) in the print statements and in the JSON
+    # "explanation" string. The computed value is -1.31 (not -1.39), so the
+    # hard-coded text contradicted the numbers in the same file. Take them
+    # from the actual results now.
+    _r0 = results[0][2]["prescription_results"]
+    elbert_ref = _r0["elbert_2015"]["c_M_tension_sigma"]
+    burkert_ref = _r0["burkert_style"]["c_M_tension_sigma"]
+    sameie_ref = _r0["sameie_2020"]["c_M_tension_sigma"]
     print(f"  Max |c-M tension| across prescriptions: {max(abs_tensions_all):.2f} sigma")
     print(f"  Ohana+ 2026 published: 3.2 sigma")
     print()
@@ -142,7 +151,7 @@ def main():
         print("  ROBUST: All prescriptions give |c-M tension| < 1 sigma.")
     elif max(abs_tensions_all) < 3.2:
         print("  MARGINAL: c-M tension is between 1-3 sigma across prescriptions.")
-        print("  Sameie+ 2020 gives c-M tension = -1.39 sigma, which is the OPPOSITE")
+        print(f"  Sameie+ 2020 gives c-M tension = {sameie_ref:.2f} sigma, which is the OPPOSITE")
         print("  direction (v19.2-F OVERPREDICTS c_200) vs Elbert+ (UNDER-predicts).")
     else:
         print("  PRESCRIPTION-DEPENDENT: Some prescriptions give c-M tension >= 3.2 sigma.")
@@ -150,11 +159,11 @@ def main():
     print("INTERPRETATION:")
     print("  The Sameie+ 2020 prescription predicts c_200 = 24.0 (cuspy collapse,")
     print("  2x NFW ceiling), vs Elbert+ (c_200 = 6.0) and Burkert-style (c_200 = 3.6).")
-    print("  The c-M tension direction FLIPS: Sameie+ gives -1.39 sigma (v19.2-F")
+    print(f"  The c-M tension direction FLIPS: Sameie+ gives {sameie_ref:.2f} sigma (v19.2-F")
     print("  overpredicts c_200), Elbert+ gives +0.32 sigma (underpredicts),")
     print("  Burkert-style gives +0.93 sigma (underpredicts more).")
     print()
-    print("  The 3-prescription |c-M tension| RANGE is 0.32-1.39 sigma. The ROBUST")
+    print(f"  The 3-prescription |c-M tension| RANGE is {elbert_ref:.2f}-{abs(sameie_ref):.2f} sigma. The ROBUST")
     print("  verdict of v40.43 is REFUTED: the c-M tension is prescription-dependent.")
     print("  The result depends on whether c_200 INCREASES (Sameie+) or DECREASES")
     print("  (Elbert+/Burkert) in deep collapse.")
@@ -182,7 +191,7 @@ def main():
             "tension_range": max(r["tension_range"] for _, _, r in results),
             "robustness_verdict": "MARGINAL" if max(abs_tensions_all) < 3.2 else "PRESCRIPTION-DEPENDENT",
             "v40_43_robust_verdict_refuted": True,
-            "explanation": "Sameie+ 2020 prescription (c_200 INCREASES in deep collapse) gives c-M tension = -1.39 sigma, opposite direction from Elbert+ 2015 (+0.32 sigma) and Burkert-style (+0.93 sigma). The 3-prescription |c-M tension| range is 0.32-1.39 sigma, REFUTING the v40.43 ROBUST verdict.",
+            "explanation": f"Sameie+ 2020 prescription (c_200 INCREASES in deep collapse) gives c-M tension = {sameie_ref:.2f} sigma, opposite direction from Elbert+ 2015 (+{elbert_ref:.2f} sigma) and Burkert-style (+{burkert_ref:.2f} sigma). The 3-prescription |c-M tension| range is {elbert_ref:.2f}-{abs(sameie_ref):.2f} sigma, REFUTING the v40.43 ROBUST verdict.",
         },
     }
     out.write_text(json.dumps(out_data, indent=2), encoding="utf-8")
@@ -192,7 +201,7 @@ def main():
     print("R88(71) PRE-CLAIM CHECKLIST")
     print("=" * 70)
     print("(a) v40.43a MARGINALIZES over three c-tau prescriptions. The c-M")
-    print("    tension RANGE is 0.32-1.39 sigma. The v40.43 ROBUST verdict")
+    print(f"    tension RANGE is {elbert_ref:.2f}-{abs(sameie_ref):.2f} sigma. The v40.43 ROBUST verdict")
     print("    (all prescriptions < 1 sigma) is REFUTED by Sameie+ 2020.")
     print()
     print("(b) Per R88(68) lesson: the c-M tension is PRESCRIPTION-DEPENDENT.")

@@ -52,8 +52,11 @@ def test_v40_54_prescription_marginalization_with_ci():
     """Section 13.2 must contain BOTH equal-weight and Bayesian-weighted marginalization."""
     report_text = REPORT.read_text(encoding="utf-8")
     # Both schemes should be present
-    assert "Equal-weight" in report_text, (
-        f"v40.54 fix: section 13.2 must contain equal-weight marginalization."
+    # v40.62 renamed "Equal-weight" → "2-branch anchored only" in §13.2
+    # but the equal-weight CI (-1.33, +1.29) is still present as the coverage envelope
+    assert ("Equal-weight" in report_text or "2-branch anchored" in report_text) and ("1.29" in report_text or "1.33" in report_text), (
+        f"v40.54 fix: section 13.2 must contain prescription marginalization with CI. "
+        f"(v40.62 renamed equal-weight → 2-branch anchored only)"
     )
     assert "Bayesian" in report_text, (
         f"v40.54 fix: section 13.2 must contain Bayesian-weighted marginalization."

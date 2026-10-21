@@ -427,11 +427,11 @@ def test_section_6_review_count_correct():
     """v40.61 self-check: section 6's review count must match the evidence."""
     text = _report()
     sec6 = _section(text, "## 6. Reviews", "## 7.")
-    assert "28 rounds" in sec6, (
-        "v40.61 fix: section 6 must state the correct total (28 review rounds: "
-        "9x120B + 6x550B COMPLETE + 5x550B DEFERRED + 8x human). The v40.59 "
-        "header said 'all 13: 7x120B + 5x550B + 1x human', wrong on all three "
-        "terms."
+    # v40.62 added n15 human round → 10 human = 30 total (was 28 in v40.61)
+    assert "30 rounds" in sec6, (
+        "v40.61/v40.62 fix: section 6 must state the correct total "
+        "(30 review rounds: 9x120B + 6x550B COMPLETE + 5x550B DEFERRED + 10x human). "
+        "The v40.59 header said 'all 13: 7x120B + 5x550B + 1x human', wrong on all three terms."
     )
     assert "DEFERRED" in sec6, (
         "v40.61 fix: section 6 must separate DEFERRED 550B rounds (which "
