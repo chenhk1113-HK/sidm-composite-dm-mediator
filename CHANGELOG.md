@@ -4130,7 +4130,7 @@ collapsed section — only the top 5 full-fidelity entries +
 
 ## [v40.63-N16ReviewResponse-2026-10-21] — v40.63 — n16.docx review response (11th human review)
 
-n16.docx is the **11th human review** (n6–n16, written in Chinese) of the v40.62 report. Verdict: v40.62 is a **substantive improvement** over v40.61 — version and test counts unified throughout, Sameie+ correctly relabelled a qualitative test, the 2-branch marginalization promoted to the primary quantitative result, the Ohana+ 2026 paper read and page-anchored, hard-coded literals removed, scatter and prior-sensitivity limitations added, the 19-test n15 suite embedded. **Eight items raised; all eight addressed. One self-found HIGH-severity defect surfaced in the process.**
+n16.docx is the **11th human review** (n6–n16, written in Chinese) of the v40.62 report. Verdict: v40.62 is a **substantive improvement** over v40.61 — version and test counts unified throughout, Sameie+ correctly relabelled a qualitative test, the 2-branch marginalization promoted to the primary quantitative result, the Ohana+ 2026 paper read and page-anchored, hard-coded literals removed, scatter and prior-sensitivity limitations added, the 19-test n15 suite embedded. **Eight items raised; all eight addressed. Three self-found defects surfaced in the process, one of them HIGH severity.**
 
 ### The headline: the "CI EXCLUDES ZERO" claim was wrong
 
@@ -4148,9 +4148,9 @@ n16.docx is the **11th human review** (n6–n16, written in Chinese) of the v40.
 - **The significance does not survive.** The tension must be reported as a **magnitude with an explicit uncertainty, never as a detection**.
 - **Nothing else in the framework's framing changes.** The framework was already downgraded (v40.50); this touches no channel verdict, no no-go theorem, and no model-downgrade framing. The tension values (+0.32, +0.93, −1.31 σ) are unchanged and independently sourced.
 
-**Why it survived v40.62's own audit:** v40.62's test asserted *"CI excludes zero: True"* — it **locked in the artefact**. A regression test that pins a statistical convention cannot detect that the convention is wrong; it only checks that the code still does what it did. **v40.63's test asserts the CI against `scipy.stats.t.ppf`**, so the convention is now pinned to an external authority.
+**Why it survived v40.62's own audit:** v40.62's test asserted *"CI excludes zero: True"* — it **locked in the artefact**. A regression test that pins a statistical convention cannot detect that the convention is wrong. **v40.63's test asserts the CI against `scipy.stats.t.ppf`**, so the convention is now pinned to an external authority.
 
-### n16 action table — all 8 items
+### n16 action table — all 8 items + 3 self-found
 
 | # | Issue | Severity | Status | Where fixed |
 |---|---|---|---|---|
@@ -4163,22 +4163,28 @@ n16.docx is the **11th human review** (n6–n16, written in Chinese) of the v40.
 | 7 | Burkert-style's "anchored" status is weaker than Elbert+ | MED | ✓ §20.1.7 | report §1, §13.2, §9.3 |
 | 8 | The +0.62 σ signal may vanish under scatter uncertainty | MED | ⚠ **premise corrected** — §20.1.8 | report §13.2, §9.3 |
 | — | *(self-found)* The "CI EXCLUDES ZERO" headline used z at n=2 | **HIGH** | ✓ §20.1.9 | report §1, §13.2, §9.3 + script |
+| — | *(self-found)* An inline `` ```json `` in prose opens an unterminated code block | MED | ✓ §20.1.9 | report §18 + 2 new structure tests |
+| — | *(self-found)* Five t90_v5x writers still default to the **production** results dir (v40.60 Defect G class) | MED | ✓ §20.1.10 | 5 scripts + 2 tests + guard |
 
 ### Item-by-item notes
 
 - **Item 1 — broader than reported.** The printed block was the **stale v40.54 fabrication in its entirety**: the ~10⁹⁵ unit conversion n16 flagged, *plus* a non-existent source filename (`v19_2_f_gravothermal_yang2024.py` — the real file is `v0.3-prelim/code/gravothermal_yang2024.py`), *plus* the inverted τ (`0.35/13.8 = 16.4`; 0.35/13.8 = 0.0254), *plus* wrong `t_core` values (printed 0.35 / 0.0008 Gyr; the stored JSON says 0.8411 / 230.151 Gyr), *plus* a placeholder `arXiv:2405.XXXXX`. The print block now shows the **actual current implementation** (Yang+ 2024 eq. 2.2, R88(29)-calibrated prefactor 1.34e12, G in kpc³/(M☉ Gyr²), no SI conversion), the correct τ direction, and the true `t_core` values — plus the correct SI conversion documented for reference. **Root cause: the v40.54→v40.55 fix corrected the *report* but not the *script* that prints the code. Shipping the changed scripts as a companion MD is what surfaced it.**
-- **Item 8 — the premise is corrected, not absorbed.** n16 proposed the scatter assumption (0.12–0.20 dex) could make the +0.62 σ signal "completely vanish". **It does not, and the reason is structural:** σ scales as 1/scatter **uniformly** across branches, so the mean *and* the SE rescale together and the CI lower bound stays proportional to the mean. Recomputed at 0.08/0.12/0.16/0.20/0.24 dex, the mean moves +1.25 → +0.42 σ and the CI lower bound never crosses zero. **The reason the tension is not significant is the sample size (n=2), not the scatter.** §9.3 now states the scatter as a *magnitude* uncertainty and says so explicitly.
-- **Item 7 — the selection bias is disclosed, not hidden.** "2-branch anchored" is **"1 paper-anchored (Elbert+, Eq. 5) + 1 project prescription (Burkert-style)"**. Excluding Sameie+ for being unanchored while retaining Burkert-style — which the report itself labels unanchored — means the two retained branches are the two that **agree in sign**. The honest options are (a) report the 2-branch result *with* the selection disclosed, or (b) report only the 1-branch Elbert+ value (+0.32 σ, no computable CI at n=1). **v40.63 takes (a)** and keeps the 3-branch coverage envelope visible, because (b) would hide the sign-flip possibility that number exists to reveal.
+- **Item 8 — the premise is corrected, not absorbed.** n16 proposed the scatter assumption (0.12–0.20 dex) could make the +0.62 σ signal "completely vanish". **It does not, and the reason is structural:** σ scales as 1/scatter **uniformly** across branches, so the mean *and* the SE rescale together and the CI lower bound stays proportional to the mean. Recomputed at 0.08/0.12/0.16/0.20/0.24 dex, the mean moves +1.25 → +0.42 σ and the CI lower bound never crosses zero. **The reason the tension is not significant is the sample size (n=2), not the scatter.**
+- **Item 7 — the selection bias is disclosed, not hidden.** "2-branch anchored" is **"1 paper-anchored (Elbert+, Eq. 5) + 1 project prescription (Burkert-style)"**. Excluding Sameie+ for being unanchored while retaining Burkert-style — which the report itself labels unanchored — is a **selection bias**: the two retained branches are the two that **agree in sign**. v40.63 takes the honest option (a): report the 2-branch result *with* the selection disclosed, and keep the 3-branch coverage envelope visible, because option (b) (1-branch only) would hide the sign-flip possibility that number exists to reveal.
+- **Self-found Defect G.** The v40.60 round fixed the smoke-test-clobbering defect for **one** script; the same pattern was still live in **five** more. Their `run_*` functions defaulted `output_dir` to the **production** results dir, so `run_dynesty(nlive=50)` overwrote the nlive=500 production posterior on every pytest run (measured: n=226→215, n=256→233). Fixed at the **generator** level: every writer's default is now env-overridable and path-relative, every smoke-test call site passes `output_dir=str(tmp_path)`, and a guard test asserts no call site omits it. **Verified by measurement: all five production md5 checksums identical before and after a smoke-test run; `git status` on the results dir empty.**
 
-### Incidental: a recurrence caught
+### Incidental: recurrences caught
 
-The v40.62 count reconciliation I shipped that morning fixed the *quoted* count locations but the version-count drift had **three more live locations** (§1's opening line, §2's heading, §2's counting rule) — the same class n6→n16 have flagged repeatedly. v40.63 enumerated and fixed all of them, and the counting rule now states that the counts are **derived from the range, never typed independently**.
+- The v40.62 count reconciliation fixed the *quoted* count locations, but the version-count drift had **three more live locations** (§1's opening line, §2's heading, §2's counting rule). v40.63 enumerated and fixed all of them, and the counting rule now states that the counts are **derived from the range, never typed independently**.
+- **Six stale frozen-literal tests** across the v40.61/v40.62 suites asserted literal counts/CIs/glyphs that v40.63 legitimately changed. Per the reviewer-checklist-processor rule they were rewritten to assert **internal consistency** (derive the round count from the §6 table; derive the n-docx range from the Human row; match the t-based CI from the script; accept either minus glyph) — not to new literals — so they hold for the next version too.
+- 29 U+2212 unicode minus signs normalized to ASCII hyphen-minus (AGENTS.md rule 27), which also makes the report's CI strings byte-match the script's output.
+- Section 4.9's listing is now generated from disk and cannot drift.
 
 ### New tests
 
-`v0.3-prelim/tests/test_v40_63_n16_docx_response.py` — **27 tests**: one per n16 item + the self-found CI-convention defect + report-wide consistency checks (all JSON blocks strict, review counts consistent across header/§6/footer, version counts consistent across §1/§2/§9.2). Includes a `scipy.stats.t.ppf` cross-check of the hard-coded t critical values and a byte-identity check that the §4.9 listing equals the live script.
+`v0.3-prelim/tests/test_v40_63_n16_docx_response.py` — **31 tests**: one per n16 item + the three self-found defects + report-wide consistency checks (all JSON blocks strict, fences balanced, review counts consistent across header/§6/footer, version counts consistent across §1/§2/§9.2) + the Defect G guard. Includes a `scipy.stats.t.ppf` cross-check of the hard-coded t critical values and a byte-identity check that the §4.9 listing equals the live script.
 
 ### Front-matter
 - VERSION: appended `+v40.63-N16ReviewResponse`
 - CHANGELOG.md, CURRENT.md: updated
-- Report: title → v40.39 → v40.63; §2 → 25-Version Arc (26 rows); §20 added; header/footer/§6 counts reconciled to 11 human / 31 rounds
+- Report: title → v40.39 → v40.63; §2 → 25-Version Arc (26 rows); §20 added (§20.1.1–§20.1.10, §20.2 gate); header/footer/§6 counts reconciled to 11 human / 31 rounds

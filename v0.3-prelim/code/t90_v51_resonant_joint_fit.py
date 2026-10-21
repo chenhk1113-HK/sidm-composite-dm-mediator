@@ -177,10 +177,14 @@ def run_dynesty(nlive: int = 500, dlogz: float = 0.05, output_dir: str = None):
     import dynesty
 
     if output_dir is None:
-        if os.name == "nt":
-            output_dir = "C:/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/data/results"
-        else:
-            output_dir = "/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/data/results"
+        # v40.63 (n16 round, Defect G class): the default writes into
+        # the PRODUCTION results directory. A smoke run that does not
+        # override this OVERWRITES the production artifact with a
+        # lower-quality posterior. Tests MUST pass output_dir=<tmp>.
+        output_dir = os.environ.get(
+            "SIDM_RESULTS_DIR",
+            str(Path(__file__).resolve().parents[1] / "data" / "results"),
+        )
     Path(output_dir).mkdir(parents=True, exist_ok=True)
 
     sampler = dynesty.NestedSampler(

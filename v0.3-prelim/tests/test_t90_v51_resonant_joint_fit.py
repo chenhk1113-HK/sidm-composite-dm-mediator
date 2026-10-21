@@ -136,12 +136,19 @@ def test_prior_transform_corners():
 # ---------------------------------------------------------------------------
 # End-to-end smoke test
 # ---------------------------------------------------------------------------
-def test_smoke_run():
+def test_smoke_run(tmp_path):
+    """
+    v40.63 (Defect G class): output_dir is redirected to tmp_path so this
+    smoke run CANNOT overwrite the production
+    t90_v5x_*_joint_posterior.json artifact. Before the fix it wrote a
+    nlive=50 posterior over the nlive=500 production one on every pytest
+    run, silently degrading the repo's evidence (v40.60 defect class).
+    """
     """Short dynesty run (nlive=50, dlogz=0.5) -- should complete and find a posterior
     that includes the T90.50 best-fit neighborhood.
     """
     from t90_v51_resonant_joint_fit import run_dynesty
-    s = run_dynesty(nlive=50, dlogz=0.5)
+    s = run_dynesty(nlive=50, dlogz=0.5, output_dir=str(tmp_path))
     # Should produce finite log Z
     assert np.isfinite(s["log_Z"])
     # Posterior median sigma/m(Cloud-9) should be in or near [30, 500]

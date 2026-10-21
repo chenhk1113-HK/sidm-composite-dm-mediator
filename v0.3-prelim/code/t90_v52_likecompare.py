@@ -175,10 +175,17 @@ def run_multi_portal(nlive: int = 200, dlogz: float = 0.1, output_dir: str = Non
     import dynesty
 
     if output_dir is None:
-        if os.name == "nt":
-            output_dir = "C:/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/data/results"
-        else:
-            output_dir = "/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/data/results"
+        # v40.63 (Defect G class, n16 round): the default writes into the
+        # PRODUCTION results directory, so a low-nlive smoke run that does
+        # not override this OVERWRITES the production artifact with a
+        # lower-quality posterior (fewer samples, wider error bars) -- the
+        # v40.60 clobbering defect, still live for this script. Tests MUST
+        # pass output_dir=<tmp_path>. The default is now env-overridable
+        # and path-relative so it works on any machine.
+        output_dir = os.environ.get(
+            "SIDM_RESULTS_DIR",
+            str(Path(__file__).resolve().parents[1] / "data" / "results"),
+        )
     Path(output_dir).mkdir(parents=True, exist_ok=True)
 
     sampler = dynesty.NestedSampler(

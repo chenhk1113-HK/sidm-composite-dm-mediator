@@ -672,6 +672,57 @@ def test_version_counts_are_consistent():
     )
 
 
+# --------------------------------------------------------------------------
+# v40.63 (Defect G class): the production result JSONs must NOT be touched
+# by a test run.
+# --------------------------------------------------------------------------
+
+# The t90_v5x joint-fit artifacts that the v40.60 clobbering defect degraded
+# on every pytest run (a nlive=50 smoke posterior overwrote the nlive=500
+# production one).
+PRODUCTION_RESULTS = (
+    "t90_v51_resonant_joint_posterior.json",
+    "t90_v52_multi_portal_joint_posterior.json",
+    "t90_v55_hybrid_joint_posterior.json",
+    "t90_v56_hybrid_4ch_joint_posterior.json",
+    "t90_v57_hybrid_5ch_joint_posterior.json",
+)
+
+
+def test_smoke_tests_do_not_write_into_the_production_results_dir():
+    """A smoke run must not be able to overwrite a production artifact.
+
+    The fix has two halves: the writers' default output_dir is now
+    env-overridable (SIDM_RESULTS_DIR), and the smoke tests pass
+    output_dir=<tmp_path>. This test asserts the SECOND half is in place --
+    a caller that forgets output_dir would reintroduce the clobbering.
+    """
+    import glob
+    offenders = []
+    for tp in (Path(__file__).resolve().parent).glob("test_t90_v5*.py"):
+        src = tp.read_text(encoding="utf-8")
+        for m in re.finditer(r"^.*\b(run_dynesty|run_multi_portal)\(.*$", src, re.M):
+            line = m.group(0)
+            if "output_dir" not in line:
+                offenders.append(f"{tp.name}: {line.strip()}")
+    assert not offenders, (
+        "v40.63 fix: these smoke-test calls would write into the PRODUCTION "
+        "results directory and overwrite the artifact with a lower-quality "
+        "posterior (v40.60 Defect G class). Pass output_dir=str(tmp_path):\n"
+        + "\n".join(offenders)
+    )
+
+
+def test_production_result_jsons_exist_and_are_non_trivial():
+    """The 5 production artifacts must be present and carry a real posterior."""
+    res_dir = REPO / "v0.3-prelim" / "data" / "results"
+    for name in PRODUCTION_RESULTS:
+        p = res_dir / name
+        assert p.exists(), f"v40.63: production artifact missing: {name}"
+        data = json.loads(p.read_text(encoding="utf-8"))
+        assert data, f"v40.63: production artifact is empty: {name}"
+
+
 if __name__ == "__main__":
     failures = 0
     for name in sorted(dir()):
