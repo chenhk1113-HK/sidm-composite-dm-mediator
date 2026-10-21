@@ -1624,6 +1624,6 @@ ALL GATES PASSED — safe to tag a new release.
 **End of report.**
 
 **Reviewed by:** Nemotron 3 Ultra 550B (7 reviews: v40.48, v40.49, v40.50, v40.51, v40.52, v40.53) + Nemotron 3 Super 120B (7 reviews: v40.40-v40.47) + **n6.docx through n13.docx human reviewers (8 reviews)**
-**Final commit:** `092d22e` (v40.59) + v40.60 smoke-test clobber fix (pending commit)
-**Final tag:** `v40.59-DefectsEFG12`
+**Final commit:** `b70825f` (v40.60 — smoke-test clobber fix)
+**Final tag:** `v40.60-SmokeTestClobberFix`
 **Date:** 2026-10-21
