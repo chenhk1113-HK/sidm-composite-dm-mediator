@@ -4,10 +4,10 @@
 **Author:** K Lam (sidm-composite-dm-mediator project)
 **Reviewer:** Nemotron 3 Ultra 550B (6 COMPLETE + 5 DEFERRED) + Nemotron 3 Super 120B (9) + **n6.docx through n15.docx human reviewers (10 reviews)** — 30 review rounds total (§6)
 **Branch:** `wip/v19.2-F-init`
-**Final commit:** `v40.62` (n15.docx review response)
+**Final commit:** `2916820` (v40.62, n15.docx review response)
 **Final tag:** `v40.62-N15ReviewResponse`
 **Project status:** Phase 3 CLOSED (framework final downgrade complete + n6-n15 reviews addressed + Defects E/F1/F2/G resolved)
-**Test count:** 1836 passed, 22 skipped, 33 deselected (214 test files across 41 suites)
+**Test count:** 1855 passed, 22 skipped, 33 deselected (215 test files across 42 suites)
 **Pre-tag gate:** 7/7 PASS (full run, 1149 s)
 
 ---
@@ -310,7 +310,9 @@ def c_200_sameie(tau, sigma_m):
         )))
 ```
 
-**v40.61 full-gate result:** `1836 passed, 22 skipped, 33 deselected, 3 warnings in 1148.67s (0:19:08)` — all 7 layers PASS.
+**v40.62 full-gate result:** `1855 passed, 22 skipped, 33 deselected, 3 warnings in 1123.26s (0:18:43)` — all 7 layers PASS.
+
+*(v40.61 gate: 1836 passed, 22 skipped, 33 deselected in 1148.67s — before the 19 v40.62 tests were added.)*
 
 *(v40.59 gate: 1816 passed, 22 skipped, 33 deselected in 1149.01s — before the 20 v40.61 tests were added.)*
 
@@ -666,7 +668,7 @@ The first v40.59 commit shipped the **smoke** values because the verification ru
 `scripts/verify_release_gate.py` L2 timeout raised 600 s → 1800 s (the suite needs 1149 s, so the old timeout was a guaranteed hang), and 13 legacy test files excluded with documented rationale. Full gate result:
 
 ```
-1836 passed, 22 skipped, 33 deselected, 3 warnings in 1148.67s (0:19:08)
+1855 passed, 22 skipped, 33 deselected, 3 warnings in 1123.26s (0:18:43)
 
   [PASS] audit_units.py
   [PASS] pytest
@@ -1094,7 +1096,7 @@ The 71% partial robustness is the framework's **TESTABLE PREDICTION**:
 - **Final tag:** `v40.59-DefectsEFG12`
 - **Repository:** github.com/chenhk1113-HK/sidm-composite-dm-mediator
 
-### 8.2 Code structure (214 test files across 41 suites; 1836 passed) [v40.61 update]
+### 8.2 Code structure (215 test files across 42 suites; 1855 passed) [v40.62 update]
 
 ```
 scripts/
@@ -1122,7 +1124,7 @@ scripts/
 
 sameie2020_implementation_audit.md  (v40.59 — Defect F1 audit)
 
-v0.3-prelim/tests/  (214 test files, 41 suites; 1836 passed, 22 skipped, 33 deselected)  [v40.61 update]
+v0.3-prelim/tests/  (215 test files, 42 suites; 1855 passed, 22 skipped, 33 deselected)  [v40.62 update]
 ├── test_v40_41_fH_sensitivity.py
 ├── test_v40_42_elbert_c_tau.py
 ├── test_v40_43_marginalization.py
@@ -1172,7 +1174,7 @@ python -m pytest v0.3-prelim/tests/
 **Expected (v40.61, n14.docx Item 3 — corrected):** the **full** suite is
 
 ```
-1836 passed, 22 skipped, 33 deselected, 3 warnings in 1148.67s (0:19:08)
+1855 passed, 22 skipped, 33 deselected, 3 warnings in 1123.26s (0:18:43)
 ```
 
 That is the number quoted in the report header and in §8.2, and it is what `scripts/verify_release_gate.py` produces (L2 layer; the 33 deselected come from the `-k` filter for the pre-v40 T131–T135/T220 tolerance-boundary tests).
@@ -1222,7 +1224,7 @@ python scripts/v19_2_f_paper_section_2_1_update.py
 - The 71% partial robustness is a **testable prediction** for future surveys
 - The framework's passing region is a **RANGE** (not a single point), documented and reproducible
 - The v40.51 bug fix (per n6.docx review) ensures the documented ranges MATCH the data
-- The investigation (**24 sequential versions**, v40.39 → v40.62; **25 arc rows** counting the v40.43a sub-version — see the §2 counting rule; **30 review rounds**; **1,836 tests**) was **methodically executed** with R88(68)/(71) gates
+- The investigation (**24 sequential versions**, v40.39 → v40.62; **25 arc rows** counting the v40.43a sub-version — see the §2 counting rule; **30 review rounds**; **1,855 tests**) was **methodically executed** with R88(68)/(71) gates
 
 *v40.62 note (n15.docx Item 1, MED-HIGH):* the v40.61 version of this line read *"The investigation (14 versions, 13 reviews, 92 tests) was methodically executed"* — counts from the v40.51 era that were never updated. Every one of the three numbers contradicted the rest of the report (title "23-version", §2 arc table 24 rows, header "28 review rounds", §8.2 "214 test files / 1836 passed"). Now updated to the current values and, like §8.3, the exact scope is stated.
 
@@ -3389,7 +3391,7 @@ This is a genuinely clarifying point, and it is consistent with the framework's 
 
 **Reviewer's suggestion:** change `return "Other"` to `raise ValueError(f"Uncategorized test: {filename}")`.
 
-**Not done as suggested, because it would break the tool.** Measured: **174 of the 214 test files** (81%) fall into that bucket — they are legacy pre-v40 tests (T-series, forward models, physics limits) with no meaningful suite tag. A blanket `raise` would make `generate_test_mapping.py` unusable on every run.
+**Not done as suggested, because it would break the tool.** Measured: **174 of the 215 test files** (81%) fall into that bucket — they are legacy pre-v40 tests (T-series, forward models, physics limits) with no meaningful suite tag. A blanket `raise` would make `generate_test_mapping.py` unusable on every run.
 
 **What was done instead, preserving the reviewer's intent** (no *new* file can hide in a catch-all) without breaking the tool:
 
@@ -3424,7 +3426,7 @@ The v40.61 §16.5 provenance table gave section anchors ("§3.1", "Fig. 4") but 
 ### 19.2 v40.62 gate result
 
 ```
-1836 passed, 22 skipped, 33 deselected, 3 warnings in 1148.67s (0:19:08)
+1855 passed, 22 skipped, 33 deselected, 3 warnings in 1123.26s (0:18:43)
 
   [PASS] audit_units.py
   [PASS] pytest
@@ -3442,6 +3444,6 @@ ALL GATES PASSED — safe to tag a new release.
 **End of report.**
 
 **Reviewed by:** Nemotron 3 Ultra 550B (6 COMPLETE: v40.48–v40.53; 5 DEFERRED: v40.54–v40.58) + Nemotron 3 Super 120B (9: v40.40–v40.47) + **n6.docx through n15.docx human reviewers (10 reviews)** — 30 review rounds total (§6)
-**Final commit:** `v40.62` (n15.docx review response)
+**Final commit:** `2916820` (v40.62, n15.docx review response)
 **Final tag:** `v40.62-N15ReviewResponse`
 **Date:** 2026-10-21
