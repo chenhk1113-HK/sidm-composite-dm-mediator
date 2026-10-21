@@ -4,7 +4,7 @@
 **Author:** K Lam (sidm-composite-dm-mediator project)
 **Reviewer:** Nemotron 3 Ultra 550B (6 COMPLETE + 5 DEFERRED) + Nemotron 3 Super 120B (9) + **n6.docx through n15.docx human reviewers (10 reviews)** — 30 review rounds total (§6)
 **Branch:** `wip/v19.2-F-init`
-**Final commit:** `2916820` (v40.62, n15.docx review response)
+**Final commit:** `5026fdb` (v40.62, n15.docx review response)
 **Final tag:** `v40.62-N15ReviewResponse`
 **Project status:** Phase 3 CLOSED (framework final downgrade complete + n6-n15 reviews addressed + Defects E/F1/F2/G resolved)
 **Test count:** 1855 passed, 22 skipped, 33 deselected (215 test files across 42 suites)
@@ -3444,6 +3444,6 @@ ALL GATES PASSED — safe to tag a new release.
 **End of report.**
 
 **Reviewed by:** Nemotron 3 Ultra 550B (6 COMPLETE: v40.48–v40.53; 5 DEFERRED: v40.54–v40.58) + Nemotron 3 Super 120B (9: v40.40–v40.47) + **n6.docx through n15.docx human reviewers (10 reviews)** — 30 review rounds total (§6)
-**Final commit:** `2916820` (v40.62, n15.docx review response)
+**Final commit:** `5026fdb` (v40.62, n15.docx review response)
 **Final tag:** `v40.62-N15ReviewResponse`
 **Date:** 2026-10-21
