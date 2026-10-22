@@ -1,0 +1,146 @@
+{
+  "label": "STRATA  Qwen3.8-Flash-Next IQ3_XXS (125B-A6B)",
+  "model": "qwen3.8-flash-next-iq3_xxs",
+  "port": 8080,
+  "net": 11,
+  "n": 12,
+  "correct": 11,
+  "wrong": 0,
+  "no_answer": 1,
+  "total_time": 1524.1,
+  "total_ct": 12467,
+  "results": [
+    {
+      "id": "Q-floor",
+      "group": "num",
+      "score": 1,
+      "why": "correct",
+      "elapsed": 143.7,
+      "ct": 1154,
+      "pt": 13415,
+      "finish": "stop",
+      "full_text": "Compute the linearly scaled floor:\n\n\\[\n\\sigma_{\\text{peak,floor}}\n= 50 \\times \\frac{50}{48.14}\n= \\frac{2500}{48.14}\n\\]\n\nNow divide:\n\n\\[\n48.14 \\times 51.93 \\approx 2499.91\n\\]\n\nso\n\n\\[\n\\frac{2500}{48.14} \\approx 51.93\n\\]\n\nMore precisely:\n\n\\[\n\\frac{2500}{48.14} \\approx 51.9319\n\\]\n\nSo the floor implied by the quoted value \\(48.14\\) is:\n\n\\[\n\\boxed{\\sigma_{\\text{peak,floor}} \\approx 51.93\\ \\text{cm}^2/\\text{g}}\n\\]\n\nThe paper\u2019s quoted floor is:\n\n\\[\n51.96\\ \\text{cm}^2/\\text{g}\n\\]\n\nCheck it:\n\n\\[\n48.14 \\times 51.96 = 2501.3544\n\\]\n\nwhich is slightly above \\(2500\\). Therefore, using the quoted rounded value \\(48.14\\), the paper\u2019s \\(51.96\\) is very close but slightly high. The arithmetic from the quoted number gives:\n\n\\[\n\\boxed{51.93\\ \\text{cm}^2/\\text{g}}\n\\]\n\nThe discrepancy is only:\n\n\\[\n51.96 - 51.93 \\approx 0.03\\ \\text{cm}^2/\\text{g}\n\\]\n\nor about \\(0.06\\%\\), likely due to rounding of the intermediate \\(\\sigma/m(28)=48.14\\) value."
+    },
+    {
+      "id": "Q-cap",
+      "group": "num",
+      "score": 1,
+      "why": "correct",
+      "elapsed": 124.8,
+      "ct": 792,
+      "pt": 13340,
+      "finish": "stop",
+      "full_text": "Yes \u2014 under the stated interpolation model, **47.67 is correct**.\n\nGiven\n\n\\[\n\\text{ratio}=\\frac{K}{\\sigma_{\\text{peak}}}\n\\]\n\nand the known point\n\n\\[\n\\text{ratio}=2.86 \\quad \\text{at} \\quad \\sigma_{\\text{peak}}=50,\n\\]\n\nsolve for \\(K\\):\n\n\\[\n2.86=\\frac{K}{50}\n\\]\n\n\\[\nK=2.86\\times 50\n\\]\n\n\\[\nK=143\n\\]\n\nThe causality cap is imposed at\n\n\\[\n\\text{ratio}=3.0\n\\]\n\nso\n\n\\[\n3.0=\\frac{143}{\\sigma_{\\text{peak,cap}}}\n\\]\n\n\\[\n\\sigma_{\\text{peak,cap}}=\\frac{143}{3.0}\n\\]\n\n\\[\n\\sigma_{\\text{peak,cap}}=47.666\\ldots\n\\]\n\nRounded to two decimal places:\n\n\\[\n\\sigma_{\\text{peak,cap}}\\approx 47.67\n\\]\n\nEquivalently, using the ratio directly:\n\n\\[\n\\sigma_{\\text{peak,cap}}\n=50\\times \\frac{2.86}{3.0}\n=50\\times 0.953333\\ldots\n=47.666\\ldots\n\\]\n\nSo the paper\u2019s quoted value **47.67 cm\u00b2/g** is arithmetically consistent with the interpolation assumption."
+    },
+    {
+      "id": "Q-empty",
+      "group": "num",
+      "score": 1,
+      "why": "correct",
+      "elapsed": 150.3,
+      "ct": 1213,
+      "pt": 13327,
+      "finish": "stop",
+      "full_text": "Yes.\n\nAt \\(c=12\\), the two requirements are:\n\n\\[\n\\sigma_{\\rm peak} \\ge 51.96\\ \\text{cm}^2/\\text{g}\n\\]\n\nfrom the Cloud-9 floor, and\n\n\\[\n\\sigma_{\\rm peak} \\le 47.67\\ \\text{cm}^2/\\text{g}\n\\]\n\nfrom the causality cap.\n\nSince\n\n\\[\n51.96 > 47.67,\n\\]\n\nthere is no value of \\(\\sigma_{\\rm peak}\\) that can satisfy both simultaneously. The viable window is therefore **empty**.\n\nEquivalently, the floor exceeds the cap by\n\n\\[\n51.96 - 47.67 = 4.29\\ \\text{cm}^2/\\text{g},\n\\]\n\nor as a ratio,\n\n\\[\n\\frac{51.96}{47.67} \\approx 1.09.\n\\]\n\nSo the lower bound is about \\(9\\%\\) above the upper bound.\n\nFor the canonical value,\n\n\\[\n\\sigma_{\\rm peak} = 174\\ \\text{cm}^2/\\text{g},\n\\]\n\nit clearly satisfies the floor but violates the \\(c=12\\) causality cap. Its excess over the floor is\n\n\\[\n\\frac{174}{51.96} \\approx 3.35.\n\\]\n\nSo the canonical \\(\\sigma_{\\rm peak}=174\\ \\text{cm}^2/\\text{g}\\) exceeds the floor by a factor of about\n\n\\[\n\\boxed{3.35}.\n\\]\n\nIt also exceeds the cap by\n\n\\[\n\\frac{174}{47.67} \\approx 3.65,\n\\]\n\nso at \\(c=12\\) the canonical value is not viable under the paper\u2019s own floor-plus-causality constraints. It is viable only under the \\(c=4\\) window, where the allowed interval is \\([51.96,250]\\ \\text{cm}^2/\\text{g}\\)."
+    },
+    {
+      "id": "Q-gauss",
+      "group": "num",
+      "score": 1,
+      "why": "correct",
+      "elapsed": 138.6,
+      "ct": 992,
+      "pt": 13336,
+      "finish": "stop",
+      "full_text": "Compute the Gaussian tail factor:\n\n\\[\n\\exp\\!\\left[-\\frac{(15-29.4)^2}{2(3.0)^2}\\right]\n\\]\n\nStep 1: velocity difference\n\n\\[\n15 - 29.4 = -14.4\n\\]\n\nStep 2: square it\n\n\\[\n(-14.4)^2 = 207.36\n\\]\n\nStep 3: denominator\n\n\\[\n2(3.0)^2 = 2 \\times 9 = 18\n\\]\n\nStep 4: exponent\n\n\\[\n-\\frac{207.36}{18} = -11.52\n\\]\n\nStep 5: exponential\n\n\\[\ne^{-11.52} \\approx 9.93 \\times 10^{-6}\n\\]\n\nEquivalently,\n\n\\[\n10^{-11.52/\\ln 10}\n=10^{-11.52/2.302585}\n=10^{-5.003}\n\\approx 9.93\\times 10^{-6}\n\\]\n\nSo the paper\u2019s quoted value\n\n\\[\n1.0\\times 10^{-5}\n\\]\n\nis correct as a rounded value. The more precise value is\n\n\\[\n\\boxed{9.93\\times 10^{-6}}\n\\]\n\nwhich rounds to \\(\\boxed{1.0\\times 10^{-5}}\\)."
+    },
+    {
+      "id": "Q-schannel",
+      "group": "num",
+      "score": 1,
+      "why": "correct",
+      "elapsed": 151.3,
+      "ct": 1172,
+      "pt": 13336,
+      "finish": "stop",
+      "full_text": "Using the paper\u2019s stated ratio\n\n\\[\n\\frac{\\Delta M}{2m_\\chi}=1.2\\times 10^{-9},\n\\]\n\nthe resonance velocity is\n\n\\[\nv_{\\rm res}=c\\sqrt{8\\frac{\\Delta M}{2m_\\chi}}.\n\\]\n\nSubstitute the numbers:\n\n\\[\nv_{\\rm res}=299792.458\\ {\\rm km/s}\\times \\sqrt{8(1.2\\times 10^{-9})}.\n\\]\n\nFirst compute the factor inside the square root:\n\n\\[\n8(1.2\\times 10^{-9})=9.6\\times 10^{-9}.\n\\]\n\nThen take the square root:\n\n\\[\n\\sqrt{9.6\\times 10^{-9}}\n= \\sqrt{9.6}\\times \\sqrt{10^{-9}}\n\\approx 3.0983867 \\times 3.1622777\\times 10^{-5}\n\\approx 9.797959\\times 10^{-5}.\n\\]\n\nNow multiply by \\(c\\):\n\n\\[\nv_{\\rm res}\n\\approx 299792.458 \\times 9.797959\\times 10^{-5}\\ {\\rm km/s}.\n\\]\n\n\\[\nv_{\\rm res}\\approx 29.37\\ {\\rm km/s}.\n\\]\n\nSo the formula gives\n\n\\[\n\\boxed{v_{\\rm res}\\approx 29.4\\ {\\rm km/s}}\n\\]\n\nwhen rounded to three significant figures. Thus yes, using \\(c=299792.458\\ {\\rm km/s}\\) and \\(\\Delta M/(2m_\\chi)=1.2\\times 10^{-9}\\), the paper\u2019s stated value \\(29.4\\ {\\rm km/s}\\) is arithmetically consistent."
+    },
+    {
+      "id": "Q-direction",
+      "group": "num",
+      "score": 1,
+      "why": "correct",
+      "elapsed": 145.5,
+      "ct": 1119,
+      "pt": 13343,
+      "finish": "stop",
+      "full_text": "The **D-5 bound is LESS restrictive** than the headline bound.\n\nFor an upper-bound constraint of the form\n\n\\[\ng_N/g_\\chi < X,\n\\]\n\na **smaller** value of \\(X\\) is more restrictive.\n\nGiven:\n\n\\[\nX_{\\text{D-5}} = 2.84\\times 10^{-13}\n\\]\n\nand\n\n\\[\nX_{\\text{headline}} = 1.74\\times 10^{-13}.\n\\]\n\nCompare them:\n\n\\[\n\\frac{X_{\\text{D-5}}}{X_{\\text{headline}}}\n=\n\\frac{2.84\\times 10^{-13}}{1.74\\times 10^{-13}}\n=\n\\frac{2.84}{1.74}\n\\approx 1.63.\n\\]\n\nSo the D-5 bound is about **1.63 times larger** than the headline bound.\n\nEquivalently, the headline bound is smaller:\n\n\\[\n1.74\\times 10^{-13} < 2.84\\times 10^{-13}.\n\\]\n\nTherefore:\n\n\\[\n\\boxed{\\text{The D-5 bound is less restrictive than the } \\sigma_1=4.4 \\text{ headline bound.}}\n\\]\n\nNumerically, the D-5 bound allows \\(g_N/g_\\chi\\) to be about **63% larger** than the headline bound:\n\n\\[\n\\frac{2.84-1.74}{1.74}\n=\n\\frac{1.10}{1.74}\n\\approx 0.632\n=\n63.2\\%.\n\\]"
+    },
+    {
+      "id": "Q-thresholds",
+      "group": "num",
+      "score": 1,
+      "why": "correct",
+      "elapsed": 138.4,
+      "ct": 1028,
+      "pt": 13359,
+      "finish": "stop",
+      "full_text": "Using the factor definition\n\n\\[\n\\text{factor}=\\frac{\\sigma/m(15)}{\\text{Horigome limit}},\n\\]\n\nwith\n\n\\[\n\\sigma/m(15)=2.85\\ \\text{cm}^2/\\text{g},\n\\]\n\nthe three factors are:\n\n1. **Against the \\(w=10\\ \\text{km/s}\\) velocity-dependent limit \\(0.8\\ \\text{cm}^2/\\text{g}\\):**\n\n\\[\n\\frac{2.85}{0.8}=3.5625 \\approx 3.6\\times\n\\]\n\n2. **Against the decisive CDM-preference threshold \\(0.2\\ \\text{cm}^2/\\text{g}\\):**\n\n\\[\n\\frac{2.85}{0.2}=14.25 \\approx 14.3\\times\n\\]\n\n3. **Against the velocity-independent \\(w\\to\\infty\\) limit \\(0.04\\ \\text{cm}^2/\\text{g}\\):**\n\n\\[\n\\frac{2.85}{0.04}=71.25 \\approx 71\\times\n\\]\n\nSo the three factors are:\n\n\\[\n\\boxed{3.6\\times,\\quad 14.3\\times,\\quad 71\\times}\n\\]"
+    },
+    {
+      "id": "Q-abstract",
+      "group": "num",
+      "score": 1,
+      "why": "correct",
+      "elapsed": 138.8,
+      "ct": 1010,
+      "pt": 13305,
+      "finish": "stop",
+      "full_text": "The two counts are:\n\n1. **Abstract / canonical framework score:**  \n   **8 constrained channels = 4 PASS / 3 MARGINAL / 1 FAIL**  \n   - 4 PASS: Cluster \\(v=500\\), dSph \\(v=10\\), Cloud-9 \\(v=28\\), SPARC \\(v=100\\)  \n   - 3 MARGINAL: UFD \\(v=3\\), UFD \\(v=5\\), UFD \\(v=15\\)  \n   - 1 FAIL: dSph \\(v=7\\)\n\n2. **A.15 Block 2 for the same canonical Phase 44 parameters at the promoted published-\\(\\sigma_{\\rm unc}\\) likelihood:**  \n   **8 channels = 1 PASS / 0 MARGINAL / 7 FAIL**  \n   - 1 PASS: Cluster \\(v=500\\) only  \n   - 0 MARGINAL  \n   - 7 FAIL\n\nSo the discrepancy is:\n\n\\[\n4\\ \\text{PASS} / 3\\ \\text{MARGINAL} / 1\\ \\text{FAIL}\n\\quad\\text{vs.}\\quad\n1\\ \\text{PASS} / 0\\ \\text{MARGINAL} / 7\\ \\text{FAIL}.\n\\]"
+    },
+    {
+      "id": "Q-fH",
+      "group": "num",
+      "score": 1,
+      "why": "correct",
+      "elapsed": 159.9,
+      "ct": 1358,
+      "pt": 13316,
+      "finish": "stop",
+      "full_text": "For the same \\(\\sigma/m\\), the only difference is the square of \\(f_H\\).\n\n### 1. Squares\n\n\\[\nf_H = 0.297\n\\]\n\n\\[\nf_H^2 = 0.297^2 = 0.088209\n\\]\n\n\\[\nf_H = 0.30\n\\]\n\n\\[\nf_H^2 = 0.30^2 = 0.090000\n\\]\n\nSo:\n\n\\[\n\\sigma_{\\rm eff}(0.297) = 0.088209\\,\\sigma/m\n\\]\n\n\\[\n\\sigma_{\\rm eff}(0.30) = 0.090000\\,\\sigma/m\n\\]\n\n### 2. Absolute drift\n\n\\[\n\\Delta \\sigma_{\\rm eff}\n= 0.090000\\,\\sigma/m - 0.088209\\,\\sigma/m\n\\]\n\n\\[\n\\Delta \\sigma_{\\rm eff}\n= 0.001791\\,\\sigma/m\n\\]\n\n### 3. Ratio\n\n\\[\n\\frac{\\sigma_{\\rm eff}(0.30)}{\\sigma_{\\rm eff}(0.297)}\n=\n\\frac{0.090000}{0.088209}\n\\]\n\n\\[\n\\frac{0.090000}{0.088209}\n\\approx 1.0203\n\\]\n\nSo using \\(f_H = 0.30\\) instead of \\(f_H = 0.297\\) increases \\(\\sigma_{\\rm eff}\\) by about:\n\n\\[\n1.0203 - 1 = 0.0203\n\\]\n\nor:\n\n\\[\n\\boxed{2.03\\%}\n\\]\n\nEquivalently, the drift is:\n\n\\[\n\\boxed{\\sigma_{\\rm eff} \\text{ is } 2.03\\% \\text{ higher for } f_H=0.30 \\text{ than for } f_H=0.297}\n\\]\n\nFor example, if \\(\\sigma/m = 1\\ \\mathrm{cm^2/g}\\):\n\n\\[\n\\sigma_{\\rm eff}(0.297) = 0.088209\\ \\mathrm{cm^2/g}\n\\]\n\n\\[\n\\sigma_{\\rm eff}(0.30) = 0.090000\\ \\mathrm{cm^2/g}\n\\]\n\n\\[\n\\Delta \\sigma_{\\rm eff} = 0.001791\\ \\mathrm{cm^2/g}\n\\]"
+    },
+    {
+      "id": "Q-dupe",
+      "group": "str",
+      "score": 1,
+      "why": "correct",
+      "elapsed": 80.2,
+      "ct": 820,
+      "pt": 4374,
+      "finish": "stop",
+      "full_text": "The section **2.6a content appears ONCE** in the excerpt.\n\nArithmetic:\n\n- Occurrences of **\u201cFirst-class result (R88(26))\u201d**: **1**\n- Occurrences of the table row **\u201cContinuous viable \u03c3_peak window\u201d**: **1**\n\nTotal requested marker/row occurrences:\n\n**1 + 1 = 2**\n\nBut each requested marker appears only once, so the full \u00a72.6a block is not duplicated."
+    },
+    {
+      "id": "Q-section-order",
+      "group": "str",
+      "score": 1,
+      "why": "correct",
+      "elapsed": 78.7,
+      "ct": 901,
+      "pt": 4383,
+      "finish": "stop",
+      "full_text": "In the **physical excerpt**, \u00a79.13 and \u00a79.18 appear **before** the `## 10.` heading.\n\nLine numbers shown:\n\n- \u00a79.13 opening: **L1206**\n- \u00a79.18 opening: **L1590**\n- `## 10.` heading: **L1685**\n- \u00a710.1 opening: **L1688**\n\nArithmetic:\n\n- **1206 < 1685**\n- **1590 < 1685**\n- **1685 < 1688**\n\nTherefore, **\u00a79.13\u2013\u00a79.18 come before \u00a710** in the physical excerpt. They are **not nested inside \u00a710**."
+    },
+    {
+      "id": "Q-table",
+      "group": "str",
+      "score": 0,
+      "why": "no-answer",
+      "elapsed": 73.8,
+      "ct": 908,
+      "pt": 4375,
+      "finish": "stop",
+      "full_text": "The excerpt provided does **not** include the actual \u201cBest configuration found\u201d table from \u00a710.3, so the column counts cannot be verified from the excerpt alone.\n\nFrom the excerpt, \u00a710.3 is present only as opening text:\n\n> \u201c### 10.3 Two-mediator candidate (Drobczyk 2025): thermal relic density\u2026\u201d\n\nNo table, header row, or data row such as `g_h_SM` is shown.\n\nTherefore, based strictly on the supplied excerpt:\n\n- **DATA ROWS value columns:** cannot be determined from the excerpt.\n- **HEADER ROW declared columns:** cannot be determined from the excerpt.\n- **Do they match?** cannot be determined from the excerpt.\n\nTo answer the question, the actual \u00a710.3 table containing the header row and the `g_h_SM` data row would need to be included."
+    }
+  ]
+}
