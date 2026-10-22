@@ -1,0 +1,416 @@
+[
+  {
+    "label": "A. CURRENT  Qwen3.6-35B-A3B-UD-Q4_K_M (MoE 35B/3B-active, Q4_K_M)",
+    "model": "Qwen3.6-35B-A3B-UD-Q4_K_M",
+    "port": 50113,
+    "net": 11,
+    "n": 12,
+    "correct": 11,
+    "wrong": 0,
+    "no_answer": 1,
+    "total_time": 236.7,
+    "total_ct": 4268,
+    "tps": 18.03,
+    "results": [
+      {
+        "id": "Q-floor",
+        "group": "num",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 28.4,
+        "ct": 524,
+        "full_text": "To determine if the paper's stated floor of $\\sigma_{peak} \\ge 51.96 \\text{ cm}^2/\\text{g}$ is correct based on the provided arithmetic logic, we perform the calculation requested.\n\n**1. Identify the variables:**\n*   Target Floor for $\\sigma/m(28)$: $50 \\text{ cm}^2/\\text{g}$\n*   $\\sigma/m(28)$ at $\\sigma_{peak} = 50 \\text{ cm}^2/\\text{g}$: $48.14 \\text{ cm}^2/\\text{g}$\n\n**2. Perform the arithmetic:**\nThe question asks to compute the scaling factor required to reach the target of 50 from the value at 50, applied to the peak height.\n\n$$ \\text{Floor} = 50 \\times \\frac{50}{48.14} $$\n\n$$ \\frac{50}{48.14} \\approx 1.0386373 $$\n\n$$ 50 \\times 1.0386373 \\approx 51.931865 $$\n\n**3. Comparison:**\n*   Calculated Floor: $\\approx 51.93 \\text{ cm}^2/\\text{g}$\n*   Paper's Quoted Floor: $51.96 \\text{ cm}^2/\\text{g}$\n\n**Conclusion:**\nThe paper's value of **51.96** is **not exactly correct** based on the simple linear scaling arithmetic provided ($50 \\times 50 / 48.14$). The result of that specific arithmetic is approximately **51.93**.\n\nThe discrepancy ($51.96 - 51.93 = 0.03$) is likely due to the paper using more precise intermediate values for $\\sigma/m(28)$ at $\\sigma_{peak}=50$ (e.g., if the actual value was $48.11$ instead of $48.14$, the result would be $51.96$) or rounding differences in the final digit. However, strictly following the arithmetic shown in the prompt:\n\n**Answer:** $51.93$ (The paper's 51.96 is slightly higher than the result of the explicit calculation).",
+        "final_score": 1
+      },
+      {
+        "id": "Q-cap",
+        "group": "num",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 19.9,
+        "ct": 376,
+        "full_text": "To determine if the cap of $\\sigma_{peak} = 47.67$ is correct, we must first derive the constant $K$ from the provided interpolation data and then calculate the new cap.\n\n**1. Determine the constant $K$**\n\nThe text states that the causality ratio follows the relationship:\n$$ \\text{Ratio} = \\frac{K}{\\sigma_{peak}} $$\n\nWe are given a reference point:\n*   At $\\sigma_{peak} = 50$, the Ratio $= 2.86$.\n\nSolving for $K$:\n$$ K = \\text{Ratio} \\times \\sigma_{peak} $$\n$$ K = 2.86 \\times 50 $$\n$$ K = 143 $$\n\n**2. Compute the causality cap**\n\nThe causality criterion requires the Ratio to be $\\le 3.0$. We set the Ratio to the cap value of $3.0$ to find the maximum allowed $\\sigma_{peak}$:\n\n$$ 3.0 = \\frac{143}{\\sigma_{peak, cap}} $$\n\nSolving for $\\sigma_{peak, cap}$:\n$$ \\sigma_{peak, cap} = \\frac{143}{3.0} $$\n$$ \\sigma_{peak, cap} = 47.6666... $$\n\nRounding to two decimal places:\n$$ \\sigma_{peak, cap} \\approx 47.67 $$\n\n**Conclusion**\n\nThe arithmetic confirms the value stated in the paper.\n\n*   **Computed K:** 143\n*   **Computed Cap:** 47.67\n*   **Is 47.67 correct?** **Yes.**",
+        "final_score": 1
+      },
+      {
+        "id": "Q-empty",
+        "group": "num",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 18.3,
+        "ct": 339,
+        "full_text": "Based on the excerpt provided, specifically **Q6 (L189-190)** and **Q10 (L2270-2271)**:\n\n**1. Is the viable sigma_peak window EMPTY?**\n**Yes.** The text explicitly states: \"At c = 12, the continuous viable \u03c3_peak window is **EMPTY**... Floor requires \u03c3_peak \u2265 51.96; causality requires \u03c3_peak \u2264 47.67... the floor and causality requirements are disjoint.\"\n\n**2. What does that imply for the canonical sigma_peak = 174 cm\u00b2/g?**\nIt implies that the canonical value of **174 cm\u00b2/g is inconsistent** with the framework's own causality criterion at the \u039bCDM-standard concentration ($c=12$). The text notes that at $c=12$, the framework is constrained to $\\sim 50$ cm\u00b2/g, which is \"a factor of 3.5\u00d7 below the canonical framework value of 174.\" Therefore, the canonical value fails the causality check at this concentration.\n\n**3. By what factor does 174 exceed the floor?**\nTo calculate the factor by which the canonical $\\sigma_{peak}$ (174 cm\u00b2/g) exceeds the floor (51.96 cm\u00b2/g):\n\n$$ \\text{Factor} = \\frac{174}{51.96} \\approx 3.35 $$\n\nThe canonical $\\sigma_{peak}$ exceeds the floor by a factor of approximately **3.35**.",
+        "final_score": 1
+      },
+      {
+        "id": "Q-gauss",
+        "group": "num",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 23.3,
+        "ct": 450,
+        "full_text": "To verify the paper's claim, we perform the arithmetic for the Gaussian exponential term at $v = 15$ km/s with width $\\sigma_1 = 3.0$ km/s and target velocity $v_{target} = 29.4$ km/s.\n\n**1. Identify the parameters:**\n*   $v = 15$\n*   $v_{target} = 29.4$\n*   $\\sigma_1 = 3.0$\n\n**2. Calculate the numerator (difference squared):**\n$$ (v - v_{target})^2 = (15 - 29.4)^2 = (-14.4)^2 $$\n$$ 14.4 \\times 14.4 = 207.36 $$\n\n**3. Calculate the denominator (2 times variance):**\n$$ 2 \\cdot \\sigma_1^2 = 2 \\cdot (3.0)^2 = 2 \\cdot 9.0 = 18.0 $$\n\n**4. Calculate the exponent:**\n$$ \\text{Exponent} = -\\frac{207.36}{18.0} $$\n$$ 207.36 / 18.0 = 11.52 $$\nSo, the exponent is $-11.52$.\n\n**5. Calculate the exponential value:**\n$$ e^{-11.52} \\approx 9.946 \\times 10^{-6} $$\n\n**6. Compare with the paper's claim:**\nThe paper claims the value is $1.0 \\times 10^{-5}$.\n$$ 9.946 \\times 10^{-6} \\approx 1.0 \\times 10^{-5} $$\n\n**Conclusion:**\nThe paper's value of **$1.0 \\times 10^{-5}$** is **correct** (rounded to two significant figures).\n\n**Answer:** Yes, the paper's $1.0 \\times 10^{-5}$ is correct.",
+        "final_score": 1
+      },
+      {
+        "id": "Q-schannel",
+        "group": "num",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 25.7,
+        "ct": 500,
+        "full_text": "To compute the resonance velocity $v_{res}$, we use the formula provided in the excerpt (Q3, L82 and Q13, L807):\n\n$$ v_{res} = c \\cdot \\sqrt{\\frac{8 \\cdot \\Delta M}{2 \\cdot m_\\chi}} $$\n\n**1. Identify the given values:**\n*   Speed of light, $c = 299,792.458$ km/s\n*   Ratio term, $\\frac{\\Delta M}{2 \\cdot m_\\chi} = 1.2 \\times 10^{-9}$\n\n**2. Substitute the values into the equation:**\n\n$$ v_{res} = 299,792.458 \\cdot \\sqrt{8 \\cdot (1.2 \\times 10^{-9})} $$\n\n**3. Perform the arithmetic inside the square root:**\n\n$$ 8 \\cdot 1.2 \\times 10^{-9} = 9.6 \\times 10^{-9} $$\n\n**4. Calculate the square root:**\n\n$$ \\sqrt{9.6 \\times 10^{-9}} = \\sqrt{96 \\times 10^{-10}} = \\sqrt{96} \\times 10^{-5} $$\n\n$$ \\sqrt{96} \\approx 9.797959 $$\n\n$$ \\sqrt{9.6 \\times 10^{-9}} \\approx 9.797959 \\times 10^{-5} \\approx 0.0000979796 $$\n\n**5. Multiply by the speed of light:**\n\n$$ v_{res} = 299,792.458 \\cdot 0.0000979796 $$\n\n$$ v_{res} \\approx 29.374 \\text{ km/s} $$\n\n**Conclusion:**\nThe calculated value is approximately **29.37 km/s**.\n\nRounding to three significant figures (consistent with the input precision of $1.2 \\times 10^{-9}$ and the paper's reported value), this yields **29.4 km/s**.\n\n**Yes, it gives 29.4 km/s.**",
+        "final_score": 1
+      },
+      {
+        "id": "Q-direction",
+        "group": "num",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 18.7,
+        "ct": 354,
+        "full_text": "Based on the arithmetic provided in **Q5 (L141-145)** and **Q10 (L2270-2273)**, the D-5 bound is **LESS restrictive** than the headline.\n\n**Numerical Explanation:**\n\n1.  **Headline Constraint ($\\sigma_1 = 4.4$):** The paper states the headline hierarchy constraint is $g_N/g_\\chi < 1.74 \\times 10^{-13}$.\n2.  **D-5 Constraint ($\\sigma_1 = 1.0$):** The paper states that under the D-5 fit maximum-likelihood width, the bound is $g_N/g_\\chi < 2.84 \\times 10^{-13}$.\n3.  **Comparison:**\n    $$2.84 \\times 10^{-13} > 1.74 \\times 10^{-13}$$\n\nBecause the upper limit on the ratio $g_N/g_\\chi$ is a larger number in the D-5 case ($2.84 \\times 10^{-13}$) compared to the headline case ($1.74 \\times 10^{-13}$), the D-5 constraint allows for a wider range of values. Therefore, it is **less restrictive**.\n\nThe text explicitly confirms this in Q5, L145: *\"i.e. the v = 28 bound is slightly LOOSER than the $\\sigma_1 = 4.4$ headline $g_N/g_\\chi < 1.74e-13$, not more restrictive.\"*",
+        "final_score": 1
+      },
+      {
+        "id": "Q-thresholds",
+        "group": "num",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 18.5,
+        "ct": 348,
+        "full_text": "Based on the excerpt provided, specifically **Q11 (L36)** and **Q1 (L11)**, here is the arithmetic for the factors against the three Horigome+ 2025 limits using the value $\\sigma/m(15) = 2.85 \\text{ cm}^2/\\text{g}$:\n\n1.  **Against the velocity-dependent limit ($0.8 \\text{ cm}^2/\\text{g}$ at $w=10 \\text{ km/s}$):**\n    $$ \\frac{2.85}{0.8} = 3.5625 $$\n    Factor: **3.56\u00d7** (The text rounds this to **3.6\u00d7** in L11 and L36).\n\n2.  **Against the decisive CDM-preference threshold ($0.2 \\text{ cm}^2/\\text{g}$):**\n    $$ \\frac{2.85}{0.2} = 14.25 $$\n    Factor: **14.25\u00d7**\n\n3.  **Against the velocity-independent limit ($0.04 \\text{ cm}^2/\\text{g}$ at $w \\to \\infty$):**\n    $$ \\frac{2.85}{0.04} = 71.25 $$\n    Factor: **71.25\u00d7**\n\n**Answer:**\nThe factors are **3.56\u00d7** (or 3.6\u00d7), **14.25\u00d7**, and **71.25\u00d7**.",
+        "final_score": 1
+      },
+      {
+        "id": "Q-abstract",
+        "group": "num",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 23.0,
+        "ct": 447,
+        "full_text": "Based on the excerpt provided, specifically **Q10 (L2275)** and **Q9 (L1606)**, here are the two counts for the canonical parameters at the promoted published-sigma_unc likelihood:\n\n1.  **Abstract channel count (Canonical Phase 44):** **4 PASS / 3 MARGINAL / 1 FAIL** (Total 8 channels).\n    *   *Source:* Q10 L2264 (\"Abstract channel count (canonical): 8 constrained channels (4 PASS / 3 MARGINAL / 1 FAIL)...\") and Q9 L1602.\n2.  **A.15 Block 2 count (Canonical Phase 44 at promoted likelihood):** **1 PASS / 0 MARGINAL / 7 FAIL** (Total 8 channels).\n    *   *Source:* Q10 L2275 (\"Per-channel pass/fail at canonical Phase 44... Headline: **1 PASS / 0 MARGINAL / 7 FAIL** (Cluster v=500 only).\")\n\n**Arithmetic/Logic Check:**\n*   The Abstract (Q10 L2264) lists the breakdown: 4 PASS + 3 MARGINAL + 1 FAIL = 8 channels.\n*   The A.15 Block 2 headline (Q10 L2275) lists the breakdown: 1 PASS + 0 MARGINAL + 7 FAIL = 8 channels.\n*   The discrepancy arises because the Abstract count (L2264) appears to reflect a different likelihood or interpretation (possibly the \"v1 free-fit result\" mentioned in Q2 L117 or a pre-correction state), whereas the A.15 Block 2 headline explicitly states it is for the \"canonical Phase 44\" at the \"promoted real likelihood (T205 8-channel published-\u03c3_unc)\" which yields only 1 pass. The text in Q9 L1606 confirms this specific likelihood yields \"1 of 8 channels\" for the canonical parameters.",
+        "final_score": 1
+      },
+      {
+        "id": "Q-fH",
+        "group": "num",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 17.3,
+        "ct": 324,
+        "full_text": "To determine the drift in $\\sigma_{eff}$ between the two stated values of $f_H$, we calculate $\\sigma_{eff}$ for both cases using the formula $\\sigma_{eff} = f_H^2 \\cdot \\sigma/m$. Since $\\sigma/m$ is a common factor, the drift is determined by the ratio of the squared $f_H$ values.\n\n**1. Calculate squares of the $f_H$ values:**\n\n*   **Case A (constants.py):** $f_H = 0.297$\n    $$f_H^2 = 0.297^2 = 0.088209$$\n\n*   **Case B (text):** $f_H = 0.30$\n    $$f_H^2 = 0.30^2 = 0.090000$$\n\n**2. Compute the ratio (Drift):**\n\nTo find the relative drift (how much larger the text value is compared to the constants.py value):\n\n$$\\text{Ratio} = \\frac{0.090000}{0.088209} \\approx 1.02028$$\n\n**Conclusion:**\n\nThe drift in $\\sigma_{eff}$ is approximately **2.03%**. The value derived from the text ($f_H=0.30$) is **1.0203\u00d7** larger than the value derived from `constants.py` ($f_H=0.297$).",
+        "final_score": 1
+      },
+      {
+        "id": "Q-dupe",
+        "group": "str",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 26.2,
+        "ct": 310,
+        "full_text": "Based on the provided excerpt, here is the count for the specified markers:\n\n1.  **'First-class result (R88(26))' marker**:\n    *   Found in **\u00a72.6a** (Line 202): `**First-class result (R88(26)) \u2014 the paper's most important internal tension...`\n    *   *Note*: The marker `R88(26)` does not appear in \u00a79.13 or \u00a79.18. \u00a79.13 restates the circularity but uses the header `### 9.13 Gravothermal evolution...` and does not repeat the bolded \"First-class result (R88(26))\" string.\n    *   **Count: 1**\n\n2.  **'Continuous viable sigma_peak window' table row**:\n    *   Found in the table within **\u00a72.6a** (Line 210): `| Continuous viable \u03c3_peak window | **EMPTY** ... | [51.96, 250] cm\u00b2/g |`\n    *   This table does not appear in \u00a79.13, \u00a79.18, \u00a710.1, or \u00a710.3.\n    *   **Count: 1**\n\n**Conclusion:**\nThe section 2.6a content (specifically the markers requested) appears **ONCE** in the excerpt.",
+        "final_score": 1
+      },
+      {
+        "id": "Q-section-order",
+        "group": "str",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 7.9,
+        "ct": 128,
+        "full_text": "Based on the line numbers provided in the excerpt, section 9.13 sits **BEFORE** the '## 10.' heading.\n\n*   **\u00a79.13** begins at **Line 1206**.\n*   The **'## 10.'** header is located at **Line 1685**.\n\nTherefore, \u00a79.13 (and \u00a79.18, which begins at Line 1590) comes **before** \u00a710. They are not nested inside \u00a710; rather, they precede it in the document structure.",
+        "final_score": 1
+      },
+      {
+        "id": "Q-table",
+        "group": "str",
+        "score": 0,
+        "why": "no-answer",
+        "elapsed": 9.6,
+        "ct": 168,
+        "full_text": "Based on the provided excerpt, **the 'Best configuration found' table is not present in the text.**\n\nThe excerpt includes the header and introductory text for **\u00a710.3** (lines 1748\u20131757), which discusses the \"Two-mediator candidate (Drobczyk 2025)\" and mentions that \"T185 \u2014 Two-mediator resolution... resolves the tension,\" but it **does not contain the actual table** with data rows (such as a `g_h_SM` row) or a header row declaring column counts.\n\nTherefore, it is impossible to answer the question regarding the number of value columns in the data rows, the number of columns in the header row, or whether they match, as the table data is missing from the provided excerpt.",
+        "final_score": 0
+      }
+    ],
+    "final_net": 11,
+    "final_correct": 11,
+    "final_wrong": 0
+  },
+  {
+    "label": "B. NEW      Qwen3.8-27B-GSQ-RCO-IQ2_S (dense 27B, 2.75 bpw)",
+    "model": "Qwen3.8-27B-GSQ-RCO-IQ2_S",
+    "port": 50114,
+    "net": 9,
+    "n": 12,
+    "correct": 10,
+    "wrong": 1,
+    "no_answer": 1,
+    "total_time": 974.1,
+    "total_ct": 5202,
+    "tps": 5.34,
+    "results": [
+      {
+        "id": "Q-floor",
+        "group": "num",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 140.4,
+        "ct": 800,
+        "full_text": "To determine if the paper's floor value of 51.96 cm\u00b2/g is correct, we must calculate the required $\\sigma_{peak}$ such that the total cross-section $\\sigma/m(28)$ equals the floor threshold of 50 cm\u00b2/g.\n\n### 1. Identify the Components of $\\sigma/m(28)$\n\nThe paper states that the total cross-section at $v=28$ km/s is the sum of the Gaussian resonance term and the power-law background:\n\n$$ \\sigma/m(28) = \\sigma_{peak} \\cdot \\exp\\left(-\\frac{(28 - v_{target})^2}{2\\sigma_1^2}\\right) + \\sigma_0 \\left(\\frac{100}{28}\\right)^{a_{slope}} $$\n\nFrom the text (Q2 and Q6), the parameters are:\n*   $v_{target} = 29.4$ km/s\n*   $\\sigma_1 = 4.4$ km/s\n*   $\\sigma_0 = 0.052$ cm\u00b2/g\n*   $a_{slope} = 1.93$\n\n### 2. Calculate the Background Contribution\n\nFirst, we calculate the background term $B$:\n\n$$ B = 0.052 \\times \\left(\\frac{100}{28}\\right)^{1.93} $$\n\n$$ \\frac{100}{28} \\approx 3.5714 $$\n\n$$ 3.5714^{1.93} \\approx 11.886 $$\n\n$$ B = 0.052 \\times 11.886 \\approx 0.618 \\text{ cm}^2/\\text{g} $$\n\n### 3. Calculate the Gaussian Resonance Coefficient\n\nNext, we calculate the exponential factor $E$ for the resonance term:\n\n$$ E = \\exp\\left(-\\frac{(28 - 29.4)^2}{2 \\times (4.4)^2}\\right) $$\n\n$$ (28 - 29.4)^2 = (-1.4)^2 = 1.96 $$\n\n$$ 2 \\times (4.4)^2 = 2 \\times 19.36 = 38.72 $$\n\n$$ \\frac{1.96}{38.72} \\approx 0.05062 $$\n\n$$ E = \\exp(-0.05062) \\approx 0.9506 $$\n\nSo, the resonance contribution is $0.9506 \\times \\sigma_{peak}$.\n\n### 4. Solve for the Floor $\\sigma_{peak}$\n\nThe floor condition is $\\sigma/m(28) \\ge 50$. We set the total equal to 50 to find the minimum $\\sigma_{peak}$:\n\n$$ 50 = \\sigma_{peak} \\cdot 0.9506 + 0.618 $$\n\n$$ 50 - 0.618 = \\sigma_{peak} \\cdot 0.9506 $$\n\n$$ 49.382 = \\sigma_{peak} \\cdot 0.9506 $$\n\n$$ \\sigma_{peak} = \\frac{49.382}{0.9506} $$\n\n$$ \\sigma_{peak} \\approx 51.948 \\text{ cm}^2/\\text{g} $$\n\nRounding to two decimal places, we get **51.95 cm\u00b2/g**.\n\n###",
+        "final_score": 1
+      },
+      {
+        "id": "Q-cap",
+        "group": "num",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 61.4,
+        "ct": 332,
+        "full_text": "Based on the text in **Q6 (L189-190)** and **Q10 (L2270)**, the causality criterion is defined as a ratio that must be greater than 3.0. The text states:\n\n> \"causality requires $\\sigma_{peak} \\le 47.67$ (interpolated from ratio = 2.86 at $\\sigma_{peak} = 50$).\"\n\nThis implies the relationship is:\n$$ \\text{Ratio} = \\frac{K}{\\sigma_{peak}} $$\n\n**Step 1: Compute K**\nUsing the given data point where $\\sigma_{peak} = 50$ and $\\text{Ratio} = 2.86$:\n$$ 2.86 = \\frac{K}{50} $$\n$$ K = 2.86 \\times 50 $$\n$$ K = 143 $$\n\n**Step 2: Compute the Cap**\nThe cap is defined as the $\\sigma_{peak}$ value where the ratio equals the threshold of 3.0:\n$$ 3.0 = \\frac{143}{\\sigma_{peak}} $$\n$$ \\sigma_{peak} = \\frac{143}{3.0} $$\n$$ \\sigma_{peak} = 47.666... $$\n\n**Conclusion:**\nRounding to two decimal places, the value is **47.67**.\n\n**Yes, 47.67 is correct.**",
+        "final_score": 1
+      },
+      {
+        "id": "Q-empty",
+        "group": "num",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 80.1,
+        "ct": 441,
+        "full_text": "Based on the excerpt provided, specifically **Q6 (L189-190)** and **Q10 (L2270)**, here is the answer with the arithmetic shown:\n\n**1. Is the viable sigma_peak window EMPTY at c=12?**\n**Yes.**\nThe text states: \"At c = 12: the continuous viable \u03c3_peak window is **EMPTY**... Floor requires \u03c3_peak \u2265 51.96; causality requires \u03c3_peak \u2264 47.67.\"\nSince the lower bound (51.96) is greater than the upper bound (47.67), there is no value of \u03c3_peak that satisfies both constraints simultaneously.\n\n**2. What does that imply for the canonical sigma_peak = 174 cm\u00b2/g?**\nIt implies that the canonical value of **174 cm\u00b2/g is NOT viable** at c=12.\nThe text states: \"The framework's canonical \u03c3_peak = 174 satisfies the floor and passes causality only at c = 4... \u2014 not at c = 12.\"\nSpecifically, 174 cm\u00b2/g exceeds the causality cap (47.67 cm\u00b2/g), meaning it violates the causality criterion at c=12.\n\n**3. By what factor does 174 exceed the floor?**\nThe floor is 51.96 cm\u00b2/g.\n$$ \\text{Factor} = \\frac{174}{51.96} \\approx 3.349 $$\n\n**Answer:**\nThe viable window is **EMPTY** because the floor (51.96) is higher than the cap (47.67). This implies the canonical \u03c3_peak = 174 cm\u00b2/g **fails** the causality criterion at c=12 (as it is well above the cap of 47.67). The canonical value exceeds the floor by a factor of approximately **3.35** (174 / 51.96).",
+        "final_score": 1
+      },
+      {
+        "id": "Q-gauss",
+        "group": "num",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 53.5,
+        "ct": 281,
+        "full_text": "**Arithmetic:**\n\n1.  **Calculate the numerator (squared difference):**\n    $$ (15 - 29.4)^2 = (-14.4)^2 = 207.36 $$\n\n2.  **Calculate the denominator:**\n    $$ 2 \\times (3.0)^2 = 2 \\times 9 = 18 $$\n\n3.  **Calculate the exponent:**\n    $$ \\frac{207.36}{18} = 11.52 $$\n\n4.  **Calculate the exponential value:**\n    $$ e^{-11.52} \\approx 9.93 \\times 10^{-6} $$\n\n**Conclusion:**\n\nThe paper's value of **$1.0 \\times 10^{-5}$** is **correct** (rounded to two significant figures).\n\nThe precise calculation yields $9.93 \\times 10^{-6}$, which rounds to $1.0 \\times 10^{-5}$. This confirms that at $\\sigma_1 = 3.0$ km/s, the Gaussian resonance tail at $v = 15$ km/s is effectively zero ($\\approx 10^{-5}$), suppressing the dSph gravothermal tail as claimed in the text.",
+        "final_score": 1
+      },
+      {
+        "id": "Q-schannel",
+        "group": "num",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 140.2,
+        "ct": 800,
+        "full_text": "To determine if the formula yields 29.4 km/s, we perform the arithmetic step-by-step using the provided values.\n\n**Given:**\n*   $c = 299,792.458$ km/s\n*   $\\frac{\\Delta M}{2 m_\\chi} = 1.2 \\times 10^{-9}$\n*   Formula: $v_{res} = c \\cdot \\sqrt{\\frac{8 \\Delta M}{2 m_\\chi}}$\n\n**Step 1: Simplify the term inside the square root**\n\nThe term inside the square root is $\\frac{8 \\Delta M}{2 m_\\chi}$. We can rewrite this as:\n$$ \\frac{8 \\Delta M}{2 m_\\chi} = 4 \\cdot \\left( \\frac{2 \\Delta M}{2 m_\\chi} \\right) $$\n*Wait, let's look at the structure carefully.*\nThe formula is $c \\cdot \\sqrt{\\frac{8 \\Delta M}{2 m_\\chi}}$.\nLet $X = \\frac{\\Delta M}{2 m_\\chi} = 1.2 \\times 10^{-9}$.\nThen $\\frac{8 \\Delta M}{2 m_\\chi} = \\frac{8}{2} \\cdot \\frac{\\Delta M}{m_\\chi} = 4 \\cdot \\frac{\\Delta M}{m_\\chi}$.\nAlternatively, express in terms of $X$:\n$$ \\frac{8 \\Delta M}{2 m_\\chi} = 4 \\cdot \\left( \\frac{2 \\Delta M}{2 m_\\chi} \\right) \\quad \\text{(This is incorrect algebra)} $$\n\nLet's do it directly:\n$$ \\frac{8 \\Delta M}{2 m_\\chi} = 4 \\cdot \\frac{\\Delta M}{m_\\chi} $$\nSince $X = \\frac{\\Delta M}{2 m_\\chi}$, then $\\frac{\\Delta M}{m_\\chi} = 2X$.\nTherefore:\n$$ \\frac{8 \\Delta M}{2 m_\\chi} = 4 \\cdot (2X) = 8X $$\n\nSo the formula becomes:\n$$ v_{res} = c \\cdot \\sqrt{8X} $$\n\n**Step 2: Calculate the value inside the square root**\n\n$$ 8X = 8 \\cdot (1.2 \\times 10^{-9}) $$\n$$ 8X = 9.6 \\times 10^{-9} $$\n\n**Step 3: Take the square root**\n\n$$ \\sqrt{9.6 \\times 10^{-9}} = \\sqrt{9.6} \\times \\sqrt{10^{-9}} $$\n$$ \\sqrt{9.6} \\approx 3.098386 $$\n$$ \\sqrt{10^{-9}} = 10^{-4.5} \\approx 3.162278 \\times 10^{-5} $$\n\n$$ \\sqrt{9.6 \\times 10^{-9}} \\approx 3.098386 \\times 3.162278 \\times 10^{-5} $$\n$$ \\approx 9.7979 \\times 10^{-5} $$\n\n**Step 4: Multiply by c**\n\n$$ v_{res} = 299,792.458 \\text{ km/s} \\times 9.7979 \\times 10^{-5} $$\n\n$$ v_{res} \\approx 299,792.458 \\times 0",
+        "final_score": 1
+      },
+      {
+        "id": "Q-direction",
+        "group": "num",
+        "score": -1,
+        "why": "confidently wrong",
+        "elapsed": 86.7,
+        "ct": 479,
+        "full_text": "**Answer:** The D-5 bound is **LESS restrictive** than the headline.\n\n**Numerical Explanation:**\n\n1.  **Compare the upper limits:**\n    *   Headline ($\\sigma_1 = 4.4$): $g_N/g_\\chi < 1.74 \\times 10^{-13}$\n    *   D-5 ($\\sigma_1 = 1.0$): $g_N/g_\\chi < 2.84 \\times 10^{-13}$\n\n2.  **Logical Interpretation:**\n    A constraint of the form $x < A$ is \"more restrictive\" if $A$ is smaller (it allows a smaller range of values for $x$).\n    *   $1.74 \\times 10^{-13} < 2.84 \\times 10^{-13}$\n    *   Therefore, the headline bound ($1.74 \\times 10^{-13}$) is tighter (more restrictive) than the D-5 bound ($2.84 \\times 10^{-13}$).\n\n3.  **Physical Context from the Text:**\n    The text explicitly states: *\"the v = 28 bound is slightly LOOSER than the $\\sigma_1 = 4.4$ headline... not more restrictive.\"*\n    This occurs because under $\\sigma_1 = 1.0$, the cross-section at $v=28$ is lower ($65.49 \\text{ cm}^2/\\text{g}$) compared to the $\\sigma_1 = 4.4$ case (where the resonance peak is broader and contributes more to the effective cross-section at that velocity, or the anchor shifts). A lower $\\sigma_{DM-DM}$ leads to a larger ratio $\\sigma_{DM-DM}/\\sigma_{SI}$, which in turn allows a larger (less restrictive) upper bound on the coupling ratio $g_N/g_\\chi$.\n\n**Conclusion:** The D-5 bound ($2.84 \\times 10^{-13}$) is **less restrictive** (looser) than the headline bound ($1.74 \\times 10^{-13}$).",
+        "final_score": 1
+      },
+      {
+        "id": "Q-thresholds",
+        "group": "num",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 98.2,
+        "ct": 548,
+        "full_text": "Based on the text provided, specifically the \"Main result\" section (L36) and the \"Historical \u03c3/m(v) table\" (L2205-2210), here are the factors for $\\sigma/m(15) = 2.85 \\text{ cm}^2/\\text{g}$ against the three Horigome+ 2025 limits:\n\n1.  **Against the 0.8 cm\u00b2/g limit (w=10 km/s velocity-dependent):**\n    $$ \\frac{2.85}{0.8} = 3.5625 \\approx 3.6 $$\n    *(Note: The text in L36 states the framework exceeds this threshold by \"3.6\u201323.7\u00d7\" at $v_{eff} = 5\u201320$ km/s. The value 3.6 corresponds to the lower end of this range, consistent with $v=15$.)*\n\n2.  **Against the 0.2 cm\u00b2/g limit (decisive CDM-preference threshold):**\n    $$ \\frac{2.85}{0.2} = 14.25 $$\n    *(Note: The text in L36 states the framework exceeds this threshold by \"27\u201349\u00d7\" at $v = 9\u201340$ km/s. The value 14.25 is within the broader context of the tension, though the specific range cited in L36 (27-49x) likely refers to other velocities or a different calculation method. However, the direct arithmetic for the 0.2 limit is 14.25.)*\n\n3.  **Against the 0.04 cm\u00b2/g limit (velocity-independent w->infinity):**\n    $$ \\frac{2.85}{0.04} = 71.25 $$\n    *(Note: The text in L2210 mentions a \"27\u201349\u00d7\" correction for the decisive threshold, but the 0.04 limit is often associated with the \"velocity-independent\" or \"w->infinity\" case. The direct arithmetic is 71.25.)*\n\n**Summary of Factors:**\n*   **0.8 cm\u00b2/g limit:** **3.6** (or 3.5625)\n*   **0.2 cm\u00b2/g limit:** **14.25**\n*   **0.04 cm\u00b2/g limit:** **71.25**",
+        "final_score": 1
+      },
+      {
+        "id": "Q-abstract",
+        "group": "num",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 92.4,
+        "ct": 521,
+        "full_text": "Based on the provided excerpt, here are the two channel counts for the canonical parameters (\u03c3\u2080=0.052, a=1.93, \u03c3_peak=174, v_target=29.4, \u03c3\u2081=4.4):\n\n1.  **Abstract / \u00a79.17 Score (Canonical Phase 44):**\n    *   **4 PASS / 3 MARGINAL / 1 FAIL**\n    *   *Source:* Q9 (L1602-1604) and Q10 (L2264).\n    *   *Breakdown:*\n        *   **4 PASS:** Cluster v=500, dSph v=10, Cloud-9 v=28, SPARC v=100.\n        *   **3 MARGINAL:** UFD v=3, UFD v=5, UFD v=15.\n        *   **1 FAIL:** dSph v=7.\n\n2.  **A.15 Block 2 (Promoted published-\u03c3_unc likelihood):**\n    *   **1 PASS / 0 MARGINAL / 7 FAIL**\n    *   *Source:* Q10 (L2275).\n    *   *Breakdown:*\n        *   **1 PASS:** Cluster v=500 only.\n        *   **0 MARGINAL:** None.\n        *   **7 FAIL:** All other channels (dSph v=10, Cloud-9 v=28, SPARC v=100, UFD v=3, UFD v=5, UFD v=15, dSph v=7).\n\n**Arithmetic/Comparison:**\nThe abstract count sums to **8** channels (4+3+1). The A.15 Block 2 count also sums to **8** channels (1+0+7). The difference arises because the \"promoted real likelihood\" (T205 8-channel published-\u03c3_unc) is much stricter than the \"canonical Phase 44\" free-fit evaluation used in the abstract/\u00a79.17. Under the stricter likelihood, only the Cluster channel (v=500) passes, whereas the abstract count claims 4 passes (including dSph v=10, Cloud-9 v=28, and SPARC v=100).",
+        "final_score": 1
+      },
+      {
+        "id": "Q-fH",
+        "group": "num",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 55.2,
+        "ct": 290,
+        "full_text": "### Step 1: Identify the values\n*   $f_{H,1} = 0.297$ (from `constants.py`)\n*   $f_{H,2} = 0.30$ (from text)\n\n### Step 2: Compute the squares\n$$f_{H,1}^2 = 0.297^2 = 0.088209$$\n$$f_{H,2}^2 = 0.30^2 = 0.090000$$\n\n### Step 3: Compute the ratio\nThe ratio of the squared factors (which is the ratio of $\\sigma_{eff}$ for a fixed $\\sigma/m$) is:\n$$\\text{Ratio} = \\frac{f_{H,2}^2}{f_{H,1}^2} = \\frac{0.090000}{0.088209} \\approx 1.0203$$\n\n### Conclusion\nThe drift in $\\sigma_{eff}$ between the two values is approximately **2.03%**. Specifically, using $f_H = 0.30$ yields a $\\sigma_{eff}$ that is **1.0203 times** larger than using $f_H = 0.297$.",
+        "final_score": 1
+      },
+      {
+        "id": "Q-dupe",
+        "group": "str",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 73.5,
+        "ct": 199,
+        "full_text": "Based on the provided excerpt, here is the count of the specified markers:\n\n1.  **'First-class result (R88(26))' marker**:\n    *   Found in line 202: `**First-class result (R88(26)) \u2014 the paper's most important internal tension, elevated from \u00a72.6.**`\n    *   **Count: 1**\n\n2.  **'Continuous viable sigma_peak window' table row**:\n    *   Found in line 210: `| Continuous viable \u03c3_peak window | **EMPTY** (no viable \u03c3_peak at c=12 with canonical Gaussian) | [51.96, 250] cm\u00b2/g |`\n    *   **Count: 1**\n\n**Conclusion:**\nThe section 2.6a content appears **ONCE** in the excerpt. Both specific markers appear exactly **1** time each.",
+        "final_score": 1
+      },
+      {
+        "id": "Q-section-order",
+        "group": "str",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 33.6,
+        "ct": 173,
+        "full_text": "Based on the line numbers provided in the excerpt:\n\n**Section 9.13 sits BEFORE the '## 10.' heading.**\n\n**\u00a79.13\u2013\u00a79.18 come before \u00a710.** They are not nested inside \u00a710; they are preceding sections in the document structure.\n\n**Line numbers:**\n*   **\u00a79.13 opening:** Line **1206**\n*   **\u00a79.18 opening:** Line **1590**\n*   **'## 10.' header:** Line **1685**\n\nSince 1206 and 1590 are numerically less than 1685, sections 9.13 and 9.18 appear earlier in the document than section 10.",
+        "final_score": 1
+      },
+      {
+        "id": "Q-table",
+        "group": "str",
+        "score": 0,
+        "why": "no-answer",
+        "elapsed": 59.0,
+        "ct": 338,
+        "full_text": "Based on the provided text, **the \"Best configuration found\" table and its header row are not present in the excerpt.**\n\nThe excerpt contains the following sections related to \u00a710.3:\n1.  **\u00a710.3 opening (L1748-L1757):** This section discusses the \"Two-mediator candidate (Drobczyk 2025)\" and the \"thermal relic density\" problem. It mentions T181, T185, and the s-channel Breit-Wigner resolution, but it **does not contain a table** titled \"Best configuration found\" or any table with a `g_h_SM` row.\n2.  **\u00a710.1 opening (L1688-L1690):** Discusses UV completion and constraints.\n3.  **\u00a710.3 table (L1748):** The header in the text is `### 10.3 Two-mediator candidate (Drobczyk 2025): thermal relic density**\u00a710.3 \u2014 Thermal relic density UV completion...`. This is a section header, not a data table.\n\n**Conclusion:**\nThe specific table requested (\"Best configuration found\" with a `g_h_SM` row) is **not included** in the provided excerpt. Therefore, it is impossible to count the columns or quote the header row from the text provided.\n\nIf you have access to the full paper, please provide the specific table content for \u00a710.3. Based strictly on the provided excerpt, the answer is that the table is missing.",
+        "final_score": 0
+      }
+    ],
+    "final_net": 11,
+    "final_correct": 11,
+    "final_wrong": 0
+  },
+  {
+    "label": "C. NEW      Qwen3.8-27B-GSQ-RCO-IQ3_XXS (dense 27B, 3.00 bpw)",
+    "model": "Qwen3.8-27B-GSQ-RCO-IQ3_XXS",
+    "port": 50115,
+    "net": 6,
+    "n": 12,
+    "correct": 8,
+    "wrong": 2,
+    "no_answer": 2,
+    "total_time": 1734.9,
+    "total_ct": 4940,
+    "tps": 2.85,
+    "results": [
+      {
+        "id": "Q-floor",
+        "group": "num",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 545.7,
+        "ct": 800,
+        "full_text": "To determine if the paper's floor value of 51.96 cm\u00b2/g is correct, we must calculate the required $\\sigma_{peak}$ such that the total cross-section $\\sigma/m(28)$ equals the floor threshold of 50 cm\u00b2/g.\n\n**1. Identify the components of $\\sigma/m(28)$**\n\nThe total cross-section at $v=28$ km/s is the sum of the Gaussian resonance term and the power-law background term:\n$$ \\sigma/m(28) = \\sigma_{peak} \\cdot \\exp\\left(-\\frac{(28 - v_{target})^2}{2\\sigma_1^2}\\right) + \\sigma_0 \\left(\\frac{100}{28}\\right)^{a_{slope}} $$\n\nFrom the paper's canonical parameters (Q2, Q6, Q10):\n*   $v_{target} = 29.4$ km/s\n*   $\\sigma_1 = 4.4$ km/s\n*   $\\sigma_0 = 0.052$ cm\u00b2/g\n*   $a_{slope} = 1.93$\n\n**2. Calculate the Background Term**\n\n$$ \\text{Background} = 0.052 \\times \\left(\\frac{100}{28}\\right)^{1.93} $$\n\nFirst, calculate the ratio:\n$$ \\frac{100}{28} \\approx 3.5714 $$\n\nNext, raise to the power of 1.93:\n$$ 3.5714^{1.93} \\approx 11.836 $$\n\nMultiply by $\\sigma_0$:\n$$ \\text{Background} \\approx 0.052 \\times 11.836 \\approx 0.6155 \\text{ cm}^2/\\text{g} $$\n\n*(Note: The paper states in Q2 that $\\sigma/m(28) \\approx 166.02$ for $\\sigma_{peak}=174$. Let's verify the Gaussian factor to ensure consistency.\nGaussian Factor $G = \\exp\\left(-\\frac{(28-29.4)^2}{2(4.4)^2}\\right) = \\exp\\left(-\\frac{1.96}{38.72}\\right) = \\exp(-0.0506) \\approx 0.9507$.\nCheck: $174 \\times 0.9507 + 0.6155 \\approx 165.42 + 0.62 = 166.04$. This matches the paper's 166.02 closely.)*\n\n**3. Set up the equation for the Floor**\n\nWe require $\\sigma/m(28) = 50$ cm\u00b2/g.\n$$ 50 = \\sigma_{peak} \\cdot G + \\text{Background} $$\n$$ 50 = \\sigma_{peak} \\cdot 0.9507 + 0.6155 $$\n\n**4. Solve for $\\sigma_{peak}$**\n\nSubtract the background from the target:\n$$ \\sigma_{peak} \\cdot 0.9507 = 50 - 0.6155 $$\n$$ \\sigma_{peak} \\cdot 0.9507 = 49.3845 $$\n\nDivide by the Gaussian factor:\n$$ \\sigma_{peak} = \\frac{49.3845}{0.950",
+        "final_score": 1
+      },
+      {
+        "id": "Q-cap",
+        "group": "num",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 77.4,
+        "ct": 277,
+        "full_text": "Based on the text in **Q6 (L189-190)**, the causality criterion is defined as a ratio $R > 3.0$. The text states that at $\\sigma_{peak} = 50$, the ratio is $2.86$.\n\nThe relationship is given as:\n$$ R = \\frac{K}{\\sigma_{peak}} $$\n\n**Step 1: Compute K**\nUsing the data point provided in the text:\n$$ 2.86 = \\frac{K}{50} $$\n$$ K = 2.86 \\times 50 $$\n$$ K = 143 $$\n\n**Step 2: Compute the cap**\nThe cap is the value of $\\sigma_{peak}$ where the ratio $R$ equals the threshold of $3.0$.\n$$ 3.0 = \\frac{143}{\\sigma_{peak, cap}} $$\n$$ \\sigma_{peak, cap} = \\frac{143}{3.0} $$\n$$ \\sigma_{peak, cap} = 47.666... $$\n\n**Conclusion:**\nRounding to two decimal places, the cap is **47.67**.\n\n**Yes, 47.67 is correct.**",
+        "final_score": 1
+      },
+      {
+        "id": "Q-empty",
+        "group": "num",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 97.2,
+        "ct": 369,
+        "full_text": "Based on the excerpt provided, specifically **Q6 (L189-190)** and **Q10 (L2270-2279)**:\n\n1.  **Is the viable sigma_peak window EMPTY at c=12?**\n    **Yes.**\n    The text states: \"At c = 12: the continuous viable \u03c3_peak window is **EMPTY**... Floor requires \u03c3_peak \u2265 51.96; causality requires \u03c3_peak \u2264 47.67\". Since the lower bound (51.96) is greater than the upper bound (47.67), there is no value of \u03c3_peak that satisfies both constraints simultaneously.\n\n2.  **What does that imply for the canonical sigma_peak = 174 cm\u00b2/g?**\n    It implies that the canonical value of **174 cm\u00b2/g is NOT viable at c = 12**.\n    The text explicitly states: \"The framework's canonical \u03c3_peak = 174 satisfies the floor and passes causality **only at c = 4** (Ohana+ physical anchor) \u2014 **not at c = 12** (\u039bCDM-conservative).\" At c=12, the framework is inconsistent because 174 is far above the causality cap of 47.67.\n\n3.  **By what factor does 174 exceed the floor?**\n    The floor is **51.96 cm\u00b2/g**.\n    Calculation:\n    $$ \\frac{174}{51.96} \\approx 3.3487 $$\n    \n    The canonical \u03c3_peak exceeds the floor by a factor of approximately **3.35**.",
+        "final_score": 1
+      },
+      {
+        "id": "Q-gauss",
+        "group": "num",
+        "score": 0,
+        "why": "no-answer",
+        "elapsed": 142.2,
+        "ct": 575,
+        "full_text": "To verify the paper's claim, we must calculate the value of the Gaussian exponential term provided in the text.\n\n**1. Identify the formula and parameters**\nFrom Q4 (L117), the paper states:\n$$ \\exp\\left(-\\frac{(15 - 29.4)^2}{2 \\times 3.0^2}\\right) = 1.0 \\times 10^{-5} $$\n\nThe parameters are:\n*   $v = 15$ km/s\n*   $v_{target} = 29.4$ km/s\n*   $\\sigma_1 = 3.0$ km/s\n\n**2. Step-by-step Arithmetic**\n\n**Step A: Calculate the numerator (squared difference)**\n$$ (15 - 29.4)^2 = (-14.4)^2 $$\n$$ (-14.4) \\times (-14.4) = 207.36 $$\n\n**Step B: Calculate the denominator**\n$$ 2 \\times (3.0)^2 = 2 \\times 9.0 = 18.0 $$\n\n**Step C: Calculate the exponent**\n$$ \\text{Exponent} = -\\frac{207.36}{18.0} $$\n$$ \\frac{207.36}{18.0} = 11.52 $$\n$$ \\text{Exponent} = -11.52 $$\n\n**Step D: Calculate the final value**\n$$ \\text{Value} = e^{-11.52} $$\n\nUsing a calculator:\n$$ e^{-11.52} \\approx 9.83 \\times 10^{-6} $$\n\n**3. Comparison with the Paper's Claim**\n*   **Calculated Value:** $\\approx 9.83 \\times 10^{-6}$\n*   **Paper's Claim:** $1.0 \\times 10^{-5}$\n\n**4. Conclusion**\nThe paper's value of $1.0 \\times 10^{-5}$ is **approximately correct** when rounded to one significant figure.\n*   $9.83 \\times 10^{-6}$ is very close to $10 \\times 10^{-6}$ (which is $1.0 \\times 10^{-5}$).\n*   The relative error is $\\frac{|1.0 - 0.983|}{1.0} \\approx 1.7\\%$.\n\nTherefore, the arithmetic in the paper is **correct** within standard rounding conventions for this context.",
+        "final_score": 0
+      },
+      {
+        "id": "Q-schannel",
+        "group": "num",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 139.5,
+        "ct": 563,
+        "full_text": "To determine if the formula yields 29.4 km/s, we substitute the given values into the equation:\n\n$$ v_{res} = c \\cdot \\sqrt{\\frac{8 \\cdot \\Delta M}{2 \\cdot m_\\chi}} $$\n\n**Step 1: Simplify the term inside the square root**\n\nThe term $\\frac{8 \\cdot \\Delta M}{2 \\cdot m_\\chi}$ can be rewritten as:\n$$ \\frac{8}{2} \\cdot \\frac{\\Delta M}{m_\\chi} = 4 \\cdot \\frac{\\Delta M}{m_\\chi} $$\n\nThe paper provides the ratio $\\frac{\\Delta M}{2 m_\\chi} = 1.2 \\times 10^{-9}$.\nTherefore, $\\frac{\\Delta M}{m_\\chi} = 2 \\times (1.2 \\times 10^{-9}) = 2.4 \\times 10^{-9}$.\n\nSubstituting this back into the simplified expression:\n$$ \\frac{8 \\cdot \\Delta M}{2 \\cdot m_\\chi} = 4 \\cdot (2.4 \\times 10^{-9}) = 9.6 \\times 10^{-9} $$\n\n**Step 2: Calculate the square root**\n\n$$ \\sqrt{9.6 \\times 10^{-9}} = \\sqrt{9.6} \\times \\sqrt{10^{-9}} $$\n$$ \\sqrt{9.6} \\approx 3.098386 $$\n$$ \\sqrt{10^{-9}} = 10^{-4.5} \\approx 3.162278 \\times 10^{-5} $$\n\nAlternatively, calculating directly:\n$$ \\sqrt{9.6 \\times 10^{-9}} \\approx 9.797959 \\times 10^{-5} $$\n\n**Step 3: Multiply by the speed of light ($c$)**\n\nGiven $c = 299,792.458$ km/s:\n$$ v_{res} = 299,792.458 \\times (9.797959 \\times 10^{-5}) $$\n$$ v_{res} \\approx 29.373 \\text{ km/s} $$\n\n**Conclusion**\n\nThe calculated value is **29.37 km/s**.\n\nRounding to one decimal place, this is **29.4 km/s**.\n\n**Yes, it gives 29.4 km/s.**",
+        "final_score": 1
+      },
+      {
+        "id": "Q-direction",
+        "group": "num",
+        "score": -1,
+        "why": "confidently wrong",
+        "elapsed": 99.1,
+        "ct": 375,
+        "full_text": "Based on the excerpt provided, specifically **Q5 (L143-145)**, the D-5 bound is **LESS restrictive** than the headline.\n\n**Numerical Explanation:**\n\n1.  **Headline Value ($\\sigma_1 = 4.4$):**\n    The paper states the headline hierarchy constraint is:\n    $$g_N/g_\\chi < 1.74 \\times 10^{-13}$$\n\n2.  **D-5 Value ($\\sigma_1 = 1.0$):**\n    The paper states the constraint under $\\sigma_1 = 1.0$ at $v=28$ is:\n    $$g_N/g_\\chi < 2.84 \\times 10^{-13}$$\n\n3.  **Comparison:**\n    A \"restrictive\" bound implies a smaller upper limit (a tighter constraint on the parameter).\n    *   $1.74 \\times 10^{-13}$ is **smaller** than $2.84 \\times 10^{-13}$.\n    *   Therefore, the headline bound ($1.74 \\times 10^{-13}$) is tighter (more restrictive).\n    *   The D-5 bound ($2.84 \\times 10^{-13}$) allows for a larger value of $g_N/g_\\chi$, making it **looser** (less restrictive).\n\nThe text explicitly confirms this in L145:\n> \"the v = 28 bound is slightly **LOOSER** than the $\\sigma_1 = 4.4$ headline $g_N/g_\\chi < 1.74e-13$, not more restrictive.\"",
+        "final_score": 1
+      },
+      {
+        "id": "Q-thresholds",
+        "group": "num",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 99.4,
+        "ct": 371,
+        "full_text": "To determine the factors by which $\\sigma/m(15) = 2.85 \\text{ cm}^2/\\text{g}$ exceeds each of the three Horigome+ 2025 limits, we perform the division of the model value by each limit.\n\n**1. Against the $w=10 \\text{ km/s}$ velocity-dependent limit ($0.8 \\text{ cm}^2/\\text{g}$):**\n$$ \\text{Factor} = \\frac{2.85}{0.8} = 3.5625 $$\nRounding to two significant figures (consistent with the precision of the input 2.85), the factor is **3.6**.\n\n**2. Against the decisive CDM-preference threshold ($0.2 \\text{ cm}^2/\\text{g}$):**\n$$ \\text{Factor} = \\frac{2.85}{0.2} = 14.25 $$\nRounding to two significant figures, the factor is **14**.\n\n**3. Against the velocity-independent $w \\to \\infty$ limit ($0.04 \\text{ cm}^2/\\text{g}$):**\n$$ \\text{Factor} = \\frac{2.85}{0.04} = 71.25 $$\nRounding to two significant figures, the factor is **71**.\n\n**Answer:**\nThe factors are:\n1.  **3.6** (against 0.8 cm\u00b2/g)\n2.  **14** (against 0.2 cm\u00b2/g)\n3.  **71** (against 0.04 cm\u00b2/g)",
+        "final_score": 1
+      },
+      {
+        "id": "Q-abstract",
+        "group": "num",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 92.7,
+        "ct": 352,
+        "full_text": "Based on the provided excerpts, here are the two channel counts for the canonical Phase 44 parameters:\n\n1.  **Abstract/Canonical Score (L1602, L2264):**\n    The abstract and the \"canonical\" machine-generated score state that the framework passes **4 of 8 channels** (specifically: 4 PASS, 3 MARGINAL, 1 FAIL).\n    *   *Source:* L1602 (\"4 PASS... 3 MARGINAL... 1 FAIL\") and L2264 (\"8 constrained channels (4 PASS / 3 MARGINAL / 1 FAIL)\").\n\n2.  **Promoted Published-\u03c3_unc Likelihood Score (L1606, L2275):**\n    Under the \"promoted real likelihood (T205 8-channel published-\u03c3_unc)\" applied to the *same* canonical Phase 44 parameters, the count is **1 of 8 channels** (specifically: 1 PASS, 0 MARGINAL, 7 FAIL).\n    *   *Source:* L1606 (\"the canonical Phase 44 parameters pass **1 of 8 channels** (Cluster only)\") and L2275 (\"Headline: **1 PASS / 0 MARGINAL / 7 FAIL** (Cluster v=500 only)\").\n\n**Answer:**\n*   **Abstract/Canonical Count:** 4 PASS / 3 MARGINAL / 1 FAIL (out of 8)\n*   **Promoted Likelihood Count:** 1 PASS / 0 MARGINAL / 7 FAIL (out of 8)",
+        "final_score": 1
+      },
+      {
+        "id": "Q-fH",
+        "group": "num",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 151.8,
+        "ct": 613,
+        "full_text": "Based on the text provided, the specific values `f_H = 0.297` and `f_H = 0.30` are not explicitly mentioned in the excerpt. However, the question asks to compute the drift in $\\sigma_{eff}$ based on these two values. I will perform the arithmetic as requested.\n\n**1. Calculate $\\sigma_{eff}$ for $f_H = 0.297$:**\n$$ \\sigma_{eff,1} = (0.297)^2 \\times \\frac{\\sigma}{m} $$\n$$ (0.297)^2 = 0.088209 $$\n$$ \\sigma_{eff,1} = 0.088209 \\times \\frac{\\sigma}{m} $$\n\n**2. Calculate $\\sigma_{eff}$ for $f_H = 0.30$:**\n$$ \\sigma_{eff,2} = (0.30)^2 \\times \\frac{\\sigma}{m} $$\n$$ (0.30)^2 = 0.090000 $$\n$$ \\sigma_{eff,2} = 0.090000 \\times \\frac{\\sigma}{m} $$\n\n**3. Compute the ratio of the two $\\sigma_{eff}$ values:**\nSince $\\sigma/m$ is a common factor, the ratio is simply the ratio of the squared $f_H$ values:\n$$ \\text{Ratio} = \\frac{\\sigma_{eff,2}}{\\sigma_{eff,1}} = \\frac{0.090000}{0.088209} $$\n$$ \\text{Ratio} \\approx 1.020304 $$\n\n**4. Compute the drift (difference):**\n$$ \\text{Drift} = \\sigma_{eff,2} - \\sigma_{eff,1} $$\n$$ \\text{Drift} = (0.090000 - 0.088209) \\times \\frac{\\sigma}{m} $$\n$$ \\text{Drift} = 0.001791 \\times \\frac{\\sigma}{m} $$\n\n**Conclusion:**\n*   **Square of 0.297:** $0.088209$\n*   **Square of 0.30:** $0.090000$\n*   **Ratio ($\\sigma_{eff,0.30} / \\sigma_{eff,0.297}$):** $\\approx 1.0203$\n*   **Drift:** The $\\sigma_{eff}$ value for $f_H=0.30$ is approximately **2.03% higher** than for $f_H=0.297$.",
+        "final_score": 1
+      },
+      {
+        "id": "Q-dupe",
+        "group": "str",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 164.4,
+        "ct": 203,
+        "full_text": "Based on the provided excerpt, here is the count of the specified markers:\n\n1.  **Marker: 'First-class result (R88(26))'**\n    *   Found in line 202: `**First-class result (R88(26)) \u2014 the paper's most important internal tension, elevated from \u00a72.6.**`\n    *   **Count: 1**\n\n2.  **Marker: 'Continuous viable sigma_peak window' table row**\n    *   Found in line 210: `| Continuous viable \u03c3_peak window | **EMPTY** (no viable \u03c3_peak at c=12 with canonical Gaussian) | [51.96, 250] cm\u00b2/g |`\n    *   **Count: 1**\n\n**Conclusion:**\nThe section 2.6a content appears **ONCE** in the excerpt. Both specific markers appear exactly **1** time each.",
+        "final_score": 1
+      },
+      {
+        "id": "Q-section-order",
+        "group": "str",
+        "score": -1,
+        "why": "confidently wrong",
+        "elapsed": 66.3,
+        "ct": 232,
+        "full_text": "Based on the line numbers provided in the excerpt:\n\n1.  **\u00a79.13** begins at **L1206**.\n2.  **\u00a79.18** begins at **L1590**.\n3.  The **'## 10.'** heading is located at **L1685**.\n\nSince L1206 and L1590 are numerically smaller than L1685, sections \u00a79.13 through \u00a79.18 appear **BEFORE** the '## 10.' heading. Therefore, they are **not** nested inside \u00a710; they come before it.\n\n**Quote of line numbers:**\n*   \u00a79.13: `1206| ### 9.13 Gravothermal evolution...`\n*   \u00a79.18: `1590| ### 9.18 Forward-path exploration summary...`\n*   ## 10.: `1685| ## 10. UV Completion: No-Go Theorems...`",
+        "final_score": 1
+      },
+      {
+        "id": "Q-table",
+        "group": "str",
+        "score": 0,
+        "why": "no-answer",
+        "elapsed": 59.4,
+        "ct": 210,
+        "full_text": "Based on the provided excerpt, **the table referenced in the question (\"Best configuration found\" table in section 10.3) is not present in the text.**\n\nThe excerpt provided for **\u00a710.3** (lines 1748\u20131757) contains only introductory text regarding the scope of the section (thermal relic density vs. Cloud-9 spike), the distinction between elastic self-scattering and annihilation cross-sections, and the status of one-mediator vs. two-mediator UV completions. It does not contain any tables, nor does it contain a row labeled `g_h_SM`.\n\nTherefore, it is impossible to answer the question about the number of columns in the data rows versus the header row, or to quote them, because the data does not exist in the provided excerpt.\n\n**Answer:**\nThe table is **not present** in the provided excerpt. Consequently, the number of columns in the data rows and header row cannot be determined, and they cannot be quoted.",
+        "final_score": 0
+      }
+    ],
+    "final_net": 10,
+    "final_correct": 10,
+    "final_wrong": 0
+  }
+]

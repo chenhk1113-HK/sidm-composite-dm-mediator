@@ -1,0 +1,42 @@
+[
+  {
+    "label": "A. CURRENT  Qwen3.6-35B-A3B-UD-Q4_K_M  (MoE 35B/3B-active, Q4_K_M, 22.6 GB)",
+    "model": "Qwen3.6-35B-A3B-UD-Q4_K_M",
+    "port": 50113,
+    "runs": [
+      {
+        "completion_tokens": 400,
+        "elapsed_s": 43.6,
+        "tok_per_s": 9.17
+      },
+      {
+        "completion_tokens": 400,
+        "elapsed_s": 37.0,
+        "tok_per_s": 10.81
+      }
+    ],
+    "median_tok_per_s": 10.81,
+    "best_tok_per_s": 10.81,
+    "worst_tok_per_s": 9.17
+  },
+  {
+    "label": "B. NEW      Qwen3.8-27B-GSQ-RCO-IQ2_S  (dense 27B, IQ2_S 2.75bpw, 9.3 GB)",
+    "model": "Qwen3.8-27B-GSQ-RCO-IQ2_S",
+    "port": 50114,
+    "runs": [
+      {
+        "completion_tokens": 400,
+        "elapsed_s": 94.2,
+        "tok_per_s": 4.24
+      },
+      {
+        "completion_tokens": 400,
+        "elapsed_s": 103.6,
+        "tok_per_s": 3.86
+      }
+    ],
+    "median_tok_per_s": 4.24,
+    "best_tok_per_s": 4.24,
+    "worst_tok_per_s": 3.86
+  }
+]

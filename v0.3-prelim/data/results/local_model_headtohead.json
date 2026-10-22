@@ -1,0 +1,222 @@
+[
+  {
+    "label": "A. CURRENT Qwen3.6-35B-A3B (MoE, Q4_K_M)",
+    "model": "Qwen3.6-35B-A3B-UD-Q4_K_M",
+    "port": 50113,
+    "net": 5,
+    "n": 12,
+    "correct": 8,
+    "wrong": 3,
+    "total_time": 313.4,
+    "total_ct": 5449,
+    "tps": 17.39,
+    "results": [
+      {
+        "id": "Q-floor",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 59.0,
+        "ct": 553,
+        "head": "To determine if the paper's stated floor of $\\sigma_{peak} \\ge 51.96 \\text{ cm}^2/\\text{g}$ is correct based on the provided arithmetic logic, we perform the calculation requested.  **1. Identify the variables from the p"
+      },
+      {
+        "id": "Q-cap",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 35.2,
+        "ct": 700,
+        "head": "To determine if the cap value of $\\sigma_{peak} = 47.67$ is correct, we must first derive the constant $K$ from the provided interpolation data and then apply the causality criterion.  **1. Determine the constant $K$**  "
+      },
+      {
+        "id": "Q-empty",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 15.7,
+        "ct": 287,
+        "head": "Based on the excerpt provided, specifically **Q6 (L189-190)** and **Q10 (L2270-2271)**:  **1. Is the viable sigma_peak window EMPTY at c=12?** **Yes.** The text explicitly states: \"At \u039bCDM-standard concentration (c = 12)"
+      },
+      {
+        "id": "Q-gauss",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 21.8,
+        "ct": 415,
+        "head": "To verify the paper's claim, we calculate the exponent in the Gaussian function provided in Q5 (Line 117):  $$ \\text{Exponent} = -\\frac{(v - v_{\\text{target}})^2}{2 \\sigma_1^2} $$  **Given values:** *   $v = 15$ km/s *  "
+      },
+      {
+        "id": "Q-schannel",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 26.6,
+        "ct": 521,
+        "head": "To compute the resonance velocity $v_{res}$, we use the formula and values provided in the excerpt (L82 and L807).  **1. Identify the given values:** *   Speed of light, $c = 299,792.458$ km/s *   Ratio, $\\frac{\\Delta M}"
+      },
+      {
+        "id": "Q-direction",
+        "score": -1,
+        "why": "confidently wrong",
+        "elapsed": 22.3,
+        "ct": 426,
+        "head": "Based on the arithmetic provided in **Q5 (L141-145)** and **Q10 (L2273)**, the D-5 bound is **LESS restrictive** than the headline.  **Numerical Explanation:**  1.  **Headline Constraint ($\\sigma_1 = 4.4$):**     The pap"
+      },
+      {
+        "id": "Q-thresholds",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 23.5,
+        "ct": 448,
+        "head": "Based on the excerpt provided, specifically **Q11 (L36)** and **Q8 (L2205-2210)**, here is the arithmetic for the factors against the three Horigome+ 2025 limits using the value $\\sigma/m(15) = 2.85 \\text{ cm}^2/\\text{g}"
+      },
+      {
+        "id": "Q-dupe",
+        "score": -1,
+        "why": "confidently wrong",
+        "elapsed": 35.0,
+        "ct": 700,
+        "head": "Based on the provided paper excerpt, the content regarding section 2.6a (specifically the \"First-class result (R88(26))\" marker and the \"Continuous viable sigma_peak window\" table row) appears **TWICE** in the document. "
+      },
+      {
+        "id": "Q-abstract",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 19.5,
+        "ct": 368,
+        "head": "Based on the excerpt provided, specifically **Q10 (L2275)** and **Q9 (L1606)**, here are the two counts for the canonical parameters at the promoted published-sigma_unc likelihood:  1.  **Abstract channel count (L1602/L2"
+      },
+      {
+        "id": "Q-fH",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 16.5,
+        "ct": 305,
+        "head": "To determine the drift in $\\sigma_{eff}$ between the two stated values of $f_H$, we calculate $\\sigma_{eff}$ for both cases using the formula $\\sigma_{eff} = f_H^2 \\cdot \\sigma/m$. Since $\\sigma/m$ is constant for this c"
+      },
+      {
+        "id": "Q-table",
+        "score": 0,
+        "why": "wrong/no-answer",
+        "elapsed": 18.1,
+        "ct": 342,
+        "head": "Based on the provided paper excerpt, **Section 10.3 and the 'Best configuration found' table are not present.**  The excerpt contains sections labeled Q1 through Q13, covering: *   Q1: Abstract/Intro (L11) *   Q2: Breit-"
+      },
+      {
+        "id": "Q-section-order",
+        "score": -1,
+        "why": "confidently wrong",
+        "elapsed": 20.2,
+        "ct": 384,
+        "head": "Based on the provided excerpt and the announced section order (\u00a71 -> \u00a72 -> \u00a79 -> \u00a710 -> \u00a711), here is the analysis:  1.  **Section Hierarchy:** The excerpt contains content from **\u00a79** (specifically lines 1008\u20131017, 1600"
+      }
+    ]
+  },
+  {
+    "label": "B. NEW Qwen3.8-27B-GSQ-RCO-IQ2_S",
+    "model": "Qwen3.8-27B-GSQ-RCO-IQ2_S",
+    "port": 50114,
+    "net": 8,
+    "n": 12,
+    "correct": 9,
+    "wrong": 1,
+    "total_time": 1094.4,
+    "total_ct": 4856,
+    "tps": 4.44,
+    "results": [
+      {
+        "id": "Q-floor",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 248.7,
+        "ct": 700,
+        "head": "Based on the text provided in **Q6 (L189-190)** and the context of **Q2 (L57)** regarding the canonical $\\sigma/m(v)$ form, here is the arithmetic verification.  ### 1. Identify the Formula The paper states that the floo"
+      },
+      {
+        "id": "Q-cap",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 72.0,
+        "ct": 393,
+        "head": "Based on the text in **Q6 (L189)** and **Q10 (L2270)**, the causality criterion is defined by a ratio that must be greater than 3.0. The text states:  > \"causality requires \u03c3_peak \u2264 47.67 (interpolated from ratio = 2.86 "
+      },
+      {
+        "id": "Q-empty",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 79.0,
+        "ct": 435,
+        "head": "Based on the excerpt provided (specifically **Q6, L189-190** and **Q10, L2270**), here is the answer with the arithmetic shown:  **1. Is the viable sigma_peak window EMPTY at c=12?** **Yes.** The text states: \"At c = 12:"
+      },
+      {
+        "id": "Q-gauss",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 44.4,
+        "ct": 227,
+        "head": "**Arithmetic:**  1.  **Calculate the numerator:**     $$ (15 - 29.4)^2 = (-14.4)^2 = 207.36 $$  2.  **Calculate the denominator:**     $$ 2 \\times (3.0)^2 = 2 \\times 9.0 = 18.0 $$  3.  **Calculate the exponent:**     $$ "
+      },
+      {
+        "id": "Q-schannel",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 122.5,
+        "ct": 700,
+        "head": "To determine if the formula yields 29.4 km/s, we perform the arithmetic step-by-step using the values provided in the excerpt.  **Given values:** *   $c = 299,792.458$ km/s *   $\\frac{\\Delta M}{2 m_\\chi} = 1.2 \\times 10^"
+      },
+      {
+        "id": "Q-direction",
+        "score": -1,
+        "why": "confidently wrong",
+        "elapsed": 89.9,
+        "ct": 501,
+        "head": "**Answer:** The D-5 bound is **LESS restrictive** than the headline.  **Numerical Explanation:**  1.  **Compare the upper limits:**     *   Headline ($\\sigma_1 = 4.4$): $g_N/g_\\chi < 1.74 \\times 10^{-13}$     *   D-5 ($\\"
+      },
+      {
+        "id": "Q-thresholds",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 85.7,
+        "ct": 476,
+        "head": "Based on the text provided, specifically **Q4 (L117)** and **Q8 (L2210)**, the factor for each limit is calculated as follows:  **1. Against the 0.8 cm\u00b2/g limit (w=10 km/s velocity-dependent):** $$ \\text{Factor} = \\frac{"
+      },
+      {
+        "id": "Q-dupe",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 86.4,
+        "ct": 341,
+        "head": "Based on the provided excerpt, the content of section 2.6a (specifically the \"First-class result (R88(26))\" marker and the \"Continuous viable sigma_peak window\" table row) appears **ONCE**.  **Arithmetic/Counting:** 1.  "
+      },
+      {
+        "id": "Q-abstract",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 116.2,
+        "ct": 434,
+        "head": "Based on the provided excerpt, here are the two channel counts for the canonical Phase 44 parameters:  1.  **Abstract / A.15 Block 1 Count:** **4 PASS / 3 MARGINAL / 1 FAIL**     *   *Source:* Q10 (L2264) states: \"Abstra"
+      },
+      {
+        "id": "Q-fH",
+        "score": 1,
+        "why": "correct",
+        "elapsed": 54.6,
+        "ct": 221,
+        "head": "**Arithmetic:**  1.  **Square of the constants.py value ($f_H = 0.297$):**     $$0.297^2 = 0.088209$$  2.  **Square of the text value ($f_H = 0.30$):**     $$0.30^2 = 0.0900$$  3.  **Ratio of the squared values (drift in"
+      },
+      {
+        "id": "Q-table",
+        "score": 0,
+        "why": "wrong/no-answer",
+        "elapsed": 48.1,
+        "ct": 199,
+        "head": "Based on the provided text, **Section 10.3 and the \"Best configuration found\" table are not present in the excerpt.**  The excerpt contains sections labeled Q1 through Q13, which correspond to various line numbers (e.g.,"
+      },
+      {
+        "id": "Q-section-order",
+        "score": 0,
+        "why": "wrong/no-answer",
+        "elapsed": 46.7,
+        "ct": 229,
+        "head": "Based on the provided excerpt, the text **does not contain** the heading for section 9.13 or the heading for section 10. Therefore, it is **impossible to determine** from the provided text where section 9.13 sits relativ"
+      }
+    ]
+  }
+]
