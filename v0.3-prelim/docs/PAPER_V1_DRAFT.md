@@ -1009,7 +1009,7 @@ The 8-channel fit outcome**depends on the assumed f_H prescription**. We documen
 | SPARC (v=100, intermediate) | ∈[0.05, 0.5] cm²/g | 0.19 cm²/g ✓ | 0.053 cm²/g ✗ | 0.058 cm²/g ✗ | Cannot match (max σ_eff = 0.069) |
 | Cluster (v=500) | <1.0 cm²/g | 0.0002 cm²/g ✓ | 0.003 cm²/g ✓ | 0.003 cm²/g ✓ | Pass (independent of f_H) |**Honest summary**(replaces the v1.12/v1.13 "7 of 8 simultaneously satisfied" claim):
 
-- With**borrowed (hand-picked) f_H**: 7 of 8 channels pass; SPARC and Cloud-9 ≥100 target satisfied.
+- With**borrowed (hand-picked) f_H**: the v1.12/v1.13 placeholder claimed **7 of 8 channels pass** (retracted v18.29). Note: §9.3 clarifies SPARC **cannot** be matched by single-channel σ_eff decomposition; Cloud-9 at ≥50 requires f_H(core) values not derived from first principles.
 - With**Yang+ 2025-derived f_H**(σ/m = 0.052 → no significant gravothermal cascade): only 4 of 8 channels pass; Cloud-9, dSph, extreme-UFD, SPARC all fail.
 - With**T202 N-body f_H**(f_H ≈ 0.92 uniform, no segregation): only 4 of 8 channels pass (same channels as Yang+-derived).
 -**SPARC cannot be matched**by any single-channel σ_eff = f_H² × σ_HH decomposition at Phase 44 σ/m. A full σ_HH + σ_HL + σ_LL decomposition is required.
