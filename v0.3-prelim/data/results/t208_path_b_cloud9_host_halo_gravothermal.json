@@ -4,16 +4,16 @@
     "concentration_c": 12,
     "r_vir_pc": 35092.89849908858,
     "r_s_pc": 2924.408208257382,
-    "V_max_kms": 24.754551058223765,
+    "V_max_kms": 31.118631093100245,
     "rho_s_Msun_per_pc3": 0.009689620013605297
   },
-  "sigma_m_at_v_virial_C9": 0.21006238359036997,
+  "sigma_m_at_v_virial_C9": 0.1671024661863409,
   "sigma_m_v28_C9_pre_corecollapse": 0.18571428571428572,
   "sigma_m_v15_C9_pre_corecollapse": 0.3466666666666667,
   "Cloud9_gravothermal": {
     "t_core_Gyr": 73.71088497222982,
-    "t_cross_Gyr": 0.11551567771529728,
-    "t_core_over_t_cross": 638.1028656032253,
+    "t_cross_Gyr": 0.09189153383622575,
+    "t_core_over_t_cross": 802.1509914460836,
     "t_core_over_t_Hubble": 5.341368476248538,
     "runs_in_Hubble": false,
     "causality_OK": true
@@ -21,11 +21,11 @@
   "subhalo_1e6_crosscheck": {
     "M_halo_Msun": 1000000.0,
     "c": 15,
-    "V_max_kms": 1.447654927914847,
-    "sigma_m_at_v_virial": 3.5920162324110643,
-    "t_core_Gyr": 1.9734186426334033,
-    "t_cross_Gyr": 0.09241254217223784,
-    "t_core_over_t_Hubble": 0.143001350915464,
+    "V_max_kms": 1.9245387585964366,
+    "sigma_m_at_v_virial": 2.7019461035912586,
+    "t_core_Gyr": 1.9734186426334037,
+    "t_cross_Gyr": 0.06951352446356829,
+    "t_core_over_t_Hubble": 0.14300135091546404,
     "matches_T204": false
   },
   "Cloud9_core_collapse_enhancement_estimate": {

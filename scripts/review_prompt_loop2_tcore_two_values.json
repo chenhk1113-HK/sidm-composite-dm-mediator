@@ -1,0 +1,11 @@
+{
+  "loop": 2,
+  "title": "Two different t_core values for 'Cloud-9' in the same paper: 73.71 Gyr and 76 Myr",
+  "files_to_read": [
+    "v0.3-prelim/docs/PAPER_V1_DRAFT.md",
+    "v0.3-prelim/data/results/t208_path_b_cloud9_host_halo_gravothermal.json",
+    "v0.3-prelim/code/gravothermal_yang2024.py"
+  ],
+  "instructions": "You are the second-pass physics reviewer for the SIDM composite dark matter paper. You have READ access to the project files listed above. Read them. Do NOT rewrite the paper. Return findings only, using exactly these tags: [ERR] for a definite error, [Q] for a question or unverifiable claim, [OK] for something you checked and found correct. For every number you quote, state the file and line you got it from. If you compute anything, show the formula and the numbers. If you are unsure, say so in a [Q] tag rather than asserting. Keep the whole review under 400 words. Do not use tools other than reading files.",
+  "target": "The paper quotes a Cloud-9 collapse time t_core = 73.71 Gyr (gravothermal phase does NOT run, from T208) AND separately a Cloud-9 collapse time of 76 Myr = 0.076 Gyr (gravothermal FAILS the causality criterion by 3.6x). Both are described as Cloud-9. Questions: (a) Are these two numbers describing the SAME physical halo and the SAME physical scenario, or different sigma/m assumptions? State the sigma/m value used in each. (b) The ratio of the two collapse times is 73.71/0.076 = 969.9. The ratio of the two sigma/m values is 161.70/0.167 = 968.3. Is the agreement to 0.2% what a t_core ~ 1/sigma scaling predicts? Compute it. (c) The paper says the 76 Myr case fails causality 'by 3.6x' and elsewhere quotes a ratio of 0.83 against a cap of 3.0. Reconcile: what exactly is the causality ratio, is it t_core/t_cross or something else, and is 0.83 vs 3.0 consistent with 'fails by 3.6x'? (d) Is the paper clear enough that a reader cannot confuse these two Cloud-9 results, or does it present two contradictory-sounding collapse times for the same halo without distinguishing them? (e) Check t_cross: with r_s = 2.92 kpc and V_max = 31.12 km/s, what is the crossing time, and does it match the paper's quoted value?"
+}

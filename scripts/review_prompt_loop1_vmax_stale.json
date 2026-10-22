@@ -1,0 +1,11 @@
+{
+  "loop": 1,
+  "title": "Cloud-9 V_max provenance: is the T208 JSON stale relative to the corrected script?",
+  "files_to_read": [
+    "v0.3-prelim/code/T208_path_b_cloud9_host_halo_gravothermal.py",
+    "v0.3-prelim/data/results/t208_path_b_cloud9_host_halo_gravothermal.json",
+    "v0.3-prelim/docs/PAPER_V1_DRAFT.md"
+  ],
+  "instructions": "You are the second-pass physics reviewer for the SIDM composite dark matter paper. You have READ access to the project files listed above. Read them. Do NOT rewrite the paper. Return findings only, using exactly these tags: [ERR] for a definite error, [Q] for a question or unverifiable claim, [OK] for something you checked and found correct. For every number you quote, state the file and line you got it from. If you compute anything, show the formula and the numbers. If you are unsure, say so in a [Q] tag rather than asserting. Keep the whole review under 400 words. Do not use tools other than reading files.",
+  "target": "Section 'Cloud-9 host-halo gravothermal' in PAPER_V1_DRAFT.md and the T208 result JSON. The paper states V_max = 31.12 km/s for the Cloud-9 host halo (M_halo = 5e9 M_sun, c = 12). The T208 JSON reports V_max_kms = 24.754551058223765. The T208 script contains a function whose docstring says the virial approximation was replaced by r_max = 2.1626 * r_s per Reviewer 2 (2review.docx). Questions: (a) Are these two V_max values consistent with each other, and if not, which is correct for the code as it now stands? (b) The JSON reports t_core = 73.71088497222982 Gyr and t_core/t_Hubble = 5.341368476248538, and the paper's verdict is 'gravothermal phase DOES NOT run at Cloud-9 host-halo params (t_core = 73.7 Gyr > t_Hubble = 13.8 Gyr)'. The t_core formula in the script contains a factor (100/v_max). If the V_max in the JSON is the older value, does the correct t_core change, and does the VERDICT (does not run) survive the change? (c) Is the paper's 73.71 Gyr number consistent with the JSON, and is the JSON consistent with the script? (d) Does any other number in the JSON or the paper's Cloud-9 section depend on V_max and would therefore need to be regenerated?"
+}

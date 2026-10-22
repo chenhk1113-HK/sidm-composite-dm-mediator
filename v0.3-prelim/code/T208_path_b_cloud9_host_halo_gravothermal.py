@@ -32,6 +32,8 @@ Outputs:
 """
 import sys
 import json
+import os
+from pathlib import Path
 
 # Balberg+ 2002 Eq. 22 normalization (T204 verified)
 SIGMA_0 = 0.052  # cm^2/g at v_ref = 100 km/s
@@ -271,7 +273,18 @@ if __name__ == "__main__":
     print("=" * 80)
 
     # Save
-    out_path = "/home/lamkuenai/projects/sidm-composite-dm-mediator/v0.3-prelim/data/results/t208_path_b_cloud9_host_halo_gravothermal.json"
+    # Path-relative + env-overridable (was a hard-coded WSL path that pointed at a
+    # DIFFERENT repo checkout on this host, so the JSON could never be regenerated
+    # from the Windows tree -- which is exactly how it went stale after the
+    # r_max = 2.1626 r_s fix in commit beeb658).
+    out_dir = os.environ.get(
+        "SIDM_RESULTS_DIR",
+        str(Path(__file__).resolve().parents[1] / "data" / "results"),
+    )
+    os.makedirs(out_dir, exist_ok=True)
+    out_path = os.path.join(
+        out_dir, "t208_path_b_cloud9_host_halo_gravothermal.json"
+    )
     with open(out_path, "w") as f:
         json.dump(results, f, indent=2)
     print(f"\nSaved to: {out_path}")

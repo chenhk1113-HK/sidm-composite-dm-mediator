@@ -19,6 +19,7 @@ Exit code 0 = all checks pass. Non-zero = at least one failure.
 """
 import argparse
 import json
+import math
 import re
 import sys
 from pathlib import Path
@@ -269,7 +270,7 @@ def verify_table(table_path: Path, results_dir: Path) -> int:
         ("§5 Cloud-9 V_max",
          "t208_path_b_cloud9_host_halo_gravothermal.json",
          ("Cloud9_host_halo_params", "V_max_kms"),
-         24.75, 0.05),
+         31.12, 0.05),
         ("§6 t_core at σ/m=70",
          "t212_silverman_gravothermal.json",
          ("cloud9_host_at_sigma70", "t_core_Gyr"),
@@ -348,6 +349,101 @@ def verify_table(table_path: Path, results_dir: Path) -> int:
         else:
             print(f"  ✓ {label}: {actual}")
             n_pass += 1
+
+    # ------------------------------------------------------------------
+    # SELF-CONSISTENCY CHECKS (mechanism fix, added 2026-10-22).
+    #
+    # The T208 JSON went stale for ~2 months: commit beeb658 fixed
+    # v_max_from_M_c to use r_max = 2.1626*r_s, but the JSON was never
+    # regenerated, so it kept the retired virial approximation
+    # sqrt(G*M/r_vir) = 24.7546 km/s while the paper quoted the corrected
+    # 31.12 km/s.  The frozen-literal check above DID NOT catch it: it
+    # pinned 24.75, i.e. it asserted the stale value and passed.
+    #
+    # These checks recompute the values from the halo parameters that the
+    # JSON itself stores, so they hold for ANY future regeneration instead
+    # of re-freezing today's numbers (the "frozen literal" trap).
+    # ------------------------------------------------------------------
+    print()
+    print("  T208 self-consistency (recomputed from the JSON's own halo params):")
+    t208_path = results_dir / "t208_path_b_cloud9_host_halo_gravothermal.json"
+    if t208_path.exists():
+        with open(t208_path) as f:
+            t208 = json.load(f)
+        hp = t208.get("Cloud9_host_halo_params", {})
+        gv = t208.get("Cloud9_gravothermal", {})
+        r_vir = hp.get("r_vir_pc")
+        r_s = hp.get("r_s_pc")
+        c_conc = hp.get("concentration_c")
+        m_halo = hp.get("M_halo_Msun")
+        v_max = hp.get("V_max_kms")
+
+        # (a) r_s == r_vir / c
+        if r_vir and r_s and c_conc:
+            expect_rs = r_vir / c_conc
+            ok = abs(r_s - expect_rs) / expect_rs < 1e-9
+            print(f"    {'✓' if ok else '✗'} r_s == r_vir/c  ({r_s:.4f} vs {expect_rs:.4f} pc)")
+            n_pass += ok
+            n_fail += (not ok)
+
+        # (b) V_max must be the r_max = 2.1626*r_s value, NOT sqrt(G*M/r_vir).
+        #     Both are computed; the JSON must match the CORRECTED one.
+        if r_vir and r_s and c_conc and m_halo and v_max:
+            g_pc = 4.3009e-3  # (km/s)^2 pc / M_sun
+            x_max = 2.1626
+            num = math.log(1 + x_max) - x_max / (1 + x_max)
+            den = math.log(1 + c_conc) - c_conc / (1 + c_conc)
+            v_corrected = math.sqrt(
+                g_pc * (m_halo * num / den) / (x_max * r_s)
+            )
+            v_virial = math.sqrt(g_pc * m_halo / r_vir)
+            ok_corr = abs(v_max - v_corrected) / v_corrected < 1e-6
+            ok_vir = abs(v_max - v_virial) / v_virial < 1e-6
+            print(f"    {'✓' if ok_corr else '✗'} V_max == r_max-corrected "
+                  f"({v_max:.6f} vs {v_corrected:.6f} km/s)")
+            if not ok_corr:
+                print(f"        (virial-approx value would be {v_virial:.6f} km/s; "
+                      f"the JSON matches the STALE value: {ok_vir})")
+            n_pass += ok_corr
+            n_fail += (not ok_corr)
+
+        # (c) t_core must be V_max-invariant at a_slope = 1.0:
+        #     t_core = (12.7/sigma)*(1/(rho_s/1e-2))*(r_s/1e4)*(100/V_max)
+        #     with sigma = 0.052*(100/V_max).  Recomputing from the JSON's
+        #     OWN sigma_m_at_v_virial_C9 must reproduce t_core_Gyr.
+        sig = t208.get("sigma_m_at_v_virial_C9")
+        rho_s = hp.get("rho_s_Msun_per_pc3")
+        t_core = gv.get("t_core_Gyr")
+        if sig and rho_s and r_s and v_max and t_core:
+            t_re = (12.7 / sig) * (1.0 / (rho_s / 1e-2)) * (r_s / 1e4) * (100 / v_max)
+            ok = abs(t_core - t_re) / t_re < 1e-9
+            print(f"    {'✓' if ok else '✗'} t_core == formula(sigma, rho_s, r_s, V_max) "
+                  f"({t_core:.6f} vs {t_re:.6f} Gyr)")
+            n_pass += ok
+            n_fail += (not ok)
+
+        # (d) t_cross must be r_s / V_max (NOT r_vir / V_max -- that was
+        #     T212 bug B, fixed in v18.40).
+        t_cross = gv.get("t_cross_Gyr")
+        if r_s and v_max and t_cross:
+            t_re = (r_s / v_max * 3.0857e13) / 3.1557e16
+            ok = abs(t_cross - t_re) / t_re < 1e-9
+            print(f"    {'✓' if ok else '✗'} t_cross == r_s/V_max "
+                  f"({t_cross:.8f} vs {t_re:.8f} Gyr)")
+            n_pass += ok
+            n_fail += (not ok)
+
+        # (e) t_core_over_t_cross must equal t_core/t_cross.
+        ratio = gv.get("t_core_over_t_cross")
+        if t_core and t_cross and ratio:
+            ok = abs(ratio - t_core / t_cross) / (t_core / t_cross) < 1e-9
+            print(f"    {'✓' if ok else '✗'} t_core_over_t_cross == t_core/t_cross "
+                  f"({ratio:.4f})")
+            n_pass += ok
+            n_fail += (not ok)
+    else:
+        print("    ⚠ MISSING JSON: t208_path_b_cloud9_host_halo_gravothermal.json")
+        n_fail += 1
 
     print()
     print("=" * 70)

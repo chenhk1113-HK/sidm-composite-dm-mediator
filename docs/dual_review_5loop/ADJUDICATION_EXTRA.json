@@ -1,0 +1,30 @@
+{
+ "E1 BW normalization": {
+  "verdict": "CONFIRMED",
+  "detail": "Printed form (Gamma/2)^2/[(v^2-v_t^2)^2+(Gamma v_t/2)^2] evaluates to 1/v_t^2 = 0.001157 at v=v_t, not 1. With sigma_peak=174 the printed expression peaks at 0.2013 cm^2/g, not 174. The numerator must be (Gamma v_t/2)^2 for a unit-peak BW. Real paper-level formula defect (as printed)."
+ },
+ "E2 Horigome ceiling inconsistency": {
+  "verdict": "CONFIRMED",
+  "detail": "Paper quotes the Horigome limit as 0.04 (L949, w->inf), 0.2 (L36, L950 w=30), 0.8 (L111, w=10) and 0.032 (canonical_numbers.json:84). Using sigma/m(9)=5.43 and sigma/m(40)=9.86: /0.04 -> 136-246x; /0.2 -> 27.1-49.3x. The abstract's '27-49x' matches the 0.2 ceiling; the paper's own L958 '115-460x' matches the 0.04 ceiling. Two different factor ranges quoted for the same claim; the labels are swapped."
+ },
+ "E3 abstract conflates sigma_eff with sigma/m": {
+  "verdict": "CONFIRMED",
+  "detail": "Abstract L11 says 'drives sigma_eff ... above Horigome's 0.8 cm^2/g limit by 3.6-23.7x'. But the paper's own sigma_eff = f_H^2 sigma/m with f_H=0.297 gives sigma_eff(15) = 0.251 cm^2/g (L111), which is 0.32x BELOW the 0.8 ceiling. The 3.6-23.7x range is sigma/m/0.8, not sigma_eff/0.8. Headline wording mislabels which quantity exceeds the limit. BOTH reviewers (DeepSeek L3, L4) found this independently."
+ },
+ "E4 alpha_chi -> 0.156 vs 2.84 inconsistency": {
+  "verdict": "CONFIRMED",
+  "detail": "alpha ratio 7.4 (squared 54.6) times sigma/m(100)=0.052 gives 2.84, and the paper reports 2.84/2.85 at L59. But the paper also reports sigma/m(100) = 0.156 (L59, L2273), which is inconsistent with its own 54.6x scaling. Both DeepSeek reviews (L3, L4) flagged this; the paper quotes both numbers for the same quantity."
+ },
+ "E5 g_N/g_chi 1.2e-24 vs 1.7e-13": {
+  "verdict": "CONFIRMED",
+  "detail": "From the paper's own numbers: 174*1.78e-24/9.4e-48 = 3.29e+25, 1/sqrt = 1.74e-13 (paper L38's 1.7e-13, CORRECT). At sigma/m(100)=0.052 the same algebra gives 1.01e-11, but the paper's L144 quotes 1.2e-24 for that case -- a jump of ~13 orders of magnitude that the quoted scaling cannot produce. Real internal inconsistency; both DeepSeek reviews flagged it."
+ },
+ "E6 Gaussian tail value": {
+  "verdict": "CONFIRMED",
+  "detail": "exp[-(15-29.4)^2/(2*3^2)] = 9.930e-06, not 8e-5 as quoted at L117. The paper's own L158 quotes the correct 1.0e-5 form. Minor but real numeric error in the text; only DeepSeek (L2) caught it."
+ },
+ "E7 s-channel resonance formula": {
+  "verdict": "CONFIRMED",
+  "detail": "Paper L82: s-channel mediator exchange, v_res = (m_med/m_chi) c. For a self-interaction with m_med ~ 2 m_chi, the s-channel resonance condition is v_res = 2c*sqrt(1 - 4 m_chi^2/m_med^2), i.e. NOT linear in (m_med/m_chi). The linear form quoted is the t-channel/Yukawa one. Also L82's 'four mediators' contradicts L75 (only v1 is a physical resonance). Only DeepSeek (L2) found this."
+ }
+}

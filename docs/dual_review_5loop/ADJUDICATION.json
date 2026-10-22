@@ -1,0 +1,147 @@
+{
+ "L1.a both: JSON V_max is the OLD virial approx": {
+  "source": "NEMO+DEEPSEEK",
+  "verdict": "CONFIRMED",
+  "detail": "JSON 24.754551 == sqrt(G M/r_vir) = 24.754551 exactly; current script = 31.1186. Paper's 31.12 == corrected. JSON was never regenerated after commit beeb658 (code fixed, JSON stale)."
+ },
+ "L1.b both: t_core is V_max-INVARIANT": {
+  "source": "NEMO+DEEPSEEK",
+  "verdict": "CONFIRMED",
+  "detail": "t_core = (12.7/sigma)(...)(100/V) with sigma = 0.052(100/V)^1.0 => (100/V)/sigma is V-independent. Recomputed both branches: 73.710885 Gyr identical. t_core=73.71 and the 'does not run' verdict are CORRECT."
+ },
+ "L1.c: sigma_m_at_v_virial_C9 stale": {
+  "source": "NEMO+DEEPSEEK",
+  "verdict": "CONFIRMED",
+  "detail": "JSON 0.210062 = 0.052*100/24.7546; correct = 0.052*100/31.1186 = 0.167102. Both reviewers' 0.167 correct."
+ },
+ "L1.c: t_cross stale": {
+  "source": "NEMO+DEEPSEEK",
+  "verdict": "CONFIRMED",
+  "detail": "JSON 0.115516 = r_s/24.7546; correct = r_s/31.1186 = 0.091890 Gyr. Both reviewers' 0.0918/0.09189 correct."
+ },
+ "L1.c: t_core_over_t_cross stale": {
+  "source": "NEMO+DEEPSEEK",
+  "verdict": "CONFIRMED",
+  "detail": "JSON 638.10; correct 73.710885/0.091892 = 802.15. Both reviewers ~802 correct."
+ },
+ "L1.d: subhalo V_max also stale": {
+  "source": "DEEPSEEK only",
+  "verdict": "CONFIRMED",
+  "detail": "JSON 1.447655 == sqrt(G*1e6/r_vir(1e6)) = 1.447655; correct = 1.924539. Nemotron only said 'similarly affected if same method' -- DeepSeek computed it."
+ },
+ "L1.d: subhalo t_core invariant, matches_T204 still false": {
+  "source": "DEEPSEEK",
+  "verdict": "CONFIRMED",
+  "detail": "t_core_sub = 1.97342 (invariant at A_SLOPE=1.0); matches_T204 False persists (T204 0.563 vs 1.973 = 3.51x apart)."
+ },
+ "L1: paper's 73.71 Gyr and verdict": {
+  "source": "both",
+  "verdict": "CONFIRMED",
+  "detail": "Paper 73.71 Gyr == JSON == invariant-correct value. Verdict t_core>t_Hubble (73.7>13.8, ratio 5.34) stands. The 802 ratio the paper quotes at :1170 is already the CORRECTED ratio, so paper and JSON disagree."
+ },
+ "L2.b both: 73.71/0.076 vs 161.70/0.167 agree within 0.2%": {
+  "source": "NEMO+DEEPSEEK",
+  "verdict": "CONFIRMED",
+  "detail": "73.71/0.076 = 969.9; 161.70/0.167 = 968.3; ratio -0.17%. Consistent with t_core ~ 1/sigma. Both reviewers right."
+ },
+ "L2.c: 0.83 vs 3.0 IS the '3.6x'": {
+  "source": "both",
+  "verdict": "CONFIRMED",
+  "detail": "3.0/0.83 = 3.6145 -> 'fails by 3.6x' is the causality-cap factor, NOT a ratio to the floor. Both reviewers identified this."
+ },
+ "L2.e: t_cross = 0.09189 Gyr gives 0.83": {
+  "source": "DEEPSEEK",
+  "verdict": "CONFIRMED",
+  "detail": "0.076/0.091892 = 0.827 -> 0.83. So the paper's 0.83 uses the CORRECTED t_cross, while the JSON's 0.115516 is stale. Paper and JSON are mutually inconsistent."
+ },
+ "L2.d: two 'Cloud-9' t_core values are different sigma/m scenarios": {
+  "source": "NEMO",
+  "verdict": "CONFIRMED",
+  "detail": "73.71 Gyr uses sigma/m = 0.167 (pre-core-collapse, Phase 44 baseline at V_max); 76 Myr uses the resonance-peak sigma_peak=174 at v_target=29.4 (sigma/m(V_max=31.12)=161.70). Same halo, two physics assumptions. The paper does distinguish them in different sections but a reader can easily conflate them."
+ },
+ "L3.b both: pure unit factor = 4.787e9 kpc^2/M_sun per cm^2/g": {
+  "source": "NEMO+DEEPSEEK",
+  "verdict": "CONFIRMED",
+  "detail": "1 M_sun/kpc^2 = 2.088893e-10 g/cm^2; reciprocal = 4.787224e+09 kpc^2/M_sun. Both right."
+ },
+ "L3.c: 8.9e9 = unit factor x BM2 calibration (1.866), NOT pure units": {
+  "source": "NEMO",
+  "verdict": "CONFIRMED",
+  "detail": "(1.34e12/150)/4.7872e+09 = 1.8661 = the BM2 1.8-1.87x calibration. So the code's docstring phrase 'documented as a unit-conversion factor of ~8.9e9' conflates units with calibration. The pure unit factor is 4.79e9; 8.9e9 is units x calibration."
+ },
+ "L3.a: denominator carries extra (cm^2/g)(M_sun/kpc^2)": {
+  "source": "NEMO",
+  "verdict": "CONFIRMED",
+  "detail": "denominator = (cm^2/g)(M_sun/kpc^3)(kpc)(1/Gyr) = (cm^2/g)(M_sun/kpc^2)/Gyr. NOT 1/Gyr. Nemotron's unit trace is correct."
+ },
+ "L3: DEEPSEEK's cgs route (150C=112.5 -> 15.77 Gyr)": {
+  "source": "DEEPSEEK",
+  "verdict": "CONFIRMED",
+  "detail": "In pure cgs the denominator IS 1/s: computed 15.7745 Gyr for prefactor 112.5. Correct. This shows the published 150 works dimensionally in cgs, and the 8.9e9 gap is the code's mixed-unit choice."
+ },
+ "L3: paper still prints 8.9e9?": {
+  "source": "DEEPSEEK",
+  "verdict": "REFUTED",
+  "detail": "grep found NO '8.9e9' in PAPER_V1_DRAFT.md. The 8.9e9 claim lives ONLY in the code docstring (gravothermal_yang2024.py:283-289,300). DeepSeek's [Q] about two coexisting conventions is right: paper:1291 calls 1.34e12 'empirically calibrated' while the code calls it a unit conversion."
+ },
+ "L4.a: script rho_s formula is CORRECT and reproduces 9.68962e-3": {
+  "source": "both",
+  "verdict": "CONFIRMED",
+  "detail": "M/(4 pi r_s^3)/f(c) = 9.689620014e-03 M_sun/pc^3, matches JSON exactly. And it equals (200/3)rho_crit c^3/f(c) = 9.689620e-03. Both reviewers' [OK] correct."
+ },
+ "L4.a: the (200/3)rho_crit*c form is WRONG (missing c^2)": {
+  "source": "DEEPSEEK",
+  "verdict": "CONFIRMED",
+  "detail": "(200/3)rho_crit*c/f(c) = 6.7289e-05 vs correct 9.6896e-03; off by c^2 = 144. DeepSeek is right that the c^1 form is dimensionally wrong."
+ },
+ "L4: NEMO's claim the PAPER prints c^1": {
+  "source": "NEMO",
+  "verdict": "REFUTED",
+  "detail": "Paper L167 verbatim: 'derive rho_s = (200/3) x c^3 x rho_crit / [ln(1+c) - c/(1+c)]'. The c^3 IS printed. Nemotron misread the file. IRONY: Nemotron's own execute_code output said 'rho_s (alt formula with c^3) = 9.68962001e-03' and 'Ratio rho_s_1/rho_s_2 = 1.000000' -- its computation CONFIRMED c^3, then the prose asserted c^1. A self-contradiction inside one review; the code-level [OK] was right, the paper-level [ERR] was a false positive."
+ },
+ "L4.b: paper's V_max 31.12 (c=12) and 25.59 (c=4)": {
+  "source": "both",
+  "verdict": "CONFIRMED",
+  "detail": "Recomputed with the script's function: c=12 -> 31.1186 km/s; c=4 -> 25.5881 km/s. Both match the paper."
+ },
+ "L4.d: docstring's '~20-30% underestimate' claim": {
+  "source": "both",
+  "verdict": "CONFIRMED",
+  "detail": "(Vcorr-Vvir)/Vcorr = 20.5%; (Vcorr-Vvir)/Vvir = 25.7%. The '~20-30%' claim is CORRECT. But the docstring's reasoning 'sqrt(M(<r_max)/M_vir * c) ~ sqrt(0.20*12) ~ 1.55' is wrong: actual M(<r_max)/M_vir = 0.2848 (not 0.20) and sqrt(0.2848*12) = 1.8486 (not 1.55); the TRUE ratio Vcorr/Vvir = 1.2571. Both reviewers flagged the 1.55/0.20 numbers as wrong; the 20-30% is right."
+ },
+ "L4.e: matches_T204 false is unexplained": {
+  "source": "both",
+  "verdict": "CONFIRMED",
+  "detail": "JSON matches_T204=False; t_core_sub 1.97342 vs T204 0.563 Gyr = 3.51x apart. No explanation in the JSON or paper. Real gap; it does not feed a headline claim but the crosscheck is presented as a validation."
+ },
+ "L5.a both: c=12 sigma_peak window is EMPTY": {
+  "source": "both",
+  "verdict": "CONFIRMED",
+  "detail": "floor 51.96 > cap 47.65 and > 47.71. Window empty either way. Both right."
+ },
+ "L5.b: floor 50*50/48.14 = 51.93, not 51.96": {
+  "source": "NEMO",
+  "verdict": "CONFIRMED",
+  "detail": "50*50/48.14 = 51.9319. Paper says 51.96 (L176, L189). Discrepancy 0.03 (0.05%) -- a real but trivial rounding-level inconsistency; implies the paper used a slightly different sigma/m(28)."
+ },
+ "L5.c: cap 47.65 vs 47.71 inconsistency": {
+  "source": "both",
+  "verdict": "CONFIRMED",
+  "detail": "From ratio(50)=2.86: K = 143, cap = 143/3 = 47.6667 -- between the two quoted values. The paper quotes 47.65 at L186 and 47.71 at L189/L192. A real (small) internal inconsistency."
+ },
+ "L5.f: dSph_violation_factor 43.333 != 50/0.8": {
+  "source": "both",
+  "verdict": "CONFIRMED",
+  "detail": "50/0.8 = 62.5000 != 43.3333. 43.3333 = 34.66667/0.8 = sigma_m_v15_C9_CORE_enhanced / dSph_ceiling. Both reviewers correct; it is NOT the same factor as the 3.6x."
+ },
+ "L5.d: '174 fails by 3.6x'": {
+  "source": "NEMO+DEEPSEEK",
+  "verdict": "PARTIAL",
+  "detail": "174/51.96 (floor) = 3.3487x; 174/47.65 (cap) = 3.6516x; 174/47.71 = 3.6470x. So '3.6x' matches the CAP ratio (3.65), not the floor (3.35). Separately 3.0/0.83 = 3.61 is a different 3.6x. The paper's '3.6x' wording is ambiguous between these."
+ },
+ "L5: channel counts conflict": {
+  "source": "DEEPSEEK",
+  "verdict": "CONFIRMED",
+  "detail": "Paper quotes 1/8 and 5/8 (L19 v19.2-E A.1 caveat), 4 PASS/3 MARGINAL/1 FAIL (L19, L2264), 1 PASS/7 FAIL (L2275), 4/7 (L942,1707,1876), 7/10, 8-channel sets. L2266 says the '4 of 7' framing is RETIRED yet it still appears at 3 other lines. Real inconsistency in the framing, though the underlying sets differ (v19.2-E A.1 caveat is a different likelihood)."
+ }
+}
