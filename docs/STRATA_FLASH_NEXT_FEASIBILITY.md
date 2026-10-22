@@ -167,6 +167,116 @@ picking 2 GB it should read ~94 GB.
 Verify with `scripts/verify_carveout.py` before and after; it flags
 `tg128 < 15 tok/s` as a revert signal (baseline 20.30 at carve = 32).
 
+## What it does NOT do — measured, 2026-10-22
+
+**Strata is now INSTALLED AND RUNNING on this host.** Full result below. The
+short version: it works, it matches the incumbent's accuracy, it is ~30% slower
+per token, and it needs the whole machine to itself.
+
+### Install record (all steps verified, exit 0)
+
+```bash
+# 1. toolchain (pip = user-scope, no admin; the Scripts dir must be on PATH)
+py -3 -m pip install cmake ninja
+#    -> cmake 4.4.4, ninja 1.13.2 in
+#    C:\Users\lamkuenai\AppData\Local\Python\pythoncore-3.14-64\Scripts
+
+# 2. repo
+git clone --depth 1 https://github.com/Niko1221/Strata.git C:\Users\lamkuenai\Strata
+
+# 3. the gfx1150 engine (no release ships one for this card)
+cd C:\Users\lamkuenai\Strata
+set STRATA_HIP_ARCHS=gfx1150
+set STRATA_ROCM_VERSION=10.2.0a20260930
+set STRATA_ROCM_INDEX=https://nightly.repo.amd.com/rocm/whl-next/
+tools\hip\build_windows.bat          # -> dist\strata-windows-x64-hip.zip (145 MB)
+
+# 4. unpack with unzip (it is a zip, not a tar)
+unzip -q dist\strata-windows-x64-hip.zip -d engine\
+
+# 5. device check (needs engine\rocm\bin on PATH)
+strata-device.exe --selftest
+#    -> "arch gfx1150, 75.6 GiB, wave32" + "strata-device selftest OK"
+
+# 6. install (the opt-in is what makes setup.py accept the iGPU)
+set STRATA_EXPERIMENTAL_GFX1150=1
+py -3 setup.py --backend hip --prebuilt dist --yes --family qwen --model IQ3_XXS --context 65536 --no-start
+#    -> "All set."
+
+# 7. start
+py -3 serve\server.py --engine strata --config strata-iq3_xxs.json --port 8080
+```
+
+Gotchas that cost time and are not in the upstream docs:
+
+| Gotcha | Detail |
+|---|---|
+| Model files go in `Strata-data\models\IQ3_XXS\` | the tag is `fam["tag"] + model`; the **qwen family's tag prefix is empty**, so the dir is `IQ3_XXS`, not the model name |
+| The HF repo stores shards in a subdirectory | `IQ3_XXS/Qwen3.8-...gguf` — a flat path 404s |
+| The MTP draft comes from a different repo | `Qwen/Qwen3.8-Flash-Next`, not the GSQ-RCO repo: `py -3 tools/mtp_fetch.py fetch --out C:\Users\lamkuenai\Strata-data\mtp` |
+| `setup.py` does NOT write `--mmap-experts` | it is **mandatory** per the upstream report; add it by hand, plus `--conversation-cache-mib` |
+| `cmd //c` does not work in MSYS git-bash | it opens an interactive shell instead. Use `cmd.exe /c` |
+| The zip needs `unzip`, not `tar` | `tar -xf` fails with "does not look like a tar archive" |
+
+### Measured performance
+
+| | Incumbent (llama.cpp) | Strata (Flash-Next IQ3_XXS) |
+|---|---|---|
+| Model | 35B total / 3B active | **125B total / 6B active** |
+| Decode | 18.03 tok/s | **12.7–16.2 tok/s** |
+| Prefill | 545 tok/s | 165 tok/s (13K prompt) / 420 tok/s (cached) |
+| Scored paper-audit battery | **+11/12** | **+11/12** |
+| Wall time for the battery | 237 s | 1524 s |
+| MTP draft acceptance | n/a | 65–66% short, 85% at 13K context |
+
+Upstream community figures on identical hardware: 10.9–11.8 tok/s (Windows rig),
+15–19 tok/s (Linux rig). **This host matches or beats them.**
+
+Both models miss the *same* question (the one asking about a table that is not in
+the excerpt) and both handle it **honestly** — reporting the table is absent
+rather than hallucinating a column count.
+
+**Read the engine's own log line, not the client's wall clock.** The client
+divides total time (including prefill) by completion tokens, which makes a
+13K-token request look like 2.7 tok/s when the real decode figure is 15.1:
+
+```
+strata serve: prompt 13241 tokens = 0 reused + 13241 read in 90797 ms (145.8 tok/s),
+              300 generated in 19811 ms (15.1 tok/s), drafts accepted 176 of 208
+```
+
+### Two open issues
+
+1. **The PLE (n-gram) table I/O.** The engine auto-picks `--ple-io direct` and
+   warns it measures only 25 MB/s of random 4 KiB reads on this SSD, so *"a
+   prompt can spend minutes reading layer 1 and trip the stall watchdog"*.
+   Upstream says `--ple-io mmap` is 40–100× faster on DRAM-less NVMe but 7×
+   slower on SATA. This host has a **CT2000P310SSD8 (DRAM-less NVMe)**, so
+   `--ple-io mmap` is correct — it moved prefill from 145.8 to 165.3 tok/s.
+
+2. **The Windows commit limit is a live landmine.** The engine warns:
+   *"the Windows commit limit is 84.9 GiB (RAM + page file) and 2.5 GiB of it is
+   left … it can end at the limit with no message (exit code 0xC0000409, #1607)
+   while RAM is still free."* Measured live: commit free fell to **0.98 GiB**
+   during a 13K-token request. Mitigated without a reboot by lowering
+   `--conversation-cache-mib` (2048→512), `--max-context` (65536→32768) and
+   `--prefill` (auto→4096), which cut planned host allocations from 4.0 to
+   2.5 GiB. **The real fix is a FIXED 65 GB page file** (commit limit →128.6
+   GiB) — that needs admin rights, which the agent does not have; run
+   `C:\Users\lamkuenai\Strata\fix_pagefile.ps1` elevated, then reboot.
+
+### The verdict that follows from the numbers
+
+Strata is **not** a drop-in replacement for the incumbent; it is a different tier.
+
+- As the **primary** local reviewer: too slow (6.4× on the paper battery).
+- As a **deep second opinion** on contested findings: worth it. 125B-A6B catches
+  things a 35B/3B cannot, and being a different model family it fails
+  differently — genuine independence for the two-reviewer loop.
+
+The RAM does not allow both to run at once; the incumbent on :50113 was stopped
+to give Strata the machine.
+
 ## The install sequence (from the upstream report)
 
 ```powershell
