@@ -118,6 +118,55 @@ Two fixes, both required:
 Also recommended: drop the BIOS iGPU carve-out from 32 GB to ~2 GB for
 headroom, and keep `--conversation-cache-mib 2048`.
 
+### The carve-out mechanism (measured on this host, 2026-10-22)
+
+Adrenalin **Performance → Tuning → System** exposes three rows:
+
+| Row | Value now | Meaning |
+|---|---|---|
+| Variable Graphics Memory (VGM) | Custom (Select an amount below) | BIOS-level reallocation of system RAM into dedicated graphics memory (Ryzen AI 300 feature) |
+| Dedicated Graphics Memory | 32 GB | the carve-out; dropdown offers 0.5 / 1 / 2 / 4 / 8 / 16 / 32 / 48 GB |
+| Remaining System Memory | (hidden by open dropdown) | live readout of what the OS keeps |
+
+AMD's FAQ is explicit that *dedicated* must not be confused with *shared*: in
+typical Windows systems 50% of RAM is already shared with the iGPU and stays
+CPU-accessible.
+
+Measured Vulkan heaps on this host:
+
+```
+heap[0] host-visible    26.54 GiB
+heap[1] DEVICE_LOCAL    53.08 GiB
+total GPU-addressable   79.62 GiB   (llama.cpp: 81528 MiB)
+```
+
+At carve = 32, `32 + 48 (50% of 96) = 80 GiB` matches the observed 79.62 GiB to
+within the OS's own reserve. So **the shared block is ~48 GiB = 50% of total RAM
+and is independent of the carve.**
+
+Consequence — lowering the carve *shrinks* the GPU's total addressable pool:
+
+| Carve | GPU-addressable | OS sees | Commit limit | Incumbent 22.6 GB model |
+|---|---|---|---|---|
+| 32 GB (now) | 79.62 GiB | 64.00 | 85.26 | in dedicated |
+| 2 GB | ~50 GiB | 94.00 | 115.26 | spills to shared |
+| 0.5 GB | ~48.5 GiB | 95.50 | 116.76 | spills to shared |
+
+The model does not stop working — shared is still GPU-addressable
+(host-visible + coherent) — but it runs over a slower path, and the
+device-local heap shrinks. This is still the right direction for Strata, which
+deliberately keeps experts in the shared pool and needs OS headroom for the
+arena; the upstream Linux gfx1150 rig used a **512 MB** carve and reached
+15–19 tok/s. But **2 GB beats 0.5 GB** for a stronger reason than before: 0.5 GB
+gives +1.5 GiB less headroom *and* a 1.5 GiB smaller GPU pool.
+
+The change requires a **reboot** ("System Restart Required"). The
+**Remaining System Memory** readout is the single best live check: after
+picking 2 GB it should read ~94 GB.
+
+Verify with `scripts/verify_carveout.py` before and after; it flags
+`tg128 < 15 tok/s` as a revert signal (baseline 20.30 at carve = 32).
+
 ## The install sequence (from the upstream report)
 
 ```powershell
