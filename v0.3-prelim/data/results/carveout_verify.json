@@ -1,0 +1,129 @@
+{
+  "timestamp": "2026-10-22T16:45:28",
+  "memory": {
+    "total_installed_gib": 96,
+    "os_visible_gib": 63.62,
+    "os_free_gib": 41.01,
+    "commit_total_gib": 84.88,
+    "commit_free_gib": 26.27,
+    "pagefile_gib": 21.26,
+    "pagefile_auto": true
+  },
+  "vulkan_heaps": {
+    "heaps": [
+      {
+        "index": 0,
+        "gib": 26.54
+      },
+      {
+        "index": 1,
+        "gib": 53.08
+      }
+    ],
+    "types": [
+      {
+        "heap": 1,
+        "flags": "0001"
+      },
+      {
+        "heap": 0,
+        "flags": "0006"
+      },
+      {
+        "heap": 1,
+        "flags": "0007"
+      },
+      {
+        "heap": 0,
+        "flags": "000e"
+      },
+      {
+        "heap": 1,
+        "flags": "00c1"
+      },
+      {
+        "heap": 0,
+        "flags": "00c6"
+      },
+      {
+        "heap": 1,
+        "flags": "00c7"
+      },
+      {
+        "heap": 0,
+        "flags": "00ce"
+      },
+      {
+        "heap": 1,
+        "flags": "0001"
+      },
+      {
+        "heap": 0,
+        "flags": "0006"
+      },
+      {
+        "heap": 1,
+        "flags": "0007"
+      },
+      {
+        "heap": 0,
+        "flags": "000e"
+      },
+      {
+        "heap": 1,
+        "flags": "00c1"
+      },
+      {
+        "heap": 0,
+        "flags": "00c6"
+      },
+      {
+        "heap": 1,
+        "flags": "00c7"
+      },
+      {
+        "heap": 0,
+        "flags": "00ce"
+      }
+    ],
+    "total_gib": 79.62
+  },
+  "vulkan_device": "Vulkan0: AMD Radeon(TM) 890M Graphics (81528 MiB, 77452 MiB free)",
+  "gpu_mem_counters": [
+    {
+      "path": "\\\\desktop-6damddi\\gpu adapter memory(luid_0x00000000_0x0001453d_phys_0)\\dedicated usage",
+      "gib": 0
+    },
+    {
+      "path": "\\\\desktop-6damddi\\gpu adapter memory(luid_0x00000000_0x812f4b7a_phys_0)\\dedicated usage",
+      "gib": 22.64
+    },
+    {
+      "path": "\\\\desktop-6damddi\\gpu adapter memory(luid_0x00000000_0x813d1efc_phys_0)\\dedicated usage",
+      "gib": 0
+    },
+    {
+      "path": "\\\\desktop-6damddi\\gpu adapter memory(luid_0x00000000_0x0001453d_phys_0)\\shared usage",
+      "gib": 0
+    },
+    {
+      "path": "\\\\desktop-6damddi\\gpu adapter memory(luid_0x00000000_0x812f4b7a_phys_0)\\shared usage",
+      "gib": 1.04
+    },
+    {
+      "path": "\\\\desktop-6damddi\\gpu adapter memory(luid_0x00000000_0x813d1efc_phys_0)\\shared usage",
+      "gib": 0.06
+    }
+  ],
+  "incumbent_bench": {
+    "pp512": {
+      "tps": 421.42,
+      "sd": 1.44
+    },
+    "tg128": {
+      "tps": 20.3,
+      "sd": 0.32
+    },
+    "ok": true
+  }
+}
