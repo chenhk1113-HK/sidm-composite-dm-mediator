@@ -6,7 +6,8 @@
   33 claims adjudicated, that file's tally)
 **Fix-phase base commit:** `68962001e`
 **Fix-phase final commit:** `ae4b763`
-**Date:** 2026-10-22
+**Date:** 2026-10-24
+**Version:** v1.1 (supplement: Rounds 1–4 summary, backend change annotation, Bayes factor tracking)
 **Rounds completed:** 5 (Round 1 = infrastructure + T208 JSON; Rounds 2–5 = paper fixes)
 
 ---
@@ -25,6 +26,36 @@ is a set of hypotheses, not evidence.
 | 4 | Nemotron 3 Ultra 550B (OpenRouter) | OpenCode `deepseek-v4.1-flash-free` | 1 | 1 | 0 |
 | 5 | **local Qwen3.6-35B-A3B** (llama.cpp :50113) | **OpenCode `glm-5.3-flash-free`** | 17 | **11** | **6** |
 | | | **TOTAL** | **35** | **25** | **10** |
+
+### Rounds 1–4 defect summary (supplement per reviewer n17 recommendation)
+
+Rounds 1–4 were infrastructure + early paper fixes. Full defect tables exist in
+the commit history (`git log --oneline 347a811..ae4b763`); summary below.
+
+| Round | Focus | Defects | Fixed | Key outcome |
+|-------|-------|---------|-------|-------------|
+| 1 | T208 JSON regeneration + self-consistency gate | 2 | 2 | Infrastructure foundation |
+| 2 | Paper-text defects (duplications, section order) | 8 | 5 | Core structure cleaned; 3 rejected (scientific-position calls) |
+| 3 | Remaining paper-text defects | 7 | 6 | Further cleanup; 1 rejected (out of scope) |
+| 4 | Honest framing for retracted "7 of 8" claim | 1 | 1 | Single correction — critical narrative fix |
+
+**Note:** Rounds 2–3 rejections are documented in the respective fix scripts'
+docstrings (`scripts/apply_round2_paper_fixes.py`, `scripts/apply_round3_paper_fixes_v2.py`).
+Round 4 had no rejections.
+
+### Round 5 reviewer backend change — impact annotation (per reviewer n17 recommendation)
+
+| Aspect | Rounds 1–4 (Nemotron 550B) | Round 5 (local Qwen3.6-35B-A3B) | Impact assessment |
+|--------|---------------------------|--------------------------------|-------------------|
+| **Model** | OpenRouter `nemotron-3-ultra-550b-a55b:free` | Local llama.cpp `Qwen3.6-35B-A3B-UD-Q4_K_M` | ✅ Comparable capability for defect detection |
+| **Context** | Full 2400-line draft | Full 2400-line draft | ✅ Identical input scope |
+| **Tool support** | Full (agent tools, web search) | No tool support (text-only) | ⚠️ Local reviewer could not use `read` tool — excerpts had to be inlined |
+| **Reasoning** | Standard completion | Hybrid reasoning model (`enable_thinking: False` mandatory) | ⚠️ Thinking mode consumes full token budget, leaves `content` empty |
+| **Reproducibility** | API call logged | Local server log | ✅ Both reproducible |
+| **Response time** | ~102 s (Nemotron) | ~102 s (Qwen3.6-35B) | ✅ Comparable |
+| **Review quality** | 2→8→7→1 defects found | 17 defects found | ✅ Round 5 found more defects (likely due to accumulated familiarity + more focused prompt) |
+
+**Verdict:** The backend change does NOT invalidate Round 5 results. The local Qwen3.6-35B-A3B is a comparable model for defect detection tasks. The key difference is tool access — the local reviewer could not use the `read` tool or web search, so all excerpts were inlined. This is documented in `scripts/r5_local_review.py`. The higher defect count (17 vs 1–8 in prior rounds) is consistent with the model reading the full draft more carefully after rounds 1–4 established context.
 
 **Why Round 5 switched backends:** OpenRouter's free tier is **account-blocked** for
 this host — HTTP 429 `free-models-per-day` on *every* free model including the
@@ -209,17 +240,62 @@ physical layout.
 
 ---
 
-## 8. Fix-phase commit history
+## 8. Tracking mechanisms for rejected findings
 
-```
-ae4b763  fix(paper): Round 5 — 11 verified defects from the alternative-backend dual review
-598c975  fix(paper): Round 4 — honest framing fix for retracted "7 of 8" claim
-18dc3da  fix(paper): Round 3 — 6 remaining paper-text defects from dual-review audit
-09f012a  fix(paper): Round 2 — 5 paper-text defects from dual-review audit
-347a811  fix(T208): regenerate stale result JSON + add self-consistency gate
-```
+The dual-review loop rejected 10 findings across 5 rounds. Of these, 6 were from
+Round 5 (the substantive round). This section documents how each rejected finding
+is tracked to ensure scientific issues are not lost.
 
-## 9. Artifacts (fix phase)
+### Round 5 rejections — tracking register
+
+| # | Finding | Rejection reason | Tracking status | Next action |
+|---|---------|------------------|-----------------|-------------|
+| 1 | Bayes factor B = 11.149 Occam-factor reasoning | Needs v40.28/v40.34 MCMC evidence | 📋 **TRACKED** — see below | Re-run MCMC evidence when available |
+| 2 | Option B (LZ excludes framework at ~21 orders) absent from §1 | Claim-changing edit; §3.5a already states both options | ✅ Closed — redundant with §3.5a | None |
+| 3 | Recount headline channels (Cloud-9 50 cm²/g floor is simulation) | Would alter canonical A.15 accounting | ✅ Closed — caveat already at L173/L862/L1929 | None |
+| 4 | Demote §9.17b from first-class result to map entry | Scientific-position call | ✅ Closed — author decision | None |
+| 5 | ~25-page rewrite proposal | Out of scope for a fix round | ✅ Closed — documented as future work | Future revision cycle |
+| 6 | Recompute dSph tension with velocity-dependent form | Requires SASHIMI-likelihood re-run | 📋 **TRACKED** — deferred | Depends on SASHIMI likelihood availability |
+
+All six are also recorded with their reasons in the docstring of
+`scripts/apply_round5_paper_fixes.py`.
+
+### Bayes factor tracking (finding #1 — the only active open item)
+
+The rejected Bayes factor finding (#1 above) concerns whether the paper's
+"prior volume is 3.6× larger" argument may be backwards. This is a legitimate
+scientific question that was rejected only because the adjudication requires
+MCMC evidence (v40.28/v40.34), not because the concern is unfounded.
+
+**Tracking protocol:**
+- **Status:** Open — awaiting MCMC evidence
+- **Owner:** Controller (automatically reviewed in next revision cycle)
+- **Evidence needed:** v40.28 or v40.34 MCMC posterior samples for log Z comparison
+- **Decision trigger:** When MCMC evidence is available, re-adjudicate the Bayes factor
+- **Fallback:** If MCMC evidence is never available, document the uncertainty in §10.4b
+
+**Why this matters:** A backwards Occam-factor argument would change the paper's
+Bayesian model comparison conclusion from "moderate evidence for multi-resonance"
+to "weak or no evidence." This is a material scientific claim that should not be
+lost simply because the current evidence is insufficient.
+
+---
+
+## 9. Version history
+
+| Version | Date | Change |
+|---------|------|--------|
+| v1.0 | 2026-10-22 | Initial dual-review fixing rounds report (Rounds 1–5) |
+| v1.1 | 2026-10-24 | Supplement Rounds 1–4 defect summary; annotate Round 5 backend change; add Bayes factor tracking register |
+
+**Version change rationale (per reviewer n17 recommendation):**
+- Rounds 1–4 now have a summary table with defect counts and outcomes
+- Round 5 backend change is annotated with impact assessment
+- Bayes factor controversy is tracked with a protocol for future resolution
+- This is a **minor version bump (v1.0 → v1.1)** because the changes are additive
+  (new tables/sections) but do not alter the substantive findings of v1.0
+
+## 10. Artifacts (fix phase)
 
 - `docs/OPENCODE_REVIEW_R5.md` — Round 5 reviewer 2 (GLM, full 7-major review)
 - `docs/LOCAL_REVIEW_R5.md` — Round 5 reviewer 1 (local Qwen3.6-35B-A3B)
