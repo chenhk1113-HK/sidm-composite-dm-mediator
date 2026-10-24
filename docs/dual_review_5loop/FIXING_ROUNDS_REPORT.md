@@ -7,7 +7,7 @@
 **Fix-phase base commit:** `68962001e`
 **Fix-phase final commit:** `ae4b763`
 **Date:** 2026-10-24
-**Version:** v1.1 (supplement: Rounds 1–4 summary, backend change annotation, Bayes factor tracking)
+**Version:** v1.2 (supplement: Rounds 1–4 summary, backend change annotation, Bayes factor adjudication)
 **Rounds completed:** 5 (Round 1 = infrastructure + T208 JSON; Rounds 2–5 = paper fixes)
 
 ---
@@ -315,6 +315,7 @@ that the verdict is robust to the σ_unc specification change.
 |---------|------|--------|
 | v1.0 | 2026-10-22 | Initial dual-review fixing rounds report (Rounds 1–5) |
 | v1.1 | 2026-10-24 | Supplement Rounds 1–4 defect summary; annotate Round 5 backend change; add Bayes factor tracking register |
+| v1.2 | 2026-10-24 | Adjudicate Bayes factor finding — MCMC evidence confirms Occam factor correctly applied; reject reviewer's "backwards" concern |
 
 **Version change rationale (per reviewer n17 recommendation):**
 - Rounds 1–4 now have a summary table with defect counts and outcomes
