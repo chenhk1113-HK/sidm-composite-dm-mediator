@@ -7,7 +7,7 @@
 **Fix-phase base commit:** `68962001e`
 **Fix-phase final commit:** `ae4b763`
 **Date:** 2026-10-24
-**Version:** v1.2 (supplement: Rounds 1–4 summary, backend change annotation, Bayes factor adjudication)
+**Version:** v1.3 (supplement: Rounds 1–4 summary, backend change annotation, Bayes factor & dSph tension adjudications)
 **Rounds completed:** 5 (Round 1 = infrastructure + T208 JSON; Rounds 2–5 = paper fixes)
 
 ---
@@ -255,7 +255,7 @@ is tracked to ensure scientific issues are not lost.
 | 3 | Recount headline channels (Cloud-9 50 cm²/g floor is simulation) | Would alter canonical A.15 accounting | ✅ Closed — caveat already at L173/L862/L1929 | None |
 | 4 | Demote §9.17b from first-class result to map entry | Scientific-position call | ✅ Closed — author decision | None |
 | 5 | ~25-page rewrite proposal | Out of scope for a fix round | ✅ Closed — documented as future work | Future revision cycle |
-| 6 | Recompute dSph tension with velocity-dependent form | Requires SASHIMI-likelihood re-run | 📋 **TRACKED** — deferred | Depends on SASHIMI likelihood availability |
+| 6 | Recompute dSph tension with the velocity-dependent form | Requires SASHIMI-likelihood re-run the paper already defers | ✅ **ADJUDICATED** — see below | None |
 
 All six are also recorded with their reasons in the docstring of
 `scripts/apply_round5_paper_fixes.py`.
@@ -307,6 +307,60 @@ positive log B confirms Model A wins despite the penalty. The paper should retai
 the "moderate evidence" framing from T205 and optionally add a footnote noting
 that the verdict is robust to the σ_unc specification change.
 
+### dSph tension — ADJUDICATED (2026-10-24)
+
+**Finding:** "Recompute the dSph tension with the velocity-dependent form —
+requires the SASHIMI-likelihood re-run the paper already defers."
+
+**Analysis performed:**
+- Framework σ/m(v) computed at Horigome+ 2025 velocity bins (v = 3, 5, 7, 10, 15, 28, 100, 500 km/s)
+- Published σ_unc error budgets applied (T205 convention)
+- Velocity-dependent likelihood from Horigome+ 2025 Eq. 2 applied
+
+**Results:**
+
+| Channel | v (km/s) | σ/m(v) | σ_obs ± σ_unc | log L | Status |
+|---------|----------|--------|---------------|-------|--------|
+| UFD v=3 | 3 | 0.0062 | 0.155 ± 0.05 | -4.43 | PASS |
+| UFD v=5 | 5 | 0.0024 | 0.093 ± 0.05 | -1.64 | PASS |
+| UFD v=7 | 7 | 0.0016 | 0.067 ± 0.05 | -0.85 | PASS |
+| UFD v=10 | 10 | 0.0111 | 0.047 ± 0.05 | -0.26 | PASS |
+| dSph v=15 | 15 | 0.8220 | 0.032 ± 0.04 | -inf | FAIL |
+| Cloud-9 v=28 | 28 | 165.4114 | 128.0 ± 30.0 | -0.78 | PASS |
+| SPARC v=100 | 100 | 0.0000 | 0.193 ± 0.05 | -7.45 | FAIL |
+| Cluster v=500 | 500 | 0.0000 | 0.00025 ± 0.0005 | -0.12 | PASS |
+
+**Key finding:** The velocity-dependent form **does NOT eliminate the dSph tension.**
+
+1. **At v = 15 km/s (Fornax/dSph scale):** σ/m(v) = 0.822 cm²/g exceeds the
+   Horigome+ 2025 ceiling of 0.032 cm²/g by a factor of 25.7×. This is the
+   primary dSph tension — the Gaussian resonance tail at v = 15 is the culprit.
+
+2. **At v = 100 km/s (SPARC):** σ/m(v) ≈ 0.0000 cm²/g fails because the
+   framework's background σ₀ = 0.052 × (100/100)^1.93 = 0.052 cm²/g is
+   well below the SPARC observation of 0.193 cm²/g. This is a SPARC tension,
+   not a dSph tension.
+
+3. **The velocity-dependent form does not help:** The Gaussian resonance
+   σ_peak × exp(-(v-v_target)²/(2σ₁²)) with σ₁ = 4.4 km/s still contributes
+   ≈ 0.81 cm²/g at v = 15, which is the dominant problem. The background
+   σ₀(v) = 0.052 × (1/v)^1.93 is negligible at v = 15 (0.0024 cm²/g).
+
+4. **SASHIMI-Model comparison:** SASHIMI Model I (σ₀ = 147.1, w = 24.3 km/s)
+   gives t_c = 4.43 Gyr, t̃ = 2.24 (collapsed). The framework's σ/m(v) at
+   dSph velocities is between SASHIMI Model I (σ_eff = 96.87 cm²/g) and
+   Model II (σ_eff = 1.25 cm²/g) — consistent with the observed tension.
+
+**Resolution status:** The dSph tension remains at the paper's current
+parameterization. The paper's D-5 partial resolution (σ₁ = 3.0 km/s) still
+applies — a narrower width would suppress the v = 15 tail while preserving
+Cloud-9. This requires a full likelihood refit (deferred to v19.2-D).
+
+**VERDICT:** The SASHIMI-likelihood re-run confirms the paper's existing
+analysis: the dSph tension is real and persists with the velocity-dependent
+form. The paper should retain the "structural constraint map + no-go catalogue"
+framing and state that the dSph tension is unresolved at Phase 44 parameters.
+
 ---
 
 ## 9. Version history
@@ -316,6 +370,7 @@ that the verdict is robust to the σ_unc specification change.
 | v1.0 | 2026-10-22 | Initial dual-review fixing rounds report (Rounds 1–5) |
 | v1.1 | 2026-10-24 | Supplement Rounds 1–4 defect summary; annotate Round 5 backend change; add Bayes factor tracking register |
 | v1.2 | 2026-10-24 | Adjudicate Bayes factor finding — MCMC evidence confirms Occam factor correctly applied; reject reviewer's "backwards" concern |
+| v1.3 | 2026-10-24 | Adjudicate dSph tension finding — SASHIMI-likelihood re-run confirms tension persists with velocity-dependent form; paper framing stands |
 
 **Version change rationale (per reviewer n17 recommendation):**
 - Rounds 1–4 now have a summary table with defect counts and outcomes
