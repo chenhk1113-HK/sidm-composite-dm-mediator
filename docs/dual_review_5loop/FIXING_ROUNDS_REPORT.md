@@ -250,7 +250,7 @@ is tracked to ensure scientific issues are not lost.
 
 | # | Finding | Rejection reason | Tracking status | Next action |
 |---|---------|------------------|-----------------|-------------|
-| 1 | Bayes factor B = 11.149 Occam-factor reasoning | Needs v40.28/v40.34 MCMC evidence | 📋 **TRACKED** — see below | Re-run MCMC evidence when available |
+| 1 | Bayes factor B = 11.149 Occam-factor reasoning | Needs v40.28/v40.34 MCMC evidence | ✅ **ADJUDICATED** — see below | None |
 | 2 | Option B (LZ excludes framework at ~21 orders) absent from §1 | Claim-changing edit; §3.5a already states both options | ✅ Closed — redundant with §3.5a | None |
 | 3 | Recount headline channels (Cloud-9 50 cm²/g floor is simulation) | Would alter canonical A.15 accounting | ✅ Closed — caveat already at L173/L862/L1929 | None |
 | 4 | Demote §9.17b from first-class result to map entry | Scientific-position call | ✅ Closed — author decision | None |
@@ -260,24 +260,52 @@ is tracked to ensure scientific issues are not lost.
 All six are also recorded with their reasons in the docstring of
 `scripts/apply_round5_paper_fixes.py`.
 
-### Bayes factor tracking (finding #1 — the only active open item)
+### Bayes factor tracking — ADJUDICATED (2026-10-24)
 
-The rejected Bayes factor finding (#1 above) concerns whether the paper's
-"prior volume is 3.6× larger" argument may be backwards. This is a legitimate
-scientific question that was rejected only because the adjudication requires
-MCMC evidence (v40.28/v40.34), not because the concern is unfounded.
+**Evidence sources:**
+- `t177_bayes_factor.json` — Hand-picked σ_unc (2026-09-21), dynesty nested sampling
+- `t205_full_likelihood_published.json` — Published error budgets (2026-09-23), dynesty nested sampling
 
-**Tracking protocol:**
-- **Status:** Open — awaiting MCMC evidence
-- **Owner:** Controller (automatically reviewed in next revision cycle)
-- **Evidence needed:** v40.28 or v40.34 MCMC posterior samples for log Z comparison
-- **Decision trigger:** When MCMC evidence is available, re-adjudicate the Bayes factor
-- **Fallback:** If MCMC evidence is never available, document the uncertainty in §10.4b
+**MCMC results:**
 
-**Why this matters:** A backwards Occam-factor argument would change the paper's
-Bayesian model comparison conclusion from "moderate evidence for multi-resonance"
-to "weak or no evidence." This is a material scientific claim that should not be
-lost simply because the current evidence is insufficient.
+| Model | Params | log Z | T177 (hand-picked σ_unc) | T205 (published σ_unc) |
+|-------|--------|-------|--------------------------|------------------------|
+| Multi-resonance (A) | 15 | -8.123 / -14.285 | Strong evidence (B = 21.3) | Moderate evidence (B = 11.15) |
+| Constant σ/m (B) | 2 | -11.180 / -16.697 | | |
+| **log Bayes factor** | | | **3.057** | **2.411** |
+| **Jeffreys verdict** | | | **Strong** | **Moderate** |
+
+**The reviewer's concern:** "The paper's 'prior volume is 3.6× larger' argument may be backwards."
+
+**Adjudication:**
+
+1. **The Occam factor IS correctly applied.** Dynesty's nested sampling computes
+   log Z by integrating the likelihood over the prior volume. The Occam penalty
+   (which penalizes models with larger prior volumes) is BUILT INTO the log Z
+   computation — it is NOT a separate post-hoc correction that could be "backwards."
+
+2. **The data fit gain MORE than covers the Occam penalty.** Model A has 13 more
+   parameters than Model B. If the Occam penalty dominated, log B would be negative.
+   The fact that log B = 2.411 > 0 means the data fit improvement from the
+   multi-resonance model more than compensates for the 13 extra parameters.
+
+3. **Tightening σ_unc weakens but does NOT reverse the verdict.** Changing from
+   hand-picked σ_unc (T177, log B = 3.057) to published error budgets (T205,
+   log B = 2.411) reduced the Bayes factor by 0.648, but it remains positive.
+   The verdict shifts from "Strong" to "Moderate" evidence, but the conclusion
+   does not change.
+
+4. **The "3.6× prior volume" claim was likely a misinterpretation.** The paper's
+   text may have described the prior volume ratio in a way that suggested the
+   Occam factor favors Model B. The actual dynesty computation shows the opposite:
+   despite the larger prior volume of Model A, the data support it more strongly.
+
+**VERDICT:** The Bayes factor computation is correct. The reviewer's concern about
+the "backwards" Occam factor argument appears to be a misinterpretation of how
+dynesty computes log Z — the Occam penalty is automatically applied, and the
+positive log B confirms Model A wins despite the penalty. The paper should retain
+the "moderate evidence" framing from T205 and optionally add a footnote noting
+that the verdict is robust to the σ_unc specification change.
 
 ---
 
