@@ -8,8 +8,16 @@ copy of the defect (see the stale-narrative-string-audit discipline), so this
 test pins the two against each other.
 
 The test recomputes the range from `_derived_ranges` in the generator's
-output JSON and asserts the docstring quotes the same numbers. It fails if
-EITHER side moves.
+output JSON and asserts the docstring quotes the same numbers.
+
+Scope of the guarantee: it fails if the docstring and the JSON disagree at the
+*displayed* precision (3 decimal places), so a change of 0.001 cm^2/g or more in
+either side is caught. It does NOT catch a sub-0.0005 drift (the numbers are
+compared as rounded 3-dp strings), and it does NOT detect a stale
+(un-regenerated) JSON -- if the JSON on disk is out of date relative to the
+generator, this test still passes. Both limits are inherent to comparing
+rounded display values; the guard against a stale JSON is to regenerate it and
+re-run the suite, not to rely on this test.
 
 Round 5 already made the JSON's `interpretation` and `limitations` fields
 computed; this test closes the remaining hole (the hand-written docstring).

@@ -19,10 +19,15 @@ What it checks
 1. Every ``σ_peak`` row of the §2.6a table quotes the σ_HL value the JSON holds.
 2. The ``(marginal)`` / ``(substantive)`` label matches the JSON's own flag.
 
-Both sides are read at test time (paper table + JSON), so this fails if either drifts.
-It deliberately does NOT re-assert a hard-coded literal: a literal would have to be
-edited by hand every time the anchor moves, which is how the drift survived in the
-first place.
+Both sides are read at test time (paper table + JSON), so this fails if either drifts
+beyond the displayed precision (half a unit in the last place). It deliberately does NOT
+re-assert a hard-coded literal: a literal would have to be edited by hand every time the
+anchor moves, which is how the drift survived in the first place.
+
+Two limits worth stating: it does not detect a sub-0.005 drift, and it does not detect a
+stale (un-regenerated) JSON on disk -- if the JSON is out of date relative to the
+generator, the table can agree with it and this test still passes. The guard against a
+stale JSON is to regenerate it and re-run the suite, not to rely on this test.
 """
 
 from __future__ import annotations
