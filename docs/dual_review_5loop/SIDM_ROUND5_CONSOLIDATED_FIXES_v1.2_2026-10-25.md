@@ -620,6 +620,20 @@ matches the current state. Corrected in the companion.
 
 **The missing guard, now added.** Nothing in the suite connected the paper's §2.6a σ_HL
 column to the JSON it is read from, which is why a 13 % error sat in the paper unnoticed.
+
+**Direct proof that the gate was blind to this class.** The full 7-layer pre-tag gate was run
+twice — once at 22:03:20 (before the fix) and once after `1c07d65` (committed 23:33:19). **Both
+runs report `ALL GATES PASSED — safe to tag a new release.`** The 22:03 run therefore certified
+a paper whose §2.6a σ_HL column was 13 % wrong *and* whose finding text asserted a false
+marginality. The reason is visible in the gate's own output: `audit_claims.py` scans 1,034
+numeric lines but states "only the headline Phase claims are tracked", and its source contains
+**zero** references to `sigma_HL` or §2.6a. So `7/7 PASS` never covered this table, and the new
+test is **not redundant coverage — it is the first check that reads this column at all**.
+
+**Generalisation:** a green pre-tag gate is evidence about the claims the gate *enumerates*, not
+about the document. When a numeric defect is found in a document a gate certifies, the finding
+to carry forward is the **gate gap**, not just the fixed cell — and the gate's summary line
+(`ALL GATES PASSED`) must not be quoted as if it covered the defect.
 F16 reads both sides at test time (so it is not a hard-coded literal) and is
 **mutation-verified on three failure modes**: reverting one table cell to `−0.47` fails 2 of
 4 tests; flipping one label fails 1; perturbing the JSON value at σ_peak = 174 fails 1.
