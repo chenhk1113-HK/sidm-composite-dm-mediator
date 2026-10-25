@@ -1,4 +1,4 @@
-# SIDM Round 5 + n18 review response — Consolidated Fixes Report (v1.2, 2026-10-25)
+# SIDM Round 5 + n18 review response — Consolidated Fixes Report (v1.3, 2026-10-25)
 
 **Scope:** all confirmed Round 5 / local-review defects, with the code and data references that
 establish ground truth. Every number below was recomputed from source on 2026-10-25.
@@ -715,3 +715,64 @@ reviewer plus one partial**. Reviewer A (Nemotron 550B) returned a complete audi
 returned a complete audit only after the transport fix; the earlier attempt produced a
 1,422-byte confused artefact which was briefly committed under a Nemotron filename and has
 since been replaced with Reviewer A's real output (commit `5b98628`).
+
+---
+
+## 15. Third reviewer pass — six further defects (v1.3)
+
+The driver fix (`df1e6b7`) let the reviewer run through the *unmodified* CLI path, and the
+review it produced carried **six additional findings, none of which had been adjudicated yet**.
+All six were verified against the paper before acting; five were real defects and one was a
+legitimate criticism of my own test docstrings.
+
+| # | Finding | Verdict | Action |
+|---|---|---|---|
+| F17 | L102: `0.09 × 2.85 = 0.257` — the rounded multiplier gives 0.2565, and the canonical unrounded 2.845457 gives **0.256** | **REAL** (rounding inconsistency; the same paper states 0.256 in the docstring) | F17 fixed: `0.09 × 2.845 = 0.256` |
+| F18 | L120: `σ/m = 2.85–18 cm²/g` — the canonical max is **16.865**, and the same paper says `2.85–16.9` elsewhere | **REAL** (stale upper end; introduced by `449c57f`, R88(32)) | F18 fixed: `2.85–16.9` |
+| F19 | L120: `The F. H. assumption` — typo for `f_H` | **REAL** | F19 fixed |
+| F20 | L109 + L115: `0.297² × 2.85 = 0.252` — that product is **0.2514** (0.251 at 3 dp) | **REAL** (arithmetic error, both places) | F20 fixed: `0.297² × 2.845 = 0.251`, table cell `0.251 cm²/g` |
+| F21 | L151: `2.84e-13 vs 1.74e-13 at v = 28` — **1.74e-13 is the σ₁ = 4.4 headline**, not a v = 28 value; the like-for-like v = 28 baseline is **1.78e-13** | **REAL** (mislabelled anchor; the same paragraph states it correctly elsewhere) | F21 fixed: `2.84e-13 at v = 28 vs the σ₁ = 4.4 headline 1.74e-13` |
+| F22 | The test docstrings claim "fails if EITHER side moves" — the comparison is at *displayed* precision and cannot detect a stale JSON | **REAL** (overstated guarantee) | F22 fixed: both docstrings now state the precision limit and the stale-JSON limit explicitly |
+
+### 15.1 The guard for the gap the reviewer correctly identified
+
+The reviewer's 6th point was the sharpest: **a paper-vs-JSON test cannot catch a stale JSON.** If
+the data file is out of date relative to the generator, the paper can agree with it and the test
+still passes — which is exactly what happened here (the §2.6a column was 13 % wrong *and* every
+paper-vs-JSON comparison was green).
+
+`v0.3-prelim/tests/test_sweep_json_not_stale.py` closes that gap with two checks:
+
+1. the JSON's own `parameterization` field must name the canonical anchor (`v = 29.4`) and not
+   the retired one (`v = 28`);
+2. **re-running the generator must reproduce the committed JSON exactly** — a reproducibility
+   check, with the diff reported field-by-field when it fails.
+
+**Mutation-verified:** baseline 2 passed; restoring the old `-0.4723` value → red; changing a
+σ/m value → red; restore byte-identically → green.
+
+### 15.2 A host-level trap found while verifying that guard
+
+The reproducibility check **skipped on its first run** — the generator died in 0.2 s with
+`No module named 'numpy._core._multiarray_umath'`. Root cause: the Hermes agent process
+injects its own `site-packages` into **`PYTHONPATH`**, which shadows the project venv's numpy
+2.5.2 with an ABI-incompatible **2.4.3** build. Clearing `PYTHONPATH` in the subprocess
+environment flips exit 1 → exit 0.
+
+Two lessons, both now encoded:
+- the guard **strips `PYTHONPATH`** before spawning the generator;
+- a generator that fails for an *environmental* reason (import/ABI) **skips honestly**, while a
+  generator that runs and fails **fails the test**. A silently-skipped check is worse than no
+  check — this one reported "green" while proving nothing.
+
+### 15.3 Verification
+
+| check | result |
+|---|---|
+| the three n18 test files + T132 | **31 passed** |
+| new stale-JSON guard, baseline | 2 passed |
+| mutation: stale σ_HL in the committed JSON | **red** (reproducibility check) |
+| mutation: altered σ/m value | **red** (reproducibility check) |
+| mutation: retired `(v-28)` anchor in `parameterization` | **red** (anchor check) |
+| restore byte-identically | green, and the working tree clean |
+| F17–F21 anchors | each matched exactly **once** before replacement |
