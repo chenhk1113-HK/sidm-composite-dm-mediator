@@ -1,13 +1,20 @@
-# SIDM Round 5 — Consolidated Fixes Report (v1.0, 2026-10-25)
+# SIDM Round 5 — Consolidated Fixes Report (v1.1, 2026-10-25)
 
 **Scope:** all confirmed Round 5 / local-review defects, with the code and data references that
 establish ground truth. Every number below was recomputed from source on 2026-10-25.
 
 **Branch:** `wip/v19.2-F-init`  **Paper:** `v0.3-prelim/docs/PAPER_V1_DRAFT.md` (2383 lines)
 
-**Outcome:** 6 paper defects + 1 generator (root-cause) defect + 1 review-document defect class
-= **8 fixes applied**, all verified. 2 additional pre-existing issues found and left alone
-(§10 L98 band; §9 Table-walker — both confirmed pre-existing, not caused by these edits).
+**Outcome (Round 5, v1.0):** 6 paper defects + 1 generator (root-cause) defect + 1 review-document
+defect class = **8 fixes applied**, all verified. 2 additional pre-existing issues found and left
+alone (§10 L98 band; §9 Table-walker — both confirmed pre-existing, not caused by these edits).
+
+**Outcome (n18 review-response, v1.1):** the n18 external review raised 3 priority items against
+the v1.0 pair. **All 3 are valid and all 3 are fixed** (§13). Two supporting claims in the n18
+review were **corrected**: (a) one of the three paper text errors was **not** introduced by
+Round 5 — it predates it by many commits; (b) the docstring mismatch is **not** a
+rounding-level difference — it is a 4.7% error in the quantity. The n18 review also produced 2
+further structural improvements to the companion document, both applied (§13).
 
 ---
 
@@ -394,3 +401,126 @@ decision rather than silently edited.
 - `docs/dual_review_5loop/FIXING_ROUNDS_REPORT.md` — Round 5 adjudication
 - `docs/dual_review_5loop/GROUND_TRUTH.json`, `ADJUDICATION_EXTRA.json` — adjudicated ground truth
 - `v0.3-prelim/docs/PAPER_STANDING_NUMBERS.md` — claim registry (29/29 verified)
+
+---
+
+## 13. n18.docx review response (v1.1) — adjudication and fixes
+
+**Source:** `n18.docx` (external review of the v1.0 report + companion, in Chinese).
+
+**Important note on the source document:** the n18 `.docx` is **itself truncated**. Its severity
+table survives only as its final row (`7  diff 单行长段落可读性差 低 考虑分行 diff 或高亮`);
+findings 1–6 of that table are **not recoverable from the file**. The three priority items in
+the review's closing 总体判断 section are complete and are the actionable set addressed here.
+
+### 13.1 Adjudication table
+
+| # | n18 finding | Controller verdict | Provenance (independently re-derived) | Action |
+|---|---|---|---|---|
+| 1 | Paper: `"halos is"` word order | **VALID** | **Introduced by Round 5** — `git log -S"halos is"` → `7cc8d8a`; absent from `7cc8d8a^` (which read "For 7 of 8 halos, \|σ_HL\| < 0.05 cm²/g") | F1 fixed |
+| 2 | Paper: `"cm²/g.,"` doubled punctuation | **VALID** | **Introduced by Round 5** — `git log -S"cm²/g.,"` → `7cc8d8a` only; count in the paper = 1 | F2 fixed |
+| 3 | Paper: `"and 4 baseline"` stray chars | **VALID defect**, provenance **CORRECTED** | **Pre-existing since `799f4ef`** ("R88 paper cleanup"), NOT Round 5. `git log -S"changes and 4 baseline headline"` → `799f4ef`; the same string is present in `7cc8d8a^` | F4 fixed |
+| 4 | Generator docstring `"1.589"` vs computed `"1.518"` | **VALID**, severity **CORRECTED** | Introduced by Round 5 (`git log -S"0.257-1.589"` → `7cc8d8a`). **Not** "rounding-level": 1.589 implies σ/m = 17.656 cm²/g vs the canonical 16.865 — a **4.7%** error. The lower end 0.257 implies 2.856 vs canonical 2.845 — also wrong | F5 fixed + regression test |
+| 5 | Companion embeds 241 lines of unchanged JSON | **VALID** | Verified: the embedded block is **byte-identical** to the live JSON (`d == live` True, all 8 top-level keys equal, zero differing values) — it carries no information the live file lacks | F6 fixed |
+| 6 | Diff single-line long paragraphs (low) | **VALID** | Max line length in the v1.0 diff fence = **3 581 characters** | F7 fixed |
+
+### 13.2 Two corrections to the n18 review
+
+**C1 — "these are new errors introduced by the fix (not present in the original paper)" is wrong
+for finding 3.** The `"and 4 baseline"` defect was introduced by commit `799f4ef` and is present
+in `7cc8d8a^` unchanged; Round 5 carried it through untouched. The defect is real and **is**
+fixed, but attributing it to Round 5 would send the next reviewer after the wrong commit.
+
+**Root cause (verified against `799f4ef^`):** that commit replaced the phrase
+`"the ratio derivation changes and g_N/g_χ < 10⁻²³. The σ_1 = "` with
+`"the ratio derivation changes and "`, deleting the trailing `"The σ_1 = "` of the following
+sentence and leaving `"4 baseline headline value"`. The restoration used is
+`"the σ_1 = 4.4 baseline headline value"` — the paper's own σ₁ = 4.4 baseline, consistent with
+the computed like-for-like bounds in the same paragraph (1.78e-13 / 1.84e-13 / 2.84e-13).
+
+**C2 — the docstring gap is not a rounding difference.** n18 described `"1.589"` vs `"1.518"` as
+`小数舍入级别` (decimal-rounding-level). It is not. `0.09 × 16.865226 = 1.517870` → **1.518**;
+the quoted 1.589 implies `0.09 × 17.656`, i.e. a σ/m maximum 4.7% above the canonical value.
+Recomputation from two independent sources agrees on 0.256–1.518:
+`channels_v03.sigma_m_at_v` + `constants.py` (σ/m(5) = 16.865226 → 0.09× = 1.517870) and the
+JSON's `_derived_ranges.sigma_m_cm2_per_g` (2.845457..16.865226 → 0.256091..1.517870).
+
+### 13.3 The fixes
+
+| Fix | File | Change |
+|---|---|---|
+| **F1** | `v0.3-prelim/docs/PAPER_V1_DRAFT.md` L102 | `"For **0 of 8** halos is \|σ_HL\| < 0.05 cm²/g"` → `"For **0 of 8** halos, \|σ_HL\| < 0.05 cm²/g"` (drop the dangling "is", restore the comma) |
+| **F2** | same, L102 | `"σ_HL = −0.534 cm²/g., indicating"` → `"σ_HL = −0.534 cm²/g, indicating"` (drop the stray period) |
+| **F3** | same, L102 | `"indicating an**internal inconsistency"` → `"indicating an **internal inconsistency"` (missing space; pre-existing, but inside the sentence F1/F2 repair) |
+| **F4** | same, L151 | `"changes and 4 baseline headline value"` → `"changes and the σ_1 = 4.4 baseline headline value"` (restore the deleted subject) |
+| **F5** | `scripts/v192_dsph_gravothermal_sweep.py` L24 | docstring `"0.257-1.589 cm^2/g"` → `"0.256-1.518 cm^2/g"` |
+| **F5b** | `v0.3-prelim/tests/test_n18_generator_docstring_consistency.py` (new) | 4 regression tests pinning the docstring's quoted numbers to the generator's own output JSON |
+| **F6** | companion §3 | 241-line full-JSON embed → a 39-line real `git diff` (pre-Round-5 → current) |
+| **F7** | companion §2 | diff fence hard-wrapped at 108 columns (was up to 3 581 chars/line) |
+
+**Fix script:** `scripts/apply_n18_review_fixes.py` — idempotent (each replacement asserts exactly
+one occurrence of the old string and refuses to edit otherwise), and its module docstring records
+each finding, its independently-re-derived provenance, and the rejected items.
+
+### 13.4 Why F5 is a generator fix and not a docstring edit
+
+Per the stale-narrative-string-audit discipline: **a docstring that restates a computed quantity
+is a second copy of the defect and will drift again.** Round 5 made the JSON's `interpretation`
+and `limitations` fields computed but left the docstring hand-written — so the fix set had a
+remaining hole. F5 therefore also adds a regression test that recomputes
+`F_H_CC**2 × _derived_ranges.sigma_m_cm2_per_g` from the generator's own output and asserts the
+docstring quotes the same numbers.
+
+**The test is mutation-verified:** reverting the docstring to `0.257-1.589` turns **2 of the 4
+tests red** (the consistency test and the explicit retracted-value guard); restoring it turns
+them green again.
+
+The test also reads `F_H_CC` from the generator's own constant rather than hard-coding 0.30, so
+it tracks the generator if f_H ever changes.
+
+### 13.5 What was NOT actioned (and why)
+
+- **Bold-marker spacing** (e.g. `an**internal`, `is**NOT falsified**`; 270 occurrences of a `**`
+  with word characters on both sides). **These render correctly** — verified with `markdown_it`
+  (the CommonMark reference implementation): `"an**internal inconsistency**"` renders as
+  `<p>indicating an<strong>internal inconsistency</strong> end</p>`, the emphasis is applied and
+  no literal `**` survives. This is the paper's pre-existing house style across ~270 sites, it
+  was **not** flagged by n18, and a wholesale restyle is a large mechanical rewrite of a
+  2 383-line paper. Only the single instance inside the sentence being repaired (F3) was fixed.
+- **The paper's `"does not.."` (line 974) and `"curves .**"` (line 120)** — both pre-existing
+  (`650ff13` and `799f4ef`), outside the reviewed diff, cosmetic. Recorded for a future sweep
+  rather than mixed into this round.
+
+### 13.6 Verification of the n18 fix set
+
+| check | result |
+|---|---|
+| n18 regression test (4 tests) | **4/4 PASS**; mutation-verified (2 turn red on the retracted value) |
+| paper: new strings present, old strings gone | 3/3 present, 4/4 old strings count = 0 |
+| rendered check (`markdown_it`, CommonMark) | all 3 repaired sentences render correctly; no literal `**` survives |
+| companion §1 listing vs live generator | **byte-identical** (288/288 lines) |
+| companion §2 diff fence | **lossless** — unwrapping reconstructs the true `git diff` exactly (83/83 lines) |
+| companion §3 diff fence | **lossless** — unwrapping reconstructs the true `git diff` exactly (39/39 lines) |
+| fix script idempotency | re-run applies 0 changes (all 5 report "already applied") |
+
+### 13.7 Additional fixes from Nemotron reviewer audit (Finding 1)
+
+**Nemotron Finding 1 (partly-wrong → actionable):** The paper's §3 channel table (L115) paired the
+canonical σ/m = 2.85 cm²/g with the §2.6a sweep's σ_HL = -0.47 — a mixed-anchor row. Recomputing
+from that pair gives σ_eff = 0.0538 (not the published 0.032). The correct canonical σ_HL for
+σ/m = 2.8455 is **−0.534**. The sweep's -0.47 is self-consistent at its own σ/m = 2.5597.
+
+| Fix | File | Change |
+|---|---|---|
+| **F8** | `v0.3-prelim/docs/PAPER_V1_DRAFT.md` L115 | `"σ_HL = -0.47"` → `"σ_HL = −0.534, canonical sweep"` (match the row's canonical σ/m anchor) |
+| **F9** | same L221 | `"σ_HL_required = −0.47 cm²/g"` → `"σ_HL_required = −0.47 cm²/g, §2.6a σ_peak sweep"` (explicit disambiguation) |
+
+**Scope note:** L190 (the §2.6a sweep table row for σ_peak=174) and L194 (sweep discussion) are already
+in the correct sweep context and need no change. The pre-existing L120 grep hit was a false positive.
+
+**Verification:**
+```python
+# L115 row: canonical sigma/m=2.8455, published sigma_eff=0.0318 -> required sigma_HL = -0.5340 ✓
+# Sweep: sigma/m=2.5597, sigma_HL=-0.4723 -> sigma_eff=0.03201 ✓
+```
+

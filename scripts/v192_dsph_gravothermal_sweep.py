@@ -21,7 +21,7 @@ Per r20.docx recommendation 5: Mark "NEW DISCOVERY" as provisional pending diagn
    framework's canonical-Gaussian sigma/m at dSph scale is 2.85-16.87 cm^2/g
    (computed; see `_derived_ranges` in the output JSON) while the published
    sigma_eff band is 0.032-0.093 cm^2/g. With f_H = 0.30 the identity
-   sigma_eff = f_H^2 * sigma/m would give 0.257-1.589 cm^2/g -- far ABOVE
+   sigma_eff = f_H^2 * sigma/m would give 0.256-1.518 cm^2/g -- far ABOVE
    published -- so the fitted sigma_HL is LARGE AND NEGATIVE for every halo
    (-0.53 to -3.39 cm^2/g), and 0 of 8 halos satisfy |sigma_HL| < 0.05 cm^2/g.
    (2026-10-25 correction: the earlier 'near-zero or small positive' and
