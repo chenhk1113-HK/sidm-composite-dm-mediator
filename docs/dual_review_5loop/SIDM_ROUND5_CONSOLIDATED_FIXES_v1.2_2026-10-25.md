@@ -538,8 +538,10 @@ with no access to the controller's reasoning). Output archived at
 findings raised.
 
 **Reviewer B — `opencode/deepseek-v4.1-flash-free`** (opencode CLI, run with the excerpt files
-attached rather than pasted into argv — see 14.6). Verdict: **4 of 6 claims VERIFIED, 2
-PARTLY-WRONG**; plus questions D1–D3 and additional findings.
+attached rather than pasted into argv — see 14.6). Output archived at
+`docs/OPENCODE_N18_FIX_AUDIT_2026-10-25.md`. Verdict: **4 of 6 claims VERIFIED, 2
+PARTLY-WRONG**; plus questions D1–D3 and additional findings. Reviewer B is the reviewer that
+found the material defect in 14.1.
 
 ### 14.1 CONFIRMED MATERIAL DEFECT — the §2.6a Fornax σ_HL column was stale (Reviewer B, D1)
 
@@ -678,6 +680,10 @@ opencode run --model <id> --format json "$(cat short_prompt.txt)" \
 come *first*. (Also note `opencode run` resolves a prompt *file path* as an attachment
 only; passing `-f <prompt>` before the message fails with
 `Error: File not found: <the prompt text>`.)
+
+Both reviewer outputs are archived in-repo for auditability:
+`docs/NEMOTRON_N18_FIX_AUDIT_2026-10-25.md` (Reviewer A) and
+`docs/OPENCODE_N18_FIX_AUDIT_2026-10-25.md` (Reviewer B, plus the raw JSONL transcript path).
 
 **Consequence for this round:** the two-reviewer loop n18.docx asked for is **one full
 reviewer plus one partial**. Reviewer A (Nemotron 550B) returned a complete audit. Reviewer B
