@@ -61,10 +61,12 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import shutil
 import subprocess
 import sys
+import tempfile
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -99,6 +101,52 @@ DEAD_PATTERNS = re.compile(
 
 PROBE_PROMPT = "Reply with exactly this and nothing else: READY-7"
 
+# Windows caps a process command line at ~32 767 chars, and the opencode CLI plus
+# its shell wrapper add overhead on top of the prompt. A long audit prompt
+# therefore cannot ride in argv. Observed 2026-10-25: a 22 979-char prompt made
+# EVERY model in PRIORITY_CHAIN return "EXIT_1 The command line is too long" in
+# 0.1 s each, so the run produced no review at all and looked like five dead
+# models rather than one oversized argument.
+MAX_ARGV_PROMPT = 6000
+
+# Short stub used when the real prompt is attached instead of passed in argv.
+ATTACH_STUB = (
+    "Your full instructions are in the attached file {name!r}. "
+    "Read it and follow it exactly: recompute every number yourself from the "
+    "data provided, answer each numbered claim with a verdict "
+    "(VERIFIED / REFUTED / PARTLY-WRONG) plus the file, line and computed value "
+    "that supports it, then list any additional defects you find. Be terse and "
+    "factual. Do not soften defects and do not invent problems that are not there."
+)
+
+
+def build_opencode_argv(binary: str, model: str,
+                        prompt: str) -> tuple[list[str], str | None]:
+    """Build an ``opencode run`` argv that survives Windows' command-line limit.
+
+    Returns ``(argv, attached_path)``. When the prompt is too long to pass in
+    argv it is written to a temp file and ATTACHED with ``-f``.
+
+    Two traps, both hit on 2026-10-25:
+
+    * ``-f`` is an ARRAY option, so it swallows any positional argument that
+      follows it. The message must come FIRST; passing it after ``-f`` fails
+      with ``Error: File not found: <the whole prompt text>``.
+    * ``-f`` takes a FILE PATH, never the prompt itself. Handing it the prompt
+      text is read as a (nonexistent) filename.
+
+    The temp file is left in place deliberately: the prompt is part of the
+    review's provenance and is worth keeping for post-mortem.
+    """
+    base = [binary, "run", "--model", model, "--format", "json"]
+    if len(prompt) <= MAX_ARGV_PROMPT:
+        return base + [prompt], None
+    fd, path = tempfile.mkstemp(suffix=".md", prefix="review_prompt_")
+    with os.fdopen(fd, "w", encoding="utf-8", newline="\n") as fh:
+        fh.write(prompt)
+    return base + [ATTACH_STUB.format(name=os.path.basename(path)),
+                   "-f", path], path
+
 
 def _strip_ansi(s: str) -> str:
     return re.sub(r"\x1b\[[0-9;]*[A-Za-z]", "", s)
@@ -125,9 +173,9 @@ def run_opencode(model: str, prompt: str, timeout: int = 300,
     binary = binary or _opencode_binary()
     t0 = time.time()
     try:
+        argv, _attached = build_opencode_argv(binary, model, prompt)
         proc = subprocess.run(
-            [binary, "run", "--model", model, "--format", "json", prompt],
-            capture_output=True, text=True, timeout=timeout,
+            argv, capture_output=True, text=True, timeout=timeout,
             encoding="utf-8", errors="replace",
         )
     except subprocess.TimeoutExpired:

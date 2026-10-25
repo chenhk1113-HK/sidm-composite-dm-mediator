@@ -680,24 +680,35 @@ Restoring both files byte-identically returns 4/4 green.
 
 ### 14.6 Reviewer-transport fix (why Reviewer B initially produced nothing)
 
-`scripts/dual_review.py` passes the prompt as a **command-line argument** to
+`scripts/dual_review.py` passed the prompt as a **command-line argument** to
 `opencode run`. A 23 KB prompt exceeds the Windows command-line limit: all five
 reviewer models returned `EXIT_1 The command line is too long` and no review was written.
-The working pattern is to keep the argv small and attach the bulky material:
+The failure also *misreports itself* — five models dying in 0.1 s each reads as five dead
+models, not as one oversized argument.
+
+**The driver is now fixed** (`build_opencode_argv`, `MAX_ARGV_PROMPT = 6000`): a prompt longer
+than the threshold is written to a temp file and attached with `-f`, with a short instruction
+stub as the message. Verified end-to-end on the exact prompt that failed — the 23 KB prompt
+now returns `OK` through the unmodified CLI path, argv reduced from 22,387 to **536 chars**.
+Two traps are recorded in the helper's docstring:
 
 ```bash
 opencode run --model <id> --format json "$(cat short_prompt.txt)" \
   -f excerpt_paper.txt -f excerpt_sweep.txt > review.jsonl
 ```
 
-**`-f` is an array option — it swallows a later positional message**, so the message must
-come *first*. (Also note `opencode run` resolves a prompt *file path* as an attachment
+- **`-f` is an array option — it swallows a later positional message**, so the message must
+  come *first*. (Also note `opencode run` resolves a prompt *file path* as an attachment
 only; passing `-f <prompt>` before the message fails with
 `Error: File not found: <the prompt text>`.)
 
 Both reviewer outputs are archived in-repo for auditability:
 `docs/NEMOTRON_N18_FIX_AUDIT_2026-10-25.md` (Reviewer A) and
 `docs/OPENCODE_N18_FIX_AUDIT_2026-10-25.md` (Reviewer B, plus the raw JSONL transcript path).
+
+**Cost of the attached-prompt path:** 365.8 s versus 41.2 s for the same model on a short
+argv — the model has to read the attachment before answering. Acceptable for an audit, but it
+means a long-prompt review should not be assumed to fit a 60 s budget.
 
 **Consequence for this round:** the two-reviewer loop n18.docx asked for is **one full
 reviewer plus one partial**. Reviewer A (Nemotron 550B) returned a complete audit. Reviewer B
