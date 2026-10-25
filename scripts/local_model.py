@@ -7,17 +7,27 @@ WHY A SWAP AND NOT TWO SERVERS
 This host has 96 GB of RAM with a 32 GB UMA carve-out, so the OS sees
 63.62 GiB. The two local models cannot coexist:
 
-    incumbent  Qwen3.6-35B-A3B-UD-Q4_K_M   22.6 GB   18.03 tok/s   (llama.cpp :50113)
+    incumbent  Qwen3.6-35B-A3B-UD-Q4_K_M   22.6 GB   18.03 tok/s   (llama.cpp :11437)
     deep       Qwen3.8-Flash-Next IQ3_XXS    75.8 GB   12.7-16.2 tok/s (Strata :8080)
 
 Strata's own engine warns that its commit limit has ~2.5 GiB of headroom, so
 starting it while the incumbent holds 22.6 GB is a guaranteed failure. The
 swap is therefore the only correct design: one at a time, on a shared port.
 
+PORTS (both are load-bearing; neither is arbitrary)
+--------------------------------------------------
+:50113 was the old incumbent port and CANNOT be used on this host: Windows
+reserves the 50060-50159 TCP range (netsh interface ipv4 show
+excludedportrange protocol=tcp), so bind fails with WinError 10013 and
+llama-server logs "couldn't bind HTTP server socket ... port 50113" while
+`netstat` shows NOTHING listening on it. "Nothing on the port" does NOT mean
+"port is free" -- check the exclusion table. The incumbent now runs on
+:11437, which is outside every excluded range.
+
 USAGE
 -----
     python local_model.py status              # what is running, and the port
-    python local_model.py use fast            # incumbent (Qwen3.6-35B-A3B) on :50113
+    python local_model.py use fast            # incumbent (Qwen3.6-35B-A3B) on :11437
     python local_model.py use deep            # Strata (Flash-Next) on :8080
     python local_model.py use deep --wait 600 # wait up to 600 s for it to be ready
     python local_model.py stop                # stop whatever is running
@@ -50,12 +60,21 @@ PY = r"C:\Users\lamkuenai\AppData\Local\Python\pythoncore-3.14-64\python.exe"
 
 FAST = {
     "name": "Qwen3.6-35B-A3B-UD-Q4_K_M",
-    "port": 50113,
+    # PORT 11437, NOT 50113. Windows reserves the 50060-50159 TCP range
+    # (netsh interface ipv4 show excludedportrange protocol=tcp), so 50113 can
+    # never be bound: socket.bind raises WinError 10013 and llama-server logs
+    # "couldn't bind HTTP server socket ... port 50113" while `netstat` shows
+    # NOTHING listening on it. "Nothing on the port" does NOT mean "port is
+    # free". 11437 is outside every excluded range on this host.
+    "port": 11437,
     "model": "Qwen3.6-35B-A3B-UD-Q4_K_M",
     "exe": HERMES / "tools" / "llamacpp-vulkan-11370-win32-x64" / "llama-server.exe",
     "gguf": HERMES / "models" / "Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    # -c 65536, not 32768: Hermes requires >=64000 context from any model it
+    # routes to (auxiliary.compression raises ValueError below that and kills
+    # the turn), and a review excerpt + 2k completion already exceeds 32k.
     "start": ["-m", "{gguf}", "--port", "{port}", "-ngl", "99",
-              "-c", "32768", "-t", "16", "--cache-type-k", "q8_0",
+              "-c", "65536", "-t", "16", "--cache-type-k", "q8_0",
               "--cache-type-v", "q8_0", "-fa", "on", "--host", "127.0.0.1"],
     "note": "35B total / 3B active. 18.03 tok/s. The fast reviewer.",
 }

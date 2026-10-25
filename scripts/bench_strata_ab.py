@@ -5,7 +5,7 @@ scripts/bench_local_models_v2.py -- the numbers are directly comparable to
 the incumbent's +11/12 result.
 
 Only the transport differs: Strata serves an OpenAI-compatible API on
-http://127.0.0.1:8080/v1, the incumbent on http://127.0.0.1:50113/v1.
+http://127.0.0.1:8080/v1, the incumbent on http://127.0.0.1:11437/v1.
 
 The questions are imported from the v2 script so the two benchmarks can
 never drift apart. Each answer is scored with the same negation-aware,

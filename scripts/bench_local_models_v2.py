@@ -191,7 +191,15 @@ def run(port: int, model: str, label: str) -> dict:
 
 if __name__ == "__main__":
     out = []
-    out.append(run(50113, "Qwen3.6-35B-A3B-UD-Q4_K_M",
+    # Ports come from local_model.py: 50113/50114 are inside the Windows-reserved
+    # TCP range 50060-50159 and can never be bound (WinError 10013).
+    import importlib.util
+    _spec = importlib.util.spec_from_file_location(
+        "local_model", PROJECT / "scripts" / "local_model.py")
+    _local = importlib.util.module_from_spec(_spec)
+    sys.modules["local_model"] = _local
+    _spec.loader.exec_module(_local)
+    out.append(run(_local.FAST["port"], _local.FAST["model"],
                    "A. CURRENT  Qwen3.6-35B-A3B-UD-Q4_K_M (MoE 35B/3B-active, Q4_K_M)"))
     print()
     out.append(run(50114, "Qwen3.8-27B-GSQ-RCO-IQ2_S",

@@ -30,6 +30,7 @@ TWO THINGS THAT MATTER FOR THIS SCRIPT
 """
 from __future__ import annotations
 
+import importlib.util
 import json
 import sys
 import time
@@ -37,8 +38,21 @@ import urllib.request
 from pathlib import Path
 
 PROJECT = Path(r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator")
-ENDPOINT = "http://127.0.0.1:50113/v1/chat/completions"
-MODEL = "Qwen3.6-35B-A3B-UD-Q4_K_M"
+
+# The port lives in local_model.py -- read it from there rather than repeating
+# the number, so the two can never drift apart again. It was 50113 until
+# 2026-10-25, when that turned out to be inside the Windows-reserved TCP range
+# 50060-50159 (bind fails with WinError 10013; `netstat` shows nothing
+# listening, which is what made it look like a free port).
+_spec = importlib.util.spec_from_file_location(
+    "local_model", PROJECT / "scripts" / "local_model.py")
+_local = importlib.util.module_from_spec(_spec)
+sys.modules["local_model"] = _local
+_spec.loader.exec_module(_local)
+
+FAST_PORT = _local.FAST["port"]
+MODEL = _local.FAST["model"]
+ENDPOINT = f"http://127.0.0.1:{FAST_PORT}/v1/chat/completions"
 OUT = PROJECT / "docs" / "LOCAL_REVIEW_R5.md"
 EXCERPT = PROJECT / "docs" / "R5_EXCERPT.md"
 
@@ -90,7 +104,7 @@ def main() -> int:
     out_lines = [
         "# Local Review (Reviewer 1, Round 5)",
         "",
-        f"**Model:** `{MODEL}` (local llama.cpp on 127.0.0.1:50113)  ",
+        f"**Model:** `{MODEL}` (local llama.cpp on 127.0.0.1:{FAST_PORT})  ",
         f"**Generated:** {time.strftime('%Y-%m-%d %H:%M:%S')}  ",
         "**Transport:** direct local OpenAI-compatible `/v1/chat/completions`  ",
         "**Why local:** OpenRouter free tier is account-blocked for this host today "
