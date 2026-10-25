@@ -51,8 +51,46 @@ sys.modules["local_model"] = _local
 _spec.loader.exec_module(_local)
 
 FAST_PORT = _local.FAST["port"]
-MODEL = _local.FAST["model"]
-ENDPOINT = f"http://127.0.0.1:{FAST_PORT}/v1/chat/completions"
+FAST_MODEL = _local.FAST["model"]
+FAST_ENDPOINT = f"http://127.0.0.1:{FAST_PORT}/v1/chat/completions"
+
+# Strata (the deep 125B reviewer) is the PRIMARY reviewer as of 2026-10-25.
+# The 35B is the STANDBY: it is only loaded when Strata has failed. That is not
+# a policy we enforce here -- it is what the Hermes fallback chain already
+# does. The chain order is
+#     openrouter -> nvidia -> strata -> llamacpp(35B)
+# so the 35B is only reached when every earlier slot, including Strata, has
+# failed. The 35B itself is served by the Hermes-managed llama.cpp runtime
+# (:18434), whose router has models_autoload=true: the weights are loaded on
+# the first request that names the model and the supervisor idle-unloads them
+# again after IDLE_UNLOAD_S (960 s), so "loaded only when Strata failed" is
+# also true of the RESIDENCY, not just of the routing.
+DEEP_PORT = _local.DEEP["port"]
+DEEP_MODEL = _local.DEEP["model"]
+DEEP_ENDPOINT = f"http://127.0.0.1:{DEEP_PORT}/v1/chat/completions"
+
+# The Hermes-managed llama.cpp runtime: base_url + api_key live in its state
+# file. Preferred over the project's own :11437 server for the standby path
+# because it is ONE copy of the 22.6 GB GGUF, it autoloads on demand and it
+# self-releases the RAM when idle -- so the standby costs nothing while
+# Strata is healthy.
+_RUNTIME_STATE = Path(
+    r"C:\Users\lamkuenai\AppData\Local\hermes\runtimes\llamacpp\server.json")
+
+
+def managed_llamacpp() -> tuple[str, str] | None:
+    """(base_url, api_key) of the Hermes-managed 35B runtime, or None."""
+    try:
+        st = json.loads(_RUNTIME_STATE.read_text(encoding="utf-8"))
+    except Exception:
+        return None
+    base = str(st.get("base_url") or "").strip()
+    key = str(st.get("api_key") or "").strip()
+    if not base:
+        return None
+    return base.rstrip("/"), key or "no-key-required"
+
+
 OUT = PROJECT / "docs" / "LOCAL_REVIEW_R5.md"
 EXCERPT = PROJECT / "docs" / "R5_EXCERPT.md"
 
@@ -97,14 +135,94 @@ FIND ANYTHING ELSE in the excerpt that is internally inconsistent or wrong. Repo
 """
 
 
+def _post(url: str, payload: dict, timeout: int, api_key: str | None = None):
+    headers = {"Content-Type": "application/json"}
+    if api_key:
+        headers["Authorization"] = f"Bearer {api_key}"
+    req = urllib.request.Request(url, data=json.dumps(payload).encode(),
+                                 headers=headers)
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+        return json.loads(r.read())
+
+
+def _try_endpoint(label: str, url: str, model: str, payload: dict,
+                  timeout: int, api_key: str | None = None,
+                  deep: bool = False) -> dict | None:
+    """One review attempt. Returns the parsed body, or None if the endpoint
+    could not answer (connection refused, or the model not loaded)."""
+    body = dict(payload)
+    body["model"] = model
+    if deep:
+        # Strata reasons first and can spend the whole token budget thinking.
+        # A small budget keeps the answer from being eaten by the thinking.
+        body["reasoning_budget_tokens"] = 256
+        # Strata writes a MUCH fuller review than the 35B (it checks F1-F11 and
+        # then adds its own findings), so it hits the 2000-token cap that was
+        # sized for the 35B and gets cut off mid-sentence. Give it room.
+        body["max_tokens"] = 4000
+    else:
+        body["chat_template_kwargs"] = {"enable_thinking": False}
+    t0 = time.time()
+    try:
+        data = _post(url, body, timeout, api_key)
+    except Exception as exc:  # noqa: BLE001
+        print(f"  {label}: FAILED ({type(exc).__name__}: {str(exc)[:110]})")
+        return None
+    text = (data.get("choices", [{}])[0].get("message", {}) or {}).get("content") or ""
+    if not text:
+        print(f"  {label}: empty answer (finish="
+              f"{data.get('choices',[{}])[0].get('finish_reason')!r})")
+        return None
+    print(f"  {label}: OK {time.time() - t0:.1f}s")
+    return data
+
+
 def main() -> int:
     excerpt = EXCERPT.read_text(encoding="utf-8")
     prompt = PROMPT + "\n=== PAPER EXCERPT BEGINS ===\n" + excerpt + "\n=== PAPER EXCERPT ENDS ==="
 
+    payload = {
+        "messages": [{"role": "user", "content": prompt}],
+        "max_tokens": 2000,
+        "temperature": 0.2,
+    }
+
+    # PRIMARY: Strata (the deep 125B reviewer). STANDBY: the 35B, tried only
+    # if Strata could not answer. The standby is the Hermes-managed runtime
+    # (autoloads the weights on demand, idle-unloads them after 960 s) so it
+    # costs no RAM while Strata is healthy; the project's own :11437 server is
+    # the last resort for it.
+    attempts = [("strata (deep, :%d)" % DEEP_PORT, DEEP_ENDPOINT, DEEP_MODEL,
+                 1800, None, True)]
+    managed = managed_llamacpp()
+    if managed:
+        attempts.append(("llamacpp standby (managed :%s)" % managed[0].rsplit(":", 1)[-1],
+                         managed[0] + "/chat/completions", FAST_MODEL, 900,
+                         managed[1], False))
+    attempts.append(("llamacpp standby (:%d)" % FAST_PORT, FAST_ENDPOINT,
+                     FAST_MODEL, 900, None, False))
+
+    data = None
+    used = ""
+    elapsed = 0.0
+    for label, url, model, timeout, key, deep in attempts:
+        t0 = time.time()
+        data = _try_endpoint(label, url, model, payload, timeout, key, deep)
+        if data is not None:
+            used = label
+            elapsed = time.time() - t0
+            break
+        data = None
+    if data is None:
+        print("FAILED: no local reviewer answered (Strata and the 35B standby "
+              "both unreachable)", file=sys.stderr)
+        return 2
+
     out_lines = [
         "# Local Review (Reviewer 1, Round 5)",
         "",
-        f"**Model:** `{MODEL}` (local llama.cpp on 127.0.0.1:{FAST_PORT})  ",
+        f"**Model:** `{DEEP_MODEL if used.startswith('strata') else FAST_MODEL}` "
+        f"({used})  ",
         f"**Generated:** {time.strftime('%Y-%m-%d %H:%M:%S')}  ",
         "**Transport:** direct local OpenAI-compatible `/v1/chat/completions`  ",
         "**Why local:** OpenRouter free tier is account-blocked for this host today "
@@ -122,28 +240,7 @@ def main() -> int:
         "",
     ]
 
-    t0 = time.time()
-    payload = {
-        "model": MODEL,
-        "messages": [{"role": "user", "content": prompt}],
-        "max_tokens": 2000,
-        "temperature": 0.2,
-        "chat_template_kwargs": {"enable_thinking": False},
-    }
-    req = urllib.request.Request(
-        ENDPOINT,
-        data=json.dumps(payload).encode(),
-        headers={"Content-Type": "application/json"},
-    )
-    try:
-        with urllib.request.urlopen(req, timeout=900) as r:
-            data = json.loads(r.read())
-    except Exception as exc:  # noqa: BLE001
-        print(f"FAILED: {type(exc).__name__}: {exc}", file=sys.stderr)
-        return 2
-
     text = data["choices"][0]["message"]["content"]
-    elapsed = time.time() - t0
     usage = data.get("usage", {})
     out_lines.append(text)
     out_lines += [
@@ -154,7 +251,7 @@ def main() -> int:
         "",
     ]
     OUT.write_text("\n".join(out_lines), encoding="utf-8")
-    print(f"Local review written to {OUT} ({elapsed:.1f}s)")
+    print(f"Local review written to {OUT}")
     print(f"Tokens: {usage}")
     print()
     print(text[:4000])

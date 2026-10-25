@@ -5,14 +5,33 @@ the deep Strata reviewer.
 WHY A SWAP AND NOT TWO SERVERS
 -------------------------------
 This host has 96 GB of RAM with a 32 GB UMA carve-out, so the OS sees
-63.62 GiB. The two local models cannot coexist:
+93.6 GiB. The two local models are:
 
     incumbent  Qwen3.6-35B-A3B-UD-Q4_K_M   22.6 GB   18.03 tok/s   (llama.cpp :11437)
     deep       Qwen3.8-Flash-Next IQ3_XXS    75.8 GB   12.7-16.2 tok/s (Strata :8080)
 
-Strata's own engine warns that its commit limit has ~2.5 GiB of headroom, so
-starting it while the incumbent holds 22.6 GB is a guaranteed failure. The
-swap is therefore the only correct design: one at a time, on a shared port.
+MEASURED 2026-10-25: they CAN in fact run side by side -- with both up,
+free RAM was 25.4 GiB of 93.6 GiB and commit was 62.9 GiB of the 111.7 GiB
+limit, and both answered requests at the same time. (An earlier note said
+they could not coexist, based on Strata's own startup-time admission
+message "commit limit is 84.9 GiB ... and 2.5 GiB of it is left". That
+number is a pre-flight estimate, not the steady state.)
+
+This script still swaps rather than co-runs, and that is deliberate: it
+keeps peak RAM predictable, and it is what the Hermes fallback chain
+expects (the chain's standby slot is the Hermes-managed llama.cpp runtime
+on :18434, which is a separate process from the :11437 server below -- a
+second copy of the same 22.6 GB GGUF). `use fast` / `use deep` therefore
+remains the single switch between them.
+
+ROLE ORDER (2026-10-25)
+-----------------------
+The deep model (Strata) is the PRIMARY local reviewer and the 35B is the
+STANDBY, loaded only when Strata has failed. See the Hermes fallback chain
+(`hermes config set fallback_providers ...`): openrouter -> nvidia ->
+strata -> llamacpp(35B). The 35B is served there by the Hermes-managed
+runtime, whose router autoloads the weights on demand and idle-unloads
+them after 960 s, so the standby costs no RAM while Strata is healthy.
 
 PORTS (both are load-bearing; neither is arbitrary)
 --------------------------------------------------
@@ -209,8 +228,11 @@ def status() -> None:
     h = strata_health()
     if h:
         print(f"\n  Strata health: {json.dumps(h)}")
-    print("\n  Only ONE can run at a time (RAM: 63.62 GiB visible to the OS).")
+    print("\n  Only ONE is started by this script at a time (RAM headroom is a")
+    print("  precaution, not a hard limit -- see the docstring).")
     print("  Use: local_model.py use fast | use deep")
+    print("  Role order (2026-10-25): Strata is the PRIMARY local reviewer;")
+    print("  the 35B is the STANDBY and is only loaded when Strata has failed.")
 
 
 def ask(args) -> None:

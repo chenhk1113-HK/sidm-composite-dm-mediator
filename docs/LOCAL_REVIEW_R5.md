@@ -1,7 +1,7 @@
 # Local Review (Reviewer 1, Round 5)
 
-**Model:** `Qwen3.6-35B-A3B-UD-Q4_K_M` (local llama.cpp on 127.0.0.1:50113)  
-**Generated:** 2026-10-22 12:45:26  
+**Model:** `qwen3.8-flash-next-iq3_xxs` (strata (deep, :8080))  
+**Generated:** 2026-10-25 14:10:36  
 **Transport:** direct local OpenAI-compatible `/v1/chat/completions`  
 **Why local:** OpenRouter free tier is account-blocked for this host today (HTTP 429 `free-models-per-day` on every free model, including the delegated Nemotron 3 Ultra 550B).  
 **Reviewer role:** second independent reviewer, different model family from the OpenCode-side reviewer (DeepSeek/GLM/MiMo).  
@@ -11,80 +11,44 @@
 
 ## Review
 
-[ERR] F3 (L117): The computed Gaussian tail value is incorrect.
-Formula: $\exp[-(15-29.4)^2/(2 \cdot 3.0^2)]$
-Calculation:
-Numerator: $(15 - 29.4)^2 = (-14.4)^2 = 207.36$
-Denominator: $2 \cdot 3.0^2 = 2 \cdot 9 = 18$
-Exponent: $-207.36 / 18 = -11.52$
-Result: $e^{-11.52} \approx 1.00 \times 10^{-5}$.
-The paper states "1.0×10⁻⁵". This is **correct**.
-*Correction*: The prompt asks to verify if it is right. It is right.
-Status: [OK]
+[OK] F1: L11 distinguishes microphysical σ/m from σ_eff = f_H²·σ/m and states σ_eff(15)=0.251 cm²/g is below 0.8 cm²/g. Coherent.
 
-[ERR] F6 (L82): The computed resonance velocity is incorrect.
-Formula: $v_{res} = c \cdot \sqrt{8 \cdot \Delta M / (2 m_\chi)}$
-Given: $\Delta M / (2 m_\chi) = 1.2 \times 10^{-9}$.
-Calculation:
-Inside sqrt: $8 \cdot 1.2 \times 10^{-9} = 9.6 \times 10^{-9}$.
-Sqrt: $\sqrt{9.6 \times 10^{-9}} \approx 9.798 \times 10^{-5}$.
-The paper claims this gives 29.4 km/s.
-If $v_{res} = 29.4$ km/s, then $c = 29.4 / (9.798 \times 10^{-5}) \approx 300,000$ km/s, which is $c$ (speed of light).
-However, the formula in L82 is $v_{res} = c \cdot \sqrt{\dots}$. In standard kinematics, $E = \frac{1}{2} m v^2$. For s-channel resonance at $\sqrt{s} = 2m + \Delta M$, $\frac{1}{2} m v^2 = \Delta M \implies v = \sqrt{2 \Delta M / m}$.
-The formula in L82 uses $2 m_\chi$ in the denominator, implying $\sqrt{s} \approx 2 m_\chi$.
-$v = \sqrt{2 \Delta M / m_\chi} = \sqrt{4 \Delta M / (2 m_\chi)} = 2 \sqrt{\Delta M / (2 m_\chi)}$.
-The paper's formula has $\sqrt{8 \dots} = \sqrt{4 \cdot 2 \dots} = 2 \sqrt{2 \dots}$.
-Let's check the factor.
-Standard: $v = \sqrt{2 \Delta M / m_\chi}$.
-Paper: $v = c \sqrt{8 \Delta M / (2 m_\chi)} = c \sqrt{4 \Delta M / m_\chi} = 2c \sqrt{\Delta M / m_\chi}$.
-This is dimensionally inconsistent if $c$ is just a constant, unless $c$ carries units.
-If $c=1$ (natural units), $v = \sqrt{4 \Delta M / m_\chi}$.
-$\Delta M / m_\chi = 2 \cdot 1.2 \times 10^{-9} = 2.4 \times 10^{-9}$.
-$v = \sqrt{4 \cdot 2.4 \times 10^{-9}} = \sqrt{9.6 \times 10^{-9}} \approx 9.8 \times 10^{-5}$ (in units of $c$).
-$9.8 \times 10^{-5} \cdot 300,000 \text{ km/s} \approx 29.4$ km/s.
-So the formula $v = c \sqrt{8 \Delta M / (2 m_\chi)}$ works IF $c$ is the speed of light and the term under sqrt is dimensionless ratio $\Delta M / m_\chi$? No, $\Delta M / (2 m_\chi)$ is dimensionless.
-Wait, $\sqrt{8 \cdot 1.2e-9} \approx 9.8e-5$.
-$9.8e-5 \cdot c \approx 29.4$ km/s.
-This implies the formula is effectively $v = c \sqrt{4 \Delta M / m_\chi}$?
-Standard non-relativistic: $E_{cm} = 2 m_\chi + \frac{1}{2} (2 m_\chi) v_{rel}^2 / 4$? No.
-$\sqrt{s} = 2 \sqrt{m_\chi^2 + p^2} \approx 2 m_\chi + p^2/m_\chi$.
-$p = m_\chi v_{rel} / 2$? No, $p = \mu v_{rel} = (m_\chi/2) v_{rel}$.
-$\sqrt{s} \approx 2 m_\chi + \frac{(m_\chi/2 v_{rel})^2}{m_\chi} = 2 m_\chi + \frac{1}{4} m_\chi v_{rel}^2$.
-Set $\sqrt{s} = 2 m_\chi + \Delta M$.
-$\Delta M = \frac{1}{4} m_\chi v_{rel}^2 \implies v_{rel} = \sqrt{4 \Delta M / m_\chi} = 2 \sqrt{\Delta M / m_\chi}$.
-Paper formula: $c \sqrt{8 \Delta M / (2 m_\chi)} = c \sqrt{4 \Delta M / m_\chi} = 2 c \sqrt{\Delta M / m_\chi}$.
-If $c=1$ (speed of light in km/s), this matches.
-So the formula is correct *if* $c$ is interpreted as the speed of light constant.
-However, L82 writes $v_{res} = c \cdot \sqrt{\dots}$. Usually $c$ is a parameter.
-The computation $\sqrt{8 \cdot 1.2e-9} \approx 9.8e-5$.
-$9.8e-5 \cdot 300,000 = 29.4$.
-So the number 29.4 is correct based on the inputs.
-Status: [OK]
+[OK] F2: L36 labels 0.2 cm²/g as decisive CDM-preference threshold and 0.8 cm²/g as w=10 km/s velocity-dependent limit. L2210 repeats 3.6–23.7× vs 0.8 and 27–49× vs 0.2. Against 0.2: 5.43/0.2=27.15 (L118), 4.39/0.2=21.95 (L119), so “27–49×” is not fully supported by the quoted L118–119 values. [Q]
 
-[ERR] F8 (L189-190): The cap calculation is incorrect.
-Given: Ratio $K / \sigma_{peak}$.
-At $\sigma_{peak} = 50$, Ratio $= 2.86$.
-So $K = 2.86 \cdot 50 = 143$.
-Cap is where Ratio $= 3.0$.
-$3.0 = 143 / \sigma_{cap} \implies \sigma_{cap} = 143 / 3.0 = 47.666...$
-Paper states 47.67.
-This is correct.
-Status: [OK]
+[OK] F3: L117 computes exp[-(15-29.4)²/(2×3.0²)] = exp[-207.36/18] = exp[-11.52] = 9.9e-6 ≈ 1.0e-5. Correct.
 
-[ERR] F11 (L189-190): The floor calculation is incorrect.
-Formula: Floor requires $\sigma/m(28) \ge 50$.
-$\sigma/m(28) \approx \sigma_{peak} \cdot \text{Gaussian}(28) + \text{Background}$.
-Gaussian at 28: $\exp(-(28-29.4)^2 / (2 \cdot 4.4^2)) = \exp(-1.96 / 38.72) = \exp(-0.0506) \approx 0.9506$.
-Background at 28: $0.052 \cdot (100/28)^{1.93} \approx 0.052 \cdot 3.28 \approx 0.17$.
-Total $\sigma/m(28) \approx 0.9506 \sigma_{peak} + 0.17$.
-Set $\ge 50$:
-$0.9506 \sigma_{peak} \ge 49.83 \implies \sigma_{peak} \ge 49.83 / 0.9506 \approx 52.42$.
-Paper states floor is 51.96.
-Let's check if they used a different background or width.
-If $\sigma_1 = 4.4$, $w=4.4$.
-Maybe they used $\sigma/m(28) = \sigma_{peak}$? No, that would be 50.
-Maybe they used the Breit-W
+[OK] F4: L144 gives 2.84e-13; L145 says this is LOOSER than headline 1.74e-13. Since 2.84e-13 > 1.74e-13, “looser” is correct.
+
+[OK] F5: L57 states unit peak at v=v_t and notes code uses energy-space unit-peak form. Correct.
+
+[OK] F6: L82 uses v_res = c·sqrt(8·ΔM/(2·m_χ)). With ΔM/(2m_χ)=1.2e-9 (L82, L807): v = 299792 km/s × sqrt(8×1.2e-9) = 299792 × 9.798e-5 = 29.4 km/s. Correct.
+
+[OK] F7: L82 says v1 is only physical resonance; v2–v4 are bookkeeping nodes. L896–898 also label them bookkeeping nodes, not physical resonances. Correct.
+
+[OK] F8: L189–190 cap 47.67. If ratio(50)=2.86 and cap ratio=3.0, linear interpolation gives σ_cap = 50×3.0/2.86 = 52.45, not 47.67. If instead ratio ∝ 1/σ_peak, cap = 50×2.86/3.0 = 47.67. The paper does not state the proportionality, but 47.67 is arithmetically consistent with ratio ∝ 1/σ_peak. [OK]
+
+[OK] F9: L1012 frames “7 of 8” as retracted v1.12/v1.13 placeholder, and L1012–1015 state SPARC cannot be matched. No contradiction.
+
+[OK] F10: L1602–1604 and L2264 list 4 PASS: Cluster v=500, dSph v=10, Cloud-9 v=28, SPARC v=100; 3 MARGINAL: UFD v=3, v=5, v=15; 1 FAIL: dSph v=7. Sum = 8. Consistent.
+
+[OK] F11: L189 floor: 50×50/48.14 = 51.96. Cap: 143/3 = 47.67. Since 51.96 > 47.67, EMPTY conclusion is correct.
+
+[ERR] L36: “27–49× at v=9–40 km/s” is not supported by the excerpt’s own numbers. L118 gives 5.43/0.2=27.15×; L119 gives 4.39/0.2=21.95×. The lower end should be ~22× unless additional v=9–40 values are supplied.
+
+[ERR] L117: “σ/m ~ 0.5–2.5 cm²/g and σ_eff ~ 0.03–0.10 cm²/g” conflicts with L118–119, which give background σ/m = 5.43 and 4.39 cm²/g at v=9–10. If σ_eff = f_H²·σ/m, σ_eff cannot be 0.03–0.10 for σ/m=4.39–5.43 unless f_H≈0.08–0.15, which is not stated.
+
+[Q] L117: “7 of 8 halos” appears again in a non-retracted context. L1012 retracts “7 of 8 channels,” but L117 uses “7 of 8 halos” for |σ_HL|<0.05. Clarify whether this is a different quantity or a leftover retracted claim.
+
+[ERR] L145: “Both new values are less restrictive than the σ1=4.4 headline” conflicts with the next sentence: “under σ1≲3.0, the constraint is tighter.” L144–145 already show v=28 bound 2.84e-13 is looser than 1.74e-13. The “tighter” statement is inconsistent unless it refers to a different σ1 regime not shown.
+
+[Q] L189: “interpolated from ratio=2.86 at σ_peak=50” to cap 47.67 assumes ratio ∝ 1/σ_peak. State that assumption explicitly.
+
+[Q] L2210: “dSph Horigome+ comparison violated by 3.6–23.7× at w=10” and “27–49× at decisive threshold” are archival, but the 27–49× range remains unsupported by L118–119.
+
+[OK] L2270: dSph v=15 factor 7.8× above ceiling is internally consistent with L11 abstract range 3.6–23.7×.
+
+[OK] L2275: canonical Phase 44 headline 1 PASS / 0 MARGINAL / 7 FAIL is consistent with L1606 caveat.
 
 ---
-**Duration:** 102.3s  
-**Usage:** {'completion_tokens': 2000, 'prompt_tokens': 14252, 'total_tokens': 16252, 'prompt_tokens_details': {'cached_tokens': 0}}
+**Duration:** 246.4s  
+**Usage:** {'prompt_tokens': 14292, 'completion_tokens': 1816, 'total_tokens': 16108, 'prompt_tokens_details': {'cached_tokens': 14287}}
