@@ -76,12 +76,14 @@ rounded from the canonical single-component `f_H = 0.297` of `constants.py`), `Ï
 
 ```python
 # BEFORE (hardcoded; stale since commit 79edeae)
-"interpretation": (
-    "Per r20.docx Bug 1 fix: paper convention (Gaussian w=4.4) gives sigma/m ~0.5-2.5 cm^2/g "
-    ...
-    "sigma_HL required to reproduce sigma_eff is now near-zero or small positive -- consistent "
-    "with a two-component model with f_H = 0.30."
-),
+{
+    "interpretation": (
+        "Per r20.docx Bug 1 fix: paper convention (Gaussian w=4.4) gives sigma/m ~0.5-2.5 cm^2/g "
+        # ... two further string literals elided ...
+        "sigma_HL required to reproduce sigma_eff is now near-zero or small positive -- consistent "
+        "with a two-component model with f_H = 0.30."
+    ),
+}
 
 # AFTER (computed from `results`; cannot drift again)
 _rv = list(results.values())
@@ -97,12 +99,15 @@ _n_small = sum(1 for r in _rv if abs(r["sigma_HL_fit_cm2_per_g"]) < 0.05)
 and the JSON now carries a machine-readable block:
 
 ```json
-"_derived_ranges": {
-  "sigma_m_cm2_per_g": {"min": 2.8454570671911887, "max": 16.865226429437705},
-  "sigma_eff_published_cm2_per_g": {"min": 0.0318, "max": 0.0931},
-  "sigma_HL_cm2_per_g": {"min": -3.392310425355699, "max": -0.5340265143981119},
-  "n_halos": 8,
-  "n_halos_abs_sigma_HL_below_0.05": 0
+{
+  "_derived_ranges": {
+    "note": "computed from dsph_halos; regenerate the file rather than hand-editing",
+    "sigma_m_cm2_per_g": {"min": 2.8454570671911887, "max": 16.865226429437705},
+    "sigma_eff_published_cm2_per_g": {"min": 0.0318, "max": 0.0931},
+    "sigma_HL_cm2_per_g": {"min": -3.392310425355699, "max": -0.5340265143981119},
+    "n_halos": 8,
+    "n_halos_abs_sigma_HL_below_0.05": 0
+  }
 }
 ```
 
