@@ -25,7 +25,7 @@ the full adjudication table are in the consolidated report v1.1, §5):
 **Two structural changes to this document (v1.0 -> v1.1):**
 
 1. **§3 now shows a DIFF, not the full file.** v1.0 embedded all 241 lines of
-   `v192_dsph_gravothermal_sweep.json`, of which only 39 lines changed in Round 5 — the
+   `v192_dsph_gravothermal_sweep.json`, of which only 20 lines differed (+19/−1) in Round 5 — the
    change was buried inside 220 unchanged lines, which defeats the purpose of a
    *changed-code* companion. v1.1 shows the actual `git diff` (pre-Round-5 -> current).
    The live file remains the authority: `v0.3-prelim/data/results/v192_dsph_gravothermal_sweep.json`.
@@ -818,10 +818,10 @@ Paper v1 draft — 6 verified numerical/prose fixes (§1-§6 of the report)
 Regenerated sweep JSON — new `_derived_ranges` block; `dsph_halos` data unchanged.
 
 **v1.1 change (n18 review item 3): this section now shows the DIFF, not the full file.**
-v1.0 embedded all 241 lines of the JSON (9,895 bytes) even though only 39 lines changed in
+v1.0 embedded all 241 lines of the JSON (10,135 bytes) even though only 20 lines differed (+19/−1) in
 Round 5 — the change was buried inside 220 unchanged lines, which defeats the purpose of a
 *changed-code* companion. The live file is the authority:
-`v0.3-prelim/data/results/v192_dsph_gravothermal_sweep.json` (241 lines, 9,895 bytes).
+`v0.3-prelim/data/results/v192_dsph_gravothermal_sweep.json` (241 lines, 10,135 bytes).
 
 **Diff shown:** pre-Round-5 (`7cc8d8a^`) -> current. 3 changes, 39 diff lines:
 

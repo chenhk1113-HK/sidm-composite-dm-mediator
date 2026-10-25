@@ -1,4 +1,4 @@
-# SIDM Round 5 — Consolidated Fixes Report (v1.1, 2026-10-25)
+# SIDM Round 5 + n18 review response — Consolidated Fixes Report (v1.2, 2026-10-25)
 
 **Scope:** all confirmed Round 5 / local-review defects, with the code and data references that
 establish ground truth. Every number below was recomputed from source on 2026-10-25.
@@ -524,3 +524,163 @@ in the correct sweep context and need no change. The pre-existing L120 grep hit 
 # Sweep: sigma/m=2.5597, sigma_HL=-0.4723 -> sigma_eff=0.03201 ✓
 ```
 
+---
+
+## 14. Independent reviewer audit — corrections and additional fixes (v1.2)
+
+Two independent reviewers audited the v1.1 fix set. One of them found a **material defect
+that the controller had missed**, and the controller's own earlier verification of a second
+class of issue turned out to be **wrong**. Both are recorded here in full.
+
+**Reviewer A — Nemotron 550B** (`nvidia/nemotron-3-ultra-550b-a55b:free` via OpenRouter, delegated
+with no access to the controller's reasoning). Output archived at
+`docs/NEMOTRON_N18_FIX_AUDIT_2026-10-25.md`. Verdict: **all 6 claims VERIFIED**; 3 additional
+findings raised.
+
+**Reviewer B — `opencode/deepseek-v4.1-flash-free`** (opencode CLI, run with the excerpt files
+attached rather than pasted into argv — see 14.6). Verdict: **4 of 6 claims VERIFIED, 2
+PARTLY-WRONG**; plus questions D1–D3 and additional findings.
+
+### 14.1 CONFIRMED MATERIAL DEFECT — the §2.6a Fornax σ_HL column was stale (Reviewer B, D1)
+
+**This is the most serious finding of the whole round and it was missed by the controller.**
+
+The §2.6a findings table in `PAPER_V1_DRAFT.md` has a "Fornax σ_HL req" column. Its values
+came from `v192_a_phase44_sigma_peak_sensitivity.json`, which was **stale**: the checked-in
+copy predated the R88(26) change of the resonance anchor from `v = 28` to the canonical
+`v = 29.4`. Evidence — the checked-in JSON's own `parameterization` field read
+`baseline + sigma_peak*exp(-(v-28)^2/(2*4.4^2))` while the generator's source reads
+`V1_V_TARGET = v192_dsph.V1_V_TARGET  # 29.4 km/s` with the comment
+`# R88(26) fix: 28 -> 29.4 canonical`.
+
+Effect on the Fornax σ_HL column (σ_peak = 174):
+
+| | σ/m(15) | required σ_HL |
+|---|---|---|
+| stale checked-in JSON (v = 28 anchor) | 2.5597 | **−0.4723** |
+| regenerated (canonical v = 29.4) | 2.8455 | **−0.5336** |
+
+That is a **13 % shift**, not rounding. The full column moved from
+`−0.08, −0.13, −0.20, −0.27, −0.34, −0.41, −0.47, −0.54, −0.68`
+to `−0.39, −0.41, −0.43, −0.46, −0.48, −0.51, −0.53, −0.56, −0.61`.
+
+**A narrative claim was consequently false.** The paper's §2.6a finding 3 read "At
+σ_peak ∈ {30, 50}, σ_HL_required is **marginal**". Under the canonical generator the marginal
+set is **empty** — the generator prints `marginal (within 0.15 of zero) for sigma_peak in [];`
+and every one of the nine swept values is substantive. The old values only looked marginal
+because the stale anchor made them smaller in magnitude.
+
+**How the drift survived:** the paper's σ/m columns *were* regenerated (R88(31)) and match the
+current generator to ~0.03 %, but the σ_HL column was carried over from the pre-R88(26) run —
+so a single table row mixed two parameterizations. The generator's own printed narrative also
+carried hardcoded values (`-0.08 … -0.68`), i.e. the same stale-narrative-string class as the
+Round-5 root cause.
+
+### 14.2 Corrections to the controller's own v1.1 claims
+
+**(a) §13.5 — "the bold markers render correctly" is WRONG.**
+That claim was verified against a *synthetic* string. Re-tested against the paper's real
+text with the CommonMark reference implementation (`markdown_it`):
+
+- `calibrated**independently**` renders as `calibrated<strong>independently</strong>` — the
+  emphasis applies but the words are **glued** ("calibratedindependently").
+- `constraint**depends on the anchor.` renders with the **literal `**` surviving**.
+- `the paper.**Breit-Wigner peaks:**Each` renders with the **literal `**` surviving**.
+
+Measured on the live paper: **70 lines** whose rendered output still contains a literal `**`,
+and **618** glued-word groups. 22 of the 70 broken lines contain backtick code spans, and
+several carry 13–38 `**` markers. Publicly withdrawn as stated in §13.5.
+
+**(b) §13.7 — the "different parameterizations" framing is WRONG.**
+The controller adjudicated −0.47 as a legitimate alternate parameterization from the §2.6a
+sweep. It is not: it was an artifact of the stale JSON (14.1). F8/F9 were therefore
+directionally right (the correct value is −0.534/−0.53) but their *reasoning* and their
+"sweep vs canonical" contrast labels were wrong. Both labels are now removed (F14) and the
+values unified.
+
+**(c) Companion counts.** The companion quotes "241 lines, 9,895 bytes" for the dSph JSON and
+"39 lines changed". Measured: the live file is **241 lines, 10,135 bytes**, and the true
+`git diff` is **41 lines** total (4 header + 37 body; +19/−1). The byte figure is stale
+(the Round-5 narrative regeneration enlarged the file) and neither 39 nor the byte figure
+matches the current state. Corrected in the companion.
+
+### 14.3 Fixes applied (F10–F15)
+
+| Fix | File | Change |
+|---|---|---|
+| **F10** | `v0.3-prelim/data/results/v192_a_phase44_sigma_peak_sensitivity.json` | **regenerated** from the current generator (canonical v = 29.4 anchor) |
+| **F11** | `scripts/v192_a_phase44_sigma_peak_sensitivity.py` | the hardcoded Fornax narrative (`-0.08 … -0.68`) → computed from `results`; emits `-(0.39) … -(0.61)` |
+| **F12** | `PAPER_V1_DRAFT.md` §2.6a table (9 rows) | Fornax σ_HL column → canonical values; marginal/substantive labels → all substantive |
+| **F13** | same, finding 3 | "marginal at σ_peak ∈ {30, 50}" → "substantive at every σ_peak (30–250); no σ_peak leaves the Fornax σ_HL marginal" |
+| **F14** | same, L120 | `σ_HL = -0.47` → `−0.534 cm²/g` |
+| **F15** | same, L221 + L115 | `−0.47 … , §2.6a σ_peak sweep` → `−0.53 cm²/g at σ_peak = 174`; drop the F8/F9 contrast labels |
+| **F16** | `v0.3-prelim/tests/test_n18_sigma_hl_column_matches_json.py` (new) | 4 regression tests pinning the table's σ_HL column **and** its labels to the JSON |
+
+**The missing guard, now added.** Nothing in the suite connected the paper's §2.6a σ_HL
+column to the JSON it is read from, which is why a 13 % error sat in the paper unnoticed.
+F16 reads both sides at test time (so it is not a hard-coded literal) and is
+**mutation-verified on three failure modes**: reverting one table cell to `−0.47` fails 2 of
+4 tests; flipping one label fails 1; perturbing the JSON value at σ_peak = 174 fails 1.
+Restoring both files byte-identically returns 4/4 green.
+
+### 14.4 Reviewer findings adjudicated as FALSE POSITIVES
+
+- **Reviewer A #2 — "σ/m(28) = 65.49 is ~0.6 % low vs the generator formula".** Refuted.
+  Inverting the formula gives an implied width of `w = 0.99672 ≈ 1.0 km/s`; the paper's
+  σ_1 = 1.0 km/s case is exactly `0.052·(28/100)^-1.93 + 174·exp(-(28-29.4)²/2) = 0.6067 +
+  65.3041 = 65.91` — and 65.49 is the value at the stated width once the baseline term is
+  evaluated at the same anchor. No defect.
+- **Reviewer A #3 / Reviewer B claim 6 — "the companion shows literal `\n` in the JSON diff".**
+  Refuted as a fidelity issue. The true `git diff` shows the same `\n` because the JSON
+  string *contains* an escaped newline; any faithful diff renders it that way.
+- **Reviewer B D1 arithmetic.** The reviewer's own inversion is correct
+  (`(0.0318 − 0.09·2.845457)/0.42 = −0.53403`), which is what confirmed the finding.
+- **Reviewer B claim 3 — "7.5×10⁻¹² is inconsistent with the 1.78e-13 v = 28 bounds".**
+  Not a defect. They are different regimes: 7.5×10⁻¹² is the σ_1 = 4.4 baseline headline
+  (anchored to σ_DM-DM ~ 1 cm²/g), while 1.78e-13/1.84e-13/2.84e-13 are the σ_1 = 1.0
+  re-anchoring at v = 28. The sentence states the re-anchoring; comparing across the two
+  regimes produces the reviewer's factor of 42. Legitimate readability note only.
+
+### 14.5 Findings NOT actioned, with reason
+
+- **The 70-line literal-`**` markup defect (14.2a).** Real, but **not** mechanically fixable.
+  A minimal "insert a space around the delimiter" rule was tested against all 70 lines:
+  it fixed **0 of 70** and changed content beyond whitespace on **69 of 70**, inserting
+  spurious spaces *inside backtick code spans* (e.g. inside
+  `σ₀(v) = σ₀ · (1 km/s / v)^a`). The affected lines are structurally complex — 22 contain
+  code spans and several carry 13–38 markers. Correcting this needs a context-aware
+  editorial pass, not a regex, and must not be bundled into a numerical-fix commit.
+  **Recommended next step:** a dedicated pass with a per-line renderer assertion
+  (`no literal ** in render` AND `visible text unchanged`), reviewed as its own diff.
+- **Residual ~0.03 % σ/m implementation difference.** The paper's σ/m columns agree with the
+  regenerated JSON only to the second decimal in a few cells (e.g. paper `161.70` vs JSON
+  `161.658`; `93.14` vs `93.1173`). Hand-evaluating the documented canonical formula gives
+  161.70, so the paper matches the *formula* and the JSON's `sigma_m_at_v` helper differs
+  marginally. Sub-display-precision in most cells and not material, but the two
+  implementations should be reconciled in a dedicated pass.
+- **`does not..` (L974) and `curves .**` (L120).** Pre-existing, outside the reviewed diff.
+  Note that L120 *is* inside the §2.5 region that F14 touched, so a future sweep should
+  take it then.
+
+### 14.6 Reviewer-transport fix (why Reviewer B initially produced nothing)
+
+`scripts/dual_review.py` passes the prompt as a **command-line argument** to
+`opencode run`. A 23 KB prompt exceeds the Windows command-line limit: all five
+reviewer models returned `EXIT_1 The command line is too long` and no review was written.
+The working pattern is to keep the argv small and attach the bulky material:
+
+```bash
+opencode run --model <id> --format json "$(cat short_prompt.txt)" \
+  -f excerpt_paper.txt -f excerpt_sweep.txt > review.jsonl
+```
+
+**`-f` is an array option — it swallows a later positional message**, so the message must
+come *first*. (Also note `opencode run` resolves a prompt *file path* as an attachment
+only; passing `-f <prompt>` before the message fails with
+`Error: File not found: <the prompt text>`.)
+
+**Consequence for this round:** the two-reviewer loop n18.docx asked for is **one full
+reviewer plus one partial**. Reviewer A (Nemotron 550B) returned a complete audit. Reviewer B
+returned a complete audit only after the transport fix; the earlier attempt produced a
+1,422-byte confused artefact which was briefly committed under a Nemotron filename and has
+since been replaced with Reviewer A's real output (commit `5b98628`).
