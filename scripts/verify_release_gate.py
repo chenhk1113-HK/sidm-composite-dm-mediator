@@ -99,9 +99,13 @@ def main():
         #     test_phase7e_unit_conversion_audit.py, test_config_split_brain.py,
         #     test_paper_v19_regression.py
         # All exclusions are out of scope for v40 gate (pre-v40 era).
-        # The T132 series has pre-existing tolerance-boundary failures
-        # (sigma_m(28) returns 99.8 < 100 boundary). These are documented
-        # in the test files themselves and are out of scope for this gate.
+        # T132 (test_T132_eft_target_map_sanity.py) was FIXED 2026-10-25 and is
+        # NO LONGER excluded: its four TestFullChainVerification assertions were
+        # re-pointed from the superseded T120.4 v1.13-era chain to the canonical
+        # Phase 44 source the paper actually cites. It had been committed
+        # already-failing in its own commit (d776480) and the gate excused it as
+        # "pre-existing tolerance-boundary failures" -- that excuse is now void.
+        # The remaining exclusions above are genuinely legacy (pre-v40 era).
         results.append(("pytest", run_layer(
             "Full pytest suite (v0.3-prelim/tests/, excluding known-broken)",
             ["-m", "pytest", "v0.3-prelim/tests/", "-q", "--tb=line",
