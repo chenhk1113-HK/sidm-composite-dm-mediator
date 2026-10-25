@@ -6,8 +6,8 @@ establish ground truth. Every number below was recomputed from source on 2026-10
 **Branch:** `wip/v19.2-F-init`  **Paper:** `v0.3-prelim/docs/PAPER_V1_DRAFT.md` (2383 lines)
 
 **Outcome:** 6 paper defects + 1 generator (root-cause) defect + 1 review-document defect class
-= **8 fixes applied**, all verified. 1 additional pre-existing issue found and left alone
-(§7, Table-walker — confirmed pre-existing, not caused by these edits).
+= **8 fixes applied**, all verified. 2 additional pre-existing issues found and left alone
+(§10 L98 band; §9 Table-walker — both confirmed pre-existing, not caused by these edits).
 
 ---
 
