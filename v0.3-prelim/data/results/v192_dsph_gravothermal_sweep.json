@@ -205,17 +205,35 @@
       "consistency": "MIXED"
     }
   },
+  "_derived_ranges": {
+    "note": "computed from dsph_halos; regenerate the file rather than hand-editing",
+    "sigma_m_cm2_per_g": {
+      "min": 2.8454570671911887,
+      "max": 16.865226429437705
+    },
+    "sigma_eff_published_cm2_per_g": {
+      "min": 0.0318,
+      "max": 0.0931
+    },
+    "sigma_HL_cm2_per_g": {
+      "min": -3.392310425355699,
+      "max": -0.5340265143981119
+    },
+    "n_halos": 8,
+    "n_halos_abs_sigma_HL_below_0.05": 0
+  },
   "verdict": {
     "all_dSphs_pass_observational": true,
     "all_dSphs_pass_gravothermal_no_collapse": false,
     "all_dSphs_pass_causality": false,
-    "interpretation": "Per r20.docx Bug 1 fix: paper convention (Gaussian w=4.4) gives sigma/m ~0.5-2.5 cm^2/g at dSph scale (not 5-18 cm^2/g from phase44_sigma_HH_at_v). This is closer to published sigma_eff. Per r20.docx Bug 2 fix: t_cross now uses canonical T212 function (r_s = r_vir/c), giving physically meaningful values (~0.05-0.5 Gyr). Causality verdict is now meaningful. Per r20.docx recommendation 5: 'NEW DISCOVERY' marked as PROVISIONAL. After Bug fixes, the 100x microphysical-vs-observational inconsistency shrinks significantly. The picture is now: framework sigma/m and sigma_eff_published are within ~10x at dSph scale, not 100x. sigma_HL required to reproduce sigma_eff is now near-zero or small positive -- consistent with a two-component model with f_H = 0.30."
+    "interpretation": "Per r20.docx Bug 1 fix: paper convention (Gaussian w=4.4) gives sigma/m ~2.85-16.87 cm^2/g at dSph scale (not 5-18 cm^2/g from phase44_sigma_HH_at_v), over the 8 halos listed. Published sigma_eff spans 0.032-0.093 cm^2/g. NOTE: this sigma/m range and the published sigma_eff range are NOT related by sigma_eff = f_H^2*sigma/m with f_H = 0.3: that identity would give sigma_eff = 0.256-1.518 cm^2/g, i.e. 2.8-47.7x ABOVE the published band. Reconciling the two therefore requires a NEGATIVE cross-channel term. The fitted sigma_HL spans -3.392 to -0.534 cm^2/g, and 0/8 halos satisfy |sigma_HL| < 0.05 cm^2/g. Per r20.docx Bug 2 fix: t_cross now uses canonical T212 function (r_s = r_vir/c), giving physically meaningful values (~0.05-0.5 Gyr). Causality verdict is now meaningful. Per r20.docx recommendation 5: 'NEW DISCOVERY' marked as PROVISIONAL. The magnitude of the microphysical-vs-observational gap is LARGE, and is bridged only by a large negative sigma_HL -- not by a near-zero or small-positive one."
   },
   "limitations": [
     "Analytical Balberg+ formula; no N-body at dSph scale.",
     "sigma_HL calibrated to match sigma_eff_published; should be fit from SPARC / cluster data.",
     "Halo parameters from Read+ 2019 [29d], Walker+ 2009, Wolf+ 2010.",
     "f_H_cc = 0.30 from T207 fit; alternative f_H values (~0.45-0.50) exist in extended fits.",
+    "The halo-mass (M_halo) assumption is fixed per halo from Read+ 2019 / Walker+ 2009 / Wolf+ 2010; the paper's quoted 0.5-2.5 cm^2/g dSph band predated the a_slope 1.0->1.93 propagation and is superseded by sigma_m_paper_convention_cm2_per_g above.",
     "Paper convention uses Gaussian; phase44 uses Breit-Wigner -- two different parameterizations.",
     "Removed UMa-II (UDG) from dSph list per p1.docx Smaller item 3.",
     "NEW DISCOVERY from v19.2-D.2 is now RESOLVED as bugs (per r20.docx review)."

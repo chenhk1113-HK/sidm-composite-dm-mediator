@@ -17,9 +17,17 @@ BUG 2: t_cross off by ~10 orders of magnitude. The script divided by
 
 Per r20.docx recommendation 1: Run diagnostic comparing functions. Done; see below.
 Per r20.docx recommendation 5: Mark "NEW DISCOVERY" as provisional pending diagnostic.
-   Result: after fixing the two bugs, the "100x inconsistency" largely disappears.
-   sigma_HL needed to reproduce published sigma_eff is now near-zero or small positive
-   (consistent with a two-component model with f_H = 0.30).
+   Result: after fixing the two bugs the gap SHRINKS but does NOT disappear. The
+   framework's canonical-Gaussian sigma/m at dSph scale is 2.85-16.87 cm^2/g
+   (computed; see `_derived_ranges` in the output JSON) while the published
+   sigma_eff band is 0.032-0.093 cm^2/g. With f_H = 0.30 the identity
+   sigma_eff = f_H^2 * sigma/m would give 0.257-1.589 cm^2/g -- far ABOVE
+   published -- so the fitted sigma_HL is LARGE AND NEGATIVE for every halo
+   (-0.53 to -3.39 cm^2/g), and 0 of 8 halos satisfy |sigma_HL| < 0.05 cm^2/g.
+   (2026-10-25 correction: the earlier 'near-zero or small positive' and
+   'sigma/m ~0.5-2.5 cm^2/g' statements here were hardcoded narrative that
+   predated the a_slope 1.0->1.93 propagation of commit 79edeae; they are now
+   computed from the results so they cannot drift again.)
 
 Method:
 1. sigma/m = sigma_m_at_v(0.052, 1.93, v) + 174 * exp(-(v-29.4)^2/(2*4.4^2))
@@ -197,9 +205,19 @@ def main():
     print(f"  Causality cap (t_core > 3 t_cross via canonical T212): {'ALL OK' if all_caus_ok else 'AT LEAST ONE FAILS'}")
     print()
 
+    # --- computed summary ranges (single source of truth for every narrative string) ---
+    _rv = list(results.values())
+    _sm_lo = min(r["sigma_m_paper_convention_cm2_per_g"] for r in _rv)
+    _sm_hi = max(r["sigma_m_paper_convention_cm2_per_g"] for r in _rv)
+    _se_lo = min(r["sigma_eff_published_cm2_per_g"] for r in _rv)
+    _se_hi = max(r["sigma_eff_published_cm2_per_g"] for r in _rv)
+    _shl_lo = min(r["sigma_HL_fit_cm2_per_g"] for r in _rv)
+    _shl_hi = max(r["sigma_HL_fit_cm2_per_g"] for r in _rv)
+    _n_small = sum(1 for r in _rv if abs(r["sigma_HL_fit_cm2_per_g"]) < 0.05)
+
     if not all_grav_no:
-        print("  Per r20.docx Bug 1 fix: paper convention gives sigma/m ~0.6 cm^2/g at dSph scale")
-        print("  (vs phase44_sigma_HH_at_v ~5-18 cm^2/g). This is closer to the published sigma_eff,")
+        print(f"  Per r20.docx Bug 1 fix: paper convention gives sigma/m ~{_sm_lo:.2f}-{_sm_hi:.2f} cm^2/g at dSph scale")
+        print(f"  (vs phase44_sigma_HH_at_v ~5-18 cm^2/g); published sigma_eff is {_se_lo:.3f}-{_se_hi:.3f} cm^2/g,")
         print("  but still predicts gravothermal collapse within Hubble time per Balberg+ formula.")
         print()
 
@@ -219,21 +237,35 @@ def main():
             "sigma_LL": SIGMA_LL,
         },
         "dsph_halos": results,
+        "_derived_ranges": {
+            "note": "computed from dsph_halos; regenerate the file rather than hand-editing",
+            "sigma_m_cm2_per_g": {"min": _sm_lo, "max": _sm_hi},
+            "sigma_eff_published_cm2_per_g": {"min": _se_lo, "max": _se_hi},
+            "sigma_HL_cm2_per_g": {"min": _shl_lo, "max": _shl_hi},
+            "n_halos": len(_rv),
+            "n_halos_abs_sigma_HL_below_0.05": _n_small,
+        },
         "verdict": {
             "all_dSphs_pass_observational": all_obs_pass,
             "all_dSphs_pass_gravothermal_no_collapse": all_grav_no,
             "all_dSphs_pass_causality": all_caus_ok,
             "interpretation": (
-                "Per r20.docx Bug 1 fix: paper convention (Gaussian w=4.4) gives sigma/m ~0.5-2.5 cm^2/g "
-                "at dSph scale (not 5-18 cm^2/g from phase44_sigma_HH_at_v). This is closer to published "
-                "sigma_eff. "
+                f"Per r20.docx Bug 1 fix: paper convention (Gaussian w={V1_WIDTH}) gives "
+                f"sigma/m ~{_sm_lo:.2f}-{_sm_hi:.2f} cm^2/g at dSph scale "
+                f"(not 5-18 cm^2/g from phase44_sigma_HH_at_v), over the {len(_rv)} halos listed. "
+                f"Published sigma_eff spans {_se_lo:.3f}-{_se_hi:.3f} cm^2/g. "
+                "NOTE: this sigma/m range and the published sigma_eff range are NOT related by "
+                f"sigma_eff = f_H^2*sigma/m with f_H = {F_H_CC}: that identity would give "
+                f"sigma_eff = {F_H_CC**2*_sm_lo:.3f}-{F_H_CC**2*_sm_hi:.3f} cm^2/g, i.e. "
+                f"{F_H_CC**2*_sm_lo/_se_hi:.1f}-{F_H_CC**2*_sm_hi/_se_lo:.1f}x ABOVE the published band. "
+                "Reconciling the two therefore requires a NEGATIVE cross-channel term. "
+                f"The fitted sigma_HL spans {_shl_lo:+.3f} to {_shl_hi:+.3f} cm^2/g, and "
+                f"{_n_small}/{len(_rv)} halos satisfy |sigma_HL| < 0.05 cm^2/g. "
                 "Per r20.docx Bug 2 fix: t_cross now uses canonical T212 function (r_s = r_vir/c), giving "
                 "physically meaningful values (~0.05-0.5 Gyr). Causality verdict is now meaningful. "
-                "Per r20.docx recommendation 5: 'NEW DISCOVERY' marked as PROVISIONAL. After Bug fixes, "
-                "the 100x microphysical-vs-observational inconsistency shrinks significantly. The picture "
-                "is now: framework sigma/m and sigma_eff_published are within ~10x at dSph scale, not 100x. "
-                "sigma_HL required to reproduce sigma_eff is now near-zero or small positive -- consistent "
-                "with a two-component model with f_H = 0.30."
+                "Per r20.docx recommendation 5: 'NEW DISCOVERY' marked as PROVISIONAL. "
+                "The magnitude of the microphysical-vs-observational gap is LARGE, and is bridged only "
+                "by a large negative sigma_HL -- not by a near-zero or small-positive one."
             ),
         },
         "limitations": [
@@ -241,6 +273,7 @@ def main():
             "sigma_HL calibrated to match sigma_eff_published; should be fit from SPARC / cluster data.",
             "Halo parameters from Read+ 2019 [29d], Walker+ 2009, Wolf+ 2010.",
             "f_H_cc = 0.30 from T207 fit; alternative f_H values (~0.45-0.50) exist in extended fits.",
+            "The halo-mass (M_halo) assumption is fixed per halo from Read+ 2019 / Walker+ 2009 / Wolf+ 2010; the paper's quoted 0.5-2.5 cm^2/g dSph band predated the a_slope 1.0->1.93 propagation and is superseded by sigma_m_paper_convention_cm2_per_g above.",
             "Paper convention uses Gaussian; phase44 uses Breit-Wigner -- two different parameterizations.",
             "Removed UMa-II (UDG) from dSph list per p1.docx Smaller item 3.",
             "NEW DISCOVERY from v19.2-D.2 is now RESOLVED as bugs (per r20.docx review).",
