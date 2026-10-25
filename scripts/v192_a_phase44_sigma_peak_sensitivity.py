@@ -270,7 +270,11 @@ def main():
         f"Fornax sigma_HL required: marginal (within 0.15 of zero) for sigma_peak in "
         f"{[r['sigma_peak_HH_1_cm2_per_g'] for r in marginal]}; substantive (more negative) for "
         f"{[r['sigma_peak_HH_1_cm2_per_g'] for r in substantive]}. "
-        f"The Fornax outlier ranges from small (-0.08) at sigma_peak=30 to large (-0.68) at sigma_peak=250."
+        f"The Fornax outlier ranges from "
+        f"({max(r['Fornax_sigma_HL_required_cm2_per_g'] for r in results):.2f}) at sigma_peak="
+        f"{min(results, key=lambda r: r['sigma_peak_HH_1_cm2_per_g'])['sigma_peak_HH_1_cm2_per_g']:.0f} "
+        f"to ({min(r['Fornax_sigma_HL_required_cm2_per_g'] for r in results):.2f}) at sigma_peak="
+        f"{max(results, key=lambda r: r['sigma_peak_HH_1_cm2_per_g'])['sigma_peak_HH_1_cm2_per_g']:.0f}."
     )
 
     # Finding 4: Phase 44 free fit
