@@ -1152,7 +1152,7 @@ The file is committed so the pass can be finished later without re-deriving the 
 |---|---|---|---|
 | 1 | `build_history_index`, `git_revisions` (L399–453) | **Historical layout adoption** — find the revision whose non-marker text is *identical* to the current paragraph and adopt its layout | identical non-marker text means the substitution can change only emphasis and whitespace |
 | 2 | `whitespace_edits`, `fix_ws`, `fix_block`, `split_cells` (L246–317) | **Cell-aware flanking repair** — move whitespace outside each marker pair; repair table rows cell by cell | whitespace-only edits; GFM parses a pipe row cell by cell, so that is the correct unit |
-| 3 | `marker_edits`, `repair_marker`, `sentence_stops`, `word_starts` (L319–397) | **Renderer-validated marker repair** — re-insert a deleted marker, or split a fused run | every candidate is scored by actually rendering the document |
+| 3 | `marker_edits`, `repair_marker`, `sentence_stops`, `word_starts` (L323–400) | **Renderer-validated marker repair** — re-insert a deleted marker, or split a fused run | every candidate is scored by actually rendering the document |
 
 Phase 1 excludes commit `ef645ce` explicitly: that commit's layout came from a broken fixer that
 relocated markers to the wrong places, so it is not trustworthy ground truth even where its
@@ -1162,7 +1162,7 @@ non-marker text happens to match.
 
 The n19 review asked for the Phase 3 implementation to be shown, so a reviewer can verify the
 "re-insert a deleted marker, or split a fused run" logic instead of taking it on trust. This is
-`scripts/fix_markup.py` lines 319–397, verbatim:
+`scripts/fix_markup.py` lines 323–400, verbatim (as of commit `e6b670c`):
 
 ```python
 # ------------------------------------------------------------------ phase 3
@@ -1244,6 +1244,35 @@ def repair_marker(text):
     cands.sort(key=lambda x: x[0])
     return cands[0][1], True
 ```
+
+### 6.2.2 Phase 3 — the integration loop (added v1.4)
+
+The block quoted in §6.2.1 is the *implementation* of the repair. This is where it is **wired in**
+and where the safety property is enforced at the acceptance point. `scripts/fix_markup.py` lines
+519–530, verbatim (line numbers as of commit `e6b670c`; the phase-3 function block in §6.2.1 is
+L323–400 on the same revision):
+
+```python
+    # ---- PHASE 3: marker repair
+    for i, b in enumerate(bl):
+        if literal_count(b) == 0:
+            continue
+        fixed, ok = repair_marker(b)
+        if ok and bare_text(fixed) == bare_text(b):
+            bl[i] = fixed
+            n_mark += 1
+            spans = [c for c, sane in bold_spans(fixed) if sane]
+            print(f'  block {i+1}: marker repaired; last bold span = '
+                  f'{spans[-1][:80]!r}')
+    print(f'phase 3 (marker): {n_mark} blocks, literal ** = '
+```
+
+The acceptance condition is the second clause: `if ok and bare_text(fixed) == bare_text(b)`.
+`repair_marker` returning `ok = True` means the candidate passed the *local* checks in §6.2.1
+(token-sequence identity, strictly-reduced literal count, no new bad span); `bare_text(fixed) ==
+bare_text(b)` is the **global** re-check that the visible text is byte-identical, so a repair can
+never change a number, a unit, or a word. Both must hold, or the block is left untouched.
+
 
 **How the safety property is enforced here.** `marker_edits` proposes only **marker-only**
 edits: deleting surplus `*` from a fused run, or inserting a `**` at a word start. The prose

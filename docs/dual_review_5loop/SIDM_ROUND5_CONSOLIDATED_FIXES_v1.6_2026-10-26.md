@@ -489,7 +489,9 @@ recoverable/unrecoverable boundary (stated precisely in v1.6, per the n19 review
 Consequence for a reader: n18's *severity grading* for findings 1–6 cannot be checked, because the
 grading did not survive in the file. The *substance* of those findings does survive, and all
 three priority items are addressed below. By contrast the n19 review (see §17) is **not**
-truncated — 181 paragraphs, 6 928 characters, all pages read.
+truncated — 181 paragraphs, 6 928 characters (convention: 6 748 decoded characters
+plus 180 newline separators; raw `<w:t>` count 7 021; WPS `CharactersWithSpaces` 6 748),
+all pages read.
 
 ### 13.1 Adjudication table
 
@@ -637,7 +639,7 @@ Effect on the Fornax σ_HL column (σ_peak = 174):
 
 | | σ/m(15) | required σ_HL |
 |---|---|---|
-| stale checked-in JSON (v = 28 anchor) | 2.5597 | **−0.4723** |
+| stale checked-in JSON (**superseded resonance anchor** v = 28) | 2.5597 | **−0.4723** |
 | regenerated (canonical v = 29.4) | 2.8455 | **−0.5336** |
 
 That is a **13 % shift**, not rounding. The full column moved from
@@ -805,6 +807,13 @@ workaround** — `MAX_ARGV_PROMPT = 6000` is deliberately far below *every* plat
 so the attachment path is taken everywhere and the transport behaves identically across hosts.
 The 6 000-character threshold also keeps the prompt readable in a process listing, which is a
 separate benefit.
+
+**Mechanism, precisely:** `build_opencode_argv` compares `len(prompt)` to the module constant
+`MAX_ARGV_PROMPT = 6000` (`scripts/dual_review.py:110,142`) and takes the attachment branch on
+**every** platform — it never reads `ARG_MAX`, `os.name`, or any OS limit. The ceiling is therefore
+a *policy choice* (safe on all hosts, and it keeps the prompt readable in a process listing), not a
+discovered platform bound. On Linux/macOS the 6,000-char path is taken even though a 6,000-char
+argv would be legal there — which is safe but is the reason for the attached-prompt cost below.
 
 **Cost of the attached-prompt path:** 365.8 s versus 41.2 s for the same model on a short
 argv — the model has to read the attachment before answering. Acceptable for an audit, but it
@@ -1038,7 +1047,10 @@ without re-deriving the analysis.
 
 **Source:** `n19.docx` — an external review of the **v1.5 PDF pair** (18 + 16 pages), written in
 Chinese. The review is **complete, not truncated**: 181 paragraphs, 6 928 characters of body
-text (contrast `n18.docx`, which survives only as 23 text nodes / 1 527 characters and whose
+text (convention: 6 748 decoded characters plus 180 newline separators; raw `<w:t>` count
+7 021; WPS `CharactersWithSpaces` 6 748 — and the file's XML ends with a valid `<w:sectPr>`,
+its last paragraph a complete sentence) (contrast `n18.docx`, which survives only as 23 text
+nodes / 1 527 characters and whose
 severity-table findings 1–6 are unrecoverable). The reviewer states it read every page of both
 PDFs.
 
@@ -1054,7 +1066,7 @@ process" is, on the evidence, fair.
 |---|---|---|---|---|
 | 1 | `audit_claims.py` coverage gaps (σ_HL, §2.6a, …) are not enumerated; each gap should get a tracking number | medium | **VALID** | **Acted on.** §17.3 is a tracked coverage-gap register with IDs CG-1…CG-4, each with the current status and what would close it. |
 | 2 | the 70-line literal `**` markup defect is unfixed | medium-low | **ALREADY ADDRESSED** | Deferred by user direction (2026-10-26) as **purely presentational** — it changes no prose, no number, no unit, no citation. Documented in §16.6 and §16.7. The n19 reviewer's own summary concedes the document "honestly flags" this. No change needed; the deferral and its rationale are now stated in the front matter too. |
-| 3 | `fix_markup.py` Phase 3 is described but its code is not shown, so a reviewer cannot verify the "re-insert a deleted marker / split a fused run" logic | low-medium | **VALID** | **Acted on in the companion (v1.4).** Companion §6.2 now quotes the Phase 3 implementation (`marker_edits` / `repair_marker`, `scripts/fix_markup.py` lines 319–397) and the companion's phase table now names the functions. |
+| 3 | `fix_markup.py` Phase 3 is described but its code is not shown, so a reviewer cannot verify the "re-insert a deleted marker / split a fused run" logic | low-medium | **VALID** | **Acted on in the companion (v1.4).** Companion §6.2.1 now quotes the Phase 3 implementation (`marker_edits` / `repair_marker`, `scripts/fix_markup.py` lines 323–400) and §6.2.2 quotes the integration loop where the safety property is enforced at acceptance (lines 519–530, `if ok and bare_text(fixed) == bare_text(b)`). The companion's phase table now names the functions. |
 | 4 | `F1`–`F22` are reused across §§8/13/14/15, so a bare `F1` is ambiguous | low | **VALID** | **Acted on.** A "Finding-number namespaces" table is added to the front matter, defining all four namespaces and giving the rule for citing a fix outside its defining section (§section.Flabel). |
 | 5 | the n18 `.docx` source loss is not scoped precisely enough to act on | low | **PARTIALLY VALID** | **Acted on.** §13's note now states the recoverable/unrecoverable boundary explicitly: the severity table survives only as its final row (`7  diff 单行长段落可读性差 低 考虑分行 diff 或高亮`), findings **1–6 are unrecoverable**, and the three priority items in the closing 总体判断 section **are** complete. |
 | 6 | "§0 TL;DR is truncated, cut off after 'Strata /'; check PDF rendering integrity" | low | **INVALID as stated — but it surfaced three real defects** | §0 is **complete** on page 1 of the v1.5 PDF (verified by rasterising and reading the page, and by text extraction: the paragraph runs to "…it is a **stale-value** problem."). **However**, checking the PDF against its source found **three genuine silent content-loss bugs in my own PDF builder** — 26 CJK characters rendered as empty boxes, 34 long code lines clipped off the page, and a paragraph split mid-sentence. All three are fixed in `scripts/build_round5_report_pdfs.py` (commit `4cba573`) and re-verified. See §17.2. |
@@ -1122,6 +1134,8 @@ is uncovered.
 | **CG-7** | the **§10 L98 band**: the paper quotes σ_eff `0.03–0.10 cm²/g`; the recomputed phase44 dSph/UFD range is `0.032–0.155` | the quoted band understates the top end (it covers v = 5–15 but omits v = 3.0 at 0.155). It is a different scope from the 8-halo sweep band, and narrowing it changes a published observational statement | **OPEN (flagged, awaiting the user's decision)** | a user decision on whether to restate the phase44 band |
 | **CG-8** | two pre-existing prose typos the gate does not read: `does not..` (paper L974) and `curves .**` (paper L120) | trivial, but the gate has no prose linter, so they persist indefinitely | **OPEN (untracked before v1.6)** | a typo sweep; both are outside the §2.6a region the fixes touched, so they need their own pass |
 | **CG-9** | the **hierarchy-bound chain** — σ/m(28) at σ_1 = 1.0, the ratio σ_DM-DM/σ_SI, and the g_N/g_χ bound it implies | the gate reads none of these three, so a stale σ/m propagates into a headline bound undetected. This is exactly how **F23** survived (§17.7): the paper's 65.49 was a retracted `a_slope = 1.0` value, and the 2.84e-13 bound derived from it. | **OPEN (F23 fixed the instance; the class is uncovered)** | add all three quantities to the standing-numbers table so the gate checks them |
+| **CG-10** | an **environment-failed** or **skipped** test **counts as a PASS** | verified 2026-10-26: `verify_release_gate.py --quick` skips the pytest layer yet still prints `[PASS] pytest` and `ALL GATES PASSED — safe to tag a new release.` (`--quick` is documented as "skip pytest (faster)"). Separately, `test_sweep_json_not_stale.py` calls `pytest.skip(...)` when the generator cannot run here (missing script, timeout, `OSError`) — a skip proves nothing, yet it is counted green. | **OPEN** | make the gate's summary distinguish *skipped* from *passed*, and fail loud on an environment-failed layer rather than counting it green |
+| **CG-11** | `run_round13_self_check.py` **Table-walker** fails at paper line 483 (7/8) | verified 2026-10-26: `scripts/walk_paper_tables.py` reports `VERDICT: 1 issues across 60 tables — Line 483 row 4: both pass+fail markers in same row: yukawa-only (no gaussian peak) 0.61 0.054 230 gyr **0.06** **yes (max-core)**`. A permanently-red layer trains the reader to ignore the whole gate — the same failure mode as F1–F7 for the paper itself. | **OPEN** | fix the Table walker's pass+fail-marker detection, or formally retire the layer and say so in the gate output |
 
 **Consequence to carry forward (unchanged from §14.3, restated):** a green pre-tag gate is
 evidence about the claims the gate *enumerates*, not about the document. The gate's summary line
