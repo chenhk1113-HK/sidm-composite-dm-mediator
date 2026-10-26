@@ -163,7 +163,10 @@ def inline(t):
     t = BOLD.sub(r'<b>\1</b>', t)
     t = ITAL.sub(r'<i>\1</i>', t)
     for i, s in enumerate(spans):
-        t = t.replace(f'\x00{i}\x00', f'<font face="Mono" size="7.6">{s}</font>')
+        # inline code is set in the Mono face, which has a narrower glyph
+        # coverage than the Body face -> fold the same way as code blocks
+        t = t.replace(f'\x00{i}\x00',
+                      f'<font face="Mono" size="7.6">{fold_mono(s)}</font>')
     return wrap_cjk(t)
 
 
@@ -395,7 +398,7 @@ def build(md_path, pdf_path, title):
             'c1', fontName='Body', fontSize=20, leading=25,
             textColor=colors.HexColor('#0b3d63'), alignment=1)),
         Spacer(1, 5 * mm),
-        Paragraph('SIDM v19.2-F &nbsp;|&nbsp; Round 5 + n18 review response',
+        Paragraph('SIDM v19.2-F &nbsp;|&nbsp; Round 5 + n18 + n19 review response',
                   ParagraphStyle('c2', fontName='Body', fontSize=10.5, leading=14,
                                  textColor=colors.HexColor('#4a6076'), alignment=1)),
         Spacer(1, 3 * mm),
@@ -418,7 +421,7 @@ def build(md_path, pdf_path, title):
         canvas.saveState()
         canvas.setFont('Body', 7)
         canvas.setFillColor(colors.HexColor('#7b8b9b'))
-        canvas.drawString(17 * mm, 9 * mm, 'SIDM v19.2-F - Round 5 + n18 review response')
+        canvas.drawString(17 * mm, 9 * mm, 'SIDM v19.2-F - Round 5 + n18 + n19 review response')
         canvas.drawRightString(A4[0] - 15 * mm, 9 * mm, f'page {d.page}')
         canvas.setStrokeColor(colors.HexColor('#d3dde6'))
         canvas.setLineWidth(0.4)
@@ -439,8 +442,8 @@ if __name__ == '__main__':
     OUT = Path(sys.argv[1])
     OUT.mkdir(parents=True, exist_ok=True)
     JOBS = [
-        (sys.argv[2], sys.argv[3], 'Consolidated Fixes Report - v1.5'),
-        (sys.argv[4], sys.argv[5], 'Changed Code Companion - v1.3'),
+        (sys.argv[2], sys.argv[3], 'Consolidated Fixes Report - v1.6'),
+        (sys.argv[4], sys.argv[5], 'Changed Code Companion - v1.4'),
     ]
     for md_path, pdf_path, title in JOBS:
         n = build(md_path, pdf_path, title)
