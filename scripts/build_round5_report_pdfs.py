@@ -18,6 +18,20 @@ FONT NOTE (this is the part that matters for a scientific document):
   superscripts (AGENTS.md rule 27) rather than relying on Unicode super
   characters.
 
+  DejaVu has NO CJK glyphs. The report quotes the Chinese-language n18 review
+  (26 CJK ideographs), so a CJK face must be registered too and CJK runs
+  wrapped in it - otherwise those characters render as .notdef (a null byte
+  in the content stream, an empty box on the page) and the text is silently
+  LOST to the reader. SimHei (C:/Windows/Fonts/simhei.ttf) covers all 26.
+
+SILENT-LOSS NOTE:
+  Preformatted does NOT wrap. A code line longer than the frame is drawn past
+  the frame edge and CLIPPED - the characters vanish from the page and from
+  text extraction, with no error. The companion had 34 such lines (the
+  longest was 867 chars). Code lines are therefore hard-wrapped at CODE_WRAP
+  columns, breaking at a space when there is one so that every source
+  character is preserved.
+
 Usage:
     wsl -- bash -c "/home/lamkuenai/.venv/bin/python /mnt/c/Users/<u>/<this>.py"
 """
@@ -54,6 +68,20 @@ def find_dejavu():
     raise SystemExit('DejaVuSans.ttf not found')
 
 
+def find_cjk():
+    """Locate a CJK-capable face. DejaVu has no CJK glyphs at all."""
+    cands = [
+        '/mnt/c/Windows/Fonts/simhei.ttf',
+        '/mnt/c/Windows/Fonts/msyh.ttc',
+        '/usr/share/fonts/truetype/wqy/wqy-zenhei.ttc',
+        '/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc',
+    ]
+    for c in cands:
+        if Path(c).exists():
+            return c
+    return None
+
+
 def register_fonts():
     base = find_dejavu()
     mono = base.replace('DejaVuSans.ttf', 'DejaVuSansMono.ttf')
@@ -61,6 +89,13 @@ def register_fonts():
         mono = base
     pdfmetrics.registerFont(TTFont('Body', base))
     pdfmetrics.registerFont(TTFont('Mono', mono))
+    cjk = find_cjk()
+    if cjk:
+        # .ttc collections need a subfont index; simhei.ttf is a plain ttf
+        if cjk.lower().endswith('.ttc'):
+            pdfmetrics.registerFont(TTFont('CJK', cjk, subfontIndex=0))
+        else:
+            pdfmetrics.registerFont(TTFont('CJK', cjk))
     return base
 
 
@@ -97,6 +132,22 @@ INLINE_CODE = re.compile(r'`([^`]+)`')
 BOLD = re.compile(r'\*\*([^*]+)\*\*')
 ITAL = re.compile(r'(?<!\*)\*([^*\n]+)\*(?!\*)')
 
+# CJK ideographs + CJK punctuation + fullwidth forms. DejaVu has none of
+# these; without a fallback face they become .notdef and the text is lost.
+CJK = re.compile(r'([\u3000-\u303f\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff'
+                 r'\uff00-\uffef]+)')
+
+
+def has_cjk_font():
+    return 'CJK' in pdfmetrics.getRegisteredFontNames()
+
+
+def wrap_cjk(t):
+    """Wrap CJK runs in the CJK face so they are not rendered as .notdef."""
+    if not has_cjk_font():
+        return t
+    return CJK.sub(r'<font face="CJK">\1</font>', t)
+
 
 def inline(t):
     """Markdown inline -> reportlab mini-markup."""
@@ -113,7 +164,51 @@ def inline(t):
     t = ITAL.sub(r'<i>\1</i>', t)
     for i, s in enumerate(spans):
         t = t.replace(f'\x00{i}\x00', f'<font face="Mono" size="7.6">{s}</font>')
+    return wrap_cjk(t)
+
+
+# -------------------------------------------------------------- code wrapping
+
+# Preformatted does not wrap: a long line is drawn past the frame edge and
+# CLIPPED, so its tail silently disappears from the page. Hard-wrap instead,
+# preferring a space break so every source character survives.
+CODE_WRAP = 108
+
+# DejaVu Sans Mono lacks a few glyphs that DejaVu Sans has (verified:
+# U+226A 'much-less-than' is the only one in these documents). A glyph
+# missing from the Mono face becomes .notdef - a null byte in the content
+# stream and an empty box on the page. Substitute an ASCII equivalent.
+MONO_FALLBACK = {
+    '≪': '<<',   # much less than
+    '≫': '>>',   # much greater than
+}
+
+
+def fold_mono(t):
+    for k, v in MONO_FALLBACK.items():
+        t = t.replace(k, v)
     return t
+
+
+def wrap_code_lines(text, width=CODE_WRAP):
+    out = []
+    for line in text.split('\n'):
+        if len(line) <= width:
+            out.append(line)
+            continue
+        indent = len(line) - len(line.lstrip())
+        cont = ' ' * min(indent + 2, 12)
+        rest = line
+        first = True
+        while len(rest) > width:
+            cut = rest.rfind(' ', 0, width)
+            if cut <= 0:
+                cut = width
+            out.append(rest[:cut].rstrip())
+            rest = cont + rest[cut:].lstrip()
+            first = False
+        out.append(rest)
+    return '\n'.join(out)
 
 
 # ---------------------------------------------------------------- styles
@@ -190,7 +285,9 @@ def md_to_flow(md, st):
         # fenced code
         if s.startswith('```'):
             if in_code:
-                flow.append(Preformatted(ascii_fold('\n'.join(code_buf)), st['code']))
+                flow.append(Preformatted(
+                    fold_mono(wrap_code_lines(ascii_fold('\n'.join(code_buf)))),
+                    st['code']))
                 code_buf = []
                 in_code = False
             else:
@@ -249,13 +346,27 @@ def md_to_flow(md, st):
             i += 1
             continue
 
-        # paragraph: gather until blank/structural line
+        # paragraph: gather until blank/structural line.
+        # A continuation line may legitimately begin with '*' or '-' (e.g. a
+        # line wrapped mid-emphasis such as "*mechanism* - the band is ...").
+        # Only treat '*'/'-'/'+' as a list bullet when followed by a space;
+        # otherwise the line continues the current paragraph.
+        def is_block(t2):
+            if (not t2 or t2.startswith(('#', '|', '```', '>'))):
+                return True
+            if re.match(r'^\d+\.\s', t2):
+                return True
+            if re.match(r'^[-*+]\s', t2):        # real bullet
+                return True
+            if re.fullmatch(r'-{3,}|\*{3,}|_{3,}', t2):   # hr
+                return True
+            return False
+
         buf = [s]
         j = i + 1
         while j < len(lines):
             t2 = lines[j].strip()
-            if (not t2 or t2.startswith(('#', '|', '```', '>', '-', '*'))
-                    or re.match(r'^\d+\.\s', t2)):
+            if is_block(t2):
                 break
             buf.append(t2)
             j += 1
@@ -264,7 +375,9 @@ def md_to_flow(md, st):
 
     flush_table()
     if in_code and code_buf:
-        flow.append(Preformatted(ascii_fold('\n'.join(code_buf)), st['code']))
+        flow.append(Preformatted(
+            fold_mono(wrap_code_lines(ascii_fold('\n'.join(code_buf)))),
+            st['code']))
     return flow
 
 
