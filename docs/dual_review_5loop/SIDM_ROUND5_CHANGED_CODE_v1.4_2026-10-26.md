@@ -1117,6 +1117,11 @@ literal-count test and still be wrong. The `sentence_stops` helper exists becaus
 `[.!?]` scan treats `Eq.` and `Fig.` as sentence ends — the same class of bug that the
 abandoned `fix_glued_markup.py` prototype hit.
 
+**Phase count.** There are **three** phases, not four: `main()` runs exactly three passes
+(L484 historical adoption, L504 flanking repair, L515 marker repair). An earlier draft of the report
+and the script's own docstring said "four"; both were wrong and are corrected in v1.6 and in the
+script.
+
 **Note on the `word_starts` candidate set:** it proposes an insertion at *every* word start, so
 the candidate space is O(words) per paragraph and O(words²) in trials. That is why Phase 3 is
 scored by rendering and not by pattern matching — the renderer is the only thing that knows
@@ -1124,7 +1129,10 @@ whether a given insertion actually pairs the markers correctly.
 
 ### 6.3 The five hard invariants
 
-The script **aborts rather than writing the file** if any invariant fails:
+The script **aborts rather than writing the file** if invariants 1–4 fail. Invariant 5 (span sanity)
+is **advisory**: the script prints `WARN invariant 5: N bold spans cross …` and lists the offending
+spans, but the write is gated only on `if lit or not stale_ok` — i.e. on invariants 3 and 4 — so a
+non-zero span count is *reported*, not *enforced*:
 
 1. **Token preservation** — the word-token sequence of the document is identical before and after.
 2. **Text preservation** — the non-marker, non-whitespace text is identical before and after.

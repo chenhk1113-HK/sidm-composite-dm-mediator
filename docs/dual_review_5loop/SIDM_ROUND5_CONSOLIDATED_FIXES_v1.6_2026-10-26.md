@@ -46,7 +46,7 @@ identify a fix on its own — the section number is part of the identifier.
 |---|---|---|---|
 | **Local review** (Strata / `qwen3.8-flash-next-iq3_xxs`) | `F2` (plus `ERR L…` / `Q L…`) | §8 | the reviewer's own finding IDs in `docs/LOCAL_REVIEW_R5.md` |
 | **n18 review** (Chinese-language) | `F1`–`F7` | §13.1, §13.3 | the n18 review's 3 priority items + the fixes they prompted |
-| **Nemotron audit** | `F8`–`F9` | §13.7 | the Nemotron "Finding 1" mixed-anchor defect |
+| **Nemotron audit** | `F8`–`F9` | **§13.7** | the Nemotron "Finding 1" mixed-anchor defect. (Note: `F8`/`F9` are *defined* in §13.7 but *also referenced* in §14.2 and §14.3 — they are the same fixes, not a second set.) |
 | **Independent reviewer audit** | `F10`–`F16` | §14.3 | the σ_HL / stale-JSON defect class (§14.1) |
 | **Third reviewer pass** | `F17`–`F22` | §15 | the six further defects of §15 |
 
@@ -54,9 +54,15 @@ identify a fix on its own — the section number is part of the identifier.
 
 - §8's `F2` is the *local review's* finding F2. It is **not** §13's F2 (the n18 `cm²/g.,`
   punctuation fix). They are unrelated defects.
-- `F1`–`F7` in §13 mean the **n18** set. `F8`–`F9` in §13.7 mean the **Nemotron** set.
-  `F10`–`F16` in §14 mean the **independent-reviewer** set. `F17`–`F22` in §15 mean the
+- `F1`–`F7` in §13 mean the **n18** set. `F8`–`F9` in **§13.7** mean the **Nemotron** set.
+  `F10`–`F16` in §14.3 mean the **independent-reviewer** set. `F17`–`F22` in §15 mean the
   **third-reviewer** set.
+- The fix IDs `F1`–`F22` are **contiguous** and not ambiguous *among themselves* — the split above
+  is by which review round produced them, and §14.3 continues to reference `F8`/`F9`/`F14` rather
+  than redefining them.
+- A caveat on the §13.1 adjudication table: it ties fixes to n18 findings with an **offset**
+  (n18 finding 3 → F4, 4 → F5, 5 → F6, 6 → F7), because `F3` is an extra repair inside the same
+  sentence as `F1`/`F2`. So `Fn` ≠ n18-finding-`n` for n ≥ 3.
 - The phrase "F1–F22" (front matter, §16.3) means **the union of all four namespaces** — a
   shorthand for "every fix recorded in this report", not a single numbered sequence.
 - When a fix is cited outside its defining section, cite it as **§section.Flabel**
@@ -358,13 +364,18 @@ pre-edit copy.
 
 | # | Reviewer finding | Verdict |
 |---|---|---|
-| F2 | ceiling labels on L36 | **OK** — the stray trailing `[Q]` removed; the "9.85" arithmetic flagged |
+| **F2** (local-review label) | ceiling labels on L36 | **OK** — the stray trailing `[Q]` removed; the "9.85" arithmetic flagged |
 | ERR L36 | 27–49× unsupported by excerpt | **VALID**, proposed lower end **superseded** (14×, not 22×) |
 | ERR L117 | 0.5–2.5 conflicts with 5.43/4.39 | **VALID and worse than stated** — stale band, not a missing assumption; line ref off by one |
 | Q L117 | "7 of 8 halos" vs retracted "7 of 8 channels" | **ANSWERED** — different quantities; and the count is 0 of 8 |
 | ERR L145 | hierarchy contradiction | **CONFIRMED**, sharper — σ_1 = 1.0 is inside "σ_1 ≲ 3.0" |
 | Q L189 | 1/σ_peak assumption unstated | **CORRECT**, assumption validated to ≤1.4% |
 | Q L2210 | archival ranges | **ANSWERED** — both reproducible from the canonical table; the stale one was 115–460× |
+
+**Namespace note:** the labels in this table are the **local review's own finding IDs** (from
+`docs/LOCAL_REVIEW_R5.md`, where they appear as `[OK] F2`, `[ERR] …`, `[Q] …`). They are **not** the
+report's fix IDs: the fix-ID `F2` in §13 is a different defect (the `"cm²/g.,"` doubled punctuation).
+See the "Finding-number namespaces" table in the front matter.
 
 **Two of the reviewer's own supporting calculations were wrong:**
 
@@ -463,7 +474,7 @@ recoverable/unrecoverable boundary (stated precisely in v1.6, per the n19 review
 | part of the n18 review | status |
 |---|---|
 | severity table, **row 7** — `7  diff 单行长段落可读性差 低 考虑分行 diff 或高亮` | **recoverable** (it is the table's final row) |
-| severity table, **findings 1–6** | **NOT recoverable** — the rows are absent from the package; the file holds only 23 text nodes / 1 527 characters |
+| severity table, **findings 1–6** | **NOT recoverable** — the rows are absent from the package; the file holds only 23 text nodes / 1 527 characters (after XML-entity unescaping). The file's last extractable text is `|σ_HL| 10}'7   diff 单行长段落可读性差   低   考虑分行 diff 或高亮` — the dangling `|σ_HL| 10}'` is itself the truncation artefact |
 | closing **总体判断** section — the 3 priority items | **recoverable and complete** — these are the actionable set addressed here |
 | the two supporting claims later corrected as **C1** and **C2** | **recoverable** — quoted inline in the text below |
 
@@ -969,18 +980,25 @@ gap **CG-2**.
 
 ### 16.6 The markup repair tool (built, verified, not applied)
 
-`scripts/fix_markup.py` is a four-phase repair with five hard invariants, each of which **aborts
-the whole operation rather than writing a file** if violated:
+`scripts/fix_markup.py` is a **three-phase** repair with five hard invariants. Invariants 1, 2, 3
+and 4 **abort the whole operation rather than writing a file** if violated; invariant 5 is a
+printed warning and does not block the write:
 
 1. **Token preservation** — the word-token sequence is identical before and after.
 2. **Text preservation** — the non-marker, non-whitespace text is identical before and after.
 3. **Renderer oracle** — zero literal `**` survives CommonMark + GFM-table rendering.
 4. **Stale-value inertness** — the occurrence count of 19 known-stale markers is unchanged.
 5. **Span sanity** — no rendered bold span crosses a code span, a table pipe, or a paragraph break.
+   *(This one is advisory: the script prints `WARN invariant 5: N bold spans cross …` and lists the
+   offending spans, but the write is gated only on invariants 3 and 4 — `if lit or not stale_ok`.
+   So a non-zero span count is reported, not enforced.)*
 
 Phases: (1) historical layout adoption from the paper's own git history, restricted to revisions
 whose non-marker text is *identical* — a provably whitespace-and-marker-only substitution;
 (2) cell-aware flanking repair; (3) renderer-validated marker re-insertion and fused-run splitting.
+*(There are three phases, not four — `fix_markup.py` runs exactly three passes in `main()`
+(L484, L504, L515). An earlier draft of this section and the script's own docstring said "four";
+both were wrong and are corrected here and in the script.)*
 
 **Measured result: 179 -> 5-8 literals, 47 of 54 damaged paragraphs fully clean**, with invariants
 1, 2 and 4 green throughout. The remaining handful are paragraphs whose text was edited *after*
@@ -1086,11 +1104,24 @@ is uncovered.
 | **CG-2** | a **resurrected stale value** in the prose (a value that a later fix removed, reintroduced by a later edit) | this is exactly how the invalid `ef645ce` commit passed the gate: it reintroduced `-0.47`, `0.5–2.5 cm²/g` and `7 of 8` and the gate said `ALL GATES PASSED` | **OPEN** | a paper-level regression test that asserts the **absence** of known-stale strings, complementing `test_sweep_json_not_stale.py` (which covers the *data* side, not the *prose* side) |
 | **CG-3** | the **dSph σ/m table** (§3, 8 rows) and the factor ranges derived from it | the paper's headline quantitative table is not read by the gate at all | **OPEN** | a test pinning the 8 σ/m rows to `channels_v03.sigma_m_at_v` + `constants.py` (the recomputation exists in §9 and is currently manual) |
 | **CG-4** | the **literal `**` markup class** — a presentational defect class the gate ignores | 70 lines still render literal `**`; a future *scientific* edit that loses emphasis would be invisible to the gate | **OPEN (deferred)** | finish the deferred markup pass (§16.6) and add a render check to the gate |
+| **CG-5** | the gate's summary line is **not document-scoped** | `ALL GATES PASSED — safe to tag a new release.` reads as a whole-document verdict, but the gate only asserts the claims it enumerates. It passed the invalid paper (§16.3) and would pass a paper with an untracked stale value. | **OPEN (documented, not fixable without changing the gate's contract)** | re-scope the summary line to name what was checked, or add a "no other layer covers this document" assertion |
+| **CG-6** | the residual **~0.03 % σ/m** difference between the paper's formula and the `sigma_m_at_v` helper | a small implementation discrepancy that is *not* a round-5 or n18 finding; it was flagged and deliberately not chased | **OPEN (flagged, awaiting a decision)** | reconcile the paper's σ/m(v) expression with the helper's implementation in a dedicated pass |
+| **CG-7** | the **§10 L98 band**: the paper quotes σ_eff `0.03–0.10 cm²/g`; the recomputed phase44 dSph/UFD range is `0.032–0.155` | the quoted band understates the top end (it covers v = 5–15 but omits v = 3.0 at 0.155). It is a different scope from the 8-halo sweep band, and narrowing it changes a published observational statement | **OPEN (flagged, awaiting the user's decision)** | a user decision on whether to restate the phase44 band |
+| **CG-8** | two pre-existing prose typos the gate does not read: `does not..` (paper L974) and `curves .**` (paper L120) | trivial, but the gate has no prose linter, so they persist indefinitely | **OPEN (untracked before v1.6)** | a typo sweep; both are outside the §2.6a region the fixes touched, so they need their own pass |
 
 **Consequence to carry forward (unchanged from §14.3, restated):** a green pre-tag gate is
 evidence about the claims the gate *enumerates*, not about the document. The gate's summary line
 (`ALL GATES PASSED — safe to tag a new release.`) must not be quoted as if it covered a defect
 the gate does not read. CG-1 is the proof: it was open while the gate was green.
+
+**Extended beyond the review's list.** The register above was cross-checked against an
+independent audit of this document (a separate pass, 2026-10-26), which found four further gaps
+this report had mentioned only in prose or not at all. They are now tracked as **CG-5** (the gate's
+summary line is not document-scoped), **CG-6** (the residual ~0.03 % σ/m formula-vs-helper
+difference), **CG-7** (the §10 L98 phase44 band, `0.03–0.10` vs the recomputed `0.032–0.155`) and
+**CG-8** (two pre-existing prose typos). The same audit corrected two factual statements in this
+report — the repair tool has **three** phases, not four, and invariant 5 (span sanity) is
+**advisory**, not aborting — both now fixed, and the script's own docstring corrected with them.
 
 ### 17.4 The numbering-scope declaration
 

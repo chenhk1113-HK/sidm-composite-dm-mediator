@@ -34,7 +34,7 @@ THE DEFECT
   pair that straddles a cell boundary therefore cannot be emphasis in either
   cell. Table rows must be repaired CELL BY CELL.
 
-THE FIX (four phases, each renderer-validated)
+THE FIX (three phases, each renderer-validated)
   PHASE 1 - HISTORICAL LAYOUT ADOPTION.
     The paper's own git history is the ground truth for emphasis layout. For
     every damaged paragraph, the revision of the paper whose NON-MARKER,
