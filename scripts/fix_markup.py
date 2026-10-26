@@ -104,6 +104,10 @@ STALE_MARKERS = (
     '-0.47', '0.5–2.5 cm²/g', '7 of 8', '115–460', '115-460', '0.256-1.518',
     '0.257-1.589', '2.845', '16.865', '0.0318', '0.0931', '1.784e-13',
     '2.840e-13', '1.836e-13', '29.4', '65.49', '136–246', '27–49', '14.2',
+    # F23 (2026-10-26): these were stale-value tripwires that have now been
+    # CORRECTED in the paper, so their counts are 0 and must stay 0. Listing
+    # them keeps a future re-introduction detectable.
+    '2.83e-13', '2.84e-13', '65.91',
 )
 
 MARKER = re.compile(r'\*+')

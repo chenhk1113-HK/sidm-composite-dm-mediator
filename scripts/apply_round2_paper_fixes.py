@@ -33,7 +33,12 @@ def hier(sigma_m):
     return ratio, 1.0 / math.sqrt(ratio)
 
 r100, g100 = hier(0.052)      # L143's stated anchor: v=100, background only
-r28d5, g28d5 = hier(65.49)    # L144's stated anchor: v=28 at sigma_1 = 1.0 (L142)
+# L144's anchor: v=28 at sigma_1 = 1.0. The canonical value is 65.91085
+# (data/results/t235_d5_width_test.json, sigma_1=1.0 -> Cloud-9). It was
+# previously 65.49, which embedded the RETRACTED a_slope=1.0 baseline term --
+# fixed as F23 (see report section 17.7).
+SIGMA_M_V28_SIGMA1_1 = 65.91085124460028
+r28d5, g28d5 = hier(SIGMA_M_V28_SIGMA1_1)
 r28can, g28can = hier(174.0)  # headline anchor: sigma_peak = 174 (L38 / L2104-2107)
 
 # sanity asserts on the computed values (these are the paper's own anchors)
@@ -91,7 +96,7 @@ FIXES.append(("F4 L143 v=100 hierarchy", old, new, 1))
 
 old = ("- Using \u03c3_DM-DM at v = 28 (Cloud-9): ratio \u03c3_DM-DM/\u03c3_SI = 6.5\u00d710\u2074\u2077 "
        "\u2192 g_N/g_\u03c7 < 1.2\u00d710\u207b\u00b2\u2074")
-new = (f"- Using \u03c3_DM-DM at v = 28 (Cloud-9, \u03c3/m = 65.49 cm\u00b2/g at \u03c3_1 = 1.0): "
+new = (f"- Using \u03c3_DM-DM at v = 28 (Cloud-9, \u03c3/m = {SIGMA_M_V28_SIGMA1_1:.2f} cm\u00b2/g at \u03c3_1 = 1.0): "
        f"ratio \u03c3_DM-DM/\u03c3_SI = {r28d5:.2e} \u2192 g_N/g_\u03c7 < {g28d5:.2e}")
 FIXES.append(("F4 L144 v=28 hierarchy", old, new, 1))
 
@@ -99,7 +104,7 @@ old = ("**7.5\u00d710\u207b\u00b9\u00b2 was anchored to \u03c3_DM-DM ~ 1 cm\u00b
        "shifts.**The hierarchy constraint becomes much more restrictive (~10\u207b\u00b2\u2074 instead of "
        "~10\u207b\u00b9\u00b9).")
 new = (f"**The 7.5\u00d710\u207b\u00b9\u00b2 value was anchored to \u03c3_DM-DM ~ 1 cm\u00b2/g; under \u03c3_1 = 1.0 the "
-       f"anchor shifts to \u03c3/m = 65.49 cm\u00b2/g at v = 28.**The hierarchy constraint is "
+       f"anchor shifts to \u03c3/m = {SIGMA_M_V28_SIGMA1_1:.2f} cm\u00b2/g at v = 28.**The hierarchy constraint is "
        f"g_N/g_\u03c7 < {g28d5:.2e} (v = 28) and < {g100:.2e} (v = 100, background only) \u2014 i.e. the "
        f"v = 28 bound is slightly LOOSER than the \u03c3_1 = 4.4 headline "
        f"g_N/g_\u03c7 < {g28can:.2e}, not more restrictive. (Corrected: the previously quoted ratios "

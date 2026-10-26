@@ -23,6 +23,14 @@ checking it surfaced the three real builder defects, §17.2). Three of the revie
 supporting calculations were checked against source: **2 agree**, and **1 has a wrong formula
 but the right conclusion** (§17.5).
 
+**Outcome (independent verification, v1.6):** three independent audits of this deliverable each
+found something real that the author's own reading had missed — two **documentation** errors (the
+repair tool has three phases, not four; invariant 5 is advisory, not aborting) and one **data**
+error in the paper: **F23**, a stale `a_slope = 1.0` value (σ/m(28) = 65.49 at σ_1 = 1.0) that
+had been dismissed as a false positive in §14.4 and is now **fixed in the paper** (§17.7). The
+dismissal was self-refuting; the corrected value is 65.91, with the ratio and the hierarchy bound
+moving with it. New tracked gap **CG-9** records why the 7/7 gate never saw it.
+
 **Outcome (Round 5, v1.0):** 6 paper defects + 1 generator (root-cause) defect + 1 review-document
 defect class = **8 fixes applied**, all verified. 2 additional pre-existing issues found and left
 alone (§10 L98 band; §9 Table-walker — both confirmed pre-existing, not caused by these edits).
@@ -288,14 +296,14 @@ is the charitable reading; the plain reading is a contradiction.
 |---|---|---|
 | 4.4 | 166.018 | 1.784e-13 |
 | 3.0 | 156.655 | 1.836e-13 |
-| 1.0 | 65.49 | 2.840e-13 |
+| 1.0 | 65.911 | 2.831e-13 |
 
 Narrowing σ_1 **lowers** σ/m at v = 28 and therefore **loosens** the allowed g_N/g_χ — a larger
 permitted g_N/g_χ is a *deeper* dark-sector hierarchy, not a tighter constraint on it. The
 paper now states the three computed bounds and the direction of the shift.
 
 **Anchor bookkeeping (found during verification):** the paper's headline `1.74e-13` is quoted at
-the **resonance-peak** anchor (σ_peak = 174 cm²/g at v = 29.4), whereas `2.84e-13` is quoted at
+the **resonance-peak** anchor (σ_peak = 174 cm²/g at v = 29.4), whereas `2.83e-13` is quoted at
 the **v = 28** anchor — so the printed pair compares two different anchors. Like-for-like at
 v = 28 the baseline is 1.78e-13. **The direction is unchanged either way** (D-5 looser), so the
 conclusion stands; the paper now states this explicitly rather than leaving the mismatch
@@ -506,7 +514,7 @@ fixed, but attributing it to Round 5 would send the next reviewer after the wron
 `"the ratio derivation changes and "`, deleting the trailing `"The σ_1 = "` of the following
 sentence and leaving `"4 baseline headline value"`. The restoration used is
 `"the σ_1 = 4.4 baseline headline value"` — the paper's own σ₁ = 4.4 baseline, consistent with
-the computed like-for-like bounds in the same paragraph (1.78e-13 / 1.84e-13 / 2.84e-13).
+the computed like-for-like bounds in the same paragraph (1.78e-13 / 1.84e-13 / 2.83e-13).
 
 **C2 — the docstring gap is not a rounding difference.** n18 described `"1.589"` vs `"1.518"` as
 `小数舍入级别` (decimal-rounding-level). It is not. `0.09 × 16.865226 = 1.517870` → **1.518**;
@@ -711,11 +719,16 @@ Restoring both files byte-identically returns 4/4 green.
 
 ### 14.4 Reviewer findings adjudicated as FALSE POSITIVES
 
-- **Reviewer A #2 — "σ/m(28) = 65.49 is ~0.6 % low vs the generator formula".** Refuted.
-  Inverting the formula gives an implied width of `w = 0.99672 ≈ 1.0 km/s`; the paper's
-  σ_1 = 1.0 km/s case is exactly `0.052·(28/100)^-1.93 + 174·exp(-(28-29.4)²/2) = 0.6067 +
-  65.3041 = 65.91` — and 65.49 is the value at the stated width once the baseline term is
-  evaluated at the same anchor. No defect.
+- ~~**Reviewer A #2 — "σ/m(28) = 65.49 is ~0.6 % low vs the generator formula".** Refuted.~~
+  **WITHDRAWN — Reviewer A was right and this dismissal was wrong** (see §17.7, finding F23).
+  The original reasoning was self-defeating: it computed the canonical value
+  `0.052·(28/100)^-1.93 + 174·exp(-(28-29.4)²/2) = 0.6067 + 65.3041 = 65.9109` and then
+  asserted, in the same sentence, that 65.49 was the correct value "once the baseline term is
+  evaluated at the same anchor". Those cannot both be true. **65.49 = 0.052·(28/100)^-1.0 +
+  65.3041 = 65.4899** — i.e. it embeds the **retracted `a_slope = 1.0`** baseline term, not the
+  canonical `a_slope = 1.93` one. The paper's own "like-for-like v = 28" list had two canonical
+  values (166.0, 156.7) and one stale one (65.49) in the same clause, which is the tell.
+  **F23 fixes the paper.** The other three items in this section stand.
 - **Reviewer A #3 / Reviewer B claim 6 — "the companion shows literal `\n` in the JSON diff".**
   Refuted as a fidelity issue. The true `git diff` shows the same `\n` because the JSON
   string *contains* an escaped newline; any faithful diff renders it that way.
@@ -723,7 +736,7 @@ Restoring both files byte-identically returns 4/4 green.
   (`(0.0318 − 0.09·2.845457)/0.42 = −0.53403`), which is what confirmed the finding.
 - **Reviewer B claim 3 — "7.5×10⁻¹² is inconsistent with the 1.78e-13 v = 28 bounds".**
   Not a defect. They are different regimes: 7.5×10⁻¹² is the σ_1 = 4.4 baseline headline
-  (anchored to σ_DM-DM ~ 1 cm²/g), while 1.78e-13/1.84e-13/2.84e-13 are the σ_1 = 1.0
+  (anchored to σ_DM-DM ~ 1 cm²/g), while 1.78e-13/1.84e-13/2.83e-13 are the σ_1 = 1.0
   re-anchoring at v = 28. The sentence states the re-anchoring; comparing across the two
   regimes produces the reviewer's factor of 42. Legitimate readability note only.
 
@@ -818,7 +831,7 @@ legitimate criticism of my own test docstrings.
 | F18 | L120: `σ/m = 2.85–18 cm²/g` — the canonical max is **16.865**, and the same paper says `2.85–16.9` elsewhere | **REAL** (stale upper end; introduced by `449c57f`, R88(32)) | F18 fixed: `2.85–16.9` |
 | F19 | L120: `The F. H. assumption` — typo for `f_H` | **REAL** | F19 fixed |
 | F20 | L109 + L115: `0.297² × 2.85 = 0.252` — that product is **0.2514** (0.251 at 3 dp) | **REAL** (arithmetic error, both places) | F20 fixed: `0.297² × 2.845 = 0.251`, table cell `0.251 cm²/g` |
-| F21 | L151: `2.84e-13 vs 1.74e-13 at v = 28` — **1.74e-13 is the σ₁ = 4.4 headline**, not a v = 28 value; the like-for-like v = 28 baseline is **1.78e-13** | **REAL** (mislabelled anchor; the same paragraph states it correctly elsewhere) | F21 fixed: `2.84e-13 at v = 28 vs the σ₁ = 4.4 headline 1.74e-13` |
+| F21 | L151: `2.84e-13 vs 1.74e-13 at v = 28` (the pre-fix value; now 2.83e-13 after F23) — **1.74e-13 is the σ₁ = 4.4 headline**, not a v = 28 value; the like-for-like v = 28 baseline is **1.78e-13** | **REAL** (mislabelled anchor; the same paragraph states it correctly elsewhere) | F21 fixed: `2.84e-13 at v = 28 vs the σ₁ = 4.4 headline 1.74e-13` |
 | F22 | The test docstrings claim "fails if EITHER side moves" — the comparison is at *displayed* precision and cannot detect a stale JSON | **REAL** (overstated guarantee) | F22 fixed: both docstrings now state the precision limit and the stale-JSON limit explicitly |
 
 ### 15.1 The guard for the gap the reviewer correctly identified
@@ -1108,6 +1121,7 @@ is uncovered.
 | **CG-6** | the residual **~0.03 % σ/m** difference between the paper's formula and the `sigma_m_at_v` helper | a small implementation discrepancy that is *not* a round-5 or n18 finding; it was flagged and deliberately not chased | **OPEN (flagged, awaiting a decision)** | reconcile the paper's σ/m(v) expression with the helper's implementation in a dedicated pass |
 | **CG-7** | the **§10 L98 band**: the paper quotes σ_eff `0.03–0.10 cm²/g`; the recomputed phase44 dSph/UFD range is `0.032–0.155` | the quoted band understates the top end (it covers v = 5–15 but omits v = 3.0 at 0.155). It is a different scope from the 8-halo sweep band, and narrowing it changes a published observational statement | **OPEN (flagged, awaiting the user's decision)** | a user decision on whether to restate the phase44 band |
 | **CG-8** | two pre-existing prose typos the gate does not read: `does not..` (paper L974) and `curves .**` (paper L120) | trivial, but the gate has no prose linter, so they persist indefinitely | **OPEN (untracked before v1.6)** | a typo sweep; both are outside the §2.6a region the fixes touched, so they need their own pass |
+| **CG-9** | the **hierarchy-bound chain** — σ/m(28) at σ_1 = 1.0, the ratio σ_DM-DM/σ_SI, and the g_N/g_χ bound it implies | the gate reads none of these three, so a stale σ/m propagates into a headline bound undetected. This is exactly how **F23** survived (§17.7): the paper's 65.49 was a retracted `a_slope = 1.0` value, and the 2.84e-13 bound derived from it. | **OPEN (F23 fixed the instance; the class is uncovered)** | add all three quantities to the standing-numbers table so the gate checks them |
 
 **Consequence to carry forward (unchanged from §14.3, restated):** a green pre-tag gate is
 evidence about the claims the gate *enumerates*, not about the document. The gate's summary line
@@ -1138,7 +1152,7 @@ before (§8, §14.2).
 
 | n19 claim | verdict | evidence |
 |---|---|---|
-| **Hierarchy bounds.** σ₁ = 4.4 → σ/m(28) = 166.018 → `g_N/g_χ < 1.784e-13`; σ₁ = 3.0 → 156.655 → `1.836e-13`; σ₁ = 1.0 → 65.49 → `2.840e-13` | **AGREES** | recomputed with `g_N/g_χ < 1/√((σ/m)·(m_χ/σ_SI))`, `m_χ = 1.78e-24 g`, `σ_SI = 9.4e-48 cm²`: √(166.018 × 1.8936e23) = 5.607e12 → `1.784e-13`; √(65.49 × 1.8936e23) = 3.521e12 → `2.840e-13`. All three match to 4 s.f., and the monotonicity conclusion (narrowing σ₁ lowers σ/m(28) and loosens the bound) is correct. |
+| **Hierarchy bounds.** σ₁ = 4.4 → σ/m(28) = 166.018 → `g_N/g_χ < 1.784e-13`; σ₁ = 3.0 → 156.655 → `1.836e-13`; σ₁ = 1.0 → 65.49 → `2.840e-13` | **AGREES on the formula — but the third INPUT was wrong** | The *formula* the reviewer used is right and the first two values reproduce exactly. The third input, 65.49, is the **stale `a_slope = 1.0`** value, not the canonical 65.911 (§17.7, F23). The reviewer was checking a wrong input and got a right-looking answer from it; the bound is now 2.831e-13. | recomputed with `g_N/g_χ < 1/√((σ/m)·(m_χ/σ_SI))`, `m_χ = 1.78e-24 g`, `σ_SI = 9.4e-48 cm²`: √(166.018 × 1.8936e23) = 5.607e12 → `1.784e-13`; √(65.49 × 1.8936e23) = 3.521e12 → `2.840e-13`. All three match to 4 s.f., and the monotonicity conclusion (narrowing σ₁ lowers σ/m(28) and loosens the bound) is correct. |
 | **F17.** `0.09 × 2.85 = 0.257` should be `0.09 × 2.845 = 0.256` | **AGREES** | `0.09 × 2.845 = 0.25605` → 0.256; `0.09 × 2.85 = 0.2565` → 0.257. The paper's text is `f_H² × σ/m = 0.09 × 2.845 = 0.256 cm²/g` — 0.09 is the **squared** f_H (f_H = 0.30), so the quantity is right and the fix was right. |
 | **F20.** "0.2972 × 2.845 = 0.2510 → 0.251" | **RIGHT CONCLUSION, WRONG FORMULA — and the wrong f_H too** | As written, `0.2972 × 2.845 = 0.8455`, **not** 0.2510. The quantity the paper computes is `f_H² × σ/m`, and the paper's canonical f_H is **0.297** (`constants.py`) — not 0.2972. With the paper's own value: `0.297² × 2.845 = 0.088209 × 2.845 = 0.250955` → **0.251**. So the paper's fixed value 0.251 is correct, but n19's written formula is wrong twice over: the multiplier form (it drops the square) and the f_H (0.2972 vs 0.297). (n19's own prose for F20 earlier in the same review states it correctly as `0.297² × 2.85`.) Recorded because a formula that is off by a factor of f_H is exactly the kind of error that mis-generalises to other halos, and because 0.2972 is close enough to 0.297 to look right while still being a different number. |
 
@@ -1162,3 +1176,102 @@ now says so explicitly so the two numbers cannot be read as a contradiction.
   invalid `ef645ce` commit through.
 - The markup pass is **still deferred** and the paper is **still not claimed** to render with
   zero literal `**` (§16.7 stands).
+- **CG-9 is open.** F23 fixed one stale value; the gate still does not read the hierarchy-bound
+  chain, so a second stale value in that family would pass. The paper is **not** claimed to be
+  free of further stale `a_slope = 1.0`-form values — only that the five occurrences of 65.49 and
+  the six derived bound/ratio instances have been recomputed and verified.
+- The §14.4 correction is **not** a claim that the other three "false positive" verdicts are
+  wrong. Only the 65.49 dismissal is withdrawn; the other three stand as adjudicated.
+
+### 17.7 F23 — a stale `a_slope = 1.0` value in the paper, found by independent verification
+
+**This is a genuine paper defect, and it was previously dismissed as a false positive. The dismissal
+was wrong, and the error was mine.**
+
+**How it was found.** An independent verification pass (a separate agent, cross-checking the n19
+review's own numeric claims against the canonical data) flagged that `σ/m(28) = 65.49` at
+σ_1 = 1.0 could not be reproduced from any canonical source, while the two sibling values in the
+same sentence could. That was the right question to ask and I had not asked it.
+
+**The value, and where it comes from.** The paper quotes σ/m(28) = 65.49 cm²/g at σ_1 = 1.0 km/s
+in five places (paper L142, L148, L150, L151 ×2). The canonical formula is
+`σ/m(v) = σ₀·(100/v)^a + σ_peak·exp(−(v−v_target)²/(2σ₁²))` with `σ₀ = 0.052`, `a = a_slope`,
+`σ_peak = 174`, `v_target = 29.4`. At v = 28, σ_1 = 1.0:
+
+| baseline exponent | baseline term | + Gaussian (65.3041) | matches the paper's 65.49? |
+|---|---|---|---|
+| `a_slope = 1.93` (**canonical**) | 0.6067 | **65.9109** | no |
+| `a_slope = 1.0` (**retracted**) | 0.1857 | **65.4899** | **yes, exactly** |
+
+So **65.49 embeds the retracted `a_slope = 1.0` baseline term** — the same pre-`79edeae` form that
+Round 5's root-cause fix removed from the numerical pipeline. It is a *stale-value* defect of
+exactly the class this project has been hunting since F1.
+
+**The corroborating evidence — all three in one clause.** The paper's own "like-for-like v = 28"
+list reads:
+
+> σ_1 = 4.4 → σ/m(28) = 166.0 → g_N/g_χ < 1.78×10⁻¹³; σ_1 = 3.0 → σ/m(28) = 156.7 →
+> g_N/g_χ < 1.84×10⁻¹³; σ_1 = 1.0 → σ/m(28) = 65.49 → g_N/g_χ < 2.84×10⁻¹³
+
+Two canonical values and one stale value, side by side, in a list whose whole purpose is
+like-for-like comparison. The canonical generator (`data/results/t235_d5_width_test.json`,
+`sigma_1 = 1.0` → Cloud-9) gives **65.91085124460028**, matching 166.01808 and 156.65515 in the
+same file to 5 decimal places. The paper's 65.49 appears in **no** canonical JSON.
+
+**Provenance.** `git log -S 65.49` on the paper: introduced by `76e8e80` (R82, 2026-10-03), in a
+revision that still carried `a_slope = 1.0` in the paper's own formula statements. `79edeae`
+("R88 full pre-submission: a_slope=1.93 propagation") then propagated `a_slope = 1.93` into the
+*numerical* pipeline but not into this prose value. `09f012a` (Round 2) **added three more
+occurrences**, propagating the stale number into new text. This is the same failure mode as F1–F7:
+a narrative string that outlives the number it was computed from.
+
+**Why my §14.4 dismissal was wrong.** It read:
+
+> "the paper's σ_1 = 1.0 km/s case is exactly `0.052·(28/100)^-1.93 + 174·exp(-(28-29.4)²/2) =
+> 0.6067 + 65.3041 = 65.91` — and 65.49 is the value at the stated width once the baseline term is
+> evaluated at the same anchor. No defect."
+
+That sentence computes 65.91 and then asserts 65.49 in the same breath. The two are
+incompatible: "the baseline term evaluated at the same anchor" *is* the 0.6067 term, which gives
+65.91. The only way to reach 65.49 is the `a_slope = 1.0` baseline — which is precisely the defect.
+**The dismissal refuted itself**, and the "0.6 %" that Reviewer A called "low" is the 0.64 %
+difference between 65.4899 and 65.9109.
+
+**The fix (F23), and the values that move with it.** The stale σ/m propagates into a ratio and a
+hierarchy bound, so all three move together:
+
+| quantity | stale (paper, before F23) | canonical (after F23) |
+|---|---|---|
+| σ/m(28) at σ_1 = 1.0 | 65.49 | **65.91** |
+| ratio σ_DM-DM/σ_SI | 1.24e+25 | **1.25e+25** |
+| g_N/g_χ < 1/√((σ/m)·(m_χ/σ_SI)) | 2.84e-13 | **2.83e-13** |
+
+Paper edits (5 × σ/m, 1 × ratio, 6 × bound, all anchored to exactly one occurrence each):
+
+- L142 `σ/m = 65.49 cm²/g` → `65.91 cm²/g` (per-channel list)
+- L148 `σ/m at v = 28 is 65.49 cm²/g` → `65.91 cm²/g`
+- L150 `σ/m = 65.49 cm²/g at σ_1 = 1.0): ratio … = 1.24e+25 → g_N/g_χ < 2.84e-13` → `65.91 … 1.25e+25 … 2.83e-13`
+- L151 `the anchor shifts to σ/m = 65.49 cm²/g` → `65.91 cm²/g`, and `g_N/g_χ < 2.84e-13 (v = 28)` → `2.83e-13`
+- L151 `σ_1 = 1.0 → σ/m(28) = 65.49 cm²/g → g_N/g_χ < 2.84×10⁻¹³` → `65.91 … 2.83×10⁻¹³`
+- L151 §10.7 "Primary value" restatement: `2.84e-13` → `2.83e-13` (3 × `2.84e-13`, 3 × `2.84×10⁻¹³` in total)
+
+**Verification after F23:** `65.49` = 0 occurrences, `2.84e-13`/`2.84×10⁻¹³` = 0, `1.24e+25` = 0;
+`65.91` × 5, `2.83e-13` × 3, `2.83×10⁻¹³` × 3, `1.25e+25` × 1. Paper line count (2 383), word
+tokens (61 968) and decimal-number line count (1 034) are all **unchanged** — the fix moves values
+in place and adds no prose. Stale-count baseline unchanged: `-0.47` = 0, `0.5–2.5 cm²/g` = 1,
+`7 of 8` = 6. The three like-for-like values are now mutually consistent: 166.0, 156.7, 65.91.
+
+**What this says about the process.** Three independent audits of this deliverable have now each
+found something real that my own reading had missed: the two-phase/three-phase error, the
+invariant-5 abort claim, and now this. The first two were *documentation* errors; this one is a
+**data** error in the paper, of the same class as F1–F7, and it survived a 7/7 gate because
+`audit_claims.py` does not read this quantity (it is not in `CLAIM_MAP` and not in the
+standing-numbers table) — it is exactly tracked gap **CG-9** below. A green gate said nothing
+about this number, and a self-review that trusted its own arithmetic said something *false* about
+it. The lesson is not "audit more"; it is that **a dismissal must reproduce the value it claims to
+dismiss**. §14.4's own computation contradicted its conclusion, and checking that contradiction
+takes one line.
+
+| gap ID | what is not covered | status |
+|---|---|---|
+| **CG-9** | the **hierarchy-bound chain** — σ/m(28) at σ_1 = 1.0, its ratio σ_DM-DM/σ_SI, and the g_N/g_χ bound it implies — none of which `audit_claims.py` or the standing-numbers table reads | **OPEN.** F23 fixed the instance; the *class* is still uncovered. The fix is to add these three quantities to the standing-numbers table so the gate checks them. |

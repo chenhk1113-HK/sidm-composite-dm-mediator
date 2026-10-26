@@ -386,13 +386,13 @@ if __name__ == "__main__":
 Paper v1 draft — 6 verified numerical/prose fixes (§1-§6 of the report)
 
 
-**Changed paper lines:** 40, 102, 120, 129, 151, 195, 939, 2136, 2193
+**Changed paper lines:** 40, 102, 120, 129, 142, 148, 150, 151, 195, 939, 2136, 2193
 
 
 ```diff
 --- a/v0.3-prelim/docs/PAPER_V1_DRAFT.md
 +++ b/v0.3-prelim/docs/PAPER_V1_DRAFT.md
-@@ -37,7 +37,7 @@ ## 1. Introduction
+@@ -37,7 +37,7 @@
  
  Velocity-dependent SIDM models resolve this tension by reducing σ/m at high velocities through one of 
 \several mechanisms: Yukawa suppression (Feng, Kaplinghat & Yu 2009 [5]; Tulin, Yu & Zurek 2013 [6]), 
@@ -440,15 +440,15 @@ Paper v1 draft — 6 verified numerical/prose fixes (§1-§6 of the report)
 \constant is α_χ ≈ 6.8×10⁻⁷. This is a post-diction, not a prediction: σ_peak was fixed first (causality 
 \cap), then the hierarchy was derived.
  
-@@ -99,7 +99,7 @@ ### 2.5 σ/m vs σ_eff: microphysical and observational cross-sections
+@@ -99,25 +99,25 @@
  
   σ_eff(v) = f_H² σ_HH(v) + 2 f_H f_L σ_HL(v) + f_L² σ_LL(v)
  
--with f_H the heavy-fraction at the observation radius (f_H_cc ≈ 0.30 from T207 fit for core-collapsed dSphs; 
-\the canonical single-component value is f_H = 0.297 per constants.py — 0.30 is a rounded stand-in, a 2% 
-\shift in f_H²·σ/m), σ_HH the heavy-heavy cross-section (≡ σ/m above), σ_HL the cross-channel cross-section 
-\(free parameter), and σ_LL the light-light cross-section (set to 0 canonical).**Per v19.2-D.3 calibration, 
-\the required σ_HL to reproduce published σ_eff from this formula is given per halo in 
+-with f_H the heavy-fraction at the observation radius (f_H_cc ≈ 0.30 from T207 fit for core-collapsed 
+\dSphs; the canonical single-component value is f_H = 0.297 per constants.py — 0.30 is a rounded stand-in, a 
+\2% shift in f_H²·σ/m), σ_HH the heavy-heavy cross-section (≡ σ/m above), σ_HL the cross-channel 
+\cross-section (free parameter), and σ_LL the light-light cross-section (set to 0 canonical).**Per v19.2-D.3 
+\calibration, the required σ_HL to reproduce published σ_eff from this formula is given per halo in 
 \`v0.3-prelim/data/results/v192_dsph_gravothermal_sweep.json`. For 7 of 8 halos, |σ_HL| < 0.05 cm²/g (small, 
 \consistent with two-component model with f_H ≈ 0.30).**Fornax is the outlier:**σ_HL = -0.473 cm²/g, 
 \indicating an**internal inconsistency between the framework's two curves at V_max = 15 km/s**. The 
@@ -466,11 +466,11 @@ Paper v1 draft — 6 verified numerical/prose fixes (§1-§6 of the report)
 \on the framework.**Note.** The claim "gravothermal uses σ_eff at dSph scale" has been DROPPED.It is not in 
 \the standard literature (Silverman+, Balberg+, Ohana+ all use σ/m) and was asserted without derivation. The 
 \convention going forward is:
-+with f_H the heavy-fraction at the observation radius (f_H_cc ≈ 0.30 from T207 fit for core-collapsed dSphs; 
-\the canonical single-component value is f_H = 0.297 per constants.py — 0.30 is a rounded stand-in, a 2% 
-\shift in f_H²·σ/m), σ_HH the heavy-heavy cross-section (≡ σ/m above), σ_HL the cross-channel cross-section 
-\(free parameter), and σ_LL the light-light cross-section (set to 0 canonical).**Per v19.2-D.3 calibration, 
-\the required σ_HL to reproduce published σ_eff from this formula is given per halo in 
++with f_H the heavy-fraction at the observation radius (f_H_cc ≈ 0.30 from T207 fit for core-collapsed 
+\dSphs; the canonical single-component value is f_H = 0.297 per constants.py — 0.30 is a rounded stand-in, a 
+\2% shift in f_H²·σ/m), σ_HH the heavy-heavy cross-section (≡ σ/m above), σ_HL the cross-channel 
+\cross-section (free parameter), and σ_LL the light-light cross-section (set to 0 canonical).**Per v19.2-D.3 
+\calibration, the required σ_HL to reproduce published σ_eff from this formula is given per halo in 
 \`v0.3-prelim/data/results/v192_dsph_gravothermal_sweep.json`. For **0 of 8** halos, |σ_HL| < 0.05 cm²/g: 
 \after the a_slope = 1.93 propagation the fitted cross-channel term is negative and LARGE for every halo 
 \(σ_HL = −0.53 cm²/g (Fornax, the smallest magnitude) to −3.39 cm²/g (Segue 1), per 
@@ -478,7 +478,7 @@ Paper v1 draft — 6 verified numerical/prose fixes (§1-§6 of the report)
 \= −0.534 cm²/g, indicating an **internal inconsistency between the framework's two curves at V_max = 15 
 \km/s**. The framework's σ/m(v) curve (paper convention, calibrated against v₁ resonance peak) and σ_eff(v) 
 \curve (calibrated against channel coverage) are calibrated**independently**— the three-term mixture with f_H 
-\= 0.30 doesn't relate them at v=15. With σ_HL = 0, the minimum σ_eff = f_H² × σ/m = 0.09 × 2.85 = 0.257 
+\= 0.30 doesn't relate them at v=15. With σ_HL = 0, the minimum σ_eff = f_H² × σ/m = 0.09 × 2.845 = 0.256 
 \cm²/g, which is 8.0× above the framework's own published σ_eff(Fornax) = 0.032 cm²/g.**The framework still 
 \passes the Fornax observational bound (σ_eff = 0.032 < 1 cm²/g) — the inconsistency is internal to the 
 \framework's parameterizations, not between the framework and observations.**The root cause: the v₁ resonance 
@@ -493,7 +493,36 @@ Paper v1 draft — 6 verified numerical/prose fixes (§1-§6 of the report)
  
  - σ/m (microphysical, paper's Gaussian convention) drives gravothermal, per Silverman+ / T212 / Ohana+.
  - σ_eff is the observational constraint (Fornax upper limit).
-@@ -117,7 +117,7 @@ ### 2.5 σ/m vs σ_eff: microphysical and observational cross-sections
+ - At Cloud-9 (v ≈ 28 km/s, resonance peak), σ/m ≈ σ_eff ≈ 174 cm²/g; channel-mixing is suppressed by 
+\resonance dominance.
+ - At dSph scale (v < 15 km/s), σ/m and σ_eff differ by ~10×, captured by the three-term mixture with σ_HL ≈ 
+\small.**Quantitative summary:**| Velocity scale | σ/m (canonical Gaussian form, a_slope=1.93) | σ_eff (f_H² 
+\× σ/m with f_H=0.297) | Constraint on |
+ 
+-**σ_eff formula (R88):** σ_eff = f_H² × σ/m with f_H = 0.297 across velocities (single canonical value per 
+\constants.py + Appendix A.7). At v=15, σ_eff = 0.297² × 2.85 = 0.252 cm²/g; at v=28 the resonance makes 
+\σ_eff ≈ σ/m.
++**σ_eff formula (R88):** σ_eff = f_H² × σ/m with f_H = 0.297 across velocities (single canonical value per 
+\constants.py + Appendix A.7). At v=15, σ_eff = 0.297² × 2.845 = 0.251 cm²/g; at v=28 the resonance makes 
+\σ_eff ≈ σ/m.
+ |---|---|---|---|
+ | v ≈ 3 km/s (extreme UFD) | 45.2 cm²/g | **3.997 cm²/g** (f_H=0.297 throughout) | Horigome+ ceiling ~0.06 
+\cm²/g at v_eff=3 (w=10 km/s velocity-dep); σ_eff = 4.0 is **MARGINAL FAIL** at w→∞ limit, **PASS** under 
+\w=10 km/s ceiling (~3 cm²/g) |
+ | v ≈ 5 km/s (UFD) | 16.87 cm²/g | **1.492 cm²/g** (f_H=0.297 throughout) | Horigome+ ceiling ~0.1 cm²/g at 
+\v_eff=5; σ_eff = 1.49 is **MARGINAL FAIL** at w→∞, **PASS** under w=10 km/s ceiling (~1 cm²/g) |
+ | v ≈ 7 km/s (edge UFD) | 8.81 cm²/g | **0.779 cm²/g** (f_H=0.297 throughout) | Horigome+ ceiling ~0.16 
+\cm²/g at v_eff=7; σ_eff = 0.78 is **MARGINAL** |
+ | v ≈ 10 km/s (UFD) | 4.44 cm²/g (canonical Gaussian, a_slope=1.93) | **0.392 cm²/g** (f_H=0.297 
+\throughout) | Horigome+ ceiling ~0.4 cm²/g at v_eff=10; σ_eff = 0.39 is **borderline** |
+-| v ≈ 15 km/s (classical dSph) | **2.85 cm²/g** (canonical Gaussian, a_slope=1.93; was 1.17 under v1.13 
+\a_slope=1.0, 2.56 under v_target=28) | **0.252 cm²/g** (f_H=0.297) | Horigome+ ceiling ~0.8 cm²/g at 
+\v_eff=15; σ_eff < 1 ✓ but Fornax outlier (σ_HL = -0.47) |
++| v ≈ 15 km/s (classical dSph) | **2.85 cm²/g** (canonical Gaussian, a_slope=1.93; was 1.17 under v1.13 
+\a_slope=1.0, 2.56 under v_target=28) | **0.251 cm²/g** (f_H=0.297) | Horigome+ ceiling ~0.8 cm²/g at 
+\v_eff=15; σ_eff < 1 ✓ but Fornax outlier (σ_HL = −0.534) |
+ | v = 28 km/s (Cloud-9 kinematic v) | **166 cm²/g** (canonical Gaussian at v=28; 174 is the peak at 
+\v_target=29.4) | ≈ σ/m (resonance dominates) | Cloud-9 collapse |
  | v ≈ 100 km/s (SPARC) | 0.052 cm²/g | ≈ σ/m (nodes dominate) | rotation curves |
  | v ≈ 500 km/s (cluster) | ≪ 1 cm²/g | ≈ σ/m | cluster lensing |
  
@@ -535,12 +564,12 @@ Paper v1 draft — 6 verified numerical/prose fixes (§1-§6 of the report)
 \single-component f_H = 0.297 of `constants.py`): that identity would give σ_eff = 0.256–1.518 cm²/g, i.e. 
 \**2.8–47.7× ABOVE** the published band, so the two-component mixture requires a NEGATIVE cross-channel term 
 \(σ_HL = −0.53 to −3.39 cm²/g) to reconcile them — and |σ_HL| < 0.05 cm²/g holds for **0 of 8** halos, not 7 
-\of 8. The F. H. assumption is explicit: the three-term mixture is σ_eff = f_H²σ_HH + 2f_Hf_Lσ_HL + f_L²σ_LL 
+\of 8. The f_H assumption is explicit: the three-term mixture is σ_eff = f_H²σ_HH + 2f_Hf_Lσ_HL + f_L²σ_LL 
 \with f_H = 0.30 (T207), σ_LL = 0, and σ_HL is a FREE parameter fitted to the published σ_eff, not derived 
-\from the framework.**Fornax (V_max = 15 km/s) is the outlier, with σ_HL = -0.47 cm²/g (required to fit 
+\from the framework.**Fornax (V_max = 15 km/s) is the outlier, with σ_HL = −0.534 cm²/g (required to fit 
 \published σ_eff).**This is an internal inconsistency between the framework's σ/m(v) and σ_eff(v) curves 
 \.**The gravothermal prediction is the strongest constraint on the framework from dSph data:**at 
-\microphysical σ/m = 2.85–18 cm²/g across the 8 representative dSph/UFD halos (σ/m(v) evaluated at each 
+\microphysical σ/m = 2.85–16.9 cm²/g across the 8 representative dSph/UFD halos (σ/m(v) evaluated at each 
 \halo's V_max), t_core = 0.25–2.08 Gyr (well below Hubble time of 13.8 Gyr) for all 8 halos. The precise 
 \per-halo range should be regenerated from v192_dsph_gravothermal_sweep.py; the values here are bounded by 
 \the V_max = 20 and V_max = 15 cases in the table above. : σ/m(Fornax V_max=15, v_target=29.4) = 2.85 cm²/g 
@@ -566,10 +595,10 @@ Paper v1 draft — 6 verified numerical/prose fixes (§1-§6 of the report)
   - v = 9 (Sculptor): 5.43 cm²/g (canonical a_slope=1.93, background only) — 27× above the **0.2 cm²/g 
 \decisive CDM-preference threshold**
   - v = 10 (Draco): 4.39 cm²/g (background only) — 22× above the **0.2 cm²/g decisive threshold**
-@@ -126,7 +126,7 @@ ### 2.5 σ/m vs σ_eff: microphysical and observational cross-sections
+@@ -126,7 +126,7 @@
   - v = 25: 0.75 cm²/g (background only) — 3.7× above the **0.2 cm²/g decisive threshold**
-  - v = 28 (Cloud-9): 0.60 cm²/g (background only) — 3× above the **0.2 cm²/g decisive threshold** (resonance 
-\peak: σ/m = 174, far above)
+  - v = 28 (Cloud-9): 0.60 cm²/g (background only) — 3× above the **0.2 cm²/g decisive threshold** 
+\(resonance peak: σ/m = 174, far above)
  
 -**Threshold-rotation note.** Three different Horigome+ 2025 limits are in play across this paper, and each 
 \quoted multiple below is against a NAMED one: the **0.8 cm²/g** w = 10 km/s velocity-dependent upper limit 
@@ -605,14 +634,38 @@ Paper v1 draft — 6 verified numerical/prose fixes (§1-§6 of the report)
  |---------|--------------------------|-----------------|---------|
  | Cloud-9 (V_max=28) | -2.4 | -0.7 | +1.7 |
  | JVAS (V_max=15) | -2.0 | -2.0 | 0 |
-@@ -148,7 +148,7 @@ ### 2.5 σ/m vs σ_eff: microphysical and observational cross-sections
-  Under σ_1 = 1.0, the derivation changes. anchored σ_DM-DM ~ 1 cm²/g at the "Cloud-9 benchmark"; under σ_1 = 
-\4.4 this held at v ~ 100 (Gaussian tail extends that far). Under σ_1 = 1.0, σ/m at v = 100 is 0.052 cm²/g 
+@@ -139,16 +139,16 @@
+ |**Total**|**-349.5**|**-3.6**|**+346**|
+ 
+ The Δlog L ≈ +346 is almost entirely one channel dominantly (Fornax); Cloud-9 also varies by ~+1.7 log L 
+\between σ_1 = 4.4 and σ_1 = 1.0; the other six channels pass with smaller variation. The "8-channel fit" is 
+\dominated by Fornax's no-collapse constraint with secondary contributions from Cloud-9. The σ_1 = 4.4 km/s 
+\baseline fails Fornax's no-collapse constraint by a large margin (log L = -344 from σ/m = 6.07 cm²/g). σ_1 ≤ 
+\3.0 km/s suppresses the Fornax tail to t_core ≥ 10 Gyr (consistent with no-collapse).**Maximum-likelihood 
+\σ_1 ≈ 1.0 km/s**(log L flat between 1.0 and 3.0 within Δlog L < 1; flat near-peak). This narrows the 
+\resonance to a delta-function-like window near v = 29.4 km/s. Per-channel effects at σ_1 = 1.0:
+-- Cloud-9 (V_max=28): σ/m = 65.49 cm²/g (substantial; Cloud-9 remains consistent)
++- Cloud-9 (V_max=28): σ/m = 65.91 cm²/g (substantial; Cloud-9 remains consistent)
+ - Fornax (V_max=18): σ/m = 0 cm²/g (no collapse; consistent)
+ - Draco, Sculptor, UFD, Cluster, SPARC, JVAS: σ/m ≤ 0.5 cm²/g (essentially no resonance contribution)
+ 
+  The framework's primary supported prediction is Cloud-9 itself. At σ_1 ≲ 3.0 km/s, the resonance acts 
+\essentially only on Cloud-9 (V_max ~ 28 km/s, near v_target = 29.4) and essentially nothing outside a ±2 
+\km/s window. The framework goes from "predicts a resonance that acts over a range of dwarf velocities" to 
+\"predicts a resonance that acts on Cloud-9 specifically and essentially nothing else." Whether this is a 
+\feature (Cloud-9 as unique prediction) or a limitation (framework has no explanatory reach beyond Cloud-9) 
+\is a judgment call, but it needs to be stated in §3.3.
+ 
+- Under σ_1 = 1.0, the derivation changes. anchored σ_DM-DM ~ 1 cm²/g at the "Cloud-9 benchmark"; under σ_1 
+\= 4.4 this held at v ~ 100 (Gaussian tail extends that far). Under σ_1 = 1.0, σ/m at v = 100 is 0.052 cm²/g 
 \(background only); σ/m at v = 28 is 65.49 cm²/g.
++ Under σ_1 = 1.0, the derivation changes. anchored σ_DM-DM ~ 1 cm²/g at the "Cloud-9 benchmark"; under σ_1 
+\= 4.4 this held at v ~ 100 (Gaussian tail extends that far). Under σ_1 = 1.0, σ/m at v = 100 is 0.052 cm²/g 
+\(background only); σ/m at v = 28 is 65.91 cm²/g.
  - Using σ_DM-DM at v = 100 (background only, σ/m = 0.052 cm²/g): ratio σ_DM-DM/σ_SI = 9.85e+21 → g_N/g_χ < 
 \1.01e-11
- - Using σ_DM-DM at v = 28 (Cloud-9, σ/m = 65.49 cm²/g at σ_1 = 1.0): ratio σ_DM-DM/σ_SI = 1.24e+25 → g_N/g_χ 
-\< 2.84e-13
+-- Using σ_DM-DM at v = 28 (Cloud-9, σ/m = 65.49 cm²/g at σ_1 = 1.0): ratio σ_DM-DM/σ_SI = 1.24e+25 → 
+\g_N/g_χ < 2.84e-13
 --**The 7.5×10⁻¹² value was anchored to σ_DM-DM ~ 1 cm²/g; under σ_1 = 1.0 the anchor shifts to σ/m = 65.49 
 \cm²/g at v = 28.**The hierarchy constraint is g_N/g_χ < 2.84e-13 (v = 28) and < 1.01e-11 (v = 100, 
 \background only) — i.e. the v = 28 bound is slightly LOOSER than the σ_1 = 4.4 headline g_N/g_χ < 1.74e-13, 
@@ -629,28 +682,30 @@ Paper v1 draft — 6 verified numerical/prose fixes (§1-§6 of the report)
 \added as a no-collapse constraint. What's falsified (or constrained) is the parameter combination (σ_peak = 
 \174 cm²/g, σ_1 = 4.4 km/s, m_χ = 1 GeV). Under the D-5 fit's preferred σ_1 ≲ 3.0 km/s, the framework is 
 \consistent.
-+-**The 7.5×10⁻¹² value was anchored to σ_DM-DM ~ 1 cm²/g; under σ_1 = 1.0 the anchor shifts to σ/m = 65.49 
-\cm²/g at v = 28.**The hierarchy constraint is g_N/g_χ < 2.84e-13 (v = 28) and < 1.01e-11 (v = 100, 
++- Using σ_DM-DM at v = 28 (Cloud-9, σ/m = 65.91 cm²/g at σ_1 = 1.0): ratio σ_DM-DM/σ_SI = 1.25e+25 → 
+\g_N/g_χ < 2.83e-13
++-**The 7.5×10⁻¹² value was anchored to σ_DM-DM ~ 1 cm²/g; under σ_1 = 1.0 the anchor shifts to σ/m = 65.91 
+\cm²/g at v = 28.**The hierarchy constraint is g_N/g_χ < 2.83e-13 (v = 28) and < 1.01e-11 (v = 100, 
 \background only) — i.e. the v = 28 bound is slightly LOOSER than the σ_1 = 4.4 headline g_N/g_χ < 1.74e-13, 
 \not more restrictive (like-for-like at the v = 28 anchor the baseline is 1.78e-13, so the ordering is 
 \unchanged). (Corrected: the previously quoted ratios 5.2×10⁴⁴ / 6.5×10⁴⁷ dropped the m_χ = 1.78×10⁻²⁴ g 
 \factor, so they were ~10²² too large and the direction of the shift was inverted.)**§10.7 hierarchy 
 \constraint update:**-**Primary value (used in thesis, abstract, all downstream claims):**Both new values are 
-\less restrictive than the σ_1 = 4.4 headline (g_N/g_χ < 2.84e-13 vs 1.74e-13 at v = 28; 1.01e-11 at v = 
-\100). The single-mediator Yukawa framework with σ_1 ≲ 3.0 km/s therefore permits a deeper dark-sector 
-\hierarchy than the σ_1 = 4.4 baseline indicated (see the computed bounds below). The footnote needs to note 
-\that the hierarchy constraint**depends on σ_1**: under σ_1 = 1.0 (the D-5 fit maximum-likelihood), the ratio 
-\derivation changes and the σ_1 = 4.4 baseline headline value 7.5×10⁻¹² holds under the σ_1 = 4.4 
-\phenomenological width. **Direction of the shift, computed from the same hierarchy formula (g_N/g_χ < 
-\1/√(σ/m·m_χ/σ_SI)), all three at a like-for-like v = 28 anchor:** σ_1 = 4.4 → σ/m(28) = 166.0 cm²/g → 
-\g_N/g_χ < 1.78×10⁻¹³; σ_1 = 3.0 → σ/m(28) = 156.7 cm²/g → g_N/g_χ < 1.84×10⁻¹³; σ_1 = 1.0 → σ/m(28) = 65.49 
-\cm²/g → g_N/g_χ < 2.84×10⁻¹³. Narrowing σ_1 therefore LOWERS the framework's σ/m at v = 28 and 
-\correspondingly LOOSENS the allowed g_N/g_χ at that anchor (a larger permitted g_N/g_χ is a deeper 
+\less restrictive than the σ_1 = 4.4 headline (g_N/g_χ < 2.83e-13 at v = 28 vs the σ_1 = 4.4 headline 
+\1.74e-13; 1.01e-11 at v = 100). The single-mediator Yukawa framework with σ_1 ≲ 3.0 km/s therefore permits a 
+\deeper dark-sector hierarchy than the σ_1 = 4.4 baseline indicated (see the computed bounds below). The 
+\footnote needs to note that the hierarchy constraint**depends on σ_1**: under σ_1 = 1.0 (the D-5 fit 
+\maximum-likelihood), the ratio derivation changes and the σ_1 = 4.4 baseline headline value 7.5×10⁻¹² holds 
+\under the σ_1 = 4.4 phenomenological width. **Direction of the shift, computed from the same hierarchy 
+\formula (g_N/g_χ < 1/√(σ/m·m_χ/σ_SI)), all three at a like-for-like v = 28 anchor:** σ_1 = 4.4 → σ/m(28) = 
+\166.0 cm²/g → g_N/g_χ < 1.78×10⁻¹³; σ_1 = 3.0 → σ/m(28) = 156.7 cm²/g → g_N/g_χ < 1.84×10⁻¹³; σ_1 = 1.0 → 
+\σ/m(28) = 65.91 cm²/g → g_N/g_χ < 2.83×10⁻¹³. Narrowing σ_1 therefore LOWERS the framework's σ/m at v = 28 
+\and correspondingly LOOSENS the allowed g_N/g_χ at that anchor (a larger permitted g_N/g_χ is a deeper 
 \dark-sector hierarchy, not a tighter constraint on it); it also suppresses the dSph tail, which is the point 
 \of the D-5 resolution. **Anchor bookkeeping:** the σ_1 = 4.4 headline 1.74×10⁻¹³ is quoted at the 
-\*resonance-peak* anchor (σ_peak = 174 cm²/g at v = 29.4), whereas the 2.84×10⁻¹³ D-5 value is quoted at the 
+\*resonance-peak* anchor (σ_peak = 174 cm²/g at v = 29.4), whereas the 2.83×10⁻¹³ D-5 value is quoted at the 
 \*v = 28* anchor, so the headline-vs-D-5 pair as printed compares two different anchors. The like-for-like v 
-\= 28 comparison is 2.84×10⁻¹³ (σ_1 = 1.0) vs 1.78×10⁻¹³ (σ_1 = 4.4); the direction is the same under either 
+\= 28 comparison is 2.83×10⁻¹³ (σ_1 = 1.0) vs 1.78×10⁻¹³ (σ_1 = 4.4); the direction is the same under either 
 \anchoring (the D-5 value is looser), so the conclusion is unchanged.**Outcome:**this is a parameter 
 \constraint, not framework falsification.**The framework with σ_1 ≲ 3.0 km/s is**NOT falsified**— it's 
 \consistent with the 8-channel dataset if Fornax is added as a no-collapse constraint. What's falsified (or 
@@ -669,16 +724,36 @@ Paper v1 draft — 6 verified numerical/prose fixes (§1-§6 of the report)
 \NOT falsified if σ_1 ≤ 3.0 km/s is consistent with the eight-channel dataset; this requires a full 
 \likelihood refit to confirm.
  
-@@ -192,7 +192,7 @@ ### 2.6 σ_peak_HH_1 Sensitivity Sweep**Question:**Different Phase 44 fits give
- | 250 | 238.27 | 232.11 | 172.56 | 53 Myr | 92 Myr | 0.58 | 3.47 Gyr | 335 Myr | 10.34 | −0.68 (substantive) 
-\| (R88(31) regenerated table: σ/m(V_max) computed from canonical Gaussian σ/m(v) at a_slope=1.93, 
-\v_target=29.4, FWHM=4.4; t_cross uses r_s/V_max convention (T204-style, consistent with §2.5 and §9.12); 
-\"below cap" = t_core/t_cross < 3, fails causality criterion.)**Three key results (R88(31) with canonical 
-\Gaussian σ/m(v)):** 1. **At c = 12 (ΛCDM-conservative, §9.12 analytical-only):** the continuous viable 
-\σ_peak window is **EMPTY** with canonical σ/m(v). Floor requires σ_peak ≥ 51.96; causality requires σ_peak ≤ 
-\47.67 (interpolated from ratio = 2.86 at σ_peak = 50); σ_peak_min > σ_peak_max. On the swept grid {30, 50, 
-\75, 100, 125, 150, 174, 200, 250}, σ_peak = 50 cm²/g is the closest to passing both (ratio = 2.86, just 
-\below cap; σ/m(28) = 48.14 just below floor 50). σ_peak = 30 fails the floor; σ_peak ≥ 75 fail c = 12 
+@@ -181,18 +181,18 @@
+ 
+ Code: `scripts/v192_a_phase44_sigma_peak_sensitivity.py`.**Findings table:**| σ_peak | σ/m(28) | σ/m(31.12) 
+\c=12 | σ/m(25.59) c=4 | c=12 t_core | c=12 t_cross | c=12 ratio | c=4 t_core | c=4 t_cross | c=4 ratio | 
+\Fornax σ_HL req |
+ |---|---|---|---|---|---|---|---|---|---|---|
+-| 30 | 29.13 | 28.29 | 21.34 | 435 Myr | 92 Myr | 4.74 | 28.01 Gyr | 335 Myr | 83.59 | −0.08 (marginal) |
+-|**50**|**48.14**|**46.82**|**35.09**|**263 Myr**|**92 Myr**|**2.86**|**17.04 Gyr**|**335 
+\Myr**|**50.84**|**−0.13 (marginal)**|
+-| 75 | 71.90 | 69.98 | 52.27 | 176 Myr | 92 Myr | 1.92 | 11.44 Gyr | 335 Myr | 34.13 | −0.20 (substantive) 
+\|
+-| 100 | 95.67 | 93.14 | 69.46 | 132 Myr | 92 Myr | 1.44 | 8.61 Gyr | 335 Myr | 25.69 | −0.27 (substantive) 
+\|
+-| 125 | 119.44 | 116.30 | 86.64 | 106 Myr | 92 Myr | 1.15 | 6.90 Gyr | 335 Myr | 20.59 | −0.34 
+\(substantive) |
+-| 150 | 143.20 | 139.46 | 103.83 | 88 Myr | 92 Myr | 0.96 | 5.76 Gyr | 335 Myr | 17.18 | −0.41 
+\(substantive) |
+-|**174**|**166.02**|**161.70**|**120.32**|**76 Myr**|**92 Myr**|**0.83**|**4.97 Gyr**|**335 
+\Myr**|**14.83**|**−0.47 (substantive)**|
+-| 200 | 190.73 | 185.78 | 138.19 | 66 Myr | 92 Myr | 0.72 | 4.33 Gyr | 335 Myr | 12.91 | −0.54 
+\(substantive) |
+-| 250 | 238.27 | 232.11 | 172.56 | 53 Myr | 92 Myr | 0.58 | 3.47 Gyr | 335 Myr | 10.34 | −0.68 
+\(substantive) | (R88(31) regenerated table: σ/m(V_max) computed from canonical Gaussian σ/m(v) at 
+\a_slope=1.93, v_target=29.4, FWHM=4.4; t_cross uses r_s/V_max convention (T204-style, consistent with §2.5 
+\and §9.12); "below cap" = t_core/t_cross < 3, fails causality criterion.)**Three key results (R88(31) with 
+\canonical Gaussian σ/m(v)):** 1. **At c = 12 (ΛCDM-conservative, §9.12 analytical-only):** the continuous 
+\viable σ_peak window is **EMPTY** with canonical σ/m(v). Floor requires σ_peak ≥ 51.96; causality requires 
+\σ_peak ≤ 47.67 (interpolated from ratio = 2.86 at σ_peak = 50); σ_peak_min > σ_peak_max. On the swept grid 
+\{30, 50, 75, 100, 125, 150, 174, 200, 250}, σ_peak = 50 cm²/g is the closest to passing both (ratio = 2.86, 
+\just below cap; σ/m(28) = 48.14 just below floor 50). σ_peak = 30 fails the floor; σ_peak ≥ 75 fail c = 12 
 \causality (ratio < 3). The framework's canonical σ_peak = 174 fails c = 12 causality (ratio = 0.83, below 
 \cap by factor ~3.6). **The grid result is a discretization check; the EMPTY continuous window is the 
 \physical c-M tension at ΛCDM-standard concentration** (see §2.6a for synthesis). 2. **At c = 4 (Ohana+ 
@@ -687,8 +762,8 @@ Paper v1 draft — 6 verified numerical/prose fixes (§1-§6 of the report)
 \floor). All σ_peak ∈ {30, ..., 250} pass the causality criterion (ratio > 3 at every σ_peak). Continuous 
 \intersection: [51.96, 250] cm²/g (limited by sweep range). At σ_peak = 174: σ/m(V_max = 25.59) = 120.32 
 \cm²/g, t_core = 4.97 Gyr, ratio = 14.83 (well above cap).
- 
- 3.**Fornax σ_HL outlier:**At σ_peak ∈ {30, 50}, σ_HL_required is marginal (−0.08, −0.13 — could be 
+-
+-3.**Fornax σ_HL outlier:**At σ_peak ∈ {30, 50}, σ_HL_required is marginal (−0.08, −0.13 — could be 
 \rounding/systematic). At σ_peak ≥ 75, σ_HL is substantive (≤ −0.20). At σ_peak = 174 (canonical), σ_HL = 
 \−0.47.**The outlier is structural**— consequence of v₁ Gaussian tail reaching dSph 
 \velocities.**Reconciliation with §9.12:**§9.12 reports σ_peak = 174, t_core = 76 Myr at c = 12 (this sweep 
@@ -710,6 +785,58 @@ Paper v1 draft — 6 verified numerical/prose fixes (§1-§6 of the report)
 \requires σ_peak ≥ 51.96; causality requires σ_peak ≤ 47.67 (interpolated from ratio = 2.86 at σ_peak = 50). 
 \On the swept grid, σ_peak = 50 is closest to satisfying both (ratio = 2.86, just below the 3.0 cap; σ/m(28) 
 \= 48.14, just below the 50 floor).
++| 30 | 29.13 | 28.29 | 21.34 | 435 Myr | 92 Myr | 4.74 | 28.01 Gyr | 335 Myr | 83.59 | −0.39 (substantive) 
+\|
++|**50**|**48.14**|**46.82**|**35.09**|**263 Myr**|**92 Myr**|**2.86**|**17.04 Gyr**|**335 
+\Myr**|**50.84**|**−0.41 (substantive)**|
++| 75 | 71.90 | 69.98 | 52.27 | 176 Myr | 92 Myr | 1.92 | 11.44 Gyr | 335 Myr | 34.13 | −0.43 (substantive) 
+\|
++| 100 | 95.67 | 93.14 | 69.46 | 132 Myr | 92 Myr | 1.44 | 8.61 Gyr | 335 Myr | 25.69 | −0.46 (substantive) 
+\|
++| 125 | 119.44 | 116.30 | 86.64 | 106 Myr | 92 Myr | 1.15 | 6.90 Gyr | 335 Myr | 20.59 | −0.48 
+\(substantive) |
++| 150 | 143.20 | 139.46 | 103.83 | 88 Myr | 92 Myr | 0.96 | 5.76 Gyr | 335 Myr | 17.18 | −0.51 
+\(substantive) |
++|**174**|**166.02**|**161.70**|**120.32**|**76 Myr**|**92 Myr**|**0.83**|**4.97 Gyr**|**335 
+\Myr**|**14.83**|**−0.53 (substantive)**|
++| 200 | 190.73 | 185.78 | 138.19 | 66 Myr | 92 Myr | 0.72 | 4.33 Gyr | 335 Myr | 12.91 | −0.56 
+\(substantive) |
++| 250 | 238.27 | 232.11 | 172.56 | 53 Myr | 92 Myr | 0.58 | 3.47 Gyr | 335 Myr | 10.34 | −0.61 
+\(substantive) | (R88(31) regenerated table: σ/m(V_max) computed from canonical Gaussian σ/m(v) at 
+\a_slope=1.93, v_target=29.4, FWHM=4.4; t_cross uses r_s/V_max convention (T204-style, consistent with §2.5 
+\and §9.12); "below cap" = t_core/t_cross < 3, fails causality criterion.)**Three key results (R88(31) with 
+\canonical Gaussian σ/m(v)):** 1. **At c = 12 (ΛCDM-conservative, §9.12 analytical-only):** the continuous 
+\viable σ_peak window is **EMPTY** with canonical σ/m(v). Floor requires σ_peak ≥ 51.96; causality requires 
+\σ_peak ≤ 47.67 (interpolated from ratio = 2.86 at σ_peak = 50); σ_peak_min > σ_peak_max. On the swept grid 
+\{30, 50, 75, 100, 125, 150, 174, 200, 250}, σ_peak = 50 cm²/g is the closest to passing both (ratio = 2.86, 
+\just below cap; σ/m(28) = 48.14 just below floor 50). σ_peak = 30 fails the floor; σ_peak ≥ 75 fail c = 12 
+\causality (ratio < 3). The framework's canonical σ_peak = 174 fails c = 12 causality (ratio = 0.83, below 
+\cap by factor ~3.6). **The grid result is a discretization check; the EMPTY continuous window is the 
+\physical c-M tension at ΛCDM-standard concentration** (see §2.6a for synthesis). 2. **At c = 4 (Ohana+ 
+\physical anchor, §9.12):** on the swept grid, σ_peak ∈ {75, 100, 125, 150, 174, 200, 250} pass the floor 
+\σ/m(28) ≥ 50 cm²/g (σ_peak = 30 gives σ/m(28) = 29.13, σ_peak = 50 gives σ/m(28) = 48.14, both FAIL the 
+\floor). All σ_peak ∈ {30, ..., 250} pass the causality criterion (ratio > 3 at every σ_peak). Continuous 
+\intersection: [51.96, 250] cm²/g (limited by sweep range). At σ_peak = 174: σ/m(V_max = 25.59) = 120.32 
+\cm²/g, t_core = 4.97 Gyr, ratio = 14.83 (well above cap).
++
++3.**Fornax σ_HL outlier:**σ_HL_required is substantive at every σ_peak in the swept range (30–250), running 
+\from −0.39 at σ_peak = 30 to −0.61 at σ_peak = 250; no σ_peak leaves the Fornax σ_HL marginal (|σ_HL| < 
+\0.15). At σ_peak = 174 (canonical), σ_HL = −0.53.**The outlier is structural**— consequence of v₁ Gaussian 
+\tail reaching dSph velocities.**Reconciliation with §9.12:**§9.12 reports σ_peak = 174, t_core = 76 Myr at c 
+\= 12 (this sweep reproduces**exactly**: t_core = 0.076 Gyr; σ/m(V_max=31.12) = 161.70 matches §9.12's 161.70 
+\(exact match)). At c = 4, §9.12 reports t_core = 4.97 Gyr (canonical). This sweep computes**t_core = 4.97 
+\Gyr (consistent with §9.12's canonical σ/m=120.32 at c=4)**. **§9.12's "same σ/m = 161.70 at c = 4" is 
+\internally inconsistent (σ/m depends on V_max which differs at each c)**(σ/m depends on V_max which differs 
+\at each c). The canonical-NFW sweep gives the self-consistent answer: 0.076 Gyr at c=12 (exact match), 4.97 
+\Gyr at c=4 (canonical self-consistent σ/m(V_max=25.59) = 120.32).** :**§9.12 uses V_max = 31.12 (NFW V_max 
+\at r_max = 2.16 r_s). The Cloud-9 / Elbert working benchmark is defined at v = 28 (resonance peak, BLN24). 
+\Two different velocities serving two purposes; both used correctly here. The V_max now varies at each c per 
+\canonical NFW, rather than held fixed.**SPARC consistency:**σ/m(v = 100) = 0.052 cm²/g constant across the 
+\sweep. SPARC is not a constraint on σ_peak under the paper convention.**Parameterization comparison (sanity 
+\check):**The Breit-Wigner parameterization used in v19.2-A v1 (and the Phase 44 multi-channel fit) gives σ/m 
+\values that differ from the paper's Gaussian by up to ~17× at UFD velocities. The Gaussian (paper 
+\convention) is what §2.5 and §9.12 state.**Bottom line:**Under the paper's own σ/m convention (Gaussian w = 
+\4.4) and causality criterion (ratio > 3), with self-consistent canonical NFW at each c:
 +-**At c = 12:** the continuous viable σ_peak window is **EMPTY** with the canonical Gaussian σ/m(v). Floor 
 \requires σ_peak ≥ 51.96; causality requires σ_peak ≤ 47.67 (interpolated from ratio = 2.86 at σ_peak = 50; 
 \the interpolation assumes the causality ratio ∝ 1/σ_peak, i.e. ratio = 143/σ_peak with 143 = 2.86 × 50 — 
@@ -739,7 +866,27 @@ Paper v1 draft — 6 verified numerical/prose fixes (§1-§6 of the report)
 \IC correction). The match is a consistency check, not a coincidence. At c = 4, the same derivation gives 
 \V_max = 25.59 km/s — §9.12 implicitly holds σ/m(V_max) constant across c rather than re-deriving V_max, 
 \which is the source of the 11% t_core discrepancy this sweep corrects.
-@@ -936,7 +936,7 @@ ### 3.6 dSph upper-limit tension (Horigome+ 2025)**Data:**Horigome+ 2025 [27] (a
+@@ -218,7 +218,7 @@
+ 
+ 1. **Cloud-9 c-M tension:** The paper's headline (Cloud-9 c-M tension at 3.16σ against Ohana+ 2026's 3.2σ 
+\at the 0.16 dex DK14 convention) is itself the tension whose resolution would normally require σ_peak ≈ 174 
+\cm²/g at the Ohana+ inferred c ~ 4. At c = 12 (the Ohana+ paper's population-median concentration), the 
+\framework cannot sustain σ_peak = 174 cm²/g.
+ 
+-2. **dSph non-collapse:** Fornax σ_HL outlier (σ_HL_required = −0.47 cm²/g, unphysical negative) is a 
+\consequence of the v₁ Gaussian tail (σ₁ = 4.4 km/s) reaching v = 15. This is robust against c = 12 vs c = 4 
+\selection. The Fornax tension is independent of the σ_peak viability tension at c = 12.
++2. **dSph non-collapse:** Fornax σ_HL outlier (σ_HL_required = −0.53 cm²/g at σ_peak = 174, unphysical 
+\negative) is a consequence of the v₁ Gaussian tail (σ₁ = 4.4 km/s) reaching v = 15. This is robust against c 
+\= 12 vs c = 4 selection. The Fornax tension is independent of the σ_peak viability tension at c = 12.
+ 
+ 3. **Path forward (gravothermal roadmap):** The c = 12 tension may resolve under phase-aware gravothermal 
+\modeling (G1-G6 in §A.10b and `GRAVOTHERMAL_ROADMAP.md`). The phase-diversity hypothesis predicts that halos 
+\at the same σ/m(v) but different gravothermal phases (core-expansion vs. collapse) should have different 
+\central densities. If Cloud-9 is in core-expansion phase and Fornax is in collapse phase, the same canonical 
+\σ_peak can satisfy both observations without requiring σ_HL_required < 0.
+ 
+@@ -936,7 +936,7 @@
  
  [Historical σ/m(v) table removed from main text in R88(20); moved to Appendix A.12.] This table used the 
 \v1.13 placeholder f_H, retracted v18.29 — superseded by the canonical Gaussian form (above). For the 
@@ -790,9 +937,9 @@ Paper v1 draft — 6 verified numerical/prose fixes (§1-§6 of the report)
  |---|---|---|---|---|---|
  | Cloud-9 (v=28, core-forming) | ≥100 cm²/g |**128 cm²/g**✓ |**92 cm²/g**✗ (below floor) |**87 cm²/g**✗ 
 \(below floor) | Pass with borrowed; fail with Yang+-derived |
- | dSph (v=15, core-collapsed, r_obs=0.2 r_vir) | ≤0.8 cm²/g |**0.18 cm²/g**✓ |**4.2 cm²/g**✗ (above ceiling) 
-\|**3.1 cm²/g**✗ (above ceiling) | Pass with borrowed; fail with Yang+-derived |
-@@ -2133,7 +2133,7 @@ ### A.7 f_H retraction (R88)
+ | dSph (v=15, core-collapsed, r_obs=0.2 r_vir) | ≤0.8 cm²/g |**0.18 cm²/g**✓ |**4.2 cm²/g**✗ (above 
+\ceiling) |**3.1 cm²/g**✗ (above ceiling) | Pass with borrowed; fail with Yang+-derived |
+@@ -2133,7 +2133,7 @@
  
  ### A.8 Horigome+ 2025 comparison caveat (R88)
  
@@ -807,7 +954,7 @@ Paper v1 draft — 6 verified numerical/prose fixes (§1-§6 of the report)
  - The 0.2 cm²/g reference used above is Horigome+'s **decisive CDM-preference threshold** (Abstract), which 
 \applies to a velocity-independent cross-section
  - Our σ/m(v) is velocity-dependent (Gaussian + power-law background)
-@@ -2190,7 +2190,7 @@ ## A.12 Historical σ/m(v) table (moved from §3.6 main text, R88(20))
+@@ -2190,7 +2190,7 @@
  | v_eff = 15 km/s (classical dSphs) | 5.0 cm²/g | 0.03 cm²/g | 0.8 cm²/g | 6× | ✓ PASS |
  | v_eff = 20 km/s (high-V_max dSphs) | 6.8 cm²/g | 0.04 cm²/g | 0.8 cm²/g | 8× | ✓ PASS |
  
@@ -840,7 +987,7 @@ Round 5 — the change was buried inside 220 unchanged lines, which defeats the 
 *changed-code* companion. The live file is the authority:
 `v0.3-prelim/data/results/v192_dsph_gravothermal_sweep.json` (241 lines, 10,135 bytes).
 
-**Diff shown:** pre-Round-5 (`7cc8d8a^`) -> current. 3 changes, 39 diff lines:
+**Diff shown:** pre-Round-5 (`7cc8d8a^`) -> current. 3 changes + F23, 41 diff lines:
 
 1. **`_derived_ranges` added** (18 lines) — the machine-readable single source of truth for
    the σ/m range, the published σ_eff band, the σ_HL range, and the halo count.
@@ -1226,3 +1373,63 @@ reads text: both are "the bytes that are there". The three checks that caught th
 cmap coverage, word-level source↔PDF containment, and rasterising the page and **looking** at
 it — are now the required gate for any PDF deliverable in this project. Text extraction alone
 is not sufficient, and neither is a box-glyph count.
+
+---
+
+## 8. F23 — the paper change in this round (stale `a_slope = 1.0` value)
+
+**Added v1.4.** The paper changed in this round, so §2's diff was **regenerated** (not hand-edited)
+and the new hunks are visible in it.
+
+### 8.1 What was wrong
+
+The paper quoted `σ/m(28) = 65.49 cm²/g` at `σ_1 = 1.0 km/s` in five places. That number embeds the
+**retracted `a_slope = 1.0`** baseline term:
+
+| baseline exponent | baseline term at v=28 | + Gaussian (65.3041) | = 65.49? |
+|---|---|---|---|
+| `a_slope = 1.93` (**canonical**) | 0.6067 | **65.9109** | no |
+| `a_slope = 1.0` (**retracted**) | 0.1857 | **65.4899** | **yes, exactly** |
+
+The canonical generator (`data/results/t235_d5_width_test.json`, `sigma_1 = 1.0` → Cloud-9) gives
+**65.91085124460028** — matching the sibling values 166.01808 and 156.65515 in the same file to 5
+decimal places. The paper's 65.49 appears in **no** canonical JSON.
+
+The tell is inside the paper's own "like-for-like v = 28" list, which had two canonical values and
+one stale value in the same clause:
+
+> σ_1 = 4.4 → 166.0 → 1.78×10⁻¹³; σ_1 = 3.0 → 156.7 → 1.84×10⁻¹³; **σ_1 = 1.0 → 65.49 → 2.84×10⁻¹³**
+
+Provenance: introduced by `76e8e80` (R82) while the paper still carried `a_slope = 1.0`; not
+updated by `79edeae` ("a_slope=1.93 propagation") because that commit propagated the exponent into
+the *numerical* pipeline only; `09f012a` (Round 2) then **added three more occurrences**. Same
+failure mode as F1–F7: a narrative value that outlives the number it was computed from.
+
+### 8.2 What changed (5 anchored edits + 1 global)
+
+| paper line | before | after |
+|---|---|---|
+| L142 | `σ/m = 65.49 cm²/g` | `σ/m = 65.91 cm²/g` |
+| L148 | `σ/m at v = 28 is 65.49 cm²/g.` | `… is 65.91 cm²/g.` |
+| L150 | `σ/m = 65.49 cm²/g … ratio = 1.24e+25 → g_N/g_χ < 2.84e-13` | `65.91 … 1.25e+25 … 2.83e-13` |
+| L151 | `anchor shifts to σ/m = 65.49 cm²/g`; `g_N/g_χ < 2.84e-13 (v = 28)` | `65.91`; `2.83e-13` |
+| L151 | `σ_1 = 1.0 → σ/m(28) = 65.49 cm²/g → g_N/g_χ < 2.84×10⁻¹³` | `65.91 … 2.83×10⁻¹³` |
+
+The stale σ/m propagates into a ratio and a bound, so **all three move together**:
+`65.49 → 65.91`, `1.24e+25 → 1.25e+25`, `2.84e-13 → 2.83e-13`.
+
+**Verification:** `65.49` = 0 occurrences in the paper, `2.84e-13`/`2.84×10⁻¹³` = 0, `1.24e+25` = 0;
+`65.91` × 5, `2.83e-13` × 3, `2.83×10⁻¹³` × 3, `1.25e+25` × 1. Paper line count (2 383), word
+tokens (61 968) and decimal-number line count (1 034) all **unchanged** — values move in place, no
+prose added. Stale-count baseline unchanged (`-0.47` = 0, `0.5–2.5 cm²/g` = 1, `7 of 8` = 6).
+
+### 8.3 The §2 diff was regenerated, not hand-edited
+
+The diff in §2 is `7cc8d8a^` → current. With F23 applied it is **138 unwrapped lines** (was 83),
+**9 hunks**, `+26 / −26`, and it now contains the F23 hunks. The wrapping convention is unchanged
+(108 columns, `\` continuation prefix), and the round-trip is **verified exact**: unwrapping the
+584-line fence reproduces the 138-line diff byte-for-byte.
+
+Two occurrences of `2.84e-13` remain in this document, at §4 — they are inside the **verbatim quote
+of the local review** (`docs/LOCAL_REVIEW_R5.md`), which is a historical record of what that review
+said. They are deliberately left unchanged; the paper they describe has moved on.
