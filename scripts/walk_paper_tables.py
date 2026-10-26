@@ -117,7 +117,15 @@ def check_table_for_issues(line_num, rows):
         # correction/retraction table — pass/fail shows the OLD vs NEW verdict.
         if re.search(r"\b(wrong|corrected|R88\(86\)|R88\(71\))", row_text, re.IGNORECASE):
             continue
-        row_text_lower = row_text.lower()
+        # Strip BALANCED PARENTHETICALS before counting markers. A marker
+        # word inside a parenthetical is a DESCRIPTION, not a verdict:
+        # "Yukawa-only (no Gaussian peak)" contains the word "no", which is
+        # not a FAIL verdict. Counting it produced a permanent false positive
+        # on paper L486 that trained the reader to ignore this whole layer.
+        # Verdicts live outside the parentheses ("YES (max-core)" keeps its
+        # "yes" and drops only the gloss).
+        row_text_flat = re.sub(r"\([^()]*\)", " ", row_text)
+        row_text_lower = row_text_flat.lower()
         ok_count = len(re.findall(r"\b(pass|ok|✓|✔|yes|true)\b", row_text_lower))
         fail_count = len(re.findall(r"\b(fail|✗|✘|no|false|not\s+resolved)\b", row_text_lower))
         if ok_count > 0 and fail_count > 0 and len(row) > 2:

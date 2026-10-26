@@ -131,7 +131,6 @@ QUOTED_BAD_CONTEXT_RE = re.compile(
 EXTERNAL_DOC_REF_RE = re.compile(
     r"ClawsGO\s*#\d+\s*§"
     r"|ClawsGO[^)\n]{0,40}§"
-    r"|supplement"
     r"|Technical\s*§"
     r"|T\d+\s*§"
     r"|R\d+\(\d+\)[^)\n]{0,20}§",
@@ -163,9 +162,49 @@ RETIRED_PAPER_SECTIONS = {
     "10.7": "retired in 10b7552 (2026-10-05 R88 decisive copy-edit)",
 }
 
-# Maximum number of STALE references the paper may carry. If this layer finds
-# more, the paper's stale-anchor set has grown and the round must look at it.
-PAPER_STALE_BASELINE = 14
+# Maximum number of STALE references the paper may carry. CG-13 was CLOSED on
+# 2026-10-26: all 14 retired-section pointers were re-pointed at the sections
+# that now hold the content (or dropped, where the content was deleted rather
+# than moved). The baseline is therefore ZERO - a single new pointer to a
+# retired section fails this layer.
+#
+# Do NOT raise this to accommodate a new stale reference. It is zero because
+# the paper has none; a non-zero reading means an edit re-introduced the defect.
+PAPER_STALE_BASELINE = 0
+
+
+# A citation made external by a marker AFTER the section symbol (e.g.
+# "§4 of the supplementary"). Kept separate from the prefix rule so the two
+# have visibly different reach.
+EXTERNAL_SUFFIX_RE = re.compile(r"^[^\n]{0,40}\bsupplement", re.IGNORECASE)
+# How far BEFORE a reference an external marker may sit and still be read as
+# belonging to it. A marker further away is a different citation.
+EXTERNAL_PREFIX_WINDOW = 55
+
+
+def is_external_ref(line, off, ref):
+    """True when the § at `off` belongs to another document's citation.
+
+    The marker must be adjacent - immediately before the symbol, or within a
+    short suffix window after it. A whole-line test would exempt every
+    reference on the line, including an unrelated stale one.
+    """
+    # NB two constraints on this slice, both learned from a failed mutation
+    # test:
+    #  (a) it INCLUDES the section symbol - every alternative in
+    #      EXTERNAL_DOC_REF_RE ends with '§', so a slice stopping short of it
+    #      matches nothing and every external citation becomes dangling;
+    #  (b) it stops at the PREVIOUS section symbol, so the marker found can
+    #      only be the one attached to THIS reference. Without (b) a citation
+    #      earlier in the same sentence ("...(ClawsGO #9 §4). See §10.7")
+    #      reached forward and exempted the stale reference too.
+    prev_ref = line.rfind("\u00a7", 0, off)
+    start = max(off - EXTERNAL_PREFIX_WINDOW, prev_ref + 1 if prev_ref >= 0 else 0)
+    prefix = line[start:off + 1]
+    if EXTERNAL_DOC_REF_RE.search(prefix):
+        return True
+    suffix = line[off + 1 + len(ref):off + 1 + len(ref) + 45]
+    return bool(EXTERNAL_SUFFIX_RE.search(suffix))
 
 
 def headings(text):
@@ -194,7 +233,7 @@ def scan_refs(text):
         if line.lstrip().startswith("#"):
             continue
         for m in SECTION_REF_RE.finditer(line):
-            yield (i, m.group(1), line.strip())
+            yield (i, m.group(1), line.strip(), m.start())
 
 
 def audit_doc(path, doc_label, registries, allow_quoted, retired_only):
@@ -213,14 +252,20 @@ def audit_doc(path, doc_label, registries, allow_quoted, retired_only):
     res = {"label": doc_label, "path": str(path), "missing_file": False,
            "ok": [], "stale": [], "dangling": [], "quoted": [],
            "external": [], "heading_count": len(own)}
-    for line_no, ref, line in scan_refs(text):
+    for line_no, ref, line, off in scan_refs(text):
         if any(ref in reg for reg in registries):
             res["ok"].append((line_no, ref, line))
             continue
         # A reference to another document's section is not a dangling internal
         # anchor. Checked BEFORE the quoted-bad test because an external
         # citation is a legitimate reference, not a quotation of an error.
-        if EXTERNAL_DOC_REF_RE.search(line):
+        #
+        # This test is PER REFERENCE, not per line. Testing the whole line made
+        # every reference on a line that happened to contain a ClawsGO
+        # citation invisible to this layer - so a stale §10.7 appended to such
+        # a line passed. The marker that makes a citation external sits
+        # immediately BEFORE its own §, so the test is anchored there.
+        if is_external_ref(line, off, ref):
             res["external"].append((line_no, ref, line))
             continue
         if allow_quoted and QUOTED_BAD_CONTEXT_RE.search(line):
