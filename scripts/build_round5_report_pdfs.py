@@ -235,7 +235,19 @@ def make_styles():
                             spaceAfter=2.4)
     cap = ParagraphStyle('cap', parent=body, fontSize=7.4, leading=9.6,
                           textColor=colors.HexColor('#5a6b7b'))
-    return dict(body=body, h1=h1, h2=h2, h3=h3, h4=h4, code=code, bullet=bullet, cap=cap)
+    # F-QUOTE (v1.7): a blockquote is a CALLOUT, not a plain paragraph. Rendering it
+    # as body text made the marker literal and flattened the emphasis inside it, so
+    # a "> ### heading" callout printed as "### heading" with visible ** markers.
+    quote = ParagraphStyle('quote', parent=body, fontSize=8.4, leading=11.8,
+                            leftIndent=9, rightIndent=4, spaceBefore=4, spaceAfter=2,
+                            textColor=colors.HexColor('#0b3d63'),
+                            backColor=colors.HexColor('#f2f6fa'),
+                            borderPadding=5)
+    quote_h = ParagraphStyle('quote_h', parent=quote, fontSize=9.2, leading=12.4,
+                              spaceBefore=4, spaceAfter=3,
+                              textColor=colors.HexColor('#0b3d63'))
+    return dict(body=body, h1=h1, h2=h2, h3=h3, h4=h4, code=code, bullet=bullet,
+                cap=cap, quote=quote, quote_h=quote_h)
 
 
 # ---------------------------------------------------------------- md -> flow
@@ -339,10 +351,29 @@ def md_to_flow(md, st):
             i += 1
             continue
 
-        # blockquote
+        # blockquote -> CALLOUT (F-QUOTE, v1.7). A quote block is gathered as a unit:
+        # consecutive '>' lines become ONE logical paragraph, so emphasis that spans
+        # a line break still matches; a '> ### heading' inside it becomes a bold
+        # callout heading rather than literal '###' text.
         if s.startswith('>'):
-            flow.append(Paragraph(inline(s.lstrip('> ')), st['body']))
-            i += 1
+            qbuf = []
+            while i < len(lines) and lines[i].strip().startswith('>'):
+                qbuf.append(lines[i].strip().lstrip('>').strip())
+                i += 1
+            # split the quote into segments at heading lines; each segment is one
+            # Paragraph so that a **...** spanning two source lines still renders.
+            seg = []
+            for qline in qbuf:
+                mh = re.match(r'^#{1,6}\s+(.*)$', qline)
+                if mh:
+                    if seg:
+                        flow.append(Paragraph(inline(' '.join(seg)), st['quote']))
+                        seg = []
+                    flow.append(Paragraph(f'<b>{inline(mh.group(1))}</b>', st['quote_h']))
+                elif qline:
+                    seg.append(qline)
+            if seg:
+                flow.append(Paragraph(inline(' '.join(seg)), st['quote']))
             continue
 
         if not s:
@@ -398,7 +429,7 @@ def build(md_path, pdf_path, title):
             'c1', fontName='Body', fontSize=20, leading=25,
             textColor=colors.HexColor('#0b3d63'), alignment=1)),
         Spacer(1, 5 * mm),
-        Paragraph('SIDM v19.2-F &nbsp;|&nbsp; Round 5 + n18 + n19 review response',
+        Paragraph('SIDM v19.2-F &nbsp;|&nbsp; Round 5 + n18 + n19 + n20 review response',
                   ParagraphStyle('c2', fontName='Body', fontSize=10.5, leading=14,
                                  textColor=colors.HexColor('#4a6076'), alignment=1)),
         Spacer(1, 3 * mm),
@@ -421,7 +452,7 @@ def build(md_path, pdf_path, title):
         canvas.saveState()
         canvas.setFont('Body', 7)
         canvas.setFillColor(colors.HexColor('#7b8b9b'))
-        canvas.drawString(17 * mm, 9 * mm, 'SIDM v19.2-F - Round 5 + n18 + n19 review response')
+        canvas.drawString(17 * mm, 9 * mm, 'SIDM v19.2-F - Round 5 + n18 + n19 + n20 review response')
         canvas.drawRightString(A4[0] - 15 * mm, 9 * mm, f'page {d.page}')
         canvas.setStrokeColor(colors.HexColor('#d3dde6'))
         canvas.setLineWidth(0.4)
@@ -442,8 +473,8 @@ if __name__ == '__main__':
     OUT = Path(sys.argv[1])
     OUT.mkdir(parents=True, exist_ok=True)
     JOBS = [
-        (sys.argv[2], sys.argv[3], 'Consolidated Fixes Report - v1.6'),
-        (sys.argv[4], sys.argv[5], 'Changed Code Companion - v1.4'),
+        (sys.argv[2], sys.argv[3], 'Consolidated Fixes Report - v1.7'),
+        (sys.argv[4], sys.argv[5], 'Changed Code Companion - v1.5'),
     ]
     for md_path, pdf_path, title in JOBS:
         n = build(md_path, pdf_path, title)
