@@ -12,8 +12,21 @@ Layers:
   3. Standing-numbers drift guard (drift_guard.py)
   4. T82 audit (t82_audit.py)
   5. Claims audit (audit_claims.py)
-  6. Fabrication cross-check (check_fabrication.py) — R88(68) lesson
-  7. Breakthrough label gate (check_breakthrough_label.py) — R88(71) checklist
+  6. Fabrication cross-check (check_fabrication.py) - R88(68) lesson
+  7. Breakthrough label gate (check_breakthrough_label.py) - R88(71) checklist
+  8. Cross-document section-anchor audit (audit_doc_anchors.py) - catches the
+     dangling-cross-reference class the report itself shipped twice
+  9. Model-provenance audit (audit_model_provenance.py) - checks the reports'
+     account of their own verification runs against the manifests + agent log
+ 10. Hierarchy-bound chain audit (audit_hierarchy_chain.py) - recomputes the
+     sigma/m(28) -> ratio -> g_N/g_chi chain from the canonical constants
+     (closes CG-9)
+
+Layers 1-7 validate the PAPER against the CODE. Layers 8-10 validate the
+DOCUMENTS against themselves and against the execution record. That
+distinction is the point: a green gate was evidence about the paper's claims
+while saying nothing about whether the report's own account of how it was
+produced was true.
 
 Usage:
     python scripts/verify_release_gate.py
@@ -34,9 +47,12 @@ if not VENV_PYTHON.exists():
     VENV_PYTHON = Path(_sys)
 
 
+TOTAL_LAYERS = 10
+
+
 def run_layer(name, args, timeout=300, cwd=None):
     """Run a verification layer. Returns (success, output_tail)."""
-    print(f"\n[L{len(results)+1}/7] {name}...")
+    print(f"\n[L{len(results)+1}/{TOTAL_LAYERS}] {name}...")
     cmd = [str(VENV_PYTHON)] + args
     try:
         r = subprocess.run(cmd, cwd=cwd or str(REPO),
@@ -80,7 +96,7 @@ def main():
 
     # Layer 2: pytest (skip if --quick)
     if args.quick:
-        print("\n[L2/7] pytest (SKIPPED --quick)")
+        print(f"\n[L2/{TOTAL_LAYERS}] pytest (SKIPPED --quick)")
         results.append(("pytest", True))
     else:
         # LEGACY TEST EXCLUSIONS (added 2026-10-21, v40.59 — Defect G)
@@ -156,6 +172,24 @@ def main():
     results.append(("check_breakthrough_label.py", run_layer(
         "Breakthrough label gate (check_breakthrough_label.py)",
         ["scripts/check_breakthrough_label.py"],
+    )))
+
+    # Layer 8: cross-document section-anchor integrity
+    results.append(("audit_doc_anchors.py", run_layer(
+        "Cross-document section-anchor audit (audit_doc_anchors.py)",
+        ["scripts/audit_doc_anchors.py"],
+    )))
+
+    # Layer 9: model/provider provenance of the reports' self-description
+    results.append(("audit_model_provenance.py", run_layer(
+        "Model-provenance audit (audit_model_provenance.py)",
+        ["scripts/audit_model_provenance.py"],
+    )))
+
+    # Layer 10: the hierarchy-bound chain (closes CG-9)
+    results.append(("audit_hierarchy_chain.py", run_layer(
+        "Hierarchy-bound chain audit (audit_hierarchy_chain.py)",
+        ["scripts/audit_hierarchy_chain.py"],
     )))
 
     # Summary

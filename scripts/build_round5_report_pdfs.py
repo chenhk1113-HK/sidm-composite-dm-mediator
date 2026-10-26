@@ -473,8 +473,8 @@ if __name__ == '__main__':
     OUT = Path(sys.argv[1])
     OUT.mkdir(parents=True, exist_ok=True)
     JOBS = [
-        (sys.argv[2], sys.argv[3], 'Consolidated Fixes Report - v1.9'),
-        (sys.argv[4], sys.argv[5], 'Changed Code Companion - v1.7'),
+        (sys.argv[2], sys.argv[3], 'Consolidated Fixes Report - v1.10'),
+        (sys.argv[4], sys.argv[5], 'Changed Code Companion - v1.8'),
     ]
     for md_path, pdf_path, title in JOBS:
         n = build(md_path, pdf_path, title)
