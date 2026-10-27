@@ -249,6 +249,47 @@ Per user directive ("I want you to do it auto, no need for my reminder"), all pa
 - **Local PDFs in docs/papers/verified/: 14 PDFs** (10 from prior + 4 new in v40.44)
 - **Pending local PDFs: 1** (Burkert 1995 — not on arXiv, journal only)
 
+### 7.7 Reference [10] does NOT resolve — Girmohanta & Yasuoka (2026-10-26, external evaluation)
+
+**VERDICT: the reference as printed cannot be found. Do not cite it as-is.**
+
+Paper L2015 prints: `[10] S. Girmohanta, Y. Yasuoka, Phys. Rev. D 111, 035005 (2025).`
+
+**What the DOI actually resolves to.** Crossref `10.1103/physrevd.111.035005` →
+*"Theoretical bounds on dark Higgs mass in a self-interacting dark matter model with
+U(1)′"*, **Li, Yang, Zhang, Zhu** — a different paper, different authors.
+
+**And no Girmohanta & Yasuoka co-authored paper exists:**
+
+| check | result |
+|---|---|
+| arXiv full-text `all:Girmohanta AND all:Yasuoka` | **0 entries** |
+| Crossref author-pair search (both authors required) | no PRD paper |
+| arXiv's own Girmohanta listing (20 most recent, 2022-2026) | **no Yasuoka co-author**; his SIDM papers are with **Shrock** (PRD 106, 063013 (2022); PRD 107, 063006 (2023)) |
+
+**Impact:** [10] is cited twice in the body — L38 (geometric mass-ladder constructions)
+and L90 (a "dark-photon model ... different UV-completion story"). Both claims are
+load-bearing for the paper's positioning.
+
+**Same shape as the v40.4 citation-drift bug** (arXiv:2305.16176 cited instead of
+2305.05067). The check was already flagged in `v0.3-prelim/docs/AUDIT_REFERENCES.md`
+("Authors may not exist; PRD 111, 035005 should be checked against PRD table of
+contents") and **never completed**.
+
+**Action needed — a user decision, not an auto-fix.** Two possibilities, and the two
+lead to different outcomes:
+1. The intended source is a **Girmohanta & Shrock** SIDM paper (two exist, listed above)
+   → re-point [10] and rewrite the two body sentences to match what that paper says.
+2. The reference was **fabricated** → cut [10] and rewrite L38 and L90 without it.
+
+**Until then [10] must not be cited.** Do not "fix" it by guessing which of the two it is.
+
+**Metadata retrieval path (verified live 2026-10-26, no new dependency):**
+`https://export.arxiv.org/api/query?id_list=<ids>` → authors, title, date, DOI,
+`arxiv:journal_ref` · `https://api.crossref.org/works/<doi>` → journal, volume, page, year.
+This same path is what the 32 `[NEEDS CITATION]` entries need — see
+`docs/papers/to_verify/zotero_developer_api.md`.
+
 ---
 
 ## 8. Standing rule for future sessions (locked 2026-10-19)
