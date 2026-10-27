@@ -52,7 +52,13 @@ for row in $SET; do
     echo "  [skip] [$slot] $f ($(stat -c%s "$f") bytes)"; skip=$((skip+1)); continue
   fi
   sleep 4    # arXiv politeness: never hammer the API
-  curl -sL --max-time 240 "https://arxiv.org/pdf/${id}" -o "$f"
+  # Pre-2007 papers are served under /pdf/<archive>/<id>; the bare /pdf/<id>
+  # form returns a JS-gated HTML page (not a PDF) for those IDs.
+  url="https://arxiv.org/pdf/${id}"
+  case "$id" in
+    0[0-9][0-9][0-9][0-9][0-9]) url="https://arxiv.org/pdf/astro-ph/${id}" ;;
+  esac
+  curl -sL --max-time 240 -A "Mozilla/5.0" "$url" -o "$f"
   sz=$(stat -c%s "$f" 2>/dev/null || echo 0)
   magic=$(head -c 4 "$f" 2>/dev/null)
   if [ "$magic" = "%PDF" ] && [ "$sz" -gt 50000 ]; then
