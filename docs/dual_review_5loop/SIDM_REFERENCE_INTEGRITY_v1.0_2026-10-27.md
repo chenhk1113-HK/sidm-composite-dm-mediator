@@ -2,7 +2,8 @@
 
 **Date:** 2026-10-27
 **Branch:** `wip/v19.2-F-init`
-**Commit:** `2915f73` (pushed)
+**Commit:** `0f65db4` (pushed) — bibliography + KB work across `6336649`, `c25cbd2`, `43f8651`,
+`46aa162`, `9fb2227`, `c614529`, `44726dd`, `2915f73`, `82c219e`, `8477b9f`, `0f65db4`
 **Scope:** the paper's 42 reference slots, and the project KB's rule that every cited paper must be on disk
 
 ---
@@ -142,13 +143,18 @@ attached to a gravothermal-model claim — not evidence that this paper was irre
 | Cited slots | **42** |
 | With a local PDF | **42** |
 | With a `.md` summary | **42** |
-| PDFs in `docs/papers/verified/` | 43 (one duplicate copy of 2305.05067) |
+| PDFs in `docs/papers/verified/` | 43 (one duplicate copy of 2305.05067, plus six papers cited by neither a slot nor a body mention) |
 
 **New tooling, both idempotent:**
 - `docs/papers/fetch_all_cited_papers.sh` — downloads the full bibliography. Two traps it handles:
   pre-2007 papers are served under `/pdf/astro-ph/<id>` (the bare form returns a JS-gated HTML
   page, not a PDF), and it asserts it landed in the project root, because an off-by-one in an
   earlier version wrote PDFs into a **sibling directory** while still printing `[ok]`.
+  A third trap was found when the script was re-run: the archive prefix in the ID
+  (`astro-ph/0110561`) made the output filename a **nested path** whose parent directory does
+  not exist, so `curl` wrote nothing and the script reported `[FAIL]` and "deleted" a file it
+  had never created — while the real PDF sat untouched under the flat name. The prefix is now
+  stripped for the filename and kept only in the URL. Re-run after the fix: `ok=0 skip=18 fail=0`.
 - `scripts/make_kb_summaries.py` — writes the summaries. The **title and author list come from the
   paper's own verified reference entry**; the abstract and the key numbers are extracted from the
   local PDF with `pdftotext`. **Nothing is invented**: every number in a summary is re-derivable by
@@ -239,5 +245,6 @@ not currently have.
 ## 11. Open items
 
 1. **CG-3, CG-6, CG-8, CG-12** — the coverage-gap register rows, carried over from earlier rounds.
-2. **No deliverable yet for this round** — the report PDF, ZIP and Telegram delivery come last, after
-   the reference work settles.
+2. **This round's deliverable** — `SIDM_REFERENCE_INTEGRITY_v1.0_2026-10-27.pdf` (6 pages) and
+   `SIDM_REFERENCE_INTEGRITY_v1.0_2026-10-27_BUNDLE.zip` (432 KB, 13 members + a sha256 manifest),
+   both built from this source and shipped last, after the reference work settled.
