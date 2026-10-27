@@ -4,10 +4,13 @@ resolve_references.py — resolve the paper's blank [N] reference slots against
 live bibliographic APIs.
 
 WHY THIS EXISTS
-The paper's References section carries 32 entries marked [NEEDS CITATION].
-Filling them needs author / title / journal / volume / page / year / arXiv id
-for each. That data is retrievable from two free HTTP endpoints with NO new
-dependency:
+The paper's References section originally carried blank/pending slots that
+needed author / title / journal / volume / page / year / arXiv id filled in.
+As of 2026-10-27 all 42 slots carry a publisher-verified entry and no slot is
+pending; this script remains the tool that re-derives and re-checks those
+entries against the live records, and the seed list in it is the record of
+what was checked. That data is retrievable from two free HTTP endpoints with
+NO new dependency:
 
     https://export.arxiv.org/api/query?id_list=<ids>   (Atom XML)
         -> authors, title, published date, DOI, arxiv:journal_ref
