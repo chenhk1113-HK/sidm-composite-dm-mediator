@@ -47,7 +47,13 @@ ok=0; skip=0; fail=0
 for row in $SET; do
   id="${row%%|*}"; rest="${row#*|}"
   who="${rest%%|*}"; slot="${rest##*|}"
-  f="$OUT/${id}_${who}.pdf"
+  # The arXiv id may carry an archive prefix ("astro-ph/0110561"). The URL
+  # needs the prefix, but the FILENAME must not: "$OUT/astro-ph/0110561_x.pdf"
+  # is a NESTED path whose parent directory does not exist, so curl writes
+  # nothing, the size check sees 0, and the script reports [FAIL] and deletes
+  # a file it never created. Flatten the prefix for the filename only.
+  name_id="${id#*/}"
+  f="$OUT/${name_id}_${who}.pdf"
   if [ -s "$f" ]; then
     echo "  [skip] [$slot] $f ($(stat -c%s "$f") bytes)"; skip=$((skip+1)); continue
   fi
