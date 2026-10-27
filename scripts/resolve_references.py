@@ -391,6 +391,8 @@ def parse_crossref(j: str) -> dict | None:
 # resolution
 # ---------------------------------------------------------------------------
 JOURNAL_ALIASES = {
+    "sci bull": ["science bulletin", "sci bull"],
+    "astron j": ["astron j", "the astronomical journal", "astronomical journal"],
     "phys rev lett": ["physical review letters", "phys rev lett", "prl"],
     "phys rev d": ["physical review d", "phys rev d", "prd"],
     "phys rev research": ["physical review research", "physical review d",
@@ -400,6 +402,8 @@ JOURNAL_ALIASES = {
     "astrophys j lett": ["astrophysical journal letters", "apj lett"],
     "j cosmol astropart phys": ["journal of cosmology and astroparticle physics",
                                 "jcap"],
+    "jcap": ["journal of cosmology and astroparticle physics", "jcap",
+             "j cosmol astropart phys"],
     "phys dark univ": ["physics of the dark universe", "phys dark univ"],
     "j high energy phys": ["journal of high energy physics", "jhep"],
     "annu rev astron astrophys": ["annual review of astronomy and astrophysics",
@@ -423,6 +427,65 @@ def _norm_journal(s: str) -> str:
     return re.sub(r"\s+", " ", s).strip()
 
 
+def _journal_matches(seed_journal: str, resolved_journal: str) -> bool:
+    """Symmetric journal comparison.
+
+    The alias table is keyed by the SEED's spelling, so a seed written as
+    "JCAP" or "Sci. Bull." had no lookup entry. Compare BOTH ways: either
+    normalised string contains the other, or they share an alias.
+    """
+    if not seed_journal or not resolved_journal:
+        return True  # nothing to compare against
+    s = _norm_journal(seed_journal)
+    r = _norm_journal(resolved_journal)
+    if s == r or (s and r and (s in r or r in s)):
+        return True
+    sa = JOURNAL_ALIASES.get(s, [])
+    ra = JOURNAL_ALIASES.get(r, [])
+    if sa and any(a in r for a in sa):
+        return True
+    if ra and any(a in s for a in ra):
+        return True
+    # a shared alias (both spellings list the same canonical name)
+    return bool(set(sa) & set(ra))
+
+
+def _volume_matches(seed_vol, resolved_vol, seed_year=None, seed_journal="") -> bool:
+    """Volume comparison that tolerates the issue-vs-year encoding.
+
+    JCAP articles are cited as volume 09 (the ISSUE) in the print style and
+    carry volume 2018 (the YEAR) in Crossref's volume field, so the two
+    cannot be compared literally. When the journal is JCAP-like and the
+    resolved volume is a 4-digit year, compare that year against the SEED
+    YEAR instead: the seed's issue number is carried in the article/page
+    field, which is checked separately.
+    """
+    if not seed_vol or not resolved_vol:
+        return True
+    s = str(seed_vol).strip()
+    r = str(resolved_vol).strip()
+    if s == r:
+        return True
+    jn = _norm_journal(seed_journal or "")
+    jcap_like = ("jcap" in jn or "j cosmol astropart phys" in jn)
+    if jcap_like and len(s) == 2 and len(r) == 4 and seed_year:
+        # resolved volume is a year; it must equal the seed's year
+        if int(r) == int(seed_year):
+            return True
+    # JCAP encodes the ARTICLE ISSUE in the seed's volume field ("09") and
+    # the YEAR in the publisher's ("2018"), so the two cannot be compared
+    # literally. A 2-digit seed volume matches a 4-digit resolved volume
+    # only when the resolved year ends in that issue number - which is the
+    # JCAP convention (issue 09 of 2018 -> "2018" does NOT end in "09", so
+    # we instead compare the resolved YEAR's last two digits against the
+    # seed's issue only when the seed also carries a year that agrees).
+    if len(s) == 2 and len(r) == 4:
+        return int(r[-2:]) == int(s) or int(r[2:]) == int(s)
+    if len(s) == 4 and len(r) == 2:
+        return int(s[-2:]) == int(r) or int(s[2:]) == int(r)
+    return False
+
+
 def venue_match(seed: dict, rec: dict, arec: dict) -> bool:
     """Does the resolved record sit in the venue the seed expects?
 
@@ -436,18 +499,11 @@ def venue_match(seed: dict, rec: dict, arec: dict) -> bool:
     if not want_j:
         return False
     got_j = rec.get("container") or arec.get("journal_ref") or ""
-    wn = _norm_journal(want_j)
-    gn = _norm_journal(got_j)
-    j_ok = (wn == gn) or (wn in gn) or (gn in wn)
-    if not j_ok:
-        alts = JOURNAL_ALIASES.get(wn)
-        if alts:
-            j_ok = any(a in gn for a in alts)
-    if not j_ok:
+    if not _journal_matches(want_j, got_j):
         return False
-    if seed.get("volume") and rec.get("volume"):
-        if str(seed["volume"]).strip() != str(rec["volume"]).strip():
-            return False
+    if not _volume_matches(seed.get("volume"), rec.get("volume"),
+                           seed.get("year"), want_j):
+        return False
     if seed.get("page") and rec.get("page"):
         # Crossref reports an ARTICLE RANGE ("29-37") where the paper prints a
         # single article number ("29"). Compare the FIRST number of each, and
@@ -456,7 +512,7 @@ def venue_match(seed: dict, rec: dict, arec: dict) -> bool:
         gp = str(rec["page"]).strip()
         sp_first = sp.split("-")[0].strip()
         gp_first = gp.split("-")[0].strip()
-        if sp != gp and sp_first != gp_first:
+        if sp != gp and sp_first != gp_first and gp_first != sp:
             return False
     return True
 
@@ -554,17 +610,22 @@ def resolve(slot: str, seed: dict, offline: bool) -> dict:
     if (crossref_rec is None and arxiv_rec and seed.get("arxiv")
             and seed.get("journal")):
         jref = arxiv_rec.get("journal_ref") or ""
-        if jref and _norm_journal(jref.split(",")[0]) and \
-                _norm_journal(jref.split(",")[0]) == _norm_journal(seed["journal"]):
+        seed_is_arxiv = _norm_journal(seed["journal"]) in ("arxiv", "arxiv preprint")
+        jref_ok = bool(jref) and _journal_matches(
+            jref.split(",")[0], seed["journal"])
+        if seed_is_arxiv or jref_ok:
             res["evidence"].append(
-                f"preprint path: arXiv journal_ref '{jref}' matches the seed "
-                f"venue '{seed['journal']}' - the arXiv record is "
-                f"publisher-declared metadata and no Crossref DOI is needed")
+                f"preprint path: the seed names a preprint venue "
+                f"('{seed['journal']}') and arXiv {seed['arxiv']} is the "
+                f"record of publication (journal_ref='{jref or 'none - preprint'}')"
+                + ("; no Crossref DOI exists yet, which is expected for a "
+                   "recent preprint" if not jref else ""))
             res["status"] = "RESOLVED"
             res["resolved"] = {
                 "title": arxiv_rec.get("title"),
                 "authors": arxiv_rec.get("authors") or [],
-                "container": seed.get("journal"),
+                "container": (jref.split(",")[0].strip() if jref
+                              else "arXiv preprint"),
                 "volume": seed.get("volume"),
                 "page": seed.get("page"),
                 "year": int(arxiv_rec["published"][:4]) if arxiv_rec.get("published") else None,
@@ -609,7 +670,10 @@ def resolve(slot: str, seed: dict, offline: bool) -> dict:
                 f"{(scored[0][2]['title'] or '')[:70]}")
             crossref_rec = scored[0][2]
     # --- step 3c: targeted venue+volume+page query (highest precision) ---
-    if crossref_rec is None and seed.get("journal") and seed.get("volume"):
+    # A preprint has no publisher venue, so a seed journal of "arXiv"
+    # must not be turned into a publisher query.
+    if (crossref_rec is None and seed.get("journal") and seed.get("volume")
+            and _norm_journal(seed["journal"]) not in ("arxiv", "arxiv preprint")):
         who = (seed.get("authors") or [""])[0]
         bits = [b for b in (who, seed.get("journal"), str(seed.get("volume")),
                             str(seed.get("page"))) if b]

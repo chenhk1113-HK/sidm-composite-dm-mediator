@@ -137,8 +137,8 @@ These are pre-2024 references. They're mostly real and well-known.
 | [7] | Chu, Garcia-Cely, Murayama | ✓ PRL 122, 071103 (2019), arXiv:1810.04709, "Velocity Dependence from Resonant Self-Interacting Dark Matter" — **the body cites this for the Chu-Hambye-Tytgat 2018 mechanism, which is a DIFFERENT paper** |
 | [8] | Duerr, Schmidt-Hoberg, Wild | ✓ arXiv:1804.10385, "Self-interacting dark matter with a stable vector mediator" — published JCAP 18 (2018) 033 |
 | [9] | Girmohanta, Shrock | ✓ PRD 106, 063013 (2022), arXiv:2206.14395 |
-| [11] | Yang, Yu | ⚠ PRD 108, 043040 — DOI 10.1103/PhysRevD.108.043040 does not resolve in Crossref, and no Yang–Yu 2023 paper with this title could be located in arXiv, InspireHEP, Crossref, Semantic Scholar or OpenAlex. **UNRESOLVED — needs the author's own citation** |
-| [12] | Turner et al. | ⚠ PRD 104 — verify. "Atomic Dark Matter" (Kaplan, Krnjaic, Rehermann, Wells, JCAP 10 (2010) 021) is a real atomic-DM paper but has a DIFFERENT author set, and PRD 104, 013005 is *Revisiting semileptonic decays*. **UNRESOLVED — needs the author's own citation** |
+| [11] | Yang, Yu | ✗ **UNRESOLVED — needs the author's own citation.** Cited as "Yang & Yu 2023, single-breathing-mode mediator with one resonance" (PRD 108, 043040). DOI `10.1103/PhysRevD.108.043040` does not resolve in Crossref; no Yang–Yu 2023 paper with this or any similar title exists in arXiv, InspireHEP, Crossref, Semantic Scholar or OpenAlex. A venue query for "Yang PRD 108 043040" returns only unrelated PRD-108 papers (Real Hopf insulator; Constraints on inflaton Higgs field couplings). The closest real work by these authors is Yang & Yu, PRD 104, 103031 (2021), already used for [13]/[30]. |
+| [12] | Turner et al. | ✗ **UNRESOLVED — needs the author's own citation.** Cited as "Turner et al. 2021, atomic-DM transitions" (PRD 104). PRD 104, 013005 is *Revisiting semileptonic decays* (Li, Liu & Yu) — a completely different paper. "Atomic Dark Matter" (Kaplan, Krnjaic, Rehermann & Wells, JCAP 10 (2010) 021) and "Self-destructing atomic dark matter" (Geller & Telem, PRD 104, 035010) are real atomic-DM papers but neither has a Turner author or the 2021 date. No candidate matching author+title+venue exists in any index. |
 | [13] | Yang, Yu | ✓ **Yang & Yu, PRD 104, 103031 (2021), arXiv:2102.02375** — "Self-interacting dark matter and small-scale gravitational lenses in galaxy clusters". The seed venue (PRL 128, 217402) was a *condensed-matter* paper. Verified via InspireHEP and via the [83] entry of arXiv:2406.17024, which cites it for exactly the core-collapse claim |
 | [14] | Lelli, McGaugh, Schombert | ✓ AJ 152, 3 (2020) — "The SPARC dataset: A comprehensive and high-precision sample of galaxy rotation curves" (arXiv id still being pinned) |
 | [16] | Vegetti, Czoske, Koopmans | ✓ MNRAS 408, 430 (2010) — "Globular clusters as the first high-mass star clusters of dwarf galaxies" (arXiv id still being pinned) |
@@ -344,8 +344,8 @@ entry now says which slot it duplicates, so a reader cannot mistake them for thr
 | [8] | ✓ resolved | Duerr, Schmidt-Hoberg & Wild, JCAP 09 (2018) 033, arXiv:1804.10385 |
 | [9] | ✓ re-pointed | Girmohanta & Shrock, PRD 106, 063013 (2022), arXiv:2206.14395 |
 | [10] | ✓ re-pointed | Girmohanta & Shrock, PRD 107, 063006 (2023), arXiv:2210.01132 |
-| [11] | ✗ **UNRESOLVED** | "Yang & Yu 2023, single-breathing-mode mediator" — no matching paper found in any index; DOI 10.1103/PhysRevD.108.043040 does not resolve |
-| [12] | ✗ **UNRESOLVED** | "Turner et al. 2021, atomic-DM transitions" — no matching paper found; PRD 104, 013005 is *Revisiting semileptonic decays* |
+| [11] | ✗ **UNRESOLVED** | "Yang & Yu 2023, single-breathing-mode mediator" — no matching paper found in any index; DOI 10.1103/PhysRevD.108.043040 does not resolve. Nearest real work by these authors: Yang & Yu, PRD 104, 103031 (2021), arXiv:2102.02375 (already [13]/[30]) |
+| [12] | ✗ **UNRESOLVED** | "Turner et al. 2021, atomic-DM transitions" — no matching paper found; PRD 104, 013005 is *Revisiting semileptonic decays* (Li, Liu & Yu) |
 | [13] | ✓ resolved | Yang & Yu, PRD 104, 103031 (2021), arXiv:2102.02375 (body year corrected 2022 → 2021) |
 | [14] | ✓ resolved | Lelli, McGaugh & Schombert, AJ 152, 3 (2020) — "The SPARC dataset" |
 | [16] | ✓ resolved | Vegetti, Czoske & Koopmans, MNRAS 408, 430 (2010) |
