@@ -52,6 +52,52 @@ arXiv/Crossref.
   *extracted-number* content has no Zotero equivalent — it would have to be re-entered
   or kept in parallel.
 
+
+## REVISIT 2026-10-27 — the prediction was tested, and it held
+
+The Tier-3 verdict rested on one falsifiable claim: *the real gap is metadata retrieval,
+and that is solvable with zero new dependencies.* That claim has now been tested end-to-end.
+
+**`scripts/resolve_references.py`** (stdlib `urllib` only — no pip install, no API key, no
+account, no 10th MCP surface) resolved **39 of the paper's 41 reference slots** against
+arXiv + Crossref, and in doing so:
+
+- **Caught two fabricated citations** that no library manager would have flagged, because
+  both DO exist in a bibliographic index — they are simply attributed to the wrong people.
+  `[10]`'s DOI resolves to a paper by *different authors*; `[9]` names an author (*Kuranchi*)
+  who appears in **zero** author records in arXiv, InspireHEP, Crossref, Semantic Scholar and
+  OpenAlex. Zotero would have imported both silently, because its import path trusts the
+  metadata you hand it — the failure mode here is a wrong *attribution*, not a missing record.
+- **Caught six more body-level attribution errors** that no reference-list tool can see,
+  because the error is in the *prose*, not the entry: `[5]`'s venue pointed at a different
+  Feng-Kaplinghat-Yu paper; `[7]` credited the wrong Chu paper; `[50c]` credited the wrong
+  author set; `[55a]`'s 6th author was wrong; `[13]`/`[30]`'s year was wrong.
+- **Rejected 8 plausible-looking wrong matches** that a looser tool would have accepted —
+  including a *Physics World* news item for an ApJ paper, a *drug-development book* for a
+  dark-matter paper, and an *optical-fibre traffic-sensing paper* for a dark-matter paper.
+
+**What this changes about the Zotero decision: nothing, but it makes the reasoning
+falsifiable rather than rhetorical.** The three strongest arguments against adopting Zotero
+were all *structural*, and none of them is affected:
+
+| Argument | Status after the test |
+|---|---|
+| The gap is metadata retrieval, not library management | **Confirmed** — 39/41 slots filled with zero new dependencies. A library manager was never the bottleneck. |
+| Zotero needs a desktop app + cloud account + API key | Unchanged — none of that was needed, and none of it would have caught a mis-attribution. |
+| The KB's extracted-number content has no Zotero equivalent | Unchanged — and now more clearly so: the resolver found errors that live *between* the paper and the reference, which is exactly the layer a metadata store does not model. |
+
+**One honest caveat.** The resolver needed three rounds of gate hardening, each found by
+mutation-testing it against a record that had already fooled it. A tool that has to be
+hardened this much is not obviously "safer than Zotero" — it is *different*. The argument for
+the resolver is not that it is more reliable; it is that its failure modes are **visible and
+auditable** (every verdict is recorded with its evidence in
+`docs/papers/to_verify/resolved_reference_candidates.json`) rather than silent. A Zotero
+import that mis-attributes a paper leaves no trace at all.
+
+**Recommendation unchanged: Tier 3, do not adopt.** Re-open only if the project needs
+*citation-graph* functionality (which-cites-which, co-citation counts) — a problem neither
+Zotero nor this resolver solves well, and a problem the project does not currently have.
+
 ## Claims in the source doc that did NOT check out
 
 1. **`zot item export KEY1 KEY2 --as bibliography --style nature`** — no such command.

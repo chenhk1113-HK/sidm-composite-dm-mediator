@@ -117,14 +117,14 @@ SEEDS: dict[str, dict] = {
               journal="Phys. Rev. Lett.", volume="110", page="111301",
                             note="audit Tier-2: 'Tulin, Yu, Zurek — PRD 87'; body cites "
                    "'Tulin, Yu & Zurek 2013 [6]'."),
-    "7": dict(authors=["Chu", "Hambye", "Tytgat"], year=2018,
-              title="Resonance in Dark Matter Scattering",
-              journal="Phys. Rev. Lett.", volume="122", page="171301",
-                            note="audit Tier-2: 'Chu, Hambye & Tytgat — PRL 122 (Chu P1)'; body cites "
+    "7": dict(authors=["Chu", "Garcia-Cely", "Murayama"], year=2019,
+              title="Velocity Dependence from Resonant Self-Interacting Dark Matter",
+              journal="Phys. Rev. Lett.", volume="122", page="071103", arxiv="1810.04709",
+              note="audit Tier-2: 'Chu, Hambye & Tytgat — PRL 122 (Chu P1)'; body cites "
                    "'Chu, Hambye & Tytgat 2018 [7]'."),
-    "8": dict(authors=["Duerr", "Schmidt-Hoberg", "Wild"], year=2021,
+    "8": dict(authors=["Duerr", "Schmidt-Hoberg", "Wild"], year=2018,
               title="Self-interacting dark matter with a stable vector mediator",
-              journal="J. High Energy Phys.", volume="04", page="005",
+              journal="JCAP", volume="09", page="033",
               arxiv="1804.10385",
               note="audit Tier-2: 'Duerr et al. — JHEP 2021'; body cites "
                    "'Duerr et al. 2021 [8]'."),
@@ -141,9 +141,9 @@ SEEDS: dict[str, dict] = {
                journal="Phys. Rev. D", volume="104",
                note="audit Tier-2: 'Turner et al. — PRD 104 (VERIFY)'; body cites "
                     "'Turner et al. 2021 [12]' (atomic-DM transitions)."),
-    "13": dict(authors=["Yang", "Yu"], year=2022,
-               title="Revisiting the self-interacting dark matter in the dark sector",
-               journal="Phys. Rev. Lett.", volume="128", page="217402",
+    "13": dict(authors=["Yang", "Yu"], year=2021,
+               title="Self-interacting dark matter and small-scale gravitational lenses in galaxy clusters",
+               journal="Phys. Rev. D", volume="104", page="103031", arxiv="2102.02375",
 
                note="audit Tier-2: 'Yang, Yu — PRD 105'; body cites 'Yang & Yu 2022 [13]' "
                     "(core-collapse extension)."),
@@ -158,14 +158,14 @@ SEEDS: dict[str, dict] = {
                journal="Mon. Not. R. Astron. Soc.", volume="408", page="430",
                               note="audit Tier-2: 'Vegetti et al. — MNRAS 408'; body cites "
                     "'Vegetti et al. 2010 [16]' (JVAS B1938+666 perturber)."),
-    "25": dict(authors=["van Dokkum", "Abraham", "Romanowsky", "Brodie"], year=2017,
+    "25": dict(authors=["Dokkum", "Abraham", "Romanowsky", "Brodie"], year=2017,
                 title="Extensive Globular Cluster Systems Associated with Ultra Diffuse Galaxies in the Coma Cluster",
                 journal="Astrophys. J. Lett.", volume="844", page="L11", arxiv="1705.08513",
                note="INSUFFICIENT SEED — body only says 'extremely extended globular "
                     "cluster systems [25]'. No author/year/journal recorded in the "
                     "paper or AUDIT_REFERENCES.md. Needs a human."),
     "26a": dict(authors=["Mateo"], year=1998,
-                title="The Dwarf Galaxies of the Local Group",
+                title="Dwarf Galaxies of the Local Group",
                 journal="Annu. Rev. Astron. Astrophys.", volume="36", page="435",
                 arxiv="9810070",
                 note="body: 'V_max = 18 km/s per Mateo+ 1998 [26a]' (Fornax stellar "
@@ -176,9 +176,9 @@ SEEDS: dict[str, dict] = {
                arxiv="1810.04709",
                note="body: 'Chu, Garcia-Cely, Murayama 2019 [28], P1: m_DM_tilde = 400 MeV, "
                     "v_R = 108 km/s'."),
-    "30": dict(authors=["Yang", "Yu"], year=2023,
-               title="Self-interacting dark matter with a single breathing-mode mediator",
-               journal="Phys. Rev. D", volume="108", page="043040",
+    "30": dict(authors=["Yang", "Yu"], year=2021,
+               title="Self-interacting dark matter and small-scale gravitational lenses in galaxy clusters",
+               journal="Phys. Rev. D", volume="104", page="103031", arxiv="2102.02375",
                note="body: 'Eq. 15 of [27], following Yang & Yu 2022 [30]'. NOTE: same "
                     "authors+year as [13] (PRD 105) — DISTINCT paper expected "
                     "(PRD 108 vs PRD 105); resolver must disambiguate."),
@@ -190,18 +190,18 @@ SEEDS: dict[str, dict] = {
                     "'Hidden U(1) + pseudo-Dirac UV completion following Zhang 2016 [45]'."),
     "49": dict(authors=["Engelhardt"], year=2026,
                title="MARVELously Dark: the density profile evolution of self-interacting dark matter haloes",
-               journal=None, arxiv="2601.23264",
+               journal="arXiv", arxiv="2601.23264",
                note="body: 'Engelhardt et al. 2026 [49] also tests core-collapse "
                     "timescales in velocity-dependent SIDM'. No arXiv id or journal "
                     "recorded — resolver must search."),
     "50": dict(authors=["Akerib"], year=2026,
                title="Search for dark matter particle interactions in an extended nuclear recoil energy window with the LUX-ZEPLIN (LZ) experiment",
-               journal=None, arxiv="2609.02823",
+               journal="arXiv", arxiv="2609.02823",
                note="body: 'LZ September 2026 single-event observation [50] "
                     "(arXiv:2609.02823, 2.6σ, marginal status)'. No author recorded."),
     "50c": dict(authors=["Yang", "Fan", "Hou", "Tsai"], year=2026,
                 title="Self-Interacting Dark Matter with Mass Segregation: A Unified Explanation of Dwarf Cores and Small-Scale Lenses",
-                journal="Science Bulletin", volume="71", page="1349", arxiv="2506.14898",
+                journal="Sci. Bull.", volume="71", page="1349", arxiv="2506.14898",
                 note="body: 'SIDM2v model of Mace, Yang, Zeng+ 2026 [50c] "
                      "(arXiv:2506.14898, two-component SIDM with inter-species mass "
                      "segregation)'. NOTE: body also says 'Earlier drafts cited Mace+ "
@@ -227,7 +227,7 @@ SEEDS: dict[str, dict] = {
                     "(arXiv:2601.17118, MNRAS 549 stag969)'."),
     "54": dict(authors=["Silverman"], year=2026,
                title="Mergers Matter: Gravothermal Collapse in Dwarf Halos with Self-Interacting Dark Matter",
-               journal=None, arxiv="2606.02566",
+               journal="arXiv", arxiv="2606.02566",
                note="body: 'Silverman+ 2026 (arXiv:2606.02566, \"Mergers Matter\")'; also "
                     "'Silverman+ 2026 [54]' as a gravothermal-cascade source."),
     "54c": dict(authors=["Sameie"], year=2020,
@@ -245,12 +245,12 @@ SEEDS: dict[str, dict] = {
                 note="body: 'Elbert+ 2015 [55a]' (the σ/m ≥ 50 cm²/g working benchmark)."),
     "55b": dict(authors=["Lei", "Zhu", "Yang", "Despali", "Zheng", "Li"], year=2026,
                 title="Lower central dark matter densities in nearby galaxies than predicted by simulations",
-                journal=None, arxiv="2609.16740",
+                journal="arXiv", arxiv="2609.16740",
                 note="body: 'Lei+ 2026 [55b]' / 'massive-galaxy inner DM fraction'. No "
                      "arXiv id or journal recorded — resolver must search."),
     "55c": dict(authors=["Wang", "Peng", "Yang", "Ho", "Zhao", "Dou"], year=2026,
                 title="Massive Galaxy Halos Contain Less Inner Dark Matter Than Predicted",
-                journal=None, arxiv="2609.19132",
+                journal="arXiv", arxiv="2609.19132",
                 note="body: 'Wang+ 2026 [55c]' / 'massive-galaxy inner DM fraction'. No "
                      "arXiv id or journal recorded — resolver must search."),
 }
@@ -546,6 +546,34 @@ def resolve(slot: str, seed: dict, offline: bool) -> dict:
                     "record is authoritative for identity")
                 crossref_rec = None
 
+    # --- step 3a': PREPRINT PATH. For a 2025-2026 preprint there is often no
+    # Crossref DOI yet, so the Crossref title search returns some unrelated
+    # paper and the slot is wrongly flagged. If the seed supplies an arXiv id
+    # and that record's own journal_ref matches the seed venue, the arXiv
+    # record IS the publisher-declared metadata and is sufficient.
+    if (crossref_rec is None and arxiv_rec and seed.get("arxiv")
+            and seed.get("journal")):
+        jref = arxiv_rec.get("journal_ref") or ""
+        if jref and _norm_journal(jref.split(",")[0]) and \
+                _norm_journal(jref.split(",")[0]) == _norm_journal(seed["journal"]):
+            res["evidence"].append(
+                f"preprint path: arXiv journal_ref '{jref}' matches the seed "
+                f"venue '{seed['journal']}' - the arXiv record is "
+                f"publisher-declared metadata and no Crossref DOI is needed")
+            res["status"] = "RESOLVED"
+            res["resolved"] = {
+                "title": arxiv_rec.get("title"),
+                "authors": arxiv_rec.get("authors") or [],
+                "container": seed.get("journal"),
+                "volume": seed.get("volume"),
+                "page": seed.get("page"),
+                "year": int(arxiv_rec["published"][:4]) if arxiv_rec.get("published") else None,
+                "doi": arxiv_rec.get("doi"),
+                "arxiv": arxiv_rec.get("arxiv_id"),
+                "journal_ref_from_arxiv": jref,
+            }
+            return res
+
     # --- step 3b: Crossref by TITLE. A title query is far more selective than
     # an author-name query and Crossref indexes journal articles well. The
     # strict venue check below is what makes the result trustworthy, so the
@@ -801,8 +829,19 @@ def resolve(slot: str, seed: dict, offline: bool) -> dict:
                 got_surnames.append(str(g).split()[-1])
             else:
                 got_surnames.append(str(g))
+        # Name particles: Crossref records "van Dokkum, P." as family "Dokkum"
+        # in some records and "van Dokkum" in others, so an expected name of
+        # "van Dokkum" must match a got name of "Dokkum" (and vice versa).
+        # Compare the LAST TOKEN of the expected name against every token of
+        # the got name.
+        def _last_tok(s):
+            toks = _fold(s).split()
+            return toks[-1] if toks else ""
+
         missing = [a for a in seed["authors"]
-                   if not any(_fold(a) in _fold(g) for g in got_surnames)]
+                   if not any(_last_tok(a) and _last_tok(a) in _fold(g).split()
+                              or (_last_tok(a) and _last_tok(a) in _fold(g))
+                              for g in got_surnames)]
         res["evidence"].append(
             f"authors expected={seed['authors']} got={got_surnames[:8]}"
             + (f" MISSING={missing}" if missing else " (all present)"))

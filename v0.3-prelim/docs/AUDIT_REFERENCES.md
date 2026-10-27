@@ -328,7 +328,10 @@ title, which is what makes the venue query resolve in one hop.
 **Duplicate slots found:** [1] and [50d] are the same paper (arXiv:1508.03339) — both are
 cited in the body at different sentences, so both entries are retained and cross-labelled.
 [1a] and [15b] are the same paper (Benítez-Llambay+ 2024, ApJ 973, 61) and are now
-cross-labelled in the reference list.
+cross-labelled in the reference list. [7] and [28] are likewise the same paper
+(Chu, Garcia-Cely & Murayama, PRL 122, 071103) and are cross-labelled. All three pairs are
+cited at *different* body sentences, so both slots are retained rather than merged — but each
+entry now says which slot it duplicates, so a reader cannot mistake them for three papers.
 
 ### Final slot status (2026-10-27)
 
