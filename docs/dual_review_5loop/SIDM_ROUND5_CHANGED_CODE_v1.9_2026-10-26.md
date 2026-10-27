@@ -115,7 +115,6 @@ before and after — only `verdict` and `limitations` changed.
 
 | # | file | description |
 |---|---|---|
-
 | 1 | `scripts/v192_dsph_gravothermal_sweep.py` | dSph gravothermal sweep generator — narrative strings now COMPUTED (root-cause fix) |
 | 2 | `v0.3-prelim/docs/PAPER_V1_DRAFT.md` | Paper v1 draft — 6 verified numerical/prose fixes (§1-§6 of the report)  *(diff hunks only — full file is 2383 lines)* |
 | 3 | `v0.3-prelim/data/results/v192_dsph_gravothermal_sweep.json` | Regenerated sweep JSON — **shown as a DIFF in v1.1** (39 changed lines of 241); new `_derived_ranges` block, `verdict.interpretation` rewritten, `limitations` +1 |
