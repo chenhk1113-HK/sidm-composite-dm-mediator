@@ -371,8 +371,8 @@ entry now says which slot it duplicates, so a reader cannot mistake them for thr
 | [8] | ✓ resolved | Duerr, Schmidt-Hoberg & Wild, JCAP 09 (2018) 033, arXiv:1804.10385 |
 | [9] | ✓ re-pointed | Girmohanta & Shrock, PRD 106, 063013 (2022), arXiv:2206.14395 |
 | [10] | ✓ re-pointed | Girmohanta & Shrock, PRD 107, 063006 (2023), arXiv:2210.01132 |
-| [11] | ✗ **UNRESOLVED** | "Yang & Yu 2023, single-breathing-mode mediator" — no matching paper found in any index; DOI 10.1103/PhysRevD.108.043040 does not resolve. Nearest real work by these authors: Yang & Yu, PRD 104, 103031 (2021), arXiv:2102.02375 (already [13]/[30]) |
-| [12] | ✗ **UNRESOLVED** | "Turner et al. 2021, atomic-DM transitions" — no matching paper found; PRD 104, 013005 is *Revisiting semileptonic decays* (Li, Liu & Yu) |
+| [11] | ✗ **REMOVED 2026-10-27 (user decision)** | "Yang & Yu 2023, single-breathing-mode mediator" — no matching paper found in any index; DOI 10.1103/PhysRevD.108.043040 does not resolve. Nearest real work by these authors: Yang & Yu, PRD 104, 103031 (2021), arXiv:2102.02375 (already [13]/[30]). The reference entry was **deleted** and the L90 sentence was **rewritten to drop both the citation and the claim it supported**. |
+| [12] | ✗ **REMOVED 2026-10-27 (user decision)** | "Turner et al. 2021, atomic-DM transitions" — no matching paper found; PRD 104, 013005 is *Revisiting semileptonic decays* (Li, Liu & Yu). Reference entry deleted and the L90 claim removed. |
 | [13] | ✓ resolved | Yang & Yu, PRD 104, 103031 (2021), arXiv:2102.02375 (body year corrected 2022 → 2021) |
 | [14] | ✓ resolved | Lelli, McGaugh & Schombert, AJ 152, 3 (2020) — "The SPARC dataset" |
 | [16] | ✓ resolved | Vegetti, Czoske & Koopmans, MNRAS 408, 430 (2010) |
@@ -391,3 +391,36 @@ entry now says which slot it duplicates, so a reader cannot mistake them for thr
 because no candidate passed the author+venue+title agreement check; both are recorded as
 open items rather than filled with a plausible-looking substitute.
 
+## ROUND 2026-10-27 (user-directed) — four more defects, two removals, two new slots
+
+**Four additional mis-attributions were found while verifying the resolver's remaining
+disagreements, and all four are now fixed** (each verified against the live arXiv/Crossref
+record — see registry §7.10 for the full evidence table):
+
+- **[16]** was credited to "S. Vegetti, O. Czoske, L. V. E. Koopmans, *Globular Clusters as the
+  First High-Mass Star Clusters of Dwarf Galaxies*, MNRAS 408, 430 (2010)". The real paper is
+  **Vegetti, Koopmans, Bolton, Treu & Gavazzi, "Detection of a dark substructure through
+  gravitational imaging", MNRAS 408, 1969 (2010)**, arXiv:0910.0760. Czoske is not an author,
+  the title is a different paper's, and the page is wrong. **The body use (the JVAS B1938+666
+  perturber) was already correct**, so only the entry needed re-pointing.
+- **[14]** gave AJ 152, 3 (2020); the real paper is **"SPARC: Mass Models for 175 Disk Galaxies
+  with Spitzer Photometry and Accurate Rotation Curves", AJ 152, 157 (2016)**, arXiv:1606.09251.
+- **[6]** gave arXiv:1308.0009, which is *Kipping, "Efficient, uninformative sampling of limb
+  darkening"* — a different paper. The correct id is arXiv:**1302.3898**.
+- **[15d]** gave the year as 2024; the published record is **Res. Notes AAS 10, 247 (2026)**,
+  arXiv:2608.20911.
+
+**[11] and [12] were removed** at the user's decision: no paper matching either description
+exists in any index, so both entries were deleted and the L90 sentence was rewritten to drop
+the citations **and** the claims they supported.
+
+**Two slots were added for work named in the body with no reference entry:** [18] Balberg,
+Shapiro & Inagaki 2002 (named 11 times) and [19] Fischer & Yu 2026 (named 9 times). All 20
+body mentions now carry slot numbers.
+
+**The "Yang+ 2024" shorthand was resolved site by site** (34 occurrences, each classified
+against the two downloaded PDFs): 28 → [43] (the parametric model, arXiv:2305.16176) and 1 →
+[17] (the velocity-dependent sigma/m(v) fit, arXiv:2305.05067). The remainder were the
+disambiguation note itself. **The registry's "NOT TO DOWNLOAD" marking of arXiv:2305.16176 was
+wrong** — the PDF was downloaded and read, and it is confirmed to be the paper the code
+implements.

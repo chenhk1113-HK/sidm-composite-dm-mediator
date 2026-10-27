@@ -45,7 +45,7 @@ This is the canonical source for paper authentication. When a new loop uses a va
 - **Jee, Park, Lee 2026** — "A New Robust Constraint on the Self-interaction Cross-section of Dark Matter with Double Radio Relic Clusters." arXiv:2605.00093. Accepted ApJ. **STATUS: VERIFIED** (PDF read; abstract gives σ/m < 0.22 cm²/g at 68% CL, σ/m < 0.63 at 95% CL).
 - **Andrade+ 2022** — MNRAS 510, 54. "Stringent upper limit on dark matter self-interaction cross-section" (149 citations per v40.11 doc). **STATUS: TO VERIFY** (no arXiv ID in v40.11 doc; need full citation).
 - **SASHIMI-SIDM (Ando+ 2024)** — arXiv:2403.16633, JCAP02(2025)053. "Semi-analytical subhalo modelling for self-interacting dark matter at sub-galactic scales." GitHub: shinichiroando/sashimi-si. **STATUS: TO VERIFY (v40.16 added)** — relevance LOW for current v40.x (no substructure analysis); MEDIUM if scope expands to streams/JVAS/substructure.
-- **parametricSIDM (Yang et al.)** — github.com/DanengYang/parametricSIDM, accompanying arXiv:2305.16176. "A Parametric Model for SIDM Halos." **STATUS: NOT TO DOWNLOAD** — same paper as the v40.4 wrong-citation bug (arXiv:2305.16176, fixed in v40.13). Real paper but NOT the gravothermal/isothermal Cloud-9 reference (that's arXiv:2305.05067). Could supplement v40.7 gravothermal work; would need re-validation.
+- **parametricSIDM (Yang et al.)** — github.com/DanengYang/parametricSIDM, accompanying arXiv:2305.16176. "A Parametric Model for SIDM Halos." **STATUS: VERIFIED 2026-10-27 (SUPERSEDES the earlier "NOT TO DOWNLOAD" marking, which was WRONG).** The PDF was downloaded and read: it is confirmed to be the paper the code implements — eq. (2.1) density profile (beta=4), eq. (2.2) collapse time (150 prefactor, C=0.75), eq. (2.3) parameter evolution, eq. (2.4) Vmax/Rmax, the BM2 calibration (t_c = 28.7 Gyr at sigma_eff/m = 7.1 cm2/g), and Cosmo-501 from Table 1. It is cited in the draft as **[43]** and is DISTINCT from arXiv:2305.05067 ([17], the gravothermal-vs-isothermal sigma/m(v) fit). See registry §7.10.
 
 ---
 
@@ -354,6 +354,72 @@ paper gets downloaded and validated, or the citation and the code's attribution 
 - **[11]** and **[12]** remain unresolvable (see §7.8).
 - **Balberg+ 2002** (11 body mentions) and **Fischer & Yu 2026** (9 mentions) are named in the body
   with **no reference slot at all** — same class of defect as the old Yang+ 2024 case.
+
+## 7.10 USER-DIRECTED CITATION FIX ROUND (2026-10-27)
+
+The user reviewed a 9-item outstanding-issues list and decided: **fix [16] and [14];
+remove [11] and [12]; download and validate [43]; go through the "Yang+ 2024" sites;
+find Balberg+/Fischer & Yu; run option 1; deliver last.**
+
+### Four MORE citation defects found and fixed (each verified against the live record)
+
+| Slot | Printed | Verified | Fix |
+|---|---|---|---|
+| [16] | "S. Vegetti, O. Czoske, L. V. E. Koopmans, *Globular Clusters as the First High-Mass Star Clusters of Dwarf Galaxies*, MNRAS 408, 430 (2010)" | Vegetti, Koopmans, Bolton, Treu & Gavazzi, *"Detection of a dark substructure through gravitational imaging"*, MNRAS 408, **1969** (2010), arXiv:0910.0760, doi 10.1111/j.1365-2966.2010.16865.x | Czoske is not an author; the title is a different paper's; page 430 is wrong. **The body use (JVAS B1938+666 perturber) was already correct** — only the entry needed re-pointing. |
+| [14] | "The SPARC Dataset: A Comprehensive and High-Precision Sample of Galaxy Rotation Curves," AJ 152, **3 (2020)** | *"SPARC: Mass Models for 175 Disk Galaxies with Spitzer Photometry and Accurate Rotation Curves"*, AJ 152, **157 (2016)**, arXiv:1606.09251, doi 10.3847/0004-6256/152/6/157 | Page, year and title corrected. |
+| [6] | arXiv:**1308.0009** | arXiv:**1302.3898** | 1308.0009 is *Kipping, "Efficient, uninformative sampling of limb darkening"* — a different paper. 1302.3898 was already in the local KB. |
+| [15d] | Res. Notes AAS (**2024**) | Res. Notes AAS **10, 247 (2026)**, arXiv:2608.20911, doi 10.3847/2515-5172/ae9cb8 | Year wrong; volume/page/arXiv/DOI added. |
+
+Also completed: **[42]** (was "Phys. Rev. D (2025)" with no volume, page or arXiv ID →
+PRD 112, 083502 (2025), arXiv:2504.02303, doi 10.1103/9952-qf5l); **[15c]** (DOI added);
+**[15a]** (arXiv:2306.05080 added); **[2]** (arXiv:1504.01437 added); **[4]** (arXiv:0704.0261 added).
+
+### [11] and [12] REMOVED
+
+No paper matching either description exists in arXiv, InspireHEP, Crossref, Semantic
+Scholar or OpenAlex. Both reference entries were **deleted** and the L90 sentence was
+**rewritten to drop the citations AND the claims they supported**, keeping the verified
+[13] and [10] clauses. Neither slot appeared anywhere else in the body.
+
+### TWO new slots added for papers named in the body with NO reference entry
+
+- **[18]** S. Balberg, S. L. Shapiro, S. Inagaki, *"Self-Interacting Dark Matter Halos and the
+  Gravothermal Catastrophe"*, ApJ 568, 475 (2002), arXiv:astro-ph/0110561 — named **11 times**
+  in the body (companion PRL 88, 101301, arXiv:astro-ph/0111176 noted).
+- **[19]** M. S. Fischer, H.-B. Yu, *"The dark fate of ultra-faint dwarfs: Gravothermal collapse in
+  action"*, arXiv:2603.04508 (2026), doi 10.1051/0004-6361/202659748 — named **9 times**.
+
+All 11 and all 9 body mentions now carry the slot number.
+
+### "Yang+ 2024" RESOLVED SITE BY SITE — 34 occurrences
+
+Both papers were downloaded and read before classifying:
+
+- **[43] arXiv:2305.16176** *"A Parametric Model for Self-Interacting Dark Matter Halos"* — the
+  paper the code implements. Confirmed from the PDF: eq. (2.1) density profile with **beta = 4**;
+  eq. (2.2) collapse time with the **150** prefactor and **C = 0.75**; eq. (2.3) parameter
+  evolution; eq. (2.4) Vmax/Rmax evolution; **BM2** calibration (t_c = 28.7 Gyr at
+  sigma_eff/m = 7.1 cm2/g); **Cosmo-501** from Table 1; Fig. 2; sigma0/m = **147.1** cm2/g with
+  **w = 24.33** km/s. **28 occurrences → [43].**
+- **[17] arXiv:2305.05067** *"A quantitative comparison between velocity dependent SIDM cross
+  sections constrained by the gravothermal and isothermal models"* — the **velocity-dependent
+  sigma/m(v) fit** (double power law, Eq. 19-21) and the SPARC+BCG cross-section constraints.
+  **1 occurrence → [17]**: the L476 line introducing the canonical sigma/m(v) form.
+
+**The registry's earlier marking of 2305.16176 as "NOT TO DOWNLOAD" was WRONG and is
+superseded.** The code's attribution was correct all along: `gravothermal_yang2024.py`
+implements eq. 2.1-2.4, the BM2 calibration and the Cosmo-501 test from 2305.16176, and the
+PDF confirms every one of those. The v40.4 "bug" was a *different* mistake (the wrong arXiv
+ID attached to a gravothermal-model claim), not evidence that this paper is irrelevant.
+
+### Option 1 executed — every cited paper now has a local PDF
+
+`docs/papers/fetch_all_cited_papers.sh` (new; supersedes the option-2
+`fetch_cited_papers.sh`) downloads the **full 42-slot bibliography**. PDFs are gitignored
+(local-only, re-downloadable); the `.md` summaries are tracked in git.
+
+**Standing note on the KB rule:** the summaries are the tracked artefact. A summary must state
+the paper's KEY NUMBERS and how v19.2-F uses it — a title-only stub does not satisfy §8.
 
 ## 8. Standing rule for future sessions (locked 2026-10-19)
 

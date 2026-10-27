@@ -40,9 +40,24 @@ papers the PAPER BODY actually leans on, downloaded because §8's rule requires 
 - [[2503.10748 Nadler+ 2025]] — SIDM Concerto [51]
 - [[2601.23264 Engelhardt+ 2026]] — MARVELously Dark [49]
 
-**Known gap:** ~19 cited slots still have no local PDF (out of option-2 scope). The shorthand
-"Yang+ 2024" refers to TWO papers — [17] arXiv:2305.05067 and [43] arXiv:2305.16176; [43] is
-marked NOT TO DOWNLOAD in the registry but is cited and implemented in code. See registry §7.9.
+**Known gap (CLOSED 2026-10-27):** option 1 has been run — `fetch_all_cited_papers.sh`
+downloads the FULL 42-slot bibliography, so every cited paper now has a local PDF.
+Re-download with `bash docs/papers/fetch_all_cited_papers.sh`.
+
+**"Yang+ 2024" is TWO papers — RESOLVED site by site (2026-10-27):**
+- **[17]** arXiv:2305.05067 — Yang, Jiang, Benson, Zhong, Mace, Du, Zeng, Peter & Fischer,
+  MNRAS 533, 4007 (2024). The **velocity-dependent σ/m(v) fit** (Eq. 19-21) and the
+  SPARC+BCG cross-section constraints.
+- **[43]** arXiv:2305.16176 — Yang, Nadler, Yu & Zhong, JCAP 02 (2024) 032,
+  "A Parametric Model for SIDM Halos". **VALIDATED** by reading the PDF: eq. (2.1)
+  density profile (β=4), eq. (2.2) collapse time (150 prefactor, C=0.75), eq. (2.3)
+  parameter evolution, eq. (2.4) Vmax/Rmax, the BM2 calibration (t_c = 28.7 Gyr at
+  σ_eff/m = 7.1 cm²/g) and Cosmo-501 from Table 1. **The registry's earlier "NOT TO
+  DOWNLOAD" marking of this paper was wrong** — see registry §7.10.
+
+**Two papers named in the body with no reference entry — SLOTS NOW ADDED:** [18]
+Balberg, Shapiro & Inagaki 2002 (astro-ph/0110561, named 11×) and [19] Fischer & Yu
+2026 (arXiv:2603.04508, named 9×).
 
 - [[2305.05067 Yang+ 2024 (Cloud-9)]] — gravothermal/isothermal σ/m comparison
 - [[2207.13111 Gilman+ 2023]] — resonant SIDM strong-lensing constraint
