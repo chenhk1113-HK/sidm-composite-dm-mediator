@@ -1,0 +1,1569 @@
+{
+  "generated_by": "scripts/resolve_references.py",
+  "paper": "v0.3-prelim\\docs\\PAPER_V1_DRAFT.md",
+  "counts": {
+    "RESOLVED": 11,
+    "CONFLICT": 18,
+    "UNRESOLVED": 2
+  },
+  "duplicates": [
+    {
+      "key": "1508.03339v1",
+      "slots": [
+        "1",
+        "50d"
+      ]
+    }
+  ],
+  "results": {
+    "1": {
+      "slot": "1",
+      "seed": {
+        "authors": [
+          "Kaplinghat",
+          "Tulin",
+          "Yu"
+        ],
+        "year": 2016,
+        "title": "Dark Matter Halos as Particle Colliders: Unified Solution to Small-Scale Structure Problems from Dark Matter Collisions",
+        "journal": "Phys. Rev. Lett.",
+        "volume": "116",
+        "page": "041302",
+        "arxiv": "1508.03339",
+        "note": "audit Tier-2: 'Kaplinghat, Tulin, Yu — PRL 116, 041302'; body cites 'Kaplinghat, Tulin & Yu 2016 [1]'. NOTE: body also cites the same paper as [50d] (arXiv:1508.03339) — DUPLICATE suspected."
+      },
+      "status": "RESOLVED",
+      "resolved": {
+        "title": "Dark Matter Halos as Particle Colliders: Unified Solution to Small-Scale Structure Puzzles from Dwarfs to Clusters",
+        "authors": [
+          "Kaplinghat",
+          "Tulin",
+          "Yu"
+        ],
+        "container": "Physical Review Letters",
+        "volume": "116",
+        "page": "041302",
+        "year": 2016,
+        "doi": "10.1103/physrevlett.116.041302",
+        "arxiv": "1508.03339v1",
+        "journal_ref_from_arxiv": "Phys. Rev. Lett. 116, 041302 (2016)"
+      },
+      "evidence": [
+        "arXiv id_list=1508.03339 -> 1 entry(ies)",
+        "Crossref DOI 10.1103/PhysRevLett.116.041302 -> hit",
+        "cross-check arXiv vs Crossref title overlap=1.00",
+        "venue match (journal+volume+page vs seed): YES",
+        "title overlap vs seed = 0.83",
+        "authors expected=['Kaplinghat', 'Tulin', 'Yu'] got=['Kaplinghat', 'Tulin', 'Yu'] (all present)",
+        "year expected=2016 got=2016 (ok)"
+      ],
+      "reason": ""
+    },
+    "1a": {
+      "slot": "1a",
+      "seed": {
+        "authors": [
+          "Benítez-Llambay"
+        ],
+        "year": 2024,
+        "title": "Examining the Nature of the Starless Dark Matter Halo Candidate Cloud-9",
+        "journal": "Astrophys. J.",
+        "volume": "973",
+        "page": "61",
+        "arxiv": "2406.18643",
+        "note": "body: 'BLN24 (Benítez-Llambay+ 2024, ApJ 973, 61, arXiv:2406.18643 [1a])'. NOTE: audit lists the same Cloud-9 paper as [15b] — DUPLICATE suspected."
+      },
+      "status": "RESOLVED",
+      "resolved": {
+        "title": "Examining the Nature of the Starless Dark Matter Halo Candidate Cloud-9 with Very Large Array Observations",
+        "authors": [
+          "Benítez-Llambay",
+          "Dutta",
+          "Fumagalli",
+          "Navarro"
+        ],
+        "container": "The Astrophysical Journal",
+        "volume": "973",
+        "page": "61",
+        "year": 2024,
+        "doi": "10.3847/1538-4357/ad65d9",
+        "arxiv": "2406.18643v1",
+        "journal_ref_from_arxiv": null,
+        "note": "preprint title differs from published title; the published version is used"
+      },
+      "evidence": [
+        "arXiv id_list=2406.18643 -> 1 entry(ies)",
+        "Crossref title search -> 8 hit(s)",
+        "Crossref best candidate: score=4.00 title_overlap=1.00 Examining the Nature of the Starless Dark Matter Halo Candidate Cloud-",
+        "cross-check arXiv vs Crossref title overlap=0.58",
+        "seed match: arXiv=0.75 crossref=1.00",
+        "decision: same author set and year on both sides — this is the PREPRINT and the PUBLISHED version of one paper (title changed between them); NOT a conflict"
+      ],
+      "reason": ""
+    },
+    "2": {
+      "slot": "2",
+      "seed": {
+        "authors": [
+          "Oman"
+        ],
+        "year": 2015,
+        "title": "The unexpected diversity of dwarf galaxy rotation curves",
+        "journal": "Mon. Not. R. Astron. Soc.",
+        "volume": "452",
+        "page": "3650",
+        "arxiv": "1504.01437",
+        "note": "audit Tier-2: 'Oman et al. — MNRAS 452, 3650'; body cites 'Oman et al. 2015 [2]'."
+      },
+      "status": "RESOLVED",
+      "resolved": {
+        "title": "The unexpected diversity of dwarf galaxy rotation curves",
+        "authors": [
+          "Oman",
+          "Navarro",
+          "Fattahi",
+          "Frenk",
+          "Sawala",
+          "White",
+          "Bower",
+          "Crain",
+          "Furlong",
+          "Schaller",
+          "Schaye",
+          "Theuns"
+        ],
+        "container": "Monthly Notices of the Royal Astronomical Society",
+        "volume": "452",
+        "page": "3650-3665",
+        "year": 2015,
+        "doi": "10.1093/mnras/stv1504",
+        "arxiv": "1504.01437v2",
+        "journal_ref_from_arxiv": "MNRAS 452 (2015) 3650-3665"
+      },
+      "evidence": [
+        "arXiv id_list=1504.01437 -> 1 entry(ies)",
+        "Crossref DOI 10.1093/mnras/stv1504 -> hit",
+        "cross-check arXiv vs Crossref title overlap=1.00",
+        "venue match (journal+volume+page vs seed): YES",
+        "title overlap vs seed = 1.00",
+        "authors expected=['Oman'] got=['Oman', 'Navarro', 'Fattahi', 'Frenk', 'Sawala', 'White', 'Bower', 'Crain'] (all present)",
+        "year expected=2015 got=2015 (ok)"
+      ],
+      "reason": ""
+    },
+    "3": {
+      "slot": "3",
+      "seed": {
+        "authors": [
+          "Boylan-Kolchin",
+          "Bullock",
+          "Kaplinghat"
+        ],
+        "year": 2011,
+        "title": "Too big to fail? The puzzling darkness of massive Milky Way subhaloes",
+        "journal": "Mon. Not. R. Astron. Soc.",
+        "volume": "415",
+        "page": "L40",
+        "arxiv": "1103.0007",
+        "note": "audit Tier-2: 'Boylan-Kolchin, Bullock, Kaplinghat — MNRAS 415'; body cites 'Boylan-Kolchin et al. 2011 [3]'."
+      },
+      "status": "RESOLVED",
+      "resolved": {
+        "title": "Too big to fail? The puzzling darkness of massive Milky Way subhaloes",
+        "authors": [
+          "Boylan-Kolchin",
+          "Bullock",
+          "Kaplinghat"
+        ],
+        "container": "Monthly Notices of the Royal Astronomical Society: Letters",
+        "volume": "415",
+        "page": "L40-L44",
+        "year": 2011,
+        "doi": "10.1111/j.1745-3933.2011.01074.x",
+        "arxiv": "1103.0007v2",
+        "journal_ref_from_arxiv": "Mon.Not.Roy.Astron.Soc.415:L40,2011"
+      },
+      "evidence": [
+        "arXiv id_list=1103.0007 -> 1 entry(ies)",
+        "Crossref DOI 10.1111/j.1745-3933.2011.01074.x -> hit",
+        "cross-check arXiv vs Crossref title overlap=1.00",
+        "venue match (journal+volume+page vs seed): YES",
+        "title overlap vs seed = 1.00",
+        "authors expected=['Boylan-Kolchin', 'Bullock', 'Kaplinghat'] got=['Boylan-Kolchin', 'Bullock', 'Kaplinghat'] (all present)",
+        "year expected=2011 got=2011 (ok)"
+      ],
+      "reason": ""
+    },
+    "4": {
+      "slot": "4",
+      "seed": {
+        "authors": [
+          "Randall"
+        ],
+        "year": 2008,
+        "title": "A Map of Dark Matter",
+        "journal": "Astrophys. J.",
+        "volume": "679",
+        "note": "audit Tier-2: 'Randall et al. — ApJ 679 (Bullet Cluster)'; body cites 'Randall et al. 2008 [4]'."
+      },
+      "status": "CONFLICT",
+      "resolved": {
+        "arxiv": {},
+        "crossref": {
+          "doi": "10.1088/2058-7058/21/02/7",
+          "title": "Dark-matter map illuminates dark energy's push",
+          "container": "Physics World",
+          "volume": "21",
+          "page": "5-5",
+          "article_number": null,
+          "year": 2008,
+          "authors": [],
+          "type": "journal-article",
+          "publisher": "IOP Publishing"
+        },
+        "title": "Dark-matter map illuminates dark energy's push"
+      },
+      "evidence": [
+        "arXiv search 'A Map of Dark Matter' -> 0 hit(s)",
+        "arXiv search: no candidate cleared the score floor",
+        "Crossref title search -> 8 hit(s)",
+        "Crossref best candidate: score=3.00 title_overlap=1.00 Dark-matter map illuminates dark energy's push",
+        "venue match (journal+volume+page vs seed): NO | resolved: journal='Physics World' vol='21' page='5-5'",
+        "title overlap vs seed = 1.00"
+      ],
+      "reason": "venue mismatch (seed expects Astrophys. J. 679; resolved 'Physics World' vol='21' page='5-5') - title overlap 1.00 does not rescue it: Dark-matter map illuminates dark energy's push"
+    },
+    "5": {
+      "slot": "5",
+      "seed": {
+        "authors": [
+          "Feng",
+          "Kaplinghat",
+          "Yu"
+        ],
+        "year": 2010,
+        "title": "Effective Theory of Dark Matter Direct Detection",
+        "journal": "Phys. Rev. Lett.",
+        "volume": "104",
+        "page": "151301",
+        "note": "audit Tier-2: 'Feng, Kaplinghat, Yu — PRL 104'; body cites 'Feng, Kaplinghat & Yu 2009 [5]'."
+      },
+      "status": "CONFLICT",
+      "resolved": {
+        "arxiv": {},
+        "crossref": {
+          "doi": "10.1093/oso/9780198855743.003.0011",
+          "title": "Effective Theory Approach to Direct Detection of Dark Matter",
+          "container": "Effective Field Theory in Particle Physics and Cosmology",
+          "volume": null,
+          "page": "650-688",
+          "article_number": null,
+          "year": 2020,
+          "authors": [
+            "Hisano"
+          ],
+          "type": "book-chapter",
+          "publisher": "Oxford University PressOxford"
+        },
+        "title": "Effective Theory Approach to Direct Detection of Dark Matter"
+      },
+      "evidence": [
+        "arXiv search 'Effective Theory of Dark Matter Direct Detection' -> 0 hit(s)",
+        "arXiv search: no candidate cleared the score floor",
+        "Crossref title search -> 8 hit(s)",
+        "Crossref best candidate: score=2.00 title_overlap=1.00 Effective Theory Approach to Direct Detection of Dark Matter",
+        "venue match (journal+volume+page vs seed): NO | resolved: journal='Effective Field Theory in Particle Physics and Cosmology' vol=None page='650-688'",
+        "title overlap vs seed = 1.00"
+      ],
+      "reason": "venue mismatch (seed expects Phys. Rev. Lett. 104 151301; resolved 'Effective Field Theory in Particle Physics and Cosmology' vol=None page='650-688') - title overlap 1.00 does not rescue it: Effective Theory Approach to Direct Detection of Dark Matter"
+    },
+    "6": {
+      "slot": "6",
+      "seed": {
+        "authors": [
+          "Tulin",
+          "Yu",
+          "Zurek"
+        ],
+        "year": 2013,
+        "title": "Dark Matter Self-Interactions and Velocities",
+        "journal": "Phys. Rev. Lett.",
+        "volume": "110",
+        "page": "111301",
+        "note": "audit Tier-2: 'Tulin, Yu, Zurek — PRD 87'; body cites 'Tulin, Yu & Zurek 2013 [6]'."
+      },
+      "status": "CONFLICT",
+      "resolved": {
+        "arxiv": {},
+        "crossref": {
+          "doi": "10.1002/andp.201200073",
+          "title": "Multiple dark matter as a self‐regulating mechanism for dark sector interactions",
+          "container": "Annalen der Physik",
+          "volume": "524",
+          "page": "602-617",
+          "article_number": null,
+          "year": 2012,
+          "authors": [
+            "Baldi"
+          ],
+          "type": "journal-article",
+          "publisher": "Wiley"
+        },
+        "title": "Multiple dark matter as a self‐regulating mechanism for dark sector interactions"
+      },
+      "evidence": [
+        "arXiv search 'Dark Matter Self-Interactions and Velocities' -> 0 hit(s)",
+        "arXiv search: no candidate cleared the score floor",
+        "Crossref title search -> 8 hit(s)",
+        "Crossref best candidate: score=2.60 title_overlap=0.80 Multiple dark matter as a self‐regulating mechanism for dark sector in",
+        "venue match (journal+volume+page vs seed): NO | resolved: journal='Annalen der Physik' vol='524' page='602-617'",
+        "title overlap vs seed = 0.80"
+      ],
+      "reason": "venue mismatch (seed expects Phys. Rev. Lett. 110 111301; resolved 'Annalen der Physik' vol='524' page='602-617') - title overlap 0.80 does not rescue it: Multiple dark matter as a self‐regulating mechanism for dark sector interactions"
+    },
+    "7": {
+      "slot": "7",
+      "seed": {
+        "authors": [
+          "Chu",
+          "Hambye",
+          "Tytgat"
+        ],
+        "year": 2018,
+        "title": "Resonance in Dark Matter Scattering",
+        "journal": "Phys. Rev. Lett.",
+        "volume": "122",
+        "page": "171301",
+        "note": "audit Tier-2: 'Chu, Hambye & Tytgat — PRL 122 (Chu P1)'; body cites 'Chu, Hambye & Tytgat 2018 [7]'."
+      },
+      "status": "CONFLICT",
+      "resolved": {
+        "arxiv": {},
+        "crossref": {
+          "doi": "10.1063/1.5010126",
+          "title": "Charged mediators in dark matter scattering",
+          "container": "AIP Conference Proceedings",
+          "volume": "1900",
+          "page": "040008",
+          "article_number": null,
+          "year": 2017,
+          "authors": [
+            "Stengel"
+          ],
+          "type": "proceedings-article",
+          "publisher": "Author(s)"
+        },
+        "title": "Charged mediators in dark matter scattering"
+      },
+      "evidence": [
+        "arXiv search 'Resonance in Dark Matter Scattering' -> 0 hit(s)",
+        "arXiv search: no candidate cleared the score floor",
+        "Crossref title search -> 8 hit(s)",
+        "Crossref best candidate: score=2.50 title_overlap=0.75 Charged mediators in dark matter scattering",
+        "venue match (journal+volume+page vs seed): NO | resolved: journal='AIP Conference Proceedings' vol='1900' page='040008'",
+        "title overlap vs seed = 0.75"
+      ],
+      "reason": "venue mismatch (seed expects Phys. Rev. Lett. 122 171301; resolved 'AIP Conference Proceedings' vol='1900' page='040008') - title overlap 0.75 does not rescue it: Charged mediators in dark matter scattering"
+    },
+    "8": {
+      "slot": "8",
+      "seed": {
+        "authors": [
+          "Duerr"
+        ],
+        "year": 2021,
+        "title": "Self-interacting dark matter with a light mediator",
+        "journal": "J. High Energy Phys.",
+        "note": "audit Tier-2: 'Duerr et al. — JHEP 2021'; body cites 'Duerr et al. 2021 [8]'."
+      },
+      "status": "CONFLICT",
+      "resolved": {
+        "arxiv": {},
+        "crossref": {
+          "doi": "10.1088/1475-7516/2020/05/001",
+          "title": "Minimal self-interacting dark matter models with light mediator",
+          "container": "Journal of Cosmology and Astroparticle Physics",
+          "volume": "2020",
+          "page": "001-001",
+          "article_number": null,
+          "year": 2020,
+          "authors": [
+            "Hambye",
+            "Vanderheyden"
+          ],
+          "type": "journal-article",
+          "publisher": "IOP Publishing"
+        },
+        "title": "Minimal self-interacting dark matter models with light mediator"
+      },
+      "evidence": [
+        "arXiv search 'Self-interacting dark matter with a light mediator' -> 0 hit(s)",
+        "arXiv search: no candidate cleared the score floor",
+        "Crossref title search -> 8 hit(s)",
+        "Crossref best candidate: score=3.00 title_overlap=1.00 Minimal self-interacting dark matter models with light mediator",
+        "venue match (journal+volume+page vs seed): NO | resolved: journal='Journal of Cosmology and Astroparticle Physics' vol='2020' page='001-001'",
+        "title overlap vs seed = 1.00"
+      ],
+      "reason": "venue mismatch (seed expects J. High Energy Phys.; resolved 'Journal of Cosmology and Astroparticle Physics' vol='2020' page='001-001') - title overlap 1.00 does not rescue it: Minimal self-interacting dark matter models with light mediator"
+    },
+    "9": {
+      "slot": "9",
+      "seed": {
+        "authors": [
+          "Hong",
+          "Kuranchi",
+          "Perez"
+        ],
+        "year": 2020,
+        "title": null,
+        "journal": "Phys. Rev. D",
+        "volume": "102",
+        "note": "audit Tier-2: 'Hong, Kuranchi & Perez — PRD 102 (VERIFY)'; body cites 'Hong, Kuranchi & Perez 2020 [9]'."
+      },
+      "status": "CONFLICT",
+      "resolved": {
+        "arxiv": {},
+        "crossref": {
+          "doi": "10.1103/physrevd.102.075028",
+          "title": "Fermi-ball dark matter from a first-order phase transition",
+          "container": "Physical Review D",
+          "volume": "102",
+          "page": null,
+          "article_number": "075028",
+          "year": 2020,
+          "authors": [
+            "Hong",
+            "Jung",
+            "Xie"
+          ],
+          "type": "journal-article",
+          "publisher": "American Physical Society (APS)"
+        },
+        "title": "Fermi-ball dark matter from a first-order phase transition"
+      },
+      "evidence": [
+        "arXiv search 'Phys. Rev. D 2020 Hong Kuranchi Perez' -> 0 hit(s)",
+        "arXiv search: no candidate cleared the score floor",
+        "Crossref venue query 'Hong Phys. Rev. D 102 None' -> 8 hit(s)",
+        "Crossref venue-query best: score=2.00 title_overlap=0.00 Fermi-ball dark matter from a first-order phase transition",
+        "venue match (journal+volume+page vs seed): YES",
+        "authors expected=['Hong', 'Kuranchi', 'Perez'] got=['Hong', 'Jung', 'Xie'] MISSING=['Kuranchi', 'Perez']"
+      ],
+      "reason": "expected author(s) ['Kuranchi', 'Perez'] are absent from the resolved record ['Hong', 'Jung', 'Xie'] - this is a different paper, not the one cited"
+    },
+    "11": {
+      "slot": "11",
+      "seed": {
+        "authors": [
+          "Yang",
+          "Yu"
+        ],
+        "year": 2023,
+        "title": "Self-interacting dark matter with a single breathing-mode mediator",
+        "journal": "Phys. Rev. D",
+        "volume": "108",
+        "page": "043040",
+        "note": "audit Tier-2: 'Yang, Yu — PRD 108'; body cites 'Yang & Yu 2023 [11]'."
+      },
+      "status": "CONFLICT",
+      "resolved": {
+        "arxiv": {},
+        "crossref": {
+          "doi": "10.22323/1.449.0121",
+          "title": "Self-interacting Dark Matter with Scalar Dilepton Mediator",
+          "container": "Proceedings of The European Physical Society Conference on High Energy Physics — PoS(EPS-HEP2023)",
+          "volume": null,
+          "page": "121",
+          "article_number": null,
+          "year": 2024,
+          "authors": [
+            "Kao"
+          ],
+          "type": "proceedings-article",
+          "publisher": "Sissa Medialab"
+        },
+        "title": "Self-interacting Dark Matter with Scalar Dilepton Mediator"
+      },
+      "evidence": [
+        "arXiv search 'Self-interacting dark matter with a single breathing-mode me' -> 0 hit(s)",
+        "arXiv search: no candidate cleared the score floor",
+        "Crossref title search -> 8 hit(s)",
+        "Crossref best candidate: score=2.25 title_overlap=0.62 Self-interacting Dark Matter with Scalar Dilepton Mediator",
+        "venue match (journal+volume+page vs seed): NO | resolved: journal='Proceedings of The European Physical Society Conference on High Energy Physics — PoS(EPS-HEP2023)' vol=None page='121'",
+        "title overlap vs seed = 0.62"
+      ],
+      "reason": "venue mismatch (seed expects Phys. Rev. D 108 043040; resolved 'Proceedings of The European Physical Society Conference on High Energy Physics — PoS(EPS-HEP2023)' vol=None page='121') - title overlap 0.62 does not rescue it: Self-interacting Dark Matter with Scalar Dilepton Mediator"
+    },
+    "12": {
+      "slot": "12",
+      "seed": {
+        "authors": [
+          "Turner"
+        ],
+        "year": 2021,
+        "title": "Atomic Dark Matter",
+        "journal": "Phys. Rev. D",
+        "volume": "104",
+        "note": "audit Tier-2: 'Turner et al. — PRD 104 (VERIFY)'; body cites 'Turner et al. 2021 [12]' (atomic-DM transitions)."
+      },
+      "status": "CONFLICT",
+      "resolved": {
+        "arxiv": {},
+        "crossref": {
+          "doi": "10.26226/morressier.5fb692d74d4e91fe5c54c297",
+          "title": "Black Holes From Atomic Dark Matter",
+          "container": null,
+          "volume": null,
+          "page": null,
+          "article_number": null,
+          "year": 2020,
+          "authors": [
+            "Ryan"
+          ],
+          "type": "posted-content",
+          "publisher": "Morressier"
+        },
+        "title": "Black Holes From Atomic Dark Matter"
+      },
+      "evidence": [
+        "arXiv search 'Atomic Dark Matter' -> 0 hit(s)",
+        "arXiv search: no candidate cleared the score floor",
+        "Crossref title search -> 8 hit(s)",
+        "Crossref best candidate: score=3.00 title_overlap=1.00 Black Holes From Atomic Dark Matter",
+        "venue match (journal+volume+page vs seed): YES",
+        "title overlap vs seed = 1.00",
+        "authors expected=['Turner'] got=['Ryan'] MISSING=['Turner']"
+      ],
+      "reason": "expected author(s) ['Turner'] are absent from the resolved record ['Ryan'] - this is a different paper, not the one cited"
+    },
+    "13": {
+      "slot": "13",
+      "seed": {
+        "authors": [
+          "Yang",
+          "Yu"
+        ],
+        "year": 2022,
+        "title": "Revisiting the self-interacting dark matter in the dark sector",
+        "journal": "Phys. Rev. Lett.",
+        "volume": "128",
+        "page": "217402",
+        "note": "audit Tier-2: 'Yang, Yu — PRD 105'; body cites 'Yang & Yu 2022 [13]' (core-collapse extension)."
+      },
+      "status": "CONFLICT",
+      "resolved": {
+        "arxiv": {},
+        "crossref": {
+          "doi": "10.1016/j.dark.2021.100888",
+          "title": "Super interacting dark sector: An improvement on self-interacting dark matter via scaling relations of galaxy clusters",
+          "container": "Physics of the Dark Universe",
+          "volume": "34",
+          "page": "100888",
+          "article_number": "100888",
+          "year": 2021,
+          "authors": [
+            "Naseri",
+            "Firouzjaee"
+          ],
+          "type": "journal-article",
+          "publisher": "Elsevier BV"
+        },
+        "title": "Super interacting dark sector: An improvement on self-interacting dark matter via scaling relations of galaxy clusters"
+      },
+      "evidence": [
+        "arXiv search 'Revisiting the self-interacting dark matter in the dark sect' -> 0 hit(s)",
+        "arXiv search: no candidate cleared the score floor",
+        "Crossref title search -> 8 hit(s)",
+        "Crossref best candidate: score=2.67 title_overlap=0.83 Super interacting dark sector: An improvement on self-interacting dark",
+        "venue match (journal+volume+page vs seed): NO | resolved: journal='Physics of the Dark Universe' vol='34' page='100888'",
+        "title overlap vs seed = 0.83"
+      ],
+      "reason": "venue mismatch (seed expects Phys. Rev. Lett. 128 217402; resolved 'Physics of the Dark Universe' vol='34' page='100888') - title overlap 0.83 does not rescue it: Super interacting dark sector: An improvement on self-interacting dark matter vi"
+    },
+    "14": {
+      "slot": "14",
+      "seed": {
+        "authors": [
+          "Lelli",
+          "McGaugh",
+          "Schombert"
+        ],
+        "year": 2020,
+        "title": "The SPARC dataset: A comprehensive and high-precision sample of galaxy rotation curves",
+        "journal": "Astron. J.",
+        "volume": "152",
+        "page": "3",
+        "arxiv": "1909.08241",
+        "note": "audit Tier-2: 'Lelli, McGaugh, Schombert — AJ 152 (SPARC)'; body cites 'SPARC sample [14]'."
+      },
+      "status": "CONFLICT",
+      "resolved": {
+        "arxiv": {
+          "arxiv_id": "1909.08241v1",
+          "title": "Most General Variant Unifiers",
+          "published": "2019-09-18",
+          "updated": "2019-09-18",
+          "doi": "10.4204/EPTCS.306.21",
+          "journal_ref": "EPTCS 306, 2019, pp. 154-167",
+          "authors": [
+            "Santiago Escobar",
+            "Julia Sapiña"
+          ],
+          "primary": "cs.LO"
+        },
+        "crossref": {
+          "doi": "10.4204/eptcs.306.21",
+          "title": "Most General Variant Unifiers",
+          "container": "Electronic Proceedings in Theoretical Computer Science",
+          "volume": "306",
+          "page": "154-167",
+          "article_number": null,
+          "year": 2019,
+          "authors": [
+            "Escobar",
+            "Sapiña"
+          ],
+          "type": "journal-article",
+          "publisher": "Open Publishing Association"
+        },
+        "title": "Most General Variant Unifiers"
+      },
+      "evidence": [
+        "arXiv id_list=1909.08241 -> 1 entry(ies)",
+        "Crossref DOI 10.4204/EPTCS.306.21 -> hit",
+        "cross-check arXiv vs Crossref title overlap=1.00",
+        "venue match (journal+volume+page vs seed): NO | resolved: journal='Electronic Proceedings in Theoretical Computer Science' vol='306' page='154-167'",
+        "title overlap vs seed = 0.00"
+      ],
+      "reason": "venue mismatch (seed expects Astron. J. 152 3; resolved 'Electronic Proceedings in Theoretical Computer Science' vol='306' page='154-167') - title overlap 0.00 does not rescue it: Most General Variant Unifiers"
+    },
+    "16": {
+      "slot": "16",
+      "seed": {
+        "authors": [
+          "Vegetti"
+        ],
+        "year": 2010,
+        "title": "Globular clusters as the first high-mass star clusters of dwarf galaxies",
+        "journal": "Mon. Not. R. Astron. Soc.",
+        "volume": "408",
+        "page": "430",
+        "arxiv": "0911.3584",
+        "note": "audit Tier-2: 'Vegetti et al. — MNRAS 408'; body cites 'Vegetti et al. 2010 [16]' (JVAS B1938+666 perturber)."
+      },
+      "status": "CONFLICT",
+      "resolved": {
+        "arxiv": {
+          "arxiv_id": "0911.3584v1",
+          "title": "Calculations on millions of atoms with DFT: Linear scaling shows its potential",
+          "published": "2009-11-18",
+          "updated": "2009-11-18",
+          "doi": "10.1088/0953-8984/22/7/074207",
+          "journal_ref": "J. Phys.: Condens. Matter 22 (2010) 074207",
+          "authors": [
+            "D. R. Bowler",
+            "T. Miyazaki"
+          ],
+          "primary": "cond-mat.mtrl-sci"
+        },
+        "crossref": {
+          "doi": "10.1088/0953-8984/22/7/074207",
+          "title": "Calculations for millions of atoms with density functional theory: linear scaling shows its potential",
+          "container": "Journal of Physics: Condensed Matter",
+          "volume": "22",
+          "page": "074207",
+          "article_number": null,
+          "year": 2010,
+          "authors": [
+            "Bowler",
+            "Miyazaki"
+          ],
+          "type": "journal-article",
+          "publisher": "IOP Publishing"
+        },
+        "title": "Calculations for millions of atoms with density functional theory: linear scaling shows its potential"
+      },
+      "evidence": [
+        "arXiv id_list=0911.3584 -> 1 entry(ies)",
+        "Crossref DOI 10.1088/0953-8984/22/7/074207 -> hit",
+        "cross-check arXiv vs Crossref title overlap=0.70",
+        "venue match (journal+volume+page vs seed): NO | resolved: journal='Journal of Physics: Condensed Matter' vol='22' page='074207'",
+        "title overlap vs seed = 0.00"
+      ],
+      "reason": "venue mismatch (seed expects Mon. Not. R. Astron. Soc. 408 430; resolved 'Journal of Physics: Condensed Matter' vol='22' page='074207') - title overlap 0.00 does not rescue it: Calculations for millions of atoms with density functional theory: linear scalin"
+    },
+    "25": {
+      "slot": "25",
+      "seed": {
+        "authors": null,
+        "year": null,
+        "title": null,
+        "note": "INSUFFICIENT SEED — body only says 'extremely extended globular cluster systems [25]'. No author/year/journal recorded in the paper or AUDIT_REFERENCES.md. Needs a human."
+      },
+      "status": "UNRESOLVED",
+      "resolved": null,
+      "evidence": [],
+      "reason": "no candidate retrieved"
+    },
+    "26a": {
+      "slot": "26a",
+      "seed": {
+        "authors": [
+          "Mateo"
+        ],
+        "year": 1998,
+        "title": "The Dwarf Galaxies of the Local Group",
+        "journal": "Annu. Rev. Astron. Astrophys.",
+        "volume": "36",
+        "page": "435",
+        "arxiv": "9810070",
+        "note": "body: 'V_max = 18 km/s per Mateo+ 1998 [26a]' (Fornax stellar velocity dispersion)."
+      },
+      "status": "CONFLICT",
+      "resolved": {
+        "arxiv": {},
+        "crossref": {
+          "doi": "10.70675/7321be2dzd44fz4ba5z975ez617347c48ffd",
+          "title": "Local Group dwarf galaxies as cosmological probes",
+          "container": null,
+          "volume": null,
+          "page": null,
+          "article_number": null,
+          "year": null,
+          "authors": [
+            "Doliva-Dolinsky"
+          ],
+          "type": "dissertation",
+          "publisher": "Agence Bibliographique de l'Enseignement Supérieur"
+        },
+        "title": "Local Group dwarf galaxies as cosmological probes"
+      },
+      "evidence": [
+        "arXiv id_list=9810070 -> 0 entry(ies)",
+        "arXiv search 'The Dwarf Galaxies of the Local Group' -> 0 hit(s)",
+        "arXiv search: no candidate cleared the score floor",
+        "Crossref title search -> 8 hit(s)",
+        "Crossref best candidate: score=2.00 title_overlap=1.00 Local Group dwarf galaxies as cosmological probes",
+        "venue match (journal+volume+page vs seed): YES",
+        "title overlap vs seed = 1.00",
+        "authors expected=['Mateo'] got=['Doliva-Dolinsky'] MISSING=['Mateo']"
+      ],
+      "reason": "expected author(s) ['Mateo'] are absent from the resolved record ['Doliva-Dolinsky'] - this is a different paper, not the one cited"
+    },
+    "28": {
+      "slot": "28",
+      "seed": {
+        "authors": [
+          "Chu",
+          "Garcia-Cely",
+          "Murayama"
+        ],
+        "year": 2019,
+        "title": "Velocity Dependence from Resonant Self-Interacting Dark Matter",
+        "journal": "Phys. Rev. Lett.",
+        "volume": "122",
+        "page": "071103",
+        "arxiv": "1810.04709",
+        "note": "body: 'Chu, Garcia-Cely, Murayama 2019 [28], P1: m_DM_tilde = 400 MeV, v_R = 108 km/s'."
+      },
+      "status": "RESOLVED",
+      "resolved": {
+        "title": "Velocity Dependence from Resonant Self-Interacting Dark Matter",
+        "authors": [
+          "Chu",
+          "Garcia-Cely",
+          "Murayama"
+        ],
+        "container": "Physical Review Letters",
+        "volume": "122",
+        "page": "071103",
+        "year": 2019,
+        "doi": "10.1103/physrevlett.122.071103",
+        "arxiv": "1810.04709v2",
+        "journal_ref_from_arxiv": "Phys. Rev. Lett. 122, 071103 (2019)"
+      },
+      "evidence": [
+        "arXiv id_list=1810.04709 -> 1 entry(ies)",
+        "Crossref DOI 10.1103/PhysRevLett.122.071103 -> hit",
+        "cross-check arXiv vs Crossref title overlap=1.00",
+        "venue match (journal+volume+page vs seed): YES",
+        "title overlap vs seed = 1.00",
+        "authors expected=['Chu', 'Garcia-Cely', 'Murayama'] got=['Chu', 'Garcia-Cely', 'Murayama'] (all present)",
+        "year expected=2019 got=2019 (ok)"
+      ],
+      "reason": ""
+    },
+    "30": {
+      "slot": "30",
+      "seed": {
+        "authors": [
+          "Yang",
+          "Yu"
+        ],
+        "year": 2023,
+        "title": "Self-interacting dark matter with a single breathing-mode mediator",
+        "journal": "Phys. Rev. D",
+        "volume": "108",
+        "page": "043040",
+        "note": "body: 'Eq. 15 of [27], following Yang & Yu 2022 [30]'. NOTE: same authors+year as [13] (PRD 105) — DISTINCT paper expected (PRD 108 vs PRD 105); resolver must disambiguate."
+      },
+      "status": "CONFLICT",
+      "resolved": {
+        "arxiv": {},
+        "crossref": {
+          "doi": "10.22323/1.449.0121",
+          "title": "Self-interacting Dark Matter with Scalar Dilepton Mediator",
+          "container": "Proceedings of The European Physical Society Conference on High Energy Physics — PoS(EPS-HEP2023)",
+          "volume": null,
+          "page": "121",
+          "article_number": null,
+          "year": 2024,
+          "authors": [
+            "Kao"
+          ],
+          "type": "proceedings-article",
+          "publisher": "Sissa Medialab"
+        },
+        "title": "Self-interacting Dark Matter with Scalar Dilepton Mediator"
+      },
+      "evidence": [
+        "arXiv search 'Self-interacting dark matter with a single breathing-mode me' -> 0 hit(s)",
+        "arXiv search: no candidate cleared the score floor",
+        "Crossref title search -> 8 hit(s)",
+        "Crossref best candidate: score=2.25 title_overlap=0.62 Self-interacting Dark Matter with Scalar Dilepton Mediator",
+        "venue match (journal+volume+page vs seed): NO | resolved: journal='Proceedings of The European Physical Society Conference on High Energy Physics — PoS(EPS-HEP2023)' vol=None page='121'",
+        "title overlap vs seed = 0.62"
+      ],
+      "reason": "venue mismatch (seed expects Phys. Rev. D 108 043040; resolved 'Proceedings of The European Physical Society Conference on High Energy Physics — PoS(EPS-HEP2023)' vol=None page='121') - title overlap 0.62 does not rescue it: Self-interacting Dark Matter with Scalar Dilepton Mediator"
+    },
+    "45": {
+      "slot": "45",
+      "seed": {
+        "authors": [
+          "Zhang"
+        ],
+        "year": 2016,
+        "title": "Self-interacting Dark Matter Without Direct Detection",
+        "journal": "Phys. Dark Univ.",
+        "volume": "15",
+        "page": "82",
+        "arxiv": "1611.03492",
+        "note": "audit Tier-2: 'Zhang — Phys. Dark Univ. 15 (VERIFY)'; body: 'Hidden U(1) + pseudo-Dirac UV completion following Zhang 2016 [45]'."
+      },
+      "status": "RESOLVED",
+      "resolved": {
+        "title": "Self-interacting dark matter without direct detection constraints",
+        "authors": [
+          "Zhang"
+        ],
+        "container": "Physics of the Dark Universe",
+        "volume": "15",
+        "page": "82-89",
+        "year": 2017,
+        "doi": "10.1016/j.dark.2016.12.003",
+        "arxiv": "1611.03492v2",
+        "journal_ref_from_arxiv": "Phys. Dark Univ. 15 (2017) 82-89"
+      },
+      "evidence": [
+        "arXiv id_list=1611.03492 -> 1 entry(ies)",
+        "Crossref DOI 10.1016/j.dark.2016.12.003 -> hit",
+        "cross-check arXiv vs Crossref title overlap=1.00",
+        "venue match (journal+volume+page vs seed): YES",
+        "title overlap vs seed = 1.00",
+        "authors expected=['Zhang'] got=['Zhang'] (all present)",
+        "year expected=2016 got=2017 (ok)"
+      ],
+      "reason": ""
+    },
+    "49": {
+      "slot": "49",
+      "seed": {
+        "authors": [
+          "Engelhardt"
+        ],
+        "year": 2026,
+        "title": null,
+        "note": "body: 'Engelhardt et al. 2026 [49] also tests core-collapse timescales in velocity-dependent SIDM'. No arXiv id or journal recorded — resolver must search."
+      },
+      "status": "UNRESOLVED",
+      "resolved": null,
+      "evidence": [
+        "arXiv search 'Engelhardt' -> 0 hit(s)",
+        "arXiv search: no candidate cleared the score floor",
+        "Crossref bibliographic 'Engelhardt' -> 6 hit(s)",
+        "Crossref search: no candidate cleared the score floor"
+      ],
+      "reason": "no candidate retrieved"
+    },
+    "50": {
+      "slot": "50",
+      "seed": {
+        "authors": null,
+        "year": 2026,
+        "title": null,
+        "arxiv": "2609.02823",
+        "note": "body: 'LZ September 2026 single-event observation [50] (arXiv:2609.02823, 2.6σ, marginal status)'. No author recorded."
+      },
+      "status": "CONFLICT",
+      "resolved": {
+        "arxiv": {
+          "arxiv_id": "2609.02823v1",
+          "title": "Search for dark matter particle interactions in an extended nuclear recoil energy window with the LUX-ZEPLIN (LZ) experiment",
+          "published": "2026-09-02",
+          "updated": "2026-09-02",
+          "doi": null,
+          "journal_ref": null,
+          "authors": [
+            "D. S. Akerib",
+            "A. K. Al Musalhi",
+            "B. J. Almquist",
+            "C. S. Amarasinghe",
+            "A. Ames",
+            "T. Anderson",
+            "N. Angelides",
+            "H. M. Araújo",
+            "J. E. Armstrong",
+            "M. Arthurs",
+            "A. Baker",
+            "S. Balashov",
+            "J. Bang",
+            "J. W. Bargemann",
+            "E. E. Barillier",
+            "D. Bauer",
+            "K. Beattie",
+            "A. Beauchene",
+            "T. L. Benson",
+            "A. Bhatti",
+            "T. P. Biesiadzinski",
+            "H. J. Birch",
+            "E. Bishop",
+            "G. M. Blockinger",
+            "B. Boxer",
+            "C. A. J. Brew",
+            "P. Brás",
+            "S. Burdin",
+            "M. C. Carmona-Benitez",
+            "M. Carter",
+            "A. Chawla",
+            "J. J. Cherwinka",
+            "Y. T. Chin",
+            "S. Contreras",
+            "M. V. Converse",
+            "R. Coronel",
+            "A. Cottle",
+            "C. Coulson",
+            "G. Cox",
+            "C. E. Dahl",
+            "I. Darlington",
+            "S. Dave",
+            "J. Delgaudio",
+            "S. Desai",
+            "S. Dey",
+            "L. de Viveiros",
+            "L. Di Felice",
+            "C. Ding",
+            "J. E. Y. Dobson",
+            "E. Druszkiewicz",
+            "S. Dubey",
+            "C. L. Dunbar",
+            "S. R. Eriksen",
+            "S. Fayer",
+            "N. Fieldhouse",
+            "S. Fiorucci",
+            "H. Flaecher",
+            "E. D. Fraser",
+            "T. M. A. Fruth",
+            "P. W. Gaemers",
+            "R. J. Gaitskell",
+            "A. Geffre",
+            "J. Genovesi",
+            "C. Ghag",
+            "J. Ghamsari",
+            "A. Ghosh",
+            "S. Ghosh",
+            "R. Gibbons",
+            "S. Gokhale",
+            "J. Green",
+            "M. G. D. van der Grinten",
+            "J. J. Haiston",
+            "C. R. Hall",
+            "T. Hall",
+            "R. N. Hampp",
+            "S. J. Haselschwardt",
+            "M. A. Hernandez",
+            "S. A. Hertel",
+            "G. J. Homenides",
+            "M. Horn",
+            "T. Horoho",
+            "D. Q. Huang",
+            "W. Hulse",
+            "D. Hunt",
+            "E. Jacquet",
+            "R. S. James",
+            "K. R. Jenkins",
+            "A. C. Kaboth",
+            "A. C. Kamaha",
+            "D. Khaitan",
+            "A. Khazov",
+            "J. Kim",
+            "Y. D. Kim",
+            "D. Kodroff",
+            "Q. C. Kong",
+            "E. V. Korolkova",
+            "H. Kraus",
+            "S. Kravitz",
+            "L. Kreczko",
+            "V. A. Kudryavtsev",
+            "C. Lawes",
+            "E. B. Leon",
+            "D. S. Leonard",
+            "K. T. Lesko",
+            "C. Levy",
+            "Z. Li",
+            "J. Lin",
+            "A. Lindote",
+            "W. H. Lippincott",
+            "J. Long",
+            "M. I. Lopes",
+            "W. Lorenzon",
+            "C. Lu",
+            "S. Luitz",
+            "W. Ma",
+            "V. Mahajan",
+            "P. A. Majewski",
+            "A. Manalaysay",
+            "R. L. Mannino",
+            "R. J. Matheson",
+            "C. Maupin",
+            "M. E. McCarthy",
+            "D. N. McKinsey",
+            "J. McLaughlin",
+            "J. B. McLaughlin",
+            "B. Mitra",
+            "E. Mizrachi",
+            "M. E. Monzani",
+            "K. Morå",
+            "E. Morrison",
+            "B. J. Mount",
+            "J. Munski",
+            "M. Murdy",
+            "A. St. J. Murphy",
+            "H. N. Nelson",
+            "F. Neves",
+            "A. Nguyen",
+            "C. L. O'Brien",
+            "F. H. O'Shea",
+            "I. Olcina",
+            "K. C. Oliver-Mallory",
+            "J. Orpwood",
+            "K. Y Oyulmaz",
+            "K. J. Palladino",
+            "N. J. Pannifer",
+            "S. J. Patton",
+            "B. Penning",
+            "G. Pereira",
+            "R. Peres",
+            "E. Perry",
+            "T. Pershing",
+            "A. Piepke",
+            "S. S. Poudel",
+            "Y. Qie",
+            "J. Reichenbacher",
+            "G. R. C. Rischbieter",
+            "E. Ritchey",
+            "H. S. Riyat",
+            "R. Rosero",
+            "N. J. Rowe",
+            "T. Rushton",
+            "D. Rynders",
+            "S. Saltão",
+            "I. Sargeant",
+            "A. B. M. R. Sazzad",
+            "R. W. Schnee",
+            "G. Sehr",
+            "M. Severson B. Shafer",
+            "S. Shaw",
+            "L. Sherman",
+            "K. Shi",
+            "T. Shutt",
+            "C. Silva",
+            "G. Sinev",
+            "J. Siniscalco",
+            "A. M. Softley-Brown",
+            "V. N. Solovov",
+            "P. Sorensen",
+            "J. Soria",
+            "T. J. Sumner",
+            "M. Szydagis",
+            "C. F. Tang",
+            "K. Thieme",
+            "D. R. Tiedt",
+            "D. R. Tovey",
+            "J. Tranter",
+            "M. Trask",
+            "K. Trengove",
+            "B. Twigg",
+            "A. Usón",
+            "A. C. Vaitkus",
+            "O. Valentino",
+            "A. Wang",
+            "J. J. Wang",
+            "Y. Wang",
+            "L. Weeldreyer",
+            "T. J. Whitis",
+            "K. Wild",
+            "M. Williams",
+            "J. Winnicki",
+            "M. S. Witherell",
+            "L. Wolf",
+            "F. L. H. Wolfs",
+            "S. Woodford",
+            "D. Woodward",
+            "C. J. Wright",
+            "Q. Xia",
+            "J. Xu",
+            "Y. Xu",
+            "M. Yeh",
+            "D. Yeum",
+            "J. Young",
+            "H. D. Zenger",
+            "W. Zha",
+            "H. Zhang",
+            "T. Zhang",
+            "Y. Zhou"
+          ],
+          "primary": "hep-ex"
+        },
+        "crossref": {},
+        "title": "Search for dark matter particle interactions in an extended nuclear recoil energy window with the LUX-ZEPLIN (LZ) experiment"
+      },
+      "evidence": [
+        "arXiv id_list=2609.02823 -> 1 entry(ies)",
+        "venue match (journal+volume+page vs seed): NO | resolved: journal=None vol=None page=None"
+      ],
+      "reason": "only a surname+year match (venue mismatch) - not an identification: Search for dark matter particle interactions in an extended nuclear recoil energy window w"
+    },
+    "50c": {
+      "slot": "50c",
+      "seed": {
+        "authors": [
+          "Mace",
+          "Yang",
+          "Zeng"
+        ],
+        "year": 2026,
+        "title": null,
+        "arxiv": "2506.14898",
+        "note": "body: 'SIDM2v model of Mace, Yang, Zeng+ 2026 [50c] (arXiv:2506.14898, two-component SIDM with inter-species mass segregation)'. NOTE: body also says 'Earlier drafts cited Mace+ 2026 [50c] — the actual reference is Mace+ 2025' — year conflict."
+      },
+      "status": "CONFLICT",
+      "resolved": {
+        "arxiv": {
+          "arxiv_id": "2506.14898v3",
+          "title": "Self-Interacting Dark Matter with Mass Segregation: A Unified Explanation of Dwarf Cores and Small-Scale Lenses",
+          "published": "2025-06-17",
+          "updated": "2026-02-04",
+          "doi": "10.1016/j.scib.2026.01.077",
+          "journal_ref": "Science Bulletin, Volume 71, Issue 6, 30 March 2026, Pages 1349-1356",
+          "authors": [
+            "Daneng Yang",
+            "Yi-Zhong Fan",
+            "Siyuan Hou",
+            "Yue-Lin Sming Tsai"
+          ],
+          "primary": "astro-ph.CO"
+        },
+        "crossref": {
+          "doi": "10.1016/j.scib.2026.01.077",
+          "title": "Self-interacting dark matter with mass segregation: a unified explanation of dwarf cores and small-scale lenses",
+          "container": "Science Bulletin",
+          "volume": "71",
+          "page": "1349-1356",
+          "article_number": null,
+          "year": 2026,
+          "authors": [
+            "Yang",
+            "Fan",
+            "Hou",
+            "Tsai"
+          ],
+          "type": "journal-article",
+          "publisher": "Elsevier BV"
+        },
+        "title": "Self-interacting dark matter with mass segregation: a unified explanation of dwarf cores and small-scale lenses"
+      },
+      "evidence": [
+        "arXiv id_list=2506.14898 -> 1 entry(ies)",
+        "Crossref DOI 10.1016/j.scib.2026.01.077 -> hit",
+        "cross-check arXiv vs Crossref title overlap=1.00",
+        "venue match (journal+volume+page vs seed): NO | resolved: journal='Science Bulletin' vol='71' page='1349-1356'"
+      ],
+      "reason": "only a surname+year match (venue mismatch) - not an identification: Self-interacting dark matter with mass segregation: a unified explanation of dwarf cores a"
+    },
+    "50d": {
+      "slot": "50d",
+      "seed": {
+        "authors": [
+          "Kaplinghat",
+          "Tulin",
+          "Yu"
+        ],
+        "year": 2016,
+        "title": "Dark Matter Halos as Particle Colliders: Unified Solution to Small-Scale Structure Problems from Dark Matter Collisions",
+        "journal": "Phys. Rev. Lett.",
+        "volume": "116",
+        "page": "041302",
+        "arxiv": "1508.03339",
+        "note": "body: 'The original Kaplinghat, Tulin, Yu 2016 PRL 116, 041302 [50d] (arXiv:1508.03339)'. DUPLICATE of [1] — same paper."
+      },
+      "status": "RESOLVED",
+      "resolved": {
+        "title": "Dark Matter Halos as Particle Colliders: Unified Solution to Small-Scale Structure Puzzles from Dwarfs to Clusters",
+        "authors": [
+          "Kaplinghat",
+          "Tulin",
+          "Yu"
+        ],
+        "container": "Physical Review Letters",
+        "volume": "116",
+        "page": "041302",
+        "year": 2016,
+        "doi": "10.1103/physrevlett.116.041302",
+        "arxiv": "1508.03339v1",
+        "journal_ref_from_arxiv": "Phys. Rev. Lett. 116, 041302 (2016)"
+      },
+      "evidence": [
+        "arXiv id_list=1508.03339 -> 1 entry(ies)",
+        "Crossref DOI 10.1103/PhysRevLett.116.041302 -> hit",
+        "cross-check arXiv vs Crossref title overlap=1.00",
+        "venue match (journal+volume+page vs seed): YES",
+        "title overlap vs seed = 0.83",
+        "authors expected=['Kaplinghat', 'Tulin', 'Yu'] got=['Kaplinghat', 'Tulin', 'Yu'] (all present)",
+        "year expected=2016 got=2016 (ok)"
+      ],
+      "reason": ""
+    },
+    "51": {
+      "slot": "51",
+      "seed": {
+        "authors": [
+          "Nadler"
+        ],
+        "year": 2025,
+        "title": "SIDM Concerto: Compilation and Data Release of Self-Interacting Dark Matter Simulations",
+        "journal": "Astrophys. J.",
+        "volume": "991",
+        "page": "69",
+        "arxiv": "2503.10748",
+        "note": "body: 'SIDM Concerto [51] (Nadler+ 2025, arXiv:2503.10748, public 14-zoom-in data release)'."
+      },
+      "status": "RESOLVED",
+      "resolved": {
+        "title": "SIDM Concerto: Compilation and Data Release of Self-interacting Dark Matter Zoom-in Simulations",
+        "authors": [
+          "Nadler",
+          "Kong",
+          "Yang",
+          "Yu"
+        ],
+        "container": "The Astrophysical Journal",
+        "volume": "991",
+        "page": "69",
+        "year": 2025,
+        "doi": "10.3847/1538-4357/adf553",
+        "arxiv": "2503.10748v2",
+        "journal_ref_from_arxiv": "ApJ, 991, 69 (2025)"
+      },
+      "evidence": [
+        "arXiv id_list=2503.10748 -> 1 entry(ies)",
+        "Crossref DOI 10.3847/1538-4357/adf553 -> hit",
+        "cross-check arXiv vs Crossref title overlap=1.00",
+        "venue match (journal+volume+page vs seed): YES",
+        "title overlap vs seed = 1.00",
+        "authors expected=['Nadler'] got=['Nadler', 'Kong', 'Yang', 'Yu'] (all present)",
+        "year expected=2025 got=2025 (ok)"
+      ],
+      "reason": ""
+    },
+    "52": {
+      "slot": "52",
+      "seed": {
+        "authors": [
+          "Jia"
+        ],
+        "year": 2026,
+        "title": "The Enhanced Isothermal Jeans Model",
+        "journal": "Mon. Not. R. Astron. Soc.",
+        "volume": "549",
+        "page": "stag969",
+        "arxiv": "2601.17118",
+        "note": "body: 'The Enhanced Isothermal Jeans model of Jia 2026 [52] (arXiv:2601.17118, MNRAS 549 stag969)'."
+      },
+      "status": "RESOLVED",
+      "resolved": {
+        "title": "An enhanced isothermal jeans approach to constraining dark matter self-interactions from galactic kinematics",
+        "authors": [
+          "Jia",
+          "Jiang",
+          "Li",
+          "Li",
+          "Wang",
+          "Zhu"
+        ],
+        "container": "Monthly Notices of the Royal Astronomical Society",
+        "volume": "549",
+        "page": "stag969",
+        "year": 2026,
+        "doi": "10.1093/mnras/stag969",
+        "arxiv": "2601.17118v1",
+        "journal_ref_from_arxiv": "Mon Not R Astron Soc (2026)"
+      },
+      "evidence": [
+        "arXiv id_list=2601.17118 -> 1 entry(ies)",
+        "Crossref DOI 10.1093/mnras/stag969 -> hit",
+        "cross-check arXiv vs Crossref title overlap=1.00",
+        "venue match (journal+volume+page vs seed): YES",
+        "title overlap vs seed = 0.75",
+        "authors expected=['Jia'] got=['Jia', 'Jiang', 'Li', 'Li', 'Wang', 'Zhu'] (all present)",
+        "year expected=2026 got=2026 (ok)"
+      ],
+      "reason": ""
+    },
+    "54": {
+      "slot": "54",
+      "seed": {
+        "authors": [
+          "Silverman"
+        ],
+        "year": 2026,
+        "title": "Mergers Matter: Gravothermal Collapse in Dwarf Halos with Self-Interacting Dark Matter",
+        "journal": null,
+        "arxiv": "2606.02566",
+        "note": "body: 'Silverman+ 2026 (arXiv:2606.02566, \"Mergers Matter\")'; also 'Silverman+ 2026 [54]' as a gravothermal-cascade source."
+      },
+      "status": "CONFLICT",
+      "resolved": {
+        "arxiv": {
+          "arxiv_id": "2606.02566v1",
+          "title": "Mergers Matter: Gravothermal Collapse in Dwarf Halos with Self-Interacting Dark Matter",
+          "published": "2026-06-01",
+          "updated": "2026-06-01",
+          "doi": null,
+          "journal_ref": null,
+          "authors": [
+            "Maya Silverman",
+            "Abdelaziz Hussein",
+            "Arpit Arora",
+            "Mariangela Lisanti",
+            "Manoj Kaplinghat",
+            "Lina Necib",
+            "Andreas Thoyas",
+            "Stephanie O'Neil",
+            "Robyn E. Sanderson",
+            "Xuejian Shen",
+            "Jorge Moreno"
+          ],
+          "primary": "astro-ph.GA"
+        },
+        "crossref": {
+          "doi": "10.1051/0004-6361/202661917",
+          "title": "Cooling, conduction, and compact objects: Gravothermal evolution of dissipative self-interacting dark matter halos",
+          "container": "Astronomy &amp; Astrophysics",
+          "volume": "714",
+          "page": "A469",
+          "article_number": null,
+          "year": 2026,
+          "authors": [
+            "Schmidt",
+            "Fischer",
+            "Garny"
+          ],
+          "type": "journal-article",
+          "publisher": "EDP Sciences"
+        }
+      },
+      "evidence": [
+        "arXiv id_list=2606.02566 -> 1 entry(ies)",
+        "Crossref title search -> 8 hit(s)",
+        "Crossref best candidate: score=2.33 title_overlap=0.67 Cooling, conduction, and compact objects: Gravothermal evolution of di",
+        "cross-check arXiv vs Crossref title overlap=0.50",
+        "seed match: arXiv=1.00 crossref=0.67"
+      ],
+      "reason": "arXiv and Crossref returned different papers for this slot and neither matches the expected title — needs a human"
+    },
+    "54c": {
+      "slot": "54c",
+      "seed": {
+        "authors": [
+          "Sameie"
+        ],
+        "year": 2020,
+        "title": "Self-Interacting Dark Matter Subhalos in the Milky Way's Tides",
+        "journal": "Phys. Rev. Lett.",
+        "volume": "124",
+        "page": "141102",
+        "arxiv": "1904.07872",
+        "note": "body: 'Sameie+ 2020 [54c]' (subhalo mass function upper limit); audit lists the same paper as [27]'s co-located family (arXiv:1904.07872 present in the paper's reference list)."
+      },
+      "status": "RESOLVED",
+      "resolved": {
+        "title": "Self-Interacting Dark Matter Subhalos in the Milky Way’s Tides",
+        "authors": [
+          "Sameie",
+          "Yu",
+          "Sales",
+          "Vogelsberger",
+          "Zavala"
+        ],
+        "container": "Physical Review Letters",
+        "volume": "124",
+        "page": "141102",
+        "year": 2020,
+        "doi": "10.1103/physrevlett.124.141102",
+        "arxiv": "1904.07872v2",
+        "journal_ref_from_arxiv": "Phys. Rev. Lett. 124, 141102 (2020)"
+      },
+      "evidence": [
+        "arXiv id_list=1904.07872 -> 1 entry(ies)",
+        "Crossref DOI 10.1103/PhysRevLett.124.141102 -> hit",
+        "cross-check arXiv vs Crossref title overlap=1.00",
+        "venue match (journal+volume+page vs seed): YES",
+        "title overlap vs seed = 1.00",
+        "authors expected=['Sameie'] got=['Sameie', 'Yu', 'Sales', 'Vogelsberger', 'Zavala'] (all present)",
+        "year expected=2020 got=2020 (ok)"
+      ],
+      "reason": ""
+    },
+    "55a": {
+      "slot": "55a",
+      "seed": {
+        "authors": [
+          "Elbert"
+        ],
+        "year": 2015,
+        "title": "Core Formation in Dwarf Halos with Self Interacting Dark Matter: No Fine Tuning Required",
+        "journal": "Mon. Not. R. Astron. Soc.",
+        "volume": "453",
+        "page": "29",
+        "arxiv": "1412.1477",
+        "note": "body: 'Elbert+ 2015 [55a]' (the σ/m ≥ 50 cm²/g working benchmark)."
+      },
+      "status": "RESOLVED",
+      "resolved": {
+        "title": "Core formation in dwarf haloes with self-interacting dark matter: no fine-tuning necessary",
+        "authors": [
+          "Elbert",
+          "Bullock",
+          "Garrison-Kimmel",
+          "Rocha",
+          "Oñorbe",
+          "Peter"
+        ],
+        "container": "Monthly Notices of the Royal Astronomical Society",
+        "volume": "453",
+        "page": "29-37",
+        "year": 2015,
+        "doi": "10.1093/mnras/stv1470",
+        "arxiv": "1412.1477v1",
+        "journal_ref_from_arxiv": null
+      },
+      "evidence": [
+        "arXiv id_list=1412.1477 -> 1 entry(ies)",
+        "Crossref DOI 10.1093/mnras/stv1470 -> hit",
+        "cross-check arXiv vs Crossref title overlap=0.91",
+        "venue match (journal+volume+page vs seed): YES",
+        "title overlap vs seed = 0.82",
+        "authors expected=['Elbert'] got=['Elbert', 'Bullock', 'Garrison-Kimmel', 'Rocha', 'Oñorbe', 'Peter'] (all present)",
+        "year expected=2015 got=2015 (ok)"
+      ],
+      "reason": ""
+    },
+    "55b": {
+      "slot": "55b",
+      "seed": {
+        "authors": [
+          "Lei"
+        ],
+        "year": 2026,
+        "title": "The Inner Dark Matter Fraction of Massive Galaxies",
+        "note": "body: 'Lei+ 2026 [55b]' / 'massive-galaxy inner DM fraction'. No arXiv id or journal recorded — resolver must search."
+      },
+      "status": "CONFLICT",
+      "resolved": {
+        "arxiv": {},
+        "crossref": {
+          "doi": "10.1051/0004-6361/202662621",
+          "title": "Dark matter haloes from dwarf to massive galaxies: No systematic inner-density tension with ΛCDM hydrodynamical simulations",
+          "container": "Astronomy &amp; Astrophysics",
+          "volume": null,
+          "page": null,
+          "article_number": null,
+          "year": 2026,
+          "authors": [
+            "Mancera Piña",
+            "Read",
+            "Sarrato-Alós",
+            "Muni"
+          ],
+          "type": "journal-article",
+          "publisher": "EDP Sciences"
+        },
+        "title": "Dark matter haloes from dwarf to massive galaxies: No systematic inner-density tension with ΛCDM hydrodynamical simulations"
+      },
+      "evidence": [
+        "arXiv search 'The Inner Dark Matter Fraction of Massive Galaxies' -> 0 hit(s)",
+        "arXiv search: no candidate cleared the score floor",
+        "Crossref title search -> 8 hit(s)",
+        "Crossref best candidate: score=2.67 title_overlap=0.83 Dark matter haloes from dwarf to massive galaxies: No systematic inner",
+        "venue match (journal+volume+page vs seed): NO | resolved: journal='Astronomy &amp; Astrophysics' vol=None page=None",
+        "title overlap vs seed = 0.83",
+        "authors expected=['Lei'] got=['Piña', 'Read', 'Sarrato-Alós', 'Muni'] MISSING=['Lei']"
+      ],
+      "reason": "expected author(s) ['Lei'] are absent from the resolved record ['Piña', 'Read', 'Sarrato-Alós', 'Muni'] - this is a different paper, not the one cited"
+    },
+    "55c": {
+      "slot": "55c",
+      "seed": {
+        "authors": [
+          "Wang"
+        ],
+        "year": 2026,
+        "title": null,
+        "note": "body: 'Wang+ 2026 [55c]' / 'massive-galaxy inner DM fraction'. No arXiv id or journal recorded — resolver must search."
+      },
+      "status": "CONFLICT",
+      "resolved": {
+        "arxiv": {},
+        "crossref": {
+          "doi": "10.1016/j.yofte.2025.104228",
+          "title": "Traffic flow and speed monitoring based on optical fiber distributed acoustic sensor",
+          "container": "Optical Fiber Technology",
+          "volume": "93",
+          "page": "104228",
+          "article_number": "104228",
+          "year": 2025,
+          "authors": [
+            "Wang",
+            "Wang",
+            "Wang",
+            "Wang",
+            "Wang",
+            "Wang",
+            "Wang"
+          ],
+          "type": "journal-article",
+          "publisher": "Elsevier BV"
+        },
+        "title": "Traffic flow and speed monitoring based on optical fiber distributed acoustic sensor"
+      },
+      "evidence": [
+        "arXiv search 'Wang' -> 0 hit(s)",
+        "arXiv search: no candidate cleared the score floor",
+        "Crossref bibliographic 'Wang' -> 6 hit(s)",
+        "Crossref best candidate score=2.00: Traffic flow and speed monitoring based on optical fiber distributed a",
+        "venue match (journal+volume+page vs seed): NO | resolved: journal='Optical Fiber Technology' vol='93' page='104228'"
+      ],
+      "reason": "only a surname+year match (venue mismatch) - not an identification: Traffic flow and speed monitoring based on optical fiber distributed acoustic sensor"
+    }
+  }
+}

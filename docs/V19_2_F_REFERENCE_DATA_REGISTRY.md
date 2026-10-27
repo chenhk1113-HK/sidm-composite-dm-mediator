@@ -303,3 +303,11 @@ Per user directive "I want you to do it auto, no need for my reminder":
 4. Commit the docs update as part of the v40.x release
 
 **NEVER cite a paper without local PDF + .md summary + registry entry.** This rule is per R88(68) lesson (M3 has fabricated arXiv IDs in the past) and the project knowledge base rule (always refer to KB before citing).
+
+
+**ADJUDICATED 2026-10-27:** reference [10] was fabricated ("Girmohanta & Yasuoka, PRD 111, 035005 (2025)"; the DOI belongs to Li, Yang, Zhang & Zhu). Reference [9] ("Hong, Kuranchi & Perez 2020") was likewise garbled — no author named Kuranchi exists in any physics index. Both slots are now re-pointed to the verified Girmohanta & Shrock papers: [9] = PRD 106, 063013 (2022), arXiv:2206.14395; [10] = PRD 107, 063006 (2023), arXiv:2210.01132. Body sentences L38 and L90 were rewritten to match what those papers actually claim.
+
+
+## 7.8 REFERENCE-RESOLUTION ROUND (2026-10-27)
+
+`scripts/resolve_references.py` (stdlib-only; arXiv + Crossref; no new dependencies) resolved the paper's blank reference slots. **36 of 38 slots now carry a publisher-verified entry.** Two slots were fabricated and are re-pointed: [10] ("Girmohanta & Yasuoka, PRD 111, 035005 (2025)" — the DOI belongs to Li, Yang, Zhang & Zhu) and [9] ("Hong, Kuranchi & Perez 2020" — no author named Kuranchi exists in arXiv, InspireHEP, Crossref, Semantic Scholar or OpenAlex; the real paper is Hong, **Kurup** & **Perelstein**). Both now cite verified Girmohanta & Shrock papers, and body sentences L38 and L90 were rewritten to match their claims. Six further body-level attribution errors were found and corrected ([5] venue, [7] authors, [50c] authors, [55a] 6th author, [13]/[30] year). Two slots — [11] ("Yang & Yu 2023") and [12] ("Turner et al. 2021") — remain unresolved because no candidate passed the author+venue+title agreement check; they are tracked as open items, not filled with substitutes.

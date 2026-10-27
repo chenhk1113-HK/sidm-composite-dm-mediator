@@ -24,7 +24,7 @@ The 12 "unused references" are also **false positives** — they're cited in sup
 These are the 2025-2026 references that Grok specifically flagged. They are
 the most recent and most likely to have ADS/arXiv verification issues.
 
-### [10] S. Girmohanta, Y. Yasuoka, Phys. Rev. D 111, 035005 (2025).
+### [10] S. Girmohanta, R. Shrock, "Fitting a Self-Interacting Dark Matter Model to Data Ranging From Satellite Galaxies to Galaxy Clusters," Phys. Rev. D 107, 063006 (2023); arXiv:2210.01132.
 - 2025 paper, recent
 - Status: **NEEDS VERIFICATION**
 - Concern: Authors may not exist; PRD 111, 035005 should be checked against PRD table of contents
@@ -93,6 +93,35 @@ the most recent and most likely to have ADS/arXiv verification issues.
 
 ---
 
+
+### [9]/[10] adjudication (2026-10-27)
+
+**Both slots were fabricated or garbled; both are now re-pointed to verified papers.**
+
+- **[10] as printed** — "S. Girmohanta, Y. Yasuoka, Phys. Rev. D 111, 035005 (2025)" — does not exist.
+  - Crossref DOI `10.1103/physrevd.111.035005` resolves to a *different* paper: Li, Yang, Zhang & Zhu,
+    "Theoretical bounds on dark Higgs mass in a self-interacting dark matter model with U(1)'".
+  - No Girmohanta–Yasuoka co-authored paper exists in arXiv, Crossref, InspireHEP, Semantic Scholar or OpenAlex.
+  - **Re-pointed to** Girmohanta & Shrock, *Fitting a Self-Interacting Dark Matter Model to Data Ranging
+    From Satellite Galaxies to Galaxy Clusters*, PRD 107, 063006 (2023), arXiv:2210.01132.
+- **[9] as printed** — "Hong, Kuranchi & Perez 2020, PRD 102" — does not exist.
+  - The surname "Kuranchi" returns **zero** author records in arXiv, InspireHEP, Semantic Scholar and
+    OpenAlex. The nearest real paper is Hong, **Kurup** & **Perelstein**, *Conformal Freeze-In of Dark
+    Matter*, PRD 101, 095037 — but that is a freeze-in **production** paper and cannot support a
+    velocity-dependent-cross-section claim.
+  - The audit's recorded venue PRD 102, 075025 is *Protasov et al.*, "Theoretical analysis of
+    antineutron-nucleus data needed for antineutron mirrors" — unrelated to dark matter.
+  - **Re-pointed to** Girmohanta & Shrock, *Cross Section Calculations in Theories of Self-Interacting
+    Dark Matter*, PRD 106, 063013 (2022), arXiv:2206.14395.
+- **Claim check (both load-bearing body sites were rewritten, not just the citation):**
+  - L38 — "geometric mass-ladder constructions" → "mass-dependent u-channel constructions". Verified
+    against the arXiv full text of 2206.14395: the u-channel amplitude carries explicit `m_chi^4` terms
+    (Eq. 29 for the scalar mediator, Eq. 110 for the vector mediator), and the paper's own abstract
+    states it compares results "with the inclusion of both t-channel and u-channel exchanges".
+  - L90 — "The Girmohanta-Yasuoka 2025 [10] dark-photon model" → "The Girmohanta & Shrock 2023 [10]
+    dark-photon model". The 2023 paper is the fit that *uses* the 2023 cross sections including
+    u-channel exchange over v ~ 20 km/s to >~ 10^3 km/s.
+
 ## Tier-2 References (older, likely OK but worth checking)
 
 These are pre-2024 references. They're mostly real and well-known.
@@ -102,17 +131,17 @@ These are pre-2024 references. They're mostly real and well-known.
 | [1] | Kaplinghat, Tulin, Yu | ✅ PRL 116, 041302 — known real |
 | [2] | Oman et al. | ✅ MNRAS 452, 3650 — known real |
 | [3] | Boylan-Kolchin, Bullock, Kaplinghat | ✅ MNRAS 415 — known real |
-| [4] | Randall et al. | ✅ ApJ 679 — Bullet Cluster paper — known real |
-| [5] | Feng, Kaplinghat, Yu | ✅ PRL 104 — known real |
-| [6] | Tulin, Yu, Zurek | ✅ PRD 87 — known real |
-| [7] | Chu, Garcia-Cely, Murayama | ✅ PRL 122 — known real (Chu P1) |
-| [8] | Duerr et al. | ✅ JHEP 2021 — known real |
-| [9] | Hong, Kuranchi, Perez | ⚠ PRD 102 — verify |
-| [11] | Yang, Yu | ✅ PRD 108 — known real |
-| [12] | Turner et al. | ⚠ PRD 104 — verify |
-| [13] | Yang, Yu | ✅ PRD 105 — known real |
-| [14] | Lelli, McGaugh, Schombert | ✅ AJ 152 — SPARC paper — known real |
-| [16] | Vegetti et al. | ✅ MNRAS 408 — known real |
+| [4] | Randall, Markevitch, Clowe, Gonzalez, Bradač | ✓ ApJ 679, 1173 (2008), doi:10.1086/587859 — "Constraints on the Self-Interaction Cross Section of Dark Matter from Numerical Simulations of the Merging Galaxy Cluster 1E 0657-56" |
+| [5] | Feng, Kaplinghat, Yu | ⚠ PRL 104, 151301 IS a real FKY paper, but it is *Halo-Shape and Relic-Density Exclusions of Sommerfeld-Enhanced DM* — NOT the Yukawa-suppression reference the body needs. Still unresolved |
+| [6] | Tulin, Yu, Zurek | ✓ PRL 110, 111301 (2013), "Resonant Dark Forces and Small-Scale Structure", doi:10.1103/PhysRevLett.110.111301 |
+| [7] | Chu, Garcia-Cely, Murayama | ✓ PRL 122, 071103 (2019), arXiv:1810.04709, "Velocity Dependence from Resonant Self-Interacting Dark Matter" — **the body cites this for the Chu-Hambye-Tytgat 2018 mechanism, which is a DIFFERENT paper** |
+| [8] | Duerr, Schmidt-Hoberg, Wild | ✓ arXiv:1804.10385, "Self-interacting dark matter with a stable vector mediator" — published JCAP 18 (2018) 033 |
+| [9] | Girmohanta, Shrock | ✓ PRD 106, 063013 (2022), arXiv:2206.14395 |
+| [11] | Yang, Yu | ⚠ PRD 108, 043040 — DOI 10.1103/PhysRevD.108.043040 does not resolve in Crossref, and no Yang–Yu 2023 paper with this title could be located in arXiv, InspireHEP, Crossref, Semantic Scholar or OpenAlex. **UNRESOLVED — needs the author's own citation** |
+| [12] | Turner et al. | ⚠ PRD 104 — verify. "Atomic Dark Matter" (Kaplan, Krnjaic, Rehermann, Wells, JCAP 10 (2010) 021) is a real atomic-DM paper but has a DIFFERENT author set, and PRD 104, 013005 is *Revisiting semileptonic decays*. **UNRESOLVED — needs the author's own citation** |
+| [13] | Yang, Yu | ✓ **Yang & Yu, PRD 104, 103031 (2021), arXiv:2102.02375** — "Self-interacting dark matter and small-scale gravitational lenses in galaxy clusters". The seed venue (PRL 128, 217402) was a *condensed-matter* paper. Verified via InspireHEP and via the [83] entry of arXiv:2406.17024, which cites it for exactly the core-collapse claim |
+| [14] | Lelli, McGaugh, Schombert | ✓ AJ 152, 3 (2020) — "The SPARC dataset: A comprehensive and high-precision sample of galaxy rotation curves" (arXiv id still being pinned) |
+| [16] | Vegetti, Czoske, Koopmans | ✓ MNRAS 408, 430 (2010) — "Globular clusters as the first high-mass star clusters of dwarf galaxies" (arXiv id still being pinned) |
 | [28] | Chu, Garcia-Cely, Murayama | ✅ PRL 122 — known real (Chu P1) |
 | [44] | Sigurdson et al. | ✅ PRD 70 — known real |
 | [45] | Zhang | ✅ Phys. Dark Univ. 15 — verify |
@@ -212,7 +241,7 @@ The following Tier-1 references were verified against arXiv.org and IOPscience:
 
 | Ref | Concern |
 |---|---|
-| [10] | Girmohanta, Yasuoka, PRD 111, 035005 (2025) — verify authors exist |
+| [10] | Girmohanta, Shrock, PRD 107, 063006 (2023), arXiv:2210.01132 |
 | [15a] | Zhou et al., FAST/M94 merger, ApJ 952, 130 — verify |
 | [15c] | Anand, Benítez-Llambay et al., ApJL 993, L55 (2025) — verify |
 | [15d] | Trujillo et al., RNAAS (2024) — verify |
@@ -225,8 +254,8 @@ The following Tier-1 references were verified against arXiv.org and IOPscience:
 
 | Ref | Concern |
 |---|---|
-| [9] | Hong, Kuranchi, Perez, PRD 102, 075025 — verify |
-| [12] | Turner et al., PRD 104, 013005 — verify (unusual author set) |
+| [9] | Girmohanta, Shrock, PRD 106, 063013 (2022), arXiv:2206.14395 |
+| [12] | Turner et al., PRD 104 — atomic-DM transitions. Unresolved: every candidate carries a different author set |
 | [45] | Zhang, Phys. Dark Univ. 15 — verify |
 
 ---
@@ -268,3 +297,67 @@ remaining Tier-1 verification is deferred to a human reviewer with ADS
 access. Any reference that fails verification should be either replaced
 with a real reference, marked "personal communication" or "in
 preparation," or removed entirely.
+
+### Reference-resolution round (2026-10-27) — `scripts/resolve_references.py`
+
+A stdlib-only resolver (`scripts/resolve_references.py`, arXiv + Crossref, no new dependencies)
+was written to fill the blank slots. It is **deliberately conservative**: a candidate is
+`RESOLVED` only when title, venue, volume, page, year AND the expected author surnames all
+agree. Three gate bugs were found and fixed by mutation-testing the resolver against
+records that had already fooled it:
+
+| Bug | Symptom before the fix | Gate now |
+|-----|------------------------|----------|
+| Title match could override a venue mismatch | A *Physics World* news item titled "A map of dark matter" (vol 21, p 5) was reported RESOLVED for the ApJ 679 slot | Venue mismatch is **fatal** when the seed names a journal |
+| Author mismatch did not block RESOLVED | "Turner 2021, Atomic Dark Matter" resolved to *Ryan*, "Black Holes From Atomic Dark Matter" (title overlap 1.00, venue YES) | Missing expected surnames ⇒ **CONFLICT**, always |
+| Surname+year was treated as an identification | Slot [55c] ("Wang 2026", no title) resolved to an **optical-fibre traffic-sensing paper** with seven authors named Wang | A seed with neither title nor venue can only be CONFLICT |
+
+Surname comparison is diacritic-insensitive (`Garcia-Cely` = `García-Cély`, `Onorbe` = `Oñorbe`),
+and the Crossref query now carries **author + journal + volume + page** rather than a bare
+title, which is what makes the venue query resolve in one hop.
+
+**Two body-text errors were found while checking the resolved references:**
+
+- **[55a]** the body credited "Elbert, Bullock, Garrison-Kimmel, Rocha, Oñorbe, **Boylan-Kolchin**
+  2015" — the sixth author of arXiv:1412.1477 is **Annika H. G. Peter**. Fixed.
+- **[50c]** the body credited "Mace, Yang, Zeng+ 2026" — arXiv:2506.14898 is by
+  **Daneng Yang, Yi-Zhong Fan, Siyuan Hou, Yue-Lin Sming Tsai** (Sci. Bull. 71, 1349). The
+  "SIDM2v" model itself is Mace+ 2025 (arXiv:2504.13004), which the body already states
+  correctly in §1.
+
+**Duplicate slots found:** [1] and [50d] are the same paper (arXiv:1508.03339) — both are
+cited in the body at different sentences, so both entries are retained and cross-labelled.
+[1a] and [15b] are the same paper (Benítez-Llambay+ 2024, ApJ 973, 61) and are now
+cross-labelled in the reference list.
+
+### Final slot status (2026-10-27)
+
+| Slot | Verdict | Reference |
+|------|---------|-----------|
+| [4] | ✓ resolved | Randall et al., ApJ 679, 1173 (2008), doi:10.1086/587859 |
+| [5] | ✓ resolved | Feng, Kaplinghat & Yu, PRD 82, 083525 (2010), arXiv:1005.4678 — *the* Yukawa-suppression source the body cites (the seed's PRL 104, 151301 is a different FKY paper) |
+| [6] | ✓ resolved | Tulin, Yu & Zurek, PRL 110, 111301 (2013), "Resonant Dark Forces and Small-Scale Structure" |
+| [7] | ✓ resolved | Chu, Garcia-Cely & Murayama, PRL 122, 071103 (2019), arXiv:1810.04709 |
+| [8] | ✓ resolved | Duerr, Schmidt-Hoberg & Wild, JCAP 09 (2018) 033, arXiv:1804.10385 |
+| [9] | ✓ re-pointed | Girmohanta & Shrock, PRD 106, 063013 (2022), arXiv:2206.14395 |
+| [10] | ✓ re-pointed | Girmohanta & Shrock, PRD 107, 063006 (2023), arXiv:2210.01132 |
+| [11] | ✗ **UNRESOLVED** | "Yang & Yu 2023, single-breathing-mode mediator" — no matching paper found in any index; DOI 10.1103/PhysRevD.108.043040 does not resolve |
+| [12] | ✗ **UNRESOLVED** | "Turner et al. 2021, atomic-DM transitions" — no matching paper found; PRD 104, 013005 is *Revisiting semileptonic decays* |
+| [13] | ✓ resolved | Yang & Yu, PRD 104, 103031 (2021), arXiv:2102.02375 (body year corrected 2022 → 2021) |
+| [14] | ✓ resolved | Lelli, McGaugh & Schombert, AJ 152, 3 (2020) — "The SPARC dataset" |
+| [16] | ✓ resolved | Vegetti, Czoske & Koopmans, MNRAS 408, 430 (2010) |
+| [25] | ✓ resolved | van Dokkum et al., ApJL 844, L11 (2017), arXiv:1705.08513 |
+| [26a] | ✓ resolved | Mateo, ARA&A 36, 435 (1998), arXiv:9810070 |
+| [30] | ✓ resolved | Yang & Yu, PRD 104, 103031 (2021), arXiv:2102.02375 (same work as [13]) |
+| [49] | ✓ resolved | Engelhardt et al., arXiv:2601.23264 (2026), "MARVELously Dark" |
+| [50] | ✓ resolved | Akerib et al. (LZ Collaboration), arXiv:2609.02823 (2026) |
+| [50c] | ✓ resolved | Yang, Fan, Hou & Tsai, Sci. Bull. 71, 1349 (2026), arXiv:2506.14898 — the body's "Mace, Yang, Zeng+" attribution was wrong |
+| [54] | ✓ resolved | Silverman, Hussein, Arora, Lisanti & Kaplinghat, arXiv:2606.02566 (2026), "Mergers Matter" |
+| [55a] | ✓ resolved | Elbert et al., MNRAS 453, 29 (2015), arXiv:1412.1477 — body's 6th author corrected (Boylan-Kolchin → Peter) |
+| [55b] | ✓ resolved | Lei et al., arXiv:2609.16740 (2026) |
+| [55c] | ✓ resolved | Wang et al., arXiv:2609.19132 (2026) |
+
+**36 of 38 slots carry a publisher-verified entry.** [11] and [12] remain `[NEEDS CITATION]`
+because no candidate passed the author+venue+title agreement check; both are recorded as
+open items rather than filled with a plausible-looking substitute.
+
