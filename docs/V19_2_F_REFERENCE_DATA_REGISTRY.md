@@ -292,6 +292,69 @@ This same path is what the 32 `[NEEDS CITATION]` entries need — see
 
 ---
 
+## 7.9 KB COMPLIANCE ROUND — option-2 body-leaning set (2026-10-27)
+
+**The gap this closes.** §8's rule is *"NEVER cite a paper without local PDF + .md summary + registry
+entry."* An audit of the 41 cited reference slots found only **5** compliant:
+[15e] Ohana+ 2026, [27] Horigome+ 2025, [54] Silverman+ 2026, [54c] Sameie+ 2020, [55a] Elbert+ 2015.
+Three more ([1]/[50d] Kaplinghat+ 2016, [9] Girmohanta & Shrock 2022, [10] Girmohanta & Shrock 2023)
+had a registry entry but **no PDF and no summary**. The remaining 33 slots were absent entirely.
+
+**Scope agreed with the user:** option 2 — add the papers the PAPER BODY actually leans on (the ones
+carrying numbers), not all 41. 14 papers were downloaded and summarised, plus a long-standing
+missing slot.
+
+### Newly added (PDF + .md now in `docs/papers/verified/`)
+
+| Slot(s) | arXiv | Paper | Why it is body-leaning |
+|---|---|---|---|
+| [23] | 2510.11006 | Yu, "Three Birds with One Stone: Core-Collapsed SIDM Halos…" | 12 numeric citations — the most heavily used numerical reference in the draft |
+| [1], [50d] | 1508.03339 | Kaplinghat, Tulin & Yu, "Dark Matter Halos as Particle Colliders" | the founding velocity-dependent SIDM result (σ/m ≈ 2 → 0.1 cm²/g) |
+| [5] | 1005.4678 | Feng, Kaplinghat & Yu, "Sommerfeld Enhancements for Thermal Relic Dark Matter" | the Yukawa-suppression mechanism the draft's background term rests on |
+| [7], [28] | 1810.04709 | Chu, Garcia-Cely & Murayama, "Velocity Dependence from Resonant SIDM" | the resonance mechanism; corrected authors/year |
+| [1a], [15b] | 2406.18643 | Benítez-Llambay+ 2024, Cloud-9 VLA | Cloud-9's observational state (W50 ≈ 12 km/s, M200 ≈ 5×10⁹ M☉) |
+| [9] | 2206.14395 | Girmohanta & Shrock 2022 | source of the revised "mass-dependent u-channel" claim |
+| [10] | 2210.01132 | Girmohanta & Shrock 2023 | the dwarf-to-cluster fit the draft compares itself against |
+| [55b] | 2609.16740 | Lei+ 2026 | inner-DM deficit channel, 100–300 km/s |
+| [55c] | 2609.19132 | Wang+ 2026 | independent inner-DM deficit channel |
+| [52] | 2601.17118 | Jia+ 2026 | the independent SPARC isothermal-Jeans framework |
+| [3] | 1103.0007 | Boylan-Kolchin, Bullock & Kaplinghat, "Too big to fail?" | the TBTF problem the draft opens with |
+| [8] | 1804.10385 | Duerr, Schmidt-Hoberg & Wild | the stable-vector-mediator mechanism |
+| [51] | 2503.10748 | Nadler+ 2025, SIDM Concerto | establishes the draft is NOT a single-component re-parameterisation |
+| [49] | 2601.23264 | Engelhardt+ 2026, MARVELously Dark | independent N-body check on the Yukawa background |
+
+Downloaded by `docs/papers/fetch_cited_papers.sh` (idempotent; asserts it landed in the project root).
+
+### NEW DEFECT FOUND — "Yang+ 2024" is TWO different papers
+
+The body uses the shorthand **"Yang+ 2024" 29 times** for two distinct works:
+
+- **[17]** (NEW slot) — arXiv:**2305.05067**, Yang, Jiang, Benson, Zhong, Mace, Du, Zeng, Peter &
+  Fischer, MNRAS **533**, 4007 (2024), *"A quantitative comparison between velocity dependent SIDM
+  cross sections constrained by the gravothermal and isothermal models."* Previously cited by name
+  with **no reference slot at all**.
+- **[43]** — arXiv:**2305.16176**, Yang, Nadler, Yu & Zhong, *"A parametric model for self-interacting
+  dark matter halos,"* JCAP **02** (2024) 032. Its entry previously carried **no arXiv ID**.
+
+This is the **same confusion the registry already records as a v40.4 bug** (wrong arXiv ID
+2305.16176 vs 2305.05067, HIGH severity, fixed in v40.13). It has recurred, now as an unresolved
+shorthand rather than a wrong ID. A disambiguation note has been placed in the draft at the first
+mention; **the 29 sites have NOT been resolved individually.**
+
+**Status of [43]:** the registry's §1 entry for parametricSIDM marks 2305.16176 **"NOT TO DOWNLOAD"**
+(it needs re-validation), yet the draft cites it as [43] and the code implements its model in
+`v40.7`-lineage work (`gravothermal_yang2024.py`). **This contradiction is unresolved:** either the
+paper gets downloaded and validated, or the citation and the code's attribution both change.
+
+### Still NOT in the KB (deliberately out of option-2 scope)
+
+- The remaining ~19 purely-citational slots ([2], [4], [6], [14], [15a], [15c], [15d], [16], [25],
+  [26a], [42], [43], [45], [50], [50c], [54c]*, [55a]*, [11], [12]) — * where already complete.
+- **[42]** has an incomplete entry: *"Phys. Rev. D (2025)"* with no volume, page or arXiv ID.
+- **[11]** and **[12]** remain unresolvable (see §7.8).
+- **Balberg+ 2002** (11 body mentions) and **Fischer & Yu 2026** (9 mentions) are named in the body
+  with **no reference slot at all** — same class of defect as the old Yang+ 2024 case.
+
 ## 8. Standing rule for future sessions (locked 2026-10-19)
 
 Per user directive "I want you to do it auto, no need for my reminder":

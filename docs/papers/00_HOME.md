@@ -20,6 +20,30 @@ This is a knowledge base for the v19.2-F project's paper references. It is organ
 ---
 
 ## Verified papers (full text downloaded + key values verified)
+
+**2026-10-27 — option-2 body-leaning set added** (14 papers; see registry §7.9). These are the
+papers the PAPER BODY actually leans on, downloaded because §8's rule requires a local PDF +
+`.md` summary for every citation. Re-download with `bash docs/papers/fetch_cited_papers.sh`.
+
+- [[2510.11006 Yu 2026]] — core-collapsed SIDM halos unify lens/stream/satellite perturbers [23]
+- [[1508.03339 Kaplinghat+ 2016]] — Dark Matter Halos as Particle Colliders [1]/[50d]
+- [[1005.4678 Feng+ 2010]] — Sommerfeld Enhancements for Thermal Relic DM [5]
+- [[1810.04709 Chu+ 2019]] — Velocity Dependence from Resonant SIDM [7]/[28]
+- [[2406.18643 Benítez-Llambay+ 2024]] — Cloud-9 VLA [1a]/[15b]
+- [[2206.14395 Girmohanta & Shrock 2022]] — Cross Section Calculations (t- and u-channel) [9]
+- [[2210.01132 Girmohanta & Shrock 2023]] — dwarf-to-cluster fit [10]
+- [[2609.16740 Lei+ 2026]] — lower central DM densities in nearby galaxies [55b]
+- [[2609.19132 Wang+ 2026]] — massive galaxy halos have less inner DM [55c]
+- [[2601.17118 Jia+ 2026]] — enhanced isothermal Jeans vs SPARC [52]
+- [[1103.0007 Boylan-Kolchin+ 2011]] — Too big to fail? [3]
+- [[1804.10385 Duerr+ 2018]] — stable vector mediator [8]
+- [[2503.10748 Nadler+ 2025]] — SIDM Concerto [51]
+- [[2601.23264 Engelhardt+ 2026]] — MARVELously Dark [49]
+
+**Known gap:** ~19 cited slots still have no local PDF (out of option-2 scope). The shorthand
+"Yang+ 2024" refers to TWO papers — [17] arXiv:2305.05067 and [43] arXiv:2305.16176; [43] is
+marked NOT TO DOWNLOAD in the registry but is cited and implemented in code. See registry §7.9.
+
 - [[2305.05067 Yang+ 2024 (Cloud-9)]] — gravothermal/isothermal σ/m comparison
 - [[2207.13111 Gilman+ 2023]] — resonant SIDM strong-lensing constraint
 - [[2508.20179 O'Donnell+ 2025]] — single cluster lensing+kinematics

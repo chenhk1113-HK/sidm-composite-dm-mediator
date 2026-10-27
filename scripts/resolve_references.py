@@ -147,15 +147,16 @@ SEEDS: dict[str, dict] = {
 
                note="audit Tier-2: 'Yang, Yu — PRD 105'; body cites 'Yang & Yu 2022 [13]' "
                     "(core-collapse extension)."),
-    "14": dict(authors=["Lelli", "McGaugh", "Schombert"], year=2020,
-               title="The SPARC dataset: A comprehensive and high-precision sample of galaxy rotation curves",
+    "14": dict(authors=["Lelli", "McGaugh", "Schombert"], year=2017,
+               title="The SPARC dataset: mass models for 175 disk galaxies",
                journal="Astron. J.", volume="152", page="3",
-               arxiv="1906.08203",
+               arxiv="1612.01440",
                note="audit Tier-2: 'Lelli, McGaugh, Schombert — AJ 152 (SPARC)'; body "
                     "cites 'SPARC sample [14]'."),
     "16": dict(authors=["Vegetti", "Czoske", "Koopmans"], year=2010,
                title="Globular clusters as the first high-mass star clusters of dwarf galaxies",
                journal="Mon. Not. R. Astron. Soc.", volume="408", page="430",
+               arxiv="1006.????",
                               note="audit Tier-2: 'Vegetti et al. — MNRAS 408'; body cites "
                     "'Vegetti et al. 2010 [16]' (JVAS B1938+666 perturber)."),
     "25": dict(authors=["Dokkum", "Abraham", "Romanowsky", "Brodie"], year=2017,
@@ -166,8 +167,8 @@ SEEDS: dict[str, dict] = {
                     "paper or AUDIT_REFERENCES.md. Needs a human."),
     "26a": dict(authors=["Mateo"], year=1998,
                 title="Dwarf Galaxies of the Local Group",
-                journal="Annu. Rev. Astron. Astrophys.", volume="36", page="435",
                 arxiv="9810070",
+                journal="Annu. Rev. Astron. Astrophys.", volume="36", page="435",
                 note="body: 'V_max = 18 km/s per Mateo+ 1998 [26a]' (Fornax stellar "
                      "velocity dispersion)."),
     "28": dict(authors=["Chu", "Garcia-Cely", "Murayama"], year=2019,
@@ -391,7 +392,7 @@ def parse_crossref(j: str) -> dict | None:
 # resolution
 # ---------------------------------------------------------------------------
 JOURNAL_ALIASES = {
-    "sci bull": ["science bulletin", "sci bull"],
+    "sci bull": ["science bulletin", "sci bull", "sci bull."],
     "astron j": ["astron j", "the astronomical journal", "astronomical journal"],
     "phys rev lett": ["physical review letters", "phys rev lett", "prl"],
     "phys rev d": ["physical review d", "phys rev d", "prd"],

@@ -2,12 +2,12 @@
   "generated_by": "scripts/resolve_references.py",
   "paper": "v0.3-prelim\\docs\\PAPER_V1_DRAFT.md",
   "counts": {
-    "RESOLVED": 19,
-    "CONFLICT": 12
+    "RESOLVED": 24,
+    "CONFLICT": 7
   },
   "duplicates": [
     {
-      "key": "1508.03339v1",
+      "key": "1508.03339",
       "slots": [
         "1",
         "50d"
@@ -58,13 +58,15 @@
         "page": "041302",
         "year": 2016,
         "doi": "10.1103/physrevlett.116.041302",
-        "arxiv": "1508.03339v1",
-        "journal_ref_from_arxiv": "Phys. Rev. Lett. 116, 041302 (2016)"
+        "arxiv": "1508.03339",
+        "journal_ref_from_arxiv": null
       },
       "evidence": [
-        "arXiv id_list=1508.03339 -> 1 entry(ies)",
-        "Crossref DOI 10.1103/PhysRevLett.116.041302 -> hit",
-        "cross-check arXiv vs Crossref title overlap=1.00",
+        "arXiv id_list=1508.03339 -> 0 entry(ies)",
+        "arXiv search 'Dark Matter Halos as Particle Colliders: Unified Solution to' -> 0 hit(s)",
+        "arXiv search: no candidate cleared the score floor",
+        "Crossref title search -> 8 hit(s)",
+        "Crossref best candidate: score=3.67 title_overlap=0.83 Dark Matter Halos as Particle Colliders: Unified Solution to Small-Sca",
         "venue match (journal+volume+page vs seed): YES",
         "title overlap vs seed = 0.83",
         "authors expected=['Kaplinghat', 'Tulin', 'Yu'] got=['Kaplinghat', 'Tulin', 'Yu'] (all present)",
@@ -399,48 +401,32 @@
         "arxiv": "1804.10385",
         "note": "audit Tier-2: 'Duerr et al. — JHEP 2021'; body cites 'Duerr et al. 2021 [8]'."
       },
-      "status": "CONFLICT",
+      "status": "RESOLVED",
       "resolved": {
-        "arxiv": {
-          "arxiv_id": "1804.10385v2",
-          "title": "Self-interacting dark matter with a stable vector mediator",
-          "published": "2018-04-27",
-          "updated": "2018-09-24",
-          "doi": "10.1088/1475-7516/2018/09/033",
-          "journal_ref": null,
-          "authors": [
-            "Michael Duerr",
-            "Kai Schmidt-Hoberg",
-            "Sebastian Wild"
-          ],
-          "primary": "hep-ph"
-        },
-        "crossref": {
-          "doi": "10.1088/1475-7516/2018/09/033",
-          "title": "Self-interacting dark matter with a stable vector mediator",
-          "container": "Journal of Cosmology and Astroparticle Physics",
-          "volume": "2018",
-          "page": "033-033",
-          "article_number": null,
-          "year": 2018,
-          "authors": [
-            "Duerr",
-            "Schmidt-Hoberg",
-            "Wild"
-          ],
-          "type": "journal-article",
-          "publisher": "IOP Publishing"
-        },
-        "title": "Self-interacting dark matter with a stable vector mediator"
+        "title": "Self-interacting dark matter with a stable vector mediator",
+        "authors": [
+          "Duerr",
+          "Schmidt-Hoberg",
+          "Wild"
+        ],
+        "container": "Journal of Cosmology and Astroparticle Physics",
+        "volume": "2018",
+        "page": "033-033",
+        "year": 2018,
+        "doi": "10.1088/1475-7516/2018/09/033",
+        "arxiv": "1804.10385v2",
+        "journal_ref_from_arxiv": null
       },
       "evidence": [
         "arXiv id_list=1804.10385 -> 1 entry(ies)",
         "Crossref DOI 10.1088/1475-7516/2018/09/033 -> hit",
         "cross-check arXiv vs Crossref title overlap=1.00",
-        "venue match (journal+volume+page vs seed): NO | resolved: journal='Journal of Cosmology and Astroparticle Physics' vol='2018' page='033-033'",
-        "title overlap vs seed = 1.00"
+        "venue match (journal+volume+page vs seed): YES",
+        "title overlap vs seed = 1.00",
+        "authors expected=['Duerr', 'Schmidt-Hoberg', 'Wild'] got=['Duerr', 'Schmidt-Hoberg', 'Wild'] (all present)",
+        "year expected=2018 got=2018 (ok)"
       ],
-      "reason": "venue mismatch (seed expects JCAP 09 033; resolved 'Journal of Cosmology and Astroparticle Physics' vol='2018' page='033-033') - title overlap 1.00 does not rescue it: Self-interacting dark matter with a stable vector mediator"
+      "reason": ""
     },
     "9": {
       "slot": "9",
@@ -621,58 +607,45 @@
           "McGaugh",
           "Schombert"
         ],
-        "year": 2020,
-        "title": "The SPARC dataset: A comprehensive and high-precision sample of galaxy rotation curves",
+        "year": 2017,
+        "title": "The SPARC dataset: mass models for 175 disk galaxies",
         "journal": "Astron. J.",
         "volume": "152",
         "page": "3",
-        "arxiv": "1906.08203",
+        "arxiv": "1612.01440",
         "note": "audit Tier-2: 'Lelli, McGaugh, Schombert — AJ 152 (SPARC)'; body cites 'SPARC sample [14]'."
       },
       "status": "CONFLICT",
       "resolved": {
-        "arxiv": {
-          "arxiv_id": "1906.08203v3",
-          "title": "Thermodynamics of weakly coherent collisional models",
-          "published": "2019-06-19",
-          "updated": "2019-10-04",
-          "doi": "10.1103/PhysRevLett.123.140601",
-          "journal_ref": "Phys. Rev. Lett. 123, 140601 (2019)",
-          "authors": [
-            "Franklin L. S. Rodrigues",
-            "Gabriele De Chiara",
-            "Mauro Paternostro",
-            "Gabriel T. Landi"
-          ],
-          "primary": "quant-ph"
-        },
+        "arxiv": {},
         "crossref": {
-          "doi": "10.1103/physrevlett.123.140601",
-          "title": "Thermodynamics of Weakly Coherent Collisional Models",
-          "container": "Physical Review Letters",
-          "volume": "123",
-          "page": null,
-          "article_number": "140601",
-          "year": 2019,
+          "doi": "10.3847/0004-6256/152/6/157",
+          "title": "SPARC: MASS MODELS FOR 175 DISK GALAXIES WITH SPITZER PHOTOMETRY AND ACCURATE ROTATION CURVES",
+          "container": "The Astronomical Journal",
+          "volume": "152",
+          "page": "157",
+          "article_number": null,
+          "year": 2016,
           "authors": [
-            "Rodrigues",
-            "De Chiara",
-            "Paternostro",
-            "Landi"
+            "Lelli",
+            "McGaugh",
+            "Schombert"
           ],
           "type": "journal-article",
-          "publisher": "American Physical Society (APS)"
+          "publisher": "American Astronomical Society"
         },
-        "title": "Thermodynamics of Weakly Coherent Collisional Models"
+        "title": "SPARC: MASS MODELS FOR 175 DISK GALAXIES WITH SPITZER PHOTOMETRY AND ACCURATE ROTATION CURVES"
       },
       "evidence": [
-        "arXiv id_list=1906.08203 -> 1 entry(ies)",
-        "Crossref DOI 10.1103/PhysRevLett.123.140601 -> hit",
-        "cross-check arXiv vs Crossref title overlap=1.00",
-        "venue match (journal+volume+page vs seed): NO | resolved: journal='Physical Review Letters' vol='123' page=None",
-        "title overlap vs seed = 0.00"
+        "arXiv id_list=1612.01440 -> 0 entry(ies)",
+        "arXiv search 'The SPARC dataset: mass models for 175 disk galaxies' -> 0 hit(s)",
+        "arXiv search: no candidate cleared the score floor",
+        "Crossref title search -> 8 hit(s)",
+        "Crossref best candidate: score=3.67 title_overlap=0.83 SPARC: MASS MODELS FOR 175 DISK GALAXIES WITH SPITZER PHOTOMETRY AND A",
+        "venue match (journal+volume+page vs seed): NO | resolved: journal='The Astronomical Journal' vol='152' page='157'",
+        "title overlap vs seed = 0.83"
       ],
-      "reason": "venue mismatch (seed expects Astron. J. 152 3; resolved 'Physical Review Letters' vol='123' page=None) - title overlap 0.00 does not rescue it: Thermodynamics of Weakly Coherent Collisional Models"
+      "reason": "venue mismatch (seed expects Astron. J. 152 3; resolved 'The Astronomical Journal' vol='152' page='157') - title overlap 0.83 does not rescue it: SPARC: MASS MODELS FOR 175 DISK GALAXIES WITH SPITZER PHOTOMETRY AND ACCURATE RO"
     },
     "16": {
       "slot": "16",
@@ -687,6 +660,7 @@
         "journal": "Mon. Not. R. Astron. Soc.",
         "volume": "408",
         "page": "430",
+        "arxiv": "1006.????",
         "note": "audit Tier-2: 'Vegetti et al. — MNRAS 408'; body cites 'Vegetti et al. 2010 [16]' (JVAS B1938+666 perturber)."
       },
       "status": "CONFLICT",
@@ -710,6 +684,7 @@
         "title": "The initial mass spectrum of old globular clusters in dwarf galaxies"
       },
       "evidence": [
+        "arXiv id_list=1006.???? -> 0 entry(ies)",
         "arXiv search 'Globular clusters as the first high-mass star clusters of dw' -> 0 hit(s)",
         "arXiv search: no candidate cleared the score floor",
         "Crossref title search -> 8 hit(s)",
@@ -778,10 +753,10 @@
         ],
         "year": 1998,
         "title": "Dwarf Galaxies of the Local Group",
+        "arxiv": "9810070",
         "journal": "Annu. Rev. Astron. Astrophys.",
         "volume": "36",
         "page": "435",
-        "arxiv": "9810070",
         "note": "body: 'V_max = 18 km/s per Mateo+ 1998 [26a]' (Fornax stellar velocity dispersion)."
       },
       "status": "CONFLICT",
@@ -950,52 +925,33 @@
         "arxiv": "2601.23264",
         "note": "body: 'Engelhardt et al. 2026 [49] also tests core-collapse timescales in velocity-dependent SIDM'. No arXiv id or journal recorded — resolver must search."
       },
-      "status": "CONFLICT",
+      "status": "RESOLVED",
       "resolved": {
-        "arxiv": {
-          "arxiv_id": "2601.23264v3",
-          "title": "MARVELously Dark: the density profile evolution of dwarf halos in velocity-dependent SIDM",
-          "published": "2026-01-30",
-          "updated": "2026-06-11",
-          "doi": null,
-          "journal_ref": null,
-          "authors": [
-            "Anna Engelhardt",
-            "Ferah Munshi",
-            "Annika H. G. Peter",
-            "Ethan O. Nadler",
-            "Akaxia Cruz",
-            "Alyson M. Brooks",
-            "Zhichao Carton Zeng",
-            "Thomas R. Quinn",
-            "Blake Keith"
-          ],
-          "primary": "astro-ph.GA"
-        },
-        "crossref": {
-          "doi": "10.1016/j.dark.2026.102265",
-          "title": "A test of invariance of halo surface density for FIRE-2 simulations with cold dark matter and self-interacting dark matter",
-          "container": "Physics of the Dark Universe",
-          "volume": "52",
-          "page": "102265",
-          "article_number": "102265",
-          "year": 2026,
-          "authors": [
-            "Dalui",
-            "Desai"
-          ],
-          "type": "journal-article",
-          "publisher": "Elsevier BV"
-        }
+        "title": "MARVELously Dark: the density profile evolution of dwarf halos in velocity-dependent SIDM",
+        "authors": [
+          "Anna Engelhardt",
+          "Ferah Munshi",
+          "Annika H. G. Peter",
+          "Ethan O. Nadler",
+          "Akaxia Cruz",
+          "Alyson M. Brooks",
+          "Zhichao Carton Zeng",
+          "Thomas R. Quinn",
+          "Blake Keith"
+        ],
+        "container": "arXiv preprint",
+        "volume": null,
+        "page": null,
+        "year": 2026,
+        "doi": null,
+        "arxiv": "2601.23264v3",
+        "journal_ref_from_arxiv": ""
       },
       "evidence": [
         "arXiv id_list=2601.23264 -> 1 entry(ies)",
-        "Crossref title search -> 8 hit(s)",
-        "Crossref best candidate: score=2.11 title_overlap=0.56 A test of invariance of halo surface density for FIRE-2 simulations wi",
-        "cross-check arXiv vs Crossref title overlap=0.17",
-        "seed match: arXiv=0.56 crossref=0.56"
+        "preprint path: the seed names a preprint venue ('arXiv') and arXiv 2601.23264 is the record of publication (journal_ref='none - preprint'); no Crossref DOI exists yet, which is expected for a recent preprint"
       ],
-      "reason": "arXiv and Crossref returned different papers for this slot and neither matches the expected title — needs a human"
+      "reason": ""
     },
     "50": {
       "slot": "50",
@@ -1009,249 +965,35 @@
         "arxiv": "2609.02823",
         "note": "body: 'LZ September 2026 single-event observation [50] (arXiv:2609.02823, 2.6σ, marginal status)'. No author recorded."
       },
-      "status": "RESOLVED",
+      "status": "CONFLICT",
       "resolved": {
-        "title": "Search for dark matter particle interactions in an extended nuclear recoil energy window with the LUX-ZEPLIN (LZ) experiment",
-        "authors": [
-          "D. S. Akerib",
-          "A. K. Al Musalhi",
-          "B. J. Almquist",
-          "C. S. Amarasinghe",
-          "A. Ames",
-          "T. Anderson",
-          "N. Angelides",
-          "H. M. Araújo",
-          "J. E. Armstrong",
-          "M. Arthurs",
-          "A. Baker",
-          "S. Balashov",
-          "J. Bang",
-          "J. W. Bargemann",
-          "E. E. Barillier",
-          "D. Bauer",
-          "K. Beattie",
-          "A. Beauchene",
-          "T. L. Benson",
-          "A. Bhatti",
-          "T. P. Biesiadzinski",
-          "H. J. Birch",
-          "E. Bishop",
-          "G. M. Blockinger",
-          "B. Boxer",
-          "C. A. J. Brew",
-          "P. Brás",
-          "S. Burdin",
-          "M. C. Carmona-Benitez",
-          "M. Carter",
-          "A. Chawla",
-          "J. J. Cherwinka",
-          "Y. T. Chin",
-          "S. Contreras",
-          "M. V. Converse",
-          "R. Coronel",
-          "A. Cottle",
-          "C. Coulson",
-          "G. Cox",
-          "C. E. Dahl",
-          "I. Darlington",
-          "S. Dave",
-          "J. Delgaudio",
-          "S. Desai",
-          "S. Dey",
-          "L. de Viveiros",
-          "L. Di Felice",
-          "C. Ding",
-          "J. E. Y. Dobson",
-          "E. Druszkiewicz",
-          "S. Dubey",
-          "C. L. Dunbar",
-          "S. R. Eriksen",
-          "S. Fayer",
-          "N. Fieldhouse",
-          "S. Fiorucci",
-          "H. Flaecher",
-          "E. D. Fraser",
-          "T. M. A. Fruth",
-          "P. W. Gaemers",
-          "R. J. Gaitskell",
-          "A. Geffre",
-          "J. Genovesi",
-          "C. Ghag",
-          "J. Ghamsari",
-          "A. Ghosh",
-          "S. Ghosh",
-          "R. Gibbons",
-          "S. Gokhale",
-          "J. Green",
-          "M. G. D. van der Grinten",
-          "J. J. Haiston",
-          "C. R. Hall",
-          "T. Hall",
-          "R. N. Hampp",
-          "S. J. Haselschwardt",
-          "M. A. Hernandez",
-          "S. A. Hertel",
-          "G. J. Homenides",
-          "M. Horn",
-          "T. Horoho",
-          "D. Q. Huang",
-          "W. Hulse",
-          "D. Hunt",
-          "E. Jacquet",
-          "R. S. James",
-          "K. R. Jenkins",
-          "A. C. Kaboth",
-          "A. C. Kamaha",
-          "D. Khaitan",
-          "A. Khazov",
-          "J. Kim",
-          "Y. D. Kim",
-          "D. Kodroff",
-          "Q. C. Kong",
-          "E. V. Korolkova",
-          "H. Kraus",
-          "S. Kravitz",
-          "L. Kreczko",
-          "V. A. Kudryavtsev",
-          "C. Lawes",
-          "E. B. Leon",
-          "D. S. Leonard",
-          "K. T. Lesko",
-          "C. Levy",
-          "Z. Li",
-          "J. Lin",
-          "A. Lindote",
-          "W. H. Lippincott",
-          "J. Long",
-          "M. I. Lopes",
-          "W. Lorenzon",
-          "C. Lu",
-          "S. Luitz",
-          "W. Ma",
-          "V. Mahajan",
-          "P. A. Majewski",
-          "A. Manalaysay",
-          "R. L. Mannino",
-          "R. J. Matheson",
-          "C. Maupin",
-          "M. E. McCarthy",
-          "D. N. McKinsey",
-          "J. McLaughlin",
-          "J. B. McLaughlin",
-          "B. Mitra",
-          "E. Mizrachi",
-          "M. E. Monzani",
-          "K. Morå",
-          "E. Morrison",
-          "B. J. Mount",
-          "J. Munski",
-          "M. Murdy",
-          "A. St. J. Murphy",
-          "H. N. Nelson",
-          "F. Neves",
-          "A. Nguyen",
-          "C. L. O'Brien",
-          "F. H. O'Shea",
-          "I. Olcina",
-          "K. C. Oliver-Mallory",
-          "J. Orpwood",
-          "K. Y Oyulmaz",
-          "K. J. Palladino",
-          "N. J. Pannifer",
-          "S. J. Patton",
-          "B. Penning",
-          "G. Pereira",
-          "R. Peres",
-          "E. Perry",
-          "T. Pershing",
-          "A. Piepke",
-          "S. S. Poudel",
-          "Y. Qie",
-          "J. Reichenbacher",
-          "G. R. C. Rischbieter",
-          "E. Ritchey",
-          "H. S. Riyat",
-          "R. Rosero",
-          "N. J. Rowe",
-          "T. Rushton",
-          "D. Rynders",
-          "S. Saltão",
-          "I. Sargeant",
-          "A. B. M. R. Sazzad",
-          "R. W. Schnee",
-          "G. Sehr",
-          "M. Severson B. Shafer",
-          "S. Shaw",
-          "L. Sherman",
-          "K. Shi",
-          "T. Shutt",
-          "C. Silva",
-          "G. Sinev",
-          "J. Siniscalco",
-          "A. M. Softley-Brown",
-          "V. N. Solovov",
-          "P. Sorensen",
-          "J. Soria",
-          "T. J. Sumner",
-          "M. Szydagis",
-          "C. F. Tang",
-          "K. Thieme",
-          "D. R. Tiedt",
-          "D. R. Tovey",
-          "J. Tranter",
-          "M. Trask",
-          "K. Trengove",
-          "B. Twigg",
-          "A. Usón",
-          "A. C. Vaitkus",
-          "O. Valentino",
-          "A. Wang",
-          "J. J. Wang",
-          "Y. Wang",
-          "L. Weeldreyer",
-          "T. J. Whitis",
-          "K. Wild",
-          "M. Williams",
-          "J. Winnicki",
-          "M. S. Witherell",
-          "L. Wolf",
-          "F. L. H. Wolfs",
-          "S. Woodford",
-          "D. Woodward",
-          "C. J. Wright",
-          "Q. Xia",
-          "J. Xu",
-          "Y. Xu",
-          "M. Yeh",
-          "D. Yeum",
-          "J. Young",
-          "H. D. Zenger",
-          "W. Zha",
-          "H. Zhang",
-          "T. Zhang",
-          "Y. Zhou"
-        ],
-        "container": null,
-        "volume": null,
-        "page": null,
-        "year": 2026,
-        "doi": null,
-        "arxiv": "2609.02823v1",
-        "journal_ref_from_arxiv": null
+        "arxiv": {},
+        "crossref": {
+          "doi": "10.1016/j.nuclphysb.2024.116437",
+          "title": "LUX, ZEPLIN and LUX-ZEPLIN: Developments in liquid xenon detectors and the search for WIMP dark matter",
+          "container": "Nuclear Physics B",
+          "volume": "1003",
+          "page": "116437",
+          "article_number": "116437",
+          "year": 2024,
+          "authors": [
+            "Akerib"
+          ],
+          "type": "journal-article",
+          "publisher": "Elsevier BV"
+        },
+        "title": "LUX, ZEPLIN and LUX-ZEPLIN: Developments in liquid xenon detectors and the search for WIMP dark matter"
       },
       "evidence": [
-        "arXiv id_list=2609.02823 -> 1 entry(ies)",
+        "arXiv id_list=2609.02823 -> 0 entry(ies)",
+        "arXiv search 'Search for dark matter particle interactions in an extended ' -> 0 hit(s)",
+        "arXiv search: no candidate cleared the score floor",
         "Crossref title search -> 8 hit(s)",
         "Crossref best candidate: score=1.67 title_overlap=0.33 LUX, ZEPLIN and LUX-ZEPLIN: Developments in liquid xenon detectors and",
-        "cross-check arXiv vs Crossref title overlap=0.44",
-        "seed match: arXiv=1.00 crossref=0.33",
-        "decision: the arXiv id resolves to the expected paper; the Crossref hit is a topical near-match and is DISCARDED",
-        "venue match (journal+volume+page vs seed): YES",
-        "title overlap vs seed = 1.00",
-        "authors expected=['Akerib'] got=['Akerib', 'Musalhi', 'Almquist', 'Amarasinghe', 'Ames', 'Anderson', 'Angelides', 'Araújo'] (all present)",
-        "year expected=2026 got=2026 (ok)"
+        "venue match (journal+volume+page vs seed): NO | resolved: journal='Nuclear Physics B' vol='1003' page='116437'",
+        "title overlap vs seed = 0.33"
       ],
-      "reason": ""
+      "reason": "venue mismatch (seed expects arXiv; resolved 'Nuclear Physics B' vol='1003' page='116437') - title overlap 0.33 does not rescue it: LUX, ZEPLIN and LUX-ZEPLIN: Developments in liquid xenon detectors and the searc"
     },
     "50c": {
       "slot": "50c",
@@ -1270,50 +1012,33 @@
         "arxiv": "2506.14898",
         "note": "body: 'SIDM2v model of Mace, Yang, Zeng+ 2026 [50c] (arXiv:2506.14898, two-component SIDM with inter-species mass segregation)'. NOTE: body also says 'Earlier drafts cited Mace+ 2026 [50c] — the actual reference is Mace+ 2025' — year conflict."
       },
-      "status": "CONFLICT",
+      "status": "RESOLVED",
       "resolved": {
-        "arxiv": {
-          "arxiv_id": "2506.14898v3",
-          "title": "Self-Interacting Dark Matter with Mass Segregation: A Unified Explanation of Dwarf Cores and Small-Scale Lenses",
-          "published": "2025-06-17",
-          "updated": "2026-02-04",
-          "doi": "10.1016/j.scib.2026.01.077",
-          "journal_ref": "Science Bulletin, Volume 71, Issue 6, 30 March 2026, Pages 1349-1356",
-          "authors": [
-            "Daneng Yang",
-            "Yi-Zhong Fan",
-            "Siyuan Hou",
-            "Yue-Lin Sming Tsai"
-          ],
-          "primary": "astro-ph.CO"
-        },
-        "crossref": {
-          "doi": "10.1016/j.scib.2026.01.077",
-          "title": "Self-interacting dark matter with mass segregation: a unified explanation of dwarf cores and small-scale lenses",
-          "container": "Science Bulletin",
-          "volume": "71",
-          "page": "1349-1356",
-          "article_number": null,
-          "year": 2026,
-          "authors": [
-            "Yang",
-            "Fan",
-            "Hou",
-            "Tsai"
-          ],
-          "type": "journal-article",
-          "publisher": "Elsevier BV"
-        },
-        "title": "Self-interacting dark matter with mass segregation: a unified explanation of dwarf cores and small-scale lenses"
+        "title": "Self-interacting dark matter with mass segregation: a unified explanation of dwarf cores and small-scale lenses",
+        "authors": [
+          "Yang",
+          "Fan",
+          "Hou",
+          "Tsai"
+        ],
+        "container": "Science Bulletin",
+        "volume": "71",
+        "page": "1349-1356",
+        "year": 2026,
+        "doi": "10.1016/j.scib.2026.01.077",
+        "arxiv": "2506.14898v3",
+        "journal_ref_from_arxiv": "Science Bulletin, Volume 71, Issue 6, 30 March 2026, Pages 1349-1356"
       },
       "evidence": [
         "arXiv id_list=2506.14898 -> 1 entry(ies)",
         "Crossref DOI 10.1016/j.scib.2026.01.077 -> hit",
         "cross-check arXiv vs Crossref title overlap=1.00",
-        "venue match (journal+volume+page vs seed): NO | resolved: journal='Science Bulletin' vol='71' page='1349-1356'",
-        "title overlap vs seed = 1.00"
+        "venue match (journal+volume+page vs seed): YES",
+        "title overlap vs seed = 1.00",
+        "authors expected=['Yang', 'Fan', 'Hou', 'Tsai'] got=['Yang', 'Fan', 'Hou', 'Tsai'] (all present)",
+        "year expected=2026 got=2026 (ok)"
       ],
-      "reason": "venue mismatch (seed expects Sci. Bull. 71 1349; resolved 'Science Bulletin' vol='71' page='1349-1356') - title overlap 1.00 does not rescue it: Self-interacting dark matter with mass segregation: a unified explanation of dwa"
+      "reason": ""
     },
     "50d": {
       "slot": "50d",
@@ -1344,13 +1069,15 @@
         "page": "041302",
         "year": 2016,
         "doi": "10.1103/physrevlett.116.041302",
-        "arxiv": "1508.03339v1",
-        "journal_ref_from_arxiv": "Phys. Rev. Lett. 116, 041302 (2016)"
+        "arxiv": "1508.03339",
+        "journal_ref_from_arxiv": null
       },
       "evidence": [
-        "arXiv id_list=1508.03339 -> 1 entry(ies)",
-        "Crossref DOI 10.1103/PhysRevLett.116.041302 -> hit",
-        "cross-check arXiv vs Crossref title overlap=1.00",
+        "arXiv id_list=1508.03339 -> 0 entry(ies)",
+        "arXiv search 'Dark Matter Halos as Particle Colliders: Unified Solution to' -> 0 hit(s)",
+        "arXiv search: no candidate cleared the score floor",
+        "Crossref title search -> 8 hit(s)",
+        "Crossref best candidate: score=3.67 title_overlap=0.83 Dark Matter Halos as Particle Colliders: Unified Solution to Small-Sca",
         "venue match (journal+volume+page vs seed): YES",
         "title overlap vs seed = 0.83",
         "authors expected=['Kaplinghat', 'Tulin', 'Yu'] got=['Kaplinghat', 'Tulin', 'Yu'] (all present)",
@@ -1456,55 +1183,35 @@
         "arxiv": "2606.02566",
         "note": "body: 'Silverman+ 2026 (arXiv:2606.02566, \"Mergers Matter\")'; also 'Silverman+ 2026 [54]' as a gravothermal-cascade source."
       },
-      "status": "CONFLICT",
+      "status": "RESOLVED",
       "resolved": {
-        "arxiv": {
-          "arxiv_id": "2606.02566v1",
-          "title": "Mergers Matter: Gravothermal Collapse in Dwarf Halos with Self-Interacting Dark Matter",
-          "published": "2026-06-01",
-          "updated": "2026-06-01",
-          "doi": null,
-          "journal_ref": null,
-          "authors": [
-            "Maya Silverman",
-            "Abdelaziz Hussein",
-            "Arpit Arora",
-            "Mariangela Lisanti",
-            "Manoj Kaplinghat",
-            "Lina Necib",
-            "Andreas Thoyas",
-            "Stephanie O'Neil",
-            "Robyn E. Sanderson",
-            "Xuejian Shen",
-            "Jorge Moreno"
-          ],
-          "primary": "astro-ph.GA"
-        },
-        "crossref": {
-          "doi": "10.1051/0004-6361/202661917",
-          "title": "Cooling, conduction, and compact objects: Gravothermal evolution of dissipative self-interacting dark matter halos",
-          "container": "Astronomy &amp; Astrophysics",
-          "volume": "714",
-          "page": "A469",
-          "article_number": null,
-          "year": 2026,
-          "authors": [
-            "Schmidt",
-            "Fischer",
-            "Garny"
-          ],
-          "type": "journal-article",
-          "publisher": "EDP Sciences"
-        }
+        "title": "Mergers Matter: Gravothermal Collapse in Dwarf Halos with Self-Interacting Dark Matter",
+        "authors": [
+          "Maya Silverman",
+          "Abdelaziz Hussein",
+          "Arpit Arora",
+          "Mariangela Lisanti",
+          "Manoj Kaplinghat",
+          "Lina Necib",
+          "Andreas Thoyas",
+          "Stephanie O'Neil",
+          "Robyn E. Sanderson",
+          "Xuejian Shen",
+          "Jorge Moreno"
+        ],
+        "container": "arXiv preprint",
+        "volume": null,
+        "page": null,
+        "year": 2026,
+        "doi": null,
+        "arxiv": "2606.02566v1",
+        "journal_ref_from_arxiv": ""
       },
       "evidence": [
         "arXiv id_list=2606.02566 -> 1 entry(ies)",
-        "Crossref title search -> 8 hit(s)",
-        "Crossref best candidate: score=2.33 title_overlap=0.67 Cooling, conduction, and compact objects: Gravothermal evolution of di",
-        "cross-check arXiv vs Crossref title overlap=0.50",
-        "seed match: arXiv=1.00 crossref=0.67"
+        "preprint path: the seed names a preprint venue ('arXiv') and arXiv 2606.02566 is the record of publication (journal_ref='none - preprint'); no Crossref DOI exists yet, which is expected for a recent preprint"
       ],
-      "reason": "arXiv and Crossref returned different papers for this slot and neither matches the expected title — needs a human"
+      "reason": ""
     },
     "54c": {
       "slot": "54c",
@@ -1610,62 +1317,36 @@
         "arxiv": "2609.16740",
         "note": "body: 'Lei+ 2026 [55b]' / 'massive-galaxy inner DM fraction'. No arXiv id or journal recorded — resolver must search."
       },
-      "status": "CONFLICT",
+      "status": "RESOLVED",
       "resolved": {
-        "arxiv": {
-          "arxiv_id": "2609.16740v1",
-          "title": "Lower central dark matter densities in nearby galaxies than predicted by simulations",
-          "published": "2026-09-15",
-          "updated": "2026-09-15",
-          "doi": null,
-          "journal_ref": null,
-          "authors": [
-            "Yu Lei",
-            "Ling Zhu",
-            "Meng Yang",
-            "Giulia Despali",
-            "Zheng Zheng",
-            "Ran Li",
-            "Dandan Xu",
-            "Niankun Yu",
-            "Jesús Falcón-Barroso",
-            "Fangzhou Jiang",
-            "Glenn van de Ven",
-            "Jie Wang"
-          ],
-          "primary": "astro-ph.GA"
-        },
-        "crossref": {
-          "doi": "10.1093/mnras/staf1539",
-          "title": "Central densities of dark matter haloes in <scp>fire-2</scp> simulations of low-mass galaxies with cold dark matter and self-interacting dark matter",
-          "container": "Monthly Notices of the Royal Astronomical Society",
-          "volume": "543",
-          "page": "1995-2005",
-          "article_number": null,
-          "year": 2025,
-          "authors": [
-            "Straight",
-            "Boylan-Kolchin",
-            "Bullock",
-            "Hopkins",
-            "Shen",
-            "Necib",
-            "Lazar",
-            "Graus",
-            "Samuel"
-          ],
-          "type": "journal-article",
-          "publisher": "Oxford University Press (OUP)"
-        }
+        "title": "Lower central dark matter densities in nearby galaxies than predicted by simulations",
+        "authors": [
+          "Yu Lei",
+          "Ling Zhu",
+          "Meng Yang",
+          "Giulia Despali",
+          "Zheng Zheng",
+          "Ran Li",
+          "Dandan Xu",
+          "Niankun Yu",
+          "Jesús Falcón-Barroso",
+          "Fangzhou Jiang",
+          "Glenn van de Ven",
+          "Jie Wang"
+        ],
+        "container": "arXiv preprint",
+        "volume": null,
+        "page": null,
+        "year": 2026,
+        "doi": null,
+        "arxiv": "2609.16740v1",
+        "journal_ref_from_arxiv": ""
       },
       "evidence": [
         "arXiv id_list=2609.16740 -> 1 entry(ies)",
-        "Crossref title search -> 8 hit(s)",
-        "Crossref best candidate: score=2.20 title_overlap=0.60 Central densities of dark matter haloes in <scp>fire-2</scp> simulatio",
-        "cross-check arXiv vs Crossref title overlap=0.50",
-        "seed match: arXiv=1.00 crossref=0.60"
+        "preprint path: the seed names a preprint venue ('arXiv') and arXiv 2609.16740 is the record of publication (journal_ref='none - preprint'); no Crossref DOI exists yet, which is expected for a recent preprint"
       ],
-      "reason": "arXiv and Crossref returned different papers for this slot and neither matches the expected title — needs a human"
+      "reason": ""
     },
     "55c": {
       "slot": "55c",
@@ -1684,65 +1365,44 @@
         "arxiv": "2609.19132",
         "note": "body: 'Wang+ 2026 [55c]' / 'massive-galaxy inner DM fraction'. No arXiv id or journal recorded — resolver must search."
       },
-      "status": "CONFLICT",
+      "status": "RESOLVED",
       "resolved": {
-        "arxiv": {
-          "arxiv_id": "2609.19132v1",
-          "title": "Massive Galaxy Halos Contain Less Inner Dark Matter Than Predicted",
-          "published": "2026-09-16",
-          "updated": "2026-09-16",
-          "doi": null,
-          "journal_ref": null,
-          "authors": [
-            "Yu-Chen Wang",
-            "Yingjie Peng",
-            "Xiaohu Yang",
-            "Luis C. Ho",
-            "Dingyi Zhao",
-            "Jing Dou",
-            "Hao Fu",
-            "Zeyu Gao",
-            "Qiusheng Gu",
-            "Fangzhou Jiang",
-            "Yukun Liu",
-            "Roberto Maiolino",
-            "Houjun Mo",
-            "Canpo Su",
-            "Bitao Wang",
-            "Kai Wang",
-            "Bingxiao Xu",
-            "Feng Yuan",
-            "Kunyao Zhao",
-            "Xingye Zhu"
-          ],
-          "primary": "astro-ph.GA"
-        },
-        "crossref": {
-          "doi": "10.22323/1.014.0041",
-          "title": "The galaxy-dark matter connection",
-          "container": "Proceedings of Baryons in Dark Matter Halos — PoS(BDMH2004)",
-          "volume": null,
-          "page": "041",
-          "article_number": null,
-          "year": 2004,
-          "authors": [
-            "Van den Bosch",
-            "Yang"
-          ],
-          "type": "proceedings-article",
-          "publisher": "Sissa Medialab"
-        },
-        "title": "The galaxy-dark matter connection"
+        "title": "Massive Galaxy Halos Contain Less Inner Dark Matter Than Predicted",
+        "authors": [
+          "Yu-Chen Wang",
+          "Yingjie Peng",
+          "Xiaohu Yang",
+          "Luis C. Ho",
+          "Dingyi Zhao",
+          "Jing Dou",
+          "Hao Fu",
+          "Zeyu Gao",
+          "Qiusheng Gu",
+          "Fangzhou Jiang",
+          "Yukun Liu",
+          "Roberto Maiolino",
+          "Houjun Mo",
+          "Canpo Su",
+          "Bitao Wang",
+          "Kai Wang",
+          "Bingxiao Xu",
+          "Feng Yuan",
+          "Kunyao Zhao",
+          "Xingye Zhu"
+        ],
+        "container": "arXiv preprint",
+        "volume": null,
+        "page": null,
+        "year": 2026,
+        "doi": null,
+        "arxiv": "2609.19132v1",
+        "journal_ref_from_arxiv": ""
       },
       "evidence": [
         "arXiv id_list=2609.19132 -> 1 entry(ies)",
-        "Crossref title search -> 8 hit(s)",
-        "Crossref best candidate: score=1.60 title_overlap=0.30 The galaxy-dark matter connection",
-        "cross-check arXiv vs Crossref title overlap=0.75",
-        "venue match (journal+volume+page vs seed): NO | resolved: journal='Proceedings of Baryons in Dark Matter Halos — PoS(BDMH2004)' vol=None page='041'",
-        "title overlap vs seed = 0.30"
+        "preprint path: the seed names a preprint venue ('arXiv') and arXiv 2609.19132 is the record of publication (journal_ref='none - preprint'); no Crossref DOI exists yet, which is expected for a recent preprint"
       ],
-      "reason": "venue mismatch (seed expects arXiv; resolved 'Proceedings of Baryons in Dark Matter Halos — PoS(BDMH2004)' vol=None page='041') - title overlap 0.30 does not rescue it: The galaxy-dark matter connection"
+      "reason": ""
     }
   }
 }
