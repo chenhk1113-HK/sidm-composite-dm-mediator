@@ -417,7 +417,7 @@ def md_to_flow(md, st):
 
 # ---------------------------------------------------------------- build
 
-def build(md_path, pdf_path, title):
+def build(md_path, pdf_path, title, subtitle, footer):
     md = Path(md_path).read_text(encoding='utf-8')
     st = make_styles()
     flow = md_to_flow(md, st)
@@ -429,7 +429,7 @@ def build(md_path, pdf_path, title):
             'c1', fontName='Body', fontSize=20, leading=25,
             textColor=colors.HexColor('#0b3d63'), alignment=1)),
         Spacer(1, 5 * mm),
-        Paragraph('SIDM v19.2-F &nbsp;|&nbsp; Round 5 + n18 + n19 + n20 review response',
+        Paragraph(inline(subtitle),
                   ParagraphStyle('c2', fontName='Body', fontSize=10.5, leading=14,
                                  textColor=colors.HexColor('#4a6076'), alignment=1)),
         Spacer(1, 3 * mm),
@@ -452,7 +452,7 @@ def build(md_path, pdf_path, title):
         canvas.saveState()
         canvas.setFont('Body', 7)
         canvas.setFillColor(colors.HexColor('#7b8b9b'))
-        canvas.drawString(17 * mm, 9 * mm, 'SIDM v19.2-F - Round 5 + n18 + n19 + n20 review response')
+        canvas.drawString(17 * mm, 9 * mm, footer)
         canvas.drawRightString(A4[0] - 15 * mm, 9 * mm, f'page {d.page}')
         canvas.setStrokeColor(colors.HexColor('#d3dde6'))
         canvas.setLineWidth(0.4)
@@ -469,13 +469,18 @@ def build(md_path, pdf_path, title):
 
 
 if __name__ == '__main__':
+    import json
     register_fonts()
-    OUT = Path(sys.argv[1])
-    OUT.mkdir(parents=True, exist_ok=True)
-    JOBS = [
-        (sys.argv[2], sys.argv[3], 'Consolidated Fixes Report - v1.11'),
-        (sys.argv[4], sys.argv[5], 'Changed Code Companion - v1.9'),
-    ]
-    for md_path, pdf_path, title in JOBS:
-        n = build(md_path, pdf_path, title)
-        print(f'OK {pdf_path}  {n} bytes')
+    # Usage:
+    #   build_round5_report_pdfs.py <jobs.json>
+    # where jobs.json is a list of
+    #   {"md": path, "pdf": path, "title": str, "subtitle": str, "footer": str}
+    # The titles/subtitles/footers are per-document: hardcoding them ships a
+    # report with another report's name on the cover.
+    jobs_file = Path(sys.argv[1])
+    jobs = json.loads(jobs_file.read_text(encoding='utf-8'))
+    for j in jobs:
+        n = build(j['md'], j['pdf'], j['title'],
+                  j.get('subtitle', 'SIDM v19.2-F'),
+                  j.get('footer', 'SIDM v19.2-F'))
+        print(f'OK {j["pdf"]}  {n} bytes')
