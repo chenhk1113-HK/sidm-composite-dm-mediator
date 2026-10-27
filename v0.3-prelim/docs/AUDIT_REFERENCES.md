@@ -105,10 +105,37 @@ the most recent and most likely to have ADS/arXiv verification issues.
   - **Re-pointed to** Girmohanta & Shrock, *Fitting a Self-Interacting Dark Matter Model to Data Ranging
     From Satellite Galaxies to Galaxy Clusters*, PRD 107, 063006 (2023), arXiv:2210.01132.
 - **[9] as printed** — "Hong, Kuranchi & Perez 2020, PRD 102" — does not exist.
-  - The surname "Kuranchi" returns **zero** author records in arXiv, InspireHEP, Semantic Scholar and
-    OpenAlex. The nearest real paper is Hong, **Kurup** & **Perelstein**, *Conformal Freeze-In of Dark
-    Matter*, PRD 101, 095037 — but that is a freeze-in **production** paper and cannot support a
-    velocity-dependent-cross-section claim.
+  - **A user lead was checked and ruled out (2026-10-27, revised).** The lead pointed to
+    "kuranchi" in a fuzzy-dark-matter context. The researcher is real: **Shalini
+    Kurinchi-Vendhan** (Caltech; advisor Xiaolong Du, Carnegie; 2021 CASSI Summer Student
+    Symposium), author of *"Spherical Collapse of Fuzzy Dark Matter in 3-D Simulations"*,
+    **BAAS 54, 347 (2022)** (BAAS 2022n6i347p01; ADS 2022AAS...24034701K), and of the
+    *Caltech Undergraduate Research Journal* article *"Collapse of Fuzzy Dark Matter in
+    Simulations"* (2022). NOTE the spelling: **Kurinchi-Vendhan** (i after r) — the
+    original web-summary spelling "Kuranchi-Bendin" was a search-engine garble, and
+    searching that garbled spelling returns zero records in every index, which is why
+    the first check found nothing at all.
+  - The lead is nonetheless **irrelevant to [9]** for two independent reasons:
+    - **(i) Topic.** The paper's [9] supports a *velocity-dependent SIDM cross-section*
+      claim. The Kurinchi-Vendhan work is *fuzzy* dark matter — ultralight scalar
+      (m_phi ~ 10^-22 eV) soliton / halo-collapse structure, a different physical model
+      with no SIDM cross-section content. The paper contains no FDM, soliton-core or
+      halo-collapse citation of this kind (verified by full-text search of the draft:
+      zero hits for "fuzzy", "spherical collapse" and "Schrodinger").
+    - **(ii) Authorship and venue.** The work is a single-author undergraduate abstract
+      plus a student-journal article, published as a **BAAS meeting abstract** (BAAS 54,
+      347) — not a peer-reviewed journal article with volume/page. It has no DOI, no
+      arXiv record, and no author entry in INSPIRE, Crossref, Semantic Scholar or
+      OpenAlex. It could not occupy a numbered physics reference in the paper's format
+      even if the topic matched.
+  - The nearest real paper to the printed citation is Hong, **Kurup** & **Perelstein**,
+    *Conformal Freeze-In of Dark Matter*, PRD 101, 095037 — but that is a freeze-in
+    **production** paper and cannot support a velocity-dependent-cross-section claim.
+  - The surname "Kuranchi"/"Kurinchi" returns **zero** author records in arXiv,
+    InspireHEP, Semantic Scholar and OpenAlex — because this work is published only as a
+    BAAS abstract and a student-journal article, which those indexes do not carry as
+    author records. (Semantic Scholar and OpenAlex author searches return 0 for both
+    "Kurinchi" and "Kurinchi-Vendhan".)
   - The audit's recorded venue PRD 102, 075025 is *Protasov et al.*, "Theoretical analysis of
     antineutron-nucleus data needed for antineutron mirrors" — unrelated to dark matter.
   - **Re-pointed to** Girmohanta & Shrock, *Cross Section Calculations in Theories of Self-Interacting
