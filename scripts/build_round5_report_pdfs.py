@@ -336,19 +336,57 @@ def md_to_flow(md, st):
             i += 1
             continue
 
+        def is_block(t2):
+            if (not t2 or t2.startswith(('#', '|', '```', '>'))):
+                return True
+            if re.match(r'^\d+\.\s', t2):
+                return True
+            if re.match(r'^[-*+]\s', t2):        # real bullet
+                return True
+            if re.fullmatch(r'-{3,}|\*{3,}|_{3,}', t2):   # hr
+                return True
+            return False
+
+        # bullet / numbered list items gather their soft-wrapped
+        # continuation lines before inline() runs, exactly like the paragraph
+        # path does. Without this, a **bold** span that straddles a line break
+        # never matches and the literal '**' markers are printed in the PDF.
+        # A continuation is a line indented by >= 2 spaces that is not itself a
+        # block start; an unindented line begins a new paragraph.
+        def gather_cont(start):
+            """Collect the indented continuation lines of a list item."""
+            buf2 = []
+            k = start
+            while k < len(lines):
+                raw = lines[k]
+                t3 = raw.strip()
+                if not t3:
+                    break
+                if (raw[:1].isspace() and len(raw) - len(raw.lstrip()) >= 2
+                        and not is_block(t3)):
+                    buf2.append(t3)
+                    k += 1
+                    continue
+                break
+            return buf2, k
+
         # bullet
         m = re.match(r'^[-*+]\s+(.*)$', s)
         if m:
-            flow.append(Paragraph(inline(m.group(1)), st['bullet'], bulletText='•'))
-            i += 1
+            cont, j = gather_cont(i + 1)
+            flow.append(Paragraph(inline(' '.join([m.group(1)] + cont)),
+                                  st['bullet'], bulletText='•'))
+            i = j
             continue
 
         # numbered
         m = re.match(r'^(\d+)\.\s+(.*)$', s)
         if m:
-            flow.append(Paragraph(inline(m.group(2)), st['bullet'],
+            cont, j = gather_cont(i + 1)
+            flow.append(Paragraph(inline(' '.join([m.group(2)] + cont)),
+                                  st['bullet'],
                                   bulletText=f'{m.group(1)}.'))
-            i += 1
+            i = j
             continue
 
         # blockquote -> CALLOUT (F-QUOTE, v1.7). A quote block is gathered as a unit:
@@ -385,17 +423,6 @@ def md_to_flow(md, st):
         # line wrapped mid-emphasis such as "*mechanism* - the band is ...").
         # Only treat '*'/'-'/'+' as a list bullet when followed by a space;
         # otherwise the line continues the current paragraph.
-        def is_block(t2):
-            if (not t2 or t2.startswith(('#', '|', '```', '>'))):
-                return True
-            if re.match(r'^\d+\.\s', t2):
-                return True
-            if re.match(r'^[-*+]\s', t2):        # real bullet
-                return True
-            if re.fullmatch(r'-{3,}|\*{3,}|_{3,}', t2):   # hr
-                return True
-            return False
-
         buf = [s]
         j = i + 1
         while j < len(lines):
