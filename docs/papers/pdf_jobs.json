@@ -4,13 +4,17 @@
   "pdf": "/mnt/c/Users/lamkuenai/round5_deliver/SIDM_REFERENCE_INTEGRITY_v1.0_2026-10-27.pdf",
   "title": "Reference Integrity & KB Compliance Report - v1.0",
   "subtitle": "SIDM v19.2-F  |  reference resolution + local KB compliance",
-  "footer": "SIDM v19.2-F - Reference Integrity & KB Compliance Report v1.0"
+  "footer": "SIDM v19.2-F - Reference Integrity & KB Compliance Report v1.0",
+  "marker_budget": 0,
+  "marker_budget_note": "Clean. The literal-** class is fully fixed in this document; the budget is 0 and must stay 0."
  },
  {
   "md": "/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/docs/dual_review_5loop/SIDM_ROUND5_CONSOLIDATED_FIXES_v1.11_2026-10-26.md",
   "pdf": "/mnt/c/Users/lamkuenai/round5_deliver/SIDM_ROUND5_CONSOLIDATED_FIXES_v1.11_2026-10-26.pdf",
   "title": "Consolidated Fixes Report - v1.11",
   "subtitle": "SIDM v19.2-F  |  Round 5 + n18 + n19 + n20 review response",
-  "footer": "SIDM v19.2-F - Round 5 + n18 + n19 + n20 review response"
+  "footer": "SIDM v19.2-F - Round 5 + n18 + n19 + n20 review response",
+  "marker_budget": 55,
+  "marker_budget_note": "DOCUMENTED, user-deferred presentational class in this companion (its own section 14.3 lists it). Measured after the 2026-10-27 wrapped-list builder fix (57 -> 55). The budget must not GROW: a count above 55 is a new regression, not the known deferral. Tighten it whenever the count drops."
  }
 ]
