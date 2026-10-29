@@ -1,0 +1,59 @@
+{
+  "_comment": [
+    "docs/STALE_STRINGS.json — registry for gate layer 13 (scripts/audit_stale_strings.py).",
+    "Closes CG-2 (resurrected stale values in the paper's prose; the defect class that let",
+    "the invalid commit ef645ce pass a green gate; pushed by review n21, item 6).",
+    "Each entry lists the exact stale STRING(S) as they appeared when illegitimate,",
+    "why the value is stale, where it was retired, and an optional per-entry allow_regex:",
+    "a hit is PERMITTED when its line also matches the entry's allow_regex (default below),",
+    "because the paper legitimately cites retracted values when explaining the retraction.",
+    "Append an entry for every future stale-value finding; the registry is the ratchet."
+  ],
+  "paper": "v0.3-prelim/docs/PAPER_V1_DRAFT.md",
+  "default_allow_regex": "(?i)(retract\\w*|no longer|not the|replac\\w*|earlier draft\\w*|legacy|placeholder|corrected|correction|supersed\\w*|previously|invalid|predated|was based on|stale|replaced|outdated|before|did not)",
+  "entries": [
+    {
+      "id": "SS-1",
+      "variants": ["0.5–2.5 cm²/g", "0.5-2.5 cm2/g", "0.5–2.5 cm2/g", "0.5-2.5 cm²/g"],
+      "why_stale": "legacy dSph σ_eff band that predated the a_slope = 1.93 propagation; reintroduced into the prose by the invalid commit ef645ce",
+      "retired_by": "R88 full pre-submission (consolidated report §16)",
+      "added": "2026-10-29"
+    },
+    {
+      "id": "SS-2",
+      "variants": ["-0.47"],
+      "why_stale": "stale numeric value reintroduced by the invalid commit ef645ce (see consolidated report §16, 'stale value' table)",
+      "retired_by": "restoration to ef645ce^ = 070f25d",
+      "added": "2026-10-29"
+    },
+    {
+      "id": "SS-3",
+      "variants": ["7 of 8"],
+      "why_stale": "the retracted v1.12/v1.13 '7 of 8 channels simultaneously satisfied' placeholder claim (retracted in v18.29); ef645ce reintroduced it illegitimately",
+      "retired_by": "v18.29 retraction; honest summary replaces it (paper §9.11/§9.12 tables)",
+      "allow_regex": "(?i)(retract\\w*|no longer|not 7 of 8|not\\*\\* 7 of 8|replac\\w*|placeholder|claimed|earlier|v1\\.12|v1\\.13|v18\\.29|invalid|stale|did not|0 of 8|pre-submission)",
+      "added": "2026-10-29"
+    },
+    {
+      "id": "SS-4",
+      "variants": ["65.49", "2.84e-13", "2.84×10⁻¹³", "2.84x10^-13", "1.24e+25", "1.24×10²⁵"],
+      "why_stale": "the F23 family: a_slope = 1.0-form values (σ/m(28) = 65.49 and the derived bound/ratio), retracted in favour of the canonical 65.91 / 1.25e+25 / 2.83e-13",
+      "retired_by": "F23 (consolidated report §17.7); gate layer 10 also asserts these absent — the overlap is intentional (registry = class, layer 10 = chain)",
+      "added": "2026-10-29"
+    },
+    {
+      "id": "SS-5",
+      "variants": ["3.98 Gyr"],
+      "why_stale": "legacy t_core at c=4 computed from the a_slope = 1.0 form; corrected to 4.97 Gyr",
+      "retired_by": "R88(30) (paper §2.6/§9.12 note)",
+      "added": "2026-10-29"
+    },
+    {
+      "id": "SS-6",
+      "variants": ["150.0 cm²/g", "150.0 cm2/g"],
+      "why_stale": "legacy σ/m(V_max = 25.59) from the a_slope = 1.0 form; corrected to 120.32 cm²/g",
+      "retired_by": "R88(30) (paper §2.6/§9.12 note)",
+      "added": "2026-10-29"
+    }
+  ]
+}

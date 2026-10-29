@@ -26,7 +26,17 @@ GENUINELY ABSENT           a residual token exists that no normalisation
                            explains. That is a render defect and must be fixed
                            in the source markdown, not reclassified.
 
-Last measured run (2026-10-29): 6/6 flagged lines PRESENT, 0 genuine.
+Last measured run (2026-10-29 rebuild): 6/6 flagged lines PRESENT, 0 genuine.
+(The 2026-10-28 gate run flagged 9/9, also verified present, 0 genuine. The
+advisory count moves between rebuilds — 9 -> 6 — with the builder's
+line-wrapping non-determinism; both runs are real and both were checked
+line-by-line. Tracked as CG-15.)
+
+SCOPE LIMIT (declared): this layer checks ALPHANUMERIC token presence only.
+Symbol-only corruption — a lost sigma, a dropped exponent (10^-44 rendered as
+1044), a mangled subscript — does not fail this layer when the alphanumeric
+neighbours survive. Per-glyph render fidelity is CG-14's problem, not this
+layer's.
 
 Usage
 -----

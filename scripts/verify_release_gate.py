@@ -47,7 +47,7 @@ if not VENV_PYTHON.exists():
     VENV_PYTHON = Path(_sys)
 
 
-TOTAL_LAYERS = 12
+TOTAL_LAYERS = 13
 
 
 def _pdf_audit_python() -> str:
@@ -253,6 +253,19 @@ def main():
         ["scripts/triage_pdf_advisory_flags.py"],
         timeout=900,
         env_python=_pdf_audit_python(),
+    )))
+
+    # Layer 13: resurrected stale values in the paper's prose (closes CG-2).
+    # Every prior layer validates the claims it enumerates; none asserted the
+    # ABSENCE of already-retired values — the class that let the invalid
+    # commit ef645ce pass a green gate. audit_stale_strings.py reads
+    # docs/STALE_STRINGS.json (the ratchet registry) and fails on any
+    # unmarked reappearance in the paper; legitimate retraction discussion is
+    # allowed via per-entry allow-regex context. Mutation-verified 2026-10-29.
+    results.append(("audit_stale_strings.py", run_layer(
+        "Stale-string absence audit (audit_stale_strings.py)",
+        ["scripts/audit_stale_strings.py"],
+        timeout=120,
     )))
 
     # Summary
