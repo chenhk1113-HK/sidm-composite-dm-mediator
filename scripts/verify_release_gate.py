@@ -47,7 +47,7 @@ if not VENV_PYTHON.exists():
     VENV_PYTHON = Path(_sys)
 
 
-TOTAL_LAYERS = 11
+TOTAL_LAYERS = 12
 
 
 def _pdf_audit_python() -> str:
@@ -235,6 +235,22 @@ def main():
     results.append(("audit_pdf_render.py", run_layer(
         "PDF render-integrity audit (audit_pdf_render.py, gate mode)",
         ["scripts/audit_pdf_render.py", "--gate-mode"],
+        timeout=900,
+        env_python=_pdf_audit_python(),
+    )))
+
+    # Layer 12: verify every advisory flag the gate-mode audit waved through.
+    # 'Advisory' is only honest if each flag is actually checked against a
+    # clean extractor; otherwise the gate is just hiding prose failures.
+    # triage_pdf_advisory_flags.py re-runs the audit with --full-flags (no
+    # display truncation — an earlier version verified 6 of 9 flags because
+    # the audit prints only the first six) and checks each flagged line's
+    # alphanumeric tokens against pdfplumber ALONE. Exit 1 = a line is really
+    # missing from the PDF. Exit 2 = the audit crashed, which must never be
+    # read as 'no flags'.
+    results.append(("triage_pdf_advisory_flags.py", run_layer(
+        "Advisory-flag triage (triage_pdf_advisory_flags.py)",
+        ["scripts/triage_pdf_advisory_flags.py"],
         timeout=900,
         env_python=_pdf_audit_python(),
     )))

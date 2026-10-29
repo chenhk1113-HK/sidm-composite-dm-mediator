@@ -123,12 +123,17 @@ def _pdf_text(pdf: Path, pdftotext: str) -> str:
     """Extract laid-out text from EVERY extractor available on this host and
     UNION the results (set union, not concatenation).
 
-    Measured on this host (2026-10-28, v1.11 PDF page 4): pdftotext drops
-    characters its ToUnicode map cannot resolve — all 19 sigmas on that page,
-    '×10⁻¹²' -> '10-12', en/em dashes -> '?' — while pdfplumber/pymupdf read
-    the same PDF's text layer perfectly. Using pdftotext ALONE makes those
-    extraction losses look like render defects. The union means a defect is
-    only flagged when NO available extractor can find the text.
+    Measured on this host (2026-10-28, re-measured 2026-10-29 with a standalone
+    script): pdftotext drops characters its ToUnicode map cannot resolve. On
+    the v1.11 PDF it reads ZERO of the 227 sigma glyphs that pdfplumber reads
+    — 19 of them on page 4 alone — and the disagreement spans 32 of 48 pages.
+    It also rewrites 'x10^-12' as '10-12' and en/em dashes as '?'. pdfplumber
+    reads the same text layer cleanly. (PyMuPDF is NOT installed on this host
+    and has never been run against these PDFs; the two extractors here are
+    pdfplumber and pdftotext, and only those two names belong in this file.)
+    Using pdftotext ALONE makes those extraction losses look like render
+    defects. The union means a defect is only flagged when NO available
+    extractor can find the text.
     errors='replace': pdftotext is not UTF-8-clean.
     """
     parts = []
@@ -342,7 +347,8 @@ def _source_lines(md_text: str):
 # ---------------------------------------------------------------------------
 # checks
 # ---------------------------------------------------------------------------
-def check_pair(md: Path, pdf: Path, job: dict, pdftotext: str) -> tuple[list, list]:
+def check_pair(md: Path, pdf: Path, job: dict, pdftotext: str,
+               full_flags: bool = False) -> tuple[list, list]:
     """Return (defects, notes) for one source/PDF pair."""
     defects, notes = [], []
 
@@ -608,14 +614,19 @@ def check_pair(md: Path, pdf: Path, job: dict, pdftotext: str) -> tuple[list, li
             "set — word presence verified, contiguity not verifiable by this method"
         )
     if missing_prose:
-        for line, cov, miss, why in missing_prose[:6]:
+        # Truncation is a *display* choice, and it silently under-reports how
+        # many lines a triage pass must actually check. --full-flags turns it
+        # off so scripts/triage_pdf_advisory_flags.py can verify EVERY flagged
+        # line, not just the first six.
+        shown = missing_prose if full_flags else missing_prose[:6]
+        for line, cov, miss, why in shown:
             defects.append(
                 f"{pdf.name}: source prose line not contained in the PDF "
                 f"({cov:.0%} of its word-trigrams found, {miss} missing"
                 f"{'; ' + why if why else ''}; source {line[:70]!r})"
             )
-        if len(missing_prose) > 6:
-            defects.append(f"{pdf.name}: ... and {len(missing_prose) - 6} more prose lines absent")
+        if len(missing_prose) > len(shown):
+            defects.append(f"{pdf.name}: ... and {len(missing_prose) - len(shown)} more prose lines absent")
 
     # 3. code containment (the D2 clipping signature: head present, tail gone)
     #
@@ -774,7 +785,8 @@ def main(argv):
         if only and only not in md.name and only not in pdf.name:
             continue
         print(f"\n  {pdf.name}")
-        defects, notes = check_pair(md, pdf, job, pdftotext)
+        defects, notes = check_pair(md, pdf, job, pdftotext,
+                                    full_flags="--full-flags" in argv)
         for n in notes:
             print(f"    . {n}")
         for d in defects:
@@ -790,13 +802,16 @@ def main(argv):
         #  HARD (fail the gate): budget breach, block-marker leak, implausible
         #  text length, CODE-line absence.
         #  ADVISORY (surface, do not fail): PROSE-line token-containment flags.
-        #  Rationale, measured on this host 2026-10-28: the reports' prose is
-        #  math-dense ('σ₀·(100/v)^a'), and pdftotext demonstrably drops or
-        #  remaps exactly those glyphs (all 19 sigmas on v1.11 page 4; every
-        #  flagged line was then verified line-by-line present in the PDF's
-        #  text layer via pymupdf/pdfplumber). A prose token-containment FAIL
-        #  is therefore a glyph-extraction artifact with high prior probability
-        #  and is routed to human triage. Manual mode (no flag) stays strict.
+        #  Rationale, measured on this host and re-verified 2026-10-29: the
+        #  reports' prose is math-dense ('σ₀·(100/v)^a'), and pdftotext reads
+        #  ZERO of the 227 sigma glyphs pdfplumber reads in the v1.11 PDF (19
+        #  of them on page 4; 32 of 48 pages disagree). So a prose
+        #  token-containment FAIL is a glyph/layout artifact with high prior
+        #  probability. It is not waved away: scripts/triage_pdf_advisory_flags.py
+        #  re-checks every flagged line against pdfplumber's extraction alone
+        #  and reports the residual missing tokens per line. Last run: 6/6
+        #  flagged lines had every alphanumeric token present — all layout
+        #  artifacts, no real content loss. Manual mode (no flag) stays strict.
         hard = [d for d in all_defects if "prose line not contained" not in d
                 and "prose lines absent" not in d]
         advisory = [d for d in all_defects if "prose line not contained" in d
