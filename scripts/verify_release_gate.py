@@ -55,19 +55,24 @@ def _pdf_audit_python() -> str:
     pdftotext alone demonstrably drops math glyphs these PDFs render —
     measured 2026-10-28 on v1.11 page 4, 19 sigmas invisible to pdftotext).
     Falls back to VENV_PYTHON (union degrades to pdftotext-only, still
-    functional, just stricter)."""
-    import sysconfig
-    candidates = [
-        Path(sys.executable),
-        Path(sysconfig.get_path("exe")),
-        Path(r"C:\Users\lamkuenai\AppData\Local\Python\pythoncore-3.14-64\python.exe"),
-        VENV_PYTHON,
-    ]
+    functional, just stricter).
+
+    NOTE on a bug this helper shipped with: sysconfig.get_path('exe') raises
+    KeyError on the Hermes-managed Python (its install scheme has no 'exe'
+    key), which crashed gate layer 11 on its first run. Every candidate probe
+    is therefore guarded, and no candidate is taken for granted."""
+    candidates = []
+    try:
+        candidates.append(Path(sys.executable))
+    except Exception:
+        pass
+    candidates.append(Path(r"C:\Users\lamkuenai\AppData\Local\Python\pythoncore-3.14-64\python.exe"))
+    candidates.append(VENV_PYTHON)
     import subprocess as _sp
     for c in candidates:
-        if not c.exists():
-            continue
         try:
+            if not c.exists():
+                continue
             r = _sp.run([str(c), "-c", "import pdfplumber"],
                         capture_output=True, timeout=60)
             if r.returncode == 0:
