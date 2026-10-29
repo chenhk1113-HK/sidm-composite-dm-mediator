@@ -595,7 +595,7 @@ all pages read.
 
 ### 13.1 Adjudication table
 
-| # | n18 finding | Controller verdict | Provenance (independently re-derived) | Action |
+| No. | n18 finding | Controller verdict | Provenance (independently re-derived) | Action |
 |---|---|---|---|---|
 | 1 | Paper: `"halos is"` word order | **VALID** | **Introduced by Round 5** — `git log -S"halos is"` → `7cc8d8a`; absent from `7cc8d8a^` (which read "For 7 of 8 halos, \|σ_HL\| < 0.05 cm²/g") | F1 fixed |
 | 2 | Paper: `"cm²/g.,"` doubled punctuation | **VALID** | **Introduced by Round 5** — `git log -S"cm²/g.,"` → `7cc8d8a` only; count in the paper = 1 | F2 fixed |
@@ -700,8 +700,8 @@ in the correct sweep context and need no change. The pre-existing L120 grep hit 
 
 **Verification:**
 ```python
-# L115 row: canonical sigma/m=2.8455, published sigma_eff=0.0318 -> required sigma_HL = -0.5340 ✓
-# Sweep: sigma/m=2.5597, sigma_HL=-0.4723 -> sigma_eff=0.03201 ✓
+>> L115 row: canonical sigma/m=2.8455, published sigma_eff=0.0318 -> required sigma_HL = -0.5340 ✓
+>> Sweep: sigma/m=2.5597, sigma_HL=-0.4723 -> sigma_eff=0.03201 ✓
 ```
 
 ---
@@ -1162,7 +1162,7 @@ process" is, on the evidence, fair.
 
 ### 17.1 The 7 action items, adjudicated
 
-| # | n19 item | severity (n19) | verdict | action |
+| No. | n19 item | severity (n19) | verdict | action |
 |---|---|---|---|---|
 | 1 | `audit_claims.py` coverage gaps (σ_HL, §2.6a, …) are not enumerated; each gap should get a tracking number | medium | **VALID** | **Acted on.** §17.3 is a tracked coverage-gap register with IDs CG-1…CG-4, each with the current status and what would close it. |
 | 2 | the 70-line literal `**` markup defect is unfixed | medium-low | **ALREADY ADDRESSED** | Deferred by user direction (2026-10-26) as **purely presentational** — it changes no prose, no number, no unit, no citation. Documented in §16.6 and §16.7. The n19 reviewer's own summary concedes the document "honestly flags" this. No change needed; the deferral and its rationale are now stated in the front matter too. |
@@ -1248,10 +1248,10 @@ is uncovered.
 |---|---|---|---|---|---|
 | **CG-1** | the paper's **§2.6a σ_HL column** (9 rows) and its marginal/substantive labels | this is the defect class that hid a **13 % error** in the paper while every gate passed (§14.1) | **CLOSED** | — closed | `v0.3-prelim/tests/test_n18_sigma_hl_column_matches_json.py` (F16) — 4 tests, mutation-verified on 3 failure modes |
 | **CG-2** | a **resurrected stale value** in the prose (a value that a later fix removed, reintroduced by a later edit) | this is exactly how the invalid `ef645ce` commit passed the gate: it reintroduced `-0.47`, `0.5–2.5 cm²/g` and `7 of 8` and the gate said `ALL GATES PASSED` | **OPEN** | me (test) | a paper-level regression test that asserts the **absence** of known-stale strings, complementing `test_sweep_json_not_stale.py` (which covers the *data* side, not the *prose* side) |
-| **CG-3** | the **dSph σ/m table** (§3, 8 rows) and the factor ranges derived from it | the paper's headline quantitative table is not read by the gate at all | **OPEN** | me (test) | a test pinning the 8 σ/m rows to `channels_v03.sigma_m_at_v` + `constants.py` (the recomputation exists in §9 and is currently manual) |
+| **CG-3** | the **dSph σ/m table** (§3, 8 rows) and the factor ranges derived from it | the paper's headline quantitative table is not read by the gate at all | **CLOSED (commit 00e2887)** | agent (test) | closed by a test pinning the 8 σ/m rows to `channels_v03.sigma_m_at_v` + `constants.py` (`test_dsph_sigma_m_table_matches_canonical.py`) |
 | **CG-4** | the **literal `**` markup class** — a presentational defect class the gate ignores | 70 lines still render literal `**`; a future *scientific* edit that loses emphasis would be invisible to the gate | **OPEN (deferred)** | user (scope) | finish the deferred markup pass (§16.6) and add a render check to the gate |
 | **CG-5** | the gate's summary line is **not document-scoped** | `ALL GATES PASSED — safe to tag a new release.` reads as a whole-document verdict, but the gate only asserts the claims it enumerates. It passed the invalid paper (§16.3) and would pass a paper with an untracked stale value. | **OPEN (documented, not fixable without changing the gate's contract)** | me (gate contract) | re-scope the summary line to name what was checked, or add a "no other layer covers this document" assertion |
-| **CG-6** | the residual **~0.03 % σ/m** difference between the paper's formula and the `sigma_m_at_v` helper | a small implementation discrepancy that is *not* a round-5 or n18 finding; it was flagged and deliberately not chased | **OPEN (flagged, awaiting a decision)** | user (decision) | reconcile the paper's σ/m(v) expression with the helper's implementation in a dedicated pass |
+| **CG-6** | the residual **sigma/m helper discrepancy** between the paper's formula and the `sigma_m_at_v` helper | the helper was PEAK-ONLY (dropped the `0.052*(100/v)^1.93` background); the previously registered "~0.03 %" figure was 10x understated — measured discrepancy was **0.32 % at v_target, 0.37 % at v=28, 6.1 % at v=20, 71 % at v=15, 100 % at v>=60 km/s** | **CLOSED (commit 7c3e205)** | agent (reconciliation pass 2026-10-28) | five scripts' helpers reconciled to the canonical section 2.6 form; outputs regenerated (sigma_eff/tau +0.3668 %, t_core -0.3655 %); c-M tension numbers provably UNCHANGED (tau>>5 saturated regime); 8 affected test files green (44 passed) |
 | **CG-7** | the **§10 L98 band**: the paper quotes σ_eff `0.03–0.10 cm²/g`; the recomputed phase44 dSph/UFD range is `0.032–0.155` | the quoted band understated the top end (it covered v = 5–15 but omitted v = 3.0 at 0.155). It is a different scope from the 8-halo sweep band, and narrowing it changes a published observational statement | **CLOSED (2026-10-26)** — the paper now carries the qualifier: “`0.03–0.10 cm²/g at dSph/UFD velocities — the quoted band covers v = 5–15 km/s; the full phase44 dSph/UFD entry set spans 0.032–0.155 cm²/g, the top being the extreme UFD at v = 3 km/s.`” The band is retained (it was a correct statement about v = 5–15, and is the published convention) and the omitted entry is now named. | **closed** — nothing further is owed | **already closed 2026-10-26** |
 | **CG-8** | two pre-existing prose typos the gate does not read: `does not..` (paper L974) and `curves .**` (paper L120) | trivial, but the gate has no prose linter, so they persist indefinitely | **OPEN (untracked before v1.6)** | me (typo pass) | a typo sweep; both are outside the §2.6a region the fixes touched, so they need their own pass |
 | **CG-9** | the **hierarchy-bound chain** — σ/m(28) at σ_1 = 1.0, the ratio σ_DM-DM/σ_SI, and the g_N/g_χ bound it implies | the gate reads none of these three, so a stale σ/m propagates into a headline bound undetected. This is exactly how **F23** survived (§17.7): the paper's 65.49 was a retracted `a_slope = 1.0` value, and the 2.84e-13 bound derived from it. | **CLOSED (2026-10-26)** by **gate layer 10**, `scripts/audit_hierarchy_chain.py` (§20.3): the chain σ/m(28) at σ_1 = 1.0 → ratio σ_DM-DM/σ_SI → g_N/g_χ is recomputed from `constants.py`, cross-checked against the canonical JSON, and the retracted values (65.49, 2.84e-13, 1.24e+25) are asserted absent. F23 fixed the instance; the layer covers the class. | **closed** — the layer is in the gate and the pre-tag hook; nothing further is owed | **already closed 2026-10-26** |
@@ -1440,7 +1440,7 @@ n20 refers to the report by section numbers that **do not exist**. The report ha
 |---|---|---|
 | "§23–§25 的 coverage-gap register" (para 113) | the register is **§17.3**, *Coverage-gap register (`audit_claims.py` and the 7-layer gate)* | **WRONG ANCHOR.** The content n20 describes is real and correct; the number is not. |
 | "§26 正确指出 F20 的公式写法有误" (para 55) | the F20 adjudication is **§17.5**, *n19's own three numeric claims, checked against source* | **WRONG ANCHOR**, same content. |
-| "§2 的 Finding-number namespaces 表" (para 86) | the namespace table is in the **front matter**, immediately before §0, as a `###` heading with no number | **MISLABELLED** — it is not "§2" (that is *FIX 2*). |
+| "§2 的 Finding-number namespaces 表" (para 86) | the namespace table is in the **front matter**, immediately before §0, as a `\###` heading with no number | **MISLABELLED** — it is not "§2" (that is *FIX 2*). |
 | "Companion §15 显示 verdict.interpretation 从旧的 … 更新为 …" (para 54) | the companion has **no §15** — it tops out at **§9** (n20 response). The old → new `verdict.interpretation` diff is in companion **§3**, and the current JSON value is `"sigma/m ~2.85-16.87 cm^2/g at dSph scale (not 5-18 cm^2/g …)"` | **WRONG ANCHOR**, same content — the string change is real and canonical, but it is at §3. |
 | "§7 修复了 PDF builder 的 D1/D2/D3 缺陷" (para 34) | the PDF-render defects are in the **companion** §7 (correct) and the report's **§17.2** (correct) | **CORRECT** |
 

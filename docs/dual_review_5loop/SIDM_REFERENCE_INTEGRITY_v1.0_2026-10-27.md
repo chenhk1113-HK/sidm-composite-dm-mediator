@@ -155,10 +155,7 @@ attached to a gravothermal-model claim — not evidence that this paper was irre
   not exist, so `curl` wrote nothing and the script reported `[FAIL]` and "deleted" a file it
   had never created — while the real PDF sat untouched under the flat name. The prefix is now
   stripped for the filename and kept only in the URL. Re-run after the fix: `ok=0 skip=18 fail=0`.
-- `scripts/make_kb_summaries.py` — writes the summaries. The **title and author list come from the
-  paper's own verified reference entry**; the abstract and the key numbers are extracted from the
-  local PDF with `pdftotext`. **Nothing is invented**: every number in a summary is re-derivable by
-  re-running the extraction.
+- `scripts/make_kb_summaries.py` — writes the summaries. The **title and author list come from the paper's own verified reference entry**; the abstract and the key numbers are extracted from the local PDF with `pdftotext`. **Nothing is invented**: every number in a summary is re-derivable by re-running the extraction.
 
 ---
 

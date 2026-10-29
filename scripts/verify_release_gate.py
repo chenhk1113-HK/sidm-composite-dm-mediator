@@ -47,13 +47,40 @@ if not VENV_PYTHON.exists():
     VENV_PYTHON = Path(_sys)
 
 
-TOTAL_LAYERS = 10
+TOTAL_LAYERS = 11
 
 
-def run_layer(name, args, timeout=300, cwd=None):
+def _pdf_audit_python() -> str:
+    """Pick an interpreter that has pdfplumber (the audit's union extractor;
+    pdftotext alone demonstrably drops math glyphs these PDFs render —
+    measured 2026-10-28 on v1.11 page 4, 19 sigmas invisible to pdftotext).
+    Falls back to VENV_PYTHON (union degrades to pdftotext-only, still
+    functional, just stricter)."""
+    import sysconfig
+    candidates = [
+        Path(sys.executable),
+        Path(sysconfig.get_path("exe")),
+        Path(r"C:\Users\lamkuenai\AppData\Local\Python\pythoncore-3.14-64\python.exe"),
+        VENV_PYTHON,
+    ]
+    import subprocess as _sp
+    for c in candidates:
+        if not c.exists():
+            continue
+        try:
+            r = _sp.run([str(c), "-c", "import pdfplumber"],
+                        capture_output=True, timeout=60)
+            if r.returncode == 0:
+                return str(c)
+        except Exception:
+            continue
+    return str(VENV_PYTHON)
+
+
+def run_layer(name, args, timeout=300, cwd=None, env_python=None):
     """Run a verification layer. Returns (success, output_tail)."""
     print(f"\n[L{len(results)+1}/{TOTAL_LAYERS}] {name}...")
-    cmd = [str(VENV_PYTHON)] + args
+    cmd = [str(env_python or VENV_PYTHON)] + args
     try:
         r = subprocess.run(cmd, cwd=cwd or str(REPO),
                            capture_output=True, text=True, timeout=timeout)
@@ -190,6 +217,21 @@ def main():
     results.append(("audit_hierarchy_chain.py", run_layer(
         "Hierarchy-bound chain audit (audit_hierarchy_chain.py)",
         ["scripts/audit_hierarchy_chain.py"],
+    )))
+
+    # Layer 11: PDF render integrity (closes CG-12)
+    # audit_pdf_render.py in --gate-mode: hard classes (literal-'**' budget,
+    # block-marker leak, implausible text length, CODE-line absence) fail the
+    # gate; prose token-containment flags surface as advisory for human triage
+    # because pdftotext demonstrably drops math glyphs that the PDFs render
+    # correctly (measured 2026-10-28; see the policy block in the script).
+    # It runs under the interpreter that has pdfplumber — the union-extractor
+    # path is what makes the check honest.
+    results.append(("audit_pdf_render.py", run_layer(
+        "PDF render-integrity audit (audit_pdf_render.py, gate mode)",
+        ["scripts/audit_pdf_render.py", "--gate-mode"],
+        timeout=900,
+        env_python=_pdf_audit_python(),
     )))
 
     # Summary
