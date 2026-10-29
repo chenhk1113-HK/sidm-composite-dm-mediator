@@ -16,9 +16,9 @@
     "merger_history_inferred": "quiescent (per Silverman+ 2026 diagnostics)"
   },
   "v19_2_f_prediction": {
-    "sigma_eff_cm2_g": 14.590770687647355,
-    "t_core_Gyr": 0.8441823209561636,
-    "tau": 16.3471795812656,
+    "sigma_eff_cm2_g": 14.64428885604883,
+    "t_core_Gyr": 0.8410972212248905,
+    "tau": 16.407140163776848,
     "verdict": "deep core collapse"
   },
   "silverman_2026_halos": [

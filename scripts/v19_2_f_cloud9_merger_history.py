@@ -82,6 +82,7 @@ sys.path.insert(0, str(REPO / "scripts"))
 from t212_silverman_gravothermal import evaluate as t212_evaluate
 from constants import (
     F_H_PLACEHOLDER_G7, SIGMA_PEAK_CM2_PER_G, V_TARGET_KMS, SIGMA_KMS,
+    SIGMA_0_CM2_PER_G, A_SLOPE, V_REF_KMS,
 )
 
 CLOUD9 = {
@@ -152,7 +153,14 @@ SILVERMAN_CASES = [
 
 
 def sigma_m_at_v(v, sigma_peak=SIGMA_PEAK_CM2_PER_G):
-    return sigma_peak * math.exp(-0.5 * ((v - V_TARGET_KMS) / SIGMA_KMS)**2)
+    # CG-6 reconciliation (2026-10-28): canonical paper section 2.6 sigma/m(v),
+    # identical to scripts/canonical_numbers.py::sigma_m_canonical_gaussian.
+    # The former helper was PEAK-ONLY (it dropped the power-law background
+    # 0.052*(100/v)^1.93), understating sigma/m by 0.32% at v_target and by
+    # 100% at v >> v_target.
+    bg = SIGMA_0_CM2_PER_G * (V_REF_KMS / v) ** A_SLOPE
+    res = sigma_peak * math.exp(-0.5 * ((v - V_TARGET_KMS) / SIGMA_KMS)**2)
+    return bg + res
 
 
 def cloud9_v19_2_f_tau(f_H=F_H_PLACEHOLDER_G7):

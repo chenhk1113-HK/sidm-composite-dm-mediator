@@ -21,9 +21,9 @@
     {
       "name": "placeholder_g7 (retracted v18.29)",
       "f_H": 0.297,
-      "sigma_eff_cm2_g": 14.590770687647355,
-      "t_core_Gyr": 0.8441823209561636,
-      "tau": 16.3471795812656,
+      "sigma_eff_cm2_g": 14.64428885604883,
+      "t_core_Gyr": 0.8410972212248905,
+      "tau": 16.407140163776848,
       "c_med_cosmological": 7.8964393482434705,
       "prescription_results": {
         "elbert_2015": {
@@ -47,9 +47,9 @@
     {
       "name": "yang_plus_low (Fig. 2 low)",
       "f_H": 0.4,
-      "sigma_eff_cm2_g": 26.465817660596738,
-      "t_core_Gyr": 0.46540298968263877,
-      "tau": 29.651721853807402,
+      "sigma_eff_cm2_g": 26.56289286770979,
+      "t_core_Gyr": 0.4637021549189148,
+      "tau": 29.76048278751936,
       "c_med_cosmological": 7.8964393482434705,
       "prescription_results": {
         "elbert_2015": {
@@ -73,9 +73,9 @@
     {
       "name": "yang_plus_mid (Fig. 2 mid)",
       "f_H": 0.5,
-      "sigma_eff_cm2_g": 41.35284009468239,
-      "t_core_Gyr": 0.2978579133968889,
-      "tau": 46.33081539657405,
+      "sigma_eff_cm2_g": 41.504520105796544,
+      "t_core_Gyr": 0.29676937914810547,
+      "tau": 46.500754355499005,
       "c_med_cosmological": 7.8964393482434705,
       "prescription_results": {
         "elbert_2015": {
@@ -99,9 +99,9 @@
     {
       "name": "yang_plus_high (Fig. 2 high)",
       "f_H": 0.7,
-      "sigma_eff_cm2_g": 81.05156658557748,
-      "t_core_Gyr": 0.15196832316167805,
-      "tau": 90.80839817728511,
+      "sigma_eff_cm2_g": 81.34885940736122,
+      "t_core_Gyr": 0.1514129485449518,
+      "tau": 91.14147853677804,
       "c_med_cosmological": 7.8964393482434705,
       "prescription_results": {
         "elbert_2015": {
@@ -125,9 +125,9 @@
     {
       "name": "t202_nbody (no segregation)",
       "f_H": 0.92,
-      "sigma_eff_cm2_g": 140.0041754245567,
-      "t_core_Gyr": 0.08797788084737976,
-      "tau": 156.8576086066411,
+      "sigma_eff_cm2_g": 140.5177032701848,
+      "t_core_Gyr": 0.08765636198845271,
+      "tau": 157.4329539459774,
       "c_med_cosmological": 7.8964393482434705,
       "prescription_results": {
         "elbert_2015": {
@@ -151,9 +151,9 @@
     {
       "name": "single_component (no f_H)",
       "f_H": 1.0,
-      "sigma_eff_cm2_g": 165.41136037872957,
-      "t_core_Gyr": 0.07446447834922222,
-      "tau": 185.3232615862962,
+      "sigma_eff_cm2_g": 166.01808042318618,
+      "t_core_Gyr": 0.07419234478702637,
+      "tau": 186.00301742199602,
       "c_med_cosmological": 7.8964393482434705,
       "prescription_results": {
         "elbert_2015": {
