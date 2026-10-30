@@ -63,7 +63,8 @@ NULLISH = {"\x00", "\ufffd", ""}
 
 # Benign-family evidence (measured 2026-10-30 on the live v1.12 + REFINT PDFs):
 # every '(cid:N)' placeholder entry sits at LINE-START x0 (57.2), has x1==x0
-# (zero advance) and an unmapped font — WeasyPrint's line-assembly separators.
+# (zero advance) and an unmapped font — the builder's (reportlab text pipeline)
+# line-assembly separators.
 # They draw nothing and advance nothing: no source glyph is lost (checks 1/2
 # are what catch real losses). Counted and reported, never a failure. A REAL
 # .notdef from the D1 family extracted as \x00 in these very PDF pipelines
