@@ -1,3 +1,14 @@
+## [v19.2-F-N22-GateAudit-2026-10-30]
+
+**n22 external audit of the gate layers: 5 of 7 claims valid, one partly, one against this report's own text (retracted). CG-14 CLOSED by new gate layer 14 (glyph coverage). Consolidated report v1.13.**
+
+- **Layer 12 silent-skip hole closed** (commit `99e1829`): triage regex now matches both repr quote styles; an apostrophe-only flagged line was previously skipped without test or count. Mutation-tested.
+- **Layer 11 honesty**: `--full-flags` emits the full source line (was 70-char slice); gate-mode `[:6]` display cap removed — it made the summary print a DISPLAYED count (7) while the true count was 8; a presentational half of the CG-15 "9 vs 6" history identified. SUBSCRIPT_MAP hygiene + fragile-slice removal; `_pdf_audit_python` docstring truth (layer 12 fallback is fail-closed, not degraded).
+- **CG-14 closed — gate layer 14 `audit_glyph_coverage.py`** (commit `99e1829`): page.chars scan per pdf_jobs pair; fails on nullish glyphs, `(cid:0)` .notdef, unmapped glyphs drawn with width, and any source non-ASCII glyph (incl. all CJK) absent from the PDF glyph stream; builder strip-substitutions allowed only by an explicit, printed table. Mutation-verified with synthetic null-byte and missing-CJK PDFs; live PDFs pass (138,636 + 16,093 glyph entries).
+- **Canonical sigma import** (commit `8176139`): the five Cloud-9 scripts' duplicated 6-line `sigma_m_at_v` bodies now delegate to `canonical_numbers.sigma_m_canonical_gaussian`; grid-equivalence proof max rel-diff 0.0 (70 points); no result JSON moved.
+- **Report v1.13** (§23): n22 adjudication; **§22.5 retracted** (its "three vs four" criticism of n21 was false — §17.2's table has four rows); §17.2 heading corrected; CG-15 count history corrected; CG-16 (hardcoded host paths) opened.
+- Gate is **14 layers**; full 14/14 ALL GATES PASSED logged in `round5_deliver/gate_run_n22fix_*.log`.
+
 ## [v19.2-F-Phase3-CLEAN-2026-10-11]
 
 **v19.2-F Phase 3 — gate verdict FAIL (paper A wins), 11 ClawsGO comments resolved, three independent numerical paths converge.**

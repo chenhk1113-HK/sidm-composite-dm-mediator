@@ -9,12 +9,12 @@
   "marker_budget_note": "Clean. The literal-** class is fully fixed in this document; the budget is 0 and must stay 0."
  },
  {
-  "md": "/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/docs/dual_review_5loop/SIDM_ROUND5_CONSOLIDATED_FIXES_v1.12_2026-10-29.md",
-  "pdf": "/mnt/c/Users/lamkuenai/round5_deliver/SIDM_ROUND5_CONSOLIDATED_FIXES_v1.12_2026-10-29.pdf",
-  "title": "Consolidated Fixes Report - v1.12",
-  "subtitle": "SIDM v19.2-F  |  Round 5 + n18 + n19 + n20 + n21 review response",
-  "footer": "SIDM v19.2-F - Round 5 + n18 + n19 + n20 + n21 review response",
-  "marker_budget": 57,
-    "marker_budget_note": "DOCUMENTED, user-deferred presentational class in this companion (its own section 14.3 lists it). Measured after the 2026-10-27 wrapped-list builder fix (57 -> 55). The 2026-10-28 rebuild regressed to 57 (builder non-determinism or environment diff); the budget is updated to 57 to reflect the current builder output. TOLERANCE BAND (per n21 review): the same source has measured 55 and 57 across rebuilds, so the budget carries a documented +/-2 builder non-determinism band 55-57; a count INSIDE the band is non-determinism, a count ABOVE 57 is a new regression. The non-determinism source itself is tracked as CG-15. Tighten the budget whenever the count drops."
+  "md": "/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/docs/dual_review_5loop/SIDM_ROUND5_CONSOLIDATED_FIXES_v1.13_2026-10-30.md",
+  "pdf": "/mnt/c/Users/lamkuenai/round5_deliver/SIDM_ROUND5_CONSOLIDATED_FIXES_v1.13_2026-10-30.pdf",
+  "title": "Consolidated Fixes Report - v1.13",
+  "subtitle": "SIDM v19.2-F  |  Round 5 + n18 + n19 + n20 + n21 + n22 review response",
+  "footer": "SIDM v19.2-F - Round 5 + n18 + n19 + n20 + n21 + n22 review response",
+  "marker_budget": 56,
+  "marker_budget_note": "Measured 2026-10-30 on the freshly built v1.13 PDF: 56 literal ** over 44 lines — INSIDE the documented 55-57 builder non-determinism band (CG-15), despite the new section 23 adjudication tables. Same DOCUMENTED, user-deferred presentational class (section 14.3). Count INSIDE the band = non-determinism; a count ABOVE 57 = new regression; tighten whenever it drops."
  }
 ]
