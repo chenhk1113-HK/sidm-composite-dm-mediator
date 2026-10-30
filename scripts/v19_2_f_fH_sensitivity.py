@@ -39,6 +39,7 @@ from t212_silverman_gravothermal import (
     evaluate as t212_evaluate,
 )
 from constants import SIGMA_0_CM2_PER_G, A_SLOPE, V_REF_KMS
+from canonical_numbers import sigma_m_canonical_gaussian
 
 # v19.2-F canonical parameters
 SIGMA_PEAK_CM2_PER_G = 174.0
@@ -66,16 +67,18 @@ F_H_CASES = [
 
 
 def sigma_m_at_v(v, sigma_peak=SIGMA_PEAK_CM2_PER_G):
-    """Canonical paper section 2.6 sigma/m(v), matching
-    scripts/canonical_numbers.py::sigma_m_canonical_gaussian.
+    """Canonical paper section 2.6 sigma/m(v) - single source of truth.
 
     CG-6 reconciliation (2026-10-28): the former helper was PEAK-ONLY (it
     dropped the power-law background 0.052*(100/v)^1.93), understating sigma/m
     by 0.32% at v_target and by 100% at v >> v_target.
+
+    n22 finding 4: this formerly duplicated the formula body; it now delegates
+    to scripts/canonical_numbers.py::sigma_m_canonical_gaussian (same
+    constants from constants.py). Keyword-only peak - the canonical signature
+    takes (v, sigma_0, a_slope, v_ref, sigma_peak, ...).
     """
-    bg = SIGMA_0_CM2_PER_G * (V_REF_KMS / v) ** A_SLOPE
-    res = sigma_peak * math.exp(-0.5 * ((v - V_TARGET_KMS) / SIGMA_KMS)**2)
-    return bg + res
+    return sigma_m_canonical_gaussian(v, sigma_peak=sigma_peak)
 
 
 def cloud9_gravothermal(f_H, sigma_peak=SIGMA_PEAK_CM2_PER_G):
