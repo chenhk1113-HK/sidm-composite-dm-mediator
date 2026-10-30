@@ -47,15 +47,19 @@ if not VENV_PYTHON.exists():
     VENV_PYTHON = Path(_sys)
 
 
-TOTAL_LAYERS = 13
+TOTAL_LAYERS = 14
 
 
 def _pdf_audit_python() -> str:
     """Pick an interpreter that has pdfplumber (the audit's union extractor;
     pdftotext alone demonstrably drops math glyphs these PDFs render —
     measured 2026-10-28 on v1.11 page 4, 19 sigmas invisible to pdftotext).
-    Falls back to VENV_PYTHON (union degrades to pdftotext-only, still
-    functional, just stricter).
+    Falls back to VENV_PYTHON. Truth (n22 correction): that fallback is only
+    "still functional" for LAYER 11, whose union degrades to pdftotext-only.
+    LAYER 12 (triage_pdf_advisory_flags.py) hard-REQUIRES pdfplumber and exits
+    1 without it — a fail-closed crash, not a degradation. The gate therefore
+    fails loudly rather than silently loosening, but nobody should read this
+    docstring as "layer 12 still works on the fallback".
 
     NOTE on a bug this helper shipped with: sysconfig.get_path('exe') raises
     KeyError on the Hermes-managed Python (its install scheme has no 'exe'
@@ -266,6 +270,26 @@ def main():
         "Stale-string absence audit (audit_stale_strings.py)",
         ["scripts/audit_stale_strings.py"],
         timeout=120,
+    )))
+
+    # Layer 14: glyph coverage — closes CG-14 (the D1 empty-box class).
+    # Layers 11/12 compare alphanumeric token containment, so a character
+    # rendered as .notdef is INVISIBLE to them: its ASCII neighbours survive
+    # and the line 'contains' everything. The original D1 defect (CJK ->
+    # empty boxes, consolidated report §17.2) extracted as null bytes in this
+    # very pipeline. audit_glyph_coverage.py walks page.chars per pair in
+    # docs/papers/pdf_jobs.json: nullish and (cid:0) notdef signatures fail, any
+    # source non-ASCII glyph absent from the PDF glyph stream fails (builder
+    # caret-form substitutions allowed by explicit table), unmapped glyphs
+    # drawn WITH width fail. Zero-width line-assembly cid separators and
+    # Mn/Me/Cf combining marks are counted and reported, never fatal.
+    # Mutation-verified 2026-10-30 with synthetic null-byte and missing-CJK
+    # PDFs (both caught); live PDFs pass with 105 benign separators disclosed.
+    results.append(("audit_glyph_coverage.py", run_layer(
+        "PDF glyph coverage audit (audit_glyph_coverage.py, CG-14)",
+        ["scripts/audit_glyph_coverage.py"],
+        timeout=900,
+        env_python=_pdf_audit_python(),
     )))
 
     # Summary

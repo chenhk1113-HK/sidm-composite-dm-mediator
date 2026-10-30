@@ -210,7 +210,14 @@ SUBSCRIPT_MAP = {
     "\u2080": "_0", "\u2081": "_1", "\u2082": "_2", "\u2083": "_3",
     "\u2084": "_4", "\u2085": "_5", "\u2086": "_6", "\u2087": "_7",
     "\u2088": "_8", "\u2089": "_9", "\u208b": "_-", "\u208a": "_+",
-    "\u2081": "_1",
+    # n22 fix: a duplicate entry for \u2081 was removed (harmless but sloppy),
+    # and \u2097 (subscript l) is now mapped for readiness. NOTE: it is NOT in
+    # the re.sub character class below, so today it still goes through the
+    # deliberate "every non-ASCII -> ?" sentinel; adding it to the map is
+    # harmless and prepares the day the class is widened. The class itself is
+    # left alone on purpose: widening canonical() changes tokenisation and
+    # could move advisory flags — a separate, tested decision, not a drive-by.
+    "\u2097": "_l",
 }
 
 def canonical(s: str) -> str:
@@ -241,7 +248,7 @@ def canonical(s: str) -> str:
     s = re.sub(r"[\u2070\u00b9\u00b2\u00b3\u2074-\u2079\u207a\u207b\u2071\u207f]+",
                lambda m: _expand_run(m.group(0)), s)
     s = re.sub(r"[\u2080-\u2089\u208a\u208b]+",
-               lambda m: "_" + "".join(SUBSCRIPT_MAP.get(c, c)[1:]
+               lambda m: "_" + "".join(SUBSCRIPT_MAP[c] if c in SUBSCRIPT_MAP else c
                                        for c in m.group(0)), s)
     s = "".join("-" if c in DASH_CHARS else NONASCII_MAP.get(c, c) for c in s)
     s = re.sub(r"[^\x00-\x7f]", "?", s)
@@ -614,19 +621,25 @@ def check_pair(md: Path, pdf: Path, job: dict, pdftotext: str,
             "set — word presence verified, contiguity not verifiable by this method"
         )
     if missing_prose:
-        # Truncation is a *display* choice, and it silently under-reports how
-        # many lines a triage pass must actually check. --full-flags turns it
-        # off so scripts/triage_pdf_advisory_flags.py can verify EVERY flagged
-        # line, not just the first six.
-        shown = missing_prose if full_flags else missing_prose[:6]
+        # n22 fix: the gate-mode [:6] display cap is REMOVED. It made the
+        # summary print the DISPLAYED count (6 capped + flags from other PDFs =
+        # 7 on 2026-10-30) while the true flag count was 8 — and layer 12's
+        # full-flags run printed 8, so the two honest runs "disagreed" for a
+        # purely presentational reason (a CG-15 red herring, now identified).
+        # One count, all modes: every flagged line is printed and counted.
+        shown = missing_prose
         for line, cov, miss, why in shown:
+            # n22 fix (Medium): under --full-flags emit the FULL source line, not
+            # a 70-char slice. Layer 12 (triage) recovers the source text by
+            # scraping these reprs; a truncated repr means triage verifies only
+            # the first 70 characters, so clipping in the TAIL of a long line
+            # could be declared PRESENT without ever being looked at.
+            quoted = line if full_flags else line[:70]
             defects.append(
                 f"{pdf.name}: source prose line not contained in the PDF "
                 f"({cov:.0%} of its word-trigrams found, {miss} missing"
-                f"{'; ' + why if why else ''}; source {line[:70]!r})"
+                f"{'; ' + why if why else ''}; source {quoted!r})"
             )
-        if len(missing_prose) > len(shown):
-            defects.append(f"{pdf.name}: ... and {len(missing_prose) - len(shown)} more prose lines absent")
 
     # 3. code containment (the D2 clipping signature: head present, tail gone)
     #

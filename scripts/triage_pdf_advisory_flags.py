@@ -107,7 +107,14 @@ def main(argv: list[str]) -> int:
 
         # The audit prints one defect line per flagged source line, with the
         # source line quoted at the end. Recover exactly those lines.
-        scoped = [d for d in re.findall(r"; source ('(?:[^'\\]|\\.)*')", run.stdout)]
+        # n22 fix (Medium-High): the audit quotes with !r (repr), which uses
+        # DOUBLE quotes whenever the slice contains an apostrophe and no double
+        # quote. A single-quote-only pattern silently skipped such lines —
+        # `continue` before total_flagged, so they were neither tested nor
+        # counted. Match BOTH repr quote styles.
+        SOURCE_RE = re.compile(
+            r"""; source ('(?:[^'\\]|\\.)*'|"(?:[^"\\]|\\.)*")""")
+        scoped = [d for d in SOURCE_RE.findall(run.stdout)]
         if not scoped:
             continue
 
@@ -122,10 +129,10 @@ def main(argv: list[str]) -> int:
             continue
         print(f"\n{pdf.name}: {len(flagged_here)} advisory flag(s)")
         for entry in flagged_here:
-            m = re.search(r"; source ('(?:[^'\\]|\\.)*')", entry)
+            m = SOURCE_RE.search(entry)
             if not m:
                 continue
-            src = m.group(1).strip().strip("'").replace("**", "").replace("`", "")
+            src = m.group(1).strip().strip("'\"").replace("**", "").replace("`", "")
             distinctive = [t for t in tokenise(src) if len(t) >= 2]
             missing = [t for t in distinctive if t not in witness_tokens]
             # A compound token like '7.5x10' is one token in the source and
