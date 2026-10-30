@@ -1,3 +1,14 @@
+## [v19.2-F-N23-ReportAudit-2026-10-30]
+
+**n23 external audit of report v1.13 itself: all four stale-state findings valid; CG-15 CLOSED as a misdiagnosis after the determinism experiment the review proposed. Consolidated report v1.14.**
+
+- **Register drift fixed** (§17.3): CG-14 row OPEN->CLOSED (commit 99e1829, mutation proof 6f26199 — the review's cited 8176139 is the sigma refactor, corrected); CG-16 row appended (was prose-only); CG-15 row rewritten. The canonical table was left in v1.12 state while §23 moved the verdicts — caught verbatim at lines 1281/1282.
+- **Count-reference drift fixed**: §17.6 bullet "The 3 PDF-render defects of §17.2" -> "The 4 ... (D1-D3 v1.6, D4 v1.7)"; §18.4 kept historical with parenthetical; §17.1 row 6 / front matter / outcome-n19 kept as historically accurate (pre-D4 era), per the review's own correct discrimination.
+- **CG-15 CLOSED as misdiagnosis**: three builds of byte-identical job entries on the same v1.13 markdown (2 same-process + 1 fresh process) -> identical extracted-text sha256, literal `**` 56==56==56, layer-11 advisory 8==8==8 same set; raw bytes differ only by reportlab's embedded timestamp. Historical 57->55->57 / 9->6 / 9->8 movements were cross-version source-edit reflow plus the removed display cap. Experiment log: docs/dual_review_5loop/evidence_n23/det_compare_results.log (committed). §23.5's "true variance remains open" sentence annotated as superseded in place.
+- **Build lesson**: verbose §17.3 cells made one table row 785pt > 742pt page frame (reportlab cannot split a row) — LayoutError; rows compacted to register style, details live in §24.
+- **Gate self-catch**: the first v1.14 gate run FAILED layer 11 — the new §24.1 table's `#` numbering column header leaked into the rendered text as a literal heading marker (2 occurrences: the table repeats its header on the page where it splits). Column renamed to `No.`; rebuild; L11 re-verified directly (0 hard, 8 advisory — all the verified superscript-split class); full 14-layer rerun on the fixed tree.
+- Gate remains 14 layers; report v1.14 rebuilt; paper untouched.
+
 ## [v19.2-F-N22-GateAudit-2026-10-30]
 
 **n22 external audit of the gate layers: 5 of 7 claims valid, one partly, one against this report's own text (retracted). CG-14 CLOSED by new gate layer 14 (glyph coverage). Consolidated report v1.13.**

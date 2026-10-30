@@ -1,0 +1,27 @@
+CG-15 DETERMINISM EXPERIMENT — full comparison log (2026-10-30)
+probe jobs: scratch/det_jobs.json (2 byte-identical entries, run1+run2 one builder process),
+          scratch/det_jobs2.json (same entry, fresh process run3); builder = WSL venv,
+          scripts/build_round5_report_pdfs.py; md = the v1.13 report markdown, unchanged throughout the probe
+
+run1           raw_sha256=5aa91fbdbdb6c529350ee9c1bc4fd6a3cfc005fc30e81d62c318928b8ba05087  text_sha256=3425cd15881cfd4163a2f38c998b12685e05fe434115840ea33af369b5e604d5
+run2           raw_sha256=d61090b153e827366af3e3a3aafd3d7720fdcf9bb9682a7ee2c2191ba8c6dc83  text_sha256=3425cd15881cfd4163a2f38c998b12685e05fe434115840ea33af369b5e604d5
+run3           raw_sha256=8648969cac7f8718d7e3388a8745b80e55ae2cd16e12d7875f7e08596cd208a5  text_sha256=3425cd15881cfd4163a2f38c998b12685e05fe434115840ea33af369b5e604d5
+shipped_v113   raw_sha256=3cf3787a0c2d0a6d413e78b214b8d971d44b1f4c32cafc24b601d8e62f20a5c1  text_sha256=3425cd15881cfd4163a2f38c998b12685e05fe434115840ea33af369b5e604d5
+
+--- det_build.log ---
+OK /mnt/c/Users/lamkuenai/AppData/Local/hermes/cache/scratch/det_run1.pdf  252909 bytes
+OK /mnt/c/Users/lamkuenai/AppData/Local/hermes/cache/scratch/det_run2.pdf  252909 bytes
+
+--- det_build2.log ---
+OK /mnt/c/Users/lamkuenai/AppData/Local/hermes/cache/scratch/det_run3.pdf  252909 bytes
+
+--- layer-11 checker (audit_pdf_render.py --gate-mode) on the 3 probes: tail ---
+    ! det_run3.pdf: source prose line not contained in the PDF (77% of its word-trigrams found, 3 missing; words absent: 7.5x10; source '- **Reviewer B claim 3 — "7.5×10⁻¹² is inconsistent with the 1.78e-13 ')
+    ! det_run3.pdf: source prose line not contained in the PDF (77% of its word-trigrams found, 3 missing; words absent: 7.5x10; source 'Not a defect. They are different regimes: 7.5×10⁻¹² is the σ_1 = 4.4 b')
+    ! det_run3.pdf: source prose line not contained in the PDF (78% of its word-trigrams found, 4 missing; words absent: 1.78x10; source '> σ_1 = 4.4 → σ/m(28) = 166.0 → g_N/g_χ < 1.78×10⁻¹³; σ_1 = 3.0 → σ/m(')
+    ! det_run3.pdf: source prose line not contained in the PDF (62% of its word-trigrams found, 5 missing; words absent: 1.84x10, 2.84x10; source '> g_N/g_χ < 1.84×10⁻¹³; σ_1 = 1.0 → σ/m(28) = 65.49 → g_N/g_χ < 2.84×1')
+    ! det_run3.pdf: source prose line not contained in the PDF (53% of its word-trigrams found, 7 missing; words absent: 2.83x10, 2.84x10; source '- L151 `σ_1 = 1.0 → σ/m(28) = 65.49 cm²/g → g_N/g_χ < 2.84×10⁻¹³` → `6')
+    ! det_run3.pdf: source prose line not contained in the PDF (79% of its word-trigrams found, 3 missing; words absent: 2.84x10; source '- L151 §10.7 "Primary value" restatement: `2.84e-13` → `2.83e-13` (3 ×')
+    ! det_run3.pdf: source prose line not contained in the PDF (81% of its word-trigrams found, 3 missing; words absent: 2.83x10; source '`65.91` × 5, `2.83e-13` × 3, `2.83×10⁻¹³` × 3, `1.25e+25` × 1. Paper l')
+RESULT: PASS (gate mode) — 0 hard defects; 24 advisory prose flag(s) listed above for triage
+exit: 0

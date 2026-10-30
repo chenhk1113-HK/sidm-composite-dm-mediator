@@ -9,12 +9,12 @@
   "marker_budget_note": "Clean. The literal-** class is fully fixed in this document; the budget is 0 and must stay 0."
  },
  {
-  "md": "/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/docs/dual_review_5loop/SIDM_ROUND5_CONSOLIDATED_FIXES_v1.13_2026-10-30.md",
-  "pdf": "/mnt/c/Users/lamkuenai/round5_deliver/SIDM_ROUND5_CONSOLIDATED_FIXES_v1.13_2026-10-30.pdf",
-  "title": "Consolidated Fixes Report - v1.13",
-  "subtitle": "SIDM v19.2-F  |  Round 5 + n18 + n19 + n20 + n21 + n22 review response",
-  "footer": "SIDM v19.2-F - Round 5 + n18 + n19 + n20 + n21 + n22 review response",
-  "marker_budget": 56,
-  "marker_budget_note": "Measured 2026-10-30 on the freshly built v1.13 PDF: 56 literal ** over 44 lines — INSIDE the documented 55-57 builder non-determinism band (CG-15), despite the new section 23 adjudication tables. Same DOCUMENTED, user-deferred presentational class (section 14.3). Count INSIDE the band = non-determinism; a count ABOVE 57 = new regression; tighten whenever it drops."
+  "md": "/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/docs/dual_review_5loop/SIDM_ROUND5_CONSOLIDATED_FIXES_v1.14_2026-10-30.md",
+  "pdf": "/mnt/c/Users/lamkuenai/round5_deliver/SIDM_ROUND5_CONSOLIDATED_FIXES_v1.14_2026-10-30.pdf",
+  "title": "Consolidated Fixes Report - v1.14",
+  "subtitle": "SIDM v19.2-F  |  Round 5 + n18 + n19 + n20 + n21 + n22 + n23 review response",
+  "footer": "SIDM v19.2-F - Round 5 + n18 + n19 + n20 + n21 + n22 + n23 review response",
+  "marker_budget": 62,
+  "marker_budget_note": "Measured 62 on the v1.14 PDF built 2026-10-30 (50 lines). CG-15 closed (§24): same-source rebuilds are deterministic, so a count change vs this budget can now only mean a source edit or a real regression; re-measure and reset after every deliberate content edit. Movement across versions is reflow, not variance."
  }
 ]
