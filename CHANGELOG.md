@@ -7,7 +7,8 @@
 - **CG-15 CLOSED as misdiagnosis**: three builds of byte-identical job entries on the same v1.13 markdown (2 same-process + 1 fresh process) -> identical extracted-text sha256, literal `**` 56==56==56, layer-11 advisory 8==8==8 same set; raw bytes differ only by reportlab's embedded timestamp. Historical 57->55->57 / 9->6 / 9->8 movements were cross-version source-edit reflow plus the removed display cap. Experiment log: docs/dual_review_5loop/evidence_n23/det_compare_results.log (committed). §23.5's "true variance remains open" sentence annotated as superseded in place.
 - **Build lesson**: verbose §17.3 cells made one table row 785pt > 742pt page frame (reportlab cannot split a row) — LayoutError; rows compacted to register style, details live in §24.
 - **Gate self-catch**: the first v1.14 gate run FAILED layer 11 — the new §24.1 table's `#` numbering column header leaked into the rendered text as a literal heading marker (2 occurrences: the table repeats its header on the page where it splits). Column renamed to `No.`; rebuild; L11 re-verified directly (0 hard, 8 advisory — all the verified superscript-split class); full 14-layer rerun on the fixed tree.
-- Gate remains 14 layers; report v1.14 rebuilt; paper untouched.
+- Gate remains 14 layers; report v1.14 rebuilt; paper untouched by the n23 findings themselves.
+- **Paper status update (user directive 2026-10-30)**: PAPER_V1_DRAFT.md gains section A.18 (review chain + gate + coverage-gap ledger status as of 2026-10-30, no scientific content changed) and the Yang+ 2024 disambiguation comment is corrected from "NOT YET RESOLVED SITE BY SITE" to the resolved state (28 sites -> [43], 1 -> [17]) — verified: all 30 occurrences carry explicit slots. Full 14-layer gate re-run on the paper-edited tree before push.
 
 ## [v19.2-F-N22-GateAudit-2026-10-30]
 
