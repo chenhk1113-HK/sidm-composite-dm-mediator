@@ -2,13 +2,13 @@
 """
 verify_release_gate.py — Master pre-tag verification gate for v19.2-F.
 
-Runs all 7 verification layers in sequence. Refuses to PASS if any layer fails.
+Runs all 15 verification layers in sequence. Refuses to PASS if any layer fails.
 This is the master gate (Tier 1, Item A.2) that should be invoked before
 any v40.x release tag.
 
 Layers:
   1. Convention/units audit (audit_units.py)
-  2. Full pytest suite (32+ tests)
+  2. Full pytest suite (32+ tests)   [--quick marks it SKIP, never PASS]
   3. Standing-numbers drift guard (drift_guard.py)
   4. T82 audit (t82_audit.py)
   5. Claims audit (audit_claims.py)
@@ -21,20 +21,41 @@ Layers:
  10. Hierarchy-bound chain audit (audit_hierarchy_chain.py) - recomputes the
      sigma/m(28) -> ratio -> g_N/g_chi chain from the canonical constants
      (closes CG-9)
+ 11. PDF render-integrity audit (audit_pdf_render.py, gate mode) - closes CG-12
+ 12. Advisory-flag triage (triage_pdf_advisory_flags.py) - every flag layer 11
+     waved through is re-checked against a clean extractor
+ 13. Stale-string absence audit (audit_stale_strings.py) - closes CG-2
+ 14. PDF glyph coverage audit (audit_glyph_coverage.py) - closes CG-14 (D1)
+ 15. Report register-vs-prose state audit (audit_register_state.py) - closes
+     CG-17: the report's own state statements (open-set lists, per-CG status
+     sentences) must agree with the canonical §17.3 register table. Closes
+     the defect class the n23 round caught four instances of (a status fixed
+     in one place and left stale in another), which layers 1-14 checked
+     everywhere except in the report about the gate.
 
-Layers 1-7 validate the PAPER against the CODE. Layers 8-10 validate the
-DOCUMENTS against themselves and against the execution record. That
-distinction is the point: a green gate was evidence about the paper's claims
-while saying nothing about whether the report's own account of how it was
-produced was true.
+GATE SUMMARY CONTRACT (n24 round, 2026-10-31 — closes CG-5 and CG-10):
+  * Each layer is recorded PASS, FAIL or SKIP. --quick records pytest as SKIP,
+    never PASS. Skipped layers are named in the summary line; a run containing
+    skips can never print a plain "ALL PASSED".
+  * Internal pytest skips are parsed from the pytest tail and disclosed.
+  * The summary names exactly which layers asserted something and states the
+    gate's scope limit: it asserts the enumerated claims, not the whole
+    document. A green gate and an unenumerated defect can coexist — that is
+    CG-5's honest wording, printed at the end of every run.
+  * A layer that crashes (nonzero exit, timeout, missing interpreter) fails
+    the gate loudly. This is exercised by mutation, not just read: see
+    tests/test_gate_summary_contract.py (unit) and
+    scripts/verify_gate_crash_mutation_proof.py (end-to-end).
 
 Usage:
     python scripts/verify_release_gate.py
-    python scripts/verify_release_gate.py --quick   # skip pytest (faster)
+    python scripts/verify_release_gate.py --quick   # pytest SKIPPED (dev only)
 
-Exit: 0 = all gates pass; 1 = at least one failed.
+Exit: 0 = all layers asserted and passed (skips disclosed if any);
+      1 = at least one layer failed.
 """
 import argparse
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -47,7 +68,7 @@ if not VENV_PYTHON.exists():
     VENV_PYTHON = Path(_sys)
 
 
-TOTAL_LAYERS = 14
+TOTAL_LAYERS = 15
 
 
 def _pdf_audit_python() -> str:
@@ -86,36 +107,78 @@ def _pdf_audit_python() -> str:
     return str(VENV_PYTHON)
 
 
+results = []  # entries: (name, status, tail) with status in PASS/FAIL/SKIP
+
+
 def run_layer(name, args, timeout=300, cwd=None, env_python=None):
-    """Run a verification layer. Returns (success, output_tail)."""
+    """Run a verification layer. Returns (success, output).
+
+    Failure semantics (n24 item 2 — no longer take-my-word-for-it):
+      nonzero returncode  -> FAILED (exit code N)   [mutation-proven end-to-end
+      timeout             -> TIMEOUT                 by verify_gate_crash_
+      missing interpreter -> ERROR                   mutation_proof.py and at
+    all three count as layer failure, never 'clean'  unit level in
+                                                     test_gate_summary_contract]
+    """
     print(f"\n[L{len(results)+1}/{TOTAL_LAYERS}] {name}...")
     cmd = [str(env_python or VENV_PYTHON)] + args
     try:
         r = subprocess.run(cmd, cwd=cwd or str(REPO),
                            capture_output=True, text=True, timeout=timeout)
-        success = r.returncode == 0
-        # Show last 5 lines
         out = r.stdout + r.stderr
+        # Show last 5 lines
         for line in out.strip().splitlines()[-5:]:
             print(f"  {line}")
-        if not success:
+        if r.returncode != 0:
             print(f"  FAILED (exit code {r.returncode})")
-        return success
+            return False, out
+        return True, out
     except subprocess.TimeoutExpired:
         print(f"  TIMEOUT after {timeout}s")
-        return False
+        return False, ""
     except FileNotFoundError as e:
         print(f"  ERROR: {e}")
-        return False
+        return False, ""
 
 
-results = []
+def summarize(results, pytest_internal_skips: int = 0) -> tuple:
+    """Pure formatter for the gate summary — the gate contract is testable
+    against this function without running 15 subprocess layers
+    (tests/test_gate_summary_contract.py). Returns (text, exit_code)."""
+    names_pass = [n for n, s, _ in results if s == "PASS"]
+    names_skip = [n for n, s, _ in results if s == "SKIP"]
+    names_fail = [n for n, s, _ in results if s == "FAIL"]
+
+    lines = ["=" * 70, "PRE-TAG GATE SUMMARY", "=" * 70]
+    for n, s, _ in results:
+        lines.append(f"  [{s}] {n}")
+    if pytest_internal_skips:
+        lines.append(f"  NOTE  pytest internal skips: {pytest_internal_skips} test(s) were "
+                     "skipped inside the pytest layer — a skip proves nothing; those "
+                     "assertions did not run in this build (CG-10 disclosure).")
+    lines.append("")
+    if names_fail:
+        lines.append("ONE OR MORE GATE LAYERS FAILED — do NOT tag a new release until fixed.")
+        code = 1
+    elif names_skip:
+        lines.append(f"GATE PASSED WITH SKIPPED LAYERS: {len(names_pass)} layer(s) asserted "
+                     f"and passed; SKIPPED: {', '.join(names_skip)}.")
+        lines.append("  A skipped layer asserts nothing — this is NOT a full green run.")
+        code = 0
+    else:
+        lines.append(f"GATE PASSED: all {len(names_pass)} layer(s) asserted and exited 0.")
+        code = 0
+    lines.append(f"Checked: {', '.join(names_pass)}.")
+    lines.append("SCOPE: the gate asserts only the enumerated layer claims above. It is not a "
+                 "whole-document verdict; an unenumerated defect can coexist with a green gate "
+                 "(CG-5 disclosure).")
+    return "\n".join(lines), code
 
 
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--quick", action="store_true",
-                   help="Skip full pytest (faster, for dev iteration)")
+                   help="Skip full pytest (faster, for dev iteration; recorded as SKIP, not PASS)")
     args = p.parse_args()
 
     print("=" * 70)
@@ -124,16 +187,22 @@ def main():
     print(f"Repo: {REPO}")
     print(f"Python: {VENV_PYTHON}")
 
+    def record(name, ok, tail=""):
+        results.append((name, "PASS" if ok else "FAIL", tail))
+
     # Layer 1: convention/units audit
-    results.append(("audit_units.py", run_layer(
+    ok, tail = run_layer(
         "Convention/units audit (audit_units.py)",
         ["scripts/audit_units.py"],
-    )))
+    )
+    record("audit_units.py", ok, tail)
 
-    # Layer 2: pytest (skip if --quick)
+    # Layer 2: pytest (SKIP, never PASS, when --quick — CG-10 fix)
+    pytest_internal_skips = 0
     if args.quick:
-        print(f"\n[L2/{TOTAL_LAYERS}] pytest (SKIPPED --quick)")
-        results.append(("pytest", True))
+        print(f"\n[L2/{TOTAL_LAYERS}] Full pytest suite (SKIPPED via --quick: this layer "
+              "asserts NOTHING in this run)")
+        results.append(("pytest", "SKIP", ""))
     else:
         # LEGACY TEST EXCLUSIONS (added 2026-10-21, v40.59 — Defect G)
         # 13 legacy tests excluded with explicit rationale:
@@ -158,7 +227,7 @@ def main():
         # already-failing in its own commit (d776480) and the gate excused it as
         # "pre-existing tolerance-boundary failures" -- that excuse is now void.
         # The remaining exclusions above are genuinely legacy (pre-v40 era).
-        results.append(("pytest", run_layer(
+        ok, tail = run_layer(
             "Full pytest suite (v0.3-prelim/tests/, excluding known-broken)",
             ["-m", "pytest", "v0.3-prelim/tests/", "-q", "--tb=line",
              "--ignore=v0.3-prelim/tests/test_sparc_hierarchical.py",
@@ -178,55 +247,74 @@ def main():
              "--ignore=v0.3-prelim/tests/test_paper_v19_regression.py",
              "-k", "not T132 and not T131 and not T133 and not T134 and not T135 and not T220"],
             timeout=1800,
-        )))
+        )
+        record("pytest", ok, tail)
+        m = re.search(r"(\d+) skipped", tail or "")
+        if m:
+            pytest_internal_skips = int(m.group(1))
 
     # Layer 3: drift guard
-    results.append(("drift_guard.py", run_layer(
+    ok, tail = run_layer(
         "Standing-numbers drift guard (drift_guard.py)",
         ["scripts/drift_guard.py"],
-    )))
+    )
+    record("drift_guard.py", ok, tail)
 
     # Layer 4: T82 audit
-    results.append(("t82_audit.py", run_layer(
+    ok, tail = run_layer(
         "T82 audit (t82_audit.py)",
         ["scripts/t82_audit.py"],
-    )))
+    )
+    record("t82_audit.py", ok, tail)
 
     # Layer 5: claims audit
-    results.append(("audit_claims.py", run_layer(
+    ok, tail = run_layer(
         "Claims audit (audit_claims.py)",
         ["scripts/audit_claims.py"],
-    )))
+    )
+    record("audit_claims.py", ok, tail)
 
     # Layer 6: fabrication cross-check (R88(68) lesson)
-    results.append(("check_fabrication.py", run_layer(
+    ok, tail = run_layer(
         "Fabrication cross-check (check_fabrication.py)",
         ["scripts/check_fabrication.py"],
-    )))
+    )
+    record("check_fabrication.py", ok, tail)
 
     # Layer 7: breakthrough label gate (R88(71) checklist)
-    results.append(("check_breakthrough_label.py", run_layer(
+    ok, tail = run_layer(
         "Breakthrough label gate (check_breakthrough_label.py)",
         ["scripts/check_breakthrough_label.py"],
-    )))
+    )
+    record("check_breakthrough_label.py", ok, tail)
 
     # Layer 8: cross-document section-anchor integrity
-    results.append(("audit_doc_anchors.py", run_layer(
+    ok, tail = run_layer(
         "Cross-document section-anchor audit (audit_doc_anchors.py)",
         ["scripts/audit_doc_anchors.py"],
-    )))
+    )
+    record("audit_doc_anchors.py", ok, tail)
 
     # Layer 9: model/provider provenance of the reports' self-description
-    results.append(("audit_model_provenance.py", run_layer(
+    ok, tail = run_layer(
         "Model-provenance audit (audit_model_provenance.py)",
-        ["scripts/audit_model_provenance.py"],
-    )))
+        ["scripts/audit_model_provenance.py", "--allow-unverifiable"],
+        # --allow-unverifiable is deliberate policy: agent.log rotates, and
+        # provenance claims verified when their logs were live must not make
+        # the layer permanently red (the CG-11 anti-pattern: a permanently-red
+        # layer trains the reader to ignore the gate). Rotation-exposed claims
+        # are printed in the audit's loud UNVERIFIABLE section — visible in
+        # this gate's layer output tail — and only a direct CONTRADICTION with
+        # surviving evidence fails the layer.
+    )
+    record("audit_model_provenance.py", ok, tail)
 
     # Layer 10: the hierarchy-bound chain (closes CG-9)
-    results.append(("audit_hierarchy_chain.py", run_layer(
+    ok, tail = run_layer(
         "Hierarchy-bound chain audit (audit_hierarchy_chain.py)",
         ["scripts/audit_hierarchy_chain.py"],
-    )))
+    )
+    record("audit_hierarchy_chain.py", ok, tail)
 
     # Layer 11: PDF render integrity (closes CG-12)
     # audit_pdf_render.py in --gate-mode: hard classes (literal-'**' budget,
@@ -236,12 +324,13 @@ def main():
     # correctly (measured 2026-10-28; see the policy block in the script).
     # It runs under the interpreter that has pdfplumber — the union-extractor
     # path is what makes the check honest.
-    results.append(("audit_pdf_render.py", run_layer(
+    ok, tail = run_layer(
         "PDF render-integrity audit (audit_pdf_render.py, gate mode)",
         ["scripts/audit_pdf_render.py", "--gate-mode"],
         timeout=900,
         env_python=_pdf_audit_python(),
-    )))
+    )
+    record("audit_pdf_render.py", ok, tail)
 
     # Layer 12: verify every advisory flag the gate-mode audit waved through.
     # 'Advisory' is only honest if each flag is actually checked against a
@@ -252,12 +341,13 @@ def main():
     # alphanumeric tokens against pdfplumber ALONE. Exit 1 = a line is really
     # missing from the PDF. Exit 2 = the audit crashed, which must never be
     # read as 'no flags'.
-    results.append(("triage_pdf_advisory_flags.py", run_layer(
+    ok, tail = run_layer(
         "Advisory-flag triage (triage_pdf_advisory_flags.py)",
         ["scripts/triage_pdf_advisory_flags.py"],
         timeout=900,
         env_python=_pdf_audit_python(),
-    )))
+    )
+    record("triage_pdf_advisory_flags.py", ok, tail)
 
     # Layer 13: resurrected stale values in the paper's prose (closes CG-2).
     # Every prior layer validates the claims it enumerates; none asserted the
@@ -266,11 +356,17 @@ def main():
     # docs/STALE_STRINGS.json (the ratchet registry) and fails on any
     # unmarked reappearance in the paper; legitimate retraction discussion is
     # allowed via per-entry allow-regex context. Mutation-verified 2026-10-29.
-    results.append(("audit_stale_strings.py", run_layer(
+    # Scope statement (n24 item 4): layer 13 is EXACT-STRING matching (registry
+    # string + allow-regex context). Approximate rewrites of a retired value
+    # (65.490, 6.549e1) are NOT caught here; values inside the recomputed
+    # hierarchy chain are caught by layer 10; approximate variants outside both
+    # remain a human-review surface.
+    ok, tail = run_layer(
         "Stale-string absence audit (audit_stale_strings.py)",
         ["scripts/audit_stale_strings.py"],
         timeout=120,
-    )))
+    )
+    record("audit_stale_strings.py", ok, tail)
 
     # Layer 14: glyph coverage — closes CG-14 (the D1 empty-box class).
     # Layers 11/12 compare alphanumeric token containment, so a character
@@ -285,32 +381,41 @@ def main():
     # Mn/Me/Cf combining marks are counted and reported, never fatal.
     # Mutation-verified 2026-10-30 with synthetic null-byte and missing-CJK
     # PDFs (both caught); live PDFs pass with 105 benign separators disclosed.
-    results.append(("audit_glyph_coverage.py", run_layer(
+    # n24 item 3 (2026-10-31): the substitution allowance is now DERIVED at
+    # import from scripts/pdf_rencode_maps.py — the same dict the builder
+    # imports — instead of a hand-copied mirror held together by a comment.
+    ok, tail = run_layer(
         "PDF glyph coverage audit (audit_glyph_coverage.py, CG-14)",
         ["scripts/audit_glyph_coverage.py"],
         timeout=900,
         env_python=_pdf_audit_python(),
-    )))
+    )
+    record("audit_glyph_coverage.py", ok, tail)
 
-    # Summary
-    print()
-    print("=" * 70)
-    print("PRE-TAG GATE SUMMARY")
-    print("=" * 70)
-    all_pass = True
-    for name, success in results:
-        marker = "PASS" if success else "FAIL"
-        print(f"  [{marker}] {name}")
-        if not success:
-            all_pass = False
+    # Layer 15: the report's own state statements vs its canonical §17.3
+    # register (closes CG-17 — n24 item 1). The n23 round proved that this
+    # report keeps state in several copies (front matter / round prose / the
+    # register table / the open-set line) and a status fixed in one place
+    # survives stale in the others; every instance so far was caught by an
+    # external reviewer's eyes. Layer 13's answer for the paper's same class
+    # was a machine check; this layer is that answer for the report: the
+    # open-set list of the live (latest) round must equal the table's OPEN
+    # set, and per-CG status sentences in the live region must agree with
+    # the table. Frozen historical round sections are exempt by design — they
+    # record what was true at their time. Mutation-verified with three fault
+    # injections (scripts/audit_register_state_mutation_proof.py).
+    ok, tail = run_layer(
+        "Register-vs-prose state audit (audit_register_state.py, CG-17)",
+        ["scripts/audit_register_state.py"],
+        timeout=120,
+    )
+    record("audit_register_state.py", ok, tail)
 
+    # Summary (gate contract: PASS/FAIL/SKIP per layer + scope statement)
     print()
-    if all_pass:
-        print("ALL GATES PASSED — safe to tag a new release.")
-        return 0
-    else:
-        print("ONE OR MORE GATES FAILED — do NOT tag a new release until fixed.")
-        return 1
+    text, code = summarize(results, pytest_internal_skips)
+    print(text)
+    return code
 
 
 if __name__ == "__main__":

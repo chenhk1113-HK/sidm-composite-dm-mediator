@@ -283,11 +283,23 @@ def session_for_delegation(manifest, api):
                 sids = [s for _, s in near]
                 # Several delegations can share a start second (a fan-out).
                 return sids if len(sids) > 1 else sids[0]
-    # Fallback: match by the effective model. Only reached when the
-    # timestamp does not match any session (e.g. the log was rotated).
+    # Fallback: match by the effective model — but ONLY within the same
+    # calendar day as the manifest timestamp. A cross-day model match is the
+    # exact class this function exists to prevent: on 2026-11-01 the rotated-
+    # out 2026-10-26 delegation records were cross-matched to 2026-10-31
+    # sessions that happened to run the same reviewer models (api_calls=140
+    # vs the claims' 27) and the audit reported a fabricated CONTRADICTION
+    # against the report. No same-day match means the record is gone; return
+    # None and let main() report the delegation as UNVERIFIABLE (loud), never
+    # as evidence from the wrong day.
     want = {t.get("model") for t in manifest.get("tasks", []) if t.get("model")}
+    started_day = None
+    if started:
+        started_day = started[:10]  # 'YYYY-MM-DD' from 'YYYY-MM-DD HH:MM:SS'
     best, best_n = None, 0
     for sid, rec in api.items():
+        if started_day and not sid.startswith(started_day.replace("-", "")):
+            continue  # date guard: never borrow evidence from another day
         if want and want & rec["models"]:
             if rec["n_calls"] > best_n:
                 best, best_n = sid, rec["n_calls"]
@@ -353,6 +365,16 @@ def main():
         sid = session_for_delegation(man, api)
         sids = sid if isinstance(sid, list) else ([sid] if sid else [])
         recs = [api[s] for s in sids if s in api]
+        if not recs:
+            # The manifest exists but its agent-log session record does not:
+            # the log has rotated. Tool-count claims stay verifiable from the
+            # manifest transcript below; API-call counts are log-derived and
+            # become UNVERIFIABLE — stated loudly, never borrowed from a
+            # same-model session on another day.
+            unverifiable.append((did,
+                "agent-log session record not present (log rotated out): API-call "
+                "count claims for this delegation rest on their contemporaneous "
+                "verification and cannot be re-derived from the live agent.log"))
         # A fan-out delegation has one session per task; the delegation's
         # API-call count is the sum over its sessions, and its tool count is
         # the sum over its task transcripts.

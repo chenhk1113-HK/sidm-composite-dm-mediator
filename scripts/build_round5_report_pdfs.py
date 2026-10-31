@@ -101,16 +101,15 @@ def register_fonts():
 
 # ---------------------------------------------------------------- text prep
 
-# Unicode super/subscripts -> ASCII (AGENTS.md rule 27: PDF-safe form)
-SUP = {
-    '⁰': '0', '¹': '1', '²': '2', '³': '3', '⁴': '4',
-    '⁵': '5', '⁶': '6', '⁷': '7', '⁸': '8', '⁹': '9',
-    '⁻': '-', '⁺': '+',
-}
-SUB = {
-    '₀': '0', '₁': '1', '₂': '2', '₃': '3', '₄': '4',
-    '₅': '5', '₆': '6', '₇': '7', '₈': '8', '₉': '9',
-}
+# Re-encode maps live in scripts/pdf_rencode_maps.py — the SINGLE source of
+# truth shared with gate layer 14 (audit_glyph_coverage.py derives its
+# substitution allowance from the same import). n24 item 3 (2026-10-31): this
+# file used to define them inline and layer 14 hand-copied them with a
+# "MUST mirror" comment; the mirror is now a reference and drift is
+# impossible by construction.
+import sys as _sys  # (already imported above; import of the maps module)
+_sys.path.insert(0, str(Path(__file__).resolve().parent))
+from pdf_rencode_maps import SUP, SUB, MONO_FALLBACK
 
 
 def ascii_fold(t):
@@ -177,14 +176,8 @@ def inline(t):
 # preferring a space break so every source character survives.
 CODE_WRAP = 108
 
-# DejaVu Sans Mono lacks a few glyphs that DejaVu Sans has (verified:
-# U+226A 'much-less-than' is the only one in these documents). A glyph
-# missing from the Mono face becomes .notdef - a null byte in the content
-# stream and an empty box on the page. Substitute an ASCII equivalent.
-MONO_FALLBACK = {
-    '≪': '<<',   # much less than
-    '≫': '>>',   # much greater than
-}
+# MONO_FALLBACK imported from scripts/pdf_rencode_maps.py (single source of
+# truth; rationale lives there).
 
 
 def fold_mono(t):

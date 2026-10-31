@@ -97,3 +97,7 @@ v0.*-prelim/logs/
 .idea/
 .vscode/
 .claude/
+
+# --- agent scratch staging (never source) ---
+scratch/
+_n24_*

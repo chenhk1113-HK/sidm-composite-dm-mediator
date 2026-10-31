@@ -47,17 +47,54 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 
-# Builder substitutions: source char -> allowed rendered replacements.
-# Evidence for each: build_round5_report_pdfs.py behaviour (documented in the
-# consolidated report §17.2 fix paragraph: SimHei wrapping, ASCII substitution
-# for U+226A; markdown_it renders unicode superscripts via the caret form).
-SUBSTITUTION_ALLOWANCE = {
-    "\u226a": {"<<"},          # reportlab builder substitutes << for ≪ (DejaVu Sans Mono gap)
+# The substitution allowance for builder re-encodes is DERIVED from the same
+# maps the builder imports (scripts/pdf_rencode_maps.py). n24 item 3
+# (2026-10-31): this file previously hand-copied the builder's strip map with
+# a "These MUST mirror ..." comment — a second copy held together by prose,
+# the exact pattern CG-6 closed for the physics scripts. A checker's hand
+# copy is worse than a script's: its table is read as evidence. Reference,
+# not mirror: both sides now import the same dict.
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from pdf_rencode_maps import SUP, SUB, MONO_FALLBACK
+
+# Extractor-level allowances: the builder WROTE the original glyph and the
+# extractor reads it back in a different form (× extracted as x, dashes
+# collapsing). These are extractor behaviours measured on these PDF pipelines,
+# not builder re-encodes, so they live here with their evidence and are NOT
+# derived from the builder maps.
+EXTRACTION_ALLOWANCE = {
     "\u00d7": {"x"},           # × may extract as x in some font paths
     "\u2013": {"-"}, "\u2014": {"-"},   # dashes collapse
     "\u2192": {"->"},          # arrow fallback
     "\u2264": {"<="}, "\u2265": {">="},
 }
+
+
+def _derived_allowance() -> dict:
+    """Allowances for characters the BUILDER re-encodes, derived from the
+    shared maps. Digits fold to their plain ASCII form; caret/underscore
+    forms are accepted as alternates because AGENTS.md rule 27 makes the
+    source itself use 10^-N, so a future builder switch to caret rendering
+    would match without touching this code. U+207B/U+207A fold to '-'/'+',
+    but a bare '-'/'+' match proves nothing (every PDF contains them), so the
+    caret form is their only allowance — same semantics as the table this
+    derivation replaces."""
+    allow = {k: {v} for k, v in MONO_FALLBACK.items()}
+    for k, v in SUP.items():
+        allow[k] = {v, "^" + v} if v.isdigit() else {"^" + v}
+    for k, v in SUB.items():
+        allow[k] = {v, "_" + v}
+    return allow
+
+
+SUBSTITUTION_ALLOWANCE = {**EXTRACTION_ALLOWANCE, **_derived_allowance()}
+
+# Completeness guard (fail closed): every character the builder re-encodes
+# must have an allowance in this audit. A builder adding a re-encode without
+# touching the audit is automatically covered; a future refactor that drops
+# the derivation trips this assert.
+_missing = (set(SUP) | set(SUB) | set(MONO_FALLBACK)) - set(SUBSTITUTION_ALLOWANCE)
+assert not _missing, f"glyph audit not covering builder re-encodes: {sorted(_missing)}"
 
 NULLISH = {"\x00", "\ufffd", ""}
 
@@ -77,23 +114,9 @@ CID_PLACEHOLDER = re.compile(r"^\(cid:\d+\)$")
 # Zero-width exemption for combining marks / variation selectors / format
 # chars (Unicode Mn/Me/Cf, e.g. U+FE0F): invisible by design, zero advance is
 # their definition, not a render loss.
-# Superscript/subscript caret allowance: the builder re-encodes unicode
-# superscripts to caret form (AGENTS.md rule 27 convention, layer-11
-# docstring); allowances with len>1 are matched as substrings of the page text.
-SUBSTITUTION_ALLOWANCE.update({
-    # These MUST mirror scripts/build_round5_report_pdfs.py's documented strip
-    # map (lines ~106-111: unicode sub/superscript digits -> plain ASCII
-    # digits, chosen by the builder for font-coverage reasons and disclosed in
-    # its docstring). Caret forms are accepted as alternates because AGENTS.md
-    # rule 27 makes the source itself use 10^-N; a future builder switch to
-    # caret rendering would match without touching this table.
-    "\u2070": {"0", "^0"}, "\u00b9": {"1", "^1"}, "\u00b2": {"2", "^2"}, "\u00b3": {"3", "^3"},
-    "\u2074": {"4", "^4"}, "\u2075": {"5", "^5"}, "\u2076": {"6", "^6"}, "\u2077": {"7", "^7"},
-    "\u2078": {"8", "^8"}, "\u2079": {"9", "^9"}, "\u207b": {"^-"}, "\u207a": {"^+"},
-    "\u2080": {"0", "_0"}, "\u2081": {"1", "_1"}, "\u2082": {"2", "_2"}, "\u2083": {"3", "_3"},
-    "\u2084": {"4", "_4"}, "\u2085": {"5", "_5"}, "\u2086": {"6", "_6"}, "\u2087": {"7", "_7"},
-    "\u2088": {"8", "_8"}, "\u2089": {"9", "_9"},
-})
+# Superscript/subscript caret allowances are DERIVED above from the shared
+# re-encode maps (see the reference note at the top of this file) — no literal
+# super/subscript table lives in this script any more, by construction.
 
 
 def _resolve(p: str) -> Path:
