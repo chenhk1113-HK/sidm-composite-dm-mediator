@@ -8,6 +8,8 @@
 - Channel 5 comparison recomputed in Python (formula re-implemented from `t39.sigma_SI_from_dark_photon`; limit interpolated from `t30_lz_real_posterior.LZ_REAL`): v0.7 MAP 2.54e-117 vs 2.337e-47 cm^2 (**-70.0 dex**); v0.8 MAP 2.97e-116 vs 1.455e-47 (**-68.7 dex**); medians -69.3 / -69.6 dex. Recomputation agrees with the stored T78 value (2.47e-117 vs 2.54e-117; 3% from hbar*c rounding 1.97e-14 vs 1.9733e-14 GeV cm).
 - **T30 Channel 5 mapping unchanged; T41 NOT re-run; `LZ_2024_LIMITS` unchanged; no successor cron scheduled.** Decision record: `v0.3-prelim/data/results/2026-11-01_lz_reevaluation_decision.json`. Docs updated: T77 archive doc (new §"2026-11-01 KIV re-evaluation" + KIV status), `MODEL_ASSUMPTIONS_AND_LIMITATIONS.md` §0, `EXTRACT.md` LZ callout, `docs/LAYMAN_SUMMARY_T77_LZ_2026_09.md` (new §"What actually happened", caveat 1 superseded, provenance).
 
+- **Verification**: full 15-layer `verify_release_gate.py` on `c323961` — GATE PASSED (pytest 1925 passed / 22 skipped disclosed / 36 deselected, 25m55s); targeted layers run standalone (drift_guard, audit_units, markdown tables, doc anchors, stale strings, hierarchy chain, breakthrough label) all PASS on the final tree.
+
 ## [v19.2-F-N24-ReportAudit-2026-10-31]
 
 **n24 external audit of report v1.14: all eight action items executed. Consolidated report v1.15; gate grows to 15 layers.**

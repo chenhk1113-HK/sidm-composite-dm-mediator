@@ -1,0 +1,191 @@
+LZ 2026-09 HIGH-RECOIL EVENT (LZ230616) - 2026-11-01 RE-EVALUATION REPORT
+Project: sidm-composite-dm-mediator | Branch: wip/v19.2-F-init
+Commits: c323961 (the re-evaluation) + this commit (gate evidence + this
+report); tree clean; analysis started from ea66c4e.
+Task handled: the re-evaluation the deleted KIV cron 080d2f590251 was supposed to run.
+
+=====================================================================
+1. VERDICT
+=====================================================================
+NO UPDATE. No change to the posterior, to T30 Channel 5, or to T41.
+
+The T77 trigger "LZ paper appears on arXiv with precise sigma_DM-nucleon
+limit -> re-evaluate Channel 5; update if >= 3 sigma" FIRED in its
+first half (the papers are on arXiv) but its update condition did NOT
+fire in either half:
+
+  - The primary paper publishes NO sigma_DM-nucleon limit. It is a
+    model-interpretation paper, not a direct-detection limit paper.
+  - Significance is unchanged at 2.6 sigma global (3.4 sigma max local),
+    verified verbatim from the LZ paper itself. Below the 3 sigma gate,
+    so "update T30 mapping; re-run T41 at nlive=2000" did not fire.
+  - Not 5 sigma, so no v0.5-prelim milestone.
+  - The "statistical fluctuation" row has not fired either (LZ is still
+    taking data), so the T77 entry stays in MODEL_ASSUMPTIONS section 0.
+
+A trigger firing is a reason to look, not a reason to change. We looked.
+
+=====================================================================
+2. WHAT THE PAPER ACTUALLY IS
+=====================================================================
+Primary hit: arXiv:2609.08893v1 (hep-ph, 2026-09-08, 7 pages)
+  Yuan, Zhang, Cao, Feng & Yang, "ALP-mediated inelastic dark matter and
+  the LUX-ZEPLIN high-recoil candidate event LZ230616"
+  Local PDF: docs/papers/verified/2609.08893_alp_lz230616_2026.pdf
+  KB summary: docs/papers/verified/2609.08893_alp_lz230616_2026.md
+
+Content (read end-to-end from the PDF text, not the abstract): two
+Majorana dark-matter states split by delta, scattering endothermically
+(chi1 N -> chi2 N) off xenon through an axion-like particle coupled to
+gluons. Leading nucleon operator O6 with momentum-dependent pion/eta
+nucleon form factors, full WimPyDD nuclear responses, SHM halo
+(v0 = 238 km/s, v_esc = 544 km/s, rho = 0.3 GeV/cm^3), LZ exposure
+2.84 tonne-years, window 5.4-269.9 keV, energy kernel 32.53 keV.
+
+Table I benchmarks (m_a = 0.3 GeV), read from the PDF:
+
+  benchmark            m_chi [TeV]  delta [keV]  q_LZ  |g_G| [GeV^-2]
+  (a) best spectrum       0.35          330        0      0.21
+  (b) q_LZ <= 1           1.25          320      0.99     2.30e-4
+  (c) q_LZ <= 2           1.04          225      1.99     4.30e-5
+  (d) elastic axion       5.0             0       2.84     1.42e-5
+
+The fit statistic is an approximate single-event recoil-energy likelihood
+and the paper says of itself that it "neither reproduces the official LZ
+likelihood nor defines statistically calibrated confidence regions", and
+that the quoted couplings "do not include a relic-abundance prior or
+collider and flavor constraints".
+
+=====================================================================
+3. SIGMA_DM-NUCLEON LIMIT: NONE COMPARABLE EXISTS
+=====================================================================
+Mechanical scan of the paper's full text: 0 occurrences of "cm-2",
+"cm^2", "exclusion", "upper limit", "90% CL", "95% CL". There is no
+sigma_SI or sigma_DM-nucleon number anywhere in it, at any mass, at any
+confidence level.
+
+Why: the paper's output is the coupling product |g_G| REQUIRED to produce
+one expected event under a conditional signal hypothesis - the opposite
+kind of statement from an exclusion limit. It also does not derive
+significance; its "3.4 local / 2.6 global" is quoted from the LZ paper
+(arXiv:2609.02823).
+
+Companion hits, triaged:
+  - 2610.32747v1 (Aristizabal Sierra+): sets real 90% CL limits, but on
+    neutrino-fermion up-scattering couplings, not sigma_DM-nucleon;
+    concludes up-scattering does not explain the event.
+  - 2609.05291v1 (Gu+): inelastic xenon-excitation companion channel,
+    rate O(0.1) of elastic or below - a future-search study, no limit
+    relevant here.
+  - 2609.04185v2 (Jeesun & Majumdar+): atmospheric-neutrino up-scattering
+    interpretation; an allowed parameter region, not a DM-nucleon limit.
+
+The LZ collaboration's own paper (2609.02823) does set new limits -
+two-sided 90% CL intervals on NREFT operator couplings (its Fig 6, called
+world-leading for those operators) and a recast of the inelastic scalar
+operator O1s to a DM-nucleon cross section with scalar normalization
+(Fig S7, at a 1000 GeV WIMP). But these constrain different observables:
+inelastic two-state operators with mass splitting, and dimensionless EFT
+couplings - not the elastic spin-independent sigma_DM-nucleon that the
+project's Channel 5 maps onto.
+
+=====================================================================
+4. COMPARISON AGAINST T30 CHANNEL 5 (all numbers re-derived in Python)
+=====================================================================
+Channel 5 today already ingests the REAL LZ WS2024 90% CL curve (HEPData
+155182, arXiv:2410.17036; LZ_REAL table in
+v0.3-prelim/code/t30_lz_real_posterior.py, 26 mass points 9 GeV - 10 TeV,
+log-log interpolation). Mapping: t39.sigma_SI_from_dark_photon
+(dark-photon kinetic mixing).
+
+  posterior point          m_chi    predicted sigma_DM-nuc   LZ limit     margin
+  v0.7 MAP (nlive=2000)    769.7    2.54e-117 cm^2           2.337e-47    -70.0 dex
+  v0.7 median              497.5    7.49e-117 cm^2           1.514e-47    -69.3 dex
+  v0.8 MAP (t88ce, 2000)   478.3    2.97e-116 cm^2           1.455e-47    -68.7 dex
+  v0.8 median              502.9    3.77e-117 cm^2           1.530e-47    -69.6 dex
+
+Strongest point in the whole LZ table: 2.182e-48 cm^2 at 40 GeV; margin
+would still be -68.9 dex. Note: the older section-0 figure "1.5e-46 at
+770 GeV" came from the superseded placeholder table; the real-curve value
+is 2.337e-47 cm^2.
+
+Conclusion: nothing in the new literature is more constraining than what
+T30 already uses, at the project's mass scale. The ALP interpretation
+bites models predicted near LZ sensitivity (10^-47 cm^2-scale); the
+project's prediction is ~70 dex below that. Channel 5 stands.
+
+=====================================================================
+5. WHAT CHANGED AND WHAT WAS VERIFIED
+=====================================================================
+Changed (docs + records only):
+  - v0.3-prelim/docs/archive/other/T77_LZ_2026_09_UPDATE.md: new section
+    "2026-11-01 KIV re-evaluation" (paper content, trigger audit table,
+    Channel 5 comparison, decision, verification) + KIV cron status note.
+  - MODEL_ASSUMPTIONS_AND_LIMITATIONS.md section 0: dated re-evaluation
+    paragraph with the numbers.
+  - EXTRACT.md: LZ callout updated with the re-check outcome.
+  - docs/LAYMAN_SUMMARY_T77_LZ_2026_09.md: new "What actually happened"
+    section; caveat 1 (paper not yet on arXiv) marked superseded;
+    provenance footer updated.
+  - CHANGELOG.md: new dated entry.
+  - docs/papers/verified/: new PDF + KB summary for 2609.08893v1.
+  - v0.3-prelim/data/results/2026-11-01_lz_reevaluation_decision.json:
+    machine-readable decision record.
+
+NOT changed (deliberately): T30 Channel 5 mapping, LZ_2024_LIMITS, T41
+(not re-run - trigger not met), posterior, version. No successor cron
+scheduled: the remaining triggers are publication events, not date events.
+
+Verified:
+  - Every paper number quoted here read from the PDF text layer
+    (pdftotext), not from abstracts or memory.
+  - 2.6 sigma global / 3.4 sigma local re-read verbatim from the LZ
+    paper PDF: "global significance of 2.6 when accounting for
+    look-elsewhere effects, with a maximum local significance of 3.4".
+  - sigma_SI formula re-implemented independently from t39 source and
+    evaluated at both v0.7 and v0.8 posterior points. Agrees with the
+    stored T78 value (stored 2.47e-117 vs recomputed 2.54e-117 at v0.7
+    MAP; the 3% difference is hbar*c rounding, 1.97e-14 vs 1.9733e-14
+    GeV cm).
+  - LZ limit at 770 GeV reproduced exactly with the T30 log-log
+    interpolation: 2.3370e-47 cm^2.
+  - Table I values cross-checked against the body text (0.214 GeV^-2 at
+    (350.2 GeV, 330 keV); 2.30e-4 at 1.25 TeV; 4.30e-5 at 1.04 TeV).
+  - Post-edits: drift_guard PASS, audit_units PASS, markdown-table audit
+    PASS, doc-anchor audit PASS, stale-string audit PASS, hierarchy-chain
+    PASS, breakthrough-label gate PASS (nothing in this round is labelled
+    a breakthrough). Full 15-layer verify_release_gate.py run on commit
+    c323961: GATE PASSED, all 15 layers exited 0 (pytest 1925 passed / 22
+    skipped disclosed / 36 deselected, 25m55s); the follow-up commit adds
+    only this report body and its CHANGELOG evidence line, no audited
+    claim changed. Log: gate_n25_lz.log.
+
+=====================================================================
+6. WHAT WOULD CHANGE THE ANSWER
+=====================================================================
+  - A new LZ (or XENONnT / PandaX-4T) release raising the GLOBAL
+    significance of a DM interpretation of LZ230616 to >= 3 sigma ->
+    update T30 Channel 5 and re-run T41 at nlive=2000 per the
+    pre-registered T78 protocol.
+  - A published ELASTIC spin-independent sigma_DM-nucleon exclusion more
+    constraining than LZ WS2024 in the 400-1000 GeV range -> Channel 5
+    limit refresh (mapping unchanged).
+  - Robustness note: even a 100x LZ sensitivity improvement leaves the
+    project's predicted cross-section ~68 dex inside the allowed region
+    under the current posterior. Under this model, the significance row
+    is the live trigger; the limit row is structurally inert because
+    epsilon ~ 10^-37.
+  - If the event is ultimately shown to be a fluctuation: remove the T77
+    entry from section 0 (no other change).
+
+=====================================================================
+7. TRIGGER MATRIX (status after this round)
+=====================================================================
+  arXiv paper with precise sigma limit  -> FIRED (re-eval done; no
+      limit exists; no update)                                [CLOSED]
+  >= 3 sigma global                     -> not met (2.6 sigma)        [OPEN]
+  >= 5 sigma (discovery)                -> not met                    [OPEN]
+  XENONnT/PandaX confirming event       -> none reported              [OPEN]
+  statistical fluctuation               -> not established             [OPEN]
+
+Decision record: v0.3-prelim/data/results/2026-11-01_lz_reevaluation_decision.json
