@@ -9,12 +9,12 @@
   "marker_budget_note": "Clean. The literal-** class is fully fixed in this document; the budget is 0 and must stay 0."
  },
  {
-  "md": "/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/docs/dual_review_5loop/SIDM_ROUND5_CONSOLIDATED_FIXES_v1.14_2026-10-30.md",
-  "pdf": "/mnt/c/Users/lamkuenai/round5_deliver/SIDM_ROUND5_CONSOLIDATED_FIXES_v1.14_2026-10-30.pdf",
-  "title": "Consolidated Fixes Report - v1.14",
-  "subtitle": "SIDM v19.2-F  |  Round 5 + n18 + n19 + n20 + n21 + n22 + n23 review response",
-  "footer": "SIDM v19.2-F - Round 5 + n18 + n19 + n20 + n21 + n22 + n23 review response",
-  "marker_budget": 62,
-  "marker_budget_note": "Measured 62 on the v1.14 PDF built 2026-10-30 (50 lines). CG-15 closed (§24): same-source rebuilds are deterministic, so a count change vs this budget can now only mean a source edit or a real regression; re-measure and reset after every deliberate content edit. Movement across versions is reflow, not variance."
+  "md": "/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/docs/dual_review_5loop/SIDM_ROUND5_CONSOLIDATED_FIXES_v1.15_2026-10-31.md",
+  "pdf": "/mnt/c/Users/lamkuenai/round5_deliver/SIDM_ROUND5_CONSOLIDATED_FIXES_v1.15_2026-10-31.pdf",
+  "title": "Consolidated Fixes Report - v1.15",
+  "subtitle": "SIDM v19.2-F  |  Round 5 + n18 + n19 + n20 + n21 + n22 + n23 + n24 review response",
+  "footer": "SIDM v19.2-F - Round 5 + n18 + n19 + n20 + n21 + n22 + n23 + n24 review response",
+  "marker_budget": 70,
+  "marker_budget_note": "Measured 2026-11-01 on this build's extracted PDF text: 70 literal '**' (deferred markup class, §16.6). 62→70 movement = source-edit reflow (§25.6/§25.10); reset-per-build rule honored (placeholder 0 was replaced by the measured value after this build). The v1.14 pair (budget 62) stands frozen as the n23-round record in git history."
  }
 ]

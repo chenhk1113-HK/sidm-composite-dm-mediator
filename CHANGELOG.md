@@ -1,3 +1,16 @@
+## [v19.2-F-N24-ReportAudit-2026-10-31]
+
+**n24 external audit of report v1.14: all eight action items executed. Consolidated report v1.15; gate grows to 15 layers.**
+
+- **Gate layer 15 (CG-17, new)**: `audit_register_state.py` machine-checks the report's own register-table rows vs the live open-set line vs per-gap status sentences, with a live/frozen split so superseded round records are exempt by design. Mutation proof (4 runs): CONTROL green; missing open-set gap, flipped table row, injected stale sentence each exit 1. Commit `c507207`.
+- **Gate summary contract (CG-5 + CG-10 closed together)**: every gate summary names the layers it asserts, discloses skipped layers and pytest-internal skips, prints the fixed SCOPE sentence; `--quick` records pytest as SKIP and can never print PASS. Crash semantics proven end-to-end by `verify_gate_crash_mutation_proof.py` (killed layer -> gate red, poisoned layer excluded from 'Checked:'), unit-tested by `test_gate_summary_contract.py`. §22.3's code-reading dismissal upgraded to mutation evidence.
+- **Layer 14 drift trap closed**: builder and glyph-coverage audit now import one shared module `pdf_rencode_maps.py` instead of hand-copied substitution tables.
+- **CG-8 closed by class sweep**: the two quoted typos no longer exist (exact-grep 0); the whitespace-before-period sweep found 8 live instances (paper L79, 783, 895, 980, 1175, 1753, 1755, 1761), all fixed whitespace-only; the L783 mid-sentence truncation recorded, not rewritten. Commit `4aa0039`.
+- **CG-2 scope sentence** written into the register row (exact-string matching; approximate rewrites remain human-review surface). **Number family reconciled** (§25.6, six objects one table). **Supersedes chain relocated verbatim to Appendix A**; namespace caliber pinned ('5 finding namespaces + 1 fix-ID space = 6 label spaces').
+- **PDF-render audit containment model fixed (`baa21a3`, found by this round's own layer 11 on the v1.15 build)**: the audit now models BOTH exponent rendering worlds — the builder's build-time ASCII fold (`10⁻¹²` drawn `10-12`, `f_H²σ` drawn `f_H2σ`; fused-token variant) and raised-baseline splitting (fragment variant) — scored per variant (variant-max), with symmetric tail normalization on every emitted token. Before/after on the git-declared byte-frozen v1.14 pair: 8 containment defects -> 0 (PDFs were always correct; the checker was not). 6-test unit suite `test_pdf_render_relax.py` incl. true-absence negative control. Report §25.10.
+- **Report v1.15** built; marker budget re-measured per-build (62 -> 70, source-edit reflow documented §25.6). Close-out deliverable `SIDM_N24_CLOSEOUT_REPORT_WITH_CODE_v1.0_2026-11-01.pdf` (adjudication summary + verification outputs + verbatim code).
+- **Gate**: 15/15 PASS on the round tree (pytest 1914 passed / 22 skipped disclosed / 36 deselected; wall 28m44s; no `--quick`). Evidence: `docs/dual_review_5loop/evidence_n24/`.
+
 ## [v19.2-F-N23-ReportAudit-2026-10-30]
 
 **n23 external audit of report v1.13 itself: all four stale-state findings valid; CG-15 CLOSED as a misdiagnosis after the determinism experiment the review proposed. Consolidated report v1.14.**

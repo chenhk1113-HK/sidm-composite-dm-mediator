@@ -109,16 +109,7 @@ def register_fonts():
 # impossible by construction.
 import sys as _sys  # (already imported above; import of the maps module)
 _sys.path.insert(0, str(Path(__file__).resolve().parent))
-from pdf_rencode_maps import SUP, SUB, MONO_FALLBACK
-
-
-def ascii_fold(t):
-    """Fold Unicode super/subscripts to ASCII so they render everywhere."""
-    for k, v in SUP.items():
-        t = t.replace(k, v)
-    for k, v in SUB.items():
-        t = t.replace(k, v)
-    return t
+from pdf_rencode_maps import SUP, SUB, MONO_FALLBACK, ascii_fold, fold_mono, wrap_code_lines, CODE_WRAP
 
 
 def esc(t):
@@ -170,41 +161,9 @@ def inline(t):
 
 
 # -------------------------------------------------------------- code wrapping
-
-# Preformatted does not wrap: a long line is drawn past the frame edge and
-# CLIPPED, so its tail silently disappears from the page. Hard-wrap instead,
-# preferring a space break so every source character survives.
-CODE_WRAP = 108
-
-# MONO_FALLBACK imported from scripts/pdf_rencode_maps.py (single source of
-# truth; rationale lives there).
-
-
-def fold_mono(t):
-    for k, v in MONO_FALLBACK.items():
-        t = t.replace(k, v)
-    return t
-
-
-def wrap_code_lines(text, width=CODE_WRAP):
-    out = []
-    for line in text.split('\n'):
-        if len(line) <= width:
-            out.append(line)
-            continue
-        indent = len(line) - len(line.lstrip())
-        cont = ' ' * min(indent + 2, 12)
-        rest = line
-        first = True
-        while len(rest) > width:
-            cut = rest.rfind(' ', 0, width)
-            if cut <= 0:
-                cut = width
-            out.append(rest[:cut].rstrip())
-            rest = cont + rest[cut:].lstrip()
-            first = False
-        out.append(rest)
-    return '\n'.join(out)
+# CODE_WRAP, fold_mono and wrap_code_lines are imported from
+# scripts/pdf_rencode_maps.py (single source of truth shared with
+# audit_pdf_render.py; rationale lives there).
 
 
 # ---------------------------------------------------------------- styles

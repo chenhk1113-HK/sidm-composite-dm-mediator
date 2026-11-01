@@ -1,0 +1,12 @@
+test_split_variant_unchanged PASS      [  9%]
+test_quote_edge_is_stripped_on_both_sides PASS [ 18%]
+test_fused_variant_emits_builder_fold PASS [ 27%]
+test_fused_variant_superscript_letters PASS [ 36%]
+test_coverage_matches_builder_folded_pdf_only_via_fused PASS [ 45%]
+test_true_absence_still_caught PASS    [ 54%]
+test_wrapped_comment_fragments_start_with_hash_or_cont PASS [ 63%]
+test_wrap_preserves_every_word PASS    [ 72%]
+test_builder_uses_the_shared_functions_not_local_copies PASS [ 81%]
+test_audit_whitelist_includes_wrapped_fragments PASS [ 90%]
+test_wrap_terminates_on_spaceless_long_line PASS [100%]
+============================== 11 passed in 2.93s ==============================

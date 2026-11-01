@@ -1,0 +1,11 @@
+[
+ {
+  "md": "/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/docs/dual_review_5loop/SIDM_N24_CLOSEOUT_REPORT_WITH_CODE_v1.0_2026-11-01.md",
+  "pdf": "/mnt/c/Users/lamkuenai/round5_deliver/SIDM_N24_CLOSEOUT_REPORT_WITH_CODE_v1.0_2026-11-01.pdf",
+  "title": "n24 Round Close-Out - Report With Code",
+  "subtitle": "SIDM v19.2-F  |  n24 close-out: adjudication summary, verification outputs, code",
+  "footer": "SIDM v19.2-F - n24 close-out report with code v1.0",
+  "marker_budget": 1,
+  "marker_budget_note": "Measured 1 literal '**' on this build's extracted text (report body quotes code containing literal '**' inside fenced blocks — that is the code listing, not markup leakage; budget set to the measured value per the reset-per-build rule)."
+ }
+]

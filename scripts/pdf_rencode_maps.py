@@ -37,3 +37,66 @@ MONO_FALLBACK = {
     '\u226a': '<<',   # much less than
     '\u226b': '>>',   # much greater than
 }
+
+
+# ------------------------------------------------------------ mono pipeline
+# The exact transform a code fence undergoes on its way to the page:
+#   ascii_fold  (Unicode super/subscripts -> ASCII caret form)
+#   fold_mono   (glyphs missing from DejaVu Sans Mono -> ASCII)
+#   wrap_code_lines (Preformatted does not wrap; hard-wrap at CODE_WRAP so
+#                    no line is drawn past the frame and clipped)
+# Moved here from build_round5_report_pdfs.py (n24 round): audit_pdf_render.py
+# must predict the builder's WRAPPED line fragments exactly — a source comment
+# longer than CODE_WRAP renders as several PDF lines, and a leak whitelist
+# that only knows whole source lines flags every such fragment as a 'heading
+# marker leak' (observed on the n24 closeout build). Single source of truth:
+# builder and audit import the same functions.
+
+CODE_WRAP = 108
+
+
+def ascii_fold(t):
+    """Fold Unicode super/subscripts to ASCII so they render everywhere."""
+    for k, v in SUP.items():
+        t = t.replace(k, v)
+    for k, v in SUB.items():
+        t = t.replace(k, v)
+    return t
+
+
+def fold_mono(t):
+    for k, v in MONO_FALLBACK.items():
+        t = t.replace(k, v)
+    return t
+
+
+def wrap_code_lines(text, width=CODE_WRAP):
+    out = []
+    for line in text.split('\n'):
+        if len(line) <= width:
+            out.append(line)
+            continue
+        indent = len(line) - len(line.lstrip())
+        cont = ' ' * min(indent + 2, 12)
+        rest = line
+        while len(rest) > width:
+            # Search for a break point STRICTLY past the continuation indent:
+            # rfind over [0, width) can land on a continuation line's own
+            # indent spaces (or a line's leading space), producing an empty
+            # fragment and a rest of unchanged length — an infinite loop that
+            # hung the builder on any long line without a usable space
+            # (found by the n24 closeout's own unit probe, 2026-11-01).
+            cut = rest.rfind(' ', len(cont) + 1, width)
+            if cut < 0:
+                cut = width  # force a hard break; length strictly decreases
+            out.append(rest[:cut].rstrip())
+            rest = cont + rest[cut:].lstrip()
+        out.append(rest)
+    return '\n'.join(out)
+
+
+def render_code_block(text):
+    """The exact lines a fenced code block produces in the built PDF:
+    fold_mono(wrap_code_lines(ascii_fold(text))) split into lines.
+    The builder renders this; the render audit whitelists it."""
+    return fold_mono(wrap_code_lines(ascii_fold(text))).split('\n')

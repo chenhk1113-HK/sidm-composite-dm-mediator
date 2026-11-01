@@ -91,6 +91,11 @@ import subprocess
 import sys
 from pathlib import Path
 
+# Shared with the builder (n24 rule: one source of truth for the code-fence
+# transform; a hand-copied prediction is how the layer-14 drift happened).
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from pdf_rencode_maps import render_code_block
+
 REPO = Path(__file__).resolve().parent.parent
 JOBS_DEFAULT = REPO / "docs" / "papers" / "pdf_jobs.json"
 
@@ -503,6 +508,30 @@ def check_pair(md: Path, pdf: Path, job: dict, pdftotext: str,
         # with a double space, then re-normalised to single spaces by _norm
         code_probes.add(re.sub(r"\s{2,}", " ", n))
         code_probes.add(re.sub(r"^#+\s*", "", re.sub(r"\s{2,}", " ", n)))
+        # wrapped fragments: a source line longer than CODE_WRAP is hard-
+        # wrapped by the builder into several PDF lines (Preformatted does
+        # not wrap; long lines would be clipped). Every fragment the builder
+        # actually produces is correct output — flagging a comment fragment
+        # that starts with '#' as a heading leak was observed on the n24
+        # closeout build. render_code_block is imported from the SAME module
+        # the builder uses, so builder and audit cannot drift (n24 rule).
+        try:
+            for frag in render_code_block(cl):
+                f = _norm(frag)
+                code_probes.add(f)
+                code_probes.add(re.sub(r"^#+\s*", "", f))
+                # ASCII-only variant: pdftotext's ToUnicode table for the
+                # mono subset can DROP non-ASCII glyphs entirely (σ drawn in
+                # DejaVu Sans Mono came out as nothing: 'f_H2σ' extracted as
+                # 'f_H2'), unlike the '?'-sentinel treatment for U+FFFD.
+                # Comparing the ASCII spine of fragment and line absorbs the
+                # extractor's glyph loss without loosening what counts as a
+                # leak for pure-ASCII documents.
+                fa = "".join(c for c in f if ord(c) < 128)
+                code_probes.add(fa)
+                code_probes.add(re.sub(r"^#+\s*", "", fa))
+        except Exception:
+            pass  # whitelisting degrades to the strict variants; leaks stay loud
 
     # Table rows: the same whitelist, because a markdown table whose first
     # column is a literal '#' (a finding-number column: '| # | Reviewer
@@ -734,7 +763,10 @@ def check_pair(md: Path, pdf: Path, job: dict, pdftotext: str,
         s = line.strip()
         if re.match(r"^#{1,6}\s+\S", s):
             n = _norm(s)
-            if n in code_probes or re.sub(r"^#+\s*", "", n) in code_probes:
+            n_ascii = "".join(c for c in n if ord(c) < 128)  # extractor glyph loss
+            if (n in code_probes or re.sub(r"^#+\s*", "", n) in code_probes
+                    or n_ascii in code_probes
+                    or re.sub(r"^#+\s*", "", n_ascii) in code_probes):
                 continue  # a code comment rendered verbatim
             if n in table_probes:
                 continue  # a markdown table's own '#' column
