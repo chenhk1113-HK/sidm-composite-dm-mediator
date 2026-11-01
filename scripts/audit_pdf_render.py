@@ -354,6 +354,90 @@ def _source_lines(md_text: str):
 # ---------------------------------------------------------------------------
 # checks
 # ---------------------------------------------------------------------------
+FMT_TOKEN = re.compile(r"^[*'`]+$")
+EDGE_STRIP = re.compile(r"^[^0-9A-Za-z\u0391-\u03c9-]+|[^0-9A-Za-z\u0391-\u03c9-]+$")
+def relax_tokens(toks, fuse=False):
+    """Relaxed-pass token normaliser, applied IDENTICALLY to both sides.
+
+    Side facts established by direct extraction (2026-10-28, live PDFs):
+      * pdftotext DROPS some rendered glyphs entirely (U+2032 prime, the
+        σ before '_'): they leave NO token — e.g. source 'U(1)?\".' vs PDF
+        'U(1)\".'; source '?_eff/m' (σ_eff/m) vs PDF 'eff/m' after the
+        empty token is dropped.
+      * other glyphs extract as '?': en-dash inside a word
+        ('Girmohanta–Yasuoka' -> 'Girmohanta?Yasuoka'), →, §.
+    Because canonical() maps EVERY non-ASCII to '?' on both sides, the
+    relaxed pipeline is side-agnostic by construction:
+      1. drop pure-punctuation (* `) tokens;
+      2. map interior '?' -> '-' (both sides; a source-internal '?' is
+         itself a sentinel, and σ/² sentinels sit at token EDGES —
+         'σ_eff' tokenises as '?_eff' — so this never erases them, it
+         only aligns en-dash ligatures like 'Girmohanta?Yasuoka' with the
+         source's ASCII-hyphen 'Girmohanta-Yasuoka');
+      3. strip every edge character outside [alnum, hyphen, ?-sentinel-
+         interiors already handled] — this removes the '?' a dropped prime
+         leaves on the source edge ('U(1)?' -> 'U(1)') and quote runs on
+         either side;
+      4. lowercase both sides (case is formatting, not content);
+      5. drop tokens that end up empty, restoring word adjacency.
+    Strict pass is untouched. A relaxed-only match is a NOTE, not a defect.
+    """
+    out = []
+    def tail(s):
+        # Shared tail normalization, applied to EVERY emitted variant so the
+        # caret branch and the caret-free path are symmetric (n24 round fix:
+        # the caret branch used to `continue` with raw fragments, skipping
+        # '?'->'-', edge-strip and lower — the source's fused token kept a
+        # quote edge the PDF side had already stripped, so a present token
+        # ('"7.5x10-12' vs '7.5x10-12') read as absent).
+        s = s.replace("?", "-")
+        if set(s) == {"-"}:
+            return ""
+        s = EDGE_STRIP.sub("", s)
+        s = s.lstrip("-")
+        return s.lower()
+    for t in toks:
+        if FMT_TOKEN.match(t):
+            continue
+        # Caret handling, applied IDENTICALLY on both sides:
+        #  (a) collapse caret runs (markdown '10^-12' expanded from '10⁻¹²'
+        #      can leave '^^' when the source already used the rule-27
+        #      ASCII form);
+        #  (b) split exponent fragments so '10^-12' becomes 10 | -12 —
+        #      the PDF draws superscripts at raised baseline and every
+        #      extractor we measured (pdftotext AND pdfplumber) drops the
+        #      '^' glyph itself: '10^-12' in the report renders as
+        #      '10-12' tokens. Splitting on the caret restores adjacency.
+        t = re.sub(r"\^{1,}", "^", t)
+        if "^" in t:
+            if fuse:
+                # Builder-fold variant (n24 round, 2026-11-01): the report
+                # builder maps super/subscripts to ASCII at BUILD time
+                # (pdf_rencode_maps.SUP/SUB — '10⁻¹²' is drawn as '10-12'
+                # and 'f_H²σ' as 'f_H2σ'), so these PDFs carry the
+                # exponent as ONE fused token. fuse=True emits the fused
+                # form ('^' deleted, neighbours rejoined); fuse=False
+                # keeps the split fragments for raised-baseline glyph
+                # rendering. Both forms derive from the source token
+                # itself; the caller scores each variant independently
+                # (never merged — merging dilutes coverage with stray
+                # fragments of the other world).
+                fused = tail(t.replace("^", ""))
+                if fused:
+                    out.append(fused)
+            else:
+                for frag in t.split("^"):
+                    if not frag:
+                        continue
+                    f = tail(frag)
+                    if f:
+                        out.append(f)
+            continue
+        t = tail(t)
+        if t:
+            out.append(t)
+    return out
+
 def check_pair(md: Path, pdf: Path, job: dict, pdftotext: str,
                full_flags: bool = False) -> tuple[list, list]:
     """Return (defects, notes) for one source/PDF pair."""
@@ -379,70 +463,6 @@ def check_pair(md: Path, pdf: Path, job: dict, pdftotext: str,
     tri = {(hay_tokens[i], hay_tokens[i + 1], hay_tokens[i + 2])
            for i in range(len(hay_tokens) - 2)}
 
-    FMT_TOKEN = re.compile(r"^[*'`]+$")
-    EDGE_STRIP = re.compile(r"^[^0-9A-Za-z\u0391-\u03c9-]+|[^0-9A-Za-z\u0391-\u03c9-]+$")
-    def relax_tokens(toks):
-        """Relaxed-pass token normaliser, applied IDENTICALLY to both sides.
-
-        Side facts established by direct extraction (2026-10-28, live PDFs):
-          * pdftotext DROPS some rendered glyphs entirely (U+2032 prime, the
-            σ before '_'): they leave NO token — e.g. source 'U(1)?\".' vs PDF
-            'U(1)\".'; source '?_eff/m' (σ_eff/m) vs PDF 'eff/m' after the
-            empty token is dropped.
-          * other glyphs extract as '?': en-dash inside a word
-            ('Girmohanta–Yasuoka' -> 'Girmohanta?Yasuoka'), →, §.
-        Because canonical() maps EVERY non-ASCII to '?' on both sides, the
-        relaxed pipeline is side-agnostic by construction:
-          1. drop pure-punctuation (* `) tokens;
-          2. map interior '?' -> '-' (both sides; a source-internal '?' is
-             itself a sentinel, and σ/² sentinels sit at token EDGES —
-             'σ_eff' tokenises as '?_eff' — so this never erases them, it
-             only aligns en-dash ligatures like 'Girmohanta?Yasuoka' with the
-             source's ASCII-hyphen 'Girmohanta-Yasuoka');
-          3. strip every edge character outside [alnum, hyphen, ?-sentinel-
-             interiors already handled] — this removes the '?' a dropped prime
-             leaves on the source edge ('U(1)?' -> 'U(1)') and quote runs on
-             either side;
-          4. lowercase both sides (case is formatting, not content);
-          5. drop tokens that end up empty, restoring word adjacency.
-        Strict pass is untouched. A relaxed-only match is a NOTE, not a defect.
-        """
-        out = []
-        for t in toks:
-            if FMT_TOKEN.match(t):
-                continue
-            # Caret handling, applied IDENTICALLY on both sides:
-            #  (a) collapse caret runs (markdown '10^-12' expanded from '10⁻¹²'
-            #      can leave '^^' when the source already used the rule-27
-            #      ASCII form);
-            #  (b) split exponent fragments so '10^-12' becomes 10 | -12 —
-            #      the PDF draws superscripts at raised baseline and every
-            #      extractor we measured (pdftotext AND pdfplumber) drops the
-            #      '^' glyph itself: '10^-12' in the report renders as
-            #      '10-12' tokens. Splitting on the caret restores adjacency.
-            t = re.sub(r"\^{1,}", "^", t)
-            if "^" in t:
-                for frag in t.split("^"):
-                    if frag:
-                        out.append(frag)
-                continue
-            t = t.replace("?", "-")
-            # A token that IS only the sentinel was a standalone → / § on
-            # EITHER side (both map to '-' here) — formatting, never content.
-            if set(t) == {"-"}:
-                continue
-            t = EDGE_STRIP.sub("", t)
-            # strip a LEADING hyphen on both sides: pdftotext drops σ entirely
-            # before '_' (source 'σ_eff' -> '?_eff' -> '-_eff', PDF '_eff'), so
-            # the leading hyphen is a glyph-drop artifact, not content. A real
-            # negative sign lives INSIDE numeric tokens ('-0.4723' keeps its
-            # digits; leading-hyphen stripping only aligns '-x' with 'x',
-            # which canonical() already conflates for en-dash ligatures).
-            t = t.lstrip("-")
-            t = t.lower()
-            if t:
-                out.append(t)
-        return out
     hay_tokens_r = relax_tokens(hay_tokens)
     hay_flat_r = " ".join(hay_tokens_r)
     tri_r = {(hay_tokens_r[i], hay_tokens_r[i + 1], hay_tokens_r[i + 2])
@@ -524,10 +544,14 @@ def check_pair(md: Path, pdf: Path, job: dict, pdftotext: str,
         if len(words) < MIN_WORDS:
             continue
         cov, miss = _coverage(words, tri)
-        # relaxed probe: same relax_tokens pipeline as the PDF side
+        # relaxed probe: same relax_tokens pipeline as the PDF side, scored
+        # per variant. Split fragments model raised-baseline superscripts;
+        # the fused variant models the builder's ASCII fold (see relax_tokens).
         words_r = relax_tokens(plain.split())
         cov_r, _ = _coverage(words_r, tri_r)
-        if cov_r >= PROSE_COVERAGE:
+        words_r_f = relax_tokens(plain.split(), fuse=True)
+        cov_r_f, _ = _coverage(words_r_f, tri_r)
+        if max(cov_r, cov_r_f) >= PROSE_COVERAGE:
             artifact_prose.append((line, cov))
             continue
         # third pass: word-set presence (bridges hyphenated line splits).
@@ -550,9 +574,22 @@ def check_pair(md: Path, pdf: Path, job: dict, pdftotext: str,
         # caret's neighbour within the same token is not.
         anchors = []
         for raw in plain.split():
-            for seg in re.split(r"(?<=[0-9a-z])\^(?=[-+]?[0-9a-z])", raw):
-                seg_r = relax_tokens([seg])
-                anchors.extend(seg_r)
+            if "^" in raw:
+                # Builder-folded world: when the FUSED spelling of a caret
+                # token is present in the PDF ('f_h2?_hh', '7.5x10-12'), its
+                # split fragments are layout artifacts of the caret form,
+                # not absent words — require the fused token instead. When it
+                # is absent, fall back to the fragments (raised-baseline
+                # rendering drops '^' and splits the token on the PDF side).
+                fused_r = relax_tokens([raw], fuse=True)
+                if fused_r and distinctive_key(fused_r[0]) in hay_token_set_norm_r:
+                    anchors.extend(fused_r)
+                else:
+                    for seg in re.split(r"(?<=[0-9a-z])\^(?=[-+]?[0-9a-z])", raw):
+                        seg_r = relax_tokens([seg])
+                        anchors.extend(seg_r)
+            else:
+                anchors.extend(relax_tokens([raw]))
         distinctive = {distinctive_key(t) for t in anchors
                        if len(distinctive_key(t)) >= 5}
         if distinctive:
