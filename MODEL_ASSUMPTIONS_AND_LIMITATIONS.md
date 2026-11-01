@@ -149,6 +149,28 @@ set a precedent for "local-only" updates; that would be a slippery
 slope. The KIV cron `080d2f590251` re-checks for any PRL
 revision on 2026-11-01.
 
+**2026-11-01 KIV re-evaluation (trigger fired → decision: NO UPDATE):**
+the KIV check ran manually 2026-11-01 (`scripts/lz_kiv_check.py` ->
+`v0.3-prelim/data/results/2026-11-01_lz_kiv_check.json`; decision record
+`v0.3-prelim/data/results/2026-11-01_lz_reevaluation_decision.json`;
+full audit in `v0.3-prelim/docs/archive/other/T77_LZ_2026_09_UPDATE.md`
+§"2026-11-01 KIV re-evaluation"). The primary arXiv hit
+**arXiv:2609.08893v1** (Yuan+ 2026) is an ALP-mediated **inelastic**
+interpretation of LZ230616 — it reports the coupling product *required*
+to produce the event (best spectral point m_chi ~ 350 GeV, delta ~ 330
+keV, |g_G| ~ 0.21 GeV^-2) and publishes **no sigma_DM-nucleon limit**
+(PDF-text scan: zero hits for "cm-2" / "exclusion" / "upper limit" /
+"90% CL"; the paper states its statistic "neither reproduces the official
+LZ likelihood nor defines statistically calibrated confidence regions").
+Significance is unchanged at **2.6 sigma global / 3.4 sigma local**
+(re-read verbatim from arXiv:2609.02823). Comparison against T30's real
+LZ WS2024 curve (log-log interpolation): predicted sigma_DM-nucleon at
+the standing posterior is 3e-116 cm^2 (v0.8 MAP, m_chi = 478 GeV) vs
+1.5e-47 cm^2 limit -> **-68.7 dex**; v0.7 MAP 2.5e-117 vs 2.3e-47 ->
+**-70.0 dex**. **No update to T30 Channel 5; no T41 re-run.** The most
+constraining sigma_DM-nucleon bound available to the project remains the
+LZ 2024 WS curve already ingested by T30.
+
 **Refined framing (T78, 2026-09-02):** the original T77 §0 used the
 language "completely orthogonal" — which is **physically overstated**.
 The correct framing is: **σ_DM-DM and σ_DM-nucleon are theoretically

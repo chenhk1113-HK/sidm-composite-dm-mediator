@@ -1,3 +1,13 @@
+## [LZ-2026-11-KIV-Reevaluation-2026-11-01]
+
+**T77 KIV trigger fired; re-evaluation executed; decision: NO UPDATE to the posterior.**
+
+- The deleted KIV cron `080d2f590251`'s action was run manually: `scripts/lz_kiv_check.py` verdict **FOUND**, 4 arXiv hits (`v0.3-prelim/data/results/2026-11-01_lz_kiv_check.json`).
+- Primary hit **arXiv:2609.08893v1** (Yuan+, Zhang+, Cao+, Feng+, Yang 2026) downloaded and read end-to-end (`docs/papers/verified/2609.08893_alp_lz230616_2026.pdf` + `.md` KB entry). It is an **ALP-mediated inelastic two-state Majorana interpretation** of LZ230616 with an approximate single-event likelihood; it publishes **no sigma_DM-nucleon limit** (PDF-text scan: 0 hits for "cm-2" / "exclusion" / "upper limit" / "90% CL" / "95% CL"; the paper states its statistic "neither reproduces the official LZ likelihood nor defines statistically calibrated confidence regions"). Table I read verbatim: best spectral point (m_chi, delta) = (0.35 TeV, 330 keV) requiring |g_G| ~ 0.21 GeV^-2; q_LZ<=1 at 1.25 TeV -> 2.30e-4; q_LZ<=2 at 1.04 TeV -> 4.30e-5; elastic axion 5 TeV -> 1.42e-5 GeV^-2.
+- Significance re-read verbatim from the LZ paper PDF (arXiv:2609.02823): **2.6 sigma global / 3.4 sigma max local** — below the project's 3 sigma trigger. Companion hits (2610.32747v1 neutrino up-scattering limits, 2609.05291v1 inelastic-xenon channel, 2609.04185v2 atmospheric-neutrino up-scattering) triaged: none delivers a sigma_DM-nucleon bound more constraining than T30's real LZ WS2024 curve.
+- Channel 5 comparison recomputed in Python (formula re-implemented from `t39.sigma_SI_from_dark_photon`; limit interpolated from `t30_lz_real_posterior.LZ_REAL`): v0.7 MAP 2.54e-117 vs 2.337e-47 cm^2 (**-70.0 dex**); v0.8 MAP 2.97e-116 vs 1.455e-47 (**-68.7 dex**); medians -69.3 / -69.6 dex. Recomputation agrees with the stored T78 value (2.47e-117 vs 2.54e-117; 3% from hbar*c rounding 1.97e-14 vs 1.9733e-14 GeV cm).
+- **T30 Channel 5 mapping unchanged; T41 NOT re-run; `LZ_2024_LIMITS` unchanged; no successor cron scheduled.** Decision record: `v0.3-prelim/data/results/2026-11-01_lz_reevaluation_decision.json`. Docs updated: T77 archive doc (new §"2026-11-01 KIV re-evaluation" + KIV status), `MODEL_ASSUMPTIONS_AND_LIMITATIONS.md` §0, `EXTRACT.md` LZ callout, `docs/LAYMAN_SUMMARY_T77_LZ_2026_09.md` (new §"What actually happened", caveat 1 superseded, provenance).
+
 ## [v19.2-F-N24-ReportAudit-2026-10-31]
 
 **n24 external audit of report v1.14: all eight action items executed. Consolidated report v1.15; gate grows to 15 layers.**

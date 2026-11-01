@@ -130,11 +130,41 @@ scenarios unchanged.** That's the power of the orthogonal-physics
 posture: the SIDM/DAMPE/LSS channels that determine σ/m are
 independent of any direct-detection event.
 
+## What actually happened (2026-11-01 re-check, trigger fired → no update)
+
+The first row of the table above fired. The scheduled re-check found the
+papers on arXiv and they were read end-to-end. Result: **no change to
+the project.**
+
+- The headline hit is **arXiv:2609.08893v1** (Yuan+), an *interpretation*
+  of the LZ event: two dark-matter states that scatter inelastically
+  through an axion-like particle. It reports the coupling strength
+  **required** to produce the event (e.g. m_chi ≈ 350 GeV, mass splitting
+  ≈ 330 keV) — it publishes **no σ_DM-nucleon limit at all**. A word
+  scan of the PDF finds zero occurrences of "cm-2", "exclusion",
+  "upper limit" or "90% CL".
+- The LZ paper itself (arXiv:2609.02823) still reports **2.6σ global**
+  significance (3.4σ local at best). That is below the project's 3σ
+  threshold, so the "update T30 / re-run T41" row did **not** fire.
+- The three companion papers interpret the event through neutrino
+  up-scattering or xenon excitation; none offers a σ_DM-nucleon limit
+  tighter than the LZ 2024 world-leading curve Channel 5 already uses.
+- Cross-check: the project's predicted σ_DM-nucleon is
+  **~10^-117 cm²**, roughly **70 orders of magnitude** below the LZ 2024
+  limit at the project's mass (~2.3 × 10^-47 cm²). Nothing in the new
+  papers moves that gap.
+
+Plainly: the paper trigger fired, its update condition did not. A trigger
+firing is a reason to *look*, not a reason to *change*. Full audit:
+`v0.3-prelim/docs/archive/other/T77_LZ_2026_09_UPDATE.md` §"2026-11-01
+KIV re-evaluation".
+
 ## What could go wrong (honest caveats)
 
-1. **The LZ paper is not yet on arXiv.** The 2.6σ number comes from
-   press releases, not the paper itself. The paper may report
-   slightly different numbers when it appears.
+1. **Superseded 2026-11-01:** the LZ paper is now on arXiv
+   (arXiv:2609.02823) and confirms the press-release numbers verbatim
+   (2.6σ global / 3.4σ local). At the time of writing (2026-09-02) the
+   2.6σ came from press releases only.
 2. **"WIMP mass ≥ 200 GeV" is a lower bound, not a value.** The
    implied mass could be much higher (200, 500, 1000 GeV).
 3. **The uploaded `more info.docx` claims SIDM provides an
@@ -191,3 +221,6 @@ headline result is unchanged. That's by design.
 > Sheffield press releases. Decision: NO project update at 2.6σ
 > (below 3σ threshold). Standing posture reaffirmed. Implementation:
 > defensive doc-prominence fix in MODEL_ASSUMPTIONS §0 + EXTRACT.md.
+> **2026-11-01 re-check:** arXiv papers found (2609.08893v1 primary);
+> read end-to-end; no σ_DM-nucleon limit published; significance still
+> 2.6σ global. Decision: NO update to T30 Channel 5, NO T41 re-run.

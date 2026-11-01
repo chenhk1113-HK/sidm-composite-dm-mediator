@@ -245,6 +245,111 @@ change σ/m because the project's predicted σ_DM-nuc is suppressed by
 "re-run T41" is a defensive integrity check, not a headline-result
 update.
 
+## 2026-11-01 KIV re-evaluation (trigger fired → decision: NO UPDATE)
+
+`scripts/lz_kiv_check.py` ran 2026-11-01 and returned verdict **FOUND**
+(`v0.3-prelim/data/results/2026-11-01_lz_kiv_check.json`): 4 arXiv hits.
+Decision record: `v0.3-prelim/data/results/2026-11-01_lz_reevaluation_decision.json`.
+
+**The primary hit is NOT an LZ measurement.** It is a third-party
+*interpretation* paper: **arXiv:2609.08893v1**, Yuan, Zhang, Cao, Feng &
+Yang, "ALP-mediated inelastic dark matter and the LUX-ZEPLIN high-recoil
+candidate event LZ230616" (hep-ph, 2026-09-08, 7 pages; local PDF
+`docs/papers/verified/2609.08893_alp_lz230616_2026.pdf`).
+
+**Paper content (read end-to-end from the local PDF, not the abstract):**
+two Majorana DM states split by δ, scattering endothermically off xenon
+via an axion-like particle coupled to gluons (operator O_6, full nucleon
+matching + pion/eta form factors, WimPyDD nuclear responses, SHM v0=238,
+vesc=544 km/s, rho=0.3 GeV/cm^3, exposure 2.84 t·y). Fit statistic is an
+**approximate single-event recoil-energy likelihood** whose own text states
+it "neither reproduces the official LZ likelihood nor defines
+statistically calibrated confidence regions".
+
+| Benchmark (m_a = 0.3 GeV) | m_chi [TeV] | delta [keV] | q_LZ | \|g_G\| [GeV^-2] |
+|---|---|---|---|---|
+| (a) best spectral shape | 0.35 | 330 | 0 | 0.21 |
+| (b) q_LZ <= 1 | 1.25 | 320 | 0.99 | 2.30e-4 |
+| (c) q_LZ <= 2 | 1.04 | 225 | 1.99 | 4.30e-5 |
+| (d) elastic axion (delta = 0) | 5.0 | 0 | 2.84 | 1.42e-5 |
+
+(Table I; values read from the PDF text.)
+
+**It contains NO sigma_DM-nucleon limit.** Mechanical scan of the PDF
+text: zero hits for "cm-2", "cm^2", "exclusion", "upper limit", "90% CL",
+"95% CL". What it reports is a *required* coupling product to produce one
+event under a signal hypothesis — the opposite kind of statement. Its
+significance numbers (3.4 local / 2.6 global) are quoted *from* the LZ
+paper (arXiv:2609.02823), not newly derived.
+
+**Companion hits:** 2610.32747v1 (Aristizabal Sierra+) — sets limits, but
+on *neutrino up-scattering* couplings, not sigma_DM-nucleon, and concludes
+up-scattering does not explain the event; 2609.05291v1 (Gu+) — inelastic-
+xenon companion channel, O(0.1) of elastic rate; 2609.04185v2 (Jeesun &
+Majumdar+) — atmospheric-neutrino up-scattering interpretation. None
+delivers a sigma_DM-nucleon limit more constraining than what T30 already
+ingests.
+
+**Trigger audit against the matrix above:**
+
+| Trigger row | Fires? | Basis |
+|---|---|---|
+| arXiv paper with precise sigma_DM-nucleon limit → re-evaluate Channel 5; update if >= 3 sigma | Re-evaluation DONE; **update condition NOT met** | No sigma_DM-nucleon limit exists in 2609.08893v1 |
+| Significance >= 3 sigma → update T30, re-run T41 at nlive=2000 | **NO** | Still 2.6 sigma global / 3.4 sigma max local (verified verbatim in arXiv:2609.02823 PDF text) |
+| >= 5 sigma (discovery) → v0.5-prelim | NO | as above |
+| Statistical fluctuation → remove T77 from §0 | NO | not yet established; LZ still taking data |
+
+**Channel 5 comparison (all numbers re-derived in Python):** T30 already
+ingests the *real* LZ WS2024 90% CL curve (HEPData 155182, arXiv:2410.17036;
+`LZ_REAL` in `v0.3-prelim/code/t30_lz_real_posterior.py`, log-log
+interpolation). At the project's mass scale the predicted
+sigma_DM-nucleon (dark-photon portal, `t39.sigma_SI_from_dark_photon`) vs
+the T30 limit:
+
+| Posterior point | m_chi [GeV] | predicted sigma_DM-nuc [cm^2] | T30 LZ limit at that mass [cm^2] | margin |
+|---|---|---|---|---|
+| v0.7 MAP (nlive=2000) | 769.7 | 2.54e-117 | 2.34e-47 | -70.0 dex |
+| v0.7 median | 497.5 | 7.49e-117 | 1.51e-47 | -69.3 dex |
+| v0.8 MAP (t88ce, nlive=2000) | 478.3 | 2.97e-116 | 1.46e-47 | -68.7 dex |
+| v0.8 median | 502.9 | 3.77e-117 | 1.53e-47 | -69.6 dex |
+
+(The strongest point of the whole LZ table is 2.18e-48 cm^2 at 40 GeV;
+margin there would still be -68.9 dex. The older §0 "1.5e-46 at 770 GeV"
+figure came from the superseded placeholder table; the real-curve value is
+2.34e-47 cm^2.)
+
+**Decision: NO UPDATE to T30 Channel 5; NO T41 re-run.** Channel 5's
+observable is elastic spin-independent sigma_DM-nucleon through the
+dark-photon portal. The new literature constrains different observables
+(NREFT couplings, inelastic cross-sections, ALP coupling products). The
+most constraining sigma_DM-nucleon bound available to the project remains
+the LZ 2024 WS curve T30 already uses. An ALP inelastic *interpretation*
+with required couplings |g_G| ~ 1e-5 - 0.21 GeV^-2 bites models predicted
+near LZ sensitivity; the project's ~1e-117 cm^2 prediction is ~70 dex away.
+The T77 §0 entry stays in place (the fluctuation row has not fired either).
+
+**Verification performed:**
+- PDF downloaded and converted locally; Table I and every quoted paper
+  number read from the PDF text layer.
+- Keyword scan of the ALP PDF for exclusion-limit language: 0 hits.
+- 2.6 sigma global / 3.4 sigma local re-read verbatim from the LZ paper PDF.
+- sigma_SI formula re-implemented independently from `t39` source and
+  evaluated at both v0.7 and v0.8 posterior points; agrees with the stored
+  T78 value (2.47e-117 vs 2.54e-117 at v0.7 MAP; the 3% difference is the
+  scripts' hbar*c rounding, 1.97e-14 vs 1.9733e-14 GeV cm).
+- LZ limit at 770 GeV reproduced exactly with the T30 log-log interpolation
+  (2.3370e-47).
+- Cron `080d2f590251` is no longer registered (`cronjob list`: only the
+  Strata watchdog remains) — the KIV action was completed manually.
+
+**What would change this answer:** a new LZ (or XENONnT/PandaX) release
+that either (i) raises the global significance to >= 3 sigma, or (ii)
+publishes an elastic SI sigma_DM-nucleon exclusion more constraining than
+the 2024 WS curve at 400-1000 GeV. Even a 100x sensitivity improvement
+would leave the project's predicted cross-section ~68 dex inside the
+allowed region, so under the current posterior the Channel 5 verdict is
+robust; the significance row is the live trigger, not the limit row.
+
 ## KIV (Keep-In-View) cron job
 
 **Cron job ID:** `080d2f590251`
@@ -259,6 +364,14 @@ The cron job is registered with `hermes cron create`. To inspect:
 `hermes cron list`. To cancel: `hermes cron remove 080d2f590251`.
 The first KIV check will run on 2026-11-01 — approximately 60 days
 after the 2026-09-01 announcement.
+
+**KIV status (2026-11-01):** the cron `080d2f590251` was subsequently
+removed from the scheduler; its action was executed manually on
+2026-11-01 via `scripts/lz_kiv_check.py` and closed out by the
+re-evaluation section above. No successor cron was scheduled — the
+remaining live triggers are the significance row (>= 3 sigma) and a
+future elastic SI limit release, both of which are publication events
+rather than date events.
 
 ## Standing-version impact
 

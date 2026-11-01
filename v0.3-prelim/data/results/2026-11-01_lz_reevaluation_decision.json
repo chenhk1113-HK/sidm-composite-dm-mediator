@@ -1,0 +1,93 @@
+{
+  "record": "LZ 2026-09 high-recoil candidate event - 2026-11-01 KIV re-evaluation decision",
+  "kiv_check_result": "v0.3-prelim/data/results/2026-11-01_lz_kiv_check.json (verdict FOUND, 4 arXiv hits)",
+  "trigger_matrix_source": "v0.3-prelim/docs/archive/other/T77_LZ_2026_09_UPDATE.md (T77 decision matrix + T78 pre-registered >=3sigma protocol)",
+  "git": {
+    "branch": "wip/v19.2-F-init",
+    "head_at_analysis": "ea66c4e",
+    "tree_before_change": "clean"
+  },
+  "primary_paper": {
+    "arxiv_id": "2609.08893v1",
+    "title": "ALP-mediated inelastic dark matter and the LUX-ZEPLIN high-recoil candidate event LZ230616",
+    "authors": ["Guan-Wen Yuan", "Bo Zhang", "Wen-Yu Cao", "Lei Feng", "Ruizhi Yang"],
+    "published": "2026-09-08",
+    "class": "hep-ph",
+    "pages": 7,
+    "local_pdf": "docs/papers/verified/2609.08893_alp_lz230616_2026.pdf",
+    "nature": "Third-party single-event INTERPRETATION (two-state Majorana DM, gluonic ALP portal, endothermic 1N->2N via operator O6, WimPyDD nuclear responses, SHM v0=238 km/s, vesc=544 km/s, rho=0.3 GeV/cm^3, exposure 2.84 tonne-years)",
+    "statistic_self_description": "\"neither reproduces the official LZ likelihood nor defines statistically calibrated confidence regions\"",
+    "table_I_benchmarks_m_a_0p3_GeV": [
+      {"benchmark": "a_best_spectral", "m_chi_TeV": 0.35, "delta_keV": 330, "q_LZ": 0.0, "abs_g_G_GeV^-2": 0.21},
+      {"benchmark": "b_q_le_1", "m_chi_TeV": 1.25, "delta_keV": 320, "q_LZ": 0.99, "abs_g_G_GeV^-2": 2.30e-4},
+      {"benchmark": "c_q_le_2", "m_chi_TeV": 1.04, "delta_keV": 225, "q_LZ": 1.99, "abs_g_G_GeV^-2": 4.30e-5},
+      {"benchmark": "d_elastic_axion", "m_chi_TeV": 5.0, "delta_keV": 0, "q_LZ": 2.84, "abs_g_G_GeV^-2": 1.42e-5}
+    ]
+  },
+  "sigma_dm_nucleon_limit_status": {
+    "found": false,
+    "pdf_text_keyword_scan": {
+      "cm-2": 0, "cm^2": 0, "exclusion": 0, "upper limit": 0, "90% CL": 0, "95% CL": 0
+    },
+    "what_the_paper_reports_instead": "Required coupling product |g_G| to produce ONE expected event in 5.4-269.9 keV under a conditional single-event signal hypothesis (a signal-interpretation statement, not an exclusion limit)",
+    "why_not_comparable_to_channel_5": "Channel 5's observable is elastic spin-independent sigma_DM-nucleon via dark-photon kinetic mixing. 2609.08893v1 constrains an ALP-gluon coupling product for an inelastic two-state model with momentum-dependent O6 nucleon operator; it converts nothing to a sigma_SI limit."
+  },
+  "companion_papers": [
+    {"arxiv_id": "2610.32747v1", "note": "Aristizabal Sierra+ - neutrino up-scattering limits (sterile fermion couplings, NOT sigma_DM-nucleon); concludes up-scattering does not explain the event"},
+    {"arxiv_id": "2609.05291v1", "note": "Gu+ - inelastic-xenon excitation companion channel, rate O(0.1) of elastic or below"},
+    {"arxiv_id": "2609.04185v2", "note": "Jeesun & Majumdar+ - atmospheric-neutrino up-scattering interpretation (pseudoscalar mediator, y_chi/y_u region)"}
+  ],
+  "lz_paper_significance": {
+    "arxiv_id": "2609.02823",
+    "global_sigma": 2.6,
+    "max_local_sigma": 3.4,
+    "source": "PDF text re-read 2026-11-01 from docs/papers/verified/2609.02823_lz_2026.pdf: \"global significance of 2.6 when accounting for look-elsewhere effects, with a maximum local significance of 3.4 across the models tested\"",
+    "lz_new_limits_in_same_paper": "Two-sided 90% CL intervals on NREFT operator couplings (Fig 6; O1s inelastic at 1000 GeV, Ls10 elastic) described as world-leading FOR THOSE MODELS, plus an O1s recast to inelastic DM-nucleon cross-section with scalar normalization (Fig S7). None of these replaces the elastic SI WS2024 curve used by Channel 5."
+  },
+  "channel5_comparison": {
+    "t30_source": "LZ_REAL table in v0.3-prelim/code/t30_lz_real_posterior.py (HEPData 155182, arXiv:2410.17036, 26 mass points 9 GeV - 10 TeV, log-log interpolation in loglike_lz_real)",
+    "mapping": "sigma_SI_from_dark_photon (t39_tier3_epsilon_alpha_joint_fit.py) with alpha_D taken as the posterior alpha_X",
+    "points": [
+      {"posterior": "v0.7_MAP_nlive2000", "m_chi_GeV": 769.69, "m_phi_MeV": 452.95, "epsilon": 1.119e-37, "alpha_X": 6.837e-17, "predicted_sigma_DM_nucleon_cm2": 2.54e-117, "lz_limit_cm2": 2.337e-47, "margin_dex": -70.0},
+      {"posterior": "v0.7_median", "m_chi_GeV": 497.50, "m_phi_MeV": 587.85, "epsilon": 1.435e-37, "alpha_X": 3.481e-16, "predicted_sigma_DM_nucleon_cm2": 7.49e-117, "lz_limit_cm2": 1.514e-47, "margin_dex": -69.3},
+      {"posterior": "v0.8_MAP_t88ce_nlive2000", "m_chi_GeV": 478.29, "m_phi_MeV": 488.15, "epsilon": 6.107e-33, "alpha_X": 3.625e-25, "predicted_sigma_DM_nucleon_cm2": 2.97e-116, "lz_limit_cm2": 1.455e-47, "margin_dex": -68.7},
+      {"posterior": "v0.8_median", "m_chi_GeV": 502.88, "m_phi_MeV": 598.39, "epsilon": 1.068e-37, "alpha_X": 3.392e-16, "predicted_sigma_DM_nucleon_cm2": 3.77e-117, "lz_limit_cm2": 1.530e-47, "margin_dex": -69.6}
+    ],
+    "strongest_point_in_lz_table": {"limit_cm2": 2.182e-48, "mass_GeV": 40.0},
+    "note": "The older MODEL_ASSUMPTIONS figure \"1.5e-46 at 770 GeV\" came from the superseded placeholder table in channels_extended.py; the real-curve value is 2.337e-47 cm^2."
+  },
+  "trigger_audit": [
+    {"trigger": "arXiv paper with precise sigma_DM-nucleon limit -> re-evaluate Channel 5; update if >= 3 sigma", "re_evaluation_done": true, "update_condition_met": false, "reason": "no sigma_DM-nucleon limit in 2609.08893v1"},
+    {"trigger": "significance >= 3 sigma -> update T30 mapping; re-run T41 at nlive=2000", "fired": false, "reason": "still 2.6 sigma global"},
+    {"trigger": ">= 5 sigma discovery -> v0.5-prelim release", "fired": false},
+    {"trigger": "statistical fluctuation -> remove T77 update from section 0", "fired": false, "reason": "not established; LZ continues taking data"}
+  ],
+  "decision": {
+    "verdict": "NO UPDATE",
+    "actions_taken": [
+      "Read 2609.08893v1 end-to-end; extracted Table I and all quantitative content",
+      "Companion papers triaged from abstracts + prior KB",
+      "Channel 5 comparison recomputed in Python against the real T30 LZ curve",
+      "Docs updated: T77 archive doc, MODEL_ASSUMPTIONS_AND_LIMITATIONS.md section 0, EXTRACT.md callout, docs/LAYMAN_SUMMARY_T77_LZ_2026_09.md, CHANGELOG.md",
+      "KB entry added for the new PDF (docs/papers/verified/2609.08893_alp_lz230616_2026.md)"
+    ],
+    "actions_not_taken": [
+      "T30 Channel 5 mapping NOT modified",
+      "T41 NOT re-run (trigger requires >= 3 sigma global AND/OR a more-constraining sigma_DM-nucleon limit; neither holds)",
+      "LZ_2024_LIMITS array in channels_extended.py NOT modified",
+      "No successor KIV cron scheduled (remaining triggers are publication events, not date events)"
+    ]
+  },
+  "what_would_change_the_answer": [
+    "New LZ/XENONnT/PandaX release with global significance >= 3 sigma for a DM interpretation of LZ230616",
+    "A published elastic SI sigma_DM-nucleon exclusion more constraining than LZ WS2024 at 400-1000 GeV",
+    "Note: even a 100x LZ sensitivity improvement leaves the predicted cross-section ~68 dex inside the allowed region under the current posterior, so the significance row is the live trigger, not the limit row"
+  ],
+  "verification": {
+    "numbers_rederived_in_python": true,
+    "sigma_SI_formula_reimplemented_from_t39_source": true,
+    "t78_stored_value_agreement": "stored 2.47e-117 vs recomputed 2.54e-117 at v0.7 MAP (3% difference from hbar*c rounding 1.97e-14 vs 1.9733e-14 GeV cm)",
+    "lz_limit_at_770GeV_reproduced": 2.337e-47,
+    "cron_status": "080d2f590251 no longer registered in the scheduler (cronjob list: only the Strata watchdog remains); KIV action completed manually"
+  }
+}
