@@ -33,7 +33,8 @@ SEARCH_QUERIES = [
 def query_arxiv(query: str, max_results: int = 10) -> list:
     """Query arXiv API and return list of result dicts."""
     url = (
-        f"{ARXIV_QUERY_URL}?search_query={query}&max_results={max_results}"
+        f"{ARXIV_QUERY_URL}?search_query={urllib.parse.quote(query, safe='')}"
+        f"&max_results={max_results}"
         "&sortBy=relevance&sortOrder=descending"
     )
     try:
@@ -173,7 +174,7 @@ def main():
     print(f"Date of check: {results['kiv_check_date']}")
     print(f"Original event: LZ 2026-09-01 mysterious signal (2.6σ)")
     print(f"Searched {len(SEARCH_QUERIES)} arXiv queries")
-    print(f"Found {n} unique arXiv hits")
+    print(f"Found {results['n_hits']} unique arXiv hits")
     print(f"Verdict: {assessment['verdict']}")
     print(f"Action: {assessment['action']}")
 
