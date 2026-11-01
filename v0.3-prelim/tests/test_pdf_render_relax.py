@@ -119,14 +119,24 @@ def test_wrap_preserves_every_word():
 
 
 def test_builder_uses_the_shared_functions_not_local_copies():
-    """Anti-drift lock: build_round5_report_pdfs must import the shared
-    wrap/fold pipeline, never redefine it locally (the layer-14 drift class)."""
-    import build_round5_report_pdfs as b
-    import pdf_rencode_maps as m
-    assert b.wrap_code_lines is m.wrap_code_lines
-    assert b.ascii_fold is m.ascii_fold
-    assert b.fold_mono is m.fold_mono
-    assert b.CODE_WRAP == m.CODE_WRAP
+    """Anti-drift lock (source-level, dependency-free): build_round5_report_pdfs
+    must import the shared wrap/fold pipeline from pdf_rencode_maps.py and must
+    never redefine it locally (the layer-14 drift class). Deliberately checked
+    against SOURCE TEXT rather than by importing the builder, so this test runs
+    in every venv - the gate venv has no reportlab, and an import-based check
+    there fails for the wrong reason (dependency), not the guarded reason."""
+    scripts = Path(__file__).resolve().parents[2] / "scripts"
+    src = (scripts / "build_round5_report_pdfs.py").read_text(encoding="utf-8")
+    maps_src = (scripts / "pdf_rencode_maps.py").read_text(encoding="utf-8")
+    imports = [ln for ln in src.splitlines() if "from pdf_rencode_maps import" in ln]
+    assert imports, "builder no longer imports pdf_rencode_maps"
+    for name in ("ascii_fold", "fold_mono", "wrap_code_lines", "CODE_WRAP"):
+        assert any(name in ln for ln in imports), f"builder does not import shared {name}"
+        assert f"def {name}(" not in src, f"builder redefines {name} locally (drift class)"
+    assert "CODE_WRAP =" not in src, "builder assigns CODE_WRAP locally (drift class)"
+    for name in ("ascii_fold", "fold_mono", "wrap_code_lines"):
+        assert f"def {name}(" in maps_src, f"shared module missing {name}"
+    assert "CODE_WRAP = 108" in maps_src
 
 
 def test_audit_whitelist_includes_wrapped_fragments():
