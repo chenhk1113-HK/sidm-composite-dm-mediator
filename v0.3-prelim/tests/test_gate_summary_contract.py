@@ -53,6 +53,21 @@ class TestSummaryContract:
         assert code == 0
         assert "pytest internal skips: 3" in text  # a skip proves nothing (CG-10)
 
+    def test_pytest_deselect_disclosed(self):
+        # n25 finding III.4: deselected tests also "did not run" — the same
+        # trust gap CG-10 closed for skips must cover them (36 > 22 observed).
+        text, code = gate.summarize(_res(("pytest", "PASS")),
+                                    pytest_internal_skips=22, pytest_deselected=36)
+        assert code == 0
+        assert "pytest internal skips: 22" in text
+        assert "pytest deselected: 36" in text
+        assert "did not run" in text
+
+    def test_no_deselect_note_when_zero(self):
+        text, _ = gate.summarize(_res(("pytest", "PASS")), pytest_internal_skips=0,
+                                 pytest_deselected=0)
+        assert "deselected" not in text
+
     def test_failure_exits_1_and_poisoned_layer_not_checked(self):
         text, code = gate.summarize(_res(("pytest", "PASS"), ("audit_stale_strings.py", "FAIL")))
         assert code == 1
@@ -102,3 +117,12 @@ class TestGateSourceContract:
     def test_legacy_green_phrase_absent_from_gate_source(self):
         src = GATE_PATH.read_text(encoding="utf-8")
         assert "ALL GATES PASSED" not in src
+
+    def test_deselect_wired_in_gate_source(self):
+        # n25: the disclosure must be wired at the parse site, not just in
+        # the formatter — a formatter nobody calls it with is decoration.
+        src = GATE_PATH.read_text(encoding="utf-8")
+        assert r"(\d+) deselected" in src          # the parse site
+        assert "pytest_deselected = int(m.group(1))" in src
+        assert "pytest deselected:" in src          # the formatter NOTE
+        assert "summarize(results, pytest_internal_skips, pytest_deselected)" in src

@@ -264,6 +264,76 @@ def tokens_of(s: str) -> list[str]:
     return canonical(s).split()
 
 PROSE_COVERAGE = 0.90   # fraction of a source line's trigrams that must be found
+
+
+def looks_like_leaked_table_row(s: str) -> bool:
+    """n25/D5 signature: a markdown table row that failed to parse in the
+    builder leaks into the rendered body as a paragraph with its pipe
+    delimiters verbatim (observed live: the CG-2 row of the shipped v1.15
+    PDF, pages 25-35, which turned the following row into a fake repeat
+    header across ten page breaks). ReportLab table cells never emit '|';
+    only a raw markdown line rendered as prose does. A leaked row wraps
+    like prose, so its FIRST extracted line starts with '|' but ends
+    mid-sentence — requiring a closing pipe would miss the real shape."""
+    return s.startswith("|") and s.count("|") >= 2
+
+
+def pipe_row_whitelist(prose_lines):
+    """Whitelist of pipe-bearing source lines the builder renders AS PROSE
+    on purpose — quoted review extracts like the n19 line
+    '> | Yukawa-only ... | 0.06 | **YES (max-core)** |'. Those legitimately
+    show pipes in the PDF; flagging them would repeat the audit v1.0
+    false-positive class. Stored as ordered token prefixes: a wrapped
+    paragraph's first PDF line is a prefix of its source line's tokens,
+    so prefix-matching recognizes the true first line of a long quoted
+    row even though it breaks mid-row."""
+    prefixes = []
+    for line in prose_lines:
+        t = line.lstrip("> ").strip()
+        if looks_like_leaked_table_row(t):
+            toks = [w for w in _norm(_strip_md(t)).split() if len(w) >= 2]
+            if toks:
+                prefixes.append(toks)
+    return prefixes
+
+
+def is_leaked_table_row(s, code_probes, prose_prefixes) -> bool:
+    """Decision for one extracted pipe-form line: whitelist source code and
+    intentional quoted pipe rows; everything else is a table row that
+    failed to parse. A line whose tokens are a prefix of a whitelisted
+    prose row is intentional prose; a line that matches only a TABLE-classified
+    source row (like the broken CG-2 row) is the leak."""
+    if not looks_like_leaked_table_row(s):
+        return False
+    n = _norm(s)
+    if n in code_probes:
+        return False
+    toks = [w for w in n.split() if len(w) >= 2]
+    if toks and any(toks == src[:len(toks)] for src in prose_prefixes):
+        return False
+    return True
+
+
+def budget_rise_defect(pdf_name: str, budget, job: dict):
+    """n25 finding III.1: budgets re-measured per build are tautological
+    inside their own build (measured == measured always passes). The
+    ratchet — a documented budget may tighten freely but may only RISE
+    with evidence — is enforced here: any declared marker_budget above
+    the previous documented build's budget (marker_budget_prev) must
+    carry a 'budget_rise_evidence' annotation naming the control run
+    that shows the rise is source-edit reflow, not a new literal-'**'
+    regression (the CG-15 evidence standard, applied by default).
+    No prev declared -> legacy behaviour unchanged; rise without
+    evidence -> hard defect."""
+    prev = job.get("marker_budget_prev")
+    if prev is None or int(budget) <= int(prev):
+        return None
+    if job.get("budget_rise_evidence"):
+        return None
+    return (f"{pdf_name}: marker_budget raised {prev} -> {budget} with no "
+            f"'budget_rise_evidence' annotation. A budget rise must come "
+            f"with the CG-15-grade control evidence that it is source-edit "
+            f"reflow (see §26.3 for the method and its first application).")
 CODE_COVERAGE = 0.85    # stricter: code must survive (nearly) verbatim
 
 def _trigrams(tokens: list[str]) -> list[tuple[str, str, str]]:
@@ -443,6 +513,93 @@ def relax_tokens(toks, fuse=False):
             out.append(t)
     return out
 
+def wordset_pass(plain: str, hay_tok_norm: set, hay_stem: set,
+                 hay_stem_sample: list):
+    """Third pass: word-set presence (bridges hyphenated line splits).
+    Distinctive tokens are hyphen-normalised on BOTH sides: a token
+    mangled by a dropped glyph sentinel ('cm?/g' -> 'cm-/g' where the
+    PDF reads 'cm2/g') carries no alphabetic content the PDF lacks;
+    hyphen-normalising collapses exactly the glyph-artifact variants,
+    and short fragments (<5 chars after normalising) carry too little
+    signal to prove absence.
+
+    Anchors are built from the RAW canonical tokens, not the relaxed
+    ones: tokens whose spelling contains '^' (the source's rule-27 ASCII
+    superscript form, and the unicode expansion) are LAYOUT-fragile —
+    reportlab draws the exponent at raised baseline and both extractors
+    measured here drop the '^' glyph, splitting '10^-12' into '10' '12'
+    on the PDF side. Requiring the source's un-split '10^12' spelling in
+    the PDF would flag a correctly rendered line. Their fragments (each
+    >=5 chars) ARE required; a caret's neighbour within the same token
+    is not.
+
+    Returns None when the line provides no distinctive anchors (caller
+    keeps its 'no distinctive words' branch); otherwise the tuple
+    (absent, glyph_frag, real_absent). Extracted from check_pair for
+    negative-control tests (n25 review-2 item 3): every rescue path of
+    the matcher must be provably narrow — a truly-absent word must
+    survive ALL rescues, not just the coverage variants.
+    """
+    def distinctive_key(tok):
+        return tok.replace("-", "")
+    anchors = []
+    for raw in plain.split():
+        if "^" in raw:
+            # Builder-folded world: when the FUSED spelling of a caret
+            # token is present in the PDF ('f_h2?_hh', '7.5x10-12'), its
+            # split fragments are layout artifacts of the caret form,
+            # not absent words — require the fused token instead. When it
+            # is absent, fall back to the fragments (raised-baseline
+            # rendering drops '^' and splits the token on the PDF side).
+            fused_r = relax_tokens([raw], fuse=True)
+            if fused_r and distinctive_key(fused_r[0]) in hay_tok_norm:
+                anchors.extend(fused_r)
+            else:
+                for seg in re.split(r"(?<=[0-9a-z])\^(?=[-+]?[0-9a-z])", raw):
+                    anchors.extend(relax_tokens([seg]))
+        else:
+            anchors.extend(relax_tokens([raw]))
+    distinctive = {distinctive_key(t) for t in anchors
+                   if len(distinctive_key(t)) >= 5}
+    if not distinctive:
+        return None
+    absent = sorted(t for t in distinctive if t not in hay_tok_norm)
+    # Glyph-fragment rule: an 'absent word' whose alphanumeric stem
+    # exists in the PDF is not missing content — it is a token whose
+    # GLYPH was dropped or remapped by pdftotext (sigma, superscript,
+    # prime): 'f_h_hh' (source sigma_HH) has stem 'fhhh' and the PDF
+    # has 'f_h_hh'->stem 'fhhh'. If EVERY absent word is such a
+    # fragment, the line's words are present; the damage is in the
+    # text EXTRACTION, not the rendering -> NOTE, not defect. A line
+    # with any fragment whose stem is genuinely absent stays a defect.
+    def stem(tok):
+        return "".join(c for c in tok if c.isalnum())
+    def glyph_adjacent(tok):
+        # A token can only be mangled by pdftotext if it carries a
+        # sentinel where a glyph was (underscore = dropped σ/prime,
+        # '?' = remapped →/§/≈, '/' or '(' = superscript/subscript
+        # boundary). AND its alphanumeric content must exist in the
+        # PDF — otherwise it is genuinely missing (e.g. a dropped
+        # '1.7x10^-44' whose digits are nowhere in the PDF).
+        if not any(s in tok for s in ("?", "_", "/", "(", "^")):
+            return False
+        s = stem(tok)
+        if len(s) < 3:
+            return True  # carries no checkable content
+        if s in hay_stem:
+            return True
+        # PDF may have split the stem across token boundaries:
+        # accept if any >=3-char alphanumeric run of the stem occurs
+        # inside some PDF token.
+        pieces = [tok[i:j] for i in range(len(tok))
+                  for j in range(i + 3, len(tok) + 1)
+                  if tok[i:j].isalnum()]
+        return any(any(p in h for h in hay_stem_sample) for p in pieces[:12])
+    glyph_frag = [a for a in absent if glyph_adjacent(a)]
+    real_absent = [a for a in absent if a not in glyph_frag]
+    return absent, glyph_frag, real_absent
+
+
 def check_pair(md: Path, pdf: Path, job: dict, pdftotext: str,
                full_flags: bool = False) -> tuple[list, list]:
     """Return (defects, notes) for one source/PDF pair."""
@@ -494,6 +651,8 @@ def check_pair(md: Path, pdf: Path, job: dict, pdftotext: str,
 
     md_text = md.read_text(encoding="utf-8")
     prose, code, tables = _source_lines(md_text)
+    # n25/D5: pipe rows that are INTENTIONAL prose (quoted review tables)
+    pipe_row_prefixes = pipe_row_whitelist(prose)
 
     # The set of source CODE lines (normalised), used to recognise a rendered
     # line that merely LOOKS like a leaked heading marker but is a code comment
@@ -576,6 +735,12 @@ def check_pair(md: Path, pdf: Path, job: dict, pdftotext: str,
         # relaxed probe: same relax_tokens pipeline as the PDF side, scored
         # per variant. Split fragments model raised-baseline superscripts;
         # the fused variant models the builder's ASCII fold (see relax_tokens).
+        # Mixed-mode note (n25 finding I.2): the variants apply fuse=False /
+        # fuse=True to the WHOLE line. Current builders fold uniformly, so a
+        # line never mixes raised-baseline glyphs and builder-folded exponents;
+        # if a future document did, both variants could dip below threshold and
+        # the line falls through to the per-token word-set pass below, which is
+        # mode-independent. Recorded here so the fallback is known, not discovered.
         words_r = relax_tokens(plain.split())
         cov_r, _ = _coverage(words_r, tri_r)
         words_r_f = relax_tokens(plain.split(), fuse=True)
@@ -583,86 +748,20 @@ def check_pair(md: Path, pdf: Path, job: dict, pdftotext: str,
         if max(cov_r, cov_r_f) >= PROSE_COVERAGE:
             artifact_prose.append((line, cov))
             continue
-        # third pass: word-set presence (bridges hyphenated line splits).
-        # Distinctive tokens are hyphen-normalised on BOTH sides: a token
-        # mangled by a dropped glyph sentinel ('cm?/g' -> 'cm-/g' where the
-        # PDF reads 'cm2/g') carries no alphabetic content the PDF lacks;
-        # hyphen-normalising collapses exactly the glyph-artifact variants,
-        # and short fragments (<5 chars after normalising) carry too little
-        # signal to prove absence.
-        def distinctive_key(tok):
-            return tok.replace("-", "")
-        # Third pass builds its anchors from the RAW canonical tokens, not
-        # the relaxed ones: tokens whose spelling contains '^' (the source's
-        # rule-27 ASCII superscript form, and the unicode expansion) are
-        # LAYOUT-fragile — reportlab draws the exponent at raised baseline and
-        # both extractors measured here drop the '^' glyph, splitting
-        # '10^-12' into '10' '12' on the PDF side. Requiring the source's
-        # un-split '10^12' spelling in the PDF would flag a correctly
-        # rendered line. Their fragments (each >=5 chars) ARE required; a
-        # caret's neighbour within the same token is not.
-        anchors = []
-        for raw in plain.split():
-            if "^" in raw:
-                # Builder-folded world: when the FUSED spelling of a caret
-                # token is present in the PDF ('f_h2?_hh', '7.5x10-12'), its
-                # split fragments are layout artifacts of the caret form,
-                # not absent words — require the fused token instead. When it
-                # is absent, fall back to the fragments (raised-baseline
-                # rendering drops '^' and splits the token on the PDF side).
-                fused_r = relax_tokens([raw], fuse=True)
-                if fused_r and distinctive_key(fused_r[0]) in hay_token_set_norm_r:
-                    anchors.extend(fused_r)
-                else:
-                    for seg in re.split(r"(?<=[0-9a-z])\^(?=[-+]?[0-9a-z])", raw):
-                        seg_r = relax_tokens([seg])
-                        anchors.extend(seg_r)
-            else:
-                anchors.extend(relax_tokens([raw]))
-        distinctive = {distinctive_key(t) for t in anchors
-                       if len(distinctive_key(t)) >= 5}
-        if distinctive:
-            absent = sorted(t for t in distinctive if t not in hay_token_set_norm_r)
-            # Glyph-fragment rule: an 'absent word' whose alphanumeric stem
-            # exists in the PDF is not missing content — it is a token whose
-            # GLYPH was dropped or remapped by pdftotext (sigma, superscript,
-            # prime): 'f_h_hh' (source sigma_HH) has stem 'fhhh' and the PDF
-            # has 'f_h_hh'->stem 'fhhh'. If EVERY absent word is such a
-            # fragment, the line's words are present; the damage is in the
-            # text EXTRACTION, not the rendering -> NOTE, not defect. A line
-            # with any fragment whose stem is genuinely absent stays a defect.
-            def stem(tok):
-                return "".join(c for c in tok if c.isalnum())
-            def glyph_adjacent(tok):
-                # A token can only be mangled by pdftotext if it carries a
-                # sentinel where a glyph was (underscore = dropped σ/prime,
-                # '?' = remapped →/§/≈, '/' or '(' = superscript/subscript
-                # boundary). AND its alphanumeric content must exist in the
-                # PDF — otherwise it is genuinely missing (e.g. a dropped
-                # '1.7x10^-44' whose digits are nowhere in the PDF).
-                if not any(s in tok for s in ("?", "_", "/", "(", "^")):
-                    return False
-                s = stem(tok)
-                if len(s) < 3:
-                    return True  # carries no checkable content
-                if s in hay_stem_set_r:
-                    return True
-                # PDF may have split the stem across token boundaries:
-                # accept if any >=3-char alphanumeric run of the stem occurs
-                # inside some PDF token.
-                pieces = [tok[i:j] for i in range(len(tok))
-                          for j in range(i + 3, len(tok) + 1)
-                          if tok[i:j].isalnum()]
-                return any(any(p in h for h in hay_stem_sample_r) for p in pieces[:12])
-            glyph_frag = [a for a in absent if glyph_adjacent(a)]
-            real_absent = [a for a in absent if a not in glyph_frag]
+        # third pass: word-set presence, delegated to the module-level
+        # wordset_pass (extracted for negative-control tests; semantics
+        # unchanged — see its docstring).
+        ws = wordset_pass(plain, hay_token_set_norm_r, hay_stem_set_r,
+                          hay_stem_sample_r)
+        if ws is None:
+            missing_prose.append((line, cov, miss, ""))
+        else:
+            absent, glyph_frag, real_absent = ws
             if not real_absent:
                 glyph_artifact_prose.append((line, absent))
                 continue
             missing_prose.append((line, cov, miss,
                                   "words absent: " + ", ".join(real_absent[:8])))
-        else:
-            missing_prose.append((line, cov, miss, ""))
     if artifact_prose:
         notes.append(
             f"{pdf.name}: {len(artifact_prose)} source line(s) matched only after "
@@ -778,6 +877,12 @@ def check_pair(md: Path, pdf: Path, job: dict, pdftotext: str,
             if n in table_probes:
                 continue
             leaked.append(("blockquote", i + 1, s))
+        # n25/D5: leaked markdown table row — the CG-2 shape (a row that
+        # failed to parse, rendering raw pipes as body prose and corrupting
+        # the repeatRows of every following page). Intentional prose with
+        # pipes (quoted review rows, fenced code) is whitelisted.
+        elif is_leaked_table_row(s, code_probes, pipe_row_prefixes):
+            leaked.append(("table-row", i + 1, s))
     for kind, ln, s in leaked[:6]:
         defects.append(
             f"{pdf.name}: literal {kind} marker leaked into the rendered text "
@@ -804,6 +909,13 @@ def check_pair(md: Path, pdf: Path, job: dict, pdftotext: str,
     literal = len(re.findall(r"\*\*", primary_text))
     budget = job.get("marker_budget")
     notes.append(f"{pdf.name}: {pages} page(s), {literal} literal '**' in rendered text")
+    if budget is not None:
+        rise = budget_rise_defect(pdf.name, budget, job)
+        if rise:
+            defects.append(rise)
+        elif job.get("marker_budget_prev") and int(budget) > int(job["marker_budget_prev"]):
+            notes.append(f"  (budget rise {job['marker_budget_prev']} -> {budget} justified by "
+                         f"evidence: {job['budget_rise_evidence']})")
     if budget is None:
         defects.append(
             f"{pdf.name}: no 'marker_budget' declared for this job in "

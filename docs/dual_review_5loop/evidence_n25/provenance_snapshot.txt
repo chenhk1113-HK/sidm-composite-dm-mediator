@@ -1,0 +1,32 @@
+n25 provenance snapshot (2026-11-01)
+=====================================
+
+Why: n25 reviewer 2 item 4 - gate layer 9 (audit_model_provenance.py) verifies
+the reports' provenance claims against agent.log, which rotates. --allow-unverifiable
+turns each rotated-out claim into a warning; over time every claim would silently
+become "unverifiable but tolerated". This snapshot restores real verification for
+the claim that actually exists.
+
+API-call claims in the deliverables (scanned from report + close-out text):
+  deleg_82eff3e9  claimed 27 API calls (report sections 19/20/25.2)
+                  -> snapshot value 27 (contemporaneously verified against the
+                     live agent.log in the v1.10 round, 2026-10-26/27)
+  deleg_8b429b84  no API-call count claimed
+  deleg_cd62e33d  no API-call count claimed
+  deleg_e2c00902  no API-call count claimed
+The "380 API calls" figure appearing in section 20.4 is a quoted historical
+mis-attribution (a wrong number this report retracted), not a claim; it is not
+snapshotted and is not checked.
+
+Tool totals (live-derivable today from delegation manifests - manifests do not rotate;
+re-derived 2026-11-01 and matching the report):
+  deleg_e2c00902  96  (terminal 81, read_file 11, skill_view 3, write_file 1)
+  deleg_cd62e33d  51  (terminal 44, read_file 7)
+  deleg_82eff3e9  39  (terminal 28, read_file 8, write_file 3)
+  deleg_8b429b84   6  (read_file 6)
+
+Forward rule: audit_model_provenance.py consults evidence_n25/provenance_snapshot.json
+before declaring a rotated-out delegation unverifiable. A snapshotted claim is
+re-verified as a number (api_calls_source: snapshot). Delegations with no snapshot
+entry stay loudly UNVERIFIABLE - counts are never borrowed from a same-model session
+on another day (the 100x "380 API calls" error this layer was built to prevent).

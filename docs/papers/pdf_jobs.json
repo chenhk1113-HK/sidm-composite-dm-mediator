@@ -9,12 +9,24 @@
   "marker_budget_note": "Clean. The literal-** class is fully fixed in this document; the budget is 0 and must stay 0."
  },
  {
-  "md": "/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/docs/dual_review_5loop/SIDM_ROUND5_CONSOLIDATED_FIXES_v1.15_2026-10-31.md",
-  "pdf": "/mnt/c/Users/lamkuenai/round5_deliver/SIDM_ROUND5_CONSOLIDATED_FIXES_v1.15_2026-10-31.pdf",
-  "title": "Consolidated Fixes Report - v1.15",
-  "subtitle": "SIDM v19.2-F  |  Round 5 + n18 + n19 + n20 + n21 + n22 + n23 + n24 review response",
-  "footer": "SIDM v19.2-F - Round 5 + n18 + n19 + n20 + n21 + n22 + n23 + n24 review response",
-  "marker_budget": 70,
-  "marker_budget_note": "Measured 2026-11-01 on this build's extracted PDF text: 70 literal '**' (deferred markup class, §16.6). 62→70 movement = source-edit reflow (§25.6/§25.10); reset-per-build rule honored (placeholder 0 was replaced by the measured value after this build). The v1.14 pair (budget 62) stands frozen as the n23-round record in git history."
+  "md": "/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/docs/dual_review_5loop/SIDM_ROUND5_CONSOLIDATED_FIXES_v1.16_2026-11-01.md",
+  "pdf": "/mnt/c/Users/lamkuenai/round5_deliver/SIDM_ROUND5_CONSOLIDATED_FIXES_v1.16_2026-11-01.pdf",
+  "title": "Consolidated Fixes Report - v1.16",
+  "subtitle": "SIDM v19.2-F  |  Round 5 + n18 + n19 + n20 + n21 + n22 + n23 + n24 + n25 review response",
+  "footer": "SIDM v19.2-F - Round 5 + n18 + n19 + n20 + n21 + n22 + n23 + n24 + n25 review response",
+  "marker_budget": 72,
+  "marker_budget_prev": 70,
+  "marker_budget_note": "Measured 2026-11-02 on this build's extracted PDF text: 72 literal '**' (plain AND -layout modes agree; per-page sum 72). Ratchet: prev 70 (v1.15). Rise = +4 markers on new quoted-markdown lines in 25.6/26 ('For **0 of 8** halos...' x2 pairs + open-set sentence), -1 from a removed supersession-chain line, all other diffs net-zero line reflows; no markup regression. Deferred markup class, 16.6.",
+  "budget_rise_evidence": "docs/dual_review_5loop/evidence_n25/budget_rise_v116.txt (line-multiset diff v1.15->v1.16, 2026-11-02; 62/69/72 both extraction modes)"
+ },
+ {
+  "md": "/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/docs/dual_review_5loop/SIDM_N24_CLOSEOUT_REPORT_WITH_CODE_v1.1_2026-11-01.md",
+  "pdf": "/mnt/c/Users/lamkuenai/round5_deliver/SIDM_N24_CLOSEOUT_REPORT_WITH_CODE_v1.1_2026-11-01.pdf",
+  "title": "n24 Round Close-Out - Report With Code - v1.1",
+  "subtitle": "SIDM v19.2-F  |  n24 close-out, n25 caliber correction",
+  "footer": "SIDM v19.2-F - n24 Round Close-Out Report v1.1 (supersedes v1.0)",
+  "marker_budget": 1,
+  "marker_budget_prev": 1,
+  "marker_budget_note": "Budget held at 1 (v1.0 documented budget, evidence_n24/pdf_audit_closeout.log); v1.1 adds rendered-bold text and code spans - measured after the build; must stay <= 1 or carry budget_rise_evidence."
  }
 ]

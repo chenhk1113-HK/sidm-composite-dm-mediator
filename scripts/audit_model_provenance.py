@@ -77,7 +77,30 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 DOCS = REPO / "docs" / "dual_review_5loop"
-REPORT = DOCS / "SIDM_ROUND5_CONSOLIDATED_FIXES_v1.10_2026-10-26.md"
+
+
+def _latest(prefix: str) -> Path | None:
+    """Newest doc matching <prefix>vMAJOR.MINOR_*.md by real version numbers.
+
+    (Lexicographic max is wrong here: 'v1.9' sorts above 'v1.16'.)
+    """
+    best, best_v = None, None
+    for p in DOCS.glob(f"{prefix}v*.md"):
+        m = re.search(r"v(\d+)\.(\d+)_", p.name)
+        if not m:
+            continue
+        v = (int(m.group(1)), int(m.group(2)))
+        if best_v is None or v > best_v:
+            best, best_v = p, v
+    return best
+
+
+# n25 (2026-11-01): the scanned docs were frozen constants (v1.10/v1.8) while
+# the deliverables moved to v1.15/close-out - the layer was verifying a stale
+# snapshot of the deliverables. It now resolves the CURRENT report and
+# close-out every run, so claims in NEW sections (e.g. report §26) are checked.
+REPORT = _latest("SIDM_ROUND5_CONSOLIDATED_FIXES_")
+CLOSEOUT = _latest("SIDM_N24_CLOSEOUT_REPORT_WITH_CODE_")
 COMPANION = DOCS / "SIDM_ROUND5_CHANGED_CODE_v1.8_2026-10-26.md"
 
 # ---------------------------------------------------------------- hermes home
@@ -90,6 +113,12 @@ def hermes_home():
 HERMES = hermes_home()
 LIVE_DIR = HERMES / "cache" / "delegation" / "live"
 AGENT_LOG = HERMES / "logs" / "agent.log"
+# n25 (2026-11-01, reviewer 2 item 4): agent.log rotates, and --allow-unverifiable
+# would slowly normalize the gap. A durable snapshot of the contemporaneously
+# verified API-call counts restores REAL re-verification (the claim is checked
+# against a number again) instead of a warning. Tool counts need no snapshot:
+# they derive from the delegation manifests, which do not rotate.
+SNAPSHOT = DOCS / "evidence_n25" / "provenance_snapshot.json"
 
 DELEGATION_ID_RE = re.compile(r"\bdeleg_([0-9a-f]{8})\b")
 API_CALL_RE = re.compile(
@@ -330,8 +359,9 @@ def iter_sections(text):
 
 def deliverable_texts():
     out = []
-    for label, path in (("report", REPORT), ("companion", COMPANION)):
-        if path.exists():
+    for label, path in (("report", REPORT), ("close-out", CLOSEOUT),
+                        ("companion", COMPANION)):
+        if path is not None and path.exists():
             out.append((label, path.read_text(encoding="utf-8")))
     return out
 
@@ -346,6 +376,9 @@ def main():
     mans = load_delegations()
     api, fb = load_agent_log()
     docs = deliverable_texts()
+    snapshot = {}
+    if SNAPSHOT.exists():
+        snapshot = json.loads(SNAPSHOT.read_text(encoding="utf-8"))
 
     referenced = set()
     for _, text in docs:
@@ -369,16 +402,20 @@ def main():
             # The manifest exists but its agent-log session record does not:
             # the log has rotated. Tool-count claims stay verifiable from the
             # manifest transcript below; API-call counts are log-derived and
-            # become UNVERIFIABLE — stated loudly, never borrowed from a
-            # same-model session on another day.
-            unverifiable.append((did,
-                "agent-log session record not present (log rotated out): API-call "
-                "count claims for this delegation rest on their contemporaneous "
-                "verification and cannot be re-derived from the live agent.log"))
+            # come from the durable snapshot when one exists for this
+            # delegation (n25); otherwise they are UNVERIFIABLE — stated
+            # loudly, never borrowed from a same-model session on another day.
+            if did not in snapshot:
+                unverifiable.append((did,
+                    "agent-log session record not present (log rotated out) and "
+                    "no snapshot entry: API-call count claims for this "
+                    "delegation rest on their contemporaneous verification and "
+                    "cannot be re-derived from the live agent.log"))
         # A fan-out delegation has one session per task; the delegation's
         # API-call count is the sum over its sessions, and its tool count is
         # the sum over its task transcripts.
-        api_calls = sum(r["n_calls"] for r in recs) if recs else None
+        api_calls = (sum(r["n_calls"] for r in recs) if recs
+                     else snapshot.get(did, {}).get("api_calls"))
         api_models = sorted({m for r in recs for m in r["models"]})
         api_providers = sorted({pr for r in recs for pr in r["providers"]})
         chains = []
@@ -404,6 +441,9 @@ def main():
             "effective_models": task_models,
             "session_id": sids[0] if len(sids) == 1 else sids,
             "api_calls": api_calls,
+            "api_calls_source": ("agent.log" if recs
+                                  else ("snapshot" if api_calls is not None
+                                        else None)),
             "api_models": api_models,
             "api_providers": api_providers,
             "fallbacks": fallbacks,

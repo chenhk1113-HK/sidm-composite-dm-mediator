@@ -1,6 +1,6 @@
 # SIDM v19.2-F — n24 Round Close-Out: Report With Code
 
-**Date:** 2026-11-01. **Branch:** `wip/v19.2-F-init`. **Round commits:** `c507207` (fix(gate): gate layer 15 register-state audit, gate summary contract CG-5/CG-10, shared re-encode maps for layer 14, provenance date guard, both mutation proofs, unit tests), `4aa0039` (fix(paper): CG-8 stray-period class sweep, 8 whitespace-only fixes), `baa21a3` (fix(audit): PDF-render audit containment model — the subject of §2 and §4 below). **Companion report:** `SIDM_ROUND5_CONSOLIDATED_FIXES_v1.15_2026-10-31.pdf` (the full n24 adjudication, §§25.1–25.10). This document is the code-level close-out: every claim below is a measured run output, and the code that produced it is reproduced verbatim in §4.
+**Date:** 2026-11-01. **Version:** v1.1 (supersedes v1.0; n25 caliber correction — consolidated-report §26.6). **Branch:** `wip/v19.2-F-init`. **Round commits:** `c507207` (fix(gate): gate layer 15 register-state audit, gate summary contract CG-5/CG-10, shared re-encode maps for layer 14, provenance date guard, both mutation proofs, unit tests), `4aa0039` (fix(paper): CG-8 stray-period class sweep, 8 whitespace-only fixes), `baa21a3` (fix(audit): PDF-render audit containment model — the subject of §2 and §4 below). **Companion report:** `SIDM_ROUND5_CONSOLIDATED_FIXES_v1.15_2026-10-31.pdf` (the full n24 adjudication, §§25.1–25.10). This document is the code-level close-out: every claim below is a measured run output, and the code that produced it is reproduced verbatim in §4.
 
 ## 1. The eight n24 items — one line each
 
@@ -280,10 +280,14 @@ if __name__ == "__main__":
 
 ### 4.5 Code shipped earlier this round (in repo, not pasted)
 
-`scripts/audit_register_state.py` (gate layer 15), `scripts/audit_register_state_mutation_proof.py`, `scripts/verify_gate_crash_mutation_proof.py`, `scripts/pdf_rencode_maps.py` (shared maps consumed by builder + layer 14), `scripts/verify_release_gate.py` summary-contract changes, `v0.3-prelim/tests/test_gate_summary_contract.py`, `v0.3-prelim/tests/test_pdf_render_pairing.py` — all in `c507207`. The CG-8 sweep is in `4aa0039` (8 one-character deletions in `SIDM_SEARCHABLE_v19_2_F.md`).
+`scripts/audit_register_state.py` (gate layer 15), `scripts/audit_register_state_mutation_proof.py`, `scripts/verify_gate_crash_mutation_proof.py`, `scripts/pdf_rencode_maps.py` (shared maps consumed by builder + layer 14), `scripts/verify_release_gate.py` summary-contract changes, `v0.3-prelim/tests/test_gate_summary_contract.py`, `v0.3-prelim/tests/test_pdf_render_pairing.py` — all in `c507207`. The CG-8 sweep is in `4aa0039` (8 one-character deletions in the paper file). **Caliber correction (n25, consolidated-report §26.6):** an earlier version of this document attributed those 8 deletions to `SIDM_SEARCHABLE_v19_2_F.md` — that file exists neither on disk nor anywhere in git history (`git log --all -- '*SEARCHABLE*'` returns empty); `git show 4aa0039 --stat` confirms the sweep touched only `v0.3-prelim/docs/PAPER_V1_DRAFT.md` (8 insertions, 8 deletions, whitespace-only), the single canonical paper file that gate layer 13 reads.
 
 ## 5. What this close-out does not claim
 
 - It does not claim the paper is scientifically verified by the gate: the gate asserts only its enumerated layers (the SCOPE sentence is printed by the gate itself).
 - It does not claim layer 11 now catches every rendering defect class — it claims the two specific gaps witnessed this round are closed, with a unit-tested boundary.
-- It does not re-open the deferred markup pass (CG-4) or the hardcoded-paths gap (CG-16); both remain OPEN in the §17.3 register with owners named.
+- It does not re-open the hardcoded-paths gap (CG-16), which remains OPEN in the §17.3 register with an owner named; the deferred markup pass (CG-4) was closed in the v1.15 round (consolidated-report §25.5).
+
+## 6. Version history (close-out)
+
+**v1.0 (2026-11-01)** — as originally delivered. **v1.1 (2026-11-01, n25 round)** — supersedes v1.0: §4.5 filename attribution corrected (the phantom `SIDM_SEARCHABLE_v19_2_F.md` disproven via `git log --all`; the sweep actually touched `v0.3-prelim/docs/PAPER_V1_DRAFT.md`); CG-4 bullet synced to its v1.15 closure; no other content changed.

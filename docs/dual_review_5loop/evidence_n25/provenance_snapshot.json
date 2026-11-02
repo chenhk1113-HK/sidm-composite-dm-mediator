@@ -1,0 +1,8 @@
+{
+  "deleg_82eff3e9": {
+    "api_calls": 27,
+    "source": "contemporaneous agent.log verification recorded in report sections 19/20 (v1.10 round, 2026-10-26/27); the agent.log session record has since rotated out",
+    "snapshot_date": "2026-11-01",
+    "note": "This is the ONLY API-call count the deliverables claim. Tool totals need no snapshot - they derive from delegation manifests, which do not rotate. Delegations whose API counts are never claimed (deleg_8b429b84, deleg_cd62e33d, deleg_e2c00902) deliberately carry no entry."
+  }
+}

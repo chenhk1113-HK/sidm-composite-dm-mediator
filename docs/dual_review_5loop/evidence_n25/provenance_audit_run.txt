@@ -1,0 +1,38 @@
+==========================================================================
+MODEL-PROVENANCE AUDIT (gate layer 9)
+==========================================================================
+Hermes home : C:\Users\lamkuenai\AppData\Local\hermes
+Agent log   : C:\Users\lamkuenai\AppData\Local\hermes\logs\agent.log (present)
+Delegations referenced by the deliverables: 4
+
+  deleg_82eff3e9
+     dispatch : nvidia/nemotron-3-ultra-550b-a55b:free (openrouter)
+     effective: ['deepseek-ai/deepseek-v4.1-flash']
+     session  : []  api_calls=27  tool_total=39
+     tools    : {'terminal': 28, 'read_file': 8, 'write_file': 3}
+  deleg_8b429b84
+     dispatch : nvidia/nemotron-3-ultra-550b-a55b:free (openrouter)
+     effective: ['nvidia/nemotron-3-ultra-550b-a55b:free']
+     session  : []  api_calls=None  tool_total=6
+     tools    : {'read_file': 6}
+  deleg_cd62e33d
+     dispatch : nvidia/nemotron-3-ultra-550b-a55b:free (openrouter)
+     effective: ['deepseek-ai/deepseek-v4.1-flash']
+     session  : []  api_calls=None  tool_total=51
+     tools    : {'terminal': 44, 'read_file': 7}
+  deleg_e2c00902
+     dispatch : nvidia/nemotron-3-ultra-550b-a55b:free (openrouter)
+     effective: ['deepseek-ai/deepseek-v4.1-flash', 'deepseek-ai/deepseek-v4.1-flash']
+     session  : []  api_calls=None  tool_total=96
+     tools    : {'skill_view': 3, 'terminal': 81, 'read_file': 11, 'write_file': 1}
+
+--------------------------------------------------------------------------
+UNVERIFIABLE provenance claims (evidence absent - a claim that cannot be checked is the failure mode this layer prevents):
+--------------------------------------------------------------------------
+  deleg_8b429b84: agent-log session record not present (log rotated out) and no snapshot entry: API-call count claims for this delegation rest on their contemporaneous verification and cannot be re-derived from the live agent.log
+  deleg_cd62e33d: agent-log session record not present (log rotated out) and no snapshot entry: API-call count claims for this delegation rest on their contemporaneous verification and cannot be re-derived from the live agent.log
+  deleg_e2c00902: agent-log session record not present (log rotated out) and no snapshot entry: API-call count claims for this delegation rest on their contemporaneous verification and cannot be re-derived from the live agent.log
+
+OK: every provenance claim in the deliverables is consistent with the manifests,
+the agent log, and the delegation transcripts.
+RESULT: PASS

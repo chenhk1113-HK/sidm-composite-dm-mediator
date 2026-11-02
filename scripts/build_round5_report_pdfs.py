@@ -219,7 +219,17 @@ def md_to_flow(md, st):
             return
         rows = []
         for raw in tbl_buf:
-            cells = [c.strip() for c in raw.strip().strip('|').split('|')]
+            # n25/D6 (2026-11-01): split on UNESCAPED pipes only. The old
+            # raw.split('|') sliced cells whose text legitimately contains
+            # escaped pipes (the CG-11 row's mutation-proof code span
+            # '\| Single-Yukawa \| 1.42 \| PASS and FAIL \|'), which cut
+            # that row mid-word in the shipped v1.14/v1.15 PDFs (extraction
+            # evidence: 'aper_tables.p', 'in the CHECKER' as separate cells)
+            # and silently widened the whole table to 10 columns.
+            # Backslash-escaped pipes stay inside their cell and render as
+            # literal '|'.
+            cells = [c.strip().replace("\\|", "|")
+                     for c in re.split(r"(?<!\\)\|", raw.strip().strip("|"))]
             if all(set(c) <= set('-: ') and c for c in cells):
                 continue                      # separator row
             rows.append(cells)

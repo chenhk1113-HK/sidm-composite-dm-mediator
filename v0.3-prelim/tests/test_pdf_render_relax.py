@@ -72,7 +72,11 @@ def test_coverage_matches_builder_folded_pdf_only_via_fused():
 
 def test_true_absence_still_caught():
     # If the exponent content is genuinely absent from the PDF, NEITHER
-    # variant may rescue it.
+    # variant may rescue it. The production rescue gate is
+    #   if max(cov_r, cov_r_f) >= PROSE_COVERAGE: rescued
+    # so the negative control must assert the max of BOTH variants stays
+    # below the gate. An `or` here would pass even if one variant falsely
+    # reached 1.0 and rescued a truly-missing exponent (n25 finding 1).
     pdf_tokens = ["the", "canonical", "value", "is", "inconsistent",
                   "regime", "labels", "differ"]
     tri_set = set(apr._trigrams(pdf_tokens))
@@ -81,7 +85,10 @@ def test_true_absence_still_caught():
     cov_s, miss_s = apr._coverage(apr.relax_tokens(src), tri_set)
     cov_f, miss_f = apr._coverage(apr.relax_tokens(src, fuse=True), tri_set)
     assert miss_s > 0 and miss_f > 0
-    assert cov_s < 0.90 or cov_f < 0.90
+    # the exact production gate, mirrored: max(...) < PROSE_COVERAGE
+    assert max(cov_s, cov_f) < apr.PROSE_COVERAGE
+    # belt-and-braces: both variants individually below threshold
+    assert cov_s < apr.PROSE_COVERAGE and cov_f < apr.PROSE_COVERAGE
 
 
 
@@ -175,6 +182,123 @@ def test_wrap_terminates_on_spaceless_long_line():
     assert all(f.strip() for f in frags)
     # no character lost across the wrap (spaces are where the breaks happen)
     assert "".join(f.replace(" ", "") for f in frags) == line.replace(" ", "")
+
+
+# ---------------------------------------------------------------------------
+# n25 addendum (2026-11-01): D5 leaked-table-row detector + budget ratchet.
+# The detector must catch the real CG-2 leak shape from the shipped v1.15
+# PDF and must NOT flag the intentional quoted review rows (the pipe rows
+# inside '> | ... |' blockquotes) — those render with pipes by design.
+# ---------------------------------------------------------------------------
+
+CG2_LEAK_SHAPE = ("| CG-2 | a resurrected stale value in the prose (a value "
+                  "that a later fix removed, reintroduced by a later edit) | this")
+QUOTED_ROW_SHAPE = ("| Yukawa-only (no Gaussian peak) | 0.61 | 0.054 | "
+                    "230 Gyr | 0.06 | YES")
+QUOTED_ROW_SOURCE = ("> | Yukawa-only (**no** Gaussian peak) | 0.61 | 0.054 | "
+                     "230 Gyr | 0.06 | **YES (max-core)** |")
+
+
+def test_pipe_row_whitelist_recognizes_quoted_source():
+    prefixes = apr.pipe_row_whitelist([QUOTED_ROW_SOURCE])
+    assert prefixes
+    # the wrapped PDF line IS a token prefix of the source line
+    assert apr.is_leaked_table_row(QUOTED_ROW_SHAPE, set(), prefixes) is False
+
+
+def test_pipe_row_detector_catches_d5_shape():
+    # same whitelisted quoted row present — the CG-2 leak must STILL be caught
+    prefixes = apr.pipe_row_whitelist([QUOTED_ROW_SOURCE])
+    assert apr.is_leaked_table_row(CG2_LEAK_SHAPE, set(), prefixes) is True
+
+
+def test_pipe_row_detector_rejects_normal_text_and_code():
+    assert apr.is_leaked_table_row("a normal line | with one pipe", set(), []) is False
+    assert apr.is_leaked_table_row("no pipes at all", set(), []) is False
+    assert apr.is_leaked_table_row("| alone", set(), []) is False
+    fenced = apr._norm(QUOTED_ROW_SHAPE)
+    assert apr.is_leaked_table_row(QUOTED_ROW_SHAPE, {fenced}, []) is False
+
+
+def test_budget_rise_without_evidence_is_defect():
+    d = apr.budget_rise_defect("x.pdf", 75, {"marker_budget": 75,
+                                             "marker_budget_prev": 70})
+    assert d and "70" in d and "budget_rise_evidence" in d
+
+
+def test_budget_rise_with_evidence_passes():
+    j = {"marker_budget": 75, "marker_budget_prev": 70,
+         "budget_rise_evidence": "evidence_n25/budget_attribution.txt"}
+    assert apr.budget_rise_defect("x.pdf", 75, j) is None
+
+
+def test_budget_flat_or_tightened_needs_no_evidence():
+    assert apr.budget_rise_defect("x.pdf", 70, {"marker_budget": 70,
+                                                "marker_budget_prev": 70}) is None
+    assert apr.budget_rise_defect("x.pdf", 66, {"marker_budget": 66,
+                                                "marker_budget_prev": 70}) is None
+    # legacy jobs with no prev declared keep the old behaviour
+    assert apr.budget_rise_defect("x.pdf", 99, {"marker_budget": 99}) is None
+
+
+# ---------------------------------------------------------------------------
+# n25 review-2 item 3: every rescue path of the matcher must be provably
+# narrow — a TRULY-absent word must survive ALL rescues (word-set pass and
+# glyph-fragment NOTE path included), not just the coverage variants already
+# guarded by test_true_absence_still_caught. Fixtures use the real sentinel
+# semantics of relax_tokens/canonical (non-ASCII -> '?', interior '?' -> '-',
+# dropped σ leaves 'eff/m' on the PDF side).
+# ---------------------------------------------------------------------------
+
+def _hay(plain_hay):
+    toks = apr.relax_tokens(plain_hay)
+    return ({t.replace("-", "") for t in toks},
+            {"".join(c for c in t if c.isalnum()) for t in toks},
+            sorted({"".join(c for c in t if c.isalnum()) for t in toks}))
+
+
+def test_wordset_pass_flags_true_absence():
+    # 'hydrostatic' and 'equilibrium' genuinely absent from the PDF text:
+    # they carry no glyph sentinel, so the glyph-fragment rule must not
+    # excuse them, and the line stays a defect.
+    plain = "the analysis includes hydrostatic equilibrium across the section grid"
+    hay_norm, hay_stem, hay_sample = _hay(
+        ["the", "analysis", "across", "the", "section", "grid"])
+    r = apr.wordset_pass(plain, hay_norm, hay_stem, hay_sample)
+    assert r is not None
+    absent, glyph_frag, real_absent = r
+    assert "hydrostatic" in real_absent and "equilibrium" in real_absent
+    assert "hydrostatic" not in glyph_frag and "equilibrium" not in glyph_frag
+
+
+def test_wordset_pass_rescues_glyph_fragments_only():
+    # Real-world shape: source '?_eff/m' (canonical 'σ_eff/m'), PDF side
+    # 'eff/m' after pdftotext drops σ entirely. The distinctive key '_eff/m'
+    # is absent from the PDF token set, but its alphanumeric stem 'effm'
+    # exists — extraction damage, NOT missing content: rescued as glyph
+    # fragment (NOTE), real_absent empty. The same line WITH 'hydrostatic'
+    # additionally absent must flag exactly that word: the rescue path must
+    # not launder a true absence sitting next to a glyph artifact.
+    hay_norm, hay_stem, hay_sample = _hay(
+        ["the", "canonical", "eff/m", "value", "is", "tabulated",
+         "across", "the", "section", "grid"])
+    r = apr.wordset_pass(
+        "the canonical ?_eff/m value is tabulated across the section grid",
+        hay_norm, hay_stem, hay_sample)
+    assert r is not None
+    absent, glyph_frag, real_absent = r
+    assert real_absent == [] and glyph_frag  # legitimate NOTE rescue
+    r2 = apr.wordset_pass(
+        "the canonical ?_eff/m hydrostatic value is tabulated across the grid",
+        hay_norm, hay_stem, hay_sample)
+    assert r2 is not None
+    absent2, glyph_frag2, real_absent2 = r2
+    assert real_absent2 == ["hydrostatic"]        # true absence survives ALL rescues
+    assert "_eff/m" in glyph_frag2
+
+
+def test_wordset_pass_no_distinctive_anchor_returns_none():
+    assert apr.wordset_pass("a b c d e", set(), set(), []) is None
 
 
 if __name__ == "__main__":

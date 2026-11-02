@@ -141,7 +141,7 @@ def run_layer(name, args, timeout=300, cwd=None, env_python=None):
         return False, ""
 
 
-def summarize(results, pytest_internal_skips: int = 0) -> tuple:
+def summarize(results, pytest_internal_skips: int = 0, pytest_deselected: int = 0) -> tuple:
     """Pure formatter for the gate summary — the gate contract is testable
     against this function without running 15 subprocess layers
     (tests/test_gate_summary_contract.py). Returns (text, exit_code)."""
@@ -156,6 +156,11 @@ def summarize(results, pytest_internal_skips: int = 0) -> tuple:
         lines.append(f"  NOTE  pytest internal skips: {pytest_internal_skips} test(s) were "
                      "skipped inside the pytest layer — a skip proves nothing; those "
                      "assertions did not run in this build (CG-10 disclosure).")
+    if pytest_deselected:
+        lines.append(f"  NOTE  pytest deselected: {pytest_deselected} test(s) were excluded "
+                     "from the pytest layer by the gate's own -k/marker filters — deselection "
+                     "means those assertions did not run in this build, exactly like a skip "
+                     "(n25 finding III.4: disclosure extended from skips to deselects).")
     lines.append("")
     if names_fail:
         lines.append("ONE OR MORE GATE LAYERS FAILED — do NOT tag a new release until fixed.")
@@ -199,6 +204,7 @@ def main():
 
     # Layer 2: pytest (SKIP, never PASS, when --quick — CG-10 fix)
     pytest_internal_skips = 0
+    pytest_deselected = 0
     if args.quick:
         print(f"\n[L2/{TOTAL_LAYERS}] Full pytest suite (SKIPPED via --quick: this layer "
               "asserts NOTHING in this run)")
@@ -252,6 +258,9 @@ def main():
         m = re.search(r"(\d+) skipped", tail or "")
         if m:
             pytest_internal_skips = int(m.group(1))
+        m = re.search(r"(\d+) deselected", tail or "")
+        if m:
+            pytest_deselected = int(m.group(1))
 
     # Layer 3: drift guard
     ok, tail = run_layer(
@@ -413,7 +422,7 @@ def main():
 
     # Summary (gate contract: PASS/FAIL/SKIP per layer + scope statement)
     print()
-    text, code = summarize(results, pytest_internal_skips)
+    text, code = summarize(results, pytest_internal_skips, pytest_deselected)
     print(text)
     return code
 

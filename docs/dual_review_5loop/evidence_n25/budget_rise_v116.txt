@@ -1,0 +1,58 @@
+Budget-rise evidence for v1.16  (n25 rule, audit_pdf_render.budget_rise_defect)
+================================================================================
+Date: 2026-11-02. Question: is the v1.15 -> v1.16 literal-'**' rise
+(prev-documented 70 -> 72) a regression (stray markup leaking into the
+render) or source-edit reflow (the report deliberately quotes '**' text)?
+
+Method: line-multiset diff over extracted PDF text (Counter diff, no
+difflib -- a SequenceMatcher attempt timed out at 120 s and was discarded).
+Script: scratch/marker_attr.py; counts verified with pdftotext plain AND
+-layout modes, and cross-checked by per-page decomposition (page sums equal
+whole-file counts).
+
+Measured literal-'**' counts:
+  v1.14  62   (frozen historical control; evidence_n24 log reproduces)
+  v1.15  69   (its declared budget was 70; re-measurement disclosed in 26.3)
+  v1.16  72   (whole-file 72; per-page sum 72; both modes agree)
+
+Line-level accounting, v1.15 -> v1.16 (the diff sums to +3 = 72 - 69):
+
+  GENUINE SOURCE ADDITIONS (+4):
+  one new line in section 26 quoting the n25 grammar-fix markdown source:
+      "For **0 of 8** halos is |_HL| < 0.05 cm2/g"  "For **0 of 8** halos,
+      |_HL| < 0.05 cm2/g"  --  two quoted '**' pairs, deliberately rendered
+      literally as quoted markdown.
+
+  REMOVED (-1): the old supersession-chain line ("Supersedes v1.14 ... the
+  filename collides with the n22 adjudicated in section 23 ...") carried 1
+  literal marker; its v1.16 replacement carries 0.
+
+  NET-ZERO REFLOWS (paired +n/-n on identical carried text re-broken across
+  render lines): the section-25.6 footnote block and related table-region
+  lines -- pairs at +5/-5, +4/-4, +3/-3, +2/-2 (x4), +1/-1 (x8). Each pair
+  contributes 0 to the total.
+
+  Arithmetic: 69 + 4 - 1 = 72. No unpaired marker of any other kind exists
+  in the diff.
+
+CONCLUSION: no regression. Every net-new literal '**' in the v1.16 PDF sits
+inside quoted markdown snippets where the asterisks ARE the quoted content
+(same evidence class as the CG-15 quoted-code control). No stray emphasis
+markup leaked: the block-marker and leaked-row checks pass on the v1.16
+build (see pdf_audit_v116_full.log / pdf_audit_v116_gate.log). Budget 72 is
+a fresh measurement against prev 70; this file satisfies the ratchet.
+
+Reproduction commands (run from repo root; use the gate's audit interpreter
+C:/Python314/python.exe -- the union extractor; pdftotext-only probes
+overstate containment defects and are NOT the gate's measurement):
+  C:/Python314/python.exe scripts/audit_pdf_render.py docs/papers/pdf_jobs.json
+  C:/Python314/python.exe scripts/audit_pdf_render.py docs/dual_review_5loop/evidence_n24/jobs_v114_frozen.json   # frozen control: PASS, 62 markers
+  pdftotext <pdf> - | grep -o '\*\*' | wc -l
+  pdftotext -layout <pdf> - | grep -o '\*\*' | wc -l
+  (marker_attr.py: Counter-diff of extracted lines, both PDFs)
+
+Control-run cross-check (2026-11-02): BOTH the pre-change (HEAD) audit and
+this round's audit PASS the byte-frozen v1.14 pair under the gate
+interpreter -- the ratchet machinery did not alter verdicts on unchanged
+inputs, and the audit changes introduced this round are validated on
+frozen inputs before being trusted on new ones.
