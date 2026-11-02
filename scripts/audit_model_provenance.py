@@ -79,20 +79,15 @@ REPO = Path(__file__).resolve().parent.parent
 DOCS = REPO / "docs" / "dual_review_5loop"
 
 
+from doc_version import latest as _doc_latest  # CG-19 shared selection
+
 def _latest(prefix: str) -> Path | None:
     """Newest doc matching <prefix>vMAJOR.MINOR_*.md by real version numbers.
 
     (Lexicographic max is wrong here: 'v1.9' sorts above 'v1.16'.)
+    Shared with gate layer 8 via scripts/doc_version.py.
     """
-    best, best_v = None, None
-    for p in DOCS.glob(f"{prefix}v*.md"):
-        m = re.search(r"v(\d+)\.(\d+)_", p.name)
-        if not m:
-            continue
-        v = (int(m.group(1)), int(m.group(2)))
-        if best_v is None or v > best_v:
-            best, best_v = p, v
-    return best
+    return _doc_latest(DOCS, prefix)
 
 
 # n25 (2026-11-01): the scanned docs were frozen constants (v1.10/v1.8) while
@@ -101,7 +96,7 @@ def _latest(prefix: str) -> Path | None:
 # close-out every run, so claims in NEW sections (e.g. report §26) are checked.
 REPORT = _latest("SIDM_ROUND5_CONSOLIDATED_FIXES_")
 CLOSEOUT = _latest("SIDM_N24_CLOSEOUT_REPORT_WITH_CODE_")
-COMPANION = DOCS / "SIDM_ROUND5_CHANGED_CODE_v1.8_2026-10-26.md"
+COMPANION = _latest("SIDM_ROUND5_CHANGED_CODE_")  # CG-19: was frozen at v1.8
 
 # ---------------------------------------------------------------- hermes home
 def hermes_home():
@@ -377,6 +372,7 @@ def main():
     api, fb = load_agent_log()
     docs = deliverable_texts()
     snapshot = {}
+    snapshot_warnings: list[tuple[str, str]] = []
     if SNAPSHOT.exists():
         snapshot = json.loads(SNAPSHOT.read_text(encoding="utf-8"))
 
@@ -416,6 +412,16 @@ def main():
         # the sum over its task transcripts.
         api_calls = (sum(r["n_calls"] for r in recs) if recs
                      else snapshot.get(did, {}).get("api_calls"))
+        # n27 item 6: a snapshot-backed count is only as trustworthy as its
+        # attestation. Entries must record WHERE/WEN the number was verified
+        # (commit + evidence log); an unanchored snapshot entry is flagged
+        # loudly instead of being trusted silently.
+        api_attested = snapshot.get(did, {}).get("attested") if not recs and api_calls is not None else None
+        if not recs and api_calls is not None and not api_attested:
+            snapshot_warnings.append((
+                did, "snapshot entry has no attestation anchor "
+                     "(commit/date/evidence-log) — the snapshot's own "
+                     "provenance is unauditable (n27 item 6)"))
         api_models = sorted({m for r in recs for m in r["models"]})
         api_providers = sorted({pr for r in recs for pr in r["providers"]})
         chains = []
@@ -444,6 +450,7 @@ def main():
             "api_calls_source": ("agent.log" if recs
                                   else ("snapshot" if api_calls is not None
                                         else None)),
+            "api_calls_attested": api_attested,
             "api_models": api_models,
             "api_providers": api_providers,
             "fallbacks": fallbacks,
@@ -610,6 +617,7 @@ def main():
             "evidence": evidence,
             "findings": findings,
             "unverifiable": unverifiable,
+            "snapshot_warnings": snapshot_warnings,
             "distinct_model_pairs": sorted(distinct_pairs),
             "result": "PASS" if ok else "FAIL",
         }, indent=2, default=str))
@@ -633,6 +641,10 @@ def main():
         print(f"     effective: {ev['effective_models']}")
         print(f"     session  : {ev['session_id']}  "
               f"api_calls={ev['api_calls']}  tool_total={ev['tool_total']}")
+        if ev.get("api_calls_source") == "snapshot":
+            att = ev.get("api_calls_attested") or {}
+            print(f"     api count from durable snapshot, attested at commit "
+                  f"{att.get('commit', 'UNANCHORED — see snapshot_warnings')}")
         if ev["tool_counts"]:
             print(f"     tools    : {ev['tool_counts']}")
         for chain in ev["fallbacks"]:

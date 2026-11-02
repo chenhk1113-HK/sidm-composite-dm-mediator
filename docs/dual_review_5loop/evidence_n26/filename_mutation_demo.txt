@@ -1,0 +1,29 @@
+# CG-20 mutation demo (2026-11-02): inject a phantom .md citation into the live close-out;
+# layer 8's filename sub-check must fail; removal must restore PASS.
+
+INJECTED LINE (appended to close-out): Machine-readable evidence for this close-out is filed under `SIDM_GHOST_EVIDENCE_v9_2026-13-99.md`.
+
+--- run 1 (phantom present): exit=1
+  report     headings=128  OK=469  STALE= 17  EXT=  0  QUOTED-BAD=  6  DANGLING=  0
+  closeout   headings= 11  OK= 20  STALE=  0  EXT=  0  QUOTED-BAD=  0  DANGLING=  0
+  companion  headings= 41  OK= 75  STALE= 21  EXT=  0  QUOTED-BAD=  2  DANGLING=  0
+  paper      headings= 66  OK=288  STALE=  0  EXT=  4  QUOTED-BAD=  0  DANGLING=  0
+  report L1721 §99.9: (exit 1); a dangling `§99.9` reproduces a DANGLING failure; restoring the file returns PASS 
+  companion L1749 §99.9: | layer 8, dangling set | `DANGLING=0`, PASS | inject `§99.9` → DANGLING FAIL, exit 1 | PASS
+  companion L1750 §10.7: | layer 8, external refs | 4 ClawsGO citations stay EXT (not DANGLING) | stale §10.7 beside 
+OK: no DANGLING section references in the report, the close-out, the companion, or the paper.
+DANGLING FILENAME references (CG-20) - a .md named in prose exists in neither the worktree nor git history. FAIL:
+  closeout L295 SIDM_GHOST_EVIDENCE_v9_2026-13-99.md: cited .md filename exists in neither the worktree nor git history
+RESULT: FAIL
+
+--- run 2 (phantom removed): exit=0
+  report     headings=128  OK=469  STALE= 17  EXT=  0  QUOTED-BAD=  6  DANGLING=  0
+  closeout   headings= 11  OK= 20  STALE=  0  EXT=  0  QUOTED-BAD=  0  DANGLING=  0
+  companion  headings= 41  OK= 75  STALE= 21  EXT=  0  QUOTED-BAD=  2  DANGLING=  0
+  paper      headings= 66  OK=288  STALE=  0  EXT=  4  QUOTED-BAD=  0  DANGLING=  0
+  report L1721 §99.9: (exit 1); a dangling `§99.9` reproduces a DANGLING failure; restoring the file returns PASS 
+  companion L1749 §99.9: | layer 8, dangling set | `DANGLING=0`, PASS | inject `§99.9` → DANGLING FAIL, exit 1 | PASS
+  companion L1750 §10.7: | layer 8, external refs | 4 ClawsGO citations stay EXT (not DANGLING) | stale §10.7 beside 
+OK: no DANGLING section references in the report, the close-out, the companion, or the paper.
+OK: every .md filename cited in the audited documents exists in the worktree or git history (disclosed phantoms are allowlisted and machine-guarded).
+RESULT: PASS

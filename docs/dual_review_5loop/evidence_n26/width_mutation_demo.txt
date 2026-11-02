@@ -1,0 +1,18 @@
+# CG-21 two-shape mutation demo (2026-11-02).
+# Shape A (D6 class): unescaped pipe added INSIDE a cell -> collected row has 7 cells vs 6-cell header.
+# Shape B (D5 class): closing pipe removed -> the builder's row collector (requires leading AND
+#   trailing pipe) does not collect the line; it escapes into the body as prose, and the
+#   extraction-side leaked-row detector (layer 11) catches the shipped artifact instead.
+
+--- run A (build, widened row): exit=1
+TABLE WIDTH MISMATCH (CG-21) in | gap ID | what is not covered | why it matters | current st: row 20: 7 cells vs header 6 — first row: '| gap ID | what is not covered | why it matters | current status | who owes it |'. Fix the source row (missing/extra unescaped pipe, or an unescaped pipe inside a code span) rather than padding around it.
+
+--- run B (build, closing pipe removed): exit=0
+OK /mnt/c/Users/lamkuenai/round5_deliver/_n27_mutB.pdf  318547 bytes
+
+--- run B audit (extraction-side, gate mode): exit=1
+  ! _n27_mutB.pdf: literal table-row marker leaked into the rendered text (extracted line 1531): "| CG-19 | the gate's own deliverable selection was frozen constants — layers 8 and 9 hardc"
+  ! _n27_mutB.pdf: literal heading marker leaked into the rendered text (extracted line 3218): "# n26 claim Adjudication against Treatment"
+  ! _n27_mutB.pdf: literal table-row marker leaked into the rendered text (extracted line 4830): "| CG-19 | the gate's own deliverable selection was frozen constants -- layers 8 and 9 hard"
+  ! _n27_mutB.pdf: literal heading marker leaked into the rendered text (extracted line 6129): "#  n26 claim                    Adjudication against                          Treatment"
+RESULT: FAIL — 4 hard defect(s), 0 advisory.

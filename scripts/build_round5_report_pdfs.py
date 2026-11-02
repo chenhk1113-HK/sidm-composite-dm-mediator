@@ -37,6 +37,8 @@ Usage:
 """
 
 import re
+
+import table_cells as tc  # CG-21 shared cell logic
 import sys
 from pathlib import Path
 
@@ -228,15 +230,27 @@ def md_to_flow(md, st):
             # and silently widened the whole table to 10 columns.
             # Backslash-escaped pipes stay inside their cell and render as
             # literal '|'.
-            cells = [c.strip().replace("\\|", "|")
-                     for c in re.split(r"(?<!\\)\|", raw.strip().strip("|"))]
+            cells = tc.split_cells(raw)  # shared with tests (CG-21)
             if all(set(c) <= set('-: ') and c for c in cells):
                 continue                      # separator row
             rows.append(cells)
         if not rows:
             tbl_buf = []
             return
-        ncol = max(len(r) for r in rows)
+        # n26/CG-21 (2026-11-02): build-time cell-width validation. A table
+        # row whose unescaped-cell count differs from the header is a hard
+        # BUILD ERROR — the old behaviour silently padded to max(len(r)),
+        # which is exactly how D5 (a row missing its closing pipe, 5 of 6
+        # cells) leaked and how D6 (escaped pipes cut mid-cell, 10 of 6
+        # cells) widened the §17.3 table without anyone noticing. Both
+        # instances of the pipe-handling class now fail loudly at build.
+        try:
+            ncol = tc.validate_rows(rows, label=tbl_buf[0][:60])
+        except ValueError as e:
+            raise SystemExit(
+                f"{e} — first row: {tbl_buf[0][:80]!r}. Fix the source row "
+                f"(missing/extra unescaped pipe, or an unescaped pipe "
+                f"inside a code span) rather than padding around it.")
         rows = [r + [''] * (ncol - len(r)) for r in rows]
         data = [[Paragraph(inline(c), st['body']) for c in r] for r in rows]
         t = Table(data, repeatRows=1, hAlign='LEFT')

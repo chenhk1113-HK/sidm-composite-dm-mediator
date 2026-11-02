@@ -274,7 +274,16 @@ def looks_like_leaked_table_row(s: str) -> bool:
     header across ten page breaks). ReportLab table cells never emit '|';
     only a raw markdown line rendered as prose does. A leaked row wraps
     like prose, so its FIRST extracted line starts with '|' but ends
-    mid-sentence — requiring a closing pipe would miss the real shape."""
+    mid-sentence — requiring a closing pipe would miss the real shape.
+
+    SCOPE LIMIT (named per n27 item 7, same disclosure standard as layer
+    12's alphanumeric-blindness and layer 14's substitution-blindness):
+    the whitelist matches pipe-bearing prose by TOKEN PREFIX, so a genuine
+    leaked row whose first extracted line happens to coincide with a
+    whitelisted quoted-prose prefix is NOT covered by this detector. The
+    class backstop for that face is the build-time width gate (CG-21,
+    scripts/table_cells.py): a ragged table now fails the build before any
+    PDF exists to extract, so an extractor-side miss can no longer ship."""
     return s.startswith("|") and s.count("|") >= 2
 
 

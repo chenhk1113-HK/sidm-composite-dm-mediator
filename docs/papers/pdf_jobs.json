@@ -9,15 +9,14 @@
   "marker_budget_note": "Clean. The literal-** class is fully fixed in this document; the budget is 0 and must stay 0."
  },
  {
-  "md": "/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/docs/dual_review_5loop/SIDM_ROUND5_CONSOLIDATED_FIXES_v1.16_2026-11-01.md",
-  "pdf": "/mnt/c/Users/lamkuenai/round5_deliver/SIDM_ROUND5_CONSOLIDATED_FIXES_v1.16_2026-11-01.pdf",
-  "title": "Consolidated Fixes Report - v1.16",
-  "subtitle": "SIDM v19.2-F  |  Round 5 + n18 + n19 + n20 + n21 + n22 + n23 + n24 + n25 review response",
-  "footer": "SIDM v19.2-F - Round 5 + n18 + n19 + n20 + n21 + n22 + n23 + n24 + n25 review response",
+  "md": "docs/dual_review_5loop/SIDM_ROUND5_CONSOLIDATED_FIXES_v1.17_2026-11-02.md",
+  "pdf": "/mnt/c/Users/lamkuenai/round5_deliver/SIDM_ROUND5_CONSOLIDATED_FIXES_v1.17_2026-11-02.pdf",
+  "title": "SIDM v19.2-F — Round 5 + n18 + n19 + n20 + n21 + n22 + n23 + n24 + n25 + n26 Review Response (v1.17, 2026-11-02)",
+  "subtitle": "SIDM v19.2-F Round 5 consolidated fixes report v1.17 + n26 review response",
+  "footer": "SIDM v19.2-F · Round 5 + n18–n26 review response · report v1.17 (2026-11-02)",
   "marker_budget": 72,
-  "marker_budget_prev": 70,
-  "marker_budget_note": "Measured 2026-11-02 on this build's extracted PDF text: 72 literal '**' (plain AND -layout modes agree; per-page sum 72). Ratchet: prev 70 (v1.15). Rise = +4 markers on new quoted-markdown lines in 25.6/26 ('For **0 of 8** halos...' x2 pairs + open-set sentence), -1 from a removed supersession-chain line, all other diffs net-zero line reflows; no markup regression. Deferred markup class, 16.6.",
-  "budget_rise_evidence": "docs/dual_review_5loop/evidence_n25/budget_rise_v116.txt (line-multiset diff v1.15->v1.16, 2026-11-02; 62/69/72 both extraction modes)"
+  "marker_budget_prev": 72,
+  "marker_budget_note": "Measured 2026-11-02 on this build's extracted PDF text: 72 literal '**' (plain AND -layout modes agree; per-page sum 72). Ratchet: prev 70 (v1.15). Rise = +4 markers on new quoted-markdown lines in 25.6/26 ('For **0 of 8** halos...' x2 pairs + open-set sentence), -1 from a removed supersession-chain line, all other diffs net-zero line reflows; no markup regression. Deferred markup class, 16.6."
  },
  {
   "md": "/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/docs/dual_review_5loop/SIDM_N24_CLOSEOUT_REPORT_WITH_CODE_v1.1_2026-11-01.md",

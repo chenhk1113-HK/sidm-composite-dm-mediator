@@ -85,8 +85,20 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 
 DOCS = REPO / "docs" / "dual_review_5loop"
-REPORT = DOCS / "SIDM_ROUND5_CONSOLIDATED_FIXES_v1.10_2026-10-26.md"
-COMPANION = DOCS / "SIDM_ROUND5_CHANGED_CODE_v1.8_2026-10-26.md"
+
+# CG-19 (n27 review item 1, 2026-11-02): the audited deliverables were
+# frozen constants (v1.10 report / v1.8 companion) from this layer's first
+# commit, while the deliverables moved through a dozen versions — the layer
+# was anchor-auditing a stale snapshot. Selection is now version-aware and
+# NUMERIC (lexicographic max is wrong here: 'v1.9' sorts above 'v1.16').
+from doc_version import latest as _doc_latest  # CG-19 shared selection
+
+def _latest(prefix: str) -> Path | None:
+    return _doc_latest(DOCS, prefix)
+
+REPORT = _latest("SIDM_ROUND5_CONSOLIDATED_FIXES_")
+CLOSEOUT = _latest("SIDM_N24_CLOSEOUT_REPORT_WITH_CODE_")
+COMPANION = _latest("SIDM_ROUND5_CHANGED_CODE_")
 PAPER = REPO / "v0.3-prelim" / "docs" / "PAPER_V1_DRAFT.md"
 
 # A heading is "## 17. Title", "### 17.3 Title", "#### 10.4g.1 Title".
@@ -278,15 +290,77 @@ def audit_doc(path, doc_label, registries, allow_quoted, retired_only):
     return res
 
 
+# ---------------------------------------------------------------------------
+# FILENAME-EXISTENCE SUBCHECK (CG-20, n27 review item 4)
+# ---------------------------------------------------------------------------
+# The close-out cited SIDM_SEARCHABLE_v19_2_F.md — a filesystem object that
+# has never existed in the worktree OR anywhere in git history — and three
+# consecutive delivery rounds shipped with every layer green. Layer 8 proves
+# section anchors resolve; this sub-check is its sibling for the other
+# reference type a document makes: a .md FILENAME named in prose must
+# actually exist, in the worktree or in git history (a superseded-and-deleted
+# historical version is a legitimate citation — e.g. the v1.0 report exists
+# only in history; a phantom exists nowhere at all).
+FILENAME_REF_RE = re.compile(r"\b[A-Z][A-Za-z0-9]{2,}(?:_[A-Za-z0-9.\-]+)+\.md\b")
+
+# Disclosed phantoms: names the documents cite AS phantoms (§26.6's whole
+# point is that the name never existed). The allowlist is machine-guarded:
+# an entry that actually exists in worktree or git history is itself a
+# defect — an allowlist may never hide a real file, and stale entries
+# surface loudly.
+PHANTOM_ALLOWLIST = {
+    "SIDM_SEARCHABLE_v19_2_F.md":
+        "disclosed phantom (§26.6): git log --all -- '*SEARCHABLE*' is empty; "
+        "cited only as a phantom",
+}
+
+
+def _git_history_names() -> set[str]:
+    """Leaf basenames of every .md path ever touched on any branch."""
+    import subprocess
+    out = subprocess.run(
+        ["git", "-C", str(REPO), "log", "--all", "--name-only",
+         "--format=", "--diff-filter=ADR"],
+        capture_output=True, text=True, timeout=180)
+    return {ln.strip().rsplit("/", 1)[-1] for ln in out.stdout.splitlines()
+            if ln.strip()}
+
+
+def check_filenames(texts: dict[str, str]) -> list[dict]:
+    """Defects for cited .md filenames that exist in neither worktree nor history."""
+    hist = _git_history_names()
+    worktree = {p.name for p in REPO.rglob("*.md")}
+    defects: list[dict] = []
+    for name, why in PHANTOM_ALLOWLIST.items():
+        if name in worktree or name in hist:
+            defects.append({
+                "doc": "PHANTOM-ALLOWLIST", "name": name,
+                "problem": f"allowlisted phantom actually exists — remove the "
+                           f"allowlist entry ({why})"})
+    for label, text in texts.items():
+        for line_no, line in enumerate(text.splitlines(), 1):
+            for name in set(FILENAME_REF_RE.findall(line)):
+                if name in PHANTOM_ALLOWLIST:
+                    continue
+                if name not in worktree and name not in hist:
+                    defects.append({
+                        "doc": label, "name": name, "line": line_no,
+                        "text": line[:100],
+                        "problem": "cited .md filename exists in neither the "
+                                   "worktree nor git history"})
+    return defects
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--json", action="store_true",
                     help="emit machine-readable JSON")
     args = ap.parse_args()
 
-    # ---- load the three audited documents --------------------------------
-    paths = {"report": REPORT, "companion": COMPANION, "paper": PAPER}
-    texts = {k: (p.read_text(encoding="utf-8") if p.exists() else "")
+    # ---- load the audited documents --------------------------------------
+    paths = {"report": REPORT, "closeout": CLOSEOUT, "companion": COMPANION,
+             "paper": PAPER}
+    texts = {k: (p.read_text(encoding="utf-8") if p and p.exists() else "")
              for k, p in paths.items()}
     H = {k: headings(v) for k, v in texts.items()}
 
@@ -300,12 +374,21 @@ def main():
                       retired_only=RETIRED_PAPER_SECTIONS)
     # The report resolves against itself, then the paper (the report is about
     # the paper and cites it constantly), then the companion.
-    report = audit_doc(REPORT, "report", [H["report"], H["paper"], H["companion"]],
+    report = audit_doc(REPORT, "report",
+                       [H["report"], H["closeout"], H["paper"], H["companion"]],
                        allow_quoted=True, retired_only=RETIRED_PAPER_SECTIONS)
     # The companion resolves against itself, then the paper, then the report.
     companion = audit_doc(COMPANION, "companion",
                           [H["companion"], H["paper"], H["report"]],
                           allow_quoted=True, retired_only=RETIRED_PAPER_SECTIONS)
+    # The close-out resolves against itself, then the report, then the paper,
+    # then the companion (CG-19: the close-out was never audited by this layer).
+    closeout = audit_doc(CLOSEOUT, "closeout",
+                         [H["closeout"], H["report"], H["paper"], H["companion"]],
+                         allow_quoted=True, retired_only=RETIRED_PAPER_SECTIONS)
+
+    # CG-20 (n27 item 4): .md filenames cited in prose must exist somewhere.
+    filename_defects = check_filenames(texts)
 
     # The paper's stale anchors are a tracked gap (CG-13), not a failure - but
     # growth is a failure, because that means a new pointer to a retired
@@ -314,15 +397,17 @@ def main():
 
     # RETIRED_PAPER_SECTIONS entries no longer triggered anywhere are dead
     # exemptions: the reference was fixed, so the entry should be removed.
-    triggered = {ref for d in (report, companion, paper)
+    triggered = {ref for d in (report, closeout, companion, paper)
                  for _, ref, _ in d["stale"]}
     dead_exemptions = sorted(set(RETIRED_PAPER_SECTIONS) - triggered)
 
-    total_dangling = (len(report["dangling"]) + len(companion["dangling"])
-                      + len(paper["dangling"]))
+    total_dangling = (len(report["dangling"]) + len(closeout["dangling"])
+                      + len(companion["dangling"]) + len(paper["dangling"]))
 
     out = {
-        "report": report, "companion": companion, "paper": paper,
+        "report": report, "closeout": closeout,
+        "companion": companion, "paper": paper,
+        "filename_defects": filename_defects,
         "paper_stale_baseline": PAPER_STALE_BASELINE,
         "paper_stale_growth": paper_stale_growth,
         "dead_exemptions": dead_exemptions,
@@ -331,16 +416,17 @@ def main():
 
     if args.json:
         print(json.dumps(out, indent=2, default=str))
-        return 1 if (total_dangling or paper_stale_growth) else 0
+        return 1 if (total_dangling or paper_stale_growth or filename_defects) else 0
 
     print("=" * 74)
     print("CROSS-DOCUMENT SECTION-ANCHOR AUDIT (gate layer 8)")
     print("=" * 74)
     print(f"Paper   : {PAPER.name}")
     print(f"Report  : {REPORT.name}")
+    print(f"Closeout: {CLOSEOUT.name}")
     print(f"Companion: {COMPANION.name}")
     print()
-    for res in (report, companion, paper):
+    for res in (report, closeout, companion, paper):
         if res.get("missing_file"):
             print(f"  {res['label']:10} MISSING FILE: {res['path']}")
             continue
@@ -364,22 +450,22 @@ def main():
             print(f"      retired: {RETIRED_PAPER_SECTIONS[ref][:88]}")
         print()
 
-    if any(d["external"] for d in (report, companion, paper)):
+    if any(d["external"] for d in (report, closeout, companion, paper)):
         print("-" * 74)
         print("EXTERNAL-DOCUMENT references (cite another document's section, "
               "not this one's - exempt):")
         print("-" * 74)
-        for res in (report, companion, paper):
+        for res in (report, closeout, companion, paper):
             for line_no, ref, line in res["external"]:
                 print(f"  {res['label']} L{line_no} §{ref}: {line[:88]}")
         print()
 
-    if report["quoted"] or companion["quoted"]:
+    if report["quoted"] or companion["quoted"] or closeout["quoted"]:
         print("-" * 74)
         print("QUOTED-BAD references (the reviewer's wrong anchors, quoted on "
               "purpose - exempt):")
         print("-" * 74)
-        for res in (report, companion):
+        for res in (report, companion, closeout):
             for line_no, ref, line in res["quoted"]:
                 print(f"  {res['label']} L{line_no} §{ref}: {line[:92]}")
         print()
@@ -398,7 +484,7 @@ def main():
         print(f"DANGLING references - section does not exist and was never "
               f"written ({total_dangling} total). FAIL:")
         print("-" * 74)
-        for res in (report, companion, paper):
+        for res in (report, closeout, companion, paper):
             for line_no, ref, line in res["dangling"]:
                 print(f"  {res['label']} L{line_no} §{ref}: {line[:96]}")
         print()
@@ -406,11 +492,25 @@ def main():
               "the companion,\n  or the paper - or be a quotation of a known-bad "
               "anchor (the context must\n  negate it explicitly).")
     else:
-        print("OK: no DANGLING section references in the report, the companion, "
-              "or the paper.")
+        print("OK: no DANGLING section references in the report, the close-out, "
+              "the companion, or the paper.")
     print()
 
-    if total_dangling or paper_stale_growth:
+    if filename_defects:
+        print("-" * 74)
+        print("DANGLING FILENAME references (CG-20) - a .md named in prose exists "
+              "in neither the worktree nor git history. FAIL:")
+        print("-" * 74)
+        for d in filename_defects:
+            print(f"  {d['doc']} L{d.get('line', '-')} {d['name']}: {d['problem'][:90]}")
+        print()
+    else:
+        print("OK: every .md filename cited in the audited documents exists in the "
+              "worktree or git history (disclosed phantoms are allowlisted and "
+              "machine-guarded).")
+    print()
+
+    if total_dangling or paper_stale_growth or filename_defects:
         print("RESULT: FAIL")
         return 1
     print("RESULT: PASS")
