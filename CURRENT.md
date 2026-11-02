@@ -59,7 +59,7 @@
 
 **Process findings (R88(80)):** Bundle directory is NOT under git version control. R88(71) checklist item (6) added: if paper text or findings document changed, the bundle directory and single .md MUST be rebuilt in the same R88 round.
 
-**Tag pending:** `v19.2-D-milestone-R88(80)` (will be created on next user request).
+**Tags created:** `v19.2-D-milestone-R88(80)` -> `260fee5` (annotated, 2026-10-08) and `v19.2-D-milestone-R88-final` -> `2e2c7c0`. Record save point for the n22-n26 audit chain (report v1.17, gate 15/15 on `e38e700`): `v19.2-F-RecordSave-v1.17` (created 2026-11-03).
 
 **v19.2-C headline:** Hierarchy constraint **g_N/g_χ < 3 × 10⁻¹¹** (R57, dark-sector hierarchy) + **α_χ ~ 6.8 × 10⁻⁷** (R58) + **5 UV no-go theorems** (1 general theorem from Chu+ 2019 p-wave literature + 4 ruled-out completions: magnetic dipole, hidden U(1), GeV inelastic, one-mediator UV) + **§2.7 Ohana+ consistency at 0.16 dex** + **Mace+ ~7× deficit** at v=28 (R39) + **standing_numbers.json infrastructure**.
 

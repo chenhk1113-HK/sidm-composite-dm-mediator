@@ -10,6 +10,31 @@
 
 - **Verification**: full 15-layer `verify_release_gate.py` on `c323961` — GATE PASSED (pytest 1925 passed / 22 skipped disclosed / 36 deselected, 25m55s); targeted layers run standalone (drift_guard, audit_units, markdown tables, doc anchors, stale strings, hierarchy chain, breakthrough label) all PASS on the final tree.
 
+## [v19.2-F-N26-ReportAudit-2026-11-02]
+
+**External review round n26 (reviewer's round 11, filename n22.docx): all 7 adjudicated findings remediated. Consolidated report v1.17.**
+
+- **CG-19 closed**: gate layers 8+9 select deliverables numerically (`scripts/doc_version.py`); frozen v1.10/v1.8 constants git-bounded 69a76e5..54ef104; close-out deliverables now anchor-audited; historical layer-9 claims bounded in report §27.2.
+- **CG-20 closed**: layer 8 gains a filename-existence sub-check (worktree + git history) with a machine-guarded phantom allowlist.
+- **CG-21 closed**: build-time table-width gate (`scripts/table_cells.py`, shared by builder and tests); two-station catch map (build vs extraction) measured.
+- **Report §27.5-27.7**: budget ratchet triple disclosed (72 -> 72, measured both modes); provenance snapshot attestation anchor (commit 54ef104 + evidence log); whitelist and numeric-copy blind spots named in source and detector docstring.
+- `v0.3-prelim/tests/conftest.py`: scripts/ added to the test import path (fixes gate layer 2 `ModuleNotFoundError: doc_version`).
+- 17 new control tests (`test_n27_gate_hardening.py`); mutation demos in `docs/dual_review_5loop/evidence_n26/`.
+- **Gate**: 15/15 PASS on the final tree (pytest 1954 passed / 22 skipped disclosed / 36 deselected, 1459.64s). Commits `ff9c33f` + gate evidence `e38e700`.
+
+## [v19.2-F-N25-ReportAudit-2026-11-02]
+
+**Round n25 review: all 11 adjudicated findings remediated. Report v1.16 + close-out v1.1.**
+
+- **D5**: CG-2 row missing its closing pipe leaked a fake header across pages 25-35 of the shipped v1.15 PDF; fixed at source; layer 11 now detects leaked table rows (whitelist for intentional quoted-pipe rows documented).
+- **D6**: builder split escaped pipes as delimiters (CG-11 row garbled in the shipped v1.15 PDF only; v1.14 never carried it); `flush_table` now splits unescaped pipes only; all 19 register rows parse to 6 cells.
+- **Budget ratchet**: layer-11 budgets may not silently rise (`budget_rise_defect` + `evidence_n25/budget_rise_v116.txt`; 62/69/72 measured, net +4/-1).
+- Gate summary now parses and discloses pytest deselections (36 were previously hidden).
+- **CG-18 registered and closed**: paper L783 "full hydrostatic equilibrium" restored verbatim from git history.
+- **Provenance**: phantom `SIDM_SEARCHABLE_v19_2_F.md` disproven (`git log --all`); close-out v1.1 re-attributes commit `4aa0039` to `PAPER_V1_DRAFT.md`; version-aware snapshot-backed deliverable discovery replaces frozen v1.10/v1.8 constants.
+- **Audit method fix**: containment probes must use the gate interpreter (pdfplumber union); pdftotext-only probes produced 19 phantom defects on the byte-frozen v1.14 control.
+- v1.16 rebuilt: PDF audits 0 hard / 0 advisory; markers 72/1/0 = budgets; 12 new unit tests green. Commits `54ef104` + `b28c149` (26.10 open-set enumeration at line start; layer 15 PASSED) + gate evidence `b5ac12e` (15/15).
+
 ## [v19.2-F-N24-ReportAudit-2026-10-31]
 
 **n24 external audit of report v1.14: all eight action items executed. Consolidated report v1.15; gate grows to 15 layers.**
