@@ -2274,7 +2274,9 @@ No scientific content changed. The paper was touched only by the CG-18 restorati
 
 ### 26.10 Corrected state after n25
 
-Register (§17.3, canonical): CG-18 added **CLOSED**; no other row changed state. Open set unchanged: **CG-16** open (owner explicit), **CG-4** user-deferred — all others closed. Document versions: consolidated report **v1.16** (this document), close-out **v1.1**. Gate: still **15 layers**; layer 11 gains the leaked-row detector and the budget ratchet; the pytest summary contract gains deselect disclosure. Active gate pairs: reference-integrity + **v1.16** (v1.15 superseded and removed from active jobs; its defect is disclosed in §26.1 and reproduced in the control run). Unit tests added this round: 12 (detector ×3, budget ×3, deselect ×3, wordset ×3), all green alongside the existing suites.
+Register (§17.3, canonical): CG-18 added **CLOSED**; no other row changed state.
+
+Open set: **CG-4** (markup pass, user-deferred), **CG-16** (owner explicit) — every other row in the register is closed. Document versions: consolidated report **v1.16** (this document), close-out **v1.1**. Gate: still **15 layers**; layer 11 gains the leaked-row detector and the budget ratchet; the pytest summary contract gains deselect disclosure. Active gate pairs: reference-integrity + **v1.16** (v1.15 superseded and removed from active jobs; its defect is disclosed in §26.1 and reproduced in the control run). Unit tests added this round: 12 (detector ×3, budget ×3, deselect ×3, wordset ×3), all green alongside the existing suites.
 
 **No scientific content changed and the paper is untouched except the single CG-18 restoration line.**
 
