@@ -1150,3 +1150,16 @@ The R88(79) bundle README claimed the paper was "byte-identical to R88(56); only
 
 This is a process-level finding, not a physics result. It documents a structural gap that allowed the drift to happen.
 
+---
+
+## 2026-11-03 — New-data sweep (Euclid / Roman / DESI + anchor citation watch)
+
+Canonical record: `docs/NEW_DATA_SWEEP_2026-11-03.md` (tiered intake table, sweep-defect log, KB operations). Summary:
+
+- **No revision found** for the v=150 anchors (Sameie+ 2020 1904.07872; Lei+ 2026 2609.16740; Wang+ 2026 2609.19132) in window 2025-06 -> 2026-11. The dissolution criterion for the v=150 tuning entry (shift ~2x in sigma_eff at v=150) has NOT fired; R88(87) demotion status unchanged.
+- One **must-read calibration threat**: 2610.28890 "Not so Fast: Revised Calibration of SIDM Core Collapse" (MNRAS accepted) — claims core collapse much slower once optically thick; pressures the Yang+ 2024 [43] t_c prefactor chain.
+- Two calibration cross-checks on the perturber normalisation: 2610.31881 (sigma0/m = 147.1 cm^2/g), 2610.40766 (sigma/m ~ 10^2-10^4 at ~10 km/s, PRL submitted).
+- First **Euclid measured** items touching channels (Q1 stream halo geometry 2606.21774; DR1 Fornax-7 2609.14535). Roman: forecasts only (launch pending). DESI Ly-alpha thermal-relic bound m_s^eff < 0.061 eV registered (2609.22581) — no threat to the ~0.5 GeV mediator.
+- Cloud-9 semantics re-confirmed: the project's Cloud-9 is the M94 RELHIC ([15a-c] chain), not the GD-1 spur.
+- KB intake: 15 PDFs to `to_verify/` (unverified until read), 3 Rule-8 PDF fills, 6 oversized PDFs held local with sha256 in the sweep doc.
+
