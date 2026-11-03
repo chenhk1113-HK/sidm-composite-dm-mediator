@@ -101,3 +101,8 @@ v0.*-prelim/logs/
 # --- agent scratch staging (never source) ---
 scratch/
 _n24_*
+
+# --- build caches (untracked 2026-11-03 housekeeping; also a CG-16 instance:
+#     .snakemake/metadata stores base64-encoded absolute Windows paths) ---
+.snakemake/
+.gitignore.strata
