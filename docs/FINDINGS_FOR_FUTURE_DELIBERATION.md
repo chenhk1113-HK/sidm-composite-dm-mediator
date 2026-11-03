@@ -126,6 +126,14 @@ The framework has been systematically tested across 10 observational channels. H
 
 ## 5. Open Questions for Future Deliberation
 
+### 5.0 New sweep verdicts applied (2026-11-03; full detail: docs/NEW_DATA_SWEEP_2026-11-03.md §7-8)
+- **Streams channel reweighted:** GD-1 single-encounter evidence weakened (Arora 2605.16200: 75% of 15,000 Gaia velocity jumps complex; Guillaume 2610.41842: merger/bar spur rates 50%/25% vs subhalo 28%; Chaves-Montero 2601.21432 reinterprets the excess as primordial power). Population-level inference (Nibauer 2510.02247: f_sub=0.05 (+0.12/−0.08), M_hm<10^8.6) stands as the CDM-consistent baseline; Model II steep subhalos remain viable.
+- **Model III watch item:** Zhu 2610.26877 (DESI DR2 BAO+CMB) puts σ/m < 0.01 cm²/g at v~1000 km/s; Model III predicts ≈0.03 there (Model I ≈5×10⁻⁵, safe). Mild cluster-scale pressure on the already-demoted Model III tail.
+- **Gravothermal calibration is now a two-source standing caveat** (van den Bosch & Tokayer 2610.28890 + Gurian 2610.28745, Kn=1 LMFP/SMFP boundary; SMFP t_c ∝ σ²). Gurian's merger delay ≤18 t_r directly relevant to stage 3 merger-tree work.
+- **J0946+1006 main halo:** Li+ 2026 (2602.20889) finds α=1.04±0.10 — cite subhalo steepness only, not main-halo super-NFW.
+- **Competing explanation logged:** Yang & Fan 2609.29114 (exothermic inelastic DM, Δ=18.1 keV) reproduces Lei/Wang-type deficits at cluster velocities — dilutes specificity of any SIDM-elastic reading.
+- **Coupling ceiling external support:** Crumrine+ 2606.10006 mixed-DM (DM-proton) satellite limits consistent with the <3×10⁻¹¹ baryon-coupling ceiling.
+
 ### 5.1 The f_H(r) segregation problem (Direction A from reviewer)
 - Yang+ 2025 Fig. 2 shows segregation in two-component SIDM
 - Heavy component sinks to center (f_H ~ 0.6) over time

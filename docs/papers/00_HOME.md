@@ -3,7 +3,7 @@
 This is a knowledge base for the v19.2-F project's paper references. It is organized as an Obsidian vault (markdown with bidirectional `[[wiki-links]]`). To use in Obsidian: open this directory as a vault.
 
 **Location:** `C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\docs\papers\`
-**Last updated:** 2026-10-17
+**Last updated:** 2026-11-03 (Tier-2 sweep papers verified — full intake closed)
 **Status:** Active, ongoing
 
 ---
@@ -47,7 +47,29 @@ papers the PAPER BODY actually leans on, downloaded because §8's rule requires 
 - [[2610.40766 Gilman+ 2026]] — SIDM hints from lensing, particle letter (PRL submitted) — corroboration; no numeric collision with 174@29.4
 - [[2609.35974 Gilman+ 2026]] — JWST survey V (PRD submitted) — population support 8:1-24:1 for core collapse
 
-The remaining 17 sweep intake papers stay in `to_verify/` (tiers per [[NEW_DATA_SWEEP_2026-11-03]] §3, incl. Euclid Q1 stream-halo geometry and Fornax-7 DR1); registry coupling happens at citation time.
+**2026-11-03 — new-data sweep Tier 2 added (read end-to-end; verdicts in each KB entry):**
+
+- [[2510.02247 Nibauer+ 2025]] — GD-1 ABC subhalo inference — background (CDM-consistent subhalo picture; f_sub 0.05±0.08; WDM M_hm<10^8.6)
+- [[2510.17956 Kollmann & Nierenberg 2025]] — lensed subhalo profiles — corroborates steep/compact subhalos (α≈2.1-2.2), no σ
+- [[2512.01361 Liu & Li 2025]] — GD-1 vs fuzzy/WDM — background (m_WDM>6.2 keV, m_FDM>1.74e-20 eV; no contact with our model)
+- [[2601.21432 Chaves-Montero+ 2026]] — GD-1 as early-universe probe — background (isocurvature A_S²<0.379; reinterpretation watch)
+- [[2602.20889 Li+ 2026]] — 20 elliptical mass profiles — refinement: J0946+1006 main halo α=1.04±0.10 (Sunnenfeld 1.7 artifact); merger-heated c200 scatter
+- [[2604.05237 Nierenberg+ 2026]] — JWST 61-cluster subhalo census — corroborates (weak): 10^8.2-10^8.6 M_sun subhalos observed, CDM-consistent
+- [[2604.20958 Jarvis+ 2026]] — GD-1 heated-subhalo cocoon — corroborates (weak): σ_v 2.49→6.13 mas/yr reproduced in CDM
+- [[2605.16200 Arora+ 2026]] — 15k Gaia velocity jumps — CONTESTS single-encounter reading (75% complex, 26% clean; GD-1 kicks all complex)
+- [[2610.41842 Guillaume+ 2026]] — Sgr merger makes GD-1-like spurs — CONTESTS (spur rates 50/25/28% merger/bar/subhalo; morphology degenerate)
+- [[2609.22581 Silva+ 2026]] — DESI Lyα sterile neutrinos — background (Neff<3.41, m_s^eff<0.061 eV; NOT a stream paper — reader misclassification corrected)
+- [[2609.29114 Yang & Fan 2026]] — mass deficit from inelastic DM — background/competing explanation (Δ=18.1 keV, σ(300)/m≈0.95 at cluster v; different regime)
+- [[2610.26877 Zhu+ 2026]] — DESI DR2 BAO SIDM1 — corroborates conditionally (lnB 5.57/8.72; σ/m<0.01 at v~1000; WATCH: pressures Model III tail ~0.03)
+- [[2609.14535 Saifollahi+ 2026]] — Euclid DR1 Fornax-7 — corroborates potential (170 M_sun, 10.4 Gyr, 2.8 kpc from Fornax; no DM measurement)
+- [[2606.10006 Crumrine+ 2026]] — mixed DM limits from MW satellites — background; external support for mediator baryon-coupling ceiling (NOT a WD paper — corrected)
+- [[2606.21774 Euclid Q1 Starkman+ 2026]] — halo geometry from 13 extragalactic streams — corroborates new channel (q_proj 0.95±0.05; no σ yet)
+- [[2609.11328 Besnard+ 2026]] — FDM mass from Euclid ERO globular clusters — background (m22<1.46 Fornax / <1.09 Perseus; NOT Sgr A* — corrected)
+- [[2610.28745 Gurian+ 2026]] — cross-code gravothermal calibration — METHODOLOGY CAVEAT with 2610.28890: Knudsen Kn=1 LMFP/SMFP boundary; Yang 150C valid only LMFP C≳0.5; SMFP t∝σ²
+
+Sweep intake is now CLOSED: all 21 candidates adjudicated (4 Tier-1 + 17 Tier-2).
+
+The remaining items in `to_verify/` are pre-sweep historical papers (Adén 2009, Simon 2011, Tulin+ 2013, etc.) with their own pending status.
 
 **Known gap (CLOSED 2026-10-27):** option 1 has been run — `fetch_all_cited_papers.sh`
 downloads the FULL 42-slot bibliography, so every cited paper now has a local PDF.

@@ -87,3 +87,18 @@ All four Tier-1 papers read end-to-end; KB summaries live in `docs/papers/verifi
 4. **2609.35974 (Gilman+, PRD, survey V) — ADOPT as population-level regime support.** Core-collapsed (sub)halos favored 8:1-24:1; escaping them requires excess GC abundance AND more subhalos than N-body predicts. Same lens sample as 40766 — do not double-count.
 
 Tier-2 items remain background (no posterior shifts) until dedicated re-runs; registry coupling happens at citation time. Stage 3 (Path 3 merger histories) awaits TNG account approval; baseline docs: `docs/FUTURE_WORK_PLAN_V19_2_E.md` section 2.
+
+## 8. Tier-2 read verdicts (CLOSED 2026-11-03 — all 17 read end-to-end)
+
+Three delegated readers extracted all 17 papers; each was then adjudicated against the local PDF text (headline numbers grep-verified; three delegated misclassifications corrected: **Silva 2609.22581** is a DESI-Lyα sterile-neutrino paper, not a stream paper; **Crumrine 2606.10006** is mixed-DM satellite limits, not a white-dwarf paper; **Besnard 2609.11328** is FDM globular-cluster limits from Euclid ERO, not Sgr A*). KB entries in `docs/papers/verified/`.
+
+| Group | Papers | Net effect |
+|---|---|---|
+| GD-1 streams | Nibauer 2510.02247, Jarvis 2604.20958, Liu 2512.01361, Chaves-Montero 2601.21432, Arora 2605.16200, Guillaume 2610.41842 | Streams channel DOWNgraded as single-encounter evidence: 75% of 15,000 Gaia velocity jumps are morphologically complex (Arora); merger/bar/subhalo spur rates 50/25/28% (Guillaume); GD-1 subhalo inference CDM-consistent, f_sub=0.05 (+0.121/−0.083), WDM M_hm<10^8.6 (Nibauer). Population-level steep-subhalo viability survives. |
+| Lensing substructure | Kollmann 2510.17956, Nierenberg 2604.05237, Li 2602.20889 | Corroborates compact/steep SUBhalos (α≈2.1-2.2; 10^8.2-10^8.6 M_sun detections) while Li finds J0946+1006 MAIN halo NFW (α=1.04±0.10 — Sonnenfeld's 1.7 was arc-driven). Cite subhalo steepness, not main-halo steepness. |
+| Gravothermal calibration | Gurian 2610.28745 | Two-source standing caveat with 2610.28890: Knudsen Kn=1 LMFP/SMFP boundary; Yang 150C family valid only LMFP C≳0.5 (Halo 1: Kn=6.65 at σ=250); SMFP t_c ∝ σ² — qualitative flip the [43] family misses; merger delay ≤18 t_r feeds stage 3. |
+| Cosmology | Zhu 2610.26877, Silva 2609.22581, Crumrine 2606.10006 | Zhu (DESI DR2 BAO): first BAO-line interacting-DM preference (lnB 5.57/8.72), σ/m<0.01 at v~1000 km/s — WATCH: Model III predicts σ(1000)≈0.03 (mildly pressured), Model I ≈5×10⁻⁵ (safe). Silva background (Neff<3.41, m_s^eff<0.061 eV). Crumrine: mixed-DM (γ/ν/p-DM) limits support our mediator baryon-coupling ceiling. |
+| Euclid | Q1 2606.21774, DR1 2609.14535, ERO 2609.11328 | New measured channels, no σ yet: q_proj=0.95±0.05 halo shapes from 13 stream hosts; Fornax-7 candidate satellite (170 M_sun, 10.4 Gyr, 2.8 kpc); FDM m22<1.46/1.09 from GC timing. Fornax cluster = emerging multi-probe lab. |
+| Alternative SIDM theory | Yang & Fan 2609.29114 | Competing cluster-velocity explanation for inner-fraction deficits (exothermic inelastic DM, Δ=18.1 keV, σ(300)/m≈0.95). Different velocity regime from our 29.4 km/s anchor; watch item only. |
+
+**Net posture:** no Tier-2 paper touches the canonical 174 cm²/g @ 29.4 km/s. Two GD-1 papers (Arora, Guillaume) materially weaken single-feature subhalo arguments. Zhu adds cluster-scale pressure on the demoted Model III tail. The gravothermal calibration caveat is now two-source (2610.28890 + 2610.28745). **Sweep intake closed: 21/21 adjudicated.**
