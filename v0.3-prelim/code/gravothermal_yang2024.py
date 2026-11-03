@@ -353,25 +353,43 @@ def formation_redshift(M_vir_msun: float) -> float:
 
 
 def lookback_time_gyr(z: float) -> float:
-    """Lookback time t_L(z) in Gyr (Yang+ 2024 eq. 3.2, h=0.7, Omega_m=0.286).
+    """Lookback time t_L(z) in Gyr (Yang+ 2024 eq. 3.2, h=0.7, Omega_m=0.286, Omega_L=0.714).
 
-    t_L(z) = 13.647 - 11.020 * ln(1.58 * (1+z)^1.5 * sqrt(1 + 2.4965*(1+z)^3))
+    Closed form: t_L(z) = 13.647 - 11.020 * asinh(1.58 * (1+z)^-1.5)
+    == 13.647 - 11.020 * ln(1.58(1+z)^-1.5 + sqrt(1 + 2.4965(1+z)^-3)).
+
+    Fixed 2026-11-03: the previous implementation transcribed eq. 3.2 with
+    (1+z) exponents sign-flipped and a SUM rendered as a PRODUCT
+    (13.647 - 11.020 ln(1.58 (1+z)^1.5 sqrt(1 + 2.4965 (1+z)^3))), which gave
+    t_L(0) = 1.71 Gyr (must be 0) and negative values for z > 0.16.
+    See docs/CLOUD9_HIGHSIGMA_TIMING_RECHECK_2026-11-03.md sec 4.
+
+    Sanity anchors (verified 2026-11-03): t_L(0) = 0; t_L(1.55) = 9.47 Gyr
+    (matches the paper's Cosmo-501 worked example, sec 3.1); t_L(1.5116)
+    = 9.50 Gyr (matches direct numerical integration of dz/((1+z)E(z))).
     """
     if z < 0:
         return 0.0
-    one_plus_z = 1.0 + z
-    arg = 1.58 * one_plus_z**1.5 * math.sqrt(1.0 + 2.4965 * one_plus_z**3)
-    return 13.647 - 11.020 * math.log(arg)
+    x = 1.58 * (1.0 + z) ** -1.5
+    return 13.647 - 11.020 * math.asinh(x)
 
 
 def evolution_time_gyr(M_vir_msun: float) -> float:
-    """Halo evolution time t_evol = 13.647 - t_L(z_f) (Yang+ 2024 eq. after 3.2).
+    """Halo evolution time since formation, in Gyr.
 
-    This is the duration the halo has evolved since formation.
+    Per Yang+ 2024 sec 3.1 recipe ("If tL(zf)/tc > 1, we truncate the halo's
+    evolution at tc"), the evolution duration entering tau = t/t_c is the
+    LOOKBACK time t_L(z_f) itself -- the time from formation to today.
+
+    Fixed 2026-11-03: the previous implementation returned 13.647 - t_L(z_f),
+    which is the age of the universe AT formation, not the evolution duration
+    (and, combined with the old broken lookback_time_gyr, returned 40.66 Gyr
+    for a 5e9 Msun halo -- longer than the age of the universe).
+    Correct value for M=5e9 (z_f=1.5116): ~9.50 Gyr.
+    See docs/CLOUD9_HIGHSIGMA_TIMING_RECHECK_2026-11-03.md sec 4.
     """
     z_f = formation_redshift(M_vir_msun)
-    t_L = lookback_time_gyr(z_f)
-    return 13.647 - t_L
+    return lookback_time_gyr(z_f)
 
 
 # ====== SIDM HALO PREDICTION (eq. 3.1 - 3.2 - 2.3 - 2.1) ======
