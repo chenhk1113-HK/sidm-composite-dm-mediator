@@ -20,9 +20,10 @@
 **SIDM constraint map + no-go catalogue (v19.0, 2026-09-27 paper-freeze):** a velocity-dependent SIDM architecture (multi-resonance σ/m(v) + two-component + gravothermal) achieves **partial observational-channel coverage** — **4 of 5 constrained channels under physically motivated f_H (the 5: SPARC, Cloud-9, dSph, Cluster, JVAS); 3 of 8 catalog slots are unconstrained placeholders (UFD/LMC/Bootes).** The Cloud-9 vs dSph tension is unresolved at Phase 44 parameters. **Path F1 (T207, v18.38) introduces the three-term σ_eff = f_H² σ_HH + 2 f_H f_L σ_HL + f_L² σ_LL decomposition** — structurally sufficient to reach SPARC's σ/m ≈ 0.193 at v = 100 km/s under borrowed prescription mode. **v19.0 paper-freeze refinements** (4 review rounds applied: 2review.docx → Cv19.docx → Comment on v19.docx → v19.0 (4)): Path F1 verdict split into §3.7; §10.5b ships as "methods contribution only" lead-in; abstract compressed to 158 words; "4 of 5 constrained channels" denominator clarified (was "4 of 8" until Cv19 review); 24 standing numbers cross-validated; 35 citations resolve; 180 §-refs resolve; 6 ASCII M_sun → M☉. **Phase 4A (population σ_eff map, Fig 5):** 60×60 V_max × M_halo grid; 8 standing observables cross-validated (3 PASS, 2 MARGINAL, 3 FAIL — Cloud-9 tail tension honestly disclosed). **Phase 4B (higher-N KiSS-SIDM):** negative result — within the parameter envelope accessible without source-code modifications, N≈3000 was the only setup that reached ~70 Myr; both ±N break the run. The model is **a constraint map + no-go catalogue, not a unified derivation**. Paper at `v0.3-prelim/docs/PAPER_V1_DRAFT.md`. Final report at `v0.3-prelim/docs/V19_FINAL_REPORT_2026-09-27.md`. Phase 4A σ_eff map at §10.4f; Phase 4B negative result at §10.5b.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.4--prelim%2Bv40.59-blue)](VERSION)
-[![WIP Paper](https://img.shields.io/badge/wip_paper-v40.59-blueviolet)](v0.3-prelim/docs/PAPER_V1_DRAFT.md)
-[![Tests](https://img.shields.io/badge/tests-14%2F14_pass-green)](test_solver_benchmarks.py)
+[![Record save](https://img.shields.io/badge/record_save-v19.2--F--RecordSave--v1.17-blue)](https://github.com/chenhk1113-HK/sidm-composite-dm-mediator)
+[![WIP Paper](https://img.shields.io/badge/wip_paper-v19.2--F--init-blueviolet)](v0.3-prelim/docs/PAPER_V1_DRAFT.md)
+[![Gate](https://img.shields.io/badge/gate-15%2F15_layers_pass-green)](scripts/verify_release_gate.py)
+[![Tests](https://img.shields.io/badge/tests-1954_pass%20%7C%2022%20skip%20%7C%2036%20deselect-green)](scripts/verify_release_gate.py)
 [![arXiv:2506.22997](https://img.shields.io/badge/cross--validated-arXiv%3A2506.22997-b31b1b)](https://arxiv.org/abs/2506.22997)
 [![arXiv:2608.04362](https://img.shields.io/badge/cross--validated-arXiv%3A2608.04362-b31b1b)](https://arxiv.org/abs/2608.04362)
 [![arXiv:2510.11006](https://img.shields.io/badge/cross--validated-arXiv%3A2510.11006-b31b1b)](https://arxiv.org/abs/2510.11006)
@@ -68,7 +69,44 @@
 
 ---
 
-## ⚡ Latest version & headline
+## ⚡ Current standing — 2026-11-03
+
+**Where the work actually is:** branch `wip/v19.2-F-init` — **237 commits ahead of `master`**, which is
+still the GitHub default branch, so the repository landing page shows the 2026-10-11 state. Record save
+point: annotated tag `v19.2-F-RecordSave-v1.17`.
+
+**What the project is:** a velocity-dependent SIDM architecture — multi-resonance σ/m(v), two-component
+dark matter, gravothermal evolution — tested against 8 observational channels spanning four orders of
+magnitude in velocity.
+
+**What it has established:** a constraint map and a no-go catalogue. A 5-parameter fit passes **5 of 8
+channels**; five UV no-go results rule out a single-mediator completion; and the attempt to derive the
+phenomenological σ/m(v) from a first-principles UV sector **failed** (v19.2-F Phase 3, 2026-10-11).
+
+**What it has NOT done:** it has not proven that dark matter self-interacts, and it has not produced a
+working particle model from first principles. Read `MODEL_ASSUMPTIONS_AND_LIMITATIONS.md` before quoting
+any number out of context.
+
+**Verification:** the 15-layer pre-tag gate is **15/15 PASS** (pytest layer 1954 passed / 22 skipped /
+36 deselected), and every release commit carries its evidence folder. Open coverage gaps: **CG-4** (the
+deferred literal-markup pass) and **CG-16** (hardcoded host paths in tracked files).
+
+**Latest round of work (v19.2-E chain, 2026-11-03):** a new-data sweep with 32 cited arXiv IDs
+live-verified, literature intake closed **21/21**, and two real gravothermal code bugs fixed — the Cloud-9
+core goes optically thick at ~3-3.5 Gyr after formation, so collapse times in that regime had been
+inflated by ≈4.3×. Consolidation: `docs/V19_2_E_CONSOLIDATED_REPORT_2026-11-03.md`. Stage 3 (real galaxy
+merger data) is waiting on IllustrisTNG registration.
+
+**Read next:** 60-second version → [`CURRENT.md`](CURRENT.md). One-page extract → [`EXTRACT.md`](EXTRACT.md).
+Audit chain of record → [`docs/dual_review_5loop/README.md`](docs/dual_review_5loop/README.md).
+
+---
+
+## ⚡ Version table (archived snapshot — 2026-09-25)
+
+> Retained for traceability, not as the current state. The track names below (`wip/cloud-9-relhic`,
+> `wip/multi-component-SIDM-core-collapse`) describe the repository as of v18.38; the active line since
+> 2026-10 is `wip/v19.2-F-init`.
 
 | Track | Version | Status | Headline |
 |---|---|---|---|
@@ -91,7 +129,7 @@ Recent rounds within this standing version: **+T80** (LZ paper compatibility), *
 | **Channels** | **22** | 16 v0.6 → +DAMPE +LSS +XENONnT/PandaX watch +XRISM Perseus +eROSITA +Euclid Q1 lensing +Euclid Q1 subhalo FORECAST +Goldstein & Hill 2026 ΔN_eff (T89 documented null) |
 | **Tests** | **677 pass, 8 skip** (was; test count is dynamic — 1928 collected after R88(82)) | +36 from T88.C (Euclid Q1 strong-lensing) + T88.E (subhalo forecast) + 15 from T89 (Goldstein & Hill 2026 ΔN_eff Channel 25) |
 | **Drift-guard audit** | **all checks ALL CLEAR** | `scripts/t82_audit.py` (CI-gatable; count is dynamic — see `python scripts/t82_audit.py` for current) |
-| **KIV cron** | **2026-11-01 09:00** | re-checks LZ paper via `scripts/lz_kiv_check.py` |
+| **KIV item** | **closed 2026-11-01** | LZ PRL re-check ran (`scripts/lz_kiv_check.py`): significance unchanged at 2.6σ global, ALP-mediated inelastic interpretation — no Channel 5 update, no refit; the cron itself was removed |
 
 > **Note (2026-09-07): Test count varies by branch.** The
 > table above quotes the count at the T88.E milestone

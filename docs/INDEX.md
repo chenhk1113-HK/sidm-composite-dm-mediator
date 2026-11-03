@@ -1,7 +1,9 @@
 # docs/INDEX.md — Navigation
 
 > **For:** Anyone who has read CURRENT.md (or README.md) and wants to
-> dig deeper. Organised by purpose, not chronology. Updated 2026-09-03.
+> dig deeper. Organised by purpose, not chronology. Updated 2026-11-03
+> (the "per-round" section below documents the Tier-1 v0.4-prelim+T75/T88E
+> milestone; the active chain is the one added at the top).
 
 ---
 
@@ -19,6 +21,25 @@
 | [`../MODEL_ASSUMPTIONS_AND_LIMITATIONS.md`](../MODEL_ASSUMPTIONS_AND_LIMITATIONS.md) | What the project does NOT claim | Honest scope |
 | [`../EXTRACT.md`](../EXTRACT.md) | 1-page project extract + key findings | The new-reader TL;DR |
 | [`../CHANGELOG.md`](../CHANGELOG.md) | Per-round ship history (T1 → T86) | To see what got shipped when |
+
+## 🧭 Active chain — 2026-11-03 (v19.2-F audit record + v19.2-E research)
+
+Read [`../CURRENT.md`](../CURRENT.md) first — it already summarises this. This table is for when a
+specific claim needs its source document.
+
+| Doc | Purpose |
+|---|---|
+| [`V19_2_E_CONSOLIDATED_REPORT_2026-11-03.md`](V19_2_E_CONSOLIDATED_REPORT_2026-11-03.md) | Running consolidation of the current four-stage chain (stages 1-2 complete, stage 3 pending IllustrisTNG) |
+| [`NEW_DATA_SWEEP_2026-11-03.md`](NEW_DATA_SWEEP_2026-11-03.md) | New-data adjudication: 32 live-verified citations, tiered intake, what fired and what did not |
+| [`CLOUD9_HIGHSIGMA_TIMING_RECHECK_2026-11-03.md`](CLOUD9_HIGHSIGMA_TIMING_RECHECK_2026-11-03.md) | Cloud-9 optical-depth / collapse-timing recheck after the lookback-time fix |
+| [`V19_2_E_A1_REAL_LIKELIHOOD_PROMOTION.md`](V19_2_E_A1_REAL_LIKELIHOOD_PROMOTION.md) … [`V19_2_E_D_CANONICAL_NUMBERS.md`](V19_2_E_D_CANONICAL_NUMBERS.md) | The A.1 / A.2 / B / C / D work packages behind the canonical numbers (real-likelihood promotion, 5-param DE fit, per-halo gravothermal calibration, data-only σ/m(v), machine-generated canonical values) |
+| [`FUTURE_WORK_PLAN_V19_2_E.md`](FUTURE_WORK_PLAN_V19_2_E.md) | What v19.2-E is for, in order |
+| [`TRANSITION_V19_2_D_TO_V19_2_E.md`](TRANSITION_V19_2_D_TO_V19_2_E.md) | Why the R88(N) sub-round convention stopped and conventional versioning started |
+| [`dual_review_5loop/README.md`](dual_review_5loop/README.md) | Index of the closed n18→n26 audit chain: which report version is the record, which are superseded, what each evidence folder certifies |
+| [`V19_2_F_REFERENCE_DATA_REGISTRY.md`](V19_2_F_REFERENCE_DATA_REGISTRY.md) | Single source of truth for every numerical value and its verification status |
+| [`papers/00_HOME.md`](papers/00_HOME.md) | Literature knowledge base home (`verified/` + `to_verify/`, intake rule) |
+| [`FINDINGS_FOR_FUTURE_DELIBERATION.md`](FINDINGS_FOR_FUTURE_DELIBERATION.md) | Open findings carried forward, drift-guarded |
+| [`CITATION_AUDIT_V19_2_D.md`](CITATION_AUDIT_V19_2_D.md) | Citation integrity for the v19.2-D record |
 
 ## 🔬 Per-round documentation (current Tier-1 milestone)
 

@@ -2,11 +2,53 @@
 
 > **For:** Anyone who has 60 seconds and wants to know what this project
 > is, what it claims, and what the current best numbers are.
-> Updated with each version-bump round. Last refresh: 2026-10-21 (v40.58 + v40.59 + v40.60 + v40.61 + v40.62 + v40.63).
+> Updated with each version-bump round. Last refresh: 2026-11-03 (`v19.2-F-RecordSave-v1.17` + v19.2-E chain stages 1-2).
 
 ---
 
-## Standing: v19.2-F-Phase3-CLEAN (2026-10-11, Phase 3 gate verdict FAIL)
+## Standing: `v19.2-F-RecordSave-v1.17` + v19.2-E chain (2026-11-03)
+
+**Record save point:** annotated tag **`v19.2-F-RecordSave-v1.17`** (commit `ef427e6`) — one
+reproducible object capturing the audited physics record: consolidated review-response report **v1.17**,
+the n22→n26 audit chain, and the 15/15 gate run.
+
+**Active branch:** `wip/v19.2-F-init` — **237 commits ahead of `master`**, which is still the GitHub
+default branch. Anyone landing on the repository landing page sees the 2026-10-11 state, not this one.
+
+**Verification status (2026-11-03):** the 15-layer pre-tag gate is **15/15 PASS** (evidence commit
+`014c9e0`); its pytest layer reports **1954 passed / 22 skipped / 36 deselected**. Standing disclosures
+travel with every green run: the gate asserts only its enumerated layers, not the whole document (CG-5),
+and internal pytest skips are named rather than folded into the pass count (CG-10).
+
+**What the v19.2-E chain did (stages 1-2 of 4 complete; `docs/V19_2_E_CONSOLIDATED_REPORT_2026-11-03.md`):**
+- **Housekeeping save + tag** (`ef427e6`): n25/n26 CHANGELOG and VERSION labels backfilled — the
+  record-drift class the R88(80) finding named.
+- **New-data sweep** (`8f262ba`, gate `344595e`): 32 cited arXiv IDs live-verified; the v = 150 km/s
+  anchors (Sameie+, Lei+, Wang+) are unrevised in the window, so the **dissolution criterion did not
+  fire**; Cloud-9 identity confirmed repo-wide as **M94 RELHIC**, not the GD-1 spur; Roman stays
+  forecast-only. Literature intake **closed 21/21** (local PDF + verified summary per the project KB rule);
+  three delegated misclassifications were caught and corrected.
+- **Two real code bugs fixed** (`c1ee215`, gate `81103b9`): `lookback_time_gyr` mis-transcribed Yang+
+  eq. 3.2, and `evolution_time_gyr` returned 13.647 − t_L instead of t_L(z_f). τ was inflated ≈4.3× in
+  affected callers (Cloud-9 τ 17.4 → 4.2). Physical consequence: at σ ≈ 174 cm²/g the Cloud-9 core becomes
+  **optically thick (τ\* ≈ 1.4) at ~3-3.5 Gyr** after formation, which is exactly the regime Bosch &
+  Tokayer (2610.28890) and Gurian (2610.28745) warn about. Dwarf anchors (σ ≈ 7) stay optically thin.
+- **Stage 3 pending:** real-galaxy merger data is gated on the IllustrisTNG registration reply
+  (application submitted); FIRE-2 and EAGLE-IC are the no-login fallbacks.
+
+**What did NOT change:** the canonical anchor **σ/m = 174 cm²/g @ 29.4 km/s** (Cloud-9 = M94 RELHIC); the
+joint galaxy-scale range 0.06–0.68 cm²/g; the baryon-coupling ceiling < 3 × 10⁻¹¹; the v19.2-E A.2 5-param
+best fit at **5 of 8 channels PASS** (2 marginal, 1 fail); and the honest headline — the project has **not**
+proven that dark matter self-interacts and has **not** derived a working particle model from first
+principles (the v19.2-F Phase 3 FAIL below stands).
+
+**Open coverage gaps** (machine-checked by gate layer 15 against the report's §17.3 register): **CG-4**
+(the deferred literal-`**` markup pass — a decision owed by the user) and **CG-16** (hardcoded host paths
+in tracked files). Every other registered gap is closed.
+
+---
+
+## Standing (history): v19.2-F-Phase3-CLEAN (2026-10-11, Phase 3 gate verdict FAIL)
 
 **v19.2-F Phase 3 (commit `40555d9`, tag `v19.2-F-Phase3-CLEAN`)** — **Phase 3 gate verdict: FAIL. Paper (A) wins.** The phenomenological σ/m(v) = 174 cm²/g at v = 29.4 km/s of v19.2-D §2.1 is **not** reproducible from a single-Yukawa UV sector.
 

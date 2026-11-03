@@ -1,6 +1,28 @@
 # EXTRACT — sidm-composite-dm-mediator
 
-**Version 0.4-prelim + T89 · 2026-09-06 · ~1,250 words**
+**Snapshot: physics record as audited 2026-09-06 (v0.4-prelim + T89) · project state refreshed 2026-11-03 · ~1,900 words**
+
+## Project state — 2026-11-03
+
+**Active branch:** `wip/v19.2-F-init` (record save point: annotated tag `v19.2-F-RecordSave-v1.17`).
+**Verification:** 15-layer pre-tag gate, **15/15 PASS**. **Audit chain of record:** Round-5 dual review,
+project rounds n18→n26, report **v1.17** — index at `docs/dual_review_5loop/README.md`.
+**Current research line (v19.2-E):** stages 1-2 complete — a live-verified new-data sweep (32 cited arXiv
+IDs), literature intake closed **21/21**, and two real gravothermal timing bugs fixed (`lookback_time_gyr`
+mis-transcribed Yang+ eq. 3.2; `evolution_time_gyr` returned the age at formation instead of the lookback
+time, inflating τ by ≈4.3× in affected callers). Stage 3 (real galaxy-merger data) is gated on
+IllustrisTNG registration. Consolidation: `docs/V19_2_E_CONSOLIDATED_REPORT_2026-11-03.md`.
+
+**What everything below this line is:** the joint-fit physics record as it stood at the v0.4-prelim+T88E/T89
+milestone. It is still the project's measurement posture, and it is the version the numerical audits pin
+(`scripts/t82_audit.py` checks the headline numbers in this file against the result JSONs). What has changed
+since is the architecture layer, not these findings: the v19.0 paper freeze, the v19.2-C direct-detection
+hierarchy results, the v19.2-D structural no-go results, and the v19.2-F Phase 3 verdict that the
+phenomenological σ/m(v) = 174 cm²/g at 29.4 km/s is **not** reproducible from a single-Yukawa UV sector.
+Current standing in 60 seconds: [`CURRENT.md`](CURRENT.md). What is not claimed:
+`MODEL_ASSUMPTIONS_AND_LIMITATIONS.md`.
+
+---
 
 **Standing version: v0.4-prelim+T88E** (post-T89: Channel 25 Goldstein & Hill 2026 ΔN_eff<0.107 documented null + sidmkit/sidm-vdsigmas σ/m benchmark + 4 citation corrections). Channels: **22 effective** (T88.E v0.8 result preserved; Channel 25 is a documented null, no posterior shift); **Tests: 677 pass, 8 skip** (+15 from T89 Goldstein & Hill Channel 25 tests; was 662 / 8 post-T88.E). v0.8 standing posterior: log Z = −164.87 ± 0.084, σ/m = 0.06 cm²/g, m_χ ~ 770 GeV, m_φ ~ 453 MeV, a = +0.13, tension 0.60 (below 1.0). Drift-guard audit: 44/44 ALL CLEAR.
 
@@ -81,7 +103,7 @@ The pipeline was **designed to scale to 10+ independent observational probes** (
 
 ---
 
-**Word count: ~1,000. References:** arXiv:0711.4866 (Pospelov), 1310.7945 (Kaplinghat), 2403.16633 (Horigome), 2505.15903 (Gurian & May), 2506.14898 (Yang+), 2506.22997 (Drobczyk), 2410.17036 (LZ WS2024), 2311.04982 (McDaniel+). See `docs/DATA_SOURCES.md` for full citations.
+**Word count: ~1,900. References:** arXiv:0711.4866 (Pospelov), 1310.7945 (Kaplinghat), 2403.16633 (Horigome), 2505.15903 (Gurian & May), 2506.14898 (Yang+), 2506.22997 (Drobczyk), 2410.17036 (LZ WS2024), 2311.04982 (McDaniel+). See `docs/DATA_SOURCES.md` for full citations.
 
 ---
 

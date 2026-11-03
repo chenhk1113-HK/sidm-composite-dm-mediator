@@ -1,3 +1,16 @@
+## [Housekeeping-FrontPage-2026-11-03]
+
+**Repository hygiene + front-page reconciliation to the 2026-11-03 state.** The physics record was current; the front pages were not.
+
+- **Untracked build cache**: `git rm --cached` on `.snakemake/metadata/` (2 entries, base64-encoded absolute Windows paths on this host — a live instance of coverage gap **CG-16**) and the 0-byte `.gitignore.strata`. Files kept on disk; `.gitignore` now covers both.
+- **`CURRENT.md`**: new standing block for `v19.2-F-RecordSave-v1.17` + v19.2-E stages 1-2 (record save tag, active branch and its 237-commit lead over `master`, 15/15 gate with 1954/22/36 disclosed, the two gravothermal bug fixes, stage-3 blocker, unchanged anchors, and the two open coverage gaps). The 2026-10-11 Phase 3 block retitled `Standing (history)`.
+- **`README.md`**: new "Current standing — 2026-11-03" section; the stale 2026-09-25 version table retitled as an archived snapshot; badges rebuilt (record save / 15-layer gate / 1954-pass) replacing the stale `v40.59` and `14/14 tests` badges; KIV row closed with its 2026-11-01 outcome.
+- **`EXTRACT.md`**: dated project-state block added above the 2026-09-06 physics record, naming which numbers the audits pin. Self-reported word count corrected (claimed ~1,250 in the header and ~1,000 in the footer; actual 1,920).
+- **`docs/INDEX.md`**: added an active-chain section (11 documents; every link target verified to exist on disk before writing).
+- **`docs/dual_review_5loop/README.md`** (new): declares report **v1.17** the record, marks the 14 superseded report versions and 9 code appendices traceability-only, and maps each gate-evidence folder to the tree it certifies.
+- **Known stale constant left in place (flagged, not silently patched)**: the docs are required by `scripts/t82_audit.py` to print `44/44 ALL CLEAR`, while the same script now reports **85/85**. The mismatch is in the auditor's expected-string table, not in the docs; changing it edits an audit contract and is held for user decision.
+- **Verification after the edits**: `scripts/t82_audit.py` → 85/85 ALL CLEAR; `scripts/drift_guard.py --strict` → no drift; full 15-layer `verify_release_gate.py` re-run recorded below.
+
 ## [LZ-2026-11-KIV-Reevaluation-2026-11-01]
 
 **T77 KIV trigger fired; re-evaluation executed; decision: NO UPDATE to the posterior.**
