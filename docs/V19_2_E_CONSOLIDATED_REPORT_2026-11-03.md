@@ -63,6 +63,6 @@ Two real repository bugs found while testing `2610.28890`'s applicability to Clo
 | `8f262ba` sweep | `evidence_sweep20261103/` | 15/15 PASS |
 | `2d7e0b7` Tier-1 KB | `evidence_kb_tier1_20261103/` | 15/15 PASS |
 | `c1ee215` timing fix | `evidence_lookback_fix_20261103/` | 15/15 PASS |
-| `4a715ce`+ Tier-2 KB | `evidence_kb_tier2_20261103/` | running at time of writing |
+| `4a715ce`+ Tier-2 KB | `evidence_kb_tier2_20261103/` | 15/15 PASS (commit `014c9e0`) |
 
 Standing disclosures: 22 pytest skips + 36 deselections per run (CG-10 / n25 III.4); the gate asserts only its enumerated layers, not a whole-document verdict (CG-5).
