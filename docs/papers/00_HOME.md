@@ -40,6 +40,15 @@ papers the PAPER BODY actually leans on, downloaded because §8's rule requires 
 - [[2503.10748 Nadler+ 2025]] — SIDM Concerto [51]
 - [[2601.23264 Engelhardt+ 2026]] — MARVELously Dark [49]
 
+**2026-11-03 — new-data sweep Tier 1 added (read end-to-end; verdicts in [[NEW_DATA_SWEEP_2026-11-03]] §7):**
+
+- [[2610.28890 van den Bosch & Tokayer 2026]] — revised SIDM core-collapse calibration (MNRAS accepted) — calibration caveat on the [43] t_c chain
+- [[2610.31881 Tekverk+ 2026]] — strong-lensing perturber predictions (JCAP submitted) — corroborates Model III (147.1, 120); contests Model I at cluster scales only
+- [[2610.40766 Gilman+ 2026]] — SIDM hints from lensing, particle letter (PRL submitted) — corroboration; no numeric collision with 174@29.4
+- [[2609.35974 Gilman+ 2026]] — JWST survey V (PRD submitted) — population support 8:1-24:1 for core collapse
+
+The remaining 17 sweep intake papers stay in `to_verify/` (tiers per [[NEW_DATA_SWEEP_2026-11-03]] §3, incl. Euclid Q1 stream-halo geometry and Fornax-7 DR1); registry coupling happens at citation time.
+
 **Known gap (CLOSED 2026-10-27):** option 1 has been run — `fetch_all_cited_papers.sh`
 downloads the FULL 42-slot bibliography, so every cited paper now has a local PDF.
 Re-download with `bash docs/papers/fetch_all_cited_papers.sh`.

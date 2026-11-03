@@ -77,8 +77,13 @@ Project policy note (verified live): `.gitignore` keeps KB PDFs **local-only** (
 - Tier-2 items are channel data, not re-fits: incorporating DESI Ly-alpha numbers into the Ly-alpha channel is a future dedicated re-run, not an automatic posterior move.
 - Roman contributes nothing measured (launch pending).
 
-## 7. Follow-ups queued for consolidation (stage 4)
+## 7. Tier-1 read verdicts (2026-11-03, reads completed)
 
-1. Full read of Tier 1, in order: 2610.28890 (calibration threat) -> 2610.31881 (calibration cross-check) -> 2610.40766 -> 2609.35974. Verdict per paper: adopt / ignore / tension, written back to this file.
-2. Decide whether Tier 2 items enter the channel registry or remain background.
-3. Stage 3 (Path 3 merger histories) awaits TNG account approval; baseline docs: `docs/FUTURE_WORK_PLAN_V19_2_E.md` section 2.
+All four Tier-1 papers read end-to-end; KB summaries live in `docs/papers/verified/` (status VERIFIED 2026-11-03). Verdicts:
+
+1. **2610.28890 (van den Bosch & Tokayer, MNRAS accepted) — ADOPT as calibration caveat.** New GTF conductivity calibration (alpha, beta) = (0.5, 0.9) for NFW; LMFP collapse somewhat shorter, but collapse slows dramatically once the core is optically thick; self-similar LMFP t_c formulae (the [43] eq. 2.2 family — they recompute our exact constants alpha = 1.0, C = 0.75) underestimate late-time collapse. No existing claim killed: the project has no BH-seed claim (grep confirmed empty). OPEN ITEM: high-σ Cloud-9-type states (174 cm^2/g at ~29 km/s) become optically thick earlier — RELHIC formation timing needs a dedicated recheck before any high-σ t_core quote.
+2. **2610.31881 (Tekverk+, JCAP submitted) — CORROBORATES Model III, CONTESTS Model I at cluster scales only.** Simultaneous reproduction of all three perturbers requires w >~ 10^2 km/s and sigma0/m >~ 10^2; at w = 24.33 the J0946 massive perturber cannot form. The project already carries both variants (`sashimi_parametric.py`: Model I dwarf-favored / Model III cluster-favored); Tekverk independently adopts (147.1, 120) from Nadler+ 2023 L39. Canonical Model I usage (Cloud-9/dwarf scales) not hit. Future perturber-channel claims must state their (sigma0, w) pairing.
+3. **2610.40766 (Gilman+, PRL letter) — CORROBORATION; no numeric collision with 174@29.4.** σ = 10^2-10^4 cm^2/g at 10 km/s via MeV mediator, smooth Yukawa velocity dependence (no resonance peak); CDM disfavored 8:1-24:1, not formally excluded; collapse floor t_c,min ≈ 10^2(rs/vs) — echoes verdict 1's "not arbitrarily fast".
+4. **2609.35974 (Gilman+, PRD, survey V) — ADOPT as population-level regime support.** Core-collapsed (sub)halos favored 8:1-24:1; escaping them requires excess GC abundance AND more subhalos than N-body predicts. Same lens sample as 40766 — do not double-count.
+
+Tier-2 items remain background (no posterior shifts) until dedicated re-runs; registry coupling happens at citation time. Stage 3 (Path 3 merger histories) awaits TNG account approval; baseline docs: `docs/FUTURE_WORK_PLAN_V19_2_E.md` section 2.
