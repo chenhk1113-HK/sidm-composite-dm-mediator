@@ -1,0 +1,580 @@
+{
+  "test": "tng_stage3_sample",
+  "built_utc": "2026-11-04T18:02:14Z",
+  "band": {
+    "vmax_kms": [
+      25.0,
+      30.0
+    ],
+    "mass_msun": [
+      4000000000.0,
+      6000000000.0
+    ],
+    "starless": true,
+    "primary_only": true,
+    "gas_min_native": 1e-05,
+    "len_dm_window": [
+      100,
+      20000
+    ]
+  },
+  "native_mass_window": [
+    0.27096,
+    0.40643999999999997
+  ],
+  "unit_msun": 14762326542.663124,
+  "h": 0.6774,
+  "mass_dm_msun": {
+    "TNG50-1": 453700.0,
+    "TNG100-1": 7463000.0,
+    "TNG300-1": 58800000.0
+  },
+  "runs": {
+    "TNG50-1": {
+      "requested": 25,
+      "accepted": 25,
+      "tree_ok": 25,
+      "tree_failed": 0,
+      "detail": [
+        {
+          "run": "TNG50-1",
+          "subhalo_id": 877120,
+          "snap": 99,
+          "mass_msun": 5801564806.613523,
+          "vmax_kms": 25.979,
+          "veldisp_kms": null,
+          "len_dm": 12781,
+          "len_stars": 0,
+          "mass_gas_msun": 2229111.307942132,
+          "len_gas": 23,
+          "n_particles_min_resolved": 12787.226816428307,
+          "tree_ok": true,
+          "tree_nodes": 93,
+          "tree_mergers": 23,
+          "tree_format": "sublink_simple",
+          "tree_keys": [
+            "Main",
+            "Mergers"
+          ]
+        },
+        {
+          "run": "TNG50-1",
+          "subhalo_id": 935697,
+          "snap": 99,
+          "mass_msun": 4733923826.3950405,
+          "vmax_kms": 26.2996,
+          "veldisp_kms": null,
+          "len_dm": 10356,
+          "len_stars": 0,
+          "mass_gas_msun": 34927664.599940956,
+          "len_gas": 371,
+          "n_particles_min_resolved": 10434.039731970553,
+          "tree_ok": true,
+          "tree_nodes": 97,
+          "tree_mergers": 32,
+          "tree_format": "sublink_simple",
+          "tree_keys": [
+            "Main",
+            "Mergers"
+          ]
+        },
+        {
+          "run": "TNG50-1",
+          "subhalo_id": 944515,
+          "snap": 99,
+          "mass_msun": 5175095955.122528,
+          "vmax_kms": 25.7576,
+          "veldisp_kms": null,
+          "len_dm": 11251,
+          "len_stars": 0,
+          "mass_gas_msun": 69988190.13876587,
+          "len_gas": 798,
+          "n_particles_min_resolved": 11406.427055592965,
+          "tree_ok": true,
+          "tree_nodes": 95,
+          "tree_mergers": 36,
+          "tree_format": "sublink_simple",
+          "tree_keys": [
+            "Main",
+            "Mergers"
+          ]
+        },
+        {
+          "run": "TNG50-1",
+          "subhalo_id": 948624,
+          "snap": 99,
+          "mass_msun": 5663374667.847653,
+          "vmax_kms": 26.4408,
+          "veldisp_kms": null,
+          "len_dm": 12400,
+          "len_stars": 0,
+          "mass_gas_msun": 36920578.68320048,
+          "len_gas": 439,
+          "n_particles_min_resolved": 12482.641983353875,
+          "tree_ok": true,
+          "tree_nodes": 97,
+          "tree_mergers": 28,
+          "tree_format": "sublink_simple",
+          "tree_keys": [
+            "Main",
+            "Mergers"
+          ]
+        },
+        {
+          "run": "TNG50-1",
+          "subhalo_id": 950199,
+          "snap": 99,
+          "mass_msun": 5409816947.150871,
+          "vmax_kms": 26.5072,
+          "veldisp_kms": null,
+          "len_dm": 11748,
+          "len_stars": 0,
+          "mass_gas_msun": 79199881.90138766,
+          "len_gas": 915,
+          "n_particles_min_resolved": 11923.775506173399,
+          "tree_ok": true,
+          "tree_nodes": 96,
+          "tree_mergers": 23,
+          "tree_format": "sublink_simple",
+          "tree_keys": [
+            "Main",
+            "Mergers"
+          ]
+        },
+        {
+          "run": "TNG50-1",
+          "subhalo_id": 953364,
+          "snap": 99,
+          "mass_msun": 5038573959.255979,
+          "vmax_kms": 27.4166,
+          "veldisp_kms": null,
+          "len_dm": 11097,
+          "len_stars": 0,
+          "mass_gas_msun": 3351048.125184529,
+          "len_gas": 34,
+          "n_particles_min_resolved": 11105.518975657877,
+          "tree_ok": true,
+          "tree_nodes": 98,
+          "tree_mergers": 27,
+          "tree_format": "sublink_simple",
+          "tree_keys": [
+            "Main",
+            "Mergers"
+          ]
+        },
+        {
+          "run": "TNG50-1",
+          "subhalo_id": 955388,
+          "snap": 99,
+          "mass_msun": 4992382639.503985,
+          "vmax_kms": 26.9286,
+          "veldisp_kms": null,
+          "len_dm": 10967,
+          "len_stars": 0,
+          "mass_gas_msun": 16149985.237673456,
+          "len_gas": 177,
+          "n_particles_min_resolved": 11003.708705100255,
+          "tree_ok": true,
+          "tree_nodes": 94,
+          "tree_mergers": 32,
+          "tree_format": "sublink_simple",
+          "tree_keys": [
+            "Main",
+            "Mergers"
+          ]
+        },
+        {
+          "run": "TNG50-1",
+          "subhalo_id": 957117,
+          "snap": 99,
+          "mass_msun": 5105993504.576322,
+          "vmax_kms": 27.6941,
+          "veldisp_kms": null,
+          "len_dm": 11081,
+          "len_stars": 0,
+          "mass_gas_msun": 78033658.10451727,
+          "len_gas": 977,
+          "n_particles_min_resolved": 11254.118370236547,
+          "tree_ok": true,
+          "tree_nodes": 97,
+          "tree_mergers": 43,
+          "tree_format": "sublink_simple",
+          "tree_keys": [
+            "Main",
+            "Mergers"
+          ]
+        },
+        {
+          "run": "TNG50-1",
+          "subhalo_id": 959129,
+          "snap": 99,
+          "mass_msun": 4996929436.079126,
+          "vmax_kms": 25.6468,
+          "veldisp_kms": null,
+          "len_dm": 10931,
+          "len_stars": 0,
+          "mass_gas_msun": 37023914.96899911,
+          "len_gas": 399,
+          "n_particles_min_resolved": 11013.730297727852,
+          "tree_ok": true,
+          "tree_nodes": 98,
+          "tree_mergers": 28,
+          "tree_format": "sublink_simple",
+          "tree_keys": [
+            "Main",
+            "Mergers"
+          ]
+        },
+        {
+          "run": "TNG50-1",
+          "subhalo_id": 961368,
+          "snap": 99,
+          "mass_msun": 5175730735.163862,
+          "vmax_kms": 28.3375,
+          "veldisp_kms": null,
+          "len_dm": 11282,
+          "len_stars": 0,
+          "mass_gas_msun": 56569235.31148509,
+          "len_gas": 645,
+          "n_particles_min_resolved": 11407.82617404422,
+          "tree_ok": true,
+          "tree_nodes": 92,
+          "tree_mergers": 32,
+          "tree_format": "sublink_simple",
+          "tree_keys": [
+            "Main",
+            "Mergers"
+          ]
+        },
+        {
+          "run": "TNG50-1",
+          "subhalo_id": 962922,
+          "snap": 99,
+          "mass_msun": 5376262178.919398,
+          "vmax_kms": 27.168,
+          "veldisp_kms": null,
+          "len_dm": 11724,
+          "len_stars": 0,
+          "mass_gas_msun": 56539710.65839977,
+          "len_gas": 643,
+          "n_particles_min_resolved": 11849.817454087279,
+          "tree_ok": true,
+          "tree_nodes": 98,
+          "tree_mergers": 19,
+          "tree_format": "sublink_simple",
+          "tree_keys": [
+            "Main",
+            "Mergers"
+          ]
+        },
+        {
+          "run": "TNG50-1",
+          "subhalo_id": 964127,
+          "snap": 99,
+          "mass_msun": 4479465603.779156,
+          "vmax_kms": 25.0131,
+          "veldisp_kms": null,
+          "len_dm": 9840,
+          "len_stars": 0,
+          "mass_gas_msun": 14599940.95069383,
+          "len_gas": 193,
+          "n_particles_min_resolved": 9873.188458847599,
+          "tree_ok": true,
+          "tree_nodes": 95,
+          "tree_mergers": 27,
+          "tree_format": "sublink_simple",
+          "tree_keys": [
+            "Main",
+            "Mergers"
+          ]
+        },
+        {
+          "run": "TNG50-1",
+          "subhalo_id": 965712,
+          "snap": 99,
+          "mass_msun": 4999512843.2240925,
+          "vmax_kms": 26.7181,
+          "veldisp_kms": null,
+          "len_dm": 10882,
+          "len_stars": 0,
+          "mass_gas_msun": 61839385.88721583,
+          "len_gas": 709,
+          "n_particles_min_resolved": 11019.424384448077,
+          "tree_ok": true,
+          "tree_nodes": 97,
+          "tree_mergers": 39,
+          "tree_format": "sublink_simple",
+          "tree_keys": [
+            "Main",
+            "Mergers"
+          ]
+        },
+        {
+          "run": "TNG50-1",
+          "subhalo_id": 967556,
+          "snap": 99,
+          "mass_msun": 5066858576.911721,
+          "vmax_kms": 26.3222,
+          "veldisp_kms": null,
+          "len_dm": 11030,
+          "len_stars": 0,
+          "mass_gas_msun": 62031296.13227045,
+          "len_gas": 684,
+          "n_particles_min_resolved": 11167.86109083474,
+          "tree_ok": true,
+          "tree_nodes": 97,
+          "tree_mergers": 27,
+          "tree_format": "sublink_simple",
+          "tree_keys": [
+            "Main",
+            "Mergers"
+          ]
+        },
+        {
+          "run": "TNG50-1",
+          "subhalo_id": 968985,
+          "snap": 99,
+          "mass_msun": 4718630056.096841,
+          "vmax_kms": 25.9948,
+          "veldisp_kms": null,
+          "len_dm": 10234,
+          "len_stars": 0,
+          "mass_gas_msun": 74992618.83672868,
+          "len_gas": 945,
+          "n_particles_min_resolved": 10400.330738586821,
+          "tree_ok": true,
+          "tree_nodes": 94,
+          "tree_mergers": 29,
+          "tree_format": "sublink_simple",
+          "tree_keys": [
+            "Main",
+            "Mergers"
+          ]
+        },
+        {
+          "run": "TNG50-1",
+          "subhalo_id": 969927,
+          "snap": 99,
+          "mass_msun": 4828166519.043402,
+          "vmax_kms": 26.352,
+          "veldisp_kms": null,
+          "len_dm": 10526,
+          "len_stars": 0,
+          "mass_gas_msun": 52037201.06288751,
+          "len_gas": 542,
+          "n_particles_min_resolved": 10641.76001552436,
+          "tree_ok": true,
+          "tree_nodes": 97,
+          "tree_mergers": 32,
+          "tree_format": "sublink_simple",
+          "tree_keys": [
+            "Main",
+            "Mergers"
+          ]
+        },
+        {
+          "run": "TNG50-1",
+          "subhalo_id": 970990,
+          "snap": 99,
+          "mass_msun": 4698863300.8562155,
+          "vmax_kms": 27.074,
+          "veldisp_kms": null,
+          "len_dm": 10231,
+          "len_stars": 0,
+          "mass_gas_msun": 56583997.63802776,
+          "len_gas": 639,
+          "n_particles_min_resolved": 10356.762840767502,
+          "tree_ok": true,
+          "tree_nodes": 99,
+          "tree_mergers": 29,
+          "tree_format": "sublink_simple",
+          "tree_keys": [
+            "Main",
+            "Mergers"
+          ]
+        },
+        {
+          "run": "TNG50-1",
+          "subhalo_id": 972571,
+          "snap": 99,
+          "mass_msun": 4756879244.168881,
+          "vmax_kms": 26.6337,
+          "veldisp_kms": null,
+          "len_dm": 10371,
+          "len_stars": 0,
+          "mass_gas_msun": 51077649.83761441,
+          "len_gas": 563,
+          "n_particles_min_resolved": 10484.635759684552,
+          "tree_ok": true,
+          "tree_nodes": 95,
+          "tree_mergers": 32,
+          "tree_format": "sublink_simple",
+          "tree_keys": [
+            "Main",
+            "Mergers"
+          ]
+        },
+        {
+          "run": "TNG50-1",
+          "subhalo_id": 973864,
+          "snap": 99,
+          "mass_msun": 4575273103.041039,
+          "vmax_kms": 26.4255,
+          "veldisp_kms": null,
+          "len_dm": 9953,
+          "len_stars": 0,
+          "mass_gas_msun": 59137880.12990847,
+          "len_gas": 699,
+          "n_particles_min_resolved": 10084.357732071941,
+          "tree_ok": true,
+          "tree_nodes": 98,
+          "tree_mergers": 30,
+          "tree_format": "sublink_simple",
+          "tree_keys": [
+            "Main",
+            "Mergers"
+          ]
+        },
+        {
+          "run": "TNG50-1",
+          "subhalo_id": 975380,
+          "snap": 99,
+          "mass_msun": 4370534396.220844,
+          "vmax_kms": 25.2419,
+          "veldisp_kms": null,
+          "len_dm": 9544,
+          "len_stars": 0,
+          "mass_gas_msun": 39976380.277531736,
+          "len_gas": 466,
+          "n_particles_min_resolved": 9633.093225084514,
+          "tree_ok": true,
+          "tree_nodes": 99,
+          "tree_mergers": 15,
+          "tree_format": "sublink_simple",
+          "tree_keys": [
+            "Main",
+            "Mergers"
+          ]
+        },
+        {
+          "run": "TNG50-1",
+          "subhalo_id": 976846,
+          "snap": 99,
+          "mass_msun": 4119692943.6079125,
+          "vmax_kms": 25.6883,
+          "veldisp_kms": null,
+          "len_dm": 9019,
+          "len_stars": 0,
+          "mass_gas_msun": 27354591.08355477,
+          "len_gas": 314,
+          "n_particles_min_resolved": 9080.213673369875,
+          "tree_ok": true,
+          "tree_nodes": 97,
+          "tree_mergers": 24,
+          "tree_format": "sublink_simple",
+          "tree_keys": [
+            "Main",
+            "Mergers"
+          ]
+        },
+        {
+          "run": "TNG50-1",
+          "subhalo_id": 978370,
+          "snap": 99,
+          "mass_msun": 4439031591.378801,
+          "vmax_kms": 25.6189,
+          "veldisp_kms": null,
+          "len_dm": 9664,
+          "len_stars": 0,
+          "mass_gas_msun": 54030115.146147035,
+          "len_gas": 566,
+          "n_particles_min_resolved": 9784.067867266478,
+          "tree_ok": true,
+          "tree_nodes": 91,
+          "tree_mergers": 23,
+          "tree_format": "sublink_simple",
+          "tree_keys": [
+            "Main",
+            "Mergers"
+          ]
+        },
+        {
+          "run": "TNG50-1",
+          "subhalo_id": 979519,
+          "snap": 99,
+          "mass_msun": 4487363448.479481,
+          "vmax_kms": 25.3518,
+          "veldisp_kms": null,
+          "len_dm": 9878,
+          "len_stars": 0,
+          "mass_gas_msun": 5255388.249188072,
+          "len_gas": 53,
+          "n_particles_min_resolved": 9890.596095392288,
+          "tree_ok": true,
+          "tree_nodes": 96,
+          "tree_mergers": 46,
+          "tree_format": "sublink_simple",
+          "tree_keys": [
+            "Main",
+            "Mergers"
+          ]
+        },
+        {
+          "run": "TNG50-1",
+          "subhalo_id": 981637,
+          "snap": 99,
+          "mass_msun": 4334632418.069088,
+          "vmax_kms": 25.4003,
+          "veldisp_kms": null,
+          "len_dm": 9454,
+          "len_stars": 0,
+          "mass_gas_msun": 44921759.66932389,
+          "len_gas": 489,
+          "n_particles_min_resolved": 9553.961688492589,
+          "tree_ok": true,
+          "tree_nodes": 97,
+          "tree_mergers": 29,
+          "tree_format": "sublink_simple",
+          "tree_keys": [
+            "Main",
+            "Mergers"
+          ]
+        },
+        {
+          "run": "TNG50-1",
+          "subhalo_id": 983265,
+          "snap": 99,
+          "mass_msun": 4159285503.395335,
+          "vmax_kms": 25.0161,
+          "veldisp_kms": null,
+          "len_dm": 9051,
+          "len_stars": 0,
+          "mass_gas_msun": 52421021.552996755,
+          "len_gas": 565,
+          "n_particles_min_resolved": 9167.479619562124,
+          "tree_ok": true,
+          "tree_nodes": 98,
+          "tree_mergers": 26,
+          "tree_format": "sublink_simple",
+          "tree_keys": [
+            "Main",
+            "Mergers"
+          ]
+        }
+      ],
+      "summary": {
+        "n": 25,
+        "trees_ok": 25,
+        "trees_failed": 0,
+        "mass_msun_min": 4119692943.6079125,
+        "mass_msun_max": 5801564806.613523,
+        "vmax_kms_min": 25.0131,
+        "vmax_kms_max": 28.3375,
+        "len_dm_min": 9019,
+        "len_dm_max": 12781,
+        "len_dm_median": 10526
+      }
+    }
+  },
+  "rejected": []
+}

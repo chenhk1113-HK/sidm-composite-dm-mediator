@@ -1,3 +1,14 @@
+## [Stage3-TNG-Sample-2026-11-04]
+
+**IllustrisTNG Stage 3 moved from a feasibility plan to an on-disk sample, and the Cloud-9 anchor was found to sit above the simulated ceiling.**
+
+- **Sample built with per-subhalo API reads only** (no ~500 GB bulk download): `v0.3-prelim/code/tng_stage3_build.py` with env-overridable band parameters produced tier 1 (`stage3_sample`: TNG50-1 60 + TNG100-1 30, V_max 15-45 km/s, M 3.16e7-1e9 Msun, starless, gas >= 1.476e5 Msun) and tier 2 (`stage3_anchor`: TNG50-1 25, M 4-6e9 Msun, V_max 25-30). 115/115 accepted, 0 tree failures, 0.18 MB of merger trees on disk.
+- **Merger activity is mass-dependent in this population**: main-lineage merger counts 0-15 (median 6) for the tier-1 low-mass halos versus 15-46 (median 29) for the 4-6e9 Msun tier. `phase_g2_merger_history.py` has been asserting a x0.7 / x8.0 quiescent/active split from literature labels; the sample makes it measurable.
+- **New plausibility finding (anchor tension).** In TNG50-1 at z=0 the cell M 4-6e9 Msun + starless + gas-bearing + primary contains **no** halo with V_max >= 30 km/s: counts are 16 (28-29), 6 (29-30), 2 (29.5-30.0), 0 (29.9-30.1), 0 (30-31), 0 (31-34), confirmed by read-back of 20 detail records whose maximum realized V_max is 29.58 km/s (subhalo 906682, 5.90e9 Msun). The canonical anchor `M200=5e9, Vmax=31.12` is realized at higher redshift instead (same cell: 22 at z=0, 31 at 0.110, 39 at 0.261, 54 at 0.440 and 0.676, 40 at 0.997). Reported as a consistency tension for the anchor, not a verdict on Cloud-9.
+- **Filter-trust rule re-confirmed with new cases:** `subhalo_id=<id>` list filter, `fields=` on list queries, `order=`/`sorting=` and `count=3` are all silently ignored by the API (each verified by the returned count or by reading the page); `id=<id>` works. `vmax__gt=15` with `mass__lt=6.774e-3` returns count 0 in TNG50-1, so the tier-1 mass floor is inert at z=0.
+- **Defect found in the new node fetcher during its own first run:** `stage3_nodes/snapshot_z.json` keys are strings when read back from JSON while the lineage snapshots are ints, so `SNAP_Z.get(run).get(snap)` returned None and rows written before the fix carry `z=null`. Fixed (`int(k)` on load); existing rows are re-joined locally, no re-fetch needed.
+- Records: `docs/STAGE3_TNG_SAMPLE_2026-11-04.md`; manifests `v0.3-prelim/data/results/tng_stage3_{sample,anchor}_manifest.json`.
+
 ## [RhoFix-Cloud9Recheck-2026-11-04]
 
 **The gravothermal density profile was inverted relative to the paper it cites. Fixed, re-derived, and the published Cloud-9 optical-thickness claim reversed.**
