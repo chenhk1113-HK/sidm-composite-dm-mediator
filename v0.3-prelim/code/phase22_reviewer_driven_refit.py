@@ -325,7 +325,13 @@ def evaluate_channels(label, params, ksfr_mask=True, asymmetric=True):
     try:
         # Majorana fermion — magnetic moment is helicity-suppressed
         mu_x = 1e-6 * epsilon_A  # rough EFT estimate
-        ll = loglike_lz_magnetic_moment(mu_x, m_chi_A)
+        # FIX (2026-11-04): arguments were REVERSED. The signature is
+        # loglike_lz_magnetic_moment(m_chi_GeV, mu_x, include_in_fit=True);
+        # the old call (mu_x, m_chi_A) put mu_x (~1e-43) into m_chi_GeV,
+        # which is < 0.1, so the function silently returned 0.0 for every
+        # point. Corrected to (m_chi_A, mu_x).
+        # NOTE: stored outputs of this script predate this correction.
+        ll = loglike_lz_magnetic_moment(m_chi_A, mu_x)
         results["lz_magnetic_moment"] = {"loglike": float(ll)}
         print(f"loglike = {ll:.2f}")
     except Exception as e:

@@ -182,7 +182,7 @@ CHANNEL_STATUS = {
     23: "production",                       # Euclid Q1 strong-lensing (T88.C) — silent cross-check at v0.7
     24: "production",                       # Euclid Q1 subhalo FORECAST (T88.E) — first non-silent, ε²-suppressed at v0.8
     25: "production",                       # Goldstein & Hill 2026 ΔN_eff<0.107 (T89) — documented null, ε²-suppressed
-    26: "production",                       # LZ magnetic-moment EFT Ls₁₀ (T90, wip/tier3 branch) — gated by env var, default OFF
+    26: "production",                       # LZ magnetic-moment EFT Ls₁₀ (T90, wip/tier3 branch) — no in-function env gate; the T41 caller gates it
 }
 
 
@@ -215,6 +215,18 @@ def sidm_m_chi_estimate(sigma_m_cm2_per_g: float) -> float:
 def loglike_direct_detection_exclusion(sigma_m: float, m_chi_GeV: float = 1.0) -> float:
     """Channel 5 — penalizes SIDM candidates that are LZ-excluded.
 
+    .. warning::
+       UNIT ERROR (~1.78x) — treat this as an order-of-magnitude flag only.
+       ``sigma_DM_nucleon = sigma_m * 1e-24 * m_chi_GeV`` is compared to the
+       LZ limit in cm^2, but the physically correct per-particle conversion
+       is sigma_DM-nucleon = sigma_m * m_chi * (1 GeV / 1.783e-24 g)
+       = sigma_m * 1.783e-24 * m_chi_GeV, so the ``1e-24`` constant is low
+       by a factor 1.783 (1 GeV = 1.783e-24 g, CODATA). Left UNCHANGED by
+       design: the identical literal in loglike_competitor_dd_watch feeds
+       the canonical T41 likelihood sum (t41_mediator_mass_joint_fit.py:756);
+       fixing one copy but not the other would silently diverge the two
+       channels, and fixing both would alter a stored canonical fit.
+
     For sigma_DM-DM ~ 1 cm^2/g and m_chi ~ 1 GeV, the expected
     sigma_DM-nucleon is well below LZ limit, so no penalty.
 
@@ -233,7 +245,7 @@ def loglike_direct_detection_exclusion(sigma_m: float, m_chi_GeV: float = 1.0) -
     # For heavier candidates, check if our sigma/m would imply
     # an excluded nucleon cross-section. This is model-dependent;
     # we apply a soft penalty.
-    sigma_DM_nucleon = sigma_m * 1e-24 * m_chi_GeV / 1.0  # very rough scaling
+    sigma_DM_nucleon = sigma_m * 1e-24 * m_chi_GeV / 1.0  # very rough scaling; 1e-24 is ~1.78x low (1 GeV=1.783e-24 g) - see docstring warning
     lz_limit = sigma_LZ_limit(m_chi_GeV)
     if sigma_DM_nucleon > lz_limit:
         return -1.0  # soft penalty
@@ -298,6 +310,21 @@ def is_excluded_by_XENONnT_or_PandaX(m_chi_GeV: float, sigma_DM_nucleon_cm2: flo
 def loglike_competitor_dd_watch(sigma_m: float, m_chi_GeV: float = 1.0) -> float:
     """Channel 19 — XENONnT + PandaX-4T direct-detection competitor watch.
 
+    .. warning::
+       UNIT ERROR (~1.78x) — this channel is an order-of-magnitude flag only
+       and must not be quoted as a physical bound. ``sigma_DM_nucleon =
+       sigma_m * 1e-24 * m_chi_GeV`` is compared against
+       LZ/XENONnT/PandaX limits in cm^2, but the correct per-particle
+       conversion is sigma_DM-nucleon = sigma_m * m_chi * (1 GeV / 1.783e-24 g)
+       = sigma_m * 1.783e-24 * m_chi_GeV, so ``1e-24`` is low by a factor
+       1.783 (1 GeV = 1.783e-24 g, CODATA). The constant is deliberately NOT
+       changed: this channel IS part of the canonical T41 likelihood sum
+       (t41_mediator_mass_joint_fit.py:756), so editing it would alter a
+       stored canonical fit. The scaling also omits the kinetic-mixing
+       suppression. (At the canonical T41 MAP, sigma_DM-nuc ~ 2.5e-23 cm^2
+       is ~23 orders above the XENONnT/PandaX limit, so the -1.0 soft
+       penalty is saturated there and the 1.78x factor does not move it.)
+
     This is a soft penalty (not a hard exclusion). For the v0.7 MAP,
     the predicted sigma_DM-nuc is far below both experiments' limits,
     so this channel contributes 0 to the log-likelihood.
@@ -314,7 +341,7 @@ def loglike_competitor_dd_watch(sigma_m: float, m_chi_GeV: float = 1.0) -> float
     # Same "very rough scaling" as Channel 5 (consistent treatment
     # for direct-detection channels; the kinetic-mixing suppression
     # is captured by the Kahlhoefer formula, not by this channel).
-    sigma_DM_nucleon = sigma_m * 1e-24 * m_chi_GeV / 1.0  # very rough
+    sigma_DM_nucleon = sigma_m * 1e-24 * m_chi_GeV / 1.0  # very rough; 1e-24 is ~1.78x low (1 GeV=1.783e-24 g) - see docstring warning
     xenonnt_limit = sigma_XENONnT_2025_limit(m_chi_GeV)
     pandax_limit = sigma_PandaX4T_2025_limit(m_chi_GeV)
 
@@ -438,10 +465,7 @@ def loglike_lens_subhalo(sigma_m_0: float, a: float) -> float:
 
 # Backward-compatible alias for the old placeholder name
 def loglike_lens_subhalo_placeholder(sigma_m: float) -> float:
-    """Backward-compatible alias. New code should use loglike_lens_subhalo().
-
-    Assumes a=0 (velocity-independent) for backwards compatibility.
-    """
+    """Legacy backward-compatible alias, NOT a stub: returns the real likelihood loglike_lens_subhalo(sigma_m, a=0.0), identical to the non-placeholder name."""
     return loglike_lens_subhalo(sigma_m, 0.0)
 
 
@@ -721,10 +745,7 @@ def loglike_dm_free_udg(sigma_m_0: float, a: float, mediator_class: str = "power
 
 # Backward-compatible alias (mirrors the pattern used for Channel 6)
 def loglike_dm_free_udg_placeholder(sigma_m: float) -> float:
-    """Backward-compatible alias. New code should use loglike_dm_free_udg().
-
-    Assumes a=0 (velocity-independent) for backwards compatibility.
-    """
+    """Legacy backward-compatible alias, NOT a stub: returns the real likelihood loglike_dm_free_udg(sigma_m, a=0.0), identical to the non-placeholder name."""
     return loglike_dm_free_udg(sigma_m, 0.0)
 
 
@@ -792,10 +813,7 @@ def loglike_dm_dominated_udg(sigma_m_0: float, a: float, mediator_class: str = "
 
 # Backward-compatible alias
 def loglike_dm_dominated_udg_placeholder(sigma_m: float) -> float:
-    """Backward-compatible alias. New code should use loglike_dm_dominated_udg().
-
-    Assumes a=0 (velocity-independent) for backwards compatibility.
-    """
+    """Legacy backward-compatible alias, NOT a stub: returns the real likelihood loglike_dm_dominated_udg(sigma_m, a=0.0), identical to the non-placeholder name."""
     return loglike_dm_dominated_udg(sigma_m, 0.0)
 
 
@@ -1235,6 +1253,23 @@ def _compute_mu_y_from_lifetime(tau_s: float) -> Tuple[float, float]:
 def loglike_cmb_distortion(m_chi: float, m_phi: float, epsilon: float) -> float:
     """Channel 16: CMB spectral distortion (Planck 2017 μ/y Gaussian penalty).
 
+    .. warning::
+       PHYSICALLY MIS-SCALED — DO NOT USE THIS BRANCH TO SET A CONSTRAINT.
+       The quantity named ``y`` returned by ``_compute_mu_y_from_lifetime`` is
+       NOT a CMB y-distortion (which is O(1e-5)). It is actually Δρ/ρ_γ, a
+       fractional energy-injection contrast of order
+       0.25 * DELTA_RHO_OVER_RHO_GAMMA_CMB ~ 1350. Dividing that ~1.35e3
+       quantity by the 1e-7 y-scale (penalty at :1294) yields penalties of
+       order -1e19, not a Planck-scale bound: e.g.
+       loglike_cmb_distortion(1e10, 1e7, 1e-14) = -6.71e19. The arithmetic is
+       left UNCHANGED because this term feeds the canonical T41 likelihood sum.
+       DORMANT at the standing (canonical v0.6) T41 posterior: with
+       m_phi ~ 625 MeV and epsilon ~ 1e-58 the mediator lifetime exceeds
+       T_CMB_DISTORTION_LATE_S, so the function returns exactly 0.0. Verified
+       by evaluating it at the canonical T41 MAP and median parameters
+       (m_chi*1e9, m_phi*1e6, epsilon) via .venv-sidm-bench python - both
+       return 0.0.
+
     Per R14 reviewer Recommendation 3, adds a post-BBN CMB spectral
     distortion likelihood that complements Channel 14's BBN-era ΔN_eff
     constraint. Penalizes mediator decays that would inject too much
@@ -1540,9 +1575,6 @@ def loglike_phi_to_gamgam_xrism(theta, include_in_fit: bool = True) -> float:
         return _impl(theta)
     except Exception:
         return 0.0
-        return _impl(theta)
-    except Exception:
-        return 0.0
 
 def loglike_euclid_q1_lensing(sigma_m_0: float, a: float, include_in_fit: bool = True) -> float:
     """T41-compatible wrapper for Euclid Q1 strong-lensing cluster catalog (Channel 23).
@@ -1758,9 +1790,14 @@ def loglike_lz_magnetic_moment(
     converted to BOHR MAGNETONS (μ_B) before passing to WIMpy_NREFT,
     which uses the atomic-physics convention.
 
-    **Tier-3 exploration channel — default OFF.** This channel only
-    fires when the env var T90_MAGNETIC_MOMENT_MU_X is set; otherwise
-    it returns 0 to preserve master behavior.
+    **Tier-3 exploration channel — the env gate is NOT in this function.**
+    This function does NOT read the environment. It is evaluated on every
+    call whose guards (below) pass; called directly with the env var unset
+    it still returns a real value (e.g. -1.000000103496805 at
+    m_chi=1000 GeV, mu_x=6.1e-8), NOT 0. The T90_MAGNETIC_MOMENT_MU_X /
+    T90_MAGNETIC_MOMENT_DISABLE gating lives ONLY at the call site in
+    t41_mediator_mass_joint_fit.py (~lines 629-654), which decides
+    whether to call this function at all. A new caller must gate itself.
 
     Args:
         m_chi_GeV: SIDM particle mass in GeV

@@ -31,7 +31,7 @@ This is the honest scientific conclusion after 4 phases of increasingly rigorous
 | 35-36 | 5-resonance + concentration physics | — | REVERTED |
 | 37 | Final verdict v37 | 139/139 | Partial solution |
 | 38 | sidmkit cross-check | 3/3 | Pipeline integrity |
-| 39 | NFW vs SIDM (15 galaxies) | 5/5 | STRONG_SIDM (overstated) |
+| 39 | NFW vs SIDM (15 galaxies) | 5/5 | STRONG_SIDM (overstated: the 'SIDM' profile is σ/m-inert, see docs/INTEGRITY_FINDINGS_2026-11-04.md F1) |
 | 40 | + Burkert + Occam (120 galaxies) | 8/8 | Burkert wins (honest) |
 | 41 | + Einasto + PISO + dynesty | 8/8 | Burkert wins by dynesty |
 | 41D | + Gravothermal (Yang+ 2023) | 8/8 | Hybrid SIDM still better |

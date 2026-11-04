@@ -82,6 +82,7 @@ from channels_extended import (
     loglike_delta_n_eff_goldstein_hill_2026,
     loglike_lz_magnetic_moment,
     loglike_lz_magnetic_moment_binned,
+    MAGNETIC_MOMENT_LZ_TUNED_MU_X_MU_N,
 )
 
 # T90.29 RELHIC likelihood (Cloud-9 + M51)
@@ -244,12 +245,19 @@ def loglike_joint_multi_portal(theta: np.ndarray) -> float:
     if not np.isfinite(ll_lz_real):
         ll_lz_real = -10.0
 
-    # LZ magnetic-moment: driven by Portal A only
-    try:
-        ll_lz_mag = loglike_lz_magnetic_moment(m_chi_A, m_phi_A, g_chi_A, epsilon_A)
-        if not np.isfinite(ll_lz_mag):
-            ll_lz_mag = -10.0
-    except Exception:
+    # LZ magnetic-moment: driven by Portal A only.
+    # FIX (2026-11-04): the previous call passed FOUR positional args
+    # (m_chi_A, m_phi_A, g_chi_A, epsilon_A) to the 3-arg signature
+    # loglike_lz_magnetic_moment(m_chi_GeV, mu_x, include_in_fit=True), so it
+    # ALWAYS raised TypeError, which the bare `except Exception` that used to
+    # sit here swallowed into a constant -10.0 independent of theta. mu_x is
+    # not a fit parameter in this 9D model, so the channel is evaluated at the
+    # project's canonical LZ-tuned moment (MAGNETIC_MOMENT_LZ_TUNED_MU_X_MU_N
+    # = 6.10e-8 mu_N, channels_extended.py) for Portal A's mass. The
+    # try/except is REMOVED so a signature error can never be hidden again.
+    # NOTE: stored outputs of this script predate this correction.
+    ll_lz_mag = loglike_lz_magnetic_moment(m_chi_A, MAGNETIC_MOMENT_LZ_TUNED_MU_X_MU_N)
+    if not np.isfinite(ll_lz_mag):
         ll_lz_mag = -10.0
 
     # ----- FERMI dwarf (Portal A annihilation) -----
