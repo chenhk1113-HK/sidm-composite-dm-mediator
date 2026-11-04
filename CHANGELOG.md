@@ -1,3 +1,13 @@
+## [Phase39-40-Scope-Guard-2026-11-04]
+
+**Decision D1 executed: the inert Phase 39/40 'SIDM' verdict is now qualified by a measurement the producers run on themselves, and the bound of that inertness was pinned (the old blanket claim was too broad).**
+
+- New `v0.3-prelim/code/sigma_responsiveness_probe.py`: measures max |dV| produced by sweeping sigma_0, generically, for any `(sigma_0, r) -> km/s` profile.
+- `phase39_nfw_vs_sidm.py` and `phase40_corrected_comparison.py` now run it over **every galaxy they fitted** (each with its own best-fit log_rho_s/log_r_s and its own observed SPARC V_max) across sigma_0 = 1e-3..1e3 cm2/g, store the result as `sigma_m_responsiveness_probe`, and publish a generated `verdict_scope` sentence next to the verdict. Measured: max |dV| = **0.0 km/s exactly** for 15/15 (Phase 39) and 120/120 (Phase 40) halos. Every pre-existing artifact value reproduced identically; only the two new keys were added.
+- Correction to an over-broad claim: inertness comes from the `max(r_core, 0.1*r_s)` clamp and the clamp breaks at a halo-dependent sigma_0 (measured breakout ~2.3e5 cm2/g for log_rho_s 6/log_r_s 2.5/Vmax 20, ~1.5e4 for (7,3,30), ~9e2 for (8,3.5,45), ~1e2 for (9,4,60)). All 135 fitted halos sit in the inert region (fitted log_r_s 0.52-2.25), so the honest wording is 'inert across the sigma/m range this project uses, for every halo it fitted', not 'inert always'.
+- `v0.3-prelim/tests/test_sigma_responsiveness_probe.py` (10 tests) pins: a synthetic responsive profile is detected (guard is not vacuous), phase39/40 are inert measured live including from the stored fitted parameters, phase39b is responsive measured live, the phase39b independent report and the probe agree, the clamp-breakout behaviour is visible to the probe, and both producer artifacts carry `verdict_scope`. Mutation test: neutering the probe to always report inert fails 4 tests; source restored byte-identically. 26 passed across the four affected suites.
+- docs/INTEGRITY_FINDINGS_2026-11-04.md adds the F1-follow-up measurement and marks D1 EXECUTED (option c), with options (a)/(b) still open as physics changes.
+
 ## [Stage3-TNG-Sample-2026-11-04]
 
 **IllustrisTNG Stage 3 moved from a feasibility plan to an on-disk sample, and the Cloud-9 anchor was found to sit above the simulated ceiling.**

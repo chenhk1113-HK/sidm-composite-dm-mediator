@@ -61,6 +61,12 @@ from t90_v70_multi_resonant_darkqcd import (
     velocity_dependent_background,
 )
 from t90_v50_resonant_sidm import kinetic_energy_eV
+from sigma_responsiveness_probe import (
+    PHYSICAL_SIGMA_SWEEP_CM2_PER_G,
+    scope_sentence,
+    sigma_m_responsiveness_kms,
+    worst_case,
+)
 
 G_KPC_KMS = 4.302e-6  # kpc (km/s)^2 / M_sun  (config.py:111)
 
@@ -470,6 +476,36 @@ def main():
     print(f"  {msg}")
     print()
 
+    # Decision D1 guard (2026-11-04): measure, inside this producer, whether the "SIDM" profile
+    # it just compared actually depends on sigma/m. If it does not, the verdict is a cored-vs-cuspy
+    # statement and the artifact must say so in its own words. A future fix to the core-radius
+    # formula flips this automatically instead of leaving a stale disclaimer behind.
+    # Probe every galaxy this test actually fitted, with its own best-fit (log_rho_s, log_r_s)
+    # and its own observed V_max, over the sigma/m values the project uses.
+    resp_list = []
+    for rec in sidm_results:
+        lrho, lrs, _ = rec["params"]
+        g = load_sparc_galaxy(rec["galaxy"])
+        if g is None:
+            continue
+        vmax = float(np.max(g["Vobs_kms"]))
+        resp_list.append(sigma_m_responsiveness_kms(
+            lambda s0, r, lrho=lrho, lrs=lrs, vmax=vmax: v_circ_sidm_multi_resonant(
+                r, lrho, lrs, vmax, m_chi, resonances, s0, a_slope),
+            sigma_0,
+            sigma_0_values=list(PHYSICAL_SIGMA_SWEEP_CM2_PER_G),
+        ))
+    resp = worst_case(resp_list) if resp_list else sigma_m_responsiveness_kms(
+        lambda s0, r: v_circ_sidm_multi_resonant(r, 7.0, 3.0, 30.0, m_chi, resonances, s0, a_slope),
+        sigma_0, sigma_0_values=list(PHYSICAL_SIGMA_SWEEP_CM2_PER_G),
+    )
+    verdict_scope = scope_sentence(resp)
+    print(f"sigma/m responsiveness probe: max |dv| = {resp['max_abs_delta_kms']:.3e} km/s "
+          f"across sigma_0 x0.01..x100 -> "
+          f"{'SIGMA-INERT' if resp['is_sigma_inert'] else 'SIGMA-RESPONSIVE'}")
+    print(f"  {verdict_scope}")
+    print()
+
     # Save
     out = {
         "test": "Phase39_NFW_vs_SIDM_comparison",
@@ -494,6 +530,8 @@ def main():
             "delta_bic": float(total_bic_nfw - total_bic_sidm),
         },
         "verdict": verdict,
+        "verdict_scope": verdict_scope,
+        "sigma_m_responsiveness_probe": resp,
         "interpretation": msg,
         "caveat": (
             "Phase 38 review noted this was the missing comparison. "

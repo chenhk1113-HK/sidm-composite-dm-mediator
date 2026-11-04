@@ -473,6 +473,32 @@
     "delta_bic": 667.6245749454979
   },
   "verdict": "STRONG_SIDM",
+  "verdict_scope": "SCOPE LIMIT (measured, not asserted): the 'SIDM' profile in this test is sigma/m-inert in each of its 15 fitted halos \u2014 sweeping sigma_0 over 1.0e-03 to 1.0e+03 cm^2/g moves the rotation curve by at most 0.000e+00 km/s. The verdict therefore compares a fixed CORED profile against a CUSPY NFW one; it is not evidence about self-interacting dark matter. The sigma/m-responsive comparison is phase39b_sidm_responsive_profile.py.",
+  "sigma_m_responsiveness_probe": {
+    "sigma_0_values": [
+      0.001,
+      0.06,
+      0.195,
+      0.68,
+      7.1,
+      147.1,
+      174.0,
+      1000.0
+    ],
+    "radii_kpc": [
+      0.5,
+      1.0,
+      2.0,
+      5.0,
+      10.0,
+      20.0
+    ],
+    "n_halos_probed": 15,
+    "max_abs_delta_kms": 0.0,
+    "max_relative_delta": 0.0,
+    "inert_tolerance_kms": 1e-06,
+    "is_sigma_inert": true
+  },
   "interpretation": "SIDM strongly preferred (>10 log-units over NFW)",
   "caveat": "Phase 38 review noted this was the missing comparison. Phase 39 implements it. CAVEAT: SIDM profile here is a simplified Burkert+NFW blend with velocity-dependent core radius. Full gravothermal evolution not simulated. AIC/BIC penalty for SIDM is identical to NFW (k=3 for both), so the test is about likelihood only."
 }

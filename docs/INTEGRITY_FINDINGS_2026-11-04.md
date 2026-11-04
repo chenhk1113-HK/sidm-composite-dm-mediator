@@ -408,11 +408,45 @@ pins it (12 tests), and the recheck scans only to `G.TAU_FIT_RANGE_MAX` with `ta
 never fires in the fit path — but it does fire in hand-written analyses like the recheck, which is
 exactly how `tau* ≈ 1.4` got published in two docs.
 
+## F1-follow-up (2026-11-04): the inertness is now measured by the producers themselves, and its bound is pinned
+
+**What changed.** `v0.3-prelim/code/sigma_responsiveness_probe.py` measures how far a rotation
+curve moves when σ₀ moves. `phase39_nfw_vs_sidm.py` and `phase40_corrected_comparison.py` now run
+it on **every galaxy they fitted**, using each galaxy's own best-fit (log ρ_s, log r_s) from the fit
+and its own observed V_max from SPARC, over σ₀ = 1e-3 … 1e3 cm²/g (which brackets the canonical
+galaxy-scale range 0.06–0.68, the BM2 dwarf anchor 7.1, and the Cloud-9 anchors 147.1 / 174). The
+measurement is stored in each artifact (`sigma_m_responsiveness_probe`) and the verdict is published
+with a `verdict_scope` sentence generated from it, so the disclosure cannot be deleted from the docs
+without the artifact contradicting them.
+
+| measured | value |
+|---|---|
+| Phase 39, 15 fitted halos, σ₀ 1e-3…1e3 cm²/g | max \|ΔV\| = **0.0 km/s exactly** |
+| Phase 40, 120 fitted halos, same sweep | max \|ΔV\| = **0.0 km/s exactly** |
+| rerun totals after the change | identical to the previous artifacts, every key (only the two new keys were added) |
+| guard suite | `v0.3-prelim/tests/test_sigma_responsiveness_probe.py`, 10 tests; 26 passed together with the existing core-radius/unit/removed-API suites |
+| mutation test | forcing `is_sigma_inert: True` in the probe fails **4** tests (the synthetic-responsive, phase39b-responsive, scope-wording and bound tests) — the guard is not vacuous; source restored byte-identically |
+
+**The bound, stated precisely (this is the correction to a claim that was too broad).** Inertness is
+a property of the halos actually fitted, not an absolute property of the formula. The clamp
+`r_core = max(r_core, 0.1 r_s)` breaks at a σ₀ that depends on the halo: measured breakout σ₀ ≈
+2.3e5 cm²/g for (log ρ_s 6, log r_s 2.5, V_max 20), ≈ 1.5e4 for (7, 3, 30), ≈ 9e2 for (8, 3.5, 45),
+≈ 1e2 for (9, 4, 60). Those parameter points are outside the SPARC fits (the fitted log r_s range
+here is 0.52–2.25), which is why 135/135 fitted halos come out exactly inert. The honest sentence is
+"inert across the σ/m range this project uses, for every halo it fitted", **not** "inert always".
+
+**D1 executed (option c, with the responsive route kept separate).** Phase 39 / Phase 40 are now
+labelled for what they test — a fixed **cored** profile against a cuspy NFW one — and the σ/m-
+responsive comparison is `phase39b_sidm_responsive_profile.py` (max ΔV 10.9 km/s across σ/m, i.e. a
+profile that does respond). Adopting Yang+ 2024 eq. 2.1 in place of the Kaplinghat-style clamp
+(option a) remains open as a physics change, and if it is made, `test_sigma_responsiveness_probe.py`
+and `test_sidm_core_radius_invariance.py` are designed to fail and force the re-derivation.
+
 ## Decisions the owner has to make
 
 | # | decision | options | what changes |
 |---|---|---|---|
-| D1 | Replace the inert SIDM core radius? | (a) adopt the Yang+ 2024 eq. 2.1 profile + eq. 2.2 collapse time already implemented and KB-verified in `gravothermal_yang2024.py` (a σ/m-responsive prototype is being measured now); (b) dimensionally consistent optical-depth form `r_core = 0.45 r_s (σ_kpc ρ_s r_s)^{1/4}`; (c) keep the fixed 0.1·r_s cored profile but rename the test honestly (NFW vs cored) | the Phase 39/40 head-to-head becomes a real SIDM test, or stops claiming to be one |
+| D1 | Replace the inert SIDM core radius? | **EXECUTED 2026-11-04 as option (c)**: the fixed 0.1·r_s cored profile stays, and both producers now measure and publish their own σ/m inertness (`sigma_responsiveness_probe.py`, `verdict_scope` in the artifacts), so the head-to-head no longer claims to be a SIDM test; the σ/m-responsive comparison is phase39b. Options (a) and (b) remain open as physics changes and would be forced through the two guard suites. | Phase 39/40 headline is now honest; a real SIDM test still requires (a) or (b) |
 | D2 | Phase 40 model-comparison scoring | penalise per model (AIC/BIC) or per dataset; how to treat UGC 02916-type outliers | which of `STRONG_SIDM` / `WEAK_NFW` survives in the docs |
 | D3 | Direct-detection constant 1e-24 vs 1.783e-24 | fix and re-run the canonical posterior (channel weight 0.5 in `t41`), or leave and keep the disclosure | certified posterior and every number derived from it |
 | D4 | Gate strictness | keep warn-only layers, or promote them to hard failures once the KB is complete | whether a green gate means anything |

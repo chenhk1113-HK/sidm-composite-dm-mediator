@@ -45,6 +45,12 @@ from t90_v70_multi_resonant_darkqcd import (
     velocity_dependent_background,
 )
 from t90_v50_resonant_sidm import kinetic_energy_eV
+from sigma_responsiveness_probe import (
+    PHYSICAL_SIGMA_SWEEP_CM2_PER_G,
+    scope_sentence,
+    sigma_m_responsiveness_kms,
+    worst_case,
+)
 
 SPARC_DIR = Path(r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\data\external\sparc")
 # Lazy-initialized results directory (created in main(), not at import time,
@@ -503,6 +509,33 @@ def main():
     print(f"  Full physical model (k_phys): SIDM vs NFW → {v_phys_nfw}")
     print(f"  Full physical model (k_phys): SIDM vs Burkert → {v_phys_burk}")
 
+    # Decision D1 guard (2026-11-04): measure whether the "SIDM" curve compared above depends on
+    # sigma/m at all. Same contract as phase39 — see sigma_responsiveness_probe.py.
+    # Probe every galaxy this test actually fitted, with its own best-fit (log_rho_s, log_r_s)
+    # and its own observed V_max, over the sigma/m values the project uses.
+    resp_list = []
+    for rec in sidm_results:
+        lrho, lrs, _ = rec["params"]
+        g = load_sparc_galaxy(rec["galaxy"])
+        if g is None:
+            continue
+        vmax = float(np.max(g["Vobs_kms"]))
+        resp_list.append(sigma_m_responsiveness_kms(
+            lambda s0, r, lrho=lrho, lrs=lrs, vmax=vmax: v_circ_sidm(
+                r, lrho, lrs, vmax, m_chi, resonances, s0, a_slope),
+            sigma_0,
+            sigma_0_values=list(PHYSICAL_SIGMA_SWEEP_CM2_PER_G),
+        ))
+    resp = worst_case(resp_list) if resp_list else sigma_m_responsiveness_kms(
+        lambda s0, r: v_circ_sidm(r, 7.0, 3.0, 30.0, m_chi, resonances, s0, a_slope),
+        sigma_0, sigma_0_values=list(PHYSICAL_SIGMA_SWEEP_CM2_PER_G),
+    )
+    verdict_scope = scope_sentence(resp)
+    print(f"sigma/m responsiveness probe: max |dv| = {resp['max_abs_delta_kms']:.3e} km/s "
+          f"across sigma_0 x0.01..x100 -> "
+          f"{'SIGMA-INERT' if resp['is_sigma_inert'] else 'SIGMA-RESPONSIVE'}")
+    print(f"  {verdict_scope}")
+
     # Save
     out = {
         "test": "Phase40_Corrected_comparison",
@@ -544,12 +577,14 @@ def main():
             "aic_diff_phys_nfw_minus_sidm": float(delta_aic_phys_nfw),
             "aic_diff_phys_burk_minus_sidm": float(delta_aic_phys_burk),
         },
+        "verdict_scope": verdict_scope,
         "verdicts": {
             "fit_nfw_vs_sidm": v_fit_nfw,
             "fit_burk_vs_sidm": v_fit_burk,
             "phys_nfw_vs_sidm": v_phys_nfw,
             "phys_burk_vs_sidm": v_phys_burk,
         },
+        "sigma_m_responsiveness_probe": resp,
         "interpretation": (
             "Phase 40 corrects Phase 39 with reviewer recommendations:\n"
             "  - Added Burkert as 3rd model (the relevant comparison for cored profiles)\n"
