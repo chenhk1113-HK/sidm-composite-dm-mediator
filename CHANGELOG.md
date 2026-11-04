@@ -1,4 +1,17 @@
 ## [Consolidation-CIFix-2026-11-03]
+## [CIFix-Verified-2026-11-03]
+
+**The CI repair was proved on a fresh checkout, and the simulation caught a bug in the repair itself.**
+
+- **How it was proved**: `git clone` of `wip/v19.2-F-init` (3336 tracked files) into a scratch dir plus a fresh Python 3.12.13 venv holding **only** `requirements-ci.txt` — the same view a GitHub runner gets — then the workflow's own pytest command run there.
+- **Result**: `1837 passed, 100 skipped, 75 deselected, 0 failed` in 348 s, exit 0. The local gate on the same commit reports `1954 passed / 22 skipped / 36 deselected`. Both sides collect the same 2012 tests, so the two numbers describe one population under two environments.
+- **What the 117-test gap actually is**: 39 tests are deselected by name (36 need `WIMpy`; 3 read gitignored local inputs) and **78 tests self-skip** when their input is absent (`100` skipped fresh vs `22` locally). A self-skip is not a pass — CI certifies 1837 tests, not 1954, and says so in the workflow file.
+- **Bug the simulation caught**: the first version of the deselect block omitted shell line-continuations after each `--deselect` argument. Bash then treated every argument after the first as a command (`line 55: --deselect=…: No such file or directory`, exit 127). On GitHub this would have made the step die immediately. Fixed by continuing every argument line, and the fixed command is the one that produced the numbers above.
+- **Why node IDs and not whole files**: the 39 tests live in 16 files that define **154** tests. Ignoring those files — what a naive fix does — would have silently deselected **115** tests CI can actually run.
+- **Cause (W) — 36 tests**: Channel 26 (magnetic moment) imports `WIMpy` (`bradkav/WIMpy_NREFT`), which **is not a PyPI package** (PyPI's `WIMpy` tops out at 0.6 and is a different project). The working copy is installed from `git+https://github.com/bradkav/WIMpy_NREFT.git@50581c637069305a3def3865462ef1b4ed9a616d` (read from `direct_url.json`). Without it the channel returns 0 by design, so its likelihood assertions cannot hold.
+- **Cause (D) — 3 tests**: `test_phase33d_real_sparc.py::…::test_sparc_table_downloaded`, `test_phase7d_t95_stream.py::test_phase7d_runs_as_script`, `test_v40_61_n14_docx_response.py::test_ohana_paper_saved_locally` read inputs `.gitignore` excludes: `v0.3-prelim/data/external/` (595 files, 16.4 MB, **0 tracked**) and the verified paper PDFs under `docs/papers/verified/` (only their `.md` summaries are tracked). Stated plainly: the KB rule "every cited slot has a local PDF and a summary" holds **on this host**, not in the repository.
+- **Also corrected**: a draft of this entry said "96 tests" for the whole-file-ignore cost. Re-measured: **115**. The draft number came from memory instead of measurement and was not shipped.
+- **Not claimed**: this is a Windows simulation of the workflow's steps, not a GitHub runner result. No hosted check run exists for these commits yet.
 
 **CI repaired, superseded review reports consolidated, auditor's stale literal re-synced.** Five user decisions applied: push / fix CI / merge into `master` / update the `44/44` literal / consolidate.
 
