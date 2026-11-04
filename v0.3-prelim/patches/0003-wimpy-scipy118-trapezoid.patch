@@ -1,0 +1,37 @@
+Local compatibility patch for the pinned WIMpy install (NOT upstream).
+
+Target:    bradkav/WIMpy_NREFT @ 50581c637069305a3def3865462ef1b4ed9a616d, file WIMpy/DMUtils.py
+Applies to: .venv-sidm-bench/Lib/site-packages/WIMpy/DMUtils.py -- the venv that
+            scripts/verify_release_gate.py runs on (its VENV_PYTHON, line 64).
+Why:       upstream imports scipy.integrate.trapz and scipy.integrate.cumtrapz. SciPy 1.18
+           removed both names (trapezoid / cumulative_trapezoid). Against this repo's own pins
+           (scipy 1.18.1) an unpatched WIMpy import fails, and Channel 26
+           (loglike_lz_magnetic_moment) then returns 0 by design -- a physics channel switched
+           off by an import error, with its 36 assertions deselected rather than failing.
+Found:     2026-11-04, by diffing the installed file against the pinned upstream commit fetched
+           from raw.githubusercontent.com. Installed sha256 199065ab55244a8a..., upstream sha256
+           7b9f1ae8a729fe4f...; the whole difference is 3 added / 1 removed lines. Generated
+           from that diff so a fresh host can rebuild the same environment instead of inheriting
+           an unrecorded hand edit.
+Apply:     cd <the .venv-sidm-bench site-packages dir>
+           patch -p1 < .../v0.3-prelim/patches/0003-wimpy-scipy118-trapezoid.patch
+Verify:    python -c "import WIMpy; print('WIMpy ok')"
+Verified:    applied to a pristine copy of the pinned upstream file -> byte-identical to the
+           installed file after normalising line endings (installed file is CRLF, 927 CRs; the
+           patch produces LF). Verified with patch -p1 --dry-run and sha256 on 2026-11-04.
+Status:    third-party local edit, not upstream, not submitted upstream. Re-apply after any
+           WIMpy reinstall or Channel 26 dies silently.
+
+--- a/WIMpy/DMUtils.py
++++ b/WIMpy/DMUtils.py
+@@ -9,7 +9,9 @@
+ 
+ import numpy as np
+ from numpy import pi, cos, sin
+-from scipy.integrate import trapz, cumtrapz, quad
++from scipy.integrate import quad
++from scipy.integrate import trapezoid as trapz
++from scipy.integrate import cumulative_trapezoid as cumtrapz
+ from scipy.interpolate import interp1d,InterpolatedUnivariateSpline
+ from numpy.random import rand
+ from scipy.special import erf

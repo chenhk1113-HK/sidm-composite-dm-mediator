@@ -1,49 +1,88 @@
-# sidm-composite-dm-mediator requirements
+# sidm-composite-dm-mediator — dependency manifest
 #
-# Generated 2026-08-11 in response to Full Codebase R2 review (T1.4).
-# Pinned to exact versions known to work with the wimpy venv that
-# produced the D5 results. Re-pin after any major dep upgrade.
-#
-# Install (on a fresh host):
-#   python -m venv wimpy
-#   source wimpy/bin/activate          # bash/zsh
-#   pip install -r requirements.txt
-#
-# Optional (for full DSMC + Julia integration):
-#   juliaup add 1.11.5                # install Julia 1.11.5
-#   juliaup default 1.11.5
-#   julia +1.11.5 -e 'using Pkg; Pkg.activate("KiSS-SIDM"); Pkg.instantiate()'
+# REVISED 2026-11-04. Two problems with the 2026-08-11 version (kept visible below
+# under ARCHIVED rather than deleted):
+#   1. It claimed to be "pinned to exact versions known to work with the wimpy venv
+#      that produced the D5 results". That is no longer the environment producing
+#      today's certified results. Environment A below is what actually runs the gate.
+#   2. `WIMpy==1.1.1` is not installable from any index: PyPI's "WIMpy" tops out at
+#      0.6 and is a different project. The package this code imports is a git repo.
+#      Every pin in the VCS block is a commit hash read out of the install records.
 
-# Core scientific stack (required)
-numpy==2.4.6
-WIMpy==1.1.1   # approved by user 2026-09-22 for T90 cross-detector analysis
-scipy==1.18.0
-matplotlib==3.11.0
-pandas==3.0.3
-
-# Bayesian inference (required)
-dynesty==3.0.0
+# ---------------------------------------------------------------------------
+# ENVIRONMENT A — the interpreter the release gate runs on
+#   .venv-sidm-bench/Scripts/python.exe  (Python 3.12)
+#   scripts/verify_release_gate.py:64 hard-codes this path as VENV_PYTHON.
+#   The versions below were read from `python -m pip freeze` in that venv on
+#   2026-11-04. This is the environment that produced the 1954-pass gate result.
+# ---------------------------------------------------------------------------
+numpy==2.5.2
+scipy==1.18.1
+matplotlib==3.11.1
+pandas==3.0.5
+dynesty==3.1.0
 emcee==3.1.6
-
-# Testing (required)
 pytest==9.1.1
-hypothesis==6.103.1   # property-based tests (v0.3-prelim/tests/test_autocheck_hypothesis.py)
-sympy==1.13.3        # symbolic math checks (v0.3-prelim/tests/test_autocheck_sympy.py)
+hypothesis==6.168.0
+sympy==1.14.0
 
-# Documentation & delivery (required for the Telegram PDF pipeline)
+# ---------------------------------------------------------------------------
+# VCS-ONLY PACKAGES — not on PyPI. Commit hashes taken from
+# .venv-sidm-bench/Lib/site-packages/<name>.dist-info/direct_url.json.
+#
+# WARNING: WIMpy at this commit imports scipy.integrate.trapz and .cumtrapz, both
+# removed in SciPy 1.18. The local install carries a patch (v0.3-prelim/patches/
+# 0003-wimpy-scipy118-trapezoid.patch) that upstream does not have; without it the
+# import fails and Channel 26 (loglike_lz_magnetic_moment) returns 0 silently.
+# A fresh `pip install` of the line below will NOT work against scipy 1.18 until
+# that patch is applied.
+# ---------------------------------------------------------------------------
+WIMpy @ git+https://github.com/bradkav/WIMpy_NREFT.git@50581c637069305a3def3865462ef1b4ed9a616d
+sidm-vdsigmas @ git+https://github.com/mtryan83/sidm-vdsigmas.git@bd4733f0089efd1fdca18f01c2771f5432327641
+sidmkit @ git+https://github.com/nalin-dhiman/sidmkit.git@8b8017f7ad0ddd5e2b35605a30195ba5fb623eed
+
+# ---------------------------------------------------------------------------
+# ENVIRONMENT B — the delivery/PDF interpreter (NOT the gate venv)
+#   C:\Python314\python.exe (Python 3.14). fpdf2 lives here and is NOT installed in
+#   .venv-sidm-bench, so scripts/t237_pdf_build.py cannot run under Environment A.
+#   The previous file listed fpdf2 under "required" without saying which interpreter
+#   provides it.
+# ---------------------------------------------------------------------------
 fpdf2==2.8.7
 
-# Jupyter (optional, for the notebook-based analysis paths in v0.1-prelim)
-# These are present in the wimpy venv but not strictly required for D5+
-# Uncomment if you need to run v0.1-prelim notebooks.
-# jupyter==1.1.1
-# jupyterlab==4.6.0
+# ---------------------------------------------------------------------------
+# CI SUBSET
+#   .github/workflows/ci.yml and self_check.yml install requirements-ci.txt instead
+#   of this file, because the VCS-only packages above cannot be installed there.
+#   Consequence stated plainly: CI runs a narrower dependency set than the gate, which
+#   is why 39 tests are deselected in CI and 78 self-skip. See CHANGELOG
+#   [CIFix-Verified-2026-11-03].
+# ---------------------------------------------------------------------------
 
-# Cosmology (optional, only for camb / cobaya / cosmopass paths)
-# These were present in the wimpy venv from prior cosmological work.
-# Uncomment only if you intend to run the cosmological analyses.
-# camb==1.6.6
-# cobaya==3.6.2
-# cosmopass==1.1
-# astropy==8.0.0
-# getdist==1.7.7
+# ---------------------------------------------------------------------------
+# ARCHIVED — the 2026-08-11 pins (Full Codebase R2 review, T1.4). Kept for
+# provenance: these produced the D5-era results and no longer match Environment A
+# (numpy 2.4.6 vs 2.5.2, scipy 1.18.0 vs 1.18.1, matplotlib 3.11.0 vs 3.11.1,
+# pandas 3.0.3 vs 3.0.5, dynesty 3.0.0 vs 3.1.0, hypothesis 6.103.1 vs 6.168.0,
+# sympy 1.13.3 vs 1.14.0).
+#   numpy==2.4.6
+#   WIMpy==1.1.1        # user-approved 2026-09-22 for T90 cross-detector analysis;
+#                       # not installable from PyPI — superseded by the git pin above
+#   scipy==1.18.0
+#   matplotlib==3.11.0
+#   pandas==3.0.3
+#   dynesty==3.0.0
+#   emcee==3.1.6
+#   pytest==9.1.1
+#   hypothesis==6.103.1   # property-based tests (test_autocheck_hypothesis.py)
+#   sympy==1.13.3         # symbolic math checks (test_autocheck_sympy.py)
+#   fpdf2==2.8.7
+# ---------------------------------------------------------------------------
+
+# Optional paths, unchanged (present in some older venvs; not required by the gate):
+#   jupyter==1.1.1  jupyterlab==4.6.0        # v0.1-prelim notebooks
+#   camb==1.6.6  cobaya==3.6.2  cosmopass==1.1  astropy==8.0.0  getdist==1.7.7
+#
+# Julia path (KiSS-SIDM / DSMC), unchanged:
+#   juliaup add 1.11.5 && juliaup default 1.11.5
+#   julia +1.11.5 -e 'using Pkg; Pkg.activate("KiSS-SIDM"); Pkg.instantiate()'

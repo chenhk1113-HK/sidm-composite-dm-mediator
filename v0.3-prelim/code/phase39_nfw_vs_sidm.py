@@ -11,6 +11,15 @@ The key: for SIDM, the core radius is DERIVED from sigma/m(v_max):
 
 This is the standard Kaplinghat+ 2016 relation for velocity-dependent SIDM.
 
+UNIT CAVEAT (found 2026-11-04, NOT yet fixed -- changes stored results): every
+``v_circ_*`` function below uses G = 4.5e-6 kpc^3 M_sun^-1 Gyr^-2, so V_c2 = G M / r
+returns a speed in kpc/Gyr. The chi2 routines then compare that number directly to
+SPARC ``Vobs_kms`` / ``eV_kms``, which are km/s, with no conversion. 1 kpc/Gyr =
+0.9778 km/s, so the modelled dark-matter velocity is inflated by 2.28% whenever it is
+read as km/s (a ~4.6% shift in the density a fit compensates into). config.py:111
+already carries the km/s-native constant ``G_KPC_KMS = 4.302e-6``. phase40_corrected_comparison.py
+has the same mismatch. Fixing it re-derives the stored phase39/phase40 comparison.
+
 Tests on 30 representative SPARC galaxies (Q=1,2 with Vflat>0).
 Computes Bayesian evidence log Z for each model.
 """
@@ -21,6 +30,11 @@ from pathlib import Path
 import numpy as np
 import warnings
 warnings.filterwarnings("ignore")
+
+# NumPy 2.x removed np.trapz (the pinned numpy here is 2.5.2). Same compat alias
+# the repo already uses in t90_v47_gravothermal_fluid.py. Guarded by
+# v0.3-prelim/tests/test_removed_api_guard.py.
+_trapz = getattr(np, "trapezoid", getattr(np, "trapz", None))
 
 sys.path.insert(0, r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\code")
 
@@ -76,20 +90,33 @@ def v_circ_burkert(r_kpc, log_rho_b, r_b):
     """Burkert circular velocity.
 
     rho(r) = rho_b * r_b^3 / ((r + r_b) * (r^2 + r_b^2))
+
+    Enclosed mass is the ANALYTIC Burkert integral (same closed form this repo
+    already uses in phase40_corrected_comparison.py and in Balberg+ 2002):
+
+        M(r) = pi rho_b r_b^3 [ 2 ln(1+x) + ln(1+x^2) - 2 arctan(x) ],  x = r/r_b
+
+    CORRECTED 2026-11-04. This function previously integrated the profile ONCE out
+    to ``r_kpc.max()`` and reused that single scalar for every radius, i.e. it
+    returned sqrt(G M(r_max) / r). The value at a radius therefore depended on the
+    outer edge of whatever array the caller passed -- and the SPARC callers pass the
+    whole radius grid. Measured on the test grid [1, 5, 10, 50] kpc, v_circ(1 kpc)
+    came out 520.4 km/s instead of 167.7 -- a factor 3.1 error at the innermost
+    point. The stored ``phase39_nfw_vs_sidm.json`` predates this correction; use
+    phase40_corrected_comparison.py for the Burkert comparison.
+
+    Guarded by v0.3-prelim/tests/test_removed_api_guard.py::test_v_circ_burkert_actually_runs,
+    which cross-checks this function against independent quadrature.
     """
     rho_b = 10**log_rho_b
-    G = 4.5e-6
+    G = 4.5e-6  # kpc^3 / (M_sun Gyr^2) -- see the unit note at the top of this module
 
-    # Burkert profile integral
-    # M_enc = 4 pi rho_b r_b^3 [ln((r+r_b)*(r^2+r_b^2)/r_b^3) + ...]
-    # Simplified: numerical integration
-    r_arr = np.logspace(-3, np.log10(r_kpc.max()), 200)
-    rho_arr = rho_b * r_b**3 / ((r_arr + r_b) * (r_arr**2 + r_b**2))
-    integrand = rho_arr * r_arr**2
-    M_enc = 4 * np.pi * np.trapz(integrand, r_arr)
+    x = np.asarray(r_kpc, dtype=float) / r_b
+    bracket = (2.0 * np.log1p(x) + np.log1p(x * x) - 2.0 * np.arctan(x))
+    M_enc = np.pi * rho_b * r_b**3 * bracket
 
-    V_c2 = G * M_enc / r_kpc
-    return np.sqrt(V_c2)
+    V_c2 = G * M_enc / np.asarray(r_kpc, dtype=float)
+    return np.sqrt(np.maximum(V_c2, 0.0))
 
 
 def v_circ_sidm_multi_resonant(r_kpc, log_rho_s, log_r_s, v_max_kms, m_chi_gev, resonances, sigma_0, a_slope):

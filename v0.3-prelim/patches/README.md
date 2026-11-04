@@ -93,3 +93,12 @@ These patches should ideally be submitted to KiSS-SIDM as a single PR with:
 3. Author: K Lam + Hermes agent
 
 PR scope: 2 files, 4 lines added, 4 lines commented out (mostly identical to existing time_step.jl fix pattern).
+
+## 0003-wimpy-scipy118-trapezoid.patch — local environment patch (not upstream)
+
+Different target from 0001/0002: this one edits the local **WIMpy** install inside
+`.venv-sidm-bench/Lib/site-packages/`, not a repository or Julia file. SciPy 1.18 removed
+`scipy.integrate.trapz`/`cumtrapz`, which the pinned WIMpy commit imports; without this
+patch Channel 26 (`loglike_lz_magnetic_moment`) returns 0 silently and its 36 tests stop
+testing anything. See the header of the patch file for apply/verify commands, and
+`requirements.txt` for the environment it belongs to.
