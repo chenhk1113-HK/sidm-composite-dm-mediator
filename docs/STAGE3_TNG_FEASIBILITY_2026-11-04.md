@@ -20,6 +20,13 @@ RELHIC-like band used throughout: `vmax` 15-45 km/s, `primary_flag = 1`, `len_st
   `mass__gt = 2.14e-3`, `mass__lt = 6.77e-2`.
 - Always verify a server-side cut by reading records back; a count that does not change when a filter
   is added means the filter name was wrong.
+- **Measured size of that trap** (an early probe that used `mass_log_msun__gt/lt` on the same
+  vmax/starless/primary cuts, so the mass window was silently absent): it reported band counts
+  9,253,224 (TNG300-1), 1,073,192 (TNG100-1), 69,544 (TNG50-1) against the read-back-verified true
+  band counts **119 / 425,891 / 39,404**. The inflation is run-dependent (77,000× on TNG300-1,
+  2.5× on TNG100-1, 1.8× on TNG50-1), so a wrong filter name is not always obviously wrong. That
+  probe's "len_dm >= 1000: 1" for TNG300-1 was an unfiltered statistic and must not be read as a
+  band candidate; the band-restricted, read-back number is 0.
 - Merger-tree bodies are gzip-compressed even when `content-type: application/json`; `urllib` does
   not decompress them (`gzip.decompress(raw)` is required).
 - The list endpoint does not return `len_dm`; fetch the detail record for it.
