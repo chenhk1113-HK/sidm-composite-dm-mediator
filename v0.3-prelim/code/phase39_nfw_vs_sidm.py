@@ -11,16 +11,31 @@ The key: for SIDM, the core radius is DERIVED from sigma/m(v_max):
 
 This is the standard Kaplinghat+ 2016 relation for velocity-dependent SIDM.
 
-UNIT CAVEAT (found 2026-11-04, NOT yet fixed -- changes stored results): every
-``v_circ_*`` function below uses G = 4.5e-6 kpc^3 M_sun^-1 Gyr^-2, so V_c2 = G M / r
-returns a speed in kpc/Gyr. The chi2 routines then compare that number directly to
-SPARC ``Vobs_kms`` / ``eV_kms``, which are km/s, with no conversion. 1 kpc/Gyr =
-0.9778 km/s, so the modelled dark-matter velocity is inflated by 2.28% whenever it is
-read as km/s (a ~4.6% shift in the density a fit compensates into). config.py:111
-already carries the km/s-native constant ``G_KPC_KMS = 4.302e-6``. phase40_corrected_comparison.py
-has the same mismatch. Fixing it re-derives the stored phase39/phase40 comparison.
+UNITS (fixed 2026-11-04, LocalIntegrity-Sweep): every ``v_circ_*`` function
+below now uses G = 4.302e-6 kpc (km/s)^2 / M_sun (config.py:111 ``G_KPC_KMS``), so
+V_c2 = G M / r returns km/s, the unit SPARC ``Vobs_kms`` / ``eV_kms`` are already in.
+Before this fix the code used G = 4.5e-6 kpc^3 M_sun^-1 Gyr^-2 -- a kpc/Gyr speed --
+and compared it to km/s with no conversion, inflating every modelled velocity by
+sqrt(4.5e-6 / 4.302e-6) = 1.02275 (+2.28% at every radius, which a fit absorbs as a
+-4.55% density shift). Artifacts generated before the fix are preserved under
+v0.3-prelim/data/results/superseded/.
 
-Tests on 30 representative SPARC galaxies (Q=1,2 with Vflat>0).
+CORE RADIUS STATUS (measured 2026-11-04 on the real functions): the r_core
+expression is NOT a working Kaplinghat+ 2016 implementation. Its velocity factor
+3.086e16/3.156e10 is ~9.6e5 times too large for km/s -> kpc/Gyr (the true factor is
+1/0.9778 = 1.0227), and (sigma_kpc * rho_s * r_s) is already dimensionless, so
+dividing it by a velocity is dimensionally inconsistent. Net effect: raw r_core lands
+2-4 orders of magnitude BELOW its own 0.1*r_s floor at every point of the fit grid,
+so r_core is always the floor and sigma/m, the resonance peak heights and a_slope have
+ZERO effect on the rotation curve -- identical to machine precision for sigma_0 anywhere
+between 1e-6 and 1e5 cm^2/g. What this module actually compares is NFW against a fixed
+0.1*r_s cored profile; the stored STRONG_SIDM verdict is a cored-vs-cuspy statement,
+not evidence about SIDM. Pinned by tests/test_sidm_core_radius_invariance.py. The
+grounded replacement (Yang+ 2024 eq. 2.1 profile + eq. 2.2 collapse time, already
+implemented and KB-verified in gravothermal_yang2024.py) is an open owner decision.
+See docs/INTEGRITY_FINDINGS_2026-11-04.md.
+
+Fits a subset capped at 15 galaxies (Q=1,2 with Vflat>0, main()).
 Computes Bayesian evidence log Z for each model.
 """
 from __future__ import annotations
@@ -46,6 +61,8 @@ from t90_v70_multi_resonant_darkqcd import (
     velocity_dependent_background,
 )
 from t90_v50_resonant_sidm import kinetic_energy_eV
+
+G_KPC_KMS = 4.302e-6  # kpc (km/s)^2 / M_sun  (config.py:111)
 
 SPARC_DIR = Path(r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\data\external\sparc")
 # Lazy-initialized results directory (created in main(), not at import time,
@@ -73,7 +90,7 @@ def v_circ_nfw(r_kpc, log_rho_s, log_r_s):
     """
     rho_s = 10**log_rho_s  # M_sun/kpc^3
     r_s = 10**log_r_s  # kpc
-    G = 4.5e-6  # kpc^3/(M_sun Gyr^2)
+    G = G_KPC_KMS  # km/s system; see the units note at the top
 
     # NFW V_c^2
     def integrand(rp):
@@ -109,7 +126,7 @@ def v_circ_burkert(r_kpc, log_rho_b, r_b):
     which cross-checks this function against independent quadrature.
     """
     rho_b = 10**log_rho_b
-    G = 4.5e-6  # kpc^3 / (M_sun Gyr^2) -- see the unit note at the top of this module
+    G = G_KPC_KMS  # km/s system; see the units note at the top
 
     x = np.asarray(r_kpc, dtype=float) / r_b
     bracket = (2.0 * np.log1p(x) + np.log1p(x * x) - 2.0 * np.arctan(x))
@@ -131,7 +148,7 @@ def v_circ_sidm_multi_resonant(r_kpc, log_rho_s, log_r_s, v_max_kms, m_chi_gev, 
     """
     rho_s = 10**log_rho_s
     r_s = 10**log_r_s
-    G = 4.5e-6
+    G = G_KPC_KMS
 
     # Compute sigma/m at v_max
     sigma_0_v = velocity_dependent_background(v_max_kms, sigma_0, a_slope)
@@ -148,6 +165,15 @@ def v_circ_sidm_multi_resonant(r_kpc, log_rho_s, log_r_s, v_max_kms, m_chi_gev, 
         # r_core / r_s = 0.45 * (sigma_kpc * rho_s * r_s / v_max)^(1/4)
         # Convert v_max to km/s in natural units: v^2 ~ kpc^3/G/M_sun
         # Actually: dimensionless
+            # KNOWN DEFECT (measured 2026-11-04, arithmetic left untouched on purpose
+            # -- the replacement prescription is an owner decision, see the module
+            # docstring and docs/INTEGRITY_FINDINGS_2026-11-04.md):
+            #   * 3.086e16/3.156e10 is NOT km/s -> kpc/Gyr (correct factor 1.0227),
+            #   * (sigma_kpc * rho_s * r_s) is already dimensionless, so dividing it
+            #     by a velocity is dimensionally inconsistent,
+            #   * therefore raw r_core is 2-4 orders of magnitude below the 0.1*r_s
+            #     floor everywhere in the grid -> r_core is always the floor and
+            #     sigma/m never reaches the rotation curve.
         v_max_natural = v_max_kms * 3.086e16 / 3.156e10  # km/s -> kpc/Gyr
         # v_max_natural^2 in units of (G * rho_s * r_s^2)
         v_dimless = (v_max_natural**2 / (G * rho_s * r_s**2))**0.5

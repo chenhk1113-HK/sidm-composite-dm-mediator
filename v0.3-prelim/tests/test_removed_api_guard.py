@@ -99,7 +99,12 @@ def test_v_circ_burkert_actually_runs():
     # profile, using the SAME gravitational constant the module uses. This is what
     # proves the integrator is intact, not merely that the file imports.
     from scipy.integrate import quad
-    G = 4.5e-6  # kpc (km/s)^2 / Msun -- the value phase39 hard-codes (see note below)
+    # Take the constant FROM the producer instead of copying it. On 2026-11-04 the
+    # producer moved from the kpc/Gyr-native G = 4.5e-6 to the km/s-native
+    # G_KPC_KMS = 4.302e-6 (config.py:111); a hard-coded copy of the old value made
+    # this guard fail by exactly sqrt(4.302/4.5) = 0.978 and hid that the integrator
+    # was in fact intact.
+    G = float(getattr(mod, "G_KPC_KMS", 4.302e-6))  # kpc (km/s)^2 / Msun
     rho_b = 10.0**log_rho_b
     rho = lambda x: rho_b * r_b**3 / ((x + r_b) * (x**2 + r_b**2))
     for ri, vi in zip(r, v):

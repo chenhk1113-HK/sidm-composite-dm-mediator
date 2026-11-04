@@ -13,6 +13,15 @@ Adopts reviewer recommendations from Critical review.docx:
 Method:
   - Three profiles: NFW (3 params), Burkert (3 params), multi-resonant SIDM (3 params)
   - SIDM profile: simplified Burkert+NFW blend with v-dependent r_core
+
+  UNITS: G = 4.302e-6 kpc (km/s)^2 / M_sun (G_KPC_KMS) throughout, so the
+  rotation curves come out in km/s and match SPARC Vobs directly. Before
+  2026-11-04 this module mixed G = 4.5e-6 (kpc/Gyr system) with km/s data,
+  inflating every modelled velocity by 2.28%.
+
+  CORE RADIUS: the r_core expression is inert (always pinned at its 0.1*r_s
+  floor), so sigma/m never affects the fit -- see the same note in
+  phase39_nfw_vs_sidm.py and docs/INTEGRITY_FINDINGS_2026-11-04.md.
   - All fits use scipy.optimize.minimize (Nelder-Mead) with wide grid
 """
 from __future__ import annotations
@@ -26,6 +35,8 @@ import scipy.integrate as integrate
 from scipy.optimize import minimize
 
 warnings.filterwarnings("ignore")
+
+G_KPC_KMS = 4.302e-6  # kpc (km/s)^2 / M_sun  (config.py:111)
 
 sys.path.insert(0, r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\code")
 
@@ -59,7 +70,7 @@ def v_circ_burkert(r_kpc, log_rho_b, r_b):
     """
     rho_b = 10**log_rho_b  # M_sun/kpc^3
     r_b = float(r_b)  # kpc
-    G = 4.5e-6  # kpc^3 / (M_sun Gyr^2)
+    G = G_KPC_KMS  # km/s system; see the module docstring
 
     # Burkert profile has analytic M_enc formula:
     # M_enc(r) = pi * rho_b * r_b^3 * [2 ln(1 + r/r_b) + ln(1 + (r/r_b)^2) - 2 arctan(r/r_b)]
@@ -78,7 +89,7 @@ def v_circ_nfw(r_kpc, log_rho_s, log_r_s):
     """NFW circular velocity (analytic)."""
     rho_s = 10**log_rho_s
     r_s = 10**log_r_s
-    G = 4.5e-6
+    G = G_KPC_KMS
     x = r_kpc / r_s
     M_enc = 4 * np.pi * rho_s * r_s**3 * (np.log(1 + x) - x / (1 + x))
     V_c2 = G * M_enc / r_kpc
@@ -89,7 +100,7 @@ def v_circ_sidm(r_kpc, log_rho_s, log_r_s, v_max_kms, m_chi, resonances, sigma_0
     """Multi-resonant SIDM: Burkert inner + NFW outer (hybrid)."""
     rho_s = 10**log_rho_s
     r_s = 10**log_r_s
-    G = 4.5e-6
+    G = G_KPC_KMS
 
     # sigma/m at v_max
     sigma_0_v = velocity_dependent_background(v_max_kms, sigma_0, a_slope)
@@ -101,6 +112,15 @@ def v_circ_sidm(r_kpc, log_rho_s, log_r_s, v_max_kms, m_chi, resonances, sigma_0
     if sigma_eff <= 0 or v_max_kms <= 0:
         r_core = 0.45 * r_s
     else:
+            # KNOWN DEFECT (measured 2026-11-04, arithmetic left untouched on purpose
+            # -- the replacement prescription is an owner decision, see the module
+            # docstring and docs/INTEGRITY_FINDINGS_2026-11-04.md):
+            #   * 3.086e16/3.156e10 is NOT km/s -> kpc/Gyr (correct factor 1.0227),
+            #   * (sigma_kpc * rho_s * r_s) is already dimensionless, so dividing it
+            #     by a velocity is dimensionally inconsistent,
+            #   * therefore raw r_core is 2-4 orders of magnitude below the 0.1*r_s
+            #     floor everywhere in the grid -> r_core is always the floor and
+            #     sigma/m never reaches the rotation curve.
         v_max_natural = v_max_kms * 3.086e16 / 3.156e10  # km/s -> kpc/Gyr
         v_dimless = (v_max_natural**2 / (G * rho_s * r_s**2))**0.5
         if v_dimless <= 0 or np.isnan(v_dimless):
