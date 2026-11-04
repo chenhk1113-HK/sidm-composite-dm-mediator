@@ -43,8 +43,16 @@ now asserts the v0.8 MAP (478 GeV / 488 MeV / 0.81σ), so this line, the docs an
   0.28 at the τ = 1 truncation, marginally thin (1.02–1.06) only in τ ≈ 0.1–0.3 — so the parametric t_c cannot
   be quoted at face value for the Cloud-9 anchor. Dwarf anchors (σ ≈ 7) stay optically thin (λ/r_c = 7–15 at
   τ = 1). Walkthrough: `docs/CLOUD9_HIGHSIGMA_TIMING_RECHECK_2026-11-03.md` §3 and §7.
-- **Stage 3 pending:** real-galaxy merger data is gated on the IllustrisTNG registration reply
-  (application submitted); FIRE-2 and EAGLE-IC are the no-login fallbacks.
+- **Stage 3 sample BUILT 2026-11-04** (no registration wait, no bulk download): 115 halos pulled by
+  per-subhalo API reads — TNG50-1 60 + TNG100-1 30 in the low-mass RELHIC band and 25 TNG50-1 halos
+  bracketing the Cloud-9 anchor mass — 115/115 accepted, 0.18 MB of merger trees on disk, plus ~1,300
+  per-node growth records being fetched. `docs/STAGE3_TNG_SAMPLE_2026-11-04.md`.
+- **New anchor tension found by that sample (open decision D8):** in TNG50-1 at z = 0 no primary,
+  starless, gas-bearing halo in M200 4–6e9 M☉ reaches V_max ≥ 30 km/s (ladder 16 / 6 / 2 / 0 / 0 / 0 over
+  V_max 28–29 / 29–30 / 29.5–30 / 29.9–30.1 / 30–31 / 31–34; maximum realized 29.58 km/s read back from
+  individual records). The canonical anchor pair (M200 = 5e9 M☉, V_max = 31.12 km/s) is realized only at
+  z ≈ 0.1–1.0 (22 / 39 / 54 members at z = 0 / 0.26 / 0.44 in the same cell). Recorded as a consistency
+  tension for the anchor, not a verdict on Cloud-9.
 
 **What did NOT change:** the canonical anchor **σ/m = 174 cm²/g @ 29.4 km/s** (Cloud-9 = M94 RELHIC); the
 joint galaxy-scale range 0.06–0.68 cm²/g; the baryon-coupling ceiling < 3 × 10⁻¹¹; the v19.2-E A.2 5-param

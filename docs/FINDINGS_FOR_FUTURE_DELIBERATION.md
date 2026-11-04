@@ -1171,3 +1171,43 @@ Canonical record: `docs/NEW_DATA_SWEEP_2026-11-03.md` (tiered intake table, swee
 - Cloud-9 semantics re-confirmed: the project's Cloud-9 is the M94 RELHIC ([15a-c] chain), not the GD-1 spur.
 - KB intake: 21 PDFs placed in `to_verify/` (local-only per gitignore); 4 Tier-1 papers since READ and promoted to `verified/` with summaries (2026-11-03); 17 remain to be read. (Mid-round "Rule-8 fills" claim retracted — see sweep doc §5.)
 
+---
+
+## 27. NEW (2026-11-04, Stage 3 built): the Cloud-9 anchor sits above the TNG50-1 ceiling at z = 0
+
+Measured, not inferred (`docs/STAGE3_TNG_SAMPLE_2026-11-04.md`, `scripts/tng_vmax_envelope.py`).
+In TNG50-1 snapshot 99, the cell **primary + starless (len_stars < 1) + gas-bearing
+(mass_gas >= 1.476e5 Msun) + len_dm >= 100 + M200 in 4-6e9 Msun** contains:
+
+| V_max window (km/s) | 28-29 | 29-30 | 29.5-30.0 | 29.9-30.1 | 30-31 | 31-34 |
+|---|---|---|---|---|---|---|
+| count | 16 | 6 | 2 | 0 | 0 | 0 |
+
+Confirmed by reading 20 individual detail records: the largest realized V_max in the cell is
+**29.58 km/s** (subhalo 906682, 5.90e9 Msun, gas 4.59e7 Msun, r_half,dm 11.18 kpc). Removing the
+starless and gas cuts opens the same mass window to 2041 objects at V_max 30-35, but the sampled
+ones are gas-free with 22-279 stars — at z = 0 a halo that massive in TNG50-1 is stellar or
+gas-poor, not both. The anchor cell **is** populated at higher redshift: 22 / 31 / 39 / 54 / 54 / 40
+members at z = 0 / 0.110 / 0.261 / 0.440 / 0.676 / 0.997.
+
+**Why this matters for the project.** `predict_sidm_halo(5e9, 31.12, 1.4, sigma)` anchors the
+canonical Cloud-9 usage on a (M200, V_max) pair that no starless gas-bearing TNG50-1 halo realizes
+at z = 0, and whose realized members have r_half,dm 9.3-18 kpc (lower concentration than the
+anchor's implied 1.4 kpc scale). This is a tension between an observation-derived anchor and the
+simulated mass-velocity relation, **not** a refutation of Cloud-9: RELHIC M200 and V_max are both
+derived from light through a mass-model choice, and TNG50-1 boxes a volume, not the M94 field.
+
+**Open decision D8 (three options, in the order I would take them):**
+1. **Match at formation redshift.** Keep the anchor, but state explicitly that the TNG comparison
+   is made at z ~ 0.3-0.7 where the cell is populated (39-54 members), and use the 22-member
+   z = 0 cell (V_max 28-30) as the nearest realizable z = 0 population. Cheapest, defensible,
+   requires only honest labelling plus a redshift-matched subsample of the trees already on disk.
+2. **Re-anchor the sample, keep Cloud-9 as an outlier.** Fit the anchor cell's own
+   mass-velocity relation from the sample and report Cloud-9's position relative to it (in km/s and
+   in sigma), instead of treating 31.12 as given.
+3. **Do nothing and record the tension.** Weakest: the anchor stays unexamined while a measured
+   ceiling exists in the repo.
+
+Related measured fact now available for Phase G2: main-lineage merger counts are 15-46
+(median 29) at 4-6e9 Msun against 0-15 (median 6) at ~9e8 Msun, so the asserted x0.7 / x8.0
+quiescent/active multipliers can be replaced by measured values.
