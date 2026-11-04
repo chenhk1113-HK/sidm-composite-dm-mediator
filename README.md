@@ -112,7 +112,7 @@ Audit chain of record → [`docs/dual_review_5loop/README.md`](docs/dual_review_
 |---|---|---|---|
 | **WIP (Tier-2, multi-component-SIDM-core-collapse)** | `v18.38` | wip/multi-component-SIDM-core-collapse (synced with `wip/cloud-9-relhic` @ `a3efc6a`) | **MOST PROMISING**: Multi-resonance SIDM + clockwork UV-derived node positions (v₃=178, v₄=430 km/s) + phenomenological peak heights + Yang+ 2025 PRD two-component + Yu 2026 PRL gravothermal + Gaussian Breit-Wigner profiles. **RMSE = 0.25 on 7 of 8 channels** (Cloud-9 is the variance-absorbing 8th). **Bayes factor B = 11.2** (T205, log B = 2.41, moderate evidence) favoring multi-resonance on joint channels. **Burkert wins on rotation curves alone** (Phase 42 dynesty log Z = -963 vs SIDM hybrid -3300). **5 no-go theorems**: magnetic dipole, Hidden U(1) + pseudo-Dirac, GeV-scale inelastic DM, Chu 2019 p-wave, T184 one-mediator UV systematic. **One-mediator UV RULED OUT** by 10⁸-10¹³× (T184). **Two-mediator Drobczyk candidate** viable at δ=0.43%, g_h_SM=0.00040, Ωh²=0.119 (5× broader than Drobczyk's 0.083%, requires composite UV). **Path F1 (T207, v18.38)**: three-term σ_eff = f_H² σ_HH + 2 f_H f_L σ_HL + f_L² σ_LL decomposition resolves the v18.34 structural SPARC limitation (heavy-channel-only σ_eff cannot reach σ/m ≈ 0.193 at v=100 km/s). Path F1 RESOLVED under borrowed mode (SPARC log L = -0.09); MARGINAL under yang (-0.24); NOT RESOLVED under t202 (-0.60) or priored free fit (-2.03). 50 tests pass. Paper v18.38 INTERNAL REFERENCE |
 | **WIP (Tier-2, cloud-9-relhic)** | `v18.38` | wip/cloud-9-relhic @ `a3efc6a` | T207 Path F1 work: BOUNDS patch in T207_three_term_fit.py + 2 new drivers (T207_priored_free_de.py, T207c_priored_free_emcee.py with n/50τ bug fix) + 3 result JSONs (DE peak, emcee posterior with corrected ratio 1.089, smart_de cross-check). Smart_de cross-check: all 3 prescription modes (borrowed, yang, t202) reproduce v18.37 results to 4 sig figs. |
-| **Standing (Tier-1, master)** | `v0.4-prelim+T88E` | master @ 2026-09-02 | σ/m₀ = **0.06 cm²/g**, log Z = **−164.87 ± 0.084**, m_χ = **770 GeV**, m_φ = **453 MeV**; 22 channels; test count is dynamic (1928 collected after R88(82)) |
+| **Standing (Tier-1, master)** | `v0.4-prelim+T88E` | master @ 2026-09-02 | σ/m₀ = **0.06 cm²/g**, log Z = **−164.87 ± 0.084**, m_χ = **478 GeV**, m_φ = **488 MeV**, tension **0.81σ**; 22 channels; test count is dynamic (1928 collected after R88(82)) |
 
 **The most promising track** is `wip/multi-component-SIDM-core-collapse` (T120 series) — it satisfies more constraints with fewer assumptions than the v0.4-prelim master or the older cloud-9-relhic track.
 
@@ -123,9 +123,11 @@ Recent rounds within this standing version: **+T80** (LZ paper compatibility), *
 |---|---|---|
 | **σ/m₀** (joint fit, galactic scale) | **0.06 cm²/g** | T41 v0.8 rerun at nlive=2000 (MAP); T88.E forecast pulls 0.27 → 0.06 |
 | **Bayesian evidence log Z** | **−164.87 ± 0.084** | +51 log-units vs v0.6 from DAMPE + LSS (T88.E penalty -0.85 brings v0.7 → v0.8) |
-| **m_χ** (DM mass, MAP) | **770 GeV** | posterior median 498 GeV |
-| **m_φ** (mediator mass, MAP) | **453 MeV** | posterior median 588 MeV (KSFR-valid) |
-| **Tension T39 vs Yukawa a** | **0.60σ** | below the 1.0 threshold (resolved) |
+| **m_χ** (DM mass, MAP) | **478 GeV** | posterior median 503 GeV (68% CI 338–770 GeV) |
+| **m_φ** (mediator mass, MAP) | **488 MeV** | posterior median 598 MeV (68% CI 472–759 MeV) |
+| **Tension T39 vs Yukawa a** | **0.81σ** | below the 1.0 threshold; the v0.7-era value was 0.60σ |
+| **Dark Yukawa g_χ** (MAP) | **0.964** | posterior median 1.549 (68% CI 1.25–1.85) |
+| *Provenance* | `t41_mediator_mass_joint_fit_t88ce_v08_with_euclid_lensing_and_subhalo_forecast_nlive2000.json` | sha256 `d2ee9750…ef6feabf`; mirrored in `data/results/canonical_numbers.json` → `t41_v08_standing_map`. 2026-11-04: the m_χ/m_φ/g_χ/tension rows above previously carried the **v0.7** MAP (770 GeV / 453 MeV / 1.19 / 0.60σ). |
 | **Channels** | **22** | 16 v0.6 → +DAMPE +LSS +XENONnT/PandaX watch +XRISM Perseus +eROSITA +Euclid Q1 lensing +Euclid Q1 subhalo FORECAST +Goldstein & Hill 2026 ΔN_eff (T89 documented null) |
 | **Tests** | **677 pass, 8 skip** (was; test count is dynamic — 1928 collected after R88(82)) | +36 from T88.C (Euclid Q1 strong-lensing) + T88.E (subhalo forecast) + 15 from T89 (Goldstein & Hill 2026 ΔN_eff Channel 25) |
 | **Drift-guard audit** | **all checks ALL CLEAR** | `scripts/t82_audit.py` (CI-gatable; count is dynamic — see `python scripts/t82_audit.py` for current) |
@@ -261,7 +263,7 @@ pytest v0.3-prelim/tests/ --ignore=v0.3-prelim/tests/test_sparc_hierarchical.py 
 #     to re-run from scratch, see scripts/parallel_run_nl2000.sh — ~7 min wall)
 python -c "import json; r = json.load(open('v0.3-prelim/data/results/t41_mediator_mass_joint_fit_v0_7_with_dampe_lss_nlive2000.json')); print('log Z =', round(r['log_Z'], 2), 'MAP m_chi =', round(r['MAP_physical']['m_chi_GeV']), 'GeV'); print('sigma/m =', round(r['MAP_physical']['sigma_m_0_derived'], 2), 'cm^2/g')"
 
-# Expect (measured from this exact file): log Z = -163.29, MAP m_chi = 770 GeV. The -164.87 figure is the
+# Expect (measured from this exact file — the v0.7 historical artifact): log Z = -163.29, MAP m_chi = 770 GeV. The -164.87 figure is the
 #         v0.8 post-T88.E posterior in a DIFFERENT artifact, not this v0.7 JSON. sigma/m = 0.27 cm²/g.
 ```
 
@@ -330,7 +332,7 @@ sidm-composite-dm-mediator/
 | **v0.3-prelim** | Main work — D1 through D15-CORRECTED3, with R12 audit closure (133 modules, 39 tests) | Joint σ/m ~ 0.066 cm²/g at MAP (R12 T41); velocity index a ≈ +0.19 (no significant tension); Benchmark A (composite dark pion + elementary A') declared canonical |
 | **Mediator_Detection v1–v12** | Mediator detection feasibility (within v0.3-prelim/code/) | σ/m ~ 0.07 cm²/g at MeV-scale m_φ (R12), mediator-invisible to LZ only in ε ≪ 10⁻¹⁰ part of posterior |
 | **v0.4-prelim+T88E** | Tier-1 milestone (T72–T88, 2026-09-04) | σ/m ~ **0.06 cm²/g** at MAP (nlive=2000); log Z = **−164.87** ± 0.084; tension = **0.60** (below 1.0); 22 effective channels |
-| **+T80** | LZ preprint compatibility check (2026-09-02) | Project m_χ ~ 770 GeV in same ballpark as LZ best-fit 1000 GeV (Ls₁₀); 3.4σ local / 2.6σ global; standing posture preserved |
+| **+T80** | LZ preprint compatibility check (2026-09-02) | Project v0.7 MAP m_χ ~ 770 GeV in same ballpark as LZ best-fit 1000 GeV (Ls₁₀); 3.4σ local / 2.6σ global; standing posture preserved (v0.8 MAP is 478 GeV — see the corrected v0.8 table above) |
 | **+T81** | LZ review response + XENONnT/PandaX competitor watch | Channel 19 added as experimental watch; 504 → 504 tests pass |
 | **+T82** | Stale-claim audit + CI-gatable drift-guard | 32/32 doc-presence checks pass; `scripts/t82_audit.py` |
 | **+T83** | KSFR (3,2) fundamental promoted to LATTICE | 3 LATTICE / 2 ANALYTICAL / 2 ESTIMATED; ANCHOR_RATIO_ERR_COMBINED = 0.304 |
@@ -351,12 +353,12 @@ Five honest takeaways a reader should leave with:
    The pre-R12 "1.3σ Yukawa tension" was caused by three independent bugs
    (sign-flip in `t41.derived_a`, units mismatch in `sigma_SI`, bimodal-surrogate dSph
    likelihood that misread the Horigome+ 2025 paper). All three fixed in R12 P0-A/B/D.
-   The same benchmark is now consistent with multi-messenger data at 0.60σ.
+   The same benchmark was reported consistent at 0.60σ in the v0.7 posterior; the v0.8 posterior sits at **0.81σ** (still below the 1.0 threshold, but closer to it).
    **Caveat:** This project is rehabilitating its OWN earlier result, not auditing other
    groups' results.
 
 2. **A self-consistent multi-probe benchmark point under Benchmark A.**
-   v0.8 MAP (post-T88.E) at (m_φ = **453 MeV**, m_χ = **770 GeV**, g_χ ≈ 1.19, σ/m₀ = **0.06 cm²/g**, a = **+0.13**) is a
+   v0.8 MAP (post-T88.E) at (m_φ = **488 MeV**, m_χ = **478 GeV**, g_χ ≈ **0.964**, σ/m₀ = **0.06 cm²/g**, a = **+0.132**) is a
    **jointly constrained** point consistent with **22 effective channels** (dSph + UFD + Bullet + SPARC +
    LZ + Fermi + DAMPE + Zhang+2025 LSS + XRISM Perseus + eROSITA + Euclid Q1 lensing + Euclid Q1 subhalo FORECAST).
    **Pre-T88.E (v0.7) MAP** at σ/m₀ = 0.27 cm²/g, a = +0.34 was jointly consistent with **21 channels**.
@@ -449,9 +451,9 @@ Honest scope, per the 2026-08-17 R12 six-reviewer audit and the
 2026-09-03 `Updated review1.docx`:
 
 - **Not a discovery.** This is a phenomenology joint-fit framework, not a
-  measurement of dark matter at any detector. The v0.8 MAP (post-T88.E) at (m_φ = 453 MeV,
-  m_χ = 770 GeV, σ/m₀ = 0.06 cm²/g, a = +0.13) is **one point in the prior
-  box** that fits the multi-channel data within 0.60σ of the data-preferred
+  measurement of dark matter at any detector. The v0.8 MAP (post-T88.E) at (m_φ = 488 MeV,
+  m_χ = 478 GeV, σ/m₀ = 0.06 cm²/g, a = +0.132) is **one point in the prior
+  box** that fits the multi-channel data within 0.81σ of the data-preferred
   Yukawa slope. (Pre-T88.E v0.7 MAP at σ/m₀ = 0.27, a = +0.34.)
 - **Not a Boltzmann-derived relic density.** The t55 module is a
   calibrated `1/⟨σv⟩` mapping, not a Boltzmann solver. A first-principles

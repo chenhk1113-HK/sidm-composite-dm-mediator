@@ -83,7 +83,7 @@ experiment's 2026-09-01 mysterious signal paper.
 
 | Quantity | v0.6 (Aug 2026) | **v0.7 (Sep 2026)** | Δ |
 |---|---|---|---|
-| **DM mass m_χ** (MAP) | 364 GeV | **770 GeV** | +112% |
+| **DM mass m_χ** (MAP) | 364 GeV | **770 GeV** (v0.7) | +112% |
 | **σ/m₀** (cross-section per unit mass, galactic scale) | 0.06 cm²/g | **0.27 cm²/g** | +350% |
 | **Bayesian evidence** (log Z) | -215 | **-163** | +52 log-units (substantial evidence gain) |
 | **Velocity-slope tension** | 0.91 (above 1.0) | **0.60** (below 1.0) | -34% (resolved!) |
@@ -92,7 +92,7 @@ experiment's 2026-09-01 mysterious signal paper.
 
 **The headline finding:** adding DAMPE + LSS resolved the v0.6
 velocity-slope tension. The project now prefers **heavier DM**
-(~770 GeV vs ~365 GeV) and **higher σ/m** (0.27 vs 0.06 cm²/g) than
+(v0.7 MAP ~770 GeV vs ~365 GeV) and **higher σ/m** (0.27 vs 0.06 cm²/g) than
 v0.6 — a major shift.
 
 ## What DAMPE added (T72-T73)
@@ -132,13 +132,13 @@ appeared, and we verified the paper end-to-end:
 
 | LZ paper fact | Project v0.7 |
 |---|---|
-| WIMP mass **1000 GeV** (best fit, Ls₁₀ EFT operator) | **770 GeV** (MAP) — **very close** |
-| Mediator mass: light (NREFT framework) | **453-588 MeV** — same regime |
+| WIMP mass **1000 GeV** (best fit, Ls₁₀ EFT operator) | **770 GeV** (v0.7 MAP) — **very close** at the time; the v0.8 MAP is 478 GeV |
+| Mediator mass: light (NREFT framework) | **453-588 MeV** (v0.7) — same regime as v0.8 (488 MeV MAP / 598 median) |
 | Significance: 3.4σ local / 2.6σ global | Below the 3σ threshold for code update |
 | Interaction type: magnetic-moment EFT | Composite-DM + secluded A' |
 
 **Stronger validation than press-release-only T77 had.** The
-project's preferred mass (770 GeV) is well within the LZ
+project's v0.7-era preferred mass (770 GeV) is well within the LZ
 best-fit regime (1000 GeV) — both in the "heavy WIMP" region where
 NREFT operators and inelastic-DM become relevant.
 
@@ -226,7 +226,7 @@ verbatim paper quotes + numerical derivations:**
 
 | | LZ paper | Project v0.7 |
 |---|---|---|
-| Mass window | **1000 GeV/c² best fit** (Ls₁₀ EFT operator) | **770 GeV** (MAP) |
+| Mass window | **1000 GeV/c² best fit** (Ls₁₀ EFT operator) | **770 GeV** (v0.7 MAP; v0.8 MAP 478 GeV) |
 | Physics regime | NREFT + inelastic DM | secluded A' + composite pion |
 | Same mass window? | ✅ Yes (700-1000 GeV "heavy WIMP" regime) |
 | Same physics regime? | ✅ Yes (the LZ paper tests exactly the framework the project predicts) |
@@ -269,7 +269,7 @@ worth flagging.
 ### What didn't change
 
 - Standing version: **v0.4-prelim+T88E** (no bump)
-- Joint-fit posterior: **log Z = −164.87 ± 0.084**, m_χ = 770 GeV, σ/m = 0.06 cm²/g
+- Joint-fit posterior: **log Z = −164.87 ± 0.084**, m_χ = 478 GeV (MAP; median 503), σ/m = 0.06 cm²/g (corrected 2026-11-04; this line previously quoted the v0.7 MAP)
 - Tests: 677 pass / 8 skip
 - Drift-guard audit: 44/44 ALL CLEAR
 - **No posterior re-run**; **no new physics**; **no new channels**
@@ -319,7 +319,7 @@ inelastic kinematic factor (F_inel ≈ 0.5) are sub-dominant.
 **What this means:**
 - **The model remains a valid SIDM candidate** for dSph/UFD/Bullet/SPARC/DAMPE/LSS. log Z = −164.87 ± 0.084 is unchanged. All T72-T88 channels still work.
 - **The model does NOT explain the LZ event** if it's real. The event (if real) points to a different microphysics — Higgsino, pseudo-Dirac, or some other inelastic-DM scenario with different (m_χ, δ, ε) than v0.7 MAP predicts.
-- **The mass-window match is genuine but not sufficient.** LZ best-fit m_χ = 1000 GeV is within 30% of the project's 770 GeV MAP and within the heavy-WIMP regime (700-1000 GeV). What breaks is the cross-section.
+- **The mass-window match is a regime match, not a MAP match.** LZ's best fit (1000 GeV) is in the heavy-WIMP region, but against the current v0.8 posterior it is 2.1× the MAP (478 GeV) and above the 84th percentile (770 GeV). What breaks regardless is the cross-section.
 
 **This is a positive scientific result.** Before T87, the "10⁷¹× below LZ"
 claim was a hand-wave. Now we have a *quantitative* cross-section at the
@@ -373,9 +373,9 @@ The T88.E-driven v0.7→v0.8 re-run (nlive=2000) shipped with:
 | log Z | −163.29 ± 0.085 | **−164.87 ± 0.084** | −1.58 (from T88.E −0.85 + small shifts in other channels) |
 | σ/m₀ (MAP) | 0.27 cm²/g | **0.06 cm²/g** | 5× lower |
 | a (Yukawa velocity index, MAP) | +0.34 | **+0.13** | 2.6× lower |
-| m_χ (MAP) | 770 GeV | 770 GeV | unchanged |
-| m_φ (MAP) | 453 MeV | 453 MeV | unchanged |
-| tension | 0.60 | 0.60 | unchanged (below 1.0) |
+| m_χ (MAP) | 770 GeV | **478 GeV** | −38% (previously mis-reported here as 'unchanged') |
+| m_φ (MAP) | 453 MeV | **488 MeV** | +8% (previously mis-reported here as 'unchanged') |
+| tension | 0.60 | **0.81** | +0.21 (still below 1.0; previously mis-reported as 'unchanged') |
 | effective channels | 21 | **22** | +1 |
 
 **Standing posture preserved.** No new channels were required to
@@ -510,5 +510,5 @@ velocity-slope tension. The Tier-1 milestone is publication-worthy.
 > T82 stale-claim audit (32/32 doc-presence + 1 VERSION drift-guard checks pass),
 > T83 KSFR (3,2) fundamental LATTICE promotion, T84 Channel 18 ρ sensitivity sweep.
 > Headline: σ/m = 0.06 cm²/g, tension = 0.60, log Z =
-> -164.87 ± 0.084, m_χ ~ 770 GeV (MAP). **677** tests passing, 22
+> -164.87 ± 0.084, m_χ ~ 770 GeV (v0.7 MAP quoted at the time; the v0.8 artifact's MAP is 478 GeV). **677** tests passing, 22
 > effective channels.** Standing posture preserved at v0.4-prelim+T88E.

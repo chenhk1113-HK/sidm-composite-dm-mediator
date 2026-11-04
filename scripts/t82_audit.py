@@ -21,6 +21,7 @@ Run from the project root:
 from __future__ import annotations
 
 import json
+import math
 import sys
 from pathlib import Path
 
@@ -149,19 +150,24 @@ CHECKS_PER_DOC: dict[str, list[tuple[str, str]]] = {
     ],
     "CURRENT.md": [
         ("Bayesian evidence log Z", "−164.87 ± 0.084"),
-        ("m_χ (MAP)", "770 GeV"),
-        ("m_φ (MAP)", "453 MeV"),
+        # 2026-11-04: this table asserted the v0.7 MAP (770 GeV / 453 MeV / 0.60σ) as the
+        # standing claim for CURRENT.md. That is why the front page could carry v0.7 numbers
+        # under a v0.8 label and still pass: the auditor was asking for the wrong numbers.
+        # The v0.7 values are still required to APPEAR in the docs (labelled historical) by the
+        # derived cross-checks in _build_value_cross_checks; this table pins the STANDING block.
+        ("m_χ (MAP)", "478 GeV"),
+        ("m_φ (MAP)", "488 MeV"),
         ("σ/m₀", "0.06 cm²/g"),
-        ("Tension", "0.60σ"),
+        ("Tension", "0.81σ"),
         ("Channels", "22 effective channels"),
         ("677 tests", "677 pass"),
-        # 2026-11-03: literal was 44/44 — a count from the T89 era, stale by 41
-        # checks. The denominator here is the sum of every entry in this table
-        # plus the VERSION check; adding or removing an entry changes it, and
-        # this literal must be re-synced in the same commit. It is not derived
-        # from the table on purpose: a hard-coded expected count is what makes a
-        # silently-growing or shrinking audit surface fail instead of drift.
-        ("Drift-guard", "85/85 ALL CLEAR"),
+        # 2026-11-03: literal was 44/44 — a count from the T89 era, stale by 41 checks.
+        # 2026-11-04: value cross-checks were added (35 new checks), so the printed total is
+        # 120. The denominator here is the sum of every entry in this table plus the VERSION
+        # check plus the derived cross-checks; adding or removing a check changes it, and this
+        # literal must be re-synced in the same commit. It is not derived on purpose: a
+        # hard-coded expected count is what makes a silently-growing audit surface fail.
+        ("Drift-guard", "120/120 ALL CLEAR"),
     ],
 }
 
@@ -180,12 +186,115 @@ CANONICAL_STANDING_VERSION = "0.4-prelim+T88E"
 VERSION_LABEL = "VERSION"
 
 
+# ---------------------------------------------------------------------------
+# Value cross-check helpers (added 2026-11-04).
+#
+# Every check in CHECKS_PER_DOC is a substring test against a hard-coded
+# literal: it never reads the canonical result JSON, so mutating the
+# declared source-of-truth artifact (e.g. flipping log_Z to -999.0) left
+# the audit at "ALL CLEAR". These helpers DERIVE the expected doc string
+# from the artifact so the two cannot drift apart silently.
+# ---------------------------------------------------------------------------
+
+_SUPERSCRIPT = {
+    "0": "\u2070", "1": "\u00b9", "2": "\u00b2", "3": "\u00b3", "4": "\u2074",
+    "5": "\u2075", "6": "\u2076", "7": "\u2077", "8": "\u2078", "9": "\u2079",
+    "-": "\u207b", "+": "\u207a",
+}
+
+
+def _num_variants(value: float, decimals: int) -> set[str]:
+    """Format ``value`` to ``decimals`` places, plus the U+2212-minus form.
+
+    Docs mix the ASCII hyphen and the typographic minus, so both spellings
+    of any negative value are accepted as the same needle.
+    """
+    rendered = f"{value:.{decimals}f}"
+    return {rendered, rendered.replace("-", "\u2212")}
+
+
+def _sci_variant(value: float, decimals: int = 2) -> str:
+    """Format a small number like ``1.12 × 10⁻³⁷`` with unicode superscripts."""
+    exponent = math.floor(math.log10(abs(value)))
+    mantissa = value / (10.0 ** exponent)
+    sup = "".join(_SUPERSCRIPT[c] for c in str(exponent))
+    return f"{mantissa:.{decimals}f} \u00d7 10{sup}"
+
+
+def _build_value_cross_checks(
+    gt: dict, hl: dict,
+) -> list[tuple[str, str, set[str]]]:
+    """Build (label, doc_label, acceptable-needles) cross-checks.
+
+    ``gt`` is the declared source-of-truth v0.7 T41 artifact and ``hl`` the
+    v0.8 post-T88.E headline artifact. Every needle is derived from a JSON
+    field, never written by hand, so mutating the JSON breaks the check
+    unless the document is updated in lockstep.
+    """
+    checks: list[tuple[str, str, set[str]]] = []
+
+    def add(label: str, doc: str, needles: set[str]) -> None:
+        checks.append((label, doc, needles))
+
+    # --- v0.7 canonical artifact (declared SOURCE OF TRUTH) ---
+    z07 = _num_variants(gt["log_Z"], 2)
+    for doc in ("README.md", "CITATION.cff", "CURRENT.md",
+                "MODEL_ASSUMPTIONS_AND_LIMITATIONS.md"):
+        add("v0.7 log_Z", doc, z07)
+    e07 = _num_variants(gt["log_Z_err"], 3)
+    add("v0.7 log_Z_err", "MODEL_ASSUMPTIONS_AND_LIMITATIONS.md", e07)
+    add("v0.7 log_Z_err", "CURRENT.md", e07)
+    mchi07 = _num_variants(gt["MAP_physical"]["m_chi_GeV"], 0)
+    for doc in ("README.md", "CURRENT.md", "CITATION.cff"):
+        add("v0.7 m_chi (MAP)", doc, mchi07)
+    mphi07 = _num_variants(gt["MAP_physical"]["m_phi_MeV"], 0)
+    for doc in ("README.md", "MODEL_ASSUMPTIONS_AND_LIMITATIONS.md"):
+        add("v0.7 m_phi (MAP)", doc, mphi07)
+    sig07 = _num_variants(gt["MAP_physical"]["sigma_m_0_derived"], 2)
+    for doc in ("CITATION.cff", "CURRENT.md"):
+        add("v0.7 sigma/m_0 (MAP)", doc, sig07)
+    a07 = _num_variants(gt["MAP_physical"]["a_derived"], 2)
+    for doc in ("CURRENT.md", "README.md"):
+        add("v0.7 velocity index a (MAP)", doc, a07)
+    ten07 = _num_variants(gt["yukawa_tension"]["a_difference"], 2)
+    for doc in ("README.md", "CURRENT.md"):
+        add("v0.7 T39-vs-Yukawa tension", doc, ten07)
+    add("epsilon_gamma = 10**log_epsilon (v0.7 MAP)",
+        "MODEL_ASSUMPTIONS_AND_LIMITATIONS.md",
+        {_sci_variant(10.0 ** gt["MAP_physical"]["log_epsilon"])})
+    add("alpha_X = 10**log_alpha (v0.7 MAP)",
+        "MODEL_ASSUMPTIONS_AND_LIMITATIONS.md",
+        {_sci_variant(10.0 ** gt["MAP_physical"]["log_alpha"])})
+
+    # --- v0.8 post-T88.E headline artifact ---
+    z08 = _num_variants(hl["log_Z"], 2)
+    for doc in ("README.md", "CITATION.cff", "CHANGELOG.md", "CURRENT.md"):
+        add("v0.8 log_Z", doc, z08)
+    e08 = _num_variants(hl["log_Z_err"], 3)
+    for doc in ("README.md", "CITATION.cff", "CURRENT.md"):
+        add("v0.8 log_Z_err", doc, e08)
+    sig08 = _num_variants(hl["MAP_physical"]["sigma_m_0_derived"], 2)
+    for doc in ("README.md", "CITATION.cff", "CURRENT.md",
+                "docs/LAYMAN_SUMMARY.md", "EXTRACT.md"):
+        add("v0.8 sigma/m_0 (MAP)", doc, sig08)
+    a08 = _num_variants(hl["MAP_physical"]["a_derived"], 2)
+    for doc in ("README.md", "CITATION.cff", "CURRENT.md",
+                "docs/LAYMAN_SUMMARY.md"):
+        add("v0.8 velocity index a (MAP)", doc, a08)
+
+    return checks
+
+
 def main() -> int:
     if not GROUND_TRUTH_JSON.exists():
         print(f"ERROR: ground truth JSON not found: {GROUND_TRUTH_JSON}", file=sys.stderr)
         return 2
 
     j = json.loads(GROUND_TRUTH_JSON.read_text(encoding="utf-8"))
+    if not HEADLINE_V08_JSON.exists():
+        print(f"ERROR: headline v0.8 JSON not found: {HEADLINE_V08_JSON}", file=sys.stderr)
+        return 2
+    h = json.loads(HEADLINE_V08_JSON.read_text(encoding="utf-8"))
     log_z = round(j["log_Z"], 2)
     log_z_err = round(j["log_Z_err"], 3)
 
@@ -247,6 +356,34 @@ def main() -> int:
             print(f"=== {VERSION_LABEL} (drift-guard) ===")
             print(f"  ✗ VERSION = '{raw_version[:80]}...' does NOT start with "
                   f"canonical '{CANONICAL_STANDING_VERSION}' — drift!")
+
+    # ------------------------------------------------------------------
+    # VALUE CROSS-CHECKS (added 2026-11-04).
+    #
+    # The CHECKS_PER_DOC entries above only assert that a doc still
+    # contains a hard-coded literal; they never read the result JSONs, so
+    # mutating the declared source-of-truth artifact (e.g. log_Z -> -999.0)
+    # left the audit reporting ALL CLEAR. These checks derive the expected
+    # doc string FROM the artifact and compare it against the document.
+    # ------------------------------------------------------------------
+    print()
+    print("=" * 70)
+    print("VALUE CROSS-CHECKS (expected strings derived from the result JSONs)")
+    print("=" * 70)
+    for label, doc_label, needles in _build_value_cross_checks(j, h):
+        path = REPO / doc_label
+        total += 1
+        if not path.exists():
+            any_drift = True
+            print(f"  ✗ {label}: doc missing ({doc_label})")
+            continue
+        text = path.read_text(encoding="utf-8")
+        if any(needle in text for needle in needles):
+            passes += 1
+            print(f"  ✓ {label}: {sorted(needles)[0]!r} in {doc_label}")
+        else:
+            any_drift = True
+            print(f"  ✗ {label}: none of {sorted(needles)} found in {doc_label}")
 
     print()
     print("=" * 70)

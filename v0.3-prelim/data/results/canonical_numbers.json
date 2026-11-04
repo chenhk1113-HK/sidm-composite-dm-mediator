@@ -430,4 +430,65 @@
     ],
     "R88_reference": "R88(88), ClawsGO #5+#7"
   }
+,
+  "t82_audit_check_count": 120,
+  "t41_v08_standing_map": {
+    "source_artifact": "v0.3-prelim/data/results/t41_mediator_mass_joint_fit_t88ce_v08_with_euclid_lensing_and_subhalo_forecast_nlive2000.json",
+    "source_artifact_sha256": "d2ee97506ed0dd35a5ab9441a12b471d145ee737ab9f9cf2d10d8440ef6feabf",
+    "config_hash": "1a07d47facfb",
+    "nlive": 2000,
+    "ndim": 6,
+    "dlogz": 0.1,
+    "log_Z": -164.8684904202744,
+    "log_Z_err": 0.08407446187648335,
+    "MAP": {
+      "m_chi_GeV": 478.29480863482195,
+      "m_phi_MeV": 488.15386822625493,
+      "g_chi": 0.963659296232169,
+      "xi": 0.15338924235326637,
+      "sigma_m_0_derived": 0.05991454841339871,
+      "a_derived": 0.13234005284350478
+    },
+    "median_physical": {
+      "m_phi_MeV": 598.3921825318386,
+      "m_chi_GeV": 502.88249111251685,
+      "g_chi": 1.5492231823429525,
+      "epsilon": 1.0682023758562073e-37,
+      "alpha": 3.3924963121920677e-16,
+      "xi": 0.16124164198271804
+    },
+    "credible_68pct": {
+      "m_chi_GeV": [
+        337.82579725715595,
+        769.8434379370539
+      ],
+      "m_phi_MeV": [
+        471.84989659913776,
+        759.3163591259347
+      ],
+      "g_chi": [
+        1.2544933637554214,
+        1.5492080154072327,
+        1.8487487415463328
+      ]
+    },
+    "yukawa_tension": {
+      "a_difference": 0.8076599471564951,
+      "reported_sigma": 0.81,
+      "threshold": 1.0,
+      "T39_a": 0.94,
+      "Yukawa_a_at_MAP": 0.13234005284350478,
+      "significant": false
+    },
+    "superseded_v07_map": {
+      "source_artifact": "v0.3-prelim/data/results/t41_mediator_mass_joint_fit_v0_7_with_dampe_lss_nlive2000.json",
+      "m_chi_GeV": 769.6913379451703,
+      "m_phi_MeV": 452.9510521222574,
+      "g_chi": 1.18898126146095,
+      "reported_sigma": 0.6,
+      "note": "Found 2026-11-04: README.md / CURRENT.md / docs/LAYMAN_SUMMARY.md quoted THESE v0.7 values in rows labelled v0.8."
+    },
+    "doc_rule": "Current-standing rows must quote the v0.8 MAP above (478 GeV / 488 MeV / g_chi 0.964 / tension 0.81). v0.7 values may appear only in rows or table blocks explicitly labelled v0.7 / historical / superseded.",
+    "added": "2026-11-04 LocalIntegrity-Sweep; drift found by reading the artifact against the front pages"
+  }
 }

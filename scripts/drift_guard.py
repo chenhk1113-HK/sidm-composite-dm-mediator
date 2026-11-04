@@ -15,9 +15,16 @@ What it checks:
 4. dSph trade-off factor matches the canonical value
 5. Halo-specific prefactors (Fornax 18.7x, Segue 1 4.0x) match
 6. "first-class" structural findings count matches the freeze (2)
+7. T41 v0.8 standing MAP: the canonical block (canonical_numbers.json -> t41_v08_standing_map)
+   must match its artifact byte-for-byte (sha256), and README.md / CURRENT.md / EXTRACT.md /
+   docs/LAYMAN_SUMMARY.md must quote the v0.8 MAP (m_chi 478 GeV, m_phi 488 MeV, g_chi 0.964,
+   tension 0.81σ). The v0.7-era MAP (770 GeV / 453 MeV / 1.19 / 0.60σ) is allowed only in text
+   explicitly labelled v0.7 / historical / superseded / pre-T88.E. Added 2026-11-04: a manual
+   audit found the front pages quoting the v0.7 MAP under a v0.8 label.
 
 What it does NOT check (because they're OK to vary):
-- Exact numerical values from a single fit (they're documented with their source)
+- Exact numerical values from a single fit (they're documented with their source) — except the
+  T41 standing MAP, which is now pinned by check 7
 - Channel denominator drift (handled by section A.15 in the paper)
 - THEOREM vs Result naming (handled by R88(87) freeze)
 
@@ -31,6 +38,7 @@ Exit codes:
   2 — canonical JSON missing
 """
 from __future__ import annotations
+import hashlib
 import json
 import re
 import sys
@@ -339,6 +347,79 @@ def check_tradeoff_factor_scatter(doc_text, doc_name):
     return drifts
 
 
+T41_STANDING_DOCS = ("README.md", "CURRENT.md", "EXTRACT.md", "docs/LAYMAN_SUMMARY.md")
+T41_STALE = re.compile(r"770 ?GeV|453(?:-588)? ?MeV|0\.60σ|g_χ ?[=≈] ?1\.19")
+T41_HIST_MARKERS = re.compile(
+    r"v0\.7|V0\.7|historical|Historical|superseded|archived|pre-T88\.E|Pre-T88\.E|retired|was ")
+
+
+def check_t41_canonical_vs_artifact(block):
+    """The canonical T41 block must match the artifact it claims, byte-for-byte by sha256."""
+    drifts = []
+    if not block:
+        return [{"severity": "HIGH", "doc": "canonical_numbers.json",
+                 "type": "t41_v08_standing_map_missing",
+                 "found": "no t41_v08_standing_map block",
+                 "canonical": "block required (added 2026-11-04)",
+                 "context": "front pages quote the T41 v0.8 MAP; without the block the quotes are unchecked"}]
+    art = _REPO / block["source_artifact"]
+    if not art.exists():
+        return [{"severity": "HIGH", "doc": "canonical_numbers.json",
+                 "type": "t41_artifact_missing", "found": str(art), "canonical": "artifact must exist"}]
+    raw = art.read_bytes()
+    sha = hashlib.sha256(raw).hexdigest()
+    if sha != block["source_artifact_sha256"]:
+        drifts.append({"severity": "HIGH", "doc": "canonical_numbers.json",
+                       "type": "t41_artifact_sha_mismatch",
+                       "found": sha, "canonical": block["source_artifact_sha256"],
+                       "context": "the T41 v0.8 artifact changed after the canonical block was recorded; "
+                                   "re-derive the block and re-check the docs"})
+    d = json.loads(raw.decode("utf-8"))
+    mp = d["MAP_physical"]
+    for key, tol in (("m_chi_GeV", 0.01), ("m_phi_MeV", 0.01), ("g_chi", 1e-4),
+                     ("sigma_m_0_derived", 1e-4), ("a_derived", 1e-4)):
+        if abs(mp[key] - block["MAP"][key]) > tol:
+            drifts.append({"severity": "HIGH", "doc": "canonical_numbers.json",
+                           "type": f"t41_map_{key}_mismatch",
+                           "found": mp[key], "canonical": block["MAP"][key],
+                           "context": "canonical block vs artifact disagreement"})
+    if abs(d["yukawa_tension"]["a_difference"] - block["yukawa_tension"]["a_difference"]) > 1e-6:
+        drifts.append({"severity": "HIGH", "doc": "canonical_numbers.json",
+                       "type": "t41_tension_mismatch",
+                       "found": d["yukawa_tension"]["a_difference"],
+                       "canonical": block["yukawa_tension"]["a_difference"]})
+    return drifts
+
+
+def check_t41_standing_in_doc(doc_text, block, doc_name):
+    """v0.8 MAP must be quoted correctly; v0.7 numbers allowed only in labelled historical context."""
+    drifts = []
+    if not block:
+        return drifts
+    lines = doc_text.split("\n")
+    for i, ln in enumerate(lines, 1):
+        if not T41_STALE.search(ln):
+            continue
+        lo = max(0, i - 9)
+        hi = min(len(lines), i + 2)
+        window = "\n".join(lines[lo:hi])
+        if T41_HIST_MARKERS.search(window):
+            continue
+        drifts.append({"severity": "HIGH", "doc": doc_name,
+                       "type": "t41_v07_values_in_unmarked_standing_context",
+                       "found": f"line {i}: {ln.strip()[:150]}",
+                       "canonical": "v0.8 MAP: m_chi 478 GeV, m_phi 488 MeV, g_chi 0.964, tension 0.81 "
+                                    f"(artifact {block['source_artifact'].rsplit('/', 1)[-1]})",
+                       "context": "770 GeV / 453 MeV / 0.60σ / g_chi 1.19 are the v0.7 MAP values"})
+    for token in ("478 GeV", "488 MeV", "0.81"):
+        if token not in doc_text:
+            drifts.append({"severity": "HIGH", "doc": doc_name,
+                           "type": "t41_v08_anchor_missing",
+                           "found": f"'{token}' absent",
+                           "canonical": "the doc must state the v0.8 MAP it is quoting"})
+    return drifts
+
+
 def main():
     print("=" * 70)
     print("V19.2-E D — Drift-guard (ClawsGO B.2)")
@@ -382,7 +463,37 @@ def main():
         "canonical_abstract_channel_count", {}
     ).get("canonical_count_string", "8 constrained channels (4 PASS / 3 MARGINAL / 1 FAIL)")
 
-    all_drifts = []
+    # T41 v0.8 standing MAP: canonical block must match the artifact, and the front pages
+    # must quote it (2026-11-04: the front pages had been quoting the v0.7 MAP under a v0.8 label).
+    t41_block = canonical.get("t41_v08_standing_map", {})
+    t41_drifts = check_t41_canonical_vs_artifact(t41_block)
+    if t41_drifts:
+        print("T41 canonical-vs-artifact: MISMATCH")
+        for drift in t41_drifts:
+            print(f"  [HIGH] {drift['type']}: found {drift.get('found')} vs {drift.get('canonical')}")
+    else:
+        mp = t41_block["MAP"]
+        print(f"T41 canonical-vs-artifact: OK (sha256 verified; MAP m_chi={mp['m_chi_GeV']:.1f} GeV, "
+              f"m_phi={mp['m_phi_MeV']:.1f} MeV, g_chi={mp['g_chi']:.3f}, "
+              f"tension={t41_block['yukawa_tension']['reported_sigma']})")
+    print()
+
+    # Auditor self-count: the standing block must quote the auditor's real check count, so an
+    # auditor that silently grows cannot stay green while the docs quote an old number.
+    t82_count = canonical.get("t82_audit_check_count")
+    if t82_count:
+        literal = f"{t82_count}/{t82_count} ALL CLEAR"
+        if literal not in load_doc(_REPO / "CURRENT.md"):
+            t41_drifts.append({"severity": "HIGH", "doc": "CURRENT.md",
+                               "type": "t82_audit_count_literal_stale",
+                               "found": f"'{literal}' absent from the standing block",
+                               "canonical": literal})
+            print(f"T82 count literal in CURRENT.md: STALE (expected '{literal}')")
+        else:
+            print(f"T82 count literal in CURRENT.md: OK ({literal})")
+        print()
+
+    all_drifts = list(t41_drifts)
     for doc_name, doc_path in headline_docs:
         doc_text = load_doc(doc_path)
         if not doc_text:
@@ -397,6 +508,13 @@ def main():
         drifts += check_no_go_catalogue_membership(doc_text, doc_name)
         drifts += check_tradeoff_factor_scatter(doc_text, doc_name)
         all_drifts += drifts
+
+    # T41 standing-MAP check over the four front-facing docs (README, CURRENT, EXTRACT, LAYMAN).
+    for doc_name in T41_STANDING_DOCS:
+        doc_text = load_doc(_REPO / doc_name)
+        if not doc_text:
+            continue
+        all_drifts += check_t41_standing_in_doc(doc_text, t41_block, doc_name)
 
     # Also check the v19.2-E round docs for halo-prefactor drift only.
     # The per-round docs legitimately have different pass counts but should

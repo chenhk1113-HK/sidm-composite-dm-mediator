@@ -30,7 +30,8 @@ specific claim needs its source document.
 | Doc | Purpose |
 |---|---|
 | [`V19_2_E_CONSOLIDATED_REPORT_2026-11-03.md`](V19_2_E_CONSOLIDATED_REPORT_2026-11-03.md) | Running consolidation of the current four-stage chain (stages 1-2 complete, stage 3 pending IllustrisTNG) |
-| [`NEW_DATA_SWEEP_2026-11-03.md`](NEW_DATA_SWEEP_2026-11-03.md) | New-data adjudication: 32 live-verified citations, tiered intake, what fired and what did not |
+| [`NEW_DATA_SWEEP_2026-11-03.md`](NEW_DATA_SWEEP_2026-11-03.md) | New-data adjudication: 31 unique cited arXiv IDs (the doc's own header says 32/32; no 32-entry list exists), tiered intake, what fired and what did not |
+| [`INTEGRITY_FINDINGS_2026-11-04.md`](INTEGRITY_FINDINGS_2026-11-04.md) | Local integrity sweep: the σ/m-inert SIDM core radius, the kpc/Gyr-vs-km/s unit fix, Phase 40 scoring contradiction, gate teeth, citation KB closure, and the open owner decisions |
 | [`CLOUD9_HIGHSIGMA_TIMING_RECHECK_2026-11-03.md`](CLOUD9_HIGHSIGMA_TIMING_RECHECK_2026-11-03.md) | Cloud-9 optical-depth / collapse-timing recheck after the lookback-time fix |
 | [`V19_2_E_A1_REAL_LIKELIHOOD_PROMOTION.md`](V19_2_E_A1_REAL_LIKELIHOOD_PROMOTION.md) … [`V19_2_E_D_CANONICAL_NUMBERS.md`](V19_2_E_D_CANONICAL_NUMBERS.md) | The A.1 / A.2 / B / C / D work packages behind the canonical numbers (real-likelihood promotion, 5-param DE fit, per-halo gravothermal calibration, data-only σ/m(v), machine-generated canonical values) |
 | [`FUTURE_WORK_PLAN_V19_2_E.md`](FUTURE_WORK_PLAN_V19_2_E.md) | What v19.2-E is for, in order |

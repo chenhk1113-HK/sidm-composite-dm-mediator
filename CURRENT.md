@@ -19,9 +19,11 @@ remote `origin/master` is still at `d411598` — 242 commits behind as of 2026-1
 `014c9e0`); its pytest layer reports **1954 passed / 22 skipped / 36 deselected**. Standing disclosures
 travel with every green run: the gate asserts only its enumerated layers, not the whole document (CG-5),
 and internal pytest skips are named rather than folded into the pass count (CG-10).
-Drift-guard audit (`scripts/t82_audit.py`): **85/85 ALL CLEAR** — the auditor's expected
-literal was re-synced from the stale `44/44` on 2026-11-03 (CHANGELOG, same date), so this
-line and the tool now report the same number.
+Drift-guard audit (`scripts/t82_audit.py`): **120/120 ALL CLEAR** — the auditor's expected
+literal was re-synced from the stale `44/44` on 2026-11-03 and re-synced again on 2026-11-04 when
+35 derived value cross-checks were added (85 -> 120). The standing table in `scripts/t82_audit.py`
+also stopped asserting the v0.7 MAP (770 GeV / 453 MeV / 0.60σ) as CURRENT.md's standing claim; it
+now asserts the v0.8 MAP (478 GeV / 488 MeV / 0.81σ), so this line, the docs and the tool agree.
 
 **What the v19.2-E chain did (stages 1-2 of 4 complete; `docs/V19_2_E_CONSOLIDATED_REPORT_2026-11-03.md`):**
 - **Housekeeping save + tag** (`ef427e6`): n25/n26 CHANGELOG and VERSION labels backfilled — the
@@ -513,18 +515,20 @@ count.
 
 ## v0.8 posterior headline (nlive=2000, ~7 min wall)
 
+> Artifact of record: `t41_mediator_mass_joint_fit_t88ce_v08_with_euclid_lensing_and_subhalo_forecast_nlive2000.json` (sha256 `d2ee9750…ef6feabf`), mirrored in `v0.3-prelim/data/results/canonical_numbers.json` → `t41_v08_standing_map`. Corrected 2026-11-04: the m_χ / m_φ / g_χ / ξ / ε / α / tension rows previously carried the **v0.7** MAP (770 GeV / 453 MeV / 1.19 / 0.17 / 1.4×10⁻³⁷ / 3.5×10⁻¹⁶ / 0.60σ) under a v0.8 label.
+
 | Quantity | Value | Source |
 |---|---|---|
 | **Bayesian evidence log Z** | **−164.87 ± 0.084** | T41 nlive=2000 |
-| DM mass **m_χ** (MAP) | **770 GeV** (median ~500) | T41 posterior |
-| Mediator mass **m_φ** (MAP) | **453 MeV** ✓ KSFR-valid (median 588) | T41 posterior |
+| DM mass **m_χ** (MAP) | **478 GeV** (median 503; 68% CI 338–770) | T41 v0.8 posterior |
+| Mediator mass **m_φ** (MAP) | **488 MeV** ✓ KSFR-valid (median 598; 68% CI 472–759) | T41 v0.8 posterior |
 | **σ/m₀** at galactic scale (MAP) | **0.06 cm²/g** | T41 derived; **post-T88.E Euclid Q1 subhalo FORECAST** (Channel 24, LensPop pipeline Collett 2015) — **not yet a measurement**, real Q1 data expected with Euclid DR1 at end of 2026. Pre-forecast v0.7 value was 0.27 cm²/g. The 5× drop reflects the forecast's substructure sensitivity, not a posterior bug. |
 | Velocity index **a** (Yukawa, at MAP) | **+0.132** | T41 derived |
-| Tension T39 vs Yukawa a | **0.60σ** (below 1.0 threshold) | T41 vs T39 |
-| Bare **ε** (median posterior) | **1.4×10⁻³⁷** | T41 posterior |
-| Bare **α_X** (median posterior) | 3.5×10⁻¹⁶ | T41 posterior |
-| Dark Yukawa **g_χ** (MAP) | 1.19 | T41 MAP |
-| Form-factor suppression **ξ** (MAP) | 0.17 | T41 MAP |
+| Tension T39 vs Yukawa a | **0.81σ** (below 1.0 threshold) | T41 vs T39; v0.7-era value was 0.60σ |
+| Bare **ε** (median posterior) | **1.07×10⁻³⁷** | T41 v0.8 posterior |
+| Bare **α_X** (median posterior) | 3.4×10⁻¹⁶ | T41 v0.8 posterior |
+| Dark Yukawa **g_χ** (MAP) | **0.964** (median 1.549) | T41 v0.8 MAP |
+| Form-factor suppression **ξ** (MAP) | **0.153** (median 0.161) | T41 v0.8 MAP |
 
 ## Pre-T88.E v0.7 posterior headline (historical, nlive=2000)
 
@@ -533,6 +537,8 @@ count.
 | **Bayesian evidence log Z** | −163.29 ± 0.085 | pre-T88.E |
 | **σ/m₀** at galactic scale (MAP) | 0.27 cm²/g | pre-T88.E |
 | Velocity index **a** (Yukawa, at MAP) | +0.344 | pre-T88.E |
+| Masses **m_χ / m_φ** (MAP) | 770 GeV / 453 MeV | pre-T88.E (v0.7 historical) |
+| Dark Yukawa **g_χ** (MAP) | 1.19 | pre-T88.E (v0.7 historical) |
 
 **T88.E contribution** (sampling-variance control test, skill P17):
 Δ log Z = −0.85 (10× the noise floor of 0.21 between control runs).
@@ -597,7 +603,7 @@ preprint. Both addressed with verbatim paper quotes + numerical derivations.
 |---|---|---|
 | Event | 248 ± 23 ± 23 keV single recoil, 2.84 tonne-years | (not in scope — measured) |
 | Significance | 2.6σ global / 3.4σ local | Below 3σ threshold |
-| Best-fit m_χ | **1000 GeV/c²** (Ls₁₀ EFT operator) | **770 GeV** (MAP) — within posterior |
+| Best-fit m_χ | **1000 GeV/c²** (Ls₁₀ EFT operator) | **770 GeV** (v0.7 MAP) — inside the v0.7 posterior; the v0.8 MAP is 478 GeV with an 84th percentile of 770 GeV, so 1000 GeV is now outside the 68% interval |
 | σ_DM-nucleon (paper's implied) | ~10⁻⁴⁵ cm² for inelastic at 1 TeV | ~10⁻¹¹¹ cm² (Kahlhoefer point-particle) |
 | σ_DM-nucleon ratio | — | **66 orders below** LZ sensitivity |
 
@@ -631,7 +637,7 @@ substantive hidden assumption and is now surfaced.
 ### What didn't change
 
 - Standing version: **v0.4-prelim+T88E** (no bump).
-- Joint-fit posterior: **log Z = −164.87 ± 0.084**, m_χ = 770 GeV, σ/m = 0.06 cm²/g.
+- Joint-fit posterior: **log Z = −164.87 ± 0.084**, m_χ = 478 GeV (MAP; median 503), σ/m = 0.06 cm²/g. (Corrected 2026-11-04 — this line previously quoted the v0.7 MAP.)
 - Tests: 677 pass / 8 skip.
 - Drift-guard audit: 44/44 ALL CLEAR.
 
@@ -659,7 +665,7 @@ space, which is what makes the model essentially invisible to LZ.
 **Scientific interpretation:**
 - **The model remains a valid SIDM candidate** for dSph/UFD/Bullet/SPARC/DAMPE/LSS. log Z = −164.87 ± 0.084 is unchanged. All T72-T84 channels still work.
 - **The model does NOT explain the LZ event** if it's real. The event (if real) points to a different microphysics — Higgsino, pseudo-Dirac, or some other inelastic-DM scenario with different (m_χ, δ, ε) than v0.7 MAP predicts.
-- **The mass-window match is genuine but not sufficient.** LZ best-fit m_χ = 1000 GeV is within 30% of the project's 770 GeV MAP and within the heavy-WIMP regime (700-1000 GeV). What breaks is the cross-section: σ_inel_nuc is 71 orders of magnitude below LZ's effective event-rate sensitivity.
+- **The mass-window match is regime-level, not MAP-level.** LZ best-fit m_χ = 1000 GeV sits in the heavy-WIMP regime (700-1000 GeV), but against the **v0.8** posterior it is 2.1× the MAP (478 GeV) and above the 84th percentile (770 GeV) — outside the 68% credible interval. The v0.7-era framing ('within 30% of the 770 GeV MAP') no longer holds. What breaks regardless is the cross-section: σ_inel_nuc is 71 orders of magnitude below LZ's effective event-rate sensitivity.
 
 **Three new code modules + 9 new tests:**
 - `v0.3-prelim/code/t87_composite_inelastic_nucleon.py` (~430 lines): Kahlhoefer point-particle elastic + T&S&W inelastic kinematics + composite F²(q) calibrated to T79.

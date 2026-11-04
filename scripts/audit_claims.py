@@ -351,6 +351,139 @@ def verify_table(table_path: Path, results_dir: Path) -> int:
             n_pass += 1
 
     # ------------------------------------------------------------------
+    # MARKDOWN MIRROR CHECKS (added 2026-11-04).
+    #
+    # The frozen-literal loop above compares hard-coded expected values
+    # against the source JSONs. It READS this markdown table into
+    # ``table_text`` but never USES its text, so a wrong number printed in
+    # the table (a typo, or a value the JSON changed under) passed
+    # silently. These checks parse the real table rows and compare the
+    # number PRINTED in the table against the same source JSON the row
+    # cites, so a table typo — or a JSON change the table failed to
+    # follow — now FAILS.
+    # ------------------------------------------------------------------
+    print()
+    print("  Markdown mirror (printed table value vs source JSON):")
+    mirrors = [
+        # (label, row_regex, col_index, nth_number, ref_json, ref_key, tol)
+        ("§2 borrowed clear_pass", r"\*\*borrowed\*\* \(hand-picked\)", 2, 0,
+         "t207_final_summary.json",
+         ("channel_coverage_summary", "borrowed", "clear_pass"), 0),
+        ("§2 borrowed marginal", r"\*\*borrowed\*\* \(hand-picked\)", 3, 0,
+         "t207_final_summary.json",
+         ("channel_coverage_summary", "borrowed", "marginal"), 0),
+        ("§2 yang clear_pass", r"\*\*yang\*\* \(Yang\+ 2025 f_H\)", 2, 0,
+         "t207_final_summary.json",
+         ("channel_coverage_summary", "yang", "clear_pass"), 0),
+        ("§2 t202 clear_pass", r"\*\*t202\*\* \(T202 N-body f_H\)", 2, 0,
+         "t207_final_summary.json",
+         ("channel_coverage_summary", "t202", "clear_pass"), 0),
+        ("§2 borrowed SPARC log L", r"\*\*borrowed\*\* \(hand-picked\)", 6, 0,
+         "t207_final_summary.json",
+         ("t207_de_prescription_modes", "borrowed", "per_channel_log_L", "SPARC v=100"), 0.005),
+        ("§2 yang SPARC log L", r"\*\*yang\*\* \(Yang\+ 2025 f_H\)", 6, 0,
+         "t207_final_summary.json",
+         ("t207_de_prescription_modes", "yang", "per_channel_log_L", "SPARC v=100"), 0.005),
+        ("§2 t202 SPARC log L", r"\*\*t202\*\* \(T202 N-body f_H\)", 6, 0,
+         "t207_final_summary.json",
+         ("t207_de_prescription_modes", "t202", "per_channel_log_L", "SPARC v=100"), 0.005),
+        ("§4 Bayes log B", r"Bayes log B \(multi-resonance", 2, 0,
+         "t205_full_likelihood_published.json", "log_bayes_factor", 0.005),
+        ("§4 Bayes B", r"^\| Bayes B \|", 2, 0,
+         "t205_full_likelihood_published.json", "bayes_factor", 0.1),
+        ("§5 t_core (Phase 44)", r"t_core \(Phase 44 Yukawa-only", 2, 0,
+         "t208_path_b_cloud9_host_halo_gravothermal.json",
+         ("Cloud9_gravothermal", "t_core_Gyr"), 0.5),
+        ("§5 Cloud-9 V_max", r"Cloud-9 V_max \(NFW-correct", 2, 0,
+         "t208_path_b_cloud9_host_halo_gravothermal.json",
+         ("Cloud9_host_halo_params", "V_max_kms"), 0.05),
+        ("§6 t_core at σ/m=70", r"^\| Cloud-9 t_core at ", 2, 0,
+         "t212_silverman_gravothermal.json",
+         ("cloud9_host_at_sigma70", "t_core_Gyr"), 0.005),
+        ("§6 t_cross at σ/m=70", r"^\| t_cross at ", 2, 0,
+         "t212_silverman_gravothermal.json",
+         ("cloud9_host_at_sigma70", "t_cross_Gyr"), 0.005),
+        ("§7 σ/m at V_max=31.12", r"V_max=31\.12 km/s\)\*\* \| \*\*0\.174", 2, 0,
+         "t213_kk_tower_silverman_combined.json",
+         "sigma_m_at_cloud9_v_max_cm2_g", 0.005),
+        ("§7 Silverman+ threshold", r"^\| Silverman\+ threshold \| 1\.0", 2, 0,
+         "t213_kk_tower_silverman_combined.json", "silverman_threshold_cm2_g", 0.05),
+        ("§9 Best Ω_h²", r"0\.1187", 2, 0,
+         "t192_thermal_avg.json", ("best_configuration", "Omega_h2"), 0.002),
+        ("§10 T215u mean", r"^\| T215u mean Myr", 2, 0,
+         "t215u_memory_cap_summary.json", "mean_myr", 0.1),
+        ("§10 T215u std", r"^\| T215u std Myr", 2, 0,
+         "t215u_memory_cap_summary.json", "std_myr", 0.1),
+        ("§10 T215u range == max-min", r"^\| T215u range Myr", 2, 0,
+         "t215u_memory_cap_summary.json", "__range_only__", 0.02),
+        ("§3 priored v_HL median", r"\*\*priored free fit\*\* \| 105\.24", 2, 0,
+         "t207c_priored_free_emcee.json", ("posterior_medians", "v_HL"), 1.0),
+        ("§3 priored v_HL std", r"\*\*priored free fit\*\* \| 105\.24", 2, 1,
+         "t207c_priored_free_emcee.json", ("posterior_stds", "v_HL"), 1.0),
+        ("§3 priored σ_peak_HL", r"\*\*priored free fit\*\* \| 105\.24", 3, 0,
+         "t207c_priored_free_emcee.json", ("posterior_medians", "sigma_peak_HL"), 0.05),
+        ("§3 priored f_H_cc", r"\*\*priored free fit\*\* \| 105\.24", 4, 0,
+         "t207c_priored_free_emcee.json", ("posterior_medians", "f_H_cc"), 0.005),
+    ]
+    table_lines = table_text.split("\n")
+    _mirror_num_rx = re.compile(r"[-+\u2212]?\d+(?:\.\d+)?(?:[eE][-+]?\d+)?")
+
+    def _mirror_row_cells(pattern: str):
+        rx = re.compile(pattern)
+        matches = [ln for ln in table_lines if rx.search(ln)]
+        if len(matches) != 1:
+            return None
+        return [c.strip() for c in matches[0].split("|")]
+
+    def _mirror_cell_number(cell: str, nth: int):
+        nums = _mirror_num_rx.findall(cell)
+        if len(nums) <= nth:
+            return None
+        return float(nums[nth].replace("\u2212", "-"))
+
+    for label, pattern, col, nth, ref_json, ref_key, tol in mirrors:
+        cells = _mirror_row_cells(pattern)
+        if cells is None:
+            print(f"    ✗ {label}: row not found / ambiguous in table")
+            n_fail += 1
+            continue
+        if col >= len(cells):
+            print(f"    ✗ {label}: column {col} out of range")
+            n_fail += 1
+            continue
+        table_value = _mirror_cell_number(cells[col], nth)
+        if table_value is None:
+            print(f"    ✗ {label}: no number in table cell {cells[col]!r}")
+            n_fail += 1
+            continue
+        json_path = results_dir / ref_json
+        if not json_path.exists():
+            print(f"    ✗ {label}: MISSING JSON {ref_json}")
+            n_fail += 1
+            continue
+        with open(json_path) as f:
+            data = json.load(f)
+        if ref_key == "__range_only__":
+            lo = _get_nested(data, "min_myr")
+            hi = _get_nested(data, "max_myr")
+            actual = None if (lo is None or hi is None) else (hi - lo)
+        else:
+            actual = _get_nested(data, ref_key)
+        if actual is None:
+            print(f"    ✗ {label}: MISSING KEY {ref_key} in {ref_json}")
+            n_fail += 1
+            continue
+        diff = abs(actual - table_value)
+        if diff > tol:
+            print(f"    ✗ DRIFT (table vs JSON): {label}")
+            print(f"        table: {table_value}")
+            print(f"        JSON:  {actual} (|Δ|={diff:.4f})")
+            n_fail += 1
+        else:
+            print(f"    ✓ {label}: table={table_value} == JSON {actual}")
+            n_pass += 1
+
+    # ------------------------------------------------------------------
     # SELF-CONSISTENCY CHECKS (mechanism fix, added 2026-10-22).
     #
     # The T208 JSON went stale for ~2 months: commit beeb658 fixed
