@@ -333,6 +333,13 @@ Burkert −2277.47, SIDM-responsive −1236.16, SIDM-inert −1205.33. The respo
 +301.93), median **+0.66** per galaxy; τ (evolution time / collapse time) has median **0.0031**, so
 gravothermal evolution barely develops in this halo sample. Phase 39/40 were not modified.
 
+The comparison that matters for D1 is **responsive vs inert**: the physical profile is slightly
+*worse* than the fake one — +369.18 vs +400.01 total, median **+0.97 vs +2.26**, and +67.25 vs
++75.68 (median +0.66 vs +1.30) with UGC02916 removed. Adopting the σ/m-driven profile therefore
+does **not** strengthen the SPARC case; it converts an inflated claim into a weaker but honest one.
+Cause is physical, not numerical: canonical σ_eff ≈ 0.13–0.47 cm²/g at these halo masses makes the
+collapse time ≫ the ~9 Gyr evolution time, so the model predicts mostly NFW-like halos here.
+
 
 ## Decisions the owner has to make
 
