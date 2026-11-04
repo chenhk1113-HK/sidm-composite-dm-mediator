@@ -1,4 +1,4 @@
-# CURRENT — Version-of-Record (1 page)
+# CURRENT — Version-of-Record (standing section first; full round history below)
 
 > **For:** Anyone who has 60 seconds and wants to know what this project
 > is, what it claims, and what the current best numbers are.
@@ -12,8 +12,8 @@
 reproducible object capturing the audited physics record: consolidated review-response report **v1.17**,
 the n22→n26 audit chain, and the 15/15 gate run.
 
-**Active branch:** `wip/v19.2-F-init` — **237 commits ahead of `master`**, which is still the GitHub
-default branch. Anyone landing on the repository landing page sees the 2026-10-11 state, not this one.
+**Active branch:** `wip/v19.2-F-init`. Local `master` was fast-forwarded to `d4cabec` and is 2 commits behind;
+remote `origin/master` is still at `d411598` — 242 commits behind as of 2026-11-04, nothing pushed (GitHub shelved by owner decision 2026-11-04) — so the landing page shows the 2026-10-11 state, not this one.
 
 **Verification status (2026-11-03):** the 15-layer pre-tag gate is **15/15 PASS** (evidence commit
 `014c9e0`); its pytest layer reports **1954 passed / 22 skipped / 36 deselected**. Standing disclosures

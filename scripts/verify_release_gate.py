@@ -265,7 +265,10 @@ def main():
     # Layer 3: drift guard
     ok, tail = run_layer(
         "Standing-numbers drift guard (drift_guard.py)",
-        ["scripts/drift_guard.py"],
+        # --strict is required for this layer to have teeth: drift_guard detects drift
+        # but exits 0 without it (scripts/drift_guard.py:439), which made the gate layer
+        # unable to fail on a doc-vs-canonical-number mismatch. Fixed 2026-11-04.
+        ["scripts/drift_guard.py", "--strict"],
     )
     record("drift_guard.py", ok, tail)
 

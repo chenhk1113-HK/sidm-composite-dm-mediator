@@ -21,8 +21,8 @@ VERIFIED_DIR = REPO / "docs" / "papers" / "verified"
 TO_VERIFY_DIR = REPO / "docs" / "papers" / "to_verify"
 
 # arXiv ID patterns
-ARXIV_NEW = re.compile(r'arXiv:\s*(\d{4}\.\d{4,5})')  # arXiv:2411.09012
-ARXIV_OLD = re.compile(r'arXiv:\s*([a-z\-]+(?:\.[A-Z]{2})?/\d{7})')  # arXiv:hep-ph/0601234
+ARXIV_NEW = re.compile(r'arXiv:\*{0,2}\s*(\d{4}\.\d{4,5})')  # arXiv:2411.09012 or **arXiv:** 2411.09012
+ARXIV_OLD = re.compile(r'arXiv:\*{0,2}\s*([a-z\-]+(?:\.[A-Z]{2})?/\d{7})')  # arXiv:hep-ph/0601234
 ARXIV_BARE = re.compile(r'(?<!\d)(\d{4}\.\d{4,5})(?!\d)')  # bare 2411.09012
 
 
@@ -32,6 +32,9 @@ def get_verified_arxiv_ids() -> set:
     if not VERIFIED_DIR.exists():
         return ids
     for f in VERIFIED_DIR.glob("*.md"):
+        # The KB filenames are themselves canonical: <arxiv-id>_author_year.md
+        for m in ARXIV_BARE.finditer(f.stem):
+            ids.add(m.group(1))
         text = f.read_text(encoding="utf-8", errors="ignore")
         for m in ARXIV_NEW.finditer(text):
             ids.add(m.group(1))

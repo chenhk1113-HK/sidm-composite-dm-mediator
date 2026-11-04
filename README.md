@@ -71,7 +71,7 @@
 
 ## ⚡ Current standing — 2026-11-03
 
-**Where the work actually is:** branch `wip/v19.2-F-init` — **237 commits ahead of `master`**, which is
+**Where the work actually is:** branch `wip/v19.2-F-init`. Local `master` was fast-forwarded to `d4cabec` (2 commits behind); remote `origin/master` is at `d411598`, 242 commits behind as of 2026-11-04, and is
 still the GitHub default branch, so the repository landing page shows the 2026-10-11 state. Record save
 point: annotated tag `v19.2-F-RecordSave-v1.17`.
 
@@ -252,7 +252,7 @@ pip install -r requirements.txt
 # 4. Verify — should print "ALL CLEAR: N/N checks passed — no drift" (N is dynamic)
 python scripts/t82_audit.py
 
-# 5. Run the test suite (1928 tests collected, expect ~0 failures — R88(82))
+# 5. Run the test suite (gate layer: 1,954 passed / 22 skipped / 36 deselected as of 2026-11-03)
 pytest v0.3-prelim/tests/ --ignore=v0.3-prelim/tests/test_sparc_hierarchical.py \
                          --ignore=v0.3-prelim/tests/test_t32_real_likelihood.py -q
 
@@ -261,8 +261,8 @@ pytest v0.3-prelim/tests/ --ignore=v0.3-prelim/tests/test_sparc_hierarchical.py 
 #     to re-run from scratch, see scripts/parallel_run_nl2000.sh — ~7 min wall)
 python -c "import json; r = json.load(open('v0.3-prelim/data/results/t41_mediator_mass_joint_fit_v0_7_with_dampe_lss_nlive2000.json')); print('log Z =', round(r['log_Z'], 2), 'MAP m_chi =', round(r['MAP_physical']['m_chi_GeV']), 'GeV'); print('sigma/m =', round(r['MAP_physical']['sigma_m_0_derived'], 2), 'cm^2/g')"
 
-# Expect: log Z = -164.87 MAP m_chi = 770 GeV (post-T88.E; pre-T88.E was -163.29)
-#         sigma/m = 0.27 cm^2/g
+# Expect (measured from this exact file): log Z = -163.29, MAP m_chi = 770 GeV. The -164.87 figure is the
+#         v0.8 post-T88.E posterior in a DIFFERENT artifact, not this v0.7 JSON. sigma/m = 0.27 cm²/g.
 ```
 
 > **R88(82) note:** Without `DM_SIDM_PROJECT_ROOT` set, `v0.3-prelim/code/config.py` falls through to the hard-coded Windows path and the test suite will fail to collect. Step 2 is required for clean-checkout reproducibility.

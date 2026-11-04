@@ -11,7 +11,7 @@
 
 | Doc | Purpose | Read if you want |
 |---|---|---|
-| [`../CURRENT.md`](../CURRENT.md) | 1-page version-of-record | The 60-second answer |
+| [`../CURRENT.md`](../CURRENT.md) | Version-of-record (standing section at the top; 1,167-line round history below) | The 60-second answer |
 | [`../README.md`](../README.md) | Project description + quick-start | The 5-minute answer |
 | [`LAYMAN_SUMMARY.md`](LAYMAN_SUMMARY.md) | Non-expert overview (Tier-1 milestone) | A readable summary |
 | [`MATHEMATICS.md`](MATHEMATICS.md) | Mathematical appendix (formulas, derivations) | The derivation chain |
@@ -118,4 +118,4 @@ a basename collision with `docs/findings_2026_SIDM_papers.md`.
 ## Maintenance note
 
 This index is regenerated whenever a T-round ships or a doc is
-renamed. Last refresh: 2026-09-03 (T86).
+renamed. Archive re-index refresh: 2026-11-03 (supersedes the 2026-09-03 (T86) index).
