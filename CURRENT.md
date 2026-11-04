@@ -19,6 +19,9 @@ default branch. Anyone landing on the repository landing page sees the 2026-10-1
 `014c9e0`); its pytest layer reports **1954 passed / 22 skipped / 36 deselected**. Standing disclosures
 travel with every green run: the gate asserts only its enumerated layers, not the whole document (CG-5),
 and internal pytest skips are named rather than folded into the pass count (CG-10).
+Drift-guard audit (`scripts/t82_audit.py`): **85/85 ALL CLEAR** — the auditor's expected
+literal was re-synced from the stale `44/44` on 2026-11-03 (CHANGELOG, same date), so this
+line and the tool now report the same number.
 
 **What the v19.2-E chain did (stages 1-2 of 4 complete; `docs/V19_2_E_CONSOLIDATED_REPORT_2026-11-03.md`):**
 - **Housekeeping save + tag** (`ef427e6`): n25/n26 CHANGELOG and VERSION labels backfilled — the

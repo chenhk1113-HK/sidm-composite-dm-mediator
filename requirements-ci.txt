@@ -1,0 +1,33 @@
+# requirements-ci.txt — what CI installs to run the test layer.
+#
+# Deliberately narrower than the root requirements.txt, for one reason: the root
+# file pins WIMpy==1.1.1 and PyPI has no such version (published releases are
+# 0.2 - 0.6). A job that installs the root file dies at the install step.
+#
+# WIMpy is not needed to run the suite: every test that touches it imports it
+# lazily inside the test body, and the 15-layer gate runs the whole suite on an
+# interpreter where it is absent (verified 2026-11-03: importlib.util.find_spec(
+# 'wimpy') is None, and the layer still reports 1954 passed / 22 skipped /
+# 36 deselected).
+#
+# Everything else is pinned to the same versions as the root file so CI and the
+# local gate resolve identical dependencies. All pins below were confirmed to
+# exist on PyPI on 2026-11-03.
+
+# Testing
+pytest==9.1.1
+hypothesis==6.103.1   # property-based tests (test_autocheck_hypothesis.py)
+sympy==1.13.3         # symbolic checks (test_autocheck_sympy.py)
+
+# Core scientific stack the tests import
+numpy==2.4.6
+scipy==1.18.0
+pandas==3.0.3
+matplotlib==3.11.0
+
+# Bayesian inference
+dynesty==3.0.0
+emcee==3.1.6
+
+# PDF delivery path used by the paper-claim tests
+fpdf2==2.8.7

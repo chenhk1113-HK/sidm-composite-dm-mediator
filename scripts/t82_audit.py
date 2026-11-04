@@ -155,7 +155,13 @@ CHECKS_PER_DOC: dict[str, list[tuple[str, str]]] = {
         ("Tension", "0.60σ"),
         ("Channels", "22 effective channels"),
         ("677 tests", "677 pass"),
-        ("Drift-guard", "44/44 ALL CLEAR"),
+        # 2026-11-03: literal was 44/44 — a count from the T89 era, stale by 41
+        # checks. The denominator here is the sum of every entry in this table
+        # plus the VERSION check; adding or removing an entry changes it, and
+        # this literal must be re-synced in the same commit. It is not derived
+        # from the table on purpose: a hard-coded expected count is what makes a
+        # silently-growing or shrinking audit surface fail instead of drift.
+        ("Drift-guard", "85/85 ALL CLEAR"),
     ],
 }
 

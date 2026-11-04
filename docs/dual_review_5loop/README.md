@@ -17,12 +17,23 @@ the raw reviewer logs, and the gate-evidence folders each round produced.
 | `../V19_2_E_CONSOLIDATED_REPORT_2026-11-03.md` | What happened **after** this chain (v19.2-E stages 1-2, KB intake, gravothermal timing fixes). The audit chain is closed; the project moved on here. |
 | `../V19_2_F_REFERENCE_DATA_REGISTRY.md` | Canonical numerical values for every citation and number used anywhere in the project. |
 
-## Superseded report versions (kept for the audit trail, not for reading)
+## Superseded report versions — `superseded/` (audit trail, not for reading)
 
-`SIDM_ROUND5_CONSOLIDATED_FIXES_v1.3 … v1.16` — 14 earlier versions of the same document. Each newer
-version supersedes the previous one; v1.17 is current. They are retained because the review chain's own
-rule is that a retraction or correction must stay traceable to the version that contained it.
-`SIDM_ROUND5_CHANGED_CODE_v1.1 … v1.9` — the per-round code-change appendices, same supersession rule.
+22 files were moved into [`superseded/`](superseded/) on 2026-11-03 with `git mv`, so every one of them
+is still in the history at both its original and its current path:
+
+- `superseded/SIDM_ROUND5_CONSOLIDATED_FIXES_v1.3 … v1.16` — 14 earlier versions of the report. Each
+  newer version supersedes the previous one; v1.17 is current and stays in this folder's top level.
+- `superseded/SIDM_ROUND5_CHANGED_CODE_v1.1 … v1.8` — the earlier code-change appendices, same
+  supersession rule.
+
+**Why `SIDM_ROUND5_CHANGED_CODE_v1.9` stays at the top level even though v1.17 supersedes it:** gate
+layers 8 and 9 (`audit_doc_anchors.py`, `audit_model_provenance.py`) resolve the companion deliverable
+with a non-recursive glob of this folder's top level. With no appendix there, the companion resolves to
+`None` and layer 8 fails outright — verified, not guessed. The audit layers define what must stay put.
+
+They are retained because the review chain's own rule is that a retraction or correction must stay
+traceable to the version that contained it. Moving them changed nothing about that rule.
 
 Do **not** quote numbers from a superseded version: several were corrected in later rounds. If a document
 cites one, check the same finding in v1.17 before repeating it.

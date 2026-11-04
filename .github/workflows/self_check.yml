@@ -9,10 +9,12 @@ on:
   push:
     branches:
       - wip/cloud-9-relhic
+      - wip/v19.2-F-init
       - master
   pull_request:
     branches:
       - wip/cloud-9-relhic
+      - wip/v19.2-F-init
       - master
   # Manual trigger
   workflow_dispatch:
@@ -30,8 +32,13 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install pytest
-        run: pip install pytest
+      - name: Install test dependencies
+        # 2026-11-03: this job installed bare `pytest`, while
+        # test_physical_invariants.py, test_physical_constraints.py and
+        # test_independent_and_robustness.py import numpy at module level. The
+        # job therefore died during collection (exit 2) rather than reporting a
+        # failed assertion; the same file passes 12/12 locally.
+        run: pip install -r requirements-ci.txt
 
       - name: Run paper-claims tests (Layer A + B)
         run: |

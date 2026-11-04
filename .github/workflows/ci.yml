@@ -1,15 +1,25 @@
 name: CI
 
+# 2026-11-03 fix. Before this, CI had been red since 2026-10-11 and had never
+# executed a single test: `cache-dependency-path: v0.3-prelim/requirements.txt`
+# named a file that exists on no branch, so actions/setup-python failed at its
+# cache-lookup step in both matrix arms and every step after it (pytest, t82)
+# was skipped. The following `pip install -e v0.3-prelim/` could not have
+# succeeded either - v0.3-prelim/ has no setup.py, pyproject.toml or setup.cfg,
+# so it is not an installable package. Only the py_compile lint job ever passed.
+# The triggers now include the active development branch, which no workflow used
+# to fire on: that branch had zero check-runs.
+
 on:
   push:
-    branches: [master]
+    branches: [master, wip/v19.2-F-init]
   pull_request:
-    branches: [master]
+    branches: [master, wip/v19.2-F-init]
   workflow_dispatch:
 
 jobs:
   test:
-    name: pytest + drift-guard (Python ${{ matrix.python-version }})
+    name: pytest + audits (Python ${{ matrix.python-version }})
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -26,27 +36,46 @@ jobs:
           python-version: ${{ matrix.python-version }}
           cache: pip
           cache-dependency-path: |
-            v0.3-prelim/requirements.txt
+            requirements-ci.txt
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          if [ -f v0.3-prelim/requirements.txt ]; then
-            pip install -r v0.3-prelim/requirements.txt
-          fi
-          # Install project itself (for module imports)
-          pip install -e v0.3-prelim/
+          pip install -r requirements-ci.txt
+          # No `pip install -e`: v0.3-prelim/ is not a package. Import paths for
+          # v0.3-prelim/code and scripts/ are set by v0.3-prelim/tests/conftest.py.
 
-      - name: Run pytest (with README-recommended ignores)
+      - name: Run pytest (same exclusions as scripts/verify_release_gate.py)
+        # The 15 --ignore exclusions and the -k filter are copied from the gate's
+        # pytest layer, so CI runs the same test population the local gate
+        # certifies: CI green and gate green then mean the same thing.
         run: |
-          python -m pytest v0.3-prelim/tests/ \
+          python -m pytest v0.3-prelim/tests/ -q --tb=short \
             --ignore=v0.3-prelim/tests/test_sparc_hierarchical.py \
             --ignore=v0.3-prelim/tests/test_t32_real_likelihood.py \
-            -v --tb=short
+            --ignore=v0.3-prelim/tests/test_phase42_summary.py \
+            --ignore=v0.3-prelim/tests/test_phase46_three_items.py \
+            --ignore=v0.3-prelim/tests/test_phase47_50.py \
+            --ignore=v0.3-prelim/tests/test_t120_4_joint_fit.py \
+            --ignore=v0.3-prelim/tests/test_t120_11_hidden_u1.py \
+            --ignore=v0.3-prelim/tests/test_t120_13_integration.py \
+            --ignore=v0.3-prelim/tests/test_t120_15_uv_slope.py \
+            --ignore=v0.3-prelim/tests/test_t87_inelastic_nucleon.py \
+            --ignore=v0.3-prelim/tests/test_t90_v60_naturalness.py \
+            --ignore=v0.3-prelim/tests/test_t82_audit_version_drift.py \
+            --ignore=v0.3-prelim/tests/test_phase7e_unit_conversion_audit.py \
+            --ignore=v0.3-prelim/tests/test_config_split_brain.py \
+            --ignore=v0.3-prelim/tests/test_paper_v19_regression.py \
+            -k "not T132 and not T131 and not T133 and not T134 and not T135 and not T220"
 
-      - name: Run drift-guard audit
-        run: |
-          python scripts/t82_audit.py
+      - name: Run claim audit
+        run: python scripts/audit_claims.py
+
+      - name: Run stale-claim audit (t82)
+        run: python scripts/t82_audit.py
+
+      - name: Run numerical drift guard
+        run: python scripts/drift_guard.py --strict
 
   lint:
     name: pre-commit py_compile
@@ -60,18 +89,11 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          if [ -f v0.3-prelim/requirements.txt ]; then
-            pip install -r v0.3-prelim/requirements.txt
-          fi
-
       - name: py_compile all Python source files
+        # Mirrors the project's pre-commit hook (.githooks/pre-commit): py_compile
+        # every .py under v0.3-prelim/, failing on SyntaxError or SyntaxWarning.
+        # This job needs no dependencies, so it installs none.
         run: |
-          # Mirror the project's pre-commit hook (per .githooks/pre-commit):
-          # py_compile each .py file under v0.3-prelim/code/ and v0.3-prelim/tests/
-          # Fail on any SyntaxError / SyntaxWarning.
           python -c "
           import py_compile, sys, pathlib, warnings
           warnings.simplefilter('error', SyntaxWarning)

@@ -51,11 +51,29 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 
-DEFAULT_DOCS = [
-    REPO / "v0.3-prelim" / "docs" / "PAPER_V1_DRAFT.md",
-    REPO / "docs" / "dual_review_5loop" / "SIDM_ROUND5_CONSOLIDATED_FIXES_v1.11_2026-10-26.md",
-    REPO / "docs" / "dual_review_5loop" / "SIDM_ROUND5_CHANGED_CODE_v1.9_2026-10-26.md",
-]
+DOCS_DIR = REPO / "docs" / "dual_review_5loop"
+
+
+def _resolve_default_docs():
+    """Select the deliverables numerically (the CG-19 pattern in scripts/doc_version.py).
+
+    This list used to hard-name v1.11 (report) and v1.9 (code appendix) — frozen
+    constants that named superseded documents, the same disease layers 8 and 9 had
+    before CG-19 fixed them. The 2026-11-03 consolidation also moved every
+    superseded version under superseded/, which a frozen path cannot follow.
+    Selection is by real version numbers, so it cannot drift again.
+    """
+    sys.path.insert(0, str(REPO / "scripts"))
+    from doc_version import latest
+    docs = [REPO / "v0.3-prelim" / "docs" / "PAPER_V1_DRAFT.md"]
+    for prefix in ("SIDM_ROUND5_CONSOLIDATED_FIXES_", "SIDM_ROUND5_CHANGED_CODE_"):
+        found = latest(DOCS_DIR, prefix) or latest(DOCS_DIR / "superseded", prefix)
+        if found is not None:
+            docs.append(found)
+    return docs
+
+
+DEFAULT_DOCS = _resolve_default_docs()
 
 
 def _is_separator(line: str) -> bool:
