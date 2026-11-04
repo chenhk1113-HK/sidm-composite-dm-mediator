@@ -94,22 +94,22 @@
       100000.0
     ]
   },
-  "module_defect_rho_sidm": {
-    "note": "gravothermal_yang2024.rho_sidm inverts the (r^beta+r_c^beta) factor and does not reduce to NFW at r_c=0; it disagrees with arXiv:2305.16176 eq. 2.1 by exactly (r/r_s)^2.",
+  "rho_sidm_source_agreement": {
+    "note": "gravothermal_yang2024.rho_sidm verified equal to arXiv:2305.16176 eq. 2.1; at r_c = 0 it reproduces NFW exactly. Fixed 2026-11-04; before that it was inverted by exactly (r/r_s)^2.",
     "rows": [
       {
         "r_kpc": 0.5,
         "nfw": 44081632.65306122,
         "paper_eq2.1": 44081632.65306122,
-        "module_rho_sidm": 1224489.795918367,
-        "module_over_nfw": 0.027777777777777776
+        "module_rho_sidm": 44081632.65306122,
+        "module_over_nfw": 1.0
       },
       {
         "r_kpc": 1.0,
         "nfw": 16875000.0,
         "paper_eq2.1": 16875000.0,
-        "module_rho_sidm": 1874999.9999999998,
-        "module_over_nfw": 0.11111111111111109
+        "module_rho_sidm": 16875000.0,
+        "module_over_nfw": 1.0
       },
       {
         "r_kpc": 3.0,
@@ -122,18 +122,18 @@
         "r_kpc": 10.0,
         "nfw": 159763.3136094674,
         "paper_eq2.1": 159763.3136094674,
-        "module_rho_sidm": 1775147.9289940833,
-        "module_over_nfw": 11.111111111111118
+        "module_rho_sidm": 159763.31360946747,
+        "module_over_nfw": 1.0000000000000004
       },
       {
         "r_kpc": 30.0,
         "nfw": 8264.462809917355,
         "paper_eq2.1": 8264.462809917355,
-        "module_rho_sidm": 826446.2809917355,
-        "module_over_nfw": 100.0
+        "module_rho_sidm": 8264.462809917355,
+        "module_over_nfw": 1.0
       }
     ],
-    "max_abs_module_over_nfw_minus_1": 99.0
+    "max_abs_module_over_paper_minus_1": 4.440892098500626e-16
   },
   "concentration_sensitivity": {
     "5.0": {
@@ -1091,7 +1091,7 @@
   },
   "caveats": [
     "The responsive profile IS sigma/m-responsive (see responsiveness block); the inert phase39 profile is bit-for-bit invariant.",
-    "gravothermal_yang2024.rho_sidm is inverted vs paper eq. 2.1; this module re-implements eq. 2.1 correctly and does not use the broken function.",
+    "gravothermal_yang2024.rho_sidm was inverted vs paper eq. 2.1 until 2026-11-04 (corrected; see the rho_sidm_source_agreement block) - this module re-implements eq. 2.1 independently and never called the broken form.",
     "Collapse time uses the BM2-calibrated normalisation, which the module's own comments note underestimates independent halos (e.g. Cosmo-501) by ~2.15x.",
     "sigma_eff/m is evaluated at one characteristic velocity, not MB-integrated.",
     "M_vir -> z_f -> t_evol uses a fixed concentration c=10; sensitivity reported.",

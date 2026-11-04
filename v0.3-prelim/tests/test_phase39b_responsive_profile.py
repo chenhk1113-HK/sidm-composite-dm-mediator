@@ -16,9 +16,10 @@ Duties, in order of importance:
 4. MONOTONIC PHYSICS on the core-forming branch: more self-interaction -> longer
    tau -> bigger core.
 
-5. DOCUMENTED MODULE DEFECT. ``gravothermal_yang2024.rho_sidm`` inverts the
-   (r^beta + r_c^beta) factor; its ratio to NFW at r_c = 0 is exactly (r/r_s)^2.
-   Pinned here so a future fix is visible. See the phase39b module docstring.
+5. FIXED MODULE DEFECT (2026-11-04). ``gravothermal_yang2024.rho_sidm`` used to invert the
+   (r^beta + r_c^beta) factor - its ratio to NFW at r_c = 0 was exactly (r/r_s)^2 - and is now
+   pinned to arXiv:2305.16176 eq. 2.1 by test_gravothermal_yang2024_rho_sidm_matches_paper_eq_2_1
+   plus tests/test_gravothermal_rho_sidm_source_form.py.
 
 6. CALIBRATION SANITY. collapse_time_calibrated_gyr reproduces the paper's BM2
    value (28.7 Gyr) and scales as 1/sigma.
@@ -109,17 +110,22 @@ def test_tau_is_capped_and_core_stays_within_the_model_range():
 
 # ------------------------------------------------------ duty 5: module defect
 
-def test_gravothermal_yang2024_rho_sidm_is_not_paper_eq_2_1():
-    """DOCUMENTED DEFECT, not a goal. The repo module inverts the
-    (r^beta + r_c^beta) factor; at r_c = 0 its ratio to NFW is (r/r_s)^2."""
+def test_gravothermal_yang2024_rho_sidm_matches_paper_eq_2_1():
+    """FIXED DEFECT (2026-11-04, decision D7). gravothermal_yang2024.rho_sidm used to carry the
+    (r^beta + r_c^beta) factor INVERTED - at r_c = 0 its ratio to NFW was exactly (r/r_s)^2 - which
+    this test pinned in the reverse direction until the module was corrected to arXiv:2305.16176
+    eq. 2.1. It now pins the CORRECT form, so reverting to the inverted profile fails here."""
     rho_s, r_s = 1e7, 3.0
-    nfw = m.rho_nfw(R_GRID, rho_s, r_s)
     module = np.array([gy.rho_sidm(float(r), rho_s, r_s, 0.0) for r in R_GRID])
-    ratio = module / nfw
-    np.testing.assert_allclose(ratio, (R_GRID / r_s) ** 2, rtol=1e-9)
-    # and it is NOT what the paper (and this module) implement
     paper_form = m.rho_yang2024(R_GRID, rho_s, r_s, 0.0)
-    assert np.max(np.abs(module / paper_form - 1.0)) > 0.5
+    np.testing.assert_allclose(module, paper_form, rtol=1e-12)
+    # and the module must equal NFW in the r_c = 0 limit the paper states
+    nfw = m.rho_nfw(R_GRID, rho_s, r_s)
+    np.testing.assert_allclose(module, nfw, rtol=1e-12)
+    # the old inverted signature must be ABSENT: its ratio to NFW was (r/r_s)^2, i.e. 100x at 30 kpc
+    # and 0.028x at 0.5 kpc, whereas the corrected profile is 1.0x at every radius
+    assert abs(module[-1] / nfw[-1] - 1.0) < 1e-9 and abs(module[-1] / nfw[-1] - 100.0) > 50
+    assert abs(module[0] / nfw[0] - 1.0) < 1e-9 and abs(module[0] / nfw[0] - 0.0277777778) > 0.5
 
 
 # ----------------------------------------------------- duty 6: calibration sanity

@@ -186,8 +186,24 @@ def collapse_time_calibrated_gyr(sigma_eff_per_m_cm2_per_g: float,
 
 # ====== EQUATION 2.3 — PARAMETER EVOLUTION (Yang+ 2024) ======
 
+# Hard ceiling on the eq. 2.3 / 2.4 fitting functions (measured 2026-11-04, not copied from the
+# paper): the polynomials stop being physical past tau ~ 1.3. At tau = 1.4, f_rs_over_rs0 = -0.0740 and
+# f_Vmax_over_Vmax0 = -2.9549 (a negative scale radius and a negative circular velocity), and
+# f_rho_s_over_rho_s0 has already exploded to 113. Evaluating these fits beyond ~1.3 returns
+# unphysical halos, so tau-dependent statements past that point are not physical statements.
+# Every producer in this repo clamps tau = min(t_evol/t_c, 1.0); keep it that way.
+TAU_FIT_RANGE_MAX = 1.3
+
+
+def tau_in_fit_range(tau: float) -> bool:
+    """True while the eq. 2.3/2.4 factors remain physical (0 <= tau <= TAU_FIT_RANGE_MAX)."""
+    return 0.0 <= tau <= TAU_FIT_RANGE_MAX
+
+
 def f_rho_s_over_rho_s0(tau: float) -> float:
-    """rho_s/rho_s,0 as function of dimensionless time tau = t/t_c (eq. 2.3)."""
+    """rho_s/rho_s,0 as function of dimensionless time tau = t/t_c (eq. 2.3).
+
+    Physical only for tau <= TAU_FIT_RANGE_MAX (see the constant above); unphysical beyond."""
     if tau < 0:
         return 1.0
     if tau == 0:
@@ -244,8 +260,30 @@ def f_Rmax_over_Rmax0(tau: float) -> float:
 def rho_sidm(r_kpc: float, rho_s: float, r_s: float, r_c: float) -> float:
     """SIDM density at radius r (Yang+ 2024 eq. 2.1).
 
-    rho_SIDM(r) = rho_s * [(r^beta + r_c^beta)/(r_s^beta + r_c^beta)]^(1/beta) * (r_s/(r+r_s))^2
+    rho_SIDM(r) = rho_s / { [ (r/r_s)^beta + (r_c/r_s)^beta ]^(1/beta) * (1 + r/r_s)^2 }
     with beta = 4.
+
+    Recovered from the source paper (docs/papers/verified/2305.16176_yang_parametric_2024.pdf,
+    eq. 2.1, p.3-4: "In the limit r_c -> 0, eq. (2.1) smoothly reduces to an NFW profile"), and
+    verified against that statement plus the two required limits:
+
+      r_c = 0        -> rho_s * (r_s/r) * (1 + r/r_s)^-2  = NFW, exactly
+      r -> 0, r_c>0  -> rho_s * (r_s/r_c)                 = flat core
+      r -> inf       -> rho_s * (r_s/r)^3 * (1 + r_c/r_s)^... -> NFW r^-3 tail
+
+    HISTORY (fixed 2026-11-04, [LocalIntegrity-Sweep-2026-11-04] F10): this function previously
+    computed rho_s * [(r^beta + r_c^beta)/(r_s^beta + r_c^beta)]^(1/beta) * (r_s/(r+r_s))^2, which
+    is the paper's factor INVERTED. It did not reduce to NFW at r_c = 0 — its ratio to NFW was
+    exactly (r/r_s)^2 (measured: 100x at r = 30 kpc with r_s = 3 kpc) and it made density *rise*
+    outward through the core. Every stored artifact of this repo predating the fix is unaffected
+    because the only callers are print-only diagnostics (verified by repo-wide grep):
+    scripts/recheck_cloud9_highsigma_20261103.py (core-density -> mean-free-path scan; writes no
+    JSON) and phase39b's cross-check report. gravothermal_yang2024's own predict_sidm_halo evolves
+    (rho_s, r_s, r_c, V_max, R_max) and never evaluates the profile, so no stored result JSON was
+    ever produced from the inverted form. The PRINTED optical-thickness conclusions of the
+    2026-11-03 Cloud-9 recheck WERE computed with the inverted profile and have been re-derived -
+    see docs/CLOUD9_HIGHSIGMA_TIMING_RECHECK_2026-11-03.md sec 3. The defect is pinned in the reverse direction by
+    tests/test_phase39b_responsive_profile.py::test_gravothermal_yang2024_rho_sidm_matches_paper_eq_2_1.
 
     Args:
         r_kpc: radius in kpc
@@ -257,12 +295,13 @@ def rho_sidm(r_kpc: float, rho_s: float, r_s: float, r_c: float) -> float:
         density in M_sun/kpc^3
     """
     if r_kpc <= 0:
-        # Limit r -> 0
-        return rho_s * (r_c / r_s) if r_c > 0 else rho_s
+        # Limit r -> 0: the (r^beta + r_c^beta)^(1/beta) factor freezes at r_c, so the profile
+        # is flat in the core with central density rho_s * r_s / r_c.
+        return rho_s * (r_s / r_c) if r_c > 0 else float("inf")
     r_pow_b = r_kpc**BETA
     rc_pow_b = r_c**BETA if r_c > 0 else 0.0
     rs_pow_b = r_s**BETA
-    inner_factor = ((r_pow_b + rc_pow_b) / (rs_pow_b + rc_pow_b)) ** (1.0/BETA)
+    inner_factor = ((r_pow_b + rc_pow_b) / rs_pow_b) ** (-1.0 / BETA)
     outer_factor = (r_s / (r_kpc + r_s)) ** 2
     return rho_s * inner_factor * outer_factor
 

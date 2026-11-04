@@ -46,7 +46,11 @@ for name, (M, vmax, r_s0) in cases.items():
         # Scan tau: r_c(tau), core density at r=r_c, mean free path
         tau_trans = None
         tau = 0.01
-        while tau <= 20.0:
+        # The eq. 2.3/2.4 fits go unphysical past tau ~ 1.3 (f_rs_over_rs0 and f_Vmax_over_Vmax0 turn
+        # NEGATIVE at tau = 1.4), so scanning to tau = 20 used to print meaningless tau* values.
+        # Scan only the range where the parametric model is physical. 2026-11-04.
+        TAU_MAX_SCAN = G.TAU_FIT_RANGE_MAX
+        while tau <= TAU_MAX_SCAN:
             rho_s = rho_s0 * G.f_rho_s_over_rho_s0(tau)
             r_c   = r_s0 * G.f_rc_over_rs0(tau)
             rho_core = G.rho_sidm(r_c, rho_s, r_s0 * G.f_rs_over_rs0(tau), r_c)
@@ -70,5 +74,6 @@ for name, (M, vmax, r_s0) in cases.items():
                   f" -> t*={tau_trans*t_c_cal:.1f} Gyr (cal) / {tau_trans*t_c_lit:.1f} Gyr (lit);"
                   f" within t_evol={t_evol:.1f} Gyr? {'YES' if tau_trans*t_c_cal < t_evol or tau_trans*t_c_lit < t_evol else 'no'}")
         else:
-            print(f"      never optically thick up to tau=20")
+            print(f"      never optically thick within the physical fit range (tau <= "
+                  f"{G.TAU_FIT_RANGE_MAX})")
     print()

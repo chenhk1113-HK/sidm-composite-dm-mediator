@@ -297,7 +297,7 @@ standing MAP and the auditor count are derived in this repo today (35 of 120 aud
 remaining 85 are still literal substring matches.
 
 
-## F10 — `gravothermal_yang2024.rho_sidm` is inverted relative to its cited equation  (MEASURED, OPEN → D7)
+## F10 — `gravothermal_yang2024.rho_sidm` was inverted relative to its cited equation  (FIXED 2026-11-04, D7 closed)
 
 **Measured.** The module computes `rho_s * [(r^b+r_c^b)/(r_s^b+r_c^b)]^(1/b) * (r_s/(r+r_s))^2`.
 arXiv:2305.16176 eq. 2.1 is `rho_s / [ ((r^b+r_c^b)^(1/b)/r_s) * (1+r/r_s)^2 ]`. Their ratio at
@@ -305,11 +305,39 @@ arXiv:2305.16176 eq. 2.1 is `rho_s / [ ((r^b+r_c^b)^(1/b)/r_s) * (1+r/r_s)^2 ]`.
 At `rho_s = 1e7`, `r_s = 3 kpc`: 0.028× NFW at 0.5 kpc, 1.0× at 3 kpc, 11.1× at 10 kpc, 100.0× at
 30 kpc — density *rising* outward and flattening to zero at the centre, the opposite of the model.
 
-**Why it matters.** `predict_sidm_halo()` uses this profile, and the Phase G1 "BM2 calibration
+**Why it mattered.** `predict_sidm_halo()` uses this profile, and the Phase G1 "BM2 calibration
 passing at 2.6% deviation" claim quoted in `v0.3-prelim/docs/PAPER_V1_DRAFT.md` (§"Quantitative
-anchor (Phase G1...)") rests on the same module. A fixed guard now exists
-(`test_gravothermal_yang2024_rho_sidm_is_not_paper_eq_2_1`) so the defect cannot be quietly quoted
-as validated.
+anchor (Phase G1...)") rests on the same module.
+
+**Fix applied (D7: fix and re-derive, not freeze).** The module now implements eq. 2.1 as written in
+the verified PDF `docs/papers/verified/2305.16176_yang_parametric_2024.pdf`. The old
+`test_gravothermal_yang2024_rho_sidm_is_not_paper_eq_2_1` guard was deleted along with the defect it
+pinned. Verification, all in `v0.3-prelim/tests/test_gravothermal_rho_sidm_source_form.py`:
+
+- module vs a third implementation typed from the PDF, over `r/r_s ∈ [0.167, 10]` × four
+  `r_c/r_s` values → `atol=1e-12, rtol=1e-12`;
+- `r_c = 0` reproduces `rho_nfw` exactly (the paper's stated limit);
+- deep core is flat with central density `rho_s·r_s/r_c`; far tail approaches the `r^-3` envelope;
+- module agrees with the independent `phase39b` implementation to 1e-12;
+- `rho_sidm_source_agreement_report()` is now computed at run time — max deviation
+  **4.44e-16** — and every producer (`phase39b`, `scripts/recheck_cloud9_highsigma_20261103.py`,
+  `gravothermal_yang2024.py` itself) refuses to run if the module drifts from the paper form again;
+- mutation test: reverting the function to the old inverted form fails **9** tests, and the file was
+  restored byte-identically (sha256 `d12dd9f7e482e90e…` before and after).
+
+**Independent numeric check.** `collapse_time_calibrated_gyr(7.1, 2.74e8, 0.141) = 28.700 Gyr`
+against the paper's BM2 value of 28.7 Gyr (0.01%), while the raw `collapse_time_gyr` gives 38.45 Gyr
+— i.e. the eq. 2.2 prefactor carries a factor ~0.746 relative to the paper's 150·C form and only the
+calibrated variant reproduces the paper's own halo. `predict_sidm_halo` uses the calibrated variant.
+
+**What the fix changed, measured.** `phase39b`'s own numbers are **unchanged** — it never called the
+broken function: rerunning the producer reproduces +369.1823988907054 / +400.0112543707105 /
++67.25455141364642 / +75.67946037494946 / 10.92109314509181 to the last digit, so F12 stands. What
+did change is everything routed **through the module**: the 2026-11-03 Cloud-9 optical-thickness
+recheck, whose conclusion reverses (F13), and `predict_sidm_halo`'s output profile shape, which the
+Cloud-9 timing numbers were built on. The Phase G1 "2.6%" sentence in `v0.3-prelim/docs/PAPER_V1_DRAFT.md`
+is **not** re-quoted as current here: it predates this fix and its status must be re-derived from the
+corrected profile before it is cited again.
 
 ## F11 — Three likelihood call sites that were silently dead  (FIXED)
 
@@ -341,6 +369,45 @@ Cause is physical, not numerical: canonical σ_eff ≈ 0.13–0.47 cm²/g at the
 collapse time ≫ the ~9 Gyr evolution time, so the model predicts mostly NFW-like halos here.
 
 
+## F13 — the Cloud-9 optical-thickness recheck was contaminated, and the eq. 2.3 fits have a hard ceiling  (FIXED)
+
+Two defects found while verifying F10's blast radius, both fixed.
+
+**(a) The 2026-11-03 recheck used the broken density.** `scripts/recheck_cloud9_highsigma_20261103.py`
+calls the module's `rho_sidm`, and `compute_tau_profile` evaluated `tau` out to **20** — past the
+point where the eq. 2.3 fits stop being physical. The reported crossing `tau* ≈ 1.4` (quoted in
+`CURRENT.md` and `docs/FINDINGS_FOR_FUTURE_DELIBERATION.md` as "optically thick ~3–3.5 Gyr after
+formation") is therefore not a measurement. Corrected values for the Cloud-9 anchor
+(`M200 = 5e9 Msun`, `V_max = 31.12 km/s`, `t_evol = 9.38 Gyr`, `sigma_eff/m = 174 cm²/g`,
+`sigma_peak/m = 4.545e5 cm²/g` from the canonical `sigma/m(v)` form with the causality cap):
+
+| τ | t_c (Gyr) | t_evol (Gyr) | r_c (kpc) | ρ(r_c) (Msun/kpc³) | λ (kpc) | λ/r_c |
+|---|---|---|---|---|---|---|
+| 0.01 | 868.59 | 8.69 | 0.218 | 6.961e+07 | 0.166 | 0.760 |
+| 0.10 | 93.77 | 9.38 | 0.237 | 7.015e+07 | 0.241 | 1.018 |
+| 0.30 | 31.26 | 9.38 | 0.277 | 7.126e+07 | 0.289 | 1.044 |
+| 1.00 | 9.38 | 9.38 | 0.410 | 7.559e+07 | 0.115 | 0.281 |
+
+So the halo is **thick over almost the whole describable window**, thin only marginally at
+τ ≈ 0.1–0.3, and never reaches a clean crossing. The "optically thin dwarf anchors" conclusion
+survives: σ ≈ 7 gives λ/r_c = 14.95 (Fornax) and 7.26 (Segue 1) at τ = 1.
+
+**(b) The eq. 2.3 / 2.4 fitting polynomials are valid only up to τ ≈ 1.3.** Measured:
+
+| τ | f_rho_s | f_r_s | f_rc/r_s0 | f_Vmax | f_Rmax |
+|---|---|---|---|---|---|
+| 1.00 | 7.2202 | 0.4547 | 0.1073 | 1.2097 | 0.4877 |
+| 1.20 | 26.5666 | 0.2386 | 0.0350 | 1.1587 | 0.2706 |
+| 1.40 | 112.8472 | **−0.0740** | 0.0313 | **−2.9549** | **−0.0024** |
+| 2.00 | 3683.10 | −1.7893 | 1.0461 | −456.49 | −1.3640 |
+
+A negative scale radius and a negative circular velocity are not halo properties. `TAU_FIT_RANGE_MAX = 1.3`
+and `tau_in_fit_range()` now encode the ceiling, `v0.3-prelim/tests/test_gravothermal_tau_fit_range.py`
+pins it (12 tests), and the recheck scans only to `G.TAU_FIT_RANGE_MAX` with `tau*` reported as
+`None` (no crossing) instead of a number. Producers clamp `tau = min(t_evol / t_c, 1.0)`, so this
+never fires in the fit path — but it does fire in hand-written analyses like the recheck, which is
+exactly how `tau* ≈ 1.4` got published in two docs.
+
 ## Decisions the owner has to make
 
 | # | decision | options | what changes |
@@ -349,8 +416,9 @@ collapse time ≫ the ~9 Gyr evolution time, so the model predicts mostly NFW-li
 | D2 | Phase 40 model-comparison scoring | penalise per model (AIC/BIC) or per dataset; how to treat UGC 02916-type outliers | which of `STRONG_SIDM` / `WEAK_NFW` survives in the docs |
 | D3 | Direct-detection constant 1e-24 vs 1.783e-24 | fix and re-run the canonical posterior (channel weight 0.5 in `t41`), or leave and keep the disclosure | certified posterior and every number derived from it |
 | D4 | Gate strictness | keep warn-only layers, or promote them to hard failures once the KB is complete | whether a green gate means anything |
-| D6 | Headline wording | "5 of 8 channel slots, 2 independent datasets", or merge the Horigome bins and re-fit | the front page claim |
-| D7 | `gravothermal_yang2024.rho_sidm` inversion | fix the equation and re-derive the Phase G1 BM2 calibration claim, or freeze the module as superseded and route everything through `phase39b` | the paper's Phase G1 quantitative anchor |
+|| D6 | Headline wording — **RESOLVED 2026-11-04 (wording, not a refit)** | `CURRENT.md` now states the count as 5 of 8 channels PASS *over 8 velocity slots drawn from 4 independent sources*, and names them from `OBS_PUBLISHED`: 5 Horigome+ 2025 bins (UFD v=3/5/7/10, dSph v=15), Cloud-9 v=28 (BLN24 / Ohana+ 2026), SPARC v=100 (Lelli+ 2016), Cluster v=500 (Randall+ 2008). The literal "5 of 8 channels PASS" is kept on purpose so `drift_guard.py::check_pass_count_in_doc` still checks it. Merging the bins and refitting was **not** done — that would change the canonical fit and needs an owner decision. | the front page claim |
+|| D7 | `gravothermal_yang2024.rho_sidm` inversion — **RESOLVED 2026-11-04 (fix + re-derive, not freeze)** | the module now matches arXiv:2305.16176 eq. 2.1, the paper's `r_c → 0` NFW limit, and an independent third implementation to 1e-12; run-time source-agreement guards replaced the defect-pinning guard; see F10 | the paper's Phase G1 quantitative anchor |
+|| D8 | Cloud-9 anchor credibility — **OPEN, owner decision** | (a) keep σ/m = 174 as the anchor and disclose that its gravothermal stage is inside the optically-thick regime the parametric model does not describe; (b) re-anchor on the dwarf/sample ceiling and move Cloud-9 to a caveat; (c) run a simulation-based chain for the Cloud-9 mass with the merger-history sample now on disk | whether the highest-σ anchor of the whole model is load-bearing or decorative |
 
 ## What this file does **not** establish
 

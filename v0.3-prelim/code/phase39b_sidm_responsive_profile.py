@@ -405,8 +405,16 @@ def responsiveness_report(r_grid=None, log_rho_s=7.0, log_r_s=0.5,
     }
 
 
-def rho_sidm_module_defect_report(rho_s=1e7, r_s=3.0) -> dict:
-    """Quantify gravothermal_yang2024.rho_sidm vs the paper's eq. 2.1."""
+def rho_sidm_source_agreement_report(rho_s=1e7, r_s=3.0) -> dict:
+    """Verify gravothermal_yang2024.rho_sidm against the paper's eq. 2.1 (raises on drift).
+
+    HISTORY: until 2026-11-04 this reported a DEFECT - the module's rho_sidm carried the
+    (r^beta + r_c^beta) factor INVERTED, so at r_c = 0 its ratio to NFW was exactly (r/r_s)^2
+    (0.028 at 0.5 kpc, 100.0 at 30.0 kpc for r_s = 3 kpc). The module was corrected to eq. 2.1 on
+    2026-11-04 ([LocalIntegrity-Sweep-2026-11-04] F10, decision D7). It now asserts agreement and
+    fails loudly if the module ever drifts back to the inverted form. The pre-fix artifact is kept
+    at data/results/superseded/phase39b_sidm_responsive_profile.pre_rhofix_2026-11-04.json.
+    """
     rows = []
     for r in (0.5, 1.0, 3.0, 10.0, 30.0):
         nfw = float(rho_nfw(r, rho_s, r_s))
@@ -414,13 +422,18 @@ def rho_sidm_module_defect_report(rho_s=1e7, r_s=3.0) -> dict:
         module = float(gy.rho_sidm(r, rho_s, r_s, 0.0))
         rows.append({"r_kpc": r, "nfw": nfw, "paper_eq2.1": correct,
                      "module_rho_sidm": module, "module_over_nfw": module / nfw})
-    worst = max(abs(row["module_over_nfw"] - 1.0) for row in rows)
+    worst = max(abs(row["module_rho_sidm"] / row["paper_eq2.1"] - 1.0) for row in rows)
+    if worst > 1e-9:
+        raise AssertionError(
+            "gravothermal_yang2024.rho_sidm no longer matches arXiv:2305.16176 eq. 2.1 "
+            f"(max relative deviation {worst:.3e}); the module drifted from the source form "
+            "(the pre-2026-11-04 variant was inverted by exactly (r/r_s)^2)")
     return {
-        "note": ("gravothermal_yang2024.rho_sidm inverts the (r^beta+r_c^beta) "
-                 "factor and does not reduce to NFW at r_c=0; it disagrees with "
-                 "arXiv:2305.16176 eq. 2.1 by exactly (r/r_s)^2."),
+        "note": ("gravothermal_yang2024.rho_sidm verified equal to arXiv:2305.16176 eq. 2.1; "
+                 "at r_c = 0 it reproduces NFW exactly. Fixed 2026-11-04; before that it was "
+                 "inverted by exactly (r/r_s)^2."),
         "rows": rows,
-        "max_abs_module_over_nfw_minus_1": worst,
+        "max_abs_module_over_paper_minus_1": worst,
     }
 
 
@@ -470,7 +483,7 @@ def main():
           f"{gy.collapse_time_SI_gyr(7.1, 2.74e8, 0.141):.3f} Gyr  "
           f"(literal 150*C, underestimates BM2 by ~1.82x)", flush=True)
 
-    defect = rho_sidm_module_defect_report()
+    defect = rho_sidm_source_agreement_report()
     print("\n[SANITY] gravothermal_yang2024.rho_sidm vs paper eq. 2.1 (r_c=0):", flush=True)
     for row in defect["rows"]:
         print(f"  r={row['r_kpc']:5.1f}  NFW={row['nfw']:11.4e}  "
@@ -649,14 +662,15 @@ def main():
                 resp["responsive_zeroed_peaks_max_abs_dV_kms"],
             "sigma_probe": resp["sigma_probe"],
         },
-        "module_defect_rho_sidm": defect,
+        "rho_sidm_source_agreement": defect,
         "concentration_sensitivity": conc_sens,
         "results": results,
         "caveats": [
             "The responsive profile IS sigma/m-responsive (see responsiveness block); "
             "the inert phase39 profile is bit-for-bit invariant.",
-            "gravothermal_yang2024.rho_sidm is inverted vs paper eq. 2.1; this module "
-            "re-implements eq. 2.1 correctly and does not use the broken function.",
+            "gravothermal_yang2024.rho_sidm was inverted vs paper eq. 2.1 until 2026-11-04 "
+            "(corrected; see the rho_sidm_source_agreement block) - this module re-implements "
+            "eq. 2.1 independently and never called the broken form.",
             "Collapse time uses the BM2-calibrated normalisation, which the module's "
             "own comments note underestimates independent halos (e.g. Cosmo-501) by ~2.15x.",
             "sigma_eff/m is evaluated at one characteristic velocity, not MB-integrated.",

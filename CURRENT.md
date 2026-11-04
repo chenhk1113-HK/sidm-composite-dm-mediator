@@ -35,15 +35,22 @@ now asserts the v0.8 MAP (478 GeV / 488 MeV / 0.81σ), so this line, the docs an
   three delegated misclassifications were caught and corrected.
 - **Two real code bugs fixed** (`c1ee215`, gate `81103b9`): `lookback_time_gyr` mis-transcribed Yang+
   eq. 3.2, and `evolution_time_gyr` returned 13.647 − t_L instead of t_L(z_f). τ was inflated ≈4.3× in
-  affected callers (Cloud-9 τ 17.4 → 4.2). Physical consequence: at σ ≈ 174 cm²/g the Cloud-9 core becomes
-  **optically thick (τ\* ≈ 1.4) at ~3-3.5 Gyr** after formation, which is exactly the regime Bosch &
-  Tokayer (2610.28890) and Gurian (2610.28745) warn about. Dwarf anchors (σ ≈ 7) stay optically thin.
+  affected callers (Cloud-9 τ 17.4 → 4.2). **Optical-thickness consequence CORRECTED 2026-11-04:** the number
+  first quoted here (optically thick at τ\* ≈ 1.4, ~3–3.5 Gyr after formation) came from `rho_sidm` while it
+  was still inverted relative to arXiv:2305.16176 eq. 2.1, and τ = 1.4 is past the ceiling of the eq. 2.3 fits
+  (`f_rs_over_rs0` goes negative at τ = 1.4). With the profile fixed (decision D7), Cloud-9 at σ ≈ 174 cm²/g is
+  optically thick across essentially the whole τ window the model can describe — λ/r_c = 0.76 at τ = 0.01 and
+  0.28 at the τ = 1 truncation, marginally thin (1.02–1.06) only in τ ≈ 0.1–0.3 — so the parametric t_c cannot
+  be quoted at face value for the Cloud-9 anchor. Dwarf anchors (σ ≈ 7) stay optically thin (λ/r_c = 7–15 at
+  τ = 1). Walkthrough: `docs/CLOUD9_HIGHSIGMA_TIMING_RECHECK_2026-11-03.md` §3 and §7.
 - **Stage 3 pending:** real-galaxy merger data is gated on the IllustrisTNG registration reply
   (application submitted); FIRE-2 and EAGLE-IC are the no-login fallbacks.
 
 **What did NOT change:** the canonical anchor **σ/m = 174 cm²/g @ 29.4 km/s** (Cloud-9 = M94 RELHIC); the
 joint galaxy-scale range 0.06–0.68 cm²/g; the baryon-coupling ceiling < 3 × 10⁻¹¹; the v19.2-E A.2 5-param
-best fit at **5 of 8 channels PASS** (2 marginal, 1 fail); and the honest headline — the project has **not**
+best fit at **5 of 8 channels PASS** (2 marginal, 1 fail) — a count over 8 velocity **slots** drawn from
+4 independent sources, 5 of them being velocity bins of a single Horigome+ 2025 dSph+UFD analysis (see
+`v0.3-prelim/code/T205_full_likelihood_published.py::OBS_PUBLISHED`); and the honest headline — the project has **not**
 proven that dark matter self-interacts and has **not** derived a working particle model from first
 principles (the v19.2-F Phase 3 FAIL below stands).
 
