@@ -19,6 +19,18 @@ This is a knowledge base for the v19.2-F project's paper references. It is organ
 
 ---
 
+## Verification levels (read this before trusting a `verified/` entry)
+
+- **Full-text verified** — PDF downloaded and the specific values quoted by this repo cross-checked
+  against the paper. These are the entries listed under "Verified papers (full text downloaded +
+  key values verified)" below.
+- **Abstract-level** — `Status:` line says `VERIFIED (arXiv metadata fetched …; title/authors/abstract
+  from arXiv export API)`. On 2026-11-04, 22 summaries for previously uncited arXiv IDs were added at
+  this level via `fetch_uncited_kb.sh`, plus 4 papers held in `to_verify/`. They are safe for
+  **citation coverage** (title, authors, scope) and **not** yet safe for quoting a number from them.
+  `scripts/check_fabrication.py` counts any `verified/` file as a verified ID, so the tool's label is
+  coarser than this KB's own levels — do not read "0 unverified citations" as "all values checked".
+
 ## Verified papers (full text downloaded + key values verified)
 
 **2026-10-27 — option-2 body-leaning set added** (14 papers; see registry §7.9). These are the
