@@ -68,11 +68,61 @@ def coarse_naturalness_from_percentiles(prior_lo_log, prior_hi_log,
     return prior_log_width / post_log_width
 
 
+# Production-scale thresholds for the T90.57 hybrid chain (10 dimensions).
+# A run below these cannot support a fine-tuning verdict, so the producer says so out loud
+# instead of returning numbers that look like verdicts.
+T90_57_NLIVE_MIN_PRODUCTION = 500
+T90_57_SAMPLES_MIN_PRODUCTION = 2000
+
+
 def analyze_t90_57():
-    """Naturalness for T90.57 hybrid (5-channel, KSFR-on, nlive=500)."""
-    fp = str(_RESULTS_DIR / 't90_v57_hybrid_5ch_joint_posterior.json')
+    """Naturalness for the T90.57 hybrid 5-channel posterior.
+
+    Run quality is READ FROM THE ARTIFACT, not assumed. The tracked
+    `t90_v57_hybrid_5ch_joint_posterior.json` is a smoke-scale run (nlive=50, ~237 samples,
+    wimpy_available=False, 1 of 3 channels satisfied at the median) — it has been that way
+    since commit c447e7b (2026-09-14), which replaced the nlive=500 / 4,959-sample production
+    run from ed72a35 (2026-09-11). The archived "mu_x EXTREME (N=19.7)" and "m_chi severe"
+    verdicts belong to that superseded production run. On a degraded chain the numbers below
+    are descriptors of an under-sampled posterior, NOT fine-tuning verdicts; `run_quality`
+    and `verdict_scope` carry that boundary so no consumer can drop it.
+    """
+    fp = _RESULTS_DIR / 't90_v57_hybrid_5ch_joint_posterior.json'
     with open(fp) as f:
         d = json.load(f)
+
+    nlive = d.get('nlive')
+    n_samples = d.get('n_samples')
+    wimpy_available = d.get('wimpy_available')
+    channels = d.get('channel_satisfaction_at_median')
+    reasons: list[str] = []
+    if isinstance(nlive, int) and nlive < T90_57_NLIVE_MIN_PRODUCTION:
+        reasons.append(f"nlive={nlive} < production minimum {T90_57_NLIVE_MIN_PRODUCTION}")
+    if isinstance(n_samples, int) and n_samples < T90_57_SAMPLES_MIN_PRODUCTION:
+        reasons.append(f"n_samples={n_samples} < production minimum {T90_57_SAMPLES_MIN_PRODUCTION}")
+    if wimpy_available is False:
+        reasons.append("wimpy_available=False (the WIMpy likelihood arm fell back)")
+    if isinstance(channels, dict) and isinstance(channels.get('n_satisfied_3ch'), int):
+        if channels['n_satisfied_3ch'] < 3:
+            reasons.append(
+                f"only {channels['n_satisfied_3ch']} of 3 channels satisfied at the median"
+            )
+    run_quality = {
+        'artifact': fp.name,
+        'framework_in_artifact': d.get('framework'),
+        'nlive': nlive,
+        'n_samples': n_samples,
+        'ndim': d.get('ndim'),
+        'wall_seconds': d.get('wall_seconds'),
+        'wimpy_available': wimpy_available,
+        'channel_satisfaction_at_median': channels,
+        'degraded_run': bool(reasons),
+        'degraded_reasons': reasons,
+        'production_thresholds': {
+            'nlive_min': T90_57_NLIVE_MIN_PRODUCTION,
+            'samples_min': T90_57_SAMPLES_MIN_PRODUCTION,
+        },
+    }
 
     # Priors for the T90.57 hybrid (from t90_v57_hybrid_ksfr.py)
     priors = {
@@ -124,12 +174,29 @@ def analyze_t90_57():
             ),
         })
 
+    label_claimed_nlive_500 = 'nlive=500' in str(run_quality['framework_in_artifact'] or '')
     return {
-        'framework': 'T90.57 hybrid (KSFR-on, nlive=500)',
+        'framework': d.get('framework', 'T90.57 hybrid 5-channel'),
+        'framework_label_note': (
+            "This producer used to hard-code 'T90.57 hybrid (KSFR-on, nlive=500)' regardless of "
+            "what the artifact actually said. The label now comes from the artifact itself."
+        ),
+        'label_matches_artifact': (
+            'nlive=500' not in str(d.get('framework', '')) or label_claimed_nlive_500
+        ),
         'log_Z': d['log_Z'],
         'log_Z_err': d['log_Z_err'],
         'n_samples': d['n_samples'],
         'naturalness_results': results,
+        'run_quality': run_quality,
+        'verdict_scope': (
+            "Naturalness verdicts from this posterior are NOT supportable while "
+            f"degraded_run={run_quality['degraded_run']}: "
+            + ("; ".join(run_quality['degraded_reasons']) if run_quality['degraded_reasons']
+               else "run meets the production thresholds")
+            + ". The coarse measure is prior_width / posterior_width, and an under-sampled chain "
+            "inflates posterior width, which biases N DOWNWARD (toward 'mild'), never upward."
+        ),
         'method': (
             'coarse proxy: log10(prior_width) / log10(posterior_p84/p16). '
             'Proportional to Barbieri-Giudice within O(1) for log-flat priors. '
@@ -138,11 +205,31 @@ def analyze_t90_57():
     }
 
 
+T41_NLIVE_MIN_PRODUCTION = 2000
+
+
 def analyze_t41_v08():
-    """Naturalness for T41 v0.8 (nlive=2000, with Euclid)."""
+    """Naturalness for T41 v0.8 (nlive=2000, with Euclid).
+
+    The nlive=2000 claim is checked against the artifact's own `t41_version` block rather than
+    taken from the filename.
+    """
     fp = str(_RESULTS_DIR / 't41_mediator_mass_joint_fit_t88ce_v08_with_euclid_lensing_and_subhalo_forecast_nlive2000.json')
     with open(fp) as f:
         d = json.load(f)
+
+    tv = d.get('t41_version') or {}
+    t41_nlive = tv.get('nlive')
+    run_quality = {
+        'artifact': Path(fp).name,
+        'nlive': t41_nlive,
+        'ndim': d.get('ndim') or tv.get('ndim'),
+        'dlogz': tv.get('dlogz'),
+        'wall_seconds': d.get('wall_seconds'),
+        'nlive_claim_matches_artifact': t41_nlive == T41_NLIVE_MIN_PRODUCTION,
+        'degraded_run': bool(isinstance(t41_nlive, int) and t41_nlive < T41_NLIVE_MIN_PRODUCTION),
+        'production_thresholds': {'nlive_min': T41_NLIVE_MIN_PRODUCTION},
+    }
 
     # Priors for T41 v0.8 (from JSON 'priors' key)
     priors = {p: tuple(d['priors'][p]) for p in d['priors']}
@@ -178,6 +265,7 @@ def analyze_t41_v08():
         'log_Z': d['log_Z'],
         'n_parameters': len(priors),
         'naturalness_results': results,
+        'run_quality': run_quality,
         'method': 'coarse proxy as above',
     }
 

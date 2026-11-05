@@ -57,6 +57,22 @@ now asserts the v0.8 MAP (478 GeV / 488 MeV / 0.81σ), so this line, the docs an
   Measured alongside it: the 25 anchor halos (4–6e9 M☉, 9,019–12,781 DM particles) are **not** quiescent
   — 0 of 25 have no merger after z = 1, median last merger z = 0.074 — so they are the wrong analogue for
   a "Cloud-9 quiescent" Phase G2 label; the ~9e8 M☉ tier (quiet fraction 0.267) is the closer one.
+- **D9 round 1 done (2026-11-05):** retired stale expectations and repaired references —
+  Phase 7e unit audit now reports corrected (~1.02) and reconstructed historical (~365.25x)
+  values separately (F19-adjacent, finding in the integrity report); T87 pins `1.3181e-75` and
+  marks `4.8135e-73` superseded; the T82 version-drift test was retargeted to the current
+  auditor wording; the paper's orphaned reference slot `[29]` was restored with an explicit
+  "currently NOT cited" disclosure; and `v0.3-prelim/code/config.py` was re-frozen from the
+  canonical root config after an AST surface comparison found four lost KISS constants (F19).
+  T90 naturalness was re-derived from its own artifact instead of from archived verdicts (F20).
+  **Remaining in D9:** the `test_t120_4/11/13/15` family (21 failures) and the CI ignore-list →
+  explicit-marker conversion.
+- **T90 naturalness is NOT currently a verdict (open decision D10, 2026-11-05):** the tracked
+  `t90_v57_hybrid_5ch_joint_posterior.json` is a 50-live, 237-sample chain (it has been since
+  `c447e7b`, 2026-09-14). It measures μ_χ N=1.46 and m_χ N=1.30 ("mild"); the archived "extreme
+  (N=19.7)" came from the nlive=500 run the repo no longer holds. Under-sampling biases
+  naturalness **downward**, so neither reading is supportable today. Either re-run at
+  production scale or retire the claim. Evidence: integrity report finding F20.
 - **Gate coverage limit made explicit (open decision D9, 2026-11-05):** running the whole
   `v0.3-prelim/tests` directory instead of the gate's selected subset found **45 failing tests in the 12
   gate-ignored files** at `b0834fe`. Two were mechanical and are fixed (`code/t90_v60_naturalness.py` read

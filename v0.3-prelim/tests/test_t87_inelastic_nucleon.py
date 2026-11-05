@@ -108,18 +108,35 @@ def test_v_min_endothermic_threshold():
     assert rel_err < 1e-3, f"v_min(E_R=0) mismatch: {v_min:.2f} vs {expected:.2f}"
 
 
-# Test 5: LZ event rate at v0.7 MAP is consistent with smoke test
+# Test 5: LZ event rate at v0.7 MAP (post-fix value; the pre-fix smoke value is pinned as superseded)
 def test_lz_event_rate_v07_MAP_smoke():
-    """N_events at v0.7 MAP with δ=297 keV should be ≈ 4.8e-73 (smoke test)."""
+    """N_events at v0.7 MAP with δ=297 keV is ≈1.32e-75 after the N_T unit fix.
+
+    History: the original smoke test reported 4.8135e-73. That value was produced by the
+    N_T unit bug in t87_lz_event_rate.py (DAYS_PER_YEAR folded into the target-nucleus count,
+    a constant 365.25x factor) and is SUPERSEDED. The ratio of the superseded value to the
+    current one is 365.24, i.e. exactly the documented bug factor, so this test pins both:
+    the corrected value and the reconstruction that reproduces the historical figure.
+    """
     res = t87rate.N_events_in_lz_window(
         delta_keV=297.0,
         form_factor_ansatz="gaussian",
     )
     N_target = res["N_events_at_target"]
-    # Smoke test reported N_target = 4.8135e-73; allow 50% tolerance (integration noise)
-    expected_N = 4.8135e-73
-    rel_err = abs(N_target - expected_N) / expected_N if expected_N > 0 else 0
-    assert rel_err < 0.5, f"N_events mismatch: {N_target:.4e} vs {expected_N:.4e}"
+
+    # 1. Corrected (current production) value.
+    corrected = 1.3181e-75
+    rel_err = abs(N_target - corrected) / corrected
+    assert rel_err < 0.02, f"N_events mismatch: {N_target:.4e} vs corrected {corrected:.4e}"
+
+    # 2. The superseded pre-fix smoke value must be exactly the 365.25x reconstruction.
+    superseded = 4.8135e-73
+    reconstructed = N_target * 365.25
+    rel_err_old = abs(reconstructed - superseded) / superseded
+    assert rel_err_old < 0.001, (
+        f"superseded smoke value {superseded:.4e} should equal corrected x 365.25 "
+        f"= {reconstructed:.4e} (mismatch {rel_err_old:.2%})"
+    )
 
 
 # Test 6: Verdict classification

@@ -49,20 +49,76 @@ def test_t90_57_returns_10_params():
 
 
 def test_t90_57_mu_x_extreme():
-    """T90.57 μ_χ should be flagged as extreme fine-tuning."""
+    """T90.57 μ_χ: the archived "extreme (N≈19.7)" verdict is SUPERSEDED, and the current
+    posterior is too degraded to replace it. Pinned as a measured-state + degraded-run guard.
+
+    Evidence (git history of the artifact):
+      ed72a35 / d4c5596 (2026-09-11): nlive=500, 4,820-4,959 samples -> μ_χ p16/p84 = -7.685/-7.127
+        = 0.558 dex against an 11 dex prior -> N = 19.7 ("EXTREME"). This is the archived claim.
+      c447e7b (2026-09-14) and every revision since: nlive=50, ~230 samples -> μ_χ posterior
+        spans ~7.53 dex -> N = 1.46 ("mild").
+    So the tracked artifact cannot support either verdict direction: an under-sampled chain
+    inflates posterior width, which biases N downward. This test therefore pins (a) the current
+    measured numbers, (b) the producer's degraded-run flag, and (c) the direction of the bias.
+    Settling μ_χ fine-tuning requires re-running T90.57 at production scale (decision D10).
+    """
     res = analyze_t90_57()
     mu_x = next(r for r in res['naturalness_results'] if r['parameter'] == 'log_mu_x')
-    # Per the 2026-09-11 production run: posterior ~0.55 dex wide,
-    # prior 11 dex wide → N ≈ 20 (extreme)
-    assert mu_x['naturalness_N'] > 10, f"μ_χ naturalness = {mu_x['naturalness_N']}, expected >10"
-    assert mu_x['fine_tuning_level'] == 'extreme'
+
+    measured_N = 1.4614
+    assert abs(mu_x['naturalness_N'] - measured_N) / measured_N < 0.02, (
+        f"μ_χ naturalness moved to {mu_x['naturalness_N']}; re-derive before pinning it"
+    )
+    assert mu_x['fine_tuning_level'] == 'mild'
+
+    prior_lo, prior_hi = mu_x['prior_range_log10']
+    assert (prior_lo, prior_hi) == (-15.0, -4.0), "μ_χ prior changed"
+    p16, _p50, p84 = mu_x['posterior_16_50_84_log']
+    post_width = p84 - p16
+    assert 7.0 < post_width < 8.0, f"μ_χ posterior width = {post_width:.3f} dex"
+    assert abs((prior_hi - prior_lo) / post_width - mu_x['naturalness_N']) < 1e-9
+
+    rq = res['run_quality']
+    assert rq['degraded_run'] is True, f"degraded flag lost: {rq}"
+    assert rq['nlive'] == 50 and rq['n_samples'] < 2000
+    assert any('nlive' in r for r in rq['degraded_reasons'])
+    assert 'NOT supportable' in res['verdict_scope']
 
 
 def test_t90_57_m_chi_severe():
-    """T90.57 m_χ should be flagged as severe fine-tuning."""
+    """T90.57 m_χ: archived "severe" verdict came from the nlive=500 run; the tracked artifact
+    measures N = 1.298 ('mild') on a 50-live chain. Pinned with the degraded-run guard."""
     res = analyze_t90_57()
     m_chi = next(r for r in res['naturalness_results'] if r['parameter'] == 'log_m_chi_GeV')
-    assert m_chi['fine_tuning_level'] in ['moderate', 'severe']
+
+    measured_N = 1.2984
+    assert abs(m_chi['naturalness_N'] - measured_N) / measured_N < 0.02, (
+        f"m_χ naturalness moved to {m_chi['naturalness_N']}; re-derive before pinning it"
+    )
+    # NOT 'severe' on this chain. The archived 'severe (~3.6)' belongs to ed72a35's run.
+    assert m_chi['fine_tuning_level'] == 'mild'
+    assert res['run_quality']['degraded_run'] is True
+
+    # The producer must not dress a degraded chain up as a production run.
+    assert 'nlive=500' not in res['framework'], (
+        f"framework label claims production scale: {res['framework']}"
+    )
+    assert res['label_matches_artifact'] is True
+
+
+def test_t90_57_run_quality_is_read_not_assumed():
+    """Guard: run-quality metadata must come from the artifact, and g_chi_B (the one
+    strongly-constrained parameter) must still be flagged extreme on this chain."""
+    res = analyze_t90_57()
+    rq = res['run_quality']
+    assert rq['framework_in_artifact'].startswith('T90.57 hybrid 10D')
+    assert rq['production_thresholds'] == {'nlive_min': 500, 'samples_min': 2000}
+    g_chi_b = next(r for r in res['naturalness_results'] if r['parameter'] == 'g_chi_B')
+    assert g_chi_b['fine_tuning_level'] == 'extreme'
+    assert abs(g_chi_b['naturalness_N'] - 8.644) < 0.01
+    # μ_χ MAP also moved between the two runs: archived 10^-7.37, current 10^-8.39.
+    mu_x = next(r for r in res['naturalness_results'] if r['parameter'] == 'log_mu_x')
+    assert -8.6 < mu_x['posterior_16_50_84_log'][1] < -8.0
 
 
 def test_t41_v08_returns_6_params():
@@ -77,6 +133,16 @@ def test_t41_v08_epsilon_moderate():
     eps = next(r for r in res['naturalness_results'] if r['parameter'] == 'log_epsilon')
     # Per production: posterior ~32 dex wide, prior 59 dex wide → N ≈ 1.86 (moderate)
     assert 1.0 < eps['naturalness_N'] < 3.0, f"ε naturalness = {eps['naturalness_N']}"
+
+
+def test_t41_v08_nlive_claim_is_verifiable_from_the_artifact():
+    """The 'nlive=2000' label must be backed by the artifact's own t41_version block, not the filename."""
+    res = analyze_t41_v08()
+    rq = res['run_quality']
+    assert rq['nlive'] == 2000, f"T41 artifact does not declare nlive=2000: {rq}"
+    assert rq['nlive_claim_matches_artifact'] is True
+    assert rq['degraded_run'] is False
+    assert 'nlive=2000' in res['framework']
 
 
 def test_output_file_written():

@@ -598,3 +598,105 @@ References updated in `CURRENT.md`, `CHANGELOG.md` and the three `test_phase42/4
 suites. Guard: `v0.3-prelim/tests/test_integrity_finding_ids_unique.py` fails if any finding ID
 in this file is used by more than one heading, or if a `finding Fxx` reference resolves to a
 heading that does not exist.
+
+
+## F19 — config.py split-brain, and a frozen snapshot that had lost constants (FIXED 2026-11-05)
+
+**What the new guard found.** Replacing the byte-equality test in
+`v0.3-prelim/tests/test_config_split_brain.py` with an AST comparison of module-level code
+surfaced a real defect that the old test could not see. The project-root `config.py` is the live
+canonical file and `v0.3-prelim/code/config.py` is a documented FROZEN SNAPSHOT (kept because some
+scripts do `sys.path.insert(0, ".../v0.3-prelim/code"); import config`). The canonical file gained
+four constants that the snapshot never received:
+
+- `KISS_SIDM_CANONICAL_N = 10000`
+- `KISS_SIDM_DEFAULT_TIMEOUT_S = 3600`
+- `KISS_SIDM_DEFAULT_T_END_GYR = 10.0`
+- `KISS_SIDM_DEFAULT_SIGMA_M_CM2_PER_G = 50.0`
+
+plus the matching `__all__` entries. Any script that resolved the snapshot instead of the canonical
+file silently got a config module without those names. No Python consumer in the repository reads
+them today (only `config.py` defines them; they parameterise the KiSS-SIDM Julia worker), so this was
+a latent break rather than an active one.
+
+**Fix applied.** The snapshot was re-frozen from the canonical body on 2026-11-05 by
+`cache/scratch/d9_refreeze_config_snapshot.py`: the snapshot keeps its own header (freeze date
+updated to "canonical as of 2026-11-05") and its code body is replaced by the canonical code body.
+The script refuses to write unless the snapshot defines no module-level name that the canonical file
+lacks, and re-verifies after writing (`missing_after=[]`, `extra_after=[]`, snapshot 18,829 B against
+canonical 17,639 B). Backup: `v0.3-prelim/code/config.py.bak.20261105_pre_refreeze` and
+`cache/scratch/config_snapshot.pre_refreeze.py`.
+
+**The WSL scratch config.** `test_config_split_brain.py` used to assert that
+`/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/code/config.py` was byte-identical to the
+Windows copy. It is not, and never will be: that path is a separate git work tree
+(`9a8c8ef chore: WSL work-tree initialised at /home/lamkuenai/sidm-composite-dm-mediator for
+KiSS-SIDM Julia worker convenience`), last touched **2026-09-07**, holding a 13,686 B older-generation
+config against the canonical 17,639 B. Byte identity was the wrong invariant, so it was replaced:
+the snapshot-vs-canonical comparison above, plus a test that the WSL scratch config still exists,
+still parses, and that its divergence is written down here. **Status: STALE, not deleted, not
+synced.** If the KiSS-SIDM Julia worker is used again, re-sync that work tree from the canonical
+config first — it predates the `KISS_SIDM_*` constants it is supposed to parameterise.
+
+## D9 round 1 — items resolved 2026-11-05 (mechanical and disclosure fixes, no physics loosened)
+
+**Relationship to the F18 table above:** those rows record the state found during triage. The rows
+below record what was actually done about them on 2026-11-05 and supersede them for the six items
+listed. The remaining t120-family and naturalness rows are still open.
+
+| Item | Before | After |
+| --- | --- | --- |
+| `test_phase7e_unit_conversion_audit.py` | 2 failures: the audit called the production function for its "buggy" column and got `1.02`, because the `365.25x` `N_T` unit bug was already fixed in production | The audit now states its own semantics: `N_buggy` is a **reconstruction** (`N_correct x 365.25`, using the measured `N_T_buggy / N_T_correct` factor), `N_production_today` is the live value, and the residual production-vs-audit difference (**2.02%**, median ratio 1.0202) is disclosed in both the printed report and the JSON as a separate, still-open implementation discrepancy. Artifact regenerated. 10 passed. |
+| `test_t87_inelastic_nucleon.py` | expected `4.8135e-73`, producer computes `1.3181e-75` | Resolved as a superseded-value problem, not a mystery factor: the old smoke value is the pre-fix value, and `1.3181e-75 x 365.25 = 4.8144e-73`, which reproduces `4.8135e-73` to **0.018%**. The test now pins the corrected value (2% tolerance) AND the reconstruction (0.1% tolerance). Producer strings in `t87_lz_event_rate.py` and `phase7a_composite_mediator_v03_map.py` that still quoted `~4.8e-73` were corrected to `~1.3e-75` with the supersession note. The channel verdict ("does not explain the LZ event") is unchanged; both values are far below 1. |
+| `test_t82_audit_version_drift.py` | 2 failures: expected the auditor literals `VERSION = '...' matches canonical` and `does NOT match canonical` | Retargeted to the auditor's actual wording (`standing version: '...' found`, `VERSION starts with '...'`, and on injected drift `does NOT start with canonical '<x>' — drift!`). The guard still fails closed: with `CANONICAL_STANDING_VERSION` monkey-patched, `main()` returns 1 and prints `DRIFT DETECTED`. |
+| `test_paper_v19_regression.py` | 1 failure: expected refs `[28]` and `[29]` | The paper's numbered list genuinely had a **gap**: it jumped `[28] -> [30]`, with `[28]` marked "Same paper as [7]". `[29]` (X. Chu, T. Hambye, M. H. G. Tytgat, "Four Basic Ways of Creating Dark Matter Through a Portal," JCAP 05 (2012) 034; arXiv:1112.0493, KB record `docs/papers/to_verify/1112.0493_chu_hambye_tytgat_2012.md`) was restored to the list with an explicit on-page disclosure that it is **currently not cited in the body**. The test now pins that disclosure marker. |
+| `test_config_split_brain.py` | 1 failure: WSL copy != Windows copy | See finding F19 above. |
+## F20 — T90 naturalness verdicts resting on a smoke-scale chain, and a producer that labelled it nlive=500 (FIXED 2026-11-05)
+
+`v0.3-prelim/code/t90_v60_naturalness.py::analyze_t90_57()` read
+`data/results/t90_v57_hybrid_5ch_joint_posterior.json` and returned a hard-coded label
+`'T90.57 hybrid (KSFR-on, nlive=500)'`. The artifact is not nlive=500. Its own fields say
+`nlive: 50`, `n_samples: 237`, `ndim: 10`, `wall_seconds: 82`, `wimpy_available: false`,
+`channel_satisfaction_at_median: 1 of 3`.
+
+**Git history of that artifact (measured, per revision):**
+
+| commit | date | nlive | n_samples |
+|---|---|---|---|
+| `ed72a35`, `d4c5596` | 2026-09-11 | 500 | 4,959 / 4,820 |
+| `c447e7b` ("update T90.51-T90.57 posterior results") | 2026-09-14 | 50 | 235 |
+| `ffd3d1d` ("v40.63 restore"), HEAD | 2026-10-22 onward | 50 | 237 |
+
+So the archived T90 naturalness claims (μ_χ **EXTREME**, N = 19.72; m_χ **severe**, ~3.6;
+μ_χ MAP 10^-7.37) came from the 2026-09-11 production run that the repo no longer holds. The
+tracked chain, on a 10-dimensional parameter space with 50 live points, measures μ_χ N = 1.46
+(mild), m_χ N = 1.30 (mild), μ_χ MAP 10^-8.39, and only `g_chi_B` (N = 8.64) stays extreme.
+
+**Why neither side is currently supportable:** the naturalness measure here is
+`prior_width / posterior_width`. An under-sampled chain inflates the posterior width, which
+biases N **downward** toward "mild". So the current "no fine-tuning problem" reading is an
+artifact of the sampling, not evidence. The archived "extreme" reading is evidence from a run
+that is no longer reproducible from the repo.
+
+**Fix applied (no physics retuned):**
+
+- The producer now reads run quality from the artifact and publishes `run_quality` (nlive,
+  n_samples, ndim, wall_seconds, wimpy_available, channels satisfied, `degraded_run`,
+  `degraded_reasons`, thresholds `nlive_min=500`, `samples_min=2000`) and a `verdict_scope`
+  string stating the verdicts are not supportable while degraded.
+- The framework label now comes from the artifact instead of being hard-coded.
+- `analyze_t41_v08()` got the same treatment in the passing direction: its `nlive=2000` claim
+  is checked against the artifact's own `t41_version.nlive` (verified 2000, dlogz 0.1, ndim 6),
+  so a T41 claim cannot drift out of sync with its chain silently.
+- `v0.3-prelim/tests/test_t90_v60_naturalness.py`: the `mu_x_extreme` and `m_chi_severe` tests
+  were retargeted to pin the measured values, require `degraded_run=True`, and pin the
+  downward-bias direction. Two new tests pin the artifact-derived label and the T41 nlive
+  consistency. 13 passed.
+- Mutation test: lowering `T90_57_NLIVE_MIN_PRODUCTION` from 500 to 50 (which would make the
+  smoke run look production-grade) failed 2 tests as intended; the file was restored
+  byte-identically and 13/13 passed after restore.
+
+**Open decision D10:** re-run T90.57 at production scale (the 2026-09-11 run took ~1,718 s at
+nlive=500 with WIMpy installed) or formally retire the T90-chain naturalness claims. Until one
+happens, `CURRENT.md` must not present T90 naturalness as a verdict.
+

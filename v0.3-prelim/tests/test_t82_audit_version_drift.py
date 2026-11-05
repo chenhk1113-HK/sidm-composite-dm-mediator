@@ -60,8 +60,11 @@ class TestNoDriftState:
             f"Script output:\n{out}"
         )
         assert "ALL CLEAR" in out
-        # Specifically check VERSION drift-guard passed (current canonical = "0.4-prelim+T88E")
-        assert "VERSION = '0.4-prelim+T88E' matches canonical" in out
+        # Auditor wording (2026-11-05): the standing-version presence check and the
+        # prefix drift-guard line. The older literal "VERSION = '...' matches canonical"
+        # was replaced by these two lines in scripts/t82_audit.py.
+        assert "standing version: '0.4-prelim+T88E' found" in out
+        assert "VERSION starts with '0.4-prelim+T88E'" in out
 
     def test_total_check_count_at_least_85(self):
         # Was >= 32 (with the original 10 README checks; pre-T86.7).
@@ -157,8 +160,11 @@ class TestDriftDetection:
             f"Script output:\n{out}"
         )
         assert "DRIFT DETECTED" in out
-        # The VERSION section should report drift
-        assert "does NOT match canonical" in out
+        # The VERSION section should report drift. Auditor wording (scripts/t82_audit.py:356-358)
+        # is a PREFIX-match message: "does NOT start with canonical '<x>' — drift!".
+        # The older literal "does NOT match canonical" was replaced by that line.
+        assert "does NOT start with canonical '0.5-prelim+fakecanonical'" in out
+        assert "— drift!" in out
 
     def test_stale_canonical_caught_by_audit(self):
         # Simulate: someone forgot to bump canonical after publishing

@@ -393,8 +393,9 @@ def main():
             "At v0.7 MAP (m_chi=770 GeV, m_phi=453 MeV, epsilon~1.12e-37, "
             "alpha_X~6.84e-17), the composite-DM inelastic sigma_DM-nucleon at "
             "248 keV is ~1.15e-117 cm^2 (gaussian F^2). The predicted event "
-            "rate at LZ is ~4.8e-73 in 2.84 tonne-years, 71+ orders of "
-            "magnitude below the 1 event observed. The dominant suppression "
+            "rate at LZ is ~1.3e-75 in 2.84 tonne-years, 74+ orders of "
+            "magnitude below the 1 event observed (the pre-fix value 4.8135e-73 was "
+            "365.25x too high and is superseded). The dominant suppression "
             "is epsilon^2 (kinetic mixing in the freeze-in regime). The "
             "model is a valid SIDM candidate but cannot claim the LZ event."
         ),

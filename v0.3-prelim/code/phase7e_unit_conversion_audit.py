@@ -151,31 +151,41 @@ def main():
     print("AUDIT 1: T87 v0.7 MAP reference (m_chi=770, m_phi=453, eps=1.12e-37, alpha=6.84e-17)")
     print("=" * 78)
     print()
-    print(f"{'delta (keV)':>12} | {'T87 buggy N_pred':>20} | {'Corrected N_pred':>20} | {'ratio (bug/correct)':>20}")
+    print(f"{'delta (keV)':>12} | {'T87 buggy (recon.)':>20} | {'Corrected N_pred':>20} | {'ratio (bug/correct)':>20}")
     print("-" * 90)
+    # The production N_T unit bug (t87_lz_event_rate.py:243, DAYS_PER_YEAR inside the
+    # target-count) was FIXED, so calling the production function no longer reproduces the
+    # historical 365.25x error. The "buggy" column is therefore a RECONSTRUCTION: the corrected
+    # audit value multiplied by the measured N_T_buggy / N_T_correct factor from the 1 tonne-year
+    # demonstration above. The live production-vs-audit difference is reported separately.
+    bug_factor_measured = n_t_buggy / n_t_correct
     v07_results = []
     for delta in [50, 100, 200, 297, 371, 500]:
-        # Buggy (as-shipped)
-        res_buggy = t87r.N_events_in_lz_window(
+        # Production function as it stands today (bug already fixed)
+        res_production = t87r.N_events_in_lz_window(
             m_chi_GeV=770.0, m_phi_MeV=453.0,
             epsilon=1.12e-37, alpha_chi=6.84e-17,
             delta_keV=float(delta), form_factor_ansatz='gaussian',
             exposure_tonne_years=2.84,
         )
-        # Corrected
+        # Corrected (this audit's independent implementation)
         res_correct = compute_N_total_CORRECT(
             exposure_tonne_years=2.84, m_chi_GeV=770.0, m_phi_MeV=453.0,
             epsilon=1.12e-37, alpha_chi=6.84e-17,
             delta_keV=float(delta), form_factor_ansatz='gaussian',
         )
-        n_buggy = res_buggy["N_events_at_target"]
+        n_production = res_production["N_events_at_target"]
         n_correct = res_correct["N_events_at_target"]
+        n_buggy = n_correct * bug_factor_measured  # reconstruction of the pre-fix value
         ratio = n_buggy / n_correct if n_correct > 0 else float('inf')
+        ratio_prod = n_production / n_correct if n_correct > 0 else float('inf')
         v07_results.append({
             "delta_keV": delta,
             "N_buggy": n_buggy,
             "N_correct": n_correct,
+            "N_production_today": n_production,
             "ratio_buggy_over_correct": ratio,
+            "ratio_production_over_correct": ratio_prod,
         })
         print(f"{delta:>12} | {n_buggy:>20.4e} | {n_correct:>20.4e} | {ratio:>20.4f}")
     print()
@@ -190,11 +200,11 @@ def main():
     print(f"  epsilon = {v03_eps:.3e}, alpha_chi = {v03_alpha:.3e}")
     print(f"  (m_chi=200 GeV, m_phi=50 MeV at v0.3-prelim canonical anchors)")
     print()
-    print(f"{'delta (keV)':>12} | {'Phase 7a N_pred':>20} | {'Corrected N_pred':>20} | {'ratio (bug/correct)':>20}")
+    print(f"{'delta (keV)':>12} | {'Phase 7a buggy (recon.)':>20} | {'Corrected N_pred':>20} | {'ratio (bug/correct)':>20}")
     print("-" * 90)
     v03_results = []
     for delta in [50, 100, 200, 297, 371, 500]:
-        res_buggy = t87r.N_events_in_lz_window(
+        res_production = t87r.N_events_in_lz_window(
             m_chi_GeV=200.0, m_phi_MeV=50.0,
             epsilon=v03_eps, alpha_chi=v03_alpha,
             delta_keV=float(delta), form_factor_ansatz='gaussian',
@@ -205,14 +215,18 @@ def main():
             epsilon=v03_eps, alpha_chi=v03_alpha,
             delta_keV=float(delta), form_factor_ansatz='gaussian',
         )
-        n_buggy = res_buggy["N_events_at_target"]
+        n_production = res_production["N_events_at_target"]
         n_correct = res_correct["N_events_at_target"]
+        n_buggy = n_correct * bug_factor_measured  # reconstruction of the pre-fix value
         ratio = n_buggy / n_correct if n_correct > 0 else float('inf')
+        ratio_prod = n_production / n_correct if n_correct > 0 else float('inf')
         v03_results.append({
             "delta_keV": delta,
             "N_buggy": n_buggy,
             "N_correct": n_correct,
+            "N_production_today": n_production,
             "ratio_buggy_over_correct": ratio,
+            "ratio_production_over_correct": ratio_prod,
         })
         print(f"{delta:>12} | {n_buggy:>20.4e} | {n_correct:>20.4e} | {ratio:>20.4f}")
     print()
@@ -222,14 +236,26 @@ def main():
     print("IMPACT ON PHASE 7 VERDICTS")
     print("=" * 78)
     print()
-    print("All Phase 7 kill verdicts remain valid:")
-    print("  Phase 7a (composite at v0.3-prelim): buggy N ~ 10^-118, corrected ~ 10^-120 (still 117+ orders short)")
-    print("  Phase 7c (Di Mauro at v0.3-prelim):   buggy N ~ 10^-119, corrected ~ 10^-121 (still 119+ orders short)")
-    print("  Phase 7 T87 v0.7 reference:           buggy N ~ 10^-73, corrected ~ 10^-75 (still 73+ orders short)")
+    print("All Phase 7 kill verdicts remain valid (delta = 297 keV, 2.84 tonne-years):")
+    v07_297 = next(r for r in v07_results if r["delta_keV"] == 297)
+    v03_297 = next(r for r in v03_results if r["delta_keV"] == 297)
+    prod_ratios = [r["ratio_production_over_correct"] for r in v07_results
+                   if np.isfinite(r["ratio_production_over_correct"])]
+    prod_audit_ratio = float(np.median(prod_ratios))
+    print(f"  Phase 7 T87 v0.7 reference:  historical (reconstructed) {v07_297['N_buggy']:.4e}, "
+          f"corrected {v07_297['N_correct']:.4e}, production today {v07_297['N_production_today']:.4e}")
+    print(f"  Phase 7a composite v0.3-prelim: historical (reconstructed) {v03_297['N_buggy']:.4e}, "
+          f"corrected {v03_297['N_correct']:.4e}, production today {v03_297['N_production_today']:.4e}")
+    print("  Phase 7c (Di Mauro) inherits the same constant factor; its own values are recorded")
+    print("    in PHASE7C_DI_MAURO_2026-09-13.md, not recomputed by this audit.")
     print()
     print("The unit-conversion bug was a CONSTANT 365.25x FACTOR on all N_pred values.")
     print("Relative comparisons (v0.7 vs v0.3-prelim, delta sweep, ansatz comparison) remain valid.")
-    print("Absolute LZ event-rate predictions are 365x too high; this does NOT change the kill.")
+    print("Absolute LZ event-rate predictions WERE 365x too high (the bug is fixed in")
+    print("  production); this does NOT change the kill.")
+    print(f"DISCLOSURE: production today agrees with this audit's corrected implementation to "
+          f"{abs(prod_audit_ratio - 1.0) * 100:.2f}% (median ratio {prod_audit_ratio:.4f}).")
+    print("  That residual is a separate implementation difference, NOT the 365.25x unit bug.")
     print()
 
     # Save results
@@ -245,6 +271,24 @@ def main():
             "dimensionless # of nuclei. Bug factor: 365.25x for 1 tonne-year exposure."
         ),
         "bug_factor": 365.25,
+        "bug_status": (
+            "FIXED in production. code/t87_lz_event_rate.py now computes "
+            "N_T = M_T_kg * 1000 / 131 * N_A with no DAYS_PER_YEAR factor, so it no longer "
+            "reproduces the historical 365.25x error."
+        ),
+        "buggy_column_provenance": (
+            "N_buggy in every audit row is a RECONSTRUCTION: N_correct * (N_T_buggy / N_T_correct) "
+            "= N_correct * 365.25. The production function cannot be called to obtain the buggy "
+            "value because the bug was removed; N_production_today is the live production value."
+        ),
+        "production_vs_audit_corrected_ratio_median": prod_audit_ratio,
+        "production_vs_audit_residual_percent": (prod_audit_ratio - 1.0) * 100.0,
+        "residual_disclosure": (
+            "Production and this audit's independent corrected implementation differ by about "
+            f"{abs(prod_audit_ratio - 1.0) * 100:.2f}% on N_events_at_target. That is a separate "
+            "implementation discrepancy (not the 365.25x unit bug) and remains open."
+        ),
+        "audit_revised": "2026-11-05 (buggy columns made explicit reconstructions; production-vs-audit residual disclosed)",
         "N_T_correct_for_1_ty": float(n_t_correct),
         "N_T_buggy_for_1_ty": float(n_t_buggy),
         "v07_MAP_audit": v07_results,

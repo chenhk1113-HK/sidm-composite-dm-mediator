@@ -180,6 +180,50 @@ def summarize(results, pytest_internal_skips: int = 0, pytest_deselected: int = 
     return "\n".join(lines), code
 
 
+# ---------------------------------------------------------------------------
+# GATE-IGNORED TEST FILES (finding F18 / decision D9, 2026-11-05)
+#
+# Before 2026-11-05 the pytest layer carried 15 hard-coded `--ignore=` strings with
+# a rationale comment that had gone stale, and the gate reported 15/15 while 45 tests
+# inside those files were failing. Exclusions are now data, not prose:
+#   * every exclusion must appear in GATE_IGNORED_TESTS with a reason;
+#   * every excluded file must carry a matching `# GATE-IGNORED[<name>]:` marker inside
+#     the file itself;
+#   * the layer prints the full exclusion list with reasons on every non-quick run;
+#   * an exclusion without its in-file marker FAILS the layer, so the ignore list can
+#     no longer grow silently and a green gate cannot hide an unlabelled failing file.
+# ---------------------------------------------------------------------------
+GATE_IGNORED_TESTS: dict[str, str] = {
+    "v0.3-prelim/tests/test_t120_4_joint_fit.py":
+        "claims-vs-computation: asserts the T120 constraints all pass; measured sigma/m and "
+        "ratio values miss the stated bounds (finding F18 / decision D9)",
+    "v0.3-prelim/tests/test_t120_11_hidden_u1.py":
+        "claims-vs-computation: same T120 claim family (finding F18 / decision D9)",
+    "v0.3-prelim/tests/test_t120_13_integration.py":
+        "claims-vs-computation: same T120 claim family (finding F18 / decision D9)",
+    "v0.3-prelim/tests/test_t120_15_uv_slope.py":
+        "claims-vs-computation: same T120 claim family (finding F18 / decision D9)",
+}
+
+GATE_IGNORED_MARKER_PREFIX = "# GATE-IGNORED["
+
+
+def gate_ignored_marker_violations(root: Path) -> list[str]:
+    """Return violations: excluded files lacking their in-file marker (or missing)."""
+    violations: list[str] = []
+    for rel in sorted(GATE_IGNORED_TESTS):
+        path = root / rel
+        if not path.exists():
+            violations.append(f"{rel}: listed as gate-ignored but the file does not exist")
+            continue
+        text = path.read_text(encoding="utf-8", errors="replace")
+        if GATE_IGNORED_MARKER_PREFIX not in text:
+            violations.append(
+                f"{rel}: gate-ignored but contains no '{GATE_IGNORED_MARKER_PREFIX}' marker"
+            )
+    return violations
+
+
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--quick", action="store_true",
@@ -211,6 +255,16 @@ def main():
         results.append(("pytest", "SKIP", ""))
     else:
         # LEGACY TEST EXCLUSIONS (added 2026-10-21, v40.59 — Defect G)
+        # SUPERSEDED 2026-11-05 (finding F18 / decision D9): the rationale list below is now
+        # historical prose and was stale at the time it was last read. The live exclusion list
+        # is the GATE_IGNORED_TESTS dict above, and every exclusion must carry an in-file
+        # `# GATE-IGNORED[<name>]:` marker. 11 of the 15 files listed below were repaired in
+        # the D9 round-1 work (test_t87_inelastic_nucleon, test_t90_v60_naturalness,
+        # test_t82_audit_version_drift, test_phase7e_unit_conversion_audit,
+        # test_config_split_brain, test_paper_v19_regression, test_sparc_hierarchical,
+        # test_t32_real_likelihood, test_phase42_summary, test_phase46_three_items,
+        # test_phase47_50) and are RUN by the gate again; only the four test_t120_* files
+        # remain excluded, because their assertions still contradict measured values.
         # 13 legacy tests excluded with explicit rationale:
         #   Deleted-doc tests (docs deleted in b5c24c0, pytest tries to find docs):
         #     test_phase42_summary.py, test_phase46_three_items.py, test_phase47_50.py
@@ -233,27 +287,27 @@ def main():
         # already-failing in its own commit (d776480) and the gate excused it as
         # "pre-existing tolerance-boundary failures" -- that excuse is now void.
         # The remaining exclusions above are genuinely legacy (pre-v40 era).
-        ok, tail = run_layer(
-            "Full pytest suite (v0.3-prelim/tests/, excluding known-broken)",
-            ["-m", "pytest", "v0.3-prelim/tests/", "-q", "--tb=line",
-             "--ignore=v0.3-prelim/tests/test_sparc_hierarchical.py",
-             "--ignore=v0.3-prelim/tests/test_t32_real_likelihood.py",
-             "--ignore=v0.3-prelim/tests/test_phase42_summary.py",
-             "--ignore=v0.3-prelim/tests/test_phase46_three_items.py",
-             "--ignore=v0.3-prelim/tests/test_phase47_50.py",
-             "--ignore=v0.3-prelim/tests/test_t120_4_joint_fit.py",
-             "--ignore=v0.3-prelim/tests/test_t120_11_hidden_u1.py",
-             "--ignore=v0.3-prelim/tests/test_t120_13_integration.py",
-             "--ignore=v0.3-prelim/tests/test_t120_15_uv_slope.py",
-             "--ignore=v0.3-prelim/tests/test_t87_inelastic_nucleon.py",
-             "--ignore=v0.3-prelim/tests/test_t90_v60_naturalness.py",
-             "--ignore=v0.3-prelim/tests/test_t82_audit_version_drift.py",
-             "--ignore=v0.3-prelim/tests/test_phase7e_unit_conversion_audit.py",
-             "--ignore=v0.3-prelim/tests/test_config_split_brain.py",
-             "--ignore=v0.3-prelim/tests/test_paper_v19_regression.py",
-             "-k", "not T132 and not T131 and not T133 and not T134 and not T135 and not T220"],
-            timeout=1800,
-        )
+        violations = gate_ignored_marker_violations(Path(__file__).resolve().parents[1])
+        tail = ""
+        if violations:
+            # Fail closed: an exclusion the file itself does not declare is an unlabelled
+            # hole in the gate, which is the F18 defect class.
+            print(f"\n[L2/{TOTAL_LAYERS}] Full pytest suite — FAIL (undocumented exclusion):")
+            for v in violations:
+                print(f"  - {v}")
+            ok = False
+        else:
+            print(f"\n[L2/{TOTAL_LAYERS}] gate-ignored test files: {len(GATE_IGNORED_TESTS)} "
+                  "(each carries an in-file marker; the gate refuses to run otherwise)")
+            for rel in sorted(GATE_IGNORED_TESTS):
+                print(f"  - {rel} :: {GATE_IGNORED_TESTS[rel]}")
+            ok, tail = run_layer(
+                "Full pytest suite (v0.3-prelim/tests/, excluding marked gate-ignored files)",
+                ["-m", "pytest", "v0.3-prelim/tests/", "-q", "--tb=line",
+                 *[f"--ignore={rel}" for rel in sorted(GATE_IGNORED_TESTS)],
+                 "-k", "not T132 and not T131 and not T133 and not T134 and not T135 and not T220"],
+                timeout=1800,
+            )
         record("pytest", ok, tail)
         m = re.search(r"(\d+) skipped", tail or "")
         if m:

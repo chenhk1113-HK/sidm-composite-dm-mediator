@@ -6,82 +6,112 @@
   "bug_location": "code/t87_lz_event_rate.py:243",
   "bug_description": "N_T is computed as M_T_kg_days * 1000 / 131 * N_A, where M_T_kg_days has units of kg*days (mass * time). The result has units of 'days' instead of dimensionless # of nuclei. Bug factor: 365.25x for 1 tonne-year exposure.",
   "bug_factor": 365.25,
+  "bug_status": "FIXED in production. code/t87_lz_event_rate.py now computes N_T = M_T_kg * 1000 / 131 * N_A with no DAYS_PER_YEAR factor, so it no longer reproduces the historical 365.25x error.",
+  "buggy_column_provenance": "N_buggy in every audit row is a RECONSTRUCTION: N_correct * (N_T_buggy / N_T_correct) = N_correct * 365.25. The production function cannot be called to obtain the buggy value because the bug was removed; N_production_today is the live production value.",
+  "production_vs_audit_corrected_ratio_median": 1.0202186117990375,
+  "production_vs_audit_residual_percent": 2.02186117990375,
+  "residual_disclosure": "Production and this audit's independent corrected implementation differ by about 2.02% on N_events_at_target. That is a separate implementation discrepancy (not the 365.25x unit bug) and remains open.",
+  "audit_revised": "2026-11-05 (buggy columns made explicit reconstructions; production-vs-audit residual disclosed)",
   "N_T_correct_for_1_ty": 4.5969465648854964e+27,
   "N_T_buggy_for_1_ty": 1.6790347328244275e+30,
   "v07_MAP_audit": [
     {
       "delta_keV": 50,
-      "N_buggy": 9.952464796645152e-76,
+      "N_buggy": 3.563080170703489e-73,
       "N_correct": 9.755181849975329e-76,
-      "ratio_buggy_over_correct": 1.0202234002096355
+      "N_production_today": 9.952464796645152e-76,
+      "ratio_buggy_over_correct": 365.25,
+      "ratio_production_over_correct": 1.0202234002096355
     },
     {
       "delta_keV": 100,
-      "N_buggy": 1.0635803441640513e-75,
+      "N_buggy": 3.807726635843421e-73,
       "N_correct": 1.0424987367127778e-75,
-      "ratio_buggy_over_correct": 1.0202221899258586
+      "N_production_today": 1.0635803441640513e-75,
+      "ratio_buggy_over_correct": 365.25,
+      "ratio_production_over_correct": 1.0202221899258586
     },
     {
       "delta_keV": 200,
-      "N_buggy": 1.198011883911203e-75,
+      "N_buggy": 4.289015448199401e-73,
       "N_correct": 1.1742684320874474e-75,
-      "ratio_buggy_over_correct": 1.0202197821000332
+      "N_production_today": 1.198011883911203e-75,
+      "ratio_buggy_over_correct": 365.25,
+      "ratio_production_over_correct": 1.0202197821000332
     },
     {
       "delta_keV": 297,
-      "N_buggy": 1.3181067599733674e-75,
+      "N_buggy": 4.7189792538083804e-73,
       "N_correct": 1.291986106449933e-75,
-      "ratio_buggy_over_correct": 1.0202174414980418
+      "N_production_today": 1.3181067599733674e-75,
+      "ratio_buggy_over_correct": 365.25,
+      "ratio_production_over_correct": 1.0202174414980418
     },
     {
       "delta_keV": 371,
-      "N_buggy": 1.4027433642957206e-75,
+      "N_buggy": 5.02199719201885e-73,
       "N_correct": 1.374947896514401e-75,
-      "ratio_buggy_over_correct": 1.0202156516998087
+      "N_production_today": 1.4027433642957206e-75,
+      "ratio_buggy_over_correct": 365.25,
+      "ratio_production_over_correct": 1.0202156516998087
     },
     {
       "delta_keV": 500,
-      "N_buggy": 1.5372955767039622e-75,
+      "N_buggy": 5.5037278594527684e-73,
       "N_correct": 1.5068385652163636e-75,
-      "ratio_buggy_over_correct": 1.020212524546865
+      "N_production_today": 1.5372955767039622e-75,
+      "ratio_buggy_over_correct": 365.25,
+      "ratio_production_over_correct": 1.020212524546865
     }
   ],
   "v03_MAP_audit": [
     {
       "delta_keV": 50,
-      "N_buggy": 1.9189257109998956e-121,
+      "N_buggy": 6.869975280553488e-119,
       "N_correct": 1.8808967229441445e-121,
-      "ratio_buggy_over_correct": 1.020218541290361
+      "N_production_today": 1.9189257109998956e-121,
+      "ratio_buggy_over_correct": 365.25,
+      "ratio_production_over_correct": 1.020218541290361
     },
     {
       "delta_keV": 100,
-      "N_buggy": 2.2896649006737113e-121,
+      "N_buggy": 8.197298314648402e-119,
       "N_correct": 2.2442979643116775e-121,
-      "ratio_buggy_over_correct": 1.0202143107035913
+      "N_production_today": 2.2896649006737113e-121,
+      "ratio_buggy_over_correct": 365.25,
+      "ratio_production_over_correct": 1.0202143107035913
     },
     {
       "delta_keV": 200,
-      "N_buggy": 2.8611993664399095e-121,
+      "N_buggy": 1.0243555637108557e-118,
       "N_correct": 2.804532686408914e-121,
-      "ratio_buggy_over_correct": 1.0202053911889168
+      "N_production_today": 2.8611993664399095e-121,
+      "ratio_buggy_over_correct": 365.24999999999994,
+      "ratio_production_over_correct": 1.0202053911889168
     },
     {
       "delta_keV": 297,
-      "N_buggy": 3.233955227343339e-121,
+      "N_buggy": 1.1578182492099648e-118,
       "N_correct": 3.1699336049554137e-121,
-      "ratio_buggy_over_correct": 1.0201965184027335
+      "N_production_today": 3.233955227343339e-121,
+      "ratio_buggy_over_correct": 365.24999999999994,
+      "ratio_production_over_correct": 1.0201965184027335
     },
     {
       "delta_keV": 371,
       "N_buggy": 0.0,
       "N_correct": 0.0,
-      "ratio_buggy_over_correct": Infinity
+      "N_production_today": 0.0,
+      "ratio_buggy_over_correct": Infinity,
+      "ratio_production_over_correct": Infinity
     },
     {
       "delta_keV": 500,
       "N_buggy": 0.0,
       "N_correct": 0.0,
-      "ratio_buggy_over_correct": Infinity
+      "N_production_today": 0.0,
+      "ratio_buggy_over_correct": Infinity,
+      "ratio_production_over_correct": Infinity
     }
   ],
   "impact_on_phase_7": "All kill verdicts remain valid (defects are 60+ orders of magnitude below 1). The bug is a constant 365.25x factor on N_pred values; relative comparisons are unaffected.",

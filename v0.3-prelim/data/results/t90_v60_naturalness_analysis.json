@@ -1,9 +1,11 @@
 {
   "t90_57_naturalness": {
-    "framework": "T90.57 hybrid (KSFR-on, nlive=500)",
-    "log_Z": -7.912246087422036,
-    "log_Z_err": 0.13429657997824326,
-    "n_samples": 4959,
+    "framework": "T90.57 hybrid 10D (multi-portal + resonance + Sommerfeld + LZ + KSFR/PCAC)",
+    "framework_label_note": "This producer used to hard-code 'T90.57 hybrid (KSFR-on, nlive=500)' regardless of what the artifact actually said. The label now comes from the artifact itself.",
+    "label_matches_artifact": true,
+    "log_Z": -3.5170308553991614,
+    "log_Z_err": 0.3664668565370999,
+    "n_samples": 237,
     "naturalness_results": [
       {
         "parameter": "log_m_chi_GeV",
@@ -12,17 +14,17 @@
           3.0
         ],
         "posterior_16_50_84_log": [
-          2.209895969360725,
-          2.6466956340391024,
-          2.895283181896342
+          0.9442345510061955,
+          2.2208022578628506,
+          2.869668002571508
         ],
         "posterior_16_50_84_linear": [
-          162.14216564678833,
-          443.29785925620797,
-          785.747814795522
+          8.794973819498706,
+          166.2655440885922,
+          740.7437615108657
         ],
-        "naturalness_N": 3.6475731590485196,
-        "fine_tuning_level": "severe"
+        "naturalness_N": 1.298408936422905,
+        "fine_tuning_level": "mild"
       },
       {
         "parameter": "log_m_phi_A_MeV",
@@ -31,16 +33,16 @@
           2.0
         ],
         "posterior_16_50_84_log": [
-          2.7830678356098892,
-          3.1420027815972302,
-          3.4753027242901475
+          2.845810195562298,
+          3.185443886033643,
+          3.4929411316991392
         ],
         "posterior_16_50_84_linear": [
-          606.8311075450564,
-          1386.7647108832573,
-          2987.4643006408646
+          701.1488007677784,
+          1532.6531637719968,
+          3111.2945748072475
         ],
-        "naturalness_N": 3.6114908983657776,
+        "naturalness_N": 3.863205821876138,
         "fine_tuning_level": "severe"
       },
       {
@@ -50,16 +52,16 @@
           2.0
         ],
         "posterior_16_50_84_log": [
-          0.35511777982670034,
-          1.0157703550675241,
-          1.6822636684020882
+          0.6804465238790035,
+          1.4246955260716603,
+          1.787665655525847
         ],
         "posterior_16_50_84_linear": [
-          2.2652585580538034,
-          10.369799396803112,
-          48.11313637565321
+          4.791224533379868,
+          26.588603400464528,
+          61.3289678268312
         ],
-        "naturalness_N": 1.5069933284779122,
+        "naturalness_N": 1.806327169424233,
         "fine_tuning_level": "moderate"
       },
       {
@@ -69,17 +71,17 @@
           2.0
         ],
         "posterior_16_50_84_log": [
-          -0.1461039434483662,
-          0.6204298491120812,
-          1.299074480002057
+          0.7838562927111661,
+          1.3465351451939775,
+          1.7539861301805628
         ],
         "posterior_16_50_84_linear": [
-          0.7143253399629238,
-          4.172821901014469,
-          19.9101476185758
+          6.079338037541185,
+          22.209314046078678,
+          56.752648034403165
         ],
-        "naturalness_N": 1.7298902055506382,
-        "fine_tuning_level": "moderate"
+        "naturalness_N": 2.5769746516830163,
+        "fine_tuning_level": "severe"
       },
       {
         "parameter": "g_chi_B",
@@ -88,16 +90,16 @@
           2.0
         ],
         "posterior_16_50_84_log": [
-          0.09244550664938414,
-          0.18041905379115644,
-          0.301495078356834
+          0.12097798227858234,
+          0.22266483202819412,
+          0.35234860626655157
         ],
         "posterior_16_50_84_linear": [
-          1.2372159398118385,
-          1.5150223991228497,
-          2.002142932171319
+          1.32122864926514,
+          1.669801443015701,
+          2.2508606368051733
         ],
-        "naturalness_N": 9.567108813783456,
+        "naturalness_N": 8.644139716302082,
         "fine_tuning_level": "extreme"
       },
       {
@@ -107,16 +109,16 @@
           5.0
         ],
         "posterior_16_50_84_log": [
-          1.2294000751503091,
-          2.6993812798561923,
-          4.2646889868579025
+          1.0938462953280124,
+          2.840401948671497,
+          4.162706002635618
         ],
         "posterior_16_50_84_linear": [
-          16.95899355567616,
-          500.4737227124952,
-          18394.54233544473
+          12.41212942137958,
+          692.4715714231004,
+          14544.741352292689
         ],
-        "naturalness_N": 1.4825606823267408,
+        "naturalness_N": 1.4663426905063617,
         "fine_tuning_level": "mild"
       },
       {
@@ -126,16 +128,16 @@
           3.0
         ],
         "posterior_16_50_84_log": [
-          -1.99792409392316,
-          0.11569581157073941,
-          2.2037751682776654
+          -1.8332911240202086,
+          0.28672217765607144,
+          2.347151123096697
         ],
         "posterior_16_50_84_linear": [
-          0.010047913925736025,
-          1.3052563405754551,
-          159.87301610546268
+          0.01467941930751077,
+          1.9351836123854862,
+          222.40836788408419
         ],
-        "naturalness_N": 0.8329963144879438,
+        "naturalness_N": 0.8372319943933728,
         "fine_tuning_level": "mild"
       },
       {
@@ -145,16 +147,16 @@
           -4.5
         ],
         "posterior_16_50_84_log": [
-          -4.357335133660104,
-          -2.9944221647357288,
-          -1.2797950392180697
+          -4.236985631608947,
+          -2.539151742998041,
+          -1.2716986828899093
         ],
         "posterior_16_50_84_linear": [
-          4.392025635379581e-05,
-          0.001012926271543168,
-          0.05250551961478178
+          5.7944786681970786e-05,
+          0.0028896700518744466,
+          0.05349353732702664
         ],
-        "naturalness_N": 1.6246742029551078,
+        "naturalness_N": 1.6861774548193151,
         "fine_tuning_level": "moderate"
       },
       {
@@ -164,16 +166,16 @@
           -4.5
         ],
         "posterior_16_50_84_log": [
-          -4.376669784614682,
-          -3.1252021688579257,
-          -1.495459569614059
+          -4.357544281623371,
+          -3.468954465785109,
+          -2.0528212142373983
         ],
         "posterior_16_50_84_linear": [
-          4.20078268693202e-05,
-          0.0007495452065688945,
-          0.03195511835231276
+          4.3899110285772405e-05,
+          0.00033966088294586923,
+          0.008854800598823433
         ],
-        "naturalness_N": 1.7353818801447358,
+        "naturalness_N": 2.1694580449836964,
         "fine_tuning_level": "moderate"
       },
       {
@@ -183,19 +185,46 @@
           -4.0
         ],
         "posterior_16_50_84_log": [
-          -7.684619642710912,
-          -7.370931424294639,
-          -7.126917627705089
+          -12.836154903162807,
+          -8.38602174974356,
+          -5.30914573898102
         ],
         "posterior_16_50_84_linear": [
-          2.0671898184673325e-08,
-          4.256656210236679e-08,
-          7.465903501899793e-08
+          1.458294026523925e-13,
+          4.111291309808751e-09,
+          4.907431666901066e-06
         ],
-        "naturalness_N": 19.723794614378725,
-        "fine_tuning_level": "extreme"
+        "naturalness_N": 1.4614038272126562,
+        "fine_tuning_level": "mild"
       }
     ],
+    "run_quality": {
+      "artifact": "t90_v57_hybrid_5ch_joint_posterior.json",
+      "framework_in_artifact": "T90.57 hybrid 10D (multi-portal + resonance + Sommerfeld + LZ + KSFR/PCAC)",
+      "nlive": 50,
+      "n_samples": 237,
+      "ndim": 10,
+      "wall_seconds": 82.45271563529968,
+      "wimpy_available": false,
+      "channel_satisfaction_at_median": {
+        "Cloud9": false,
+        "Galaxy": false,
+        "Bullet": true,
+        "n_satisfied_3ch": 1
+      },
+      "degraded_run": true,
+      "degraded_reasons": [
+        "nlive=50 < production minimum 500",
+        "n_samples=237 < production minimum 2000",
+        "wimpy_available=False (the WIMpy likelihood arm fell back)",
+        "only 1 of 3 channels satisfied at the median"
+      ],
+      "production_thresholds": {
+        "nlive_min": 500,
+        "samples_min": 2000
+      }
+    },
+    "verdict_scope": "Naturalness verdicts from this posterior are NOT supportable while degraded_run=True: nlive=50 < production minimum 500; n_samples=237 < production minimum 2000; wimpy_available=False (the WIMpy likelihood arm fell back); only 1 of 3 channels satisfied at the median. The coarse measure is prior_width / posterior_width, and an under-sampled chain inflates posterior width, which biases N DOWNWARD (toward 'mild'), never upward.",
     "method": "coarse proxy: log10(prior_width) / log10(posterior_p84/p16). Proportional to Barbieri-Giudice within O(1) for log-flat priors. Cannot distinguish \"well-measured\" from \"fine-tuned\" without raw chains."
   },
   "t41_v08_naturalness": {
@@ -318,6 +347,18 @@
         "fine_tuning_level": "severe"
       }
     ],
+    "run_quality": {
+      "artifact": "t41_mediator_mass_joint_fit_t88ce_v08_with_euclid_lensing_and_subhalo_forecast_nlive2000.json",
+      "nlive": 2000,
+      "ndim": 6,
+      "dlogz": 0.1,
+      "wall_seconds": 751.671190738678,
+      "nlive_claim_matches_artifact": true,
+      "degraded_run": false,
+      "production_thresholds": {
+        "nlive_min": 2000
+      }
+    },
     "method": "coarse proxy as above"
   }
 }

@@ -1,3 +1,32 @@
+## [D9-Round1-2026-11-05] Retired stale expectations, repaired references, re-derived T90 naturalness
+
+- **Phase 7e unit audit** (`code/phase7e_unit_conversion_audit.py`): the audit now reports three
+  distinct things instead of mixing them — live production values, independently corrected audit
+  values, and historical values reconstructed as `correct x 365.25` — and records the residual
+  production-vs-audit implementation difference separately. The old `~365` test expectation was
+  the historical tonne-unit defect, not current physics; the corrected conversion is ~1.02.
+- **T87**: `test_t87_inelastic_nucleon.py` pins the live `1.3181e-75`, marks the stale
+  `4.8135e-73` as superseded by the same 365.25-day/year defect, and checks the reconstructed
+  ratio. `code/t87_lz_event_rate.py` and `code/phase7a_composite_mediator_v03_map.py` prose
+  updated from `4.8e-73` to `1.3e-75` with the historical error disclosed. The channel verdict
+  ("DOES NOT EXPLAIN") is unchanged: both numbers are far below 1 event.
+- **T82 version-drift test** retargeted to what `scripts/t82_audit.py` actually emits now
+  ("GROUND TRUTH (v0.7 T41 ...)"); the obsolete "does NOT match canonical" expectation was
+  guarding a string that no longer exists.
+- **Paper reference slot `[29]`** (Chu, Hambye, Tytgat) restored in `PAPER_V1_DRAFT.md` with an
+  explicit "currently NOT cited in the body" disclosure, pinned by
+  `test_paper_v19_regression.py`.
+- **F19 config split-brain**: `test_config_split_brain.py` now compares module surfaces by AST
+  instead of file bytes; that exposed four canonical KISS constants missing from the frozen
+  `v0.3-prelim/code/config.py`, which was re-frozen from the canonical root `config.py` under
+  asserted anchors. Mutation test: changed constant value, removed constant, and stripped F19
+  marker were each caught; files restored byte-identically.
+- **F20 T90 naturalness**: `analyze_t90_57()` no longer labels its output `nlive=500`; run
+  quality (nlive=50, 237 samples, wimpy unavailable, 1/3 channels) is read from the artifact and
+  published as `run_quality` + `verdict_scope`, with `degraded_run=True`. `analyze_t41_v08()`
+  verified its `nlive=2000` claim against `t41_version.nlive`. The `mu_x_extreme` /
+  `m_chi_severe` tests were retargeted to measured values plus the degraded-run guard (13
+  passed); mutating the production threshold to 50 failed 2 tests as intended.
 ## [FindingID-Renumber-2026-11-05] Duplicate finding ID (F17 used twice)
 
 - `docs/INTEGRITY_FINDINGS_2026-11-04.md` carried **two findings numbered `F17`**: the BM2

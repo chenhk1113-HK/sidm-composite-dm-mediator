@@ -183,7 +183,9 @@ def run_phase7a_sweep() -> dict:
     print(f"  m_χ = {PHI7A_INPUTS['m_chi_GeV']} GeV  (canonical v0.3-prelim anchor)")
     print(f"  m_φ = {PHI7A_INPUTS['m_phi_MeV']} MeV  (canonical v0.3-prelim anchor)")
     print()
-    print(f"Comparison: v0.7 MAP had ε ≈ 1.12e-37, giving N_pred ≈ 4.8e-73.")
+    print(f"Comparison: v0.7 MAP had ε ≈ 1.12e-37, giving N_pred ≈ 1.3e-75 today")
+    print(f"           (the pre-fix figure 4.8e-73 was 365.25x too high — superseded by the")
+    print(f"           N_T unit fix in t87_lz_event_rate.py; see phase7e_unit_conversion_audit).")
     print(f"           v0.3-prelim MAP has ε ≈ {V03_MAP['epsilon']:.2e},")
     print(f"           giving ε² suppression ratio of (ε_v03/ε_v07)² ≈")
     ratio = (V03_MAP["epsilon"] / 1.12e-37) ** 2

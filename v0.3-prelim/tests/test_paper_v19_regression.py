@@ -328,7 +328,14 @@ def test_paper_v19_status_line_present():
     assert "800" in content or "~800" in content, (
         "v1.9 paper should mention the 800x dSph correction (T101.4 finding)"
     )
-    # Should mention refs [28] and [29]
-    assert "[28]" in content and "[29]" in content, (
-        "v1.9 should add refs [28] Chu, Garcia-Cely, Murayama and [29] Chu, Hambye, Tytgat"
+    # Reference-list integrity: [28] must exist, and the [29] slot must exist WITH its
+    # 2026-11-05 disclosure marker. History: an earlier edit deleted the [29] entry, so the
+    # numbered list jumped 28 -> 30 (a dangling gap). The entry is now listed and explicitly
+    # flagged as uncited, so this assertion pins the documented state rather than a fictional
+    # "v1.9 added both refs" state.
+    assert "[28]" in content, "reference [28] Chu, Garcia-Cely, Murayama missing"
+    assert "[29]" in content, "reference slot [29] missing (numbering gap)"
+    assert "Number restored 2026-11-05, currently NOT cited in this draft" in content, (
+        "[29] must carry its disclosure marker: it is listed to close the numbering gap and "
+        "is not cited in the body"
     )
