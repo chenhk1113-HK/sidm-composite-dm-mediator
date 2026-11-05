@@ -9,7 +9,7 @@ pytest.skip(
     DELETED by commit b5c24c0 ("paper: fix section 10.5 + streamline docs +
     CHANGELOG additions"). The tests were left behind by that docs streamlining, so
     their failure is a missing-deliverable question, not a physics result: either
-    restore the docs or retire this suite. Tracked as finding F17 / decision D9 in
+    restore the docs or retire this suite. Tracked as finding F18 / decision D9 in
     docs/INTEGRITY_FINDINGS_2026-11-04.md.
     """
     , allow_module_level=True)

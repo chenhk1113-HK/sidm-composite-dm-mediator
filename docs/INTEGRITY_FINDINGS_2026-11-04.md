@@ -549,7 +549,7 @@ and `test_sidm_core_radius_invariance.py` are designed to fail and force the re-
 - The re-derived Phase 39/40 artifacts in this sweep change numbers but not the physics
   prescription — that is D1.
 
-## F17 — the release gate's ignore list hides 12 test files that contradict stored claims (OPEN, decision D9)
+## F18 — the release gate's ignore list hides 12 test files that contradict stored claims (OPEN, decision D9)
 
 **Found 2026-11-05** while running the whole `v0.3-prelim/tests` directory instead of the gate's
 selected subset. The gate passes 15/15 while ignoring 15 files; 12 of them failed, carrying
@@ -588,3 +588,13 @@ with the measured numbers, (b) fix the model if a defect is found (the `3.65e15`
 `365` vs `1.02` factor in phase7e are the two most likely genuine unit defects), or (c) retire the
 claim in writing. Nothing here has been loosened to green, and nothing has been re-added to the gate
 as passing.
+
+
+### ID collision note (2026-11-05)
+
+This finding was written as `F17` while the BM2 finding above it already held `F17`, so two
+findings in one file shared one ID. It is renumbered to `F18`; the BM2 finding keeps `F17`.
+References updated in `CURRENT.md`, `CHANGELOG.md` and the three `test_phase42/46/47_50`
+suites. Guard: `v0.3-prelim/tests/test_integrity_finding_ids_unique.py` fails if any finding ID
+in this file is used by more than one heading, or if a `finding Fxx` reference resolves to a
+heading that does not exist.

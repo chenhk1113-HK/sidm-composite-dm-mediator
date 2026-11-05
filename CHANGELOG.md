@@ -1,3 +1,15 @@
+## [FindingID-Renumber-2026-11-05] Duplicate finding ID (F17 used twice)
+
+- `docs/INTEGRITY_FINDINGS_2026-11-04.md` carried **two findings numbered `F17`**: the BM2
+  collapse-time finding and the gate-ignore-list finding. The gate-ignore-list finding is
+  renumbered **`F18`**; the BM2 finding keeps `F17`.
+- References followed: `CURRENT.md` (D9 line), `CHANGELOG.md` (`[GateCoverage-2026-11-05]`
+  heading and its "Recorded" bullet), and the module-level skip messages in
+  `test_phase42_summary.py`, `test_phase46_three_items.py`, `test_phase47_50.py`.
+- New guard: `v0.3-prelim/tests/test_integrity_finding_ids_unique.py` — finding headings in
+  the integrity report must be unique, and every `finding Fxx` reference must resolve to an
+  existing heading. Mutation-tested by duplicating a heading.
+
 ## [BM2-Rederive-G2-Measured-2026-11-05]
 
 ### Re-derived: the Phase G1 BM2 "2.6% deviation" (finding F17)
@@ -145,7 +157,7 @@
 - **Verification state.** `verify_release_gate.py --quick`: 14/14 PASS (pytest layer skipped — not a full green run). `drift_guard.py --strict`: no drift. `t82_audit.py`: 85/85 ALL CLEAR. `check_fabrication.py`: warn-only, 46 hits / 26 unique remaining.
 ## [Consolidation-CIFix-2026-11-03]
 ## [CIFix-Verified-2026-11-03]
-## [GateCoverage-2026-11-05] Ignored-file triage (finding F17, decision D9)
+## [GateCoverage-2026-11-05] Ignored-file triage (finding F18, decision D9)
 
 - Fixed a real portability defect: `v0.3-prelim/code/t90_v60_naturalness.py` read
   `data/results/...` relative to the current working directory, so from the repo root every read raised
@@ -161,7 +173,7 @@
 - Three suites (`test_phase42_summary`, `test_phase46_three_items`, `test_phase47_50`) asserted the
   contents of four master docs deleted by commit `b5c24c0`. They are now module-level documented skips
   citing that commit rather than unexplained failures.
-- Recorded F17: the release gate passes 15/15 while ignoring 15 files, and 12 of them held 45 failing
+- Recorded F18: the release gate passes 15/15 while ignoring 15 files, and 12 of them held 45 failing
   tests at `b0834fe` — 29 of them claim-vs-computation contradictions (t120 eight-constraint "all pass"
   claims vs measured Cloud-9 88.02–106.81 / dSph 1.132; a `3.65e15` LZ event-rate factor in
   `test_t87_inelastic_nucleon`; `365` vs `1.02` in `test_phase7e_unit_conversion_audit`; a stale

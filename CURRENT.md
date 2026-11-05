@@ -66,7 +66,7 @@ now asserts the v0.8 MAP (478 GeV / 488 MeV / 0.81σ), so this line, the docs an
   `>=100` and dSph sigma/m(v=15) measures 1.132 against a stated `<=0.8`; `test_t87_inelastic_nucleon`
   disagrees with its stored LZ rate by a factor `3.65e15`; `test_phase7e_unit_conversion_audit` expects a
   `~365` bug factor and gets `1.02`; `test_t82_audit_version_drift` expects text the auditor no longer
-  prints. Full breakdown in `docs/INTEGRITY_FINDINGS_2026-11-04.md` F17. Nothing was loosened to green and
+  prints. Full breakdown in `docs/INTEGRITY_FINDINGS_2026-11-04.md` F18. Nothing was loosened to green and
   nothing was added to the passing set: a 15/15 gate certifies the selected subset only.
 - **Phase G2 now carries measured merger statistics (2026-11-05):** `measured_merger_statistics()` in
   `v0.3-prelim/code/phase_g2_merger_history.py` reads the Stage-3 sample and writes
