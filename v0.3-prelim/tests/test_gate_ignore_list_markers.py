@@ -34,8 +34,10 @@ def _read(path: Path) -> str:
 
 
 def test_exclusions_are_data_with_reasons():
+    """The exclusion list may legitimately be EMPTY (every file repaired and re-admitted),
+    but it may never be a bare list of file names without a stated reason."""
     ignored = gate.GATE_IGNORED_TESTS
-    assert isinstance(ignored, dict) and ignored, "exclusion list must be a non-empty dict"
+    assert isinstance(ignored, dict), "exclusion list must be a dict of {file: reason}"
     for rel, reason in ignored.items():
         assert rel.startswith("v0.3-prelim/tests/test_"), rel
         assert len(reason) > 40, f"{rel}: exclusion needs a real reason, got {reason!r}"

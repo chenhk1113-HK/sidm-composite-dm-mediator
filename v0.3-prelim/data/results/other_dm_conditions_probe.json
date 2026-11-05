@@ -1,0 +1,564 @@
+{
+  "question": "does the framework's velocity-dependent sigma/m(v), fitted to Cloud-9 at v = 28 km/s, also satisfy published constraints from other dark-matter systems?",
+  "parameter_set": {
+    "sigma_0_cm2_per_g": 0.05156371513303437,
+    "a_slope": 1.9286750353457855,
+    "resonance_targets_km_s": [
+      29.36,
+      100.0,
+      178.5,
+      430.5,
+      768.9
+    ],
+    "f_H_squared": 0.5627784859370496
+  },
+  "conditions": [
+    {
+      "id": "mw_satellites_horigome",
+      "system": "Milky Way satellites (Gaia DR3 kinematics + subhalo N-body)",
+      "velocity_km_s": [
+        3.0,
+        5.0,
+        7.0,
+        10.0,
+        15.0
+      ],
+      "kind": "ceiling",
+      "bound_cm2_per_g": 0.8,
+      "source": {
+        "arxiv": "2503.13650",
+        "kb": "2503.13650_horigome_2025.md",
+        "line": 16,
+        "quote": "| \u03c3/m upper limit (w=10 km/s velocity-dep) | 0.8 cm\u00b2/g | 95% | Eq. 7, Table 1 |"
+      },
+      "note": "KB line 22 of the same entry already records the paper's own claim that this framework exceeds the Horigome+ 2025 threshold by 3.6-23.7x at v_eff = 5-20 km/s; the measurement here is an independent recomputation of that statement.",
+      "model_at_these_velocities": {
+        "3.0": {
+          "model": {
+            "total_cm2_per_g": 44.61730362598699,
+            "effective_cm2_per_g": 25.112354420745653,
+            "phase44_stored_cm2_per_g": 0.15488440893348154,
+            "halo_type": "core_collapsed",
+            "r_over_rvir": 0.2,
+            "point_kind": "producer_point"
+          },
+          "verdict_by_convention": {
+            "total_cm2_per_g": "VIOLATED",
+            "effective_cm2_per_g": "VIOLATED",
+            "phase44_stored_cm2_per_g": "CONSISTENT"
+          }
+        },
+        "5.0": {
+          "model": {
+            "total_cm2_per_g": 16.66009861560147,
+            "effective_cm2_per_g": 9.37695170077197,
+            "phase44_stored_cm2_per_g": 0.09305390842195108,
+            "halo_type": "core_collapsed",
+            "r_over_rvir": 0.2,
+            "point_kind": "producer_point"
+          },
+          "verdict_by_convention": {
+            "total_cm2_per_g": "VIOLATED",
+            "effective_cm2_per_g": "VIOLATED",
+            "phase44_stored_cm2_per_g": "CONSISTENT"
+          }
+        },
+        "7.0": {
+          "model": {
+            "total_cm2_per_g": 8.708395828118919,
+            "effective_cm2_per_g": 4.901423992472998,
+            "phase44_stored_cm2_per_g": 0.06659099956169537,
+            "halo_type": "core_collapsed",
+            "r_over_rvir": 0.2,
+            "point_kind": "producer_point"
+          },
+          "verdict_by_convention": {
+            "total_cm2_per_g": "VIOLATED",
+            "effective_cm2_per_g": "VIOLATED",
+            "phase44_stored_cm2_per_g": "CONSISTENT"
+          }
+        },
+        "10.0": {
+          "model": {
+            "total_cm2_per_g": 4.379858642051036,
+            "effective_cm2_per_g": 2.465154852340504,
+            "phase44_stored_cm2_per_g": 0.04680728549612335,
+            "halo_type": "core_collapsed",
+            "r_over_rvir": 0.2,
+            "point_kind": "producer_point"
+          },
+          "verdict_by_convention": {
+            "total_cm2_per_g": "VIOLATED",
+            "effective_cm2_per_g": "VIOLATED",
+            "phase44_stored_cm2_per_g": "CONSISTENT"
+          }
+        },
+        "15.0": {
+          "model": {
+            "total_cm2_per_g": 2.010991224081925,
+            "effective_cm2_per_g": 1.1318641032072747,
+            "phase44_stored_cm2_per_g": 0.031775504769417776,
+            "halo_type": "core_collapsed",
+            "r_over_rvir": 0.2,
+            "point_kind": "producer_point"
+          },
+          "verdict_by_convention": {
+            "total_cm2_per_g": "VIOLATED",
+            "effective_cm2_per_g": "TENSION",
+            "phase44_stored_cm2_per_g": "CONSISTENT"
+          }
+        }
+      }
+    },
+    {
+      "id": "segue_streams_gilman2023",
+      "system": "galaxy clusters / BCG stellar streams (relative velocities below 30 km/s)",
+      "velocity_km_s": [
+        28.0
+      ],
+      "kind": "ceiling",
+      "bound_cm2_per_g": 100.0,
+      "source": {
+        "arxiv": "2207.13111",
+        "kb": "2207.13111_gilman2023.md",
+        "line": 14,
+        "quote": "the strongest constraints obtained for cross section strengths exceeding 100 cm\u00b2/g at relative velocities below 30 km/s"
+      },
+      "note": "KB line 23 of that entry states this is a CORE-COLLAPSE TIMING constraint, not a direct sigma/m constraint: a high sigma/m is disfavored only if it makes a majority of halos core collapse. Treat the 100 as where the disfavoring begins, not a hard cutoff.",
+      "model_at_these_velocities": {
+        "28.0": {
+          "model": {
+            "total_cm2_per_g": 177.75388842653638,
+            "effective_cm2_per_g": 100.03606419810939,
+            "phase44_stored_cm2_per_g": 128.1262923221052,
+            "halo_type": "core_forming",
+            "r_over_rvir": 0.05,
+            "point_kind": "producer_point"
+          },
+          "verdict_by_convention": {
+            "total_cm2_per_g": "TENSION",
+            "effective_cm2_per_g": "TENSION",
+            "phase44_stored_cm2_per_g": "TENSION"
+          }
+        }
+      }
+    },
+    {
+      "id": "dwarf_dispersion_gilman2026",
+      "system": "ultra-faint dwarf velocity dispersion (sigma at 10 km/s)",
+      "velocity_km_s": [
+        10.0
+      ],
+      "kind": "floor",
+      "bound_cm2_per_g": 10.0,
+      "source": {
+        "arxiv": "2610.40766",
+        "kb": "2610.40766_gilman_2026.md",
+        "line": 31,
+        "quote": "| Disfavored region | \u03c3(10 km/s) < 10 cm\u00b2/g | \u00a7\"Results\" |"
+      },
+      "model_at_these_velocities": {
+        "10.0": {
+          "model": {
+            "total_cm2_per_g": 4.379858642051036,
+            "effective_cm2_per_g": 2.465154852340504,
+            "phase44_stored_cm2_per_g": 0.04680728549612335,
+            "halo_type": "core_collapsed",
+            "r_over_rvir": 0.2,
+            "point_kind": "producer_point"
+          },
+          "verdict_by_convention": {
+            "total_cm2_per_g": "TENSION",
+            "effective_cm2_per_g": "TENSION",
+            "phase44_stored_cm2_per_g": "VIOLATED"
+          }
+        }
+      }
+    },
+    {
+      "id": "dracos_core_collapse_sameie",
+      "system": "Dracos dSph / subhalo core collapse",
+      "velocity_km_s": [
+        10.0
+      ],
+      "kind": "floor",
+      "bound_cm2_per_g": 5.0,
+      "source": {
+        "arxiv": "1904.07872",
+        "kb": "1904.07872_sameie_2020.md",
+        "line": 29,
+        "quote": "| \u03c3/m threshold for core collapse | > 5 cm\u00b2/g | Sameie+ 2020 \u00a71 |"
+      },
+      "note": "Direction check, not a demand: below this threshold the framework does not produce a core-collapsed dwarf at that velocity. Other SIDM work does build core-collapsed subhalos, at \u03c30/m = 147.1 cm\u00b2/g with w = 120 km/s (2610.31881 line 186).",
+      "model_at_these_velocities": {
+        "10.0": {
+          "model": {
+            "total_cm2_per_g": 4.379858642051036,
+            "effective_cm2_per_g": 2.465154852340504,
+            "phase44_stored_cm2_per_g": 0.04680728549612335,
+            "halo_type": "core_collapsed",
+            "r_over_rvir": 0.2,
+            "point_kind": "producer_point"
+          },
+          "verdict_by_convention": {
+            "total_cm2_per_g": "TENSION",
+            "effective_cm2_per_g": "TENSION",
+            "phase44_stored_cm2_per_g": "VIOLATED"
+          }
+        }
+      }
+    },
+    {
+      "id": "tbtf_elbert",
+      "system": "too-big-to-fail in MW-mass halos",
+      "velocity_km_s": [
+        40.0
+      ],
+      "kind": "band",
+      "bound_cm2_per_g": [
+        0.5,
+        50.0
+      ],
+      "source": {
+        "arxiv": "1412.1477",
+        "kb": "1412.1477_elbert_2015.md",
+        "line": 28,
+        "quote": "| \u03c3/m range for TBTF | [0.5, 50] cm\u00b2/g | Elbert+ 2015 \u00a71 |"
+      },
+      "note": "Elbert+ 2015 shows what alleviates TBTF; it does not require a specific value. KB line 13 adds the sweet spot for the largest cores at 5-10 cm\u00b2/g.",
+      "model_at_these_velocities": {
+        "40.0": {
+          "model": {
+            "total_cm2_per_g": 0.7203223739794975,
+            "effective_cm2_per_g": 0.4054254578941039,
+            "phase44_stored_cm2_per_g": null,
+            "halo_type": "core_collapsed",
+            "r_over_rvir": 0.2,
+            "point_kind": "extension"
+          },
+          "verdict_by_convention": {
+            "total_cm2_per_g": "CONSISTENT",
+            "effective_cm2_per_g": "OUTSIDE"
+          }
+        }
+      }
+    },
+    {
+      "id": "macs0138_odonnell",
+      "system": "MACS J0138-2155 galaxy cluster",
+      "velocity_km_s": [
+        500.0
+      ],
+      "kind": "ceiling",
+      "bound_cm2_per_g": 0.613,
+      "source": {
+        "arxiv": "2508.20179",
+        "kb": "2508.20179_odonnell2025.md",
+        "line": 14,
+        "quote": "\u03c3/m < 0.613 cm\u00b2/g** at \u27e8v_pair\u27e9 < 2090 km/s"
+      },
+      "note": "Evaluated at 500 km/s, the highest velocity this framework samples. sigma/m falls with velocity, so the real v_pair < 2090 km/s only strengthens the agreement.",
+      "model_at_these_velocities": {
+        "500.0": {
+          "model": {
+            "total_cm2_per_g": 0.017156445214782642,
+            "effective_cm2_per_g": 0.009644075978745243,
+            "phase44_stored_cm2_per_g": 0.0002515574844246151,
+            "halo_type": "core_collapsed",
+            "r_over_rvir": 0.5,
+            "point_kind": "producer_point"
+          },
+          "verdict_by_convention": {
+            "total_cm2_per_g": "CONSISTENT",
+            "effective_cm2_per_g": "CONSISTENT",
+            "phase44_stored_cm2_per_g": "CONSISTENT"
+          }
+        }
+      }
+    },
+    {
+      "id": "desi_bao_zhu",
+      "system": "cosmic web / DESI BAO",
+      "velocity_km_s": [
+        500.0
+      ],
+      "kind": "ceiling",
+      "bound_cm2_per_g": 0.2,
+      "source": {
+        "arxiv": "2610.26877",
+        "kb": "2610.26877_zhu_2026.md",
+        "line": 14,
+        "quote": "\u03c3/m < 0.2 cm\u00b2/g (DESI BAO alone)"
+      },
+      "note": "The same line gives < 0.01 cm\u00b2/g with CMB priors at v_rel ~ 1000 km/s, which this framework cannot evaluate at that velocity (no sampled point there); evaluated at 500 km/s. KB adjudication for this paper: CORROBORATES (conditional, model-dependent).",
+      "model_at_these_velocities": {
+        "500.0": {
+          "model": {
+            "total_cm2_per_g": 0.017156445214782642,
+            "effective_cm2_per_g": 0.009644075978745243,
+            "phase44_stored_cm2_per_g": 0.0002515574844246151,
+            "halo_type": "core_collapsed",
+            "r_over_rvir": 0.5,
+            "point_kind": "producer_point"
+          },
+          "verdict_by_convention": {
+            "total_cm2_per_g": "CONSISTENT",
+            "effective_cm2_per_g": "CONSISTENT",
+            "phase44_stored_cm2_per_g": "CONSISTENT"
+          }
+        }
+      }
+    },
+    {
+      "id": "cloud9_optimum_ohana",
+      "system": "Cloud-9 (VLA HI + UV background, cosmological c-M prior)",
+      "velocity_km_s": [
+        28.0
+      ],
+      "kind": "target",
+      "bound_cm2_per_g": 200.0,
+      "source": {
+        "arxiv": "2608.04362",
+        "kb": "2608.04362_ohana_2026_cloud9_cdm_sidm.md",
+        "line": 29,
+        "quote": "| SIDM deviation minimised at | **~3\u03c3** for \u03c3/m \u2248 200 cm\u00b2/g | \u00a73.2, Fig. 3 bottom-left |"
+      },
+      "extra_published_values": {
+        "tau_018_fiducial_inferred_sigma_m_cm2_per_g": 483.0,
+        "tau_018_fiducial_kb_line": 26,
+        "cdm_requires_sigma_below_cM_median": 7.3,
+        "cdm_kb_line": 22
+      },
+      "note": "This is the published Cloud-9 preference. It is NOT the >= 100 bar the project used internally (F21): 100 and 128 are project-internal numbers, 200 (and 483 for the tau = 0.18 fiducial) are what the paper reports.",
+      "model_at_these_velocities": {
+        "28.0": {
+          "model": {
+            "total_cm2_per_g": 177.75388842653638,
+            "effective_cm2_per_g": 100.03606419810939,
+            "phase44_stored_cm2_per_g": 128.1262923221052,
+            "halo_type": "core_forming",
+            "r_over_rvir": 0.05,
+            "point_kind": "producer_point"
+          },
+          "verdict_by_convention": {
+            "total_cm2_per_g": "CONSISTENT",
+            "effective_cm2_per_g": "CONSISTENT",
+            "phase44_stored_cm2_per_g": "CONSISTENT"
+          }
+        }
+      }
+    },
+    {
+      "id": "yang_family_validity_gurian",
+      "system": "validity of the Yang+ 2024 gravothermal family at the Cloud-9 anchor",
+      "velocity_km_s": [
+        28.0
+      ],
+      "kind": "methodology",
+      "bound_cm2_per_g": null,
+      "source": {
+        "arxiv": "2610.28745",
+        "kb": "2610.28745_gurian_2026.md",
+        "line": 14,
+        "quote": "at **\u03c3\u2272100 cm\u00b2/g** halos enter dense-core/SMFP and the Yang family becomes inaccurate"
+      },
+      "note": "Not a bound on sigma/m: a caveat about the model family this project uses. The framework's effective value at Cloud-9 is 100.04, i.e. exactly at the boundary where Gurian+ 2026 say the Yang family stops being accurate.",
+      "model_at_these_velocities": {
+        "28.0": {
+          "model": {
+            "total_cm2_per_g": 177.75388842653638,
+            "effective_cm2_per_g": 100.03606419810939,
+            "phase44_stored_cm2_per_g": 128.1262923221052,
+            "halo_type": "core_forming",
+            "r_over_rvir": 0.05,
+            "point_kind": "producer_point"
+          },
+          "verdict_by_convention": {
+            "total_cm2_per_g": "NOT_A_BOUND",
+            "effective_cm2_per_g": "NOT_A_BOUND",
+            "phase44_stored_cm2_per_g": "NOT_A_BOUND"
+          }
+        }
+      }
+    }
+  ],
+  "tally_effective_convention": {
+    "CONSISTENT": 3,
+    "TENSION": 4,
+    "VIOLATED": 4,
+    "OUTSIDE": 1,
+    "NOT_A_BOUND": 1
+  },
+  "arms": {
+    "a_slope_0.5": {
+      "a_slope": 0.5,
+      "tally_effective_convention": {
+        "CONSISTENT": 8,
+        "TENSION": 1,
+        "VIOLATED": 2,
+        "OUTSIDE": 1,
+        "NOT_A_BOUND": 1
+      },
+      "effective_cm2_per_g_by_velocity": {
+        "3.0": 0.16876759573252717,
+        "5.0": 0.13128665395768702,
+        "7.0": 0.11153667037840885,
+        "10.0": 0.09427697082798403,
+        "15.0": 0.08017077576284329,
+        "28.0": 99.75289124538487,
+        "40.0": 0.2814008945864337,
+        "100.0": 0.25715623860963965,
+        "500.0": 0.021306244147614194
+      }
+    },
+    "a_slope_0.8": {
+      "a_slope": 0.8,
+      "tally_effective_convention": {
+        "CONSISTENT": 8,
+        "TENSION": 1,
+        "VIOLATED": 2,
+        "OUTSIDE": 1,
+        "NOT_A_BOUND": 1
+      },
+      "effective_cm2_per_g_by_velocity": {
+        "3.0": 0.4809766583114297,
+        "5.0": 0.32032098906754947,
+        "7.0": 0.24542820419064587,
+        "10.0": 0.18561799392575895,
+        "15.0": 0.13762616321375584,
+        "28.0": 99.77839492084853,
+        "40.0": 0.2959190139802752,
+        "100.0": 0.25715623860963965,
+        "500.0": 0.016342002793564337
+      }
+    },
+    "a_slope_1.0": {
+      "a_slope": 1.0,
+      "tally_effective_convention": {
+        "CONSISTENT": 7,
+        "TENSION": 2,
+        "VIOLATED": 2,
+        "OUTSIDE": 1,
+        "NOT_A_BOUND": 1
+      },
+      "effective_cm2_per_g_by_velocity": {
+        "3.0": 0.9686107942907997,
+        "5.0": 0.5819373348750612,
+        "7.0": 0.4164445047904938,
+        "10.0": 0.29272179359555595,
+        "15.0": 0.1987165598243989,
+        "28.0": 99.80168969102034,
+        "40.0": 0.30806814326217286,
+        "100.0": 0.25715623860963965,
+        "500.0": 0.014140688600938396
+      }
+    },
+    "default_phase44": {
+      "a_slope": 1.9286750353457855,
+      "tally_effective_convention": {
+        "CONSISTENT": 3,
+        "TENSION": 4,
+        "VIOLATED": 4,
+        "OUTSIDE": 1,
+        "NOT_A_BOUND": 1
+      },
+      "effective_cm2_per_g_by_velocity": {
+        "3.0": 25.112354420745653,
+        "5.0": 9.37695170077197,
+        "7.0": 4.901423992472998,
+        "10.0": 2.465154852340504,
+        "15.0": 1.1318641032072747,
+        "28.0": 100.03606419810939,
+        "40.0": 0.4054254578941039,
+        "100.0": 0.25715623860963965,
+        "500.0": 0.009644075978745243
+      }
+    }
+  },
+  "arm_dependence": "Every dwarf-velocity verdict below is an a_slope verdict as much as a sigma/m(v) verdict: the same framework with a_slope = 1.0 instead of the Phase-44 default changes the effective value at v = 3 km/s by roughly an order of magnitude, which is larger than the 0.198-0.247% Cloud-9 near-miss the internal bar was measuring.",
+  "measured_ratios": {
+    "mw_satellites_horigome": {
+      "3.0": {
+        "effective": 25.112354420745653,
+        "bound": 0.8,
+        "value_over_bound": 31.390443025932065
+      },
+      "5.0": {
+        "effective": 9.37695170077197,
+        "bound": 0.8,
+        "value_over_bound": 11.721189625964962
+      },
+      "7.0": {
+        "effective": 4.901423992472998,
+        "bound": 0.8,
+        "value_over_bound": 6.126779990591247
+      },
+      "10.0": {
+        "effective": 2.465154852340504,
+        "bound": 0.8,
+        "value_over_bound": 3.08144356542563
+      },
+      "15.0": {
+        "effective": 1.1318641032072747,
+        "bound": 0.8,
+        "value_over_bound": 1.4148301290090932
+      }
+    },
+    "segue_streams_gilman2023": {
+      "28.0": {
+        "effective": 100.03606419810939,
+        "bound": 100.0,
+        "value_over_bound": 1.0003606419810938
+      }
+    },
+    "dwarf_dispersion_gilman2026": {
+      "10.0": {
+        "effective": 2.465154852340504,
+        "bound": 10.0,
+        "value_over_bound": 0.2465154852340504
+      }
+    },
+    "dracos_core_collapse_sameie": {
+      "10.0": {
+        "effective": 2.465154852340504,
+        "bound": 5.0,
+        "value_over_bound": 0.4930309704681008
+      }
+    },
+    "tbtf_elbert": {
+      "40.0": {
+        "effective": 0.4054254578941039,
+        "x_above_band_low": 0.8108509157882078,
+        "x_below_band_high": 123.327233222389
+      }
+    },
+    "macs0138_odonnell": {
+      "500.0": {
+        "effective": 0.009644075978745243,
+        "bound": 0.613,
+        "value_over_bound": 0.015732587241019974
+      }
+    },
+    "desi_bao_zhu": {
+      "500.0": {
+        "effective": 0.009644075978745243,
+        "bound": 0.2,
+        "value_over_bound": 0.04822037989372621
+      }
+    },
+    "cloud9_optimum_ohana": {
+      "28.0": {
+        "effective": 100.03606419810939,
+        "bound": 200.0,
+        "value_over_bound": 0.5001803209905469
+      }
+    }
+  },
+  "headline": {
+    "high_velocity_systems": "CONSISTENT with large margin. At v = 500 km/s the framework gives 0.009644 cm2/g, i.e. 64x below the MACS J0138 ceiling (0.613) and 21x below the DESI BAO ceiling (0.2). sigma/m falls with velocity, so the agreement only strengthens at the true v_pair ~ 2090 km/s.",
+    "dwarf_velocity_systems": "VIOLATED against Horigome+ 2025: the framework is 31.4x above their 0.8 cm2/g 95% ceiling at v = 3 km/s and 3.08x above it at v = 10 km/s (2.465 cm2/g).",
+    "published_dwarf_data_conflict": "The two published dwarf conditions bracket sigma/m(10 km/s) in opposite directions: Horigome+ 2025 requires < 0.8 cm2/g while Gilman+ 2026 disfavours < 10 cm2/g, a 12.5x contradiction. No single value \u2014 this framework's 2.465 included \u2014 can satisfy both.",
+    "cloud9_velocity": "At v = 28 km/s the framework gives 100 cm2/g effective (177.8 total). Gilman+ 2023 begin to disfavor > 100 cm2/g below 30 km/s (ratio 1.0004). Ohana+ 2026's published Cloud-9 optimum is ~200 cm2/g, so the framework is 2.00x below it on the effective convention and 1.13x below it on the total convention (the paper's tau = 0.18 fiducial infers 483 cm2/g).",
+    "what_the_quarter_percent_means": "The 0.198-0.247% Cloud-9 near-miss is a comparison against this project's own internal bar (F21). Against published data from other systems the dwarf-regime discrepancies run 1.41x to 31.4x above the published ceiling, and the cluster-regime margins run 21x to 64x below the published ceilings."
+  }
+}

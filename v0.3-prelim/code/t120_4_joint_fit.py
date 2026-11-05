@@ -201,15 +201,29 @@ if __name__ == "__main__":
 
     print()
     print("=" * 80)
-    print("RESULT: All 4 constraints simultaneously satisfied with w1 <= 5 km/s")
+    print("T120.4 DEFAULT-ARM EVALUATION (verdicts computed from the values, not asserted)")
     print("=" * 80)
     print()
+    print("=" * 80)
     print("BEST FIT (default): w1=3.0 km/s")
     r = joint_fit_evaluation()
-    print(f"  Cloud-9:  sigma/m(v=28) = {r['Cloud-9']:.2f} cm^2/g  (required >= 100, ✓ PASS)")
-    print(f"  dSph:     sigma/m(v=15) = {r['dSph']:.3f} cm^2/g  (required <= 0.8, ✓ PASS)")
-    print(f"  SPARC:    sigma/m(v=100) = {r['SPARC']:.4f} cm^2/g  (required 0.05-0.5, ✓ PASS)")
-    print(f"  cluster:  sigma/m(v=500) = {r['cluster']:.4f} cm^2/g  (required < 1.0, ✓ PASS)")
+    # Verdicts are computed from the evaluated values. They were previously hard-coded as
+    # "✓ PASS" on every line regardless of the numbers, which made the producer's own output
+    # unfalsifiable (finding F21 / decision D9).
+    _grades = [
+        ("Cloud-9", "required >= 100 (internal anchor, F21)", r["Cloud-9"], lambda x: x >= 100.0),
+        ("dSph", "required <= 0.8", r["dSph"], lambda x: x <= 0.8),
+        ("SPARC", "required 0.05-0.5", r["SPARC"], lambda x: 0.05 <= x <= 0.5),
+        ("cluster", "required < 1.0", r["cluster"], lambda x: x < 1.0),
+    ]
+    _fmt = {"Cloud-9": ".2f", "dSph": ".3f", "SPARC": ".4f", "cluster": ".4f"}
+    for _name, _req, _val, _ok in _grades:
+        print(f"  {_name}:  sigma/m = {_val:{_fmt[_name]}} cm^2/g  ({_req}, "
+              f"{'PASS' if _ok(_val) else 'FAIL'})")
+    print(f"  all_pass (this arm): {bool(r['all_pass'])}")
+    if not r["all_pass"]:
+        print("  RESULT: NOT all constraints are satisfied by this arm; see "
+              "v0.3-prelim/code/t120_constraint_scoreboard.py for the full 8-channel scoreboard")
 
     print()
     print("=" * 80)

@@ -11,12 +11,16 @@ the velocity dependence from first principles. The derived slope is:
 Why this matters:
 1. The phenomenological fit found a_slope = 0.92 ± 0.36
 2. The Hidden U(1) UV model predicts a_slope = 0.5 (analytically)
-3. With a_slope = 0.5, ALL 8 observational constraints STILL PASS:
-   - Cloud-9 (v=28): sigma/m = 128 cm^2/g (passes >=100)
-   - dSph (v=15): sigma/m = 0.013 cm^2/g (passes <0.8, much safer than slope=1)
-   - UFD (v=3-10): all <0.03 cm^2/g (well below 0.8 limit)
-   - SPARC (v=100): 0.19 cm^2/g (in [0.05, 0.5])
-   - Cluster (v=500): 0.0004 cm^2/g (well below 1.0)
+3. RETIRED CLAIM (F18 / D9, 2026-11-05): 'with a_slope = 0.5 ALL 8 constraints
+   still pass'. Re-measured through v0.3-prelim/code/t120_constraint_scoreboard.py
+   with the repo venv, the a_slope=0.5 arm is 7 PASS / 1 MARGINAL / 0 FAIL, not
+   8/8, and the numbers in the original claim are not the producer's values:
+   - Cloud-9 (v=28): 99.752891 cm^2/g (claimed 128) -> MARGINAL, 0.247% short of >=100
+   - dSph (v=15):    0.080171 cm^2/g (claimed 0.013) -> PASS
+   - UFD v=3/5/7/10: 0.168768 / 0.131287 / 0.111537 / 0.094277 (claimed <0.03) -> PASS
+   - SPARC (v=100):  0.257156 cm^2/g (claimed 0.19) -> PASS
+   - Cluster (v=500): 0.021306 cm^2/g (claimed 0.0004) -> PASS
+   Bounds are unchanged; only the claimed values were wrong.
 
 The "slope flattening" we did in v1.13.1 (1.93 -> 1.0) was actually a
 phenomenological APPROXIMATION of what the Hidden U(1) UV predicts.
@@ -102,22 +106,41 @@ class TestUVSlopeFromHiddenU1:
 
 
 class TestUVSlopePassesObservations:
-    """Test that UV-derived slope (= 0.5) still satisfies all 8 observational constraints."""
+    """Test the UV-derived slope (= 0.5) against the 8 observational constraints.
+
+    Measured tally is 7 PASS / 1 MARGINAL / 0 FAIL (F18 / D9), not 8/8.
+    """
 
     def test_all_8_constraints_pass_with_uv_slope(self):
-        """With a_slope = 0.5, all 8 observational constraints pass."""
+        """RETIRED (F18/D9): 'with a_slope = 0.5, all 8 observational constraints pass'.
+
+        Measured: 7 PASS / 1 MARGINAL / 0 FAIL of 8, all_pass False. The single miss
+        is Cloud-9 v=28 = 99.752891 cm^2/g against the stated >= 100 floor (0.247%
+        short -> MARGINAL). The UV-derived slope is the best arm tested, but it is a
+        near-miss on Cloud-9, not a clean sweep.
+        """
         from t120_4_joint_fit import joint_fit_full_evaluation
+        from t120_constraint_scoreboard import constraint_scoreboard
+
         result = joint_fit_full_evaluation(a_slope_override=0.5)
-        assert result["all_pass"], f"All should pass: {result}"
+        s = constraint_scoreboard(a_slope_override=0.5)["summary"]
+        assert (s["n_pass"], s["n_marginal"], s["n_fail"], s["n_total"]) == (7, 1, 0, 8), s
+        assert bool(result["all_pass"]) is False, f"all_pass unexpectedly True: {result}"
 
     def test_cloud9_satisfies_with_uv_slope(self):
-        """Cloud-9 (v=28) sigma/m >= 100 cm^2/g with a_slope=0.5."""
-        from t120_4_joint_fit import joint_fit_full_evaluation
-        result = joint_fit_full_evaluation(a_slope_override=0.5)
-        # v28.0_Cloud-9
-        assert result["v28.0_Cloud-9"] >= 100, (
-            f"Cloud-9 sigma/m should be >=100: got {result['v28.0_Cloud-9']}"
-        )
+        """RETIRED (F18/D9): 'Cloud-9 sigma/m >= 100 (128 cm^2/g) with a_slope=0.5'.
+
+        Measured: 99.752891 cm^2/g — 0.247% BELOW the >= 100 floor, so the scoreboard
+        scores it MARGINAL. The 128 figure in the original docstring is not produced
+        by this code path at any a_slope tested (100.04 at the Phase-44 default,
+        99.75-99.89 across a_slope 0.5-1.93).
+        """
+        from t120_constraint_scoreboard import constraint_scoreboard
+
+        obs = constraint_scoreboard(a_slope_override=0.5)["observations"]["v28.0_Cloud-9"]
+        assert obs["verdict"] == "MARGINAL", obs
+        assert obs["value"] == pytest.approx(99.75289124538487, rel=1e-6)
+        assert obs["value"] < 100.0, obs
 
     def test_dsph_passes_with_uv_slope(self):
         """dSph (v=15) sigma/m < 0.8 cm^2/g with a_slope=0.5."""
@@ -171,14 +194,30 @@ class TestUVSlopeVsPhenomenology:
         )
 
     def test_uv_slope_0_5_still_passes_born_like_1_93(self):
-        """All 8 constraints pass for both slope=0.5 and slope=1.93."""
+        """RETIRED (F18/D9): 'all 8 constraints pass for both slope=0.5 and slope=1.93'.
+
+        Measured tallies (scoreboard, MARGINAL band 5%):
+          a_slope=0.5  -> 7 PASS / 1 MARGINAL / 0 FAIL  (Cloud-9 99.752891 MARGINAL)
+          a_slope=1.93 -> 3 PASS / 0 MARGINAL / 5 FAIL  (v=3 25.229294, v=5 9.414239,
+                                         v=7 4.918718, v=10 2.472679, dSph 1.134700)
+        The Born-derived slope is not merely 'flatter', it is the difference between
+        a near-miss and a five-way violation. all_pass is False for both arms.
+        """
         from t120_4_joint_fit import joint_fit_full_evaluation
+        from t120_constraint_scoreboard import constraint_scoreboard
+
         r_05 = joint_fit_full_evaluation(a_slope_override=0.5)
         r_193 = joint_fit_full_evaluation(a_slope_override=1.93)
+        s05 = constraint_scoreboard(a_slope_override=0.5)["summary"]
+        s193 = constraint_scoreboard(a_slope_override=1.93)["summary"]
 
-        assert r_05["all_pass"]
-        # Note: slope=1.93 FAILS dSph in v1.13.1 (the flattening was needed)
-        # So r_193 may not have all_pass
+        assert (s05["n_pass"], s05["n_marginal"], s05["n_fail"]) == (7, 1, 0), s05
+        assert (s193["n_pass"], s193["n_marginal"], s193["n_fail"]) == (3, 0, 5), s193
+        assert bool(r_05["all_pass"]) is False, r_05
+        assert bool(r_193["all_pass"]) is False, r_193
+        o193 = constraint_scoreboard(a_slope_override=1.93)["observations"]
+        assert o193["v3.0_extreme_UFD"]["value"] == pytest.approx(25.229293887021484, rel=1e-9)
+        assert o193["v15.0_classical_dSph"]["value"] == pytest.approx(1.1346995765, rel=1e-9)
 
 
 class TestUVSlopePhysicalInterpretation:
@@ -273,10 +312,19 @@ class TestUVSlopeMultiComponentConsistency:
     """Test that UV-derived slope is consistent with multi-component + gravothermal."""
 
     def test_uv_slope_passes_with_multi_component(self):
-        """With slope=0.5 + multi-component + gravothermal, all 8 pass."""
+        """RETIRED (F18/D9): 'slope=0.5 + multi-component + gravothermal gives all 8'.
+
+        Measured: 7 PASS / 1 MARGINAL / 0 FAIL, all_pass False (Cloud-9 99.752891).
+        The multi-component machinery is what puts Cloud-9 within 0.25% of the floor;
+        it does not clear the floor.
+        """
         from t120_4_joint_fit import joint_fit_full_evaluation
+        from t120_constraint_scoreboard import constraint_scoreboard
+
         result = joint_fit_full_evaluation(a_slope_override=0.5)
-        assert result["all_pass"], f"All should pass: {result}"
+        s = constraint_scoreboard(a_slope_override=0.5)["summary"]
+        assert (s["n_pass"], s["n_marginal"], s["n_fail"]) == (7, 1, 0), s
+        assert bool(result["all_pass"]) is False, f"all_pass unexpectedly True: {result}"
 
     def test_uv_slope_better_at_dsph_than_phenomenological(self):
         """Slope=0.5 gives smaller dSph (safer) than slope=1.0."""

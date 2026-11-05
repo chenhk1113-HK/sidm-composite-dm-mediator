@@ -12,6 +12,12 @@ while evading direct detection, because:
 - Self-interaction still works because during close approach,
   potential energy alpha_D * m_D >> Delta_m, allowing adiabatic
   up-scattering within the potential well
+
+F18 / D9 note (2026-11-05): the class TestPseudoDiracCompatibityWithV113 used to
+assert Cloud-9 sigma/m ~128 and 'all 8 constraints still pass'. Measured through
+v0.3-prelim/code/t120_constraint_scoreboard.py the Cloud-9 arm is 99.801690
+(MARGINAL, 0.198% short of >= 100) and the a_slope=1.0 tally is 6 PASS / 1
+MARGINAL / 1 FAIL with all_pass False. See docs/INTEGRITY_FINDINGS_2026-11-04.md.
 """
 import sys
 from pathlib import Path
@@ -20,6 +26,10 @@ import pytest
 
 _CODE_DIR = Path(__file__).parent.parent / "code"
 sys.path.insert(0, str(_CODE_DIR))
+
+# F18/D9: artifact reads are anchored to this file, never to the current
+# working directory (the same defect class as the T90 CWD-relative paths).
+_RESULTS_DIR = Path(__file__).resolve().parents[1] / "data" / "results"
 
 
 class TestHiddenU1UV:
@@ -294,55 +304,93 @@ class TestPseudoDiracCompatibityWithV113:
     """Tests that pseudo-Dirac UV is COMPATIBLE with v1.13.1 phenomenology."""
 
     def test_pseudo_dirac_does_not_break_cloud9(self):
-        """Pseudo-Dirac Yukawa + BW peaks must still give Cloud-9 sigma/m ~ 128."""
-        import sys
-        sys.path.insert(0, 'v0.3-prelim/code')
-        from t120_4_joint_fit import (total_sigma_m_gaussian, T120_4_V_TARGETS,
-                                       T120_4_SIGMA_PEAKS, T120_4_W_LIST_DEFAULT)
-        from phase44_two_component import f_H_at_r
-        import json
-        with open('v0.3-prelim/data/results/phase44_joint_fit.json') as f:
-            d44 = json.load(f)
-        sigma_0 = d44['best_params'][1]
+        """RETIRED (F18/D9): 'pseudo-Dirac Yukawa + BW peaks give Cloud-9 sigma/m ~ 128'.
 
-        # At v=28, BW peak dominates
+        Measured in this task with the repo venv through the same producers the
+        scoreboard calls (sigma_0 = 0.05156371513303437 cm^2/g from
+        phase44_joint_fit.json, default w_list = [3, 30, 30, 50, 50]):
+
+            sigma_HH(v=28)               = 177.337429 cm^2/g
+            f_H_at_r(0.05, core_forming) =   0.750186   (this test's old comment said 0.85)
+            sigma_eff = f_H^2 * sigma_HH =  99.801690 cm^2/g
+
+        99.801690 is 0.198% BELOW the stated >= 100 floor, so it scores MARGINAL,
+        not PASS. The floor is not moved; the '~128' claim is retired. The honest
+        statement is: the pseudo-Dirac arm lands on a Cloud-9 near-miss.
+        """
+        import json
+        from phase44_two_component import f_H_at_r
+        from t120_4_joint_fit import (total_sigma_m_gaussian, T120_4_V_TARGETS,
+                                      T120_4_SIGMA_PEAKS, T120_4_W_LIST_DEFAULT)
+        from t120_constraint_scoreboard import four_constraint_scoreboard
+
+        sigma_0 = json.loads((_RESULTS_DIR / "phase44_joint_fit.json").read_text())["best_params"][1]
         sigma_HH = total_sigma_m_gaussian(28.0, T120_4_V_TARGETS, T120_4_SIGMA_PEAKS,
                                           T120_4_W_LIST_DEFAULT, sigma_0, 1.0)
-        f_H = f_H_at_r(0.05, "core_forming")  # 0.85
+        f_H = f_H_at_r(0.05, "core_forming")
         sigma_eff = f_H * f_H * sigma_HH
-        # Should be ~128 cm²/g (Cloud-9 PASS)
-        assert sigma_eff > 100, f"Cloud-9 should still pass: {sigma_eff:.2f}"
+
+        assert sigma_HH == pytest.approx(177.33742881952278, rel=1e-9)
+        assert f_H == pytest.approx(0.7501856343179664, rel=1e-9)
+        assert sigma_eff == pytest.approx(99.80168969102034, rel=1e-9), sigma_eff
+        assert sigma_eff < 100.0, f"measured Cloud-9 is short of the floor: {sigma_eff}"
+
+        obs = four_constraint_scoreboard(a_slope_override=1.0)["observations"]["Cloud-9"]
+        assert obs["verdict"] == "MARGINAL", obs
+        assert obs["value"] == pytest.approx(99.80168969102034, rel=1e-9)
 
     def test_pseudo_dirac_does_not_break_dsph(self):
-        """Pseudo-Dirac Yukawa + BW peaks + 2C + gravothermal still passes dSph."""
-        import sys
-        sys.path.insert(0, 'v0.3-prelim/code')
-        from t120_4_joint_fit import (total_sigma_m_gaussian, T120_4_V_TARGETS,
-                                       T120_4_SIGMA_PEAKS, T120_4_W_LIST_DEFAULT)
-        from phase44_two_component import f_H_at_r
-        import json
-        with open('v0.3-prelim/data/results/phase44_joint_fit.json') as f:
-            d44 = json.load(f)
-        sigma_0 = d44['best_params'][1]
+        """Pseudo-Dirac + BW peaks + gravothermal keeps dSph under the 0.8 ceiling.
 
-        # At v=15, BW peaks don't contribute much
+        Numbers corrected to measured values (F18/D9): f_H_at_r(0.20, core_collapsed)
+        is 0.750226 (this test's old comment claimed 0.30) and sigma_eff = 0.198717
+        cm^2/g (the old comment claimed ~0.03). The verdict survives — 0.198717 is a
+        clean PASS — but it has 4x less margin than the retired comment implied.
+        """
+        import json
+        from phase44_two_component import f_H_at_r
+        from t120_4_joint_fit import (total_sigma_m_gaussian, T120_4_V_TARGETS,
+                                      T120_4_SIGMA_PEAKS, T120_4_W_LIST_DEFAULT)
+        from t120_constraint_scoreboard import four_constraint_scoreboard
+
+        sigma_0 = json.loads((_RESULTS_DIR / "phase44_joint_fit.json").read_text())["best_params"][1]
         sigma_HH = total_sigma_m_gaussian(15.0, T120_4_V_TARGETS, T120_4_SIGMA_PEAKS,
                                           T120_4_W_LIST_DEFAULT, sigma_0, 1.0)
-        f_H = f_H_at_r(0.20, "core_collapsed")  # 0.30
+        f_H = f_H_at_r(0.20, "core_collapsed")
         sigma_eff = f_H * f_H * sigma_HH
-        # Should be ~0.03 cm²/g (dSph PASS)
-        assert sigma_eff < 0.8, f"dSph should still pass: {sigma_eff:.3f}"
+
+        assert sigma_HH == pytest.approx(0.353061164104642, rel=1e-9)
+        assert f_H == pytest.approx(0.7502259041964671, rel=1e-9)
+        assert sigma_eff == pytest.approx(0.1987165598243989, rel=1e-9), sigma_eff
+
+        obs = four_constraint_scoreboard(a_slope_override=1.0)["observations"]["dSph"]
+        assert obs["verdict"] == "PASS", obs
+        assert obs["value"] == pytest.approx(0.1987165598243989, rel=1e-9)
 
     def test_uv_completion_does_not_change_observables(self):
-        """UV completion is invisible to observations; only affects DD safety."""
-        # UV completion (pseudo-Dirac) doesn't change sigma/v curve
-        # It only changes the particle-physics interpretation of sigma_0
-        # Therefore all 8 observational constraints still pass
+        """RETIRED (F18/D9): 'therefore all 8 observational constraints still pass'.
 
-        # Just verify the framework is consistent
+        What survives: the UV layer changes no number — every observable equals the
+        producer's own value at a_slope = 1.0, which is what this test verifies.
+        What is retired: 'all 8 pass'. Measured at the Hidden U(1) prediction
+        a_slope = 1.0 the tally is 6 PASS / 1 MARGINAL / 1 FAIL:
+          v3.0_extreme_UFD = 0.968611 (1.210764x the 0.8 ceiling -> FAIL)
+          v28.0_Cloud-9    = 99.801690 (0.198% short of >= 100 -> MARGINAL)
+        """
         from t120_4_joint_fit import joint_fit_full_evaluation
+        from t120_constraint_scoreboard import constraint_scoreboard
+
         r = joint_fit_full_evaluation(a_slope_override=1.0)
-        assert r["all_pass"], "All 8 should still pass with UV completion"
+        sb = constraint_scoreboard(a_slope_override=1.0)
+        s = sb["summary"]
+
+        assert (s["n_pass"], s["n_marginal"], s["n_fail"], s["n_total"]) == (6, 1, 1, 8), s
+        assert bool(r["all_pass"]) is False, f"all_pass unexpectedly True: {r}"
+        # The UV-completion claim proper: observables are exactly the producer's.
+        for key, obs in sb["observations"].items():
+            assert float(r[key]) == pytest.approx(obs["value"], rel=1e-12), key
+        assert r["v3.0_extreme_UFD"] == pytest.approx(0.9686107942907997, rel=1e-9)
+        assert r["v28.0_Cloud-9"] == pytest.approx(99.80168969102034, rel=1e-9)
 
 
 if __name__ == "__main__":

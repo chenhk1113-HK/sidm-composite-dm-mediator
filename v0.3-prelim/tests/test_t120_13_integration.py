@@ -10,6 +10,11 @@ These are NEW integration tests that were not covered by:
 - test_t120_4_joint_fit.py (just the joint fit)
 - test_t120_9_mcmc_and_uv.py (MCMC + magnetic dipole)
 - test_t120_11_hidden_u1.py (Hidden U(1) standalone)
+
+F18 / D9 note (2026-11-05): three assertions in this file claimed the integration
+'passes'. Measured through v0.3-prelim/code/t120_constraint_scoreboard.py, the
+phenomenological layer at a_slope=1.0 is 6 PASS / 1 MARGINAL / 1 FAIL with
+all_pass False. Bounds were not moved; see docs/INTEGRITY_FINDINGS_2026-11-04.md.
 """
 import sys
 from pathlib import Path
@@ -18,6 +23,10 @@ import pytest
 
 _CODE_DIR = Path(__file__).parent.parent / "code"
 sys.path.insert(0, str(_CODE_DIR))
+
+# F18/D9: artifact reads are anchored to this file, never to the current
+# working directory (the same defect class as the T90 CWD-relative paths).
+_RESULTS_DIR = Path(__file__).resolve().parents[1] / "data" / "results"
 
 
 # Standard test parameters
@@ -32,12 +41,27 @@ class TestHiddenU1AndPhase44Integration:
     """Hidden U(1) UV completion + Phase 44 joint fit integration."""
 
     def test_phase44_joint_fit_still_passes(self):
-        """Phase 44 joint fit with a_slope=1.0 (Hidden U(1) prediction) still passes all 8."""
+        """RETIRED (F18/D9): 'Phase 44 joint fit at a_slope=1.0 passes all 8'.
+
+        Measured through v0.3-prelim/code/t120_constraint_scoreboard.py at
+        a_slope_override=1.0 (the Hidden U(1) prediction):
+            6 PASS / 1 MARGINAL / 1 FAIL of 8, all_pass False
+            v3.0_extreme_UFD = 0.968611 cm^2/g  (1.210764x the 0.8 ceiling -> FAIL)
+            v28.0_Cloud-9    = 99.801690 cm^2/g (0.198% short of >= 100 -> MARGINAL)
+        The name is kept for traceability; the test now pins the measured state so
+        the retired claim cannot be re-blessed.
+        """
         from t120_4_joint_fit import joint_fit_full_evaluation
-        result = joint_fit_full_evaluation(a_slope_override=1.0)
-        assert result["all_pass"], (
-            f"Phase 44 joint fit should pass: {result}"
-        )
+        from t120_constraint_scoreboard import constraint_scoreboard
+
+        s = constraint_scoreboard(a_slope_override=1.0)["summary"]
+        assert (s["n_pass"], s["n_marginal"], s["n_fail"], s["n_total"]) == (6, 1, 1, 8), s
+        obs = constraint_scoreboard(a_slope_override=1.0)["observations"]
+        assert obs["v3.0_extreme_UFD"]["verdict"] == "FAIL"
+        assert obs["v3.0_extreme_UFD"]["value"] == pytest.approx(0.9686107942907997, rel=1e-9)
+        assert obs["v28.0_Cloud-9"]["verdict"] == "MARGINAL"
+        assert obs["v28.0_Cloud-9"]["value"] == pytest.approx(99.80168969102034, rel=1e-9)
+        assert bool(joint_fit_full_evaluation(a_slope_override=1.0)["all_pass"]) is False
 
     def test_hidden_u1_self_interaction_matches_phase44(self):
         """Hidden U(1) sigma/m should be within factor 2 of Phase 44 sigma_0."""
@@ -62,17 +86,27 @@ class TestHiddenU1AndPhase44Integration:
         assert ratio > 1000, f"Should be > 1000x below LZ: {ratio:.2e}"
 
     def test_combined_pass(self):
-        """Combined: Hidden U(1) UV + Phase 44 phenomenology + 2C + gravothermal."""
+        """Combined: Hidden U(1) UV + Phase 44 phenomenology + 2C + gravothermal.
+
+        RETIRED (F18/D9): 'the combination passes' asserted as result["all_pass"].
+        Measured: the Hidden U(1) direct-detection check does pass, but the
+        phenomenological tally at a_slope=1.0 is 6 PASS / 1 MARGINAL / 1 FAIL and
+        all_pass is False. The combination is therefore 'DD-safe but not
+        observationally complete', not 'all pass'.
+        """
         from t120_11_hidden_u1_uv import check_uv_completion
         from t120_4_joint_fit import joint_fit_full_evaluation
+        from t120_constraint_scoreboard import constraint_scoreboard
 
         # Hidden U(1) UV completion check
         uv_pass = check_uv_completion(M_D_GEV, ALPHA_D, M_A_PRIME_GEV, DELTA_M_GEV, EPSILON)
         assert uv_pass
 
-        # Phase 44 phenomenology check
+        # Phase 44 phenomenology check (measured, not asserted as passing)
         result = joint_fit_full_evaluation(a_slope_override=1.0)
-        assert result["all_pass"]
+        s = constraint_scoreboard(a_slope_override=1.0)["summary"]
+        assert (s["n_pass"], s["n_marginal"], s["n_fail"]) == (6, 1, 1), s
+        assert bool(result["all_pass"]) is False, f"all_pass unexpectedly True: {result}"
 
 
 class TestHiddenU1ParameterValues:
@@ -128,7 +162,7 @@ class TestHiddenU1Phase44Synergy:
                                           v_rel_c=100/2.998e5)
         # Phase 44 sigma_0 from JSON
         import json
-        with open('v0.3-prelim/data/results/phase44_joint_fit.json') as f:
+        with open(_RESULTS_DIR / "phase44_joint_fit.json") as f:
             d44 = json.load(f)
         sigma_0_p44 = d44["best_params"][1]
 
@@ -146,7 +180,7 @@ class TestHiddenU1Phase44Synergy:
         # Therefore Phase 44 BW peaks should be the same with or without Hidden U(1)
         from t120_4_joint_fit import total_sigma_m_gaussian, T120_4_V_TARGETS, T120_4_SIGMA_PEAKS, T120_4_W_LIST_DEFAULT
         import json
-        with open('v0.3-prelim/data/results/phase44_joint_fit.json') as f:
+        with open(_RESULTS_DIR / "phase44_joint_fit.json") as f:
             d44 = json.load(f)
         sigma_0 = d44["best_params"][1]
 
@@ -162,20 +196,28 @@ class TestHiddenU1Phase44Synergy:
         - Phenomenological (T120.4): resolves Cloud-9 vs UFD tension
         - Statistical (T120.9a): MCMC verification
         - UV completion (T120.11): makes mediator safe from direct detection
+
+        RETIRED (F18/D9): the layer-1 assertion 'p44["all_pass"]'. Measured at
+        a_slope=1.0 the phenomenological layer is 6 PASS / 1 MARGINAL / 1 FAIL
+        (v3.0_extreme_UFD = 0.968611 FAIL; v28.0_Cloud-9 = 99.801690 MARGINAL) and
+        all_pass is False. The layers remain complementary — each does something the
+        others do not — but layer 1 does not pass everything it claimed.
         """
-        # Just verify that each layer provides distinct functionality
         from t120_4_joint_fit import joint_fit_full_evaluation
         from t120_11_hidden_u1_uv import check_uv_completion
+        from t120_constraint_scoreboard import constraint_scoreboard
 
-        # Layer 1: phenomenology
+        # Layer 1: phenomenology (measured tally, retired all_pass claim)
         p44 = joint_fit_full_evaluation(a_slope_override=1.0)
-        assert p44["all_pass"]
+        s = constraint_scoreboard(a_slope_override=1.0)["summary"]
+        assert (s["n_pass"], s["n_marginal"], s["n_fail"], s["n_total"]) == (6, 1, 1, 8), s
+        assert bool(p44["all_pass"]) is False, f"all_pass unexpectedly True: {p44}"
 
         # Layer 2: UV completion
         uv = check_uv_completion(M_D_GEV, ALPHA_D, M_A_PRIME_GEV, DELTA_M_GEV, EPSILON)
         assert uv
 
-        # Both must pass independently (no redundant testing)
+        # Both layers are exercised independently (no redundant testing).
 
 
 class TestPhase44NumericalValues:
@@ -184,7 +226,7 @@ class TestPhase44NumericalValues:
     def test_sigma_0_value(self):
         """Phase 44 sigma_0 should be 0.052 cm^2/g (the target)."""
         import json
-        with open('v0.3-prelim/data/results/phase44_joint_fit.json') as f:
+        with open(_RESULTS_DIR / "phase44_joint_fit.json") as f:
             d44 = json.load(f)
         sigma_0 = d44["best_params"][1]
         assert abs(sigma_0 - 0.052) < 0.01, f"sigma_0: {sigma_0}"
@@ -192,7 +234,7 @@ class TestPhase44NumericalValues:
     def test_m_chi_value(self):
         """Phase 44 m_chi should be ~10 GeV."""
         import json
-        with open('v0.3-prelim/data/results/phase44_joint_fit.json') as f:
+        with open(_RESULTS_DIR / "phase44_joint_fit.json") as f:
             d44 = json.load(f)
         m_chi = d44["best_params"][0]
         assert 5 < m_chi < 20, f"m_chi: {m_chi}"
@@ -200,7 +242,7 @@ class TestPhase44NumericalValues:
     def test_bw_peaks_count(self):
         """Phase 44 should have 4 BW peaks."""
         import json
-        with open('v0.3-prelim/data/results/phase44_joint_fit.json') as f:
+        with open(_RESULTS_DIR / "phase44_joint_fit.json") as f:
             d44 = json.load(f)
         # best_params layout: [m_chi, sigma_0, a_slope, v_t1, v_t2, v_t3, v_t4,
         #                     sigma_peak1, sigma_peak2, sigma_peak3, sigma_peak4,

@@ -59,9 +59,13 @@ WHY THE FOUR TestFullChainVerification ASSERTIONS ARE WRONG (they are not
   `v0.3-prelim/data/results/sigma_m_phase44.json` (the v19.2-F Phase 44 fit),
   NOT the T120.4 chain. The paper's 8-channel table at L941-944 quotes
   128 / 0.18 / 0.19 / 0.0002 cm2/g, and Cloud-9 128 and SPARC 0.19 reproduce
-  from that JSON to <2% (128.126 and 0.193). Note that 128 is the *observational
-  floor* (BLN24/Ohana+ 2026), not a model output — see canonical_numbers.py
-  line 333 "Cloud-9 v=28 (BLN24/Ohana+ 2026 floor 128, canonical Phase 44)".
+  from that JSON to <2% (128.126 and 0.193). Correction (2026-11-06, finding F21): 128 is NOT a published observation. It is this project's own
+  Phase 44 model output (128.126, `sigma_m_phase44.json['v28.0_Cloud-9']`), and the label
+  "BLN24/Ohana+ 2026 floor 128" at `canonical_numbers.py` is a misattribution — neither
+  arXiv:2406.18643 (zero mentions of self-interaction; Cloud-9 modelled as a normal-concentration
+  CDM RELHIC) nor arXiv:2608.04362 (cross-section posterior peaking near 200 cm²/g, both tails
+  penalised) publishes a Cloud-9 cross section or a 100/128 floor. Grading the fit against a bar it
+  produced itself is circular; see `v0.3-prelim/code/t120_cloud9_bound.py`.
 
 WHAT WAS CHANGED HERE (2026-10-25): the four `TestFullChainVerification`
 assertions are re-pointed from the superseded T120.4 chain to the CURRENT

@@ -20,13 +20,24 @@ The 8 channels and their published σ_unc:
 | UFD v=7  km/s | Horigome+ 2025 [27] | "±0.05 cm²/g" 95% CL systematic |
 | UFD v=10 km/s | Horigome+ 2025 [27] | "±0.05 cm²/g" 95% CL systematic |
 | dSph v=15 km/s | Horigome+ 2025 [27] | "±0.04 cm²/g" combined stat+syst |
-| Cloud-9 v=28 | BLN24 / Ohana+ 2026 [15b/15e] | "±30 cm²/g" 1σ floor uncertainty |
+| Cloud-9 v=28 | **INTERNAL anchor (F21)** — see note below | "±30 cm²/g" assumed 1σ |
 | SPARC v=100 | Lelli+ 2016 [14] | "±0.05 cm²/g" rotation curve band |
 | Cluster v=500 | Randall+ 2008 [4] | "±5×10⁻⁴ cm²/g" 95% CL limit |
 
 (All σ_unc values are documented in T205_PUBLISHED_SIGMA_UNC.md with citation
 to the actual paper text. For channels where no error budget is published
 in machine-readable form, we use the published 95% CL or systematic floor.)
+
+Cloud-9 note (finding F21, 2026-11-06): the 128 ± 30 cm²/g entry below is a PROJECT-INTERNAL
+anchor, not a published measurement. 128.126 cm²/g is this project's own canonical Phase 44 model
+output (`data/results/sigma_m_phase44.json`, key `v28.0_Cloud-9`); the ±30 is assumed. The papers
+formerly credited with it publish no Cloud-9 cross section at all: arXiv:2406.18643 (BLN24) contains
+zero mentions of self-interaction and models Cloud-9 as a normal-concentration CDM RELHIC, and
+arXiv:2608.04362 (Ohana+ 2026) publishes a posterior peaking near 200 cm²/g that "disfavors both
+very small and very large cross sections", with no floor at 100 or 128. Grading the fit against a
+bar the fit itself produced is circular, so this channel is an internal consistency check, not
+external evidence. Re-derivation: `code/t120_cloud9_bound.py` ->
+`data/results/t120_cloud9_bound_rederivation.json`.
 
 Honest limitations:
 - Some σ_unc are approximated from published plots and error tables, not
@@ -60,13 +71,23 @@ OBS_PUBLISHED = [
     (10.0, 0.047, 0.05, 'ceiling', 'UFD v=10', 'Horigome+ 2025 Table II'),
     # dSph v=15: combined 8 dSphs, σ_unc from Horigome Table II systematic.
     (15.0, 0.032, 0.04, 'ceiling', 'dSph v=15', 'Horigome+ 2025 Table II'),
-    # Cloud-9 v=28: BLN24 + Ohana+ 2026, σ_unc ~ 30 cm²/g floor uncertainty.
-    (28.0, 128.0, 30.0, 'floor', 'Cloud-9 v=28', 'BLN24 / Ohana+ 2026'),
-    # SPARC v=100: Lelli+ 2016 rotation curve band ±0.05.
+    # Cloud-9 v=28: INTERNAL anchor (finding F21). 128.126 cm²/g is this project's own canonical
+    # Phase 44 output (sigma_m_phase44.json['v28.0_Cloud-9']); the ±30 is assumed. The papers
+    # formerly credited here publish no Cloud-9 cross section (see the module docstring).
+    (28.0, 128.0, 30.0, 'floor', 'Cloud-9 v=28', 'INTERNAL anchor (F21); was "BLN24 / Ohana+ 2026"'),
     (100.0, 0.193, 0.05, 'gaussian', 'SPARC v=100', 'Lelli+ 2016'),
     # Cluster v=500: Randall+ 2008 95% CL limit (5e-4).
     (500.0, 2.5e-4, 5e-4, 'ceiling', 'Cluster v=500', 'Randall+ 2008'),
 ]
+
+# F21 provenance declaration (2026-11-06): the Cloud-9 slot is a model output, not published data.
+CLOUD9_ANCHOR_STATUS = "INTERNAL"
+CLOUD9_ANCHOR_VALUE_CM2_PER_G = 128.0
+CLOUD9_ANCHOR_UNC_CM2_PER_G = 30.0
+CLOUD9_ANCHOR_IS_MODEL_OUTPUT_CM2_PER_G = 128.1262923221052   # sigma_m_phase44.json
+CLOUD9_PUBLISHED_POSTERIOR_PEAK_CM2_PER_G = 200.0             # Ohana+ 2026, arXiv:2608.04362
+CLOUD9_PUBLISHED_PREFERRED_REGION_CM2_PER_G = (50.0, 500.0)
+CLOUD9_NO_PUBLISHED_FLOOR = True
 
 
 # ============================================================================

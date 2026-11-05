@@ -194,15 +194,10 @@ def summarize(results, pytest_internal_skips: int = 0, pytest_deselected: int = 
 #     no longer grow silently and a green gate cannot hide an unlabelled failing file.
 # ---------------------------------------------------------------------------
 GATE_IGNORED_TESTS: dict[str, str] = {
-    "v0.3-prelim/tests/test_t120_4_joint_fit.py":
-        "claims-vs-computation: asserts the T120 constraints all pass; measured sigma/m and "
-        "ratio values miss the stated bounds (finding F18 / decision D9)",
-    "v0.3-prelim/tests/test_t120_11_hidden_u1.py":
-        "claims-vs-computation: same T120 claim family (finding F18 / decision D9)",
-    "v0.3-prelim/tests/test_t120_13_integration.py":
-        "claims-vs-computation: same T120 claim family (finding F18 / decision D9)",
-    "v0.3-prelim/tests/test_t120_15_uv_slope.py":
-        "claims-vs-computation: same T120 claim family (finding F18 / decision D9)",
+    # EMPTY 2026-11-05: the four T120 claim files were repaired by decision D9
+    # (single-source scoreboard + measured assertions) and re-admitted to the gate.
+    # A future exclusion needs BOTH an entry here AND a matching in-file
+    # `# GATE-IGNORED[<name>]:` marker, or this layer fails.
 }
 
 GATE_IGNORED_MARKER_PREFIX = "# GATE-IGNORED["

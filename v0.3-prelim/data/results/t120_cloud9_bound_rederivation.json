@@ -1,0 +1,153 @@
+{
+  "velocity_kms": 28.0,
+  "internal_bar": {
+    "value_cm2_per_g": 100.0,
+    "used_by": [
+      "t120_4_joint_fit.joint_fit_evaluation",
+      "t120_constraint_scoreboard",
+      "T205_full_likelihood_published channel list uses 128 +/- 30"
+    ],
+    "provenance": "project-internal working anchor (labelled in the paper as 'Elbert+ 2015 [55a] working benchmark'); NOT a published lower bound",
+    "status": "INTERNAL"
+  },
+  "internal_t205_anchor": {
+    "value_cm2_per_g": 128.0,
+    "uncertainty_cm2_per_g": 30.0,
+    "citation_label_in_code": "BLN24 / Ohana+ 2026",
+    "status": "MISATTRIBUTED",
+    "finding": "neither cited paper publishes a Cloud-9 cross section: BLN24 contains none, Ohana+ 2026 publishes a posterior peaked near 200 cm^2/g with no floor"
+  },
+  "published_anchors": {
+    "elbert_2015": {
+      "arxiv": "1412.1477",
+      "pdf_lines_quoted": [
+        13,
+        14,
+        44,
+        96,
+        205
+      ],
+      "what_it_publishes": [
+        "sigma/m = 0.5-50 cm^2/g alleviates TBTF and produces 300-1000 pc cores",
+        "largest, lowest-density cores at sigma/m = 5-10 cm^2/g",
+        "the 50 cm^2/g run is denser in its core than the 5 cm^2/g run: mild core collapse",
+        "cross sections as large or larger than 50 cm^2/g remain viable at v_rms ~ 40 km/s",
+        "the viable range spans at least two orders of magnitude: no fine-tuning"
+      ],
+      "is_100_a_floor_in_this_paper": false,
+      "role_of_50": "largest simulated cross section / mild-collapse onset, plus a viability statement"
+    },
+    "benitez_llambay_2024_bln24": {
+      "arxiv": "2406.18643",
+      "pdf_lines_quoted": [
+        263,
+        319
+      ],
+      "what_it_publishes": [
+        "Cloud-9 modelled as a CDM (NFW) RELHIC in hydrostatic + UVB thermal equilibrium",
+        "M200 in 4-6 x 10^9 Msun and cNFW in 10-17, 'all consistent with the CDM mass-concentration relation'",
+        "W50 = 12 km/s line profile"
+      ],
+      "contains_any_self_interaction_cross_section": false,
+      "grep_evidence": "0 occurrences of 'sigma' and 0 of 'SIDM'/'self-interact' in the extracted text",
+      "is_128_or_100_from_this_paper": false
+    },
+    "ohana_2026": {
+      "arxiv": "2608.04362",
+      "pdf_lines_quoted": [
+        253,
+        356,
+        404,
+        464
+      ],
+      "what_it_publishes": [
+        "cross-section posterior is right-skewed log-normal peaking around 200 cm^2/g",
+        "the posterior 'disfavors both very small and very large cross sections'",
+        "concentration deviation minimised at ~3 sigma below the median at sigma/m ~ 200 cm^2/g",
+        "SIDM concentration posterior peaks 3.3 sigma below the cosmological median",
+        "CDM requires 7.3 sigma below the median, still >6.7 sigma allowing for fit uncertainty",
+        "a tau-based inference quotes sigma/m = 483 cm^2/g"
+      ],
+      "is_100_a_floor_in_this_paper": false,
+      "published_preferred_region_cm2_per_g": [
+        50.0,
+        500.0
+      ],
+      "published_posterior_peak_cm2_per_g": 200.0,
+      "caveat": "concentration is constrained only through the cosmological c-M prior; the gas profile alone is degenerate between CDM and SIDM"
+    }
+  },
+  "model_values_by_arm": {
+    "default_phase44": {
+      "a_slope": 1.9286750353457855,
+      "sigma_0_cm2_per_g": 0.05156371513303437,
+      "Q_total_cm2_per_g": 177.75388842653638,
+      "Q_canonical_gaussian_cm2_per_g": 166.01808042318618,
+      "Q_effective_fH_squared_cm2_per_g": 100.03606419810939,
+      "f_H": 0.7501856343179664,
+      "f_H_squared": 0.5627784859370496,
+      "margin_vs_internal_bar_pct": {
+        "Q_total": 77.75388842653638,
+        "Q_canonical": 66.01808042318618,
+        "Q_effective": 0.036064198109386325
+      }
+    },
+    "a_slope_1.0": {
+      "a_slope": 1.0,
+      "sigma_0_cm2_per_g": 0.05156371513303437,
+      "Q_total_cm2_per_g": 177.33742881952278,
+      "Q_canonical_gaussian_cm2_per_g": 166.01808042318618,
+      "Q_effective_fH_squared_cm2_per_g": 99.80168969102034,
+      "f_H": 0.7501856343179664,
+      "f_H_squared": 0.5627784859370496,
+      "margin_vs_internal_bar_pct": {
+        "Q_total": 77.33742881952278,
+        "Q_canonical": 66.01808042318618,
+        "Q_effective": -0.19831030897965715
+      }
+    },
+    "a_slope_0.8": {
+      "a_slope": 0.8,
+      "sigma_0_cm2_per_g": 0.05156371513303437,
+      "Q_total_cm2_per_g": 177.29603638759102,
+      "Q_canonical_gaussian_cm2_per_g": 166.01808042318618,
+      "Q_effective_fH_squared_cm2_per_g": 99.77839492084853,
+      "f_H": 0.7501856343179664,
+      "f_H_squared": 0.5627784859370496,
+      "margin_vs_internal_bar_pct": {
+        "Q_total": 77.29603638759102,
+        "Q_canonical": 66.01808042318618,
+        "Q_effective": -0.2216050791514732
+      }
+    },
+    "a_slope_0.5": {
+      "a_slope": 0.5,
+      "sigma_0_cm2_per_g": 0.05156371513303437,
+      "Q_total_cm2_per_g": 177.25071895613095,
+      "Q_canonical_gaussian_cm2_per_g": 166.01808042318618,
+      "Q_effective_fH_squared_cm2_per_g": 99.75289124538487,
+      "f_H": 0.7501856343179664,
+      "f_H_squared": 0.5627784859370496,
+      "margin_vs_internal_bar_pct": {
+        "Q_total": 77.25071895613095,
+        "Q_canonical": 66.01808042318618,
+        "Q_effective": -0.24710875461512674
+      }
+    }
+  },
+  "conventions": {
+    "quantity_graded_against_100_in_t120_4": "Q_effective_fH_squared",
+    "quantity_the_paper_quotes_as_166": "Q_canonical_gaussian",
+    "convention_factor": 1.776898060228721,
+    "note": "the same model differs by a factor ~1.78 between the quantity the paper quotes as passing (canonical 166) and the quantity the joint fit grades (effective ~100); that factor dwarfs the 0.2% near-miss"
+  },
+  "verdict": {
+    "against_internal_bar_100": {
+      "Q_total": "passes by 77.8%",
+      "Q_canonical": "passes by 66.0%",
+      "Q_effective": "near-miss, +0.04%"
+    },
+    "against_published_posterior_peak_200": "Q_total sits inside the published preferred region (peak ~200, broad intermediate range, both tails penalised); no published floor is crossed",
+    "honest_limit": "this shows the model is consistent with the published Cloud-9 inference, not that Cloud-9 confirms the model: the published constraint is weak, prior-driven, and the profile alone does not discriminate CDM from SIDM"
+  }
+}
