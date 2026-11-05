@@ -81,17 +81,32 @@ now asserts the v0.8 MAP (478 GeV / 488 MeV / 0.81σ), so this line, the docs an
   `v0.3-prelim/data/results/superseded/t90_v57_hybrid_5ch_joint_posterior.pre_d10_rerun_2026-11-05.json`
   (sha256 `d84c102f1ab5dd823f12feb34ebe25a5a0da701dfe022bfb671684c89bced7c2`); the new chain is
   `412d30e981860bf1fbedf3409b104612324ca721e96f3faad03b6cbd990a343e`. Evidence: F20.
-- **Gate coverage limit made explicit (open decision D9, 2026-11-05):** running the whole
-  `v0.3-prelim/tests` directory instead of the gate's selected subset found **45 failing tests in the 12
-  gate-ignored files** at `b0834fe`. Two were mechanical and are fixed (`code/t90_v60_naturalness.py` read
-  its posteriors through CWD-relative paths; three suites asserted four master docs that commit `b5c24c0`
-  deleted, now documented skips). The remaining **29** are claims the model does not reproduce — the t120
-  family asserts "all constraints pass" while Cloud-9 sigma/m measures 88.02–106.81 against a stated
-  `>=100` and dSph sigma/m(v=15) measures 1.132 against a stated `<=0.8`; `test_t87_inelastic_nucleon`
-  disagrees with its stored LZ rate by a factor `3.65e15`; `test_phase7e_unit_conversion_audit` expects a
-  `~365` bug factor and gets `1.02`; `test_t82_audit_version_drift` expects text the auditor no longer
-  prints. Full breakdown in `docs/INTEGRITY_FINDINGS_2026-11-04.md` F18. Nothing was loosened to green and
-  nothing was added to the passing set: a 15/15 gate certifies the selected subset only.
+- **F21 / Cloud-9 bound provenance (closed 2026-11-06).** The Cloud-9 `>= 100 cm²/g` bar and the
+  `128 ± 30 cm²/g` "observation" are **project-internal**: 128.126 is `sigma_m_phase44.json`'s own
+  model output, and neither arXiv:2406.18643 nor arXiv:2608.04362 publishes a Cloud-9 cross section
+  (BLN24 has none at all; Ohana+ 2026's posterior peaks near 200 cm²/g and penalises both tails).
+  Re-derivation producer `v0.3-prelim/code/t120_cloud9_bound.py`, artifact
+  `v0.3-prelim/data/results/t120_cloud9_bound_rederivation.json`, guard
+  `v0.3-prelim/tests/test_t120_cloud9_bound_provenance.py`. Consequence: the Cloud-9 row in every
+  "N of 8" tally is an internal consistency check, not external evidence. See
+  `docs/INTEGRITY_FINDINGS_2026-11-04.md` F21.
+- **F22 (other dark-matter conditions, MEASURED 2026-11-06):** the σ/m(v) shape transfers to cluster and cosmic-web scales by large margins (0.009644 cm²/g at 500 km/s vs 0.613 and 0.2 ceilings), but in the dwarf regime it is 31.4x above Horigome+ 2025's published 0.8 cm²/g ceiling at 3 km/s on the canonical a_slope=1.9287 arm; the two published dwarf bounds themselves contradict each other by 12.5x, and Cloud-9's published optimum is ~200 cm²/g (Ohana+ 2026), not the internal 100/128 numbers. Scoreboard: `v0.3-prelim/data/results/other_dm_conditions_probe.json`. Evidence: F22.
+- **Gate coverage limit (decision D9 — rounds 1–2 executed 2026-11-05/06):** running the whole
+  `v0.3-prelim/tests` directory instead of the gate's selected subset had found **45 failing tests in the 12
+  gate-ignored files** at `b0834fe` — 16 mechanical (CWD-relative posterior paths; suites asserting four
+  master docs that commit `b5c24c0` deleted) and 29 claims the model did not reproduce. Every one of the 29
+  has since been resolved as a measured value instead of an asserted one: Phase 7e's `~365` was the retired
+  tonne-unit defect (live conversion `1.02`); the T87 LZ factor is the `365.25x` historical normalization
+  error, now pinned in the test; the T82 wording guard was rewritten to match what the auditor prints; the
+  T90 naturalness readings were re-derived at production scale (F20); the paper reference-slot test was
+  repaired; and the four `test_t120_*` files, which asserted "all constraints pass" against stale stored
+  values, were rebuilt on one live scoreboard and **re-admitted to the gate — `GATE_IGNORED_TESTS` is empty**,
+  with any future exclusion needing a reason in that map plus a matching in-file `# GATE-IGNORED[<name>]:`
+  marker. Measured state of the repaired family (15 files, 2026-11-06): **174 passed, 3 skipped in 7.11 s**.
+  What T120 actually measures: default `a_slope=1.9287` → 3/8, `a_slope=0.5–0.8` → 7/8, `a_slope=1.0` → 6/8,
+  Cloud-9 σ/m 99.75–100.04 across those arms, and no arm reaches 8/8; F21 shows the Cloud-9 bar is internal,
+  so its "pass" is self-consistency, not external evidence. A 15/15 gate certifies the selected subset, not
+  the project. Full breakdown: `docs/INTEGRITY_FINDINGS_2026-11-04.md` F18.
 - **Phase G2 now carries measured merger statistics (2026-11-05):** `measured_merger_statistics()` in
   `v0.3-prelim/code/phase_g2_merger_history.py` reads the Stage-3 sample and writes
   `phase_g2_measured_merger_statistics.json`: measured f_active **0.733** (RELHIC-mass tier, 60 halos)

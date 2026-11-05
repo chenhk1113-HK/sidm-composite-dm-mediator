@@ -549,7 +549,7 @@ and `test_sidm_core_radius_invariance.py` are designed to fail and force the re-
 - The re-derived Phase 39/40 artifacts in this sweep change numbers but not the physics
   prescription — that is D1.
 
-## F18 — the release gate's ignore list hides 12 test files that contradict stored claims (OPEN, decision D9)
+## F18 — the release gate's ignore list hides 12 test files that contradict stored claims (D9 ROUNDS 1–2 EXECUTED 2026-11-06; every table row below resolved as a measured value)
 
 **Found 2026-11-05** while running the whole `v0.3-prelim/tests` directory instead of the gate's
 selected subset. The gate passes 15/15 while ignoring 15 files; 12 of them failed, carrying
@@ -589,6 +589,19 @@ with the measured numbers, (b) fix the model if a defect is found (the `3.65e15`
 claim in writing. Nothing here has been loosened to green, and nothing has been re-added to the gate
 as passing.
 
+
+**Status after D9 rounds 1–2 (measured 2026-11-06).** Every row of the table above has since been resolved as
+a measured value rather than an asserted one. The four `test_t120_*` files were rebuilt against
+`code/t120_constraint_scoreboard.py` (one live producer) and **re-admitted to the release gate**:
+`GATE_IGNORED_TESTS` in `scripts/verify_release_gate.py` is empty, and any future exclusion must appear both
+in that map with a reason and as a `# GATE-IGNORED[<name>]:` marker that
+`v0.3-prelim/tests/test_gate_ignore_list_markers.py` checks. Re-running all 15 repaired or re-admitted files
+gave **174 passed, 3 skipped in 7.11 s**. The rebuilt T120 family measures: default `a_slope=1.9287` → 3/8,
+`a_slope=0.5` and `0.8` → 7/8, `a_slope=1.0` → 6/8, `a_slope=1.93` → 3/8; Cloud-9 σ/m 99.75–100.04 across
+those arms; mechanism ratio 2.2511, not the claimed ~2.9. F21 later showed the Cloud-9 bar is a
+project-internal anchor, so a Cloud-9 "pass" is an internal consistency check rather than observational
+support, and the 7/8 arms are dwarf-side near-misses (0.198–0.247%) rather than eight confirmed constraints.
+The "45 / 29" figures above are the state at `b0834fe`, kept as history and not as the current count.
 
 ### ID collision note (2026-11-05)
 
@@ -743,4 +756,175 @@ to the production chain (14 passed) and mutation-tested by swapping the archived
 into place: 4 guards failed, the artifact was restored byte-identically, 14/14 passed after restore.
 Decision D10 is closed.
 
+## F21 — the Cloud-9 "observational floor" is this project's own model output (FIXED 2026-11-06)
 
+**What was claimed.** `v0.3-prelim/code/T205_full_likelihood_published.py` carried
+`(28.0, 128.0, 30.0, 'floor', 'Cloud-9 v=28', 'BLN24 / Ohana+ 2026')` as published pseudo-data that
+feeds the canonical eight-channel likelihood. `scripts/canonical_numbers.py` labels the same figure
+"Cloud-9 v=28 (BLN24/Ohana+ 2026 floor 128)". `v0.3-prelim/tests/test_T132_eft_target_map_sanity.py`
+stated outright that "128 is the *observational* floor … not a model output". The T120 joint fit
+grades Cloud-9 against `sigma_eff(v=28) >= 100`, and its `__main__` printed `✓ PASS` on all four
+channels regardless of the values it had just computed.
+
+**What is actually true (measured, with sources read from the verified local PDFs via pdftotext).**
+
+1. `128.1262923221052` is `v0.3-prelim/data/results/sigma_m_phase44.json['v28.0_Cloud-9']` — the
+   canonical Phase 44 **model output**. The likelihood was being graded against a bar the fit itself
+   produced. That is circular, and it inflates the channel tally.
+2. Neither cited paper publishes a Cloud-9 cross section:
+   - **arXiv:2406.18643 (BLN24)** — the extracted text contains **zero** occurrences of "sigma" or of
+     any self-interaction mention. It models Cloud-9 as a CDM (NFW) RELHIC with M200 = 4–6 × 10⁹ M☉
+     and c_NFW = 10–17, "all consistent with the CDM mass–concentration relation" (extracted lines
+     263, 319), W50 = 12 km/s.
+   - **arXiv:2608.04362 (Ohana+ 2026)** — cross-section posterior is a right-skewed log-normal
+     peaking around **200 cm²/g** and "disfavors both very small and very large cross sections"
+     (lines 253, 356); the concentration deviation is minimised at ~3σ below the cosmological median
+     at σ/m ≈ 200 (line 404); the SIDM posterior peaks 3.3σ below the median while **CDM requires
+     7.3σ** (still >6.7σ allowing for fit uncertainty) (line 464); a τ-based inference quotes
+     483 cm²/g. There is **no floor at 100 or at 128**, and the paper explicitly warns that the gas
+     profile alone is degenerate between CDM and SIDM.
+   - **arXiv:1412.1477 (Elbert+ 2015)** — 0.5–50 cm²/g alleviate the too-big-to-fail problem; the
+     largest, lowest-density cores come at 5–10 cm²/g; the 50 cm²/g run is *denser* in its core than
+     the 5 cm²/g run, i.e. mild core collapse (line 44); "cross sections as large or larger than
+     50 cm²/g remain viable" at v_rms ≈ 40 km/s (line 205). A viability demonstration, not a
+     requirement.
+   - **arXiv:2503.13650 (Horigome+ 2025)** — the 0.8 cm²/g dwarf ceiling **is** published: "we obtain
+     95%-percentile upper limits of 0.8 cm²/g for w = 10 km/s and 0.04 cm²/g for the
+     velocity-independent case" (lines 261–262). The per-bin 0.155 / 0.093 / 0.067 / 0.047 / 0.032 in
+     T205 are this project's own splitting of that single limit across velocity bins, as that module's
+     docstring already says; they must not be quoted as five separate measurements.
+3. The same Cloud-9 quantity carries four different numbers depending on convention: total five-peak
+   **177.75**, canonical Gaussian **166.02**, two-component effective f_H² × total **100.04**, Phase-44
+   v²-space convention **128.13**, with f_H = 0.7501856344812027 (f_H² = 0.562778). The convention
+   factor 1.7769 is roughly **900× larger** than the 0.036% margin by which the default arm clears the
+   100 bar — the near-miss story was never the dominant uncertainty.
+4. Two families in this repo use different bounds for the same channels: cluster `< 1.0` in T120
+   versus `2.5e-4 ± 5e-4` in T205 (~4000× looser), and SPARC band lower edge 0.05 versus 0.1. The
+   framework's values (2.5e-6, 0.155) pass under both, so the tally is unaffected, but the loose
+   numbers must not be quoted as the strict ones.
+
+**Fixes applied.**
+- New producer `v0.3-prelim/code/t120_cloud9_bound.py` →
+  `v0.3-prelim/data/results/t120_cloud9_bound_rederivation.json`: measures all three model
+  quantities per arm, records the published anchors with the PDF line each came from, and states the
+  verdict as consistency with the published posterior rather than a floor test.
+- `T205_full_likelihood_published.py`: the Cloud-9 slot is now labelled `INTERNAL anchor (F21)` and
+  the module declares `CLOUD9_ANCHOR_STATUS`, `CLOUD9_NO_PUBLISHED_FLOOR`, the posterior peak
+  (200 cm²/g) and preferred region (50–500 cm²/g). The tuple values were left untouched so the
+  likelihood is not silently re-tuned.
+- `t120_constraint_scoreboard.py`: every scored row now carries `bound_provenance`, and the Cloud-9
+  verdict reports the graded quantity as `f_H^2 * sigma/m(v=28)` against an **internal** bar.
+- `t120_4_joint_fit.py`: the `__main__` block no longer prints hard-coded `✓ PASS`; verdicts are
+  computed from the values, and the unconditional "All 4 constraints simultaneously satisfied" banner
+  is gone.
+- `test_T132_eft_target_map_sanity.py`: the "128 is the observational floor" sentence is replaced by
+  the measured provenance.
+- Paper `v0.3-prelim/docs/PAPER_V1_DRAFT.md`: §3.2 no longer credits BLN24 with a σ/m floor (it
+  states BLN24 publishes none, and traces ≳50 to Elbert+ 2015), both §9 tables label the ≥100 bar an
+  internal anchor, the "obs = 128 ± 30" bullet is corrected, and the sensitivity row is relabelled as
+  a working floor rather than a published bound. The BLN24-vs-Ohana tension (normal-concentration CDM
+  halo vs a 7σ-below-median CDM halo) is now stated in the paper.
+- New regression test `v0.3-prelim/tests/test_t120_cloud9_bound_provenance.py`.
+
+**What this does not fix.** The `>= 100` bar still exists as a working anchor, and the Cloud-9 channel
+still contributes to the "N of 8" tally. What changed is what the tally *means*: with an internal bar,
+the Cloud-9 row is an internal consistency statement, not external evidence. Replacing it with a
+published comparison would mean comparing against Ohana+ 2026's posterior — which peaks near 200 with
+both tails penalised, and which the framework's total 177.75 sits inside. That comparison is weaker,
+not stronger, evidence.
+
+**One of my own earlier statements was wrong and is corrected here.** In this session I reported the
+T205 channel list as carrying SPARC `(100.0, 0.19, 0.05, 'range')` and cluster
+`(500.0, 1e-3, 5e-4, 'upper_limit')`. At HEAD it carries `(100.0, 0.193, 0.05, 'gaussian', …)` and
+`(500.0, 2.5e-4, 5e-4, 'ceiling', …)`. The Cloud-9 slot was as I described. This does not change the
+F21 conclusion, but the misquote is recorded so it is not repeated.
+
+## F22 — the Cloud-9 parameterisation tested against other dark-matter systems (MEASURED 2026-11-06)
+
+**What was asked.** Whether the velocity-dependent σ/m that the project fits at Cloud-9
+(v = 28 km/s) also explains *other* dark-matter conditions.
+
+**What was built.** `v0.3-prelim/code/other_dm_conditions_probe.py` evaluates the project's own
+σ/m(v) at the velocities each published system actually probes, using the producer's own halo-type
+and observation-radius convention per point (`test_other_dm_conditions_probe.py` pins that mirror on
+every a_slope arm), and compares against nine published entries. Each bound carries a verbatim quote
+plus a line number in `docs/papers/verified/`, and the test suite fails if any quote is not found on
+its cited line — no paraphrased-from-memory citations.
+
+**Measured verdicts, effective convention, four a_slope arms** (`tally_effective_convention`):
+
+| arm | a_slope | CONSISTENT | TENSION | VIOLATED | OUTSIDE |
+|---|---|---|---|---|---|
+| a_slope 0.5 | 0.5 | 8 | 1 | 2 | 1 |
+| a_slope 0.8 | 0.8 | 8 | 1 | 2 | 1 |
+| a_slope 1.0 | 1.0 | 7 | 2 | 2 | 1 |
+| Phase-44 default | 1.9287 | 3 | 4 | 4 | 1 |
+
+**The four findings that matter.**
+
+1. **High-velocity systems transfer easily, and only because σ/m falls with velocity.** At
+   v = 500 km/s the framework gives 0.009644 cm²/g — 64×
+   below O'Donnell+ 2025's MACS J0138 ceiling (0.613 cm²/g, arXiv:2508.20179 line 14) and
+   21× below Zhu+ 2026's DESI BAO ceiling (0.2 cm²/g, arXiv:2610.26877 line 14).
+   This is agreement by distance, not a fit.
+
+2. **Dwarf-velocity systems do not transfer on the canonical arm.** With the Phase-44 default
+   a_slope = 1.9287, σ/m(3 km/s) = 25.11 cm²/g, which is
+   31.4× above Horigome+ 2025's published 95% ceiling of 0.8 cm²/g
+   (arXiv:2503.13650 line 16); σ/m(10 km/s) = 2.465 is 3.08× above it.
+   The same KB entry (line 22) already records the paper's own 3.6–23.7× claim; this is an
+   independent recomputation of it, and it lands in the same range.
+
+3. **The two published dwarf conditions contradict each other by 12.5×.** Horigome+ 2025 requires
+   σ/m(10 km/s) < 0.8 cm²/g while Gilman+ 2026 *disfavours* σ(10 km/s) < 10 cm²/g
+   (arXiv:2610.40766 line 31). No single value satisfies both — including the framework's
+   2.465 cm²/g. Any future "explains the dwarfs" claim must say which of the two it is
+   answering.
+
+4. **Cloud-9's own published optimum is ~200 cm²/g, not 100 and not 128.** Ohana+ 2026 minimise the
+   SIDM deviation at σ/m ≈ 200 cm²/g (arXiv:2608.04362 line 29) and infer 483 cm²/g for their
+   τ = 0.18 fiducial (line 26). The framework sits 2.00× below that optimum on the
+   effective convention and 1.13× below it on the total convention. The 100 bar it
+   was being scored against is internal (F21), and the 128.126 ± 30 anchor is the project's own
+   Phase-44 model output.
+
+**Answer to the question asked.** The *shape* transfers: one velocity-dependent curve reproduces the
+right order of magnitude at cluster scales without any extra tuning. The *number* does not transfer:
+in the dwarf regime the same curve is between 1.4× and 31.4× above a published ceiling on the
+arms that keep Cloud-9 near 100, and the ceiling itself conflicts with other published dwarf data by
+an order of magnitude. The 0.198–0.247% Cloud-9 near-miss is therefore **not** the binding
+uncertainty of this framework — the a_slope choice (a factor of ~26× at v = 3 km/s) and the
+published dwarf-data conflict are both far larger.
+
+**Method caveats (declared, not hidden).**
+- `target` verdicts (Ohana optimum) use a declared ±2× consistency window; that window is this
+  project's convention, not a published uncertainty.
+- v = 40 km/s (Elbert+ 2015 TBTF) is an *extension* point: the producer does not sample 40 km/s, so
+  the halo convention is declared in `EXTRAPOLATED_POINTS` and the artifact marks the row
+  `point_kind: "extension"`.
+- Gilman+ 2023's 100 cm²/g is a core-collapse *timing* constraint (its own KB entry says so at
+  line 23), not a direct σ/m cutoff.
+- Gurian+ 2026 (arXiv:2610.28745 line 14) says the Yang+ 2024 family the project uses becomes
+  inaccurate at σ ≲ 100 cm²/g; the framework's Cloud-9 effective value is 100.04, i.e. exactly at
+  that boundary. This is recorded as a methodology caveat, not a bound.
+- No claim here is that the framework is wrong or right about dark matter; it is a scoreboard against
+  published numbers, each traceable to a line in a verified KB entry.
+
+**Guard.** `v0.3-prelim/tests/test_other_dm_conditions_probe.py` (12 tests) pins the artifact to a
+live rebuild, pins the per-arm tallies and the v = 3/10/28 km/s values, verifies every bound quote
+verbatim on its cited KB line, forbids the internal Phase-44 number from acting as data, and checks
+that the headline text carries the computed ratios. Mutation-tested: fabricated bound, fabricated
+quote, halo-convention drift, internal-number-as-data, and an edited artifact were each caught, and
+all files were restored byte-identically.
+
+**Mutation protocol note (2026-11-06, recorded because the first harness proved less than it claimed).**
+The first harness mutated a *producer* value and then deselected `test_artifact_matches_a_live_rebuild`
+so that a "semantic" guard would have to catch it. It reported nothing, and the reason is structural: the
+semantic guards read the **stored artifact**, so a producer-only edit cannot move them until the artifact is
+rebuilt. The corrected harness (`cache/scratch/f22_mutation2.py`) runs a passing baseline first (12 passed),
+mutates each producer value **and regenerates the artifact**, requires the *named* guard in pytest's FAILED
+list with a real summary line, and restores every touched file byte-identically. Result: **7/7 caught** —
+fabricated published bound (caught by the tally pin *and* the dwarf-bracket test, and independently by the
+rebuild check without any artifact edit), fabricated quote, halo-convention table drift,
+internal-number-as-data, edited artifact, and a reintroduced stale pin. Baseline 12 passed, post-restore
+12 passed.

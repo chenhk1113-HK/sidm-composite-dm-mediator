@@ -1,3 +1,54 @@
+## [T120-Readmit-ClaimSweep-2026-11-06] — the gate's exclusion list is empty, and the stale claims around it were swept
+
+- Rebuilt `v0.3-prelim/tests/test_t120_11_hidden_u1.py`, `test_t120_13_integration.py` and
+  `test_t120_15_uv_slope.py` onto one live producer (`code/t120_constraint_scoreboard.py`): stale blanket
+  assertions replaced with measured values, and result paths anchored to the module instead of the CWD.
+- Added `v0.3-prelim/tests/test_t120_constraint_scoreboard.py`: pins the measured arms (default
+  `a_slope=1.9287` -> 3/8; `0.5` and `0.8` -> 7/8; `1.0` -> 6/8; `1.93` -> 3/8), Cloud-9 99.75–100.04, and
+  the retired "all 8 pass" claims.
+- **`GATE_IGNORED_TESTS` in `scripts/verify_release_gate.py` is now empty** and the four in-file
+  `# GATE-IGNORED[...]` markers were removed; the marker guard was updated to allow an empty map while still
+  requiring a reason for any future exclusion. Repaired files keep their F18/D9 retirement notes.
+- Re-ran the 15 repaired or re-admitted files: **174 passed, 3 skipped in 7.11 s** (the 3 skips are the
+  deleted-document suites citing `b5c24c0`).
+- Stale-claim sweep: `CURRENT.md`'s D9 bullet no longer presents the `b0834fe` snapshot (including a Cloud-9
+  range of 88.02–106.81 that no arm produces) as current; finding F18's heading and a new status block record
+  that every table row was resolved as a measured value; the paper's "consistent with all 8 channels" is now
+  "all eight channel slots" with the F16 taxonomy and the F21 internal-slot fact named, and the historical
+  "N of 8" bullets carry an explicit convention caveat.
+- Corrected a false statement made in-session: the two T120 entry points were reported as disagreeing
+  (100.04 vs 99.80). They agree exactly at equal `a_slope` (relative difference 0.00000000%); that comparison
+  had mixed the default arm with an override.
+## [OtherDM-Conditions-2026-11-06]
+
+- Added `v0.3-prelim/code/other_dm_conditions_probe.py`: the project's velocity-dependent σ/m(v) evaluated at the velocities nine published dark-matter systems actually probe, using the producer's own per-point halo type and radius, with every bound quoted verbatim from a `docs/papers/verified/` entry plus its line number.
+- Measured: at 500 km/s the framework is 0.009644 cm²/g — 64x below MACS J0138 (0.613) and 21x below DESI BAO (0.2). At 3 km/s on the Phase-44 default arm it is 25.11 cm²/g — 31.4x above Horigome+ 2025's published 0.8 cm²/g ceiling. Horigome+ 2025 (<0.8 at 10 km/s) and Gilman+ 2026 (disfavours <10 at 10 km/s) contradict each other by 12.5x. Cloud-9's published optimum is ~200 cm²/g (Ohana+ 2026 line 29), vs the project's internal 100 bar and its own 128.126 model output (F21).
+- Added `v0.3-prelim/tests/test_other_dm_conditions_probe.py` (12 tests): artifact-vs-live-rebuild equality, per-arm mirror of `joint_fit_full_evaluation`, verbatim citation-on-cited-line checks, ban on the internal Phase-44 number as data, pinned tallies and pinned v = 3/10/28 values, extension-point labelling. Mutation-tested with a baseline-valid harness; all mutations caught, files restored byte-identically.
+- Recorded as finding F22 in `docs/INTEGRITY_FINDINGS_2026-11-04.md`.
+## [Cloud9-Bound-F21-2026-11-06] — the Cloud-9 "observational floor" was our own model output
+
+- Measured `128.1262923221052` = `sigma_m_phase44.json['v28.0_Cloud-9']`, i.e. the number labelled
+  "BLN24 / Ohana+ 2026 floor" in the published-likelihood channel list is the canonical Phase 44
+  model output. Grading the fit against it was circular.
+- Re-derived the bound from source: arXiv:2406.18643 publishes no self-interaction cross section
+  (0 mentions; Cloud-9 as a normal-concentration CDM RELHIC, M200 4–6e9 Msun, cNFW 10–17);
+  arXiv:2608.04362 peaks near 200 cm²/g, penalises both tails, requires 7.3σ-below-median for CDM,
+  and quotes 483 cm²/g for a τ-based inference; arXiv:1412.1477's 50 cm²/g is its largest simulated
+  value plus a viability statement. The dwarf ceiling 0.8 cm²/g IS published (Horigome+ 2025, 95%
+  upper limit at w = 10 km/s).
+- New producer `v0.3-prelim/code/t120_cloud9_bound.py` + artifact
+  `v0.3-prelim/data/results/t120_cloud9_bound_rederivation.json`; measured conventions: total 177.75,
+  canonical Gaussian 166.02, effective f_H²×total 100.04, Phase-44 128.13, f_H² = 0.562778,
+  convention factor 1.7769 (~900× the 0.036% default-arm margin).
+- `T205_full_likelihood_published.py` Cloud-9 slot relabelled `INTERNAL anchor (F21)` with explicit
+  provenance constants; `t120_constraint_scoreboard.py` rows now carry `bound_provenance`;
+  `t120_4_joint_fit.py` computes its PASS/FAIL prints instead of asserting them.
+- Paper §3.2 / §9 tables / §9 bullet / sensitivity row corrected; the BLN24-vs-Ohana concentration
+  tension is now stated.
+- Guard: `v0.3-prelim/tests/test_t120_cloud9_bound_provenance.py`.
+- Self-correction: an earlier statement this session misquoted the T205 SPARC/cluster slots
+  (`0.19`/`range`, `1e-3`/`upper_limit`); HEAD carries `0.193`/`gaussian` and `2.5e-4`/`ceiling`.
+
 ## [D10-T90ProductionRerun-2026-11-05]
 
 - **Executed decision D10** (re-run, not retire). `v0.3-prelim/code/t90_v57_hybrid_ksfr.py --nlive 500
