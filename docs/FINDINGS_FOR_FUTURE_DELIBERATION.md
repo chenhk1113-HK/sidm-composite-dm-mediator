@@ -1197,17 +1197,40 @@ anchor's implied 1.4 kpc scale). This is a tension between an observation-derive
 simulated mass-velocity relation, **not** a refutation of Cloud-9: RELHIC M200 and V_max are both
 derived from light through a mass-model choice, and TNG50-1 boxes a volume, not the M94 field.
 
-**Open decision D8 (three options, in the order I would take them):**
-1. **Match at formation redshift.** Keep the anchor, but state explicitly that the TNG comparison
-   is made at z ~ 0.3-0.7 where the cell is populated (39-54 members), and use the 22-member
-   z = 0 cell (V_max 28-30) as the nearest realizable z = 0 population. Cheapest, defensible,
-   requires only honest labelling plus a redshift-matched subsample of the trees already on disk.
-2. **Re-anchor the sample, keep Cloud-9 as an outlier.** Fit the anchor cell's own
-   mass-velocity relation from the sample and report Cloud-9's position relative to it (in km/s and
-   in sigma), instead of treating 31.12 as given.
+**Update after the anchor-tier growth measurement (2026-11-04, same file section 3).** The anchor
+tier (25 halos, 4-6e9 Msun, 9,019-12,781 DM particles) is now measured too:
+
+| measured | value |
+|---|---|
+| V_max(z=0) / V_max(z~1) | **1.044** (4.4% growth) |
+| M(z)/M(0) at z = 0.5 / 1 / 2 / 3 | 0.779 / 0.537 / 0.289 / 0.146 |
+| redshift where the lineage held half its z=0 mass | **0.175** (late assembly) |
+| halos with no merger after z = 1 | **0 / 25** (quiet fraction 0.000) |
+| most recent merger redshift (median) | **0.074** (~0.9 Gyr ago) |
+
+That reorders the options below, and it removes the first one as it was written: the gap from
+29.58 to 31.12 km/s is +5.2%, and these halos only gain 4.4% in V_max from z ~ 1 to z = 0, so
+matching at formation redshift does not close it. The gap is a mass-velocity offset, not a
+timing artifact.
+
+**Open decision D8 (revised order):**
+1. **Re-anchor the sample, keep Cloud-9 as an outlier.** Fit the anchor cell's own mass-velocity
+   relation from the 22 z = 0 members (plus the higher-z members as the same population at other
+   epochs) and report Cloud-9's position relative to that relation in km/s and in sigma, instead of
+   treating 31.12 as given. Now the recommended path because the growth measurement says the offset
+   persists at every redshift.
+2. **Match at formation redshift, but only as labelling.** Keep the anchor and state that the TNG
+   comparison is made at z ~ 0.3-0.7 where the cell is populated (39-54 members). Legible and cheap,
+   but it must not be presented as resolving the velocity gap, because of the 4.4% growth above.
 3. **Do nothing and record the tension.** Weakest: the anchor stays unexamined while a measured
    ceiling exists in the repo.
 
-Related measured fact now available for Phase G2: main-lineage merger counts are 15-46
-(median 29) at 4-6e9 Msun against 0-15 (median 6) at ~9e8 Msun, so the asserted x0.7 / x8.0
-quiescent/active multipliers can be replaced by measured values.
+**Related measured facts now available for Phase G2** (they constrain the labels, not the ×0.7 /
+×8.0 magnitudes): main-lineage merger counts are 15-46 (median 29) at 4-6e9 Msun against 0-15
+(median 6) at ~9e8 Msun; the quiet fraction at z < 1 is **0.267** for the ~9e8 Msun tier and **0.000**
+for the 4-6e9 Msun anchor tier, where every halo merged and the median last merger was at
+z = 0.074. Two cautions follow. (i) The 4-6e9 Msun gas-rich starless population is the opposite of
+quiescent, so it is the wrong analogue for a "Cloud-9 quiescent" label; the ~1e9 Msun tier-1
+population, which is closer to Cloud-9's actual host mass, is where 27% of halos are quiet.
+(ii) TNG100-1 cannot be used for any of this: at the same masses its subhalos are tracked only to
+z ~ 3.5 and its merger lists are empty (median 0, max 1), which is a tracking artifact, not physics.

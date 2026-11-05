@@ -25,13 +25,14 @@ import gzip
 import json
 import os
 import pathlib
+import shutil
 import sys
 import time
 import urllib.request
 
 REPO = pathlib.Path(r"C:/Users/lamkuenai/projects/sidm-composite-dm-mediator")
-SAMPLE = REPO / "v0.3-prelim/data/external/tng/stage3_sample"
-OUT_DIR = REPO / "v0.3-prelim/data/external/tng/stage3_nodes"
+SAMPLE = REPO / "v0.3-prelim/data/external/tng" / os.environ.get("TNG_SAMPLE", "stage3_sample")
+OUT_DIR = REPO / "v0.3-prelim/data/external/tng" / os.environ.get("TNG_NODES_OUT", "stage3_nodes")
 KEY_FILE = pathlib.Path(r"C:/Users/lamkuenai/.tng_api_key")
 BASE = "https://www.tng-project.org/api/"
 
@@ -51,7 +52,13 @@ SNAP_Z: dict[str, dict[int, float]] = {}
 
 def load_snap_z() -> None:
     """Read the snapshot/z table from the portal table file if present, else refuse to guess."""
+    # the snapshot/redshift table is run-independent, so a second sample directory reuses the
+    # one already fetched rather than needing its own copy
     cached = OUT_DIR / "snapshot_z.json"
+    if not cached.exists():
+        shared = REPO / "v0.3-prelim" / "data" / "external" / "tng" / "stage3_nodes" / "snapshot_z.json"
+        if shared.exists() and shared != cached:
+            shutil.copyfile(shared, cached)
     if cached.exists():
         raw = json.loads(cached.read_text(encoding="utf-8"))
         # the cached table is JSON, so its snapshot keys come back as strings; the trees use ints

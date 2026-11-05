@@ -101,23 +101,101 @@ z ≈ 0.1–1.0. Two consequences, both decision-relevant:
 
 ---
 
-## 3. Per-node growth curves (in progress at the time of writing)
+## 3. Growth and merger timing measured from the stored products (2026-11-04)
 
-`v0.3-prelim/code/tng_stage3_nodes.py` walks each main lineage and fetches the subhalo **detail**
-record for every 4th node, giving M(z), V_max(z), len_dm(z), r_half(z) growth curves. First pass
-status: **1,290 node rows** stored in `v0.3-prelim/data/external/tng/stage3_nodes/nodes.jsonl`,
-3 failed reads (0.2%), ~2.3 s per node with 1.5 s pacing — ~2,150 requests for the tier-1 sample,
-well under a megabyte. Resumable: it appends and skips stored (run, halo, snap, id) tuples.
+`v0.3-prelim/code/tng_stage3_growth_summary.py` reads only the local products (90 + 25 merger
+trees, 2,090 node rows, the API snapshot→redshift table) and writes
+`v0.3-prelim/data/results/tng_stage3_growth_summary.json`. Masses use the run's own
+`SubhaloMass` unit, 1e10 Msun/h with h = 0.6774, the Planck-II value the IllustrisTNG papers use.
+`z` was backfilled into all 2,090 rows (0 missing). Merger redshifts come from the snapshot id the
+tree reports for each merger event.
 
-**Defect found and fixed in this script during its own first run:** `snapshot_z.json` is JSON, so
-its keys come back as **strings**, while the tree lineages use **int** snapshot numbers —
-`SNAP_Z.get(run).get(snap)` therefore returned `None` and the rows written before the fix have
-`z = null`. Fixed (`int(k)` on load). The already-written rows are corrected locally by a
-re-join against the cached table; no re-fetch is needed. The snapshot→z table itself was taken
-from the API (`{run}/snapshots/`, 100 entries/run, e.g. TNG50-1 snap 50 → z = 0.9973, snap 0 →
-z = 20.0465), not from memory.
+Coverage first, because it limits what the numbers mean:
 
----
+| stored lineage | TNG50-1 tier 1 (60) | TNG100-1 tier 1 (30) | TNG50-1 anchor tier (25) |
+|---|---|---|---|
+| main-lineage nodes in the tree (median) | 96 | 77 | 97 |
+| deepest snapshot the subhalo is tracked to (median) | 4 (z = 10.0) | 23 (z = 3.49) | 3 (z = 11.98) |
+| nodes stored per halo (stride 4 / 3) | 25 | 20 | 33 |
+| halos whose stored lineage reaches z ≥ 3 | **60 / 60** | **19 / 30** | **25 / 25** |
+
+Tier-1 growth and merger statistics (median, with the quartile spread where it matters):
+
+| quantity | TNG50-1 | TNG100-1 |
+|---|---|---|
+| M(z=0) [Msun] | 6.85e8 – 9.99e8 (median 9.01e8) | 7.77e8 – 9.86e8 (median 9.26e8) |
+| V_max(z=0) [km/s] | 15.05 – 18.81 (median 16.55) | 15.00 – 19.17 (median 16.49) |
+| DM particles at z=0 | 1510 – 2200 (median 1986) | 104 – 132 (median 124) |
+| M(z)/M(0) at z = 0.5 | 0.834 (q25 0.775 / q75 0.865) | 0.771 (0.686 / 0.879) |
+| M(z)/M(0) at z = 1 | 0.696 (0.653 / 0.737) | 0.648 (0.568 / 0.747) |
+| M(z)/M(0) at z = 2 | 0.446 (0.381 / 0.520) | 0.445 (0.329 / 0.502) |
+| M(z)/M(0) at z = 3 | 0.308 (0.223 / 0.366) — all 60 halos | 0.392 (0.297 / 0.422) — **only the 19 halos that reach z ≥ 3** |
+| redshift where the lineage held 50% of its z=0 mass | 1.36 (1.28 / 1.45) | 0.77 (0.54 / 0.96) |
+| V_max(z=0) / V_max(z≈1) | 1.021 | 1.040 |
+| main-progenitor mergers (total) | median 7.5 (6 / 9), max 15 | median 0 (**max 1**) |
+| mergers at z < 1 | median 2, max 8 | median 0, max 1 |
+| halos with no merger after z = 1 | 16 / 60 → quiet fraction **0.267** | 25 / 30 → **0.833** |
+| most recent merger redshift (median) | 0.535 | 0.500 (the only merger some of them have) |
+
+Anchor tier (the Cloud-9 mass scale), same script, `stage3_nodes_anchor` (824 rows, 2 request
+failures out of 826, 470 KB):
+
+| quantity | TNG50-1 anchor tier (25 halos, 4–6e9 Msun) |
+|---|---|
+| M(z=0) [Msun] | 4.12e9 – 5.80e9 (median 4.83e9) |
+| V_max(z=0) [km/s] | 25.01 – 28.34 (median 26.32) |
+| DM particles at z=0 | 9,019 – 12,781 (median 10,526) — well resolved, no resolution wall here |
+| M(z)/M(0) at z = 0.5 / 1 / 2 / 3 | 0.779 / 0.537 / 0.289 / **0.146** |
+| redshift where the lineage held 50% of its z=0 mass | **0.175** (q25 0.132 / q75 0.277) |
+| V_max(z=0) / V_max(z≈1) | 1.044 |
+| main-progenitor mergers | median 29 (26 / 32), max 46 |
+| mergers at z < 1 | median 12, max 22 |
+| halos with no merger after z = 1 | **0 / 25** → quiet fraction **0.000** |
+| most recent merger redshift (median) | **0.074** |
+
+Two consequences, both measured rather than assumed:
+
+1. **Redshift evolution cannot close the Cloud-9 velocity gap.** These halos grow V_max by only
+   4.4% between z ≈ 1 and z = 0. The ceiling found in section 2 was 29.58 km/s against Cloud-9's
+   31.12 km/s, a +5.2% requirement, and the anchor-cell population was already counted at higher
+   redshift. So "match the anchor at formation redshift instead of z = 0" (option D8) does not
+   rescue the velocity by itself: the simulated halos in that cell are simply a few percent below
+   the observed value at every redshift, and the tension is a mass–velocity offset, not a timing
+   artifact.
+2. **The mass-matched simulated analogue of Cloud-9 is not quiescent.** All 25 anchor halos merged
+   after z = 1, and the median one merged at z = 0.074 (~0.9 Gyr ago). They also assemble very
+   late — half their z = 0 mass arrived after z ≈ 0.18. That is a property of what TNG50-1 puts in
+   the 4–6e9 Msun, gas-rich, starless, primary-flagged cell, and it is the population this sample
+   selected. It does **not** contradict Cloud-9 being quiescent (Cloud-9 is a ~1e9 Msun dwarf in
+   the M94 group, an order of magnitude less massive, and its isolation is an observational
+   statement), but it does mean these 25 halos are **not** drop-in Cloud-9 analogues for the
+   `phase_g2_merger_history.py` labels: if they were used as "quiescent", the sample's own merger
+   lists would say otherwise. The quiescent analogue in this sample is the tier-1 population
+   (26.7% quiet at z < 1) at ~1e9 Msun, which is also the mass scale Cloud-9's host actually has.
+
+**The finding that matters most is a limitation, not a result: TNG100-1 cannot supply merger
+histories in this mass band.** Its 1e9 Msun subhalos are only tracked back to snapshot ~23
+(z ≈ 3.5) and their merger lists contain **0 events for 30 of 30 halos' medians (max 1)**. Their
+apparent 83% "quiet" rate is therefore a subhalo-tracking artifact — the ancestors were never
+found — and reading it as "these halos experienced no mergers" would be a false claim. TNG50-1,
+which tracks the same masses back to z ≈ 10, gives 7.5 mergers per halo and a 26.7% quiet rate.
+Any merger-history statistic in the RELHIC band must come from TNG50-1; TNG100-1 stays a mass /
+V_max resolution control only (its 104–132 DM particles already said so).
+
+**What this does to the Phase G2 multipliers.** `phase_g2_merger_history.py` currently assigns
+history labels per halo by hand from observation (Cloud-9 quiescent, Fornax/Sculptor/Draco active)
+and applies ×0.7 / ×8.0 / ×1.0 from Silverman+ 2026 §3, with an assumed `f_active ~ 0.5`. The
+measured analogue for **field** ~1e9 Msun halos in TNG50-1 is f_active(z < 1) = **0.73** (73% have
+at least one merger after z = 1), and half of them merged within the last ~7.5 Gyr (median last
+merger z = 0.535). Two honest conclusions: (i) the sim does not contradict the observation-based
+labels — Cloud-9's isolation is exactly the minority population the sim puts at ~27%; (ii) the sim
+does **not** support `f_active ~ 0.5` as a generic property of this mass range, so that number must
+stay a stated literature assumption for the labelled halos and must not be quoted as simulation-
+derived. The ×0.7 / ×8.0 magnitudes themselves are **not** measured by this work — only which
+halos are quiet and when they last merged is.
+
+Measured anchor-side growth is in the table above; it argues against the "match at formation
+redshift" reading of D8 and for treating the anchor gap as a mass–velocity offset.
 
 ## 4. API contract, as measured (additions to the feasibility doc)
 
@@ -143,9 +221,12 @@ Nothing was downloaded in bulk; the PC's disk, RAM and GPU were not stressed.
 
 ## 5. What Stage 3 does **not** establish yet
 
-- It does not yet produce a **fit**: no likelihood has been evaluated on these halos. The trees
-  give lineage topology and the node fetch gives growth curves; connecting them to the SIDM model
+- It does not yet produce a **fit**: no likelihood has been evaluated on these halos. Section 3
+  measures growth and merger timing; connecting those to the SIDM model
   (`phase_g2_merger_history.py`, `phase_g4_pipeline.py`) is still to be done.
+- It does not measure the **×0.7 / ×8.0 collapse-time multipliers**. Those magnitudes come from
+  Silverman+ 2026 §3 and remain an assumption; what is measured here is quiet/active membership
+  and merger timing only.
 - It does not measure a **mass–velocity relation** for the anchor in the statistical sense yet —
   the ceiling above is a count ladder plus 24 read-back records, not a fitted distribution.
 - It says nothing about TNG300-1 (dropped: zero RELHIC-band halos with ≥ 100 DM particles) or
@@ -155,8 +236,9 @@ Nothing was downloaded in bulk; the PC's disk, RAM and GPU were not stressed.
 
 ## 6. Next concrete steps (in dependency order)
 
-1. Backfill `z` into `nodes.jsonl` and run the growth-curve summary (M(z), V_max(z), merger time
-   distribution) → replaces the asserted × 0.7 / × 8.0 Phase G2 multipliers with measured values.
+1. ~~Backfill `z` and run the growth-curve summary~~ — **done 2026-11-04** (section 3). What it
+   replaced is the *quiet/active fraction*, not the ×0.7 / ×8.0 magnitudes, which stay a literature
+   assumption until a simulation-based estimate of collapse-time shift exists.
 2. Match the anchor tier to the z = 0 cell (V_max 28–30, 22 objects) and report the anchor as
    formation-redshift-dependent, or re-anchor explicitly.
 3. Only then decide whether Stage 3 enters the canonical fit or stays a plausibility check.

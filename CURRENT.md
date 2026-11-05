@@ -50,9 +50,13 @@ now asserts the v0.8 MAP (478 GeV / 488 MeV / 0.81σ), so this line, the docs an
 - **New anchor tension found by that sample (open decision D8):** in TNG50-1 at z = 0 no primary,
   starless, gas-bearing halo in M200 4–6e9 M☉ reaches V_max ≥ 30 km/s (ladder 16 / 6 / 2 / 0 / 0 / 0 over
   V_max 28–29 / 29–30 / 29.5–30 / 29.9–30.1 / 30–31 / 31–34; maximum realized 29.58 km/s read back from
-  individual records). The canonical anchor pair (M200 = 5e9 M☉, V_max = 31.12 km/s) is realized only at
-  z ≈ 0.1–1.0 (22 / 39 / 54 members at z = 0 / 0.26 / 0.44 in the same cell). Recorded as a consistency
-  tension for the anchor, not a verdict on Cloud-9.
+  individual records). The same cell IS populated at z = 0.1–1.0 (22 / 39 / 54 members at z = 0 / 0.26 /
+  0.44), but the anchor tier's measured growth is only **V_max(z=0)/V_max(z≈1) = 1.044**, and closing
+  29.58 → 31.12 km/s needs +5.2% — so redshift matching does not close the gap and the tension is a
+  mass–velocity offset. Recorded as a consistency tension for the anchor, not a verdict on Cloud-9.
+  Measured alongside it: the 25 anchor halos (4–6e9 M☉, 9,019–12,781 DM particles) are **not** quiescent
+  — 0 of 25 have no merger after z = 1, median last merger z = 0.074 — so they are the wrong analogue for
+  a "Cloud-9 quiescent" Phase G2 label; the ~9e8 M☉ tier (quiet fraction 0.267) is the closer one.
 
 **What did NOT change:** the canonical anchor **σ/m = 174 cm²/g @ 29.4 km/s** (Cloud-9 = M94 RELHIC); the
 joint galaxy-scale range 0.06–0.68 cm²/g; the baryon-coupling ceiling < 3 × 10⁻¹¹; the v19.2-E A.2 5-param
