@@ -190,11 +190,16 @@ def analyze_t90_57():
         'naturalness_results': results,
         'run_quality': run_quality,
         'verdict_scope': (
-            "Naturalness verdicts from this posterior are NOT supportable while "
-            f"degraded_run={run_quality['degraded_run']}: "
-            + ("; ".join(run_quality['degraded_reasons']) if run_quality['degraded_reasons']
-               else "run meets the production thresholds")
-            + ". The coarse measure is prior_width / posterior_width, and an under-sampled chain "
+            (
+                "degraded_run=False: this chain meets the production thresholds, so the "
+                "numbers below are supportable AS MEASURED VALUES of the coarse proxy. "
+                if not run_quality['degraded_run'] else
+                "degraded_run=True ("
+                + "; ".join(run_quality['degraded_reasons'])
+                + "): the levels below are descriptors of an under-sampled posterior, NOT "
+                "fine-tuning verdicts. "
+            )
+            + "The coarse measure is prior_width / posterior_width, and an under-sampled chain "
             "inflates posterior width, which biases N DOWNWARD (toward 'mild'), never upward."
         ),
         'method': (

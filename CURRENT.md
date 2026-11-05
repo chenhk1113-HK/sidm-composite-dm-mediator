@@ -65,14 +65,22 @@ now asserts the v0.8 MAP (478 GeV / 488 MeV / 0.81σ), so this line, the docs an
   "currently NOT cited" disclosure; and `v0.3-prelim/code/config.py` was re-frozen from the
   canonical root config after an AST surface comparison found four lost KISS constants (F19).
   T90 naturalness was re-derived from its own artifact instead of from archived verdicts (F20).
-  **Remaining in D9:** the `test_t120_4/11/13/15` family (21 failures) and the CI ignore-list →
-  explicit-marker conversion.
-- **T90 naturalness is NOT currently a verdict (open decision D10, 2026-11-05):** the tracked
-  `t90_v57_hybrid_5ch_joint_posterior.json` is a 50-live, 237-sample chain (it has been since
-  `c447e7b`, 2026-09-14). It measures μ_χ N=1.46 and m_χ N=1.30 ("mild"); the archived "extreme
-  (N=19.7)" came from the nlive=500 run the repo no longer holds. Under-sampling biases
-  naturalness **downward**, so neither reading is supportable today. Either re-run at
-  production scale or retire the claim. Evidence: integrity report finding F20.
+  **Remaining in D9:** the `test_t120_4/11/13/15` family. The ignore-list conversion is done —
+  `scripts/verify_release_gate.py` now drives exclusions from `GATE_IGNORED_TESTS`, every
+  exclusion must carry a matching in-file `# GATE-IGNORED[<name>]:` marker naming F18/D9, and an
+  unmarked exclusion fails the gate (`v0.3-prelim/tests/test_gate_ignore_list_markers.py`).
+- **T90 naturalness re-derived on a production chain (decision D10 executed 2026-11-05):** the
+  tracked `t90_v57_hybrid_5ch_joint_posterior.json` is now a real production run —
+  `t90_v57_hybrid_ksfr.py --nlive 500 --dlogz 0.1 --ksfr on`, 4,874 samples, `wimpy_available: true`,
+  wall 2,112.8 s, `log Z = -7.7183 +/- 0.1322`, 3 of 3 channels satisfied at the median, posterior
+  medians sigma/m(Cloud-9) 97.192, sigma/m(Galaxy) 1.548, sigma/m(Bullet) 0.0015. The archived
+  verdicts reproduce on an independent chain: mu_chi **extreme** N = 21.03 (archived 19.72),
+  m_chi **severe** N = 3.50 (archived ~3.51), `g_chi_B` extreme N = 8.84. The 237-sample smoke chain's
+  "mild" readings (mu_chi 1.46, m_chi 1.30) are confirmed as the downward undersampling bias, not
+  evidence. The pre-rerun smoke posterior is kept byte-for-byte at
+  `v0.3-prelim/data/results/superseded/t90_v57_hybrid_5ch_joint_posterior.pre_d10_rerun_2026-11-05.json`
+  (sha256 `d84c102f1ab5dd823f12feb34ebe25a5a0da701dfe022bfb671684c89bced7c2`); the new chain is
+  `412d30e981860bf1fbedf3409b104612324ca721e96f3faad03b6cbd990a343e`. Evidence: F20.
 - **Gate coverage limit made explicit (open decision D9, 2026-11-05):** running the whole
   `v0.3-prelim/tests` directory instead of the gate's selected subset found **45 failing tests in the 12
   gate-ignored files** at `b0834fe`. Two were mechanical and are fixed (`code/t90_v60_naturalness.py` read

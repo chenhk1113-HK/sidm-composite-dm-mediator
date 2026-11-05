@@ -48,62 +48,84 @@ def test_t90_57_returns_10_params():
     assert len(res['naturalness_results']) == 10
 
 
-def test_t90_57_mu_x_extreme():
-    """T90.57 μ_χ: the archived "extreme (N≈19.7)" verdict is SUPERSEDED, and the current
-    posterior is too degraded to replace it. Pinned as a measured-state + degraded-run guard.
+# ---------------------------------------------------------------------------
+# T90.57 pins after decision D10 was EXECUTED (2026-11-05).
+#
+# History of this artifact, from its own git log:
+#   ed72a35 / d4c5596 (2026-09-11): nlive=500, 4,820-4,959 samples, log Z = -7.912.
+#       mu_chi N = 19.72 'extreme', m_chi N = 3.51 'severe' -> the archived claims.
+#   c447e7b (2026-09-14) and every revision since: the --smoke path (nlive=50, dlogz 0.5)
+#       wrote over the production posterior -> 237 samples, log Z = -3.517, mu_chi N = 1.46
+#       'mild'. That was a smoke run, not a measurement (finding F20).
+#   2026-11-05 D10 re-run: t90_v57_hybrid_ksfr.py --nlive 500 --dlogz 0.1 --ksfr on
+#       -> 4,874 samples, log Z = -7.7183 +/- 0.1322, wall 2,112.8 s, wimpy_available True.
+#       The pre-rerun smoke posterior is archived byte-for-byte at
+#       data/results/superseded/t90_v57_hybrid_5ch_joint_posterior.pre_d10_rerun_2026-11-05.json.
+#
+# Outcome: the archived DIRECTION is reproduced on an independent production chain
+# (mu_chi 19.72 -> 21.03 'extreme'; m_chi 3.51 -> 3.50 'severe'), and the smoke-era
+# 'mild' verdict is confirmed as the undersampling artifact the bias argument predicted.
+# ---------------------------------------------------------------------------
 
-    Evidence (git history of the artifact):
-      ed72a35 / d4c5596 (2026-09-11): nlive=500, 4,820-4,959 samples -> μ_χ p16/p84 = -7.685/-7.127
-        = 0.558 dex against an 11 dex prior -> N = 19.7 ("EXTREME"). This is the archived claim.
-      c447e7b (2026-09-14) and every revision since: nlive=50, ~230 samples -> μ_χ posterior
-        spans ~7.53 dex -> N = 1.46 ("mild").
-    So the tracked artifact cannot support either verdict direction: an under-sampled chain
-    inflates posterior width, which biases N downward. This test therefore pins (a) the current
-    measured numbers, (b) the producer's degraded-run flag, and (c) the direction of the bias.
-    Settling μ_χ fine-tuning requires re-running T90.57 at production scale (decision D10).
-    """
+T90_57_PRODUCTION_NLIVE = 500
+T90_57_PRODUCTION_SAMPLES_MIN = 2000
+
+
+def test_t90_57_is_a_production_chain_after_d10():
+    """The chain must meet the production thresholds; if it degrades again, every level
+    below becomes unsupportable and this test must fail rather than re-bless the numbers."""
+    res = analyze_t90_57()
+    rq = res['run_quality']
+    assert rq['degraded_run'] is False, f"chain degraded again: {rq}"
+    assert rq['nlive'] == T90_57_PRODUCTION_NLIVE
+    assert rq['n_samples'] >= T90_57_PRODUCTION_SAMPLES_MIN
+    assert rq['production_thresholds'] == {'nlive_min': 500, 'samples_min': 2000}
+    assert 'supportable AS MEASURED VALUES' in res['verdict_scope'], res['verdict_scope']
+    # The rerun reproduced the archived evidence, not a new one.
+    assert abs(res['log_Z'] - (-7.7183)) < 0.01, f"log Z moved: {res['log_Z']}"
+
+
+def test_t90_57_mu_x_extreme():
+    """T90.57 mu_chi: 'extreme' is now MEASURED on a production chain, reproducing the
+    archived N = 19.72 that the 237-sample smoke chain could not support (F20 / D10)."""
     res = analyze_t90_57()
     mu_x = next(r for r in res['naturalness_results'] if r['parameter'] == 'log_mu_x')
 
-    measured_N = 1.4614
+    measured_N = 21.0285
     assert abs(mu_x['naturalness_N'] - measured_N) / measured_N < 0.02, (
-        f"μ_χ naturalness moved to {mu_x['naturalness_N']}; re-derive before pinning it"
+        f"mu_chi naturalness moved to {mu_x['naturalness_N']}; re-derive before pinning it"
     )
-    assert mu_x['fine_tuning_level'] == 'mild'
+    assert mu_x['fine_tuning_level'] == 'extreme'
 
     prior_lo, prior_hi = mu_x['prior_range_log10']
-    assert (prior_lo, prior_hi) == (-15.0, -4.0), "μ_χ prior changed"
-    p16, _p50, p84 = mu_x['posterior_16_50_84_log']
+    assert (prior_lo, prior_hi) == (-15.0, -4.0), "mu_chi prior changed"
+    p16, p50, p84 = mu_x['posterior_16_50_84_log']
     post_width = p84 - p16
-    assert 7.0 < post_width < 8.0, f"μ_χ posterior width = {post_width:.3f} dex"
+    assert 0.4 < post_width < 0.7, f"mu_chi posterior width = {post_width:.4f} dex"
     assert abs((prior_hi - prior_lo) / post_width - mu_x['naturalness_N']) < 1e-9
+    # The MAP sits where the archived production run put it (10^-7.37), not at the
+    # smoke chain's 10^-8.39.
+    assert abs(p50 - (-7.3637)) < 0.01, f"mu_chi MAP moved: {p50}"
 
-    rq = res['run_quality']
-    assert rq['degraded_run'] is True, f"degraded flag lost: {rq}"
-    assert rq['nlive'] == 50 and rq['n_samples'] < 2000
-    assert any('nlive' in r for r in rq['degraded_reasons'])
-    assert 'NOT supportable' in res['verdict_scope']
+    assert res['run_quality']['degraded_run'] is False
 
 
 def test_t90_57_m_chi_severe():
-    """T90.57 m_χ: archived "severe" verdict came from the nlive=500 run; the tracked artifact
-    measures N = 1.298 ('mild') on a 50-live chain. Pinned with the degraded-run guard."""
+    """T90.57 m_chi: 'severe' (N = 3.4954) reproduces the archived ~3.51. The 50-live chain's
+    N = 1.298 'mild' is retired as a smoke artifact."""
     res = analyze_t90_57()
     m_chi = next(r for r in res['naturalness_results'] if r['parameter'] == 'log_m_chi_GeV')
 
-    measured_N = 1.2984
+    measured_N = 3.4954
     assert abs(m_chi['naturalness_N'] - measured_N) / measured_N < 0.02, (
-        f"m_χ naturalness moved to {m_chi['naturalness_N']}; re-derive before pinning it"
+        f"m_chi naturalness moved to {m_chi['naturalness_N']}; re-derive before pinning it"
     )
-    # NOT 'severe' on this chain. The archived 'severe (~3.6)' belongs to ed72a35's run.
-    assert m_chi['fine_tuning_level'] == 'mild'
-    assert res['run_quality']['degraded_run'] is True
+    assert m_chi['fine_tuning_level'] == 'severe'
+    assert res['run_quality']['degraded_run'] is False
 
-    # The producer must not dress a degraded chain up as a production run.
-    assert 'nlive=500' not in res['framework'], (
-        f"framework label claims production scale: {res['framework']}"
-    )
+    # The framework label must come from the artifact, never be hard-coded.
     assert res['label_matches_artifact'] is True
+    assert res['framework'].startswith('T90.57 hybrid 10D')
 
 
 def test_t90_57_run_quality_is_read_not_assumed():
@@ -115,10 +137,9 @@ def test_t90_57_run_quality_is_read_not_assumed():
     assert rq['production_thresholds'] == {'nlive_min': 500, 'samples_min': 2000}
     g_chi_b = next(r for r in res['naturalness_results'] if r['parameter'] == 'g_chi_B')
     assert g_chi_b['fine_tuning_level'] == 'extreme'
-    assert abs(g_chi_b['naturalness_N'] - 8.644) < 0.01
-    # μ_χ MAP also moved between the two runs: archived 10^-7.37, current 10^-8.39.
+    assert abs(g_chi_b['naturalness_N'] - 8.8406) / 8.8406 < 0.02
     mu_x = next(r for r in res['naturalness_results'] if r['parameter'] == 'log_mu_x')
-    assert -8.6 < mu_x['posterior_16_50_84_log'][1] < -8.0
+    assert -7.5 < mu_x['posterior_16_50_84_log'][1] < -7.2
 
 
 def test_t41_v08_returns_6_params():

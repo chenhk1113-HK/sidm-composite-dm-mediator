@@ -697,6 +697,35 @@ that is no longer reproducible from the repo.
   byte-identically and 13/13 passed after restore.
 
 **Open decision D10:** re-run T90.57 at production scale (the 2026-09-11 run took ~1,718 s at
-nlive=500 with WIMpy installed) or formally retire the T90-chain naturalness claims. Until one
-happens, `CURRENT.md` must not present T90 naturalness as a verdict.
+nlive=500 with WIMpy installed) or formally retire the T90-chain naturalness claims. **D10 was
+executed the same day — see the addendum immediately below, which supersedes this paragraph.**
+
+### D10 executed 2026-11-05 — the production chain reproduces the archived verdicts
+
+`v0.3-prelim/code/t90_v57_hybrid_ksfr.py --nlive 500 --dlogz 0.1 --ksfr on` re-ran the T90.57 hybrid
+posterior with WIMpy available in the benchmark venv. Wall 2,112.8 s, 4,874 samples, `log Z =
+-7.7183 +/- 0.1322` (the 2026-09-11 production run reported -7.912, the smoke chain -3.517), KSFR box
+satisfied, `channel_satisfaction_at_median: 3 of 3`.
+
+| parameter | archived (nlive=500, 2026-09-11) | smoke chain (nlive=50) | D10 re-run (nlive=500) |
+|---|---|---|---|
+| log_mu_x | N = 19.72 extreme | N = 1.46 mild | **N = 21.03 extreme** |
+| log_m_chi_GeV | N ~ 3.51 severe | N = 1.30 mild | **N = 3.50 severe** |
+| log_m_phi_A_MeV | — | — | N = 3.75 severe |
+| g_chi_B | N = 8.64 extreme | N = 8.64 extreme | N = 8.84 extreme |
+| mu_chi MAP | 10^-7.37 | 10^-8.39 | **10^-7.3637** |
+
+The archived direction is therefore reproduced on an independent chain, and the smoke chain's "no
+fine-tuning problem" reading is confirmed as the undersampling artifact the bias argument predicted.
+The reproduction is not bit-identical (log Z differs by 0.194 against a quoted error of 0.132, about
+1.5 sigma, and N differs by the sampling noise expected of a coarse prior-width/posterior-width
+ratio); it is a reproduction, not a confirmation to the last digit.
+
+`verdict_scope` is now conditional so it cannot state the wrong thing about a healthy chain:
+`degraded_run=False` prints "supportable AS MEASURED VALUES", `degraded_run=True` prints "NOT
+fine-tuning verdicts" with the reasons. `v0.3-prelim/tests/test_t90_v60_naturalness.py` was retargeted
+to the production chain (14 passed) and mutation-tested by swapping the archived smoke chain back
+into place: 4 guards failed, the artifact was restored byte-identically, 14/14 passed after restore.
+Decision D10 is closed.
+
 

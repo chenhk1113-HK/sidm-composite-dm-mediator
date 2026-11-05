@@ -1,3 +1,24 @@
+## [D10-T90ProductionRerun-2026-11-05]
+
+- **Executed decision D10** (re-run, not retire). `v0.3-prelim/code/t90_v57_hybrid_ksfr.py --nlive 500
+  --dlogz 0.1 --ksfr on` produced a production T90.57 posterior: 4,874 samples, wall 2,112.8 s,
+  `wimpy_available: true`, `log Z = -7.7183 +/- 0.1322`, 3/3 channels satisfied at the median.
+- **Archived verdicts reproduce:** mu_chi extreme N = 21.03 (archived 19.72), m_chi severe N = 3.50
+  (archived ~3.51), g_chi_B extreme N = 8.84, mu_chi MAP 10^-7.3637 (archived 10^-7.37). The 237-sample
+  smoke chain's "mild" readings are confirmed as undersampling bias, not evidence.
+- **Pre-rerun artifact preserved** byte-for-byte at
+  `v0.3-prelim/data/results/superseded/t90_v57_hybrid_5ch_joint_posterior.pre_d10_rerun_2026-11-05.json`
+  (sha256 `d84c102f1ab5dd823f12feb34ebe25a5a0da701dfe022bfb671684c89bced7c2`); the new chain is
+  `412d30e981860bf1fbedf3409b104612324ca721e96f3faad03b6cbd990a343e`.
+- **Producer:** `verdict_scope` made conditional — `degraded_run=False` prints "supportable AS MEASURED
+  VALUES", `degraded_run=True` prints "NOT fine-tuning verdicts" with the reasons — so a healthy chain
+  can no longer be labelled unsupportable (and vice versa).
+- **Tests:** `test_t90_v60_naturalness.py` retargeted to the production chain plus a new
+  `test_t90_57_is_a_production_chain_after_d10` guard; 14 passed. Mutation test swapped the archived
+  smoke chain back into place: 4 guards failed, the artifact was restored byte-identically, 14/14 after
+  restore.
+- F20 closed; decision D10 closed.
+
 ## [D9-Round1-2026-11-05] Retired stale expectations, repaired references, re-derived T90 naturalness
 
 - **Phase 7e unit audit** (`code/phase7e_unit_conversion_audit.py`): the audit now reports three
