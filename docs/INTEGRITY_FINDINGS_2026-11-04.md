@@ -562,7 +562,7 @@ stated. Measured breakdown after the two mechanical repairs below:
 | `test_t120_15_uv_slope.py` | 4 fail | same claims under a UV-slope variant; Cloud-9 measures 99.7529 against `>=100` |
 | `test_t120_13_integration.py` | 3 fail | "Phase 44 joint fit still passes" — measured channel dict contains failing entries |
 | `test_t120_11_hidden_u1.py` | 2 fail | "UV completion does not change observables" — Cloud-9 measures 99.80 against `>=100` |
-| `test_t87_inelastic_nucleon.py` | 1 fail | LZ event rate computed `1.3179e-75` vs stored `4.8135e-73` — a factor `3.65e15`, the signature of a unit-convention split, not a rounding difference |
+| `test_t87_inelastic_nucleon.py` | 1 fail | LZ event rate computed `1.3179e-75` vs the `4.8135e-73` the test expects — a factor `3.65e15`, the signature of a unit-convention split. Scope note: that expected figure is a smoke-test log value from `code/t87_lz_event_rate.py`, not a number cited in any project document (checked repo-wide), and both values are `≪ 1`, so the "DOES NOT EXPLAIN" verdict the same file asserts is unaffected. The open question is which normalization is right, not whether the channel explains anything |
 | `test_phase7e_unit_conversion_audit.py` | 2 fail | an audit "bug factor" expected `~365` now computes `1.02` |
 | `test_t82_audit_version_drift.py` | 2 fail | the drift test expects the auditor to print `does NOT match canonical`; `scripts/t82_audit.py` currently prints `GROUND TRUTH (v0.7 T41 ...)`, so the guard no longer guards anything it claims to |
 | `test_t90_v60_naturalness.py` | 2 fail | after the path fix, `mu_chi` naturalness measures `1.46` against an expected `>10`, and a severity label computes `mild` where `moderate`/`severe` was asserted |
