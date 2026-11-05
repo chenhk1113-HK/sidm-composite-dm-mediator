@@ -1,3 +1,38 @@
+## [Channel-Count-Independence-2026-11-04]
+
+**The "5 of 8 channels" headline's independence qualifier was wrong where it was stated, and the repo is using two different 8-channel lists.**
+
+- F8 corrected by reading the source list (`T205_full_likelihood_published.py::OBS_PUBLISHED`): the 8 slots come from **4 distinct sources**, and **5 of the 8** (UFD v=3/5/7/10 + dSph v=15) are velocity bins of one Horigome+ 2025 analysis (arXiv:2503.13650). The previous text said "two independent datasets" and "two channels from the same paper" — both wrong.
+- `README.md` carried the bare claim "a 5-parameter fit passes 5 of 8 channels"; it now states the slot/source breakdown and points to F8/F16. `CURRENT.md` already carried the qualified wording.
+- **New finding F16 (open, decision owed):** paper §A.15 canonical accounting uses channels Cluster v=500, dSph v=10, Cloud-9 v=28, SPARC v=100, UFD v=3, UFD v=5, UFD v=15, dSph v=7 (4 PASS / 3 MARGINAL / 1 FAIL), while the likelihood actually evaluated (`OBS_PUBLISHED`) uses UFD v=3/5/7/10, dSph v=15, Cloud-9 v=28, SPARC v=100, Cluster v=500 (5 PASS / 2 MARGINAL / 1 FAIL at the v19.2-E A.2 best fit; 1 PASS / 7 FAIL at the v19.2-D canonical parameters). v=7, v=10 and v=15 are labelled dSph in one list and UFD in the other, so "4 PASS / 3 MARGINAL / 1 FAIL" and "5 of 8" are not comparable counts. No paper number was rewritten in this round; the taxonomy decision is recorded for the owner.
+- Records: `docs/INTEGRITY_FINDINGS_2026-11-04.md` F8 (rewritten) + F16 (new).
+
+## [Constants-SingleSource-TestCollect-2026-11-04]
+
+**Whole-directory pytest could not be collected at all, and the reason was two files sharing one module name with different constants.**
+
+- Symptom: `pytest v0.3-prelim/tests` died with `ImportError: cannot import name 'SIGMA_0_CM2_PER_G' from 'constants'` for 5 test files, while the same tests passed when named explicitly.
+- Cause: `constants.py` (convention layer) and `scripts/constants.py` (numeric layer) both occupy the flat name `constants`; Python caches that name process-wide, so collection order decided which file every `from constants import ...` got.
+- Second defect from the same collision: `HBAR_C_GEV_CM` was 1.97327e-14 in one file and 1.973e-14 in the other (0.014% apart), so any cross-section built through (hbar*c)^2 differed by 0.027% depending on import order. `scripts/constants.py` is standardized to 1.97327e-14.
+- Fix: root `conftest.py` loads both layers under private module names and installs one composite `constants`, raising `RuntimeError` at import if any name defined in both files disagrees. New guard `v0.3-prelim/tests/test_constants_single_source.py` (5 tests) pins single-value shared names, the CODATA match (rejects 1.973e-14 and 1.97e-14 explicitly), derived hbar*c squared, and that producers from both layers resolve through the composite.
+- Mutation test: putting the truncated 1.973e-14 back made conftest itself fail with `RuntimeError: constants collision: 'HBAR_C_GEV_CM' differs between constants.py and scripts/constants.py (1.973e-14 vs 1.97327e-14)`; the file was restored byte-identically (sha256 0e1081572b7db441…) and the guard passes 5/5.
+- Guard bug found by the full run (and fixed): the numeric-layer probe looked for public names, but `gravothermal_yang2024.py` imports them as private aliases (`SIGMA_0_CM2_PER_G as _SIGMA_0`), so the assertion `assert []` fired; probes now accept either spelling, otherwise the guard would have been vacuous.
+- Two optional-data tests called `sys.exit(0)` at import time (`test_sparc_hierarchical.py:27`, `test_t32_real_likelihood.py`), which terminated the whole pytest session with `INTERNALERROR: mainloop caught unexpected SystemExit` instead of skipping; both now use module-level `pytest.skip(...)`.
+- Full-suite measurement (no deselects): **47 failed / 2199 passed / 22 skipped** in 1459 s. 46 of the 47 failures are inside files the CI workflow deselects (WIMpy- or external-asset-dependent); that classification is by file, not an individual root-cause of each. The 47th was the guard bug above.
+- Also seen in that run and NOT yet reconciled: `test_t82_audit_version_drift.py` expects the auditor text `VERSION = '0.4-prelim+T88E' matches canonical` and a `TestDriftDetection` string that the current auditor output no longer prints (the auditor now reports 120/120 with the v0.8 standing MAP). Open follow-up.
+
+## [Stage3-GrowthSummary-D8-2026-11-04]
+
+**The Stage-3 sample now has measured growth and merger-timing statistics, and they contradict the fix I had recommended for the Cloud-9 anchor.**
+
+- Anchor-tier node properties fetched per subhalo: 824 rows (470 KB), 2 of 826 requests failed after retries; tier-1 cache is 2,090 rows with all redshifts backfilled from the cached snapshot map. Local only (`data/external/tng/…` is ignored), no bulk download.
+- New producer `v0.3-prelim/code/tng_stage3_growth_summary.py` (local-only, no network) writes `v0.3-prelim/data/results/tng_stage3_growth_summary.json` with per-tier mass growth, V_max growth, merger counts, merger timing, and quiescence fractions.
+- Measured anchor tier (25 halos, 4-6e9 Msun, 9,019-12,781 DM particles): M(z)/M(0) = 0.779 / 0.537 / 0.289 / 0.146 at z = 0.5 / 1 / 2 / 3; half of the z=0 mass arrived after **z = 0.175**; **V_max(z=0)/V_max(z~1) = 1.044**; median 29 main-progenitor mergers (max 46); **0 of 25 quiet at z < 1**, median most-recent merger z = 0.074.
+- Consequence for D8: closing 29.58 -> 31.12 km/s needs +5.2% and these halos gain 4.4%, so matching the anchor at formation redshift does not close the gap; D8 option 1 (fit the anchor cell's own mass-velocity relation and report Cloud-9's offset) becomes the recommended path, and redshift matching survives only as labelling. `docs/FINDINGS_FOR_FUTURE_DELIBERATION.md` §27 and `CURRENT.md` updated accordingly.
+- Second consequence: the 4-6e9 Msun gas-rich starless population is the opposite of quiescent, so it is the wrong analogue for a "Cloud-9 quiescent" Phase G2 label; the ~9e8 Msun tier (quiet fraction 0.267) is the closer one, and Cloud-9's actual host mass is ~1e9 Msun.
+- `v0.3-prelim/code/phase_g2_merger_history.py` still uses literature-label multipliers (x0.7 quiescent / x8.0 active); it is **not** yet driven by these measured statistics. Not claimed as integrated.
+- TNG100-1 limitation recorded: at the same masses its subhalos are tracked only to z ~ 3.5 and its main-lineage merger lists are empty (median 0, max 1) — a tracking artifact, not physics, so it cannot carry the quiescence statistics.
+
 ## [Phase39-40-Scope-Guard-2026-11-04]
 
 **Decision D1 executed: the inert Phase 39/40 'SIDM' verdict is now qualified by a measurement the producers run on themselves, and the bound of that inertness was pinned (the old blanket claim was too broad).**

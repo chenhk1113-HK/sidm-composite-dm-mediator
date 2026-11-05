@@ -79,8 +79,8 @@ point: annotated tag `v19.2-F-RecordSave-v1.17`.
 dark matter, gravothermal evolution — tested against 8 observational channels spanning four orders of
 magnitude in velocity.
 
-**What it has established:** a constraint map and a no-go catalogue. A 5-parameter fit passes **5 of 8
-channels**; five UV no-go results rule out a single-mediator completion; and the attempt to derive the
+**What it has established:** a constraint map and a no-go catalogue. A 5-parameter fit passes **5 of 8 channel slots** (8 slots from 4 distinct sources;
+5 of the 8 are velocity bins of one Horigome+ 2025 analysis — see `docs/INTEGRITY_FINDINGS_2026-11-04.md` F8/F16); five UV no-go results rule out a single-mediator completion; and the attempt to derive the
 phenomenological σ/m(v) from a first-principles UV sector **failed** (v19.2-F Phase 3, 2026-10-11).
 
 **What it has NOT done:** it has not proven that dark matter self-interacts, and it has not produced a

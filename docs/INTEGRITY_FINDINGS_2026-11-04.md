@@ -266,9 +266,42 @@ there is no missing-citation problem left from this sweep.
 ## F8 — "5 of 8 channels pass" overstates independence  (MEASURED, OPEN)
 
 The headline counts **eight channel slots**, and five of them are **velocity bins of one
-dataset** (Horigome+ 2025). Independent datasets behind the headline: **two**. Older
-likelihood sums additionally include **two channels from the same paper** (arXiv 2503.13650).
-Decision D6.
+dataset**. Measured from the source list (`v0.3-prelim/code/T205_full_likelihood_published.py::OBS_PUBLISHED`,
+read 2026-11-04), the eight slots come from **four distinct sources**, not two:
+
+| slot | source |
+|---|---|
+| UFD v=3, v=5, v=7, v=10 and dSph v=15 (5 slots) | Horigome+ 2025 Table II (arXiv:2503.13650) |
+| Cloud-9 v=28 | BLN24 / Ohana+ 2026 |
+| SPARC v=100 | Lelli+ 2016 |
+| Cluster v=500 | Randall+ 2008 |
+
+So the honest wording is "**5 of 8 slots pass, over 4 distinct sources, with 5 of the 8 slots from a
+single Horigome+ 2025 analysis**" — the previous sentence in this file claimed "two independent
+datasets" and "two channels from the same paper", and both were wrong: the same paper supplies **five**
+of the eight slots, and the other three slots are three different papers. `CURRENT.md` already carries
+the qualified wording; `README.md` did not, and now does. Decision D6 (merge the five Horigome bins
+into one channel and refit, or keep the slots with this wording) is still open.
+
+## F16 — two different "8 channels" lists are in use  (MEASURED, OPEN)
+
+The same phrase "8 channels" refers to two **different** channel sets, and their counts are therefore
+not comparable:
+
+| list | channels | verdict split |
+|---|---|---|
+| paper §A.15 canonical (`canonical_numbers.json::canonical_abstract_channel_count`) | Cluster v=500, **dSph v=10**, Cloud-9 v=28, SPARC v=100, UFD v=3, UFD v=5, **UFD v=15**, **dSph v=7** | 4 PASS / 3 MARGINAL / 1 FAIL |
+| T205 likelihood (`OBS_PUBLISHED`, per-channel verdicts in the same JSON) | Cluster v=500, Cloud-9 v=28, SPARC v=100, UFD v=3, UFD v=5, **UFD v=7**, **UFD v=10**, **dSph v=15** | 5 PASS / 2 MARGINAL / 1 FAIL at the v19.2-E A.2 best fit; 1 PASS / 7 FAIL at the v19.2-D canonical parameters |
+
+Three labels collide: v=7, v=10 and v=15 are assigned to **dSph** in one list and to **UFD** in the
+other. That is not a likelihood-convention difference (which the paper does disclose at line 23); it is
+a different velocity/halo-type assignment, so a reader comparing "4 PASS / 3 MARGINAL / 1 FAIL" with
+"5 of 8" is comparing different measurements. Physically the T205 assignment is the more plausible one
+(ultra-faint dwarfs have V_max ~ 5-15 km/s, so v_eff = 0.64 V_max lands on 3-10 km/s; classical dSphs
+sit near v_eff ~ 15 km/s), but I have not verified Horigome+ 2025 Table II line by line, so I am not
+rewriting the canonical table on that basis. Decision needed: pick one taxonomy (recommended: T205's,
+since it is the list the likelihood actually evaluates), regenerate §A.15 from it, and make the drift
+guard reject an "N of 8" claim that does not name which list and which likelihood convention it uses.
 
 ---
 
