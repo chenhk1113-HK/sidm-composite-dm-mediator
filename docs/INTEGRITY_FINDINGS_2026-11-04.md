@@ -638,6 +638,21 @@ still parses, and that its divergence is written down here. **Status: STALE, not
 synced.** If the KiSS-SIDM Julia worker is used again, re-sync that work tree from the canonical
 config first — it predates the `KISS_SIDM_*` constants it is supposed to parameterise.
 
+**Guard verification — a harness defect found and corrected the same day.** The first mutation
+harness (`cache/scratch/d9_r1_mutation.py`) built its pytest command as
+`[test_file.py] + ["::Class::test"]`, i.e. two positional arguments, so pytest treated
+`::Class::test` as a malformed node id and exited **4** with `no tests ran` for every targeted
+run. Because the harness scored "caught" as `returncode != 0`, all three injections reported
+`caught=True rc=4` **without any test having executed** — the original F19 mutation evidence proved
+nothing. The corrected harness (`cache/scratch/d9_r1_mutation2.py`) passes one well-formed node id,
+runs an unperturbed baseline first, and refuses to score a catch unless the output contains a real
+`N failed` / `N passed` summary. Measured re-run: baseline `1 passed` for both guards; constant
+value drift `1 failed`; constant block deleted (4 lines) `1 failed`; F19 marker stripped from this
+report `1 failed`; both files restored byte-identically (sha256); post-restore class `6 passed`.
+The guards are therefore genuinely non-vacuous, but only the second run is evidence of that. This
+is recorded because `returncode != 0` is not a test result: exit 4 is a usage error, exit 2 a
+collection error, exit 5 no tests collected, and any of them can masquerade as a caught mutation.
+
 ## D9 round 1 — items resolved 2026-11-05 (mechanical and disclosure fixes, no physics loosened)
 
 **Relationship to the F18 table above:** those rows record the state found during triage. The rows

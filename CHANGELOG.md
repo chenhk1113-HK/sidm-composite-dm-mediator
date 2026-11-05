@@ -41,7 +41,13 @@
   instead of file bytes; that exposed four canonical KISS constants missing from the frozen
   `v0.3-prelim/code/config.py`, which was re-frozen from the canonical root `config.py` under
   asserted anchors. Mutation test: changed constant value, removed constant, and stripped F19
-  marker were each caught; files restored byte-identically.
+  marker were each caught; files restored byte-identically. **Harness correction (same day):**
+  the first mutation harness passed the node id as a second pytest positional argument
+  (`[test_file.py] + ["::Class::test"]`), so every targeted run exited 4 with `no tests ran`;
+  its `caught=True rc=4` lines were usage errors and proved nothing. Re-run with well-formed
+  node ids plus baseline runs and a required `N failed`/`N passed` summary: baselines
+  `1 passed`, value-drift `1 failed`, block-deleted `1 failed` (4 lines removed), marker-removed
+  `1 failed`, both files restored byte-identically, post-restore class `6 passed`.
 - **F20 T90 naturalness**: `analyze_t90_57()` no longer labels its output `nlive=500`; run
   quality (nlive=50, 237 samples, wimpy unavailable, 1/3 channels) is read from the artifact and
   published as `run_quality` + `verdict_scope`, with `degraded_run=True`. `analyze_t41_v08()`
