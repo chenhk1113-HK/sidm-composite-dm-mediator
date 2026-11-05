@@ -2,6 +2,20 @@
 Tests for Phase 43, 44, 45 (three-item update).
 """
 import pytest
+
+pytest.skip(
+    """
+    This suite asserts the content of v0.3-prelim/docs/PHASE46_THREE_ITEM_UPDATE.md, which were
+    DELETED by commit b5c24c0 ("paper: fix section 10.5 + streamline docs +
+    CHANGELOG additions"). The tests were left behind by that docs streamlining, so
+    their failure is a missing-deliverable question, not a physics result: either
+    restore the docs or retire this suite. Tracked as finding F17 / decision D9 in
+    docs/INTEGRITY_FINDINGS_2026-11-04.md.
+    """
+    , allow_module_level=True)
+
+
+
 import os
 import json
 import numpy as np

@@ -44,12 +44,43 @@ def test_gmm_runs_without_exception():
     """GMM should converge on each stream (or fail gracefully)."""
     import warnings
     warnings.filterwarnings("ignore")
-    from t95_v12_gmm_cross_match import cross_match_stream_gmm
+    from t95_v12_gmm_cross_match import cross_match_stream_gmm, GAIA_RETRIES
     # Use NGC6362 as the smoke test
     r = cross_match_stream_gmm("NGC6362", verbose=False)
     assert r["status"] in ("ok", "gaia_failed", "no_gaia_match", "exception")
+    if r["status"] == "gaia_failed":
+        # Live external-service dependency: Gaia rejects synchronous jobs with
+        # HTTP 503 when its queue is full. That is an archive outage, not a code
+        # defect, so it skips rather than fails (the schema itself is asserted
+        # network-free by test_gaia_failure_return_keeps_the_uniform_schema).
+        pytest.skip(f"Gaia unavailable after {GAIA_RETRIES} attempts: {r.get('error')}")
     assert "n_stars_cone" in r
     assert "n_members" in r
+
+
+def test_gaia_failure_return_keeps_the_uniform_schema(monkeypatch):
+    """Regression guard for the defect found 2026-11-05: the gaia_failed return path
+    omitted n_stars_cone / n_members while no_gaia_match had them, so a throttled
+    Gaia archive turned into a KeyError in every consumer and failed this suite.
+    Network-free by monkeypatching the Gaia client.
+    """
+    import warnings
+    warnings.filterwarnings("ignore")
+    import t95_v12_gmm_cross_match as mod
+
+    class _AlwaysRejects:
+        def launch_job(self, *a, **kw):
+            raise RuntimeError("Server overloaded: synchronous job rejected")
+
+    monkeypatch.setattr(mod.Gaia, "launch_job", _AlwaysRejects().launch_job)
+    monkeypatch.setattr(mod.time, "sleep", lambda s: None)
+
+    r = mod.cross_match_stream_gmm("NGC6362", verbose=False)
+    assert r["status"] == "gaia_failed"
+    assert r["n_stars_cone"] == 0
+    assert r["n_members"] == 0
+    assert "overloaded" in r["error"]
+    assert mod.GAIA_RETRIES >= 2  # a single 503 must not poison a whole run
 
 
 def test_gmm_emits_required_fields():

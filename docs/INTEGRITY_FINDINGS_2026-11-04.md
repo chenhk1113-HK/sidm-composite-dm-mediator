@@ -548,3 +548,43 @@ and `test_sidm_core_radius_invariance.py` are designed to fail and force the re-
   tests skip / 75 are deselected in a clean checkout because WIMpy or external data are absent.
 - The re-derived Phase 39/40 artifacts in this sweep change numbers but not the physics
   prescription — that is D1.
+
+## F17 — the release gate's ignore list hides 12 test files that contradict stored claims (OPEN, decision D9)
+
+**Found 2026-11-05** while running the whole `v0.3-prelim/tests` directory instead of the gate's
+selected subset. The gate passes 15/15 while ignoring 15 files; 12 of them failed, carrying
+**45 failing tests** at commit `b0834fe`. None of them is a missing-dependency problem except where
+stated. Measured breakdown after the two mechanical repairs below:
+
+| file | status | what the failure actually says |
+|---|---|---|
+| `test_t120_4_joint_fit.py` | 12 fail | hard-coded "all constraints pass" claims. Measured: Cloud-9 sigma/m = 88.02 / 100.04 / 106.81 against a stated `>=100` requirement; dSph sigma/m(v=15) = 1.132 against a stated `<=0.8`; `v1.13` arm fails at v=3 by 1.21x; a mechanism ratio claimed "~2.9" measures 2.25 |
+| `test_t120_15_uv_slope.py` | 4 fail | same claims under a UV-slope variant; Cloud-9 measures 99.7529 against `>=100` |
+| `test_t120_13_integration.py` | 3 fail | "Phase 44 joint fit still passes" — measured channel dict contains failing entries |
+| `test_t120_11_hidden_u1.py` | 2 fail | "UV completion does not change observables" — Cloud-9 measures 99.80 against `>=100` |
+| `test_t87_inelastic_nucleon.py` | 1 fail | LZ event rate computed `1.3179e-75` vs stored `4.8135e-73` — a factor `3.65e15`, the signature of a unit-convention split, not a rounding difference |
+| `test_phase7e_unit_conversion_audit.py` | 2 fail | an audit "bug factor" expected `~365` now computes `1.02` |
+| `test_t82_audit_version_drift.py` | 2 fail | the drift test expects the auditor to print `does NOT match canonical`; `scripts/t82_audit.py` currently prints `GROUND TRUTH (v0.7 T41 ...)`, so the guard no longer guards anything it claims to |
+| `test_t90_v60_naturalness.py` | 2 fail | after the path fix, `mu_chi` naturalness measures `1.46` against an expected `>10`, and a severity label computes `mild` where `moderate`/`severe` was asserted |
+| `test_paper_v19_regression.py` | 1 fail | expects refs `[28] Chu, Garcia-Cely, Murayama` and `[29] Chu, Hambye, Tytgat` in a status line |
+| `test_phase42_summary.py`, `test_phase46_three_items.py`, `test_phase47_50.py` | 12 skipped with reason | they assert the contents of four master docs that commit `b5c24c0` ("streamline docs") deleted, while leaving the tests behind. Now a documented module-level skip instead of an unexplained failure |
+
+**Two mechanical repairs applied (not claim changes):**
+1. `code/t90_v60_naturalness.py` read its posteriors through CWD-relative paths
+   (`'data/results/...'`), so from the repo root every read raised `FileNotFoundError`. Anchored to
+   the module's own project root; 6 error-failures became 4 passes + 2 content failures. The module
+   had been sitting on the gate ignore list as if it were an environment problem.
+2. The three doc-content suites above became documented skips citing `b5c24c0`.
+
+**What this means for the standing claim.** A 15/15 gate, T82 120/120 and a clean drift check
+certify the *selected* subset. They do not certify the ignored subset, and the ignored subset
+contains the same failure mode as F16: prose/assertions of "all constraints pass" that the model
+does not reproduce. The t120 family in particular asserts an eight-constraint PASS set that the
+current model violates at Cloud-9 and dSph, which is consistent with the independently measured
+Phase-44 tally of 1 PASS / 0 MARGINAL / 7 FAIL.
+
+**Decision D9 (owner):** for each remaining failing claim, either (a) re-derive and restate the claim
+with the measured numbers, (b) fix the model if a defect is found (the `3.65e15` factor in t87 and the
+`365` vs `1.02` factor in phase7e are the two most likely genuine unit defects), or (c) retire the
+claim in writing. Nothing here has been loosened to green, and nothing has been re-added to the gate
+as passing.

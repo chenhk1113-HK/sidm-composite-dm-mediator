@@ -31,6 +31,14 @@ measure used in many SUSY papers).
 
 import json
 import os
+from pathlib import Path
+
+# 2026-11-05 fix: the data paths below were CWD-relative ('data/results/...'), so this
+# module only worked when launched from v0.3-prelim/. Run from the repo root (which is
+# how pytest and the release gate invoke it) every read raised FileNotFoundError, and the
+# whole module sat on the gate ignore list as if it were an environment problem.
+# Anchor to the module's own project root instead.
+_RESULTS_DIR = Path(__file__).resolve().parents[1] / "data" / "results"
 
 def coarse_naturalness_from_percentiles(prior_lo_log, prior_hi_log,
                                         p16_log, p50_log, p84_log):
@@ -62,7 +70,7 @@ def coarse_naturalness_from_percentiles(prior_lo_log, prior_hi_log,
 
 def analyze_t90_57():
     """Naturalness for T90.57 hybrid (5-channel, KSFR-on, nlive=500)."""
-    fp = 'data/results/t90_v57_hybrid_5ch_joint_posterior.json'
+    fp = str(_RESULTS_DIR / 't90_v57_hybrid_5ch_joint_posterior.json')
     with open(fp) as f:
         d = json.load(f)
 
@@ -132,7 +140,7 @@ def analyze_t90_57():
 
 def analyze_t41_v08():
     """Naturalness for T41 v0.8 (nlive=2000, with Euclid)."""
-    fp = 'data/results/t41_mediator_mass_joint_fit_t88ce_v08_with_euclid_lensing_and_subhalo_forecast_nlive2000.json'
+    fp = str(_RESULTS_DIR / 't41_mediator_mass_joint_fit_t88ce_v08_with_euclid_lensing_and_subhalo_forecast_nlive2000.json')
     with open(fp) as f:
         d = json.load(f)
 
@@ -175,7 +183,7 @@ def analyze_t41_v08():
 
 
 def main():
-    out_dir = 'data/results'
+    out_dir = str(_RESULTS_DIR)
     os.makedirs(out_dir, exist_ok=True)
 
     t90 = analyze_t90_57()

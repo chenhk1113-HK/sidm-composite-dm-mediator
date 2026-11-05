@@ -145,6 +145,28 @@
 - **Verification state.** `verify_release_gate.py --quick`: 14/14 PASS (pytest layer skipped — not a full green run). `drift_guard.py --strict`: no drift. `t82_audit.py`: 85/85 ALL CLEAR. `check_fabrication.py`: warn-only, 46 hits / 26 unique remaining.
 ## [Consolidation-CIFix-2026-11-03]
 ## [CIFix-Verified-2026-11-03]
+## [GateCoverage-2026-11-05] Ignored-file triage (finding F17, decision D9)
+
+- Fixed a real portability defect: `v0.3-prelim/code/t90_v60_naturalness.py` read
+  `data/results/...` relative to the current working directory, so from the repo root every read raised
+  `FileNotFoundError`. Paths are now anchored to the module's own project root. 6 error-failures became
+  4 passes plus 2 content failures (`mu_chi` naturalness measures 1.46 against an expected `>10`; a
+  severity label computes `mild` where `moderate`/`severe` was asserted).
+- Fixed throttling and the failure-path schema in the T95.12 GMM cross-match: `cross_match_stream_gmm()` now
+  retries a Gaia query 3 times (`GAIA_RETRIES`, backoff 10/30 s) because the archive rejects synchronous
+  jobs with HTTP 503 under load, and its `gaia_failed` / `no_track` returns now carry `n_stars_cone` and
+  `n_members` like `no_gaia_match` does. Those two paths used to omit the count fields, so a Gaia outage
+  became a `KeyError` in every consumer; it was the single failure in the CI-verbatim local run.
+  Network-free guard: `test_gaia_failure_return_keeps_the_uniform_schema`.
+- Three suites (`test_phase42_summary`, `test_phase46_three_items`, `test_phase47_50`) asserted the
+  contents of four master docs deleted by commit `b5c24c0`. They are now module-level documented skips
+  citing that commit rather than unexplained failures.
+- Recorded F17: the release gate passes 15/15 while ignoring 15 files, and 12 of them held 45 failing
+  tests at `b0834fe` — 29 of them claim-vs-computation contradictions (t120 eight-constraint "all pass"
+  claims vs measured Cloud-9 88.02–106.81 / dSph 1.132; a `3.65e15` LZ event-rate factor in
+  `test_t87_inelastic_nucleon`; `365` vs `1.02` in `test_phase7e_unit_conversion_audit`; a stale
+  expectation in `test_t82_audit_version_drift`; a missing refs `[28]/[29]` status line). Decision D9
+  asks the owner to re-derive, fix, or retire each. No assertion was loosened to green.
 ## [LocalIntegrity-Sweep-2026-11-04]
 
 **Owner redirected priority 2026-11-04: local integrity, sanity and scientific plausibility. GitHub push/merge/default-branch work is shelved. Four real defects found; three fixed, one disclosed because fixing it re-derives certified numbers.**

@@ -187,12 +187,25 @@ def select_stream_members_gmm(df: pd.DataFrame,
 # ============================================================================
 # Per-stream GMM cross-match
 # ============================================================================
+# Gaia rejects synchronous jobs when its queue is full (HTTP 503, "try again
+# later"), so one attempt does not measure availability. Retry briefly.
+GAIA_RETRIES = 3
+GAIA_RETRY_BACKOFF_S = (10, 30)
+
+
 def cross_match_stream_gmm(stream_name: str,
                             verbose: bool = True) -> dict:
-    """Cross-match a single degenerate stream against Gaia DR3 + GMM selection."""
+    """Cross-match a single degenerate stream against Gaia DR3 + GMM selection.
+
+    Return-schema contract (2026-11-05): EVERY path carries ``n_stars_cone`` and
+    ``n_members``, so a caller can index them without a KeyError no matter why the
+    lookup failed. The failure paths used to omit them, which made a Gaia outage a
+    downstream KeyError instead of a recorded zero.
+    """
     center = get_stream_center(stream_name)
     if center is None:
-        return {"stream": stream_name, "status": "no_track", "n_stars_queried": 0}
+        return {"stream": stream_name, "status": "no_track", "n_stars_queried": 0,
+                "n_stars_cone": 0, "n_members": 0}
 
     # Use same cone-radius heuristic as T95.11
     from t95_v11_gaia_cross_match import CONE_RADIUS_DEG_MIN, CONE_RADIUS_DEG_MAX
@@ -223,14 +236,23 @@ def cross_match_stream_gmm(stream_name: str,
     AND ruwe < {RUWE_MAX}
     AND visibility_periods_used >= {VPU_MIN}
     """
-    try:
-        job = Gaia.launch_job(adql, dump_to_file=False, verbose=False)
-        df_cone = job.get_results().to_pandas()
-    except Exception as e:
-        print(f"  Gaia cone search failed: {e}")
+    df_cone = None
+    last_error = None
+    for attempt in range(GAIA_RETRIES):
+        try:
+            job = Gaia.launch_job(adql, dump_to_file=False, verbose=False)
+            df_cone = job.get_results().to_pandas()
+            break
+        except Exception as e:
+            last_error = e
+            print(f"  Gaia cone search failed (attempt {attempt + 1}/{GAIA_RETRIES}): {e}")
+            if attempt + 1 < GAIA_RETRIES:
+                time.sleep(GAIA_RETRY_BACKOFF_S[attempt])
+    if df_cone is None:
         return {
             "stream": stream_name, "status": "gaia_failed",
-            "wall_s": time.time() - t0, **center,
+            "wall_s": time.time() - t0, "n_stars_cone": 0, "n_members": 0,
+            "cone_radius_deg": cone_radius_deg, "error": str(last_error), **center,
         }
     wall_s = time.time() - t0
 

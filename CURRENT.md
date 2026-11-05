@@ -57,6 +57,17 @@ now asserts the v0.8 MAP (478 GeV / 488 MeV / 0.81σ), so this line, the docs an
   Measured alongside it: the 25 anchor halos (4–6e9 M☉, 9,019–12,781 DM particles) are **not** quiescent
   — 0 of 25 have no merger after z = 1, median last merger z = 0.074 — so they are the wrong analogue for
   a "Cloud-9 quiescent" Phase G2 label; the ~9e8 M☉ tier (quiet fraction 0.267) is the closer one.
+- **Gate coverage limit made explicit (open decision D9, 2026-11-05):** running the whole
+  `v0.3-prelim/tests` directory instead of the gate's selected subset found **45 failing tests in the 12
+  gate-ignored files** at `b0834fe`. Two were mechanical and are fixed (`code/t90_v60_naturalness.py` read
+  its posteriors through CWD-relative paths; three suites asserted four master docs that commit `b5c24c0`
+  deleted, now documented skips). The remaining **29** are claims the model does not reproduce — the t120
+  family asserts "all constraints pass" while Cloud-9 sigma/m measures 88.02–106.81 against a stated
+  `>=100` and dSph sigma/m(v=15) measures 1.132 against a stated `<=0.8`; `test_t87_inelastic_nucleon`
+  disagrees with its stored LZ rate by a factor `3.65e15`; `test_phase7e_unit_conversion_audit` expects a
+  `~365` bug factor and gets `1.02`; `test_t82_audit_version_drift` expects text the auditor no longer
+  prints. Full breakdown in `docs/INTEGRITY_FINDINGS_2026-11-04.md` F17. Nothing was loosened to green and
+  nothing was added to the passing set: a 15/15 gate certifies the selected subset only.
 - **Phase G2 now carries measured merger statistics (2026-11-05):** `measured_merger_statistics()` in
   `v0.3-prelim/code/phase_g2_merger_history.py` reads the Stage-3 sample and writes
   `phase_g2_measured_merger_statistics.json`: measured f_active **0.733** (RELHIC-mass tier, 60 halos)
