@@ -129,7 +129,11 @@ F_H_PHYSICAL_RANGES = {
 C_KMS = 2.998e5
 
 # Planck constant * c
-HBAR_C_GEV_CM = 1.973e-14
+# 2026-11-04 integrity fix: this file said 1.973e-14 while constants.py said 1.97327e-14. Both
+# files are imported as the flat name `constants`, so which value a process got depended on import
+# order, and any cross-section built from (hbar*c)^2 differed by 0.027% between the two paths.
+# Unified on 1.97327e-14 (CODATA hbar*c = 1.973269804e-14 GeV*cm, correct to 5 digits).
+HBAR_C_GEV_CM = 1.97327e-14
 HBAR_C_SQ_GEV2_CM2 = HBAR_C_GEV_CM ** 2
 
 # ====== DERIVED QUANTITIES ======

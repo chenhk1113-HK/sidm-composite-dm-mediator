@@ -16,15 +16,25 @@ import sys
 import os
 from pathlib import Path
 
-# Skip if the data isn't downloaded yet
-WSL_ROOT = Path("/home/lamkuenai/sidm-composite-dm-mediator")
-DATA_DIR = WSL_ROOT / "v0.3-prelim/data/external/fermi_mcdaniel2024"
-if not DATA_DIR.exists():
-    print(f"SKIP: McDaniel data not found at {DATA_DIR}. "
-          f"Run outputs/fetch_external_data.sh first.")
-    sys.exit(0)
+# Skip if the data isn't downloaded yet.
+# NOTE (2026-11-04): this file used to call sys.exit(0) at import time when the external
+# dataset was absent. That does not skip the module - it terminates the whole pytest process
+# (INTERNALERROR: mainloop caught unexpected SystemExit), so one missing optional dataset was
+# enough to stop the entire suite from running. It now skips the module properly.
+# The repo root is also derived from this file's own location instead of a hardcoded WSL path,
+# so the test resolves the same dataset on the Windows and the WSL checkout.
+import pytest
 
-sys.path.insert(0, str(WSL_ROOT / "v0.3-prelim/code"))
+_REPO_CANDIDATES = (Path(__file__).resolve().parents[2],
+                    Path("/home/lamkuenai/sidm-composite-dm-mediator"))
+REPO_ROOT = next((p for p in _REPO_CANDIDATES if (p / "v0.3-prelim" / "code").is_dir()),
+                 _REPO_CANDIDATES[0])
+DATA_DIR = REPO_ROOT / "v0.3-prelim/data/external/fermi_mcdaniel2024"
+if not DATA_DIR.exists():
+    pytest.skip(f"McDaniel data not found at {DATA_DIR}; "
+                f"run outputs/fetch_external_data.sh first", allow_module_level=True)
+
+sys.path.insert(0, str(REPO_ROOT / "v0.3-prelim/code"))
 import t32_real_likelihood as t32r
 
 

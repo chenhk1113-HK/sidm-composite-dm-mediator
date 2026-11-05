@@ -18,15 +18,22 @@ import sys
 import os
 from pathlib import Path
 
-# Skip if the precomputed grid doesn't exist yet
-WSL_ROOT = Path("/home/lamkuenai/sidm-composite-dm-mediator")
-GRID_PATH = WSL_ROOT / "v0.3-prelim/data/results/sparc_hierarchical_grid.npz"
-if not GRID_PATH.exists():
-    print(f"SKIP: SPARC hierarchical grid not found at {GRID_PATH}. "
-          f"Run precompute_sparc_hierarchical.py first.")
-    sys.exit(0)
+# Skip if the precomputed grid doesn't exist yet.
+# NOTE (2026-11-04): was `sys.exit(0)` at import, which killed the entire pytest session
+# (INTERNALERROR: mainloop caught unexpected SystemExit) instead of skipping this module.
+# Repo root now comes from this file's location, so the grid resolves on Windows too.
+import pytest
 
-sys.path.insert(0, str(WSL_ROOT / "v0.3-prelim/code"))
+_REPO_CANDIDATES = (Path(__file__).resolve().parents[2],
+                    Path("/home/lamkuenai/sidm-composite-dm-mediator"))
+REPO_ROOT = next((p for p in _REPO_CANDIDATES if (p / "v0.3-prelim" / "code").is_dir()),
+                 _REPO_CANDIDATES[0])
+GRID_PATH = REPO_ROOT / "v0.3-prelim/data/results/sparc_hierarchical_grid.npz"
+if not GRID_PATH.exists():
+    pytest.skip(f"SPARC hierarchical grid not found at {GRID_PATH}; "
+                f"run precompute_sparc_hierarchical.py first", allow_module_level=True)
+
+sys.path.insert(0, str(REPO_ROOT / "v0.3-prelim/code"))
 import t8_v03_joint_fit as t8
 
 
