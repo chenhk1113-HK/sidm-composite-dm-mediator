@@ -20,13 +20,13 @@ We report a constraint map and no-go catalogue for velocity-dependent self-inter
 
 **Note (R88(87) demotion):** The v=150 Lei/Wang vs Sameie+ tension is **a tuning statement, not a first-class result**. Phase G7's σ_peak2 = 5.0 cm²/g at v=150 (chosen to pass Lei/Wang by 4.5×) overshoots Sameie+ 2020 by 1.5×. A smaller peak σ_peak2 ∈ (1.11, 3.33) cm²/g sits in the (0.1, 0.3) σ_eff window and satisfies both constraints simultaneously. See §9.17a for the full window analysis and the σ_peak2 PASS range.
 
-**Framework score (per A.15 canonical, R88(52) honest + v19.2-E A.1 caveat):** 8 constrained channels. Under the canonical (self-normalized σ_unc) accounting: **4 PASS / 3 MARGINAL / 1 FAIL** (PASS = Cluster v=500, dSph v=10, Cloud-9 v=28, SPARC v=100; MARGINAL = UFD v=3, UFD v=5, UFD v=15; FAIL = dSph v=7; see §A.15 Block 1). Under the promoted published-σ_unc likelihood (T205, v19.2-E A.1) the SAME canonical parameters give **1 PASS / 0 MARGINAL / 7 FAIL** (Cluster v=500 only); the 5-parameter DE best-fit reaches 5/8 at that likelihood (§A.15 Blocks 2–3). **Both counts are stated here because they differ only by likelihood convention, and a reader who sees only one of them would draw a materially different conclusion.** The Lei/Wang v=150 entry is the **R88(87) TUNING statement, not a separate PASS** (ClawsGO #7 §2b: Lei/Wang and Sameie+ 2020 are the same v=150 constraint counted under different names; the "no-go" is a tuning statement about Phase G7's specific σ_peak2 = 5.0 choice, NOT a structural constraint of the framework). **v19.2-E A.1 caveat:** under the promoted real likelihood (T205 8-channel published-σ_unc), the **canonical Phase 44 parameters** (σ₀=0.052, a=1.93, σ_peak=174, v_target=29.4, σ₁=4.4) pass **1 of 8 channels** (Cluster v=500 only). The 5-parameter DE best-fit (v19.2-E A.2) at the same likelihood passes **5 of 8** (σ_peak=2026, σ₁=1.2). The "canonical" σ(v) presented in this paper is the v1 free-fit result; v19.2-E shows the data prefer a different (5-param DE) point at 5/8. The counts 1/8 and 5/8 use the SAME 8 channels under different parameter priors. This caveat belongs wherever "canonical" appears. The framework is a constraint map, not a unified SIDM model.
+**Framework score (computed in §A.15 Block 1 by `scripts/canonical_numbers.py`; the paper quotes no channel count that is not generated there):** 8 constrained channel slots — UFD v=3, UFD v=5, UFD v=7, UFD v=10, dSph v=15, Cloud-9 v=28, SPARC v=100, Cluster v=500 — which are eight slots drawn from four distinct source datasets (five of the eight are Horigome+ 2025 Table II velocity bins). Under the promoted published-σ_unc likelihood: **1 PASS / 0 MARGINAL / 7 FAIL** at the canonical Phase-44 parameters (Cluster v=500 only) and **5 PASS / 2 MARGINAL / 1 FAIL** at the v19.2-E A.2 5-parameter DE best fit (§A.15 Blocks 2–3). Under the older self-normalized σ_unc convention (σ_unc = σ_obs, T206) the same two parameter sets give **2 PASS / 1 MARGINAL / 5 FAIL** and **6 PASS / 2 MARGINAL / 0 FAIL**. The literal **4 PASS / 3 MARGINAL / 1 FAIL** that this abstract previously headlined is **RETIRED (finding F16, 2026-11-05)**: no parameter set and no σ_unc convention stored in this repo reproduces it, and it used a different halo-type taxonomy (dSph v=10, UFD v=15, dSph v=7) from the list the likelihood evaluates. **Both counts are stated here because they differ only by likelihood convention, and a reader who sees only one of them would draw a materially different conclusion.** The Lei/Wang v=150 entry is the **R88(87) TUNING statement, not a separate PASS** (ClawsGO #7 §2b: Lei/Wang and Sameie+ 2020 are the same v=150 constraint counted under different names; the "no-go" is a tuning statement about Phase G7's specific σ_peak2 = 5.0 choice, NOT a structural constraint of the framework). **v19.2-E A.1 caveat:** under the promoted real likelihood (T205 8-channel published-σ_unc), the **canonical Phase 44 parameters** (σ₀=0.052, a=1.93, σ_peak=174, v_target=29.4, σ₁=4.4) pass **1 of 8 channels** (Cluster v=500 only). The 5-parameter DE best-fit (v19.2-E A.2) at the same likelihood passes **5 of 8** (σ_peak=2026, σ₁=1.2). The "canonical" σ(v) presented in this paper is the v1 free-fit result; v19.2-E shows the data prefer a different (5-param DE) point at 5/8. The counts 1/8 and 5/8 use the SAME 8 channels under different parameter priors. This caveat belongs wherever "canonical" appears. The framework is a constraint map, not a unified SIDM model.
 
 **Four forward paths tested (R88(72)-(78), all FAILED):** A (IDE-2cSIDM) 4/8→4/8; B (ULDM) 4/8→2-3/8; C (N-body+exotic UV) deferred; D (observation refinement) caught a σ_m(150) numerical error — initial Direction D analysis used σ_m(150) = 0.5 cm²/g (assumed) instead of the computed value 0.046 cm²/g. The Phase 44 baseline (no v=150 resonance) gives σ_eff(150, 1.5 r_s) = 0.0041 cm²/g, which **fails Lei/Wang by factor 24** at observation radius. Phase G7 (with v=150 peak, σ_peak=5) gives σ_eff(150, 1.5 r_s) = 0.454 cm²/g, which **passes Lei/Wang by 4.5× but fails Sameie+ 2020 by 1.5×** — a v=150 tuning statement (R88(87), not a structural no-go). The structural trade-off result stands as the framework's fundamental limit within the ansatz.
 
 **Five UV completion no-gos** (magnetic dipole, Hidden U(1) + pseudo-Dirac, GeV inelastic, Chu+ 2019 p-wave, one-mediator UV systematic) rule out the simplest one-mediator UV completions at the Phase 44 baseline. A two-mediator candidate (Drobczyk+ 2025) survives relic density constraints. Each no-go is an order-of-magnitude exclusion at one parameter point (the Phase 44 baseline); see §10 for full scope statements. **Note (ClawsGO #7 §7):** four of the five are specific UV constructions (CONSTRAINT, 10.2a-d); the fifth (T184, 10) is a general scaling argument (SCALING_ARGUMENT). The abstract's "no-go theorems" framing is the LEAST precise for T184 — the full breakdown is in §A.15 Block 6.
 
-**Channel count summary (per A.15 canonical table):** 8 constrained channels (4 PASS / 3 MARGINAL / 1 FAIL) + 2 unconstrained placeholders (LMC, Boötes — no published σ_eff). See Appendix A.14 for σ_peak sensitivity, A.13 for citation corrections, A.15 for canonical channel accounting. The §3.5b Lei+ 2026 / Wang+ 2026 citation chain is verified (arXiv:2609.16740, arXiv:2609.19132).
+**Channel count summary (per A.15 canonical table, computed):** 8 constrained channel slots — 1 PASS / 0 MARGINAL / 7 FAIL at the canonical Phase-44 parameters and 5 PASS / 2 MARGINAL / 1 FAIL at the v19.2-E A.2 5-parameter DE best fit, both under the published-σ_unc likelihood — + 2 unconstrained placeholders (LMC, Boötes — no published σ_eff). See Appendix A.14 for σ_peak sensitivity, A.13 for citation corrections, A.15 for canonical channel accounting. The §3.5b Lei+ 2026 / Wang+ 2026 citation chain is verified (arXiv:2609.16740, arXiv:2609.19132).
 
 **Submission status:** Submission-ready as Direction C (constraint map + no-go catalogue) for Physics of the Dark Universe or JCAP. The Cloud-9 vs dSph structural no-go (§2.6a) and the structural trade-off result (§9.17b) are the two first-class structural results. The v=150 entry (§9.17a) is demoted to a tuning statement (R88(87)) — Phase G7's σ_peak2 = 5.0 cm²/g overshoots Sameie+ by 1.5×, but a smaller peak in (1.11, 3.33) cm²/g satisfies both constraints.
 ## 1. Introduction
@@ -1277,7 +1277,7 @@ The factor-of-3 reduction comes from the low-velocity tail of the Maxwell-Boltzm
 
 **Forward work (Phase G4-G6):** Run `gravothermal_yang2024.py`'s `predict_sidm_halo()` across all 5-7 constrained channels (Cloud-9, dSph, SPARC, Cluster, Lei/Wang massive galaxies), computing τ = t/t_c at the canonical σ/m(v). If predicted phases match observed density diversity — Cloud-9 in core-expansion (or merger-rescued from collapse), dSphs in or near collapse, SPARC NFW-like or weak core-expansion, Lei/Wang massive galaxies in core-expansion — then the gravothermal pipeline has converted the static-σ/m(v) "circularity" into a phase-diversity prediction. **This is the framework's most important verification path forward** and is the substantive scientific work flagged by the 8Review_ SIDM reviewer as missing.
 
-**Implementation status:** Phase G1 (Yang+ 2024 [43] parametric model) is implemented in `v0.3-prelim/code/gravothermal_yang2024.py` (~408 lines, BM2 calibration passing at 2.6% deviation). Phase G2 (merger history stochastic modulator) is scaffolded but not calibrated. Phases G3-G6 are scoped in `v0.3-prelim/docs/GRAVOTHERMAL_ROADMAP.md` but not yet implemented (estimated 8-12 weeks additional work).
+**Implementation status:** Phase G1 (Yang+ 2024 [43] parametric model) is implemented in `v0.3-prelim/code/gravothermal_yang2024.py` (728 lines). Its BM2 check reproduces `t_c(BM2) = 29.438 Gyr` against the published `28.7 Gyr`, i.e. **+2.57%** (re-measured 2026-11-05 using `collapse_time_gyr`, the mixed-units variant `predict_sidm_halo()` calls). That agreement is **by construction** — `CALIBRATED_PREFACTOR = 1.34e12` was tuned on BM2 — so it is a self-consistency check, not validation: the independent-halo test `validate_cosmo_501_calibration()` returns False (Cosmo-501 underestimated by 10.75×). Phase G2 (merger-history modulator) now publishes measured merger activity from the local IllustrisTNG sample (`measured_merger_statistics()` → `phase_g2_measured_merger_statistics.json`): measured f_active = 0.733 for the RELHIC-mass tier and 1.000 for the Cloud-9-mass tier, against the assumed 0.5; its 0.7 / 8.0 τ multipliers remain Silverman+ 2026 labels, because that sample measures merger rates, not their effect on t_c. Phases G3-G6 are scoped in `v0.3-prelim/docs/GRAVOTHERMAL_ROADMAP.md` but not yet implemented (estimated 8-12 weeks additional work).
 
 ### 9.14 Phase G4 implementation: massive-halo gravothermal pipeline (R88(42))
 
@@ -1583,12 +1583,12 @@ To test whether the v=150 no-go can be resolved within the existing framework, t
 
 2. **UV completion implication (revised):** The §9.17b trade-off is about a **physically-derived centre-peaked f_H(r) profile** (Yang+ 2025 SIDM2c). Resolving the trade-off within the current framework requires either (a) a different f_H(r) parameterization (e.g., flat f_H(r) as the project's own Phase G9 N-body found, f_H drop 0.94-1.01×) — note the **Caveat (R88(88) per ClawsGO #5)**: the project's own N-body is NOT subject to the trade-off; OR (b) abandoning single-species σ_m and moving to multi-species UV (Direction B). The 200 eV Yukawa background the framework names is a separate question (§2.8, v19.2-F Phase 3, OPEN status per ClawsGO #6).
 
-3. **Phase G8 score (R88(88) honest, R88(87) updated, ClawsGO #7 §4 canonical):** Per §A.15 Block 1 (canonical, machine-generated):
-   - **4 PASS**: Cluster v=500 (Randall+ 2008 strong lensing), dSph v=10 (Horigome+ 2025 ceiling, canonical Phase 44), Cloud-9 v=28 (BLN24/Ohana+ 2026 floor 128, canonical Phase 44), SPARC v=100 (Lelli+ 2016, canonical Phase 44)
-   - **3 MARGINAL**: UFD v=3, UFD v=5, UFD v=15 (all Horigome+ 2025 ceilings, within 1σ)
-   - **1 FAIL**: dSph v=7 (Horigome+ 2025 ceiling, factor 11.6× over) — independent of the v=150 question
-   - **v=150 Lei/Wang** is the R88(87) TUNING statement, NOT counted in 4 PASS / 3 MARGINAL / 1 FAIL
-   - **v19.2-E A.1 caveat:** under the promoted real likelihood (T205 8-channel published-σ_unc), the canonical Phase 44 parameters pass **1 of 8 channels** (Cluster only); the 5-param DE best-fit passes **5 of 8**
+3. **Channel score (computed in §A.15 Block 1 by `scripts/canonical_numbers.py`; this section quotes no count that the generator does not print).** Eight channel slots, published-σ_unc likelihood, per parameter set:
+   - **canonical Phase-44 parameters (σ₀=0.052, a=1.93, σ_peak=174, v_target=29.4, σ₁=4.4): 1 PASS / 0 MARGINAL / 7 FAIL** — PASS = Cluster v=500 (Randall+ 2008) only
+   - **v19.2-E A.2 5-parameter DE best fit (σ₀=0.0265, a=1.198, σ_peak=2025.57, v_target=28.47, σ₁=1.2): 5 PASS / 2 MARGINAL / 1 FAIL** — PASS = UFD v=5, UFD v=7, UFD v=10, dSph v=15 (Horigome+ 2025 Table II), Cloud-9 v=28 (BLN24 / Ohana+ 2026 floor 128); MARGINAL = UFD v=3, Cluster v=500; FAIL = SPARC v=100 (Lelli+ 2016)
+   - **under the older self-normalized σ_unc convention (σ_unc = σ_obs, T206)** the same two parameter sets give 2 PASS / 1 MARGINAL / 5 FAIL and 6 PASS / 2 MARGINAL / 0 FAIL
+   - **RETIRED literal (finding F16, 2026-11-05):** this section previously quoted "4 PASS / 3 MARGINAL / 1 FAIL" (PASS = Cluster v=500, **dSph v=10**, Cloud-9 v=28, SPARC v=100; MARGINAL = UFD v=3, UFD v=5, **UFD v=15**; FAIL = **dSph v=7**, factor 11.6× over). That tally is not reproducible from any stored parameter set or σ_unc convention (the four reproducible tallies are 1/0/7, 2/1/5, 5/2/1, 6/2/0), and its halo-type labels (dSph v=10, UFD v=15, dSph v=7) contradict the list the likelihood evaluates (UFD v=7, UFD v=10, dSph v=15). Kept verbatim in `canonical_numbers.py` as `RETIRED_ABSTRACT_CHANNEL_COUNT_4_3_1`
+   - **v=150 Lei/Wang** is the R88(87) TUNING statement and is **not** one of the eight counted slots
 
 The honest framing: "framework has one structural no-go (Cloud-9 vs dSph at v=28↔15) plus the structural trade-off result within the multi-resonance ansatz. The v=150 entry is a tuning statement (R88(87)) — a smaller σ_peak2 lands in the (0.1, 0.3) σ_eff window and satisfies both Lei/Wang and Sameie+ 2020." This is a more accurate scientific claim than "4 of 7 channels pass" or "two structural no-gos".
 
@@ -2250,33 +2250,131 @@ The paper's canonical σ_peak = 174 cm²/g is the **causality cap** (post-dictio
 
 ### A.15 Canonical channel table (machine-generated, single source of truth)
 
-**This section is regenerated from `scripts/canonical_numbers.py` on every freeze round.** Per ClawsGO #5 B.2 + #7, this is the single source of truth for the paper's pass/fail, no-go catalogue, and trade-off factors. **Do not edit by hand** — edit `scripts/canonical_numbers.py` and re-run. The full table is also written to `v0.3-prelim/data/results/section_A15.md` for cross-reference.
+**This section is regenerated from `scripts/canonical_numbers.py` on every freeze round; the values here are the canonical numbers used in the abstract, §2.6, §9.17, §10, and §11. Do not edit by hand — edit `scripts/canonical_numbers.py` and re-run.** Per ClawsGO #5 B.2 + #7, this is the single source of truth for the paper's pass/fail, no-go catalogue, and trade-off factors.
 
-**Abstract channel count (canonical):** 8 constrained channels (4 PASS / 3 MARGINAL / 1 FAIL). See `section_A15.md` Block 1 for the per-channel breakdown (4 PASS: Cluster v=500, dSph v=10, Cloud-9 v=28, SPARC v=100; 3 MARGINAL: UFD v=3, UFD v=5, UFD v=15; 1 FAIL: dSph v=7).
+**Abstract channel count (computed, not hand-written):** 8 constrained channel slots, published-sigma_unc likelihood: 1 PASS / 0 MARGINAL / 7 FAIL at the canonical Phase-44 parameters, 5 PASS / 2 MARGINAL / 1 FAIL at the v19.2-E A.2 5-parameter DE best fit
 
-**Note on Lei/Wang double-count (ClawsGO #7 §2b):** Lei/Wang+ 2026 v=150 mass bound is the SAME constraint as Sameie+ 2020 v=150, counted under different names. The v=150 entry is the R88(87) TUNING statement (not a separate PASS). In the 8-channel count above, Lei/Wang is folded into the v=150 TUNING entry and NOT counted in the 4 PASS / 3 MARGINAL / 1 FAIL. **The "4 of 7 constrained channels pass" framing is RETIRED** (was based on the double-count).
+**Channel taxonomy (the list the likelihood evaluates):** OBS_PUBLISHED as evaluated by the likelihood (T205_full_likelihood_published.OBS_PUBLISHED): UFD v=3, UFD v=5, UFD v=7, UFD v=10, dSph v=15, Cloud-9 v=28, SPARC v=100, Cluster v=500
 
-**No-go catalogue (canonical, machine-generated from canonical_numbers.json):**
+Every tally below is computed from that taxonomy under a named convention; the paper quotes no channel count that is not in this table.
 
-- **[STRUCTURAL]** **Cloud-9 vs dSph tension (v=28↔15)** (§2.6a). Argument: σ_m(28)/σ_m(15) ratio; the framework's resonance at v=29.4 necessarily overproduces σ/m at v=15 by 7.8-25.7× (R88(82)). Factor vs constraint: dSph v=15 factor above ceiling = 7.8. Reference: R88(82), R88(88).
-- **[STRUCTURAL]** **f_H(r) compatibility result (structural trade-off, R88(88) restated)** (§9.17b). Argument: A physically-derived centre-peaked f_H(r) profile (Yang+ 2025 SIDM2c parameterization: f_H(0.05 r_s)=0.81, f_H(0.5 r_s)=0.03, f_H(1.0 r_s)=0.04) is incompatible with Cloud-9 and SPARC at observation radii: σ_eff(Cloud-9) ~0.15 ≪ 50 (fails by ~300×), σ_eff(SPARC) ~0.0001 ≪ 0.19 (fails by ~1900×). Caveat: statement about SIDM2c parameterization, not the project's own N-body (Phase G9 found f_H drop 0.94-1.01×, NOT subject to the trade-off). Reference: R88(88), R88(82), R88(86).
-- **[TUNING]** **v=150 Lei/Wang vs Sameie+ 2020 (demoted R88(87))** (§9.17a). Argument: Phase G7's σ_peak2 = 5.0 overshoots Sameie+ 2020 by 1.5×. But the PASS window σ_peak2 ∈ (1.11, 3.33) cm²/g satisfies both constraints simultaneously. The "no-go" is a tuning statement about Phase G7's specific choice, NOT a structural constraint of the framework. Reference: R88(87).
-- **[OPEN]** **Background UV derivation (open requirement, NOT a no-go)** (§2.8 v19.2-F Phase 1+2+3). Argument: The background σ/m = 0.052·(100/v)^1.93 is a phenomenological fit. The framework's named 200 eV Yukawa at α_χ = 6.8×10⁻⁷ (t40 Born formula, outside its domain since κ=3.4 > 1.68) gives σ/m(100) = 0.156 cm²/g (factor 3× above fit) and σ/m(29.4) = 0.354 cm²/g (factor 492× below target 174); the fitted slope a = 1.93 is a constant that no single Yukawa holds across the window (Born slope slides from 0 to −4 as m_A' varies from 500 keV to 5 keV). The v19.2-F Phase 3 EXTENDED scan (m_A' ∈ [1 keV, 2 GeV]) confirms no (α_D, m_A'/m_χ) point places a resonance at v = 29.4 km/s; the gate verdict is FAIL (paper A wins). NOT a UV completion no-go while M2 is open. Reference: ClawsGO Phase 1+2 (v19.2-F P1+2), ClawsGO #11 (corrected framework-coupling sign and Born arithmetic).
+| Parameter set | sigma_unc convention | PASS | MARGINAL | FAIL |
+|---|---|---|---|---|
+| v19_2_D_canonical_phase_44 | published_sigma_unc | 1 | 0 | 7 |
+| v19_2_D_canonical_phase_44 | self_normalized_sigma_unc | 2 | 1 | 5 |
+| v19_2_E_A2_5param_DE_best_fit | published_sigma_unc | 5 | 2 | 1 |
+| v19_2_E_A2_5param_DE_best_fit | self_normalized_sigma_unc | 6 | 2 | 0 |
 
-**Per-channel pass/fail at canonical Phase 44 (σ₀=0.052, a=1.93, σ_peak=174, v_target=29.4, σ₁=4.4):** see `section_A15.md` Block 2 for the full table. Headline: **1 PASS / 0 MARGINAL / 7 FAIL** (Cluster v=500 only). **Caveat (v19.2-E A.1):** this is the canonical Phase 44 free-fit result at the published-σ_unc likelihood; the 5-parameter DE best-fit (v19.2-E A.2) gives 5 PASS / 2 MARGINAL / 1 FAIL at the same likelihood.
+**Headline evaluation = v19_2_E_A2_5param_DE_best_fit under published_sigma_unc:**
 
-**Per-channel pass/fail at v19.2-E A.2 5-param DE best-fit (σ₀=0.0265, a=1.198, σ_peak=2026, v_target=28.47, σ₁=1.2):** see `section_A15.md` Block 3. Headline: **5 PASS / 2 MARGINAL / 1 FAIL**.
+| Status | Channels |
+|---|---|
+| PASS (5) | UFD v=5 (Horigome+ 2025 Table II) |
+| PASS (5) | UFD v=7 (Horigome+ 2025 Table II) |
+| PASS (5) | UFD v=10 (Horigome+ 2025 Table II) |
+| PASS (5) | dSph v=15 (Horigome+ 2025 Table II) |
+| PASS (5) | Cloud-9 v=28 (BLN24 / Ohana+ 2026) |
+| MARGINAL (2) | UFD v=3 (Horigome+ 2025 Table II) |
+| MARGINAL (2) | Cluster v=500 (Randall+ 2008) |
+| FAIL (1) | SPARC v=100 (Lelli+ 2016) |
 
-**Trade-off factors (canonical, R88(88)):** σ_eff(Cloud-9) ~0.15 vs 50 (factor ~300×), σ_eff(SPARC) ~0.0001 vs 0.19 (factor ~1900×). The 250×/200× values in the §9.17b Phase G10 table (R88(86) footnote) are the SIDM2c-with-gravothermal-at-τ=0.3 variant and are RETIRED for the abstract/§9.17b prose.
+**Conventions explained:** see `SIGMA_UNC_CONVENTIONS` in `scripts/canonical_numbers.py`.
 
-**UV completion no-gos (S10, 5 entries):** the abstract calls these "five UV completion no-go theorems". Four are specific UV constructions (10.2a-d: CONSTRAINT); the fifth (T184, 10) is a general scaling argument (SCALING_ARGUMENT). Per ClawsGO #7 §7, the abstract should either rename to "no-go constraints/exclusions at the Phase-44 baseline" or state which are theorems and which are arguments. Full list in `section_A15.md` Block 6.
+**Note on Lei/Wang double-count (ClawsGO #7 §2b):** Lei/Wang+ 2026 v=150 mass bound is the SAME constraint as Sameie+ 2020 v=150 (ClawsGO #7 section 2b double-count): one v=150 constraint counted under two names. It is the R88(87) TUNING statement and is NOT one of the 8 slots counted above.
 
-**Halo-specific gravothermal prefactors (v19.2-E B):** BM2 cluster 1.82×, Cosmo-501 dwarf 2.2×, Fornax dSph 18.7×, Segue 1 UFD 4.0×. Prefactor varies ≥10× across halos (R88(83) caveat). Full table in `section_A15.md` Block 7.
+**Retired conventions:**
+- 4 of 7 constrained channels pass (RETIRED: Lei/Wang double-counted; ClawsGO #7 section 4)
+- two structural no-gos (RETIRED R88(87): v=150 demoted to a tuning statement)
+- 4 PASS / 3 MARGINAL / 1 FAIL (RETIRED 2026-11-05, F16): a hand-written literal that no stored parameter set or sigma_unc convention reproduces. Measured: at the canonical Phase-44 parameters the computed tallies are 1/0/7 (published sigma_unc) and 2/1/5 (self-normalized sigma_unc); at the v19.2-E A.2 best fit they are 5/2/1 and 6/2/0 (measured by scripts/canonical_numbers.py, printed on every run). It also used a different halo-type taxonomy (dSph v=10, UFD v=15, dSph v=7) from the list the likelihood evaluates (UFD v=7, UFD v=10, dSph v=15). Preserved verbatim as RETIRED_ABSTRACT_CHANNEL_COUNT_4_3_1 below.
 
-**Source:** `scripts/canonical_numbers.py` → `v0.3-prelim/data/results/canonical_numbers.json` → `v0.3-prelim/data/results/section_A15.md` (this section). To regenerate: `python scripts/canonical_numbers.py && python scripts/generate_a15.py`.
+**Per-channel pass/fail at canonical Phase 44 (σ₀=0.052, a=1.93, σ_peak=174, v_target=29.4, σ₁=4.4):**
 
-**Drift note (R88(82) process finding, ClawsGO #7 reinforced):** the prior hand-written §A.15 was the root of the 4-of-7 / 4-of-8 ambiguity, the Lei/Wang double-count, and the demoted-v=150-still-listed-as-no-go drift. The machine-generated version makes this drift impossible by construction: every value here is derived from `canonical_numbers.json` and the no-go catalogue is one of the injected values (STRUCTURAL | TUNING | OPEN).
+| v [km/s] | Channel | σ_obs | σ_unc | kind | σ_HH | σ_eff | verdict |
+|---|---|---|---|---|---|---|---|
+| 3 | UFD v=3 | 0.155 | 0.05 | ceiling | 45.2 | 3.987 | **FAIL** |
+| 5 | UFD v=5 | 0.093 | 0.05 | ceiling | 16.9 | 1.488 | **FAIL** |
+| 7 | UFD v=7 | 0.067 | 0.05 | ceiling | 8.81 | 0.7771 | **FAIL** |
+| 10 | UFD v=10 | 0.047 | 0.05 | ceiling | 4.44 | 0.3913 | **FAIL** |
+| 15 | dSph v=15 | 0.032 | 0.04 | ceiling | 2.85 | 0.251 | **FAIL** |
+| 28 | Cloud-9 v=28 | 128 | 30 | floor | 166 | 14.64 | **FAIL** |
+| 100 | SPARC v=100 | 0.193 | 0.05 | gaussian | 0.052 | 0.004587 | **FAIL** |
+| 500 | Cluster v=500 | 0.00025 | 0.0005 | ceiling | 0.00233 | 0.0002054 | **PASS** |
+| | **TOTAL (v19_2_D_canonical_phase_44, published_sigma_unc)** | | | | | | **1 PASS / 0 MARGINAL / 7 FAIL** |
 
+**Per-channel pass/fail at v19.2-E A.2 5-param DE best-fit (σ₀=0.0265, a=1.198, σ_peak=2026, v_target=28.47, σ₁=1.2):**
+
+| v [km/s] | Channel | σ_obs | σ_unc | kind | σ_HH | σ_eff | verdict |
+|---|---|---|---|---|---|---|---|
+| 3 | UFD v=3 | 0.155 | 0.05 | ceiling | 1.77 | 0.156 | **MARGINAL** |
+| 5 | UFD v=5 | 0.093 | 0.05 | ceiling | 0.959 | 0.0846 | **PASS** |
+| 7 | UFD v=7 | 0.067 | 0.05 | ceiling | 0.641 | 0.05654 | **PASS** |
+| 10 | UFD v=10 | 0.047 | 0.05 | ceiling | 0.418 | 0.03688 | **PASS** |
+| 15 | dSph v=15 | 0.032 | 0.04 | ceiling | 0.257 | 0.02269 | **PASS** |
+| 28 | Cloud-9 v=28 | 128 | 30 | floor | 1.88e+03 | 165.5 | **PASS** |
+| 100 | SPARC v=100 | 0.193 | 0.05 | gaussian | 0.0265 | 0.002338 | **FAIL** |
+| 500 | Cluster v=500 | 0.00025 | 0.0005 | ceiling | 0.00385 | 0.0003399 | **MARGINAL** |
+| | **TOTAL (v19_2_E_A2_5param_DE_best_fit, published_sigma_unc)** | | | | | | **5 PASS / 2 MARGINAL / 1 FAIL** |
+
+**Trade-off factors (canonical, R88(88)):**
+
+sigma_eff(Cloud-9) ~ 0.15 vs 50 (factor ~300x), sigma_eff(SPARC) ~ 0.0001 vs 0.19 (factor ~1900x)
+
+| Quantity | Factor |
+|---|---|
+| σ_eff(Cloud-9) below 50 | **300×** |
+| σ_eff(SPARC) below 0.19 | **1900×** |
+
+**Retired values (ClawsGO #7 §5):**
+- 250x / 200x in §9.17b table (:1245, :1247) - RETIRED (different calc: SIDM2c with gravothermal at tau=0.3, not bare SIDM2c)
+- 5-300 / 200-1000 / 250 / '130' range in older drafts - RETIRED per ClawsGO #5
+
+**No-go catalogue (canonical, machine-generated):**
+
+**Status legend:** **STRUCTURAL** = Survives all tested forward paths. First-class result. | **TUNING** = Specific parameter choice that fails, but the framework has a parameter region that passes (PASS window exists). Not a no-go. | **OPEN** = Open requirement, NOT a no-go. UV-status question pending Phase 3. | **PASS** = Framework passes the channel under all canonical choices.
+
+- **[STRUCTURAL]** **Cloud-9 vs dSph tension (v=28<->15)** (§2.6a)
+  - Argument: sigma_m(28)/sigma_m(15) ratio; the framework's resonance at v=29.4 necessarily overproduces sigma/m at v=15 by 7.8-25.7x (R88(82)).
+  - Factor vs constraint: dsph_v15_factor_above_ceiling=7.8
+  - Reference: R88(82), R88(88)
+- **[STRUCTURAL]** **f_H(r) compatibility result (structural trade-off, R88(88) restated)** (§9.17b (R88(88) restatement))
+  - Argument: A physically-derived centre-peaked f_H(r) profile (Yang+ 2025 SIDM2c parameterization: f_H(0.05 r_s)=0.81, f_H(0.5 r_s)=0.03, f_H(1.0 r_s)=0.04) is incompatible with Cloud-9 and SPARC at observation radii: sigma_eff(Cloud-9) ~0.15 << 50 (fails by ~300x), sigma_eff(SPARC) ~0.0001 << 0.19 (fails by ~1900x).
+  - Caveat: Statement about SIDM2c parameterization, not the project's own N-body (Phase G9 found f_H drop 0.94-1.01x, which is NOT subject to the trade-off).
+  - Factor vs constraint: cloud9_factor_below_50=300.0, sparc_factor_below_0p19=1900.0
+  - Reference: R88(88), R88(82), R88(86)
+- **[TUNING]** **v=150 Lei/Wang vs Sameie+ 2020 (demoted R88(87))** (§9.17a (R88(87) demotion))
+  - Argument: Phase G7's sigma_peak2 = 5.0 overshoots Sameie+ 2020 by 1.5x. But the PASS window sigma_peak2 in (1.11, 3.33) cm²/g satisfies both constraints simultaneously. The 'no-go' is a tuning statement about Phase G7's specific choice, NOT a structural constraint of the framework.
+  - Factor vs constraint: pass_window_sigma_peak2_cm2_per_g_min=1.11, pass_window_sigma_peak2_cm2_per_g_max=3.33
+  - Reference: R88(87)
+- **[OPEN]** **Background UV derivation (open requirement, NOT a no-go)** (§2.8 (v19.2-F Phase 1+2))
+  - Argument: The background sigma/m = 0.052*(100/v)^1.93 is a phenomenological fit. The framework's named 200 eV Yukawa at alpha_chi = 6.8e-7 fails at v=100 by 55x and overproduces at v=10 by ~4300x; the fitted slope is closer to a Sommerfeld v^-2 near a t-channel bound-state resonance (M2 mechanism, Chu+ 2018 [7]). A first-principles derivation is open (v19.2-F Phase 3). NOT a UV completion no-go while M2 is open.
+  - Factor vs constraint: yukawa_at_alpha_chi_v100_factor_over_fitted=55.0, yukawa_at_alpha_chi_v10_factor_over_fitted=4300.0
+  - Reference: ClawsGO Phase 1+2 (v19.2-F P1+2)
+
+**UV completion no-gos (S10, 5 entries):**
+
+**Note (ClawsGO #7 §7):** the abstract calls these 'five UV completion no-go theorems'. Four are specific UV constructions (CONSTRAINT, 10.2a-d); the fifth (T184, 10) is a general scaling argument. Per ClawsGO #7, the abstract should either rename to 'no-go constraints/exclusions at the Phase-44 baseline' or state which are theorems and which are arguments.
+
+- **[CONSTRAINT]** **Magnetic dipole DM** (§10.2a)
+  - Cross-section ~18 orders above LZ limit; not a UV completion theorem but a constraint exclusion at the Phase 44 baseline.
+- **[CONSTRAINT]** **Hidden U(1) + 10 MeV pseudo-Dirac** (§10.2b)
+  - Same as 10.2a - constraint exclusion at the Phase 44 baseline.
+- **[CONSTRAINT]** **GeV-scale inelastic DM** (§10.2c)
+- **[CONSTRAINT]** **Published best-fit p-wave resonance (Chu+ 2019)** (§10.2d)
+- **[SCALING_ARGUMENT]** **One-mediator UV systematic (T184 scaling argument)** (§10 (T184))
+  - T184 is a general scaling argument rather than a specific UV construction. Per the abstract's 'five UV completion no-go theorems' framing, this entry is the LEAST specific of the five. Per ClawsGO #7, the abstract should either rename to 'no-go constraints/exclusions at the Phase-44 baseline' or state which are theorems and which are arguments.
+
+**Halo-specific gravothermal prefactors (v19.2-E B):**
+
+| Halo | Prefactor vs Yang+ 2024 150×C | σ_eff/m [cm²/g] | t_c [Gyr] | Citation |
+|---|---|---|---|---|
+| BM2 cluster | 1.82× | 7.1 | 28.7 | Yang+ 2024 calibration halo (R88(83) result: 1.82x to match 28.7 Gyr) |
+| Cosmo-501 dwarf | 2.2× | 50.0 | 9.04 | Yang+ 2024 Table 1, R88(83) independent halo (under-prediction by 2.2x) |
+| Fornax dSph | 18.7× | 2.85 | >13.8 | v19.2-E B: Fornax dSph, M_200=1e9, c=15, v_eff=15 km/s. Prefactor must be >= 18.7x BM2 calibration to match observational lower limit on t_c. |
+| Segue 1 UFD | 4.0× | 6.81 | >13.8 | v19.2-E B: Segue 1 UFD, M_200=1e8, c=25, v_eff=8 km/s. Prefactor must be >= 4.0x BM2 calibration. |
+
+---
+
+**Source:** `scripts/canonical_numbers.py` → `v0.3-prelim/data/results/canonical_numbers.json`. To regenerate: `python scripts/canonical_numbers.py && python scripts/generate_a15.py`.
 ### A.16 Gravothermal t_c prefactor re-derivation (R88(83), in response to ClawsGO review)
 
 The ClawsGO Science Agent review (2026-10-08) identified the gravothermal t_c calibration as circular: `CALIBRATED_PREFACTOR = 1.34e12` in `gravothermal_yang2024.py:190` was tuned to reproduce BM2 t_c = 28.7 Gyr, which is also the validation target used at lines 358-371. The "validation" cannot fail by construction.
@@ -2305,7 +2403,7 @@ has units of seconds. For BM2 (ρ_s = 2.74e8 M_☉/kpc³, r_s = 0.141 kpc, σ_ef
 |---------|-----------|---------|
 | Literal published 150 * C | 112.5 | **15.77 Gyr** |
 | BM2-N-body-calibrated (1.82×) | 204.75 | 28.70 Gyr ✓ (matches published) |
-| Code's `CALIBRATED_PREFACTOR = 1.34e12` (mixed units) | — | 29.44 Gyr ✓ (matches within 2.6%) |
+| Code's `CALIBRATED_PREFACTOR = 1.34e12` (mixed units; tuned on BM2) | — | 29.438 Gyr ✓ (+2.57%, re-measured 2026-11-05) |
 
 The 1.82× discrepancy between the literal formula and the BM2 N-body result is **real** and reflects the fact that the published "150" is an order-of-magnitude estimate, not a derivation.
 

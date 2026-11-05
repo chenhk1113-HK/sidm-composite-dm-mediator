@@ -216,13 +216,19 @@
     "PASS": 1,
     "MARGINAL": 0,
     "FAIL": 7,
-    "canonical_count_string": "1 of 8 channels pass"
+    "parameter_set": "v19_2_D_canonical_phase_44",
+    "convention": "published_sigma_unc",
+    "channel_list": "OBS_PUBLISHED",
+    "canonical_count_string": "1 of 8 channels pass (v19_2_D_canonical_phase_44, published_sigma_unc)"
   },
   "pass_fail_summary_v19_2_E_A2_best_fit": {
     "PASS": 5,
     "MARGINAL": 2,
     "FAIL": 1,
-    "canonical_count_string": "5 of 8 channels pass"
+    "parameter_set": "v19_2_E_A2_5param_DE_best_fit",
+    "convention": "published_sigma_unc",
+    "channel_list": "OBS_PUBLISHED",
+    "canonical_count_string": "5 of 8 channels pass (v19_2_E_A2_5param_DE_best_fit, published_sigma_unc)"
   },
   "tradeoff_factors_v19_2_D_canonical": {
     "cloud9_factor_below_50": 3.414300311301732,
@@ -396,42 +402,478 @@
   },
   "canonical_abstract_channel_count": {
     "n_channels_total": 8,
-    "n_PASS": 4,
-    "n_MARGINAL": 3,
+    "taxonomy": "OBS_PUBLISHED as evaluated by the likelihood (T205_full_likelihood_published.OBS_PUBLISHED): UFD v=3, UFD v=5, UFD v=7, UFD v=10, dSph v=15, Cloud-9 v=28, SPARC v=100, Cluster v=500",
+    "likelihood_convention": "published_sigma_unc",
+    "headline_evaluation": "v19_2_E_A2_5param_DE_best_fit",
+    "n_PASS": 5,
+    "n_MARGINAL": 2,
     "n_FAIL": 1,
-    "canonical_count_string": "8 constrained channels (4 PASS / 3 MARGINAL / 1 FAIL)",
-    "retired_conventions": [
-      "4 of 7 constrained channels pass (RETIRED: Lei/Wang double-counted in old table; see ClawsGO #7 \u00a74)",
-      "two structural no-gos (RETIRED R88(87): v=150 demoted to tuning statement)"
-    ],
+    "canonical_count_string": "8 constrained channel slots, published-sigma_unc likelihood: 1 PASS / 0 MARGINAL / 7 FAIL at the canonical Phase-44 parameters, 5 PASS / 2 MARGINAL / 1 FAIL at the v19.2-E A.2 5-parameter DE best fit",
     "PASS_channels": [
-      "Cluster v=500 (Randall+ 2008 strong lensing)",
-      "dSph v=10 (Horigome+ 2025 ceiling)",
-      "Cloud-9 v=28 (BLN24/Ohana+ 2026 floor 128, canonical Phase 44)",
-      "SPARC v=100 (Lelli+ 2016, canonical Phase 44)"
+      "UFD v=5 (Horigome+ 2025 Table II)",
+      "UFD v=7 (Horigome+ 2025 Table II)",
+      "UFD v=10 (Horigome+ 2025 Table II)",
+      "dSph v=15 (Horigome+ 2025 Table II)",
+      "Cloud-9 v=28 (BLN24 / Ohana+ 2026)"
     ],
     "MARGINAL_channels": [
-      "UFD v=3 (Horigome+ 2025 ceiling)",
-      "UFD v=5 (Horigome+ 2025 ceiling)",
-      "UFD v=15 (Horigome+ 2025 ceiling, within 1sigma)"
+      "UFD v=3 (Horigome+ 2025 Table II)",
+      "Cluster v=500 (Randall+ 2008)"
     ],
     "FAIL_channels": [
-      "dSph v=7 (Horigome+ 2025 ceiling, factor 11.6x over)"
+      "SPARC v=100 (Lelli+ 2016)"
     ],
-    "note_on_lei_wang": "Lei/Wang+ 2026 v=150 mass bound is the SAME constraint as Sameie+ 2020 v=150 (see ClawsGO #7 \u00a72b Lei/Wang double-count). It is the SAME channel counted under different names; the v=150 entry is the R88(87) TUNING statement, not a separate PASS. In the 8-channel count above, Lei/Wang is folded into the v=150 TUNING entry and NOT counted in the 4 PASS / 3 MARGINAL / 1 FAIL."
+    "PASS_channels_canonical_parameters": [
+      "Cluster v=500 (Randall+ 2008)"
+    ],
+    "MARGINAL_channels_canonical_parameters": [],
+    "FAIL_channels_canonical_parameters": [
+      "UFD v=3 (Horigome+ 2025 Table II)",
+      "UFD v=5 (Horigome+ 2025 Table II)",
+      "UFD v=7 (Horigome+ 2025 Table II)",
+      "UFD v=10 (Horigome+ 2025 Table II)",
+      "dSph v=15 (Horigome+ 2025 Table II)",
+      "Cloud-9 v=28 (BLN24 / Ohana+ 2026)",
+      "SPARC v=100 (Lelli+ 2016)"
+    ],
+    "evaluations": [
+      {
+        "parameter_set": "v19_2_D_canonical_phase_44",
+        "convention": "published_sigma_unc",
+        "params": {
+          "sigma_0": 0.052,
+          "a_slope": 1.93,
+          "sigma_peak": 174.0,
+          "v_target": 29.4,
+          "sigma_1": 4.4
+        },
+        "tally": {
+          "PASS": 1,
+          "MARGINAL": 0,
+          "FAIL": 7
+        },
+        "count_string": "1 PASS / 0 MARGINAL / 7 FAIL",
+        "channels": [
+          {
+            "v_kms": 3.0,
+            "label": "UFD v=3",
+            "kind": "ceiling",
+            "sigma_obs": 0.155,
+            "sigma_unc_used": 0.05,
+            "sigma_HH_at_v": 45.20217657770099,
+            "sigma_eff": 3.9872387937424265,
+            "verdict": "FAIL",
+            "citation": "Horigome+ 2025 Table II"
+          },
+          {
+            "v_kms": 5.0,
+            "label": "UFD v=5",
+            "kind": "ceiling",
+            "sigma_obs": 0.093,
+            "sigma_unc_used": 0.05,
+            "sigma_HH_at_v": 16.865226429437705,
+            "sigma_eff": 1.4876647581142703,
+            "verdict": "FAIL",
+            "citation": "Horigome+ 2025 Table II"
+          },
+          {
+            "v_kms": 7.0,
+            "label": "UFD v=7",
+            "kind": "ceiling",
+            "sigma_obs": 0.067,
+            "sigma_unc_used": 0.05,
+            "sigma_HH_at_v": 8.810170885877744,
+            "sigma_eff": 0.7771363636723899,
+            "verdict": "FAIL",
+            "citation": "Horigome+ 2025 Table II"
+          },
+          {
+            "v_kms": 10.0,
+            "label": "UFD v=10",
+            "kind": "ceiling",
+            "sigma_obs": 0.047,
+            "sigma_unc_used": 0.05,
+            "sigma_HH_at_v": 4.43636954684815,
+            "sigma_eff": 0.3913277213579284,
+            "verdict": "FAIL",
+            "citation": "Horigome+ 2025 Table II"
+          },
+          {
+            "v_kms": 15.0,
+            "label": "dSph v=15",
+            "kind": "ceiling",
+            "sigma_obs": 0.032,
+            "sigma_unc_used": 0.04,
+            "sigma_HH_at_v": 2.8454570671911887,
+            "sigma_eff": 0.25099492243986754,
+            "verdict": "FAIL",
+            "citation": "Horigome+ 2025 Table II"
+          },
+          {
+            "v_kms": 28.0,
+            "label": "Cloud-9 v=28",
+            "kind": "floor",
+            "sigma_obs": 128.0,
+            "sigma_unc_used": 30.0,
+            "sigma_HH_at_v": 166.01808042318618,
+            "sigma_eff": 14.64428885604883,
+            "verdict": "FAIL",
+            "citation": "BLN24 / Ohana+ 2026"
+          },
+          {
+            "v_kms": 100.0,
+            "label": "SPARC v=100",
+            "kind": "gaussian",
+            "sigma_obs": 0.193,
+            "sigma_unc_used": 0.05,
+            "sigma_HH_at_v": 0.052,
+            "sigma_eff": 0.004586867999999999,
+            "verdict": "FAIL",
+            "citation": "Lelli+ 2016"
+          },
+          {
+            "v_kms": 500.0,
+            "label": "Cluster v=500",
+            "kind": "ceiling",
+            "sigma_obs": 0.00025,
+            "sigma_unc_used": 0.0005,
+            "sigma_HH_at_v": 0.0023280442736601657,
+            "sigma_eff": 0.00020535445733528955,
+            "verdict": "PASS",
+            "citation": "Randall+ 2008"
+          }
+        ]
+      },
+      {
+        "parameter_set": "v19_2_D_canonical_phase_44",
+        "convention": "self_normalized_sigma_unc",
+        "params": {
+          "sigma_0": 0.052,
+          "a_slope": 1.93,
+          "sigma_peak": 174.0,
+          "v_target": 29.4,
+          "sigma_1": 4.4
+        },
+        "tally": {
+          "PASS": 2,
+          "MARGINAL": 1,
+          "FAIL": 5
+        },
+        "count_string": "2 PASS / 1 MARGINAL / 5 FAIL",
+        "channels": [
+          {
+            "v_kms": 3.0,
+            "label": "UFD v=3",
+            "kind": "ceiling",
+            "sigma_obs": 0.155,
+            "sigma_unc_used": 0.155,
+            "sigma_HH_at_v": 45.20217657770099,
+            "sigma_eff": 3.9872387937424265,
+            "verdict": "FAIL",
+            "citation": "Horigome+ 2025 Table II"
+          },
+          {
+            "v_kms": 5.0,
+            "label": "UFD v=5",
+            "kind": "ceiling",
+            "sigma_obs": 0.093,
+            "sigma_unc_used": 0.093,
+            "sigma_HH_at_v": 16.865226429437705,
+            "sigma_eff": 1.4876647581142703,
+            "verdict": "FAIL",
+            "citation": "Horigome+ 2025 Table II"
+          },
+          {
+            "v_kms": 7.0,
+            "label": "UFD v=7",
+            "kind": "ceiling",
+            "sigma_obs": 0.067,
+            "sigma_unc_used": 0.067,
+            "sigma_HH_at_v": 8.810170885877744,
+            "sigma_eff": 0.7771363636723899,
+            "verdict": "FAIL",
+            "citation": "Horigome+ 2025 Table II"
+          },
+          {
+            "v_kms": 10.0,
+            "label": "UFD v=10",
+            "kind": "ceiling",
+            "sigma_obs": 0.047,
+            "sigma_unc_used": 0.047,
+            "sigma_HH_at_v": 4.43636954684815,
+            "sigma_eff": 0.3913277213579284,
+            "verdict": "FAIL",
+            "citation": "Horigome+ 2025 Table II"
+          },
+          {
+            "v_kms": 15.0,
+            "label": "dSph v=15",
+            "kind": "ceiling",
+            "sigma_obs": 0.032,
+            "sigma_unc_used": 0.032,
+            "sigma_HH_at_v": 2.8454570671911887,
+            "sigma_eff": 0.25099492243986754,
+            "verdict": "FAIL",
+            "citation": "Horigome+ 2025 Table II"
+          },
+          {
+            "v_kms": 28.0,
+            "label": "Cloud-9 v=28",
+            "kind": "floor",
+            "sigma_obs": 128.0,
+            "sigma_unc_used": 128.0,
+            "sigma_HH_at_v": 166.01808042318618,
+            "sigma_eff": 14.64428885604883,
+            "verdict": "MARGINAL",
+            "citation": "BLN24 / Ohana+ 2026"
+          },
+          {
+            "v_kms": 100.0,
+            "label": "SPARC v=100",
+            "kind": "gaussian",
+            "sigma_obs": 0.193,
+            "sigma_unc_used": 0.193,
+            "sigma_HH_at_v": 0.052,
+            "sigma_eff": 0.004586867999999999,
+            "verdict": "PASS",
+            "citation": "Lelli+ 2016"
+          },
+          {
+            "v_kms": 500.0,
+            "label": "Cluster v=500",
+            "kind": "ceiling",
+            "sigma_obs": 0.00025,
+            "sigma_unc_used": 0.00025,
+            "sigma_HH_at_v": 0.0023280442736601657,
+            "sigma_eff": 0.00020535445733528955,
+            "verdict": "PASS",
+            "citation": "Randall+ 2008"
+          }
+        ]
+      },
+      {
+        "parameter_set": "v19_2_E_A2_5param_DE_best_fit",
+        "convention": "published_sigma_unc",
+        "params": {
+          "sigma_0": 0.0265,
+          "a_slope": 1.198,
+          "sigma_peak": 2025.57,
+          "v_target": 28.47,
+          "sigma_1": 1.2
+        },
+        "tally": {
+          "PASS": 5,
+          "MARGINAL": 2,
+          "FAIL": 1
+        },
+        "count_string": "5 PASS / 2 MARGINAL / 1 FAIL",
+        "channels": [
+          {
+            "v_kms": 3.0,
+            "label": "UFD v=3",
+            "kind": "ceiling",
+            "sigma_obs": 0.155,
+            "sigma_unc_used": 0.05,
+            "sigma_HH_at_v": 1.7687017714260407,
+            "sigma_eff": 0.15601541455571963,
+            "verdict": "MARGINAL",
+            "citation": "Horigome+ 2025 Table II"
+          },
+          {
+            "v_kms": 5.0,
+            "label": "UFD v=5",
+            "kind": "ceiling",
+            "sigma_obs": 0.093,
+            "sigma_unc_used": 0.05,
+            "sigma_HH_at_v": 0.9591351535543553,
+            "sigma_eff": 0.08460435275987613,
+            "verdict": "PASS",
+            "citation": "Horigome+ 2025 Table II"
+          },
+          {
+            "v_kms": 7.0,
+            "label": "UFD v=7",
+            "kind": "ceiling",
+            "sigma_obs": 0.067,
+            "sigma_unc_used": 0.05,
+            "sigma_HH_at_v": 0.6409415436688206,
+            "sigma_eff": 0.056536812625483,
+            "verdict": "PASS",
+            "citation": "Horigome+ 2025 Table II"
+          },
+          {
+            "v_kms": 10.0,
+            "label": "UFD v=10",
+            "kind": "ceiling",
+            "sigma_obs": 0.047,
+            "sigma_unc_used": 0.05,
+            "sigma_HH_at_v": 0.4180669864703273,
+            "sigma_eff": 0.0368772708095611,
+            "verdict": "PASS",
+            "citation": "Horigome+ 2025 Table II"
+          },
+          {
+            "v_kms": 15.0,
+            "label": "dSph v=15",
+            "kind": "ceiling",
+            "sigma_obs": 0.032,
+            "sigma_unc_used": 0.04,
+            "sigma_HH_at_v": 0.25721041231541486,
+            "sigma_eff": 0.02268827325993043,
+            "verdict": "PASS",
+            "citation": "Horigome+ 2025 Table II"
+          },
+          {
+            "v_kms": 28.0,
+            "label": "Cloud-9 v=28",
+            "kind": "floor",
+            "sigma_obs": 128.0,
+            "sigma_unc_used": 30.0,
+            "sigma_HH_at_v": 1876.1365988818511,
+            "sigma_eff": 165.4921332507692,
+            "verdict": "PASS",
+            "citation": "BLN24 / Ohana+ 2026"
+          },
+          {
+            "v_kms": 100.0,
+            "label": "SPARC v=100",
+            "kind": "gaussian",
+            "sigma_obs": 0.193,
+            "sigma_unc_used": 0.05,
+            "sigma_HH_at_v": 0.0265,
+            "sigma_eff": 0.0023375385,
+            "verdict": "FAIL",
+            "citation": "Lelli+ 2016"
+          },
+          {
+            "v_kms": 500.0,
+            "label": "Cluster v=500",
+            "kind": "ceiling",
+            "sigma_obs": 0.00025,
+            "sigma_unc_used": 0.0005,
+            "sigma_HH_at_v": 0.0038537169106032704,
+            "sigma_eff": 0.0003399325149674039,
+            "verdict": "MARGINAL",
+            "citation": "Randall+ 2008"
+          }
+        ]
+      },
+      {
+        "parameter_set": "v19_2_E_A2_5param_DE_best_fit",
+        "convention": "self_normalized_sigma_unc",
+        "params": {
+          "sigma_0": 0.0265,
+          "a_slope": 1.198,
+          "sigma_peak": 2025.57,
+          "v_target": 28.47,
+          "sigma_1": 1.2
+        },
+        "tally": {
+          "PASS": 6,
+          "MARGINAL": 2,
+          "FAIL": 0
+        },
+        "count_string": "6 PASS / 2 MARGINAL / 0 FAIL",
+        "channels": [
+          {
+            "v_kms": 3.0,
+            "label": "UFD v=3",
+            "kind": "ceiling",
+            "sigma_obs": 0.155,
+            "sigma_unc_used": 0.155,
+            "sigma_HH_at_v": 1.7687017714260407,
+            "sigma_eff": 0.15601541455571963,
+            "verdict": "MARGINAL",
+            "citation": "Horigome+ 2025 Table II"
+          },
+          {
+            "v_kms": 5.0,
+            "label": "UFD v=5",
+            "kind": "ceiling",
+            "sigma_obs": 0.093,
+            "sigma_unc_used": 0.093,
+            "sigma_HH_at_v": 0.9591351535543553,
+            "sigma_eff": 0.08460435275987613,
+            "verdict": "PASS",
+            "citation": "Horigome+ 2025 Table II"
+          },
+          {
+            "v_kms": 7.0,
+            "label": "UFD v=7",
+            "kind": "ceiling",
+            "sigma_obs": 0.067,
+            "sigma_unc_used": 0.067,
+            "sigma_HH_at_v": 0.6409415436688206,
+            "sigma_eff": 0.056536812625483,
+            "verdict": "PASS",
+            "citation": "Horigome+ 2025 Table II"
+          },
+          {
+            "v_kms": 10.0,
+            "label": "UFD v=10",
+            "kind": "ceiling",
+            "sigma_obs": 0.047,
+            "sigma_unc_used": 0.047,
+            "sigma_HH_at_v": 0.4180669864703273,
+            "sigma_eff": 0.0368772708095611,
+            "verdict": "PASS",
+            "citation": "Horigome+ 2025 Table II"
+          },
+          {
+            "v_kms": 15.0,
+            "label": "dSph v=15",
+            "kind": "ceiling",
+            "sigma_obs": 0.032,
+            "sigma_unc_used": 0.032,
+            "sigma_HH_at_v": 0.25721041231541486,
+            "sigma_eff": 0.02268827325993043,
+            "verdict": "PASS",
+            "citation": "Horigome+ 2025 Table II"
+          },
+          {
+            "v_kms": 28.0,
+            "label": "Cloud-9 v=28",
+            "kind": "floor",
+            "sigma_obs": 128.0,
+            "sigma_unc_used": 128.0,
+            "sigma_HH_at_v": 1876.1365988818511,
+            "sigma_eff": 165.4921332507692,
+            "verdict": "PASS",
+            "citation": "BLN24 / Ohana+ 2026"
+          },
+          {
+            "v_kms": 100.0,
+            "label": "SPARC v=100",
+            "kind": "gaussian",
+            "sigma_obs": 0.193,
+            "sigma_unc_used": 0.193,
+            "sigma_HH_at_v": 0.0265,
+            "sigma_eff": 0.0023375385,
+            "verdict": "PASS",
+            "citation": "Lelli+ 2016"
+          },
+          {
+            "v_kms": 500.0,
+            "label": "Cluster v=500",
+            "kind": "ceiling",
+            "sigma_obs": 0.00025,
+            "sigma_unc_used": 0.00025,
+            "sigma_HH_at_v": 0.0038537169106032704,
+            "sigma_eff": 0.0003399325149674039,
+            "verdict": "MARGINAL",
+            "citation": "Randall+ 2008"
+          }
+        ]
+      }
+    ],
+    "computed": true,
+    "note_on_lei_wang": "Lei/Wang+ 2026 v=150 mass bound is the SAME constraint as Sameie+ 2020 v=150 (ClawsGO #7 section 2b double-count): one v=150 constraint counted under two names. It is the R88(87) TUNING statement and is NOT one of the 8 slots counted above.",
+    "retired_conventions": [
+      "4 of 7 constrained channels pass (RETIRED: Lei/Wang double-counted; ClawsGO #7 section 4)",
+      "two structural no-gos (RETIRED R88(87): v=150 demoted to a tuning statement)",
+      "4 PASS / 3 MARGINAL / 1 FAIL (RETIRED 2026-11-05, F16): a hand-written literal that no stored parameter set or sigma_unc convention reproduces. Measured: at the canonical Phase-44 parameters the computed tallies are 1/0/7 (published sigma_unc) and 2/1/5 (self-normalized sigma_unc); at the v19.2-E A.2 best fit they are 5/2/1 and 6/2/0 (measured by scripts/canonical_numbers.py, printed on every run). It also used a different halo-type taxonomy (dSph v=10, UFD v=15, dSph v=7) from the list the likelihood evaluates (UFD v=7, UFD v=10, dSph v=15). Preserved verbatim as RETIRED_ABSTRACT_CHANNEL_COUNT_4_3_1 below."
+    ]
   },
-  "canonical_tradeoff_factors": {
-    "cloud9_factor_below_50": 300.0,
-    "sparc_factor_below_0p19": 1900.0,
-    "canonical_text": "sigma_eff(Cloud-9) ~ 0.15 vs 50 (factor ~300x), sigma_eff(SPARC) ~ 0.0001 vs 0.19 (factor ~1900x)",
-    "retired_values": [
-      "250x / 200x in \u00a79.17b table (:1245, :1247) - RETIRED (different calc: SIDM2c with gravothermal at tau=0.3, not bare SIDM2c)",
-      "5-300 / 200-1000 / 250 / '130' range in older drafts - RETIRED per ClawsGO #5"
-    ],
-    "R88_reference": "R88(88), ClawsGO #5+#7"
-  }
-,
-  "t82_audit_check_count": 120,
   "t41_v08_standing_map": {
     "source_artifact": "v0.3-prelim/data/results/t41_mediator_mass_joint_fit_t88ce_v08_with_euclid_lensing_and_subhalo_forecast_nlive2000.json",
     "source_artifact_sha256": "d2ee97506ed0dd35a5ab9441a12b471d145ee737ab9f9cf2d10d8440ef6feabf",
@@ -442,9 +884,12 @@
     "log_Z": -164.8684904202744,
     "log_Z_err": 0.08407446187648335,
     "MAP": {
-      "m_chi_GeV": 478.29480863482195,
       "m_phi_MeV": 488.15386822625493,
+      "m_chi_GeV": 478.29480863482195,
       "g_chi": 0.963659296232169,
+      "log_epsilon": -32.21413841174674,
+      "log_alpha": -24.440724446528556,
+      "log_xi": -0.8142050976910864,
       "xi": 0.15338924235326637,
       "sigma_m_0_derived": 0.05991454841339871,
       "a_derived": 0.13234005284350478
@@ -480,15 +925,27 @@
       "Yukawa_a_at_MAP": 0.13234005284350478,
       "significant": false
     },
+    "computed_from_artifact": true,
     "superseded_v07_map": {
       "source_artifact": "v0.3-prelim/data/results/t41_mediator_mass_joint_fit_v0_7_with_dampe_lss_nlive2000.json",
       "m_chi_GeV": 769.6913379451703,
       "m_phi_MeV": 452.9510521222574,
       "g_chi": 1.18898126146095,
       "reported_sigma": 0.6,
-      "note": "Found 2026-11-04: README.md / CURRENT.md / docs/LAYMAN_SUMMARY.md quoted THESE v0.7 values in rows labelled v0.8."
+      "note": "Found 2026-11-04: README.md / CURRENT.md / docs/LAYMAN_SUMMARY.md quoted  THESE v0.7 values in rows labelled v0.8."
     },
     "doc_rule": "Current-standing rows must quote the v0.8 MAP above (478 GeV / 488 MeV / g_chi 0.964 / tension 0.81). v0.7 values may appear only in rows or table blocks explicitly labelled v0.7 / historical / superseded.",
     "added": "2026-11-04 LocalIntegrity-Sweep; drift found by reading the artifact against the front pages"
+  },
+  "t82_audit_check_count": 120,
+  "canonical_tradeoff_factors": {
+    "cloud9_factor_below_50": 300.0,
+    "sparc_factor_below_0p19": 1900.0,
+    "canonical_text": "sigma_eff(Cloud-9) ~ 0.15 vs 50 (factor ~300x), sigma_eff(SPARC) ~ 0.0001 vs 0.19 (factor ~1900x)",
+    "retired_values": [
+      "250x / 200x in \u00a79.17b table (:1245, :1247) - RETIRED (different calc: SIDM2c with gravothermal at tau=0.3, not bare SIDM2c)",
+      "5-300 / 200-1000 / 250 / '130' range in older drafts - RETIRED per ClawsGO #5"
+    ],
+    "R88_reference": "R88(88), ClawsGO #5+#7"
   }
 }

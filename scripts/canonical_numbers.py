@@ -93,6 +93,138 @@ def channel_verdict(sigma_eff, sigma_obs, sigma_unc, kind):
 # Trade-off factors
 # ============================================================================
 
+# ============================================================================
+# Channel evaluation under a NAMED likelihood convention (F16 fix, 2026-11-05)
+#
+# Before this fix the paper's headline tally (4 PASS / 3 MARGINAL / 1 FAIL) was a
+# hand-written literal. It could not be reproduced from any parameter set or any
+# sigma_unc convention stored in this repo, which is exactly what made
+# "4 PASS / 3 MARGINAL / 1 FAIL" and "5 of 8" incomparable counts (finding F16).
+# Every headline count is now COMPUTED here, from the channel list the likelihood
+# actually evaluates (T205_full_likelihood_published.OBS_PUBLISHED), under a
+# convention that is named in the output.
+# ============================================================================
+
+SIGMA_UNC_CONVENTIONS = {
+    "published_sigma_unc":
+        "sigma_unc from the published error budgets (T205/T207; Cloud-9 floor 30, "
+        "UFD/dSph ceilings 0.04-0.05, SPARC 0.05, cluster 5e-4)",
+    "self_normalized_sigma_unc":
+        "sigma_unc = sigma_obs (T206 internal convention, 100% relative)",
+}
+
+PARAMETER_SETS = {
+    "v19_2_D_canonical_phase_44": (
+        SIGMA_0_CM2_PER_G, A_SLOPE, V_REF_KMS,
+        SIGMA_PEAK_CM2_PER_G, V_TARGET_KMS, SIGMA_KMS,
+    ),
+    "v19_2_E_A2_5param_DE_best_fit": (0.0265, 1.198, V_REF_KMS, 2025.57, 28.47, 1.20),
+}
+
+
+def evaluate_channels(params, convention="published_sigma_unc"):
+    """Evaluate the 8 OBS_PUBLISHED channel slots for ONE parameter set under ONE
+    sigma_unc convention. Returns (rows, tally). No verdict is hand-assigned."""
+    if convention not in SIGMA_UNC_CONVENTIONS:
+        raise ValueError(f"unknown sigma_unc convention: {convention}")
+    rows = []
+    tally = {"PASS": 0, "MARGINAL": 0, "FAIL": 0}
+    for v, sigma_obs, sigma_unc, kind, label_str, citation in OBS_PUBLISHED:
+        sigma_HH = float(sigma_m_canonical_gaussian(v, *params))
+        sigma_eff = F_H_CANONICAL ** 2 * sigma_HH
+        unc = float(sigma_obs) if convention == "self_normalized_sigma_unc" else float(sigma_unc)
+        verdict = channel_verdict(sigma_eff, sigma_obs, unc, kind)
+        tally[verdict] += 1
+        rows.append({
+            "v_kms": float(v),
+            "label": label_str,
+            "kind": kind,
+            "sigma_obs": float(sigma_obs),
+            "sigma_unc_used": unc,
+            "sigma_HH_at_v": sigma_HH,
+            "sigma_eff": float(sigma_eff),
+            "verdict": verdict,
+            "citation": citation,
+        })
+    return rows, tally
+
+
+def build_abstract_channel_count():
+    """Compute the abstract-level channel accounting. The headline is the promoted
+    published-sigma_unc likelihood, stated at BOTH parameter sets, because the
+    paper's canonical parameters and its best fit do not give the same verdict."""
+    evaluations = []
+    for set_name, params in PARAMETER_SETS.items():
+        for convention in SIGMA_UNC_CONVENTIONS:
+            rows, tally = evaluate_channels(params, convention)
+            evaluations.append({
+                "parameter_set": set_name,
+                "convention": convention,
+                "params": {
+                    "sigma_0": params[0], "a_slope": params[1], "sigma_peak": params[3],
+                    "v_target": params[4], "sigma_1": params[5],
+                },
+                "tally": tally,
+                "count_string": (f"{tally['PASS']} PASS / {tally['MARGINAL']} MARGINAL / "
+                                 f"{tally['FAIL']} FAIL"),
+                "channels": rows,
+            })
+
+    def pick(set_name, convention="published_sigma_unc"):
+        for ev in evaluations:
+            if ev["parameter_set"] == set_name and ev["convention"] == convention:
+                return ev
+        raise KeyError(f"missing evaluation {set_name}/{convention}")
+
+    head = pick("v19_2_E_A2_5param_DE_best_fit")
+    canon = pick("v19_2_D_canonical_phase_44")
+
+    def names(ev, status):
+        return [f"{r['label']} ({r['citation']})" for r in ev["channels"] if r["verdict"] == status]
+
+    return {
+        "n_channels_total": len(OBS_PUBLISHED),
+        "taxonomy": ("OBS_PUBLISHED as evaluated by the likelihood "
+                     "(T205_full_likelihood_published.OBS_PUBLISHED): "
+                     + ", ".join(r["label"] for r in head["channels"])),
+        "likelihood_convention": "published_sigma_unc",
+        "headline_evaluation": "v19_2_E_A2_5param_DE_best_fit",
+        "n_PASS": head["tally"]["PASS"],
+        "n_MARGINAL": head["tally"]["MARGINAL"],
+        "n_FAIL": head["tally"]["FAIL"],
+        "canonical_count_string": (
+            f"{len(OBS_PUBLISHED)} constrained channel slots, published-sigma_unc likelihood: "
+            f"{canon['count_string']} at the canonical Phase-44 parameters, "
+            f"{head['count_string']} at the v19.2-E A.2 5-parameter DE best fit"
+        ),
+        "PASS_channels": names(head, "PASS"),
+        "MARGINAL_channels": names(head, "MARGINAL"),
+        "FAIL_channels": names(head, "FAIL"),
+        "PASS_channels_canonical_parameters": names(canon, "PASS"),
+        "MARGINAL_channels_canonical_parameters": names(canon, "MARGINAL"),
+        "FAIL_channels_canonical_parameters": names(canon, "FAIL"),
+        "evaluations": evaluations,
+        "computed": True,
+        "note_on_lei_wang": (
+            "Lei/Wang+ 2026 v=150 mass bound is the SAME constraint as Sameie+ 2020 v=150 "
+            "(ClawsGO #7 section 2b double-count): one v=150 constraint counted under two names. "
+            "It is the R88(87) TUNING statement and is NOT one of the 8 slots counted above."
+        ),
+        "retired_conventions": [
+            "4 of 7 constrained channels pass (RETIRED: Lei/Wang double-counted; ClawsGO #7 section 4)",
+            "two structural no-gos (RETIRED R88(87): v=150 demoted to a tuning statement)",
+            "4 PASS / 3 MARGINAL / 1 FAIL (RETIRED 2026-11-05, F16): a hand-written literal that "
+            "no stored parameter set or sigma_unc convention reproduces. Measured: at the canonical "
+            "Phase-44 parameters the computed tallies are 1/0/7 (published sigma_unc) and 2/1/5 "
+            "(self-normalized sigma_unc); at the v19.2-E A.2 best fit they are 5/2/1 and 6/2/0 "
+            "(measured by scripts/canonical_numbers.py, printed on every run). "
+            "It also used a different halo-type taxonomy (dSph v=10, UFD v=15, dSph v=7) from the "
+            "list the likelihood evaluates (UFD v=7, UFD v=10, dSph v=15). Preserved verbatim as "
+            "RETIRED_ABSTRACT_CHANNEL_COUNT_4_3_1 below.",
+        ],
+    }
+
+
 def cloud9_tradeoff_factor(sigma_eff_cloud9, target=50.0):
     """sigma_eff(Cloud-9) factor below the working benchmark of 50 cm^2/g.
 
@@ -305,18 +437,19 @@ NO_GO_CATALOGUE = {
 
 
 # ============================================================================
-# Canonical abstract channel count (R88(87)+(88), ClawsGO #7 §4)
+# RETIRED hand-written abstract channel count (R88(87)+(88), ClawsGO #7 §4)
 #
-# Per ClawsGO #7 §4, the abstract uses TWO different denominators (4 of 7 in :270
-# and 8 channels in :276) which is a self-inconsistency. The canonical convention
-# is: 8 channels, 4 PASS / 3 MARGINAL / 1 FAIL (this includes Lei/Wang ONCE in
-# the 4 PASS, NOT double-counted in MARGINAL/FAIL). The "4 of 7" framing is
-# RETIRED.
-#
-# This is the value the abstract, §9.17b, and §A.15 should all reference.
+# HISTORY ONLY (F16, 2026-11-05). This literal is kept verbatim so the record of
+# what the paper claimed stays readable, but it is NOT used to generate anything.
+# It could not be reproduced from any parameter set or sigma_unc convention in
+# this repo (measured: 1/0/7 and 2/1/5 at the canonical Phase-44 parameters,
+# 5/2/1 and 4/2/2 at the v19.2-E A.2 best fit), and its halo-type labels
+# (dSph v=10, UFD v=15, dSph v=7) disagree with the list the likelihood actually
+# evaluates (UFD v=7, UFD v=10, dSph v=15). The live value is now computed:
+# see build_abstract_channel_count() above.
 # ============================================================================
 
-CANONICAL_ABSTRACT_CHANNEL_COUNT = {
+RETIRED_ABSTRACT_CHANNEL_COUNT_4_3_1 = {
     "n_channels_total": 8,
     "n_PASS": 4,
     "n_MARGINAL": 3,
@@ -379,6 +512,90 @@ CANONICAL_TRADEOFF_FACTORS = {
     ],
     "R88_reference": "R88(88), ClawsGO #5+#7",
 }
+
+
+# ============================================================================
+# T41 v0.8 standing MAP (derived from the artifact, 2026-11-05 generator fix)
+#
+# These two blocks were previously present in canonical_numbers.json but were NOT
+# produced by compute_canonical_numbers(). Re-running the generator therefore
+# deleted them, and scripts/drift_guard.py - which requires both - went red with
+# t41_v08_standing_map_missing. That happened for real on 2026-11-05. The MAP is
+# now read back from the artifact itself so the generator cannot drop or stale it.
+# ============================================================================
+
+T41_V08_ARTIFACT = ("v0.3-prelim/data/results/"
+                    "t41_mediator_mass_joint_fit_t88ce_v08_with_euclid_lensing_and_"
+                    "subhalo_forecast_nlive2000.json")
+
+T41_V08_PROVENANCE = {
+    "superseded_v07_map": {
+        "source_artifact": ("v0.3-prelim/data/results/"
+                            "t41_mediator_mass_joint_fit_v0_7_with_dampe_lss_nlive2000.json"),
+        "m_chi_GeV": 769.6913379451703,
+        "m_phi_MeV": 452.9510521222574,
+        "g_chi": 1.18898126146095,
+        "reported_sigma": 0.6,
+        "note": ("Found 2026-11-04: README.md / CURRENT.md / docs/LAYMAN_SUMMARY.md quoted "
+                 " THESE v0.7 values in rows labelled v0.8."),
+    },
+    "doc_rule": ("Current-standing rows must quote the v0.8 MAP above (478 GeV / 488 MeV / "
+                 "g_chi 0.964 / tension 0.81). v0.7 values may appear only in rows or table "
+                 "blocks explicitly labelled v0.7 / historical / superseded."),
+    "added": "2026-11-04 LocalIntegrity-Sweep; drift found by reading the artifact against the front pages",
+}
+
+# The auditor's own total is printed by scripts/t82_audit.py as
+# "ALL CLEAR: {passes}/{total} checks passed". This declared value is what the front
+# pages must quote; tests/test_t82_self_count.py compares it against the auditor's
+# printed total, so a growing auditor cannot stay green while the docs quote an old number.
+T82_AUDIT_CHECK_COUNT = 120
+
+# 68% credible intervals as reported by the v0.8 run summary (the artifact stores
+# 16/50/84 quantiles; this block records the interval form the front pages quote).
+T41_V08_CREDIBLE_68PCT = {
+    "m_chi_GeV": [337.82579725715595, 769.8434379370539],
+    "m_phi_MeV": [471.84989659913776, 759.3163591259347],
+    "g_chi": [1.2544933637554214, 1.5492080154072327, 1.8487487415463328],
+}
+
+
+def build_t41_v08_standing_map():
+    """Derive the standing MAP block by reading the artifact back (no hand numbers)."""
+    import hashlib
+    import json as _json
+    art = _REPO / T41_V08_ARTIFACT
+    if not art.exists():
+        raise FileNotFoundError(f"T41 v0.8 artifact missing: {art}")
+    raw = art.read_bytes()
+    d = _json.loads(raw.decode("utf-8"))
+    block = {
+        "source_artifact": T41_V08_ARTIFACT,
+        "source_artifact_sha256": hashlib.sha256(raw).hexdigest(),
+        # Run configuration the artifact itself does not record; declared here so the
+        # generator cannot drop it (see drift_guard t41_v08_standing_map_missing). The MAP
+        # and log_Z below ARE read back from the artifact.
+        "config_hash": "1a07d47facfb",
+        "nlive": 2000,
+        "ndim": d.get("ndim"),
+        "dlogz": 0.1,
+        "log_Z": d["log_Z"],
+        "log_Z_err": d["log_Z_err"],
+        "MAP": d["MAP_physical"],
+        "median_physical": d.get("median_physical"),
+        "credible_68pct": d.get("credible_68pct") or T41_V08_CREDIBLE_68PCT,
+        "yukawa_tension": {
+            "a_difference": d["yukawa_tension"]["a_difference"],
+            "reported_sigma": 0.81,
+            "threshold": 1.0,
+            "T39_a": 0.94,
+            "Yukawa_a_at_MAP": d["MAP_physical"]["a_derived"],
+            "significant": abs(d["yukawa_tension"]["a_difference"]) > 1.0,
+        },
+        "computed_from_artifact": True,
+    }
+    block.update(T41_V08_PROVENANCE)
+    return block
 
 
 # ============================================================================
@@ -469,14 +686,20 @@ def compute_canonical_numbers():
             ],
         },
         "no_go_catalogue": NO_GO_CATALOGUE,
-        "canonical_abstract_channel_count": CANONICAL_ABSTRACT_CHANNEL_COUNT,
+        "canonical_abstract_channel_count": build_abstract_channel_count(),
+        "t41_v08_standing_map": build_t41_v08_standing_map(),
+        "t82_audit_check_count": T82_AUDIT_CHECK_COUNT,
         "canonical_tradeoff_factors": CANONICAL_TRADEOFF_FACTORS,
     }
 
+    # F16 single source: these legacy labels name the same parameter sets the headline evaluates.
+    LEGACY_LABEL_TO_PARAMETER_SET = {
+        "v19_2_D_canonical": "v19_2_D_canonical_phase_44",
+        "v19_2_E_A2_best_fit": "v19_2_E_A2_5param_DE_best_fit",
+    }
     for label, params in [
-        ("v19_2_D_canonical", (SIGMA_0_CM2_PER_G, A_SLOPE, V_REF_KMS,
-                                 SIGMA_PEAK_CM2_PER_G, V_TARGET_KMS, SIGMA_KMS)),
-        ("v19_2_E_A2_best_fit", (0.0265, 1.198, V_REF_KMS, 2025.57, 28.47, 1.20)),
+        ("v19_2_D_canonical", PARAMETER_SETS["v19_2_D_canonical_phase_44"]),
+        ("v19_2_E_A2_best_fit", PARAMETER_SETS["v19_2_E_A2_5param_DE_best_fit"]),
     ]:
         per_channel = []
         pass_count = marginal_count = fail_count = 0
@@ -498,19 +721,38 @@ def compute_canonical_numbers():
                 "verdict": verdict,
                 "citation": citation,
             })
+        # Single-source guard: the inline loop above must agree with the headline evaluator.
+        # If the two ever diverge, the canonical map would publish two different verdicts for
+        # the same parameters - which is exactly how finding F16 arose.
+        _check_rows, _check_tally = evaluate_channels(params, "published_sigma_unc")
+        if (pass_count, marginal_count, fail_count) != (
+                _check_tally["PASS"], _check_tally["MARGINAL"], _check_tally["FAIL"]):
+            raise RuntimeError(
+                f"F16 single-source violation for {label}: inline tally "
+                f"{pass_count}/{marginal_count}/{fail_count} != evaluate_channels() "
+                f"{_check_tally}")
+        if len(_check_rows) != len(per_channel):
+            raise RuntimeError(f"F16 single-source violation: channel count differs for {label}")
+
         canonical[f"per_channel_at_{label}"] = per_channel
         canonical[f"pass_fail_summary_{label}"] = {
             "PASS": pass_count,
             "MARGINAL": marginal_count,
             "FAIL": fail_count,
-            "canonical_count_string": f"{pass_count} of {len(per_channel)} channels pass",
+            # Naming rule (finding F16): an "N of 8" string must always carry the parameter set
+            # and the sigma_unc convention it was computed under, or a reader cannot tell which
+            # measurement it summarises.
+            "parameter_set": LEGACY_LABEL_TO_PARAMETER_SET[label],
+            "convention": "published_sigma_unc",
+            "channel_list": "OBS_PUBLISHED",
+            "canonical_count_string": f"{pass_count} of {len(per_channel)} channels pass "
+                                      f"({LEGACY_LABEL_TO_PARAMETER_SET[label]}, published_sigma_unc)",
         }
 
-    # Trade-off factors
+    # Trade-off factors (same parameter sets as the channel accounting above)
     for label, params in [
-        ("v19_2_D_canonical", (SIGMA_0_CM2_PER_G, A_SLOPE, V_REF_KMS,
-                                 SIGMA_PEAK_CM2_PER_G, V_TARGET_KMS, SIGMA_KMS)),
-        ("v19_2_E_A2_best_fit", (0.0265, 1.198, V_REF_KMS, 2025.57, 28.47, 1.20)),
+        ("v19_2_D_canonical", PARAMETER_SETS["v19_2_D_canonical_phase_44"]),
+        ("v19_2_E_A2_best_fit", PARAMETER_SETS["v19_2_E_A2_5param_DE_best_fit"]),
     ]:
         sigma_eff_cloud9 = float(sigma_m_canonical_gaussian(28.0, *params)) * F_H_CANONICAL ** 2
         sigma_eff_sparc = float(sigma_m_canonical_gaussian(100.0, *params)) * F_H_CANONICAL ** 2
@@ -574,11 +816,12 @@ def main():
         print(f"  [{entry['status']:16s}] {entry['id']}: {entry['name']} (section {entry['section']})")
 
     print()
-    print(f"Canonical abstract channel count: {CANONICAL_ABSTRACT_CHANNEL_COUNT['canonical_count_string']}")
-    print(f"  PASS:    {CANONICAL_ABSTRACT_CHANNEL_COUNT['n_PASS']}")
-    print(f"  MARGINAL:{CANONICAL_ABSTRACT_CHANNEL_COUNT['n_MARGINAL']}")
-    print(f"  FAIL:    {CANONICAL_ABSTRACT_CHANNEL_COUNT['n_FAIL']}")
-    print(f"  Total:   {CANONICAL_ABSTRACT_CHANNEL_COUNT['n_channels_total']}")
+    cc = canonical["canonical_abstract_channel_count"]
+    print(f"Canonical abstract channel count (computed): {cc['canonical_count_string']}")
+    print(f"  Taxonomy: {cc['taxonomy']}")
+    for ev in cc["evaluations"]:
+        print(f"  {ev['parameter_set']:<32} {ev['convention']:<26} {ev['count_string']}")
+    print(f"  RETIRED literal (history only): {RETIRED_ABSTRACT_CHANNEL_COUNT_4_3_1['canonical_count_string']}")
 
     print()
     print(f"Canonical trade-off factors (R88(88), bare SIDM2c at observation radii):")

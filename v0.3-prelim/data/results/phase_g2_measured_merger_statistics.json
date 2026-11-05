@@ -1,0 +1,86 @@
+{
+  "source_artifact": "data\\results\\tng_stage3_growth_summary.json",
+  "built_by": "v0.3-prelim/code/tng_stage3_growth_summary.py",
+  "measured_on": "2026-11-05",
+  "tiers": {
+    "relhic_mass_tier_tng50_1": {
+      "run": "TNG50-1",
+      "analogue": "RELHIC / UFD-mass field halos (Cloud-9 host mass is NOT in this tier)",
+      "n_halos": 60,
+      "median_m200_msun": 901166223.7968705,
+      "median_vmax0_kms": 16.547449999999998,
+      "median_mergers_total": 7.5,
+      "max_mergers_total": 15,
+      "median_mergers_after_z1": 2.0,
+      "quiet_halos_no_merger_after_z1": 16,
+      "quiet_fraction": 0.26666666666666666,
+      "measured_activity_fraction": 0.7333,
+      "median_latest_merger_z": 0.5354790017874724,
+      "median_earliest_merger_z": 6.4915977456675,
+      "median_vmax0_over_vmax_at_z1": 1.0213941764338967
+    },
+    "cloud9_mass_anchor_tier_tng50_1": {
+      "run": "TNG50-1",
+      "analogue": "Cloud-9 host mass (4.1-5.8e9 Msun); see decision D8",
+      "n_halos": 25,
+      "median_m200_msun": 4828166519.043402,
+      "median_vmax0_kms": 26.3222,
+      "median_mergers_total": 29,
+      "max_mergers_total": 46,
+      "median_mergers_after_z1": 12,
+      "quiet_halos_no_merger_after_z1": 0,
+      "quiet_fraction": 0.0,
+      "measured_activity_fraction": 1.0,
+      "median_latest_merger_z": 0.0736613846564387,
+      "median_earliest_merger_z": 7.00541704554453,
+      "median_vmax0_over_vmax_at_z1": 1.0439025595414568
+    },
+    "control_tier_tng100_1": {
+      "run": "TNG100-1",
+      "analogue": "resolution control only - EXCLUDED from merger claims",
+      "n_halos": 30,
+      "median_m200_msun": 926328609.3888397,
+      "median_vmax0_kms": 16.48675,
+      "median_mergers_total": 0.0,
+      "max_mergers_total": 1,
+      "median_mergers_after_z1": 0.0,
+      "quiet_halos_no_merger_after_z1": 25,
+      "quiet_fraction": 0.8333333333333334,
+      "measured_activity_fraction": 0.1667,
+      "median_latest_merger_z": 0.5004907770852615,
+      "median_earliest_merger_z": 0.5004907770852615,
+      "median_vmax0_over_vmax_at_z1": 1.0403229307779602
+    }
+  },
+  "usable_for_merger_claims": [
+    "cloud9_mass_anchor_tier_tng50_1",
+    "relhic_mass_tier_tng50_1"
+  ],
+  "excluded_from_merger_claims": [
+    "control_tier_tng100_1"
+  ],
+  "exclusion_reason": {
+    "control_tier_tng100_1": "median 0 tracked mergers; TNG100-1 subhalo trees are tracked only to z ~ 3.5, so absence of a merger is a tracking limit, not a physical quiescence"
+  },
+  "literature_labels_in_use": {
+    "f_active": 0.5,
+    "multipliers": {
+      "quiescent": 0.7,
+      "active": 8.0,
+      "mixed": 1.0
+    },
+    "source": "Silverman+ 2026 \u00a73 (as implemented by merger_history_modulator)"
+  },
+  "measured_vs_literature": {
+    "f_active_assumed": 0.5,
+    "f_active_measured_relhic_mass": 0.7333,
+    "f_active_measured_cloud9_mass": 1.0,
+    "direction": "both measured tiers are MORE active than the assumed 0.5; the Cloud-9-mass tier contains no quiescent halo at all",
+    "consequence_for_cloud9_label": "HALOS_G2 labels the Cloud-9 host 'quiescent' from observation (Zhou+ 2023). Its TNG50-1 mass analogue is uniformly active. The label stays observational; the tension is recorded as decision D8, not resolved by relabeling."
+  },
+  "what_this_does_not_measure": [
+    "the effect of a merger on a gravothermal collapse time (the 0.7 / 8.0 magnitudes are literature calibration, not measured here)",
+    "halo mass above ~6e9 Msun in TNG50-1 resolution-matched form (see D8: no z=0 primary in the 4-6e9 Msun cell reaches V_max >= 30 km/s)",
+    "merger mass ratios - the local trees record merger events, not their mass ratio, so 'major merger' in the literature sense is not equivalent to these counts"
+  ]
+}

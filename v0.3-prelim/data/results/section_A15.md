@@ -2,24 +2,40 @@
 
 **This section is regenerated from `scripts/canonical_numbers.py` on every freeze round; the values here are the canonical numbers used in the abstract, §2.6, §9.17, §10, and §11. Do not edit by hand — edit `scripts/canonical_numbers.py` and re-run.** Per ClawsGO #5 B.2 + #7, this is the single source of truth for the paper's pass/fail, no-go catalogue, and trade-off factors.
 
-**Abstract channel count (canonical):** 8 constrained channels (4 PASS / 3 MARGINAL / 1 FAIL)
+**Abstract channel count (computed, not hand-written):** 8 constrained channel slots, published-sigma_unc likelihood: 1 PASS / 0 MARGINAL / 7 FAIL at the canonical Phase-44 parameters, 5 PASS / 2 MARGINAL / 1 FAIL at the v19.2-E A.2 5-parameter DE best fit
+
+**Channel taxonomy (the list the likelihood evaluates):** OBS_PUBLISHED as evaluated by the likelihood (T205_full_likelihood_published.OBS_PUBLISHED): UFD v=3, UFD v=5, UFD v=7, UFD v=10, dSph v=15, Cloud-9 v=28, SPARC v=100, Cluster v=500
+
+Every tally below is computed from that taxonomy under a named convention; the paper quotes no channel count that is not in this table.
+
+| Parameter set | sigma_unc convention | PASS | MARGINAL | FAIL |
+|---|---|---|---|---|
+| v19_2_D_canonical_phase_44 | published_sigma_unc | 1 | 0 | 7 |
+| v19_2_D_canonical_phase_44 | self_normalized_sigma_unc | 2 | 1 | 5 |
+| v19_2_E_A2_5param_DE_best_fit | published_sigma_unc | 5 | 2 | 1 |
+| v19_2_E_A2_5param_DE_best_fit | self_normalized_sigma_unc | 6 | 2 | 0 |
+
+**Headline evaluation = v19_2_E_A2_5param_DE_best_fit under published_sigma_unc:**
 
 | Status | Channels |
 |---|---|
-| PASS (4) | Cluster v=500 (Randall+ 2008 strong lensing) |
-| PASS (4) | dSph v=10 (Horigome+ 2025 ceiling) |
-| PASS (4) | Cloud-9 v=28 (BLN24/Ohana+ 2026 floor 128, canonical Phase 44) |
-| PASS (4) | SPARC v=100 (Lelli+ 2016, canonical Phase 44) |
-| MARGINAL (3) | UFD v=3 (Horigome+ 2025 ceiling) |
-| MARGINAL (3) | UFD v=5 (Horigome+ 2025 ceiling) |
-| MARGINAL (3) | UFD v=15 (Horigome+ 2025 ceiling, within 1sigma) |
-| FAIL (1) | dSph v=7 (Horigome+ 2025 ceiling, factor 11.6x over) |
+| PASS (5) | UFD v=5 (Horigome+ 2025 Table II) |
+| PASS (5) | UFD v=7 (Horigome+ 2025 Table II) |
+| PASS (5) | UFD v=10 (Horigome+ 2025 Table II) |
+| PASS (5) | dSph v=15 (Horigome+ 2025 Table II) |
+| PASS (5) | Cloud-9 v=28 (BLN24 / Ohana+ 2026) |
+| MARGINAL (2) | UFD v=3 (Horigome+ 2025 Table II) |
+| MARGINAL (2) | Cluster v=500 (Randall+ 2008) |
+| FAIL (1) | SPARC v=100 (Lelli+ 2016) |
 
-**Note on Lei/Wang double-count (ClawsGO #7 §2b):** Lei/Wang+ 2026 v=150 mass bound is the SAME constraint as Sameie+ 2020 v=150 (see ClawsGO #7 §2b Lei/Wang double-count). It is the SAME channel counted under different names; the v=150 entry is the R88(87) TUNING statement, not a separate PASS. In the 8-channel count above, Lei/Wang is folded into the v=150 TUNING entry and NOT counted in the 4 PASS / 3 MARGINAL / 1 FAIL.
+**Conventions explained:** see `SIGMA_UNC_CONVENTIONS` in `scripts/canonical_numbers.py`.
+
+**Note on Lei/Wang double-count (ClawsGO #7 §2b):** Lei/Wang+ 2026 v=150 mass bound is the SAME constraint as Sameie+ 2020 v=150 (ClawsGO #7 section 2b double-count): one v=150 constraint counted under two names. It is the R88(87) TUNING statement and is NOT one of the 8 slots counted above.
 
 **Retired conventions:**
-- 4 of 7 constrained channels pass (RETIRED: Lei/Wang double-counted in old table; see ClawsGO #7 §4)
-- two structural no-gos (RETIRED R88(87): v=150 demoted to tuning statement)
+- 4 of 7 constrained channels pass (RETIRED: Lei/Wang double-counted; ClawsGO #7 section 4)
+- two structural no-gos (RETIRED R88(87): v=150 demoted to a tuning statement)
+- 4 PASS / 3 MARGINAL / 1 FAIL (RETIRED 2026-11-05, F16): a hand-written literal that no stored parameter set or sigma_unc convention reproduces. Measured: at the canonical Phase-44 parameters the computed tallies are 1/0/7 (published sigma_unc) and 2/1/5 (self-normalized sigma_unc); at the v19.2-E A.2 best fit they are 5/2/1 and 6/2/0 (measured by scripts/canonical_numbers.py, printed on every run). It also used a different halo-type taxonomy (dSph v=10, UFD v=15, dSph v=7) from the list the likelihood evaluates (UFD v=7, UFD v=10, dSph v=15). Preserved verbatim as RETIRED_ABSTRACT_CHANNEL_COUNT_4_3_1 below.
 
 **Per-channel pass/fail at canonical Phase 44 (σ₀=0.052, a=1.93, σ_peak=174, v_target=29.4, σ₁=4.4):**
 
@@ -33,7 +49,7 @@
 | 28 | Cloud-9 v=28 | 128 | 30 | floor | 166 | 14.64 | **FAIL** |
 | 100 | SPARC v=100 | 0.193 | 0.05 | gaussian | 0.052 | 0.004587 | **FAIL** |
 | 500 | Cluster v=500 | 0.00025 | 0.0005 | ceiling | 0.00233 | 0.0002054 | **PASS** |
-| | **TOTAL** | | | | | | **1 PASS / 0 MARGINAL / 7 FAIL** |
+| | **TOTAL (v19_2_D_canonical_phase_44, published_sigma_unc)** | | | | | | **1 PASS / 0 MARGINAL / 7 FAIL** |
 
 **Per-channel pass/fail at v19.2-E A.2 5-param DE best-fit (σ₀=0.0265, a=1.198, σ_peak=2026, v_target=28.47, σ₁=1.2):**
 
@@ -47,7 +63,7 @@
 | 28 | Cloud-9 v=28 | 128 | 30 | floor | 1.88e+03 | 165.5 | **PASS** |
 | 100 | SPARC v=100 | 0.193 | 0.05 | gaussian | 0.0265 | 0.002338 | **FAIL** |
 | 500 | Cluster v=500 | 0.00025 | 0.0005 | ceiling | 0.00385 | 0.0003399 | **MARGINAL** |
-| | **TOTAL** | | | | | | **5 PASS / 2 MARGINAL / 1 FAIL** |
+| | **TOTAL (v19_2_E_A2_5param_DE_best_fit, published_sigma_unc)** | | | | | | **5 PASS / 2 MARGINAL / 1 FAIL** |
 
 **Trade-off factors (canonical, R88(88)):**
 

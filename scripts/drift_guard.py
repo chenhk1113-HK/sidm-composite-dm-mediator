@@ -225,8 +225,10 @@ def check_first_class_count_in_doc(doc_text, canonical_count, doc_name):
 def check_abstract_channel_count(doc_text, canonical_count_string, doc_name):
     """ClawsGO #7 §4: detect denominator self-inconsistency in the abstract.
 
-    The canonical convention is: 8 channels (4 PASS / 3 MARGINAL / 1 FAIL).
-    The retired '4 of 7' framing should not appear in headline docs.
+    '4 of 7' and the retired 4/3/1 literal should not appear in headline docs
+    outside a retirement/retraction context. The live counts are computed per
+    parameter set and convention by scripts/canonical_numbers.py; the F16 guard
+    check_channel_count_claims() enforces them.
     """
     drifts = []
     # Search for "4 of 7" with surrounding context
@@ -420,6 +422,92 @@ def check_t41_standing_in_doc(doc_text, block, doc_name):
     return drifts
 
 
+def check_channel_count_claims(doc_text, canonical_block, doc_name):
+    """F16 guard (2026-11-05).
+
+    Every 'N PASS / M MARGINAL / K FAIL' claim in a headline doc must
+      (a) be a tally that scripts/canonical_numbers.py actually computes, and
+      (b) sit next to the parameter set and sigma_unc convention it belongs to.
+
+    Root cause this closes: the paper headlined 4 PASS / 3 MARGINAL / 1 FAIL, a
+    tally no code in this repo produces, in the same document as '5 of 8'. The
+    two were presented as if they measured the same thing.
+    """
+    drifts = []
+    evals = canonical_block.get("evaluations", [])
+    allowed = set()
+    for ev in evals:
+        tl = ev.get("tally", {})
+        total = sum(tl.get(k, 0) for k in ("PASS", "MARGINAL", "FAIL"))
+        allowed.add(f"{tl.get('PASS')} PASS / {tl.get('MARGINAL')} MARGINAL / "
+                    f"{tl.get('FAIL')} FAIL")
+        allowed.add(f"{tl.get('PASS')} of {total}")
+    if not allowed:
+        return drifts
+
+    context_markers = [
+        "phase-44", "phase 44", "a.2", "best fit", "best-fit", "canonical",
+        "self-normalized", "v19.2", "r88(", "retired", "historical",
+        "previously quoted", "not reproducible", "convention", "likelihood",
+        "sigma_unc", "\u03c3_unc",
+    ]
+    retired_markers = ["retired", "historical", "previously quoted",
+                       "not reproducible", "no stored parameter set"]
+    scoped_eval_markers = ["phase 4a", "phase 4b", "phase 4c", "phase 4d", "phase g8",
+                           "phase g4", "phase g1", "three-peak", "two-resonance",
+                           "v19.0", "population", "fig 5"]
+    artifact_pointer = re.compile(r"\.json|phase4a|phase4b|§10\.4f|\bT\d{2,3}\b")
+
+    pat = re.compile(r"(\d+)\s+PASS\s*/\s*(\d+)\s+MARGINAL\s*/\s*(\d+)\s+FAIL")
+    for m in pat.finditer(doc_text):
+        claim = m.group(0)
+        ctx = doc_text[max(0, m.start() - 400): m.end() + 400].lower()
+        # Evidence for scoping / labelling must be on the claim's own line. A 400-char window
+        # let an unrelated neighbour line vouch for a fabricated tally (mutation-tested).
+        line_lo = doc_text.rfind("\n", 0, m.start()) + 1
+        line_hi = doc_text.find("\n", m.end())
+        if line_hi == -1:
+            line_hi = len(doc_text)
+        own_line = doc_text[line_lo:line_hi].lower()
+        if claim not in allowed:
+            if any(k in ctx for k in retired_markers):
+                continue
+            # A tally that names its own evaluation AND points at its artifact or paper
+            # section is a scoped claim from a different run (e.g. the v19.0 Phase 4A
+            # population map, whose 8 observables are not the §A.15 channel slots).
+            # Those are allowed; unlabelled foreign tallies are not.
+            scoped = any(k in own_line for k in scoped_eval_markers)
+            pointed = bool(artifact_pointer.search(own_line))
+            if scoped and pointed:
+                continue
+            if scoped:
+                drifts.append({
+                    "type": "channel_count_claim_missing_artifact_pointer",
+                    "doc": doc_name, "found": claim,
+                    "canonical": "scoped claim should cite its artifact or paper section",
+                    "context": ctx[:160], "severity": "WARN",
+                })
+                continue
+            drifts.append({
+                "type": "channel_count_claim_not_computed",
+                "doc": doc_name,
+                "found": claim,
+                "canonical": "one of: " + " | ".join(sorted(allowed)),
+                "context": ctx[:160],
+                "severity": "HIGH",
+            })
+        elif not any(w in own_line for w in context_markers):
+            drifts.append({
+                "type": "channel_count_claim_missing_parameter_set_label",
+                "doc": doc_name,
+                "found": claim,
+                "canonical": "count must name its parameter set and sigma_unc convention",
+                "context": ctx[:160],
+                "severity": "WARN",
+            })
+    return drifts
+
+
 def main():
     print("=" * 70)
     print("V19.2-E D — Drift-guard (ClawsGO B.2)")
@@ -459,9 +547,15 @@ def main():
     ]
 
     # Canonical abstract channel count (ClawsGO #7 §4)
-    canonical_abstract_count = canonical.get(
-        "canonical_abstract_channel_count", {}
-    ).get("canonical_count_string", "8 constrained channels (4 PASS / 3 MARGINAL / 1 FAIL)")
+    canonical_abstract_block = canonical.get("canonical_abstract_channel_count", {})
+    canonical_abstract_count = canonical_abstract_block.get("canonical_count_string")
+    if not canonical_abstract_count:
+        # Fail closed: without the computed block, no channel claim can be verified.
+        canonical_abstract_count = "<canonical_abstract_channel_count MISSING>"
+        print("canonical_abstract_channel_count: MISSING from canonical JSON "
+              "(channel claims cannot be verified)")
+    else:
+        print(f"canonical_abstract_channel_count: computed -> {canonical_abstract_count}")
 
     # T41 v0.8 standing MAP: canonical block must match the artifact, and the front pages
     # must quote it (2026-11-04: the front pages had been quoting the v0.7 MAP under a v0.8 label).
@@ -505,6 +599,7 @@ def main():
         drifts += check_first_class_count_in_doc(doc_text, canonical_first_class, doc_name)
         # ClawsGO #7 checks
         drifts += check_abstract_channel_count(doc_text, canonical_abstract_count, doc_name)
+        drifts += check_channel_count_claims(doc_text, canonical_abstract_block, doc_name)
         drifts += check_no_go_catalogue_membership(doc_text, doc_name)
         drifts += check_tradeoff_factor_scatter(doc_text, doc_name)
         all_drifts += drifts

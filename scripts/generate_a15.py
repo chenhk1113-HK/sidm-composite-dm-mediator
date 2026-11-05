@@ -59,16 +59,35 @@ def render_a15(canonical):
     # Block 1: Abstract channel count (canonical, ClawsGO #7 §4)
     # ----------------------------------------------------------------------
     cc = canonical["canonical_abstract_channel_count"]
-    out.append(f"**Abstract channel count (canonical):** {cc['canonical_count_string']}")
+    out.append(f"**Abstract channel count (computed, not hand-written):** {cc['canonical_count_string']}")
+    out.append("")
+    out.append(f"**Channel taxonomy (the list the likelihood evaluates):** {cc['taxonomy']}")
+    out.append("")
+    out.append("Every tally below is computed from that taxonomy under a named convention; "
+               "the paper quotes no channel count that is not in this table.")
+    out.append("")
+    out.append("| Parameter set | sigma_unc convention | PASS | MARGINAL | FAIL |")
+    out.append("|---|---|---|---|---|")
+    for ev in cc["evaluations"]:
+        tl = ev["tally"]
+        out.append(f"| {ev['parameter_set']} | {ev['convention']} | {tl['PASS']} | "
+                   f"{tl['MARGINAL']} | {tl['FAIL']} |")
+    out.append("")
+    out.append(f"**Headline evaluation = {cc['headline_evaluation']} under "
+               f"{cc['likelihood_convention']}:**")
     out.append("")
     out.append("| Status | Channels |")
     out.append("|---|---|")
-    for ch in cc["PASS_channels"]:
-        out.append(f"| PASS (4) | {ch} |")
-    for ch in cc["MARGINAL_channels"]:
-        out.append(f"| MARGINAL (3) | {ch} |")
-    for ch in cc["FAIL_channels"]:
-        out.append(f"| FAIL (1) | {ch} |")
+    for status, lst in (("PASS", cc["PASS_channels"]),
+                       ("MARGINAL", cc["MARGINAL_channels"]),
+                       ("FAIL", cc["FAIL_channels"])):
+        for ch in lst:
+            out.append(f"| {status} ({len(lst)}) | {ch} |")
+    out.append("")
+    out.append(f"**Conventions explained:** "
+               + " / ".join(f"{k}: {v}" for k, v in cc.get("conventions_explained", {}).items())
+               if cc.get("conventions_explained") else "**Conventions explained:** see "
+               "`SIGMA_UNC_CONVENTIONS` in `scripts/canonical_numbers.py`.")
     out.append("")
     out.append(f"**Note on Lei/Wang double-count (ClawsGO #7 §2b):** {cc['note_on_lei_wang']}")
     out.append("")
@@ -92,7 +111,7 @@ def render_a15(canonical):
             f"{ch['sigma_eff']:.4g} | **{ch['verdict']}** |"
         )
     s = canonical["pass_fail_summary_v19_2_D_canonical"]
-    out.append(f"| | **TOTAL** | | | | | | "
+    out.append(f"| | **TOTAL ({s['parameter_set']}, {s['convention']})** | | | | | | "
                f"**{s['PASS']} PASS / {s['MARGINAL']} MARGINAL / {s['FAIL']} FAIL** |")
     out.append("")
 
@@ -111,7 +130,7 @@ def render_a15(canonical):
             f"{ch['sigma_eff']:.4g} | **{ch['verdict']}** |"
         )
     s2 = canonical["pass_fail_summary_v19_2_E_A2_best_fit"]
-    out.append(f"| | **TOTAL** | | | | | | "
+    out.append(f"| | **TOTAL ({s2['parameter_set']}, {s2['convention']})** | | | | | | "
                f"**{s2['PASS']} PASS / {s2['MARGINAL']} MARGINAL / {s2['FAIL']} FAIL** |")
     out.append("")
 

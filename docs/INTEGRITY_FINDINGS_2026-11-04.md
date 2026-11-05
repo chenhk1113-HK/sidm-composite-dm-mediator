@@ -283,25 +283,76 @@ of the eight slots, and the other three slots are three different papers. `CURRE
 the qualified wording; `README.md` did not, and now does. Decision D6 (merge the five Horigome bins
 into one channel and refit, or keep the slots with this wording) is still open.
 
-## F16 — two different "8 channels" lists are in use  (MEASURED, OPEN)
+## F16 — two different "8 channels" lists are in use  (FIXED 2026-11-05)
 
 The same phrase "8 channels" refers to two **different** channel sets, and their counts are therefore
 not comparable:
 
 | list | channels | verdict split |
 |---|---|---|
-| paper §A.15 canonical (`canonical_numbers.json::canonical_abstract_channel_count`) | Cluster v=500, **dSph v=10**, Cloud-9 v=28, SPARC v=100, UFD v=3, UFD v=5, **UFD v=15**, **dSph v=7** | 4 PASS / 3 MARGINAL / 1 FAIL |
+| §A.15 as it stood before 2026-11-05 (hand-written, **RETIRED**) | Cluster v=500, **dSph v=10**, Cloud-9 v=28, SPARC v=100, UFD v=3, UFD v=5, **UFD v=15**, **dSph v=7** | 4 PASS / 3 MARGINAL / 1 FAIL — **no parameter set or σ_unc convention in the repo reproduces it** |
 | T205 likelihood (`OBS_PUBLISHED`, per-channel verdicts in the same JSON) | Cluster v=500, Cloud-9 v=28, SPARC v=100, UFD v=3, UFD v=5, **UFD v=7**, **UFD v=10**, **dSph v=15** | 5 PASS / 2 MARGINAL / 1 FAIL at the v19.2-E A.2 best fit; 1 PASS / 7 FAIL at the v19.2-D canonical parameters |
 
 Three labels collide: v=7, v=10 and v=15 are assigned to **dSph** in one list and to **UFD** in the
 other. That is not a likelihood-convention difference (which the paper does disclose at line 23); it is
-a different velocity/halo-type assignment, so a reader comparing "4 PASS / 3 MARGINAL / 1 FAIL" with
+a different velocity/halo-type assignment, so a reader comparing the RETIRED "4 PASS / 3 MARGINAL / 1 FAIL" with
 "5 of 8" is comparing different measurements. Physically the T205 assignment is the more plausible one
 (ultra-faint dwarfs have V_max ~ 5-15 km/s, so v_eff = 0.64 V_max lands on 3-10 km/s; classical dSphs
 sit near v_eff ~ 15 km/s), but I have not verified Horigome+ 2025 Table II line by line, so I am not
-rewriting the canonical table on that basis. Decision needed: pick one taxonomy (recommended: T205's,
-since it is the list the likelihood actually evaluates), regenerate §A.15 from it, and make the drift
-guard reject an "N of 8" claim that does not name which list and which likelihood convention it uses.
+rewriting the canonical table on that basis.
+
+**Executed 2026-11-05 (owner decision: "taxonomy do it").** T205's `OBS_PUBLISHED` assignment is now the
+canonical taxonomy, because it is the list the promoted likelihood actually evaluates:
+UFD v=3, UFD v=5, UFD v=7, UFD v=10, dSph v=15, Cloud-9 v=28, SPARC v=100, Cluster v=500.
+
+- `scripts/canonical_numbers.py` now *computes* the accounting: `evaluate_channels()` walks the evaluated
+  channel list for each named parameter set (`v19_2_D_canonical_phase_44`, `v19_2_E_A2_5param_DE_best_fit`)
+  under each named σ_unc convention (`published_sigma_unc`, `self_normalized_sigma_unc`). No verdict is
+  hand-assigned anywhere in the chain.
+- Measured tallies: canonical Phase-44 parameters **1 PASS / 0 MARGINAL / 7 FAIL** (published) and
+  **2 / 1 / 5** (self-normalized); v19.2-E A.2 best fit **5 / 2 / 1** (published) and **6 / 2 / 0**
+  (self-normalized). The previously printed 4/3/1 was not reproducible under any of them and is retired.
+- `§A.15` and the paper abstract now quote the computed counts; the hand-written Phase G8 score block was
+  replaced by the generated one, and `docs/TRANSITION_V19_2_D_TO_V19_2_E.md` had its 4/3/1 headline replaced.
+- `scripts/drift_guard.py::check_channel_count_claims()` rejects a headline tally that is not one the
+  generator computes, or that does not name its parameter set / convention. A tally belonging to a
+  *different* evaluation is allowed only if it names that evaluation and points at its artifact — which is
+  how `README.md` now presents the v19.0 **Phase 4A** population-map result (3 PASS / 2 MARGINAL / 3 FAIL
+  over its own 8 observables, including Segue 1 and LMC, `phase4a_population_sigma_eff_map.json`).
+- Regression test: `v0.3-prelim/tests/test_channel_taxonomy_single_source.py` re-derives every stored tally
+  by calling `evaluate_channels()` live, checks the generated §A.15 rows against the paper body, and fails
+  if the retired 4/3/1 tally appears outside retirement wording.
+
+**Residual limitation, unchanged:** the halo-type labels themselves (which bin is UFD, which is dSph) were
+not verified line by line against Horigome+ 2025 Table II. The taxonomy adopted here is the one the
+likelihood evaluates, which makes the numbers reproducible; it is not an independent confirmation that
+Horigome+ intended those labels. Verification of Table II remains open (D6 companion item).
+
+---
+
+## F17 — the BM2 "2.6% deviation" never named which implementation it belongs to  (RE-DERIVED 2026-11-05)
+
+`v0.3-prelim/code/gravothermal_yang2024.py` carries **three** collapse-time implementations and they
+disagree by a factor 1.87 at the very halo used to claim agreement:
+
+| variant | BM2 t_c | deviation vs published 28.7 Gyr |
+|---|---|---|
+| `collapse_time_gyr` (mixed units, `CALIBRATED_PREFACTOR = 1.34e12`) — the one `predict_sidm_halo()` calls | **29.438 Gyr** | **+2.57%** |
+| `collapse_time_SI_gyr` (literal published `150*C = 112.5`, evaluated in SI) | 15.774 Gyr | −45.04% |
+| `collapse_time_calibrated_gyr` (`1.8194 ×` the SI form) | 28.700 Gyr | −0.001% |
+
+**Verdict.** The 2.6% figure is reproducible, but only for the first variant, and that variant matches
+BM2 **by construction** — its prefactor was tuned on BM2. It is a self-consistency check, not validation:
+`validate_bm2_calibration()` → True while `validate_cosmo_501_calibration()` → False (10.75× underestimate).
+
+**Relationship to the `rho_sidm` fix (F10).** The earlier note that this claim "predates the fix and must be
+re-derived" was right about provenance and wrong to imply the number had moved: `predict_sidm_halo()` evolves
+(`rho_s`, `r_s`, `r_c`, `V_max`, `R_max`) and never evaluates `rho_sidm`, so F10 cannot change any collapse
+time. Re-derivation confirms the value.
+
+**Fixed by:** naming the variant at both paper sites (implementation status and the prefactor table), and
+pinning all three values plus both validator outcomes in
+`v0.3-prelim/tests/test_bm2_collapse_time_rederivation.py`.
 
 ---
 

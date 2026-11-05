@@ -57,6 +57,17 @@ now asserts the v0.8 MAP (478 GeV / 488 MeV / 0.81σ), so this line, the docs an
   Measured alongside it: the 25 anchor halos (4–6e9 M☉, 9,019–12,781 DM particles) are **not** quiescent
   — 0 of 25 have no merger after z = 1, median last merger z = 0.074 — so they are the wrong analogue for
   a "Cloud-9 quiescent" Phase G2 label; the ~9e8 M☉ tier (quiet fraction 0.267) is the closer one.
+- **Phase G2 now carries measured merger statistics (2026-11-05):** `measured_merger_statistics()` in
+  `v0.3-prelim/code/phase_g2_merger_history.py` reads the Stage-3 sample and writes
+  `phase_g2_measured_merger_statistics.json`: measured f_active **0.733** (RELHIC-mass tier, 60 halos)
+  and **1.000** (Cloud-9-mass anchor tier, 25 halos) versus the assumed 0.5. TNG100-1 is excluded from
+  merger claims (median 0 tracked mergers; its trees stop near z ~ 3.5). The 0.7 / 8.0 τ multipliers
+  are unchanged and stay Silverman+ 2026 labels — the sample measures merger rates, not their effect on t_c.
+- **BM2 "2.6% deviation" re-derived (2026-11-05), claim stands with a qualifier:** `collapse_time_gyr(7.1,
+  2.74e8, 0.141) = 29.438 Gyr` vs the published 28.7 Gyr → **+2.57%**. The number survives the `rho_sidm`
+  fix because `predict_sidm_halo()` never evaluates the profile. Any quoted deviation must name the variant:
+  the literal published `150*C` form gives 15.774 Gyr (−45.0%) and the `1.8194×` calibrated form gives
+  28.700 Gyr (−0.001%).
 
 **What did NOT change:** the canonical anchor **σ/m = 174 cm²/g @ 29.4 km/s** (Cloud-9 = M94 RELHIC); the
 joint galaxy-scale range 0.06–0.68 cm²/g; the baryon-coupling ceiling < 3 × 10⁻¹¹; the v19.2-E A.2 5-param

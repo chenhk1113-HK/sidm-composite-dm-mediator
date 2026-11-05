@@ -1,3 +1,42 @@
+## [BM2-Rederive-G2-Measured-2026-11-05]
+
+### Re-derived: the Phase G1 BM2 "2.6% deviation" (finding F17)
+- Measured at the BM2 halo (`sigma_eff/m = 7.1 cm^2/g`, `rho_s = 2.74e8 M_sun/kpc^3`, `r_s = 0.141 kpc`):
+  `collapse_time_gyr` = **29.438 Gyr** (+2.57% vs the published 28.7 Gyr) — this is the variant
+  `predict_sidm_halo()` calls; `collapse_time_SI_gyr` = **15.774 Gyr** (−45.04%); `collapse_time_calibrated_gyr`
+  = **28.700 Gyr** (−0.001%). The paper's 2.6% claim is therefore reproducible but variant-specific, and the
+  `1.34e12` prefactor was tuned on BM2, so it is self-consistency, not validation
+  (`validate_bm2_calibration()` True, `validate_cosmo_501_calibration()` False).
+- The claim was NOT moved by the `rho_sidm` fix: `predict_sidm_halo()` never evaluates the profile.
+- Paper §implementation status and the prefactor table now name the variant and the re-measured value;
+  pinned by `v0.3-prelim/tests/test_bm2_collapse_time_rederivation.py`.
+
+### Wired: Phase G2 measured merger statistics
+- `v0.3-prelim/code/phase_g2_merger_history.py` gains `measured_merger_statistics()` and
+  `write_measured_statistics_artifact()`, reading the local IllustrisTNG Stage-3 growth summary and publishing
+  `v0.3-prelim/data/results/phase_g2_measured_merger_statistics.json`.
+- Measured activity fractions: **0.733** (TNG50-1 RELHIC-mass tier, 60 halos, quiet fraction 0.267) and
+  **1.000** (TNG50-1 Cloud-9-mass anchor tier, 25 halos, 0 quiescent after z = 1, median latest merger
+  z = 0.074), against the literature assumption `f_active ~ 0.5`. TNG100-1 (median 0 tracked mergers) is
+  excluded from merger claims by name.
+- No multiplier was changed: 0.7 / 8.0 / 1.0 remain Silverman+ 2026 labels, and the artifact states explicitly
+  that the sample measures merger rates, not their effect on a gravothermal collapse time.
+
+### Channel taxonomy (F16) executed + guard
+- `scripts/canonical_numbers.py` computes the channel accounting for both named parameter sets and both named
+  `sigma_unc` conventions; `scripts/generate_a15.py` and the paper §A.15 / abstract / Phase G8 block now quote
+  computed values; the 4 PASS / 3 MARGINAL / 1 FAIL literal is retired.
+- Measured tallies: canonical Phase-44 1/0/7 (published) and 2/1/5 (self-normalized); v19.2-E A.2 5/2/1
+  (published) and 6/2/0 (self-normalized).
+- Generator regression: re-running `canonical_numbers.py` had silently dropped `t41_v08_standing_map` and
+  `t82_audit_check_count`, which its own guard requires. Both are now emitted by the generator (the T41 MAP is
+  read back from the artifact; the run-config fields are declared).
+- `scripts/drift_guard.py::check_channel_count_claims()` fails a headline tally that the generator does not
+  compute, or that names no parameter set / convention; a tally from a different evaluation is accepted only if
+  it names that evaluation and its artifact (how `README.md` now presents the v19.0 Phase 4A 3/2/3 result).
+- Tests: `v0.3-prelim/tests/test_channel_taxonomy_single_source.py` re-derives every stored tally live and
+  checks the generated §A.15 rows against the paper body.
+
 ## [Channel-Count-Independence-2026-11-04]
 
 **The "5 of 8 channels" headline's independence qualifier was wrong where it was stated, and the repo is using two different 8-channel lists.**
