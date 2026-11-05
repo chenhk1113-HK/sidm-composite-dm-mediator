@@ -1,3 +1,25 @@
+## [Channel-Bound-Provenance-F23-F24-2026-11-06] — the Cloud-9 pass depends on which f_H a producer imports, and two channel bounds were mislabelled
+
+- **F23 (open).** `sigma_eff = f_H^2 * sigma/m` is computed from two live `f_H` values: 0.7501856343179664
+  (`phase44_two_component.f_H_at_r`) and 0.297 (`scripts/constants.py`, in-file labelled a retracted placeholder).
+  At Cloud-9 (v=28, default arm) they give 100.03606419810939 versus 15.679492744216347 cm^2/g — factor
+  6.380057431067687. `code/t120_cloud9_bound.py` now loads both layers by private module name and publishes
+  `f_H_conventions` (values, ratio, both Cloud-9 consequences, live consumers) in
+  `data/results/t120_cloud9_bound_rederivation.json` with `status: UNRESOLVED_CONVENTION_SPLIT`.
+- **F24 (labels fixed).** Channel 6 (arXiv:2510.11006) is single-author Hai-Bo Yu 2025 (v2 2026-03-20,
+  doi 10.1103/txxx-97ln); "Yang, Yang, Yu et al. 2026" / "Zhang+ 2025" / "PRL 2026" labels removed, and the GD-1
+  perturber paper is named separately as arXiv:2409.19493 (Zhang, Yu, Yang & Nadler). The invented agreement claim
+  "their sigma/m ~ 1 cm^2/g matches our ~1.86 cm^2/g" was removed: the paper's values are 0/30/50/70/100/147 cm^2/g.
+  Channel 6's 50 cm^2/g Gaussian is labelled a project-constructed prior. Channel 7 (arXiv:2503.13650, Ando, Hayashi,
+  Horigome, Ibe & Shirai) publishes 95% limits 0.8 (w=10) and 0.04 cm^2/g; the implemented 0.2 is the project's own
+  stricter choice, and the unsupported "V_50 = 18 km/s -> sigma0/m >~ 1.0 cm^2/g" line was replaced with the paper's
+  actual statements (fiducial V_50 = 10.5 km/s; V_50 = 18 km/s disfavoured, SIDM improves with it).
+- **No physics moved:** `LENS_SIGMA_M_LOG_PEAK=1.7`, `LENS_SIGMA_M_LOG_WIDTH=0.7`, `DSPH_SIGMA_M_UPPER_LIMIT=0.2`,
+  `DSPH_VMAX_KMS=18.0` are pinned by the new test.
+- **Knowledge base:** added `docs/papers/verified/2510.11006_yu_2025_three_birds.md` (quote-level verified, with a
+  "what the paper does NOT publish" section) and a re-checked source-facts block plus full author list in
+  `docs/papers/verified/2503.13650_horigome_2025.md`.
+
 ## [T120-Readmit-ClaimSweep-2026-11-06] — the gate's exclusion list is empty, and the stale claims around it were swept
 
 - Rebuilt `v0.3-prelim/tests/test_t120_11_hidden_u1.py`, `test_t120_13_integration.py` and

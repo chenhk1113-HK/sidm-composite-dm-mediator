@@ -118,7 +118,7 @@ CONDITIONS = [
         "velocity_km_s": [3.0, 5.0, 7.0, 10.0, 15.0],
         "kind": "ceiling",
         "bound_cm2_per_g": 0.8,
-        "source": {"arxiv": "2503.13650", "kb": "2503.13650_horigome_2025.md", "line": 16,
+        "source": {"arxiv": "2503.13650", "kb": "2503.13650_horigome_2025.md", "line": 39,
                    "quote": "| σ/m upper limit (w=10 km/s velocity-dep) | 0.8 cm²/g | 95% | Eq. 7, Table 1 |"},
         "note": "KB line 22 of the same entry already records the paper's own claim that this "
                 "framework exceeds the Horigome+ 2025 threshold by 3.6-23.7x at v_eff = 5-20 km/s; "

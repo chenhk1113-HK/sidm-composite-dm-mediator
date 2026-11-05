@@ -91,6 +91,19 @@ now asserts the v0.8 MAP (478 GeV / 488 MeV / 0.81σ), so this line, the docs an
   "N of 8" tally is an internal consistency check, not external evidence. See
   `docs/INTEGRITY_FINDINGS_2026-11-04.md` F21.
 - **F22 (other dark-matter conditions, MEASURED 2026-11-06):** the σ/m(v) shape transfers to cluster and cosmic-web scales by large margins (0.009644 cm²/g at 500 km/s vs 0.613 and 0.2 ceilings), but in the dwarf regime it is 31.4x above Horigome+ 2025's published 0.8 cm²/g ceiling at 3 km/s on the canonical a_slope=1.9287 arm; the two published dwarf bounds themselves contradict each other by 12.5x, and Cloud-9's published optimum is ~200 cm²/g (Ohana+ 2026), not the internal 100/128 numbers. Scoreboard: `v0.3-prelim/data/results/other_dm_conditions_probe.json`. Evidence: F22.
+
+- **F23 (f_H convention split, OPEN).** `sigma_eff = f_H^2 * sigma/m` has two live definitions: 0.7501856343179664
+  (`phase44_two_component.f_H_at_r`, used by every T120 entry point) and 0.297 (`scripts/constants.py`, labelled
+  "retracted placeholder" yet used by `phase44_joint_fit_v2_real_likelihood.py` and `phase_g4_pipeline.py`). At Cloud-9
+  they give 100.03606419810939 versus 15.679492744216347 cm^2/g — a factor 6.380057431067687, which decides whether
+  the Cloud-9 bar is passed. The bound re-derivation now publishes both; choosing one is an open decision (D11).
+- **F24 (Channel 6/7 source labels, FIXED at label level 2026-11-06).** arXiv:2510.11006 is single-author Hai-Bo Yu
+  (not "Yang, Yang, Yu et al." nor "Zhang+ 2025"; the GD-1 paper is arXiv:2409.19493, Zhang, Yu, Yang & Nadler); its
+  30-100 cm^2/g is adopted/assumed, so Channel 6's Gaussian is a project prior, and the code's "their sigma/m ~ 1 cm^2/g
+  agrees with our ~1.86 cm^2/g" claim is absent from the paper. arXiv:2503.13650 (Ando, Hayashi, Horigome, Ibe & Shirai)
+  publishes 95% limits 0.8 (w=10) and 0.04 cm^2/g — the implemented 0.2 is the project's own stricter choice, and the
+  code's "V_50 = 18 km/s -> sigma0/m >~ 1.0 cm^2/g" claim is not in the paper (fiducial V_50 = 10.5 km/s). Numeric
+  constants unchanged; guard: `v0.3-prelim/tests/test_channel_bound_attribution.py`.
 - **Gate coverage limit (decision D9 — rounds 1–2 executed 2026-11-05/06):** running the whole
   `v0.3-prelim/tests` directory instead of the gate's selected subset had found **45 failing tests in the 12
   gate-ignored files** at `b0834fe` — 16 mechanical (CWD-relative posterior paths; suites asserting four

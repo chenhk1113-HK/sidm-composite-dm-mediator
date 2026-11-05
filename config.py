@@ -144,18 +144,38 @@ UFD_LOG_SM_SIGMA = 1.37           # 1-sigma width in dex
 BULLET_LOG_SM_LIMIT = -0.30103    # log10(0.5) = upper limit at 95% CL
 BULLET_TAIL_WIDTH = 0.30          # one-sided Gaussian tail width
 
-# Gravitational lensing substructure (Yang+ 2026 PRL — Channel 6)
+# Gravitational lensing substructure (arXiv:2510.11006 — Channel 6)
+# 2026-11-06 source check (finding F24): arXiv:2510.11006 is SINGLE-AUTHOR — Hai-Bo Yu,
+# submitted 2025-10-13, v2 2026-03-20, doi 10.1103/txxx-97ln.  The labels "Yang+ 2026",
+# "Yang, Yang, Yu et al." and "Zhang+ 2025" used elsewhere in this repo for this arXiv id are
+# all wrong.  Its Sec. IV attributes the 30-100 cm^2/g range to prior work as an ASSUMPTION
+# ("Ref. [9] assumed constant self-interaction cross sections sigma/m = 30-100 cm^2/g for halo
+# masses 1e6-1e8 Msun") and argues sigma/m >~ 30 collapses a 1e8 Msun, Vmax ~ 10 km/s halo in
+# under a Hubble time, with velocity-dependent models favouring "amplitudes up to ~100 cm^2/g".
+# The same paper does assert the range as its own unified explanation ("SIDM provides a unified
+# explanation for their high densities, with a cross section of sigma/m = 30-100 cm^2/g"), but it
+# publishes no inferred value, no confidence interval and no likelihood.  The Gaussian below is
+# therefore a PROJECT-CONSTRUCTED prior over that range, not an observational constraint.
 # 2026-09-12: REVISED width from 0.3 to 0.7 dex (per ch04_width_resolution_2026_09_12.json).
 # Rationale: 0.3 dex was 3.3x tighter than other channels (which use 1.0 dex), causing
 # ch04_lens_subhalo to dominate the joint fit and produce +31.8 nat catastrophic LOO-CV
 # overfit penalty. 0.7 dex reduces this to +4.6 nats (-86%) while keeping regression
 # in other 8 channels to +0.047 nats (under 0.05 nat threshold).
-LENS_SIGMA_M_LOG_PEAK = 1.7       # log10(cm^2/g) — middle of 30-100 range
+LENS_SIGMA_M_LOG_PEAK = 1.7       # log10(cm^2/g) — middle of the ASSUMED 30-100 range (project prior)
 LENS_SIGMA_M_LOG_WIDTH = 0.7      # dex — revised 2026-09-12 (was 0.3)
 
-# MW satellite upper limit (Hayashi+ 2025 — Channel 7)
-DSPH_SIGMA_M_UPPER_LIMIT = 0.2    # cm^2/g — Hayashi+ 2025 95% upper limit
-DSPH_VMAX_KMS = 18.0              # characteristic UFD velocity in the paper
+# MW satellite upper limit (arXiv:2503.13650 — Channel 7)
+# 2026-11-06 source check (finding F24): ONE paper — Ando, Hayashi, Horigome, Ibe & Shirai 2025 —
+# which this repo labels both "Horigome+ 2025" and "Hayashi+ 2025".  Its published 95%-percentile
+# upper limits are 0.8 cm^2/g for w = 10 km/s and 0.04 cm^2/g for the velocity-independent case
+# (log-uniform prior on sigma0/m over 1e-3..1e3 cm^2/g).  0.2 cm^2/g is the abstract's
+# CDM-PREFERENCE threshold ("decisively prefers CDM to SIDM when sigma/m exceeds 0.2 cm^2/g, if a
+# velocity-independent cross section is assumed"), not a 95% upper limit, so the value below is
+# the project's own stricter choice.  The paper's fiducial UFD velocity is V50 = 10.5 km/s and it
+# reports V50 = 18 km/s as DISFAVOURED by the Milky Way satellite abundance; no 1.0 cm^2/g limit
+# appears anywhere in the paper.
+DSPH_SIGMA_M_UPPER_LIMIT = 0.2    # cm^2/g — project choice (published 95% ULs: 0.8 at w=10, 0.04 const)
+DSPH_VMAX_KMS = 18.0              # km/s — the disfavoured alternative (paper's fiducial is 10.5)
 
 # Cluster upper limit (O'Donnell+ 2026 PRD — Channel 8)
 CLUSTER_VMAX_KMS = 2090.0         # MACS J0138-2155 interaction velocity

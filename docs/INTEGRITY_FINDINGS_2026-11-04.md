@@ -928,3 +928,91 @@ fabricated published bound (caught by the tally pin *and* the dwarf-bracket test
 rebuild check without any artifact edit), fabricated quote, halo-convention table drift,
 internal-number-as-data, edited artifact, and a reintroduced stale pin. Baseline 12 passed, post-restore
 12 passed.
+
+## F23 — one physical quantity, two live values: f_H = 0.297 and f_H = 0.750 (OPEN: a convention must be chosen)
+
+**What was found (2026-11-06, during reconciliation of a delegated cross-system study).**
+The quantity `sigma_eff = f_H^2 * sigma/m` is computed from two different `f_H` values that are both
+live in the repository:
+
+| convention | value | defined in | live consumers |
+|---|---|---|---|
+| two-component radius-dependent | 0.7501856343179664 | `v0.3-prelim/code/phase44_two_component.py::f_H_at_r(0.05, "core_forming")` | `t120_4_joint_fit.sigma_eff_two_comp`, `t120_constraint_scoreboard`, `t120_cloud9_bound` |
+| placeholder alias | 0.297 | `scripts/constants.py` (`F_H_CANONICAL` / `F_H_PLACEHOLDER_G7` / `F_H`) | `phase44_joint_fit_v2_real_likelihood.py:140` (`sigma_eff = F_H**2 * sigma_HH`), `phase_g4_pipeline.py:144` (`sigma_eff = F_H**2 * sigma_mb`), `scripts/canonical_numbers.py` header ("canonical F_H = 0.297") |
+
+The `scripts/constants.py` value is labelled in-file `v1.13 / Phase G7 placeholder (retracted v18.29)`
+and `DEPRECATED`, yet `phase_g4_pipeline.py` describes the same number as "Yang+ 2025-derived f_H".
+
+**Measured consequence at Cloud-9 (v = 28 km/s, default arm `a_slope = 1.9286750353457855`).**
+
+- total fitted `Q_total = 177.75388842653638 cm^2/g`
+- with `f_H = 0.7501856` -> `Q_effective = 100.03606419810939 cm^2/g` -> **passes** the internal 100 bar
+- with `f_H = 0.297`        -> `Q_effective = 15.679492744216347 cm^2/g` -> **fails it by 6.4x**
+- ratio between conventions: **6.380057431067687**
+
+So the project's headline "Cloud-9 is satisfied" depends on which `f_H` a producer happens to import,
+and no producer declared which one it used. The 0.25% near-miss discussed in T120 is dwarfed by this
+convention gap.
+
+**What was changed.** `v0.3-prelim/code/t120_cloud9_bound.py` now loads BOTH definitions (the scripts
+layer under a private module name, because the repo has two files named `constants.py` and a plain
+`import constants` resolves by path order) and publishes them side by side in
+`v0.3-prelim/data/results/t120_cloud9_bound_rederivation.json` under `f_H_conventions`, with the ratio,
+the two Cloud-9 effective values, the consumer list, and `status: UNRESOLVED_CONVENTION_SPLIT`.
+`v0.3-prelim/tests/test_channel_bound_attribution.py` pins both values, the ratio, the two Cloud-9
+consequences, and re-derives them from the producer live.
+
+**What is NOT decided (this finding stays open).** Which `f_H` is canonical for the Cloud-9 and
+cross-system claims. Options: (a) declare `f_H_at_r` canonical and retire the 0.297 alias from live
+producers, (b) keep both and require every producer to name its convention in its artifact, (c) re-derive
+`f_H` from arXiv:2504.02303 directly. Until then, `sigma_eff` numbers are convention-labelled, not
+absolute.
+
+## F24 — Channel 6 and Channel 7 carried source claims that the cited papers do not make (LABELS FIXED 2026-11-06)
+
+**Verified against the arXiv records and the local PDFs on 2026-11-06.**
+
+1. **Channel 6's paper has one author.** arXiv:2510.11006 is Hai-Bo Yu, submitted 2025-10-13,
+   v2 2026-03-20, doi `10.1103/txxx-97ln`. The repo called the same id "Yang, Yang, Yu et al. 2026",
+   "Yang+ GD-1 paper" and "Zhang+ 2025". The GD-1 perturber paper is a different work:
+   arXiv:2409.19493, Zhang, Yu, Yang & Nadler, "The GD-1 stellar stream perturber as a core-collapsed
+   self-interacting dark matter halo" (2024-09-29). The "PRL 136, 141001" style volume/date written in
+   code comments is not confirmable from the arXiv record and must not be cited.
+2. **An invented cross-section agreement.** `channels_extended.py` claimed "Their sigma/m ~ 1 cm^2/g in
+   the relevant regime is consistent with our T8/T11 posterior median of ~1.86 cm^2/g". The paper
+   contains no `sigma/m ~ 1 cm^2/g` at all: every cross-section value in the extracted text is
+   0, 30, 50, 70, 100 or 147 cm^2/g. The claim was removed.
+3. **30-100 cm^2/g is adopted, not measured.** The paper says "SIDM provides a unified explanation for
+   their high densities, with a cross section of sigma/m = 30-100 cm^2/g" (PDF lines 113-114) and
+   attributes the constant values to prior work ("Ref. [9] assumed constant self-interaction cross
+   sections", line 217), with a collapse-timescale argument (`sigma/m >~ 30` collapses a 1e8 Msun,
+   V_max ~ 10 km/s halo within a Hubble time, line 222) and "amplitudes up to ~100 cm^2/g" for
+   velocity-dependent models (line 224). It publishes no inferred value, no interval, no likelihood.
+   Channel 6's Gaussian (`LENS_SIGMA_M_LOG_PEAK = 1.7`, `LENS_SIGMA_M_LOG_WIDTH = 0.7` dex) is therefore
+   a **project-constructed prior** over that range and is now labelled as one.
+4. **Channel 7 is one paper labelled two ways.** arXiv:2503.13650 = Ando, Hayashi, Horigome, Ibe &
+   Shirai 2025; the repo labels it "Horigome+ 2025" in the knowledge base and "Hayashi et al. 2025" in
+   the code. Its published limits are "95%-percentile upper limits of 0.8 cm^2/g for w = 10 km/s and
+   0.04 cm^2/g for the velocity-independent case". `config.py` labelled the implemented `0.2 cm^2/g`
+   a "95% upper limit": 0.2 is the abstract's CDM-preference threshold ("decisively prefers CDM to SIDM
+   when sigma/m exceeds 0.2 cm^2/g, if a velocity-independent cross section is assumed"), so the
+   implemented bound is the project's own stricter choice, not a published limit.
+5. **A claim that does not exist in the paper.** Channel 7's header asserted "For V_50 = 18 km/s (UFDs):
+   CDM preferred over SIDM when sigma_0/m >~ 1.0 cm^2/g". The paper adopts `V_50 = 10.5 km/s` as
+   fiducial, states that `V_50 = 18 km/s` "is disfavoured by the abundance of Milky Way satellites", and
+   that with it "the Bayes factor result improves for the SIDM models". Its CDM preference arises for
+   larger `w` approaching the velocity-independent case, not at V_50 = 18.
+
+**What was changed.** Attribution and status labels corrected in `config.py` (Channel 6/7 blocks) and
+`v0.3-prelim/code/channels_extended.py` (module docstring, Channel 6 header/interpretation/quote block,
+Channel 7 header). **No numeric constant moved** — `LENS_SIGMA_M_LOG_PEAK = 1.7`,
+`LENS_SIGMA_M_LOG_WIDTH = 0.7`, `DSPH_SIGMA_M_UPPER_LIMIT = 0.2`, `DSPH_VMAX_KMS = 18.0` are pinned by
+test, so a later documentation edit cannot change physics without failing. Knowledge base: new
+`docs/papers/verified/2510.11006_yu_2025_three_birds.md` (quote-level verification, with an explicit
+"what the paper does NOT publish" section) and a re-checked block added to
+`docs/papers/verified/2503.13650_horigome_2025.md` with the full author list and the quoted sentences.
+
+**Residual.** The channel *likelihoods* still encode a project prior (Channel 6) and a project-chosen
+stricter bound (Channel 7). They remain legitimate modelling choices, but any "N of 8 channels pass"
+statement that counts them must be read as "against the project's own bound", exactly as F21 established
+for Cloud-9.

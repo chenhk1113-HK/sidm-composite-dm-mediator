@@ -38,22 +38,24 @@ We provide:
 The SASHIMI-SIDM extension (gravothermal collapse timescale per halo)
 is implemented in gravothermal.py and provides per-halo priors.
 
-2026-08-10 PATCH — Observational validation of gravothermal collapse:
-    Yang, Yang, Yu et al. (UC Riverside),
-    "Three Birds with One Stone: Core-Collapsed SIDM Halos as the
-     Common Origin of Dense Perturbers in Lenses, Streams, and Satellites",
-    Phys. Rev. Lett. (accepted April 2026), arXiv:2510.11006.
-    → First OBSERVATIONAL validation that core-collapsed SIDM halos
-      (M_subhalo ~ 10^6 M_sun) simultaneously explain:
+2026-08-10 PATCH (corrected 2026-11-06, finding F24) — Observational motivation:
+    Hai-Bo Yu (SINGLE AUTHOR), "Three Birds with One Stone: Core-Collapsed SIDM Halos as the
+     Common Origin of Dense Perturbers in Lenses, Streams, and Satellites", arXiv:2510.11006
+     (submitted 2025-10-13, v2 2026-03-20, doi 10.1103/txxx-97ln).
+    This file previously listed it as "Yang, Yang, Yu et al. (UC Riverside)" and as
+    "Phys. Rev. Lett. (accepted April 2026)" — both WRONG (single author; no volume/date
+    confirmable from the arXiv record).
+    → It argues that core-collapsed SIDM subhalos simultaneously explain:
         (a) JVAS B1938+666 strong-lensing dense perturber,
         (b) GD-1 stellar stream spur-and-gap feature,
         (c) Fornax satellite galaxy substructure.
-    → Their σ/m ~ 1 cm^2/g in the relevant regime is consistent with
-      our T8/T11 posterior median of ~1.86 cm^2/g. This validates the
-      gravothermal model in `gravothermal.py` as the correct physics
-      beyond the simple "expanded core" Balberg+ 2002 phase.
-    → Future work: implement this as Channel 6 (gravitational-lensing
-      substructure constraint). Currently a placeholder below.
+    → The cross section the paper works with is σ/m = 30-100 cm^2/g (its own wording, PDF lines
+      113-114; simulated values 0/30/50/100 cm^2/g, PDF lines 88-89).
+    → The claim previously written here — "their σ/m ~ 1 cm^2/g ... agrees with our T8/T11 posterior
+      median of ~1.86 cm^2/g" — is NOT in the paper: the extracted text contains no σ/m ≈ 1 cm^2/g value at
+      all, so the numeric agreement claim is removed.  The gravothermal-physics attribution to
+      `gravothermal.py` stands; the "~1 cm^2/g agreement" does not.
+    → Later implemented as Channel 6 (gravitational-lensing substructure constraint).
 """
 from __future__ import annotations
 import math
@@ -393,14 +395,19 @@ def gravothermal_collapse_prior(halo_mass_Msun: float,
 #   (c) Fornax satellite galaxy substructure
 #
 # The preferred σ/m range in this regime is **30-100 cm²/g at V_max ~ 10 km/s**
-# (Yang, Yang, Yu et al. 2026, arXiv:2510.11006; the GD-1 perturber is
-# specifically anchored by Zhang et al. 2025 ApJL 978 L23, arXiv:2409.19493).
+# (arXiv:2510.11006 — Hai-Bo Yu, single author, 2025; the GD-1 perturber paper is
+#  arXiv:2409.19493 — Zhang, Yu, Yang & Nadler, "The GD-1 stellar stream perturber as a
+#  core-collapsed self-interacting dark matter halo".  This channel's header previously called
+#  2510.11006 "Yang, Yang, Yu et al. 2026" and "Zhang+ 2025", conflating the two papers.)
 #
-# IMPORTANT — interpretation of σ/m at subhalo V_max:
-# In the Yang+ GD-1 paper (arXiv:2510.11006 / Zhang+ 2025), σ/m ~ 30-100 cm²/g
-# is reported as the "effective" σ/m at V_max ~ 10 km/s — i.e., it is ALREADY
-# evaluated at subhalo velocity, NOT scaled from any reference. This is the
-# natural σ/m for the subhalo's internal heat-transfer regime.
+# IMPORTANT — interpretation of σ/m at subhalo V_max (source-checked 2026-11-06, finding F24):
+# arXiv:2510.11006 is single-author (Hai-Bo Yu 2025, v2 2026-03-20).  Two labels used elsewhere in
+# this repo are WRONG for it: "Yang+ GD-1 paper" / "Zhang+ 2025", and "Yang, Yang, Yu et al."
+# The 30-100 cm²/g figure is what the paper ADOPTS for its SIDM halos ("SIDM provides
+# a unified explanation for their high densities, with a cross section of σ/m = 30-100 cm²/g"),
+# attributed by it to Ref. [9] as constant assumed values; it is not an inferred measurement with
+# an uncertainty.  Treated here as the effective σ/m at V_max ~ 10 km/s — i.e. ALREADY evaluated
+# at subhalo velocity, NOT scaled from any reference — which is the paper's own convention.
 #
 # In our pipeline's v-dep parametrization:
 #     σ/m(v) = σ/m_0 * (v / V_REF)^(-a)
@@ -420,7 +427,11 @@ def gravothermal_collapse_prior(halo_mass_Msun: float,
 #
 # Returns log L (relative units).
 
-# Quantitative values from arXiv:2510.11006 (Yang, Yang, Yu et al. 2026):
+# Quantitative values from arXiv:2510.11006 (Hai-Bo Yu 2025), quoted from the local PDF
+# (docs/papers/verified/2510.11006_yu_2025_three_birds.pdf).  NOTE: the block below stitches the
+# figure-caption sentence (pdftotext lines 88-89, the paper's wording is "assuming SIDM cross
+# sections per unit mass of σ/m = 0 cm²/g (CDM), 30 cm²/g, 50 cm²/g, and 100 cm²/g") to the body
+# sentences (lines 109-113).  Both are genuine; the "We use" wording is not the paper's.
 # "We use SIDM cross sections per unit mass of σ/m = 0 cm²/g (CDM),
 #  30 cm²/g, 50 cm²/g, and 100 cm²/g. We find that the inferred density
 #  profiles of the B1938+666 perturber, the Fornax substructure, and the
@@ -431,7 +442,7 @@ def gravothermal_collapse_prior(halo_mass_Msun: float,
 
 
 def loglike_lens_subhalo(sigma_m_0: float, a: float) -> float:
-    """Channel 6: gravitational-lensing substructure (PRL 2026).
+    """Channel 6: gravitational-lensing substructure (arXiv:2510.11006, Hai-Bo Yu 2025).
 
     Gaussian constraint on log10(σ/m_eff) where σ/m_eff is the effective σ/m
     at subhalo velocity v=10 km/s: log10(σ/m_eff) = log10(σ/m_0) + a.
@@ -472,15 +483,23 @@ def loglike_lens_subhalo_placeholder(sigma_m: float) -> float:
 # ---------------------------------------------------------------------------
 # Channel 7 (Tier-3 implemented 2026-08-10): Milky-Way satellite galaxies UPPER LIMIT
 #
-# Per arXiv:2503.13650 (Hayashi et al. 2025), a combined analysis of 8 classical
-# + 23 ultrafaint Milky-Way satellite galaxies using SASHIMI-SIDM with
-# gravothermal core collapse yields a stringent UPPER LIMIT on σ/m at dwarf scales:
+# Per arXiv:2503.13650 (Ando, Hayashi, Horigome, Ibe & Shirai 2025 — labelled "Hayashi et al.
+# 2025" and "Horigome+ 2025" interchangeably in this repo; it is ONE paper), a combined analysis
+# of 8 classical + 23 ultrafaint Milky-Way satellite galaxies using SASHIMI-SIDM with gravothermal
+# core collapse reports:
 #   "The combined analysis decisively prefers CDM to SIDM when the
-#    self-interaction cross section per unit mass, σ/m, exceeds ~0.2 cm²/g,
-#    if a velocity-independent cross section is assumed."
-#   For V_50 = 18 km/s (UFDs): CDM preferred over SIDM when σ₀/m ≳ 1.0 cm²/g.
+#    self-interaction cross section per unit mass, σ/m, exceeds 0.2 cm²/g,
+#    if a velocity-independent cross section is assumed."   (abstract)
+#   "we obtain 95%-percentile upper limits of 0.8 cm²/g for w = 10 km/s and
+#    0.04 cm²/g for the velocity-independent case"          (model-evidence paragraph)
+# Source-checked 2026-11-06 (finding F24): the claim previously written here — "For V_50 = 18 km/s
+# (UFDs): CDM preferred over SIDM when σ₀/m ≳ 1.0 cm²/g" — is NOT in the paper.  The paper adopts
+# V_50 = 10.5 km/s as fiducial, states V_50 = 18 km/s is "disfavoured by the abundance of Milky Way
+# satellites" and that with it "the Bayes factor result improves for the SIDM models".  The CDM
+# preference it reports for larger w approaches the velocity-independent limit, not V_50 = 18.
 #
-# We implement this as a SOFT UPPER LIMIT: σ/m_0 > 0.2 cm²/g is penalized.
+# We implement this as a SOFT UPPER LIMIT: σ/m_0 > 0.2 cm²/g is penalized — i.e. the project's own
+# choice, stricter than the published 0.8 cm²/g 95% limit at w = 10 km/s.
 # This is the COMPLEMENT to Channel 6 (lens substructure, which gives a
 # LOWER limit on σ/m_eff at v=10 km/s). Together they bracket σ/m.
 #

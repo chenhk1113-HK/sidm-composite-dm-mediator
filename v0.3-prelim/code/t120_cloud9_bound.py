@@ -36,6 +36,7 @@ Cloud-9 measurement. Both are project-internal anchors. The published preferred 
 """
 from __future__ import annotations
 
+import importlib.util
 import json
 import math
 import sys
@@ -47,6 +48,19 @@ if str(_CODE_DIR) not in sys.path:
 
 _RESULTS_DIR = _CODE_DIR.parent / "data" / "results"
 ARTIFACT = _RESULTS_DIR / "t120_cloud9_bound_rederivation.json"
+
+# The repo has TWO files named `constants.py` (root layer and scripts/ layer) that define
+# different values for the same flat name.  Loading the scripts layer under a PRIVATE module
+# name (importlib, not `import constants`) is the only way to compare them deterministically;
+# a plain `import constants` resolves by sys.path order and has already produced bugs here.
+_SCRIPTS_CONSTANTS_PATH = _CODE_DIR.parent.parent / "scripts" / "constants.py"
+
+
+def _load_scripts_constants():
+    spec = importlib.util.spec_from_file_location("_scripts_constants_layer", _SCRIPTS_CONSTANTS_PATH)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 import t120_4_joint_fit as T120  # noqa: E402
 from phase44_two_component import f_H_at_r  # noqa: E402
@@ -135,6 +149,46 @@ def model_quantities(a_slope=None):
     }
 
 
+def f_H_conventions(q_total_default: float) -> dict:
+    """The same physical quantity, sigma_eff = f_H^2 * sigma/m, has TWO live values in this repo.
+
+    Measured, not asserted: both are read from the files that define them.
+    """
+    live_f_h = f_H_at_r(R_OVER_RVIR, HALO_TYPE)          # used by every T120 entry point
+    scripts_layer = _load_scripts_constants()
+    legacy_f_h = scripts_layer.F_H                        # scripts/constants.py: F_H_PLACEHOLDER_G7
+    return {
+        "quantity": "f_H (heavy fraction entering sigma_eff = f_H^2 * sigma/m)",
+        "live_value_used_by_t120": {
+            "value": live_f_h,
+            "f_H_squared": live_f_h * live_f_h,
+            "defined_in": "v0.3-prelim/code/phase44_two_component.py::f_H_at_r",
+            "provenance_claimed_in_code": "Yang+ 2025 PRD 112, 083011 (arXiv:2504.02303) Fig. 2 profile",
+            "consumers": ["t120_4_joint_fit.sigma_eff_two_comp", "t120_constraint_scoreboard",
+                          "t120_cloud9_bound"],
+            "cloud9_Q_effective_cm2_per_g": live_f_h * live_f_h * q_total_default,
+        },
+        "legacy_value_still_in_live_code": {
+            "value": legacy_f_h,
+            "f_H_squared": legacy_f_h * legacy_f_h,
+            "defined_in": "scripts/constants.py (F_H_CANONICAL / F_H_PLACEHOLDER_G7 / F_H alias)",
+            "provenance_claimed_in_code": "labelled in-file 'v1.13 / Phase G7 placeholder (retracted "
+                                          "v18.29)' and 'DEPRECATED'; phase_g4_pipeline.py calls the "
+                                          "same number 'Yang+ 2025-derived f_H'",
+            "consumers": ["phase44_joint_fit_v2_real_likelihood.py:140 (sigma_eff = F_H**2 * sigma_HH)",
+                          "phase_g4_pipeline.py:144 (sigma_eff = F_H**2 * sigma_mb)",
+                          "scripts/canonical_numbers.py header ('canonical F_H = 0.297')"],
+            "cloud9_Q_effective_cm2_per_g": legacy_f_h * legacy_f_h * q_total_default,
+        },
+        "ratio_between_conventions": (live_f_h * live_f_h) / (legacy_f_h * legacy_f_h),
+        "finding": "F23: the Cloud-9 `>= 100 cm^2/g` verdict depends on WHICH f_H is used. "
+                   "The two-component live path gives a pass; the deprecated 0.297 placeholder path "
+                   "gives an effective cross section far below the bar. Both are in live code, one is "
+                   "labelled retracted, and neither producer declares which convention it used.",
+        "status": "UNRESOLVED_CONVENTION_SPLIT",
+    }
+
+
 def build_report():
     arms = {}
     for label, a in [("default_phase44", None), ("a_slope_1.0", 1.0), ("a_slope_0.8", 0.8),
@@ -162,6 +216,7 @@ def build_report():
         },
         "published_anchors": PUBLISHED,
         "model_values_by_arm": arms,
+        "f_H_conventions": f_H_conventions(default["Q_total_cm2_per_g"]),
         "conventions": {
             "quantity_graded_against_100_in_t120_4": "Q_effective_fH_squared",
             "quantity_the_paper_quotes_as_166": "Q_canonical_gaussian",
