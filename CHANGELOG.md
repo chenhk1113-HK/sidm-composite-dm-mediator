@@ -1,3 +1,38 @@
+## [Owner-Decisions-Arm-F25-2026-11-06] — the dwarf-compatible arm becomes the model, the Cloud-9 bar stays internal, and canonical f_H = 0.750 is measured before it is applied
+
+- **Adopted arm (owner decision 2026-11-06).** `v0.3-prelim/code/t120_constraint_scoreboard.py` gains
+  `ADOPTED_A_SLOPE_ARMS = (0.5, 0.8)` and `adopted_arm_declaration()`, which computes the declaration live.
+  Measured: 7 PASS / 1 MARGINAL / 0 FAIL of 8 at a_slope=0.5 and at 0.8; Cloud-9 is the single non-pass,
+  99.7528912454 (0.247109 % below the bar) and 99.7783949208 (0.221605 % below), scored MARGINAL under the
+  declared `MARGINAL_BAND_RELATIVE = 0.05` because it is a near-miss of the retained internal 100 cm^2/g floor,
+  not a violation. The Phase-44 default arm (3 PASS / 0 MARGINAL / 5 FAIL) is labelled `legacy_default_fit`.
+- **Cloud-9 bar retained as internal.** `adopted_arm_declaration()` reports `cloud9_bound_cm2_per_g = 100.0`
+  with the F21 provenance string "no published Cloud-9 floor exists"; a test refuses any change that drops the
+  INTERNAL label.
+- **F25 (new finding, OPEN decision D11).** Canonicalising f_H = 0.7501856343179664 is exactly degenerate with a
+  joint rescale of `sigma_0` and `sigma_peak` by k = 0.15673840099471523: re-paired, every §A.15 `sigma_eff`
+  matches the archived value to 3.558e-16 relative and all four tallies are unchanged; not re-paired, the
+  `v19_2_E_A2_5param_DE_best_fit` accounting moves from 5 PASS / 2 MARGINAL / 1 FAIL to 1 PASS / 0 MARGINAL / 7 FAIL
+  and the Phase-44 one from 1 PASS / 0 MARGINAL / 7 FAIL to 0 PASS / 0 MARGINAL / 8 FAIL. Three internal Cloud-9
+  `sigma_eff` values now coexist (14.6443, 100.03606419810939, 165.4921) under three bars. No numeric constant was
+  moved in this round; the pairing choice is left to the owner.
+- **Guard.** `v0.3-prelim/tests/test_t120_constraint_scoreboard.py` gains `test_adopted_arm_is_declared_and_measured`,
+  `test_cloud9_bar_is_retained_and_stays_internal`: 28 passed in 1.56 s for the scoreboard + Cloud-9 provenance +
+  gate-marker files.
+- **Artifact + drift guard (same round).** `adopted_arm_declaration()` is now written by the producer to
+  `v0.3-prelim/data/results/t120_adopted_arm_declaration.json`, so headline docs cite a file instead of asserting a
+  tally in prose; `scripts/drift_guard.py` adds `t120 scoreboard` to its scoped-evaluation markers, which stops the
+  §A.15 channel tallies and the T120 eight-point tallies from being mistaken for each other while still requiring the
+  claim's own line to point at an artifact. Two new tests pin the artifact against a live recomputation.
+- **Guard evidence.** Mutation harness 5/5 caught: unlabelled foreign tally in `CURRENT.md` (drift `1 drift(s) detected`);
+  T120 tally with its artifact pointer removed (`1 drift(s) detected`); hand-edited artifact `cloud9_value_cm2_per_g`
+  (`1 failed, 3 passed`); `ADOPTED_A_SLOPE_ARMS` moved to the legacy default (`3 failed, 1 passed`); Cloud-9 floor
+  100.0 -> 99.0 (`4 failed`). All touched files rewritten from the pre-mutation snapshot and verified byte-identical.
+- **Self-correction.** The first version of that harness silently skipped one mutation (no anchor assertion), its
+  `n_pass` anchor matched twice, and its final step checked restoration instead of performing it, which left mutation
+  residue in the artifact (`n_pass: 8`, `cloud9_bound_cm2_per_g: 99.0`). The artifact was regenerated from the live
+  producers and the harness corrected; the 5/5 evidence above is from the corrected run. Disclosed in F25.
+
 ## [Channel-Bound-Provenance-F23-F24-2026-11-06] — the Cloud-9 pass depends on which f_H a producer imports, and two channel bounds were mislabelled
 
 - **F23 (open).** `sigma_eff = f_H^2 * sigma/m` is computed from two live `f_H` values: 0.7501856343179664

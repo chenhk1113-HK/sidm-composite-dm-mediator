@@ -1016,3 +1016,104 @@ test, so a later documentation edit cannot change physics without failing. Knowl
 stricter bound (Channel 7). They remain legitimate modelling choices, but any "N of 8 channels pass"
 statement that counts them must be read as "against the project's own bound", exactly as F21 established
 for Cloud-9.
+
+## F25 — what "canonical f_H = 0.750" actually costs, measured before acting (2026-11-06, OPEN: decision D11)
+
+The owner chose f_H = 0.750 (the `phase44_two_component.f_H_at_r` value) as canonical. Measuring what
+that changes, rather than assuming it is a label swap, produced three facts.
+
+**1. f_H is not an independent number — it is degenerate with the fitted total cross sections.**
+`sigma_eff = f_H^2 * sigma/m(v)` and `sigma/m(v) = sigma_0 (v_ref/v)^a_slope + sigma_peak exp(...)` mean
+f_H multiplies the entire curve. Therefore f_H 0.297 -> 0.7501856343179664 is *exactly* compensated by
+rescaling both fitted amplitudes by
+
+    k = (0.297 / 0.7501856343179664)^2 = 0.15673840099471523
+
+Verified live in this repo (`scripts/canonical_numbers.py`, repo venv, Python 3.12 / numpy 2.5.2 /
+scipy 1.18.1): after re-pairing, every `sigma_eff` in the eight-channel accounting matches the archived
+value to a maximum relative difference of 3.558e-16, and all four tallies are unchanged —
+1 PASS / 0 MARGINAL / 7 FAIL and 2 PASS / 1 MARGINAL / 5 FAIL at `v19_2_D_canonical_phase_44`
+(published_sigma_unc and self_normalized_sigma_unc), 5 PASS / 2 MARGINAL / 1 FAIL and 6 PASS / 2 MARGINAL /
+0 FAIL at `v19_2_E_A2_5param_DE_best_fit`. Re-pairing the parameters preserves every prediction; it only
+re-expresses them: `sigma_0` 0.052 -> 0.008150 and `sigma_peak` 174.0 -> 27.272482 (canonical Phase-44),
+0.0265 -> 0.004154 and 2025.57 -> 317.484603 (A.2 best fit).
+
+**2. Adopting 0.750 WITHOUT re-pairing the amplitudes changes the verdicts, and the change is large.**
+Measured with the same generator, same parameters, same bounds, f_H only:
+`v19_2_D_canonical_phase_44` goes from 1 PASS / 0 MARGINAL / 7 FAIL to 0 PASS / 0 MARGINAL / 8 FAIL
+(published_sigma_unc), and `v19_2_E_A2_5param_DE_best_fit` goes from 5 PASS / 2 MARGINAL / 1 FAIL to
+1 PASS / 0 MARGINAL / 7 FAIL. The promoted A.2 headline therefore depends on the amplitude pairing, not
+only on f_H. Any canonicalisation must state which amplitudes it is paired with.
+
+**3. The two families disagree about the Cloud-9 observable itself, independent of f_H.**
+Both compute `sigma_eff(v=28)` and both call it Cloud-9, from different parameter sets and different bars:
+
+| family | total sigma/m at v=28 | sigma_eff at v=28 | bar compared against | verdict |
+|---|---|---|---|---|
+| `scripts/canonical_numbers.py` (Phase-44 canonical params, f_H 0.297) | 166.0181 | 14.6443 | 128.0 floor | FAIL |
+| `scripts/canonical_numbers.py` (A.2 best fit, f_H 0.297) | 1876.1366 | 165.4921 | 128.0 floor | PASS |
+| `v0.3-prelim/code/t120_constraint_scoreboard.py` (f_H 0.7502) | 177.75388842653638 | 100.03606419810939 | 100.0 floor | PASS |
+**4. The other two decisions (adopt `a_slope` 0.5-0.8, keep the 100 cm^2/g bar) are implemented and
+guarded (2026-11-06).** `v0.3-prelim/code/t120_constraint_scoreboard.py` now declares
+`ADOPTED_A_SLOPE_ARMS = (0.5, 0.8)`, keeps `LEGACY_A_SLOPE_ARMS = (None, 1.0)` as legacy only, and
+`adopted_arm_declaration()` computes the tallies live:
+
+| arm | role | tally | Cloud-9 `sigma_eff` | Cloud-9 verdict | shortfall vs 100 |
+|---|---|---|---|---|---|
+| `a_slope=0.5` | adopted | 7 PASS / 1 MARGINAL / 0 FAIL | 99.75289124538487 | MARGINAL | 0.247109 % |
+| `a_slope=0.8` | adopted | 7 PASS / 1 MARGINAL / 0 FAIL | 99.77839492084853 | MARGINAL | 0.221605 % |
+| `a_slope=1.9286750353457855` | legacy default fit | 3 PASS / 0 MARGINAL / 5 FAIL | 100.03606419810939 | PASS | 0 |
+| `a_slope=1.0` | legacy v1.13 override | 6 PASS / 2 MARGINAL / 0 FAIL | 99.80168969102034 | MARGINAL | 0.198310 % |
+
+The declaration is written to `v0.3-prelim/data/results/t120_adopted_arm_declaration.json` by the
+producer itself, so the headline docs cite a file rather than assert a tally in prose.
+
+`scripts/drift_guard.py` gained `"t120 scoreboard"` / `"t120_constraint_scoreboard"` to its
+scoped-evaluation markers: the T120 scoreboard scores eight project-stated bounds, which are not the
+§A.15 channel slots, so its tallies must not be compared against the §A.15 ones. The marker does not
+by itself excuse a claim — the claim's own line must still point at an artifact, which is why the
+declaration is a JSON file.
+
+**Guard evidence (mutation harness, 5/5 caught, baseline and post-restore runs genuinely passed):**
+
+| mutation | guard that fired | result |
+|---|---|---|
+| unlabelled foreign tally `6 PASS / 1 MARGINAL / 1 FAIL` added to `CURRENT.md` | `drift_guard --strict` | `RESULT: 1 drift(s) detected` |
+| T120-scoped tally with its artifact pointer removed | `drift_guard --strict` | `RESULT: 1 drift(s) detected` |
+| hand-edit of the artifact (`cloud9_value_cm2_per_g` 99.7529 -> 100.0361) | `test_adoption_artifact_is_reproducible_from_the_live_producers` | `1 failed, 3 passed` |
+| `ADOPTED_A_SLOPE_ARMS` silently moved to the legacy default `(None,)` | `test_adopted_arm_is_declared_and_measured` | `3 failed, 1 passed` |
+| Cloud-9 floor moved 100.0 -> 99.0 | `test_cloud9_bar_is_retained_and_stays_internal` | `4 failed` |
+
+All four touched files were then rewritten from the pre-mutation snapshot and verified byte-identical
+(`CURRENT.md` 2846765e880ac51c…, `t120_constraint_scoreboard.py` 8bee074b051310ca…,
+`t120_adopted_arm_declaration.json` 1a2cf6c7639514ae…, `test_t120_constraint_scoreboard.py`
+7c2808ebf3da62ca…).
+
+**Self-correction recorded (first harness version was defective).** The first run of this harness
+(1) applied no anchor-count assertion, so its `CURRENT.md` mutation silently no-opped against stale
+anchor text and reported it as "not caught"; (2) its `n_pass: 7 -> 8` anchor matched twice, which its
+assertion correctly refused; and (3) worst: its final step only *checked* restoration instead of
+performing it, so after two producer mutations the test's own artifact regeneration left mutation
+residue on disk — `t120_adopted_arm_declaration.json` sitting at `n_pass: 8` and
+`cloud9_bound_cm2_per_g: 99.0`. The artifact was regenerated from the live producers
+(7/1/0 arms, bound 100.0) and the harness was rewritten to assert `anchor count == 1` per mutation
+and to restore by writing the snapshot back before verifying. The 5/5 table above is from the
+corrected harness.
+
+
+The 128.0 bar is itself a project output (F21), so three internal bars (14.6 / 100.0 / 128.0) currently
+describe one object. Choosing f_H does not reconcile them; reconciling them requires choosing one
+parameter set.
+
+**Sites that hard-code 0.297 as a literal rather than importing it** (so a constant edit would not reach
+them): `v0.3-prelim/code/phase44_joint_fit_v2_real_likelihood.py:44`, `v0.3-prelim/code/phase_g4_pipeline.py:52`,
+`scripts/v19_2_f_cloud9_cM_tension.py:53`. `v0.3-prelim/code/phase_g17a_symmetric_ide.py:98` uses 0.297 for a
+different quantity (cosmological heavy fraction) and is not part of this split.
+
+**Open sub-decision (D11).** Either (a) canonicalise f_H = 0.7501856343179664 and re-pair the fitted
+amplitudes by k = 0.15673840099471523 across the paper's parameter table (predictions provably
+unchanged, quoted `sigma_0` / `sigma_peak` shrink 6.38x, every consumer that hard-codes 0.297 must be
+converted), or (b) keep 0.297 as the declared pairing of the Phase-44/A.2 amplitude table and reserve
+0.750 for the T120 two-component family, labelling each table with its pairing. (a) is the smaller
+physics change and the larger documentation change; (b) is the smaller documentation change and leaves
+three internal Cloud-9 bars in place.

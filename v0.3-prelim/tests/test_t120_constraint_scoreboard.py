@@ -212,3 +212,77 @@ def test_no_arm_reaches_eight_of_eight():
     for a in PINNED_TALLIES:
         s = constraint_scoreboard(a_slope_override=a)["summary"]
         assert not (s["n_pass"] == 8 and s["n_marginal"] == 0 and s["n_fail"] == 0), (a, s)
+
+
+# ---------------------------------------------------------------------------
+# OWNER DECISION 2026-11-06: "adopt 0.5-0.8; keep 100".
+# The decision is pinned here so a later edit cannot quietly promote the
+# Phase-44 default arm back to headline status, nor quietly move the bar.
+# ---------------------------------------------------------------------------
+
+def test_adopted_arm_is_declared_and_measured():
+    from t120_constraint_scoreboard import adopted_arm_declaration
+    d = adopted_arm_declaration()
+    assert [row["a_slope"] for row in d["adopted_arms"]] == [0.5, 0.8]
+    for row in d["adopted_arms"]:
+        assert (row["n_pass"], row["n_marginal"], row["n_fail"]) == (7, 1, 0), row
+        assert row["cloud9_verdict"] == "MARGINAL", row
+        # The adopted arm MISSES the retained 100 cm^2/g floor by a quarter of a
+        # percent. Pinned as a range so a real physics change is caught, but
+        # float noise is not treated as drift.
+        assert 0.0015 < row["cloud9_shortfall_fraction"] < 0.0035, row
+        assert row["cloud9_value_cm2_per_g"] < row_bound_cloud9(), row
+    legacy = {row["a_slope"]: row for row in d["legacy_arms"]}
+    assert legacy[None]["role"] == "legacy_default_fit"
+    assert (legacy[None]["n_pass"], legacy[None]["n_marginal"], legacy[None]["n_fail"]) == (3, 0, 5)
+    assert legacy[None]["cloud9_verdict"] == "PASS"
+    assert "owner decision 2026-11-06" in d["note"]
+
+
+def test_cloud9_bar_is_retained_and_stays_internal():
+    """Owner kept the 100 cm^2/g mark; F21 requires it to stay labelled INTERNAL."""
+    from t120_constraint_scoreboard import adopted_arm_declaration
+    d = adopted_arm_declaration()
+    assert d["cloud9_bound_cm2_per_g"] == 100.0
+    assert "INTERNAL" in d["cloud9_bound_provenance"]
+    assert "no published Cloud-9 floor" in d["cloud9_bound_provenance"]
+
+
+def row_bound_cloud9():
+    from t120_constraint_scoreboard import OBSERVATIONS
+    return float([o[3] for o in OBSERVATIONS if o[0] == "v28.0_Cloud-9"][0])
+
+
+# ---------------------------------------------------------------------------
+# The adoption artifact is what the headline docs cite. It must be a real,
+# reproducible product of the live producers, not a hand-written number file.
+# ---------------------------------------------------------------------------
+
+def test_adoption_artifact_is_reproducible_from_the_live_producers():
+    import json
+
+    from t120_constraint_scoreboard import ADOPTION_ARTIFACT, write_adoption_artifact
+
+    assert ADOPTION_ARTIFACT.exists(), (
+        "v0.3-prelim/data/results/t120_adopted_arm_declaration.json is missing; "
+        "run python v0.3-prelim/code/t120_constraint_scoreboard.py"
+    )
+    stored = json.loads(ADOPTION_ARTIFACT.read_text(encoding="utf-8"))
+    live = write_adoption_artifact()
+    assert stored == live, "the adoption artifact no longer matches a live recomputation"
+
+
+def test_adoption_artifact_carries_the_owner_decision_values():
+    import json
+
+    from t120_constraint_scoreboard import ADOPTION_ARTIFACT
+
+    d = json.loads(ADOPTION_ARTIFACT.read_text(encoding="utf-8"))
+    assert [row["a_slope"] for row in d["adopted_arms"]] == [0.5, 0.8]
+    assert all(row["role"] == "adopted" for row in d["adopted_arms"])
+    for row in d["adopted_arms"]:
+        assert (row["n_pass"], row["n_marginal"], row["n_fail"]) == (7, 1, 0), row
+        assert row["cloud9_verdict"] == "MARGINAL", row
+    assert d["cloud9_bound_cm2_per_g"] == 100.0
+    assert "INTERNAL" in d["cloud9_bound_provenance"]
+    assert "owner decision 2026-11-06" in d["note"]

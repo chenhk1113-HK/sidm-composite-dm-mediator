@@ -1,0 +1,58 @@
+{
+  "adopted_arms": [
+    {
+      "a_slope": 0.5,
+      "cloud9_shortfall_fraction": 0.0024710875461512673,
+      "cloud9_value_cm2_per_g": 99.75289124538487,
+      "cloud9_verdict": "MARGINAL",
+      "n_fail": 0,
+      "n_marginal": 1,
+      "n_pass": 7,
+      "n_total": 8,
+      "parameter_set": "a_slope_override=0.5",
+      "role": "adopted"
+    },
+    {
+      "a_slope": 0.8,
+      "cloud9_shortfall_fraction": 0.002216050791514732,
+      "cloud9_value_cm2_per_g": 99.77839492084853,
+      "cloud9_verdict": "MARGINAL",
+      "n_fail": 0,
+      "n_marginal": 1,
+      "n_pass": 7,
+      "n_total": 8,
+      "parameter_set": "a_slope_override=0.8",
+      "role": "adopted"
+    }
+  ],
+  "cloud9_bound_cm2_per_g": 100.0,
+  "cloud9_bound_provenance": "INTERNAL (F21): project working anchor; no published Cloud-9 floor exists",
+  "legacy_arms": [
+    {
+      "a_slope": null,
+      "cloud9_shortfall_fraction": 0.0,
+      "cloud9_value_cm2_per_g": 100.03606419810939,
+      "cloud9_verdict": "PASS",
+      "n_fail": 5,
+      "n_marginal": 0,
+      "n_pass": 3,
+      "n_total": 8,
+      "parameter_set": "phase44_default_a_slope (producer default, joint_fit_full_evaluation(a_slope_override=None))",
+      "role": "legacy_default_fit"
+    },
+    {
+      "a_slope": 1.0,
+      "cloud9_shortfall_fraction": 0.0019831030897965716,
+      "cloud9_value_cm2_per_g": 99.80168969102034,
+      "cloud9_verdict": "MARGINAL",
+      "n_fail": 1,
+      "n_marginal": 1,
+      "n_pass": 6,
+      "n_total": 8,
+      "parameter_set": "a_slope_override=1.0",
+      "role": "legacy_v113_override"
+    }
+  ],
+  "marginal_band_relative": 0.05,
+  "note": "owner decision 2026-11-06: model arm = a_slope 0.5-0.8 (dwarf-compatible); Cloud-9 bar retained at 100 cm^2/g as an INTERNAL yardstick (F21)"
+}

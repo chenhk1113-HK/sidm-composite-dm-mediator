@@ -92,11 +92,28 @@ now asserts the v0.8 MAP (478 GeV / 488 MeV / 0.81σ), so this line, the docs an
   `docs/INTEGRITY_FINDINGS_2026-11-04.md` F21.
 - **F22 (other dark-matter conditions, MEASURED 2026-11-06):** the σ/m(v) shape transfers to cluster and cosmic-web scales by large margins (0.009644 cm²/g at 500 km/s vs 0.613 and 0.2 ceilings), but in the dwarf regime it is 31.4x above Horigome+ 2025's published 0.8 cm²/g ceiling at 3 km/s on the canonical a_slope=1.9287 arm; the two published dwarf bounds themselves contradict each other by 12.5x, and Cloud-9's published optimum is ~200 cm²/g (Ohana+ 2026), not the internal 100/128 numbers. Scoreboard: `v0.3-prelim/data/results/other_dm_conditions_probe.json`. Evidence: F22.
 
-- **F23 (f_H convention split, OPEN).** `sigma_eff = f_H^2 * sigma/m` has two live definitions: 0.7501856343179664
-  (`phase44_two_component.f_H_at_r`, used by every T120 entry point) and 0.297 (`scripts/constants.py`, labelled
-  "retracted placeholder" yet used by `phase44_joint_fit_v2_real_likelihood.py` and `phase_g4_pipeline.py`). At Cloud-9
-  they give 100.03606419810939 versus 15.679492744216347 cm^2/g — a factor 6.380057431067687, which decides whether
-  the Cloud-9 bar is passed. The bound re-derivation now publishes both; choosing one is an open decision (D11).
+- **F23 (f_H convention split, OWNER DECISION RECORDED 2026-11-06: canonical f_H = 0.750).**
+  `sigma_eff = f_H^2 * sigma/m` has two live definitions: 0.7501856343179664 (`phase44_two_component.f_H_at_r`,
+  used by every T120 entry point) and 0.297 (`scripts/constants.py`, labelled "retracted placeholder" yet used by
+  `phase44_joint_fit_v2_real_likelihood.py` and `phase_g4_pipeline.py`). At Cloud-9 they give 100.03606419810939
+  versus 15.679492744216347 cm^2/g — a factor 6.380057431067687, which decides whether the Cloud-9 bar is passed.
+  The owner chose 0.750. The cost was measured first: f_H is exactly degenerate with the fitted amplitudes, so
+  canonicalising it requires re-pairing `sigma_0` and `sigma_peak` by 0.15673840099471523, which reproduces every
+  §A.15 `sigma_eff` to 3.558e-16 relative and leaves the canonical Phase-44 canonical published_sigma_unc tally at
+  1 PASS / 0 MARGINAL / 7 FAIL and the v19.2-E A.2 best-fit published_sigma_unc tally at 5 PASS / 2 MARGINAL / 1 FAIL (canonical_numbers.json).
+  Doing it without re-pairing changes those verdicts; both options are laid out in F25 and the pairing choice (D11)
+  is open.
+- **F25 (measured 2026-11-06).** Canonical f_H = 0.750 is degenerate with the fitted amplitudes, and three internal
+  Cloud-9 `sigma_eff` values now coexist — 14.6443, 100.03606419810939 and 165.4921 — compared against bars 128.0,
+  100.0 and 128.0. Evidence and the two implementation options: `docs/INTEGRITY_FINDINGS_2026-11-04.md` F25.
+- **Model arm and Cloud-9 bar (OWNER DECISION 2026-11-06: adopt a_slope 0.5-0.8, keep 100).** Declared in
+  `v0.3-prelim/code/t120_constraint_scoreboard.py` (`ADOPTED_A_SLOPE_ARMS`, `adopted_arm_declaration()`) and pinned
+  by `v0.3-prelim/tests/test_t120_constraint_scoreboard.py`.
+  T120 scoreboard adopted arm, a_slope=0.5 and a_slope=0.8, data/results/t120_adopted_arm_declaration.json: 7 PASS / 1 MARGINAL / 0 FAIL
+  — Cloud-9 is the single non-pass, 99.7528912454 and 99.7783949208 against the retained internal 100.0 floor,
+  0.247109 % and 0.221605 % short.
+  T120 scoreboard legacy Phase-44 default arm, a_slope=1.9286750353457855, data/results/t120_adopted_arm_declaration.json: 3 PASS / 0 MARGINAL / 5 FAIL
+  — Cloud-9 passes there at 100.03606419810939, but that arm is no longer the headline.
 - **F24 (Channel 6/7 source labels, FIXED at label level 2026-11-06).** arXiv:2510.11006 is single-author Hai-Bo Yu
   (not "Yang, Yang, Yu et al." nor "Zhang+ 2025"; the GD-1 paper is arXiv:2409.19493, Zhang, Yu, Yang & Nadler); its
   30-100 cm^2/g is adopted/assumed, so Channel 6's Gaussian is a project prior, and the code's "their sigma/m ~ 1 cm^2/g

@@ -137,6 +137,94 @@ _FOUR_TO_EIGHT = {
 }
 
 
+# ============================================================================
+# OWNER-DECLARED MODEL ARM (decision recorded 2026-11-06, owner K Lam)
+# ============================================================================
+# "adopt 0.5-0.8; keep 100" -- the dwarf-compatible arm is the project's declared
+# model arm for the T120 family, and the Cloud-9 floor stays at 100 cm^2/g.
+#
+# Consequence stated honestly rather than hidden: under the adopted arm the Cloud-9
+# floor is MISSED, not passed (99.7529 at a_slope=0.5 and 99.7784 at a_slope=0.8
+# against the retained 100.0 floor, i.e. 0.2471 % and 0.2216 % short). Both misses
+# fall inside the declared MARGINAL_BAND_RELATIVE = 0.05 above, so the scoreboard
+# scores them MARGINAL, not PASS and not FAIL. The Phase-44 best-fit default
+# a_slope = 1.9286750353457855 reaches 100.0361 (PASS on Cloud-9) but scores only
+# 3 of 8 overall, and is therefore reported below as the LEGACY arm, not the headline.
+ADOPTED_A_SLOPE_ARMS = (0.5, 0.8)
+LEGACY_A_SLOPE_ARMS = (None, 1.0)  # None = producer default 1.9286750353457855
+ADOPTION_NOTE = (
+    "owner decision 2026-11-06: model arm = a_slope 0.5-0.8 (dwarf-compatible); "
+    "Cloud-9 bar retained at 100 cm^2/g as an INTERNAL yardstick (F21)"
+)
+
+
+def _cloud9_shortfall(scoreboard):
+    obs = scoreboard["observations"]["v28.0_Cloud-9"]
+    value, bound = obs["value"], float(obs["bound"])
+    return (bound - value) / bound if value < bound else 0.0
+
+
+def adopted_arm_declaration():
+    """Machine-readable declaration of which arm is 'the model', computed live."""
+    arms = []
+    for a in ADOPTED_A_SLOPE_ARMS:
+        sb = constraint_scoreboard(a_slope_override=a)
+        arms.append({
+            "a_slope": a,
+            "role": "adopted",
+            "n_pass": sb["summary"]["n_pass"],
+            "n_marginal": sb["summary"]["n_marginal"],
+            "n_fail": sb["summary"]["n_fail"],
+            "n_total": sb["summary"]["n_total"],
+            "cloud9_value_cm2_per_g": sb["observations"]["v28.0_Cloud-9"]["value"],
+            "cloud9_verdict": sb["observations"]["v28.0_Cloud-9"]["verdict"],
+            "cloud9_shortfall_fraction": _cloud9_shortfall(sb),
+            "parameter_set": sb["summary"]["parameter_set"],
+        })
+    legacy = []
+    for a in LEGACY_A_SLOPE_ARMS:
+        sb = constraint_scoreboard(a_slope_override=a)
+        legacy.append({
+            "a_slope": a,
+            "role": "legacy_default_fit" if a is None else "legacy_v113_override",
+            "n_pass": sb["summary"]["n_pass"],
+            "n_marginal": sb["summary"]["n_marginal"],
+            "n_fail": sb["summary"]["n_fail"],
+            "n_total": sb["summary"]["n_total"],
+            "cloud9_value_cm2_per_g": sb["observations"]["v28.0_Cloud-9"]["value"],
+            "cloud9_verdict": sb["observations"]["v28.0_Cloud-9"]["verdict"],
+            "cloud9_shortfall_fraction": _cloud9_shortfall(sb),
+            "parameter_set": sb["summary"]["parameter_set"],
+        })
+    return {
+        "adopted_arms": arms,
+        "legacy_arms": legacy,
+        "cloud9_bound_cm2_per_g": float(dict(OBSERVATIONS and [(o[0], o[3]) for o in OBSERVATIONS])["v28.0_Cloud-9"]),
+        "cloud9_bound_provenance": BOUND_PROVENANCE["v28.0_Cloud-9"],
+        "marginal_band_relative": MARGINAL_BAND_RELATIVE,
+        "note": ADOPTION_NOTE,
+    }
+
+
+# The declaration is also emitted as an artifact, for two reasons: (1) headline docs must point at
+# a file rather than assert a tally in prose (drift_guard's F16 rule requires the claim's own line
+# to carry an artifact pointer), and (2) the numbers a doc quotes then have a byte-checkable source.
+RESULTS_DIR = Path(__file__).resolve().parents[1] / "data" / "results"
+ADOPTION_ARTIFACT = RESULTS_DIR / "t120_adopted_arm_declaration.json"
+
+
+def write_adoption_artifact():
+    """Regenerate the adopted-arm declaration from the live producers and write it to disk."""
+    import json
+
+    payload = adopted_arm_declaration()
+    RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+    with open(ADOPTION_ARTIFACT, "w", encoding="utf-8", newline="\n") as fh:
+        json.dump(payload, fh, indent=2, sort_keys=True)
+        fh.write("\n")
+    return payload
+
+
 def _nearest_band_bound(value, bound):
     """For a band (lo, hi), return the endpoint nearest to `value` in relative terms."""
     lo, hi = bound
@@ -280,6 +368,8 @@ def four_constraint_scoreboard(a_slope_override=None, w_list=None):
 
 
 if __name__ == "__main__":
+    payload = write_adoption_artifact()
+    print(f"wrote {ADOPTION_ARTIFACT}")
     for a in (None, 0.5, 0.8, 1.0, 1.2, 1.5, 1.93):
         sb = constraint_scoreboard(a_slope_override=a)
         s = sb["summary"]

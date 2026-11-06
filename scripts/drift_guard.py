@@ -453,9 +453,15 @@ def check_channel_count_claims(doc_text, canonical_block, doc_name):
     ]
     retired_markers = ["retired", "historical", "previously quoted",
                        "not reproducible", "no stored parameter set"]
+    # "t120 scoreboard" is a named evaluation of its own: eight project-stated bounds scored by
+    # v0.3-prelim/code/t120_constraint_scoreboard.py and pinned by test_t120_constraint_scoreboard.py.
+    # Its bounds are not the §A.15 channel slots, so its tallies are not §A.15 claims. Adding the
+    # marker does not make a tally acceptable on its own -- the line must still point at an artifact,
+    # and the scoreboard producer's own numbers are guarded by tests.
     scoped_eval_markers = ["phase 4a", "phase 4b", "phase 4c", "phase 4d", "phase g8",
                            "phase g4", "phase g1", "three-peak", "two-resonance",
-                           "v19.0", "population", "fig 5"]
+                           "v19.0", "population", "fig 5", "t120 scoreboard",
+                           "t120_constraint_scoreboard"]
     artifact_pointer = re.compile(r"\.json|phase4a|phase4b|§10\.4f|\bT\d{2,3}\b")
 
     pat = re.compile(r"(\d+)\s+PASS\s*/\s*(\d+)\s+MARGINAL\s*/\s*(\d+)\s+FAIL")
