@@ -38,7 +38,8 @@ M_PHI_EV = 200e-9
 SIGMA_PEAK = 174.0  # cm^2/g
 V_TARGET = 29.4      # km/s
 SIGMA_1 = 4.4        # km/s (Gaussian width)
-F_H_INITIAL = 0.297  # canonical heavy fraction
+# PAIRING: ARCHIVED PAIR (f_H = 0.297) — this module publishes the archived pair; the live pair is f_H = 0.7501856343179664 with amplitudes scaled by PAIRING_K = 0.15673840099471523, and sigma_eff = f_H^2 * sigma/m is identical between them (finding F26).
+F_H_ARCHIVED_PAIR_0297 = 0.297  # archived pair heavy fraction
 
 
 def sigma_m_phase44(v):

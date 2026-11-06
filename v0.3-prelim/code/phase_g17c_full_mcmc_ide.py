@@ -56,6 +56,7 @@ import numpy as np
 from typing import Dict, Tuple
 
 # Same physical constants
+# PAIRING: ARCHIVED PAIR (f_H = 0.297 with sigma_0 = 0.052, sigma_peak = 174).
 SIGMA_PEAK_CM2_PER_G = 174.0
 M_CHI_GEV = 1.0
 M_PHI_GEV = 200e-9

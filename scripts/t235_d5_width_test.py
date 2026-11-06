@@ -27,13 +27,13 @@ from pathlib import Path
 
 SCRIPT_DIR = Path(__file__).parent
 sys.path.insert(0, str(SCRIPT_DIR))
-from constants import (
+from constants import (  # PAIRING: ARCHIVED PAIR
     M_CHI_GEV,
     M_PHI_GEV,
     V_TARGET_KMS,
     SIGMA_KMS,        # R76: was FWHM_KMS=4.4; renamed to SIGMA_KMS=4.4 (the actual Gaussian σ used in formulas)
     A_RES,
-    SIGMA_PEAK_CM2_PER_G,
+    SIGMA_PEAK_LEGACY_PAIR_174 as SIGMA_PEAK_CM2_PER_G_ARCHIVED,  # archived pair
     M_NUCLEON_GEV,
     C_KMS,
     HBAR_C_GEV_CM,
@@ -44,7 +44,7 @@ from constants import (
 # ====== σ/m(v) function ======
 
 def sigma_m(v_kms, v_target=V_TARGET_KMS, sigma_kms=SIGMA_KMS,
-            sigma_peak=SIGMA_PEAK_CM2_PER_G, sigma_0=0.052, a_slope=1.93):
+            sigma_peak=SIGMA_PEAK_CM2_PER_G_ARCHIVED, sigma_0=0.052, a_slope=1.93):
     """
     σ/m at velocity v (km/s).
     Paper convention: σ/m(v) = sigma_0 * (v/100)^(-a) + sigma_peak * exp(-(v-v_target)^2 / (2 * sigma_kms^2))
@@ -346,7 +346,7 @@ if __name__ == "__main__":
             "M_CHI_GEV": M_CHI_GEV,
             "V_TARGET_KMS": V_TARGET_KMS,
             "SIGMA_KMS": SIGMA_KMS,  # R76 renamed from FWHM_KMS
-            "SIGMA_PEAK_CM2_PER_G": SIGMA_PEAK_CM2_PER_G,
+            "SIGMA_PEAK_CM2_PER_G_ARCHIVED": SIGMA_PEAK_CM2_PER_G_ARCHIVED,
         },
         "sigma_1_values": [1.0, 2.0, 3.0, 4.0, 4.4, 6.0],
         "results_by_sigma_1": {

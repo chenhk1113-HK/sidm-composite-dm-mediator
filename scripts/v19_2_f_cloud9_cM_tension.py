@@ -13,7 +13,7 @@ Background:
   - v19.2-F Phase 44 has sigma_peak = 174 cm^2/g at v=29.4 km/s
     (Breit-Wigner resonance, LOWER than Ohana+'s single-component 483).
   - v19.2-F has sigma_eff = f_H^2 * sigma_m (fundamental observability
-    relation). f_H(Cloud-9 core) ~ 0.297 (canonical F_H_CANONICAL).
+    relation). f_H(Cloud-9 core) ~ 0.297 (canonical F_H_ARCHIVED_PAIR_0297).
   - So v19.2-F's effective sigma at v=28 is sigma_eff = 0.088 * 174
     = 15.3 cm^2/g.
 
@@ -50,8 +50,9 @@ from t212_silverman_gravothermal import (
 )
 
 # v19.2-F canonical parameters (from scripts/constants.py)
-F_H_CANONICAL = 0.297
-SIGMA_PEAK_CM2_PER_G = 174.0  # Phase 44
+F_H_ARCHIVED_PAIR_0297 = 0.297
+# PAIRING: ARCHIVED PAIR (f_H = 0.297 with sigma_0 = 0.052, sigma_peak = 174).
+SIGMA_PEAK_CM2_PER_G_ARCHIVED = 174.0  # Phase 44
 V_TARGET_KMS = 29.4  # Phase 44
 SIGMA_KMS = 4.4  # Gaussian sigma (FWHM = 10.36)
 A_RES = 100.0  # Breit-Wigner peak height
@@ -165,7 +166,7 @@ def c_M_tension_sigma(c_200, M_halo, scatter_dex=0.16):
     return (math.log10(c_med) - math.log10(c_200)) / sigma_log_c
 
 
-def v19_2_f_cloud9_cM_tension(f_H=F_H_CANONICAL, sigma_peak=SIGMA_PEAK_CM2_PER_G):
+def v19_2_f_cloud9_cM_tension(f_H=F_H_ARCHIVED_PAIR_0297, sigma_peak=SIGMA_PEAK_CM2_PER_G_ARCHIVED):
     """Compute Cloud-9 c-M tension under v19.2-F multi-resonance + f_H.
 
     Returns: dict with all intermediate values for verification.
@@ -276,7 +277,7 @@ def main():
     print()
 
     # Canonical f_H
-    result = v19_2_f_cloud9_cM_tension(f_H=F_H_CANONICAL, sigma_peak=SIGMA_PEAK_CM2_PER_G)
+    result = v19_2_f_cloud9_cM_tension(f_H=F_H_ARCHIVED_PAIR_0297, sigma_peak=SIGMA_PEAK_CM2_PER_G_ARCHIVED)
     print("--- CANONICAL (f_H = 0.297, sigma_peak = 174) ---")
     print(f"  sigma_m at v=28: {result['params']['sigma_m_at_v28_cm2_g']:.1f} cm^2/g")
     print(f"  sigma_eff = f_H^2 * sigma_m = {result['params']['sigma_eff_cm2_g']:.2f} cm^2/g")
@@ -310,7 +311,7 @@ def main():
     print("--- SENSITIVITY to f_H (sigma_peak fixed at 174) ---")
     print("  (All entries have tau > 1 = deep core collapse, Yang+ invalid)")
     for f_H in [0.1, 0.2, 0.297, 0.4, 0.5, 0.7, 1.0]:
-        r = v19_2_f_cloud9_cM_tension(f_H=f_H, sigma_peak=SIGMA_PEAK_CM2_PER_G)
+        r = v19_2_f_cloud9_cM_tension(f_H=f_H, sigma_peak=SIGMA_PEAK_CM2_PER_G_ARCHIVED)
         print(f"  f_H = {f_H:.3f}: sigma_eff = {r['params']['sigma_eff_cm2_g']:.1f} cm^2/g, "
               f"tau = {r['gravothermal']['tau']:.2f} (OUTSIDE Yang+), "
               f"max-core c_200 = {r['c_M_result']['c_200_sidm']:.1f}")
@@ -320,7 +321,7 @@ def main():
     print("--- SENSITIVITY to sigma_peak (f_H fixed at 0.297) ---")
     print("  (All entries have tau > 1 = deep core collapse, Yang+ invalid)")
     for sigma_peak in [50, 100, 174, 300, 483, 700, 1000]:
-        r = v19_2_f_cloud9_cM_tension(f_H=F_H_CANONICAL, sigma_peak=sigma_peak)
+        r = v19_2_f_cloud9_cM_tension(f_H=F_H_ARCHIVED_PAIR_0297, sigma_peak=sigma_peak)
         print(f"  sigma_peak = {sigma_peak:4d}: sigma_eff = {r['params']['sigma_eff_cm2_g']:.1f} cm^2/g, "
               f"tau = {r['gravothermal']['tau']:.2f} (OUTSIDE Yang+), "
               f"max-core c_200 = {r['c_M_result']['c_200_sidm']:.1f}")

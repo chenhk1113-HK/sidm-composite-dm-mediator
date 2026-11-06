@@ -37,7 +37,7 @@ Self-interacting dark matter (SIDM) was proposed as a solution to small-scale st
 
 Velocity-dependent SIDM models resolve this tension by reducing σ/m at high velocities through one of several mechanisms: Yukawa suppression (Feng, Kaplinghat & Yu 2010 [5]; Tulin, Yu & Zurek 2013 [6]), threshold resonances (Chu, Garcia-Cely & Murayama 2019 [7]; Duerr, Schmidt-Hoberg & Wild 2018 [8]), or mass-dependent u-channel constructions (Girmohanta & Shrock 2022 [9]; Girmohanta & Shrock 2023 [10]). This paper tests a velocity-dependent framework against Cloud-9 (a starless gas cloud discovered by Zhou+ 2023 [15a] with σ/m ≥ 50 cm²/g is Elbert+ 2015's largest simulated cross-section for v_rms ~ 40 km/s [55a], adopted as a working benchmark (BLN24 [15b] constrains Cloud-9's mass/structure, not σ/m)), dwarf galaxies, UFDs, SPARC, and clusters.
 
-**Main result.** The framework's σ_peak = 174 cm²/g at v_target = 29.4 km/s (Phase 44 free fit) is **consistent with Cloud-9** at the 0.16 dex scatter convention (matching Ohana+ 2026's 3.2σ SIDM tension within 0.04σ) but is **in severe tension with Horigome+ 2025 preference thresholds** [27] (arXiv:2503.13650): the framework's σ/m(v) exceeds Horigome+ 2025 preference thresholds by 3.6–23.7× at v_eff = 5–20 km/s using their w = 10 km/s velocity-dependent limit (0.8 cm²/g) and by 27–49× at v = 9–40 km/s — the v = 9 (Sculptor, 5.43 cm²/g) and v = 40 (Cluster LMC, 9.86 cm²/g) endpoint values against their decisive CDM-preference threshold (0.2 cm²/g, Abstract), excluding v = 28 where σ/m is resonantly 830×. The minimum over this window is 14× at v = 15 (2.85 cm²/g), and v = 10 and v = 18 give 22× and 37×; the 27–49× pair is therefore the window's endpoints, not its min–max; at v = 28 km/s (Cloud-9 anchor) σ/m = 166 cm²/g, 830× above the velocity-independent threshold. **Caveat:** the 0.2 cm²/g decisive threshold is a velocity-INDEPENDENT quantity while the framework's σ/m(v) is strongly velocity-dependent, so these factors are an UPPER BOUND on the true tension; a definitive comparison requires re-running Horigome+'s SASHIMI likelihood with our σ(v,θ) form (§3.6). The exclusion is robust to the resonance width σ_1; the background Yukawa tail (a_slope = 1.93, the Phase 44 free-fit value) alone exceeds the threshold. The comparison is approximate (Horigome's bound assumes a different σ(v,θ) form); a definitive exclusion (deferred to dedicated SASHIMI likelihood) requires re-running their SASHIMI likelihood with our σ(v,θ) form.
+**Main result.** The framework's σ_peak = 174 cm²/g at v_target = 29.4 km/s (Phase 44 free fit) is **consistent with Cloud-9** at the 0.16 dex scatter convention (matching Ohana+ 2026's 3.2σ SIDM tension within 0.04σ) but is **in severe tension with Horigome+ 2025 preference thresholds** [27] (arXiv:2503.13650): the framework's σ/m(v) exceeds Horigome+ 2025 preference thresholds by 3.6–23.7× at v_eff = 5–20 km/s using their w = 10 km/s velocity-dependent limit (0.8 cm²/g) and by 27–49× at v = 9–40 km/s — the v = 9 (Sculptor, 5.43 cm²/g) and v = 40 (Cluster LMC, 9.86 cm²/g) endpoint values against their decisive CDM-preference threshold (0.2 cm²/g, Abstract), excluding v = 28 where σ/m is resonantly 830×. The minimum over this window is 14× at v = 15 (2.85 cm²/g), and v = 10 and v = 18 give 22× and 37×; the 27–49× pair is therefore the window's endpoints, not its min–max; at v = 28 km/s (Cloud-9 anchor) σ/m = 166 cm²/g, 830× above the velocity-independent threshold. **Level of the comparison (corrected 2026-11-06, finding F27):** every factor quoted above is particle-level — σ/m of the archived pair (f_H = 0.297 with σ_peak = 174 cm²/g) — while the Horigome+ 2025 thresholds are halo-level bounds on σ_eff = f_H² × σ/m. Dividing by 1/f_H² = 11.336 puts them on the same level: the 27× and 49× pair becomes 2.39× (v = 9) and 4.35× (v = 40), the 14× at v = 15 becomes 1.25×, and the 830× at v = 28 becomes 73.22×. σ_peak = 174 cm²/g is the archived-pair amplitude; the live canonical amplitude is 27.272481773080454 cm²/g at f_H = 0.7501856343179664, giving the identical σ_eff. See §3 for the paired numbers. **Caveat:** the 0.2 cm²/g decisive threshold is a velocity-INDEPENDENT quantity while the framework's σ/m(v) is strongly velocity-dependent, so these factors are an UPPER BOUND on the true tension; a definitive comparison requires re-running Horigome+'s SASHIMI likelihood with our σ(v,θ) form (§3.6). The exclusion is robust to the resonance width σ_1; the background Yukawa tail (a_slope = 1.93, the Phase 44 free-fit value) alone exceeds the threshold. The comparison is approximate (Horigome's bound assumes a different σ(v,θ) form); a definitive exclusion (deferred to dedicated SASHIMI likelihood) requires re-running their SASHIMI likelihood with our σ(v,θ) form.
 
 **Hierarchy constraint.** For LZ direct-detection compliance (conditional: if σ_SI were tuned to the LZ bound), the framework requires a dark-sector hierarchy g_N/g_χ ≲ 1.7×10⁻¹³ (actual value, paper rounds to 10⁻¹³ for order-of-magnitude bound) (anchored at v = 28, σ/m = 166 cm²/g). The derived dark fine-structure constant is α_χ ≈ 6.8×10⁻⁷. This is a post-diction, not a prediction: σ_peak was fixed first (causality cap), then the hierarchy was derived.
 
@@ -839,7 +839,12 @@ This is the SINGLE canonical σ/m(v) used throughout this paper for Horigome+ co
 | 40       | Cluster LMC               | 9.86        | **49× above** |
 | 100      | Cluster v_ref (background)| 0.052       | 0.26× (below threshold) |
 
-**Convention:** All σ/m(v) values in this paper are computed with the Gaussian form above. The v²-space Breit–Wigner and v-space Breit–Wigner forms were cross-checked at §2 and produce the same qualitative verdict (>10× excess at dSph velocities); specific numbers quoted above use the Gaussian convention.
+**Convention:** All σ/m(v) values in this paper are computed with the Gaussian form above.
+
+**Pairing used by this table (added 2026-11-06, findings F26/F27).** Every σ/m cell above is the **ARCHIVED PAIR** of the framework: f_H = 0.297 against σ₀ = 0.052 cm²/g and σ_peak = 174 cm²/g. The live canonical pairing is f_H = 0.7501856343179664 against σ₀ = 0.008150396851725193 cm²/g and σ_peak = 27.272481773080454 cm²/g. The two pairings give the same halo-level σ_eff = f_H² × σ/m to within 1.9×10⁻¹⁶ and differ only in the particle-level amplitude, by the factor 6.380057431067687. `canonical_numbers.sigma_m_canonical_gaussian_archived()` reproduces this table exactly (5.4277, 4.4364, 2.8455, 7.4891, 166.0181, 174.5522, 9.8611, 0.0520 at the eight tabulated velocities); `scripts/constants.py::PAIRING_CONVENTIONS` names both pairs and `v0.3-prelim/data/results/fH_pairing_registry.json` lists which modules publish which.
+
+**What this table does not measure (finding F27).** Horigome+ 2025's 0.2 cm²/g is a **halo-level** limit on the effective cross section σ_eff = f_H² × σ/m, while the σ/m column above is the **particle-level** amplitude. The "× above" column therefore overstates the halo-level tension by 1/f_H² = 11.336×. Evaluated at the level the published bound actually applies, the same eight velocities give σ_eff = 0.4788, 0.3913, 0.2510, 0.6606, 14.6443, 15.3971, 0.8698, 0.0046 cm²/g, i.e. **2.39×, 1.96×, 1.25×, 3.30×, 73.22×, 76.99×, 4.35×, 0.02×** above 0.2 cm²/g. The verdict changes in degree, not in sign: the dSph-velocity tension is real but is 1.25–3.3× rather than 14–37×, and the Cloud-9 anchor stays severe (73–77×). The headline factors quoted in the Abstract and §2.5 are the particle-level reading and should be read as such.
+ The v²-space Breit–Wigner and v-space Breit–Wigner forms were cross-checked at §2 and produce the same qualitative verdict (>10× excess at dSph velocities); specific numbers quoted above use the Gaussian convention.
 
 **Horigome threshold caveat:** The 0.2 cm²/g threshold is from Horigome+ 2025's velocity-INDEPENDENT analysis. The framework's σ/m(v) is velocity-dependent (Gaussian resonance + power-law background). A proper comparison requires re-running Horigome+'s SASHIMI likelihood with our σ(v,θ) form; the 10–27× factors above are therefore an approximate upper bound on the true tension.
 
@@ -1589,8 +1594,8 @@ To test whether the v=150 no-go can be resolved within the existing framework, t
 2. **UV completion implication (revised):** The §9.17b trade-off is about a **physically-derived centre-peaked f_H(r) profile** (Yang+ 2025 SIDM2c). Resolving the trade-off within the current framework requires either (a) a different f_H(r) parameterization (e.g., flat f_H(r) as the project's own Phase G9 N-body found, f_H drop 0.94-1.01×) — note the **Caveat (R88(88) per ClawsGO #5)**: the project's own N-body is NOT subject to the trade-off; OR (b) abandoning single-species σ_m and moving to multi-species UV (Direction B). The 200 eV Yukawa background the framework names is a separate question (§2.8, v19.2-F Phase 3, OPEN status per ClawsGO #6).
 
 3. **Channel score (computed in §A.15 Block 1 by `scripts/canonical_numbers.py`; this section quotes no count that the generator does not print).** Eight channel slots, published-σ_unc likelihood, per parameter set:
-   - **canonical Phase-44 parameters (σ₀=0.052, a=1.93, σ_peak=174, v_target=29.4, σ₁=4.4): 1 PASS / 0 MARGINAL / 7 FAIL** — PASS = Cluster v=500 (Randall+ 2008) only
-   - **v19.2-E A.2 5-parameter DE best fit (σ₀=0.0265, a=1.198, σ_peak=2025.57, v_target=28.47, σ₁=1.2): 5 PASS / 2 MARGINAL / 1 FAIL** — PASS = UFD v=5, UFD v=7, UFD v=10, dSph v=15 (Horigome+ 2025 Table II), Cloud-9 v=28 (BLN24 / Ohana+ 2026 floor 128); MARGINAL = UFD v=3, Cluster v=500; FAIL = SPARC v=100 (Lelli+ 2016)
+   - **canonical Phase-44 parameters (archived-pair amplitudes as fitted: σ₀=0.052, a=1.93, σ_peak=174, v_target=29.4, σ₁=4.4 with f_H=0.297; live pair: σ₀=0.008150396851725193, σ_peak=27.272481773080454 with f_H=0.7501856343179664 — finding F26, §2.6 pairing note): 1 PASS / 0 MARGINAL / 7 FAIL** — PASS = Cluster v=500 (Randall+ 2008) only
+   - **v19.2-E A.2 5-parameter DE best fit (archived-pair amplitudes as fitted: σ₀=0.0265, a=1.198, σ_peak=2025.57, v_target=28.47, σ₁=1.2 with f_H=0.297; live pair: σ₀=0.004154, σ_peak=317.5 with f_H=0.7501856343179664 — finding F26): 5 PASS / 2 MARGINAL / 1 FAIL** — PASS = UFD v=5, UFD v=7, UFD v=10, dSph v=15 (Horigome+ 2025 Table II), Cloud-9 v=28 (BLN24 / Ohana+ 2026 floor 128); MARGINAL = UFD v=3, Cluster v=500; FAIL = SPARC v=100 (Lelli+ 2016)
    - **under the older self-normalized σ_unc convention (σ_unc = σ_obs, T206)** the same two parameter sets give 2 PASS / 1 MARGINAL / 5 FAIL and 6 PASS / 2 MARGINAL / 0 FAIL
    - **RETIRED literal (finding F16, 2026-11-05):** this section previously quoted "4 PASS / 3 MARGINAL / 1 FAIL" (PASS = Cluster v=500, **dSph v=10**, Cloud-9 v=28, SPARC v=100; MARGINAL = UFD v=3, UFD v=5, **UFD v=15**; FAIL = **dSph v=7**, factor 11.6× over). That tally is not reproducible from any stored parameter set or σ_unc convention (the four reproducible tallies are 1/0/7, 2/1/5, 5/2/1, 6/2/0), and its halo-type labels (dSph v=10, UFD v=15, dSph v=7) contradict the list the likelihood evaluates (UFD v=7, UFD v=10, dSph v=15). Kept verbatim in `canonical_numbers.py` as `RETIRED_ABSTRACT_CHANNEL_COUNT_4_3_1`
    - **v=150 Lei/Wang** is the R88(87) TUNING statement and is **not** one of the eight counted slots
@@ -2279,7 +2284,7 @@ Every tally below is computed from that taxonomy under a named convention; the p
 | PASS (5) | UFD v=7 (Horigome+ 2025 Table II) |
 | PASS (5) | UFD v=10 (Horigome+ 2025 Table II) |
 | PASS (5) | dSph v=15 (Horigome+ 2025 Table II) |
-| PASS (5) | Cloud-9 v=28 (BLN24 / Ohana+ 2026) |
+| PASS (5) | Cloud-9 v=28 (INTERNAL anchor (F21); was "BLN24 / Ohana+ 2026") |
 | MARGINAL (2) | UFD v=3 (Horigome+ 2025 Table II) |
 | MARGINAL (2) | Cluster v=500 (Randall+ 2008) |
 | FAIL (1) | SPARC v=100 (Lelli+ 2016) |
@@ -2297,28 +2302,28 @@ Every tally below is computed from that taxonomy under a named convention; the p
 
 | v [km/s] | Channel | σ_obs | σ_unc | kind | σ_HH | σ_eff | verdict |
 |---|---|---|---|---|---|---|---|
-| 3 | UFD v=3 | 0.155 | 0.05 | ceiling | 45.2 | 3.987 | **FAIL** |
-| 5 | UFD v=5 | 0.093 | 0.05 | ceiling | 16.9 | 1.488 | **FAIL** |
-| 7 | UFD v=7 | 0.067 | 0.05 | ceiling | 8.81 | 0.7771 | **FAIL** |
-| 10 | UFD v=10 | 0.047 | 0.05 | ceiling | 4.44 | 0.3913 | **FAIL** |
-| 15 | dSph v=15 | 0.032 | 0.04 | ceiling | 2.85 | 0.251 | **FAIL** |
-| 28 | Cloud-9 v=28 | 128 | 30 | floor | 166 | 14.64 | **FAIL** |
-| 100 | SPARC v=100 | 0.193 | 0.05 | gaussian | 0.052 | 0.004587 | **FAIL** |
-| 500 | Cluster v=500 | 0.00025 | 0.0005 | ceiling | 0.00233 | 0.0002054 | **PASS** |
+| 3 | UFD v=3 | 0.155 | 0.05 | ceiling | 7.08 | 3.987 | **FAIL** |
+| 5 | UFD v=5 | 0.093 | 0.05 | ceiling | 2.64 | 1.488 | **FAIL** |
+| 7 | UFD v=7 | 0.067 | 0.05 | ceiling | 1.38 | 0.7771 | **FAIL** |
+| 10 | UFD v=10 | 0.047 | 0.05 | ceiling | 0.695 | 0.3913 | **FAIL** |
+| 15 | dSph v=15 | 0.032 | 0.04 | ceiling | 0.446 | 0.251 | **FAIL** |
+| 28 | Cloud-9 v=28 | 128 | 30 | floor | 26 | 14.64 | **FAIL** |
+| 100 | SPARC v=100 | 0.193 | 0.05 | gaussian | 0.00815 | 0.004587 | **FAIL** |
+| 500 | Cluster v=500 | 0.00025 | 0.0005 | ceiling | 0.000365 | 0.0002054 | **PASS** |
 | | **TOTAL (v19_2_D_canonical_phase_44, published_sigma_unc)** | | | | | | **1 PASS / 0 MARGINAL / 7 FAIL** |
 
-**Per-channel pass/fail at v19.2-E A.2 5-param DE best-fit (σ₀=0.0265, a=1.198, σ_peak=2026, v_target=28.47, σ₁=1.2):**
+**Per-channel pass/fail at v19.2-E A.2 5-param DE best-fit (archived-pair amplitudes as fitted: σ₀=0.0265, a=1.198, σ_peak=2026, v_target=28.47, σ₁=1.2; live pair: σ₀=0.004154, σ_peak=317.5 with f_H=0.750186; σ_HH/σ_eff below are computed with the live pair, finding F26):**
 
 | v [km/s] | Channel | σ_obs | σ_unc | kind | σ_HH | σ_eff | verdict |
 |---|---|---|---|---|---|---|---|
-| 3 | UFD v=3 | 0.155 | 0.05 | ceiling | 1.77 | 0.156 | **MARGINAL** |
-| 5 | UFD v=5 | 0.093 | 0.05 | ceiling | 0.959 | 0.0846 | **PASS** |
-| 7 | UFD v=7 | 0.067 | 0.05 | ceiling | 0.641 | 0.05654 | **PASS** |
-| 10 | UFD v=10 | 0.047 | 0.05 | ceiling | 0.418 | 0.03688 | **PASS** |
-| 15 | dSph v=15 | 0.032 | 0.04 | ceiling | 0.257 | 0.02269 | **PASS** |
-| 28 | Cloud-9 v=28 | 128 | 30 | floor | 1.88e+03 | 165.5 | **PASS** |
-| 100 | SPARC v=100 | 0.193 | 0.05 | gaussian | 0.0265 | 0.002338 | **FAIL** |
-| 500 | Cluster v=500 | 0.00025 | 0.0005 | ceiling | 0.00385 | 0.0003399 | **MARGINAL** |
+| 3 | UFD v=3 | 0.155 | 0.05 | ceiling | 0.277 | 0.156 | **MARGINAL** |
+| 5 | UFD v=5 | 0.093 | 0.05 | ceiling | 0.15 | 0.0846 | **PASS** |
+| 7 | UFD v=7 | 0.067 | 0.05 | ceiling | 0.1 | 0.05654 | **PASS** |
+| 10 | UFD v=10 | 0.047 | 0.05 | ceiling | 0.0655 | 0.03688 | **PASS** |
+| 15 | dSph v=15 | 0.032 | 0.04 | ceiling | 0.0403 | 0.02269 | **PASS** |
+| 28 | Cloud-9 v=28 | 128 | 30 | floor | 294 | 165.5 | **PASS** |
+| 100 | SPARC v=100 | 0.193 | 0.05 | gaussian | 0.00415 | 0.002338 | **FAIL** |
+| 500 | Cluster v=500 | 0.00025 | 0.0005 | ceiling | 0.000604 | 0.0003399 | **MARGINAL** |
 | | **TOTAL (v19_2_E_A2_5param_DE_best_fit, published_sigma_unc)** | | | | | | **5 PASS / 2 MARGINAL / 1 FAIL** |
 
 **Trade-off factors (canonical, R88(88)):**
@@ -2352,7 +2357,7 @@ sigma_eff(Cloud-9) ~ 0.15 vs 50 (factor ~300x), sigma_eff(SPARC) ~ 0.0001 vs 0.1
   - Factor vs constraint: pass_window_sigma_peak2_cm2_per_g_min=1.11, pass_window_sigma_peak2_cm2_per_g_max=3.33
   - Reference: R88(87)
 - **[OPEN]** **Background UV derivation (open requirement, NOT a no-go)** (§2.8 (v19.2-F Phase 1+2))
-  - Argument: The background sigma/m = 0.052*(100/v)^1.93 is a phenomenological fit. The framework's named 200 eV Yukawa at alpha_chi = 6.8e-7 fails at v=100 by 55x and overproduces at v=10 by ~4300x; the fitted slope is closer to a Sommerfeld v^-2 near a t-channel bound-state resonance (M2 mechanism, Chu+ 2018 [7]). A first-principles derivation is open (v19.2-F Phase 3). NOT a UV completion no-go while M2 is open.
+  - Argument: The background sigma/m = 0.008150396851725193*(100/v)^1.93 in the live canonical pairing (0.052*(100/v)^1.93 in the archived f_H = 0.297 pair) is a phenomenological fit. The framework's named 200 eV Yukawa at alpha_chi = 6.8e-7 fails at v=100 by 55x and overproduces at v=10 by ~4300x; the fitted slope is closer to a Sommerfeld v^-2 near a t-channel bound-state resonance (M2 mechanism, Chu+ 2018 [7]). A first-principles derivation is open (v19.2-F Phase 3). NOT a UV completion no-go while M2 is open.
   - Factor vs constraint: yukawa_at_alpha_chi_v100_factor_over_fitted=55.0, yukawa_at_alpha_chi_v10_factor_over_fitted=4300.0
   - Reference: ClawsGO Phase 1+2 (v19.2-F P1+2)
 

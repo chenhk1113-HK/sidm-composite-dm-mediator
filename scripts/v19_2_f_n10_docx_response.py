@@ -27,31 +27,32 @@ REPO = Path(__file__).resolve().parents[1]
 
 # Constants from constants.py
 T_HUBBLE_GYR = 13.8
-SIGMA_0_CM2_PER_G = 0.052  # Yukawa background amplitude (Phase 44)
-SIGMA_PEAK_CM2_PER_G = 174.0  # Gaussian peak amplitude (canonical)
+# PAIRING: ARCHIVED PAIR (f_H = 0.297 with sigma_0 = 0.052, sigma_peak = 174).
+SIGMA_0_CM2_PER_G_ARCHIVED = 0.052  # Yukawa background amplitude (Phase 44)
+SIGMA_PEAK_CM2_PER_G_ARCHIVED = 174.0  # Gaussian peak amplitude (canonical)
 V_TARGET_KMS = 29.4  # Peak center velocity
 SIGMA_KMS = 4.4  # Peak width
 A_SLOPE = 1.93  # Yukawa slope
 V_REF_KMS = 100.0  # Reference velocity
-F_H_PLACEHOLDER = 0.297  # f_H placeholder (retracted v18.29)
+F_H_ARCHIVED_PAIR_0297 = 0.297  # archived pair (retracted v18.29)
 
 # Cloud-9 halo (from constants.py)
 CLOUD9 = {"V_max_kms": 28.0, "M_halo_Msun": 5e9}
 
 
-def sigma_m_canonical(v, peak_amplitude=SIGMA_PEAK_CM2_PER_G):
+def sigma_m_canonical(v, peak_amplitude=SIGMA_PEAK_CM2_PER_G_ARCHIVED):
     """v19.2-F canonical sigma/m(v) = Yukawa background + Gaussian peak.
 
     This is the ACTUAL project formula (matches scripts/v19_2_f_no_peak_analysis.py).
     """
-    yukawa = SIGMA_0_CM2_PER_G * (V_REF_KMS / v) ** A_SLOPE
+    yukawa = SIGMA_0_CM2_PER_G_ARCHIVED * (V_REF_KMS / v) ** A_SLOPE
     if peak_amplitude == 0:
         return yukawa  # No peak
     gaussian = peak_amplitude * math.exp(-((v - V_TARGET_KMS)**2) / (2 * SIGMA_KMS**2))
     return yukawa + gaussian
 
 
-def cloud9_tau_actual(peak_amplitude=SIGMA_PEAK_CM2_PER_G, f_H=F_H_PLACEHOLDER):
+def cloud9_tau_actual(peak_amplitude=SIGMA_PEAK_CM2_PER_G_ARCHIVED, f_H=F_H_ARCHIVED_PAIR_0297):
     """Cloud-9 tau using the ACTUAL project formula.
 
     tau = T_HUBBLE_GYR / t_core (per gravothermal_yang2024.py + Yang+ 2024 Eq. 2.2)
@@ -81,12 +82,12 @@ def verify_tau_values():
     print("=" * 70)
     print()
     print("Project constants used:")
-    print(f"  SIGMA_0_CM2_PER_G = {SIGMA_0_CM2_PER_G} (Yukawa amplitude, Phase 44)")
-    print(f"  SIGMA_PEAK_CM2_PER_G = {SIGMA_PEAK_CM2_PER_G} (Gaussian peak amplitude)")
+    print(f"  SIGMA_0_CM2_PER_G_ARCHIVED = {SIGMA_0_CM2_PER_G_ARCHIVED} (Yukawa amplitude, Phase 44)")
+    print(f"  SIGMA_PEAK_CM2_PER_G_ARCHIVED = {SIGMA_PEAK_CM2_PER_G_ARCHIVED} (Gaussian peak amplitude)")
     print(f"  V_TARGET_KMS = {V_TARGET_KMS} (peak center)")
     print(f"  A_SLOPE = {A_SLOPE}")
     print(f"  T_HUBBLE_GYR = {T_HUBBLE_GYR}")
-    print(f"  F_H_PLACEHOLDER = {F_H_PLACEHOLDER} (retracted v18.29)")
+    print(f"  F_H_ARCHIVED_PAIR_0297 = {F_H_ARCHIVED_PAIR_0297} (retracted v18.29)")
     print()
     print("Canonical (with peak, peak_amplitude=174):")
     tau_c, t_c, sigma_eff_c, sigma_m_c = cloud9_tau_actual(174.0)

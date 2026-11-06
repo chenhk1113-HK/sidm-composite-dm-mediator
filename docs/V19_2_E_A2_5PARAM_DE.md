@@ -44,7 +44,10 @@ popsize=25, seed=42, prior (σ_peak up to 5000).
 | SPARC v=100 | 100 | 0.0023 | 0.193 | 0.05 | **FAIL** (factor 84× under) |
 | Cluster v=500 | 500 | 3.4×10⁻⁴ | 2.5×10⁻⁴ | 5×10⁻⁴ | **MARGINAL** |
 
-Best-fit parameters (5-param DE on canonical Gaussian form):
+Best-fit parameters (5-param DE on canonical Gaussian form). These are the amplitudes the fit was
+**produced under**, i.e. the archived pair with f_H = 0.297 (finding F26); the equivalent live-pair
+amplitudes are σ_0 = 0.004154 cm²/g and σ_peak = 317.5 cm²/g with f_H = 0.7501856343179664, and both
+pairs give the same σ_eff, so no verdict in this document changes:
 - σ_0 = 0.0265 cm²/g (background amplitude)
 - a_slope = 1.20 (background velocity exponent)
 - σ_peak = 2026 cm²/g (Gaussian peak height)

@@ -74,12 +74,23 @@ This is the canonical source for paper authentication. When a new loop uses a va
 | A_SLOPE | 1.93 | Yang+ 2024 fit (Eq 4, 19, 20, Tables 2-3) | **TO VERIFY exact source** |
 | V_REF_KMS | 100.0 | Convention | OK |
 | A_SLOPE_OPTION_A | 1.0 | Alternative | OK (alternative model) |
-| F_H_CANONICAL | 0.297 | Hydrogen fraction | **TO VERIFY** (standard value ~0.75 for mass fraction, 0.92 for number fraction; 0.297 is unusual) |
-| SIGMA_0_CM2_PER_G | 0.052 | Yang+ 2024 fit (Cloud-9) | OK (project internal) |
-| SIGMA_PEAK_CM2_PER_G | 174.0 | Project target | OK |
+| F_H_CANONICAL | 0.7501856343179664 | phase44_two_component.f_H_at_r(0.05, core-forming) — **LIVE PAIR** | **RESOLVED 2026-11-06 (finding F26)**; consistent with the standard hydrogen mass fraction Y_p ~ 0.75. The 0.297 was the v18.29-retracted placeholder and is archived as `F_H_LEGACY_PLACEHOLDER_0297` |
+| SIGMA_0_CM2_PER_G | 0.008150396851725193 | = 0.052 x 0.15673840099471523 — **LIVE PAIR** (finding F26) | OK (project internal); the archived-pair value 0.052 is kept as `SIGMA_0_LEGACY_PAIR_052` |
+| SIGMA_PEAK_CM2_PER_G | 27.272481773080454 | = 174.0 x 0.15673840099471523 — **LIVE PAIR** (finding F26) | OK (project internal); the archived-pair value 174.0 is kept as `SIGMA_PEAK_LEGACY_PAIR_174` |
 | G_CHI | 8.351e-3 (= sqrt(4π·5.55e-6)) | From α_D | OK (matches root) |
 
-**⚠️ NOTE: F_H_CANONICAL = 0.297 is anomalous.** Standard hydrogen mass fraction Y_p ≈ 0.75 (from BBN); standard cosmic baryon fraction Ω_b/Ω_m ≈ 0.157; standard hydrogen number fraction X ≈ 0.92. The value 0.297 doesn't match any standard cosmology constant. Either it has a project-specific definition (e.g., a "dark sector equivalent" or a specific scaling factor for the model), or it's a typo. **TO VERIFY** with original project source.
+**PAIRING NOTE (RESOLVED 2026-11-06, findings F25/F26/F28; owner decision "call 1 repair").** `f_H` is exactly
+degenerate with the fitted amplitudes: `sigma_eff = f_H^2 x sigma/m` is unchanged when `f_H` and both amplitudes
+are rescaled together, so the three numbers above are one atomic pair and must never be mixed across pairs.
+`PAIRING_K_LEGACY_TO_CANONICAL = 0.15673840099471523 = 0.297^2 / 0.7501856343179664^2`, inverse
+`6.380057431067687`. The live pair is `f_H = 0.7501856343179664` with `sigma_0 = 0.008150396851725193` and
+`sigma_peak = 27.272481773080454 cm^2/g`; the archived pair is `0.297 / 0.052 / 174.0`. Halo-level predictions
+(`sigma_eff`) are identical between the pairs to 1.9e-16; what the choice decides is which number is the
+**particle-level** cross section, and the `174 cm^2/g` causality-cap narrative belongs to the archived pair.
+`scripts/constants.py` asserts the pair at import, `scripts/fH_pairing_registry.py` publishes which pairing every
+module uses (`v0.3-prelim/data/results/fH_pairing_registry.json`), and an archived value may only appear in a
+module under an archived-looking name. Earlier text in this registry that quotes `0.052` or `174.0` is
+archived-pair raw amplitude, not the live pair.
 
 ### Halo catalogue (from v40.x JSONs)
 | Halo | σ_v (km/s) | Citation | Status |
@@ -124,9 +135,12 @@ q² = 2 μ² v² (1 - cos θ)
 
 ### σ/m Gaussian background (Cloud-9 fit)
 ```
-σ_m(v) = 0.052 × (100/v)^1.93 + 174 × exp(-(v - 29.4)² / (2 × 4.4²))   [v in km/s]
+σ_m(v) = 0.052 × (100/v)^1.93 + 174 × exp(-(v - 29.4)² / (2 × 4.4²))   [v in km/s]   # ARCHIVED PAIR (f_H = 0.297)
 ```
-**STATUS: Empirically correct from Cloud-9 fit**. A_SLOPE = 1.93 and SIGMA_0 = 0.052 match Yang+ 2024.
+**STATUS: Empirically correct from Cloud-9 fit**, and it is the **archived pair**: A_SLOPE = 1.93 with
+`sigma_0 = 0.052` and `sigma_peak = 174` (matching Yang+ 2024) pair with `f_H = 0.297`. The live pair
+(finding F26) writes the same curve as `0.008150396851725193 × (100/v)^1.93 + 27.272481773080454 × exp(...)`
+with `f_H = 0.7501856343179664`, and gives the same `sigma_eff`.
 
 ### Gravothermal collapse time (Yang+ 2024 eq. 2.2 in v40.4/v40.9 docs)
 ```
@@ -165,7 +179,7 @@ f_MB(v) = 4π v² exp(-(v/v_0)²) / (sqrt(π) v_0³)
 | "Yang+ 2024 eq. 2.2" citation likely wrong (v31 says eqs. 4, 19, 20) | MED | v40.4, v40.7, v40.9, v40.12 | Patch in v40.13 to "eq. 19 or 20" |
 | Cloud-9 NFW v_max: ~10 km/s (claim) vs ~36 km/s (actual) | HIGH | docs/CLOUD9_REBASELINE.md, docs/papers/concepts/Cloud-9 Galaxy.md | **Fixed in v40.21** with full derivation (M=5e9, c=15, R_200=28 kpc, r_s=1.85 kpc gives v_max=~36 km/s). The "~10 km/s" was an error; the gas W_50=12 km/s is the gas line width (T~2×10⁴ K), not the DM V_max. Nemotron 120B confirmed. |
 | Bootes I, Tri II, Leo T σ_v have no explicit citation | MED | v40.5, v40.10, v40.12 | Add citation in v40.13 |
-| F_H_CANONICAL = 0.297 in scripts/constants.py | NOT A BUG (v40.15) | verified | This is a **project-internal phenomenological fit** (Phase G7), not the standard cosmological Y_p ≈ 0.75. The docstring says: "σ_eff = f_H² × σ/m with f_H=0.297" (paper §2.6 "σ_eff formula (R88)"). The discrepancy with Y_p is because they're different quantities: F_H is an empirical f_H that modulates σ_eff vs σ_HH, not a BBN mass fraction. R88(88) caveat: project's own N-body Phase G9 found f_H drop 0.94-1.01×, a flat f_H(r). |
+| F_H_CANONICAL = 0.297 in scripts/constants.py | SUPERSEDED 2026-11-06 (finding F26): 0.297 is now `F_H_LEGACY_PLACEHOLDER_0297`, archived; the live value is `F_H_CANONICAL = 0.7501856343179664` | verified | This is a **project-internal phenomenological fit** (Phase G7), not the standard cosmological Y_p ≈ 0.75. The docstring says: "σ_eff = f_H² × σ/m with f_H=0.297" (paper §2.6 "σ_eff formula (R88)"). The discrepancy with Y_p is because they're different quantities: F_H is an empirical f_H that modulates σ_eff vs σ_HH, not a BBN mass fraction. R88(88) caveat: project's own N-body Phase G9 found f_H drop 0.94-1.01×, a flat f_H(r). |
 | v_0 = sqrt(2)·σ_v_los convention: standard is v_0² = 2·σ_v² (consistent) | OK | (no fix needed) | — |
 | Andrade+ 2022 MNRAS 510, 54 — no arXiv ID, no DOI | LOW | v40.11 doc | Add in v40.13 |
 | Kaplinghat+ 2016 — no arXiv ID, no DOI; possibly conflated with Tulin+ 2013/2018 | LOW (v40.15) | v40.11 doc, constants.py | VERIFIED: Kaplinghat, Tulin, Yu 2016 is PRL 116, 041302, arXiv:1508.03339 ("Dark Matter Halos as Particle Colliders"). 797 citations (close to v40.11's "~600" claim, off by 200). The other key review is Tulin & Yu 2018, Phys. Rep. 730, 1-57, arXiv:1705.02358 (1100+ citations, already downloaded). Both references are real and worth citing; the v40.11 doc's "~600 citations" should be updated to ~800 for the PRL or to ~1100 for the Phys. Rep. |

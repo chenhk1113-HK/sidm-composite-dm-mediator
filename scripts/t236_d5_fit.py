@@ -25,16 +25,12 @@ from pathlib import Path
 
 SCRIPT_DIR = Path(__file__).parent
 sys.path.insert(0, str(SCRIPT_DIR))
-from constants import (
-    M_CHI_GEV,
-    V_TARGET_KMS,
-    SIGMA_KMS,
-    SIGMA_PEAK_CM2_PER_G,
-    M_NUCLEON_GEV,
+from constants import (  # PAIRING: ARCHIVED PAIR (sigma-only consumer)
+    M_CHI_GEV, V_TARGET_KMS, SIGMA_KMS, SIGMA_PEAK_LEGACY_PAIR_174 as SIGMA_PEAK_CM2_PER_G_ARCHIVED, M_NUCLEON_GEV,
 )
 
 
-def sigma_m(v_kms, v_target=V_TARGET_KMS, sigma_kms=SIGMA_KMS, sigma_peak=SIGMA_PEAK_CM2_PER_G):
+def sigma_m(v_kms, v_target=V_TARGET_KMS, sigma_kms=SIGMA_KMS, sigma_peak=SIGMA_PEAK_CM2_PER_G_ARCHIVED):
     """Single-Gaussian sigma/m(v) in cm^2/g. No background Yukawa — paper convention
     uses 0.052 * (v/100)^-1 background but the dSph constraints come from the
     Gaussian tail which dominates the dSph channels.
@@ -240,7 +236,7 @@ def d5_fit_main():
             "M_CHI_GEV": M_CHI_GEV,
             "V_TARGET_KMS": V_TARGET_KMS,
             "SIGMA_KMS_BASELINE": SIGMA_KMS,
-            "SIGMA_PEAK_CM2_PER_G": SIGMA_PEAK_CM2_PER_G,
+            "SIGMA_PEAK_CM2_PER_G_ARCHIVED": SIGMA_PEAK_CM2_PER_G_ARCHIVED,
         },
         "channels": CHANNELS,
         "sigma_1_values": sigma_1_values,

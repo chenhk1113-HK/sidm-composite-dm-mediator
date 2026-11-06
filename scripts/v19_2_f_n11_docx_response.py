@@ -26,27 +26,28 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[1]
 
 T_HUBBLE_GYR = 13.8
-SIGMA_0_CM2_PER_G = 0.052
-SIGMA_PEAK_CM2_PER_G = 174.0
+# PAIRING: ARCHIVED PAIR (f_H = 0.297 with sigma_0 = 0.052, sigma_peak = 174).
+SIGMA_0_CM2_PER_G_ARCHIVED = 0.052
+SIGMA_PEAK_CM2_PER_G_ARCHIVED = 174.0
 V_TARGET_KMS = 29.4
 SIGMA_KMS = 4.4
 A_SLOPE = 1.93
 V_REF_KMS = 100.0
-F_H_PLACEHOLDER = 0.297
+F_H_ARCHIVED_PAIR_0297 = 0.297
 CLOUD9_V_MAX = 28.0
 CLOUD9_M_HALO = 5e9
 
 
-def sigma_m_canonical(v, peak_amplitude=SIGMA_PEAK_CM2_PER_G):
+def sigma_m_canonical(v, peak_amplitude=SIGMA_PEAK_CM2_PER_G_ARCHIVED):
     """v19.2-F canonical sigma/m(v) = Yukawa background + Gaussian peak."""
-    yukawa = SIGMA_0_CM2_PER_G * (V_REF_KMS / v) ** A_SLOPE
+    yukawa = SIGMA_0_CM2_PER_G_ARCHIVED * (V_REF_KMS / v) ** A_SLOPE
     if peak_amplitude == 0:
         return yukawa
     gaussian = peak_amplitude * math.exp(-((v - V_TARGET_KMS)**2) / (2 * SIGMA_KMS**2))
     return yukawa + gaussian
 
 
-def cloud9_tau_via_t212(peak_amplitude=SIGMA_PEAK_CM2_PER_G, f_H=F_H_PLACEHOLDER):
+def cloud9_tau_via_t212(peak_amplitude=SIGMA_PEAK_CM2_PER_G_ARCHIVED, f_H=F_H_ARCHIVED_PAIR_0297):
     """Cloud-9 tau using ACTUAL t212_evaluate (matches v40.46 script)."""
     sys.path.insert(0, str(REPO / "v0.3-prelim" / "code"))
     from t212_silverman_gravothermal import evaluate as t212_evaluate
@@ -73,7 +74,7 @@ def independent_verification():
     print("Canonical (with peak):")
     sigma_m = sigma_m_canonical(v=28, peak_amplitude=174.0)
     print(f"  Step 1: sigma_m(v=28) = {sigma_m:.4f} cm^2/g")
-    sigma_eff = F_H_PLACEHOLDER**2 * sigma_m
+    sigma_eff = F_H_ARCHIVED_PAIR_0297**2 * sigma_m
     print(f"  Step 2: sigma_eff = 0.297^2 * {sigma_m:.4f} = {sigma_eff:.4f} cm^2/g")
     tau_c, t_core_c, _, _ = cloud9_tau_via_t212(174.0)
     print(f"  Step 3: t212_evaluate({sigma_eff:.4f}, M_halo=5e9, c=12) = {t_core_c:.4f} Gyr")
@@ -85,7 +86,7 @@ def independent_verification():
     print("Downgraded (peak=0):")
     sigma_m_no = sigma_m_canonical(v=28, peak_amplitude=0.0)
     print(f"  Step 1: sigma_m(v=28) = {sigma_m_no:.4f} cm^2/g (Yukawa only)")
-    sigma_eff_no = F_H_PLACEHOLDER**2 * sigma_m_no
+    sigma_eff_no = F_H_ARCHIVED_PAIR_0297**2 * sigma_m_no
     print(f"  Step 2: sigma_eff = 0.297^2 * {sigma_m_no:.4f} = {sigma_eff_no:.4f} cm^2/g")
     tau_d, t_core_d, _, _ = cloud9_tau_via_t212(0.0)
     print(f"  Step 3: t212_evaluate({sigma_eff_no:.4f}, M_halo=5e9, c=12) = {t_core_d:.4f} Gyr")

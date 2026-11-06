@@ -9,26 +9,34 @@
       "C   = dba12e1 (data-only sigma/m(v) constraint, 2/4 PASS)",
       "D   = THIS FILE (machine-generated canonical numbers)"
     ],
-    "constants_source": "scripts/constants.py (F_H_CANONICAL = 0.297 added R88(82) A.1)",
+    "constants_source": "scripts/constants.py (F_H_CANONICAL live = 0.7501856343179664; 0.297 was the v18.29-retracted placeholder and is archived as F_H_LEGACY_PLACEHOLDER_0297 -- finding F25)",
     "channels_source": "T205_full_likelihood_published.OBS_PUBLISHED (8 channels with published sigma_unc)"
   },
   "v19_2_D_canonical_phase_44_free_fit": {
-    "sigma_0": 0.052,
+    "sigma_0": 0.008150396851725193,
     "a_slope": 1.93,
     "v_ref": 100.0,
-    "sigma_peak": 174.0,
+    "sigma_peak": 27.272481773080454,
     "v_target": 29.4,
     "sigma_1": 4.4,
-    "F_H": 0.297,
-    "interpretation": "Paper canonical Gaussian sigma/m(v) per section 2.6. sigma_peak=174 is the CAUSALITY CAP (not the Phase 44 free-fit value 178.5; per R88(76))."
+    "F_H": 0.7501856343179664,
+    "interpretation": "Paper canonical Gaussian sigma/m(v) per section 2.6. The 174 cm^2/g causality cap (not the Phase 44 free-fit value 178.5; per R88(76)) is the ARCHIVED pair's sigma_peak, i.e. 174.0 with f_H = 0.297; it does not cap the live particle-level amplitude 27.272481773080454 cm^2/g. Both pairs give the same sigma_eff (finding F26)."
   },
   "v19_2_E_A2_5param_DE_best_fit": {
     "sigma_0": 0.0265,
     "a_slope": 1.198,
-    "sigma_peak": 2025.57,
+    "sigma_peak": 2025.5700000000002,
     "v_target": 28.47,
     "sigma_1": 1.2,
     "F_H": 0.297,
+    "pairing_of_the_values_above": "ARCHIVED PAIR",
+    "live_pair_equivalent": {
+      "sigma_0": 0.004153567626359954,
+      "sigma_peak": 317.4846029028654,
+      "F_H": 0.7501856343179664,
+      "note": "same sigma_eff; each amplitude divided by 6.380057431067687 (finding F26)"
+    },
+    "F_H_canonical": 0.7501856343179664,
     "logL": -7.29,
     "interpretation": "5-param DE best-fit to 8-channel T205 published-sigma_unc likelihood. Wider prior (sigma_peak up to 5000). Found 5 of 8 channels PASS (2 MARGINAL, 1 FAIL). sigma_peak=2026 is 12x the v19.2-D canonical 174, at the upper edge of the prior."
   },
@@ -39,7 +47,7 @@
       "kind": "ceiling",
       "sigma_obs": 0.155,
       "sigma_unc": 0.05,
-      "sigma_HH_at_v": 45.20217657770099,
+      "sigma_HH_at_v": 7.084916878269623,
       "sigma_eff": 3.9872387937424265,
       "verdict": "FAIL",
       "citation": "Horigome+ 2025 Table II"
@@ -50,8 +58,8 @@
       "kind": "ceiling",
       "sigma_obs": 0.093,
       "sigma_unc": 0.05,
-      "sigma_HH_at_v": 16.865226429437705,
-      "sigma_eff": 1.4876647581142703,
+      "sigma_HH_at_v": 2.643428622963877,
+      "sigma_eff": 1.4876647581142706,
       "verdict": "FAIL",
       "citation": "Horigome+ 2025 Table II"
     },
@@ -61,7 +69,7 @@
       "kind": "ceiling",
       "sigma_obs": 0.067,
       "sigma_unc": 0.05,
-      "sigma_HH_at_v": 8.810170885877744,
+      "sigma_HH_at_v": 1.3808920971426715,
       "sigma_eff": 0.7771363636723899,
       "verdict": "FAIL",
       "citation": "Horigome+ 2025 Table II"
@@ -72,8 +80,8 @@
       "kind": "ceiling",
       "sigma_obs": 0.047,
       "sigma_unc": 0.05,
-      "sigma_HH_at_v": 4.43636954684815,
-      "sigma_eff": 0.3913277213579284,
+      "sigma_HH_at_v": 0.6953494689946286,
+      "sigma_eff": 0.3913277213579285,
       "verdict": "FAIL",
       "citation": "Horigome+ 2025 Table II"
     },
@@ -83,7 +91,7 @@
       "kind": "ceiling",
       "sigma_obs": 0.032,
       "sigma_unc": 0.04,
-      "sigma_HH_at_v": 2.8454570671911887,
+      "sigma_HH_at_v": 0.44599239081065895,
       "sigma_eff": 0.25099492243986754,
       "verdict": "FAIL",
       "citation": "Horigome+ 2025 Table II"
@@ -94,10 +102,10 @@
       "kind": "floor",
       "sigma_obs": 128.0,
       "sigma_unc": 30.0,
-      "sigma_HH_at_v": 166.01808042318618,
-      "sigma_eff": 14.64428885604883,
+      "sigma_HH_at_v": 26.021408461742244,
+      "sigma_eff": 14.644288856048831,
       "verdict": "FAIL",
-      "citation": "BLN24 / Ohana+ 2026"
+      "citation": "INTERNAL anchor (F21); was \"BLN24 / Ohana+ 2026\""
     },
     {
       "v_kms": 100.0,
@@ -105,8 +113,8 @@
       "kind": "gaussian",
       "sigma_obs": 0.193,
       "sigma_unc": 0.05,
-      "sigma_HH_at_v": 0.052,
-      "sigma_eff": 0.004586867999999999,
+      "sigma_HH_at_v": 0.008150396851725193,
+      "sigma_eff": 0.004586868,
       "verdict": "FAIL",
       "citation": "Lelli+ 2016"
     },
@@ -116,7 +124,7 @@
       "kind": "ceiling",
       "sigma_obs": 0.00025,
       "sigma_unc": 0.0005,
-      "sigma_HH_at_v": 0.0023280442736601657,
+      "sigma_HH_at_v": 0.00036489393689839765,
       "sigma_eff": 0.00020535445733528955,
       "verdict": "PASS",
       "citation": "Randall+ 2008"
@@ -129,8 +137,8 @@
       "kind": "ceiling",
       "sigma_obs": 0.155,
       "sigma_unc": 0.05,
-      "sigma_HH_at_v": 1.7687017714260407,
-      "sigma_eff": 0.15601541455571963,
+      "sigma_HH_at_v": 0.27722348748983794,
+      "sigma_eff": 0.1560154145557196,
       "verdict": "MARGINAL",
       "citation": "Horigome+ 2025 Table II"
     },
@@ -140,8 +148,8 @@
       "kind": "ceiling",
       "sigma_obs": 0.093,
       "sigma_unc": 0.05,
-      "sigma_HH_at_v": 0.9591351535543553,
-      "sigma_eff": 0.08460435275987613,
+      "sigma_HH_at_v": 0.1503333103059303,
+      "sigma_eff": 0.08460435275987611,
       "verdict": "PASS",
       "citation": "Horigome+ 2025 Table II"
     },
@@ -151,8 +159,8 @@
       "kind": "ceiling",
       "sigma_obs": 0.067,
       "sigma_unc": 0.05,
-      "sigma_HH_at_v": 0.6409415436688206,
-      "sigma_eff": 0.056536812625483,
+      "sigma_HH_at_v": 0.1004601526857354,
+      "sigma_eff": 0.05653681262548299,
       "verdict": "PASS",
       "citation": "Horigome+ 2025 Table II"
     },
@@ -162,7 +170,7 @@
       "kind": "ceiling",
       "sigma_obs": 0.047,
       "sigma_unc": 0.05,
-      "sigma_HH_at_v": 0.4180669864703273,
+      "sigma_HH_at_v": 0.06552715096803836,
       "sigma_eff": 0.0368772708095611,
       "verdict": "PASS",
       "citation": "Horigome+ 2025 Table II"
@@ -173,8 +181,8 @@
       "kind": "ceiling",
       "sigma_obs": 0.032,
       "sigma_unc": 0.04,
-      "sigma_HH_at_v": 0.25721041231541486,
-      "sigma_eff": 0.02268827325993043,
+      "sigma_HH_at_v": 0.040314748745509534,
+      "sigma_eff": 0.022688273259930426,
       "verdict": "PASS",
       "citation": "Horigome+ 2025 Table II"
     },
@@ -184,10 +192,10 @@
       "kind": "floor",
       "sigma_obs": 128.0,
       "sigma_unc": 30.0,
-      "sigma_HH_at_v": 1876.1365988818511,
-      "sigma_eff": 165.4921332507692,
+      "sigma_HH_at_v": 294.0626505564049,
+      "sigma_eff": 165.49213325076923,
       "verdict": "PASS",
-      "citation": "BLN24 / Ohana+ 2026"
+      "citation": "INTERNAL anchor (F21); was \"BLN24 / Ohana+ 2026\""
     },
     {
       "v_kms": 100.0,
@@ -195,7 +203,7 @@
       "kind": "gaussian",
       "sigma_obs": 0.193,
       "sigma_unc": 0.05,
-      "sigma_HH_at_v": 0.0265,
+      "sigma_HH_at_v": 0.004153567626359954,
       "sigma_eff": 0.0023375385,
       "verdict": "FAIL",
       "citation": "Lelli+ 2016"
@@ -206,7 +214,7 @@
       "kind": "ceiling",
       "sigma_obs": 0.00025,
       "sigma_unc": 0.0005,
-      "sigma_HH_at_v": 0.0038537169106032704,
+      "sigma_HH_at_v": 0.0006040254264542506,
       "sigma_eff": 0.0003399325149674039,
       "verdict": "MARGINAL",
       "citation": "Randall+ 2008"
@@ -231,16 +239,16 @@
     "canonical_count_string": "5 of 8 channels pass (v19_2_E_A2_5param_DE_best_fit, published_sigma_unc)"
   },
   "tradeoff_factors_v19_2_D_canonical": {
-    "cloud9_factor_below_50": 3.414300311301732,
-    "sparc_factor_below_0p19": 42.076641403240735,
+    "cloud9_factor_below_50": 3.4143003113017314,
+    "sparc_factor_below_0p19": 42.07664140324073,
     "dsph_v15_factor_above_ceiling": 7.8435913262458605,
     "ufd_v3_factor_above_ceiling": 25.72412124995114
   },
   "tradeoff_factors_v19_2_E_A2_best_fit": {
-    "cloud9_factor_below_50": 0.3021291647998477,
+    "cloud9_factor_below_50": 0.30212916479984764,
     "sparc_factor_below_0p19": 82.56548501767993,
-    "dsph_v15_factor_above_ceiling": 0.7090085393728259,
-    "ufd_v3_factor_above_ceiling": 1.0065510616498041
+    "dsph_v15_factor_above_ceiling": 0.7090085393728258,
+    "ufd_v3_factor_above_ceiling": 1.006551061649804
   },
   "halo_specific_gravothermal_prefactors": {
     "BM2 cluster": {
@@ -356,7 +364,7 @@
         "affected_channels": [
           "all channels (background sigma/m)"
         ],
-        "argument": "The background sigma/m = 0.052*(100/v)^1.93 is a phenomenological fit. The framework's named 200 eV Yukawa at alpha_chi = 6.8e-7 fails at v=100 by 55x and overproduces at v=10 by ~4300x; the fitted slope is closer to a Sommerfeld v^-2 near a t-channel bound-state resonance (M2 mechanism, Chu+ 2018 [7]). A first-principles derivation is open (v19.2-F Phase 3). NOT a UV completion no-go while M2 is open.",
+        "argument": "The background sigma/m = 0.008150396851725193*(100/v)^1.93 in the live canonical pairing (0.052*(100/v)^1.93 in the archived f_H = 0.297 pair) is a phenomenological fit. The framework's named 200 eV Yukawa at alpha_chi = 6.8e-7 fails at v=100 by 55x and overproduces at v=10 by ~4300x; the fitted slope is closer to a Sommerfeld v^-2 near a t-channel bound-state resonance (M2 mechanism, Chu+ 2018 [7]). A first-principles derivation is open (v19.2-F Phase 3). NOT a UV completion no-go while M2 is open.",
         "factor_vs_constraint": {
           "yukawa_at_alpha_chi_v100_factor_over_fitted": 55.0,
           "yukawa_at_alpha_chi_v10_factor_over_fitted": 4300.0
@@ -403,6 +411,25 @@
   "canonical_abstract_channel_count": {
     "n_channels_total": 8,
     "taxonomy": "OBS_PUBLISHED as evaluated by the likelihood (T205_full_likelihood_published.OBS_PUBLISHED): UFD v=3, UFD v=5, UFD v=7, UFD v=10, dSph v=15, Cloud-9 v=28, SPARC v=100, Cluster v=500",
+    "pairing": {
+      "live_f_H": 0.7501856343179664,
+      "live_f_H_squared": 0.5627784859370496,
+      "archived_f_H": 0.297,
+      "archived_f_H_squared": 0.088209,
+      "pairing_k_legacy_to_canonical": 0.15673840099471525,
+      "pairing_k_inverse": 6.380057431067687,
+      "archived_pair_amplitudes": {
+        "v19_2_D_canonical_phase_44": {
+          "sigma_0": 0.052,
+          "sigma_peak": 174.0
+        },
+        "v19_2_E_A2_5param_DE_best_fit": {
+          "sigma_0": 0.0265,
+          "sigma_peak": 2025.5700000000002
+        }
+      },
+      "note": "sigma_eff is invariant under the pairing (measured worst relative difference 1.9e-16 across 8 channels x 2 parameter sets x 2 sigma_unc conventions, and every pass/fail tally identical). Only the particle-level amplitudes change, each by exactly pairing_k. Divide the live amplitudes by pairing_k to reproduce artifacts written before 2026-11-06. Finding F25."
+    },
     "likelihood_convention": "published_sigma_unc",
     "headline_evaluation": "v19_2_E_A2_5param_DE_best_fit",
     "n_PASS": 5,
@@ -414,7 +441,7 @@
       "UFD v=7 (Horigome+ 2025 Table II)",
       "UFD v=10 (Horigome+ 2025 Table II)",
       "dSph v=15 (Horigome+ 2025 Table II)",
-      "Cloud-9 v=28 (BLN24 / Ohana+ 2026)"
+      "Cloud-9 v=28 (INTERNAL anchor (F21); was \"BLN24 / Ohana+ 2026\")"
     ],
     "MARGINAL_channels": [
       "UFD v=3 (Horigome+ 2025 Table II)",
@@ -433,7 +460,7 @@
       "UFD v=7 (Horigome+ 2025 Table II)",
       "UFD v=10 (Horigome+ 2025 Table II)",
       "dSph v=15 (Horigome+ 2025 Table II)",
-      "Cloud-9 v=28 (BLN24 / Ohana+ 2026)",
+      "Cloud-9 v=28 (INTERNAL anchor (F21); was \"BLN24 / Ohana+ 2026\")",
       "SPARC v=100 (Lelli+ 2016)"
     ],
     "evaluations": [
@@ -441,9 +468,9 @@
         "parameter_set": "v19_2_D_canonical_phase_44",
         "convention": "published_sigma_unc",
         "params": {
-          "sigma_0": 0.052,
+          "sigma_0": 0.008150396851725193,
           "a_slope": 1.93,
-          "sigma_peak": 174.0,
+          "sigma_peak": 27.272481773080454,
           "v_target": 29.4,
           "sigma_1": 4.4
         },
@@ -460,7 +487,7 @@
             "kind": "ceiling",
             "sigma_obs": 0.155,
             "sigma_unc_used": 0.05,
-            "sigma_HH_at_v": 45.20217657770099,
+            "sigma_HH_at_v": 7.084916878269623,
             "sigma_eff": 3.9872387937424265,
             "verdict": "FAIL",
             "citation": "Horigome+ 2025 Table II"
@@ -471,8 +498,8 @@
             "kind": "ceiling",
             "sigma_obs": 0.093,
             "sigma_unc_used": 0.05,
-            "sigma_HH_at_v": 16.865226429437705,
-            "sigma_eff": 1.4876647581142703,
+            "sigma_HH_at_v": 2.643428622963877,
+            "sigma_eff": 1.4876647581142706,
             "verdict": "FAIL",
             "citation": "Horigome+ 2025 Table II"
           },
@@ -482,7 +509,7 @@
             "kind": "ceiling",
             "sigma_obs": 0.067,
             "sigma_unc_used": 0.05,
-            "sigma_HH_at_v": 8.810170885877744,
+            "sigma_HH_at_v": 1.3808920971426715,
             "sigma_eff": 0.7771363636723899,
             "verdict": "FAIL",
             "citation": "Horigome+ 2025 Table II"
@@ -493,8 +520,8 @@
             "kind": "ceiling",
             "sigma_obs": 0.047,
             "sigma_unc_used": 0.05,
-            "sigma_HH_at_v": 4.43636954684815,
-            "sigma_eff": 0.3913277213579284,
+            "sigma_HH_at_v": 0.6953494689946286,
+            "sigma_eff": 0.3913277213579285,
             "verdict": "FAIL",
             "citation": "Horigome+ 2025 Table II"
           },
@@ -504,7 +531,7 @@
             "kind": "ceiling",
             "sigma_obs": 0.032,
             "sigma_unc_used": 0.04,
-            "sigma_HH_at_v": 2.8454570671911887,
+            "sigma_HH_at_v": 0.44599239081065895,
             "sigma_eff": 0.25099492243986754,
             "verdict": "FAIL",
             "citation": "Horigome+ 2025 Table II"
@@ -515,10 +542,10 @@
             "kind": "floor",
             "sigma_obs": 128.0,
             "sigma_unc_used": 30.0,
-            "sigma_HH_at_v": 166.01808042318618,
-            "sigma_eff": 14.64428885604883,
+            "sigma_HH_at_v": 26.021408461742244,
+            "sigma_eff": 14.644288856048831,
             "verdict": "FAIL",
-            "citation": "BLN24 / Ohana+ 2026"
+            "citation": "INTERNAL anchor (F21); was \"BLN24 / Ohana+ 2026\""
           },
           {
             "v_kms": 100.0,
@@ -526,8 +553,8 @@
             "kind": "gaussian",
             "sigma_obs": 0.193,
             "sigma_unc_used": 0.05,
-            "sigma_HH_at_v": 0.052,
-            "sigma_eff": 0.004586867999999999,
+            "sigma_HH_at_v": 0.008150396851725193,
+            "sigma_eff": 0.004586868,
             "verdict": "FAIL",
             "citation": "Lelli+ 2016"
           },
@@ -537,7 +564,7 @@
             "kind": "ceiling",
             "sigma_obs": 0.00025,
             "sigma_unc_used": 0.0005,
-            "sigma_HH_at_v": 0.0023280442736601657,
+            "sigma_HH_at_v": 0.00036489393689839765,
             "sigma_eff": 0.00020535445733528955,
             "verdict": "PASS",
             "citation": "Randall+ 2008"
@@ -548,9 +575,9 @@
         "parameter_set": "v19_2_D_canonical_phase_44",
         "convention": "self_normalized_sigma_unc",
         "params": {
-          "sigma_0": 0.052,
+          "sigma_0": 0.008150396851725193,
           "a_slope": 1.93,
-          "sigma_peak": 174.0,
+          "sigma_peak": 27.272481773080454,
           "v_target": 29.4,
           "sigma_1": 4.4
         },
@@ -567,7 +594,7 @@
             "kind": "ceiling",
             "sigma_obs": 0.155,
             "sigma_unc_used": 0.155,
-            "sigma_HH_at_v": 45.20217657770099,
+            "sigma_HH_at_v": 7.084916878269623,
             "sigma_eff": 3.9872387937424265,
             "verdict": "FAIL",
             "citation": "Horigome+ 2025 Table II"
@@ -578,8 +605,8 @@
             "kind": "ceiling",
             "sigma_obs": 0.093,
             "sigma_unc_used": 0.093,
-            "sigma_HH_at_v": 16.865226429437705,
-            "sigma_eff": 1.4876647581142703,
+            "sigma_HH_at_v": 2.643428622963877,
+            "sigma_eff": 1.4876647581142706,
             "verdict": "FAIL",
             "citation": "Horigome+ 2025 Table II"
           },
@@ -589,7 +616,7 @@
             "kind": "ceiling",
             "sigma_obs": 0.067,
             "sigma_unc_used": 0.067,
-            "sigma_HH_at_v": 8.810170885877744,
+            "sigma_HH_at_v": 1.3808920971426715,
             "sigma_eff": 0.7771363636723899,
             "verdict": "FAIL",
             "citation": "Horigome+ 2025 Table II"
@@ -600,8 +627,8 @@
             "kind": "ceiling",
             "sigma_obs": 0.047,
             "sigma_unc_used": 0.047,
-            "sigma_HH_at_v": 4.43636954684815,
-            "sigma_eff": 0.3913277213579284,
+            "sigma_HH_at_v": 0.6953494689946286,
+            "sigma_eff": 0.3913277213579285,
             "verdict": "FAIL",
             "citation": "Horigome+ 2025 Table II"
           },
@@ -611,7 +638,7 @@
             "kind": "ceiling",
             "sigma_obs": 0.032,
             "sigma_unc_used": 0.032,
-            "sigma_HH_at_v": 2.8454570671911887,
+            "sigma_HH_at_v": 0.44599239081065895,
             "sigma_eff": 0.25099492243986754,
             "verdict": "FAIL",
             "citation": "Horigome+ 2025 Table II"
@@ -622,10 +649,10 @@
             "kind": "floor",
             "sigma_obs": 128.0,
             "sigma_unc_used": 128.0,
-            "sigma_HH_at_v": 166.01808042318618,
-            "sigma_eff": 14.64428885604883,
+            "sigma_HH_at_v": 26.021408461742244,
+            "sigma_eff": 14.644288856048831,
             "verdict": "MARGINAL",
-            "citation": "BLN24 / Ohana+ 2026"
+            "citation": "INTERNAL anchor (F21); was \"BLN24 / Ohana+ 2026\""
           },
           {
             "v_kms": 100.0,
@@ -633,8 +660,8 @@
             "kind": "gaussian",
             "sigma_obs": 0.193,
             "sigma_unc_used": 0.193,
-            "sigma_HH_at_v": 0.052,
-            "sigma_eff": 0.004586867999999999,
+            "sigma_HH_at_v": 0.008150396851725193,
+            "sigma_eff": 0.004586868,
             "verdict": "PASS",
             "citation": "Lelli+ 2016"
           },
@@ -644,7 +671,7 @@
             "kind": "ceiling",
             "sigma_obs": 0.00025,
             "sigma_unc_used": 0.00025,
-            "sigma_HH_at_v": 0.0023280442736601657,
+            "sigma_HH_at_v": 0.00036489393689839765,
             "sigma_eff": 0.00020535445733528955,
             "verdict": "PASS",
             "citation": "Randall+ 2008"
@@ -655,9 +682,9 @@
         "parameter_set": "v19_2_E_A2_5param_DE_best_fit",
         "convention": "published_sigma_unc",
         "params": {
-          "sigma_0": 0.0265,
+          "sigma_0": 0.004153567626359954,
           "a_slope": 1.198,
-          "sigma_peak": 2025.57,
+          "sigma_peak": 317.4846029028654,
           "v_target": 28.47,
           "sigma_1": 1.2
         },
@@ -674,8 +701,8 @@
             "kind": "ceiling",
             "sigma_obs": 0.155,
             "sigma_unc_used": 0.05,
-            "sigma_HH_at_v": 1.7687017714260407,
-            "sigma_eff": 0.15601541455571963,
+            "sigma_HH_at_v": 0.27722348748983794,
+            "sigma_eff": 0.1560154145557196,
             "verdict": "MARGINAL",
             "citation": "Horigome+ 2025 Table II"
           },
@@ -685,8 +712,8 @@
             "kind": "ceiling",
             "sigma_obs": 0.093,
             "sigma_unc_used": 0.05,
-            "sigma_HH_at_v": 0.9591351535543553,
-            "sigma_eff": 0.08460435275987613,
+            "sigma_HH_at_v": 0.1503333103059303,
+            "sigma_eff": 0.08460435275987611,
             "verdict": "PASS",
             "citation": "Horigome+ 2025 Table II"
           },
@@ -696,8 +723,8 @@
             "kind": "ceiling",
             "sigma_obs": 0.067,
             "sigma_unc_used": 0.05,
-            "sigma_HH_at_v": 0.6409415436688206,
-            "sigma_eff": 0.056536812625483,
+            "sigma_HH_at_v": 0.1004601526857354,
+            "sigma_eff": 0.05653681262548299,
             "verdict": "PASS",
             "citation": "Horigome+ 2025 Table II"
           },
@@ -707,7 +734,7 @@
             "kind": "ceiling",
             "sigma_obs": 0.047,
             "sigma_unc_used": 0.05,
-            "sigma_HH_at_v": 0.4180669864703273,
+            "sigma_HH_at_v": 0.06552715096803836,
             "sigma_eff": 0.0368772708095611,
             "verdict": "PASS",
             "citation": "Horigome+ 2025 Table II"
@@ -718,8 +745,8 @@
             "kind": "ceiling",
             "sigma_obs": 0.032,
             "sigma_unc_used": 0.04,
-            "sigma_HH_at_v": 0.25721041231541486,
-            "sigma_eff": 0.02268827325993043,
+            "sigma_HH_at_v": 0.040314748745509534,
+            "sigma_eff": 0.022688273259930426,
             "verdict": "PASS",
             "citation": "Horigome+ 2025 Table II"
           },
@@ -729,10 +756,10 @@
             "kind": "floor",
             "sigma_obs": 128.0,
             "sigma_unc_used": 30.0,
-            "sigma_HH_at_v": 1876.1365988818511,
-            "sigma_eff": 165.4921332507692,
+            "sigma_HH_at_v": 294.0626505564049,
+            "sigma_eff": 165.49213325076923,
             "verdict": "PASS",
-            "citation": "BLN24 / Ohana+ 2026"
+            "citation": "INTERNAL anchor (F21); was \"BLN24 / Ohana+ 2026\""
           },
           {
             "v_kms": 100.0,
@@ -740,7 +767,7 @@
             "kind": "gaussian",
             "sigma_obs": 0.193,
             "sigma_unc_used": 0.05,
-            "sigma_HH_at_v": 0.0265,
+            "sigma_HH_at_v": 0.004153567626359954,
             "sigma_eff": 0.0023375385,
             "verdict": "FAIL",
             "citation": "Lelli+ 2016"
@@ -751,7 +778,7 @@
             "kind": "ceiling",
             "sigma_obs": 0.00025,
             "sigma_unc_used": 0.0005,
-            "sigma_HH_at_v": 0.0038537169106032704,
+            "sigma_HH_at_v": 0.0006040254264542506,
             "sigma_eff": 0.0003399325149674039,
             "verdict": "MARGINAL",
             "citation": "Randall+ 2008"
@@ -762,9 +789,9 @@
         "parameter_set": "v19_2_E_A2_5param_DE_best_fit",
         "convention": "self_normalized_sigma_unc",
         "params": {
-          "sigma_0": 0.0265,
+          "sigma_0": 0.004153567626359954,
           "a_slope": 1.198,
-          "sigma_peak": 2025.57,
+          "sigma_peak": 317.4846029028654,
           "v_target": 28.47,
           "sigma_1": 1.2
         },
@@ -781,8 +808,8 @@
             "kind": "ceiling",
             "sigma_obs": 0.155,
             "sigma_unc_used": 0.155,
-            "sigma_HH_at_v": 1.7687017714260407,
-            "sigma_eff": 0.15601541455571963,
+            "sigma_HH_at_v": 0.27722348748983794,
+            "sigma_eff": 0.1560154145557196,
             "verdict": "MARGINAL",
             "citation": "Horigome+ 2025 Table II"
           },
@@ -792,8 +819,8 @@
             "kind": "ceiling",
             "sigma_obs": 0.093,
             "sigma_unc_used": 0.093,
-            "sigma_HH_at_v": 0.9591351535543553,
-            "sigma_eff": 0.08460435275987613,
+            "sigma_HH_at_v": 0.1503333103059303,
+            "sigma_eff": 0.08460435275987611,
             "verdict": "PASS",
             "citation": "Horigome+ 2025 Table II"
           },
@@ -803,8 +830,8 @@
             "kind": "ceiling",
             "sigma_obs": 0.067,
             "sigma_unc_used": 0.067,
-            "sigma_HH_at_v": 0.6409415436688206,
-            "sigma_eff": 0.056536812625483,
+            "sigma_HH_at_v": 0.1004601526857354,
+            "sigma_eff": 0.05653681262548299,
             "verdict": "PASS",
             "citation": "Horigome+ 2025 Table II"
           },
@@ -814,7 +841,7 @@
             "kind": "ceiling",
             "sigma_obs": 0.047,
             "sigma_unc_used": 0.047,
-            "sigma_HH_at_v": 0.4180669864703273,
+            "sigma_HH_at_v": 0.06552715096803836,
             "sigma_eff": 0.0368772708095611,
             "verdict": "PASS",
             "citation": "Horigome+ 2025 Table II"
@@ -825,8 +852,8 @@
             "kind": "ceiling",
             "sigma_obs": 0.032,
             "sigma_unc_used": 0.032,
-            "sigma_HH_at_v": 0.25721041231541486,
-            "sigma_eff": 0.02268827325993043,
+            "sigma_HH_at_v": 0.040314748745509534,
+            "sigma_eff": 0.022688273259930426,
             "verdict": "PASS",
             "citation": "Horigome+ 2025 Table II"
           },
@@ -836,10 +863,10 @@
             "kind": "floor",
             "sigma_obs": 128.0,
             "sigma_unc_used": 128.0,
-            "sigma_HH_at_v": 1876.1365988818511,
-            "sigma_eff": 165.4921332507692,
+            "sigma_HH_at_v": 294.0626505564049,
+            "sigma_eff": 165.49213325076923,
             "verdict": "PASS",
-            "citation": "BLN24 / Ohana+ 2026"
+            "citation": "INTERNAL anchor (F21); was \"BLN24 / Ohana+ 2026\""
           },
           {
             "v_kms": 100.0,
@@ -847,7 +874,7 @@
             "kind": "gaussian",
             "sigma_obs": 0.193,
             "sigma_unc_used": 0.193,
-            "sigma_HH_at_v": 0.0265,
+            "sigma_HH_at_v": 0.004153567626359954,
             "sigma_eff": 0.0023375385,
             "verdict": "PASS",
             "citation": "Lelli+ 2016"
@@ -858,7 +885,7 @@
             "kind": "ceiling",
             "sigma_obs": 0.00025,
             "sigma_unc_used": 0.00025,
-            "sigma_HH_at_v": 0.0038537169106032704,
+            "sigma_HH_at_v": 0.0006040254264542506,
             "sigma_eff": 0.0003399325149674039,
             "verdict": "MARGINAL",
             "citation": "Randall+ 2008"

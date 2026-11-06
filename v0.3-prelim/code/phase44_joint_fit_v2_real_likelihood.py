@@ -39,9 +39,14 @@ from constants import (
     SIGMA_0_CM2_PER_G, A_SLOPE, V_REF_KMS, LZ_BOUND_CM2,
 )
 
-# Canonical f_H (paper §2.6, "σ_eff formula (R88)": σ_eff = f_H² × σ/m with f_H=0.297)
-# Not in constants.py yet — added here as the canonical value.
-F_H_CANONICAL = 0.297
+# Canonical f_H (paper §2.6, "σ_eff formula (R88)": σ_eff = f_H² × σ/m).
+# This module imports its sigma amplitudes from scripts/constants.py, so it MUST use the
+# f_H that those amplitudes are paired with. Before 2026-11-06 it hard-coded 0.297 while
+# constants.py carried the 174.0/0.052 archived pair -- consistent. After the pairing flip
+# the constants carry the 27.272481773080454/0.008150396851725193 canonical pair, so a
+# locally hard-coded 0.297 would have divided every sigma_eff in this fit by 6.380057431
+# (finding F25, mixed-convention hazard).
+from constants import F_H_CANONICAL  # live canonical pair: 0.7501856343179664
 F_H = F_H_CANONICAL
 
 # T205 published σ_unc per channel

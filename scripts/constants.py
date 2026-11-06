@@ -36,11 +36,19 @@ SIGMA_KMS = 4.4  # Gaussian σ (NOT FWHM) — historical rename in R76 from FWHM
 # Resonance amplitude A_res ~ 100 (Breit-Wigner peak height enhancement)
 A_RES = 100.0
 
-# Target sigma_peak at Cloud-9 resonance: 174 cm^2/g
+# Target sigma_peak at Cloud-9 resonance.
 # R76 RESOLUTION: 174 is the CAUSALITY CAP (paper §9.12), NOT a rounded fit value.
 # Phase 44 free fit gave σ_peak_R0 = 178.5 unconstrained (best_params[4]).
 # Causality cap truncates to 174. See §2.6 sensitivity sweep.
-SIGMA_PEAK_CM2_PER_G = 174.0
+#
+# 2026-11-06 pairing note (owner decision, finding F25): 174.0 is the amplitude in the ARCHIVED
+# f_H = 0.297 pair. The live canonical amplitude is 174.0 * PAIRING_K_LEGACY_TO_CANONICAL =
+# 27.272481773080454, which reproduces the same sigma_eff to 1.9e-16. Note the consequence for
+# the cap story: under the canonical pair the particle amplitude is 27.27, so the 174 causality
+# cap no longer binds. "The cap truncated the free fit" is a property of the legacy pair, not of
+# the live model, and must not be quoted as if it still constrains the model.
+SIGMA_PEAK_LEGACY_PAIR_174 = 174.0  # archived pair amplitude
+SIGMA_PEAK_CM2_PER_G = 27.272481773080454  # LIVE canonical pair amplitude (f_H = 0.7501856343179664)
 
 # v40.46 DOWNGRADE: per Nemotron 120B 6th review (v40.45), the Gaussian
 # peak is more likely a phenomenological placeholder than a real resonance.
@@ -58,8 +66,13 @@ M_NUCLEON_GEV = 0.939
 # ====== PHASE 44 POWER-LAW BACKGROUND CONSTANTS (R88, R88(23)) ======
 # Background sigma/m(v) = sigma_0 * (v_ref/v)^a_slope
 
-# Background amplitude at v_ref = 100 km/s
-SIGMA_0_CM2_PER_G = 0.052  # cm^2/g (Phase 44 free-fit background)
+# Background amplitude at v_ref = 100 km/s.
+# 2026-11-06 pairing (finding F25): 0.052 belongs to the archived f_H = 0.297 pair; the live
+# canonical amplitude is 0.052 * PAIRING_K_LEGACY_TO_CANONICAL = 0.008150396851725193, which
+# reproduces the same sigma_eff. Historical artifacts quoting 0.052 must read
+# SIGMA_0_LEGACY_PAIR_052, never the live name.
+SIGMA_0_LEGACY_PAIR_052 = 0.052  # archived pair amplitude
+SIGMA_0_CM2_PER_G = 0.008150396851725193  # LIVE canonical pair amplitude (Phase 44 free-fit background)
 
 # Background velocity exponent (Phase 44 free fit, NOT v1.13 Option A flattening)
 A_SLOPE = 1.93
@@ -69,6 +82,93 @@ V_REF_KMS = 100.0
 
 # Legacy v1.13 Option A flattening (kept for comparison, NOT canonical)
 A_SLOPE_OPTION_A = 1.0
+
+# ====== f_H PAIRING: ONE LIVE VALUE, ONE ARCHIVED PAIR (owner decision 2026-11-06) ======
+# sigma_eff(v) = f_H^2 * sigma/m(v). f_H is not a free knob: choosing it fixes the amplitudes
+# that reproduce the same sigma_eff, and vice versa. Writing 0.7501856343179664 as the live f_H
+# therefore REQUIRES the sigma amplitudes to be written in the matching pair, or every sigma_eff
+# in this repository silently multiplies by 6.38.
+#
+#   live pair      : f_H = 0.7501856343179664, sigma_0 = 0.008150396851725193,
+#                    sigma_peak = 27.272481773080454
+#   archived pair  : f_H = 0.297 (retracted v18.29 placeholder), sigma_0 = 0.052,
+#                    sigma_peak = 174.0
+#
+# Both pairs give the same sigma_eff to 1.9e-16 relative across all 8 channels and both parameter
+# sets, and both give the same pass/fail tallies: 1 PASS / 0 MARGINAL / 7 FAIL for the Phase-44
+# parameterization, 5 PASS / 2 MARGINAL / 1 FAIL for the v19.2-E A.2 5-parameter DE best fit
+# (measured 2026-11-06; finding F25 in docs/INTEGRITY_FINDINGS_2026-11-04.md).
+# What changes under the pairing is the PARTICLE-level number quoted as sigma/m: it is 6.380057431
+# times smaller than the legacy pair said. That is a re-labelling of the particle claim, not a
+# change of any observational verdict.
+#
+# Mixing the two pairs is the failure mode this block exists to prevent: canonical f_H with legacy
+# amplitudes, or legacy f_H with canonical amplitudes, each shift every sigma_eff by 6.38 in
+# opposite directions. The pair is frozen as a unit and guarded by
+# v0.3-prelim/tests/test_fH_pairing_integrity.py.
+F_H_CANONICAL = 0.7501856343179664  # live: phase44_two_component.f_H_at_r(0.05, core-forming)
+F_H_LEGACY_PLACEHOLDER_0297 = 0.297  # archived: retracted v18.29 placeholder, NOT live
+F_H_PLACEHOLDER_G7 = F_H_LEGACY_PLACEHOLDER_0297  # historical alias, kept for archived scripts
+F_H = F_H_CANONICAL  # backward-compat alias, now the live canonical value
+
+PAIRING_K_LEGACY_TO_CANONICAL = (
+    F_H_LEGACY_PLACEHOLDER_0297 ** 2 / F_H_CANONICAL ** 2
+)  # 0.15673840099471523; its inverse is 6.380057431067687
+
+# The three live conventions found in this repository on 2026-11-06, measured by reading the code
+# that uses them. They differ by factors of 6.38 and 11.34 on the same parameter table.
+PAIRING_CONVENTIONS = {
+    "canonical_pair_fH_0p750": {
+        "f_H": F_H_CANONICAL,
+        "f_H_squared": F_H_CANONICAL ** 2,
+        "sigma_0": SIGMA_0_CM2_PER_G,
+        "sigma_peak": SIGMA_PEAK_CM2_PER_G,
+        "used_by": ["scripts/canonical_numbers.py", "v0.3-prelim/code/t120_cloud9_bound.py",
+                    "v0.3-prelim/code/t120_constraint_scoreboard.py",
+                    "v0.3-prelim/code/phase44_joint_fit_v2_real_likelihood.py",
+                    "v0.3-prelim/code/phase_g4_pipeline.py",
+                    "scripts/v19_2_f_cloud9_cM_tension.py"],
+        "status": "LIVE",
+    },
+    "legacy_pair_fH_0p297": {
+        "f_H": F_H_LEGACY_PLACEHOLDER_0297,
+        "f_H_squared": F_H_LEGACY_PLACEHOLDER_0297 ** 2,
+        "sigma_0": SIGMA_0_LEGACY_PAIR_052,
+        "sigma_peak": SIGMA_PEAK_LEGACY_PAIR_174,
+        "used_by": ["archived artifacts written before 2026-11-06",
+                    "scripts/t233_consistent_dd.py", "scripts/t235_d5_width_test.py",
+                    "scripts/t236_d5_fit.py"],
+        "status": "ARCHIVED_PAIR",
+    },
+    "raw_sigma_no_fH": {
+        "f_H": 1.0,
+        "f_H_squared": 1.0,
+        "note": "compares sigma/m from the same amplitude table straight against observational "
+                "anchors, i.e. implicitly f_H = 1",
+        "used_by": ["v0.3-prelim/code/gravothermal_evolution.py",
+                    "v0.3-prelim/code/T204_substructure_test.py",
+                    "scripts/v19_2_f_fornax_no_peak.py", "scripts/audit_hierarchy_chain.py",
+                    "the t41/t90 joint-fit family (samples g_chi directly, no f_H factor)"],
+        "status": "RESOLVED_BY_EXPLICIT_ARCHIVED_PINNING_2026-11-06 (findings F26/F28)",
+    },
+}
+
+# Pairing self-check. The two pairs must reproduce the same sigma_eff; a half-paired edit (live
+# f_H with archived amplitudes, or the reverse) shifts every sigma_eff in the repository by 6.38,
+# so it must fail at import rather than drift silently into an artifact.
+_pairing_peak_legacy = SIGMA_PEAK_LEGACY_PAIR_174 * F_H_LEGACY_PLACEHOLDER_0297 ** 2
+_pairing_peak_live = SIGMA_PEAK_CM2_PER_G * F_H_CANONICAL ** 2
+_pairing_bg_legacy = SIGMA_0_LEGACY_PAIR_052 * F_H_LEGACY_PLACEHOLDER_0297 ** 2
+_pairing_bg_live = SIGMA_0_CM2_PER_G * F_H_CANONICAL ** 2
+assert abs(_pairing_peak_live - _pairing_peak_legacy) < 1e-9, (
+    f"f_H pairing broken at the resonance peak: archived pair gives sigma_eff "
+    f"{_pairing_peak_legacy!r}, live pair gives {_pairing_peak_live!r}"
+)
+assert abs(_pairing_bg_live - _pairing_bg_legacy) < 1e-12, (
+    f"f_H pairing broken in the power-law background: archived pair gives sigma_eff "
+    f"{_pairing_bg_legacy!r}, live pair gives {_pairing_bg_live!r}"
+)
+PAIRING_SIGMA_EFF_PEAK_CM2_PER_G = _pairing_peak_live
 
 # f_H(Cloud-9 core) -- Phase G7 phenomenological placeholder (R88(88) caveat)
 # ============================================================================
@@ -99,9 +199,21 @@ A_SLOPE_OPTION_A = 1.0
 # Use F_H_PLACEHOLDER_G7 (= 0.297) for backward compatibility with v1.13
 # code that imported F_H_CANONICAL. New code should use F_H_PHYSICAL_RANGES
 # to acknowledge the f_H is a placeholder, not a first-principles value.
-F_H_CANONICAL = 0.297  # DEPRECATED: use F_H_PLACEHOLDER_G7 instead
-F_H_PLACEHOLDER_G7 = 0.297  # v1.13 / Phase G7 placeholder (retracted v18.29)
-F_H = F_H_PLACEHOLDER_G7  # backward-compat alias
+#
+# 2026-11-06 (finding F25, owner decision): F_H_CANONICAL used to be re-assigned to 0.297 HERE,
+# which is what made the module disagree with itself -- importers got 0.297 while phase44 consumers
+# computed 0.7501856343179664 from f_H_at_r. The re-assignment is GONE. 0.297 now lives only as
+# F_H_LEGACY_PLACEHOLDER_0297 in the pairing block above, and F_H / F_H_CANONICAL /
+# F_H_PLACEHOLDER_G7 all resolve to the single live canonical value.
+# The comment above is now enforced rather than asserted: this line used to RE-ASSIGN
+# F_H_CANONICAL, which is what made the module disagree with itself. It is an assertion, so the
+# pairing block above remains the only definition and a second definition anywhere in this file
+# fails at import.
+assert F_H_CANONICAL == 0.7501856343179664, (
+    "F_H_CANONICAL must be defined exactly once, in the pairing block above")
+assert F_H == F_H_CANONICAL != F_H_LEGACY_PLACEHOLDER_0297, (
+    "F_H / F_H_CANONICAL must resolve to the live canonical value; 0.297 lives only as "
+    "F_H_LEGACY_PLACEHOLDER_0297")
 
 # Yang+ 2025 Fig. 2 segregation range (for sigma_0/m = 147 cm^2/g, NOT Phase 44)
 F_H_YANG_PLUS_LOW = 0.40  # f_L = 0.6 (heavy fraction at low end)

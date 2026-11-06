@@ -64,8 +64,9 @@ def gravothermal_phase_tau(M_200, c_200):
     V_max = v_max_nfw(M_200, c_200)
     sigma_m_vmax = sigma_m_phase_g8(V_max)
     # σ_eff for single-species
-    f_H = 0.297
-    sigma_eff = f_H ** 2 * sigma_m_vmax
+    # PAIRING: ARCHIVED PAIR (f_H = 0.297) — this module publishes the archived pair; the live pair is f_H = 0.7501856343179664 with amplitudes scaled by PAIRING_K = 0.15673840099471523, and sigma_eff = f_H^2 * sigma/m is identical between them (F26).
+    f_H_ARCHIVED_PAIR = 0.297  # ARCHIVED PAIR (finding F25/F26); live canonical is 0.7501856343179664
+    sigma_eff = f_H_ARCHIVED_PAIR ** 2 * sigma_m_vmax
 
     # Yang+ 2024 t_c
     t_c = 28.7 * (7.1 / sigma_eff) * (0.04 / rho_eff_pc) if rho_eff_pc > 0 else 1e10

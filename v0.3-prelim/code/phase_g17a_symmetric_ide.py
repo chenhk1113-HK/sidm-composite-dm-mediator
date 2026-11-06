@@ -86,24 +86,25 @@ import numpy as np
 from typing import Dict, List, Tuple
 
 # Physical constants (same as R88(56) SSoT)
-SIGMA_PEAK_CM2_PER_G = 174.0  # phase 44 peak, post-diction
+# PAIRING: ARCHIVED PAIR (f_H = 0.297 with sigma_0 = 0.052, sigma_peak = 174).
+SIGMA_PEAK_CM2_PER_G_ARCHIVED = 174.0  # phase 44 peak, post-diction
 M_CHI_GEV = 1.0
 M_PHI_GEV = 200e-9
 V_TARGET_KMS = 29.4
 SIGMA_KMS = 4.4
 A_SLOPE = 1.93
 A_RES = 100.0
-SIGMA_0_CM2_PER_G = 0.052
+SIGMA_0_CM2_PER_G_ARCHIVED = 0.052
 V_REF_KMS = 100.0
-F_H = 0.297  # Cosmic dark matter fraction in heavy species (cosmological)
+F_H_ARCHIVED_PAIR_0297 = 0.297  # archived pair heavy fraction
 OMEGA_DM_0 = 0.27  # Omega_DM today
 
 def sigma_m_at_v(v_kms: float, v_target: float = V_TARGET_KMS,
-                 sigma_peak: float = SIGMA_PEAK_CM2_PER_G,
+                 sigma_peak: float = SIGMA_PEAK_CM2_PER_G_ARCHIVED,
                  sigma_kms: float = SIGMA_KMS,
                  a_slope: float = A_SLOPE, v_ref: float = V_REF_KMS) -> float:
     """Phase 44 sigma/m(v) - Gaussian resonance + power-law background."""
-    background = A_SLOPE * SIGMA_0_CM2_PER_G * (v_ref / v_kms) ** a_slope
+    background = A_SLOPE * SIGMA_0_CM2_PER_G_ARCHIVED * (v_ref / v_kms) ** a_slope
     resonance = sigma_peak * np.exp(-0.5 * ((v_kms - v_target) / sigma_kms) ** 2)
     return background + resonance
 

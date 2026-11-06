@@ -59,10 +59,8 @@ sys.path.insert(0, str(REPO / "v0.3-prelim" / "code"))
 sys.path.insert(0, str(REPO / "scripts"))
 
 from t212_silverman_gravothermal import evaluate as t212_evaluate
-from constants import (
-    F_H_PLACEHOLDER_G7,
-    SIGMA_0_CM2_PER_G, A_SLOPE, V_REF_KMS,
-    SIGMA_PEAK_CM2_PER_G, V_TARGET_KMS, SIGMA_KMS,
+from constants import (  # PAIRING: ARCHIVED PAIR
+    F_H_PLACEHOLDER_G7, SIGMA_0_LEGACY_PAIR_052 as SIGMA_0_CM2_PER_G_ARCHIVED, A_SLOPE, V_REF_KMS, SIGMA_PEAK_LEGACY_PAIR_174 as SIGMA_PEAK_CM2_PER_G_ARCHIVED, V_TARGET_KMS, SIGMA_KMS,
 )
 
 CLOUD9_V_MAX_KMS = 28.0
@@ -79,8 +77,8 @@ def sigma_m_canonical_gaussian(v):
 
     sigma/m(v) = 0.052 * (100/v)^1.93 + 174 * exp(-(v - 29.4)^2 / (2*4.4^2))
     """
-    yukawa = SIGMA_0_CM2_PER_G * (V_REF_KMS / v)**A_SLOPE
-    gaussian = SIGMA_PEAK_CM2_PER_G * math.exp(-((v - V_TARGET_KMS)**2) / (2 * SIGMA_KMS**2))
+    yukawa = SIGMA_0_CM2_PER_G_ARCHIVED * (V_REF_KMS / v)**A_SLOPE
+    gaussian = SIGMA_PEAK_CM2_PER_G_ARCHIVED * math.exp(-((v - V_TARGET_KMS)**2) / (2 * SIGMA_KMS**2))
     return yukawa + gaussian
 
 
@@ -90,7 +88,7 @@ def sigma_m_yukawa_only(v):
     sigma/m(v) = 0.052 * (100/v)^1.93
     This represents pure Yukawa velocity dependence without a resonance peak.
     """
-    return SIGMA_0_CM2_PER_G * (V_REF_KMS / v)**A_SLOPE
+    return SIGMA_0_CM2_PER_G_ARCHIVED * (V_REF_KMS / v)**A_SLOPE
 
 
 def sigma_m_resonance_50(v):
@@ -99,8 +97,8 @@ def sigma_m_resonance_50(v):
     sigma/m(v) = 0.052 * (100/v)^1.93 + 174 * exp(-(v - 50)^2 / (2*5.0^2))
     The peak amplitude is preserved at 174 cm^2/g but at a different velocity.
     """
-    yukawa = SIGMA_0_CM2_PER_G * (V_REF_KMS / v)**A_SLOPE
-    gaussian = SIGMA_PEAK_CM2_PER_G * math.exp(-((v - 50.0)**2) / (2 * 5.0**2))
+    yukawa = SIGMA_0_CM2_PER_G_ARCHIVED * (V_REF_KMS / v)**A_SLOPE
+    gaussian = SIGMA_PEAK_CM2_PER_G_ARCHIVED * math.exp(-((v - 50.0)**2) / (2 * 5.0**2))
     return yukawa + gaussian
 
 
@@ -110,8 +108,8 @@ def sigma_m_resonance_100(v):
     sigma/m(v) = 0.052 * (100/v)^1.93 + 174 * exp(-(v - 100)^2 / (2*10.0^2))
     The peak is at SPARC velocity, so Cloud-9 at v=28 only sees the tail.
     """
-    yukawa = SIGMA_0_CM2_PER_G * (V_REF_KMS / v)**A_SLOPE
-    gaussian = SIGMA_PEAK_CM2_PER_G * math.exp(-((v - 100.0)**2) / (2 * 10.0**2))
+    yukawa = SIGMA_0_CM2_PER_G_ARCHIVED * (V_REF_KMS / v)**A_SLOPE
+    gaussian = SIGMA_PEAK_CM2_PER_G_ARCHIVED * math.exp(-((v - 100.0)**2) / (2 * 10.0**2))
     return yukawa + gaussian
 
 

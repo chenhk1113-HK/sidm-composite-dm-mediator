@@ -119,6 +119,7 @@ SPARC_DIR = Path(
 
 # ---- canonical particle-model parameters (identical to phase39 / phase40) ----
 M_CHI_GEV = 6.58
+# PAIRING: ARCHIVED PAIR (f_H = 0.297 with sigma_0 = 0.052, sigma_peak = 174).
 SIGMA_0_CM2_PER_G = 0.195
 A_SLOPE = 0.7
 V_TARGETS = [28.0, 100.0, 300.0, 700.0]

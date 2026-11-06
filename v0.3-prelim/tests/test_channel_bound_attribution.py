@@ -26,9 +26,17 @@ CHANNELS_PATH = CODE_DIR / "channels_extended.py"
 ARTIFACT = RESULTS_DIR / "t120_cloud9_bound_rederivation.json"
 
 # Measured 2026-11-06 by running v0.3-prelim/code/t120_cloud9_bound.py.
+# F26 (2026-11-06): the f_H split that F23 recorded is repaired by re-pairing the fitted amplitude
+# with f_H. These pins now guard the REPAIRED state: one live pair, the archived pair reachable only
+# under archived names, and the half-paired edit kept as a labelled counterfactual.
 PINNED_LIVE_F_H = 0.7501856343179664
 PINNED_LEGACY_F_H = 0.297
 PINNED_RATIO = 6.380057431067687
+PINNED_PAIRING_K = 0.15673840099471523
+PINNED_SIGMA_PEAK_LIVE = 27.272481773080454
+PINNED_SIGMA_PEAK_ARCHIVED = 174.0
+PINNED_SIGMA_0_LIVE = 0.008150396851725193
+PINNED_SIGMA_0_ARCHIVED = 0.052
 PINNED_Q_EFFECTIVE_LIVE = 100.03606419810939
 PINNED_Q_EFFECTIVE_LEGACY = 15.679492744216347
 
@@ -48,47 +56,77 @@ def _load(module_name: str, path: Path):
 
 
 def test_both_f_H_conventions_are_live_and_pinned():
-    """Both definitions still exist, and their values have not drifted."""
+    """F26 guard: ONE live pair, and the archived pair reachable only under archived names.
+
+    F23 found scripts/constants.py carrying f_H = 0.297 while the two-component path used
+    f_H = 0.7501856343179664 against the same amplitudes. The repair re-pairs the amplitude with
+    f_H, so the two live definitions now agree and the archived value survives only as an
+    explicitly-named archived constant. If a future edit re-assigns F_H / F_H_CANONICAL back to
+    0.297, or re-assigns an amplitude without moving f_H, this test fails.
+    """
     from phase44_two_component import f_H_at_r
     live = f_H_at_r(0.05, "core_forming")
     scripts_layer = _load("_scripts_constants_under_test", REPO_DIR / "scripts" / "constants.py")
     assert live == pytest.approx(PINNED_LIVE_F_H, rel=1e-12)
-    assert scripts_layer.F_H == pytest.approx(PINNED_LEGACY_F_H, rel=1e-12)
-    ratio = (live * live) / (scripts_layer.F_H ** 2)
+    assert scripts_layer.F_H == pytest.approx(PINNED_LIVE_F_H, rel=1e-12)
+    assert scripts_layer.F_H_CANONICAL == pytest.approx(PINNED_LIVE_F_H, rel=1e-12)
+    assert scripts_layer.F_H_LEGACY_PLACEHOLDER_0297 == pytest.approx(PINNED_LEGACY_F_H, rel=1e-12)
+    # The archived pair must stay exactly recoverable, and only under its archived names.
+    assert scripts_layer.SIGMA_PEAK_LEGACY_PAIR_174 == pytest.approx(PINNED_SIGMA_PEAK_ARCHIVED, rel=1e-12)
+    assert scripts_layer.SIGMA_0_LEGACY_PAIR_052 == pytest.approx(PINNED_SIGMA_0_ARCHIVED, rel=1e-12)
+    assert scripts_layer.SIGMA_PEAK_CM2_PER_G == pytest.approx(PINNED_SIGMA_PEAK_LIVE, rel=1e-12)
+    assert scripts_layer.SIGMA_0_CM2_PER_G == pytest.approx(PINNED_SIGMA_0_LIVE, rel=1e-12)
+    ratio = (live * live) / (scripts_layer.F_H_LEGACY_PLACEHOLDER_0297 ** 2)
     assert ratio == pytest.approx(PINNED_RATIO, rel=1e-9)
+    # Amplitudes and f_H moved together: the pairing factor is the inverse of the f_H^2 ratio.
+    k_amplitude = scripts_layer.SIGMA_PEAK_CM2_PER_G / scripts_layer.SIGMA_PEAK_LEGACY_PAIR_174
+    assert k_amplitude == pytest.approx(PINNED_PAIRING_K, rel=1e-12)
+    assert k_amplitude * ratio == pytest.approx(1.0, rel=1e-9)
 
 
 def test_cloud9_bound_artifact_declares_the_convention_split():
-    """The re-derivation must publish BOTH conventions, not silently pick one."""
+    """The re-derivation must publish the pairing it used, live and archived, with the invariant."""
     import json
     report = json.loads(ARTIFACT.read_text(encoding="utf-8"))
     block = report["f_H_conventions"]
-    assert block["status"] == "UNRESOLVED_CONVENTION_SPLIT"
-    assert block["live_value_used_by_t120"]["value"] == pytest.approx(PINNED_LIVE_F_H, rel=1e-12)
-    assert block["legacy_value_still_in_live_code"]["value"] == pytest.approx(PINNED_LEGACY_F_H, rel=1e-12)
-    assert block["ratio_between_conventions"] == pytest.approx(PINNED_RATIO, rel=1e-9)
-    assert block["live_value_used_by_t120"]["cloud9_Q_effective_cm2_per_g"] == pytest.approx(
-        PINNED_Q_EFFECTIVE_LIVE, rel=1e-9)
-    assert block["legacy_value_still_in_live_code"]["cloud9_Q_effective_cm2_per_g"] == pytest.approx(
-        PINNED_Q_EFFECTIVE_LEGACY, rel=1e-9)
+    assert block["status"] == "RESOLVED_SINGLE_PAIRING_2026-11-06", (
+        "the pairing must be declared resolved; an UNRESOLVED_CONVENTION_SPLIT status means the "
+        "F23 split came back")
+    live = block["live_pairing"]
+    archived = block["archived_pairing"]
+    assert live["f_H"] == pytest.approx(PINNED_LIVE_F_H, rel=1e-12)
+    assert live["sigma_peak_cm2_per_g"] == pytest.approx(PINNED_SIGMA_PEAK_LIVE, rel=1e-12)
+    assert live["sigma_0_cm2_per_g"] == pytest.approx(PINNED_SIGMA_0_LIVE, rel=1e-12)
+    assert archived["f_H"] == pytest.approx(PINNED_LEGACY_F_H, rel=1e-12)
+    assert archived["sigma_peak_cm2_per_g"] == pytest.approx(PINNED_SIGMA_PEAK_ARCHIVED, rel=1e-12)
+    assert archived["sigma_0_cm2_per_g"] == pytest.approx(PINNED_SIGMA_0_ARCHIVED, rel=1e-12)
+    assert block["ratio_between_live_conventions"] == pytest.approx(1.0, rel=1e-12)
+    assert block["pairing_k_archived_to_live"] == pytest.approx(PINNED_PAIRING_K, rel=1e-12)
+    check = block["pairing_invariance_check"]
+    assert check["abs difference"] < 1e-9, (
+        "the two pairings must give the same sigma_eff at the resonance peak; a non-zero gap means "
+        "one side was edited alone")
 
 
 def test_legacy_convention_fails_the_cloud9_bar_that_the_live_one_passes():
-    """The whole point of F23: the verdict depends on the convention, by ~6.4x."""
+    """Keep the F23 lesson as a labelled counterfactual: a half-paired edit fails the bar by 6.4x."""
     live = PINNED_Q_EFFECTIVE_LIVE
-    legacy = PINNED_Q_EFFECTIVE_LEGACY
+    half_paired = PINNED_Q_EFFECTIVE_LEGACY
     assert live >= 100.0
-    assert legacy < 100.0
-    assert live / legacy == pytest.approx(PINNED_RATIO, rel=1e-9)
+    assert half_paired < 100.0
+    assert live / half_paired == pytest.approx(PINNED_RATIO, rel=1e-9)
 
 
 def test_producer_recomputation_matches_the_artifact():
     """Live re-run must reproduce the stored numbers (guards producer edits)."""
     bound = _load("t120_cloud9_bound_under_test", CODE_DIR / "t120_cloud9_bound.py")
     fresh = bound.f_H_conventions(bound.model_quantities(None)["Q_total_cm2_per_g"])
-    assert fresh["ratio_between_conventions"] == pytest.approx(PINNED_RATIO, rel=1e-12)
-    assert fresh["live_value_used_by_t120"]["cloud9_Q_effective_cm2_per_g"] == pytest.approx(
-        PINNED_Q_EFFECTIVE_LIVE, rel=1e-12)
+    assert fresh["ratio_between_live_conventions"] == pytest.approx(1.0, rel=1e-12)
+    assert fresh["live_pairing"]["f_H_squared"] * bound.model_quantities(None)["Q_total_cm2_per_g"] \
+        == pytest.approx(PINNED_Q_EFFECTIVE_LIVE, rel=1e-9)
+    assert fresh["archived_pairing"]["half_paired_counterfactual_Q_effective_cm2_per_g"] \
+        == pytest.approx(PINNED_Q_EFFECTIVE_LEGACY, rel=1e-9)
+    assert fresh["status"] == "RESOLVED_SINGLE_PAIRING_2026-11-06"
 
 
 # --------------------------------------------------------------------------- F24

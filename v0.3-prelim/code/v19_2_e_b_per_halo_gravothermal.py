@@ -39,9 +39,8 @@ sys.path.insert(0, r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3
 sys.path.insert(0, r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\scripts")
 
 import gravothermal_yang2024 as gy
-from constants import (
-    SIGMA_0_CM2_PER_G, A_SLOPE, V_REF_KMS,
-    SIGMA_PEAK_CM2_PER_G, V_TARGET_KMS, SIGMA_KMS,
+from constants import (  # PAIRING: ARCHIVED PAIR
+    SIGMA_0_LEGACY_PAIR_052 as SIGMA_0_CM2_PER_G_ARCHIVED, A_SLOPE, V_REF_KMS, SIGMA_PEAK_LEGACY_PAIR_174 as SIGMA_PEAK_CM2_PER_G_ARCHIVED, V_TARGET_KMS, SIGMA_KMS,
 )
 
 # Lazy-initialized results directory
@@ -103,8 +102,8 @@ HALO_SEGUE1 = {
 def sigma_m_canonical_gaussian(v_kms):
     """Canonical Phase 44 Gaussian σ/m(v)."""
     v = np.atleast_1d(np.asarray(v_kms, dtype=float))
-    bg = SIGMA_0_CM2_PER_G * (V_REF_KMS / v) ** A_SLOPE
-    res = SIGMA_PEAK_CM2_PER_G * np.exp(-((v - V_TARGET_KMS) ** 2) / (2 * SIGMA_KMS ** 2))
+    bg = SIGMA_0_CM2_PER_G_ARCHIVED * (V_REF_KMS / v) ** A_SLOPE
+    res = SIGMA_PEAK_CM2_PER_G_ARCHIVED * np.exp(-((v - V_TARGET_KMS) ** 2) / (2 * SIGMA_KMS ** 2))
     sigma = bg + res
     return sigma if len(sigma) > 1 else float(sigma[0])
 
@@ -180,8 +179,8 @@ def main():
     print("  Fornax dSph and Segue 1 UFD")
     print("=" * 70)
     print()
-    print(f"Canonical Phase 44 σ/m(v) form: σ_0={SIGMA_0_CM2_PER_G}, "
-          f"a_slope={A_SLOPE}, v_ref={V_REF_KMS}, σ_peak={SIGMA_PEAK_CM2_PER_G}, "
+    print(f"Canonical Phase 44 σ/m(v) form: σ_0={SIGMA_0_CM2_PER_G_ARCHIVED}, "
+          f"a_slope={A_SLOPE}, v_ref={V_REF_KMS}, σ_peak={SIGMA_PEAK_CM2_PER_G_ARCHIVED}, "
           f"v_target={V_TARGET_KMS}, σ_1={SIGMA_KMS}")
     print()
 

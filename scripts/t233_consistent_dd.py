@@ -22,10 +22,8 @@ import sys
 
 # Import framework constants
 sys.path.insert(0, r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\scripts")
-from constants import (
-    M_CHI_GEV, M_PHI_GEV, V_TARGET_KMS, FWHM_KMS, A_RES, SIGMA_PEAK_CM2_PER_G,
-    M_NUCLEON_GEV, C_KMS, HBAR_C_GEV_CM, HBAR_C_SQ_GEV2_CM2,
-    reduced_mass_gev, q_mev, g_chi_from_sigma_peak, LZ_BOUND_CM2
+from constants import (  # PAIRING: ARCHIVED PAIR (sigma-only consumer)
+    M_CHI_GEV, M_PHI_GEV, V_TARGET_KMS, FWHM_KMS, A_RES, SIGMA_PEAK_LEGACY_PAIR_174 as SIGMA_PEAK_CM2_PER_G_ARCHIVED, M_NUCLEON_GEV, C_KMS, HBAR_C_GEV_CM, HBAR_C_SQ_GEV2_CM2, reduced_mass_gev, q_mev, g_chi_from_sigma_peak, LZ_BOUND_CM2,
 )
 
 
@@ -144,7 +142,7 @@ print(f"T233: CONSISTENT DD ANALYSIS (m_chi = {M_CHI_GEV} GeV from constants.py)
 print("=" * 70)
 print()
 
-g_chi = g_chi_from_sigma_peak()
+g_chi = g_chi_from_sigma_peak(SIGMA_PEAK_CM2_PER_G_ARCHIVED)  # PAIRING: ARCHIVED PAIR — the default argument binds the LIVE sigma_peak, so passing it explicitly is what keeps this table one pairing
 print(f"g_chi = {g_chi:.4e}")
 print(f"reduced_mass = {reduced_mass_gev():.4f} GeV")
 print(f"q(v=220) = {q_mev(220):.4f} MeV")
@@ -236,7 +234,7 @@ out = {
         'M_CHI_GEV': M_CHI_GEV,
         'M_PHI_GEV': M_PHI_GEV,
         'V_TARGET_KMS': V_TARGET_KMS,
-        'SIGMA_PEAK_CM2_PER_G': SIGMA_PEAK_CM2_PER_G,
+        'SIGMA_PEAK_CM2_PER_G_ARCHIVED': SIGMA_PEAK_CM2_PER_G_ARCHIVED,
         'M_NUCLEON_GEV': M_NUCLEON_GEV
     },
     'g_chi': g_chi,
@@ -262,5 +260,5 @@ print("CONSTANTS MODULE IMPORTS (per R66 reviewer):")
 print("=" * 70)
 print()
 print("scripts/constants.py now provides M_CHI_GEV, M_PHI_GEV, V_TARGET_KMS,")
-print("SIGMA_PEAK_CM2_PER_G, M_NUCLEON_GEV, etc. Future cross-section code MUST")
+print("SIGMA_PEAK_CM2_PER_G_ARCHIVED, M_NUCLEON_GEV, etc. Future cross-section code MUST")
 print("import from this module. Cross-script comparisons now meaningful.")

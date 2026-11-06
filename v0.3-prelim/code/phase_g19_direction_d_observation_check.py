@@ -64,6 +64,7 @@ import numpy as np
 
 # Phase 44 parameters (from R88(56) SSoT)
 V_TARGET_KMS = 29.4  # Cloud-9 resonance, NOT v=150
+# PAIRING: ARCHIVED PAIR (f_H = 0.297 with sigma_0 = 0.052, sigma_peak = 174).
 SIGMA_PEAK_CM2_PER_G = 174.0
 SIGMA_KMS = 4.4
 A_SLOPE = 1.93

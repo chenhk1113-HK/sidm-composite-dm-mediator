@@ -23,7 +23,7 @@ Every tally below is computed from that taxonomy under a named convention; the p
 | PASS (5) | UFD v=7 (Horigome+ 2025 Table II) |
 | PASS (5) | UFD v=10 (Horigome+ 2025 Table II) |
 | PASS (5) | dSph v=15 (Horigome+ 2025 Table II) |
-| PASS (5) | Cloud-9 v=28 (BLN24 / Ohana+ 2026) |
+| PASS (5) | Cloud-9 v=28 (INTERNAL anchor (F21); was "BLN24 / Ohana+ 2026") |
 | MARGINAL (2) | UFD v=3 (Horigome+ 2025 Table II) |
 | MARGINAL (2) | Cluster v=500 (Randall+ 2008) |
 | FAIL (1) | SPARC v=100 (Lelli+ 2016) |
@@ -41,28 +41,28 @@ Every tally below is computed from that taxonomy under a named convention; the p
 
 | v [km/s] | Channel | σ_obs | σ_unc | kind | σ_HH | σ_eff | verdict |
 |---|---|---|---|---|---|---|---|
-| 3 | UFD v=3 | 0.155 | 0.05 | ceiling | 45.2 | 3.987 | **FAIL** |
-| 5 | UFD v=5 | 0.093 | 0.05 | ceiling | 16.9 | 1.488 | **FAIL** |
-| 7 | UFD v=7 | 0.067 | 0.05 | ceiling | 8.81 | 0.7771 | **FAIL** |
-| 10 | UFD v=10 | 0.047 | 0.05 | ceiling | 4.44 | 0.3913 | **FAIL** |
-| 15 | dSph v=15 | 0.032 | 0.04 | ceiling | 2.85 | 0.251 | **FAIL** |
-| 28 | Cloud-9 v=28 | 128 | 30 | floor | 166 | 14.64 | **FAIL** |
-| 100 | SPARC v=100 | 0.193 | 0.05 | gaussian | 0.052 | 0.004587 | **FAIL** |
-| 500 | Cluster v=500 | 0.00025 | 0.0005 | ceiling | 0.00233 | 0.0002054 | **PASS** |
+| 3 | UFD v=3 | 0.155 | 0.05 | ceiling | 7.08 | 3.987 | **FAIL** |
+| 5 | UFD v=5 | 0.093 | 0.05 | ceiling | 2.64 | 1.488 | **FAIL** |
+| 7 | UFD v=7 | 0.067 | 0.05 | ceiling | 1.38 | 0.7771 | **FAIL** |
+| 10 | UFD v=10 | 0.047 | 0.05 | ceiling | 0.695 | 0.3913 | **FAIL** |
+| 15 | dSph v=15 | 0.032 | 0.04 | ceiling | 0.446 | 0.251 | **FAIL** |
+| 28 | Cloud-9 v=28 | 128 | 30 | floor | 26 | 14.64 | **FAIL** |
+| 100 | SPARC v=100 | 0.193 | 0.05 | gaussian | 0.00815 | 0.004587 | **FAIL** |
+| 500 | Cluster v=500 | 0.00025 | 0.0005 | ceiling | 0.000365 | 0.0002054 | **PASS** |
 | | **TOTAL (v19_2_D_canonical_phase_44, published_sigma_unc)** | | | | | | **1 PASS / 0 MARGINAL / 7 FAIL** |
 
-**Per-channel pass/fail at v19.2-E A.2 5-param DE best-fit (σ₀=0.0265, a=1.198, σ_peak=2026, v_target=28.47, σ₁=1.2):**
+**Per-channel pass/fail at v19.2-E A.2 5-param DE best-fit (archived-pair amplitudes as fitted: σ₀=0.0265, a=1.198, σ_peak=2026, v_target=28.47, σ₁=1.2; live pair: σ₀=0.004154, σ_peak=317.5 with f_H=0.750186; σ_HH/σ_eff below are computed with the live pair, finding F26):**
 
 | v [km/s] | Channel | σ_obs | σ_unc | kind | σ_HH | σ_eff | verdict |
 |---|---|---|---|---|---|---|---|
-| 3 | UFD v=3 | 0.155 | 0.05 | ceiling | 1.77 | 0.156 | **MARGINAL** |
-| 5 | UFD v=5 | 0.093 | 0.05 | ceiling | 0.959 | 0.0846 | **PASS** |
-| 7 | UFD v=7 | 0.067 | 0.05 | ceiling | 0.641 | 0.05654 | **PASS** |
-| 10 | UFD v=10 | 0.047 | 0.05 | ceiling | 0.418 | 0.03688 | **PASS** |
-| 15 | dSph v=15 | 0.032 | 0.04 | ceiling | 0.257 | 0.02269 | **PASS** |
-| 28 | Cloud-9 v=28 | 128 | 30 | floor | 1.88e+03 | 165.5 | **PASS** |
-| 100 | SPARC v=100 | 0.193 | 0.05 | gaussian | 0.0265 | 0.002338 | **FAIL** |
-| 500 | Cluster v=500 | 0.00025 | 0.0005 | ceiling | 0.00385 | 0.0003399 | **MARGINAL** |
+| 3 | UFD v=3 | 0.155 | 0.05 | ceiling | 0.277 | 0.156 | **MARGINAL** |
+| 5 | UFD v=5 | 0.093 | 0.05 | ceiling | 0.15 | 0.0846 | **PASS** |
+| 7 | UFD v=7 | 0.067 | 0.05 | ceiling | 0.1 | 0.05654 | **PASS** |
+| 10 | UFD v=10 | 0.047 | 0.05 | ceiling | 0.0655 | 0.03688 | **PASS** |
+| 15 | dSph v=15 | 0.032 | 0.04 | ceiling | 0.0403 | 0.02269 | **PASS** |
+| 28 | Cloud-9 v=28 | 128 | 30 | floor | 294 | 165.5 | **PASS** |
+| 100 | SPARC v=100 | 0.193 | 0.05 | gaussian | 0.00415 | 0.002338 | **FAIL** |
+| 500 | Cluster v=500 | 0.00025 | 0.0005 | ceiling | 0.000604 | 0.0003399 | **MARGINAL** |
 | | **TOTAL (v19_2_E_A2_5param_DE_best_fit, published_sigma_unc)** | | | | | | **5 PASS / 2 MARGINAL / 1 FAIL** |
 
 **Trade-off factors (canonical, R88(88)):**
@@ -96,7 +96,7 @@ sigma_eff(Cloud-9) ~ 0.15 vs 50 (factor ~300x), sigma_eff(SPARC) ~ 0.0001 vs 0.1
   - Factor vs constraint: pass_window_sigma_peak2_cm2_per_g_min=1.11, pass_window_sigma_peak2_cm2_per_g_max=3.33
   - Reference: R88(87)
 - **[OPEN]** **Background UV derivation (open requirement, NOT a no-go)** (§2.8 (v19.2-F Phase 1+2))
-  - Argument: The background sigma/m = 0.052*(100/v)^1.93 is a phenomenological fit. The framework's named 200 eV Yukawa at alpha_chi = 6.8e-7 fails at v=100 by 55x and overproduces at v=10 by ~4300x; the fitted slope is closer to a Sommerfeld v^-2 near a t-channel bound-state resonance (M2 mechanism, Chu+ 2018 [7]). A first-principles derivation is open (v19.2-F Phase 3). NOT a UV completion no-go while M2 is open.
+  - Argument: The background sigma/m = 0.008150396851725193*(100/v)^1.93 in the live canonical pairing (0.052*(100/v)^1.93 in the archived f_H = 0.297 pair) is a phenomenological fit. The framework's named 200 eV Yukawa at alpha_chi = 6.8e-7 fails at v=100 by 55x and overproduces at v=10 by ~4300x; the fitted slope is closer to a Sommerfeld v^-2 near a t-channel bound-state resonance (M2 mechanism, Chu+ 2018 [7]). A first-principles derivation is open (v19.2-F Phase 3). NOT a UV completion no-go while M2 is open.
   - Factor vs constraint: yukawa_at_alpha_chi_v100_factor_over_fitted=55.0, yukawa_at_alpha_chi_v10_factor_over_fitted=4300.0
   - Reference: ClawsGO Phase 1+2 (v19.2-F P1+2)
 

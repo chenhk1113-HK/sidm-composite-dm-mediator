@@ -38,11 +38,14 @@ sys.path.insert(0, str(REPO / "scripts"))
 from t212_silverman_gravothermal import (
     evaluate as t212_evaluate,
 )
-from constants import SIGMA_0_CM2_PER_G, A_SLOPE, V_REF_KMS
-from canonical_numbers import sigma_m_canonical_gaussian
-
+from constants import (  # PAIRING: ARCHIVED PAIR
+    # PAIRING: ARCHIVED PAIR
+    SIGMA_0_LEGACY_PAIR_052 as SIGMA_0_CM2_PER_G_ARCHIVED, A_SLOPE, V_REF_KMS,
+)
+from canonical_numbers import sigma_m_canonical_gaussian_archived as sigma_m_canonical_gaussian
 # v19.2-F canonical parameters
-SIGMA_PEAK_CM2_PER_G = 174.0
+# PAIRING: ARCHIVED PAIR (f_H = 0.297 with sigma_0 = 0.052, sigma_peak = 174).
+SIGMA_PEAK_CM2_PER_G_ARCHIVED = 174.0
 V_TARGET_KMS = 29.4
 SIGMA_KMS = 4.4
 T_HUBBLE_GYR = 13.8
@@ -66,7 +69,7 @@ F_H_CASES = [
 ]
 
 
-def sigma_m_at_v(v, sigma_peak=SIGMA_PEAK_CM2_PER_G):
+def sigma_m_at_v(v, sigma_peak=SIGMA_PEAK_CM2_PER_G_ARCHIVED):
     """Canonical paper section 2.6 sigma/m(v) - single source of truth.
 
     CG-6 reconciliation (2026-10-28): the former helper was PEAK-ONLY (it
@@ -81,7 +84,7 @@ def sigma_m_at_v(v, sigma_peak=SIGMA_PEAK_CM2_PER_G):
     return sigma_m_canonical_gaussian(v, sigma_peak=sigma_peak)
 
 
-def cloud9_gravothermal(f_H, sigma_peak=SIGMA_PEAK_CM2_PER_G):
+def cloud9_gravothermal(f_H, sigma_peak=SIGMA_PEAK_CM2_PER_G_ARCHIVED):
     """Cloud-9 gravothermal phase tau for given f_H and sigma_peak.
 
     Returns: dict with all intermediate values.

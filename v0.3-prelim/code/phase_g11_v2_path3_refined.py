@@ -8,6 +8,7 @@ tau diversity can produce differentiated sigma_eff outcomes.
 Key change: f_H cap reduced from 0.95 to 0.60 (more physical for Phase 44).
 This forces f_H to vary with tau in the meaningful range.
 """
+# PAIRING: ARCHIVED PAIR (f_H = 0.297 with sigma_peak = 174.0 cm^2/g — the archived pair; these are historical published numbers, not the live model amplitudes at f_H = 0.7501856343179664)
 from __future__ import annotations
 import math
 import numpy as np
@@ -16,7 +17,7 @@ import numpy as np
 OMEGA_M = 0.315
 OMEGA_LAMBDA = 0.685
 HUBBLE_H = 0.674
-F_H_INITIAL = 0.297
+F_H_ARCHIVED_PAIR_0297 = 0.297
 
 
 def dutton_maccio_2014_concentration(M_200, z=0.0):
@@ -49,7 +50,7 @@ def gravothermal_phase_tau(M_200, c_200):
     rho_eff_pc = rho_s * 0.01 * 1e-9
     V_max = v_max_nfw(M_200, c_200)
     sigma_m_vmax = sigma_m_phase_g8(V_max)
-    sigma_eff = F_H_INITIAL ** 2 * sigma_m_vmax
+    sigma_eff = F_H_ARCHIVED_PAIR_0297 ** 2 * sigma_m_vmax
     t_c = 28.7 * (7.1 / sigma_eff) * (0.04 / rho_eff_pc) if rho_eff_pc > 0 else 1e10
     tau = 13.8 / t_c
     return tau, V_max, sigma_eff
@@ -58,10 +59,10 @@ def gravothermal_phase_tau(M_200, c_200):
 def f_H_sidm2c_v2(r_over_r_s, tau, cap=0.60):
     """Refined SIDM2c with smaller cap and stronger tau dependence."""
     if tau <= 0:
-        return F_H_INITIAL
+        return F_H_ARCHIVED_PAIR_0297
     tau_seg = 0.3  # shorter segregation timescale
-    concentration = 1 + (cap/F_H_INITIAL - 1) * (1 - math.exp(-tau / tau_seg))
-    return F_H_INITIAL * concentration
+    concentration = 1 + (cap/F_H_ARCHIVED_PAIR_0297 - 1) * (1 - math.exp(-tau / tau_seg))
+    return F_H_ARCHIVED_PAIR_0297 * concentration
 
 
 def run_phase_g11_v2():

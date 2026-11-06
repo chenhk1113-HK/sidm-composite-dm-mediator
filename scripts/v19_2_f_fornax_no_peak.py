@@ -32,10 +32,8 @@ REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / "v0.3-prelim" / "code"))
 sys.path.insert(0, str(REPO / "scripts"))
 
-from constants import (
-    SIGMA_0_CM2_PER_G, A_SLOPE, V_REF_KMS,
-    SIGMA_PEAK_CM2_PER_G, V_TARGET_KMS, SIGMA_KMS,
-    SIGMA_PEAK_CM2_PER_G_NUISANCE,
+from constants import (  # PAIRING: ARCHIVED PAIR (sigma-only consumer)
+    SIGMA_0_LEGACY_PAIR_052 as SIGMA_0_CM2_PER_G_ARCHIVED, A_SLOPE, V_REF_KMS, SIGMA_PEAK_LEGACY_PAIR_174 as SIGMA_PEAK_CM2_PER_G_ARCHIVED, V_TARGET_KMS, SIGMA_KMS, SIGMA_PEAK_CM2_PER_G_NUISANCE,
 )
 
 FORNAX_V_KMS = 15.0  # Fornax cross-section velocity
@@ -45,7 +43,7 @@ FORNAX_SIGMA_HL_REQUIRED_CANONICAL = -0.47  # v19.2-F canonical prediction, UNPH
 
 def sigma_m_v(v, peak_amplitude):
     """sigma/m(v) with given peak amplitude."""
-    yukawa = SIGMA_0_CM2_PER_G * (V_REF_KMS / v)**A_SLOPE
+    yukawa = SIGMA_0_CM2_PER_G_ARCHIVED * (V_REF_KMS / v)**A_SLOPE
     if peak_amplitude == 0:
         return yukawa
     gaussian = peak_amplitude * math.exp(-((v - V_TARGET_KMS)**2) / (2 * SIGMA_KMS**2))
@@ -66,8 +64,8 @@ def main():
     print()
 
     # Sigma/m decomposition
-    yukawa = SIGMA_0_CM2_PER_G * (V_REF_KMS / FORNAX_V_KMS)**A_SLOPE
-    peak_tail = SIGMA_PEAK_CM2_PER_G * math.exp(-((FORNAX_V_KMS - V_TARGET_KMS)**2) / (2 * SIGMA_KMS**2))
+    yukawa = SIGMA_0_CM2_PER_G_ARCHIVED * (V_REF_KMS / FORNAX_V_KMS)**A_SLOPE
+    peak_tail = SIGMA_PEAK_CM2_PER_G_ARCHIVED * math.exp(-((FORNAX_V_KMS - V_TARGET_KMS)**2) / (2 * SIGMA_KMS**2))
     sigma_m_canonical = yukawa + peak_tail
     sigma_m_nuisance = yukawa  # peak=0
 

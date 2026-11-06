@@ -118,8 +118,14 @@ def render_a15(canonical):
     # ----------------------------------------------------------------------
     # Block 3: Per-channel at v19.2-E A.2 best-fit
     # ----------------------------------------------------------------------
+    a2 = canonical["v19_2_E_A2_5param_DE_best_fit"]
+    live_a2 = a2["live_pair_equivalent"]
     out.append("**Per-channel pass/fail at v19.2-E A.2 5-param DE best-fit "
-               "(σ₀=0.0265, a=1.198, σ_peak=2026, v_target=28.47, σ₁=1.2):**")
+               f"(archived-pair amplitudes as fitted: σ₀={a2['sigma_0']:.4g}, a={a2['a_slope']}, "
+               f"σ_peak={a2['sigma_peak']:.4g}, v_target={a2['v_target']}, σ₁={a2['sigma_1']}; "
+               f"live pair: σ₀={live_a2['sigma_0']:.4g}, σ_peak={live_a2['sigma_peak']:.4g} with "
+               f"f_H={live_a2['F_H']:.6g}; σ_HH/σ_eff below are computed with the live pair, "
+               "finding F26):**")
     out.append("")
     out.append("| v [km/s] | Channel | σ_obs | σ_unc | kind | σ_HH | σ_eff | verdict |")
     out.append("|---|---|---|---|---|---|---|---|")

@@ -38,15 +38,15 @@ from t212_silverman_gravothermal import t_cross_Gyr_from_r_vir_vmax
 _SCRIPTS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'scripts')
 if _SCRIPTS_DIR not in sys.path:
     sys.path.insert(0, _SCRIPTS_DIR)
-from constants import (
-    SIGMA_0_CM2_PER_G as CONST_SIGMA_0,  # 0.052
-    A_SLOPE as CONST_A_SLOPE,             # 1.93
-    V_REF_KMS as CONST_V_REF,             # 100.0
+from constants import (  # PAIRING: ARCHIVED PAIR (sigma-only consumer)
+    SIGMA_0_LEGACY_PAIR_052 as SIGMA_0_CM2_PER_G_ARCHIVED, # 0.052
+    A_SLOPE as CONST_A_SLOPE, # 1.93
+    V_REF_KMS as CONST_V_REF, # 100.0,
 )
 
 # Phase 44 parameters (now imported from constants.py as CONST_SIGMA_0, CONST_A_SLOPE, CONST_V_REF)
 # Module-level aliases kept for backward compatibility (per R88(23) constants SSoT enforcement).
-SIGMA_0 = CONST_SIGMA_0  # cm^2/g  # R88(26) fix: 0.052 canonical Phase 44
+SIGMA_0 = SIGMA_0_CM2_PER_G_ARCHIVED  # cm^2/g  # ARCHIVED PAIR value 0.052 (Phase 44)
 A_SLOPE = CONST_A_SLOPE  # Phase 44 canonical (was 1.0 in v1.13 under Option A flattening)  # R88(26) fix: 1.93 Phase 44 free-fit
 V_REF = CONST_V_REF  # km/s reference velocity  # R88(26) fix: 100.0 from constants.py
 TCROSS_CAP_FACTOR = 3.0  # enforce causality: t_core >= 3 * r_s / v_max

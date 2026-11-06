@@ -1117,3 +1117,220 @@ converted), or (b) keep 0.297 as the declared pairing of the Phase-44/A.2 amplit
 0.750 for the T120 two-component family, labelling each table with its pairing. (a) is the smaller
 physics change and the larger documentation change; (b) is the smaller documentation change and leaves
 three internal Cloud-9 bars in place.
+
+---
+
+## F26 — the f_H split repaired by re-pairing the amplitudes (REPAIRED 2026-11-06, owner decision "call 1 repair")
+
+F23 recorded one physical quantity with two live values. F25 measured what canonicalising it would
+cost. The owner's decision was to repair it by moving the fitted amplitude together with `f_H`, so
+that every halo-level prediction is unchanged and the archived pair survives only under archived
+names. This section records what was actually changed and what was verified unchanged.
+
+**1. One live pair, the archived pair named.** `scripts/constants.py` now defines:
+
+| pairing | f_H | sigma_0 (cm2/g) | sigma_peak (cm2/g) | status |
+|---|---|---|---|---|
+| canonical | 0.7501856343179664 | 0.008150396851725193 | 27.272481773080454 | LIVE |
+| archived | 0.297 | 0.052 | 174.0 | ARCHIVED_PAIR |
+
+`F_H`, `F_H_CANONICAL` and `F_H_PLACEHOLDER_G7` all resolve to the live value; `0.297`, `0.052` and
+`174.0` are reachable only as `F_H_LEGACY_PLACEHOLDER_0297`, `SIGMA_0_LEGACY_PAIR_052` and
+`SIGMA_PEAK_LEGACY_PAIR_174`. Import-time assertions compare
+`F_H**2 * SIGMA_PEAK_CM2_PER_G` and `F_H**2 * SIGMA_0_CM2_PER_G` against the archived products, so a
+future edit that moves one side alone raises at import rather than silently shifting every effective
+prediction by 6.380057431067687.
+
+**2. What a half-paired state looked like in live code, and what it cost.** Scanning before editing
+found 13 modules that bind `0.297` locally and 36 modules that import a raw amplitude. One of them,
+`scripts/v192_dsph_gravothermal_sweep.py`, was genuinely half-paired: it imported the live
+`SIGMA_0_CM2_PER_G` while hard-coding `V1_SIGMA_PEAK = 174.0` — an archived peak multiplied by a live
+background, which is exactly the failure mode F23 exposed. It is now pinned to the archived pair by
+name. 25 modules are declared ARCHIVED PAIR (they publish historical published numbers and must keep
+reproducing them); 4 use the live canonical pair (they combine `f_H` with amplitudes, so their
+products are pairing-invariant). The split is published as
+`v0.3-prelim/data/results/fH_pairing_registry.json`.
+
+**3. Verified unchanged, measured field by field rather than argued.**
+- `v0.3-prelim/data/results/canonical_numbers.json` regenerated: 303 common leaves identical, **0**
+  `sigma_eff` leaves changed, and all 48 raw-`sigma` plus 8 amplitude leaves moved by exactly
+  `PAIRING_K = 0.15673840099471523`. Worst effective-output difference 1.9e-16. Tallies unchanged:
+  1 PASS / 0 MARGINAL / 7 FAIL (canonical Phase-44) and 5 PASS / 2 MARGINAL / 1 FAIL (v19.2-E A.2).
+- `v192_a_phase44_sigma_peak_sensitivity.json` regenerated from the archived-pinned producer: **300 of
+  300 leaves identical** to the committed artifact, no keys added or dropped. The §2.6a sweep is
+  byte-reproducible again.
+- The Cloud-9 effective value stays 100.03606419810939 cm2/g, and the adopted-arm tallies stay
+  7 PASS / 1 MARGINAL / 0 FAIL at a_slope 0.5 and 0.8
+  (`data/results/t120_adopted_arm_declaration.json`).
+
+**4. The physics claim that genuinely changed, stated plainly.** The framework's *particle-level*
+resonance amplitude is now 27.272481773080454 cm2/g, not 174 cm2/g. The 174 cm2/g number was never a
+measurement of the amplitude at the live `f_H`; it is what the archived pair implies. The causality-cap
+narrative that produced 174 (JVAS bound) therefore constrains the archived pair and no longer binds the
+live particle amplitude — the live amplitude is 6.38x smaller, so the cap is satisfied with room to
+spare and the "capped at 174" story is history, not current physics. Every halo-level statement
+(`sigma_eff`) is untouched by this.
+
+**5. Guards added.** `v0.3-prelim/tests/test_fH_pairing_integrity.py` (single live `f_H`; archived pair
+reproduces the same peak and background `sigma_eff`; re-pairing leaves every channel and every tally
+unchanged; no live module may bind 0.297 under a canonical-looking name, scanned through the AST; the
+generated artifact states its pairing). `test_channel_bound_attribution.py` now pins the resolved
+pairing block, including the `pairing_invariance_check` gap. `test_dsph_sigma_m_table_matches_canonical.py`
+compares the paper's §3 rows against `sigma_m_canonical_gaussian_archived`, a named archived curve,
+instead of comparing them against an amplitude that has since moved.
+
+---
+
+## F27 — the §3 table compares particle-level sigma/m against a halo-level published bound (MEASURED 2026-11-06)
+
+While re-pinning the §3 table it was checked against what the published threshold actually means. It
+does not mean the same thing as the table's own column.
+
+**1. The table itself is correct and reproduces exactly.** Recomputed from
+`scripts/canonical_numbers.py` live: the eight velocities 9, 10, 15, 18, 28, 29.4, 40, 100 km/s give
+5.4277, 4.4364, 2.8455, 7.4891, 166.0181, 174.5522, 9.8611, 0.0520 cm2/g — matching the paper's
+5.43 / 4.44 / 2.85 / 7.49 / 166.0 / 174.6 / 9.86 / 0.052 at the table's own displayed precision. Those
+numbers are the ARCHIVED pair, and the paper now says so.
+
+**2. The comparison is at the wrong level.** Horigome+ 2025 (arXiv:2503.13650) publishes 0.2 cm2/g
+(velocity-independent) and 0.8 cm2/g at w = 10 km/s as limits on the **halo-level effective** cross
+section, i.e. what a halo observation constrains. The table's column is the **particle-level** amplitude.
+Comparing them directly overstates the tension by 1/f_H_archived^2 = 1 / 0.297^2 = **11.3367**.
+
+**3. The corrected halo-level reading, computed in the same run as the text.** Evaluating
+`sigma_eff = f_H^2 * sigma/m` at the same eight velocities gives 0.4788, 0.3913, 0.2510, 0.6606,
+14.6443, 15.3971, 0.8698, 0.0046 cm2/g, i.e. **2.39x, 1.96x, 1.25x, 3.30x, 73.22x, 76.99x, 4.35x,
+0.02x** above 0.2 cm2/g. The published tension factors in the Abstract and §2.5 (14x at Fornax, 27x and
+49x at the endpoints, 37x at Fornax canonical, 830x at the Cloud-9 anchor) are the particle-level
+reading and are 11.34x larger than the halo-level reading.
+
+**4. What this changes in the argument, and what it does not.** At the level the published bound
+applies, the dwarf-velocity tension is **1.25-4.35x**, not 14-49x: still above the threshold, but close
+to it rather than an order of magnitude above, and Fornax at v = 15 is only 1.25x. The Cloud-9 anchor
+tension remains severe (73-77x). The sign of the conclusion survives; its magnitude was overstated.
+
+**5. What was NOT done, stated so nobody over-reads this.** The halo-level reading assumes
+`sigma_eff = f_H^2 * sigma/m` evaluated at the same velocity the published bound quotes. That is this
+project's own convention, not Horigome+'s analysis — their bound comes from a SASHIMI likelihood over
+their own `sigma(v,theta)` form. A definitive comparison still requires re-running their likelihood with
+our `sigma(v,theta)`, which remains open (§3.6). `f_H` itself is also not fixed across halos
+(`f_H_at_r` varies with radius and halo type), so 0.5628 is a single representative value, not a
+measured constant.
+
+## F28 — the pairing rename broke 15 modules before anything could notice (REPAIRED 2026-11-06, GUARD ADDED)
+
+**What was done.** Canonicalising the pairing left 30+ modules holding archived values under
+live-looking names (`f_H = 0.297`, `SIGMA_PEAK = 174.0`), which reads as a live claim. 19 modules were
+renamed so an archived value can only enter a module under a name that says archived
+(`SIGMA_0_CM2_PER_G_ARCHIVED`, `F_H_ARCHIVED_PAIR_0297`, `SIGMA_PEAK_CM2_PER_G_ARCHIVED`), each carrying a
+`# PAIRING: ARCHIVED PAIR` declaration.
+
+**What broke, disclosed.** The rename was a scripted find/replace and it damaged source in two ways that
+the test suite could not see:
+
+1. **Four files left syntactically invalid** — `scripts/v19_2_f_fH_sensitivity.py` (a
+   `from canonical_numbers import ...` line spliced into the constants import block),
+   `v0.3-prelim/code/gravothermal_evolution.py` and `scripts/t235_d5_width_test.py` (unmatched parentheses
+   from an inserted comment), `v0.3-prelim/code/v40_24_path_forward_fixed.py` (an ARCHIVED PAIR comment
+   added to a module that imports no amplitude at all). Two were restored from git and re-pinned by hand;
+   the provenance of every dangling name was checked file by file to prove which defects the rename created
+   rather than inherited.
+2. **Eleven modules loaded pairing names that no longer existed in their own import list** — the assignment
+   or import alias was renamed and the use was not (`_SIGMA_0`, `SIGMA_0`, `CONST_SIGMA_0`, `F_H_INITIAL`,
+   `F_H_PLACEHOLDER`, `F_H_CANONICAL`). None of them failed the suite.
+
+**Why the suite could not see it.** A `NameError` in a function body only fires when that function is
+called, and no test imports most of these producers. An unimported script is never executed, so a module
+that crashes the moment anyone runs it was green across 2311 tests. That is the real gap this finding is
+about, and it is wider than pairing: it applies to every script in `scripts/` that no test imports.
+
+**Guards added.**
+- `v0.3-prelim/tests/test_module_parse_and_pairing_names_bound.py` — 1292 parametrized
+  cases: every module under `scripts/` and `v0.3-prelim/code/` must parse, and every pairing-looking name it
+  loads must be bound inside it. Its first run found 3 more dangling renames (`gravothermal_yang2024.py`
+  lines 686/699/712, `phase_g4_pipeline.py` line 58, `T204_substructure_test.py` line 49), all repaired;
+  now 1292 passed (`C:\Users\lamkuenai\AppData\Local\hermes\cache\scratch\parse_guard.txt`).
+- `scripts/fH_pairing_registry.py` (read-only producer, `--check` reproduces it) and
+  `v0.3-prelim/tests/test_fH_pairing_registry.py`: the pairing each module publishes is derived from what it
+  imports or assigns, so a module cannot describe itself as canonical while importing an archived amplitude.
+  Current registry (`v0.3-prelim/data/results/fH_pairing_registry.json`):
+  10 canonical-pair / 28 archived-pair /
+  0 mixed / 0 archived without a declaration.
+- `test_no_half_paired_default_argument_call` (AST) — `g_chi_from_sigma_peak()` with no argument binds the
+  **live** amplitude at def time, so an archived-pair module calling it bare mixes pairings silently.
+  `scripts/t233_consistent_dd.py` was doing exactly that (declared archived, called with the live default)
+  and now passes the archived amplitude explicitly.
+
+**Pairing status string updated.** `constants.PAIRING_CONVENTIONS["raw_sigma_no_fH"]["status"]` moved from
+`DECLARED_UNRESOLVED` to `RESOLVED_BY_EXPLICIT_ARCHIVED_PINNING_2026-11-06`, matching the state the registry
+measures; the test that pins it was changed in the same edit rather than after a failure.
+
+**Mutation evidence, including the first harness's failure.** Harness v1 caught 4/7, and all three misses
+were the harness's own fault, not the guards': two mutations edited `scripts/constants.py`, whose import-time
+pairing assertion fires before pytest can collect anything (`rc=4`, no test summary) — the guard worked,
+stronger than a test failure, but v1 only accepted a named FAILED node; the third mutation replaced only the
+bold label of the paper's §3 declaration and left the sentence the guard actually reads. Harness v2
+(`C:\Users\lamkuenai\AppData\Local\hermes\cache\scratch\pairing_mutation_harness_v2.py`, log `C:\Users\lamkuenai\AppData\Local\hermes\cache\scratch\pairing_mutation_run2.txt`) treats an
+import-level pairing assertion as its own catch category, uses whole-line mutations, and adds the defects this
+session actually created (half-paired default argument, archived curve inheriting a live amplitude,
+pairing-blind registry classifier, producer reporting the live pair as the archived pair):
+**9/9 caught, all 8 touched files byte-identical after restore, post-restore baseline 17/17 passed.**
+
+**Verification.** Targeted pairing/registry/single-source/parse set: 1349 passed. Full suite after the
+repair: `1 failed, 3611 passed, 25 skipped, 3 warnings in 1429.38s (0:23:49)` (`C:\Users\lamkuenai\AppData\Local\hermes\cache\scratch\suite_pairing3.txt`, SUITE3_RC=1).
+
+## F29 — the knowledge base was outside every drift check, and it was stale 24 hours after the pairing repair (FOUND AND FIXED 2026-11-06)
+
+**What the project claims.** `docs/V19_2_F_REFERENCE_DATA_REGISTRY.md` is declared the single source of
+truth for numerical values (AGENTS.md project knowledge-base rule 30: "the KB is the source of truth, not
+the codebase"), and the rule says a discovered error must be fixed *and* the KB entry updated.
+
+**What was actually true.** The registry still listed, as live constants:
+
+| registry row | value it carried | live pair (finding F26) |
+|---|---|---|
+| `F_H_CANONICAL` | 0.297 | 0.7501856343179664 |
+| `SIGMA_0_CM2_PER_G` | 0.052 | 0.008150396851725193 |
+| `SIGMA_PEAK_CM2_PER_G` | 174.0 | 27.272481773080454 |
+
+with a `⚠️ TO VERIFY` note describing 0.297 as "anomalous ... doesn't match any standard cosmology
+constant" — a 2026-10 question that the 2026-11-06 decision had already answered. And **no check could see
+it**: `scripts/drift_guard.py`'s `headline_docs` list covers PAPER, README, CURRENT, FINDINGS,
+CITATION_AUDIT and TRANSITION. The registry was not in it, and `--strict` reported "No drift detected"
+while the KB contradicted `scripts/constants.py`.
+
+**Three more stale or half-paired things found in the same sweep.**
+
+1. **A half-paired block in the canonical artifact itself.**
+   `canonical_numbers.json -> v19_2_E_A2_5param_DE_best_fit` stored the archived-pair amplitudes
+   `sigma_0 = 0.0265`, `sigma_peak = 2025.57` next to `F_H = 0.7501856343179664` with nothing saying so —
+   an archived amplitude paired with a live `f_H`, the exact state this repair forbids in code but had left
+   in data. Fixed in `scripts/canonical_numbers.py`: the block now states
+   `pairing_of_the_values_above: "ARCHIVED PAIR"`, carries `F_H = F_H_LEGACY_PLACEHOLDER_0297` alongside
+   those amplitudes, and adds an explicit `live_pair_equivalent` (`sigma_0 = 0.004154`,
+   `sigma_peak = 317.5`, `F_H = 0.7501856343179664`).
+2. **A stale narrative inside the same artifact.** Its `interpretation` string said "sigma_peak=174 is the
+   CAUSALITY CAP" while `sigma_peak` in the adjacent field was 27.272481773080454. Rewritten: the 174 cap
+   is the archived pair's `sigma_peak` and does not cap the live particle-level amplitude.
+3. **§A.15 was stale against its own generator.** The committed `v0.3-prelim/data/results/section_A15.md`
+   predated the F21 Cloud-9 provenance label that `scripts/generate_a15.py` produces, and its `sigma_HH`
+   column was the archived pair. Regenerated and re-spliced into the paper: every `sigma_HH` divided by
+   exactly 6.380057431067687, every `sigma_eff` and every PASS/MARGINAL/FAIL verdict unchanged, 26/26
+   generated rows present in the paper afterwards
+   (`v0.3-prelim/tests/test_channel_taxonomy_single_source.py::test_generated_a15_region_matches_the_paper`).
+   Paper `§A.15` headline bullets and `docs/V19_2_E_A2_5PARAM_DE.md` now say which pairing their
+   amplitudes belong to.
+
+**Guard added.** `scripts/drift_guard.py::check_registry_pairing_values` (wired into `main()`) pins the
+registry's three pairing rows to the canonical artifact and requires any archived-pair literal
+(`0.297`, `0.052`, `174`, `0.0265`, `2025.57`) quoted in a paragraph that makes a `sigma`/`f_H` claim to be
+labelled archived in that same paragraph. Mutation-tested 2/2 with byte-identical restore
+(`AppData/Local/hermes/cache/scratch/registry_drift_mutation.py`): reverting the `F_H_CANONICAL` row to
+0.297 produces a HIGH drift; inserting an unlabelled "σ_0 = 0.052 and σ_peak = 174.0 ..." paragraph
+produces a MED drift. Baseline and post-restore runs are clean.
+
+**The bug in the guard, found while testing the guard.** The paragraph rule first split on `"\n\n"`,
+which matches nothing in a CRLF file — the registry is CRLF throughout — so the whole document counted as
+one paragraph and any single label anywhere would have silenced every unlabelled claim. Newline
+normalisation before splitting is what makes the rule mean what it says. A check that passes because its
+tokenizer never split anything is the worst kind of green.

@@ -43,13 +43,8 @@ from typing import Tuple, Optional
 _SCRIPTS_DIR = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'scripts'))
 if _SCRIPTS_DIR not in sys.path:
     sys.path.insert(0, _SCRIPTS_DIR)
-from constants import (
-    SIGMA_0_CM2_PER_G as _SIGMA_0,
-    A_SLOPE as _A_SLOPE,
-    V_REF_KMS as _V_REF,
-    SIGMA_PEAK_CM2_PER_G as _SIGMA_PEAK,
-    V_TARGET_KMS as _V_TARGET,
-    SIGMA_KMS as _SIGMA_1,
+from constants import (  # PAIRING: ARCHIVED PAIR (sigma-only consumer)
+    SIGMA_0_LEGACY_PAIR_052 as SIGMA_0_CM2_PER_G_ARCHIVED, A_SLOPE as _A_SLOPE, V_REF_KMS as _V_REF, SIGMA_PEAK_LEGACY_PAIR_174 as SIGMA_PEAK_CM2_PER_G_ARCHIVED, V_TARGET_KMS as _V_TARGET, SIGMA_KMS as _SIGMA_1,
 )
 
 # ====== Yang+ 2024 FIXED PARAMETERS ======
@@ -688,7 +683,7 @@ if __name__ == "__main__":
     r_s_cloud9 = 1.4  # kpc (rough)
 
     # Sigma_eff/m at Cloud-9 kinematic v=28 km/s from canonical Gaussian form
-    s_at_28 = _SIGMA_0 * (_V_REF / 28.0) ** _A_SLOPE + _SIGMA_PEAK * math.exp(-((28.0 - _V_TARGET) ** 2) / (2 * _SIGMA_1 ** 2))
+    s_at_28 = SIGMA_0_CM2_PER_G_ARCHIVED * (_V_REF / 28.0) ** _A_SLOPE + SIGMA_PEAK_CM2_PER_G_ARCHIVED * math.exp(-((28.0 - _V_TARGET) ** 2) / (2 * _SIGMA_1 ** 2))
 
     print(f"\n  Case A: Cloud-9-like (M = {M_cloud9:.1e} M_sun, V_max = {V_max_cloud9} km/s)")
     print(f"    sigma_eff/m(28 km/s) = {s_at_28:.2f} cm^2/g (canonical Gaussian)")
@@ -701,7 +696,7 @@ if __name__ == "__main__":
     V_max_fornax = 18.0
     r_s_fornax = 1.0  # kpc
 
-    s_at_15 = _SIGMA_0 * (_V_REF / 15.0) ** _A_SLOPE + _SIGMA_PEAK * math.exp(-((15.0 - _V_TARGET) ** 2) / (2 * _SIGMA_1 ** 2))
+    s_at_15 = SIGMA_0_CM2_PER_G_ARCHIVED * (_V_REF / 15.0) ** _A_SLOPE + SIGMA_PEAK_CM2_PER_G_ARCHIVED * math.exp(-((15.0 - _V_TARGET) ** 2) / (2 * _SIGMA_1 ** 2))
 
     print(f"\n  Case B: Fornax-like (M = {M_fornax:.1e} M_sun, V_max = {V_max_fornax} km/s)")
     print(f"    sigma_eff/m(15 km/s) = {s_at_15:.2f} cm^2/g (canonical Gaussian)")
@@ -714,7 +709,7 @@ if __name__ == "__main__":
     V_max_sparc = 100.0
     r_s_sparc = 5.0
 
-    s_at_100 = _SIGMA_0 * (_V_REF / 100.0) ** _A_SLOPE + _SIGMA_PEAK * math.exp(-((100.0 - _V_TARGET) ** 2) / (2 * _SIGMA_1 ** 2))
+    s_at_100 = SIGMA_0_CM2_PER_G_ARCHIVED * (_V_REF / 100.0) ** _A_SLOPE + SIGMA_PEAK_CM2_PER_G_ARCHIVED * math.exp(-((100.0 - _V_TARGET) ** 2) / (2 * _SIGMA_1 ** 2))
 
     print(f"\n  Case C: SPARC-like (M = {M_sparc:.1e} M_sun, V_max = {V_max_sparc} km/s)")
     print(f"    sigma_eff/m(100 km/s) = {s_at_100:.4f} cm^2/g")

@@ -36,11 +36,8 @@ sys.path.insert(0, str(REPO / "v0.3-prelim" / "code"))
 sys.path.insert(0, str(REPO / "scripts"))
 
 from t212_silverman_gravothermal import evaluate as t212_evaluate
-from constants import (
-    F_H_PLACEHOLDER_G7,
-    SIGMA_0_CM2_PER_G, A_SLOPE, V_REF_KMS,
-    SIGMA_PEAK_CM2_PER_G, V_TARGET_KMS, SIGMA_KMS,
-    SIGMA_PEAK_CM2_PER_G_NUISANCE,
+from constants import (  # PAIRING: ARCHIVED PAIR
+    F_H_PLACEHOLDER_G7, SIGMA_0_LEGACY_PAIR_052 as SIGMA_0_CM2_PER_G_ARCHIVED, A_SLOPE, V_REF_KMS, SIGMA_PEAK_LEGACY_PAIR_174 as SIGMA_PEAK_CM2_PER_G_ARCHIVED, V_TARGET_KMS, SIGMA_KMS, SIGMA_PEAK_CM2_PER_G_NUISANCE,
 )
 
 CLOUD9 = {
@@ -56,16 +53,16 @@ OHANA_TAU = 0.18
 OHANA_C_200 = 4.0
 
 
-def sigma_m_canonical(v, peak_amplitude=SIGMA_PEAK_CM2_PER_G):
+def sigma_m_canonical(v, peak_amplitude=SIGMA_PEAK_CM2_PER_G_ARCHIVED):
     """v19.2-F canonical sigma/m(v) with peak amplitude (174 or 0)."""
-    yukawa = SIGMA_0_CM2_PER_G * (V_REF_KMS / v)**A_SLOPE
+    yukawa = SIGMA_0_CM2_PER_G_ARCHIVED * (V_REF_KMS / v)**A_SLOPE
     if peak_amplitude == 0:
         return yukawa  # No peak
     gaussian = peak_amplitude * math.exp(-((v - V_TARGET_KMS)**2) / (2 * SIGMA_KMS**2))
     return yukawa + gaussian
 
 
-def cloud9_tau(peak_amplitude=SIGMA_PEAK_CM2_PER_G, f_H=F_H_PLACEHOLDER_G7):
+def cloud9_tau(peak_amplitude=SIGMA_PEAK_CM2_PER_G_ARCHIVED, f_H=F_H_PLACEHOLDER_G7):
     """Cloud-9 tau for given peak amplitude."""
     sigma_m_v28 = sigma_m_canonical(CLOUD9["V_max_kms"], peak_amplitude)
     sigma_eff = f_H**2 * sigma_m_v28
@@ -90,7 +87,7 @@ def main():
     print()
 
     cases = [
-        ("CANONICAL (peak=174)", SIGMA_PEAK_CM2_PER_G),
+        ("CANONICAL (peak=174)", SIGMA_PEAK_CM2_PER_G_ARCHIVED),
         ("DOWNGRADED (peak=0, Nemotron recommendation)", SIGMA_PEAK_CM2_PER_G_NUISANCE),
     ]
 

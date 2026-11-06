@@ -373,9 +373,17 @@ class TestFullChainVerification:
         )
 
     def test_dSph_decomposition_chain_is_consistent(self):
-        """The paper's 3-row dSph decomposition (2.85 -> 2.0 -> 0.18) holds."""
+        """The paper's 3-row dSph decomposition (2.85 -> 2.0 -> 0.18) holds, in the ARCHIVED pair.
+
+        PAIRING: ARCHIVED PAIR. This chain is the paper's historical decomposition and its numbers
+        (2.85, 2.0, 0.18) were produced with f_H = 0.297 against sigma_0 = 0.052 and
+        sigma_peak = 174. Before finding F26 this test mixed the live (already re-paired) sigma_0
+        with a hard-coded 174.0, which is the half-paired state the pairing rule forbids; it
+        reproduced 1.1389 instead of 2.85 and looked like a physics failure when it was a
+        convention failure. Both amplitudes now come from the archived pair, by name.
+        """
         _sigma_eff, bg = dSph_cell_sigma_m()
-        # row 1: canonical Gaussian sigma/m(15) = 2.85 (paper L1005)
+        # row 1: archived-pair Gaussian sigma/m(15) = 2.85 (paper L1005)
         # NOTE: the canonical constants live in scripts/constants.py. The repo-root
         # constants.py is a DIFFERENT module (no SIGMA_0_CM2_PER_G) and shadows it on
         # sys.path, so load the canonical one by explicit path.
@@ -384,9 +392,17 @@ class TestFullChainVerification:
             os.path.join(REPO, "scripts", "constants.py"),
         )
         gauss = channels_v03.sigma_m_at_v(
+            constants_mod.SIGMA_0_LEGACY_PAIR_052, constants_mod.A_SLOPE, 15.0
+        ) + constants_mod.SIGMA_PEAK_LEGACY_PAIR_174 * math.exp(-(15 - 29.4) ** 2 / (2 * 4.4 ** 2))
+        assert abs(gauss - 2.85) / 2.85 <= 0.01, f"archived-pair Gaussian sigma/m(15) = {gauss!r}"
+        # The live canonical pair must give exactly the pairing factor less, not a different shape.
+        gauss_live = channels_v03.sigma_m_at_v(
             constants_mod.SIGMA_0_CM2_PER_G, constants_mod.A_SLOPE, 15.0
-        ) + 174.0 * math.exp(-(15 - 29.4) ** 2 / (2 * 4.4 ** 2))
-        assert abs(gauss - 2.85) / 2.85 <= 0.01, f"Gaussian canonical sigma/m(15) = {gauss!r}"
+        ) + constants_mod.SIGMA_PEAK_CM2_PER_G * math.exp(-(15 - 29.4) ** 2 / (2 * 4.4 ** 2))
+        expected_ratio = 1.0 / constants_mod.PAIRING_K_LEGACY_TO_CANONICAL
+        assert abs(gauss / gauss_live - expected_ratio) <= 1e-9 * expected_ratio, (
+            f"archived/live amplitude ratio is {gauss / gauss_live!r}, expected {expected_ratio!r}; "
+            "any other ratio means an amplitude was moved without moving f_H")
         # row 2: the Gaussian-BW step is the background alone = 2.0
         assert abs(bg - 2.0) / 2.0 <= 0.02, f"Gaussian-BW background step = {bg!r}, expected 2.0"
         # row 3: two-component step = f_H^2 x 2.0 = 0.18, i.e. an 11x reduction

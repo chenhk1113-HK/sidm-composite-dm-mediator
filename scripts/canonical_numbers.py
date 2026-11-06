@@ -6,7 +6,11 @@ pass/fail table, the v19.2-D freeze, and the v19.2-E work.
 
 Reads scripts/constants.py and T205 OBS_PUBLISHED, computes:
 - sigma/m(v) at all 8 T205 channels using the canonical Phase 44 Gaussian
-- sigma_eff(v) = F_H^2 * sigma/m(v) with canonical F_H = 0.297
+- sigma_eff(v) = F_H^2 * sigma/m(v) with the LIVE canonical pair:
+  f_H = 0.7501856343179664 and the sigma amplitudes written in the matching pair
+  (sigma_0 = 0.008150396851725193, sigma_peak = 27.272481773080454). The archived pair
+  (f_H = 0.297, sigma_0 = 0.052, sigma_peak = 174.0) reproduces the same sigma_eff to
+  1.9e-16; see finding F25 and scripts/constants.py PAIRING_CONVENTIONS.
 - Per-channel pass/fail verdict (PASS / MARGINAL / FAIL)
 - Pass/fail summary (PASS count, MARGINAL count, FAIL count)
 - Trade-off factor: sigma_eff(Cloud-9) / 50 (Cloud-9 working benchmark)
@@ -42,8 +46,23 @@ sys.path.insert(0, str(_REPO / "v0.3-prelim" / "code"))
 from constants import (
     SIGMA_0_CM2_PER_G, A_SLOPE, V_REF_KMS,
     SIGMA_PEAK_CM2_PER_G, V_TARGET_KMS, SIGMA_KMS,
-    F_H_CANONICAL,
+    F_H_CANONICAL, PAIRING_K_LEGACY_TO_CANONICAL,
+    SIGMA_0_LEGACY_PAIR_052, SIGMA_PEAK_LEGACY_PAIR_174, F_H_LEGACY_PLACEHOLDER_0297,
+    PAIRING_CONVENTIONS,
 )
+
+# Amplitudes below are stored in the LIVE canonical pairing (f_H = 0.7501856343179664).
+# Dividing by PAIRING_K_LEGACY_TO_CANONICAL recovers the archived pair that the historical
+# artifacts were written with (finding F25).
+PAIRING_K = PAIRING_K_LEGACY_TO_CANONICAL
+
+# The archived pair, named. sigma_eff = f_H^2 * sigma/m is identical under both pairings
+# (0.297^2 * 174.0 == 0.7501856343179664^2 * 27.272481773080454 == 15.3997...), so every
+# published halo-level prediction is pairing-invariant; only the particle-level amplitude moves.
+ARCHIVED_PAIR = (SIGMA_0_LEGACY_PAIR_052, A_SLOPE, V_REF_KMS,
+                 SIGMA_PEAK_LEGACY_PAIR_174, V_TARGET_KMS, SIGMA_KMS)
+CANONICAL_PAIR = (SIGMA_0_CM2_PER_G, A_SLOPE, V_REF_KMS,
+                  SIGMA_PEAK_CM2_PER_G, V_TARGET_KMS, SIGMA_KMS)
 
 from T205_full_likelihood_published import OBS_PUBLISHED
 
@@ -68,6 +87,36 @@ def sigma_m_canonical_gaussian(v_kms, sigma_0=SIGMA_0_CM2_PER_G,
     res = sigma_peak * np.exp(-((v - v_target) ** 2) / (2 * sigma_1 ** 2))
     sigma = bg + res
     return sigma if len(sigma) > 1 else float(sigma[0])
+
+
+def sigma_m_canonical_gaussian_archived(v_kms, sigma_0=SIGMA_0_LEGACY_PAIR_052,
+                                        a_slope=A_SLOPE, v_ref=V_REF_KMS,
+                                        sigma_peak=SIGMA_PEAK_LEGACY_PAIR_174,
+                                        v_target=V_TARGET_KMS, sigma_1=SIGMA_KMS):
+    """The same Gaussian form evaluated with the ARCHIVED pair (f_H = 0.297 with
+    sigma_0 = 0.052, sigma_peak = 174.0).
+
+    This is the curve the paper's §3 table and the §2.6 sweep rows were written with, and it is
+    the curve the historical artifacts reproduce. It is NOT the live model amplitude: the live
+    pair is (sigma_0 = 0.008150396851725193, sigma_peak = 27.272481773080454) at
+    f_H = 0.7501856343179664, and the two are related by PAIRING_K = 0.15673840099471523 exactly
+    so that sigma_eff = f_H^2 * sigma/m stays identical (finding F26).
+
+    The signature mirrors sigma_m_canonical_gaussian so an archived-pair caller can override any
+    parameter without accidentally inheriting a live-pair default.
+    Any table or artifact that quotes this curve must say that it is the archived pair.
+    """
+    return sigma_m_canonical_gaussian(v_kms, sigma_0, a_slope, v_ref, sigma_peak, v_target, sigma_1)
+
+
+def sigma_eff_canonical(v_kms):
+    """Halo-level effective cross section, sigma_eff = f_H^2 * sigma/m, pairing-invariant.
+
+    This is the quantity published observational limits constrain. Comparing the raw
+    particle-level sigma/m against a published limit overstates the tension by 1/f_H^2
+    (11.336x for the archived pair, 1.777x for the canonical pair) - see finding F27.
+    """
+    return F_H_CANONICAL ** 2 * sigma_m_canonical_gaussian(v_kms)
 
 
 # ============================================================================
@@ -118,8 +167,25 @@ PARAMETER_SETS = {
         SIGMA_0_CM2_PER_G, A_SLOPE, V_REF_KMS,
         SIGMA_PEAK_CM2_PER_G, V_TARGET_KMS, SIGMA_KMS,
     ),
-    "v19_2_E_A2_5param_DE_best_fit": (0.0265, 1.198, V_REF_KMS, 2025.57, 28.47, 1.20),
+    # A2 amplitudes re-paired to the live f_H on 2026-11-06 (finding F25). Archived pair was
+    # sigma_0 = 0.0265, sigma_peak = 2025.57 at f_H = 0.297; multiplying both by PAIRING_K
+    # (0.15673840099471523) gives the values below and leaves every sigma_eff unchanged.
+    "v19_2_E_A2_5param_DE_best_fit": (
+        0.0265 * PAIRING_K, 1.198, V_REF_KMS, 2025.57 * PAIRING_K, 28.47, 1.20,
+    ),
 }
+
+# The same two parameter sets expressed in the ARCHIVED pairing, derived rather than re-typed:
+# dividing the live amplitudes by PAIRING_K recovers the numbers every pre-2026-11-06 artifact
+# was written with (0.052 / 174.0 and 0.0265 / 2025.57). Finding F25/F26.
+LEGACY_PAIR_SIGMA_0_D, LEGACY_PAIR_SIGMA_PEAK_D = (
+    PARAMETER_SETS["v19_2_D_canonical_phase_44"][0] / PAIRING_K,
+    PARAMETER_SETS["v19_2_D_canonical_phase_44"][3] / PAIRING_K,
+)
+LEGACY_PAIR_SIGMA_0_A2, LEGACY_PAIR_SIGMA_PEAK_A2 = (
+    PARAMETER_SETS["v19_2_E_A2_5param_DE_best_fit"][0] / PAIRING_K,
+    PARAMETER_SETS["v19_2_E_A2_5param_DE_best_fit"][3] / PAIRING_K,
+)
 
 
 def evaluate_channels(params, convention="published_sigma_unc"):
@@ -187,6 +253,30 @@ def build_abstract_channel_count():
         "taxonomy": ("OBS_PUBLISHED as evaluated by the likelihood "
                      "(T205_full_likelihood_published.OBS_PUBLISHED): "
                      + ", ".join(r["label"] for r in head["channels"])),
+        "pairing": {
+            "live_f_H": F_H_CANONICAL,
+            "live_f_H_squared": F_H_CANONICAL ** 2,
+            "archived_f_H": F_H_LEGACY_PLACEHOLDER_0297,
+            "archived_f_H_squared": F_H_LEGACY_PLACEHOLDER_0297 ** 2,
+            "pairing_k_legacy_to_canonical": PAIRING_K,
+            "pairing_k_inverse": 1.0 / PAIRING_K,
+            "archived_pair_amplitudes": {
+                "v19_2_D_canonical_phase_44": {
+                    "sigma_0": LEGACY_PAIR_SIGMA_0_D,
+                    "sigma_peak": LEGACY_PAIR_SIGMA_PEAK_D,
+                },
+                "v19_2_E_A2_5param_DE_best_fit": {
+                    "sigma_0": LEGACY_PAIR_SIGMA_0_A2,
+                    "sigma_peak": LEGACY_PAIR_SIGMA_PEAK_A2,
+                },
+            },
+            "note": "sigma_eff is invariant under the pairing (measured worst relative "
+                    "difference 1.9e-16 across 8 channels x 2 parameter sets x 2 sigma_unc "
+                    "conventions, and every pass/fail tally identical). Only the "
+                    "particle-level amplitudes change, each by exactly pairing_k. Divide the "
+                    "live amplitudes by pairing_k to reproduce artifacts written before "
+                    "2026-11-06. Finding F25.",
+        },
         "likelihood_convention": "published_sigma_unc",
         "headline_evaluation": "v19_2_E_A2_5param_DE_best_fit",
         "n_PASS": head["tally"]["PASS"],
@@ -380,7 +470,9 @@ NO_GO_CATALOGUE = {
             "status": "OPEN",
             "section": "2.8 (v19.2-F Phase 1+2)",
             "affected_channels": ["all channels (background sigma/m)"],
-            "argument": "The background sigma/m = 0.052*(100/v)^1.93 is a phenomenological fit. "
+            "argument": "The background sigma/m = 0.008150396851725193*(100/v)^1.93 in the live "
+                 "canonical pairing (0.052*(100/v)^1.93 in the archived f_H = 0.297 pair) "
+                 "is a phenomenological fit. "
                          "The framework's named 200 eV Yukawa at alpha_chi = 6.8e-7 fails at "
                          "v=100 by 55x and overproduces at v=10 by ~4300x; the fitted slope is "
                          "closer to a Sommerfeld v^-2 near a t-channel bound-state resonance "
@@ -620,7 +712,9 @@ def compute_canonical_numbers():
                 "C   = dba12e1 (data-only sigma/m(v) constraint, 2/4 PASS)",
                 "D   = THIS FILE (machine-generated canonical numbers)",
             ],
-            "constants_source": "scripts/constants.py (F_H_CANONICAL = 0.297 added R88(82) A.1)",
+            "constants_source": "scripts/constants.py (F_H_CANONICAL live = 0.7501856343179664; "
+                 "0.297 was the v18.29-retracted placeholder and is archived as "
+                 "F_H_LEGACY_PLACEHOLDER_0297 -- finding F25)",
             "channels_source": "T205_full_likelihood_published.OBS_PUBLISHED (8 channels with published sigma_unc)",
         },
         "v19_2_D_canonical_phase_44_free_fit": {
@@ -632,17 +726,31 @@ def compute_canonical_numbers():
             "sigma_1": SIGMA_KMS,
             "F_H": F_H_CANONICAL,
             "interpretation": (
-                "Paper canonical Gaussian sigma/m(v) per section 2.6. sigma_peak=174 is "
-                "the CAUSALITY CAP (not the Phase 44 free-fit value 178.5; per R88(76))."
+                "Paper canonical Gaussian sigma/m(v) per section 2.6. The 174 cm^2/g causality cap "
+                "(not the Phase 44 free-fit value 178.5; per R88(76)) is the ARCHIVED pair's "
+                "sigma_peak, i.e. 174.0 with f_H = 0.297; it does not cap the live particle-level "
+                "amplitude 27.272481773080454 cm^2/g. Both pairs give the same sigma_eff (finding F26)."
             ),
         },
         "v19_2_E_A2_5param_DE_best_fit": {
-            "sigma_0": 0.0265,
+            # The amplitudes below are the values this DE fit was actually produced under, i.e.
+            # the ARCHIVED pair (0.0265 / 2025.57 with f_H = 0.297). They used to sit next to
+            # F_H = 0.750 with no label, which paired an archived amplitude with a live f_H —
+            # the exact half-pair this repair forbids (finding F29).
+            "sigma_0": LEGACY_PAIR_SIGMA_0_A2,
             "a_slope": 1.198,
-            "sigma_peak": 2025.57,
+            "sigma_peak": LEGACY_PAIR_SIGMA_PEAK_A2,
             "v_target": 28.47,
             "sigma_1": 1.20,
-            "F_H": F_H_CANONICAL,
+            "F_H": F_H_LEGACY_PLACEHOLDER_0297,
+            "pairing_of_the_values_above": "ARCHIVED PAIR",
+            "live_pair_equivalent": {
+                "sigma_0": 0.0265 * PAIRING_K,
+                "sigma_peak": 2025.57 * PAIRING_K,
+                "F_H": F_H_CANONICAL,
+                "note": "same sigma_eff; each amplitude divided by 6.380057431067687 (finding F26)",
+            },
+            "F_H_canonical": F_H_CANONICAL,
             "logL": -7.29,
             "interpretation": (
                 "5-param DE best-fit to 8-channel T205 published-sigma_unc likelihood. "
@@ -774,7 +882,7 @@ def main():
     print("                  + no-go catalogue (ClawsGO #5 B.2 + #7)")
     print("=" * 70)
     print()
-    print(f"F_H canonical = {F_H_CANONICAL}")
+    print(f"F_H canonical (live pairing) = {F_H_CANONICAL}")
     print(f"Phase 44 free fit: sigma_0={SIGMA_0_CM2_PER_G}, a_slope={A_SLOPE}, "
           f"sigma_peak={SIGMA_PEAK_CM2_PER_G}, v_target={V_TARGET_KMS}, sigma_1={SIGMA_KMS}")
     print()

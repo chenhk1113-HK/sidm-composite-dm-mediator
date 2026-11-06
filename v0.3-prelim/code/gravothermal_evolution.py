@@ -35,13 +35,15 @@ import os
 _SCRIPTS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'scripts')
 if _SCRIPTS_DIR not in sys.path:
     sys.path.insert(0, _SCRIPTS_DIR)
-from constants import (
-    SIGMA_PEAK_CM2_PER_G as PHASE44_SIGMA_PEAK_CM2_PER_G,  # 174.0 cm^2/g (causality cap)
+from constants import (  # PAIRING: ARCHIVED PAIR (sigma-only consumer)
+    SIGMA_PEAK_LEGACY_PAIR_174 as PHASE44_SIGMA_PEAK_CM2_PER_G,  # 174.0 cm^2/g (archived pair;
+                                                                  # the causality cap was measured
+                                                                  # against this pair)
     V_TARGET_KMS as PHASE44_V_TARGET_KMS,                  # 29.4 km/s
-    SIGMA_KMS as PHASE44_SIGMA_1_KMS,                        # 4.4 km/s (Gaussian sigma width)
-    SIGMA_0_CM2_PER_G as PHASE44_SIGMA_0_CM2_PER_G,         # 0.052 cm^2/g
-    A_SLOPE as PHASE44_A_SLOPE,                             # 1.93 (Phase 44 free-fit)
-    V_REF_KMS as PHASE44_V_REF_KMS,                         # 100 km/s reference
+    SIGMA_KMS as PHASE44_SIGMA_1_KMS,                      # 4.4 km/s (Gaussian sigma width)
+    SIGMA_0_LEGACY_PAIR_052 as PHASE44_SIGMA_0_CM2_PER_G,  # 0.052 cm^2/g (archived pair)
+    A_SLOPE as PHASE44_A_SLOPE,                            # 1.93 (Phase 44 free-fit)
+    V_REF_KMS as PHASE44_V_REF_KMS,                        # 100 km/s reference
 )
 
 

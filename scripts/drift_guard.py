@@ -514,6 +514,56 @@ def check_channel_count_claims(doc_text, canonical_block, doc_name):
     return drifts
 
 
+def check_registry_pairing_values(doc_text, doc_name, canonical):
+    """The reference-data registry is the project's single source of truth for numbers, yet it was
+    outside every drift check (finding F29, 2026-11-06): it still listed f_H = 0.297 with sigma_0 =
+    0.052 and sigma_peak = 174.0 as live constants after the canonical pairing (finding F26) moved
+    them to the archived pair. This check pins the registry's three pairing rows to the canonical
+    artifact and requires any archived-pair literal quoted next to a sigma/f_H claim to be labelled
+    as archived in the same paragraph. Fail closed: an unlabelled archived value in the KB reads as a
+    live claim to the next reader."""
+    live = canonical.get("v19_2_D_canonical_phase_44_free_fit", {})
+    want = {"F_H_CANONICAL": live.get("F_H"),
+            "SIGMA_0_CM2_PER_G": live.get("sigma_0"),
+            "SIGMA_PEAK_CM2_PER_G": live.get("sigma_peak")}
+    drifts = []
+    for key, target in want.items():
+        if target is None:
+            continue
+        for i, line in enumerate(doc_text.splitlines(), 1):
+            if not line.strip().startswith(f"| {key} |"):
+                continue
+            cell = line.split("|")[2].strip()
+            try:
+                got = float(cell)
+            except ValueError:
+                drifts.append({"severity": "HIGH", "doc": doc_name, "type": "registry pairing row unreadable",
+                               "found": f"{key} = {cell!r} (line {i})", "canonical": target,
+                               "context": "the registry is the KB single source of truth for this constant"})
+                continue
+            if abs(got - target) > 1e-9:
+                drifts.append({"severity": "HIGH", "doc": doc_name, "type": "registry pairing value stale",
+                               "found": f"{key} = {got!r} (line {i})", "canonical": target,
+                               "context": "archived-pair value presented as a live constant "
+                                          "(findings F26/F29; pairing_k = 0.15673840099471523)"})
+    ARCHIVED_LITERALS = ("0.297", "174.0", "174 ", "2025.57", "0.052")
+    LABELS = ("ARCHIVED", "archived", "ARCHIVED PAIR", "LEGACY", "legacy", "SUPERSEDED",
+              "superseded", "retracted", "PAIRING", "pairing", "live pair", "LIVE PAIR")
+    for para in doc_text.replace("\r\n", "\n").split("\n\n"):
+        if not any(lit in para for lit in ARCHIVED_LITERALS):
+            continue
+        if ("sigma" not in para.lower() and "\u03c3" not in para and "F_H" not in para):
+            continue
+        if any(lbl in para for lbl in LABELS):
+            continue
+        snippet = " ".join(para.split())[:200]
+        drifts.append({"severity": "MED", "doc": doc_name, "type": "unlabelled archived-pair literal",
+                       "found": snippet, "canonical": "label it ARCHIVED PAIR (or quote the live-pair value)",
+                       "context": "0.297 / 0.052 / 174.0 / 0.0265 / 2025.57 are archived-pair amplitudes; "
+                                  "unlabelled they read as live constants (finding F26)"})
+    return drifts
+
+
 def main():
     print("=" * 70)
     print("V19.2-E D — Drift-guard (ClawsGO B.2)")
@@ -636,6 +686,13 @@ def main():
         drifts += check_halo_prefactors_in_doc(doc_text, doc_name)
         drifts += check_first_class_count_in_doc(doc_text, canonical_first_class, doc_name)
         all_drifts += drifts
+
+    # The reference-data registry (KB single source of truth) must agree with the canonical
+    # pairing, and every archived-pair literal it quotes must be labelled (finding F29).
+    registry_doc = _REPO / "docs" / "V19_2_F_REFERENCE_DATA_REGISTRY.md"
+    registry_text = load_doc(registry_doc)
+    if registry_text:
+        all_drifts += check_registry_pairing_values(registry_text, "REFERENCE_DATA_REGISTRY.md", canonical)
 
     if not all_drifts:
         print("=" * 70)

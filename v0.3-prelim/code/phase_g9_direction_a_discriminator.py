@@ -14,6 +14,7 @@ removes heavy and f_H(r_obs) drops.
 If heavy concentrates at center (Mechanism 1), stripping removes light first,
 and f_H(r_obs) increases (counter-direction).
 """
+# PAIRING: ARCHIVED PAIR (f_H = 0.297 with sigma_peak = 174.0 cm^2/g — the archived pair; these are historical published numbers, not the live model amplitudes at f_H = 0.7501856343179664)
 from __future__ import annotations
 import math
 import numpy as np
@@ -24,7 +25,7 @@ M_200 = 1e10
 c_200 = 15.0
 r_s_kpc = 1.5
 r_vir_kpc = c_200 * r_s_kpc
-F_H_INITIAL = 0.297
+F_H_ARCHIVED_PAIR_0297 = 0.297
 R_OBS_OVER_R_S = 1.0
 N_PERICENTER = 5
 R_PERI_OVER_R_S_HOST = 0.5
@@ -40,7 +41,7 @@ def nfw_enclosed_mass_fraction(r_over_r_vir, c=15.0):
 def heavy_radial_profile(r_over_r_s: float, tau: float) -> float:
     """Heavy particle radial distribution f_H(r) after Yang+ 2025 SIDM2c segregation.
 
-    At tau=0: f_H uniform = F_H_INITIAL
+    At tau=0: f_H uniform = F_H_ARCHIVED_PAIR_0297
     At tau>0: heavy has BROADER distribution than light (Mechanism 2 per R88(53)):
       Heavy sigma_HH > light sigma_HH -> more scattering -> equipartition
       -> heavy LOSES kinetic energy -> migrates OUTWARD
@@ -52,7 +53,7 @@ def heavy_radial_profile(r_over_r_s: float, tau: float) -> float:
       2. Broad tail (Mechanism 2): heavy extends to larger r
     """
     if tau <= 0:
-        return F_H_INITIAL
+        return F_H_ARCHIVED_PAIR_0297
 
     r_seg_core = 0.2   # heavy core radius
     r_seg_broad = 2.0  # broad tail radius (Mechanism 2)
@@ -65,7 +66,7 @@ def heavy_radial_profile(r_over_r_s: float, tau: float) -> float:
     broad_factor = 1 + 1.5 * (1 - math.exp(-tau / tau_seg)) * math.exp(-(r_over_r_s - 0.8)**2 / (2 * r_seg_broad**2))
 
     segregation_strength = max(core_factor, broad_factor)
-    return min(F_H_INITIAL * segregation_strength, 0.95)
+    return min(F_H_ARCHIVED_PAIR_0297 * segregation_strength, 0.95)
 
 
 def compute_f_H_at_obs(f_H_profile_func, r_obs_over_r_s):
@@ -137,7 +138,7 @@ def run_phase_g9():
 
     print("Test setup:")
     print(f"  Subhalo: M_200 = {M_200:.0e} M_sun, c = {c_200}, r_s = {r_s_kpc} kpc")
-    print(f"  Initial heavy fraction: f_H = {F_H_INITIAL}")
+    print(f"  Initial heavy fraction: f_H = {F_H_ARCHIVED_PAIR_0297}")
     print(f"  Observation radius: r_obs = {R_OBS_OVER_R_S} r_s")
     print(f"  Number of pericenter passages: {N_PERICENTER}")
     print()

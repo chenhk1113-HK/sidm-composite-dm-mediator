@@ -67,12 +67,18 @@ OUT_DIR = REPO / 'v0.3-prelim' / 'data' / 'results'
 
 # Paper convention (Gaussian, from v19.1.x Cloud-9 work)
 # Phase 44 canonical parameters - now imported from constants.py (R88(23) SSoT enforcement)
+# PAIRING: ARCHIVED PAIR. This module's published numbers (v192_dsph_gravothermal_sweep.json,
+# the paper's §2.6 sweep rows) were produced with f_H = 0.297 against sigma_0 = 0.052 and
+# sigma_peak = 174, so it pins the archived pair explicitly on both sides. Importing the live
+# canonical amplitude here while keeping V1_SIGMA_PEAK = 174.0 below is the half-paired state
+# the pairing rule forbids; that is what finding F26 exposed in this file on 2026-11-06.
 from constants import (
-    SIGMA_0_CM2_PER_G as PHASE44_SIGMA_0,  # 0.052 cm^2/g at v=100 km/s
+    SIGMA_0_LEGACY_PAIR_052 as PHASE44_SIGMA_0,  # 0.052 cm^2/g at v=100 km/s (archived pair)
     A_SLOPE as PHASE44_A_SLOPE,             # 1.93 Phase 44 free fit (was 1.0; R86 audit caught mismatch)
     V_REF_KMS as PHASE44_V_REF,            # 100 km/s reference velocity
+    F_H_LEGACY_PLACEHOLDER_0297 as F_H_ARCHIVED,  # 0.297 (archived pair)
 )
-V1_SIGMA_PEAK = 174.0  # cm^2/g
+V1_SIGMA_PEAK = 174.0  # cm^2/g  # PAIRING: ARCHIVED PAIR amplitude (canonical pair: 27.272481773080454)
 V1_V_TARGET = 29.4  # km/s (R74 fix: Phase 44 free fit = 29.36; constants.py = 29.4)
 V1_WIDTH = 4.4  # km/s Gaussian width
 

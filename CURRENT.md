@@ -107,8 +107,50 @@ now asserts the v0.8 MAP (478 GeV / 488 MeV / 0.81σ), so this line, the docs an
   canonicalising it requires re-pairing `sigma_0` and `sigma_peak` by 0.15673840099471523, which reproduces every
   §A.15 `sigma_eff` to 3.558e-16 relative and leaves the canonical Phase-44 canonical published_sigma_unc tally at
   1 PASS / 0 MARGINAL / 7 FAIL and the v19.2-E A.2 best-fit published_sigma_unc tally at 5 PASS / 2 MARGINAL / 1 FAIL (canonical_numbers.json).
-  Doing it without re-pairing changes those verdicts; both options are laid out in F25 and the pairing choice (D11)
-  is open.
+  Doing it without re-pairing changes those verdicts. The split is now REPAIRED (owner decision 2026-11-06,
+  "call 1 repair"; decision D11 CLOSED): one live pair, the archived pair reachable only under archived
+  names, and import-time assertions that fail a half-paired edit. See F26.
+
+- **F26 (f_H pairing REPAIRED 2026-11-06).** Live pair: f_H = 0.7501856343179664 with sigma_0 =
+  0.008150396851725193 and sigma_peak = 27.272481773080454 cm^2/g. Archived pair (0.297 / 0.052 / 174.0)
+  kept under `F_H_LEGACY_PLACEHOLDER_0297`, `SIGMA_0_LEGACY_PAIR_052`, `SIGMA_PEAK_LEGACY_PAIR_174`.
+  Verified unchanged: canonical_numbers.json 303 leaves identical with 0 `sigma_eff` changed and 48 raw +
+  8 amplitude leaves moved by exactly 0.15673840099471523; the §2.6a sweep artifact regenerated 300/300
+  leaves identical; Cloud-9 `sigma_eff` still 100.03606419810939 with the T120 scoreboard adopted arm,
+  a_slope=0.5 and a_slope=0.8, tally 7 PASS / 1 MARGINAL / 0 FAIL
+  (`v0.3-prelim/data/results/t120_adopted_arm_declaration.json`). Module pairing registry:
+  `v0.3-prelim/data/results/fH_pairing_registry.json`
+  (10 canonical / 28 archived). The particle-level amplitude claim genuinely changed: 27.27 cm^2/g, not
+  174, and the 174 causality-cap narrative is historical to the archived pair.
+- **F27 (comparison-level defect, MEASURED AND FIXED IN THE PAPER 2026-11-06).** The §3 table and the
+  Abstract compared particle-level `sigma/m` (archived pair) against Horigome+ 2025's halo-level bound on
+  `sigma_eff = f_H^2 * sigma/m`, overstating the tension by 1/0.297^2 = 11.3367. At the level the bound
+  applies the eight §3 velocities give 2.39 / 1.96 / 1.25 / 3.30 / 73.22 / 76.99 / 4.35 / 0.02 times
+  0.2 cm^2/g — so the dwarf-velocity tension is 1.25-4.35x rather than 14-49x, and the Cloud-9 anchor
+  stays severe at 73-77x. The paper now states its pairing and both readings. A definitive comparison
+  still needs Horigome+'s SASHIMI likelihood re-run with our `sigma(v,theta)` (§3.6).
+
+- **F28 (pairing rename collateral, REPAIRED 2026-11-06, GUARD ADDED).** Renaming archived values out of
+  live-looking names left 4 modules syntactically invalid and 11 modules using pairing names their own imports
+  no longer defined; none of it failed the suite, because an unimported script is never executed. All repaired.
+  New guard `v0.3-prelim/tests/test_module_parse_and_pairing_names_bound.py` parses all 1292
+  producers and requires every pairing name to be bound (1292 passed,
+  `AppData/Local/hermes/cache/scratch/parse_guard.txt`), and found 3 further dangling renames on its first run.
+  Pairing registry (`v0.3-prelim/data/results/fH_pairing_registry.json`, produced by `scripts/fH_pairing_registry.py`):
+  10 canonical / 28 archived / 0 mixed /
+  0 archived-without-declaration. Mutation harness v2: 9/9 caught with
+  byte-identical restore (`AppData/Local/hermes/cache/scratch/pairing_mutation_run2.txt`); harness v1's 4/7 is
+  disclosed in F28 as a harness fault, not a guard failure. Full suite: 1 failed, 3611 passed, 25 skipped, 3 warnings in 1429.38s (0:23:49).
+- **F29 (knowledge base outside the drift layer, FOUND AND FIXED 2026-11-06).** `docs/V19_2_F_REFERENCE_DATA_REGISTRY.md`
+  still carried `F_H_CANONICAL = 0.297`, `SIGMA_0 = 0.052`, `SIGMA_PEAK = 174.0` as live constants while
+  `--strict` reported no drift, because the registry was in no `headline_docs` list. Registry rows pinned to
+  the live pair, a half-paired `v19_2_E_A2_5param_DE_best_fit` block in `canonical_numbers.json` labelled as
+  the archived pair with an explicit `live_pair_equivalent`, its stale "sigma_peak=174 is the CAUSALITY CAP"
+  narrative corrected, and §A.15 regenerated (every `sigma_HH` divided by 6.380057431067687, every `sigma_eff`
+  and verdict unchanged, 26/26 rows re-spliced into the paper). New guard
+  `scripts/drift_guard.py::check_registry_pairing_values`, mutation-tested 2/2 with byte-identical restore
+  (`AppData/Local/hermes/cache/scratch/registry_drift_mutation.py`).
+
 - **F25 (measured 2026-11-06).** Canonical f_H = 0.750 is degenerate with the fitted amplitudes, and three internal
   Cloud-9 `sigma_eff` values now coexist — 14.6443, 100.03606419810939 and 165.4921 — compared against bars 128.0,
   100.0 and 128.0. Evidence and the two implementation options: `docs/INTEGRITY_FINDINGS_2026-11-04.md` F25.

@@ -40,16 +40,11 @@ from pathlib import Path
 
 # Use Phase 44 canonical SSoT from constants.py
 sys.path.insert(0, r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\scripts")
-from constants import (
-    SIGMA_0_CM2_PER_G as SIGMA_0,
-    A_SLOPE,
-    V_REF_KMS as V_REF,
-    V_TARGET_KMS as V_TARGET,
-    SIGMA_KMS as FWHM,
-    SIGMA_PEAK_CM2_PER_G as SIGMA_PEAK,
+from constants import (  # PAIRING: ARCHIVED PAIR
+    SIGMA_0_LEGACY_PAIR_052 as SIGMA_0_CM2_PER_G_ARCHIVED, A_SLOPE, V_REF_KMS as V_REF, V_TARGET_KMS as V_TARGET, SIGMA_KMS as FWHM, SIGMA_PEAK_LEGACY_PAIR_174 as SIGMA_PEAK_CM2_PER_G_ARCHIVED,
 )
 
-F_H = 0.297  # Yang+ 2025-derived f_H
+F_H_ARCHIVED_PAIR_0297 = 0.297  # Yang+ 2025-derived f_H
 T_LOOKBACK_GYR = 10.0  # typical halo formation epoch
 
 # BM2 calibration anchor (Yang+ 2024 Table 1)
@@ -60,7 +55,7 @@ BM2_T_C_GYR = 28.7
 
 def sigma_m_canonical_gaussian(v):
     """Canonical σ/m(v) — Gaussian resonance at v_target, Yukawa-type background."""
-    return SIGMA_0 * (V_REF / v) ** A_SLOPE + SIGMA_PEAK * math.exp(
+    return SIGMA_0_CM2_PER_G_ARCHIVED * (V_REF / v) ** A_SLOPE + SIGMA_PEAK_CM2_PER_G_ARCHIVED * math.exp(
         -((v - V_TARGET) ** 2) / (2 * FWHM ** 2)
     )
 
@@ -141,7 +136,7 @@ def predict_phase(V_max, rho_eff, t_lookback=T_LOOKBACK_GYR, sigma_hh_mode=False
     dict with sigma_mb, sigma_eff, sigma_hh, t_c, tau, phase, in_calibration
     """
     sigma_mb = mb_weighted_sigma_m(V_max)
-    sigma_eff = F_H ** 2 * sigma_mb  # observable (used by kinematics)
+    sigma_eff = F_H_ARCHIVED_PAIR_0297 ** 2 * sigma_mb  # observable (used by kinematics)
     sigma_hh = sigma_mb              # microphysical (used by gravothermal cascade)
     if sigma_hh_mode:
         # Correct (R88(49), Suggestion 1): gravothermal driven by σ_HH, not σ_eff

@@ -26,27 +26,28 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[1]
 
 T_HUBBLE_GYR = 13.8
-SIGMA_0_CM2_PER_G = 0.052
-SIGMA_PEAK_CM2_PER_G = 174.0
+# PAIRING: ARCHIVED PAIR (f_H = 0.297 with sigma_0 = 0.052, sigma_peak = 174).
+SIGMA_0_CM2_PER_G_ARCHIVED = 0.052
+SIGMA_PEAK_CM2_PER_G_ARCHIVED = 174.0
 V_TARGET_KMS = 29.4
 SIGMA_KMS = 4.4
 A_SLOPE = 1.93
 V_REF_KMS = 100.0
-F_H_PLACEHOLDER = 0.297
+F_H_ARCHIVED_PAIR_0297 = 0.297
 CLOUD9_V_MAX = 28.0
 CLOUD9_M_HALO = 5e9
 
 
-def sigma_m_canonical(v, peak_amplitude=SIGMA_PEAK_CM2_PER_G):
+def sigma_m_canonical(v, peak_amplitude=SIGMA_PEAK_CM2_PER_G_ARCHIVED):
     """v19.2-F canonical sigma/m(v) = Yukawa background + Gaussian peak."""
-    yukawa = SIGMA_0_CM2_PER_G * (V_REF_KMS / v) ** A_SLOPE
+    yukawa = SIGMA_0_CM2_PER_G_ARCHIVED * (V_REF_KMS / v) ** A_SLOPE
     if peak_amplitude == 0:
         return yukawa
     gaussian = peak_amplitude * math.exp(-((v - V_TARGET_KMS)**2) / (2 * SIGMA_KMS**2))
     return yukawa + gaussian
 
 
-def cloud9_tau_pure_python(peak_amplitude=SIGMA_PEAK_CM2_PER_G, f_H=F_H_PLACEHOLDER):
+def cloud9_tau_pure_python(peak_amplitude=SIGMA_PEAK_CM2_PER_G_ARCHIVED, f_H=F_H_ARCHIVED_PAIR_0297):
     """Cloud-9 tau using PURE PYTHON (no project modules).
 
     Uses Cloud-9 halo parameters as documented in t212_evaluate output
@@ -83,7 +84,7 @@ def balberg_t_core_Gyr(sigma_eff_cm2_per_g, rho_s_M_sun_pc3, r_s_pc, v_max_kms):
     return 12.7 / sigma_eff_cm2_per_g * (rho_s_M_sun_pc3 / 1e-2) ** -1 * (r_s_pc / 1e4) * (100 / v_max_kms)
 
 
-def cloud9_tau_pure_python(peak_amplitude=SIGMA_PEAK_CM2_PER_G, f_H=F_H_PLACEHOLDER):
+def cloud9_tau_pure_python(peak_amplitude=SIGMA_PEAK_CM2_PER_G_ARCHIVED, f_H=F_H_ARCHIVED_PAIR_0297):
     """Cloud-9 tau using PURE PYTHON (no project modules).
 
     Verifies v40.46 / v40.56 result via direct analytical formula.

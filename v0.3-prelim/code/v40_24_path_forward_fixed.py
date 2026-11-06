@@ -26,9 +26,8 @@ sys.path.insert(0, _PROJECT)  # for constants.py at project root
 sys.path.insert(0, os.path.join(_PROJECT, "v0.3-prelim", "code"))  # for v19_2_f_* modules
 
 # Import ACTUAL project constants and functions
-from constants import (
-    M_CHI_GEV, ALPHA_D, G_CHI, KAPPA_C, KAPPA_C_ANALYTIC,
-    C_KMS, HBAR_C_GEV_CM,
+from constants import (  # PAIRING: ARCHIVED PAIR
+    M_CHI_GEV, ALPHA_D, G_CHI, KAPPA_C, KAPPA_C_ANALYTIC, C_KMS, HBAR_C_GEV_CM,
 )
 
 # Hardcoded from project context (v40.20 locked values, not in constants.py)
@@ -36,6 +35,9 @@ M_RHO_GEV = 5e-5             # 0.05 MeV mediator mass
 V_TARGET_KMS = 29.4          # Cloud-9 resonance velocity
 SIGMA_KMS = 4.4              # MB Gaussian width (deprecated, MB now uses halo-specific)
 A_RES = 100.0                # resonance parameter
+# PAIRING: ARCHIVED PAIR — this module hardcodes the archived pair (f_H = 0.297 with
+# sigma_peak = 174.0 cm^2/g); it does not import the live amplitudes, so its numbers
+# are the historical pair and must be labelled as such.
 SIGMA_PEAK_CM2_PER_G = 174.0 # canonical Cloud-9 sigma/m peak
 
 # Import the actual sigma_m_resonance (5-arg signature)

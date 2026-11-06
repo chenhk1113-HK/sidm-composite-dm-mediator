@@ -1,0 +1,353 @@
+{
+  "canonical_pair_modules": [
+    "v0.3-prelim/code/phase20_full_space_conditions.py",
+    "v0.3-prelim/code/phase39b_sidm_responsive_profile.py",
+    "v0.3-prelim/code/phase44_joint_fit_v2_real_likelihood.py",
+    "v0.3-prelim/code/phase44_v2_a2_5param_de.py",
+    "v0.3-prelim/code/phase_g17b_species_dependent_ide.py",
+    "v0.3-prelim/code/phase_g17c_full_mcmc_ide.py",
+    "v0.3-prelim/code/phase_g19_direction_d_observation_check.py",
+    "v0.3-prelim/code/v19_2_e_c_data_only_sigma_m.py",
+    "v0.3-prelim/code/v19_2_f_loop4_tc_breit_wigner_reproduction.py",
+    "v0.3-prelim/code/v40_24_path_forward_fixed.py"
+  ],
+  "archived_pair_modules": [
+    "scripts/fH_pairing_registry.py",
+    "scripts/t233_consistent_dd.py",
+    "scripts/t235_d5_width_test.py",
+    "scripts/t236_d5_fit.py",
+    "scripts/v192_dsph_gravothermal_sweep.py",
+    "scripts/v19_2_f_cloud9_cM_elbert.py",
+    "scripts/v19_2_f_cloud9_cM_marginalized.py",
+    "scripts/v19_2_f_cloud9_cM_tension.py",
+    "scripts/v19_2_f_cloud9_cM_three_prescriptions.py",
+    "scripts/v19_2_f_cloud9_merger_history.py",
+    "scripts/v19_2_f_cloud9_velocity_form_sensitivity.py",
+    "scripts/v19_2_f_fH_sensitivity.py",
+    "scripts/v19_2_f_fornax_no_peak.py",
+    "scripts/v19_2_f_n10_docx_response.py",
+    "scripts/v19_2_f_n11_docx_response.py",
+    "scripts/v19_2_f_n12_docx_response.py",
+    "scripts/v19_2_f_no_peak_analysis.py",
+    "v0.3-prelim/code/gravothermal_yang2024.py",
+    "v0.3-prelim/code/phase_g10_sidm2c_f_h.py",
+    "v0.3-prelim/code/phase_g11_cosmological_synthesis.py",
+    "v0.3-prelim/code/phase_g11_v2_path3_refined.py",
+    "v0.3-prelim/code/phase_g11_v3_debug.py",
+    "v0.3-prelim/code/phase_g17a_symmetric_ide.py",
+    "v0.3-prelim/code/phase_g4_pipeline.py",
+    "v0.3-prelim/code/phase_g9_direction_a_discriminator.py",
+    "v0.3-prelim/code/T204_substructure_test.py",
+    "v0.3-prelim/code/v19_2_e_b_per_halo_gravothermal.py",
+    "v0.3-prelim/tests/test_channel_bound_attribution.py"
+  ],
+  "mixed_pair_modules": [],
+  "archived_contract_modules_missing_declaration": [],
+  "hardcoded_archived_literals_no_contract": [
+    {
+      "module": "scripts/silverman2026_cloud9_gravothermal.py",
+      "names": [
+        "PHASE44_SIGMA_0"
+      ]
+    },
+    {
+      "module": "scripts/t220_bound_state_sidm.py",
+      "names": [
+        "sigma_peak_target"
+      ]
+    },
+    {
+      "module": "scripts/t221_drobczyk_combined_sidm.py",
+      "names": [
+        "sigma_peak_target"
+      ]
+    },
+    {
+      "module": "scripts/t222_r50_retraction.py",
+      "names": [
+        "sigma_peak_target"
+      ]
+    },
+    {
+      "module": "scripts/t223_dark_photon_sidm.py",
+      "names": [
+        "sigma_peak_target"
+      ]
+    },
+    {
+      "module": "scripts/t224_sigma_peak_dd_tension.py",
+      "names": [
+        "sigma_peak"
+      ]
+    },
+    {
+      "module": "scripts/t225_corrected_dd.py",
+      "names": [
+        "sigma_peak"
+      ]
+    },
+    {
+      "module": "scripts/t226_proper_dd.py",
+      "names": [
+        "sigma_peak"
+      ]
+    },
+    {
+      "module": "scripts/t227_hierarchy_constraint.py",
+      "names": [
+        "sigma_peak"
+      ]
+    },
+    {
+      "module": "scripts/t229_hierarchy_sensitivity.py",
+      "names": [
+        "sigma_peak_target"
+      ]
+    },
+    {
+      "module": "scripts/t238_figure_sigma_m_horigome.py",
+      "names": [
+        "SIGMA_PEAK"
+      ]
+    },
+    {
+      "module": "scripts/t239_figure_hierarchy.py",
+      "names": [
+        "SIGMA_PEAK"
+      ]
+    },
+    {
+      "module": "v0.3-prelim/code/phase44_two_component.py",
+      "names": [
+        "PHASE44_SIGMA_0_PER_M"
+      ]
+    },
+    {
+      "module": "v0.3-prelim/code/t120_10a_direct_detection.py",
+      "names": [
+        "sigma_target"
+      ]
+    },
+    {
+      "module": "v0.3-prelim/code/T175_nogo_retest_t163.py",
+      "names": [
+        "sigma0_at_v100"
+      ]
+    },
+    {
+      "module": "v0.3-prelim/code/T180_jvas_gravothermal.py",
+      "names": [
+        "sigma_0"
+      ]
+    },
+    {
+      "module": "v0.3-prelim/code/T181_relic_density.py",
+      "names": [
+        "sigma_HH_cm2_per_g",
+        "sigma_HL_cm2_per_g",
+        "sigma_LL_cm2_per_g"
+      ]
+    },
+    {
+      "module": "v0.3-prelim/code/T183_2c_fluid.py",
+      "names": [
+        "SIGMA_HH",
+        "SIGMA_HL",
+        "SIGMA_LL"
+      ]
+    },
+    {
+      "module": "v0.3-prelim/code/T194_master_sigma_v_figure.py",
+      "names": [
+        "SIGMA_0"
+      ]
+    },
+    {
+      "module": "v0.3-prelim/code/T202_two_component_sidm_nbody.py",
+      "names": [
+        "SIGMA_M_CM2_PER_G"
+      ]
+    },
+    {
+      "module": "v0.3-prelim/code/T203_proper_two_component_sidm.py",
+      "names": [
+        "SIGMA_M_PHASE44"
+      ]
+    },
+    {
+      "module": "v0.3-prelim/code/T208_path_b_cloud9_host_halo_gravothermal.py",
+      "names": [
+        "SIGMA_0"
+      ]
+    },
+    {
+      "module": "v0.3-prelim/code/v19_2_f_loop1_segue1_veff_check.py",
+      "names": [
+        "SIGMA_TARGET_CM2_PER_G"
+      ]
+    },
+    {
+      "module": "v0.3-prelim/code/v19_2_f_loop2_multi_ufd_regenerator.py",
+      "names": [
+        "SIGMA_TARGET"
+      ]
+    },
+    {
+      "module": "v0.3-prelim/code/v19_2_f_lyman_alpha_post_v18.py",
+      "names": [
+        "target"
+      ]
+    },
+    {
+      "module": "v0.3-prelim/code/v19_2_f_lyman_alpha_post_v24.py",
+      "names": [
+        "sigma_target"
+      ]
+    },
+    {
+      "module": "v0.3-prelim/code/v19_2_f_lyman_alpha_post_v25.py",
+      "names": [
+        "sigma_target"
+      ]
+    },
+    {
+      "module": "v0.3-prelim/code/v19_2_f_lyman_alpha_post_v27.py",
+      "names": [
+        "sigma_target"
+      ]
+    },
+    {
+      "module": "v0.3-prelim/code/v19_2_f_lyman_alpha_post_v30.py",
+      "names": [
+        "SIGMA_TARGET"
+      ]
+    },
+    {
+      "module": "v0.3-prelim/code/v19_2_f_lyman_alpha_post_v31.py",
+      "names": [
+        "SIGMA_TARGET"
+      ]
+    },
+    {
+      "module": "v0.3-prelim/code/v19_2_f_lyman_alpha_post_v31_continuous_curve.py",
+      "names": [
+        "SIGMA_TARGET"
+      ]
+    },
+    {
+      "module": "v0.3-prelim/code/v19_2_f_lyman_alpha_post_v32_multi_curve.py",
+      "names": [
+        "SIGMA_TARGET"
+      ]
+    },
+    {
+      "module": "v0.3-prelim/code/v19_2_f_lyman_alpha_post_v32_velocity_distribution.py",
+      "names": [
+        "SIGMA_TARGET"
+      ]
+    },
+    {
+      "module": "v0.3-prelim/code/v19_2_f_lyman_alpha_post_v33_full_multi_curve.py",
+      "names": [
+        "SIGMA_TARGET"
+      ]
+    },
+    {
+      "module": "v0.3-prelim/code/v19_2_f_lyman_alpha_post_v35_extended_curve.py",
+      "names": [
+        "SIGMA_TARGET"
+      ]
+    },
+    {
+      "module": "v0.3-prelim/code/v19_2_f_lyman_alpha_post_v35_velocity_weighted.py",
+      "names": [
+        "SIGMA_TARGET"
+      ]
+    },
+    {
+      "module": "v0.3-prelim/code/v19_2_f_lyman_alpha_post_v35_window_sensitivity.py",
+      "names": [
+        "SIGMA_TARGET"
+      ]
+    },
+    {
+      "module": "v0.3-prelim/code/v19_2_f_lyman_alpha_post_v36_dense_sampling.py",
+      "names": [
+        "SIGMA_TARGET"
+      ]
+    },
+    {
+      "module": "v0.3-prelim/code/v19_2_f_lyman_alpha_post_v40_1_rebaseline.py",
+      "names": [
+        "SIGMA_TARGET"
+      ]
+    },
+    {
+      "module": "v0.3-prelim/code/v19_2_f_lyman_alpha_post_v40_2_finegrid.py",
+      "names": [
+        "SIGMA_TARGET"
+      ]
+    },
+    {
+      "module": "v0.3-prelim/code/v19_2_f_lyman_alpha_post_v40_extended.py",
+      "names": [
+        "SIGMA_TARGET"
+      ]
+    },
+    {
+      "module": "v0.3-prelim/code/v19_2_f_phase3_composite_form_factor.py",
+      "names": [
+        "TARGET_SIGMA"
+      ]
+    },
+    {
+      "module": "v0.3-prelim/code/v19_2_f_phase3_resonance_scan.py",
+      "names": [
+        "sigma_target"
+      ]
+    },
+    {
+      "module": "v0.3-prelim/code/v19_2_f_priority1_resonance_form_factor.py",
+      "names": [
+        "TARGET_SIGMA_CM2_PER_G"
+      ]
+    },
+    {
+      "module": "v0.3-prelim/code/v40_30_alpha_d_derive.py",
+      "names": [
+        "target_born"
+      ]
+    },
+    {
+      "module": "v0.3-prelim/code/v40_36_all_fixes.py",
+      "names": [
+        "SIGMA_PEAK"
+      ]
+    },
+    {
+      "module": "yukawa_resonance_benchmark.py",
+      "names": [
+        "TARGET_SIGMA"
+      ]
+    }
+  ],
+  "counts": {
+    "canonical_pair_modules": 10,
+    "archived_pair_modules": 28,
+    "mixed_pair_modules": 0,
+    "archived_contract_modules_missing_declaration": 0
+  },
+  "canonical_pair_values": {
+    "f_H": 0.7501856343179664,
+    "sigma_0_cm2_per_g": 0.008150396851725193,
+    "sigma_peak_cm2_per_g": 27.272481773080454
+  },
+  "archived_pair_values": {
+    "f_H": 0.297,
+    "sigma_0_cm2_per_g": 0.052,
+    "sigma_peak_cm2_per_g": 174.0
+  },
+  "pairing_k_legacy_to_canonical": 0.15673840099471523,
+  "pairing_rule": "Every module publishes exactly one pairing through what it imports. An archived-pair module binds archived-looking names and carries the '# PAIRING: ARCHIVED PAIR' declaration; a canonical-pair module imports the live amplitudes with f_H = 0.7501856343179664. sigma_eff = f_H^2 * sigma/m is identical between the pairs, so the choice decides which number is the particle-level cross section, not any halo-level prediction.",
+  "generated_utc": "2026-11-06T11:36:02+00:00"
+}

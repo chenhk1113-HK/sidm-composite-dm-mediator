@@ -64,6 +64,7 @@ KPC_M = 3.0857e19
 RHO_CRIT_MSUN_PER_KPC3 = 141.0
 
 # Canonical Gaussian parameters (from scripts/constants.py)
+# PAIRING: ARCHIVED PAIR (f_H = 0.297 with sigma_0 = 0.052, sigma_peak = 174).
 SIGMA_0_CM2_PER_G = 0.052
 A_SLOPE = 1.93
 V_REF_KMS = 100.0

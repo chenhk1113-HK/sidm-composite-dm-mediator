@@ -1271,3 +1271,81 @@ What the decision does not do: it does not close the mass-velocity offset, does 
 anchor velocity or its implied core scale, does not license presenting a simulation count as an
 observation, and changes no cross-section number. What it changes is what a future failure to
 find a twin would mean: nothing.
+
+### 27.9 The published-threshold comparison in the paper was at the wrong level, and the honest number is smaller (measured 2026-11-06)
+
+The §3 table's σ/m column and the "× above published 0.2 cm²/g" column were checked against what
+Horigome+ 2025's 0.2 cm²/g actually bounds. Their bound is on the halo-level effective cross section;
+the table's column is the particle-level amplitude of the archived pair. The mismatch factor is
+1/f_H² = 1/0.297² = 11.3367.
+
+Measured on the same eight velocities (9, 10, 15, 18, 28, 29.4, 40, 100 km/s):
+
+| v (km/s) | paper σ/m (archived pair) | σ_eff = f_H²·σ/m | × above 0.2 | paper's own × |
+|---|---|---|---|---|
+| 9 | 5.4277 | 0.4788 | 2.39 | 27 |
+| 10 | 4.4364 | 0.3913 | 1.96 | 22 |
+| 15 | 2.8455 | 0.2510 | 1.25 | 14 |
+| 18 | 7.4891 | 0.6606 | 3.30 | 37 |
+| 28 | 166.0181 | 14.6443 | 73.22 | 830 |
+| 29.4 | 174.5522 | 15.3971 | 76.99 | 873 |
+| 40 | 9.8611 | 0.8698 | 4.35 | 49 |
+| 100 | 0.0520 | 0.0046 | 0.02 | 0.26 |
+
+What this means for the framework: the dwarf-regime tension with Horigome+ 2025 is real but is
+1.25–4.35× at the level their bound applies, not 14–49×. Fornax at v = 15 is 1.25× above the threshold,
+which is close enough that a modest change in the background amplitude or in f_H would clear it. The
+Cloud-9 anchor tension is unaffected in kind (73–77×).
+
+What this does not mean: it is not a re-derivation of Horigome+'s bound. Their 0.2 cm²/g comes from a
+SASHIMI likelihood over their own σ(v,θ) form; applying it to σ_eff evaluated at the same velocity is
+this project's convention, and it is the convention that needs justifying. It is also not a constraint
+on the framework's cross section — it is a statement about how the framework's own table was being read.
+
+Deliberation left open: whether to (a) present only the halo-level comparison and move the raw
+particle-level table to an appendix, (b) re-run their likelihood with our σ(v,θ) as §3.6 promises, or
+(c) present both columns side by side as now. Option (c) was implemented 2026-11-06; (a) and (b) remain
+open.
+
+### 27.10 Finding F28 closed (2026-11-06): the pairing rename's collateral damage is now a guard, and the residue it exposed is a decision
+
+The rename that moved archived values out of live-looking names produced 4 syntactically invalid modules and
+11 modules referencing pairing names their own imports no longer defined. All were repaired, and the class of
+defect is covered by `v0.3-prelim/tests/test_module_parse_and_pairing_names_bound.py` (1292 modules parsed,
+every pairing-looking name required to be bound). Its first run found 3 dangling renames that the rename
+script had created and that no test would otherwise have noticed.
+
+What is open here is a decision, not a defect:
+
+1. **The new guard is pairing-scoped.** It parses every producer, so a syntax error anywhere in `scripts/` or
+   `v0.3-prelim/code/` now fails the suite. Undefined *names*, however, are only checked for pairing-related
+   names. A dangling `M_VIR` in an unimported script would still pass. Extending the binding check to all
+   loaded names is mechanical but raises false positives from `try/except ImportError` optional-dependency
+   patterns. Worth doing, or worth leaving scoped? Owner's call.
+2. **Most of `scripts/` is never imported by the suite.** 1292 producer modules exist (`v0.3-prelim/data/results/fH_pairing_registry.json`,
+   `v0.3-prelim/tests/test_module_parse_and_pairing_names_bound.py`) and the tests import a fraction of them.
+   A producer that has not been executed since a number was published from it is a claim with no execution
+   evidence behind it, and this session proved the suite cannot see it. The structural answer is an
+   import-or-execute layer: either a test that imports every producer, or a scheduled re-run of the specific
+   producers behind published artifacts, with output compared to the committed artifact. That is a bigger
+   commitment than a guard and should not be taken silently.
+3. **Archived-pair producers are frozen on purpose.** 28 modules (`v0.3-prelim/data/results/fH_pairing_registry.json`)
+   deliberately reproduce the archived pair so historical artifacts stay reproducible to the digit. They will
+   keep importing `SIGMA_*_LEGACY_PAIR_*`. The `# PAIRING: ARCHIVED PAIR` declaration plus
+   `test_fH_pairing_registry.py` is what keeps a future physics change from being applied to them by accident.
+
+### 27.11 Finding F29 open question (2026-11-06): how much of the documentation should the drift layer own?
+
+`check_registry_pairing_values` pins one document. The repository has 47 disclosed hardcoded archived
+literals (`hardcoded_archived_literals_no_contract` in `v0.3-prelim/data/results/fH_pairing_registry.json`)
+spread across docs and scripts that are labelled but not enforced, and `drift_guard.py` still checks only
+seven headline documents plus the registry. Two ways forward, both defensible:
+
+1. **Widen the same rule** (every `docs/*.md` that quotes a pairing constant must label its pairing). Cheap
+   to write, but it will surface a long tail of historical documents written before the pairing existed, and
+   the honest fix for most of them is "mark superseded", which is a documentation policy decision, not a bug.
+2. **Leave the check scoped to the sources of truth** (registry + paper + front pages) and rely on
+   `scripts/fH_pairing_registry.py` for module-level pairing truth. Less coverage, fewer false alarms.
+
+The middle ground that matches how the other F16/F19 guards work: pin any document a *published number*
+is read from, and leave archival documents alone. That is the recommendation, but the choice is the owner's.

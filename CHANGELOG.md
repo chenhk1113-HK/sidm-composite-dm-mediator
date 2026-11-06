@@ -1,3 +1,77 @@
+## [KB-Drift-Coverage-F29-2026-11-06] - the single source of truth was unchecked, stale, and half-paired in one artifact
+
+- **Coverage gap:** `docs/V19_2_F_REFERENCE_DATA_REGISTRY.md` was in no drift-guard document list, so it kept
+  `F_H_CANONICAL = 0.297`, `SIGMA_0 = 0.052`, `SIGMA_PEAK = 174.0` as live constants after finding F26 moved
+  them to the archived pair. Rows now pinned to the live pair and labelled.
+- **Half-paired data:** `canonical_numbers.json -> v19_2_E_A2_5param_DE_best_fit` carried archived amplitudes
+  next to the live `f_H`; it now declares `pairing_of_the_values_above: ARCHIVED PAIR` and an explicit
+  `live_pair_equivalent`. Its `interpretation` text no longer claims 174 caps the live amplitude.
+- **§A.15 regenerated and re-spliced:** every `sigma_HH` divided by exactly 6.380057431067687, every
+  `sigma_eff` and verdict unchanged, 26/26 generated rows present in the paper. `generate_a15.py` now prints
+  both pairings instead of hard-coding the archived one.
+- **New guard:** `scripts/drift_guard.py::check_registry_pairing_values` — registry pairing rows must match
+  the canonical artifact, and archived-pair literals must be labelled in the paragraph that makes the claim.
+  Mutation-tested 2/2, byte-identical restore, baseline and post-restore clean.
+- **Guard bug caught during testing:** paragraph splitting on `"\n\n"` matched nothing in a CRLF document,
+  which would have silenced the label rule entirely. Fixed by normalising newlines first.
+
+## [fH-Pairing-Naming-Registry-F28-2026-11-06] - archived values renamed to archived-looking names, and the rename's own damage turned into a guard
+
+- **Renaming (19 modules):** an archived value may now enter a module only under a name that says archived
+  (`SIGMA_0_CM2_PER_G_ARCHIVED`, `F_H_ARCHIVED_PAIR_0297`, `SIGMA_PEAK_CM2_PER_G_ARCHIVED`), with an explicit
+  `# PAIRING: ARCHIVED PAIR` declaration. No published number changed; only the names carrying them.
+- **Collateral damage disclosed and repaired:** 4 modules left syntactically invalid by the scripted rename,
+  11 modules referencing names their imports no longer defined, 3 of them found by the new guard rather than
+  by me. See finding F28.
+- **New guard:** `v0.3-prelim/tests/test_module_parse_and_pairing_names_bound.py` — 1292
+  parametrized cases, one per producer module; every module must parse and every pairing-looking name it loads
+  must be bound in it.
+- **New producer + test:** `scripts/fH_pairing_registry.py` (read-only, `--check`) and
+  `v0.3-prelim/tests/test_fH_pairing_registry.py`; artifact `v0.3-prelim/data/results/fH_pairing_registry.json`
+  now reports 10 canonical / 28 archived /
+  0 mixed / 0 archived-without-declaration.
+- **Half-paired default argument fixed:** `scripts/t233_consistent_dd.py` declared the archived pair and then
+  called `g_chi_from_sigma_peak()` with no argument, which binds the live amplitude at def time. It now passes
+  `SIGMA_PEAK_CM2_PER_G_ARCHIVED` explicitly, and `test_no_half_paired_default_argument_call` fails the pattern.
+- **Status string:** `PAIRING_CONVENTIONS["raw_sigma_no_fH"]["status"]` is
+  `RESOLVED_BY_EXPLICIT_ARCHIVED_PINNING_2026-11-06`, pinned by test in the same edit.
+- **Mutation evidence:** harness v2, 9/9 caught, 8 touched files byte-identical after restore, post-restore
+  baseline 17/17 passed; v1's 4/7 explained in F28 (import-time assertion counted as a miss; shallow
+  substring mutation).
+- **Tests:** 1 failed, 3611 passed, 25 skipped, 3 warnings in 1429.38s (0:23:49).
+
+## [fH-Pairing-Repair-F26-F27-2026-11-06] - one live f_H pair, the archived pair named, and the §3 table corrected to the level the published bound applies
+
+**Owner decision implemented:** "call 1 repair" — canonicalise `f_H = 0.7501856343179664` by
+re-pairing the fitted amplitudes, not by changing `f_H` alone.
+
+- `scripts/constants.py`: one live pair (f_H 0.7501856343179664, sigma_0 0.008150396851725193,
+  sigma_peak 27.272481773080454); archived pair under archived names only (0.297 / 0.052 / 174.0);
+  `PAIRING_CONVENTIONS` block plus import-time assertions that fail a half-paired edit.
+- `scripts/canonical_numbers.py`: `sigma_m_canonical_gaussian_archived()` and `sigma_eff_canonical()`
+  published as named APIs; derived archived amplitudes; pairing metadata written into the artifact.
+- `v0.3-prelim/code/t120_cloud9_bound.py`: the `f_H_conventions` block reports
+  `RESOLVED_SINGLE_PAIRING_2026-11-06` with both pairings, the pairing factor, an invariance check, and
+  the half-paired counterfactual kept as a labelled number instead of a live value.
+- 25 modules pinned to the archived pair by name, 4 on the live pair; registry published as
+  `v0.3-prelim/data/results/fH_pairing_registry.json` (4 canonical / 25 archived).
+- **Defect found and fixed:** `scripts/v192_dsph_gravothermal_sweep.py` was half-paired (live
+  `sigma_0` imported, archived 174.0 hard-coded). `v0.3-prelim/code/phase_g11_cosmological_synthesis.py`
+  renamed its local `f_H = 0.297` to `f_H_ARCHIVED_PAIR`.
+- **Verified unchanged:** canonical_numbers.json — 303 leaves identical, 0 `sigma_eff` changed, 48 raw +
+  8 amplitude leaves moved by exactly 0.15673840099471523, tallies unchanged; the §2.6a sweep artifact
+  regenerated with 300/300 leaves identical; Cloud-9 `sigma_eff` still 100.03606419810939.
+- **Claim changed, disclosed:** the particle-level amplitude is 27.27 cm2/g; the 174 cm2/g
+  causality-cap story belongs to the archived pair and no longer binds the live amplitude.
+- **Finding F27:** the §3 table and the Abstract compared particle-level `sigma/m` against
+  Horigome+ 2025's halo-level bound on `sigma_eff`, overstating the tension by 1/f_H^2 = 11.3367.
+  Recomputed halo-level: 2.39 / 1.96 / 1.25 / 3.30 / 73.22 / 76.99 / 4.35 / 0.02 times 0.2 cm2/g. The
+  paper now declares its pairing and states both readings.
+- Tests: `test_fH_pairing_integrity.py` (new), the F23 tests in `test_channel_bound_attribution.py`
+  re-pointed at the resolved pairing, `test_dsph_sigma_m_table_matches_canonical.py` pinned against the
+  named archived curve plus two new comparison-level guards, and the T132 chain test's own half-paired
+  formula corrected.
+
 ## [TNG-Framework-Role-D8-2026-11-06] - IllustrisTNG is reclassified as a framework check, and the missing Cloud-9 twin stops being a failure
 
 - **Decision D8 closed (owner, option 3).** The simulation is no longer required to contain a
