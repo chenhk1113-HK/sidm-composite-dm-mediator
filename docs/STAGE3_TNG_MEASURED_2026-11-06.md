@@ -115,3 +115,12 @@ tier-1 combined merger median 5 instead of 6; tier-1 combined z_form 0.959 inste
 29.58 km/s ceiling attributed to the accepted anchor tier instead of the wider mass-cell scan). They are
 corrected above. The fetch counts (2090 rows / 4 failures; 824 rows / 2 failures; 115/115 trees) and the
 gas statistics were correct as drafted.
+### 8. Role of this sample (decided 2026-11-06)
+
+The owner decided on 2026-11-06 that IllustrisTNG serves as a framework check, not as a test
+that a Cloud-9 analogue has to exist in the simulation (decision D8, recorded in
+docs/FINDINGS_FOR_FUTURE_DELIBERATION.md section 27.8). Sections 4-5 of this file therefore read
+as sample characterisation: the ceiling and the merger activity describe the simulated volume,
+and the missing Cloud-9 look-alike is something to report, not to repair. Halos of Cloud-9's
+mass do exist in TNG50-1 (25 accepted, 100 scanned); what they lack is the anchor's combination
+of speed and quietness.

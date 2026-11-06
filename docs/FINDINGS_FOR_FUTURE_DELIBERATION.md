@@ -1213,7 +1213,7 @@ That reorders the options below, and it removes the first one as it was written:
 matching at formation redshift does not close it. The gap is a mass-velocity offset, not a
 timing artifact.
 
-**Open decision D8 (revised order):**
+**Open decision D8 (revised order; CLOSED by section 27.8 on 2026-11-06, options 1 and 2 not taken):**
 1. **Re-anchor the sample, keep Cloud-9 as an outlier.** Fit the anchor cell's own mass-velocity
    relation from the 22 z = 0 members (plus the higher-z members as the same population at other
    epochs) and report Cloud-9's position relative to that relation in km/s and in sigma, instead of
@@ -1244,3 +1244,30 @@ The full table is in docs/STAGE3_TNG_MEASURED_2026-11-06.md.
 Two headline facts:
 1. The Cloud-9-mass window in TNG50-1 tops out at 29.5767 km/s with zero halos at or above 30 km/s: within the Cloud-9 mass window at z=0, TNG50-1 contains 16 halos in 28–29 km/s, 6 halos in 29–30 km/s, and ZERO in 30–31 and 31–34 km/s. The single highest is subhalo 906682 at V_max 29.5767 km/s.
 2. All 25 anchor halos merged after z=1 (quiescent fraction 0.000): the anchor tier (Cloud-9 mass window) has zero halos that experienced no merger since z=1, meaning the relaxed-anchor assumption behind the project's Cloud-9 model is unsupported by this sample.
+
+### 27.8 Decision D8 closed (2026-11-06): IllustrisTNG is a framework check, not a Cloud-9 twin test
+
+Owner decision on D8, option 3 of the three presented: change what the simulation is for.
+IllustrisTNG is no longer asked to contain a Cloud-9 analogue. Its job is now three questions
+that do not need one: (i) do halos of Cloud-9's mass exist in the simulation, (ii) how do they
+grow and merge, and (iii) does the framework behave consistently when run on them.
+
+What follows:
+
+- The velocity ceiling and the zero quiescent fraction recorded in
+  docs/STAGE3_TNG_MEASURED_2026-11-06.md sections 4-5 stop being a failed test of Cloud-9; they
+  are facts about a simulated volume.
+- No further anchor search is authorised as Cloud-9 validation. Neither a higher-redshift hunt
+  for a calmer, faster halo, nor re-fitting the anchor velocity from the sample's own
+  mass-velocity relation. Those were options 1 and 2 above and both are closed.
+- Cloud-9's mass, velocity and relaxed-history anchor stays what finding F23 established: an
+  observation-derived modelling input obtained through a mass-model choice, not an independently
+  measured quantity.
+- The measured facts stay on the record and still constrain labels, not cross sections: the
+  anchor tier cannot carry a quiescent Phase G2 label, and TNG100-1 cannot supply merger
+  statistics at these masses (section 27.6).
+
+What the decision does not do: it does not close the mass-velocity offset, does not validate the
+anchor velocity or its implied core scale, does not license presenting a simulation count as an
+observation, and changes no cross-section number. What it changes is what a future failure to
+find a twin would mean: nothing.

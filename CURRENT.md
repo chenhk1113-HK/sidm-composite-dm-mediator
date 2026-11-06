@@ -47,7 +47,7 @@ now asserts the v0.8 MAP (478 GeV / 488 MeV / 0.81σ), so this line, the docs an
   per-subhalo API reads — TNG50-1 60 + TNG100-1 30 in the low-mass RELHIC band and 25 TNG50-1 halos
   bracketing the Cloud-9 anchor mass — 115/115 accepted, 0.18 MB of merger trees on disk, plus ~1,300
   per-node growth records being fetched. `docs/STAGE3_TNG_SAMPLE_2026-11-04.md`.
-- **New anchor tension found by that sample (open decision D8):** in TNG50-1 at z = 0 no primary,
+- **Anchor tension from that sample (decision D8, CLOSED 2026-11-06):** in TNG50-1 at z = 0 no primary,
   starless, gas-bearing halo in M200 4–6e9 M☉ reaches V_max ≥ 30 km/s (ladder 16 / 6 / 2 / 0 / 0 / 0 over
   V_max 28–29 / 29–30 / 29.5–30 / 29.9–30.1 / 30–31 / 31–34; maximum realized 29.58 km/s read back from
   individual records). The same cell IS populated at z = 0.1–1.0 (22 / 39 / 54 members at z = 0 / 0.26 /
@@ -57,6 +57,12 @@ now asserts the v0.8 MAP (478 GeV / 488 MeV / 0.81σ), so this line, the docs an
   Measured alongside it: the 25 anchor halos (4–6e9 M☉, 9,019–12,781 DM particles) are **not** quiescent
   — 0 of 25 have no merger after z = 1, median last merger z = 0.074 — so they are the wrong analogue for
   a "Cloud-9 quiescent" Phase G2 label; the ~9e8 M☉ tier (quiet fraction 0.267) is the closer one.
+- **D8 CLOSED 2026-11-06 (owner decision, option 3):** IllustrisTNG is used as a framework check, not as a search for a Cloud-9 twin.
+  Halos of Cloud-9's mass exist in TNG50-1 and their growth and merger behaviour is what the
+  sample is for; the missing speed-and-quietness combination is reported as a sample fact, not as
+  a failed Cloud-9 test, and no twin hunt is authorised. Cloud-9's own anchor stays an
+  observation-derived modelling input (finding F23).
+  `docs/FINDINGS_FOR_FUTURE_DELIBERATION.md` section 27.8.
 - **D9 round 1 done (2026-11-05):** retired stale expectations and repaired references —
   Phase 7e unit audit now reports corrected (~1.02) and reconstructed historical (~365.25x)
   values separately (F19-adjacent, finding in the integrity report); T87 pins `1.3181e-75` and
@@ -1281,3 +1287,4 @@ independent EFT channels in the same composite-DM UV completion.
 - **`wip/t95-stream-cross-match`:** T95.11 + T95.14 tests pass (15+)
 - Both branches pass their respective test suites
 - Master unchanged at v0.4-prelim+T88E
+

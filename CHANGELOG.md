@@ -1,3 +1,16 @@
+## [TNG-Framework-Role-D8-2026-11-06] - IllustrisTNG is reclassified as a framework check, and the missing Cloud-9 twin stops being a failure
+
+- **Decision D8 closed (owner, option 3).** The simulation is no longer required to contain a
+  Cloud-9 analogue. It is used to ask whether halos of Cloud-9's mass exist, how they grow and
+  merge, and whether the framework behaves consistently when run on them.
+- The measured ceiling (29.5767 km/s, scratch artifact `tng_vmax_envelope.json`) and the zero
+  quiescent fraction of the anchor tier (`v0.3-prelim/data/results/tng_stage3_growth_summary.json`)
+  are kept on the record as sample facts about a simulated volume, not as a failed Cloud-9 test.
+- No twin hunt is authorised: neither a higher-redshift search for a calmer, faster halo, nor
+  re-fitting the anchor velocity from the sample's own mass-velocity relation.
+- Recorded in `docs/FINDINGS_FOR_FUTURE_DELIBERATION.md` 27.8, `docs/STAGE3_TNG_MEASURED_2026-11-06.md` 8,
+  and the `CURRENT.md` D8 line. No number and no code path changed.
+
 ## [Owner-Decisions-Arm-F25-2026-11-06] — the dwarf-compatible arm becomes the model, the Cloud-9 bar stays internal, and canonical f_H = 0.750 is measured before it is applied
 
 - **Adopted arm (owner decision 2026-11-06).** `v0.3-prelim/code/t120_constraint_scoreboard.py` gains
@@ -4655,3 +4668,4 @@ n16.docx is the **11th human review** (n6–n16, written in Chinese) of the v40.
 - VERSION: appended `+v40.63-N16ReviewResponse`
 - CHANGELOG.md, CURRENT.md: updated
 - Report: title → v40.39 → v40.63; §2 → 25-Version Arc (26 rows); §20 added (§20.1.1–§20.1.10, §20.2 gate); header/footer/§6 counts reconciled to 11 human / 31 rounds
+
