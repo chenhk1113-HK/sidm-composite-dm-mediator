@@ -1,0 +1,354 @@
+{
+  "producer": "scripts/audit_hierarchy_chain.py",
+  "constants": {
+    "A_SLOPE": 1.93,
+    "V_TARGET_KMS": 29.4,
+    "SIGMA_KMS": 4.4,
+    "SIGMA_0_CM2_PER_G": 0.052,
+    "SIGMA_PEAK_CM2_PER_G": 174.0,
+    "F_H_ARCHIVED": 0.297,
+    "LIVE_SIGMA_0_CM2_PER_G": 0.008150396851725193,
+    "LIVE_SIGMA_PEAK_CM2_PER_G": 27.272481773080454,
+    "F_H_CANONICAL": 0.7501856343179664,
+    "PAIRING_SCALE_LIVE_OVER_ARCHIVED": 0.15673840099471525
+  },
+  "chains": {
+    "archived_pair": {
+      "f_H": 0.297,
+      "sigma_0_cm2_per_g": 0.052,
+      "sigma_peak_cm2_per_g": 174.0,
+      "sigma_m_28_sigma1_1_cm2_per_g": 65.91085124460028,
+      "sigma_m_28_sigma1_44_cm2_per_g": 166.01808042318618,
+      "sigma_m_v100_background_cm2_per_g": 0.052,
+      "ratio_v28": 1.248099098036048e+25,
+      "g_n_over_g_chi_v28": 2.8305802058057657e-13,
+      "ratio_peak": 3.2948936170212773e+25,
+      "g_n_over_g_chi_peak": 1.7421249536860025e-13,
+      "ratio_v100": 9.846808510638298e+21,
+      "g_n_over_g_chi_v100": 1.0077487168097181e-11,
+      "sigma_m_28_sigma1_3_cm2_per_g": 156.65515044041183,
+      "g_n_over_g_chi_sigma1_3": 1.8360376668962025e-13,
+      "ratio_sigma1_44": 3.1437466292901217e+25,
+      "g_n_over_g_chi_sigma1_44": 1.7835128044069568e-13,
+      "option_b_ratio": 25810.0,
+      "option_b_g_n_over_g_chi": 0.006224521877824551,
+      "option_b_sigma_SI_cm2": 1.2e-26
+    },
+    "live_pair": {
+      "f_H": 0.7501856343179664,
+      "sigma_0_cm2_per_g": 0.008150396851725193,
+      "sigma_peak_cm2_per_g": 27.272481773080454,
+      "sigma_m_28_sigma1_1_cm2_per_g": 10.330761432279184,
+      "sigma_m_28_sigma1_44_cm2_per_g": 26.021408461742244,
+      "sigma_m_v100_background_cm2_per_g": 0.008150396851725193,
+      "ratio_v28": 1.9562505690911647e+24,
+      "g_n_over_g_chi_v28": 7.149699014075012e-13,
+      "ratio_peak": 5.164363569796087e+24,
+      "g_n_over_g_chi_peak": 4.400394321353844e-13,
+      "ratio_v100": 1.5433730208586004e+21,
+      "g_n_over_g_chi_v100": 2.5454498665084686e-11,
+      "sigma_m_28_sigma1_3_cm2_per_g": 24.553877787616713,
+      "g_n_over_g_chi_sigma1_3": 4.637606335933356e-13,
+      "ratio_sigma1_44": 4.927458198074596e+24,
+      "g_n_over_g_chi_sigma1_44": 4.504934964606896e-13,
+      "option_b_ratio": 4045.4181296736006,
+      "option_b_g_n_over_g_chi": 0.015722380111925487,
+      "option_b_sigma_SI_cm2": 1.2e-26
+    },
+    "pairing": {
+      "scale_live_over_archived": 0.15673840099471525,
+      "amplitude_factor_archived_over_live": 6.380057431067687,
+      "bound_loosening_factor_sqrt_inverse": 2.5258775566261495,
+      "sigma_eff_invariance_max_relative_residual": 1.3475450596200408e-17,
+      "note": "sigma_eff = f_H^2 x sigma/m is identical under both pairings; the particle-level sigma/m and every g_N/g_chi bound derived from it are pairing-dependent and are stated as such."
+    },
+    "hierarchy_inputs_from_the_paper": {
+      "m_chi_g": 1.78e-24,
+      "sigma_SI_cm2": 9.4e-48
+    }
+  },
+  "checks": [
+    {
+      "name": "known-system: sigma/m(28) at sigma_1=4.4 vs t235 JSON",
+      "expected": 166.01808042318618,
+      "actual": 166.01808042318618,
+      "tol_rel": 1e-12,
+      "ok": true,
+      "note": "if this fails the sigma_m() implementation is wrong, not the data"
+    },
+    {
+      "name": "link 1: sigma/m(28) at sigma_1=1.0 vs t235 JSON",
+      "expected": 65.91085124460028,
+      "actual": 65.91085124460028,
+      "tol_rel": 1e-12,
+      "ok": true,
+      "note": "the canonical value the F23 fix restored"
+    },
+    {
+      "name": "link 4: paper prints 65.91 for sigma_m_28_sigma1_1",
+      "expected": 65.91,
+      "actual": 65.91085124460028,
+      "tol_rel": 0.005,
+      "ok": true,
+      "note": "paper-printed value vs recomputed"
+    },
+    {
+      "name": "link 4: paper prints 1.25e+25 for ratio_v28",
+      "expected": 1.25e+25,
+      "actual": 1.248099098036048e+25,
+      "tol_rel": 0.005,
+      "ok": true,
+      "note": "paper-printed value vs recomputed"
+    },
+    {
+      "name": "link 4: paper prints 2.83e-13 for g_n_over_g_chi_v28",
+      "expected": 2.83e-13,
+      "actual": 2.8305802058057657e-13,
+      "tol_rel": 0.005,
+      "ok": true,
+      "note": "paper-printed value vs recomputed"
+    },
+    {
+      "name": "link 4: paper prints 166.02 for sigma_m_28_sigma1_44",
+      "expected": 166.02,
+      "actual": 166.01808042318618,
+      "tol_rel": 0.005,
+      "ok": true,
+      "note": "paper-printed value vs recomputed"
+    },
+    {
+      "name": "link 4: paper prints 3.3e+25 for ratio_peak",
+      "expected": 3.3e+25,
+      "actual": 3.2948936170212773e+25,
+      "tol_rel": 0.02,
+      "ok": true,
+      "note": "paper-printed value vs recomputed"
+    },
+    {
+      "name": "link 4: paper prints 1.74e-13 for g_n_over_g_chi_peak",
+      "expected": 1.74e-13,
+      "actual": 1.7421249536860025e-13,
+      "tol_rel": 0.02,
+      "ok": true,
+      "note": "paper-printed value vs recomputed"
+    },
+    {
+      "name": "link 4: paper prints 9.85e+21 for ratio_v100",
+      "expected": 9.85e+21,
+      "actual": 9.846808510638298e+21,
+      "tol_rel": 0.02,
+      "ok": true,
+      "note": "paper-printed value vs recomputed"
+    },
+    {
+      "name": "link 4: paper prints 1.01e-11 for g_n_over_g_chi_v100",
+      "expected": 1.01e-11,
+      "actual": 1.0077487168097181e-11,
+      "tol_rel": 0.02,
+      "ok": true,
+      "note": "paper-printed value vs recomputed"
+    },
+    {
+      "name": "link 6 (live pairing): paper prints 10.33 for sigma_m_28_sigma1_1",
+      "expected": 10.33,
+      "actual": 10.330761432279184,
+      "tol_rel": 0.005,
+      "ok": true,
+      "note": "live-pair value the paper must state as its current claim"
+    },
+    {
+      "name": "link 6 (live pairing): paper prints 1.96e+24 for ratio_v28",
+      "expected": 1.96e+24,
+      "actual": 1.9562505690911647e+24,
+      "tol_rel": 0.005,
+      "ok": true,
+      "note": "live-pair value the paper must state as its current claim"
+    },
+    {
+      "name": "link 6 (live pairing): paper prints 7.15e-13 for g_n_over_g_chi_v28",
+      "expected": 7.15e-13,
+      "actual": 7.149699014075012e-13,
+      "tol_rel": 0.005,
+      "ok": true,
+      "note": "live-pair value the paper must state as its current claim"
+    },
+    {
+      "name": "link 6 (live pairing): paper prints 26.02 for sigma_m_28_sigma1_44",
+      "expected": 26.02,
+      "actual": 26.021408461742244,
+      "tol_rel": 0.005,
+      "ok": true,
+      "note": "live-pair value the paper must state as its current claim"
+    },
+    {
+      "name": "link 6 (live pairing): paper prints 5.16e+24 for ratio_peak",
+      "expected": 5.16e+24,
+      "actual": 5.164363569796087e+24,
+      "tol_rel": 0.02,
+      "ok": true,
+      "note": "live-pair value the paper must state as its current claim"
+    },
+    {
+      "name": "link 6 (live pairing): paper prints 4.40e-13 for g_n_over_g_chi_peak",
+      "expected": 4.4e-13,
+      "actual": 4.400394321353844e-13,
+      "tol_rel": 0.02,
+      "ok": true,
+      "note": "live-pair value the paper must state as its current claim"
+    },
+    {
+      "name": "link 6 (live pairing): paper prints 1.54e+21 for ratio_v100",
+      "expected": 1.54e+21,
+      "actual": 1.5433730208586004e+21,
+      "tol_rel": 0.02,
+      "ok": true,
+      "note": "live-pair value the paper must state as its current claim"
+    },
+    {
+      "name": "link 6 (live pairing): paper prints 2.55e-11 for g_n_over_g_chi_v100",
+      "expected": 2.55e-11,
+      "actual": 2.5454498665084686e-11,
+      "tol_rel": 0.02,
+      "ok": true,
+      "note": "live-pair value the paper must state as its current claim"
+    },
+    {
+      "name": "link 6: sigma_eff invariance at v=28, sigma_1=1.0",
+      "expected": 5.813930277434946,
+      "actual": 5.813930277434945,
+      "tol_rel": 1e-09,
+      "ok": true,
+      "note": "f_H^2 x sigma/m must be identical under both pairings"
+    },
+    {
+      "name": "link 6: sigma_eff invariance at v=28, sigma_1=4.4",
+      "expected": 14.64428885604883,
+      "actual": 14.644288856048831,
+      "tol_rel": 1e-09,
+      "ok": true,
+      "note": "f_H^2 x sigma/m must be identical under both pairings"
+    },
+    {
+      "name": "link 6: sigma_eff invariance at resonance peak",
+      "expected": 15.348365999999999,
+      "actual": 15.348366,
+      "tol_rel": 1e-09,
+      "ok": true,
+      "note": "f_H^2 x sigma/m must be identical under both pairings"
+    },
+    {
+      "name": "link 6: bound shift factor at peak",
+      "expected": 4.400394321353844e-13,
+      "actual": 4.400394321353844e-13,
+      "tol_rel": 1e-09,
+      "ok": true,
+      "note": "g_N/g_chi must loosen by exactly sqrt(1/K) = 2.5258775566261495"
+    },
+    {
+      "name": "link 6: bound shift factor at v=28",
+      "expected": 7.149699014075011e-13,
+      "actual": 7.149699014075012e-13,
+      "tol_rel": 1e-09,
+      "ok": true,
+      "note": "g_N/g_chi must loosen by exactly sqrt(1/K) = 2.5258775566261495"
+    },
+    {
+      "name": "link 6: bound shift factor at v=100",
+      "expected": 2.5454498665084683e-11,
+      "actual": 2.5454498665084686e-11,
+      "tol_rel": 1e-09,
+      "ok": true,
+      "note": "g_N/g_chi must loosen by exactly sqrt(1/K) = 2.5258775566261495"
+    },
+    {
+      "name": "link 7: Option B ratio (archived pair) matches the paper's 2.6e4",
+      "expected": 25810.0,
+      "actual": 26000.0,
+      "tol_rel": 0.02,
+      "ok": true,
+      "note": "the Option B cross-check at the archived pair"
+    },
+    {
+      "name": "link 7: Option B bound (archived pair) matches the paper's 6.2e-3",
+      "expected": 0.006224521877824551,
+      "actual": 0.0062,
+      "tol_rel": 0.02,
+      "ok": true,
+      "note": "the Option B cross-check at the archived pair"
+    },
+    {
+      "name": "link 7: sigma_1 = 3.0 bound (archived pair) matches the paper's 1.84e-13",
+      "expected": 1.8360376668962025e-13,
+      "actual": 1.84e-13,
+      "tol_rel": 0.006,
+      "ok": true,
+      "note": "the sigma_1 = 3.0 comparison at the archived pair"
+    },
+    {
+      "name": "link 7: sigma_1 = 4.4 bound (archived pair) matches the paper's 1.78e-13",
+      "expected": 1.7835128044069568e-13,
+      "actual": 1.78e-13,
+      "tol_rel": 0.006,
+      "ok": true,
+      "note": "the sigma_1 = 4.4 comparison at the archived pair"
+    },
+    {
+      "name": "link 7: sigma_1 = 3.0 bound (live pair) matches the paper's 4.64e-13",
+      "expected": 4.637606335933356e-13,
+      "actual": 4.64e-13,
+      "tol_rel": 0.006,
+      "ok": true,
+      "note": "the sigma_1 = 3.0 comparison at the live pair"
+    },
+    {
+      "name": "link 7: sigma_1 = 4.4 bound (live pair) matches the paper's 4.50e-13",
+      "expected": 4.504934964606896e-13,
+      "actual": 4.5e-13,
+      "tol_rel": 0.006,
+      "ok": true,
+      "note": "the sigma_1 = 4.4 comparison at the live pair"
+    },
+    {
+      "name": "link 7: quantities in pairing-labelled claims are recomputable",
+      "expected": 0,
+      "actual": 0,
+      "tol_rel": 0,
+      "ok": true,
+      "note": "6 claim slices scanned, 22 scientific-notation quantities checked"
+    },
+    {
+      "name": "link 5: retracted value '65.49' absent",
+      "expected": 0,
+      "actual": 0,
+      "tol_rel": 0,
+      "ok": true,
+      "note": "F23 retraction guard"
+    },
+    {
+      "name": "link 5: retracted value '2.84e-13' absent",
+      "expected": 0,
+      "actual": 0,
+      "tol_rel": 0,
+      "ok": true,
+      "note": "F23 retraction guard"
+    },
+    {
+      "name": "link 5: retracted value '2.84\u00d710\u207b\u00b9\u00b3' absent",
+      "expected": 0,
+      "actual": 0,
+      "tol_rel": 0,
+      "ok": true,
+      "note": "F23 retraction guard"
+    },
+    {
+      "name": "link 5: retracted value '1.24e+25' absent",
+      "expected": 0,
+      "actual": 0,
+      "tol_rel": 0,
+      "ok": true,
+      "note": "F23 retraction guard"
+    }
+  ],
+  "failures": [],
+  "result": "PASS"
+}

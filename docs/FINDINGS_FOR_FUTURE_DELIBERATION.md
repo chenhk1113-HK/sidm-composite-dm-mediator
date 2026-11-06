@@ -1349,3 +1349,50 @@ seven headline documents plus the registry. Two ways forward, both defensible:
 
 The middle ground that matches how the other F16/F19 guards work: pin any document a *published number*
 is read from, and leave archival documents alone. That is the recommendation, but the choice is the owner's.
+
+### 27.12 Finding F30 closed (2026-11-06): the pairing dependence of a published bound is now audited, not assumed
+
+The gate's layer-10 failure was the useful kind. It said, in one number repeated ten times, that the
+hierarchy bound `g_N/g_chi` had been quoted without saying which `f_H` pairing produced it. Now both chains
+exist, side by side, with the arithmetic checked: archived pair 1.74e-13 at the
+resonance peak, live pair 4.4e-13, every bound shifted by exactly
+sqrt(1/K) = 2.5258775566261495, `sigma_eff` invariant to 1e-15.
+
+**What this changes for the framework.** Nothing that is measured. The Cloud-9 anchor, the dSph tensions,
+and the eight-channel verdicts are `sigma_eff` statements and did not move. What changes is a *requirement*
+the paper imposes on its own UV sector: the hierarchy it says it needs is 4.4e-13
+under the live pair, not 1.74e-13. Anyone building a model against the framework
+should be given the live number.
+
+**Standing rule this establishes.** Any quantity built from a particle-level amplitude divided by, or
+compared against, something that is not particle-level (a halo-level bound, a nucleon cross-section) must
+name its pairing where the claim is made. `sigma_eff` claims are safe; mixed-level ratios are not. The
+drift layer checks the registry (F29), the pairing registry checks module bindings (F28), and layer 10 now
+checks the chain end to end.
+### 27.13 Finding F31 closed (2026-11-07): printed precision became a contract, and a guard's pass criteria had to be mutation-tested too
+
+**The decision taken.** Layer 10 now checks pairing-labelled claims *at their claim sites* rather than
+asking whether a value appears somewhere in the paper. Printed precision is part of the claim: `3.29e25` and
+`3.30e25` are different claims, and the scan refuses both unless the arithmetic produces them.
+
+**Why this matters beyond this finding.** "Appears somewhere" is the default way to assert that a document
+matches a computation, and it is quietly weak: duplicated values, historical restatements, and archived
+tables all give a mutation somewhere else to hide. The same pattern is probably live in other layers that
+compare artifacts against prose, and the honest next step is to audit which of them are existence checks.
+
+**What the harness episode establishes.** A harness that scores its own guards can mis-score them. Two of
+three "misses" in `MUTATION_HARNESS: FAIL (11/14 caught)` were pytest reporting a fixture-time guard as `ERROR`. The lesson is not
+"count ERROR lines"; it is that the harness itself needs a mutation-tested baseline — a known-green run, a
+known-red probe, and a disclosure when the scoring rule changes. v4 does that and keeps v3's log
+(`mutation_run4.txt`) as the record of the weaker scoring rule.
+
+**What is still open.**
+1. Link 7 verifies recomputability, not meaning. A number can be exactly right and attached to the wrong
+   sentence — the `1.9e-16` case in finding F31.
+2. Bare order-of-magnitude statements are exempt. A wrong exponent in a context sentence is invisible.
+3. Only the hierarchy chain has claim-site coverage. The T120 scoreboard and the §A.15 table are guarded by
+   drift and artifact equality, not by a scan of their claim sentences.
+
+**Standing rule this establishes.** Whenever a guard compares a document to a computation, state whether it
+is an existence check or a claim-site check, and mutation-test the comparison rule itself, not only the
+computation.

@@ -1334,3 +1334,146 @@ which matches nothing in a CRLF file — the registry is CRLF throughout — so 
 one paragraph and any single label anywhere would have silenced every unlabelled claim. Newline
 normalisation before splitting is what makes the rule mean what it says. A check that passes because its
 tokenizer never split anything is the worst kind of green.
+
+## F30 — the gate caught the pairing a second time, in the hierarchy chain (FOUND AND FIXED 2026-11-06)
+
+**What happened.** The full 15-layer release gate on `a91ea53` returned `GATE_RC=1`. Layers 1-9 and 11-15
+passed; layer 10, `scripts/audit_hierarchy_chain.py`, failed on 10 links. Every single discrepancy was the
+same number: a factor of 6.380057431067687. That regularity is the tell — a numerical bug would scatter, a pairing
+mismatch multiplies everything by one constant.
+
+**Root cause.** The auditor read `SIGMA_0_CM2_PER_G` and `SIGMA_PEAK_CM2_PER_G` from
+`scripts/constants.py` by bare name. After F26 those names hold the LIVE canonical pair
+(f_H = 0.7501856343179664, sigma_peak = 27.272481773080454). What the auditor compares against — the
+t235 artifact and the paper's printed hierarchy cells — are the **archived** pair
+(sigma_peak = 174.0). The layer had no idea which pairing it was auditing; it
+followed whichever one the constants file happened to expose. `a91ea53` did not create the mismatch, it
+revealed it: the auditor and the audited artifacts had been quietly living in different pairings.
+
+**The substantive part: the hierarchy bound really does move with the pairing.** This is not just a
+bookkeeping failure. `sigma_eff = f_H^2 x sigma/m` is pairing-invariant (checked here to 1e-15), but the
+hierarchy bound is built from `sigma_DM-DM / sigma_SI`, where `sigma_DM-DM` is particle-level and
+`sigma_SI` is a nucleon-level direct-detection cross-section that carries no `f_H` at all. So the ratio,
+and therefore `g_N/g_chi`, is pairing-dependent: amplitudes scale by 1/6.380057431067687 and every bound loosens by
+sqrt(6.380057431067687) = 2.5258775566261495.
+
+Measured, at identical anchors (both chains recomputed by the auditor, artifact
+`v0.3-prelim/data/results/hierarchy_chain_pairing.json`):
+
+| anchor | archived pair (as published) | live canonical pair |
+|---|---|---|
+| sigma/m(28), sigma_1 = 1.0 | 65.9109 -> g_N/g_chi < 2.83e-13 | 10.3308 -> < 7.15e-13 |
+| sigma/m(28), sigma_1 = 4.4 | 166.018 -> < 1.78e-13 | 26.0214 -> < 4.5e-13 |
+| resonance peak | 174 -> < 1.74e-13 | 27.2725 -> < 4.4e-13 |
+| v = 100 background | 0.052 -> < 1.01e-11 | 0.0081504 -> < 2.55e-11 |
+
+The headline bound the paper quotes (1.74e-13) is the archived-pair value; under the live pair the same
+chain gives 4.4e-13. The direction of the conclusion is unchanged — the framework
+still needs a hierarchy deeper than 1e-12 — and the live pair makes that requirement about 2.5x easier to
+satisfy, not harder. Nothing in the framework's halo-level predictions moves.
+
+**Two smaller defects the same region produced.**
+1. The abstract attributed the 1.74e-13 headline to "anchored at v = 28, sigma/m = 166 cm2/g". 1.74e-13 is
+   the *resonance-peak* anchor (174 cm2/g at v = 29.4); the like-for-like v = 28 anchor is 1.78e-13 at
+   sigma_1 = 4.4 and 2.83e-13 at sigma_1 = 1.0. The paper already said this correctly in its D-5 anchor
+   bookkeeping; the abstract did not match it. Corrected.
+2. `§A.3` still labelled `sigma_peak = 174 cm2/g` as "the causality cap" flatly, which is the archived-pair
+   statement F28 retired. It is now labelled as such next to the live amplitude.
+
+**Fix applied.** `scripts/audit_hierarchy_chain.py` no longer guesses. It reads both pairs by
+pairing-specific name (`SIGMA_0_LEGACY_PAIR_052` / `SIGMA_PEAK_LEGACY_PAIR_174` for the historical links,
+`SIGMA_0_CM2_PER_G` / `SIGMA_PEAK_CM2_PER_G` for the live chain), refuses to run at all if the two live
+amplitudes are not scaled by the same factor (a half-paired constants.py), and refuses to run if the
+archived pair is quietly redefined. A new link 6 recomputes the whole chain under the live pair, checks the
+paper prints those values as its current claim, verifies `sigma_eff` invariance at three anchors, and
+verifies that every live bound shifted by exactly sqrt(1/K). It writes both chains to
+`v0.3-prelim/data/results/hierarchy_chain_pairing.json`. The audit now reports `28 checks, 0 failures`.
+
+**Paper.** The abstract, the `§3.3` D-5 paragraph, and `§A.3` now state both chains with the pairing named
+on each, and the abstract declares the convention: an unlabelled hierarchy number in this paper is the
+archived pair. The archived values stay printed — they are the historical record — and the live-pair values
+appear beside them as the framework's current claim.
+
+**Guard added.** `v0.3-prelim/tests/test_hierarchy_chain_pairing.py`: 9 passed in 1.11s. It re-runs the auditor,
+compares the committed artifact against a fresh run, checks the pairing arithmetic to 1e-12, proves the two
+refusal guards fire against a mutated copy of `constants.py`, and checks that the paper prints both chains.
+
+**Process note.** Two earlier findings were about the pairing being ambiguous in code (F26) and about the
+pairing rename's collateral damage (F28). This is the third face of the same decision: an audit layer that
+does not name its pairing is not an audit layer. The gate caught it because the gate is the one place where
+producer code and published artifacts are forced to meet — which is the argument for keeping the gate
+rather than trusting a green test suite.
+
+## F31 — the guard meant to catch a wrong number in the paper let one through, and its own first run caught two wrong numbers in the paper (FOUND AND FIXED 2026-11-07)
+
+**What the mutation harness said.** After F30, the decision harness was extended to 14 mutations
+(`pairing_mutation_harness_v3.py`) and it returned `MUTATION_HARNESS: FAIL (11/14 caught)`. Three were logged as misses. Two of
+those three were not guard gaps at all: a pairing assertion that fires while a pytest *fixture* is building
+its mutated copy of `constants.py` surfaces as `ERROR`, and the harness only counted lines starting `FAILED`,
+so a guard that had genuinely fired was scored as a failure to fire. Those two were proven by
+`probe_harness_misses.py` (each mutation applied alone, full pytest body captured, file restored
+byte-identically).
+
+**The third miss was real, and it is the finding.** The mutation replaced the abstract's live-pair bound
+`4.40e-13` with `9.99e-13`, and the whole suite stayed green:
+
+```
+MISSED  paper's LIVE-pair hierarchy bound replaced by a wrong number (link 6 must notice)
+```
+
+The reason is how link 4 and link 6 were written. They ask whether a value the auditor recomputed **appears
+somewhere in the paper**. The same quantity appears in the abstract, in `§3.3`, and again in `§A.3`, so
+corrupting one copy left the others intact and every "paper prints 4.40e-13" assertion still passed. A guard
+whose pass condition is "this number exists somewhere in the document" cannot detect a wrong number in a
+document that quotes the number twice. That is a documentation-integrity hole, not a numerical one: the
+published headline could be wrong while layer 10 stayed green.
+
+**Fix: link 7, the claim-site scan.** `scripts/audit_hierarchy_chain.py` now extracts six anchored claim
+slices — abstract live claim, `§3.3` table claim, `§3.3` D-5 claim, `§3.5a` pairing-dependence claim,
+`§A.3` archived chain, `§A.3` live chain — and requires that **every scientific-notation quantity printed
+inside a pairing-labelled claim equals a value the auditor recomputed, at the precision printed** (3 or 4
+significant figures). A claim slice whose anchor is missing is a failure, so a paper that stops labelling its
+claims is caught rather than silently shrinking the scan. Bare order-of-magnitude mentions (`10^-23 cm^2/g`
+for direct-detection limits) are declared out of scope on purpose; they are context, not claims.
+Current state: 7 link-7 checks, 6 claim slices scanned, 22 scientific-notation quantities checked, 35 checks total, 0 failures, written to
+`v0.3-prelim/data/results/hierarchy_chain_pairing.json`.
+
+**What the new guard caught on its first run — two real defects in the paper.**
+
+1. `§3.3` stated the archived/live `sigma_eff` agreement as "to within `1.9e-16`". The recomputed maximum
+   **relative** residual across the three anchors is `1.35e-17`. The `1.9e-16` figure was the
+   artifact-wide worst **absolute** difference measured during the F26 re-pairing comparison; it had been
+   re-used as an anchor-level relative claim. The paper now reads `1.3e-17 relative`, and the value is
+   stored in the artifact as `sigma_eff_invariance_max_relative_residual` so the claim has a source.
+2. `§A.3` printed the archived resonance-peak ratio as `3.30e25`. `sigma_peak x m_chi / sigma_SI` =
+   `3.294893617e+25`, which rounds to `3.29e25`. One unit in the last printed digit, on a published
+   row.
+
+**A trap that would have made the new guard useless.** The first implementation parsed `4.40 × 10⁻¹³` as
+`float("4.40") * 10**-13`, which differs from `float("4.40e-13")` by one unit in the last place, and flagged
+12 correct values as unrecognised. Scientific-notation literals must be assembled whole
+(`float(f"{coeff}e{exp}")`) before comparison. Any future numeric text scanner inherits this.
+
+**Harness defect fixed, and re-proven.** `pairing_mutation_harness_v4.py` counts a named `FAILED` **or**
+`ERROR` as a catch (with `no tests ran` still rejected, so usage errors cannot fake a pass — the F19 lesson),
+adds the link-7 tests to the baseline, and adds two mutations that only link 7 can catch: a wrong coefficient
+in the `§A.3` live row and a one-digit change to the `§A.3` archived row. Result: `MUTATION_HARNESS: PASS (16/16 caught)`,
+`ALL 10 touched files byte-identical after restore: True`, post-restore baseline `28 passed in 12.71s`. The same paper mutation that v3 logged as a miss is
+now refused: applying it alone gives `rc=1` with `E   AssertionError: audit_hierarchy_chain.py failed:`
+(`probe_misses2.txt`), versus the green `rc=0` in `mutation_run4.txt`.
+
+**Guard.** `v0.3-prelim/tests/test_hierarchy_chain_pairing.py` — 14 passed in 1.53s, including five link-7 tests:
+the scan is green and covers at least 20 quantities, a wrong coefficient in the abstract is caught at its
+claim site, a wrong coefficient in the `§A.3` live row is caught at its claim site, an invariance claim
+tighter than the arithmetic is caught, an unlabelled paper is refused, and the three new anchors (Option B,
+`sigma_1 = 3.0`, `sigma_1 = 4.4`) loosen by exactly `sqrt(1/K)` = 2.5258775566261495 under re-pairing.
+
+**Disclosure — the documentation helper for this finding damaged a document.** The script that inserted the
+`CURRENT.md` bullet replaced the anchor without re-appending it, which deleted the opening text of the
+neighbouring F30 bullet (`- **F30 (hierarchy chain pairing`). Caught by reviewing `git diff` before any
+commit, repaired in place, and the helper fixed (the insertion now re-appends the anchor). No committed
+artifact ever carried the damage.
+
+**Residual weakness, stated.** Link 7 proves a printed quantity is *recomputable at the precision printed*.
+It does not prove the quantity is cited in the right place or means what the sentence says. The `1.9e-16`
+defect above is exactly that class of error: a real number from a real audit, attached to the wrong claim.

@@ -151,6 +151,30 @@ now asserts the v0.8 MAP (478 GeV / 488 MeV / 0.81σ), so this line, the docs an
   `scripts/drift_guard.py::check_registry_pairing_values`, mutation-tested 2/2 with byte-identical restore
   (`AppData/Local/hermes/cache/scratch/registry_drift_mutation.py`).
 
+- **F31 (claim-site guard, FOUND AND FIXED 2026-11-07).** The extended mutation harness scored
+  FAIL (11/14 caught): two "misses" were the harness miscounting a guard that fired inside a pytest
+  fixture as a non-catch, and one was real — corrupting the abstract's live-pair bound left the `§A.3` copy
+  and layer 10 stayed green, because links 4/6 only ask whether a value appears somewhere in the paper.
+  Link 7 now scans 6 pairing-labelled claim slices (6 claim slices scanned, 22 scientific-notation quantities checked) and demands each printed quantity
+  match the recomputation at the printed precision; missing claim anchors fail. Artifact now
+  35 checks / 0 failures. The scan's first run caught two paper defects: `§3.3` claimed
+  sigma_eff agreement "to within 1.9e-16" where the recomputed relative residual is 1.35e-17, and
+  `§A.3` printed the archived peak ratio as 3.30e25 where the arithmetic gives 3.295e+25 ->
+  3.29e25. Harness v4: PASS (16/16 caught), all 10 touched files restored byte-identically, baseline
+  28 passed. Guard: `v0.3-prelim/tests/test_hierarchy_chain_pairing.py` (14 passed).
+
+- **F30 (hierarchy chain pairing, FOUND BY THE GATE AND FIXED 2026-11-06).** Gate layer 10
+  (`scripts/audit_hierarchy_chain.py`) failed on `a91ea53` with 10 mismatches, each off by exactly
+  6.380057431067687: the auditor read whichever pairing `constants.py` exposed while auditing archived-pair artifacts.
+  The bound is genuinely pairing-dependent — sigma_eff is invariant, `sigma_DM-DM / sigma_SI` is not, and
+  every `g_N/g_chi` loosens by sqrt(1/K) = 2.5258775566261495. Both chains are now audited and published
+  (`v0.3-prelim/data/results/hierarchy_chain_pairing.json`, 35 checks — extended to 35 by F31 — 0 failures): peak anchor
+  1.74e-13 archived vs 4.4e-13 live; v=28
+  2.83e-13 vs 7.15e-13; v=100
+  1.01e-11 vs 2.55e-11. The paper states both and
+  declares unlabelled hierarchy numbers archived-pair. Half-paired or redefined-pair constants files are
+  refused outright. Guard: `v0.3-prelim/tests/test_hierarchy_chain_pairing.py` (9 passed in 1.11s).
+
 - **F25 (measured 2026-11-06).** Canonical f_H = 0.750 is degenerate with the fitted amplitudes, and three internal
   Cloud-9 `sigma_eff` values now coexist — 14.6443, 100.03606419810939 and 165.4921 — compared against bars 128.0,
   100.0 and 128.0. Evidence and the two implementation options: `docs/INTEGRITY_FINDINGS_2026-11-04.md` F25.

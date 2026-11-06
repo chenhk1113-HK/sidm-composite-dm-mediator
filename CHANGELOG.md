@@ -1,3 +1,71 @@
+## [Audit-Claim-Site-F31-2026-11-07] - a wrong number in the paper passed layer 10, and the fix made printed precision a contract
+
+**Found by the mutation harness, not by a test.** After the F30 dual-chain repair the decision harness was
+extended to 14 mutations and returned `MUTATION_HARNESS: FAIL (11/14 caught)`. Two of the three misses were harness bookkeeping (a
+guard firing during a fixture surfaces as `ERROR`, which v3 did not count). The third was a genuine hole:
+
+> `MISSED  paper's LIVE-pair hierarchy bound replaced by a wrong number (link 6 must notice)`
+
+**Why it was a hole.** Links 4 and 6 assert that recomputed values **appear in the paper**. The live-pair
+bound is quoted in the abstract, in `§3.3` and in `§A.3`; corrupting one copy left two others, so every
+assertion stayed green while a published headline number was wrong.
+
+**Fix — link 7, claim-site scan.** Six anchored slices (abstract live claim, `§3.3` table, `§3.3` D-5,
+`§3.5a` pairing dependence, `§A.3` archived chain, `§A.3` live chain). Every scientific-notation quantity
+inside a pairing-labelled claim must equal a recomputed value at the precision printed; a missing anchor is
+a failure; bare order-of-magnitude context is declared out of scope. Extra anchors were added to both
+chains so the scan has something to compare against: Option B ratio/bound, `sigma_1 = 3.0`, and
+`sigma_1 = 4.4` bounds, each of which loosens by `sqrt(1/K)` = 2.5258775566261495 on re-pairing.
+
+**Two paper defects the new guard caught immediately.**
+- `§3.3` claimed `sigma_eff` agreement "to within `1.9e-16`"; the recomputed maximum relative residual is
+  `1.35e-17`. `1.9e-16` was the artifact-wide absolute worst case from the F26 re-pairing diff, reused
+  as an anchor-level relative claim. Now `1.3e-17 relative`, with the number stored in the artifact.
+- `§A.3` printed the archived peak ratio as `3.30e25`; `sigma_peak x m_chi / sigma_SI` =
+  `3.294893617e+25` -> `3.29e25`.
+
+**Harness fixed and re-proven.** v4 counts named `FAILED` or `ERROR` as catches (still rejecting
+`no tests ran`), baselines the link-7 tests, and adds two `§A.3` row mutations only link 7 can catch:
+`MUTATION_HARNESS: PASS (16/16 caught)`, `ALL 10 touched files byte-identical after restore: True`, baseline `28 passed in 12.71s`. The previously-missed mutation, applied alone,
+now yields `rc=1` (`E   AssertionError: audit_hierarchy_chain.py failed:`).
+
+**Guard.** `v0.3-prelim/tests/test_hierarchy_chain_pairing.py` — 14 passed in 1.53s, five of them link-7 tests,
+including a refusal of a paper that stops naming its pairing claims.
+
+**Known limit.** Recomputability is not correctness of attribution: a number can be exactly right and
+attached to the wrong claim, which is how `1.9e-16` got there.
+
+## [Hierarchy-Chain-Pairing-F30-2026-11-06] - the gate caught the pairing in the hierarchy bound, and both chains are now published
+
+**Found by the gate, not by the test suite.** The 15-layer release gate on `a91ea53` failed at layer 10 with
+10 mismatches, each off by exactly 6.380057431067687. `scripts/audit_hierarchy_chain.py` had been reading bare amplitude
+names from `constants.py` — which since F26 hold the live pair — while auditing the t235 artifact and the
+paper's cells, which are the archived pair. The full suite was green at the same moment.
+
+**The physics, measured.** `sigma_eff = f_H^2 x sigma/m` is pairing-invariant (to 1e-15), but
+`g_N/g_chi < 1/sqrt(sigma_DM-DM / sigma_SI)` is not, because `sigma_SI` is nucleon-level and carries no
+`f_H`. Amplitudes scale by 1/6.380057431067687; bounds loosen by sqrt(1/K) = 2.5258775566261495:
+
+- resonance peak: 1.74e-13 (archived, as published) -> 4.4e-13 (live)
+- v = 28, sigma_1 = 1.0: 2.83e-13 -> 7.15e-13
+- v = 100 background: 1.01e-11 -> 2.55e-11
+
+**Layer rewritten.** The auditor now reads both pairings by pairing-specific name, refuses a half-paired
+`constants.py` (the two live amplitudes must scale by the same factor), refuses a redefined archived pair,
+adds link 6 (live chain vs the paper's printed live values, `sigma_eff` invariance at three anchors, the
+sqrt(1/K) bound-shift identity, and physics checks on the live chain), and writes both chains to
+`v0.3-prelim/data/results/hierarchy_chain_pairing.json` (28 checks, 0 failures).
+
+**Paper corrected.** Abstract, `§3.3` D-5 paragraph and `§A.3` state both chains with the pairing named;
+the abstract declares that unlabelled hierarchy numbers are the archived pair. Two attribution defects were
+fixed in passing: the abstract had credited the 1.74e-13 headline to the v = 28 / 166 cm2/g anchor when it
+is the resonance-peak / 174 cm2/g anchor, and `§A.3` still presented 174 cm2/g as a flat "causality cap"
+after F28 retired that framing.
+
+**Guard.** `v0.3-prelim/tests/test_hierarchy_chain_pairing.py` — 9 passed in 1.11s: auditor green with no
+failures, committed artifact equals a fresh run, pairing arithmetic to 1e-12, both refusal guards proven
+against a mutated copy of `constants.py`, and the paper checked for both chains.
+
 ## [KB-Drift-Coverage-F29-2026-11-06] - the single source of truth was unchecked, stale, and half-paired in one artifact
 
 - **Coverage gap:** `docs/V19_2_F_REFERENCE_DATA_REGISTRY.md` was in no drift-guard document list, so it kept
