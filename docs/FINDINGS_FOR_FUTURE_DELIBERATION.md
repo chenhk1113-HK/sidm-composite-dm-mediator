@@ -1234,3 +1234,13 @@ quiescent, so it is the wrong analogue for a "Cloud-9 quiescent" label; the ~1e9
 population, which is closer to Cloud-9's actual host mass, is where 27% of halos are quiet.
 (ii) TNG100-1 cannot be used for any of this: at the same masses its subhalos are tracked only to
 z ~ 3.5 and its merger lists are empty (median 0, max 1), which is a tracking artifact, not physics.
+
+### 27.7 IllustrisTNG figures that arrived without tuning (2026-11-06)
+
+This section records IllustrisTNG Stage-3 simulation measurements that arrived without tuning the framework's parameters — they are raw simulation outputs for transparency and future reference, not constraints on the project's cross section.
+
+The full table is in docs/STAGE3_TNG_MEASURED_2026-11-06.md.
+
+Two headline facts:
+1. The Cloud-9-mass window in TNG50-1 tops out at 29.5767 km/s with zero halos at or above 30 km/s: within the Cloud-9 mass window at z=0, TNG50-1 contains 16 halos in 28–29 km/s, 6 halos in 29–30 km/s, and ZERO in 30–31 and 31–34 km/s. The single highest is subhalo 906682 at V_max 29.5767 km/s.
+2. All 25 anchor halos merged after z=1 (quiescent fraction 0.000): the anchor tier (Cloud-9 mass window) has zero halos that experienced no merger since z=1, meaning the relaxed-anchor assumption behind the project's Cloud-9 model is unsupported by this sample.
