@@ -5,6 +5,8 @@
 > 2026-10-01 (tag `v19.2-C-milestone-R71`, commit `c486782`): DD section finalized after **12 review rounds** (R60 → R71).
 > Hierarchy constraint **g_N/g_χ < 3 × 10⁻¹¹** (R57) + **α_χ ~ 6.8 × 10⁻⁷** (R58) + **5 UV no-go theorems** (1 general theorem from Chu+ 2019 p-wave literature + 4 ruled-out completions) + **§2.7 Ohana+ consistency at 0.16 dex** + **Mace+ ~7× deficit** at v=28 (R39) + **standing_numbers.json infrastructure**.
 
+**Pairing declaration (findings F26/F33):** this document quotes amplitudes in two pairings. The LIVE canonical pair is f_H = 0.7501856343179664 with σ_0 = 0.008150396851725193 cm²/g and σ_peak = 27.272481773080454 cm²/g. The ARCHIVED pair is f_H = 0.297 with σ_0 = 0.052 cm²/g and σ_peak = 174.0 cm²/g. Unless a sentence says otherwise, an amplitude quoted below is an ARCHIVED-pair raw amplitude. Both pairs give the same halo-level σ_eff = f_H² × (σ/m) = 15.348366 cm²/g at the 29.4 km/s resonance, so no effective prediction changes. Sources: scripts/constants.py, v0.3-prelim/data/results/canonical_numbers.json, v0.3-prelim/data/results/fH_pairing_registry.json.
+
 ## What this milestone is, in one sentence
 
 **The DD section is now defensible** — magnetic dipole no-go cites one equation (Sigurdson+ 2004 Eq. 11), hierarchy constraint is stated as a ratio of empirical anchors (Cloud-9 σ_DM-DM ~ 1 cm²/g / LZ σ_SI ≲ 10⁻⁴⁶ cm² = 10⁴⁶ → g_χ/g_N ~ 10¹¹), and the T232 dimension retrofit confirms σ_SI(v=220) = 2.109×10⁻²⁷ cm² vs T226 = 2.110×10⁻²⁷ → ratio 1.000 (within 0.05%) after fixing the R65 4π bug.

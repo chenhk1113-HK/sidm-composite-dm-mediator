@@ -514,14 +514,212 @@ def check_channel_count_claims(doc_text, canonical_block, doc_name):
     return drifts
 
 
+def check_archived_pair_labels(doc_text, doc_name):
+    """An archived-pair amplitude quoted next to a sigma/f_H claim must be labelled,
+    in the same paragraph, as belonging to the archived pairing.
+
+    Why (findings F26/F29/F33). The live canonical pair is
+    f_H = 0.7501856343179664 with sigma_0 = 0.008150396851725193 and
+    sigma_peak = 27.272481773080454 cm^2/g; the archived pair is f_H = 0.297 with
+    sigma_0 = 0.052 and sigma_peak = 174.0. Both give the same halo-level
+    sigma_eff = f_H^2 * sigma/m = 15.348366 cm^2/g at the resonance peak, so the raw
+    amplitudes are pairing-specific and a bare "174 cm^2/g" in a live document reads
+    as a current claim. F29 applied this rule to the reference-data registry only;
+    F33 applies it to the front pages, the paper and the report of record, where the
+    "canonical anchor sigma/m = 174 cm^2/g" sentence survived the pairing change
+    unlabelled. Fail closed.
+
+    Two deliberate refinements, both auditable (finding F33):
+    1. Literals are matched with a digit/dot lookbehind, so "0.174 cm^2/g" - a
+       different quantity - is not mistaken for the 174 cm^2/g amplitude.
+    2. A document may declare its default pairing once in a `**Pairing declaration`
+       paragraph whose numbers are verified against the canonical artifact. Every
+       paragraph then inherits that declaration EXCEPT one that presents a
+       canonical/current claim, which must carry its own local label. A declaration is
+       a stated convention, not a blanket exemption: it cannot make an unlabelled
+       canonical anchor pass, and its own numbers are checked by
+       check_pairing_declaration.
+
+    The rule is paragraph-scoped, with two sharpenings that a mutation probe forced (F33):
+    - a literal counts as an amplitude only if it is sigma-adjacent (a sigma/sigma-m/f_H/peak
+       within 60 characters before it, or a cm^2/g unit right after it), so "174 passed, 3 skipped"
+       in a test tally is not mistaken for the 174 cm^2/g amplitude;
+    - a paragraph that presents a canonical/current claim needs a label NEAR the amplitude
+       (within 160 characters), not merely somewhere in the paragraph. Without this, one
+       incidental 'legacy' three sentences away launders an unlabelled canonical claim - which
+       is exactly how the first F33 mutation probe missed a corruption it should have caught.
+       Coverage must be an ARCHIVED-flavoured label: an F30 dual-pair paragraph saying 'under
+       the live canonical pair' nearby made an unlabelled 174 cm^2/g look covered, so 'pairing'
+       and 'live pair' do not count for an archived amplitude.
+    - a claim is canonical if it uses canonical vocabulary OR the paragraph quotes both an
+       archived amplitude and a live-pair amplitude, so deleting the word 'canonical' from a
+       labelled anchor sentence cannot launder it.
+    A non-canonical paragraph still passes on a paragraph-level label, or on the document's
+    declared default pairing."""
+    literal_res = (
+        re.compile(r"(?<![\d.])0\.297"),
+        re.compile(r"(?<![\d.])174\.0"),
+        re.compile(r"(?<![\d.])174(?=\s)"),
+        re.compile(r"(?<![\d.])2025\.57"),
+        re.compile(r"(?<![\d.])0\.052"),
+    )
+    labels = ("ARCHIVED", "archived", "LEGACY", "legacy", "SUPERSEDED",
+              "superseded", "retracted", "PAIRING", "pairing", "live pair", "LIVE PAIR")
+    # A label counts as coverage for an ARCHIVED amplitude only if it is an archived-flavoured
+    # label. Accepting 'live pair'/'pairing' here was a laundering hole the mutation probe found:
+    # an F30 dual-pair paragraph that says "under the live canonical pair" 40 characters away
+    # made an unlabelled 174 cm^2/g look covered.
+    archived_labels = ("ARCHIVED", "archived", "LEGACY", "legacy",
+                       "SUPERSEDED", "superseded", "retracted")
+    live_pair_literals = ("27.272481773080454", "0.008150396851725193", "0.7501856343179664")
+    canonical_claim_res = (
+        re.compile(r"canonical anchor", re.IGNORECASE),
+        re.compile(r"the canonical\b", re.IGNORECASE),
+        re.compile(r"canonical \u03c3", re.IGNORECASE),
+        re.compile(r"canonical sigma", re.IGNORECASE),
+        re.compile(r"canonical f_?H", re.IGNORECASE),
+    )
+    sigma_context_res = re.compile(r"\u03c3|sigma|f_?H|peak", re.IGNORECASE)
+    unit_after_res = re.compile(r"^\s*cm(?:2|\u00b2)\s*/\s*g")
+    continuation_chars = ("\u00d7", "\u00b7", "*", "^", "/", "(")
+    proximity = 160
+    # A literal is an amplitude only if the sigma/sigma-m/f_H/peak token is right in front of it
+    # (real amplitudes read "sigma_peak = 174" or "174 cm^2/g"). A 60-character window was too
+    # loose: it read 'amplitudes count only when sigma-adjacent so a "174 passed" test tally' as
+    # an amplitude claim, i.e. the guard flagged its own documentation.
+    sigma_context_window = 25
+    drifts = []
+    declared = bool(re.search(r"^\*\*Pairing declaration", doc_text, re.MULTILINE))
+    doc_text = doc_text.replace("\r\n", "\n")
+    fence_spans = []
+    fence_open = None
+    for fm in re.finditer(r"```", doc_text):
+        if fence_open is None:
+            fence_open = fm.start()
+        else:
+            fence_spans.append((fence_open, fm.end()))
+            fence_open = None
+    if fence_open is not None:
+        fence_spans.append((fence_open, len(doc_text)))
+
+    def inside_fence(pos):
+        return any(a <= pos < b for a, b in fence_spans)
+
+    running = 0
+    for idx, para in enumerate(doc_text.split("\n\n")):
+        para_start = running
+        running += len(para) + 2
+        if ("sigma" not in para.lower() and "\u03c3" not in para and "F_H" not in para):
+            continue
+        # Fenced formula bodies are excluded using DOCUMENT-wide fence spans: a displayed equation
+        # can open in one paragraph and close in another, so per-paragraph fence counting would
+        # treat the tail of a multi-paragraph equation as prose and demand a label inside it.
+        # A quoted equation is relabelled on its introducing sentence instead.
+        amplitude_matches = []
+        for rx in literal_res:
+            for m in rx.finditer(para):
+                if inside_fence(para_start + m.start()):
+                    continue
+                before = para[max(0, m.start() - 60):m.start()]
+                after = para[m.end():m.end() + 12]
+                has_assignment = bool(re.search(r"[=≈≥≤<>]\s*$", before))
+                if not ((sigma_context_res.search(before[-sigma_context_window:]) and has_assignment)
+                        or unit_after_res.match(after)):
+                    continue  # a number that is not being asserted as a cross-section
+                end = m.end()
+                unit = re.match(r"\s*cm(?:2|\u00b2)\s*/\s*g", para[end:])
+                if unit:
+                    end += unit.end()
+                if para[end:end + 1] in continuation_chars or para[end:].lstrip()[:1] in continuation_chars:
+                    continue  # a term inside an equation, not a standalone claim
+                amplitude_matches.append((m.start(), end))
+        if not amplitude_matches:
+            continue
+        is_canonical_claim = (any(rx.search(para) for rx in canonical_claim_res)
+                              # Mixing trigger: a paragraph that quotes BOTH an archived amplitude
+                              # and a live-pair amplitude is a pairing claim whether or not it uses
+                              # the word 'canonical'. Deleting the word 'canonical' from a labelled
+                              # anchor sentence must not launder it.
+                              or any(lit in para for lit in live_pair_literals))
+        if is_canonical_claim:
+            uncovered = [(s, e) for s, e in amplitude_matches
+                         if not any(lbl in para[max(0, s - proximity):e + proximity]
+                                    for lbl in archived_labels)]
+            if not uncovered:
+                continue
+        else:
+            if any(lbl in para for lbl in labels):
+                continue
+            if declared:
+                continue  # inherits the document's declared default pairing
+        snippet = " ".join(para.split())[:200]
+        drifts.append({"severity": "MED", "doc": doc_name,
+                       "type": "unlabelled archived-pair literal",
+                       "found": snippet,
+                       "canonical": "label every archived-pair amplitude within %d characters "
+                                    "(or quote the live-pair value 27.272481773080454 and note "
+                                    "sigma_eff = 15.348366)" % proximity,
+                       "context": f"paragraph {idx}; 0.297 / 0.052 / 174.0 / 0.0265 / 2025.57 are "
+                                  "archived-pair amplitudes; unlabelled they read as live constants "
+                                  "(findings F26/F29/F33)"})
+    # Fenced formula bodies are exempt from per-amplitude labelling (a label inside an equation
+    # would change the equation), but the equation itself must be declared: the text introducing
+    # the fence has to say which pairing its amplitudes belong to. Otherwise a reader copying the
+    # displayed formula uses archived amplitudes as if they were live.
+    for open_pos, close_pos in fence_spans:
+        body = doc_text[open_pos:close_pos]
+        if not any(rx.search(body) for rx in literal_res):
+            continue
+        introducing = doc_text[max(0, open_pos - 600):open_pos]
+        # A declaration inside the first lines of the formula body counts too; requiring it only
+        # outside the fence would force edits into the equation itself.
+        if any(lbl in introducing for lbl in archived_labels) or any(
+                lbl in body[:300] for lbl in archived_labels):
+            continue
+        drifts.append({"severity": "MED", "doc": doc_name,
+                       "type": "unlabelled archived-pair literal",
+                       "found": " ".join(body.split())[:200],
+                       "canonical": "label the sentence that introduces this fenced formula with "
+                                    "ARCHIVED PAIR (or restate it with the live-pair amplitudes "
+                                    "27.272481773080454 / 0.008150396851725193)",
+                       "context": f"fenced formula body at offset {open_pos}; its amplitudes are "
+                                  "pairing-specific and the introducing sentence does not say which "
+                                  "pair they belong to (finding F33)"})
+    return drifts
+
+
+def check_pairing_declaration(doc_text, doc_name, canonical):
+    """If a document declares a default pairing, the declaration's own numbers must
+    equal the canonical artifact's. A drifted declaration would legitimise every
+    unlabelled amplitude in that document, so it is checked rather than trusted (F33)."""
+    live = canonical.get("v19_2_D_canonical_phase_44_free_fit", {})
+    want = {"live sigma_peak": str(live.get("sigma_peak")),
+            "archived sigma_peak": "174.0",
+            "live f_H": str(live.get("F_H")),
+            "archived f_H": "0.297"}
+    drifts = []
+    for para in doc_text.replace("\r\n", "\n").split("\n\n"):
+        if not para.startswith("**Pairing declaration"):
+            continue
+        missing = {label: value for label, value in want.items()
+                   if value and value not in para}
+        if missing:
+            drifts.append({"severity": "HIGH", "doc": doc_name,
+                           "type": "pairing declaration incomplete or stale",
+                           "found": " ".join(para.split())[:200],
+                           "canonical": "declaration must name " + ", ".join(
+                               f"{k} = {v}" for k, v in want.items()),
+                           "context": "the declaration is inherited by every unlabelled amplitude "
+                                      "in this document, so its numbers are load-bearing (F33)"})
+    return drifts
+
+
 def check_registry_pairing_values(doc_text, doc_name, canonical):
     """The reference-data registry is the project's single source of truth for numbers, yet it was
     outside every drift check (finding F29, 2026-11-06): it still listed f_H = 0.297 with sigma_0 =
     0.052 and sigma_peak = 174.0 as live constants after the canonical pairing (finding F26) moved
     them to the archived pair. This check pins the registry's three pairing rows to the canonical
-    artifact and requires any archived-pair literal quoted next to a sigma/f_H claim to be labelled
-    as archived in the same paragraph. Fail closed: an unlabelled archived value in the KB reads as a
-    live claim to the next reader."""
+    artifact, and applies the shared archived-pair labelling rule below."""
     live = canonical.get("v19_2_D_canonical_phase_44_free_fit", {})
     want = {"F_H_CANONICAL": live.get("F_H"),
             "SIGMA_0_CM2_PER_G": live.get("sigma_0"),
@@ -546,21 +744,7 @@ def check_registry_pairing_values(doc_text, doc_name, canonical):
                                "found": f"{key} = {got!r} (line {i})", "canonical": target,
                                "context": "archived-pair value presented as a live constant "
                                           "(findings F26/F29; pairing_k = 0.15673840099471523)"})
-    ARCHIVED_LITERALS = ("0.297", "174.0", "174 ", "2025.57", "0.052")
-    LABELS = ("ARCHIVED", "archived", "ARCHIVED PAIR", "LEGACY", "legacy", "SUPERSEDED",
-              "superseded", "retracted", "PAIRING", "pairing", "live pair", "LIVE PAIR")
-    for para in doc_text.replace("\r\n", "\n").split("\n\n"):
-        if not any(lit in para for lit in ARCHIVED_LITERALS):
-            continue
-        if ("sigma" not in para.lower() and "\u03c3" not in para and "F_H" not in para):
-            continue
-        if any(lbl in para for lbl in LABELS):
-            continue
-        snippet = " ".join(para.split())[:200]
-        drifts.append({"severity": "MED", "doc": doc_name, "type": "unlabelled archived-pair literal",
-                       "found": snippet, "canonical": "label it ARCHIVED PAIR (or quote the live-pair value)",
-                       "context": "0.297 / 0.052 / 174.0 / 0.0265 / 2025.57 are archived-pair amplitudes; "
-                                  "unlabelled they read as live constants (finding F26)"})
+    drifts += check_archived_pair_labels(doc_text, doc_name)
     return drifts
 
 
@@ -658,6 +842,9 @@ def main():
         drifts += check_channel_count_claims(doc_text, canonical_abstract_block, doc_name)
         drifts += check_no_go_catalogue_membership(doc_text, doc_name)
         drifts += check_tradeoff_factor_scatter(doc_text, doc_name)
+        # F33: archived-pair amplitudes must be labelled wherever they appear.
+        drifts += check_archived_pair_labels(doc_text, doc_name)
+        drifts += check_pairing_declaration(doc_text, doc_name, canonical)
         all_drifts += drifts
 
     # T41 standing-MAP check over the four front-facing docs (README, CURRENT, EXTRACT, LAYMAN).
@@ -666,6 +853,19 @@ def main():
         if not doc_text:
             continue
         all_drifts += check_t41_standing_in_doc(doc_text, t41_block, doc_name)
+
+    # F33: docs that quote the canonical anchor but are not in the headline set.
+    # EXTRACT.md and the v19.2-E report of record both carried "canonical anchor
+    # sigma/m = 174 cm^2/g" with no pairing label after the pairing change.
+    for doc_name, doc_path in [
+        ("EXTRACT.md", _REPO / "EXTRACT.md"),
+        ("V19_2_E_CONSOLIDATED.md", _REPO / "docs" / "V19_2_E_CONSOLIDATED_REPORT_2026-11-03.md"),
+        ("LAYMAN_SUMMARY.md", _REPO / "docs" / "LAYMAN_SUMMARY.md"),
+    ]:
+        doc_text = load_doc(doc_path)
+        if not doc_text:
+            continue
+        all_drifts += check_archived_pair_labels(doc_text, doc_name)
 
     # Also check the v19.2-E round docs for halo-prefactor drift only.
     # The per-round docs legitimately have different pass counts but should

@@ -2,9 +2,11 @@
 
 **Scope:** the four-stage chain ordered by the user on 2026-11-03: (1) housekeeping save → (2) new-data search (Euclid/Roman/DESI) → (3) real galaxy merger data → (4) consolidate and report. This document is the running stage-4 consolidation; stage 3 is gated on IllustrisTNG registration approval (application submitted; FIRE-2/EAGLE-IC are no-login fallbacks).
 
-**Record status:** the audited physics record remains **v1.17** (tag `v19.2-F-RecordSave-v1.17`). Nothing in this chain changes any posterior or the canonical anchor **σ/m = 174 cm²/g @ 29.4 km/s (Cloud-9 = M94 RELHIC)**. The chain adds evidence adjudication, two corrected code bugs, and closed literature intake.
+**Record status:** the audited physics record remains **v1.17** (tag `v19.2-F-RecordSave-v1.17`). Nothing in this chain changes any posterior or the anchor **σ/m = 174 cm²/g @ 29.4 km/s (Cloud-9 = M94 RELHIC) — ARCHIVED pair** (the live canonical raw peak is 27.272481773080454 cm²/g and the halo-level σ_eff = 15.348366 cm²/g is unchanged). The chain adds evidence adjudication, two corrected code bugs, and closed literature intake.
 
 ---
+
+**Pairing declaration (findings F26/F33):** this document quotes amplitudes in two pairings. The LIVE canonical pair is f_H = 0.7501856343179664 with σ_0 = 0.008150396851725193 cm²/g and σ_peak = 27.272481773080454 cm²/g. The ARCHIVED pair is f_H = 0.297 with σ_0 = 0.052 cm²/g and σ_peak = 174.0 cm²/g. Unless a sentence says otherwise, an amplitude quoted below is an ARCHIVED-pair raw amplitude. Both pairs give the same halo-level σ_eff = f_H² × (σ/m) = 15.348366 cm²/g at the 29.4 km/s resonance, so no effective prediction changes. Sources: scripts/constants.py, v0.3-prelim/data/results/canonical_numbers.json, v0.3-prelim/data/results/fH_pairing_registry.json.
 
 ## 1. Stage 1 — housekeeping save (COMPLETE)
 
@@ -46,7 +48,7 @@ Two real repository bugs found while testing `2610.28890`'s applicability to Clo
 
 ## 5. What did NOT change
 
-- 174 cm²/g @ 29.4 km/s canonical anchor; joint galaxy-scale 0.06-0.68 cm²/g range; mediator baryon-coupling ceiling <3×10⁻¹¹ (now with external support from Crumrine mixed-DM limits).
+- 174 cm²/g @ 29.4 km/s anchor (ARCHIVED pair; live canonical raw peak 27.272481773080454 cm²/g; halo-level σ_eff = 15.348366 cm²/g unchanged); joint galaxy-scale 0.06-0.68 cm²/g range; mediator baryon-coupling ceiling <3×10⁻¹¹ (now with external support from Crumrine mixed-DM limits).
 - The honest headline: **the project has not proven dark matter self-interacts and has not derived a working particle model from first principles** (v19.2-F Phase 3 FAIL stands).
 
 ## 6. Stage 3 status and next actions

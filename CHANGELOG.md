@@ -1,3 +1,28 @@
+## [PairingRelabel-F33-2026-11-08] - the pairing changed and the vocabulary did not follow it
+
+F26 made `f_H = 0.7501856343179664` (`sigma_peak = 27.272481773080454 cm^2/g`) the live canonical pair and moved
+`f_H = 0.297` (`sigma_peak = 174.0`) to the archived pair, with halo-level `sigma_eff = f_H^2 x (sigma/m) =
+15.348366 cm^2/g` identical either way. Because nothing downstream changed, the documentation kept presenting
+`174 cm^2/g` as the canonical anchor: **86 unlabelled paragraphs across nine live-facing documents**, including the
+`CURRENT.md` and `docs/V19_2_E_CONSOLIDATED_REPORT_2026-11-03.md` sentence
+"the canonical anchor **sigma/m = 174 cm^2/g @ 29.4 km/s** (Cloud-9 = M94 RELHIC)".
+
+- Relabelled in place, no numeric value changed: 7 `**Pairing declaration` paragraphs, 39 paper/front-page labels in
+  total (25 in the first pass, 14 more under the sharpened proximity rule), 4 exact anchor-sentence relabels (front
+  page, report of record x2, §2.2 findings bullet), the `sigma_peak[0]` parameter-table row, and `161.70 cm^2/g` now
+  carrying its live-pair equivalent `25.344599 cm^2/g`. Each anchor sentence names the archived pair, the live
+  canonical raw peak `27.272481773080454 cm^2/g`, and the unchanged `sigma_eff = 15.348366 cm^2/g`.
+- Equations untouched: the fenced canonical `sigma/m(v)` block and both inline `sigma/m(v)` formulas are
+  byte-identical, labelled on their introducing sentences instead. An earlier inserter put a label **inside** a
+  formula; that pass was reverted from git before any commit.
+- `scripts/drift_guard.py`: `check_archived_pair_labels` (F29's rule, generalised) now covers nine live-facing
+  documents; sigma-adjacency so a `174 passed, 3 skipped` tally is not mistaken for the amplitude; 160-character
+  proximity for canonical claims so one stray 'legacy' cannot launder a paragraph; fenced-formula and inline-term
+  exemptions; and `check_pairing_declaration`, which verifies each declaration's own four numbers against the
+  canonical artifact.
+- Guard: `v0.3-prelim/tests/test_pairing_label_coverage.py` (7 tests, 2 negative). Evidence: strict drift 86 -> 0;
+  mutation probe 3/3 caught with byte-identical restoration (its first run caught 2/3 and found the laundering
+  loophole); 40 pairing/targeted tests pass after the paper relabel.
 ## [ReleaseBump-v1.18-2026-11-07] - VERSION now names the 2026-11-06/07 round, and the front page matches live git state
 
 `VERSION`'s newest token was `LocalIntegritySweep-2026-11-04`. Three days of work - the pairing

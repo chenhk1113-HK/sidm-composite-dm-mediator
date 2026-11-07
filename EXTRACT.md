@@ -2,6 +2,8 @@
 
 **Snapshot: physics record as audited 2026-09-06 (v0.4-prelim + T89) · project state refreshed 2026-11-03 · ~1,900 words**
 
+**Pairing declaration (findings F26/F33):** this document quotes amplitudes in two pairings. The LIVE canonical pair is f_H = 0.7501856343179664 with σ_0 = 0.008150396851725193 cm²/g and σ_peak = 27.272481773080454 cm²/g. The ARCHIVED pair is f_H = 0.297 with σ_0 = 0.052 cm²/g and σ_peak = 174.0 cm²/g. Unless a sentence says otherwise, an amplitude quoted below is an ARCHIVED-pair raw amplitude. Both pairs give the same halo-level σ_eff = f_H² × (σ/m) = 15.348366 cm²/g at the 29.4 km/s resonance, so no effective prediction changes. Sources: scripts/constants.py, v0.3-prelim/data/results/canonical_numbers.json, v0.3-prelim/data/results/fH_pairing_registry.json.
+
 ## Project state — 2026-11-03
 
 **Active branch:** `wip/v19.2-F-init`, pushed to `origin` 2026-11-07 (record save point: annotated tag

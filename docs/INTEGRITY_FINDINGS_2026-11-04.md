@@ -1530,3 +1530,85 @@ command.
 scientifically accurate. The guard covers numbered `v40.NN` tokens and the save-point family only - prose claims
 about version counts (for example "21-version arc") are outside it, as are free-text tokens that do not match
 either pattern.
+
+## F33 - the pairing changed and the vocabulary did not follow it (FOUND 2026-11-08, FIXED)
+
+**What was found.** F26 made `f_H = 0.7501856343179664` with `sigma_0 = 0.008150396851725193` and
+`sigma_peak = 27.272481773080454 cm^2/g` the live canonical pair, and moved `f_H = 0.297 / sigma_0 = 0.052 /
+sigma_peak = 174.0` to the archived pair. Nothing downstream looked wrong, because the halo-level product is the
+same either way: `f_H^2 x (sigma/m) = 15.348366 cm^2/g` at the 29.4 km/s resonance for both pairs. That is exactly
+why the wording went unnoticed. An audit prompted by the owner's "relabel" instruction found **86 paragraphs across
+nine live-facing documents** quoting archived-pair amplitudes with no pairing label, including the sentence shared
+by the front page (`CURRENT.md`) and the report of record
+(`docs/V19_2_E_CONSOLIDATED_REPORT_2026-11-03.md`):
+
+> the canonical anchor **sigma/m = 174 cm^2/g @ 29.4 km/s** (Cloud-9 = M94 RELHIC)
+> (quoted as it stood before this relabel; the `174 cm^2/g` in it is the archived pair)
+
+After F26 that is an **archived-pair raw amplitude presented as the canonical one**. F29 had answered the identical
+problem for the reference-data registry alone, and §27.11 had left open how much of the documentation the drift layer
+should own.
+
+**What was fixed.**
+1. `scripts/drift_guard.py`: F29's paragraph rule was generalised into `check_archived_pair_labels(doc_text,
+   doc_name)` and wired into the strict drift layer for `README.md`, `CURRENT.md`,
+   `v0.3-prelim/docs/PAPER_V1_DRAFT.md`, `docs/FINDINGS_FOR_FUTURE_DELIBERATION.md`,
+   `docs/CITATION_AUDIT_V19_2_D.md`, `docs/TRANSITION_V19_2_D_TO_V19_2_E.md`, `EXTRACT.md`, the v19.2-E report of
+   record and `docs/LAYMAN_SUMMARY.md`.
+2. A document may declare its default pairing once in a `**Pairing declaration` paragraph; every other paragraph
+   inherits it **except** one that makes a canonical/current claim. `check_pairing_declaration` verifies each
+   declaration's own four numbers against the canonical artifact - without that, "add one declaration paragraph"
+   would have been a way to make the guard pass without relabelling anything.
+3. Three sharpenings, each forced by a failure rather than designed in:
+   - **sigma-adjacency.** A literal counts as an amplitude only if a `sigma`/`f_H`/`peak` token appears within 60
+     characters before it, or a `cm^2/g` unit right after it. Before this, `**174 passed, 3 skipped in 7.11 s**`
+     in a test tally was read as the 174 cm^2/g amplitude.
+   - **Proximity.** A canonical-bearing paragraph needs a label within 160 characters of *every* archived
+     amplitude, not one label anywhere in the paragraph. The first mutation probe stripped a label from a canonical
+     anchor sentence and the guard did not fire, because an unrelated 'legacy' elsewhere in the same paragraph had
+     laundered it (probe result 2/3).
+   - **Equation immunity.** Matches inside fenced formula bodies, and matches immediately followed by `x`, `.`,
+     `*`, `^`, `/` or `(`, are exempt, so the archived-pair formula `sigma/m(v) = 0.052 x (100/v)^1.93 + 174 x
+     exp(...)` (0.052 and 174 are archived-pair amplitudes) is never edited inside; a fenced formula must instead
+     carry the pairing declaration on the sentence that introduces it, which is what the §3.3 canonical table
+     heading now does. An earlier version of the inserter put `(archived pair)` **inside** a formula and the
+     whole pass was reverted from git before it reached a commit.
+4. Relabelled in place, with no numeric value changed anywhere: seven `**Pairing declaration` paragraphs; 25 paper
+   labels from the first pass plus 14 more from the proximity rule (13 in the paper, 1 in `CURRENT.md`); four exact
+   sentence relabels (front page, report of record x2, §2.2 findings bullet) each naming `174 cm^2/g` as the
+   archived pair, `27.272481773080454 cm^2/g` as the live canonical raw peak and `sigma_eff = 15.348366 cm^2/g`
+   unchanged; the paper's `sigma_peak[0]` parameter-table row; and `161.70 cm^2/g`, which now carries its live-pair
+   equivalent `25.344599 cm^2/g` (`161.70 x 0.15673840099471523`).
+
+**Evidence.**
+- `scripts/drift_guard.py --strict`: 86 unlabelled archived-pair claims before, **0 after** (rc 0).
+- `v0.3-prelim/tests/test_pairing_label_coverage.py`: 7 tests, wiring plus two negative tests (deleting a label
+  from a canonical anchor re-fires the label guard; corrupting a declaration's peak number re-fires the declaration
+  guard at HIGH) plus a test that the fenced formula body is untouched.
+- Mutation probe (`cache/scratch/f33_drift_mutation_probe.py`) through the real `drift_guard.py --strict`: 3
+  corruptions (unlabelled anchor claim in `CURRENT.md`, stale peak number in the `README.md` declaration, unlabelled
+  canonical sentence in the paper) - 3/3 caught, expected drift type matched on each, all three files restored
+  byte-identically, post-restore drift rc 0.
+- Pairing/targeted regression set after the relabel: 40 passed (`test_hierarchy_chain_pairing.py`,
+  `test_fH_pairing_integrity.py`, `test_fH_pairing_registry.py`, `test_registry_drift_coverage.py`,
+  `test_version_tokens_have_tags.py`) - F31's paper claim-site slices survived the label insertions.
+- The relabel helper (`cache/scratch/f33_relabel2.py`) is append-only by construction: it logs every insertion
+  offset and refuses to write unless unwinding those offsets reproduces the original bytes. Its invariants caught
+  four bugs during development: a declaration inserted inside a `## ` heading, a duplicated em dash in a relabelled
+  sentence, an inserter that modified rather than purely inserted text, and an unwind loop that removed labels in
+  descending order - descending removal looks for labels at offsets that earlier smaller insertions had already
+  shifted, so a correct edit failed its own invariant.
+
+**Limits, stated.**
+- Canonical-claim detection is a vocabulary list (`canonical anchor`, `the canonical`, `canonical sigma`,
+  `canonical f_H`). A claim worded outside that vocabulary inherits the document's declaration. The declaration tells
+  a reader which pairing applies; it cannot certify that a given sentence used the right one. F31's claim-site scan
+  remains the mechanism that pins printed values at their claim sites, and it covers the hierarchy chain, not every
+  sentence in the paper.
+- Amplitudes inside equations are exempt by design. A label inside a formula would change the formula, so equations
+  are labelled only on the sentence that introduces them.
+- Historical round records under `docs/dual_review_5loop/` (including `superseded/`) were left as written; F26 does
+  not retroactively change what those documents said on their dates.
+- The paper's gravothermal line `sigma/m ≈ sigma_eff ≈ 174 cm^2/g` is now labelled archived-pair, but the deeper
+  component-level versus halo-level conflation that line contains is a separate issue and stays flagged in §27.9 and
+  F27.

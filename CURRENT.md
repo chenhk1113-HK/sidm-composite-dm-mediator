@@ -6,6 +6,8 @@
 
 ---
 
+**Pairing declaration (findings F26/F33):** this document quotes amplitudes in two pairings. The LIVE canonical pair is f_H = 0.7501856343179664 with σ_0 = 0.008150396851725193 cm²/g and σ_peak = 27.272481773080454 cm²/g. The ARCHIVED pair is f_H = 0.297 with σ_0 = 0.052 cm²/g and σ_peak = 174.0 cm²/g. Unless a sentence says otherwise, an amplitude quoted below is an ARCHIVED-pair raw amplitude. Both pairs give the same halo-level σ_eff = f_H² × (σ/m) = 15.348366 cm²/g at the 29.4 km/s resonance, so no effective prediction changes. Sources: scripts/constants.py, v0.3-prelim/data/results/canonical_numbers.json, v0.3-prelim/data/results/fH_pairing_registry.json.
+
 ## Standing: `v19.2-F-RecordSave-v1.18` (2026-11-07); previous save point `v19.2-F-RecordSave-v1.17` + v19.2-E chain (2026-11-03)
 
 **Record save point:** annotated tag **`v19.2-F-RecordSave-v1.18`** — the 2026-11-06/07 round: `f_H = 0.7501856343179664`
@@ -48,7 +50,7 @@ now asserts the v0.8 MAP (478 GeV / 488 MeV / 0.81σ), so this line, the docs an
   affected callers (Cloud-9 τ 17.4 → 4.2). **Optical-thickness consequence CORRECTED 2026-11-04:** the number
   first quoted here (optically thick at τ\* ≈ 1.4, ~3–3.5 Gyr after formation) came from `rho_sidm` while it
   was still inverted relative to arXiv:2305.16176 eq. 2.1, and τ = 1.4 is past the ceiling of the eq. 2.3 fits
-  (`f_rs_over_rs0` goes negative at τ = 1.4). With the profile fixed (decision D7), Cloud-9 at σ ≈ 174 cm²/g is
+  (`f_rs_over_rs0` goes negative at τ = 1.4). With the profile fixed (decision D7), Cloud-9 at σ ≈ 174 cm²/g (archived pair) is
   optically thick across essentially the whole τ window the model can describe — λ/r_c = 0.76 at τ = 0.01 and
   0.28 at the τ = 1 truncation, marginally thin (1.02–1.06) only in τ ≈ 0.1–0.3 — so the parametric t_c cannot
   be quoted at face value for the Cloud-9 anchor. Dwarf anchors (σ ≈ 7) stay optically thin (λ/r_c = 7–15 at
@@ -161,6 +163,20 @@ now asserts the v0.8 MAP (478 GeV / 488 MeV / 0.81σ), so this line, the docs an
   `scripts/drift_guard.py::check_registry_pairing_values`, mutation-tested 2/2 with byte-identical restore
   (`AppData/Local/hermes/cache/scratch/registry_drift_mutation.py`).
 
+- **F33 (pairing vocabulary relabelled and guarded, FOUND 2026-11-08, FIXED).** F26 changed the pairing but the
+  documentation kept the old vocabulary: 86 paragraphs in nine live-facing documents quoted archived-pair amplitudes
+  (`f_H = 0.297`, `sigma_0 = 0.052`, `sigma_peak = 174.0`) with no pairing label, including the shared front-page and
+  v19.2-E-report-of-record sentence "the canonical anchor **sigma/m = 174 cm^2/g @ 29.4 km/s**", which after F26 is an
+  archived-pair raw amplitude. Relabelled in place with no numeric change: `174 cm^2/g` is stated as the archived pair,
+  `27.272481773080454 cm^2/g` as the live canonical raw peak, and halo-level `sigma_eff = 15.348366 cm^2/g` is
+  identical either way - which is why no downstream check ever failed. `scripts/drift_guard.py` now applies the F29
+  labelling rule to the paper, both front pages, `EXTRACT.md`, the findings docs, the citation audit, the transition
+  note, the layman summary and the report of record, with a checked `**Pairing declaration` paragraph per document
+  (its four numbers verified against the canonical artifact; canonical claims must still label themselves within 160
+  characters of each amplitude, and amplitudes count only when sigma-adjacent so a "174 passed" test tally is not
+  read as the amplitude). Drift: 86 -> 0. New guard `v0.3-prelim/tests/test_pairing_label_coverage.py` (7 tests, two
+  negative); mutation probe 3/3 caught with byte-identical restoration after its first run caught only 2/3 and
+  exposed the laundering loophole. See `docs/INTEGRITY_FINDINGS_2026-11-04.md` F33 and §27.15.
 - **F32 (version claims vs real tags, FOUND AND FIXED 2026-11-07).** The v40.51 review report has said
   "Final tag: `v40.63-N16ReviewResponse`" since 2026-10-19 and `VERSION` has carried that token, but no such tag
   ever existed. Two of the six numbered `v40.NN` claims in `VERSION` were unbacked. A new guard
@@ -242,7 +258,7 @@ now asserts the v0.8 MAP (478 GeV / 488 MeV / 0.81σ), so this line, the docs an
   the literal published `150*C` form gives 15.774 Gyr (−45.0%) and the `1.8194×` calibrated form gives
   28.700 Gyr (−0.001%).
 
-**What did NOT change:** the canonical anchor **σ/m = 174 cm²/g @ 29.4 km/s** (Cloud-9 = M94 RELHIC); the
+**What did NOT change:** the anchor **σ/m = 174 cm²/g @ 29.4 km/s (ARCHIVED pair)** (Cloud-9 = M94 RELHIC; the live canonical raw peak is 27.272481773080454 cm²/g and the halo-level σ_eff = 15.348366 cm²/g is unchanged); the
 joint galaxy-scale range 0.06–0.68 cm²/g; the baryon-coupling ceiling < 3 × 10⁻¹¹; the v19.2-E A.2 5-param
 best fit at **5 of 8 channels PASS** (2 marginal, 1 fail) — a count over 8 velocity **slots** drawn from
 4 independent sources, 5 of them being velocity bins of a single Horigome+ 2025 dSph+UFD analysis (see

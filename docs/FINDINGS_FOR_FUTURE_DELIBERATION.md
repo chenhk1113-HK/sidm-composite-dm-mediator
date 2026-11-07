@@ -7,6 +7,8 @@
 
 ---
 
+**Pairing declaration (findings F26/F33):** this document quotes amplitudes in two pairings. The LIVE canonical pair is f_H = 0.7501856343179664 with σ_0 = 0.008150396851725193 cm²/g and σ_peak = 27.272481773080454 cm²/g. The ARCHIVED pair is f_H = 0.297 with σ_0 = 0.052 cm²/g and σ_peak = 174.0 cm²/g. Unless a sentence says otherwise, an amplitude quoted below is an ARCHIVED-pair raw amplitude. Both pairs give the same halo-level σ_eff = f_H² × (σ/m) = 15.348366 cm²/g at the 29.4 km/s resonance, so no effective prediction changes. Sources: scripts/constants.py, v0.3-prelim/data/results/canonical_numbers.json, v0.3-prelim/data/results/fH_pairing_registry.json.
+
 ## 1. Headline Verdict
 
 The Phase 44 SIDM composite DM mediator model — at the parameter point (m_χ = 1.0 GeV, σ_peak = 174 cm²/g, f_H = 0.297, Gaussian resonance at v=29.4 km/s with σ_1 = 4.4 km/s) — **does not simultaneously satisfy all observational channels**.
@@ -29,7 +31,7 @@ The framework has been systematically tested across 10 observational channels. H
 - CLEAR FAIL under priored free fit
 
 ### 2.2 Cloud-9 anchor (PASS)
-- At canonical σ_peak = 174 cm²/g, σ/m(V_max=31.12) = 161.70 cm²/g
+- At the archived-pair σ_peak = 174.0 cm²/g, σ/m(V_max=31.12) = 161.70 cm²/g (live pair: 25.344599 cm²/g; the halo-level σ_eff is identical)
 - Consistent with Elbert+ 2015 working benchmark of σ/m(28) ≥ 50 cm²/g
 - Mace+ 2025 (arXiv:2504.13004) gravothermal N-body calibration satisfied
 
@@ -158,7 +160,7 @@ The framework has been systematically tested across 10 observational channels. H
   - Re-derive ALL scaling relations (~1-2 months)
 
 ### 5.3 The c=12 circularity (still §2.6a)
-- Canonical σ_peak = 174 works only at c ≈ 4 (Ohana+ inferred)
+- Canonical σ_peak = 174 (archived pair) works only at c ≈ 4 (Ohana+ inferred)
 - At c = 12 (ΛCDM standard), no σ_peak satisfies both floor and causality
 - This is the most important internal constraint
 - Resolved only if:
@@ -1427,3 +1429,32 @@ marker of the work commit). `v19.2-F-RecordSave-2026-11-07` -> `6f6917f` (curren
 
 **Standing rule this establishes.** A version number written in a document or in `VERSION` is a claim about a
 tree. Publish it as a tag pointing at that tree, and let a test verify that the tree says what the tag says.
+
+### 27.15 Finding F33 closed (2026-11-08): pairing labels are now a drift-layer obligation in every live-facing document
+
+§27.11 asked how much of the documentation `drift_guard.py` should own. The answer: the archived-pair labelling rule
+that F29 applied to the reference-data registry now runs over the paper, both front pages, `EXTRACT.md`, this
+findings document, the citation audit, the transition note, the layman summary and the v19.2-E report of record.
+
+The load-bearing sentence was in two of them, and both read
+
+> the canonical anchor **sigma/m = 174 cm^2/g @ 29.4 km/s** (Cloud-9 = M94 RELHIC)
+> (quoted as it stood before this relabel; the `174 cm^2/g` in it is the archived pair)
+
+Since F26 that value is the **archived** pair's raw peak; the live canonical raw peak is
+`27.272481773080454 cm^2/g`. Both give the same halo-level `sigma_eff = 15.348366 cm^2/g`, which is precisely why
+nothing downstream ever looked wrong.
+
+Design decision worth keeping: a document may declare its default pairing once and paragraphs inherit it, but the
+declaration's own numbers are checked against the canonical artifact and a paragraph making a canonical claim must
+still label itself near the amplitude. Without those two constraints, adding a single declaration paragraph would
+have satisfied the guard while leaving every claim ambiguous.
+
+What the probe taught (and what the guard now enforces): a label counts only if it is within 160 characters of the
+amplitude, and an amplitude counts only if it is sigma-adjacent. The first probe run caught 2 of 3 corruptions
+because one stray 'legacy' three sentences away had laundered an unlabelled canonical anchor; a test tally,
+`174 passed, 3 skipped`, was being read as the 174 cm^2/g amplitude.
+
+Still open: canonical-claim detection is a vocabulary list, an oddly worded claim inherits the declaration, and
+equations are labelled only by their introducing sentence. The historical round records under
+`docs/dual_review_5loop/` are deliberately not relabelled - they are the audit trail.
