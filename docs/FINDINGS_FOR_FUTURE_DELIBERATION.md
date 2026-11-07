@@ -1396,3 +1396,34 @@ known-red probe, and a disclosure when the scoring rule changes. v4 does that an
 **Standing rule this establishes.** Whenever a guard compares a document to a computation, state whether it
 is an existence check or a claim-site check, and mutation-test the comparison rule itself, not only the
 computation.
+
+
+### 27.14 Finding F32 closed (2026-11-07): a version claim is only worth what its tag can show
+
+The v40.51 review report's closing line has read "Final tag: `v40.63-N16ReviewResponse`" since 2026-10-19, and
+`VERSION` has carried the matching token. No tag ever existed. The claim was checked by nobody because nothing
+in the test suite could ask the question.
+
+Two rules are now enforced by `v0.3-prelim/tests/test_version_tokens_have_tags.py`:
+
+1. Every numbered `v40.NN` token in `VERSION` needs a tag that starts with that base **and** whose target
+   commit's own `VERSION` contains the token.
+2. The current `VERSION` tail needs a tag in the milestone/RecordSave family pointing at a commit with the same
+   tail. Ordinary commits are unaffected; advancing `VERSION` without a save point is not.
+
+Rule 1 is what caught the case the audit had missed: `v19.2-F-Phase3-CLOSED-r40.58` is anchored on `dbca352`,
+whose `VERSION` predates the numbering scheme entirely, so a tag named for v40.58 certified a tree that never
+declared v40.58. Name-only matching would have passed it.
+
+**Tags now in place.** `v40.63-N16ReviewResponse` -> `6447e8d` (last commit of the v40.63 round; retroactive).
+`v40.58-Phase3-CLOSED` -> `7138503` (first tree declaring the token; the older r40.58 tag is retained as the
+marker of the work commit). `v19.2-F-RecordSave-2026-11-07` -> `6f6917f` (current standing).
+
+**What is still open.**
+1. Version counts written as prose ("21-version arc", "all 8 channels") are outside this guard; only numbered
+   tokens and the save-point family are checked.
+2. Nothing checks that a tag is *annotated* or that its message is truthful - the guard reads names and trees.
+3. Nothing enforces a tag naming convention for future rounds beyond "must belong to the save family".
+
+**Standing rule this establishes.** A version number written in a document or in `VERSION` is a claim about a
+tree. Publish it as a tag pointing at that tree, and let a test verify that the tree says what the tag says.

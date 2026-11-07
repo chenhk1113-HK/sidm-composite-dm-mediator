@@ -1,3 +1,31 @@
+## [VersionTagGuard-F32-2026-11-07] - a published version label had no tag, and a tag had no version
+
+**Two mismatches between version claims and git reality.**
+
+1. `docs/SIDM_V40_51_FULL_REVIEW_REPORT_2026_10_19.md:8` has said "Final tag: `v40.63-N16ReviewResponse`" since
+   2026-10-19, and `VERSION` carries the token from `0d64890` onward. No such tag existed. The same line's
+   "Final commit: `499c624`" is superseded by four further commits carrying the `v40.63` label (`06851c7`,
+   `2c6a7d6`, `2f240c4`, `6447e8d`).
+2. Found by the new guard rather than by the audit: `v19.2-F-Phase3-CLOSED-r40.58` points at `dbca352`, whose
+   `VERSION` has no `v40.5x` token at all (tail `...+R88(80)-BundleDriftFix`). The token `v40.58-Phase3-CLOSED`
+   first appears one commit later at `7138503`. A tag named for a version was anchored on a tree that never
+   declared it.
+
+**Fix.** Annotated tags `v40.63-N16ReviewResponse` -> `6447e8d`, `v40.58-Phase3-CLOSED` -> `7138503`, and
+`v19.2-F-RecordSave-2026-11-07` -> `6f6917f` for the current standing. No historical tag was moved or deleted;
+the r40.58 tag is retained because it marks the round's work commit, and both facts are recorded in the tag
+messages.
+
+**Guard.** `v0.3-prelim/tests/test_version_tokens_have_tags.py` (6 tests, green in 1.49 s): every numbered
+`v40.NN` token in `VERSION` must have a tag whose target commit's own `VERSION` contains that token, and the
+current `VERSION` tail must be certified by a save-family tag. Four negative tests inject a fake `VERSION`
+resolver so the checker is mutation-tested rather than depending on the current tag set.
+
+**Disclosed self-inflicted error.** The first tag command, `git tag -a 6447e8d -m "..."`, created a tag *named*
+`6447e8d` on `HEAD` - `git tag` takes the name first and defaults the commit to `HEAD`. Caught in the tag
+listing, deleted, and redone. Every tag this round is verified with `git rev-list -n1 <tag>` instead of trusting
+the command's exit code.
+
 ## [Audit-Claim-Site-F31-2026-11-07] - a wrong number in the paper passed layer 10, and the fix made printed precision a contract
 
 **Found by the mutation harness, not by a test.** After the F30 dual-chain repair the decision harness was

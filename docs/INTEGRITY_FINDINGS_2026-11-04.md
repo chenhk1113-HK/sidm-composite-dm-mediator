@@ -1477,3 +1477,56 @@ artifact ever carried the damage.
 **Residual weakness, stated.** Link 7 proves a printed quantity is *recomputable at the precision printed*.
 It does not prove the quantity is cited in the right place or means what the sentence says. The `1.9e-16`
 defect above is exactly that class of error: a real number from a real audit, attached to the wrong claim.
+
+
+## F32 — the repository published a version label that no tag carried, and a tag whose tree did not carry the version (FOUND 2026-11-07, FIXED)
+
+**The claim.** `docs/SIDM_V40_51_FULL_REVIEW_REPORT_2026_10_19.md:8` states
+"Final tag: `v40.63-N16ReviewResponse`", and line 33 presents the same round as part of the version arc.
+`VERSION` has carried the token `v40.63-N16ReviewResponse` since commit `0d64890`.
+
+**The reality.** No such tag existed. Before this round `git tag -l` had `v40.61-ReportCleanup` and
+`v40.62-N15ReviewResponse` and nothing matching `v40.63`. The claim lived only inside a document. A version
+label that is not a tag has no address: nobody can check out `v40.63`, and nobody can tell which tree that
+report described. The same line also names "Final commit: `499c624`", which is not the end of the round - four
+more commits carrying the same `v40.63` label follow it (`06851c7`, `2c6a7d6`, `2f240c4`, `6447e8d`).
+
+**Counting the exposure.** `VERSION` makes six numbered `v40.NN` claims (`v40.58` through `v40.63`). Two of
+the six had no tag behind them: `v40.63` (no tag at all) and `v40.58` (tagged only under a non-numeric name,
+see below).
+
+**The second defect, found by the guard rather than by the audit.** The existing tag
+`v19.2-F-Phase3-CLOSED-r40.58` points at `dbca352` ("v40.58: n13.docx review response", 2026-10-20). That
+commit's `VERSION` contains no `v40.5x` token at all - its tail is `...+R88(80)-BundleDriftFix`, the pre-numbering
+scheme. The token `v40.58-Phase3-CLOSED` first appears in `VERSION` one commit later, at `7138503` (the v40.59
+round, 2026-10-21, which appended `+v40.58-Phase3-CLOSED+v40.59-DefectsEFG12`). So a tag named for v40.58 was
+anchored on a tree that does not declare v40.58. That is the more dangerous shape of the same problem: the name
+is satisfied while the tree is wrong.
+
+**Fix.**
+1. Annotated tag `v40.63-N16ReviewResponse` at `6447e8d`, the last commit of the round labelled v40.63. Its tag
+   message records that the tag is retroactive, that the document's "Final tag" line had always been false, and
+   that its "Final commit" line is superseded by the log.
+2. Annotated tag `v40.58-Phase3-CLOSED` at `7138503`, the first tree that actually declares the token. The old
+   `v19.2-F-Phase3-CLOSED-r40.58` tag is kept, because it marks the round's work commit; both are documented in
+   the tag messages. No historical tag was moved or deleted.
+3. Annotated tag `v19.2-F-RecordSave-2026-11-07` at `6f6917f` for the current standing, with the evidence
+   summary (gate, suite, mutation harness) inside the tag message.
+4. `v0.3-prelim/tests/test_version_tokens_have_tags.py` - a guard that (a) requires every numbered `v40.NN`
+   token in `VERSION` to have a tag that starts with that base **and** points at a commit whose `VERSION`
+   contains the token, and (b) requires the current `VERSION` tail to be certified by a tag in the
+   milestone/RecordSave family. Four negative tests inject a fake `VERSION` resolver so the checker itself is
+   mutation-tested instead of relying on whatever tags happen to exist. 6 tests, green in 1.49 s.
+
+**Mistake made and corrected during this round (disclosed per standing rule 12).** The first tag command was
+written as `git tag -a 6447e8d -m "..."`, which does not tag commit `6447e8d`: `git tag` takes the tag **name**
+first and defaults the commit to `HEAD`, so it created a tag literally named `6447e8d` on `HEAD`. Caught by the
+`git tag -l --sort=-creatordate` listing, deleted with `git tag -d`, and redone as `git tag -a <name> <commit>`.
+`git tag -a HEAD -m ...` for the save point was also rejected outright (`fatal: 'HEAD' is not a valid tag name`).
+Every tag created this round is verified by `git rev-list -n1 <tag>` rather than by the exit code of the tag
+command.
+
+**Residual weakness, stated.** A tag proves a label is addressable; it does not prove the label is
+scientifically accurate. The guard covers numbered `v40.NN` tokens and the save-point family only - prose claims
+about version counts (for example "21-version arc") are outside it, as are free-text tokens that do not match
+either pattern.

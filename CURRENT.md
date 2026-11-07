@@ -151,6 +151,17 @@ now asserts the v0.8 MAP (478 GeV / 488 MeV / 0.81σ), so this line, the docs an
   `scripts/drift_guard.py::check_registry_pairing_values`, mutation-tested 2/2 with byte-identical restore
   (`AppData/Local/hermes/cache/scratch/registry_drift_mutation.py`).
 
+- **F32 (version claims vs real tags, FOUND AND FIXED 2026-11-07).** The v40.51 review report has said
+  "Final tag: `v40.63-N16ReviewResponse`" since 2026-10-19 and `VERSION` has carried that token, but no such tag
+  ever existed. Two of the six numbered `v40.NN` claims in `VERSION` were unbacked. A new guard
+  (`v0.3-prelim/tests/test_version_tokens_have_tags.py`, 6 tests) now requires every numbered token to have a tag
+  **anchored on a tree whose own `VERSION` declares it**, and requires the current `VERSION` tail to be certified
+  by a save-point tag; it caught a second defect the audit had missed - `v19.2-F-Phase3-CLOSED-r40.58` points at
+  `dbca352`, whose `VERSION` predates the numbering scheme, so it named v40.58 without certifying it. Tags added
+  retroactively: `v40.63-N16ReviewResponse` -> `6447e8d`, `v40.58-Phase3-CLOSED` -> `7138503` (the r40.58 tag is
+  kept as the marker of the work commit), and `v19.2-F-RecordSave-2026-11-07` -> `6f6917f` for the current
+  standing. No existing tag was moved or deleted. See `docs/INTEGRITY_FINDINGS_2026-11-04.md` F32 and
+  `docs/FINDINGS_FOR_FUTURE_DELIBERATION.md` 27.14.
 - **F31 (claim-site guard, FOUND AND FIXED 2026-11-07).** The extended mutation harness scored
   FAIL (11/14 caught): two "misses" were the harness miscounting a guard that fired inside a pytest
   fixture as a non-catch, and one was real — corrupting the abstract's live-pair bound left the `§A.3` copy
