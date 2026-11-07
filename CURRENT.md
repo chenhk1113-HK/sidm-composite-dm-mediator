@@ -2,18 +2,28 @@
 
 > **For:** Anyone who has 60 seconds and wants to know what this project
 > is, what it claims, and what the current best numbers are.
-> Updated with each version-bump round. Last refresh: 2026-11-03 (`v19.2-F-RecordSave-v1.17` + v19.2-E chain stages 1-2).
+> Updated with each version-bump round. Last refresh: 2026-11-07 (`v19.2-F-RecordSave-v1.18`; previous save point `v19.2-F-RecordSave-v1.17` + v19.2-E chain stages 1-2).
 
 ---
 
-## Standing: `v19.2-F-RecordSave-v1.17` + v19.2-E chain (2026-11-03)
+## Standing: `v19.2-F-RecordSave-v1.18` (2026-11-07); previous save point `v19.2-F-RecordSave-v1.17` + v19.2-E chain (2026-11-03)
 
-**Record save point:** annotated tag **`v19.2-F-RecordSave-v1.17`** (commit `ef427e6`) — one
+**Record save point:** annotated tag **`v19.2-F-RecordSave-v1.18`** — the 2026-11-06/07 round: `f_H = 0.7501856343179664`
+made the live pairing with the archived 0.297 pair pinned explicitly, IllustrisTNG reclassified as a framework
+check, the claim-site pairing audit, and the version-tag guard. Its target is the commit whose 15-layer gate is
+green; read the hash with `git rev-list -n1 v19.2-F-RecordSave-v1.18`.
+
+**Previous save point:** annotated tag **`v19.2-F-RecordSave-v1.17`** (commit `ef427e6`) — one
 reproducible object capturing the audited physics record: consolidated review-response report **v1.17**,
-the n22→n26 audit chain, and the 15/15 gate run.
+the n22→n26 audit chain, and the 15/15 gate run. A further annotated tag `v19.2-F-RecordSave-2026-11-07`
+(commit `6f6917f`) marks the F30/F31 gate-green state inside the same round.
 
-**Active branch:** `wip/v19.2-F-init`. Local `master` was fast-forwarded to `d4cabec` and is 2 commits behind;
-remote `origin/master` is still at `d411598` — 242 commits behind as of 2026-11-04, nothing pushed (GitHub shelved by owner decision 2026-11-04) — so the landing page shows the 2026-10-11 state, not this one.
+**Active branch:** `wip/v19.2-F-init`, **pushed to `origin` on 2026-11-07** by owner decision. Local `master`
+is at `d4cabec` and trails the working branch; `origin/master` is at `0a98e2d` and remains the GitHub default
+branch (verified 2026-11-07 with `git ls-remote --heads origin` and `git rev-list --count origin/master..wip/v19.2-F-init`
+= 274). The landing page therefore still shows the 2026-10-11 `master` state, not this one. The earlier statement
+that `origin/master` was at `d411598` and that nothing was pushed was inaccurate against live remote state and is
+superseded here (finding F32 covers this class of label-vs-reality gap).
 
 **Verification status (2026-11-03):** the 15-layer pre-tag gate is **15/15 PASS** (evidence commit
 `014c9e0`); its pytest layer reports **1954 passed / 22 skipped / 36 deselected**. Standing disclosures

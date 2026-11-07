@@ -1,3 +1,24 @@
+## [ReleaseBump-v1.18-2026-11-07] - VERSION now names the 2026-11-06/07 round, and the front page matches live git state
+
+`VERSION`'s newest token was `LocalIntegritySweep-2026-11-04`. Three days of work - the pairing
+canonicalization (`a91ea53`), the IllustrisTNG reclassification (`c3808a8`), the claim-site audit (`6f6917f`) and
+the version-tag guard (`e53351e`) - sat above it with no version token, which is the same label-vs-reality gap as
+finding F32. Appended: `+PairingCanonical-TNG-ClaimSiteAudit-2026-11-07`.
+
+Save point for the new tail: annotated tag **`v19.2-F-RecordSave-v1.18`**, created at the release-gated commit of
+this round (the repo's own RecordSave naming convention, after `v19.2-F-RecordSave-v1.17`).
+
+Front-page statements corrected against live git state (verified with `git ls-remote --heads origin` and
+`git rev-list --count origin/master..wip/v19.2-F-init`):
+- `wip/v19.2-F-init` **is** pushed to `origin` as of 2026-11-07; `CURRENT.md` and `README.md` said nothing was
+  pushed (owner decision 2026-11-04, since reversed).
+- `origin/master` is at `0a98e2d`, not the `d411598` the docs named; the working branch is 274 commits ahead of it.
+- `CURRENT.md`, `README.md` and `EXTRACT.md` now name `v19.2-F-RecordSave-v1.18` as the current save point with
+  `v19.2-F-RecordSave-v1.17` retained as the previous one.
+
+`v19.2-F-RecordSave-2026-11-07` (commit `6f6917f`) is kept as the marker of the F30/F31 gate-green state inside
+the same round. No historical tag was moved or deleted.
+
 ## [VersionTagGuard-F32-2026-11-07] - a published version label had no tag, and a tag had no version
 
 **Two mismatches between version claims and git reality.**

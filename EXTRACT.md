@@ -4,7 +4,8 @@
 
 ## Project state — 2026-11-03
 
-**Active branch:** `wip/v19.2-F-init` (record save point: annotated tag `v19.2-F-RecordSave-v1.17`).
+**Active branch:** `wip/v19.2-F-init`, pushed to `origin` 2026-11-07 (record save point: annotated tag
+`v19.2-F-RecordSave-v1.18`; previous `v19.2-F-RecordSave-v1.17`).
 **Verification:** 15-layer pre-tag gate, **15/15 PASS**. **Audit chain of record:** Round-5 dual review,
 project rounds n18→n26, report **v1.17** — index at `docs/dual_review_5loop/README.md`.
 **Current research line (v19.2-E):** stages 1-2 complete — a live-verified new-data sweep (32 cited arXiv

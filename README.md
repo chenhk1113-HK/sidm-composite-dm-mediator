@@ -71,9 +71,10 @@
 
 ## ⚡ Current standing — 2026-11-03
 
-**Where the work actually is:** branch `wip/v19.2-F-init`. Local `master` was fast-forwarded to `d4cabec` (2 commits behind); remote `origin/master` is at `d411598`, 242 commits behind as of 2026-11-04, and is
-still the GitHub default branch, so the repository landing page shows the 2026-10-11 state. Record save
-point: annotated tag `v19.2-F-RecordSave-v1.17`.
+**Where the work actually is:** branch `wip/v19.2-F-init`, 274 commits ahead of `origin/master` (`0a98e2d`,
+verified 2026-11-07), and `master` is still the GitHub default branch, so the repository landing page shows the
+2026-10-11 state. The working branch was pushed to `origin` on 2026-11-07. Record save point: annotated tag
+`v19.2-F-RecordSave-v1.18` (previous: `v19.2-F-RecordSave-v1.17`).
 
 **What the project is:** a velocity-dependent SIDM architecture — multi-resonance σ/m(v), two-component
 dark matter, gravothermal evolution — tested against 8 observational channels spanning four orders of
