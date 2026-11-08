@@ -17,3 +17,15 @@ Query endpoints:
 `/repos/chenhk1113-HK/sidm-composite-dm-mediator/actions/runs?per_page=50&branch=wip%2Fv19.2-F-init`,
 `/actions/runs/42345553629/jobs`,
 `/actions/runs?per_page=50&workflow=ci.yml`.
+
+## Gate evidence (appended after the record commits)
+
+- `gate_full_20261108c.log` - full 15-layer pre-tag gate on `efd6021`, run 2026-11-08:
+  GATE PASSED, all 15 layers exited 0. pytest 3642 passed / 25 skipped / 40 deselected in
+  1422.63s; t82 drift audit 120/120 ALL CLEAR; PDF render-integrity OK (72 literal '**' in
+  the v1.17 PDF, budget 72); advisory triage 0 genuine absences.
+- `pdfaudit_prepush_20261108.log` - the same audit layer run standalone before the push, after
+  the 11:42 PDF rebuild: RESULT PASS (gate mode), 0 hard defects, 18 advisory prose flags.
+- The earlier `gate_full_20261108.log` (06:40) is kept as evidence of a FAILED gate on the
+  pre-fix tree: 2 failed tests + 5 errors, and the v1.17 PDF at 74 literal '**' over budget.
+  Both failure classes were fixed before the passing run.
