@@ -2570,13 +2570,20 @@ unauthenticated GitHub REST API instead — `chenhk1113-HK/sidm-composite-dm-med
 which is not the account name used by earlier probes (they 404'd for that reason). Run *logs* do
 require a token (HTTP 403), so the failing steps are known and their messages are not.
 
-On `wip/v19.2-F-init` there are exactly 4 workflow runs: Self-check #572 and #573, both success, and
-CI #242 and #243, both failure — on `6f6917f9` and on `8946b3a3`, the latter being the current HEAD.
-Inside #243 the Python 3.11 job dies at the "Install dependencies" step, the Python 3.12 job installs
-cleanly and dies at "Run pytest", and the `pre-commit py_compile` job passes; the claim-audit steps
-(6-8) are therefore skipped in every run. Repo-wide, over the 600 most recent runs: 210 CI runs, all
-failures, plus 388 Self-check failures and 2 successes. Raw payloads are filed in
+On `wip/v19.2-F-init` there were exactly 4 workflow runs at read time: Self-check #572 and #573, both
+success, and CI #242 and #243, both failure — on `6f6917f9` and on `8946b3a3`, the latter being the HEAD
+at read time. Inside #243 the Python 3.11 job dies at the "Install dependencies" step, the Python 3.12
+job installs cleanly and dies at "Run pytest", and the `pre-commit py_compile` job passes; the
+claim-audit steps (6-8) are therefore skipped in every run. Repo-wide, over the 600 most recent runs:
+210 CI runs, all failures, plus 388 Self-check failures and 2 successes. Raw payloads are filed in
 `docs/dual_review_5loop/evidence_n27_20261108/`.
+
+Pushing this round's record commits added a third pair on the same branch and it repeats the pattern
+exactly: Self-check #574 success and CI #244 failure, both on `5c93e4de`, with `Install dependencies`
+failing on Python 3.11, `Run pytest` failing on Python 3.12, and `pre-commit py_compile` passing. The
+local 15-layer gate on the same commit reports 3642 passed and 15/15 layers exit 0, so the GitHub-side
+pytest failure is a dependency-environment difference the CI install step has never resolved, not a
+result of this round's changes.
 
 The honest reading: **no CI run on this branch has ever reached the claim audits**, so CI is not
 evidence of anything about the physics, and the 3.11 install wall is the same fact as the standing

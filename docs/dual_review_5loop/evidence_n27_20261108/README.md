@@ -29,3 +29,13 @@ Query endpoints:
 - The earlier `gate_full_20261108.log` (06:40) is kept as evidence of a FAILED gate on the
   pre-fix tree: 2 failed tests + 5 errors, and the v1.17 PDF at 74 literal '**' over budget.
   Both failure classes were fixed before the passing run.
+
+## Post-push census (`ci_runs_after_push_20261108.json`)
+
+After the record commits were pushed, the branch has 6 runs. `Self-check #574` succeeded and
+`CI #244` failed on the new head `5c93e4de`, with the same three job outcomes as #243:
+`Install dependencies` failure (Python 3.11), `Run pytest` failure (Python 3.12),
+`pre-commit py_compile` success. The local full gate on the same commit passed 15/15 with
+3642 tests, which is what makes the GitHub-side pytest failure an environment problem rather
+than a result of this round. Note for anyone repeating this: the jobs endpoint path takes the
+run **id** (42449128597), not the run number - using the number returns HTTP 404.

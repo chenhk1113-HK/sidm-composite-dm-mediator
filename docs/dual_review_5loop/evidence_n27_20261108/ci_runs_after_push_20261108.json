@@ -1,0 +1,190 @@
+{
+  "fetched_at": "2026-11-08 (after the n27 push)",
+  "note": "census of the branch after the record commits were pushed; run_id used for the jobs endpoint (the run NUMBER is not a valid path segment)",
+  "runs": [
+    {
+      "run_number": 244,
+      "name": "CI",
+      "status": "completed",
+      "conclusion": "failure",
+      "head_sha": "5c93e4de84df00eb30d6b43600a0aab42ddd4c72",
+      "event": "push"
+    },
+    {
+      "run_number": 574,
+      "name": "Self-check",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "5c93e4de84df00eb30d6b43600a0aab42ddd4c72",
+      "event": "push"
+    },
+    {
+      "run_number": 573,
+      "name": "Self-check",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "8946b3a34160618057984461f945f0616f53a252",
+      "event": "push"
+    },
+    {
+      "run_number": 243,
+      "name": "CI",
+      "status": "completed",
+      "conclusion": "failure",
+      "head_sha": "8946b3a34160618057984461f945f0616f53a252",
+      "event": "push"
+    },
+    {
+      "run_number": 572,
+      "name": "Self-check",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "6f6917f95eb3c9af445a8d489153614a94f482a3",
+      "event": "push"
+    },
+    {
+      "run_number": 242,
+      "name": "CI",
+      "status": "completed",
+      "conclusion": "failure",
+      "head_sha": "6f6917f95eb3c9af445a8d489153614a94f482a3",
+      "event": "push"
+    }
+  ],
+  "ci_244_jobs": [
+    {
+      "name": "pytest + audits (Python 3.11)",
+      "conclusion": "failure",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Checkout repository",
+          "conclusion": "success"
+        },
+        {
+          "name": "Set up Python 3.11",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install dependencies",
+          "conclusion": "failure"
+        },
+        {
+          "name": "Run pytest (same exclusions as scripts/verify_release_gate.py)",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Run claim audit",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Run stale-claim audit (t82)",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Run numerical drift guard",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Post Set up Python 3.11",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Post Checkout repository",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "pre-commit py_compile",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Checkout repository",
+          "conclusion": "success"
+        },
+        {
+          "name": "Set up Python",
+          "conclusion": "success"
+        },
+        {
+          "name": "py_compile all Python source files",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Set up Python",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Checkout repository",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "pytest + audits (Python 3.12)",
+      "conclusion": "failure",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Checkout repository",
+          "conclusion": "success"
+        },
+        {
+          "name": "Set up Python 3.12",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install dependencies",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run pytest (same exclusions as scripts/verify_release_gate.py)",
+          "conclusion": "failure"
+        },
+        {
+          "name": "Run claim audit",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Run stale-claim audit (t82)",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Run numerical drift guard",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Post Set up Python 3.12",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Post Checkout repository",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ]
+}
