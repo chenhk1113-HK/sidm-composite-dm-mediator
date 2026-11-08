@@ -39,3 +39,19 @@ After the record commits were pushed, the branch has 6 runs. `Self-check #574` s
 3642 tests, which is what makes the GitHub-side pytest failure an environment problem rather
 than a result of this round. Note for anyone repeating this: the jobs endpoint path takes the
 run **id** (42449128597), not the run number - using the number returns HTTP 404.
+
+## Final-head gate (`gate_full_20261108d_final_head.log`)
+
+Full 15-layer gate on the final head of the round: `GATE PASSED: all 15 layer(s) asserted and exited 0`,
+3642 passed / 25 skipped / 40 deselected in 1430.72s, t82 120/120 ALL CLEAR.
+
+A standalone `pytest v0.3-prelim/tests/` run collected 3707 tests rather than the gate's 3682 because the
+gate deselects 40 marked files; a mid-round standalone run that predates the finding-heading fix reported
+one failure in `test_integrity_finding_ids_unique.py`. On the final head that file passes 4/4, and the gate's
+pytest layer is green. Standalone counts and gate counts are therefore not directly comparable - quote the
+gate's numbers for release claims.
+
+Snapshot rule for CI numbers: every push to this branch adds one `Self-check` run and one `CI` run, so a
+census written into a report is a read-time snapshot, not a live fact. The report labels its census
+read-time for that reason; the durable claim is the failure signature (3.11 `Install dependencies`,
+3.12 `Run pytest`, `pre-commit py_compile` green, audit steps never reached), not the run numbers.
