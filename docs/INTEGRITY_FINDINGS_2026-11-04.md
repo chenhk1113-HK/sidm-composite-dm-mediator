@@ -92,7 +92,7 @@ had been quoted in the docs as +304.
 
 ---
 
-## F3 — Phase 40 contradicts itself inside one artifact  (MEASURED, OPEN)
+## F3 — Phase 40 contradicts itself inside one artifact  (MEASURED, CLOSED 2026-11-07 by decision D2: per-model penalty is the published convention, and the rejected per-dataset charging plus the legacy unscaled value are published alongside it in the same artifact, guarded by `v0.3-prelim/tests/test_phase40_penalty_convention.py`)
 
 Stored `phase40_corrected_comparison.json` (120 galaxies) contains both of these:
 
@@ -263,7 +263,7 @@ there is no missing-citation problem left from this sweep.
 
 ---
 
-## F8 — "5 of 8 channels pass" overstates independence  (MEASURED, OPEN)
+## F8 — "5 of 8 channels pass" overstates independence  (MEASURED, CLOSED 2026-11-07 by decision D6: the slot/source structure is machine-readable in `v0.3-prelim/data/results/t205_channel_independence.json` and guarded by `v0.3-prelim/tests/test_channel_independence_structure.py`; the owner declined merging the five Horigome+ bins and refitting)
 
 The headline counts **eight channel slots**, and five of them are **velocity bins of one
 dataset**. Measured from the source list (`v0.3-prelim/code/T205_full_likelihood_published.py::OBS_PUBLISHED`,
@@ -536,7 +536,7 @@ and `test_sidm_core_radius_invariance.py` are designed to fail and force the re-
 | D4 | Gate strictness | keep warn-only layers, or promote them to hard failures once the KB is complete | whether a green gate means anything |
 || D6 | Headline wording — **RESOLVED 2026-11-04 (wording, not a refit)** | `CURRENT.md` now states the count as 5 of 8 channels PASS *over 8 velocity slots drawn from 4 independent sources*, and names them from `OBS_PUBLISHED`: 5 Horigome+ 2025 bins (UFD v=3/5/7/10, dSph v=15), Cloud-9 v=28 (BLN24 / Ohana+ 2026), SPARC v=100 (Lelli+ 2016), Cluster v=500 (Randall+ 2008). The literal "5 of 8 channels PASS" is kept on purpose so `drift_guard.py::check_pass_count_in_doc` still checks it. Merging the bins and refitting was **not** done — that would change the canonical fit and needs an owner decision. | the front page claim |
 || D7 | `gravothermal_yang2024.rho_sidm` inversion — **RESOLVED 2026-11-04 (fix + re-derive, not freeze)** | the module now matches arXiv:2305.16176 eq. 2.1, the paper's `r_c → 0` NFW limit, and an independent third implementation to 1e-12; run-time source-agreement guards replaced the defect-pinning guard; see F10 | the paper's Phase G1 quantitative anchor |
-|| D8 | Cloud-9 anchor credibility — **OPEN, owner decision** | (a) keep σ/m = 174 as the anchor and disclose that its gravothermal stage is inside the optically-thick regime the parametric model does not describe; (b) re-anchor on the dwarf/sample ceiling and move Cloud-9 to a caveat; (c) run a simulation-based chain for the Cloud-9 mass with the merger-history sample now on disk | whether the highest-σ anchor of the whole model is load-bearing or decorative |
+|| D8 | Cloud-9 anchor credibility — **CLOSED 2026-11-06 (owner chose option 3: IllustrisTNG is a framework check, not a Cloud-9 twin search; the 115-halo stage-3 sample was built 2026-11-04 without waiting on registration)** | (a) keep σ/m = 174 as the anchor and disclose that its gravothermal stage is inside the optically-thick regime the parametric model does not describe; (b) re-anchor on the dwarf/sample ceiling and move Cloud-9 to a caveat; (c) run a simulation-based chain for the Cloud-9 mass with the merger-history sample now on disk | whether the highest-σ anchor of the whole model is load-bearing or decorative |
 
 ## What this file does **not** establish
 
@@ -724,7 +724,7 @@ that is no longer reproducible from the repo.
   smoke run look production-grade) failed 2 tests as intended; the file was restored
   byte-identically and 13/13 passed after restore.
 
-**Open decision D10:** re-run T90.57 at production scale (the 2026-09-11 run took ~1,718 s at
+**Decision D10 (raised 2026-11-05 and closed the same day):** re-run T90.57 at production scale (the 2026-09-11 run took ~1,718 s at
 nlive=500 with WIMpy installed) or formally retire the T90-chain naturalness claims. **D10 was
 executed the same day — see the addendum immediately below, which supersedes this paragraph.**
 
@@ -929,7 +929,7 @@ rebuild check without any artifact edit), fabricated quote, halo-convention tabl
 internal-number-as-data, edited artifact, and a reintroduced stale pin. Baseline 12 passed, post-restore
 12 passed.
 
-## F23 — one physical quantity, two live values: f_H = 0.297 and f_H = 0.750 (OPEN: a convention must be chosen)
+## F23 — one physical quantity, two live values: f_H = 0.297 and f_H = 0.750 (CLOSED 2026-11-07: f_H = 0.7501856343179664 is the live canonical pairing, the 0.297 pair is pinned explicitly as ARCHIVED, commit `a91ea53`)
 
 **What was found (2026-11-06, during reconciliation of a delegated cross-system study).**
 The quantity `sigma_eff = f_H^2 * sigma/m` is computed from two different `f_H` values that are both
@@ -1017,7 +1017,7 @@ stricter bound (Channel 7). They remain legitimate modelling choices, but any "N
 statement that counts them must be read as "against the project's own bound", exactly as F21 established
 for Cloud-9.
 
-## F25 — what "canonical f_H = 0.750" actually costs, measured before acting (2026-11-06, OPEN: decision D11)
+## F25 — what "canonical f_H = 0.750" actually costs, measured before acting (2026-11-06, CLOSED: decision D11, costed before the switch was made)
 
 The owner chose f_H = 0.750 (the `phase44_two_component.f_H_at_r` value) as canonical. Measuring what
 that changes, rather than assuming it is a label swap, produced three facts.
@@ -1531,7 +1531,7 @@ scientifically accurate. The guard covers numbered `v40.NN` tokens and the save-
 about version counts (for example "21-version arc") are outside it, as are free-text tokens that do not match
 either pattern.
 
-## F33 - the pairing changed and the vocabulary did not follow it (FOUND 2026-11-08, FIXED)
+## F33 - the pairing changed and the vocabulary did not follow it (FOUND 2026-11-07, FIXED)
 
 **What was found.** F26 made `f_H = 0.7501856343179664` with `sigma_0 = 0.008150396851725193` and
 `sigma_peak = 27.272481773080454 cm^2/g` the live canonical pair, and moved `f_H = 0.297 / sigma_0 = 0.052 /
@@ -1612,3 +1612,24 @@ should own.
 - The paper's gravothermal line `sigma/m ≈ sigma_eff ≈ 174 cm^2/g` is now labelled archived-pair, but the deeper
   component-level versus halo-level conflation that line contains is a separate issue and stays flagged in §27.9 and
   F27.
+## F34 — the markup pass left one pinned unrenderable emphasis pair, and initially broke a pinned claim anchor (FOUND 2026-11-08, PINNED)
+
+**What was found.** The CG-4 markup pass balanced the paper draft (measured 2026-11-08: 3010
+two-asterisk markers, 0 odd-count lines, 0 unbalanced blocks), but one emphasis pair still cannot
+render because it is space-flanked under CommonMark — the reader sees asterisks instead of bold in the
+Cloud-9 cross-validation sentence of 2.7. It is deliberately left in place and **pinned**:
+`v0.3-prelim/tests/test_markup_balance_cg4.py` lists it in `PINNED_MALFORMED` and asserts that the
+malformed pairs it finds are exactly the pinned ones. A new malformed pair fails the gate; fixing this
+one means updating the pin in the same commit.
+
+**The regression the gate caught.** The same pass initially stripped the bold from
+`**Pairing (finding F30):**` in 3.3 — the D-5 live-pair claim sentence that
+`scripts/audit_hierarchy_chain.py` scans as a claim anchor (its `CLAIM_ANCHORS` list). The full gate
+run of 2026-11-08 06:40 failed at layer 10 on "the paper no longer states its pairing claim(s)". The
+markers were restored and the auditor reports `RESULT: PASS` on the current tree (re-measured
+2026-11-08). Rule taken from it: a presentational pass must not move markers inside a machine-pinned
+claim anchor.
+
+**What is NOT claimed.** The register's CG-4 row closes the *coverage gap* (the gate now looks at
+markup balance); it does not claim every emphasis pair in the paper renders. The remaining flanking fix
+changes rendered emphasis in a paper section and is an owner decision.

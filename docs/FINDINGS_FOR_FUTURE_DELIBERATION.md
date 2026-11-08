@@ -1430,7 +1430,7 @@ marker of the work commit). `v19.2-F-RecordSave-2026-11-07` -> `6f6917f` (curren
 **Standing rule this establishes.** A version number written in a document or in `VERSION` is a claim about a
 tree. Publish it as a tag pointing at that tree, and let a test verify that the tree says what the tag says.
 
-### 27.15 Finding F33 closed (2026-11-08): pairing labels are now a drift-layer obligation in every live-facing document
+### 27.15 Finding F33 closed (2026-11-07, commit `8946b3a`; recorded under the 2026-11-08 refresh): pairing labels are now a drift-layer obligation in every live-facing document
 
 §27.11 asked how much of the documentation `drift_guard.py` should own. The answer: the archived-pair labelling rule
 that F29 applied to the reference-data registry now runs over the paper, both front pages, `EXTRACT.md`, this

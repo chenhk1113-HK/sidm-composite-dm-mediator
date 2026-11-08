@@ -65,7 +65,7 @@ def relax_tokens(toks, fuse=False):
     Side facts established by direct extraction (2026-10-28, live PDFs):
       * pdftotext DROPS some rendered glyphs entirely (U+2032 prime, the
         σ before '_'): they leave NO token -- e.g. source 'U(1)?\".' vs PDF
-        'U(1)\".'; source '?_eff/m' (σ_eff/m) vs PDF 'eff/m' after the
+        'U(1)\".'; source '?_eff/m' (sigma_eff/m) vs PDF 'eff/m' after the
         empty token is dropped.
       * other glyphs extract as '?': en-dash inside a word
         ('Girmohanta-Yasuoka' -> 'Girmohanta?Yasuoka'), →, §.
@@ -73,7 +73,7 @@ def relax_tokens(toks, fuse=False):
     relaxed pipeline is side-agnostic by construction:
       1. drop pure-punctuation (* `) tokens;
       2. map interior '?' -> '-' (both sides; a source-internal '?' is
-         itself a sentinel, and σ/2 sentinels sit at token EDGES --
+         itself a sentinel, and sigma/2 sentinels sit at token EDGES --
          'σ_eff' tokenises as '?_eff' -- so this never erases them, it
          only aligns en-dash ligatures like 'Girmohanta?Yasuoka' with the
          source's ASCII-hyphen 'Girmohanta-Yasuoka');
@@ -117,7 +117,7 @@ def relax_tokens(toks, fuse=False):
                 # Builder-fold variant (n24 round, 2026-11-01): the report
                 # builder maps super/subscripts to ASCII at BUILD time
                 # (pdf_rencode_maps.SUP/SUB -- '10-12' is drawn as '10-12'
-                # and 'f_H2σ' as 'f_H2σ'), so these PDFs carry the
+                # and 'f_H2sigma' as 'f_H2sigma'), so these PDFs carry the
                 # exponent as ONE fused token. fuse=True emits the fused
                 # form ('^' deleted, neighbours rejoined); fuse=False
                 # keeps the split fragments for raised-baseline glyph
@@ -187,7 +187,7 @@ def relax_tokens(toks, fuse=False):
 """n24-round containment unit test (2026-11-01): exponent-fold semantics.
 
 The report builder ASCII-folds super/subscripts at BUILD time
-(pdf_rencode_maps.SUP/SUB: '10-12' -> '10-12', 'f_H2σ' -> 'f_H2σ'), so the
+(pdf_rencode_maps.SUP/SUB: '10-12' -> '10-12', 'f_H2sigma' -> 'f_H2sigma'), so the
 rendered PDFs carry the exponent as ONE fused token. audit_pdf_render's
 relax_tokens must model BOTH rendering worlds -- split fragments for
 raised-baseline glyphs, the fused form for the builder fold -- and score

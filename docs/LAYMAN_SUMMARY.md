@@ -513,4 +513,4 @@ velocity-slope tension. The Tier-1 milestone is publication-worthy.
 > T83 KSFR (3,2) fundamental LATTICE promotion, T84 Channel 18 ρ sensitivity sweep.
 > Headline: σ/m = 0.06 cm²/g, tension = 0.60, log Z =
 > -164.87 ± 0.084, m_χ ~ 770 GeV (v0.7 MAP quoted at the time; the v0.8 artifact's MAP is 478 GeV). **677** tests passing, 22
-> effective channels.** Standing posture preserved at v0.4-prelim+T88E.
+> effective channels. Standing posture preserved at v0.4-prelim+T88E.

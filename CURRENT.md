@@ -163,7 +163,7 @@ now asserts the v0.8 MAP (478 GeV / 488 MeV / 0.81σ), so this line, the docs an
   `scripts/drift_guard.py::check_registry_pairing_values`, mutation-tested 2/2 with byte-identical restore
   (`AppData/Local/hermes/cache/scratch/registry_drift_mutation.py`).
 
-- **F33 (pairing vocabulary relabelled and guarded, FOUND 2026-11-08, FIXED).** F26 changed the pairing but the
+- **F33 (pairing vocabulary relabelled and guarded, FOUND and FIXED 2026-11-07, commit `8946b3a`; logged under the 2026-11-08 record refresh).** F26 changed the pairing but the
   documentation kept the old vocabulary: 86 paragraphs in nine live-facing documents quoted archived-pair amplitudes
   (`f_H = 0.297`, `sigma_0 = 0.052`, `sigma_peak = 174.0`) with no pairing label, including the shared front-page and
   v19.2-E-report-of-record sentence "the canonical anchor **sigma/m = 174 cm^2/g @ 29.4 km/s**", which after F26 is an
@@ -177,6 +177,24 @@ now asserts the v0.8 MAP (478 GeV / 488 MeV / 0.81σ), so this line, the docs an
   read as the amplitude). Drift: 86 -> 0. New guard `v0.3-prelim/tests/test_pairing_label_coverage.py` (7 tests, two
   negative); mutation probe 3/3 caught with byte-identical restoration after its first run caught only 2/3 and
   exposed the laundering loophole. See `docs/INTEGRITY_FINDINGS_2026-11-04.md` F33 and §27.15.
+- **CG-4 and CG-16 closed (2026-11-08) — the register now has no open row.** **CG-4** (literal `**`
+  markup class): the deferred markup pass is finished in the paper draft and the four front-page documents,
+  and the class has a guard, `v0.3-prelim/tests/test_markup_balance_cg4.py` (4 tests) — per-block `**` balance
+  plus CommonMark flanking on those five files. Measured on the paper draft: 21 lines and 13 blocks carrying an
+  odd number of `**` before the pass, 0 and 0 after; 3010 `**` occurrences now, even, no odd-count line.
+  **CG-16** (hardcoded host paths): `scripts/paths.py` is the single source — every repository path derived from
+  its own location, every external tool path an environment variable with one reviewable default; 87 tracked
+  modules import it. The live gate scope (`scripts/`, `tests/`, `v0.3-prelim/tests/`, `config.py`) is inventoried
+  in `v0.3-prelim/data/results/cg16_host_path_inventory.json`: 422 files with no host path, 4 with host paths in
+  prose only, 2 deliberate pinned exceptions (the WSL-side Julia binary and the WSL KiSS-SIDM directory, which a
+  Windows-side process must not resolve against the Windows home); 230 historical scripts and 198 doc/data files
+  are inventoried and deliberately **not** re-pointed, because re-pointing a script whose outputs are frozen
+  artefacts is a silent re-read risk. Guard: `v0.3-prelim/tests/test_no_hardcoded_host_paths_cg16.py` (7 tests)
+  fails on any new host literal anywhere in the live scope. **Collateral, caught by the suite and fixed:** the
+  conversion gave the canonical `config.py` a bootstrap that imports `scripts/paths.py`, and
+  `v0.3-prelim/tests/test_config_split_brain.py` went red (1 failed, 8 passed) because the frozen snapshot
+  deliberately does not receive that bootstrap; the guard now exempts the bootstrap by name (`_CG16_*` and the
+  `paths` / `sys`+`pathlib` imports) and asserts that no constant name can be exempted by it (9 passed).
 - **F32 (version claims vs real tags, FOUND AND FIXED 2026-11-07).** The v40.51 review report has said
   "Final tag: `v40.63-N16ReviewResponse`" since 2026-10-19 and `VERSION` has carried that token, but no such tag
   ever existed. Two of the six numbered `v40.NN` claims in `VERSION` were unbacked. A new guard
@@ -266,9 +284,10 @@ best fit at **5 of 8 channels PASS** (2 marginal, 1 fail) — a count over 8 vel
 proven that dark matter self-interacts and has **not** derived a working particle model from first
 principles (the v19.2-F Phase 3 FAIL below stands).
 
-**Open coverage gaps** (machine-checked by gate layer 15 against the report's §17.3 register): **CG-4**
-(the deferred literal-`**` markup pass — a decision owed by the user) and **CG-16** (hardcoded host paths
-in tracked files). Every other registered gap is closed.
+**Open coverage gaps** (machine-checked by gate layer 15 against the report's §17.3 register): **none**.
+**CG-4** (the deferred literal-`**` markup pass) and **CG-16** (hardcoded host paths in tracked files) were the
+last two open rows and both were closed 2026-11-08, with guards, as recorded above. Every row in the register
+is now closed.
 
 ---
 

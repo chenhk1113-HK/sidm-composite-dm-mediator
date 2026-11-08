@@ -1,6 +1,6 @@
 # v19.2-E Consolidated Report — 2026-11-03 (stages 1-2 complete, stage 3 pending)
 
-**Scope:** the four-stage chain ordered by the user on 2026-11-03: (1) housekeeping save → (2) new-data search (Euclid/Roman/DESI) → (3) real galaxy merger data → (4) consolidate and report. This document is the running stage-4 consolidation; stage 3 is gated on IllustrisTNG registration approval (application submitted; FIRE-2/EAGLE-IC are no-login fallbacks).
+**Scope:** the four-stage chain ordered by the user on 2026-11-03: (1) housekeeping save → (2) new-data search (Euclid/Roman/DESI) → (3) real galaxy merger data → (4) consolidate and report. This document is the running stage-4 consolidation. SUPERSEDED NOTE (2026-11-08): stage 3 was NOT gated on registration — the 115-halo stage-3 sample was built 2026-11-04 by per-subhalo API reads, and decision D8 was closed 2026-11-06 reclassifying IllustrisTNG as a framework check rather than a Cloud-9 twin search.
 
 **Record status:** the audited physics record remains **v1.17** (tag `v19.2-F-RecordSave-v1.17`). Nothing in this chain changes any posterior or the anchor **σ/m = 174 cm²/g @ 29.4 km/s (Cloud-9 = M94 RELHIC) — ARCHIVED pair** (the live canonical raw peak is 27.272481773080454 cm²/g and the halo-level σ_eff = 15.348366 cm²/g is unchanged). The chain adds evidence adjudication, two corrected code bugs, and closed literature intake.
 
@@ -53,7 +53,7 @@ Two real repository bugs found while testing `2610.28890`'s applicability to Clo
 
 ## 6. Stage 3 status and next actions
 
-- IllustrisTNG: registration application submitted; **awaiting their reply.** Kill criterion unchanged: <10 RELHIC-like halos in TNG-300 ends Path 3.
+- IllustrisTNG: registration application submitted, and the sample was built without waiting for it (2026-11-04: 115 halos by per-subhalo API reads — TNG50-1 60 + TNG100-1 30 in the low-mass RELHIC band + 25 TNG50-1 merger-history halos). The <10 RELHIC-like halos kill criterion was therefore never exercised. Decision D8 closed 2026-11-06.
 - No-login fallbacks if approval stalls: FIRE-2 (via existing LESG contacts/public) and EAGLE-IC.
 - Merger-tree work must absorb Gurian's finding that mergers delay core collapse by up to 18 t_r, and replace the hand-classified quiescent/active/mixed labels in `GRAVOTHERMAL_ROADMAP.md`.
 - Optional physics watch items (low cost, no blocker): Model III vs Zhu cluster-tail check; SMFP slowdown quantification using Gurian Eq. 17 constants (B=3.91, n_L=179, A=0.917, W=2.23, X̂=0.052).

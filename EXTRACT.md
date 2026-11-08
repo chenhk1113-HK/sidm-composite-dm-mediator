@@ -13,8 +13,10 @@ project rounds n18→n26, report **v1.17** — index at `docs/dual_review_5loop/
 **Current research line (v19.2-E):** stages 1-2 complete — a live-verified new-data sweep (32 cited arXiv
 IDs), literature intake closed **21/21**, and two real gravothermal timing bugs fixed (`lookback_time_gyr`
 mis-transcribed Yang+ eq. 3.2; `evolution_time_gyr` returned the age at formation instead of the lookback
-time, inflating τ by ≈4.3× in affected callers). Stage 3 (real galaxy-merger data) is gated on
-IllustrisTNG registration. Consolidation: `docs/V19_2_E_CONSOLIDATED_REPORT_2026-11-03.md`.
+time, inflating τ by ≈4.3× in affected callers). Stage 3 (real galaxy-merger data) was built 2026-11-04
+without waiting for IllustrisTNG registration (115 halos, per-subhalo API reads); decision D8 closed 2026-11-06
+reclassifying that sample as a framework check rather than a Cloud-9 twin search. Consolidation:
+`docs/V19_2_E_CONSOLIDATED_REPORT_2026-11-03.md`.
 
 **What everything below this line is:** the joint-fit physics record as it stood at the v0.4-prelim+T88E/T89
 milestone. It is still the project's measurement posture, and it is the version the numerical audits pin
@@ -82,7 +84,7 @@ The pipeline was **designed to scale to 10+ independent observational probes** (
 
 **3. The secluded mediator is naturally invisible to direct detection.** Under a wide prior on mediator coupling (allowing ε → 10⁻⁵⁰), the posterior is consistent with σ_SI ≈ 2×10⁻¹¹⁸ cm² — about 10⁷² times below the LZ WS2024 limit (arXiv:2410.17036, 2.2×10⁻⁴⁸ cm² at 43 GeV) and 2.5×10⁷² times below the neutrino floor. Under the Roberts et al. 2024 narrow default prior (ε ~ 10⁻⁴), the same data excludes SIDM catastrophically (log Z ≈ −9388). The Tier-3 "resolution" is therefore **prior-dependent**. The wide prior is the physically motivated choice, but the conclusion does not survive the narrow one.
 
-**4. Composite dark-rho gives σ/m within 13% of the joint posterior**.** PCAC + KSFR predict m_ρ ≈ 3.55 MeV for m_χ ≈ 34 GeV. The resulting σ/m ≈ 1.36 cm²/g matches the T21/T39 MAP to within 13% — the strongest single theoretical prediction of the pipeline. Relic density Ωh² ≈ 0.12 sits within the Planck band.
+**4. Composite dark-rho gives σ/m within 13% of the joint posterior**. PCAC + KSFR predict m_ρ ≈ 3.55 MeV for m_χ ≈ 34 GeV. The resulting σ/m ≈ 1.36 cm²/g matches the T21/T39 MAP to within 13% — the strongest single theoretical prediction of the pipeline. Relic density Ωh² ≈ 0.12 sits within the Planck band.
 
 **5. Two-component mass-segregated SIDM is Occam-neutral, not yet evidence.** The T22 two-component vs single-component Bayes factor is +0.39 (with IMFP correction) or +0.22 (without) — both well below the 2.5 significance threshold. **Critically: all three two-component observational likelihoods are still public-limit-curve surrogates (Gaussian proxies over 95% CL upper limits), not raw posterior chains**, so this BF is a **pipeline feasibility diagnostic**, not definitive evidence for a two-species dark sector. (See Drobczyk 2025 for an independent UV route that demonstrates qualitative literature consistency — not a cross-validation of this project's numerical pipeline.)
 

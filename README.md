@@ -91,14 +91,16 @@ working particle model from first principles. Read `MODEL_ASSUMPTIONS_AND_LIMITA
 any number out of context.
 
 **Verification:** the 15-layer pre-tag gate is **15/15 PASS** (pytest layer 1954 passed / 22 skipped /
-36 deselected), and every release commit carries its evidence folder. Open coverage gaps: **CG-4** (the
-deferred literal-markup pass) and **CG-16** (hardcoded host paths in tracked files).
+36 deselected), and every release commit carries its evidence folder. Open coverage gaps: **none** — **CG-4**
+(literal-markup pass) and **CG-16** (hardcoded host paths) were the last two open rows and both closed 2026-11-08
+with guards; the gate's layer 15 now reads an empty open set.
 
 **Latest round of work (v19.2-E chain, 2026-11-03):** a new-data sweep with 32 cited arXiv IDs
 live-verified, literature intake closed **21/21**, and two real gravothermal code bugs fixed — the Cloud-9
 core goes optically thick at ~3-3.5 Gyr after formation, so collapse times in that regime had been
 inflated by ≈4.3×. Consolidation: `docs/V19_2_E_CONSOLIDATED_REPORT_2026-11-03.md`. Stage 3 (real galaxy
-merger data) is waiting on IllustrisTNG registration.
+merger data) was built 2026-11-04 without waiting for IllustrisTNG registration — 115 halos read per subhalo —
+and decision D8 was closed 2026-11-06 reclassifying the sample as a framework check, not a Cloud-9 twin search.
 
 **Read next:** 60-second version → [`CURRENT.md`](CURRENT.md). One-page extract → [`EXTRACT.md`](EXTRACT.md).
 Audit chain of record → [`docs/dual_review_5loop/README.md`](docs/dual_review_5loop/README.md).
