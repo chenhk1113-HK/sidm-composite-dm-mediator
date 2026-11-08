@@ -247,6 +247,13 @@ now asserts the v0.8 MAP (478 GeV / 488 MeV / 0.81σ), so this line, the docs an
   0.247109 % and 0.221605 % short.
   T120 scoreboard legacy Phase-44 default arm, a_slope=1.9286750353457855, data/results/t120_adopted_arm_declaration.json: 3 PASS / 0 MARGINAL / 5 FAIL
   — Cloud-9 passes there at 100.03606419810939, but that arm is no longer the headline.
+  **Decision D13 (2026-11-08, owner chose option a):** the adopted-arm tally above stays **out of the paper**.
+  The paper's channel counts remain the published-`sigma_unc` ones of §A.15 — 1 PASS / 0 MARGINAL / 7 FAIL at the
+  canonical Phase-44 parameters and 5 PASS / 2 MARGINAL / 1 FAIL at the v19.2-E A.2 best fit. Reason on the record:
+  the T120 scoreboard scores eight **project-stated** bounds (the Cloud-9 100.0 floor is this project's own model
+  output, finding F21) and `scripts/drift_guard.py` already states its tallies must not be compared with §A.15's.
+  Recorded so this is not mistaken for drift later: the paper describes the canonical arm; the adopted arms are
+  scoreboard bookkeeping, not a configuration the paper claims.
 - **F24 (Channel 6/7 source labels, FIXED at label level 2026-11-06).** arXiv:2510.11006 is single-author Hai-Bo Yu
   (not "Yang, Yang, Yu et al." nor "Zhang+ 2025"; the GD-1 paper is arXiv:2409.19493, Zhang, Yu, Yang & Nadler); its
   30-100 cm^2/g is adopted/assumed, so Channel 6's Gaussian is a project prior, and the code's "their sigma/m ~ 1 cm^2/g
