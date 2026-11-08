@@ -92,6 +92,19 @@ from config import (
 from sidm_velocity_dependent import sigma_m_effective
 from mediator_registry import sigma_m_at_v as _sigma_m_at_v_mediator
 
+# ---------------------------------------------------------------------------
+# Unit conversion for the direct-detection channels (finding F4, FIXED
+# 2026-11-07 by owner decision). sigma_DM-nucleon [cm^2] is obtained from
+# sigma/m [cm^2/g] by multiplying by the mass of one particle in grams:
+#     sigma_DM-nucleon = sigma/m * m_chi[g] = sigma/m * m_chi_GeV * GEV_IN_G
+# 1 GeV/c^2 = 1.78266192e-24 g (CODATA 2018). Both direct-detection channels
+# in this module (loglike_direct_detection_exclusion and
+# loglike_competitor_dd_watch) read this ONE constant; they previously each
+# carried a hard-coded 1e-24, which is 1.783x low.
+# ---------------------------------------------------------------------------
+GEV_IN_G = 1.78266192e-24  # g per GeV/c^2, CODATA 2018
+SIGMA_M_TO_DM_NUCLEON = GEV_IN_G  # alias used at the two call sites
+
 # LZ 2024 results (arXiv 2410.17034 / WS2024 dataset, 220 days + 60 days)
 # World-leading spin-independent WIMP-nucleon cross-section limits.
 # Format: (m_WIMP_GeV, sigma_limit_cm2)
@@ -218,16 +231,19 @@ def loglike_direct_detection_exclusion(sigma_m: float, m_chi_GeV: float = 1.0) -
     """Channel 5 — penalizes SIDM candidates that are LZ-excluded.
 
     .. warning::
-       UNIT ERROR (~1.78x) — treat this as an order-of-magnitude flag only.
-       ``sigma_DM_nucleon = sigma_m * 1e-24 * m_chi_GeV`` is compared to the
-       LZ limit in cm^2, but the physically correct per-particle conversion
+       ORDER-OF-MAGNITUDE FLAG ONLY — this channel is a soft penalty, not a
+       physical bound, and it omits the kinetic-mixing suppression.
+       FIXED UNIT (2026-11-07, owner decision on finding F4): the conversion
        is sigma_DM-nucleon = sigma_m * m_chi * (1 GeV / 1.783e-24 g)
-       = sigma_m * 1.783e-24 * m_chi_GeV, so the ``1e-24`` constant is low
-       by a factor 1.783 (1 GeV = 1.783e-24 g, CODATA). Left UNCHANGED by
-       design: the identical literal in loglike_competitor_dd_watch feeds
-       the canonical T41 likelihood sum (t41_mediator_mass_joint_fit.py:756);
-       fixing one copy but not the other would silently diverge the two
-       channels, and fixing both would alter a stored canonical fit.
+       = sigma_m * SIGMA_M_TO_DM_NUCLEON * m_chi_GeV with
+       SIGMA_M_TO_DM_NUCLEON = 1.783e-24 (1 GeV = 1.783e-24 g, CODATA).
+       Until 2026-11-07 both this channel and loglike_competitor_dd_watch used
+       1e-24, i.e. low by a factor 1.783. Both copies were changed in the same
+       edit, because fixing one but not the other silently diverges the two
+       channels. Effect on the stored canonical fit was MEASURED, not assumed
+       (see v0.3-prelim/data/results/dd_unit_fix_recertification.json): the
+       channel is a saturated -1.0 penalty across the posterior, so the
+       canonical numbers do not move.
 
     For sigma_DM-DM ~ 1 cm^2/g and m_chi ~ 1 GeV, the expected
     sigma_DM-nucleon is well below LZ limit, so no penalty.
@@ -247,7 +263,7 @@ def loglike_direct_detection_exclusion(sigma_m: float, m_chi_GeV: float = 1.0) -
     # For heavier candidates, check if our sigma/m would imply
     # an excluded nucleon cross-section. This is model-dependent;
     # we apply a soft penalty.
-    sigma_DM_nucleon = sigma_m * 1e-24 * m_chi_GeV / 1.0  # very rough scaling; 1e-24 is ~1.78x low (1 GeV=1.783e-24 g) - see docstring warning
+    sigma_DM_nucleon = sigma_m * SIGMA_M_TO_DM_NUCLEON * m_chi_GeV  # unit fixed 2026-11-07 (F4); still a rough scaling - see docstring warning
     lz_limit = sigma_LZ_limit(m_chi_GeV)
     if sigma_DM_nucleon > lz_limit:
         return -1.0  # soft penalty
@@ -313,19 +329,21 @@ def loglike_competitor_dd_watch(sigma_m: float, m_chi_GeV: float = 1.0) -> float
     """Channel 19 — XENONnT + PandaX-4T direct-detection competitor watch.
 
     .. warning::
-       UNIT ERROR (~1.78x) — this channel is an order-of-magnitude flag only
-       and must not be quoted as a physical bound. ``sigma_DM_nucleon =
-       sigma_m * 1e-24 * m_chi_GeV`` is compared against
-       LZ/XENONnT/PandaX limits in cm^2, but the correct per-particle
-       conversion is sigma_DM-nucleon = sigma_m * m_chi * (1 GeV / 1.783e-24 g)
-       = sigma_m * 1.783e-24 * m_chi_GeV, so ``1e-24`` is low by a factor
-       1.783 (1 GeV = 1.783e-24 g, CODATA). The constant is deliberately NOT
-       changed: this channel IS part of the canonical T41 likelihood sum
-       (t41_mediator_mass_joint_fit.py:756), so editing it would alter a
-       stored canonical fit. The scaling also omits the kinetic-mixing
-       suppression. (At the canonical T41 MAP, sigma_DM-nuc ~ 2.5e-23 cm^2
-       is ~23 orders above the XENONnT/PandaX limit, so the -1.0 soft
-       penalty is saturated there and the 1.78x factor does not move it.)
+       ORDER-OF-MAGNITUDE FLAG ONLY — not a physical bound. FIXED UNIT
+       (2026-11-07, owner decision on finding F4): the conversion is
+       sigma_DM-nucleon = sigma_m * SIGMA_M_TO_DM_NUCLEON * m_chi_GeV with
+       SIGMA_M_TO_DM_NUCLEON = 1.78266192e-24 (1 GeV = 1.78266192e-24 g,
+       CODATA 2018). Until 2026-11-07 this channel and
+       loglike_direct_detection_exclusion each carried a hard-coded 1e-24,
+       low by 1.783x; both were changed in the same edit so the two channels
+       cannot diverge. This channel IS part of the canonical T41 likelihood
+       sum (t41_mediator_mass_joint_fit.py), so the effect on the stored
+       canonical fit was MEASURED rather than assumed:
+       v0.3-prelim/data/results/dd_unit_fix_recertification.json. The scaling
+       also omits the kinetic-mixing suppression. (At the canonical T41 MAP,
+       sigma_DM-nuc ~ 2.5e-23 cm^2 is ~23 orders above the XENONnT/PandaX
+       limit, so the -1.0 soft penalty is saturated there and the 1.783x
+       factor does not move it.)
 
     This is a soft penalty (not a hard exclusion). For the v0.7 MAP,
     the predicted sigma_DM-nuc is far below both experiments' limits,
@@ -343,7 +361,7 @@ def loglike_competitor_dd_watch(sigma_m: float, m_chi_GeV: float = 1.0) -> float
     # Same "very rough scaling" as Channel 5 (consistent treatment
     # for direct-detection channels; the kinetic-mixing suppression
     # is captured by the Kahlhoefer formula, not by this channel).
-    sigma_DM_nucleon = sigma_m * 1e-24 * m_chi_GeV / 1.0  # very rough; 1e-24 is ~1.78x low (1 GeV=1.783e-24 g) - see docstring warning
+    sigma_DM_nucleon = sigma_m * SIGMA_M_TO_DM_NUCLEON * m_chi_GeV  # unit fixed 2026-11-07 (F4); still a rough scaling - see docstring warning
     xenonnt_limit = sigma_XENONnT_2025_limit(m_chi_GeV)
     pandax_limit = sigma_PandaX4T_2025_limit(m_chi_GeV)
 

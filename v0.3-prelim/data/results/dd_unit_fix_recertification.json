@@ -1,0 +1,325 @@
+{
+  "finding": "F4 - direct-detection sigma/m -> sigma_DM-nucleon conversion constant",
+  "decision": "D3 (owner, 2026-11-07): fix the constant in both channels; certify by measurement",
+  "constant_pre_fix": 1e-24,
+  "constant_fixed": 1.78266192e-24,
+  "ratio_new_over_old": 1.78266192,
+  "channels_affected": [
+    "loglike_direct_detection_exclusion (Channel 5)",
+    "loglike_competitor_dd_watch (Channel 19, in the canonical T41 likelihood sum)"
+  ],
+  "per_point": {
+    "t41_mediator_mass_joint_fit_t88ce_v08_with_euclid_lensing_and_subhalo_forecast_nlive2000.json": {
+      "MAP_physical": {
+        "m_chi_GeV": 478.29480863482195,
+        "sigma_m_0_derived": 0.05991454841339871,
+        "sigma_DM_nucleon_fixed_cm2": 5.1085417248288353e-23,
+        "sigma_DM_nucleon_pre_fix_cm2": 2.8656817467828305e-23,
+        "LZ_limit_cm2_at_this_mass": 9.489928002918317e-46,
+        "XENONnT_PandaX_limit_cm2_at_this_mass": 2.427649362116073e-46,
+        "channels": {
+          "loglike_direct_detection_exclusion": {
+            "fixed": -1.0,
+            "pre_fix_1e24": -1.0,
+            "changed": false
+          },
+          "loglike_competitor_dd_watch": {
+            "fixed": -1.0,
+            "pre_fix_1e24": -1.0,
+            "changed": false
+          }
+        },
+        "penalty_changed": false,
+        "saturated_identical": true
+      }
+    },
+    "t41_mediator_mass_joint_fit_v0_7_with_dampe_lss_nlive2000.json": {
+      "MAP_physical": {
+        "m_chi_GeV": 769.6913379451703,
+        "sigma_m_0_derived": 0.27313307663467384,
+        "sigma_DM_nucleon_fixed_cm2": 3.7476574103396473e-22,
+        "sigma_DM_nucleon_pre_fix_cm2": 2.102281631920228e-22,
+        "LZ_limit_cm2_at_this_mass": 3.157530703561362e-45,
+        "XENONnT_PandaX_limit_cm2_at_this_mass": 3.8484566897258515e-46,
+        "channels": {
+          "loglike_direct_detection_exclusion": {
+            "fixed": -1.0,
+            "pre_fix_1e24": -1.0,
+            "changed": false
+          },
+          "loglike_competitor_dd_watch": {
+            "fixed": -1.0,
+            "pre_fix_1e24": -1.0,
+            "changed": false
+          }
+        },
+        "penalty_changed": false,
+        "saturated_identical": true
+      }
+    },
+    "t41_mediator_mass_joint_fit_v0_5_1_nlive2000.json": {
+      "MAP_physical": {
+        "m_chi_GeV": 439.77731724923717,
+        "sigma_m_0_derived": 0.10358694946363625,
+        "sigma_DM_nucleon_fixed_cm2": 8.12095037854545e-23,
+        "sigma_DM_nucleon_pre_fix_cm2": 4.555519073715026e-23,
+        "LZ_limit_cm2_at_this_mass": 8.584766955357074e-46,
+        "XENONnT_PandaX_limit_cm2_at_this_mass": 2.2992577241641236e-46,
+        "channels": {
+          "loglike_direct_detection_exclusion": {
+            "fixed": -1.0,
+            "pre_fix_1e24": -1.0,
+            "changed": false
+          },
+          "loglike_competitor_dd_watch": {
+            "fixed": -1.0,
+            "pre_fix_1e24": -1.0,
+            "changed": false
+          }
+        },
+        "penalty_changed": false,
+        "saturated_identical": true
+      }
+    }
+  },
+  "switch_boundaries": {
+    "t41_mediator_mass_joint_fit_t88ce_v08_with_euclid_lensing_and_subhalo_forecast_nlive2000.json": {
+      "m_chi_GeV": 478.29480863482195,
+      "sigma_m_switch_LZ_pre_fix_cm2_per_g": 1.984116873441517e-24,
+      "sigma_m_switch_LZ_fixed_cm2_per_g": 1.113007941203746e-24,
+      "sigma_m_switch_XENONnT_PandaX_pre_fix_cm2_per_g": 5.075633935992776e-25,
+      "sigma_m_switch_XENONnT_PandaX_fixed_cm2_per_g": 2.8472218310428574e-25,
+      "boundary_shift_factor": 0.5609588608927036,
+      "canonical_sigma_m_0_derived": 0.05991454841339871
+    },
+    "t41_mediator_mass_joint_fit_v0_7_with_dampe_lss_nlive2000.json": {
+      "m_chi_GeV": 769.6913379451703,
+      "sigma_m_switch_LZ_pre_fix_cm2_per_g": 4.1023336861123575e-24,
+      "sigma_m_switch_LZ_fixed_cm2_per_g": 2.301240431563354e-24,
+      "sigma_m_switch_XENONnT_PandaX_pre_fix_cm2_per_g": 5.0000000000000005e-25,
+      "sigma_m_switch_XENONnT_PandaX_fixed_cm2_per_g": 2.804794304463518e-25,
+      "boundary_shift_factor": 0.5609588608927036,
+      "canonical_sigma_m_0_derived": 0.27313307663467384
+    },
+    "t41_mediator_mass_joint_fit_v0_5_1_nlive2000.json": {
+      "m_chi_GeV": 439.77731724923717,
+      "sigma_m_switch_LZ_pre_fix_cm2_per_g": 1.9520713367060234e-24,
+      "sigma_m_switch_LZ_fixed_cm2_per_g": 1.0950317134199083e-24,
+      "sigma_m_switch_XENONnT_PandaX_pre_fix_cm2_per_g": 5.228231729971316e-25,
+      "sigma_m_switch_XENONnT_PandaX_fixed_cm2_per_g": 2.9328229157277993e-25,
+      "boundary_shift_factor": 0.5609588608927036,
+      "canonical_sigma_m_0_derived": 0.10358694946363625
+    }
+  },
+  "n_points_tested": 3,
+  "n_points_where_penalty_changed": 0,
+  "n_points_already_saturated": 3,
+  "saturation_scan": {
+    "m_chi_GeV_grid": [
+      1.0,
+      10.0,
+      100.0,
+      478.29,
+      1000.0
+    ],
+    "sigma_m_grid_cm2_per_g": [
+      1e-06,
+      0.0001,
+      0.01,
+      1.0,
+      10.0,
+      100.0
+    ],
+    "fraction_penalised_fixed": 0.8,
+    "fraction_penalised_pre_fix": 0.8,
+    "rows": [
+      {
+        "m_chi_GeV": 1.0,
+        "sigma_m": 1e-06,
+        "penalised_fixed": false,
+        "penalised_pre_fix": false
+      },
+      {
+        "m_chi_GeV": 1.0,
+        "sigma_m": 0.0001,
+        "penalised_fixed": false,
+        "penalised_pre_fix": false
+      },
+      {
+        "m_chi_GeV": 1.0,
+        "sigma_m": 0.01,
+        "penalised_fixed": false,
+        "penalised_pre_fix": false
+      },
+      {
+        "m_chi_GeV": 1.0,
+        "sigma_m": 1.0,
+        "penalised_fixed": false,
+        "penalised_pre_fix": false
+      },
+      {
+        "m_chi_GeV": 1.0,
+        "sigma_m": 10.0,
+        "penalised_fixed": false,
+        "penalised_pre_fix": false
+      },
+      {
+        "m_chi_GeV": 1.0,
+        "sigma_m": 100.0,
+        "penalised_fixed": false,
+        "penalised_pre_fix": false
+      },
+      {
+        "m_chi_GeV": 10.0,
+        "sigma_m": 1e-06,
+        "penalised_fixed": true,
+        "penalised_pre_fix": true
+      },
+      {
+        "m_chi_GeV": 10.0,
+        "sigma_m": 0.0001,
+        "penalised_fixed": true,
+        "penalised_pre_fix": true
+      },
+      {
+        "m_chi_GeV": 10.0,
+        "sigma_m": 0.01,
+        "penalised_fixed": true,
+        "penalised_pre_fix": true
+      },
+      {
+        "m_chi_GeV": 10.0,
+        "sigma_m": 1.0,
+        "penalised_fixed": true,
+        "penalised_pre_fix": true
+      },
+      {
+        "m_chi_GeV": 10.0,
+        "sigma_m": 10.0,
+        "penalised_fixed": true,
+        "penalised_pre_fix": true
+      },
+      {
+        "m_chi_GeV": 10.0,
+        "sigma_m": 100.0,
+        "penalised_fixed": true,
+        "penalised_pre_fix": true
+      },
+      {
+        "m_chi_GeV": 100.0,
+        "sigma_m": 1e-06,
+        "penalised_fixed": true,
+        "penalised_pre_fix": true
+      },
+      {
+        "m_chi_GeV": 100.0,
+        "sigma_m": 0.0001,
+        "penalised_fixed": true,
+        "penalised_pre_fix": true
+      },
+      {
+        "m_chi_GeV": 100.0,
+        "sigma_m": 0.01,
+        "penalised_fixed": true,
+        "penalised_pre_fix": true
+      },
+      {
+        "m_chi_GeV": 100.0,
+        "sigma_m": 1.0,
+        "penalised_fixed": true,
+        "penalised_pre_fix": true
+      },
+      {
+        "m_chi_GeV": 100.0,
+        "sigma_m": 10.0,
+        "penalised_fixed": true,
+        "penalised_pre_fix": true
+      },
+      {
+        "m_chi_GeV": 100.0,
+        "sigma_m": 100.0,
+        "penalised_fixed": true,
+        "penalised_pre_fix": true
+      },
+      {
+        "m_chi_GeV": 478.29,
+        "sigma_m": 1e-06,
+        "penalised_fixed": true,
+        "penalised_pre_fix": true
+      },
+      {
+        "m_chi_GeV": 478.29,
+        "sigma_m": 0.0001,
+        "penalised_fixed": true,
+        "penalised_pre_fix": true
+      },
+      {
+        "m_chi_GeV": 478.29,
+        "sigma_m": 0.01,
+        "penalised_fixed": true,
+        "penalised_pre_fix": true
+      },
+      {
+        "m_chi_GeV": 478.29,
+        "sigma_m": 1.0,
+        "penalised_fixed": true,
+        "penalised_pre_fix": true
+      },
+      {
+        "m_chi_GeV": 478.29,
+        "sigma_m": 10.0,
+        "penalised_fixed": true,
+        "penalised_pre_fix": true
+      },
+      {
+        "m_chi_GeV": 478.29,
+        "sigma_m": 100.0,
+        "penalised_fixed": true,
+        "penalised_pre_fix": true
+      },
+      {
+        "m_chi_GeV": 1000.0,
+        "sigma_m": 1e-06,
+        "penalised_fixed": true,
+        "penalised_pre_fix": true
+      },
+      {
+        "m_chi_GeV": 1000.0,
+        "sigma_m": 0.0001,
+        "penalised_fixed": true,
+        "penalised_pre_fix": true
+      },
+      {
+        "m_chi_GeV": 1000.0,
+        "sigma_m": 0.01,
+        "penalised_fixed": true,
+        "penalised_pre_fix": true
+      },
+      {
+        "m_chi_GeV": 1000.0,
+        "sigma_m": 1.0,
+        "penalised_fixed": true,
+        "penalised_pre_fix": true
+      },
+      {
+        "m_chi_GeV": 1000.0,
+        "sigma_m": 10.0,
+        "penalised_fixed": true,
+        "penalised_pre_fix": true
+      },
+      {
+        "m_chi_GeV": 1000.0,
+        "sigma_m": 100.0,
+        "penalised_fixed": true,
+        "penalised_pre_fix": true
+      }
+    ],
+    "only_unpenalised_region": "two regions only: (a) m_chi < 3 GeV, where the channel returns 0.0 by the sub-GeV guard, and (b) sigma/m below the switch boundary (~1e-24 cm^2/g at heavy masses), which is many orders below any SIDM regime of interest. In the mass regime the canonical fits actually occupy (400-800 GeV) the channel is at its constant -1.0 penalty for every sigma/m >= 1e-4 cm^2/g, so it adds a constant offset and cannot discriminate between parameter points: it is a flag, not a constraint.",
+    "unpenalised_rows_explained_by_sub_gev_guard": 6,
+    "unpenalised_rows_not_explained_by_guard": 0
+  },
+  "verdict": {
+    "canonical_numbers_move": false,
+    "reading": "The fix is a real unit correction, but at every stored canonical posterior point both DD channels are already at their saturated penalty value, so no published canonical number changes. What the fix DOES change is the switch boundary: the sigma/m at which a candidate starts being penalised moves down by a factor 0.560959, i.e. the channel is 1.783x stricter than it used to be."
+  }
+}

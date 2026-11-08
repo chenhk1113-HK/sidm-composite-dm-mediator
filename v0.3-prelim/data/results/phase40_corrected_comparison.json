@@ -4726,15 +4726,38 @@
     "k_phys_nfw": 5,
     "k_phys_burkert": 5,
     "k_phys_sidm": 15,
-    "aic_diff_phys_nfw_minus_sidm": 136.94217749010932,
-    "aic_diff_phys_burk_minus_sidm": -2367.068188783119
+    "adopted_convention": "per_model",
+    "aic_diff_phys_nfw_minus_sidm": 2516.9421774901084,
+    "aic_diff_phys_burk_minus_sidm": 12.931811216880305,
+    "rejected_alternative_per_dataset_charging": {
+      "aic_diff_phys_nfw_minus_sidm": 136.94217749010932,
+      "aic_diff_phys_burk_minus_sidm": -2367.068188783119,
+      "penalty_units_charged": 2400.0,
+      "why_rejected": "bills the 10 extra SIDM particle parameters once per galaxy (120 times) although they are shared by every galaxy and are not re-fitted per galaxy"
+    },
+    "legacy_unscaled_per_model": {
+      "aic_diff_phys_nfw_minus_sidm": 1248.4710887450542,
+      "aic_diff_phys_burk_minus_sidm": -3.5340943915598473,
+      "why_wrong": "doubled the parameter penalty but not the log-likelihood term"
+    },
+    "outlier_sensitivity": {
+      "per_model_total_delta_aic_burk_minus_sidm": 12.931811216880305,
+      "per_model_median_scaled_delta_aic_burk_minus_sidm": -57.150792177354425,
+      "per_model_no_outliers_delta_aic_burk_minus_sidm": 247.3660821253768,
+      "per_model_no_outliers_delta_aic_nfw_minus_sidm": 824.5106380426043
+    }
   },
   "verdict_scope": "SCOPE LIMIT (measured, not asserted): the 'SIDM' profile in this test is sigma/m-inert in each of its 120 fitted halos \u2014 sweeping sigma_0 over 1.0e-03 to 1.0e+03 cm^2/g moves the rotation curve by at most 0.000e+00 km/s. The verdict therefore compares a fixed CORED profile against a CUSPY NFW one; it is not evidence about self-interacting dark matter. The sigma/m-responsive comparison is phase39b_sidm_responsive_profile.py.",
   "verdicts": {
     "fit_nfw_vs_sidm": "STRONG_SIDM",
     "fit_burk_vs_sidm": "STRONG_SIDM",
     "phys_nfw_vs_sidm": "STRONG_SIDM",
-    "phys_burk_vs_sidm": "WEAK_BURKERT"
+    "phys_burk_vs_sidm": "STRONG_SIDM"
+  },
+  "verdict_caveats": {
+    "phys_burk_vs_sidm_is_not_robust": "the adopted reading (total \u0394log L, per-model penalty) gives +12.93, only 2.9 AIC units above the STRONG threshold; the per-galaxy median reading gives -57.15, which flips the label to STRONG_BURKERT. The SIDM-vs-Burkert verdict must therefore always be quoted together with the outlier treatment.",
+    "phys_nfw_vs_sidm_is_robust": "SIDM vs NFW keeps the same sign in every reading published here (total, median-scaled, outliers dropped).",
+    "comparison_is_sigma_inert": "SCOPE LIMIT (measured, not asserted): the 'SIDM' profile in this test is sigma/m-inert in each of its 120 fitted halos \u2014 sweeping sigma_0 over 1.0e-03 to 1.0e+03 cm^2/g moves the rotation curve by at most 0.000e+00 km/s. The verdict therefore compares a fixed CORED profile against a CUSPY NFW one; it is not evidence about self-interacting dark matter. The sigma/m-responsive comparison is phase39b_sidm_responsive_profile.py."
   },
   "sigma_m_responsiveness_probe": {
     "sigma_0_values": [
@@ -4761,5 +4784,5 @@
     "inert_tolerance_kms": 1e-06,
     "is_sigma_inert": true
   },
-  "interpretation": "Phase 40 corrects Phase 39 with reviewer recommendations:\n  - Added Burkert as 3rd model (the relevant comparison for cored profiles)\n  - Larger sample\n  - Proper Occam penalty for full physical model (k_phys=15 vs k_phys=5)\n  - Outlier analysis with and without UGC 02916-type galaxies\n\nHonest verdict:\n  - On rotation-curve fit alone (k=3 same for all): SIDM vs NFW and SIDM vs Burkert\n    both go in SIDM's favor but are sensitive to specific galaxies.\n  - With proper Occam penalty (k_phys=15 for SIDM): the 13 extra parameters cost\n    ~26 AIC units, which exceeds typical \u0394log L improvements.\n  - Conclusion: The multi-resonance particle model is **competitive** on rotation curves\n    but NOT decisively preferred once full parameter complexity is counted."
+  "interpretation": "Phase 40 corrects Phase 39 with reviewer recommendations:\n  - Added Burkert as 3rd model (the relevant comparison for cored profiles)\n  - Larger sample\n  - Proper Occam penalty for full physical model (k_phys=15 vs k_phys=5)\n  - Outlier analysis with and without UGC 02916-type galaxies\n\nHonest verdict (re-stated 2026-11-07 under decision D2, per-model penalty):\n  - On rotation-curve fit alone (k=3 same for all): SIDM vs NFW and SIDM vs Burkert\n    both go in SIDM's favor but are sensitive to specific galaxies.\n  - With the per-model Occam penalty (2*(15-5)=20 AIC units, charged once):\n    SIDM vs NFW is preferred by a wide margin in every reading (total, median-scaled,\n    outliers dropped); SIDM vs Burkert flips with the outlier treatment - the total\n    margin favours SIDM, the per-galaxy median favours Burkert.\n  - The outlier treatment moves the SIDM-vs-Burkert verdict further than the penalty\n    convention does, so the verdict is not robust and must be quoted with both.\n  - The comparison is sigma-inert (verdict_scope): it tests a fixed cored profile\n    against a cuspy NFW one, not a SIDM cross-section."
 }

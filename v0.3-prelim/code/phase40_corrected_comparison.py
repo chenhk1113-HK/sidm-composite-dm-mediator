@@ -453,10 +453,35 @@ def main():
     aic_burk_fit = sum(2 * k_fit_burkert + 2 * r['chi2'] for r in burk_results)
     aic_sidm_fit = sum(2 * k_fit_sidm + 2 * r['chi2'] for r in sidm_results)
 
-    # AIC for full physical model (k_phys)
+    # AIC for full physical model (k_phys).
+    # Decision D2 (2026-11-07, owner): the PENALTY CONVENTION IS DECLARED HERE.
+    #   ADOPTED  = per-model. The 10 extra SIDM particle parameters are shared by
+    #              every galaxy and are not re-fitted per galaxy, so they are
+    #              charged ONCE per model (standard AIC for a joint fit).
+    #   RETAINED = per-dataset, which bills 2*dk once per galaxy (2400 AIC units
+    #              at n_gal=120). It is still computed and published, labelled as
+    #              the rejected alternative, because hiding it would hide the
+    #              convention dependence that F3 measured.
     aic_nfw_phys = sum(2 * k_phys_nfw + 2 * r['chi2'] for r in nfw_results)
     aic_burk_phys = sum(2 * k_phys_burkert + 2 * r['chi2'] for r in burk_results)
     aic_sidm_phys = sum(2 * k_phys_sidm + 2 * r['chi2'] for r in sidm_results)
+    delta_aic_phys_nfw = aic_nfw_phys - aic_sidm_phys      # per-galaxy charging (rejected)
+    delta_aic_phys_burk = aic_burk_phys - aic_sidm_phys    # per-galaxy charging (rejected)
+
+    delta_fit = total_sid - total_nfw
+    delta_fit_burk = total_sid - total_bur
+    # Decision D2 (2026-11-07, owner): per-model AIC difference, ADOPTED.
+    #   ΔAIC(model A - model B) = 2*(k_A - k_B) - 2*(logL_A - logL_B)
+    #                           = 2*ΔlogL(B relative to A) - 2*Δk
+    # The previous line was `delta_fit - 2*Δk`, which doubled the penalty but not
+    # the log-likelihood term - a second bookkeeping error in the same block, found
+    # while executing D2. Both terms now carry the AIC factor 2, and the penalty is
+    # charged once per model rather than once per galaxy.
+    delta_phys = 2.0 * delta_fit - 2.0 * (k_phys_sidm - k_phys_nfw)
+    delta_phys_burk = 2.0 * delta_fit_burk - 2.0 * (k_phys_sidm - k_phys_burkert)
+    # Legacy value published for traceability (factor-2-on-logL error, per-model k):
+    delta_phys_legacy_unscaled = delta_fit - (k_phys_sidm - k_phys_nfw) * 2
+    delta_phys_burk_legacy_unscaled = delta_fit_burk - (k_phys_sidm - k_phys_burkert) * 2
 
     print("AIC (rotation-curve fit, k_fit=3 all):")
     print(f"  AIC (NFW):     {aic_nfw_fit:.2f}")
@@ -465,22 +490,21 @@ def main():
     print(f"  ΔAIC (NFW - SIDM, fit): {aic_nfw_fit - aic_sidm_fit:.2f}")
     print(f"  ΔAIC (Burkert - SIDM, fit): {aic_burk_fit - aic_sidm_fit:.2f}")
     print()
-    print("AIC (full physical model, k_phys varies):")
-    print(f"  AIC (NFW, k=5):      {aic_nfw_phys:.2f}")
-    print(f"  AIC (Burkert, k=5):  {aic_burk_phys:.2f}")
-    print(f"  AIC (SIDM, k=15):    {aic_sidm_phys:.2f}")
-    delta_aic_phys_nfw = aic_nfw_phys - aic_sidm_phys
-    delta_aic_phys_burk = aic_burk_phys - aic_sidm_phys
-    print(f"  ΔAIC (NFW - SIDM, physical):     {delta_aic_phys_nfw:.2f}")
-    print(f"  ΔAIC (Burkert - SIDM, physical): {delta_aic_phys_burk:.2f}")
-    print(f"  (positive = NFW/Burkert preferred after Occam penalty)")
+    print("AIC (full physical model):")
+    print(f"  [ADOPTED per-model penalty, charged once]")
+    print(f"    ΔAIC (NFW - SIDM, physical):     {delta_phys:.2f}")
+    print(f"    ΔAIC (Burkert - SIDM, physical): {delta_phys_burk:.2f}")
+    print(f"    (positive = SIDM preferred after Occam penalty)")
+    print(f"  [REJECTED alternative: penalty charged once per galaxy, {n_gal}x]")
+    print(f"    ΔAIC (NFW - SIDM):     {delta_aic_phys_nfw:.2f}")
+    print(f"    ΔAIC (Burkert - SIDM): {delta_aic_phys_burk:.2f}")
+    print(f"    AIC (NFW, k=5):      {aic_nfw_phys:.2f}")
+    print(f"    AIC (Burkert, k=5):  {aic_burk_phys:.2f}")
+    print(f"    AIC (SIDM, k=15):    {aic_sidm_phys:.2f}")
     print()
 
-    # Final verdict (rotation-curve fit, k_fit=3 same for all)
-    delta_fit = total_sid - total_nfw
-    delta_fit_burk = total_sid - total_bur
-    delta_phys = delta_fit - (k_phys_sidm - k_phys_nfw) * 2
-    delta_phys_burk = delta_fit_burk - (k_phys_sidm - k_phys_burkert) * 2
+    # Final verdict labels. delta_fit / delta_phys / delta_phys_burk were computed
+    # above (per-model, AIC factor 2 on both terms, decision D2 2026-11-07).
 
     def verdict_label(delta, name1, name2):
         if delta > 10:
@@ -574,8 +598,43 @@ def main():
             "k_phys_nfw": k_phys_nfw,
             "k_phys_burkert": k_phys_burkert,
             "k_phys_sidm": k_phys_sidm,
-            "aic_diff_phys_nfw_minus_sidm": float(delta_aic_phys_nfw),
-            "aic_diff_phys_burk_minus_sidm": float(delta_aic_phys_burk),
+            # Decision D2 (2026-11-07, owner): the published convention is
+            # per-model — the shared particle parameters are charged ONCE.
+            "adopted_convention": "per_model",
+            "aic_diff_phys_nfw_minus_sidm": float(delta_phys),
+            "aic_diff_phys_burk_minus_sidm": float(delta_phys_burk),
+            "rejected_alternative_per_dataset_charging": {
+                "aic_diff_phys_nfw_minus_sidm": float(delta_aic_phys_nfw),
+                "aic_diff_phys_burk_minus_sidm": float(delta_aic_phys_burk),
+                "penalty_units_charged": float(2 * (k_phys_sidm - k_phys_nfw) * n_gal),
+                "why_rejected": (
+                    "bills the 10 extra SIDM particle parameters once per galaxy "
+                    f"({n_gal} times) although they are shared by every galaxy and are "
+                    "not re-fitted per galaxy"
+                ),
+            },
+            "legacy_unscaled_per_model": {
+                "aic_diff_phys_nfw_minus_sidm": float(delta_phys_legacy_unscaled),
+                "aic_diff_phys_burk_minus_sidm": float(delta_phys_burk_legacy_unscaled),
+                "why_wrong": "doubled the parameter penalty but not the log-likelihood term",
+            },
+            # Outlier treatment moves the SIDM-vs-Burkert verdict further than the
+            # penalty convention does (20 units), so it is published alongside it.
+            "outlier_sensitivity": {
+                "per_model_total_delta_aic_burk_minus_sidm": float(delta_phys_burk),
+                "per_model_median_scaled_delta_aic_burk_minus_sidm": float(
+                    2.0 * float(np.median(delta_sid_minus_bur)) * n_gal
+                    - 2.0 * (k_phys_sidm - k_phys_burkert)
+                ),
+                "per_model_no_outliers_delta_aic_burk_minus_sidm": float(
+                    2.0 * float(delta_sid_minus_bur[mask].sum())
+                    - 2.0 * (k_phys_sidm - k_phys_burkert)
+                ),
+                "per_model_no_outliers_delta_aic_nfw_minus_sidm": float(
+                    2.0 * float(delta_sid_minus_nfw[mask].sum())
+                    - 2.0 * (k_phys_sidm - k_phys_nfw)
+                ),
+            },
         },
         "verdict_scope": verdict_scope,
         "verdicts": {
@@ -583,6 +642,19 @@ def main():
             "fit_burk_vs_sidm": v_fit_burk,
             "phys_nfw_vs_sidm": v_phys_nfw,
             "phys_burk_vs_sidm": v_phys_burk,
+        },
+        "verdict_caveats": {
+            "phys_burk_vs_sidm_is_not_robust": (
+                "the adopted reading (total Δlog L, per-model penalty) gives +12.93, only "
+                "2.9 AIC units above the STRONG threshold; the per-galaxy median reading "
+                "gives -57.15, which flips the label to STRONG_BURKERT. The SIDM-vs-Burkert "
+                "verdict must therefore always be quoted together with the outlier treatment."
+            ),
+            "phys_nfw_vs_sidm_is_robust": (
+                "SIDM vs NFW keeps the same sign in every reading published here "
+                "(total, median-scaled, outliers dropped)."
+            ),
+            "comparison_is_sigma_inert": verdict_scope,
         },
         "sigma_m_responsiveness_probe": resp,
         "interpretation": (
@@ -592,13 +664,17 @@ def main():
             "  - Proper Occam penalty for full physical model (k_phys=15 vs k_phys=5)\n"
             "  - Outlier analysis with and without UGC 02916-type galaxies\n"
             "\n"
-            "Honest verdict:\n"
+            "Honest verdict (re-stated 2026-11-07 under decision D2, per-model penalty):\n"
             "  - On rotation-curve fit alone (k=3 same for all): SIDM vs NFW and SIDM vs Burkert\n"
             "    both go in SIDM's favor but are sensitive to specific galaxies.\n"
-            "  - With proper Occam penalty (k_phys=15 for SIDM): the 13 extra parameters cost\n"
-            "    ~26 AIC units, which exceeds typical Δlog L improvements.\n"
-            "  - Conclusion: The multi-resonance particle model is **competitive** on rotation curves\n"
-            "    but NOT decisively preferred once full parameter complexity is counted."
+            "  - With the per-model Occam penalty (2*(15-5)=20 AIC units, charged once):\n"
+            "    SIDM vs NFW is preferred by a wide margin in every reading (total, median-scaled,\n"
+            "    outliers dropped); SIDM vs Burkert flips with the outlier treatment - the total\n"
+            "    margin favours SIDM, the per-galaxy median favours Burkert.\n"
+            "  - The outlier treatment moves the SIDM-vs-Burkert verdict further than the penalty\n"
+            "    convention does, so the verdict is not robust and must be quoted with both.\n"
+            "  - The comparison is sigma-inert (verdict_scope): it tests a fixed cored profile\n"
+            "    against a cuspy NFW one, not a SIDM cross-section."
         ),
     }
 

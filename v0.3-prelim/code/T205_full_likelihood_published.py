@@ -82,6 +82,62 @@ OBS_PUBLISHED = [
 
 # F21 provenance declaration (2026-11-06): the Cloud-9 slot is a model output, not published data.
 CLOUD9_ANCHOR_STATUS = "INTERNAL"
+
+# ---------------------------------------------------------------------------
+# Decision D6 (2026-11-07, owner): the INDEPENDENCE STRUCTURE of the 8 slots is
+# declared in code so that every published count can be given both ways.
+# The 5 low-velocity slots are velocity bins of ONE measurement (Horigome+ 2025
+# combined dSph+UFD analysis); they are correlated pseudo-replicates, not 5
+# independent constraints. Merging them and refitting was NOT done (it would move
+# the canonical fit); declaring the grouping is what the owner approved.
+# ---------------------------------------------------------------------------
+INDEPENDENT_SOURCE_OF_SLOT = {
+    # One measurement, five velocity bins: Horigome+ 2025 reports its UFD and dSph
+    # 95% CL limits from a single combined analysis (arXiv:2503.13650, Table II), so
+    # the five bins share their systematics and are ONE independent source here.
+    "UFD v=3": "Horigome+ 2025 (arXiv:2503.13650, combined dSph+UFD analysis, Table II)",
+    "UFD v=5": "Horigome+ 2025 (arXiv:2503.13650, combined dSph+UFD analysis, Table II)",
+    "UFD v=7": "Horigome+ 2025 (arXiv:2503.13650, combined dSph+UFD analysis, Table II)",
+    "UFD v=10": "Horigome+ 2025 (arXiv:2503.13650, combined dSph+UFD analysis, Table II)",
+    "dSph v=15": "Horigome+ 2025 (arXiv:2503.13650, combined dSph+UFD analysis, Table II)",
+    "Cloud-9 v=28": "INTERNAL model output (F21) - not an external measurement",
+    "SPARC v=100": "Lelli+ 2016 (SPARC rotation curves)",
+    "Cluster v=500": "Randall+ 2008 (Bullet Cluster 95% CL limit)",
+}
+# Horigome+ reports UFD and dSph bins from one combined analysis; the repo has
+# historically counted them as two sources. Declared here as one.
+SOURCES_COLLAPSED_TO_ONE = ["Horigome+ 2025"]
+
+
+def channel_independence_summary() -> dict:
+    """Machine-read count of slots vs independent sources (decision D6)."""
+    labels = [row[4] for row in OBS_PUBLISHED]
+    sources = [INDEPENDENT_SOURCE_OF_SLOT[label] for label in labels]
+    external = [s for s in sources if not s.startswith("INTERNAL")]
+    families = {}
+    for label, src in zip(labels, sources):
+        families.setdefault(src, []).append(label)
+    return {
+        "declared_by": "decision D6 (owner, 2026-11-07)",
+        "n_slots": len(labels),
+        "n_distinct_sources": len(set(sources)),
+        "n_external_independent_sources": len(set(external)),
+        "n_internal_slots": len(labels) - len(external),
+        "slot_to_source": dict(zip(labels, sources)),
+        "slots_by_source": families,
+        "correlated_groups": {
+            "Horigome+ 2025": [l for l, s in zip(labels, sources) if s.startswith("Horigome+ 2025")],
+        },
+        "reading": (
+            f"{len(labels)} velocity slots drawn from {len(set(external))} independent external "
+            "sources plus 1 internal anchor; 5 of the slots are correlated velocity bins of a "
+            "single Horigome+ 2025 analysis and must not be counted as 5 independent confirmations."
+        ),
+        "refit_status": "NOT refitted - merging the bins would change the canonical fit (owner declined)",
+    }
+
+
+# F21 provenance constants (continued from CLOUD9_ANCHOR_STATUS above).
 CLOUD9_ANCHOR_VALUE_CM2_PER_G = 128.0
 CLOUD9_ANCHOR_UNC_CM2_PER_G = 30.0
 CLOUD9_ANCHOR_IS_MODEL_OUTPUT_CM2_PER_G = 128.1262923221052   # sigma_m_phase44.json

@@ -1,0 +1,46 @@
+{
+  "declared_by": "decision D6 (owner, 2026-11-07)",
+  "n_slots": 8,
+  "n_distinct_sources": 4,
+  "n_external_independent_sources": 3,
+  "n_internal_slots": 1,
+  "slot_to_source": {
+    "UFD v=3": "Horigome+ 2025 (arXiv:2503.13650, combined dSph+UFD analysis, Table II)",
+    "UFD v=5": "Horigome+ 2025 (arXiv:2503.13650, combined dSph+UFD analysis, Table II)",
+    "UFD v=7": "Horigome+ 2025 (arXiv:2503.13650, combined dSph+UFD analysis, Table II)",
+    "UFD v=10": "Horigome+ 2025 (arXiv:2503.13650, combined dSph+UFD analysis, Table II)",
+    "dSph v=15": "Horigome+ 2025 (arXiv:2503.13650, combined dSph+UFD analysis, Table II)",
+    "Cloud-9 v=28": "INTERNAL model output (F21) - not an external measurement",
+    "SPARC v=100": "Lelli+ 2016 (SPARC rotation curves)",
+    "Cluster v=500": "Randall+ 2008 (Bullet Cluster 95% CL limit)"
+  },
+  "slots_by_source": {
+    "Horigome+ 2025 (arXiv:2503.13650, combined dSph+UFD analysis, Table II)": [
+      "UFD v=3",
+      "UFD v=5",
+      "UFD v=7",
+      "UFD v=10",
+      "dSph v=15"
+    ],
+    "INTERNAL model output (F21) - not an external measurement": [
+      "Cloud-9 v=28"
+    ],
+    "Lelli+ 2016 (SPARC rotation curves)": [
+      "SPARC v=100"
+    ],
+    "Randall+ 2008 (Bullet Cluster 95% CL limit)": [
+      "Cluster v=500"
+    ]
+  },
+  "correlated_groups": {
+    "Horigome+ 2025": [
+      "UFD v=3",
+      "UFD v=5",
+      "UFD v=7",
+      "UFD v=10",
+      "dSph v=15"
+    ]
+  },
+  "reading": "8 velocity slots drawn from 3 independent external sources plus 1 internal anchor; 5 of the slots are correlated velocity bins of a single Horigome+ 2025 analysis and must not be counted as 5 independent confirmations.",
+  "refit_status": "NOT refitted - merging the bins would change the canonical fit (owner declined)"
+}
