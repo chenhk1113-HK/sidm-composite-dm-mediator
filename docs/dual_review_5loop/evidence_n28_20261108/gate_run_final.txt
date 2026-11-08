@@ -1,0 +1,133 @@
+======================================================================
+v19.2-F PRE-TAG VERIFICATION GATE
+======================================================================
+Repo: C:\Users\lamkuenai\projects\sidm-composite-dm-mediator
+Python: C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\.venv-sidm-bench\Scripts\python.exe
+
+[L1/15] Convention/units audit (audit_units.py)...
+    Note: paper has many unicode superscripts (1373). Per Rule 27,
+    these should be converted to ASCII (10^-N) only when sent to PDF/Telegram.
+  
+  ======================================================================
+  ✓ No unit consistency issues
+
+[L2/15] gate-ignored test files: 0 (each carries an in-file marker; the gate refuses to run otherwise)
+
+[L2/15] Full pytest suite (v0.3-prelim/tests/, excluding marked gate-ignored files)...
+    See https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method
+      fixturefunc = resolve_fixture_function(fixturedef, request)
+  
+  -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+  3642 passed, 25 skipped, 40 deselected, 3 warnings in 1417.08s (0:23:37)
+
+[L3/15] Standing-numbers drift guard (drift_guard.py)...
+  T82 count literal in CURRENT.md: OK (120/120 ALL CLEAR)
+  
+  ======================================================================
+  RESULT: No drift detected. All docs consistent with canonical numbers.
+  ======================================================================
+
+[L4/15] T82 audit (t82_audit.py)...
+    ✓ v0.8 velocity index a (MAP): '0.13' in CURRENT.md
+    ✓ v0.8 velocity index a (MAP): '0.13' in docs/LAYMAN_SUMMARY.md
+  
+  ======================================================================
+  ALL CLEAR: 120/120 checks passed — no drift
+
+[L5/15] Claims audit (audit_claims.py)...
+  ======================================================================
+  Found 1108 lines with decimal numbers in paper.
+  Most are within prose; only the headline Phase claims are tracked.
+  
+  REGEX RESULT: PASS — all tracked claims match reference data within tolerance.
+
+[L6/15] Fabrication cross-check (check_fabrication.py)...
+    arXiv:2411.09012  (in astrosage_8b_repo.md)
+    arXiv:1903.10676  (in scibert_repo.md)
+  
+  ----------------------------------------------------------------------
+  OK: All arXiv citations in target are in verified/ or to_verify/.
+
+[L7/15] Breakthrough label gate (check_breakthrough_label.py)...
+    LEGACY  SIDM_ROUND5_CONSOLIDATED_FIXES_v1.16_2026-11-01.md: pre-R88(71) vintage, exempt (missing 4 phrases would not block)
+    LEGACY  SIDM_ROUND5_CONSOLIDATED_FIXES_v1.8_2026-10-26.md: pre-R88(71) vintage, exempt (missing 4 phrases would not block)
+    LEGACY  SIDM_ROUND5_CONSOLIDATED_FIXES_v1.9_2026-10-26.md: pre-R88(71) vintage, exempt (missing 4 phrases would not block)
+  
+  OK: All non-legacy BREAKTHROUGH-labeled documents have the required R88(71) phrases.
+
+[L8/15] Cross-document section-anchor audit (audit_doc_anchors.py)...
+  OK: no DANGLING section references in the report, the close-out, the companion, or the paper.
+  
+  OK: every .md filename cited in the audited documents exists in the worktree or git history (disclosed phantoms are allowlisted and machine-guarded).
+  
+  RESULT: PASS
+
+[L9/15] Model-provenance audit (audit_model_provenance.py)...
+    deleg_e2c00902: manifest not found in the delegation cache
+  
+  OK: every provenance claim in the deliverables is consistent with the manifests,
+  the agent log, and the delegation transcripts.
+  RESULT: PASS
+
+[L10/15] Hierarchy-bound chain audit (audit_hierarchy_chain.py)...
+    [PASS] link 5: retracted value '1.24e+25' absent
+  
+  OK: the hierarchy-bound chain recomputes from the canonical constants,
+  every link agrees with the paper, and the retracted values stay absent.
+  RESULT: PASS
+
+[L11/15] PDF render-integrity audit (audit_pdf_render.py, gate mode)...
+      OK: source contained, no block-marker leakage, budget respected
+  
+  ----------------------------------------------------------------------
+  RESULT: PASS (gate mode) — 0 hard defects, 0 advisory flags
+  ----------------------------------------------------------------------
+
+[L12/15] Advisory-flag triage (triage_pdf_advisory_flags.py)...
+  SUMMARY: 0 advisory flag(s), 0 genuine absence(s)
+  OK: every advisory flag is a layout/extraction artifact, verified line-by-line against pdfplumber alone.
+
+[L13/15] Stale-string absence audit (audit_stale_strings.py)...
+  Stale-string audit — registry 6 entries / 15 variants; paper: PAPER_V1_DRAFT.md
+    hits in retraction context (allowed): 16
+  VERDICT: PASS — no unmarked stale string from the registry appears in the paper
+
+[L14/15] PDF glyph coverage audit (audit_glyph_coverage.py, CG-14)...
+    allowed substitution: source U+207B '⁻' -> builder ASCII form present in PDF (disclosed behaviour)
+  SIDM_N24_CLOSEOUT_REPORT_WITH_CODE_v1.1_2026-11-01.pdf: 18148 glyph entries scanned, md=yes (3 benign line-assembly cid separators)
+    VERDICT: PASS — no nullish glyphs; all source non-ASCII glyphs present in the PDF glyph stream
+  
+  GLYPH COVERAGE AUDIT PASSED (CG-14: empty-box class is now machine-checked)
+
+[L15/15] Register-vs-prose state audit (audit_register_state.py, CG-17)...
+  register rows parsed: 21; table OPEN set: []
+  live section: ## 28; status assertions checked: 0
+  report audited: SIDM_ROUND5_CONSOLIDATED_FIXES_v1.17_2026-11-02.md
+  
+  REGISTER STATE AUDIT PASSED (CG-17: the live round's state statements agree with the canonical §17.3 register; frozen historical rounds are exempt by design)
+
+======================================================================
+PRE-TAG GATE SUMMARY
+======================================================================
+  [PASS] audit_units.py
+  [PASS] pytest
+  [PASS] drift_guard.py
+  [PASS] t82_audit.py
+  [PASS] audit_claims.py
+  [PASS] check_fabrication.py
+  [PASS] check_breakthrough_label.py
+  [PASS] audit_doc_anchors.py
+  [PASS] audit_model_provenance.py
+  [PASS] audit_hierarchy_chain.py
+  [PASS] audit_pdf_render.py
+  [PASS] triage_pdf_advisory_flags.py
+  [PASS] audit_stale_strings.py
+  [PASS] audit_glyph_coverage.py
+  [PASS] audit_register_state.py
+  NOTE  pytest internal skips: 25 test(s) were skipped inside the pytest layer — a skip proves nothing; those assertions did not run in this build (CG-10 disclosure).
+  NOTE  pytest deselected: 40 test(s) were excluded from the pytest layer by the gate's own -k/marker filters — deselection means those assertions did not run in this build, exactly like a skip (n25 finding III.4: disclosure extended from skips to deselects).
+
+GATE PASSED: all 15 layer(s) asserted and exited 0.
+Checked: audit_units.py, pytest, drift_guard.py, t82_audit.py, audit_claims.py, check_fabrication.py, check_breakthrough_label.py, audit_doc_anchors.py, audit_model_provenance.py, audit_hierarchy_chain.py, audit_pdf_render.py, triage_pdf_advisory_flags.py, audit_stale_strings.py, audit_glyph_coverage.py, audit_register_state.py.
+SCOPE: the gate asserts only the enumerated layer claims above. It is not a whole-document verdict; an unenumerated defect can coexist with a green gate (CG-5 disclosure).
+GATE_RC=0
