@@ -63,7 +63,8 @@ are not directly comparable.)
   substantive change, with commit hashes for full provenance
 - [`CURRENT.md`](../../CURRENT.md) — current standing version
   + headline numbers
-- [`scripts/t82_audit.py`](../../scripts/t82_audit.py) — CI-gatable
-  drift-guard (44 doc-presence + 1 VERSION-drift checks)
-- [`.github/workflows/ci.yml`](../../.github/workflows/ci.yml) — CI
-  workflow that runs pytest + t82_audit on every push/PR
+- [`scripts/t82_audit.py`](../../scripts/t82_audit.py) — drift-guard
+  (doc-presence + VERSION-drift + derived-value cross-checks; 120 checks as of 2026-11-08)
+- [`.github/workflows/ci.yml.disabled`](../../.github/workflows/ci.yml.disabled) — the GitHub
+  CI workflow, **switched off by owner decision D12 (2026-11-08)**; the release evidence is
+  the local `scripts/verify_release_gate.py` gate, not a GitHub badge

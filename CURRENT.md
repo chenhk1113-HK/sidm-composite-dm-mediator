@@ -25,7 +25,13 @@ is at `d4cabec` and trails the working branch; `origin/master` is at `0a98e2d` a
 branch (verified 2026-11-07 with `git ls-remote --heads origin` and `git rev-list --count origin/master..wip/v19.2-F-init`
 = 274). The landing page therefore still shows the 2026-10-11 `master` state, not this one. The earlier statement
 that `origin/master` was at `d411598` and that nothing was pushed was inaccurate against live remote state and is
-superseded here (finding F32 covers this class of label-vs-reality gap).
+superseded here (finding F32 covers this class of label-vs-reality gap). **Decision D12 (2026-11-08):** the GitHub CI
+workflow was switched off by renaming `.github/workflows/ci.yml` to `ci.yml.disabled` — it had been red since
+2026-10-11, both matrix arms still died before any test ran (census 2026-11-08: 3.11 at "Install dependencies", 3.12 at
+"Run pytest"), and its 15 `--ignore` files certify less than the local gate, whose `GATE_IGNORED_TESTS` is empty. The
+local 15-layer gate is the release evidence. Flipping the default branch is **not** an agent action: it needs the
+GitHub web UI or an admin-scoped API token, neither of which exists on this host (no `gh` CLI, `GITHUB_TOKEN` commented
+out in `~/.hermes/.env`); pushing over SSH works, changing repository settings does not.
 
 **Verification status (2026-11-03):** the 15-layer pre-tag gate is **15/15 PASS** (evidence commit
 `014c9e0`); its pytest layer reports **1954 passed / 22 skipped / 36 deselected**. Standing disclosures

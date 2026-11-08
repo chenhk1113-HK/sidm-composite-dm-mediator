@@ -20,10 +20,10 @@
 **SIDM constraint map + no-go catalogue (v19.0, 2026-09-27 paper-freeze):** a velocity-dependent SIDM architecture (multi-resonance σ/m(v) + two-component + gravothermal) achieves **partial observational-channel coverage** — **4 of 5 constrained channels under physically motivated f_H (the 5: SPARC, Cloud-9, dSph, Cluster, JVAS); 3 of 8 catalog slots are unconstrained placeholders (UFD/LMC/Bootes).** The Cloud-9 vs dSph tension is unresolved at Phase 44 parameters. **Path F1 (T207, v18.38) introduces the three-term σ_eff = f_H² σ_HH + 2 f_H f_L σ_HL + f_L² σ_LL decomposition** — structurally sufficient to reach SPARC's σ/m ≈ 0.193 at v = 100 km/s under borrowed prescription mode. **v19.0 paper-freeze refinements** (4 review rounds applied: 2review.docx → Cv19.docx → Comment on v19.docx → v19.0 (4)): Path F1 verdict split into §3.7; §10.5b ships as "methods contribution only" lead-in; abstract compressed to 158 words; "4 of 5 constrained channels" denominator clarified (was "4 of 8" until Cv19 review); 24 standing numbers cross-validated; 35 citations resolve; 180 §-refs resolve; 6 ASCII M_sun → M☉. **Phase 4A (population σ_eff map, Fig 5; v19.0 evaluation, `phase4a_population_sigma_eff_map.json`):** 60×60 V_max × M_halo grid; 8 Phase-4A observables cross-validated (3 PASS, 2 MARGINAL, 3 FAIL — Cloud-9 tail tension honestly disclosed). This is the Phase-4A observable set (it includes Segue 1 and LMC), NOT the §A.15 channel slots, so its tally is not comparable with the canonical channel count. **Phase 4B (higher-N KiSS-SIDM):** negative result — within the parameter envelope accessible without source-code modifications, N≈3000 was the only setup that reached ~70 Myr; both ±N break the run. The model is **a constraint map + no-go catalogue, not a unified derivation**. Paper at `v0.3-prelim/docs/PAPER_V1_DRAFT.md`. Final report at `v0.3-prelim/docs/V19_FINAL_REPORT_2026-09-27.md`. Phase 4A σ_eff map at §10.4f; Phase 4B negative result at §10.5b.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Record save](https://img.shields.io/badge/record_save-v19.2--F--RecordSave--v1.17-blue)](https://github.com/chenhk1113-HK/sidm-composite-dm-mediator)
+[![Record save](https://img.shields.io/badge/record_save-v19.2--F--RecordSave--2026--11--08-blue)](https://github.com/chenhk1113-HK/sidm-composite-dm-mediator)
 [![WIP Paper](https://img.shields.io/badge/wip_paper-v19.2--F--init-blueviolet)](v0.3-prelim/docs/PAPER_V1_DRAFT.md)
 [![Gate](https://img.shields.io/badge/gate-15%2F15_layers_pass-green)](scripts/verify_release_gate.py)
-[![Tests](https://img.shields.io/badge/tests-1954_pass%20%7C%2022%20skip%20%7C%2036%20deselect-green)](scripts/verify_release_gate.py)
+[![Tests](https://img.shields.io/badge/tests-3642_pass%20%7C%2025%20skip%20%7C%2040%20deselect-green)](scripts/verify_release_gate.py)
 [![arXiv:2506.22997](https://img.shields.io/badge/cross--validated-arXiv%3A2506.22997-b31b1b)](https://arxiv.org/abs/2506.22997)
 [![arXiv:2608.04362](https://img.shields.io/badge/cross--validated-arXiv%3A2608.04362-b31b1b)](https://arxiv.org/abs/2608.04362)
 [![arXiv:2510.11006](https://img.shields.io/badge/cross--validated-arXiv%3A2510.11006-b31b1b)](https://arxiv.org/abs/2510.11006)
@@ -90,8 +90,8 @@ phenomenological σ/m(v) from a first-principles UV sector **failed** (v19.2-F P
 working particle model from first principles. Read `MODEL_ASSUMPTIONS_AND_LIMITATIONS.md` before quoting
 any number out of context.
 
-**Verification:** the 15-layer pre-tag gate is **15/15 PASS** (pytest layer 1954 passed / 22 skipped /
-36 deselected), and every release commit carries its evidence folder. Open coverage gaps: **none** — **CG-4**
+**Verification:** the 15-layer gate is **15/15 PASS** (pytest layer 3642 passed / 25 skipped /
+40 deselected, re-run 2026-11-08 on the pushed tree; drift audit 120/120), and every release commit carries its evidence folder. Open coverage gaps: **none** — **CG-4**
 (literal-markup pass) and **CG-16** (hardcoded host paths) were the last two open rows and both closed 2026-11-08
 with guards; the gate's layer 15 now reads an empty open set.
 
@@ -145,13 +145,14 @@ Recent rounds within this standing version: **+T80** (LZ paper compatibility), *
 > the count is **457 collected + 1 collection error** in
 > `test_sparc_hierarchical.py` (a pre-existing `sys.exit(0)`
 > at module load time, see T82 audit). On `wip/v0.4-prelim`,
-> the count is **154 + 1 error**. The CI workflow
-> (`.github/workflows/ci.yml`) runs pytest with the README's
-> recommended ignore flags and reports the actual count on
-> each push. The branch-dependent badge above reflects this
-> rather than embedding a stale number.
+> the count is **154 + 1 error**. The GitHub CI workflow was
+> **switched off on 2026-11-08** by owner decision D12 — it had been red since
+> 2026-10-11 and its audit steps were never reached (see
+> `.github/workflows/ci.yml.disabled` and decision D12 in
+> `docs/INTEGRITY_FINDINGS_2026-11-04.md`). The verification that counts is the
+> local 15-layer `scripts/verify_release_gate.py` run, not a GitHub badge.
 
-> All headline numbers are spot-checked against `v0.3-prelim/data/results/t41_mediator_mass_joint_fit_t88ce_v08_with_euclid_lensing_and_subhalo_forecast_nlive2000.json` and verified by `scripts/t82_audit.py` (43 doc-presence + 1 VERSION-drift checks, all passing).
+> All headline numbers are spot-checked against `v0.3-prelim/data/results/t41_mediator_mass_joint_fit_t88ce_v08_with_euclid_lensing_and_subhalo_forecast_nlive2000.json` and verified by `scripts/t82_audit.py` (120 checks — doc-presence, VERSION drift and derived-value cross-checks — all passing as of 2026-11-08).
 
 ---
 
@@ -259,9 +260,9 @@ pip install -r requirements.txt
 # 4. Verify — should print "ALL CLEAR: N/N checks passed — no drift" (N is dynamic)
 python scripts/t82_audit.py
 
-# 5. Run the test suite (gate layer: 1,954 passed / 22 skipped / 36 deselected as of 2026-11-03)
-pytest v0.3-prelim/tests/ --ignore=v0.3-prelim/tests/test_sparc_hierarchical.py \
-                         --ignore=v0.3-prelim/tests/test_t32_real_likelihood.py -q
+# 5. Run the test suite (gate layer: 3,642 passed / 25 skipped / 40 deselected as of 2026-11-08)
+#    No --ignore flags: GATE_IGNORED_TESTS is empty since decision D9 round 2 (2026-11-06).
+pytest v0.3-prelim/tests/ -q
 
 # 6. Reproduce the v0.7 headline — T41 v0.7 rerun at nlive=2000 with DAMPE+LSS
 #    (loads the existing JSON result in data/results/ for fast verification;

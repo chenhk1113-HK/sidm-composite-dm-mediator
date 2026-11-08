@@ -1,3 +1,34 @@
+## [PublishingSurface-D12-2026-11-08] - the GitHub CI badge was switched off; the default-branch flip is an owner click, not an agent action
+
+Owner decision D12. Two halves, executed differently.
+
+- **(a) DONE — CI switched off.** `.github/workflows/ci.yml` was renamed to `ci.yml.disabled`; GitHub only picks up
+  `.yml`/`.yaml` filenames, so the workflow no longer runs and nothing was deleted. Ground for the decision, measured
+  rather than assumed: CI had been red continuously since 2026-10-11; the 2026-11-03 repair fixed the cache path and
+  removed the impossible `pip install -e v0.3-prelim/`, and the public-API census on 2026-11-08 (runs 244/245) still
+  showed the Python 3.11 arm dying at `Install dependencies` and the 3.12 arm dying at `Run pytest`, with the
+  `pre-commit py_compile` arm the only pass and the three audit steps (`audit_claims.py`, `t82_audit.py`,
+  `drift_guard.py --strict`) never reached. Run logs are 403 without a token, so the badge could not even say why it
+  failed. Separately, the file's 15 `--ignore` test files certify a **smaller** population than the local gate, whose
+  `GATE_IGNORED_TESTS` has been empty since decision D9 round 2 (2026-11-06) — a green CI would have been weaker than
+  the thing it was supposed to certify. Leaving a permanently red badge in place trains readers to ignore badges
+  (the CG-11 anti-pattern), so it is off. **What this does not change:** no verification is lost. The release evidence
+  for every round is the local 15-layer `scripts/verify_release_gate.py` run (15/15 PASS on `4a2ffdc`, 2026-11-08:
+  3642 passed / 25 skipped / 40 deselected, t82 120/120).
+- **(b) NOT EXECUTABLE HERE — default branch.** Making `wip/v19.2-F-init` the default branch needs the GitHub web UI or
+  an API token with repo administration. This host has no `gh` CLI, `GITHUB_TOKEN` is commented out in `~/.hermes/.env`
+  (lines 402-409), and no GitHub account is connected, so the agent can push over SSH but cannot change repository
+  settings. Recorded as the owner's action rather than done silently.
+- **Front pages synced to live state while touching the CI story** (stale-number sweep, no physics changed): README test
+  badge and verification line `1954 / 22 / 36` -> `3642 / 25 / 40` re-run 2026-11-08; README record-save badge ->
+  `v19.2-F-RecordSave-2026-11-08`; README t82 line `43 + 1` -> `120 checks`; README quick-start pytest line dropped its
+  two `--ignore` flags, which the gate no longer uses; `v0.3-prelim/docs/reviews/INDEX.md` re-pointed its ci.yml link to
+  the disabled file and its t82 line from `44 + 1` to 120. Guards re-run after the edits:
+  `test_t82_audit_readme_drift.py`, `test_markup_balance_cg4.py`, `test_integrity_finding_ids_unique.py`,
+  `test_version_tokens_have_tags.py`, `test_no_hardcoded_host_paths_cg16.py`.
+- `VERSION` was **not** advanced and no new tag was cut: this sits inside the `N27RecordRound-HostPathDecisions-MarkupBalance-2026-11-08`
+  record round, whose save-family tag `v19.2-F-RecordSave-2026-11-08` already points at the commit declaring that tail.
+
 ## [PairingRelabel-F33-2026-11-08] - the pairing changed and the vocabulary did not follow it
 
 F26 made `f_H = 0.7501856343179664` (`sigma_peak = 27.272481773080454 cm^2/g`) the live canonical pair and moved

@@ -1629,6 +1629,22 @@
         "host_path_lines": 1
       },
       {
+        "path": "docs/dual_review_5loop/evidence_n27_20261108/gate_run_committed_efd6021.txt",
+        "host_path_lines": 2
+      },
+      {
+        "path": "docs/dual_review_5loop/evidence_n27_20261108/gate_run_failed_findingids_L11.txt",
+        "host_path_lines": 2
+      },
+      {
+        "path": "docs/dual_review_5loop/evidence_n27_20261108/gate_run_failed_prefix_tree.txt",
+        "host_path_lines": 2
+      },
+      {
+        "path": "docs/dual_review_5loop/evidence_n27_20261108/gate_run_final.txt",
+        "host_path_lines": 2
+      },
+      {
         "path": "docs/dual_review_5loop/evidence_sweep20261103/gate_run_committed.txt",
         "host_path_lines": 2
       },
@@ -2231,7 +2247,7 @@
     "pinned_source": 3,
     "pinned_exception": 3,
     "historical_frozen_code": 230,
-    "docs_prose": 130,
+    "docs_prose": 134,
     "data_artifact": 69,
     "other": 0
   },
