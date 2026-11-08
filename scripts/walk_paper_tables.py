@@ -126,6 +126,17 @@ def check_table_for_issues(line_num, rows):
         # "yes" and drops only the gloss).
         row_text_flat = re.sub(r"\([^()]*\)", " ", row_text)
         row_text_lower = row_text_flat.lower()
+        # A row that TALLIES verdicts (e.g. "**1 PASS / 0 MARGINAL / 7 FAIL**")
+        # is a SUMMARY row reporting counts over MANY rows, not a single row
+        # that contradicts itself. PASS and FAIL there count DIFFERENT rows,
+        # so flagging it is a false positive -- and a permanent one, because
+        # it trains the reader to ignore this whole layer. Require TWO OR MORE
+        # numeric verdict counts to treat the row as a tally; a genuine
+        # contradiction ("**PASS**" in one cell, "**FAIL**" in another) has no
+        # numeric counts and is still flagged.
+        tally_markers = re.findall(r"\b\d+\s*(?:pass|fail|marginal)\b", row_text_lower)
+        if len(tally_markers) >= 2:
+            continue
         ok_count = len(re.findall(r"\b(pass|ok|✓|✔|yes|true)\b", row_text_lower))
         fail_count = len(re.findall(r"\b(fail|✗|✘|no|false|not\s+resolved)\b", row_text_lower))
         if ok_count > 0 and fail_count > 0 and len(row) > 2:
@@ -144,7 +155,7 @@ def check_table_for_issues(line_num, rows):
 
 
 def main():
-    with open(PAPER) as f:
+    with open(PAPER, encoding="utf-8") as f:
         text = f.read()
     tables = find_tables(text)
 

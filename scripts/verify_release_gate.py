@@ -129,9 +129,13 @@ def run_layer(name, args, timeout=300, cwd=None, env_python=None):
     print(f"\n[L{len(results)+1}/{TOTAL_LAYERS}] {name}...")
     cmd = [str(env_python or VENV_PYTHON)] + args
     try:
+        # encoding= is REQUIRED: text=True alone decodes with the LOCALE
+        # codec (cp1252 on this host); a decode error makes r.stdout None and
+        # `r.stdout + r.stderr` would raise TypeError, losing the verdict.
         r = subprocess.run(cmd, cwd=cwd or str(REPO),
-                           capture_output=True, text=True, timeout=timeout)
-        out = r.stdout + r.stderr
+                           capture_output=True, text=True, timeout=timeout,
+                           encoding="utf-8", errors="replace")
+        out = (r.stdout or "") + (r.stderr or "")
         # Show last 5 lines
         for line in out.strip().splitlines()[-5:]:
             print(f"  {line}")

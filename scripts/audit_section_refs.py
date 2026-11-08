@@ -54,7 +54,7 @@ def is_external_cite(context):
 
 
 def main():
-    with open(PAPER) as f:
+    with open(PAPER, encoding="utf-8") as f:
         text = f.read()
 
     # Get all section headings — match both ## and ### level

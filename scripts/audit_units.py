@@ -29,7 +29,7 @@ PAPER = REPO / "v0.3-prelim" / "docs" / "PAPER_V1_DRAFT.md"
 
 
 def main():
-    with open(PAPER) as f:
+    with open(PAPER, encoding="utf-8") as f:
         text = f.read()
 
     print("=" * 70)

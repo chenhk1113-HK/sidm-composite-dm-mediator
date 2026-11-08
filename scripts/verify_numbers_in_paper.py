@@ -22,7 +22,7 @@ PAPER = REPO / "v0.3-prelim" / "docs" / "PAPER_V1_DRAFT.md"
 
 
 def load_paper():
-    with open(PAPER) as f:
+    with open(PAPER, encoding="utf-8") as f:
         return f.read()
 
 

@@ -14,9 +14,24 @@ Runs in sequence:
 
 If all pass, exit 0. Otherwise print which check failed.
 """
+import os
 import subprocess
 import sys
 from pathlib import Path
+
+# This host's default locale codec is cp1252, which cannot encode the U+2713 /
+# U+2717 check marks this script prints in its summary. Without this, the run
+# dies with UnicodeEncodeError AFTER every check has already completed, so the
+# script reports a crash instead of its verdict. Reconfigure to utf-8 with a
+# replace fallback, and export PYTHONUTF8 so every child process inherits
+# UTF-8 mode (that is what fixes the child's own file reads).
+for _stream in (sys.stdout, sys.stderr):
+    try:
+        _stream.reconfigure(encoding="utf-8", errors="replace")
+    except (AttributeError, ValueError):
+        pass
+os.environ.setdefault("PYTHONIOENCODING", "utf-8")
+os.environ.setdefault("PYTHONUTF8", "1")
 
 REPO = Path(__file__).parent.parent
 PYTHON = REPO / ".venv-sidm-bench" / "Scripts" / "python.exe"
@@ -29,9 +44,20 @@ def run(name, args, timeout=60):
     print(f"  {name}")
     print("=" * 70)
     try:
-        r = subprocess.run([str(PYTHON)] + args, cwd=str(REPO),
-                           capture_output=True, text=True, timeout=timeout)
-        output = r.stdout + r.stderr
+        # encoding= is REQUIRED: text=True alone decodes with the LOCALE
+        # codec (cp1252 on this host), and a decode error makes r.stdout None,
+        # so `r.stdout + r.stderr` raises TypeError. errors="replace" degrades
+        # instead of crashing.
+        # PYTHONUTF8=1 makes the CHILD run in UTF-8 mode, so the child's own
+        # bare open() calls read the paper as utf-8 instead of the locale
+        # codec. PYTHONIOENCODING covers the child's stdout.
+        _child_env = {**os.environ,
+                      "PYTHONIOENCODING": "utf-8",
+                      "PYTHONUTF8": "1"}
+        r = subprocess.run([str(PYTHON)] + args, cwd=str(REPO), env=_child_env,
+                           capture_output=True, text=True, timeout=timeout,
+                           encoding="utf-8", errors="replace")
+        output = (r.stdout or "") + (r.stderr or "")
         success = r.returncode == 0
         # Show last 8 lines of output
         lines = output.strip().split('\n')

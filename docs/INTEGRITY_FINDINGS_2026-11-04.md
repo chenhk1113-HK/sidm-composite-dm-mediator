@@ -1635,3 +1635,47 @@ claim anchor.
 **What is NOT claimed.** The register's CG-4 row closes the *coverage gap* (the gate now looks at
 markup balance); it does not claim every emphasis pair in the paper renders. The remaining flanking fix
 changes rendered emphasis in a paper section and is an owner decision.
+
+## F35 — the check scripts could not report a verdict on this host, so a healthy paper read as `ok: false` (FOUND 2026-11-08, FIXED)
+
+**What was wrong.** `scripts/run_round13_self_check.py` decoded its children's
+output with the **locale** codec rather than UTF-8. On this host that codec is
+cp1252, which cannot represent the `⁻` (U+207B) in the paper's `10⁻³⁷` powers
+nor the `✓`/`✗` markers the summary prints. The failure sequence was:
+`UnicodeDecodeError` inside the reader thread → `r.stdout` becomes `None` →
+`r.stdout + r.stderr` raises `TypeError` → the script dies **before** printing
+its verdict → the MCP wrapper reports `ok: false`.
+
+**Why it matters more than a crash.** A crash is loud. This one was quiet in
+the worst way: the wrapper returned a *scientific-looking* verdict (a boolean
+per layer) that had nothing to do with the checks. An agent that trusted it
+would have gone looking for a physics bug in a paper that had none — and four
+of the eight checks were crashing for the same reason, each reported as a
+science failure.
+
+**A second, independent face of the same class.** The four audit scripts that
+read the paper used a bare `open(PAPER)` with no `encoding=`, so they died on
+the same byte. Under `PYTHONUTF8=1` those scripts return `0 issues found` on
+all four checks — proof that the *content* was clean and only the *encoding*
+was broken.
+
+**The fix.** Explicit `encoding="utf-8"` on every file read (the
+env-independent root fix); `encoding="utf-8", errors="replace"` plus
+`(r.stdout or "")` on every subprocess decode; `stdout.reconfigure` to UTF-8
+at module top; and `PYTHONUTF8=1` + `PYTHONIOENCODING=utf-8` in the child
+environment, because a child's own file reads need UTF-8 **mode**, not just
+the stdio variables. The venv additionally carries a `sitecustomize.py` that
+exports `PYTHONUTF8=1`, so every process spawned from it inherits UTF-8 mode.
+
+**Verification.** Run under the hostile environment — `PYTHONUTF8` and
+`PYTHONIOENCODING` removed, which is the environment the MCP server creates —
+the self-check reports **8/8 PASS, exit 0**, and `sidm_run_all_audits` returns
+`ok: true`. Before the fix the same command returned `ok: false` with a
+`TypeError` traceback.
+
+**Rule taken from it.** A check script that *crashes* cannot report a
+verdict, so a wrapper reading `ok: false` from one is reading a crash, not a
+result. Read the printed VERDICT line, not the exit code. And on this host,
+`UnicodeDecodeError: 'charmap' codec can't decode byte 0x81` means a missing
+`encoding=`, never a corrupt file — `0x81` is the continuation byte of `⁻`.
+

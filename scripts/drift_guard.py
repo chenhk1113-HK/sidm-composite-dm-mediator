@@ -54,7 +54,7 @@ def load_canonical():
         print(f"ERROR: {CANONICAL_PATH} not found.")
         print(f"Run `python scripts/canonical_numbers.py` first.")
         sys.exit(2)
-    with open(CANONICAL_PATH) as f:
+    with open(CANONICAL_PATH, encoding="utf-8") as f:
         return json.load(f)
 
 

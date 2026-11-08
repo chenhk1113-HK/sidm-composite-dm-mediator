@@ -333,7 +333,7 @@ def verify_table(table_path: Path, results_dir: Path) -> int:
             print(f"  ⚠ MISSING JSON: {ref_json}")
             n_fail += 1
             continue
-        with open(json_path) as f:
+        with open(json_path, encoding="utf-8") as f:
             data = json.load(f)
         actual = _get_nested(data, ref_key)
         if actual is None:
@@ -461,7 +461,7 @@ def verify_table(table_path: Path, results_dir: Path) -> int:
             print(f"    ✗ {label}: MISSING JSON {ref_json}")
             n_fail += 1
             continue
-        with open(json_path) as f:
+        with open(json_path, encoding="utf-8") as f:
             data = json.load(f)
         if ref_key == "__range_only__":
             lo = _get_nested(data, "min_myr")
@@ -501,7 +501,7 @@ def verify_table(table_path: Path, results_dir: Path) -> int:
     print("  T208 self-consistency (recomputed from the JSON's own halo params):")
     t208_path = results_dir / "t208_path_b_cloud9_host_halo_gravothermal.json"
     if t208_path.exists():
-        with open(t208_path) as f:
+        with open(t208_path, encoding="utf-8") as f:
             t208 = json.load(f)
         hp = t208.get("Cloud9_host_halo_params", {})
         gv = t208.get("Cloud9_gravothermal", {})

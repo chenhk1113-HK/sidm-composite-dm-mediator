@@ -21,7 +21,7 @@ PAPER = REPO / "v0.3-prelim" / "docs" / "PAPER_V1_DRAFT.md"
 
 
 def main():
-    with open(PAPER) as f:
+    with open(PAPER, encoding="utf-8") as f:
         text = f.read()
 
     # Find References section start
@@ -112,7 +112,7 @@ def main():
 if __name__ == "__main__":
     # Add ref_start_pos to fix scoping issue
     PAPER = Path(__file__).parent.parent / "v0.3-prelim" / "docs" / "PAPER_V1_DRAFT.md"
-    with open(PAPER) as f:
+    with open(PAPER, encoding="utf-8") as f:
         text = f.read()
     ref_section_match = re.search(r'^## References\s*$', text, re.MULTILINE)
     ref_start_pos = ref_section_match.start() if ref_section_match else 0

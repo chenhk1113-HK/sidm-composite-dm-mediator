@@ -1,3 +1,69 @@
+## [EncodingFix-2026-11-08] - the check scripts no longer crash on this host's cp1252 locale, and the table-walker no longer flags a verdict tally as a contradiction
+
+The Round-13 self-check was reporting `ok: false` while **all 8 of its checks
+actually passed**. The verdict was never wrong about the science; it was
+crashing before it could print one. Two independent defects, both found and
+fixed on 2026-11-08.
+
+**1. The cp1252 encoding class (the false negative).** This host's default
+locale codec is cp1252. Three faces of one defect, each of which turned a
+healthy paper into a reported failure:
+
+- `scripts/run_round13_self_check.py` called `subprocess.run(..., text=True)`
+  with **no `encoding=`**, so the child's output was decoded with the LOCALE
+  codec — not with the child's own `PYTHONIOENCODING`. On a decode error
+  `r.stdout` becomes `None`, and `r.stdout + r.stderr` raises
+  `TypeError: unsupported operand type(s) for +: 'NoneType' and 'str'`. The
+  script therefore **crashed before printing any verdict**, and the MCP wrapper
+  faithfully reported the crash as `ok: false`.
+- `verify_numbers_in_paper.py`, `audit_section_refs.py`,
+  `audit_citation_provenance.py` and `audit_units.py` opened the paper with a
+  bare `open(PAPER)` — no `encoding=` — and died with
+  `UnicodeDecodeError: 'charmap' codec can't decode byte 0x81` at byte 4687.
+  That byte is the continuation of the UTF-8 sequence for `⁻` (U+207B), i.e.
+  the superscript in `10⁻³⁷`.
+- The summary prints `✓` (U+2713) / `✗` (U+2717), which cp1252 cannot encode,
+  so the run died with `UnicodeEncodeError` **after every check had already
+  passed**.
+
+Fixed by: explicit `encoding="utf-8"` on every file read; `encoding="utf-8",
+errors="replace"` plus `(r.stdout or "") + (r.stderr or "")` on every subprocess
+decode; `sys.stdout.reconfigure(encoding="utf-8", errors="replace")` at module
+top; and `PYTHONUTF8=1` + `PYTHONIOENCODING=utf-8` in the child environment
+(the child's own file reads need UTF-8 **mode**, not just the stdio variables).
+The same class was fixed in `scripts/verify_release_gate.py`, which had the
+identical `r.stdout + r.stderr` pattern, and in `audit_claims.py` /
+`drift_guard.py` / `walk_paper_tables.py` (bare reads). The venv also gained
+`.venv-sidm-bench/Lib/site-packages/sitecustomize.py`, which exports
+`PYTHONUTF8=1` so that every process spawned from that venv inherits UTF-8
+mode — the durable fix at the source rather than per call site.
+
+**Verified:** with `PYTHONUTF8` and `PYTHONIOENCODING` removed from the
+environment (the hostile case, and the one the MCP server creates), the
+self-check now reports **8/8 PASS, exit 0**, and the MCP tool
+`sidm_run_all_audits` returns `ok: true` with 8 layers PASS.
+
+**2. The table-walker flagged a verdict tally as a contradiction.**
+`scripts/walk_paper_tables.py` flagged any row containing both a pass marker
+and a fail marker. A **summary** row such as
+`**TOTAL (...)** | **1 PASS / 0 MARGINAL / 7 FAIL**` counts verdicts across
+*many* rows, so both words are expected; flagging it was a false positive on
+paper L2332 — and a permanent one, because a check that always fires trains
+the reader to ignore the layer. Fixed by exempting a row that carries **two or
+more numeric verdict counts** (`\b\d+\s*(?:pass|fail|marginal)\b`).
+
+The exemption is deliberately narrow, and that is proven by mutation rather
+than asserted: a single row containing both `**PASS**` and `**FAIL**` is
+**still flagged**, and a row with only one count (`**3 PASS** and **FAIL**`) is
+**still flagged**. Only a genuine tally is exempt. The live paper went from 1
+issue to 0 issues across 66 tables.
+
+**What is NOT claimed.** `walk_paper_tables.py` is **not** one of the 15
+release-gate layers (`verify_release_gate.py` contains 0 references to it), so
+the 15-layer gate never saw this false positive — only the 8-check self-check
+did. The paper's content is unchanged by either fix; only the *reporting* of
+it was broken.
+
 ## [DefaultBranch-D12b-2026-11-08] - the repository landing page now shows the working branch
 
 Owner action completing decision **D12(b)**: the GitHub default branch of
