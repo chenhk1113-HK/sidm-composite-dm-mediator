@@ -1,3 +1,29 @@
+# DISABLED by owner decision D12 on 2026-11-08. GitHub only picks up workflows whose
+# filename ends in .yml/.yaml, so renaming this file to .disabled switches the workflow
+# off without deleting it.
+#
+# Why it was switched off instead of left running:
+#   1. It has been red continuously since 2026-10-11. Census read from the public API
+#      on 2026-11-08 (runs 244/245, both triggered by a push): the Python 3.11 job fails
+#      at "Install dependencies", the 3.12 job installs and fails at "Run pytest", the
+#      `pre-commit py_compile` job passes, and the three audit steps below (claims, t82,
+#      drift guard) are never reached. The failure messages are unreadable
+#      unauthenticated (HTTP 403 on run logs), so the badge cannot even explain itself.
+#   2. Even a green run would certify less than the local gate: this file still lists 15
+#      `--ignore` test files, while `scripts/verify_release_gate.py` now has an EMPTY
+#      `GATE_IGNORED_TESTS` (decision D9 round 2 re-admitted the T120 family on
+#      2026-11-06). The two test populations have drifted apart.
+#   3. A permanently red badge teaches readers to ignore badges (the CG-11 anti-pattern).
+#
+# This does not reduce verification. The release evidence for every round is the local
+# 15-layer `scripts/verify_release_gate.py` run (15/15 PASS on 4a2ffdc, 2026-11-08:
+# 3642 passed / 25 skipped / 40 deselected, t82 120/120). A GitHub-side mark says nothing
+# about the physics in either direction.
+#
+# To re-enable: `git mv .github/workflows/ci.yml.disabled .github/workflows/ci.yml`,
+# after (a) finding why the 3.11 arm cannot install `requirements-ci.txt` and (b)
+# replacing the 15 `--ignore` lines with the gate's current exclusion map.
+
 name: CI
 
 # 2026-11-03 fix. Before this, CI had been red since 2026-10-11 and had never
