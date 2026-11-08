@@ -73,10 +73,11 @@
 
 ## ⚡ Current standing — 2026-11-03
 
-**Where the work actually is:** branch `wip/v19.2-F-init`, 274 commits ahead of `origin/master` (`0a98e2d`,
-verified 2026-11-07), and `master` is still the GitHub default branch, so the repository landing page shows the
-2026-10-11 state. The working branch was pushed to `origin` on 2026-11-07. Record save point: annotated tag
-`v19.2-F-RecordSave-v1.18` (previous: `v19.2-F-RecordSave-v1.17`).
+**Where the work actually is:** branch `wip/v19.2-F-init` — which is **also the GitHub default branch** since an
+owner action on 2026-11-08 (verified two ways: `git ls-remote --symref origin HEAD` → `refs/heads/wip/v19.2-F-init`,
+and the public API `default_branch`). `origin/master` sits at `0a98e2d` (2026-10-11), **289 commits behind**, as a
+stale branch rather than a declared archive. The working branch was pushed to `origin` on 2026-11-07. Record save
+point: annotated tag `v19.2-F-RecordSave-2026-11-08` (previous: `v19.2-F-RecordSave-v1.18`).
 
 **What the project is:** a velocity-dependent SIDM architecture — multi-resonance σ/m(v), two-component
 dark matter, gravothermal evolution — tested against 8 observational channels spanning four orders of

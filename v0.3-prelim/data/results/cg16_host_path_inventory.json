@@ -1561,6 +1561,10 @@
         "host_path_lines": 1
       },
       {
+        "path": "docs/dual_review_5loop/evidence_d13_20261108/gate_run_committed.txt",
+        "host_path_lines": 2
+      },
+      {
         "path": "docs/dual_review_5loop/evidence_kb_tier1_20261103/gate_run_committed.txt",
         "host_path_lines": 2
       },
@@ -2251,7 +2255,7 @@
     "pinned_source": 3,
     "pinned_exception": 3,
     "historical_frozen_code": 230,
-    "docs_prose": 135,
+    "docs_prose": 136,
     "data_artifact": 69,
     "other": 0
   },

@@ -1,3 +1,27 @@
+## [DefaultBranch-D12b-2026-11-08] - the repository landing page now shows the working branch
+
+Owner action completing decision **D12(b)**: the GitHub default branch of
+`chenhk1113-HK/sidm-composite-dm-mediator` is now `wip/v19.2-F-init`.
+
+- **Verified by reading it back, not taken on report.** 19:07 CST, two independent paths: `git ls-remote --symref
+  origin HEAD` → `ref: refs/heads/wip/v19.2-F-init` at `049451d`, and `GET /repos/{o}/{r}` → `default_branch:
+  "wip/v19.2-F-init"`. A previous attempt earlier the same evening had **not** taken effect (a 18:45 CST read still
+  reported `master`, and the repo record's `updated_at` was unchanged), which is why the flip is confirmed by a
+  read-back rather than accepted from the UI.
+- **What that changes for a visitor:** the landing page, the default pull-request base and the status badge all now
+  describe the working branch. Actions shows `Self-check` #577-#581 all **success** on `wip/v19.2-F-init`, the latest
+  run 42470525197 at `049451d`. The last red mark, CI #247 at `8216bda`, predates the D12 workflow disable and no
+  longer sits on the default branch.
+- **`master` was not archived or deleted.** `origin/master` is still `0a98e2d` (2026-10-11) and is **289 commits
+  behind** the working branch. Declaring it an archive (and/or dropping `self_check.yml`'s `master` trigger) is a
+  separate owner choice, left open.
+- **Front pages synced to the new state:** the "Where the work actually is" paragraph in `README.md` (previously
+  "274 commits ahead of `origin/master` ... `master` is still the GitHub default branch") and the same claim in
+  `CURRENT.md`; the D12 row of `docs/INTEGRITY_FINDINGS_2026-11-04.md` changed from PART-EXECUTED to EXECUTED. The
+  stale record-save line in `README.md` naming `v19.2-F-RecordSave-v1.18` now names `v19.2-F-RecordSave-2026-11-08`,
+  which is what the badge already pointed at. Frozen historical reports that stated the old default were left as
+  written.
+
 ## [ScorecardDecision-D13-2026-11-08] - the paper keeps the published-test scorecard; the adopted-arm 7-of-8 stays repo-internal
 
 Owner decision **D13** (answered 2026-11-08): option **(a) — no paper change**. The paper's channel counts remain
