@@ -115,11 +115,38 @@ class TestConfigCrossLocation:
             name for name in set(c_surface) & set(s_surface)
             if c_surface[name] != s_surface[name]
         )
-        assert not (only_canonical or only_snapshot or mismatched), (
+
+        # Declared exemption (CG-16, 2026-11-08). The canonical config.py gained a
+        # bootstrap that imports the single host-path source `scripts/paths.py`. The frozen
+        # snapshot deliberately does NOT get it: the scripts that import the snapshot would
+        # then resolve their roots against whatever tree they happen to run from, which is the
+        # silent re-read risk the CG-16 inventory explicitly refuses
+        # (v0.3-prelim/data/results/cg16_host_path_inventory.json -> decision.frozen_rule).
+        # The exemption is narrow by construction: private `_CG16_*` names and the import
+        # statements that bring `paths` (plus its sys/pathlib aliases) in. A constant name can
+        # never be excused by it, which the assertion below proves rather than asserts in prose.
+        def _is_cg16_bootstrap(name: str) -> bool:
+            if name.startswith("_CG16_"):
+                return True
+            if name.startswith("import::"):
+                body = name[len("import::"):]
+                return "module='paths'" in body or (
+                    "alias(name='sys'" in body and "alias(name='pathlib'" in body)
+            return False
+
+        # The classifier must not be a loophole: a physics-constant name is not bootstrap.
+        assert not _is_cg16_bootstrap("SIGMA_0_CM2_G")
+        assert not _is_cg16_bootstrap("REPO")
+        assert not _is_cg16_bootstrap("import::Import(names=[alias(name='numpy')])")
+
+        bootstrap = [n for n in only_canonical if _is_cg16_bootstrap(n)]
+        drift = [n for n in only_canonical if not _is_cg16_bootstrap(n)]
+        assert not (drift or only_snapshot or mismatched), (
             "frozen snapshot has drifted from the canonical config:\n"
-            f"  missing in snapshot: {only_canonical[:10]}\n"
+            f"  missing in snapshot: {drift[:10]}\n"
             f"  extra in snapshot:   {only_snapshot[:10]}\n"
-            f"  different value:     {mismatched[:10]}"
+            f"  different value:     {mismatched[:10]}\n"
+            f"  declared CG-16 bootstrap exempted: {bootstrap}"
         )
 
     def test_wsl_scratch_copy_divergence_is_recorded(self):

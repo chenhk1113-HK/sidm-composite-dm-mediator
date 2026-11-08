@@ -15,13 +15,19 @@ data release) but does NOT derive a new f_H value.
 Output: data/results/layer2_f_H_from_sidm_concerto.json
 """
 from __future__ import annotations
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import REPO, REPO_ROOT  # noqa: E402
 
 import json
 import numpy as np
 from pathlib import Path
 
 DATA_DIR = Path(
-    r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\data\external\sidm_concerto\central\groups\carnegie_poc\enadler\zoomins\sidm_concerto\parametric\concertoSIDM\MW_Halo004_GroupSIDM"
+    str(REPO_ROOT / "v0.3-prelim/data/external/sidm_concerto/central/groups/carnegie_poc/enadler/zoomins/sidm_concerto/parametric/concertoSIDM/MW_Halo004_GroupSIDM")
 )
 
 
@@ -138,7 +144,7 @@ output = {
 }
 
 out = Path(
-    r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\data\results\layer2_f_H_from_sidm_concerto.json"
+    str(REPO_ROOT / "v0.3-prelim/data/results/layer2_f_H_from_sidm_concerto.json")
 )
 out.parent.mkdir(parents=True, exist_ok=True)
 with open(out, "w") as f:

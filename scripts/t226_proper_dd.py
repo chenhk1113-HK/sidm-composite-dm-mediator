@@ -46,6 +46,12 @@ the low-v tail. With v_min = 10 km/s cutoff:
   ~ log(220/10) * (g^4 m_N^2 / (4 mu^2 * v_0^3))
   ~ 3.1 * (g^4 m_N^2 / (4 mu^2 * v_0^3))
 """
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import REPO, REPO_ROOT  # noqa: E402
 
 import math
 import json
@@ -187,7 +193,7 @@ def main():
         )
     }
 
-    out_path = r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\data\results\t226_proper_dd.json"
+    out_path = str(REPO_ROOT / "v0.3-prelim/data/results/t226_proper_dd.json")
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     with open(out_path, 'w') as f:
         json.dump(results, f, indent=2)

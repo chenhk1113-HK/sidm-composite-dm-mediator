@@ -41,6 +41,12 @@ Strategy:
 Reference: Holdom 1986 (Phys. Lett. 166B, 196), Tulin 2013 (arXiv:1308.4989)
 Per R42 rule: not verbatim fetched, applied from standard literature.
 """
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import REPO, REPO_ROOT  # noqa: E402
 
 import math
 import json
@@ -220,7 +226,7 @@ def main():
         ]
     }
 
-    out_path = r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\data\results\t223_dark_photon_sidm.json"
+    out_path = str(REPO_ROOT / "v0.3-prelim/data/results/t223_dark_photon_sidm.json")
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     with open(out_path, 'w') as f:
         json.dump(results, f, indent=2)

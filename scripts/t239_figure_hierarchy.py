@@ -4,11 +4,17 @@ T239 (D-17 figure 2): Hierarchy constraint g_N/g_chi
 Per R83: g_N/g_chi < ~10^-13 (Cloud-9 v=28 anchor, σ/m = 166 cm²/g)
 Per R86: with a_slope = 1.93, σ/m at v = 28 = 166.0 cm²/g
 """
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import REPO, REPO_ROOT  # noqa: E402
 import sys
 import math
 from pathlib import Path
 
-sys.path.insert(0, r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\scripts")
+sys.path.insert(0, str(REPO_ROOT / "scripts"))
 
 import matplotlib
 matplotlib.use('Agg')
@@ -102,7 +108,7 @@ def main():
     ax.set_ylim(1e-15, 1e-9)
 
     plt.tight_layout()
-    output_path = Path(r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\docs\FIG_HIERARCHY_R88.png")
+    output_path = Path(str(REPO_ROOT / "v0.3-prelim/docs/FIG_HIERARCHY_R88.png"))
     plt.savefig(output_path, dpi=120, bbox_inches='tight')
     print(f"\nFigure saved to: {output_path}")
     print(f"Size: {output_path.stat().st_size} bytes")

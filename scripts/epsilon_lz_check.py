@@ -18,6 +18,12 @@ which is wildly below LZ sensitivity (so the practical orthogonality
 holds even though the theoretical link via the mediator exists).
 """
 from __future__ import annotations
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import REPO, REPO_ROOT  # noqa: E402
 
 import json
 import sys
@@ -44,7 +50,7 @@ def sigma_DM_nucleon(epsilon: float, alpha_X: float, m_phi_MeV: float) -> float:
 
 def main():
     # Load v0.7 MAP
-    repo = Path(r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator")
+    repo = Path(REPO)
     fit_path = repo / "v0.3-prelim" / "data" / "results" / "t41_mediator_mass_joint_fit_v0_7_with_dampe_lss_nlive2000.json"
     with open(fit_path) as f:
         fit = json.load(f)

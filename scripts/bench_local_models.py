@@ -14,6 +14,12 @@ This is deliberately the SAME kind of task the model is being asked to do
 in production: read a paper excerpt, do arithmetic, report a finding.
 """
 from __future__ import annotations
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import REPO, REPO_ROOT  # noqa: E402
 
 import json
 import re
@@ -22,7 +28,7 @@ import time
 import urllib.request
 from pathlib import Path
 
-PROJECT = Path(r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator")
+PROJECT = Path(REPO)
 EXCERPT = PROJECT / "docs" / "R5_EXCERPT.md"
 
 # (id, question, expected-substring-list, wrong-substring-list)

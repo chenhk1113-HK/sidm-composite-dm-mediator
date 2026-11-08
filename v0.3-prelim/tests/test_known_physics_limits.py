@@ -11,6 +11,12 @@ errors by testing against:
 The v40.21 NFW V_max bug (off by 3.6×) and the v40.7 r_s/ρ_s errors (100× / 4700×)
 were this class of bug. The framework can catch them BEFORE the paper is committed.
 """
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import REPO, REPO_ROOT  # noqa: E402
 import importlib.util
 import math
 import sys
@@ -19,7 +25,7 @@ from pathlib import Path
 # Load scripts/constants.py for v19.2-F phenomenological values
 _spec = importlib.util.spec_from_file_location(
     "v19_constants",
-    r"C:/Users/lamkuenai/projects/sidm-composite-dm-mediator/scripts/constants.py"
+    str(REPO_ROOT / "scripts/constants.py")
 )
 _v19 = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(_v19)
@@ -124,7 +130,7 @@ def test_h_alpha_d_convention():
     # Load root constants.py for ALPHA_D and G_CHI
     _spec_root = importlib.util.spec_from_file_location(
         "root_constants",
-        r"C:/Users/lamkuenai/projects/sidm-composite-dm-mediator/constants.py"
+        str(REPO_ROOT / "constants.py")
     )
     _root = importlib.util.module_from_spec(_spec_root)
     _spec_root.loader.exec_module(_root)
@@ -142,7 +148,7 @@ def test_kappa_c_analytic_window():
     # If scripts/constants.py doesn't have KAPPA_C, fall back to root
     _spec_root = importlib.util.spec_from_file_location(
         "root_constants",
-        r"C:/Users/lamkuenai/projects/sidm-composite-dm-mediator/constants.py"
+        str(REPO_ROOT / "constants.py")
     )
     _root = importlib.util.module_from_spec(_spec_root)
     _spec_root.loader.exec_module(_root)

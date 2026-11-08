@@ -26,6 +26,12 @@ For sigma_SI < LZ bound 9e-48 cm^2, need either:
 
 Let me check (b): m_phi = 10 MeV, 100 MeV, 1 GeV, 10 GeV
 """
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import REPO, REPO_ROOT  # noqa: E402
 
 import math
 import json
@@ -169,7 +175,7 @@ def main():
         'conclusion': 'sigma_peak = 174 cm^2/g is INCOMPATIBLE with LZ for any mediator mass in Yukawa framework'
     }
 
-    out_path = r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\data\results\t224_sigma_peak_dd_tension.json"
+    out_path = str(REPO_ROOT / "v0.3-prelim/data/results/t224_sigma_peak_dd_tension.json")
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     with open(out_path, 'w') as f:
         json.dump(results, f, indent=2)

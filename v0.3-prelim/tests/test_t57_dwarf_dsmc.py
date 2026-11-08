@@ -1,10 +1,16 @@
 """Tests for the dwarf-mass KiSS-SIDM DSMC driver (T57, R11 G16)."""
 from __future__ import annotations
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import LEGACY_WSL_ROOT, REPO_ROOT  # noqa: E402
 import sys
 import math
 from pathlib import Path
 
-WSL_ROOT = Path("/home/lamkuenai/sidm-composite-dm-mediator")
+WSL_ROOT = Path(LEGACY_WSL_ROOT)
 sys.path.insert(0, str(WSL_ROOT / "v0.3-prelim/code"))
 import t57_dwarf_dsmc as t57
 

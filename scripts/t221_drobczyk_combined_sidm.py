@@ -23,6 +23,12 @@ This script:
   (2) Computes Omega_h^2 from <sigma*v>_ann
   (3) Checks consistency with: sigma_peak = 174, g_chi perturbative, lambda_PDG ~ 0.12
 """
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import REPO, REPO_ROOT  # noqa: E402
 
 import math
 import json
@@ -292,7 +298,7 @@ def main():
         ]
     }
 
-    out_path = r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\data\results\t221_drobczyk_combined_sidm.json"
+    out_path = str(REPO_ROOT / "v0.3-prelim/data/results/t221_drobczyk_combined_sidm.json")
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     with open(out_path, 'w') as f:
         json.dump(results, f, indent=2)

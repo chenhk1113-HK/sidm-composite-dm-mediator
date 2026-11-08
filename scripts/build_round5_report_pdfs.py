@@ -35,6 +35,12 @@ SILENT-LOSS NOTE:
 Usage:
     wsl -- bash -c "/home/lamkuenai/.venv/bin/python /mnt/c/Users/<u>/<this>.py"
 """
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import WSL_HOME  # noqa: E402
 
 import re
 
@@ -65,7 +71,7 @@ def find_dejavu():
         if Path(c).exists():
             return c
     # matplotlib bundles them
-    for root in Path('/home/lamkuenai').rglob('DejaVuSans.ttf'):
+    for root in Path(WSL_HOME).rglob('DejaVuSans.ttf'):
         return str(root)
     raise SystemExit('DejaVuSans.ttf not found')
 

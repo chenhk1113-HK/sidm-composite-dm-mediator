@@ -19,6 +19,12 @@ These tests assert:
     with a = 1 maps to sigma/m(v_DSPH) = 0.2 cm^2/g (at the limit).
 """
 from __future__ import annotations
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import LEGACY_WSL_ROOT, REPO, REPO_ROOT  # noqa: E402
 import sys
 import os
 from pathlib import Path
@@ -27,8 +33,8 @@ from pathlib import Path
 # and sparc_loader live in v0.1-prelim/code). v0.1-prelim MUST come
 # before v0.3-prelim in sys.path so that `from halo_profiles import ...`
 # resolves correctly even when PYTHONPATH already includes v0.3-prelim/code.
-WSL = Path("/home/lamkuenai/sidm-composite-dm-mediator")
-WIN = Path("C:/Users/lamkuenai/projects/sidm-composite-dm-mediator")
+WSL = Path(LEGACY_WSL_ROOT)
+WIN = Path(REPO)
 PROJ = WSL if WSL.exists() else WIN
 if not PROJ.exists():
     raise ImportError(f"Project root not found at {WSL} or {WIN}")

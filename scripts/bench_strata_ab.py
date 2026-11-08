@@ -12,6 +12,12 @@ never drift apart. Each answer is scored with the same negation-aware,
 stance-based matcher.
 """
 from __future__ import annotations
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import REPO, REPO_ROOT  # noqa: E402
 
 import json
 import re
@@ -20,7 +26,7 @@ import time
 import urllib.request
 from pathlib import Path
 
-PROJECT = Path(r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator")
+PROJECT = Path(REPO)
 sys.path.insert(0, str(PROJECT / "scripts"))
 
 # reuse the exact question set + ground truth from the v2 benchmark

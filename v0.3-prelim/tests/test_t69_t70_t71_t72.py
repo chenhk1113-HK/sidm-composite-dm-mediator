@@ -1,6 +1,12 @@
 """
 Tests for T69-T72 (reviewer recommendations on cross-validation).
 """
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import REPO_ROOT, WSL_MNT_ROOT  # noqa: E402
 import json
 import sys
 from pathlib import Path
@@ -66,7 +72,7 @@ class TestT72Plot:
         assert hasattr(t72, "main")
 
     def test_t72_plot_generated(self):
-        plot_path = Path("/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/outputs/Cross_Validation_T54_vs_Drobczyk_2026-08-13.png")
+        plot_path = Path(WSL_MNT_ROOT + "/outputs/Cross_Validation_T54_vs_Drobczyk_2026-08-13.png")
         if not plot_path.exists():
             pytest.skip("Plot not yet generated")
         assert plot_path.stat().st_size > 1000, "Plot should be > 1 KB"

@@ -12,6 +12,12 @@ These tests exercise:
   6. Mass/sigma_v grid edge extrapolation does not crash
 """
 from __future__ import annotations
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import LEGACY_WSL_ROOT, REPO_ROOT  # noqa: E402
 import sys
 import os
 from pathlib import Path
@@ -26,7 +32,7 @@ from pathlib import Path
 import pytest
 
 _REPO_CANDIDATES = (Path(__file__).resolve().parents[2],
-                    Path("/home/lamkuenai/sidm-composite-dm-mediator"))
+                    Path(LEGACY_WSL_ROOT))
 REPO_ROOT = next((p for p in _REPO_CANDIDATES if (p / "v0.3-prelim" / "code").is_dir()),
                  _REPO_CANDIDATES[0])
 DATA_DIR = REPO_ROOT / "v0.3-prelim/data/external/fermi_mcdaniel2024"

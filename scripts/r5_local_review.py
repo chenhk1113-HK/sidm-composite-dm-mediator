@@ -29,6 +29,12 @@ TWO THINGS THAT MATTER FOR THIS SCRIPT
    answers in ~2 s.
 """
 from __future__ import annotations
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import LLAMACPP_SERVER_JSON, REPO, REPO_ROOT  # noqa: E402
 
 import importlib.util
 import json
@@ -37,7 +43,7 @@ import time
 import urllib.request
 from pathlib import Path
 
-PROJECT = Path(r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator")
+PROJECT = Path(REPO)
 
 # The port lives in local_model.py -- read it from there rather than repeating
 # the number, so the two can never drift apart again. It was 50113 until
@@ -75,7 +81,7 @@ DEEP_ENDPOINT = f"http://127.0.0.1:{DEEP_PORT}/v1/chat/completions"
 # self-releases the RAM when idle -- so the standby costs nothing while
 # Strata is healthy.
 _RUNTIME_STATE = Path(
-    r"C:\Users\lamkuenai\AppData\Local\hermes\runtimes\llamacpp\server.json")
+    str(LLAMACPP_SERVER_JSON))
 
 
 def managed_llamacpp() -> tuple[str, str] | None:

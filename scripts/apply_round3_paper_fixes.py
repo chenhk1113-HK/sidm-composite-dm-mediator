@@ -17,12 +17,17 @@ Defects fixed:
   F5  L82 "four mediators" contradicts L896-898 (v2-v4 are bookkeeping nodes,
       not physical resonances).
 """
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import REPO, REPO_ROOT  # noqa: E402
 import pathlib
 import re
 
 PAPER = pathlib.Path(
-    r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator"
-    r"\v0.3-prelim\docs\PAPER_V1_DRAFT.md"
+    str(REPO_ROOT / "v0.3-prelim/docs/PAPER_V1_DRAFT.md")
 )
 
 txt = PAPER.read_text(encoding="utf-8")

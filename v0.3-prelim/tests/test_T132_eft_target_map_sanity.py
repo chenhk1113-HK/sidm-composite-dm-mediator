@@ -77,6 +77,12 @@ The `TestSummary` docstring findings above are RETAINED VERBATIM as the
 historical record of the 2026-09-20 referee request. They describe the state of
 §10.5 at that date and are NOT claims about the current paper.
 """
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import REPO, REPO_ROOT  # noqa: E402
 import math
 import numpy as np
 import importlib.util
@@ -96,21 +102,21 @@ def load_module(name, path):
 # Load modules
 t120_4 = load_module(
     "t120_4_joint_fit",
-    r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\code\t120_4_joint_fit.py"
+    str(REPO_ROOT / "v0.3-prelim/code/t120_4_joint_fit.py")
 )
 channels_v03 = load_module(
     "channels_v03",
-    r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\code\channels_v03.py"
+    str(REPO_ROOT / "v0.3-prelim/code/channels_v03.py")
 )
 T131 = load_module(
     "T131_chu_pwave_verification",
-    r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\code\T131_chu_pwave_verification.py"
+    str(REPO_ROOT / "v0.3-prelim/code/T131_chu_pwave_verification.py")
 )
 
 # --- canonical sources the PAPER's 8-channel table is actually generated from ---
 # (see module docstring for the full audit; the T120.4 `joint_fit_full_evaluation`
 #  chain is the SUPERSEDED v1.13-era path and reproduces none of these cells.)
-REPO = r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator"
+REPO = REPO
 PHASE44_JSON = os.path.join(REPO, "v0.3-prelim", "data", "results", "sigma_m_phase44.json")
 PAPER_MD = os.path.join(REPO, "v0.3-prelim", "docs", "PAPER_V1_DRAFT.md")
 

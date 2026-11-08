@@ -31,13 +31,19 @@ THIS SCRIPT (T234):
 - Compares to T231 (Sigurdson+ 2004 Eq. 11) result 1.48×10⁻²⁹ cm²
 - Reports both results honestly: ~16 orders (T120.10) vs ~18 orders (T231)
 """
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import REPO, REPO_ROOT  # noqa: E402
 
 import math
 import json
 import os
 import sys
 
-sys.path.insert(0, r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\scripts")
+sys.path.insert(0, str(REPO_ROOT / "scripts"))
 from constants import (
     M_CHI_GEV, M_PHI_GEV, M_NUCLEON_GEV, C_KMS, HBAR_C_GEV_CM, HBAR_C_SQ_GEV2_CM2,
     LZ_BOUND_CM2
@@ -219,7 +225,7 @@ out = {
     'paper_action': 'Replace 1.15e-33 with 2.04e-30 in §10.2a; cite T234; drop the 12,834x mystery'
 }
 
-out_path = r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\data\results\t234_t120_10_original.json"
+out_path = str(REPO_ROOT / "v0.3-prelim/data/results/t234_t120_10_original.json")
 os.makedirs(os.path.dirname(out_path), exist_ok=True)
 with open(out_path, 'w') as f:
     json.dump(out, f, indent=2)

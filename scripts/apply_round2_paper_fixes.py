@@ -16,13 +16,18 @@ Defects fixed:
       factor was dropped) AND the direction claim is backwards.
   F5  L57  the printed v^2-space Breit-Wigner peaks at 1/v_t^2, not 1.
 """
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import REPO, REPO_ROOT  # noqa: E402
 import math
 import pathlib
 import re
 
 PAPER = pathlib.Path(
-    r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator"
-    r"\v0.3-prelim\docs\PAPER_V1_DRAFT.md"
+    str(REPO_ROOT / "v0.3-prelim/docs/PAPER_V1_DRAFT.md")
 )
 
 # ---------------------------------------------------------------- compute

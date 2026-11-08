@@ -27,6 +27,12 @@ against the post-fix paper (commit ae4b763) before this script was run.
 See the docstring of v1 for the derivation of each.
 """
 from __future__ import annotations
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import REPO, REPO_ROOT  # noqa: E402
 
 import json
 import re
@@ -34,7 +40,7 @@ import time
 import urllib.request
 from pathlib import Path
 
-PROJECT = Path(r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator")
+PROJECT = Path(REPO)
 NUM_EXCERPT = PROJECT / "docs" / "R5_EXCERPT.md"
 STR_EXCERPT = PROJECT / "docs" / "R5_STRUCTURAL_EXCERPT.md"
 

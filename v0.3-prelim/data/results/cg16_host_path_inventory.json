@@ -1,0 +1,2221 @@
+{
+  "decision": {
+    "live_scope": [
+      "scripts/",
+      "tests/",
+      "v0.3-prelim/tests/",
+      "config.py"
+    ],
+    "live_rule": "no host absolute path in code; scripts/paths.py is the single source",
+    "frozen_scope": [
+      "v0.3-prelim/code/**",
+      "v0.3-prelim/data/**",
+      "docs/**",
+      "*.md"
+    ],
+    "frozen_rule": "inventoried, deliberately not rewritten (artefacts already exist; re-pointing reads risks silent re-computation)"
+  },
+  "pinned": {
+    "scripts/paths.py": "the single source",
+    "v0.3-prelim/code/kiss_sidm_julia_bridge.py": "WSL-side tool defaults must stay WSL-spelled",
+    "v0.3-prelim/tests/test_config_split_brain.py": "asserts the historical split-brain defect",
+    "v0.3-prelim/tests/test_no_hardcoded_host_paths_cg16.py": "the guard must spell the spellings it forbids"
+  },
+  "categories": {
+    "live_clean": [
+      "config.py",
+      "scripts/apply_n18_review_fixes.py",
+      "scripts/apply_round2_paper_fixes.py",
+      "scripts/apply_round2_paper_fixes_part2.py",
+      "scripts/apply_round3_paper_fixes.py",
+      "scripts/apply_round3_paper_fixes_v2.py",
+      "scripts/apply_round5_paper_fixes.py",
+      "scripts/audit_citation_provenance.py",
+      "scripts/audit_claims.py",
+      "scripts/audit_doc_anchors.py",
+      "scripts/audit_glyph_coverage.py",
+      "scripts/audit_glyph_coverage_mutation_proof.py",
+      "scripts/audit_hierarchy_chain.py",
+      "scripts/audit_markdown_tables.py",
+      "scripts/audit_model_provenance.py",
+      "scripts/audit_pdf_render.py",
+      "scripts/audit_register_state.py",
+      "scripts/audit_register_state_mutation_proof.py",
+      "scripts/audit_section_refs.py",
+      "scripts/audit_stale_strings.py",
+      "scripts/audit_units.py",
+      "scripts/bench_local_models.py",
+      "scripts/bench_local_models_v2.py",
+      "scripts/bench_strata_ab.py",
+      "scripts/build_continuous_E_predictive.py",
+      "scripts/build_figures.py",
+      "scripts/build_population_sigma_eff_map.py",
+      "scripts/build_sigma_eff_environment_axis.py",
+      "scripts/build_species_dependent_sigma.py",
+      "scripts/burkert_style_c_tau_prescription.py",
+      "scripts/canonical_numbers.py",
+      "scripts/check_breakthrough_label.py",
+      "scripts/check_fabrication.py",
+      "scripts/compare_reviews.py",
+      "scripts/constants.py",
+      "scripts/doc_version.py",
+      "scripts/drift_guard.py",
+      "scripts/dual_review.py",
+      "scripts/elbert2015_c_tau_prescription.py",
+      "scripts/epsilon_lz_check.py",
+      "scripts/fH_pairing_registry.py",
+      "scripts/fix_47_71.py",
+      "scripts/fix_markup.py",
+      "scripts/generate_a15.py",
+      "scripts/generate_test_mapping.py",
+      "scripts/layer2_f_H_from_concerto.py",
+      "scripts/load_standing_numbers.py",
+      "scripts/local_model.py",
+      "scripts/lz_kiv_check.py",
+      "scripts/make_kb_summaries.py",
+      "scripts/multi_UFD_heldout_test.py",
+      "scripts/ohana2026_cloud9_joint_likelihood.py",
+      "scripts/pdf_rencode_maps.py",
+      "scripts/plot_sigma_m_v.py",
+      "scripts/pre-tag-hook.sh",
+      "scripts/r5_local_review.py",
+      "scripts/recheck_cloud9_highsigma_20261103.py",
+      "scripts/resolve_references.py",
+      "scripts/review_prompt_loop1_vmax_stale.json",
+      "scripts/review_prompt_loop1_vmax_stale.txt",
+      "scripts/review_prompt_loop2_tcore_two_values.json",
+      "scripts/review_prompt_loop2_tcore_two_values.txt",
+      "scripts/review_prompt_loop3_yang_prefactor.json",
+      "scripts/review_prompt_loop3_yang_prefactor.txt",
+      "scripts/review_prompt_loop4_nfw_selfconsistency.json",
+      "scripts/review_prompt_loop4_nfw_selfconsistency.txt",
+      "scripts/review_prompt_loop5_sigma_window_channels.json",
+      "scripts/review_prompt_loop5_sigma_window_channels.txt",
+      "scripts/review_prompt_r5_excerpt.md",
+      "scripts/review_prompt_round5_final.md",
+      "scripts/review_prompt_round5_short.md",
+      "scripts/review_prompt_v19_2_f_cloud9_cM_tension.txt",
+      "scripts/review_prompt_v40_41_fH_sensitivity.txt",
+      "scripts/run_python_with_tests.py",
+      "scripts/run_round12_self_check.py",
+      "scripts/run_round13_self_check.py",
+      "scripts/run_self_check.sh",
+      "scripts/sameie2020_c_tau_prescription.py",
+      "scripts/silverman2026_cloud9_gravothermal.py",
+      "scripts/smoke_test_continuous_E.py",
+      "scripts/t207_sparc_verification.py",
+      "scripts/t220_bound_state_sidm.py",
+      "scripts/t221_drobczyk_combined_sidm.py",
+      "scripts/t222_r50_retraction.py",
+      "scripts/t223_dark_photon_sidm.py",
+      "scripts/t224_sigma_peak_dd_tension.py",
+      "scripts/t225_corrected_dd.py",
+      "scripts/t226_proper_dd.py",
+      "scripts/t227_hierarchy_constraint.py",
+      "scripts/t228_nogo_recheck.py",
+      "scripts/t229_hierarchy_sensitivity.py",
+      "scripts/t230_magnetic_dipole_proper.py",
+      "scripts/t231_magnetic_dipole_citation.py",
+      "scripts/t232_dd_dimension_retrofit.py",
+      "scripts/t233_consistent_dd.py",
+      "scripts/t234_t120_10_original.py",
+      "scripts/t235_d5_width_test.py",
+      "scripts/t236_d5_fit.py",
+      "scripts/t237_pdf_build.py",
+      "scripts/t238_figure_sigma_m_horigome.py",
+      "scripts/t239_figure_hierarchy.py",
+      "scripts/t73_build_telegram_bundle.py",
+      "scripts/t73_smoke.py",
+      "scripts/t74_smoke.py",
+      "scripts/t75_build_ablation.py",
+      "scripts/t75_build_telegram_bundle.py",
+      "scripts/t76_build_telegram_bundle.py",
+      "scripts/t76_plot_v0_7.py",
+      "scripts/t76_run_nlive2000.py",
+      "scripts/t77_build_telegram_bundle.py",
+      "scripts/t78_build_telegram_bundle.py",
+      "scripts/t79_build_telegram_bundle.py",
+      "scripts/t79_composite_form_factor.py",
+      "scripts/t80_build_telegram_bundle.py",
+      "scripts/t81_build_telegram_bundle.py",
+      "scripts/t81_doc_sync_build_telegram_bundle.py",
+      "scripts/t82_audit.py",
+      "scripts/t88ce_postprocess.py",
+      "scripts/table_cells.py",
+      "scripts/test_run_python_with_tests_v19_2_f.py",
+      "scripts/tng_vmax_envelope.py",
+      "scripts/triage_pdf_advisory_flags.py",
+      "scripts/v04_prelim_milestone_build_telegram_bundle.py",
+      "scripts/v192_a_phase44_sigma_peak_sensitivity.py",
+      "scripts/v192_b_ohana3p2sigma_reproduction.py",
+      "scripts/v192_c_concerto_subhalo_cloud9.py",
+      "scripts/v192_dsph_gravothermal_sweep.py",
+      "scripts/v19_2_f_background_refit.py",
+      "scripts/v19_2_f_cloud9_cM_elbert.py",
+      "scripts/v19_2_f_cloud9_cM_marginalized.py",
+      "scripts/v19_2_f_cloud9_cM_tension.py",
+      "scripts/v19_2_f_cloud9_cM_three_prescriptions.py",
+      "scripts/v19_2_f_cloud9_merger_history.py",
+      "scripts/v19_2_f_cloud9_velocity_form_sensitivity.py",
+      "scripts/v19_2_f_fH_sensitivity.py",
+      "scripts/v19_2_f_fornax_no_peak.py",
+      "scripts/v19_2_f_multiscale_refit.py",
+      "scripts/v19_2_f_n10_docx_response.py",
+      "scripts/v19_2_f_n11_docx_response.py",
+      "scripts/v19_2_f_n12_docx_response.py",
+      "scripts/v19_2_f_n7_docx_response.py",
+      "scripts/v19_2_f_n8_docx_response.py",
+      "scripts/v19_2_f_n9_docx_response.py",
+      "scripts/v19_2_f_no_peak_analysis.py",
+      "scripts/v19_2_f_paper_section_2_1_update.py",
+      "scripts/verify_carveout.py",
+      "scripts/verify_gate_crash_mutation_proof.py",
+      "scripts/verify_numbers_in_paper.py",
+      "scripts/verify_release_gate.py",
+      "scripts/walk_paper_tables.py",
+      "tests/test_batch_utils.py",
+      "tests/test_ch04_width_regression.py",
+      "tests/test_config_centralization.py",
+      "tests/test_config_snapshot_consistency.py",
+      "tests/test_cosmic_web_radio.py",
+      "tests/test_dark_matter_free_udg.py",
+      "tests/test_dm_dominated_udg_channel.py",
+      "tests/test_gravothermal_lookback_fix.py",
+      "tests/test_halo_and_likelihoods.py",
+      "tests/test_ksfr_pcac_validity.py",
+      "tests/test_long_term_5_and_3.py",
+      "tests/test_mediator_lifetime.py",
+      "tests/test_ngc1052_trail_channel.py",
+      "tests/test_phase2_hierarchical.py",
+      "tests/test_phase3_baryonic.py",
+      "tests/test_phase4_6d_joint_fit.py",
+      "tests/test_phase5_mediator_class.py",
+      "tests/test_phase5b_rewrite.py",
+      "tests/test_phase6_gravothermal.py",
+      "tests/test_phase6b_gravothermal_integration.py",
+      "tests/test_reference_chains.py",
+      "tests/test_sashimi_parametric.py",
+      "tests/test_sashimi_per_galaxy.py",
+      "tests/test_sidm_mass_lower.py",
+      "tests/test_version_guard.py",
+      "v0.3-prelim/tests/conftest.py",
+      "v0.3-prelim/tests/test_T130_inelastic_kinematic_scan.py",
+      "v0.3-prelim/tests/test_T131_chu_pwave_verification.py",
+      "v0.3-prelim/tests/test_T132_eft_target_map_sanity.py",
+      "v0.3-prelim/tests/test_T133_hidden_u1_slope_audit.py",
+      "v0.3-prelim/tests/test_autocheck_hypothesis.py",
+      "v0.3-prelim/tests/test_autocheck_sympy.py",
+      "v0.3-prelim/tests/test_bm2_collapse_time_rederivation.py",
+      "v0.3-prelim/tests/test_channel_19_competitor_dd.py",
+      "v0.3-prelim/tests/test_channel_bound_attribution.py",
+      "v0.3-prelim/tests/test_channel_taxonomy_single_source.py",
+      "v0.3-prelim/tests/test_cmb_distortion.py",
+      "v0.3-prelim/tests/test_constants_single_source.py",
+      "v0.3-prelim/tests/test_d15_corrected3_review5.py",
+      "v0.3-prelim/tests/test_dampe_cre_forward_model.py",
+      "v0.3-prelim/tests/test_dampe_cre_spectrum.py",
+      "v0.3-prelim/tests/test_delta_n_eff_goldstein_hill_2026.py",
+      "v0.3-prelim/tests/test_dsph_sigma_m_table_matches_canonical.py",
+      "v0.3-prelim/tests/test_dsph_upper_limit_p0d.py",
+      "v0.3-prelim/tests/test_erosita_erass1_forward_model.py",
+      "v0.3-prelim/tests/test_euclid_q1_lensing_forward_model.py",
+      "v0.3-prelim/tests/test_euclid_q1_subhalo_forecast_forward_model.py",
+      "v0.3-prelim/tests/test_euclid_q1_subhalo_real_data.py",
+      "v0.3-prelim/tests/test_fH_pairing_integrity.py",
+      "v0.3-prelim/tests/test_fH_pairing_registry.py",
+      "v0.3-prelim/tests/test_gate_ignore_list_markers.py",
+      "v0.3-prelim/tests/test_gate_summary_contract.py",
+      "v0.3-prelim/tests/test_gravothermal_rho_sidm_source_form.py",
+      "v0.3-prelim/tests/test_gravothermal_tau_fit_range.py",
+      "v0.3-prelim/tests/test_hierarchy_chain_pairing.py",
+      "v0.3-prelim/tests/test_independent_and_robustness.py",
+      "v0.3-prelim/tests/test_inelastic_wrapper_regression.py",
+      "v0.3-prelim/tests/test_integrity_finding_ids_unique.py",
+      "v0.3-prelim/tests/test_kiss_sidm_dsmc.py",
+      "v0.3-prelim/tests/test_kiss_sidm_julia_bridge.py",
+      "v0.3-prelim/tests/test_kiss_sidm_scalings.py",
+      "v0.3-prelim/tests/test_known_physics_limits.py",
+      "v0.3-prelim/tests/test_lz_magnetic_moment.py",
+      "v0.3-prelim/tests/test_model_provenance_date_guard.py",
+      "v0.3-prelim/tests/test_module_parse_and_pairing_names_bound.py",
+      "v0.3-prelim/tests/test_n18_generator_docstring_consistency.py",
+      "v0.3-prelim/tests/test_n18_sigma_hl_column_matches_json.py",
+      "v0.3-prelim/tests/test_n27_gate_hardening.py",
+      "v0.3-prelim/tests/test_nc_nf_scan.py",
+      "v0.3-prelim/tests/test_ohana2026_baseline.py",
+      "v0.3-prelim/tests/test_other_dm_conditions_probe.py",
+      "v0.3-prelim/tests/test_pairing_label_coverage.py",
+      "v0.3-prelim/tests/test_pandax_magnetic_moment_real.py",
+      "v0.3-prelim/tests/test_paper_claims.py",
+      "v0.3-prelim/tests/test_paper_v19_regression.py",
+      "v0.3-prelim/tests/test_pdf_render_relax.py",
+      "v0.3-prelim/tests/test_phase11_majorana_freeze_out.py",
+      "v0.3-prelim/tests/test_phase12_sigma_m_drop_mystery.py",
+      "v0.3-prelim/tests/test_phase13_mediator_mass_survey.py",
+      "v0.3-prelim/tests/test_phase14_mphi_comparison.py",
+      "v0.3-prelim/tests/test_phase15_16_17_probes.py",
+      "v0.3-prelim/tests/test_phase18_mchi_comparison.py",
+      "v0.3-prelim/tests/test_phase19_full_fit_mchi_5GeV.py",
+      "v0.3-prelim/tests/test_phase20_full_space_conditions.py",
+      "v0.3-prelim/tests/test_phase21_t90_45_multi_portal.py",
+      "v0.3-prelim/tests/test_phase22_reviewer_driven_refit.py",
+      "v0.3-prelim/tests/test_phase23_cloud9_nuisance.py",
+      "v0.3-prelim/tests/test_phase24_25_sparc_euclid.py",
+      "v0.3-prelim/tests/test_phase27_three_portal.py",
+      "v0.3-prelim/tests/test_phase28_resonant.py",
+      "v0.3-prelim/tests/test_phase29_full_resonant.py",
+      "v0.3-prelim/tests/test_phase29b_full_scorecard.py",
+      "v0.3-prelim/tests/test_phase30_critical_review.py",
+      "v0.3-prelim/tests/test_phase31a_three_tests.py",
+      "v0.3-prelim/tests/test_phase31bc_remaining_tests.py",
+      "v0.3-prelim/tests/test_phase32a_multi_resonant.py",
+      "v0.3-prelim/tests/test_phase32b_joint_fit.py",
+      "v0.3-prelim/tests/test_phase32c_all_tests.py",
+      "v0.3-prelim/tests/test_phase33a_bayes_factor.py",
+      "v0.3-prelim/tests/test_phase33bc_external_probes.py",
+      "v0.3-prelim/tests/test_phase33d_real_sparc.py",
+      "v0.3-prelim/tests/test_phase34a_jvas_lensing.py",
+      "v0.3-prelim/tests/test_phase36_concentration_collapse.py",
+      "v0.3-prelim/tests/test_phase38_sidmkit_crosscheck.py",
+      "v0.3-prelim/tests/test_phase39_nfw_vs_sidm.py",
+      "v0.3-prelim/tests/test_phase39b_responsive_profile.py",
+      "v0.3-prelim/tests/test_phase40_corrected_comparison.py",
+      "v0.3-prelim/tests/test_phase41_extended_comparison.py",
+      "v0.3-prelim/tests/test_phase41d_parametric_sidm.py",
+      "v0.3-prelim/tests/test_phase42_summary.py",
+      "v0.3-prelim/tests/test_phase46_three_items.py",
+      "v0.3-prelim/tests/test_phase47_50.py",
+      "v0.3-prelim/tests/test_phase51_smoke.py",
+      "v0.3-prelim/tests/test_phase52_smoke.py",
+      "v0.3-prelim/tests/test_phase53_v2_smoke.py",
+      "v0.3-prelim/tests/test_phase7a_composite_mediator.py",
+      "v0.3-prelim/tests/test_phase7b_magnetic_moment.py",
+      "v0.3-prelim/tests/test_phase7c_di_mauro.py",
+      "v0.3-prelim/tests/test_phase7d_t95_stream.py",
+      "v0.3-prelim/tests/test_phase7e_unit_conversion_audit.py",
+      "v0.3-prelim/tests/test_phase8a_exothermic.py",
+      "v0.3-prelim/tests/test_phase8b_majorana.py",
+      "v0.3-prelim/tests/test_phase8c_majorana_joint_fit.py",
+      "v0.3-prelim/tests/test_phase9b_mass_segregation.py",
+      "v0.3-prelim/tests/test_phase_g2_measured_statistics.py",
+      "v0.3-prelim/tests/test_physical_constraints.py",
+      "v0.3-prelim/tests/test_physical_invariants.py",
+      "v0.3-prelim/tests/test_r88_gravothermal_prefactor.py",
+      "v0.3-prelim/tests/test_registry_drift_coverage.py",
+      "v0.3-prelim/tests/test_removed_api_guard.py",
+      "v0.3-prelim/tests/test_sidm_core_radius_invariance.py",
+      "v0.3-prelim/tests/test_sigma_responsiveness_probe.py",
+      "v0.3-prelim/tests/test_solar_8b_cevns_real_data.py",
+      "v0.3-prelim/tests/test_sparc_hierarchical.py",
+      "v0.3-prelim/tests/test_sweep_json_not_stale.py",
+      "v0.3-prelim/tests/test_t101_t102_portal_b.py",
+      "v0.3-prelim/tests/test_t103_joint_4d_fit.py",
+      "v0.3-prelim/tests/test_t105_uv_consistency.py",
+      "v0.3-prelim/tests/test_t106_multi_experiment_joint.py",
+      "v0.3-prelim/tests/test_t107_full_8d_joint.py",
+      "v0.3-prelim/tests/test_t108_full_8d_dynesty.py",
+      "v0.3-prelim/tests/test_t110_full_7d_dynesty.py",
+      "v0.3-prelim/tests/test_t111_multicomponent_dm.py",
+      "v0.3-prelim/tests/test_t112_t113_t114.py",
+      "v0.3-prelim/tests/test_t115_sequential_confirmation.py",
+      "v0.3-prelim/tests/test_t116_sequential_t90_value.py",
+      "v0.3-prelim/tests/test_t120_10_direct_detection.py",
+      "v0.3-prelim/tests/test_t120_11_hidden_u1.py",
+      "v0.3-prelim/tests/test_t120_13_integration.py",
+      "v0.3-prelim/tests/test_t120_15_uv_slope.py",
+      "v0.3-prelim/tests/test_t120_16_kinematic_threshold.py",
+      "v0.3-prelim/tests/test_t120_4_joint_fit.py",
+      "v0.3-prelim/tests/test_t120_9_mcmc_and_uv.py",
+      "v0.3-prelim/tests/test_t120_cloud9_bound_provenance.py",
+      "v0.3-prelim/tests/test_t120_constraint_scoreboard.py",
+      "v0.3-prelim/tests/test_t120_two_component_phase44.py",
+      "v0.3-prelim/tests/test_t17_kiss_sidm_corrected_fit.py",
+      "v0.3-prelim/tests/test_t191_t194_uv_completion.py",
+      "v0.3-prelim/tests/test_t21_real_kiss_sidm.py",
+      "v0.3-prelim/tests/test_t22_t23_real_kiss_sidm.py",
+      "v0.3-prelim/tests/test_t24_t25_systematics.py",
+      "v0.3-prelim/tests/test_t26_t27_t28_systematics.py",
+      "v0.3-prelim/tests/test_t29_beta_seg.py",
+      "v0.3-prelim/tests/test_t30_lz_real.py",
+      "v0.3-prelim/tests/test_t31_halo_mass.py",
+      "v0.3-prelim/tests/test_t32_fermi.py",
+      "v0.3-prelim/tests/test_t32_real_likelihood.py",
+      "v0.3-prelim/tests/test_t36_sashimi_config_matrix.py",
+      "v0.3-prelim/tests/test_t37_beta_seg_robustness.py",
+      "v0.3-prelim/tests/test_t38_dwarf_kiss_sidm.py",
+      "v0.3-prelim/tests/test_t39_prior_robustness.py",
+      "v0.3-prelim/tests/test_t39_tier3_epsilon_alpha.py",
+      "v0.3-prelim/tests/test_t40_t41_t42.py",
+      "v0.3-prelim/tests/test_t43_t44_t45.py",
+      "v0.3-prelim/tests/test_t46_sommerfeld.py",
+      "v0.3-prelim/tests/test_t47_t48_t49.py",
+      "v0.3-prelim/tests/test_t50_t51_t52.py",
+      "v0.3-prelim/tests/test_t53_t54_t55.py",
+      "v0.3-prelim/tests/test_t53b_lattice_input.py",
+      "v0.3-prelim/tests/test_t56_t57_t58_t59.py",
+      "v0.3-prelim/tests/test_t57_dwarf_dsmc.py",
+      "v0.3-prelim/tests/test_t60_t61_t62_t63.py",
+      "v0.3-prelim/tests/test_t64_t65_t66_t67.py",
+      "v0.3-prelim/tests/test_t68_cross_validation.py",
+      "v0.3-prelim/tests/test_t69_feedback_nuisance.py",
+      "v0.3-prelim/tests/test_t69_t70_t71_t72.py",
+      "v0.3-prelim/tests/test_t73_t74_t75_t76.py",
+      "v0.3-prelim/tests/test_t82_audit_readme_drift.py",
+      "v0.3-prelim/tests/test_t82_audit_version_drift.py",
+      "v0.3-prelim/tests/test_t83_ksfr_lattice_promotion.py",
+      "v0.3-prelim/tests/test_t84_rho_sensitivity.py",
+      "v0.3-prelim/tests/test_t87_inelastic_nucleon.py",
+      "v0.3-prelim/tests/test_t90_v10_cross_detector.py",
+      "v0.3-prelim/tests/test_t90_v11_v12_v13.py",
+      "v0.3-prelim/tests/test_t90_v14_calibrated.py",
+      "v0.3-prelim/tests/test_t90_v15_indirect_signals.py",
+      "v0.3-prelim/tests/test_t90_v16_uv_completion.py",
+      "v0.3-prelim/tests/test_t90_v17_lz_time_series.py",
+      "v0.3-prelim/tests/test_t90_v18_composite_dm_lattice.py",
+      "v0.3-prelim/tests/test_t90_v21_lz_mixture.py",
+      "v0.3-prelim/tests/test_t90_v22_master_recalibration.py",
+      "v0.3-prelim/tests/test_t90_v23_dry_run.py",
+      "v0.3-prelim/tests/test_t90_v24_pandax_fold.py",
+      "v0.3-prelim/tests/test_t90_v25_pandax_efficiency_background_fold.py",
+      "v0.3-prelim/tests/test_t90_v25_pandax_public_response.py",
+      "v0.3-prelim/tests/test_t90_v26_pandax_event_scorecard.py",
+      "v0.3-prelim/tests/test_t90_v27_relhic.py",
+      "v0.3-prelim/tests/test_t90_v28_relhic.py",
+      "v0.3-prelim/tests/test_t90_v29_relhic_yukawa.py",
+      "v0.3-prelim/tests/test_t90_v32_relhic_population.py",
+      "v0.3-prelim/tests/test_t90_v35_v36_v37.py",
+      "v0.3-prelim/tests/test_t90_v38_vdep_correction.py",
+      "v0.3-prelim/tests/test_t90_v41_vdep_channels.py",
+      "v0.3-prelim/tests/test_t90_v42_loo_profiling.py",
+      "v0.3-prelim/tests/test_t90_v44_multi_portal.py",
+      "v0.3-prelim/tests/test_t90_v45_multi_portal_joint_fit.py",
+      "v0.3-prelim/tests/test_t90_v46_multi_component_sidm.py",
+      "v0.3-prelim/tests/test_t90_v47_gravothermal_fluid.py",
+      "v0.3-prelim/tests/test_t90_v48_parameter_scan.py",
+      "v0.3-prelim/tests/test_t90_v49_inelastic_sidm.py",
+      "v0.3-prelim/tests/test_t90_v50_resonant_sidm.py",
+      "v0.3-prelim/tests/test_t90_v51_resonant_joint_fit.py",
+      "v0.3-prelim/tests/test_t90_v52_likecompare.py",
+      "v0.3-prelim/tests/test_t90_v54_hybrid_sigma_m.py",
+      "v0.3-prelim/tests/test_t90_v55_hybrid_joint_fit.py",
+      "v0.3-prelim/tests/test_t90_v56_hybrid_lz.py",
+      "v0.3-prelim/tests/test_t90_v57_hybrid_ksfr.py",
+      "v0.3-prelim/tests/test_t90_v58_ablation.py",
+      "v0.3-prelim/tests/test_t90_v60_naturalness.py",
+      "v0.3-prelim/tests/test_t90_v61_kahlhoefer_audit.py",
+      "v0.3-prelim/tests/test_t90_v63_lrd_channel.py",
+      "v0.3-prelim/tests/test_t95_two_component_sidm_yang2026.py",
+      "v0.3-prelim/tests/test_t95_v11_gaia_cross_match.py",
+      "v0.3-prelim/tests/test_t95_v12_gmm_cross_match.py",
+      "v0.3-prelim/tests/test_t95_v14_chemodynamic.py",
+      "v0.3-prelim/tests/test_t95_v23_two_component_sidm_gravothermal.py",
+      "v0.3-prelim/tests/test_t95_v24_multi_stream_analysis.py",
+      "v0.3-prelim/tests/test_t95_v25_multi_stream_real_galstreams.py",
+      "v0.3-prelim/tests/test_t95_v26_pilot_113_streams.py",
+      "v0.3-prelim/tests/test_t98_di_mauro_cross_check.py",
+      "v0.3-prelim/tests/test_tng_framework_role_posture.py",
+      "v0.3-prelim/tests/test_tucana_ii_sigma_v.py",
+      "v0.3-prelim/tests/test_two_component_sidm.py",
+      "v0.3-prelim/tests/test_unit_conversion.py",
+      "v0.3-prelim/tests/test_v19_2_f_cloud9_cM_negative.py",
+      "v0.3-prelim/tests/test_v40_41_fH_sensitivity.py",
+      "v0.3-prelim/tests/test_v40_42_elbert_c_tau.py",
+      "v0.3-prelim/tests/test_v40_43_marginalization.py",
+      "v0.3-prelim/tests/test_v40_43a_three_prescriptions.py",
+      "v0.3-prelim/tests/test_v40_44_merger_history.py",
+      "v0.3-prelim/tests/test_v40_45_velocity_form.py",
+      "v0.3-prelim/tests/test_v40_46_no_peak.py",
+      "v0.3-prelim/tests/test_v40_47_fornax_no_peak.py",
+      "v0.3-prelim/tests/test_v40_48_background_refit.py",
+      "v0.3-prelim/tests/test_v40_49_multiscale_refit.py",
+      "v0.3-prelim/tests/test_v40_50_paper_section_2_1_update.py",
+      "v0.3-prelim/tests/test_v40_51_paper_section_2_1_ranges.py",
+      "v0.3-prelim/tests/test_v40_52_n7_docx_response.py",
+      "v0.3-prelim/tests/test_v40_53_n8_docx_response.py",
+      "v0.3-prelim/tests/test_v40_54_n9_docx_response.py",
+      "v0.3-prelim/tests/test_v40_55_n10_docx_response.py",
+      "v0.3-prelim/tests/test_v40_56_n11_docx_response.py",
+      "v0.3-prelim/tests/test_v40_57_n12_docx_response.py",
+      "v0.3-prelim/tests/test_v40_58_n13_docx_response.py",
+      "v0.3-prelim/tests/test_v40_61_n14_docx_response.py",
+      "v0.3-prelim/tests/test_v40_62_n15_docx_response.py",
+      "v0.3-prelim/tests/test_v40_63_n16_docx_response.py",
+      "v0.3-prelim/tests/test_version_tokens_have_tags.py",
+      "v0.3-prelim/tests/test_xrism_perseus_icm_forward_model.py",
+      "v0.3-prelim/tests/test_xrism_phi_decay_forward_model.py",
+      "v0.3-prelim/tests/test_yang2026_likelihood.py",
+      "v0.3-prelim/tests/test_zhang_lss_channel.py"
+    ],
+    "live_prose_only": [
+      {
+        "path": "scripts/build_round5_report_pdfs.py",
+        "host_path_lines": 2,
+        "code_lines_with_host_path": 0
+      },
+      {
+        "path": "scripts/run_5loop_opencode.sh",
+        "host_path_lines": 1,
+        "code_lines_with_host_path": 0
+      },
+      {
+        "path": "scripts/sidm_test_mcp_server.py",
+        "host_path_lines": 1,
+        "code_lines_with_host_path": 0
+      },
+      {
+        "path": "v0.3-prelim/tests/test_t55_wimp_relic_calibration.py",
+        "host_path_lines": 2,
+        "code_lines_with_host_path": 0
+      }
+    ],
+    "pinned_source": [],
+    "pinned_exception": [
+      {
+        "path": "v0.3-prelim/code/kiss_sidm_julia_bridge.py",
+        "host_path_lines": 3
+      },
+      {
+        "path": "v0.3-prelim/tests/test_config_split_brain.py",
+        "host_path_lines": 8
+      }
+    ],
+    "historical_frozen_code": [
+      {
+        "path": "build_codebase_pdf.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "build_single_pdf.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "enumerate_unknowns.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "priority5_nan_distribution.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "test_born.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "test_calogero.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "test_hulthen.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "test_misc.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.1-prelim/code/_inspect_errV.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.1-prelim/code/_profile_timing.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.1-prelim/code/_sparc_stats.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.1-prelim/code/aggregate_sparc.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.1-prelim/code/fit_single_galaxy.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.1-prelim/code/fit_t4_3param.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.1-prelim/code/fit_t6_NFW_core.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.1-prelim/code/halo_profiles.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.1-prelim/code/t5_full_mock_validation.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.2-prelim/code/plot_t7_posterior.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.2-prelim/code/t7_joint_fit.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.2-prelim/code/t7b_vindep_fit.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/T138_born_resonance_fit.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/T143_sidmkit_search.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/T144_fast.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/T144_parameter_search.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/T145_full_search.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/T146_data_structure.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/T149_smart_search.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/T150_kk_tower.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/T151_optimize_kk.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/T152_smart_kk.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/T153_asymmetric_dm.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/T154_cached_search.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/T155_time_bounded.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/T156_fast.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/T156_threshold_search.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/T157_multi_threshold.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/T158_assessment.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/T159_heavy_dm.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/T160_fast_search.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/T160_fixed.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/T161_kk_around_best.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/T162_fixed_search.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/T163_fixed_kk.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/T164_fixed_heavy_dm.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/T165_cloud9_robustness.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/T166_loo.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/T167_bootstrap.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/T168_lower_bound.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/T169_published_range.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/T170_resonant_sidm.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/T171_resonant_search.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/T172_physics_guided.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/T173_fH_sensitivity.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/T175_nogo_retest_t163.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/T177_bayes_factor.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/T178_dic_cv.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/T179_partial_wave.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/T180_jvas_gravothermal.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/T181_relic_density.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/T182_single_resonance.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/T183_2c_fluid.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/T184_dark_higgs_uv.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/T185_two_mediator.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/T186_sommerfeld.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/T187_direct_detection.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/T188_indirect_detection.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/T189_beam_dump.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/T190_charm_compliant.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/T191_delta_0_vs_v.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/T192_thermal_avg.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/T193_thermal_visualization.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/T202_two_component_sidm_nbody.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/T205_full_likelihood_published.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/T206_f_H_fit.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/T207_FWHM_sensitivity.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/T207_priored_free_de.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/T207_save_summary.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/T207_three_term_fit.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/T207b_emcee.py",
+        "host_path_lines": 3
+      },
+      {
+        "path": "v0.3-prelim/code/T207b_long_emcee.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/T207c_extended_free_emcee.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/T207c_priored_free_emcee.py",
+        "host_path_lines": 3
+      },
+      {
+        "path": "v0.3-prelim/code/T207c_smart_de.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/T207d_strict_50tau_emcee.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/aggregate_nl2000_scan.py",
+        "host_path_lines": 3
+      },
+      {
+        "path": "v0.3-prelim/code/amuse_bullet_dwarf.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/amuse_focused_rerun.py",
+        "host_path_lines": 4
+      },
+      {
+        "path": "v0.3-prelim/code/amuse_rerun_with_sashimi.py",
+        "host_path_lines": 5
+      },
+      {
+        "path": "v0.3-prelim/code/amuse_simulation_benchmark.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/ch27_peak_sensitivity.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/ch27_three_way.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/channels_v03.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/config.py",
+        "host_path_lines": 4
+      },
+      {
+        "path": "v0.3-prelim/code/d13_final_state_capture.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/d13_partial_state_capture.py",
+        "host_path_lines": 3
+      },
+      {
+        "path": "v0.3-prelim/code/d14_parallel_sessions_state.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/d15_hayashi_2025_published_c_vir.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/kiss_sidm_julia_reader.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/phase38_sidmkit_crosscheck.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/phase38b_sidmkit_sparc.py",
+        "host_path_lines": 3
+      },
+      {
+        "path": "v0.3-prelim/code/phase39_nfw_vs_sidm.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/phase39b_sidm_responsive_profile.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/phase40_corrected_comparison.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/phase41_extended_comparison.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/phase41d_parametric_sidm.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/phase43_vdgravothermal.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/phase44_joint_fit.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/phase44_joint_fit_v2_real_likelihood.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/phase44_v2_a2_5param_de.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/phase45_theoretical_uv.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/phase47_stress_test.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/phase48_hidden_valley.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/phase51_portal_resonance.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/phase52_multi_mediator.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/phase53_v2_clockwork_uv_prior_fixed.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/phase54_joint_comparison.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/phase7b_magnetic_moment_v03_map.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/phase_g2_merger_history.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/phase_g4_pipeline.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/phase_g5_ufd_diversity.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/plot_posteriors.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/plot_t8_v03.py",
+        "host_path_lines": 3
+      },
+      {
+        "path": "v0.3-prelim/code/precompute_sparc_hierarchical.py",
+        "host_path_lines": 3
+      },
+      {
+        "path": "v0.3-prelim/code/review5_audit.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/run_nc_nf_scan.py",
+        "host_path_lines": 11
+      },
+      {
+        "path": "v0.3-prelim/code/summarize_results.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t10_vdep_per_galaxy.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t11_vdep_aggregate.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t12_6channel_with_lens.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t13_8channel_2025_2026.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t13_v2_12channel_2025_2026.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t13_v2_trail_ablation.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t13_v2_udg_ablation.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t14_sashimi_per_galaxy.py",
+        "host_path_lines": 4
+      },
+      {
+        "path": "v0.3-prelim/code/t15_sashimi_vs_hayashi_2025.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t210_quick_sigma_eff_decompose.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t212_silverman_gravothermal.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t213_kk_tower_silverman_combined.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t215_nfw_ic_generator.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t22_real_kiss_sidm_two_comp.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t23_real_kiss_sidm_two_comp_imfp.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t24_likelihood_width_sensitivity.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t25_cvir_marginalization.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t26_t21_width_sensitivity.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t27_multiresolution_kiss_sidm.py",
+        "host_path_lines": 3
+      },
+      {
+        "path": "v0.3-prelim/code/t28_published_style_dsph.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t29_beta_seg_fitted.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t30_lz_real_posterior.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t31_halo_mass_marginalization.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t32_fermi_dwarf_channel.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t32_real_likelihood.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t36_sashimi_config_matrix.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t36b_5config_c_vir_sweep.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t37_t22_with_fitted_beta_seg.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t38_dwarf_kiss_sidm_higher_N.py",
+        "host_path_lines": 4
+      },
+      {
+        "path": "v0.3-prelim/code/t38_partial_wallclock_finding.py",
+        "host_path_lines": 4
+      },
+      {
+        "path": "v0.3-prelim/code/t38b_post_mortem.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t38c_dwarf_kiss_sidm_paper_scale.py",
+        "host_path_lines": 4
+      },
+      {
+        "path": "v0.3-prelim/code/t38c_post_mortem.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t39_prior_robustness.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t39b_tier3_conditional_marginalization.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t41_mediator_mass_joint_fit.py",
+        "host_path_lines": 4
+      },
+      {
+        "path": "v0.3-prelim/code/t42_lab_exclusions.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t43_inelastic_joint_fit.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t44_publication_plot.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t45_cmb_bbn.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t46_yukawa_sommerfeld_joint_fit.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t47_higgs_beta_function.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t48_dark_confinement.py",
+        "host_path_lines": 4
+      },
+      {
+        "path": "v0.3-prelim/code/t49_vacuum_decay.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t50_dark_glueball_relic.py",
+        "host_path_lines": 3
+      },
+      {
+        "path": "v0.3-prelim/code/t51_dark_glueball_self_interaction.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t52_glueball_sommerfeld.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t53_dark_rho_meson.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t53b_lattice_input.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t54_dark_quark_joint_fit.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t55_dark_matter_mixing.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t55_wimp_relic_calibration.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t56_slope_engineering.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t57_dwarf_dsmc.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t57_lattice_qcd_verification.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t58_coupled_boltzmann.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t59_dark_baryon.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t59_production_boltzmann.py",
+        "host_path_lines": 3
+      },
+      {
+        "path": "v0.3-prelim/code/t60_chiral_log_corrections.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t61_depletion_mechanisms.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t62_lz_direct_detection.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t63_dark_rho_decay.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t64_uncertainty_quantification.py",
+        "host_path_lines": 3
+      },
+      {
+        "path": "v0.3-prelim/code/t65_slope_mitigation.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t66_uv_caveat.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t67_comparison_table.py",
+        "host_path_lines": 5
+      },
+      {
+        "path": "v0.3-prelim/code/t68_cross_validation_drobczyk.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t68b_quantitative_cross_validation.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t69_velocity_scaling_cross_check.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t70_mev_mass_window.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t71_7_kiss_sidm_ufd_launcher.py",
+        "host_path_lines": 4
+      },
+      {
+        "path": "v0.3-prelim/code/t71_relic_density_mechanism_comparison.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t72_cross_validation_plot.py",
+        "host_path_lines": 3
+      },
+      {
+        "path": "v0.3-prelim/code/t73_fix_fifth_force_error.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t74_dark_sector_thermalization.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t75_updated_plot_with_bands.py",
+        "host_path_lines": 3
+      },
+      {
+        "path": "v0.3-prelim/code/t76_reframe_direct_detection.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t87_lz_event_rate.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t8_v03_joint_fit.py",
+        "host_path_lines": 4
+      },
+      {
+        "path": "v0.3-prelim/code/t90_v23_xenonnt_s2only_live.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t90_v28_relhic_likelihood.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t90_v28_relhic_mcmc.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t90_v30_t41_rerun.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t90_v33_three_options.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t90_v40_honest_unification.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t90_v42_loo_profiling.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t90_v45_multi_portal_joint_fit.py",
+        "host_path_lines": 3
+      },
+      {
+        "path": "v0.3-prelim/code/t90_v53_channel_survey.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t90_v63_hybrid_lrd.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t95_v25_multi_stream_real_galstreams.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t9_prior_variation.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/tier3_epsilon_alpha_sketch.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/tng_stage3_build.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/tng_stage3_nodes.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/v19_2_e_b_per_halo_gravothermal.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/v19_2_e_c_data_only_sigma_m.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/v19_2_f_loop2_multi_ufd_regenerator.py",
+        "host_path_lines": 3
+      },
+      {
+        "path": "v0.3-prelim/code/v40_24_path_forward_fixed.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/v40_26_parameter_scan.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/v40_27_3d_scan.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/v40_28_3d_scan_corrected.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/v40_29_multi_resonance.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/v40_30_alpha_d_derive.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/v40_31_unified_formula.py",
+        "host_path_lines": 1
+      }
+    ],
+    "docs_prose": [
+      {
+        "path": ".githooks/pre-commit",
+        "host_path_lines": 1
+      },
+      {
+        "path": ".gitignore",
+        "host_path_lines": 1
+      },
+      {
+        "path": "CHANGELOG.md",
+        "host_path_lines": 2
+      },
+      {
+        "path": "CONTRIBUTING.md",
+        "host_path_lines": 12
+      },
+      {
+        "path": "MODEL_ASSUMPTIONS_AND_LIMITATIONS.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "PLAN_v0.1.md",
+        "host_path_lines": 3
+      },
+      {
+        "path": "README.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "Snakefile",
+        "host_path_lines": 1
+      },
+      {
+        "path": "check_julia.sh",
+        "host_path_lines": 1
+      },
+      {
+        "path": "docs/CLAWSGO_REVIEW_2026-10-08.md",
+        "host_path_lines": 2
+      },
+      {
+        "path": "docs/CLAWSGO_REVIEW_RESPONSE.md",
+        "host_path_lines": 2
+      },
+      {
+        "path": "docs/FINDINGS_FOR_FUTURE_DELIBERATION.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "docs/INTEGRITY_FINDINGS_2026-11-04.md",
+        "host_path_lines": 5
+      },
+      {
+        "path": "docs/NEMOTRON_N18_FIX_AUDIT_2026-10-25.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "docs/OPENCODE_N18_FIX_AUDIT_2026-10-25.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "docs/REVIEWER_AUDIT_R10.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "docs/REVIEWER_AUDIT_R11.md",
+        "host_path_lines": 8
+      },
+      {
+        "path": "docs/REVIEWER_AUDIT_R2.md",
+        "host_path_lines": 8
+      },
+      {
+        "path": "docs/REVIEWER_AUDIT_R9.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "docs/SIDM_V40_50_FULL_REVIEW_REPORT_2026_10_19.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "docs/SIDM_V40_51_FULL_REVIEW_REPORT_2026_10_19.md",
+        "host_path_lines": 2
+      },
+      {
+        "path": "docs/STAGE3_TNG_FEASIBILITY_2026-11-04.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "docs/STAGE3_TNG_MEASURED_2026-11-06.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "docs/STRATA_FLASH_NEXT_FEASIBILITY.md",
+        "host_path_lines": 5
+      },
+      {
+        "path": "docs/TODO_V40_58_STATUS_2026_10_20.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "docs/TRANSITION_V19_2_D_TO_V19_2_E.md",
+        "host_path_lines": 2
+      },
+      {
+        "path": "docs/TUTORIAL.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "docs/V19_2_F_PHASE3_CLOSED_REVIEW_PACKET_V13.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "docs/V19_2_F_PHASE3_CLOSED_REVIEW_PACKET_V14.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "docs/V19_2_F_PLAN_A_COMPLETE_REPORT.md",
+        "host_path_lines": 2
+      },
+      {
+        "path": "docs/V19_2_F_PRIORITY1_2_REPORT.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "docs/V19_2_F_PRIORITY1_RESONANCE_FORM_FACTOR_REPORT.md",
+        "host_path_lines": 2
+      },
+      {
+        "path": "docs/V19_2_F_V40_26_TO_31_DATA_DRIVEN_EXPLORATION.md",
+        "host_path_lines": 6
+      },
+      {
+        "path": "docs/V19_2_F_V40_27_REVIEW.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "docs/dual_review_5loop/evidence_kb_tier1_20261103/gate_run_committed.txt",
+        "host_path_lines": 2
+      },
+      {
+        "path": "docs/dual_review_5loop/evidence_kb_tier2_20261103/gate_run_committed.txt",
+        "host_path_lines": 2
+      },
+      {
+        "path": "docs/dual_review_5loop/evidence_lookback_fix_20261103/gate_run_committed.txt",
+        "host_path_lines": 2
+      },
+      {
+        "path": "docs/dual_review_5loop/evidence_n23/det_build.log",
+        "host_path_lines": 2
+      },
+      {
+        "path": "docs/dual_review_5loop/evidence_n23/det_build2.log",
+        "host_path_lines": 1
+      },
+      {
+        "path": "docs/dual_review_5loop/evidence_n23/det_compare_results.log",
+        "host_path_lines": 3
+      },
+      {
+        "path": "docs/dual_review_5loop/evidence_n23/det_jobs_run12.json",
+        "host_path_lines": 1
+      },
+      {
+        "path": "docs/dual_review_5loop/evidence_n23/det_jobs_run3.json",
+        "host_path_lines": 1
+      },
+      {
+        "path": "docs/dual_review_5loop/evidence_n24/gate_run_committed.txt",
+        "host_path_lines": 2
+      },
+      {
+        "path": "docs/dual_review_5loop/evidence_n24/gate_run_final.txt",
+        "host_path_lines": 2
+      },
+      {
+        "path": "docs/dual_review_5loop/evidence_n24/jobs_closeout.json",
+        "host_path_lines": 2
+      },
+      {
+        "path": "docs/dual_review_5loop/evidence_n24/jobs_v114_frozen.json",
+        "host_path_lines": 1
+      },
+      {
+        "path": "docs/dual_review_5loop/evidence_n25/gate_run_committed.txt",
+        "host_path_lines": 2
+      },
+      {
+        "path": "docs/dual_review_5loop/evidence_n25/gate_run_failed_L15.txt",
+        "host_path_lines": 2
+      },
+      {
+        "path": "docs/dual_review_5loop/evidence_n25/provenance_audit_run.txt",
+        "host_path_lines": 2
+      },
+      {
+        "path": "docs/dual_review_5loop/evidence_n26/gate_run_committed.txt",
+        "host_path_lines": 2
+      },
+      {
+        "path": "docs/dual_review_5loop/evidence_n26/width_mutation_demo.txt",
+        "host_path_lines": 1
+      },
+      {
+        "path": "docs/dual_review_5loop/evidence_sweep20261103/gate_run_committed.txt",
+        "host_path_lines": 2
+      },
+      {
+        "path": "docs/dual_review_5loop/superseded/SIDM_ROUND5_CHANGED_CODE_v1.2_2026-10-26.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "docs/papers/00_HOME.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "docs/papers/fetch_uncited_kb.sh",
+        "host_path_lines": 1
+      },
+      {
+        "path": "docs/papers/pdf_jobs.json",
+        "host_path_lines": 5
+      },
+      {
+        "path": "install_julia_pkgs.bat",
+        "host_path_lines": 2
+      },
+      {
+        "path": "parallel_run_nl2000.sh",
+        "host_path_lines": 3
+      },
+      {
+        "path": "sync_to_win.sh",
+        "host_path_lines": 5
+      },
+      {
+        "path": "sync_to_wsl.sh",
+        "host_path_lines": 5
+      },
+      {
+        "path": "v0.1-prelim/docs/FINDINGS.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.2-prelim/docs/FINDINGS.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/README_AMUSE.md",
+        "host_path_lines": 4
+      },
+      {
+        "path": "v0.3-prelim/code/t215_analyze.jl",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t215_analyze_safe.jl",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t215_analyze_t215d.jl",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t215_analyze_t215e.jl",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t215_analyze_v2.jl",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t215_debug.jl",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t215_gc_test.jl",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t215_no_snap.jl",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t215_run_kiss_sidm.jl",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t215_safe.jl",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t215_small.jl",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t215c.jl",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t215d.jl",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t215f.jl",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t215g.jl",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t215h.jl",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t215i.jl",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t215k.jl",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t215n.jl",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t215p.jl",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t215p_analyze.jl",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t215q.jl",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t215q2.jl",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t215r.jl",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t215s.jl",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/code/t215v.jl",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t215w.jl",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t215x.jl",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/code/t215y.jl",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/docs/AUTOCHECK_TIER3_STATUS.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/docs/PATH3_REVIEW_PACKAGE_2026-09-28.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/docs/PHASE4B_KISS_SIDM_HIGHER_N_PILOT_2026-09-27.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/docs/REVIEW_2REVIEW_DOCX_2026-09-26.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/docs/REVIEW_2REVIEW_RESPONSE_STATUS_2026-09-26.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/docs/T207_THREE_TERM_REPORT_2026-09-23.md",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/docs/T207_V1838_PRIORED_REVIEW_2026-09-25.md",
+        "host_path_lines": 5
+      },
+      {
+        "path": "v0.3-prelim/docs/T208_T209_STRATEGIC_INVESTIGATION_REPORT_2026-09-25.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/docs/T211_PATH_B3_B2_LITERATURE_SURVEY_2026-09-25.md",
+        "host_path_lines": 3
+      },
+      {
+        "path": "v0.3-prelim/docs/T215B_KISS_SIDM_GRAVOTHERMAL_BREAKTHROUGH_2026-09-26.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/docs/T215C_PUSH_BEYOND_45MYR_FAILED_2026-09-26.md",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/docs/T215D_55MYR_BREAKTHROUGH_2026-09-26.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/docs/TASK_BC_COMBINED_2026-09-28.md",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/docs/TASK_BC_REPORT_2026-09-28.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/docs/V18_40_REVIEW_BUNDLE_2026-09-25.md",
+        "host_path_lines": 8
+      },
+      {
+        "path": "v0.3-prelim/docs/V18_40_REVIEW_BUNDLE_PART_2.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/docs/V18_40_REVIEW_BUNDLE_PART_3.md",
+        "host_path_lines": 3
+      },
+      {
+        "path": "v0.3-prelim/docs/V18_40_REVIEW_BUNDLE_PART_B.md",
+        "host_path_lines": 4
+      },
+      {
+        "path": "v0.3-prelim/docs/V19_FINAL_REPORT_2026-09-27.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/docs/WSL_MUTMUT_SETUP.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/docs/archive/other/AMUSE_BULLET_DWARF_CALIBRATION_2026_09_12.md",
+        "host_path_lines": 3
+      },
+      {
+        "path": "v0.3-prelim/docs/archive/other/AMUSE_SIMULATION_BENCHMARK_2026_09_12.md",
+        "host_path_lines": 4
+      },
+      {
+        "path": "v0.3-prelim/docs/archive/other/BRANCH_COMPARISON_2026_09_17.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/docs/archive/other/CONFIG_DUPLICATION_2026_09_12.md",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/docs/archive/other/H3_H4_SENSITIVITY_REPORT.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/docs/archive/other/PROJECT_FINDINGS.md",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/docs/archive/other/REVIEWER_AUDIT_R15.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/docs/archive/other/REVIEWER_AUDIT_R16.md",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/docs/archive/other/REVIEWER_BARYONIC_FEEDBACK.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/docs/archive/other/T81_LZ_REVIEW_RESPONSE.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/docs/archive/t215/T215M_RV18_4_ROUND4_RESPONSE_2026-09-26.md",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/docs/archive/t90/T90_PATH_C4_ALL_FINDINGS_REFERENCE.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/docs/archive/t95/T95_MULTI_STREAM_REAL_GALSTREAMS.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/docs/archive/v0_legacy/V0_7_REVIEWER_RESPONSE_BROWER_ASSESSMENT.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/docs/consider4_review/README.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/docs/consider5_review/README.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/docs/reviews/MAGNET1_REVIEW_AUDIT.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/docs/reviews/REVIEW6_AUDIT.md",
+        "host_path_lines": 2
+      }
+    ],
+    "data_artifact": [
+      {
+        "path": "v0.3-prelim/data/results/kiss_sidm_canonical_simulation_N1e5.json",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/data/results/nc_nf_scan_v0_6_nl2000_summary.json",
+        "host_path_lines": 7
+      },
+      {
+        "path": "v0.3-prelim/data/results/nc_nf_scan_v0_6_summary.json",
+        "host_path_lines": 7
+      },
+      {
+        "path": "v0.3-prelim/data/results/t207c_priored_free_emcee.json",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/data/results/t21_real_kiss_sidm_gravothermal.json",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/data/results/t22_real_kiss_sidm_two_comp.json",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/data/results/t23_real_kiss_sidm_two_comp_imfp.json",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/data/results/t38_dwarf_kiss_sidm_higher_N.json",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/data/results/t48_dark_confinement_survey.json",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/data/results/t59_full_scan.log",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/data/results/t71_7_kiss_sidm_ufd_n5e4.json",
+        "host_path_lines": 2
+      },
+      {
+        "path": "v0.3-prelim/data/results/t88a_ablation_20260904.json",
+        "host_path_lines": 4
+      },
+      {
+        "path": "v0.3-prelim/data/results/t88b_ablation_20260904_111705.json",
+        "host_path_lines": 4
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215_safe/snap_000.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215_safe/snap_001.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215_safe/snap_002.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215_safe/snap_003.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215_safe/snap_004.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215_safe/snap_005.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215_safe/snap_006.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215_safe/snap_007.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215_safe/snap_008.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215_small/snap_000.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215_small/snap_001.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215_small/snap_002.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215_small/snap_003.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215_small/snap_004.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215_small/snap_005.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215_small/snap_006.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215_small/snap_007.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215_small/snap_008.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215_small/snap_009.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215_small/snap_010.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215_small/snap_011.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215_small/snap_012.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215b/snap_000.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215b/snap_001.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215b/snap_002.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215b/snap_003.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215b/snap_004.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215b/snap_005.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215b/snap_006.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215b/snap_007.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215b/snap_008.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215b/snap_009.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215b/snap_010.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215b/snap_011.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215d/snap_000.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215d/snap_001.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215d/snap_002.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215d/snap_003.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215d/snap_004.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215d/snap_005.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215d/snap_006.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215d/snap_007.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215d/snap_008.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215d/snap_009.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215e/snap_000.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215e/snap_001.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215e/snap_002.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215e/snap_003.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215e/snap_004.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215e/snap_005.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215e/snap_006.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215e/snap_007.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215e/snap_008.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215e/snap_009.jld2",
+        "host_path_lines": 12
+      },
+      {
+        "path": "v0.3-prelim/data/snapshots_t215e/snap_010.jld2",
+        "host_path_lines": 12
+      }
+    ],
+    "other": []
+  },
+  "counts": {
+    "live_clean": 422,
+    "live_prose_only": 4,
+    "pinned_source": 0,
+    "pinned_exception": 2,
+    "historical_frozen_code": 230,
+    "docs_prose": 130,
+    "data_artifact": 68,
+    "other": 0
+  },
+  "patterns": [
+    "C:\\Users\\lamkuenai\\projects\\sidm-composite-dm-mediator",
+    "C:/Users/lamkuenai/projects/sidm-composite-dm-mediator",
+    "/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator",
+    "/home/lamkuenai/sidm-composite-dm-mediator",
+    "C:\\Users\\lamkuenai\\AppData\\Local\\hermes",
+    "C:\\Users\\lamkuenai\\Strata",
+    "/home/lamkuenai"
+  ]
+}

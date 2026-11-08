@@ -30,6 +30,12 @@ Generated in response to peer review (2026-08-10):
     "Hardcoded absolute paths everywhere; zero configuration system"
 """
 from __future__ import annotations
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import LEGACY_WSL_ROOT, REPO, REPO_ROOT  # noqa: E402
 from pathlib import Path
 import os
 
@@ -58,12 +64,12 @@ def _detect_root() -> Path:
         return Path(env)
 
     # Windows path (canonical for Telegram MEDIA: + Windows tools)
-    win = Path(r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator")
+    win = Path(REPO)
     if win.exists():
         return win
 
     # WSL path (where dynesty runs)
-    wsl = Path("/home/lamkuenai/sidm-composite-dm-mediator")
+    wsl = Path(LEGACY_WSL_ROOT)
     if wsl.exists():
         return wsl
 

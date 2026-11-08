@@ -80,6 +80,12 @@ HARD INVARIANTS (the script ABORTS rather than writing if any fails):
   5. SPAN SANITY          no rendered bold span crosses a code span, a table
                            pipe, or a paragraph break.
 """
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import REPO, REPO_ROOT  # noqa: E402
 
 import os
 import pickle
@@ -90,7 +96,7 @@ from pathlib import Path
 
 from markdown_it import MarkdownIt
 
-REPO = Path(r'C:\Users\lamkuenai\projects\sidm-composite-dm-mediator')
+REPO = Path(REPO)
 REL = 'v0.3-prelim/docs/PAPER_V1_DRAFT.md'
 BASE_REV = 'ef645ce^'          # last commit BEFORE the broken markup commit
 INVALID_REV = 'ef645ce3d7a0c5f044102ed28b29c143f19073e3'   # the bad commit

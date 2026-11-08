@@ -8,14 +8,20 @@ numerical Boltzmann solution. The test suite is unchanged but
 renamed.
 """
 from __future__ import annotations
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import LEGACY_WSL_ROOT, REPO, REPO_ROOT  # noqa: E402
 import sys
 import math
 from pathlib import Path
 
 # On WSL: /home/lamkuenai/sidm-composite-dm-mediator
 # On Windows (CI / windows-side test runs): C:/Users/lamkuenai/projects/sidm-composite-dm-mediator
-_WSL_ROOT = Path("/home/lamkuenai/sidm-composite-dm-mediator")
-_WIN_ROOT = Path("C:/Users/lamkuenai/projects/sidm-composite-dm-mediator")
+_WSL_ROOT = Path(LEGACY_WSL_ROOT)
+_WIN_ROOT = Path(REPO)
 if _WSL_ROOT.exists():
     sys.path.insert(0, str(_WSL_ROOT / "v0.3-prelim/code"))
 elif _WIN_ROOT.exists():

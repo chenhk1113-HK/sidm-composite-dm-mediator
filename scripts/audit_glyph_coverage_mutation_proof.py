@@ -26,10 +26,13 @@ import sys
 import tempfile
 from pathlib import Path
 
-HERE = Path(__file__).resolve().parent
+REPO = Path(__file__).resolve().parents[1]
+# CG-16: host-dependent paths come from scripts/paths.py (single source).
+sys.path.insert(0, str(REPO / "scripts"))
+from paths import DELIVER_DIR  # noqa: E402
 AUDIT = HERE / "audit_glyph_coverage.py"
 REPO = HERE.parent
-REFINT_PDF = Path(r"C:/Users/lamkuenai/round5_deliver/SIDM_REFERENCE_INTEGRITY_v1.0_2026-10-27.pdf")
+REFINT_PDF = Path(str(DELIVER_DIR / "SIDM_REFERENCE_INTEGRITY_v1.0_2026-10-27.pdf"))
 
 
 def _wrap_pdf(content: bytes) -> bytes:

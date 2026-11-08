@@ -13,12 +13,18 @@ NFW self-consistent means each c has its own V_max. This is correct physics:
 - c=12 (LCDM-conservative): V_max=31.12, sigma/m(V_max)=135.5, t_core=0.091Gyr
 - c=4 (Ohana+ physical anchor): V_max=25.59, sigma/m(V_max)=150, t_core=4.42Gyr
 """
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import REPO, REPO_ROOT  # noqa: E402
 import json
 import math
 import sys
 from pathlib import Path
 
-REPO = Path(r'C:\Users\lamkuenai\projects\sidm-composite-dm-mediator')
+REPO = Path(REPO)
 sys.path.insert(0, str(REPO / 'scripts'))
 
 # Import paper convention from v19.2-D.3 script

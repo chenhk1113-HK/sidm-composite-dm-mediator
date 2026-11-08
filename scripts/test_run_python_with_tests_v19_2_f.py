@@ -4,8 +4,14 @@ Imports from TWO constants files (the project has them split):
   - root constants.py:  ALPHA_D, G_CHI, M_CHI_GEV (convention lock)
   - scripts/constants.py: V_TARGET_KMS, SIGMA_PEAK_CM2_PER_G, SIGMA_KMS (v19.2-F phenomenology)
 """
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import REPO, REPO_ROOT  # noqa: E402
 import sys
-sys.path.insert(0, r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\scripts")
+sys.path.insert(0, str(REPO_ROOT / "scripts"))
 from run_python_with_tests import run_python_with_tests
 import json
 
@@ -17,7 +23,7 @@ from pathlib import Path
 # Load root constants.py (convention: alpha_D, g, kappa) by absolute path
 _spec_root = importlib.util.spec_from_file_location(
     "root_constants",
-    r"C:/Users/lamkuenai/projects/sidm-composite-dm-mediator/constants.py"
+    r"@REPO@/constants.py"   # CG-16: substituted below from scripts/paths.py
 )
 _root_c = importlib.util.module_from_spec(_spec_root)
 _spec_root.loader.exec_module(_root_c)
@@ -25,7 +31,7 @@ _spec_root.loader.exec_module(_root_c)
 # Load scripts/constants.py (v19.2-F phenomenology: V_TARGET_KMS, etc.) by absolute path
 _spec_v19 = importlib.util.spec_from_file_location(
     "v19_constants",
-    r"C:/Users/lamkuenai/projects/sidm-composite-dm-mediator/scripts/constants.py"
+    r"@REPO@/scripts/constants.py"   # CG-16: substituted below from scripts/paths.py
 )
 _v19 = importlib.util.module_from_spec(_spec_v19)
 _spec_v19.loader.exec_module(_v19)
@@ -45,6 +51,9 @@ def sigma_m_flexible(v_kms, a_slope, sigma_0, v_target, sigma_peak, sigma_1):
     resonance = sigma_peak * math.exp(-0.5 * ((v_kms - v_target) / sigma_1) ** 2)
     return background + resonance
 '''
+# The embedded code string cannot import paths.py (it runs in its own namespace), so the
+# host root is substituted here rather than spelled inside the embedded source.
+production_code = production_code.replace("@REPO@", REPO)
 
 test_code = r'''
 def test_alpha_d_convention():

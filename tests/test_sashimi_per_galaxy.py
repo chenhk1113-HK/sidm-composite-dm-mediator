@@ -2,6 +2,12 @@
 Tests for sashimi_per_galaxy.py — per-galaxy SASHIMI-SIDM forward model.
 """
 from __future__ import annotations
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import LEGACY_WSL_ROOT, REPO, REPO_ROOT, WSL_MNT_ROOT  # noqa: E402
 import sys
 import numpy as np
 from pathlib import Path
@@ -95,9 +101,9 @@ class TestChi2PerGalaxy:
         import os
         # Try Windows path first, then WSL path
         candidates = [
-            r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.1-prelim\data\Rotmod_LTG\NGC2403_rotmod.dat",
-            "/mnt/c/Users/lamkuenai/projects/sidm-composite-dm-mediator/v0.1-prelim/data/Rotmod_LTG/NGC2403_rotmod.dat",
-            "/home/lamkuenai/sidm-composite-dm-mediator/v0.1-prelim/data/Rotmod_LTG/NGC2403_rotmod.dat",
+            str(REPO_ROOT / "v0.1-prelim/data/Rotmod_LTG/NGC2403_rotmod.dat"),
+            WSL_MNT_ROOT + "/v0.1-prelim/data/Rotmod_LTG/NGC2403_rotmod.dat",
+            LEGACY_WSL_ROOT + "/v0.1-prelim/data/Rotmod_LTG/NGC2403_rotmod.dat",
         ]
         rotmod_path = None
         for p in candidates:

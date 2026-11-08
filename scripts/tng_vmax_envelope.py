@@ -6,9 +6,15 @@ vmax in [28,34) but 0 for vmax in [30,35). That is contradictory unless the boun
 between 28 and 30. This script walks the boundary and then reads back the three highest-vmax
 members of the cell to confirm the envelope from the detail records themselves.
 """
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import SCRATCH_DIR, TNG_KEY_FILE  # noqa: E402
 import gzip, json, time, urllib.request
 
-KEY = open(r"C:/Users/lamkuenai/.tng_api_key").read().strip()
+KEY = open(TNG_KEY_FILE).read().strip()
 BASE = ("primary_flag=1&len_stars__lt=1&mass__gt=2.7080e-1&mass__lt=4.0620e-1"
         "&mass_gas__gt=1e-5&len_dm__gt=100")
 UNIT = 1e10 / 0.6774
@@ -50,6 +56,6 @@ for sid in ids:
         out["envelope"].append(row)
         print("  ", row, flush=True)
 
-open(r"C:/Users/lamkuenai/AppData/Local/hermes/cache/scratch/tng_vmax_envelope.json", "w",
+open(str(SCRATCH_DIR / "tng_vmax_envelope.json"), "w",
      encoding="utf-8").write(json.dumps(out, indent=1))
 print("DONE", flush=True)

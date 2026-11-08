@@ -25,6 +25,12 @@ Units check:
   g^4 * mu^2 / q^4 = dimless * GeV^2 / GeV^4 = 1/GeV^2
   1/GeV^2 * (hbar c)^2 [GeV^2 cm^2] = cm^2 ✓
 """
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import REPO, REPO_ROOT  # noqa: E402
 
 import math
 import json
@@ -199,7 +205,7 @@ out = {
     'paper_action': 'Apply same Units discipline to T222, T225 retroactively (cheap)'
 }
 
-out_path = r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\data\results\t232_dd_dimension_retrofit.json"
+out_path = str(REPO_ROOT / "v0.3-prelim/data/results/t232_dd_dimension_retrofit.json")
 os.makedirs(os.path.dirname(out_path), exist_ok=True)
 with open(out_path, 'w') as f:
     json.dump(out, f, indent=2)

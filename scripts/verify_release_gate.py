@@ -54,6 +54,12 @@ Usage:
 Exit: 0 = all layers asserted and passed (skips disclosed if any);
       1 = at least one layer failed.
 """
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import REFERENCE_PYTHON  # noqa: E402
 import argparse
 import re
 import subprocess
@@ -91,7 +97,7 @@ def _pdf_audit_python() -> str:
         candidates.append(Path(sys.executable))
     except Exception:
         pass
-    candidates.append(Path(r"C:\Users\lamkuenai\AppData\Local\Python\pythoncore-3.14-64\python.exe"))
+    candidates.append(Path(REFERENCE_PYTHON))
     candidates.append(VENV_PYTHON)
     import subprocess as _sp
     for c in candidates:

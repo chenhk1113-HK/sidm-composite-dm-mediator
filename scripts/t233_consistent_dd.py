@@ -14,6 +14,12 @@ THIS SCRIPT:
 Resolves the 372x discrepancy: T120.10 used a different formula than Eq. 11
 (specifically, the original T120.10 likely used a different normalization).
 """
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import REPO, REPO_ROOT  # noqa: E402
 
 import math
 import json
@@ -21,7 +27,7 @@ import os
 import sys
 
 # Import framework constants
-sys.path.insert(0, r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\scripts")
+sys.path.insert(0, str(REPO_ROOT / "scripts"))
 from constants import (  # PAIRING: ARCHIVED PAIR (sigma-only consumer)
     M_CHI_GEV, M_PHI_GEV, V_TARGET_KMS, FWHM_KMS, A_RES, SIGMA_PEAK_LEGACY_PAIR_174 as SIGMA_PEAK_CM2_PER_G_ARCHIVED, M_NUCLEON_GEV, C_KMS, HBAR_C_GEV_CM, HBAR_C_SQ_GEV2_CM2, reduced_mass_gev, q_mev, g_chi_from_sigma_peak, LZ_BOUND_CM2,
 )
@@ -249,7 +255,7 @@ out = {
     'verification': 'All scripts now use constants.py for m_chi'
 }
 
-out_path = r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\data\results\t233_consistent_dd.json"
+out_path = str(REPO_ROOT / "v0.3-prelim/data/results/t233_consistent_dd.json")
 os.makedirs(os.path.dirname(out_path), exist_ok=True)
 with open(out_path, 'w') as f:
     json.dump(out, f, indent=2)

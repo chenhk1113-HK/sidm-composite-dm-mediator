@@ -26,6 +26,12 @@ DIMENSION-CHECK DISCIPLINE (per R63 reviewer):
 
 This script includes an explicit dimensional-analysis check at the start.
 """
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import REPO, REPO_ROOT  # noqa: E402
 
 import math
 import json
@@ -231,7 +237,7 @@ out = {
     'paper_action': 'Replace T230 number with literature citation in §10.2a. Drop the 1.7e29 claim.'
 }
 
-out_path = r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\data\results\t231_magnetic_dipole_citation.json"
+out_path = str(REPO_ROOT / "v0.3-prelim/data/results/t231_magnetic_dipole_citation.json")
 os.makedirs(os.path.dirname(out_path), exist_ok=True)
 with open(out_path, 'w') as f:
     json.dump(out, f, indent=2)

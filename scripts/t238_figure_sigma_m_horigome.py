@@ -4,12 +4,18 @@ T238 (D-17 figures): Generate sigma/m multi-channel figure for v19.2-D paper
 Per R88: framework's σ/m at all dSph velocities exceeds Horigome's threshold.
 This figure shows the σ/m(v) profile and the Horigome exclusion.
 """
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import REPO, REPO_ROOT  # noqa: E402
 import sys
 import math
 from pathlib import Path
 
 # Use the venv
-sys.path.insert(0, r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\scripts")
+sys.path.insert(0, str(REPO_ROOT / "scripts"))
 
 import matplotlib
 matplotlib.use('Agg')
@@ -83,7 +89,7 @@ def main():
     ax.set_ylim(0.01, 1000)
 
     plt.tight_layout()
-    output_path = Path(r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\docs\FIG_SIGMA_M_V_HORIGOME_R88.png")
+    output_path = Path(str(REPO_ROOT / "v0.3-prelim/docs/FIG_SIGMA_M_V_HORIGOME_R88.png"))
     plt.savefig(output_path, dpi=120, bbox_inches='tight')
     print(f"Figure saved to: {output_path}")
     print(f"Size: {output_path.stat().st_size} bytes")

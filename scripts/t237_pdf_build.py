@@ -3,14 +3,20 @@ T237 (R88 PDF): Build PDF using Unicode-aware font (Cambria from C:/Windows/Font
 
 Per R88 reviewer's note: cm2/g should be cm²/g, σ_peak should render correctly.
 """
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import REPO, REPO_ROOT  # noqa: E402
 import sys
 from pathlib import Path
 
 from fpdf import FPDF
 
 
-PAPER_PATH = Path(r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\docs\PAPER_V1_DRAFT.md")
-PDF_PATH = Path(r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\docs\PAPER_V19_2_D_R88.pdf")
+PAPER_PATH = Path(str(REPO_ROOT / "v0.3-prelim/docs/PAPER_V1_DRAFT.md"))
+PDF_PATH = Path(str(REPO_ROOT / "v0.3-prelim/docs/PAPER_V19_2_D_R88.pdf"))
 
 # Calibri has Greek letters and most Unicode characters
 FONT_PATH = r"C:/Windows/Fonts/calibri.ttf"

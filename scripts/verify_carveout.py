@@ -19,6 +19,12 @@ Baseline recorded 2026-10-22, carve-out = 32 GB:
   model sits in DEDICATED VRAM (22.65 GB dedicated usage observed)
 """
 from __future__ import annotations
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import HERMES_HOME, REPO, REPO_ROOT  # noqa: E402
 
 import json
 import os
@@ -27,10 +33,10 @@ import subprocess
 import sys
 from pathlib import Path
 
-HERMES = Path(r"C:\Users\lamkuenai\AppData\Local\hermes")
+HERMES = Path(str(HERMES_HOME))
 LLAMA = HERMES / "tools" / "llamacpp-vulkan-11370-win32-x64"
 MODEL = HERMES / "models" / "Qwen3.6-35B-A3B-UD-Q4_K_M.gguf"
-OUT = Path(r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\data\results\carveout_verify.json")
+OUT = Path(str(REPO_ROOT / "v0.3-prelim/data/results/carveout_verify.json"))
 
 GIB = 1024 ** 3
 

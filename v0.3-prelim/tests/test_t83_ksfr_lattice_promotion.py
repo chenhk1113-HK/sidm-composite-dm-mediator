@@ -37,6 +37,12 @@ Note: the (2, 2) entry has TWO rows in the KSFR table — fundamental
 Only the adjoint row is in LATTICE_TABLE.
 """
 from __future__ import annotations
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import LEGACY_WSL_ROOT, REPO_ROOT  # noqa: E402
 
 import sys
 from pathlib import Path
@@ -46,7 +52,7 @@ _HERE = Path(__file__).resolve().parent
 for p in (
     str(_HERE.parent / "code"),  # v0.3-prelim/code
     str(_HERE.parent),            # v0.3-prelim
-    "/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/code",
+    LEGACY_WSL_ROOT + "/v0.3-prelim/code",
 ):
     if p not in sys.path:
         sys.path.insert(0, p)

@@ -15,8 +15,14 @@ Usage:
     python scripts/make_kb_summaries.py --slot 4 --id 0704.0261 --author randall_2008
     python scripts/make_kb_summaries.py --batch batch.json
 """
-
 from __future__ import annotations
+
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import PDFTOTEXT_EXE  # noqa: E402
 
 import argparse
 import json
@@ -57,7 +63,7 @@ TEMPLATE = """# {title}
 # pdftotext lives in the MSYS/Git-Bash toolchain, which is NOT on the PATH of
 # the Windows venv python. Locate it rather than assuming.
 PDFTOTEXT_CANDIDATES = [
-    r"C:\Users\lamkuenai\AppData\Local\hermes\tools\git-2.53.0+3-win32-x64\mingw64\bin\pdftotext.exe",
+    PDFTOTEXT_EXE,
     r"C:\Program Files\Git\usr\bin\pdftotext.exe",
     r"C:\Program Files\Git\mingw64\bin\pdftotext.exe",
     r"C:\msys64\usr\bin\pdftotext.exe",

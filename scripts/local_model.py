@@ -61,6 +61,12 @@ can burn the whole token budget on thinking with no answer. It sends
 it prints the engine's own decode rate when the server exposes one.
 """
 from __future__ import annotations
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import HERMES_HOME, REFERENCE_PYTHON, STRATA_DATA_DIR, STRATA_DIR  # noqa: E402
 
 import argparse
 import json
@@ -72,10 +78,10 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
-HERMES = Path(r"C:\Users\lamkuenai\AppData\Local\hermes")
-STRATA = Path(r"C:\Users\lamkuenai\Strata")
-STRATA_DATA = Path(r"C:\Users\lamkuenai\Strata-data")
-PY = r"C:\Users\lamkuenai\AppData\Local\Python\pythoncore-3.14-64\python.exe"
+HERMES = Path(str(HERMES_HOME))
+STRATA = Path(str(STRATA_DIR))
+STRATA_DATA = Path(str(STRATA_DATA_DIR))
+PY = REFERENCE_PYTHON
 
 FAST = {
     "name": "Qwen3.6-35B-A3B-UD-Q4_K_M",

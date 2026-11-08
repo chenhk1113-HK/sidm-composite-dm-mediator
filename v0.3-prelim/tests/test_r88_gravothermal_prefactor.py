@@ -12,13 +12,19 @@ These tests verify:
 Tests were added in response to ClawsGO Science Agent review (2026-10-08),
 which identified the BM2-only validation as circular.
 """
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import REPO, REPO_ROOT  # noqa: E402
 
 import os
 import sys
 
-os.environ['DM_SIDM_PROJECT_ROOT'] = r'C:\Users\lamkuenai\projects\sidm-composite-dm-mediator'
-sys.path.insert(0, r'C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\code')
-sys.path.insert(0, r'C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\scripts')
+os.environ['DM_SIDM_PROJECT_ROOT'] = REPO
+sys.path.insert(0, str(REPO_ROOT / "v0.3-prelim/code"))
+sys.path.insert(0, str(REPO_ROOT / "scripts"))
 sys.modules.pop('config', None)
 
 import math

@@ -16,6 +16,12 @@ These tests do NOT require running the full Julia simulation (which takes
 Standing rule (AGENTS.md): no new dependencies. We use the existing
 wimpy venv and the system Julia 1.11.5 install.
 """
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import JULIA_BIN, KISS_SIDM_DIR  # noqa: E402
 import json
 import os
 import sys
@@ -38,11 +44,11 @@ class TestBridgeModule:
         assert hasattr(bridge, "JULIA_PROJECT")
 
     def test_julia_path_correct(self):
-        """Julia binary path is /home/lamkuenai/.juliaup/bin/julia."""
+        'Julia binary path is ' + JULIA_BIN + '.'
         bridge = pytest.importorskip("kiss_sidm_julia_bridge")
-        assert bridge.JULIA_BIN == "/home/lamkuenai/.juliaup/bin/julia"
+        assert bridge.JULIA_BIN == JULIA_BIN
         assert bridge.JULIA_VERSION == "+1.11.5"
-        assert bridge.JULIA_PROJECT == "/home/lamkuenai/KiSS-SIDM"
+        assert bridge.JULIA_PROJECT == KISS_SIDM_DIR
 
     def test_canonical_halo_params(self):
         """Canonical 10^9 M_sun halo parameters match the paper."""
@@ -149,7 +155,7 @@ class TestEndToEnd:
 
     def test_julia_installed(self):
         """Verify the Julia binary exists at the expected path."""
-        julia_path = Path("/home/lamkuenai/.juliaup/bin/julia")
+        julia_path = Path(JULIA_BIN)
         if not julia_path.exists():
             pytest.skip(f"Julia not installed at {julia_path}")
         # Check we can run it
@@ -163,13 +169,13 @@ class TestEndToEnd:
 
     def test_dsmc_loadable(self):
         """Verify DSMC.jl is loadable from the KiSS-SIDM project."""
-        julia_path = Path("/home/lamkuenai/.juliaup/bin/julia")
+        julia_path = Path(JULIA_BIN)
         if not julia_path.exists():
             pytest.skip("Julia not installed")
 
         import subprocess
         result = subprocess.run(
-            [str(julia_path), "+1.11.5", "--project=/home/lamkuenai/KiSS-SIDM",
+            [str(julia_path), "+1.11.5", '--project=' + KISS_SIDM_DIR,
              "-e", "using DSMC; println(\"DSMC OK\")"],
             capture_output=True, text=True, timeout=60,
         )

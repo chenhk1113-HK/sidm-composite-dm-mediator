@@ -28,6 +28,12 @@ RESULT that should be added to the paper's no-go catalogue.
 The framework's sigma_peak = 174 cm^2/g remains UNANCHORED. Per the paper's
 honest framing (§3 R47 retraction), this is the state of the project.
 """
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import REPO, REPO_ROOT  # noqa: E402
 
 import math
 import json
@@ -177,7 +183,7 @@ results = {
     ]
 }
 
-out_path = r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\data\results\t222_r50_retraction.json"
+out_path = str(REPO_ROOT / "v0.3-prelim/data/results/t222_r50_retraction.json")
 os.makedirs(os.path.dirname(out_path), exist_ok=True)
 with open(out_path, 'w') as f:
     json.dump(results, f, indent=2)

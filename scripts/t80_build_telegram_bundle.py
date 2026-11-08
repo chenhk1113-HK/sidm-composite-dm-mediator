@@ -1,12 +1,18 @@
 """Build the T80 (LZ paper update) Telegram bundle."""
 from __future__ import annotations
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import REPO, REPO_ROOT  # noqa: E402
 
 import shutil
 import tempfile
 import zipfile
 from pathlib import Path
 
-REPO = Path(r"C:\Users\lamkuenai\projects\sidm-composite-dm-mediator")
+REPO = Path(REPO)
 OUT = Path(tempfile.gettempdir()) / "t80_telegram_bundle"
 if OUT.exists():
     shutil.rmtree(OUT)

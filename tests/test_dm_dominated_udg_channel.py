@@ -10,13 +10,19 @@ Reference: arXiv:2609.10700 — σ/m_eff at v_LSB6 ~15 km/s = 14.3 (+2.0/-1.9) c
 These tests pin the channel behavior so accidental edits don't silently
 change the LSB-6 anchor or the velocity-mapping convention.
 """
+# CG-16: every host-dependent path is resolved by scripts/paths.py (single source).
+import sys as _sys, pathlib as _pathlib
+_CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
+                  if (a / "scripts" / "paths.py").exists())
+_sys.path.insert(0, str(_CG16_ROOT / "scripts"))
+from paths import REPO, REPO_ROOT  # noqa: E402
 import pytest
 import numpy as np
 
 # Use canonical path
 import sys
 from pathlib import Path
-project_root = Path(r'C:/Users/lamkuenai/projects/sidm-composite-dm-mediator')
+project_root = Path(REPO)
 sys.path.insert(0, str(project_root / 'v0.3-prelim' / 'code'))
 
 from channels_extended import loglike_dm_dominated_udg, loglike_dm_dominated_udg_placeholder
