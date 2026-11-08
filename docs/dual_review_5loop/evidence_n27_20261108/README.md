@@ -55,3 +55,16 @@ Snapshot rule for CI numbers: every push to this branch adds one `Self-check` ru
 census written into a report is a read-time snapshot, not a live fact. The report labels its census
 read-time for that reason; the durable claim is the failure signature (3.11 `Install dependencies`,
 3.12 `Run pytest`, `pre-commit py_compile` green, audit steps never reached), not the run numbers.
+
+## Why the gate logs are stored as `.txt`
+
+`.gitignore` line 78 (`*.log`) silently swallows any evidence file with a `.log` extension, so the gate
+logs first copied into this folder were present on disk but not in the repository - the commits that said
+"filed the gate log" were overstated. Repo convention (evidence_n24, _n25, _n26) is `gate_run_committed.txt`
+and `gate_run_final.txt`, so the logs are stored under `.txt` names here:
+
+- `gate_run_committed_efd6021.txt` - 15/15 PASS on `efd6021` (3642 passed, 1422.63s).
+- `gate_run_final.txt` - 15/15 PASS on `4a2ffdc` (3642 passed, 1430.72s, t82 120/120).
+- `pdf_render_audit_prepush.txt` - render-integrity layer standalone after the 11:42 rebuild: PASS, 0 hard.
+- `gate_run_failed_prefix_tree.txt` - the 06:40 FAILED run (2 failed + 5 errors), kept so the fix path stays visible.
+- `gate_run_failed_findingids_L11.txt` - the 08:22 FAILED run (1 failed test + the 74-literal-`**` budget breach).

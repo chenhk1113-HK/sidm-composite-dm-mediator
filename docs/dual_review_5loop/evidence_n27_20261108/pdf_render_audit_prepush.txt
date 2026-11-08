@@ -1,0 +1,47 @@
+======================================================================
+PDF RENDER INTEGRITY AUDIT
+======================================================================
+
+  SIDM_REFERENCE_INTEGRITY_v1.0_2026-10-27.pdf
+    . SIDM_REFERENCE_INTEGRITY_v1.0_2026-10-27.pdf: only 1 page — check the flow length
+    . SIDM_REFERENCE_INTEGRITY_v1.0_2026-10-27.pdf: 85 source line(s) matched only after dropping markdown punctuation tokens (bold wrapping a code span); words verified present in the PDF, formatting differs — not a defect
+    . SIDM_REFERENCE_INTEGRITY_v1.0_2026-10-27.pdf: 4 source line(s) failed token containment only because pdftotext drops or remaps glyphs (sigma -> nothing, superscript 2 -> ASCII 2, prime -> nothing): every 'absent' word on those lines has its alphanumeric stem present in the PDF token stream — extraction damage, not missing content. Example signature: source 'f_H sigma_HH' tokenises 'f_h_hh', PDF tokenises 'f_h_hh' with the sigma removed; stems match.
+    . SIDM_REFERENCE_INTEGRITY_v1.0_2026-10-27.pdf: 1 page(s), 0 literal '**' in rendered text
+    OK: source contained, no block-marker leakage, budget respected
+
+  SIDM_ROUND5_CONSOLIDATED_FIXES_v1.17_2026-11-02.pdf
+    . SIDM_ROUND5_CONSOLIDATED_FIXES_v1.17_2026-11-02.pdf: only 1 page — check the flow length
+    . SIDM_ROUND5_CONSOLIDATED_FIXES_v1.17_2026-11-02.pdf: 1205 source line(s) matched only after dropping markdown punctuation tokens (bold wrapping a code span); words verified present in the PDF, formatting differs — not a defect
+    . SIDM_ROUND5_CONSOLIDATED_FIXES_v1.17_2026-11-02.pdf: 95 source line(s) failed token containment only because pdftotext drops or remaps glyphs (sigma -> nothing, superscript 2 -> ASCII 2, prime -> nothing): every 'absent' word on those lines has its alphanumeric stem present in the PDF token stream — extraction damage, not missing content. Example signature: source 'f_H sigma_HH' tokenises 'f_h_hh', PDF tokenises 'f_h_hh' with the sigma removed; stems match.
+    . SIDM_ROUND5_CONSOLIDATED_FIXES_v1.17_2026-11-02.pdf: 1 source code line(s) appear in the PDF joined to an adjacent comment line by the code renderer (words verified present verbatim) — a layout join, not clipping
+    . SIDM_ROUND5_CONSOLIDATED_FIXES_v1.17_2026-11-02.pdf: 1 page(s), 72 literal '**' in rendered text
+    ! SIDM_ROUND5_CONSOLIDATED_FIXES_v1.17_2026-11-02.pdf: source prose line not contained in the PDF (42% of its word-trigrams found, 7 missing; words absent: 2.847.7x; source 'i.e. the identity predicts **2.8–47.7× too much** σ_eff. Bridging that')
+    ! SIDM_ROUND5_CONSOLIDATED_FIXES_v1.17_2026-11-02.pdf: source prose line not contained in the PDF (55% of its word-trigrams found, 5 missing; words absent: 115460x; source 'violations are higher (**115–460×**)". Those numbers trace to the **re')
+    ! SIDM_ROUND5_CONSOLIDATED_FIXES_v1.17_2026-11-02.pdf: source prose line not contained in the PDF (54% of its word-trigrams found, 6 missing; words absent: 115460x; source 'The paper now says **136–246×**, and states explicitly that the old 11')
+    ! SIDM_ROUND5_CONSOLIDATED_FIXES_v1.17_2026-11-02.pdf: source prose line not contained in the PDF (21% of its word-trigrams found, 11 missing; words absent: 14.2x, 71.2x; source 'σ/m(15) = 2.845 cm²/g: **3.6×, 14.2×, 71.2×**. The 10× and 50× were co')
+    ! SIDM_ROUND5_CONSOLIDATED_FIXES_v1.17_2026-11-02.pdf: source prose line not contained in the PDF (47% of its word-trigrams found, 8 missing; words absent: 2749x; source '**Defect:** "27–49× at v = 9–40 km/s" reads as a min–max over that vel')
+    ! SIDM_ROUND5_CONSOLIDATED_FIXES_v1.17_2026-11-02.pdf: source prose line not contained in the PDF (60% of its word-trigrams found, 6 missing; words absent: 2749x; source 'The paper now labels 27–49× as the endpoint pair and states the 14× wi')
+    ! SIDM_ROUND5_CONSOLIDATED_FIXES_v1.17_2026-11-02.pdf: source prose line not contained in the PDF (23% of its word-trigrams found, 10 missing; words absent: 1/(/mxm_/_si; source '(`g_N/g_χ < 1/√(σ/m·m_χ/σ_SI)`, `m_χ = 1.78e-24 g`, `σ_SI = 9.4e-48 cm')
+    ! SIDM_ROUND5_CONSOLIDATED_FIXES_v1.17_2026-11-02.pdf: source prose line not contained in the PDF (57% of its word-trigrams found, 6 missing; words absent: 49.25x; source '- **"9.85/0.2 = 49.25×"** — there is no 9.85 cm²/g anywhere in the pap')
+    ! SIDM_ROUND5_CONSOLIDATED_FIXES_v1.17_2026-11-02.pdf: source prose line not contained in the PDF (50% of its word-trigrams found, 7 missing; words absent: 14.2x, 22.2x; source '- **"~22× lower end"** — 22.2× is the v=10 value; the window minimum i')
+    ! SIDM_ROUND5_CONSOLIDATED_FIXES_v1.17_2026-11-02.pdf: source prose line not contained in the PDF (8% of its word-trigrams found, 12 missing; words absent: 2749x, 3.623.7x; source '- factor ranges: 136–246× (vs 0.04), 27–49× endpoints (vs 0.2), 14× wi')
+    ! SIDM_ROUND5_CONSOLIDATED_FIXES_v1.17_2026-11-02.pdf: source prose line not contained in the PDF (36% of its word-trigrams found, 7 missing; words absent: 14.2x, 71.2x; source '- σ/m(15) → 3.6× / 14.2× / 71.2× against 0.8 / 0.2 / 0.04')
+    ! SIDM_ROUND5_CONSOLIDATED_FIXES_v1.17_2026-11-02.pdf: source prose line not contained in the PDF (25% of its word-trigrams found, 6 missing; words absent: 0.09x; source '`channels_v03.sigma_m_at_v` + `constants.py` (σ/m(5) = 16.865226 → 0.0')
+    ! SIDM_ROUND5_CONSOLIDATED_FIXES_v1.17_2026-11-02.pdf: source prose line not contained in the PDF (0% of its word-trigrams found, 18 missing; words absent: 1.78x10; source '> σ_1 = 4.4 → σ/m(28) = 166.0 → g_N/g_χ < 1.78×10⁻¹³; σ_1 = 3.0 → σ/m(')
+    ! SIDM_ROUND5_CONSOLIDATED_FIXES_v1.17_2026-11-02.pdf: source prose line not contained in the PDF (0% of its word-trigrams found, 13 missing; words absent: 1.84x10, 2.84x10; source '> g_N/g_χ < 1.84×10⁻¹³; σ_1 = 1.0 → σ/m(28) = 65.49 → g_N/g_χ < 2.84×1')
+    ! SIDM_ROUND5_CONSOLIDATED_FIXES_v1.17_2026-11-02.pdf: source prose line not contained in the PDF (0% of its word-trigrams found, 15 missing; words absent: 2.83x10, 2.84x10; source '- L151 `σ_1 = 1.0 → σ/m(28) = 65.49 cm²/g → g_N/g_χ < 2.84×10⁻¹³` → `6')
+    ! SIDM_ROUND5_CONSOLIDATED_FIXES_v1.17_2026-11-02.pdf: source prose line not contained in the PDF (29% of its word-trigrams found, 10 missing; words absent: 2.84x10; source '- L151 §10.7 "Primary value" restatement: `2.84e-13` → `2.83e-13` (3 ×')
+    ! SIDM_ROUND5_CONSOLIDATED_FIXES_v1.17_2026-11-02.pdf: source prose line not contained in the PDF (31% of its word-trigrams found, 11 missing; words absent: 2.83x10; source '`65.91` × 5, `2.83e-13` × 3, `2.83×10⁻¹³` × 3, `1.25e+25` × 1. Paper l')
+    ! SIDM_ROUND5_CONSOLIDATED_FIXES_v1.17_2026-11-02.pdf: source prose line not contained in the PDF (82% of its word-trigrams found, 3 missing; words absent: 1.783x; source "sits at the channel's saturated −1.0 penalty), the 1.783× stricter swi")
+
+  SIDM_N24_CLOSEOUT_REPORT_WITH_CODE_v1.1_2026-11-01.pdf
+    . SIDM_N24_CLOSEOUT_REPORT_WITH_CODE_v1.1_2026-11-01.pdf: only 1 page — check the flow length
+    . SIDM_N24_CLOSEOUT_REPORT_WITH_CODE_v1.1_2026-11-01.pdf: 14 source line(s) matched only after dropping markdown punctuation tokens (bold wrapping a code span); words verified present in the PDF, formatting differs — not a defect
+    . SIDM_N24_CLOSEOUT_REPORT_WITH_CODE_v1.1_2026-11-01.pdf: 1 source line(s) failed token containment only because pdftotext drops or remaps glyphs (sigma -> nothing, superscript 2 -> ASCII 2, prime -> nothing): every 'absent' word on those lines has its alphanumeric stem present in the PDF token stream — extraction damage, not missing content. Example signature: source 'f_H sigma_HH' tokenises 'f_h_hh', PDF tokenises 'f_h_hh' with the sigma removed; stems match.
+    . SIDM_N24_CLOSEOUT_REPORT_WITH_CODE_v1.1_2026-11-01.pdf: 1 source code line(s) appear in the PDF joined to an adjacent comment line by the code renderer (words verified present verbatim) — a layout join, not clipping
+    . SIDM_N24_CLOSEOUT_REPORT_WITH_CODE_v1.1_2026-11-01.pdf: 1 page(s), 1 literal '**' in rendered text
+    OK: source contained, no block-marker leakage, budget respected
+
+----------------------------------------------------------------------
+RESULT: PASS (gate mode) — 0 hard defects; 18 advisory prose flag(s) listed above for triage
+----------------------------------------------------------------------
