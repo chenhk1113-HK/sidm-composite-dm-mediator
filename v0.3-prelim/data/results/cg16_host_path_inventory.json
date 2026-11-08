@@ -198,6 +198,7 @@
       "tests/test_sashimi_per_galaxy.py",
       "tests/test_sidm_mass_lower.py",
       "tests/test_version_guard.py",
+      "v0.3-prelim/tests/_cg16_env_probe.py",
       "v0.3-prelim/tests/conftest.py",
       "v0.3-prelim/tests/test_T130_inelastic_kinematic_scan.py",
       "v0.3-prelim/tests/test_T131_chu_pwave_verification.py",
@@ -208,6 +209,7 @@
       "v0.3-prelim/tests/test_bm2_collapse_time_rederivation.py",
       "v0.3-prelim/tests/test_channel_19_competitor_dd.py",
       "v0.3-prelim/tests/test_channel_bound_attribution.py",
+      "v0.3-prelim/tests/test_channel_independence_structure.py",
       "v0.3-prelim/tests/test_channel_taxonomy_single_source.py",
       "v0.3-prelim/tests/test_cmb_distortion.py",
       "v0.3-prelim/tests/test_constants_single_source.py",
@@ -215,6 +217,7 @@
       "v0.3-prelim/tests/test_dampe_cre_forward_model.py",
       "v0.3-prelim/tests/test_dampe_cre_spectrum.py",
       "v0.3-prelim/tests/test_delta_n_eff_goldstein_hill_2026.py",
+      "v0.3-prelim/tests/test_direct_detection_unit_constant.py",
       "v0.3-prelim/tests/test_dsph_sigma_m_table_matches_canonical.py",
       "v0.3-prelim/tests/test_dsph_upper_limit_p0d.py",
       "v0.3-prelim/tests/test_erosita_erass1_forward_model.py",
@@ -236,6 +239,7 @@
       "v0.3-prelim/tests/test_kiss_sidm_scalings.py",
       "v0.3-prelim/tests/test_known_physics_limits.py",
       "v0.3-prelim/tests/test_lz_magnetic_moment.py",
+      "v0.3-prelim/tests/test_markup_balance_cg4.py",
       "v0.3-prelim/tests/test_model_provenance_date_guard.py",
       "v0.3-prelim/tests/test_module_parse_and_pairing_names_bound.py",
       "v0.3-prelim/tests/test_n18_generator_docstring_consistency.py",
@@ -280,6 +284,7 @@
       "v0.3-prelim/tests/test_phase39_nfw_vs_sidm.py",
       "v0.3-prelim/tests/test_phase39b_responsive_profile.py",
       "v0.3-prelim/tests/test_phase40_corrected_comparison.py",
+      "v0.3-prelim/tests/test_phase40_penalty_convention.py",
       "v0.3-prelim/tests/test_phase41_extended_comparison.py",
       "v0.3-prelim/tests/test_phase41d_parametric_sidm.py",
       "v0.3-prelim/tests/test_phase42_summary.py",
@@ -468,7 +473,20 @@
         "code_lines_with_host_path": 0
       }
     ],
-    "pinned_source": [],
+    "pinned_source": [
+      {
+        "path": "scripts/cg16_convert.py",
+        "host_path_lines": 25
+      },
+      {
+        "path": "scripts/cg16_scan.py",
+        "host_path_lines": 8
+      },
+      {
+        "path": "scripts/paths.py",
+        "host_path_lines": 5
+      }
+    ],
     "pinned_exception": [
       {
         "path": "v0.3-prelim/code/kiss_sidm_julia_bridge.py",
@@ -477,6 +495,10 @@
       {
         "path": "v0.3-prelim/tests/test_config_split_brain.py",
         "host_path_lines": 8
+      },
+      {
+        "path": "v0.3-prelim/tests/test_no_hardcoded_host_paths_cg16.py",
+        "host_path_lines": 4
       }
     ],
     "historical_frozen_code": [
@@ -1925,6 +1947,10 @@
     ],
     "data_artifact": [
       {
+        "path": "v0.3-prelim/data/results/cg16_host_path_inventory.json",
+        "host_path_lines": 7
+      },
+      {
         "path": "v0.3-prelim/data/results/kiss_sidm_canonical_simulation_N1e5.json",
         "host_path_lines": 1
       },
@@ -2200,13 +2226,13 @@
     "other": []
   },
   "counts": {
-    "live_clean": 422,
+    "live_clean": 427,
     "live_prose_only": 4,
-    "pinned_source": 0,
-    "pinned_exception": 2,
+    "pinned_source": 3,
+    "pinned_exception": 3,
     "historical_frozen_code": 230,
     "docs_prose": 130,
-    "data_artifact": 68,
+    "data_artifact": 69,
     "other": 0
   },
   "patterns": [
