@@ -69,14 +69,13 @@ the most recent and most likely to have ADS/arXiv verification issues.
 - 2025 paper, central to dSph constraints
 - Status: **NEEDS VERIFICATION**
 
-### [29a] G. Despali et al., "Introducing the AIDA-TNG project: Galaxy formation in alternative dark matter models," Mon. Not. R. Astron. Soc. ... (2024).
-- 2024 paper
-- Status: **NEEDS VERIFICATION**
+### [29a] G. Despali et al., "Introducing the AIDA-TNG project: Galaxy formation in alternative dark matter models," Astron. Astrophys. 697, A213 (2025); doi:10.1051/0004-6361/202553836.
+- **CORRECTED 2026-11-09 (registry §7.11 D2):** this entry previously read "Mon. Not. R. Astron. Soc. ... (2024)". Crossref resolves the title to **Astronomy & Astrophysics, vol 697, page A213, issued 2025-05**.
+- Status: **VERIFIED (bibliographic, Crossref 2026-11-09)** — no local PDF yet; do not cite numerical content from this entry until the paper is in the KB.
 
-### [29b] G. Despali et al., "The AIDA-TNG project: dark matter profiles and concentrations in alternative dark matter models," Astron. Astrophys. 699, A222 (2026); arXiv:2512.15869v1.
-- 2026 paper
-- Status: **NEEDS VERIFICATION**
-- **Note:** arXiv:2512.15869 — December 2025. Verify.
+### [29b] G. Despali et al., "The AIDA-TNG project: dark matter profiles and concentrations in alternative dark matter models," Astron. Astrophys. 708, A47 (2026); arXiv:2512.15869v2; doi:10.1051/0004-6361/202558686.
+- **CORRECTED 2026-11-09 (registry §7.11 D1):** this entry previously read "Astron. Astrophys. 699, A222 (2026); arXiv:2512.15869v1". Crossref resolves it to **A&A vol 708, page A47, published online 2026-03-26**, and the current arXiv version is **v2**. A&A 699, A222 is a DIFFERENT paper ("Detecting low-mass haloes with strong gravitational lensing"), so the old line was a wrong-venue citation, not a formatting slip. Line 259 of this same file already carried the correct venue — the file was internally inconsistent.
+- Status: **VERIFIED (full text read)** — `docs/papers/verified/2512.15869_despali_2026.md`. Cited in the draft as [48].
 
 ### [29c] G. Alguero, G. Belanger, S. Kraml, A. Pukhov, et al., "micrOMEGAs 6.0: N-component dark matter," Comput. Phys. Commun. 299, 109133 (2025).
 - 2025 paper, micrOMEGAs is a real codebase
@@ -273,7 +272,7 @@ The following Tier-1 references were verified against arXiv.org and IOPscience:
 | [15c] | Anand, Benítez-Llambay et al., ApJL 993, L55 (2025) — verify |
 | [15d] | Trujillo et al., RNAAS (2024) — verify |
 | [26] | Cerny et al. — long author list, verify (likely DELVE paper) |
-| [29a] | Despali et al. — AIDA-TNG introducing paper, verify |
+|| [29a] | Despali et al. — AIDA-TNG introducing paper — **venue verified 2026-11-09 (A&A 697, A213, 2025); local PDF still missing** |
 | [42] | Yang, Tsai, Fan, two-component SIDM mass segregation — verify |
 | [43] | Yang, Nadler, Yu, Zhong, parametric SIDM halos — verify |
 

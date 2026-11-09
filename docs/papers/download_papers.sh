@@ -36,7 +36,7 @@ mkdir -p docs/papers/verified
 cd docs/papers/verified
 echo ""
 echo "=== Downloading 2026-11-09 intake papers ==="
-for pair in "2411.11945|2411.11945_tran_2026.pdf" "2512.15869|2512.15869_despali_2026.pdf" "2607.08818|2607.08818_sarratoalos_2026.pdf" "2002.02102|2002.02102_yang_2020.pdf" "2403.11403|2403.11403_zhang_2024.pdf" "astro-ph/9611107|9611107_nfw_1997.pdf" "astro-ph/9508025|9508025_nfw_1996.pdf" "astro-ph/9703057|9703057_burkert_1997.pdf"; do
+for pair in "2411.11945|2411.11945_tran_2026.pdf" "2512.15869|2512.15869_despali_2026.pdf" "2607.08818|2607.08818_sarratoalos_2026.pdf" "2002.02102|2002.02102_yang_2020.pdf" "2403.11403|2403.11403_zhang_2024.pdf" "astro-ph/9611107|9611107_nfw_1997.pdf" "astro-ph/9508025|9508025_nfw_1996.pdf" "astro-ph/9703057|9703057_burkert_1997.pdf" "astro-ph/9504041|9504041_burkert_1995.pdf"; do
   url_id="${pair%%|*}"; out="${pair##*|}"
   if [ -f "$out" ]; then
     echo "  [skip] $out already exists"

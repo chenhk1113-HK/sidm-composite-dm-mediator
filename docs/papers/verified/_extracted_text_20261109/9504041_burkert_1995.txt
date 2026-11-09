@@ -1,0 +1,571 @@
+astro-ph/9504041   12 Apr 95
+The Structure of Dark Matter Halo es in Dw arf Galaxies
+A/. Burk ert
+Max/-Planc k/-Institut f / ur Astronomie
+K/ onigstuhl /1/7/, D/-/6/9/1/1/7 Heidelb erg/, German y
+Receiv ed /; accepted
+Revised V ersion /, submitted to Astr ophysic al Journal/, L etters to the Editor
+/{ /2 /{
+ABSTRA CT
+Recen t observ ations indicate that dark matter halo es ha v e /at cen tral
+densit y pro/les/. Cosmological sim ulations with non/-bary onic dark matter
+predict ho w ev er self/-similar halo es with cen tral densit y cusps/. This con tradiction
+has lead to the conclusion that dark matter m ust b e bary onic/. Here it is sho wn
+that the dark matter halo es of dw arf spiral galaxies represen t a one/-parameter
+family with self/-similar densit y pro/les/. The observ ed global halo parameters
+are coupled with eac h other through simple scaling relations whic h can b e
+explained b y the standard cold dark matter mo del if one assumes that all the
+halo es formed from densit y /uctuations with the same primordial amplitude/.
+W e /nd that the /nite cen tral halo densities correlate with the other global
+parameters/. This result rules out scenarios where the /at halo cores formed
+subsequen tly through violen t dynamical pro cesses in the bary onic comp onen t/.
+These cores instead pro vide imp ortan t information on the origin and nature of
+dark matter in dw arf galaxies/.
+Subje ct he adings/: Dark matter /| galaxies/: spiral /| galaxies/: structure
+/{ /3 /{
+/1/. In tro duction
+The nature of the dark matter /(DM/) is one of the most imp ortan t and still unsolv ed
+problems in astronom y /. Curren t cosmological mo dels assume that there exists a non bary onic/,
+cold dark matter /(CDM/) comp onen t whic h consists of non/-relativistic particles that are
+assumed to b e collisionless and to in teract with the bary ons only through gra vitational
+forces/. CDM sim ulations indeed repro duce quite w ell the observ ed clustering on galactic
+scales /(Da vis et al/. /1/9/8/5/)/. They also predict the existence of extended dark matter halo es
+around galaxies /(F renk et al/. /1/9/8/5/) with constan t outer rotation curv es/, in agreemen t with
+the observ ations /(Casertano /& v an Gork om /1/9/9/1/)/.
+In order for the galactic gas and stars to ac hiev e a constan t circular v elo cit y in the
+outer regions/, the densit y pro/le of the DM halo m ust fall appro ximately prop ortional
+to r
+/BnZr /2
+in the relev an t radius range/. Suc h a pro/le resem bles the densit y structure of an
+isothermal/, self/-gra vitating system of particles whic h is c haracterized b y a constan t v elo cit y
+disp ersion/. DM halo es are therefore often appro ximated b y a so called mo di/ed/, isothermal
+densit y pro/le /(Begeman et al/. /1/9/9/1/)
+/ /( r /) /=
+/
+/0
+/1 /+
+r
+/2
+r
+/2
+c
+/(/1/)
+where r
+c
+is the core radius and /
+/0
+is the cen tral dark matter densit y /.
+Early cosmological N/-b o dy calculations did not ha v e enough resolution to resolv e the
+inner structure of DM halo es/. Recen t CDM/-sim ulations with m uc h higher spatial resolution
+/(Dubinski /& Carlb erg /1/9/9/1/, Na v arro et al/. /1/9/9/5/) ho w ev er lead to DM halo es with an inner
+densit y distribution that is inconsisten t with equation /1/. Whereas the isothermal densit y
+pro/le b ecomes almost constan t at radii smaller than r
+c
+and has a /nite cen tral densit y /,
+the n umerical mo dels indicate a densit y distribution whic h div erges as / / r
+/BnZr /1
+in the
+/{ /4 /{
+inner parts/, leading to an in/nite densit y in the cen ter/. Unfortunately suc h cen tral densit y
+cusps are hard to v erify in normal spiral galaxies as their inner parts are gra vitationally
+dominated b y bary ons/. The inferred DM prop erties then dep end strongly on the assumed
+mass/-to/-ligh t ratios of the galactic disk and of the spheroidal cen tral stellar comp onen t/.
+The situation is di/eren t in dw arf spiral systems whic h recen tly ha v e b een observ ed with
+high resolution/. It has b een sho wn that some of these systems are completely dominated
+b y dark matter /(Carignan /& F reeman /1/9/8/8/)/. They therefore represen t ideal candidates for
+an in v estigation of the inner structure of dark matter halos/. Flores /& Primac k /(/1/9/9/4/) and
+Mo ore /(/1/9/9/4/) recen tly sho w ed that the DDO galaxies ha v e rotation curv es whic h rule out
+singular halo pro/les with in/nite cen tral densities and are in go o d agreemen t with the
+mo di/ed isothermal densit y la w /(eq/. /1/)/. The origin of these shallo w DM cores represen ts
+an in teresting and c hallenging cosmological puzzle whic h is not y et solv ed/.
+/2/. The Univ ersal Densit y Pro/les of Dark Matter Halo es
+Scale free cosmological scenarios with non/-bary onic/, dissipationless DM predict that
+all DM halo es should ha v e similar structure /(Na v arro et al/. /1/9/9/5/)/. This prediction is tested
+in Figure /1 whic h sho ws the DM mass distribution as deriv ed from the observ ed neutral
+h ydrogen rotation curv es of four w ell studied dw arf spiral galaxies/. These systems are
+completely DM dominated/, ev en in their innermost regions/. Their rotation curv es therefore
+trace directly the DM mass distribution and the uncertain gra vitational con tribution of the
+bary onic comp onen t can b e neglected/. All four pro/les indeed follo w the same univ ersal
+mass relation/, implying a univ ersal halo structure/. Note that the mo di/ed/, isothermal pro/le
+/(dashed curv e/) only /ts the inner regions/; it rises somewhat to o fast at large radii/. The
+dotted and dot/-dashed curv es sho w the mass distribution as predicted from cosmological
+CDM sim ulations on cluster scales /(Na v arro et al/. /1/9/8/5/)/. These calculations predict DM
+/{ /5 /{
+pro/les whic h are giv en b y the /tting function / /( r /) /= /3/0/0 / / r
+/3
+/2/0/0
+/ r
+/BnZr /1
+/( r /+ /0 /: /2/5 r
+/2/0/0
+/)
+/BnZr /2
+where
+// is the mean densit y of the univ erse at the ep o c h when the DM halo formed/. r
+/2/0/0
+denotes
+the radius of the DM sphere of mean o v erdensit y of /2/0/0/. These pro/les predict to o m uc h
+mass at small radii as a result of the cen tral densit y cusp /(Flores /& Primac k /1/9/9/4/, Mo ore
+/1/9/9/4/)/.
+The observ ed univ ersal mass pro/les can b e /tted nicely o v er the whole observ ed radius
+range b y the follo wing/, purely phenomenological densit y distribution/:
+/
+D M
+/( r /) /=
+/
+/0
+r
+/3
+/0
+/( r /+ r
+/0
+/)/( r
+/2
+/+ r
+/2
+/0
+/)
+/: /(/2/)
+whic h is sho wn in Figure /1 b y the solid line/. /
+/0
+and r
+/0
+are free parameters whic h represen t
+the cen tral densit y and a scale radius/, resp ectiv ely /. This revised densit y la w resem bles an
+isothermal pro/le in the inner regions /( r / r
+/0
+/) and predicts a /nite cen tral densit y /
+/0
+/. r
+/0
+is similar to the core radius r
+c
+of the isothermal /t form ula /(equation /1/)/. F or large radii/,
+the mass distribution of the isothermal pro/le w ould div erge prop ortional to r/. Equation /2
+leads to mass pro/les whic h div erge logarithmically with increasing r/, in agreemen t with
+the predictions of cosmological CDM calculations /(Na v arro et al/. /1/9/9/5/)/.
+/3/. The Dark Matter Scaling Relations
+Supp osing that the DM halo es of dw arf spirals are indeed all similar with a densit y
+structure as describ ed b y equation /2/, w e next can in v estigate the question whether there
+exists a relation b et w een /
+/0
+and r
+/0
+/. Instead of studying /
+/0
+/, whic h cannot b e observ ed
+directly /, w e c ho ose as free parameter the rotational v elo cit y v
+/0
+of the DM rotation curv e
+at r
+/0
+/. r
+/0
+and v
+/0
+are determined b y /tting the theoretically predicted rotation curv e /(using
+equation /2/) to the observ ed DM rotation curv es/. Accurate neutral h ydrogen rotation
+/{ /6 /{
+curv es are no w a v ailable for ab out a dozen lo w/-mass disk galaxies/. F rom this sample w e
+select those candidates whic h are clearly dark matter dominated at r
+/0
+/. This restriction
+considerably reduces the error in determining v
+/0
+due to uncertain ties in the mass/-to/-ligh t
+ratios of the gaseous and stellar comp onen ts/. In addition/, the inner DM pro/les are not
+strongly a/ected b y the gra vitational force of the bary ons/. Only those galaxies can b e used
+for whic h the rotation curv e is kno wn at r
+/0
+/. These constrain ts reduce the sample to sev en
+galaxies/. The presen t sample consists of the four previously studied galaxies plus three
+systems /(Puc he /& Carignan /1/9/9/1/, Bro eils /1/9/9/2/)/: NGC/5/5/, NGC/3/0/0/, and NGC/1/5/6/0/. F or
+these galaxies the gra vitational force of the visible comp onen ts is not completely negligible
+inside r
+/0
+/. The con tribution of the visible matter to the gra vitational p oten tial therefore had
+to b e subtracted/, leading to a residual DM rotation curv e/. Here w e adopt the b est three
+comp onen t /ts to the rotation curv es as suggested b y Puc he /& Carignan /(/1/9/9/1/) for NGC/5/5
+and NGC/3/0/0 and b y Bro eils /(/1/9/9/2/) for NGC/1/5/6/0/.
+Figure /2 sho ws v
+/0
+of all galaxies as a function of r
+/0
+/. W e /nd a strong/, linear correlation
+b et w een r
+/0
+and v
+/1 /: /5
+/0
+/. Assuming spherical symmetry /, one can deriv e the follo wing scaling
+relations for v
+/0
+/, the total dark matter mass M
+/0
+inside r
+/0
+/, the cen tral densit y /
+/0
+and r
+/0
+/:
+v
+/0
+/= /1/7 /: /7
+/ 
+r
+/0
+k pc
+/!
+/2 /= /3
+k m
+s
+M
+/0
+/= /7 /: /2 / /1/0
+/7
+/ 
+r
+/0
+k pc
+/!
+/7 /= /3
+M
+/
+/(/3/)
+/
+/0
+/= /4 /: /5 / /1/0
+/BnZr /2
+/ 
+r
+/0
+k pc
+/!
+/BnZr /2 /= /3
+M
+/
+pc
+/3
+The equations /3 demonstrate/, that the densit y pro/les of the dark matter halo es in
+dw arf galaxies dep end only on one free parameter/, e/.g/. r
+/0
+/. Giv en r
+/0
+/, the cen tral densit y /
+/0
+/(equation /3/) and b y this the complete DM densit y pro/le /(equation /2/) is sp eci/ed/. One
+should note/, that Mo ore /(/1/9/9/4/) also noted a trend of increasing size of the galaxy with the
+/{ /7 /{
+p eak rotational v elo cit y v
+max
+/. Unfortunately /, v
+max
+is not w ell determined in most systems
+as the rotation curv es tend to rise past the observ ed region/. Mo ore/'s conclusion is ho w ev er
+in qualitativ e agreemen t with the presen t results/.
+/4/. Discussion of the Scaling Relations
+F rom the scaling la ws /(equation /3/) one can deriv e the follo wing relation/: M
+/0
+/ v
+/3 /: /5
+/0
+/.
+This relation is similar to the T ully/-Fisher/-Relation /(TFR/) for massiv e spiral galaxies
+/(T ully /& Fisher /1/9/7/7/) whic h predicts that the galaxies/' luminosit y L correlates with their
+maxim um rotational v elo cit y v
+max
+according to L / v
+/4
+max
+/. Note ho w ev er that the TFR
+com bines the mass of the luminous galactic comp onen ts with the maxim um of the rotation
+curv e whereas here/, the v elo cit y of the DM rotation curv e at r
+/0
+is correlated with the DM
+mass inside r
+/0
+/. There exists no ob vious reason wh y the relations should b e similar/. In
+addition/, it has b een sho wn that the TFR is not v alid for DM/-dominated DDO galaxies
+/(Carignan /& F reeman /1/9/8/8/) as in these systems the bary onic comp onen t is not massiv e
+enough in order to determine v
+max
+/.
+Lik e the TFR/, the equations /3 can b e used as a to ol for determining the distances to
+DM/-dominated dw arf galaxies/, pro vided their HI/-rotation curv es are kno wn up to r
+/0
+/. In
+this case/, r
+/0
+in arcsec can b e sp eci/ed b y /tting the univ ersal v elo cit y pro/le as giv en b y
+equation /2 to the observ ed rotation curv e/. v
+/0
+can then b e determined directly from the
+data/. Equation /3 then giv es the corresp onding scale radius r
+/0
+in units of kiloparsecs/. A
+comparison with the observ ed radius in arcsec leads to the distance of the galaxy /.
+There migh t exist a cosmological explanation for the scaling relations /(equation /3/)/.
+Consider a spherical region with DM densit y / and o v erdensit y / /= //= / /BnZr /1 in an otherwise
+uniform Einstein/-de Sitter univ erse with mean densit y / /. The mass of this DM halo is
+M
+h
+/= /4 / /R
+/3
+/= /3 where R is its ph ysical radius/. The densit y /uctuation /rst expands with
+/{ /8 /{
+the univ erse/, reac hes a maxim um radius R
+m
+at a certain redshift z
+m
+and then collapses
+again/. F or a collisionless system of DM particles/, this DM halo will ac hiev e a virial
+equilibrium state with a /nal radius R
+h
+/= /0 /: /5 R
+m
+/. Bardeen et al/. /(/1/9/8/6/) and White /(/1/9/9/4/)
+demonstrate in detail ho w one can calculate R
+m
+and z
+m
+as a function of M
+h
+for certain
+cosmological scenarios/. As an example/, the solid line in Fig/. /3a sho ws the theoretically
+predicted mass/-radius relation for virialized/, dissipationless CDM halo es whic h formed from
+primordial /1 / densit y /uctuations in the standard CDM/-univ erse/.
+Let us no w assume that all the observ ed DM halo es result from /1 / /uctuations/. As all
+halo es are self/-similar there should exist a univ ersal/, linear relation b et w een the observ ed
+scale parameters /( M
+/0
+/; r
+/0
+/) and the virial parameters /( M
+h
+/; R
+h
+/)/. In order to determine this
+relation/, the dotted curv e in Fig/. /3a sho ws the observ ed mass pro/le M/(r/) for the DM halo
+of the dw arf galaxy DDO/1/5/4/. Its scale parameters /( M
+/0
+/; r
+/0
+/) are sho wn b y the /lled circle/. If
+DDO/1/5/4 formed from a /1 / /uctuation/, its virial parameters should lie somewhere on the
+solid line/. The virial parameters are therefore determined b y the in tersection /(op en circle/)
+of the dashed and solid curv e/, leading to the follo wing relations
+R
+h
+/= /3 /: /4 / r
+/0
+/(/4/)
+M
+h
+/= /5 /: /8 / M
+/0
+Supp osing that the DM halo es of all the observ ed dw arf spirals are similar and result
+from /1 / CDM /uctuations/, their cosmological virial parameters M
+h
+and R
+h
+can b e deriv ed
+from the observ ed scale parameters r
+/0
+and M
+/0
+/, using the equations /4/. Figure /3b sho ws M
+h
+v ersus R
+h
+for all the dw arf spirals of our sample/. The data p oin ts indeed follo w v ery nicely
+the theoretical mass/-radius relation/.
+/{ /9 /{
+/5/. Conclusions
+As demonstrated in the previous section/, cosmological mo dels with non/-bary onic/,
+dissipationless cold dark matter can in principle explain the scaling relations of DM halo es
+around dw arf galaxies/. The dotted and dashed lines in Figure /3b sho w ho w ev er clearly
+that a m uc h larger spread of the virial parameters is exp ected as regions with di/eren t
+primordial o v erdensities could in principle form lo w/-mass DM halo es/. If the prop osed
+cosmological in terpretation is v alid w e ha v e to dra w the conclusion that only /uctuations
+with a certain/, /xed amplitude managed to form dw arf spiral galaxies with dominating DM
+halo es/. This in teresting question will b e addressed in greater details in a subsequen t pap er/.
+Cosmological mo dels predict self/-similar halo es/, in agreemen t with the presen t
+observ ations/. Figure /1 sho ws ho w ev er that n umerical CDM sim ulations lead to DM densit y
+pro/les with shap es that disagree with the observ ations/. A p ossible answ er to this problem
+migh t b e dynamical pro cesses within the bary onic/, visible comp onen t /(Flores /& Primac k
+/1/9/9/4/, Mo ore /1/9/9/4/) whic h a/ect the gra vitational p oten tial in the inner regions of DM
+halo es/, b y this leading to a secular c hange of the DM densit y pro/le/. Ejection of gas migh t
+for example decrease the gra vitational force in the inner region/, triggering an expansion
+of the inner DM halo and leading to a /nite cen tral densit y with an almost constan t
+densit y core/. Although suc h a scenario seems at /rst v ery attractiv e/, the presen t results
+indicate that signi/can t /ne tuning w ould b e required b et w een the early cosmological/,
+collisionless collapse phase whic h leads to DM halo es in the /rst place and the secular
+energetic pro cesses in the bary onic matter whic h o ccur later/. It is unlik ely that DM halo es
+ha v e self/-similar densit y pro/les/, if their inner structure is subsequen tly c hanged b y these
+completely di/eren t/, secular pro cesses/, whereas the outer regions result from the collisionless
+relaxation phase of the DM halo/. W e rather w ould exp ect to /nd a second indep enden t
+parameter whic h describ es the structure of the cores of DM halo es and is determined b y
+/{ /1/0 /{
+the e/ciency with whic h the bary onic pro cesses a/ect the inner DM halo/.
+The observ ed shallo w cen tral densit y pro/les of DM halo es are more lik ely a direct
+result of their collisionless formation history /. If DM/, for example/, has a /nite maxim um
+phase space densit y f
+max
+/(as in the case of w arm or hot dark matter/) conserv ation of f
+max
+during the collisionless halo formation phase limits the halo/'s core phase space densit y f
+/0
+/,
+leading to a cen tral region with f
+/0
+/ f
+max
+/. If the cen tral v elo cit y disp ersion /
+/0
+of the DM
+halo is /nite/, this constrain t implies a /nite maxim um cen tral densit y /
+/0
+/ f
+max
+/ /
+/3
+/0
+/. This
+scenario w ould ho w ev er require that the cen tral phase space densities of DM halo es are
+similar whic h can b e ruled out from the scaling relations/. According to the equations /3/, f
+/0
+scales as f
+/0
+/ /
+/0
+/=v
+/3
+/0
+/ r
+/BnZr /8 /= /3
+/0
+and therefore decreases steeply with increasing scale length/. A
+/nite maxim um phase space densit y therefore is unlik ely to b e the correct explanation/.
+The nature of DM and the origin of DM halo es with /nite cen tral densities remains ill
+understo o d/. The discussed discrepancies b et w een CDM calculations and the observ ations
+indicate that some imp ortan t ph ysical features/, whic h are related to the nature and origin
+of dark matter are still missing in cosmological mo dels/.
+I w ould lik e to thank Simon White for in teresting and critical discussions and the
+referee for clarifying commen ts/.
+/{ /1/1 /{
+REFERENCES
+Bardeen/, J/. M/./, Bond/, J/. R/./, Kaiser/, N/./, and Szala y /, A/. S/. /1/9/8/6/, ApJ/, /3/0/4/, /1/5
+Begeman/, K/. G/./, Bro eils/, A/. H/./, and Sanders/, R/. H/. /1/9/9/1/, MNRAS/, /2/4/9/, /5/2/3
+Bro eils/, A/. H/. /1/9/9/0/, Thesis/, Univ/. Groningen
+Bro eils/, A/. H/. /1/9/9/2/, A/&A/, /2/5/6/, /1/9
+Carignan/, C/./, and Beaulieu/, S/. /1/9/8/9/, ApJ/, /3/4/7/, /7/6/0
+Carignan/, C/./, and F reeman/, K/. C/. /1/9/8/8/, ApJ/, /3/3/2/, L/3/3
+Casertano/, S/./, and v an Gork om/, J/. H/. /1/9/9/1/, AJ/, /1/0/1/, /1/2/3/1
+Da vis/, M/./, Efstathiou/, G/. P /. E/./, F renk/, C/. S/./, and White/, S/. D/. M/. /1/9/8/5/, ApJ/, /2/9/2/, /3/7/1
+Dubinski/, J/./, and Carlb erg/, R/. /1/9/9/1/, ApJ/, /3/7/8/, /4/9/6
+Flores/, R/. A/./, and Primac k/, J/. R/. /1/9/9/4/, ApJ/, /4/2/7/, L/1
+F renk/, C/. S/./, White/, S/. D/. M/./, Efstathiou/, G/. P /./, and Da vis/, M/. /1/9/8/5/, Nature/, /3/1/7/, /5/9/5
+Kormendy /, J/./, and Sanders/, D/. B/. /1/9/9/2/, ApJ/, /3/9/0/, L/5/3
+Lak e/, G/./, Sc hommer/, R/. A/./, and v an Gork om/, J/. H/. /1/9/9/0/, AJ/, /9/9/, /5/4/7
+Mo ore/, B/. /1/9/9/4/, Nature/, /3/7/0/, /6/2/9
+Na v arro/, J/. F/./, F renk/, C/. S/./, and White/, S/. D/. M/./, /1/9/9/5/, MNRAS/, in publication
+Puc he/, D/./, and Carignan/, C/. /1/9/9/1/, ApJ/, /3/7/8/, /4/8/7
+Sc hramm/, D/.N/. /1/9/9/2/, Nucl/. Ph ys/. B/. Pro c/. Suppl/./, /2/8A/, /2/4/3
+T ully /, R/. B/./, and Fisher/, J/. R/. /1/9/7/7/, A/&A/, /5/4/, /6/6/1
+White/, S/. D/. M/./, Efstathiou/, G/./, and F renk/, C/. /1/9/9/3/, MNRAS/, /2/6/2/, /1/0/2/3
+/{ /1/2 /{
+White/, S/. D/. M/. /1/9/9/4/, MP A/-Preprin ts/, /8/3/1
+This man uscript w as prepared with the AAS L
+A
+T
+E
+X macros v/3/./0/.
+/{ /1/3 /{
+FIGURE CAPTIONS
+FIG/. /1/: Dark matter mass pro/les/, deriv ed from the observ ed rotation curv es are
+sho wn for the follo wing dw arf spiral galaxies/: DDO/1/5/4 /(op en triangle/, Carignan /& Beaulieu
+/1/9/8/9/)/, DDO/1/0/5 /(op en square/, Sc hramm /1/9/9/2/)/, NGC/3/1/0/9 /(op en circle/, Bro eils /1/9/9/0/) and
+DDO/1/7/0 /(starred/, Lak e et al/. /1/9/9/0/)/. The scale radius r
+/0
+is de/ned b y equation /2/. The
+errorbar at the innermost triangle represen ts the observ ational uncertain t y in determining
+the rotational v elo cit y and the mass at these radii/. F or larger radii/, the errorbars are as
+large as the size of the sym b ols/. The isothermal /t is sho wn as dashed curv e/, assuming a
+core radius r
+c
+/= r
+/0
+/. The solid line sho ws the revised pro/le /(equation /2/)/. The dotted and
+dot/-dashed curv es sho w DM pro/les as predicted from CDM calculations/. The b est /t to
+the data /(dotted line/) is ac hiev ed if one assumes r
+/2/0/0
+/= /1/7 /: /5 / r
+/0
+whic h for an /
+ /= /1 /; h /= /0 /: /5
+CDM univ erse corresp onds to a formation redshift of z /= /0 /: /6/. The dot/-dashed curv e
+sho ws the mass pro/le as predicted from the CDM calculations if r
+/2/0/0
+/= /5 / r
+c
+with a
+corresp onding formation redshift of z /= /1 /: /5/.
+FIG/. /2/: The scaling relation b et w een the rotational v elo cit y v
+/0
+of the DM halo es at
+r
+/0
+is sho wn as function of the scale radius r
+/0
+/(equation /2/)/. The op en circles sho w the four
+b est kno wn DDO galaxies whic h ha v e b een used in Figure /1/. The /lled circles sho w three
+additional galaxies for whic h the con tribution of the bary onic comp onen t to the rotation
+curv e at r
+/0
+had to b e subtracted/. The error bars sho w the observ ational uncertain t y in
+determining v
+/0
+as quoted in the literature/. The dashed line sho ws a /t /(equation /3/) through
+the data p oin ts/. An extension of the data to larger radii /ts nicely the halo parameters of
+Sc/-Im galaxies /(Kormendy /& Sanders /1/9/9/2/)/. F or comparison/, the dotted curv e sho ws a
+linear /t v
+/0
+/ r
+/0
+/.
+/{ /1/4 /{
+FIG/. /3/: The solid line in Figure /3a sho ws the predicted mass/-radius relation M
+h
+/( R
+h
+/)
+for virialized/, cold dark matter halo es whic h formed from primordial /1 / densit y /uctuations
+in the standard /(/
+ /= /1/; h /= /0/./5/)/-univ erse with a biasing factor of b /= /0 /: /6 /(White et al/.
+/1/9/9/3/)/. The dotted line sho ws the halo mass pro/le for DDO/1/5/4 as deriv ed from its rotation
+curv e and extended to larger radii/, using equation /2/. The /lled circle indicates the lo cation
+of the observ ed halo scale parameters /( M
+/0
+/; r
+/0
+/)/, the op en circle sho ws the predicted virial
+parameters/( M
+h
+/; R
+h
+/) for DDO/1/5/4/.
+Figure /3b compares the virial parameters M
+h
+v ersus R
+h
+of the observ ed DM halo es
+/(op en circles/) with the mass/-radius relation as predicted for a standard CDM univ erse/.
+The dotted/, solid and dashed lines represen t primordial /0 /: /5 / /, /1 / and /2 / p erturbations/,
+resp ectiv ely /.
+/{ /1/5 /{
+Fig/. /1/./|
+/{ /1/6 /{
+Fig/. /2/./|
+/{ /1/7 /{
+Fig/. /3/./|
