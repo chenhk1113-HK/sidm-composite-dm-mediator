@@ -1,0 +1,1358 @@
+arXiv:1101.3097v2 [astro-ph.CO] 9 Mar 2011
+
+Mon. Not. R. Astron. Soc. 000, 1­14 (2011) Printed 22 October 2018 (MN LATEX style file v2.2)
+
+Gravothermal collapse of isolated self-interacting dark matter haloes: N -body simulation versus the fluid model
+
+Jun Koda1 and Paul R. Shapiro1
+1 Department of Astronomy, Texas Cosmology Center, the University of Texas at Austin, TX 78712, USA
+
+22 October 2018
+
+ABSTRACT Self-Interacting Dark Matter (SIDM) is a collisional form of cold dark matter (CDM), originally proposed to solve problems that arose when the collisionless CDM theory of structure formation was compared with observations of galaxies on small scales. The quantitative impact of the proposed elastic collisions on structure formation has been estimated previously by Monte Carlo N -body simulations and by a conducting fluid model, with apparently diverging results. To improve this situation, we make direct comparisons between new Monte Carlo N -body simulations and solutions of the conducting fluid model, for isolated SIDM haloes of fixed mass. This allows us to separate cleanly the effects of gravothermal relaxation from those of continuous mass accretion in an expanding background universe. When these two methods were previously applied to halo formation with cosmological boundary conditions, they disagreed by an order of magnitude about the size of the scattering cross section required to solve the so-called `cusp-core problem.' We show here, however, that the methods agree with each other within 20 per cent for isolated haloes. This suggests that the two methods are consistent, and that their disagreement for cosmological haloes is not caused by a breakdown of their validity.
+The isolated haloes studied here undergo gravothermal collapse. We compare the solutions calculated by these two methods for gravothermal collapse starting from several initial conditions, including the self-similar solution by Balberg, Shapiro, & Inagaki (2002, BSI), and the Plummer, Navarro-Frenk-White and Hernquist profiles. We compare for the case in which the collisional mean free path is comparable to, or greater than, the size of the halo core. This allows us to calibrate the heat conduction which accounts for the effect of elastic hard-sphere scattering in the fluid model. The amount of tuning of the thermal conductivity parameters required to bring the two methods into such close agreement for isolated haloes, however, is too small to explain the discrepancy found previously in the cosmological context. We will discuss the origin of that discrepancy in a separate paper.
+Key words: cosmology: theory ­ dark matter ­ galaxies: kinematics and dynamics ­ galaxies: haloes ­ methods: numerical ­ methods: N -body simulation.
+
+1 INTRODUCTION
+In the currently standard cosmological model (CDM), a flat universe with a cosmological constant contains collisionless cold dark matter as its dominant matter component, perturbed by primordial Gaussian-random-noise density fluctuations. This model has been highly successful at explaining observations of the background universe and large-scale structure. On small scales, however, the distribution of dark matter in coordinate and velocity space is not
+E-mail: junkoda@physics.utexas.edu.  E-mail: shapiro@astro.as.utexas.edu
+c 2011 RAS
+
+fully understood. N -body simulations show that the density profiles of the virialized regions (`haloes') that form in this collisionless dark matter are cuspy, such as the Navarro, Frenk, & White (1997, NFW) profile, in which   r-1 toward the centre. Recent high-resolution simulations show that the inner profile is not exactly a power law (Hayashi et al. 2004; Diemand et al. 2005; Merritt et al. 2006; Gao et al. 2008; Stadel et al. 2009; Navarro et al. 2010), but it diverges nevertheless. On the other hand, a cored profile (a profile which flattens in the centre) such as a pseudoisothermal profile, is favored by observations of dwarf and low surface brightness (LSB) galaxies (de Blok et al. 2003; Gentile et al. 2004; Kuzio de Naray et al. 2006; Zackrisson
+
+2 Jun Koda & P. R. Shapiro
+et al. 2006; Gentile et al. 2007; Kuzio de Naray et al. 2008; de Blok et al. 2008; Oh et al. 2010b; de Blok 2010). Dwarf spiral and LSB galaxies are dark-matter dominated. As such, it was originally thought, their mass distribution should reflect the dark matter dynamics alone, and be relatively less affected by the complexity of the dissipative baryonic component. This, it was thought, makes these systems ideal for studying the undisturbed, intrinsic, dark matter distribution on small scales.
+This apparent cusp-core conflict was one of the smallscale structure problems of the CDM model which prompted suggestions that the dark matter might be something else, with microscopic properties that would alter the structure on small scales without spoiling the success of CDM on largescales. Spergel & Steinhardt (2000) proposed self-interacting dark matter (SIDM) as a possible solution to this cusp-core problem, adding hypothetical elastic-scattering collisions to the otherwise collisionless particles of the standard CDM cosmology. Heat transfer within the virialized haloes, due to these non-gravitational collisions, was then suggested to make the halo cores expand. This latter idea was confirmed by several numerical and analytical studies. Burkert (2000) introduced a Monte Carlo scattering algorithm between dark matter particles to take the self interaction into account in a numerical N -body simulation, and this method was refined by Kochanek & White (2000). These N -body results suggested, however, that SIDM haloes would undergo gravothermal collapse, making them unsuitable to explain the observed haloes.
+Balberg, Shapiro, & Inagaki (2002, hereafter BSI) applied a conducting fluid model, originally invented to describe gravitational scattering in star clusters, to isolated1 SIDM haloes. BSI derived a self-similar gravothermal collapse solution at large Knudsen number (Kn 1, where Kn is the ratio of SIDM scattering mean free path to the system size). The isolated halo collapsed within a finite time. They also showed that the collapse is delayed compared to their self-similar solution when the Knudsen number is comparable to or smaller than one, because the length scale of energy exchange is restricted by the mean free path. Their conclusion that the collapse time would naturally exceed a Hubble time was more optimistic about the SIDM hypothesis.
+A realistic halo is not isolated, however, since it forms in a cosmologically expanding background universe, with infall and a finite pressure at the virial radius (Shapiro et al. 1999). Cosmological simulations showed that a cross section per unit mass  = 0.5 - 5 cm2 g-1 makes the profile cored, and the cored profile is stable (Yoshida et al. 2000; Dav´e et al. 2001). Col´in et al. (2002) emphasized that the profile depends on the accretion history, especially when the last major merger occurred.
+With the importance of cosmological infall in mind, Ahn & Shapiro (2005) derived a cosmological similarity solution for this problem, with proper account taken of such cosmo-
+1 The term `isolated halo' shall refer here to an object of fixed mass with vacuum boundary conditions; i.e., not subject to cosmological boundary conditions involving mass infall or evolution by perturbation growth in a Friedmann-Robertson-Walker universe.
+
+logical boundary conditions. This solution shows that the gravothermal collapse, which occurs for the isolated halo, is prevented by infall in the cosmological case, and the core has a constant size in units of the virial radius, for a given SIDM cross section. When there is no self-interaction, this fluid approximation gives a density profile similar to the cuspy profile found in N -body simulations. This shows that the fluid approximation also describes the virialization of collisionless dark matter appropriately, providing in effect an analytical derivation of the NFW profile in the collisionless limit. This is because the collisionless Boltzmann equation reduces to fluid conservation equations for an ideal gas with ratio of specific heats equal to 5/3 if the velocity distribution of the particles in the frame of bulk motion is isotropic and skewless (see Section 2.2). In the presence of SIDM scattering collisions, too, those analytical solutions are in qualitative agreement with the corresponding Monte Carlo N -body simulations; SIDM haloes have cores and the cores collapse within a finite time when they are isolated, but they do not collapse within a Hubble time in a cosmological environment. However, the values of the cross section necessary to explain the observed dark matter density profiles are not in agreement. Ahn & Shapiro (2005) find that   200 cm2 g-1 fits the dwarf and LSB galaxy rotation curves best, while N -body simulations suggest the range of  = 0.5 - 5 cm2g-1 gives the observed central density.
+In order to test the SIDM hypothesis by comparison with astronomical observations, it is necessary to improve our understanding of these theoretical predictions and reconcile them. That will be the focus of this paper, as described below. In the meantime, related progress continues to be made on other fronts, in comparing both SIDM and collisionless CDM with observation. For example, non-circular motions may affect the density profile estimate (Hayashi & Navarro 2006), but they are usually not strong enough to make observations consistent with the theoretically-predicted cuspy profile (Oh et al. 2008; Trachternach et al. 2008; Kuzio de Naray et al. 2009). The cusp-core conflict may be mitigated by baryonic processes of gas outflow, induced by supernovae feedback (Governato et al. 2010; Oh et al. 2010a). Central dark-matter densities could also be reduced, in addition, by bars (Weinberg & Katz 2002), or by gas clumps sinking via dynamical friction (El-Zant et al. 2001), while the system is baryon rich, but these two scenarios may not be strong enough to make large enough cores in realistic situations (Sellwood 2008; Jardel & Sellwood 2009). While observations of dwarf and LSB galaxies generally prefer cored density profiles, some, however, are also consistent with an NFW profile (Hayashi et al. 2004; Simon et al. 2005; Hayashi & Navarro 2006; Valenzuela et al. 2007). The wide diversity of dwarf/LSB cores has also led to a suggestion that SIDM alone cannot be the full solution to the cusp-core problem (Sa´nchez-Salcedo 2005; Kuzio de Naray et al. 2010).
+There are also some constraints on the value of the SIDM cross section from comparison of theoretical predictions with galaxy clusters, for which dark matter velocity is much higher than for galaxies. N -body results find that the core size of relaxed SIDM clusters of galaxies becomes too large for cross section  1 cm2g-1 (Yoshida et al. 2000; Arabadjis et al. 2002; Lewis et al. 2003). The analytical cosmological self-similar solutions of Ahn & Shapiro
+c 2011 RAS, MNRAS 000, 1­14
+
+Gravothermal collapse of isolated SIDM haloes 3
+
+(2005), however, point out that the core sizes of clusters are also small enough, not only for small cross section in the long-mean-free-path regime, but also for large cross section in the short-mean-free-math regime, i.e.,  200 cm2g-1, because the short mean free path then limits the amount of heat conduction. However, such a large cross section would also enhance the fluid-like behaviour of SIDM, which may then conflict with observations of merging clusters. For example, observations of cluster 1E 0657-56, known as the `bullet cluster,' from which total matter density has been mapped by weak and strong gravitational lensing measurements while the density of the intergalactic baryon-electron fluid was mapped by X-ray measurements, show that the dark matter spatially segregated from the baryon-electron plasma, as it would be if the dark matter is not highly collisional (Clowe et al. 2006). The dark matter and galaxies of the subcluster have passed through the main cluster without distortion while the baryon gas shows a bow shock due to its collisional nature. This observation excludes the possibility that SIDM is too highly collisional, or fluid-like. Analytical estimates and Monte Carlo N -body simulations of the bullet cluster by Markevitch et al. (2004) and Randall et al. (2008) constrain the velocity independent cross section to be  < 0.7 cm2 g-1, using the fact that the massto-light ratio of the subcluster is normal. Larger cross section would make the mass-to-light ratio smaller because the SIDM collisions scatter the dark matter out of the subhalo. [On the other hand, see Mahdavi et al. (2007) for a possibility that SIDM with cross section  4 cm2g-1 explains a cluster Abell 520 which has substructures with anomalous mass-to-light ratio]. If the cross section is velocity dependent, it puts a constraint only at very large relative velocity. The relative velocity of the merging haloes is estimated to be between 2, 500 and 4, 000km s-1 at their observed separation, and even higher at centre passage (Milosavljevi´c et al. 2007; Springel & Farrar 2007; Mastropietro & Burkert 2008). If the cross section is too large, the SIDM halo could also be too spherical compared to the observed elliptical matter distribution of galaxy clusters (Miralda-Escud´e 2002). In addition, large cross sections result in too much heating and evaporation of substructure haloes in clusters (Gnedin & Ostriker 2001). These constraints almost exclude the possibility that a velocity-independent cross section solves the cusp-core problem for dwarf/LSB galaxies, but, velocity-dependent cross section can still be effective on dwarf scales, and simultaneously negligible on galaxy cluster scales: e.g., inversely proportional to relative speed (Firmani et al. 2000; D'Onghia et al. 2003), or short range Yukawa interaction, whose scattering cross section has v-4 velocity dependence for large relative velocities (Koda 2009; Loeb & Weiner 2010).
+There was an additional motivation for the SIDM hypothesis when it was first put forth, involving the overabundance of subhaloes in CDM N -body simulation compared to observations of the Local Group. The number of substructures in the collisionless CDM model has previously been thought to be about an order of magnitude larger than the observed number of dwarf galaxies in the Local Group. Although the number of substructures is reduced by SIDM stripping, D'Onghia & Burkert (2003) claim that SIDM does not solve this problem; the cross-section that makes the profile cored (0.6 cm2g-1) is apparently not efficient enough to
+c 2011 RAS, MNRAS 000, 1­14
+
+reduce the number of satellites down to the observed level. Recent findings of nearby faint galaxies improve the agreement between observations and collisionless CDM simulations, but still require some feedback or reionization effect that suppresses star formation in low-mass haloes (e.g. Koposov et al. 2009; Wadepuhl & Springel 2010, and references therein).
+Apart from the original motivation for proposing SIDM as a solution of small-scale structure problem of the collisionless CDM model, interest in the SIDM hypothesis remains strong for other reasons, as well. The fundamental nature of dark matter is still unknown. Anomalous cosmic ray detections, reported by PAMELA, FERMI and ATIC, have recently stimulated new particle physics models for dark matter that result in the scattering interaction of SIDM as a secondary effect (Arkani-Hamed et al. 2009; Buckley & Fox 2010; Feng et al. 2010). Astronomical constraints on the SIDM cross section and its velocity dependence continue to be of importance, therefore, in order to constrain such models.
+Further progress along these lines requires that we reduce the uncertainties in the theoretical productions for SIDM. As described above, the quantitative estimates by Monte Carlo N -body simulation and the conducting fluid model, of cross section values that are consistent with observations of dwarf galaxy rotation curves, are in strong disagreement with each other. As long as this disagreement is unresolved, many of the additional constraints on the SIDM hypothesis described above, which also depend upon the validity of the N -body results or related analysis, will remain suspect. It is possible that either the N -body or the fluid model does not describe the system correctly. To remove such possibility, we directly compare the two methods in the simplest case, namely, the isolated spherically symmetric halo.
+We will summarize the basis for the conducting fluid model in Section 2. In Section 3, we will describe our Monte Carlo numerical algorithm for the SIDM elastic scattering interaction in N -body simulations. We test those two methods against each other for isolated haloes in Section 4. The impact of our comparison results on the cosmological similarity solution by Ahn & Shapiro (2005) is discussed in Section 5. Finally, our results are summarized in Section 6.
+2 THE CONDUCTING FLUID MODEL
+2.1 Background: Gravothermal Collapse in Star Clusters
+The conducting fluid model (also known as the gaseous model) was first developed to study gravothermal collapse in globular star cluster systems, and has been shown to be successful in those systems. Lynden-Bell & Eggleton (1980, hereafter LBE) proposed a thermal conduction formula for collisional, gravitationally-bound systems based on dimensional analysis, and derived an analytical solution that describes the self-similar collapse of a star cluster. That selfsimilar solution appears in the late stage of collapse in a Fokker-Planck calculation (Cohn 1980) and in N -body simulations (Makino 1996; Spurzem & Aarseth 1996; Baumgardt et al. 2003; Szell et al. 2005). When the time evolu-
+
+4 Jun Koda & P. R. Shapiro
+tion of a Plummer sphere is solved numerically by integrating the partial differential equations of the fluid model, the resulting collapse time agrees with that from other methods (Goodman 1987; Heggie & Ramamani 1989). SIDM haloes and globular clusters are both `collisional,' self-gravitating systems, but the angular distribution and velocity dependence of the collisions are different in the two cases. Stars obey Rutherford scattering, which is dominated by smallangle scattering and small velocity encounters,   v-4, while the SIDM cross section we explore in this paper is isotropic and velocity independent. It is possible, however, that the SIDM interaction also obeys Rutherford scattering via a `dark-photon' interaction (Ackerman et al. 2009; Feng et al. 2009). Gravitational Rutherford scattering between dark matter particles are negligible unless they are all 105 - 106M mass black holes (Jin et al. 2005).
+2.2 The Basic Equations
+In this section, we review the conducting fluid model developed by LBE and BSI before we compare its results with our simulations. As in these papers, we shall here restrict the conducting model to the case of particle distributions that are spherically symmetric, isotropic in velocity dispersion, and quasi-static. The quasi-static approximation means that, while the fluid evolves thermally, it always satisfies hydrostatic equilibrium at each moment. For the problem at hand, it is a good approximation, because the collapse timescale is always much longer than the dynamical time. The conducting fluid model is not, in general, restricted to quasi-static systems, however (Bettwieser 1983; Ahn & Shapiro 2005). Deviation from isotropic velocity dispersion is also possible to consider, but it plays only a minor role for the problem of interest here.
+The Boltzmann equation, which is a partial differential equation in phase space, can be written as an infinite series of moment equations in position space by integrating over all velocities. When third moments are negligible (skewless), the series of moment equations can be closed by truncating at second order, as described in Ahn & Shapiro (2005). The equations which result in this case are what we shall here refer to as `the fluid approximation.' The same equations would result from assuming a Gaussian velocity distribution (not necessarily isotropic or Maxwellian), an approximation called `Gaussian closure' (Levermore 1996, and references therein). If velocity isotropy is imposed in addition, the fluid approximation gives the familiar Euler equation for an ideal gas with the ratio of specific heats,  = 5/3. This fluid approximation can describe the structure formation of collisionless CDM, and accurately reproduce the CDM halo properties found in 3D N -body simulations when applied to the problem of spherical cosmological infall (Ahn & Shapiro 2005).
+When collisions are important (e.g. either gravitational scattering between stars or DM self-interaction), thermal conduction, which is a third order moment, should not be neglected. However, accurate evaluation of third moments is only successful in the small Knudsen number regime, Kn 1. In this regime, the Navier-Stakes equation can be derived from the Boltzmann equation with the Fourier law of heat flux,
+
+Lsmfp
+
+= - 3 a-1b 2
+
+v2 ,
+
+(1)
+
+4r2
+
+2
+
+tr r
+
+where (r, t) is the mass density, v(r, t) is the one-
+
+dimensional velocity dispersion,  is the scattering cross sec-
+
+tion per unit 25 /32 
+
+mass,   1/ is the mean free path, 1.38 is a constant2 (Chapman-Enskog
+
+and b  theory,
+
+e.g., Chapman & Cowling 1970; Lifshitz & Pitaevskii 1981).
+
+The local relaxation time is defined as tr(r, t)  1/(av),
+
+where the constant a  16/  2.26 describes the colli-
+
+sion rate of particles that follow a Maxwellian distribution,
+
+defined in BSI.
+
+In the other limit, Kn 1, Lynden-Bell & Eggleton
+
+(LBE) found that an empirical thermal conduction formula
+
+with  replaced by the gravitational scale height (or Jeans
+
+length), H  v2/4G, explains the gravothermal catas-
+
+trophe of star clusters very well, i.e.,
+
+Llmfp
+
+3 H2 = - C
+
+v2 ,
+
+(2)
+
+4r2
+
+2 tr r
+
+where C is an unknown constant of order unity. The scale height H characterizes the length scale that particles (or stars) orbit under the action of the gravitational force.
+BSI combined the two limiting forms of this thermal conduction into one as follows:
+
+L
+
+3
+
+4r2
+
+=-  2
+
+H2 C
+tr
+
+-1
++
+
+a-1b 2 tr
+
+-1
+
+-1
+v2
+
+.
+
+r
+
+(3)
+
+The first term inside the brackets is the LBE formula, equation (2), which dominates in the large Knudsen number limit,  H. In the other limit ( H), the second term inside the brackets dominates, and the conduction converges to equation (1), instead. BSI's formula is an empirical interpolation between those two heat conductivity limits. BSI assumed C = b, but the exact value cannot be determined analytically. We determine the value of C by fitting the Monte Carlo N -body data in Section 4.1.1.
+The conducting fluid model is a set of moment equations closed empirically by this conductive heat flux L/4r2, as follows:
+
+ (v2) r
+
+=
+
+GM - r2 ,
+
+(4)
+
+1 L - 4r2 r
+
+=
+
+v2 D ln Dt
+
+v3 
+
+,
+
+(5)
+
+where M is the mass enclosed by radius r, and D/Dt is the Lagrangian derivative with respect to time. The first equation describes hydrostatic equilibrium. The second equation is the first law of thermodynamics, in the form relating energy transfer and entropy, `dQ = T dS = dE + pdV .'
+When  H, the fluid equations (4, 5) with the heat conduction equation (2) have a self-similar solution. In general, if a self-similar solution exists, if density is static as r   and if the evolution timescale c/c is proportional to the relaxation time at the centre, tr,c(t)  tr(r = 0, t), then the central quantities evolve as,
+
+c(t)/c(0) = (1 - t/tcoll )-2/(3-2) ,
+
+(6)
+
+2
+
+BSI
+
+used
+
+a
+
+value
+
+b
+
+
+
+
+
+= 25 /(32 6) 
+
+1.002,
+
+but
+
+it
+
+should
+
+be
+
+25/32.
+
+c 2011 RAS, MNRAS 000, 1­14
+
+Gravothermal collapse of isolated SIDM haloes 5
+
+vc2(t)/vc2(0) = (1 - t/tcoll )-(2-2)/(3-2) ,
+
+(7)
+
+tr,c(t)/tr,c(0) = 1 - t/tcoll ,
+
+(8)
+
+for some constants  and tcoll , by dimensional analysis (LBE). The exponents of 1 - t/tcoll depend on the form of the relaxation time, therefore, different from those for star clusters. BSI obtained,
+
+ = 2.190, tcoll = 290 C-1tr,c(0),
+
+(9) (10)
+
+by solving an eigenvalue problem of a system of ordinary differential equations.
+For the non-self-similar time evolution considered in Sections 4.1.2, 4.1.3, and 4.2, we must integrate the time evolution of fluid variables  and v2 numerically by alternative steps of the heat conduction and adiabatic relaxation to hydrostatic equilibrium, as described in BSI.
+
+3 N -BODY METHOD WITH MONTE CARLO SCATTERING
+
+3.1 Scattering Algorithm
+
+In this section, we will describe the Monte Carlo algorithm we implemented to model non-gravitational scattering of dark matter particles by other dark matter particles, within a pre-existing gravitational N -body method. Our scattering algorithm is similar to Kochanek & White (2000). Each particle can collide with one of its k nearest neighbors with a probability consistent with a given scattering cross section. For simplicity, we assume collisions are elastic, velocity independent, and isotropic in the centre of mass frame, but the Monte Carlo method can handle any differential cross section. We first outline the Monte Carlo N -body method and then explain, in detail, the algorithm that we have implemented in the parallel N -body code GADGET 1.1 (Springel, Yoshida, & White 2001), which uses the tree algorithm to calculate gravitational forces.
+Monte Carlo algorithms for particle-particle scattering (known as direct simulation Monte Carlo) have been used for more than thirty years to solve physics and engineering problems of collisional molecules, giving reasonable results (Bird 1994). For example, the results agree with an exact solution of the spatially homogeneous Boltzmann equation that describes the relaxation toward a Maxwellian distribution; they also agree with the Navier-Stokes equation solutions and experiments, including the thermal conductivity, in the small Kn regime (e.g., Nanbu 1984; Bird 1994; Gallis et al. 2004).
+Consider N -body particles at positions xj and velocities vj with equal mass m. We discretize the distribution function f with,
+
+f (x, v) = mW (x - xj ; rjkth)3(v - vj ),
+
+(11)
+
+j
+
+where W (x; rk) is a spline kernel function of size rk, rjkth is the distance from particle j to its k  32nd nearest neighbor, and  is the Dirac delta function. Our choice of kernel is often used in smoothed particle hydrodynamics, including GADGET. Our algorithm is identical to that of Kochanek & White if a top-hat kernel is used for W instead of a spline.
+
+The result does not depend on the details of the kernel, however. We tested with k = 128 but did not see any difference.
+The collision rate  for a particle at position x with velocity v to collide with this distribution f is,
+
+ = mW (x - xj ; rjkth)|v - vj |,
+
+(12)
+
+j
+
+where  is the scattering cross section per unit mass. Therefore the probability that an N -body particle 0 collides with particle j during a small timestep t is,
+
+P0j = mW (x0 - xj ; rjkth)|v0 - vj |t
+
+(13)
+
+One can generate a random number and decide whether
+
+this collision happens and reorient velocities when they col-
+
+lide. This method is similar to a variant of direct simula-
+
+tion Monte Carlo called Nanbu's method (Nanbu 1980). His
+
+Monte Carlo algorithm, with the pairwise collision probabil-
+
+ity, equation (13), can be derived from the Boltzmann equa-
+
+tion as described in his paper. Conversely, results of Nanbu's
+
+numerical method converge, mathematically, to the solution
+
+of the Boltzmann equation as the number of particles goes
+
+to infinity (Babovsky & Illner 1989). In Nanbu's method,
+
+only one particle is scattered per collision (only particle 0
+
+but not j). The philosophy is that the N -body particles are
+
+samples chosen from real sets of microscopic particles, and
+
+those samples should collide with a smooth underlying dis-
+
+tribution function, not necessarily with another sampled N -
+
+body particle. However, then the energy and momentum are
+
+not conserved per collision. Moreover, the expectation value
+
+of the energy decreases systematically (Greengard & Reyna
+
+1991). In our case, the error in the energy rises by 10 per cent
+
+quickly, so we decided to scatter N -body particles in pairs,
+
+not using Nanbu's method. Scattering in pairs is common in
+
+direct simulation Monte Carlo (e.g. Bird's method).
+
+When particles are scattered in pairs, other particles j
+
+can scatter particle 0 during their timestep as well, but the
+
+scattering probability P0j, in equation (13), is similar to, but
+
+not exactly equal to Pj0, due to the difference in kernel sizes.
+
+Therefore, we symmetrize the scattering probability by tak-
+
+ing the average scattering rate. Note that it is not trivial to
+
+generalize the pairwise scattering algorithm to simulations
+
+with unequal N -body particle masses, because P0j and Pj0
+
+would then differ by a factor of their mass ratio; there is no
+
+reason to symmetrize two intrinsically different probabilities
+
+into single pairwise scattering probability.
+
+In the following, we describe our algorithm in detail.
+
+Each particle, say particle 0, goes through the following
+
+steps, (i) to (iii), during its timestep t0. Let particles
+
+1, . . . , k be the k nearest neighbors of particle 0 (k = 32±2).
+
+The particle 0 collides with its neighbors with probabili-
+
+ties Pj0/2 (equation 13) during its timestep. The factor of
+
+two is the symmetrization factor that corrects the double
+
+counting of pairs. A particle j would also scatter particle
+
+0 during its timestep, which results in a symmetrized scat-
+
+tering rate. Imagine a probability space [0, 1], with disjoint
+
+subsets Ij  [
+
+j-1 l=1
+
+Pl0/2,
+
+j l=1
+
+Pl0/2)
+
+that
+
+represent
+
+scat-
+
+tering events between particles 0 and j. We neglect the pos-
+
+sibility of multiple scattering in the given timestep. Particle
+
+0 collides with at most one of its neighbors. We restrict the
+
+timestep so that it is small enough that this approximation
+
+is good enough (see equation 15 below). We generate a uni-
+
+c 2011 RAS, MNRAS 000, 1­14
+
+6 Jun Koda & P. R. Shapiro
+
+form random number x in [0, 1], and scatter particles 0 and j if x falls in a segment Ij, as described below.
+
+(i) In the large Kn regime, most of the particles do not collide with another particle in a given timestep. Therefore, we can reduce the computation by estimating the rough scattering probability first, and compute the accurate probability P0j only if necessary. First, we calculated an upper bound to the scattering probability,
+
+P¯ = ~vmax t0,
+
+(14)
+
+where ~ is the approximate density calculated from r0kth via
+
+~
+
+=
+
+km/
+
+4 3
+
+(r0kth
+
+)3
+
+,
+
+and
+
+vmax
+
+is
+
+the
+
+maximum
+
+speed
+
+of
+
+all
+
+the
+
+particles. If the generated random number x is larger than
+
+P¯, this means that x is not in any segment Ij, therefore, the
+
+particle 0 does not collide during this timestep.
+
+(ii) If the possibility of collision was not rejected in step
+
+(i), we calculate the pairwise scattering probability Pj0 and
+
+determine which neighbor the particle 0 collides with. The
+
+index j of the collision partner is the smallest integer that
+
+satisfies x
+
+j l=1
+
+P0j ,
+
+i.e.
+
+x
+
+
+
+Ij ,
+
+if
+
+such
+
+j
+
+exists
+
+(otherwise,
+
+the particle does not collide with any neighbors).
+
+(iii) For particle pairs that collide, we reorient their ve-
+
+locities randomly, assuming an elastic scattering which is
+
+isotropic in the centre of mass frame. Isotropic random direc-
+
+tions can be generated by one square root operation, without
+
+using trigonometric functions (e.g., Vesely 2001). The veloc-
+
+ities are updated in the kick phase of the leap-frog time inte-
+
+gration in the GADGET 1.1 gravitational N -body method.
+
+At that time, we also update the centre-of-mass velocities
+
+of the nodes around the scattered particles in the oct-tree,
+
+used for the gravity calculation. This is because the centre-
+
+of-mass velocities can be changed drastically by scattering.
+
+We allowed at most one scattering per timestep per particle. In order to suppress the error due to possible multiple scattering, we restrict the timestep so that,
+
+P¯ < 0.1.
+
+(15)
+
+This restriction makes the Monte Carlo method computationally costly in the small Kn regime, because then the timestep becomes much smaller than the dynamical time ­ of the order of the timestep in collisionless N -body simulations. This timestep problem may seem to be avoided by performing multiple scatterings per dynamical timestep, but there is another limit when the Knudsen number is small. The distances to kth neighbors must be smaller than the mean free path  = 1/(),
+
+rk .
+
+(16)
+
+Otherwise, particles more than a mean free path away would be allowed to collide and, thereby, make the heat transfer larger than it should be in the diffusion limit. If one tries to avoid this by choosing a kernel size smaller than the mean particle separation length, then the particles simply freely stream beyond the mean free path, which is again incorrect. The only way to overcome this problem is to increase the number of the particles in inverse proportion to the volume within the mean free path, Nparticles  -3 = ()3, which increases very rapidly during core collapse as  increases. Conditions (15) and (16) prevent us from running simulations with small mean free path.
+
+3.2 Dimensions and Units
+We use the following characteristic scales in the rest of this paper. For the initial BSI self-similar profile (Sections 4.1.1, 4.2) and the Plummer model (Section 4.1.2), we describe densities and velocities in units of central quantities, c(t)  (0, t) and vc2(t)  v2(0, t); (r, t) and v(r, t) denote the density and the one dimensional velocity dispersion, respectively, in spherical symmetry. We use core radius rc(t)  vc/ 4Gc as a standard length scale.
+For Hernquist and NFW profiles (Section 4.1.3), which have singularities at the centre, we use the scale radius rs and density 0 that appear in the density profiles as units, instead. We use v0  rs 4G0 as the velocity scale, which is similar to the definition of the core radius above.
+The relaxation times at the centre tr,c(t)  tr(0, t) for BSI and Plummer model, or tr,0  1/(a0v0) for NFW and Hernquist profiles, are used as unit time-scales.
+We express cross sections in a dimensionless way as ^c  crc and ^0  0rs, where  is the scattering cross section per unit mass. The inverses are the Knudsen numbers, the mean free path in the unit of system size (rc or rs). The evolution of the system is characterized by the Knudsen number Kn only, not depending on the overall physical scale.
+3.3 Simulation Setup
+We generate the initial conditions for N -body particle positions and velocities randomly from the distribution functions using the rejection method (Aarseth et al. 1974).3 The distribution function of the BSI's self-similar solution and the NFW profile are calculated numerically by Eddington's formula (Binney & Tremaine 1987). The distribution functions of the Plummer model and the Hernquist model (Hernquist 1990) have known analytical forms. We set the initial centreof-mass velocity of the system of N -body particles to zero by an overall boost.
+We truncate the initial profile at some radius rf , and put a simple reflecting boundary, which flips the direction of the radial velocity if particles are moving outward passed the reflecting boundary. We use rf = 600 rc for the BSI self-similar profile, rf = 58.5 rc for the Plummer model, and rf = 100 rs for the Hernquist and NFW profiles. The density at rf is smaller than 2 × 10-7c, and the heat flux (L/4r2 in Section 2) at rf , calculated from the equation for the conducting fluid model, is smaller than 0.02 per cent of its maximum value. Nevertheless, the collapse time is sometimes sensitive to the position of this reflecting boundary. The collapse was slower by a factor of two when we first used truncation radius rf = 58.5 rc for the BSI profile, even though this rf is large enough to satisfy Antonov's criterion for gravothermal catastrophe (Endoh et al. 1997). We also tested rf = 300 rc, for the BSI profile, and the collapse time changed by only 3 per cent compared to rf = 600 rc. Hence, our choice of rf = 600 rc is large enough to bring about a converged solution to high accuracy.
+We use two timestep criteria in addition to equation
+3 See also The Art of Computational Science vol. 11 by Hut, P. and Makino, J.; http://www.artcompsci.org/kali/vol/plummer/title.html
+c 2011 RAS, MNRAS 000, 1­14
+
+Gravothermal collapse of isolated SIDM haloes 7
+
+run name initial condition cross section N
+
+Ncmax
+
+rf
+
+C
+
+BSI P H NFW
+
+BSI self-similar Plummer Hernquist profile NFW profile
+
+^c = 0.067 ^c = 0.067 ^0 = 0.16 ^0 = 0.088
+
+4 × 643 4 × 323 2 × 643 2 × 643
+
+473 600 rc 0.1 rc 0.75 1455 58.5 rc 0.1 rc 0.8 1493 100 rs 0.03 rs 0.9
+794 100 rs 0.03 rs 0.75
+
+Table 1. The long-mean-free-path regime: parameters used for each run. N is the number of N -body particles, Ncmax is the maximum
+
+number of particles inside the core, rf is the radius of the reflecting boundary, length, which is reset sometimes overtime as central density c(t) increases; i.e.
+
+is 
+
+trhce(ti)nitiavlc2P/lumcm. Terheeqcuoinvsatlaenntt
+
+gravitational C is the LBE
+
+softening prefactor
+
+used for the conducting fluid model.
+
+(15). The timestep must also satisfy t vvc(0)/a, and t G/ G~, where vc(0) is the initial one-dimensional velocity dispersion, a is the local acceleration, and ~ is the local density calculated from k = 32 nearest neighbors (see below equation 14). We choose the dimensionless parameters to be v = 0.02 and G = 0.005. With this choice, the initial conditions are static for several dynamical times when scattering is turned off. Energy conservation is satisfied to better than 1 per cent in all runs.
+The number of particles, gravitational softening length and other parameters are summarized in Table 1. For cases BSI and P, we reset the gravitational softening length to 0.1 rc(t) every time the central density increases by a factor of 10, to avoid the numerical effect of softening on the density profile.
+We tested that the numerical scattering rate is correct, by counting the number of scatterings in the simulation of a non-singular isothermal sphere4 and comparing it to the analytical rate. The scattering rates agree within 3 per cent when 643 particles are used and the isothermal sphere is truncated at 58.5 rc. The difference is due to the fluctuation in the randomly generated initial condition, not to the Poisson fluctuation in the number of scatterings.
+
+3.4 Analysis Methods
+
+We calculate the central quantities for each snapshot from N -body particles within a sphere of radius rc around the density-weighted centre of mass (Casertano & Hut 1985), assuming an isothermal sphere inside rc. Namely, we find a consistent rc iteratively that satisfies,
+
+rc = vc2/4Gc,
+
+(17)
+
+where c is the central density estimated from M (rc), the mass inside rc,
+
+c
+
+
+
+1.10
+
+×
+
+M
+
+(rc
+
+)/
+
+4 3
+
+rc3
+
+,
+
+(18)
+
+and vc is the velocity dispersion inside rc. The value 1.10 in equation (18) is the ratio of the central density to the average density inside rc for the non-singular isothermal sphere. In this way, we can use as many particles as possible without systematic error for the calculation of the central quantities. The velocity dispersion inside the core quickly becomes isothermal due to collisions.
+
+4 The solution of hydrostatic equilibrium (equation 4) with constant v(r)  vc and finite central density.
+c 2011 RAS, MNRAS 000, 1­14
+
+We calculated the smoothed density and velocity dispersion field at each point in space using an adaptive kernel, similar to that used in the well-known SPH method, with a Gaussian kernel whose size is r32 ­ the distance to the 32nd nearest neighbor. These smoothed-particle density and velocity dispersion fields were then averaged over spherical surfaces on different radii r to give the radial profiles of these quantities. In practice, this amounts to summing the spherically-averaged Gaussian kernels evaluated at each radius r (e.g., Reed et al. 2005).
+4 RESULTS
+We compare our Monte Carlo N -body simulations with the conducting fluid model, first in the large Kn regime for various initial conditions, and then in the transitional regime Kn  1.
+4.1 Long Mean-Free-Path Regime
+4.1.1 Self-Similar Gravothermal Collapse Solution
+In this section, our Monte Carlo N -body simulation for large Kn, ^c(0) = Kn-1 = 0.067, is compared with the BSI selfsimilar solution. Fig. 1 shows the evolution of the density and velocity dispersion profiles. The right panels, plotted in self-similar variables, show that, when the N -body particles are initialized according to a given time-slice of the self-similar solution, they indeed evolve self-similarly in the Monte Carlo N -body simulation, thereafter.
+Fig. 2 shows that our Monte Carlo N -body simulation is in excellent agreement with the self-similar solution (equations 6-10), by adjusting the value of one parameter, C, in the heat conduction equation (2). We determine the collapse time tcoll = 385 tr,c(0) by fitting the time evolution of the relaxation time data (Fig. 2, left-bottom panel) by the linear function, equation (8). The prefactor of the thermal flux C = 0.75 follows from equation (10). The best-fitting power law index of vc2  (c-2)/ (equations 6 and 7) gives a value  = 2.22 (Fig. 2, right-bottom), which agrees reasonably well with the value of the self-similar solution, 2.19 (equation 9).
+To test convergence, we simulated the self-similar solution with three different numbers of particles, 2×323, 4×323, and 16×323, which give the initial number of particles inside the core Nc(0) = 227, 376 and 1527, respectively. At the time of our resolution test, we used reflecting radius rf = 58.5 rc. Numerical errors due to finite number of particles should only depend on the N -body particle density, independent of
+
+1
+t r, c t r, c(0)
+
+1
+c c(0)
+
+8 Jun Koda & P. R. Shapiro
+
+ c(0)
+
+100
+
+10
+
+1
+
+0.1
+
+0.01
+
+0.001
+
+0.01
+
+0.1
+
+1
+
+10
+
+r rc(0)
+
+2
+
+ c(t)
+
+1
+0.1
+0.01
+0.001 0.1
+1.2
+
+1
+
+10
+
+r rc(t)
+
+v2 vc2(t )
+
+v2 vc2(0)
+
+1 1
+0.8
+
+0 0.1
+
+1
+
+10
+
+r rc(0)
+
+0.6 0.1
+
+1
+
+10
+
+r rc(t)
+
+Figure 1. Monte Carlo N -body results for evolution from BSI self-similar initial conditions. Profiles of density (top) and velocity dispersion (bottom) for ^c = 0.067 plotted in units of fixed, initial central values, as labelled (left), and in units of the time varying self-similar quantities (right) at t/tr,c(0) = 0, 275, 356, 376 and 383. The evolution is indeed self-similar.
+
+1.8 100
+1.6
+
+v c2(0)
+
+1
+
+2 c
+
+v
+
+1.4 10
+1.2
+
+1 0
+1 0.8
+
+1
+
+200
+t t r, c(0)
+1
+
+400
+
+0
+
+200
+
+400
+
+t t r, c(0)
+
+1
+
+linear fit
+
+BSI
+
+fit
+
+v c2(0)
+
+0.6
+
+1
+
+2 c
+
+0.4
+
+v
+
+0.2
+
+0
+
+1
+
+0
+
+200
+
+400
+
+1
+
+10
+
+100
+
+t t r, c(0)
+
+c c(0)
+
+Figure 2. Comparison of N -body results and BSI similarity so-
+
+lution for the case shown in Fig. 1. Central quantities plotted
+
+as a function time. N -body results are in good agreement with
+
+the self-similar solution (smooth curves, equations 6­9), with
+
+tcoll = 385 tr,c (0) or C = 0.75. Fluctuations are of order Pois-
+
+son and
+
+noise; error vc2/vc2 =
+
+bars represent 1/ Nc, plotted
+
+c/c = tr,c/tr,c = 2/ Nc, for every 10 data points, where
+
+Nc is the number of particles inside rc.
+
+1
+c c(0)
+1 Nc
+
+16 × 323 100
+1000
+4 × 323
+10
+
+100 2 × 323
+
+1 0 200 400 600 800
+t t r, c(0)
+
+0
+
+200 400 600
+
+t t r, c(0)
+
+Figure 3. Same as Fig. 2, except for simulations with different total numbers of N -body particles. Density deviates from BSI solution when Nc 100. Collapse times are different from those in run BSI because the reflecting boundary is set at 58.5 rc. Density curves (left panel) are shifted left by 50, and up by factor of 2 for readability; three smooth curves are all the same BSI self-similar solution.
+
+the choice of boundary condition. As a result, it was not necessary to run additional convergence test for the case with rf = 600 rc, used in our final runs. Other parameters are the same as run BSI. In Fig. 3, we plot the evolution of density and number of particles inside the core as a function of time. The three smooth curves in the left panel are the same analytic self-similar solution (equation 6) with tcoll = 705 tr,c(0). The results for the runs with N = 4 × 323 and N = 16 × 323 agree very well, while those for N = 2 × 323 deviate from the other two runs systematically when Nc 100. Our run BSI contains 470 particles inside the core at t = 0 (Table 1), which is better than the converged N = 4 × 323 run here. Other runs in the following sections have better resolution inside the core, because of the smaller fraction of particles for r > rc, resulting from the steeper decline in their density profiles.
+
+4.1.2 Plummer Model
+
+We compare the Monte Carlo N -body simulation with the conducting fluid model when the initial condition is the Plummer model in the large Kn regime. The Plummer model, a standard initial condition used to study gravothermal instabilities, has a spherical mass distribution given by,
+
+(r)
+
+=
+
+MT 4a3pl/3
+
+(1
+
++
+
+1 r/apl)5/2 .
+
+(19)
+
+In this case, the characteristic scales defined in Section 3.2 can beshown to be, vc = (2GMT /apl)1/2/12 and rc = apl/(3 2). We evolve this system according to the conducting fluid model in the large Kn limit with the quasi-static approximation described in Section 2, equations (2), (4), and (5). The N -body simulation is also performed in the large Kn regime, ^c(0) = 0.013. The time evolution for this quasistatic system is independent of the actual value of  for the large Kn regime, if the time for solutions with different  is expressed in units of the relaxation time.
+We plot the time evolution in Fig. 4. The fluid model agrees with the N -body results reasonably well if the coefficient C is assigned a value of 0.80. This is in reasonably good agreement with the value of C = 0.75, found for the self-similar solution. The logarithmic slope (right-top panel)
+
+c 2011 RAS, MNRAS 000, 1­14
+
+Gravothermal collapse of isolated SIDM haloes 9
+
+1
+ c(0)
+
+1
+c c(0)
+
+1000
+
+100
+
+10
+
+1
+
+0.1
+
+0.01
+
+0.001
+
+0.01
+
+0.1
+
+1
+
+10
+
+r rc(0)
+
+1000
+
+1
+
+1
+dln dln r
+
+0
+
+-1
+
+-2
+
+-3
+
+-4
+
+-5
+
+0.01
+
+0.1
+
+1
+
+10
+
+r rc(0)
+
+1
+
+1
+
+0.8
+100 0.6
+
+1
+t r, c t r, c(0)
+
+0.4 10
+0.2
+
+1
+0 10 20 30 40 50 60
+t t r, c(0)
+
+0
+0 10 20 30 40 50 60
+t t r, c(0)
+
+Figure 4. Collapse of the Plummer model for ^c(0) = 0.013. (Top:) Snapshots of the Monte Carlo N -body simulation, taken at t/tr,c(0) = 0.0, 24.338.552.0, 56.7, 58.6, and 59.3. (Bottom:) Central density and relaxation time evolution as functions of time for both the N -body results and the 1D calculation of the fluid model with C = 0.8 (smooth curves).
+
+has a plateau at about -, which is the asymptotic slope of the self-similar profile. This implies that the inner part is converging to the self-similar solution, with an asymptotic logarithmic slope -, which was well known in the gravothermal collapse of star clusters.
+
+4.1.3 NFW & Hernquist Profiles
+
+We also considered the case of an initial condition with spherical mass distribution given by the NFW profile (Navarro et al. 1997) to test the consistency of the Monte Carlo N -body simulation and the conducting fluid model with each other for the typical halo profile seen in cosmological N -body simulations. The gravothermal collapse timescale is interesting as a way to put constraints on the SIDM cross section, because the result of gravothermal collapse is a divergent profile with   r-2.2, which is not seen in observations. We note that gravothermal collapse is prevented by cosmological infall or major mergers, but when a halo decouples from cosmological growth, the halo could experience gravothermal collapse. The NFW profile is given by,
+
+1
+
+(r) = 0 r/rs(1 + r/rs)2 .
+
+(20)
+
+In addition, we perform a test with initial conditions based upon a Hernquist profile (Hernquist 1990),
+
+1
+
+(r) = 0 r/rs(1 + r/rs)3 ,
+
+(21)
+
+which has the same inner profile,   r-1, and is sometimes used to approximate the NFW profile. As we will demonstrate below, the gravothermal collapses for the NFW and
+
+c 2011 RAS, MNRAS 000, 1­14
+
+1
+v v0
+
+1
+ 0
+
+1000
+
+100
+
+10
+
+1
+
+1
+
+0.1
+
+0.01
+
+0.001 0.4
+
+1
+
+1
+
+0.3
+
+1
+
+0.2
+
+0.1
+
+NFW initial
+
+N - body fluid C = 0.75 0
+
+Hernquist initial
+N - body fluid C = 0.9
+
+0.1
+
+1
+
+r rs
+
+10 0.01
+
+0.1
+
+1
+
+10
+
+r rs
+
+Figure 5. Gravothermal collapse of SIDM haloes starting from NFW and Hernquist profiles: The density and velocity dispersion profiles. (Left:) N -body snapshots with NFW initial condition at t/tr,0 = 0, 197, 336, 462 and 515, and profiles of the fluid model when they have the same central density. (Right:) Same as left panels, except with Hernquist initial profile, plotted at t/tr,0 = 0, 16, 111, 129 and 139.
+
+Hernquist profiles are significantly different, and it is therefore, dangerous to use the results for the Hernquist profile (Kochanek & White 2000) to describe realistic haloes. As for the Plummer model, our conducting fluid model calculations adopt the large Kn limit, and the N -body simulations use a small, but nonzero,  (cf. Table 1).
+Figs. 5 and 6 show that the fluid model agrees reasonably with N -body results. In particular, the density profiles in the two cases evolve through a sequence which is close to the N -body results, although the agreement is better if the following adjustments are made to the time axis of the fluid model solutions (6). For NFW, N -body and fluid model central density agree best when compared at times which differ by a small shift equal to 100 tr,0, or 20 per cent of the collapse time. For the Hernquist initial profile, the agreement is best if the time axis is scaled by a factor of order of unity which is equivalent to adjusting the value of C in the conductivity from C = 0.75 (found in the BSI run) to 0.9, which also differs by only 20 per cent. For both NFW and Hernquist initial conditions, density profiles agree very well when the central densities are equal, but the values of the central densities differ by about 20 per cent at the maximum core expansion.
+We note that the initial NFW profile evolves very differently from the initial Hernquist profile, for the same parameters 0 and rs. The NFW run has a central density about three times smaller at maximum core expansion, and a collapse time about four times longer than for the H run. This is because the NFW profile has larger heat flux at r rs due to its larger density there, which heats and expands the central mass more than does the Hernquist profile.
+
+1 c 0
+1
+
+10 Jun Koda & P. R. Shapiro
+
+NFW initial
+
+100 Hernquist initial
+
+10
+
+10
+
+1
+
+0 100 200 300 400 500
+
+0
+
+t t r, 0
+
+50
+
+100
+
+t t r, 0
+
+Figure 6. Central density versus time, starting from NFW (left) and Hernquist profiles (right). We use C = 0.75 for NFW and C = 0.9 for Hernquist profile. In the left panel, the origin for the fluid curve is shifted to the right along the time axis by 100 tr,0 to show the agreement in the gravothermal collapse phase. Minimum density of the fluid is ±20 per cent different from N -body. Error bars show c/c = 2/ Nc for every 10 data points.
+
+Our simulation results are qualitatively similar to those
+of Kochanek & White (2000), but the time evolutions dif-
+fer by a factor of two. We do not know the reason for
+this difference. We show how our units convert to those in Kochanek & White (2000) as follows: 0KW = 20, trK,W c = 1.7 × 2 2atr,0 = 11 tr,0 and ^DKW M = 2^0. Their simulation for ^DKW M = 1, which has the same cross section as ours, reached minimum density at t  tK r,W c = 11tr,0 and collapsed gravothermally to c = 20KW = 13 0 at t  3.2tK r,W c = 35 tr,0, while our simulation reached those densities at 20 tr,0 and 70 tr,0, respectively (Fig. 6). Their
+evolution is about twice as fast as in our simulation. The
+origin of this discrepancy is unknown.
+
+4.1.4 The Source of Difference
+Our Monte Carlo N -body simulations agree with the solutions of the conducting fluid model in the self-similar gravothermal collapse phase, but in general have about a 20 per cent difference in the central density and the collapse rate. This modest disagreement is not surprising in view of the fact that the conducting fluid model is not an exact theory derived from first principals. Heggie & Stevenson (1988) compared the thermal conductivity of the conducting fluid model with that calculated from the orbit-averaged FokkerPlanck equation for star clusters with several profiles, including polytropes and lowered Maxwellians, evaluated at the centres. They find that the coefficients of conductivity C varied from one profile to another by factors of 2 or 3. The overall collapse rates are not that different, probably because the profiles quickly converge to the self-similar solution around the centre. Indeed, for star clusters, the value of C = 0.88, which makes the fluid model match the asymptotic collapse rate in the isotropic Fokker-Planck calculation (Cohn 1980), also gives the correct collapse time of the Plummer model, 15.4 half-mass relaxation times (Goodman 1987; Heggie & Ramamani 1989). This means that C needs not to be different for the cases of self-similar collapse solution and the collapse of Plummer profile.
+One possible distinction between the 1D conducting fluid model and the 3D N -body/Monte Carlo simulations is that the former assumes that particle velocity distribu-
+
+v2 vc2(0)
+
+2 q
+
+1 0
+
+v2
+
+v
+
+2 0
+
+rtaandgiaelntial BSI 0.01 NFW q
+
+q
+
+q
+
+q
+
+q
+
+q
+
+qq q
+
+q
+
+q
+
+q
+
+q
+
+q
+
+q
+
+q
+
+q
+
+q
+
+q
+
+q
+
+q
+
+q
+
+q
+
+q
+
+q
+
+q
+
+qqqqqqqqqqqqqqqqqq qqqqqq
+
+q
+
+q
+
+q
+
+q
+
+q
+
+q
+
+q
+
+q
+
+q
+
+q
+
+q
+
+qqqqqq
+
+q
+
+q
+
+1
+q
+0q
+
+qqqqqqqqqqqqq q q
+
+q
+Plummer q q
+
+q
+
+q
+
+q
+q q q qqqq
+
+v2
+
+v
+
+2 0
+
+qqqqqqqqqqqq
+
+q
+
+q
+
+0.05
+
+q q
+
+q
+
+Hernquist
+
+q
+
+q
+
+q
+
+q
+
+q
+
+0
+
+qqqqqqqqqqqqq
+
+0.1
+
+1
+
+10
+
+0.1
+
+1
+
+10
+
+r rc
+
+r rs
+
+v2 vc2(0)
+
+Figure 7. Velocity anisotropy for N -body results. The radial and tangential velocity dispersion for each run. The snapshots are taken when the densities at the centre are 10c(0) for run BSI and P, 250 for run NFW and 1250 for run H. The velocity dispersion is calculated in 40 equally-spaced logarithmic bins. The error bars show the Poisson fluctuations when they are larger than 1 per cent, v2 = v2/ N , where N is the number of particles in each bin.
+
+tions are isotropic in the frame of the bulk flow while the latter do not. Anisotropy in velocity dispersion affects the collapse time (Bettwieser 1983; Louis 1990). Fokker-Planck calculations with anisotropy show that the collapse time of the star clusters initialized by the Plummer model is 20 per cent larger than for the isotropic case (Takahashi 1995), and agrees with N -body simulation (Khalisi et al. 2007). In Fig. 7, we plot the radial (vr2) and tangential [v2 = (v2 + v2 )/2] velocity dispersions of our simulation when the central density has increased by a factor of 10. We do not see anisotropies near the centre, but we do at r 5rc for runs P, NFW and H. When particles scatter from the centre to large radii, their nearly radial orbits bring anisotropy to the initially isotropic velocity distribution at large radii. If the original unscattered particles at large radii are less numerous, because the density profile is steeper, the anisotropy that results from scattering particles from small to large radii will be relatively larger. This is why anisotropy is larger if the logarithmic slope of the density profile is steeper. Anisotropy may therefore play some role in the collapse rate of run P and H.
+In short, the conducting fluid model has been shown to describe the gravothermal collapse relatively accurately, but we cannot expect very high precision in general. Therefore, the 20 per cent match in minimum core density of runs NFW and H, and 20 per cent match in the gravothermal collapse time for runs P, NFW and H run is a very reasonable agreement.
+
+4.2 Transitional Regime
+When Kn becomes comparable to, or smaller than, one, the self-similar collapse solution of BSI no longer applies, because of the presence of the second term in the heat conduction equation (3). The time evolution in units of the relaxation time becomes slower the smaller Kn gets, because smaller mean free path suppresses particle transport more, which results in smaller heat conduction (BSI). To test the heat conduction equation (3) when both long and short mean-free-path terms are important (i.e. transitional regime), we compared the time evolution of Monte Carlo N -
+c 2011 RAS, MNRAS 000, 1­14
+
+Gravothermal collapse of isolated SIDM haloes 11
+
+^c(0)
+0.25 0.5 0.75 1.0
+
+N
+4 × 643 4 × 643 2 × 1283 2 × 1283
+
+/r32
+10.3 5.2 5.5 4.1
+
+t10 /tr,c (0)
+374 417 510 585
+
+Table 2. The transitional regime simulations. ^c is the initial dimensionless cross section, N is the number of N -body particles, /r32(0) is the ratio of the mean free path to the kernel size at the centre at t = 0, and t10 is the time for the density to increase by a factor of 10. Other parameters are the same as for the BSI run.
+
+body simulations with those of the conducting fluid model, derived numerically when no self-similar solution exists, with initial Knudsen numbers Kn-1(0) = ^c(0) = 0.25, 0.5, 0.75 and 1.0. The initial condition is the same as in Section 4.1.1: the particle distribution of the BSI self-similar collapse solution. See Table 2 for the summary. N -body simulation with larger ^c becomes very difficult because of the mean free path requirement equation (16). The initial ratio of mean free path to the kernel size, /r32  -2/3, at the centre is listed in the table. Our ^c(0) = 1.0 run violates  > r32 at c(t)  8. The number of particles required to follow the collapse scales as ^c3 beyond this density or cross section.
+For the fluid model, the prefactor C is chosen to be 0.75 to make an agreement at small ^c (Section 4.1.1). We ran the fluid code with initial dimensionless cross section ^(0)/ b = 0, 0.25, 0.5, 0.75, 1.0, 1.5 and 2.0. The time evolution of the fluid model in units ofinitial relaxation time depends only on the combination ^/ b, which can be seen from the heat conduction equation (3).
+We plot the evolution of the central density for both N -body and fluid model results in Fig. 8. In units of the relaxation time, the collapse is slower for larger cross section. Fluid model results for ^c(0)/ b = 0.5, 1.0, 1.5 and 2.0 evolve similarly to N -body simulation results for ^c(0) = 0.25, 0.5, 0.75 and 1.0, respectively. This suggest that the effective value of the coefficient is b = 0.25 in the transitional regime, Kn 1.
+To show the agreement between our N -body results and the fluid model solution with b = 0.25, we plotted the normalized collapse rate as a function of cross section in Fig. 9, where t10 is the time for the density to increase by a factor of 10, and the fiducial time scale t10 is the time at which the self-similar solution with ^c(0) = 1 has a density increase by a factor of 10. The collapse rate is proportional to the cross section in the large Kn regime (small ^), but deviates from the linear relation in the transitional regime ^ 0.5, as predicted by BSI. The collapse rate should reach some maximum at some cross section and then decrease as t-101  ^c-1 as ^c  . Furthermore, since the value of b can be calculated from first principals in the small Kn regime, b should converge to the Chapman-Enskog value (b=1.38 in Section 2) as Kn  0. However, due to the numerical limit in equation (16), we cannot go into the small Kn regime to see the convergence to the Chapman-Enskog theory or the turn over of the collapse rate. Our N -body results are consistent with a constant b = 0.25 in the range we are able to simulate.
+c 2011 RAS, MNRAS 000, 1­14
+
+10 8 6
+4
+
+c c(0)
+
+2
+
+1
+
+0.25
+
+0.5
+
+0.75
+
+1.0 N - body ^c(0)
+
+0
+
+200 400 600 800 1000 1200 1400
+
+t t r, c(0)
+
+Figure 8. Gravothermal collapse in the transitional regime: Central density against time from Monte Carlo N -body simulations and the conducting fluid model. Cross sections of N body runs are ^c(0) = 0.25, 0.50, 0.75 and 1.0, from left to right, shifted to the right by 300 for readability. Four copies of smooth curves are the solutions of the fluid model with cross sections ^c(0)/ b = 0, 0.25, 0.5, 1.0, 1.5 and 2.0, from left to right. First two curves, ^c/ b = 0 and 0.25, are indistinguishable, and ^c/ b = 0.5, 1.0, 0.15, and 2.0 overlap with the N -body results for ^c = 0.25, 0.5, 0.75, and 1.0, respectively. This match suggests b = 0.25.
+
+1
+
+self-similar
+
+fluid b = 1.0
+
+b = 0.25
+
+N - body
+
+0.5
+
+collapse rate (t10 t10 *)-1
+
+0
+
+0
+
+0.5
+
+1
+
+^ c
+
+Figure 9. Collapse rate plotted as a function of cross section for self-similar solution (dotted line), fluid model with previously assumed value b = 1.0 (dashed line), with b = 0.25 (solid line) and N -body (crosses). See text for the definition of the collapse rate. A value of b = 0.25 makes the fluid model solution (with its conductivity that maps smoothly between the limits of long and short mean free path) agree with N -body simulations even in the transitional regime.
+
+5 DISCUSSION: IMPLICATIONS FOR THE COSMOLOGICAL SIMILARITY SOLUTION
+In this section, we discuss the consequences for the cosmological similarity solution derived by Ahn & Shapiro (2005, hereafter, A&S) of replacing the values of the prefactors (in the heat conduction equation 3) C = b = 1.0 by C = 0.75 and b = 0.25, as calibrated by our Monte Carlo N -body simulations. Until now, we have limited our attention to the gravothermal relaxation of isolated SIDM haloes. However, the haloes that form in a cosmological context are not isolated but rather build up over time from the nonlinear growth of small-amplitude initial density perturbations in the expanding cosmological background universe, which results in a continuous infall of additional mass. To model this cosmological formation and evolution of SIDM haloes, A&S added the BSI heat conduction term to the fully timedependent conservation equations of the fluid approximation in 1D, spherical symmetry, as described in A&S. They
+
+12 Jun Koda & P. R. Shapiro
+
+used these equations to derive an analytical solution for the so-called `secondary infall' problem, in an Einstein-de Sitter universe, with initial perturbation given by the spherical overdensity profile M/M¯  M¯ -1/6, where M¯ (r) is the unperturbed mass in a sphere of radius r at the mean density of the universe, and M (r) = M (r) - M¯ (r) is the mass perturbation inside the radius. The solution with this initial overdensity is self-similar, that is, the solution is timeindependent if radius and density are measured in units of the time-varying turn-around radius rta and background critical density b, respectively. The family of similarity solutions is parametrized by the dimensionless cross section,
+
+Q  brvir,
+
+(22)
+
+where rvir is the halo virial radius, the radius at which an accretion shock occurs. The density profile has a core whose density and size depend upon the value of Q.
+The heat conduction equation (3) has a dependence on ^ = H/ given by,
+
+L  ^ a-1C-1 + b-1^2 -1 .
+
+(23)
+
+ This function takes its maximum value abC/2 at ^ =
+a-1b C-1. Compared to previously assumed values, C = b = 1.0, our calibrated heat conduction has a maximum that is smaller by a factor of bC  0.4, which occurs at a value of ^ that is smaller by a factor of bC-1 = 0.58. There is a minimum central density and largest core size which occur approximately when the dimensionless cross section at the centre, ^c, defined inSection 3.2, maximizes the heat flux with the value, ^c = a-1b C-1. The solution with that ^c is defined as the maximally-relaxed solution, and the corresponding cross section Q is denoted by Qth (A&S). This maximally-relaxed halo has a density profile almost identical to the empirical Burkert profile (Burkert 1995), which fits the observed rotation curves of dwarf and LSB galaxies well.
+We used the same numerical code as A&S to solve for the cosmological similarity solutions with our calibrated prefactors, and to compare with their original solutions. In Fig. 10, we plot the maximally-relaxed density profile (left panel), and the dependence of the central density on dimensionless cross section ^c (right panel). For prefactors C = b = 1.0 adopted by A&S, the solution is maximally relaxed for Qth = 7.35 × 10-4, with central density c = 1.17×104b. For C = 0.75 and b = 0.25, the maximallyrelaxed solution shifts to Qth = 3.95 × 10-4, with a central density c = 1.50 × 104b.5 This central density is about 30 per cent larger than that of the original solution. For ^c 1, a cross section that is 1.33 times as large is required to achieve the same central density, due to the change of coefficient C from 1.0 to 0.75.
+
+5 Thevalue of ^c which defined the maximally-relaxed solution, ^c = a-1bC-1, changes from 0.666 to 0.384 if the conductivity
+parameters change their values in A&S to our new values here.
+However, the actual minimum densities occur at slightly higher
+^. For C = b = 1.0, central density takes its minimum value c = 1.15 × 104b at ^c = 0.85, or Q = 9.78 × 10-4. For C = 0.75 and b = 0.25, the minimum density c = 1.46 × 104b is found at ^c = 0.55, or Q = 3.95 × 10-4.
+
+ b 1
+c b
+
+105 104
+
+103
+
+102
+
+C = 0.75 b = 0.25
+
+C = 1.0 b = 1.0
+
+101
+
+104
+
+0.001
+
+0.01
+
+0.1
+
+r rta
+
+0.01 0.1
+
+1
+
+10
+
+^ c
+
+Figure 10. The cosmological similarity solution by Ahn & Shapiro (2005) with our calibrated prefactors (C=0.75, b=0.25; solid line) and the original prefactors (C=b=1.0; dotted line). (Left:) The maximally-relaxed density profiles, with density and radius in units of background critical density b and turn around radius rta. The maximally-relaxed solution for new prefactors has a 30 per cent larger central density. (Right:) The central density for old and new prefactors for different cross section values.
+
+A&S estimated the cross section values that brought dwarf galaxy rotation curves into agreement with the cosmological self-similar halo profiles. In order to translate a given value of Qth into a cross section value , the typical formation time for haloes that host dwarf galaxies in the CDM model of structure formation was used to relate rvir and b in the definition of Q, as described in A&S. Using the same argument, our corrected Qth value corresponds to a cross section 117 cm2 g-1, which is smaller than the original value 218 cm2 g-1 but still much larger than the values, 0.5 - 5 cm2 g-1, found in Monte Carlo N -body simulations that produce cored profiles for galactic haloes formed from cosmological initial conditions (Dav´e et al. 2001).
+We will discuss this apparent discrepancy between the values of the SIDM cross section which are best able to match the observed rotation curves of dwarf and LSB galaxies, from the A&S similarity solutions and cosmological N body/Monte Carlo simulations, respectively, in a separate paper. Here, we have demonstrated that this discrepancy is not likely to result from the break down of the conducting fluid model. We have found good agreement, in fact, between the Monte Carlo N -body simulations and the conducting fluid model for the thermal relaxation and gravothermal collapse of isolated haloes (of fixed mass), at least with regard to the long mean-free-path regime and the transitional regime in which the mean free path is comparable to the system size. These are the regimes of greatest relevance to the SIDM halo problem. We have also shown that, when we use the agreement between our Monte Carlo N -body results and the conducting fluid model solutions for isolated haloes to calculate the dimensionless parameters on which the heat conduction depends, the impact of the modified parameters on the A&S similarity solution is relatively small. We must, therefore, seek a different explanation for the different values of  required by the cosmological N -body/Monte Carlo and the similarity solutions of A&S, to produce the same observed degree of relaxation of the SIDM halo density profiles.
+As we shall discuss in our next paper in this series, the essential difference between the self-similar solution of A&S and the cosmological N -body simulations is that the self-
+c 2011 RAS, MNRAS 000, 1­14
+
+Gravothermal collapse of isolated SIDM haloes 13
+
+similar halo is continuously heated by the accretion shock, while the inner part of a more realistic halo, on the galaxy scale, is eventually unaffected by infall when infall rate slows after the halo forms. We will compare cosmological Monte Carlo N -body simulations with the conducting fluid model with non-self-similar infall in our next paper.
+
+panion paper, in fact, the discrepancy results, instead, from the gradual departure of halo evolution from self-similarity as the infall rate during cosmological structure formation drops below the self-similar rate at late times after halo formation.
+
+6 CONCLUSION AND SUMMARY
+The ability of the SIDM hypothesis to resolve the cusp-core problem of collisionless CDM haloes on the galaxy scale and the cross section values required to accomplish this remain uncertain, as long as the previous conclusions drawn from N -body simulation and the conducting fluid model differ so strongly. To rectify this situation, we have developed a new Monte Carlo N -body code of our own, based on the pre-existing GADGET 1.1 N -body code, and applied it to compare the N -body simulations with the conducting fluid model for isolated, spherically symmetric self-gravitating SIDM haloes. The collisions were assumed to be velocity independent, elastic, and isotropic. Our results include the following:
+(i) Our Monte Carlo N -body simulations are in very good agreement with the analytical self-similar gravothermal collapse solution of BSI, when the coefficient of thermal conduction is set to C = 0.75 (Section 4.1.1); the density and velocity dispersion profiles evolve self-similarly; the central density and velocity dispersion follow the self-similar time evolution formulae with the predicted constant  = 2.19; and, the time to collapse is always proportional to the central relaxation time at that time (equation 6-10).
+(ii) The conducting fluid model agrees with Monte Carlo N -body simulations reasonably well for different initial conditions: Plummer model, Hernquist profile, and NFW profile, in the large-Kn regime. The collapse time and the central density at maximum core expansion agree within 20 per cent. The shape of the density profile and the central density evolution as a function of time during gravothermal collapse agree very well.
+(iii) We also showed that the collapse time becomes longer in units of relaxation time as the system transitions from the large- to the small-Kn regime, as predicted by the conducting fluid model. The N -body results agree with the conducting fluid model for Kn 1, or ^ 1, with the prefactor b = 0.25. However, this prefactor is more than five times smaller than the Chapman-Enskog value, valid asymptotically in the small Kn limit. The conducting fluid model must be further calibrated against N -body simulations if it is used beyond the transitional regime, for ^ 1.
+(iv) Our calibration of the prefactors C and b does not change the cosmological similarity solutions of Ahn & Shapiro (2005) significantly. The cross section that gives the minimum central density on the dwarf galaxy scale is altered from 220 cm2g-1 to 117 cm2g-1, but this is still much larger than the values that cosmological Monte Carlo N body simulations used to make cored SIDM haloes (  0.5 - 5 cm2g-1). We will investigate this problem in our subsequent paper. Our results here suggest that this apparent discrepancy is not the result of a breakdown of either the conducting fluid model or the Monte Carlo scattering algorithm in the N -body simulations. As we shall show in a com-
+c 2011 RAS, MNRAS 000, 1­14
+
+7 ACKNOWLEDGMENTS
+We thank Kyungjin Ahn for useful discussions and letting us use the cosmological similarity solution solver. This work was supported in part by NASA ATP grants NNG04G177G and NNX07AH09G, CHANDRA SAO grant TM8-9009X, and NSF grant AST-0708176 and AST-1009799 to PRS. Simulations were performed at the Texas Advanced Computing Center.
+REFERENCES
+Aarseth S. J., Henon M., Wielen R., 1974, A&A, 37, 183 Ackerman L., Buckley M. R., Carroll S. M., Kamionkowski
+M., 2009, Phys. Rev. D, 79, 023519 Ahn K., Shapiro P. R., 2005, MNRAS, 363, 1092, (A&S) Arabadjis J. S., Bautz M. W., Garmire G. P., 2002, ApJ,
+572, 66 Arkani-Hamed N., Finkbeiner D. P., Slatyer T. R., Weiner
+N., 2009, Phys. Rev. D, 79, 015014 Babovsky H., Illner R., 1989, SIAM J. Numer. Anal., 26,
+45 Balberg S., Shapiro S. L., Inagaki S., 2002, ApJ, 568, 475,
+(BSI) Baumgardt H., Heggie D. C., Hut P., Makino J., 2003,
+MNRAS, 341, 247 Bettwieser E., 1983, MNRAS, 203, 811 Binney J., Tremaine S., 1987, Galactic dynamics. Prince-
+ton, NJ, Princeton University Press Bird G. A., 1994, Molecular Gas Dynamics and the Direct
+Simulation of Gas Flows. Clarendon, Oxford, 1994 Buckley M. R., Fox P. J., 2010, Phys. Rev. D, 81, 083522 Burkert A., 1995, ApJ, 447, L25 --, 2000, ApJ, 534, L143 Casertano S., Hut P., 1985, ApJ, 298, 80 Chapman S., Cowling T. G., 1970, The mathematical the-
+ory of non-uniform gases. Cambridge: University Press, 1970, 3rd ed. Clowe D., Bradac M., Gonzalez A. H., Markevitch M., Randall S. W., Jones C., Zaritsky D., 2006, ApJ, 648, L109 Cohn H., 1980, ApJ, 242, 765 Col´in P., Avila-Reese V., Valenzuela O., Firmani C., 2002, ApJ, 581, 777 Dav´e R., Spergel D. N., Steinhardt P. J., Wandelt B. D., 2001, ApJ, 547, 574 de Blok W. J. G., 2010, Advances in Astronomy, 2010 de Blok W. J. G., Bosma A., McGaugh S., 2003, MNRAS, 340, 657 de Blok W. J. G., Walter F., Brinks E., Trachternach C., Oh S.-H., Kennicutt R. C., 2008, AJ, 136, 2648 Diemand J., Zemp M., Moore B., Stadel J., Carollo C. M., 2005, MNRAS, 364, 665 D'Onghia E., Burkert A., 2003, ApJ, 586, 12
+
+14 Jun Koda & P. R. Shapiro
+D'Onghia E., Firmani C., Chincarini G., 2003, MNRAS, 338, 156
+El-Zant A., Shlosman I., Hoffman Y., 2001, ApJ, 560, 636 Endoh H., Fukushige T., Makino J., 1997, PASJ, 49, 345 Feng J. L., Kaplinghat M., Tu H., Yu H.-B., 2009, Journal
+of Cosmology and Astro-Particle Physics, 7, 4 Feng J. L., Kaplinghat M., Yu H., 2010, Physical Review
+Letters, 104, 151301 Firmani C., D'Onghia E., Chincarini G., UNAM, Mexico,
+Milano U., Italy, di Brera O., Italy, 2000, ArXiv e-prints (astro-ph/0010497) Gallis M. A., Torczynski J. R., Rader D. J., 2004, Phys. Rev. E, 69, 042201 Gao L., Navarro J. F., Cole S., Frenk C. S., White S. D. M., Springel V., Jenkins A., Neto A. F., 2008, MNRAS, 387, 536 Gentile G., Salucci P., Klein U., Vergani D., Kalberla P., 2004, MNRAS, 351, 903 Gentile G., Tonini C., Salucci P., 2007, A&A, 467, 925 Gnedin O. Y., Ostriker J. P., 2001, ApJ, 561, 61 Goodman J., 1987, ApJ, 313, 576 Governato F., Brook C., Mayer L., Brooks A., Rhee G., Wadsley J., Jonsson P., Willman B., Stinson G., Quinn T., Madau P., 2010, Nature, 463, 203 Greengard C., Reyna L., 1991, Phys. Fluids A, 4, 4 Hayashi E., Navarro J. F., 2006, MNRAS, 373, 1117 Hayashi E., Navarro J. F., Power C., Jenkins A., Frenk C. S., White S. D. M., Springel V., Stadel J., Quinn T. R., 2004, MNRAS, 355, 794 Heggie D. C., Ramamani N., 1989, MNRAS, 237, 757 Heggie D. C., Stevenson D., 1988, MNRAS, 230, 223 Hernquist L., 1990, ApJ, 356, 359 Jardel J. R., Sellwood J. A., 2009, ApJ, 691, 1300 Jin S., Ostriker J. P., Wilkinson M. I., 2005, MNRAS, 359, 104 Khalisi E., Amaro-Seoane P., Spurzem R., 2007, MNRAS, 374, 703 Kochanek C. S., White M., 2000, ApJ, 543, 514 Koda J., 2009, PhD thesis, The University of Texas at Austin Koposov S. E., Yoo J., Rix H., Weinberg D. H., Maccio` A. V., Escud´e J. M., 2009, ApJ, 696, 2179 Kuzio de Naray R., Martinez G. D., Bullock J. S., Kaplinghat M., 2010, ApJ, 710, L161 Kuzio de Naray R., McGaugh S. S., de Blok W. J. G., 2008, ApJ, 676, 920 Kuzio de Naray R., McGaugh S. S., de Blok W. J. G., Bosma A., 2006, ApJS, 165, 461 Kuzio de Naray R., McGaugh S. S., Mihos J. C., 2009, ApJ, 692, 1321 Levermore C. D., 1996, Journal of Statistical Physics, 83, 1021 Lewis A. D., Buote D. A., Stocke J. T., 2003, ApJ, 586, 135 Lifshitz E. M., Pitaevskii L. P., 1981, Physical Kinetics. Oxford; Butterworth-Heinemann Loeb A., Weiner N., 2010, ArXiv e-prints (1011.6374) Louis P. D., 1990, MNRAS, 244, 478 Lynden-Bell D., Eggleton P. P., 1980, MNRAS, 191, 483, (LBE) Mahdavi A., Hoekstra H., Babul A., Balam D. D., Capak P. L., 2007, ApJ, 668, 806
+
+Makino J., 1996, ApJ, 471, 796 Markevitch M., Gonzalez A. H., Clowe D., Vikhlinin A.,
+Forman W., Jones C., Murray S., Tucker W., 2004, ApJ, 606, 819 Mastropietro C., Burkert A., 2008, MNRAS, 389, 967 Merritt D., Graham A. W., Moore B., Diemand J., Terzi´c B., 2006, AJ, 132, 2685 Milosavljevi´c M., Koda J., Nagai D., Nakar E., Shapiro P. R., 2007, ApJ, 661, L131 Miralda-Escud´e J., 2002, ApJ, 564, 60 Nanbu K., 1980, Journal of the Physical Society of Japan, 49, 2042 --, 1984, Physics of Fluids, 27, 2632 Navarro J. F., Frenk C. S., White S. D. M., 1997, ApJ, 490, 493 Navarro J. F., Ludlow A., Springel V., Wang J., Vogelsberger M., White S. D. M., Jenkins A., Frenk C. S., Helmi A., 2010, MNRAS, 402, 21 Oh S., Brook C., Governato F., Brinks E., Mayer L., de Blok W. J. G., Brooks A., Walter F., 2010a, ArXiv eprints (1011.2777) Oh S., de Blok W. J. G., Brinks E., Walter F., Kennicutt Jr R. C., 2010b, ArXiv e-prints (1011.0899) Oh S.-H., de Blok W. J. G., Walter F., Brinks E., Kennicutt R. C., 2008, AJ, 136, 2761 Randall S. W., Markevitch M., Clowe D., Gonzalez A. H., Bradac M., 2008, ApJ, 679, 1173 Reed D., Governato F., Verde L., Gardner J., Quinn T., Stadel J., Merritt D., Lake G., 2005, MNRAS, 357, 82 Sa´nchez-Salcedo F. J., 2005, ApJ, 631, 244 Sellwood J. A., 2008, ApJ, 679, 379 Shapiro P. R., Iliev I. T., Raga A. C., 1999, MNRAS, 307, 203 Simon J. D., Bolatto A. D., Leroy A., Blitz L., Gates E. L., 2005, ApJ, 621, 757 Spergel D. N., Steinhardt P. J., 2000, Physical Review Letters, 84, 3760 Springel V., Farrar G. R., 2007, MNRAS, 380, 911 Springel V., Yoshida N., White S. D. M., 2001, New Astronomy, 6, 79 Spurzem R., Aarseth S. J., 1996, MNRAS, 282, 19 Stadel J., Potter D., Moore B., Diemand J., Madau P., Zemp M., Kuhlen M., Quilis V., 2009, MNRAS, 398, L21 Szell A., Merritt D., Kevrekidis I. G., 2005, Physical Review Letters, 95, 081102 Takahashi K., 1995, PASJ, 47, 561 Trachternach C., de Blok W. J. G., Walter F., Brinks E., Kennicutt R. C., 2008, AJ, 136, 2720 Valenzuela O., Rhee G., Klypin A., Governato F., Stinson G., Quinn T., Wadsley J., 2007, ApJ, 657, 773 Vesely F. J., 2001, Computational Physics: An Introduction. New York, Plenum Press Wadepuhl M., Springel V., 2010, MNRAS, in press, (arXiv:1004.3217) Weinberg M. D., Katz N., 2002, ApJ, 580, 627 Yoshida N., Springel V., White S. D. M., Tormen G., 2000, ApJ, 544, L87 Zackrisson E., Bergvall N., Marquart T., O¨ stlin G., 2006, A&A, 452, 857
+c 2011 RAS, MNRAS 000, 1­14
+
+

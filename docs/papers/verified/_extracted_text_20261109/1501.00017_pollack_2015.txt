@@ -1,0 +1,1230 @@
+arXiv:1501.00017v1 [astro-ph.CO] 30 Dec 2014
+
+CALT-TH-2014-144
+Supermassive Black Holes from Ultra-Strongly Self-Interacting Dark Matter
+Jason Pollack,1,  David N. Spergel,2 and Paul J. Steinhardt3
+1Walter Burke Institute for Theoretical Physics, Division of Physics, Mathematics & Astronomy, California Institute of Technology, Pasadena, CA 91125 2Department of Astrophysical Sciences, Peyton Hall,
+Princeton University, Princeton, NJ 08544 3Department of Physics and Princeton Center for Theoretical Science,
+Princeton University, Princeton, NJ 08544 (Dated: January 5, 2015)
+We consider the cosmological consequences if a small fraction (f 0.1) of the dark matter is ultra-strongly self-interacting, with an elastic self-interaction cross-section per unit mass  1 cm2/g. This possibility evades all current constraints that assume that the self-interacting component makes up the majority of the dark matter. Nevertheless, even a small fraction of ultra-strongly self-interacting dark matter (uSIDM) can have observable consequences on astrophysical scales. In particular, the uSIDM subcomponent can undergo gravothermal collapse and form seed black holes in the center of a halo. These seed black holes, which form within several hundred halo interaction times, contain a few percent of the total uSIDM mass in the halo. For reasonable values of f , these black holes can form at high enough redshifts to grow to  109M quasars by z 6, alleviating tension within the standard CDM cosmology. The ubiquitous formation of central black holes in halos could also create cores in dwarf galaxies by ejecting matter during binary black hole mergers, potentially resolving the "too big to fail" problem.
+Electronic address: jpollack@caltech.edu
+
+2
+
+Contents
+
+1. Introduction
+
+2
+
+2. Supermassive Black Holes
+
+4
+
+3. Gravothermal Collapse
+
+5
+
+A. The Gravothermal Fluid Equations
+
+6
+
+B. Initial Conditions
+
+8
+
+C. Integration of the Equations
+
+10
+
+D. Results
+
+12
+
+4. Supermassive Black Holes from uSIDM
+
+16
+
+A. Halo Parameters
+
+16
+
+B. Explaining Observations
+
+17
+
+C. Examples
+
+18
+
+5. Discussion
+
+18
+
+A. Cosmological Caveats
+
+19
+
+B. The Too Big to Fail Problem
+
+20
+
+C. Parameter Space
+
+21
+
+1. High-Redshift Quasars
+
+21
+
+2. Dwarf Galaxies
+
+24
+
+3. Both Simultaneously?
+
+26
+
+6. Conclusion
+
+27
+
+References
+
+28
+
+1. INTRODUCTION
+Although CDM cosmology provides an excellent fit to the observational data on Mpc scales [1], its success is less certain over the strongly nonlinear, kpc regime relevant to the substructure within galactic halos. The deviation of galactic cores from an expected cuspy density profile [2, 3] and an apparent shortfall of observed Milky Way satellites relative to expectations from simulations [4, 5] originally motivated considerations that the dark matter might have non-negligible self-interactions [6]. Although a combination of improved theoretical understanding and additional observations had appeared to alleviate these problems and remove the phenomenologically interesting parameter space for self-interacting dark matter (SIDM) [7­9], a recent reevaluation of the constraints [10, 11] has demonstrated that SIDM with an velocity-independent elastic self-interaction cross section per unit mass  0.1 - 1 cm2/g 0.2 - 2 b/GeV can simultaneously meet all constraints and alleviate the discrepancies between CDM and observations.
+In this paper, we exhibit a distinct area of the SIDM parameter space which is likewise both allowed by observations and potentially interesting phenomenologically. In particular, we examine the case in which most of the dark matter remains non-self-interacting (or weakly self-interacting) as in the standard CDM picture, but a small fraction f 1 of the dark matter is made up of a subdominant component that is ultra-strongly self-interacting,
+
+3
+abbreviated as uSIDM, with  1 cm2/g (where  denotes the cross section per unit mass). Because most of the dark matter remains inert, constraints that rely on distinguishing the overall behavior of SIDM halos from their CDM counterparts are no longer relevant.
+Consider, for example, the constraints placed on the SIDM cross section from observations of the Bullet Cluster (1E 0657-6). Observations reveal an offset between the gas "bullet" and the dark matter centroid of the currently merging subcluster. Under the assumption that the subcluster has already passed through the main cluster, this offset is due to stripping and deceleration of gas in the subcluster due to interactions with the main cluster itself. The observation that the dark matter has not been slowed to the same degree allows limits to be placed on the dark matter self-interaction cross section. The strongest constraint [12] comes from the measurement of the ratio of mass-to-light ratios of the subcluster and the main cluster, which is found to be 0.84 ± 0.07. Under the assumption that the subcluster and main cluster had the same initial mass-to-light ratio before merger, this means that the subcluster cannot have lost more than 23% of its mass.
+In [12], this measurement plus estimates of the subcluster escape velocity and merger speed were used to constrain  0.6 cm2/g when f = 1. However, it is clear that, even in the extreme example that all of the SIDM mass in the subcluster was lost to scattering, current observations would not be able to detect the SIDM subcomponent if f < 0.07, within the uncertainty on the mass-to-light ratio. So constraints from the Bullet Cluster certainly do not apply when f 10-1, regardless of the size of the self-interaction cross section per unit mass . Even when f  0.1,  may not be well-constrained, since one pass through the main cluster would not suffice to strip all of the SIDM from the bullet.
+We note that observations of another cluster undergoing a major merger, A520 [13­16] have not provided similar constraints on the SIDM cross section; here the dark matter centroid of the subcluster is in fact coincident with the (presumably stripped) gas. Under certain assumptions, this can be taken as evidence of a nonzero dark matter self-interaction cross section per unit mass, as strong as 0.94 ± 0.06 cm2/g in the latest observations [16]. The limited number of ongoing major merger events in the observable universe makes it hard to give an overall estimate of the self-interaction cross section from major mergers, but future surveys could potentially combine many minor merger events to measure  with a precision of 0.1 cm2/g [17].
+Regardless of the situation for f = 1 SIDM, we have seen that there are no observational constraints on a uSDIM component of the dark matter with f 0.1. At the same time, of course, a small component of uSIDM by itself is unable to produce cores or dissolve substructure to any observable degree. We point out, though, that a uSIDM component of the dark matter could instead explain another potential discrepancy with the CDM picture: the existence of billion-solar-mass quasars at high redshifts z 6.5 - 7 (for reviews, see [18­23]). In §2 we review the observational situation and the difficulties with explaining it within CDM. In §3 we suggest an alternative: gravothermal collapse of an ultra-strongly self-interacting dark matter component. We review the mechanism of gravothermal collapse, specialize to the case of a halo containing uSIDM, and solve the problem numerically. We apply the results of §3 to individual observations of high-redshift quasars in §4, then discuss broader cosmological implications in §5, including a potential way for uSIDM to indirectly produce cores in dwarf halos. We finally conclude in §6.
+
+4
+
+2. SUPERMASSIVE BLACK HOLES
+
+Supermassive black holes (SMBHs) which grow primarily via gas accretion are Eddingtonlimited: the gravitational force on the accreting gas is balanced by its own radiation pressure. Hence growth via gas accretion cannot proceed faster than exponentially, with an e-folding rate bounded by the inverse of the Salpeter time [24]:
+
+tSal
+
+=
+
+rT c 4Gmp
+
+
+
+r
+0.1
+
+45.1 Myr,
+
+(1)
+
+where T is the Thompson cross section,
+
+8
+
+e2
+
+2
+
+T = 3 4 0mec2 ,
+
+(2)
+
+mp and me are respectively the proton and electron masses, and r is the radiative efficiency, which ranges from 1 - 8/9  0.057 to 1 - 1/3  0.42 as the angular momentum of the black hole increases from zero to its extremal value [25]; in astrophysical applications, r is typically taken to be r = 0.1. Accretion faster than the Eddington limit, ME dd = M tS-a1l, onto a black hole of mass M will result in a radiation pressure exceeding the gravitational
+force, driving outflows which should quickly halt this excessive accretion. Yet several dozen quasars with masses a few × 109 M have been detected at redshifts z 6, including a quasar, ULAS J1120+0641, with mass 2.0-+10..75 × 109 M at redshift z = 7.085 [26, 27]. Using the Planck Collaboration's best-fit cosmological values [1], z = 7.085 corresponds to
+747 Myr after the Big Bang, so even continuous Eddington accretion since the Big Bang can only increase the mass of a seed black hole by a factor of 1.6 × 107. If we make the standard assumption that black hole seeds are formed from Pop III stars, the seed cannot have formed before around z  30, so the maximum growth factor shrinks by another order of magnitude, to 1.75 × 106, requiring a seed black hole mass  103M .
+More generally, in order to explain the observed abundance of  1/Gpc3 billion-solarmass quasars at z 6 [23] within CDM, we must form 102-3M seed black holes soon
+after the beginning of baryonic structure formation and grow these black holes continuously at near-Eddington rates for  800 Myr. Some simulations have shown this can be achieved [28], but only by making optimistic assumptions about cooling and star formation [29, 30],
+fragmentation [31­33], photoevacuation [34­36], black hole spin [37­39], and black hole
+mergers [40­42]. We emphasize, in particular, that these results depend critically on the
+assumption of r = 0.1; because the e-folding time itself depends linearly on the radiative efficiency, the maximum mass formed by a given time is exponentially sensitive to its value.
+Because quasar masses are inferred by measuring their luminosities and assuming they are
+Eddington-limited, increasing the assumed radiative efficiency will decrease the inferred quasar mass by -r 1. However, this reduction in required mass is made negligible by the much larger number of e-folds required to reach it. Recent work, both theoretical [25] and observational [43], has found r > 0.2, which would be catastrophically incompatible with an assumption of black hole growth driven by Eddington accretion.
+One alternative is to allow for extended periods of super-Eddington gas accretion. Super-
+Eddington accretion is known to be possible, for example when outflows of gas and radiation
+are collimated [44, 45], and extended periods of super-Eddington growth could account for
+the observed supermassive high-redshift quasars [46, 47]. However, estimates of quasar
+masses and luminosities at low redshifts using emission line widths indicate that, at least in
+
+5
+the late universe, the vast majority of quasars are constrained to radiate at the Eddington limit [48], or possibly well below it [49, 50].
+In this paper, we will therefore neglect the possibility of extended super-Eddington accretion. We will assume that growth of black holes from baryonic accretion is limited to exponential growth with an e-folding time given by the Salpeter time (1). In order to facilitate comparision of uSIDM to the standard picture, we will, however, allow for continuous accretion of baryons at this limit once a seed black hole has formed, despite the potential issues mentioned in the previous paragraph. In other words, we attempt to modify the mechanism by which black hole seeds are formed, while leaving the simplest conventional mechanism for their growth from seeds to supermassive black holes intact. It would be easy to combine our results with more realistic baryon accretion histories.
+Finally, we note that future observations in the near-infrared, e.g. with the James Webb Space Telescope and Wide Field Infrared Survey Telescope (WFIRST), and in the radio, e.g. with the Square Kilometer Array, should be able to detect (or place limits on the density of) even intermediate-mass ( 105M ) quasars out to z  10 [51­54], providing vastly more information about the formation and growth of high-redshift quasars.
+
+3. GRAVOTHERMAL COLLAPSE
+
+Motivated by the tensions within the standard (CDM) picture discussed in the previous section, we propose an alternative mechanism for black hole seed formation: the gravothermal collapse [55] of the uSIDM component of a dark matter galactic halo. The simplest form of gravothermal collapse occurs in a population of gravitating point particles with elastic short-range interactions. The classic illustration of the mechanism is globular clusters, where the point particles are stars. Stellar short-range interactions are not purely elastic, so in this case collapse is eventually halted by binary formation. A gas of SIDM, however, has only elastic interactions, so core collapse continues until relativistic instability results in the formation of a black hole, which promptly Bondi accretes [56] the optically thick core of SIDM that surrounds it.
+In this section we make this intuitive picture precise. Full expressions will be given below, but in brief we find that the uSIDM component of a galactic halo undergoes gravothermal collapse in  460 halo relaxation times, forming a black hole which contains  2% of the uSIDM mass of the galaxy. The halo relaxation time is a complicated expression which depends on the halo mass and time of formation as well as the uSIDM properties, but we show in the following sections that, for reasonable values of uSIDM fraction f and cross section per unit mass , there exist halos that can easily form seed black holes, and grow them using uSIDM and baryons, to achieve 109M SMBHs by redshift 6.
+Before formulating the problem, we first review the gravothermal collapse mechanism itself. Intuitively, gravothermal collapse depends on the simple observation that gravitationally bound systems have negative specific heat. For a virialized system, this is immediate:
+
+0 = 2T + V = T + E  E = -T.
+
+(3)
+
+Now consider two systems, an inner, gravitationally bound system with negative specific heat and an outer system surrounding it with positive specific heat--the inner and outer parts of a globular cluster, for example. Evolution towards equilibrium will direct both mass and heat outward, causing both the inner and the outer system to increase in temperature.
+
+6
+A possible physical mechanism is a two-body scattering in the inner system which sends one star closer to the core (where it gains potential energy and thus speeds up, increasing the temperature of the inner system) and kicks one star out to the periphery (where its higher speed increases the temperature of the outer system). Importantly, we see that the inner system shrinks as it heats up.
+Now two outcomes are possible, depending on the specific heat of the two systems as a function of their masses. If the outer system always has the smaller (magnitude of) specific heat, its temperature will eventually grow to exceed that of the inner system, and the entire assemblage of masses will reach equilibrium. On the other hand, if the outer system grows in mass too quickly, its specific heat will become too large and its temperature will never catch up to the inner system. Hence the inner system will continue shrinking in mass and growing in temperature until the thermodynamic description breaks down. This is precisely the gravothermal catastrophe [55]. In the case of a globular cluster (at least an idealized one with uniform-mass stars), the gravothermal collapse process is halted by binary formation, which acts as an energy sink [57, 58]. If the uSIDM interacts purely via elastic scattering, however, no bound state formation is possible, and gravothermal collapse can drive the core to relativistic velocities, where it undergoes catastrophic collapse into a black hole via the radial instability [59­62].
+
+A. The Gravothermal Fluid Equations
+
+We now consider the gravothermal collapse of a general two-component dark matter halo,
+
+where the self-interacting component comprises some fraction f of the mass of the halo. At
+
+this stage we do not yet specialize to the uSIDM case, with f 1. To avoid confusion,
+
+we will therefore refer to the two different components of the halo as SIDM (making up a
+
+fraction f of the total mass of the halo) and (ordinary) CDM (making up the remainder),
+
+denoting the SIDM as uSIDM only when f 1. To simulate the collapse, we employ the
+
+gravothermal fluid approximation [63­65], which reduces the problem to a set of coupled
+
+partial differential equations that can then be solved numerically. First consider the general
+
+case for an f = 1 fluid, i.e. a halo composed entirely of SIDM. A spherically symmetric
+
+ideal gas of point particles in hydrostatic equilibrium with arbitrary conductivity  obeys
+
+the following equations [63]:
+
+M = 4r2
+
+(4)
+
+r
+
+ (2) = - GM 
+
+(5)
+
+r
+
+r2
+
+L 4r2
+
+=
+
+-  T r
+
+(6)
+
+L = -4r22 
+
+3 ln ,
+
+(7)
+
+r
+
+t M 
+
+where (r) is the one-dimensional velocity dispersion and L(r) the total heat radiated in-
+
+ward through a sphere of radius r. The first equation (4) simply defines the integrated mass
+
+distribution in terms of the density. The second (5) is the statement of hydrostatic equi-
+
+librium: we inserted Euler's equation into the Poisson equation for a spherically symmetric potential and used the equation of state for an ideal gas, p = 2. The third (6) states that
+
+7
+
+the heat flux is proportional to the temperature gradient, with proportionality constant
+
+given by the conductivity . The fourth (7) is the second law of thermodynamics, inserting
+
+the
+
+specific
+
+entropy
+
+of
+
+an
+
+ideal
+
+gas
+
+of
+
+point
+
+particles
+
+u
+
+=
+
+kB m
+
+ln(
+
+T
+
+3/2
+
+
+)
+
+and
+
+using
+
+the
+
+relation
+
+2 = kBT /m. This gives a set of four differential equations with four dependent variables
+
+{M, , , L} and two independent variables {r, t}. (The temperature T is directly related
+
+to  by 2 = kBT /m.)
+
+To make progress, we need an expression for the form of the thermal conductivity 
+
+in terms of our physical parameter, the elastic scattering cross section per unit mass .
+
+Dimensional analysis alone will not suffice: we have one time scale, the fluid relaxation time
+
+tr  1/(a),
+
+(8)
+
+with a = 16/  2.257 for hard-sphere interactions, but two length scales, the mean
+
+free path   1/() and the Jeans length or gravitational scale height H  2/(4G).
+
+Following [64, 65], we find the unique length scales in the two limiting cases, the short
+
+mean free path (smfp) regime  H  smfp =  and the long mean free path (lmfp)
+
+regime  H  lmfp = H, and combine them in reciprocal to get a final length scale,
+
+
+
+-1 smfp
+
++
+
+-1 lmfp
+
+-1. In the smfp regime, transport theory tells us that
+
+L 4r2
+
+
+
+- 3 a-1b 2 2 .
+
+2
+
+tr r
+
+(9)
+
+2T5he c/o3e2ffici1en.3t85b.
+
+is In
+
+calculated perturbatively in Chapman-Enskog theory [66], the lmfp regime, the flux equation is well approximated as
+
+b
+
+=
+
+L 4r2
+
+
+
+-3CH2 2 tr
+
+2 ,
+r
+
+(10)
+
+where C is a constant setting the scale on which the two conduction mechanisms are equally
+
+effective, determined by N-body simulations [65] to be C  290/385  0.75. Hence the final
+
+expression is
+
+L
+
+= -3ab
+
+a2 + b 4G
+
+-1 2 .
+
+(11)
+
+4r2
+
+2
+
+C 2 r
+
+Now consider the more general case, f = 1. Hydrostatic equilibrium is separately satisfied
+for each species of particle, but the gravitational potential is of course sourced by both
+species, giving the coupling between the two components. Because the non-SIDM component is taken to be collisionless, it has  = 0, so Lni = 0. So the total system is governed by six partial differential equations with six dependent variables {M, int, ni, int, ni, Lint} and two independent variables {r, t}:
+
+M = 4r2 int + ni
+
+(12)
+
+r
+
+ int (int)2 = - GM int
+
+r
+
+r2
+
+(13)
+
+ ni (ni)2 = - GM ni
+
+(14)
+
+r
+
+r2
+
+8
+
+Lint = - 3 abint 4r2 2
+
+a2
+
++
+
+b C
+
+4G int (int)2
+
+-1  (int)2 r
+
+(15)
+
+Lint = -4intr2 int 2 
+
+( int )3 ln
+
+r
+
+t M
+
+int
+
+(16)
+
+
+
+( ni )3
+
+0=
+
+t
+
+ln
+M
+
+ni
+
+.
+
+(17)
+
+As before, the first equation gives the total mass distribution, while the second and third
+
+enforce hydrostatic equilibrium. The fourth determines how the SIDM fluid conducts heat
+
+and the fifth how the flux gradient affects the fluid. Finally, the sixth equation ensures
+
+that the entropy of the collisionless component is conserved, 3 / = /. Notice that the
+
+fraction f does not appear in the differential equations themselves, but only in the boundary
+
+conditions: we must have
+
+ 0
+
+4r
+
+2int(r
+
+)dr
+
+ 0
+
+4r
+
+2ni(r
+
+)dr
+
+f = 1-f
+
+(18)
+
+at all times.
+
+B. Initial Conditions
+
+In principle (12 ­17) can be solved exactly given appropriate boundary conditions at r = 0 and r =  and a set of initial radial profiles which obey the equations. In practice, this is computationally impossible: even finding the initial profiles for an arbitrary  is infeasible. Balberg, Shapiro, and Inagaki [64], considering the f = 1 case, took the   0 limit, which admits a self-similar solution where separation of variables is possible, then found the eigenvalues of the resulting system of ordinary spatial differential equations and took the resulting profiles as their initial conditions for the more general  = 0 case.
+We will instead assume that SIDM self-interactions are unimportant during the process of halo formation, so that the the SIDM and collisionless components have the same initial profile. This allows us to use the results of (collisionless) CDM simulations. We simplify further by approximating the initial halo by an NFW profile,
+
+NFW(r)
+
+=
+
+s (r/rs)(1 +
+
+, r/rs)2
+
+(19)
+
+where s and rs are the characteristic density and scale radius, respectively. Since the NFW profile has a characteristic radius, we can state our assumption more precisely: we assume that halo formation proceeds much faster than heat conduction, which is true when the dynamical timescale of collapse is much less than the relaxation timescale due to collisions:
+
+tdyn(rs)
+
+trel(rs)
+
+
+
+1 s tdyn(rs)
+
+
+
+s
+
+1;
+
+(20)
+
+i.e. so long as the halo is optically thin at its characteristic radius. Again, if the optical
+
+depth is small,
+
+  f NFWr
+
+1  f 
+
+1 ,
+
+srs
+
+(21)
+
+9
+
+typical SIDM particles have not yet undergone any self-interaction by the time of halo for-
+
+mation, so we are justified in assuming they follow the same initial profile as the collisionless dark matter, i0nt(r) = f NFW(r).
+Before checking the validity of this assumption, we comment on the consequences of taking
+
+a different initial profile. The NFW profile is particularly simple: its form means that the
+
+optical depth at small radii, r rs, is independent of radius, so a small characteristic optical depth implies that the central regions are also optically thin despite the presence
+
+of a cusp. Modern CDM simulations, however, have tended to find density profiles more
+
+complicated than the NFW profile. Profiles with cores or at least less cuspy behavior, e.g.
+
+Einasto profiles [67, 68], will have  1 everywhere if s 1. Below we will see that SIDM halos with initial NFW density profiles grow cores on a scale of tens of halo relaxation
+
+times anyway, so shallower initial profiles will only result in slightly smaller times before
+
+black hole formation. Profiles with more cuspy behavior, e.g. generalized NFW or Zhao
+
+profiles [69] with inner slope  1, will unavoidably have regions at very small radii in the
+
+optically thick regime. Below we will see that SIDM halos with initial NFW profiles first
+
+evacuate the cusp to form cores before beginning the gravothermal collapse process, and it
+
+seems reasonable to conclude that the same thing will happen for non-pathological cuspier
+
+profiles. We conclude that imposing a different profile should not significantly change the
+
+behavior investigated below.
+
+When is the assumption that s 1 justified? Recall that the characteristic radius
+
+s and radius rs for an NFW profile are given in terms of the halo virial mass M and
+
+concentration c:
+
+r  crs,
+
+(22)
+
+M  M (r) =
+
+r
+4r2NFW(r)dr = 4srs3
+0
+
+ln(1 + c) - c 1+c
+
+,
+
+(23)
+
+s  ccrit(z).
+
+(24)
+
+The density contrast c is in turn given by
+
+ c3
+
+c =
+
+, 3 Kc
+
+(25)
+
+where Kc  ln(1 + c) - c/(1 + c). The problem thus reduces to finding an expression for , the virial overdensity. In the spherical collapse model, this is given by   182m0.45 for a flat universe [70­73];  hence approaches the familiar value of 178 in the matter-dominated
+era.
+Inserting these expressions into (21) above yields an inequality for f in terms of c and
+M, along with the redshift of virialization z:
+
+f
+
+
+
+1 srs
+
+=
+
+(4)-1/3M-1/3
+
+crit(z) 3
+
+-2/3
+Kc c-2
+
+(26)
+
+= 24.56 cm2/g × M 1012M
+
+-1/3
+×
+
+crit(z) crit(z = 15)
+
+-2/3
+Kc c-2.
+
+(27)
+
+In the second line we have inserted the typical halo parameters we will consider below: z = 15, M = 1012M .
+
+10
+It remains to insert plausible values for the concentration c. Individual halos of mass M formed at a fixed redshift z will have varying concentrations, but there should be some mass- and redshift-dependent median concentration, c(M, z). Prada et al. [74] used the Millennium [75, 76], Bolshoi [77], and MultiDark [78] simulations to examine the shape of the c(M, z) curve with varying mass and redshifts. They found that for each redshift considered (from z  0 - 6) the concentration formed a U-shaped curve: it was minimized at a certain value of the mass, but increased steeply both above and below this mass. Furthermore, they found that both the minimum value of the concentration and the mass at which this minimum was realized decreased with increasing redshift. At the large redshifts we consider, the cluster-sized halos needed to form supermassive black holes are far more massive than the bottom of the U-shaped curve; accordingly, the fitting formulae given in [74] predict that the concentration for these halos will be extremely large, of the order of c  105 for the halo parameters above. If this were true, the initial density profiles of these large, early halos would be extremely concentrated, so that their inner regions are extremely thick even for f 10-6. In this case the simulations presented in this paper would not be reliable.
+We emphasize, however, that the fitting formulae of [74] were devised using simulated halos only out to z  6; they should not be trusted so far away from their domain of validity. Accordingly, we have consulted the high-redshift halo catalogs of the FIRE simulation [79], which attempted to resolve an overdense region at high redshift. The catalogs use the Amiga Halo Finder [80] to measure c in the same way as defined in [74]. We are interested in the concentration parameters of the most massive halos formed at a given redshift. Perhaps unsurprisingly, we find that, even at z  30, halo concentrations range from 2 to 11, similar to the values found at lower redshifts in the simulations consulted in [74], rather than the much higher values predicted by naively applying the fitting formulae. We do not attempt to construct the full c(M, z) curve at high redshifts on the basis of this limited data, but we do assume that realistic halos will take concentrations in this observed range.
+The upper bound on f for which s  1 ranges from 0.32 - 2.65 cm2/g as concentrations decreasing from 11 to 2 are inserted into (27). In the remainder of this paper we will typically set c = 9, which gives a bound of 0.425 cm2/g. In Section 5 below we will find that this bound is of the same order of magnitude as the cross section needed to produce the desired high-redshift supermassive black holes using uSIDM. Accordingly, there is a surprisingly small region of parameter space where both the assumption of an initial NFW profile is valid and the desired black holes are produced. We will discuss this further in Section 5. For now, we note only that the qualitative results of this paper should still hold even when our assumption of an initial NFW profile is invalid. Outside of this range, we expect that gravothermal collapse should still occur--in fact, it should occur faster because core formation will have begun even before virialization--but the particular expressions given here will no longer be valid.
+C. Integration of the Equations
+Given the initial conditions, we can proceed to integrate the system of equations (12 ­17). We first move to a dimensionless form of the problem by choosing fiducial mass and length scales {M0, R0}. Then the remaining dependent variables are given naturally in terms of these quantities, e.g. 0 = GM0/R0. Full expressions for all dependent variables in terms of M0 and R0 are given in Section 5 of [64]. The cross section per unit mass is now expressed dimensionlessly by ^ = /0, 0 = 4R02/M0. It is convenient to use the two quantities
+
+11
+
+101
+
+total mass
+
+10-1
+
+CDM density
+
+10-3 10-5
+
+velocity
+
+10-7
+
+SIDM
+
+10-9
+
+Mass
+
+density
+
+10-11
+
+CDM Density Velocity
+
+SIDM luminosity
+
+10-13
+
+SIDM Density SIDM Luminosity
+
+10-1150-2
+
+10-1
+
+100
+
+101
+
+102
+
+103
+
+Dimensionless Radius
+
+FIG. 1: The dimensionless initial profiles for an NFW halo, with f = 0.01. The CDM and SIDM have the same velocity profile, and their density profiles have the same shape but a normalization differing by f /(1 + f ). As expected for SIDM, the initial luminosity at small radii is negative (shown as dashed on the plot), indicating that the cusp is being forced outward as a core begins to form. The glitch in the luminosity at r~ = 200 is a numerical artifact.
+
+already specified in the NFW profile, {s, rs}; we therefore take
+
+{M0 = 4R03s, R0 = rs}.
+
+(28)
+
+Note that we have made a different choice of {M0, R0} than [64], since we consider a cuspy NFW profile rather than a cored one and thus work with characteristic rather than central
+
+quantities. Finally, the timescale is set by the initial relaxation time at the characteristic
+
+radius,
+
+tr,c(0) = 1/(f ass),
+
+(29)
+
+so the independent variable can also be made dimensionless. Dimensionless quantities are written with tildes (e.g. ~, t~). The resulting initial profiles for an f = 0.01 halo are shown
+in Figure 1.
+
+12
+We solve the problem by spatially discretizing into N concentric spherical shells, initially evenly logarithmically spaced in radius. At each timestep, we first apply the effects of heat conduction, which increases the energy within each shell, then adjust the profile to maintain hydrostatic equilibrium. The heat conduction step is simple: we determine the luminosity profile from the density and velocity dispersion using the dimensionless, discretized form of (15), then adjust the energy of each shell accordingly (using dU  Ldt for a finite but small timestep). Timesteps are chosen so that the change of (dimensionless) specific energy u~i = 3~i2/2 is not large: we require u~i/u~i <  1 for each shell i, typically taking  = 0.001. This means that as the gravothermal catastrophe approaches and core temperatures and densities become large, the size of timesteps will decrease dramatically: as expected, we cannot integrate through the collapse because the fluid approximation itself breaks down there.
+To carry out the hydrostatic equilibrium step, we use the method of Lagrangian zones, in which the radius of each shell is adjusted while the mass it contains is left constant. The relaxation process, which involves long-range gravitational interactions rather than heat conduction via collisions, is entropy-preserving, so it preserves the adiabatic invariants Ai  ~iV~i5/3 for each shell i. After the heat conduction step, each shell is temporarily out of hydrostatic equilibrium, so that the equality (13) is violated by some amount i. The problem is to adjust the density, velocity dispersion, and radius of each shell i, such that hydrostatic equilibrium is again satisfied (i = 0 i) while preserving the adiabatic invariants. The assumption of adiabaticity, along with the use of Lagrangian zones to keep the mass of each shell fixed, fixes the density and velocity changes as functions of the set of changes of radii r~i. Hence the requirement of hydrostatic equilibrium gives a system of differential equations for the changes of radii which, when linearized, is tridiagonal (since the thickness of each shell depends not only on its own central radius but that of its nearest neighbors). The resulting system is solved using a standard linear algebra library1.
+D. Results
+Unfortunately, the above procedure is still insufficient to integrate (12­17) in full generality. The problem is that, because the SIDM and collisionless dark matter are separately in hydrostatic equilibrium, the method of Lagrangian zones will result in different sets of radii for the two species. But in order to perform subsequent timesteps, we need the total mass distribution at each radius for both types of DM. For computationally feasible numbers of shells (N  400), interpolation is not accurate enough to preserve numerical stability and the distributions cannot be integrated all the way up to the point of gravothermal collapse.
+We can, however, consider the two limiting cases. (Luckily, these happen to be the cases we are interested in!) In the pure SIDM case f = 1, there is only one species and the problem does not arise. In the uSIDM case, f 1, we can ignore the gravitational backreaction of the uSIDM component on the collisionless DM and assume that it maintains an NFW profile throughout, allowing the calculation of its mass distribution analytically at every point. We expect that the two cases should yield similar results, because the temporary violation of (13), the hydrostatic equilibrium condition, after each heat conduction timestep is overwhelmingly due to the increase on the LHS of the equation, from heat conduction,
+1 http://www.gnu.org/software/gsl.
+
+13
+
+Dimensionless SIDM Density
+
+(a)
+
+102 ~t/~tr,c (0) = 0
+
+~t/~tr,c (0) = 9.73
+
+~t/~tr,c (0) = 22.87
+
+101
+
+~t/~tr,c (0) = 36.86 ~t/~tr,c (0) = 65.49
+
+100
+
+10-110-2
+
+10-1
+
+100
+
+Dimensionless Radius
+
+(b)
+
+FIG. 2: (a) Evolution of SIDM density profiles, starting with an f = 0.01 NFW halo. Only the inner part of the halo is shown; the outer part still asymptotes to r-3 as in Figure 1
+above for all halos. From top to bottom, profiles are at 0.0, 2.51, 4.79, 7.07, 9.35, and 11.63 central relaxation times. Because tr  -1, this corresponds to integrating for  1000 relaxation times in an f = 1 halo. However, comparison to the f = 1 results below suggests that the density profile flattens in the same manner, just f -1 times slower:
+evidently the non-interacting dark matter has little influence on the central SIDM
+evolution. (b) Evolution of an f = 1 halo starting from NFW initial conditions. For
+clarity, only the inner portion of the density profile is shown: the outer profile has not yet
+changed significantly at this stage. From top to bottom, profiles are at 0.0, 9.73, 22.87,
+36.86, and 65.49 central relaxation times. As in the f = 0.01 case, the density profile is
+flattening as a core develops.
+
+14
+
+Log Base 10 of Dimensionless SIDM Density
+
+5 0 -5
+
+400
+
+Log
+
+Bas-e310-o2f
+
+D-im1 en0sionl1ess
+
+2
+Radius
+
+0
+
+200
+100Time
+
+300
+(~t/~t
+
+r,c
+
+(0))
+
+FIG. 3: Runaway collapse of an f = 1 SIDM halo with ^ = 0.088, starting from an initial NFW profile. The inner profile starts cuspy, rapidly shrinks to a self-similar profile (as in [64] and Figure 2 above) with a ~ = 1 core, then slowly increases in density in a self-similar manner. After  450 relaxation times, the core of the halo becomes optically thick, and self-similarity is broken: the core splits into a very dense inner core and an outer core which transitions between the two regions. Catastrophic collapse occurs as t~/t~r,c(0) approaches  455.65.
+rather than from interactions with the collisionless component, on the RHS of the equation. This is just the statement that the self-interaction is much larger than gravitational strength. We indeed find that this is the case, at least qualitatively. Consider Figure 2, which shows the early evolution of f = 0.01 and f = 1 halos with the same value of ^. We see that behavior is indeed qualitatively the same: in both cases, a core begins to form as heat conduction dissolves the initial cusp. Note that the time scales are different: in the uSIDM case the relaxation time is increased by a factor of f -1 since the uSIDM density is a factor of f lower. So Figure 2 suggests that uSIDM evolution is the same as the f = 1 case, just f -1 times slower.
+We will focus on the f = 1 case in the following, and then rescale our final results by f -1 as just described. Figures 3 and 4 show the entire evolution of an f = 1 halo with ^ = 0.088 (chosen to allow comparison with [65]) from initial NFW profile through to gravothermal collapse. First consider Figure 3, which shows the evolution of the density profile. Although
+
+15
+
+Log Base 10 of Dimensionless SIDM Mass
+
+0.5 0.0 -0.5 -1.0 -1.5 -2.0 -2.5 -3.0
+
+400 300
+
+200
+
+100
+
+0
+
+-3
+
+-2
+
+-1
+
+0
+
+1
+
+2
+
+Log Base 10 of Dimensionless Radius
+
+Time (~t/~tr,c (0))
+
+FIG. 4: Mass profile history of a cored SIDM halo with ^ = 0.088, starting from an initial NFW profile. Once the core enters the optically thick regime, around t~/t~r,c(0) = 450, the inner core contains a constant total mass, around 2.5 - 3% of the characteristic mass M0.
+the halo is initially in an NFW profile, the initial negative luminosity at small radii causes the cusp to empty out, driving evolution towards the cored, self-similar profile found by [64], as was already seen in Figure 2 above. When the self-similar profile is reached after a few tens of relaxation times, the luminosity profile becomes everywhere positive, and the core increases in density while its mass steadily shrinks. While the entire profile is in the lmfp regime, evolution is self-similar, and the central density increases steadily. Inevitably, there comes a time, about 450 relaxation times after virialization, when the inner density increases enough that the most central regions enter the smfp regime, and the core bifurcates into a very dense outer core and an inner core which transitions between the two regions.
+Importantly, once the smfp regime has been reached, mass loss from the inner core is no longer efficient: the inner core has become so thick that evaporation is only possible from its boundary, not from the entire volume. This means that the mass in the inner core is essentially constant over the very short time ( 10tr,c(0)) between breaking of self-similarity and catastrophic collapse. As mentioned in subsection 3 C above, the size of successive timesteps decreases rapidly as the gravothermal catastrophe approaches, so this short time takes very many (increasingly small) timesteps to integrate over, and the time of collapse
+
+16
+can be precisely given as 455.65 relaxation times after the start of integration. Because evaporation is inefficient after the loss of self-similarity, the mass in the inner core is still nonzero at the moment of collapse, unlike in the globular cluster case, and a black hole will form. Figure 4 shows that the inner core at collapse contains a mass of around 0.025M0. Because the fluid approximation breaks down, we do not know that the entire inner core will collapse directly into a black hole, but, because it is optically thick, Bondi accretion [56] is extremely efficient. Hence, we expect that the black hole will rapidly grow to encompass the entire region regardless.
+
+4. SUPERMASSIVE BLACK HOLES FROM USIDM
+We have found that halos with a uSIDM component (and pure SIDM halos, on much longer timescales) grow black holes of mass MBH  0.025f M0 in a time 455.65tr,c(0). Given the considerations discussed above, uSIDM can help explain the existence of massive highredshift quasars if the resulting black holes are large enough and form early enough that baryonic accretion can grow them to  109M by z 6. It remains to evaluate M0 and tr,c(0) in terms of the halo parameters and use this requirement to place constraints on the uSIDM parameters {, f }.
+
+A. Halo Parameters
+
+Instead of using the characteristic NFW parameters {s, rs}, it is convenient to again parameterize a halo by its virial mass M and concentration c. In dimensionless units, the mass contained within the ith shell is
+
+M~ i =
+
+r~i
+~r~2dr~ =
+0
+
+r~i 0
+
+r~-1
+
+(1
+
++
+
+r~)-2
+
+r~2dr~
+
+=
+
+- 1
+
+r~i + r~i
+
++
+
+ln(1
+
++
+
+r~i),
+
+(30)
+
+but the virial radius r  crs, so
+
+MBH M
+
+=
+
+M~ BH M~ (c)
+
+=
+
+0.025f ln(1 + c) - c/(1 + c).
+
+(31)
+
+This gives the desired expression for the seed black hole mass M~BH in term of the halo and uSIDM parameters. The denominator ranges from  0.5 - 2 for realistic values of the halo
+concentration, so the BH mass is a few percent of the total uSIDM mass in the halo.
+Recall that the relaxation time is tr,c(0) = 1/(af ss), i.e. the scattering time at the characteristic radius. The lower end of the interesting range for f = 1 SIDM is  0.1 cm2/g,
+for which the relaxation time at the characteristic radius of a Milky-Way scale halo is
+approximately a Hubble time. To grow a black hole in galactic halos by z  6, the relaxation time needs to be  104 times smaller to ensure  500 relaxation times by the time the universe was a twentieth of its present age. This does not mean that   1000f -1 cm2/g,
+though! Recall that s = ccrit, where c is a function of c and the cosmology given below, and the critical density goes as (1 + z)3 in the matter-dominated era. Also rs  r  (M/crit)1/3 implies s  M/r  M1/3c1r/i6t. Hence the mass and approximate redshift dependence of the relaxation time are
+
+tr,c(0)  (1 + z)-7/2M-1/3
+
+(32)
+
+17
+
+and we expect that f need not be that much larger than the interesting range for f = 1, i.e. we expect f 0.1 - 1 cm2/g.
+At this point, the reader might worry that this conclusion combined with the observation of non-collapsed cores in the nearby (z  0) universe rules out the existence of standard (f  1) SIDM. We emphasize, however, that large values of f mean that core collapse in times much smaller than the age of the universe is possible, but not, we expect, typical ; it occurs only in the rare halos which virialize at very high redshifts and remain uninterrupted, i.e. do not experience major mergers, for long enough to complete the gravothermal collapse process. See subsection 5 A below for further discussion of this point.
+The exact expression for the halo relaxation time is
+
+tr,c(0)
+
+=
+
+1 af 
+
+(
+
+Kc2 4G3
+
+)1/6c-7/6crit
+
+(z)-7/6M-1/3
+
+(33)
+
+= 0.354 Myr ×
+
+M 1012M
+
+-1/3
+
+Kc 3/2 c -7/2
+
+K9
+
+9
+
+crit(z)
+
+-7/6
+
+crit(z = 15)
+
+f
+
+-1
+
+1 cm2/g ,
+
+(34)
+
+where Kc  ln(1 + c) - c/(1 + c), c = (/3)c3/Kc, and , the virial overdensity, is 182m0.45 for a flat universe, approximately 178 in the matter-dominated era. So the relaxation time,
+
+and hence the collapse time, is given in terms of the halo and uSIDM parameters. To match
+
+observations, we need some seed black holes to grow by a large enough factor via Eddington
+
+accretion to reach MBH  109M by z 6; this leads to an inequality on  when the halo parameters and f are specified.
+
+B. Explaining Observations
+
+Let us spell out the procedure more precisely. An observation of a particular high-redshift quasar at redshift zobs yields a value for the luminosity, which corresponds to a supermassive black hole of mass MSMBH once the measured luminosity is identified with the Eddington luminosity and a particular value for the radiative efficiency r is assumed. (We have already discussed potential issues with these assumptions in section 2 above; in the remainder of the paper, we will take the published observations at face value and assume their quoted SMBH masses, which take r=0.1 as input, are correct.)
+At the same time, the uSIDM framework developed in this paper tells us that NFW halos of viral mass M and concentration c virialized at redshift z form seed black holes of mass MBH in a time 455.65tr,c(0), i.e. the seed black holes are formed at redshift zcoll, where
+
+t(zcoll) - t(z) = 455.65tr,c(0),
+
+(35)
+
+and the time t(z) after the Big Bang corresponding to redshift z is given by the usual cosmology-dependent expression,
+
+1/(1+z) da
+
+t(z) = t0
+0
+
+. a
+
+(36)
+
+Equations (31) and (33) then give expressions for these quantities in terms of the halo properties {M, c, z} and the uSIDM parameters {, f }.
+
+18
+
+There is still one parameter that must be specified: the fraction of SMBH mass which is due to accretion of baryons as opposed to the initial seed black hole. For simplicity, we will assume that the central black hole accretes continuously at the Eddington limit from the time of formation to the time at which it is observed. Of course more complicated growth histories are both possible and likely. Nevertheless, this simplifying assumption allows us to specify the fraction by instead giving Ne, the number of e-folds of accretion at the Eddington limit. This finally allows us to compute the observable quantities: we have
+
+t(zobs) = t(zcoll) + NetSal,
+
+(37)
+
+MSMBH = MBH exp(Ne).
+
+(38)
+
+To find acceptable values of  and f given the SMBH observables, we must specify (or marginalize over) the halo parameters and the baryonic contribution to the SMBH mass. The latter quantity directly sets (37) the redshift of seed black hole collapse, zcoll, which yields the required collapse time and thus the required value of f via (33). Knowing the growth due to accretion of baryons also tells us (38) the required seed black hole mass MBH, which specifies f via (31).
+
+C. Examples
+As an example, consider again ULAS J1120+0641, with mass MSMBH  2 × 109M at zobs = 7.085. To grow four orders of magnitude (Ne = ln 104) by Eddington-limited baryon accretion, for example, we must form a seed black hole with mass MBH = 2 × 105M by zcoll = 12.9. With a halo of mass M = 1012M and concentration c = 9 formed at redshift z = 15, we find that tr,c(0) = 0.354 Myr × (1 cm2/g)/(f ). In order for 455.65 relaxation times to have passed in the 64.5 Myr between z = 15 and zcoll = 12.9, we must have f = 2.50 cm2/g. From (31), we require f = 1.12 × 10-5 to get the correct seed mass, so  = 2.23 × 105 cm2/g = 3.97 × 105 b/GeV. The large value of  is unsurprising: we chose to start with a halo much larger than the seed black hole we wanted to form, so f had to be small and  large in order to compensate.
+Alternatively, we could start with the same halo but produce the black hole entirely from uSIDM. The relaxation time is unchanged: tr,c(0) = 0.354 Myr × (1 cm2/g)/(f ). But now the black hole need not form until z = 7.085, 479 Myr after halo formation, so the required value of f is smaller, f = 0.336 cm2/g. Again applying (31) yields f = 0.112,  = 2.99 cm2/g = 5.36 b/GeV, coming much closer to the classic SIDM cross section.
+Of course, in the absence of direct measurements of the host halo of ULAS J1120+0641 the problem is underdetermined. The point is that f takes reasonable values of O(1) cm2/g, well within the regime described by the gravothermal fluid approximation starting from an initial NFW profile.
+
+5. DISCUSSION
+The examples in the previous section show that individual observations of high-redshift quasars can successfully be explained within the uSIDM paradigm. For uSIDM to be fruitful, however, we should ideally be able to find (or rule out) a consistent choice of these parameters which successfully explains the cosmological abundance of high-redshift quasars. It is
+
+19
+unsurprising that some choice of cross section per unit mass  and fraction f can reproduce one particular observation, e.g. ULAS J1120+0641, but it is more suggestive if that choice can reproduce the entire observed number density of supermassive black holes as a function of mass and redshift. The minimal requirement for a viable uSIDM model is that it explain (or at least not conflict with) what has currently been observed. That means producing the correct abundance of  109M quasars at redshift 6 - 7, as has already been discussed, and ensuring that supermassive black holes are not overproduced in the nearby (lower-redshift) universe. Beyond that, one would like to make concrete predictions for the next generation of experiments, which should be sensitive to smaller masses and higher redshifts.
+This task is difficult for a number of reasons. The essential problem is that a number of nuisance parameters must be constrained or marginalized over in order to connect the uSIDM properties to the SMBH distribution (and then further to the quasar distribution). Even in the simplified setup described above there were already the e-folds of baryonic accretion, Ne, and the halo parameters M and c. In the cosmological context, these nuisance parameters are promoted to entire unknown functions that are currently only poorly constrained by observations and simulations. Even when constraints or functional forms are available, they are often trustworthy only in regimes far separated from the ones of interest to us here (for example, in the low-redshift universe, or in a lower mass range). We have already encountered this problem in Section 3 above, when considering the concentrations of massive NFW profiles at high redshifts.
+Nevertheless, in the remainder of this section we attempt to estimate the constraints that our existing knowledge places on the uSIDM parameter space. We first explain the source of our cosmological uncertainty and means by which it could be improved. Next we note a different source of tension within CDM, independent of the existence of high-redshift SMBHs, that could be relieved by uSIDM. Finally, we present tentative maps of the uSIDM parameter space relevant to the resolution of these tensions.
+A. Cosmological Caveats
+Predicting the cosmological consequences of gravothermal collapse given a choice of the uSIDM parameters requires a unified picture of the SIDM profile at galaxy formation in terms of the halo mass and redshift, which will be easier given proper N -body simulations of halos containing uSIDM. There are several reasons why using the fluid approximation to simulate an isolated halo does not suffice.
+First, although the process of gravothermal collapse can be quite short on cosmological timescales, which is why it allows massive quasars to form faster than in the standard CDM picture, we have seen that it is long in terms of halo time scales (several hundred characteristic relaxation times). It is therefore necessary for the halo to remain essentially undisturbed for this length of time in order for core collapse to occur and seed black holes to form.. The beginning and end of the collapse process--the elimination of the initial cusp and the catastrophic collapse itself after the core becomes optically thick--are driven entirely by dynamics in the innermost part of the profile, so we might expect them to be insensitive to accretion or mergers in the outer halo. Figures 2 and 3 make clear, though, that these stages are very short compared to the length of the overall process. The vast majority of the time required for collapse involves the slow increase of density in the core as mass flows inward from the outer halo, which we expect to be sensitive to accretion or mergers. In other words, the halo must be isolated for several hundred relaxation times. Strong interactions with other
+
+20
+masses, such as major mergers, will disrupt the collapse process, essentially resetting the clock for seed black hole formation. Even accounting for more controlled accretion via minor mergers will technically necessitate the tracking of substructure within the collapsing halo, since it breaks the spherical symmetry required by the fluid approximation, although we expect it will not change our qualitative conclusions. Such tracking of substructure is only truly possible using N -body simulations.
+More importantly, determining how often the collapse process is disrupted, and therefore predicting the spectrum of black hole masses as a function of redshift for particular values of  and f , in order to compare with existing and upcoming observations, requires detailed cosmological information. We need not only the halo mass function at very high redshifts (up to redshift 15 in the above example, and ideally out to at least z 30 - 50) but also information on halo shape (the concentration parameter c(M, z) at the same high values of z, in the case that the halos form in NFW profiles) and, most importantly, detailed merger probabilities and histories as functions of mass and redshift. Even when analytical approximations to these quantities at z 1 exist, it is unclear how confidently they can be extrapolated to z  50. Hence dedicated N -body simulations are desirable. We will briefly note some additional interesting results, beyond the prediction of the history of the black hole mass function, which could be investigated given this cosmological information.
+B. The Too Big to Fail Problem
+This paper has noted that gravothermal collapse of uSIDM can produce seed black holes in the center of virialized halos. We have primarily been concerned with using this mechanism to explain the abundance of massive high-redshift quasars, but we now mention a few other areas where it could prove useful. We emphasize that these are logically independent of the quasar issue: we should not necessarily expect that the same choice of uSIDM parameters will be useful in both cases.
+First, it is intriguing that there exists a well-known (and relatively tight) relation between the properties of a host galaxy and the massive black hole it contains, the M ­ relation [81­83], which suggests some sort of causal mechanism connecting the central portions of the galaxy containing the black hole with the more distant regions where the velocity dispersion is measured. Gravothermal collapse naturally provides one such mechanism, and it would be suggestive if it produced the correct relation for some choice of the uSIDM parameters. At a minimum, it should not spoil the observed relationship in nearby galaxies; this has been used previously to constrain the cross section of f = 1 SIDM [84, 85].
+More speculatively, the presence of central black holes in dwarf galaxies could resolve the "too big to fail" problem [86, 87], in which the central densities of the brightest Milky Way satellites have much lower central densities than the most massive subhalos in CDM simulations of Milky-Way sized galaxies. One way to resolve the problem is to invoke physics not present in the simulations to reduce the central densities (within  1 kpc of the subhalo center) by a factor of order unity. If all of the dark matter is self-interacting with  0.1 cm2/g, it naturally smooths out cusps to form cores, which could provide the needed reduction in density [10]. But the small fractions f 1 we consider in this paper cannot solve the problem in this manner; another method of removing substantial mass from the central  kpc is needed.
+Under some circumstances, it is possible that black holes could provide the needed reduction in mass. Merging black hole binaries emit gravitational waves anistropically and
+
+21
+thus receive an impulsive kick, up to several hundred km/s. This energy can be distributed to the surrounding baryons and kick out a substantial portion of the central mass, forming a core [41, 88, 89]. Such a scenario is only viable if the required binary black hole mergers are sufficiently common within dwarf galaxies or their progenitors. Although the standard cosmological model predicts the presence of black holes in the center of nearly all large halos, it is not clear that CDM produces enough black holes within the smaller halos which are the progenitors of dwarf galaxies. Here we propose instead to use uSIDM to produce them.
+Solving the Too Big to Fail problem using black holes formed from uSIDM requires a particular sequence of events: first, small halos must remain isolated enough to form seed black holes; second, the probability of major mergers must become large enough that essentially all of the Milky Way satellites have binary black holes coalesce within them in order to reduce their central densities. During the epoch of matter domination, we see that the black hole formation time for a halo of fixed mass goes as (1 + z)-7/2 (32), while we expect the merger timescale to be set roughly by the Hubble time, H-1(z)  (1 + z)-3/2. So halos of a given mass that form before some critical redshift will indeed grow black holes before they merge. In the next subsection we consider the parameter space where black hole seeds are ubiquitously formed in the progenitors of today's dwarf galaxies.
+C. Parameter Space
+1. High-Redshift Quasars
+In subsection 4 C above, we presented two possible routes to produce a supermassive black hole matching observations. Here we move from specific examples to a discussion of the entire parameter space relevant to the production of high-redshift quasars like ULAS J1120+0641. Recall that we have six input parameters: {M, c, z, Ne, , f }, respectively the halo mass, concentration, redshift of virialization, e-folds of Eddington-limited accretion after collapse, and uSIDM cross section per unit mass and fraction. We specify the halo properties as above: M = 1012M , c = 9, z = 15. We then use (37) and the redshift at which a quasar is observed, in this case zobs = 7.085, to eliminate Ne, leaving a two-dimensional parameter space for production of black holes by this time. Finally, the requirement that the mass of the quasar match observations, MSMBH  2 × 109M , combined with the assumption of continuous Eddington-limited growth since black hole formation, reduces the parameter space to one dimension, a curve (f ).
+We present the parameter space in Figure 5. The one-dimensional curve (f ), where continual Eddington-limited accretion since black hole formation results in a supermassive black hole with MSMBH = 2 × 109M at zobs = 7.085, is the solid black line. Because the baryonic accretion history after seed black hole formation is uncertain, as discussed in Section 2 above, we also indicate with the shaded regions the entire portion of the full ­f plane in which black holes of any size smaller than MSMBH are produced by zobs.
+There are several constraints on this reduced parameter space. First is the simple requirement that gravothermal collapse indeed occurs before zobs = 7.085. We have already seen in subsection 4 C above that this constrains f  0.336 cm2/g. Second is the requirement that the black hole produced by gravothermal collapse must not be larger than the observed mass of ULAS J1120+0641. Combined with additional assumptions about baryonic accretion, this excludes the entire region above the black curve in Figure 5. Even without the assumptions, this still constrains the black hole mass via equation (31), and therefore the
+
+22
+
+Cross Section per Unit Mass (cm2/g)
+
+102 101 100 10-110-2
+
+halo optically thick by virialization no SMBH at zOBS
+
+BH forms at z = 7.085
+CollaphasleodstBarHts optically thick too lacrogrreect size given Eddington accretion
+initial black hole not too large BH forms by z = 7.085 collapse expected by z = 7.085
+halo optically thick by virialization
+
+MSMBH correct assuming continuous Eddington
+
+no SMBH at zOBS
+
+accretion after BH seeded
+
+Collapsed BH
+
+too large
+
+10-1
+
+100
+
+SIDM Fraction
+
+FIG. 5: uSIDM parameter space for production of massive high-redshift quasars. We have used the numbers considered in the example above: MSMBH  2 × 109M , zobs = 7.085, M = 1012M , c = 9, z = 15. The solid line plots values of  and f that result in an SMBH of the desired size at the time of observation, assuming continuous Eddington accretion from the time the core collapses and the seed black hole is formed. The green dotted vertical line marks the largest allowed value of f . To its right, collapsed black holes are already larger than MSMBH. To its left, collapsed black holes form smaller than MSMBH, but can grow larger by accreting baryons. The points on the blue dashed line all result in collapse precisely at the redshift of observation; below this line, a black hole has not yet formed by zobs. Points on and above the red dashed line result in a halo that is already optically thick at the time of virialization, i.e. optically thick at the characteristic radius for the initial NFW profile. As discussed in the text, the methods used in this paper are not directly applicable here, but we still expect gravothermal collapse. Numerical values for all of these bounding lines are given in the text.
+
+uSIDM fraction f , provided that a black hole is actually produced. Again, the resulting constraint was calculated in subsection 4 C: f  0.112. Larger values of f would produce black holes which contained too large a portion of the mass of the entire halo.
+Finally, recall that our expressions for the collapse time and resulting black hole mass are based on simulations. As discussed in subsection 3 B above, the simulations assume the uSIDM is initially in NFW profile, which is only valid if uSIDM interactions were slow compared to the timescale of halo formation, i.e. when the halo is initially optically thin. This places a constraint on f as a function of the halo parameters, given by equation (27).
+
+23
+For our chosen values this gives f  0.425 cm2/g. Because f directly sets the collapse time via (33, 35), the upper bound on f is also
+a lower bound on the time of formation of a black hole from an initially optically thin uSIDM halo: in this case, we must have zcoll  7.90. In turn, this places an upper bound on the number of e-folds of growth from baryons that can occur before zobs = 7.085, via (37). We find Ne  2.24, i.e. black holes formed from optically thin uSIDM halos have time to grow less than an order of magnitude from baryons. In particular, we cannot trust the precise results of our simulations for the example we considered in subsection 4 C above, with Ne = ln 104. Note, however, that the upper bound on f , and thus on zcoll, is independent of zobs: it depends only on z, the redshift of halo formation. Most high-redshift quasars are seen near zobs  6: ULAS J1120+0641 is an outlier. Black holes at redshift 6 have had time for another 180 Myr  4tsal of baryonic growth, so they can grow by up to a factor of  500 from baryons.
+We have seen that there is an extremely narrow range, 0.336 cm2/g  f  0.425 cm2/g, in which the uSIDM halo considered here is optically thin at virialization but nevertheless rapidly collapses to form a black hole. How can we explain the closeness of these two bounds? In general, they are not independent. The upper bound requires that the initial halo be optically thin, i.e. that the scattering cross section be less than the "characteristic cross section" of the halo, 1/(srs). But the lower bound requires that collapse not take too long, i.e. that the scattering time at the characteristic radius, 1/(f ss) is small compared to a Hubble time. These bounds can be simultaneously satisfied when H-1  rs/s. But, ignoring concentration dependence and numerical factors, s  GM/rs  Gcritrs2  Hrs, so rs/s  H-1 as desired. That is, both bounds exhibit the same mass dependence, and their redshift dependence is identical when z and zcoll are similar, as can be verified from (26, 33, 35). For our particular choice of c = 9, the numerical factors are nearly canceled by the concentration dependence, so the bounds are especially close.
+We emphasize again, however, that the upper bound on f (the red dashed curve in Figure 5) is not a true physical exclusion of the uSIDM parameter space above it. It merely signals that the fluid approximation used in this paper is no longer valid outside this space. As discussed extensively in subsection 3 B above, we expect that profiles in which the uSIDM starts optically thick should in fact undergo collapse even faster. The requirement of an optically thin initial profile would only be physical if starting otherwise led to fragmentation, turbulence, or some other mechanism by which the core was destroyed or core collapse avoided.
+Figure 5 presents the uSIDM parameter space for a particular choice of halo parameters {M, c, z}. We briefly consider how constraints on the parameter space are changed when these parameters are altered. First consider the halo mass M. The collapse time (33) scales as M-1/3, so smaller values of the halo mass require values of f to form black holes in the same time. At the same time, the value of f required for the halo to start initially optically thin (26) has the same scaling with halo mass. So decreasing M will shift both bounds to higher values of f (up and to the right on the ­f plane), but it will not qualitatively change the shape of the allowed parameter space. This shift accounts for the main difference between the high-redshift quasar parameter space and the dwarf satellite parameter space we will consider next. We note, however, that at relatively low redshifts there is a well-known black hole­bulge relation [81, 90, 91], MSMBH  10-3Mbulge. If this relation persists at high redshifts, we should not depart too far from M  1012M to explain MSMBH  109M .
+Next consider the concentration parameter c. Again consulting (33), we see that the
+
+24
+collapse time depends strongly on concentration, scaling roughly as c-7/2. The collapse time depends more strongly on the concentration than does the optically thin condition, so for small enough values of c it will be impossible to form black holes before a given redshift starting from an optically thin halo. When the other halo parameters and zobs are kept fixed, we find that this critical value of c is 7.4. Conversely, by going to larger and larger values of c we can form black holes by any desired time at smaller and smaller values of f . However, extremely high values of the concentration parameter correspond (unsurprisingly) to extremely concentrated halos, with rs r. It is not clear that such halos are actually produced in CDM.
+Finally, consider the redshift of halo formation z. Once more consulting (33), we see that we can take the collapse time to zero by increasing z. Heuristically, this is because the critical density, and thus characteristic density, increases with increasing redshift, so a just-virialized halo is closer to the densities needed to start the catastrophic collapse process. However, producing large virialized halos at higher and higher redshifts becomes increasingly unphysical given the bottom-up structure formation mechanism in CDM. Decreasing z has the opposite effect: halos of a given size become more common, but larger values of f are required to produce a black hole by a given zobs. Like the case of small concentration parameter, for small enough z it is impossible to form black holes starting from optically thin halos before a given time. In this case the bound on the redshift of formation for the halo considered here is z > 13.53.
+
+2. Dwarf Galaxies
+
+Recall from the previous subsection that one resolution to the Too Big to Fail problem is the formation of cores in dwarf galaxies if matter is ejected during binary black hole mergers. Our goal here is to specify the parameter space in which uSIDM produces black holes in the progenitors of dwarf galaxies before the epoch in which binary mergers are common. As in the case of high-redshift quasars above, we start by specifying a set of typical values for the halo parameters {M, c, z}. Ref. [87] compared the Milky Way dwarf galaxies to subhalos around similarly-sized galaxies in the Aquarius simulations [92] to derive probable values for the virial mass M and maximum central velocity vmax of each halo at the time of its infall into the main Milky Way halo.
+Recall that the maximum velocity of an NFW profile is
+
+c
+
+vmax = 0.465 Kc v,
+
+(39)
+
+with Kc = ln(1 + c) - c/(1 + c), at radius
+
+rmax = 2.163rs,
+
+(40)
+
+as can easily be verified numerically using the definition of the NFW density profile (19)
+and v = GM (r)/r. Rearranging gives an expression for Kc/c in terms of M, vmax, and zinfall. In particular, since r  s  crit(z)-1/3, we have Kc/c  crit(z)1/3. But Kc/c has a maximum value of 0.216, so above some value of zinfall, there is no possible NFW profile with the given values of M and vmax. For the derived values for the Milky Way dwarfs, we find in general that zinfall 6. As the infall redshift moves lower for each particular dwarf, the concentration increases from a minimal value c = 2.16. (Actually, Kc/c attains
+
+25
+
+109
+
+108
+
+Cross Section per Unit Mass (cm2/g)
+
+107 106 105 104 103 102 101 10100- 8
+
+Collapsed
+
+MSMBH correct assuming continuous Eddington
+
+SMBH
+
+halo
+
+optically
+
+thick
+
+by
+
+too
+virialization
+
+large
+
+no BH at z =4.5
+
+accretion after BH seeded
+
+Collapsed SMBH
+
+not too large
+
+10- 7
+
+10- 6
+
+10- 5
+
+10- 4
+
+10- 3
+
+10- 2
+
+10- 1
+
+100
+
+SIDM Fraction
+
+FIG. 6: uSIDM parameter space for production of black holes in dwarf galaxies. The parameters used are MSMBH = 105M , zobs = 4.5, M = 108M , c = 9, z = 15. The solid line plots values of  and f that result in an SMBH of the desired size at the time of observation, assuming continuous Eddington accretion from the time the core collapses and the seed black hole is formed. The green dotted vertical line marks the largest allowed value of f . To its right, collapsed black holes are already larger than MSMBH. To its left, collapsed black holes form smaller than MSMBH, but can grow larger by accreting baryons. The points on the blue dashed line all result in collapse precisely at the redshift of observation; below this line, a black hole has not yet formed by zobs. Points on and above the red dashed line result in a halo that is already optically thick at the time of virialization, i.e. optically thick at the characteristic radius for the initial NFW profile. As discussed in the text, the methods used in this paper are not directly applicable here, but we still expect gravothermal collapse. Numerical values for all of these bounding lines are given in the text.
+
+its maximum at c = 2.16 and approaches zero both as c  0 and c  , but we neglect the former branch, with c < 2.16, as unphysical.) In particular, we choose zinfall  4.5, which results in c  9 for a typical dwarf, the same as considered above.
+A typical Milky Way dwarf in [87] has M = 2 × 108M at the time of infall. If Too Big to Fail is to be explained by means of binary black hole mergers, a typical dwarf should
+have undergone a major merger, so that a binary black hole merger occurs in the first place. We will therefore take M = 108M , c = 9, zobs = 4.5 as our typical parameters.
+Figure 6 presents the parameter space for our typical dwarf halo. We have taken the
+
+26
+black hole mass to be MSMBH = 105M , in accordance with the black hole­bulge relation, and again assumed that the redshift of formation of the progenitor halo is z = 15. The various bounds in the figure are attained in the same manner as they were for the quasar bounds shown in Figure 5, so we simply quote them here and refer to the discussion above for details of their calculation. The lower bound on f , which comes from requiring collapse before zobs = 4.5, is f  3.26 cm2/g. The upper bound on f , which is calculated using (31) and scales linearly with MSMBH, is f  0.056.
+The upper bound on f , set by the requirement of an optically thin initial profile, is f  9.16 cm2/g. This corresponds to an upper bound on the redshift of collapse, zcoll  7.90. (As discussed above, the upper and lower bounds have the same mass dependence, and we are considering the same values of z and c as we did for high-redshift quasars, so we recover the same bound on the collapse time.) Once again, this gives an upper bound on the number of e-folds of growth from baryons, via (37). Because we have a much longer time for growth after black hole formation than we did in the high-redshift quasar case, it is much looser: Ne  15.2. Once again, the allowed range on f is a factor of only a few. But the significantly looser bound on Ne means that black holes can grow by a factor of nearly 4 × 106. So f can be decreased by over six orders of magnitude from its maximal value, and  increased by a corresponding amount, while still maintaining an optically thin initial profile and allowing reasonably large black holes to form. This explains the much larger range in  and f seen on Figure 6 compared to Figure 5.
+3. Both Simultaneously?
+We have just seen that the minimum value of f needed to produce massive high-redshift quasars is about an order of magnitude lower than those needed to produce black holes in dwarf galaxies before major mergers. We can understand this qualitatively from the expression for the halo relaxation time, (33): it scales as M-1/3. The black holes in dwarf galaxies have about twice as long to form, until zobs = 4.5 instead of zobs = 7.085, so f is scaled by a factor of 104/3/2  10.
+This scaling of f implies that the uSIDM parameters which produce black holes in dwarfs are a strict subset of those which produce high-redshift quasars. It is then easy to choose values which solve both: one simply takes f  3.26 cm2/g and chooses compatible values of  and f to taste. Because f is significantly larger than the minimum value needed to produce high-redshift quasars, the uSIDM halos which produce them will start initially optically thick, above the (red dashed) upper bound on f shown in Figure 5. In this optically thick regime, the expressions for the gravothermal collapse time and black hole seed mass derived from the simulations of Section 3 should be taken as limits: we expect that gravothermal collapse should occur a slightly shorter time after halo formation and result in slightly larger seed black holes.
+As an example, consider the {, f } values that fall in the one-dimensional parameter space discussed at the beginning of this subsection, where continuous Eddington accretion from the time of black hole collapse until zobs just produces a supermassive black hole with the observed value of MSMBH = 2 × 109M (the solid black line in Figure 5). If f = 3.26, the smallest possible value needed to also produce black holes in dwarfs by redshift 4.5, we would find using (33, 37) that zcoll = 13.3. (Strictly speaking (37) is not valid in the context of an optically thick initial halo, since it uses an expression for the collapse time derived from an initially optically thin NFW profile. We are simply using it here for the sake of
+
+27
+illustration.) In this case there is time for 9.54 e-folds of baryonic accretion before z = 7.085, and the initial black hole has mass 7 × 104M . This determines the USDIM parameters for this example as  = 8.14 × 105 cm2/g, f = 4.01 × 10-6.
+As the beginning of this section emphasized, it is largely beyond this scope of this paper to describe a fully consistent uSIDM cosmology. Nevertheless, this subsection suggests that the USDIM paradigm is flexible enough to resolve both of the potential tensions within CDM discussed here. It is possible that a single species of ultra-strongly self-interacting dark matter could in fact resolve both tensions simultaneously. In investigating this question further, it will be important to move beyond the simplifying assumptions employed herein, especially the stipulations of an initial optically thin profile and a cosmologically isolated profile.
+6. CONCLUSION
+In this paper, we considered a minimal extension of the SIDM parameter space, in which a self-interacting component comprises only a fraction of the dark matter. For f 0.1, this evades all prior constraints on SIDM models. We highlighted the uSIDM regime, where the SIDM component is subdominant but ultra-strongly self-interacting, with f 1 and  1 cm2/g. In the setup considered here, the presence of uSIDM leads to the production of black holes with a mass of around 2% of the total uSIDM mass in the halo at very early times. In particular, such black holes can act as seeds for baryon accretion starting soon after halo formation, alleviating potential difficulties with accommodating massive quasars at high redshifts within the standard CDM cosmology. If black holes are formed ubiquitously in dwarf halos before they undergo mergers, they may also resolve the Too Big to Fail problem by ejecting matter from cores during black hole mergers. More detailed cosmological simulations are needed to confirm the conclusions of this paper and suggest other potential observational consequences of uSIDM.
+Setting aside the detailed predictions, this paper has demonstrated that multi-component dark matter can have strong effects on small scales while still evading existing constraints. In the toy model discussed here, the strong effect was the result of the gravothermal catastrophe. Gravothermal collapse of a strongly-interacting dark matter component is a novel mechanism for production of seed black holes, potentially one with many implications. Given its appearance in the simple extension of CDM considered here, it is plausible that gravothermal collapse and its observational consequences, such as seed black hole formation, are generic features of more detailed models. It is important to consider, and then observe or constrain, this and other observational consequences that are qualitatively different from the predictions of the standard cosmological model.
+Our discussion has been purely phenomenological, so it is reassuring to note the existence of a class of hidden-sector models [93] which naturally produce a subdominant stronglyinteracting dark matter component, with self-interaction cross-sections ranging as high as   1011 cm2/g. Very interestingly, some models give both a dominant component with  0.1 - 1 cm2/g, as needed to alleviate discrepancies between CDM and observations, and a uSIDM component with  105 - 107 cm2/g, which could produce seed black holes via the mechanism described in this paper.
+We thank Shmulik Balberg, James Bullock, Renyue Chen, Phil Hopkins, Jun Koda, Sasha Muratov, Lisa Randall, Paul Shapiro, Stu Shapiro, Charles Steinhardt, and Naoki Yoshida for helpful discussions. We thank especially Sasha Muratov for measuring concentration
+
+28
+parameters at high redshifts in the FIRE runs and providing us with the resulting halo catalogs. This research is funded in part by DOE Grant #DE-SC0011632, and by the Gordon and Betty Moore Foundation through Grant #776 to the Caltech Moore Center for Theoretical Cosmology and Physics.
+[1] Planck Collaboration Collaboration, P. Ade et al., "Planck 2013 results. XVI. Cosmological parameters," arXiv:1303.5076 [astro-ph.CO].
+[2] B. Moore, "Evidence against dissipationless dark matter from observations of galaxy haloes," Nature 370 (1994) 629.
+[3] B. Moore, F. Governato, T. R. Quinn, J. Stadel, and G. Lake, "Resolving the structure of cold dark matter halos," Astrophys.J. 499 (1998) L5, arXiv:astro-ph/9709051 [astro-ph].
+[4] A. A. Klypin, A. V. Kravtsov, O. Valenzuela, and F. Prada, "Where are the missing Galactic satellites?," Astrophys.J. 522 (1999) 82­92, arXiv:astro-ph/9901240 [astro-ph].
+[5] B. Moore, S. Ghigna, F. Governato, G. Lake, T. R. Quinn, et al., "Dark matter substructure within galactic halos," Astrophys.J. 524 (1999) L19­L22, arXiv:astro-ph/9907411 [astro-ph].
+[6] D. N. Spergel and P. J. Steinhardt, "Observational evidence for selfinteracting cold dark matter," Phys.Rev.Lett. 84 (2000) 3760­3763, arXiv:astro-ph/9909386 [astro-ph].
+[7] N. Yoshida, V. Springel, S. D. White, and G. Tormen, "Weakly self-interacting dark matter and the structure of dark halos," Astrophys.J. 544 (2000) L87­L90, arXiv:astro-ph/0006134 [astro-ph].
+[8] M. Markevitch, A. Gonzalez, D. Clowe, A. Vikhlinin, L. David, et al., "Direct constraints on the dark matter self-interaction cross-section from the merging galaxy cluster 1E0657-56," Astrophys.J. 606 (2004) 819­824, arXiv:astro-ph/0309303 [astro-ph].
+[9] O. Y. Gnedin and J. P. Ostriker, "Limits on collisional dark matter from elliptical galaxies in clusters," Astrophys.J. (2000) , arXiv:astro-ph/0010436 [astro-ph].
+[10] M. Rocha, A. H. Peter, J. S. Bullock, M. Kaplinghat, S. Garrison-Kimmel, et al., "Cosmological Simulations with Self-Interacting Dark Matter I: Constant Density Cores and Substructure," Mon.Not.Roy.Astron.Soc. 430 (2013) 81­104, arXiv:1208.3025 [astro-ph.CO].
+[11] A. H. Peter, M. Rocha, J. S. Bullock, and M. Kaplinghat, "Cosmological Simulations with Self-Interacting Dark Matter II: Halo Shapes vs. Observations," arXiv:1208.3026 [astro-ph.CO].
+[12] S. W. Randall, M. Markevitch, D. Clowe, A. H. Gonzalez, and M. Bradac, "Constraints on the Self-Interaction Cross-Section of Dark Matter from Numerical Simulations of the Merging Galaxy Cluster 1E 0657-56," Astrophys.J. 679 (2008) 1173­1180, arXiv:0704.0261 [astro-ph].
+[13] A. Mahdavi, H. Hoekstra, A. Babul, D. Balam, and P. Capak, "A Dark Core in Abell 520," Astrophys.J. 668 (2007) 806­814, arXiv:0706.3048 [astro-ph].
+[14] M. Jee, A. Mahdavi, H. Hoekstra, A. Babul, J. Dalcanton, et al., "A Study of the Dark Core in A520 with Hubble Space Telescope: The Mystery Deepens," Astrophys.J. 747 (2012) 96, arXiv:1202.6368 [astro-ph.CO].
+[15] D. Clowe, M. Markevitch, M. Bradac, A. H. Gonzalez, S. M. Chung, et al., "On Dark Peaks
+
+29
+and Missing Mass: A Weak Lensing Mass Reconstruction of the Merging Cluster System Abell 520," Astrophys.J. 758 (2012) 128, arXiv:1209.2143 [astro-ph.CO]. [16] M. J. Jee, H. Hoekstra, A. Mahdavi, and A. Babul, "Hubble Space Telescope/Advanced Camera for Surveys Confirmation of the Dark Substructure in A520," Astrophys.J. 783 (2014) 78, arXiv:1401.3356 [astro-ph.CO]. [17] D. Harvey, E. Tittley, R. Massey, T. D. Kitching, A. Taylor, et al., "On the cross-section of Dark Matter using substructure infall into galaxy clusters," Mon.Not.Roy.Astron.Soc. 441 (2014) 404, arXiv:1310.1731 [astro-ph.CO]. [18] V. Dokuchaev, Y. Eroshenko, and S. Rubin, "Origin of supermassive black holes," arXiv:0709.0070 [astro-ph]. [19] M. Volonteri, "Formation of Supermassive Black Holes," Astron.Astrophys.Rev. 18 (2010) 279­315, arXiv:1003.4404 [astro-ph.CO]. [20] A. Sesana, "A practical guide to the massive black hole cosmic history," Adv.Astron. 2012 (2012) 805402, arXiv:1110.6445 [astro-ph.CO]. [21] E. Treister and C. M. Urry, "The Cosmic History of Black Hole Growth from Deep Multiwavelength Surveys," Adv.Astron. 2012 (2012) 516193, arXiv:1112.0320 [astro-ph.CO]. [22] B. C. Kelly and A. Merloni, "Mass Functions of Supermassive Black Holes Across Cosmic Time," Adv.Astron. 2012 (2012) 970858, arXiv:1112.1430 [astro-ph.CO]. [23] Z. Haiman, "The Formation of the First Massive Black Holes," in Astrophysics and Space Science Library, T. Wiklind, B. Mobasher, and V. Bromm, eds., vol. 396 of Astrophysics and Space Science Library, p. 293. 2013. arXiv:1203.6075 [astro-ph.CO]. [24] E. Salpeter, "Accretion of Interstellar Matter by Massive Objects," Astrophys.J. 140 (1964) 796­800. [25] S. L. Shapiro, "Spin, accretion and the cosmological growth of supermassive black holes," Astrophys.J. 620 (2005) 59­68, arXiv:astro-ph/0411156 [astro-ph]. [26] D. J. Mortlock, S. J. Warren, B. P. Venemans, M. Patel, P. C. Hewett, et al., "A luminous quasar at a redshift of z = 7.085," Nature 474 (2011) 616, arXiv:1106.6088 [astro-ph.CO]. [27] B. Venemans, R. McMahon, F. Walter, R. Decarli, P. Cox, et al., "Detection of atomic carbon [CII] 158 micron and dust emission from a z=7.1 quasar host galaxy," Astrophys.J. 751 (2012) L25, arXiv:1203.5844 [astro-ph.CO]. [28] Y.-X. Li, L. Hernquist, B. Robertson, T. J. Cox, P. F. Hopkins, et al., "Formation of z 6 quasars from hierarchical galaxy mergers," Astrophys.J. 665 (2007) 187­208, arXiv:astro-ph/0608190 [astro-ph]. [29] M. Tegmark, J. Silk, M. J. Rees, A. Blanchard, T. Abel, et al., "How small were the first cosmological objects?," Astrophys.J. 474 (1997) 1­12, arXiv:astro-ph/9603007 [astro-ph]. [30] L. Gao, T. Abel, C. Frenk, A. Jenkins, V. Springel, et al., "The first generation of stars in lambda-CDM cosmology," Mon.Not.Roy.Astron.Soc. 378 (2007) 449, arXiv:astro-ph/0610174 [astro-ph]. [31] M. J. Turk, T. Abel, and B. W. O'Shea, "The Formation of Population III Binaries from Cosmological Initial Conditions," Science 325 (2009) 601­605, arXiv:0907.2919 [astro-ph.CO]. [32] A. Stacy, T. Greif, and V. Bromm, "The first stars: formation of binaries and small multiple systems," arXiv:0908.0712 [astro-ph.CO].
+
+30
+[33] C. F. McKee and J. C. Tan, "The Formation of the First Stars II. Radiative Feedback Processes and Implications for the Initial Mass Function," arXiv:0711.1377 [astro-ph].
+[34] J. L. Johnson and V. Bromm, "The aftermath of the first stars: massive black holes," Mon.Not.Roy.Astron.Soc. 374 (2007) 1557­1568, arXiv:astro-ph/0605691 [astro-ph].
+[35] T. Abel, J. H. Wise, and G. L. Bryan, "The HII Region of a Primordial Star," Astrophys.J. 659 (2007) L87­L90, arXiv:astro-ph/0606019 [astro-ph].
+[36] N. Yoshida, S. P. Oh, T. Kitayama, and L. Hernquist, "Early Cosmological HII/HeIII Regions and Their Impact on Second-Generation Star Formation," Astrophys.J. 663 (2007) 687­707, arXiv:astro-ph/0610819 [astro-ph].
+[37] J. M. Bardeen, W. H. Press, and S. A. Teukolsky, "Rotating black holes: Locally nonrotating frames, energy extraction, and scalar synchrotron radiation," Astrophys.J. 178 (1972) 347.
+[38] S. Zhang, W. Cui, and W. Chen, "Black hole spin in X-ray binaries: Observational consequences," Astrophys.J. 482 (1997) L155, arXiv:astro-ph/9704072 [astro-ph].
+[39] R. Narayan and J. E. McClintock, "Observational Evidence for a Correlation Between Jet Power and Black Hole Spin," Mon.Not.Roy.Astron.Soc. 419 (2012) L69­L73, arXiv:1112.0569 [astro-ph.HE].
+[40] M. J. Fitchett, "The influence of gravitational wave momentum losses on the centre of mass motion of a Newtonian binary system," MNRAS 203 (June, 1983) 1049­1062.
+[41] D. Merritt, M. Milosavljevic, M. Favata, S. A. Hughes, and D. E. Holz, "Consequences of gravitational radiation recoil," Astrophys.J. 607 (2004) L9­L12, arXiv:astro-ph/0402057 [astro-ph].
+[42] Z. Haiman, "Constraints from gravitational recoil on the growth of supermassive black holes at high redshift," Astrophys.J. 613 (2004) 36­40, arXiv:astro-ph/0404196 [astro-ph].
+[43] B. Trakhtenbrot, "The Most Massive Active Black-Holes at z  1.5-3.5 Have High Spins and Radiative Efficiencies," Astrophys.J. 789 (2014) L9, arXiv:1405.5877 [astro-ph.GA].
+[44] N. Shakura and R. Sunyaev, "Black holes in binary systems. Observational appearance," Astron.Astrophys. 24 (1973) 337­355.
+[45] Y.-F. Jiang, J. M. Stone, and S. W. Davis, "A Global Three Dimensional Radiation Magneto-hydrodynamic Simulation of Super-Eddington Accretion Disks," arXiv:1410.0678 [astro-ph.HE].
+[46] M. Volonteri and J. Silk, "The case for super-critical accretion on massive black holes at high redshift," arXiv:1401.3513 [astro-ph.GA].
+[47] P. Madau, F. Haardt, and M. Dotti, "Super-Critical Growth of Massive Black Holes from Stellar-Mass Seeds," Astrophys.J. 784 (2014) L38, arXiv:1402.6995 [astro-ph.CO].
+[48] J. A. Kollmeier, C. A. Onken, C. S. Kochanek, A. Gould, D. H. Weinberg, et al., "Black hole masses and eddington ratios at 0.3 < z < 4," Astrophys.J. 648 (2006) 128­139, arXiv:astro-ph/0508657 [astro-ph].
+[49] C. L. Steinhardt and M. Elvis, "The Quasar Mass-Luminosity Plane I: A Sub-Eddington Limit for Quasars," Mon.Not.Roy.Astron.Soc. 402 (2010) 2637, arXiv:0911.1355 [astro-ph.HE].
+[50] C. L. Steinhardt, M. Elvis, and M. Amarie, "Evolutionary Tracks of Individual Quasars in the Mass-Luminosity Plane," arXiv:1103.4608 [astro-ph.HE].
+[51] Z. Haiman and A. Loeb, "Observational signatures of the first quasars," Astrophys.J. 503 (1998) 505, arXiv:astro-ph/9710208 [astro-ph].
+[52] Z. Haiman and A. Loeb, "What is the highest plausible redshift of luminous quasars?," arXiv:astro-ph/0011529 [astro-ph].
+
+31
+[53] Z. Haiman, E. Quataert, and G. C. Bower, "Modeling the counts of faint radio loud quasars: Constraints on the supermassive black hole population and predictions for high redshift," Astrophys.J. 612 (2004) 698­705, arXiv:astro-ph/0403104 [astro-ph].
+[54] D. J. Whalen, A. Heger, K.-J. Chen, W. Even, C. L. Fryer, et al., "Supermassive Population III Supernovae and the Birth of the First Quasars," Astrophys.J. 778 (2013) 17, arXiv:1211.1815 [astro-ph.CO].
+[55] D. Lynden-Bell and R. Wood, "The gravo-thermal catastrophe in isothermal spheres and the onset of red-giant structure for stellar systems," Mon.Not.Roy.Astron.Soc. 138 (1968) 495.
+[56] H. Bondi, "On spherically symmetrical accretion," Mon.Not.Roy.Astron.Soc. 112 (1952) 195. [57] D. Heggie, "Binary evolution in stellar dynamics," Mon.Not.Roy.Astron.Soc. 173 (1975)
+729­787. [58] P. Hut, S. McMillan, J. Goodman, M. Mateo, E. Phinney, et al., "Binaries in globular
+clusters," Publ.Astron.Soc.Pac. 104 (1992) 981. [59] Y. B. Zel'dovich and M. A. Podurets, "The Evolution of a System of Gravitationally
+Interacting Point Masses," Soviet Ast. 9 (Apr., 1966) 742. [60] S. L. Shapiro and S. A. Teukolsky, "Relativistic stellar dynamics on the computer. I -
+Motivation and numerical method," Astrophys. J. 298 (Nov., 1985) 34­79. [61] S. L. Shapiro and S. A. Teukolsky, "Relativistic Stellar Dynamics on the Computer - Part
+Two - Physical Applications," Astrophys. J. 298 (Nov., 1985) 58. [62] S. L. Shapiro and S. A. Teukolsky, "Relativistic stellar dynamics on the computer. IV -
+Collapse of a star cluster to a black hole," Astrophys. J. 307 (Aug., 1986) 575­592. [63] D. Lynden-Bell and P. P. Eggleton, "On the consequences of the gravothermal catastrophe,"
+MNRAS 191 (May, 1980) 483­498. [64] S. Balberg, S. L. Shapiro, and S. Inagaki, "Selfinteracting dark matter halos and the
+gravothermal catastrophe," Astrophys.J. 568 (2002) 475­487, arXiv:astro-ph/0110561 [astro-ph]. [65] J. Koda and P. R. Shapiro, "Gravothermal collapse of isolated self-interacting dark matter haloes: N-body simulation versus the fluid model," MNRAS 415 (Aug., 2011) 1125­1137, arXiv:1101.3097 [astro-ph.CO]. [66] E. M. Lifshitz and L. P. Pitaevskii, Physical kinetics. 1981. [67] D. Merritt, J. F. Navarro, A. Ludlow, and A. Jenkins, "A Universal density profile for dark and luminous matter?," Astrophys.J. 624 (2005) L85­L88, arXiv:astro-ph/0502515 [astro-ph]. [68] A. W. Graham, D. Merritt, B. Moore, J. Diemand, and B. Terzic, "Empirical Models for Dark Matter Halos. II. Inner profile slopes, dynamical profiles, and rho/sigma," Astron.J. 132 (2006) 2701­2710, arXiv:astro-ph/0608613 [astro-ph]. [69] H. Zhao, "Analytical models for galactic nuclei," Mon.Not.Roy.Astron.Soc. 278 (1996) 488­496, arXiv:astro-ph/9509122 [astro-ph]. [70] O. Lahav, P. B. Lilje, J. R. Primack, and M. J. Rees, "Dynamical effects of the cosmological constant," Mon.Not.Roy.Astron.Soc. 251 (1991) 128­136. [71] V. R. Eke, S. Cole, and C. S. Frenk, "Using the evolution of clusters to constrain Omega," Mon.Not.Roy.Astron.Soc. 282 (1996) 263­280, arXiv:astro-ph/9601088 [astro-ph]. [72] G. Bryan and M. Norman, "Statistical properties of x-ray clusters: Analytic and numerical comparisons," Astrophys.J. 495 (1998) 80, arXiv:astro-ph/9710107 [astro-ph]. [73] A. F. Neto, L. Gao, P. Bett, S. Cole, J. F. Navarro, et al., "The statistics of lambda CDM Halo Concentrations," Mon.Not.Roy.Astron.Soc. 381 (2007) 1450­1462, arXiv:0706.2919
+
+32
+[astro-ph]. [74] F. Prada, A. A. Klypin, A. J. Cuesta, J. E. Betancort-Rijo, and J. Primack, "Halo
+concentrations in the standard LCDM cosmology," Mon.Not.Roy.Astron.Soc. 428 (2012) 3018­3030, arXiv:1104.5130 [astro-ph.CO]. [75] V. Springel, S. D. White, A. Jenkins, C. S. Frenk, N. Yoshida, et al., "Simulating the joint evolution of quasars, galaxies and their large-scale distribution," Nature 435 (2005) 629­636, arXiv:astro-ph/0504097 [astro-ph]. [76] M. Boylan-Kolchin, V. Springel, S. D. White, A. Jenkins, and G. Lemson, "Resolving Cosmic Structure Formation with the Millennium-II Simulation," Mon.Not.Roy.Astron.Soc. 398 (2009) 1150, arXiv:0903.3041 [astro-ph.CO]. [77] A. Klypin, S. Trujillo-Gomez, and J. Primack, "Halos and galaxies in the standard cosmological model: results from the Bolshoi simulation," arXiv:1002.3660 [astro-ph.CO]. [78] K. Riebe, A. M. Partl, H. Enke, J. Forero-Romero, S. Gottloeber, et al., "The MultiDark Database: Release of the Bolshoi and MultiDark Cosmological Simulations," arXiv:1109.0003 [astro-ph.CO]. [79] P. F. Hopkins, D. Keres, J. Onorbe, C.-A. Faucher-Giguere, E. Quataert, et al., "Galaxies on FIRE (Feedback In Realistic Environments): Stellar Feedback Explains Cosmologically Inefficient Star Formation," arXiv:1311.2073 [astro-ph.CO]. [80] S. R. Knollmann and A. Knebe, "Ahf: Amiga's Halo Finder," Astrophys.J.Suppl. 182 (2009) 608­624, arXiv:0904.3662 [astro-ph.CO]. [81] J. Magorrian, S. Tremaine, D. Richstone, R. Bender, G. Bower, et al., "The Demography of massive dark objects in galaxy centers," Astron.J. 115 (1998) 2285, arXiv:astro-ph/9708072 [astro-ph]. [82] L. Ferrarese and D. Merritt, "A Fundamental relation between supermassive black holes and their host galaxies," Astrophys.J. 539 (2000) L9, arXiv:astro-ph/0006053 [astro-ph]. [83] K. Gebhardt, R. Bender, G. Bower, A. Dressler, S. Faber, et al., "A Relationship between nuclear black hole mass and galaxy velocity dispersion," Astrophys.J. 539 (2000) L13, arXiv:astro-ph/0006289 [astro-ph]. [84] J. F. Hennawi and J. P. Ostriker, "Observational constraints on the self interacting dark matter scenario and the growth of supermassive black holes," Astrophys.J. 572 (2002) 41, arXiv:astro-ph/0108203 [astro-ph]. [85] J. Hu, Y. Shen, Y.-Q. Lou, and S. Zhang, "Forming supermassive black holes by accreting dark and baryon matter," Mon.Not.Roy.Astron.Soc. 365 (2006) 345­351, arXiv:astro-ph/0510222 [astro-ph]. [86] M. Boylan-Kolchin, J. S. Bullock, and M. Kaplinghat, "Too big to fail? The puzzling darkness of massive Milky Way subhaloes," Mon.Not.Roy.Astron.Soc. 415 (2011) L40, arXiv:1103.0007 [astro-ph.CO]. [87] M. Boylan-Kolchin, J. S. Bullock, and M. Kaplinghat, "The Milky Way's bright satellites as an apparent failure of LCDM," Mon.Not.Roy.Astron.Soc. 422 (2012) 1203­1218, arXiv:1111.2048 [astro-ph.CO]. [88] M. Boylan-Kolchin, C.-P. Ma, and E. Quataert, "Core formation in galactic nuclei due to recoiling black holes," Astrophys.J. 613 (2004) L37, arXiv:astro-ph/0407488 [astro-ph]. [89] Z. Lippai, Z. Frei, and Z. Haiman, "Prompt Shocks in the Gas Disk Around a Recoiling Supermassive Black Hole Binary," arXiv:0801.0739 [astro-ph]. [90] A. Marconi and L. K. Hunt, "The relation between black hole mass, bulge mass, and
+
+33
+near-infrared luminosity," Astrophys.J. 589 (2003) L21­L24, arXiv:astro-ph/0304274 [astro-ph]. [91] N. Haring and H.-W. Rix, "On the black hole mass - bulge mass relation," Astrophys.J. 604 (2004) L89­L92, arXiv:astro-ph/0402376 [astro-ph]. [92] V. Springel, J. Wang, M. Vogelsberger, A. Ludlow, A. Jenkins, et al., "The Aquarius Project: the subhalos of galactic halos," Mon.Not.Roy.Astron.Soc. 391 (2008) 1685­1711, arXiv:0809.0898 [astro-ph]. [93] K. K. Boddy, J. L. Feng, M. Kaplinghat, and T. M. P. Tait, "Self-Interacting Dark Matter from a Non-Abelian Hidden Sector," arXiv:1402.3629 [hep-ph].
+
+

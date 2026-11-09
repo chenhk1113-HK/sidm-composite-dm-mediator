@@ -41,6 +41,9 @@ astro-ph/9810070|mateo_1998|26a
 2506.14898|yang_fan_hou_2026|50c
 2305.16176|yang_parametric_2024|43
 1302.3898|tulin_yu_zurek_2013|6
+2501.12439|despali_introducing_aida_tng_2025|29a
+1101.3097|koda_shapiro_2011|56
+1501.00017|pollack_2015|57
 "
 
 ok=0; skip=0; fail=0

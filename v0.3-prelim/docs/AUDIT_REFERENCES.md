@@ -69,9 +69,9 @@ the most recent and most likely to have ADS/arXiv verification issues.
 - 2025 paper, central to dSph constraints
 - Status: **NEEDS VERIFICATION**
 
-### [29a] G. Despali et al., "Introducing the AIDA-TNG project: Galaxy formation in alternative dark matter models," Astron. Astrophys. 697, A213 (2025); doi:10.1051/0004-6361/202553836.
+### [29a] G. Despali et al., "Introducing the AIDA-TNG project: Galaxy formation in alternative dark matter models," Astron. Astrophys. 697, A213 (2025); arXiv:2501.12439v2; doi:10.1051/0004-6361/202553836. **arXiv id resolved 2026-11-09** via InspHEP recid 2871654 and confirmed from the downloaded PDF's own header. The id previously carried in session notes, arXiv:2404.10440, is an unrelated linguistics paper (see registry defect D12) and must not be used.
 - **CORRECTED 2026-11-09 (registry §7.11 D2):** this entry previously read "Mon. Not. R. Astron. Soc. ... (2024)". Crossref resolves the title to **Astronomy & Astrophysics, vol 697, page A213, issued 2025-05**.
-- Status: **VERIFIED (bibliographic, Crossref 2026-11-09)** — no local PDF yet; do not cite numerical content from this entry until the paper is in the KB.
+- Status: **VERIFIED (bibliographic: Crossref + InspHEP, 2026-11-09; arXiv:2501.12439v2; local PDF present, 20 pp)** — abstract/scope read; do not cite numerical content from this entry until the full numerical read is done.
 
 ### [29b] G. Despali et al., "The AIDA-TNG project: dark matter profiles and concentrations in alternative dark matter models," Astron. Astrophys. 708, A47 (2026); arXiv:2512.15869v2; doi:10.1051/0004-6361/202558686.
 - **CORRECTED 2026-11-09 (registry §7.11 D1):** this entry previously read "Astron. Astrophys. 699, A222 (2026); arXiv:2512.15869v1". Crossref resolves it to **A&A vol 708, page A47, published online 2026-03-26**, and the current arXiv version is **v2**. A&A 699, A222 is a DIFFERENT paper ("Detecting low-mass haloes with strong gravitational lensing"), so the old line was a wrong-venue citation, not a formatting slip. Line 259 of this same file already carried the correct venue — the file was internally inconsistent.
@@ -272,7 +272,7 @@ The following Tier-1 references were verified against arXiv.org and IOPscience:
 | [15c] | Anand, Benítez-Llambay et al., ApJL 993, L55 (2025) — verify |
 | [15d] | Trujillo et al., RNAAS (2024) — verify |
 | [26] | Cerny et al. — long author list, verify (likely DELVE paper) |
-|| [29a] | Despali et al. — AIDA-TNG introducing paper — **venue verified 2026-11-09 (A&A 697, A213, 2025); local PDF still missing** |
+|| [29a] | Despali et al. — AIDA-TNG introducing paper — **venue + arXiv id verified 2026-11-09 (A&A 697, A213, 2025; arXiv:2501.12439v2); local PDF present** `docs/papers/verified/2501.12439_despali_introducing_aida_tng_2025.pdf`, 20 pp, title+authors confirmed from its own first page; numeric content not yet read |
 | [42] | Yang, Tsai, Fan, two-component SIDM mass segregation — verify |
 | [43] | Yang, Nadler, Yu, Zhong, parametric SIDM halos — verify |
 

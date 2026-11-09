@@ -1,0 +1,27 @@
+{
+  "y24_definition": "The second model we consider is the parametric function introduced by Gilman et al. (2021) and Yang et al. (2024) (hereafter \"Y24\"), specifically designed to capture the characteristic features of SIDM haloes, including both central cores and the potential central density increase associated with gravothermal core collapse. It is defined as ρY(r)= ρY [(rβ +r β c)1/β/rY] 1+ r rY 2, (2) where ρY and rY are the scale density and radius, and rc is the core size. The transition between the inner core and outer NFW profile is controlled by β. Yang et al. (2024) showed that β=4 is a good fit to simulated data. In the limiting case of no core (rc=0), this model reduces exactly to the NFW profile. Also in this case, we use the scale radius rY to calculate the halo concentration. (Sect. 3.2, lines 436–456)",
+  "bias_statements": [
+    "As expected, the NFW profile provides a good description of CDM haloes but lacks the flexibility to reproduce the cores induced by WDM and SIDM. Consequently, NFW concentrations are lower at the low-mass (high-mass) end for WDM (SIDM) haloes, in agreement with Despali et al. (2025b). (Sect. 4.1, lines 483–487)",
+    "Overall, we find that the Einasto profile provides a reasonable description for all dark matter models, although it cannot fully capture the flattened cores present in SIDM1 and vSIDM haloes, particularly for M200c ≳10^12 M⊙. (Sect. 4.1, lines 494–497)",
+    "In contrast, the SIDM1 and vSIDM Einasto concentrations remain systematically lower than CDM in all masses. This is a direct consequence of the inner core, whose presence is not fully absorbed by the Einasto scale radius. (Sect. 4.2, lines 559–562)",
+    "In the two SIDM models, the halo profiles are more accurately described by the Y24 profile, followed by the NFW profile. (Appendix A, lines 1291–1292)",
+    "The concentration–mass relation is thus an incomplete description for SIDM profiles. A more precise parametrisation can be obtained by combining the concentration–mass relation with the mass dependence of the core size, shown Fig. 4. (Sect. 4.2, lines 631–634)"
+  ],
+  "concentration_numbers": [
+    "SIDM1 and vSIDM Einasto concentrations remain systematically lower than CDM in all masses (Sect. 4.2, lines 559–562, Fig. 4 left panel)",
+    "Y24 concentrations for both SIDM models closely match the CDM relation (Sect. 4.2, lines 565–567, Fig. 4 right panel)",
+    "NFW concentrations are lower at the high-mass end for SIDM haloes (Sect. 4.1, lines 485–487)",
+    "WDM1 and WDM3 Einasto concentrations converge to the CDM prediction at the high-mass end, while exhibiting the characteristic downturn for low-mass haloes (Sect. 4.2, lines 553–556)",
+    "Core size mass-dependence: y(SIDM1)=0.37−0.5x+0.0026x^2 and y(vSIDM)=0.16−0.11x where x=log M200c and y=log(rc/r200c) (Sect. 4.2, Eq. 3, lines 636–638)",
+    "In DMO SIDM models... the core does not affect halo concentrations, which are essentially unchanged from CDM as shown in Fig. 4 (Sect. 7, lines 1056–1059)"
+  ],
+  "caveats": [
+    "The concentration–mass relation is thus an incomplete description for SIDM profiles. A more precise parametrisation can be obtained by combining the concentration–mass relation with the mass dependence of the core size (Sect. 4.2, lines 631–634)",
+    "We also note that the AIDA-TNG haloes do not form density cores due to feedback... In AIDA, but also in the IllustrisTNG simulations, we do not observe the formation of significant density cores in the FP run compared to its DMO counterpart. (Sect. 5.1, lines 843–852)",
+    "As discussed in the previous section, the baryonic content of haloes — and therefore the degree of contraction — depends on resolution. In Appendix B, we present convergence tests for both dark matter and stellar profiles across the four resolution levels of AIDA. (Sect. 5.1, lines 839–842)",
+    "We find good convergence in the dark-matter density profiles beyond our adopted lower limit of r=3ϵDM for CDM, WDM, and for the DMO versions of SIDM1 and vSIDM. When baryons are included in the self-interacting runs, the stellar distributions and the resulting dark-matter response show a resolution- and mass-dependent behaviour, with the largest discrepancies occurring for haloes with M200c=[10^12,10^13]M⊙ (Sect. 3.1, lines 268–275)",
+    "For these reasons, we adopt the 50/A simulations as our fiducial description of halo profiles, and discuss how they can be consistently combined with the lower-resolution runs. (Sect. 3.1, lines 276–278)",
+    "In SIDM1, we observe departures up to larger radii, peaking at M200c=10^12−13 M⊙. (Appendix B, lines 1371–1372)"
+  ],
+  "family_choice_statement": "Given that the Einasto and NFW profiles perform equally well for CDM, we adopt the Einasto profile for all subsequent analyses and do not discuss NFW further. Moreover, in the absence of a significant core, the Y24 model reduces to NFW, effectively including NFW as a potential model. (Sect. 4.1, lines 506–510) ... In the previous section, we have demonstrated that CDM and WDM profiles are best fit by Einasto, while SIDM ones by the Y24 profiles. We highlight these with solid lines in the figure and display the remaining ones with lighter colours. (Fig. 4 caption, lines 744–745) ... As SIDM cores disappear or become less flat, the FP profiles are best fit by the Einasto model rather than the Y24 cored profile. (Sect. 5.2, lines 1075–1076)"
+}

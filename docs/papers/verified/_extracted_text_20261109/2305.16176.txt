@@ -1,0 +1,2710 @@
+arXiv:2305.16176v3 [astro-ph.CO] 21 Mar 2024
+
+Prepared for submission to JCAP
+A Parametric Model for Self-Interacting Dark Matter Halos
+Daneng Yang,1 ID a Ethan O. Nadler, ID b,c Hai-Bo Yu, ID a Yi-Ming Zhong ID d,e
+aDepartment of Physics and Astronomy, University of California, Riverside, CA 92521, USA bCarnegie Observatories, 813 Santa Barbara Street, Pasadena, CA 91101, USA cDepartment of Physics & Astronomy, University of Southern California, Los Angeles, CA, 90007, USA dDepartment of Physics, City University of Hong Kong, Tat Chee Avenue, Kowloon, Hong Kong SAR, China eKavli Institute for Cosmological Physics, University of Chicago, Chicago, IL 60637, USA E-mail: danengy@ucr.edu, enadler@carnegiescience.edu, haiboyu@ucr.edu, yimzhong@cityu.edu.hk
+Abstract.
+We propose a parametric model for studying self-interacting dark matter (SIDM) halos. The model uses an analytical density profile, calibrated using a controlled N-body SIDM simulation that covers the entire gravothermal evolution, including core-forming and -collapsing phases. By normalizing the calibrated density profile, we obtain a universal description for SIDM halos at any evolution phase. The model allows us to infer properties of SIDM halos based on their cold dark matter (CDM) counterparts. As a basic application, we only require two characteristic parameters of an isolated CDM halo at z = 0. We then extend the model to incorporate effects induced by halo mass changes, such as major mergers or tidal stripping, making it applicable to both isolated halos and subhalos. The parametric model is tested and validated using cosmological zoom-in SIDM simulations available in the literature.
+1Corresponding author.
+
+Contents
+
+1 Simulation data
+
+2
+
+2 A universal density profile
+
+4
+
+3 Transforming CDM halos into SIDM halos
+
+6
+
+3.1 The basic approach
+
+7
+
+3.2 The integral approach
+
+8
+
+4 Modeling the evolution of SIDM isolated halos
+
+10
+
+5 Modeling the evolution of SIDM subhalos
+
+12
+
+6 Exploring SIDM parameter space using the parametric model
+
+17
+
+7 Conclusions
+
+21
+
+A The parametric model based on the Read profile
+
+22
+
+Contents
+In self-interacting dark matter (SIDM), dark matter particles can interact with each other, in addition to their interactions through gravity; see refs. [1, 2] for reviews. The selfinteractions can thermalize the inner region of dark matter halos and modify its structure [3]. An SIDM halo could experience gravothermal core-forming and -collapsing phases sequentially, and its inner density profile varies with time dynamically. Compared to collisionless cold dark matter (CDM), SIDM predicts more diverse dark matter distributions in both isolated halos and subhalos, see, e.g., [4, 5]. In particular, the phenomenon of gravothermal collapse [6­8] could be probed using observations of the Milky Way satellite galaxies [4, 5, 9­ 17] and strong gravitational lensing events [18­22]. The collapsed central halo could also provide a seed for supermassive black holes [23­28].
+Cosmological N-body simulations are essential for studying the formation and evolution of SIDM halos in realistic environments, see, e.g., [29­39]. These simulations are often computationally expensive as they need a high resolution in order to resolve the central halo, where the dark matter collision rate is the highest. In some cases, controlled high-resolution N-body simulations can be used to study SIDM predictions, see, e.g., [40­47]. A conducting fluid model is also broadly used [7­9, 25, 48­51], as it can resolve the central region of a collapsed halo, but the model is based on an idealized setup. Another complication is that dark matter self-scattering is generally angular- and velocity-dependent [52­62], and it is challenging to directly use these simulation tools in the search for entire particle parameter space.
+Ref. [63] introduced a semi-analytical model for inferring SIDM density profiles from their CDM counterparts. It assumes that the dark matter distribution in the inner halo follows an isothermal distribution, and determines the distribution parameters through a matching procedure. The model has been tested and validated in both controlled and cosmological SIDM simulations with and without baryons [40, 42, 64, 65]. It has been used to analyze the
+
+­1­
+
+rotation curves of a large sample of spiral galaxies [66­69]. However, the basic version of this model is only valid for isolated halos in the core-forming phase, but see [50].
+In this work, we propose a parametric model that can "transfer" CDM halos into their SIDM counterparts for both core-forming and -collapsing phases, and it works for isolated halos and subhalos. Our model is based on two main observations. For velocity- and angulardependent dark matter self-scattering, there is a constant effective cross section [49, 61, 70] that can dynamically incorporate the variation of the halo's mass and concentration over its evolution history. Furthermore, gravothermal evolution of an SIDM halo is largely selfsimilar [6­8, 23, 48, 51, 70]. We will normalize halo evolution time with its collapse timescale; see also [51, 70]. The rescaled evolution trajectories of characteristic halo parameters become universal, as they do not have an explicit dependence on the cross section.
+We will introduce an analytical density profile and calibrate it using a controlled Nbody SIDM simulation from ref. [61] for the entire evolution history. Then, we normalize the calibrated density profile and obtain a universal description for SIDM halos. We consider two approaches in applying the parametric model. In the basic application, we take density parameters of an isolated CDM halo at z = 0 as input and reconstruct the evolution history of its SIDM counterpart. We extend the model to incorporate effects induced by halo mass changes, such as major mergers or tidal stripping, making it applicable to both isolated halos and subhalos. We will validate the parametric model using the cosmological zoom-in SIDM simulation of a Milky Way analog in ref. [5]. Since our model is accurate and computationally inexpensive, it can be used to efficiently scan large parameter space of particle physics models of SIDM. We will provide an example for such an exercise.
+The rest of the paper is organized as follows. In Sec. 1, we discuss the simulation data used in this work. In Sec. 2, we introduce the universal density profile and calibrate it with the controlled N-body SIDM simulation 2. In Sec. 3, we discuss applications of the parametric model based on basic and integral approaches. We validate the parametric model with isolated halos and subhalos from the cosmological zoom-in simulation, in Secs. 4 and 5, respectively. We present an example of using the parametric model to constrain particle physics parameters of SIDM in Sec. 6 and conclude in Sec. 7.
+1 Simulation data
+In this study, we use two types of simulation datasets from the literature. We first take the results from an isolated N-body SIDM simulation in ref. [61] to calibrate a universal density profile over the course of gravothermal evolution, an essential ingredient of our parametric model. Then, we apply the model to a large population of isolated halos and subhalos from a cosmological zoom-in SIDM simulation of a Milky Way analog from ref. [5], and show the parametric model can successfully predict their properties. Both simulations were performed using the Gadget2 program [71], with an SIDM module that adopts similar techniques described in refs. [30, 72].
+For calibration, we take simulated halos from ref. [61] that have an NFW initial condition with the scale density s = 2.74 × 108 M/kpc3 and scale density rs = 0.141 kpc. These halos are collectively named as "BM2" in ref. [61], and we will follow the same naming convention for convenience. The simulated halos contain four million particles, assuming various SIDM scenarios, such as Rutherford- and Møller-like scatterings, both having novel angular- and velocity-dependence, as well as isotropic scatterings with a constant cross section. Ref. [61] proposed and tested a constant effective cross section to model the halo evolution for velocity-
+­2­
+
+and angular-dependent SIDM interactions; see also refs. [49, 70]. For a differential cross section of d/d cos , the effective cross section is evaluated as
+
+2 eff =
+
+dvd
+
+cos
+
+
+
+d
+
+d cos
+
+
+
+sin2
+
+v5fMB(v,
+
+eff )
+
+dvd cos  sin2 v5fMB(v, eff )
+
+1 = 512e8ff
+
+dvd cos  d v7 sin2  exp d cos 
+
+v2 - 4e2ff
+
+,
+
+(1.1)
+
+where we have assumed that dark matter particles follow a Maxwell-Boltzmann velocity distribution
+
+fMB(v, eff )  v2 exp
+
+v2 - 4e2ff
+
+,
+
+(1.2)
+
+ with eff = 0.64Vmax,NFW  1.05reff Geff being a characteristic velocity dispersion of dark
+
+matter particles in the halo, v is the relative velocity between the two incoming parti-
+
+cles, and  the polar angle that takes values in [0, ]. We have used the relations eff = (Vmax/(1.648reff ))2/G and reff = Rmax/2.1626, where Vmax is the maximal circular velocity
+
+of a halo and Rmax its corresponding radius. For an NFW halo, reff and eff reduce to rs and
+
+s, respectively. In cosmological simulations, Vmax and Rmax are more useful for specifying a halo, as they do not rely on a specific form of density profiles. The kernel sin2 v5 in eq. (1.1)
+
+is motived by the evaluation of thermal conductivity in kinetic theory of a fluid in the short-
+
+mean-free-path regime. Although for the bulk of SIDM evolution, the inner halo is not in
+
+that regime, the kernel does provide an accurate weighting factor for velocity- and angular-
+
+dependent dark matter self-interactions as demonstrated using simulations [49, 61, 70].
+
+To be concrete, we will consider a Rutherford scattering benchmark in ref. [61], which
+
+assumes the BM2 initial NFW condition and the following differential cross section
+
+d d cos 
+
+= 2
+
+0w4 w2 + v2 sin2(/2)
+
+2,
+
+(1.3)
+
+where 0/m = 2.4 × 104 cm2/g and w = 1 km/s. The corresponding effective cross section is eff /m = 7.1 cm2/g. Ref. [61] performed N-body simulations with the differential cross section in eq. (1.3) and a constant cross section of /m = 10 cm2/g.1 It further rescaled the simulation result of /m = 10 cm2/g and obtained the density profile at a given snapshot for eff /m = 7.1 cm2/g. In this work, we will calibrate our parametric model using the density profile of eff /m = 7.1 cm2/g from the rescaling, as well as the simulated one based on the differential cross section in eq. (1.3), and show they agree with each other well. Then we take
+the calibrated model and apply it to halos from cosmological simulations, as we discuss next.
+The cosmological zoom-in simulation in ref. [5] contains a Milky Way analog and the differential cross section is given in eq. (1.3), with 0/m = 147.1 cm2/g and w = 24.33 km/s. We consider simulated halos above a mass threshold of 108 M/h and each halo contains more than 3500 simulation particles. Applying this selection condition, we obtain 125 and
+115 subhalos for CDM and SIDM, respectively. For isolated halos at z = 0, we further require
+them to reside between 0.3­3 Mpc the center of the main halo so that these candidates
+do not suffer from numerical contamination. There are 647 CDM and 626 SIDM isolated
+1The simulations assume all particles participate in scattering. See the relevant discussion in ref. [61] for a self-consistent interpretation in terms of quantum statistics.
+
+­3­
+
+halos. Among them, some are slingshot and splashback halos, which have experienced close encounters with other halos at low redshifts. In addition, 32 subhalos and 58 isolated halos have their collapse timescale less than 10 Gyr [5].
+
+2 A universal density profile
+
+The underlying mechanism of our parametric model is that the evolution of SIDM halos exhibits universality [51, 70], i.e., after proper normalization, the evolution of the density profile does not explicitly depend on the initial condition and the self-scattering cross section, unless its central region is deeply collapsed. In this section, we first introduce an analytical density profile and determine its parameters by fitting to the simulated halo for a given snapshot. We then propose accurate fitting functions to smoothly model the evolution of the parameters. These functions are formulated without explicit dependence on the initial halo condition and the cross section, and hence they represent a universal solution to gravothermal evolution of dark matter halos.
+In SIDM, a halo first develops a shallow density core, and then the core size shrinks and central density increases. We introduce the following function to model the density profile of an isolated halo over the course of gravothermal evolution,
+
+SIDM(r) =
+
+s
+
+,
+
+r +rc 1/ rs
+
+2
+
+1
+
++
+
+r rs
+
+(2.1)
+
+where s and rs are scale density and radius, respectively, and rc is the core size. The transition between inner core and outer NFW profile is controlled by . We found that increasing  from 1 to 4, the fit to the simulated halo can be improved significantly, and its remains almost unchanged for   4. We fix  = 4, as in ref. [57], where a similar trick was applied for halos with a Hernquist density profile. In the limit rc  0, eq. (2.1) smoothly reduces to an NFW profile. The density profile in eq. (2.1) only applies to isolated halos. We will discuss subhalos in Sec. 5. In Appendix A, we will discuss an alternative cored density profile from refs. [73, 74], which works as well as the one in eq. (2.1).
+To develop a universal solution for parameterizing SIDM halo evolution, we need to use a dimensionless timescale and eliminate explicit dependence on the cross section. This can be achieved by normalizing the evolution time with the collapse timescale tc, which is approximately a fixed multiple of the relaxation time. We estimate tc as [7, 23, 48]
+
+150
+
+1
+
+1
+
+tc =
+
+
+
+,
+
+C (eff /m)eff reff 4Geff
+
+(2.2)
+
+where C is constant that can be calibrated with N-body simulations [8, 9, 48, 49], and we fix C = 0.75. For the BM2 halo we consider, tc  28.7 Gyr for eff = 7.1 cm2/g [61].
+Figure 1 shows the simulated density profile of the BM2 halo at t/tc = 0, 0.09, 0.18, 0.25, 0.50, and 1 (eff /m = 7.1 cm2/g, dashed-red), as well as the one fitted using the density profile in eq. (2.1) (solid-blue). Our fit is performed over the entire range, upper to the virial radius,
+and the agreement is very good. Even at t/tc = 1, the agreement is within 10%. While introducing additional parameters could further improve the fit, we prioritize simplicity over
+sub-10% accuracy in our approach.
+We further fit the density profile of the simulated BM2 halo at successive time intervals
+of 0.2 Gyr, and obtain the evolution trajectories for rs, s and rc in eq. (2.1) over the
+
+­4­
+
+(M /kpc3)
+
+1010
+t/tc = 0.00
+109
+
+108
+
+107
+
+106
+/m = 7.1 cm2/g Fitted
+
+105
+
+10 2
+
+r10 1(kpc)
+
+100
+
+109
+
+t/tc = 0.35
+
+108
+
+107
+
+106
+
+/m = 7.1 cm2/g
+
+Fitted
+
+105
+
+10 2
+
+r10 1(kpc)
+
+100
+
+(M /kpc3)
+
+(M /kpc3)
+
+109
+
+t/tc = 0.09
+
+108
+
+107
+
+106
+
+/m = 7.1 cm2/g
+
+Fitted
+
+105
+
+10 2
+
+r10 1(kpc)
+
+100
+
+109
+
+t/tc = 0.50
+
+108
+
+107
+
+106
+
+/m = 7.1 cm2/g Fitted
+105
+
+10 2
+
+r10 1(kpc)
+
+100
+
+(M /kpc3)
+
+(M /kpc3)
+
+109
+
+t/tc = 0.18
+
+108
+
+107
+
+106
+
+/m = 7.1 cm2/g
+
+Fitted
+
+105
+
+10 2
+
+r10 1(kpc)
+
+100
+
+1010
+
+t/tc = 1.00
+
+109
+
+108
+
+107
+
+106
+/m = 7.1 cm2/g Fitted
+105
+
+10 2
+
+r10 1(kpc)
+
+100
+
+(M /kpc3)
+
+Figure 1. Density profiles of the simulated BM2 halo at different times for an effective constant cross section of eff /m = 7.1 cm2/g (dashed-red); data from ref. [61]. Each density profile is fitted using the density profile in eq. (2.1) (solid-blue).
+
+dimensionless time variable   t/tc. They can be expressed as the following functions
+
+s = 2.033 + 0.7381 + 7.264 5 - 12.73 7 + 9.915 9 + (1 - 2.033)(ln 0.001)-1 ln ( + 0.001) , s,0
+
+rs = 0.7178 - 0.1026 + 0.2474 2 - 0.4079 3 + (1 - 0.7178)(ln 0.001)-1 ln ( + 0.001) , rs,0
+
+rc
+
+=
+
+ 2.555 
+
+-
+
+3.632
+
++
+
+2.131 2
+
+-
+
+1.415 3
+
++
+
+0.4683 4,
+
+rs,0
+
+(2.3)
+
+where the subscript "0" denotes the corresponding value of the initial NFW profile. To enforce s/s,0 = 1 and rs/rs,0 = 1 at  = 0, we have chosen a term of +(1-)(ln 0.001)-1 ln ( + 0.001) and  is the fitting parameter. The numerical factor 0.001 inside the logarithm is introduced to avoid singularity at  = 0. Although tc may vary slightly with a different calibration of C, the functional forms in eq. (2.3), including the coefficients, are robust to this variation. For the choice of terms in the fitting functions, we did it through trial and error with the assumption that the three halo parameters can be expressed in terms of polynomials of the normalized time, aside from the logarithmic term. We had included more terms with different powers of time, and then dropped those with small coefficients before performing the final fit. In this way, we achieve a balance between accuracy and simplicity of the fitting functions.
+In figure 2, we present the evolution of s/s,0 (left), rs/rs,0 (middle), and rc/rc,0 (right). Our fitting functions in eq. (2.3) (solid-blue) well describe the simulation results (eff /m = 7.1 cm2/g, solid-red). We further show the results from the N-body simulation [61] with the differential cross section (d/d cos , dotted-red), which agree with those from the simulation
+
+­5­
+
+s/s, 0 rs/rs, 0 rc/rs, 0
+
+101
+
+/m = 7.1 cm2/g d/dcos
+
+Isolated
+
+Fitted curve
+
+1000.0
+
+0.2
+
+0.4
+
+0.6
+
+0.8
+
+1.0
+
+t/tc
+
+1.0
+
+0.9
+
+Isolated
+
+0.8
+
+0.7
+
+0.6
+
+0.5
+
+/m = 7.1 cm2/g
+
+0.4
+
+d/dcos
+
+Fitted curve
+
+0.30.0
+
+0.2
+
+0.4
+
+0.6
+
+0.8
+
+1.0
+
+t/tc
+
+0.6
+Isolated
+0.5
+
+0.4
+
+0.3
+
+0.2
+
+0.1
+
+/m = 7.1 cm2/g
+
+d/dcos
+
+Fitted curve
+
+0.00.0
+
+0.2
+
+0.4
+
+0.6
+
+0.8
+
+1.0
+
+t/tc
+
+Figure 2. Evolution of normalized density parameters s/s,0 (left), rs/rs,0 (middle), and rc/rs,0 (right) from the calibrated functions in eq. (2.3) (solid-blue) and the N-body SIDM simulation with the effective constant cross section eff /m = 7.1 cm2/g [61] (solid-red). For comparison, the SIDM simulation [61] based on the differential scattering cross section d/d cos  is also shown (dotted-red).
+
+with the effective cross section eff /m = 7.1 cm2/g (solid-red), within  5%. The agreement further confirms that the effective constant cross section can accurately capture the halo evolution, setting the base for constructing a parametric model that can be applied to SIDM models with velocity- and angular-dependent dark matter self-interactions, as we will discuss later. Since ref. [61] has more extended snapshots for the BM2 halo using eff /m (t  30 Gyr) than the one using the differential cross section d/d cos  (t  25 Gyr), we will present our main results based on the parametric model calibrated with the former.
+In figure 3, we show the density (left) and circular velocity (middle) profiles obtained from the N-body simulation (dashed) and our model in eq. (2.3) (solid) at three representative times, t/tc = 0, 0.18, and 1. The overall agreement is good, with only a minor discrepancy at t/tc  1, which is expected from the fit shown in figure 1. Figure 3 (right) further shows the evolution of central densities from the N-body simulation with the effective cross section (/m = 7.1 cm2/g; solid-red) and the one with d/d cos  (dotted-red), as well as that obtained using eq. (2.3) (solid-blue). We see that they agree with each other very well up to t/tc = 25/28.7  0.87, beyond which eq. (2.3) underestimates the central density by  15% at t/tc = 1.
+We can use eq. (2.3) and obtain Vmax and Rmax from the reconstructed halo rotation curve at each snapshot. For the BM2 halo with /m = 7.1 cm2/g, we find that the evolution trajectories of Vmax and Rmax can be well fitted by
+
+Vmax = 1 + 0.1777 - 4.399 3 + 16.66 4 - 18.87 5 + 9.077 7 - 2.436 9 Vmax,0 Rmax = 1 + 0.007623 - 0.7200 2 + 0.3376 3 - 0.1375 4, Rmax,0
+
+(2.4)
+
+where  = t/tc and the subscript "0" denotes the corresponding value of the initial NFW profile.
+
+3 Transforming CDM halos into SIDM halos
+To apply the functions in eq. (2.3) for halos in cosmological simulations, we need to determine s,0, rs,0, tc, and evolution time after halo formation. In this section, we first introduce a
+
+­6­
+
+ (M /kpc3) Vcirc (km/sec) Central density (M /kpc3)
+
+1010
+
+Isolated
+109
+
+Isolated
+
+/m = 7.1 cm2/g d/dcos
+
+101
+
+Parametric model
+
+108
+
+107
+
+109 106
+
+105
+
+t/tc = 0
+
+t/tc = 0
+
+t/tc = 0.18
+
+t/tc = 0.18
+
+t/tc = 1
+
+t/tc = 1
+
+104
+
+10-1
+
+100
+
+100
+
+10-1
+
+100
+
+r (kpc)
+
+r (kpc)
+
+0
+
+5
+
+10
+
+15
+
+20
+
+25
+
+30
+
+t (Gyr)
+
+Figure 3. Density (left) and circular velocity (middle) profiles from eq. (2.3) (solid) and the SIDM simulation with the effective cross section eff /m = 7.1 cm2/g [61] (dashed) at t/tc = 0, 0.18 and 1. The evolution curves of the central dark matter density (right) from eq. (2.3) (solid-blue) and the simulations [61] with eff /m = 7.1 cm2/g (solid-red) and d/d cos  (dashed-red) are also shown.
+
+basic approach for the parametric model that simply utilizes the corresponding CDM halo parameters at z = 0 as input to make predictions for a given cross section specified in eq. (1.3). We then present a more synthesized approach that makes use of the CDM halo properties over the evolution history, yielding more detailed and reliable SIDM predictions. To demonstrate the accuracy and effectiveness, we will take the CDM halos from the cosmological simulation in ref. [5], use the parametric model to obtain their corresponding SIDM halos, which will be further compared to the SIDM halos directly from the N-body simulation.
+To facilitate discussion, we rank the simulated halos in ref. [5] by their masses in descending order. We identify the corresponding CDM counterpart for each simulated SIDM halo by examining the evolution history. We label these pairs as "Cosmo-#." For example, Cosmo-501 represents the halo ranked 501st from the top in terms of mass.
+
+3.1 The basic approach
+
+We propose to use the NFW halo parameters rs = Rmax/2.1626 and s = (Vmax/(1.648rs))2/G evaluated for simulated CDM halos at z = 0 as input for the functions in eq. (2.3). To justify this approach, we show in figure 4 the evolution history of the density profile (left), scale density (middle) and radius (right) for the Cosmo-501 CDM halo in physical coordinates. For this halo, its inner NFW profile was established 10 Gyr ago and has remained largely unchanged since then. In particular, s and rs are approximately constants after first 3 Gyr.
+In general, isolated halos undergo exponential mass growth at high redshifts, during which their inner density profiles are established. At later stages, minor mergers primarily contribute mass to the outer regions, resulting in moderate mass increases, and the inner density profile remains largely unchanged. Thus we can use the NFW halo parameters at z = 0 for the functions in eq. (2.3) to make SIDM predictions, if we know the halo formation time tf at which the s and rs become stable.
+To estimate tf , we use the following relation [75],
+
+zf = -0.0064
+
+log10
+
+Mvir,0 1010 M
+
+2
+- 0.1043 log10
+
+Mvir,0 1010 M
+
++ 1.4807
+
+(3.1)
+
+where zf is the redshift of halo formation and Mvir,0 is the halo mass at present. The formation redshift is determined through the condition that at zf the halo mass is Mvir,0/q,
+
+­7­
+
+phys (M kpc-3) s, phys (M kpc-3)
+rs,phys (kpc)
+
+108
+
+ICsooslamteod-501
+
+107
+
+106
+
+tL = 0 Gyr
+
+tL = 5.4 Gyr
+
+105
+
+tL = 7.9 Gyr tL = 10.5 Gyr
+
+NtLF=W12p.r1oGfiyler
+
+104
+
+100
+
+101
+
+rphys (kpc)
+
+CIsooslamteod-501
+
+1.6 1.4
+
+CIsooslamteod-501
+
+109
+
+1.2
+
+1.0 108
+0.8
+
+0.6
+
+107
+
+0.4
+
+0.2
+
+10614
+
+12
+
+10
+
+8
+
+6
+
+4
+
+2
+
+0
+
+0.014
+
+12
+
+10
+
+8
+
+6
+
+4
+
+2
+
+0
+
+tL (Gyr)
+
+tL (Gyr)
+
+Figure 4. Density profiles (left) of an isolated CDM halo at different lookback times, from the cosmological zoom-in simulation [5]. For tL  0.2 Gyr, the halo density can be described by a single NFW profile. Evolution of the NFW parameters s (middle) and rs (right) constructed from the simulation [5]. The subscript "phys" denotes that the relevant quantities are evaluated in physical coordinates.
+
+where q  4.137zf-0.9476 [75]. The relation in eq. (3.1) is validated for halos in the mass range
+
+108­1015 M [75], and it is applicable for our study as the halo masses of interest in the
+
+cosmological simulation from ref. [5] are 108­1012 M.
+
+The corresponding lookback time is computed as tL(zf ) =
+
+zf 0
+
+dz/(H
+
+×
+
+(1
+
++
+
+z)),
+
+where
+
+H is the Hubble rate as a function of z. For the cosmology with h = 0.7, m,0 = 0.286, and
+
+0 = 0.714, as in ref. [76], the lookback time can be evaluated as
+
+1.5800
+
+2.4965
+
+tL(z) = 13.647 - 11.020 ln (1 + z)1.5 + 1 + (1 + z)3 Gyr.
+
+(3.2)
+
+For convenience, we define tf = 13.647 Gyr - tL(zf ). For the Cosmo-501 isolated halo, Mvir,0 = 1.81 × 109 M, we have zf  1.55 and tL(zf )  9.48 Gyr estimated using eqs. (3.1) and (3.2), respectively. This is well consistent with the evolution history shown in figure 4.
+In short, we take the following steps for applying the parametric model with the basic approach. For an isolated CDM halo, we take its NFW scale parameters at z = 0, i.e., s,0 and rs,0 in eq. (2.3), and calculate the virial mass and sequentially the formation time tL(zf ) using eqs. (3.1) and (3.2), which could also be obtained from halo catalogs if available. Then, we evaluate the effective cross section eq. (1.1) and collapse time eq. (2.2) for a given particle physics model of SIDM, see eq. (1.3). Lastly, we use the functions in eq. (2.3) and obtain s, rs and rc as a function of time t, and reconstruct the density profile at t based on eq. (2.1). In practice, we also incorporate a Gaussian scatter of 0.16 dex in log10(tL(zf )/Gyr) [77], when applying to a population of halos. If tL(zf )/tc > 1, we truncate the halo's evolution at tc to avoid extrapolation. This truncation only affects the value of the central density of halos that would be deeply collapsed.
+3.2 The integral approach
+The basic approach is straightforward, but it has limitations when applied to halos that have undergone significant mass accretion or loss at relatively late times. Isolated halos, for instance, can experience mass increases due to minor mergers, or mass loss due to slingshot and splashback events, which cause spikes and valleys in Vmax and Rmax. Furthermore,
+
+­8­
+
+subhalos evolve in the tidal field and lose mass. Here, we propose an extended approach that can effectively "integrate" the SIDM effects over the period of mass growth or reduction.
+We assume the mass accretion history in SIDM is similar to that in CDM. This is a reasonable assumption for most cases, as the self-interactions mainly modify the inner halo structure; we will discuss later about subhalos where the assumption is violated. Given the evolution of Vmax,CDM and Rmax,CDM, we propose the following integral functions
+
+Vmax(t) = Vmax,CDM(tf ) +
+
+t tf
+
+dt
+
+dVmax,CDM(t) dt
+
++
+
+t dt dVmax,Model( )
+
+tf tc(t)
+
+d 
+
+Rmax(t) = Rmax,CDM(tf ) +
+
+t tf
+
+dt
+
+dRmax,CDM(t) dt
+
++
+
+t tf
+
+dt tc(t)
+
+dRmax,Model( d 
+
+)
+
+,
+
+(3.3)
+
+where   = t/tc(t). The first integral on the right-hand side accommodates for the change due to the evolution events, such as mergers and tidal mass loss, while the second integral captures the SIDM effects by accounting for variations of the effective cross section and the collapse timescale, resulting from the change in the halo properties. The dVmax,Model( )/d and dRmax,Model( )/d terms are derivatives of the corresponding functions in eq. (2.4), i.e.,
+
+1
+
+dVmax,Model( ) = 0.1777 - 13.20 2 + 66.62 3 - 94.34 4 + 63.54 6 - 21.93 8
+
+Vmax,CDM(t)
+
+d
+
+1
+
+dRmax,Model( ) = 0.007623 - 1.440 + 1.013 2 - 0.5502 3,
+
+Rmax,CDM(t)
+
+d
+
+where the Vmax,0 and Rmax,0 in eq. (2.4) have been replaced by Vmax,CDM(t) and Rmax,CDM(t), respectively.
+At each moment, the collapse time tc(t) is computed using Vmax,CDM(t) and Rmax,CDM(t). Once obtaining Vmax(t), Rmax(t) and  = (tL(zf ) - tL(t))/tc(t), we further use eq. (2.4) to solve for Vmax,0 and Rmax,0, which in turn give rise to s,0 and rs,0 assuming an NFW density profile. In this way, we "construct" an isolated CDM halo at a given moment t, to which we can apply the functions in eq. (2.3) for obtaining s, rs and rc. Note that in the integral approach, s,0 and rs,0 in eq. (2.3) are not necessary their corresponding values found in the simulation at z = 0. With the effects of mass changes incorporated, we can apply the model to the halo earlier than the formation time used in the basic approach. For the integral approach, we take it to be half of 13.647 Gyr - tL(zf ), see eq. (3.2), although the difference is small. In practice, we discretize the lookback time for a simulated halo into 1000 intervals with equal spacing and obtain its Vmax and Rmax at all times incrementally. Then, we replace the integrals in eq. (3.3) with discrete summation.
+The proposed integrals in eq. (3.3) can be understood as follows. For a CDM halo, at each small time interval, the change in the mass due to accretion or tidal stripping, is reflected in the change of s and rs. The effective cross section eq. (1.1) with the velocity dispersion eff , as well as the collapse time tc, being computed using the obtained s and rs values, effectively incorporates the SIDM effects during this time interval. Thus, the integral approach in eq. (3.3) gives rise to the net change in Vmax and Rmax during the time interval. If the evolution history of CDM halos is known, the integral approach is easy to implement and it has broader applications than the basic approach.
+We also note that the integral approach becomes the basic one in the limit that Vmax,CDM and Rmax,CDM do not change after the halo formation time tf . From eq. (3.3), we see that in
+
+­9­
+
+the limit the first integral vanishes, and the second integral simply reduces to two boundary terms at t and tf as tc is a constant. The latter term carries a minus sign and it cancels the first term in the right-hand side of eq. (3.3).
+
+4 Modeling the evolution of SIDM isolated halos
+
+We first consider a few representative halos from the cosmological simulation [5] that have evolved into late stages; see table 1 for their characteristic properties. Among them, Cosmo26 and Cosmo-32 are core-forming, and both have tL(zf )/tc  0.2. All others are deeply collapsed at z = 0, with tL(zf )/tc  1, and they will be truncated at tL(zf )/tc = 1. Cosmo796 and Cosmo-1128 have relatively complex accretion histories. The former had a late merger and the latter experienced a splashback event (i.e., it passed through a larger halo before z = 0).
+
+Cosmo-ID Isolated 26 32 501 796 800 1128
+
+Mvir,0 (108 M)
+186 146 6.47 3.92 4.03 2.64
+
+tL(zf ) (Gyr) 9.23 9.26 9.58 9.62 9.62 9.65
+
+tL(zf )/tc -
+0.035 0.018 1.06 1.00 1.17 1.27
+
+Vmax,SIDM,0 (km/s) 45.4 40.7 21.9 21.1 21.7 19.6
+
+Rmax,SIDM,0 (kpc) 9.11 10.4 0.63 0.56 0.40 0.60
+
+Vmax,Model,0 (km/s) 45.2 40.4 22.8 21.7 21.7 20.9
+
+Rmax,Model,0 (kpc) 9.27 12.6 0.61 0.61 0.57 0.53
+
+Table 1. Characteristic properties of isolated halos at z = 0, selected from the cosmological zoom-in SIDM simulation [5] for testing the parametric model. The virial mass, formation time, tL(zf )/tc, Vmax and Rmax are reported for the halos. For comparison, their Vmax and Rmax values predicted in the parametric model eq. (2.4) are also listed in the last two columns.
+
+In figure 5, we show the Vmax (top) and Rmax (bottom) evolution of three halos: Cosmo32, Cosmo-501, and Cosmo-796. Both basic (solid-blue) and integral (solid-green) approaches agree with the SIDM simulation (solid-magenta) within  10%. Compared to their CDM counterparts (dashed-black), Cosmo-501 and Cosmo-796 have larger Vmax and smaller Rmax at later stages due to core collapse. Although Cosmo-796 has a significant merger at tL  7 Gyr, both approaches make similar predictions, and they agree with the simulation. For Cosmo-32, the evolution is almost identical in SIDM and CDM. This halo is in the core-forming phase over the entire evolution history, as it has a higher mass and a smaller effective cross section accordingly. As a good approximation, dark matter self-interactions do not change Vmax and Rmax (z = 0) for core-forming isolated SIDM halos [5].
+In figure 6, we show density profiles of all isolated halos at z = 0 listed in table 1. We again see that both basic (solid-blue) and integral (solid-green) approaches agree well with the SIDM simulation (solid-magenta). Cosmo-26 and Cosmo-32 are in the core-forming phase at z = 0 and they have a cored density profile. The four others are deeply collapsed, and their central densities are higher compared to CDM (dashed-black).
+We have tested both approaches with a sample of 647 isolated CDM halos resolved in the simulation [5]. As discussed previously, the integral approach requires well-resolved evolution history of a CDM halo, but numerical noise could be large for low-mass halos in the sample that are close to the resolution limit. In addition, the basic and integral approaches agree well for the representative examples shown in figures 5 and 6. Thus, we show the comparison between N-body simulation and basic approach for the whole sample of simulated halos.
+
+­ 10 ­
+
+ICsooslamteod-32
+
+CIsooslamteod-501
+
+CIsooslamteod-796
+
+Vmax (km/s)
+
+Vmax (km/s)
+
+Vmax (km/s)
+
+SIDM CDM Integral model Basic model
+
+10114
+
+12
+
+10
+
+8
+
+6
+
+4
+
+2
+
+0
+
+tL (Gyr)
+
+25
+CIsooslamteod-32
+
+20
+
+15
+
+10114
+
+12
+
+10
+
+8
+
+6
+
+4
+
+2
+
+0
+
+tL (Gyr)
+
+3.5
+
+3.0
+
+ICsooslamteod-501
+
+2.5
+
+2.0
+
+Rmax, phys (kpc)
+
+10
+
+1.5
+
+1.0
+5 0.5
+
+014
+
+12
+
+10
+
+8
+
+6
+
+4
+
+2
+
+0
+
+0.014
+
+12
+
+10
+
+8
+
+6
+
+4
+
+2
+
+0
+
+tL (Gyr)
+
+tL (Gyr)
+
+Rmax, phys (kpc)
+
+10114
+
+12
+
+10
+
+8
+
+6
+
+4
+
+2
+
+0
+
+tL (Gyr)
+
+8
+
+7
+
+CIsooslamteod-796
+
+6
+
+5
+
+4
+
+3
+
+2
+
+1
+
+014
+
+12
+
+10
+
+8
+
+6
+
+4
+
+2
+
+0
+
+tL (Gyr)
+
+Rmax, phys (kpc)
+
+Figure 5. Evolution of Vmax (top) and Rmax (bottom) for three isolated halos from the parametric model with the basic (solid-blue) and integral (solid-green) approaches, as well as the N-body simulation [5] (solid-magenta). Cosmo-32 is in the core-forming phase at z = 0, while the other two are deeply collapsed. Cosmo-796 has a late major merger at tL  7 Gyr. The subscript "phys" denotes that the relevant quantities are evaluated in physical coordinates.
+
+Figure 7 (top) shows Rmax­Vmax and Vcirc(rfid)­Vmax distributions predicted using the basic approach, where rfid = 2Vmax/(70 km/s) kpc and each halo is color coded according to tL(zf )/tc. We see that the predicted distributions agree well with those directly from the N-body SIDM simulation [5] as shown in figure 7 (bottom), where the simulated SIDM halo is colored based on its effective concentration as in [5]. In particular, our parametric model successfully reproduces halos that are deeply collapsed. These halos have the lowest Rmax and highest Vcirc(rfid) values for given Vmax.
+
+Properties
+
+µ
+
+log Rmax
+10 Rmax,median
+
+
+
+log Rmax
+10 Rmax,median
+
+µ (Vmax) (km/s)
+
+ (Vmax) (km/s)
+
+µ (Vmax - Vcirc(rfid)) (km/s)
+
+ (Vmax - Vcirc(rfid)) (km/s)
+
+CDM simulation 0.0144
+0.173 15.9 7.40 3.00 2.32
+
+SIDM simulation -0.0763
+0.224 16.9 7.75 5.40 3.74
+
+Model prediction -0.0918
+0.272 16.7 7.46 4.16 3.90
+
+Table 2. The mean and standard deviation of the log10(Rmax/Rmax,median), Vmax, and (Vmax - Vcirc(rfid)) distributions.
+
+­ 11 ­
+
+108
+
+ICsooslamteod-26
+
+108
+
+ICsooslamteod-32
+
+108
+
+CIsooslamteod-501
+
+107
+
+107
+
+107
+
+ (M /kpc3)
+
+ (M /kpc3)
+
+ (M /kpc3)
+
+106
+
+106
+
+105
+
+SIDM CDM
+
+105
+
+Integral model
+
+Basic model
+
+104
+
+100
+
+104
+
+r (kpc)
+
+108
+
+ICsooslamteod-800
+
+108
+
+107
+
+107
+
+106
+
+105
+
+100
+
+104
+
+r (kpc)
+
+CIsooslamteod-796
+
+108
+
+107
+
+100
+r (kpc) ICsooslamteod-1128
+
+ (M /kpc3)
+
+ (M /kpc3)
+
+ (M /kpc3)
+
+106
+
+106
+
+106
+
+105
+
+105
+
+105
+
+104
+
+100
+
+r (kpc)
+
+104
+
+100
+
+r (kpc)
+
+104
+
+100
+
+r (kpc)
+
+Figure 6. Density profiles of the isolated halos in table 1 from the parametric model with the basic (solid-blue) and integral (solid-green) approaches, and the SIDM simulation [5] (solid-magenta), as well as the CDM simulation (dashed-black) for comparison.
+
+Figure 8 further shows the distribution of log10(Rmax/Rmax,median) (left), Vmax (middle), and (Vmax - Vcirc(rfid)) (right) for the sample, from the parametric model (solid-blue), as well as the N-body SIDM (solid-magenta) and CDM (dashed-black) simulations [5]. We see good
+agreement between parametric model and simulation. In addition, compared to CDM, SIDM
+predicts a higher population for log10(Rmax/Rmax,median)  -0.5 due to core collapse, as well as a higher population for (Vmax - Vcirc(rfid)) > 5 km/s because of core formation. For a more quantitative comparison, we show the mean and standard deviation of the three distributions
+in table 2.
+
+5 Modeling the evolution of SIDM subhalos
+
+Subhalos can be significantly affected by the host halo due to tidal interactions. As a result, their density profiles are different from those of isolated halos. To account for the tidal effects, we modify the density profile in eq. (2.1) as
+
+tSIDM(r) =
+(r +rc )1/
+rs
+
+s
+
+2
+
+1
+
++
+
+r rs
+
+1+
+
+r 2-u 1+3u ,
+rt
+
+(5.1)
+
+where the additional parameters are the tidal radius rt and the numerical factor u controlling the logarithmic slope of the truncated density profile in the outer region. We evaluate the
+
+­ 12 ­
+
+tL(zf)/tc
+
+Rmax (kpc)
+
+1.0
+
+1.0
+
+Basic model prediction Isolated halos
+
+0.9
+
+Basic model prediction Isolated halos
+
+0.9
+
+0.8
+
+0.8
+
+101
+
+0.7
+
+0.7
+
+tL(zf)/tc Vcirc(rfid) (km/s)
+
+0.6
+
+0.6
+
+0.5
+
+0.5
+
+100
+
+0.4
+
+0.4
+
+0.3
+
+101
+
+0.3
+
+0.2
+
+0.2
+
+0.1
+
+0.1
+
+10-1
+
+101
+
+102 0.0
+
+101
+
+0.0
+
+Vmax (km/s)
+
+Vmax (km/s)
+
+120
+
+120
+
+SIDM simulation Isolated halos
+
+105
+
+SIDM simulation Isolated halos
+
+105
+
+101
+
+90
+
+90
+
+ceff Vcirc(rfid) (km/s)
+
+75
+
+75
+
+60
+
+60
+
+100
+
+45
+
+45
+
+101
+
+30
+
+30
+
+15
+
+15
+
+10-1
+
+101
+
+Vmax (km/s)
+
+102
+
+0
+
+101
+
+0
+
+Vmax (km/s)
+
+ceff
+
+Rmax (kpc)
+
+Figure 7. The Rmax­Vmax (left) and Vcirc(rfid)­Vmax (right) distributions of isolated SIDM halos at z = 0 predicted using the parametric model with the basic approach (top), where each halo is color coded according to tL(zf )/tc. For comparison, the corresponding distributions from the N-body SIDM simulation are also shown (bottom), and the color coding is based on the effective concentration ceff = Rvir/(Rmax/2.1626); taken from [5]. As in [5], the median CDM isolated halo Vmax­Rmax relation (solid-black) together with a ±0.6 dex band (dashed-black), and resolution limit (gray-shaded) are shown in the left panel; the 1:1 relation (dashed-black) in the right panel.
+
+tidal radius rt as [78, 79]
+
+rt = d
+
+Msub Mhost(r < d)
+
+1/3
+,
+
+(5.2)
+
+where d is the distance of the subhalo from its host halo, Msub is the subhalo virial mass and Mhost(r < d) is the host halo mass enclosed within d. We further take into account the evolution of the tidal radius in our study. The smooth truncation is controlled by the term 1/(1 + (r/rt)2-u)1+3u, which falls off at large radii as r-2 at u = 0 and as r-4 at u = 1, as in the case of a truncated NFW profile for CDM subhalos, see, e.g., [18, 80].
+
+­ 13 ­
+
+CDM simulation SIDM simulation Model prediction
+
+CDM simulation SIDM simulation Model prediction
+
+CDM simulation SIDM simulation Model prediction
+
+102
+
+102
+
+102
+
+Counts Counts Counts
+
+101
+
+101
+
+101
+
+100
+
+100
+
+1.0
+
+0.5
+
+0.0
+
+0.5
+
+1.0
+
+logRmax/Rmax, median
+
+101
+Vmax (km/s)
+
+100
+
+102
+
+0
+
+5
+
+10
+
+15 20
+
+25 30
+
+35
+
+Vmax - Vcirc(rfid) (km/s)
+
+Figure 8. The log10(Rmax/Rmax,median) (left), Vmax (middle), and (Vmax - Vcirc(rfid)) (right) distributions for the sample of isolated halos from the parametric model (solid-blue), SIDM (solid-
+magenta) and CDM (dashed-black) simulations [5].
+
+In this work, we take u(ceff ) = Min(1, 0.0004ce2f.f2), where ceff = Rvir/(Rmax/2.1626) is the effective concentration [5], and the corresponding truncated profile in eq. (5.1) can fit both
+
+core-forming and -collapsing subhalos. We have also checked that the SIDM evaporation
+
+effect [81] is negligible for the subhalos in the simulation [5], although such an effect could be
+
+incorporated using a semi-analytical method [82].
+
+Since subhalos undergo tidal mass loss after falling into the host halo, the basic approach
+
+is insufficient for modeling their evolution. However, the integral approach based on eq. (3.3)
+
+still works. As a demonstration, we select 6 representative cases, ranging from core-forming
+
+subhalos to deeply collapsing ones, as summarized in table 3. The evolution stage is quantified
+
+by 0 =
+
+t0 tf
+
+dt/tc(t),
+
+where
+
+t0
+
+=
+
+13.647
+
+Gyr
+
+and
+
+we
+
+take
+
+the
+
+formation
+
+time
+
+tf
+
+to
+
+be
+
+half
+
+of 13.647 Gyr - tL(zf ), see eq. (3.2). In addition, the collapse time tc changes along with
+
+tidal mass loss, and we use eq. (2.2) to evaluate it with eff = (Vmax,CDM/1.648reff )2/G and
+
+reff = (Rmax,CDM/2.1626) for a given moment.
+
+Cosmo-ID Subhalos 71 186 567 665 945 1357
+
+Mvir,0 (108 M)
+57.1 20.7 6.04 4.61 3.92 2.38
+
+0 0.092 0.27 0.85 0.12 1.10 1.18
+
+Vmax,SIDM,0 (km/s) 44.6 34.4 31.7 13.7 38.8 26.0
+
+Rmax,SIDM,0 (kpc) 4.93 2.46 0.58 3.72 0.24 0.37
+
+Vmax,Model,0 (km/s) 43.0 31.4 30.3 13.6 38.3 24.6
+
+Rmax,Model,0 (kpc) 5.60 2.00 0.82 3.43 0.045 0.42
+
+Table 3. Characteristic properties of subhalos at z = 0, selected from the cosmological zoom-in
+
+SIDM simulation [5] for testing the parametric model. The virial mass, 0 =
+
+t0 tf
+
+dt/tc(t),
+
+Vmax
+
+and
+
+Rmax are reported for the subhalos. For comparison, their Vmax and Rmax values predicted in the
+
+parametric model with the integral approach are also listed in the last two columns; see the relevant
+
+discussion after eq. (3.3).
+
+Figure 9 shows the Vmax and Rmax evolution of three SIDM subhalos that are in the collapse phase at z = 0 from the parametric model (solid-green) and the N-body simulation [5] (solid-magenta), as well as their CDM counterparts (dashed-black). We see that the model well reproduces the evolution history of Vmax and Rmax of the simulated SIDM subhalos, and
+
+­ 14 ­
+
+SCuobsmhaol-o567
+
+CSuobsmhaol-o945
+
+SCuobsmhaol-o1357
+
+Vmax (km/s)
+
+Vmax (km/s)
+
+Vmax (km/s)
+
+Rmax, phys (kpc)
+
+SIDM CDM Integral model
+
+10114
+
+12
+
+10
+
+8
+
+6
+
+4
+
+2
+
+0
+
+tL (Gyr)
+
+6
+SCuobsmhaol-o567
+5
+
+4
+
+3
+
+2
+
+1
+
+014
+
+12
+
+10
+
+8
+
+6
+
+4
+
+2
+
+0
+
+tL (Gyr)
+
+Rmax, phys (kpc)
+
+10114
+
+12
+
+10
+
+8
+
+6
+
+4
+
+2
+
+0
+
+10114
+
+12
+
+10
+
+8
+
+6
+
+4
+
+2
+
+0
+
+tL (Gyr)
+
+tL (Gyr)
+
+6
+
+4.0
+
+SCuobsmhaol-o945
+
+3.5
+
+SCuobsmhaol-o1357
+
+5
+
+3.0
+
+4 2.5
+
+Rmax, phys (kpc)
+
+3
+
+2.0
+
+1.5 2
+1.0 1
+0.5
+
+014
+
+12
+
+10
+
+8
+
+6
+
+4
+
+2
+
+0
+
+0.014
+
+12
+
+10
+
+8
+
+6
+
+4
+
+2
+
+0
+
+tL (Gyr)
+
+tL (Gyr)
+
+Figure 9. The Vmax (top) and Rmax (bottom) evolution of three SIDM subhalos that are in the deeply collapse phase at z = 0 from the parametric model with the integral approach (solid-green) and the SIDM simulation [5] (solid-magenta), as well as their CDM counterparts (dashed-black).
+
+the agreement is within 10%. For the SIDM subhalos, Vmax increases, while Rmax decreases continuously for tL  6 Gyr, a significant deviation from CDM. In figure 11, we further show the density profiles for all subhalos listed in table 3 at z = 0. We again see the agreement between parametric model (solid-green) and simulation (solid-magenta) predictions for both core-forming and -collapsing SIDM subhalos. Their density profiles different from the corresponding CDM ones (dashed-black).
+
+102
+
+Cosmo-71
+
+104
+
+Cosmo-186
+
+Cosmo-567
+
+Cosmo-665
+
+Cosmo-945 Cosmo-1357
+
+103
+
+Cosmo-71 Cosmo-186 Cosmo-567 Cosmo-665 Cosmo-945 Cosmo-1357
+
+1.0
+
+Cosmo-71
+
+Cosmo-186
+
+0.8
+
+Cosmo-567 Cosmo-665
+
+Cosmo-945
+
+Cosmo-1357
+
+0.6
+
+eff/m (cm2/g) tc (Gyr) t/tc(t)
+
+102
+
+0.4
+
+101
+
+0.2 101
+
+14
+
+12
+
+10
+
+8
+
+6
+
+4
+
+2
+
+0
+
+tL (Gyr)
+
+14
+
+12
+
+10
+
+8
+
+6
+
+4
+
+2
+
+0
+
+0.014
+
+12
+
+10
+
+8
+
+6
+
+4
+
+2
+
+0
+
+tL (Gyr)
+
+tL (Gyr)
+
+Figure 10. The eff /m, tc(t), and t/tc(t) evolution of the SIDM subhalos in table 3, where t is the time duration the halo has evolved since its formation.
+As discussed in Sec. 3.2, eff /m and tc evolve with the mass change, which is captured in the integral approach. Figure 10 shows the eff /m, tc and t/tc evolution of the 6 subhalos
+
+­ 15 ­
+
+listed in table 3. Apart from fluctuations, both eff /m and tc(t) changed moderately on average, within an order of magnitude. The ratio t/tc has large fluctuations but gradually increases since the halo formation.
+
+108
+
+CSuobsmhaol-o567
+
+108
+
+CSuobsmhaol-o945
+
+108
+
+SCuobsmhaol-o1357
+
+107
+
+107
+
+107
+
+ (M /kpc3)
+
+ (M /kpc3)
+
+ (M /kpc3)
+
+106
+
+106
+
+106
+
+105
+
+105
+
+104
+
+SIDM CDM
+
+Integral model
+
+103
+
+100
+
+r (kpc)
+
+104
+
+101
+
+103
+
+108
+
+SCuobsmhaol-o71
+
+108
+
+105
+
+104
+
+100
+r (kpc)
+
+101
+
+103
+
+SCuobsmhaol-o186
+
+108
+
+100
+
+101
+
+r (kpc)
+
+CSuobsmhaol-o665
+
+107
+
+107
+
+107
+
+ (M /kpc3)
+
+ (M /kpc3)
+
+ (M /kpc3)
+
+106
+
+106
+
+106
+
+105
+
+105
+
+105
+
+104
+
+104
+
+104
+
+103
+
+100
+
+101
+
+103
+
+100
+
+101
+
+103
+
+100
+
+101
+
+r (kpc)
+
+r (kpc)
+
+r (kpc)
+
+Figure 11. Density profiles of core-collapsing (top) and -forming (bottom) SIDM subhalos at z = 0 from the parametric model with the integral approach (solid-green) and the SIDM simulation [5] (solid-magenta), as well as their CDM counterparts [5] (dashed-black).
+
+Rmax (kpc) tf/tc
+Rmax (kpc) ceff
+Rmax (kpc) ceff
+
+Integral model prediction Subhalos
+101
+
+100
+
+10-1
+
+101
+
+Vmax (km/s)
+
+1.0
+
+0.9
+
+0.8
+
+0.7
+
+0.6
+
+0.5
+
+0.4
+
+0.3
+
+0.2
+
+0.1
+
+102
+
+0.0
+
+SIDM simulation Subhalos
+101
+
+100
+
+10-1
+
+101
+
+Vmax (km/s)
+
+120
+
+105
+
+90
+
+75
+
+60
+
+45
+
+30
+
+15
+
+102
+
+0
+
+CDM simulation Subhalos
+101
+
+100
+
+10-1
+
+101
+
+Vmax (km/s)
+
+120
+
+105
+
+90
+
+75
+
+60
+
+45
+
+30
+
+15
+
+102
+
+0
+
+Figure 12. The Vmax­Rmax distribution of subhalos predicted using the parametric model with the integral approach (left), where each subhalo is colored according to its tL(zf )/tc value. For comparison, the distributions from the SIDM (middle) and CDM (right) simulations are shown; taken from ref. [5].
+As in [5], the median CDM subhalo Vmax­Rmax relation (solid-black) together with a ±0.6 dex band (dashed-black), and resolution limit (gray-shaded) are shown.
+
+We have applied the parametric model to all 125 resolved CDM subhalos in the cosmological simulation of a Milky Way analog in ref. [5] and obtain their SIDM predictions in the Rmax­Vmax plane. Since some of the low-mass simulated subhalos that undergo strong
+
+­ 16 ­
+
+stripping may suffer from numerical artifacts, we set Vmax = 2 km/s and Rmax = 0.1 kpc, if their values drop below the corresponding ones when performing the discrete summation in eq. (3.3). With this condition, we avoid producing unphysical results while preserving the numerical error in the same order as the numerical noise induced by the resolution limit.
+Figure 12 shows the Rmax­Vmax distributions of the SIDM subhalos predicted using the parametric model (left) and the N-body simulation [5] (middle), compared to the simulated CDM subhalos [5] (right). We see that our model successfully reproduces the main trends of the simulated SIDM subhalos, especially the spread towards the lower-right region in the Rmax­Vmax plane, corresponding to a population of collapsed subhalos. In the upperleft region, the model prediction misses a few subhalos with large Rmax seen in the SIDM simulation. For these subhalos, the tidal mass loss is amplified due to SIDM core formation and they become more diffuse, compared to CDM. Our current model does not capture this effect, as we have assumed that the tidal mass loss rate of an SIDM subhalo is similar to that of its CDM counterpart. The assumption could be violated in some extreme cases, see, e.g., [5, 10, 44, 83, 84]. A dedicated study on this aspect is beyond the scope of this work, and we leave it for future work.
+6 Exploring SIDM parameter space using the parametric model
+In Sec. 4, we applied the parametric model to the isolated CDM halos in ref. [5] and obtained their SIDM counterparts, whose properties well agree with those from the cosmological Nbody simulation. The simulation in ref. [5] assumes 0/m = 147.1 cm2/g and w = 24.33 km/s. Since our model is flexible, it becomes possible to efficiently sample large parameter space of 0/m and w, which can be in turn mapped to fundamental particle physics parameters, such as mediator mass and coupling constant; see ref. [61] for details. As a demonstration, we take the 647 isolated CDM halos in [5] as input and apply the parametric model, while varying 0/m and w over a wide range.
+We first consider four representative constant cross sections to gain insights: /m = 3 cm2/g, 10 cm2/g, 50 cm2/g, and 100 cm2/g. In figure 13, we show the Vcirc(rfid)­Vmax distribution predicted using the parametric model with the basic approach (circle), where each halo is colored according to its tL(zf )/tc value. For comparison, we also include observed galaxies with data compiled in [68] (cross). For /m = 3 cm2/g, all halos are in the coreforming phase, Vcirc(rfid) is systematically lower and its spread for fixed Vmax becomes larger, compared to CDM [5]. As the cross section increases, the number of core-collapsing halos increases accordingly. When /m = 50­100 cm2/g, a significant number of halos are in the collapse phase and they have a high inner density, close to the 1:1 line in the Vcirc(rfid)­Vmax plane. Meanwhile, the most diffused halos are still in the core-forming phase and remain far off the 1:1 line, even for /m = 100 cm2/g. These halos could potentially host ultra-diffuse galaxies in the field [85].
+The deviation of the Vcirc(rfid)­Vmax distribution from the 1:1 line provides a useful measure to characterize the SIDM effects. We fit the halos with a relation of Vcirc(rfid) = b Vmax for the range of 15 km/s < Vmax < 50 km/s, consistent with that for observed galaxies shown in figure 13, and minimize the absolute mean distance from the 1:1 line to determine the parameter b; see figure 13 (solid-black line). Our fit tends to split the selected halos into two equal halves on two sides of the fitted line. For the CDM counterparts, b = 0.82. As the cross section increases, the b value decreases first as the core size increases for most halos, but it increases again as more and more halos are collapsed. For /m = 100 cm2/g,
+­ 17 ­
+
+b = 0.96. As a reference, b = 0.60 for the observed galaxies shown in figure 13. We expect that there is significant coverage bias for the sample of observed galaxies, and hence it is challenging to make a quantitative comparison between observations and SIDM predictions based on the b value. Nevertheless, it is a useful indicator for the overall significance of dark matter self-interactions over a population of halos.
+
+tL(zf)/tc
+
+Vcirc(rfid) (km/s)
+
+1.0
+
+1.0
+
+Vfid = 0.75Vmax 1:1
+
+0.9
+
+Vfid = 0.72Vmax 1:1
+
+0.9
+
+Obs.
+
+0.8
+
+Obs.
+
+0.8
+
+/m = 3 cm2/g
+
+0.7
+
+/m = 10 cm2/g
+
+0.7
+
+tL(zf)/tc Vcirc(rfid) (km/s)
+
+0.6
+
+0.6
+
+0.5
+
+0.5
+
+0.4
+
+0.4
+
+101
+
+0.3
+
+101
+
+0.3
+
+0.2
+
+0.2
+
+0.1
+
+0.1
+
+101
+
+0.0
+
+Vmax (km/s)
+
+101
+
+0.0
+
+Vmax (km/s)
+
+1.0
+
+1.0
+
+Vfid = 0.85Vmax 1:1
+
+0.9
+
+Vfid = 0.96Vmax 1:1
+
+0.9
+
+Obs.
+
+0.8
+
+Obs.
+
+0.8
+
+/m = 50 cm2/g
+
+0.7
+
+/m = 100 cm2/g
+
+0.7
+
+tL(zf)/tc Vcirc(rfid) (km/s)
+
+0.6
+
+0.6
+
+0.5
+
+0.5
+
+0.4
+
+0.4
+
+101
+
+0.3
+
+101
+
+0.3
+
+0.2
+
+0.2
+
+0.1
+
+0.1
+
+101
+
+0.0
+
+Vmax (km/s)
+
+101
+
+0.0
+
+Vmax (km/s)
+
+tL(zf)/tc
+
+Vcirc(rfid) (km/s)
+
+Figure 13. The Vcirc(rfid)­Vmax distribution of isolated halos predicted using the parametric model with the basic approach for the constant cross sections /m = 3 cm2/g, 10 cm2/g, 50 cm2/g and 100 cm2/g (circle). Each halo is colored according to tL(zf )/tc. The Vcirc(rfid)­Vmax relation from fit-
+ting to the halos in the range 15 km/s < Vmax < 50 km/s (solid-black), the 1:1 relation (dotted-black),
+and the data points from observed galaxies compiled in [68] (red cross) are shown for comparison.
+
+In figure 14, we show contours of the fitted b value based on a scan with a grid of 100 × 100 points in the w­0/m plane, where 0/m is the overall normalization factor of the cross section and w controls the velocity dependence. We see the distribution of b has nontrivial features, including a valley (darker green) and a hill (darker pink). In the lowerleft region, the SIDM effect is small and the b value reduces to the CDM case around 0.82. For w  O(10) km/s, the increase of 0/m first decreases b, enlarging the spread of halos
+
+­ 18 ­
+
+w (km/s) b
+
+1.00
+
+102
+
+0.96
+
+0.92
+
+0.88
+
+0.84
+101 0.80
+
+0.76
+
+0.72
+
+1010 00
+
+101
+
+102
+
+0.68
+
+0/m (cm2/g)
+
+Figure 14. Contours of the fitted b value in the w­0/m plane, where 0/m is the overall normalization factor of the self-scattering cross section and w controls the velocity dependence;
+see eq. (1.3). The squares denote the two SIDM models on the same contour with b = 0.75: (0/m, w) = (300 cm2/g, 8 km/s) (red) and (5 cm2/g, 65 km/s) (blue), which will be studied further.
+
+in the Vcirc(rfid)­Vmax from the 1:1 line. When 0/m further increases, b increases as well because more and more halos enter the collapse phase. These nontrivial features could help
+us distinguish different particle physics models of SIDM.
+To further disentangle the degeneracy effect associated with the parameter b, we select
+two example velocity-dependent SIDM models that have the same b = 0.75 for a detailed comparison: (0/m, w) = (300 cm2/g, 8 km/s) and (5 cm2/g, 65 km/s), denoted by the red and blue squares in figure 14, respectively. Figure 15 shows the Vcirc(rfid)­Vmax distribution for the two models. For 15 km/s < Vmax < 50 km/s, the distribution is similar for both models as expected. Nevertheless, for the halos with Vmax  15 km/s, the model with (0/m, w) = (300 cm2/g, 8 km/s) predicts much larger spread. The former has a much larger effective cross section in the regime Vmax  15 km/s, as illustrated in figure 16 (left), and hence halos are more cored or collapsed, resulting in a larger spread.
+On the other hand, for more massive halos with Vmax  15 km/s, the effective cross section of the (300 cm2/g, 8 km/s) model drops below that of the (5 cm2/g, 65 km/s) model,
+while approaching the CDM limit for Vmax  100 km/s. Thus the former predicts smaller cores and higher inner circular velocities than the latter model, as demonstrated in figure 16
+(right), where we show the halo rotation curves in the two regimes 10 km/s < Vmax < 15 km/s (solid) and Vmax > 50 km/s (dashed) for the models.
+We have demonstrated it is possible to further break the degeneracy and distinguish
+different SIDM models with similar b values by applying the parametric model to isolated
+halos over a wide range of masses (and thus velocities). We can further extend the analysis to satellite halos. For example, in the model with (0/m, w) = (300 cm2/g, 8 km/s), we expect that most of the ultra-faint dwarf galaxies of the Milky Way would be in the collapse
+phase, resulting in a dense core. In practice, it is important to take into account observational
+
+­ 19 ­
+
+Vcirc(rfid) (km/s) tL(zf)/tc
+Vcirc(rfid) (km/s) tL(zf)/tc
+
+1.0
+
+1.0
+
+Vfid = 0.75Vmax 1:1
+
+0.9
+
+Vfid = 0.75Vmax 1:1
+
+0.9
+
+Obs.
+
+0.8
+
+Obs.
+
+0.8
+
+0/m = 300 cm2/g
+
+0.7
+
+0/m = 5 cm2/g
+
+0.7
+
+w = 8 km/s
+
+0.6
+
+w = 65 km/s
+
+0.6
+
+0.5
+
+0.5
+
+0.4
+
+0.4
+
+101
+
+0.3
+
+101
+
+0.3
+
+0.2
+
+0.2
+
+0.1
+
+0.1
+
+101
+
+0.0
+
+Vmax (km/s)
+
+101
+
+0.0
+
+Vmax (km/s)
+
+Figure 15. The Vcirc(rfid)­Vmax distribution of isolated halos predicted using the parametric model with the basic approach for two SIDM models that have the same b value (b = 0.75): (0/m, w) = (300 cm2/g, 8 km/s) (left) and (5 cm2/g, 65 km/s) (right). Each halo is colored according to tL(zf )/tc. The Vcirc(rfid)­Vmax relation from fitting to the halos in the range 15 km/s < Vmax < 50 km/s (solidblack), the 1:1 relation (dotted-black), and the data points from observed galaxies compiled in [68]
+(red cross) are shown for comparison.
+
+103
+
+0/m = 300 cm2/g, w = 8 km/s
+
+102 Dashed : Vmax > 50 km/s
+
+0/m = 5 cm2/g, w = 65 km/s
+
+Solid : Vmax  [10, 15] km/s
+
+102
+
+eff/m (cm2/g)
+Vcirc(r) (km/s)
+
+101
+
+100 101
+10-1
+
+10-12 00
+
+101
+
+102
+
+Vmax (km/s)
+
+100
+r (kpc)
+
+Figure 16. The effective cross section per mass as a function of Vmax in CDM for the velocitydependent SIDM models (left): (0/m, w) = (300 cm2/g, 8 km/s) (red) and (5 cm2/g, 65 km/s)
+(blue); their corresponding rotation curves (right) for isolate halos with 10 km/s < Vmax < 15 km/s
+(solid) and Vmax > 50 km/s (dashed).
+
+­ 20 ­
+
+uncertainties, baryonic contributions to the velocity of tracers, and selection bias of galaxy samples. We will leave the application of the parametric model to observed galaxies for future work.
+7 Conclusions
+In this work, we have proposed a parametric model to transfer CDM (sub)halos into their SIDM counterparts. The model is based on an analytical universal density profile, which can accurately describe the dark matter distribution of halos over the course of the evolution. We calibrated the density profile using controlled N-body simulations of an isolated halo and obtained a set of equations capturing the time evolution of the parameters of the density profile. We then introduced two ways of applying the model. The basic approach uses the scale radius and density of an isolated CDM halo (z = 0) as input and reconstructs the halo's evolution history in the presence of dark matter self-interactions. The integral approach further extends the basic one to incorporate the mass change, and integrates the SIDM effects along the evolution history. Thus it can be used to model gravothermal evolution of subhalos, which suffer from tidal mass loss.
+We have tested and validated the parametric model using zoom-in cosmological SIDM simulations of a Milky Way analog for both isolated halos and subhalos. We further applied it to map out the relevant parameter space for a particle physics model of SIDM. In the future, we could apply the parametric model to state-of-the-art cosmological CDM simulations, e.g., FIRE2 [86, 87] and IllustrisTNG [88, 89], and transform existing CDM (sub)halo properties into SIDM predictions. We could integrate the parametric model together with existing semianalytical models with halo merger trees [90­92] and subhalo evolution trajectories [93]. The parametric model is flexible and it provides an efficient tool for identifying favored SIDM parameter regions in light of latest observations of galactic systems, such as satellite galaxies of the Milky Way and ultra-diffuse galaxies.
+We could further improve the model. While this work focuses on the dark matter-only case, it is crucial to include baryonic effects on gravothermal evolution in order to make better connections with observations of galaxies whose baryon concentration is high. For the integral approach, extra terms could be included to incorporate SIDM effects that couple to mass changes. In addition, we use the collapse timescale as a normalization factor to derive the universal density profile. It would be interesting to explore if there is a more accurate way to estimate the timescale for halos in cosmological environments. We will leave these interesting topics for future investigation.
+We provide example scripts for applying the parametric model at: https://github. com/DanengYang/parametricSIDM
+Acknowledgments
+We thank Manoj Kaplinghat and Daniel Gilman for helpful discussion, and the anonymous referee for suggesting the Read profile. D.Y. and H.-B. Y were supported by the John Templeton Foundation under grant ID #61884 and the U.S. Department of Energy under grant No. de-sc0008541. Y.Z. was supported by the Kavli Institute for Cosmological Physics at the University of Chicago through an endowment from the Kavli Foundation and its founder Fred Kavli. The opinions expressed in this publication are those of the authors and do not necessarily reflect the views of the John Templeton Foundation.
+­ 21 ­
+
+A The parametric model based on the Read profile
+
+(M /kpc3)
+
+1010
+t/tc = 0.00
+109
+
+108
+
+107
+
+106
+/m = 7.1 cm2/g Fitted
+
+105
+
+10 2
+
+r10 1(kpc)
+
+100
+
+109
+
+t/tc = 0.35
+
+108
+
+107
+
+106
+
+/m = 7.1 cm2/g
+
+Fitted
+
+105
+
+10 2
+
+r10 1(kpc)
+
+100
+
+(M /kpc3)
+
+(M /kpc3)
+
+109
+
+t/tc = 0.09
+
+108
+
+107
+
+106
+
+/m = 7.1 cm2/g
+
+Fitted
+
+105
+
+10 2
+
+r10 1(kpc)
+
+100
+
+109
+
+t/tc = 0.50
+
+108
+
+107
+
+106
+
+/m = 7.1 cm2/g Fitted
+105
+
+10 2
+
+r10 1(kpc)
+
+100
+
+(M /kpc3)
+
+(M /kpc3)
+
+109
+
+t/tc = 0.18
+
+108
+
+107
+
+106
+
+/m = 7.1 cm2/g
+
+Fitted
+
+105
+
+10 2
+
+r10 1(kpc)
+
+100
+
+1010
+
+t/tc = 1.00
+
+109
+
+108
+
+107
+
+106
+/m = 7.1 cm2/g Fitted
+105
+
+10 2
+
+r10 1(kpc)
+
+100
+
+(M /kpc3)
+
+Figure 17. Density profiles of the simulated BM2 halo at different times for an effective constant cross section of eff /m = 7.1 cm2/g (dashed-red); data from ref. [61]. Each simulated density profile is fitted using the Read profile eq. (A.1) from refs. [73, 74] (solid-blue).
+
+In this section, we show that the cored density ("Read") profile proposed in refs. [73, 74] can also be used to parametrize the evolution of the SIDM halo. The Read profile is formulated based on the NFW profile,
+
+Read(r)
+
+=
+
+f nNFW
+
++
+
+nf n-1(1 - 4r2rc
+
+f2) MNFW,
+
+(A.1)
+
+where rc is the core radius, f (r) = tanh(r/rc), and n is a parameter in the range 0 < n  1. The NFW density and mass profiles are
+
+NFW(r) =
+r
+rs
+
+s
+
+1
+
++
+
+r rs
+
+2 , MNFW(r) = 4srs3 ln
+
+r 1+
+rs
+
+r
+
+-
+
+.
+
+r + rs
+
+(A.2)
+
+The enclosed mass follows the relation MRead = f n(r)MNFW(r). For r  rc, f n(r) = 1, and MRead = MNFW(r). In the limit of rc  0, f  1 and Read(r)  (r)NFW. In this work, we fix n = 1, fit the profile in eq. (A.1) to the simulated BM2 halo, and determine the parameters s, rs, and rc, accordingly.
+Figure 17 shows the Read profile (solid-blue) fitted to the simulated density profile (dashed-red) of the BM2 halo at t/tc = 0, 0.09, 0.18, 0.25, 0.50 and 1. We have checked that the overall fit quality of the Read profile is similar to that of our cored profile in eq. (2.1); see figure 1.
+
+­ 22 ­
+
+s/s, 0 rs/rs, 0 rc/rs, 0
+
+101
+
+/m = 7.1 cm2/g
+
+Fitted curve
+
+1000.0
+
+0.2
+
+0.4
+
+0.6
+
+0.8
+
+1.0
+
+t/tc
+
+1.0
+
+0.9
+
+0.8
+
+0.7
+
+0.6
+
+0.5
+
+/m = 7.1 cm2/g
+
+0.4
+
+Fitted curve
+
+0.0
+
+0.2
+
+0.4
+
+0.6
+
+0.8
+
+1.0
+
+t/tc
+
+0.7
+
+0.6
+
+0.5
+
+0.4
+
+0.3
+
+0.2
+
+0.1
+
+/m = 7.1 cm2/g
+
+Fitted curve
+
+0.00.0
+
+0.2
+
+0.4
+
+0.6
+
+0.8
+
+1.0
+
+t/tc
+
+Figure 18. Evolution of normalized density parameters s/s,0 (left), rs/rs,0 (middle), and rc/rs,0 (right) from the calibrated functions in eq. (A.3) for the Read profile (solid-blue) and the N-body SIDM simulation with the effective constant cross section /m = 7.1 cm2/g [61] (solid-red).
+
+As was done for the profile of eq. (2.1), we fit the Read profile to the simulated density one
+
+of the BM2 halo at a successive time interval of 0.2 Gyr, and obtain the evolution trajectories
+
+for the parameters s, rs, and rc,
+
+s = 1.335 + 0.7746 + 8.042 5 - 13.89 7 + 10.18 9 + (1 - 1.335)(ln 0.001)-1 ln ( + 0.001) , s,0
+
+rs = 0.8771 - 0.2372 + 0.2216 2 - 0.3868 3 + (1 - 0.8771)(ln 0.001)-1 ln ( + 0.001) , rs,0
+
+rc
+
+=
+
+ 3.324 
+
+-
+
+4.897
+
++
+
+3.367 2
+
+-
+
+2.512 3
+
++
+
+0.8699 4,
+
+rs,0
+
+(A.3)
+
+where the subscript "0" denotes the corresponding value of the initial NFW profile. We found the same functional forms of eq. (2.3) work well for the Read profile, with the adjustment of the coefficients; see figure 18. It is important to note that the fitted values of s, rs, and rc of the Read profile are different from those of our cored profile in eq. (2.1). We have also numerically checked Vmax and Rmax using the two fitted density profiles and found they agree within 10%.
+
+References
+[1] S. Tulin and H.-B. Yu, Physics Reports 730, 1 (2018), 1705.02358. [2] S. Adhikari, A. Banerjee, K. K. Boddy, F.-Y. Cyr-Racine, H. Desmond, C. Dvorkin, B. Jain,
+F. Kahlhoefer, M. Kaplinghat, A. Nierenberg, et al., arXiv e-prints arXiv:2207.10638 (2022), 2207.10638. [3] D. N. Spergel and P. J. Steinhardt, Phys. Rev. Lett. 84, 3760 (2000), astro-ph/9909386. [4] C. A. Correa, M. Schaller, S. Ploeckinger, N. Anau Montel, C. Weniger, and S. Ando (2022), 2206.11298. [5] D. Yang, E. O. Nadler, and H.-B. Yu (2022), 2211.13768. [6] S. Balberg, S. L. Shapiro, and S. Inagaki, APJ 568, 475 (2002), astro-ph/0110561. [7] S. Balberg, S. L. Shapiro, and S. Inagaki, Astrophys. J. 568, 475 (2002), astro-ph/0110561. [8] J. Koda and P. R. Shapiro, MNRAS 415, 1125 (2011), 1101.3097. [9] H. Nishikawa, K. K. Boddy, and M. Kaplinghat, Phys. Rev. D 101, 063009 (2020), 1901.00499.
+
+­ 23 ­
+
+[10] O. Sameie, H.-B. Yu, L. V. Sales, M. Vogelsberger, and J. Zavala (2019), 1904.07872. [11] J. Zavala, M. R. Lovell, M. Vogelsberger, and J. D. Burger, Phys. Rev. D 100, 063007 (2019),
+1904.09998. [12] M. Kaplinghat, M. Valli, and H.-B. Yu, Mon. Not. Roy. Astron. Soc. 490, 231 (2019),
+1904.04939. [13] F. Kahlhoefer, M. Kaplinghat, T. R. Slatyer, and C.-L. Wu, JCAP 12, 010 (2019), 1904.10539. [14] C. A. Correa, Mon. Not. Roy. Astron. Soc. 503, 920 (2021), 2007.02958. [15] H. C. Turner, M. R. Lovell, J. Zavala, and M. Vogelsberger, Mon. Not. Roy. Astron. Soc. 505,
+5327 (2021), 2010.02924. [16] O. Slone, F. Jiang, M. Lisanti, and M. Kaplinghat, Phys. Rev. D 107, 043014 (2023),
+2108.03243. [17] M. Silverman, J. S. Bullock, M. Kaplinghat, V. H. Robles, and M. Valli, Mon. Not. Roy.
+Astron. Soc. 518, 2418 (2022), 2203.10104. [18] Q. E. Minor, S. Gad-Nasr, M. Kaplinghat, and S. Vegetti, Mon. Not. Roy. Astron. Soc. 507,
+1662 (2021), 2011.10627. [19] D. Yang and H.-B. Yu, Phys. Rev. D 104, 103031 (2021), 2102.02375. [20] D. Gilman, J. Bovy, T. Treu, A. Nierenberg, S. Birrer, A. Benson, and O. Sameie, Mon. Not.
+Roy. Astron. Soc. 507, 2432 (2021), 2105.05259. [21] D. Gilman, Y.-M. Zhong, and J. Bovy, Phys. Rev. D 107, 103008 (2023), 2207.13111. [22] E. O. Nadler, D. Yang, and H.-B. Yu (2023), 2306.01830. [23] J. Pollack, D. N. Spergel, and P. J. Steinhardt, Astrophys. J. 804, 131 (2015), 1501.00017. [24] J. Choquette, J. M. Cline, and J. M. Cornell, JCAP 07, 036 (2019), 1812.05088. [25] W.-X. Feng, H.-B. Yu, and Y.-M. Zhong, Astrophys. J. Lett. 914, L26 (2021), 2010.15132. [26] W.-X. Feng, H.-B. Yu, and Y.-M. Zhong, JCAP 2022, 036 (2022), 2108.11967. [27] H. Xiao, X. Shen, P. F. Hopkins, and K. M. Zurek, JCAP 07, 039 (2021), 2103.13407. [28] T. Meshveliani, J. Zavala, and M. R. Lovell, Phys. Rev. D 107, 083010 (2023), 2210.01817. [29] M. Vogelsberger, J. Zavala, and A. Loeb, Mon. Not. Roy. Astron. Soc. 423, 3740 (2012),
+1201.5892. [30] M. Rocha, A. H. G. Peter, J. S. Bullock, M. Kaplinghat, S. Garrison-Kimmel, J. Onorbe, and
+L. A. Moustakas, Mon. Not. Roy. Astron. Soc. 430, 81 (2013), 1208.3025. [31] A. H. G. Peter, M. Rocha, J. S. Bullock, and M. Kaplinghat, MNRAS 430, 105 (2013),
+1208.3026. [32] J. Zavala, M. Vogelsberger, and M. G. Walker, Mon. Not. Roy. Astron. Soc. 431, L20 (2013),
+1211.6426. [33] M. Vogelsberger, J. Zavala, F.-Y. Cyr-Racine, C. Pfrommer, T. Bringmann, and K. Sigurdson,
+Mon. Not. Roy. Astron. Soc. 460, 1399 (2016), 1512.05349. [34] A. Fitts et al., Mon. Not. Roy. Astron. Soc. 490, 962 (2019), 1811.11791. [35] V. H. Robles, T. Kelley, J. S. Bullock, and M. Kaplinghat, Mon. Not. Roy. Astron. Soc. 490,
+2117 (2019), 1903.01469. [36] A. Banerjee, S. Adhikari, N. Dalal, S. More, and A. Kravtsov (2019), 1906.12026. [37] O. Sameie, M. Boylan-Kolchin, R. Sanderson, D. Vargya, P. F. Hopkins, A. Wetzel, J. Bullock,
+A. Graus, and V. H. Robles, Mon. Not. Roy. Astron. Soc. 507, 720 (2021), 2102.12480.
+­ 24 ­
+
+[38] E. O. Nadler, A. Banerjee, S. Adhikari, Y.-Y. Mao, and R. H. Wechsler (2020), 2001.08754. [39] T. Ebisu, T. Ishiyama, and K. Hayashi, Phys. Rev. D 105, 023016 (2022), 2107.05967. [40] O. D. Elbert, J. S. Bullock, M. Kaplinghat, S. Garrison-Kimmel, A. S. Graus, and M. Rocha,
+Astrophys. J. 853, 109 (2018), 1609.08626. [41] P. Creasey, O. Sameie, L. V. Sales, H.-B. Yu, M. Vogelsberger, and J. Zavala, Mon. Not. Roy.
+Astron. Soc. 468, 2283 (2017), 1612.03903. [42] O. Sameie, P. Creasey, H.-B. Yu, L. V. Sales, M. Vogelsberger, and J. Zavala, Mon. Not. Roy.
+Astron. Soc. 479, 359 (2018), 1801.09682. [43] R. Huo, H.-B. Yu, and Y.-M. Zhong, JCAP 06, 051 (2020), 1912.06757. [44] D. Yang, H.-B. Yu, and H. An, Phys. Rev. Lett. 125, 111105 (2020), 2002.02102. [45] Z. C. Zeng, A. H. G. Peter, X. Du, A. Benson, S. Kim, F. Jiang, F.-Y. Cyr-Racine, and
+M. Vogelsberger, Mon. Not. Roy. Astron. Soc. 513, 4845 (2022), 2110.00259. [46] J. D. Burger, J. Zavala, L. V. Sales, M. Vogelsberger, F. Marinacci, and P. Torrey, Mon. Not.
+Roy. Astron. Soc. 513, 3458 (2022), 2108.07358. [47] T. S. Ray, S. Sarkar, and A. K. Shaw, JCAP 09, 011 (2022), 2202.12247. [48] R. Essig, S. D. Mcdermott, H.-B. Yu, and Y.-M. Zhong, Phys. Rev. Lett. 123, 121102 (2019),
+1809.01144. [49] S. Yang, X. Du, Z. C. Zeng, A. Benson, F. Jiang, E. O. Nadler, and A. H. G. Peter, Astrophys.
+J. 946, 47 (2023), 2205.02957. [50] S. Yang, F. Jiang, A. Benson, Y.-M. Zhong, C. Mace, X. Du, Z. C. Zeng, and A. H. G. Peter
+(2023), 2305.05067. [51] Y.-M. Zhong, D. Yang, and H.-B. Yu (2023), 2306.08028. [52] J. L. Feng, M. Kaplinghat, and H.-B. Yu, Phys. Rev. Lett. 104, 151301 (2010), 0911.0422. [53] J. L. Feng, M. Kaplinghat, H. Tu, and H.-B. Yu, JCAP 2009, 004 (2009), 0905.3039. [54] S. Tulin, H.-B. Yu, and K. M. Zurek, Phys. Rev. D 87, 115007 (2013), 1302.3898. [55] F. Kahlhoefer, K. Schmidt-Hoberg, M. T. Frandsen, and S. Sarkar, Mon. Not. Roy. Astron.
+Soc. 437, 2865 (2014), 1308.3419. [56] P. Agrawal, F.-Y. Cyr-Racine, L. Randall, and J. Scholtz, JCAP 2017, 022 (2017),
+1610.04611. [57] A. Robertson, R. Massey, and V. Eke, Mon. Not. Roy. Astron. Soc. 467, 4719 (2017),
+1612.03906. [58] F. Kahlhoefer, K. Schmidt-Hoberg, and S. Wild, JCAP 08, 003 (2017), 1704.02149. [59] J. Kummer, F. Kahlhoefer, and K. Schmidt-Hoberg, Mon. Not. Roy. Astron. Soc. 474, 388
+(2018), 1706.04794. [60] B. Colquhoun, S. Heeba, F. Kahlhoefer, L. Sagunski, and S. Tulin, Phys. Rev. D 103, 035006
+(2021), 2011.04679. [61] D. Yang and H.-B. Yu, JCAP 2022, 077 (2022), 2205.03392. [62] S. Girmohanta and R. Shrock, Phys. Rev. D 106, 063013 (2022), 2206.14395. [63] M. Kaplinghat, S. Tulin, and H.-B. Yu, Phys. Rev. Lett. 116, 041302 (2016), 1508.03339. [64] A. Robertson, R. Massey, V. Eke, J. Schaye, and T. Theuns, Mon. Not. Roy. Astron. Soc. 501,
+4610 (2021), 2009.07844. [65] F. Jiang et al., Mon. Not. Roy. Astron. Soc. 521, 4630 (2023), 2206.12425.
+­ 25 ­
+
+[66] A. Kamada, M. Kaplinghat, A. B. Pace, and H.-B. Yu, Phys. Rev. Lett. 119, 111102 (2017), 1611.02716.
+[67] T. Ren, A. Kwa, M. Kaplinghat, and H.-B. Yu, Physical Review X 9, 031020 (2019), 1808.05695.
+[68] I. M. E. Santos-Santos, J. F. Navarro, A. Robertson, A. Benítez-Llambay, K. A. Oman, M. R. Lovell, C. S. Frenk, A. D. Ludlow, A. Fattahi, and A. Ritz, MNRAS 495, 58 (2020), 1911.09116.
+[69] A. Zentner, S. Dandavate, O. Slone, and M. Lisanti, JCAP 07, 031 (2022), 2202.00012. [70] N. J. Outmezguine, K. K. Boddy, S. Gad-Nasr, M. Kaplinghat, and L. Sagunski (2022),
+2204.06568. [71] V. Springel, MNRAS 364, 1105 (2005), astro-ph/0505010. [72] A. Robertson, R. Massey, and V. Eke, Mon. Not. Roy. Astron. Soc. 465, 569 (2017),
+1605.04307. [73] J. I. Read, O. Agertz, and M. L. M. Collins, MNRAS 459, 2573 (2016), 1508.04143. [74] J. I. Read, G. Iorio, O. Agertz, and F. Fraternali, MNRAS 462, 3628 (2016), 1601.05821. [75] C. A. Correa, J. S. B. Wyithe, J. Schaye, and A. R. Duffy, Mon. Not. Roy. Astron. Soc. 450,
+1514 (2015), 1409.5228. [76] G. Hinshaw, D. Larson, E. Komatsu, D. N. Spergel, C. L. Bennett, J. Dunkley, M. R. Nolta,
+M. Halpern, R. S. Hill, N. Odegard, et al., APJS 208, 19 (2013), 1212.5226. [77] C. Giocoli, G. Tormen, and R. K. Sheth, Mon. Not. Roy. Astron. Soc. 422, 185 (2012),
+1111.6977. [78] F. C. van den Bosch, G. Ogiya, O. Hahn, and A. Burkert, Mon. Not. Roy. Astron. Soc. 474,
+3043 (2018), 1711.05276. [79] A. A. Klypin, S. Gottlober, and A. V. Kravtsov, Astrophys. J. 516, 530 (1999),
+astro-ph/9708191. [80] E. A. Baltz, P. Marshall, and M. Oguri, JCAP 01, 015 (2009), 0705.0682. [81] E. O. Nadler, A. Banerjee, S. Adhikari, Y.-Y. Mao, and R. H. Wechsler, APJ 896, 112 (2020),
+2001.08754. [82] M. Shirasaki, T. Okamoto, and S. Ando, MNRAS 516, 4594 (2022), 2205.09920. [83] J. Moreno, S. Danieli, J. S. Bullock, R. Feldmann, P. F. Hopkins, O. çatmabacak, A. Gurvich,
+A. Lazar, C. Klein, C. B. Hummels, et al., Nature Astronomy 6, 496 (2022), 2202.05836. [84] T. Carleton, R. Errani, M. Cooper, M. Kaplinghat, J. Peñarrubia, and Y. Guo, MNRAS 485,
+382 (2019), 1805.06896. [85] D. Kong, M. Kaplinghat, H.-B. Yu, F. Fraternali, and P. E. Mancera Piña, APJ 936, 166
+(2022), 2204.05981. [86] P. F. Hopkins, A. Wetzel, D. Keres, C.-A. Faucher-Giguère, E. Quataert, M. Boylan-Kolchin,
+N. Murray, C. C. Hayward, S. Garrison-Kimmel, C. Hummels, et al., MNRAS 480, 800 (2018), 1702.06148. [87] A. Wetzel et al. (2022), 2202.06969. [88] A. Pillepich et al., Mon. Not. Roy. Astron. Soc. 473, 4077 (2018), 1703.02970. [89] D. Nelson et al. (2018), 1812.05609. [90] P. S. Behroozi, R. H. Wechsler, H.-Y. Wu, M. T. Busha, A. A. Klypin, and J. R. Primack, APJ 763, 18 (2013), 1110.4370.
+­ 26 ­
+
+[91] R. S. Somerville, P. F. Hopkins, T. J. Cox, B. E. Robertson, and L. Hernquist, Mon. Not. Roy. Astron. Soc. 391, 481 (2008), 0808.1227.
+[92] A. J. Benson, New Astron. 17, 175 (2012), 1008.1786. [93] G. Ogiya, F. C. van den Bosch, O. Hahn, S. B. Green, T. B. Miller, and A. Burkert, Mon. Not.
+Roy. Astron. Soc. 485, 189 (2019), 1901.08601.
+­ 27 ­
+
+
