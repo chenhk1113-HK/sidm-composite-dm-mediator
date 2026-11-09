@@ -1,0 +1,1983 @@
+astro-ph/9508025   7 Aug 1995
+The Structure of Cold Dark Matter Halos
+Julio F/. Na v arro
+/1
+Stewar d Observatory/, The University of A rizona/, T ucson/, AZ/, /8/5/7/2/1/, USA/.
+Carlos S/. F renk
+Physics Dep artment/, University of Durham/, Durham DH/1 /3LE/, England/.
+Simon D/.M/. White
+Max Planck Institut f / ur Astr ophysik/, Karl/-Schwarzschild Str asse /1/, D/-/8/5/7/4/0/, Gar ching/, Germany/.
+ABSTRA CT
+W e use N/-b o dy sim ulations to in v estigate the structure of dark halos in the standard
+Cold Dark Matter cosmogon y /. Halos are excised from sim ulations of cosmologically rep/-
+resen tativ e regions and are resim ulated individually at high resolution/. W e study ob jects
+with masses ranging from those of dw arf galaxy halos to those of ric h galaxy clusters/.
+The spherically a v eraged densit y pro/les of all our halos can b e /t o v er t w o decades in
+radius b y scaling a simple /\univ ersal/" pro/le/. The c haracteristic o v erdensit y of a halo/, or
+equiv alen tly its concen tration/, correlates strongly with halo mass in a w a y whic h re/ects
+the mass dep endence of the ep o c h of halo formation/. Halo pro/les are appro ximately
+isothermal o v er a large range in radii/, but are signi/can tly shallo w er than r
+/BnZr /2
+near the
+cen ter and steep er than r
+/BnZr /2
+near the virial radius/. Matc hing the observ ed rotation
+curv es of disk galaxies requires disk mass/-to/-ligh t ratios to increase systematically with
+luminosit y /. F urther/, it suggests that the halos of brigh t galaxies dep end only w eakly on
+galaxy luminosit y and ha v e circular v elo cities signi/can tly lo w er than the disk rotation
+sp eed/. This ma y explain wh y luminosit y and dynamics are uncorrelated in observ ed
+samples of binary galaxies and of satellite//spiral systems/. F or galaxy clusters/, our halo
+mo dels are consisten t b oth with the presence of gian t arcs and with the observ ed struc/-
+ture of the in tracluster medium/, and they suggest a simple explanation for the disparate
+estimates of cluster core radii found b y previous authors/. Our results also highligh t t w o
+shortcomings of the CDM mo del/. CDM halos are to o concen trated to b e consisten t with
+the halo parameters inferred for dw arf irregulars/, and the predicted abundance of galaxy
+halos is larger than the observ ed abundance of galaxies/. The /rst problem ma y imply
+that the core structure of dw arf galaxies w as altered b y the galaxy formation pro cess/,
+the second that galaxies failed to form /(or remain undetected/) in man y dark halos/.
+/1
+Bart J/. Bok F ello w/.
+/1
+/1/. In tro duction
+Analytic calculations and n umerical sim ulations
+b oth suggest that the densit y pro/les of dark mat/-
+ter halos ma y con tain useful information regarding
+the cosmological parameters of the Univ erse and the
+p o w er sp ectrum of initial densit y /uctuations/. F or
+example/, the secondary infall mo dels of Gunn /& Gott
+/(/1/9/7/2/) established that gra vitational collapse could
+lead to the formation of virialized systems with al/-
+most isothermal densit y pro/les/. This result/, fur/-
+ther re/ned b y Fillmore /& Goldreic h /(/1/9/8/4/) and
+Bertsc hinger /(/1/9/8/5/)/, suggested a cosmological signi//-
+cance for the observ ation that the rotation curv es of
+galactic disks are /at/.
+This analytic w ork w as extended b y Ho/man /&
+Shaham /(/1/9/8/5/) and Ho/man /(/1/9/8/8/)/, who p oin ted out
+that the structure of halos should also dep end on the
+v alue of the densit y parameter /
+ and the p o w er sp ec/-
+trum of initial densit y /uctuations/. Studying scale/-
+free sp ectra/, P /( k /) // k
+n
+/( /BnZr /3 /< n /< /4/)/, these authors
+concluded that halo densit y pro/les should steep en
+for larger v alues of n and lo w er v alues of /
+/. Appro xi/-
+mately /at circular v elo cit y curv es w ere predicted for
+/BnZr /2 /< n /< /BnZr /1 and /
+ / /1/. These conclusions w ere
+con/rmed b y N/-b o dy exp erimen ts /(F renk et al/. /1/9/8/5/,
+/1/9/8/8/, Quinn et al/. /1/9/8/6/, Efstathiou et al/. /1/9/8/8a/,
+Zurek et al/. /1/9/8/8/) and supp orted the then emerging
+Cold Dark Matter scenario/, since in this mo del the ef/-
+fectiv e slop e of the p o w er sp ectrum on galactic mass
+scales is n
+ef f
+/ /BnZr /1 /: /5 /(Blumen thal et al/. /1/9/8/4/, Da vis
+et al/. /1/9/8/5/)/.
+It has b ecome customary to mo del virialized halos
+b y isothermal spheres c haracterized b y t w o param/-
+eters/; a v elo cit y disp ersion and a core radius/. F or
+galaxies/, the halo v elo cit y disp ersion /(or its circular
+v elo cit y /, de/ned b y V
+/2
+c
+/= GM /=r /) is often assumed to
+b e directly prop ortional to the c haracteristic v elo cit y
+of the observ ed galaxy /. This assumption allo ws ob/-
+serv ations to b e compared directly to the results of
+cosmological N/-b o dy sim ulations or of analytic mo d/-
+els for galaxy formation /(see e/.g/. F renk et al/. /1/9/8/8/,
+White /& F renk /1/9/9/1/, Cole /1/9/9/1/, Lacey et al/. /1/9/9/3/,
+Kau/mann et al/. /1/9/9/3/, Cole et al/. /1/9/9/4/)/. Ho w/-
+ev er/, this simple h yp othesis do es not seem to b e sup/-
+p orted b y observ ation/. If more massiv e halos w ere in/-
+deed asso ciated with faster rotating disks and so with
+brigh ter galaxies/, a correlation w ould b e exp ected b e/-
+t w een the luminosit y of binary galaxies and the rel/-
+ativ e v elo cit y of their comp onen ts/. Similarly /, there
+should b e a correlation b et w een the v elo cit y of a satel/-
+lite galaxy relativ e to its primary and the rotation
+v elo cit y of the primary/'s disk/. No suc h correlations
+are apparen t in existing data /(see/, e/.g/. White et al/.
+/1/9/8/3/, Zaritsky et al/. /1/9/9/3/)/. A p ossible explanation
+ma y come from the w ork of P ersic /& Salucci /(/1/9/9/1/)/,
+who argue that halo circular v elo cit y is only w eakly
+related to disk rotation sp eed/.
+Observ ational estimates of the core radii of dark
+halos ha v e also led to con/icting results/. Large core
+radii ha v e b een adv o cated in order to accommo date
+the con tribution of the luminous comp onen t to the
+rotation curv es of disk galaxies /(Blumen thal et al/.
+/1/9/8/6/, Flores et al/. /1/9/9/3/)/; to accoun t for the shap e
+of the rotation curv es of dw arf galaxies /(Flores /& Pri/-
+mac k /1/9/9/4/, Mo ore /1/9/9/4/)/; and to reconcile X/-ra y clus/-
+ter co oling /o w mo dels with observ ations /(F abian et
+al/. /1/9/9/1/)/. On the other hand/, the gian t arcs pro/-
+duced b y gra vitational lensing of bac kground galax/-
+ies b y galaxy clusters require cluster core radii to b e
+small /(see e/.g/. the review b y Soucail /& Mellier /1/9/9/4/)/.
+The v ery existence of a /\core/"/, i/.e/. a cen tral re/-
+gion where the densit y is appro ximately constan t/, has
+b een c hallenged b y recen t high resolution n umerical
+w ork/. N/-b o dy sim ulations of the formation of galac/-
+tic halos and galaxy cluster halos pro vide no /rm ev/-
+idence for the existence of a core/, b ey ond that im/-
+p osed b y n umerical limitations /(Dubinski /& Carlb erg
+/1/9/9/1/, W arren et al/. /1/9/9/2/, Crone/, Evrard /& Ric h/-
+stone /1/9/9/4/, Carlb erg /1/9/9/4/, Na v arro/, F renk /& White
+/1/9/9/5b/)/. These studies indicate that dark matter halos
+are not w ell appro ximated b y isothermal spheres/, but
+rather ha v e gen tly c hanging logarithmic slop es as in
+the mo del prop osed b y Hernquist /(/1/9/9/0/) for elliptical
+galaxies/,
+/ /( r /) //
+/1
+r /(/1 /+ r /=r
+s
+/)
+/3
+/; /(/1/)
+or that prop osed b y Na v arro/, F renk /& White /(/1/9/9/5b/)
+for X/-ra y cluster halos/,
+/ /( r /) //
+/1
+r /(/1 /+ r /=r
+s
+/)
+/2
+/: /(/2/)
+These pro/les are singular /(although the p oten tial
+and mass con v erge near the cen ter/)/, and p ossess a
+w ell de/ned scale where the pro/le c hanges shap e/,
+the scale radius r
+s
+/. /(W e will refer to r
+s
+as a /\scale/"
+radius and reserv e the term /\core/" to refer to a cen/-
+tral region of constan t densit y /./) Near the scale radius
+the pro/les are almost isothermal/, so these results are
+/2
+quite consisten t with the lo w er resolution sim ulations
+men tioned earlier/.
+The p ossibilit y that dark matter densit y pro/les
+ma y div erge lik e r
+/BnZr /1
+near the cen ter has imp ortan t
+consequences for the observ ational issues discussed
+ab o v e/. In this pap er/, w e presen t the results of a large
+set of high resolution n umerical sim ulations aimed at
+understanding the densit y pro/les of dark halos in
+the standard CDM cosmogon y /. Although this partic/-
+ular cosmogon y has fallen in to some disrepute since
+the COBE measuremen t of temp erature /uctuations
+in the micro w a v e bac kground radiation/, it is still the
+prime example of the general class of hierarc hical clus/-
+tering theories/. Man y of the conclusions reac hed from
+studying this mo del are directly applicable to other
+mo dels of structure formation/. Indeed/, preliminary
+results of a study of halos formed in scale/-free uni/-
+v erses corrob orate the conclusions presen ted b elo w
+/(Na v arro et al/. in preparation/)/.
+The study of the structure of dark matter halos is
+particularly w ell suited to the N/-b o dy metho ds de/-
+v elop ed o v er the past decade/. Care is needed/, ho w/-
+ev er/, to mo del their cen tral regions reliably since these
+regions are the most vulnerable to systematic errors
+in tro duced b y /nite resolution e/ects/. It is particu/-
+larly imp ortan t to ensure that all halos/, irresp ectiv e of
+mass/, are sim ulated with comparable n umerical reso/-
+lution/. Halos iden ti/ed in a single cosmological sim u/-
+lation are inevitably resolv ed to v arying degrees since
+massiv e systems con tain more particles than less mas/-
+siv e ones/. W e circum v en t this problem b y selecting
+halos with a wide range of masses from cosmologi/-
+cal sim ulations of large regions and then resim ulating
+them individually at higher resolution/. W e presen t
+details of our n umerical pro cedures in x /2/, and in x /3
+w e test ho w their limitati ons a/ect the structure of
+our halos/. Section /4 presen ts results for an ensem ble
+of sim ulations spanning four orders of magnitude in
+halo mass/. Section /5 discusses some implications of
+our results/, and x /6 summarizes our conclusions/.
+/2/. The Numerical Exp erimen ts
+W e sim ulate the formation of /1/9 di/eren t systems
+with scales ranging from those of dw arf galaxies to
+those of ric h clusters/. The systems w ere iden ti/ed in
+t w o large cosmological N/-b o dy sim ulations of a stan/-
+dard /
+ /= /1 CDM univ erse carried out with a P
+/3
+M
+co de /(Efstathiou et al /1/9/8/5/)/. These sim ulations fol/-
+lo w ed the ev olution of /2/6/2/,/1/4/4 particles in p erio dic
+b o xes of /3/6/0 and /3/0 Mp c on a side/, resp ectiv ely /, and
+w ere stopp ed when the rms /uctuation in spheres of
+radius /1/6 Mp c w as /
+/8
+/ /1 /=b /= /0 /: /6/3/, where b de/-
+notes the usual /\bias/" parameter/. /(All ph ysical quan/-
+tities quoted in this pap er assume a Hubble constan t
+of /5/0 km//s//Mp c/./) A t this ep o c h/, whic h w e iden tify
+with the presen t/, w e found collapsed systems of v ary/-
+ing mass using a friends/-of/-friends group /nding al/-
+gorithm with the linking parameter set to /1/0/% of the
+mean in terparticle separation/. The cen ters of mass of
+these clumps w ere used as halo cen ters and the radius
+of the sphere encompassing a mean o v erdensit y of /2/0/0
+w as calculated in eac h case/. Hereafter/, w e shall refer
+to this as the /\virial/" radius of the system and de/-
+note it b y r
+/2/0/0
+/. After sorting the clumps b y the mass/,
+M
+/2/0/0
+/, con tained within these spheres/, w e pic k ed /1/9 of
+them co v ering a range of four orders of magnitude in
+mass /( / /3 / /1/0
+/1/1
+/< M
+/2/0/0
+/= M
+/
+/< / /3 / /1/0
+/1/5
+/)/. W e did
+not select randomly from this mass range/, but c hose
+instead halos group ed roughly in to three bins of cir/-
+cular v elo cit y /, / /1/0/0 km s
+/BnZr /1
+/, /2/5/0 km s
+/BnZr /1
+and /> /4/5/0
+km s
+/BnZr /1
+/. This giv es some indication of the /\cosmic
+scatter/" in the prop erties of halos of a giv en mass/.
+The particles in eac h of the /1/9 selected systems
+w ere then traced bac k to the initial time/, where a
+b o x con taining all of them w as dra wn/. This b o x w as
+loaded with /3/2
+/3
+particles on a cubic grid whic h w as
+p erturb ed using the same w a v es as in the original sim/-
+ulation/, together with additional w a v es to /ll out the
+p o w er sp ectrum to the Nyquist frequency of the new
+particle grid/. The size/, L
+box
+/, of this /\high/-resolution/"
+b o x w as c hosen so that all systems had/, at z /= /0/,
+appro ximately the same n um b er of particles within
+the virial radius/, t ypically /5 /; /0/0/0/-/1/0 /; /0/0/0/. The gra vi/-
+tational softening w as c hosen to b e one p ercen t of the
+virial radius/, and w as k ept /xed in ph ysical co ordi/-
+nates/. /(Note that some of the tests describ ed in x /3
+ha v e few er particles/; for these runs the gra vitational
+softening w as sligh tly larger/./) The initial redshift of
+eac h run w as c hosen so that the median displace/-
+men t of particles within the /\high/-resolution/" b o x
+w as smaller than the initial particle gridsize/. These
+c hoices ensure that all halos w ere resolv ed to a similar
+degree at z /= /0/. A summary of the n umerical param/-
+eters of the sim ulations is giv en in T able /1/. The pa/-
+rameters listed in this T able are de/ned throughout
+the text/.
+Tidal e/ects due to distan t material are repre/-
+sen ted b y using sev eral thousand massiv e particles
+to coarse/-sample the region surrounding the /\high/-
+/3
+resolution/" b o x/. This pro cedure for setting up initial
+conditions is iden tical to that describ ed in Na v arro/,
+F renk /& White /(/1/9/9/5a/,b/)/, where further details ma y
+b e found/. All sim ulations w ere run with the N/-
+b o dy co de describ ed b y Na v arro /& White /(/1/9/9/3/)/; a
+second/-order accurate/, nearest/-neigh b or binary/-tree
+co de/, with individual particle timesteps/. T ypically /,
+the minim um timestep is b et w een /1/0
+/BnZr /4
+and /1/0
+/BnZr /5
+of a Hubble time/, lo w mass systems requiring more
+timesteps than more massiv e ones due to their higher
+cen tral densities/.
+/3/. E/ects of n umerical limitati on s
+As men tioned in x /1/, n umerical limitati ons can in/-
+/uence the structure of mo del halos/. The n um b er of
+particles/, the gra vitational softening/, the initial red/-
+shift/, and the timestep can all/, in principle/, ha v e a
+signi/can t e/ect/. It is imp ortan t to c hec k explicitly
+that our results are insensitiv e to the particular c hoice
+of n umerical parameters w e ha v e made/. F or eac h of
+the tests describ ed b elo w w e c hose one of the least
+massiv e and one of the most massiv e halos in our se/-
+ries/, and w e resim ulated them v arying the n umerical
+parameters in a systematic fashion/. Our conclusion is
+that/, when c hosen carefully /, n umerical parameters do
+not a/ect the structure of halos in w ell resolv ed re/-
+gions/, i/.e/. at radii whic h are larger than the gra vita/-
+tional softening and whic h enclose a su/cien tly large
+n um b er of particles /(
+/
+/>
+/5/0/)/.
+/3/./1/. The initi al redshift
+Figures /1a and /1b sho w the e/ect of v arying the ini/-
+tial redshift/, z
+i
+/, of the sim ulation for t w o of our halos/,
+a large halo of mass M
+/2/0/0
+/ /1/0
+/1/5
+M
+/
+/, corresp onding
+to a ric h galaxy cluster/, and a small halo of mass
+M
+/2/0/0
+/ /1/0
+/1/1
+M
+/
+/, corresp onding to a dw arf galaxy /.
+These mo dels had only /2/2
+/3
+particles within the /\high/-
+resolution/" b o x for CPU econom y reasons/. The pan/-
+els sho w the densit y pro/le and the circular v elo cit y
+as a function of radius/. The pro/les are spherically
+a v eraged o v er bins con taining ab out /3/0 particles eac h/.
+Three di/eren t c hoices of z
+i
+w ere tried for the small
+halo/, /1 /+ z
+i
+/= /5 /: /5/, /1/1 /: /0/, and /2/2 /: /0/, and t w o for the
+large system/, /1 /+ z
+i
+/= /5 /: /5 and /1/1 /: /0/. The densit y
+pro/les sho w little c hange/, although for /1 /+ z
+i
+/= /5 /: /5
+the cen tral densit y of the small halo app ears to b e
+substan tially underestimated/. Since it is a cum ulativ e
+quan tit y /, the circular v elo cit y pro/le is more sensitiv e
+to v ariations near the cen ter/. Figure /1b sho ws that
+starting at /1 /+ z
+i
+/= /5 /: /5 results in a reduced circular
+v elo cit y near the cen ter but/, as the starting redshift
+is increased/, the pro/les con v erge to a unique shap e
+so that for /1 /+ z
+i
+/= /1/1 /: /0 and /2/2 /: /0 the t w o curv es are
+indistinguishable/. In the case of the massiv e system/,
+starting at /1 /+ z
+i
+/= /5 /: /5 or at /1/1 /: /0 had no signi/can t
+e/ect/.
+The imp ortance of the initial redshift ma y b e un/-
+dersto o d b y considering the initial displacemen t /eld
+of the particles giv en b y the Zel/'do vic h appro xima/-
+tion/. A t /1 /+ z
+i
+/= /5 /: /5/, the median particle displace/-
+men t in the small halo sim ulation w as ab out /4 times
+the mean in terparticle separation/. Th us/, the /uc/-
+tuations are not linear on small scales in the initial
+conditions and the Zel/'do vic h appro ximation breaks
+do wn/. The excess kinetic energy imparted to the par/-
+ticles prev en ts the formation of dense clumps in the
+early stages of the sim ulation/, reducing the maxim um
+densit y of the /nal system/. The median displace/-
+men t is less than the mean in terparticle separation
+at /1 /+ z
+i
+/= /2/2 /: /0/, and less than t wice the mean in ter/-
+particle separation at /1 /+ z
+i
+/= /1/1 /: /0/. In these cases/,
+use of the Ze/'ldo vic h appro ximation is justi/ed/, and
+the results con v erge to a unique solution/.
+In the case of the massiv e halo/, ev en at /1 /+ z
+i
+/= /5 /: /5
+the median displacemen t w as only ab out t wice the
+mean in terparticle separation/. As a result starting
+this /\late/" had a negligible e/ect on the /nal pro/le/.
+W e conclude that as long as the initial ratio b et w een
+the median particle displacemen t and the mean in/-
+terparticle separation is of order unit y /(or less/) the
+results are insensitiv e to the particular c hoice of z
+i
+/.
+The initial redshifts of all runs /(quoted in T able /1/)
+satisfy this condition/.
+/3/./2/. The gra vitation al softening
+The gra vitational softening/, h
+g
+/, is included in the
+N/-b o dy equations of motion in order to suppress re/-
+laxation e/ects due to t w o/-b o dy encoun ters/. This
+is accomplished if h
+g
+is set signi/can tly larger than
+the impact parameter for a large angle de/ection
+in a t ypical /2/-b o dy encoun ter/, / Gm/=/
+/2
+/, where m
+is the mass of a particle and / the v elo cit y dis/-
+p ersion of the system /(White /1/9/7/9/)/. Since /
+/2
+/
+GM
+/2/0/0
+/= /2 r
+/2/0/0
+/= GmN
+/2/0/0
+/= /2 r
+/2/0/0
+/, then h
+g
+should b e
+larger than /2 r
+/2/0/0
+/= N
+/2/0/0
+/. /(Here N
+/2/0/0
+is the total n um/-
+b er of particles within the virial radius r
+/2/0/0
+and w e
+ha v e assumed that all particles ha v e the same mass/./)
+In our sim ulations N
+/2/0/0
+is t ypically of order a few
+thousand/, so c ho osing h
+g
+of the order /1/0
+/BnZr /2
+/ r
+/2/0/0
+/4
+should b e safe/.
+Figures /2a and /2b sho w that v arying the softening
+length b y up to a factor of /5 /(within the constrain t
+men tioned ab o v e/) has little impact on the /nal struc/-
+ture of the halos outside ab out one softening length/.
+Three di/eren t v alues of h
+g
+w ere tried for the large
+halo and t w o for the small system/. The /gures dis/-
+pla y the densit y and circular v elo cit y pro/les of the
+same t w o halos used in the previous subsection/. The
+n um b er of particles within the /\high/-resolution/" b o x/,
+ho w ev er/, w as increased to /3/2
+/3
+/, and the initial redshift
+w as also /xed at /1 /+ z
+i
+/= /2/2 /: /0 in b oth cases/.
+Note that although h
+g
+/< /1/0
+/BnZr /2
+/ r
+/2/0/0
+could b e used/,
+to o small a v alue of h
+g
+w ould b e coun terpro ductiv e/.
+Smaller softenings require smaller timesteps for the
+same accuracy /, with a consequen t increase in CPU
+time consumption/. F or the test runs in Figure /2/, the
+n um b er of timesteps increased roughly as h
+/1 /= /2
+g
+/. Th us/,
+the exp erimen ts illustrated in this /gure also sho w
+that the /nal halo structures are indep enden t of the
+n um b er of timesteps in the sim ulation/, t ypically o v er
+/1/0 /; /0/0/0 timesteps p er run/.
+Finally /, comparison of Figures /1 and /2 sho ws that
+increasing the n um b er of particles b y a factor of three
+has no noticeable e/ect on the structure of the halos/,
+except that larger v alues of N allo w us to determine
+the structure closer to the halo/'s cen ter/. A t radii con/-
+taining more than / /5/0 particles/, our results are in/-
+sensitiv e to the n um b er of particles/. F or the parti/-
+cle n um b ers in these runs/, w e can reliably prob e the
+structure of halos o v er appro ximately t w o decades in
+radius/, b et w een r
+/2/0/0
+and /1/0
+/BnZr /2
+/ r
+/2/0/0
+/.
+/4/. Results
+/4/./1/. Densit y Pro/les
+Figure /3 sho ws the densit y pro/les of four dark ha/-
+los of di/eren t mass/. Halo mass increases from left
+to righ t/, from / /3 / /1/0
+/1/1
+M
+/
+for the smallest sys/-
+tem/, to / /3 / /1/0
+/1/5
+M
+/
+for the largest/. The arro ws
+indicate the gra vitational softening in eac h sim ula/-
+tion/. In all cases/, the virial radius is ab out t w o orders
+of magnitude larger than the softening length/. The
+smo oth curv es represen t /ts to the sim ulation data us/-
+ing a mo del of the form prop osed b y Na v arro/, F renk
+/& White /(/1/9/9/5b/)/,
+/ /( r /)
+/
+cr it
+/=
+/
+c
+/( r /=r
+s
+/)/(/1 /+ r /=r
+s
+/)
+/2
+/; /(/3/)
+where r
+s
+/= r
+/2/0/0
+/=c is a c haracteristic radius an /
+cr it
+/=
+/3 H
+/2
+/= /8 / G is the critical densit y /( H is the curren t
+v alue of Hubble/'s constan t/)/; /
+c
+and c are t w o dimen/-
+sionless parameters/. Note that r
+/2/0/0
+determines the
+mass of the halo/, M
+/2/0/0
+/= /2/0/0 /
+cr it
+/(/4 / /= /3/) r
+/3
+/2/0/0
+/, and that
+/
+c
+and c are link ed b y the requiremen t that the mean
+densit y within r
+/2/0/0
+should b e /2/0/0 / /
+cr it
+/. That is/,
+/
+c
+/=
+/2/0/0
+/3
+c
+/3
+/BnZr
+ln/(/1 /+ c /) /BnZr c/= /(/1 /+ c /)
+/
+/: /(/4/)
+W e will refer to /
+c
+as the c haracteristic o v erdensit y
+of the halo/, to r
+s
+as its scale radius/, and to c as its
+concen tration/.
+A striking feature of Figure /3 is that the same pro/-
+/le shap e pro vides a v ery go o d /t to all the halos ev en
+though they span nearly four orders of magnitude in
+mass/. The agreemen t holds for radii ranging from
+the gra vitational softening length to the virial radius/.
+Halo concen tration decreases systematically with in/-
+creasing mass/. This ma y b e clearly seen in Figure /4/,
+where w e sho w t w o of the pro/les of Figure /3 /(corre/-
+sp onding to the smallest and largest halos/)/, scaled so
+that the densit y is giv en in units of the critical densit y
+and the radius in units of the virial radius/. Although
+w e sho w pro/les only for a few halos in Figures /3 and
+/4/, these are b y no means sp ecial/. Eq/. /(/3/) /ts all our
+halos almost equally w ell/, irresp ectiv e of mass/.
+/4/./2/. Circular V elo cit y Pro/les
+The circular v elo cit y pro/le/, V
+c
+/( r /) /= /( GM /( r /) /=r /)
+/1 /= /2
+/,
+con tains the same information as the densit y pro/le
+but is less noisy b ecause it is a cum ulativ e measure
+of the radial structure of a halo/. Circular v elo cit y
+curv es for all /1/9 systems are sho wn in Figure /5/. They
+all lo ok rather similar/, as exp ected giv en the simi/-
+larit y in the shap es of the densit y pro/les/. The cir/-
+cular v elo cit y rises near the cen ter/, then remains al/-
+most constan t o v er an extended region/, and /nally
+declines near the virial radius/. There is a notice/-
+able trend with mass/. Larger systems ha v e circu/-
+lar v elo cities that con tin ue to rise to a larger frac/-
+tion of the virial radius than do smaller halos/. This
+is more easily seen in Figure /6/, where for t w o ha/-
+los w e scale circular v elo cit y b y the v alue at r
+/2/0/0
+/,
+V
+/2/0/0
+/= /( GM
+/2/0/0
+/=r
+/2/0/0
+/)
+/1 /= /2
+/ /(/1 /= /2/)/( r
+/2/0/0
+/= kp c/) km//s/,
+and radii b y r
+/2/0/0
+itself/. Again/, w e c ho ose the least and
+most massiv e systems to illustrate the trend/. Note
+/(i/) that the maxim um circular v elo cit y of eac h halo/,
+V
+max
+/, is larger than V
+/2/0/0
+/(b y up to /4/0 p er cen t/)/; /(ii/)
+/5
+that the ratio V
+max
+/=V
+/2/0/0
+is larger for lo w mass halos/;
+and /(iii/) that the radius r
+max
+at whic h the p eak o ccurs
+is a larger fraction of the virial radius for more mas/-
+siv e systems/. This is an alternativ e w a y of expressing
+the fact that lo w mass systems are signi/can tly more
+concen trated than high mass ones /(see Figure /4/)/.
+The dashed lines in Figure /6 are /ts to the circular
+v elo cit y curv e predicted from eq/./(/3/)/;
+/
+V
+c
+/( r /)
+V
+/2/0/0
+/
+/2
+/=
+/1
+x
+ln/(/1 /+ cx /) /BnZr /( cx /) /= /(/1 /+ cx /)
+ln/(/1 /+ c /) /BnZr c/= /(/1 /+ c /)
+/; /(/5/)
+where x /= r /=r
+/2/0/0
+is the radius in units of the virial
+radius/. Note that for this mo del the circular v elo cit y
+p eaks at r
+max
+/ /2 r
+s
+/= /2 r
+/2/0/0
+/=c /.
+The dotted line in Figure /6 is a /t to the circular
+v elo cit y curv e of the small halo using the Hernquist
+/(/1/9/9/0/) mo del/. The circular v elo cit y in this mo del is
+giv en b y
+/
+V
+H
+/( r /)
+V
+max
+/
+/2
+/=
+/4/( r /=r
+max
+/)
+/(/1 /+ r /=r
+max
+/)
+/2
+/: /(/6/)
+Note that although in the inner regions /(for o v erden/-
+sities larger than / /1/0/0/0/) this mo del pro vides as go o d
+a /t to the data as our adopted pro/le /(eq/. /3/)/, it pre/-
+dicts circular v elo cities that are to o lo w near the virial
+radius/.
+/4/./3/. Mass dep endence of halo prop erties
+As sho wn in Figures /4 and /6/, lo w mass CDM halos
+are more cen trally concen trated than high mass ones/.
+This is not surprising b ecause lo w er mass systems
+generally collapse at higher redshift/, when the mean
+densit y of the univ erse w as higher/. In the spherical
+top/-hat mo del/, the p ostcollapse densit y is a constan t
+m ultiple of the mean cosmic densit y at the time of col/-
+lapse/. T o understand the relation b et w een halo mass
+and c haracteristic densit y requires a formal de/nition
+of the time of formation/. This is not straigh tforw ard
+b ecause systems are con tin ually ev olving/, accreting
+mass through mergers with satellites and neigh b or/-
+ing clumps/. One p ossibilit y is to de/ne the formation
+time of a halo as the /rst time when half of its /nal
+mass M w as in progenitors with individual masses ex/-
+ceeding some fraction f of M /. With this de/nition/,
+the t ypical formation redshifts of halos of di/ering
+mass can b e predicted analytically /.
+Lacey /& Cole /(/1/9/9/3/) sho w that a randomly c hosen
+mass elemen t from a halo of mass M iden ti/ed at red/-
+shift z
+/0
+w as part of a progenitor with mass exceeding
+f M at the earlier redshift z with probabilit y
+P /( /> f M /; z j M /; z
+/0
+/) /= er f c
+/
+/
+/0
+/( z /BnZr z
+/0
+/)/(/1 /+ z
+/0
+/)
+p
+/2/(/
+/2
+/0
+/( f M /) /BnZr /
+/2
+/0
+/( M /)/)
+/
+/;
+/(/7/)
+where /
+/2
+/0
+/( M /) is the v ariance of the linear p o w er sp ec/-
+trum at z /= /0 when smo othed with a top hat /lter en/-
+closing mass M /(see/, for example/, eqs/. /(/6/) and /(/7/) of
+White /& F renk /(/1/9/9/1/) for a de/nition/)/, and /
+/0
+/= /1 /: /6/9
+is the usual critical linear o v erdensit y for top/-hat col/-
+lapse/. This equation is v alid for z /> z
+/0
+and f /< /1/.
+The formation redshift z
+f or m
+/( M /; f /; z
+/0
+/) is then de/ned
+b y setting P /= /1 /= /2 in eq/. /(/7/)/. Lacey /& Cole /(/1/9/9/4/)
+tested this form ula against N/-b o dy sim ulations for the
+case f /= /0 /: /5 and found excellen t agreemen t/.
+Ha ving assigned a t ypical formation redshift to ha/-
+los of a giv en mass/, the mean densit y of the univ erse
+at that redshift pro vides a natural scaling parameter/.
+Let us assume that the c haracteristic o v erdensit y of a
+halo scales as
+/
+c
+/( M /; f /; z
+/0
+/) /= C /( f /)/(/1 /+ z
+f or m
+/( M /; f /; z
+/0
+/)/)
+/3
+/: /(/8/)
+Figure /7 sho ws the c haracteristic densit y /, /
+c
+/(ob/-
+tained b y /tting eq/. /3/)/, as a function of halo mass
+expressed in units of the non/-linear mass/, M
+/?
+/( z
+/0
+/)/.
+This c haracteristic mass is de/ned b y the condition
+//( M
+/?
+/( z /)/) /= /1 /: /6/9 /= /(/1 /+ z /)/; for our adopted normaliza/-
+tion of the CDM p o w er sp ectrum/, M
+/?
+/' /3 /: /3 / /1/0
+/1/3
+M
+/
+at z /= /0/. The curv es in Figure /7 sho w the predictions
+of eq/. /(/8/) for v arious c hoices of f /. The normaliza/-
+tions ha v e b een c hosen so that the curv es all cross at
+M
+/2/0/0
+/= M
+/?
+/; this implies C /( f /) /= /1 /: /5 / /1/0
+/4
+/, /5 /: /4 / /1/0
+/3
+/,
+and /2 /: /0 / /1/0
+/3
+for f /= /0 /: /5/, /0 /: /1/, and /0 /: /0/1/, resp ectiv ely /.
+Note that the shap es of these curv es are almost inde/-
+p enden t of f for f / /1/. The agreemen t b et w een the
+mass/-densit y relation predicted b y eqn/. /(/8/) and our
+N/-b o dy results is fair for f /= /0 /: /5/, and impro v es for
+smaller v alues of f /. Th us the c haracteristic densit y of
+a halo do es indeed seem to re/ect its formation time/.
+Figure /8 sho ws the correlation b et w een concen tra/-
+tion/, c /, and the mass of the halo/. Although this /gure
+con tains the same information as Figure /7 /(since /
+c
+and c are related b y eqn/. /4/)/, it sho ws explicitly that
+large halos are signi/can tly less concen trated than
+small ones/. Note that the dep endence of concen tra/-
+tion on mass is quite w eak/; c c hanges b y less than a
+factor of four while M v aries b y four orders of magni/-
+tude/. Th us/, halos di/ering in mass b y less than/, sa y /,
+one order of magnitude/, ha v e densit y pro/les that are
+almost indistinguishable in the scaled v ariables used
+/6
+in Figure /4/. This con/rms the results w e presen ted
+in Na v arro/, F renk /& White /(/1/9/9/5b/)/, where w e found
+that galaxy cluster halos in the CDM cosmogon y are
+w ell appro ximated b y eq/. /(/3/) with c / /5/. The presen t
+higher resolution sim ulations sho w that suc h a w eak
+concen tration is appropriate only for the largest halos/,
+M
+/2/0/0
+/= M
+/?
+/ /1/0/0/. With hindsigh t/, the w eak dep en/-
+dence of c on mass conspired with our use in Na v arro/,
+F renk /& White /(/1/9/9/5b/) of a /xed softening length of
+ab out /1/0/0 kp c for all systems and of a rather /\late/"
+starting redshift/, z
+i
+/= /3 /: /7/4/, to giv e concen tration es/-
+timates whic h are sligh tly lo w er than those sho wn in
+Figure /8/.
+Figure /9 sho ws that the maxim um circular v elo c/-
+it y /, V
+max
+/, can di/er b y up to /4/0 p ercen t from the
+circular v elo cit y at the virial radius/, V
+/2/0/0
+/. The ratio
+V
+max
+/=V
+/2/0/0
+is an in teresting quan tit y to consider b e/-
+cause man y analytic and n umerical studies use V
+/2/0/0
+to c haracterize the statistical prop erties of the halo
+p opulation and to compare them with the observ ed
+prop erties of the galaxy p opulation/. F or example/, it is
+often assumed that the rotation v elo cit y of a galactic
+disk is iden tical to V
+/2/0/0
+/, an assumption that clearly
+breaks do wn if the circular v elo cit y of a halo v aries
+with radius as sho wn in Figures /5 and /6/.
+Finally /, Figure /1/0 sho ws the correlation b et w een
+the maxim um circular v elo cit y /, V
+max
+/, and the radius/,
+r
+max
+/, at whic h the circular v elo cit y attains that max/-
+im um/. Note that for V
+max
+/= /2/2/0 km//s/, the rotation
+v elo cit y of the Milky W a y /, r
+max
+is ab out /5/0 kp c/, larger
+than the t ypical optical size of galaxies lik e the Milky
+W a y /. Th us/, if the dark halo of the Milky W a y resem/-
+bles our mo del halos/, the observ ed /at rotation curv e
+m ust b e the result of the dissipational collapse of the
+luminous comp onen t rather than a direct re/ection of
+the structure of the dark halo/. W e discuss further the
+implications of these results in the follo wing section/.
+/5/. Discussion
+/5/./1/. The shap es of the rotation curv es of disk
+galaxies/.
+The shap es of the rotation curv es of disk galaxies
+ha v e b een the sub ject of n umerous studies /(Burstein
+/& Rubin /1/9/8/5/, Whitmore et al/. /1/9/8/8/, F renk /&
+Salucci /1/9/8/9/, P ersic /& Salucci /1/9/9/1/, Casertano /&
+v an Gork om /1/9/9/1/)/. T o /rst appro ximation/, the ro/-
+tation v elo cit y is observ ed to b e constan t within the
+luminous radius/, but there is go o d evidence no w that
+the rotation curv es of less luminous galaxies tend to
+b e rising whilst those of their brigh ter coun terparts
+tend to b e gen tly declining/. These systematic trends
+ha v e b een con/rmed in a recen t analysis of the large
+dataset of Matthewson et al/. /(/1/9/9/2/) b y P ersic /&
+Salucci /(/1/9/9/5/)/. They /nd that the optical radius
+of a galaxy /, r
+opt
+/, and the rotation v elo cit y at r
+opt
+/,
+V
+opt
+/, are strongly correlated/, r
+opt
+/ /2/0/( V
+opt
+/= /2/0/0 km
+s
+/BnZr /1
+/)
+/1 /: /1/6
+kp c/. /(The optical radius is de/ned as the
+radius that encloses /8/3/% of the total B /-band lumi/-
+nosit y of the galaxy and corresp onds to /3 /: /2 exp o/-
+nen tial disk scalelengths/. F or a F reeman disk/, r
+opt
+corresp onds to the /2/5 mag
+B
+//arcsec
+/2
+isophotal ra/-
+dius/./) The total B /-band luminosit y of a galaxy is also
+strongly correlated with V
+opt
+via the T ully/-Fisher re/-
+lation/, L
+B
+/ /3 /: /3 / /1/0
+/9
+/( V
+opt
+/= /1/0/0 km s
+/BnZr /1
+/)
+/2 /: /7
+L
+/
+/(Pierce
+/& T ully /1/9/8/8/)/. All these correlations exhibit rather
+small scatter/.
+W e no w consider the implications of our results on
+the structure of dark matter halos for these obser/-
+v ations/. T o compute the rotation curv e of a mo del
+/\disk galaxy/" forming within a CDM halo/, w e need
+to sp ecify three parameters/: the mass of the disk/,
+M
+disk
+/, its exp onen tial scalelength/, r
+disk
+/, and the mass
+of the halo/, M
+/2/0/0
+/. /(W e ignore the con tribution of the
+galaxy/'s spheroid in this simpli/ed mo del/./) Accord/-
+ing to the observ ed correlations men tioned ab o v e/, V
+opt
+uniquely determines the luminosit y and scalelength of
+the disk/. Requiring that our mo del should also exhibit
+these correlations then reduces the n um b er of param/-
+eters to t w o and these ma y b e tak en to b e the disk
+mass/-to/-ligh t ratio/, /( M /=L /)
+disk
+/, and the halo mass/.
+These t w o parameters ma y b e /xed b y matc hing the
+amplitude of the observ ed rotation curv e/, V
+opt
+/, and
+its slop e at the optical radius/.
+T o carry this program through/, w e need to allo w for
+the fact that the halo will resp ond to disk formation
+b y adjusting sligh tly according to the mass and radius
+of the disk/. W e assume that the disk is assem bled
+slo wly and that the halo is adiabatically compressed
+during this pro cess /(Blumen thal et al/. /1/9/8/6/, Flores
+et al/. /1/9/9/3/)/. In this appro ximation/, the radius/, r /, of
+eac h halo mass shell after the assem bly of the disk is
+related to its initial radius/, r
+i
+/, b y
+r /[ M
+disk
+/( r /) /+ M
+halo
+/( r /)/] /= r
+i
+M
+i
+/( r
+i
+/) /: /(/9/)
+Here M
+i
+/( r
+i
+/) is the mass within radius r
+i
+b efore disk
+formation /(found b y in tegrating eqn/. /3/)/, M
+disk
+/( r /) is
+the /nal disk mass within r /(assumed to b e exp o/-
+nen tial/) and M
+halo
+/( r /) is the /nal dark matter dis/-
+tribution w e wish to calculate/. W e assume that
+/7
+halo mass shells do not cross during compression/, so
+that M
+halo
+/( r /) /= M
+halo
+/( r
+i
+/) /= /(/1 /BnZr /
+b
+/) M
+i
+/( r
+i
+/)/, where
+/
+b
+/= /0 /: /0/6 is the initial bary on fraction and is c hosen
+to agree with primordial n ucleosyn thesis calculations
+/(W alk er et al/. /1/9/9/1/)/.
+The results of this pro cedure are illustrated in Fig/-
+ure /1/1/, where w e plot the circular v elo cit y of the
+adiabatically compressed halo /(dashed lines/) and the
+disk/+halo or /\galaxy/" rotation curv e /(solid lines/) for
+galaxies with V
+opt
+equal to /1/0/0/, /2/0/0/, and /3/0/0 km//s/.
+Eac h curv e is lab eled b y the B /-band disk mass/-to/-
+ligh t ratio required b y our mo del/. The /\t ypical/"
+slop es of observ ed rotation curv es near r
+opt
+/, as giv en
+b y P ersic/, Salucci /& Stel /(/1/9/9/5/)/, are sho wn as dotted
+lines/. These and the mo del /ts ma y b e seen to b e
+declining for rapidly rotating disks and gen tly rising
+for slo wly rotating disks/.
+Note that in order to matc h the observ ed rota/-
+tion curv es/, our mo dels require that disk mass/-to/-
+ligh t ratios increase with luminosit y /, appro ximately
+as /( M /=L /)
+disk
+// L
+/1 /= /2
+/. This is b ecause ev en after adi/-
+abatic compression/, the circular v elo cit y of the halo is
+either rising or /at near the optical radius/. Th us/, to
+pro duce a declining rotation curv e/, the disk /(whose
+o wn rotation curv e is declining in this region/) m ust
+b e relativ ely more imp ortan t in brigh ter galaxies/. As/-
+suming a constan t /( M /=L /)
+disk
+/ /1 /: /2 for all galaxies
+w ould result in nearly /at rotation curv es at r
+opt
+for
+all mo dels irresp ectiv e of V
+opt
+/. The required increase
+in /( M /=L /)
+disk
+with rotation v elo cit y is consisten t with
+the results of Bro eils /(/1/9/9/2a/) and Salucci/, Ashman
+/& P ersic /(/1/9/9/1/)/, who also required a systematically
+v arying /( M /=L /)
+disk
+to /t the rotation curv es of spiral
+galaxies/.
+An imp ortan t implication of our mo dels is that as
+V
+opt
+for a galaxy increases from /2/0/0 to /3/0/0 km//s/, V
+/2/0/0
+for the surrounding halo increases only from /1/5/0 to
+/1/7/0 km//s/. This kind of b eha viour w as previously
+noted b y P ersic and Salucci /(/1/9/9/1/) and has a n um/-
+b er of consequences/. It a/ects the in terpretation of
+dynamical data on binary and satellite galaxies/, an
+issue whic h w e discuss in more detail in x /5 /: /2/. It
+ma y also help with an apparen t di/cult y in theo/-
+ries where galaxies form b y the co oling of bary ons
+within dark matter halos /(White /& Rees /1/9/7/8/)/. As/-
+suming galaxy//halo systems to ha v e singular isother/-
+mal p oten tials with circular v elo cit y V
+c
+equal to the
+rotation v elo cit y of the cen tral disk/, White /& F renk
+/(/1/9/9/1/) estimated X/-ra y luminosities of order /1/0
+/4/2
+erg//s for brigh t spiral galaxies/, w ell in excess of the
+observ ed upp er limits on di/use emission from brigh t
+spiral halos/. They noted that their mo del predicted
+a t ypical emission temp erature of T
+X
+/= /0 /: /1/9/( V
+c
+/= /2/5/0
+km//s/)
+/2
+k eV/, suggesting that the emission migh t b e
+soft enough to ha v e b een missed/. The halo structure
+implied b y our curren t mo dels has V
+c
+signi/can tly
+smaller than V
+opt
+o v er the emitting regions and th us
+implies ev en softer emission from the co oling gas/.
+In our mo dels/, the dark matter fraction within r
+opt
+increases sharply with decreasing galaxy luminosit y /,
+from less than / /7/0/% for galaxies with V
+opt
+/= /3/0/0
+km//s/, to more than / /9/0/% for galaxies with V
+opt
+/=
+/1/0/0 km//s/. The fraction of the total mass within the
+virial radius of the halo represen ted b y the disk also
+dep ends strongly on V
+opt
+and v aries from / /0 /: /0/7 for
+V
+opt
+/= /3/0/0 km//s/, to less than / /0 /: /0/1 for V
+opt
+/= /1/0/0
+km//s/. The v alue for large galaxies is close to our as/-
+sumed v alue for the univ ersal bary on fraction/. Th us/,
+if pregalactic material had a uniform bary onic mass
+fraction to b egin with/, our mo dels require that the
+transformation of bary ons in to stars should ha v e b een
+extremely ine/cien t in halos with circular v elo cit y b e/-
+lo w ab out /1/0/0 km//s/.
+Suc h a trend of increasing global mass/-to/-ligh t ra/-
+tio /( M
+/2/0/0
+/=L
+B
+/) with decreasing halo mass is also re/-
+quired in hierarc hical clustering mo dels of galaxy for/-
+mation in order to reconcile the steep mass function
+of dark halos predicted in these mo dels with the shal/-
+lo w fain t/-end slop e of the observ ed galaxy luminosit y
+function /(see/, e/.g/. White /& Rees /1/9/7/8/, F renk et al/.
+/1/9/8/8/, White /& F renk /1/9/9/1/, Lacey et al/. /1/9/9/3/, Kau//-
+mann et al/. /1/9/9/3/, Ashman/, Salucci and P ersic /1/9/9/3/,
+Cole et al/. /1/9/9/4/)/. Th us a detailed theory for galaxy
+formation within halos of this t yp e is lik ely to b e more
+successful than previous semi/-analytic mo dels in pro/-
+ducing realistic galaxy luminosit y functions/.
+In summary /, the observ ed rotation curv es of spirals
+are consisten t with the structure of CDM halos pro/-
+vided that the assem bly of the luminous comp onen t
+of galaxies w as ine/cien t in lo w mass halos/. The ro/-
+tation v elo cit y of brigh t galaxies is largely determined
+b y the con tribution of the disk/, and is therefore not
+a go o d indicator of the circular v elo cit y of the sur/-
+rounding halo/.
+/5/./2/. The dynamics of binary galaxies and
+satellite companions/.
+A ma jor unresolv ed issue in studies of the dynam/-
+ics of binary galaxies and of satellites orbiting around
+/8
+brigh t spirals is the puzzling lac k of correlation b e/-
+t w een the luminosit y of the system and the observ ed
+relativ e v elo cit y di/erence /(White et al/. /1/9/8/3/, Zarit/-
+sky et al/. /1/9/9/3/, Zaritsky /& White /1/9/9/4/)/. The puz/-
+zle arises b ecause it is commonly assumed that the
+rotation v elo cit y of galactic disks is a go o d indica/-
+tor of the mean circular v elo cit y of their surrounding
+halos/. Since brigh ter galaxies ha v e more rapidly ro/-
+tating disks/, a strong correlation is exp ected b et w een
+the luminosit y of a pair and their v elo cit y di/erence/,
+as w ell as b et w een the rotation v elo cit y of a primary
+galaxy and the orbital v elo cit y of its satellites/. Obser/-
+v ational datasets rule out suc h correlations with high
+signi/cance/. Indeed/, the data seem to fa v or mo dels
+where galaxies ha v e extended halos with a mass whic h
+dep ends only v ery w eakly on their luminosit y /.
+The discussion in x /5 /: /1 pro vides an in teresting clue
+to this puzzle/. As can b e seen in Figure /1/1/, the mean
+circular v elo cit y of halos surrounding galaxies with
+rotation v elo cities larger than ab out /2/0/0 km//s is al/-
+most uncorrelated with V
+opt
+and/, consequen tly /, with
+the luminosit y of the galaxy /. /(Brigh t galaxies with
+V
+opt
+of the order or larger than /2/0/0 km//s t ypically
+constitute the bulk of the systems considered in ob/-
+serv ational surv eys of binaries and satellite//primary
+systems/./) According to the analysis presen ted ab o v e/,
+brigh t galaxies are t ypically surrounded b y a halo
+with mean circular v elo cit y V
+/2/0/0
+/ /1/6/0 km//s/. The
+mass of suc h halo is M
+/2/0/0
+/ /1 /: /9 / /1/0
+/1/2
+M
+/
+within the
+virial radius r
+/2/0/0
+/ /3/2/0 kp c/. This agrees with the es/-
+timates of Zaritsky /& White /(/1/9/9/4/)/, who found from
+their study of the dynamics of satellites surrounding
+brigh t spirals that the a v erage circular v elo cit y is b e/-
+t w een /1/8/0 and /2/0/0 km//s at /3/0/0 kp c/. This agreemen t
+is encouraging/, since the halo prop erties w e infer here
+are c hosen to matc h the shap e of the disk rotation
+curv es/, and do not use an y information ab out dy/-
+namics at larger radii/. The structure of the dark ha/-
+los whic h surround brigh t spiral galaxies seems to b e
+similar to that implied b y our mo dels/.
+/5/./3/. The cores of dw arf galaxies/.
+The luminous comp onen t t ypically constitutes only
+a small fraction of the total mass within the lumi/-
+nous radius of a dw arf galaxy /. Therefore/, measure/-
+men ts of the in ternal dynamics of these dark mat/-
+ter dominated systems are a direct prob e of the in/-
+ner regions of dark matter halos/. High/-qualit y ro/-
+tation curv es of sev eral dw arf galaxies indicate that
+the dark halo circular v elo cit y rises almost linearly
+with radius o v er the luminous regions of these galax/-
+ies /(Carignan /& F reeman /1/9/8/8/, Carignan /& Beaulieu
+/1/9/8/9/, Bro eils /1/9/9/2a/,b/, Jobin /& Carignan /1/9/9/0/, Lak e
+et al/. /1/9/9/0/)/. F or spherical symmetry /, this implies
+that the halo has a w ell de/ned core within whic h the
+dark matter densit y is appro ximately constan t/. As
+p oin ted out b y Mo ore /(/1/9/9/4/) and Flores /& Primac k
+/(/1/9/9/4/)/, this result is inconsisten t with the singular
+halo mo dels fa v oured b y N/-b o dy sim ulations suc h as
+those presen ted in this pap er/.
+Figure /1/2 sho ws the con tribution of the dark halo
+to the observ ed rotation curv e of four dw arf galax/-
+ies /(solid lines/)/. The t w o curv es are mean t to en/-
+compass the halo con tributions allo w ed b y the ob/-
+serv ations/, and corresp ond to the results of assum/-
+ing a /\maxim al disk/" or a /\maxim al halo/"/. These
+/ts assume that the halo structure is of the form
+/ /( r /) /= /
+/0
+/= /(/1 /+ /( r /=r
+cor e
+/)
+/2
+/)/, and are plotted only in
+the radial range where the rotation curv e is mea/-
+sured/. The parameters for eac h galaxy ha v e b een
+tak en from Carignan /& F reeman /(/1/9/8/8/, DDO/1/5/4/)/,
+Bro eils /(/1/9/9/2a/, DDO/1/6/8 and NGC/3/1/0/9/)/, and Lak e et
+al/. /(/1/9/9/0/, DDO/1/7/0/)/. The dotted lines in these plots
+are the exp ected con tribution of a CDM dark halo/,
+constrained to matc h the circular v elo cit y at the out/-
+ermost radius for whic h the rotation v elo cit y has b een
+measured/. The t w o dotted lines are mean t to repre/-
+sen t the most and least concen trated halo compatible
+with this constrain t and with the scatter in the cor/-
+relations sho wn in Figure /1/0 /(a factor of / /2 in r
+max
+for a giv en c hoice of V
+max
+/)/.
+Figure /1/2 sho ws that/, except p erhaps for DDO/1/7/0/,
+where observ ations constrain the halo parameters
+v ery p o orly /, the CDM halos app ear to o concen trated
+to /t the observ ations/. W e th us agree with the conclu/-
+sions of Mo ore /(/1/9/9/4/) and Flores /& Primac k /(/1/9/9/4/)/.
+The discrepancy /, ho w ev er/, is less dramatic than found
+b y these authors /( e/.g/. compare Figure /1/2 with Figure
+/1 of Mo ore /1/9/9/4/)/. The reason for this di/erence is
+that CDM halos are actually less concen trated than
+assumed b y Mo ore /(/1/9/9/4/)/. Mo ore/'s /gure is based
+on the sim ulation of a single CDM halo b y Dubinski
+/& Carlb erg /(/1/9/9/1/)/, who found r
+max
+/= /2/6 kp c for an
+ob ject with V
+max
+/= /2/8/0 km//s/. This con trasts with
+the mean v alue of / /6/0 kp c found in our sim ulations
+for the same circular v elo cit y /(see Figure /1/0/)/. W e
+attribute this di/erence to the fact that Dubinski /&
+Carlb erg stopp ed their sim ulations at z /= /1/; their run
+cannot therefore b e considered represen tativ e of dark
+halos iden ti/ed at z /= /0/.
+/9
+W e conclude that/, although the cores of dw arf
+galaxies p ose a signi/can t problem for CDM/, the
+problem is not as bad as previously though t/. P ertur/-
+bations to the cen tral regions of dw arf galaxy halos/,
+resulting p erhaps from the sudden loss of a large frac/-
+tion of the bary onic material after a vigorous b out of
+star formation /(Dek el and Silk /1/9/8/6/)/, can in principle
+reconcile the observ ations of dw arfs with the structure
+of CDM halos /(Na v arro/, Ek e /& F renk /1/9/9/5/)/.
+/5/./4/. The abundance of galactic dark halos/.
+A problem whic h a/icts all curren t mo dels of
+galaxy formation based on the standard CDM cos/-
+mogon y is related to the high abundance of galactic
+dark halos /(White /& F renk /1/9/9/1/, Kau/mann et al/.
+/1/9/9/3/, Cole et al/. /1/9/9/4/)/. Indeed/, dark halos of galac/-
+tic size are so n umerous in this scenario that it is
+imp ossible to /t simultane ously the observ ed T ully/-
+Fisher relation and the galaxy luminosit y function/.
+This can b e sho wn follo wing the argumen t of Kau//-
+mann et al/. /(/1/9/9/3/)/. Let us assume that there is only
+one galaxy p er halo/, a conserv ativ e assumption since
+w e kno w that the halos of galaxy groups and clusters
+con tain sev eral galaxies/. W e can then use the Press/-
+Sc hec h ter /(/1/9/7/4/) theory to compute the n um b er den/-
+sit y of galaxies as a function of the circular v elo cit y of
+their surrounding halos/, V
+/2/0/0
+/(see/, for example/, eq/. /5
+of White /& F renk /1/9/9/1/)/. Assuming that w e can infer
+the rotation v elo cit y of the disk /( V
+opt
+/) from V
+/2/0/0
+/, the
+T ully/-Fisher relation allo ws us to compute the con/-
+tribution of galaxies with a giv en rotation v elo cit y to
+the mean luminosit y densit y of the univ erse/.
+Using the B/-band T ully/-Fisher relation presen ted
+in x /5 /: /1/, and assuming that the mean luminosit y den/-
+sit y of the univ erse is L
+B
+/= /9 /: /7 / /1/0
+/7
+L
+/
+Mp c
+/BnZr /3
+/(Efstathiou et al/. /1/9/8/8b/, Lo v eda y et al/. /1/9/9/2/)/, w e
+sho w in Figure /1/3 the cum ulativ e fraction of the total
+luminosit y densit y con tributed b y galaxies with v e/-
+lo cities larger than V
+opt
+/, under the assumption that
+V
+/2/0/0
+/= V
+opt
+/(solid line/)/. In order to b e conserv a/-
+tiv e/, w e ha v e assumed in this plot that halos with
+V
+opt
+/> /3/0/0 km//s do not con tribute to the luminosit y
+densit y at all/, th us excluding groups and clusters of
+galaxies from the coun t/. As noted b y Kau/mann et
+al/. /(/1/9/9/3/)/, ev en with this restriction the cum ulativ e
+luminosit y is to o large for V
+opt
+/ /1/0/0 km//s/. This im/-
+plies that it is imp ossible to matc h the T ully/-Fisher
+relation and the galaxy luminosit y densit y sim ultane/-
+ously unless our assumption that eac h halo con tains
+one galaxy is incorrect/.
+According to the discussion in x /5 /: /1/, the mean cir/-
+cular v elo cit y of CDM halos/, V
+/2/0/0
+/, should actually b e
+lower than V
+opt
+in order to accoun t for the shap e of
+the rotation curv es of disk galaxies/. A simple appro x/-
+imation to the relationship b et w een halo and galaxy
+circular v elo cit y is
+V
+/2/0/0
+/= F /( V
+opt
+/) /=
+V
+opt
+/1 /+ /( V
+opt
+/= /3/0/0 k m/=s /)
+/(/1/0/)
+/(see Figure /1/1/)/. The result of this iden ti/cation is
+sho wn as a dotted line in Figure /1/3/. Clearly /, assigning
+lo w er circular v elo cities to the halos of galaxies of a
+giv en luminosit y only exacerbates the problem/. There
+is no w to o m uc h luminosit y in the standard CDM
+cosmogon y for V
+opt
+/ /2/0/0 km//s/.
+W e conclude that this remains a serious problem/.
+Although it can in principle b e alleviated b y adopting
+a di/eren t cosmogon y /(for example/, an op en univ erse
+or a univ erse with cold and hot dark matter comp o/-
+nen ts/)/, the most p opular forms of these alternativ e
+mo dels do not readily o v ercome the di/cult y /(Heyl
+et al/. /1/9/9/5/)/. Another alternativ e w ould b e to as/-
+sume that a large n um b er of halos ha v e failed to form
+galaxies at all/, or that the galaxies they host ha v e so
+far escap ed detection/. The large n um b ers of systems
+b eing detected in systematic surv eys for lo w surface
+brigh tness galaxies suggest that the existence of suc h
+a p opulation of galaxies cannot b e ruled out /(see/, e/.g/.
+Spra yb erry et al/. /1/9/9/3/, F erguson /& McGaugh /1/9/9/5/)/.
+/5/./5/. Core prop erties of galaxy clusters/.
+W e no w examine the consequences of the structure
+of CDM halos discussed in x /4 for X/-ra y and gra vita/-
+tional lensing observ ations of galaxy clusters/. An on/-
+going debate concerns the di/ering estimates of core
+radius obtained from mo dels of the X/-ra y emitting
+gas and from attempts to repro duce the gian t arcs
+observ ed in man y clusters/.
+The X/-ra y emitting in tracluster medium is often
+appro ximated b y the h ydrostatic/, isothermal / /-mo del
+/(Ca v aliere /& F usco/-F emiano /1/9/7/6/)/. The densit y pro/-
+/le of the X/-ra y emitting gas is then of the form/,
+/
+I C M
+// /(/1 /+ /( r /=r
+cor e
+/)
+/2
+/)
+/BnZr /3 / /= /2
+/. The core radius/, r
+cor e
+/,
+is usually a sizeable fraction of the total exten t of
+the emission/, and / is t ypically found to b e / /0 /: /6/-
+/0 /: /8 /(see Jones /& F orman /1/9/8/4/)/. The halo mass pro/-
+/le can then b e deriv ed b y assuming that the gas is
+isothermal and in h ydrostatic equilibrium/; it follo ws
+the same la w as the gas/, with the same core radius
+/1/0
+and with outer slop e parameter /
+D M
+/= / /=/
+T
+/, where
+/
+T
+measures the ratio of the /\temp eratures/" of the
+dark matter and of the gas/, /
+T
+/= /m
+p
+/
+/2
+D M
+/=k T
+g as
+/( / m
+p
+is the mean molecular w eigh t of the gas and
+k is Boltzmann/'s constan t/)/. This mo del is frequen tly
+used to in terpret X/-ra y observ ations and to constrain
+the dark matter distribution near the cen ter of clus/-
+ters /(Jones /& F orman /1/9/8/4/, Edge /& Stew art /1/9/9/1/)/.
+Co oling /o w mo dels with a / /-mo del mass pro/le ha v e
+b een successful at explaining a n um b er of observ a/-
+tions/, including the cen tral X/-ra y surface brigh tness
+/\excess/" and the drop in cen tral temp erature seen in
+systems with strong co oling /o ws/. The core radius
+of the dark matter is t ypically inferred to b e in the
+range r
+c
+/ /1/0/0/-/2/0/0 kp c /(F abian et al/. /1/9/9/1/)/.
+On the other hand/, suc h large cores are ruled out
+b y observ ations of gian t arcs/, whic h require core radii
+of order /2/0/-/6/0 kp c when a / /-mo del is used to describ e
+the lensing cluster /(Grossman /& Nara y an /1/9/8/8/)/. This
+discrepancy is resolv ed if w e assume instead that clus/-
+ter halos follo w the densit y pro/le of eq/./(/3/)/. F or the
+parameters suggested b y Figures /7 and /8/, halos are
+su/cien tly concen trated to agree with the gra vita/-
+tional lensing constrain ts/. A CDM cluster with mean
+v elo cit y disp ersion / /1/0/0/0 km//s placed at z /= /0 /: /3
+can pro duce gian t arcs similar to those seen /(W ax/-
+man /& Miralda/-Escud / e /1/9/9/5/) y et it can also b e con/-
+sisten t with a large core radius in the X/-ra y emit/-
+ting gas/. Requiring that the ICM b e isothermal
+and in h ydrostatic equilibrium in the dark matter
+p oten tial results in a w ell de/ned core/. This is il/-
+lustrated in Figure /1/4/, where w e plot densit y pro/-
+/les for an isothermal gas /(dotted line/) and for the
+dark matter /(solid line/)/. Radii are giv en in units of
+r
+max
+and the densit y units are arbitrary /. W e assume
+that the gas and dark matter temp eratures are equal/,
+k T
+g as
+/=/ m
+p
+/= /
+/2
+D M
+/= GM
+/2/0/0
+/= /2 r
+/2/0/0
+/.
+The di/erence in shap e b et w een the gas and the
+dark matter is due to our assumption that the gas is
+isothermal/. Since the dark matter v elo cit y disp ersion
+drops at radii larger and smaller than r
+max
+/(see Fig/-
+ures /5 and /6/)/, the gas structure deviates strongly from
+that of the dark matter at small and large radii/. A t
+small radii an isothermal gas dev elops a w ell de/ned
+core/, and at large radii its densit y drops less rapidly
+than the dark matter/. Suc h lev eling o/ of the gas pro/-
+/le is not observ ed in real clusters/, indicating that the
+gas temp erature m ust decrease in the outer regions/.
+Hydro dynamical sim ulations con/rm that this is the
+case/, and indicate that the gas and dark matter distri/-
+butions in the outer regions are v ery similar /(Na v arro/,
+F renk /& White /1/9/9/5b/)/. The dashed line sho ws the
+result of /tting the gas pro/le with the / mo del men/-
+tioned ab o v e/. In this case/, v alues of r
+cor e
+/= /0 /: /1 / r
+max
+and / /= /0 /: /7 giv e a v ery go o d /t to the structure of the
+gas/. F or a cluster with a v elo cit y disp ersion of /1/0/0/0
+km//s/, this implies a gas core radius of ab out /1/2/0 kp c/.
+Detailed co oling /o w mo dels that use the p oten/-
+tial corresp onding to eq/./(/3/) rather than the / /-mo del
+can agree w ell with observ ation/. A recen t analysis b y
+W axman /& Miralda/-Escud / e /(/1/9/9/5/) sho ws that the ob/-
+serv ational signatures of co oling /o ws in CDM halos
+are essen tially indistinguishable from those o ccurring
+in halos with a true constan t densit y core/. W e con/-
+clude that the apparen t discrepancy b et w een X/-ra y
+and gra vitational lensing estimates of the core radius
+is a direct result of force/-/tting a / /-mo del to systems
+whose structure is b etter describ ed b y a pro/le more
+similar to that of our CDM halos/.
+/6/. Conclusions
+The main conclusions of this pap er can b e summa/-
+rized as follo ws/.
+/1/) The densit y pro/les of CDM halos of all masses can
+b e w ell /t b y an appropriate scaling of a /\univ er/-
+sal/" pro/le with no free shap e parameters/. This
+pro/le is shallo w er than isothermal near the cen ter
+of a halo/, and steep er than isothermal in its outer
+regions/.
+/2/) The c haracteristic o v erdensities of halos/, or equiv/-
+alen tly their concen trations/, correlate with halo
+mass in a w a y whic h can b e in terpreted as re/-
+/ecting the di/eren t formation redshifts of halos
+of di/ering mass/.
+/3/) The observ ed rotation curv es of disk galaxies are
+compatible with this halo structure pro vided that
+the mass/-to/-ligh t ratio of the disk increases with
+luminosit y /. This implies that the halos of brigh t
+spirals ha v e masses whic h correlate only w eakly
+with their luminosit y /, and ma y explain wh y lumi/-
+nosit y and dynamics app ear uncorrelated in sam/-
+ples of binary galaxies and of satellite//spiral pairs/.
+Disks with rotation v elo cit y in the range /2/0/0 to
+/3/0/0 km//s are predicted to ha v e halos with a t yp/-
+ical mass of /1 /: /8 / /1/0
+/1/2
+M
+/
+within /3/0/0 kp c/. This
+agrees w ell with the masses inferred from the dy/-
+namics of observ ed satellite galaxy samples/.
+/4/) CDM halos seem to o cen trally concen trated to b e
+consisten t with observ ations of the rotation curv es
+/1/1
+of dw arf irregulars /(Mo ore /1/9/9/4/, Flores /& Primac k
+/1/9/9/4/)/. This ma y imply that the cen tral regions
+of dw arf galaxy halos w ere substan tially altered
+during galaxy formation/, for example b y sudden
+bary onic out/o ws o ccurring after a burst of star
+formation /(Na v arro/, Ek e /& F renk /1/9/9/5/./)
+/5/) The fact that brigh t galaxies are surrounded b y ha/-
+los with mean circular v elo cit y lower than the ob/-
+serv ed disk rotation v elo cit y exacerbates the dis/-
+crepancy b et w een the n um b er of /\galaxy/" halos
+predicted in an /
+ /= /1 univ erse and the observ ed
+n um b er of galaxies/.
+/6/) The predicted structure of galaxy clusters is consis/-
+ten t b oth with X/-ra y observ ations of the ICM and
+with the presence of gian t gra vitationally lensed
+arcs/. Previous discrepan t estimates of the core ra/-
+dius based on these t w o kinds of data probably
+result from force/-/tting of an inappropriate p o/-
+ten tial structure/. A singular pro/le suc h as those
+fa v oured b y our sim ulations can b e consisten t with
+all curren t data/.
+W e w ould lik e to thank the hospitalit y of the In/-
+stitute for Theoretical Ph ysics of the Univ ersit y of
+California at San ta Barbara/, where most of the w ork
+presen ted here w as carried out/. JFN w ould also lik e
+to thank the hospitalit y of the Max Planc k Insti/-
+tut f / ur Astroph ysik in Garc hing/, where this pro ject
+w as started/, as w ell as to ac kno wledge useful discus/-
+sions with C/. Lacey /, N/. Katz/, and B/. Mo ore/. This
+w ork has b een supp orted in part b y the U/.K/. PP AR C
+and the National Science F oundation under gran t No/.
+PHY/9/4/-/0/7/1/9/4 to the Institute for Theoretical Ph ysics
+of the Univ ersit y of California at San ta Barbara/.
+/1/2
+Lab el L
+box
+/1 /+ z
+i
+h
+g
+M
+/2/0/0
+r
+/2/0/0
+V
+/2/0/0
+N
+/2/0/0
+r
+s
+/=r
+/2/0/0
+/[Mp c/] /[kp c/] /[/1/0
+/1/2
+M
+/
+/] /[kp c/] /[km//s/]
+/1 /3/./0 /4/4/./0 /1/./5 /0/./3/1/9 /1/7/7 /8/8/./0 /5/6/3/7 /0/./0/5/2
+/2 /3/./0 /4/4/./0 /1/./5 /0/./2/9/3 /1/7/2 /8/5/./6 /5/1/7/8 /0/./0/5/7
+/3 /3/./0 /4/4/./0 /1/./5 /0/./4/1/4 /1/9/3 /9/6/./1 /7/3/1/6 /0/./0/8/2
+/4 /3/./0 /4/4/./0 /1/./5 /0/./5/2/5 /2/0/9 /1/0/3/./9 /9/2/7/8 /0/./0/4/6
+/5 /6/./0 /2/2/./0 /3/./0 /2/./4/2/5 /3/4/8 /1/7/3/./1 /5/3/5/7 /0/./0/6/0
+/6 /6/./0 /2/2/./0 /3/./0 /2/./3/0/1 /3/4/2 /1/7/0/./1 /5/0/8/3 /0/./0/7/1
+/7 /6/./0 /2/2/./0 /3/./0 /3/./5/1/9 /3/9/4 /1/9/6/./0 /7/7/7/4 /0/./0/6/8
+/8 /6/./0 /2/2/./0 /3/./0 /2/./5/5/2 /3/5/4 /1/7/6/./1 /5/6/3/7 /0/./1/2/4
+/9 /1/2/./0 /1/1/./0 /6/./0 /2/8/./1/5 /7/8/8 /3/9/2/./0 /7/7/7/3 /0/./1/2/4
+/1/0 /1/2/./0 /1/1/./0 /6/./0 /2/0/./5/9 /7/1/0 /3/5/3/./2 /5/6/8/6 /0/./0/7/8
+/1/1 /1/2/./0 /1/1/./0 /6/./0 /2/9/./6/7 /8/0/2 /3/9/8/./9 /8/1/9/3 /0/./1/3/1
+/1/2 /1/2/./0 /1/1/./0 /6/./0 /2/2/./0/1 /7/2/6 /3/6/1/./1 /6/0/7/8 /0/./0/8/8
+/1/3 /1/2/./0 /1/1/./0 /6/./0 /2/6/./1/6 /7/6/9 /3/8/2/./5 /7/2/2/4 /0/./0/7/7
+/1/4 /1/2/./0 /1/1/./0 /6/./0 /2/2/./6/5 /7/3/3 /3/6/4/./6 /6/2/5/4 /0/./0/6/5
+/1/5 /1/8/./0 /5/./5 /9/./0 /1/0/2/./6/8 /1/2/1/3 /6/0/3/./4 /8/4/0/1 /0/./1/1/0
+/1/6 /2/4/./0 /5/./5 /1/2/./0 /2/2/4/./3/5 /1/5/7/4 /7/8/3/./0 /7/7/4/4 /0/./1/2/1
+/1/7 /4/0/./0 /5/./5 /2/0/./0 /1/1/0/9/./9 /2/6/8/2 /1/3/3/4 /8/2/7/4 /0/./1/5/1
+/1/8 /4/8/./0 /5/./5 /2/4/./0 /1/9/3/1/./5 /3/2/2/6 /1/6/0/5 /8/3/3/4 /0/./1/8/8
+/1/9 /5/8/./0 /5/./5 /3/0/./0 /3/0/0/9/./7 /3/7/4/0 /1/8/6/1 /7/3/6/0 /0/./1/4/3
+T able /1/: P arameters of the n umerical exp erimen ts/.
+/1/3
+REFERENCES
+Ashman/, K/./, Salucci/, P /./, /& P ersic/, M/. /1/9/9/3/, MNRAS/,
+/2/6/0/, /6/1/0/.
+Bertsc hinger/, E/. /1/9/8/5/, ApJS/, /5/8/, /3/9/.
+Blumen thal/, G/.R/./, F ab er/, S/.M/./, Primac k/, J/.R/./, /&
+Rees/, M/.J/. /1/9/8/4/, Natur e /, /3/1/1/, /5/2/7/.
+Blumen thal/, G/.R/./, F ab er/, S/.M/./, Flores/, R/./, /& Pri/-
+mac k/, J/.P /. /1/9/8/6/, ApJ/, /3/0/1/, /2/7/.
+Bro eils/, A/.H/. /1/9/9/2a/, Ph/.D/. Thesis/, Gr/ oningen Univ er/-
+sit y /.
+Bro eils/, A/.H/. /1/9/9/2b/, A/&A/, /2/5/6/, /1/9/.
+Burstein/, D/./, /& Rubin/, V/. /1/9/8/5/, ApJ/, /2/9/7/, /4/2/3/.
+Carignan/, C/./, /& F reeman K/.C/. /1/9/8/8/, ApJ/, /3/3/2/, L/3/3/.
+Carignan/, C/./, /& Beaulieu/, S/./, /1/9/8/9/, ApJ/, /3/4/7/, /7/6/0/.
+Carlb erg/, R/. /1/9/9/4/, ApJ/, /4/3/3/, /4/6/8/.
+Casertano/, S/./, /& v an Gork om/, J/.H/./, /1/9/9/1/, AJ/, /1/0/1/,
+/1/2/3/1/.
+Ca v aliere/, A/./, /& F usco/-F emiano/, R/. /1/9/7/6/, A/&A/, /4/9/,
+/1/3/7/.
+Cole/, S/.M/. /1/9/9/1/, ApJ/, /3/6/7/, /4/5/.
+Cole/, S/.M/./, Arag/ on/-Salamanca/, A/./, F renk/, C/.S/./,
+Na v arro/, J/.F/./, /& Zepf/, S/.E/. /1/9/9/4/, MNRAS/, /2/7/1/,
+/7/8/1/.
+Crone/, M/./, Evrard/, A/.E/./, /& Ric hstone/, D/.O/. /1/9/9/4/,
+ApJ/, /4/3/4/, /4/0/2/.
+Da vis/, M/./, Efstathiou/, G/.P /./, F renk/, C/.S/./, /& White
+S/.D/.M/./, ApJ/, /2/9/2/, /3/7/1/.
+Dek el/, A/./, /& Silk/, J/. /1/9/8/6/, ApJ/, /3/0/3/, /3/9/.
+Dubinski/, J/. /& Carlb erg/, R/. /1/9/9/1/, ApJ/, /3/7/8/, /4/9/6/.
+Edge/, A/./, /& Stew art/, G/./, /1/9/9/1/, MNRAS/, /2/5/2/, /4/1/4/.
+Efstathiou/, G/.P /./, Da vis/, M/./, F renk/, C/.S/./, /& White/,
+S/.D/.M/. /1/9/8/5/, ApJS/, /5/7/, /2/4/1/.
+Efstathiou/, G/.P /./, F renk/, C/.S/./, White/, S/.D/.M/./, /&
+Da vis/, M/. /1/9/8/8a/, MNRAS/, /2/3/5/, /7/1/5/.
+Efstathiou/, G/.P /./, Ellis/, R/.S/./, /& P eterson/, B/.A/. /1/9/8/8b/,
+MNRAS/, /2/3/2/, /4/3/1/.
+F abian/, A/./, Canizares/, C/.R/./, and Nulsen/, P /.E/.J/. /1/9/9/1/,
+A/&AR/, /2/, /1/9/1/.
+F erguson/, H/.C/./, /& McGaugh/, S/. /1/9/9/5/, ApJ/, /4/4/0/, /4/7/0/.
+Fillmore/, J/.A/./, /& Goldreic h/, P /. /1/9/8/4/, ApJ/, /2/8/1/, /1/.
+Flores/, R/./, Primac k/, J/.R/./, Blumen thal/, G/.R/./, /&
+F ab er/, S/.M/. /1/9/9/3/, ApJ/, /4/1/2/, /4/4/3/.
+Flores/, R/./, /& Primac k/, J/.R/. /1/9/9/4/, ApJ/, /4/2/7/, L/1/.
+F renk/, C/.S/./, White/, S/.D/.M/./, Efstathiou/, G/.P /./, and
+Da vis/, M/. /1/9/8/5/, Natur e /, /3/1/7/, /5/9/5/.
+F renk/, C/.S/./, White/, S/.D/.M/./, Da vis/, M/./, and Efs/-
+tathiou/, G/.P /. /1/9/8/8/, ApJ/, /3/2/7/, /5/0/7/.
+Grossman/, S/.A/./, /& Nara y an/, R/./, /1/9/8/8/, ApJ/, /3/2/4/, L/3/7/.
+Gunn/, J/./, /& Gott/, J/.R/. /1/9/7/2/, ApJ/, /2/0/9/,/1/.
+Hernquist/, L/. /1/9/9/0/, ApJ/, /3/5/6/, /3/5/9/.
+Heyl/, J/.S/./, Cole/, S/.M/./, F renk/, C/.S/./, /& Na v arro/, J/.F/.
+/1/9/9/5/, MNRAS/, /2/7/4/, /7/5/5/.
+Ho/man/, Y/. /1/9/8/8/, ApJ/, /3/2/8/, /4/8/9/.
+Ho/man/, Y/./, /& Shaham/, J/. /1/9/8/5/, ApJ/, /2/9/7/, /1/6/.
+Jobin/, M/./, /& Carignan/, C/. /1/9/9/0/, AJ/, /1/0/0/, /6/4/8/.
+Jones/, C/./, /& F orman/, W/. /1/9/8/4/, ApJ/, /2/7/6/, /3/8/.
+Kau/mann/, G/./, White/, S/.D/.M/./, and Guiderdoni/, B/.
+/1/9/9/3/, MNRAS/, /2/6/4/, /2/0/1/.
+Lacey /, C/.G/./, Guiderdoni/, B/./, Ro cca/-V olmerange/, B/./,
+/& Silk/, J/. /1/9/9/3/, ApJ/, /4/0/2/, /1/5/.
+Lacey /, C/.G/./, /& Cole/, S/.M/. /1/9/9/3/, MNRAS/, /2/6/2/, /6/2/7/.
+Lacey /, C/.G/./, /& Cole/, S/.M/. /1/9/9/4/, MNRAS/, /2/7/1/, /6/7/6/.
+Lak e/, G/./, Sc hommer/, R/.A/./, /& v an Gork om/, J/.H/. /1/9/9/0/,
+AJ/, /9/9/, /5/4/7/.
+Lo v eda y /, J/./, P eterson/, B/.A/./, Efstathiou/, G/.P /./, Mad/-
+do x/, S/.J/. /1/9/9/2/, ApJ/, /3/9/0/, /3/3/8/.
+Matthewson/, D/.S/./, F ord/, V/.L/./, /& Buc hhorn/, M/. /1/9/9/2/,
+ApJS/, /8/1/, /4/1/3/.
+Mo ore/, B/. /1/9/9/4/, Natur e /, /3/7/0/, /6/2/9/.
+Na v arro/, J/.F/./, /& White/, S/.D/.M/. /1/9/9/3/, MNRAS/, /2/6/5/,
+/2/7/1/.
+/1/4
+Na v arro/, J/.F/./, F renk/, C/.S/./, /& White/, S/.D/.M/. /1/9/9/5a/,
+MNRAS/, /2/7/5/, /5/6/.
+Na v arro/, J/.F/./, F renk/, C/.S/./, /& White/, S/.D/.M/. /1/9/9/5b/,
+MNRAS/, in press/.
+Na v arro/, J/.F/./, Ek e/, V/.R/./, /& F renk/, C/.S/. /1/9/9/5/, MN/-
+RAS/, submitted/.
+P ersic/, M/./, /& Salucci/, P /. /1/9/9/1/, ApJ/, /3/6/8/, /6/0/.
+P ersic/, M/./, /& Salucci/, P /. /1/9/9/5/, ApJS/, in press/.
+P ersic/, M/./, Salucci/, P /./, /& Stel/, F/. /1/9/9/5/, MNRAS/, sub/-
+mitted/.
+Pierce/, M/./, /& T ully /, B/. /1/9/8/8/, ApJ/, /3/3/0/, /5/7/9/.
+Press/, W/.H/./, /& Sc hec h ter/, P /. /1/9/7/4/, ApJ/, /1/8/7/, /4/2/5/.
+Quinn/, P /.J/./, Salmon/, J/.K/./, /& Zurek/, W/.H/. /1/9/8/6/, Na/-
+tur e /, /3/2/2/, /3/2/9/.
+Salucci/, P /. /& F renk/, C/.S/. /1/9/8/9/, MNRAS/, /2/3/7/, /2/4/7/.
+Salucci/, P /./, Ashman/, K/./, /& P ersic/, M/. /1/9/9/1/, ApJ/, /3/7/9/,
+/8/9/.
+Soucail/, G/./, /& Mellier/, Y/./, /1/9/9/4/, in Gr avitational
+L enses in the Universe /, eds/. Surdej/, J/. et al/. /(Uni/-
+v ersit y of Liege/)/, p/./5/9/5/.
+Spra yb erry /, D/./, Imp ey /, C/./, Irwin/, M/.J/./, McMahon/,
+R/.G/./, /& Both un/, G/.D/. /1/9/9/3/, ApJ/, /4/1/7/, /1/1/4/.
+W alk er/, T/.P /./, Steigman/, G/./, Sc hramm/, D/.N/./, Oliv e/,
+K/.A/./, Kang/, H/./-S/. /1/9/9/1/, ApJ/, /3/7/6/, /5/1/.
+W arren/, M/.S/./, Quinn/, P /.J/./, Salmon/, J/.K/./, /& Zurek/,
+W/.H/. /1/9/9/2/, ApJ/, /3/9/9/, /4/0/5/.
+W axman/, E/./, /& Miralda/-Escud / e/, J/. /1/9/9/5/, ApJ/, in
+press/.
+White/, S/.D/.M/./, /& Rees/, M/.J/. /1/9/7/8/, MNRAS/, /1/8/3/, /3/4/1/.
+White/, S/.D/.M/. /1/9/7/9/, MNRAS/, /1/8/9/, /8/3/1/.
+White et al/. /1/9/8/3/, ApJ/, /2/0/3/, /7/0/1/.
+White/, S/.D/.M/./, and F renk/, C/.S/. /1/9/9/1/, ApJ/, /3/7/9/, /2/5/.
+Whitmore/, B/./, F orb es/, D/./, /& Rubin/, V/.C/. /1/9/8/8/, ApJ/,
+/3/3/3/, /5/4/2/.
+Zaritsky /, D/./, Smith/, R/./, F renk/, C/.S/./, /& White/, S/.D/.M/.
+/1/9/9/3/, ApJ/, /4/0/5/, /4/6/4/.
+Zaritsky /, D/./, /& White/, S/.D/.M/. /1/9/9/4/, ApJ/, /4/3/5/, /5/9/9 /.
+Zurek/, W/.H/./, Quinn/, P /.J/./, /& Salmon/, J/.K/. /1/9/8/8/, ApJ/,
+/3/3/0/, /5/1/9/.
+This /2/-column preprin t w as prepared with the AAS L
+A
+T
+E
+X
+macros v/4/./0/.
+/1/5
+Fig/. /1a/./| The e/ects of v arying the initial redshift on
+the densit y pro/le of sim ulated halos/. The masses of
+the t w o halos sho wn are / /1/0
+/1/1
+and / /1/0
+/1/5
+M
+/
+/. The
+gra vitational softening and the virial radius are in/-
+dicated with up w ard and do wn w ard p oin ting arro ws/,
+resp ectiv ely /. Solid/, dotted/, and dashed lines corre/-
+sp ond to /1 /+ z
+i
+/= /2/2 /: /0/, /1/1 /: /0/, and /5 /: /5/, resp ectiv ely /.
+Fig/. /1b/./| Circular v elo cit y pro/les for the halos
+sho wn in Fig/. /1a/. Arro ws are also as in Fig/. /1a/.
+F or /1 /+ z
+i
+/= /5 /: /5/, the circular v elo cit y near the cen ter
+of the small halo is substan tially underestimated/. F or
+larger z
+i
+/, the mo dels con v erge to a unique pro/le/.
+/1/6
+Fig/. /2a/./| Densit y pro/les of the same halos sho wn
+in Figure /1 for di/eren t c hoices of the gra vitational
+softening/, h
+g
+/. Up w ard/-p oin ting arro ws indicate the
+softening v alues/. Do wn w ard p oin ting arro ws indicate
+the virial radius/. V arying the softening b y a factor of
+/v e has no signi/can t e/ect on the structure of the
+halo b ey ond one gra vitational softening length/.
+Fig/. /2b/./| Circular v elo cit y pro/les for the halos
+sho wn in Figure /2a/. Arro ws are also as in Figure /2a/.
+Di/ering gra vitational softening lengths ha v e no sig/-
+ni/can t e/ect on the structure of the halo on regions
+larger than h
+g
+/.
+Fig/. /3/./| Densit y pro/les of four halos spanning four
+orders of magnitude in mass/. The arro ws indicate the
+gra vitational softening/, h
+g
+/, of eac h sim ulation/. Also
+sho wn are /ts from eq/./3/. The /ts are go o d o v er t w o
+decades in radius/, appro ximately from h
+g
+out to the
+virial radius of eac h system/.
+/1/7
+Fig/. /4/./| Scaled densit y pro/les of the most and least
+massiv e halos sho wn in Figure /3/. The large halo is less
+cen trally concen trated than the less massiv e system/.
+Fig/. /5/./| Circular v elo cit y pro/les of all /1/9 halos/.
+The pro/les are truncated at the virial radius/, r
+/2/0/0
+/.
+The gra vitational softening is ab out /1/0
+/BnZr /2
+/ r
+/2/0/0
+/. Note
+that all pro/les ha v e the same shap e/.
+Fig/. /6/./| Scaled circular v elo cit y pro/les of t w o ha/-
+los/, one of the largest and one of the smallest in our
+sample /(solid curv es/)/. The dashed lines are /ts with
+eq/./(/5/)/. The dotted line is a /t to the lo w mass sys/-
+tem using a Hernquist mo del /(see eq/./6/)/. Note that
+the Hernquist mo del underestimates the halo circular
+v elo cit y at r
+/2/0/0
+/.
+/1/8
+Fig/. /7/./| The c haracteristic o v erdensit y /
+c
+as a func/-
+tion of the mass of the halo/. The curv es sho w the
+mass/-o v erdensit y relation predicted from the forma/-
+tion times of halos /(see text/)/. All curv es are normal/-
+ized so that they cross at M
+/2/0/0
+/= M
+/?
+/.
+Fig/. /8/./| The concen tration c as a function of
+the mass of the halo/. The curv es sho w the mass/-
+concen tration relation predicted from the formation
+times of halos/. All curv es are as in Figure /7/, and ha v e
+b een normalized so that they cross at M
+/2/0/0
+/= M
+/?
+/.
+Fig/. /9/./| The ratio b et w een the maxim um circular
+v elo cit y of a halo and the v alue at r
+/2/0/0
+as a func/-
+tion of the circular v elo cit y at the virial radius/. Lo w
+mass systems are more concen trated than more mas/-
+siv e ones/. The maxim um v elo cit y can b e up to t wice
+the v alue at r
+/2/0/0
+for a small galaxy halo/.
+/1/9
+Fig/. /1/0/./| The maxim um circular v elo cit y as a func/-
+tion of the radius at whic h it is attained in halos of
+di/eren t mass/. Note that a halo with V
+max
+/= /2/2/0
+km//s has a rising rotation curv e that extends out to
+ab out /5/0 kp c/, w ell b ey ond the luminous radius of a
+galaxy lik e the Milky W a y /.
+Fig/. /1/1/./| Rotation curv es of disk/+halo systems
+/(solid lines/) with parameters c hosen to matc h the ob/-
+serv ational data of P ersic /& Salucci /(/1/9/9/5/) /(dotted
+lines/)/. The dashed lines indicate the con tribution of
+the dark halo/. Note that the disk mass/-to/-ligh t ra/-
+tio increases as a function of mass/, and that the halo
+con tribution is less imp ortan t in brigh t galaxies/.
+/2/0
+Fig/. /1/2/./| The circular v elo cities of CDM halos /(dot/-
+ted lines/) compared with the halo con tribution to the
+rotation curv e of four dw arf galaxies /(solid lines/)/. The
+solid lines encompass the lik ely con tribution of the
+halo/, and corresp ond to the /\maxim al /" and /\mini/-
+mal/" disk h yp otheses/. CDM halos seem to b e signif/-
+ican tly more concen trated than allo w ed b y observ a/-
+tions/.
+Fig/. /1/3/./| The cum ulativ e B/-band luminosit y den/-
+sit y in galaxies with optical rotation v elo cities larger
+than V
+opt
+as predicted b y our standard CDM mo del/.
+W e use the T ully/-Fisher relation/, and assume that
+the abundance of galaxies with rotation v elo cit y V
+opt
+matc hes that of halos with V
+/2/0/0
+/= V
+opt
+/(solid line/)/, or
+V
+/2/0/0
+/= F /( V
+opt
+/) as giv en in the text /(dotted line/)/.
+/2/1
+Fig/. /1/4/./| The densit y pro/le of an isothermal gas
+/(dotted line/) in h ydrostatic equilibrium within a CDM
+halo whose structure is giv en b y eq/./(/3/) /(solid line/)/.
+The dashed line indicates a /t using the / mo del/.
+The parameters r
+c
+/= /0 /: /1 r
+max
+and / /= /0 /: /7 giv e an
+excellen t / /-mo del /t to the gas pro/le/.
+/2/2

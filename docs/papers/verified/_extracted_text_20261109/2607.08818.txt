@@ -1,0 +1,1472 @@
+Astronomy&Astrophysicsmanuscript no. aa61941-26©ESO 2026
+October 23, 2026
+Dark matter density profiles of the Milky Way satellite population:
+reconciling simulations and observations
+J. Sarrato-Alós1,2 & J. M. Arroyo-Polonio1,2⋆
+1 Instituto de Astrofísica de Canarias (IAC), Calle Via Láctea s/n, E-38205 La Laguna, Tenerife, Spain
+e-mail:jorge.sarrato@iac.es
+2 Universidad de La Laguna, Avda. Astrofísico Fco. Sánchez s/n, E-38206 La Laguna, Tenerife, Spain
+Received x xx, xxxx; accepted x xx, xxxx
+ABSTRACT
+Context.The cusp-core problem remains a central challenge in theΛCDM model. Comparisons between the inner logarithmic slopes
+(dlogρ/dlogr) of galaxies’ dark matter haloes inferred from simulations and observations have historically suffered from a systematic
+methodological mismatch. Comparing slopes at different radii raised apparent tensions between simulations and observations due to
+inconsistent slope definitions rather than genuine physical discrepancies.
+Aims.We aim to perform a rigorous comparison between dark matter density profiles of Milky Way dwarf satellite galaxies in-
+ferred from dynamical modelling and those predicted by CDM cosmological hydrodynamical simulations in order to evaluate their
+agreement.
+Methods.We use the NIHAO and FIRE-2 cosmological zoom-in simulation suites (M ⋆∼10 3–1011 M⊙) to compare simulated dark
+matter density profiles against dynamical model inferences of 16 Milky Way satellites from four distinct methods, restricting the
+analysis to their reliability limits. We evaluate simulated slopes at observationally accessible radii and directly compare full density
+and slope profiles between simulated and observed satellites of matched stellar mass.
+Results.Both observed and simulated galaxies reveal a clear mass-dependent core-formation trend, with inner slopes rising from
+super-cuspy values (dlogρ/dlogr≈ −1.5) atM ⋆ ∼10 5 M⊙ to core-like values (≈0 to−0.4) atM ⋆ ∼10 8 M⊙. Efficient core
+formation begins atM ⋆ ≳10 6 M⊙, with satellite systems presenting increased scatter at this mass, consistent with tidal disruption.
+Simulated profiles agree with observations to within≲1σfor most systems, outperforming a NFW profile. Willman 1 remains an
+unresolved outlier whose anomalous structural properties are not reproduced by either simulation suite. Observational models present
+scatter for the same system at a level comparable to the apparent simulation-to-observation offset.
+Conclusions.Evaluating dark matter density slopes at fixed physical radii significantly improves the agreement between hydrody-
+namical simulations and dwarf satellites’ dynamical models. Moreover, a comprehensive comparison of full density profiles at fixed
+stellar mass reveals no clear signs of tension.
+Key words.Dark matter profiles, Dwarf galaxies, Satellites
+1. Introduction
+The distribution of dark matter in galaxies remains a high-
+priority problem in astrophysics. While cosmological simula-
+tions within theΛCDM framework predict that dark matter
+haloes follow a characteristic density profile with a cuspy in-
+ner slope (dlogρ/dlogr=−1, Navarro et al. 1997), observa-
+tional inferences often suggest shallower, cored profiles, particu-
+larly in dwarf galaxies (e.g., de Blok et al. 2001; Oh et al. 2011).
+Reconciling this apparent discrepancy (commonly known as the
+"cusp–core problem") is central to understanding both the na-
+ture of dark matter and the interplay between baryonic feedback
+processes and halo structure.
+On one hand, this discrepancy has motivated the explo-
+ration of non-CDM scenarios. These include Warm Dark Mat-
+ter (WDM; e.g., Bode et al. 2001), Self-Interacting Dark Mat-
+ter (SIDM; e.g., Spergel & Steinhardt 2000), and Fuzzy Dark
+Matter (FDM; e.g., Hu et al. 2000; Hui et al. 2017), each of
+which can alter inner halo structures through distinct physical
+mechanisms. WDM suppresses small-scale structure via free-
+streaming, though it generally requires additional baryonic ef-
+⋆ Both authors contributed equally to this work.
+fects to produce flat inner cores rather than slightly lower-
+amplitude cusps. In contrast, SIDM features self-scattering that
+robustly creates a central core in haloes; however, at later times,
+these systems can undergo core collapse, reverting back to a
+steep, cuspy profile. FDM introduces ultralight bosons where
+quantum pressure suppresses structures below the de Broglie
+wavelength, naturally forming a flat core at the centre of haloes.
+On the other hand, over the past decade, hydrodynamical
+simulations have demonstrated that baryonic processes, in par-
+ticular stellar feedback, can significantly alter the inner slope of
+cold dark matter (CDM) density profiles (Governato et al. 2010;
+Pontzen & Governato 2012). Several systematic studies, such
+as those of Di Cintio et al. (2014), Tollet et al. (2016), Lazar
+et al. (2020) and Sarrato-Alós et al. (2026), have quantified the
+dependence of the inner slope on the stellar-to-halo mass ratio.
+These works typically measure the slope in simulations within
+a radial range of 0.01–0.02R vir, and they reveal a strong corre-
+lation: haloes hosting galaxies with intermediate stellar-to-halo
+mass ratios (M⋆/Mhalo∼5×10 −3) develop the shallowest dark
+matter profiles, while both lower and higher mass systems re-
+main cuspier.
+Article number, page 1 of 14
+arXiv:2607.08818v2  [astro-ph.GA]  22 Oct 2026
+A&A proofs:manuscript no. aa61941-26
+On the observational side, constraints on inner dark mat-
+ter slopes rely primarily on dynamical modelling of stellar and
+gaseous kinematics. Studies such as Hayashi et al. (2020, 2023),
+or Cooke et al. (2022) for more massive dwarf galaxies, have
+attempted to bridge simulations and observations by compar-
+ing the predicted slope versus stellar-to-halo mass ratio relation
+from hydrodynamical CDM runs with the slopes inferred from
+dynamical models of dwarf galaxies. These comparisons reveal
+contrasting systematic discrepancies at different regions of the
+dwarf mass scale. At the lower-mass end (M ⋆/Mhalo ≤10 −3),
+where hydrodynamical simulations feature cuspy dark matter
+profiles, non-spherical Jeans dynamical models indicate inner
+slopes that are systematically shallower than the simulated re-
+lations (Hayashi et al. 2020, 2023). This lower-mass preference
+for cored structures is matched by gas rotation curve data across
+the same mass scales (Cooke et al. 2022). The latter study also
+presents hints of the inverse discrepancy at larger stellar-to-halo
+mass ratios (M⋆/Mhalo∼10 −2), where some rotation curve fits
+indicate cuspier slopes than simulations, for which this scale is
+close to their peak of core formation efficiency.
+While this represents an important step towards a direct com-
+parison, we noticed a methodological mismatch: simulations
+typically report slopes at radii defined as a fixed fraction of the
+virial radius (0.01–0.02R vir; e.g., Di Cintio et al. 2014), histor-
+ically labelled as inner slopes, whereas observational analyses
+can only probe down to the innermost radius accessible with the
+available data. This mismatch complicates the interpretation of
+whether apparent discrepancies arise from genuine physical dif-
+ferences or from inconsistent definitions of the inner slope.
+In this work, we address this mismatch by adopting a
+simulation measurement strategy consistent with observational
+methodology. Rather than evaluating the inner slope at a fixed
+fraction of the virial radius, we compute it at the specific physical
+radii accessible to dynamical modelling. This approach ensures
+a rigorous, apples-to-apples comparison between simulated and
+observed galaxies. Using this method, we find that this obser-
+vationally motivated definition significantly improves the agree-
+ment between hydrodynamical simulations in a CDM frame-
+work and dwarf galaxy observations. Moreover, a comprehen-
+sive comparison of full density profiles at fixed stellar mass re-
+veals no clear signs of tension.
+Our analysis focuses on the faintest systems with litera-
+ture models based on fits to resolved stellar kinematics (M ⋆∼
+103−10 8 M⊙), comparing the observationally inferred dark mat-
+ter profiles of Milky Way dwarf satellites with predictions from
+the NIHAO (Wang et al. 2015) and FIRE-2 (Hopkins et al. 2018)
+hydrodynamical simulation suites. The proximity of these satel-
+lite galaxies allows for resolved stellar kinematics, enabling ro-
+bust dark matter constraints via various dynamical modelling
+techniques. However, this low-mass regime introduces distinct
+challenges: observational data are limited by spatial coverage
+and potential extrapolation bias, while simulations are bounded
+by numerical resolution (e.g., Power et al. 2003). We explicitly
+account for these systematic limitations to ensure a fair and con-
+sistent comparison.
+This paper is structured as follows. Sec. 2 reviews the lim-
+itations of existing methods for estimating dark matter density
+profiles from observations, presenting the observational works
+with which we compare in this study and defining their relia-
+bility radial ranges. Sec. 3 describes the simulation suites and
+our post-processing methods to ensure consistency with observa-
+tions. In Sec. 4, we present and discuss our main results, includ-
+ing both the slope-only and direct profile comparisons. Finally,
+Sec. 5 summarises our conclusions.
+2. Defining reliable regions from observational
+inferences
+The inference of dark matter density profiles from observations
+primarily relies on projected phase-space information. Stellar
+positions on the sky are typically obtained from photometric sur-
+veys (e.g., Gaia Collaboration et al. 2021), while line-of-sight
+velocities are measured through ground-based spectroscopic ob-
+servations (e.g., Tolstoy et al. 2006; Walker et al. 2009; Tol-
+stoy et al. 2025) 1. Samples comprising hundreds, or in rare
+cases thousands, of stellar line-of-sight velocity measurements
+are commonly used for dynamical modelling.
+Spectroscopic datasets are often affected by significant selec-
+tion effects arising from limited observing time, fibre-allocation
+constraints, and target prioritisation strategies. In addition, reli-
+able membership assignment becomes increasingly difficult in
+the outermost regions, where contamination from foreground
+stars is more severe and the surface density of member stars is
+low. Consequently, the effective radial coverage of dynamical
+tracers can vary substantially across systems. It is essential to
+assess carefully the radial range over which observational con-
+straints drive the inference of dark matter density profiles, and to
+determine the spatial scales within which these profiles can be
+considered robust.
+Furthermore, dynamical modelling techniques may intro-
+duce additional biases. In particular, methods that rely solely
+on solving the second-order Jeans equations are affected by
+the well-known mass–anisotropy degeneracy (Binney & Ma-
+mon 1982; Merritt 1987). However, several approaches have
+been proposed to mitigate this limitation. For example, the
+presence of multiple stellar populations in some dwarf galax-
+ies can provide additional constraints on the mass profile (e.g.,
+Battaglia et al. 2008; Zhu et al. 2016; Strigari et al. 2017), while
+higher-order moments of the velocity distribution, which con-
+tain information beyond the velocity dispersion, can also help
+break the degeneracy (Breddels & Helmi 2013; Wardana et al.
+2025; Bañares-Hernández et al. 2026). Furthermore, alternative
+dynamical modelling techniques, such as distribution-function
+modelling, fit the full line-of-sight velocity distribution and ac-
+count for multiple stellar populations, therefore further alleviat-
+ing this degeneracy (Arroyo-Polonio et al. 2025; Pascale et al.
+2026).
+In this work, we compile inferred dark matter density pro-
+files from four primary literature sources: Hayashi et al. (2020,
+2023) (H20/H23), Read et al. (2019) (R19), Arroyo-Polonio
+et al. (2025) (AP25), and Pascale et al. (2025, 2026) (P25/P26)2.
+We consider only observed galaxies for which at least one sim-
+ulated galaxy has a comparable stellar mass, defined as be-
+ing within±0.25 dex in stellar mass, for reference, the lowest-
+mass galaxy in our combined FIRE-2 and NIHAO sample has
+log10 M⋆/M⊙ =3.16. Significant modelling differences exist
+among these distinct analysis frameworks. However, robustly
+accounting for which specific technique is most reliable within
+1 In a few favourable cases, the combination ofHSTandGaiaas-
+trometry enables proper-motion measurements for several hundred stars
+in some of the most massive Milky Way satellites (Vitral et al. 2024).
+These data can provide useful additional constraints for dynamical mod-
+elling. However, such measurements remain rare, are spatially limited
+by the field of view ofHST, and typically contribute less constraining
+power than line-of-sight velocity samples.
+2 P26 uses different models and datasets for the same galaxies.
+Throughout this paper, we use their results reported for axisymmet-
+ric models fitting two stellar populations with the Walker et al. (2023)
+dataset.
+Article number, page 2 of 14
+J. Sarrato-Alós & J. M. Arroyo-Polonio: Reconciling simulated and observed MW satellite density profiles
+each region of a galaxy is exceptionally challenging and remains
+beyond the scope of this paper. We therefore assume that these
+various techniques all provide meaningful constraints within ra-
+dial regions sufficiently populated by spectroscopic tracers.
+Under this assumption, the primary limitation is established
+by the data quality rather than by the modelling framework itself.
+Therefore, for each individual system, we must define objective
+criteria to determine the radial range over which the inferred pro-
+file is genuinely constrained by observations, as opposed to be-
+ing driven by extrapolation or modelling priors. To accomplish
+this, we analyse directly the spectroscopic catalogues used in
+each literature work. We define the reliable radial range using
+distinct criteria depending on whether the dynamical analysis fits
+individual stars or binned velocity dispersion data3.
+For star-by-star analyses, we always consider the profile at
+the half-light radius as reliable. The inner reliability limit is de-
+termined by the smallest radius enclosing at least 50 member
+stars with line-of-sight velocity measurements. The projected
+half-light radius is computed asR h =R h,e
+√
+1−e, whereR h,e
+is the projected half-light radius along the semi-major axis and
+eis the ellipticity of the galaxy. If the radius enclosing 50 stars
+exceedsR h, the half-light radius is adopted as the inner limit in-
+stead. The outer reliability limit is set by the radius beyond which
+fewer than 10 member stars are available.
+For analyses based on binned velocity dispersion data, we
+require a minimum of three bins to constrain a slope. The radius
+of the third innermost bin therefore defines the inner reliability
+limit. We consider these models reliable all the way out to the
+outermost bin. These binned-data criteria are necessarily less re-
+strictive than those applied to discrete analyses. This choice is
+consistent with the fact that individual stellar measurements re-
+tain more information than binned summaries. We note that the
+reliability limits are derived from projected quantities and sub-
+sequently applied to three-dimensional profiles. This approxima-
+tion is unavoidable given that the line-of-sight position of indi-
+vidual stars is unknown.
+3. Simulations
+3.1. NIHAO
+The NIHAO project (Numerical Investigations of Hundred As-
+trophysical Objects Wang et al. 2015) comprises a suite of high-
+resolution zoom-in hydrodynamical simulations. These simu-
+lations utilise thegasoline2 code (Wadsley et al. 2017), and
+a Planck cosmology (Planck Collaboration et al. 2014) frame-
+work: H0 =100h km s -1 Mpc-1 with h=0.671,Ω m =0.3175,
+ΩΛ =0.6824,Ω b =0.049, andσ 8 =0.8344.
+Galaxy formation is modelled via the MaGICC framework
+(Making Galaxies In a Cosmological Context; Stinson et al.
+2013), which has demonstrated success in reproducing observed
+scaling relations, including the Tully-Fisher, size-luminosity,
+and mass-metallicity relations, (Brook et al. 2012; Macciò et al.
+2012). Star formation follows a Chabrier (2003) initial mass
+function, occurring in gas regions exceeding a number density
+threshold ofn th =10.3 cm−3. Stellar feedback incorporates both
+early energy injection from massive stars and supernova blast-
+waves (Stinson et al. 2006). Gas experiences metal-line cooling,
+3 The adopted thresholds should be regarded as practical working def-
+initions rather than rigorous theoretical limits. There is no unique min-
+imum number of stars or velocity-dispersion measurements required to
+constrain a dark matter density slope, as the available dynamical in-
+formation depends on the radial distribution of the stars, the velocity
+uncertainties, and the applied technique.
+photoionisation, and ultraviolet heating, based on the prescrip-
+tions detailed by Shen et al. (2010).
+The simulation resolution (100–800 pc) allows for resolving
+internal structures below 1% of the virial radius. We used AHF
+(Amiga Halo Finder; Knollmann & Knebe 2009) to identify
+haloes within each zoom-in volume. From the AHF catalogue,
+we selected haloes containing more than 99% high-resolution
+particles (fMhires>0.99) and at least 50 star particles, both
+globally and within the inner 0.1Rvir. This limit is set empirically
+to ensure baryonic properties like stellar masses and half-light
+radii are well resolved, while accounting for possible contami-
+nation from nearby galaxies. Haloes are classified as centrals or
+satellites based on the AHFhostHaloflag. Our final NIHAO
+sample comprises 425 haloes drawn from 95 zoom-in simula-
+tions, including 326 centrals and 99 satellites.
+3.2. FIRE-2
+The Feedback In Realistic Environments (FIRE Hopkins et al.
+2014) project consists of a series of cosmological zoom-in sim-
+ulations produced using the meshless finite-mass code GIZMO
+(Hopkins 2015). The suite uses slightly varying cosmological
+parameters across different runs. Some align with Planck results
+(Planck Collaboration et al. 2014): H0 =100h km s -1 Mpc-1 with
+h=0.671,Ω m =0.3175,Ω Λ =0.6824,Ω b =0.049, andσ 8 =
+0.8344. Other simulations adopt the AGORA project parameters
+(Kim et al. 2014): H 0 =100h km s -1 Mpc-1 with h=0.702,Ω m
+=0.272,Ω Λ =0.728,Ω b =0.0455, andσ 8 =0.807.
+Specifically, we use the FIRE-2 simulations (Hopkins et al.
+2018), which include a detailed model of galaxy formation
+physics. The core zoom-in runs implement stellar feedback
+channels that include the energy, momentum, mass, and metal
+fluxes from supernovae (Types Ia and II), continuous stellar
+mass-loss via O-star and AGB winds, radiation pressure, pho-
+toionisation, and photoelectric heating. Furthermore, star forma-
+tion follows a Kroupa (2002) initial mass function and is strictly
+restricted to cold, self-gravitating, and molecular gas that ex-
+ceeds a high critical density threshold (n H≥1000 cm−3), where
+the molecular gas fraction is determined dynamically by ac-
+counting for self-shielding. These simulations reach high spatial
+resolution, with gravitational softening lengths on the order of
+10 pc.
+The FIRE-2 suite has been extensively validated against ob-
+servations, successfully reproducing realistic star formation his-
+tories, gas distributions, metallicity profiles, morphologies, and
+the macroscopic features of dwarf and Milky Way-mass rotation
+curves, as well as stellar mass scaling relations (Hopkins et al.
+2018). While these simulations successfully capture broad kine-
+matic properties on global scales, our work extends this analysis
+by conducting a rigorous comparison of the smaller-scale inner
+density slopes against individual local dwarf satellite systems.
+We used the Rockstar halo catalogues (Behroozi et al. 2012),
+which are publicly available for each zoom-in volume. From the
+Rockstar catalogues, we retained haloes containing a minimum
+of 50 star particles within 0.1R vir. These catalogues do not di-
+rectly flag haloes as either centrals or satellites; we distinguish
+them by iterating through the catalogue in order of decreasing
+mass: a halo is flagged as a satellite if its centre lies within the
+virial radius of a more massive halo 4. As an additional quality
+cut, we required the offset between the shrinking-sphere centre
+4 This instantaneous geometric cut may introduce minor contamina-
+tion in the sample of centrals from exited splashback systems (Adhikari
+et al. 2014).
+Article number, page 3 of 14
+A&A proofs:manuscript no. aa61941-26
+(Power et al. 2003) and the Rockstar-reported halo centre to be
+less than 1 kpc, filtering out haloes with poorly converged cen-
+tres. Our final FIRE-2 sample consists of 573 haloes drawn from
+26 zoom-in simulations, comprising 294 centrals and 279 satel-
+lites.
+3.3. Comparison to observations
+We compare the baryonic structural parameters (stellar mass,
+circularised projected half-light radius, and effective surface
+brightness) of simulated galaxies in our sample with observa-
+tions of dwarf galaxies, including those with dynamical mod-
+els from R19, H20/H23, AP25, and P25/P26. Observational data
+are extracted from the publicly available McConnachie (2021)
+database, which tracks literature updates on the original work
+presented in McConnachie (2012). With respect to the galaxies
+for which we compiled dynamical models, data for Sextans and
+Canes Venatici I are extracted from the original McConnachie
+(2012), Crater 2 from Torrealba et al. (2016), Antlia II from Tor-
+realba et al. (2019), and all remaining systems from Muñoz et al.
+(2018). Stellar masses are computed assuming a V-band mass-
+to-light ratio of 1.68. This value is derived from a synthetic stel-
+lar population based on BaSTI evolutionary models (a Bag of
+Stellar Tracks and Isochrones, Pietrinferni et al. 2013) and a
+Salpeter initial mass function (Salpeter 1955), assuming a con-
+stant star formation history between 12 and 13 Gyr ago and a
+metallicity distribution centred at−2.3 with a spread of 0.5 dex.
+Fig. 1 shows the joint distributions of these parameters. For sim-
+ulated galaxies, we calculate the projected half-light radius and
+effective surface brightness in the V-band5 from 256 projections
+uniformly distributed along the unit sphere, and plot the median
+and 1σrange.
+Simulations exhibit general agreement with observational
+trends. However, we note that, for stellar masses higher than
+∼107M⊙, the half-light radii of simulated galaxies are systemati-
+cally larger than those of field galaxies in McConnachie (2012),
+closer to those of ultra-diffuse galaxies (e.g., van Dokkum et al.
+2015). Other recent studies from the literature find similar trends.
+Merritt et al. (2020) report light profiles of galaxies in the Il-
+lustris TNG100 (Nelson et al. 2017) simulations are more ex-
+tended than observations from DNGS (Dragonfly Nearby Galax-
+ies Survey, Merritt et al. 2016). Furthermore, Rohr et al. (2022)
+compared FIREbox (Feldmann et al. 2023, which uses the same
+galaxy formation model as FIRE-2 simulations in this work)
+simulated galaxies with galaxy size-stellar mass relations ob-
+tained by Nedkova et al. (2021), and also concluded that the sizes
+of simulated galaxies are larger than their observational counter-
+parts at the same stellar masses.
+3.4. Inner slopes of simulated galaxies
+The inner slope of dark matter density profiles in cosmological
+simulations is frequently reported at∼1.5%R vir (e.g., Di Cin-
+tio et al. 2014; Tollet et al. 2016; Lazar et al. 2020; Sarrato-Alós
+et al. 2026). However, this convention has significant limitations.
+First, measurements at this radius often coincide with the pro-
+file’s slope transition region, making them unrepresentative of
+the asymptotic inner slope. Second,R vir is generally inaccessi-
+ble in observational studies. Finally, for satellite galaxies (the
+5 For this calculation, we make use of the publicly available pynbody
+code (Pontzen et al. 2013). It assigns luminosities to each stellar particle
+using simple stellar populations from Marigo et al. (2008); Girardi et al.
+(2010).
+Fig. 1.Comparison of the properties of NIHAO (grey) and FIRE-
+2 (black) isolated (circles) and satellite (triangles) galaxies to Lo-
+cal Group galaxies from the updated McConnachie (2021) catalogue
+(coloured triangles). Top-left panel: Effective surface brightness plot-
+ted against stellar mass. Top-right panel: Effective surface brightness
+against circularised projected half-light radius. Bottom panel: Circu-
+larised projected half-light radius against stellar mass. Orange trian-
+gles indicate dwarf satellite galaxies analysed in R19, H20/H23, AP25,
+and P25/P26, while blue triangles represent the rest of the observational
+samples.
+primary targets for dynamical modelling) the virial radius is not
+well defined due to tidal stripping (e.g., Read et al. 2006; Chang
+et al. 2013).
+Fig. 2.Dark matter density profiles for two galaxies from the FIRE-
+2 project, shown as points. The shaded regions indicate the 1-2%R vir
+range, with the dashed lines representing the slope at the logarithmic
+midpoint. The simulated galaxy m10e_res500 is selected to match the
+stellar mass of the Sculptor dwarf galaxy; its density is scaled by 1.6
+to facilitate the visual comparison of profile shapes with the dynamical
+analysis by AP25. The simulated galaxy m12r_res7100 is shown as a
+representative example of a galaxy with a higher stellar mass
+Article number, page 4 of 14
+J. Sarrato-Alós & J. M. Arroyo-Polonio: Reconciling simulated and observed MW satellite density profiles
+Fig. 2 shows dark matter density profiles for two FIRE-2
+galaxies. While the slope measured at 1–2%R vir is commonly
+used as a proxy for the inner slope, the profiles continue to flat-
+ten significantly interior to this region. Using this definition to
+compare with dynamical models of observed dwarf galaxies can
+be misleading. For example, the figure compares the simulation
+profile with the AP25 model of Sculptor. The slope inferred at
+1–2%R vir appears cuspier than a more representative inner slope
+measured at smaller radii, even though the simulation resolves
+the inner region and such a measurement is feasible. Comparing
+both the simulated galaxy and the dynamical model at the same
+physical radii would provide a fairer assessment.
+Based on visual inspection, we find that an inner range of
+100–500 pc is typically sufficient to avoid the slope transition
+region. To improve the robustness of comparisons between sim-
+ulations and observations, we therefore choose to estimate inner
+slopes at the same physical radius in both.
+3.4.1. Determining the slope profile
+We aim to fit the dark matter density profile of each halo with an
+analytical function that allows calculating the logarithmic slope
+at any radius. For this, we adopt the double power-law profile
+(Zhao 1996):
+ρ(r)= ρs
+(r/rs)γ 1+ (r/rs)αβ−γ
+α
+,(1)
+whereρ s andr s are the characteristic scale density and ra-
+dius, respectively. We construct dark matter density profiles us-
+ing 100 logarithmically spaced spherical bins, extending from
+the radius enclosing the innermost 100 dark matter particles to
+Rvir. We defineR vir as the radius enclosing an average density
+∆vir times the critical density of the universe,ρ crit =3H 2/8πG,
+where∆ vir follows the redshift-dependent definition by Bryan &
+Norman (1998) evaluated with theΩ m value of each simulation.
+Before fitting, we apply a radial mask to ensure numerical re-
+liability. In the inner regions, we adopt simulation-specific con-
+vergence criteria. For the FIRE-2 simulations, we exclude data
+belowr 200p, defined as the radius enclosing the innermost 200
+dark matter particles. Hopkins et al. (2018) validated this thresh-
+old by comparing fiducial-resolution runs with higher-resolution
+resimulations, finding that the enclosed dark matter density pro-
+file converges to within∼20% at this radius. For the NIHAO sim-
+ulations, where such resolution studies are not available, we in-
+stead apply the Power et al. (2003) relaxation-time convergence
+criterion with the revised threshold of Schaller et al. (2015).
+Specifically, we compute the convergence parameter
+f(r)=
+√
+200
+8
+r
+4πρcrit
+3mDM
+√N(<r)
+lnN(<r) r3/2,(2)
+whereN(<r) is the number of dark matter particles enclosed
+within radiusrandm DM is the particle mass. We take the conver-
+gence radius as the smallestrat whichf(r)≥0.33, correspond-
+ing to∼20% convergence in density (Schaller et al. 2015). Data
+below this radius are excluded from the fit.
+Hereafter, we will refer to these different definitions jointly
+asr conv,20, indicating the radius where density profiles converge
+to∼20%.
+3.4.2. NFW Baseline Comparison
+The standard Navarro-Frenk-White (NFW; Navarro et al. 1997)
+profile represents a specific case of the general double power-law
+configuration presented in Eq. 1, corresponding to the parameter
+choice (α,β,γ)=(1,3,1), and is expressed as:
+ρNFW(r)= ρs
+ r
+rs
+
+1+ r
+rs
+2 .(3)
+To establish a theoretical baseline, we construct NFW
+proxy profiles as a function of stellar mass through abundance-
+matching. We create a fine grid of stellar masses and, for each
+grid point, we invert the Moster et al. (2013) stellar-to-halo mass
+relation to obtain the correspondingM200c, from which we derive
+R200c using the critical overdensity definition. The NFW scale ra-
+diusr s and concentrationcare then assigned via the Moliné et al.
+(2023) relation for subhaloes, since we aim to compare with dy-
+namical models of Milky Way satellites.
+For each stellar mass along the grid, this yields an NFW
+proxy profile characterised by (r s,c,R 200c). Evaluating the an-
+alytic NFW logarithmic slope at any physical radius provides a
+dark-matter-only NFW expectation for the inner density slope as
+a function of stellar mass, against which the slopes measured in
+hydrodynamical simulations or inferred from observations can
+be directly compared at identical physical scales.
+To propagate the uncertainty in abundance matching into
+the NFW baseline, we perform a Monte Carlo sampling of the
+Moster et al. (2013) relation parameters, drawing from their re-
+ported 1σuncertainties. Each draw produces a different NFW
+profile, resulting in scatter bands for the inner slope at a fixed
+stellar mass that reflect the propagated uncertainty from the
+stellar-to-halo mass relation into the NFW prediction.
+4. Results
+We present the comparison of the dark matter profiles inferred
+with dynamical models in R19, H20/H23, AP25, and P25/P26
+against those from our simulation dataset. We structure this com-
+parison in two complementary ways. First, we evaluate the in-
+ner logarithmic slope at three fixed physical radii (100, 250, and
+500 pc) as a function of stellar mass, comparing simulations, ob-
+servations, and the NFW baseline. Second, we perform a direct
+profile-by-profile comparison for each observed galaxy, both in
+density and slope space, which we further extend for the primary
+satellite-only sample in Appendix B and for the sample of simu-
+lated centrals in Appendix C.
+4.1. Inner slope versus stellar mass at fixed physical radius
+Fig. 3 shows the logarithmic dark matter density slope
+dlogρ/dlogrevaluated at 100, 250, and 500 pc as a function
+of stellar mass, separately for central (isolated) galaxies (upper
+row) and satellites (lower row). Tables A.1, A.2 and A.3 (Ap-
+pendix A) indicate the logarithmic slope values derived from the
+dynamical models of observed satellite galaxies at 100 pc, 250 pc
+and 500 pc, respectively. It is important to note that, as the galax-
+ies span a wide range of stellar masses and sizes, these fixed
+radii probe a different region relative to the galaxy’s half-light
+radius. To identify how inner these distances are, we also assess
+these radii relative to the virial radius: 100 and 250 pc lie within
+1.5%Rvir for most systems considered and can be regarded as
+measurements of the inner slope in the sense commonly used
+Article number, page 5 of 14
+A&A proofs:manuscript no. aa61941-26
+in the literature. The 500 pc radius meets this criterion only for
+galaxies withM ⋆ >10 6M⊙. These radii are selected particularly
+to probe the innermost regions that can be reliably resolved in
+both simulations and observations across the stellar-mass range
+considered.
+4.1.1. Core formation and its mass dependence
+For isolated galaxies evaluated at 500 pc, the simulations reveal a
+clear trend: inner slopes rise from super-cuspy values of≈−1.5
+atM ⋆∼10 5 M⊙ to shallow, core-like values ofdlogρ/dlogr≈
+0 to−0.4 atM ⋆∼10 8 M⊙, before steepening moderately again
+at the highest masses probed (M ⋆ ≳10 10 M⊙). This behaviour
+is consistent with the baryonic feedback-driven core formation
+mechanism identified in previous work (Di Cintio et al. 2014;
+Tollet et al. 2016; Lazar et al. 2020; Sarrato-Alós et al. 2026),
+where repeated cycles of star formation and supernova-driven
+outflows flatten the inner dark matter cusp most efficiently at
+intermediate stellar-to-halo mass ratios. The steepening at high
+stellar masses is consistent with the regime where the deep grav-
+itational potential resists feedback-driven fluctuations and adia-
+batic contraction begins to dominate; although historically it has
+only been reported when studying the logarithmic slope at fixed
+fractions ofR vir, never at fixed physical scales.
+At 250 pc, the same trend is visible, albeit with some dif-
+ferences. At this radius, galaxies generally present more cored
+slope values, as expected from this more inner region. This also
+causes the peak of core formation to be an extended range of
+stellar masses of∼10 8-1010 M⊙, rather than a well-defined value
+over which a sudden re-steepening occurs, as seen traditionally
+inR vir-based studies. At 100 pc, the apparent shallowing is most
+extreme, with a large fraction of galaxies atM ⋆ ≳10 7 M⊙ ap-
+proaching slopes≈0. However, the majority of these points cor-
+respond to galaxies for which the evaluation radius lies below the
+simulation convergence radiusr conv,20. Although we are conser-
+vative with the extent of extrapolation, the 100 pc column should
+be interpreted as providing only a qualitative indication of the
+direction of the trend. We therefore base most of our quantita-
+tive statements primarily on the 250 and 500 pc columns, where
+the fraction of converged profiles is substantially higher and the
+slope estimates are more reliable.
+A critical mass scale for core formation is evident at both
+most reliable radii: belowM⋆≈10 5.5 M⊙ many simulated slopes
+fall within or below the NFW prediction bands, indicating that
+stellar feedback is insufficient to transform a cusp into a core
+in this regime. This is broadly consistent with theoretical work
+(e.g., Peñarrubia et al. 2012; Brook & Di Cintio 2015) showing
+that feedback-driven core formation becomes most efficient at
+much higher stellar masses, aroundM ⋆ ∼10 8.5 M⊙, and that
+core formation becomes increasingly difficult in fainter dwarfs.
+We note that the transition is gradual rather than sharp, with non-
+negligible scatter in both directions; nevertheless, the mass scale
+M⋆∼10 6 M⊙ represents a robust estimate for the lower limit of
+efficient core formation in these simulations.
+4.1.2. Centrals versus satellites
+Satellite galaxies (lower row of Fig. 3) occupy broadly the
+same region of theM ⋆-dlogρ/dlogrplane as isolated galax-
+ies, but with systematically larger scatter. In particular, at 250
+and 500 pc, the satellite distribution develops a pronounced tail
+towards steep slopes (≈−2.5 to−3) with no counterpart in the
+central galaxy sample. This excess of steep slopes in satellites
+may be related to gravitational tides, which preferentially dis-
+rupt the mass distribution by stripping material from the outer
+regions of the subhaloes. When we evaluate profiles at identical
+physical distances, this structural disruption may affect galaxies
+differently across mass scales. In particular, lower-mass systems
+typically have shallower potential wells, meaning that a fixed
+physical radius probes regions further out relative to their scale
+radii. Consequently, the mass distribution at these fixed scales is
+far more vulnerable to tidal effects than in more massive coun-
+terparts (Peñarrubia et al. 2010; Green & van den Bosch 2019).
+A detailed investigation of how the dark matter density slopes
+of individual simulated satellites evolve along their orbits under
+the influence of tidal effects, and how this evolution compares
+with the slopes inferred for observed galaxies, would provide a
+valuable test of this interpretation and represents an interesting
+avenue for a separate contribution.
+At a fixed stellar mass, our sample includes satellites with a
+diverse range of central halo masses and unique orbital histories.
+These environmental factors control the degree to which an in-
+dividual system is affected by tides, increasing the scatter of the
+dark matter density profile slopes at fixed physical scales. Under
+this interpretation, the split observed in the slopes of the satel-
+lite population at stellar mass scales where isolated galaxies uni-
+formly exhibit profiles flatter than NFW (M ⋆ ≈10 6–107 M⊙),
+while a fraction of the satellite sample presents NFW-like or
+even cuspier inner slopes, is entirely consistent with varying de-
+grees of tidal disruption.
+Since all observed targets in our comparison are Milky Way
+satellite galaxies, the satellite row provides the appropriate theo-
+retical reference. The wider scatter in the satellite sample means
+that a broader range ofdlogρ/dlogrvalues is physically ex-
+pected at fixed stellar mass, which has direct implications for
+the interpretation of apparent simulation to observation discrep-
+ancies: a slope difference that would be anomalous for an iso-
+lated galaxy may fall within the normal range of the satellite
+population. In fact, satellite galaxies in our sample provide bet-
+ter matches than centrals for the steepest dynamical models
+in the literature, such as those of R19 (blue squares) around
+M⋆∼10 6 M⊙.
+4.1.3. Comparison with observations and the NFW baseline
+The observational estimates occupy the same region of theM ⋆-
+dlogρ/dlogrplane as the simulated satellites at all three eval-
+uation radii, with no systematic offset that persists across all
+datasets, although our dataset includes very few galaxies below
+M⋆ =10 5 M⊙. However, the four sets of dynamical models do
+not always agree with one another to within their quoted uncer-
+tainties for all systems, which complicates any statement about
+overall simulation-observation consistency.
+The H20/H23 measurements (orange) carry the largest in-
+dividual uncertainties, often spanning∆dlogρ/dlogr∼1-1.5
+at 1σ, and are therefore consistent with both cusps and cores
+across the entire stellar mass range sampled. This is expected
+especially because their studies are the only ones including the
+faintest (M⋆ <10 5 M⊙) dwarf galaxies, for which stellar kine-
+matic data are very limited. However, their uncertainties are still
+slightly larger than the rest for higher stellar masses. The R19
+estimates (blue) are the most cusp-like of the four datasets, clus-
+tering near or within the NFW prediction bands, with slopes of
+dlogρ/dlogr≈ −1.5 to−2 at 500 pc, except the more cored
+point at higher stellar mass, corresponding to the Fornax dwarf
+spheroidal galaxy. The AP25 estimate (purple) consistently in-
+dicates a somewhat cored distribution for the Sculptor galaxy
+Article number, page 6 of 14
+J. Sarrato-Alós & J. M. Arroyo-Polonio: Reconciling simulated and observed MW satellite density profiles
+Fig. 3.Dark matter density slopedlogρ/dlogrevaluated at three fixed physical radii versus stellar mass. Each column corresponds to a different
+radius: 100 pc (left), 250 pc (middle), and 500 pc (right). The upper row shows central (isolated) simulated galaxies, the lower row shows satellites,
+as indicated in the rows. Grey scale symbols represent simulated galaxies: circles for FIRE-2 and squares for NIHAO. Solid black symbols indicate
+resolved galaxies, while empty symbols represent unresolved galaxies whose density profile fit we extrapolate up to half of the convergence radius,
+at maximum. Lighter colour symbols indicate cases of further profile extrapolation. Observational estimates from H20/H23 (orange stars), R19
+(blue squares), AP25 (purple pentagon), and P25/P26 (red diamonds) are overlaid with their 68% credible intervals, and they are also represented
+as empty markers when the studied radius falls outside their reliability range (see Sec. 2). The cyan shaded bands show the 1σ, 2σ, and 3σscatter
+of NFW profiles derived from the Moster et al. (2013) stellar-to-halo mass relation combined with the Moliné et al. (2023) concentration-mass
+relation, propagated via Monte Carlo sampling of the Moster et al. (2013) parameter uncertainties.
+at all studied physical scales. Finally, the P25/P26 results (red)
+cluster arounddlogρ/dlogr≈−0.4 to−0.7 at 100-250 pc, find-
+ing both a well-developed core, a NFW consistent profile, and a
+mixed result for their three studied satellites.
+The NFW prediction bands (cyan shading) provide a use-
+ful dark-matter-only reference. At 500 pc, the NFW slope ranges
+fromdlogρ/dlogr NFW≈−1.75 atM ⋆∼10 5 M⊙ to≈−1.25 at
+107 M⊙. This trend reflects the weak mass dependence from the
+Moliné et al. (2023) concentration relation. Simulated galaxies
+in the peak core-forming mass range lie at∆dlogρ/dlogr≈
+0.7−1.0 shallower than this baseline. This departure is statis-
+tically significant given the narrow width of the NFW bands.
+Cored observational points sit well above the NFW expecta-
+tion. This group includes the AP25 profile and the most cored
+P25/P26 marker. Generally, we find no significant tension be-
+tween simulations and observations. They span the same regions
+of the plane, except for the 500 pc evaluation of the most cored
+P25/P26 system. However, a clear systematic tension exists be-
+tween the NFW baseline and both the hydrodynamical simula-
+tions and observations aboveM ⋆∼10 6 M⊙. In this regime, the
+profiles deviate from NFW cusps towards flatter, cored distribu-
+tions. For the satellite population, this shallower signature is only
+uniformly preserved above∼10 7 M⊙, as lower mass satellites
+present larger scatter consistent with environmental disruption.
+4.2. Direct profile comparison
+The comparison of slopes at fixed radii in the previous section
+summarises the profile information into a single number per
+galaxy per radius, which facilitates identifying trends but dis-
+cards information about the entire radial structure. We comple-
+ment it with a direct comparison of density and slope profiles
+as a function of physical radius for each of the 16 observed
+galaxies in the cited literature works (Fig. 4 and 5), restricting
+this primary analysis strictly to simulated satellites to ensure a
+physically consistent comparison that accounts for environmen-
+tal effects, while keeping the comparison with centrals separate
+in Appendix C. For the satellites, most of the simulated profiles
+in these figures come from FIRE-2, which provides the higher-
+resolution simulations in our sample.
+For each observational target, we select a comparison sample
+of simulated satellite haloes drawn from a stellar mass window
+of±0.25 dex around the target’s observed stellar mass. In both
+figures, simulated profiles are colour-coded by their logarithmic
+stellar mass offset (∆log 10 M⋆ =log 10 M⋆,sim−log 10 M⋆,obs) us-
+ing a blue-black-red colour palette, where black indicates the
+closest mass match. To ensure a robust comparison, we re-
+strict all profiles to their respective reliable radial ranges, enforc-
+ing ther conv,20 convergence threshold for simulations (Sec. 3.4)
+and the data-driven spatial limits for observations (Sec. 2).
+Each panel also displays the corresponding abundance-matched
+NFW proxy profile as a baseline reference (Sec. 3.4.2), along
+with a vertical dashed line marking the observed half-light ra-
+Article number, page 7 of 14
+A&A proofs:manuscript no. aa61941-26
+dius. For panels where the radial coverage of the observational
+models extends significantly beyond the shared axis limits, in-
+set panels are included to preserve the entire unclipped pro-
+files. Appendix B (Fig. B.1 and B.2) presents the correspond-
+ing error-normalised deviations between these observationally
+derived profiles and their matching simulated satellite counter-
+parts, while Appendix C provides the complementary compar-
+ison with simulated centrals alone. Below, we report the main
+findings of this extended comparison.
+4.2.1. Density profiles: cases of good agreement
+The main result from the direct density comparison (Fig. 4 and
+B.1) is that the observed density profiles sit inside the cloud
+of mass-matched simulation profiles for the large majority of
+galaxies, with no systematic offset in amplitude or radial shape.
+This is confirmed quantitatively by the deviation plots (Fig. B.1):
+the best-matching simulations reproduce the H20/H23 profiles to
+within≲1σacross essentially the full reliable radial range for
+most systems, and the associated 68% envelope of best-matching
+profiles for each individual galaxy (see Appendix B) only ex-
+ceeds the 2σdeviation for Antlia 2, Crater 2, and for a marginal
+fraction of the radial span of Fornax and Sculptor. The NFW
+proxy (dotted lines) systematically over-predicts the central den-
+sity for the more cored systems (most visibly Sculptor, Fornax,
+Sextans and Carina), with deviations exceeding 4σat the small-
+est resolved radii, confirming that the hydrodynamical simula-
+tions provide a better description of those profiles than a pure
+dark-matter expectation.
+Although the R19 profiles also fall broadly in the same space
+as simulated density profiles, their tighter reported uncertain-
+ties make them harder to match. Specifically, for several sys-
+tems (most notably Fornax, Sculptor, Leo I and Leo II) the best-
+matching simulation deviates from the R19 median by≳2−3σ
+over a significant fraction of the radial range. We note, however,
+that because the R19 credible intervals are generally narrower
+than those of H20/H23, this pronouncedσ-deviation reflects the
+tighter observational constraints rather than a larger absolute
+density offset. Furthermore, as mentioned above, the R19 pro-
+files are the steepest ones at 250-500 pc, and some tension may
+be partially attributed to dataset-to-dataset and model-to-model
+differences rather than a genuine physical discrepancy. We also
+note that the tight uncertainties of the R19 sample result in sev-
+eral noise spikes in Fig. B.1, as they cause simulation density
+profile fluctuations to appear amplified.
+4.2.2. Density profiles: notable outliers
+Willman 1 stands out as difficult to match for both simulation
+suites. It is the only galaxy which shows a systematically over-
+dense profile compared to simulations in a similar mass range,
+even accounting for uncertainties in the dynamical model. Al-
+though still marginally consistent with a NFW profile within 1σ,
+the density inferred by the dynamical model available for this
+system is notably higher than that of a NFW cusp. Several fac-
+tors complicate the comparison between simulations and obser-
+vations for Willman 1. First, statistics are limited: only four sim-
+ulated galaxies fall within±0.25 dex of its stellar mass, and none
+reproduce its exceptionally compact half-light radius of∼28 pc
+(Muñoz et al. 2018). Instead, these simulated satellites exhibit
+much larger half-light radii between 150 and 600 pc. Second,
+the observational data are highly constrained; the H20/H23 dy-
+namical model relies on the smallest dataset in our sample, com-
+prising just 40 stars. Furthermore, Arroyo-Polonio et al. (2026)
+found that the inferred dynamical mass of Willman 1 decreases
+by approximately 20% when including a statistical correction for
+undetected binary stars in the models, a correction missing from
+the H20/H23 inference. Not only does this galaxy present prop-
+erties that are difficult to match by simulations, but it has also
+caused discussion about its classification as a galaxy. While re-
+cent studies reinforce its galaxy status (Chiu et al. 2026), histori-
+cally other authors have debated whether this system is a satellite
+galaxy or an anomalous star cluster (e.g., Willman et al. 2005;
+Siegel et al. 2008; Willman et al. 2011).
+At the other end, Antlia 2 and Crater 2 display central sur-
+face densities well below both the NFW proxy and the bulk of
+the mass-matched simulation sample. For Crater 2, the down-
+ward arrow and inset panel in Fig. 4 indicate that the central
+density inferred from the single available H20/H23 profile lies
+below 10 6 M⊙ kpc−3 at the smallest accessible radius, a value
+only marginally reached by the simulated galaxies in the match-
+ing mass window. Although Fig. B.1 shows the single best-
+matching simulations deviate only within 2σfor Antlia 2 and
+1σfor Crater 2 across their full radial ranges, the large devia-
+tions of the 68% best-matching simulations indicate these under-
+dense profiles are notably uncommon in our simulations at these
+stellar masses. These two objects are plausibly among the most
+tidally evolved satellites in the Local Group (Ji et al. 2021), and
+their central under-densities are tightly linked to their exception-
+ally large half-light radii: both systems are remarkably extended
+and diffuse for their stellar mass, far more than most simulated
+counterparts. For reference, in the literature, some simulations
+of Crater 2 starting with a cored DM distribution have managed
+to explain the extension and dynamics of the system after strong
+tidal stripping by the MW (Sanders et al. 2018).
+Ursa Minor also merits individual attention: the P25/P26 pro-
+file sits systematically below and flatter than both the H20/H23
+and R19 constraints for the inner region of the same galaxy. This
+is the most pronounced internal disagreement among the dif-
+ferent literature dynamical models we compiled for any single
+system in our sample. We note, however, that this discrepancy
+appears to depend, at least in part, on the modelling assump-
+tions. The spherical model presented in P25/P26 is in much bet-
+ter agreement with the spherical inference of R19 shown here,
+whereas our comparison uses the axisymmetric P25/P26 model,
+which is more directly comparable to the flattened H20/H23
+models. At the same time, Yang et al. (2025) also analysed
+Ursa Minor adopting flattened dynamical models and recovered
+a shallow density profile, more consistent with the P25/P26 ax-
+isymmetric result. Taken together, the current spread among pub-
+lished inferences prevents a definitive assessment of whether
+simulations over- or under-predict the dark matter density of
+Ursa Minor at different radii.
+4.2.3. Slope profiles: larger scatter, consistent trends
+The direct slope-profile comparisons (Fig. 5 and B.2) confirm the
+core signatures evident in Fig. 3, but with considerably larger
+scatter. For the cored systems (most clearly Fornax, Sculptor,
+and the P25/P26 model for Ursa Minor) the observed slope pro-
+files flatten significantly inside the half-light radius, reaching
+dlogρ/dlogr≈ −0.3 to−0.7 atr≲200 pc. The simulated
+slope profiles reproduce this inner flattening for a subset of mass-
+matched galaxies, while others retain a cusp, reflecting the gen-
+uine scatter in core-formation efficiency expected from varia-
+tions in star formation history and stellar feedback at fixed stellar
+mass.
+Article number, page 8 of 14
+J. Sarrato-Alós & J. M. Arroyo-Polonio: Reconciling simulated and observed MW satellite density profiles
+Fig. 4.Dark matter density profiles versus physical radius. Each panel corresponds to one observed dwarf galaxy and includes all considered
+literature dynamical model estimates for that galaxy as well as the simulated galaxies whose stellar masses lie within±0.25 dex of the observed
+value. Dynamical model density profiles are shown as solid lines (median) with shaded bands (68% credible intervals), colour-coded by source:
+orange for H20/H23, blue for R19, purple for AP25, and red for P25/P26. Simulated satellite galaxy profiles appear as sequences of triangle
+symbols from their radial bins, coloured by the logarithmic deviation of the simulated stellar mass from that of the observed galaxy: black
+indicates the closest match, blue marks simulations with lower stellar mass, and red those with higher stellar mass. Black dotted lines represent the
+NFW proxy profiles derived from the Moster et al. (2013) and Moliné et al. (2023) relations evaluated at the stellar mass of the observed galaxy.
+A grey vertical dashed line indicates the observed circularised projected half-light radius. Inset panels (when present) display dynamical models
+whose radial extent falls largely outside the shared axis limits of the main panel. Only radial ranges that satisfy the reliability criteria for both
+simulations and observations are drawn.
+This analysis provides additional information on the mis-
+match between Antlia 2 and the simulated satellite galaxies in
+the same mass range. Not only is Antlia 2 notably under-dense
+compared to its simulated counterparts, but it is an even clearer
+outlier in terms of slope. The model by H20/H23 presents a shal-
+low slope (≈−0.3) at very large radii (>1 kpc), where all stellar
+mass-matched simulated satellites are still much cuspier, with
+slopes≲−2. This mismatch results in a deviation profile that
+reaches 4-5σat the innermost available radial reliability range
+of the associated dynamical model.
+The slope deviation representation (Fig. B.2) also reinforces
+the conclusion that the R19 dataset is the most difficult to
+match also in slope space. The best-matching simulations reach
+≳2σdeviation from the R19 profiles for several galaxies (most
+Article number, page 9 of 14
+A&A proofs:manuscript no. aa61941-26
+Fig. 5.Same layout as Fig. 4, but showing the logarithmic density slope versus physical radius. Satellite simulation slopes are obtained from the
+double power-law fits (Eq. 1).
+notably Leo II), whereas we find simulations consistent with
+H20/H23 to within≲1σfor the same systems.
+A practical note on the slope-vs-density comparison is that
+density space provides a substantially more discriminating test
+for simulation-observation comparisons than slope space. The
+logarithmic slope is a numerical derivative of the density profile,
+and both observational and simulated profiles carry significant
+radially correlated uncertainties that are amplified on differen-
+tiation. As a result, apparent tensions in slope space can arise
+from small radial shifts in the position of the core-cusp tran-
+sition rather than from genuine density amplitude differences,
+and these can dissolve when the same profiles are compared di-
+rectly in density space. We therefore recommend density-profile
+comparisons as the primary metric for studying the agreement
+between dark matter density profiles of simulations and obser-
+vations.
+4.2.4. Ultra-faint dwarfs
+For the four lowest-mass systems in the sample (Boötes I, Ursa
+Major I, Coma Berenices, Willman 1; logM ⋆ <4.6), the reli-
+able regions of the observational profiles cover only a narrow
+radial range around the half-light radius and reach very large de-
+viations from the main panel limits for Willman 1 (see the inset
+in Fig. 4). The best-matching simulation for Boötes I is consis-
+tent with the H20/H23 dynamical model to within≲1σover the
+reliable range, and the NFW proxy likewise falls within the cred-
+ible intervals. While NFW profiles are also consistent with Ursa
+Article number, page 10 of 14
+J. Sarrato-Alós & J. M. Arroyo-Polonio: Reconciling simulated and observed MW satellite density profiles
+Major I and Coma Berenices, our sample of simulated satellites
+does not include any systems close to these stellar masses. How-
+ever, one simulated central survives the stellar mass cut for each
+of them, and in both cases it matches the observations within 1σ
+(see Figs. C.1-C.4). The fact that both NFW proxies and simu-
+lated galaxies match these observations well is expected given
+that, in this mass regime, both simulations and NFW predict
+cuspy profiles. These systems serve as a confirmation that stellar
+feedback in our simulations is not extreme enough to produce
+cored dark matter density profiles at radial and mass scales at
+which observations are still compatible with cusps.
+Additional caveats on the validity of dynamical model results
+become more relevant for low-mass dwarfs. The observed line-
+of-sight velocity dispersion might be artificially inflated by an
+unresolved binary population, which would over-predict the in-
+ferred dynamical mass if left uncorrected (Arroyo-Polonio et al.
+2026). Furthermore, the difficulty to obtain spectroscopic mea-
+surements for individually resolved stars in these systems im-
+plies that dynamical models must operate with limited kinematic
+information. To illustrate, the datasets used in H20/H23 for in-
+ferring the dark matter distribution of these galaxies comprise
+only between 40 and 65 stars.
+5. Conclusions
+We have compared the dark matter density profiles of Milky Way
+dwarf satellite galaxies, inferred from four independent dynam-
+ical modelling programmes (Hayashi et al. 2020, 2023; Read
+et al. 2019; Arroyo-Polonio et al. 2025; Pascale et al. 2025,
+2026), against predictions from the NIHAO (Wang et al. 2015)
+and FIRE-2 (Hopkins et al. 2018) hydrodynamical simulation
+suites. The central methodological contribution of this work is
+based on our identification of recurring inconsistent radial defi-
+nitions for comparisons of logarithmic dark matter density inner
+slopes in the literature. Our proposed solution is to reconsider the
+common practice of evaluating inner slopes in simulations at a
+fixed fraction of the virial radius (typically 1-2%R vir) and rather
+measure them at the same physical radii accessible to the ob-
+servational analyses. This ensures a genuinely apples-to-apples
+comparison and, as we demonstrate, significantly reduces appar-
+ent tensions between cosmological hydrodynamical simulations
+in a CDM context and observations. Additionally, we advocate
+for comparing galaxies based on their stellar masses alone rather
+than the stellar-to-halo mass ratio, dropping the need for esti-
+mating halo masses of observed galaxies through either abun-
+dance matching methods or the dynamical models themselves,
+eliminating one dependency. We also note that comparing pro-
+files of dark matter density and its logarithmic slope over the full
+available radial range is crucial for drawing detailed conclusions
+on the agreement between simulations and observations, since
+they provide expanded information compared to measurements
+at specific radial points. Our main conclusions are as follows.
+–Physical-radius slope measurements reveal a clear stellar
+mass-dependent core-formation trend. Between 100 and
+500 pc, simulated isolated and satellite galaxies exhibit a
+rise in inner dark matter slope from super-cuspy values
+(dlogρ/dlogr≈−1.5) atM ⋆∼10 5 M⊙ to core-like values
+(dlogρ/dlogr≈0 to−0.4) atM ⋆∼10 8 M⊙, with a mod-
+est re-steepening at the highest masses, as shown in Fig. 3.
+This behaviour is consistent with feedback-driven cusp-to-
+core transformation peaking at intermediate stellar-to-halo
+mass ratios (e.g., Di Cintio et al. 2014; Di Cintio et al. 2014;
+Tollet et al. 2016; Lazar et al. 2020; Sarrato-Alós et al. 2026).
+–We identify a lower mass threshold for core formation in our
+set of NIHAO and FIRE-2 simulations. Up toM⋆≈10 6 M⊙,
+simulated isolated galaxies remain marginally compatible
+with NFW-like cusps, indicating that stellar feedback in this
+regime is insufficient to consistently remove the central dark
+matter cusp (Fig. 3). This mass scale agrees broadly with
+theoretical predictions for the minimum feedback energy re-
+quired to unbind the inner cusp (e.g., Peñarrubia et al. 2012;
+Brook & Di Cintio 2015).
+–Simulated satellites display wider slope scatter than centrals,
+with a tail towards steep slopes, as indicated by the bottom
+row of Fig. 3. The satellite population develops a signifi-
+cant tail towardsdlogρ/dlogr≈−2.5 to−3 absent in the
+isolated sample, consistent with tidal stripping of the outer
+halo. Since all observed targets are satellites, this wider dis-
+tribution must be used as the relevant theoretical reference.
+This choice reduces the statistical significance of individ-
+ual slope discrepancies, showing no signs of tension in the
+slope-mass space. This stands in contrast to previous findings
+fromR vir-based studies. This environmental trend is consis-
+tent with exposure to tidal disruption at fixed physical dis-
+tances, where a diversity in orbital histories and central halo
+masses acts to split the low-mass satellite population. Un-
+der this interpretation, a clear signature of slope shallowing
+compared to NFW cusps is only uniformly preserved above
+M⋆≈10 7 M⊙, where deeper potential wells shield the inner
+profiles.
+–Simulations and observations agree well in density space
+(Fig. 4 and B.1). When compared directly in density pro-
+file space rather than in slope space, the simulated galaxies
+reproduce the observed profiles to within≲1σfor most sys-
+tems and most observational datasets. For the cored systems,
+the simulations provide a markedly better description than
+an unmodified NFW profile, which over-predicts the central
+density by 2–3σ. We find no systematic global tension be-
+tween the simulations and observations in density space.
+–Slope-space comparisons present some scatter in observa-
+tional profile reconstruction methods (Fig. 5 and B.2). The
+four modelling programmes present differences that can
+reach the 2σlevel in some systems (most prominently for
+Leo II, Draco and Ursa Minor), comparable to the appar-
+ent offset between simulations and some observational es-
+timates. We conclude that observational modelling system-
+atics currently represent an additional source of uncertainty
+that complicates their use for constraining galaxy formation
+and evolution models.
+–One system resists matching: Willman 1 presents an ex-
+tremely compact half-light radius that cannot be matched by
+CDM simulations in our dataset (Fig. 4). That, together with
+the limited range over which we deem the H20/H23 dynam-
+ical model reliable for this system, complicates finding sim-
+ulated galaxies that can reproduce its high density at similar
+stellar masses.
+–Extremely diffuse systems, specifically Antlia 2 and Crater 2,
+challenge standard satellite evolutionary tracks within the
+simulation suites we analysed. Both satellites display cen-
+tral dark matter densities significantly lower than the bulk
+of the stellar mass-matched simulated population, together
+with exceptionally large, extended half-light radii (Fig. 4).
+Furthermore, Antlia 2 exhibits an anomalously shallow slope
+(≈ −0.3) extending out to large physical radii (>1 kpc),
+a feature that remains entirely unmatched by our simulated
+satellite sample (Fig. 5). These systems are likely among the
+most tidally evolved structures in the Local Group (Sanders
+Article number, page 11 of 14
+A&A proofs:manuscript no. aa61941-26
+et al. 2018; Ji et al. 2021), which suggests that capturing such
+outliers may require simulations to resolve more extreme or-
+bital histories, or potentially explore alternative dark matter
+physics.
+Taken together, these results demonstrate that much of the
+apparent discrepancy between hydrodynamical simulations and
+dwarf satellite galaxy observations in the cusp-core problem
+can be attributed to methodological inconsistencies in how in-
+ner slopes are defined and measured, compounded by significant
+inter-dataset and inter-model scatter in the observational con-
+straints. Once a consistent physical-radius measurement strategy
+is adopted and comparisons are performed in density space, the
+level of agreement is high across the full stellar mass range sam-
+pled, with the notable exception of the most compact systems.
+Future progress will require both higher-resolution simulations
+that extend convergence radii to≲50 pc for the faintest dwarfs,
+and improved observational constraints, particularly in the in-
+nermost regions of ultra-faint dwarfs, to distinguish cores from
+cusps belowM⋆∼10 5 M⊙ and to better understand the evolution
+of such systems in diverse environments.
+Acknowledgements.JSA thanks the Spanish Ministry of Economy and Com-
+petitiveness (MINECO) for support through grant P/301404 from the Severo
+Ochoa project CEX2019-000920-S. JMA acknowledges support from the Agen-
+cia Estatal de Investigación del Ministerio de Ciencia e Innovación (AEI-MICIN)
+and the European Social Fund (ESF+) under grant PRE2021-100638. JMA ac-
+knowledges support from the Agencia Estatal de Investigación del Ministerio de
+Ciencia, Innovación y Universidades (MCIU/AEI) under grant "FOGALERA",
+the European Regional Development Fund (ERDF) with reference PID2023-
+150319NB-C21 and PID2020-118778GB-I00 and the AEI under grant number
+CEX2019-000920-S. Both authors thank Kohei Hayashi, Justin Read, Raffaele
+Pascale, and their respective collaborators for kindly sharing the results of the
+dynamical models of dwarf galaxies analysed in this study. They also thank
+Christopher Brook, Arianna Di Cintio, Giuseppina Battaglia, Jorge Moreno and
+Daisuke Kawata for insightful discussions. The authors wish to acknowledge the
+contribution of the IAC High-Performance Computing support team and hard-
+ware facilities to the results of this research. The authors also thank the NI-
+HAO and FIRE collaborations for providing the simulations used in this work.
+We thank the anonymous referee for constructive comments that improved this
+manuscript.
+References
+Adhikari, S., Dalal, N., & Chamberlain, R. T. 2014, Journal of Cosmology and
+Astroparticle Physics, 2014, 019–019
+Arroyo-Polonio, J. M., Battaglia, G., & Thomas, G. F. 2026, A&A, 708, A287
+Arroyo-Polonio, J. M., Pascale, R., Battaglia, G., et al. 2025, A&A, 699, A347
+Bañares-Hernández, A., Read, J. I., & Júlio, M. P. 2026, A&A, 705, A212
+Battaglia, G., Helmi, A., Tolstoy, E., et al. 2008, ApJ, 681, L13
+Behroozi, P. S., Wechsler, R. H., & Wu, H.-Y . 2012, The Astrophysical Journal,
+762, 109
+Binney, J. & Mamon, G. A. 1982, MNRAS, 200, 361
+Bode, P., Ostriker, J. P., & Turok, N. 2001, ApJ, 556, 93
+Breddels, M. A. & Helmi, A. 2013, A&A, 558, A35
+Brook, C. B. & Di Cintio, A. 2015, MNRAS, 453, 2133
+Brook, C. B., Stinson, G., Gibson, B. K., Wadsley, J., & Quinn, T. 2012, MN-
+RAS, 424, 1275
+Bryan, G. L. & Norman, M. L. 1998, ApJ, 495, 80
+Chabrier, G. 2003, PASP, 115, 763
+Chang, J., Macciò, A. V ., & Kang, X. 2013, Monthly Notices of the Royal As-
+tronomical Society, 431, 3533
+Chiu, C., Geha, M., Cerny, W., et al. 2026, ApJ, 1002, 55
+Cooke, L. H., Levy, R. C., Bolatto, A. D., et al. 2022, MNRAS, 512, 1012
+de Blok, W. J. G., McGaugh, S. S., & Rubin, V . C. 2001, AJ, 122, 2396
+Di Cintio, A., Brook, C. B., Dutton, A. A., et al. 2014, MNRAS, 441, 2986
+Di Cintio, A., Brook, C. B., Macciò, A. V ., et al. 2014, MNRAS, 437, 415
+Feldmann, R., Quataert, E., Faucher-Giguère, C.-A., et al. 2023, MNRAS, 522,
+3831
+Gaia Collaboration, Brown, A. G. A., Vallenari, A., et al. 2021, A&A, 649, A1
+Girardi, L., Williams, B. F., Gilbert, K. M., et al. 2010, ApJ, 724, 1030
+Governato, F., Brook, C., Mayer, L., et al. 2010, Nature, 463, 203
+Green, S. B. & van den Bosch, F. C. 2019, MNRAS, 490, 2091
+Hayashi, K., Chiba, M., & Ishiyama, T. 2020, ApJ, 904, 45
+Hayashi, K., Hirai, Y ., Chiba, M., & Ishiyama, T. 2023, ApJ, 953, 185
+Hopkins, P. F. 2015, MNRAS, 450, 53
+Hopkins, P. F., Kereš, D., Oñorbe, J., et al. 2014, Monthly Notices of the Royal
+Astronomical Society, 445, 581
+Hopkins, P. F., Wetzel, A., Kereš, D., et al. 2018, MNRAS, 480, 800–863
+Hu, W., Barkana, R., & Gruzinov, A. 2000, Phys. Rev. Lett., 85, 1158
+Hui, L., Ostriker, J. P., Tremaine, S., & Witten, E. 2017, Phys. Rev. D, 95, 043541
+Ji, A. P., Koposov, S. E., Li, T. S., et al. 2021, ApJ, 921, 32
+Kim, J.-h., Abel, T., Agertz, O., et al. 2014, ApJS, 210, 14
+Knollmann, S. R. & Knebe, A. 2009, ApJS, 182, 608
+Kroupa, P. 2002, Science, 295, 82
+Lazar, A., Bullock, J. S., Boylan-Kolchin, M., et al. 2020, MNRAS, 497, 2393
+Macciò, A. V ., Stinson, G., Brook, C. B., et al. 2012, ApJ, 744, L9
+Marigo, P., Girardi, L., Bressan, A., et al. 2008, A&A, 482, 883
+McConnachie, A. W. 2012, AJ, 144, 4
+McConnachie, A. W. 2021, Local Group and Nearby Dwarf Galaxies Catalog,
+Canadian Astronomy Data Centre, online catalogue; accessed 8 July 2026
+Merritt, A., Dokkum, P. v., Abraham, R., & Zhang, J. 2016, The Astrophysical
+Journal, 830, 62
+Merritt, A., Pillepich, A., van Dokkum, P., et al. 2020, MNRAS, 495, 4570
+Merritt, D. 1987, ApJ, 313, 121
+Moliné, Á., Sánchez-Conde, M. A., Aguirre-Santaella, A., et al. 2023, MNRAS,
+518, 157
+Moster, B. P., Naab, T., & White, S. D. M. 2013, MNRAS, 428, 3121
+Muñoz, R. R., Côté, P., Santana, F. A., et al. 2018, ApJ, 860, 66
+Navarro, J. F., Frenk, C. S., & White, S. D. M. 1997, ApJ, 490, 493
+Nedkova, K. V ., Häußler, B., Marchesini, D., et al. 2021, Monthly Notices of the
+Royal Astronomical Society, 506, 928
+Nelson, D., Pillepich, A., Springel, V ., et al. 2017, Monthly Notices of the Royal
+Astronomical Society, 475, 624–647
+Oh, S.-H., de Blok, W. J. G., Brinks, E., Walter, F., & Kennicutt, R. C. 2011,
+ApJ, 141, 193
+Pascale, R., Battaglia, G., Arroyo-Polonio, J. M., et al. 2026, A&A, 710, A291
+Pascale, R., Nipoti, C., Calura, F., & Della Croce, A. 2025, A&A, 700, A77
+Peñarrubia, J., Benson, A. J., Walker, M. G., et al. 2010, MNRAS, 406, 1290
+Peñarrubia, J., Pontzen, A., Walker, M. G., & Koposov, S. E. 2012, ApJ, 759,
+L42
+Pietrinferni, A., Cassisi, S., Salaris, M., & Hidalgo, S. 2013, A&A, 558, A46
+Planck Collaboration, Ade, P. A. R., Aghanim, N., et al. 2014, A&A, 571, A16
+Pontzen, A. & Governato, F. 2012, MNRAS, 421, 3464
+Pontzen, A., Roškar, R., Stinson, G., & Woods, R. 2013, pynbody: N-Body/SPH
+analysis for python, Astrophysics Source Code Library, record ascl:1305.002
+Power, C., Navarro, J. F., Jenkins, A., et al. 2003, MNRAS, 338, 14
+Read, J. I., Walker, M. G., & Steger, P. 2019, MNRAS, 484, 1401
+Read, J. I., Wilkinson, M. I., Evans, N. W., Gilmore, G., & Kleyna, J. T. 2006,
+MNRAS, 366, 429
+Rohr, E., Feldmann, R., Bullock, J. S., et al. 2022, MNRAS, 510, 3967
+Salpeter, E. E. 1955, ApJ, 121, 161
+Sanders, J. L., Evans, N. W., & Dehnen, W. 2018, MNRAS, 478, 3879
+Sarrato-Alós, J., Bullock, J., Di Cintio, A., et al. 2026, A&A, 710, A95
+Schaller, M., Frenk, C. S., Bower, R. G., et al. 2015, MNRAS, 451, 1247
+Shen, S., Wadsley, J., & Stinson, G. 2010, MNRAS, 407, 1581–1596
+Siegel, M. H., Shetrone, M. D., & Irwin, M. 2008, AJ, 135, 2084
+Spergel, D. N. & Steinhardt, P. J. 2000, Phys. Rev. Lett., 84, 3760
+Stinson, G., Seth, A., Katz, N., et al. 2006, MNRAS, 373, 1074
+Stinson, G. S., Brook, C., Macciò, A. V ., et al. 2013, MNRAS, 428, 129
+Strigari, L. E., Frenk, C. S., & White, S. D. M. 2017, ApJ, 838, 123
+Tollet, E., Macciò, A. V ., Dutton, A. A., et al. 2016, MNRAS, 456, 3542
+Tolstoy, E., Battaglia, G., Arroyo-Polonio, J. M., et al. 2025, A&A, 698, A53
+Tolstoy, E., Hill, V ., Irwin, M., et al. 2006, The Messenger, 123, 33
+Torrealba, G., Belokurov, V ., Koposov, S. E., et al. 2019, MNRAS, 488, 2743
+Torrealba, G., Koposov, S. E., Belokurov, V ., & Irwin, M. 2016, MNRAS, 459,
+2370
+van Dokkum, P. G., Abraham, R., Merritt, A., et al. 2015, The Astrophysical
+Journal, 798, L45
+Vitral, E., van der Marel, R. P., Sohn, S. T., et al. 2024, ApJ, 970, 1
+Wadsley, J. W., Keller, B. W., & Quinn, T. R. 2017, Monthly Notices of the Royal
+Astronomical Society, 471, 2357
+Walker, M. G., Caldwell, N., Mateo, M., et al. 2023, ApJS, 268, 19
+Walker, M. G., Mateo, M., & Olszewski, E. W. 2009, AJ, 137, 3100
+Wang, L., Dutton, A. A., Stinson, G. S., et al. 2015, Monthly Notices of the Royal
+Astronomical Society, 454, 83
+Wardana, D., Chiba, M., & Hayashi, K. 2025, ApJ, 982, 167
+Willman, B., Blanton, M. R., West, A. A., et al. 2005, The Astronomical Journal,
+129, 2692–2700
+Willman, B., Geha, M., Strader, J., et al. 2011, The Astronomical Journal, 142,
+128
+Yang, H., Wang, W., Zhu, L., et al. 2025, ApJ, 993, 249
+Zhao, H. 1996, Monthly Notices of the Royal Astronomical Society, 278,
+488–496
+Zhu, L., van de Ven, G., Watkins, L. L., & Posti, L. 2016, MNRAS, 463, 1117
+Article number, page 12 of 14
+J. Sarrato-Alós & J. M. Arroyo-Polonio: Reconciling simulated and observed MW satellite density profiles
+Appendix A: Inner slope values of observed
+galaxies
+Tables A.1, A.2 and A.3 list the logarithmic dark matter density
+slope values derived from the dynamical models of the observed
+satellite galaxies, evaluated at 100, 250 and 500 pc, respectively.
+Table A.1.Logarithmic dark matter density profile slope d logρ/d logr
+evaluated at 100 pc for each observed galaxy and modelling method.
+Values are the median of the posterior distribution with asymmetric 1σ
+uncertainties (16th and 84th percentiles). Studies are: R19 (Read et al.
+2019), H20/H23 (Hayashi et al. 2020, 2023), AP25 (Arroyo-Polonio
+et al. 2025), and P25/P26 (Pascale et al. 2025, 2026). A superscript†
+indicates that the evaluation radius falls outside the reliability region
+defined for that galaxy and study.
+Galaxy R19 H20/H23 AP25 P25/P26
+Antlia 2··· −0.37 +0.22
+−0.28
+† ··· ···
+Boötes I··· −0.85 +0.54
+−0.76
+† ··· ···
+Canes Venatici I··· −0.71 +0.42
+−0.50
+† ··· ···
+Carina−0.81 +0.36
+−0.35 −0.79+0.24
+−0.22 ··· ···
+Coma Berenices··· −0.74 +0.49
+−0.78 ··· ···
+Crater 2··· −0.64 +0.41
+−0.56
+† ··· ···
+Draco−0.92 +0.25
+−0.24 −1.03+0.14
+−0.14 ··· −0.99 +0.25
+−0.28
+Eridanus II··· −1.34 +0.60
+−0.45
+† ··· ···
+Fornax−0.17 +0.12
+−0.23
+† −0.51+0.27
+−0.36
+† ··· ···
+Leo I−0.88 +0.38
+−0.33
+† −1.43+0.38
+−0.27 ··· −0.67 +0.23
+−0.20
+Leo II−1.52 +0.34
+−0.35
+† −1.06+0.40
+−0.35
+† ··· ···
+Sculptor−0.43 +0.22
+−0.26 −0.62+0.34
+−0.33 −0.44+0.13
+−0.14 ···
+Sextans−0.97 +0.38
+−0.44
+† −0.82+0.39
+−0.39
+† ··· ···
+Ursa Major I··· −1.49 +0.77
+−1.31
+† ··· ···
+Ursa Minor−0.59 +0.28
+−0.30 −1.30+0.42
+−0.35
+† ··· −0.37 +0.24
+−0.31
+Willman 1··· −1.61 +0.73
+−1.57
+† ··· ···
+Table A.2.Dark matter density profile logarithmic slope d logρ/d logr
+as Table A.1, but evaluated at 250 pc.
+Galaxy R19 H20/H23 AP25 P25/P26
+Antlia 2··· −0.37 +0.22
+−0.27
+† ··· ···
+Boötes I··· −1.00 +0.64
+−1.09 ··· ···
+Canes Venatici I··· −0.80 +0.46
+−0.52 ··· ···
+Carina−1.49 +0.28
+−0.29 −0.82+0.23
+−0.21 ··· ···
+Coma Berenices··· −0.92 +0.60
+−1.35
+† ··· ···
+Crater 2··· −0.71 +0.44
+−0.61
+† ··· ···
+Draco−1.34 +0.20
+−0.23 −1.04+0.14
+−0.13 ··· −1.02 +0.25
+−0.27
+Eridanus II··· −1.43 +0.61
+−0.52 ··· ···
+Fornax−0.40 +0.20
+−0.24 −0.66+0.27
+−0.29 ··· ···
+Leo I−1.28 +0.31
+−0.30 −1.60+0.28
+−0.31 ··· −1.20 +0.19
+−0.19
+Leo II−2.00 +0.29
+−0.30 −1.17+0.40
+−0.38 ··· ···
+Sculptor−1.25 +0.20
+−0.23 −0.91+0.32
+−0.26 −0.57+0.10
+−0.11 ···
+Sextans−1.41 +0.37
+−0.42 −1.00+0.35
+−0.32 ··· ···
+Ursa Major I··· −1.72 +0.89
+−2.22 ··· ···
+Ursa Minor−0.96 +0.27
+−0.27 −1.56+0.31
+−0.30 ··· −0.37 +0.24
+−0.31
+Willman 1··· −1.82 +0.82
+−2.53
+† ··· ···
+Table A.3.Dark matter density profile logarithmic slope d logρ/d logr
+as Table A.1, but evaluated at 500 pc.
+Galaxy R19 H20/H23 AP25 P25/P26
+Antlia 2··· −0.38 +0.21
+−0.27
+† ··· ···
+Boötes I··· −1.18 +0.75
+−1.96
+† ··· ···
+Canes Venatici I··· −0.92 +0.52
+−0.65 ··· ···
+Carina−1.79 +0.22
+−0.37 −0.89+0.22
+−0.24 ··· ···
+Coma Berenices··· −1.12 +0.74
+−2.28
+† ··· ···
+Crater 2··· −0.79 +0.49
+−0.76
+† ··· ···
+Draco−2.02 +0.15
+−0.16 −1.06+0.14
+−0.14 ··· −1.09 +0.26
+−0.30
+Eridanus II··· −1.55 +0.64
+−0.86
+† ··· ···
+Fornax−0.68 +0.25
+−0.22 −1.01+0.30
+−0.32 ··· ···
+Leo I−1.70 +0.27
+−0.28 −1.83+0.36
+−0.71 ··· −1.66 +0.24
+−0.38
+Leo II−2.53 +0.25
+−0.25
+† −1.30+0.44
+−0.60 ··· ···
+Sculptor−2.07 +0.18
+−0.19 −1.47+0.29
+−0.35 −0.75+0.10
+−0.11 ···
+Sextans−1.95 +0.35
+−0.32 −1.30+0.38
+−0.54 ··· ···
+Ursa Major I··· −1.99 +1.05
+−2.81
+† ··· ···
+Ursa Minor−1.43 +0.24
+−0.29 −1.98+0.41
+−0.61 ··· −0.39 +0.25
+−0.31
+Willman 1··· −2.14 +1.03
+−3.15
+† ··· ···
+Appendix B: Deviations in comparisons to
+individual density and slope profiles of satellite
+galaxies
+This appendix complements the galaxy-by-galaxy comparisons
+presented in the main text (Fig. 4 and 5) by showing the error-
+normalised structural deviations between the observationally de-
+rived profiles and their matching simulated satellite counter-
+parts (Fig. B.1 and B.2), expressed in units of each observa-
+tional model’s 1σcredible interval. The quantitative matching
+process used to pair the mass-selected simulated satellite haloes
+with their corresponding observational targets is detailed below.
+Galaxies remain ordered by decreasing stellar mass from top-left
+to bottom-right.
+The profile comparisons in Fig. B.1 and B.2 are performed
+separately for each observational source available for a given
+galaxy. For each source, we identify the best-matching sim-
+ulation as the mass-matched satellite galaxy that minimises
+the mean error-normalised absolute deviation (MADσ) over the
+overlapping reliable radial range, which is defined as:
+MADσ = 1
+Npts
+NptsX
+i=1
+δi,(B.1)
+whereN pts is the number of overlapping radial points, and the
+dimensionless residualδ i at each radial coordinater i is defined
+by scaling the absolute difference by the asymmetric 1σobser-
+vational uncertainty envelope:
+δi =
+
+ysim(ri)−y obs,med(ri)
+yobs,h68(ri)−y obs,med(ri) ify sim(ri)>y obs,med(ri),
+yobs,med(ri)−y sim(ri)
+yobs,med(ri)−y obs,l68(ri) ify sim(ri)≤y obs,med(ri).
+(B.2)
+Here,y sim represents the simulated profile value (either density
+ρor logarithmic slopedlogρ/dlogr), whiley obs,med,y obs,l68, and
+yobs,h68 represent the median, 16 th, and 84 th percentiles of the
+observational credible interval, respectively. Simulated satellite
+galaxies are only considered valid candidates if the overlapping
+Article number, page 13 of 14
+A&A proofs:manuscript no. aa61941-26
+spatial segment covers at least 50% of the total logarithmic width
+of the observational reliable range:
+log10(rov,max/rov,min)
+log10(robs,max/robs,min)≥0.5,(B.3)
+wherer ov,min andr ov,max are the minimum and maximum radii of
+the radial segment over which the observational and simulated
+reliable ranges overlap [i.e.r ov,min =max(r obs,min,r conv,20) and
+rov,max =min(r obs,max,R vir)].
+Shaded bands enclose the 68% of mass-matched satellite
+simulations with the lowest MAD σ values relative to the ob-
+served median, providing a measure of the structural spread
+among the best-fitting simulated profiles. For reference, the dot-
+ted line in the source colour shows the deviation of the NFW
+proxy profile from the observed median. A deviation of zero in-
+dicates perfect agreement with the observed median; a value of
+1 corresponds to the 1σboundary of the observational credible
+interval.
+Appendix C: Comparison with simulated central
+galaxies alone
+For completeness, this appendix presents the comparison of the
+16 observed dwarf satellites exclusively against simulated cen-
+tral galaxies.
+The simulated central profiles are selected using an identi-
+cal stellar mass window of±0.25 dex around each target’s ob-
+served stellar mass. The optimisation process to define the best-
+matching haloes and the 68% minimum-deviation envelopes
+follows the exact mathematical formulation described in Ap-
+pendix B.
+Fig. C.1 presents the comparison for density profiles and
+Fig. C.2 for slope profiles. Figs. C.3 and C.4 display their re-
+spective error-normalised deviation profiles.
+While these comparisons are hindered by noise spikes am-
+plified due to error normalisation of deviations, we highlight that
+density profile deviations with respect to centrals are in general
+larger than with respect to simulated satellites. As an example,
+the R19 deviations with respect to best-matching profiles exceed
+3σfor several cases (Leo I, Sculptor, Carina, Sextans, Ursa Mi-
+nor), while in the comparison to satellites (Fig. B.1) they remain
+below that value (and also below 2σin the cases of Carina and
+Sextans) over the full reliability region of the dynamical model.
+Article number, page 14 of 14
+J. Sarrato-Alós & J. M. Arroyo-Polonio: Reconciling simulated and observed MW satellite density profiles
+Fig. B.1.Deviation of simulated satellites’ dark matter density profiles from individual dynamical model inferences, expressed in units of
+each model’s 1σcredible interval. Each panel corresponds to one observed dwarf galaxy. For each dynamical model available for that galaxy
+(colour-coded by source: orange for H20/H23, blue for R19, purple for AP25, and red for P25/P26), a dashed line in the source colour shows
+the deviation of the mass-matched satellite simulation that minimises the mean absolute deviation relative to that model’s median density profile;
+shaded bands enclose the 68% of mass-matched satellite simulations with the smallest mean absolute deviations from the same model; and a dotted
+line in the source colour gives the deviation of the NFW proxy profile derived from Moster et al. (2013) and Moliné et al. (2023). A grey vertical
+dashed line marks the observed half-light radius. Only radial ranges deemed reliable for both simulations and observations are shown.
+Article number, page 15 of 14
+A&A proofs:manuscript no. aa61941-26
+Fig. B.2.Same as Fig. B.1, but for the logarithmic density slope.
+Article number, page 16 of 14
+J. Sarrato-Alós & J. M. Arroyo-Polonio: Reconciling simulated and observed MW satellite density profiles
+Fig. C.1.Dark matter density profiles versus physical radius, comparing observed satellite galaxies exclusively with simulated central galaxies.
+Layout, symbols, and literature colour-coding are identical to Fig. 4, but simulated central profiles are represented here as circular points.
+Article number, page 17 of 14
+A&A proofs:manuscript no. aa61941-26
+Fig. C.2.Same as Fig. C.1, but for the logarithmic density slope.
+Article number, page 18 of 14
+J. Sarrato-Alós & J. M. Arroyo-Polonio: Reconciling simulated and observed MW satellite density profiles
+Fig. C.3.Deviation of simulated central dark matter density profiles from individual dynamical model inferences, expressed in units of each
+model’s 1σcredible interval. Layout, symbols, and literature colour-coding are identical to Fig. B.1, but simulated central profiles are represented
+here as circular points.
+Article number, page 19 of 14
+A&A proofs:manuscript no. aa61941-26
+Fig. C.4.Same as Fig. C.3, but for the logarithmic density slope.
+Article number, page 20 of 14

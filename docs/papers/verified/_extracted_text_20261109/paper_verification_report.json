@@ -1,0 +1,201 @@
+{
+  "papers": [
+    {
+      "arxiv_id": "2411.11945v4",
+      "title_as_printed": "Novel density profile for isothermal cores of dark matter halos",
+      "authors_short": "Tran, Shen, Vogelsberger, Gilman, O'Neil, Roche, Zier, Gao",
+      "identity_confirmed": true,
+      "identity_note": "Title and author list match expected record exactly. arXiv:2411.11945v4, dated March 13 2026, published Phys. Rev. D 113(6), March 2026.",
+      "venue_year": "Phys. Rev. D 113(6), March 2026",
+      "profile_or_method_summary": "Proposes a novel analytic density profile (ρ_T25, Eq. 11) for SIDM halos with isothermal cores: ρ_T25(r) = ρ_c [tanh(r/r_c)/(r/r_c)]^n [1 + (r/r_s)^γ]^((3−n)/γ) with γ=2 fixed. Free parameters: ρ_c (core density), r_c (core radius), r_s (scale radius), n (transition index). Core velocity dispersion given by Eq. 12. Validated against idealized N-body simulations of a 10^8 M⊙ halo with σ/m = 21.94 cm^2/g (and 31.98 cm^2/g in smaller dataset). The profile accurately captures both density and velocity dispersion across evolutionary stages from early thermalization to deep core collapse. Transition index n evolves from 1 (NFW) to ~2.5 and remains stable. Fitting errors are negligible vs. direct measurement uncertainties. Outperforms Read, Robertson-Fischer, and Yang profiles in velocity dispersion reconstruction.",
+      "key_numbers": [
+        {
+          "what": "SIDM cross-section (main halo simulation)",
+          "value": "21.94 cm^2/g",
+          "location": "Section III.B, line 575: 'halo of mass 10^8 M⊙ evolved under the cross section of 21.94 cm^2 g−1'"
+        },
+        {
+          "what": "SIDM cross-section (smaller dataset)",
+          "value": "31.98 cm^2/g",
+          "location": "Appendix B, Table II, line 1068: logM_200=7.9, σ/m=31.98"
+        },
+        {
+          "what": "Halo mass (main simulation)",
+          "value": "10^8 M⊙",
+          "location": "Section III.B, line 575"
+        },
+        {
+          "what": "Transition index n (stable value)",
+          "value": "n ≃ 2.5",
+          "location": "Section III.B, lines 709-712: 'n evolves rapidly from initial n=1 to approximately n≃2.5, where it remains relatively stable'"
+        },
+        {
+          "what": "Core velocity dispersion formula",
+          "value": "σ̃_c,T25 = sqrt(4πGρ_c r_c^2 / [2n+3 + (3−n)(r_c/r'_s)^2])",
+          "location": "Eq. 12, lines 421-424"
+        },
+        {
+          "what": "Profile free parameters",
+          "value": "ρ_c, r_c, r_s, n (γ=2 fixed)",
+          "location": "Eq. 11, lines 402-406; γ=2 fixed at line 412"
+        },
+        {
+          "what": "Collapse timescale τ formula",
+          "value": "τ(σ_eff/m) = 150/C * (σ_eff/m)^(-1) * ρ_s^(-1/2) * (4π σ_s^2)^(-1/2)",
+          "location": "Eq. 14, lines 583-592"
+        }
+      ],
+      "caveats": [
+        "Display math in extracted text is corrupted (e.g., Eq. 11 shows as fragmented symbols); functional form reported as words + raw fragment for human verification.",
+        "Simulation limited to velocity-independent cross-section (VICS) models; velocity-dependent cross-sections not tested.",
+        "Profile shows slight deviations from simulated velocity dispersion around r_s; a more complex form with additional DOF would be needed for better reconstruction.",
+        "Fitting uses log-space least-squares prioritizing core over outer regions (not statistically exact)."
+      ],
+      "verdict_for_project": "corroborates"
+    },
+    {
+      "arxiv_id": "2512.15869v2",
+      "title_as_printed": "The AIDA-TNG project: dark matter profiles and concentrations in alternative dark matter models",
+      "authors_short": "Despali, Giocoli, Moscardini, Pillepich, Vogelsberger, Meneghetti et al.",
+      "identity_confirmed": true,
+      "identity_note": "Title and author list match expected record. arXiv:2512.15869v2, accepted A&A, published 2026-03-26, DOI 10.1051/0004-6361/202558686.",
+      "venue_year": "A&A, published 2026-03-26, DOI 10.1051/0004-6361/202558686",
+      "profile_or_method_summary": "AIDA-TNG cosmological simulations (two boxes: 110.7 and 51.7 Mpc) with DMO and full-physics runs across CDM, WDM (1,3 keV), SIDM1 (constant σ/m=1 cm^2/g), and vSIDM (velocity-dependent, Correa 2021 model). Halo mass range 10^9.5–10^14.5 M⊙. Profiles fit with NFW, Einasto, and Y24 (Yang et al. 2024, β=4) models. Resolution limits: r≥4.4 kpc (100/A), r≥1.7 kpc (50/A). In DMO, SIDM forms large flat cores best fit by Y24; core size increases with mass in SIDM1 but reverses in vSIDM (larger cores at low mass). Core radius r_c < scale radius r_Y, so concentrations match CDM when using Y24. In FP runs, baryons suppress SIDM cores via adiabatic contraction (central density enhancement factor ~30 for SIDM vs ~4 for CDM at high mass), and Einasto becomes preferred fit. SIDM1 halos at M_200c~10^12–13 M⊙ show steep cusps γ<−1.5 (gravothermal contraction precursor). Core size–mass relations: y(SIDM1)=0.37−0.5x+0.0026x^2, y(vSIDM)=0.16−0.11x (x=log M_200c, y=log(r_c/r_200c)).",
+      "key_numbers": [
+        {
+          "what": "SIDM1 cross-section (constant)",
+          "value": "1 cm^2/g",
+          "location": "Table 1, lines 190-193: 'SIDM1 is a classic elastic SIDM model with constant cross-section σ/m_χ = 1 cm^2 g−1'"
+        },
+        {
+          "what": "vSIDM cross-section model",
+          "value": "velocity-dependent, Correa (2021); reaches σ/m ~ 1 cm^2/g for v < 300 km/s (M_200c ~ 10^13 M⊙)",
+          "location": "Lines 192-193, 540-542"
+        },
+        {
+          "what": "Halo mass range",
+          "value": "10^9.5 to 10^14.5 M⊙",
+          "location": "Lines 19-20, 146-147"
+        },
+        {
+          "what": "Resolution limits",
+          "value": "r ≥ 4.4 kpc (100/A), r ≥ 1.7 kpc (50/A)",
+          "location": "Lines 20-21, 469-471, 1037-1038"
+        },
+        {
+          "what": "Core size–mass relation (SIDM1)",
+          "value": "y = 0.37 − 0.5x + 0.0026x^2 (x=log M_200c, y=log(r_c/r_200c))",
+          "location": "Eq. 3, line 637"
+        },
+        {
+          "what": "Core size–mass relation (vSIDM)",
+          "value": "y = 0.16 − 0.11x (x=log M_200c, y=log(r_c/r_200c))",
+          "location": "Eq. 3, line 638"
+        },
+        {
+          "what": "Adiabatic contraction factor (SIDM vs CDM at high mass)",
+          "value": "factor ~30 density increase for SIDM vs ~4 for CDM",
+          "location": "Lines 782-784: 'factor of ∼30 in the centre at the high-mass end, compared to a factor of ∼4 in CDM and WDM'"
+        },
+        {
+          "what": "Concentration peak mass scale",
+          "value": "M_200c ≃ 10^12 M⊙",
+          "location": "Lines 895-896, 990-992: 'sharp enhancement in concentration around M_200c ≃ 10^12 M⊙'"
+        },
+        {
+          "what": "Cluster cross-section upper limit cited",
+          "value": "σ/m_χ < 0.5 cm^2/g",
+          "location": "Lines 122-124: 'self-interaction cross-section is constrained to be lower than σ/m_χ ≥ 0.5 cm^2/g (Harvey et al. 2015; Kaplinghat et al. 2016; Sagunski et al. 2021)'"
+        },
+        {
+          "what": "Dwarf cross-section requirement cited",
+          "value": "σ/m_χ ∼ 100 cm^2/g",
+          "location": "Lines 125-128: 'diverse properties of dwarf galaxies are instead compatible with ... requiring σ/m_χ ∼ 100 cm^2/g (Correa 2021)'"
+        }
+      ],
+      "caveats": [
+        "Display math in extracted text is corrupted; equations reported as words + raw fragments.",
+        "SIDM cross-sections simulated (1 cm^2/g constant, vSIDM peaking at ~1 cm^2/g) are far below the project's fiducial 483 cm^2/g at 29.4 km/s.",
+        "vSIDM model is specifically the Correa (2021) implementation; not a general velocity-dependent model.",
+        "FP runs show resolution-dependent behavior for M_200c=[10^12,10^13] M⊙ where stellar component dominates.",
+        "AIDA-TNG halos do not form density cores from baryonic feedback (unlike some other hydro simulations)."
+      ],
+      "verdict_for_project": "methodology-caveat"
+    },
+    {
+      "arxiv_id": "2607.08818v2",
+      "title_as_printed": "Dark matter density profiles of the Milky Way satellite population: reconciling simulations and observations",
+      "authors_short": "Sarrato-Alós & Arroyo-Polonio",
+      "identity_confirmed": true,
+      "identity_note": "Title and author list match expected record. arXiv:2607.08818v2, accepted A&A, 20 pages, 11 figures (manuscript shows 14 pages + appendices).",
+      "venue_year": "A&A accepted, 2026 (arXiv v2 dated 22 Oct 2026)",
+      "profile_or_method_summary": "Compares NIHAO and FIRE-2 cosmological zoom-in simulations (CDM + baryons) against dynamical models of 16 MW dwarf satellites from four methods (R19, H20/H23, AP25, P25/P26). Key innovation: measures inner slopes at fixed physical radii (100, 250, 500 pc) instead of fixed fraction of R_vir, enabling apples-to-apples comparison. Stellar mass range M_⋆ ~ 10^3–10^8 M⊙ (observed), simulations up to 10^11 M⊙. Fits double power-law (Zhao 1996) to simulated profiles. Defines reliability radii from spectroscopic catalogs (50 stars inner, 10 stars outer for star-by-star; 3 bins for binned). NFW baseline from Moster et al. (2013) + Moliné et al. (2023) via abundance matching. Main result: clear mass-dependent core formation trend; simulations agree with observations within ≲1σ for most systems in density space, outperforming NFW. No SIDM cross-section constraints.",
+      "key_numbers": [
+        {
+          "what": "Inner slope at 500 pc (M_⋆ ~ 10^5 M⊙)",
+          "value": "dlogρ/dlogr ≈ −1.5 (super-cuspy)",
+          "location": "Lines 547-549, 957-959: 'inner slopes rise from super-cuspy values of ≈−1.5 at M_⋆∼10^5 M⊙'"
+        },
+        {
+          "what": "Inner slope at 500 pc (M_⋆ ~ 10^8 M⊙)",
+          "value": "dlogρ/dlogr ≈ 0 to −0.4 (core-like)",
+          "location": "Lines 548-550, 958-960: 'to shallow, core-like values of dlogρ/dlogr≈0 to−0.4 at M_⋆∼10^8 M⊙'"
+        },
+        {
+          "what": "Efficient core formation threshold",
+          "value": "M_⋆ ≳ 10^6 M⊙",
+          "location": "Lines 580-591, 965-968: 'M_⋆≈10^6 M⊙ represents a robust estimate for the lower limit of efficient core formation'"
+        },
+        {
+          "what": "NFW baseline slope at 500 pc (M_⋆ ~ 10^5 M⊙)",
+          "value": "dlogρ/dlogr_NFW ≈ −1.75",
+          "location": "Lines 677-680: 'NFW slope ranges from dlogρ/dlogr_NFW≈−1.75 at M_⋆∼10^5 M⊙'"
+        },
+        {
+          "what": "NFW baseline slope at 500 pc (M_⋆ ~ 10^7 M⊙)",
+          "value": "dlogρ/dlogr_NFW ≈ −1.25",
+          "location": "Lines 679-680: 'to ≈−1.25 at 10^7 M⊙'"
+        },
+        {
+          "what": "Simulated–NFW offset at peak core formation",
+          "value": "Δ(dlogρ/dlogr) ≈ 0.7–1.0 shallower than NFW",
+          "location": "Lines 681-683: 'Simulated galaxies in the peak core-forming mass range lie at Δdlogρ/dlogr≈0.7−1.0 shallower than this baseline'"
+        },
+        {
+          "what": "Satellite slope scatter (steep tail)",
+          "value": "dlogρ/dlogr ≈ −2.5 to −3",
+          "location": "Lines 596-598, 976-978: 'satellite distribution develops a pronounced tail towards steep slopes (≈−2.5 to−3)'"
+        },
+        {
+          "what": "Willman 1 half-light radius",
+          "value": "~28 pc",
+          "location": "Line 779: 'exceptionally compact half-light radius of ∼28 pc'"
+        },
+        {
+          "what": "Antlia 2 anomalous slope",
+          "value": "≈ −0.3 at >1 kpc",
+          "location": "Lines 1024-1026: 'Antlia 2 exhibits an anomalously shallow slope (≈−0.3) extending out to large physical radii (>1 kpc)'"
+        },
+        {
+          "what": "Simulation–observation agreement (density space)",
+          "value": "≲1σ for most systems and most datasets",
+          "location": "Lines 740-742, 992-995: 'best-matching simulations reproduce the H20/H23 profiles to within ≲1σ across essentially the full reliable radial range for most systems'"
+        },
+        {
+          "what": "NFW over-prediction for cored systems",
+          "value": "2–3σ (up to 4σ at smallest radii)",
+          "location": "Lines 746-749, 996-998: 'NFW proxy systematically over-predicts the central density for the more cored systems ... with deviations exceeding 4σ at the smallest resolved radii'"
+        }
+      ],
+      "caveats": [
+        "No SIDM cross-section constraints or sigma/m values — this is a CDM+baryons paper.",
+        "Display math in extracted text is corrupted; slope values from Tables A.1–A.3 are reliable as they appear as plain numbers.",
+        "Ultra-faint dwarfs (M_⋆ < 10^5 M⊙) have very limited observational data (40–65 stars) and no close simulated mass matches.",
+        "R19 dataset has tighter uncertainties, making it harder to match; some tensions reflect dataset-to-dataset differences.",
+        "Antlia 2 and Crater 2 are likely extreme tidal outliers; Willman 1 has compactness and binary-star issues.",
+        "Convergence radii: FIRE-2 uses r_200p (200 DM particles), NIHAO uses Power et al. (2003) with Schaller et al. (2015) threshold f(r)≥0.33."
+      ],
+      "verdict_for_project": "background-only"
+    }
+  ]
+}

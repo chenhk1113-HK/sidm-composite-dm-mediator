@@ -1,0 +1,591 @@
+Self-Interacting Dark Matter and the Origin of Ultra-Diﬀuse Galaxies NGC1052-DF2
+and -DF4
+Daneng Yang, 1,∗ Hai-Bo Yu, 2,† and Haipeng An 1, 3,‡
+1Department of Physics, Tsinghua University, Beijing 100084, China
+2Department of Physics and Astronomy, University of California, Riverside, California 92521, USA
+3Center for High Energy Physics, Tsinghua University, Beijing 100084, China
+(Dated: August 31, 2020)
+Observations of ultra-diﬀuse galaxies NGC 1052-DF2 and -DF4 show they may contain little dark
+matter, challenging our understanding of galaxy formation. Using controlled N-body simulations,
+we explore the possibility that their properties can be reproduced through tidal stripping from
+the elliptical galaxy NGC 1052, in both cold dark matter (CDM) and self-interacting dark matter
+(SIDM) scenarios. To explain the dark matter deﬁciency, we ﬁnd that a CDM halo must have a very
+low concentration so that it can lose suﬃcient inner mass in the tidal ﬁeld. In contrast, SIDM favors
+a higher and more reasonable concentration as core formation enhances tidal mass loss. Final stellar
+distributions in our SIDM benchmarks are more diﬀuse than the CDM one, and hence the former
+are in better agreement with the data. We further show that a cored CDM halo model modiﬁed by
+strong baryonic feedback is unlikely to reproduce the observations. Our results indicate that SIDM
+is more favorable for the formation of dark-matter-deﬁcient galaxies.
+Introduction. Dark matter plays a crucial role in
+galaxy formation and evolution [1]. In the standard sce-
+nario, a luminous galaxy is hosted by a dark matter halo,
+which dominates the overall mass of the galactic system.
+However, using globular clusters as a tracer, the Dragon-
+ﬂy team found that ultra-diﬀuse galaxies NGC 1052-DF2
+(DF2) and -DF4 (DF4) may contain little dark matter [2–
+4]. The ratio of their dark matter to stellar masses is
+MDM/Mstar∼ 1, a factor of 300 lower than expected from
+the canonical stellar-to-halo mass relation [5–7]. There
+has been intensive debate in the literature about uncer-
+tainties that may aﬀect the inference, including those as-
+sociated with mass [8–12] and distance [13, 14] estimates.
+Further measurements [15, 16] conﬁrm the original ﬁnd-
+ings, although more observations are needed to fully set-
+tle the debate.
+The dark matter deﬁciency of these galaxies may be
+related to their environments. Both DF2 and DF4 are
+likely satellite galaxies of the massive elliptical galaxy
+NGC 1052 [16–18], which is at a distance of 20 Mpc
+from the earth. Cosmological hydrodynamical cold dark
+matter (CDM) simulations could produce dark-matter-
+deﬁcient satellite galaxies [19–22] due to tidal strip-
+ping [23–29]. However, it is challenging to ﬁnd analogs
+in CDM simulations that could match properties of DF2
+and DF4 even after taking into account the known un-
+certainties, as highlighted in [30]. Ref. [31] constructs a
+DF2-like system based on controlled N-body simulations.
+It argues that a cored dark matter halo is required, as a
+CDM cuspy halo does not lose suﬃcient mass in NGC
+1052’s tidal ﬁeld. In addition, stars expand more signiﬁ-
+cantly in a cored halo in response to tidal stripping [32].
+In this paper, we study realizations of DF2 and DF4-
+like galaxies in the self-interacting dark matter (SIDM)
+scenario [33, 34]; see [35] for a recent review. Dark mat-
+ter self-interactions can thermalize the inner halo and
+naturally lead to a density core in the inner halo for
+low-surface brightness galaxies, see, e.g., [36–42]. Recent
+studies show that SIDM may provide a uniﬁed expla-
+nation for dark matter distributions in galactic systems
+over a wide mass range, including satellite galaxies in the
+Milky Way [28, 29, 36, 43], spiral galaxies in the ﬁeld [44–
+47] and galaxy clusters [34]. It is intriguing to see how the
+newly observed dark-matter-deﬁcient galaxies can shed
+further light on the nature of dark matter.
+Using controlled N-body simulations, we model the
+evolution of satellite galaxies in the tidal ﬁeld of NGC
+1052 and study their properties in both SIDM and CDM
+scenarios. After choosing a radial orbit to enhance tidal
+stripping, we impose observational constraints from the
+dark-matter-deﬁcient galaxies and derive conditions on
+initial halo parameters for the satellites. We will show
+that SIDM is more likely to result in DF2 and DF4-like
+galaxies than CDM, in terms of reproducing their lit-
+tle dark matter content and diﬀuse stellar distributions.
+These results are insensitive to the initial halo mass. We
+further demonstrate that stellar particles can prevent a
+satellite halo from being disrupted in the tidal ﬁeld, and
+a cored CDM halo, motivated by simulations with strong
+baryonic feedback, could be destroyed within 11 Gyr.
+Simulation setup. We model host galaxy NGC
+1052 with a static spherical potential, including both
+dark matter halo and stellar components. Assuming a
+Navarro-Frenk-White (NFW) density proﬁle [48] for the
+host halo, we ﬁx the characteristic scale density and ra-
+dius as ρs = 1.6× 106 M⊙/kpc3 and rs = 80 kpc, simi-
+lar to those used in [31]. The total halo mass is M200 =
+1.1×1013 M⊙. The luminosity of the galaxy follows a 2D
+S´ ersic proﬁle [49] with the index parametern = 3.4 and
+the eﬀective radius Re = 2.06 kpc; the total stellar mass
+is 10 11 M⊙ [50]. In our simulations, we use a Hernquist
+proﬁle ρH =ρh/[r/rh(1 +r/rh)3] [51] to model the stel-
+arXiv:2002.02102v2  [astro-ph.GA]  27 Aug 2020
+2
+lar distribution, where we take ρh = 1.1× 1010 M⊙/kpc3
+andrh = 1.2 kpc such that both Hernquist and 3D depro-
+jected S´ ersic proﬁles have the same total enclosed mass
+and half-mass radius.
+For the satellite system, we consider a conservative sce-
+nario where tidal mass loss of stars is small, i.e., the ratio
+of initial to ﬁnal stellar masses is O(1), so that the ini-
+tial halo mass could be as low as possible, subject to the
+stellar-halo mass relation, which also holds in SIDM [46].
+In this work, we choose the initial halo and stellar masses
+as M200 = 6.0× 1010 M⊙ and M⋆ = 3.2× 108 M⊙, con-
+sistent with the median stellar-halo mass relation [5, 6].
+We assume that the halo follows an NFW proﬁle and
+perform a coarse scan of the concentration parameter
+c200 ≡ r200/rs, where r200 is the halo’s virial radius
+(z = 0). We varyc200 from 4 to 10, and ﬁnd a value such
+that, after tidal evolution, the simulated satellites can
+match the observed dark matter content of DF2 and DF4.
+In practice, for a given halo, we convert its ( c200, M200)
+to (rs, ρs) for specifying its initial density proﬁle in sim-
+ulations. For the stellar component, we use a Plummer
+proﬁle ρP = ρp/[1 + (r/rp)2]5/2 [52] to model its ini-
+tial distribution, where ρp = 5.8× 107 M⊙/kpc3 and
+rp = 1.1 kpc. Our stellar distribution is consistent with
+the size-mass relation found in galaxy surveys, see [32].
+We perform both SIDM and CDM simulations. For
+the former, we consider two values of the self-scattering
+cross section per mass, σ/m = 3 cm 2/g (SIDM3) and
+5 cm 2/g (SIDM5), consistent with the ones used to ex-
+plain dark matter distributions in ﬁeld spiral and Milky
+Way satellite galaxies [28, 46]. We use the public code
+GADGET-2 [53, 54] to perform simulations. To model dark
+matter self-interactions, we have developed and imple-
+mented an SIDM module based on the method as in [55].
+We have checked our code for a test halo and found that
+the simulated density and velocity-dispersion proﬁles well
+agree with the results obtained using a semi-analytical
+model [34], which has been calibrated to other SIDM
+simulations, see [46]. For the satellite system, we use
+the code SpherIC [56] to generate initial conditions. The
+mass of the simulation particles is 10 4 M⊙ for both the
+halo and stellar components, and the softening length is
+50 pc. We identify bound halo particles with the help of
+the code ROCKSTAR [57].
+Orbital parameters. The simulated satellites are ini-
+tially placed at the apocenter and they have a tangential
+velocity of 27 km/s. The apocenter is 380 kpc away from
+the center of the host. We ﬁnd that the orbital period
+is about 2.5 Gyr, the pericenter is 9 kpc, and the veloc-
+ity there is 740 km/s. The corresponding orbital energy
+and circularity parameters are xc = 0.49 and η = 0.13,
+respectively, which are on lower tails of cosmological dis-
+tributions [27]. We have chosen a radial orbit to enhance
+tidal stripping of the halo mass.
+We determine a timescale for the ﬁnal snapshot from
+the following consideration. DF2 has a projected dis-
+tance of 80 kpc from NGC 1052 and a relative velocity
+of 293 km /s along the line-of-sight direction [2]. Sup-
+pose the angle between the host–satellite plane and the
+line-of-sight direction is θ and the orbit is nearly ra-
+dial, as in our setup, we have the relations, d sinθ ≈
+80 kpc and v cosθ ≈ 293 km/s. For t ≈ 9.6 Gyr
+and 11.2 Gyr, corresponding to the moments right be-
+fore and after passing the apocenter for the fourth time,
+respectively, our simulated satellites satisfy condition
+(80 kpc/d)2 + (293 km/s/v)2≈ 1. We will show results
+with t = 11.2 Gyr, corresponding to 4 orbits in total.
+We make additional checks to further validate our sim-
+ulations. Using a low-resolution simulation that treats
+the host halo with live particles, we ﬁnd that dynamical
+friction could shorten the orbital period by 10% at late
+stages, which is negligible for the purpose of this work.
+For our system, the evaporation eﬀect could be important
+if the cross section between dark matter in the host and
+the one in the satellite is σ/m ≳ 2.5 cm 2/g. Consider
+a realistic SIDM model in [34], where σ/m is velocity
+dependent and diminishing towards cluster scales, we es-
+timate σ/m∼ 0.3 cm 2/g when the satellite passes the
+pericenter at a velocity of v = 740 km/s, and thus evap-
+oration mass loss of the satellite halo is negligible. Note
+that σ/m can be much larger in the satellite halo as the
+dark matter velocity there is much lower, ∼ 40 km/s.
+We also simulate CDM and SIDM ( σ/m = 3 cm 2/g)
+halo density proﬁles for NGC 1052 in the presence of the
+stellar potential, and ﬁnd that they behave similarly, i.e.,
+both of them are steeper than the assumed NFW proﬁle
+towards the center. However, since stars dominate the
+host’s inner potential, the diﬀerence in the halo density
+proﬁle of the host has a small eﬀect. Thus our approach
+with the static potential is well justiﬁed. Lastly, using
+the semi-analytic method in [59], we have conﬁrmed that
+resolution of our benchmark simulations is high enough
+to avoid numerical artifacts concerning tidal disruption
+of substructure in N-body simulations [27, 60].
+Mass proﬁles. Our simulations search for upper lim-
+its of c200 such that the simulated satellites can broadly
+match the observations. We ﬁnd three benchmark cases,
+c200 = 4, 7, and 9 for CDM, SIDM3 and SIDM5, respec-
+tively. Fig. 1 shows their enclosed dark matter (gray)
+and stellar (magenta) masses vs. radius at t = 0 Gyr
+(dashed) and 11.2 Gyr (solid), as well as the ﬁnal total
+mass proﬁles (solid black). For all the benchmarks, the
+simulated halos experience signiﬁcant mass loss in the
+tidal ﬁeld of NGC 1052, and the bound masses approach
+MDM≈ 2× 108 M⊙ att = 11.2 Gyr, reduced by a factor
+of 300 compared to the initial value, 6× 1010 M⊙. Tidal
+mass loss of the stars is much more mild, resulting in a
+total stellar mass of Mstar≈ 1.5× 108 M⊙. Thus the
+mass ratio is MDM/Mstar∼ 1 after tidal evolution.
+Observationally, Ref. [2] reports a 90% CL upper limit
+ofσintr< 10.5 km/s for the velocity dispersion of 10 glob-
+ular clusters of DF2, corresponding to a total dynamical
+3
+FIG. 1. Enclosed mass proﬁles before (dashed) and after (solid) tidal evolution for CDM, SIDM3 and SIDM5 benchmarks.
+The black arrows denote the upper limits on the total dynamical mass within r = 3.1 kpc and 7 .6 kpc for the NGC 1052-DF2
+galaxy at 90% CL [2, 3]. As a reference, values in the parentheses indicate deviations of the initial halo concentrations from
+the median of the concentration-mass relation ( z = 0) predicted in cosmological simulations [58].
+mass of Mdyn ≲ 3.4× 108 M⊙ within a radius of 7.6 kpc;
+see also [61, 62] using other tracers. Ref. [3] revises it to
+beσintr< 12.4 km/s, and we obtainMdyn ≲ 4.7×108 M⊙
+accordingly (Mdyn∝ σ2
+intr [63]). DF2 has a total stel-
+lar mass of Mstar = 2× 108 M⊙ [2]. Further measure-
+ments using stellar spectroscopy show Mstar = (1.0±
+0.2)× 108 M⊙ and Mdyn = (1.3± 0.8)× 108 M⊙ within
+DF2’s 3D half-light radiusR1/2 = 2.7 kpc [15]. For DF4,
+Mstar = (1.5±0.4)×108 M⊙ andMdyn = 0.4+1.2
+−0.3×108 M⊙
+within 7 kpc [4]. We see our three benchmarks well re-
+produce low dark matter content of DF2 and DF4. For
+reference, we display the upper limits of Mdyn for DF2
+in Fig. 1, 3.2× 108 M⊙ and 4.7× 108 M⊙ within 3.1 kpc
+and 7.6 kpc, respectively.
+Halo concentration. Using tailored simulations, we
+have shown that the tidal interactions can cause low dark
+matter content of DF2 and DF4 in both CDM and SIDM
+scenarios. However, the benchmark halos shown in Fig. 1
+have diﬀerent concentrations. The CDM one is the lowest
+c200 = 4, corresponding to 4 σ below the median of the
+concentration-mass relation [58] ( z = 0). In contrast,
+SIDM favors a higher concentration. SIDM3 has c200 =
+7, 1.8σ below the median, and SIDM5 has c200 = 9, 0.8σ
+below.
+We see that the dark-matter-deﬁcient galaxies are
+more likely realized in SIDM than in CDM. Since the in-
+ner density cusp in a CDM halo is resilient to tidal strip-
+ping, a low concentration is required. In contrast, dark
+matter self-interactions can thermalize the inner halo and
+push dark matter from inner to outer regions, lowering
+the inner gravitation potential. Thus SIDM satellite ha-
+los are more prone to tidal stripping (if there is no core
+collapse; see [28, 29]), and a higher and more reasonable
+c200 value can match the observations.
+To further test our ﬁndings, we have performed a series
+of additional CDM simulations, where we keep the same
+initial stellar mass, but varying the halo mass within
+±1σ deviations from the median stellar-to-halo mass rela-
+tion [6]. Even with the ﬂexibility, the CDM halo concen-
+tration needs to be∼ 4σ below the median [58] to achieve
+MDM/Mstar∼ 1. Thus the CDM model is strongly dis-
+favored, regardless of the initial halo mass. We also have
+checked that if the SIDM halos evolve for 2 Gyr in isola-
+tion before being subject to the tidal ﬁeld, an even higher
+concentration is allowed. Thus our results are robust.
+Stellar distributions. Fig. 2 (left) shows stellar den-
+sity proﬁles at t = 0 Gyr and 11 .2 Gyr for the bench-
+marks. From our simulations, we ﬁnd that ﬁnal half-mass
+radii are R1/2 = 1.4 kpc, 1.8 kpc and 2.1 kpc for CDM,
+SIDM3 and SIDM5 benchmarks, respectively. We use a
+3D deprojected S´ esic proﬁle to ﬁt the simulated stellar
+distributions within 5 kpc and ﬁnd good agreement. The
+inferred S´ esic indices, characterizing the stellar concen-
+tration, aren = 1.0, 0.81 and 0.67 for CDM, SIDM3 and
+SIDM5, respectively; the associated eﬀective radii Re are
+consistent with the half-mass radii from the simulations
+(R1/2≈ 4/3Re [64]).
+As σ/m increases, the stellar distributions become
+more diﬀuse and the baryon concentration decreases.
+This is because SIDM core formation leads to a shallow
+gravitational potential and the stars expand more signif-
+icantly through tidal stripping; see also [32]. The mea-
+sured half-light radii and S´ esic indices areR1/2 = 2.7 kpc
+andn = 0.6 for DF2 [2], andR1/2 = 2.0 kpc andn = 0.79
+for DF4 [4]. In Fig. 2 (left), we show the measured stel-
+lar density of DF4 for comparison. Our SIDM bench-
+marks agree better with the observed stellar distribu-
+tions than the CDM one, although all three cases have
+MDM/Mstar∼ 1 after evolution, as shown in Fig. 1.
+4
+FIG. 2. Left: ﬁnal stellar density proﬁles for the CDM, SIDM3 and SIDM5 benchmarks (solid), as well as the initial condition
+(dashed). The green band denotes the measured stellar density of NGC 1052-DF4 [4], and the arrows denote the half-mass
+radii of the stellar components from the simulations. Right: evolution of the bound halo masses for the benchmarks (solid).
+For comparison, we also show results without including stellar particles in simulations (dashed).
+Tidal evolution. Fig. 2 (right) shows the bound halo
+masses vs. time for the benchmarks (solid). There is
+a trend between the concentration of the benchmark
+models and the rate of mass loss, i.e., the SIDM5 halo
+(c200 = 9) has much less rapid mass loss than the CDM
+halo (c200 = 4). We also display the evolution of the
+bound halo masses without including stellar particles in
+the simulations (dashed). All of the halos are destroyed
+right after their third pericenter passages at t≈ 7.5 Gyr.
+Thus the stars are crucial for preventing the simulated
+halos from being disrupted in the tidal ﬁeld. Even though
+the SIDM5 halo has a high concentration, dark matter
+self-interactions make it vulnerable to tidal disruption in
+the absence of the stars. For comparison, we perform
+CDM runs of the initial SIDM5 halo without stellar par-
+ticles. The halo survives from tidal disruption and its
+ﬁnal bound mass is 2.6× 108 M⊙.
+Our results may have implications for understanding
+the population of dark-matter-deﬁcient galaxies. If CDM
+satellite halos host DF2 and DF4 galaxies, they need to
+be on the very low end of the concentration distribution.
+Thus a large number of satellite halos with higher con-
+centrations would populate the NGC 1052 group. They
+would have deep gravitational potentials to collect gas
+to form stars and prevent them from tidal disruption. It
+seems odd that we have observed only two that contain
+little dark matter. On the other hand, SIDM satellite ha-
+los have higher concentrations towards the median, and
+they are more prone to disruption. Thus it is natural to
+expect that luminous satellite galaxies in the NGC 1052
+group are rare in SIDM. It would be interesting to test
+this scenario with cosmological simulations and future
+observations.
+Discussion. Dark matter self-interaction is not the
+only mechanism that can create density cores. Hydro-
+dynamical simulations show that strong baryonic feed-
+back may create cores in CDM halos [65–76]. For DF2-
+like systems under consideration, the ratio of initial
+stellar-to-halo masses is ∼ 5× 10−3, at which the feed-
+back has the strongest impact and the core size is the
+largest [67, 68, 76]. Ref. [31] considers a cored CDM halo
+motivated by those simulations and ﬁnds it could repro-
+duce DF2 observations after tidal evolution, although the
+halo has a median concentration. It also assumes a steep
+initial density proﬁle for stars, which dominate in mass
+for r ≲ 1.5 kpc.
+However, CDM simulations that create dark matter
+cores would also produce diﬀuse stellar distributions, as
+argued in [47]. Consider a simulated galaxy from re-
+cent FIRE-2 simulations (m10xg) [76], which has a dark
+matter core due to strong feedback. Its halo mass is
+6.2× 1010 M⊙ and stellar mass 4.6× 108 M⊙, similar to
+our benchmarks. However, its stellar Plummer radius is
+3.1 kpc, a factor of 3 larger than ours, and its central
+stellar density is 15 times lower. We evolve a m10xg-like
+system in the tidal ﬁeld of NGC 1052. It is destroyed
+at t∼ 7 Gyr when using our orbital parameters, and
+11 Gyr using those in [31]. The ratio MDM/Mstar has a
+minimum of∼ 5 right before tidal disruption, at which
+the halo mass is close to 10 9 M⊙. Thus the cored CDM
+halo modiﬁed by strong feedback is unlikely to reproduce
+DF2- and DF4-like systems. Note that our initial stellar
+distribution is broadly consistent with simulations with
+weak baryonic feedback as in [77].
+Conclusions. We have studied realizations of dark-
+matter-deﬁcient galaxies through tidal stripping. Both
+5
+CDM and SIDM halos can lose the majority of their mass
+in the NGC 1052’s tidal ﬁeld, drastically increasing the
+ratio of stellar-to-halo masses in accord with the obser-
+vations. In CDM, halo concentration needs to be low to
+explain the dark matter deﬁciency. In contrast, an SIDM
+halo can have a higher and more reasonable concentra-
+tion, as collisional thermalization leads to core forma-
+tion, boosting tidal mass loss. Our SIDM benchmarks
+also predict more diﬀuse stellar distributions, resulting
+in better agreement with measurements. Thus the newly
+observed DF2 and DF4 are more naturally realized in
+SIDM than in CDM scenarios. There are interesting top-
+ics we could explore further, such as correlations between
+orbital and halo parameters of the satellite, and forma-
+tion of NGC 1052-like systems in the cosmological setup.
+Recent observations of dark-matter-deﬁcient galaxies in
+the ﬁeld [78–80] may help test the nature of dark mat-
+ter from another angle, as the tidal eﬀects are absent in
+these systems.
+We would like to thank Ran Huo and Go Ogiya for
+useful discussions. HBY was supported by the U.S. De-
+partment of Energy under Grant No. de-sc0008541 and
+in part by the U.S. National Science Foundation under
+Grant No. NSF PHY-1748958 through the “From In-
+ﬂation to the Hot Big Bang” KITP program. HA was
+supported by NSFC under Grant No. 11975134, the Na-
+tional Key Research and Development Program of China
+under Grant No. 2017YFA0402204 and Tsinghua Uni-
+versity Initiative Scientiﬁc Research Program.
+∗ yangdn@mail.tsinghua.edu.cn
+† haiboyu@ucr.edu
+‡ anhp@mail.tsinghua.edu.cn
+[1] S. D. M. White and M. J. Rees, Mon. Not. Roy. Astron.
+Soc. 183, 341 (1978).
+[2] P. van Dokkum et al. , Nature 555, 629 (2018),
+arXiv:1803.10237 [astro-ph.GA].
+[3] P. van Dokkum, Y. Cohen, S. Danieli, A. Romanowsky,
+R. Abraham, J. Brodie, C. Conroy, J. M. D. Kruijssen,
+D. Lokhorst, A. Merritt, L. Mowla, and J. Zhang, Re-
+search Notes of the American Astronomical Society 2, 54
+(2018), arXiv:1806.04685 [astro-ph.GA].
+[4] P. van Dokkum, S. Danieli, R. Abraham, C. Conroy, and
+A. J. Romanowsky, Astrophys. J. Lett 874, L5 (2019),
+arXiv:1901.05973 [astro-ph.GA].
+[5] B. P. Moster, R. S. Somerville, C. Maulbetsch, F. C. v. d.
+Bosch, A. V. Maccio, T. Naab, and L. Oser, Astrophys.
+J. 710, 903 (2010), arXiv:0903.4682 [astro-ph.CO].
+[6] B. P. Moster, T. Naab, and S. D. M. White, Mon.
+Not. Roy. Astron. Soc.428, 3121 (2013), arXiv:1205.5807
+[astro-ph.CO].
+[7] P. S. Behroozi, R. H. Wechsler, and C. Conroy, Astro-
+phys. J. 770, 57 (2013), arXiv:1207.6105 [astro-ph.CO].
+[8] N. F. Martin, M. L. M. Collins, N. Longeard,
+and E. Tollerud, Astrophys. J. 859, L5 (2018),
+arXiv:1804.04136 [astro-ph.GA].
+[9] C. F. P. Laporte, A. Agnello, and J. F. Navarro, Mon.
+Not. Roy. Astron. Soc.484, 245 (2019), arXiv:1804.04139
+[astro-ph.GA].
+[10] K. Hayashi and S. Inoue, Mon. Not. Roy. Astron. Soc.
+481, L59 (2018), arXiv:1808.10116 [astro-ph.GA].
+[11] A. Nusser, Mon. Not. Roy. Astron. Soc. 484, 510 (2019),
+arXiv:1810.03864 [astro-ph.GA].
+[12] R. Huo, Mon. Not. Roy. Astron. Soc. 495, L144 (2020),
+arXiv:1903.02434 [astro-ph.GA].
+[13] I. Trujillo et al. , Mon. Not. Roy. Astron. Soc. 486, 1192
+(2019), arXiv:1806.10141 [astro-ph.GA].
+[14] M. Monelli and I. Trujillo, Astrophys. J. Lett. 880, L11
+(2019), arXiv:1907.03761 [astro-ph.GA].
+[15] S. Danieli, P. van Dokkum, C. Conroy, R. Abraham, and
+A. J. Romanowsky, Astrophys. J. Lett 874, L12 (2019),
+arXiv:1901.03711 [astro-ph.GA].
+[16] S. Danieli, P. van Dokkum, R. Abraham, C. Conroy,
+A. E. Dolphin, and A. J. Romanowsky, Astrophys. J.
+Lett. 895, L4 (2020), arXiv:1910.07529 [astro-ph.GA].
+[17] P. van Dokkum, S. Danieli, Y. Cohen, A. J. Romanowsky,
+and C. Conroy, Astrophys. J. Lett 864, L18 (2018),
+arXiv:1807.06025 [astro-ph.GA].
+[18] J. P. Blakeslee and M. Cantiello, Research Notes of
+the American Astronomical Society 2, 146 (2018),
+arXiv:1808.02176 [astro-ph.GA].
+[19] Y. Jing, C. Wang, R. Li, S. Liao, J. Wang, Q. Guo, and
+L. Gao, Mon. Not. Roy. Astron. Soc. 488, 3298 (2019),
+arXiv:1811.09070 [astro-ph.GA].
+[20] H. Yu, B. Ratra, and F.-Y. Wang, (2018),
+arXiv:1809.05938 [astro-ph.GA].
+[21] S. Liao et al. , Mon. Not. Roy. Astron. Soc. 490, 5182
+(2019), arXiv:1904.06356 [astro-ph.GA].
+[22] M. Haslbauer, J. Dabringhausen, P. Kroupa, B. Ja-
+vanmardi, and I. Banik, Astron. Astrophys. 626, A47
+(2019), arXiv:1905.03258 [astro-ph.GA].
+[23] E. Hayashi, J. F. Navarro, J. E. Taylor, J. Stadel, and
+T. R. Quinn, Astrophys. J. 584, 541 (2003), arXiv:astro-
+ph/0203004 [astro-ph].
+[24] J. Penarrubia, J. F. Navarro, and A. W. McConnachie,
+Astrophys. J. 673, 226 (2008), arXiv:0708.3087 [astro-
+ph].
+[25] J. Penarrubia, A. J. Benson, M. G. Walker, G. Gilmore,
+A. McConnachie, and L. Mayer, Mon. Not. Roy. Astron.
+Soc. 406 (2010).
+[26] R. Errani, J. Penarrubia, and G. Tormen, Mon. Not.
+Roy. Astron. Soc. 449, L46 (2015), arXiv:1501.04968
+[astro-ph.GA].
+[27] F. C. van den Bosch, G. Ogiya, O. Hahn, and A. Burk-
+ert, Mon. Not. Roy. Astron. Soc. 474, 3043 (2018),
+arXiv:1711.05276 [astro-ph.GA].
+[28] O. Sameie, H.-B. Yu, L. V. Sales, M. Vogelsberger, and
+J. Zavala, (2019), arXiv:1904.07872 [astro-ph.GA].
+[29] F. Kahlhoefer, M. Kaplinghat, T. R. Slatyer, and C.-L.
+Wu, JCAP 1912, 010 (2019), arXiv:1904.10539 [astro-
+ph.GA].
+[30] M. Haslbauer, I. Banik, P. Kroupa, and K. Grishunin,
+Mon. Not. Roy. Astron. Soc. 489, 2634 (2019), [Erra-
+tum: Mon. Not. Roy. Astron. Soc.490,no.4,5692(2019)],
+arXiv:1909.04663 [astro-ph.GA].
+[31] G. Ogiya, Mon. Not. Roy. Astron. Soc. 480, L106 (2018),
+arXiv:1804.06421 [astro-ph.GA].
+[32] T. Carleton, R. Errani, M. Cooper, M. Kaplinghat, J. Pe-
+6
+narrubia, and Y. Guo, Mon. Not. Roy. Astron. Soc. 485,
+382 (2019), arXiv:1805.06896 [astro-ph.GA].
+[33] D. N. Spergel and P. J. Steinhardt, Phys. Rev. Lett. 84,
+3760 (2000), arXiv:astro-ph/9909386 [astro-ph].
+[34] M. Kaplinghat, S. Tulin, and H.-B. Yu, Phys. Rev. Lett.
+116, 041302 (2016), arXiv:1508.03339 [astro-ph.CO].
+[35] S. Tulin and H.-B. Yu, Phys. Rept. 730, 1 (2018),
+arXiv:1705.02358 [hep-ph].
+[36] M. Vogelsberger, J. Zavala, and A. Loeb, Mon. Not. Roy.
+Astron. Soc. 423, 3740 (2012), arXiv:1201.5892 [astro-
+ph.CO].
+[37] M. Rocha, A. H. G. Peter, J. S. Bullock, M. Kapling-
+hat, S. Garrison-Kimmel, J. Onorbe, and L. A. Mous-
+takas, Mon. Not. Roy. Astron. Soc. 430, 81 (2013),
+arXiv:1208.3025 [astro-ph.CO].
+[38] J. Zavala, M. Vogelsberger, and M. G. Walker, Mon.
+Not. Roy. Astron. Soc. 431, L20 (2013), arXiv:1211.6426
+[astro-ph.CO].
+[39] M. Vogelsberger, J. Zavala, F.-Y. Cyr-Racine, C. Pfrom-
+mer, T. Bringmann, and K. Sigurdson, Mon. Not. Roy.
+Astron. Soc. 460, 1399 (2016), arXiv:1512.05349 [astro-
+ph.CO].
+[40] A. Robertson, R. Massey, and V. Eke, Mon. Not. Roy.
+Astron. Soc. 467, 4719 (2017), arXiv:1612.03906 [astro-
+ph.CO].
+[41] A. Banerjee, S. Adhikari, N. Dalal, S. More, and
+A. Kravtsov, JCAP 02, 024 (2020), arXiv:1906.12026
+[astro-ph.CO].
+[42] E. O. Nadler, A. Banerjee, S. Adhikari, Y.-Y. Mao,
+and R. H. Wechsler, Astrophys. J. 896, 112 (2020),
+arXiv:2001.08754 [astro-ph.CO].
+[43] M. Valli and H.-B. Yu, Nat. Astron. 2, 907 (2018),
+arXiv:1711.03502 [astro-ph.GA].
+[44] A. Kamada, M. Kaplinghat, A. B. Pace, and H.-B. Yu,
+Phys. Rev. Lett. 119, 111102 (2017), arXiv:1611.02716
+[astro-ph.GA].
+[45] P. Creasey, O. Sameie, L. V. Sales, H.-B. Yu, M. Vogels-
+berger, and J. Zavala, Mon. Not. Roy. Astron. Soc. 468,
+2283 (2017), arXiv:1612.03903 [astro-ph.GA].
+[46] T. Ren, A. Kwa, M. Kaplinghat, and H.-B. Yu,
+Phys. Rev. X9, 031020 (2019), arXiv:1808.05695 [astro-
+ph.GA].
+[47] M. Kaplinghat, T. Ren, and H.-B. Yu, JCAP 2006, 027
+(2020), arXiv:1911.00544 [astro-ph.GA].
+[48] J. F. Navarro, C. S. Frenk, and S. D. M. White, Astro-
+phys. J. 490, 493 (1997), arXiv:astro-ph/9611107 [astro-
+ph].
+[49] J. L. Sersic, Boletin de la Asociacion Argentina de As-
+tronomia La Plata Argentina 6, 41 (1963).
+[50] D. A. Forbes, L. Sinpetru, G. Savorgnan, A. J. Ro-
+manowsky, C. Usher, and J. Brodie, Mon. Not. Roy.
+Astron. Soc. 464, 4611 (2017), arXiv:1610.02037 [astro-
+ph.GA].
+[51] L. Hernquist, Astrophys. J. 356, 359 (1990).
+[52] H. C. Plummer, Mon. Not. Roy. Astron. Soc. 71, 460
+(1911).
+[53] V. Springel, Mon. Not. Roy. Astron. Soc. 364, 1105
+(2005), arXiv:astro-ph/0505010 [astro-ph].
+[54] V. Springel, N. Yoshida, and S. D. M. White, New As-
+tron. 6, 79 (2001), arXiv:astro-ph/0003162 [astro-ph].
+[55] C. S. Kochanek and M. J. White, Astrophys. J. 543, 514
+(2000), arXiv:astro-ph/0003483 [astro-ph].
+[56] S. Garrison-Kimmel, M. Rocha, M. Boylan-Kolchin,
+J. Bullock, and J. Lally, Mon. Not. Roy. Astron. Soc.
+433, 3539 (2013), arXiv:1301.3137 [astro-ph.CO].
+[57] P. S. Behroozi, R. H. Wechsler, and H.-Y. Wu, Astro-
+phys. J. 762, 109 (2013), arXiv:1110.4372 [astro-ph.CO].
+[58] A. A. Dutton and A. V. Macci´ o, Mon. Not. Roy. Astron.
+Soc. 441, 3359 (2014), arXiv:1402.7073 [astro-ph.CO].
+[59] F. C. van den Bosch and G. Ogiya, Mon. Not. Roy.
+Astron. Soc. 475, 4066 (2018), arXiv:1801.05427 [astro-
+ph.GA].
+[60] F. C. van den Bosch, Mon. Not. Roy. Astron. Soc. 468,
+885 (2017), arXiv:1611.02657 [astro-ph.GA].
+[61] E. Emsellem et al. , Astronomy and Astrophysics 625,
+A76 (2019), arXiv:1812.07345 [astro-ph.GA].
+[62] J. Fensch et al. , Astronomy and Astrophysics 625, A77
+(2019), arXiv:1812.07346 [astro-ph.GA].
+[63] L. L. Watkins, N. W. Evans, and J. An, Mon. Not. Roy.
+Astron. Soc. 406, 264 (2010), arXiv:1002.4565 [astro-
+ph.GA].
+[64] J. Wolf, G. D. Martinez, J. S. Bullock, M. Kapling-
+hat, M. Geha, R. R. Munoz, J. D. Simon, and F. F.
+Avedo, Mon. Not. Roy. Astron. Soc. 406, 1220 (2010),
+arXiv:0908.2995 [astro-ph.CO].
+[65] J. F. Navarro, V. R. Eke, and C. S. Frenk, Mon.
+Not. Roy. Astron. Soc. 283, L72 (1996), arXiv:astro-
+ph/9610187 [astro-ph].
+[66] F. Governato et al. , Nature 463, 203 (2010),
+arXiv:0911.2237 [astro-ph.CO].
+[67] R. Teyssier, A. Pontzen, Y. Dubois, and J. I. Read, Mon.
+Not. Roy. Astron. Soc.429, 3068 (2013), arXiv:1206.4895
+[astro-ph.CO].
+[68] A. Di Cintio et al., Mon. Not. Roy. Astron. Soc. 437, 415
+(2014), arXiv:1306.0898 [astro-ph.CO].
+[69] T. K. Chan et al., Mon. Not. Roy. Astron. Soc. 454, 2981
+(2015), arXiv:1507.02282 [astro-ph.GA].
+[70] J. I. Read, O. Agertz, and M. L. M. Collins, Mon. Not.
+Roy. Astron. Soc. 459, 2573 (2016), arXiv:1508.04143
+[astro-ph.GA].
+[71] E. Tollet et al. , Mon. Not. Roy. Astron. Soc. 456, 3542
+(2016), arXiv:1507.03590 [astro-ph.GA].
+[72] A. Fitts et al. , Mon. Not. Roy. Astron. Soc. 471, 3547
+(2017), arXiv:1611.02281 [astro-ph.GA].
+[73] P. F. Hopkins et al. , Mon. Not. Roy. Astron. Soc. 480,
+800 (2018), arXiv:1702.06148 [astro-ph.GA].
+[74] I. M. Santos-Santos, , et al., Mon. Not. Roy. Astron. Soc.
+473, 4392 (2018), arXiv:1706.04202 [astro-ph.GA].
+[75] A. Di Cintio, C. B. Brook, A. V. Macci` o, A. A. Dutton,
+and S. Cardona-Barrero, Mon. Not. Roy. Astron. Soc.
+486, 2535 (2019), arXiv:1901.08559 [astro-ph.GA].
+[76] A. Lazar et al., (2020), arXiv:2004.10817 [astro-ph.GA].
+[77] M. Vogelsberger, J. Zavala, C. Simpson, and A. Jenk-
+ins, Mon. Not. Roy. Astron. Soc. 444, 3684 (2014),
+arXiv:1405.5216 [astro-ph.CO].
+[78] Q. Guo et al. , Nat. Astron. 4, 246 (2020),
+arXiv:1908.00046 [astro-ph.GA].
+[79] P. E. Mancera Pi˜ naet al., Astrophys. J. 883, L33 (2019),
+arXiv:1909.01363 [astro-ph.GA].
+[80] P. E. Mancera Pi˜ naet al. , Mon. Not. Roy. Astron. Soc.
+495, 3636 (2020), arXiv:2004.14392 [astro-ph.GA].

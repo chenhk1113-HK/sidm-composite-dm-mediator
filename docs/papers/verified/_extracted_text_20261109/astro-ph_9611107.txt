@@ -1,0 +1,831 @@
+arXiv:astro-ph/9611107v4  21 Oct 1997
+A Universal Density Proﬁle from Hierarchical Clustering
+Julio F. Navarro 1
+Steward Observatory, University of Arizona, Tucson, AZ, 85 721, USA.
+Carlos S. Frenk 2
+Physics Department, University of Durham, Durham DH1 3LE, E ngland.
+Simon D.M. White 3
+Max Planck Institut f¨ ur Astrophysik, Karl-Schwarzschild Strasse 1, D-85740, Garching, Germany.
+ABSTRACT
+We use high-resolution N-body simulations to study the equi librium density proﬁles
+of dark matter halos in hierarchically clustering universe s. We ﬁnd that all such
+proﬁles have the same shape, independent of halo mass, of ini tial density ﬂuctuation
+spectrum, and of the values of the cosmological parameters. Spherically averaged
+equilibrium proﬁles are well ﬁt over two decades in radius by a simple formula originally
+proposed to describe the structure of galaxy clusters in a co ld dark matter universe.
+In any particular cosmology the two scale parameters of the ﬁ t, the halo mass and its
+characteristic density, are strongly correlated. Low-mas s halos are signiﬁcantly denser
+than more massive systems, a correlation which reﬂects the h igher collapse redshift
+of small halos. The characteristic density of an equilibriu m halo is proportional to
+the density of the universe at the time it was assembled. A sui table deﬁnition of
+this assembly time allows the same proportionality constan t to be used for all the
+cosmologies that we have tested. We compare our results to pr evious work on halo
+density proﬁles and show that there is good agreement. We als o provide a step-by-step
+analytic procedure, based on the Press-Schechter formalis m, which allows accurate
+equilibrium proﬁles to be calculated as a function of mass in any hierarchical model.
+Subject headings: cosmology: theory – dark matter – galaxies: halos – methods:
+numerical
+1Bart J. Bok Fellow. E-mail: jnavarro@as.arizona.edu
+2E-mail: C.S.Frenk@durham.ac.uk
+3E-mail: swhite@mpa-garching.mpg.de
+– 2 –
+1. Introduction
+It is twenty-ﬁve years since the discovery that galaxies are surrounded by extended massive
+halos of dark matter. A variety of observational probes – dis k rotation curves, stellar kinematics,
+gas rings, motions of globular clusters, planetary nebulae and satellite galaxies, hot gaseous
+atmospheres, gravitational lensing eﬀects – are now making it possible to map halo mass
+distributions in some detail. These distributions are inti mately linked to the nature of the dark
+matter, to the way halos formed, and to the cosmological cont ext of halo formation.
+Insight into these links came ﬁrst from analytic studies. Bu ilding on the early work of Gunn &
+Gott (1972), similarity solutions were obtained by Fillmor e & Goldreich (1984) and Bertschinger
+(1985) for the self-similar collapse of spherical perturba tions in an Einstein-de Sitter universe.
+Such solutions necessarily resemble power laws in the viria lized regions. Hoﬀman & Shaham (1985)
+and Hoﬀman (1988) extended this analysis by considering ope n universes, and by modeling as
+scale-free spherical perturbations the objects which form by hierarchical clustering from power-law
+initial density perturbation spectra ( P (k) ∝ kn). They argued that isothermal structure ( ρ ∝ r−2)
+should be expected in an Einstein-de Sitter universe if n ≤ −2, and that steeper proﬁles should be
+expected for larger n and in open universes.
+Despite the schematic nature of these arguments, their gene ral predictions were veriﬁed as
+numerical data became available from N -body simulations of hierarchical cosmologies. Power-law
+ﬁts to halo density proﬁles in a variety of simulations all sh owed a clear steepening as n increases
+or the density of the universe decreases (Frenk et al. 1985, 1 988; Quinn et al. 1986; Efstathiou et
+al. 1988; Zurek, Quinn & Salmon 1988; Warren et al. 1992; Cron e, Evrard & Richstone 1994).
+An apparent exception was the work of West et al. (1987), who f ound that galaxy cluster density
+proﬁles show no clear dependence on n.
+Signiﬁcant departures from power-law behaviour were ﬁrst r eported by Frenk et al. (1988),
+who noted that halo proﬁles in cold dark matter (CDM) simulat ions steepen progressively with
+increasing radius. Efstathiou et al. (1988) found similar d epartures – at odds with the analytic
+predictions – in their simulations of scale-free hierarchi cal clustering. They also noted that these
+departures were most obvious in their best resolved halos. S imilar eﬀects were noted by Dubinski
+& Carlberg (1991) in a high resolution simulation of a galaxy -sized CDM halo. These authors
+found their halo to be well described by a density proﬁle with a gently changing logarithmic slope,
+speciﬁcally that proposed by Hernquist (1990).
+In earlier papers of this series we used high-resolution sim ulations to study the formation
+of CDM halos with masses spanning about four orders of magnit ude, ranging from dwarf galaxy
+halos to those of rich galaxy clusters (Navarro, Frenk & Whit e 1995, 1996). This work showed
+that the equilibrium density proﬁles of CDM halos of all mass es can be accurately ﬁt over two
+decades in radius by the simple formula,
+ρ (r)
+ρ crit
+= δ c
+(r/r s)(1 + r/r s)2 , (1)
+– 3 –
+where rs is a scale radius, δ c is a characteristic (dimensionless) density, and ρ crit = 3 H 2/ 8πG is
+the critical density for closure. This proﬁle diﬀers from th e Hernquist (1990) model only in its
+asymptotic behaviour at r ≫ rs (it tends to r−3 instead of r−4). Power-law ﬁts over a restricted
+radial range have slopes which depend on the range ﬁtted, ste epening from −1 near the center to
+−3 at large r/r s.
+This similarity between CDM halos of widely diﬀering mass is surprising in view of the strong
+dependence on power spectrum shape reported in earlier stud ies. The eﬀective slope of the CDM
+power spectrum varies from neﬀ ≈ − 2 on galactic scales to neﬀ ≈ − 1 on cluster scales, so one
+might have expected shallower proﬁles in galaxy halos than i n clusters. In fact, the opposite is
+true; low-mass halos are denser, i.e. have higher values of δ c, than high-mass halos. This property
+reﬂects the higher collapse redshift of the smaller systems . Power-law ﬁts actually yield steeper
+slopes for less massive halos both when carried out at a ﬁxed r adius and when carried out at a
+ﬁxed fraction of the virial radius (see Figures 3 and 4 of Nava rro, Frenk & White 1996).
+We argue below that the apparent relationship between proﬁl e shape and initial power
+spectrum seen in earlier work results from systematic diﬀer ences in the characteristic density of
+the halos chosen when comparing diﬀerent models. This inter pretation is reinforced by the recent
+work of Cole & Lacey (1996) and Tormen, Bouchet & White (1996) , who ﬁnd that the proﬁles
+of massive halos formed from power-law spectra are well desc ribed by eq. 1. They also conﬁrm
+the strong correlation between δ c and halo mass seen in our earlier work, and they ﬁnd that, at
+a given mass, halos are denser when n is larger. Thus, the spectral index n seems to control the
+exact relationship between characteristic density and hal o mass, rather than the eﬀective slope of
+the density proﬁle.
+It is clear from this discussion that a comprehensive study o f this problem needs to consider
+the role of at least three factors: the halo mass, the power sp ectrum of initial density ﬂuctuations,
+and the values of the cosmological parameters. In this paper we present the results of a large
+set of N-body simulations speciﬁcally designed to address t hese issues. We consider a variety of
+hierarchical clustering models, including CDM and power-l aw initial ﬂuctuation spectra, as well
+as diﬀerent values of the cosmological parameters Ω 0 and Λ. In each cosmology we study halos
+spanning a large range in mass, carefully choosing numerica l parameters so that all systems are
+simulated with comparable numerical resolution.
+The plan of the paper is as follows. Our numerical experiment s are described in §2. In §3 we
+present our results and in §4 we discuss them in the context of earlier work. In §5 we summarize
+our main conclusions. An appendix lays out the formulae nece ssary to calculate analytically the
+density proﬁle of an equilibrium halo of any mass in any hiera rchical cosmology.
+2. The Numerical Experiments
+– 4 –
+2.1. The Cosmological Models
+We analyze the structure of dark matter halos in 8 diﬀerent co smologies. Five are Einstein-de
+Sitter (Ω 0 = 1) models with various power spectra: the standard biased C DM spectrum (SCDM
+model: Ω 0 = 1, h = 0. 5, σ 8 = 0. 63) and four power-law or “scale-free” spectra with indices n = 0,
+−0. 5, −1, and −1. 5. Two further models also have power-law spectra ( n = 0 and −1) but in an
+open universe (Ω 0 = 0 . 1). The last model we consider is a low-density CDM model with a ﬂat
+geometry (CDMΛ: Ω 0 = 0. 25, Λ = 0 . 75, h = 0. 75, σ 8 = 1. 3). (Here and throughout this paper we
+express the cosmological constant Λ in units of 3 H 2
+0 , so that a low-density universe with a ﬂat
+geometry has Ω 0 + Λ = 1. We also adopt the standard convention of writing the pr esent Hubble
+constant as H0 = 100 h km s −1 Mpc−1.)
+The normalization of the CDM models is speciﬁed by σ 8, the rms mass ﬂuctuation in spheres
+of radius 8 h−1 Mpc. Because of self-similarity, the normalization of the s cale-free models is
+arbitrary. The evolutionary state of these models may be ful ly speciﬁed by a single parameter,
+the current value of the “nonlinear mass”, M⋆(z). This mass scale is deﬁned by requiring that the
+variance of the linear overdensity ﬁeld at redshift z = 0, smoothed with a top-hat ﬁlter enclosing
+a mass M = M⋆, should equal the square of the critical density threshold f or spherical collapse by
+redshift z: ∆ 2
+0(M⋆(z)) = δ 2
+crit(z, Ω 0, Λ). (See the Appendix for details on the computation of δ crit).
+This deﬁnition provides a “natural” way to scale the scale-f ree simulations to physical units and
+to compare diﬀerent cosmological models. In scale-free mod els the mass scale deﬁned by M⋆(z) is
+the only physical scale, and therefore the structure of halo s can depend on mass only through the
+ratio M/M ⋆.
+2.2. The Simulations
+Large cosmological N–body simulations are required to simu late the evolution of dark matter
+halos in their full cosmological context. However, such sim ulations are not generally well suited
+to explore a large range of halo masses. This is because syste ms of diﬀering mass formed in
+a single simulation are resolved to diﬀering degrees. More m assive systems are better resolved
+because they contain more particles and because the gravita tional softening is a smaller fraction
+of the virial radius. These systematic diﬀerences can intro duce insidious numerical artifacts in
+the mass trends that we wish to investigate. We circumvent th is problem by using the procedure
+outlined by Navarro, Frenk & White (1996). Halos are ﬁrst ide ntiﬁed in cosmological N-body
+simulations of large periodic boxes and then resimulated in dividually at higher resolution. During
+the resimulation the remainder of the original simulation i s treated only to the accuracy needed
+to model tidal eﬀects on the halo of interest. The advantage o f this procedure is that numerical
+parameters can be tuned so that all halos are simulated with c omparable resolution. Its main
+disadvantage is that only one halo is modeled per simulation , so that many simulations are needed
+to compile a representative halo sample.
+– 5 –
+2.2.1. The cosmological simulations
+The cosmological simulations were carried out using the P 3M code of Efstathiou et al.
+(1985). The desired initial power spectrum was generated by using the Zel’dovich approximation
+to displace particles from a uniform initial load. The unifo rm load we used was either a “glass”
+conﬁguration (White 1996) or a cubic grid. For simulations w ith power-law power spectra, the
+amplitude of the initial displacements was chosen by settin g the power of the perturbed density
+ﬁeld to the white-noise level at the Nyquist frequency of the particle grid. These simulations
+followed 106 particles on a 128 3 mesh and were stopped when the nonlinear mass, M⋆, corresponded
+to 1 , 000-2, 000 particles. We identify this time with the present ( z = 0). Since clustering evolves
+faster for more negative values of n, an expansion factor of 9 . 5 was suﬃcient for n = −1. 5 whereas
+an expansion factor of 90 was required for n = 0 (Ω 0 = 1). Open models require even longer
+integrations, an expansion factor exceeding 150 for n = 0 and Ω 0 = 0 . 1. These simulations used
+the time-stepping and numerical scheme described in Efstat hiou et al (1988). (Note, however, that
+the deﬁnition of M⋆ in that paper diﬀers from the one we use here.)
+We ran two P 3M simulations for each of our CDM models. The SCDM runs follow ed
+643 particles in periodic boxes of 180 h−1 and 15 h−1 Mpc and were stopped when σ 8 = 0 . 63
+(M⋆ ≈ 1. 6 × 1013h−1 M⊙), the time which we identify with the present. The CDMΛ runs f ollowed
+106 particles in boxes of 140 h−1 and 46 . 67 h−1 Mpc, until σ 8 = 1. 3 ( M⋆ ≈ 4. 1 × 1013h−1 M⊙).
+2.2.2. The individual halo simulations
+Halos to be resimulated at higher resolution were selected r andomly at z = 0 from a list of
+clumps identiﬁed using a friends-of-friends group ﬁnder wi th linking length set to 10% of the mean
+interparticle separation. We chose masses in the range 0 . 1–10 M⋆ for the power-law models and
+0. 01–100 M⋆ for the CDM models. (The mass range is larger for the CDM model s because in this
+case halos were chosen from two parent cosmological simulat ions with diﬀerent box sizes.) Because
+we are interested the structure of equilibrium halos we were careful not to choose for analysis any
+halo which is far from virial equilibrium. In practice, we an alyze each resimulated halo at the
+time between redshifts 0.05 and 0 when it is closest to dynami cal equilibrium, deﬁned as the time
+when the ratio of kinetic to potential energy is closest to 0. 5 for material within the virial radius.
+[Throughout this paper, we measure halo masses, M200, within a virial radius, r200, deﬁned as the
+radius of a sphere of mean interior density 200 ρ crit. Halo circular speeds, V200 = (GM200/r 200)1/2,
+are also measured at this radius unless otherwise speciﬁed. Numerical experiments show that for
+Ω = 1 this radius approximately separates the virialized and infall regions (Cole & Lacey 1996).
+For convenience we continue to use these deﬁnitions when Ω 0 ̸= 1.]
+Once a halo is chosen for resimulation, the particles within its virial radius are traced back
+to the initial conditions, where a small box containing all o f them is drawn. This box is ﬁlled
+with ∼ 323 particles on a cubic grid which are then perturbed using the w aves of the original
+– 6 –
+P3M simulation, together with extra high-frequency waves add ed to ﬁll out the power spectrum
+between the Nyquist frequencies of the old and new particle g rids. The regions beyond the
+“high-resolution” box are coarsely sampled with a few thous and particles of radially increasing
+mass in order to account for the large-scale tidal ﬁelds pres ent in the original simulation.
+This procedure ensures the formation of a clump similar in al l respects to the one selected in
+the P 3M run, except for the improved numerical resolution. The siz e of the high-resolution box
+scales naturally with the total mass of each system and, as a r esult, all resimulated halos have
+about the same number of particles within the virial radius a t z = 0, typically between 5 , 000
+and 10 , 000. The extensive tests presented in Navarro, Frenk & White (1996) indicate that this
+number of particles is adequate to resolve the structure of a halo over approximately two decades
+in radius. We therefore choose the gravitational softening , hg, to be 1% of the virial radius in all
+cases. (This is the scale-length of a spline softening; see N avarro & White 1993 for a deﬁnition.)
+The tree-code carries out simulations in physical, rather t han comoving, coordinates, and uses
+individual timesteps for each particle. The minimum timest ep depends on the maximum density
+resolved in each case, but was typically 10 −5H −1
+0 .
+As discussed in Navarro, Frenk & White (1996), numerically c onvergent results require
+that the initial redshift of each run, zinit, should be high enough that all resolved scales in the
+initial box are still in the linear regime. In order to satisf y this condition, we chose zinit so that
+the median initial displacement of particles in the high-re solution box was always less than the
+mean interparticle separation. Problems with this procedu re may arise if zinit is so high that the
+gravitational softening (which is kept ﬁxed in physical coo rdinates) becomes signiﬁcantly larger
+that the mean initial interparticle separation. We found th is to be a problem only for the smallest
+masses, M ∼<M⋆, in the n = 0, Ω 0 = 0 . 1 model. In this case the initial redshift prescribed by the
+median displacement condition is zinit > 700 and the gravitational softening is then a signiﬁcant
+fraction of the initial box. This can aﬀect the collapse of th e earliest progenitors of these systems
+and so introduce spurious eﬀects. We therefore limit our inv estigation to M ∼>M⋆ in this particular
+cosmological model. Further tests of the eﬀects of particle number, timestep size, and gravitational
+softening are given by Tormen et al. (1996). Their results co nﬁrm that the numerical parameters
+chosen here are adequate to give stable and accurate results .
+3. Results
+3.1. Time Evolution
+Figure 1 illustrates the time evolution of halos of diﬀerent mass selected from the Ω 0 = 1,
+n = −1 series. Time runs from top to bottom and mass increases from left to right. The box size
+in each column is chosen so as to contain always approximatel y the same number of particles. The
+redshifts of each snapshot have been chosen so that the nonli near mass M⋆ increases by factors of
+4 from z2 to z1 and from z1 to z0 = 0. This ﬁgure illustrates convincingly that low-mass halo s
+– 7 –
+complete their assembly earlier than more massive systems.
+3.2. Density Proﬁles
+Figure 2 shows spherically averaged density proﬁles at z = 0 for one of the least and one of
+the most massive halos for each set of cosmological paramete rs. These halos span almost four
+orders of magnitude in mass in the case of the CDM models, and a bout two orders of magnitude
+in mass in the power-law models. Radial units are kpc for CDM m odels (scale at the top), and are
+arbitrary in the power-law panels. Density is in units of 10 10M⊙/ kpc3 in the CDM models and
+in arbitrary units in the others. Solid lines are ﬁts to each h alo proﬁle using eq. 1. This simple
+formula provides a good ﬁt to the structure of all halos over a bout two decades in radius, from the
+gravitational softening (indicated by arrows in Figure 2) t o about the virial radius. The quality
+of the ﬁt is essentially independent of halo mass or cosmolog ical model and implies a remarkable
+uniformity in the equilibrium structure of dark matter halo s in diﬀerent hierarchical clustering
+models.
+The solid and dashed lines in Figure 3 show the proﬁle ﬁts of Fi gure 2 but with the radius
+scaled to the virial radius of each halo. This scaling remove s the intrinsic dependence of size
+on mass (more massive halos are bigger) and allows a meaningf ul comparison between halos of
+diﬀerent mass. From the deﬁnition of virial radius, the “con centration” of a halo, c = r200/r s, and
+the characteristic density, δ c, are linked by the relation
+δ c = 200
+3
+c3
+[ln(1 + c) − c/ (1 + c)] . (2)
+Thus at given halo mass (speciﬁed by M200), there is a single free parameter in eq. 1, which may
+be expressed either as the characteristic density, δ c, or as the concentration parameter, c. This free
+parameter varies systematically with mass; Figure 3 shows t hat c and δ c decrease with increasing
+halo mass.
+A universal density proﬁle implies a universal circular vel ocity proﬁle, Vc(r) = ( GM (r)/r )1/2.
+This is illustrated in Figure 4, where we plot Vc-proﬁles for the same systems shown in Figure 2.
+As in Figure 3, radii are plotted in units of the virial radius ; circular speeds have been normalized
+to the value at the virial radius, V200. The circular velocity curve implied by eq. 1 is
+( Vc(r)
+V200
+) 2
+= 1
+x
+ln(1 + cx) − (cx)/ (1 + cx)
+ln(1 + c) − c/ (1 + c) , (3)
+where x = r/r 200 is the radius in units of the virial radius. Circular velocit ies rise near the
+center, reach a maximum ( Vmax) at xmax ∼ 2/c , and decline near the virial radius. More centrally
+concentrated halos (higher δ c or higher c) are characterized by higher values of Vmax/V 200. The
+dashed lines in Figure 4 show plots of eq. 3 with parameter val ues derived from the ﬁts to the
+density proﬁles of Figure 2. The dotted lines are ﬁts using a H ernquist (1990) model constrained
+– 8 –
+to match the location of the maximum of the Vc-curve. The two ﬁts are indistinguishable near
+the center, but the Hernquist model underestimates Vc near the virial radius. This disagreement
+becomes more pronounced in lower mass systems, for which δ c and Vmax/V 200 are larger.
+3.3. The mass dependence of halo structure
+The mass-density dependence pointed out above is further il lustrated in Figure 5, where we
+plot δ c versus mass (expressed in units of M⋆) for all the systems in each series. An equivalent
+plot, illustrating the mass dependence of the concentratio n, c, is shown in Figure 6. (The panel
+on the upper-left, corresponding to the SCDM model, is equiv alent to Figure 7 of Navarro, Frenk
+& White 1996). The characteristic density of a halo increase s towards lower masses in all the
+cosmological models considered. This result supports the i dea that the M200-δ c relation is a direct
+result of the higher redshift of collapse of less massive sys tems, and suggests a simple model to
+describe the mass-density relation. This model assigns to e ach halo of mass M (identiﬁed at z = 0)
+a collapse redshift, zcoll(M, f ), deﬁned as the time at which half the mass of the halo was ﬁrst
+contained in progenitors more massive than some fraction f of the ﬁnal mass. With this deﬁnition,
+zcoll can be computed simply using the Press-Schechter formalism (e.g. Lacey & Cole 1993),
+erfc
+( δ crit(zcoll) − δ 0
+crit√
+2(∆ 2
+0(f M) − ∆ 2
+0(M ))
+)
+= 1
+2 , (4)
+where ∆ 2
+0(M ) is the linear variance of the power spectrum at z = 0 smoothed with a top-hat ﬁlter
+of mass M , δ crit(z) is the density threshold for spherical collapse by redshif t z, and δ 0
+crit = δ crit(0).
+[This deﬁnition can be extended to halos identiﬁed at any red shift z0 by replacing δ 0
+crit by δ crit(z0)
+in eq. 4.] Assuming the characteristic density of a halo to be proportional to the density of the
+universe at the corresponding zcoll then implies
+δ c(M |f ) = C Ω 0 (1 + zcoll(M, f ))3 (5)
+where C is a proportionality constant which might, in principle, de pend on f and on the power
+spectrum.
+We will see below that f ≪ 1 is needed for this argument to give a good ﬁt to our simulatio n
+data. In this limit ∆ 2
+0(f M) ≫ ∆ 2
+0(M ) and eq. 4 reduces to
+δ crit(zcoll) = δ 0
+crit + C ′∆ 0(f M), (6)
+where C ′ ≈ 0. 7. For f ≪ 1, δ crit(zcoll) ≫ δ 0
+crit for all masses in the range of interest, so that
+δ crit(zcoll) ∝ ∆ 0(f M). Since M⋆(zcoll) is deﬁned by ∆ 0(M⋆(zcoll)) = δ crit(zcoll), this equation
+implies that the characteristic density of a halo is proport ional to the mean density of the universe
+at the time when M⋆ ≈ f M, ie. when the characteristic non-linear mass is a ﬁxed small fraction
+of the ﬁnal halo mass. For scale-free models this implies δ c ∝ M −(n+3)/2, the same scaling that
+links M⋆(z) and the mean cosmic density at redshift z.
+– 9 –
+Figure 5 shows the correlations predicted from eq. 5 for thre e values of the parameter f : 0 . 5,
+0. 1, and 0 . 01. The value of the proportionality constant, C(f ), is chosen in each case in order to
+match the results of the Einstein-de Sitter simulations for M = M⋆. These values are given in
+Table 1. The same values of C(f ) are used to plot the curves in the panels corresponding to th e
+low-density models. Some interesting results emerge from i nspection of Figure 5 and Table 1.
+(i) The agreement between the mass-density dependence pred icted by eq. 5 and the results of
+the Einstein-de Sitter simulations improves for smaller va lues of f . This is also true for the
+low-density models. Once C(f ) is ﬁxed by matching the results of the Einstein-de Sitter
+models, the same value of C(f ) provides a good match to the low density models only if f ∼<0. 01.
+Interestingly, for f = 0 . 01 approximately the same value of the proportionality cons tant,
+C ≈ 3 × 103, seems to ﬁt all our simulations.
+(ii) The characteristic density of M⋆ halos decreases systematically for more negative values of
+the spectral index n. At M = M⋆, SCDM halos are the least dense in our Ω 0 = 1 series, less
+concentrated still than those corresponding to n = −1. 5. This is consistent with the general
+trend because, according to eqs. 4 and 5, the characteristic density of a halo of mass M⋆ is
+controlled by the shape of the power spectrum on scales ∼ f M⋆. This is about ∼ 1011M⊙ for
+f ≈ 0. 01 and the eﬀective slope of the CDM spectrum on this mass scal e is neﬀ ∼ −2.
+(iii) For the power-law models with n = 0 and −1 the characteristic density at a given M/M ⋆
+increases as Ω 0 decreases. Such a trend is plausible since we expect the coll apse redshift of
+halos of a given mass to increase as Ω 0 decreases. On the other hand, halos formed in the
+low-density CDMΛ universe are actually less dense than those formed in the standard biased
+CDM model because δ c depends not only on collapse redshift but also on Ω 0 (see eq. 5).
+Although reducing Ω 0 increases the collapse redshift, the increase in δ c from the (1 + zcoll)3
+factor can be outweighed by the change in Ω 0. In the CDMΛ model the two eﬀects can combine
+to give a reduction in δ c as Ω 0 decreases. (We remind the reader that δ c is deﬁned relative to
+the critical density rather than the mean density.)
+(iv) Each halo has a characteristic maximum circular speed, Vmax (see eq. 3), which is strongly
+correlated with its mass. This is shown in Figure 7, where we a lso plot least squares ﬁts of the
+form M200 ∝ V α
+max to the data in each series. Consistent with the trends shown i n Figures
+5 and 6, the correlation steepens as n increases; we ﬁnd α ∼ 3. 2 – 3 . 3 for CDM models and
+α > 5 for n = 0. Note also that the correlations are extremely tight; the rms scatter in
+log M200 is less than ∼ 0. 1 in all cases. This is in part a consequence of the generally g ood
+ﬁt of the density proﬁle of eq. 1. The ratio Vmax/V 200 increases only logarithmically with the
+central concentration of the halo, and changes only by about a factor of two as δ c varies by
+four orders of magnitude between 10 3 and 10 7. As a result, the M200-Vmax relation does not
+deviate much from the M200-V200 relation which, by deﬁnition, has zero scatter. This has
+important consequences for the expected tightness of empir ical correlations between mass and
+characteristic velocity, such as the Tully-Fisher relatio n. We intend to return to this issue in
+– 10 –
+future work.
+The results in Figures 5–7 support our conclusion that the ch aracteristic density of a halo
+is controlled mainly by the mean matter density of the univer se at a suitably deﬁned time of
+collapse. One important test of this interpretation is to me asure zcoll directly in the simulations
+and to compare the result to eq. 5. To do this we identify clump s at every output time using our
+friends-of-friends group-ﬁnder with linking length set to 20% of the current mean interparticle
+separation. We then trace the particles in the most massive c lump identiﬁed at z = 0 (which
+typically has a mean overdensity of ∼ 200) and, at each redshift, add up the total mass in clumps
+which contain any of these particles and which are individua lly more massive than 10% of the ﬁnal
+mass. We identify zcoll with the redshift at which this mass ﬁrst exceeds half of the ﬁ nal mass.
+This is roughly equivalent to the analytic procedure outlin ed in eq. 4 for f = 0. 1. (We decided to
+use f = 0. 1 rather than f = 0. 01 because the smaller value results in very high collapse re dshifts,
+often before the ﬁrst output in the simulation.) The main diﬀ erence is that some of the mass from
+the high redshift progenitors ends up outside the virial rad ius at z = 0. This causes a slight bias
+of the measured collapse redshifts towards higher values th an the Press-Schechter predictions.
+The correlation between δ c/ Ω 0 and (1 + zcoll)3 obtained using this procedure is shown in
+Figure 8. All halos in Einstein-de Sitter models are shown wi th ﬁlled circles; those in open
+universes with open circles; and those in the CDMΛ model with starred symbols. The solid line is
+the relation predicted by eq. 5 for C = 5 × 103. This is clearly an excellent approximation to the
+results of the numerical simulations, and conﬁrms that the m ean matter density of the universe
+at the time of collapse is the main factor determining the cha racteristic density of a halo. Note
+that the value of the proportionality constant is slightly l ower than the values given in Table
+1 for f = 0 . 1. This diﬀerence compensates for the slight bias towards hi gher collapse redshifts
+introduced by our numerical procedure.
+A summary of our results is presented in Figure 9. The panels o n the left compile the ﬁts
+(for f = 0 . 01) to the mass dependence of δ c and c in the Einstein-de Sitter models. The panels
+on the right compare the Einstein-de Sitter results with tho se for low-density models. As noted
+above, the typical density of M⋆-halos increases with n. However, the diﬀerence between models
+becomes less pronounced at higher masses, and is almost negl igible at M ∼> 10M⋆. Halos of a given
+M/M ⋆ in low density universes can have either lower or higher char acteristic densities than their
+Einstein-de Sitter counterparts, depending on the competi ng eﬀects of the collapse redshift and
+the value of Ω 0. Note that all the curves in Figure 9 use the same value, f = 0. 01, and essentially
+the same value of the proportionality constant C ≈ 3 × 103 (see eq. 5). Thus, once calibrated
+for an Einstein-de Sitter model, it is possible to apply eqs. 4 and 5 to predict the characteristic
+density of halos formed in other hierarchically clustering models. In the Appendix we provide a
+detailed description of how to compute δ c(M ) numerically for a variety of cosmologies.
+– 11 –
+3.4. The scatter in the correlations
+We examine now the origin of the scatter in the correlations p resented above. In particular,
+we explore whether at ﬁxed mass the dispersion in the measured values of δ c is due to variations
+either in the collapse redshift or in the global angular mome ntum of the system. As shown by
+Figures 10 and 11, the bulk of the scatter in δ c at a given M/M ⋆ can be attributed to small
+diﬀerences in the redshift of collapse. Figure 10 shows that the δ c-deviations from the solid-line ﬁts
+in Figure 5 (i.e. those for f = 0. 01) correlate strongly with deviations in the redshift of co llapse.
+(The latter are measured from least-square ﬁts to the M200 vs (1 + zcoll) correlations measured
+directly from the simulations.) Furthermore, the two resid uals seem to correlate just as expected
+from eq. 5, i.e. ∆ log δ c = 3∆ log(1 + zcoll). (We note that the magnitude of this scatter may not
+be fully representative of the dispersion in halo propertie s corresponding to each cosmological
+model, since the sample has been selected so as to minimize de partures from equilibrium.) This
+relation is indicated by the solid line and is seen to reprodu ce very well the trend observed in
+Figure 10. Figure 11 shows the same δ c-residuals of Figure 10, but now as a function of the scatter
+in the mass–rotation parameter ( M200 vs λ ) correlation. (The rotation parameter is deﬁned by
+λ = J|E|1/2/GM 5/2, where J is the angular momentum and E is the binding energy of the halo.
+The median λ in our series is ∼ 0. 04, in good agreement with previous studies.) We ﬁnd no
+discernible correlation between M/M ⋆ and λ or between the δ c- and λ -residuals (Figure 11). This
+provides further evidence supporting our contention that t he redshift of collapse is the primary
+factor determining the characteristic density of a halo.
+4. Comparison with previous work
+The main conclusion of our study, that the shape of halo densi ty proﬁles is independent of
+cosmological context, appears to contradict previous work on this subject. As discussed in §1,
+a strong dependence of the slope of the density proﬁle on the s pectral index n and the density
+parameter Ω 0 has been established by a number of analytic and numerical st udies. We now show
+that our results actually include and extend those of previo us workers, and we oﬀer an attractive
+explanation for some discrepancies found in the literature .
+We ﬁrst address the claim by Quinn et al. (1986), Efstathiou e t al (1988), Zurek et al. (1988),
+and Warren et al. (1992) that halo density proﬁles steepen wi th increasing values of the spectral
+index n in an Einstein-de Sitter universe. This claim is based on the discovery that circular
+velocity proﬁles of galaxy-sized halos are relatively ﬂat f or n ≈ − 2 (or for SCDM; Frenk et al.
+1985) but decline progressively faster at large r for larger n. Figure 12 shows that we ﬁnd the
+same trend if we analyze our data in the same fashion as these a uthors. In this ﬁgure we plot, in
+linear units, the Vc-proﬁle of an M⋆ halo for diﬀerent values of n. Each curve has been computed
+using eq. 3 and the values of c obtained from the ﬁts presented in Figure 9. Since all these h alos
+have the same mass, they also have the same virial radius and c ircular speed, r200 and V200,
+– 12 –
+respectively, which we have used as normalizing factors. Th e linear units in Figure 12 obscure the
+fact that the form of the curves is the same in all cases, and encourage one to conclude, as did
+previous authors, that halo rotation curves steepen with in creasing n. In fact this trend is present
+because M⋆ halos collapse earlier, and so are denser, for larger values of n.
+We note that the trend with n in Figure 12 is sensitive to the choice of halo mass. Had we
+used halos with M < M ⋆ the trend would have been stronger. On the other hand, very ma ssive
+halos ( M ∼>10 M⋆) have similar characteristic densities, irrespective of n (see Figure 9). Thus,
+had we plotted very massive halos in Figure 12 we would have co ncluded that the density proﬁle
+depends only weakly on n (at least for Ω 0 = 1). This is reminiscent of the claim by West et al.
+(1987) that the structure of galaxy cluster halos is independent of n in Einstein-de Sitter universes.
+Our analysis suggests an explanation for this apparently di screpant result. By considering only
+the most massive systems in their simulations, West et al. fo cused on a mass range where the
+dependence of δ c on n is minimal, and so concluded (correctly) that cluster proﬁl es depend very
+weakly on initial power spectrum.
+A similar explanation accounts for the weak dependence of ha lo density proﬁle on spectral
+index n and on Ω 0 reported by Crone et al. (1994). These authors chose to combi ne the 35 most
+massive clumps in each of their cosmological simulations in order to produce an “average” density
+proﬁle for each value of n and Ω 0. They then ﬁtted power laws of the form ρ (r) ∝ rγ to these
+proﬁles in the radial range corresponding to density contra sts between 100 and 3000. For Ω 0 = 1,
+this procedure yielded γ values that decrease from −2. 2 to −2. 5 as n increases from −2 to 0 (see
+the curve labeled “EdS” in their Figure 4). Our results show t his weak trend to be a consequence
+of the averaging procedure they adopted. The shape of the hal o mass function depends strongly
+on n and is increasingly peaked around M ≈ M⋆ for larger values of n. Thus, combining the 35
+most massive clumps in a simulation results in diﬀerent “eﬀe ctive” masses for diﬀerent values of
+n, with a bias towards larger values of M/M ⋆ for more negative values of n. Applying the same
+selection procedure as Crone et al. to our own cosmological s imulations we ﬁnd that the median
+mass of these halo ensembles increases from ∼ M⋆ for n = 0 to ∼ 6M⋆ for n = −1. 5. As illustrated
+in Figure 13, ﬁtting power-laws to the density proﬁles of the se “average” halos results in a weak
+steepening with n similar to the trend reported by Crone et al. The slopes of γ ∼ −3 which they
+found for low density models are also easily understood, sin ce in these cases they ﬁt a radial range
+which extends well outside our nominal virial radius r200.
+Our results are also in agreement with recent work by Cole & La cey (1996) and Tormen et
+al. (1996), who analyzed the structure of massive halos ( M > M ⋆) in scale-free universes. The
+general correlations with mass which they report (more mass ive halos tend to be less centrally
+concentrated than less massive halos) agree well with the re sults we present in §3. At a given halo
+mass, however, Cole & Lacey’s halos are signiﬁcantly less co ncentrated than ours. For example,
+for M⋆ halos they ﬁnd c ∼ 12 and ∼ 17 for n = −1 and 0, respectively (Ω 0 = 1), compared with
+c ∼ 17 and ∼ 30 in our simulations (see connected symbols in the lower-ri ght panel of Figure 9).
+On the other hand, the results of Tormen et al. (1996) are in ve ry good agreement with ours;
+– 13 –
+they ﬁnd c ∼ 10 for a 10 M⋆ halo formed in an n = −1, Ω 0 = 1 universe, which compares well with
+c ∼ 9 that we ﬁnd for a similar system.
+As discussed in detail by Tormen et al, the discrepancy betwe en our results and those of Cole
+& Lacey is likely to be due in part to the poorer numerical reso lution of their simulations. Indeed,
+their simulations used gravitational softenings that are 2 -3 times larger than ours and timesteps
+which are also signiﬁcantly longer than the typical values i n our simulations. Both of these
+eﬀects can artiﬁcially lower the central concentration of a halo. A concurrent factor may be the
+averaging procedure adopted by Cole & Lacey. These authors c onstructed average density proﬁles
+by co-adding all halos of similar mass identiﬁed in their cos mological simulations, regardless of
+their dynamical state. This sample contains a number of unre laxed systems and ongoing mergers
+where substructure and double centers can bias the results o f the ﬁtting procedure towards lower
+concentrations.
+We can test directly for the eﬀects of these various factors b y applying the averaging procedure
+of Cole & Lacey to halos identiﬁed in our own P 3M cosmological simulations (see §2.2.1) and
+comparing with the results of the individual halo runs. We re strict this comparison to the most
+massive halos in each run, M ∼> 10M⋆, since these systems have a large number of particles
+and comparable numerical resolution to that of Cole & Lacey. The comparison conﬁrms that
+the central concentration of halos can be signiﬁcantly unde restimated as a result of the factors
+mentioned above. The magnitude of the eﬀect is sensitive to n and Ω 0; the concentration c can be
+underestimated by up to a factor of ∼ 3 for n = 0 and Ω 0 = 0. 1, but by less than ∼ 1. 5 for n = −1
+and Ω 0 = 1. We conclude that the disagreement between our results an d those of Cole & Lacey is
+likely to be the result of the combined eﬀect of their halo sel ection and averaging procedures and
+their poorer numerical resolution.
+5. Discussion
+Our results suggest that equilibrium dark halos formed thro ugh dissipationless hierarchical
+clustering have density proﬁles with a universal shape whic h does not depend on their mass,
+on the power spectrum of initial ﬂuctuations, or on the cosmo logical parameters Ω 0 and Λ. It
+appears that mergers and collisions act during halo formati on as a “relaxation” mechanism to
+produce an equilibrium which is largely independent of init ial conditions. This mechanism must
+operate rapidly since the similarity between proﬁles exten ds to the virial radius. These properties
+are characteristic of the “violent relaxation” process pro posed by Lynden-Bell (1967) to explain
+the regularities observed in the structure of elliptical ga laxies, and it is interesting that our
+universal proﬁle is similar to the Hernquist proﬁle which gi ves a good description of elliptical
+galaxy photometry. The two diﬀer signiﬁcantly only at large radii, perhaps because ellipticals
+are relatively isolated systems whereas dark halos are not. Syer & White (1996) suggest that a
+universal proﬁle may be understood as a ﬁxed point for a proce ss of repeated mergers between
+unequal objects. Their analysis of this process predicts a d ependence on initial power spectrum
+– 14 –
+which seems stronger, however, than that seen in our numeric al data.
+Our simulations suggest that the density proﬁle of an isolat ed equilibrium halo can be
+speciﬁed quite accurately by giving two parameters; halo ma ss and halo characteristic density.
+Furthermore, in any particular hierarchical model these pa rameters are related in such a way that
+the characteristic density is proportional to the mean cosm ic density at the time when the mass of
+typical nonlinear objects was some ﬁxed small fraction of th e halo mass. The characteristic density
+thus reﬂects the density of the universe at the collapse time of the objects which merge to form
+the halo core. With this interpretation we are able to ﬁt the m ass-density relation for equilibrium
+halos in all the cosmological models we have considered. In a ddition, it is possible to calculate the
+mass-density relation in any other hierarchical model (see Appendix). It is diﬃcult to imagine
+a simpler situation – halos of all masses in all hierarchical cosmologies look the same, and their
+characteristic densities are just proportional to the cosm ic density at the time they “formed”.
+Our results extend the radial range over which dark halo stru cture can reliably be determined
+to more than two decades. The central regions of our models ha ve densities of order 10 6ρ crit,
+comparable to those in the luminous parts of galaxies and in t he central cores of galaxy clusters.
+As a result a variety of direct observational tests of our pre dictions are available. In Navarro
+et al. (1996) we discussed several of these in the context of t he standard CDM cosmogony –
+rotation curves of giant and dwarf galaxies, satellite gala xy dynamics, hot gaseous atmospheres
+around galaxies and in clusters, strong and weak gravitatio nal lensing – all provide interesting
+constraints. We will not pursue these issues here, however, because they would take us too far
+from our primary goal, namely the presentation of a simple an d apparently general theoretical
+result: hierarchical clustering leads to a universal halo d ensity proﬁle just as it leads to universal
+distributions of halo axial ratios and halo spins; none of th ese properties depends strongly on
+power spectrum, on Ω, or on Λ [see Cole & Lacey (1996) and refer ences therein]. Comparison
+of the predicted halo structure with observation should, of course, provide strong constraints on
+the parameters which deﬁne particular hierarchical cosmog onies, and perhaps on the hierarchical
+clustering paradigm itself. We expect to come back to these i ssues in future work.
+We are grateful for the hospitality of the Institute for Theo retical Physics of the University
+of California at Santa Barbara, where some of the work presen ted here was carried out. JFN is
+also grateful for the hospitality of the Max Planck Institut f¨ ur Astrophysik in Garching, where
+this project was started. In addition he would like to acknow ledge useful discussions with Cedric
+Lacey. Special thanks are due to Shaun Cole for making the dat a shown in Figure 9 available in
+electronic form. This work was supported in part by the PPARC and by the NSF under grant
+No. PHY94-07194 to the Institute for Theoretical Physics of the University of California at Santa
+Barbara.
+– 15 –
+A. Step-by-step calculation of the density proﬁle of a dark m atter halo
+In this Appendix we describe in detail the calculation of the parameters that specify the
+density proﬁle of a dark halo of mass M . This calculation is applicable to Einstein-de Sitter
+(Ω 0 = 1, Λ = 0), open (Ω 0 < 1, Λ = 0), and ﬂat (Ω 0 + Λ = 1) universes. We provide approximate
+ﬁtting formulae that are valid for power-law and CDM initial density ﬂuctuation spectra.
+A halo of mass M identiﬁed at z = z0 can be characterized by its virial radius,
+r200 = 1. 63 × 10−2
+( M
+h−1M⊙
+) 1/3( Ω 0
+Ω( z0)
+) −1/3
+(1 + z0)−1 h−1kpc, (A1)
+or by its circular velocity,
+V200 =
+( GM
+r200
+) 1/2
+=
+( r200
+h−1kpc
+) ( Ω 0
+Ω( z0)
+) 1/2
+(1 + z0)3/2 km/ s. (A2)
+The density proﬁle of this system is fully speciﬁed by its cha racteristic density δ c and is given by
+(see eq.1)
+ρ (r) = 3H 2
+0
+8πG (1 + z0)3 Ω 0
+Ω( z0)
+δ c
+cx(1 + cx)2 , (A3)
+where x = r/r 200 and c is the concentration parameter, a function of δ c given in eq. 2. The
+corresponding circular velocity proﬁle, Vc(r), is given by
+( Vc(r)
+V200
+) 2
+= 1
+x
+ln(1 + cx) − (cx)/ (1 + cx)
+ln(1 + c) − c/ (1 + c) , (A4)
+using the concentration c as a parameter.
+The characteristic density is determined by the collapse re dshift zcoll, which is given by (see
+eq. 4)
+δ crit(zcoll)
+δ crit(z0) = δ 0
+crit(Ω( zcoll), Λ)
+δ 0
+crit(Ω( z0), Λ)
+D(z0, Ω 0, Λ)
+D(zcoll, Ω 0, Λ) = 1 + 0. 477
+δ crit(z0)
+√
+2(∆ 2
+0(f M) − ∆ 2
+0(M )) ( A5)
+Here D(z, Ω 0, Λ) is an Ω-dependent linear growth factor that can be written as
+D(z, Ω 0, Λ) =
+
+
+
+
+
+1/ (1 + z) if Ω 0 = 1 and Λ = 0,
+F1(w)/F 1(w0) if Ω 0 < 1 and Λ = 0,
+F2(y)F3(y)/F 2(y0)F3(y0) if Ω 0 + Λ = 1,
+(A6)
+where we have used the following auxiliary deﬁnitions,
+w0 = 1
+Ω 0
+− 1, (A7)
+w = w0
+1 + z , (A8)
+– 16 –
+F1(u) = 1 + 3
+u + 3(1 + u)1/2
+u3/2 ln [(1 + u)1/2 − u1/2], (A9)
+y0 = (2w0)1/3, (A10)
+y = y0
+1 + z , (A11)
+F2(u) = (u3 + 2)1/2
+u3/2 , (A12)
+and
+F3(u) =
+∫ u
+0
+( u′
+u′3 + 2
+) 3/2
+du′. (A13)
+A good numerical approximation to the Ω-dependence of the cr itical threshold for spherical
+collapse is given by
+δ 0
+crit(Ω , Λ) =
+
+
+
+
+
+0. 15 (12π )2/3 if Ω = 1 and Λ = 0,
+0. 15 (12π )2/3 Ω 0.0185 if Ω 0 < 1 and Λ = 0,
+0. 15 (12π )2/3 Ω 0.0055 if Ω 0 + Λ = 1,
+(A14)
+which can be used to compute δ crit(z0) = δ 0
+crit(Ω( z0))/D (z0, Ω 0, Λ). Finally, eq. A5 requires
+∆ 2
+0(M ), the variance of the power spectrum on mass scale M , extrapolated linearly to z = 0. In
+the case of a power-law spectrum of initial density ﬂuctuati ons, P (k) ∝ kn, this is simply
+∆ 2
+0(M ) = δ 0
+crit
+( M
+M⋆(z = 0)
+) −(n+3)/6
+, (A15)
+where we have normalized the spectrum by M⋆(z = 0), the present nonlinear mass. A CDM
+spectrum is usually normalized by σ 8, the rms mass ﬂuctuations within a sphere of radius 8 h−1
+Mpc, and its variance can be approximated by,
+∆ 0(M ) = σ 8F4(M8)/F 4(Mh), (A16)
+where we have used the following deﬁnitions,
+M8 = 6. 005 × 1014(h Ω 0)3, (A17)
+Mh =
+( M
+h−1M⊙
+)
+h3Ω 2
+0 (A18)
+and
+F4(u) = A1u0.67[1 + (A2u−0.1 + A3u−0.63)p]1/p, (A19)
+with A1 = 8. 6594 × 10−12, A2 = 3. 5, A3 = 1. 628 × 109, and p = 0. 255.
+Eqs. A6-A19 can be used to solve eq. A5 and ﬁnd the collapse red shift, zcoll, corresponding to
+a halo of mass M . As noted when discussing Fig. 5, we recommend using f = 0. 01 when solving
+eq. A5, since this value seems to reproduce well the results o f all our numerical experiments.
+– 17 –
+Once zcoll(M ) has been found, the characteristic density of the halo (exp ressed in units of the
+critical density at z = z0) can be computed from (see eq.5 and Table 1),
+δ c(M, z 0) ∼ 3 × 103 Ω( z0)
+( 1 + zcoll
+1 + z0
+) 3
+, (A20)
+where we have assumed f = 0 . 01. A FORTRAN subroutine that implements the procedure
+described here and returns δ c(M, z 0) for all the cosmologies we discuss is available from the aut hors
+upon request.
+– 18 –
+P (k) Ω 0 Λ f C (f )
+CDM 1.0 0.0 0.5 1 . 75 × 104
+1.0 0.0 0.1 7 . 44 × 103
+1.0 0.0 0.01 3 . 41 × 103
+CDMΛ 0.25 0.75 0.5 1 . 75 × 104
+0.25 0.75 0.1 7 . 44 × 103
+0.25 0.75 0.01 3 . 41 × 103
+n = −1. 5 1.0 0.0 0.5 3 . 00 × 104
+1.0 0.0 0.1 1 . 08 × 104
+1.0 0.0 0.01 3 . 15 × 103
+n = −1. 0 1.0 0.0 0.5 5 . 00 × 104
+1.0 0.0 0.1 1 . 38 × 104
+1.0 0.0 0.01 2 . 50 × 103
+0.1 0.0 0.5 5 . 00 × 104
+0.1 0.0 0.1 1 . 38 × 104
+0.1 0.0 0.01 2 . 50 × 103
+n = −0. 5 1.0 0.0 0.5 1 . 25 × 105
+1.0 0.0 0.1 2 . 81 × 104
+1.0 0.0 0.01 2 . 81 × 103
+n = 0. 0 1.0 0.0 0.5 4 . 00 × 105
+1.0 0.0 0.1 6 . 66 × 104
+1.0 0.0 0.01 4 . 00 × 103
+0.1 0.0 0.5 4 . 00 × 105
+0.1 0.0 0.1 6 . 66 × 104
+0.1 0.0 0.01 4 . 00 × 103
+Table 1: Parameters in eq. 5 used to plot the ﬁts in Figure 5.
+– 19 –
+REFERENCES
+Bertschinger, E. 1985, ApJS, 58, 39.
+Cole, S.M., & Lacey, C., 1996, MNRAS, in press (astro-ph 9510 147).
+Crone, M., Evrard, A.E., & Richstone, D.O. 1994, ApJ, 434, 40 2.
+Dubinski, J. & Carlberg, R. 1991, ApJ, 378, 496.
+Efstathiou, G.P., Davis, M., Frenk, C.S., & White, S.D.M. 19 85, ApJS, 57, 241.
+Efstathiou, G.P., Frenk, C.S., White, S.D.M., & Davis, M. 19 88, MNRAS, 235, 715.
+Fillmore, J.A., & Goldreich, P. 1984, ApJ, 281, 1.
+Frenk, C.S., White, S.D.M., Efstathiou, G.P., and Davis, M. 1985, Nature, 317, 595.
+Frenk, C.S., White, S.D.M., Davis, M., and Efstathiou, G.P. 1988, ApJ, 327, 507.
+Gunn, J., & Gott, J.R. 1972, ApJ, 176,1.
+Hernquist, L. 1990, ApJ, 356, 359.
+Hoﬀman, Y. 1988, ApJ, 328, 489.
+Hoﬀman, Y., & Shaham, J. 1985, ApJ, 297, 16.
+Lacey, C.G., & Cole, S.M. 1993, MNRAS, 262, 627.
+Lynden-Bell, D., 1967, MNRAS, 136, 101.
+Navarro, J.F., & White, S.D.M. 1993, MNRAS, 265, 271.
+Navarro, J.F., Frenk, C.S., & White, S.D.M. 1995, MNRAS, 275 , 720.
+Navarro, J.F., Frenk, C.S., & White, S.D.M. 1996, ApJ, 462, 5 63.
+Quinn, P.J., Salmon, J.K., & Zurek, W.H. 1986, Nature, 322, 3 29.
+Syer, D., & White, S.D.M. 1996, MNRAS, submitted (astro-ph 9 611065).
+Tormen, G., Bouchet, F., & White, S.D.M., 1996, MNRAS, submi tted (astro-ph 9603132).
+Warren, M.S., Quinn, P.J., Salmon, J.K., & Zurek, W.H. 1992, ApJ, 399, 405.
+West, M.J., Dekel, A., & Oemler, A., 1987, ApJ, 316, 1.
+White, S.D.M. 1996, in Les Houches Session LX: Cosmology and Large-scale Structure, ed.
+Schaeﬀer, R. Silk, J., Spiro, M., Zinn-Justin, J., North Hol land, p. 349.
+– 20 –
+Zurek, W.H., Quinn, P.J., & Salmon, J.K. 1988, ApJ, 330, 519.
+This preprint was prepared with the AAS L ATEX macros v4.0.
+– 21 –
+Fig. 1.— Particle plots illustrating the time evolution of h alos of diﬀerent mass in an Ω 0 = 1,
+n = −1 cosmology. Box sizes of each column are chosen so as to inclu de approximately the same
+number of particles. At z0 = 0 the box size corresponds to about 6 × r200. Time runs from top to
+bottom. Each snapshot is chosen so that M⋆ increases by a factor of 4 between each row. Low mass
+halos assemble earlier than their more massive counterpart s. This is true for every cosmological
+scenario in our series.
+– 22 –
+Fig. 2.— Density proﬁles of one of the most and one of the least massive halos in each series. In
+each panel the low-mass system is represented by the leftmos t curve. In the SCDM and CDMΛ
+models radii are given in kpc (scale at the top) and densities are in units of 10 10M⊙/kpc3. In all
+other panels units are arbitrary. The density parameter, Ω 0, and the value of the spectral index, n
+is given in each panel. Solid lines are ﬁts to the density proﬁ les using eq. (1). The arrows indicate
+the value of the gravitational softening. The virial radius of each system is in all cases two orders
+of magnitude larger than the gravitational softening.
+– 23 –
+Fig. 3.— The ﬁts to the density proﬁles of Figure 2, scaled to t he virial radius, r200, of each
+system and to the critical density of the universe at z = 0. Solid and dashed lines correspond to the
+low- and high-mass systems, respectively. Note that low-ma ss systems are denser than high-mass
+systems near the center, indicating that the characteristi c density of a halo increases as the halo
+mass decreases.
+– 24 –
+Fig. 4.— The circular velocity proﬁles of the halos shown in F igure 2. Radii are in units of the
+virial radius and circular speeds are normalized to the valu e at the virial radius. The thin solid line
+shows the data from the simulations. All curves have the same shape: they rise near the center
+until they reach a maximum and then decline at the outer edge. Low mass systems have higher
+maximum circular velocities in these scaled units because o f their higher central concentrations.
+Dashed lines are ﬁts using eq.(3). The dotted lines are the ﬁt to the low-mass halo in each panel
+using a Hernquist proﬁle. Note that this model ﬁts rather wel l the inner regions of the halos, but
+underestimates the circular velocity near the virial radiu s.
+– 25 –
+Fig. 5.— The correlation between the mass of a halo and its cha racteristic density. Masses are
+given in units of the nonlinear mass scale M⋆ (see text for a deﬁnition). Densities are relative to
+the critical value. Three curves are shown in each panel for d iﬀerent values of the parameter f (see
+eq. 5). The ﬁts are normalized to intersect at M200 = M∗ in the case Ω = 1. This normalization
+is then used for the low-density models (Ω 0 < 1). Note that for f = 0. 01 this procedure results in
+good ﬁts to the results of the simulations in all cases.
+– 26 –
+Fig. 6.— As Figure 5, but for the concentration parameter c.
+– 27 –
+Fig. 7.— The mass dependence of the maximum circular velocit y of a halo. Velocity units are
+arbitrary in the power-law panels and km s −1 in the CDM models (scale at top). Mass is in units
+of 10 10M⊙ for CDM halos and in units of M⋆ in the other panels. Power law ﬁts of the form
+M ∝ V α
+max are shown. The value of α and the rms scatter in the mass about the ﬁt are indicated
+in each panel. Note that the M -Vmax dependence steepens for larger values of the spectral index
+n. The eﬀect of the cosmological parameters on α seems to be rather small.
+– 28 –
+Fig. 8.— The characteristic density of all halos in our serie s as a function of the redshift at which
+half of the ﬁnal mass is in collapsed progenitors more massiv e than 10% of the ﬁnal mass. Solid
+circles correspond to all our runs with Ω 0 = 1, open circles to our runs with Ω 0 = 0 . 1 and Λ = 0,
+and starred symbols to the CDMΛ runs (Ω 0 = 0. 25, Λ = 0 . 75). The solid line shows the “natural”
+scaling, δ c ∝ Ω 0(1 + z)3 expected if the characteristic density of a halo is directly proportional to
+the mean matter density of the universe at the time of collaps e.
+– 29 –
+Fig. 9.— A summary of the mass dependence of δ c and c in our diﬀerent cosmological models.
+Mass is given in units of the nonlinear mass scale M⋆. Curves are labeled in the upper plots and
+the same line types are used in the bottom plots. The symbols i n the lower-right panel show the
+correlation between c and mass found by Cole & Lacey (1996), with open squares for n = −1,
+Ω 0 = 1 and solid squares for n = 0, Ω 0 = 1. These results should be compared to the lower dashed
+and lower dot-dashed curves in the same panel, respectively . Because of their poorer numerical
+resolution, Cole & Lacey’s halos are signiﬁcantly less conc entrated than the ones in our study.
+– 30 –
+Fig. 10.— The δ c-deviation from the ﬁts shown in Figure 5 (for f = 0 . 01) plotted versus the
+deviation from the mean relation between the collapse redsh ift, 1 + zcoll (Figure 8), and the mass of
+a system. Note that systems assembled earlier (later) than t he average tend to have characteristic
+densities above (below) the mean. The correlation between t he δ c and 1 + zcoll residuals follows
+the “natural” scaling, ∆ log δ c = 3∆ log(1 + zcoll), as shown by the solid line. Only the results
+corresponding to Ω 0 = 1 are shown.
+– 31 –
+Fig. 11.— The δ c-residuals in Figure 5 relative to the solid curve ﬁt ( f = 0. 01) plotted versus the
+residuals in the M200– λ correlation. This ﬁgure shows that the scatter in δ c at a given mass cannot
+be attributed to the eﬀects of rotation. All halos with Ω 0 = 1 are included in this plot.
+– 32 –
+Fig. 12.— Circular velocity proﬁles of M⋆ halos formed in simulations with diﬀerent power spectra
+in an Einstein-de Sitter universe. The curves were computed using eq. 3 and the values of the
+concentration c obtained from the ﬁts in Figure 9. Radii are in units of the vir ial radius and
+circular speeds in units of the circular velocity at the viri al radius. Note that, because of the use
+of linear units, the fact that all curves have the same shape ( eq. 3) is not immediately apparent.
+– 33 –
+Fig. 13.— A comparison between our density proﬁles and the po wer-law ﬁts of Crone et al. (1994).
+The region ﬁtted by these authors, corresponding to densiti es between 100 and 3000, is shown by
+the dotted lines. Over this region our results (solid lines) and the power-law parameterization
+adopted by Crone et al. (dashed lines) are consistent. The pr oﬁles shown by the solid curves
+correspond to M = 6 M∗ (n = −1. 5), M = 4 M∗ (n = −1), M = 2 M∗ (n = −0. 5), and M = M∗
+(n = 0), as discussed in the text.

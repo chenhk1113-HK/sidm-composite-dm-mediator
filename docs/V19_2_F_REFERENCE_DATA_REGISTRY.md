@@ -253,9 +253,11 @@ Per user directive ("I want you to do it auto, no need for my reminder"), all pa
 - **Used in v40.44:** Cloud-9 morphology (compact, non-rotating, dynamically cold → QUIESCENT merger history inference)
 - **CORRECTION:** Earlier v19.2-F notes referenced NGC 1023 as Cloud-9's host. Correct host is M94 (NGC 4736). Some scripts/notes may need updating.
 
-### 7.5 Burkert 1995 (cited but no local PDF — journal article)
-- **Burkert 1995** (ApJ 447, L25) — cored dark matter profile, foundational
-- **STATUS: TO ADD LOCAL PDF (not on arXiv)** — for now, citation only
+### 7.5 Burkert 1995 (still no local PDF — and the 2026-10-19 status line was stale)
+- **Burkert 1995** — "The Structure of Dark Matter Halos in Dwarf Galaxies", ApJ **447** (1995), DOI **10.1086/309560** (Crossref, verified 2026-11-09) — cored dark matter profile, foundational
+- **STATUS: TO ADD LOCAL PDF (no arXiv preprint exists — verified: `astro-ph/9508181` is not an arXiv record)** — journal/IOP access required
+- **CORRECTION (2026-11-09, registry §7.11 D4):** this line previously said "cited but no local PDF". The current `PAPER_V1_DRAFT.md` reference list (43 entries) contains **no Burkert entry at all**; every one of the 26 body mentions is "Burkert+ 2020 fits" inside quoted reviewer text. So the paper does not currently cite Burkert 1995 either.
+- **Reading stand-in:** `docs/papers/verified/9703057_burkert_1997.pdf` (Burkert 1997 review, "The structure of dark matter halos. Observation versus theory") is in the KB for background only — it is a different paper and must not be cited as the 1995 profile paper.
 - **Used in v40.43:** Burkert-style c-τ prescription (placeholder anchored to Burkert 1995 + Balberg 2002)
 
 ### 7.6 Citation count update
@@ -454,3 +456,70 @@ Per user directive "I want you to do it auto, no need for my reminder":
 ## 7.8 REFERENCE-RESOLUTION ROUND (2026-10-27)
 
 `scripts/resolve_references.py` (stdlib-only; arXiv + Crossref; no new dependencies) resolved the paper's blank reference slots. **36 of 38 slots now carry a publisher-verified entry.** Two slots were fabricated and are re-pointed: [10] ("Girmohanta & Yasuoka, PRD 111, 035005 (2025)" — the DOI belongs to Li, Yang, Zhang & Zhu) and [9] ("Hong, Kuranchi & Perez 2020" — no author named Kuranchi exists in arXiv, InspireHEP, Crossref, Semantic Scholar or OpenAlex; the real paper is Hong, **Kurup** & **Perelstein**). Both now cite verified Girmohanta & Shrock papers, and body sentences L38 and L90 were rewritten to match their claims. Six further body-level attribution errors were found and corrected ([5] venue, [7] authors, [50c] authors, [55a] 6th author, [13]/[30] year). Two slots — [11] ("Yang & Yu 2023") and [12] ("Turner et al. 2021") — remain unresolved because no candidate passed the author+venue+title agreement check; they are tracked as open items, not filled with substitutes. The evidence for both is recorded in `v0.3-prelim/docs/AUDIT_REFERENCES.md`; the closest real atomic-DM papers (Kaplan+ 2010 JCAP; Geller & Telem 2021 PRD 104 035010) and the closest real Yang–Yu work (PRD 104, 103031, already [13]/[30]) are documented so a future session does not re-run the same fruitless searches.
+
+## 7.11 INTAKE + CITATION-CLEANUP ROUND (2026-11-09 — the user's "Useful papers.docx")
+
+**Trigger.** The user supplied `Useful papers.docx`, a list of Cloud-9 / SIDM-profile literature with arXiv links, asking for KB building and citation cleanup.
+
+**Method (what was actually done, so it can be repeated).** (1) Every arXiv ID in the doc was re-resolved against the arXiv export API before anything was downloaded — title, author list, `journal_ref`, date. (2) Journal venues, volumes, pages and DOIs were resolved against Crossref, not remembered. (3) PDFs were fetched to `to_verify/`, text extracted with pypdf, read end-to-end by two delegated readers under a schema, then **every headline number in this section was spot-grepped by the controller** against the extracted text before promotion. (4) All 8 entries were then moved to `verified/` with `_extracted_text_20261109/` kept alongside for provenance.
+
+### New KB entries (PDF + .md now in `docs/papers/verified/`)
+
+| KB file | arXiv | Verified record | Read level |
+|---|---|---|---|
+| `9611107_nfw_1997` | astro-ph/9611107v4 | ApJ 490, 493-508 (1997), DOI 10.1086/304888 (Crossref) | full text, clean layer |
+| `9508025_nfw_1996` | astro-ph/9508025 | ApJ 462, 563 (1996), DOI 10.1086/177173 (Crossref) | **abstract-level only** — 1995 scan, text layer damaged |
+| `9703057_burkert_1997` | astro-ph/9703057v1 | no arXiv journal_ref (review) | downloaded, text layer checked; not yet read numerically |
+| `2411.11945_tran_2026` | 2411.11945v4 | PRD 113(6), March 2026 (arXiv journal_ref); 8 authors | full text |
+| `2512.15869_despali_2026` | 2512.15869v2 | A&A **708, A47**, 2026-03-26, DOI 10.1051/0004-6361/202558686 | full text |
+| `2002.02102_yang_2020` | 2002.02102v2 | PRL 125, 111105 (2020); Daneng Yang, Hai-Bo Yu, Haipeng An | full text |
+| `2403.11403_zhang_2024` | 2403.11403v2 | **no journal reference anywhere** — unrefereed preprint | full text |
+| `2607.08818_sarratoalos_2026` | 2607.08818v2 | accepted A&A, no volume/page registered yet | full text |
+
+### Citation defects found by this round
+
+**D1 — AIDA-TNG venue is wrong in `v0.3-prelim/docs/AUDIT_REFERENCES.md` (L76).** It prints "A&A 699, A222 (2026); arXiv:2512.15869v1". The correct record is **A&A 708, A47 (2026)**, arXiv current version **v2**. Crossref resolves A&A **699, A222** to a different paper entirely: "Detecting low-mass haloes with strong gravitational lensing" (2025-07). A citation with that volume/page would point a reader at the wrong paper.
+
+**D2 — "Introducing the AIDA-TNG project" venue is wrong in the same file (L72).** It prints MNRAS (2024). Crossref resolves that exact title to **A&A 697, A213 (2025-05)**; no MNRAS record with that title was found.
+
+**D3 — the paper uses the NFW profile with no NFW reference.** `PAPER_V1_DRAFT.md`'s References section holds 43 numbered entries. "NFW" appears **49 times** in the body, and `r_s`/`rho_s`/`c_200` are computed from M_200 and c_200 throughout `scripts/`. "Navarro" appears 4 times in the reference list, **all as a co-author of other papers** (Benítez-Llambay+ 2024 [1a]/[15b], Oman+ 2015 [2]). There is no primary NFW citation. This is the single most likely citation objection a referee would raise, and it is cheap to close: add `9611107_nfw_1997` as the profile/concentration definition.
+
+**D4 — the registry's own §7.5 claim was stale.** §7.5 said Burkert 1995 was "cited but no local PDF". The current draft's References section contains **no Burkert entry at all**; all 26 body mentions of Burkert are "Burkert+ 2020 fits" inside quoted reviewer text. Correct record: Burkert 1995, "The Structure of Dark Matter Halos in Dwarf Galaxies", ApJ 447 (1995), DOI 10.1086/309560 (Crossref). **No arXiv preprint exists for it.**
+
+**D5 — three links in the user's doc point at unrelated papers** (recorded so they are not re-imported):
+- "Moore+ 1998 minimum concentration" → `astro-ph/9810021` is actually Mendes de Oliveira+ et al., "A NIR search for high-redshift clusters" (1998).
+- "Navarro+ 2004 Einasto" → `astro-ph/0403457` is Steed & Weinberg, "Explaining Low Redshift Quasar Evolution" (2004).
+- "Burkert 1995, arXiv:astro-ph/9508181" → no such arXiv record exists; the doc's other link (ar5iv `astro-ph/9703057`) is Burkert's **1997 review**, not the 1995 profile paper. Its DOI 10.1086/309560 was the only correct element of that entry.
+- `astro-ph/9611107` and `astro-ph/9508025` (the NFW pair) **are** correct, and the doc's labelling of them as "NFW 1997" / "NFW 1997" is loose: 9508025 is the 1996 ApJ paper, 9611107 the 1997 one.
+
+**D6 — convention trap for whoever adds the NFW citation.** NFW 1996 states verbatim that "All physical quantities quoted in this paper assume a Hubble constant of 50 km/s/Mpc". v19.2-F uses `rho_crit = 1.381e-7 Msun/pc^3` at H_0 = 67.66 with Planck-2018 flat LambdaCDM and c_200 = r_200/r_s, i.e. the **critical-density** convention of NFW 1997 (whose eq. 1 defines rho/rho_crit with rho_crit = 3H^2/8piG). Cite **1997** for the profile and concentration definition. The commonly repeated claim that NFW 1996 defines overdensity relative to the **mean** density could **not** be verified from its damaged text layer and is recorded as unverified — check the journal PDF before stating it in the paper.
+
+**D7 — two DOIs written from memory during this round were wrong and were corrected before commit** (10.1086/309191 → 10.1086/304888 for NFW 1997; 10.1086/176418 → 10.1086/177173 for NFW 1996). Recorded because it is the exact failure mode §8's rule exists to prevent: DOIs must be resolved, never recalled.
+
+### Why these papers matter to v19.2-F (not just coverage)
+
+- **Tran+ T25 (2411.11945)** and **AIDA-TNG (2512.15869)** are both evidence that a fitted concentration depends on the profile family. AIDA-TNG states SIDM1/vSIDM **Einasto** concentrations "remain systematically lower than CDM in all masses ... a direct consequence of the inner core, whose presence is not fully absorbed" by the fit, while its Y24 (Gilman+ 2021 / Yang+ 2024) fits behave differently. The project's headline "NFW fit is 7σ below the c-M relation, SIDM reduces it to 3σ" is therefore partly a **fit-family statement** and should be checked against a Y24-style fit before being presented as a model-discrimination result.
+- **Yang+ 2020 (2002.02102)** is the closest published analogue of the project's argument: a halo that is **4σ below** the c-M median (c_200 = 4) is unreproducible in CDM, and SIDM removes the deficit because core formation raises the fitted concentration and enhances tidal mass loss. It also documents the competing CDM explanation (an implausibly low concentration) rather than assuming it away.
+- **Sarrato-Alós (2607.08818)** supplies the cleanest single number for the underlying mechanism: an unmodified NFW profile over-predicts the central density of cored dwarf systems by **2-3σ**, and simulated cored profiles agree with observations to <~1σ.
+- **Zhang+ 2024 (2403.11403)** and Yang+ 2020 place the DF2/dwarf literature at **0.3-13 cm^2/g**, i.e. 37-1600x below the project's low-velocity amplitude. Useful as a literature-comparison sentence, not as a constraint.
+- **Tran+** itself simulates at 21.94 and 31.98 cm^2/g (10^7-10^8 Msun halos) — the same decade as Cloud-9's >= 50 cm^2/g benchmark, and its Appendix A7 fit table gives r_s values of 18.4-21.2 kpc for those halos.
+
+### Proposed slots (NOT applied — the draft was not edited in this round)
+
+| Proposed | Entry | Where it belongs |
+|---|---|---|
+| new [N1] | Navarro, Frenk & White 1997, ApJ 490, 493-508 | §2.1 / wherever the NFW profile and c_200 = r_200/r_s are first used |
+| new [N2] (optional) | Navarro, Frenk & White 1996, ApJ 462, 563 | same sentence, as the original halos paper |
+| new [N3] (optional) | Burkert 1995, ApJ 447, L25 | wherever Burkert cores or the c-tau prescription are named |
+| new [N4] (optional) | Despali+ 2026, A&A 708, A47 | §3.4 UFD cores / the c-M deviation discussion |
+| new [N5] (optional) | Yang, Yu & An 2020, PRL 125, 111105 | §3.2 Cloud-9, as the published precedent for a below-median-concentration halo repaired by SIDM |
+
+Applying these requires paper edits (reference list plus the sentences that name NFW); that is deliberately left for approval.
+
+### Open items
+
+1. Burkert 1995 PDF is still missing (no arXiv record; IOP/ADS only). Either obtain it or record an explicit exception before the paper cites ApJ 447, L25.
+2. `2607.08818` has no registered volume/page yet — cite as "accepted, arXiv:2607.08818" until Crossref registers it.
+3. `2403.11403` has no journal reference at all — label as a preprint if used.
+4. The NFW 1996 mean-density-vs-critical-density convention claim is unverified (damaged text layer).
+5. Numbers quoted from `9508025_nfw_1996` are abstract-level only.

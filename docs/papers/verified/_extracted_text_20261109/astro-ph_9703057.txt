@@ -1,0 +1,269 @@
+arXiv:astro-ph/9703057v1  10 Mar 1997
+THE STRUCTURE OF DARK MA TTER HALOS.
+OBSER V A TION VERSUS THEORY
+A. BURKERT
+Max-Planck-Institut f¨ ur Astronomie, K¨ onigstuhl 17,
+69117 Heidelberg, GERMANY
+The rotation curves of dark matter dominated dwarf galaxies are analysed. The
+observations show that dark matter halos represent a one-pa rameter family with
+self similar density proﬁles. The global halo parameters, l ike total mass and scale
+length are coupled by simple scaling relations. The inner ha lo regions resemble
+non-singular, isothermal spheres with constant density co res. The observations are
+compared with dark matter halos, resulting from cosmologic al cold dark matter
+simulations. The theoretical models predict that dark matt er halos represent a one-
+parameter family in agreement with the observations. Howev er, in contradiction
+to the observations, the calculations lead to dark matter ha los with r− 1 density
+cusps in the center and non-isothermal velocity dispersion proﬁles. Processes which
+might aﬀect the inner halo structure, resulting in isotherm al, constant density cores
+are discussed.
+1 Introduction
+Structure formation in the universe is strongly coupled with dark ma tter (DM).
+Current cosmological models assume that there exists a non-bary onic cold dark
+matter (CDM) component which consist of non-relativistic particles that in-
+teract with the baryonic component only through gravity. Given a p rimordial
+density ﬂuctuation spectrum, cosmological models investigate the formation of
+dark matter structures and compare the results with observatio ns of the distri-
+bution of galaxies into clusters and superclusters 6. This comparison provides
+important information on cosmological parameters as well as on the initial
+dark matter ﬂuctuation spectrum and by this on the origin and natu re of dark
+matter.
+Dark matter can also be studied on galactic scales. On these scales w hich
+are of order a few kpc, dark matter structures are in general mu ch older than
+their internal dynamical timescales. They therefore have reache d a dynamical
+equilibrium state, a virialized dark matter halo. These halos could howe ver
+still retain valuable information about the initial conditions from which they
+formed, if the assumption is valid, that dark matter consists of collis ionless and
+dissipationless particles. Dark matter halos often host galaxies in th eir inner
+regions. Studying the dynamical properties of these galaxies we ga in insight
+into the inner density structure of dark matter halos and by this int o the origin
+and nature of dark matter.
+1
+2 The structure of simulated dark matter halos
+Assuming spherical symmetry, the radial DM mass distribution M (r) can
+be described by the DM rotation curve, that is the circular velocity p roﬁle
+Vc(r) = ( GM (r)/r)1/2. The observations of constant circular velocities in the
+outer regions of many spiral galaxies 5 have lead to the conclusion that DM
+halos are virialized isothermal spheres with an r−2 density proﬁle in the ob-
+servable radius range. Cosmological models indeed lead to dark matt er halos
+which produce constant outer rotation curves, in general agree ment with these
+observations. Early cosmological calculations did not have enough r esolution
+in order to resolve the density structure of DM halos in detail. Recen t high-
+resolution simulations 11,12,14 however have shown that in the inner and outer
+regions dark matter halos depart signiﬁcantly from an r−2 power-law distribu-
+tion. All halo density proﬁles can be ﬁt accurately by the simple formu la,
+ρ(r) = ¯ρ
+(r/rs)(1 + r/rs)2 (1)
+where ¯ρ and rs are two free parameters. It is very interesting that Navarro et
+al 12,14 ﬁnd a strong correlation between ¯ ρ and rs. Dark matter halos seem
+to represent a one-parameter family, characterized completely b y their virial
+mass M200 which is the total mass inside the virial radius r200. r200 is the
+characteristic radius inside which the mean DM density is 200 × ρcrit, where
+ρcrit = 3H 2/8πG is the critical density.
+3 The structure of observed dark matter halos
+Unfortunately it is diﬃcult to observationally verify these numerical results
+as galaxies are in general gravitationally dominated by their visible bar yonic
+components in the inner regions, while in the outer regions there is no t enough
+visible material in order to measure accurately a rotation curve. In the inner
+region the inferred DM proﬁles will depend strongly on how much bary onic
+mass is subtracted, which in turn depends on the assumed baryonic mass-to-
+light ratio. The situation becomes even more complicated by the fact that a
+dominating baryonic component will gravitationally aﬀect and change the cold
+dark matter density proﬁle 13.
+3.1 Observed dark matter mass proﬁles
+This situation has changed with the discovery of a new class of low sur face
+brightness dwarf spirals and irregulars, which are strongly dominat ed by dark
+matter, even in their innermost regions. High-quality rotation curv es have
+2
+Figure 1: Dark matter mass proﬁles are shown for the followin g dwarf spiral galaxies:
+DDO154 (open triangle), DDO105 (open square), NGC3109 (ope n circle) and DDO170
+(starred). The errorbar at the innermost triangle represen ts the observational uncertainty in
+the inner region. The isothermal ﬁt with core radius r0 is shown as dashed curve, the solid
+line shows the revised proﬁle, given in the text. The dotted a nd dot-dashed curve show the
+mass proﬁles as predicted from CDM calculations with format ion redshifts of z = 0 .6 and
+z = 1.5, respectively.
+3
+become available in the past few years 1,4,15,16, which provide insight into the
+detailed structure of dark matter halos.
+Figure 1 shows the dark matter mass proﬁles of four dwarf galaxies with
+high signal-to-noise ratio HI rotation curves. All four proﬁles indee d follow
+the same universal mass relation. The dot-dashed and dotted cur ves show
+DM proﬁles as predicted from cosmological simulations (equation 1). The dot-
+dashed curve corresponds to a dark matter halo with virial radius r200 = 5 × rs.
+The best ﬁt through the data. using equation 1. is achieved with the dotted
+line which assumes r200 = 17 .5 × rs. Clearly, the halo proﬁles resulting from
+numerical simulations, are too massive at small radii when compared with the
+observations. This is a result of the central r−1 density cusp. The apparent
+contradiction between observation and theory has been discusse d in detail by
+Flores and Primack 8, Moore 10 and Burkert 2,3.
+A nice ﬁt through the observed proﬁles over the whole observable r adius
+range is achieved with the simple density distribution 2,3,
+ρDM (r) = ρ0r3
+0
+(r + r0)(r2 + r2
+0) (2)
+where ρ0 and r0 are free parameters which represent the central DM density
+and a scale radius, respectively. Equation 2 resembles an isotherma l proﬁle
+with a constant-density core at small radii ( r < r 0). At large radii the density
+decreases faster than expected for an isothermal distribution, in agreement
+with the predictions from CDM calculations.
+3.2 Dark matter scaling relations
+Navarro et al 12,14 have shown that the two scale parameters of equation 1 are
+strongly correlated. Small halos are signiﬁcantly denser than large halos as a
+result of the fact that small, low-mass halos formed at higher collaps e redshifts
+when the density of the universe was higher.
+Whether DM halos indeed represent a one-parameter family, being d e-
+scribed completely by their total mass, can be investigated by lookin g for a
+correlation between the free parameters ρ0 and r0 in the observational ﬁt for-
+mula (equation 2). Instead of using ρ0, which cannot be observed directly,
+Fig. 2 shows the rotational velocity v0 of observed DM rotation curves at r0
+as a function of r0. r0 is determined by ﬁtting the data with a velocity curve
+as predicted by equation 2. We ﬁnd indeed a very strong correlation between
+r0 and v0. The slope agrees well with the predictions from cosmological mod-
+els 2. Using equation 2 and assuming spherical symmetry one can derive t he
+following scaling relations for the observed DM halos:
+4
+Figure 2: The scaling relation between the rotational veloc ity v0 measured at r0 is shown for
+the DM halos, investigated by Burkert 2. Open circles represent the four DDO galaxies which
+have been used also in Fig. 1. The ﬁlled circles show three add itional galaxies: NGC55,
+NGC300 and NGC1560. The dashed line is a ﬁt through the data po ints.
+5
+v0 = 17 .7
+( r0
+kpc
+) 2/3 km
+s
+M0 = 7 .2 × 107
+( r0
+kpc
+) 7/3
+M⊙ (3)
+ρ0 = 2 .7 × 10−2
+( r0
+kpc
+) −2/3 M⊙
+pc3
+where M0 is the total dark matter mass inside r0. These relations indicate
+that dark matter halos indeed represent a one-parameter family, in agreement
+with cosmological models.
+4 On the origin of isothermal dark matter cores
+As shown in the last section, the shape of the cosmologically predicte d universal
+dark matter density proﬁles disagrees with the observations. Whe reas the
+observations indicate isothermal dark matter cores with constan t density ρ0
+and constant velocity dispersion σ0, the cosmological models lead to cuspy
+cores with density proﬁles ρ ∼ r−1 and velocity dispersion proﬁles σ(r) ∼ r.
+The simulated dark matter cores are dynamically cold and dense. The observed
+dark matter cores are hotter and less dense. In order to explain t his diﬀerence
+a mechanism has to be found which heats dark matter cores, increa sing their
+velocity dispersion and by this decreasing the central dark matter density.
+4.1 Cosmological initial conditions
+Navarro et al 14 have investigated in detail how the structure of DM halos de-
+pends on the adopted cosmological model. They ﬁnd that the proﬁle s are al-
+ways well ﬁtted by equation 1, independent of halo mass, of the ado pted initial
+density ﬂuctuation spectrum, and of the values of the cosmologica l parameters.
+Thus the problem cannot be solved by selecting a certain cosmologica l model.
+This result is not surprising. It is well known that the violent gravitat ional
+relaxation of collisionless particle systems leads to universal equilibriu m pro-
+ﬁles, independent of the initial conditions 7. The ﬁnal proﬁles of such systems
+can be well described by a Hernquist proﬁle 9,
+ρh(r) = M
+2π
+a
+r(r + a)3 (4)
+6
+where M is the total mass of the system and a is its scale length. The H ernquist
+proﬁle, for example, gives a good description of the surface bright ness proﬁles
+of elliptical galaxies, collisionless stellar systems which have gone thro ugh a
+stage of violent relaxation. Note, that the simulated halo proﬁles (e quation
+1) are very similar to the proﬁles described by equation (3), with the main
+diﬀerence being a less steeply decreasing density distribution in the o utermost
+regions. This results from the fact that the Hernquist proﬁle desc ribes systems
+with ﬁnite mass, whereas in cosmological models with Ω = 1 halos will alway s
+accrete dark matter, leading to a mass proﬁle that should diverge lo garithmi-
+cally for large radii.
+4.2 Warm dark matter
+Dark matter is assumed to consist of collisionless particles, which inte ract only
+by gravity. In this case, the 6-dimensional, microscopic phase spac e distribu-
+tion function (DF) f (⃗ x, ⃗ v) is a conserved quantity. The cuspy dark matter
+cores with ρ ∼ r−1 and σ ∼ r are characterized by a DF which diverges as
+f ∼ ρ/σ3 ∼ r−4. Given a critical phase space density fcrit, there always exists
+a ﬁnite radius rcrit, inside which f > f crit. If the maximum phase space den-
+sity of dark matter would be ﬁnite ( f < f crit), the dark matter density proﬁle
+should ﬂatten inside rcrit.
+CDM particles formed with negligible initial velocity dispersion and there -
+fore with an inﬁnitely large fcrit. No phase space limitations are imposed
+on CDM cores. The situation is diﬀerent in the case of warm dark matt er,
+which starts with a ﬁnite initial velocity dispersion and therefore with a ﬁnite
+fcrit. In this case, DM cores might become isothermal inside rcrit, where f ap-
+proaches a constant and universal value fcrit, that is determined by the initial
+dark matter temperature. This idea can be tested. According to t he equa-
+tions 3, the central phase space density of observed dark matte r cores scales
+as f0 ∼ ρ0/v3
+0 ∼ r−8/3
+0 . It decreases steeply with increasing core radius. The
+centers of DM halos are not limited by a universal and ﬁnite maximum ph ase
+space density which rules out warm dark matter as origin for isother mal dark
+matter cores.
+4.3 Secular dynamical processes
+As the problem cannot be solved by varying the initial conditions or th e nature
+of dark matter we have to focus on secular dynamical processes t hat might
+aﬀect the central parts of the dark matter halos, after the halo formation
+phase.
+7
+Navarro et al 13 have proposed a scenario, where a gaseous disk forms in
+the centers of dark matter halos. The disk potential dominates th e central
+gravitational potential. The authors assume that after a vigorou s episode of
+star formation a large fraction of the total baryonic component is expelled
+from the galaxy through supernova-driven winds. They show, tha t a sudden
+loss of a large fraction of the total gravitational mass from the inn er region
+would result in an expansion of the dark matter core, decreasing th e central
+DM density. This scenario seems at ﬁrst very attractive. The obse rved scal-
+ing relations for dark matter cores and the fact that dark matter halo proﬁles
+are universal would however require signiﬁcant ﬁne tuning between the early
+cosmological collapse phase and the secular energetic processes. It is unlikely
+that DM halos would have self-similar density proﬁles if their inner stru cture
+is subsequently changed by dynamical processes which are not rela ted to the
+collisionless relaxation process which determined the outer DM proﬁle s. In
+this case, we would expect that dark matter halos are described by two inde-
+pendent parameters. The ﬁrst parameter determines their inner structure. It
+will depend on the violence of the secular processes. The second pa rameter
+determines the outer DM structure and depends on the cosmologic al merging
+history of the halo.
+Substantial mass loss also seems unlikely in the case of the DDO154 4,16, a
+dwarf spiral galaxy with a dark matter halo of total mass MDM ≈ 3 × 109M⊙,
+containing an extended HI disk with total mass 2 .5 × 108M⊙. Navarro et
+al 13 estimate that, prior to the mass loss epoch, the mass of the gaseo us disk
+should be of order 6 per cent of the total dark matter mass. This r atio is in
+agreement with the disk-to-halo mass ratio in DDO154, demonstrat ing that
+no substantial mass loss has yet occured in this system. On the oth er hand,
+the rotation curve of DDO154 clearly shows that its dark matter ha lo has an
+isothermal DM core, which must have formed by a diﬀerent mechanis m.
+5 Summary
+The observations indicate that dark matter halos are self-similar, b eing de-
+scribed completely by one free parameter. This surprising universa lity makes
+it unlikely that the isothermal cores of observed DM halos result fro m secular
+processes. The observed shallow central density proﬁles probab ly formed as a
+direct result of the same processes, which lead to the dark matter halos in the
+ﬁrst place. As discussed above, DM calculations do not produce isot hermal
+halo cores. We therefore have to conclude that some important, y et unknown
+physical features, related to the nature and origin of dark matte r, are still
+missing in cosmological models.
+8
+References
+1. A.H. Broeils, Astron. Astrophys. , 256, 19 (1992).
+2. A. Burkert, Astrophys. J. , 447, L25 (1995).
+3. A. Burkert, in IAU 171: New Light on Galaxy Evolution , eds. R. Bender
+and R.L. Davies (Dordrecht; Kluwer), 175 (1996).
+4. C. Carignan and K.C. Freeman, Astrophys. J. , 332, L33 (1988).
+5. S. Casertano and J.H. van Gorkom. 1991, Astron. J. , 101, 1231 (1991).
+6. M. Davis et al , Astrophys. J. , 292, 371 (1985).
+7. J. Dubinski and R. Carlberg, Astrophys. J. , 378, 496 (1991).
+8. R.A. Flores and J.R. Primack, Astrophys. J. , 427, L1 (1994).
+9. L. Hernquist, Astrophys. J. , 356, 359 (1990).
+10. B. Moore, Nature, 370, 629 (1994).
+11. J.F. Navarro et al , MNRAS, 275, 56 (1995).
+12. J.F. Navarro et al , Astrophys. J. , 462, 563 (1996).
+13. J.F. Navarro et al , MNRAS, 283, L72 (1996).
+14. J.F. Navarro et al , astro-ph/9611107, in press, (1997).
+15. D. Puche and C. Carignan, C., Astrophys. J. , 378, 487 (1991).
+16. C.R. Purton and C. Carignan, C., Bul. AAS , 28/4, 1320 (1996).
+9

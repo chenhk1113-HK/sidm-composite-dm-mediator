@@ -3,7 +3,7 @@
 This is a knowledge base for the v19.2-F project's paper references. It is organized as an Obsidian vault (markdown with bidirectional `[[wiki-links]]`). To use in Obsidian: open this directory as a vault.
 
 **Location:** `C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\docs\papers\`
-**Last updated:** 2026-11-03 (Tier-2 sweep papers verified — full intake closed)
+**Last updated:** 2026-11-09 (intake from the user's "Useful papers.docx": 8 papers added, including the NFW 1996/1997 pair that the paper had never cited; citation defects recorded in registry §7.11). Prior: 2026-11-03 (Tier-2 sweep papers verified — full intake closed).
 **Status:** Active, ongoing
 
 ---
@@ -32,6 +32,17 @@ This is a knowledge base for the v19.2-F project's paper references. It is organ
   coarser than this KB's own levels — do not read "0 unverified citations" as "all values checked".
 
 ## Verified papers (full text downloaded + key values verified)
+
+**2026-11-09 — intake from the user's "Useful papers.docx"** (8 papers; registry §7.11). Read end-to-end from pypdf text extraction; every headline number below was spot-grepped against the extracted text before promotion.
+
+- [[9611107 Navarro+FrenkWhite 1997]] — A Universal Density Profile from Hierarchical Clustering — ApJ 490, 493-508, DOI 10.1086/304888. **The profile the paper uses 49x with no citation** (defect D3). Source of eq. 1 and of c = r_200/r_s with rho_crit = 3H^2/8piG.
+- [[9508025 Navarro+FrenkWhite 1996]] — The Structure of Cold Dark Matter Halos — ApJ 462, 563, DOI 10.1086/177173. **ABSTRACT-LEVEL ONLY: the 1995 scan's text layer is damaged** (digits split by stray slashes); bibliographic facts verified, numerical values not quotable.
+- [[9703057 Burkert 1997]] — The structure of dark matter halos. Observation versus theory — review, no arXiv journal_ref. Background stand-in only; **Burkert 1995 (ApJ 447, DOI 10.1086/309560) has no arXiv record and still has no local PDF** (registry §7.5).
+- [[2411.11945 Tran+ 2026]] — Novel density profile for isothermal cores; T25 = 4 rho_c [tanh(r/r_c)/(r/r_c)]^n [1+(r/r_s')^2]^((3-n)/2) — arXiv 2024, published PRD 113(6) March 2026; 8 authors; simulated at 21.94 and 31.98 cm^2/g. Profile-family caveat on every fitted-concentration claim.
+- [[2512.15869 Despali+ 2026]] — AIDA-TNG: dark matter profiles and concentrations — A&A **708, A47**, DOI 10.1051/0004-6361/202558686 (the draft's audit file has the wrong venue: defect D1). SIDM1 = 1 cm^2/g constant; SIDM1/vSIDM Einasto concentrations systematically BELOW CDM at all masses; Y24 (Gilman+ 2021 / Yang+ 2024) is the SIDM-native fit.
+- [[2002.02102 Yang+Yu+An 2020]] — SIDM origin of NGC1052-DF2/-DF4 — PRL 125, 111105. sigma/m = 3 and 5 cm^2/g; CDM needs c_200 = 4, i.e. **4 sigma below the c-M median**, and is "strongly disfavored"; SIDM raises the fitted concentration through core formation plus enhanced tidal mass loss. Closest published analogue of the Cloud-9 7 sigma -> 3 sigma argument.
+- [[2403.11403 Zhang+Bi+Yin 2024]] — Tidal formation of NGC1052-DF2 by SIDM — **unrefereed** (no journal reference in arXiv or Crossref). Adopted band 0.3-10.2 cm^2/g, benchmark 5.0, maximum 13.0.
+- [[2607.08818 Sarrato-Alós+ 2026]] — Dark matter density profiles of the Milky Way satellite population — accepted A&A, volume/page not yet registered. Inner slopes -1.5 at M_star ~ 10^5 Msun to 0/-0.4 at ~10^8; core formation begins above ~10^6 Msun; **unmodified NFW over-predicts cored central density by 2-3 sigma**.
 
 **2026-10-27 — option-2 body-leaning set added** (14 papers; see registry §7.9). These are the
 papers the PAPER BODY actually leans on, downloaded because §8's rule requires a local PDF +
@@ -83,6 +94,17 @@ Sweep intake is now CLOSED: all 21 candidates adjudicated (4 Tier-1 + 17 Tier-2)
 
 The remaining items in `to_verify/` are pre-sweep historical papers (Adén 2009, Simon 2011, Tulin+ 2013, etc.) with their own pending status.
 
+**2026-11-09 — intake from the user's "Useful papers.docx" (8 papers; citation defects in registry §7.11):**
+
+- [[9611107 Navarro+FrenkWhite 1997]] — A Universal Density Profile from Hierarchical Clustering, ApJ 490, 493-508, DOI 10.1086/304888 — **the profile the paper uses 49× with no citation** (defect D3)
+- [[9508025 Navarro+FrenkWhite 1996]] — The Structure of Cold Dark Matter Halos, ApJ 462, 563, DOI 10.1086/177173 — abstract-level only (1995 scan has a damaged text layer)
+- [[2411.11945 Tran+ 2024/2026]] — Novel density profile for isothermal cores (T25), PRD 113(6) — profile-family caveat on any fitted-concentration claim
+- [[2512.15869 Despali+ 2026]] — AIDA-TNG profiles & concentrations, A&A **708, A47** — SIDM1/vSIDM Einasto concentrations sit BELOW CDM at all masses; draft's audit file has the wrong venue (defect D1)
+- [[2002.02102 Yang+Yu+An 2020]] — SIDM origin of NGC1052-DF2/-DF4, PRL 125, 111105 — CDM needs c_200 = 4 (4σ below the c-M median); SIDM repairs it. Closest published analogue of the Cloud-9 7σ→3σ argument
+- [[2403.11403 Zhang+Bi+Yin 2024]] — tidal DF2 by SIDM, unrefereed — dwarf σ/m band 0.3-10.2, benchmark 5.0, max 13.0 cm^2/g
+- [[2607.08818 Sarrato-Alós+ 2026]] — MW satellite density profiles, accepted A&A — unmodified NFW over-predicts cored dwarfs' central density by 2-3σ
+- [[9703057 Burkert 1997]] — review, "Observation versus theory" — stand-in for reading; Burkert 1995 (ApJ 447, L25, DOI 10.1086/309560) has **no arXiv preprint** (KB exception, see §7.5)
+
 **Known gap (CLOSED 2026-10-27):** option 1 has been run — `fetch_all_cited_papers.sh`
 downloads the FULL 42-slot bibliography, so every cited paper now has a local PDF.
 Re-download with `bash docs/papers/fetch_all_cited_papers.sh`.
@@ -123,6 +145,10 @@ Balberg, Shapiro & Inagaki 2002 (astro-ph/0110561, named 11×) and [19] Fischer 
 - [[Adén+ 2009 Hercules]] — ApJL 706, L150 — likely thesis-only
 
 ## Bug history (papers with corrected citations)
+- 2026-11-09: `AUDIT_REFERENCES.md` had AIDA-TNG profiles as "A&A 699, A222 (2026)" — actual **A&A 708, A47** (2026-03-26); 699/A222 is a different paper ("Detecting low-mass haloes with strong gravitational lensing"). "Introducing the AIDA-TNG project" was listed as MNRAS 2024 — actual **A&A 697, A213** (2025). See registry §7.11 D1-D2.
+- 2026-11-09: NFW 1997 DOI recorded as 10.1086/309191 and NFW 1996 as 10.1086/176418 — **both wrong, recalled from memory**; resolved to 10.1086/304888 and 10.1086/177173 via Crossref. See registry §7.11 D7.
+- 2026-11-09: registry §7.5 claimed Burkert 1995 was "cited but no local PDF" — the draft cites no Burkert at all (registry D4).
+- 2026-11-09: three arXiv links in the user's "Useful papers.docx" point at unrelated papers (astro-ph/9810021, astro-ph/0403457, astro-ph/9508181). See registry §7.11 D5.
 - v40.4: 2305.16176 (wrong) → 2305.05067 (correct) for Yang+ 2024 gravothermal
 - v40.6: fabricated verbatim quote attributed to 2605.00093 (corrected in v40.11)
 - v40.6: 2510.05682 with wrong A&A id (corrected in v40.11)

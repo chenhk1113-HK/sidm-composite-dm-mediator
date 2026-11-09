@@ -1,0 +1,1223 @@
+Novel density profile for isothermal cores of dark matter halos
+Vinh Tran ,1 Xuejian Shen ,1 Mark Vogelsberger ,1 Daniel Gilman ,2
+Stephanie O’Neil ,3, 4 Cian Roche ,1 Oliver Zier ,5 and Jiarun Gao 6
+1Department of Physics and Kavli Institute for Astrophysics and Space Research,
+Massachusetts Institute of Technology, Cambridge, MA 02139, USA∗
+2Department of Astronomy & Astrophysics, University of Chicago, Chicago, IL 60637, USA
+3Department of Physics & Astronomy, University of Pennsylvania, Philadelphia, PA 19104, USA
+4Department of Physics, Princeton University, Princeton, NJ 08544, USA
+5Center for Astrophysics, Harvard & Smithsonian, 60 Garden St, Cambridge, MA 02138, USA
+6University of Rochester, 500 Joseph C Wilson Blvd, Rochester, NY 14627, USA
+(Dated: March 13, 2026)
+We present a novel analytic density profile for halos in self-interacting dark matter (SIDM) mod-
+els, which accurately captures the isothermal-core configuration, i.e. where both the density and
+velocity dispersion profiles exhibit central plateaus in the halo innermost region. Importantly, the
+profile retains a simple and tractable functional form. We demonstrate analytically how our density
+profile satisfies the aforementioned conditions, with comparisons to other contemporary functional
+choices. We further validate the profile using idealized N-body simulations, showing that it provides
+excellent representations of both the density and velocity dispersion profiles across a broad range
+of evolutionary stages, from the early thermalization phase to the late core-collapse regime. As a
+result of its accuracy and simplicity, the proposed profile offers a robust framework for analyzing
+halo evolution in a variety of SIDM scenarios. It also holds practical utility in reducing simulation
+needs and in generating initial conditions for simulations targeting the deep core-collapse regime.
+I. INTRODUCTION
+Despite the success of the ΛCDM (cosmological con-
+stant Λ plus collisionless cold dark matter, CDM) model
+in explaining the large-scale structure of the universe [e.g.
+1, 2], challenges remain in matching simulations to obser-
+vations of small-scale structures [e.g. 3, 4]. For example,
+many dwarf galaxies exhibit kpc-size cores in contrast
+to the universal cuspy density profiles seen in CDM-only
+simulations (core-cusp problem) [e.g. 5, 6]. The dwarf
+spheroidal galaxies in the Local Group are found to be
+systematically less dense compared to the subhalos in
+CDM-only simulations (the too-big-to-fail problem) [e.g.
+7]. Although stellar feedback processes have been shown
+to alleviate these tensions [e.g. 8, 9], a population of com-
+pact dwarf galaxies is missing in simulations of CDM
+(plus baryons) that can produce DM cores [e.g. 10]. The
+diversity problem of dwarf galaxy structures is still a chal-
+lenge for the CDM framework [e.g. 11, 12].
+Self-interacting dark matter (SIDM) is an important
+class of DM models that serves as an alternative to CDM
+and is well motivated by hidden sector models beyond the
+standard model [e.g. 13–15]. SIDM provides promising
+solutions to many small-scale problems (see [16] for a re-
+view). In most cases, DM self-interactions are considered
+elastic for simplicity and will be the main focus of this pa-
+per, although inelastic DM self-interactions have raised
+some attention recently [e.g. 17–21]. The elastic colli-
+sions between DM particles result in the thermalization
+of the inner part of the halo and lead to the formation of
+∗ vinhtran@mit.edu
+cores [e.g. 22–24], which could explain the core-cusp and
+the too-big-to-fail problems. Meanwhile, the sensitivity
+of SIDM halo structure to halo concentration and baryon
+dominance results in more diverse rotation curves com-
+pared to the CDM case and is more aligned with observa-
+tions [e.g. 11, 12, 25]. In recent years, SIDM models with
+very large self-interaction cross sections at lower velocity
+ranges have gained popularity. It has implications for
+the diversity problem of dwarf galaxy structures and the
+dense compact substructures of galaxy clusters found in
+strong gravitational lensing observations [e.g. 26]. In this
+regime, the efficient heat conduction and the negative
+heat capacity of the SIDM halo result in gravothermal
+collapse [e.g. 27–29], originally discussed in the context
+of globular clusters, e.g. [30].
+Following the initial thermalization phase and
+throughout the gravothermal collapse process, until
+reaching the short-mean-free-path regime when heat con-
+duction is only effective at the surface of the core,
+the halo core exhibits self-similarity in both the den-
+sity and velocity dispersion profiles. That is, through-
+out its evolution, the halo profiles can be characterized
+by specific values of scale density, radius, and veloc-
+ity dispersion. This behavior has been well described
+theoretically [e.g., 29] and confirmed in simulations for
+both velocity-independent and velocity-dependent self-
+interacting cross sections [e.g., 31, 32]. In addition, when
+these scale quantities are normalized by their initial val-
+ues (or by the corresponding NFW values), and time is
+rescaled by a collapse timescale (inversely proportional to
+the self-interaction cross section), the evolution of halos
+with different parameters would become almost identi-
+cal. Such universality, discussed and observed in [33],
+as well as the aforementioned self-similar natures, pro-
+arXiv:2411.11945v4  [astro-ph.CO]  12 Mar 2026
+2
+vide the foundation for adopting particular functional
+forms to describe the density structure of halos. In this
+self-similar regime, the halo core develops characteristic
+plateaus in both the density and velocity dispersion pro-
+files. The emergence of a central plateau in the density
+profile, commonly referred to as the “core configuration”,
+is a key feature of SIDM models and is instrumental in
+addressing the core-cusp problem, as discussed above. In
+this context, we also define the “isothermal-core config-
+uration” as a state in which both the density and veloc-
+ity dispersion remain approximately constant within the
+central region of the halo. Such behaviors of SIDM have
+been found in cosmological and isolated N-body simula-
+tions [e.g. 22–24, 32, 34]. In the outer regions of the halo,
+however, the number density and velocity dispersion of
+DM particles are significantly smaller than in the core, re-
+sulting in negligible scattering interactions over the age
+of the Universe. As a consequence, the density profile
+asymptotically approaches the NFW profile [35, 36] com-
+monly observed in CDM.
+To characterize the properties of DM halos in simula-
+tions, it is common to fit the density profiles with certain
+functional choices based on the core configuration [e.g.
+32, 37–41]. Efforts to derive analytical density profiles
+based on the isothermal-core configuration have also been
+made, either by enforcing the isothermal condition in the
+Jeans equation [e.g. 25, 42, 43] or within the more com-
+plex gravothermal fluid formalism [e.g. 32]. However, de-
+spite the advantage of directly capturing the isothermal
+core and being robust in accommodating baryonic con-
+figurations, these profiles lack a closed-form functional
+expression. Here, we introduce a novel functional form
+for the density profile that provides a close approxima-
+tion to the isothermal-core configuration. Section II de-
+tails the different contemporary density profiles, as well
+as the motivation and derivation of our profile. We also
+examine the analytical behavior of each density profile
+and the corresponding velocity dispersion profiles. Sec-
+tion III inspects the fitting and reconstructing results of
+the profiles in the context of isolated N-body simulations.
+We conclude the investigation with a summary in Section
+IV and discuss potential further applications of the pro-
+files in future SIDM studies.
+II. ANAL YTICAL DENSITY PROFILES
+A. Core density profiles
+In this section, we will review several existing analyti-
+cal density profiles proposed for a cored DM distribution.
+The physical driver for coring is usually at the center of
+the DM halo, so these profiles should all transition to the
+NFW profile at large radii. The NFW profile represents
+a universal scale-invariant stable configuration of halos in
+the CDM model observed in cosmological N-body simu-
+lations, following
+ρNFW(r) = ρs
+(r/rs) (1 +r/r s)2 ,(1)
+where,ρ s andr s are the scale density and radius. Here,
+ris the spherical radial coordinate. This profile exhibits
+a cuspy central density, with steep divergence asrap-
+proaches 0. To instead describe the core configuration,
+a common approach is to modify the NFW profile with
+a function that flattens the density at small radii but
+maintains convergence to the NFW profile at large radii.
+A density profile that utilizes one such approach is the
+Robertson-Fischerρ R17−F24 profile [38, 39]
+ρ∗
+R17−F24(r) = ρc
+
+1 + (r/rc)β
+1/β
+(1 +r/r ′s)2
+,(2)
+withβ∈[2; 4] 1. This power-law, often fixed and taking
+the value ofβ= 4, results in the density profile that con-
+verges almost perfectly to the NFW profile for all radii
+larger than the core radius.ρ c andr c represent the char-
+acteristic core density and radius, respectively.r ′
+s is a
+scale radius, characterizing the NFW tail. The prime
+symbol is used to distinguish this parameter from the
+initial NFW scale radiusr s. Althoughr ′
+s is similar in
+nature, it should not be confused withr ′
+s.
+As an alternative toρ R17−F24, the Read profileρ R16
+approximates the enclosed mass profiles of cored halos as
+MR16(r) =M ′
+NFW(r) tanh (r/rc),(3)
+whereM ′
+NFW (r) is the NFW mass profile derived from
+the corresponding NFW scale densityρ ′
+s and scale ra-
+diusr ′
+s
+2. The characteristic core densityρ c of the Read
+profile can be recovered asρ c = 1.5ρ ′
+sr′
+s/rc. It must be
+noted here that the scale density and radius of the Read
+and other profiles (indicated by the prime notation to be
+distinguished from the NFW profile parameters) are not
+necessarily the same as the initial NFW profile parame-
+ters, with their values changing throughout the evolution
+of the halo.
+For the Robertson-Fischer and Read profiles, when
+the condition ofr c ≪r ′
+s is satisfied, the density profile
+asymptotically approach a power-law ofρ∼r −n in the
+intermediate region ofr c ≪r≪r ′
+s. Here,nis the tran-
+sition index, taking the value ofn= 1. This index con-
+trols the steepness of the transition between the constant-
+density core (ρ∼const) and the NFW tail (ρ∼r −3),
+even in the case ofr c ∼r ′
+s, where intermediate region be-
+comes ill-defined. It has been demonstrated in [29] that in
+1 Similar functional forms are also utilized in [40, 41] among others.
+2 Originally, the Read profile was used to characterize the baryon-
+induced flat core of DM halos, with an additional exponentαin
+the tanhα (r/rc) term, controlling the core flatness. However, it
+has also been used in the context of SIDM as a convenient fitting
+function [e.g. 25, 32, 40].
+3
+Density ProfileN DOF Functional Formρ(r c < r < r′
+s)r ρ/2(rc ≪r ′
+s)
+ρR16 3ρ c 2
+3(r/r′s)
+2
+∂
+∂r/r c
+h
+tanhr/r c
+
+lnr/r ′
+s −
+r/r′
+s
+1+r/r′s
+ i
+ρ∝r −1 rc tanh−1 0.75
+ρR17−F24 4ρ c
+h  
+1 + (r/rc)4n/4
+(1 +r/r ′
+s)3−n
+i−1
+ρ∝r −n rc
+
+24/n −1
+1/4
+ρY23 4ρ c
+h
+1 + (r/rc)n (1 +r/r ′
+s)3−n
+i−1
+ρ∝r −n rc
+ρT25 4ρ c
+
+tanhr/r c
+r/rc
+n h 
+1 + (r/r′
+s)2
+(3−n)/2 i−1
+ρ∝r −n rcf −1(0.51/n)
+TABLE I. Summary of analytical density profiles. The profile parameters (detailed further in the text)β= 4, andγ= 2 are
+fixed forρ R16,ρ R17−F24, andρ T25, respectively.N DOF is the number of DOF in the different profiles.ρ(r c < r < r′
+s) and
+rρ/2(rc ≪r ′
+s) show the behaviors of the density profiles in the intermediate region and the approximated core half-density radii,
+respectively. For our density profile (ρ T25), we definef(x) = tanhx/x.
+the gravothermal fluid formalism, a self-similar solution
+for SIDM halos can be found in whichn= 2.19, pro-
+vided the collisional mean free path is much larger than
+the gravitational scale height. This is very similar to the
+value ofn≃2.5 observed in simulations (as observed in
+Section III B). However, we find that this is a difficult
+constraint. These values, which can also vary through-
+out the halo evolution, as detailed later in Section III B,
+are significantly different from the value ofn= 1 taken
+by the Read and Robertson-Fischer approaches. Thus,
+modifications or alternative forms of density profiles are
+necessary. Accommodating this variation requires the
+Robertson-Fischer profile to increase the number of de-
+grees of freedom (DOF), taking the form
+ρR17−F24(r) = ρc
+
+1 + (r/rc)β
+n/β
+(1 +r/r s)3−n
+.(4)
+On the other hand, we keep the functional form of the
+Read profile, since the initial construction of it involves
+the NFW mass profile and is more difficult to modify.
+Another straightforward approach to approximating
+the core configuration is the Yang profileρ Y23 [32], which
+utilizes a triple power-law to represent the dark matter
+halo structure,
+ρY23(r) = ρc
+1 + (r/rc)n (1 +r/r s)3−n ,(5)
+wherenis originally set ton= 2.19. However, here we
+allownto vary as a free parameter.
+The majority of the evolution of an SIDM halo stays in
+the long mean free path (LMFP) limit, where the mean
+free path of SIDM is much larger than the gravitational
+scale height of the system. A self-similar solution of the
+density profile has been found in this regime [e.g. 29, 30].
+One indication of such behavior is the similarity in tran-
+sitional behavior across different epochs, as evidenced by
+the stability ofnthroughout the halo evolution. This
+suggests that measuringnis more informative than as-
+suming fixed values when probing self-similarity.
+Additionally, we note that while the core densityρ c
+retains a consistent physical meaning across the Read,
+Robertson-Fischer, and Yang profiles, the interpretations
+of the core radiusr c differ. This is a result of the differ-
+ent functional forms of the profiles. To facilitate a more
+meaningful comparison of core sizes across different pro-
+files, we introduce a new parameterr ρ/2, the core half-
+density radius, defined as the radius at which the halo
+density falls to half the value ofρ c. Typically,r ρ/2 scales
+linearly withr c, with the proportionality factor deter-
+mined by the value ofn(as well asr ′
+s whenr c ∼r ′
+s).
+A summary of the mapping betweenr c andr ρ/2 in the
+rc ≪r ′
+s regime is presented in Table I.
+B. Isothermal-core density profile
+Although the aforementioned profiles capture the
+cored mass distribution of DM halos, they were not de-
+signed to reproduce the kinematic structure of SIDM ha-
+los. The velocity dispersion profiles they produce often
+deviate significantly from simulations and the isothermal-
+core configuration, which requires a constant velocity dis-
+persion in the core.
+To construct a density profile that satisfies the
+isothermal-core configuration, we start from the Jeans
+equation [e.g. 25, 42, 43]
+∂
+∂r
+h
+ρ(r)σ2
+1D(r)
+i
+=−ρ(r) ∂Φ(r)
+∂r ,(6)
+where we assume spherical symmetry and isotropy.
+Considering only dark matter, the gravitational poten-
+tial term can be written as∂Φ(r)/∂r=GM(r)/r 2,
+withM(r) as the enclosed mass profile, obtained from
+4
+∂M(r)/∂r= 4πr 2ρ(r).3 The one-dimensional velocity
+dispersionσ 1D is taken to be constant within a speci-
+fied radius, beyond which the profile transitions to an
+NFW form. This method is relatively accurate and can
+accommodate adiabatic contractions caused by baryons.
+However, no closed-form expression exists for the den-
+sity profile calculated from this approach, as it neces-
+sitates numerical calculations and a more complicated
+boundary-stitching procedure [25].
+As our goal is to arrive at an analytical density pro-
+file that closely satisfies the isothermal-core configuration
+while maintaining a well-defined functional form, we take
+a similar but slightly more simplistic approach. First and
+foremost, we require our density profile to exhibit simi-
+lar behaviors to the profiles detailed in Section II A, that
+is: having a radius-independent density at lower radii, a
+transition index ofnin the intermediate region, and a
+power-law ofr −3 similar to the NFW profile at the halo
+edge. In agreement with simulation results, we assume
+a constant core velocity dispersionσ c within the region
+ofr≲r c, leading to the following dimensionless set of
+equations
+∂ ¯M(¯r)
+∂¯r = ¯r2 ¯ρ(¯r),(7)
+∂¯ρ(¯r)
+∂¯r =− 1
+I
+¯ρ(¯r)¯M(¯r)
+¯r2 ,(8)
+with, ¯r=r/r c, ¯ρ(¯r) =ρ(r)/ρ c, andρbeing our de-
+sired density profile. Here, ¯M(¯r) =M(r)/4πr 3
+c ρc and
+I=σ 2
+c /4πGρcr2
+c . This parameterIcan be interpreted
+as a characteristic core kinetic-to-gravitational (K–G) ra-
+tio under the isothermal-core assumption, which can be
+calculated from ¯ρas
+I= −¯ρ3¯r
+2¯ρ ∂¯ρ/∂¯r−¯r(∂¯ρ/∂¯r)2 + ¯r¯ρ ∂2 ¯ρ/∂¯r2 .(9)
+For the assumption of a constant core velocity dispersion
+σc to hold, the parameterImust remain independent of
+radius. Here, we make two additional assumptions. First,
+we assume thatr c ≪r ′
+s, which allows us to simplify the
+functional form to a constant-density core transitioning
+to a slope ofnat larger radii. Second, we assume that
+ifI∼const up to orderO(¯r 2), thenIremains approx-
+imately radius-independent throughout the majority of
+the halo core. As detailed in Appendix A, this is satis-
+fied by the functional form of
+ρ(r) =ρ c
+ tanhr/r c
+r/rc
+n
+.(10)
+Including the necessary modifications to satisfy the den-
+sity structure requirement of the NFW tail, we introduce
+3 More complicated systems involving both baryonic and dark
+matter would require treatments utilizing Poisson’s equation.
+our density profileρ T254
+ρT25(r) =ρ c
+ tanhr/r c
+r/rc
+n 1
+(1 + (r/rs)γ)(3−n)/γ .(11)
+Here,γfunctions similarly to the nuisance parameterβin
+the Robertson-Fischer profile, in that they both control
+the sharpness of the core. We find that the best results,
+i.e., where the velocity dispersion of the halo core least
+depends on the radius, are provided byγ≥2 with the
+detailed explanation presented in Appendix A. We fix
+γ= 2 for the remainder of our analysis. Similar adjust-
+ments can also be made for other profiles. However, we
+find that such modifications have no significant effect on
+the quality of the profile fits to simulations, nor on the
+agreement between the reconstructed velocity dispersion
+profiles and the desired isothermal-core configuration.
+From Equation A9 and the definition ofI, we also
+retrieve the core velocity dispersion of our profile
+˜σc,T25 =
+s
+4πGρcr2c
+2n+ 3 (3−n) (r c/r′s)2 .(12)
+The tilde denotes that the expression serves as an approx-
+imation; a more accurate value can be obtained by aver-
+aging the reconstructed velocity dispersion profile within
+the core radius. Nevertheless, the deviation between the
+two approaches is typically of the order of 1%. Typically,
+nis close to 3 andr c ≪r ′
+s, causing the second term in
+the denominator to become negligible. Forn≃2.5, the
+core half-density radius also satisfiesr ρ/2 ≃r c. Table I
+summarizes the characteristics of the analytical density
+profiles under inspection.
+C. Analytical characteristics of density profiles
+Figure 1 shows the Read density profile (ρ R16), the
+modified Robertson-Fischer profile (hereafter referred to
+as the Robertson-Fischer profile;ρ R17−F24), the Yang
+profile (ρ Y23), and the profile proposed and studied in
+this work (ρ T25). Densities are normalized as ¯ρ=ρ/ρ c
+and shown as functions of the normalized radius ¯r=r/rc.
+We show density profiles with three choices of edge-core
+ratios,r ′
+s/rc = 3,10,30, and three choices of the tran-
+sition index,n= 1,1.75,2.5. As expected, all profiles
+show similar morphology by construction, except for the
+Read profile being limited by its DOFs. In both the Yang
+profile and our profile, we find that the same values ofn
+produce similar density profiles despite the variation of
+r′
+s. This persists even in the regime wherer c ∼r ′
+s for
+sufficiently high values ofn∼2.5, indicating a dominant
+role ofnin determining the transition between the halo
+4 We note that our profile closely resembles the one employed
+in [44], as both adopt the tanhr/rfunctional approach.
+5
+FIG. 1. The density profiles of the Read (top left), Robertson-Fischer (top right), Yang (bottom left), and our (bottom right)
+profiles. Densities and radii are scaled with the characteristics core densityρ c and core radiusr c. Each profile family is shown
+with three choices ofr s/rc = 3,10,30 (in pink, green, and blue) and three choices ofn= 1,1.75,2.5 (in dotted, dashed, and
+solid lines). The choice ofnis not relevant in the context of the Read profile.
+FIG. 2. The velocity dispersion profiles reconstructed from the density profiles presented in Figure 1 using the spherically
+symmetric Jeans equation (Equation 6). Velocity dispersions and radii are scaled with
+p
+G ρc r2c andr c, respectively. Again,
+the Read (top left), Robertson-Fischer (top right), Yang (bottom left), and our (bottom right) profiles are shown with three
+choices ofr s/rc = 3,10,30 (in pink, green, and blue), as well as three choices ofn= 1,1.75,2.5 (in dotted, dashed, and solid
+lines) for the relevant profiles. The sub-panels present a zoomed-in view of the velocity dispersion profiles within the expected
+isothermal region of the corer≲3r c.
+6
+core and the outer edge. Such a behavior is not observed
+in the Robertson–Fischer profile, even for ther c ≪r ′
+s
+regime.
+Figure 2 shows the normalized one-dimensional veloc-
+ity dispersion profiles ¯σ1D =σ 1D/
+p
+G¯ρc¯r2c reconstructed
+from Figure 1’s density profiles using the spherically sym-
+metric Jeans equation (Equation 6). The sub-panels dis-
+play the velocity dispersion profiles in linear scale, with
+a zoomed-in focus on ther≲3r c region, where the pro-
+file is expected to exhibit isothermal behavior. For the
+Robertson-Fischer and Yang profiles, the velocity disper-
+sion profiles with higher values ofntend to approach the
+isothermal-core configuration in the innermost region of
+r≪r c, albeit with relatively abrupt core transitions. In
+contrast, our profile exhibits smoother transitions across
+parameter choices, with the velocity dispersion remaining
+nearly constant throughout the core, indicating a closer
+approximation to the isothermal-core configuration.
+III. APPLICA TION TO SIDM HALOS IN
+SIMULA TIONS
+A. Simulation data & analysis
+In this section, we will assess the density profiles in
+the context of numerical simulations. Here, we use the
+high-resolution N-body simulations of isolated SIDM ha-
+los evolved under velocity-independent cross sections pre-
+sented in [45] and [46]. Each halo contains 3×10 7 DM
+particles within the virial radius (r 200) and is initialized
+with the NFW configuration as detailed in [45]. More
+detailed information of the simulations is provided in Ap-
+pendix B.
+The particle counts within each simulation snapshot
+are measured using 100 log-spaced radial bins from
+0.01r s to 3r 200, i.e. from around the value of the grav-
+itational softening length to the largest sampling radius
+of the initial conditions at snapshot 0. The data are
+then further processed by merging shells with low par-
+ticle counts and keeping only those within the virial ra-
+dius. This is to avoid the strong exponential cut-off for
+r > r200 configured in the initial conditions [45]. We
+limit the number of DM particles per shell to at least
+400, ensuring a minimum signal-noise ratio (SNR) of 20.
+To directly measure the core densityρ core and veloc-
+ity dispersionσ core for each snapshot, we start from the
+first radial biniwith the cumulative particle count of
+Ni ≥N min. For the core density, we chooseN min = 103,
+while for the core velocity dispersion,N min = 104. These
+choices are empirical and depend primarily on the simu-
+lation resolution. From the radial bini, the cumulative
+average density ¯ρi ±∆¯ρi is calculated. Comparing this
+to the density of the following radial binρ i+1 ±∆ρ i+1,
+if|¯ρi −ρ i+1| ≥
+ 
+∆¯ρ2
+i + ∆ρ2
+i+1
+1/2
+, take ¯ρi as the core
+densityρ core, else, consider the radial bini+ 1 and re-
+peat. For the core velocity dispersionσ core, we repeat
+the same process using the one-dimensional velocity dis-
+persion profileσ 1D(r). For improved statistics, we also
+utilize a Monte Carlo (MC) approach, perturbing the
+density and one-dimensional velocity dispersion profiles
+according to their uncertainties, generating a set of sam-
+ples. We then repeat the aforementioned process for the
+values ofρ core andσ core in each sample. The final results,
+derived from the distributions of sampled values, are con-
+sistent with those obtained directly from the original sim-
+ulation configurations. The core half-density radiusr ρ/2
+is obtained using a similar MC method.
+To fit these sampled density structures using the ana-
+lytical profiles detailed in Section II, we utilize the least-
+squares method in log space, minimizing the residual sum
+of squares (RSS)
+χ2(θ)∝
+X
+i
+
+logρ i −log ˆρi(ρc, rc, r′
+s, n)
+2
+.(13)
+Here,ρ i and ˆρi(θ) are the density within radial biniand
+its expected value calculated from the analytical profile.
+The approach here is equivalent to taking the maximum
+likelihood approach, assuming the SNR of the density
+measurements remains constant across radial bins. This
+is typically untrue, as the SNR of the density measure-
+ment depends on the number of particles within each
+radial bin, which can vary by orders of magnitude. How-
+ever, we want to prioritize the fitting of the halo core and
+can accept a reasonably good description of the density
+profile (with the enforced minimum SNR of 20) rather
+than a statistically exact solution 5. To account for the
+statistical fluctuation of the density measurements, we
+employ a similar MC method as detailed above, i.e., per-
+turbing the density profile and analyzing the resulting
+parameter distributions.
+B. Fitting results
+For the following analysis, we focus on the halo of mass
+108 M⊙ evolved under the cross section of 21.94 cm2 g−1.
+This system will be referred to as the main halo through-
+out the discussion. We scale all radii, densities, and ve-
+locity dispersions withr s,ρ s, andσ s =
+p
+G ρs r2s , while
+times are scaled with the collapse timescaleτ, defined in
+Equation 2.2 of [40] as
+τ(σ eff /m) = 150
+C
+1
+σeff /m
+1
+ρs
+ 1
+4π σ2s
+1/2
+.(14)
+5 Another choice of RSS can be found in [39], where the fitting
+criterion takes into account the Poisson statistics in isolated N-
+body simulations. This typically leads to the algorithm priori-
+tizing fitting the outer region over the core, which is not ideal
+for the investigation of core collapse. The deviations of the re-
+sults between the two choices of RSS are not significant, except
+in the values ofr ′
+s or when the halos are deep into core collapse
+atT≳0.8τ.
+7
+FIG. 3. The density profile fits (left) and reconstructed one-dimensional velocity dispersion profiles (right) at three different
+snapshots for the halo of mass 10 8 M⊙ evolved under the cross section of 21.94 cm 2 g−1. The first snapshot,T≃0.02τ(top),
+corresponds to the earliest phase of core formation. The second,T≃0.45τ(middle), represents a typical snapshot during
+core collapse, while the final snapshot,T≃0.94τ(bottom), shows the halo deep into core collapse, during the gravothermal
+catastrophe. The scatter points and associated error bars represent measurements obtained from N-body simulations. The
+uncertainties for the density profile are derived from Poisson statistics, while the uncertainties in the velocity dispersion
+are quantified as the standard error of the standard deviation of the one-dimensional particle velocities. The fitted and
+reconstructed profiles for the Read (orange), Robertson-Fischer (purple), Yang (cyan), and our (pink) profiles are shown in
+solid lines. The dashed lines represent the initial NFW configuration for the halo of interest. The horizontal red and blue lines
+(and corresponding shaded areas) display the directly measured core densityρ core and velocity dispersionσ core, respectively.
+In the current picture,C=O(1) often takes the value of
+C≃0.75 to match the results of fluid models [e.g. 17, 32,
+33] and N-body simulations [e.g. 17, 19, 47, 48]. Here,
+we use the value ofC≃0.85 in order to approximateτ
+as the onset of the gravothermal catastrophe, i.e. when
+the core density and velocity dispersion rapidly diverge
+while the core radius (and mass) vanishes.
+Figure 3 shows the density profile fits and the recon-
+structed one-dimensional velocity dispersion profiles for
+three different snapshots of the main halo. The first snap-
+shot,T≃0.02τ, corresponds to the earliest phase of core
+formation. The second,T≃0.45τ, represents a typi-
+cal snapshot during core collapse, where self-similarity is
+most relevant. The results for this snapshot are represen-
+tative of the halo’s behavior within the time interval of
+T≃0.05–0.85τ. The final snapshot,T≃0.94τ, shows
+the halo during the gravothermal catastrophe. The den-
+sity profiles from each snapshot are fitted using the Read,
+Robertson–Fischer, Yang, and our profiles. Correspond-
+ing velocity dispersion profiles are then reconstructed
+based on the fitted parameters using the spherically sym-
+metric Jeans equation (Equation 6). For reference, the
+directly measured core densityρ core and velocity disper-
+sionσ core are also displayed. We find that our profile and
+the Yang profile generally provide good fits to the halo
+density structures, while the Read profile deviates signif-
+8
+FIG. 4. Comparisons between direct measurements (shaded
+areas) and fitted parameters using our density profileρ T25
+(black lines) for the core densityρ c (top, left y-axis), core
+half-density radiusr ρ/2 (top, right y-axis), and core velocity
+dispersionσ c (bottom) in the halo of mass 10 8 M⊙ evolved
+under the cross section of 21.94 cm2 g−1. The direct measure-
+ments are displayed with uncertainties, while the fitting errors
+of the parameters are negligible and therefore not shown.
+icantly after the earliest snapshots. This becomes more
+apparent in the logarithmic slope presented in Figure
+6. Additionally, although the Robertson–Fischer profile
+provides a reasonable fit during the earlier evolutionary
+stages, it fails to accurately capture the density struc-
+ture’s behavior in the later phases of core collapse. The
+Yang profile and our profile yield notably similar results
+in fitting the density structures, with only minor devia-
+tions observed in the constant-density cores and the inter-
+mediate transition regions, i.e., the regions where density
+starts to decrease. However, these small deviations result
+in very different behaviors in the velocity dispersion pro-
+files, most clearly seen in the middle panel of Figure 3,
+with only our profile closely matching simulations and
+maintaining consistency with the isothermal-core config-
+uration. It should be noted, nonetheless, that even our
+profile exhibits slight deviations from the simulated ve-
+locity dispersion aroundr s. The underlying reason can
+be inferred from the deviations in the logarithmic slope,
+which also indicate that achieving a more accurate recon-
+struction of the velocity dispersion profile would require
+adopting a more complex functional form with additional
+degrees of freedom. The exceptions for the general good-
+ness of fit observation occur only at the earliest snap-
+FIG. 5. The evolutions of the fitted transition indexn(top)
+and scale radiusr ′
+s (bottom) for the Robertson-Fischer (pur-
+ple), Yang (cyan) and our (pink) density profiles. Each data
+point corresponds to a single snapshot from an individual
+halo. All simulated halos are included in the figures. The
+dashed horizontal line represents a constant value ofn= 2.5,
+observed throughout most evolutionary stages in both the
+Yang and our profiles.
+shots, where the Yang and other profiles provide a better
+description of the velocity dispersion structures, and at
+the later stages of core collapse, where none of the profiles
+can accurately capture the isothermal core.
+Figure 4 compares the directly measured values of core
+density, half-density radius, and velocity dispersion with
+those inferred from fitting using our density profile. The
+direct measurements are shown with associated uncer-
+tainties, while the inferred values are displayed without.
+This is due to the negligible fitting errors, calculated us-
+ing the bootstrapping approach detailed in Section III A.
+We observe that the values remain generally consistent,
+even during the early stages of core formation, and con-
+tinue to hold up as the system approaches the gravother-
+mal catastrophe. This is as expected with the perfor-
+mance of the density profile fits and the velocity disper-
+sion reconstructions discussed above.
+Given that both the Yang profile and our profile per-
+form well in representing the density structure of halos
+across different evolutionary stages, resulting in similar
+values ofρ c andr ρ/2, it is of particular interest to ex-
+amine the evolutions of the transition indexnand the
+scale radiusr ′
+s over time. Figure 5 presents these evo-
+lutionary trends, along with the corresponding param-
+eter evolution derived from the Robertson-Fischer pro-
+file. In both the Yang profile and our profile, we observe
+9
+that the transition indexnevolves rapidly from an ini-
+tial value ofn= 1, characteristic of the NFW profile, to
+approximatelyn≃2.5, where it remains relatively sta-
+ble throughout the majority of the halo’s evolution. As
+discussed in Section II A, this behavior is indicative of
+the preservation of self-similarity during the evolution-
+ary process. This relative stability ofnis in contrast to
+the evolutions of the scale radiusr ′
+s, which vary signif-
+icantly across epochs. Such deviations may stem from
+limitations in the density profile fitting, where variations
+inr ′
+s compensate for the need to simultaneously fit both
+the core and the outer regions of the halo. Nevertheless,
+our density profile continues to exhibit a consistent and
+coherent evolution ofr ′
+s across different halos. On the
+other hand, the Yang profile shows significant scatter in
+the evolution ofr ′
+s, breaking self-similarity and displaying
+a lack of systematic behavior. Interestingly, unlike in the
+Yang or our profiles, the scale radius in the Robertson-
+Fischer profile retains the value of the initial NFW scale
+radius throughout a significant portion of the evolution-
+ary sequence. A similar behavior is also observed in the
+Read profile, which, although not shown, preserves this
+initial scale radius throughout the entire gravothermal
+collapse process.
+IV. CONCLUSIONS AND DISCUSSIONS
+In this work, we introduce a novel density profile for
+SIDM halos (Equation 11) that closely approximates the
+isothermality of the core. We show that this profile pro-
+vides a good representation of DM halos in SIDM models,
+while retaining the simplicity of an analytic functional
+form. We find that
+1. Analytically, halos with structure following our
+density profile possess close-to-flat velocity disper-
+sions extending to a few of the characteristic core
+radii (i.e. the typical size of the core region). This
+results in a close agreement with the isothermal-
+core configuration seen in the analytical self-similar
+solutions presented in [29, 30].
+2. The density structure fits performed with our den-
+sity profile result in high levels of stability and the
+best density profile fits to various simulation data.
+The core density and half-density radius inferred
+from the fitted profiles show strong agreement with
+the direct measurements from simulations. No-
+tably, the fitted values benefit from significantly
+lower uncertainties, estimated via statistical boot-
+strapping, compared to the uncertainties associated
+with direct measurements.
+3. The velocity dispersion profiles reconstructed from
+the density structure fits using our profile exhibit
+close agreement with simulation data, whereas
+those derived from other common functional forms
+fail to adequately capture the isothermal-core con-
+figuration.
+With the exception of the earliest stages of core for-
+mation and the late-time deep core collapse regime, our
+profile demonstrates a high level of agreement with simu-
+lation data. As a result of its ability to accurately repre-
+sent dark matter halos in self-similar scenarios, our pro-
+file serves as a promising tool for reducing reliance on
+computationally expensive SIDM simulations of velocity-
+independent cross section (VICS) models. The profile
+can act as a benchmark for comparisons between VICS
+and more complex interaction models using the empiri-
+cal formulae detailed in Appendix D. The resulting values
+of the transition indexn, derived from the density pro-
+file fits, may also serve as a diagnostic for self-similarity
+in more intricate SIDM models. Additionally, having a
+functional form also facilitates accurate and efficient cal-
+culations of the heat conductivity and luminosity struc-
+tures of DM halos (an example of which is shown in Ap-
+pendix E). Finally, initial conditions for simulations en-
+tering the deep core collapse regime may be constructed
+directly from our density profile, following the Eddington
+sampling procedure described in [45], thus mitigating the
+need to evolve halos from earlier epochs.
+ACKNOWLEDGMENTS
+We thank the anonymous referee for useful comments
+and suggestions. We thank Philip Harris for useful dis-
+cussions.
+[1] G. R. Blumenthal, S. M. Faber, J. R. Primack, and
+M. J. Rees, Formation of galaxies and large-scale struc-
+ture with cold dark matter., Nature311, 517 (1984).
+[2] M. Davis, G. Efstathiou, C. S. Frenk, and S. D. M. White,
+The evolution of large-scale structure in a universe dom-
+inated by cold dark matter, ApJ292, 371 (1985).
+[3] J. S. Bullock and M. Boylan-Kolchin, Small-Scale Chal-
+lenges to the ΛCDM Paradigm, ARA&A55, 343 (2017),
+arXiv:1707.04256 [astro-ph.CO].
+[4] L. V. Sales, A. Wetzel, and A. Fattahi, Baryonic solutions
+and challenges for cosmological models of dwarf galax-
+ies, Nature Astronomy6, 897 (2022), arXiv:2206.05295
+[astro-ph.GA].
+[5] R. A. Flores and J. R. Primack, Observational and The-
+oretical Constraints on Singular Dark Matter Halos, ApJ
+427, L1 (1994), arXiv:astro-ph/9402004 [astro-ph].
+[6] B. Moore, Evidence against dissipation-less dark mat-
+ter from observations of galaxy haloes, Nature370, 629
+(1994).
+[7] M. Boylan-Kolchin, J. S. Bullock, and M. Kapling-
+hat, Too big to fail? The puzzling darkness of mas-
+sive Milky Way subhaloes, MNRAS415, L40 (2011),
+10
+arXiv:1103.0007 [astro-ph.CO].
+[8] F. Governato, C. Brook, L. Mayer, A. Brooks, G. Rhee,
+J. Wadsley, P. Jonsson, B. Willman, G. Stinson,
+T. Quinn, and P. Madau, Bulgeless dwarf galaxies and
+dark matter cores from supernova-driven outflows, Na-
+ture463, 203 (2010), arXiv:0911.2237 [astro-ph.CO].
+[9] A. Pontzen and F. Governato, How supernova feedback
+turns dark matter cusps into cores, MNRAS421, 3464
+(2012), arXiv:1106.0499 [astro-ph.CO].
+[10] I. M. E. Santos-Santos, J. F. Navarro, A. Robertson,
+A. Ben ´ ıtez-Llambay, K. A. Oman, M. R. Lovell, C. S.
+Frenk, A. D. Ludlow, A. Fattahi, and A. Ritz, Baryonic
+clues to the puzzling diversity of dwarf galaxy rotation
+curves, MNRAS495, 58 (2020), arXiv:1911.09116 [astro-
+ph.GA].
+[11] K. A. Oman, J. F. Navarro, A. Fattahi, C. S. Frenk,
+T. Sawala, S. D. M. White, R. Bower, R. A. Crain,
+M. Furlong, M. Schaller, J. Schaye, and T. Theuns, The
+unexpected diversity of dwarf galaxy rotation curves,
+MNRAS452, 3650 (2015), arXiv:1504.01437 [astro-
+ph.GA].
+[12] M. Kaplinghat, M. Valli, and H.-B. Yu, Too big to fail in
+light of Gaia, MNRAS490, 231 (2019), arXiv:1904.04939
+[astro-ph.GA].
+[13] L. Ackerman, M. R. Buckley, S. M. Carroll, and
+M. Kamionkowski, Dark matter and dark radiation,
+Phys. Rev. D79, 023519 (2009), arXiv:0810.5126 [hep-
+ph].
+[14] N. Arkani-Hamed, D. P. Finkbeiner, T. R. Slatyer, and
+N. Weiner, A theory of dark matter, Phys. Rev. D79,
+015014 (2009), arXiv:0810.0713 [hep-ph].
+[15] F.-Y. Cyr-Racine and K. Sigurdson, Cosmology of
+atomic dark matter, Phys. Rev. D87, 103515 (2013),
+arXiv:1209.5752 [astro-ph.CO].
+[16] S. Tulin and H.-B. Yu, Dark matter self-interactions
+and small scale structure, Phys. Rep.730, 1 (2018),
+arXiv:1705.02358 [hep-ph].
+[17] R. Essig, S. D. McDermott, H.-B. Yu, and Y.-M. Zhong,
+Constraining Dissipative Dark Matter Self-Interactions,
+Phys. Rev. Lett.123, 121102 (2019), arXiv:1809.01144
+[hep-ph].
+[18] M. Vogelsberger, J. Zavala, K. Schutz, and T. R. Slatyer,
+Evaporating the Milky Way halo and its satellites with
+inelastic self-interacting dark matter, MNRAS484, 5437
+(2019), arXiv:1805.03203 [astro-ph.GA].
+[19] X. Shen, P. F. Hopkins, L. Necib, F. Jiang, M. Boylan-
+Kolchin, and A. Wetzel, Dissipative dark matter on FIRE
+- I. Structural and kinematic properties of dwarf galax-
+ies, MNRAS506, 4421 (2021), arXiv:2102.09580 [astro-
+ph.GA].
+[20] X. Shen, P. Hopkins, L. Necib, F. Jiang, M. Boylan-
+Kolchin, and A. Wetzel, Dissipative Dark Matter on
+FIRE: Structural and kinematic properties of dwarf
+galaxies and observational constraints, inAmerican As-
+tronomical Society Meeting #240, American Astronomi-
+cal Society Meeting Abstracts, Vol. 240 (2022) p. 347.06.
+[21] S. O’Neil, M. Vogelsberger, S. Heeba, K. Schutz, J. C.
+Rose, P. Torrey, J. Borrow, R. Low, R. Adhikari, M. V.
+Medvedev, T. R. Slatyer, and J. Zavala, Endothermic
+self-interacting dark matter in Milky Way-like dark mat-
+ter haloes, MNRAS524, 288 (2023), arXiv:2210.16328
+[astro-ph.GA].
+[22] M. Vogelsberger, J. Zavala, and A. Loeb, Subhaloes
+in self-interacting galactic dark matter haloes, MNRAS
+423, 3740 (2012), arXiv:1201.5892 [astro-ph.CO].
+[23] M. Rocha, A. H. G. Peter, J. S. Bullock, M. Kaplinghat,
+S. Garrison-Kimmel, J. O˜ norbe, and L. A. Moustakas,
+Cosmological simulations with self-interacting dark mat-
+ter - I. Constant-density cores and substructure, MNRAS
+430, 81 (2013), arXiv:1208.3025 [astro-ph.CO].
+[24] O. D. Elbert, J. S. Bullock, S. Garrison-Kimmel,
+M. Rocha, J. O˜ norbe, and A. H. G. Peter, Core for-
+mation in dwarf haloes with self-interacting dark mat-
+ter: no fine-tuning necessary, MNRAS453, 29 (2015),
+arXiv:1412.1477 [astro-ph.GA].
+[25] F. Jiang, A. Benson, P. F. Hopkins, O. Slone, M. Lisanti,
+M. Kaplinghat, A. H. G. Peter, Z. C. Zeng, X. Du,
+S. Yang, and X. Shen, A semi-analytic study of self-
+interacting dark-matter haloes with baryons, MNRAS
+521, 4630 (2023), arXiv:2206.12425 [astro-ph.CO].
+[26] D. Gilman, Y.-M. Zhong, and J. Bovy, Constrain-
+ing resonant dark matter self-interactions with strong
+gravitational lenses, Phys. Rev. D107, 103008 (2023),
+arXiv:2207.13111 [astro-ph.CO].
+[27] A. Burkert, The Structure and Evolution of Weakly Self-
+interacting Cold Dark Matter Halos, ApJ534, L143
+(2000), arXiv:astro-ph/0002409 [astro-ph].
+[28] C. S. Kochanek and M. White, A Quantitative Study of
+Interacting Dark Matter in Halos, ApJ543, 514 (2000),
+arXiv:astro-ph/0003483 [astro-ph].
+[29] S. Balberg, S. L. Shapiro, and S. Inagaki, Self-Interacting
+Dark Matter Halos and the Gravothermal Catastrophe,
+ApJ568, 475 (2002), arXiv:astro-ph/0110561 [astro-ph].
+[30] D. Lynden-Bell and P. P. Eggleton, On the conse-
+quences of the gravothermal catastrophe, MNRAS191,
+483 (1980).
+[31] N. J. Outmezguine, K. K. Boddy, S. Gad-Nasr,
+M. Kaplinghat, and L. Sagunski, Universal gravothermal
+evolution of isolated self-interacting dark matter halos
+for velocity-dependent cross-sections, MNRAS523, 4786
+(2023), arXiv:2204.06568 [astro-ph.GA].
+[32] S. Yang, X. Du, Z. C. Zeng, A. Benson, F. Jiang,
+E. O. Nadler, and A. H. G. Peter, Gravothermal So-
+lutions of SIDM Halos: Mapping from Constant to
+Velocity-dependent Cross Section, ApJ946, 47 (2023),
+arXiv:2205.02957 [astro-ph.CO].
+[33] Y.-M. Zhong, D. Yang, and H.-B. Yu, The impact of
+baryonic potentials on the gravothermal evolution of self-
+interacting dark matter haloes, MNRAS526, 758 (2023),
+arXiv:2306.08028 [astro-ph.CO].
+[34] P. Col ´ ın, V. Avila-Reese, O. Valenzuela, and C. Fir-
+mani, Structure and Subhalo Population of Halos in a
+Self-interacting Dark Matter Cosmology, ApJ581, 777
+(2002), arXiv:astro-ph/0205322 [astro-ph].
+[35] J. F. Navarro, C. S. Frenk, and S. D. M. White, The
+Structure of Cold Dark Matter Halos, ApJ462, 563
+(1996), arXiv:astro-ph/9508025 [astro-ph].
+[36] J. F. Navarro, C. S. Frenk, and S. D. M. White, A Uni-
+versal Density Profile from Hierarchical Clustering, ApJ
+490, 493 (1997), arXiv:astro-ph/9611107 [astro-ph].
+[37] J. I. Read, O. Agertz, and M. L. M. Collins, Dark mat-
+ter cores all the way down, MNRAS459, 2573 (2016),
+arXiv:1508.04143 [astro-ph.GA].
+[38] A. Robertson, R. Massey, and V. Eke, What does the
+Bullet Cluster tell us about self-interacting dark mat-
+ter?, MNRAS465, 569 (2017), arXiv:1605.04307 [astro-
+ph.CO].
+[39] M. S. Fischer, L. Kasselmann, M. Br¨ uggen, K. Dolag,
+11
+F. Kahlhoefer, A. Ragagnin, A. Robertson, and
+K. Schmidt-Hoberg, Cosmological and idealized simula-
+tions of dark matter haloes with velocity-dependent, rare
+and frequent self-interactions, MNRAS529, 2327 (2024),
+arXiv:2310.07750 [astro-ph.CO].
+[40] D. Yang, E. O. Nadler, H.-B. Yu, and Y.-M. Zhong,
+A parametric model for self-interacting dark matter
+halos, J. Cosmol. Astropart. Phys.2024, 032 (2024),
+arXiv:2305.16176 [astro-ph.CO].
+[41] I. Palubski, O. Slone, M. Kaplinghat, M. Lisanti,
+and F. Jiang, Numerical Challenges in Modeling
+Gravothermal Collapse in Self-Interacting Dark Mat-
+ter Halos, arXiv e-prints , arXiv:2402.12452 (2024),
+arXiv:2402.12452 [astro-ph.CO].
+[42] M. Kaplinghat, R. E. Keeley, T. Linden, and H.-B. Yu,
+Tying Dark Matter to Baryons with Self-Interactions,
+Phys. Rev. Lett.113, 021302 (2014), arXiv:1311.6524
+[astro-ph.CO].
+[43] A. Robertson, R. Massey, V. Eke, J. Schaye, and T. The-
+uns, The surprising accuracy of isothermal Jeans mod-
+elling of self-interacting dark matter density profiles, MN-
+RAS501, 4610 (2021), arXiv:2009.07844 [astro-ph.CO].
+[44] M. G. Roberts, M. Kaplinghat, M. Valli, and H.-B. Yu,
+Gravothermal collapse and the diversity of galactic ro-
+tation curves, arXiv e-prints , arXiv:2407.15005 (2024),
+arXiv:2407.15005 [astro-ph.GA].
+[45] V. Tran, D. Gilman, M. Vogelsberger, X. Shen, S. O’Neil,
+and X. Zhang, Gravothermal catastrophe in resonant
+self-interacting dark matter models, Phys. Rev. D110,
+043048 (2024), arXiv:2405.02388 [astro-ph.GA].
+[46] V. Tran, X. Shen, D. Gilman, M. Vogelsberger, S. O’Neil,
+D. Xiong, J. Hu, and Z. Wu, Core collapse in res-
+onant self-interacting dark matter across two decades
+in halo mass, Phys. Rev. D112, 083003 (2025),
+arXiv:2504.02928 [astro-ph.GA].
+[47] J. Koda and P. R. Shapiro, Gravothermal collapse of iso-
+lated self-interacting dark matter haloes: N-body simu-
+lation versus the fluid model, MNRAS415, 1125 (2011),
+arXiv:1101.3097 [astro-ph.CO].
+[48] D. Yang and H.-B. Yu, Gravothermal evolution of
+dark matter halos with differential elastic scatter-
+ing, J. Cosmol. Astropart. Phys.2022, 077 (2022),
+arXiv:2205.03392 [astro-ph.CO].
+[49] C. Mace, Z. Carton Zeng, A. H. G. Peter, X. Du,
+S. Yang, A. Benson, and M. Vogelsberger, Convergence
+Tests of Self-Interacting Dark Matter Simulations, arXiv
+e-prints , arXiv:2402.01604 (2024), arXiv:2402.01604
+[astro-ph.GA].
+[50] X. Shen, P. F. Hopkins, L. Necib, F. Jiang, M. Boylan-
+Kolchin, and A. Wetzel, Dissipative Dark Matter on
+FIRE: II. Observational signatures and constraints from
+local dwarf galaxies, arXiv e-prints , arXiv:2206.05327
+(2022), arXiv:2206.05327 [astro-ph.GA].
+Appendix A: Analytical calculation of the core
+velocity dispersion via the isothermal K-G ratio
+To inspect the core isothermal K-G ratio (Equation 9)
+of our density profile, we first separate ¯ρT25 (r) into
+g(¯r) =
+ tanh ¯r
+¯r
+n
+,(A1)
+h(¯r) = 1
+(1 + (λ¯r)γ)
+3−n
+γ
+,(A2)
+withλ=r c/r′
+s. Here,g(¯r) andh(¯r) represent the ap-
+proximate density profile of the halo inner part and the
+modifier for the halo outer edge. Taking the ¯r≪1 ap-
+proximations, we obtain the first and second derivatives
+g′(¯r) =−2n
+3 ¯r+O(¯r3),(A3)
+g′′(¯r) =−2n
+3 + 4n2
+9 ¯r2 +O(¯r3),(A4)
+h′(¯r) =−(3−n) (λ¯r)γ
+¯r +O(¯r2γ−1),(A5)
+h′′(¯r) =−(3−n) (γ−1) (λ¯r)γ
+¯r2 +O(¯r2γ−2).(A6)
+Considering only the simplified trial density profile,
+ρ(¯r) =g(¯r), the resulting core isothermal K-G ratio takes
+the form of
+I ∗
+c,T25 = 1
+2n +O
+ 
+¯r2
+,(A7)
+which is independent of radius (to the order of ¯r2). When
+the outer edge modifierh(¯r) is included, the core isother-
+mal K-G ratio would follow
+Ic,T25 ≈
+
+2n+ (3−n) (γ+ 1) (λ¯r)γ
+¯r2
+−1
+.(A8)
+Here, the extra term−(3−n) 2 (λ¯r)2γ /¯r2 inside the
+parentheses has been ignored. It is clear from Equation
+A8 that as ¯r→0, unlessγ≥2, (λ¯r) γ /¯r2 → ∞and
+Ic,T25 →0. In fact,γ= 2 represents a special case with
+Ic,T25 = 1
+2n+ 3 (3−n)λ 2 +O
+ 
+¯r2
+,(A9)
+while, otherwise,
+Ic,T25 = 1
+2n+ (3−n) (γ+ 1)λ γ ¯rγ−2 +O
+ 
+¯r2
+.(A10)
+The first case provides a near-optimal situation, with
+Ic,T25 becoming practically independent of ¯rsimilar to
+in the idealistic configuration. In most cases,λ≪1, as
+well asntaking values close to 3, resulting in the core
+isothermal K-G ratio reverting to the form displayed by
+Equation A7.
+12
+logM 200 mDM c r s logρ s σ/m
+[M⊙] [M ⊙] [kpc] [M ⊙ kpc−3 ] [cm 2 g−1]
+7.9 2.64 18.70 0.49 7.43 31.98
+7 0.33 21.21 0.21 7.57 24.94, 19.81
+7.5 1.05 19.81 0.34 7.50 43.54, 19.76
+8 3.33 18.42 0.53 7.42 28.07, 21.94
+8.5 10.5 17.05 0.84 7.33 18.60, 14.62
+9 33.3 15.69 1.35 7.24 13.09, 8.87
+TABLE II. Simulation configurations of the smaller data set
+(top) [45] and larger data set (bottom) [46]. (1)M 200 and
+(2)m DM are the virial mass of the halo and the mass of DM
+particles in the simulation, respectively. (3)cis the halo con-
+centration parameter. (5)ρ s and (4)r s are the scale density
+and radius of the NFW profile. (6)σ/mis the SIDM colli-
+sions’ cross section per unit of mass.
+Appendix B: Simulation configurations
+Table II shows the detailed simulation configurations
+in the two data sets [45, 46]. For the smaller data
+set [45], two velocity-independent cross sections for DM
+self-interactions are presented in the original work; how-
+ever, we focus mainly on the lower value ofσ/m=
+31.98 cm2 g−1 to avoid numerical effects causing devia-
+tion in the self-similarity [41, 49, 50]. For the larger
+data set [46], we utilize the results of all simulations with
+velocity-independent cross sections.
+Appendix C: Logarithmic slope of density profiles
+Figure 6 presents the logarithmic slopes of the fitted
+density profiles shown in Figure 3. The level of agreement
+between the logarithmic slopes of the fitted profiles and
+those from the simulations reveals why, despite the den-
+sity profiles being well reproduced by our functional form,
+the reconstructed velocity dispersion profiles still exhibit
+small deviations. Nevertheless, our profile remains the
+closest match to the log–log slope of the density struc-
+ture. In order to achieve a better fit to the slope and a
+more accurate reconstruction of the velocity dispersion
+profiles, a more complex functional form with additional
+degrees of freedom is required.
+Appendix D: Empirical evolutions of parameters in
+the self-similar solution
+Using the fitting results of Section III B, we arrive at
+a general set of empirical equations describing the evo-
+lutions ofρ c,T25 ,r c,T25,r s,T25, andn T25 in term of the
+scaled timet=T /τ(Equation 14). These equations
+can serve as good references when comparisons between
+FIG. 6. The logarithmic slopes of the density profile fits at
+three different snapshots for the halo of mass 10 8 M⊙ evolved
+under the cross section of 21.94 cm 2 g−1. The snapshots and
+halo are the same as in Figure 3. The scatter points and
+associated error bars represent measurements obtained from
+N-body simulations. The profiles for the Read (orange),
+Robertson-Fischer (purple), Yang (cyan), and our (pink) pro-
+files are shown in solid lines. The dashed lines represent the
+initial NFW configuration for the halo of interest.
+simple VICS models and more complicated SIDM mod-
+els are needed, especially in the context of idealized iso-
+lated halos. For simplicity, we construct the empirical
+equations only out of polynomials and square/cube roots.
+Constraints in the initial conditions are also enforced to
+map the density profile back to the NFW configuration.
+These includer ′
+s,t=0 =r s andn t=0 = 1. Idealistically,
+the condition ofρ c,t=0 rc,t=0 =ρ s rs should also be satis-
+fied. However, we find that this is a difficult constraint to
+implement and, thus, ignore it. The resulting empirical
+fits then follow
+13
+FIG. 7. The luminosity profiles of the 10 8 M⊙ halo evolved
+withσ/m= 21.94 cm 2 g−1, calculated atT≃0.45τ. Top:
+The scatter points and dashed lines are derived from the time
+evolution of the halo, based on interpolation of the simulated
+profiles and on the corresponding fitted density and recon-
+structed velocity dispersion using our density model, respec-
+tively. Bottom: The solid lines show the luminosity profiles
+computed from the velocity dispersion gradient of the four
+fitted density profiles and the empirical heat conductivity for-
+mula (Equation E4) withβ= 0.75.
+log
+ ρc,T25
+ρs
+
+= 1
+1−t
+
+0.592−25.71t+ 13.02t 2
+−4.426t 3 + 24.22
+√
+t−7.363
+3√
+t
+−1
+,(D1)
+rc,T25
+rs
+=−3.110t+ 2.066t 2 −1.149t 3
++ 2.229
+√
+t−0.044
+3√
+t,(D2)
+rs,T25
+rs
+= 1 + 12.455t−8.785t 2 + 0.556t 3
+−8.364
+√
+t+ 14.706
+3√
+t,(D3)
+nT25 = 1−1.978t+ 2.417t 2 −1.293t 3
+−3.550
+√
+t+ 5.745
+3√
+t.(D4)
+Appendix E: Luminosity & heat conductivity
+To illustrate a potential application of our density pro-
+file, we compute the luminosity profile of a halo during
+the core-collapse phase following the same procedure as
+in [48], i.e.
+L(r) =−4π
+Z r
+0
+dr′ r′2 ˜ρ(r′) DE(r ′)
+DT ,(E1)
+where the Lagrangian time derivative of the specific en-
+ergy is estimated by
+DE(r)
+DT = E(rM , T+ ∆T)−E(r, T)
+∆T .(E2)
+Here,E(r) = 3σ 2
+1D(r)/2 + Φ(r), andr M is the radius
+that encloses the same mass at timeT+ ∆Tas the en-
+closed mass withinrat timeT. In practice, we calcu-
+late DE/DTas the symmetric difference averaged over
+T−∆TandT+ ∆Twith ∆T≃0.015τ. Figure 7 shows
+these profiles, calculated using values ofσ 1D and Ψ in-
+terpolated from simulation data, as well as those recon-
+structed from the fitted density profile.
+Additionally, we adopt an alternative approach in
+which the luminosity is computed directly from the fitted
+analytical profile
+L(r) =−4πr 2κ dσ2
+1D
+dr ,(E3)
+with
+κ= 0.27β ρ σ3
+1D
+σ/m
+G ,(E4)
+where typicallyβ= 0.75 for isolated halos [17].ρandσ 1D
+are taken from the density fits and the velocity dispersion
+reconstructions of the four density profile choices. The
+results of such calculations are also shown in Figure 7.
+Although the approaches described by Equations E1 and
+E3 do not necessarily converge, in the inner regions of the
+halo, the time evolution–based calculation and the recon-
+structed velocity dispersion gradient approach based on
+our fitted profile yield fairly similar luminosity profiles.
