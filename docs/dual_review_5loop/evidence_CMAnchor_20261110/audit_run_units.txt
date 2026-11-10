@@ -1,0 +1,56 @@
+======================================================================
+UNIT CONSISTENCY AUDIT
+======================================================================
+
+Cross-section units:
+  cm²/g (unicode):    585
+  cm^2/g (ASCII):     0
+  cm2/g (compact):    0
+
+Solar mass units:
+  M☉ (unicode):       71
+  M_sun/M⊙ (ASCII):   0
+
+Time units:
+  Gyr: 89
+  Myr: 84
+  yr:  0
+
+Velocity units:
+  km/s: 335
+
+----------------------------------------------------------------------
+SUSPICIOUS BARE NUMBERS (heuristic):
+----------------------------------------------------------------------
+  L7: 7501856343179664 followed by 'with'
+  L7: 008150396851725193 followed by 'cm'
+  L7: 272481773080454 followed by 'cm'
+  L7: 348366 followed by 'cm'
+  L15: 2025 followed by 'SIDM'
+  L17: 2015 followed by 'c'
+  L17: 2019 followed by 'relation'
+  L25: 2020 followed by 'by'
+  L27: 2025 followed by 'Table'
+  L27: 2020 followed by 'are'
+  ... and 279 more
+
+----------------------------------------------------------------------
+UNICODE SUPERSCRIPTS (Rule 27 audit):
+----------------------------------------------------------------------
+Unicode superscript characters: 1385 total
+  ⁻ (0x207b): 177
+  ⁰ (0x2070): 16
+  ¹ (0xb9): 86
+  ² (0xb2): 849
+  ³ (0xb3): 78
+  ⁴ (0x2074): 54
+  ⁵ (0x2075): 23
+  ⁶ (0x2076): 37
+  ⁷ (0x2077): 22
+  ⁸ (0x2078): 15
+  ⁹ (0x2079): 28
+  Note: paper has many unicode superscripts (1385). Per Rule 27,
+  these should be converted to ASCII (10^-N) only when sent to PDF/Telegram.
+
+======================================================================
+✓ No unit consistency issues

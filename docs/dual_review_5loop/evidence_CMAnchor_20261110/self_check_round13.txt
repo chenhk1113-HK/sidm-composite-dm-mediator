@@ -1,0 +1,110 @@
+
+======================================================================
+  CHECK 1/8: Standing-numbers table audit
+======================================================================
+    ✓ t_cross == r_s/V_max (0.09189153 vs 0.09189153 Gyr)
+    ✓ t_core_over_t_cross == t_core/t_cross (802.1510)
+
+======================================================================
+TABLE SUMMARY: 52 pass, 0 fail
+======================================================================
+
+✓ All numbers verified against source JSON. Zero drift.
+
+======================================================================
+  CHECK 2/8: Paper-claims regex audit
+======================================================================
+
+======================================================================
+NUMERICAL LINES IN PAPER (informational)
+======================================================================
+Found 1136 lines with decimal numbers in paper.
+Most are within prose; only the headline Phase claims are tracked.
+
+REGEX RESULT: PASS — all tracked claims match reference data within tolerance.
+
+======================================================================
+  CHECK 3/8: Cross-validation (numbers + forbidden)
+======================================================================
+  ✓ 'Cloud-9 tension resolved (positive)'    NOT FOUND
+  ✓ '8/8 channel pass as headline'           NOT FOUND
+
+FORBIDDEN: 7/7 pass (0 expected to appear)
+
+======================================================================
+VERDICT: 0 issues found
+✓ All cross-validation checks pass
+
+======================================================================
+  CHECK 4/8: Table-walker
+======================================================================
+ 2489     5     3       0 ✓
+ 2501     5     4       0 ✓
+ 2541     4     4       0 ✓
+ 2548     7     6       0 ✓
+
+======================================================================
+VERDICT: 0 issues across 66 tables
+✓ All tables walked cleanly — no TODOs, no contradictory verdicts, no out-of-range percentages
+
+======================================================================
+  CHECK 5/8: §-symbol cross-reference audit
+======================================================================
+Total refs: 318
+  ✓ Good (resolves to existing section): 314
+  ✓ External citation (other paper):    4
+  ⚠ Deeper subsection (parent exists):   0
+  ✗ Missing section:                     0
+
+======================================================================
+✓ All in-paper §-references resolve to existing sections
+
+======================================================================
+  CHECK 6/8: Citation provenance audit
+======================================================================
+
+======================================================================
+CITATION PROVENANCE AUDIT
+======================================================================
+✓ All body citations resolve to References entries
+✓ All Reference entries are cited in body
+
+✓ No missing citations
+
+======================================================================
+  CHECK 7/8: Unit consistency audit
+======================================================================
+  ⁷ (0x2077): 22
+  ⁸ (0x2078): 15
+  ⁹ (0x2079): 28
+  Note: paper has many unicode superscripts (1385). Per Rule 27,
+  these should be converted to ASCII (10^-N) only when sent to PDF/Telegram.
+
+======================================================================
+✓ No unit consistency issues
+
+======================================================================
+  CHECK 8/8: pytest test_paper_claims.py
+======================================================================
+v0.3-prelim/tests/test_paper_claims.py::test_phase47_loo_removing_sparc_hurts PASSED [ 58%]
+v0.3-prelim/tests/test_paper_claims.py::test_phase47_jvas_residual_is_significant PASSED [ 66%]
+v0.3-prelim/tests/test_paper_claims.py::test_phase51_winner_rms_is_minimal PASSED [ 75%]
+v0.3-prelim/tests/test_paper_claims.py::test_phase52_power_law_or_integer_minimal PASSED [ 83%]
+v0.3-prelim/tests/test_paper_claims.py::test_phase54_multiresonance_wins_raw_logL PASSED [ 91%]
+v0.3-prelim/tests/test_paper_claims.py::test_sigma_m_positive_in_dwarf_regime PASSED [100%]
+
+============================= 12 passed in 2.88s ==============================
+
+======================================================================
+  ROUND 13 SELF-CHECK SUMMARY
+======================================================================
+  ✓ PASS  Standing-numbers table audit
+  ✓ PASS  Paper-claims regex audit
+  ✓ PASS  Cross-validation
+  ✓ PASS  Table-walker
+  ✓ PASS  §-symbol cross-references
+  ✓ PASS  Citation provenance
+  ✓ PASS  Unit consistency
+  ✓ PASS  pytest test_paper_claims.py
+
+  ✓ ALL CHECKS PASSED — paper is robust across 8 consistency layers

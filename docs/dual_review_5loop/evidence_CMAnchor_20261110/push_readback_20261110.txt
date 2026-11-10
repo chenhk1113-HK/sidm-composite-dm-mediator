@@ -1,0 +1,17 @@
+# Push read-back for commit d362721 (round CMAnchor-2026-11-10)
+
+Push executed 2026-11-10 ~13:10 CST from this host, plain branch push (no refspec):
+  git push origin wip/v19.2-F-init
+  To github.com:chenhk1113-HK/sidm-composite-dm-mediator.git
+     6d346e2..d362721  wip/v19.2-F-init -> wip/v19.2-F-init
+  (the ".." range is a fast-forward; a force would print "+ (forced)")
+
+Read-back at filing time 2026-11-10 13:46:01 CST:
+  local  HEAD           = d3627215f9cba81ad691b3bf7ee5de88e33b078f
+  remote wip/v19.2-F-init = d3627215f9cba81ad691b3bf7ee5de88e33b078f
+  local master          = d4cabeca11b7fe5638beb951dca44cbb6a719995
+  remote master         = 0a98e2d25fd5aef2841b4f26270719951a08517a
+  commits local-ahead-of-remote(wip) = 0
+  working tree AT PUSH TIME (checked in the same command that ran the push): clean, 0 modified paths
+  working tree AT FILING TIME (13:46): 3 modified paths — CHANGELOG.md, CURRENT.md and this evidence
+  folder. Those are the record commit that follows the physics commit, not uncommitted work at push time.

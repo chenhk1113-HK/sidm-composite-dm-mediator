@@ -1,0 +1,45 @@
+==========================================================================
+CROSS-DOCUMENT SECTION-ANCHOR AUDIT (gate layer 8)
+==========================================================================
+Paper   : PAPER_V1_DRAFT.md
+Report  : SIDM_ROUND5_CONSOLIDATED_FIXES_v1.17_2026-11-02.md
+Closeout: SIDM_N24_CLOSEOUT_REPORT_WITH_CODE_v1.1_2026-11-01.md
+Companion: SIDM_ROUND5_CHANGED_CODE_v1.9_2026-10-26.md
+
+  report     headings=136  OK=477  STALE= 17  EXT=  0  QUOTED-BAD=  6  DANGLING=  0
+  closeout   headings= 11  OK= 20  STALE=  0  EXT=  0  QUOTED-BAD=  0  DANGLING=  0
+  companion  headings= 41  OK= 75  STALE= 21  EXT=  0  QUOTED-BAD=  2  DANGLING=  0
+  paper      headings= 66  OK=314  STALE=  0  EXT=  4  QUOTED-BAD=  0  DANGLING=  0
+
+Paper stale-anchor baseline: 0 (actual 0)  (ok)
+
+--------------------------------------------------------------------------
+EXTERNAL-DOCUMENT references (cite another document's section, not this one's - exempt):
+--------------------------------------------------------------------------
+  paper L31 §7: **Five UV completion no-gos** (magnetic dipole, Hidden U(1) + pseudo-Dirac, GeV inelasti
+  paper L827 §4: **Honest limit sentence for the frozen paper.** The background σ/m = 0.052·(100/v)^1.93 
+  paper L2406 §5: **Retired values (ClawsGO #7 §5):**
+  paper L2434 §7: **Note (ClawsGO #7 §7):** the abstract calls these 'five UV completion no-go theorems'. 
+
+--------------------------------------------------------------------------
+QUOTED-BAD references (the reviewer's wrong anchors, quoted on purpose - exempt):
+--------------------------------------------------------------------------
+  report L1202 §10.4c: | **CG-13** | the paper's **stale section anchors** — 14 references to sections retired by t
+  report L1202 §10.4d: | **CG-13** | the paper's **stale section anchors** — 14 references to sections retired by t
+  report L1674 §99.9: new layer was therefore mutation-tested: a dangling `§99.9` was injected into this report, t
+  report L1707 §10.4c: | §10.4c | *Deferred items — Summary* | the contents-list bullet removed; the surviving T178
+  report L1721 §99.9: (exit 1); a dangling `§99.9` reproduces a DANGLING failure; restoring the file returns PASS 
+  report L2401 §18.6: dense model" (it is a **552B MoE with 8B/16B active**). A dangling `§18.6` cross-reference —
+  companion L1749 §99.9: | layer 8, dangling set | `DANGLING=0`, PASS | inject `§99.9` → DANGLING FAIL, exit 1 | PASS
+  companion L1750 §10.7: | layer 8, external refs | 4 ClawsGO citations stay EXT (not DANGLING) | stale §10.7 beside 
+
+--------------------------------------------------------------------------
+DEAD EXEMPTIONS (RETIRED_PAPER_SECTIONS entries no longer triggered - re-audit and remove):
+--------------------------------------------------------------------------
+  §9.3: retired in 799f4ef (2026-10-05 R88 paper cleanup); last a heading at 32d720b (v1.11 -> v1.
+
+OK: no DANGLING section references in the report, the close-out, the companion, or the paper.
+
+OK: every .md filename cited in the audited documents exists in the worktree or git history (disclosed phantoms are allowlisted and machine-guarded).
+
+RESULT: PASS

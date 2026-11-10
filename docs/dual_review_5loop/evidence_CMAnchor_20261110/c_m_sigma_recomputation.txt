@@ -1,0 +1,21 @@
+artifact: v0.3-prelim/data/results/v19_2_f_cloud9_cM_elbert_2026_10_19.json
+artifact case: placeholder_g7 (retracted v18.29)  f_H=0.297  tau=16.357
+artifact c_200_elbert          = 6.0
+artifact c_med_cosmological    = 7.8964393482434705
+artifact c_M_tension_sigma     = 0.7455003347803808
+artifact anchor labels         = diemer_2019 (primary), ohana_2026_implied (comparative)
+
+recomputed from scripts/elbert2015_c_tau_prescription.py at M_200 = 4.7e+09 Msun:
+  c_M_tension_sigma(c=6.0)            = +0.7455 sigma   (Diemer+ 2019 median 7.8964)
+  c_M_tension_sigma_ohana2026(c=6.0)   = +2.0587 sigma   (implied median 12.81)
+  c_M_tension_sigma_legacy(c=6.0)      = +0.3238 sigma   (the withdrawn value; do-not-cite)
+  c_M_shift_sigma(log10(6.0/4.0))      = +1.1006 sigma   (anchor-independent)
+
+artifact-vs-function agreement: |0.7455003347803808 - 0.7455003347803808| = 0.00e+00 -> PASS
+
+reference points quoted in registry defect D9 (same functions):
+  c_200=4.0 (Ohana+ 2026 measured c_200): diemer +1.8461 | ohana2026 +3.1593 | legacy +0.8017
+  c_200=26.4 (retracted v40.39 prediction): diemer -3.2761 | ohana2026 -1.9628 | legacy -1.4228
+
+D9 arithmetic that the fix removed: 0.176 dex / (0.16 * ln 10) understates by ln(10) = 2.3026
+  legacy 0.3238 * ln(10) = 0.7455  ==  corrected 0.7455

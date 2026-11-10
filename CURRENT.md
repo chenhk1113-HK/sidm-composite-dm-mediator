@@ -2,11 +2,23 @@
 
 > **For:** Anyone who has 60 seconds and wants to know what this project
 > is, what it claims, and what the current best numbers are.
-> Updated with each version-bump round. Last refresh: 2026-11-07 (`v19.2-F-RecordSave-v1.18`; previous save point `v19.2-F-RecordSave-v1.17` + v19.2-E chain stages 1-2).
+> Updated with each version-bump round. Last refresh: 2026-11-10 (`CMAnchor-2026-11-10` c-M anchor round, no VERSION change; save point remains `v19.2-F-RecordSave-v1.18`).
 
 ---
 
 **Pairing declaration (findings F26/F33):** this document quotes amplitudes in two pairings. The LIVE canonical pair is f_H = 0.7501856343179664 with σ_0 = 0.008150396851725193 cm²/g and σ_peak = 27.272481773080454 cm²/g. The ARCHIVED pair is f_H = 0.297 with σ_0 = 0.052 cm²/g and σ_peak = 174.0 cm²/g. Unless a sentence says otherwise, an amplitude quoted below is an ARCHIVED-pair raw amplitude. Both pairs give the same halo-level σ_eff = f_H² × (σ/m) = 15.348366 cm²/g at the 29.4 km/s resonance, so no effective prediction changes. Sources: scripts/constants.py, v0.3-prelim/data/results/canonical_numbers.json, v0.3-prelim/data/results/fH_pairing_registry.json.
+
+## Standing: `CMAnchor-2026-11-10` — c-M anchor labelling, defect D9 resolved, slots [56]-[58]
+
+**No VERSION change and no new tag.** This round corrected how a headline number is stated; it did not move the version line, so the save point is still `v19.2-F-RecordSave-v1.18` and the tag guard (`test_version_tokens_have_tags.py`) stays green. The version-of-record physics (the pairing declaration above) is unchanged.
+
+**The correction.** Every c-M tension in the paper now names the c-M relation it is measured against. Under the Elbert+ 2015 c-tau prescription the framework puts Cloud-9 at c_200 = 6.0 against Ohana+ 2026's measured 4.0: **+0.75σ against Diemer+ 2019** (median 7.90) and **+2.06σ against Ohana+ 2026's own relation** (their published pair implies a median of 12.81), i.e. a **1.10σ / 0.176 dex reduction — reduced, not resolved**. The withdrawn "3.2σ → 0.32σ" had subtracted across two different relations and its scatter carried a ln(10) unit error (registry defect **D9**, now RESOLVED). `scripts/elbert2015_c_tau_prescription.py` now divides by the 0.16 dex scatter; the old arithmetic lives on as `c_M_tension_sigma_legacy()`, marked do-not-cite.
+
+**Reference register:** **51** numbered entries (machine recount). New this round: [56] Koda & Shapiro 2011, [57] Pollack/Spergel/Steinhardt 2015, [58] Despali+ 2025 "Introducing the AIDA-TNG project" (A&A 697, A213; arXiv:2501.12439v2) — the paper the KB carried as **[29a]**, with its transfer limit recorded in the entry (σ/m = 1 cm²/g cases; nothing quoted below M_vir ≈ 10¹⁰ M☉, so no number transfers to Cloud-9). Defect **D13** found that the "150 prefactor" belongs to Yang+ 2024 [43] eq. 2.2, not to Balberg+/Koda-Shapiro/Pollack.
+
+**Verification at head `d362721` (2026-11-10):** 15-layer gate **15/15 PASS** (`GATE PASSED: all 15 layer(s) asserted and exited 0`) — pytest layer **3644 passed / 25 skipped / 40 deselected** in 24m06s, drift guard **120/120 ALL CLEAR**, Round-13 self-check **8/8 PASS**, and an independent unfiltered run of `v0.3-prelim/tests` **3684 passed / 25 skipped / 0 failed** in 24m35s, which covers the 40 deselected tests. The gate's own disclosures (CG-5, CG-10) still apply: skips and deselections inside the gate prove nothing on their own. Logs filed in `docs/dual_review_5loop/evidence_CMAnchor_20261110/`. Pushed as `6d346e2..d362721` (fast-forward; remote head read back equal to local HEAD). Earlier the same day the same gate had exited 1 on exactly three layers — `audit_units.py`, `pytest`, `audit_doc_anchors.py` — all now green.
+
+**What this round does NOT claim:** no σ/m, f_H, halo mass or core radius changed; the AIDA-TNG numbers were not transferred to Cloud-9; and the c-M residual on Ohana+ 2026's own relation is still ~2σ.
 
 ## Standing: `v19.2-F-RecordSave-v1.18` (2026-11-07); previous save point `v19.2-F-RecordSave-v1.17` + v19.2-E chain (2026-11-03)
 
