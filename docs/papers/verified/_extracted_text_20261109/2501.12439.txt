@@ -1,0 +1,1134 @@
+Astronomy & Astrophysics manuscript no. aa53836-25corr June 12, 2025
+
+©ESO 2025
+
+arXiv:2501.12439v2 [astro-ph.CO] 11 Jun 2025
+
+Introducing the AIDA-TNG project:
+Galaxy formation in alternative dark matter models
+Giulia Despali1, 2, 3,, Lauro Moscardini1, 2, 3, Dylan Nelson4, Annalisa Pillepich5, Volker Springel6, Mark Vogelsberger7
+1 Dipartimento di Fisica e Astronomia "Augusto Righi", Alma Mater Studiorum Università di Bologna, via Gobetti 93/2, I-40129 Bologna, Italy
+2 INAF-Osservatorio di Astrofisica e Scienza dello Spazio di Bologna, Via Piero Gobetti 93/3, I-40129 Bologna, Italy 3 INFN-Sezione di Bologna, Viale Berti Pichat 6/2, I-40127 Bologna, Italy 4 Universität Heidelberg, Zentrum für Astronomie, ITA, Albert-Ueberle-Str. 2, 69120 Heidelberg, Germany 5 Max-Planck-Institut für Astronomie, Königstuhl 17, 69117 Heidelberg, Germany 6 Max-Planck-Institut für Astrophysik, Karl-Schwarzschild-Straße 1, D-85740, Garching bei München, Germany 7 Department of Physics, Kavli Institute for Astrophysics and Space Research, Massachusetts Institute of Technology, Cambridge,
+MA 02139, USA
+
+ABSTRACT
+We introduce the AIDA-TNG project, a suite of cosmological magnetohydrodynamic simulations that simultaneously model galaxy formation and different variations in the underlying dark matter model. We consider the standard cold dark matter model and five variations, including three warm dark matter scenarios and two self-interacting models with a constant or velocity-dependent crosssection. In each model, we simulated two cosmological boxes of 51.7 and 110.7 Mpc on a side with the same initial conditions as TNG50 and TNG100, and we combined the variations in the physics of dark matter with the fiducial IllustrisTNG galaxy formation model. The AIDA-TNG runs are thus ideal for studying the simultaneous effects of baryons and alternative dark matter models on observable properties of galaxies and large-scale structures. We resolved haloes in the range between 108 and 4 × 1014 M and scales down to the nominal resolution of 570 pc in the highest-resolution runs. This work presents the first results on statistical quantities such as the halo mass function and the matter power spectrum. We quantified the modification in the number of haloes and the power on scales smaller than 1 Mpc due to the combination of baryonic and dark matter physics. Despite being calibrated on cold dark matter, we find that the TNG galaxy formation model can produce a realistic galaxy population in all scenarios. The stellar and gas mass fraction, stellar mass function, black hole mass as a function of stellar mass, and star formation rate density are very similar in all dark matter models, with some deviations only in the most extreme warm dark matter model. Finally, we also quantify changes in halo structure due to warm and self-interacting dark matter, which appear in the density profiles, concentration-mass relation, and galaxy sizes.
+Key words. Cosmology: dark matter ­ Cosmology: large-scale structure of Universe ­ Galaxies ­ Galaxies: evolution
+
+1. Introduction
+One of the foundations of the concordance cosmological model is that approximately 85% of the matter content of the Universe is in the form of some yet unknown component that can only be detected through its gravitational effect. Namely, this component is dark matter. Starting from small density perturbations in the early Universe, dark matter leads the gravitational collapse on large scales, forming the cosmic-web structure of filaments. Along these filaments, gas flows to the potential wells of dark matter haloes, where it cools and creates stars ­ eventually leading to the formation of galaxies. Despite decades of experimental searches, the favoured particle candidates for cold dark matter (CDM) ­ axions and weakly interacting massive particles (WIMPS) ­ have so far not been detected. This has motivated the study of alternative models that are allowed by particle physics assumptions and span a wide range of masses ­ from the electronvolt to the gigaelectron volt scale.
+Moreover, while the CDM model is very successful at explaining the large-scale structure distribution of the Universe
+ giulia.despali@unibo.it
+
+(Planck Collaboration et al. 2014), it has been challenged by observations at the scale of galaxies and below (Bullock & BoylanKolchin 2017). In the past few years, inconsistencies between CDM numerical simulations and observations that led to the famous `missing satellites problem' (Klypin et al. 1999) have been mitigated with the inclusion of baryonic effects in simulations (Brooks et al. 2013) and with the discovery of new faint satellites in the Milky Way (Bechtol et al. 2015; Drlica-Wagner et al. 2015; Kim et al. 2018). However, other possible tensions have arisen, such as the `core-cusp' and `too-big-to-fail' problems (Boylan-Kolchin et al. 2011) or the diversity of rotation curves (Kaplinghat et al. 2020). Recent observational analyses have also identified new challenges for CDM. For example, the lensing properties of subhaloes appear inconsistent with CDM both at galaxy (Minor et al. 2017; Ballard et al. 2024; Despali et al. 2024; Enzi et al. 2024) and cluster scales (Meneghetti et al. 2020; Ragagnin et al. 2022; Meneghetti et al. 2023). In both cases, the observed lensing signal is inferred to be stronger than predicted, and the subhalo concentrations required to explain it are outliers within the CDM model. It is thus still uncertain if simulated CDM predictions can be brought completely
+
+Article number, page 1 of 20
+
+A&A proofs: manuscript no. aa53836-25corr
+
+into agreement with observations by modifications of baryonic feedback and other aspects of the subgrid physics in simulations or if these discrepancies point towards new physics in the dark sector.
+Many previous works have addressed the aforementioned tensions, with some developing a theoretical and computational framework especially suited for warm dark matter (WDM) and self-interacting dark matter (SIDM). These models were originally motivated by models of the satellite population of galaxies (for WDM), the profiles of dwarf galaxies, and merging clusters (for SIDM). While these effects are certainly among the most relevant, the most stringent constraints on the WDM particle mass are derived from observations of the Lyman- forest (Irsic et al. 2024) and flux-ratio anomalies of lensed quasars (Gilman et al. 2020a), while the self-interaction cross-section is strongly constrained at the scale of massive elliptical galaxies and galaxy clusters (Meneghetti et al. 2001; Peter et al. 2013; Despali et al. 2019, 2022; Eckert et al. 2022; Shen et al. 2022; Mastromarino et al. 2023). In general, any dark matter model that aspires to explain observations should be challenged with reproducing the halo and galaxy properties spanning many decades in mass and not only in a narrow range of scales. This is the fundamental aim of the AIDA-TNG project.
+The majority of the work in the field of alternative dark matter is based on zoom-in simulations of limited samples of objects (Zavala et al. 2013; Rocha et al. 2013; Fry et al. 2015; Robles et al. 2017; Creasey et al. 2017; Despali et al. 2019, 2022; Bhattacharyya et al. 2022; Nadler et al. 2023; O'Neil et al. 2023; Ragagnin et al. 2024). These simulations can have the advantage of high spatial and mass resolution, but they lack the required statistics to test models on multiple scales and fully understand potential biases in the sample selection. At the same time, the inclusion of baryonic physics is fundamental for studying small scales, but only a limited number of available alternative dark matter (ADM) hydrodynamical simulations are of cosmological scale (see Fig. 1). For WDM, Oman et al. (2024) recently presented two cosmological runs that use the Eagle galaxy formation model: one 25 Mpc box where the WDM model considers a 1.5 keV thermal relic candidate and one 34 Mpc box reproducing the effect of 7.1 keV sterile neutrinos. In SIDM, the EAGLE-SIDM (Robertson et al. 2018, 2021; Forouhar Moreno et al. 2022) and BAHAMAS-SIDM (Robertson et al. 2019) simulations have been the first to include both self-interactions and baryonic physics on cosmological scales. This set includes elastic self-interactions with constant crosssections /m = [0.1, 1] cm2g-1 and a model with a mild velocity dependence peaking at /m = 3 cm2g-1. More recently, the TANGO-SIDM simulations (Correa et al. 2022, 2024) explored velocity-dependent SIDM models in 25 Mpc volumes, including the SWIFT-EAGLE physics model (Schaller et al. 2024; Bahé et al. 2022; Borrow et al. 2023). Finally, the THESAN-HR (Shen et al. 2024) simulations include different dark matter variations; however, given their focus on the epoch of reionisation, they only follow a 6 Mpc box until z = 6.
+The AIDA-TNG project advances the field of ADM simulations by providing a consistent set of high-resolution cosmological boxes simulated with the same galaxy formation model and multiple WDM and SIDM models, in addition to CDM. We provide a large simulated sample of galaxies and break the degeneracy between baryonic and dark matter effects at small scales. In this work, we present simulations evolving two cosmological volumes of 51.7 and 110.7 Mpc on a side evolved with the AREPO code (Springel 2010) in different dark matter scenarios
+
+DM mass resolution [M ]
+
+spatial resolution DM [pc]
+
+105
+EAGLE12-SIDM
+
+CO2C0O/A-WDM
+
+106 THESAN-HR (z 6)
+
+EAGLE-1.5/7keV
+5R0o/cAha+13
+
+107
+
+Stuecker+22
+
+COLOR-WDM
+
+TANGO-ESAIDGMLE50-SIDM
+
+103
+
+100/A
+
+108
+
+Fischer+22
+
+AIDA-TNG
+
+109
+
+WDM dark SIDM dark
+
+Schneider+12
+
+WDM hydro
+
+SIDM hydro WDM/SIDM hydro
+
+BAHAMAS-SIDM
+
+104
+
+1010 102 103 104 105 106 107 108 109
+
+volume [Mpc3]
+
+Fig. 1. Available cosmological simulations for ADM models, compared in volume (x-axis) and resolution (y-axis), to the AIDA-TNG flagship runs (yellow stars) introduced in this paper. Grey symbols show DMO runs (Schneider et al. 2012; Rocha et al. 2013; Bose et al. 2016; Stücker et al. 2022; Fischer et al. 2022, 2024), while the simulations including baryonic physics are shown in colour (Robertson et al. 2018, 2019; Forouhar Moreno et al. 2022; Shen et al. 2024; Correa et al. 2024; Oman et al. 2024). The present work introduces the 50 and 100 Mpc AIDA runs, while the highest-resolution 20 Mpc box will be presented in an upcoming paper.
+
+and in the TNG galaxy formation model (Weinberger et al. 2017; Pillepich et al. 2018b).
+We present the first results from the AIDA-TNG suite, providing an overview of the multiple effects of ADM models. In Sect. 2, we describe the set-up of the AIDA simulations and discuss the considered dark matter models and their properties. We then present our main results in Sects. 3 to 6. We start by discussing the halo and stellar mass function in Sect. 3 and their evolution with redshift. Section 4 focuses on the effects of ADM on the distribution of dark matter and baryons within haloes, exploring the density profiles and concentration-mass relation. We then look at the properties of galaxies in Sect. 5. Finally, Sect. 6 presents measurements of the matter power spectra of the different mass components and their evolution in time. In Sect. 7, we summarise our results and present our conclusions.
+
+2. The AIDA simulations
+The AIDA-TNG simulations, Alternative Dark Matter in the TNG universe (AIDA for short, hereafter), consist of three cosmological volumes of increasing resolution and decreasing size simulated in cold and ADM models, with and without baryonic physics. In this work we present the two largest boxes of 110.7 and 51.7 Mpc on a side and the first results obtained from their analysis, while a smaller (and higher resolution) 20 Mpc box will be introduced in an upcoming work. The uniqueness of the AIDA set lies in the fact that we run the same cosmological volumes in multiple dark matter scenarios, spanning cold, warm and self-interacting dark matter. Moreover, we create both a dark matter-only (DMO) and a full-physics (FP) version of each run so that we can disentangle the effects of ADM and baryonic physics as described by the IllustrisTNG galaxy formation
+
+Article number, page 2 of 20
+
+Despali et al.: Introducing the AIDA-TNG simulations
+
+Table 1. AIDA-TNG runs presented in this work.
+
+Name 100/A 100/B 50/A 50/B
+
+Box [Mpc] 110.7
+110.7
+51.7
+51.7
+
+Physics
+DMO FP
+DMO FP
+DMO FP
+DMO FP
+
+mDM [M]
+7.1×107 6.0×107 5.7×108 4.8×108 4.3×106 3.6×106 3.4×107 2.9×107
+
+mbar [M]
+1.1×107
+8.9×107
+6.8×105
+5.4×106
+
+Dz=M0, [kpc]
+1.48 1.48 2.95 2.95 0.57 0.57 1.15 1.15
+
+CDM
+       
+
+WDM 1 keV
+   
+
+WDM 3 keV
+      
+
+WDM 5 keV
+ -
+
+SIDM 1 cm2g-1
+       
+
+vSIDM Correa+21
+       
+
+Notes. We run each box at two resolution levels, where `A' is the highest. The 100/A(B) and 50/A(B) boxes start from the same initial conditions of the TNG100-2(3) and TNG50-2(3) boxes of the original IllustrisTNG project (Nelson et al. 2019). We list the resolution of each run and mark the dark matter models that are included in this work.
+
+model (TNG hereafter Weinberger et al. 2017; Pillepich et al. 2018b). We discuss the considered dark matter scenarios and the integration with the TNG model in more detail in Sects. 2.1, 2.2 and 2.3.
+All simulations start at redshift z = 127 and adopt the cosmological model from Planck Collaboration et al. (2016): m = 0.3089,  = 0.6911, b = 0.0486, H0 = 0.6774 and 8 = 0.8159. The initial conditions (ICs) have been generated with N-GenIC code (Springel 2005) by applying the Zel'dovich approximation on a glass distribution of particles with a linear matter transfer function computed using the CAMB code (Lewis et al. 2000). The 110.7 and 51.7 Mpc boxes (corresponding to 75 and 35 h-1Mpc, respectively) are run from the same ICs of the corresponding runs of the original IllustrisTNG simulations (Pillepich et al. 2018a). For each case, we simulate two resolution levels: `A' corresponds to the TNG100-2 and TNG502 runs, while `B' corresponds to the TNG100-3 and TNG50-3 runs. Therefore, we can compare to many previous results on galaxy formation in CDM and better understand systematics. Haloes and subhaloes are identified using the SUBFIND algorithm, producing catalogues of the halo and galaxy properties with the same information available for the TNG runs (Nelson et al. 2019). In the FP 50/A runs, we reach a best spatial resolution of DM, = 570 parsecs (gravitational softening length), as well as a dark matter and target baryon mass resolution of mDM = 3.6 × 106 M and mbar = 6.8 × 105 M, respectively.
+Table 1 lists the properties of all other runs, and which combinations of box size, resolution and dark matter model have been computed. The choice was made with the aim of a economic use of computational resources and is based on which models produce significant differences compared to CDM at a given resolution ­ an issue particularly relevant for the WDM models, as discussed in the next section.
+2.1. Warm dark matter models
+In WDM models, dark matter particles are lighter (keV) than CDM candidates (GeV) and thus become non-relativistic at sufficiently late times so as to suppress, by free streaming, the formation of low-mass galactic-scale haloes with respect to CDM. The number of satellites of the Milky Way and the properties of its stellar streams, strong gravitational lensing and the Lyman- forest are all well-known probes of the WDM particle mass mWDM.
+
+Each of these is sensitive to the number of low-mass haloes and
+subhaloes in certain redshift and halo mass ranges: our Galaxy, gravitational lenses at distances 0.1  zlens  3, and the distribution of neutral gas on large scales. Joint constraints that com-
+bine the results of such methods are thus more robust than indi-
+vidual measurements. Very warm models are currently already
+excluded, with upper limits at mWDM  5 keV (Gilman et al. 2020b), mWDM  6.046 keV (Enzi et al. 2021), mWDM  7.4 keV (Nadler et al. 2021), mWDM  4.1 keV (Irsic et al. 2024): If dark matter is warm, it still needs to be relatively cold.
+In practice, a suppressed power spectrum is used to re-create
+the initial conditions with the N-GenIC code (Springel et al. 2005; Angulo et al. 2012). The difference between WDM and CDM, and thus the amount of suppression, can be fully mod-
+elled by a transfer function (Bode et al. 2001):
+
+P(k)WDM P(k)CDM
+
+= |Tk|2,
+
+(1)
+
+where
+
+Tk = 1 + (k)2 -5/ ,
+
+and
+
+
+
+=
+
+0.048
+
+X 0.15 0.4
+
+h 1.3 0.65
+
+keV 1.15 mX
+
+1.5
+
+0.29
+.
+
+gX
+
+The parameter  characterises the scale of damping and  = 1.2, gX = 1.5 (Viel et al. 2005). In this way, small-scale fluctuations (high k) are erased while the power spectrum is identical to the CDM one on large scales. From the ratio of the WDM and CDM P(k), one can define the half-mode mass Mhm that corresponds to the scale at which the power spectrum is suppressed by one half and is thus the halo mass below which we expect to erase almost all structures. In the AIDA sample, we consider three different WDM models where the mass of the dark matter particle candidates is mWDM = (1, 3, 5) keV, corresponding to the halfmode masses Mhm = (1.26 × 1010, 3.26 × 108, 5.95 × 107) h-1M. The left panel of Fig. 2 shows the initial power spectra of the considered models. In comparison to the existing observational limits:
+
+­ The warmest model (WDM1 ­ mWDM = 1 keV) is already ruled out since it is incompatible with structure formation
+constraints. However, we use it as an extreme case to emphasise any differences with respect to the CDM simulations and to test the effects of baryonic physics in such a different scenario. We do not run this model at the highest
+
+Article number, page 3 of 20
+
+P(k)
+/m [cm2/g]
+
+A&A proofs: manuscript no. aa53836-25corr
+
+103
+102 z=127 (ICs)
+
+101
+
+100
+
+10 1
+
+10 2
+
+10 3
+
+WDM 5 keV WDM 3 keV
+
+10 4
+
+WDM 1 keV CDM
+
+10 150 1
+
+100
+
+101
+
+102
+
+103
+
+k [h/Mpc]
+
+103 102 101 100 10 1 10 2 10 1300
+
+SIDM1( =1) vSIDM (Correa+21)
+101 <v>1[0k2m/s] 103
+
+Fig. 2. Properties that distinguish alternative models from CDM. Left: Input matter power spectrum P(k) in CDM and WDM models at the initial time of the simulations (z = 127). Warmer models show a cut-off at increasingly larger scales, corresponding to smaller k values. Right: Selfinteraction cross-section /m as a function of velocity. We consider a model with a constant cross-section (blue line) and one with a steep velocity dependence (green line) from Correa (2021).
+
+resolution given that it erases most structures with masses Mvir  1010 M (see Sect. 3). These are already well sampled by the mass resolution of the 100/B and 50/B boxes (see Table 1) which are sufficient to study it properly. ­ The intermediate scenario (WDM3 ­ mWDM = 3 keV), is somewhat at the edge of observational constraints: it is already ruled out by combined analysis, while some individual probes (for example gravitational lensing) still allow it. Given the lack of cosmological hydrodynamical simulations with this model, most constraints are based on predictions from DMO runs. We may not yet fully understand possible systematics coming from zoom-in runs of small samples of galaxies and the extent of possible deviations from CDM at all scales, making it an interesting scenario. Moreover, this model (together with its 7 keV sterile-neutrino counterpart) has been used in the majority of recent numerical explorations of WDM effects (Lovell et al. 2012, 2014; Oman et al. 2024), and thus it is useful for comparisons to previous work.
+­ Finally, the coldest model (WDM5 ­ mWDM = 5 keV) is still considered a viable alternative to CDM by observational constraints. It starts to suppress structures significantly only in the regime of M 5 × 108 M, and thus we only consider it in the highest-resolution runs, which start to probe this mass range. The results presented in Sect. 3 demonstrate that this model is very close to CDM, given the maximum mass and spatial resolution of the two large boxes. Therefore, we choose not to create a FP version of the 50/A WDM5 box, which would be a waste of computational resources, and postpone such a combination to the upcoming higherresolution 20 Mpc simulations.
+The analysis of WDM simulations requires a careful treatment of some numerical effects. It has been demonstrated that any model with a steep suppression in the power spectrum (such as WDM) can be affected by the formation of spurious structures at the low-mass end caused by artificial fragmentation. This happens at a limiting mass Mlim = 10.1 ¯m Lbox/Nd1m/3 k-p2, where
+
+kp corresponds to the maximum in the dimensionless powerspectrum 2(k) (Wang & White 2007). Thus, Mlim depends on the simulation size Lbox and resolution of the dark matter component Ndm, and on the WDM particle mass. We calculated Mlim for each run and found that its values are either below the smallest haloes that we considered or nicely correspond to the upturn in the halo mass function (see the discussion in Sect. 3). We thus used Mlim as a lower limit for the mass function calculation and do not attempt, at this stage, to identify the spurious haloes and separate them from the real ones. Lovell et al. (2014) proposed an empirical way of eliminating spurious subhaloes by tracking their particles to the initial conditions and measuring the shapes of the Lagrangian regions occupied by the protohalo. They identified a typical sphericity of CDM protohaloes and used it to select only WDM systems of comparable shape, disregarding those with very elongated protohaloes. We will apply this method in future works focused on the halo and subhalo properties at the low-mass end.
+2.2. Self-interacting dark matter models
+Self-interacting dark matter generally refers to a variety of models in which dark matter particles have both gravitational and non-gravitational interactions (see Tulin & Yu 2018, for a review). In this scenario, a whole hidden phenomenology of dark interactions could exist, separated from the interaction with ordinary matter (Kaplinghat et al. 2014). Moreover, the selfinteraction cross-section , which regulates the amount of collisions between particles, can be constant or inversely dependent on the relative velocity of particles. The interactions lead to an exchange of energy and momentum between particles, which does not take place in CDM or WDM, and induce modifications of the dark matter distribution within haloes. Over the course of cosmic time, high-density regions are partially eroded, leading to the formation of cores. However, the SIDM phenomenology is complex and, if the interactions are frequent and the core is quickly created, this can cause instability and the onset of
+
+Article number, page 4 of 20
+
+Despali et al.: Introducing the AIDA-TNG simulations
+
+Fig. 3. Visualisation of the dark matter (top), gas (middle), and stellar (bottom) projected mass distributions in a Milky-Way mass halo (Mvir = 6.9 × 1012 M in CDM at z = 0) from the 100/A runs. From left to right, CDM, SIDM1, vSIDM, and WDM3. We zoom-in to the central parts of the halo,  0.5 rvir in the top and middle panels, and  0.25 rvir in the stellar distribution. In the latter, we also mark the distance corresponding to twice the stellar half-mass radius. One can observe a decrease in the number of substructures in WDM3 as well as a clear difference in the gas
+dynamics and the shape of the stellar distribution.
+
+gravothermal core collapse (Koda & Shapiro 2011; Rocha et al. 2013; Turner et al. 2021; Yang & Yu 2021; Zhong et al. 2023), leading to profiles that are cuspier than CDM instead of cores.
+Self-interactions leave a whole set of astrophysical signatures, spanning many orders of magnitudes from dwarf galaxies to galaxy clusters (see Adhikari et al. 2022, for a review). Observational constraints on the self-interaction cross-section can differ significantly, depending on the considered scale. For example, the elongation of haloes hosting elliptical galaxies yields /m  1 cm2g-1 (Peter et al. 2013) and strong lensing arc statistics in galaxy clusters allows /m < 0.1 cm2g-1 (Meneghetti et al. 2001). Given these disparities on different scales, a constant cross-section compatible with cluster scale limitations is unable to lower the central density of dwarf galaxies appreciably (Zavala et al. 2013; Fry et al. 2015). As a result, there has been a surge of interest in SIDM models with velocity-dependent crosssections, where the strength of the interactions decreases with increasing relative velocity of the particles. The effective crosssection in dwarf galaxies can then be several orders of magnitude bigger than in cluster-sized haloes, bringing constraints on dif-
+
+ferent scales into agreement (Zavala & Frenk 2019; Correa 2021; Yang et al. 2023).
+Recent works are instead starting to model the interplay between self-interactions and baryonic physics, finding that previous predictions based on DMO simulations need to be updated. At the scale of (massive) galaxies, Sameie et al. (2018) used simulations of isolated galaxies to show that the cross-talk between SIDM and baryons produces a wide range of halo profiles, depending on how centrally concentrated the baryonic component is. Rose et al. (2023) found that the density profiles of haloes hosting MW galaxies are not cored in the presence of baryons and that SIDM haloes have a stronger response to baryons than CDM ones. Despali et al. (2019) ran full-hydrodynamic zoom-in simulations of nine haloes hosting massive galaxies, finding that SIDM haloes can be both cored and cuspy, depending on halo mass, morphological type, as well as the halo mass accretion history. Moreover, the same simulations show that CDM and SIDM halo shapes are similar when baryons are included (Despali et al. 2022), and thus /m = 1 cm2g-1 is not yet excluded, revising the constraints from Peter et al. (2013). Robertson et al. (2018, 2019, 2021), and Shen et al. (2022) studied the effect of SIDM
+
+Article number, page 5 of 20
+
+A&A proofs: manuscript no. aa53836-25corr
+
+Fig. 4. Same as Fig. 3 but for a galaxy cluster of mass Mvir = 4.1 × 1014 M in CDM at z = 0. In this case, the SIDM1 model produces a more diffuse central halo (see the dark matter component in the top panel), also corresponding to a much larger effective radius (bottom panels).
+
+on the density profiles of galaxy clusters and have concluded that the inclusion of baryons reduces the difference between CDM and SIDM predictions.
+In this work, we consider two self-interacting models with constant and velocity-dependent cross-sections, shown in the right panel of Fig. 2:
+­ One is a classic elastic SIDM model with a constant crosssection /m = 1 cm2g-1 (blue line) - SIDM1 hereafter. This model is already excluded at the scales of galaxy clusters, but it serves as an important comparison to previous works given that it has been used in most SIDM numerical experiments so far. Moreover, the constant cross-section more easily produces predictable effects and eases the interpretation of the other model.
+­ The second is a model with elastic scattering where the interaction cross-section is velocity dependent (vSIDM hereafter). We chose the model by Correa (2021) (green line) which is based on an empirical fit calibrated at the lowvelocity end on observations of dwarf spheroidals in the Milky Way. At these scales, /m = 100 cm2g-1, and thus we expect important effects, while the cross-section drops very rapidly at larger velocities (corresponding to high halo
+
+masses) in order to be consistent with observational limits at the scales of massive galaxies and clusters.
+We used the self-interaction scheme implemented in Arepo by Vogelsberger et al. (2012, 2016, 2019). It corresponds to a particle physics model where the self-scattering between dark matter particles of mass m is set by an attractive Yukawa potential mediated by a new gauge boson in the dark sector. A Monte Carlo approach is used to account for dark matter selfinteractions where pairs of particles selected for collision are assigned new velocities with a randomly drawn direction. The time step is also chosen to be small enough to avoid multiple scatterings during one single step (see Vogelsberger et al. 2012, for more details). The simulations start from the same ICs as the CDM ones, given that self-interactions do not affect the initial perturbations and become important during the late non-linear evolution of structures.
+2.3. TNG galaxies in alternative dark matter
+We employ the TNG galaxy formation model described in detail in Weinberger et al. (2017); Pillepich et al. (2018b). We keep the fiducial TNG galaxy formation model entirely unchanged in all
+
+Article number, page 6 of 20
+
+Despali et al.: Introducing the AIDA-TNG simulations
+
+Fig. 5. Same as Fig. 3 but for a group-scale system with a CDM mass of Mvir = 4.3 × 1013 M undergoing a major merger with a halo of mass Mvir = 4.5 × 1012 M. The merger happens around z = 0 in all scenarios but the timescale differs.
+
+our runs despite the changes in the nature of dark matter. This way, we are able to characterise the effects of ADM models on galaxies and haloes and look at relative differences to their CDM counterparts.
+The TNG model has been extensively tested in large-scale simulations, namely the TNG50, TNG100, and TNG300 volumes (Springel et al. 2018; Pillepich et al. 2018a; Nelson et al. 2018; Marinacci et al. 2018; Naiman et al. 2018; Pillepich et al. 2019; Nelson et al. 2019), plus more recent projects including MillenniumTNG (Pakmor et al. 2023), TNG-Cluster (Nelson et al. 2024) and the THESAN runs (Kannan et al. 2022). Moreover, it has been used in a number of smaller projects of zoomin simulations both in cold (Lee et al. 2024) and ADM models (Despali et al. 2019; Rose et al. 2023). It has been shown to roughly reproduce a broad range of galaxy properties and scaling relations across the galaxy population and as a function of the cosmic epoch. The model updates upon the previous Illustris model (Vogelsberger et al. 2014; Torrey et al. 2014), including a revised kinetic AGN feedback model for the low accretion state (Weinberger et al. 2017) and an improved parametrisation of galactic winds (Pillepich et al. 2018b). The model includes (i) a sub-resolution treatment of the interstellar medium (ISM) as a two-phase gas where cold clumps are embedded in a smooth,
+
+hot phase produced by supernova explosions (Springel & Hernquist 2003); (ii) feedback from supernova explosions and stellar winds, in the form of kinetic and thermal energy; (iii) the production and evolution of nine elements (H, He, C, N, O, Ne, Mg, Si, and Fe), as well as the tracking of the overall gas metallicity and a model for Europium; (iv) density-, redshift-, metallicity-, and temperature-dependent cooling; and (v) super-massive black hole (SMBH) formation, growth and feedback in two different modes (quasar/thermal and kinetic/low-state).
+In Figs. 3, 4 and 5, we show a visualisation of three systems to provide a qualitative picture of the effect of ADM at different scales and of the wealth of information available in the AIDA simulations. In each figure, the top panels show the projected density distribution of dark matter in the FP run of four dark matter scenarios: We focus on the central part of the halo ( 0.5 rvir, represented by the white dashed circle) given that it is here that we expect the most significant differences between dark matter models. Similarly, the middle and bottom panels show the gas density within the same distance of the dark matter and stellar distribution in an even smaller area ( 0.25 rvir). We have chosen these systems from a random selection within each mass bin in the 100/A runs and matched the CDM haloes to their counterparts in the other simulations.
+
+Article number, page 7 of 20
+
+A&A proofs: manuscript no. aa53836-25corr
+
+The first galaxy in Fig. 3 lives in a halo of mass Mvir = 6.7 × 1012 M at z = 0 and has a total stellar mass of M = 1.3 × 1011 M. Looking at the dark matter distribution (top panels), one can see that the overall structure is similar in all simulations, as well as the virial radii (and thus masses) of matched haloes. However, we observed (i) the expected suppression of low-mass structures in WDM and (ii) a more diffuse central peak in selfinteracting models, especially SIDM1. We also observed clear differences in the small-scale distribution of the gas (middle panels) and its accretion and rotation pattern in the halo, which clearly differ in density and compactness ­ or are disrupted in WDM3. Finally, the stellar distribution is more diffuse in the vSIDM model, as shown by the size of the stellar half-mass radius: the dashed circle, which represents 2reff,. Figure 4 shows a more massive system of cluster size: Mvir = 4.1 × 1014 M, M = 2×1012 M and Mgas = 5.2×1013 M. In this case, SIDM1 shows a particularly striking difference both in the dark matter central density and the size of the stellar distribution. In contrast, fewer differences are visible in the gas panels. Finally, in Fig. 5, we show a group mass halo undergoing a major merger. The merger affects the gas distribution similarly in all models, but the timescale is different, highlighting how the underlying dark matter model modifies the dynamics and timings of structure formation. These visualisations allow us to draw a few first qualitative considerations about the differences between the considered dark matter models ­ even though these examples do not represent the full complexity of galaxy and halo properties, as well as environments that are present in the AIDA runs.
+3. Halo and stellar mass functions
+The low-mass end of the halo and subhalo mass functions is known to be affected by modifications to the dark matter particle mass in WDM models (Schneider et al. 2012; Lovell et al. 2012, 2014; Lovell 2020) since the suppression of the smallscale power spectrum P(k) directly alters the formation of objects at the low-mass end. In SIDM, Zavala et al. (2013) showed that only a high constant cross-section of /m = 10 cm2g-1 modifies the number of subhaloes at the low-mass, and Despali et al. (2019) confirmed that the effect was negligible for /m = 1 cm2g-1 using zoom-in simulations including the TNG model. Thus, we do not expect strong differences due to self-interactions alone.
+However, in AIDA the effects of ADM combine with those caused by baryonic physics: Stellar and AGN feedback redistribute matter within the haloes and produce a suppression in the halo and subhalo mass functions of an amount that depends on the details of the galaxy formation model (typically up to  20%, see Schaye et al. 2015; Vogelsberger et al. 2014; Despali & Vegetti 2017; Lovell et al. 2018; Springel et al. 2018). For example, Despali et al. (2019) have shown that the WDM (7 keV sterile neutrino, equivalent to a 3 keV model) mass function of subhaloes hosted by massive galaxies is further depleted in the presence of baryons, using zoom-in runs of four haloes that included the EAGLE galaxy formation model. We now investigate both effects by computing the halo mass function in the DMO and FP runs and its evolution with redshift.
+In the AIDA simulations, we can reliably measure the halo mass function over six orders of magnitude in halo mass and thus characterise the full halo population in all dark matter scenarios. We start by plotting the halo mass functions at redshift z = 0 in Fig. 6 for halo masses in the range 108  Mvir  5 × 1014 M. Here we choose the virial mass Mvir as our definition of halo mass. This is computed by SUBFIND for each FOF group in the
+
+halo catalogue and corresponds to the radius that encloses the virial overdensity vir (Bryan & Norman 1998). We show measurements for the dark (left) and FP (right) runs. In the bottom panels, we plot the ratio of each ADM mass function to CDM to highlight the mass range in which one can observe significant deviations. We also compared AIDA to theoretical predictions, namely, the Despali et al. (2016) virial mass function for CDM and the suppressed number density predicted for WDM by Lovell et al. (2014)
+
+nWDM =
+
+1 +  Mhm
+
+
+,
+
+(2)
+
+nCDM
+
+M
+
+where  = 2.7,  = 0.99 and Mhm is the half-mode mass of the WDM model. As discussed in Sect. 2.1, WDM simulations can be affected by artificial fragmentation below a limiting mass Mlim, causing the identification of spurious structures. The transition to dashed lines in Fig. 6 marks the regime where Mvir  Mlim. We found a good correspondence between Mlim and the upturn of the mass functions at low-mass haloes caused
+by artificial fragmentation.
+In the dark runs, we found excellent consistency between
+the theoretical predictions and our measurements since we ob-
+served the predicted suppression in WDM and instead did not find any significant difference in SIDM counts. In the right panel of Fig. 6, the model by Despali et al. (2016) does not reproduce
+the CDM counts because stellar and AGN feedback suppresses
+the number density at low masses, as mentioned above. In this case, we fit for the slope of the mass function, finding  = -0.82 (instead of -0.9) and used this as a baseline to calculate the pre-
+dicted numbers in WDM instead of the prediction used in the left panel. The number of haloes with masses Mvir < 1010 M is slightly above CDM both in WDM and SIDM, consistent with
+the fact that also Eq. (2) was derived for DMO runs.
+Next, we look at the redshift evolution of the halo mass function and its dependence on ADM and baryonic effects. In each panel of Fig. 7, we show the ratio of the halo mass function in
+one scenario to the reference CDM measurement, considering six snapshots at redshifts between z = 0 and z = 5. At all considered times, the ADM effects are remarkably similar to each other and to the z = 0 case. In SIDM, the 5-10% excess in the number density of haloes with Mvir  5 × 1010 M persists at all redshifts. Our WDM measurements are consistent with those
+by Lovell (2024), who recently used the COCO simulation to analyse the halo mass function up to redshift z = 15 in a WDM model with particle mass mWDM = 3.3 keV ­ thus similar to our WDM3 run. They showed that the suppression in WDM stays consistent for most redshifts, with some differences appearing only at z > 10.
+We then calculated the effect of baryons on the halo mass function. In Fig. 8, we show the ratios between the counts in
+the FP and the corresponding DMO runs in each model and again consider six redshifts between z = 0 (orange) and z = 5 (light blue). Interestingly, baryonic effects are quite similar in all dark matter scenarios. The only exception is the WDM1 run,
+where the number of low-mass haloes is higher in the presence of baryons at z  2, despite the mass function being still depleted
+compared to CDM. However, this could be a non-trivial conse-
+quence of artificial fragmentation and its interplay with the pres-
+ence of baryons. The similarity between dark matter scenarios is
+a remarkable result, considering that the TNG galaxy formation
+model has been calibrated in the standard CDM, and we have not modified it in any way to absorb ADM effects. This happens despite the striking differences in the number density of WDM
+
+Article number, page 8 of 20
+
+Despali et al.: Introducing the AIDA-TNG simulations
+
+dn/dlogM [Mpc 3dex 1]
+
+101
+
+100
+
+50/A 100/A
+
+10 1
+
+50/B
+
+10 2
+
+10 3
+
+10 4
+10 5
+1.25 1.00 0.75 0.50 0.25
+108
+
+Despali+16 Lovell+14 CDM SIDM1
+109 1010
+
+DMO runs, z=0 100/B vSIDM WDM1 WDM3 WDM5
+1M0v1i1r [M 1]012 1013 1014
+
+n/nCDM
+
+dn/dlogM [Mpc 3]
+
+101 Full-physics runs, z=0
+100
+10 1
+10 2
+10 3
+10 4
+10 5
+fit to CDM full-physics
+1.25 1.00 0.75 0.50 0.25
+108 109 1010 M10vi1r1[M 1]012 1013 1014
+
+n/nCDM
+
+Fig. 6. Halo mass function at z = 0 in the DMO (left) and FP (right) runs of the four simulation sets listed in Table 1. For each set, we only plot haloes with masses Mvir  100 mDM, corresponding to increasingly smaller low-mass limits as indicated by the labels in the top-left panel. The smaller panels show the ratio of each model to CDM. The dashed black line gives the theoretical prediction calculated by Despali et al. (2016) ­ which agrees very well with the mass function measured in the DMO runs, while the dotted lines are calculated by applying to it the correction derived by Lovell et al. (2014). In the right panel, we also plot the CDM DMO mass function (black dashed line) to highlight the suppression generated by baryons at the low-mass end, compared to the DMO case. For the WDM runs, the transition between dashed and solid lines marks the limiting mass Mlim below which the runs are affected by artificial fragmentation.
+
+n/nCDM
+
+1.25
+
+CDM
+
+1.00
+
+0.75
+
+0.50
+
+0
+
+2
+
+0.25
+
+0.5 1
+
+3 5
+
+0.00
+
+10M10vir [M101]2 1014
+
+SIDM1
+10M10vir [M101]2 1014
+
+vSIDM
+10M10vir [M101]2 1014
+
+WDM3
+10M10vir [M101]2 1014
+
+WDM1
+10M10vir [M101]2 1014
+
+Fig. 7. Redshift evolution of the effects of different dark matter models. In each panel, we show the ratios of each halo mass function to CDM at six different redshifts between z = 0 (orange) and z = 5 (light blue), calculated by averaging over all the available FP runs of each dark matter
+model.
+
+nFP/ndmo
+
+1.4
+
+1.2
+
+CDM
+
+1.0
+
+0.8
+
+0
+
+2
+
+0.6
+
+0.5
+
+3
+
+1
+
+5
+
+0.4
+
+10M10vir [M10]12 1014
+
+SIDM1
+10M10vir [M10]12 1014
+
+vSIDM
+10M10vir [M10]12 1014
+
+WDM3
+10M10vir [M10]12 1014
+
+WDM1
+10M10vir [M10]12 1014
+
+Fig. 8. Baryonic effects on the halo mass function. In each panel, we compare the FP and DMO runs of each dark matter variation, plotting their ratios at six different redshifts from z = 0 (orange) to z = 5 (light blue), as in Fig. 7.
+
+Article number, page 9 of 20
+
+A&A proofs: manuscript no. aa53836-25corr
+
+4.1. Halo density profiles
+
+10 2
+
+[Mpc 3 dex 1]
+
+10 3
+
+10 4
+
+Wright et al. 2017 Bernardi et al. 2013
+
+100/A
+
+50/A
+
+50/B
+
+10 5 109
+
+M*1(0<130 0 kpc) [M1]011
+
+1012
+
+Fig. 9. Stellar mass function at z = 0. In each run, we consider the stellar mass measured within r = 30 kpc from the halo centre and qualita-
+tively compare it to observations from SDSS (Bernardi et al. 2013) and GAMA (Wright et al. 2017). Solid and dashed lines represent the 100/A and 50/A runs, while we show the 50/B measurements (dot-dashed) only for the WDM1 scenarios. The colour scheme of the different dark
+matter models is the same as in Fig. 6.
+
+haloes and the structural properties of haloes in both alternative scenarios (such as the density profiles discussed later in Sect. 4).
+Finally, we analyse the stellar mass function at z = 0. This is one of the quantities that has been considered in the calibration of the TNG model, and thus, we want to check if it is affected by dark matter physics. In Fig. 9, we qualitatively compare the simulated results to observations from SDSS (Bernardi et al. 2013) and GAMA (Wright et al. 2017). We do not observe systematic differences between different dark matter scenarios at fixed resolution, consistent with the fact that all halo mass functions predict the same number of haloes at Mvir  5 × 1011 M (see the right panel in Fig. 6). This means that, despite the differences at the low-mass end, the models considered here cannot be distinguished in terms of the number of observed galaxies, even in the most extreme cases. The difference due to resolution is consistent with the previous analyses by Pillepich et al. (2018b) and Pakmor et al. (2023). Moreover, comparing our results to the analysis by Pillepich et al. (2018b), we can conclude that variations in the stellar mass function due to ADM models are much smaller than those produced by a modification of the baryonic treatment. In Sect. 5, we return to considering other galaxy properties that have been used in the model calibration and discuss the scaling relations of galaxies in more detail.
+
+4. The structure of dark matter haloes
+Warm and self-interacting models alter how dark matter particles interact, thus impacting the internal structure of haloes and the galaxies they host. In this section, we look at the inner parts of haloes and quantify the effects of WDM and SIDM on density profiles of dark matter (Fig. 10) and baryons (Fig. 11), as well as on the halo concentration-mass relation.
+
+The AIDA boxes allow us to explore many orders of magnitude
+in halo mass as well as to measure the density distribution inside
+haloes down to kilo-parsec scales. We only computed density
+profiles of haloes resolved by at least 500 dark matter particles
+and thus, the 51.7 Mpc boxes are essential to reliably measure density profiles of haloes with Mvir  1010 M, thanks to the higher resolution and smaller particle mass. At the same time,
+the larger boxes provide us with the best statistical sample, especially at the high-mass end, Mvir  1013 M. We measured the density profiles of each halo by binning particles in 30 logarith-
+mically spaced bins in the range between 0.4 kpc and the virial
+radius of the halo. The density within each radial bin is then com-
+puted as the ratio of the total mass of dark matter particles falling
+within said bin, and the volume enclosed between the spherical
+shells defined by the boundaries of the bin. To compute the total
+density profiles, we followed the same procedure but consider
+the mass in stars, gas and SMBHs in addition to dark matter.
+In the top panels of Fig. 10, we show the z = 0 dark matter profiles for five representative bins in halo mass, from 1010 to 1014 M. In each bin, we selected haloes in a narrow range  log Mvir = 0.2 dex around each central value and then calculated the mean density profile of each model in logarithmi-
+cally spaced bins out to the halo virial radius, both in the DMO
+(dashed lines) and FP (solid lines) runs. For each mass bin, we also use the sub-panels to highlight the effect of baryons (middle) and dark matter physics (bottom) on the dark matter distri-
+bution. Given that baryons and dark matter coexist at the centre
+of haloes, we expect that the variations in the dark matter distribution will also affect the baryonic content and vice versa. The general effect of baryons is to enhance the dark matter density in the central region, with the strongest effect being at Mvir  1013 M (see the middle sub-panels) where the star formation and baryon fraction in the inner region are the highest.
+However, the magnitude of the baryonic enhancement depends on the dark matter physics, highlighting that the two effects are interconnected.
+Both warm and self-interacting dark matter can create den-
+sity cores, but the mechanisms that leads to the core formation and the mass ranges are different. The high velocities of WDM particles can naturally lower the concentration of structures at
+the low-mass end of the mass function, starting from haloes with
+a mass approximately one hundred times the model half-mode
+mass Mhm (Ludlow et al. 2016). Based on the half-mode mass values mentioned in Sect. 2.1, we can thus expect cores appearing at Mvir  2 × 1012 M in WDM1 and Mvir  4.8 × 1010 M in WDM3. However, this is the mass scale at which the halo
+concentrations start departing from the CDM values, but a significant effect is only present one order of magnitude below.
+In Fig. 10, we indeed observe a strong deviation of WDM1 profiles (purple lines) at Mvir  1011 M where an inner dark matter core is created both in the DMO (dashed) and FP (solid)
+runs, while the model behaves similarly to CDM at higher
+masses. WDM3 profiles are instead more similar to the cold
+case, but a departure from CDM in the inner parts of the halo can be observed in the lowest mass bin. A different mechanism is at play in SIDM, where the density cores are created over time
+when self-interactions are triggered in the high-density central
+regions (Sameie et al. 2018; Despali et al. 2020). Both SIDM1
+and vSIDM cores are thus larger ­ and deeper ­ for high-mass haloes and decrease at lower masses. The strongest effects are seen in the constant cross-section SIDM1 model (blue lines): In the dark runs, cores reach a size of  10 kpc for 1013 M
+
+Article number, page 10 of 20
+
+/ dmo(r) DM(r) [M /kpc3]
+50/A res. 100/A res.
+
+log(Mvir) 10 109 108 107 106 105 1044
+2
+
+Despali et al.: Introducing the AIDA-TNG simulations
+
+log(Mvir) 11
+
+log(Mvir) 12
+
+log(Mvir) 13
+
+CDM WDM1 WDM3 SIDM1 vSIDM
+
+log(Mvir) 14
+
+/ CDM(r)
+
+1.0
+
+0.5
+
+DMO FP
+
+0.0100
+
+r [kpc1]01
+
+100
+
+r [1k0p1c]
+
+100
+
+r10[1kpc] 102 100
+
+10r1[kpc] 102 100
+
+101r [kpc]102
+
+Fig. 10. Dark matter density profiles at z = 0 when considering five halo mass bins (left to right). We calculated the mean dark matter profile in bins of  log(Mvir) = 0.2 dex around the mean value, both in the FP (solid) and dark (dashed) runs. The profiles were calculated in logarithmically spaced spherical shells from 1 kpc to the halo virial radius. In order to capture both good statistics at high masses and the highest resolution, we average profiles from both the 50/A and 100/A runs for all models ­ except WDM1, where 50/B is employed. The small panels show (i) the ratio of
+each mean profile to its dark counterpart and (ii) to the CDM version. We observe an opposite trend in mass in the WDM and SIDM models. The latter creates larger density cores at high masses and cuspy profiles at Mvir  1012 M, while the former lowers the central density at low masses (halo masses below the half-mode mass Mhm). In all panels, the grey bands indicate 2.3DM for both runs, which is often used as the minimum distance for reliable measurements.
+
+(r) [M /kpc3] 50/A res. 100/A res.
+
+1010
+
+log(Mvir) 10
+
+109
+
+108
+
+107
+
+log(Mvir) 11 CDM WDM1 WDM3 SIDM1 vSIDM
+
+log(Mvir) 12
+
+log(Mvir) 13
+
+log(Mvir) 14 total stars
+
+106
+
+105
+
+104 1.5
+
+1.0
+
+0.5
+
+0.0100
+
+r [kpc1]01
+
+100
+
+r [1k0p1c]
+
+100
+
+r10[1kpc] 102 100
+
+10r1[kpc] 102 100
+
+101r [kpc]102
+
+/ CDM(r)
+
+Fig. 11. Total and stellar mean density profiles in the inner parts of the haloes at z = 0, represented by solid and dashed lines. The mass bins are the same as in Fig. 10, and the bottom panels highlight the effect of alternative models on the total density profiles. Similarly to the dark matter profiles, the total density is affected by core formation in SIDM at the high-mass end, and in WDM at the low-mass end, but the core size and
+depth are reduced.
+
+haloes and  30 kpc for 1014 M. When interactions are velocitydependent, the core sizes are smaller in these two mass bins, while they are identical at lower masses. In the FP run (solid lines), the presence of a massive galaxy helps to reduce the core size (although the core is still present), while at Mvir  1012 M we observe a 5 to 10% increase of the central density compared to CDM, followed by a small central core which is, however, below our resolution limit and can thus be partly artificial.
+It is well known that two-body relaxation creates artificial cores at the centre of CDM haloes at a scale close to the soft-
+
+ening length of the simulation and this has led to the adoption of r  2.3 DM as reliable distances. The same effect is also present in the other dark matter models, as demonstrated by the fact that the WDM/CDM ratios (bottom sub-panels) are close to unity up to the centre of the halo at high masses, where WDM effects do not alter the density distribution (Power et al. 2003;
+Hopkins et al. 2018). The SIDM central core in the mass bins Mvir  1011-12 M is instead much deeper and thus arises due to a combination of numerical effects and self-interactions.
+
+Article number, page 11 of 20
+
+dmo
+101
+
+A&A proofs: manuscript no. aa53836-25corr
+
+Ludlow et al. 2016 Sorini et al. 2024 CDM SIDM1
+
+vSIDM WDM3
+
+full-physics
+
+WDM1
+
+101
+
+Sorini et al. 2024 - Broken PL
+
+NFW concentration - c200c
+
+1010 09
+
+1010
+
+ha1lo01m1 ass - M210001c2[M ] 1013
+
+1014 101009
+
+1010
+
+ha1lo01m1 ass - M21000c12[M ] 1013
+
+1014
+
+Fig. 12. Concentration-mass relation at z = 0 for haloes in the DMO (left) and FP (right) runs. We combine measurements from the 50/A and 100/A boxes, using the latter only for haloes with a mass M200c  1011 M. The coloured lines and symbols show the mean concentration as a function of mass, together with the 1- uncertainty represented by the bands of the corresponding colour. The dashed and dashed-dotted black
+lines show the previous work by Ludlow et al. (2016) and Sorini et al. (2024) on CDM simulations instead. The latter used the IllustrisTNG and
+MillenniumTNG, which also employ the TNG galaxy formation model, and provided a broken-power-law fit for the FP runs, which we show here
+in the right panel.
+
+The formation of a cuspy profile in the mass range of galaxies is consistent with the findings of previous works. For example, Despali et al. (2019) reported similar trends in the profiles (cored at the high-mass end but cuspy at intermediate masses) in zoom-in simulations of massive galaxies run with the SIDM1 and the TNG model. Correa et al. (2024) and Rose et al. (2023) also measured cuspy profiles in SIDM for Milky-Way mass haloes around 1012 M, which can be steeper than CDM. Notably, the effect is similar despite differences in the numerical implementation (SWIFT versus AREPO) and galaxy formation model (EAGLE versus TNG). Rose et al. (2023) concluded that, at the scale of Milky Way galaxies, baryons change the thermal structure of the central region of the halo to a greater extent than the SIDM scattering, and these changes cause SIDM to create cuspier central densities rather than cores because the SIDM scatterings remove the thermal support by transferring heat away from the centre of the galaxy. The EAGLE50 and BAHAMAS-SIDM simulations that include the Eagle galaxy formation model (Robertson et al. 2019, 2021) also produce large cores,  30 kpc for 1014 M. However, in our simulations, we find a stronger effect of baryons on the dark matter profiles (middle panels of Fig. 10) at Mvir = 1014 M compared to their work. Robertson et al. (2019) does not observe the steepening of the profile at the scale of massive galaxies and the density profiles at 1012-13 M for the model with constant cross-section  = 1 cm2g-1 remain shallower in SIDM than CDM. This is the halo mass range where star formation is the most efficient, baryons dominate the inner density profile, and the dark matter nature plays a secondary role. Thus, it could be heavily affected by the galaxy formation model.
+In Fig. 11 we switch to the total and stellar density profiles in the full physics runs and the same mass bins of Fig. 10. Even if stars are a significant or dominant mass component at the centre (see the dotted lines), the profiles are still affected by the different clustering of dark matter in the halo formation and, indeed, we observe that the total density behaves similarly to the dark matter distribution from Fig. 10, even if the effects are weaker. In addition to the maximum reduction that we measure, it is also important to evaluate at which dynamical scale within the halo the
+
+core becomes important: While SIDM cores are larger in massive haloes in physical units, the inner 10-20 kpc corresponds to less than 0.05% of the virial radius, the WDM core created in low-mass haloes corresponds to 15-30% of Rvir. These statistical differences in the density profiles impact astrophysical observables related to the gravitational effects, such as gravitational lensing. At the high-mass end between clusters and massive galaxies, the density cores in the total density profile modify the distribution of Einstein radii and lead to smaller angular separations between the lensed images. Low-mass haloes are instead not dense enough to lens background sources on their own, but they can be detected if they produce additional distortions on lensed arcs (Vegetti & Koopmans 2009). In WDM, the low concentration of low-mass haloes reduces the number of detectable systems as discussed in Gilman et al. (2020a) and Amorisco et al. (2022). The AIDA simulations are thus ideal for comparisons with observational results at multiple scales through analytical predictions and the creation of realistic mock observations.
+4.2. The concentration-mass relation at z = 0
+In light of the results of the previous section, here we discuss the halo concentration-mass relation that summarised the properties of density profiles over the whole range of halo masses. We fit the dark matter density with an NFW profile (NavarroFrenk-White, see Navarro et al. 1996) and calculated the concentration as c200c = R200c/rs, where rs is the scale radius of the NFW fit and R200c is the radius that encloses an overdensity equal to 200 c. In Fig. 12, we plot the concentration-mass relation in the considered five dark matter scenarios. We measure the concentration of the dark matter haloes both in the dark (left panel) and FP (right panel) runs to evaluate the response of the halo to the presence of baryons. The fit was performed in logarithmic scale, and we considered only the radial bins in the range between 2.3DM and R200c. For each halo, we obtained the two parameters s and rs and calculated the halo concentration as c200c. We chose this as opposed to the virial radius Rvir to compare with previous results (Ludlow et al. 2016; Sorini et al. 2024), with which we found good consistency in CDM. In WDM
+
+Article number, page 12 of 20
+
+Despali et al.: Introducing the AIDA-TNG simulations
+9
+
+Fig. 13. Quantitative tests of the TNG galaxy formation model in all dark matter scenarios at z = 0. We focus on some of the quantities that have been used in the design of the TNG model (see Pillepich et al. 2018b) together with the stellar mass function (Fig. 9) and the galaxy sizes (Fig. 14). The colour-correspondence to the dark matter model is the same in all panels. Top left: Stellar-mass halo-mass relation. Here, M is measured within 30 kpc from the centre. The black dotted curves show empirical estimates based on CDM and the model by Moster et al. (2010), Behroozi et al. (2019) and Shuntov et al. (2022), while the coloured curves show the results from our simulations, represented by running mean and standard deviations for each dark matter scenario. Top right: Gas fraction of haloes within r500c. Bottom left: Central SMBH mass as a function of the stellar mass (here calculated within twice the stellar half-mass radius r) for all subhaloes at z = 0. The dotted lines mark the 1 region. Bottom right: Cosmic SFRD as a function of redshift compared qualitatively to observational measurements by Behroozi et al. (2013); Madau & Dickinson (2014).
+
+and SIDM, the core formation causes a decrease in concentration at opposite ends of the halo mass range. We observe the turnover at M200c  1012 M for WDM1 and M200c  1011 M for WDM3, corresponding to 100 Mhm, as discussed above. Given that the SIDM1 model produces the largest cores, it also shows the largest departure from the CDM concentration-mass relation towards at high masses. Instead, the vSIDM model is less extreme at cluster masses but starts departing from CDM at lower masses compared to SIDM1.
+In the right panel, we show the concentration-mass relation measured in our FP runs and calculated by fitting the dark matter density profile of haloes. The concentration increases compared to the dark matter runs, peaking at M200c  1012 M and reaching a plateau at low masses. This is due to the adiabatic contraction of infalling gas, which promotes star formation, increasing the central density and facilitating further dark matter collapse into the central regions of the halo. We compare our measurements to the broken power-law best fit (dot-dashed line) by Sorini et al. (2024) using the IllustrisTNG and MillenniumTNG runs, which employ the same galaxy formation model used here. Due to the presence of the central baryonic component, the effects of ADM models are reduced but maintain the same trend: The WDM sup-
+
+pression starts at a lower mass compared to the dark runs, while the SIDM one does at higher mass.
+In all cases, we fit an NFW profile to the density profiles. In the presence of large cores, we already know that this model is a priori not a good description of the data, which may be better fit by a more flexible Einasto profile (Einasto 1965). Nevertheless, the NFW concentrations are a good indicator of the departure of the profiles from the standard CDM model. In a follow-up paper, we will model the redshift evolution of density profiles and of the concentration-mass relation, and provide a better fitting function for ADM models.
+5. Galaxy properties in alternative dark matter models
+In the AIDA simulations, we employ the TNG galaxy formation model and leave it unchanged in all runs. Since the model was calibrated in a CDM universe, it is natural to ask whether or not alternative models may break it in some way and, in this case, how are the galaxy properties modified. In Fig. 9, we have already shown that the stellar mass function at z = 0 is not significantly affected. We now look at the other galaxy properties that have been considered in the calibration of the TNG model.
+
+Article number, page 13 of 20
+
+A&A proofs: manuscript no. aa53836-25corr
+50/B-WDM1 100/A
+50/A
+
+CDM SIDM1 vSIDM WDM1 WDM3
+
+Fig. 14. Left: Galaxy sizes expressed in terms of r as a function of the galaxy stellar mass at z = 0. The ratios of alternative models to CDM (bottom subpanel) show us that SIDM models produce larger galaxies in most mass bins (see also the bottom panel of Fig. 4 as an example). We show the running mean for the 50/A (dashed), 100/A (solid) and 50/B (dot-dashed) runs, the latter only to represent the WDM1 model. We compare simulated results to observational values from the SLACS strong gravitational lenses (ETGs Auger et al. 2010), galaxies (spheroidal and disk) from the KiDS survey (Roy et al. 2018) and from the SDSS (early and late type) survey (Shen et al. 2003). We note, however, that the galaxy size is estimated as the projected half-light radius in observations while we plot the stellar half-mass radius, and the observed galaxies are at different redshifts. They are thus only meant to provide a qualitative comparison. Right: Full normalised distribution of sizes highlighting the lack of galaxies with small sizes in SIDM models.
+
+In Fig. 13, we consider four of these properties related to the stellar and gas distribution in galaxies: the stellar mass fraction as a function of halo mass M200c at z = 0 (top left), the gas fraction within r500c as a function of halo mass (top right), the SMBH mass as a function of stellar mass (bottom left), and the starformation rate density (SFRD) as a function of redshift (bottom right). Despite the clear impact of ADM models on the halo mass function and density profiles, these global properties of galaxies are very similar in all considered scenarios. Compared to the results by Pillepich et al. (2018b), the difference between dark matter scenarios is much smaller than that due to variations of baryonic physics (see their Fig. B1). Galaxy properties are also affected by the resolution of the simulations, as one can appreciate in the panels showing multiple boxes. The difference between the 50/A and 100/A curves is again consistent with the analysis by Pillepich et al. (2018b, Fig. A2) and Pakmor et al. (2023, Fig. 2), while the effect of dark matter physics at fixed resolution induces much smaller changes. For reference, the resolution of the 50/A boxes is in between that of the TNG50-1 and TNG100-1 runs, while 100/A is comparable to TNG300-1.
+Figure 14 shows another observable property of galaxies that has been considered in the calibration: galaxy size (represented by the stellar half-mass radius) as a function of stellar mass. In the left panel, the running means from simulations are compared to observational measurements: spheroidal and disk galaxies from the KiDS survey (Roy et al. 2018), early and late types from the SDSS survey (Shen et al. 2003), and elliptical galaxies acting as strong gravitational lenses from the SLACS sample (ETGs Auger et al. 2010). Unlike Fig. 13, here we observe a systematic difference between CDM and SIDM: Self-interactions drive dark matter particles outwards from the halo centre, leading to a lower dark matter density and galaxy sizes larger by a
+
+factor of 20% in the mass range between 5 × 109 and 1012 M. A similar trend is also present at higher redshift, maintaining the same distribution up to z = 0.5 and then decreasing to 10% at higher redshift. In the right panels, we show the normalised distribution of sizes separating the two levels of resolution to highlight the lack of systems with small r in both cases. The velocity-dependent cross-section (green line) has the largest effect below M = 1010 M, while the constant cross-section impact is larger at higher masses. This difference can be identified in the example haloes shown in Fig. 3, where vSIDM produces the largest effective radius r, and Fig. 4 where instead it is SIDM1.
+We conclude from the results presented in this section that there is a reassuring agreement between the AIDA simulations and the TNG original runs, meaning that most of the results found for CDM in TNG papers can also be expected to hold in all AIDA simulations. Despite the differences in the dark matter physics that emerges in the halo mass functions and profiles, all scenarios produce similar galaxy properties, indicating that the TNG galaxy formation model can produce a realistic population in all scenarios. This gives us a big advantage since we can use previous results to factor out baryonic effects and unveil those due to the physics of dark matter. Global properties such as those analysed in Fig. 13 are not systematically modified, and it is thus not necessary to recalibrate the galaxy formation model at this stage to study the galaxy population in WDM and SIDM. However, properties that depend on the redistribution of matter within haloes due to dark matter physics are affected, such as the distribution of galaxy sizes shown in Fig. 14. The visualisations in Fig. 3, 4, and 5 indeed suggest that additional signatures can be found when looking at small scales. This will be the focus of upcoming AIDA papers.
+
+Article number, page 14 of 20
+
+Despali et al.: Introducing the AIDA-TNG simulations
+
+104 z=0
+
+10500//AA
+
+and the measurements agree well in the intermediate range covered by both boxes.
+
+103
+
+6.1. Baryonic effects
+
+102
+
+PCDM(k)
+
+101
+
+100
+
+TNG300-1, Springel+18
+
+10 1
+
+linear theory dmo
+
+all matter
+
+10 2
+
+baryons gas
+
+stars
+
+10 130 1
+
+100 k [h/Mpc1]01
+
+102
+
+Fig. 15. Matter power spectrum in the CDM runs at z = 0 for the DMO (black) and the FP runs separated into different components (coloured
+curves). The dotted lines show the prediction from linear theory, while
+the yellow line shows the result from Springel et al. (2018) for the larger TNG300-1 box. We used the two high-resolution boxes, 100/A (solid lines) and 50/A (dashed lines). All power spectra are computed with a grid of size 20483, leading to Nyquist frequencies for the two cases of k = 85.8 h Mpc-1 and k = 183 h Mpc-1, respectively. Here and in the
+following figures, we used these values to limit the curves and plot the
+remaining points as a fainter line.
+
+6. Matter power spectrum
+In this section we investigate the combined effect of baryons and ADM on the matter power spectrum and its evolution with redshift. We already know that the initial power spectrum is suppressed in WDM models (see Fig. 2) and that we expect some of this suppression to persist until z = 0, given that the number density of low-mass haloes is lower than in CDM (see Fig. 6). Instead, the initial power is unchanged in SIDM, and so any difference compared to CDM is created by self-interactions during the evolution of structures. At the same time, baryonic physics alters the power on scales smaller than 1 Mpc (Hellwing et al. 2016; Springel et al. 2018). We thus expect that baryonic and dark matter effects will combine at these scales, where they both appear. We note that in this Sect. we express distances in units of Mpc h-1 and kpc h-1 to match the usual convention of the field.
+We calculated the matter power spectrum in each box by sampling the mass distribution with a 20483 grid. In the FP simulations, we computed the total matter power spectrum as well as the spectrum of each mass component separately. Figure 15 shows the relative power of dark matter and baryons, separated in gas and stars, in the CDM boxes at z = 0. In the same figure, we also show the DMO spectrum, the prediction from linear theory and the results from Springel et al. (2018) ­ with which we find very good consistency. We compare the two high-resolution boxes to each other (solid versus dashed lines). As expected, the smaller 50/A boxes cannot sample the power spectrum correctly on large scales, while the 100/A runs follow well the results from Springel et al. (2018). The situation is reversed at small scales,
+
+We first look at the effect of baryons in each dark matter model. To this end, we compared the total matter power spectrum in the FP runs to the corresponding DMO one. In Fig. 16, we visualise this as PFP/Pdmo ratios measured at five redshifts ­ z = 0, 1, 3, 5, and 10 ­ in the 100 (top) and 50 (bottom) Mpc boxes. The CDM results are shown in black and are identical in all panels, while the other colours stand for the four alternative models for which we have hydrodynamical runs. Baryons start suppressing the power spectrum at k  1 h Mpc-1 and have the strongest effect at z = 0 and k  15 h Mpc-1, corresponding to r  100 h-1kpc. At smaller scales, close to the centre of galaxies and clusters, the power is instead rapidly enhanced in the FP simulations. Interestingly, baryonic effects have an almost identical effect on the power spectrum of all dark matter models. This indicates that the drastic changes in the baryon distribution relative to the dark matter brought about by galaxy formation physics are a dominant factor in determining the change of the total matter power spectrum, despite differences in the underlying dark matter physics.
+To aid the comparison to previous works, we also show measurements from the Illustris, TNG300 (Springel et al. 2018) and Eagle (Hellwing et al. 2016) simulations. As already discussed in Springel et al. (2018), the effect is noticeably stronger in Illustris than in all other runs: The suppression extends to considerably larger scales and is stronger in amplitude due to the important differences in the AGN feedback model. On the other hand, the TNG300 and Eagle measurements are close to the CDM measurement (black solid line) presented here.
+Some small differences are visible at k  50 h Mpc-1, corresponding to scales r  20 h-1 kpc: in self-interacting scenarios, the power spectrum is enhanced compared to CDM at z < 3, with SIDM1 showing the strongest effect, followed by vSIDM. This is consistent with the fact that SIDM1 (followed by vSIDM) haloes have the strongest response to the presence of baryons at the centre of haloes and to adiabatic contraction, which led to much denser central regions compared to the dark runs ­ see the middle panels of Fig. 10. This effect is only visible at low redshift (z  1), when the effect of self-interactions strongly kicks in.
+6.2. The impact of dark matter physics
+Next, we looked into the effect of ADM at z = 0. In Fig. 17, we plot the ratio between the ADM power spectra and the CDM one. The power is unchanged for k < 1 h Mpc-1, corresponding to length scales larger than 1 h-1 Mpc. The large-scale distribution of structures which unfolds in the cosmic web of filaments, walls, and knots is similar in all models. In the DMO runs (left panel), the power is suppressed in all alternative models, although by different amounts. The two boxes show a good convergence: The 50 Mpc and 100 Mpc boxes are represented, respectively, by the thin and thick (fainter) lines. The SIDM1 model shows a very strong difference from CDM, reaching a level that is comparable to the most extreme WDM1 model at high-k. However, WDM1 starts departing from CDM at larger scales (k  4 instead of k  20), thus showing the different origin of the effect. Warm models show a global effect due to the
+
+Article number, page 15 of 20
+
+PFP/PDMO
+
+A&A proofs: manuscript no. aa53836-25corr
+
+2.0 1.8
+
+SIDM1
+TNG300 z=0 Illustris z=0
+
+1.6
+
+Eagle z=0
+
+vSIDM
+
+1.4
+
+1.2
+
+1.0
+
+0.8
+
+0.6
+
+4.0 3.5
+
+100
+0 1
+
+101
+
+3.0
+
+3 5
+
+2.5
+
+10
+
+100
+
+101
+
+2.0
+
+1.5
+
+1.0
+
+0.5 100 k [h1/0M1pc] 102 100 k [h1/0M1pc]
+
+WDM3
+
+100
+
+101
+
+102 100 k [h1/0M1pc]
+
+WDM1 box 100
+
+100
+
+101
+
+box 50
+
+102 100 k [h1/0M1pc] 102
+
+PFP/PDMO
+
+Fig. 16. Baryonic effects on the total matter power-spectrum measured at five different redshifts from z = 0 to z = 10. Here we plot the P(k) ratio of the FP run of each model to its corresponding DMO one. Each column considers one alternative model (coloured lines of different styles) and contrasts it with the CDM result at the same redshift (black lines). In the top (bottom) panels, we look at the 100/A (50/A) boxes. We see how the
+smaller box allows us to reach higher k values and larger enhancements of the power spectrum due to the baryons located at the very centre of haloes. The power spectrum of the WDM1 model (rightmost panels) is measured in the 100/B and 50/B boxes and compared to the corresponding CDM case ­ the reason why the black curves differ in the right panel. The grey bands mark a difference within 20% from the DMO value. In the leftmost panels, we also compare to previous results at z = 0 from the Illustris, TNG300 (Springel et al. 2018) and Eagle (Hellwing et al. 2016)
+simulations.
+
+lack of low-mass systems, while self-interactions appear only at the very centre of haloes.
+The two colder WDM models are more similar to CDM, indicating that the suppression introduced in the initial conditions has been largely reduced at z = 0. The other panels of Fig. 17 show measurements from the FP runs, using only the dark matter component (middle) and all matter (right). The middle panel thus illustrates how much the presence of baryons impacts the dark matter distribution. Different models react differently to the presence of baryons on small scales: In WDM1 and WDM3, the suppression is still clear, while the SIDM1 and vSIDM power spectra are now much more similar to than in the dark runs. The total matter power spectra (right panel) show a similar behaviour. This can be understood in terms of the different physical origins of the suppression: Given that baryons cool and form galaxies at the centres of the available dark matter (sub)haloes, their presence does not increase the number of low-mass haloes and subhaloes in WDM models (see the halo mass functions in Fig. 6). On the other hand, when such baryonic structures are formed at the centres of haloes, they reduce the fraction of dark matter in the inner regions and, with it, the fraction of matter that is affected by self-interactions; their presence prevents the formation of large cores in the total density profiles which remain closer to the CDM case (see Fig. 11).
+
+The AIDA runs allow us to follow the evolution of P(k)
+throughout the entire history of the Universe and determine the redshifts at which WDM and SIDM effects are most important. Moreover, we can also follow each component (dark matter, stars
+and gas) separately to understand how the interplay between
+dark matter physics and galaxy formation impacts each of them.
+Figure 18 focuses on the redshift evolution of the power spectrum of different components in each dark matter scenario, computed at six representative redshifts between z = 20 and z = 0. To highlight the differences to CDM at small scales, we plot again the ratios P/PCDM for the dark runs (first column) and different components of the FP runs (other columns). In the DMO
+runs, WDM shows, by construction, the strongest reduction of
+power on small scales at high-z due to the lack of low-mass
+haloes and subhaloes, and the formation of cores in haloes with masses Mvir  0.1 × Mhm. The relative difference to CDM is then mitigated towards z = 0 when structure formation becomes increasingly more non-linear. Instead, SIDM models evolve in the
+opposite direction: They are equivalent to CDM at high-z, while differences emerge later when the self-interactions create large cores at the centre of haloes (see Fig. 10, which are the main source of the lack of power at k > 10 h Mpc-1 (l < 100 h-1kpc). By z = 0 the suppression in SIDM1 is comparable to or stronger than in WDM models: in the SIDM1 model, we have 10% less power at k = 20 h Mpc-1 and 30% at k > 200 h Mpc-1.
+
+Article number, page 16 of 20
+
+P/PCDM
+
+Despali et al.: Introducing the AIDA-TNG simulations
+
+1.2
+dmo run
+1.1
+
+1.0
+
+0.9
+
+0.8
+
+SIDM1
+
+0.7
+
+vSIDM WDM1
+
+0.6
+
+WDM3 WDM5
+
+100
+
+1k0[1h/Mpc] 102
+
+dm in FP run
+
+box 100 box 50
+
+100
+
+1k0[1h/Mpc] 102
+
+all matter in FP run
+
+100
+
+1k0[1h/Mpc] 102
+
+Fig. 17. Matter power spectrum in alternative models compared to the CDM scenario in the dark (left) and FP (middle and right) runs at z = 0. For each dark matter model, we plot the ratio to the CDM value in the range 1 h Mpc-1  k  300 h Mpc-1, corresponding to scales 1 h-1Mpc  l  0.003 h-1Mpc. At scales larger than 1 h-1Mpc, the power spectra are identical, indicating that the large-scale structure distribution is unaltered by
+ADM effects. Each dark matter model is represented by a different colour, while the thin (thick) lines show the results for the 50 (100) Mpc boxes.
+
+The velocity-dependent model is more complex, as the selfinteraction cross-section is inversely proportional to the relative velocity of particles, which is a proxy for halo mass. The vSIDM cores are smaller than in SIDM1 at the high-mass end (see Fig. 10) and they disappear for Mvir  1012 M. This is reflected in a weaker suppression that is relevant at k  60 h Mpc (l  20 h-1kpc).
+The second column in Fig. 18 shows the ratio of total matter power spectra measured in the full physics runs, calculated with all particle types (dark matter, gas, stars and SMBHs). In all scenarios, the z = 0 suppression is less pronounced than in the DMO runs due to the presence of baryonic matter on small scales, which is unaffected by dark matter physics. In both WDM models, this is the case at all redshifts, while SIDM produces a more complex evolution with fluctuations within 10% around P/PCDM = 1. The next two columns divide the FP runs into dark and baryonic matter to show the relative contributions of the two. For example, from Fig. 15, we know that stars dominate the power at all scales compared to gas. Unexpected variations of baryonic power can thus be related to differences in the star formation history of the simulation. In the bottom-right panel for Fig. 13, the SFRD is higher in WDM3 than in CDM for z > 2.5, which is related to the higher power in the baryonic component in this model.
+7. Summary and conclusions
+This work introduces the AIDA-TNG project (AIDA for short hereafter) and presents the first results from two cosmological volumes of 110.7 and 51.7 Mpc on a side, corresponding to 75 and 35 h-1Mpc. Each volume is evolved to z = 0 in multiple dark matter scenarios, including a complete treatment of baryonic physics, described by the IllustrisTNG galaxy formation model (Weinberger et al. 2017; Pillepich et al. 2018b). Apart from CDM, we consider three WDM models with particle masses mWDM = (1, 3, 5) keV, and two self-interacting dark matter scenarios where the cross-section is either constant ( = 1 cm2g-1) or follows the velocity-dependent model by Correa (2021). Our runs reach a maximum mass resolution of mDM = 3.6 × 106 M and mbar = 6.8 × 105 M in our 50/A flagship run. The family of runs of AIDA-TNG are listed and summarised in Table 1. These
+
+will be complemented by higher-resolution 20 Mpc box, which will be presented in an upcoming work.
+We present the first analysis of the AIDA runs in terms of halo and stellar mass functions, density profiles, galaxy properties and matter power spectra. We compare the outcome of the full physics runs (FP) with those including only dark matter (DMO) and across dark matter models. These comparisons reveal the scales that are most affected by the physics of dark matter and the somewhat opposite trends in WDM and SIDM.
+In Sect. 3, we measured the halo mass function at redshifts between z = 0 and z = 5 and quantified the effects of the dark matter models and baryons. We recovered the suppression at small scales predicted by WDM and found good consistency with previous results. Self-interactions do not modify the mass function in the DMO runs, while in the FP ones they produce a  5 - 10% increase in the number density of haloes below 1011 M when compared to CDM. In Sect. 4, we measured the dark matter and total density profiles of haloes over six orders of magnitudes in mass ­ from 109 M to 1014 M ­ and extract the halo concentration-mass relation. In the DMO runs, selfinteractions create density cores of sizes increasing with mass, leading to a very different dark matter distribution in haloes. Instead, WDM creates cores in low-mass haloes, starting at a mass about 100 times the model half-mode mass. These trends persist in the FP runs, although the presence of baryons reduces the sizes and depth of dark matter cores. Moreover, SIDM models produce steeper inner slopes than CDM at intermediate masses Mvir  1012 M. These signatures of warm and self-interacting dark matter are visible not only in the dark matter density but also in the stellar and total matter distribution, highlighting the interplay between dark and luminous matter.
+The design of the AIDA project also allows us to perform quantitative tests of the galaxy formation model in all dark matter scenarios and evaluate the properties of the galaxy population. In Sect. 5, we move to the properties of galaxies and perform quantitative tests of the galaxy formation model in all considered scenarios. We look at quantities that have been considered in the design of the TNG model. The z = 0 stellar and gas mass fractions within haloes, the z = 0 super-massive black hole mass, and the cosmic star formation rate density are all well consistent across dark matter scenarios. The distribution of
+
+Article number, page 17 of 20
+
+A&A proofs: manuscript no. aa53836-25corr
+
+P/PCDM
+
+P/PCDM
+
+P/PCDM
+
+P/PCDM
+
+dmo
+
+1.1 vSIDM - 50/A
+
+1.0 0.9
+
+0 1
+
+5 10
+
+0.8
+
+2 3
+
+20
+
+0.7
+
+k [h/Mpc]
+
+1.1 SIDM1 - 50/A
+
+1.0
+
+0.9
+
+0.8
+
+0.7
+
+k [h/Mpc]
+
+1.1 WDM3 - 50/A
+
+1.0
+
+0.9
+
+0.8
+
+0.7 1.0
+
+WDM1 - 5k0/[Bh/Mpc]
+
+0.8
+
+0.6
+
+100
+
+k [1h0/1Mpc]
+
+dmo
+
+vSIDM - 100/A
+
+1.0
+
+0.9
+
+0 1
+
+5 10
+
+0.8
+
+2 3
+
+20
+
+SIDM1 - 1k00[h/A/Mpc] 1.0
+
+0.9
+
+0.8 WDM3 - 1k00[h/A/Mpc]
+1.0
+
+0.9
+
+0.8 WDM1 - 1k00[h/B/Mpc]
+1.0 0.9 0.8 0.7 100 k [h/M1p0c1]
+
+102 100 102 100
+
+all matter
+
+dark matter
+
+k [h/Mpc]
+
+k [h/Mpc]
+
+k [h/Mpc]
+
+k [h/Mpc]
+
+k [h/Mpc]
+
+k [h/Mpc]
+
+k [1h0/1Mpc] 102 100 k [1h0/1Mpc] 102 100
+
+all matter
+
+dark matter
+
+k [h/Mpc]
+
+k [h/Mpc]
+
+k [h/Mpc]
+
+k [h/Mpc]
+
+k [h/Mpc]
+
+k [h/Mpc]
+
+k [h/M1p0c1]
+
+102 100 k [h/M1p0c1]
+
+102 100
+
+baryons
+
+k [h/Mpc]
+k [h/Mpc]
+k [h/Mpc]
+k [1h0/1Mpc] 102 baryons
+
+k [h/Mpc]
+
+k [h/Mpc]
+
+k [h/Mpc]
+
+k [h/M1p0c1]
+
+102
+
+P/PCDM
+
+P/PCDM
+
+P/PCDM
+
+P/PCDM
+
+Fig. 18. Redshift evolution of the matter power spectra in alternative models compared to the CDM scenario in the two boxes. Each panel shows the ratio between the two for a particular case. From left to right, we show the DMO power and the total power in the FP, followed by the separate power spectra of dark matter and baryons in the FP boxes. Each colour stands for a redshift from z = 20 (light blue) to z = 0 (orange).
+
+Article number, page 18 of 20
+
+Despali et al.: Introducing the AIDA-TNG simulations
+
+galaxy sizes instead shows a signature of self-interactions, which create larger sizes compared to CDM. This indicates that alternative models considered here affect properties that depend on the distribution of matter within haloes and galaxies, but not scaling relations associated with the total halo or stellar mass. Similarly, in Sect. 3, we found that the stellar mass function is not significantly different across models, and thus, the prediction of the model for galaxy counts is preserved. Moreover, we compared the FP and DMO of each scenario and found that the TNG galaxy formation model produces a similar suppression of the halo mass function (Sect. 3) and the matter power-spectrum (Sect. 6) in all models with some deviations only in the WDM1 runs at redshift z = 2 and above. These results suggest that the TNG model can reproduce the overall properties of structures and galaxies in all considered scenarios and that baryonic effects can, to first order, be factored out when comparing dark matter models. Moreover, compared to the analysis by Pillepich et al. (2018b), who considered variations in the baryonic model, we see that the latter introduces much larger differences in galaxies compared to ADM. Nevertheless, some properties of galaxies are affected by the physics of dark matter: The total and stellar density profiles are (i) cored at high masses in SIDM, (ii) cuspy at the scale of massive galaxies and below in SIDM, and (iii) are cored at low masses in WDM. Moreover, the stellar distribution in SIDM galaxies is more extended than in CDM.
+It is well known that baryons also modify the matter power spectrum on scales smaller than 1 Mpc, creating a suppression of  20%. In Sect. 6 we find that this is once again very similar across all dark matter models despite the larger differences between alternative models and CDM. We also quantify the variations in the small-scale power due to ADM physics, considering the dark matter, total and baryonic power spectra. Once again, WDM and SIDM models show opposite trends: The initial WDM suppression is reduced towards z = 0, while selfinteractions create important variations towards low redshift.
+The AIDA-TNG project offers a unique opportunity to study structure and galaxy formation in ADM scenarios. In this work, we showed that it can be used to generate predictions at multiple scales and a variety of cosmological environments while simultaneously capturing subgalactic physics. New and upcoming observational facilities, such as Euclid, JWST, Vera Rubin, ALMA, VLBI and ELT will soon provide large statistical samples of galaxies and exciting progress in resolution, giving us a sharper view of the properties of dark matter. AIDA is extremely timely: Our simulations will be instrumental in guiding the interpretation of existing and upcoming observations, giving us a fantastic window of opportunity to make an impact in the field of dark matter and galaxy formation.
+Data availability
+The original IllustrisTNG simulations are publicly available and accessible at www.tng-project.org/data (Nelson et al. 2019), where AIDA-TNG will also be made public in the future. Data directly related to this publication is available on request from the corresponding author. Additional information about AIDA can be found online at https://gdespali.github. io/AIDA/.
+Acknowledgements. GD thanks Haibo Yu, Ruediger Pakmor, Daneng Yang and Carlo Giocoli for useful discussions on the models and the code. GD would like to thank her late PhD supervisor Bepi Tormen for teaching her how to run simulations and always find the best names for them. We acknowledge the EuroHPC Joint Undertaking for awarding this project access to the EuroHPC supercomputer LUMI, hosted by CSC (Finland) and the LUMI consortium through
+
+a EuroHPC Extreme Scale Access call. We acknowledge ISCRA and ICSC for awarding this project access to the LEONARDO supercomputer, owned by the EuroHPC Joint Undertaking, hosted by CINECA (Italy). GD acknowledges the funding by the European Union - NextGenerationEU, in the framework of the HPC project ­ "National Centre for HPC, Big Data and Quantum Computing" (PNRR - M4C2 - I1.4 - CN00000013 ­ CUP J33C22001170001). LM acknowledges the financial contribution from the PRIN-MUR 2022 20227RNLY3 grant "The concordance cosmological model: stress-tests with galaxy clusters" supported by Next Generation EU and from the grant ASI n. 2024-10-HH.0 "Attività scientifiche per la missione Euclid ­ fase E". DN acknowledges funding from the Deutsche Forschungsgemeinschaft (DFG) through an Emmy Noether Research Group (grant number NE 2441/1-1). We thank the referee for the appreciation of our work. This research made use of the public Python packages matplotlib (Hunter 2007), NumPy (Harris et al. 2020), COLOSSUS (Diemer 2018) and Py-SPHViewer (Benitez-Llambay 2015).
+References
+Adhikari, S., Banerjee, A., Boddy, K. K., et al. 2022, arXiv e-prints, arXiv:2207.10638
+Amorisco, N. C., Nightingale, J., He, Q., et al. 2022, MNRAS, 510, 2464 Angulo, R. E., Springel, V., White, S. D. M., et al. 2012, MNRAS, 426, 2046 Auger, M. W., Treu, T., Gavazzi, R., et al. 2010, ApJ, 721, L163 Bahé, Y. M., Schaye, J., Schaller, M., et al. 2022, MNRAS, 516, 167 Ballard, D. J., Enzi, W. J. R., Collett, T. E., Turner, H. C., & Smith, R. J. 2024,
+MNRAS, 528, 7564 Bechtol, K., Drlica-Wagner, A., Balbinot, E., et al. 2015, The Astrophysical Jour-
+nal, 807, 50 Behroozi, P., Wechsler, R. H., Hearin, A. P., & Conroy, C. 2019, MNRAS, 488,
+3143 Behroozi, P. S., Wechsler, R. H., & Wu, H.-Y. 2013, ApJ, 762, 109 Benitez-Llambay, A. 2015, py-sphviewer: Py-SPHViewer v1.0.0 Bernardi, M., Meert, A., Sheth, R. K., et al. 2013, MNRAS, 436, 697 Bhattacharyya, J., Adhikari, S., Banerjee, A., et al. 2022, ApJ, 932, 30 Bode, P., Ostriker, J. P., & Turok, N. 2001, ApJ, 556, 93 Borrow, J., Schaller, M., Bahé, Y. M., et al. 2023, MNRAS, 526, 2441 Bose, S., Hellwing, W. A., Frenk, C. S., et al. 2016, MNRAS, 455, 318 Boylan-Kolchin, M., Bullock, J. S., & Kaplinghat, M. 2011, MNRAS, 415, L40 Brooks, A. M., Kuhlen, M., Zolotov, A., & Hooper, D. 2013, ApJ, 765, 22 Bryan, G. L. & Norman, M. L. 1998, ApJ, 495, 80 Bullock, J. S. & Boylan-Kolchin, M. 2017, ARA&A, 55, 343 Correa, C., Schaller, M., Schaye, J., et al. 2024, arXiv e-prints, arXiv:2403.09186 Correa, C. A. 2021, MNRAS, 503, 920 Correa, C. A., Schaller, M., Ploeckinger, S., et al. 2022, MNRAS, 517, 3045 Creasey, P., Sameie, O., Sales, L. V., et al. 2017, MNRAS, 468, 2283 Despali, G., Giocoli, C., Angulo, R. E., et al. 2016, MNRAS, 456, 2486 Despali, G., Heinze, F. M., Fassnacht, C. D., et al. 2024, arXiv e-prints, submitted
+to A&A under review, arXiv:2407.12910 Despali, G., Lovell, M., Vegetti, S., Crain, R. A., & Oppenheimer, B. D. 2020,
+MNRAS, 491, 1295 Despali, G., Sparre, M., Vegetti, S., et al. 2019, MNRAS, 484, 4563 Despali, G. & Vegetti, S. 2017, MNRAS, 469, 1997 Despali, G., Walls, L. G., Vegetti, S., et al. 2022, MNRAS, 516, 4543 Diemer, B. 2018, ApJS, 239, 35 Drlica-Wagner, A., Bechtol, K., Rykoff, E., et al. 2015, The Astrophysical Jour-
+nal, 813, 109 Eckert, D., Ettori, S., Robertson, A., et al. 2022, A&A, 666, A41 Einasto, J. 1965, Trudy Astrofizicheskogo Instituta Alma-Ata, 5, 87 Enzi, W., Murgia, R., Newton, O., et al. 2021, MNRAS, 506, 5848 Enzi, W. J. R., Krawczyk, C. M., Ballard, D. J., & Collett, T. E. 2024, arXiv
+e-prints, submitted to MNRAS, arXiv:2411.08565 Fischer, M. S., Brüggen, M., Schmidt-Hoberg, K., et al. 2022, MNRAS, 516,
+1923 Fischer, M. S., Kasselmann, L., Brüggen, M., et al. 2024, MNRAS, 529, 2327 Forouhar Moreno, V. J., Benítez-Llambay, A., Cole, S., & Frenk, C. 2022, MN-
+RAS, 517, 5627 Fry, A. B., Governato, F., Pontzen, A., et al. 2015, MNRAS, 452, 1468 Gilman, D., Birrer, S., Nierenberg, A., et al. 2020a, MNRAS, 491, 6077 Gilman, D., Birrer, S., & Treu, T. 2020b, A&A, 642, A194 Harris, C. R., Millman, K. J., van der Walt, S. J., et al. 2020, Nature, 585, 357 Hellwing, W. A., Schaller, M., Frenk, C. S., et al. 2016, MNRAS, 461, L11 Hopkins, P. F., Wetzel, A., Keres, D., et al. 2018, MNRAS, 480, 800 Hunter, J. D. 2007, Computing In Science & Engineering, 9, 90 Irsic, V., Viel, M., Haehnelt, M. G., et al. 2024, Phys. Rev. D, 109, 043511 Kannan, R., Garaldi, E., Smith, A., et al. 2022, MNRAS, 511, 4005 Kaplinghat, M., Keeley, R. E., Linden, T., & Yu, H.-B. 2014, Physical Review
+Letters, 113, 021302
+
+Article number, page 19 of 20
+
+A&A proofs: manuscript no. aa53836-25corr
+Kaplinghat, M., Ren, T., & Yu, H.-B. 2020, J. Cosmology Astropart. Phys., 2020,
+027 Kim, S. Y., Peter, A. H. G., & Hargis, J. R. 2018, Phys. Rev. Lett., 121, 211302 Klypin, A., Kravtsov, A. V., Valenzuela, O., & Prada, F. 1999, ApJ, 522, 82 Koda, J. & Shapiro, P. R. 2011, MNRAS, 415, 1125 Lee, M. E., Genel, S., Wandelt, B. D., et al. 2024, ApJ, 968, 11 Lewis, A., Challinor, A., & Lasenby, A. 2000, Astrophys. J., 538, 473 Lovell, M. R. 2020, MNRAS, 493, L11 Lovell, M. R. 2024, MNRAS, 527, 3029 Lovell, M. R., Eke, V., Frenk, C. S., et al. 2012, MNRAS, 420, 2318 Lovell, M. R., Frenk, C. S., Eke, V. R., et al. 2014, MNRAS, 439, 300 Lovell, M. R., Pillepich, A., Genel, S., et al. 2018, MN-
+RAS[arXiv:1801.10170] Ludlow, A. D., Bose, S., Angulo, R. E., et al. 2016, MNRAS, 460, 1214 Madau, P. & Dickinson, M. 2014, ARA&A, 52, 415 Marinacci, F., Vogelsberger, M., Pakmor, R., et al. 2018, MNRAS, 480, 5113 Mastromarino, C., Despali, G., Moscardini, L., et al. 2023, MNRAS, 524, 1515 Meneghetti, M., Cui, W., Rasia, E., et al. 2023, A&A, 678, L2 Meneghetti, M., Davoli, G., Bergamini, P., et al. 2020, Science, 369, 1347 Meneghetti, M., Yoshida, N., Bartelmann, M., et al. 2001, MNRAS, 325, 435 Minor, Q. E., Kaplinghat, M., & Li, N. 2017, ApJ, 845, 118 Moster, B. P., Somerville, R. S., Maulbetsch, C., et al. 2010, ApJ, 710, 903 Nadler, E. O., Birrer, S., Gilman, D., et al. 2021, ApJ, 917, 7 Nadler, E. O., Yang, D., & Yu, H.-B. 2023, ApJ, 958, L39 Naiman, J. P., Pillepich, A., Springel, V., et al. 2018, MNRAS, 477, 1206 Navarro, J. F., Frenk, C. S., & White, S. D. M. 1996, ApJ, 462, 563 Nelson, D., Kauffmann, G., Pillepich, A., et al. 2018, MNRAS, 477, 450 Nelson, D., Pillepich, A., Ayromlou, M., et al. 2024, A&A, 686, A157 Nelson, D., Springel, V., Pillepich, A., et al. 2019, Computational Astrophysics
+and Cosmology, 6, 2 Oman, K. A., Frenk, C. S., Crain, R. A., Lovell, M. R., & Pfeffer, J. 2024, MN-
+RAS, 533, 67 O'Neil, S., Vogelsberger, M., Heeba, S., et al. 2023, MNRAS, 524, 288 Pakmor, R., Springel, V., Coles, J. P., et al. 2023, MNRAS, 524, 2539 Peter, A. H. G., Rocha, M., Bullock, J. S., & Kaplinghat, M. 2013, MNRAS,
+430, 105 Pillepich, A., Nelson, D., Hernquist, L., et al. 2018a, MNRAS, 475, 648 Pillepich, A., Nelson, D., Springel, V., et al. 2019, MNRAS, 490, 3196 Pillepich, A., Springel, V., Nelson, D., et al. 2018b, MNRAS, 473, 4077 Planck Collaboration, Ade, P. A. R., Aghanim, N., et al. 2014, A&A, 571, A1 Planck Collaboration, Ade, P. A. R., Aghanim, N., et al. 2016, A&A, 594, A24 Power, C., Navarro, J. F., Jenkins, A., et al. 2003, MNRAS, 338, 14 Ragagnin, A., Meneghetti, M., Bassini, L., et al. 2022, A&A, 665, A16 Ragagnin, A., Meneghetti, M., Calura, F., et al. 2024, A&A, 687, A270 Robertson, A., Harvey, D., Massey, R., et al. 2019, MNRAS, 488, 3646 Robertson, A., Massey, R., Eke, V., Schaye, J., & Theuns, T. 2021, MNRAS,
+501, 4610 Robertson, A., Massey, R., Eke, V., et al. 2018, MNRAS, 476, L20 Robles, V. H., Bullock, J. S., Elbert, O. D., et al. 2017, MNRAS, 472, 2945 Rocha, M., Peter, A. H. G., Bullock, J. S., et al. 2013, MNRAS, 430, 81 Rose, J. C., Torrey, P., Vogelsberger, M., & O'Neil, S. 2023, MNRAS, 519, 5623 Roy, N., Napolitano, N. R., La Barbera, F., et al. 2018, MNRAS, 480, 1057 Sameie, O., Creasey, P., Yu, H.-B., et al. 2018, MNRAS, 479, 359 Schaller, M., Borrow, J., Draper, P. W., et al. 2024, MNRAS, 530, 2378 Schaye, J., Crain, R. A., Bower, R. G., et al. 2015, MNRAS, 446, 521 Schneider, A., Smith, R. E., Macciò, A. V., & Moore, B. 2012, MNRAS, 424,
+684 Shen, S., Mo, H. J., White, S. D. M., et al. 2003, MNRAS, 343, 978 Shen, X., Borrow, J., Vogelsberger, M., et al. 2024, MNRAS, 527, 2835 Shen, X., Brinckmann, T., Rapetti, D., et al. 2022, MNRAS, 516, 1302 Shuntov, M., McCracken, H. J., Gavazzi, R., et al. 2022, A&A, 664, A61 Sorini, D., Bose, S., Pakmor, R., et al. 2024, MNRAS[arXiv:2409.01758] Springel, V. 2005, MNRAS, 364, 1105 Springel, V. 2010, MNRAS, 401, 791 Springel, V. & Hernquist, L. 2003, MNRAS, 339, 289 Springel, V., Pakmor, R., Pillepich, A., et al. 2018, MNRAS, 475, 676 Springel, V., White, S. D. M., Jenkins, A., et al. 2005, Nature, 435, 629 Stücker, J., Angulo, R. E., Hahn, O., & White, S. D. M. 2022, MNRAS, 509,
+1703 Torrey, P., Vogelsberger, M., Genel, S., et al. 2014, MNRAS, 438, 1985 Tulin, S. & Yu, H.-B. 2018, Physics Reports, 730, 1 Turner, H. C., Lovell, M. R., Zavala, J., & Vogelsberger, M. 2021, MNRAS, 505,
+5327 Vegetti, S. & Koopmans, L. V. E. 2009, MNRAS, 392, 945 Viel, M., Lesgourgues, J., Haehnelt, M. G., Matarrese, S., & Riotto, A. 2005,
+Physical Review D, 71, 063534 Vogelsberger, M., Genel, S., Springel, V., et al. 2014, MNRAS, 444, 1518 Vogelsberger, M., Zavala, J., Cyr-Racine, F.-Y., et al. 2016, MNRAS, 460, 1399 Vogelsberger, M., Zavala, J., & Loeb, A. 2012, MNRAS, 423, 3740 Vogelsberger, M., Zavala, J., Schutz, K., & Slatyer, T. R. 2019, MNRAS, 484,
+5437 Wang, J. & White, S. D. M. 2007, MNRAS, 380, 93 Weinberger, R., Springel, V., Hernquist, L., et al. 2017, MNRAS, 465, 3291 Wright, A. H., Robotham, A. S. G., Driver, S. P., et al. 2017, MNRAS, 470, 283 Yang, D., Nadler, E. O., & Yu, H.-B. 2023, The Astrophysical Journal, 949, 67 Yang, D. & Yu, H.-B. 2021, Phys. Rev. D, 104, 103031 Zavala, J. & Frenk, C. S. 2019, Galaxies, 7, 81 Zavala, J., Vogelsberger, M., & Walker, M. G. 2013, MNRAS, 431, L20 Zhong, Y.-M., Yang, D., & Yu, H.-B. 2023, MNRAS, 526, 758
+Article number, page 20 of 20
+
+
