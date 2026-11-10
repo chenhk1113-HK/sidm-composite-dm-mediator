@@ -58,6 +58,7 @@ Each is the saved output of a 15-layer `scripts/verify_release_gate.py` run on a
 |---|---|
 | `evidence_n23`, `evidence_n24`, `evidence_n25`, `evidence_n26` | the four audit rounds |
 | `evidence_n27_20261108`, `evidence_n28_20261108` | the 2026-11-08 record round and decision D12 (added to the index 2026-11-10 — the folders existed but were never listed here) |
+| `evidence_FrontPage_20261110` | front-page rewrite (README 869 -> 202 lines): the two gate runs that failed (MSYS env var, then stale CG-16 inventory) and their logs, the pre-rewrite page, the CG-16 re-scan |
 | `evidence_CMAnchor_20261110` | `d362721` (c-M anchor labelling, D9 resolved, slots [56]-[58]); its own record commit is certified by `gate_run_final.txt` in that folder |
 | `evidence_sweep20261103` | `8f262ba` (new-data sweep) |
 | `evidence_kb_tier1_20261103`, `evidence_kb_tier2_20261103` | `2d7e0b7`, `4a715ce` (literature intake 21/21) |

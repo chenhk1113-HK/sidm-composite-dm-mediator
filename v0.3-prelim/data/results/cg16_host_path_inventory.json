@@ -1449,10 +1449,6 @@
         "host_path_lines": 3
       },
       {
-        "path": "README.md",
-        "host_path_lines": 1
-      },
-      {
         "path": "Snakefile",
         "host_path_lines": 1
       },
@@ -2279,7 +2275,7 @@
     "pinned_source": 3,
     "pinned_exception": 3,
     "historical_frozen_code": 230,
-    "docs_prose": 142,
+    "docs_prose": 141,
     "data_artifact": 69,
     "other": 0
   },
