@@ -3,13 +3,20 @@
 Per v40.43a: 3-prescription marginalization across Elbert+ 2015,
 Burkert-style, and Sameie+ 2020 prescriptions. Critical finding:
 the v40.43 ROBUST verdict (all prescriptions < 1 sigma) is REFUTED
-by Sameie+ 2020, which gives c-M tension = -1.31 sigma (opposite
-direction to Elbert+/Burkert-style).
+by Sameie+ 2020, which gives c-M tension of the OPPOSITE sign to
+Elbert+/Burkert-style (v19.2-F overpredicts c_200).
 
-This test locks the 3-prescription result so any future change
-that makes either Elbert+ or Burkert-style give c-M tension > 1 sigma
-(WORSE than v40.43) or that makes Sameie+ give c-M tension < 1 sigma
-(contradicting the v40.43a finding) FAILS the test.
+Numbers quoted at the Diemer+ 2019 anchor (median 7.90 at M_200 = 4.7e9
+Msun, 1 sigma = 0.16 dex), corrected 2026-11-10 per registry defect D9:
+  Elbert+ 2015     c_200 = 6.0   +0.75 sigma   (Ohana+ anchor: +2.06)
+  Burkert-style    c_200 = 3.6   +2.13 sigma   (Ohana+ anchor: +3.45)
+  Sameie+ 2020     c_200 = 24.0  -3.02 sigma   (Ohana+ anchor: -1.70)
+The pre-fix values (-1.31, +0.32, +0.93) were understated by ln(10) = 2.303
+and are reproducible via c_M_tension_sigma_legacy().
+
+This test locks the 3-prescription result so any future change that moves
+Elbert+ or Burkert-style off their anchor values, or flips the Sameie+ sign,
+FAILS the test.
 
 Reference: scripts/v19_2_f_cloud9_cM_three_prescriptions.py
 """

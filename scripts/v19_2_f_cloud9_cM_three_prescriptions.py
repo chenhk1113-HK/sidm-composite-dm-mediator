@@ -31,6 +31,9 @@ from constants import (  # PAIRING: ARCHIVED PAIR
     F_H_PLACEHOLDER_G7, F_H_YANG_PLUS_LOW, F_H_YANG_PLUS_MID, F_H_YANG_PLUS_HIGH, F_H_T202_NBODY, F_H_SINGLE_COMPONENT, SIGMA_PEAK_LEGACY_PAIR_174 as SIGMA_PEAK_CM2_PER_G_ARCHIVED, V_TARGET_KMS, SIGMA_KMS, SIGMA_0_LEGACY_PAIR_052 as SIGMA_0_CM2_PER_G_ARCHIVED, A_SLOPE, V_REF_KMS,
 )
 from canonical_numbers import sigma_m_canonical_gaussian
+from elbert2015_c_tau_prescription import (  # D9 anchor labels (2026-11-10)
+    C200_MEDIAN_OHANA2026_IMPLIED, c_M_tension_sigma_ohana2026,
+)
 from elbert2015_c_tau_prescription import (
     c200_combined_tau as c200_elbert_tau,
     c200_cosmological_median, c_M_tension_sigma,
@@ -88,9 +91,13 @@ def cloud9_cM_three_prescriptions(f_H, sigma_peak=SIGMA_PEAK_CM2_PER_G_ARCHIVED)
     for name, c200_func, _ in PRESCRIPTIONS:
         c_200 = c200_func(tau, CLOUD9_C_0)
         tension = c_M_tension_sigma(c_200, CLOUD9_M_HALO) if c_200 else None
+        # D9 anchor labels: Diemer+ 2019 median vs Ohana+ 2026 implied median.
+        tension_ohana = c_M_tension_sigma_ohana2026(c_200) if c_200 else None
         prescription_results[name] = {
             "c_200": c_200,
             "c_M_tension_sigma": tension,
+            "c_M_tension_sigma_diemer2019": tension,
+            "c_M_tension_sigma_ohana2026": tension_ohana,
         }
         if tension is not None:
             tensions.append(tension)
@@ -107,6 +114,8 @@ def cloud9_cM_three_prescriptions(f_H, sigma_peak=SIGMA_PEAK_CM2_PER_G_ARCHIVED)
         "t_core_Gyr": t_core,
         "tau": tau,
         "c_med_cosmological": c_med,
+        "c_med_ohana2026_implied": C200_MEDIAN_OHANA2026_IMPLIED,
+        "scatter_convention_dex": 0.16,
         "prescription_results": prescription_results,
         "tension_min": tension_min,
         "tension_max": tension_max,
@@ -165,8 +174,14 @@ def main():
     print("  The Sameie+ 2020 prescription predicts c_200 = 24.0 (cuspy collapse,")
     print("  2x NFW ceiling), vs Elbert+ (c_200 = 6.0) and Burkert-style (c_200 = 3.6).")
     print(f"  The c-M tension direction FLIPS: Sameie+ gives {sameie_ref:.2f} sigma (v19.2-F")
-    print("  overpredicts c_200), Elbert+ gives +0.32 sigma (underpredicts),")
-    print("  Burkert-style gives +0.93 sigma (underpredicts more).")
+    print("  overpredicts c_200), Elbert+ gives "
+          f"{_r0['elbert_2015']['c_M_tension_sigma_diemer2019']:+.2f} sigma (underpredicts),")
+    print("  Burkert-style gives "
+          f"{_r0['burkert_style']['c_M_tension_sigma_diemer2019']:+.2f} sigma (underpredicts more).")
+    print("  (All three at the Diemer+ 2019 anchor, 0.16 dex; at the Ohana+ 2026 anchor")
+    print(f"   the same prescriptions give {_r0['elbert_2015']['c_M_tension_sigma_ohana2026']:+.2f}, "
+          f"{_r0['burkert_style']['c_M_tension_sigma_ohana2026']:+.2f} and "
+          f"{_r0['sameie_2020']['c_M_tension_sigma_ohana2026']:+.2f} sigma.)")
     print()
     print(f"  The 3-prescription |c-M tension| RANGE is {elbert_ref:.2f}-{abs(sameie_ref):.2f} sigma. The ROBUST")
     print("  verdict of v40.43 is REFUTED: the c-M tension is prescription-dependent.")

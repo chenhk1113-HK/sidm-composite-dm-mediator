@@ -42,6 +42,9 @@ from constants import (  # PAIRING: ARCHIVED PAIR
     F_H_PLACEHOLDER_G7, F_H_YANG_PLUS_LOW, F_H_YANG_PLUS_MID, F_H_YANG_PLUS_HIGH, F_H_T202_NBODY, F_H_SINGLE_COMPONENT, SIGMA_PEAK_LEGACY_PAIR_174 as SIGMA_PEAK_CM2_PER_G_ARCHIVED, V_TARGET_KMS, SIGMA_KMS, SIGMA_0_LEGACY_PAIR_052 as SIGMA_0_CM2_PER_G_ARCHIVED, A_SLOPE, V_REF_KMS,
 )
 from canonical_numbers import sigma_m_canonical_gaussian
+from elbert2015_c_tau_prescription import (  # D9 anchor labels (2026-11-10)
+    C200_MEDIAN_OHANA2026_IMPLIED, c_M_tension_sigma_ohana2026,
+)
 from elbert2015_c_tau_prescription import (
     c200_combined_tau, c200_cosmological_median, c_M_tension_sigma,
 )
@@ -86,7 +89,15 @@ def cloud9_cM_elbert(f_H, sigma_peak=SIGMA_PEAK_CM2_PER_G_ARCHIVED):
     c_200 = c200_combined_tau(tau, CLOUD9_C_0)
     c_med = c200_cosmological_median(CLOUD9_M_HALO)
     tension = c_M_tension_sigma(c_200, CLOUD9_M_HALO) if c_200 else None
+    # ANCHOR DISCIPLINE (D9 fix, 2026-11-10). `tension` is measured against
+    # the Diemer+ 2019 median (c_med above, 8.20 at this mass). Ohana+ 2026's
+    # own c-M relation implies a median of 12.81 at Cloud-9's mass, so their
+    # quoted 3.2 sigma is NOT on the same scale as this number. Record both
+    # and compare only within an anchor.
+    tension_ohana = c_M_tension_sigma_ohana2026(c_200) if c_200 else None
+    ohana_measured = c_M_tension_sigma_ohana2026(4.0)  # Ohana+ best-fit c_200 = 4.0 -> 3.16 sigma
     delta_vs_ohana = tension - 3.2 if tension is not None else None
+    delta_vs_ohana_same_anchor = (ohana_measured - tension_ohana) if tension_ohana is not None else None
 
     return {
         "f_H": f_H,
@@ -97,6 +108,14 @@ def cloud9_cM_elbert(f_H, sigma_peak=SIGMA_PEAK_CM2_PER_G_ARCHIVED):
         "c_med_cosmological": c_med,
         "c_M_tension_sigma": tension,
         "delta_vs_ohana": delta_vs_ohana,
+        "c_M_tension_anchor": "diemer_2019 (primary), ohana_2026_implied (comparative)",
+        "median_c200_diemer2019": c_med,
+        "median_c200_ohana2026_implied": C200_MEDIAN_OHANA2026_IMPLIED,
+        "c_M_tension_sigma_diemer2019": tension,
+        "c_M_tension_sigma_ohana2026": tension_ohana,
+        "ohana_measured_c200_tension_ohana_anchor": ohana_measured,
+        "delta_vs_ohana_same_anchor": delta_vs_ohana_same_anchor,
+        "scatter_convention_dex": 0.16,
     }
 
 

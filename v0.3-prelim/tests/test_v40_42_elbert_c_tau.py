@@ -3,7 +3,14 @@
 Per v40.42: the v19.2-F Cloud-9 c-M tension analysis under the Elbert+
 2015 c-tau prescription (Nemotron 120B's recommended fix) gives:
   - c_200 = 6.0 (saturated at 50% of NFW floor) for tau >= 5
-  - c-M tension = 0.32 sigma (vs Ohana+ 3.2 sigma)
+  - c-M tension = 0.75 sigma against the Diemer+ 2019 c-M median (7.90 at
+    M_200 = 4.7e9 Msun), or 2.06 sigma against Ohana+ 2026's own c-M relation
+    (implied median 12.81); Ohana+ 2026's measured c_200 = 4.0 is 1.85 / 3.16
+    sigma on the same two anchors. Stated anchor-independently, Elbert+ moves
+    c_200 by log10(6.0/4.0) = 0.176 dex = 1.10 sigma.
+    (The 0.32 sigma figure this file used to quote was the pre-2026-11-10
+     convention, which divided a dex deviation by 0.16 * ln(10); see registry
+     defect D9 and c_M_tension_sigma_legacy().)
   - All f_H in [0.3, 1.0] give the SAME c_200 (because all give tau > 5)
 
 This is qualitatively different from v40.39 (which used Yang+ Eq. 5

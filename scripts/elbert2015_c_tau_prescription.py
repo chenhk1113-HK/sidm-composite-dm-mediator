@@ -138,12 +138,63 @@ def c200_cosmological_median(M_halo):
 
 
 def c_M_tension_sigma(c_200, M_halo, scatter_dex=0.16):
-    """How many sigma below cosmological median is c_200?
-    Diemer+ 2019 scatter: 0.16 dex in log10(c_200) (Ohana+ choice).
+    """How many sigma below the Diemer+ 2019 c-M median is c_200?
+
+    CONVENTION (FIXED 2026-11-10, registry defect D9): one sigma is ONE
+    scatter_dex in log10(c_200), so
+
+        sigma = [log10(c_med) - log10(c_200)] / scatter_dex
+
+    Before this fix the function divided by scatter_dex * ln(10), which
+    understated every c-M tension by a factor ln(10) = 2.303. The old
+    behaviour is preserved verbatim in c_M_tension_sigma_legacy() so numbers
+    published under the old convention stay reproducible and traceable. The
+    corrected convention is the one Ohana+ 2026 use: their own quoted pair
+    (c_200 = 4.0 at 3.2 sigma, 0.16 dex) closes only when dividing by 0.16,
+    not by 0.16 * ln(10).
     """
+    c_med = c200_cosmological_median(M_halo)
+    return (math.log10(c_med) - math.log10(c_200)) / scatter_dex
+
+
+def c_M_tension_sigma_legacy(c_200, M_halo, scatter_dex=0.16):
+    """DEPRECATED (unit error, see c_M_tension_sigma). Kept only so older
+    result JSONs and older draft numbers remain reproducible. Do NOT cite."""
     c_med = c200_cosmological_median(M_halo)
     sigma_log_c = scatter_dex * math.log(10)
     return (math.log10(c_med) - math.log10(c_200)) / sigma_log_c
+
+
+# ---------------------------------------------------------------------------
+# Second c-M anchor: Ohana+ 2026's own concentration-mass relation
+# ---------------------------------------------------------------------------
+# The observational tension argued against in this paper is defined against
+# OHANA+ 2026's c-M relation, not Diemer+ 2019's. Ohana+ 2026 report their
+# best-fit SIDM halo as c_200 = 4.0 at 3.2 sigma below their median with a
+# 0.16 dex scatter, which IMPLIES a median of
+#
+#     c_med = 4.0 * 10**(3.16 * 0.16) = 12.81
+#
+# at Cloud-9's mass. That value is IMPLIED from their own quoted pair; it is
+# not a re-fit of their relation. It differs from the Diemer+ 2019 median
+# (8.20 at M_200 = 4.7e9 Msun) by a factor 1.56. Every c-M sigma quoted in
+# the paper must name which relation it is measured against: mixing the two
+# is the cross-anchor arithmetic documented as registry defect D9.
+C200_MEDIAN_OHANA2026_IMPLIED = 12.81
+
+
+def c_M_tension_sigma_ohana2026(c_200, scatter_dex=0.16, c_med=None):
+    """Deviation of c_200 from Ohana+ 2026's c-M relation median, in sigma
+    (implied median 12.81 at Cloud-9 mass, 0.16 dex). Positive = below."""
+    med = C200_MEDIAN_OHANA2026_IMPLIED if c_med is None else c_med
+    return (math.log10(med) - math.log10(c_200)) / scatter_dex
+
+
+def c_M_shift_sigma(dex_offset, scatter_dex=0.16):
+    """Anchor-INDEPENDENT statement of a prescription's effect: how many
+    sigma does a shift of dex_offset in log10(c_200) move the tension?
+    log10(6.0 / 4.0) = 0.176 dex -> 1.10 sigma under EITHER c-M relation."""
+    return dex_offset / scatter_dex
 
 
 if __name__ == "__main__":

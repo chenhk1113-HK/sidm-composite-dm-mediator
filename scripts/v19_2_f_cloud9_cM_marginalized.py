@@ -35,6 +35,9 @@ from constants import (  # PAIRING: ARCHIVED PAIR
     F_H_PLACEHOLDER_G7, F_H_YANG_PLUS_LOW, F_H_YANG_PLUS_MID, F_H_YANG_PLUS_HIGH, F_H_T202_NBODY, F_H_SINGLE_COMPONENT, SIGMA_PEAK_LEGACY_PAIR_174 as SIGMA_PEAK_CM2_PER_G_ARCHIVED, V_TARGET_KMS, SIGMA_KMS, SIGMA_0_LEGACY_PAIR_052 as SIGMA_0_CM2_PER_G_ARCHIVED, A_SLOPE, V_REF_KMS,
 )
 from canonical_numbers import sigma_m_canonical_gaussian
+from elbert2015_c_tau_prescription import (  # D9 anchor labels (2026-11-10)
+    C200_MEDIAN_OHANA2026_IMPLIED, c_M_tension_sigma_ohana2026,
+)
 from elbert2015_c_tau_prescription import (
     c200_combined_tau as c200_elbert_tau,
     c200_cosmological_median, c_M_tension_sigma,
@@ -92,12 +95,20 @@ def cloud9_cM_marginalize(f_H, sigma_peak=SIGMA_PEAK_CM2_PER_G_ARCHIVED):
     for name, c200_func, _ in PRESCRIPTIONS:
         c_200 = c200_func(tau, CLOUD9_C_0)
         tension = c_M_tension_sigma(c_200, CLOUD9_M_HALO) if c_200 else None
+        # D9 anchor labels: Diemer+ 2019 median (8.20 at this mass) vs
+        # Ohana+ 2026's implied median (12.81). Never compare across anchors.
+        tension_ohana = c_M_tension_sigma_ohana2026(c_200) if c_200 else None
         prescription_results[name] = {
             "c_200": c_200,
             "c_M_tension_sigma": tension,
+            "c_M_tension_sigma_diemer2019": tension,
+            "c_M_tension_sigma_ohana2026": tension_ohana,
         }
         if tension is not None:
             tensions.append(tension)
+
+    ohana_tensions = [v["c_M_tension_sigma_ohana2026"] for v in prescription_results.values()
+                      if v["c_M_tension_sigma_ohana2026"] is not None]
 
     tension_min = min(tensions) if tensions else None
     tension_max = max(tensions) if tensions else None
@@ -110,11 +121,15 @@ def cloud9_cM_marginalize(f_H, sigma_peak=SIGMA_PEAK_CM2_PER_G_ARCHIVED):
         "t_core_Gyr": t_core,
         "tau": tau,
         "c_med_cosmological": c_med,
+        "c_med_ohana2026_implied": C200_MEDIAN_OHANA2026_IMPLIED,
+        "scatter_convention_dex": 0.16,
         "prescription_results": prescription_results,
         "tension_min": tension_min,
         "tension_max": tension_max,
         "tension_mean": tension_mean,
         "tension_range": tension_range,
+        "tension_min_ohana_anchor": min(ohana_tensions) if ohana_tensions else None,
+        "tension_max_ohana_anchor": max(ohana_tensions) if ohana_tensions else None,
     }
 
 
@@ -138,10 +153,23 @@ def main():
 
     print()
     print("MARGINALIZATION SUMMARY (all f_H cases):")
+    _r0 = results[0][2]
+    print(f"  Anchors (never mix): Diemer+ 2019 median = {_r0['c_med_cosmological']:.2f} | "
+          f"Ohana+ 2026 implied median = {_r0['c_med_ohana2026_implied']:.2f} | scatter 0.16 dex")
     tensions_all = [r["tension_max"] for _, _, r in results]
-    print(f"  Max c-M tension across prescriptions: {max(tensions_all):.2f} sigma")
-    print(f"  Ohana+ 2026 published: 3.2 sigma")
-    print(f"  Reduction vs Ohana+: {3.2 - max(tensions_all):.2f} sigma")
+    ohana_all = [r["tension_max_ohana_anchor"] for _, _, r in results
+                 if r["tension_max_ohana_anchor"] is not None]
+    ohana_min = [r["tension_min_ohana_anchor"] for _, _, r in results
+                 if r["tension_min_ohana_anchor"] is not None]
+    print(f"  Max c-M tension across prescriptions (Diemer+ 2019 anchor): {max(tensions_all):.2f} sigma")
+    if ohana_all:
+        print(f"  Max c-M tension across prescriptions (Ohana+ 2026 anchor): {max(ohana_all):.2f} sigma")
+    print(f"  Ohana+ 2026 published tension (their own anchor): 3.2 sigma")
+    if ohana_min:
+        print(f"  Like-for-like reduction vs Ohana+ measured (Ohana+ anchor): "
+              f"{3.16 - min(ohana_min):.2f} sigma")
+    print(f"  (The cross-anchor subtraction 3.2 - max(Diemer) is NOT a valid comparison;")
+    print(f"   it was defect D9. Anchor-independent shift: log10(6.0/4.0) = 0.176 dex = 1.10 sigma.)")
     print()
     print("ROBUSTNESS VERDICT:")
     if max(tensions_all) < 1.0:
@@ -160,11 +188,14 @@ def main():
     print("    c-M tension depends on c_med comparison")
     print("  Under Elbert+ 2015 (shallower decay, higher floor):")
     print("    c_200 = 6.0 (saturated at 50% NFW for tau >= 5)")
-    print("    c-M tension = 0.32 sigma (per v40.42)")
+    _elb0 = results[0][2]["prescription_results"]["elbert_2015"]
+    print(f"    c-M tension = {_elb0['c_M_tension_sigma_diemer2019']:.2f} sigma (Diemer+ 2019 anchor), "
+          f"{_elb0['c_M_tension_sigma_ohana2026']:.2f} sigma (Ohana+ 2026 anchor)")
     print()
     print("  The difference between prescriptions is a FACTOR OF 1.67 in c_200")
-    print("  (6.0 vs 3.6), but BOTH prescriptions give c_200 within the")
-    print("  cosmological c-M range for Cloud-9 (c_med = 7.4 for M=4.7e9).")
+    print("  (6.0 vs 3.6). Whether either lies inside the cosmological c-M range")
+    print(f"  depends on which relation is used: median {results[0][2]['c_med_cosmological']:.2f}")
+    print(f"  (Diemer+ 2019 at M = 4.7e9) vs {results[0][2]['c_med_ohana2026_implied']:.2f} (Ohana+ 2026 implied).")
     print()
 
     # Save
