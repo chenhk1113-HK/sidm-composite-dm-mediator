@@ -17,140 +17,188 @@
     {
       "name": "placeholder_g7 (retracted v18.29)",
       "f_H": 0.297,
-      "sigma_eff_cm2_g": 14.64428885604883,
-      "t_core_Gyr": 0.8410972212248905,
-      "tau": 16.407140163776848,
+      "sigma_eff_cm2_g": 14.599159039786768,
+      "t_core_Gyr": 0.8436972725668179,
+      "tau": 16.356577707091127,
       "c_med_cosmological": 7.8964393482434705,
+      "c_med_ohana2026_implied": 12.81,
+      "scatter_convention_dex": 0.16,
       "prescription_results": {
         "elbert_2015": {
           "c_200": 6.0,
-          "c_M_tension_sigma": 0.3237666816521463
+          "c_M_tension_sigma": 0.7455003347803808,
+          "c_M_tension_sigma_diemer2019": 0.7455003347803808,
+          "c_M_tension_sigma_ohana2026": 2.0587367460065162
         },
         "burkert_style": {
           "c_200": 3.5999999999999996,
-          "c_M_tension_sigma": 0.9259397302491446
+          "c_M_tension_sigma": 2.1320550198826083,
+          "c_M_tension_sigma_diemer2019": 2.1320550198826083,
+          "c_M_tension_sigma_ohana2026": 3.4452914311087435
         }
       },
-      "tension_min": 0.3237666816521463,
-      "tension_max": 0.9259397302491446,
-      "tension_mean": 0.6248532059506454,
-      "tension_range": 0.6021730485969983
+      "tension_min": 0.7455003347803808,
+      "tension_max": 2.1320550198826083,
+      "tension_mean": 1.4387776773314944,
+      "tension_range": 1.3865546851022275,
+      "tension_min_ohana_anchor": 2.0587367460065162,
+      "tension_max_ohana_anchor": 3.4452914311087435
     },
     {
       "name": "yang_plus_low (Fig. 2 low)",
       "f_H": 0.4,
-      "sigma_eff_cm2_g": 26.56289286770979,
-      "t_core_Gyr": 0.4637021549189148,
-      "tau": 29.76048278751936,
+      "sigma_eff_cm2_g": 26.481033073335865,
+      "t_core_Gyr": 0.4651355794740402,
+      "tau": 29.668768868648105,
       "c_med_cosmological": 7.8964393482434705,
+      "c_med_ohana2026_implied": 12.81,
+      "scatter_convention_dex": 0.16,
       "prescription_results": {
         "elbert_2015": {
           "c_200": 6.0,
-          "c_M_tension_sigma": 0.3237666816521463
+          "c_M_tension_sigma": 0.7455003347803808,
+          "c_M_tension_sigma_diemer2019": 0.7455003347803808,
+          "c_M_tension_sigma_ohana2026": 2.0587367460065162
         },
         "burkert_style": {
           "c_200": 3.5999999999999996,
-          "c_M_tension_sigma": 0.9259397302491446
+          "c_M_tension_sigma": 2.1320550198826083,
+          "c_M_tension_sigma_diemer2019": 2.1320550198826083,
+          "c_M_tension_sigma_ohana2026": 3.4452914311087435
         }
       },
-      "tension_min": 0.3237666816521463,
-      "tension_max": 0.9259397302491446,
-      "tension_mean": 0.6248532059506454,
-      "tension_range": 0.6021730485969983
+      "tension_min": 0.7455003347803808,
+      "tension_max": 2.1320550198826083,
+      "tension_mean": 1.4387776773314944,
+      "tension_range": 1.3865546851022275,
+      "tension_min_ohana_anchor": 2.0587367460065162,
+      "tension_max_ohana_anchor": 3.4452914311087435
     },
     {
       "name": "yang_plus_mid (Fig. 2 mid)",
       "f_H": 0.5,
-      "sigma_eff_cm2_g": 41.504520105796544,
-      "t_core_Gyr": 0.29676937914810547,
-      "tau": 46.500754355499005,
+      "sigma_eff_cm2_g": 41.37661417708728,
+      "t_core_Gyr": 0.2976867708633858,
+      "tau": 46.357451357262654,
       "c_med_cosmological": 7.8964393482434705,
+      "c_med_ohana2026_implied": 12.81,
+      "scatter_convention_dex": 0.16,
       "prescription_results": {
         "elbert_2015": {
           "c_200": 6.0,
-          "c_M_tension_sigma": 0.3237666816521463
+          "c_M_tension_sigma": 0.7455003347803808,
+          "c_M_tension_sigma_diemer2019": 0.7455003347803808,
+          "c_M_tension_sigma_ohana2026": 2.0587367460065162
         },
         "burkert_style": {
           "c_200": 3.5999999999999996,
-          "c_M_tension_sigma": 0.9259397302491446
+          "c_M_tension_sigma": 2.1320550198826083,
+          "c_M_tension_sigma_diemer2019": 2.1320550198826083,
+          "c_M_tension_sigma_ohana2026": 3.4452914311087435
         }
       },
-      "tension_min": 0.3237666816521463,
-      "tension_max": 0.9259397302491446,
-      "tension_mean": 0.6248532059506454,
-      "tension_range": 0.6021730485969983
+      "tension_min": 0.7455003347803808,
+      "tension_max": 2.1320550198826083,
+      "tension_mean": 1.4387776773314944,
+      "tension_range": 1.3865546851022275,
+      "tension_min_ohana_anchor": 2.0587367460065162,
+      "tension_max_ohana_anchor": 3.4452914311087435
     },
     {
       "name": "yang_plus_high (Fig. 2 high)",
       "f_H": 0.7,
-      "sigma_eff_cm2_g": 81.34885940736122,
-      "t_core_Gyr": 0.1514129485449518,
-      "tau": 91.14147853677804,
+      "sigma_eff_cm2_g": 81.09816378709107,
+      "t_core_Gyr": 0.15188100554254383,
+      "tau": 90.86060466023477,
       "c_med_cosmological": 7.8964393482434705,
+      "c_med_ohana2026_implied": 12.81,
+      "scatter_convention_dex": 0.16,
       "prescription_results": {
         "elbert_2015": {
           "c_200": 6.0,
-          "c_M_tension_sigma": 0.3237666816521463
+          "c_M_tension_sigma": 0.7455003347803808,
+          "c_M_tension_sigma_diemer2019": 0.7455003347803808,
+          "c_M_tension_sigma_ohana2026": 2.0587367460065162
         },
         "burkert_style": {
           "c_200": 3.5999999999999996,
-          "c_M_tension_sigma": 0.9259397302491446
+          "c_M_tension_sigma": 2.1320550198826083,
+          "c_M_tension_sigma_diemer2019": 2.1320550198826083,
+          "c_M_tension_sigma_ohana2026": 3.4452914311087435
         }
       },
-      "tension_min": 0.3237666816521463,
-      "tension_max": 0.9259397302491446,
-      "tension_mean": 0.6248532059506454,
-      "tension_range": 0.6021730485969983
+      "tension_min": 0.7455003347803808,
+      "tension_max": 2.1320550198826083,
+      "tension_mean": 1.4387776773314944,
+      "tension_range": 1.3865546851022275,
+      "tension_min_ohana_anchor": 2.0587367460065162,
+      "tension_max_ohana_anchor": 3.4452914311087435
     },
     {
       "name": "t202_nbody (no segregation)",
       "f_H": 0.92,
-      "sigma_eff_cm2_g": 140.5177032701848,
-      "t_core_Gyr": 0.08765636198845271,
-      "tau": 157.4329539459774,
+      "sigma_eff_cm2_g": 140.0846649579467,
+      "t_core_Gyr": 0.08792733071342917,
+      "tau": 156.94778731514845,
       "c_med_cosmological": 7.8964393482434705,
+      "c_med_ohana2026_implied": 12.81,
+      "scatter_convention_dex": 0.16,
       "prescription_results": {
         "elbert_2015": {
           "c_200": 6.0,
-          "c_M_tension_sigma": 0.3237666816521463
+          "c_M_tension_sigma": 0.7455003347803808,
+          "c_M_tension_sigma_diemer2019": 0.7455003347803808,
+          "c_M_tension_sigma_ohana2026": 2.0587367460065162
         },
         "burkert_style": {
           "c_200": 3.5999999999999996,
-          "c_M_tension_sigma": 0.9259397302491446
+          "c_M_tension_sigma": 2.1320550198826083,
+          "c_M_tension_sigma_diemer2019": 2.1320550198826083,
+          "c_M_tension_sigma_ohana2026": 3.4452914311087435
         }
       },
-      "tension_min": 0.3237666816521463,
-      "tension_max": 0.9259397302491446,
-      "tension_mean": 0.6248532059506454,
-      "tension_range": 0.6021730485969983
+      "tension_min": 0.7455003347803808,
+      "tension_max": 2.1320550198826083,
+      "tension_mean": 1.4387776773314944,
+      "tension_range": 1.3865546851022275,
+      "tension_min_ohana_anchor": 2.0587367460065162,
+      "tension_max_ohana_anchor": 3.4452914311087435
     },
     {
       "name": "single_component (no f_H)",
       "f_H": 1.0,
-      "sigma_eff_cm2_g": 166.01808042318618,
-      "t_core_Gyr": 0.07419234478702637,
-      "tau": 186.00301742199602,
+      "sigma_eff_cm2_g": 165.50645670834913,
+      "t_core_Gyr": 0.07442169271584645,
+      "tau": 185.42980542905062,
       "c_med_cosmological": 7.8964393482434705,
+      "c_med_ohana2026_implied": 12.81,
+      "scatter_convention_dex": 0.16,
       "prescription_results": {
         "elbert_2015": {
           "c_200": 6.0,
-          "c_M_tension_sigma": 0.3237666816521463
+          "c_M_tension_sigma": 0.7455003347803808,
+          "c_M_tension_sigma_diemer2019": 0.7455003347803808,
+          "c_M_tension_sigma_ohana2026": 2.0587367460065162
         },
         "burkert_style": {
           "c_200": 3.5999999999999996,
-          "c_M_tension_sigma": 0.9259397302491446
+          "c_M_tension_sigma": 2.1320550198826083,
+          "c_M_tension_sigma_diemer2019": 2.1320550198826083,
+          "c_M_tension_sigma_ohana2026": 3.4452914311087435
         }
       },
-      "tension_min": 0.3237666816521463,
-      "tension_max": 0.9259397302491446,
-      "tension_mean": 0.6248532059506454,
-      "tension_range": 0.6021730485969983
+      "tension_min": 0.7455003347803808,
+      "tension_max": 2.1320550198826083,
+      "tension_mean": 1.4387776773314944,
+      "tension_range": 1.3865546851022275,
+      "tension_min_ohana_anchor": 2.0587367460065162,
+      "tension_max_ohana_anchor": 3.4452914311087435
     }
   ],
   "marginalization_summary": {
-    "tension_max_across_prescriptions": 0.9259397302491446,
-    "tension_min_across_prescriptions": 0.3237666816521463,
+    "tension_max_across_prescriptions": 2.1320550198826083,
+    "tension_min_across_prescriptions": 0.7455003347803808,
     "ohana_published": 3.2,
-    "robustness_verdict": "ROBUST"
+    "robustness_verdict": "MARGINAL"
   }
 }

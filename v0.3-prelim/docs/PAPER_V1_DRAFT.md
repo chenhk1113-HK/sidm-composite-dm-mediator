@@ -278,21 +278,30 @@ At ΛCDM-standard concentration (c = 12), the framework's canonical σ_peak = 17
 - For τ ≥ 5: saturated at 50% of NFW (c_0 × 0.5 = 6.0 for c_0 = 12)
 - Anchored to Elbert+ 2015 (arXiv:1412.1477) finding: even at σ/m = 50 cm²/g (mild core-collapse), c_200 stays close to NFW value, not orders of magnitude lower.
 
-**Result (v40.42):**
+**Anchor convention (locked 2026-11-10, registry defect D9).** A c-M tension in this paper is meaningless unless it names the concentration–mass relation it is measured against. Two are in play:
 
-| f_H source | f_H | τ (deep collapse) | c_200 (Elbert+) | c-M tension | vs Ohana+ 3.2σ |
-|---|---|---|---|---|---|
-| Placeholder (retracted v18.29) | 0.297 | 16.3 | 6.00 | 0.32σ | -2.88σ (better) |
-| Yang+ 2025 Fig. 2 (low) | 0.40 | 29.7 | 6.00 | 0.32σ | -2.88σ |
-| Yang+ 2025 Fig. 2 (mid) | 0.50 | 46.3 | 6.00 | 0.32σ | -2.88σ |
-| Yang+ 2025 Fig. 2 (high) | 0.70 | 90.8 | 6.00 | 0.32σ | -2.88σ |
-| T202 N-body (no segregation) | 0.92 | 156.9 | 6.00 | 0.32σ | -2.88σ |
-| Single-component (no f_H) | 1.00 | 185.3 | 6.00 | 0.32σ | -2.88σ |
+- **Diemer+ 2019 anchor** — the relation `scripts/elbert2015_c_tau_prescription.py` actually evaluates: median `c_200 = 7.4 (M/10^10)^-0.086 = 7.90` at `M_200 = 4.7 × 10^9 M_☉`.
+- **Ohana+ 2026 anchor** — the relation their 3.2σ is quoted against. Their own pair (best-fit `c_200 = 4.0` at 3.2σ, 0.16 dex) implies a median of `4.0 × 10^(3.16 × 0.16) = 12.81` at Cloud-9's mass, i.e. 1.31σ above the Diemer+ median. This value is *implied by their own numbers*, not re-fitted here.
+
+In both cases **1σ = 0.16 dex in log₁₀(c₂₀₀)**. Earlier versions of this section divided the dex deviation by `0.16 × ln(10)`, which understated every tension by a factor 2.303; those legacy numbers are reproducible via `c_M_tension_sigma_legacy()`.
+
+**Result (v40.42, anchors labelled 2026-11-10):**
+
+| f_H source | f_H | τ (deep collapse) | c_200 (Elbert+) | c-M tension (Diemer+ 2019) | c-M tension (Ohana+ 2026) | Δ vs Ohana+ measured c₂₀₀ = 4.0 |
+|---|---|---|---|---|---|---|
+| Placeholder (retracted v18.29) | 0.297 | 16.3 | 6.00 | +0.75σ | +2.06σ | −1.10σ (anchor-independent) |
+| Yang+ 2025 Fig. 2 (low) | 0.40 | 29.7 | 6.00 | +0.75σ | +2.06σ | −1.10σ |
+| Yang+ 2025 Fig. 2 (mid) | 0.50 | 46.3 | 6.00 | +0.75σ | +2.06σ | −1.10σ |
+| Yang+ 2025 Fig. 2 (high) | 0.70 | 90.8 | 6.00 | +0.75σ | +2.06σ | −1.10σ |
+| T202 N-body (no segregation) | 0.92 | 156.9 | 6.00 | +0.75σ | +2.06σ | −1.10σ |
+| Single-component (no f_H) | 1.00 | 185.3 | 6.00 | +0.75σ | +2.06σ | −1.10σ |
+
+The last column is the only anchor-independent statement available: the prescription moves `c_200` by `log₁₀(6.0/4.0) = 0.176 dex = 1.10σ` whichever relation is used. Ohana+ 2026's own measured value sits at +1.85σ (Diemer+) / +3.16σ (Ohana+).
 
 **Quantitative comparison with v40.39 (Yang+ Eq. 5 extrapolation):**
-- v40.39 (f_H=0.297): c_200 = 26.4 (Yang+ extrapolation), c-M tension = -1.42σ
-- v40.42 (f_H=0.297): c_200 = 6.0 (Elbert+ saturated), c-M tension = +0.32σ
-- **Difference: 4.4× lower c_200, 1.7σ better c-M tension**
+- v40.39 (f_H=0.297): c_200 = 26.4 (Yang+ extrapolation), c-M tension = **−3.28σ** (Diemer+ anchor) / **−1.96σ** (Ohana+ anchor) — i.e. 3.28σ *above* the median, not "1.42σ"
+- v40.42 (f_H=0.297): c_200 = 6.0 (Elbert+ saturated), c-M tension = **+0.75σ** (Diemer+ anchor) / **+2.06σ** (Ohana+ anchor)
+- **Difference: 4.4× lower c_200, 4.0σ closer to the median at either anchor** (the 1.7σ quoted earlier was the legacy-unit value)
 
 **Per Nemotron 120B review (v40.42, 17.0s response):**
 > "The Elbert+ 2015 c-τ prescription is physically reasonable as a first-order extrapolation: it retains the Yang+ Eq. 5 behavior in the calibrated regime (τ ≤ 1) and then forces the concentration to approach the NFW value as the halo undergoes deep core-collapse, which matches the N-body finding that even relatively strong self-interactions (σ/m ≈ 50 cm²/g) only modestly reduce c_200."
@@ -303,7 +312,9 @@ At ΛCDM-standard concentration (c = 12), the framework's canonical σ_peak = 17
 
 > "**The deep-collapse scenario should be presented as a plausible but not definitive interpretation**" until baryonic heating, velocity-dependent scattering, and other effects are modeled.
 
-**Verdict:** Under Elbert+ 2015 c-τ prescription, v19.2-F's c-M tension is **REDUCED to 0.32σ** (well below Ohana+ 2026's 3.2σ). The qualitative issue remains (v19.2-F predicts Cloud-9 in deep collapse, τ = 16, while Ohana+ finds max-core, τ = 0.18), but the c_200 prediction is now within the cosmological c-M range.
+**Correction to the review quotes above (2026-11-10, D9).** The reviewer's "~3.2σ → ~0.3σ" is a cross-anchor subtraction: 3.2σ is quoted against Ohana+ 2026's own c-M relation (implied median 12.81) and 0.3σ against Diemer+ 2019's (median 7.90), and the 0.3σ additionally carries the legacy `ln(10)` unit error. Like-for-like the drop is **1.10σ** (0.176 dex): 3.16σ → 2.06σ on the Ohana+ anchor, 1.85σ → 0.75σ on the Diemer+ anchor. The reviewer's physical point (deep core-collapse pulls c_200 back toward the NFW baseline rather than blowing it up) is unaffected.
+
+**Verdict (corrected 2026-11-10):** Under the Elbert+ 2015 c-τ prescription, v19.2-F's Cloud-9 c-M tension is **reduced by 1.10σ** — from Ohana+ 2026's 3.16σ to **2.06σ on Ohana+ 2026's own c-M relation**, or from 1.85σ to **0.75σ on the Diemer+ 2019 relation**. It is *reduced*, not resolved: on the observation's own relation the residual is still ~2σ. The qualitative issue remains (v19.2-F predicts Cloud-9 in deep collapse, τ = 16, while Ohana+ finds max-core, τ = 0.18). The earlier "reduced to 0.32σ, well below 3.2σ" phrasing mixed the two anchors and is withdrawn.
 
 **Honest framing (per Nemotron review):**
 - The Elbert+ prescription is a SIMPLIFICATION anchored to a single σ/m = 50 N-body point. Full quantitative reproduction requires marginalization over multiple prescriptions (Burkert+ 2020, hydrodynamic sims).
@@ -335,20 +346,21 @@ At ΛCDM-standard concentration (c = 12), the framework's canonical σ_peak = 17
 
 **Result (v40.43 marginalization, all f_H in [0.3, 1.0] — τ = 16-185):**
 
-| f_H source | f_H | τ | Elbert+ c-M | Burkert c-M | **RANGE** |
+| f_H source | f_H | τ | Elbert+ c-M (Diemer anchor) | Burkert c-M (Diemer anchor) | **RANGE (Diemer anchor)** |
 |---|---|---|---|---|---|
-| Placeholder (retracted v18.29) | 0.297 | 16.3 | 0.32σ | 0.93σ | **0.32-0.93σ** |
-| Yang+ 2025 Fig. 2 (low) | 0.40 | 29.7 | 0.32σ | 0.93σ | **0.32-0.93σ** |
-| Yang+ 2025 Fig. 2 (mid) | 0.50 | 46.3 | 0.32σ | 0.93σ | **0.32-0.93σ** |
-| Yang+ 2025 Fig. 2 (high) | 0.70 | 90.8 | 0.32σ | 0.93σ | **0.32-0.93σ** |
-| T202 N-body (no segregation) | 0.92 | 156.9 | 0.32σ | 0.93σ | **0.32-0.93σ** |
-| Single-component (no f_H) | 1.00 | 185.3 | 0.32σ | 0.93σ | **0.32-0.93σ** |
+| Placeholder (retracted v18.29) | 0.297 | 16.3 | +0.75σ | +2.13σ | **+0.75 to +2.13σ** |
+| Yang+ 2025 Fig. 2 (low) | 0.40 | 29.7 | +0.75σ | +2.13σ | **+0.75 to +2.13σ** |
+| Yang+ 2025 Fig. 2 (mid) | 0.50 | 46.3 | +0.75σ | +2.13σ | **+0.75 to +2.13σ** |
+| Yang+ 2025 Fig. 2 (high) | 0.70 | 90.8 | +0.75σ | +2.13σ | **+0.75 to +2.13σ** |
+| T202 N-body (no segregation) | 0.92 | 156.9 | +0.75σ | +2.13σ | **+0.75 to +2.13σ** |
+| Single-component (no f_H) | 1.00 | 185.3 | +0.75σ | +2.13σ | **+0.75 to +2.13σ** |
 
-**Quantitative summary:**
-- Max c-M tension across prescriptions: **0.93σ** (Burkert-style)
-- Min c-M tension across prescriptions: **0.32σ** (Elbert+ 2015)
-- vs Ohana+ 2026 (3.2σ): reduction of **2.27-2.88σ**
-- **ROBUSTNESS VERDICT: ROBUST** (all prescriptions give c-M tension < 1σ)
+**Quantitative summary (corrected 2026-11-10, D9; σ convention 1σ = 0.16 dex):**
+- Max c-M tension across prescriptions: **+2.13σ** (Burkert-style, Diemer+ 2019 anchor) / **+3.45σ** (Ohana+ 2026 anchor)
+- Min c-M tension across prescriptions: **+0.75σ** (Elbert+ 2015, Diemer+ 2019 anchor) / **+2.06σ** (Ohana+ 2026 anchor)
+- Like-for-like reduction vs Ohana+ 2026's measured `c_200 = 4.0`, **within one anchor**: **1.10σ** (3.16σ → 2.06σ on their own relation; 1.85σ → 0.75σ on Diemer+ 2019's)
+- The earlier "reduction of 2.27-2.88σ" subtracted a Diemer-anchor number from an Ohana-anchor number and is withdrawn
+- **ROBUSTNESS VERDICT: NOT ROBUST** (the Burkert-style floor `c_200 = 3.6` sits 2.13σ / 3.45σ below the median — *below Ohana+ 2026's own measurement of 4.0*, so it over-collapses rather than relieving the tension)
 
 **Per Nemotron 120B review (v40.43, 32.4s response):**
 > "The v40.43 marginalization satisfies the robustness criterion you set in v40.42: both the Elbert+ 2015 and the Burkert-style prescriptions yield c-M tensions well below 1σ (0.32σ and 0.93σ, respectively), and the maximum tension across the two is 0.93σ. Hence the 'ROBUST' verdict is correct under your standard that a claim is robust when all reasonable prescriptions give < 1σ tension."
@@ -359,7 +371,7 @@ At ΛCDM-standard concentration (c = 12), the framework's canonical σ_peak = 17
 
 > "The qualitative conclusion—that Cloud-9 is in a deep-collapse state (τ ≫ 1) and thus distinct from Ohana+ 2026's max-core case (τ = 0.18)—remains unchanged across prescriptions, which is consistent: our τ values (≈ 16-185) indicate a far more collapsed core than the Ohana+ max-core scenario, so the qualitative verdict is robust to the choice of c-τ prescription."
 
-**Verdict (per Nemotron recommendation):** Report c-M tension as **RANGE (0.32-0.93σ)**, NOT single point estimate. The c-M tension reduction is **ROBUST** under both prescriptions, but the spread between prescriptions (0.61σ) is appreciable and should be reported.
+**Verdict (corrected 2026-11-10, superseding the Nemotron-recommendation verdict):** Report the c-M tension as an **anchor-labelled range**, not a single point: **+0.75 to +2.13σ (Diemer+ 2019 anchor)** or **+2.06 to +3.45σ (Ohana+ 2026 anchor)**. The reduction relative to Ohana+ 2026's measurement is **1.10σ**, which is prescription-independent; the "ROBUST (all < 1σ)" label attached to v40.43 is withdrawn, because it only held under the legacy `ln(10)` unit error. The Nemotron quotes above predate the fix and are reproduced verbatim for the audit trail; their internal numbers (0.32σ, 0.93σ, 0.62σ) are legacy-unit values.
 
 **Honest framing:**
 - The Burkert-style prescription is a SIMPLIFIED treatment anchored to Burkert 1995 + Balberg 2002. Full quantitative reproduction requires actual N-body marginalization.
@@ -388,19 +400,20 @@ At ΛCDM-standard concentration (c = 12), the framework's canonical σ_peak = 17
 
 **Result (v40.43a 3-prescription marginalization, all f_H in [0.3, 1.0]):**
 
-| f_H source | τ | Elbert+ c-M | Burkert c-M | **Sameie c-M** | max\|c-M\| |
+| f_H source | τ | Elbert+ c-M (Diemer anchor) | Burkert c-M (Diemer anchor) | **Sameie c-M (Diemer anchor)** | max\|c-M\| |
 |---|---|---|---|---|---|
-| Placeholder (retracted v18.29) | 16.3 | +0.32σ | +0.93σ | **-1.31σ** | 1.31σ |
-| Yang+ 2025 Fig. 2 (low) | 29.7 | +0.32σ | +0.93σ | **-1.31σ** | 1.31σ |
-| Yang+ 2025 Fig. 2 (mid) | 46.3 | +0.32σ | +0.93σ | **-1.31σ** | 1.31σ |
-| Yang+ 2025 Fig. 2 (high) | 90.8 | +0.32σ | +0.93σ | **-1.31σ** | 1.31σ |
-| T202 N-body (no segregation) | 156.9 | +0.32σ | +0.93σ | **-1.31σ** | 1.31σ |
-| Single-component (no f_H) | 185.3 | +0.32σ | +0.93σ | **-1.31σ** | 1.31σ |
+| Placeholder (retracted v18.29) | 16.3 | +0.75σ | +2.13σ | **−3.02σ** | 3.02σ |
+| Yang+ 2025 Fig. 2 (low) | 29.7 | +0.75σ | +2.13σ | **−3.02σ** | 3.02σ |
+| Yang+ 2025 Fig. 2 (mid) | 46.3 | +0.75σ | +2.13σ | **−3.02σ** | 3.02σ |
+| Yang+ 2025 Fig. 2 (high) | 90.8 | +0.75σ | +2.13σ | **−3.02σ** | 3.02σ |
+| T202 N-body (no segregation) | 156.9 | +0.75σ | +2.13σ | **−3.02σ** | 3.02σ |
+| Single-component (no f_H) | 185.3 | +0.75σ | +2.13σ | **−3.02σ** | 3.02σ |
 
-**Quantitative summary:**
-- c-M tension RANGE: -1.31σ to +0.93σ (range = 2.24σ)
-- Max |c-M tension|: 1.31σ (Sameie+ 2020)
-- v40.43 ROBUST verdict (all < 1σ) is **REFUTED**
+**Quantitative summary (corrected 2026-11-10, D9):**
+- c-M tension RANGE at the Diemer+ 2019 anchor: **−3.02σ (Sameie+, c_200 = 24.0) to +2.13σ (Burkert-style, c_200 = 3.6)**; total spread **5.15σ**
+- Same spread at the Ohana+ 2026 anchor: **−1.70σ to +3.45σ** (5.15σ — the spread is a difference of c_200 values, so it is anchor-independent; only the absolute levels move)
+- Max |c-M tension|: **3.02σ** (Sameie+ 2020, Diemer anchor) / 3.45σ (Burkert-style, Ohana anchor)
+- v40.43 ROBUST verdict (all < 1σ) is **REFUTED** — and refuted by the corrected convention alone, before Sameie+ 2020 is even considered
 
 **Per Nemotron 120B review (v40.43a, 22.5s response):**
 > "The v40.43 'ROBUST' verdict is indeed refuted by the Sameie+ 2020 prescription: the absolute c-M tension reaches 1.31σ (with a negative sign), exceeding the 1σ threshold used for robustness."
@@ -413,7 +426,7 @@ At ΛCDM-standard concentration (c = 12), the framework's canonical σ_peak = 17
 
 > "The paper should therefore report the c-M tension as a range that captures both magnitude and sign, e.g. 'c-M tension = 0.32-1.31σ (absolute value), with the sign flipping from positive (Elbert+/Burkert-style) to negative (Sameie+ 2020) depending on whether deep-collapse SIDM lowers or raises c_200,' and note that **the robustness claim is marginal at best and highly sensitive to the assumed collapse physics**."
 
-**Verdict (per Nemotron recommendation):** Report c-M tension as **range with sign information**: "c-M tension = 0.32-1.31σ (|tension|), with sign flipping from positive to negative across prescriptions depending on deep-collapse physics (cored vs cuspy)."
+**Verdict (corrected 2026-11-10, superseding the Nemotron-recommendation wording):** Report the c-M tension as an **anchor-labelled signed range**: **+0.75σ to +2.13σ and −3.02σ (Diemer+ 2019 anchor)**, equivalently **+2.06σ to +3.45σ and −1.70σ (Ohana+ 2026 anchor)**, with the sign flipping from positive (Elbert+/Burkert-style, framework underpredicts c_200) to negative (Sameie+ 2020, framework overpredicts c_200) depending on the assumed deep-collapse physics (cored vs cuspy). The robustness claim is marginal at best and highly sensitive to that physics, exactly as the reviewer warned; the reviewer's own numbers (0.32-1.31σ) are legacy-unit values reproduced verbatim above.
 
 **Honest framing (per Nemotron review):**
 - The c-M tension is **PRESCRIPTION-DEPENDENT, not ROBUST**. The result depends on whether deep-collapse SIDM is "core-cusp" (c_200 decreases, Elbert+/Burkert-style) or "cusp-core" (c_200 increases, Sameie+ 2020).
@@ -774,9 +787,13 @@ Or, per the user's directive style ("proceed" / "next session"), the user may al
 - **0.085 dex** (sensitivity-only): no published source reports exactly this value; closest candidates are Macciò 2008 and Dutton & Macciò 2014 (≈0.10 dex). The 6.18σ intrinsic tension using this value is illustrative only.
 - **0.110 dex** (sensitivity-only): no published source. Illustrative only.
 
+**c-M medians used in this paper (D9 anchor discipline, 2026-11-10):** a σ below the median is only meaningful with the median named. §2.7 uses **Ohana+ 2026's own c-M relation**, whose median at Cloud-9's mass is implied by their published pair (`c_200 = 4.0` at 3.2σ, 0.16 dex) to be **c_200 ≈ 12.81**; §2.6c/§2.6d use the **Diemer+ 2019** relation, `7.4 (M/10^10)^-0.086 = 7.90` at `M_200 = 4.7 × 10^9 M_☉`. The two differ by 1.31σ, so a §2.7 number must never be subtracted from a §2.6 number.
+
 **Mechanism of the apparent 6.18σ vs Ohana+ 3.2σ gap (resolved):** the factor-1.93 ratio is the scatter-convention difference (0.085 dex vs 0.16 dex), not an internal disagreement. With Ohana+'s scatter (0.16 dex, the DK14/DK15 full-population prescription), the simplified pipeline is consistent with Ohana+ 3.2σ within rounding tolerance (3.29σ MCMC vs 3.16σ fiducial). The framework's c-M tension prediction at the Ohana+ scatter convention is correct. The 6.18σ illustrative number is secondary; the headline finding is the 3.16σ consistency check.
 
 **Result.** The framework's Cloud-9 c-M tension prediction is consistent with Ohana+ 2026's 3.2σ at the fiducial under the 0.16 dex convention (DK14/DK15 scatter, Ohana+ 2026 §3.1 line 29 verbatim). The simplified pipeline gives**3.16σ at the fiducial** (c=4.0, M=4.7×10⁹ M☉, τ=0.18) and**3.29σ at the MCMC best-fit** (c=3.8171, M=4.7571×10⁹ M☉) — both within 0.09σ of Ohana+'s published 3.20σ. The 6.18σ at 0.085 dex is footnote-level only (illustrative, source UNVERIFIED for that exact scatter value).
+
+**What this check does and does not establish (clarified 2026-11-10, D9).** All three numbers here (3.16σ, 3.29σ, 6.18σ) are measured against Ohana+ 2026's own c-M relation (implied median c_200 = 12.81 at this mass), and the fiducial `c_200 = 4.0` is *their* published best-fit concentration, not a value the framework chose. The check therefore validates that the framework's scatter model reproduces Ohana+'s quoted tension from their own inputs; it is not an independent prediction of c_200, and it must not be quoted alongside §2.6c/§2.6d, which measure the framework's own `c_200` predictions against the Diemer+ 2019 median (7.90). On the Diemer+ 2019 anchor, the same `c_200 = 4.0` sits at 1.85σ, not 3.16σ.
 
 **Check 2 — v19.2-C: SIDM Concerto subhalo consistency**(`scripts/v192_c_concerto_subhalo_cloud9.py`).
 
