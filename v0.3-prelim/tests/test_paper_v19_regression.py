@@ -330,12 +330,17 @@ def test_paper_v19_status_line_present():
     )
     # Reference-list integrity: [28] must exist, and the [29] slot must exist WITH its
     # 2026-11-05 disclosure marker. History: an earlier edit deleted the [29] entry, so the
-    # numbered list jumped 28 -> 30 (a dangling gap). The entry is now listed and explicitly
-    # flagged as uncited, so this assertion pins the documented state rather than a fictional
-    # "v1.9 added both refs" state.
+    # numbered list jumped 28 -> 30 (a dangling gap). The entry is now listed AND cited in the
+    # body (2026-11-09: 2.8 path (iii) and both M2-hypothesis sites), so this assertion pins
+    # the CURRENT documented state. The old marker text "currently NOT cited in this draft"
+    # was superseded on 2026-11-09; asserting it would pin an obsolete state (found 2026-11-10).
     assert "[28]" in content, "reference [28] Chu, Garcia-Cely, Murayama missing"
     assert "[29]" in content, "reference slot [29] missing (numbering gap)"
-    assert "Number restored 2026-11-05, currently NOT cited in this draft" in content, (
-        "[29] must carry its disclosure marker: it is listed to close the numbering gap and "
-        "is not cited in the body"
+    assert "Number restored 2026-11-05" in content, (
+        "[29] must carry its disclosure marker: the entry was deleted by an earlier edit and "
+        "restored to close the 28 -> 30 numbering gap"
+    )
+    assert content.count("[29]") >= 4, (
+        "[29] must appear in the reference list AND at least twice in the body "
+        "(3 body sites since 2026-11-09); a single occurrence means the citation was dropped"
     )
