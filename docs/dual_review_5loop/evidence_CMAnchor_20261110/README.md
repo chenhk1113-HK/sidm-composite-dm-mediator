@@ -1,6 +1,6 @@
 # Evidence — round `CMAnchor-2026-11-10`: every c-M tension named its c-M relation, defect D9 resolved, slots [56]–[58] registered
 
-Round span: seven commits `5aa0fce` (2026-11-09 19:34) → `d362721` (2026-11-10 12:30), branch
+Round span: seven commits `5aa0fce` (2026-11-09 19:34) → `d362721` (2026-11-10 12:30), plus the record commits `b5d959a` (front page + this folder) and `b047e0a` (CG-16 inventory refresh), branch
 `wip/v19.2-F-init`, pushed as a fast-forward `6d346e2..d362721`. **VERSION was deliberately not
 advanced**, so no new tag is implied and the save point stays `v19.2-F-RecordSave-v1.18`.
 
@@ -19,6 +19,9 @@ once became false in this repo.
 | `pytest_full_suite.txt` | An independent **unfiltered** run of `v0.3-prelim/tests` (`-p no:cacheprovider`, no `-k`): **3684 passed / 25 skipped / 0 failed** in 24m35s. It exists because the gate deselects 40 tests; those assertions do run, and this log is where. Launched 12:16, finished 12:41 — after the last source edit (12:07:49) and across the commit (12:30:06). |
 | `c_m_sigma_recomputation.txt` | The headline numbers re-derived from `scripts/elbert2015_c_tau_prescription.py` and cross-checked against the result artifact they are quoted from: artifact-vs-function difference exactly `0.00e+00`. |
 | `push_readback_20261110.txt` | Push output plus `git ls-remote` read-back. Remote head equal to local HEAD; `master` shown as the stale branch it still is. |
+| `gate_run_b5d959a_cg16_inventory_drift.txt` | The gate run on the **first record commit** `b5d959a`: 14 layers PASS, pytest layer FAIL on `test_no_hardcoded_host_paths_cg16.py::test_inventory_is_current`. The three logs filed by that commit carry absolute host paths inside them (2/2/1 lines), which moved the CG-16 inventory's `docs_prose` count 136 → 139. Fixed by refreshing the inventory with `scripts/cg16_scan.py` (`b047e0a`), not by editing the logs. |
+| `gate_run_final_b047e0a.txt` | The 15-layer gate on `b047e0a` after that fix: `GATE PASSED: all 15 layer(s) asserted and exited 0`, pytest 3644 passed / 25 skipped / 40 deselected in 19m28s. |
+| `ci_runs_20261110.json` | GitHub Actions census taken after the pushes: `Self-check` #585 @ `d362721` and #586 @ `b5d959a`, both `completed/success`. |
 
 ## The number this round is about
 
@@ -57,8 +60,6 @@ An earlier statement in `CURRENT.md` describing a 2026-11-03 run (1954 passed / 
 - No tag was created and no VERSION token was added; `test_version_tokens_have_tags.py` therefore
   still certifies the state through `v19.2-F-RecordSave-v1.18`.
 
-## Still to land in this folder
+## Which commit each log actually certifies
 
-`gate_run_final.txt` — the 15-layer gate re-run on the **record commit** (the front-page + evidence
-commit). A gate log certifies only the head it ran on, so the log for `d362721` above does not
-certify this commit; it was re-run at filing time and appended when it finished.
+A gate log certifies only the head it ran on, so the three gate logs above certify three different commits and none of them certifies the commit that files them. `gate_run_d362721.txt` certifies the content commit; `gate_run_b5d959a_cg16_inventory_drift.txt` is the first record commit's red run; `gate_run_final_b047e0a.txt` certifies `b047e0a`, the commit that fixed the inventory. The commit that adds these files to the repository was checked with the fast doc guards instead of a fresh 15-layer run — re-running the gate to certify the filing of a gate log would demand another log, forever. The guards run on the final tree were: `audit_markdown_tables`, `audit_stale_strings`, `audit_doc_anchors`, `audit_claims`, `t82_audit` (120/120 ALL CLEAR) and the doc-guard tests (markup balance, finding-id uniqueness, version-tag pairing, t82 version drift) — all green, plus `test_no_hardcoded_host_paths_cg16.py` 7/7 and `cg16_scan.py --check` OK.

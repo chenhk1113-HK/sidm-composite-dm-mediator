@@ -1561,11 +1561,19 @@
         "host_path_lines": 1
       },
       {
+        "path": "docs/dual_review_5loop/evidence_CMAnchor_20261110/gate_run_b5d959a_cg16_inventory_drift.txt",
+        "host_path_lines": 2
+      },
+      {
         "path": "docs/dual_review_5loop/evidence_CMAnchor_20261110/gate_run_d362721.txt",
         "host_path_lines": 2
       },
       {
         "path": "docs/dual_review_5loop/evidence_CMAnchor_20261110/gate_run_failed_audit_units_pytest_doc_anchors.txt",
+        "host_path_lines": 2
+      },
+      {
+        "path": "docs/dual_review_5loop/evidence_CMAnchor_20261110/gate_run_final_b047e0a.txt",
         "host_path_lines": 2
       },
       {
@@ -2267,7 +2275,7 @@
     "pinned_source": 3,
     "pinned_exception": 3,
     "historical_frozen_code": 230,
-    "docs_prose": 139,
+    "docs_prose": 141,
     "data_artifact": 69,
     "other": 0
   },
