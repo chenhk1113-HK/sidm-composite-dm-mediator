@@ -1,0 +1,108 @@
+........................................................................ [  1%]
+.......................................................................s [  3%]
+s....................................................................... [  5%]
+........................................................................ [  7%]
+........................................................................ [  9%]
+...............................ss....................s.ss............... [ 11%]
+........................................................................ [ 13%]
+........................................................................ [ 15%]
+........................................................................ [ 17%]
+........................................................................ [ 19%]
+........................................................................ [ 21%]
+........................................................................ [ 23%]
+........................................................................ [ 25%]
+........................................................................ [ 27%]
+........................................................................ [ 29%]
+........................................................................ [ 31%]
+........................................................................ [ 33%]
+........................................................................ [ 35%]
+........................................................................ [ 37%]
+........................................................................ [ 38%]
+........................................................................ [ 40%]
+........................................................................ [ 42%]
+........................................................................ [ 44%]
+........................................................................ [ 46%]
+........................................................................ [ 48%]
+........................................................................ [ 50%]
+........................................................................ [ 52%]
+........................................................................ [ 54%]
+........................................................................ [ 56%]
+........................................................................ [ 58%]
+.........................................................sssssssss...... [ 60%]
+.........................................................ssss........... [ 62%]
+........................................................................ [ 64%]
+........................................................................ [ 66%]
+........................................................................ [ 68%]
+........................................................................ [ 70%]
+........................................................................ [ 72%]
+........................................................................ [ 74%]
+........................................................................ [ 76%]
+.............................................................s........s. [ 77%]
+........................................................................ [ 79%]
+........................................................................ [ 81%]
+........................................................................ [ 83%]
+........................................................................ [ 85%]
+........................................................................ [ 87%]
+........................................................................ [ 89%]
+........s............................................................... [ 91%]
+........................................................................ [ 93%]
+........................................................................ [ 95%]
+........................................................................ [ 97%]
+........................................................................ [ 99%]
+.....................                                                    [100%]
+============================== warnings summary ===============================
+v0.3-prelim/tests/test_t17_kiss_sidm_corrected_fit.py::TestEndToEndSmoke::test_both_runs_complete
+v0.3-prelim/tests/test_t17_kiss_sidm_corrected_fit.py::TestSavedArtifacts::test_json_exists_and_has_expected_keys
+v0.3-prelim/tests/test_t17_kiss_sidm_corrected_fit.py::TestSavedArtifacts::test_npz_exists_and_has_expected_arrays
+  C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\.venv-sidm-bench\Lib\site-packages\_pytest\fixtures.py:1313: PytestRemovedIn10Warning: Class-scoped fixture defined as instance method is deprecated.
+  Instance attributes set in this fixture will NOT be visible to test methods,
+  as each test gets a new instance while the fixture runs only once per class.
+  Use @classmethod decorator and set attributes on cls instead.
+  See https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method
+    fixturefunc = resolve_fixture_function(fixturedef, request)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+SKIPPED [1] v0.3-prelim\tests\test_phase42_summary.py:6: 
+    This suite asserts the content of v0.3-prelim/docs/PHASE42_ROTATION_CURVE_FINAL_VERDICT.md, which were
+    DELETED by commit b5c24c0 ("paper: fix section 10.5 + streamline docs +
+    CHANGELOG additions"). The tests were left behind by that docs streamlining, so
+    their failure is a missing-deliverable question, not a physics result: either
+    restore the docs or retire this suite. Tracked as finding F18 / decision D9 in
+    docs/INTEGRITY_FINDINGS_2026-11-04.md.
+SKIPPED [1] v0.3-prelim\tests\test_phase46_three_items.py:6: 
+    This suite asserts the content of v0.3-prelim/docs/PHASE46_THREE_ITEM_UPDATE.md, which were
+    DELETED by commit b5c24c0 ("paper: fix section 10.5 + streamline docs +
+    CHANGELOG additions"). The tests were left behind by that docs streamlining, so
+    their failure is a missing-deliverable question, not a physics result: either
+    restore the docs or retire this suite. Tracked as finding F18 / decision D9 in
+    docs/INTEGRITY_FINDINGS_2026-11-04.md.
+SKIPPED [1] v0.3-prelim\tests\test_phase47_50.py:6: 
+    This suite asserts the content of v0.3-prelim/docs/PHASE49_PAPER_OUTLINE.md and PHASE50_JVAS_DECISION.md, which were
+    DELETED by commit b5c24c0 ("paper: fix section 10.5 + streamline docs +
+    CHANGELOG additions"). The tests were left behind by that docs streamlining, so
+    their failure is a missing-deliverable question, not a physics result: either
+    restore the docs or retire this suite. Tracked as finding F18 / decision D9 in
+    docs/INTEGRITY_FINDINGS_2026-11-04.md.
+SKIPPED [1] v0.3-prelim\tests\test_d15_corrected3_review5.py:80: FINDINGS.md not found
+SKIPPED [1] v0.3-prelim\tests\test_d15_corrected3_review5.py:95: FINDINGS.md not found
+SKIPPED [1] v0.3-prelim\tests\test_inelastic_wrapper_regression.py:168: KSFR mask signature mismatch (nlive=500: 9.5-500, nlive=2000: unknown-2000); re-run nlive=500 with current mask
+SKIPPED [1] v0.3-prelim\tests\test_inelastic_wrapper_regression.py:222: KSFR mask MAX bound not logged at runtime (older JSONs lack the ksfr_mask_max_at_runtime field). Cannot pin the extension delta without the marker.
+SKIPPED [1] v0.3-prelim\tests\test_kiss_sidm_julia_bridge.py:112: No snapshots from prior bridge run; run kiss_sidm_julia_bridge.py first
+SKIPPED [1] v0.3-prelim\tests\test_kiss_sidm_julia_bridge.py:160: Julia not installed at \home\lamkuenai\.juliaup\bin\julia
+SKIPPED [1] v0.3-prelim\tests\test_kiss_sidm_julia_bridge.py:174: Julia not installed
+SKIPPED [1] v0.3-prelim\tests\test_physical_constraints.py:179: No anchor at index 11
+SKIPPED [1] v0.3-prelim\tests\test_physical_constraints.py:179: No anchor at index 12
+SKIPPED [1] v0.3-prelim\tests\test_physical_constraints.py:179: No anchor at index 13
+SKIPPED [1] v0.3-prelim\tests\test_physical_constraints.py:179: No anchor at index 14
+SKIPPED [1] v0.3-prelim\tests\test_physical_constraints.py:179: No anchor at index 15
+SKIPPED [1] v0.3-prelim\tests\test_physical_constraints.py:179: No anchor at index 16
+SKIPPED [1] v0.3-prelim\tests\test_physical_constraints.py:179: No anchor at index 17
+SKIPPED [1] v0.3-prelim\tests\test_physical_constraints.py:179: No anchor at index 18
+SKIPPED [1] v0.3-prelim\tests\test_physical_constraints.py:179: No anchor at index 19
+SKIPPED [4] v0.3-prelim\tests\test_t101_t102_portal_b.py:23: No LZ data extraction; run t101_lz_data_extraction.py
+SKIPPED [1] v0.3-prelim\tests\test_t69_t70_t71_t72.py:77: Plot not yet generated
+SKIPPED [1] v0.3-prelim\tests\test_t82_audit_readme_drift.py:91: README badge is branch-dependent (no specific count)
+SKIPPED [1] v0.3-prelim\tests\test_t95_v12_gmm_cross_match.py:56: Gaia unavailable after 3 attempts: Error 503:
+Server overloaded: synchronous job rejected due to maximum number of synchronous queued jobs (150) reached. Please, try again later.
+3670 passed, 26 skipped, 3 warnings in 1502.68s (0:25:02)

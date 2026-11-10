@@ -1,0 +1,412 @@
+=== t82_audit ===
+GROUND TRUTH (v0.7 T41, nlive=2000, ndim=6, DAMPE+LSS channels):
+  log Z = -163.29 ± 0.085
+  m_χ MAP = 769.7 GeV
+  m_φ MAP = 453 MeV
+  σ/m₀ MAP = 0.27 cm²/g
+  a MAP = 0.34
+  ε_median = 1.435e-37
+  tension = 0.6σ
+
+=== VERSION ===
+  ✓ standing version: '0.4-prelim+T88E' found
+=== README.md ===
+  ✓ σ/m headline: '0.06 cm²/g' found
+  ✓ a headline: '+0.13' found
+  ✓ tension: '0.60σ' found
+  ✓ m_φ MAP: '453 MeV' found
+  ✓ m_χ MAP: '770 GeV' found
+  ✓ log Z (v0.8): '−164.87 ± 0.084' found
+  ✓ log Z (v0.7 historical): '−163.29' found
+  ✓ channels: '**22**' found
+  ✓ tests: '677 pass, 8 skip' found
+  ✓ headline row present: '**σ/m₀**' found
+  ✓ ε posterior reference: '10⁻³⁷' found
+=== CITATION.cff ===
+  ✓ log Z (v0.8): '-164.87' found
+  ✓ log Z (v0.7 historical): '-163.29' found
+  ✓ tension: 'tension T39 vs Yukawa a = 0.60' found
+  ✓ m_chi: 'MAP m_chi = 770' found
+  ✓ sigma/m_0 (v0.7 historical): 'sigma/m_0 = 0.27' found
+  ✓ sigma/m_0 (v0.8): 'sigma/m_0 = 0.06' found
+  ✓ version: '0.4-prelim+T88E' found
+=== EXTRACT.md ===
+  ✓ Channels 22: 'Channels: **22 effective**' found
+  ✓ Tests 677: '677 pass' found
+  ✓ σ/m headline: 'σ/m = 0.06 cm²/g' found
+=== MODEL_ASSUMPTIONS_AND_LIMITATIONS.md ===
+  ✓ log_epsilon: 'log_epsilon = -36.95' found
+  ✓ log_alpha: 'log_alpha = -16.17' found
+  ✓ m_φ claim: 'm_φ = 453' found
+  ✓ ε_γ: '1.12 × 10⁻³⁷' found
+  ✓ α_X: '6.84 × 10⁻¹⁷' found
+  ✓ T90 Door B section heading: 'Magnetic-moment Ls₁₀ channel' found
+  ✓ T90 8D log Z: '-162.78' found
+  ✓ T90 8D delta log Z: '+0.51' found
+  ✓ T90 8D MAP m_chi: '138 GeV' found
+  ✓ T90 8D MAP delta: '98 keV' found
+  ✓ T90 8D MAP sigma_PortalB: '1.4×10⁻⁴²' found
+  ✓ T110 7D log Z: '-174.014' found
+  ✓ T110 7D delta log Z: '-10.72' found
+  ✓ T110 7D MAP m_chi: '712.6 GeV' found
+  ✓ T110 7D MAP mu_x: '1.08×10⁻⁷' found
+  ✓ Tier A Door B best door heading: 'Best current LZ door — Door B' found
+  ✓ Tier A Door B status text: 'Door B (Portal B inelastic, T108) is the' found
+  ✓ Tier A Door B Delta log Z: '+0.51' found
+  ✓ Tier A Door C closed marker: 'Door C CLOSED' found
+  ✓ Tier B Door D delta log Z: '-5.72' found
+  ✓ Tier D all doors closed heading: 'All remaining doors closed for this model' found
+  ✓ Tier D Door D closed marker: 'Door D CLOSED' found
+  ✓ Door B Di Mauro 2026 ref: 'Di Mauro et al. (2026)' found
+  ✓ Door B Berlin Ferraro 2025 ref: 'Berlin & Ferraro (2025)' found
+  ✓ Door B Cline 2024 ref: 'Cline et al. (2024)' found
+  ✓ Door B DIAMX 2026 ref: 'DIAMX Collaboration (2026)' found
+  ✓ Door B XENONnT 2025 ref: 'XENONnT (2025)' found
+  ✓ Door B LZ Run 4 future data: 'LZ Run 4 (2027-2028)' found
+  ✓ T112 high-res dynesty nlive: 'nlive=2000' found
+  ✓ T112 tight delta prior: '[50, 200] keV' found
+  ✓ T113 LZ Run 4 forecast: 'LZ Run 4 (2027-2028)' found
+  ✓ T113 DarkSide-20k forecast: 'DarkSide-20k (2028+)' found
+  ✓ T114 Xe124 DEC systematic: '¹²⁴Xe DEC charge-yield systematic' found
+  ✓ T112 breakthrough delta log Z: '+2.13' found
+  ✓ T112 breakthrough log Z uncertainty: '± 0.09' found
+  ✓ T112 breakthrough MAP delta keV: 'δ = 116 keV' found
+  ✓ T112 breakthrough criterion 5 status: 'T90 merge rule criterion #5: SATISFIED' found
+  ✓ T112 breakthrough 3 of 5 status: '3 of 5 T90 criteria satisfied' found
+  ✓ T112 breakthrough merge eligible: 'ELIGIBLE for merge to master' found
+  ✓ T115 sequential v07 log Z drift: '1.49' found
+  ✓ T115 sequential LZ N_pred at MAP: '0.0086' found
+  ✓ T115 sequential verdict: 'Both sequential' found
+  ✓ T115 interpretation update: 'data compatible with Portal B' found
+  ✓ T116 T90 value mu_chi: '6.10' found
+  ✓ T116 T90 value m_chi: '1000' found
+  ✓ T116 sequential LZ event at T90: 'in [0.5, 5.0]' found
+=== CURRENT.md ===
+  ✓ Bayesian evidence log Z: '−164.87 ± 0.084' found
+  ✓ m_χ (MAP): '478 GeV' found
+  ✓ m_φ (MAP): '488 MeV' found
+  ✓ σ/m₀: '0.06 cm²/g' found
+  ✓ Tension: '0.81σ' found
+  ✓ Channels: '22 effective channels' found
+  ✓ 677 tests: '677 pass' found
+  ✓ Drift-guard: '120/120 ALL CLEAR' found
+=== CHANGELOG.md ===
+  ✓ v0.4-prelim+T88E: 'v0.4-prelim+T88E' found
+  ✓ log Z: '−164.87' found
+=== docs/LAYMAN_SUMMARY.md ===
+  ✓ m_χ MAP: '770 GeV' found
+  ✓ σ/m₀: '0.06 cm²/g' found
+  ✓ log Z: '**-163**' found
+  ✓ tension 0.60: '0.60** (below 1.0)' found
+  ✓ channels 21: '**21**' found
+  ✓ tests 677: '**677**' found
+=== VERSION (drift-guard) ===
+  ✓ VERSION starts with '0.4-prelim+T88E' (length 1834 chars, full chain)
+
+======================================================================
+VALUE CROSS-CHECKS (expected strings derived from the result JSONs)
+======================================================================
+  ✓ v0.7 log_Z: '-163.29' in README.md
+  ✓ v0.7 log_Z: '-163.29' in CITATION.cff
+  ✓ v0.7 log_Z: '-163.29' in CURRENT.md
+  ✓ v0.7 log_Z: '-163.29' in MODEL_ASSUMPTIONS_AND_LIMITATIONS.md
+  ✓ v0.7 log_Z_err: '0.085' in MODEL_ASSUMPTIONS_AND_LIMITATIONS.md
+  ✓ v0.7 log_Z_err: '0.085' in CURRENT.md
+  ✓ v0.7 m_chi (MAP): '770' in README.md
+  ✓ v0.7 m_chi (MAP): '770' in CURRENT.md
+  ✓ v0.7 m_chi (MAP): '770' in CITATION.cff
+  ✓ v0.7 m_phi (MAP): '453' in README.md
+  ✓ v0.7 m_phi (MAP): '453' in MODEL_ASSUMPTIONS_AND_LIMITATIONS.md
+  ✓ v0.7 sigma/m_0 (MAP): '0.27' in CITATION.cff
+  ✓ v0.7 sigma/m_0 (MAP): '0.27' in CURRENT.md
+  ✓ v0.7 velocity index a (MAP): '0.34' in CURRENT.md
+  ✗ v0.7 velocity index a (MAP): none of ['0.34'] found in README.md
+  ✓ v0.7 T39-vs-Yukawa tension: '0.60' in README.md
+  ✓ v0.7 T39-vs-Yukawa tension: '0.60' in CURRENT.md
+  ✓ epsilon_gamma = 10**log_epsilon (v0.7 MAP): '1.12 × 10⁻³⁷' in MODEL_ASSUMPTIONS_AND_LIMITATIONS.md
+  ✓ alpha_X = 10**log_alpha (v0.7 MAP): '6.84 × 10⁻¹⁷' in MODEL_ASSUMPTIONS_AND_LIMITATIONS.md
+  ✓ v0.8 log_Z: '-164.87' in README.md
+  ✓ v0.8 log_Z: '-164.87' in CITATION.cff
+  ✓ v0.8 log_Z: '-164.87' in CHANGELOG.md
+  ✓ v0.8 log_Z: '-164.87' in CURRENT.md
+  ✓ v0.8 log_Z_err: '0.084' in README.md
+  ✓ v0.8 log_Z_err: '0.084' in CITATION.cff
+  ✓ v0.8 log_Z_err: '0.084' in CURRENT.md
+  ✓ v0.8 sigma/m_0 (MAP): '0.06' in README.md
+  ✓ v0.8 sigma/m_0 (MAP): '0.06' in CITATION.cff
+  ✓ v0.8 sigma/m_0 (MAP): '0.06' in CURRENT.md
+  ✓ v0.8 sigma/m_0 (MAP): '0.06' in docs/LAYMAN_SUMMARY.md
+  ✓ v0.8 sigma/m_0 (MAP): '0.06' in EXTRACT.md
+  ✓ v0.8 velocity index a (MAP): '0.13' in README.md
+  ✓ v0.8 velocity index a (MAP): '0.13' in CITATION.cff
+  ✓ v0.8 velocity index a (MAP): '0.13' in CURRENT.md
+  ✓ v0.8 velocity index a (MAP): '0.13' in docs/LAYMAN_SUMMARY.md
+
+======================================================================
+DRIFT DETECTED: 119/120 checks passed
+exit=1 t82_audit
+=== drift_guard ===
+======================================================================
+V19.2-E D — Drift-guard (ClawsGO B.2)
+======================================================================
+
+Canonical headline: v19.2-E A.2 5-param DE best-fit:
+  PASS count: 5
+  SPARC factor below 0.19: 82.6x
+  First-class structural findings (v19.2-D freeze): 2
+  Halo-specific prefactors:
+    BM2 cluster: 1.82x
+    Cosmo-501 dwarf: 2.2x
+    Fornax dSph: 18.7x
+    Segue 1 UFD: 4.0x
+
+canonical_abstract_channel_count: computed -> 8 constrained channel slots, published-sigma_unc likelihood: 1 PASS / 0 MARGINAL / 7 FAIL at the canonical Phase-44 parameters, 5 PASS / 2 MARGINAL / 1 FAIL at the v19.2-E A.2 5-parameter DE best fit
+T41 canonical-vs-artifact: OK (sha256 verified; MAP m_chi=478.3 GeV, m_phi=488.2 MeV, g_chi=0.964, tension=0.81)
+
+T82 count literal in CURRENT.md: OK (120/120 ALL CLEAR)
+
+======================================================================
+RESULT: 2 drift(s) detected.
+======================================================================
+
+  [WARN] README.md: channel_count_claim_missing_parameter_set_label
+    Found: 5 PASS / 2 MARGINAL / 1 FAIL
+    Canonical: count must name its parameter set and sigma_unc convention
+    Context: — under the 1.0 threshold the project set for itself.
+
+two results survive every forward path that was tested (§2.6a, §9.17b). five uv-completion routes are exc
+
+  [HIGH] README.md: t41_v07_values_in_unmarked_standing_context
+    Found: line 65: | m_χ | **478 GeV** | posterior median 503 GeV (68% CI 338–770 GeV) |
+    Canonical: v0.8 MAP: m_chi 478 GeV, m_phi 488 MeV, g_chi 0.964, tension 0.81 (artifact t41_mediator_mass_joint_fit_t88ce_v08_with_euclid_lensing_and_subhalo_forecast_nlive2000.json)
+    Context: 770 GeV / 453 MeV / 0.60σ / g_chi 1.19 are the v0.7 MAP values
+
+exit=0 drift_guard
+=== audit_markdown_tables ===
+======================================================================
+MARKDOWN TABLE STRUCTURE AUDIT
+======================================================================
+
+  PAPER_V1_DRAFT.md: 65 table(s) - all well-formed
+
+  SIDM_ROUND5_CONSOLIDATED_FIXES_v1.17_2026-11-02.md: 47 table(s) - all well-formed
+
+  SIDM_ROUND5_CHANGED_CODE_v1.9_2026-10-26.md: 20 table(s) - all well-formed
+
+----------------------------------------------------------------------
+OK: every table header is a real table row, every row's cell count
+    matches its separator, and every table renders.
+----------------------------------------------------------------------
+RESULT: PASS
+exit=0 audit_markdown_tables
+=== audit_stale_strings ===
+Stale-string audit — registry 6 entries / 15 variants; paper: PAPER_V1_DRAFT.md
+  hits in retraction context (allowed): 16
+VERDICT: PASS — no unmarked stale string from the registry appears in the paper
+exit=0 audit_stale_strings
+=== audit_doc_anchors ===
+==========================================================================
+CROSS-DOCUMENT SECTION-ANCHOR AUDIT (gate layer 8)
+==========================================================================
+Paper   : PAPER_V1_DRAFT.md
+Report  : SIDM_ROUND5_CONSOLIDATED_FIXES_v1.17_2026-11-02.md
+Closeout: SIDM_N24_CLOSEOUT_REPORT_WITH_CODE_v1.1_2026-11-01.md
+Companion: SIDM_ROUND5_CHANGED_CODE_v1.9_2026-10-26.md
+
+  report     headings=136  OK=477  STALE= 17  EXT=  0  QUOTED-BAD=  6  DANGLING=  0
+  closeout   headings= 11  OK= 20  STALE=  0  EXT=  0  QUOTED-BAD=  0  DANGLING=  0
+  companion  headings= 41  OK= 75  STALE= 21  EXT=  0  QUOTED-BAD=  2  DANGLING=  0
+  paper      headings= 66  OK=314  STALE=  0  EXT=  4  QUOTED-BAD=  0  DANGLING=  0
+
+Paper stale-anchor baseline: 0 (actual 0)  (ok)
+
+--------------------------------------------------------------------------
+EXTERNAL-DOCUMENT references (cite another document's section, not this one's - exempt):
+--------------------------------------------------------------------------
+  paper L31 §7: **Five UV completion no-gos** (magnetic dipole, Hidden U(1) + pseudo-Dirac, GeV inelasti
+  paper L827 §4: **Honest limit sentence for the frozen paper.** The background σ/m = 0.052·(100/v)^1.93 
+  paper L2406 §5: **Retired values (ClawsGO #7 §5):**
+  paper L2434 §7: **Note (ClawsGO #7 §7):** the abstract calls these 'five UV completion no-go theorems'. 
+
+--------------------------------------------------------------------------
+QUOTED-BAD references (the reviewer's wrong anchors, quoted on purpose - exempt):
+--------------------------------------------------------------------------
+  report L1202 §10.4c: | **CG-13** | the paper's **stale section anchors** — 14 references to sections retired by t
+  report L1202 §10.4d: | **CG-13** | the paper's **stale section anchors** — 14 references to sections retired by t
+  report L1674 §99.9: new layer was therefore mutation-tested: a dangling `§99.9` was injected into this report, t
+  report L1707 §10.4c: | §10.4c | *Deferred items — Summary* | the contents-list bullet removed; the surviving T178
+  report L1721 §99.9: (exit 1); a dangling `§99.9` reproduces a DANGLING failure; restoring the file returns PASS 
+  report L2401 §18.6: dense model" (it is a **552B MoE with 8B/16B active**). A dangling `§18.6` cross-reference —
+  companion L1749 §99.9: | layer 8, dangling set | `DANGLING=0`, PASS | inject `§99.9` → DANGLING FAIL, exit 1 | PASS
+  companion L1750 §10.7: | layer 8, external refs | 4 ClawsGO citations stay EXT (not DANGLING) | stale §10.7 beside 
+
+--------------------------------------------------------------------------
+DEAD EXEMPTIONS (RETIRED_PAPER_SECTIONS entries no longer triggered - re-audit and remove):
+--------------------------------------------------------------------------
+  §9.3: retired in 799f4ef (2026-10-05 R88 paper cleanup); last a heading at 32d720b (v1.11 -> v1.
+
+OK: no DANGLING section references in the report, the close-out, the companion, or the paper.
+
+OK: every .md filename cited in the audited documents exists in the worktree or git history (disclosed phantoms are allowlisted and machine-guarded).
+
+RESULT: PASS
+exit=0 audit_doc_anchors
+=== audit_claims ===
+Paper:  C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\docs\PAPER_V1_DRAFT.md
+README: C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\README.md
+Results dir: C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\data\results
+Standing-numbers table: C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\docs\PAPER_STANDING_NUMBERS.md
+
+======================================================================
+STANDING-NUMBERS TABLE VERIFICATION (Phase 1.2)
+Table: C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\docs\PAPER_STANDING_NUMBERS.md
+======================================================================
+  ✓ §2 borrowed pass count (4+2 = 6): 4
+  ✓ §2 borrowed marginal count: 2
+  ✓ §2 yang pass count (4): 4
+  ✓ §2 t202 pass count (3): 3
+  ✓ §3 borrowed SPARC log L: -0.09190591069850636
+  ✓ §3 yang SPARC log L: -0.24264943377509
+  ✓ §3 t202 SPARC log L: -0.6068216487406486
+  ✓ §4 Bayes log B: 2.4113762479443395
+  ✓ §4 Bayes B: 11.1492947852287
+  ✓ §5 t_core at Phase 44 σ/m: 73.71088497222982
+  ✓ §5 Cloud-9 V_max: 31.118631093100245
+  ✓ §6 t_core at σ/m=70: 0.1759610094805328
+  ✓ §6 t_cross at σ/m=70: 0.09189153383622575
+  ✓ §7 σ/m at V_max=31.12: 0.17413886016430768
+  ✓ §7 Silverman+ threshold: 1.0
+  ✓ §9 Best Ω_h²: 0.11870564684343003
+  ✓ §10 T215u mean Myr: 69.57
+  ✓ §10 T215u std Myr: 0.74
+  ✓ §10 T215u min Myr: 68.72
+  ✓ §10 T215u max Myr: 69.99
+  ✓ §3 priored v_HL median: 105.2385618011314
+  ✓ §3 priored v_HL std: 38.60286767503894
+  ✓ §3 priored f_H_cc median: 0.060431280100529915
+  ✓ §3 priored σ_peak_HL median: 0.522601932831181
+
+  Markdown mirror (printed table value vs source JSON):
+    ✓ §2 borrowed clear_pass: table=4.0 == JSON 4
+    ✓ §2 borrowed marginal: table=2.0 == JSON 2
+    ✓ §2 yang clear_pass: table=4.0 == JSON 4
+    ✓ §2 t202 clear_pass: table=3.0 == JSON 3
+    ✓ §2 borrowed SPARC log L: table=-0.0919 == JSON -0.09190591069850636
+    ✓ §2 yang SPARC log L: table=-0.2426 == JSON -0.24264943377509
+    ✓ §2 t202 SPARC log L: table=-0.6068 == JSON -0.6068216487406486
+    ✓ §4 Bayes log B: table=2.411 == JSON 2.4113762479443395
+    ✓ §4 Bayes B: table=11.149 == JSON 11.1492947852287
+    ✓ §5 t_core (Phase 44): table=73.71 == JSON 73.71088497222982
+    ✓ §5 Cloud-9 V_max: table=31.12 == JSON 31.118631093100245
+    ✓ §6 t_core at σ/m=70: table=0.176 == JSON 0.1759610094805328
+    ✓ §6 t_cross at σ/m=70: table=0.092 == JSON 0.09189153383622575
+    ✓ §7 σ/m at V_max=31.12: table=0.174 == JSON 0.17413886016430768
+    ✓ §7 Silverman+ threshold: table=1.0 == JSON 1.0
+    ✓ §9 Best Ω_h²: table=0.1187 == JSON 0.11870564684343003
+    ✓ §10 T215u mean: table=69.57 == JSON 69.57
+    ✓ §10 T215u std: table=0.74 == JSON 0.74
+    ✓ §10 T215u range == max-min: table=1.27 == JSON 1.269999999999996
+    ✓ §3 priored v_HL median: table=105.24 == JSON 105.2385618011314
+    ✓ §3 priored v_HL std: table=38.6 == JSON 38.60286767503894
+    ✓ §3 priored σ_peak_HL: table=0.523 == JSON 0.522601932831181
+    ✓ §3 priored f_H_cc: table=0.06 == JSON 0.060431280100529915
+
+  T208 self-consistency (recomputed from the JSON's own halo params):
+    ✓ r_s == r_vir/c  (2924.4082 vs 2924.4082 pc)
+    ✓ V_max == r_max-corrected (31.118631 vs 31.118631 km/s)
+    ✓ t_core == formula(sigma, rho_s, r_s, V_max) (73.710885 vs 73.710885 Gyr)
+    ✓ t_cross == r_s/V_max (0.09189153 vs 0.09189153 Gyr)
+    ✓ t_core_over_t_cross == t_core/t_cross (802.1510)
+
+======================================================================
+TABLE SUMMARY: 52 pass, 0 fail
+======================================================================
+
+✓ All numbers verified against source JSON. Zero drift.
+
+======================================================================
+CHECKING MAPPED CLAIMS (regex mode)
+======================================================================
+  ! NOT FOUND IN PAPER: Phase 44: +8.10 log-units (free joint fit)
+      (regex: \+8\.10\s+log-?units?)
+  ✓ Phase 53 v2: +7.93 log-units (clockwork UV prior): 7.932484749305507 (within 0.01 of 7.93)
+  ✓ Phase 53 v2: BIC Δ = -5.66 favoring clockwork: -5.655637978571544 (within 0.05 of -5.66)
+  ✓ Phase 33d: 115/127 SPARC pass V_flat test: 115 (within 0 of 115)
+  ✓ Phase 54: +6.08 log-units (joint vs constant σ/m): 6.081352044640333 (within 0.01 of 6.08)
+  ✓ Phase 54: BIC Δ = +3.22 favoring constant σ/m: 3.217867952072872 (within 0.05 of 3.22)
+  ✓ Cloud-9: M_200 ≈ 5×10⁹ M☉ (halo mass prior): 5000000000.0 (within 100000000.0 of 5000000000.0)
+  ✓ T215u: mean t_max = 69.57 Myr (memory-capped): 69.57 (within 0.1 of 69.57)
+  ✓ T215u: std = 0.74 Myr (memory-capped): 0.74 (within 0.1 of 0.74)
+  ✓ T208: t_core = 73.7 Gyr (Phase 44 host halo): 73.71088497222982 (within 0.5 of 73.71)
+  ✓ T212: t_core = 0.176 Gyr at σ/m=70: 0.1759610094805328 (within 0.005 of 0.176)
+  ✓ T213: σ/m(V_max=31.12) = 0.174 cm²/g: 0.17413886016430768 (within 0.005 of 0.174)
+  ✓ T205: Bayes log B = 2.411 (multi-resonance vs constant): 2.4113762479443395 (within 0.01 of 2.411)
+  ✓ T207c: v_HL = 105.24 ± 38.60 (priored free): 105.2385618011314 (within 1.0 of 105.24)
+  ✓ T207c: f_H_cc = 0.060 ± 0.012 (priored free): 0.060431280100529915 (within 0.005 of 0.06)
+
+======================================================================
+NUMERICAL LINES IN PAPER (informational)
+======================================================================
+Found 1136 lines with decimal numbers in paper.
+Most are within prose; only the headline Phase claims are tracked.
+
+REGEX RESULT: FAIL — at least one mapped claim has drifted or is untracked.
+exit=1 audit_claims
+=== audit_units ===
+======================================================================
+UNIT CONSISTENCY AUDIT
+======================================================================
+
+Cross-section units:
+  cm²/g (unicode):    585
+  cm^2/g (ASCII):     0
+  cm2/g (compact):    0
+
+Solar mass units:
+  M☉ (unicode):       71
+  M_sun/M⊙ (ASCII):   0
+
+Time units:
+  Gyr: 89
+  Myr: 84
+  yr:  0
+
+Velocity units:
+  km/s: 335
+
+----------------------------------------------------------------------
+SUSPICIOUS BARE NUMBERS (heuristic):
+----------------------------------------------------------------------
+  L7: 7501856343179664 followed by 'with'
+  L7: 008150396851725193 followed by 'cm'
+  L7: 272481773080454 followed by 'cm'
+  L7: 348366 followed by 'cm'
+  L15: 2025 followed by 'SIDM'
+  L17: 2015 followed by 'c'
+  L17: 2019 followed by 'relation'
+  L25: 2020 followed by 'by'
+  L27: 2025 followed by 'Table'
+  L27: 2020 followed by 'are'
+  ... and 279 more
+
+----------------------------------------------------------------------
+UNICODE SUPERSCRIPTS (Rule 27 audit):
+----------------------------------------------------------------------
+Unicode superscript characters: 1385 total
+  ⁻ (0x207b): 177
+  ⁰ (0x2070): 16
+  ¹ (0xb9): 86
+  ² (0xb2): 849
+  ³ (0xb3): 78
+  ⁴ (0x2074): 54
+  ⁵ (0x2075): 23
+  ⁶ (0x2076): 37
+  ⁷ (0x2077): 22
+  ⁸ (0x2078): 15
+  ⁹ (0x2079): 28
+  Note: paper has many unicode superscripts (1385). Per Rule 27,
+  these should be converted to ASCII (10^-N) only when sent to PDF/Telegram.
+
+======================================================================
+✓ No unit consistency issues
+exit=0 audit_units

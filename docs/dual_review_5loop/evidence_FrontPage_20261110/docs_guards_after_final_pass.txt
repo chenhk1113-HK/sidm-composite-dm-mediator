@@ -1,0 +1,40 @@
+### scripts/audit_markdown_tables.py
+    matches its separator, and every table renders.
+----------------------------------------------------------------------
+RESULT: PASS
+exit=0
+### scripts/audit_doc_anchors.py
+OK: every .md filename cited in the audited documents exists in the worktree or git history (disclosed phantoms are allowlisted and machine-guarded).
+
+RESULT: PASS
+exit=0
+### scripts/audit_stale_strings.py
+Stale-string audit — registry 6 entries / 15 variants; paper: PAPER_V1_DRAFT.md
+  hits in retraction context (allowed): 16
+VERDICT: PASS — no unmarked stale string from the registry appears in the paper
+exit=0
+### scripts/audit_register_state.py
+report audited: SIDM_ROUND5_CONSOLIDATED_FIXES_v1.17_2026-11-02.md
+
+REGISTER STATE AUDIT PASSED (CG-17: the live round's state statements agree with the canonical §17.3 register; frozen historical rounds are exempt by design)
+exit=0
+### scripts/t82_audit.py
+
+======================================================================
+ALL CLEAR: 120/120 checks passed — no drift
+exit=0
+### scripts/drift_guard.py
+======================================================================
+RESULT: No drift detected. All docs consistent with canonical numbers.
+======================================================================
+exit=0
+### scripts/audit_units.py
+
+======================================================================
+✓ No unit consistency issues
+exit=0
+### scripts/audit_claims.py
+Most are within prose; only the headline Phase claims are tracked.
+
+REGEX RESULT: PASS — all tracked claims match reference data within tolerance.
+exit=0
