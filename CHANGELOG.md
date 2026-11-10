@@ -14,6 +14,8 @@ Triggered by the user's request that the front page show only the abstract, key 
 
 **VERSION deliberately not advanced** (same convention as the CMAnchor round), so no new version token implies a tag that does not exist.
 
+**6. The filing commit went red on `test_inventory_is_current`, and the reason is an ordering rule.** Gate run 5 on `3165b6e` failed exactly one test: `docs_prose 143 -> 149` (`gate_run5_red_cg16_3165b6e.txt`). The inventory had been re-scanned *before* `git add`, and `scripts/cg16_scan.py:50` enumerates the tree with `git ls-files` — the index, not the working directory — so the seven evidence files that became visible to `git ls-files` at that commit (six extra host-path occurrences across their headers) were invisible to that scan and already visible to the test. Rule for future rounds: stage first, then `cg16_scan.py`, then commit; `--check` in the working copy proves nothing about what the test will see. Fixed in the follow-up chore commit, whose full gate run certifies the dated tag.
+
 ## [CMAnchor-2026-11-10] - every c-M tension now names its own c-M relation; the "3.2σ → 0.32σ" headline is withdrawn; reference slots [56]-[58] registered
 
 Seven commits, 2026-11-09 19:34 to 2026-11-10 12:30: `5aa0fce` (KB intake from `Useful papers.docx` + citation cleanup), `1bccdb1` (5 verified reference slots applied, 2 wrong venues fixed), `0253a8b` (Y24 profile-family recheck closed, slots [56]/[57], defects D9-D13 recorded), `91d94d9` (c-M sigma convention fixed in code), `e1af562` (every c-M tension anchor-labelled in the paper), `6d346e2` (full numerical read of the AIDA-TNG introduction paper), `d362721` (abstract adopts the anchor-labelled headline, slot [58] registered, audit findings cleared).
