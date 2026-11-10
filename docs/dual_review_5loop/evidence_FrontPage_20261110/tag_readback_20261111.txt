@@ -1,0 +1,33 @@
+Tag and push read-back - v19.2-F-RecordSave-2026-11-11 (created 2026-11-11 03:08:24 +0800)
+
+Local refs
+  refs/tags/v19.2-F-RecordSave-2026-11-11  tag object 0b659c5  commit dffbf11
+  git rev-parse v19.2-F-RecordSave-2026-11-11^{} -> dffbf118a41bf886c21675233225440a63cfa7f6
+
+Certifying gate run (run 6, on dffbf11, finished 02:51)
+  GATE PASSED: all 15 layer(s) asserted and exited 0
+  3644 passed, 25 skipped, 40 deselected, 3 warnings in 1303.05s (0:21:43)
+  drift_guard: No drift detected  |  t82_audit: ALL CLEAR 120/120
+
+Push (branch was rejected first, then fast-forwarded)
+  First attempt: rejected non-fast-forward. Remote had moved to 709fbe9 "Update README.md"
+  (web-UI edit by the repo owner, 2026-11-10 23:26 +0800, crediting Qwen3.8_Flash_Next as a
+  coder on the disclaimer line). Also discovered: this working copy's remote-tracking ref still stood at de8cc7c when the fetch
+  reported de8cc7c..709fbe9, so be4cb92 was not visible on the remote from here; it reached GitHub
+  with the tag push (as ancestry of dffbf11) and then with the branch push.
+  Resolution: git merge origin/wip/v19.2-F-init (ort, auto-clean; both edits survived - the
+  owner's disclaimer line 3 and the badge line 10), no force push, no history rewrite.
+  git push origin wip/v19.2-F-init -> 709fbe9..cf6cedc
+  git push origin refs/tags/v19.2-F-RecordSave-2026-11-11 -> [new tag]
+
+Remote read-back (git ls-remote, 2026-11-11)
+  cf6cedc082e04f3df70c72e4b573d1d3a9eb8300  refs/heads/wip/v19.2-F-init
+  0b659c5f2648589f911342703c0a291f5e2b6ca1  refs/tags/v19.2-F-RecordSave-2026-11-11
+  dffbf118a41bf886c21675233225440a63cfa7f6  refs/tags/v19.2-F-RecordSave-2026-11-11^{}
+
+GitHub API read-back
+  GET /git/ref/tags/v19.2-F-RecordSave-2026-11-11 -> object.sha 0b659c5... (annotated tag object)
+  GET /commits/dffbf118... -> "chore(cg16): re-scan the host-path inventory after staging the evidence .txt files"
+  GET /contents/.../evidence_FrontPage_20261110?ref=wip/v19.2-F-init -> 13 entries, all gate logs present
+     as .txt (gate_run1..gate_run6, docs_guards x2, cg16_check, pytest_skip_inventory, push_readback)
+  raw README line 3 = owner's disclaimer edit, line 10 = tests-3644_pass | 25 skip | 40 deselect
