@@ -1613,6 +1613,10 @@
         "host_path_lines": 3
       },
       {
+        "path": "docs/dual_review_5loop/evidence_FrontPage_20261110/gate_run6_certify_dffbf11.txt",
+        "host_path_lines": 3
+      },
+      {
         "path": "docs/dual_review_5loop/evidence_FrontPage_20261110/pytest_skip_inventory_be4cb92.txt",
         "host_path_lines": 2
       },
@@ -2311,7 +2315,7 @@
     "pinned_source": 3,
     "pinned_exception": 3,
     "historical_frozen_code": 230,
-    "docs_prose": 150,
+    "docs_prose": 151,
     "data_artifact": 69,
     "other": 0
   },

@@ -7,7 +7,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![WIP Paper](https://img.shields.io/badge/wip_paper-v19.2--F--init-blueviolet)](v0.3-prelim/docs/PAPER_V1_DRAFT.md)
 [![Gate](https://img.shields.io/badge/gate-15%2F15_layers_pass-green)](scripts/verify_release_gate.py)
-[![Tests](https://img.shields.io/badge/tests-3643_pass%20%7C%2026%20skip%20%7C%2040%20deselect-green)](scripts/verify_release_gate.py)
+[![Tests](https://img.shields.io/badge/tests-3644_pass%20%7C%2025%20skip%20%7C%2040%20deselect-green)](scripts/verify_release_gate.py)
 
 **Pairing declaration (findings F26/F33):** this document quotes amplitudes in two pairings. The LIVE canonical pair is f_H = 0.7501856343179664 with σ_0 = 0.008150396851725193 cm²/g and σ_peak = 27.272481773080454 cm²/g. The ARCHIVED pair is f_H = 0.297 with σ_0 = 0.052 cm²/g and σ_peak = 174.0 cm²/g. Unless a sentence says otherwise, an amplitude quoted below is an ARCHIVED-pair raw amplitude. Both pairs give the same halo-level σ_eff = f_H² × (σ/m) = 15.348366 cm²/g at the 29.4 km/s resonance, so no effective prediction changes. Sources: scripts/constants.py, v0.3-prelim/data/results/canonical_numbers.json, v0.3-prelim/data/results/fH_pairing_registry.json.
 
