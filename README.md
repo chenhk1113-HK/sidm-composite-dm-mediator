@@ -1,6 +1,6 @@
 # sidm-composite-dm-mediator
 
-> ⚠️ **Disclaimer:** a personal project built out of curiosity, using Hermes with **MiniMax M3** as the coder and **Grok**, **Doubao**, **Qwen 3.8 Max** and other AIs as reviewers.
+> ⚠️ **Disclaimer:** a personal project built out of curiosity, using Hermes with **MiniMax M3** and **Qwen3.8_Flash_Next** as the coder and **Grok**, **Doubao**, **Qwen 3.8 Max** and other AIs as reviewers.
 
 **Standing:** branch `wip/v19.2-F-init` (also the GitHub default branch) · record save `v19.2-F-RecordSave-2026-11-10` → commit `4098d01` · paper `v0.3-prelim/docs/PAPER_V1_DRAFT.md` · 15-layer release gate **15/15 PASS**. Round-by-round history is in [`CHANGELOG.md`](CHANGELOG.md), [`CURRENT.md`](CURRENT.md), the branch front page [`v0.3-prelim/README.md`](v0.3-prelim/README.md) and [`v0.3-prelim/docs/archive/phases/`](v0.3-prelim/docs/archive/phases/), not on this page.
 
