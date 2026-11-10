@@ -1577,6 +1577,10 @@
         "host_path_lines": 2
       },
       {
+        "path": "docs/dual_review_5loop/evidence_CMAnchor_20261110/gate_run_head_4098d01.txt",
+        "host_path_lines": 2
+      },
+      {
         "path": "docs/dual_review_5loop/evidence_CMAnchor_20261110/pytest_full_suite.txt",
         "host_path_lines": 1
       },
@@ -2275,7 +2279,7 @@
     "pinned_source": 3,
     "pinned_exception": 3,
     "historical_frozen_code": 230,
-    "docs_prose": 141,
+    "docs_prose": 142,
     "data_artifact": 69,
     "other": 0
   },
