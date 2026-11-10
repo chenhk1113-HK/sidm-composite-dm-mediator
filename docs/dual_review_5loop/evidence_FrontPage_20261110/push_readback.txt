@@ -1,0 +1,5 @@
+push read-back 2026-11-10
+local  commit: df92ecf298d3ac25cc7fa60fc9f3df43bb2200d8
+remote ls-remote: df92ecf298d3ac25cc7fa60fc9f3df43bb2200d8	refs/heads/wip/v19.2-F-init
+branch: ## wip/v19.2-F-init...origin/wip/v19.2-F-init
+df92ecf docs(front-page): rewrite README to abstract + key findings + layman summary
