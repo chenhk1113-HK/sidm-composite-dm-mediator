@@ -2,11 +2,34 @@
 
 > **For:** Anyone who has 60 seconds and wants to know what this project
 > is, what it claims, and what the current best numbers are.
-> Updated with each version-bump round. Last refresh: 2026-11-10 (`CMAnchor-2026-11-10` c-M anchor round, no VERSION change; dated save tag `v19.2-F-RecordSave-2026-11-10` → `4098d01`, numeric save point remains `v19.2-F-RecordSave-v1.18`).
+> Updated with each version-bump round. Last refresh: 2026-11-11 (`ReviewResponse-2026-11-11` claim-sync + reproducibility round, no VERSION change; the numeric save point remains `v19.2-F-RecordSave-v1.18` and the dated save tag `v19.2-F-RecordSave-2026-11-10` → `4098d01`).
 
 ---
 
 **Pairing declaration (findings F26/F33):** this document quotes amplitudes in two pairings. The LIVE canonical pair is f_H = 0.7501856343179664 with σ_0 = 0.008150396851725193 cm²/g and σ_peak = 27.272481773080454 cm²/g. The ARCHIVED pair is f_H = 0.297 with σ_0 = 0.052 cm²/g and σ_peak = 174.0 cm²/g. Unless a sentence says otherwise, an amplitude quoted below is an ARCHIVED-pair raw amplitude. Both pairs give the same halo-level σ_eff = f_H² × (σ/m) = 15.348366 cm²/g at the 29.4 km/s resonance, so no effective prediction changes. Sources: scripts/constants.py, v0.3-prelim/data/results/canonical_numbers.json, v0.3-prelim/data/results/fH_pairing_registry.json.
+
+## Standing: `ReviewResponse-2026-11-11` — claim sync and a reproducibility contract (no VERSION change)
+
+**Nothing in the version-of-record physics changed.** This round corrected how one comparison is
+stated and added tooling; the pairing declaration above, the canonical fit and every headline
+number are untouched. Full record: `docs/REVIEW_RESPONSE_2026_11_11.md`.
+
+* **Paper §10.5 now compares the pair its numbers come from.** log B = 2.411 and the Phase 54
+  BIC penalty belong to *15-parameter multi-resonance vs constant σ/m*, not to the 4-parameter vs
+  7-parameter basin comparison; the section is split into an evidence comparison and a basin-coverage
+  comparison, and the "prior volume 3.6× larger" explanation is withdrawn (the Occam factor is
+  already inside dynesty's log Z, so multi-resonance wins **despite** the larger prior volume).
+  README and REFEREE_RESPONSES already carried this reading; the paper was the outlier.
+* **Stochastic results must now record a seed and an interval.** `v0.3-prelim/code/repro_contract.py`
+  writes both, `scripts/seed_interval_audit.py` inventories the gap (487 artifacts, 203 stochastic,
+  2 with a seed, 136 with an interval, 0 with both) and fails closed for anything dated from
+  2026-11-11 onward. Published artifacts were not regenerated.
+* **README's Python is 3.12**, matching CI and the working venv.
+* **CI health measured, not assumed:** `Self-check` active, the 15 most recent runs green on
+  `wip/v19.2-F-init` (2026-11-08 → 2026-11-10). `v0.3-prelim/tests/test_ci_workflow_wiring.py`
+  keeps the drift classes from returning, and `self_check.yml` runs them as CI Layer G.
+* **Open finding:** `v0.3-prelim/data/results/amuse_focused_rerun_with_sashimi_2026_09_12.json`
+  is truncated mid-value and cannot be parsed; disclosed rather than hidden.
 
 ## Standing: `CMAnchor-2026-11-10` — c-M anchor labelling, defect D9 resolved, slots [56]-[58]
 

@@ -254,6 +254,21 @@ def log_likelihood_model_B(params, obs):
     return total_logL if np.isfinite(total_logL) else -1e10
 
 
+# Reproducibility contract (2026-11-11): the seed is recorded in the artifact so log Z is
+# re-derivable, and each sampled parameter gets a credible interval from the chain itself.
+# Labels below match log_likelihood_model_A's indexing (params[0], [1], [2:6], [6:10],
+# [10:14], [14]) and logU_A's prior order.
+SEED = 20261111
+MODEL_A_LABELS = (
+    ["sigma_0", "a_slope"]
+    + [f"v_target_{i + 1}" for i in range(4)]
+    + [f"log_w_{i + 1}" for i in range(4)]
+    + [f"log_sigma_peak_{i + 1}" for i in range(4)]
+    + ["halo_mix"]
+)
+MODEL_B_LABELS = ["sigma_0", "a_slope"]
+
+
 def main():
     print("=" * 60)
     print("T205: Full-likelihood with published error budgets")
@@ -267,6 +282,7 @@ def main():
 
     # Run dynesty nested sampling
     import dynesty
+    from repro_contract import attach_reproducibility, posterior_summary
 
     # Model A: 15 parameters
     print("=== Model A (multi-resonance, 15 params) ===")
@@ -296,7 +312,8 @@ def main():
             0 + u[14] * 1,
         ])
 
-    sampler_A = dynesty.NestedSampler(logL_A, logU_A, ndim_A, nlive=200)
+    sampler_A = dynesty.NestedSampler(logL_A, logU_A, ndim_A, nlive=200,
+                                     rstate=np.random.default_rng(SEED))
     sampler_A.run_nested(dlogz=0.5)
     logZ_A = sampler_A.results.logz[-1]
     print(f"  log Z_A = {logZ_A:.3f}")
@@ -312,10 +329,15 @@ def main():
             0.0 + u[1] * 5.0,
         ])
 
-    sampler_B = dynesty.NestedSampler(logL_B, logU_B, ndim_B, nlive=100)
+    sampler_B = dynesty.NestedSampler(logL_B, logU_B, ndim_B, nlive=100,
+                                     rstate=np.random.default_rng(SEED))
     sampler_B.run_nested(dlogz=0.5)
     logZ_B = sampler_B.results.logz[-1]
     print(f"  log Z_B = {logZ_B:.3f}")
+
+    # Credible intervals straight from the posterior samples the sampler produced.
+    posterior_A = posterior_summary(sampler_A.results.samples, MODEL_A_LABELS)
+    posterior_B = posterior_summary(sampler_B.results.samples, MODEL_B_LABELS)
 
     log_bayes_factor = logZ_A - logZ_B
     bayes_factor = math.exp(log_bayes_factor)
@@ -377,12 +399,23 @@ def main():
             'T177_bayes_factor': t177_bf,
             'delta_logbf': float(delta_logbf),
         },
+        'posterior_credible_16_84': {
+            'model_A_multi_resonance': posterior_A,
+            'model_B_constant': posterior_B,
+        },
         'HONEST_LIMITATIONS': [
             'Published σ_unc values are approximate extractions from papers (not posterior chains)',
             'Horigome+ 2025 reports a single combined σ/m; we split across 5 v bins',
             'Some σ_unc values may not include all systematics (e.g., velocity convention)',
         ],
     }
+    attach_reproducibility(
+        output, SEED, sampler='dynesty 3.x nested sampling',
+        n_samples=int(np.asarray(sampler_A.results.samples).shape[0]),
+        sampler_options={'nlive_A': 200, 'nlive_B': 100, 'dlogz': 0.5},
+        note='Seed recorded from 2026-11-11 onwards. The log Z values stored in this '
+             'artifact were produced by an earlier unseeded run; from this change on the '
+             'run is re-derivable from the recorded seed.')
     with open(output_path, 'w') as f:
         json.dump(output, f, indent=2)
     print(f"Results saved to {output_path}")

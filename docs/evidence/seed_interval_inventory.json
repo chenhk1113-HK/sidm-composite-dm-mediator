@@ -1,0 +1,1662 @@
+{
+  "generated_by": "scripts/seed_interval_audit.py",
+  "generated_at": "2026-11-11T11:23:41+00:00",
+  "conduct_date": "2026-11-11",
+  "counts": {
+    "total": 487,
+    "stochastic": 203,
+    "seed": 2,
+    "interval": 136,
+    "both": 0,
+    "legacy_gap": 203,
+    "forward_violation": 0,
+    "allowlisted_nonresult": 1,
+    "corrupt": 1,
+    "corrupt_allowlisted": 1,
+    "date_from_artifact": 84,
+    "date_from_git": 399,
+    "date_from_mtime": 3
+  },
+  "forward_rule_violations": [],
+  "corrupt_artifacts": [
+    {
+      "file": "amuse_focused_rerun_with_sashimi_2026_09_12.json",
+      "problem": "unparseable JSON (JSONDecodeError)",
+      "size_bytes": 203917,
+      "allowlisted": true,
+      "reason": "truncated at 203,917 bytes mid-value (ends at '\"core_collapsed\":'); the AMUSE benchmark writer cut the file off. Open finding: re-run the benchmark or archive the fragment."
+    }
+  ],
+  "allowlisted_nonresults": {
+    "cg16_host_path_inventory.json": "CG-16 path inventory (docs artifact): lists file paths, stores no sampled quantity",
+    "standing_numbers.json": "registry of canonical values, not the output of a stochastic run"
+  },
+  "legacy_gap_files": [
+    "2026-09-03_t87_lz_forward_prediction.json",
+    "amuse_bullet_dwarf_calibration_2026_09_12.json",
+    "amuse_seed_comparison_2026_09_12.json",
+    "canonical_numbers.json",
+    "ch04_width_resolution_2026_09_12.json",
+    "ch27_peak_sensitivity_2026_09_12.json",
+    "ch27_sigma_m_peak_from_amuse_2026_09_12.json",
+    "ch27_three_way_comparison_2026_09_12.json",
+    "checkpoint_t10_vdep.json",
+    "h3_convergence_nlive1000.json",
+    "h3_convergence_nlive200.json",
+    "h3_convergence_nlive500.json",
+    "h3_convergence_summary.json",
+    "h4_form_factor_sweep_dipole.json",
+    "h4_form_factor_sweep_exponential.json",
+    "h4_form_factor_sweep_gaussian.json",
+    "h4_form_factor_sweep_monopole.json",
+    "h4_form_factor_sweep_summary.json",
+    "h4_inelastic_sweep_off.json",
+    "h4_inelastic_sweep_on.json",
+    "h4_inelastic_sweep_summary.json",
+    "h4_xi_sweep_summary.json",
+    "h4_xi_sweep_xi0.10.json",
+    "h4_xi_sweep_xi0.50.json",
+    "h4_xi_sweep_xi1.00.json",
+    "h4_xi_sweep_xi2.00.json",
+    "h4_xi_sweep_xi5.00.json",
+    "hierarchy_chain_pairing.json",
+    "kiss_sidm_canonical_simulation.json",
+    "kiss_sidm_canonical_simulation_N1e5.json",
+    "loo_cv_validation_2026_09_12.json",
+    "nc_nf_scan_v0_6_nl2000_summary.json",
+    "nc_nf_scan_v0_6_summary.json",
+    "ohana2026_cloud9_joint_likelihood.json",
+    "other_dm_conditions_probe.json",
+    "phase12_sigma_m_drop_mystery.json",
+    "phase14_mphi_comparison.json",
+    "phase17_core_collapse_gD.json",
+    "phase18_mchi_comparison.json",
+    "phase19_full_fit_mchi_5GeV.json",
+    "phase19b_parallel_mchi_45GeV.json",
+    "phase29_full_resonant_joint_fit.json",
+    "phase2_minimal_hierarchical.json",
+    "phase32b_multi_resonant_joint_fit.json",
+    "phase33a_bayes_factor.json",
+    "phase39b_sidm_responsive_profile.json",
+    "phase41_extended_comparison.json",
+    "phase44_joint_fit_v2_real_likelihood.json",
+    "phase47_stress_test.json",
+    "phase4_6d_smoke_test.json",
+    "phase5_mediator_class_comparison.json",
+    "phase7a_composite_mediator_v03_map.json",
+    "phase7b_magnetic_moment_v03_map.json",
+    "phase8c_majorana_reframe_joint_fit.json",
+    "phase8d2_majorana_mA_marginalized.json",
+    "phase8d3_majorana_thermal_fH_prior.json",
+    "phase8d_majorana_alpha_consistent.json",
+    "t12_6channel_with_lens.json",
+    "t13_10channel_2025_2026.json",
+    "t13_8channel_2025_2026.json",
+    "t13_9channel_2025_2026.json",
+    "t13_v2_12channel_2025_2026.json",
+    "t13_v2_trail_ablation_2026_09_12.json",
+    "t13_v2_udg_ablation_2026_09_12.json",
+    "t177_bayes_factor.json",
+    "t17_kiss_sidm_corrected_fit.json",
+    "t189_beam_dump.json",
+    "t18_smoke_grid.json",
+    "t18_two_component_fit.json",
+    "t197_deep_lz_analysis.json",
+    "t205_full_likelihood_published.json",
+    "t207_final_summary.json",
+    "t207b_emcee.json",
+    "t207b_long_emcee.json",
+    "t207c_extended_free_emcee.json",
+    "t207c_priored_free_emcee.json",
+    "t21_real_kiss_sidm_gravothermal.json",
+    "t22_real_kiss_sidm_two_comp.json",
+    "t23_real_kiss_sidm_two_comp_imfp.json",
+    "t24_likelihood_width_sensitivity.json",
+    "t25_cvir_marginalization.json",
+    "t26_t21_width_sensitivity.json",
+    "t28_published_style_dsph.json",
+    "t29_beta_seg_fitted.json",
+    "t30_lz_real_posterior.json",
+    "t32_fermi_dwarf_channel.json",
+    "t37_t22_with_fitted_beta_seg.json",
+    "t39_prior_robustness.json",
+    "t39_tier3_epsilon_alpha_joint_fit.json",
+    "t41_mediator_mass_joint_fit.json",
+    "t41_mediator_mass_joint_fit_PRE_v05_backup_20260826_155808.json",
+    "t41_mediator_mass_joint_fit_smoke_bullet_sens.json",
+    "t41_mediator_mass_joint_fit_smoke_cheap_nc3_nf3.json",
+    "t41_mediator_mass_joint_fit_smoke_hier_nc3_nf3.json",
+    "t41_mediator_mass_joint_fit_t88a_all.json",
+    "t41_mediator_mass_joint_fit_t88a_dampe_lss.json",
+    "t41_mediator_mass_joint_fit_t88a_none.json",
+    "t41_mediator_mass_joint_fit_t88a_v07_with_xrism_nlive2000.json",
+    "t41_mediator_mass_joint_fit_t88a_xrism_only.json",
+    "t41_mediator_mass_joint_fit_t88b_all.json",
+    "t41_mediator_mass_joint_fit_t88b_erosita_only.json",
+    "t41_mediator_mass_joint_fit_t88b_none.json",
+    "t41_mediator_mass_joint_fit_t88b_v07_with_erosita_nlive2000.json",
+    "t41_mediator_mass_joint_fit_t88b_xrism_only.json",
+    "t41_mediator_mass_joint_fit_t88ce_sampling_variance_control.json",
+    "t41_mediator_mass_joint_fit_t88ce_v08_with_euclid_lensing_and_subhalo_forecast_nlive2000.json",
+    "t41_mediator_mass_joint_fit_T9030_A_baseline.json",
+    "t41_mediator_mass_joint_fit_T9030_B_t90v29_ksfr_on.json",
+    "t41_mediator_mass_joint_fit_T9030_C_t90v29_ksfr_off.json",
+    "t41_mediator_mass_joint_fit_T9033_D_opt1_pop.json",
+    "t41_mediator_mass_joint_fit_T9033_E_opt3_dom.json",
+    "t41_mediator_mass_joint_fit_T9033_F_opt1_and_3.json",
+    "t41_mediator_mass_joint_fit_T9040_G_baseline.json",
+    "t41_mediator_mass_joint_fit_T9040_H_honest.json",
+    "t41_mediator_mass_joint_fit_T9040_I_dom_for_compare.json",
+    "t41_mediator_mass_joint_fit_T9041_vdep.json",
+    "t41_mediator_mass_joint_fit_T9042_all_nonrelhic_out.json",
+    "t41_mediator_mass_joint_fit_T9042_baseline.json",
+    "t41_mediator_mass_joint_fit_T9042_no_cmb.json",
+    "t41_mediator_mass_joint_fit_T9042_no_dampe.json",
+    "t41_mediator_mass_joint_fit_T9042_no_fermi.json",
+    "t41_mediator_mass_joint_fit_T9042_no_fermi_no_lss.json",
+    "t41_mediator_mass_joint_fit_T9042_no_fermi_no_lss_no_cmb.json",
+    "t41_mediator_mass_joint_fit_T9042_no_lss.json",
+    "t41_mediator_mass_joint_fit_T9042_no_lz.json",
+    "t41_mediator_mass_joint_fit_T9042_no_lz_mag.json",
+    "t41_mediator_mass_joint_fit_T9043_velocity_aware.json",
+    "t41_mediator_mass_joint_fit_T9043b_corrected_v.json",
+    "t41_mediator_mass_joint_fit_T9043b_no_fermi.json",
+    "t41_mediator_mass_joint_fit_T9043b_t90_weight_10.json",
+    "t41_mediator_mass_joint_fit_v0_4_historical.json",
+    "t41_mediator_mass_joint_fit_v0_5.json",
+    "t41_mediator_mass_joint_fit_v0_5_1_nlive2000.json",
+    "t41_mediator_mass_joint_fit_v0_5_elastic_only_BACKUP.json",
+    "t41_mediator_mass_joint_fit_v0_6_anchor_nlive500.json",
+    "t41_mediator_mass_joint_fit_v0_6_bullet_sens.json",
+    "t41_mediator_mass_joint_fit_v0_6_hier_sparc.json",
+    "t41_mediator_mass_joint_fit_v0_6_inelastic_on_nlive500.json",
+    "t41_mediator_mass_joint_fit_v0_6_inelastic_on_nlive500_v2.json",
+    "t41_mediator_mass_joint_fit_v0_6_nc2_nf2.json",
+    "t41_mediator_mass_joint_fit_v0_6_nc2_nf3.json",
+    "t41_mediator_mass_joint_fit_v0_6_nc3_nf2.json",
+    "t41_mediator_mass_joint_fit_v0_6_nc3_nf3.json",
+    "t41_mediator_mass_joint_fit_v0_6_nc3_nf4.json",
+    "t41_mediator_mass_joint_fit_v0_6_nc4_nf3.json",
+    "t41_mediator_mass_joint_fit_v0_6_nc4_nf4.json",
+    "t41_mediator_mass_joint_fit_v0_6_nl2000_nc2_nf2.json",
+    "t41_mediator_mass_joint_fit_v0_6_nl2000_nc2_nf3.json",
+    "t41_mediator_mass_joint_fit_v0_6_nl2000_nc3_nf2.json",
+    "t41_mediator_mass_joint_fit_v0_6_nl2000_nc3_nf3.json",
+    "t41_mediator_mass_joint_fit_v0_6_nl2000_nc3_nf4.json",
+    "t41_mediator_mass_joint_fit_v0_6_nl2000_nc4_nf3.json",
+    "t41_mediator_mass_joint_fit_v0_6_nl2000_nc4_nf4.json",
+    "t41_mediator_mass_joint_fit_v0_6_nlive2000.json",
+    "t41_mediator_mass_joint_fit_v0_6_xi_free.json",
+    "t41_mediator_mass_joint_fit_v0_7_dampe_only_nlive500.json",
+    "t41_mediator_mass_joint_fit_v0_7_lss_only_nlive500.json",
+    "t41_mediator_mass_joint_fit_v0_7_with_dampe_lss_nlive2000.json",
+    "t41_mediator_mass_joint_fit_v0_7_with_dampe_lss_nlive500.json",
+    "t43_inelastic_dm_joint_fit.json",
+    "t46_yukawa_sommerfeld_joint_fit.json",
+    "t54_dark_quark_joint_fit.json",
+    "t64_uncertainty_quantification.json",
+    "t69_feedback_nuisance_sweep.json",
+    "t71_7_kiss_sidm_ufd_n5e4.json",
+    "t88a_ablation_20260904.json",
+    "t88b_ablation_20260904_111705.json",
+    "t8_v03_posterior.json",
+    "t90_v28_cloud9_mcmc.json",
+    "t90_v45_multi_portal_joint_fit.json",
+    "t90_v45_multi_portal_joint_fit_nlive200.json",
+    "t90_v45_multi_portal_joint_fit_nlive50.json",
+    "t90_v51_resonant_joint_posterior.json",
+    "t90_v52_multi_portal_joint_posterior.json",
+    "t90_v55_hybrid_joint_posterior.json",
+    "t90_v56_hybrid_4ch_joint_posterior.json",
+    "t90_v57_hybrid_5ch_joint_posterior.json",
+    "t90_v58_ablation_all_5ch.json",
+    "t90_v58_ablation_drop_Bullet.json",
+    "t90_v58_ablation_drop_Cloud9.json",
+    "t90_v58_ablation_drop_Galaxy.json",
+    "t90_v58_ablation_drop_KSFR.json",
+    "t90_v58_ablation_drop_LZ.json",
+    "t90_v58_ablation_summary.json",
+    "t90_v60_naturalness_analysis.json",
+    "t90_v63_hybrid_6ch_joint_posterior.json",
+    "t90_v63_v2_hybrid_6ch_joint_posterior.json",
+    "t90_v63_v3_smoke.json",
+    "t9_prior_variation.json",
+    "v192_b_ohana3p2sigma_reproduction.json",
+    "v192_c_concerto_subhalo_cloud9.json",
+    "v19_2_e_b_per_halo_gravothermal.json",
+    "v19_2_f_cloud9_cM_elbert_2026_10_19.json",
+    "v19_2_f_cloud9_cM_marginalized_2026_10_19.json",
+    "v19_2_f_cloud9_cM_tension.json",
+    "v19_2_f_cloud9_cM_three_prescriptions_2026_10_19.json",
+    "v19_2_f_cloud9_merger_history_2026_10_19.json",
+    "v19_2_f_cloud9_velocity_form_sensitivity_2026_10_19.json",
+    "v19_2_f_fH_sensitivity_2026_10_19.json",
+    "v19_2_f_no_peak_analysis_2026_10_19.json",
+    "v40_35_comparison.json",
+    "v40_35_summary.json",
+    "v40_36_results.json"
+  ],
+  "per_stochastic_file": [
+    {
+      "file": "2026-09-03_t87_lz_forward_prediction.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-09-03",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "amuse_bullet_dwarf_calibration_2026_09_12.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-09-12",
+      "date_basis": "artifact field"
+    },
+    {
+      "file": "amuse_seed_comparison_2026_09_12.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-09-12",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "canonical_numbers.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-11-06",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "ch04_width_resolution_2026_09_12.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-09-12",
+      "date_basis": "artifact field"
+    },
+    {
+      "file": "ch27_peak_sensitivity_2026_09_12.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-09-12",
+      "date_basis": "artifact field"
+    },
+    {
+      "file": "ch27_sigma_m_peak_from_amuse_2026_09_12.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-09-12",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "ch27_three_way_comparison_2026_09_12.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-09-12",
+      "date_basis": "artifact field"
+    },
+    {
+      "file": "checkpoint_t10_vdep.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "h3_convergence_nlive1000.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-26",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "h3_convergence_nlive200.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-26",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "h3_convergence_nlive500.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-26",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "h3_convergence_summary.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-08-26",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "h4_form_factor_sweep_dipole.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-08-26",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "h4_form_factor_sweep_exponential.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-08-26",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "h4_form_factor_sweep_gaussian.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-08-26",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "h4_form_factor_sweep_monopole.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-08-26",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "h4_form_factor_sweep_summary.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-08-26",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "h4_inelastic_sweep_off.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-08-26",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "h4_inelastic_sweep_on.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-08-26",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "h4_inelastic_sweep_summary.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-08-26",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "h4_xi_sweep_summary.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-08-26",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "h4_xi_sweep_xi0.10.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-08-26",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "h4_xi_sweep_xi0.50.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-08-26",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "h4_xi_sweep_xi1.00.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-08-26",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "h4_xi_sweep_xi2.00.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-08-26",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "h4_xi_sweep_xi5.00.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-08-26",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "hierarchy_chain_pairing.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-11-07",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "kiss_sidm_canonical_simulation.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-08-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "kiss_sidm_canonical_simulation_N1e5.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-08-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "loo_cv_validation_2026_09_12.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-09-12",
+      "date_basis": "artifact field"
+    },
+    {
+      "file": "nc_nf_scan_v0_6_nl2000_summary.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-28",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "nc_nf_scan_v0_6_summary.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-27",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "ohana2026_cloud9_joint_likelihood.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-29",
+      "date_basis": "artifact field"
+    },
+    {
+      "file": "other_dm_conditions_probe.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-11-06",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "phase12_sigma_m_drop_mystery.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-09-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "phase14_mphi_comparison.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-09-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "phase17_core_collapse_gD.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-09-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "phase18_mchi_comparison.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-09-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "phase19_full_fit_mchi_5GeV.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-09-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "phase19b_parallel_mchi_45GeV.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-09-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "phase29_full_resonant_joint_fit.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-09-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "phase2_minimal_hierarchical.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-09-12",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "phase32b_multi_resonant_joint_fit.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-09-15",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "phase33a_bayes_factor.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-09-15",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "phase39b_sidm_responsive_profile.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-11-05",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "phase41_extended_comparison.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-15",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "phase44_joint_fit_v2_real_likelihood.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-10-09",
+      "date_basis": "artifact field"
+    },
+    {
+      "file": "phase47_stress_test.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-09-15",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "phase4_6d_smoke_test.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-12",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "phase5_mediator_class_comparison.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-09-12",
+      "date_basis": "artifact field"
+    },
+    {
+      "file": "phase7a_composite_mediator_v03_map.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-09-13",
+      "date_basis": "artifact field"
+    },
+    {
+      "file": "phase7b_magnetic_moment_v03_map.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-13",
+      "date_basis": "artifact field"
+    },
+    {
+      "file": "phase8c_majorana_reframe_joint_fit.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "phase8d2_majorana_mA_marginalized.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-09-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "phase8d3_majorana_thermal_fH_prior.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-09-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "phase8d_majorana_alpha_consistent.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-09-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t12_6channel_with_lens.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-08-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t13_10channel_2025_2026.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-08-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t13_8channel_2025_2026.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-08-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t13_9channel_2025_2026.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-08-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t13_v2_12channel_2025_2026.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-08-25",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t13_v2_trail_ablation_2026_09_12.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-09-12",
+      "date_basis": "artifact field"
+    },
+    {
+      "file": "t13_v2_udg_ablation_2026_09_12.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-09-12",
+      "date_basis": "artifact field"
+    },
+    {
+      "file": "t177_bayes_factor.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-09-21",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t17_kiss_sidm_corrected_fit.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t189_beam_dump.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-09-21",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t18_smoke_grid.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t18_two_component_fit.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t197_deep_lz_analysis.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-22",
+      "date_basis": "artifact field"
+    },
+    {
+      "file": "t205_full_likelihood_published.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-09-23",
+      "date_basis": "artifact field"
+    },
+    {
+      "file": "t207_final_summary.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-09-25",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t207b_emcee.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-09-25",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t207b_long_emcee.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-25",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t207c_extended_free_emcee.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-25",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t207c_priored_free_emcee.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-25",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t21_real_kiss_sidm_gravothermal.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-08-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t22_real_kiss_sidm_two_comp.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t23_real_kiss_sidm_two_comp_imfp.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t24_likelihood_width_sensitivity.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t25_cvir_marginalization.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-08-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t26_t21_width_sensitivity.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-08-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t28_published_style_dsph.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-08-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t29_beta_seg_fitted.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-08-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t30_lz_real_posterior.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-08-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t32_fermi_dwarf_channel.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-08-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t37_t22_with_fitted_beta_seg.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t39_prior_robustness.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-08-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t39_tier3_epsilon_alpha_joint_fit.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-06",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_PRE_v05_backup_20260826_155808.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-26",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_smoke_bullet_sens.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-28",
+      "date_basis": "filesystem mtime (weak evidence)"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_smoke_cheap_nc3_nf3.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-28",
+      "date_basis": "filesystem mtime (weak evidence)"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_smoke_hier_nc3_nf3.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-28",
+      "date_basis": "filesystem mtime (weak evidence)"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_t88a_all.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-04",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_t88a_dampe_lss.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-04",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_t88a_none.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-04",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_t88a_v07_with_xrism_nlive2000.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-04",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_t88a_xrism_only.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-04",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_t88b_all.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-04",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_t88b_erosita_only.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-04",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_t88b_none.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-04",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_t88b_v07_with_erosita_nlive2000.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-04",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_t88b_xrism_only.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-04",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_t88ce_sampling_variance_control.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-06",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_t88ce_v08_with_euclid_lensing_and_subhalo_forecast_nlive2000.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-06",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_T9030_A_baseline.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-10",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_T9030_B_t90v29_ksfr_on.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-10",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_T9030_C_t90v29_ksfr_off.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-10",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_T9033_D_opt1_pop.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-10",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_T9033_E_opt3_dom.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-10",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_T9033_F_opt1_and_3.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-10",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_T9040_G_baseline.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-10",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_T9040_H_honest.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-10",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_T9040_I_dom_for_compare.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-10",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_T9041_vdep.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-10",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_T9042_all_nonrelhic_out.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-10",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_T9042_baseline.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-10",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_T9042_no_cmb.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-10",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_T9042_no_dampe.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-10",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_T9042_no_fermi.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-10",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_T9042_no_fermi_no_lss.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-10",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_T9042_no_fermi_no_lss_no_cmb.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-10",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_T9042_no_lss.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-10",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_T9042_no_lz.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-10",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_T9042_no_lz_mag.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-10",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_T9043_velocity_aware.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-10",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_T9043b_corrected_v.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-10",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_T9043b_no_fermi.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-10",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_T9043b_t90_weight_10.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-10",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_v0_4_historical.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-26",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_v0_5.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-26",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_v0_5_1_nlive2000.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-26",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_v0_5_elastic_only_BACKUP.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-27",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_v0_6_anchor_nlive500.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-27",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_v0_6_bullet_sens.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-28",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_v0_6_hier_sparc.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-28",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_v0_6_inelastic_on_nlive500.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-27",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_v0_6_inelastic_on_nlive500_v2.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-27",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_v0_6_nc2_nf2.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-27",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_v0_6_nc2_nf3.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-27",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_v0_6_nc3_nf2.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-27",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_v0_6_nc3_nf3.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-27",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_v0_6_nc3_nf4.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-27",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_v0_6_nc4_nf3.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-27",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_v0_6_nc4_nf4.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-27",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_v0_6_nl2000_nc2_nf2.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-28",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_v0_6_nl2000_nc2_nf3.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-28",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_v0_6_nl2000_nc3_nf2.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-28",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_v0_6_nl2000_nc3_nf3.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-28",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_v0_6_nl2000_nc3_nf4.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-28",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_v0_6_nl2000_nc4_nf3.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-28",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_v0_6_nl2000_nc4_nf4.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-28",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_v0_6_nlive2000.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-27",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_v0_6_xi_free.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-26",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_v0_7_dampe_only_nlive500.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-02",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_v0_7_lss_only_nlive500.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-02",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_v0_7_with_dampe_lss_nlive2000.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-02",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t41_mediator_mass_joint_fit_v0_7_with_dampe_lss_nlive500.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-02",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t43_inelastic_dm_joint_fit.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t46_yukawa_sommerfeld_joint_fit.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t54_dark_quark_joint_fit.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t64_uncertainty_quantification.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-08-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t69_feedback_nuisance_sweep.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-19",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t71_7_kiss_sidm_ufd_n5e4.json",
+      "seed": true,
+      "interval": false,
+      "run_date": "2026-08-28",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t88a_ablation_20260904.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-04",
+      "date_basis": "artifact field"
+    },
+    {
+      "file": "t88b_ablation_20260904_111705.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-04",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t8_v03_posterior.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-08-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t90_v28_cloud9_mcmc.json",
+      "seed": true,
+      "interval": false,
+      "run_date": "2026-09-10",
+      "date_basis": "artifact field"
+    },
+    {
+      "file": "t90_v45_multi_portal_joint_fit.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-09-10",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t90_v45_multi_portal_joint_fit_nlive200.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-09-10",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t90_v45_multi_portal_joint_fit_nlive50.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-09-10",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t90_v51_resonant_joint_posterior.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-10-21",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t90_v52_multi_portal_joint_posterior.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-10-21",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t90_v55_hybrid_joint_posterior.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-10-21",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t90_v56_hybrid_4ch_joint_posterior.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-10-21",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t90_v57_hybrid_5ch_joint_posterior.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-11-05",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t90_v58_ablation_all_5ch.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-10-21",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t90_v58_ablation_drop_Bullet.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-10-21",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t90_v58_ablation_drop_Cloud9.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-10-21",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t90_v58_ablation_drop_Galaxy.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-10-21",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t90_v58_ablation_drop_KSFR.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-10-21",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t90_v58_ablation_drop_LZ.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-10-21",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t90_v58_ablation_summary.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-10-21",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t90_v60_naturalness_analysis.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-11-05",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t90_v63_hybrid_6ch_joint_posterior.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-11",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t90_v63_v2_hybrid_6ch_joint_posterior.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-12",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t90_v63_v3_smoke.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-12",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "t9_prior_variation.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-08-14",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "v192_b_ohana3p2sigma_reproduction.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-30",
+      "date_basis": "artifact field"
+    },
+    {
+      "file": "v192_c_concerto_subhalo_cloud9.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-09-30",
+      "date_basis": "artifact field"
+    },
+    {
+      "file": "v19_2_e_b_per_halo_gravothermal.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-10-09",
+      "date_basis": "artifact field"
+    },
+    {
+      "file": "v19_2_f_cloud9_cM_elbert_2026_10_19.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-10-19",
+      "date_basis": "artifact field"
+    },
+    {
+      "file": "v19_2_f_cloud9_cM_marginalized_2026_10_19.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-10-19",
+      "date_basis": "artifact field"
+    },
+    {
+      "file": "v19_2_f_cloud9_cM_tension.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-10-19",
+      "date_basis": "artifact field"
+    },
+    {
+      "file": "v19_2_f_cloud9_cM_three_prescriptions_2026_10_19.json",
+      "seed": false,
+      "interval": true,
+      "run_date": "2026-10-19",
+      "date_basis": "artifact field"
+    },
+    {
+      "file": "v19_2_f_cloud9_merger_history_2026_10_19.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-10-19",
+      "date_basis": "artifact field"
+    },
+    {
+      "file": "v19_2_f_cloud9_velocity_form_sensitivity_2026_10_19.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-10-19",
+      "date_basis": "artifact field"
+    },
+    {
+      "file": "v19_2_f_fH_sensitivity_2026_10_19.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-10-19",
+      "date_basis": "artifact field"
+    },
+    {
+      "file": "v19_2_f_no_peak_analysis_2026_10_19.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-10-19",
+      "date_basis": "artifact field"
+    },
+    {
+      "file": "v40_35_comparison.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-10-17",
+      "date_basis": "artifact field"
+    },
+    {
+      "file": "v40_35_summary.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-10-18",
+      "date_basis": "git commit date"
+    },
+    {
+      "file": "v40_36_results.json",
+      "seed": false,
+      "interval": false,
+      "run_date": "2026-10-17",
+      "date_basis": "artifact field"
+    }
+  ]
+}

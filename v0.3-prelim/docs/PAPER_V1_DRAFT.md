@@ -1989,19 +1989,28 @@ The remaining two verifications from the original §10.4b list — M94 tidal dis
 | 4 | **Flat velocity dependence** | **REFUTED** | Framework's σ/m(v) varies by factor 100+ across v = 5–500 km/s (Cloud-9 spike at v = 29.4, Born-like at v > 100). Not flat. |
 | 5 | One-mediator UV systematic (T184) | **REFUTED** | General scaling argument: single light mediator (m_φ < 1 keV) cannot simultaneously satisfy Cloud-9 σ/m ≥ 50 cm²/g and dSph σ/m ≤ 0.8 cm²/g. A two-mediator candidate (Drobczyk+ 2025) survives. |
 
-**Statistical comparison: single-resonance (v40.28) vs multi-resonance (v40.34):**
+**Statistical comparison A — multi-resonance vs the constant-σ/m null.** The evidence numbers below compare the 15-parameter multi-resonance σ/m(v) model with a constant-σ/m model (2 free parameters in the dynesty evidence run, 1 in the Phase 54 parsimony rule). They do not compare the 4-parameter v40.28 single-resonance fit with the 7-parameter v40.34 multi-resonance fit; that comparison is Comparison B below.
+
+| Statistic | Constant σ/m | Multi-resonance | Verdict |
+|---|---|---|---|
+| Free parameters | 2 (T205) / 1 (Phase 54) | 15 | 14 extra parameters |
+| log evidence (dynesty, published σ_unc) | **-16.697** | **-14.285** | multi higher by 2.411 log-units |
+| Bayes log B | 0 (reference) | **2.411** (Bayes B = 11.149) | **moderate evidence for multi-resonance** (Jeffreys scale) |
+| Raw joint log-likelihood gain (Phase 54, 3 channels) | baseline | **+6.081** | multi fits the joint channels better before any penalty |
+| BIC Δ (multi minus constant, Phase 54 rule) | baseline | **+3.22 BIC penalty** | **constant σ/m preferred on parsimony** in the 3-channel variant |
+| BIC Δ, 2-channel variant | baseline | **-1.391** | the parsimony verdict flips sign with the channel count |
+| Combined | — | — | **Bayes favors multi-resonance 11×, BIC favors the constant-σ/m null; both are reported, neither is presented as dominant** |
+
+**Bayes vs BIC reconciliation (corrected 2026-11-11).** An earlier version of this paragraph attributed the Bayes win to prior volume — the "3.6× larger" argument, measured against the 4-parameter fit. **That argument is withdrawn**, for two independent reasons. (i) *Wrong model pair:* log B = 2.411 and the +3.22 BIC penalty both come from the 15-parameter multi-resonance model versus the constant-σ/m model, not from a 4-parameter versus a 7-parameter resonance fit. (ii) *Wrong direction:* the Occam factor is already inside dynesty's log Z, because log Z integrates the likelihood over the prior volume, so a model spread over 14 extra parameters is penalized by that integral rather than credited by it. The correct reading is the opposite of the withdrawn sentence: the multi-resonance model ends 2.411 log-units ahead **despite** carrying the larger prior volume and a 14-parameter penalty, so the preference comes from the data and not from prior volume. This was adjudicated on 2026-10-24 as finding F1 of `docs/dual_review_5loop/SIDM_DUAL_REVIEW_FINDINGS_v1.0_2026-10-24.md`, with the fixing log in `docs/dual_review_5loop/FIXING_ROUNDS_REPORT.md`. Sensitivity: with hand-picked uncertainties (T177) log B moves from 3.06 to 2.411 when published error budgets are used (T205); the label weakens from "strong" to "moderate" but the preference does not reverse. The parsimony side is the fragile one: Phase 54's BIC treats one channel as one datum, so its penalty is 14 times ln(number of channels); with 3 channels it favors the constant-σ/m null by 3.22, and with 2 channels it favors multi-resonance by 1.391. **v40.36 verdict, restated:** multi-resonance remains the framework's working phenomenological model, but this comparison does not settle which model the data prefer — Bayes and BIC point in opposite directions and the BIC sign depends on the channel count. Independent verification required before citing. The Bayes factor must not be quoted on its own (see item O5 of `v0.3-prelim/docs/REFEREE_RESPONSES.md`).
+
+**Statistical comparison B — basin coverage: single-resonance (v40.28) vs multi-resonance (v40.34).** This counts how wide a region of parameter space reaches 20/20 channels. It is not a model-evidence comparison and carries no Bayes factor.
 
 | Statistic | Single (v40.28) | Multi (v40.34) | Verdict |
 |---|---|---|---|
 | Number of free parameters (n_params) | 4 | 7 | multi is 1.75× more complex |
 | Number of channels fit (n_channels) | 21 | 21 | same |
-| BIC | baseline | **BIC penalty +3.22** | multi is less parsimonious by 3.22 |
-| Bayes log B | 0 (reference) | **2.411** (Bayes B = 11.149) | **multi is Bayes-favored by 11×** |
 | Basins at 20/20 (proper Monte Carlo) | 30/6000 = 0.5% | 858/76800 = 1.1% | multi covers 2.2× more basin |
 | P(20/20 by chance) | 5.5×10⁻³ (empirical) | 5.5×10⁻³ (same) | — |
-| Verdict (Bayes) | — | — | **multi-resonance is Bayes-favored 11× over single-resonance despite the +3.22 BIC penalty** |
-
-**Bayes vs BIC reconciliation:** The +3.22 BIC penalty disfavors multi-resonance on parsimony grounds (more parameters). The Bayes factor B = 11.149 favors multi-resonance by likelihood × prior volume. The Bayes verdict wins because the prior volume in the 7-parameter space is 3.6× larger than the 4-parameter space, overcoming the parsimony penalty. **v40.36 verdict: multi-resonance is the recommended phenomenological model, with explicit acknowledgment that parsimony is sacrificed.** Independent verification required before citing.
 
 ---
 

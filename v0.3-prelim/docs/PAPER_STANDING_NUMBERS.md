@@ -61,7 +61,13 @@ The 11-bundle §2.7 loop ended in R35-POLISH (`c9f6b4c`) with §2.7 marked PARTI
 | T177 log B (hand-picked σ_unc) | 3.06 | (deprecated, see T205) | Superseded by T205 |
 | Phase 42 SPARC log Z (Burkert) | -963 | (separate run) | Burkert wins |
 | Phase 42 SPARC log Z (SIDM hybrid) | -3300 | (separate run) | SIDM loses by wide margin |
-| Phase 54 BIC penalty | ΔBIC = +3.22 favoring constant | (T205/T177) | 15 vs 1 params |
+| Phase 54 BIC penalty (3-channel) | ΔBIC = +3.22 favoring constant | `data/results/phase54_joint_comparison.json` (`headline.bic_delta_3channel`) | 15 vs 1 params; scoring rule, one channel = one datum |
+| Bayes log Z (multi-resonance, 15 params) | **-14.285** | `data/results/t205_full_likelihood_published.json` (`model_A_multi_resonance.logZ`) | dynesty, published σ_unc |
+| Bayes log Z (constant σ/m, 2 params) | **-16.697** | `data/results/t205_full_likelihood_published.json` (`model_B_constant.logZ`) | dynesty, published σ_unc |
+| T177 Bayes B (hand-picked σ_unc) | 21.263 | `data/results/t177_bayes_factor.json` (`bayes_factor`) | superseded by T205 |
+| T177 log Z pair (hand-picked σ_unc) | -8.123 ± 0.424 / -11.180 ± 0.118 | `data/results/t177_bayes_factor.json` (`model_A_multi_resonance`, `model_B_constant`) | dynesty logZ ± logZerr |
+| Phase 54 ΔBIC (2-channel variant) | -1.391 | `data/results/phase54_joint_comparison.json` (`headline.bic_delta_2channel`) | sign flips against the 3-channel variant |
+| Phase 54 Δ log-likelihood (3 channels) | +6.081 | `data/results/phase54_joint_comparison.json` (`headline.logL_delta_3channel`) | raw gain before any parsimony penalty |
 
 ## §5. Host-halo gravothermal (T208)
 

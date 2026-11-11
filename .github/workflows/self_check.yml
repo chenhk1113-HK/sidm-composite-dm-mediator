@@ -56,6 +56,18 @@ jobs:
         run: |
           python -m pytest v0.3-prelim/tests/test_independent_and_robustness.py -v --tb=short
 
+      - name: Run reproducibility + CI wiring guards (Layer G)
+        # 2026-11-11. Three guards against drift this repo has actually been bitten by:
+        #   - a stochastic artifact published with no seed and no interval
+        #     (scripts/seed_interval_audit.py fails closed for artifacts dated 2026-11-11 onward);
+        #   - README and CI disagreeing about which Python to use;
+        #   - the branch triggers drifting away from the branch that carries this workflow.
+        # The tests are stdlib-only on purpose: requirements-ci.txt has no PyYAML, and a guard
+        # written with pytest.importorskip("yaml") would skip in CI and assert nothing.
+        run: |
+          python -m pytest v0.3-prelim/tests/test_repro_contract.py v0.3-prelim/tests/test_ci_workflow_wiring.py -v --tb=short
+          python scripts/seed_interval_audit.py
+
       - name: Run audit_claims.py (Layer F)
         run: |
           python scripts/audit_claims.py

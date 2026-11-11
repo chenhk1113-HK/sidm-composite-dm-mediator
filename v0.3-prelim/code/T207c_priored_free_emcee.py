@@ -18,6 +18,7 @@ import emcee
 from T207_three_term_fit import (
     log_likelihood_for_params, BOUNDS, PARAM_NAMES,
 )
+from repro_contract import attach_reproducibility
 
 
 DE_PATH = Path(r'C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\data\results\t207_priored_free_de.json')
@@ -49,7 +50,8 @@ def main():
     print(f"  DE best_params.f_H_cc = {de_params_dict['f_H_cc']:.4f}")
     print(f"  DE best_params.v_HL = {de_params_dict['v_HL']:.2f} km/s")
 
-    rng = np.random.default_rng(42)
+    SEED = 42  # recorded in the artifact so the run is re-derivable (2026-11-11)
+    rng = np.random.default_rng(SEED)
     init = np.zeros((n_walkers, n_dim))
     for i in range(n_walkers):
         # Wider init (5% Gaussian) than original 2% to allow exploration of f_H_cc space
@@ -104,6 +106,7 @@ def main():
     out = {
         'metadata': {
             'description': 'free_f_H emcee with v18.38 prior (f_H_cc >= 0.05)',
+            'seed': SEED,
             'n_walkers': n_walkers,
             'n_steps': n_steps,
             'n_burn': n_burn,
@@ -144,6 +147,12 @@ def main():
     print(f"log L total at median = {out['log_L_total_at_median']:.4f}")
     print(f"convergence: ratio = {n_over_50tau}, converged_50tau = {out['converged_50tau']}")
 
+    attach_reproducibility(
+        out, SEED, sampler='emcee EnsembleSampler',
+        n_samples=int(chain.shape[0]),
+        sampler_options={'n_walkers': n_walkers, 'n_steps': n_steps, 'n_burn': n_burn},
+        note='Seed recorded from 2026-11-11 onwards; posterior_q16/posterior_q84 are the '
+             'credible intervals for every sampled parameter.')
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUT_PATH.write_text(json.dumps(out, indent=2))
     print(f"\nSaved: {OUT_PATH}")

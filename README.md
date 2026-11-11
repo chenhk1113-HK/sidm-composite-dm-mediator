@@ -127,8 +127,12 @@ cd sidm-composite-dm-mediator
 # test modules and yields C:\c\Users\... -> 3 collection errors.
 export DM_SIDM_PROJECT_ROOT="$(cygpath -w "$PWD")"
 
-python3.11 -m venv .venv && source .venv/bin/activate
+# The suite is developed and gated on Python 3.12: CI pins 3.12 (self_check.yml) and the
+# local working venv used for record rounds (.venv-sidm-bench) is 3.12.13. The previous
+# instruction here said 3.11, which no longer matches either.
+python3.12 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
+# Test layer only (exactly what CI installs): pip install -r requirements-ci.txt
 
 # Docs-vs-code drift audit — should print "ALL CLEAR: N/N checks passed"
 python scripts/t82_audit.py
