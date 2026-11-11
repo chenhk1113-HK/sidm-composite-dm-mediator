@@ -164,3 +164,12 @@ or an interval fails CI rather than sitting in the inventory.
 5. Owner decision open: **re-run T205 (and optionally T177/T207c) under the recorded seeds** so the
    headline Bayes numbers become reproducible artifacts with intervals, and cascade any change
    through the registry, paper §10.5 and the README. This round deliberately did not do that.
+
+6. **The forward rule is prospective, and today it has nothing to bite.** The inventory dates every
+   stochastic artifact and finds **0 of 203 dated 2026-11-11 or later** — the newest is
+   `hierarchy_chain_pairing.json` (2026-11-07), since this round wrote no new sampler output. A green
+   `forward_rule_violations: 0` therefore proves only that no legacy artifact is being passed off as new
+   (the two apparent violations the first audit run reported were exactly that: `cg16_host_path_inventory.json`
+   is a path inventory with no sampled quantity, now in `NON_RESULT_ALLOWLIST`, and
+   `t120_cloud9_bound_rederivation.json` was dated 2026-11-11 by mtime although its content last changed in
+   commit of 2026-11-06 and it stores no sampler field). The rule's real test is the next seeded run.
