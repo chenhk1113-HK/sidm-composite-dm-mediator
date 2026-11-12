@@ -98,9 +98,15 @@ def test_v45_dm_mass_zero_returns_neg_inf():
 
 
 def test_v45_reference_sigma_m_in_cloud9_range():
-    """At the reference point, combined sigma/m(28) is in Cloud-9 range."""
+    """At the reference point, combined sigma/m(28) is in Cloud-9 range.
+
+    g_chi_B retuned 0.22 -> 0.30 on 2026-11-12 after the Born-transfer-
+    coefficient correction (record round 4) lowered sigma/m(28) to 18.6 at the
+    superseded coupling; measured 64.3 at 0.30 (derivation in
+    test_t90_v44_multi_portal.py::test_multi_portal_at_heavy_a_light_b_reference).
+    """
     from t90_v45_multi_portal_joint_fit import loglike_joint_multi_portal
     from t90_v44_multi_portal import sigma_m_multi_portal
-    sm_28 = sigma_m_multi_portal(28.0, 700, 100, 1.5, 10, 500, 0.22)
+    sm_28 = sigma_m_multi_portal(28.0, 700, 100, 1.5, 10, 500, 0.30)
     # Cloud-9 range is 30-500 cm^2/g
     assert 30 < sm_28 < 500, f"sm(28)={sm_28:.2f} not in Cloud-9 range"

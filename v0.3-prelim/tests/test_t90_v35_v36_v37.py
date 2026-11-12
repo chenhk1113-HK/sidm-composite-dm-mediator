@@ -95,8 +95,15 @@ def test_yukawa_tuned_target():
 
 
 def test_loglike_yukawa_tuned_aggressive():
-    """Tuned aggressive (g_chi=1.3) gives sigma_eff ~ 390 cm^2/g, within Cloud-9 range."""
-    ll = loglike_yukawa_tuned_t90v36(50.0, 100.0, 1.3)
+    """Tuned aggressive gives sigma_eff ~ 385 cm^2/g, within Cloud-9 range.
+
+    2026-11-11 Born-transfer-coefficient correction (record round 4): at the
+    superseded g_chi=1.3, sigma_eff(28) is now ~759 cm^2/g (ll = -4.63, outside
+    the broad 150+-200 target band). Coupling retuned in closed form
+    (sigma_Born ∝ g_chi^4): 1.3 * (390/759)^(1/4) -> 1.10, measured
+    sigma_eff(28) ~ 384, ll = -0.714.
+    """
+    ll = loglike_yukawa_tuned_t90v36(50.0, 100.0, 1.10)
     assert np.isfinite(ll)
     assert -1.0 < ll < 0.5  # reasonable likelihood
 

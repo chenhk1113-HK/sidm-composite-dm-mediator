@@ -5,6 +5,7 @@ import json
 import sys
 from pathlib import Path
 
+import numpy as np
 import pytest
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
@@ -75,21 +76,28 @@ class TestT40Yukawa:
         sT_low_v = t40.sigma_T_cm2(0.01, 10.0, 40.0, 0.1)
         sT_born = t40.sigma_T_cm2(100.0, 10.0, 40.0, 0.1)
         # Both should be in same order of magnitude (Born plateau).
-        # In the Born regime (small s), L(s) ~ 1, so sigma_T is constant.
+        # In the Born regime (small s) sigma_T plateaus; at 100 km/s with
+        # m_phi = 10 MeV it is already suppressed. Tightened 2026-11-11 (review
+        # qwen4-1): the old band 0.5 < ratio < 2.0 was calibrated to the previous
+        # screening factor [log(1+s)/s]^2 and would pass even with a wrong shape.
+        # Now the ratio is checked against the Born transfer formula evaluated
+        # independently of the module: sigma(v)/sigma(0) = 2 F(t), t = m_chi^2 v^2 / m_phi^2,
+        # F(t) = [log(1+t) - t/(1+t)] / t^2.
         assert sT_low_v > 0, f"sigma_T(0.01 km/s) = {sT_low_v}, must be > 0"
-        # Ratio should be O(1), not 1e10
+        t100 = ((40.0 * 1000.0 * 100.0 / 299792.458) / 10.0) ** 2
+        expected_low_over_born = 1.0 / (2.0 * (np.log(1.0 + t100) - t100 / (1.0 + t100)) / t100 ** 2)
         ratio = sT_low_v / sT_born
-        assert 0.5 < ratio < 2.0, (
-            f"sigma_T plateau broken: sigma_T(0.01)/sigma_T(100) = {ratio:.3e}; "
-            "expected Born plateau with ratio O(1)"
+        assert abs(ratio / expected_low_over_born - 1.0) < 0.02, (
+            f"sigma_T shape wrong: sigma_T(0.01)/sigma_T(100) = {ratio:.5f}; "
+            f"Born transfer formula predicts {expected_low_over_born:.5f}"
         )
 
     def test_t40_sigma_m_finite_as_v_zero(self):
         """R12 P0-A: sigma/m must remain finite as v -> 0.
 
         Previously, sigma_m_cm2_per_g(0.1 km/s) returned ~1.95e6 cm^2/g
-        (the bogus 1/(2s) blowup). It should now plateau at ~3.5 cm^2/g
-        for (m_chi=40 GeV, m_phi=10 MeV, g=0.1).
+        (the bogus 1/(2s) blowup). It now plateaus at twice the old value
+        (the Born transfer factor R(0) = 2, fixed 2026-11-11).
         """
         t40 = pytest.importorskip("t40_yukawa_sigma_m")
         sm_low = t40.sigma_m_cm2_per_g(0.1, 10.0, 40.0, 0.1)
@@ -101,10 +109,16 @@ class TestT40Yukawa:
             "v^{-2} blowup returned. Was the bogus (1+1/(2s)) factor "
             "re-introduced?"
         )
-        # Should be within factor 2 of Born plateau value.
-        ratio = sm_low / sm_born
-        assert 0.5 < ratio < 2.0, (
-            f"Born plateau broken: sigma/m(0.1)/sigma/m(100) = {ratio:.3e}"
+        # Plateau value must equal the analytic Born limit 2 * g^4 m_chi^2 / (8 pi m_phi^4).
+        plateau_cm2 = (2.0 * 0.1 ** 4 * (40.0 * 1000.0) ** 2 / (8.0 * np.pi * 10.0 ** 4)
+                       * 1.9732698e-11 ** 2)
+        plateau_cm2_per_g = plateau_cm2 / 40.0 / 1.7826619e-24
+        assert abs(sm_low / plateau_cm2_per_g - 1.0) < 0.005, (
+            f"Born plateau wrong: sigma/m(0.1 km/s) = {sm_low:.6g}, "
+            f"analytic plateau = {plateau_cm2_per_g:.6g} cm^2/g"
+        )
+        assert sm_low > sm_born, (
+            f"sigma/m must decrease with v in this regime: {sm_low:.4g} vs {sm_born:.4g}"
         )
 
     def test_t40_alias_matches_clean_form(self):

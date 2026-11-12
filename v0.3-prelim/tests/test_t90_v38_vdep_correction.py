@@ -23,10 +23,16 @@ def test_module_imports_without_error():
 
 
 def test_sigma_m_at_v_yukawa_at_vref():
-    """sigma/m at V_REF=100 km/s is the canonical sigma_m_0."""
+    """sigma/m at V_REF=100 km/s is the canonical sigma_m_0.
+
+    2026-11-11 Born-transfer-coefficient correction (record round 4): at the
+    superseded g_chi=0.22 the Yukawa sigma at V_REF is 0.244 cm^2/g (was ~1.3).
+    Coupling retuned in closed form (sigma_Born ∝ g_chi^4): 0.22 *
+    (1.3/0.244)^(1/4) -> 0.33, measured 1.235 cm^2/g - same canonical scale.
+    """
     from t41_mediator_mass_joint_fit import sigma_m_at_v_yukawa
-    s = sigma_m_at_v_yukawa(100.0, 10.0, 500.0, 0.22)
-    # Should be ~ 1.3 cm^2/g (from T90.29 v3 test points)
+    s = sigma_m_at_v_yukawa(100.0, 10.0, 500.0, 0.33)
+    # ~ 1.2-1.3 cm^2/g (T90.29 v3 test-point scale, retuned 2026-11-12)
     assert 1.0 < s < 2.0
 
 

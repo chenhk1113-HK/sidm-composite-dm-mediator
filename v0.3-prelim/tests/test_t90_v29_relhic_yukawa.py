@@ -62,12 +62,18 @@ def test_yukawa_sigma_m_at_cloud9_v200_at_v07_map():
 
 
 def test_yukawa_matches_cloud9_published_range():
-    """At m_phi=10 MeV and g_chi=0.22, Yukawa gives σ/m(28) in Cloud-9's published range.
+    """At m_phi=10 MeV and g_chi=0.2757, Yukawa gives σ/m(28) in Cloud-9's published range.
 
     Per arXiv:2608.04362 §3.1, the SIDM best-fit has σ/m ~ 50-500 cm²/g
-    at the dwarf-halo v200. We verify that g_chi=0.22 reproduces this.
+    at the dwarf-halo v200. We verify that g_chi=0.2757 reproduces ~50 cm²/g.
+
+    Coupling refit 2026-11-11: the previous value 0.22 was calibrated against t40's
+    superseded screening factor [log(1+s)/s]^2. Under the corrected Born transfer factor
+    (R(s) = [log(1+2s) - 2s/(1+2s)]/s^2) the same masses give sigma/m = 20.27 at g_chi=0.22,
+    and sigma/m scales as g_chi^4, so 50 cm^2/g requires g_chi = 0.2757
+    (the 30-100 band spans g_chi 0.243-0.328). Refit chosen by the user on 2026-11-11.
     """
-    sm = sigma_m_cloud9_v200_yukawa(10, 500, 0.22)
+    sm = sigma_m_cloud9_v200_yukawa(10, 500, 0.2757)
     assert 30 < sm < 100, f"σ/m = {sm}, expected ~ 50 cm²/g"
 
 

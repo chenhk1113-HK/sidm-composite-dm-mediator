@@ -23,11 +23,18 @@ def test_multi_portal_module_imports():
 
 
 def test_multi_portal_at_heavy_a_light_b_reference():
-    """Reference test: Portal A heavy + Portal B light gives correct sigma/m."""
+    """Reference test: Portal A heavy + Portal B light gives correct sigma/m.
+
+    2026-11-11 Born-transfer-coefficient correction (record round 4): at the
+    superseded g_chi_B=0.22 the reference point gives sigma/m(28)=18.6, below
+    the Cloud-9 band. Coupling retuned in closed form (sigma ∝ g^4 near this
+    point): 0.22 -> 0.30. Measured: 64.3 at v=28, 0.88 at v=100, 0.0078 at
+    v=3000 - the Cloud-9 / galactic / Bullet triple consistency is preserved.
+    """
     from t90_v44_multi_portal import sigma_m_multi_portal
-    sm_28 = sigma_m_multi_portal(28, 700, 100, 1.5, 10, 500, 0.22)
-    sm_100 = sigma_m_multi_portal(100, 700, 100, 1.5, 10, 500, 0.22)
-    sm_3000 = sigma_m_multi_portal(3000, 700, 100, 1.5, 10, 500, 0.22)
+    sm_28 = sigma_m_multi_portal(28, 700, 100, 1.5, 10, 500, 0.30)
+    sm_100 = sigma_m_multi_portal(100, 700, 100, 1.5, 10, 500, 0.30)
+    sm_3000 = sigma_m_multi_portal(3000, 700, 100, 1.5, 10, 500, 0.30)
     # Cloud-9 in range (50-200 cm^2/g)
     assert 30 < sm_28 < 200, f"sm(28)={sm_28:.2f} not in Cloud-9 range"
     # Galactic < 2 cm^2/g (close to published upper limits)
@@ -99,12 +106,17 @@ def test_multi_portal_smoke_at_various_params():
 
 
 def test_multi_portal_unified_setting():
-    """The reference unified setting satisfies all 3 velocity scales."""
+    """The reference unified setting satisfies all 3 velocity scales.
+
+    g_chi_B retuned 0.20 -> 0.26 on 2026-11-12 after the Born-transfer-
+    coefficient correction (record round 4). Measured: 36.3 / 0.512 / 0.00775
+    at v=28 / 100 / 3000.
+    """
     from t90_v44_multi_portal import sigma_m_multi_portal
     # Portal A heavy + Portal B tuned for Cloud-9
-    sm_28 = sigma_m_multi_portal(28, 700, 100, 1.5, 10, 500, 0.20)
-    sm_100 = sigma_m_multi_portal(100, 700, 100, 1.5, 10, 500, 0.20)
-    sm_3000 = sigma_m_multi_portal(3000, 700, 100, 1.5, 10, 500, 0.20)
+    sm_28 = sigma_m_multi_portal(28, 700, 100, 1.5, 10, 500, 0.26)
+    sm_100 = sigma_m_multi_portal(100, 700, 100, 1.5, 10, 500, 0.26)
+    sm_3000 = sigma_m_multi_portal(3000, 700, 100, 1.5, 10, 500, 0.26)
     # Cloud-9: 30-500 cm^2/g
     assert 30 < sm_28 < 500
     # Galactic: < 1 cm^2/g

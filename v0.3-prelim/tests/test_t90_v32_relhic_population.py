@@ -43,10 +43,16 @@ def test_pop_likelihood_heavy_mediator():
 
 
 def test_pop_likelihood_cloud9_regime():
-    """Cloud-9 regime (sigma_m ~ 50 cm^2/g): small penalty."""
-    # m_phi=10 MeV, m_chi=500 GeV, g_chi=0.22 -> sigma_m ~ 50 cm^2/g
-    ll = loglike_relhic_population_monaci2026(10, 500, 0.22)
-    # log L = -0.5 * (50/100)^2 = -0.125
+    """Cloud-9 regime (sigma_m ~ 40 cm^2/g): small penalty.
+
+    2026-11-11 Born-transfer-coefficient correction (record round 4): at the
+    superseded g_chi=0.22 the point gives sigma_m(28) ~ 18.6 (ll = -0.017, too
+    small to exercise the regime). Coupling retuned in closed form (sigma_Born
+    ∝ g_chi^4): 0.22 * (50/18.6)^(1/4) -> 0.30, measured ll = -0.207.
+    """
+    # m_phi=10 MeV, m_chi=500 GeV, g_chi=0.30 (retuned 2026-11-12) -> sigma_m ~ 40
+    ll = loglike_relhic_population_monaci2026(10, 500, 0.30)
+    # log L = -0.5 * (40/100)^2 ~ -0.2
     assert np.isfinite(ll)
     assert -0.3 < ll < -0.05
 
