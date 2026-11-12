@@ -93,6 +93,11 @@ NON_RESULT_ALLOWLIST = {
         "CG-16 path inventory (docs artifact): lists file paths, stores no sampled quantity",
     "standing_numbers.json":
         "registry of canonical values, not the output of a stochastic run",
+    "canonical_numbers.json":
+        "registry of canonical values assembled from other artifacts (ref_json sources); it "
+        "stores no direct sampler output - each number is traceable to the artifact cited "
+        "in its own block. Allowlisted 2026-11-12: a dated commit of the registry must not "
+        "be read as a dated stochastic run.",
 }
 
 # Known-truncated / unparseable artifacts, disclosed so the forward rule stays enforceable.

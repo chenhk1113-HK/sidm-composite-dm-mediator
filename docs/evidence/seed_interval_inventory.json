@@ -1,20 +1,20 @@
 {
   "generated_by": "scripts/seed_interval_audit.py",
-  "generated_at": "2026-11-12T11:21:15+00:00",
+  "generated_at": "2026-11-12T12:31:33+00:00",
   "conduct_date": "2026-11-11",
   "counts": {
-    "total": 484,
-    "stochastic": 202,
+    "total": 481,
+    "stochastic": 198,
     "seed": 9,
     "interval": 138,
     "both": 7,
-    "legacy_gap": 195,
+    "legacy_gap": 191,
     "forward_violation": 0,
-    "allowlisted_nonresult": 1,
+    "allowlisted_nonresult": 2,
     "corrupt": 1,
     "corrupt_allowlisted": 1,
     "date_from_artifact": 84,
-    "date_from_git": 397,
+    "date_from_git": 394,
     "date_from_mtime": 3
   },
   "forward_rule_violations": [],
@@ -29,11 +29,11 @@
   ],
   "allowlisted_nonresults": {
     "cg16_host_path_inventory.json": "CG-16 path inventory (docs artifact): lists file paths, stores no sampled quantity",
-    "standing_numbers.json": "registry of canonical values, not the output of a stochastic run"
+    "standing_numbers.json": "registry of canonical values, not the output of a stochastic run",
+    "canonical_numbers.json": "registry of canonical values assembled from other artifacts (ref_json sources); it stores no direct sampler output - each number is traceable to the artifact cited in its own block. Allowlisted 2026-11-12: a dated commit of the registry must not be read as a dated stochastic run."
   },
   "legacy_gap_files": [
     "2026-09-03_t87_lz_forward_prediction.json",
-    "canonical_numbers.json",
     "ch04_width_resolution_2026_09_12.json",
     "ch27_peak_sensitivity_2026_09_12.json",
     "ch27_three_way_comparison_2026_09_12.json",
@@ -193,9 +193,6 @@
     "t88b_ablation_20260904_111705.json",
     "t8_v03_posterior.json",
     "t90_v28_cloud9_mcmc.json",
-    "t90_v45_multi_portal_joint_fit.json",
-    "t90_v45_multi_portal_joint_fit_nlive200.json",
-    "t90_v45_multi_portal_joint_fit_nlive50.json",
     "t90_v51_resonant_joint_posterior.json",
     "t90_v52_multi_portal_joint_posterior.json",
     "t90_v55_hybrid_joint_posterior.json",
@@ -234,13 +231,6 @@
       "seed": false,
       "interval": false,
       "run_date": "2026-09-03",
-      "date_basis": "git commit date"
-    },
-    {
-      "file": "canonical_numbers.json",
-      "seed": false,
-      "interval": true,
-      "run_date": "2026-11-06",
       "date_basis": "git commit date"
     },
     {
@@ -849,7 +839,7 @@
       "file": "t41_mediator_mass_joint_fit.json",
       "seed": true,
       "interval": true,
-      "run_date": "2026-09-06",
+      "run_date": "2026-11-12",
       "date_basis": "git commit date"
     },
     {
@@ -940,7 +930,7 @@
       "file": "t41_mediator_mass_joint_fit_t88b_v07_with_erosita_nlive2000.json",
       "seed": true,
       "interval": true,
-      "run_date": "2026-09-04",
+      "run_date": "2026-11-12",
       "date_basis": "git commit date"
     },
     {
@@ -954,14 +944,14 @@
       "file": "t41_mediator_mass_joint_fit_t88ce_sampling_variance_control.json",
       "seed": true,
       "interval": true,
-      "run_date": "2026-09-06",
+      "run_date": "2026-11-12",
       "date_basis": "git commit date"
     },
     {
       "file": "t41_mediator_mass_joint_fit_t88ce_v08_with_euclid_lensing_and_subhalo_forecast_nlive2000.json",
       "seed": true,
       "interval": true,
-      "run_date": "2026-09-06",
+      "run_date": "2026-11-12",
       "date_basis": "git commit date"
     },
     {
@@ -1325,7 +1315,7 @@
       "file": "t41_mediator_mass_joint_fit_v0_7_with_dampe_lss_nlive2000.json",
       "seed": true,
       "interval": true,
-      "run_date": "2026-09-02",
+      "run_date": "2026-11-12",
       "date_basis": "git commit date"
     },
     {
@@ -1404,27 +1394,6 @@
       "interval": false,
       "run_date": "2026-09-10",
       "date_basis": "artifact field"
-    },
-    {
-      "file": "t90_v45_multi_portal_joint_fit.json",
-      "seed": false,
-      "interval": false,
-      "run_date": "2026-09-10",
-      "date_basis": "git commit date"
-    },
-    {
-      "file": "t90_v45_multi_portal_joint_fit_nlive200.json",
-      "seed": false,
-      "interval": false,
-      "run_date": "2026-09-10",
-      "date_basis": "git commit date"
-    },
-    {
-      "file": "t90_v45_multi_portal_joint_fit_nlive50.json",
-      "seed": false,
-      "interval": false,
-      "run_date": "2026-09-10",
-      "date_basis": "git commit date"
     },
     {
       "file": "t90_v51_resonant_joint_posterior.json",
