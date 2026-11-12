@@ -83,10 +83,17 @@ CLAIM_MAP = [
         "tol": 0.05,
     },
     {
-        "label": "Cloud-9: M_200 ≈ 5×10⁹ M☉ (halo mass prior)",
+        # 2026-11-12 re-binding (found by the regenerated-pipeline re-audit). This claim was
+        # pointed at phase23's nuisance-prior mean, but that key is the T90.29 RELHIC best-fit
+        # halo mass (CLOUD9_BESTFIT_M200 = 4.7e9, v0.3-prelim/code/t90_v29_relhic_yukawa.py:131)
+        # — a different quantity from the Cloud-9 host halo the paper quotes. Regenerating
+        # phase23 therefore moved the key to 4.7e9 and this claim failed on a mis-binding, not
+        # on a physics change. It is now bound to the artifact that actually carries the paper
+        # value. The 4.7e9 prior is disclosed in CURRENT.md instead of being claimed here.
+        "label": "Cloud-9: M_200 ≈ 5×10⁹ M☉ (host halo, T208)",
         "regex": r"5(?:\.0)?[×x·]10[⁹^]9?\s*M[☉_]",
-        "ref_json": "phase23_cloud9_nuisance_marginalization.json",
-        "ref_key": ("nuisance_priors", "M200", "mean"),
+        "ref_json": "t208_path_b_cloud9_host_halo_gravothermal.json",
+        "ref_key": ("Cloud9_host_halo_params", "M_halo_Msun"),
         "expected": 5.0e9,
         "tol": 1.0e8,
     },
@@ -132,11 +139,11 @@ CLAIM_MAP = [
         "tol": 0.005,
     },
     {
-        "label": "T205: Bayes log B = 2.411 (multi-resonance vs constant)",
-        "regex": r"log\s*B\s*=?\s*2\.41",
+        "label": "T205: Bayes log B = 1.14 (multi-resonance vs constant, nlive=1000, 3 seeds)",
+        "regex": r"log\s*B\s*=?\s*1\.14",
         "ref_json": "t205_full_likelihood_published.json",
         "ref_key": "log_bayes_factor",
-        "expected": 2.411,
+        "expected": 1.145,
         "tol": 0.01,
     },
     {
@@ -258,11 +265,11 @@ def verify_table(table_path: Path, results_dir: Path) -> int:
         ("§4 Bayes log B",
          "t205_full_likelihood_published.json",
          "log_bayes_factor",
-         2.411, 0.005),
+         1.145, 0.05),   # 2026-11-11: nlive=1000, 3 seeds; superseded nlive=200 value 2.411
         ("§4 Bayes B",
          "t205_full_likelihood_published.json",
          "bayes_factor",
-         11.149, 0.1),
+         3.142, 0.1),    # 2026-11-11: nlive=1000, 3 seeds; superseded nlive=200 value 11.149
         ("§5 t_core at Phase 44 σ/m",
          "t208_path_b_cloud9_host_halo_gravothermal.json",
          ("Cloud9_gravothermal", "t_core_Gyr"),

@@ -661,6 +661,34 @@ def build_t41_v08_standing_map():
         raise FileNotFoundError(f"T41 v0.8 artifact missing: {art}")
     raw = art.read_bytes()
     d = _json.loads(raw.decode("utf-8"))
+    di = d.get("derived_intervals") or {}
+    sm_i = di.get("sigma_m_0_derived_cm2_per_g") or {}
+    a_i = di.get("a_derived") or {}
+    tension_posterior = None
+    if a_i.get("p16") is not None and a_i.get("p84") is not None:
+        # T39_a = 0.94 is the same literal already used in the yukawa_tension block below.
+        ends = sorted(abs(0.94 - a_i[q]) for q in ("p16", "p84"))
+        tension_posterior = {
+            "a_difference_over_a_16_84": [round(ends[0], 4), round(ends[1], 4)],
+            "threshold": 1.0,
+            "threshold_exceeded_anywhere_in_16_84": bool(ends[1] > 1.0),
+            "note": "maps the 16/84 posterior quantiles of a onto the tension; NOT a MAP-only statement",
+        }
+    q = d.get("quantiles_16_50_84") or {}
+
+    def _cred(name, is_log):
+        v = q.get(name)
+        if not v:
+            return None
+        vals = [10 ** x for x in v] if is_log else list(v)
+        return [round(vals[0], 4), round(vals[1], 4), round(vals[2], 4)]
+
+    credible_68_computed = {
+        "m_chi_GeV": _cred("log_m_chi_GeV", True),
+        "m_phi_MeV": _cred("log_m_phi_MeV", True),
+        "g_chi": _cred("g_chi", False),
+    }
+    credible_68 = {k: v for k, v in credible_68_computed.items() if v}
     block = {
         "source_artifact": T41_V08_ARTIFACT,
         "source_artifact_sha256": hashlib.sha256(raw).hexdigest(),
@@ -675,15 +703,24 @@ def build_t41_v08_standing_map():
         "log_Z_err": d["log_Z_err"],
         "MAP": d["MAP_physical"],
         "median_physical": d.get("median_physical"),
-        "credible_68pct": d.get("credible_68pct") or T41_V08_CREDIBLE_68PCT,
+        "credible_68pct": credible_68 or T41_V08_CREDIBLE_68PCT,
+        "credible_68pct_source": (
+            "artifact quantiles_16_50_84 (16/50/84), 10** applied to log-parameters"
+            if credible_68 else "T41_V08_CREDIBLE_68PCT literal (artifact quantiles unavailable)"
+        ),
         "yukawa_tension": {
             "a_difference": d["yukawa_tension"]["a_difference"],
-            "reported_sigma": 0.81,
+            "reported_sigma": round(abs(d["yukawa_tension"]["a_difference"]), 2),
             "threshold": 1.0,
             "T39_a": 0.94,
             "Yukawa_a_at_MAP": d["MAP_physical"]["a_derived"],
             "significant": abs(d["yukawa_tension"]["a_difference"]) > 1.0,
         },
+        "derived_intervals": di,
+        "sigma_m_0_derived_cm2_per_g_16_84": [sm_i.get("p16"), sm_i.get("p84")] if sm_i else None,
+        "sigma_m_0_derived_cm2_per_g_median": sm_i.get("median") if sm_i else None,
+        "a_derived_16_84": [a_i.get("p16"), a_i.get("p84")] if a_i else None,
+        "yukawa_tension_from_posterior": tension_posterior,
         "computed_from_artifact": True,
     }
     block.update(T41_V08_PROVENANCE)
