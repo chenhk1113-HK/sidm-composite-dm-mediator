@@ -1,0 +1,32 @@
+# seed_interval_audit forward-rule violations, before triage (2026-11-12)
+
+Captured verbatim from `scripts/seed_interval_audit.py --json` at the moment the
+round-4 commit activated the forward rule (artifacts dated 2026-11-11 or later, no
+seed / no credible interval). Counts at that moment:
+
+  total 481, stochastic 202, seed 9, interval 138, both 7, legacy_gap 195,
+  forward_violation 3, allowlisted_nonresult 1, corrupt 1, corrupt_allowlisted 0
+
+Violations (verbatim from the JSON):
+
+1. v0.3-prelim/data/results/canonical_numbers.json
+   date 2026-11-12 (git), has_seed False, has_interval True, looks_stochastic True
+   -> TRIAGE: registry of other artifacts' numbers, not a run output.
+      Allowlisted in NON_RESULT_ALLOWLIST with reason.
+2. v0.3-prelim/data/results/t90_v45_multi_portal_joint_fit.json
+   date 2026-11-12 (git), has_seed False, has_interval False, looks_stochastic True
+   -> TRIAGE: 9143 s exploratory fit, no consumer reads it (the maintained pipeline
+      reads only the _nlive200 variant); no tracked claim depends on it after the
+      Cloud-9 re-binding. Archived to _archive_multiportal_20261112/.
+3. v0.3-prelim/data/results/t90_v45_multi_portal_joint_fit_nlive200.json
+   date 2026-11-12 (git), has_seed False, has_interval False, looks_stochastic True
+   -> TRIAGE: input of phase21/22/23/24/25; those pipelines support no standing claim
+      after the re-binding (see CURRENT.md supersession entry and
+      _archive_multiportal_20261112/ARCHIVE_NOTE.md). Archived with the variants.
+
+Also disclosed at that moment: amuse_focused_rerun_with_sashimi_2026_09_12.json
+CORRUPT (Unterminated string starting at 202546) - allowlisted, file retained in
+the disclosure after being archived.
+
+After triage: forward_violation 0, corrupt 1 allowlisted, allowlisted_nonresult 2,
+counts re-certified in docs/evidence/seed_interval_inventory.json (total 481).

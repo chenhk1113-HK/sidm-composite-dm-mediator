@@ -2,12 +2,12 @@
 
 > ⚠️ **Disclaimer:** a personal project built out of curiosity, using Hermes with **MiniMax M3** and **Qwen3.8_Flash_Next** as the coder and **Grok**, **Doubao**, **Qwen 3.8 Max** and other AIs as reviewers.
 
-**Standing:** branch `wip/v19.2-F-init` (also the GitHub default branch) · record save `v19.2-F-RecordSave-2026-11-10` → commit `4098d01` · paper `v0.3-prelim/docs/PAPER_V1_DRAFT.md` · 15-layer release gate **15/15 PASS**. Round-by-round history is in [`CHANGELOG.md`](CHANGELOG.md), [`CURRENT.md`](CURRENT.md), the branch front page [`v0.3-prelim/README.md`](v0.3-prelim/README.md) and [`v0.3-prelim/docs/archive/phases/`](v0.3-prelim/docs/archive/phases/), not on this page.
+**Standing:** branch `wip/v19.2-F-init` (also the GitHub default branch) · record save `v19.2-F-RecordSave-2026-11-10` → commit `4098d01` · record regeneration `v19.2-F-T88CERegenRound4-2026-11-12` → commit `e73a963` (standing MAP re-derived on the corrected Born transfer factor: log Z **−165.32 ± 0.081**, m_χ **383 GeV**, m_φ **513 MeV**) · paper `v0.3-prelim/docs/PAPER_V1_DRAFT.md` · 15-layer release gate **15/15 PASS**. Round-by-round history is in [`CHANGELOG.md`](CHANGELOG.md), [`CURRENT.md`](CURRENT.md), the branch front page [`v0.3-prelim/README.md`](v0.3-prelim/README.md) and [`v0.3-prelim/docs/archive/phases/`](v0.3-prelim/docs/archive/phases/), not on this page.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![WIP Paper](https://img.shields.io/badge/wip_paper-v19.2--F--init-blueviolet)](v0.3-prelim/docs/PAPER_V1_DRAFT.md)
 [![Gate](https://img.shields.io/badge/gate-15%2F15_layers_pass-green)](scripts/verify_release_gate.py)
-[![Tests](https://img.shields.io/badge/tests-3644_pass%20%7C%2025%20skip%20%7C%2040%20deselect-green)](scripts/verify_release_gate.py)
+[![Tests](https://img.shields.io/badge/tests-3665_pass%20%7C%2025%20skip%20%7C%2040%20deselect-green)](scripts/verify_release_gate.py)
 
 **Pairing declaration (findings F26/F33):** this document quotes amplitudes in two pairings. The LIVE canonical pair is f_H = 0.7501856343179664 with σ_0 = 0.008150396851725193 cm²/g and σ_peak = 27.272481773080454 cm²/g. The ARCHIVED pair is f_H = 0.297 with σ_0 = 0.052 cm²/g and σ_peak = 174.0 cm²/g. Unless a sentence says otherwise, an amplitude quoted below is an ARCHIVED-pair raw amplitude. Both pairs give the same halo-level σ_eff = f_H² × (σ/m) = 15.348366 cm²/g at the 29.4 km/s resonance, so no effective prediction changes. Sources: scripts/constants.py, v0.3-prelim/data/results/canonical_numbers.json, v0.3-prelim/data/results/fH_pairing_registry.json.
 
@@ -186,7 +186,7 @@ The headline fit is a stored artifact, not a re-run: read `v0.3-prelim/data/resu
 
 ## How this repo is verified
 
-- **15-layer release gate** (`scripts/verify_release_gate.py`) runs on every record commit; its 15 layers are pytest, `audit_units.py`, `drift_guard.py`, `t82_audit.py`, `audit_claims.py`, `check_fabrication.py`, `check_breakthrough_label.py`, `audit_doc_anchors.py`, `audit_model_provenance.py`, `audit_hierarchy_chain.py`, `audit_pdf_render.py`, `triage_pdf_advisory_flags.py`, `audit_stale_strings.py`, `audit_glyph_coverage.py`, `audit_register_state.py`. Current head: **15/15 PASS**, pytest layer **3,644 passed / 25 skipped / 40 deselected**, drift audit **120/120 ALL CLEAR**.
+- **15-layer release gate** (`scripts/verify_release_gate.py`) runs on every record commit; its 15 layers are pytest, `audit_units.py`, `drift_guard.py`, `t82_audit.py`, `audit_claims.py`, `check_fabrication.py`, `check_breakthrough_label.py`, `audit_doc_anchors.py`, `audit_model_provenance.py`, `audit_hierarchy_chain.py`, `audit_pdf_render.py`, `triage_pdf_advisory_flags.py`, `audit_stale_strings.py`, `audit_glyph_coverage.py`, `audit_register_state.py`. Current head: **15/15 PASS**, pytest layer **3,665 passed / 25 skipped / 40 deselected** (certified 2026-11-12 on `e73a963`, raw log `docs/evidence/gate_run_final_20261112.txt`), drift audit **120/120 ALL CLEAR**.
 - **Run alongside the gate:** `audit_markdown_tables.py` and `scripts/run_round13_self_check.py` (8 layers, currently 8/8 PASS) are not gate layers; the self-check runs in the GitHub `Self-check` workflow.
 - **Evidence folders** carry the raw logs of each record commit, for example `docs/dual_review_5loop/evidence_CMAnchor_20261110/`.
 - **GitHub Actions CI is disabled** (decision D12, 2026-11-08): it had been red since 2026-10-11 and its ignore list certified less than the local gate, whose ignore list is empty. The `Self-check` workflow still runs.
@@ -214,7 +214,7 @@ See [`CITATION.cff`](CITATION.cff) for GitHub-native citation metadata and [`doc
 @software{lam_sidm_composite_dm_mediator_2026,
   author = {Lam, K.},
   title = {sidm-composite-dm-mediator},
-  version = {v19.2-F-RecordSave-2026-11-10},
+  version = {v19.2-F-T88CERegenRound4-2026-11-12},
   year = {2026},
   url = {https://github.com/chenhk1113-HK/sidm-composite-dm-mediator},
   license = {MIT}

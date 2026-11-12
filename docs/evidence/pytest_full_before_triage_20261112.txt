@@ -1,0 +1,205 @@
+........................................................................ [  1%]
+........................................................................ [  3%]
+......ss................................................................ [  5%]
+........................................................................ [  7%]
+........................................................................ [  9%]
+......................................ss....................s.ss........ [ 11%]
+........................................................................ [ 13%]
+........................................................................ [ 15%]
+........................................................................ [ 17%]
+........................................................................ [ 19%]
+........................................................................ [ 21%]
+........................................................................ [ 23%]
+........................................................................ [ 25%]
+........................................................................ [ 27%]
+........................................................................ [ 29%]
+........................................................................ [ 31%]
+........................................................................ [ 32%]
+........................................................................ [ 34%]
+........................................................................ [ 36%]
+........................................................................ [ 38%]
+........................................................................ [ 40%]
+........................................................................ [ 42%]
+........................................................................ [ 44%]
+........................................................................ [ 46%]
+........................................................................ [ 48%]
+....................................................F................... [ 50%]
+........................................................................ [ 52%]
+........................................................................ [ 54%]
+........................................................................ [ 56%]
+........................................................................ [ 58%]
+....................................................................ssss [ 60%]
+sssss.........................................F......................... [ 62%]
+......ssss.............................................................. [ 63%]
+........................................................................ [ 65%]
+........................................................................ [ 67%]
+........................................................................ [ 69%]
+........................................................................ [ 71%]
+........................................................................ [ 73%]
+........................................................................ [ 75%]
+........................................................................ [ 77%]
+..........s........s.................................................... [ 79%]
+........................................................................ [ 81%]
+........................................................................ [ 83%]
+..............F................F...........F.......F.................... [ 85%]
+F.....F......F.......................................................... [ 87%]
+........................................................................ [ 89%]
+........................................................................ [ 91%]
+........................................................................ [ 93%]
+........................................................................ [ 94%]
+........................................................................ [ 96%]
+........................................................................ [ 98%]
+..........................................                               [100%]
+================================== FAILURES ===================================
+__________________________ test_inventory_is_current __________________________
+
+    def test_inventory_is_current():
+        """scripts/cg16_scan.py --check must pass against the working tree."""
+        r = subprocess.run([sys.executable, str(REPO / "scripts" / "cg16_scan.py"), "--check"],
+                           capture_output=True, text=True, cwd=str(REPO))
+>       assert r.returncode == 0, (r.stdout, r.stderr)
+E       AssertionError: ("FAIL: inventory counts drifted
+E          recorded: {'live_clean': 427, 'live_prose_only': 4, 'pinned_source': 3, 'pinned_exc...': 3, 'pinned_exception': 3, 'historical_frozen_code': 230, 'docs_prose': 151, 'data_artifact': 69, 'other': 0}
+E         ", '')
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['C:\\Users\\lamkuenai\\projects\\sidm-composite-dm-mediator\\.venv-sidm-bench\\Scripts\\python....pinned_exception': 3, 'historical_frozen_code': 230, 'docs_prose': 151, 'data_artifact': 69, 'other': 0}\n", stderr='').returncode
+
+v0.3-prelim\tests\test_no_hardcoded_host_paths_cg16.py:158: AssertionError
+_________ test_seed_interval_audit_runs_and_enforces_the_forward_rule _________
+
+    def test_seed_interval_audit_runs_and_enforces_the_forward_rule():
+        proc = subprocess.run(
+            [sys.executable, str(paths.SCRIPTS_DIR / "seed_interval_audit.py"), "--json"],
+            capture_output=True, text=True, encoding="utf-8", errors="replace",
+            env={**os.environ, "PYTHONUTF8": "1"}, timeout=600,
+        )
+        assert proc.returncode == 0, f"audit failed:\n{proc.stdout[-2000:]}\n{proc.stderr[-2000:]}"
+        data = json.loads((proc.stdout or "").strip())
+        counts = data["counts"]
+        assert counts["total"] > 0
+        assert counts["stochastic"] > 0, "no stochastic artifact recognised - audit is not scanning"
+        assert counts["forward_violation"] == 0
+        assert counts["seed"] > 0 and counts["interval"] > 0
+        inv = Path(data["inventory"])
+        assert inv.exists()
+        payload = json.loads(inv.read_text(encoding="utf-8"))
+        assert payload["conduct_date"] == rc.CONDUCT_DATE
+        assert len(payload["per_stochastic_file"]) == counts["stochastic"]
+>       assert payload["corrupt_artifacts"], "the disclosed truncated artifact must stay listed"
+E       AssertionError: the disclosed truncated artifact must stay listed
+E       assert []
+
+v0.3-prelim\tests\test_repro_contract.py:134: AssertionError
+______________________ test_pop_likelihood_cloud9_regime ______________________
+
+    def test_pop_likelihood_cloud9_regime():
+        """Cloud-9 regime (sigma_m ~ 50 cm^2/g): small penalty."""
+        # m_phi=10 MeV, m_chi=500 GeV, g_chi=0.22 -> sigma_m ~ 50 cm^2/g
+        ll = loglike_relhic_population_monaci2026(10, 500, 0.22)
+        # log L = -0.5 * (50/100)^2 = -0.125
+        assert np.isfinite(ll)
+>       assert -0.3 < ll < -0.05
+E       assert -0.017273560853273882 < -0.05
+
+v0.3-prelim\tests\test_t90_v32_relhic_population.py:51: AssertionError
+____________________ test_loglike_yukawa_tuned_aggressive _____________________
+
+    def test_loglike_yukawa_tuned_aggressive():
+        """Tuned aggressive (g_chi=1.3) gives sigma_eff ~ 390 cm^2/g, within Cloud-9 range."""
+        ll = loglike_yukawa_tuned_t90v36(50.0, 100.0, 1.3)
+        assert np.isfinite(ll)
+>       assert -1.0 < ll < 0.5  # reasonable likelihood
+        ^^^^^^^^^^^^^^^^^^^^^^
+E       assert -1.0 < -4.632205485180344
+
+v0.3-prelim\tests\test_t90_v35_v36_v37.py:101: AssertionError
+______________________ test_sigma_m_at_v_yukawa_at_vref _______________________
+
+    def test_sigma_m_at_v_yukawa_at_vref():
+        """sigma/m at V_REF=100 km/s is the canonical sigma_m_0."""
+        from t41_mediator_mass_joint_fit import sigma_m_at_v_yukawa
+        s = sigma_m_at_v_yukawa(100.0, 10.0, 500.0, 0.22)
+        # Should be ~ 1.3 cm^2/g (from T90.29 v3 test points)
+>       assert 1.0 < s < 2.0
+E       assert 1.0 < 0.2439341475862226
+
+v0.3-prelim\tests\test_t90_v38_vdep_correction.py:30: AssertionError
+_______________ test_dsph_vdep_at_heavy_mediator_matches_legacy _______________
+
+    def test_dsph_vdep_at_heavy_mediator_matches_legacy():
+        """Heavy m_phi (Yukawa flat), vdep should match power-law within 10%."""
+        m_phi, m_chi, g_chi = 700.0, 500.0, 0.1
+        s_vref = sigma_m_cm2_per_g(V_REF, m_phi, m_chi, g_chi)
+        a = _derived_a(m_phi, m_chi, g_chi)
+        s_legacy = sigma_m_at_v(s_vref, a, V_DSPH)
+        s_vdep = sigma_m_cm2_per_g(V_DSPH, m_phi, m_chi, g_chi)
+>       assert abs(s_legacy - s_vdep) / s_vdep < 0.10
+E       assert (np.float64(4.066981231805323e-07) / 3.595177732901814e-06) < 0.1
+E        +  where np.float64(4.066981231805323e-07) = abs((np.float64(4.001875856082346e-06) - 3.595177732901814e-06))
+
+v0.3-prelim\tests\test_t90_v41_vdep_channels.py:51: AssertionError
+_______________ test_multi_portal_at_heavy_a_light_b_reference ________________
+
+    def test_multi_portal_at_heavy_a_light_b_reference():
+        """Reference test: Portal A heavy + Portal B light gives correct sigma/m."""
+        from t90_v44_multi_portal import sigma_m_multi_portal
+        sm_28 = sigma_m_multi_portal(28, 700, 100, 1.5, 10, 500, 0.22)
+        sm_100 = sigma_m_multi_portal(100, 700, 100, 1.5, 10, 500, 0.22)
+        sm_3000 = sigma_m_multi_portal(3000, 700, 100, 1.5, 10, 500, 0.22)
+        # Cloud-9 in range (50-200 cm^2/g)
+>       assert 30 < sm_28 < 200, f"sm(28)={sm_28:.2f} not in Cloud-9 range"
+E       AssertionError: sm(28)=18.62 not in Cloud-9 range
+E       assert 30 < 18.623496740461768
+
+v0.3-prelim\tests\test_t90_v44_multi_portal.py:32: AssertionError
+______________________ test_multi_portal_unified_setting ______________________
+
+    def test_multi_portal_unified_setting():
+        """The reference unified setting satisfies all 3 velocity scales."""
+        from t90_v44_multi_portal import sigma_m_multi_portal
+        # Portal A heavy + Portal B tuned for Cloud-9
+        sm_28 = sigma_m_multi_portal(28, 700, 100, 1.5, 10, 500, 0.20)
+        sm_100 = sigma_m_multi_portal(100, 700, 100, 1.5, 10, 500, 0.20)
+        sm_3000 = sigma_m_multi_portal(3000, 700, 100, 1.5, 10, 500, 0.20)
+        # Cloud-9: 30-500 cm^2/g
+>       assert 30 < sm_28 < 500
+E       assert 30 < 12.73171347200855
+
+v0.3-prelim\tests\test_t90_v44_multi_portal.py:109: AssertionError
+_________________ test_v45_reference_sigma_m_in_cloud9_range __________________
+
+    def test_v45_reference_sigma_m_in_cloud9_range():
+        """At the reference point, combined sigma/m(28) is in Cloud-9 range."""
+        from t90_v45_multi_portal_joint_fit import loglike_joint_multi_portal
+        from t90_v44_multi_portal import sigma_m_multi_portal
+        sm_28 = sigma_m_multi_portal(28.0, 700, 100, 1.5, 10, 500, 0.22)
+        # Cloud-9 range is 30-500 cm^2/g
+>       assert 30 < sm_28 < 500, f"sm(28)={sm_28:.2f} not in Cloud-9 range"
+E       AssertionError: sm(28)=18.62 not in Cloud-9 range
+E       assert 30 < 18.623496740461768
+
+v0.3-prelim\tests\test_t90_v45_multi_portal_joint_fit.py:106: AssertionError
+============================== warnings summary ===============================
+v0.3-prelim/tests/test_t17_kiss_sidm_corrected_fit.py::TestEndToEndSmoke::test_both_runs_complete
+v0.3-prelim/tests/test_t17_kiss_sidm_corrected_fit.py::TestSavedArtifacts::test_json_exists_and_has_expected_keys
+v0.3-prelim/tests/test_t17_kiss_sidm_corrected_fit.py::TestSavedArtifacts::test_npz_exists_and_has_expected_arrays
+  C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\.venv-sidm-bench\Lib\site-packages\_pytest\fixtures.py:1313: PytestRemovedIn10Warning: Class-scoped fixture defined as instance method is deprecated.
+  Instance attributes set in this fixture will NOT be visible to test methods,
+  as each test gets a new instance while the fixture runs only once per class.
+  Use @classmethod decorator and set attributes on cls instead.
+  See https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method
+    fixturefunc = resolve_fixture_function(fixturedef, request)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED v0.3-prelim/tests/test_no_hardcoded_host_paths_cg16.py::test_inventory_is_current
+FAILED v0.3-prelim/tests/test_repro_contract.py::test_seed_interval_audit_runs_and_enforces_the_forward_rule
+FAILED v0.3-prelim/tests/test_t90_v32_relhic_population.py::test_pop_likelihood_cloud9_regime
+FAILED v0.3-prelim/tests/test_t90_v35_v36_v37.py::test_loglike_yukawa_tuned_aggressive
+FAILED v0.3-prelim/tests/test_t90_v38_vdep_correction.py::test_sigma_m_at_v_yukawa_at_vref
+FAILED v0.3-prelim/tests/test_t90_v41_vdep_channels.py::test_dsph_vdep_at_heavy_mediator_matches_legacy
+FAILED v0.3-prelim/tests/test_t90_v44_multi_portal.py::test_multi_portal_at_heavy_a_light_b_reference
+FAILED v0.3-prelim/tests/test_t90_v44_multi_portal.py::test_multi_portal_unified_setting
+FAILED v0.3-prelim/tests/test_t90_v45_multi_portal_joint_fit.py::test_v45_reference_sigma_m_in_cloud9_range
+9 failed, 3683 passed, 25 skipped, 3 warnings in 1340.62s (0:22:20)
+PYTEST_RC=1
