@@ -149,16 +149,22 @@ CHECKS_PER_DOC: dict[str, list[tuple[str, str]]] = {
         ("standing version", "0.4-prelim+T88E"),
     ],
     "CURRENT.md": [
-        ("Bayesian evidence log Z", "−164.87 ± 0.084"),
+        ("Bayesian evidence log Z", "−165.32 ± 0.081"),
         # 2026-11-04: this table asserted the v0.7 MAP (770 GeV / 453 MeV / 0.60σ) as the
         # standing claim for CURRENT.md. That is why the front page could carry v0.7 numbers
         # under a v0.8 label and still pass: the auditor was asking for the wrong numbers.
         # The v0.7 values are still required to APPEAR in the docs (labelled historical) by the
         # derived cross-checks in _build_value_cross_checks; this table pins the STANDING block.
-        ("m_χ (MAP)", "478 GeV"),
-        ("m_φ (MAP)", "488 MeV"),
-        ("σ/m₀", "0.06 cm²/g"),
-        ("Tension", "0.81σ"),
+        # 2026-11-12 (round 4, user-approved): re-pinned to the regenerated T88.CE record
+        # (T41 v0.8, seed 20261112, nlive=2000): log Z −165.32 ± 0.081, m_χ 383 GeV,
+        # m_φ 513 MeV, σ/m₀ 0.055 cm²/g (MAP), tension 0.74σ. The superseded 2026-11-04
+        # standing values (478 GeV / 488 MeV / 0.06 cm²/g / 0.81σ) keep appearing in the
+        # docs only under the "(historical)" standing section; this table must be re-synced
+        # in the SAME commit as any future standing-record regeneration.
+        ("m_χ (MAP)", "383 GeV"),
+        ("m_φ (MAP)", "513 MeV"),
+        ("σ/m₀", "0.055 cm²/g"),
+        ("Tension", "0.74σ"),
         ("Channels", "22 effective channels"),
         ("677 tests", "677 pass"),
         # 2026-11-03: literal was 44/44 — a count from the T89 era, stale by 41 checks.
