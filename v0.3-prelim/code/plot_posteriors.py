@@ -62,7 +62,10 @@ def plot_t39_posterior_1d(t39, prior_robustness=None, out_path=None):
         ax.grid(True, alpha=0.3)
         ax.text(0.95, 0.95,
                 f"log Z = {t39['log_Z']:.2f} ± {t39['log_Z_err']:.2f}\n"
-                f"⚠ REQUIRES SM DECOUPLING\n(epsilon ~ 10^[-50], alpha ~ 10^[-28])",
+                f"⚠ REQUIRES SM DECOUPLING\n"
+                f"(epsilon ~ 10^{t39.get('median', {}).get('log_epsilon', float('nan')):.0f}, "
+                f"alpha ~ 10^{t39.get('median', {}).get('log_alpha', float('nan')):.0f}; "
+                f"log-epsilon prior [-60,-1] -> weakly constrained)",
                 transform=ax.transAxes,
                 fontsize=9, va='top', ha='right',
                 bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.5))

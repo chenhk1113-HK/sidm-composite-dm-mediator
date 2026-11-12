@@ -80,6 +80,7 @@
       "scripts/pre-tag-hook.sh",
       "scripts/r5_local_review.py",
       "scripts/recheck_cloud9_highsigma_20261103.py",
+      "scripts/regenerate_t88ce_chain.py",
       "scripts/resolve_references.py",
       "scripts/review_prompt_loop1_vmax_stale.json",
       "scripts/review_prompt_loop1_vmax_stale.txt",
@@ -101,6 +102,7 @@
       "scripts/run_round13_self_check.py",
       "scripts/run_self_check.sh",
       "scripts/sameie2020_c_tau_prescription.py",
+      "scripts/seed_interval_audit.py",
       "scripts/silverman2026_cloud9_gravothermal.py",
       "scripts/smoke_test_continuous_E.py",
       "scripts/t207_sparc_verification.py",
@@ -211,6 +213,7 @@
       "v0.3-prelim/tests/test_channel_bound_attribution.py",
       "v0.3-prelim/tests/test_channel_independence_structure.py",
       "v0.3-prelim/tests/test_channel_taxonomy_single_source.py",
+      "v0.3-prelim/tests/test_ci_workflow_wiring.py",
       "v0.3-prelim/tests/test_cmb_distortion.py",
       "v0.3-prelim/tests/test_constants_single_source.py",
       "v0.3-prelim/tests/test_d15_corrected3_review5.py",
@@ -308,6 +311,7 @@
       "v0.3-prelim/tests/test_r88_gravothermal_prefactor.py",
       "v0.3-prelim/tests/test_registry_drift_coverage.py",
       "v0.3-prelim/tests/test_removed_api_guard.py",
+      "v0.3-prelim/tests/test_repro_contract.py",
       "v0.3-prelim/tests/test_sidm_core_radius_invariance.py",
       "v0.3-prelim/tests/test_sigma_responsiveness_probe.py",
       "v0.3-prelim/tests/test_solar_8b_cevns_real_data.py",
@@ -2031,6 +2035,30 @@
     ],
     "data_artifact": [
       {
+        "path": "v0.3-prelim/data/results/_chain_backup_20261111/chain_report_20261112_084745.json",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/data/results/_chain_backup_20261111/chain_report_20261112_103048.json",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/data/results/_chain_backup_20261111/chain_report_20261112_113517.json",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/data/results/_chain_backup_20261111/chain_report_20261112_120305.json",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/data/results/_chain_backup_20261111/chain_report_20261112_122858.json",
+        "host_path_lines": 1
+      },
+      {
+        "path": "v0.3-prelim/data/results/_chain_backup_20261111/chain_report_20261112_134250.json",
+        "host_path_lines": 1
+      },
+      {
         "path": "v0.3-prelim/data/results/cg16_host_path_inventory.json",
         "host_path_lines": 7
       },
@@ -2310,13 +2338,13 @@
     "other": []
   },
   "counts": {
-    "live_clean": 427,
+    "live_clean": 431,
     "live_prose_only": 4,
     "pinned_source": 3,
     "pinned_exception": 3,
     "historical_frozen_code": 230,
     "docs_prose": 151,
-    "data_artifact": 69,
+    "data_artifact": 75,
     "other": 0
   },
   "patterns": [

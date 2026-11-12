@@ -369,8 +369,10 @@ def main():
         "verdict": tier3_verdict,
         "requires_sm_decoupling": requires_sm_decoupling,
         "publishable_caveat": (
-            "The posterior concentrates at epsilon ~ 10^-50, alpha ~ 10^-28 (essentially "
-            "zero). The SIDM mediator is INVISIBLE to the Standard Model at direct-detection "
+            f"The posterior concentrates at epsilon ~ 10^{MAP[2]:.1f}, alpha ~ 10^{MAP[3]:.1f} "
+            "(values read from this run's MAP; the log_epsilon/log_alpha priors are log-uniform "
+            "[-60, -1], so epsilon and alpha are weakly constrained and must be quoted as "
+            "intervals, not points). The SIDM mediator is INVISIBLE to the Standard Model at direct-detection "
             "(LZ) and gamma-ray (Fermi) energies. The publishable headline MUST foreground "
             "this IF: 'sigma/m = 1.67 cm^2/g is consistent with multi-channel data IF the "
             "SIDM mediator decouples from SM.' This is the MINIMUM statement, not the "

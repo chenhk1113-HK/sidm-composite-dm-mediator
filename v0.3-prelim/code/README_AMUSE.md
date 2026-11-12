@@ -1,3 +1,5 @@
+> **STATUS 2026-11-11: DROPPED.** The AMUSE bullet-dwarf branch is retired and no sigma/m_peak value from it is citable. Reasons: degenerate sigmoid fit (n = 6.35 +/- 3478); the run's own resolution check fails (SASHIMI r_core 0.126 kpc vs softening 0.050 kpc); the collision speed 358 km/s is ~7x V_max (~50 km/s), the wrong regime for the SASHIMI comparison; re-running the same script moved sigma/m_peak from 3.07 +/- 0.51 to 0.100 +/- 0.013 cm^2/g. See CURRENT.md. Code is kept for provenance only.
+
 # AMUSE bullet-dwarf simulation pipeline (v0.3-prelim)
 
 **Status:** Working pipeline. Reproducibility across seeds verified at σ/m_peak = 3.07 cm²/g (within ±0.05 nats n_bound variance). Sigma/m_peak is a **softening-resolution threshold**, not a half-disruption measurement — see docs.

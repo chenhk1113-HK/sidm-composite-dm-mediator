@@ -70,6 +70,40 @@ def beta_phi(v_kms: float, m_phi_MeV: float, m_chi_GeV: float) -> float:
     return beta
 
 
+def born_transport_factor(s: float) -> float:
+    """Born *transfer* (momentum-weighted) shape factor R(s), normalised so that
+
+        sigma_T(v) = (g_chi^4 m_chi^2) / (8 pi m_phi^4) * R(s)
+
+    Derivation (fixed 2026-11-11, review qwen4-1 adjudication; supersedes the
+    previous `[log(1+s)/s]^2`, which was the *screening* factor squared, not the
+    transfer cross-section):
+
+        f_Born(theta) = -(2 mu alpha / m_phi^2) / (1 + t sin^2(theta/2))
+        sigma_T       = int |f|^2 (1 - cos theta) dOmega
+                      = 2 pi (2 mu alpha / m_phi^2)^2 * 4 [log(1+t) - t/(1+t)] / t^2
+        with mu = m_chi/2 (DM-DM), alpha = g_chi^2/(4 pi), t = 4 mu^2 v^2 / m_phi^2 = 2 s.
+
+    Substituting t = 2 s and folding the constants into the prefactor gives
+
+        R(s) = [log(1 + 2s) - 2s/(1 + 2s)] / s^2,   R(0) = 2.
+
+    Asymptotics: R -> 2 as s -> 0 (the old form went to 1, i.e. the plateau was a
+    factor 2 too small — the review's '0.500' ratio); R -> log(2s)/s^2 at large s,
+    so the fall-off is log(s)/s^2, NOT log^2(s)/s^2.
+
+    Verified against direct angular quadrature of the Born amplitude: agreement
+    1.00000 over v = 1-1000 km/s for (m_phi, m_chi) = (488 MeV, 478 GeV),
+    (10 MeV, 40 GeV), (1 MeV, 10 GeV). Script:
+    AppData/Local/hermes/cache/scratch/review_qwen4/t40_ground_truth.py
+    """
+    if s < 1e-6:
+        # Series expansion: avoids catastrophic cancellation in the numerator
+        # (which is O(s^2) while its terms are O(s)).
+        return 2.0 - (16.0 / 3.0) * s + 12.0 * s * s
+    return float((np.log(1.0 + 2.0 * s) - 2.0 * s / (1.0 + 2.0 * s)) / (s * s))
+
+
 def sigma_T_cm2(v_kms: float, m_phi_MeV: float, m_chi_GeV: float, g_chi: float) -> float:
     """Transfer cross-section sigma_T in cm^2 (Born approximation).
 
@@ -92,10 +126,10 @@ def sigma_T_cm2(v_kms: float, m_phi_MeV: float, m_chi_GeV: float, g_chi: float) 
     s = beta ** 2
     if s <= 0:
         return 0.0
-    L = np.log(1.0 + s) / s  # log(1+s)/s
+    R = born_transport_factor(s)
     m_chi_MeV = m_chi_GeV * 1000.0
     prefactor_natural = (g_chi ** 4) * (m_chi_MeV ** 2) / (8.0 * np.pi * m_phi_MeV ** 4)
-    sigma_cm2 = prefactor_natural * (HBAR_C_MEV_CM ** 2) * L ** 2
+    sigma_cm2 = prefactor_natural * (HBAR_C_MEV_CM ** 2) * R
     return float(sigma_cm2)
 
 

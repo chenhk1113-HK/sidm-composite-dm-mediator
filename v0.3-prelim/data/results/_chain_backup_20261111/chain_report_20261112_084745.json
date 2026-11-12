@@ -1,0 +1,61 @@
+{
+  "nlive": 200,
+  "chain_started": "2026-11-12T08:45:11",
+  "python": "C:\\Users\\lamkuenai\\projects\\sidm-composite-dm-mediator\\.venv-sidm-bench\\Scripts\\python.exe",
+  "roles": {
+    "v0.7": {
+      "artifact": "t41_mediator_mass_joint_fit_v0_7_with_dampe_lss_nlive2000.json",
+      "old": {
+        "log_Z": -163.29135026604473,
+        "log_Z_err": 0.08515384765042988,
+        "a_derived": 0.34425425011699784,
+        "sigma_m_0_derived": 0.27313307663467384,
+        "m_phi_MeV": 452.9510521222574,
+        "m_chi_GeV": 769.6913379451703,
+        "g_chi": 1.18898126146095,
+        "seed": null
+      },
+      "new": {
+        "log_Z": -164.7805854118944,
+        "log_Z_err": 0.2402684451842096,
+        "a_derived": 0.21952895475295317,
+        "sigma_m_0_derived": 0.2870827688629767,
+        "m_phi_MeV": 657.801637862017,
+        "m_chi_GeV": 516.9271506180688,
+        "g_chi": 1.599052288777519,
+        "seed": null
+      },
+      "old_sha256_16": "MISSING",
+      "new_sha256_16": "5885e9662f924efc",
+      "wall_s": 71.4,
+      "log_Z_delta": -1.489
+    },
+    "t88b": {
+      "artifact": "t41_mediator_mass_joint_fit_t88b_v07_with_erosita_nlive2000.json",
+      "old": {
+        "log_Z": -164.22971791647822,
+        "log_Z_err": 0.08473698112325219,
+        "a_derived": 0.1902681128993502,
+        "sigma_m_0_derived": 0.2804575367008745,
+        "m_phi_MeV": 729.624192335394,
+        "m_chi_GeV": 874.1054185432796,
+        "g_chi": 1.8335930686671171,
+        "seed": null
+      },
+      "new": {
+        "log_Z": -164.57014052903747,
+        "log_Z_err": 0.23555988041111456,
+        "a_derived": 0.18971012377030655,
+        "sigma_m_0_derived": 0.065322434519867,
+        "m_phi_MeV": 1149.3425335788747,
+        "m_chi_GeV": 832.6022907496737,
+        "g_chi": 1.707327244475374,
+        "seed": null
+      },
+      "old_sha256_16": "MISSING",
+      "new_sha256_16": "a563b93141b5c969",
+      "wall_s": 82.2,
+      "log_Z_delta": -0.34
+    }
+  }
+}

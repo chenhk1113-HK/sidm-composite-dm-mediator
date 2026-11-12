@@ -869,11 +869,22 @@ def main():
     # re-runs and follow-up sweeps can scale up cleanly. Default nlive=200 preserves
     # backward compatibility with the published T41 numbers.
     nlive = int(os.environ.get("T41_NLIVE", "200"))
+    # Seed pinned 2026-11-12 (user decision "fix and pin the seed"). dynesty draws from numpy's
+    # legacy global RNG and this script never seeded it, so every previous T41 run was
+    # irreproducible by construction and no prior artifact recorded a seed. Override with T41_SEED.
+    # Changing the seed changes the MAP and log Z, so treat any change here as a record-round change.
+    seed = int(os.environ.get("T41_SEED", "20261112"))
+    np.random.seed(seed)
+    print(f"  seed pinned: np.random.seed({seed}) (override via T41_SEED)")
     # v0.6: 6D posterior (log_xi promoted from fixed to free per R14 Rec #8).
     sampler = dynesty.NestedSampler(
         loglikelihood=loglike_for_run,
         prior_transform=prior_transform_6,
         ndim=6, nlive=nlive, bound='multi', sample='auto', bootstrap=0,
+        # dynesty 3.x does NOT use numpy's global RNG: it uses self.rstate (a numpy Generator,
+        # `rstate or get_random_generator()`) and derives per-iteration seeds from it. So
+        # np.random.seed() alone is not enough, and a RandomState object is the wrong type.
+        rstate=np.random.default_rng(seed),
     )
     sampler.run_nested(dlogz=0.1, print_progress=False)
     wall = time.time() - t0
@@ -919,6 +930,41 @@ def main():
     map_g_chi = MAP[2]
     map_sigma_m_0 = sigma_m_at_v_yukawa(V_REF, map_m_phi_MeV, map_m_chi_GeV, map_g_chi)
     map_a = derived_a(map_m_phi_MeV, map_m_chi_GeV, map_g_chi)
+
+    # Derived-quantity posterior intervals (added 2026-11-12, user request "add interval").
+    # sigma_m_0 and a are deterministic functions of (m_phi, m_chi, g_chi), so their honest interval
+    # comes from transforming EVERY posterior sample and taking weighted percentiles -- not from the
+    # MAP. The MAP alone is unstable here: sigma_m_0 at MAP read 0.055 / 0.067 / 0.270 cm^2/g across
+    # three pinned seeds at nlive=2000, i.e. the MAP hops between comparable modes.
+    with np.errstate(over="ignore", under="ignore"):
+        der_sigma = np.array([
+            sigma_m_at_v_yukawa(V_REF, 10 ** s[0], 10 ** s[1], s[2]) for s in samples
+        ])
+        der_a = np.array([derived_a(10 ** s[0], 10 ** s[1], s[2]) for s in samples])
+    ok = np.isfinite(der_sigma) & np.isfinite(der_a) & np.isfinite(weights)
+    w_ok = weights[ok] / np.sum(weights[ok])
+    ds_q = weighted_quantiles(der_sigma[ok], w_ok, [0.16, 0.5, 0.84])
+    da_q = weighted_quantiles(der_a[ok], w_ok, [0.16, 0.5, 0.84])
+    derived_intervals = {
+        "propagation": (
+            "per-sample transform through sigma_m_at_v_yukawa(V_REF, m_phi, m_chi, g_chi) and "
+            "derived_a(m_phi, m_chi, g_chi), then weighted 16/50/84 percentiles of the posterior"
+        ),
+        "n_samples_used": int(np.count_nonzero(ok)),
+        "sigma_m_0_derived_cm2_per_g": {
+            "p16": float(ds_q[0]), "median": float(ds_q[1]), "p84": float(ds_q[2]),
+            "MAP": map_sigma_m_0,
+        },
+        "a_derived": {
+            "p16": float(da_q[0]), "median": float(da_q[1]), "p84": float(da_q[2]),
+            "MAP": map_a,
+        },
+    }
+    print(
+        f"  DERIVED posterior: sigma_m_0 = {ds_q[1]:.3f} cm^2/g "
+        f"[{ds_q[0]:.3f}, {ds_q[2]:.3f}] (16/84), a = {da_q[1]:+.3f} "
+        f"[{da_q[0]:+.3f}, {da_q[2]:+.3f}]"
+    )
 
     # Compare to T39 prior
     t39_sigma_m_0 = 1.57   # median from T39
@@ -976,9 +1022,13 @@ def main():
             "log_alpha": list(LOG_ALPHA_RANGE),
             "log_xi": list(LOG_XI_RANGE),
         },
+        "seed": seed,
+        "seed_rng": "numpy legacy global RNG via np.random.seed(seed); dynesty draws from it",
+        "nlive": nlive,
         "log_Z": log_Z,
         "log_Z_err": log_Z_err,
         "MAP": MAP,
+        "derived_intervals": derived_intervals,
         "MAP_physical": {
             "m_phi_MeV": map_m_phi_MeV,
             "m_chi_GeV": map_m_chi_GeV,

@@ -1,0 +1,119 @@
+{
+  "nlive": 2000,
+  "chain_started": "2026-11-12T09:19:52",
+  "python": "C:\\Users\\lamkuenai\\projects\\sidm-composite-dm-mediator\\.venv-sidm-bench\\Scripts\\python.exe",
+  "roles": {
+    "v0.7": {
+      "artifact": "t41_mediator_mass_joint_fit_v0_7_with_dampe_lss_nlive2000.json",
+      "old": {
+        "log_Z": -163.29135026604473,
+        "log_Z_err": 0.08515384765042988,
+        "a_derived": 0.34425425011699784,
+        "sigma_m_0_derived": 0.27313307663467384,
+        "m_phi_MeV": 452.9510521222574,
+        "m_chi_GeV": 769.6913379451703,
+        "g_chi": 1.18898126146095,
+        "seed": null
+      },
+      "new": {
+        "log_Z": -164.87166600111252,
+        "log_Z_err": 0.08345159675465401,
+        "a_derived": 0.07690117598876267,
+        "sigma_m_0_derived": 0.24123434199635277,
+        "m_phi_MeV": 696.7214983559544,
+        "m_chi_GeV": 311.44225583170635,
+        "g_chi": 1.8133735817283716,
+        "seed": 20261112
+      },
+      "old_sha256_16": "63b0c4704c11eaf1",
+      "new_sha256_16": "5c354564374a27e7",
+      "wall_s": 794.1,
+      "log_Z_delta": -1.58
+    },
+    "t88b": {
+      "artifact": "t41_mediator_mass_joint_fit_t88b_v07_with_erosita_nlive2000.json",
+      "old": {
+        "log_Z": -164.22971791647822,
+        "log_Z_err": 0.08473698112325219,
+        "a_derived": 0.1902681128993502,
+        "sigma_m_0_derived": 0.2804575367008745,
+        "m_phi_MeV": 729.624192335394,
+        "m_chi_GeV": 874.1054185432796,
+        "g_chi": 1.8335930686671171,
+        "seed": null
+      },
+      "new": {
+        "log_Z": -164.8581034780357,
+        "log_Z_err": 0.08266382016693068,
+        "a_derived": 0.2702848634332019,
+        "sigma_m_0_derived": 0.2535574138628949,
+        "m_phi_MeV": 487.9440026488792,
+        "m_chi_GeV": 431.64554784829653,
+        "g_chi": 1.2097950427532602,
+        "seed": 20261112
+      },
+      "old_sha256_16": "b3be67d8986bcfca",
+      "new_sha256_16": "07698a11973e7f2b",
+      "wall_s": 937.0,
+      "log_Z_delta": -0.628
+    },
+    "control": {
+      "artifact": "t41_mediator_mass_joint_fit_t88ce_sampling_variance_control.json",
+      "old": {
+        "log_Z": -164.0194242685308,
+        "log_Z_err": 0.08404825508990728,
+        "a_derived": 0.07414430827133832,
+        "sigma_m_0_derived": 0.06457814221921761,
+        "m_phi_MeV": 487.9009183187878,
+        "m_chi_GeV": 350.9381281435529,
+        "g_chi": 1.054065313609368,
+        "seed": null
+      },
+      "new": {
+        "log_Z": -164.78619530395522,
+        "log_Z_err": 0.08231050447934384,
+        "a_derived": 0.2050088043105688,
+        "sigma_m_0_derived": 0.2971390731294433,
+        "m_phi_MeV": 731.0175519676252,
+        "m_chi_GeV": 552.8718831907235,
+        "g_chi": 1.7597180100944203,
+        "seed": 20261112
+      },
+      "old_sha256_16": "532f216fa78196b0",
+      "new_sha256_16": "488c6f402ef5df86",
+      "wall_s": 944.1,
+      "log_Z_delta": -0.767
+    },
+    "headline": {
+      "artifact": "t41_mediator_mass_joint_fit_t88ce_v08_with_euclid_lensing_and_subhalo_forecast_nlive2000.json",
+      "old": {
+        "log_Z": -164.8684904202744,
+        "log_Z_err": 0.08407446187648335,
+        "a_derived": 0.13234005284350478,
+        "sigma_m_0_derived": 0.05991454841339871,
+        "m_phi_MeV": 488.15386822625493,
+        "m_chi_GeV": 478.29480863482195,
+        "g_chi": 0.963659296232169,
+        "seed": null
+      },
+      "new": {
+        "log_Z": -165.32261253046929,
+        "log_Z_err": 0.08112677607659807,
+        "a_derived": 0.200730445396647,
+        "sigma_m_0_derived": 0.05475434723772094,
+        "m_phi_MeV": 512.9595661320412,
+        "m_chi_GeV": 383.42226210901504,
+        "g_chi": 0.8861302875886187,
+        "seed": 20261112
+      },
+      "old_sha256_16": "d2ee97506ed0dd35",
+      "new_sha256_16": "81492b13d5dd39a3",
+      "wall_s": 1579.1,
+      "log_Z_delta": -0.454
+    }
+  },
+  "postprocess": {
+    "t88ce_postprocess.py": 0,
+    "canonical_numbers.py": 0
+  }
+}

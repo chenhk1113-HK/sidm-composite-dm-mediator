@@ -49,7 +49,7 @@
       "sigma_unc": 30.0,
       "kind": "floor",
       "label": "Cloud-9 v=28",
-      "citation": "BLN24 / Ohana+ 2026"
+      "citation": "INTERNAL anchor (F21); was \"BLN24 / Ohana+ 2026\""
     },
     {
       "v_kms": 100.0,
@@ -69,23 +69,235 @@
     }
   ],
   "model_A_multi_resonance": {
-    "logZ": -14.285314279516502,
+    "logZ": -15.936915158854461,
     "n_params": 15
   },
   "model_B_constant": {
-    "logZ": -16.69669052746084,
+    "logZ": -17.08176148160058,
     "n_params": 2
   },
-  "log_bayes_factor": 2.4113762479443395,
-  "bayes_factor": 11.1492947852287,
+  "log_bayes_factor": 1.144846322746119,
+  "bayes_factor": 3.1419584721861096,
   "comparison_to_T177": {
     "T177_log_bf": 3.06,
     "T177_bayes_factor": 21.26,
-    "delta_logbf": -0.6486237520556606
+    "delta_logbf": -1.915153677253881
+  },
+  "posterior_credible_16_84": {
+    "model_A_multi_resonance": {
+      "sigma_0": {
+        "median": 4.705065268769141,
+        "mean": 4.845480855381207,
+        "credible_16_84": [
+          0.9258866344570281,
+          9.194308277736601
+        ]
+      },
+      "a_slope": {
+        "median": 3.6053694200476185,
+        "mean": 3.348924778617804,
+        "credible_16_84": [
+          2.1495197135907587,
+          4.484073890932388
+        ]
+      },
+      "v_target_1": {
+        "median": 369.3923421466983,
+        "mean": 437.8985212470458,
+        "credible_16_84": [
+          87.67696669950183,
+          811.516851141564
+        ]
+      },
+      "v_target_2": {
+        "median": 529.6207202921133,
+        "mean": 440.63863654791226,
+        "credible_16_84": [
+          122.10368506698272,
+          686.4790741987921
+        ]
+      },
+      "v_target_3": {
+        "median": 132.34681129589598,
+        "mean": 285.85055619278626,
+        "credible_16_84": [
+          27.993768531019917,
+          688.8643352699435
+        ]
+      },
+      "v_target_4": {
+        "median": 205.4235586626598,
+        "mean": 349.0664990212951,
+        "credible_16_84": [
+          122.34927754935123,
+          714.9713366295686
+        ]
+      },
+      "log_w_1": {
+        "median": -3.374574028698455,
+        "mean": -3.136375745775545,
+        "credible_16_84": [
+          -4.7733266333328075,
+          -1.4318781163517498
+        ]
+      },
+      "log_w_2": {
+        "median": -3.943685560536964,
+        "mean": -3.7831188592127196,
+        "credible_16_84": [
+          -4.921448196587602,
+          -2.311510236054392
+        ]
+      },
+      "log_w_3": {
+        "median": -2.6975043177605387,
+        "mean": -3.036146541603511,
+        "credible_16_84": [
+          -4.646136976404381,
+          -1.9004968389520076
+        ]
+      },
+      "log_w_4": {
+        "median": -3.614865968787848,
+        "mean": -3.4365130534402732,
+        "credible_16_84": [
+          -4.916227762862688,
+          -2.280392174551422
+        ]
+      },
+      "log_sigma_peak_1": {
+        "median": 0.8822021096785368,
+        "mean": 0.9848980055144189,
+        "credible_16_84": [
+          -0.8406716011999924,
+          3.10979012289188
+        ]
+      },
+      "log_sigma_peak_2": {
+        "median": 1.9362667787546795,
+        "mean": 1.8880762702990563,
+        "credible_16_84": [
+          -0.43750596434647665,
+          3.581068497626848
+        ]
+      },
+      "log_sigma_peak_3": {
+        "median": 2.2757414071462247,
+        "mean": 1.9149455093195265,
+        "credible_16_84": [
+          -0.4299949311133475,
+          3.950562877392206
+        ]
+      },
+      "log_sigma_peak_4": {
+        "median": 1.3924826064863687,
+        "mean": 1.7290279052287822,
+        "credible_16_84": [
+          -0.5251270774134641,
+          3.766972091501905
+        ]
+      },
+      "halo_mix": {
+        "median": 0.4376396163467579,
+        "mean": 0.46925432463992617,
+        "credible_16_84": [
+          0.14921482232229438,
+          0.8113228001353403
+        ]
+      },
+      "_meta": {
+        "basis": "unweighted percentile 16/50/84",
+        "n_samples": 17602
+      }
+    },
+    "model_B_constant": {
+      "sigma_0": {
+        "median": 4.58895011345888,
+        "mean": 4.543549322143349,
+        "credible_16_84": [
+          1.478840567339657,
+          7.566450382967209
+        ]
+      },
+      "a_slope": {
+        "median": 3.207203757316281,
+        "mean": 2.979017078977394,
+        "credible_16_84": [
+          1.6334738925727996,
+          4.240534595160447
+        ]
+      },
+      "_meta": {
+        "basis": "unweighted percentile 16/50/84",
+        "n_samples": 257
+      }
+    }
   },
   "HONEST_LIMITATIONS": [
-    "Published \u03c3_unc values are approximate extractions from papers (not posterior chains)",
-    "Horigome+ 2025 reports a single combined \u03c3/m; we split across 5 v bins",
-    "Some \u03c3_unc values may not include all systematics (e.g., velocity convention)"
-  ]
+    "Published σ_unc values are approximate extractions from papers (not posterior chains)",
+    "Horigome+ 2025 reports a single combined σ/m; we split across 5 v bins",
+    "Some σ_unc values may not include all systematics (e.g., velocity convention)"
+  ],
+  "reproducibility": {
+    "seed": 20261111,
+    "rng": "numpy.random.default_rng",
+    "recorded_at": "2026-11-11T13:52:25Z",
+    "python": "3.12.13",
+    "numpy": "2.5.2",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "sampler": "dynesty 3.x nested sampling",
+    "n_posterior_samples": 17602,
+    "sampler_options": {
+      "nlive_A": 200,
+      "nlive_B": 100,
+      "dlogz": 0.5
+    },
+    "note": "Seed recorded from 2026-11-11 onwards. The log Z values stored in this artifact were produced by an earlier unseeded run; from this change on the run is re-derivable from the recorded seed."
+  },
+  "seed": 20261111,
+  "multi_seed_summary": {
+    "seeds": [
+      20261111,
+      20261112,
+      20261113
+    ],
+    "nlive": 1000,
+    "n_samples_per_model": [
+      17602,
+      10528,
+      17668
+    ],
+    "logZ_A_values": [
+      -15.936915158854461,
+      -16.077075289175117,
+      -16.00575957679445
+    ],
+    "logZ_A_median": -16.00575957679445,
+    "logZ_A_stdev": 0.07008369620836806,
+    "logZ_B_values": [
+      -17.08176148160058,
+      -17.226057332093475,
+      -17.099726536892014
+    ],
+    "logZ_B_median": -17.099726536892014,
+    "logZ_B_stdev": 0.07863788897781808,
+    "log_bayes_factor_values": [
+      1.144846322746119,
+      1.1489820429183588,
+      1.0939669600975641
+    ],
+    "log_bayes_factor_median": 1.144846322746119,
+    "log_bayes_factor_stdev": 0.030638954134252938,
+    "bayes_factor_median": 3.1419584721861096,
+    "note": "Interval is the seed-to-seed spread of the nested-sampling estimator at nlive=1000. The superseded nlive=200 run gave 1.887/2.654/1.238 (spread 1.42) and a published single value 2.411.",
+    "superseded_nlive200": {
+      "logZ_A": -14.285314279516502,
+      "logZ_B": -16.69669052746084,
+      "log_bayes_factor": 2.4113762479443395,
+      "bayes_factor": 11.14929
+    }
+  },
+  "sampler_settings": {
+    "nlive": 1000
+  }
 }

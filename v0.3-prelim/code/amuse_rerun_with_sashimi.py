@@ -26,6 +26,7 @@ import json
 import math
 import sys
 import time
+import datetime as _dt
 from pathlib import Path
 
 # Force unbuffered output
@@ -257,7 +258,8 @@ def main():
     # Step 4: Save
     out = {
         "simulation_id": f"amuse_rerun_seed{NEW_SEED}_2026_09_12",
-        "date": "2026-09-12",
+        "date": _dt.date.today().isoformat(),
+        "run_date_note": "written at run time; supersedes the 2026-09-12 run of this script (user decision 2026-11-11: overwrite accepted)",
         "purpose": "Re-run AMUSE bullet-dwarf sweep with seed=20260912 + benchmark against SASHIMI-SIDM",
         "amuse_setup": {
             "halo_mass_MSun": ab.HALO_MASS_MSUN,

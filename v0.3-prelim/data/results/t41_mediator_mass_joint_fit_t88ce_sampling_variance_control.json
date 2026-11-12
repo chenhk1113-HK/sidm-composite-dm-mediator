@@ -36,87 +36,106 @@
       0.7
     ]
   },
-  "log_Z": -164.0194242685308,
-  "log_Z_err": 0.08404825508990728,
+  "seed": 20261112,
+  "seed_rng": "numpy legacy global RNG via np.random.seed(seed); dynesty draws from it",
+  "nlive": 2000,
+  "log_Z": -164.78619530395522,
+  "log_Z_err": 0.08231050447934384,
   "MAP": [
-    2.688331635534703,
-    2.545230555285195,
-    1.054065313609368,
-    -47.49142396648671,
-    -2.178711748684961,
-    -0.6801777226777505
+    2.8639278046338843,
+    2.7426245040541053,
+    1.7597180100944203,
+    -29.852065567633723,
+    -20.23445194997648,
+    -0.8804046195858171
   ],
+  "derived_intervals": {
+    "propagation": "per-sample transform through sigma_m_at_v_yukawa(V_REF, m_phi, m_chi, g_chi) and derived_a(m_phi, m_chi, g_chi), then weighted 16/50/84 percentiles of the posterior",
+    "n_samples_used": 26527,
+    "sigma_m_0_derived_cm2_per_g": {
+      "p16": 0.06528446218764633,
+      "median": 0.23943335183223016,
+      "p84": 0.2913647802323088,
+      "MAP": 0.2971390731294433
+    },
+    "a_derived": {
+      "p16": 0.09007668206879008,
+      "median": 0.1609991783741271,
+      "p84": 0.37476539688292687,
+      "MAP": 0.2050088043105688
+    }
+  },
   "MAP_physical": {
-    "m_phi_MeV": 487.9009183187878,
-    "m_chi_GeV": 350.9381281435529,
-    "g_chi": 1.054065313609368,
-    "log_epsilon": -47.49142396648671,
-    "log_alpha": -2.178711748684961,
-    "log_xi": -0.6801777226777505,
-    "xi": 0.20884413206878924,
-    "sigma_m_0_derived": 0.06457814221921761,
-    "a_derived": 0.07414430827133832
+    "m_phi_MeV": 731.0175519676252,
+    "m_chi_GeV": 552.8718831907235,
+    "g_chi": 1.7597180100944203,
+    "log_epsilon": -29.852065567633723,
+    "log_alpha": -20.23445194997648,
+    "log_xi": -0.8804046195858171,
+    "xi": 0.1317029128900399,
+    "sigma_m_0_derived": 0.2971390731294433,
+    "a_derived": 0.2050088043105688
   },
   "median": {
-    "log_m_phi_MeV": 2.768323822728252,
-    "log_m_chi_GeV": 2.6942906123666157,
-    "g_chi": 1.5760638964134361,
-    "log_epsilon": -36.6465865435078,
-    "log_alpha": -15.607017898727603,
-    "log_xi": -0.8032820355799484
+    "log_m_phi_MeV": 2.811037190871984,
+    "log_m_chi_GeV": 2.6620251576899756,
+    "g_chi": 1.4860995927765954,
+    "log_epsilon": -36.50612177250912,
+    "log_alpha": -15.493627210698977,
+    "log_xi": -0.8104583589559188
   },
   "quantiles_16_50_84": {
     "log_m_phi_MeV": [
-      2.6720045379065853,
-      2.7683188889586874,
-      2.8603650582977007
+      2.688283385970777,
+      2.811036934613431,
+      2.929527202785949
     ],
     "log_m_chi_GeV": [
-      2.529100082714291,
-      2.6942754071944615,
-      2.875075014143991
+      2.4570019453195027,
+      2.6620195754476246,
+      2.8720617961757964
     ],
     "g_chi": [
-      1.30518048928244,
-      1.576060842757959,
-      1.855548181216057
+      1.1954181911661135,
+      1.485994678375378,
+      1.8210818586391209
     ],
     "log_epsilon": [
-      -52.41020737802646,
-      -36.64672050303726,
-      -20.905865093190542
+      -52.54415385363293,
+      -36.507901901352454,
+      -20.739829698402314
     ],
     "log_alpha": [
-      -25.41796092990064,
-      -15.607253648214906,
-      -5.645073715550744
+      -25.290082701418104,
+      -15.493672448029402,
+      -5.689993108500785
     ],
     "log_xi": [
-      -0.9457169720928269,
-      -0.8032821086359365,
-      -0.5376508624671075
+      -0.9496440839147529,
+      -0.8104771724063773,
+      -0.525927575505897
     ]
   },
   "median_physical": {
-    "m_phi_MeV": 586.5753693303658,
-    "m_chi_GeV": 494.64157047403387,
-    "g_chi": 1.5760638964134361,
-    "epsilon": 2.2563863120393815e-37,
-    "alpha": 2.471622279099375e-16,
-    "xi": 0.15729610346325026
+    "m_phi_MeV": 647.1980362748266,
+    "m_chi_GeV": 459.2246139021209,
+    "g_chi": 1.4860995927765954,
+    "epsilon": 3.118015196355987e-37,
+    "alpha": 3.209022700593245e-16,
+    "xi": 0.15471828438949475
   },
   "yukawa_tension": {
     "T39_sigma_m_0": 1.57,
     "T39_a": 0.94,
-    "Yukawa_a_at_MAP": 0.07414430827133832,
-    "a_difference": 0.8658556917286616,
+    "Yukawa_a_at_MAP": 0.2050088043105688,
+    "a_difference": 0.7349911956894312,
     "significant": false
   },
-  "wall_seconds": 629.0997807979584,
+  "wall_seconds": 957.789797782898,
   "verdict": "TIER-3 EXTENSION: m_phi + xi parameterized posterior (v0.6: xi promoted from fixed to free)",
-  "interpretation": "log Z = -164.019, posterior medians: m_phi = 586.58 MeV, m_chi = 494.64 GeV, g_chi = 1.5761, eps = 2.26e-37, alpha = 2.47e-16, xi = 0.157. Derived sigma/m_0 = 0.065 cm^2/g, a = +0.074. Yukawa velocity index = +0.074; T39 data-preferred = +0.94. |Tension| = 0.87 (threshold 1.0). R12 P0-B (2026-08-17): the pre-fix '1.3 sigma tension' claim was a sign-flip artifact in derived_a; this re-run uses the corrected sign. v0.6 (R14 Rec #8, 2026-08-26): log_xi promoted from fixed-1 to free with prior log_xi in [-1.0, 0.7] (xi in [0.1, 5.0], matching H4.1 sweep range). v0.5 baseline log Z = -254.24 at nlive=500; v0.6 should be within ~0.5 of that since xi only enters via the Fermi-dwarf sigma_v scaling (sigma_v * xi^2), a subdominant channel.",
+  "interpretation": "log Z = -164.786, posterior medians: m_phi = 647.20 MeV, m_chi = 459.22 GeV, g_chi = 1.4861, eps = 3.12e-37, alpha = 3.21e-16, xi = 0.155. Derived sigma/m_0 = 0.297 cm^2/g, a = +0.205. Yukawa velocity index = +0.205; T39 data-preferred = +0.94. |Tension| = 0.73 (threshold 1.0). R12 P0-B (2026-08-17): the pre-fix '1.3 sigma tension' claim was a sign-flip artifact in derived_a; this re-run uses the corrected sign. v0.6 (R14 Rec #8, 2026-08-26): log_xi promoted from fixed-1 to free with prior log_xi in [-1.0, 0.7] (xi in [0.1, 5.0], matching H4.1 sweep range). v0.5 baseline log Z = -254.24 at nlive=500; v0.6 should be within ~0.5 of that since xi only enters via the Fermi-dwarf sigma_v scaling (sigma_v * xi^2), a subdominant channel.",
   "t41_version": {
-    "suffix": "_t88ce_sampling_variance_control",
+    "suffix": "",
     "ksfr_mask_enabled": true,
     "ksfr_mask_max_at_runtime": 9.5,
     "nlive": 2000,

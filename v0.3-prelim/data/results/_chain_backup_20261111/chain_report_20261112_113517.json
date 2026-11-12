@@ -1,0 +1,34 @@
+{
+  "nlive": 2000,
+  "chain_started": "2026-11-12T11:07:24",
+  "python": "C:\\Users\\lamkuenai\\projects\\sidm-composite-dm-mediator\\.venv-sidm-bench\\Scripts\\python.exe",
+  "roles": {
+    "headline": {
+      "artifact": "t41_mediator_mass_joint_fit_t88ce_v08_with_euclid_lensing_and_subhalo_forecast_nlive2000.json",
+      "old": {
+        "log_Z": -165.32261253046929,
+        "log_Z_err": 0.08112677607659807,
+        "a_derived": 0.200730445396647,
+        "sigma_m_0_derived": 0.05475434723772094,
+        "m_phi_MeV": 512.9595661320412,
+        "m_chi_GeV": 383.42226210901504,
+        "g_chi": 0.8861302875886187,
+        "seed": 20261112
+      },
+      "new": {
+        "log_Z": -165.38442727697623,
+        "log_Z_err": 0.08209622364036025,
+        "a_derived": 0.2465270528681239,
+        "sigma_m_0_derived": 0.06708414060180036,
+        "m_phi_MeV": 634.8431955895284,
+        "m_chi_GeV": 532.7306101496644,
+        "g_chi": 1.0681330102215638,
+        "seed": 7
+      },
+      "old_sha256_16": "d2ee97506ed0dd35",
+      "new_sha256_16": "2e55e6550671df95",
+      "wall_s": 1673.5,
+      "log_Z_delta": -0.062
+    }
+  }
+}

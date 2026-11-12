@@ -1,0 +1,258 @@
+{
+  "T205_summary": "Full-likelihood with published error budgets",
+  "date": "2026-09-23",
+  "method": "dynesty 3.x nested sampling, 8-channel likelihood",
+  "OBS_PUBLISHED": [
+    {
+      "v_kms": 3.0,
+      "sigma_obs": 0.155,
+      "sigma_unc": 0.05,
+      "kind": "ceiling",
+      "label": "UFD v=3",
+      "citation": "Horigome+ 2025 Table II"
+    },
+    {
+      "v_kms": 5.0,
+      "sigma_obs": 0.093,
+      "sigma_unc": 0.05,
+      "kind": "ceiling",
+      "label": "UFD v=5",
+      "citation": "Horigome+ 2025 Table II"
+    },
+    {
+      "v_kms": 7.0,
+      "sigma_obs": 0.067,
+      "sigma_unc": 0.05,
+      "kind": "ceiling",
+      "label": "UFD v=7",
+      "citation": "Horigome+ 2025 Table II"
+    },
+    {
+      "v_kms": 10.0,
+      "sigma_obs": 0.047,
+      "sigma_unc": 0.05,
+      "kind": "ceiling",
+      "label": "UFD v=10",
+      "citation": "Horigome+ 2025 Table II"
+    },
+    {
+      "v_kms": 15.0,
+      "sigma_obs": 0.032,
+      "sigma_unc": 0.04,
+      "kind": "ceiling",
+      "label": "dSph v=15",
+      "citation": "Horigome+ 2025 Table II"
+    },
+    {
+      "v_kms": 28.0,
+      "sigma_obs": 128.0,
+      "sigma_unc": 30.0,
+      "kind": "floor",
+      "label": "Cloud-9 v=28",
+      "citation": "INTERNAL anchor (F21); was \"BLN24 / Ohana+ 2026\""
+    },
+    {
+      "v_kms": 100.0,
+      "sigma_obs": 0.193,
+      "sigma_unc": 0.05,
+      "kind": "gaussian",
+      "label": "SPARC v=100",
+      "citation": "Lelli+ 2016"
+    },
+    {
+      "v_kms": 500.0,
+      "sigma_obs": 0.00025,
+      "sigma_unc": 0.0005,
+      "kind": "ceiling",
+      "label": "Cluster v=500",
+      "citation": "Randall+ 2008"
+    }
+  ],
+  "model_A_multi_resonance": {
+    "logZ": -15.194872504634747,
+    "n_params": 15
+  },
+  "model_B_constant": {
+    "logZ": -17.08176148160058,
+    "n_params": 2
+  },
+  "log_bayes_factor": 1.8868889769658335,
+  "bayes_factor": 6.598807672074212,
+  "comparison_to_T177": {
+    "T177_log_bf": 3.06,
+    "T177_bayes_factor": 21.26,
+    "delta_logbf": -1.1731110230341666
+  },
+  "posterior_credible_16_84": {
+    "model_A_multi_resonance": {
+      "sigma_0": {
+        "median": 2.6487988342422533,
+        "mean": 3.731771655067831,
+        "credible_16_84": [
+          0.38331401940117266,
+          7.674508074812425
+        ]
+      },
+      "a_slope": {
+        "median": 3.841322144824769,
+        "mean": 3.553552581717891,
+        "credible_16_84": [
+          2.447671039180586,
+          4.393274603788632
+        ]
+      },
+      "v_target_1": {
+        "median": 706.2245895284133,
+        "mean": 585.4691269878357,
+        "credible_16_84": [
+          131.4809744242902,
+          912.1376871175023
+        ]
+      },
+      "v_target_2": {
+        "median": 144.11124819755742,
+        "mean": 267.0065242734012,
+        "credible_16_84": [
+          28.013235683827446,
+          616.6495983520491
+        ]
+      },
+      "v_target_3": {
+        "median": 281.4669781494198,
+        "mean": 380.14509364537446,
+        "credible_16_84": [
+          102.6055438614033,
+          753.0418826186626
+        ]
+      },
+      "v_target_4": {
+        "median": 132.28111570079597,
+        "mean": 336.0679474622655,
+        "credible_16_84": [
+          83.7994904322481,
+          780.089953369843
+        ]
+      },
+      "log_w_1": {
+        "median": -2.6886778644233966,
+        "mean": -3.0115269016361093,
+        "credible_16_84": [
+          -4.639855860457269,
+          -1.5732658787746518
+        ]
+      },
+      "log_w_2": {
+        "median": -3.163560887014283,
+        "mean": -3.454560216961209,
+        "credible_16_84": [
+          -5.019149539176421,
+          -2.251349529531948
+        ]
+      },
+      "log_w_3": {
+        "median": -4.377181927138026,
+        "mean": -3.9769949798901596,
+        "credible_16_84": [
+          -5.456106651327547,
+          -2.0689790127944874
+        ]
+      },
+      "log_w_4": {
+        "median": -3.461533515812649,
+        "mean": -3.5866035482106002,
+        "credible_16_84": [
+          -5.188024123530938,
+          -2.1240131193166163
+        ]
+      },
+      "log_sigma_peak_1": {
+        "median": -0.05261016441362676,
+        "mean": 0.6217551578960369,
+        "credible_16_84": [
+          -1.0078427703343018,
+          2.837229231191495
+        ]
+      },
+      "log_sigma_peak_2": {
+        "median": 2.8969184573688382,
+        "mean": 2.393007373728859,
+        "credible_16_84": [
+          -0.3289768716295743,
+          4.459150757638075
+        ]
+      },
+      "log_sigma_peak_3": {
+        "median": 0.13681053660958664,
+        "mean": 0.7178657788863094,
+        "credible_16_84": [
+          -1.4035809853042953,
+          3.369756244543437
+        ]
+      },
+      "log_sigma_peak_4": {
+        "median": 3.0435211669364026,
+        "mean": 2.833246385681068,
+        "credible_16_84": [
+          0.009248570028033067,
+          5.2808387788578735
+        ]
+      },
+      "halo_mix": {
+        "median": 0.34241660419919917,
+        "mean": 0.4361020837554133,
+        "credible_16_84": [
+          0.2208532945501749,
+          0.7511754974508923
+        ]
+      },
+      "_meta": {
+        "basis": "unweighted percentile 16/50/84",
+        "n_samples": 3413
+      }
+    },
+    "model_B_constant": {
+      "sigma_0": {
+        "median": 4.58895011345888,
+        "mean": 4.543549322143349,
+        "credible_16_84": [
+          1.478840567339657,
+          7.566450382967209
+        ]
+      },
+      "a_slope": {
+        "median": 3.207203757316281,
+        "mean": 2.979017078977394,
+        "credible_16_84": [
+          1.6334738925727996,
+          4.240534595160447
+        ]
+      },
+      "_meta": {
+        "basis": "unweighted percentile 16/50/84",
+        "n_samples": 257
+      }
+    }
+  },
+  "HONEST_LIMITATIONS": [
+    "Published \u03c3_unc values are approximate extractions from papers (not posterior chains)",
+    "Horigome+ 2025 reports a single combined \u03c3/m; we split across 5 v bins",
+    "Some \u03c3_unc values may not include all systematics (e.g., velocity convention)"
+  ],
+  "reproducibility": {
+    "seed": 20261111,
+    "rng": "numpy.random.default_rng",
+    "recorded_at": "2026-11-11T12:37:12Z",
+    "python": "3.12.13",
+    "numpy": "2.5.2",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "sampler": "dynesty 3.x nested sampling",
+    "n_posterior_samples": 3413,
+    "sampler_options": {
+      "nlive_A": 200,
+      "nlive_B": 100,
+      "dlogz": 0.5
+    },
+    "note": "Seed recorded from 2026-11-11 onwards. The log Z values stored in this artifact were produced by an earlier unseeded run; from this change on the run is re-derivable from the recorded seed."
+  },
+  "seed": 20261111
+}
