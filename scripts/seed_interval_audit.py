@@ -99,7 +99,9 @@ NON_RESULT_ALLOWLIST = {
 CORRUPT_ALLOWLIST = {
     "amuse_focused_rerun_with_sashimi_2026_09_12.json":
         "truncated at 203,917 bytes mid-value (ends at '\"core_collapsed\":'); the AMUSE benchmark "
-        "writer cut the file off. Open finding: re-run the benchmark or archive the fragment.",
+        "writer cut the file off. Archived 2026-11-12 to "
+        "v0.3-prelim/data/results/_archive_amuse_20261112/ (branch dropped 2026-11-11; no AMUSE "
+        "number is cited anywhere). Entry retained so the disclosure stays on the record.",
 }
 
 
@@ -242,6 +244,21 @@ def main() -> int:
                     counts["legacy_gap"] += 1
             rows.append({"file": p.name, "seed": seeded, "interval": intervalled,
                          "run_date": run_date.isoformat(), "date_basis": basis})
+
+    # Allowlisted corrupt artifacts that have been ARCHIVED (moved out of
+    # data/results) stay disclosed: the allowlist entry with its reason is the
+    # record, and test_repro_contract asserts the disclosure never disappears.
+    scanned_names = {p.name for p in files}
+    for name, reason in sorted(CORRUPT_ALLOWLIST.items()):
+        if name not in scanned_names:
+            corrupt.append({"file": name,
+                            "problem": "not present in data/results - archived; "
+                                       "disclosure retained",
+                            "size_bytes": None,
+                            "allowlisted": True,
+                            "reason": reason})
+            counts["corrupt"] += 1
+            counts["corrupt_allowlisted"] += 1
 
     inventory = {
         "generated_by": "scripts/seed_interval_audit.py",

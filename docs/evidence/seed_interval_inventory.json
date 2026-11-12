@@ -1,30 +1,30 @@
 {
   "generated_by": "scripts/seed_interval_audit.py",
-  "generated_at": "2026-11-11T11:38:58+00:00",
+  "generated_at": "2026-11-12T11:21:15+00:00",
   "conduct_date": "2026-11-11",
   "counts": {
-    "total": 487,
-    "stochastic": 203,
-    "seed": 2,
-    "interval": 136,
-    "both": 0,
-    "legacy_gap": 203,
+    "total": 484,
+    "stochastic": 202,
+    "seed": 9,
+    "interval": 138,
+    "both": 7,
+    "legacy_gap": 195,
     "forward_violation": 0,
     "allowlisted_nonresult": 1,
     "corrupt": 1,
     "corrupt_allowlisted": 1,
     "date_from_artifact": 84,
-    "date_from_git": 399,
+    "date_from_git": 397,
     "date_from_mtime": 3
   },
   "forward_rule_violations": [],
   "corrupt_artifacts": [
     {
       "file": "amuse_focused_rerun_with_sashimi_2026_09_12.json",
-      "problem": "unparseable JSON (JSONDecodeError)",
-      "size_bytes": 203917,
+      "problem": "not present in data/results - archived; disclosure retained",
+      "size_bytes": null,
       "allowlisted": true,
-      "reason": "truncated at 203,917 bytes mid-value (ends at '\"core_collapsed\":'); the AMUSE benchmark writer cut the file off. Open finding: re-run the benchmark or archive the fragment."
+      "reason": "truncated at 203,917 bytes mid-value (ends at '\"core_collapsed\":'); the AMUSE benchmark writer cut the file off. Archived 2026-11-12 to v0.3-prelim/data/results/_archive_amuse_20261112/ (branch dropped 2026-11-11; no AMUSE number is cited anywhere). Entry retained so the disclosure stays on the record."
     }
   ],
   "allowlisted_nonresults": {
@@ -33,12 +33,9 @@
   },
   "legacy_gap_files": [
     "2026-09-03_t87_lz_forward_prediction.json",
-    "amuse_bullet_dwarf_calibration_2026_09_12.json",
-    "amuse_seed_comparison_2026_09_12.json",
     "canonical_numbers.json",
     "ch04_width_resolution_2026_09_12.json",
     "ch27_peak_sensitivity_2026_09_12.json",
-    "ch27_sigma_m_peak_from_amuse_2026_09_12.json",
     "ch27_three_way_comparison_2026_09_12.json",
     "checkpoint_t10_vdep.json",
     "h3_convergence_nlive1000.json",
@@ -102,7 +99,7 @@
     "t18_smoke_grid.json",
     "t18_two_component_fit.json",
     "t197_deep_lz_analysis.json",
-    "t205_full_likelihood_published.json",
+    "t205_full_likelihood_published_PRE_20261111_backup.json",
     "t207_final_summary.json",
     "t207b_emcee.json",
     "t207b_long_emcee.json",
@@ -121,7 +118,6 @@
     "t37_t22_with_fitted_beta_seg.json",
     "t39_prior_robustness.json",
     "t39_tier3_epsilon_alpha_joint_fit.json",
-    "t41_mediator_mass_joint_fit.json",
     "t41_mediator_mass_joint_fit_PRE_v05_backup_20260826_155808.json",
     "t41_mediator_mass_joint_fit_smoke_bullet_sens.json",
     "t41_mediator_mass_joint_fit_smoke_cheap_nc3_nf3.json",
@@ -134,10 +130,7 @@
     "t41_mediator_mass_joint_fit_t88b_all.json",
     "t41_mediator_mass_joint_fit_t88b_erosita_only.json",
     "t41_mediator_mass_joint_fit_t88b_none.json",
-    "t41_mediator_mass_joint_fit_t88b_v07_with_erosita_nlive2000.json",
     "t41_mediator_mass_joint_fit_t88b_xrism_only.json",
-    "t41_mediator_mass_joint_fit_t88ce_sampling_variance_control.json",
-    "t41_mediator_mass_joint_fit_t88ce_v08_with_euclid_lensing_and_subhalo_forecast_nlive2000.json",
     "t41_mediator_mass_joint_fit_T9030_A_baseline.json",
     "t41_mediator_mass_joint_fit_T9030_B_t90v29_ksfr_on.json",
     "t41_mediator_mass_joint_fit_T9030_C_t90v29_ksfr_off.json",
@@ -189,7 +182,6 @@
     "t41_mediator_mass_joint_fit_v0_6_xi_free.json",
     "t41_mediator_mass_joint_fit_v0_7_dampe_only_nlive500.json",
     "t41_mediator_mass_joint_fit_v0_7_lss_only_nlive500.json",
-    "t41_mediator_mass_joint_fit_v0_7_with_dampe_lss_nlive2000.json",
     "t41_mediator_mass_joint_fit_v0_7_with_dampe_lss_nlive500.json",
     "t43_inelastic_dm_joint_fit.json",
     "t46_yukawa_sommerfeld_joint_fit.json",
@@ -245,20 +237,6 @@
       "date_basis": "git commit date"
     },
     {
-      "file": "amuse_bullet_dwarf_calibration_2026_09_12.json",
-      "seed": false,
-      "interval": false,
-      "run_date": "2026-09-12",
-      "date_basis": "artifact field"
-    },
-    {
-      "file": "amuse_seed_comparison_2026_09_12.json",
-      "seed": false,
-      "interval": false,
-      "run_date": "2026-09-12",
-      "date_basis": "git commit date"
-    },
-    {
       "file": "canonical_numbers.json",
       "seed": false,
       "interval": true,
@@ -278,13 +256,6 @@
       "interval": false,
       "run_date": "2026-09-12",
       "date_basis": "artifact field"
-    },
-    {
-      "file": "ch27_sigma_m_peak_from_amuse_2026_09_12.json",
-      "seed": false,
-      "interval": false,
-      "run_date": "2026-09-12",
-      "date_basis": "git commit date"
     },
     {
       "file": "ch27_three_way_comparison_2026_09_12.json",
@@ -729,9 +700,23 @@
     },
     {
       "file": "t205_full_likelihood_published.json",
+      "seed": true,
+      "interval": true,
+      "run_date": "2026-11-11",
+      "date_basis": "artifact field"
+    },
+    {
+      "file": "t205_full_likelihood_published_PRE_20261111_backup.json",
       "seed": false,
       "interval": false,
       "run_date": "2026-09-23",
+      "date_basis": "artifact field"
+    },
+    {
+      "file": "t205_full_likelihood_published_PRE_nl1000_20261111.json",
+      "seed": true,
+      "interval": true,
+      "run_date": "2026-11-11",
       "date_basis": "artifact field"
     },
     {
@@ -862,7 +847,7 @@
     },
     {
       "file": "t41_mediator_mass_joint_fit.json",
-      "seed": false,
+      "seed": true,
       "interval": true,
       "run_date": "2026-09-06",
       "date_basis": "git commit date"
@@ -953,7 +938,7 @@
     },
     {
       "file": "t41_mediator_mass_joint_fit_t88b_v07_with_erosita_nlive2000.json",
-      "seed": false,
+      "seed": true,
       "interval": true,
       "run_date": "2026-09-04",
       "date_basis": "git commit date"
@@ -967,14 +952,14 @@
     },
     {
       "file": "t41_mediator_mass_joint_fit_t88ce_sampling_variance_control.json",
-      "seed": false,
+      "seed": true,
       "interval": true,
       "run_date": "2026-09-06",
       "date_basis": "git commit date"
     },
     {
       "file": "t41_mediator_mass_joint_fit_t88ce_v08_with_euclid_lensing_and_subhalo_forecast_nlive2000.json",
-      "seed": false,
+      "seed": true,
       "interval": true,
       "run_date": "2026-09-06",
       "date_basis": "git commit date"
@@ -1338,7 +1323,7 @@
     },
     {
       "file": "t41_mediator_mass_joint_fit_v0_7_with_dampe_lss_nlive2000.json",
-      "seed": false,
+      "seed": true,
       "interval": true,
       "run_date": "2026-09-02",
       "date_basis": "git commit date"

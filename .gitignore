@@ -106,3 +106,7 @@ _n24_*
 #     .snakemake/metadata stores base64-encoded absolute Windows paths) ---
 .snakemake/
 .gitignore.strata
+
+# Local tool-generated code-intelligence notes (GitNexus); host-local, not part of the record
+AGENTS.md
+CLAUDE.md
