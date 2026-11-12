@@ -380,6 +380,8 @@ The T88.E-driven v0.7→v0.8 re-run (nlive=2000) shipped with:
 | tension | 0.60 | **0.81** | +0.21 (still below 1.0; previously mis-reported as 'unchanged') |
 | effective channels | 21 | **22** | +1 |
 
+**2026-11-12 T88.CE regeneration (corrected Born factor, pinned seed 20261112):** The v0.8 artifact was regenerated, superseding the post-T88.E values above. The new standing v0.8 record is: log Z = **−165.32 ± 0.081**, m_χ = **383 GeV** (MAP), m_φ = **513 MeV** (MAP), g_χ = 0.886, σ/m₀ = 0.055 cm²/g (MAP), a = **0.20** (MAP), tension = **0.74σ** (not significant). The corrected v0.7 values (nlive=2000, seed 20261112) are: log Z = **−164.87 ± 0.083**, m_χ = **311 GeV** (MAP), m_φ = **697 MeV** (MAP), σ/m₀ = **0.24 cm²/g** (MAP), a = **0.08** (MAP), tension = **0.86σ**. Seed sensitivity at nlive=2000 (three pinned seeds): a_difference 0.739 / 0.693 / 0.541 (all not significant); σ/m₀ at MAP 0.055 / 0.067 / 0.270.
+
 **Standing posture preserved.** No new channels were required to
 make this work — T88.E is a forecast based on the projected Euclid
 Q1 dN/dM sensitivity.

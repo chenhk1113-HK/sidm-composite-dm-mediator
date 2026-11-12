@@ -7,7 +7,7 @@
 
 ---
 
-## §0 — Standing posture: orthogonal-physics in practice (locked 2026-08-10, reaffirmed 2026-09-02 in T75; refined 2026-09-02 in T78/T79; LZ-paper-validated 2026-09-02 in T80; XENONnT+PandaX competitor watch added 2026-09-02 in T81; T86.7j plausibility audit 2026-09-03; **T87 forward prediction 2026-09-03: composite-DM *cannot* claim LZ event**; T108 Portal B inelastic 2026-09-08: Δlog Z=+0.51 (best available door, not significant); T110 magnetic-moment Ls₁₀ 2026-09-08: Δlog Z=-10.72 (Door C CLOSED); T111 multi-component DM 2026-09-08: Δlog Z=-5.72 (Door D CLOSED); **T112 high-res 8D dynesty 2026-09-08: Δlog Z=+2.13 (Door B' OPENS, T90 merge criterion #5 SATISFIED)**)
+## §0 — Standing posture: orthogonal-physics in practice (locked 2026-08-10, reaffirmed 2026-09-02 in T75; refined 2026-09-02 in T78/T79; LZ-paper-validated 2026-09-02 in T80; XENONnT+PandaX competitor watch added 2026-09-02 in T81; T86.7j plausibility audit 2026-09-03; **T87 forward prediction 2026-09-03: composite-DM *cannot* claim LZ event**; T108 Portal B inelastic 2026-09-08: Δlog Z=+0.51 (best available door, not significant); T110 magnetic-moment Ls₁₀ 2026-09-08: Δlog Z=-10.72 (Door C CLOSED); T111 multi-component DM 2026-09-08: Δlog Z=-5.72 (Door D CLOSED); **T112 high-res 8D dynesty 2026-09-08: Δlog Z=+2.13 (Door B' OPENS, T90 merge criterion #5 SATISFIED)**; **T88.CE regeneration 2026-11-12: corrected Born factor, pinned seed 20261112, nlive=2000**)
 
 **The project's headline σ/m = 0.06 cm²/g (T41 v0.8, nlive=2000;
 post-T88.E, was 0.27 cm²/g at v0.7)
@@ -16,6 +16,8 @@ cm² of cross-section per gram of dark matter).** This is a **practically
 independent** observable from σ_DM-nucleon (the dark-matter-nucleon
 scattering cross-section measured by direct-detection experiments like
 LZ, XENONnT, PandaX).
+
+**2026-11-12 T88.CE regeneration note:** The v0.7 T41 artifact was regenerated on 2026-11-12 under the corrected Born transfer factor with pinned seed `T41_SEED=20261112`, `T41_NLIVE=2000`. The corrected v0.7 values (superseding the pre-regeneration log Z = -163.29 ± 0.085, m_χ = 770 GeV, m_φ = 453 MeV) are: log Z = **−164.87 ± 0.083**, MAP m_χ = **311 GeV**, m_φ = **697 MeV**, σ/m₀ = **0.24 cm²/g**, velocity index a = **0.08**, tension = **0.86σ**, ε_γ = **1.41 × 10⁻²⁰**, α_X = **4.18 × 10⁻⁸**. The v0.8 artifact was also regenerated: log Z = **−165.32 ± 0.081**, MAP m_χ = **383 GeV**, m_φ = **513 MeV**, g_χ = 0.886, σ/m₀ = **0.055 cm²/g**, a = **0.20**, Yukawa tension = **0.74σ** (not significant).
 
 | Observable | Measured by | Order of magnitude | Project status |
 |---|---|---|---|

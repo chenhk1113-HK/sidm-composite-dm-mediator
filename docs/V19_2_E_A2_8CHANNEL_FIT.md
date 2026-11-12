@@ -45,7 +45,7 @@ Best-fit parameters:
 - `log_sigma_peaks = [4.05, -0.29, 1.31, 3.73]` → `sigma_peaks = [11152, 0.51, 20.3, 5392]`
 - `halo_mix = 0.54`
 
-Compare to T205 dynesty result: log Z = -14.285, BF = 11.15.
+Compare to T205 dynesty result: log Z = -16.01 +/- 0.07, BF = 3.14 +/- 0.03.
 Compare to Phase 44 v1 (3-channel hand-set): best logL = -11.578.
 
 ## R88(71) pre-claim checklist — flagged

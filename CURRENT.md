@@ -14,22 +14,9 @@
 stated and added tooling; the pairing declaration above, the canonical fit and every headline
 number are untouched. Full record: `docs/REVIEW_RESPONSE_2026_11_11.md`.
 
-* **Paper §10.5 now compares the pair its numbers come from.** log B = 2.411 and the Phase 54
-  BIC penalty belong to *15-parameter multi-resonance vs constant σ/m*, not to the 4-parameter vs
-  7-parameter basin comparison; the section is split into an evidence comparison and a basin-coverage
-  comparison, and the "prior volume 3.6× larger" explanation is withdrawn (the Occam factor is
-  already inside dynesty's log Z, so multi-resonance wins **despite** the larger prior volume).
-  README and REFEREE_RESPONSES already carried this reading; the paper was the outlier.
-* **Stochastic results must now record a seed and an interval.** `v0.3-prelim/code/repro_contract.py`
-  writes both, `scripts/seed_interval_audit.py` inventories the gap (487 artifacts, 203 stochastic,
-  2 with a seed, 136 with an interval, 0 with both) and fails closed for anything dated from
-  2026-11-11 onward. Published artifacts were not regenerated.
-* **README's Python is 3.12**, matching CI and the working venv.
-* **CI health measured, not assumed:** `Self-check` active, the 15 most recent runs green on
-  `wip/v19.2-F-init` (2026-11-08 → 2026-11-10). `v0.3-prelim/tests/test_ci_workflow_wiring.py`
-  keeps the drift classes from returning, and `self_check.yml` runs them as CI Layer G.
-* **Open finding:** `v0.3-prelim/data/results/amuse_focused_rerun_with_sashimi_2026_09_12.json`
-  is truncated mid-value and cannot be parsed; disclosed rather than hidden.
+* **DROPPED (2026-11-11):** the AMUSE bullet-dwarf branch. Re-running `v0.3-prelim/code/amuse_rerun_with_sashimi.py` with scipy installed (seed 20260912) returned sigma/m_peak = 0.100 +/- 0.013 cm^2/g against the 2026-09-12 record of 3.07 +/- 0.51, a 30x shift from re-running the same script. Three independent defects make no number from it citable: (a) the sigmoid slope fit is degenerate, n = 6.35 +/- 3478; (b) the run's own resolution check fails, SASHIMI r_core = 0.126 kpc against softening 0.050 kpc, so the core is at/below AMUSE resolution; (c) the encounter is 358 km/s against V_max ~ 50 km/s for a 10^9 Msun halo (~7x), i.e. the kinetic-scattering regime, not the core-collapse regime the comparison assumes. Bound counts are non-monotonic (16/11 at 0.5 cm^2/g, 0/1024 at 3.0 near 2 Gyr). The 2026-11-11 run overwrote `amuse_rerun_with_sashimi_2026_09_12.json` (overwrite accepted by the user); the script's hard-coded `date` is now the run date. The superseded 2026-09-12 artifact is preserved at `AppData/Local/hermes/cache/scratch/review_qwen4/amuse_fragment_backup_20260912.json` (203,917 bytes). No sigma/m_peak from AMUSE is cited anywhere; it is absent from the paper draft and from PAPER_STANDING_NUMBERS.md. **Archived 2026-11-12:** all six AMUSE artifacts (`amuse_bullet_dwarf_calibration`, `amuse_focused_rerun_with_sashimi`, `amuse_rerun_with_sashimi`, `amuse_seed_comparison`, `amuse_simulation_benchmark`, `ch27_sigma_m_peak_from_amuse`, all `_2026_09_12`) were moved to `v0.3-prelim/data/results/_archive_amuse_20261112/` — nothing deleted, restore with a single `mv`. Rationale and the dependency check are in `_archive_amuse_20261112/ARCHIVE_NOTE.md`: no `ref_json` entry, no paper mention, no test reads them.
+
+* **SUPERSEDED (2026-11-12):** seven legacy fit pipelines are no longer maintained sources — `t41_v08_magnetic_moment_8d.py`, `t112_highres_8d_dynesty.py`, `t43_inelastic_joint_fit.py`, `t46_yukawa_sommerfeld_joint_fit.py`, `t116_sequential_t90_value.py`, `phase17_core_collapse_gD.py`, `phase27_three_portal_diagnostic.py`. GitNexus lists all of them as upstream consumers of `t40_yukawa_sigma_m.py::sigma_m_cm2_per_g` (202 impacted symbols, CRITICAL risk, 9 affected execution flows), so their stored artifacts predate the corrected Born transfer factor. They were NOT regenerated because no tracked claim depends on them: none appears in the `ref_json` claim map in `scripts/audit_claims.py`, none in `v0.3-prelim/docs/PAPER_STANDING_NUMBERS.md`, none in `PAPER_V1_DRAFT.md`. The standing T88.CE numbers come from `scripts/regenerate_t88ce_chain.py` at `T41_NLIVE=2000`, `T41_SEED=20261112`. Two consumers of the same function ARE maintained, because `phase23_cloud9_nuisance_marginalization.json` is a `ref_json` claim source and reads `t90_v45_multi_portal_joint_fit_nlive200.json`: both were regenerated on 2026-11-12 (pre-regeneration copies in `data/results/_chain_backup_20261111/pre_claim_pipeline_20261112/`).
 
 ## Standing: `CMAnchor-2026-11-10` — c-M anchor labelling, defect D9 resolved, slots [56]-[58]
 
@@ -81,7 +68,9 @@ Drift-guard audit (`scripts/t82_audit.py`): **120/120 ALL CLEAR** — the audito
 literal was re-synced from the stale `44/44` on 2026-11-03 and re-synced again on 2026-11-04 when
 35 derived value cross-checks were added (85 -> 120). The standing table in `scripts/t82_audit.py`
 also stopped asserting the v0.7 MAP (770 GeV / 453 MeV / 0.60σ) as CURRENT.md's standing claim; it
-now asserts the v0.8 MAP (478 GeV / 488 MeV / 0.81σ), so this line, the docs and the tool agree.
+now asserts the v0.8 MAP (**383 GeV / 513 MeV / 0.74σ**), so this line, the docs and the tool agree.
+
+**2026-11-12 T88.CE regeneration note:** The T41 v0.8 artifact was regenerated on 2026-11-12 under the corrected Born transfer factor with pinned seed `T41_SEED=20261112`, `T41_NLIVE=2000`. The new standing record (superseding the pre-regeneration v0.8 MAP of 478 GeV / 488 MeV / 0.81σ) is: log Z = **−165.32 ± 0.081**, MAP m_χ = **383 GeV**, m_φ = **513 MeV**, g_χ = 0.886, σ/m₀ = 0.055 cm²/g, velocity index a = **0.20**, Yukawa tension = **0.74σ** (threshold 1.0, NOT significant). The pre-regeneration v0.7 values (nlive=2000, seed 20261112) were: log Z = **−164.87 ± 0.083**, MAP m_χ = **311 GeV**, m_φ = **697 MeV**, σ/m₀ = **0.24 cm²/g**, a = **0.08**, tension = **0.86σ**. Seed sensitivity at nlive=2000 (three pinned seeds): a_difference 0.739 / 0.693 / 0.541 (all not significant); σ/m₀ at MAP 0.055 / 0.067 / 0.270.
 
 **What the v19.2-E chain did (stages 1-2 of 4 complete; `docs/V19_2_E_CONSOLIDATED_REPORT_2026-11-03.md`):**
 - **Housekeeping save + tag** (`ef427e6`): n25/n26 CHANGELOG and VERSION labels backfilled — the

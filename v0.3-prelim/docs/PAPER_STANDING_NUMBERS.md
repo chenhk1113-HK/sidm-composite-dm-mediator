@@ -56,14 +56,14 @@ The 11-bundle §2.7 loop ended in R35-POLISH (`c9f6b4c`) with §2.7 marked PARTI
 
 | Statistic | Value | Source | Note |
 |---|---|---|---|
-| Bayes log B (multi-resonance vs constant) | **2.411** | `data/results/t205_full_likelihood_published.json` | Moderate evidence, published σ_unc |
-| Bayes B | 11.149 | same | Down from T177's 3.06 |
+| Bayes log B (multi-resonance vs constant) | **1.14 +/- 0.03** | `data/results/t205_full_likelihood_published.json` | Weak-to-anecdotal evidence (B = 3.14); nlive=1000, seeds 20261111/12/13; the earlier 2.411 (B = 11.149) was an under-resolved nlive=200 draw |
+| Bayes B | 3.14 +/- 0.03 | same | Down from T177's 3.06 and from the superseded nlive=200 value 11.149 |
 | T177 log B (hand-picked σ_unc) | 3.06 | (deprecated, see T205) | Superseded by T205 |
 | Phase 42 SPARC log Z (Burkert) | -963 | (separate run) | Burkert wins |
 | Phase 42 SPARC log Z (SIDM hybrid) | -3300 | (separate run) | SIDM loses by wide margin |
 | Phase 54 BIC penalty (3-channel) | ΔBIC = +3.22 favoring constant | `data/results/phase54_joint_comparison.json` (`headline.bic_delta_3channel`) | 15 vs 1 params; scoring rule, one channel = one datum |
-| Bayes log Z (multi-resonance, 15 params) | **-14.285** | `data/results/t205_full_likelihood_published.json` (`model_A_multi_resonance.logZ`) | dynesty, published σ_unc |
-| Bayes log Z (constant σ/m, 2 params) | **-16.697** | `data/results/t205_full_likelihood_published.json` (`model_B_constant.logZ`) | dynesty, published σ_unc |
+| Bayes log Z (multi-resonance, 15 params) | **-15.94** | `data/results/t205_full_likelihood_published.json` (`model_A_multi_resonance.logZ`) | dynesty nlive=1000, published σ_unc; 3-seed median -16.01 ± 0.07 |
+| Bayes log Z (constant σ/m, 2 params) | **-17.08** | `data/results/t205_full_likelihood_published.json` (`model_B_constant.logZ`) | dynesty nlive=1000, published σ_unc; 3-seed median -17.10 ± 0.08 |
 | T177 Bayes B (hand-picked σ_unc) | 21.263 | `data/results/t177_bayes_factor.json` (`bayes_factor`) | superseded by T205 |
 | T177 log Z pair (hand-picked σ_unc) | -8.123 ± 0.424 / -11.180 ± 0.118 | `data/results/t177_bayes_factor.json` (`model_A_multi_resonance`, `model_B_constant`) | dynesty logZ ± logZerr |
 | Phase 54 ΔBIC (2-channel variant) | -1.391 | `data/results/phase54_joint_comparison.json` (`headline.bic_delta_2channel`) | sign flips against the 3-channel variant |

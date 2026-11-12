@@ -173,3 +173,40 @@ or an interval fails CI rather than sitting in the inventory.
    is a path inventory with no sampled quantity, now in `NON_RESULT_ALLOWLIST`, and
    `t120_cloud9_bound_rederivation.json` was dated 2026-11-11 by mtime although its content last changed in
    commit of 2026-11-06 and it stores no sampler field). The rule's real test is the next seeded run.
+
+
+---
+
+## Late-round correction (2026-11-11, after the tightened re-run)
+
+The T205 numbers quoted above (logZ -14.285 / -16.697, log B = 2.411, B = 11.149) came from the
+published nlive=200 run and are **superseded**. Re-running T205 at nlive=1000 with three seeds
+(20261111, 20261112, 20261113; 10,528-17,668 posterior samples per model) gives
+
+| quantity | nlive=1000, median +/- stdev over 3 seeds | nlive=200 (superseded) |
+|---|---|---|
+| log Z_A (multi-resonance) | -16.01 +/- 0.07 | -14.285 |
+| log Z_B (constant sigma/m) | -17.10 +/- 0.08 | -16.697 |
+| log Bayes factor | **1.14 +/- 0.03** (B = 3.14) | 2.411 (B = 11.149) |
+
+At nlive=200 the same quantity moved by 1.887 -> 2.654 -> 1.238 across three seeds (spread 1.42);
+at nlive=1000 the spread collapses to 0.055. The nlive=200 estimator was therefore both noisy and
+biased high for model A (15-17 dimensional prior), which inflated log Z_A by about 1.7.
+
+Verdict change: the multi-resonance model is still preferred, but the evidence is **weak**
+(B ~ 3), not moderate. Every downstream statement quoting B = 11.149 or "moderate evidence"
+needs the same correction.
+
+
+## Decisions logged — round 3 (2026-11-11)
+
+| # | Decision | Executed | Evidence |
+|---|---|---|---|
+| 1 | Refresh the standing joint-fit map | In flight | `t41_mediator_mass_joint_fit.py` re-run with `T41_NLIVE=2000` (the snapshot's nlive), all T88 channels default-ON, under the corrected Born factor. On completion: `scripts/t88ce_postprocess.py` then `scripts/canonical_numbers.py`, then README rows. Pre-refresh snapshot backed up at `review_qwen4/t88ce_headline_PRE_20261111.json`. |
+| 2 | AMUSE artifact overwrite accepted | Done | New run stands; `amuse_rerun_with_sashimi.py` `date` changed from hard-coded "2026-09-12" to the run date. Original 2026-09-12 output preserved in scratch backup. |
+| 3 | Drop the AMUSE branch | Done | Banner in `v0.3-prelim/code/README_AMUSE.md`; open finding in `CURRENT.md` replaced with the DROPPED resolution and its three defects. AMUSE appears in neither `PAPER_V1_DRAFT.md` nor `PAPER_STANDING_NUMBERS.md`, so no paper claim was removed. |
+
+Carried, not silently dropped: `scripts/seed_interval_audit.py:100` still maps
+`amuse_focused_rerun_with_sashimi_2026_09_12.json` (the truncated artifact named in CHANGELOG and
+CURRENT.md). It was left in place so the audit keeps reporting the gap; deleting the mapping would
+hide it rather than resolve it. `CHANGELOG.md` keeps its historical entry.

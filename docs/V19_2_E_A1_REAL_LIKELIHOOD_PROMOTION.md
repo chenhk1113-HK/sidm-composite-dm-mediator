@@ -26,7 +26,7 @@ budgets, not **chosen** by hand.
 |---|---|---|---|---|---|
 | Phase 44 v1 (3-channel hand-set Gaussian) | 3 | — | — | — | "+8.10 log-unit improvement" |
 | Phase 44 v1 (3-channel) under paper's canonical σ/m(v) at f_H=0.297 | 8 | 1 | 0 | 7 | "1 of 8 channels pass" |
-| T205 (8-channel published σ_unc, full dynesty) | 8 | — | — | — | log Z = -14.285, BF = 11.15 |
+| T205 (8-channel published σ_unc, full dynesty) | 8 | — | — | — | log Z = -16.01 +/- 0.07, BF = 3.14 +/- 0.03 |
 
 The canonical Gaussian σ/m(v) (per `scripts/constants.py` Phase 44 free
 fit: σ_0=0.052, a_slope=1.93, σ_peak=174, v_target=29.4, σ₁=4.4, f_H=0.297)
@@ -109,7 +109,7 @@ constraints and the Cloud-9 v=28 floor.
    T205 uses a v²-space Lorentzian Breit-Wigner with 4 resonances and
    15 free parameters; this script uses the paper's canonical Gaussian
    form (single resonance, σ_peak=174, σ₁=4.4). The T205 model A
-   full dynesty result (log Z = -14.285) was found by T205's
+   full dynesty result (log Z = -16.01 +/- 0.07) was found by T205's
    parameterization, not the paper's. The paper's Gaussian form is
    what the paper's headline numbers use (σ/m(15)=2.85, σ/m(28)=166).
 

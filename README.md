@@ -19,7 +19,7 @@ A velocity-dependent self-interacting dark matter (SIDM) architecture — a mult
 
 What the project produces is a **constraint map and a no-go catalogue**, not a unified particle model. At the current best fit — the v19.2-E A.2 5-parameter differential-evolution fit under the published σ_unc convention — it clears **5 PASS / 2 MARGINAL / 1 FAIL** on the 8 published channel slots the likelihood evaluates.
 
-The standing joint fit (T41 v0.8 rerun, nlive=2000) sits at **σ/m₀** = **0.06 cm²/g**, m_χ = **478 GeV**, m_φ = **488 MeV**, g_χ = 0.964, Bayesian evidence log Z = **−164.87 ± 0.084**, and a velocity-slope tension of **0.81σ** against the Yukawa-predicted slope — under the 1.0 threshold the project set for itself.
+The standing joint fit (T41 v0.8 rerun, nlive=2000) sits at **σ/m₀** = **0.06 cm²/g**, m_χ = **383 GeV**, m_φ = **513 MeV**, g_χ = 0.886, Bayesian evidence log Z = **−165.32 ± 0.081**, and a velocity-slope tension of **0.74σ** against the Yukawa-predicted slope — under the 1.0 threshold the project set for itself.
 
 Two results survive every forward path that was tested (§2.6a, §9.17b). Five UV-completion routes are excluded. The attempt to derive the phenomenological σ/m(v) from a single-Yukawa UV sector **failed**: three independent numerical paths converge on the same negative verdict (v19.2-F Phase 3).
 
@@ -58,24 +58,45 @@ Magnetic dipole DM; hidden U(1) with a 10 MeV pseudo-Dirac partner; GeV-scale in
 
 ### 5. Numbers of record
 
-Historical, superseded (v0.7 MAP, pre-T88.E): log Z **−163.29**, m_χ 770 GeV, m_φ 453 MeV, velocity index a +0.34, tension **0.60σ**. The table below is the v0.8 MAP.
+Historical, superseded (v0.7 MAP, pre-T88.E, nlive=2000, seed 20261112): log Z **−164.87 ± 0.083**, m_χ **311 GeV**, m_φ **697 MeV**, σ/m₀ **0.24 cm²/g**, velocity index a **0.08**, tension **0.86σ**, ε_γ = **1.41 × 10⁻²⁰**, α_X = **4.18 × 10⁻⁸**. The table below is the v0.8 MAP.
 
 | Quantity | Value | Note |
 |---|---|---|
-| **σ/m₀** (joint fit, galactic scale) | **0.06 cm²/g** | T41 v0.8 MAP, nlive=2000 |
-| Bayesian evidence log Z | **−164.87 ± 0.084** | v0.8 posterior |
-| m_χ | **478 GeV** | posterior median 503 GeV (68% CI 338–770 GeV) |
-| m_φ | **488 MeV** | posterior median 598 MeV (68% CI 472–759 MeV) |
-| g_χ | 0.964 | MAP; posterior median 1.549 |
-| Velocity index a | +0.132 | tension vs the Yukawa slope **0.81σ** |
+| **σ/m₀** (joint fit, galactic scale) | **0.227 cm²/g [0.062, 0.281]** | posterior 16/50/84; MAP 0.055 lies *below* the 16th percentile |
+| Bayesian evidence log Z | **−165.323 ± 0.081** | T41 v0.8 headline, nlive=2000, seed 20261112 |
+| m_χ | **461 GeV [287, 742]** | 16/50/84; MAP 383 GeV |
+| m_φ | **669 MeV [495, 908]** | 16/50/84; MAP 513 MeV |
+| g_χ | **1.47 [1.15, 1.81]** | 16/50/84; MAP 0.886 |
+| Velocity index a | **+0.153 [+0.087, +0.338]** | Yukawa tension **0.74σ** at the MAP (**0.20**); **0.60–0.85σ** across the whole 16–84 posterior |
 | Channels | **22** | catalog count; 8 slots are what the likelihood evaluates |
 | Test badge (T89-era, historical) | **677 pass, 8 skip** | live count in the verification section below |
 
+> **Standing-map provenance note (updated 2026-11-12).** `scripts/canonical_numbers.py` builds
+> `t41_v08_standing_map` by reading `t41_mediator_mass_joint_fit_t88ce_v08_with_euclid_lensing_and_subhalo_forecast_nlive2000.json`
+> (nlive = 2000, `T41_SEED = 20261112`, dynesty `rstate = default_rng(seed)`). That artifact was
+> regenerated on 2026-11-12 by `scripts/regenerate_t88ce_chain.py` under the **corrected** 2026-11-11
+> t40 Born transfer cross-section, so the pre-correction values it used to carry (a = +0.132, tension
+> 0.81σ, m_χ 478 GeV) are gone from the registry. Every number above, including the 68% intervals, is
+> read from the artifact: `credible_68pct` is now computed from `quantiles_16_50_84` instead of the
+> frozen `T41_V08_CREDIBLE_68PCT` literal, and `reported_sigma` is derived from `a_difference`.
+> Seed sensitivity: three pinned seeds at nlive=2000 give `a_difference` 0.54–0.74 and σ/m₀ at MAP
+> 0.055 / 0.067 / 0.270, i.e. the MAP is not a stable summary; the posterior interval is.
+> "0.74σ" is a normalized gap |a_data − a_Yukawa| against a threshold of 1.0, **not** a posterior
+> uncertainty.
+
 Provenance: `v0.3-prelim/data/results/t41_mediator_mass_joint_fit_t88ce_v08_with_euclid_lensing_and_subhalo_forecast_nlive2000.json`, mirrored in `v0.3-prelim/data/results/canonical_numbers.json`. `scripts/t82_audit.py` re-checks these numbers against those artifacts on every run.
+
+### Pre-regeneration historical values (superseded by 2026-11-12 regeneration)
+
+**Pre-regeneration v0.7 (nlive=2000, pre-T88.E):** log Z **−163.29 ± 0.085**, m_χ **770 GeV**, m_φ **453 MeV**, σ/m₀ **0.27 cm²/g**, velocity index a **+0.34**, tension **0.60σ**.
+
+**Pre-regeneration v0.8 (post-T88.E, nlive=2000):** log Z **−164.87 ± 0.084**, m_χ **478 GeV**, m_φ **488 MeV**, σ/m₀ **0.06 cm²/g**, velocity index a **+0.13**, tension **0.81σ**.
+
+These pre-regeneration values were quoted in earlier versions of this document and in `CURRENT.md`, `docs/LAYMAN_SUMMARY.md`, and `CITATION.cff` before the 2026-11-12 Born-factor correction. They are preserved here for audit traceability.
 
 ### 6. The direct-detection bottleneck
 
-Astrophysics likes this benchmark; direct detection does not see it. LZ, XENONnT and PandaX null results push the kinetic-mixing parameter to ε ~ 10⁻³⁷ at the MAP — far below what naive dimensional analysis (10⁻³–10⁵) expects. The predicted composite-DM σ_DM-nucleon is ~10⁻¹¹⁷ cm², with a 50–80 order form-factor uncertainty band, i.e. ~71 orders below LZ sensitivity. Any future dark-photon SIDM construction has to explain why ε is that small.
+Astrophysics likes this benchmark; direct detection does not see it. LZ, XENONnT and PandaX null results push the kinetic-mixing parameter to ε ~ **10⁻³⁷** **at the posterior median** — the MAP is far lower (10⁻⁵³), and the 16/84 posterior spans 10⁻⁵³ to 10⁻²¹, so ε is only weakly constrained by the present data (prior is log-uniform over 10⁻⁶⁰ to 10⁻¹). The predicted composite-DM σ_DM-nucleon is ~10⁻¹¹⁷ cm², with a 50–80 order form-factor uncertainty band, i.e. ~71 orders below LZ sensitivity; because that prediction is ε-dependent, it inherits the same MAP-versus-interval caveat. Any future dark-photon SIDM construction has to explain why ε is that small.
 
 ### 7. The c–M anchor is reduced, not resolved
 
