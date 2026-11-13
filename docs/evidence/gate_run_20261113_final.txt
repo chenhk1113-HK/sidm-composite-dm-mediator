@@ -1,0 +1,16 @@
+======================================================================
+v19.2-F PRE-TAG VERIFICATION GATE
+======================================================================
+Repo: C:\Users\lamkuenai\projects\sidm-composite-dm-mediator
+Python: C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\.venv-sidm-bench\Scripts\python.exe
+
+[L1/15] Convention/units audit (audit_units.py)...
+    Note: paper has many unicode superscripts (1385). Per Rule 27,
+    these should be converted to ASCII (10^-N) only when sent to PDF/Telegram.
+  
+  ======================================================================
+  ✓ No unit consistency issues
+
+[L2/15] gate-ignored test files: 0 (each carries an in-file marker; the gate refuses to run otherwise)
+
+[L2/15] Full pytest suite (v0.3-prelim/tests/, excluding marked gate-ignored files)...

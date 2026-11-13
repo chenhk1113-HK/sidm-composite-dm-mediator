@@ -1,0 +1,168 @@
+{
+  "test": "T13_v2_lsb_ablation_ngc5963_core",
+  "date": "2026-11-13",
+  "seed": 20261115,
+  "nlive": 500,
+  "dlogz": 0.1,
+  "channel_citation": "astro-ph/0506345 (Sanchez-Salcedo, Melnick & Vega 2005) NGC 5963: sigma_0 <~ 0.2 cm2/g at 95% CL, ~0.1 tighter; quoted at v0 = 100 km/s, same V_REF convention",
+  "channel_status": "ablation only \u2014 not promoted to production",
+  "kitazawa_audit": {
+    "citation": "arXiv:2605.05588 (Kitazawa 2026)",
+    "rows": [
+      {
+        "name": "F561-1",
+        "nu_s_kms": 61.156891931196284,
+        "sigma_1": {
+          "printed_Gyr": 0.54,
+          "recomputed_Gyr": 565.3719738947476,
+          "ratio_calc_over_printed": 1046.985136842125
+        },
+        "sigma_0p1": {
+          "printed_Gyr": 5.4,
+          "recomputed_Gyr": 5653.719738947476,
+          "ratio_calc_over_printed": 1046.985136842125
+        }
+      },
+      {
+        "name": "F563-V1",
+        "nu_s_kms": 38.469657827687975,
+        "sigma_1": {
+          "printed_Gyr": 0.87,
+          "recomputed_Gyr": 898.7964713198553,
+          "ratio_calc_over_printed": 1033.0993923216727
+        },
+        "sigma_0p1": {
+          "printed_Gyr": 8.7,
+          "recomputed_Gyr": 8987.964713198553,
+          "ratio_calc_over_printed": 1033.099392321673
+        }
+      },
+      {
+        "name": "F571-V1",
+        "nu_s_kms": 108.50416310373534,
+        "sigma_1": {
+          "printed_Gyr": 0.3,
+          "recomputed_Gyr": 318.66420346794865,
+          "ratio_calc_over_printed": 1062.2140115598288
+        },
+        "sigma_0p1": {
+          "printed_Gyr": 3.0,
+          "recomputed_Gyr": 3186.6420346794866,
+          "ratio_calc_over_printed": 1062.2140115598288
+        }
+      },
+      {
+        "name": "F574-1",
+        "nu_s_kms": 128.2321927589599,
+        "sigma_1": {
+          "printed_Gyr": 0.27,
+          "recomputed_Gyr": 269.63894139595664,
+          "ratio_calc_over_printed": 998.6627459109504
+        },
+        "sigma_0p1": {
+          "printed_Gyr": 2.7,
+          "recomputed_Gyr": 2696.389413959566,
+          "ratio_calc_over_printed": 998.6627459109503
+        }
+      },
+      {
+        "name": "F574-2",
+        "nu_s_kms": 48.33367265530028,
+        "sigma_1": {
+          "printed_Gyr": 0.69,
+          "recomputed_Gyr": 715.3686200300889,
+          "ratio_calc_over_printed": 1036.7661159856361
+        },
+        "sigma_0p1": {
+          "printed_Gyr": 6.9,
+          "recomputed_Gyr": 7153.686200300889,
+          "ratio_calc_over_printed": 1036.7661159856361
+        }
+      }
+    ],
+    "recomputed_over_printed_ratio_range": [
+      998.6627459109504,
+      1062.2140115598288
+    ],
+    "verdict": "printed t_core values are ~1e3 smaller than the paper's own equations produce from its own Table 1 parameters; catalogue parameters themselves pass an independent NFW mass check. LSB core-formation times therefore NOT used as a constraint."
+  },
+  "res_baseline": {
+    "label": "baseline 12-channel (LSB OFF)",
+    "log_Z": -5.7007423211522035,
+    "median_log_sigma_m_0": -0.913965815269709,
+    "median_sigma_m_0": 0.12190855533347647,
+    "p16_sigma_m_0": 0.03452369326992513,
+    "p84_sigma_m_0": 1.4403885993878998,
+    "credible_68pct_sigma_m_0": [
+      0.03452369326992513,
+      1.4403885993878998
+    ],
+    "median_a": 1.4658917178504571,
+    "p16_a": 0.2753858753168812,
+    "p84_a": 1.870500768645743,
+    "credible_68pct_a": [
+      0.2753858753168812,
+      1.870500768645743
+    ],
+    "lsb_penalised_posterior_fraction": 0.3220064724919094,
+    "wall_seconds": 1.847641944885254,
+    "n_posterior_samples": 3090,
+    "seed": 20261115,
+    "nlive": 500,
+    "dlogz": 0.1
+  },
+  "res_lsb_loose": {
+    "label": "12ch + NGC 5963 limit 0.2 cm2/g (95% CL)",
+    "log_Z": -6.092199813151637,
+    "median_log_sigma_m_0": -1.0618783909214566,
+    "median_sigma_m_0": 0.0867204672297615,
+    "p16_sigma_m_0": 0.025088241590606415,
+    "p84_sigma_m_0": 0.43409221552759036,
+    "credible_68pct_sigma_m_0": [
+      0.025088241590606415,
+      0.43409221552759036
+    ],
+    "median_a": 1.51032052884715,
+    "p16_a": 0.09923355280728048,
+    "p84_a": 1.8917850917484238,
+    "credible_68pct_a": [
+      0.09923355280728048,
+      1.8917850917484238
+    ],
+    "lsb_penalised_posterior_fraction": 0.21897810218978103,
+    "wall_seconds": 3.9588053226470947,
+    "n_posterior_samples": 3288,
+    "seed": 20261115,
+    "nlive": 500,
+    "dlogz": 0.1
+  },
+  "res_lsb_tight": {
+    "label": "12ch + NGC 5963 limit 0.1 cm2/g (Upsilon*=1.2 fit)",
+    "log_Z": -6.34403073387022,
+    "median_log_sigma_m_0": -1.123474927515261,
+    "median_sigma_m_0": 0.07525321737530075,
+    "p16_sigma_m_0": 0.018801061874362278,
+    "p84_sigma_m_0": 0.30313931403524036,
+    "credible_68pct_sigma_m_0": [
+      0.018801061874362278,
+      0.30313931403524036
+    ],
+    "median_a": 1.5498582682508513,
+    "p16_a": 0.09181501790714393,
+    "p84_a": 1.9002264229342203,
+    "credible_68pct_a": [
+      0.09181501790714393,
+      1.9002264229342203
+    ],
+    "lsb_penalised_posterior_fraction": 0.16925329428989752,
+    "wall_seconds": 4.224180698394775,
+    "n_posterior_samples": 3415,
+    "seed": 20261115,
+    "nlive": 500,
+    "dlogz": 0.1
+  },
+  "delta_log_Z_loose": -0.39145749199943314,
+  "delta_log_Z_tight": -0.6432884127180163,
+  "delta_median_sigma_m_0_loose_dex": -0.14791257565174767,
+  "delta_median_sigma_m_0_tight_dex": -0.20950911224555188
+}

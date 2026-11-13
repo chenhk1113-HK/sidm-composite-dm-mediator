@@ -2,11 +2,54 @@
 
 > **For:** Anyone who has 60 seconds and wants to know what this project
 > is, what it claims, and what the current best numbers are.
-> Updated with each version-bump round. Last refresh: 2026-11-11 (`ReviewResponse-2026-11-11` claim-sync + reproducibility round, no VERSION change; the numeric save point remains `v19.2-F-RecordSave-v1.18` and the dated save tag `v19.2-F-RecordSave-2026-11-10` → `4098d01`).
+> Updated with each version-bump round. Last refresh: 2026-11-13 (`LSBChannelRound5-2026-11-13` LSB core-check round — Channel 14 shipped, baseline re-issued with a pinned seed, one external paper held as a cautionary audit; no VERSION change; the numeric save point remains `v19.2-F-RecordSave-v1.18` and the dated save tag `v19.2-F-RecordSave-2026-11-10` → `4098d01`).
 
 ---
 
 **Pairing declaration (findings F26/F33):** this document quotes amplitudes in two pairings. The LIVE canonical pair is f_H = 0.7501856343179664 with σ_0 = 0.008150396851725193 cm²/g and σ_peak = 27.272481773080454 cm²/g. The ARCHIVED pair is f_H = 0.297 with σ_0 = 0.052 cm²/g and σ_peak = 174.0 cm²/g. Unless a sentence says otherwise, an amplitude quoted below is an ARCHIVED-pair raw amplitude. Both pairs give the same halo-level σ_eff = f_H² × (σ/m) = 15.348366 cm²/g at the 29.4 km/s resonance, so no effective prediction changes. Sources: scripts/constants.py, v0.3-prelim/data/results/canonical_numbers.json, v0.3-prelim/data/results/fH_pairing_registry.json.
+
+## Standing: `LSBChannelRound5-2026-11-13` — LSB core check shipped as Channel 14 (no VERSION change)
+
+**Nothing in the version-of-record physics changed.** The pairing declaration above, the
+standing T88.CE MAP and every headline number are untouched. What changed is the constraint
+ladder and one literature verdict. Full record: `docs/V19_2_F_REFERENCE_DATA_REGISTRY.md` §7.12.
+
+* **SHIPPED:** Channel 14 — the NGC 5963 core-collapsibility upper bound (Sánchez-Salcedo,
+  Melnick & Vega 2005, astro-ph/0506345, full PDF in `docs/papers/verified/`) — added to the
+  production ladder in `v0.3-prelim/code/t13_v2_12channel_2025_2026.py`. **Both arms ship** by
+  owner decision: 0.2 cm^2/g (their 95% CL core-size fit) and 0.1 cm^2/g (their tightest fit),
+  recorded as `channel_14_shipped_arms_cm2_g = [0.2, 0.1]`. The bound is quoted at v0 = 100 km/s,
+  the same V_REF this project pins, and evaluated at v ~ 150 km/s.
+* **Ladder effect** (dynesty, nlive=500, dlogz=0.1, seeds 20261113 / 20261114): 12-channel log Z
+  -5.749 / -5.802 with sigma/m_0 0.130 / 0.123 [0.03, 1.49] → 13-channel @ 0.2 cm^2/g: -6.059 /
+  -6.004, 0.089 / 0.088 [0.03, 0.50], a 1.53 → 13-channel @ 0.1 cm^2/g: -6.232 / -6.234,
+  0.078 / 0.075 [0.02, 0.34], a 1.57. Sampler noise measured 0.05-0.11 in log Z, so the deltas
+  (-0.31 and -0.48) are 3-5x noise: mild tension, not a rejection. The 68% upper bound tightens
+  about 3x. Neither arm may be quoted alone.
+* **BASELINE RE-ISSUED:** the archived 12-channel artifact (log Z -7.279, median 0.684 cm^2/g)
+  recorded no seed and no nlive and cannot be reproduced by the current code; it is preserved as
+  `_archive_prebaseline_20261113/t13_v2_12channel_2025_2026.superseded_20261113.json`
+  (+ `ARCHIVE_NOTE.md`; the original `*.bak.*` name is gitignored, so an untracked backup
+  would not survive a fresh clone) and must not be quoted. `run_fit()`
+  now pins `rstate=np.random.default_rng(seed)` (`T13_V2_SEED`, default 20261113) and the artifact
+  records `seed`, `n_samples` and a `sampler_settings` block. The **0.68 cm^2/g** that five
+  standing documents quoted traces to the pre-`8629f10` (2026-08-17) dSph channel, whose bimodal-dip
+  surrogate — a second peak near sigma/m ~ 10 cm^2/g — was replaced by Horigome+'s one-sided
+  0.2 cm^2/g upper limit. Measured at fixed theta: dSph log L -0.88 → -1.72 at (1.0, 1.5) and
+  -1.43 → -0.15 at (0.019, 1.22), with the UFD and Bullet terms identical.
+* **CAUTIONARY AUDIT (citation policy, owner decision):** arXiv:2605.05588 (Kitazawa 2026, v1 only,
+  no journal reference, no erratum) is cited **as a cautionary audit only**. Its printed
+  core-formation times are 10^3 smaller than its own equations produce — 30/30 entries across all
+  six tables (ratios 952-1072) — while its catalogue passes an NFW mass check (M(<R_c)/M_dyn =
+  0.92-1.04, 15/15 rows), so the defect is the time column, not the halos. Recomputed, the same
+  halos need sigma/m >~ 24-82 cm^2/g to form their cores in 11-13 Gyr. Never cited as evidence for
+  sigma/m ~ 0.1 cm^2/g, nor as an exclusion of 1 cm^2/g. Audit code:
+  `channels_lsb_core.kitazawa_unit_adjudication()`.
+* **HONEST LIMIT:** for the same halos at sigma/m = 1 cm^2/g, four published timing conventions
+  give 0.3, 7, 270-900 and 2,300-13,800 Gyr. LSB data support an UPPER bound; they do not yet
+  support a lower bound.
+* **Tests:** `v0.3-prelim/tests/test_lsb_core_channel.py`, 32 tests, moved into the gated test
+  directory so the release gate's pytest layer runs them.
 
 ## Standing: `ReviewResponse-2026-11-11` — claim sync and a reproducibility contract (no VERSION change)
 
@@ -319,12 +362,28 @@ now asserts the v0.8 MAP (**383 GeV / 513 MeV / 0.74σ**), so this line, the doc
   28.700 Gyr (−0.001%).
 
 **What did NOT change:** the anchor **σ/m = 174 cm²/g @ 29.4 km/s (ARCHIVED pair)** (Cloud-9 = M94 RELHIC; the live canonical raw peak is 27.272481773080454 cm²/g and the halo-level σ_eff = 15.348366 cm²/g is unchanged); the
-joint galaxy-scale range 0.06–0.68 cm²/g; the baryon-coupling ceiling < 3 × 10⁻¹¹; the v19.2-E A.2 5-param
+joint galaxy-scale range **RE-ISSUED 2026-11-13 — the 0.06–0.68 cm²/g span is stale, see the re-issue note below**; the baryon-coupling ceiling < 3 × 10⁻¹¹; the v19.2-E A.2 5-param
 best fit at **5 of 8 channels PASS** (2 marginal, 1 fail) — a count over 8 velocity **slots** drawn from
 4 independent sources, 5 of them being velocity bins of a single Horigome+ 2025 dSph+UFD analysis (see
 `v0.3-prelim/code/T205_full_likelihood_published.py::OBS_PUBLISHED`); and the honest headline — the project has **not**
 proven that dark matter self-interacts and has **not** derived a working particle model from first
 principles (the v19.2-F Phase 3 FAIL below stands).
+
+**Re-issued 2026-11-13 (LSB core round; registry §7.12):** the joint galaxy-scale
+σ/m_0 range is **no longer 0.06–0.68 cm²/g**. The T13_v2 ladder re-run with a pinned
+seed (nlive=500, dlogz=0.1, seeds 20261113 / 20261114,
+`v0.3-prelim/data/results/t13_v2_12channel_2025_2026.json`) gives 12-channel
+log Z **−5.749 / −5.802**, median σ/m_0 **0.130 / 0.123 cm²/g, 68% CI [0.03, 1.49]**,
+a = 1.49 / 1.45 — and **0.089 cm²/g, 68% CI [0.03, 0.50]** once the new LSB NGC 5963
+core channel (Channel 14) is included. *Why the old 0.68 was wrong to carry:* it came
+from a 2026-08-14 artifact that predates commit `8629f10` (2026-08-17, "fix(dSph):
+replace bimodal-dip surrogate with Horigome+ 0.2 cm²/g upper limit"). That commit
+changed Channel 2 from a bimodal surrogate (peaks at σ/m ≈ 0.1 **and** ≈ 10 cm²/g) into
+a one-sided published upper limit; measured at fixed (σ/m_0 = 1.0, a = 1.5) its log L
+moved **−0.88 → −1.72**, and at (0.019, 1.22) **−1.43 → −0.15**, while the UFD and
+Bullet terms are unchanged (`sigma_m_at_v` is byte-identical; `V_CLUSTER` 1500 → 3000
+in `12396b8` leaves the Bullet term ≈ 0 in both). The 0.066 lower endpoint (T41 MAP)
+is a different pipeline and is untouched by this re-issue.
 
 **Open coverage gaps** (machine-checked by gate layer 15 against the report's §17.3 register): **none**.
 **CG-4** (the deferred literal-`**` markup pass) and **CG-16** (hardcoded host paths in tracked files) were the

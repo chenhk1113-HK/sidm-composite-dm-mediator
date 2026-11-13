@@ -498,7 +498,7 @@ exactly how `tau* ≈ 1.4` got published in two docs.
 curve moves when σ₀ moves. `phase39_nfw_vs_sidm.py` and `phase40_corrected_comparison.py` now run
 it on **every galaxy they fitted**, using each galaxy's own best-fit (log ρ_s, log r_s) from the fit
 and its own observed V_max from SPARC, over σ₀ = 1e-3 … 1e3 cm²/g (which brackets the canonical
-galaxy-scale range 0.06–0.68, the BM2 dwarf anchor 7.1, and the Cloud-9 anchors 147.1 / 174). The
+galaxy-scale range 0.06–0.68 **[re-issued 2026-11-13 — the 0.68 endpoint predates commit `8629f10`; seeded T13_v2 ladder gives 0.130 [0.03, 1.49] cm²/g, see registry §7.12]**, the BM2 dwarf anchor 7.1, and the Cloud-9 anchors 147.1 / 174). The
 measurement is stored in each artifact (`sigma_m_responsiveness_probe`) and the verdict is published
 with a `verdict_scope` sentence generated from it, so the disclosure cannot be deleted from the docs
 without the artifact contradicting them.

@@ -241,6 +241,7 @@
       "v0.3-prelim/tests/test_kiss_sidm_julia_bridge.py",
       "v0.3-prelim/tests/test_kiss_sidm_scalings.py",
       "v0.3-prelim/tests/test_known_physics_limits.py",
+      "v0.3-prelim/tests/test_lsb_core_channel.py",
       "v0.3-prelim/tests/test_lz_magnetic_moment.py",
       "v0.3-prelim/tests/test_markup_balance_cg4.py",
       "v0.3-prelim/tests/test_model_provenance_date_guard.py",
@@ -1725,6 +1726,18 @@
         "host_path_lines": 1
       },
       {
+        "path": "docs/evidence/gate_run_20261113.txt",
+        "host_path_lines": 3
+      },
+      {
+        "path": "docs/evidence/gate_run_final_20261112.txt",
+        "host_path_lines": 3
+      },
+      {
+        "path": "docs/evidence/pytest_full_before_triage_20261112.txt",
+        "host_path_lines": 2
+      },
+      {
         "path": "docs/papers/00_HOME.md",
         "host_path_lines": 1
       },
@@ -2338,12 +2351,12 @@
     "other": []
   },
   "counts": {
-    "live_clean": 431,
+    "live_clean": 432,
     "live_prose_only": 4,
     "pinned_source": 3,
     "pinned_exception": 3,
     "historical_frozen_code": 230,
-    "docs_prose": 151,
+    "docs_prose": 154,
     "data_artifact": 75,
     "other": 0
   },

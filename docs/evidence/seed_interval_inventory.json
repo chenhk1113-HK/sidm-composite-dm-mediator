@@ -1,21 +1,21 @@
 {
   "generated_by": "scripts/seed_interval_audit.py",
-  "generated_at": "2026-11-12T12:57:30+00:00",
+  "generated_at": "2026-11-13T09:19:48+00:00",
   "conduct_date": "2026-11-11",
   "counts": {
-    "total": 481,
-    "stochastic": 198,
-    "seed": 9,
-    "interval": 138,
-    "both": 7,
-    "legacy_gap": 191,
+    "total": 485,
+    "stochastic": 202,
+    "seed": 14,
+    "interval": 143,
+    "both": 12,
+    "legacy_gap": 190,
     "forward_violation": 0,
     "allowlisted_nonresult": 2,
     "corrupt": 1,
     "corrupt_allowlisted": 1,
-    "date_from_artifact": 84,
+    "date_from_artifact": 87,
     "date_from_git": 394,
-    "date_from_mtime": 3
+    "date_from_mtime": 4
   },
   "forward_rule_violations": [],
   "corrupt_artifacts": [
@@ -90,7 +90,6 @@
     "t13_10channel_2025_2026.json",
     "t13_8channel_2025_2026.json",
     "t13_9channel_2025_2026.json",
-    "t13_v2_12channel_2025_2026.json",
     "t13_v2_trail_ablation_2026_09_12.json",
     "t13_v2_udg_ablation_2026_09_12.json",
     "t177_bayes_factor.json",
@@ -627,10 +626,38 @@
     },
     {
       "file": "t13_v2_12channel_2025_2026.json",
-      "seed": false,
-      "interval": false,
+      "seed": true,
+      "interval": true,
       "run_date": "2026-08-25",
       "date_basis": "git commit date"
+    },
+    {
+      "file": "t13_v2_12channel_2025_2026_seed20261114.json",
+      "seed": true,
+      "interval": true,
+      "run_date": "2026-11-13",
+      "date_basis": "filesystem mtime (weak evidence)"
+    },
+    {
+      "file": "t13_v2_lsb_ablation_2026-11-13.json",
+      "seed": true,
+      "interval": true,
+      "run_date": "2026-11-13",
+      "date_basis": "artifact field"
+    },
+    {
+      "file": "t13_v2_lsb_ablation_2026-11-13_replica_seed20261114.json",
+      "seed": true,
+      "interval": true,
+      "run_date": "2026-11-13",
+      "date_basis": "artifact field"
+    },
+    {
+      "file": "t13_v2_lsb_ablation_2026-11-13_replica_seed20261115.json",
+      "seed": true,
+      "interval": true,
+      "run_date": "2026-11-13",
+      "date_basis": "artifact field"
     },
     {
       "file": "t13_v2_trail_ablation_2026_09_12.json",

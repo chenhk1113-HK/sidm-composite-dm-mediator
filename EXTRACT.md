@@ -41,8 +41,13 @@ Current standing in 60 seconds: [`CURRENT.md`](CURRENT.md). What is not claimed:
 - Added Channel 11 (NGC 1052-DF2/DF4 + FCC 224/240 dark-matter-free UDG consistency check)
   and Channel 12 (cosmic-web radio synchrotron 40× excess, Pinetti 2025-26) as new observational
   channels (10 → 12 total). Both pass at the current MAP. Headline σ/m_0 from T13 v2 (5/6/8/9/10/11/12-channel
-  joint fit) is **0.68 cm²/g** at galactic scale, consistent with T21 (1.4-1.7 cm²/g) and T41 historical (0.066 cm²/g)
-  within the 0.4-0.5 dex systematic budget. See `CHANGELOG.md` [T70] entry for details.
+  joint fit) was **0.68 cm²/g** at galactic scale — **RE-ISSUED 2026-11-13: that number is a 2026-08-14 artifact
+  that predates commit `8629f10` (dSph bimodal-dip surrogate replaced by the Horigome+ 2025 0.2 cm²/g upper limit)
+  and stores no seed or nlive. The seeded re-run (nlive=500, dlogz=0.1, seeds 20261113/20261114) gives 12-channel
+  σ/m_0 = 0.130 / 0.123 cm²/g, 68% CI [0.03, 1.49], log Z = −5.749 / −5.802; with the new LSB channel 0.089
+  [0.03, 0.50].** Still consistent with T21 (1.4-1.7 cm²/g) and T41 historical (0.066 cm²/g)
+  within the 0.4-0.5 dex systematic budget. See `CHANGELOG.md` [T70] entry for details and
+  `docs/V19_2_F_REFERENCE_DATA_REGISTRY.md` §7.12 for the re-derivation.
 - Added Channel 13 (T70.1): SIDM quantum-statistical lower mass bound from
   Tremaine-Gunn 1979 + Rogers-Peiris 2021 Lyman-α (m > 100 eV for fermionic DM).
   Defensive documentation channel — encodes the "SIDM in classical regime"

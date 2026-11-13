@@ -1,0 +1,240 @@
+{
+  "test": "T13_v2_12channel_with_2018_2026_constraints",
+  "sampler_settings": {
+    "sampler": "dynesty NestedSampler (bound=multi, sample=auto, bootstrap=0)",
+    "dynesty_version": "3.1.0",
+    "seed": 20261114,
+    "nlive": 500,
+    "dlogz": 0.1,
+    "log10_sigma_m_0_prior": [
+      -3.0,
+      2.5
+    ],
+    "a_prior": [
+      -2.0,
+      2.0
+    ],
+    "seeded_rebaseline": "2026-11-13 \u2014 earlier copies of this artifact recorded no seed and no nlive, so their log Z could not be reproduced"
+  },
+  "res_5channel": {
+    "label": "5-channel",
+    "log_Z": -2.388639224518657,
+    "median_log_sigma_m_0": -1.7387305471045693,
+    "median_sigma_m_0": 0.018250276680442545,
+    "p16_sigma_m_0": 0.0047575935943114725,
+    "p84_sigma_m_0": 0.7577152844916061,
+    "credible_68pct_sigma_m_0": [
+      0.0047575935943114725,
+      0.7577152844916061
+    ],
+    "median_a": 1.2401396505519897,
+    "p16_a": -0.0291234709160247,
+    "p84_a": 1.7876040556368753,
+    "credible_68pct_a": [
+      -0.0291234709160247,
+      1.7876040556368753
+    ],
+    "wall_seconds": 1.3215231895446777,
+    "n_samples": 2669,
+    "seed": 20261114
+  },
+  "res_6channel": {
+    "label": "6-channel (with lens subhalo)",
+    "log_Z": -4.167484673015002,
+    "median_log_sigma_m_0": -0.2007826817509577,
+    "median_sigma_m_0": 0.6298212626488154,
+    "p16_sigma_m_0": 0.08793399303000006,
+    "p84_sigma_m_0": 4.770002280845384,
+    "credible_68pct_sigma_m_0": [
+      0.08793399303000006,
+      4.770002280845384
+    ],
+    "median_a": 1.3346540042258468,
+    "p16_a": 0.3032687177636488,
+    "p84_a": 1.8244388831857752,
+    "credible_68pct_a": [
+      0.3032687177636488,
+      1.8244388831857752
+    ],
+    "wall_seconds": 1.5498721599578857,
+    "n_samples": 2892,
+    "seed": 20261114
+  },
+  "res_8channel": {
+    "label": "8-channel (+MW sat + cluster)",
+    "log_Z": -5.042109889582066,
+    "median_log_sigma_m_0": -0.5658710420082786,
+    "median_sigma_m_0": 0.27172459992534315,
+    "p16_sigma_m_0": 0.04985952064897858,
+    "p84_sigma_m_0": 2.614609649596366,
+    "credible_68pct_sigma_m_0": [
+      0.04985952064897858,
+      2.614609649596366
+    ],
+    "median_a": 1.3880259887186468,
+    "p16_a": 0.3089466690936854,
+    "p84_a": 1.84465309582387,
+    "credible_68pct_a": [
+      0.3089466690936854,
+      1.84465309582387
+    ],
+    "wall_seconds": 1.798081398010254,
+    "n_samples": 2987,
+    "seed": 20261114
+  },
+  "res_9channel": {
+    "label": "9-channel (+Draco dSph)",
+    "log_Z": -5.71921238186116,
+    "median_log_sigma_m_0": -0.9055921605451931,
+    "median_sigma_m_0": 0.1242818872376537,
+    "p16_sigma_m_0": 0.0317610133612866,
+    "p84_sigma_m_0": 1.6321989018293646,
+    "credible_68pct_sigma_m_0": [
+      0.0317610133612866,
+      1.6321989018293646
+    ],
+    "median_a": 1.4528320390245164,
+    "p16_a": 0.3172541923487343,
+    "p84_a": 1.867097305472904,
+    "credible_68pct_a": [
+      0.3172541923487343,
+      1.867097305472904
+    ],
+    "wall_seconds": 1.869386911392212,
+    "n_samples": 3103,
+    "seed": 20261114
+  },
+  "res_10channel": {
+    "label": "10-channel (+radio relic)",
+    "log_Z": -5.743410032226255,
+    "median_log_sigma_m_0": -0.9229797416361132,
+    "median_sigma_m_0": 0.11940438012568028,
+    "p16_sigma_m_0": 0.031486916539738896,
+    "p84_sigma_m_0": 1.385681033645253,
+    "credible_68pct_sigma_m_0": [
+      0.031486916539738896,
+      1.385681033645253
+    ],
+    "median_a": 1.4594471486144993,
+    "p16_a": 0.31689067505675483,
+    "p84_a": 1.8686170668676034,
+    "credible_68pct_a": [
+      0.31689067505675483,
+      1.8686170668676034
+    ],
+    "wall_seconds": 1.9364488124847412,
+    "n_samples": 3115,
+    "seed": 20261114
+  },
+  "res_11channel": {
+    "label": "11-channel (+DM-free UDG)",
+    "log_Z": -5.801992153045582,
+    "median_log_sigma_m_0": -0.9114799783147178,
+    "median_sigma_m_0": 0.12260834258244421,
+    "p16_sigma_m_0": 0.03299207203877754,
+    "p84_sigma_m_0": 1.4101246149937565,
+    "credible_68pct_sigma_m_0": [
+      0.03299207203877754,
+      1.4101246149937565
+    ],
+    "median_a": 1.4493187311604303,
+    "p16_a": 0.3142870292967871,
+    "p84_a": 1.8725038357716108,
+    "credible_68pct_a": [
+      0.3142870292967871,
+      1.8725038357716108
+    ],
+    "wall_seconds": 2.0634171962738037,
+    "n_samples": 3140,
+    "seed": 20261114
+  },
+  "res_12channel": {
+    "label": "12-channel (+cosmic-web radio, eps=10^-35)",
+    "log_Z": -5.801992153045582,
+    "median_log_sigma_m_0": -0.9114799783147178,
+    "median_sigma_m_0": 0.12260834258244421,
+    "p16_sigma_m_0": 0.03299207203877754,
+    "p84_sigma_m_0": 1.4101246149937565,
+    "credible_68pct_sigma_m_0": [
+      0.03299207203877754,
+      1.4101246149937565
+    ],
+    "median_a": 1.4493187311604303,
+    "p16_a": 0.3142870292967871,
+    "p84_a": 1.8725038357716108,
+    "credible_68pct_a": [
+      0.3142870292967871,
+      1.8725038357716108
+    ],
+    "wall_seconds": 2.1732959747314453,
+    "n_samples": 3140,
+    "seed": 20261114
+  },
+  "res_13channel_lsb": {
+    "label": "13-channel (+LSB NGC 5963 core bound 0.2 cm2/g)",
+    "log_Z": -6.0038878701658245,
+    "median_log_sigma_m_0": -1.054735389602695,
+    "median_sigma_m_0": 0.08815858490451413,
+    "p16_sigma_m_0": 0.024250067324412726,
+    "p84_sigma_m_0": 0.46725141693203764,
+    "credible_68pct_sigma_m_0": [
+      0.024250067324412726,
+      0.46725141693203764
+    ],
+    "median_a": 1.5282524016307082,
+    "p16_a": 0.15923327432114215,
+    "p84_a": 1.8895872810428247,
+    "credible_68pct_a": [
+      0.15923327432114215,
+      1.8895872810428247
+    ],
+    "wall_seconds": 3.58066725730896,
+    "n_samples": 3242,
+    "seed": 20261114
+  },
+  "res_13channel_lsb_tight": {
+    "label": "13-channel tight (LSB bound 0.1 cm2/g)",
+    "log_Z": -6.234453292481799,
+    "median_log_sigma_m_0": -1.122815835167707,
+    "median_sigma_m_0": 0.07536750958209106,
+    "p16_sigma_m_0": 0.019840334019431957,
+    "p84_sigma_m_0": 0.3028496119255908,
+    "credible_68pct_sigma_m_0": [
+      0.019840334019431957,
+      0.3028496119255908
+    ],
+    "median_a": 1.5614920790985072,
+    "p16_a": 0.18414184460117458,
+    "p84_a": 1.9022381101586872,
+    "credible_68pct_a": [
+      0.18414184460117458,
+      1.9022381101586872
+    ],
+    "wall_seconds": 3.66831374168396,
+    "n_samples": 3361,
+    "seed": 20261114
+  },
+  "channel_14_citation": "astro-ph/0506345 (Sanchez-Salcedo, Melnick & Vega 2005, ApJ 626,173) \u2014 NGC 5963 core collapsibility; primary PDF in docs/papers/verified/",
+  "channel_14_status": "PRODUCTION (adopted 2026-11-13, LSB core-check round) \u2014 one-sided UPPER bound, sigma_0 <~ 0.2 cm^2/g at 95% CL quoted at v0 = 100 km/s (= this project's V_REF); evaluated at v ~ 150 km/s",
+  "channel_14_shipped_arms_cm2_g": [
+    0.2,
+    0.1
+  ],
+  "channel_14_shipped_arms_decision": "Owner decision 2026-11-13: BOTH arms ship as production \u2014 0.2 cm^2/g (the paper's 95% CL core-size fit) and 0.1 cm^2/g (their tightest fit).  The 0.1 arm is not a sensitivity probe any more; it is a shipped arm, so the ladder reports both posteriors side by side and neither is quoted alone.",
+  "kitazawa_citation_policy": "CAUTIONARY AUDIT ONLY (owner decision 2026-11-13).  arXiv:2605.05588 (Kitazawa 2026, v1 only, no journal reference, no erratum) may be cited as an example of a published LSB core-formation timescale whose printed time column is 1e3 smaller than its own equations produce (30/30 entries across all six tables, ratios 952-1072; kpc^3<->pc^3 ruled out because that slip is 1e9 and the NFW mass check passes 15/15).  It may NOT be cited as evidence for sigma/m ~ 0.1 cm^2/g: recomputed, the same halos require sigma/m >~ 24-82 cm^2/g to form cores in 11-13 Gyr.  Audit code: channels_lsb_core.kitazawa_unit_adjudication(); tests: TestKitazawaUnitAdjudication.",
+  "channel_14_limit_used_cm2_g": 0.2,
+  "channel_14_tight_variant_cm2_g": 0.1,
+  "channel_14_sensitivity_note": "S\u00e1nchez-Salcedo+ warn their limit 'may be overestimated by as much as a factor 2'; the 0.1 cm^2/g variant (their tightest core-size fit) is run alongside as the conservative arm.  Ablation with 3 seeds: dlog Z = -0.31 +/- 0.09 (0.2) and -0.48 +/- 0.11 (0.1) vs sampler noise 0.09-0.11; median sigma/m_0 down 0.16-0.22 dex; 68% upper bound 1.49 -> 0.50 / 0.34.  See t13_v2_lsb_ablation_2026-11-13.json.",
+  "channel_12_null_channel_note": "loglike_cosmic_web_radio evaluated at the pinned epsilon = 10^-35 returns exactly 0.0 across the whole prior box (checked on 20 points spanning sigma/m_0 1e-3..10 and a -2..2), which is why the 11- and 12-channel log Z agree to 3 decimals.  Channel 12 constrains epsilon, not sigma/m, and cannot move this posterior.",
+  "channel_6_citation": "arXiv:2510.11006 (Yang, Yang, Yu et al. 2026, PRL)",
+  "channel_7_citation": "arXiv:2503.13650 (Hayashi et al. 2025)",
+  "channel_8_citation": "arXiv:2508.20179 (O'Donnell et al. 2026, PRD 113, 063531)",
+  "channel_9_citation": "Read+ 2018 (Draco dSph, 99% CL upper limit)",
+  "channel_10_citation": "arXiv:2605.00093 (Lee et al. 2026, 11-cluster radio relic, 68% upper limit)",
+  "channel_11_citation": "arXiv:1803.10237 + 1901.05973 + 2205.08552 + 2502.05405 + 2603.15860 + 2605.24099 (van Dokkum+ 2018-2026 + Buzzo+ 2025-2026 + Keim+ 2026, DM-free UDGs \u2014 six confirmed examples)",
+  "channel_11_status": "experimental \u2014 NOT in primary production (R16 #12, T71.4)",
+  "channel_12_citation": "arXiv:2504.08025 (Pinetti et al. 2025-26, cosmic-web radio, eps_upper=-11)",
+  "channel_12_status": "experimental \u2014 NOT in primary production (R16 #12, T71.4)",
+  "channel_12_epsilon_fixed": 1e-35,
+  "interpretation": "12-channel fit combines 5 original channels + 7 new peer-reviewed constraints from 2018-2026 literature. Channels 6+7+8+9+10 bracket \u03c3/m across 5 orders of magnitude in velocity scale (10-2000 km/s). Channel 11 (NEW) provides a consistency check: the empirical existence of DM-free UDGs (NGC 1052-DF2/DF4 + FCC 224/240) is consistent with the SIDM model at the MAP \u03c3/m_0 ~ 0.78 cm\u00b2/g. Channel 12 (NEW) provides an indirect-detection upper limit on the kinetic-mixing \u03b5 that is trivially satisfied at the project's wide-prior posterior median \u03b5 ~ 10\u207b\u00b3\u2075 (the Pinetti bound is at \u03b5 ~ 10\u207b\u00b9\u00b9)."
+}

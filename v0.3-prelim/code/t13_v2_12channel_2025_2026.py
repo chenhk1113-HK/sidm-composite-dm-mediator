@@ -15,6 +15,15 @@ Channels:
     12: NEW (Tier-1 PATCH 2026-08-25): Pinetti+ 2025-26 cosmic-web radio
         synchrotron 40× excess (arXiv:2504.08025) — evaluated at
         ε = 10⁻³⁵ (project's wide-prior posterior median from T39).
+    14: NEW (LSB core-check round 2026-11-13): Sanchez-Salcedo, Melnick & Vega
+        2005 (astro-ph/0506345) NGC 5963 core-collapsibility UPPER bound
+        (σ_0 ≲ 0.2 cm²/g at 95% CL, quoted at v0 = 100 km/s = V_REF), adopted
+        into production with a tighter 0.1 cm²/g sensitivity arm.
+
+NUMBERING NOTE: 'Channel 14' is the channel ID used across channels_extended /
+channels_lsb_core (Channel 13 there is the DM-dominated UDG channel and is NOT
+in this ladder).  The fits below are labelled by how many channels they include,
+so the LSB runs are reported as '13-channel' = 12 ladder channels + Channel 14.
 
 Together, Channels 6+7+8+9+10 bracket the σ/m posterior; Channels 11+12
 add a CONSISTENCY CHECK (Channel 11: DM-free UDG observations are consistent
@@ -51,9 +60,28 @@ from channels_extended import (
     loglike_dm_free_udg,
     loglike_cosmic_web_radio,
 )
+from channels_lsb_core import (
+    loglike_lsb_ngc5963_core,
+    NGC5963_SIGMA_LIMIT_CM2G,
+    NGC5963_SIGMA_LIMIT_TIGHT,
+)
 
 
-RESULTS_DIR = Path("/home/lamkuenai/sidm-composite-dm-mediator/v0.3-prelim/data/results")
+import os
+
+# The primary clone is this one (Windows, branch wip/v19.2-F-init, 1163 commits).
+# RESULTS_DIR used to be hard-coded to /home/lamkuenai/sidm-composite-dm-mediator,
+# which on this host points at the STALE 1-commit WSL snapshot clone (master,
+# 9a8c8ef, 2026-08-14, no remote) rather than at the working repo.  Deriving it
+# from __file__ keeps the same relative layout in both clones.
+REPO_ROOT = Path(__file__).resolve().parent.parent
+RESULTS_DIR = REPO_ROOT / "data" / "results"
+
+# Seed pinned (AGENTS.md rule 32): dynesty draws its sampling randomness from
+# `rstate`, so without this the artifact is not reproducible.  Override with
+# T13_V2_SEED for replica runs; replica files must be renamed by the caller so
+# the primary artifact is never overwritten.
+SEED = int(os.environ.get("T13_V2_SEED", 20261113))
 
 
 def loglike_5channel(sigma_m_0, a):
@@ -131,8 +159,31 @@ def loglike_12channel(sigma_m_0, a, epsilon=COSMIC_WEB_EPSILON_FIXED):
             loglike_cosmic_web_radio(sigma_m_0, a, epsilon))
 
 
-def run_fit(label, loglike_fn):
-    print(f"[T13 {label}] ...")
+def loglike_13channel_lsb(sigma_m_0, a,
+                          lsb_limit_cm2_g=NGC5963_SIGMA_LIMIT_CM2G):
+    """Channel 14 (ADOPTED 2026-11-13): LSB core-collapsibility upper bound.
+
+    Source: Sanchez-Salcedo, Melnick & Vega 2005, astro-ph/0506345 (NGC 5963);
+    primary PDF read end-to-end and stored in docs/papers/verified/.
+
+    NGC 5963's core is small (r_c ~ 0.42 kpc) and dense (rho_0 ~ 1.75
+    M_sun pc^-3), so if sigma/m at the halo's own collision velocity (v ~ 150
+    km/s) exceeded ~0.2 cm^2 g^-1 the halo would have gravothermally collapsed
+    within a Hubble time.  This is an UPPER bound only and is one-sided by
+    physics: sigma/m -> 0 (CDM) is fully allowed and receives zero penalty.
+
+    The paper normalises sigma_0 at v0 = 100 km/s, identical to this project's
+    V_REF_KMS, so its quoted limits map onto sigma_m_0 without rescaling; the
+    channel still evaluates the model at v = 150 km/s through
+    mediator_registry's velocity mapping so the mediator classes are respected.
+    """
+    return (loglike_12channel(sigma_m_0, a) +
+            loglike_lsb_ngc5963_core(
+                sigma_m_0, a, sigma_limit_cm2_g=lsb_limit_cm2_g)["loglike"])
+
+
+def run_fit(label, loglike_fn, seed=SEED):
+    print(f"[T13 {label}] ... (seed={seed})")
 
     def loglike(theta):
         return loglike_fn(10**theta[0], theta[1])
@@ -147,6 +198,7 @@ def run_fit(label, loglike_fn):
     sampler = dynesty.NestedSampler(
         loglikelihood=loglike, prior_transform=prior_transform,
         ndim=2, nlive=NLIVE, bound='multi', sample='auto', bootstrap=0,
+        rstate=np.random.default_rng(seed),
     )
     sampler.run_nested(dlogz=DLOGZ, print_progress=False)
     res = sampler.results
@@ -171,10 +223,14 @@ def run_fit(label, loglike_fn):
         "median_sigma_m_0": 10**p50_sm,
         "p16_sigma_m_0": 10**p16_sm,
         "p84_sigma_m_0": 10**p84_sm,
+        "credible_68pct_sigma_m_0": [10**p16_sm, 10**p84_sm],
         "median_a": p50_a,
         "p16_a": p16_a,
         "p84_a": p84_a,
+        "credible_68pct_a": [p16_a, p84_a],
         "wall_seconds": wall,
+        "n_samples": int(len(samples)),
+        "seed": seed,
     }
 
 
@@ -187,15 +243,31 @@ def main():
     res_10 = run_fit("10-channel (+radio relic)", loglike_10channel)
     res_11 = run_fit("11-channel (+DM-free UDG)", loglike_11channel)
     res_12 = run_fit("12-channel (+cosmic-web radio, eps=10^-35)", loglike_12channel)
+    res_13 = run_fit("13-channel (+LSB NGC 5963 core bound 0.2 cm2/g)", loglike_13channel_lsb)
+    res_13t = run_fit("13-channel tight (LSB bound 0.1 cm2/g)",
+                      lambda s0, a: loglike_13channel_lsb(
+                          s0, a, lsb_limit_cm2_g=NGC5963_SIGMA_LIMIT_TIGHT))
 
     print(f"\n=== Summary ===")
     print(f"{'label':<45} {'log_Z':<10} {'median σ/m_0':<14} {'68% CI':<22} {'a'}")
-    for r in [res_5, res_6, res_8, res_9, res_10, res_11, res_12]:
+    for r in [res_5, res_6, res_8, res_9, res_10, res_11, res_12, res_13, res_13t]:
         ci = f"[{r['p16_sigma_m_0']:.2f}, {r['p84_sigma_m_0']:.2f}]"
         print(f"{r['label']:<45} {r['log_Z']:<10.3f} {r['median_sigma_m_0']:<14.3f} {ci:<22} {r['median_a']:.2f}")
 
     out = {
         "test": "T13_v2_12channel_with_2018_2026_constraints",
+        "sampler_settings": {
+            "sampler": "dynesty NestedSampler (bound=multi, sample=auto, bootstrap=0)",
+            "dynesty_version": dynesty.__version__,
+            "seed": SEED,
+            "nlive": NLIVE,
+            "dlogz": DLOGZ,
+            "log10_sigma_m_0_prior": list(LOG_SIGMA_M_RANGE),
+            "a_prior": list(A_RANGE),
+            "seeded_rebaseline": "2026-11-13 — earlier copies of this artifact "
+                                 "recorded no seed and no nlive, so their log Z "
+                                 "could not be reproduced",
+        },
         "res_5channel": res_5,
         "res_6channel": res_6,
         "res_8channel": res_8,
@@ -203,6 +275,17 @@ def main():
         "res_10channel": res_10,
         "res_11channel": res_11,
         "res_12channel": res_12,
+        "res_13channel_lsb": res_13,
+        "res_13channel_lsb_tight": res_13t,
+        "channel_14_citation": "astro-ph/0506345 (Sanchez-Salcedo, Melnick & Vega 2005, ApJ 626,173) — NGC 5963 core collapsibility; primary PDF in docs/papers/verified/",
+        "channel_14_status": "PRODUCTION (adopted 2026-11-13, LSB core-check round) — one-sided UPPER bound, sigma_0 <~ 0.2 cm^2/g at 95% CL quoted at v0 = 100 km/s (= this project's V_REF); evaluated at v ~ 150 km/s",
+        "channel_14_shipped_arms_cm2_g": [NGC5963_SIGMA_LIMIT_CM2G, NGC5963_SIGMA_LIMIT_TIGHT],
+        "channel_14_shipped_arms_decision": "Owner decision 2026-11-13: BOTH arms ship as production — 0.2 cm^2/g (the paper's 95% CL core-size fit) and 0.1 cm^2/g (their tightest fit).  The 0.1 arm is not a sensitivity probe any more; it is a shipped arm, so the ladder reports both posteriors side by side and neither is quoted alone.",
+        "kitazawa_citation_policy": "CAUTIONARY AUDIT ONLY (owner decision 2026-11-13).  arXiv:2605.05588 (Kitazawa 2026, v1 only, no journal reference, no erratum) may be cited as an example of a published LSB core-formation timescale whose printed time column is 1e3 smaller than its own equations produce (30/30 entries across all six tables, ratios 952-1072; kpc^3<->pc^3 ruled out because that slip is 1e9 and the NFW mass check passes 15/15).  It may NOT be cited as evidence for sigma/m ~ 0.1 cm^2/g: recomputed, the same halos require sigma/m >~ 24-82 cm^2/g to form cores in 11-13 Gyr.  Audit code: channels_lsb_core.kitazawa_unit_adjudication(); tests: TestKitazawaUnitAdjudication.",
+        "channel_14_limit_used_cm2_g": NGC5963_SIGMA_LIMIT_CM2G,
+        "channel_14_tight_variant_cm2_g": NGC5963_SIGMA_LIMIT_TIGHT,
+        "channel_14_sensitivity_note": "Sánchez-Salcedo+ warn their limit 'may be overestimated by as much as a factor 2'; the 0.1 cm^2/g variant (their tightest core-size fit) is run alongside as the conservative arm.  Ablation with 3 seeds: dlog Z = -0.31 +/- 0.09 (0.2) and -0.48 +/- 0.11 (0.1) vs sampler noise 0.09-0.11; median sigma/m_0 down 0.16-0.22 dex; 68% upper bound 1.49 -> 0.50 / 0.34.  See t13_v2_lsb_ablation_2026-11-13.json.",
+        "channel_12_null_channel_note": "loglike_cosmic_web_radio evaluated at the pinned epsilon = 10^-35 returns exactly 0.0 across the whole prior box (checked on 20 points spanning sigma/m_0 1e-3..10 and a -2..2), which is why the 11- and 12-channel log Z agree to 3 decimals.  Channel 12 constrains epsilon, not sigma/m, and cannot move this posterior.",
         "channel_6_citation": "arXiv:2510.11006 (Yang, Yang, Yu et al. 2026, PRL)",
         "channel_7_citation": "arXiv:2503.13650 (Hayashi et al. 2025)",
         "channel_8_citation": "arXiv:2508.20179 (O'Donnell et al. 2026, PRD 113, 063531)",

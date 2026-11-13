@@ -33,6 +33,12 @@ This is a knowledge base for the v19.2-F project's paper references. It is organ
 
 ## Verified papers (full text downloaded + key values verified)
 
+**2026-11-13 — LSB core-check intake (registry §7.12).** 2 papers added, 1 promoted to full-text verified.
+
+- [[astro-ph_0506345_sanchezsalcedo_2005_ngc5963|Sánchez-Salcedo, Melnick & Vega 2005]] — Dark matter in NGC 5963, ApJ 626, 173. **Full text read from the downloaded PDF.** Source of the usable LSB bound: `sigma_0 <~ 0.2 cm^2 g^-1` at 95% CL (`<~0.1` tighter fit, `<~0.08` from the core-collapse / halo-lifetime test), quoted at **v_0 = 100 km/s — the same V_REF convention this project uses**. Implemented as `loglike_lsb_ngc5963_core()`.
+- [[2605.05588_kitazawa_2026_lsb_cores|Kitazawa 2026]] — SIDM core formation in field LSB galaxies. **Held in `to_verify/`: its printed `t_core` values failed an independent recomputation by a factor ~10^3 (5/5 objects, both cross sections).** Its catalogue passes an NFW mass check, so the defect is in the times. Do not quote its times or its "sigma/m ~ 0.1 favoured" conclusion. **Cite it as a cautionary audit only** (owner decision 2026-11-13): it is a worked example of a published core-formation timescale whose time column is 10^3 low.
+- [[2509.24270_wang_2026_dmdg_collisions|Wang, Yang, Lu, Tsai & Fan 2025-26]] — Dark-matter-deficient galaxies from collisions. Abstract-level; kept as a **diagnostic idea** (bursty feedback lowers |E_bind| ~15%, elastic SIDM makes cores without lowering it) for the DM-free-UDG channel. No likelihood built yet.
+
 **2026-11-09 — intake from the user's "Useful papers.docx"** (8 papers; registry §7.11). Read end-to-end from pypdf text extraction; every headline number below was spot-grepped against the extracted text before promotion.
 
 - [[9611107 Navarro+FrenkWhite 1997]] — A Universal Density Profile from Hierarchical Clustering — ApJ 490, 493-508, DOI 10.1086/304888. **The profile the paper uses 49x with no citation** (defect D3). Source of eq. 1 and of c = r_200/r_s with rho_crit = 3H^2/8piG.

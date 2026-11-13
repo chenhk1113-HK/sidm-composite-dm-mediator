@@ -1,96 +1,240 @@
 {
   "test": "T13_v2_12channel_with_2018_2026_constraints",
+  "sampler_settings": {
+    "sampler": "dynesty NestedSampler (bound=multi, sample=auto, bootstrap=0)",
+    "dynesty_version": "3.1.0",
+    "seed": 20261113,
+    "nlive": 500,
+    "dlogz": 0.1,
+    "log10_sigma_m_0_prior": [
+      -3.0,
+      2.5
+    ],
+    "a_prior": [
+      -2.0,
+      2.0
+    ],
+    "seeded_rebaseline": "2026-11-13 \u2014 earlier copies of this artifact recorded no seed and no nlive, so their log Z could not be reproduced"
+  },
   "res_5channel": {
     "label": "5-channel",
-    "log_Z": -3.0323974925752344,
-    "median_log_sigma_m_0": -0.21045475171181138,
-    "median_sigma_m_0": 0.6159497003605849,
-    "p16_sigma_m_0": 0.028958030685666866,
-    "p84_sigma_m_0": 2.5466988084569424,
-    "median_a": 0.9929080047139773,
-    "p16_a": -0.09540437733607736,
-    "p84_a": 1.6828184668247264,
-    "wall_seconds": 1.2012290954589844
+    "log_Z": -2.452651997815419,
+    "median_log_sigma_m_0": -1.7209321001304938,
+    "median_sigma_m_0": 0.019013755276751962,
+    "p16_sigma_m_0": 0.0045902755742518965,
+    "p84_sigma_m_0": 0.8707809200091591,
+    "credible_68pct_sigma_m_0": [
+      0.0045902755742518965,
+      0.8707809200091591
+    ],
+    "median_a": 1.2169265803125213,
+    "p16_a": -0.03785122766579509,
+    "p84_a": 1.782966099661783,
+    "credible_68pct_a": [
+      -0.03785122766579509,
+      1.782966099661783
+    ],
+    "wall_seconds": 1.3340134620666504,
+    "n_samples": 2702,
+    "seed": 20261113
   },
   "res_6channel": {
     "label": "6-channel (with lens subhalo)",
-    "log_Z": -4.760268659550959,
-    "median_log_sigma_m_0": -0.0021598052127815848,
-    "median_sigma_m_0": 0.995039210276704,
-    "p16_sigma_m_0": 0.3176852670923504,
-    "p84_sigma_m_0": 5.769855104643394,
-    "median_a": 1.4104878284437392,
-    "p16_a": 0.2963532408870604,
-    "p84_a": 1.8396129977360127,
-    "wall_seconds": 1.7543067932128906
+    "log_Z": -4.083188686357231,
+    "median_log_sigma_m_0": -0.2013823117260518,
+    "median_sigma_m_0": 0.628952269082209,
+    "p16_sigma_m_0": 0.10680188648239726,
+    "p84_sigma_m_0": 4.799473108333141,
+    "credible_68pct_sigma_m_0": [
+      0.10680188648239726,
+      4.799473108333141
+    ],
+    "median_a": 1.3514923202785716,
+    "p16_a": 0.26957988015578943,
+    "p84_a": 1.8256859384576039,
+    "credible_68pct_a": [
+      0.26957988015578943,
+      1.8256859384576039
+    ],
+    "wall_seconds": 1.49043869972229,
+    "n_samples": 2849,
+    "seed": 20261113
   },
   "res_8channel": {
     "label": "8-channel (+MW sat + cluster)",
-    "log_Z": -5.795356587928202,
-    "median_log_sigma_m_0": -0.05450605280586096,
-    "median_sigma_m_0": 0.8820515088104414,
-    "p16_sigma_m_0": 0.2930776870752971,
-    "p84_sigma_m_0": 5.396861731977543,
-    "median_a": 1.4181012092330212,
-    "p16_a": 0.37508469766226277,
-    "p84_a": 1.8380915411139875,
-    "wall_seconds": 1.821587085723877
+    "log_Z": -4.950348557155208,
+    "median_log_sigma_m_0": -0.5780573413133978,
+    "median_sigma_m_0": 0.2642059894528044,
+    "p16_sigma_m_0": 0.055832472191313494,
+    "p84_sigma_m_0": 2.751226413072517,
+    "credible_68pct_sigma_m_0": [
+      0.055832472191313494,
+      2.751226413072517
+    ],
+    "median_a": 1.4445152285537657,
+    "p16_a": 0.28100412320476525,
+    "p84_a": 1.8538179363248046,
+    "credible_68pct_a": [
+      0.28100412320476525,
+      1.8538179363248046
+    ],
+    "wall_seconds": 1.6998016834259033,
+    "n_samples": 2942,
+    "seed": 20261113
   },
   "res_9channel": {
     "label": "9-channel (+Draco dSph)",
-    "log_Z": -7.099359512955308,
-    "median_log_sigma_m_0": -0.14176385552871906,
-    "median_sigma_m_0": 0.7214996827582668,
-    "p16_sigma_m_0": 0.24391472981391266,
-    "p84_sigma_m_0": 4.174462951794266,
-    "median_a": 1.4495773030139576,
-    "p16_a": 0.34071043027524406,
-    "p84_a": 1.861197763822532,
-    "wall_seconds": 1.939452886581421
+    "log_Z": -5.6650961649561555,
+    "median_log_sigma_m_0": -0.8820434739408176,
+    "median_sigma_m_0": 0.13120685511711971,
+    "p16_sigma_m_0": 0.03436908809488078,
+    "p84_sigma_m_0": 1.6868085923130458,
+    "credible_68pct_sigma_m_0": [
+      0.03436908809488078,
+      1.6868085923130458
+    ],
+    "median_a": 1.4796165459980188,
+    "p16_a": 0.29645078877066555,
+    "p84_a": 1.8707480023875498,
+    "credible_68pct_a": [
+      0.29645078877066555,
+      1.8707480023875498
+    ],
+    "wall_seconds": 1.8692936897277832,
+    "n_samples": 3074,
+    "seed": 20261113
   },
   "res_10channel": {
     "label": "10-channel (+radio relic)",
-    "log_Z": -7.112497641762064,
-    "median_log_sigma_m_0": -0.1363154792554624,
-    "median_sigma_m_0": 0.7306081638744792,
-    "p16_sigma_m_0": 0.26335821706791396,
-    "p84_sigma_m_0": 4.143645562510051,
-    "median_a": 1.4500218277700703,
-    "p16_a": 0.35429787491471015,
-    "p84_a": 1.8551130191382008,
-    "wall_seconds": 1.8818199634552002
+    "log_Z": -5.706937458702348,
+    "median_log_sigma_m_0": -0.8965433456027805,
+    "median_sigma_m_0": 0.12689854845679205,
+    "p16_sigma_m_0": 0.03438894020650192,
+    "p84_sigma_m_0": 1.521891866944215,
+    "credible_68pct_sigma_m_0": [
+      0.03438894020650192,
+      1.521891866944215
+    ],
+    "median_a": 1.492569724383658,
+    "p16_a": 0.2959129730021042,
+    "p84_a": 1.8750868090982147,
+    "credible_68pct_a": [
+      0.2959129730021042,
+      1.8750868090982147
+    ],
+    "wall_seconds": 1.9046494960784912,
+    "n_samples": 3097,
+    "seed": 20261113
   },
   "res_11channel": {
     "label": "11-channel (+DM-free UDG)",
-    "log_Z": -7.179868524409691,
-    "median_log_sigma_m_0": -0.16017156520871945,
-    "median_sigma_m_0": 0.6915577215725015,
-    "p16_sigma_m_0": 0.22555639518242795,
-    "p84_sigma_m_0": 3.546800552169886,
-    "median_a": 1.467660219772212,
-    "p16_a": 0.3405129792041678,
-    "p84_a": 1.8674376118974978,
-    "wall_seconds": 1.9647400379180908
+    "log_Z": -5.748576671286595,
+    "median_log_sigma_m_0": -0.8864082950596954,
+    "median_sigma_m_0": 0.12989478186526252,
+    "p16_sigma_m_0": 0.034763894414758544,
+    "p84_sigma_m_0": 1.488052886358434,
+    "credible_68pct_sigma_m_0": [
+      0.034763894414758544,
+      1.488052886358434
+    ],
+    "median_a": 1.4889392056132362,
+    "p16_a": 0.2977420917035619,
+    "p84_a": 1.8715986658489814,
+    "credible_68pct_a": [
+      0.2977420917035619,
+      1.8715986658489814
+    ],
+    "wall_seconds": 2.0565578937530518,
+    "n_samples": 3116,
+    "seed": 20261113
   },
   "res_12channel": {
     "label": "12-channel (+cosmic-web radio, eps=10^-35)",
-    "log_Z": -7.279493649575216,
-    "median_log_sigma_m_0": -0.16489832918815894,
-    "median_sigma_m_0": 0.6840717736359538,
-    "p16_sigma_m_0": 0.23137820118145186,
-    "p84_sigma_m_0": 3.96847290418655,
-    "median_a": 1.4810821893048147,
-    "p16_a": 0.3881975202515488,
-    "p84_a": 1.8668162543125975,
-    "wall_seconds": 2.114920139312744
+    "log_Z": -5.748576671286595,
+    "median_log_sigma_m_0": -0.8864082950596954,
+    "median_sigma_m_0": 0.12989478186526252,
+    "p16_sigma_m_0": 0.034763894414758544,
+    "p84_sigma_m_0": 1.488052886358434,
+    "credible_68pct_sigma_m_0": [
+      0.034763894414758544,
+      1.488052886358434
+    ],
+    "median_a": 1.4889392056132362,
+    "p16_a": 0.2977420917035619,
+    "p84_a": 1.8715986658489814,
+    "credible_68pct_a": [
+      0.2977420917035619,
+      1.8715986658489814
+    ],
+    "wall_seconds": 1.8911442756652832,
+    "n_samples": 3116,
+    "seed": 20261113
   },
+  "res_13channel_lsb": {
+    "label": "13-channel (+LSB NGC 5963 core bound 0.2 cm2/g)",
+    "log_Z": -6.058864795914196,
+    "median_log_sigma_m_0": -1.0486451386043911,
+    "median_sigma_m_0": 0.08940357006463101,
+    "p16_sigma_m_0": 0.025260293163479955,
+    "p84_sigma_m_0": 0.4993522629392521,
+    "credible_68pct_sigma_m_0": [
+      0.025260293163479955,
+      0.4993522629392521
+    ],
+    "median_a": 1.53229715756353,
+    "p16_a": 0.18258800415679097,
+    "p84_a": 1.8956358937152327,
+    "credible_68pct_a": [
+      0.18258800415679097,
+      1.8956358937152327
+    ],
+    "wall_seconds": 3.914281129837036,
+    "n_samples": 3271,
+    "seed": 20261113
+  },
+  "res_13channel_lsb_tight": {
+    "label": "13-channel tight (LSB bound 0.1 cm2/g)",
+    "log_Z": -6.232291465632025,
+    "median_log_sigma_m_0": -1.10952809795515,
+    "median_sigma_m_0": 0.07770910409834124,
+    "p16_sigma_m_0": 0.01988076109040436,
+    "p84_sigma_m_0": 0.3417675375971497,
+    "credible_68pct_sigma_m_0": [
+      0.01988076109040436,
+      0.3417675375971497
+    ],
+    "median_a": 1.5716143848205335,
+    "p16_a": 0.16644774228927073,
+    "p84_a": 1.9090745215509108,
+    "credible_68pct_a": [
+      0.16644774228927073,
+      1.9090745215509108
+    ],
+    "wall_seconds": 4.200162887573242,
+    "n_samples": 3359,
+    "seed": 20261113
+  },
+  "channel_14_citation": "astro-ph/0506345 (Sanchez-Salcedo, Melnick & Vega 2005, ApJ 626,173) \u2014 NGC 5963 core collapsibility; primary PDF in docs/papers/verified/",
+  "channel_14_status": "PRODUCTION (adopted 2026-11-13, LSB core-check round) \u2014 one-sided UPPER bound, sigma_0 <~ 0.2 cm^2/g at 95% CL quoted at v0 = 100 km/s (= this project's V_REF); evaluated at v ~ 150 km/s",
+  "channel_14_shipped_arms_cm2_g": [
+    0.2,
+    0.1
+  ],
+  "channel_14_shipped_arms_decision": "Owner decision 2026-11-13: BOTH arms ship as production \u2014 0.2 cm^2/g (the paper's 95% CL core-size fit) and 0.1 cm^2/g (their tightest fit).  The 0.1 arm is not a sensitivity probe any more; it is a shipped arm, so the ladder reports both posteriors side by side and neither is quoted alone.",
+  "kitazawa_citation_policy": "CAUTIONARY AUDIT ONLY (owner decision 2026-11-13).  arXiv:2605.05588 (Kitazawa 2026, v1 only, no journal reference, no erratum) may be cited as an example of a published LSB core-formation timescale whose printed time column is 1e3 smaller than its own equations produce (30/30 entries across all six tables, ratios 952-1072; kpc^3<->pc^3 ruled out because that slip is 1e9 and the NFW mass check passes 15/15).  It may NOT be cited as evidence for sigma/m ~ 0.1 cm^2/g: recomputed, the same halos require sigma/m >~ 24-82 cm^2/g to form cores in 11-13 Gyr.  Audit code: channels_lsb_core.kitazawa_unit_adjudication(); tests: TestKitazawaUnitAdjudication.",
+  "channel_14_limit_used_cm2_g": 0.2,
+  "channel_14_tight_variant_cm2_g": 0.1,
+  "channel_14_sensitivity_note": "S\u00e1nchez-Salcedo+ warn their limit 'may be overestimated by as much as a factor 2'; the 0.1 cm^2/g variant (their tightest core-size fit) is run alongside as the conservative arm.  Ablation with 3 seeds: dlog Z = -0.31 +/- 0.09 (0.2) and -0.48 +/- 0.11 (0.1) vs sampler noise 0.09-0.11; median sigma/m_0 down 0.16-0.22 dex; 68% upper bound 1.49 -> 0.50 / 0.34.  See t13_v2_lsb_ablation_2026-11-13.json.",
+  "channel_12_null_channel_note": "loglike_cosmic_web_radio evaluated at the pinned epsilon = 10^-35 returns exactly 0.0 across the whole prior box (checked on 20 points spanning sigma/m_0 1e-3..10 and a -2..2), which is why the 11- and 12-channel log Z agree to 3 decimals.  Channel 12 constrains epsilon, not sigma/m, and cannot move this posterior.",
   "channel_6_citation": "arXiv:2510.11006 (Yang, Yang, Yu et al. 2026, PRL)",
   "channel_7_citation": "arXiv:2503.13650 (Hayashi et al. 2025)",
   "channel_8_citation": "arXiv:2508.20179 (O'Donnell et al. 2026, PRD 113, 063531)",
   "channel_9_citation": "Read+ 2018 (Draco dSph, 99% CL upper limit)",
   "channel_10_citation": "arXiv:2605.00093 (Lee et al. 2026, 11-cluster radio relic, 68% upper limit)",
-  "channel_11_citation": "arXiv:1803.10237 + 1901.05973 + 2205.08552 (van Dokkum+ 2018-2026, DM-free UDGs)",
+  "channel_11_citation": "arXiv:1803.10237 + 1901.05973 + 2205.08552 + 2502.05405 + 2603.15860 + 2605.24099 (van Dokkum+ 2018-2026 + Buzzo+ 2025-2026 + Keim+ 2026, DM-free UDGs \u2014 six confirmed examples)",
+  "channel_11_status": "experimental \u2014 NOT in primary production (R16 #12, T71.4)",
   "channel_12_citation": "arXiv:2504.08025 (Pinetti et al. 2025-26, cosmic-web radio, eps_upper=-11)",
+  "channel_12_status": "experimental \u2014 NOT in primary production (R16 #12, T71.4)",
   "channel_12_epsilon_fixed": 1e-35,
   "interpretation": "12-channel fit combines 5 original channels + 7 new peer-reviewed constraints from 2018-2026 literature. Channels 6+7+8+9+10 bracket \u03c3/m across 5 orders of magnitude in velocity scale (10-2000 km/s). Channel 11 (NEW) provides a consistency check: the empirical existence of DM-free UDGs (NGC 1052-DF2/DF4 + FCC 224/240) is consistent with the SIDM model at the MAP \u03c3/m_0 ~ 0.78 cm\u00b2/g. Channel 12 (NEW) provides an indirect-detection upper limit on the kinetic-mixing \u03b5 that is trivially satisfied at the project's wide-prior posterior median \u03b5 ~ 10\u207b\u00b3\u2075 (the Pinetti bound is at \u03b5 ~ 10\u207b\u00b9\u00b9)."
 }

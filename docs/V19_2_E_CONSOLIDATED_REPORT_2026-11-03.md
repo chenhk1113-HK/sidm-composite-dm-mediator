@@ -48,7 +48,7 @@ Two real repository bugs found while testing `2610.28890`'s applicability to Clo
 
 ## 5. What did NOT change
 
-- 174 cm²/g @ 29.4 km/s anchor (ARCHIVED pair; live canonical raw peak 27.272481773080454 cm²/g; halo-level σ_eff = 15.348366 cm²/g unchanged); joint galaxy-scale 0.06-0.68 cm²/g range; mediator baryon-coupling ceiling <3×10⁻¹¹ (now with external support from Crumrine mixed-DM limits).
+- 174 cm²/g @ 29.4 km/s anchor (ARCHIVED pair; live canonical raw peak 27.272481773080454 cm²/g; halo-level σ_eff = 15.348366 cm²/g unchanged); joint galaxy-scale 0.06-0.68 cm²/g range **[re-issued 2026-11-13: the 0.68 endpoint is a pre-`8629f10` (2026-08-17) artifact with no seed recorded; the seeded T13_v2 ladder gives 12-channel 0.130 [0.03, 1.49] cm²/g, 0.089 [0.03, 0.50] with the new LSB channel — registry §7.12. The 0.06 endpoint is the T41 MAP and is unchanged]**; mediator baryon-coupling ceiling <3×10⁻¹¹ (now with external support from Crumrine mixed-DM limits).
 - The honest headline: **the project has not proven dark matter self-interacts and has not derived a working particle model from first principles** (v19.2-F Phase 3 FAIL stands).
 
 ## 6. Stage 3 status and next actions

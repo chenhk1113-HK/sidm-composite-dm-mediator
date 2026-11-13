@@ -1,5 +1,15 @@
 # 2026 SIDM literature context — Yang+ 2026 (arXiv:2504.02303) and Yang, Yang, Yu+ 2026 (arXiv:2510.11006)
 
+> **Pipeline numbers re-issued 2026-11-13 (registry §7.12).** The σ/m_0 values quoted
+> in this dated document — **0.68 cm²/g** (5-channel) and **0.94 cm²/g** (6-channel),
+> log Z −2.911 / −4.601 — come from artifacts written before commit `8629f10`
+> (2026-08-17, "fix(dSph): replace bimodal-dip surrogate with Horigome+ 0.2 cm²/g upper
+> limit") and record no seed or nlive. The seeded T13_v2 ladder (nlive=500, dlogz=0.1,
+> seeds 20261113 / 20261114) gives 5-channel median σ/m_0 **0.019 [0.00, 0.87]** and
+> 12-channel **0.130 [0.03, 1.49]**. The literature comparisons, citations and physics
+> conclusions below are unchanged; only the pipeline numbers are stale. Read every
+> "pipeline current state" table as the **2026-08-10** state.
+
 **Date**: 2026-08-10
 **Context**: User uploaded "Dark matter latest.docx" pointing to recent SIDM literature.
 **Decision**: Two of the cited papers are directly relevant to this project.
@@ -66,7 +76,7 @@ below + `CHANGELOG.md` [T70] entry.
 | Aspect | Pipeline current state | What this paper adds |
 |---|---|---|
 | Gravothermal model | Implemented (Balberg+ 2002 phase diagram) | **First OBSERVATIONAL validation** (PRL 2026) |
-| σ/m posterior | 0.68 cm²/g (5-channel) | Independent confirmation: σ/m ~ 30-100 cm²/g at subhalo v |
+| σ/m posterior | 0.68 cm²/g (5-channel) **[stale — see banner]** | Independent confirmation: σ/m ~ 30-100 cm²/g at subhalo v |
 | Subhalo mass regime | Not explicitly modeled | Adds Channel 6 (10⁶ M_⊙ subhalos) |
 | Cross-validation | 5 channels | 6 channels (now includes lens substructure) |
 
@@ -85,7 +95,7 @@ below + `CHANGELOG.md` [T70] entry.
 
 | Metric | 5-channel | 6-channel | Δ |
 |---|---|---|---|
-| median σ/m_0 (cm²/g) | 0.68 | **0.94** | **+0.26 (+38%)** |
+| median σ/m_0 (cm²/g) | 0.68 **[stale — see banner]** | **0.94** **[stale — see banner]** | **+0.26 (+38%)** |
 | median a (v-dep index) | 1.03 | **1.43** | +0.40 |
 | 68% CI σ/m_0 | [0.03, 2.53] | [0.31, 4.91] | Tighter lower bound |
 

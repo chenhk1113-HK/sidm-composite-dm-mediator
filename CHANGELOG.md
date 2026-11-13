@@ -1,3 +1,49 @@
+## [LSBChannelRound5-2026-11-13] - LSB core check shipped as Channel 14 (both 0.2 and 0.1 cm^2/g arms); the T13_v2 baseline re-issued with a pinned seed; arXiv:2605.05588 held as a cautionary audit; five standing documents re-issued off the stale 0.68 cm^2/g
+
+**No VERSION change.** The version-of-record physics is untouched: the pairing declaration, the T88.CE standing MAP (log Z -165.32 ± 0.081) and every headline number in `canonical_numbers.json` are unchanged. What changed is the constraint ladder, the reproducibility of one ladder artifact, and one literature verdict.
+
+**Shipped: Channel 14 — NGC 5963 core collapsibility** (`v0.3-prelim/code/channels_lsb_core.py::loglike_lsb_ngc5963_core`, wired into `v0.3-prelim/code/t13_v2_12channel_2025_2026.py`). Source: Sánchez-Salcedo, Melnick & Vega 2005, astro-ph/0506345 (ApJ 626, 173), full PDF read and filed at `docs/papers/verified/astro-ph_0506345_sanchezsalcedo_2005_ngc5963.pdf`. Their limit is quoted at **v0 = 100 km/s, identical to this project's pinned V_REF**, so it maps with no rescaling; the collisions happen at v ~ 150 km/s. One-sided: sigma/m -> 0 (CDM) carries zero penalty. **Both arms ship by owner decision** — 0.2 cm^2/g (95% CL core-size fit) and 0.1 cm^2/g (their tightest fit) — recorded as `channel_14_shipped_arms_cm2_g = [0.2, 0.1]`.
+
+**Ladder effect** (dynesty bound=multi, nlive=500, dlogz=0.1, seeds 20261113 / 20261114):
+
+| Ladder | log Z | median sigma/m_0 | 68% CI | median a |
+|---|---|---|---|---|
+| 12-channel | -5.749 / -5.802 | 0.130 / 0.123 | [0.03, 1.49] / [0.03, 1.41] | 1.49 / 1.45 |
+| + Channel 14 @ 0.2 cm^2/g | -6.059 / -6.004 | 0.089 / 0.088 | [0.03, 0.50] / [0.02, 0.47] | 1.53 / 1.53 |
+| + Channel 14 @ 0.1 cm^2/g | -6.232 / -6.234 | 0.078 / 0.075 | [0.02, 0.34] / [0.02, 0.30] | 1.57 / 1.56 |
+
+Sampler noise floor 0.05-0.11 in log Z (replica seeds), so dlog Z = -0.31 and -0.48 are 3-5x noise: **mild tension, not rejection**; the 68% upper bound tightens ~3x. Separate ablation with three seeds: `v0.3-prelim/code/t13_v2_lsb_ablation.py` -> `t13_v2_lsb_ablation_2026-11-13.json` (+ 2 replica files).
+
+**Baseline re-issued.** `run_fit()` had no `rstate` and `RESULTS_DIR` pointed at a stale 1-commit WSL snapshot clone on this host. Fixed: `SEED = int(os.environ.get("T13_V2_SEED", 20261113))` passed as `rstate=np.random.default_rng(seed)`, `RESULTS_DIR` derived from `__file__`, and every fit record now carries `seed` / `n_samples` plus an artifact-level `sampler_settings` block. The previous artifact (log Z -7.279, median 0.684 cm^2/g) is archived as `_archive_prebaseline_20261113/t13_v2_12channel_2025_2026.superseded_20261113.json` (+ `ARCHIVE_NOTE.md`) — the original `*.bak.*` name is gitignored, so an untracked "backup" would not survive a fresh clone — and is **not citable**: no seed, no nlive, and 13 commits had rewritten parts of the channel code since.
+
+**Root cause of the 0.68 cm^2/g that five standing documents quoted** (measured, not inferred): it is `t12_6channel_with_lens.json` (log Z -2.9106, 0.6785, a 1.028) from the initial snapshot `ede5dd6`. `loglike_5channel`'s composition is identical then and now, and `config.py`'s prior ranges / NLIVE / DLOGZ were never edited, so the shift is the likelihood. Evaluating the initial-snapshot `channels_v03.py` beside the current one at fixed theta: dSph log L **-0.88 -> -1.72** at (1.0, 1.5) and **-1.43 -> -0.15** at (0.019, 1.22), UFD and Bullet identical. The commit responsible is **`8629f10` (2026-08-17), "fix(dSph): replace bimodal-dip surrogate with Horigome+ 0.2 cm^2/g upper limit"** — Channel 2 lost its second peak near sigma/m ~ 10 cm^2/g, which is what had supported a high-sigma mode. Re-issued in place with supersession banners: `CURRENT.md`, `EXTRACT.md`, `docs/findings_2026_SIDM_papers.md`, `docs/V19_2_E_CONSOLIDATED_REPORT_2026-11-03.md`, `docs/INTEGRITY_FINDINGS_2026-11-04.md`. Dated historical tables kept and marked stale. The 0.06 endpoint (T41 MAP) is a different pipeline and was not re-derived.
+
+**Cautionary audit: arXiv:2605.05588 (Kitazawa 2026, v1 only, no journal reference, no erratum, 0 citations).** Owner decision: resolve internally, no author enquiry. Four timescales computed for the same five LSB halos at sigma/m = 1 cm^2/g: printed **0.27-0.87 Gyr**; this repo's Balberg+ 2002 convention **6.99 Gyr**; the paper's own eq. (11)+(7) evaluated here **270-899 Gyr**; Yang+ 2024 eq. 2.2 published prefactor **2281-7605 Gyr** (BM2-calibrated 4151-13836 Gyr). The printed column reproduces our evaluation **halo-by-halo after a factor 10^3** (4-6% residual: 540/565, 870/899, 300/319, 270/270, 690/715), and Yang/ours is a **constant 8.46** on all five halos, i.e. identical halo scaling with a different dimensionless prefactor. `kpc^3 <-> pc^3` is ruled out (that slip is 10^9) and the NFW mass check passes 15/15 (M(<R_c)/M_dyn = 0.92-1.04), so rho_s really is per kpc^3. Our side is anchored by Yang+ 2024's own BM2 halo, which its calibrated function reproduces at 28.70 Gyr against the published 28.7. **Verdict: the arithmetic follows the stated equations; the time column is 10^3 low.** Corrected floors: sigma/m >~ 24-82 cm^2/g for 11-13 Gyr core formation (>~ 12-41 at the paper's own 15 t_core threshold). Second, independent defect: the paper tests t_core = 30 t_r,0 against the age although its own collapse threshold is 450 t_r,0 = 15 t_core, and "t_core < age" is 5/5 in all six tables for BOTH cross sections, so it cannot discriminate 1 from 0.1. Pinned in `channels_lsb_core.kitazawa_unit_adjudication()` / `kitazawa_balberg_t_core_gyr()` and `TestKitazawaUnitAdjudication`. **Citation policy: cautionary audit only** — never as evidence for sigma/m ~ 0.1 cm^2/g, never as an exclusion of 1 cm^2/g.
+
+**New tests / scope fix:** `test_lsb_core_channel.py`, **32 tests**, moved from `tests/` into `v0.3-prelim/tests/` because the gate's pytest layer only runs `v0.3-prelim/tests/` — a shipped channel whose tests the gate never runs is unprotected. Neighbour channel tests still living in `tests/` (UDG, long-term, NGC 1052 trail, gravothermal) remain outside the gate; that gap is disclosed, not closed here.
+
+**KB intake:** `docs/papers/verified/astro-ph_0506345_sanchezsalcedo_2005_ngc5963.{pdf,md}` (254,727 bytes, 13 pp, PDF 1.4, magic verified); `docs/papers/to_verify/2605.05588_kitazawa_2026_lsb_cores.md`; `docs/papers/to_verify/2509.24270_wang_2026_dmdg_collisions.md` (Wang, Yang, Lu, Tsai & Fan 2026, ApJL 997, L43 — attribution corrected; a binding-energy discriminator idea for the DM-free-UDG channel, no likelihood built). Registry: `docs/V19_2_F_REFERENCE_DATA_REGISTRY.md` §7.12. Index: `docs/papers/00_HOME.md`.
+
+**Also found while regenerating the baseline:** Channel 12 (`loglike_cosmic_web_radio` at the pinned epsilon = 10^-35) is a **null channel** — exactly 0.0 at all 20 probe points spanning sigma/m_0 1e-3..10 and a -2..2 — which is why the 11- and 12-channel log Z agree to 3 decimals. It constrains epsilon, not sigma/m.
+
+**Primary sources archived, and the KB downloader was broken.** All three LSB papers now
+have their PDFs on disk with sha256 recorded in the registry (§7.12): Sánchez-Salcedo
+254,727 B / 13 pp, Kitazawa 238,396 B / 16 pp, Wang+ 1,440,381 B / 17 pp. The Kitazawa
+audit was then **re-verified against the PDF itself, row by row: 30/30 rows match**
+`KITAZAWA_SCENARIOS` on name, `A`, `rho_s`, `r_s` and the printed `t_core` for both cross
+sections, with the ages 11 / 13 / 13 Gyr quoted from §3 and every sigma = 0.1 value exactly
+10x its sigma = 1 partner — so the ~10^3 finding is against a faithfully transcribed table.
+`docs/papers/download_papers.sh` had anchored itself with `cd ../..` relative to its own
+directory, which from `docs/papers/` lands in `docs/`, so it had been re-downloading into a
+nested `docs/docs/docs/...` tree — 25 PDFs (~95 MB) stranded six levels deep and invisible
+to the KB. Fixed to an absolute `ROOT`, idempotent by filename, now covering the 2026-11-13
+intake; re-running reports 25 skips / 0 downloads; the two orphaned PDFs
+(`1306.5010`, `1712.02521`) were recovered into `to_verify/` and the junk tree deleted. PDFs
+are gitignored, so the script — not git — is the reproduce path.
+
+**Release gate: 15/15 layers PASS** on this tree (pytest layer 3701 passed); evidence
+`docs/evidence/gate_run_20261113.txt`.
+
 ## [T88CE-Regeneration-2026-11-12] - corrected Born factor chain regenerated at nlive=2000 with pinned seed 20261112; intervals now propagated (derived_intervals in each artifact, credible_68pct in the registry computed from quantiles instead of a frozen literal, reported_sigma derived); three-seed sensitivity; seven pipelines marked SUPERSEDED; AMUSE archived; the audit_claims Cloud-9 M_200 claim re-bound from phase23's nuisance prior (4.7e9, the T90.29 RELHIC best-fit) to the T208 host-halo artifact (5.0e9)
 
 **No VERSION change.** The entire T88.CE record chain was regenerated on 2026-11-12 under the **corrected Born transfer factor** (2026-11-11 fix) with pinned seed `T41_SEED=20261112`, `T41_NLIVE=2000`. Registry (`v0.3-prelim/data/results/canonical_numbers.json`, block `t41_v08_standing_map`) and every artifact now carry posterior intervals (`derived_intervals` with 16/50/84 quantiles for σ/m₀ and a; `credible_68pct` computed from `quantiles_16_50_84` instead of the frozen `T41_V08_CREDIBLE_68PCT` literal; `reported_sigma` derived from `a_difference`). Three gates already PASS: `scripts/audit_claims.py`, `scripts/drift_guard.py`, `scripts/seed_interval_audit.py`.
