@@ -728,7 +728,7 @@ that is no longer reproducible from the repo.
 
 **Decision D10 (raised 2026-11-05 and closed the same day):** re-run T90.57 at production scale (the 2026-09-11 run took ~1,718 s at
 nlive=500 with WIMpy installed) or formally retire the T90-chain naturalness claims. **D10 was
-executed the same day — see the addendum immediately below, which supersedes this paragraph.**
+executed the same day — see the F37-follow-up section further down this file, which supersedes this paragraph.**
 
 ### D10 executed 2026-11-05 — the production chain reproduces the archived verdicts
 
@@ -1733,7 +1733,7 @@ the guard. If a check says "the artifact does not contain what I am looking for,
 that by looking at the artifact — and if the artifact does contain it, the check is
 broken, not the artifact. Make the silent-skip mode assertable.
 
-## F37 — the census gap was a misreading, and the real finding is that a test's outcome depends on which other tests the gate runs (FOUND 2026-11-15, OPEN; FIRST ACCOUNT CORRECTED 2026-11-15)
+## F37 — the census gap was a misreading, and the real finding is that a test's outcome depends on which other tests the gate runs (FOUND 2026-11-15; SEED HALF CLOSED 2026-11-15, CENSUS HALF OPEN; FIRST ACCOUNT CORRECTED 2026-11-15)
 
 **What was originally claimed, and why it was wrong.** The first version of this finding
 asserted a stable 2-3 item gap between the gate's pytest census and a standalone
@@ -1807,10 +1807,9 @@ where the only commit between them changed `VERSION` and markdown prose yet one 
 from pass to skip with the selected total unchanged. Which test, and why, is not identified.
 Any claim of the form "N tests pass" must name the tree and the selection it was measured on.
 
-**Status.** OPEN. It blocks no physics claim in the paper — the standing fit is an
-`nlive=500` production posterior, not this `nlive=50` smoke run. Closing it means pinning
-`rstate`/seed in the smoke test, reporting its interval, and bisecting the full-suite
-interaction.
+**Status.** CLOSED for the seed half (mechanism, seed pinning and the measured band: the F37-follow-up
+section, printed under F38). OPEN for the census half: the 3-item residual, the pass->skip flip, and
+finding F39.
 
 ## F38 — a guard that greps source text broke when the code moved, and its first fix broke again on prose (FOUND AND FIXED 2026-11-15)
 
@@ -1839,3 +1838,93 @@ behaviour changed, not because a string moved.
 against **editing that file**, not against the defect it names. When a check breaks on a
 refactor that preserves the invariant, the check was testing the wrong thing. Prefer
 calling the thing over grepping for the thing.
+
+## F37-follow-up — the mechanism, measured (2026-11-15)
+
+Raw transcripts: `docs/evidence/v51_order_dependence_probes_20261115.txt`. Per-seed scan:
+`docs/evidence/v51_smoke_seed_scan_20261115.json`.
+
+**Global-state inheritance is proven experimentally.** Setting numpy's global seed and leaving
+`dynesty` unpinned gives 79.32 / 82.04 / 56.40 cm²/g for global seeds 1 / 999999 / 424242 —
+the state left by earlier code is an input to the assertion. Pinning `rstate` and scrambling the
+global state instead gives 2584.761 in all three cases. Corroborated at source level
+(`dynesty 3.1.0`, `sampler.py:368`: `self.rstate = rstate or get_random_generator()`, and every
+sampling call threads `self.rstate`; a grep of the package for direct `np.random.*` draws returns
+nothing, so `rstate` is the sampler's only random source).
+
+**Reproducibility after the fix is measured, not assumed.** Seed 20261115, `nlive=50`,
+`dlogz=0.5`: three runs in three fresh processes and four runs back-to-back inside one process
+all returned `sm = 2584.761392`, `log Z = -2.542512`, `n_samples = 223` — byte-identical. No
+process-global residue in dynesty was detected.
+
+**The assertion band is now measured over 32 pinned seeds**: `sm(Cloud-9)` ranges
+11.98 – 5830.69 cm²/g, median 161.45. The band is `1.0 < sm < 20000.0` (12× below the observed
+minimum, 3.4× above the observed maximum). Two consequences worth stating plainly:
+
+- **The 6402.28 failure was sampling noise, not a broken likelihood.** Seed 42 alone reaches
+  5830.69, i.e. essentially the same regime as the value that tripped the old `5000` bound. The
+  old band was simply narrower than the estimator's own spread — an assertion calibrated to a
+  number nobody had measured.
+- **A band wide enough to admit that noise is no longer a physics assertion.** The seeded smoke
+  test with this band is a completion-and-gross-sanity guard. Its `log Z` (~ −2.1 to −2.8 across
+  all 32 seeds) is a different evidence scale from the standing `nlive=500` production posterior
+  (MAP `log Z = −165.32 ± 0.081`) and must never be quoted as evidence for anything.
+
+**Seed and interval now recorded in the artifact**, per the repo's standing rule: `run_dynesty()`
+writes `seed` and `rng` into `t90_v51_resonant_joint_posterior.json`, and a `null` seed there is
+itself the disclosure that a run was not reproducible. `--seed` / `T90_51_SEED` added to the
+script entry point. The production `nlive=500` invocation keeps `seed=None` and is therefore
+labelled unseeded in its own artifact rather than silently presented as reproducible.
+
+**Bisection outcome (what was asked for, and what it produced).** A commit bisect of the flake
+was attempted in a git worktree of `bab9bfa` and abandoned as invalid for this defect, for two
+reasons: (a) the smoke test **passed** in that unfiltered full-suite run, so the failure does not
+reproduce on the current tree and there is no red-to-green boundary to bisect — the flake is a
+draw, not a regression introduced by a commit; (b) the worktree run's 10 failures are all
+artifacts of cloning (finding F39), so that tree is not a faithful replica to bisect on. What
+replaced the bisect is the direct mechanism test above, which is stronger evidence than a bisect
+would have given: a bisect locates a change, it does not establish a mechanism.
+
+**The census half stays open:** the 3-item / 0.08% residual, the `c0adf38` vs `3c50e70`
+pass→skip flip, and finding F39 below. Any claim of the form "N tests pass" must name the tree
+**and** the selection it was measured on.
+
+## F39 — the test suite depends on files that git does not track, so "green" is not reproducible from a clone (FOUND 2026-11-15, OPEN)
+
+An unfiltered full-suite run in a **git worktree** of `bab9bfa` reported
+`10 failed, 3641 passed, 112 skipped in 1104.12 s`. The same tests pass in the working copy:
+
+| failing test (worktree) | reason given | in the working copy |
+|---|---|---|
+| `test_fH_pairing_registry.py::test_registry_describes_the_current_source`, `::test_both_buckets_are_populated` | registry inputs absent | 6 passed in 9.61 s |
+| `test_t90_v23_dry_run.py` ×5 | `Expected output at ...\sidm_bisect\v0.3-prelim\outputs\t90\t90_v23_lz_lowE_count.json` | outputs present |
+| `test_v40_61_n14_docx_response.py::test_ohana_paper_saved_locally` | `the Ohana+ 2026 PDF must be saved locally: ...\docs\papers\verified\2608.04362_...pdf` | PDF present (2,654,775 bytes) |
+| `test_phase33d_real_sparc.py::test_sparc_table_downloaded` | `FileNotFoundError` inside the worktree | — |
+
+Every failure names a path **inside the clone**, and the two decisive inputs are git-ignored:
+
+```
+docs/papers/.gitignore:11:*.pdf     -> docs/papers/verified/2608.04362_ohana_2026_cloud9_cdm_sidm.pdf
+.gitignore:38:outputs/              -> v0.3-prelim/outputs/t90
+```
+
+**Why it matters.** A green gate is only a reproducibility claim if the tree it ran on can be
+recreated. Ten tests cannot pass in a fresh clone, so today's certification is a statement about
+*this working copy*, not about the repository. `test_fH_pairing_registry` is the uncomfortable
+one: it is the guard that asserts the pairing registry describes its source data, and its source
+data is untracked.
+
+**What would close it, in order of honesty:** (1) track the inputs the tests need (the verified
+PDF is 2.6 MB; `outputs/t90` count files are small JSONs); (2) have those tests skip with a named
+reason when their input is absent, so a clone reports "not evaluated" instead of "failed";
+(3) do nothing and state in the certification record that gate results are working-copy-scoped.
+Option (2) is the cheap one and it is disclosure, not a fix — the claim still cannot be
+reproduced by anyone else.
+
+**Also open, same census family:** the worktree run skipped 112 tests while the gate's filtered
+run on the same commit skipped 25. Some of that is selection (deselected tests cannot report a
+skip), but the residue was not identified, and `-q` output does not list runtime skips, so the
+number of assertions the certified gate never exercised is currently unmeasured. Collection-time
+skips are identical under both selections (3, all file-level `pytest.skip(...)` stubs left behind
+by deleted phase docs — finding F18 / D9), which means the difference is entirely runtime skips and
+therefore entirely context-dependent.

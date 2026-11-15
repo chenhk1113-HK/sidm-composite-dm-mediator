@@ -2,7 +2,7 @@
 
 > **For:** Anyone who has 60 seconds and wants to know what this project
 > is, what it claims, and what the current best numbers are.
-> Updated with each version-bump round. Last refresh: 2026-11-15 (`v40.64-LSBChannelRound5-FrontPageRefresh-2026-11-15` — VERSION advanced, front pages re-issued, save tag `v19.2-F-RecordSave-2026-11-15` → `c0adf38` with `v40.64-…` anchored on the bump commit; no physics change). Previous refresh 2026-11-13 (`LSBChannelRound5-2026-11-13` LSB core-check round — Channel 14 shipped, baseline re-issued with a pinned seed, one external paper held as a cautionary audit; no VERSION change at the time). Same-day follow-up, no VERSION change: `BadgeGuardRepair-2026-11-15` — the README test-count guard had been inert on every recent tagged tree (finding F36, fixed), a second guard was found broken by the repair's own refactor (F38, fixed), and the first account of finding F37 was a misreading that has been corrected in place. Current head certified 15/15 on `bafb508` (3709 passed / 25 skipped / 40 deselected).
+> Updated with each version-bump round. Last refresh: 2026-11-15 (`v40.64-LSBChannelRound5-FrontPageRefresh-2026-11-15` — VERSION advanced, front pages re-issued, save tag `v19.2-F-RecordSave-2026-11-15` → `c0adf38` with `v40.64-…` anchored on the bump commit; no physics change). Previous refresh 2026-11-13 (`LSBChannelRound5-2026-11-13` LSB core-check round — Channel 14 shipped, baseline re-issued with a pinned seed, one external paper held as a cautionary audit; no VERSION change at the time). Same-day follow-up, no VERSION change: `BadgeGuardRepair-2026-11-15` — the README test-count guard had been inert on every recent tagged tree (finding F36, fixed), a second guard was found broken by the repair's own refactor (F38, fixed), and the first account of finding F37 was a misreading that has been corrected in place. Same-round follow-up: F37's seed half CLOSED (dynesty `rstate` pinned, assertion band measured over 32 seeds, seed recorded in the artifact) and F39 OPENED (the suite depends on git-ignored inputs, so gate certifications are working-copy-scoped). Current head certified 15/15 on `bafb508` (3709 passed / 25 skipped / 40 deselected).
 
 ---
 
@@ -90,6 +90,39 @@ tree. Strictness was additionally opt-in and nothing set it, and its collect rec
   returns. A guard that greps a specific file is a guard against editing that file, not against its named defect.
 * **No VERSION change.** No physics, no refit, no channel. A guard repair is a verification-asset change, and its
   evidence is a green full-gate run on the commit that carries it.
+
+**Follow-up in the same round — F37's seed half CLOSED, F39 opened.**
+
+* **Mechanism established by experiment, not argument.** `run_dynesty()` now takes `seed` and passes
+  `numpy.random.default_rng(seed)` to `dynesty.NestedSampler` as `rstate`. Unpinned dynesty under three
+  numpy global seeds returns 79.32 / 82.04 / 56.40 cm^2/g; `rstate` pinned under three deliberately
+  scrambled global states returns 2584.761 every time. The process's leftover RNG state was an input to
+  the assertion. Source corroboration: `dynesty 3.1.0` `sampler.py:368` (`self.rstate = rstate or
+  get_random_generator()`), and no direct `np.random.*` draw anywhere in the package.
+* **Reproducible, measured:** seed 20261115 gave `sm = 2584.761392`, `log Z = -2.542512`,
+  `n_samples = 223` byte-identically in three fresh processes and in four runs inside one process.
+* **The assertion band is measured over 32 pinned seeds:** 11.98 - 5830.69 cm^2/g, median 161.45; band set
+  to `1.0 < sm < 20000.0`. So the 6402.28 that tripped the old `5000` bound was **sampling noise, not a
+  broken likelihood** (seed 42 alone reaches 5830.69), and the seeded smoke test is a completion-and-
+  gross-sanity guard: its `log Z` (-2.1 to -2.8) is a different evidence scale from the standing
+  `nlive=500` production posterior (MAP `log Z = -165.32 +- 0.081`) and is not quotable as evidence.
+* **Seed recorded in the artifact:** `seed` and `rng` now written into
+  `v0.3-prelim/data/results/t90_v51_resonant_joint_posterior.json`; `seed: null` is itself the disclosure
+  that a run was not reproducible. The production `nlive=500` invocation keeps `seed=None` and is labelled
+  unseeded rather than silently presented as reproducible. Evidence:
+  `docs/evidence/v51_smoke_seed_scan_20261115.json`, `docs/evidence/v51_order_dependence_probes_20261115.txt`.
+* **The requested bisect was attempted and abandoned as invalid for this defect:** the smoke test passed in
+  an unfiltered full-suite run of a `bab9bfa` worktree, so the flake is a draw rather than a regression and
+  no red-to-green boundary exists; a direct mechanism test replaced it (a bisect locates a change, it does
+  not establish a mechanism).
+* **NEW OPEN FINDING F39:** that clone run reported `10 failed, 3641 passed, 112 skipped in 1104.12 s`
+  where the same tests pass in the working copy, every failure naming a path inside the clone, because the
+  inputs are git-ignored (`docs/papers/.gitignore:11 *.pdf` — the Ohana+ 2026 verified PDF; `.gitignore:38
+  outputs/` — the `t90_v23_*` count files). It includes `test_fH_pairing_registry`, the guard that asserts
+  the pairing registry describes its source data, whose source data is untracked. Also unmeasured: 112 skips
+  in the clone run vs 25 in the gate's filtered run on the same commit (collection-time skips are identical
+  at 3, so the residue is entirely runtime skips). **Consequence: the 2026-11-15 certifications are
+  working-copy-scoped; a fresh clone cannot reproduce them.**
 
 ## Standing: `LSBChannelRound5-2026-11-13` — LSB core check shipped as Channel 14 (no VERSION change)
 

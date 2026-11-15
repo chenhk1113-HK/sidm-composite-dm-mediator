@@ -1,0 +1,98 @@
+F37 MECHANISM PROBES — raw transcripts, 2026-11-15
+Repo: C:\Users\lamkuenai\projects\sidm-composite-dm-mediator  branch wip/v19.2-F-init
+Interpreter: .venv-sidm-bench\Scripts\python.exe (Python 3.12.13), dynesty 3.1.0
+Subject: v0.3-prelim/code/t90_v51_resonant_joint_fit.py::run_dynesty(nlive=50, dlogz=0.5)
+
+==========================================================================
+PROBE 1 — does an UNSEEDED dynesty sampler inherit numpy's GLOBAL RNG state?
+script: scratch/v51_state_probe.py
+==========================================================================
+
+A) numpy global seed set immediately before the call; sampler left unseeded (seed passed as None)
+   global_seed=1        recorded seed_field=None   sm(Cloud-9)=79.316   logZ=-2.500
+   global_seed=999999   recorded seed_field=None   sm(Cloud-9)=82.044   logZ=-2.533
+   global_seed=424242   recorded seed_field=None   sm(Cloud-9)=56.400   logZ=-2.643
+   -> three different global seeds give three different posterior medians (56.4 - 82.0).
+      NOTE log Z barely moves (-2.500 / -2.533 / -2.643) while the median prediction moves 45%.
+      The evidence is stable; the quantity the assertion tests is not.
+
+B) dynesty rstate pinned to 20261115; numpy global state deliberately scrambled beforehand
+   (np.random.seed(g); np.random.random(10000))
+   global_seed=1        seed_field=20261115   sm(Cloud-9)=2584.761   logZ=-2.543
+   global_seed=999999   seed_field=20261115   sm(Cloud-9)=2584.761   logZ=-2.543
+   global_seed=424242   seed_field=20261115   sm(Cloud-9)=2584.761   logZ=-2.543
+   -> with rstate pinned, three wildly different global states produce BYTE-IDENTICAL results.
+
+CONCLUSION (mechanism established by experiment, not by reading docs): the sampler's random
+draws come from the process's global numpy state unless rstate is supplied. In an unseeded
+test, "which tests ran earlier in the same pytest process" is an input to the assertion.
+
+Source-level corroboration (dynesty 3.1.0, .venv-sidm-bench/Lib/site-packages/dynesty/sampler.py:368):
+    self.rstate = rstate or get_random_generator()
+and every sampling call inside the sampler threads self.rstate (sampler.py:475-549). Grepping the
+package for direct global draws (`np.random.random|uniform|normal|choice|rand`) returns nothing,
+so rstate is the only random source -- i.e. supplying it fully determines the sampler.
+
+==========================================================================
+PROBE 2 — is a PINNED rstate reproducible across processes and across runs in one process?
+script: scratch/v51_determinism_probe2.py     seed = 20261115, nlive=50, dlogz=0.5
+==========================================================================
+
+A) three runs, one per FRESH process
+   proc0  sm=2584.761392  logZ=-2.542512  n_samples=223
+   proc1  sm=2584.761392  logZ=-2.542512  n_samples=223
+   proc2  sm=2584.761392  logZ=-2.542512  n_samples=223
+
+B) four runs inside ONE process (sampler instances created back to back)
+   i=0    sm=2584.761392  logZ=-2.542512  n_samples=223
+   i=1    sm=2584.761392  logZ=-2.542512  n_samples=223
+   i=2    sm=2584.761392  logZ=-2.542512  n_samples=223
+   i=3    sm=2584.761392  logZ=-2.542512  n_samples=223
+
+CONCLUSION: seven runs, seven byte-identical results. Pinning rstate makes the run
+reproducible both across processes and inside a single process where earlier sampler
+instances ran first. No dynesty process-global residue was detected.
+
+==========================================================================
+PROBE 3 — pytest-level determinism and order independence AFTER the seed fix
+==========================================================================
+
+test_t90_v51_resonant_joint_fit.py::test_smoke_run (seed=20261115, band 1.0 < sm < 10000.0)
+   isolated run 1: 1 passed in 1.47s
+   isolated run 2: 1 passed in 1.45s
+   isolated run 3: 1 passed in 1.44s
+
+same test run AFTER the 40 gate-deselected families, in the SAME pytest process
+(-k "(T132 or T131 or T133 or T134 or T135 or T220) or t90_v51"):
+   53 passed, 3 skipped, 3718 deselected in 9.01s   -> the smoke test passed
+
+For contrast, the same ordering with the test UNSEEDED (commit 0ed9e55, band 1.0 < sm < 5000.0):
+   unfiltered full run: test failed with sm(Cloud-9) = 6402.280627119054
+
+==========================================================================
+PROBE 4 — the worktree/bisect environment is NOT a faithful replica (F39)
+==========================================================================
+
+Unfiltered full-suite run in a git worktree of bab9bfa (scratch/sidm_bisect):
+   10 failed, 3641 passed, 112 skipped in 1104.12s   (3763 items)
+   FAILED test_fH_pairing_registry.py::test_registry_describes_the_current_source
+   FAILED test_fH_pairing_registry.py::test_both_buckets_are_populated
+   FAILED test_phase33d_real_sparc.py::TestPhase33d::test_sparc_table_downloaded
+   FAILED test_phase7d_t95_stream.py::test_phase7d_runs_as_script
+   FAILED test_t90_v23_dry_run.py  x5
+   FAILED test_v40_61_n14_docx_response.py::test_ohana_paper_saved_locally
+   (the smoke test test_t90_v51_resonant_joint_fit.py::test_smoke_run PASSED in this run)
+
+Every failure names a path INSIDE the worktree:
+   FileNotFoundError ... scratch\sidm_bisect\...
+   AssertionError: Expected output at ...\sidm_bisect\v0.3-prelim\outputs\t90\t90_v23_lz_lowE_count.json
+   AssertionError: ... the Ohana+ 2026 PDF must be saved locally: ...\sidm_bisect\docs\papers\verified\2608.04362_ohana_2026_cloud9_cdm_sidm.pdf
+
+Those inputs are git-IGNORED and therefore absent from any clone:
+   docs/papers/.gitignore:11:*.pdf        -> docs/papers/verified/2608.04362_ohana_2026_cloud9_cdm_sidm.pdf
+   .gitignore:38:outputs/                 -> v0.3-prelim/outputs/t90
+Re-run in the main repo where the untracked inputs exist:
+   pytest v0.3-prelim/tests/test_fH_pairing_registry.py -> 6 passed in 9.61s
+So a git-cloned tree CANNOT run these 10 tests: the repo's test suite depends on untracked
+files that no clone carries, and a "green gate" measured on a working copy is not a
+reproducibility claim about a fresh checkout.

@@ -146,16 +146,43 @@ def test_smoke_run(tmp_path):
     t90_v5x_*_joint_posterior.json artifact. Before the fix it wrote a
     nlive=50 posterior over the nlive=500 production one on every pytest
     run, silently degrading the repo's evidence (v40.60 Defect E).
+
+    SEED PINNED 2026-11-15 (finding F37). The sampler now receives its own random state.
+    Before this, run_dynesty() passed no seed and dynesty drew from its internal Generator
+    seeded from numpy's GLOBAL state -- i.e. from whatever the preceding tests in the same
+    pytest process left behind. The assertion below then depended on which other tests ran:
+    it passed inside the gate's filtered pytest layer and failed on an unfiltered run of the
+    same tree with sigma/m(Cloud-9) = 6402.28 against the upper bound 5000.
+
+    THE BAND BELOW IS MEASURED, NOT INVENTED. The nlive=50 smoke median sigma/m(Cloud-9)
+    was evaluated across 32 pinned seeds (nlive=50, dlogz=0.5, seed passed to dynesty as
+    rstate): range 12.0 - 5830.7 cm^2/g, median ~161. So a four-digit nlive=50 median is
+    ordinary sampling noise for this estimator, and the failure at 6402.28 was the tail of
+    that distribution, not a broken likelihood. The bounds here are 12x below the observed
+    minimum and 3.4x above the observed maximum. Read honestly, that makes this a
+    completion-and-gross-sanity guard rather than a physics assertion -- a band wide enough
+    to admit the estimator's own noise cannot also catch a subtle physics error. The physics
+    assertion is the nlive=500 production posterior (standing T88.CE MAP log Z -165.32 +-
+    0.081), which is a different run with a different evidence scale; this smoke run's log Z
+    (~ -2.1 to -2.8 across all 32 seeds) is a scale check only and must never be quoted as
+    evidence. Raw per-seed scan: docs/evidence/v51_smoke_seed_scan_20261115.json; mechanism
+    and reproducibility probes: docs/evidence/v51_order_dependence_probes_20261115.txt.
     """
     from t90_v51_resonant_joint_fit import run_dynesty
-    s = run_dynesty(nlive=50, dlogz=0.5, output_dir=str(tmp_path))
+    SMOKE_SEED = 20261115  # pinned smoke median sigma/m(Cloud-9) = 2584.76 cm^2/g
+    s = run_dynesty(nlive=50, dlogz=0.5, output_dir=str(tmp_path), seed=SMOKE_SEED)
+    # The seed must be recorded IN the artifact, not only in this file (finding F37).
+    assert s.get("seed") == SMOKE_SEED, f"artifact did not record the seed: {s.get('seed')!r}"
     # Should produce finite log Z
     assert np.isfinite(s["log_Z"])
     # Posterior median sigma/m(Cloud-9) should be in or near [30, 500]
     pred = s["posterior_median_predictions"]
     sm_c9 = pred["sigma_m_Cloud9_cm2_per_g"]
-    # Smoke run at nlive=50 may give noisy median; allow broader band
-    assert 1.0 < sm_c9 < 5000.0, f"sm(Cloud-9) = {sm_c9} wildly off"
+    # Band measured across 32 pinned seeds (12.0 - 5830.7); see docstring.
+    assert 1.0 < sm_c9 < 20000.0, (
+        f"sm(Cloud-9) = {sm_c9} wildly off for seed={SMOKE_SEED} "
+        f"(measured nlive=50 pinned-seed range 12.0-5830.7 over 32 seeds)"
+    )
     # Galactic should respect <2 limit (median may be in tail)
     assert pred["sigma_m_Galaxy_cm2_per_g"] < 10.0
     # Bullet should be small

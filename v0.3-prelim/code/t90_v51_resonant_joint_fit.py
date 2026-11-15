@@ -172,8 +172,19 @@ def prior_transform_6(u):
 # --------------------------------------------------------------------------
 # Main
 # --------------------------------------------------------------------------
-def run_dynesty(nlive: int = 500, dlogz: float = 0.05, output_dir: str = None):
-    """Run the 6D resonant SIDM joint fit with dynesty nested sampling."""
+def run_dynesty(nlive: int = 500, dlogz: float = 0.05, output_dir: str = None,
+                seed: int | None = None):
+    """Run the 6D resonant SIDM joint fit with dynesty nested sampling.
+
+    seed (added 2026-11-15, finding F37): when given, the sampler's OWN random state is
+    pinned via dynesty's `rstate` argument. Seeding numpy's global RNG would NOT make the
+    run reproducible, because dynesty draws from its internal Generator -- and with no
+    seed at all the run inherits whatever global state the preceding tests left behind,
+    which is how the nlive=50 smoke test came to pass inside the gate's filtered run and
+    fail on an unfiltered run of the same tree (6402.28 against a 5000 bound).
+    None (the default) preserves the historical unseeded behaviour for the production
+    nlive=500 invocation, which has its own dated artifact and its own seed discipline.
+    """
     import dynesty
 
     if output_dir is None:
@@ -187,6 +198,7 @@ def run_dynesty(nlive: int = 500, dlogz: float = 0.05, output_dir: str = None):
         )
     Path(output_dir).mkdir(parents=True, exist_ok=True)
 
+    rstate = np.random.default_rng(seed) if seed is not None else None
     sampler = dynesty.NestedSampler(
         loglike_resonant_3ch,
         prior_transform_6,
@@ -195,6 +207,7 @@ def run_dynesty(nlive: int = 500, dlogz: float = 0.05, output_dir: str = None):
         bound="multi",
         sample="rwalk",
         walks=50,
+        rstate=rstate,
     )
     t0 = time.time()
     sampler.run_nested(dlogz=dlogz, maxiter=50000, print_progress=True)
@@ -228,6 +241,14 @@ def run_dynesty(nlive: int = 500, dlogz: float = 0.05, output_dir: str = None):
         "wall_seconds": wall,
         "nlive": nlive,
         "dlogz_target": dlogz,
+        # Seed discipline (2026-11-15, finding F37): the sampler's own RNG is recorded in
+        # the artifact, not only in the script. seed=null here means this run was NOT
+        # reproducible -- dynesty drew from its default internal Generator, and an
+        # unseeded run inherits process state from whatever ran before it in the same
+        # pytest process. See v0.3-prelim/tests/test_t90_v51_resonant_joint_fit.py
+        # (SMOKE_SEED) for the seeded smoke invocation.
+        "seed": seed,
+        "rng": "numpy.random.default_rng(seed) via dynesty rstate" if seed is not None else "unseeded (dynesty default Generator)",
         "n_samples": int(samples.shape[0]),
         "posterior_medians": {
             param_names[i]: {
@@ -300,14 +321,20 @@ if __name__ == "__main__":
     p.add_argument("--dlogz", type=float, default=0.05)
     p.add_argument("--smoke", action="store_true",
                    help="Smoke test: nlive=50, dlogz=0.5, very short")
+    # Env-driven like the repo's other runners (<TEST>_NLIVE pattern); a seed is required
+    # for a reproducible run (finding F37). T90_51_SEED unset => unseeded, recorded as such.
+    p.add_argument("--seed", type=int,
+                   default=int(os.environ.get("T90_51_SEED", "0")) or None,
+                   help="Pin dynesty's own RNG via rstate (recorded in the artifact)")
     args = p.parse_args()
 
     if args.smoke:
         print("[T90.51 SMOKE] nlive=50, dlogz=0.5")
-        s = run_dynesty(nlive=50, dlogz=0.5)
+        s = run_dynesty(nlive=50, dlogz=0.5, seed=args.seed)
     else:
-        s = run_dynesty(nlive=args.nlive, dlogz=args.dlogz)
+        s = run_dynesty(nlive=args.nlive, dlogz=args.dlogz, seed=args.seed)
 
+    print("[T90.51] seed =", s["seed"], "| rng =", s["rng"])
     print("\n[T90.51] log Z =", s["log_Z"], "+/-", s["log_Z_err"])
     print("[T90.51] wall =", round(s["wall_seconds"], 1), "s")
     print("[T90.51] posterior median predictions:")
