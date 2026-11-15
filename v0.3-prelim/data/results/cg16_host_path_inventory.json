@@ -1734,6 +1734,14 @@
         "host_path_lines": 2
       },
       {
+        "path": "docs/evidence/gate_run_committed_20261115.txt",
+        "host_path_lines": 3
+      },
+      {
+        "path": "docs/evidence/gate_run_failed_cg16_20261115.txt",
+        "host_path_lines": 3
+      },
+      {
         "path": "docs/evidence/gate_run_final_20261112.txt",
         "host_path_lines": 3
       },
@@ -2360,7 +2368,7 @@
     "pinned_source": 3,
     "pinned_exception": 3,
     "historical_frozen_code": 230,
-    "docs_prose": 155,
+    "docs_prose": 157,
     "data_artifact": 75,
     "other": 0
   },
