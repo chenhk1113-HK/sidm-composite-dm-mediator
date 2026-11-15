@@ -283,6 +283,40 @@ def test_readme_names_only_evidence_files_that_exist():
     )
 
 
+def test_named_evidence_files_are_not_git_ignored():
+    """Every evidence file the README cites must be trackable by git.
+
+    Finding F39 showed this repo's certifications are only as durable as the files that carry
+    them: a green gate proved nothing about a clone because the tests' inputs are git-ignored.
+    The same trap sits under the certification itself -- `.gitignore` line 78 is `*.log`, and
+    every filed gate log in `docs/evidence/` is therefore named `gate_run*.txt` on purpose. A
+    log named `.log` would exist only in the working copy: the badge would cite evidence that
+    no clone contains, and the guard's own evidence glob (`gate_run*.txt`) would never see it.
+
+    Checked with git's own matcher rather than by re-reading .gitignore, so the guard follows
+    the ignore rules as they actually are instead of duplicating a snapshot of them.
+    """
+    text = _readme_text()
+    named = sorted(set(re.findall(r"docs/evidence/[A-Za-z0-9_.\-]+\.(?:txt|json|md|log)", text)))
+    tracked = subprocess.run(
+        ["git", "ls-files", "--", *named], cwd=str(REPO_ROOT),
+        capture_output=True, text=True, encoding="utf-8", errors="replace",
+    ).stdout.split()
+    untracked = [p for p in named if p not in tracked]
+    if not untracked:
+        return
+    res = subprocess.run(
+        ["git", "check-ignore", "--stdin"], cwd=str(REPO_ROOT), input="\n".join(untracked),
+        capture_output=True, text=True, encoding="utf-8", errors="replace",
+    )
+    ignored = sorted({u for u in untracked if u in (res.stdout or "").split()})
+    assert not ignored, (
+        f"README cites evidence files that git ignores, so they cannot exist in a clone: "
+        f"{ignored}. Rename them to a tracked pattern (gate logs use `gate_run*.txt` because "
+        f"`.gitignore` has `*.log`) and re-point the paragraph."
+    )
+
+
 def test_readme_badge_deselection_matches_the_gate_exactly():
     """Deselection is countable and stable, so it is checked exactly, not tolerantly.
 

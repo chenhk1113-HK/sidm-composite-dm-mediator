@@ -2,7 +2,7 @@
 
 > **For:** Anyone who has 60 seconds and wants to know what this project
 > is, what it claims, and what the current best numbers are.
-> Updated with each version-bump round. Last refresh: 2026-11-15 (`v40.64-LSBChannelRound5-FrontPageRefresh-2026-11-15` — VERSION advanced, front pages re-issued, save tag `v19.2-F-RecordSave-2026-11-15` → `c0adf38` with `v40.64-…` anchored on the bump commit; no physics change). Previous refresh 2026-11-13 (`LSBChannelRound5-2026-11-13` LSB core-check round — Channel 14 shipped, baseline re-issued with a pinned seed, one external paper held as a cautionary audit; no VERSION change at the time). Same-day follow-up, no VERSION change: `BadgeGuardRepair-2026-11-15` — the README test-count guard had been inert on every recent tagged tree (finding F36, fixed), a second guard was found broken by the repair's own refactor (F38, fixed), and the first account of finding F37 was a misreading that has been corrected in place. Same-round follow-up: F37's seed half CLOSED (dynesty `rstate` pinned, assertion band measured over 32 seeds, seed recorded in the artifact) and F39 OPENED (the suite depends on git-ignored inputs, so gate certifications are working-copy-scoped). Current head certified 15/15 on `bafb508` (3709 passed / 25 skipped / 40 deselected).
+> Updated with each version-bump round. Last refresh: 2026-11-15 (`v40.64-LSBChannelRound5-FrontPageRefresh-2026-11-15` — VERSION advanced, front pages re-issued, save tag `v19.2-F-RecordSave-2026-11-15` → `c0adf38` with `v40.64-…` anchored on the bump commit; no physics change). Previous refresh 2026-11-13 (`LSBChannelRound5-2026-11-13` LSB core-check round — Channel 14 shipped, baseline re-issued with a pinned seed, one external paper held as a cautionary audit; no VERSION change at the time). Same-day follow-up, no VERSION change: `BadgeGuardRepair-2026-11-15` — the README test-count guard had been inert on every recent tagged tree (finding F36, fixed), a second guard was found broken by the repair's own refactor (F38, fixed), and the first account of finding F37 was a misreading that has been corrected in place. Same-round follow-up: F37's seed half CLOSED (dynesty `rstate` pinned, assertion band measured over 32 seeds, seed recorded in the artifact) and F39 OPENED (the suite depends on git-ignored inputs, so gate certifications are working-copy-scoped), and a third guard defect F40 CLOSED (a guard that greps source text reported a docstring sentence as its only offender; rewritten as an AST walk and falsified both ways). Current head `37a00f7` certified 15/15 (3709 passed / 25 skipped / 40 deselected in 1480.86 s).
 
 ---
 
@@ -26,9 +26,13 @@ pages state it.
   saves are unchanged. All tags read back two ways on the remote (tag object and `^{}` commit). The numbered
   token is backed by a real tag because a version label that is only a document string is a claim with no
   address (finding F32).
-* **Certification:** full 15-layer gate **PASSED 15/15** on `bafb508` (the badge-guard repair) — pytest
-  **3709 passed / 25 skipped / 40 deselected** in 1489.21 s, drift audit **120/120 ALL CLEAR** (raw log
-  `docs/evidence/gate_run_badge_fixed_20261115.txt`); the save-tag tree `c0adf38` was certified separately at
+* **Certification:** full 15-layer gate **PASSED 15/15** on `37a00f7` (the repair round's final commit) — pytest
+  **3709 passed / 25 skipped / 40 deselected** in 1480.86 s, drift audit **120/120 ALL CLEAR** (raw log
+  `docs/evidence/gate_run_repair_final_20261115.txt`). Earlier runs of the same round, all kept: green on `bafb508`
+  (3709 / 25 / 40 in 1489.21 s, `gate_run_badge_fixed_20261115.txt`); red on `089fd41` (2 failed / 3707 passed /
+  25 skipped / 40 deselected in 1618.43 s, `gate_run_failed_ast_guard_20261115.txt`) where **both** failures were
+  defects in guards rather than in the code they guard — a stale CG-16 inventory, and a guard that reported a
+  docstring sentence as an offender (F40, now an AST walk). The save-tag tree `c0adf38` was certified separately at
   **3701 / 25 / 40** in 1256.83 s (`docs/evidence/gate_run_committed_20261115.txt`). A first run on `a98f1f6` went
   red on one guard, `test_no_hardcoded_host_paths_cg16::test_inventory_is_current` — the host-path inventory
   predated the evidence files the LSB round filed — and was cleared by **regenerating** the inventory, never by

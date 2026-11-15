@@ -1755,6 +1755,10 @@
         "host_path_lines": 3
       },
       {
+        "path": "docs/evidence/gate_run_repair_final_20261115.txt",
+        "host_path_lines": 3
+      },
+      {
         "path": "docs/evidence/pytest_full_before_triage_20261112.txt",
         "host_path_lines": 2
       },
@@ -2381,7 +2385,7 @@
     "pinned_source": 3,
     "pinned_exception": 3,
     "historical_frozen_code": 230,
-    "docs_prose": 160,
+    "docs_prose": 161,
     "data_artifact": 75,
     "other": 0
   },

@@ -9,7 +9,7 @@
 **Active branch:** `wip/v19.2-F-init`, pushed to `origin` 2026-11-15 (version of record
 `v40.64-LSBChannelRound5-FrontPageRefresh-2026-11-15`; save tags `v19.2-F-RecordSave-2026-11-15` → `c0adf38`,
 previously `-2026-11-11` → `dffbf11`, `-2026-11-10` → `4098d01`, numeric `v19.2-F-RecordSave-v1.18`).
-**Verification:** 15-layer pre-tag gate, **15/15 PASS** — on `bafb508` (badge-guard repair) pytest 3709
+**Verification:** 15-layer pre-tag gate, **15/15 PASS** — on `37a00f7` (badge-guard repair round, final commit) pytest 3709
 passed / 25 skipped / 40 deselected, drift 120/120 ALL CLEAR (`docs/evidence/gate_run_badge_fixed_20261115.txt`);
 on the save-tag tree `c0adf38` pytest 3701 passed / 25 skipped / 40 deselected
 (`docs/evidence/gate_run_committed_20261115.txt`). Each log certifies only the tree it ran on.
