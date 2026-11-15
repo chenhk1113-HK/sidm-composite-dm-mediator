@@ -47,6 +47,7 @@
       "scripts/bench_local_models.py",
       "scripts/bench_local_models_v2.py",
       "scripts/bench_strata_ab.py",
+      "scripts/bootstrap_gate_inputs.py",
       "scripts/build_continuous_E_predictive.py",
       "scripts/build_figures.py",
       "scripts/build_population_sigma_eff_map.py",
@@ -64,6 +65,8 @@
       "scripts/elbert2015_c_tau_prescription.py",
       "scripts/epsilon_lz_check.py",
       "scripts/fH_pairing_registry.py",
+      "scripts/fetch_external_data.sh",
+      "scripts/fetch_sparc.py",
       "scripts/fix_47_71.py",
       "scripts/fix_markup.py",
       "scripts/gate_pytest_selection.py",
@@ -210,6 +213,7 @@
       "v0.3-prelim/tests/test_autocheck_hypothesis.py",
       "v0.3-prelim/tests/test_autocheck_sympy.py",
       "v0.3-prelim/tests/test_bm2_collapse_time_rederivation.py",
+      "v0.3-prelim/tests/test_bootstrap_gate_inputs.py",
       "v0.3-prelim/tests/test_channel_19_competitor_dd.py",
       "v0.3-prelim/tests/test_channel_bound_attribution.py",
       "v0.3-prelim/tests/test_channel_independence_structure.py",
@@ -1727,6 +1731,10 @@
         "host_path_lines": 1
       },
       {
+        "path": "docs/evidence/clone_run_53806dd_20261115.txt",
+        "host_path_lines": 66
+      },
+      {
         "path": "docs/evidence/gate_run_20261113.txt",
         "host_path_lines": 3
       },
@@ -1741,6 +1749,10 @@
       {
         "path": "docs/evidence/gate_run_committed_20261115.txt",
         "host_path_lines": 3
+      },
+      {
+        "path": "docs/evidence/gate_run_f39_bootstrap_20261116.txt",
+        "host_path_lines": 5
       },
       {
         "path": "docs/evidence/gate_run_failed_ast_guard_20261115.txt",
@@ -2380,12 +2392,12 @@
     "other": []
   },
   "counts": {
-    "live_clean": 433,
+    "live_clean": 437,
     "live_prose_only": 4,
     "pinned_source": 3,
     "pinned_exception": 3,
     "historical_frozen_code": 230,
-    "docs_prose": 161,
+    "docs_prose": 163,
     "data_artifact": 75,
     "other": 0
   },

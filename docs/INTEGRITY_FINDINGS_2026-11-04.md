@@ -1889,7 +1889,7 @@ would have given: a bisect locates a change, it does not establish a mechanism.
 pass→skip flip, and finding F39 below. Any claim of the form "N tests pass" must name the tree
 **and** the selection it was measured on.
 
-## F39 — the test suite depends on files that git does not track, so "green" is not reproducible from a clone (FOUND 2026-11-15, OPEN)
+## F39 — the test suite depends on files that git does not track, so "green" is not reproducible from a clone (FOUND 2026-11-15, BOOTSTRAP SHIPPED + CENSUS ACCOUNTED 2026-11-16; ONE RESIDUE OPEN)
 
 An unfiltered full-suite run in a **git worktree** of `bab9bfa` reported
 `10 failed, 3641 passed, 112 skipped in 1104.12 s`. The same tests pass in the working copy:
@@ -1914,20 +1914,41 @@ recreated. Ten tests cannot pass in a fresh clone, so today's certification is a
 one: it is the guard that asserts the pairing registry describes its source data, and its source
 data is untracked.
 
-**What would close it, in order of honesty:** (1) track the inputs the tests need (the verified
-PDF is 2.6 MB; `outputs/t90` count files are small JSONs); (2) have those tests skip with a named
-reason when their input is absent, so a clone reports "not evaluated" instead of "failed";
-(3) do nothing and state in the certification record that gate results are working-copy-scoped.
-Option (2) is the cheap one and it is disclosure, not a fix — the claim still cannot be
-reproduced by anyone else.
+**Closure shipped 2026-11-16 (measured, not asserted).** A second, cleaner reproduction was run:
+`git clone` of `53806dd` into a scratch directory, the gate's own selection, the project venv
+interpreter -> `10 failed, 3642 passed, 112 skipped in 1053.10 s`
+(`docs/evidence/clone_run_53806dd_20261115.txt`, raw output included). Classification of the 10:
 
-**Also open, same census family:** the worktree run skipped 112 tests while the gate's filtered
-run on the same commit skipped 25. Some of that is selection (deselected tests cannot report a
-skip), but the residue was not identified, and `-q` output does not list runtime skips, so the
-number of assertions the certified gate never exercised is currently unmeasured. Collection-time
-skips are identical under both selections (3, all file-level `pytest.skip(...)` stubs left behind
-by deleted phase docs — finding F18 / D9), which means the difference is entirely runtime skips and
-therefore entirely context-dependent.
+| clone failure | what was actually missing | state now |
+|---|---|---|
+| `test_fH_pairing_registry` ×2 | nothing — **the guard was broken**: `scripts/fH_pairing_registry.py` filtered `SKIP_DIRS` against `path.parts`, and `path.parts` of an absolute path contains every *ancestor*. The checkout sat under a directory named `scratch`, so the scan skipped **every** module and reported an empty registry | FIXED (relative parts); clone re-run 6 passed, working copy 15 passed |
+| `test_t90_v23_dry_run` ×5 | `outputs/t90` count JSONs (`.gitignore:38 outputs/`) | rebuilt by bootstrap in seconds |
+| `test_ohana_paper_saved_locally` | the Ohana+ 2026 PDF; **no tracked fetcher could produce it** (`download_papers.sh` had no line for arXiv 2608.04362) | fetch line added; clone fetched it, guard passed |
+| `test_sparc_table_downloaded` | `data/external/sparc/Table1.mrt`, **and its fetcher lived inside the gitignored directory it fetches into** (F41) | tracked fetcher at `scripts/fetch_sparc.py`; rebuilt in the clone |
+| phase7d stream-map run | `outputs/t95/multi_stream_real_galstreams.json`, whose producer reads a **host path outside the repository** (galstreams catalog) | OPEN — no tracked producer exists |
+
+`scripts/bootstrap_gate_inputs.py` now declares every git-ignored input the suite reads, with the
+tracked command that rebuilds it, and classifies each as `REPO_BUILT` / `FETCH` / `HOST_PINNED` /
+`LONG_RUN` (8 entries; `--require` checks manifest integrity, `v0.3-prelim/tests/
+test_bootstrap_gate_inputs.py` falsifies that checker with fabricated entries). Run in the clean
+clone: 7 inputs present or rebuilt, 0 failures.
+
+**The residue is stated rather than papered over.** `galstreams_tracks` is `HOST_PINNED`:
+`t95_v25` reads `track.st.*.ecsv` from a path outside the repository (a CG-16 FROZEN literal), the
+catalog is not vendored, `pip install galstreams` is not in the project venv, and no tracked script
+downloads it. Closing that requires vendoring the catalog or writing a fetcher, and the
+stream-map chain therefore stays working-copy-scoped. A certification is now reproducible from a
+clone **except for that chain**, and the boundary is named with its cost.
+
+**The 112-vs-25 skip census is now counted** from the 68 grouped `SKIPPED [...]` lines in the raw
+log (112 skips total): 64 producer posteriors absent (`No T1xx results; run <producer>.py` - dynesty
+and N-body runs of minutes to hours, deliberately skipping rather than failing), 13 network and
+clone-host conditions (Gaia `WinError 10060`), 42 smaller data/artefact absences (SPARC hierarchical
+grid, `fermi_mcdaniel2024`, `FINDINGS.md`, `plots/`, bridge snapshots, phase42/46/47 module stubs,
+detached-HEAD branch name, and `.venv-sidm-bench` not existing in a clone). Running every
+`LONG_RUN` producer is not a bootstrap job: the suite's own certifications put those producers at
+minutes-to-hours each. What F39 now supplies is the exact boundary of what a green gate means,
+enumerated rather than estimated.
 
 ## F40 — a guard that greps source text flagged a docstring, i.e. it was testing prose (FOUND AND FIXED 2026-11-15)
 
@@ -1973,3 +1994,41 @@ Every such guard in this repo has now failed at least once on an innocent edit (
 a docstring). Where the property is behavioural — a call missing an argument, an exclusion list built from a
 constant — parse and call instead of grepping, and keep at most one structural assertion that the real caller
 is wired in.
+
+## F41 — the tool a test told you to run lived inside a gitignored directory, i.e. it did not exist in a clone (FOUND AND FIXED 2026-11-16)
+
+**The finding.** `v0.3-prelim/tests/test_t32_real_likelihood.py` skips with
+`run outputs/fetch_external_data.sh first`. `.gitignore:38` is `outputs/`, which ignores the whole
+directory, not just generated artefacts — so the fetch tool itself was untracked and absent from
+every fresh clone, and the test's remediation instruction was impossible to follow. The same shape
+one directory over: `test_phase33d_real_sparc.py` depends on `data/external/sparc/Table1.mrt` whose
+fetcher sat at `v0.3-prelim/data/external/sparc/fetch_sparc.py`, inside the very directory
+`.gitignore:53` excludes. In the fresh-clone run of `53806dd` the SPARC guard failed on the missing
+table and the figshare skip named a script that was not there.
+
+**What was done.** Both fetchers were copied to `scripts/` (tracked) on 2026-11-16 and the skip
+message re-pointed (`docs/DATA_SOURCES.md`, `docs/REVIEWER_AUDIT_R11.md` updated to match); both are
+declared in `scripts/bootstrap_gate_inputs.py`, and the manifest guard asserts a declared producer
+exists. `scripts/fetch_sparc.py` also had to be taught its target: its original
+`Path(__file__).resolve().parent.parent / "data" / "external" / "sparc"` silently created a stray
+178-file `data/` tree at the repository root when run from `scripts/` — discovered by noticing the
+new directory, removed, and the target made explicit per invocation site.
+
+**Audit, counted not estimated:** 23 scripts live in gitignored scopes (`outputs/`: 17 `.py` + 5
+`.sh`; `v0.3-prelim/data/external/`: 1 `.py`). Exactly 2 of them are named by tracked tests or docs,
+and those are the 2 that were moved. The other 21 are never cited by anything tracked: scratch code,
+disclosed here rather than migrated.
+
+**Incidental data-integrity finding, disclosed not silently repaired.** Re-fetching the figshare
+bundle in the clone returned nginx `403 Forbidden`, and the script saved the 146-byte HTML error page
+as `dSphs.csv` before the md5 check could reject it. The pinned md5
+(`1627630e27c73cded88370a9344c66a2`) still matches the verified copy on the authoring machine, so the
+project's cited data is intact and traceable to figshare DOI `10.6084/m9.figshare.24058650.v2`; what
+is broken is a fresh clone's ability to re-verify it over the network. `scripts/fetch_external_data.sh`
+now uses `curl -f` (HTTP errors fail instead of being saved as data), sniffs for an HTML body, and
+enforces the pinned byte size that the script already parsed and never checked.
+
+**Rule.** A tool inside a gitignored directory is invisible to a clone. Any path a test, doc or error
+message tells a reader to run must live in a tracked path, and audit scopes should be defined so they
+overlap the ignore rules — the CG-16 audit covered `scripts/`, `tests/` and `v0.3-prelim/tests/` and
+therefore never looked inside the directories where these two tools actually lived.

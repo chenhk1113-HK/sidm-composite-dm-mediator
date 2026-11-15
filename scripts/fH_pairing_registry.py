@@ -55,9 +55,16 @@ def scan():
     contract = {"canonical_pair_modules": [], "archived_pair_modules": [], "mixed_pair_modules": []}
     hardcoded, undeclared = [], []
     for path in sorted(REPO.rglob("*.py")):
-        if any(part in SKIP_DIRS for part in path.parts):
+        # SKIP_DIRS must be tested against parts RELATIVE to the repo. path.parts on an absolute
+        # path includes every ancestor directory, so a checkout that itself lives under a
+        # directory named scratch/archive/deprecated (a CI runner, a clone parked in a scratch
+        # area) silently skipped EVERY module and produced an empty registry. Proved by the
+        # 53806dd fresh-clone run (docs/evidence/clone_run_53806dd_20261115.txt): rebuilt came
+        # back with zero modules in all four buckets.
+        rel = path.relative_to(REPO)
+        if any(part in SKIP_DIRS for part in rel.parts):
             continue
-        rel = str(path.relative_to(REPO)).replace("\\", "/")
+        rel = str(rel).replace("\\", "/")
         if path.name in SOURCE_MODULE_FILES:
             continue
         try:

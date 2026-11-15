@@ -111,7 +111,7 @@ profiles (40 mass × 60 σv per dSph, 4 channel/prior combinations =
 [10.6084/m9.figshare.24058650.v2](https://doi.org/10.6084/m9.figshare.24058650.v2)
 (CC BY 4.0). Stored at
 `v0.3-prelim/data/external/fermi_mcdaniel2024/`. Auto-fetched via
-`outputs/fetch_external_data.sh` (idempotent, md5-verified).
+`scripts/fetch_external_data.sh` (idempotent, md5-verified).
 
 **Used by**: T32 (Tier-3.3) in v0.3-prelim — replaces the previous
 Gaussian-proxy + 0.3-dex half-Gaussian surrogate (added per R11 audit
@@ -127,7 +127,7 @@ Key physics result (T32): under standard WIMP coupling, the SIDM
 mediator would be excluded at m_χ = 40-50 GeV; **mediator must
 decouple from thermal-WIMP expectations by ~10⁰×.**
 
-**Reproducibility**: `outputs/fetch_external_data.sh` downloads
+**Reproducibility**: `scripts/fetch_external_data.sh` downloads
 `dSphs.csv` (3.9 KB), `dSphs.tar.gz` (4.3 MB → 220 .npy files), and
 `basic_data_usage.html` (961 KB example notebook). Total ~5.2 MB.
 Verified md5 against figshare computed hashes.

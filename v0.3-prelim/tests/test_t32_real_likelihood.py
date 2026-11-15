@@ -38,7 +38,7 @@ REPO_ROOT = next((p for p in _REPO_CANDIDATES if (p / "v0.3-prelim" / "code").is
 DATA_DIR = REPO_ROOT / "v0.3-prelim/data/external/fermi_mcdaniel2024"
 if not DATA_DIR.exists():
     pytest.skip(f"McDaniel data not found at {DATA_DIR}; "
-                f"run outputs/fetch_external_data.sh first", allow_module_level=True)
+                f"run scripts/fetch_external_data.sh first", allow_module_level=True)
 
 sys.path.insert(0, str(REPO_ROOT / "v0.3-prelim/code"))
 import t32_real_likelihood as t32r

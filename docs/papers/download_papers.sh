@@ -52,6 +52,24 @@ done
 echo "  NOTE: Burkert 1995 (ApJ 447, DOI 10.1086/309560) has NO arXiv record and cannot be fetched"
 echo "        by this script; see registry §7.5."
 
+# 2026-11-16 (finding F39): Ohana+ 2026 was the only PDF a gate GUARD asserts on
+# (test_v40_61_n14_docx_response.py::test_ohana_paper_saved_locally) while no tracked fetcher
+# could produce it -- docs/papers/*.pdf is gitignored, and a fresh clone therefore failed that
+# guard. It is the single verified summary whose **arXiv:** field is a plain numeric id, so it is
+# declared here explicitly rather than by filename inference.
+echo ""
+echo "=== Downloading F39 guard-required papers ==="
+cd "$ROOT/docs/papers/verified"
+for pair in "2608.04362|2608.04362_ohana_2026_cloud9_cdm_sidm.pdf"; do
+  url_id="${pair%%|*}"; out="${pair##*|}"
+  if [ -f "$out" ]; then
+    echo "  [skip] $out already exists"
+  else
+    curl -sL "https://arxiv.org/pdf/${url_id}" -o "$out"
+    echo "  Downloaded ${url_id} -> $out ($(stat -c%s "$out" 2>/dev/null || stat -f%z "$out") bytes)"
+  fi
+done
+
 # To-verify: downloaded but full read pending
 mkdir -p "$ROOT/docs/papers/to_verify"
 cd "$ROOT/docs/papers/to_verify"

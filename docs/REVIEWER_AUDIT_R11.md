@@ -449,7 +449,7 @@ following fixes have been APPLIED in commit [next]:
     bb/ττ × Jprior/noprior). Returns log L = TS(m_χ, σv)/2 with the
     profile-likelihood-ratio convention. T32's `loglike_fermi_sidm()`
     now calls the real likelihood. Data downloaded via
-    `outputs/fetch_external_data.sh` (idempotent, md5-verified against
+    `scripts/fetch_external_data.sh` (idempotent, md5-verified against
     figshare). Data gitignored per existing `external_data/` policy.
     Test: 7/7 pass. Combined TS peak = 13.78 at m_χ=41.25 GeV,
     σv=1.37e-26; 95% CL σv upper limit at peak = 2.76e-26 cm³/s
