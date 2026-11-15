@@ -1678,4 +1678,93 @@ verdict, so a wrapper reading `ok: false` from one is reading a crash, not a
 result. Read the printed VERDICT line, not the exit code. And on this host,
 `UnicodeDecodeError: 'charmap' codec can't decode byte 0x81` means a missing
 `encoding=`, never a corrupt file — `0x81` is the continuation byte of `⁻`.
+## F36 — the guard that reads the test count off the README badge had been asserting nothing for months (FOUND AND FIXED 2026-11-15)
 
+**What was wrong.** `v0.3-prelim/tests/test_t82_audit_readme_drift.py` searched the
+badge URL with `badge/tests-(\d+)\s*pass` — digits then whitespace-or-nothing. The
+README spells the badge `badge/tests-3701_pass`. An underscore is neither whitespace
+nor end-of-match-then-`pass`, so the search never matched, the helper returned `None`,
+and the test **skipped** with the reason *"README badge is branch-dependent (no
+specific count)"* — a statement about a page that plainly carries a count. Read back
+out of the tags, the same spelling is on `v19.2-F-RecordSave-2026-11-11`
+(`tests-3643_pass`) and on HEAD: the guard had been inert across every recent tagged
+tree while the front page advertised a guarded number.
+
+**Two more defects behind the first.** Strictness was opt-in
+(`T82_README_DRIFT_STRICT=1`) and no script or workflow set it, so even a *parseable*
+badge off by 50% would have passed. And its collect recipe was not the gate's: it
+hard-coded `--ignore` for two files the gate now runs (repaired in the D9 round) and
+omitted the gate's `-k` filter, so it measured 3750 tests where the gate measures 3763
+on the same tree. Two scripts that re-implement "the test suite" with different filters
+cannot see drift in each other's numbers.
+
+**Why it matters more than a broken regex.** The failure mode is not "a check did not
+run"; it is "the repository believed a claim was checked." The badge is the only
+machine-readable test count on the front page, and the guard existed to keep it honest.
+A guard that skips quietly is worse than no guard, because the absence of a failure was
+taken as evidence.
+
+**The fix, and the trap it nearly walked into.** The guard now (1) fails when a badge
+exists and it cannot read a number from it — the silent-skip mode is itself the defect
+under test; (2) carries a parser-variant regression test over every spelling the page
+has used; (3) requires the badge's (pass, skip, deselect) triple to equal the triple
+reported by a tracked gate log that declares `GATE PASSED: all 15 layer(s)` — a failing
+run is part of the record but certifies nothing for a front page; (4) refuses to let the
+README name an evidence file that does not exist in the tree; (5) keeps a coarse
+suite-size census check, collected with the gate's own selection args, now imported from
+`scripts/gate_pytest_selection.py` so guard and gate cannot diverge. Strict by default;
+the opt-out is renamed `T82_README_DRIFT_LENIENT=1` and must be recorded in the round's
+docs, not merely set.
+
+The first rewrite of the parser decoded nothing and read the badge
+`tests-3701_pass%20%7C%2025%20skip` as **skip=20, deselect=20** — the `20` of the URL
+escape `%20`. Caught by an offline probe *before* it reached the repo. URL-decode first,
+then read digits.
+
+**Verification.** Offline probe against the live tree: badge parses to 3701 / 25 / 40,
+21 certified gate logs are found, the badge matches two of them
+(`gate_run_20261113.txt`, `gate_run_committed_20261115.txt`), 6/6 tests pass. Then a
+falsification run: a copy of the tree whose README claims **3,799 passed** fails with
+the certified logs printed in the message. Before this change the same falsified badge
+passed silently.
+
+**Rule taken from it.** A guard's skip reason is a claim about the artifact, not about
+the guard. If a check says "the artifact does not contain what I am looking for," verify
+that by looking at the artifact — and if the artifact does contain it, the check is
+broken, not the artifact. Make the silent-skip mode assertable.
+
+## F37 — the gate's pytest layer and a standalone collect of the same tree count three tests apart (FOUND 2026-11-15, OPEN)
+
+**What was measured.** On the same commit, with the same selection arguments and the same
+interpreter: `pytest v0.3-prelim/tests/ -k "<gate filter>" --collect-only` reports
+**3763 collected / 40 deselected = 3723 selected**, while the gate's own pytest layer
+reports **3701 passed + 25 skipped = 3726 selected** (and 3700 + 26 = 3726 on the next
+tree). The gap is 3 tests, 0.08%, and it is stable across runs.
+
+**What is NOT the cause.** Not the two `--ignore` flags — `GATE_IGNORED_TESTS` is empty
+and the gate prints `gate-ignored test files: 0`. Not the `-k` filter — both sides apply
+it, and both report 40 deselected.
+
+**What has not been established.** Whether the difference comes from collection context
+(rootdir/conftest resolution differs between a bare invocation and the gate's
+subprocess) or from items the gate's run materialises that a bare collect does not. No
+claim is made here; the two numbers are simply not equal, and no one had noticed.
+
+**Why it is recorded rather than tolerated silently.** A badge guard that asserts
+*exact* equality between the front-page number and a standalone collect would fail on
+this 0.08% gap and would then be "fixed" by loosening the assertion or editing the
+badge — i.e. the guard would be broken to fit the measurement. The census check
+therefore carries an explicit 0.4% tolerance, chosen above this known gap and below the
+drift a stale badge actually carries (~0.9%+), and the tolerance is stated in the guard's
+source with this finding as its justification. The badge's own numbers are still checked
+for exact equality — against the certified gate log, which is what the badge claims to
+quote (F36).
+
+**Consequence for pass/skip arithmetic.** The pass and skip counts separately are not a
+stable invariant: 3701/25 on `c0adf38` and 3700/26 on `3c50e70` for a commit that changed
+only prose. A test moved from pass to skip between two green runs. The selected total is
+identical, so no gate layer noticed. Any future claim of the form "N tests pass" must
+name the tree it was measured on.
+
+**Status.** OPEN. Attribution needs the collected-item lists diffed between the two
+invocation paths — cheap to do, not yet done. It does not block any claim in the paper.

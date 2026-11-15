@@ -2,7 +2,7 @@
 
 > **For:** Anyone who has 60 seconds and wants to know what this project
 > is, what it claims, and what the current best numbers are.
-> Updated with each version-bump round. Last refresh: 2026-11-15 (`v40.64-LSBChannelRound5-FrontPageRefresh-2026-11-15` — VERSION advanced, front pages re-issued, save tag `v19.2-F-RecordSave-2026-11-15` → `c0adf38` with `v40.64-…` anchored on the bump commit; no physics change). Previous refresh 2026-11-13 (`LSBChannelRound5-2026-11-13` LSB core-check round — Channel 14 shipped, baseline re-issued with a pinned seed, one external paper held as a cautionary audit; no VERSION change at the time).
+> Updated with each version-bump round. Last refresh: 2026-11-15 (`v40.64-LSBChannelRound5-FrontPageRefresh-2026-11-15` — VERSION advanced, front pages re-issued, save tag `v19.2-F-RecordSave-2026-11-15` → `c0adf38` with `v40.64-…` anchored on the bump commit; no physics change). Previous refresh 2026-11-13 (`LSBChannelRound5-2026-11-13` LSB core-check round — Channel 14 shipped, baseline re-issued with a pinned seed, one external paper held as a cautionary audit; no VERSION change at the time). Same-day follow-up, no VERSION change: `BadgeGuardRepair-2026-11-15` — the README test-count guard had been inert on every recent tagged tree (finding F36, fixed); new open finding F37 records a 3-test gap between the gate's pytest layer and a standalone collect of the same tree.
 
 ---
 
@@ -40,6 +40,38 @@ pages state it.
 * **What this round does NOT claim:** no refit, no new channel, no changed number anywhere. A front-page refresh
   is a bookkeeping act; treating it as a physics advance is exactly the pattern this repo's guard layers exist
   to catch.
+
+## Standing: `BadgeGuardRepair-2026-11-15` — the guard that reads the test count off the README badge had been asserting nothing (finding F36; no VERSION change)
+
+**What was broken.** The README badge (`tests-3701_pass | 25 skip | 40 deselect`) is the only machine-readable
+test count on the front page, and `test_t82_audit_readme_drift.py` existed to keep it honest. Its badge pattern was
+`badge/tests-(\d+)\s*pass`; the page spells the count with an **underscore**, so the search never matched and the test
+**skipped** claiming the badge carried no count. Read back out of the tags, the same spelling is on
+`v19.2-F-RecordSave-2026-11-11` (`tests-3643_pass`) and on HEAD: the guard was inert across every recent tagged
+tree. Strictness was additionally opt-in and nothing set it, and its collect recipe was not the gate's (two stale
+`--ignore`s, no `-k` filter) so it measured 3750 tests where the gate measures 3763. See finding F36.
+
+* **Guard rewritten** (`v0.3-prelim/tests/test_t82_audit_readme_drift.py`, 1 test → 6): fails when a badge exists
+  and the guard cannot read a number from it; carries a parser-variant regression test; requires the badge's
+  (pass, skip, deselect) triple to equal the triple in a tracked gate log declaring `GATE PASSED: all 15 layer(s)`;
+  refuses to let the README name an evidence file that is not in the tree; keeps a coarse suite-size census check.
+  Strict by default; the opt-out is now `T82_README_DRIFT_LENIENT=1` and must be recorded in the round's docs.
+* **A trap caught before it landed:** the first rewrite URL-decoded nothing and read the badge
+  `...%20%7C%2025%20skip` as **skip=20** — the `20` of the escape `%20`. Decode first, then read digits.
+* **Shared selection:** new `scripts/gate_pytest_selection.py` is now the single source of the gate's pytest
+  selection, imported by both `scripts/verify_release_gate.py` and the guard. Two scripts that re-implement "the
+  test suite" with different filters cannot see drift in each other's numbers.
+* **Verified by falsification, not just by passing:** against a copy of the tree whose README claims **3,799
+  passed**, the new guard fails and prints the certified logs; the old guard passed that same forgery silently.
+  Against the real tree it parses 3701 / 25 / 40 and matches two certified logs (6 passed).
+* **New open finding (F37):** the gate's pytest layer and a standalone collect of the *same* commit with the
+  *same* args differ by **3 tests** (3726 selected vs 3723; stable across runs, `GATE_IGNORED_TESTS` is empty).
+  Unattributed, and recorded rather than absorbed: a guard asserting exact equality would have to be loosened to
+  fit the measurement, so the census check states a 0.4% tolerance in source with F37 as its justification. Also
+  noted: 3701/25 on `c0adf38` vs 3700/26 on `3c50e70` — one test moved from pass to skip across a prose-only
+  commit, with the selected total unchanged.
+* **No VERSION change.** No physics, no refit, no channel. A guard repair is a verification-asset change, and its
+  evidence is a green full-gate run on the commit that carries it.
 
 ## Standing: `LSBChannelRound5-2026-11-13` — LSB core check shipped as Channel 14 (no VERSION change)
 

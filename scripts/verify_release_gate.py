@@ -60,6 +60,10 @@ _CG16_ROOT = next(a for a in _pathlib.Path(__file__).resolve().parents
                   if (a / "scripts" / "paths.py").exists())
 _sys.path.insert(0, str(_CG16_ROOT / "scripts"))
 from paths import REFERENCE_PYTHON  # noqa: E402
+# The pytest selection is shared with the README badge guard (finding F36): two scripts
+# that re-implement "the test suite" with different filters cannot detect drift in each
+# other's numbers, which is exactly how the guard went blind.
+from gate_pytest_selection import gate_pytest_args  # noqa: E402
 import argparse
 import re
 import subprocess
@@ -308,9 +312,7 @@ def main():
                 print(f"  - {rel} :: {GATE_IGNORED_TESTS[rel]}")
             ok, tail = run_layer(
                 "Full pytest suite (v0.3-prelim/tests/, excluding marked gate-ignored files)",
-                ["-m", "pytest", "v0.3-prelim/tests/", "-q", "--tb=line",
-                 *[f"--ignore={rel}" for rel in sorted(GATE_IGNORED_TESTS)],
-                 "-k", "not T132 and not T131 and not T133 and not T134 and not T135 and not T220"],
+                ["-m", "pytest", *gate_pytest_args(sorted(GATE_IGNORED_TESTS))],
                 timeout=1800,
             )
         record("pytest", ok, tail)
