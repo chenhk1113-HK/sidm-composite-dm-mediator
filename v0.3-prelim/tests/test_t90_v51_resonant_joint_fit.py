@@ -148,7 +148,7 @@ def test_smoke_run(tmp_path):
     run, silently degrading the repo's evidence (v40.60 Defect E).
 
     SEED PINNED 2026-11-15 (finding F37). The sampler now receives its own random state.
-    Before this, run_dynesty() passed no seed and dynesty drew from its internal Generator
+    Before this fix the sampler was never seeded and dynesty drew from its internal Generator,
     seeded from numpy's GLOBAL state -- i.e. from whatever the preceding tests in the same
     pytest process left behind. The assertion below then depended on which other tests ran:
     it passed inside the gate's filtered pytest layer and failed on an unfiltered run of the

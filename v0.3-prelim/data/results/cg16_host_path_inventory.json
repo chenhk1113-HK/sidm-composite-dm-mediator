@@ -1743,6 +1743,10 @@
         "host_path_lines": 3
       },
       {
+        "path": "docs/evidence/gate_run_failed_ast_guard_20261115.txt",
+        "host_path_lines": 3
+      },
+      {
         "path": "docs/evidence/gate_run_failed_cg16_20261115.txt",
         "host_path_lines": 3
       },
@@ -1753,6 +1757,10 @@
       {
         "path": "docs/evidence/pytest_full_before_triage_20261112.txt",
         "host_path_lines": 2
+      },
+      {
+        "path": "docs/evidence/v51_order_dependence_probes_20261115.txt",
+        "host_path_lines": 1
       },
       {
         "path": "docs/papers/00_HOME.md",
@@ -2373,7 +2381,7 @@
     "pinned_source": 3,
     "pinned_exception": 3,
     "historical_frozen_code": 230,
-    "docs_prose": 158,
+    "docs_prose": 160,
     "data_artifact": 75,
     "other": 0
   },

@@ -1928,3 +1928,48 @@ number of assertions the certified gate never exercised is currently unmeasured.
 skips are identical under both selections (3, all file-level `pytest.skip(...)` stubs left behind
 by deleted phase docs — finding F18 / D9), which means the difference is entirely runtime skips and
 therefore entirely context-dependent.
+
+## F40 — a guard that greps source text flagged a docstring, i.e. it was testing prose (FOUND AND FIXED 2026-11-15)
+
+**What happened.** The full gate on `089fd41` came back 14/15. The pytest layer reported
+`2 failed, 3707 passed, 25 skipped, 40 deselected in 1618.43 s`. One failure was
+`test_no_hardcoded_host_paths_cg16.py::test_inventory_is_current` — the CG-16 inventory had been regenerated
+**before** the two evidence files were staged, and `cg16_scan.py` enumerates through `git ls-files`, so
+untracked files were invisible to it. Third occurrence of that trap in one day; fixed by regenerating, not
+by relaxing the guard. The other failure was
+`test_v40_63_n16_docx_response.py::test_smoke_tests_do_not_write_into_the_production_results_dir`, whose
+only reported offender was a **sentence inside a docstring**:
+
+    AssertionError: ... test_t90_v51_resonant_joint_fit.py: Before this, run_dynesty() passed no seed and dynesty drew from its internal Generator
+
+**Why the guard is the defect, not the code.** The guard compiled
+`^.*\b(run_dynesty|run_multi_portal|run_hybrid_joint_fit|run_hybrid_joint_fit_4ch|run_hybrid_joint_fit_5ch)\(.*$`
+with `re.M` and flagged any matching line that lacked the substring `output_dir`. A docstring line is not a
+call and cannot write anything. The assertion was therefore measuring the **wording of the test file**, not
+the absence of an unprotected call. The defect it exists to prevent — a smoke run overwriting a production
+artifact (Defect E) — was in fact fully prevented in that file: its single call passes
+`output_dir=str(tmp_path)`.
+
+**Third instance of one class.** F36: a badge guard whose pattern could not match the badge, so it
+self-skipped across every recent tagged tree. F38: a guard grepping for `--ignore=` that broke when the
+argument builder moved into a shared module, and whose first repair then matched a comment describing the
+old defect. F40: the same habit a third time — proving an absence by searching for a string. In all three
+cases the guard was silent or red while the protected invariant was completely intact.
+
+**The fix.** The guard now parses each `test_t90_v5*.py` with `ast` and inspects only `ast.Call` nodes whose
+function name is one of the five writers, flagging those with no `output_dir=` keyword, and reports the
+offending line number. Docstrings and comments are structurally out of scope.
+
+**Falsification of the new guard (scratch copy of just the guard plus its target file).**
+- Unmodified copy, prose mentioning the writer: `1 passed` — the false positive is gone.
+- Same copy with `output_dir=str(tmp_path)` deleted from the real call: `1 failed` — the defect class is
+  still caught, with a line number in the message.
+- The old regex against the current file: no offenders (the docstring was also reworded), which shows the
+  rewording alone would have worked — and would have left the guard fragile. The guard was fixed because it
+  is the defect; the wording change is a courtesy, not the repair.
+
+**Rule.** A guard that searches source text for a token asserts *how the code is written*, not *what it does*.
+Every such guard in this repo has now failed at least once on an innocent edit (a badge spelling, a refactor,
+a docstring). Where the property is behavioural — a call missing an argument, an exclusion list built from a
+constant — parse and call instead of grepping, and keep at most one structural assertion that the real caller
+is wired in.

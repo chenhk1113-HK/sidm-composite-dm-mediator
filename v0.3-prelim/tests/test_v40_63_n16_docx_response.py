@@ -697,26 +697,45 @@ def test_smoke_tests_do_not_write_into_the_production_results_dir(tmp_path):
     output_dir=<tmp_path>. This test asserts the SECOND half is in place --
     a caller that forgets output_dir would reintroduce the clobbering.
     """
+    import ast
     import glob
     offenders = []
     # v40.63: cover ALL FIVE writer entry points. The first version of this
     # guard only matched run_dynesty / run_multi_portal, so the three
     # hybrid writers (run_hybrid_joint_fit, _4ch, _5ch) were unchecked --
     # and the v5 gate still clobbered 3 of the 5 production JSONs.
-    WRITERS = (
+    #
+    # v40.64 round (finding F40): rewritten from a text search into an AST
+    # walk, because the text version flagged PROSE. On 2026-11-15 it fired on a
+    # docstring sentence in test_t90_v51_resonant_joint_fit.py explaining the
+    # pre-fix state -- a line that is not a call and cannot write anything. That
+    # is the third instance in this repo of a guard asserting a spelling rather
+    # than a behaviour (F36: a badge pattern that could not match the badge;
+    # F38: a grep for --ignore= that matched a comment describing the old
+    # defect). A regex over source text also matches every mention inside
+    # docstrings and comments. The guard now parses each test file and inspects
+    # only real Call nodes, so a call that genuinely lacks output_dir is caught
+    # and a sentence about a call is not.
+    WRITERS = {
         "run_dynesty",
         "run_multi_portal",
         "run_hybrid_joint_fit",
         "run_hybrid_joint_fit_4ch",
         "run_hybrid_joint_fit_5ch",
-    )
-    pat = re.compile(r"^.*\b(" + "|".join(WRITERS) + r")\(.*$", re.M)
+    }
     for tp in (Path(__file__).resolve().parent).glob("test_t90_v5*.py"):
         src = tp.read_text(encoding="utf-8")
-        for m in pat.finditer(src):
-            line = m.group(0)
-            if "output_dir" not in line:
-                offenders.append(f"{tp.name}: {line.strip()}")
+        tree = ast.parse(src, filename=str(tp))
+        for node in ast.walk(tree):
+            if not isinstance(node, ast.Call):
+                continue
+            func = node.func
+            name = getattr(func, "id", None) or getattr(func, "attr", None)
+            if name not in WRITERS:
+                continue
+            kwnames = {kw.arg for kw in node.keywords if kw.arg}
+            if "output_dir" not in kwnames:
+                offenders.append(f"{tp.name}:{node.lineno}: {name}(...) has no output_dir=")
     assert not offenders, (
         "v40.63 fix: these smoke-test calls would write into the PRODUCTION "
         "results directory and overwrite the artifact with a lower-quality "

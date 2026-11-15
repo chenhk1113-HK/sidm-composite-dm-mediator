@@ -115,6 +115,14 @@ tree. Strictness was additionally opt-in and nothing set it, and its collect rec
   an unfiltered full-suite run of a `bab9bfa` worktree, so the flake is a draw rather than a regression and
   no red-to-green boundary exists; a direct mechanism test replaced it (a bisect locates a change, it does
   not establish a mechanism).
+* **THIRD GUARD DEFECT, F40, FIXED:** the gate on `089fd41` came back 14/15 (`2 failed / 3707 passed / 25 skipped /
+  40 deselected`) and one of the two failures was `test_smoke_tests_do_not_write_into_the_production_results_dir`
+  reporting **a docstring sentence** as an offender — the guard grepped source text for writer-call spellings, so it
+  was testing wording rather than behaviour while the invariant (every smoke call passes `output_dir`) was intact.
+  Now an `ast` walk over `ast.Call` nodes flagging only real calls missing `output_dir=`, falsified both ways: prose
+  present -> passes, injected unprotected call -> fails with the line number. The other failure was the CG-16
+  inventory regenerated before staging (third time this day; regenerate after `git add`, never relax the guard).
+  Red gate log: `docs/evidence/gate_run_failed_ast_guard_20261115.txt`.
 * **NEW OPEN FINDING F39:** that clone run reported `10 failed, 3641 passed, 112 skipped in 1104.12 s`
   where the same tests pass in the working copy, every failure naming a path inside the clone, because the
   inputs are git-ignored (`docs/papers/.gitignore:11 *.pdf` — the Ohana+ 2026 verified PDF; `.gitignore:38
