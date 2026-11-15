@@ -9,8 +9,9 @@
 **Active branch:** `wip/v19.2-F-init`, pushed to `origin` 2026-11-15 (version of record
 `v40.64-LSBChannelRound5-FrontPageRefresh-2026-11-15`; save tags `v19.2-F-RecordSave-2026-11-15` → `c0adf38`,
 previously `-2026-11-11` → `dffbf11`, `-2026-11-10` → `4098d01`, numeric `v19.2-F-RecordSave-v1.18`).
-**Verification:** 15-layer pre-tag gate, **15/15 PASS** — on `37a00f7` (badge-guard repair round, final commit) pytest 3709
-passed / 25 skipped / 40 deselected, drift 120/120 ALL CLEAR (`docs/evidence/gate_run_badge_fixed_20261115.txt`);
+**Verification:** 15-layer pre-tag gate, **15/15 PASS** — on `2ac96b8` (clone-reproducibility round) pytest 3724
+passed / 25 skipped / 40 deselected, drift 120/120 ALL CLEAR (`docs/evidence/gate_run_f39_bootstrap_20261116.txt`);
+previous certification on `37a00f7` (badge-guard repair round) 3709 / 25 / 40 (`gate_run_repair_final_20261115.txt`);
 on the save-tag tree `c0adf38` pytest 3701 passed / 25 skipped / 40 deselected
 (`docs/evidence/gate_run_committed_20261115.txt`). Each log certifies only the tree it ran on.
 **Standing physics:** T88.CE MAP log Z −165.32 ± 0.081, m_χ 383 GeV, m_φ 513 MeV, g_χ 0.886, tension 0.74;

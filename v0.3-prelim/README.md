@@ -162,7 +162,8 @@ sidmkit-sparc batch --inputs data/external/sparc/Rotmod_LTG --outdir data/extern
 2. **15-galaxy dynesty subset** — full 120-galaxy Bayesian evidence not computed
 3. **No JVAS resolution** — lensing perturber remains unexplained (Paper 2 alternative: CDM+black hole)
 4. **Tsai UV wrong** — particle physics motivation was incorrect
-5. **External SPARC data gitignored** — re-fetch via `data/external/sparc/fetch_sparc.py`
+5. **External SPARC data gitignored** — re-fetch with the tracked fetcher `scripts/fetch_sparc.py`,
+   or rebuild every git-ignored input at once via `python scripts/bootstrap_gate_inputs.py --fetch`
 
 ---
 
