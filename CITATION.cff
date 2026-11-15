@@ -47,8 +47,9 @@ message: >-
   Current record (v40.64, saved 2026-11-15): LSB core check shipped as Channel 14
   (NGC 5963 core size, production upper bound) at both 0.2 and 0.1 cm^2/g arms -
   ladder 13 channels, sigma/m_0 0.130 -> 0.089 (0.2 arm) / 0.078 (0.1 arm);
-  15-layer release gate 15/15 PASS on commit c0adf38 (pytest 3701 passed / 25
-  skipped / 40 deselected, drift 120/120 ALL CLEAR); save tag
+  15-layer release gate 15/15 PASS on commit bafb508 (pytest 3709 passed / 25
+  skipped / 40 deselected, drift 120/120 ALL CLEAR; save-tag tree c0adf38 certified
+  separately at 3701 / 25 / 40); save tag
   v40.64-LSBChannelRound5-FrontPageRefresh-2026-11-15.
   Pre-regeneration historical values (superseded by 2026-11-12 Born-factor correction): v0.7 log Z = -163.29 +/- 0.085 (nlive=2000), tension T39 vs Yukawa a = 0.60 (below 1.0 threshold), MAP m_chi = 770 GeV, sigma/m_0 = 0.27 cm^2/g; v0.8 (post-T88.E) log Z = -164.87 +/- 0.084 (nlive=2000), MAP m_chi = 770 GeV, sigma/m_0 = 0.06 cm^2/g. These pre-regeneration values appeared in earlier versions of this citation file and are preserved for audit traceability.
   Earlier closed rounds: T71.4 (3 v0.6 items in parallel: hier-sparc

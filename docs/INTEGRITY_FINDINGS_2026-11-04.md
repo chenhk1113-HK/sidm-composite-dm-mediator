@@ -1733,47 +1733,84 @@ the guard. If a check says "the artifact does not contain what I am looking for,
 that by looking at the artifact — and if the artifact does contain it, the check is
 broken, not the artifact. Make the silent-skip mode assertable.
 
-## F37 — a standalone pytest collect does not reproduce the gate's own run census, and a pass→skip flip moved across a prose-only commit (FOUND 2026-11-15, OPEN)
+## F37 — the census gap was a misreading, and the real finding is that a test's outcome depends on which other tests the gate runs (FOUND 2026-11-15, OPEN; FIRST ACCOUNT CORRECTED 2026-11-15)
 
-**What was measured, all on this host with the same interpreter and the same selection
-arguments.**
+**What was originally claimed, and why it was wrong.** The first version of this finding
+asserted a stable 2-3 item gap between the gate's pytest census and a standalone
+`--collect-only`. It rested on misreading pytest's own line
+`3723/3763 tests collected (40 deselected)`: the first number is the **selected** count and
+the second is the **total collected**, and the deselected items are included in the second,
+not additional to it. Reading them as two different censuses manufactured a gap that the
+numbers do not contain.
 
-| tree | gate's pytest layer | standalone `--collect-only` | total-item gap |
-|---|---|---|---|
-| `3c50e70` | 3700 passed + 26 skipped + 40 deselected = **3766** | 3763 collected (initially read as 3723 selected) | **3** |
-| `0ed9e55` | 2 failed + 3705 passed + 25 skipped + 40 deselected = **3772** | 3763 + 7 = **3770** | **2** |
+**The corrected measurement, all on `bafb508` with the same interpreter.**
 
-The gap is small, stable, and had never been noticed. `GATE_IGNORED_TESTS` is empty (the
-gate prints `gate-ignored test files: 0`), and both sides report exactly 40 deselected, so
-it is not an exclusion difference.
+| quantity | value |
+|---|---|
+| gate's pytest layer (selected) | 3709 passed + 25 skipped = **3734**, plus 40 deselected |
+| same log's own census line | `3709 passed, 25 skipped, 40 deselected` |
+| `pytest --collect-only` (no filter) | **3771** tests collected |
+| `pytest --collect-only -k "<gate filter>"` | `3731/3771 collected (40 deselected)` |
+| `pytest` unfiltered (earlier commit `0ed9e55`) | 3 failed + 3744 passed + 25 skipped = **3772** items |
 
-**What is NOT the cause.** Not `--ignore` flags, not the `-k` filter, not the interpreter
-(the gate runs `VENV_PYTHON = .venv-sidm-bench/Scripts/python.exe`, the same interpreter a
-manual run uses).
+The collect-only census and the gate's run census are now in the same place: 3771 collected
+unfiltered, 3731 selected under the gate's filter, 40 deselected on both sides. The gate's
+pytest layer reported 3734 items selected against those 3731 — a residual of **3 items /
+0.08%** that is not yet explained. There is no 2-3 item gap between *censuses* as originally
+claimed; there is a small unexplained difference between what a collect lists and what the
+gate's own invocation runs.
 
-**What has not been established.** Whether the difference comes from collection context
-(rootdir/conftest resolution in the gate's subprocess) or from items a run materialises
-that a collect does not. No mechanism is claimed here. The honest statement is that two
-counts of "the same suite" on the same commit differ by 2-3 items and nobody knows why.
+**Consequence for the guard.** The badge guard's census check stays an ADVISORY bound rather
+than an equality, but for the honest reason: a run census and a collect census are not the
+same instrument (0.03% apart here), and exact equality between instruments is the kind of
+check that gets deleted the first time it bites an innocent commit. Exactness lives in the
+comparison that has no instrument mismatch — the badge against a certified 15/15 gate log —
+and in the badge's deselection count against the certified runs.
 
-**Why recording it changed the guard's design.** The badge guard's first version asserted
-that the badge's census equal a standalone collect. On `0ed9e55` the badge quoting the
-certified run exactly (3705 + 25 = 3730) sits **1 item / 0.03%** from a collect that
-reports 3729 selected — and quoting `3c50e70` exactly (3726) sits 3 items away. A check
-that a *correct* badge can fail gets loosened, skipped, or deleted by the next person who
-hits it, which is how guards die. So exactness was moved to the two comparisons that are
-actually stable — the badge against a certified gate log, and the badge's deselection
-count against the certified runs — and the census comparison was demoted to an advisory
-1% bound, with this finding named in the guard's source as the reason the bound exists.
+**The finding that the misreading was hiding.** `test_t90_v51_resonant_joint_fit.py::test_smoke_run`
+**passed** inside the gate's filtered pytest layer on `bafb508` (log
+`docs/evidence/gate_run_badge_fixed_20261115.txt`: 3709 passed, 0 failures) and **failed** on
+an unfiltered `pytest v0.3-prelim/tests/` run of the earlier commit `0ed9e55` with
+`sm(Cloud-9) = 6402.280627119054 wildly off` against a hard assertion band of
+`1.0 < sm < 5000.0` — 28% above the bound. The test asserts on the posterior median of a
+`dynesty` `nlive=50` nested-sampling run. `run_dynesty()` in `v0.3-prelim/code/` accepts no
+`seed` argument and does not seed anything; `dynesty.NestedSampler` accepts an `rstate`
+argument and none is passed. The sampler therefore draws from numpy's **global** RNG state as
+left by whatever ran earlier in the same process, and the assertion is a hard band with no
+seed and no interval — the repo's own documented failure class (Defect E family, and the
+standing "pin the seed, report the interval" rule).
 
-**Second observation, same finding.** 3701 passed / 25 skipped on `c0adf38` against 3700 /
-26 on `3c50e70`. The commit between them changed only `VERSION` and markdown prose, yet one
-test moved from pass to skip and the selected total was unchanged. No layer noticed, because
-no layer asserts a per-test outcome history. Which test, and why, is not identified. Any
-claim of the form "N tests pass" must name the tree it was measured on.
+**What reproduction has ruled out (2026-11-15, `bafb508` tree, one interpreter).**
+- The smoke test in isolation: 3 runs, 3 passes (1.69-1.96 s each).
+- The 40 deselected families run first, then the smoke test **in a separate process**: 3
+  trials, 3 passes. The deselected families run 44 passed + 3 skipped in 7.7 s, so they do
+  not consume enough randomness to shift a posterior median — a cross-process "they ran
+  before it" story is ruled out.
+- What has NOT been ruled out: same-process interaction inside a full unfiltered run — other
+  tests consuming global RNG draws, or mutating shared module/fixture state — remains the
+  narrowed candidate, unproven. The gate's `-k` selection is correlated with green and is not
+  shown to be the causal lever.
 
-**Status.** OPEN. Closing it means diffing collected-item identifiers between the gate's
-invocation path and a bare one — cheap, not yet done. It blocks no claim in the paper.
+**Why the observation matters regardless of mechanism.** A physics-adjacent assertion in this
+repo is not deterministic across suite composition, and no layer asserts per-test outcome
+history, so a test that passes in the certified selection and fails in another selection is
+invisible to the gate. Deselection is disclosed here as "those assertions did not run"
+(CG-10 / n25 III.4); this adds that deselection is not inert — changing which tests run
+changes what the tests that DO run experience. A green gate certifies outcomes under one
+particular selection, not under the suite's full composition.
+
+**Still open.** (a) the mechanism above; (b) a residual of **3 items** between the gate's
+selected count (3734) and a filtered `--collect-only` selected count (3731) on `bafb508` —
+small, unexplained, and the reason the guard's census check is an advisory 1% bound rather
+than an equality; (c) the pass→skip flip between `c0adf38` (3701/25) and `3c50e70` (3700/26),
+where the only commit between them changed `VERSION` and markdown prose yet one test moved
+from pass to skip with the selected total unchanged. Which test, and why, is not identified.
+Any claim of the form "N tests pass" must name the tree and the selection it was measured on.
+
+**Status.** OPEN. It blocks no physics claim in the paper — the standing fit is an
+`nlive=500` production posterior, not this `nlive=50` smoke run. Closing it means pinning
+`rstate`/seed in the smoke test, reporting its interval, and bisecting the full-suite
+interaction.
 
 ## F38 — a guard that greps source text broke when the code moved, and its first fix broke again on prose (FOUND AND FIXED 2026-11-15)
 

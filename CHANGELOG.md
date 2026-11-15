@@ -12,9 +12,33 @@
 
 **Verification.** Against the live tree the guard parses 3701 / 25 / 40, finds 21 certified gate logs, matches two of them, and passes 6/6. Falsification: a copy of the tree whose README claims **3,799 passed** makes it fail with the certified logs printed in the message; the pre-fix guard passed that forgery silently. A full 15-layer gate run then certifies the commit carrying the fix (`docs/evidence/`), and the same run certifies the tagged `v40.64` tree.
 
-**New open finding F37.** A standalone `--collect-only` does **not** reproduce the gate's own run census: 3766 total items in the gate's pytest layer on `3c50e70` against 3763 collected standalone, and 3772 against 3770 on `0ed9e55` — a 2-3 item gap, stable, with `GATE_IGNORED_TESTS` empty and 40 deselected on both sides and the same interpreter on both. Mechanism unidentified; recorded rather than absorbed. Related observation: 3701 passed / 25 skipped on `c0adf38` against 3700 / 26 on `3c50e70`, a prose-only commit — one test moved from pass to skip while the selected total stayed identical, and no layer noticed. Design consequence: the guard's census comparison was demoted to an advisory 1% bound with F37 named in its source as the reason, because a check that a *correct* badge can fail gets loosened or deleted the next time someone hits it; exactness was moved to the two comparisons that are actually stable (badge vs certified gate log; badge deselection vs certified runs).
+**Open finding F37 — the first account was wrong, and the correction is in the record.** The original claim was a stable 2-3 item gap between the gate's pytest census and a standalone `--collect-only`. It came from misreading pytest's own line `3731/3771 collected (40 deselected)`: the first number is the **selected** count, the second is the **total collected**, and the deselected items are inside the second rather than additional to it. Corrected measurement on `bafb508`: 3771 collected unfiltered, 3731 selected under the gate filter, 40 deselected on both sides, against a gate layer that reported 3734 selected — a residual of **3 items / 0.08%**, unexplained but an order of magnitude smaller than claimed. The census comparison stays an advisory 1% bound rather than an equality, for the honest reason that a run census and a collect census are different instruments. Design consequence unchanged: a check that a *correct* badge can fail gets loosened or deleted the next time someone hits it, so exactness lives in the badge-vs-certified-log and badge-deselection-vs-certified-runs comparisons.
 
 **Second guard found broken — F38, fixed.** `test_gate_ignore_list_markers.py::test_gate_no_longer_hard_codes_ignore_strings` asserted that the literal string `--ignore={rel}` appears in `scripts/verify_release_gate.py`. Moving the selection into the shared module kept the protected invariant fully intact and turned the guard red anyway, because it was asserting a spelling in one file rather than a behaviour. The first repair failed a second time for the same habit: it globbed `scripts/*.py` for any file containing `--ignore=` and matched the gate's own historical comment describing the pre-2026-11-05 defect — a guard failing on prose. The assertion is now behavioural: import `gate_pytest_selection`, call `gate_pytest_args([...])`, require exactly the requested `--ignore=` flags, require none for an empty exclusion list, and require the shared `-k` constant at the end; plus one structural check that the gate calls `gate_pytest_args()`.
+
+**What the F37 misreading had been hiding.** `test_t90_v51_resonant_joint_fit.py::test_smoke_run` **passed** inside
+the gate's filtered pytest layer and **failed** on an unfiltered `pytest v0.3-prelim/tests/` run of `0ed9e55`:
+`sm(Cloud-9) = 6402.280627119054 wildly off` against the hard band `1.0 < sm < 5000.0`, i.e. 28% above the bound. The
+test asserts on the posterior median of a `dynesty` `nlive=50` nested-sampling run; `run_dynesty()` accepts no seed
+and passes no `rstate`, so the sampler draws from numpy's global RNG state as left by whatever ran earlier in the
+same process — a hard-band assertion with no seed and no interval, which is this repo's own standing
+"pin the seed, report the interval" rule being violated in its own smoke test. Reproduction (2026-11-15, `bafb508`
+tree): the smoke test alone passes 3/3 in 1.69-1.96 s; running the 40 deselected families first and the smoke test
+afterwards **in a separate process** passes 3/3, and those families finish 44 passed + 3 skipped in 7.7 s, far too
+little randomness to move a posterior median — so a cross-process ordering story is ruled out. Same-process
+interaction inside a full unfiltered run remains the narrowed candidate and is **unproven**; the gate's `-k`
+selection is correlated with green, not shown to be the lever. Recorded, not absorbed. It blocks no physics claim:
+the standing fit is an `nlive=500` production posterior, not this smoke run.
+
+**Certification of this round.** First gate run on the fix commit `0ed9e55` came back **14/15** — the pytest layer
+red on the guard's own census test (the F37 misread above) and on `test_gate_ignore_list_markers` (F38), plus a
+CG-16 inventory that predated the doc edits in the same commit; the inventory was **regenerated** (157 → 158), not
+relaxed. After those repairs, the gate on `bafb508` is **15/15 PASS**: pytest **3709 passed / 25 skipped / 40
+deselected** in 1489.21 s, drift audit **120/120 ALL CLEAR**, raw log `docs/evidence/gate_run_badge_fixed_20261115.txt`.
+The README badge, README verification paragraph, `EXTRACT.md` and `CITATION.cff` are re-pointed at that run
+(3,709 / 25 / 40), which is the first time the badge has been re-synchronised by the guard that is supposed to
+enforce it — the badge had been quoting 3,701 across three commits whose certified runs reported 3,701 and then
+3,709, and the inert guard never said a word about it.
 
 ## [v40.64-LSBChannelRound5-FrontPageRefresh-2026-11-15] - Version advanced; front pages re-issued onto the round-5 record (no physics change)
 

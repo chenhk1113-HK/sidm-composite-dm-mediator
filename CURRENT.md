@@ -2,7 +2,7 @@
 
 > **For:** Anyone who has 60 seconds and wants to know what this project
 > is, what it claims, and what the current best numbers are.
-> Updated with each version-bump round. Last refresh: 2026-11-15 (`v40.64-LSBChannelRound5-FrontPageRefresh-2026-11-15` — VERSION advanced, front pages re-issued, save tag `v19.2-F-RecordSave-2026-11-15` → `c0adf38` with `v40.64-…` anchored on the bump commit; no physics change). Previous refresh 2026-11-13 (`LSBChannelRound5-2026-11-13` LSB core-check round — Channel 14 shipped, baseline re-issued with a pinned seed, one external paper held as a cautionary audit; no VERSION change at the time). Same-day follow-up, no VERSION change: `BadgeGuardRepair-2026-11-15` — the README test-count guard had been inert on every recent tagged tree (finding F36, fixed); new open finding F37 records a 3-test gap between the gate's pytest layer and a standalone collect of the same tree.
+> Updated with each version-bump round. Last refresh: 2026-11-15 (`v40.64-LSBChannelRound5-FrontPageRefresh-2026-11-15` — VERSION advanced, front pages re-issued, save tag `v19.2-F-RecordSave-2026-11-15` → `c0adf38` with `v40.64-…` anchored on the bump commit; no physics change). Previous refresh 2026-11-13 (`LSBChannelRound5-2026-11-13` LSB core-check round — Channel 14 shipped, baseline re-issued with a pinned seed, one external paper held as a cautionary audit; no VERSION change at the time). Same-day follow-up, no VERSION change: `BadgeGuardRepair-2026-11-15` — the README test-count guard had been inert on every recent tagged tree (finding F36, fixed), a second guard was found broken by the repair's own refactor (F38, fixed), and the first account of finding F37 was a misreading that has been corrected in place. Current head certified 15/15 on `bafb508` (3709 passed / 25 skipped / 40 deselected).
 
 ---
 
@@ -26,11 +26,13 @@ pages state it.
   saves are unchanged. All tags read back two ways on the remote (tag object and `^{}` commit). The numbered
   token is backed by a real tag because a version label that is only a document string is a claim with no
   address (finding F32).
-* **Certification:** full 15-layer gate **PASSED 15/15** on `c0adf38` — pytest **3701 passed / 25 skipped /
-  40 deselected** in 1256.83 s, drift audit **120/120 ALL CLEAR** (raw log
-  `docs/evidence/gate_run_committed_20261115.txt`). A first run on `a98f1f6` went red on one guard,
-  `test_no_hardcoded_host_paths_cg16::test_inventory_is_current` — the host-path inventory predated the evidence
-  files the LSB round filed — and was cleared by **regenerating** the inventory, never by relaxing the guard.
+* **Certification:** full 15-layer gate **PASSED 15/15** on `bafb508` (the badge-guard repair) — pytest
+  **3709 passed / 25 skipped / 40 deselected** in 1489.21 s, drift audit **120/120 ALL CLEAR** (raw log
+  `docs/evidence/gate_run_badge_fixed_20261115.txt`); the save-tag tree `c0adf38` was certified separately at
+  **3701 / 25 / 40** in 1256.83 s (`docs/evidence/gate_run_committed_20261115.txt`). A first run on `a98f1f6` went
+  red on one guard, `test_no_hardcoded_host_paths_cg16::test_inventory_is_current` — the host-path inventory
+  predated the evidence files the LSB round filed — and was cleared by **regenerating** the inventory, never by
+  relaxing the guard.
 * **Abstract corrected:** it previously quoted the standing joint fit as **σ/m₀ = 0.06 cm²/g**, a leftover MAP
   from the pre-regeneration record. It now states MAP **0.055 cm²/g** with the posterior 16/84 interval
   **[0.062, 0.281]**, and m_χ / m_φ with their intervals, matching the table and the provenance note in the
@@ -68,11 +70,19 @@ tree. Strictness was additionally opt-in and nothing set it, and its collect rec
   census, so the census comparison was demoted to an advisory 1% bound; the exact assertions are the badge against
   a certified 15/15 gate log, and the badge's deselection count against the certified runs. A guard a *correct*
   badge can fail is a guard that gets deleted the next time someone hits it.
-* **New open finding (F37):** the gate's pytest layer and a standalone collect of the *same* commit with the *same*
-  selection args and interpreter differ by **2-3 items** (3766 vs 3763 on `3c50e70`; 3772 vs 3770 on `0ed9e55`),
-  with `GATE_IGNORED_TESTS` empty and 40 deselected on both sides. Mechanism unidentified, and recorded rather than
-  absorbed. Also recorded: 3701/25 on `c0adf38` vs 3700/26 on `3c50e70` — a test moved pass→skip across a
-  prose-only commit and no layer noticed.
+* **New open finding (F37, first account corrected):** my original write-up claimed a 2-3 item gap between the
+  gate's pytest census and a standalone collect. That was a **misreading** of pytest's own line
+  `3731/3771 collected (40 deselected)` — the first number is *selected*, the second is *total collected*, and the
+  deselected items are inside the second, not additional to it. Corrected measurement on `bafb508`: 3771 collected
+  unfiltered, 3731 selected under the gate filter, 40 deselected both sides, against a gate layer that reported
+  3734 selected — a **3-item / 0.08%** residual, unexplained. What the misreading had hidden is the real finding:
+  `test_t90_v51_resonant_joint_fit.py::test_smoke_run` **passed** in the gate's filtered layer and **failed** on an
+  unfiltered run of `0ed9e55` (`sm(Cloud-9) = 6402.28` against a hard band `1.0 < sm < 5000.0`), with no seed pinned
+  and `dynesty`'s `rstate` never passed. Reproduction rules out the smoke test alone (3/3 pass) and rules out the
+  deselected families running first in a separate process (3/3 pass; they finish in 7.7 s, far too little randomness
+  to shift a posterior median). Same-process interaction inside a full run remains the candidate and is unproven.
+  Also recorded: 3701/25 on `c0adf38` vs 3700/26 on `3c50e70` — a test moved pass→skip across a prose-only commit
+  and no layer noticed.
 * **Second guard found broken (F38, fixed):** `test_gate_ignore_list_markers.py` asserted that the literal string
   `--ignore={rel}` appears in the gate file. Moving the selection into the shared module broke it while the
   invariant it protects stayed intact; the first repair then failed on a *prose comment* that mentioned
