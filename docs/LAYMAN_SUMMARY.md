@@ -5,6 +5,19 @@
 > 2026-10-01 (tag `v19.2-C-milestone-R71`, commit `c486782`): DD section finalized after **12 review rounds** (R60 → R71).
 > Hierarchy constraint **g_N/g_χ < 3 × 10⁻¹¹** (R57) + **α_χ ~ 6.8 × 10⁻⁷** (R58) + **5 UV no-go theorems** (1 general theorem from Chu+ 2019 p-wave literature + 4 ruled-out completions) + **§2.7 Ohana+ consistency at 0.16 dex** + **Mace+ ~7× deficit** at v=28 (R39) + **standing_numbers.json infrastructure**.
 
+> **Current version of record (2026-11-15): `v40.64-LSBChannelRound5-FrontPageRefresh-2026-11-15`.** This page
+> explains the v19.2-C milestone below; the standing record has moved on by three rounds. In plain words, what
+> changed since: **(1)** a faint disk galaxy, NGC 5963, caps how strongly dark matter may interact — that cap
+> (Channel 14) is now part of the production constraint ladder, and it pulls the favoured interaction strength
+> from 0.13 down to 0.089 (0.078 on the tighter arm) cm²/g; **(2)** the standing joint fit is log Z −165.32 ± 0.081
+> with m_χ 383 GeV, m_φ 513 MeV, g_χ 0.886 and a velocity-slope tension of 0.74 against the Yukawa expectation,
+> quoted as an interval (σ/m₀ MAP 0.055, 68% [0.062, 0.281]) because the point estimate is not stable across
+> sampler seeds; **(3)** a published paper claiming faint galaxies *require* ~0.1 cm²/g was audited and found to
+> print core-formation times 10³ below what its own equations give, so it is cited only as a caution about how
+> such timings are done; **(4)** the old 0.68 cm²/g figure some older documents quoted is retired — it came from
+> a run with no recorded seed and a superseded dSph channel. See [`CURRENT.md`](../CURRENT.md) and the repo front
+> page [`README.md`](../README.md) for the live record.
+
 **Pairing declaration (findings F26/F33):** this document quotes amplitudes in two pairings. The LIVE canonical pair is f_H = 0.7501856343179664 with σ_0 = 0.008150396851725193 cm²/g and σ_peak = 27.272481773080454 cm²/g. The ARCHIVED pair is f_H = 0.297 with σ_0 = 0.052 cm²/g and σ_peak = 174.0 cm²/g. Unless a sentence says otherwise, an amplitude quoted below is an ARCHIVED-pair raw amplitude. Both pairs give the same halo-level σ_eff = f_H² × (σ/m) = 15.348366 cm²/g at the 29.4 km/s resonance, so no effective prediction changes. Sources: scripts/constants.py, v0.3-prelim/data/results/canonical_numbers.json, v0.3-prelim/data/results/fH_pairing_registry.json.
 
 ## What this milestone is, in one sentence

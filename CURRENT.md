@@ -2,11 +2,44 @@
 
 > **For:** Anyone who has 60 seconds and wants to know what this project
 > is, what it claims, and what the current best numbers are.
-> Updated with each version-bump round. Last refresh: 2026-11-13 (`LSBChannelRound5-2026-11-13` LSB core-check round — Channel 14 shipped, baseline re-issued with a pinned seed, one external paper held as a cautionary audit; no VERSION change; the numeric save point remains `v19.2-F-RecordSave-v1.18` and the dated save tag `v19.2-F-RecordSave-2026-11-10` → `4098d01`).
+> Updated with each version-bump round. Last refresh: 2026-11-15 (`v40.64-LSBChannelRound5-FrontPageRefresh-2026-11-15` — VERSION advanced, front pages re-issued, save tag `v19.2-F-RecordSave-2026-11-15` → `c0adf38` with `v40.64-…` anchored on the bump commit; no physics change). Previous refresh 2026-11-13 (`LSBChannelRound5-2026-11-13` LSB core-check round — Channel 14 shipped, baseline re-issued with a pinned seed, one external paper held as a cautionary audit; no VERSION change at the time).
 
 ---
 
 **Pairing declaration (findings F26/F33):** this document quotes amplitudes in two pairings. The LIVE canonical pair is f_H = 0.7501856343179664 with σ_0 = 0.008150396851725193 cm²/g and σ_peak = 27.272481773080454 cm²/g. The ARCHIVED pair is f_H = 0.297 with σ_0 = 0.052 cm²/g and σ_peak = 174.0 cm²/g. Unless a sentence says otherwise, an amplitude quoted below is an ARCHIVED-pair raw amplitude. Both pairs give the same halo-level σ_eff = f_H² × (σ/m) = 15.348366 cm²/g at the 29.4 km/s resonance, so no effective prediction changes. Sources: scripts/constants.py, v0.3-prelim/data/results/canonical_numbers.json, v0.3-prelim/data/results/fH_pairing_registry.json.
+
+## Standing: `v40.64-LSBChannelRound5-FrontPageRefresh-2026-11-15` — VERSION advanced; front pages re-issued onto the round-5 record (no physics change)
+
+**Nothing in the version-of-record physics changed.** The pairing declaration above, the standing T88.CE MAP
+(log Z **−165.32 ± 0.081**, m_χ 383 GeV, m_φ 513 MeV, g_χ 0.886, tension 0.74), the Channel 14 ladder and every
+headline number in `canonical_numbers.json` are untouched. What changed is the version line and how the front
+pages state it.
+
+* **VERSION advanced:** token `v40.64-LSBChannelRound5-FrontPageRefresh-2026-11-15` appended, making this the
+  numeric version of record (`v19.2-F-RecordSave-v1.18` and the dated saves no longer head the line).
+* **Save tags:** `v19.2-F-RecordSave-2026-11-15` (annotated, cut 2026-11-15) → `c0adf38`, the tree certified
+  green by the full 15-layer gate. `v40.64-LSBChannelRound5-FrontPageRefresh-2026-11-15` → the commit carrying
+  this VERSION token, which is also what certifies the current version line as a save point:
+  `test_version_tokens_have_tags.py` requires a tag whose own tree's VERSION tail equals HEAD's tail, and that
+  tag satisfies both rules at once (its name starts with the numbered base `v40.64`, and its name is in the
+  `v19.2-F-RecordSave|v40.NN` save family). The older `-2026-11-11` → `dffbf11` and `-2026-11-10` → `4098d01`
+  saves are unchanged. All tags read back two ways on the remote (tag object and `^{}` commit). The numbered
+  token is backed by a real tag because a version label that is only a document string is a claim with no
+  address (finding F32).
+* **Certification:** full 15-layer gate **PASSED 15/15** on `c0adf38` — pytest **3701 passed / 25 skipped /
+  40 deselected** in 1256.83 s, drift audit **120/120 ALL CLEAR** (raw log
+  `docs/evidence/gate_run_committed_20261115.txt`). A first run on `a98f1f6` went red on one guard,
+  `test_no_hardcoded_host_paths_cg16::test_inventory_is_current` — the host-path inventory predated the evidence
+  files the LSB round filed — and was cleared by **regenerating** the inventory, never by relaxing the guard.
+* **Abstract corrected:** it previously quoted the standing joint fit as **σ/m₀ = 0.06 cm²/g**, a leftover MAP
+  from the pre-regeneration record. It now states MAP **0.055 cm²/g** with the posterior 16/84 interval
+  **[0.062, 0.281]**, and m_χ / m_φ with their intervals, matching the table and the provenance note in the
+  same page. The interval is the quotable summary; the MAP sits below the 16th percentile.
+* **Badges and citation re-synchronised** to the run that certifies the tagged tree (3,701 / 25 / 40), and the
+  README bibtex `version` field now carries the new token.
+* **What this round does NOT claim:** no refit, no new channel, no changed number anywhere. A front-page refresh
+  is a bookkeeping act; treating it as a physics advance is exactly the pattern this repo's guard layers exist
+  to catch.
 
 ## Standing: `LSBChannelRound5-2026-11-13` — LSB core check shipped as Channel 14 (no VERSION change)
 

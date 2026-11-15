@@ -1,3 +1,17 @@
+## [v40.64-LSBChannelRound5-FrontPageRefresh-2026-11-15] - Version advanced; front pages re-issued onto the round-5 record (no physics change)
+
+**VERSION advanced:** `+v40.64-LSBChannelRound5-FrontPageRefresh-2026-11-15` appended. This is a documentation and record-keeping round: the pairing declaration, the standing T88.CE MAP (log Z -165.32 ± 0.081, m_chi 383 GeV, m_phi 513 MeV, g_chi 0.886, tension 0.74), the Channel 14 ladder and every headline value in `canonical_numbers.json` are untouched.
+
+**Save tags.** `v19.2-F-RecordSave-2026-11-15` (annotated) anchored on `c0adf38`, the commit whose full 15-layer gate is green, read back two ways on the remote (tag object `24e9c0a`, commit `c0adf38`). `v40.64-LSBChannelRound5-FrontPageRefresh-2026-11-15` anchored on the VERSION bump commit, as `test_version_tokens_have_tags.py` requires for a numbered token (F32: a version label that exists only in a document is a claim with no address).
+
+**Certification.** Full 15-layer gate **PASSED 15/15** on `c0adf38`: pytest 3701 passed / 25 skipped / 40 deselected in 1256.83 s, drift 120/120 ALL CLEAR (`docs/evidence/gate_run_committed_20261115.txt`). The preceding run on `a98f1f6` was **red on one guard** — `test_no_hardcoded_host_paths_cg16::test_inventory_is_current`, because the CG-16 host-path inventory predated the evidence files the LSB round filed — and was cleared by regenerating the inventory, not by relaxing the guard (`c0adf38`). Both logs are filed, including the failing one.
+
+**Abstract corrected.** `README.md` quoted the standing joint fit as **sigma/m_0 = 0.06 cm^2/g**, a point value left over from the pre-regeneration record, while the table directly below it carried MAP 0.055 with posterior 16/84 [0.062, 0.281]. The abstract now states the MAP with its interval and gives m_chi / m_phi intervals, matching the provenance note that the interval - not the MAP - is the quotable summary.
+
+**Front pages re-synchronised.** README standing line, test badge (3665 -> 3701, set from the run that certifies the tagged tree), bibtex `version` field; `CURRENT.md` header and new standing section; `EXTRACT.md` project-state block; `v0.3-prelim/README.md` current-round block; `docs/LAYMAN_SUMMARY.md` current-record note; `CITATION.cff` current-version line. `EXTRACT.md`'s stated word count was stale (claimed ~1,900; measured 2,553 after the edits) and now states the measured value.
+
+**Known disclosure.** The gate log certifies `c0adf38` exactly; the tagged trees are that commit plus this bump commit, which changes only `VERSION` and markdown prose. No layer that reads the changed files reported a finding on the bump commit (fast guards re-run there: version-tag guard, CG-16 inventory guard, markup balance, finding-id uniqueness).
+
 ## [LSBChannelRound5-2026-11-13] - LSB core check shipped as Channel 14 (both 0.2 and 0.1 cm^2/g arms); the T13_v2 baseline re-issued with a pinned seed; arXiv:2605.05588 held as a cautionary audit; five standing documents re-issued off the stale 0.68 cm^2/g
 
 **No VERSION change.** The version-of-record physics is untouched: the pairing declaration, the T88.CE standing MAP (log Z -165.32 ± 0.081) and every headline number in `canonical_numbers.json` are unchanged. What changed is the constraint ladder, the reproducibility of one ladder artifact, and one literature verdict.

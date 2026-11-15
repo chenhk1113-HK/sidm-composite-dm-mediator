@@ -1,15 +1,20 @@
 # EXTRACT — sidm-composite-dm-mediator
 
-**Snapshot: physics record as audited 2026-09-06 (v0.4-prelim + T89) · project state refreshed 2026-11-03 · ~1,900 words**
+**Snapshot: physics record as audited 2026-09-06 (v0.4-prelim + T89) · project state refreshed 2026-11-15 (v40.64) · ~2,550 words**
 
 **Pairing declaration (findings F26/F33):** this document quotes amplitudes in two pairings. The LIVE canonical pair is f_H = 0.7501856343179664 with σ_0 = 0.008150396851725193 cm²/g and σ_peak = 27.272481773080454 cm²/g. The ARCHIVED pair is f_H = 0.297 with σ_0 = 0.052 cm²/g and σ_peak = 174.0 cm²/g. Unless a sentence says otherwise, an amplitude quoted below is an ARCHIVED-pair raw amplitude. Both pairs give the same halo-level σ_eff = f_H² × (σ/m) = 15.348366 cm²/g at the 29.4 km/s resonance, so no effective prediction changes. Sources: scripts/constants.py, v0.3-prelim/data/results/canonical_numbers.json, v0.3-prelim/data/results/fH_pairing_registry.json.
 
-## Project state — 2026-11-03
+## Project state — 2026-11-15
 
-**Active branch:** `wip/v19.2-F-init`, pushed to `origin` 2026-11-07 (record save point: annotated tag
-`v19.2-F-RecordSave-v1.18`; previous `v19.2-F-RecordSave-v1.17`).
-**Verification:** 15-layer pre-tag gate, **15/15 PASS**. **Audit chain of record:** Round-5 dual review,
-project rounds n18→n26, report **v1.17** — index at `docs/dual_review_5loop/README.md`.
+**Active branch:** `wip/v19.2-F-init`, pushed to `origin` 2026-11-15 (version of record
+`v40.64-LSBChannelRound5-FrontPageRefresh-2026-11-15`; save tags `v19.2-F-RecordSave-2026-11-15` → `c0adf38`,
+previously `-2026-11-11` → `dffbf11`, `-2026-11-10` → `4098d01`, numeric `v19.2-F-RecordSave-v1.18`).
+**Verification:** 15-layer pre-tag gate, **15/15 PASS** on `c0adf38` — pytest 3701 passed / 25 skipped / 40
+deselected, drift 120/120 ALL CLEAR (raw log `docs/evidence/gate_run_committed_20261115.txt`).
+**Standing physics:** T88.CE MAP log Z −165.32 ± 0.081, m_χ 383 GeV, m_φ 513 MeV, g_χ 0.886, tension 0.74;
+Channel 14 (NGC 5963) shipped 2026-11-13 at both 0.2 and 0.1 cm²/g, ladder σ/m₀ 0.130 → 0.089 / 0.078.
+**Audit chain of record:** Round-5 dual review, project rounds n18→n26, report **v1.17** — index at
+`docs/dual_review_5loop/README.md`.
 **Current research line (v19.2-E):** stages 1-2 complete — a live-verified new-data sweep (32 cited arXiv
 IDs), literature intake closed **21/21**, and two real gravothermal timing bugs fixed (`lookback_time_gyr`
 mis-transcribed Yang+ eq. 3.2; `evolution_time_gyr` returned the age at formation instead of the lookback

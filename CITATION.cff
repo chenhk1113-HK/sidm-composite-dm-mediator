@@ -29,8 +29,9 @@ message: >-
   clean: pure T88.E contribution = -0.849 +/- 0.084 (10x noise floor);
   v0.8 result (2026-11-12 regeneration, corrected Born factor): log Z = -165.32
   +/- 0.081 (nlive=2000, seed 20261112), MAP m_chi = 383 GeV,
-  m_phi = 513 MeV, sigma/m_0 = 0.05 cm^2/g, velocity index a = 0.20,
-  g_chi = 0.886; T88.E pulls posterior 5x lower in sigma/m_0 + 2.6x
+  m_phi = 513 MeV, sigma/m_0 = 0.055 cm^2/g (posterior 16/84 [0.062, 0.281] -
+  the interval is the quotable summary, the MAP is seed-sensitive),
+  velocity index a = 0.20, g_chi = 0.886; T88.E pulls posterior 5x lower in sigma/m_0 + 2.6x
   lower in a (steep velocity slope keeps sigma/m(v=150) in the in-band
   subhalo-survival region); T89 Goldstein & Hill 2026 DeltaN_eff<0.107 Channel 25
   documented null (Phys. Rev. D 114, L021305, 2026-07-17; eps^2-
@@ -43,6 +44,12 @@ message: >-
   Jeans); 677 tests passing; 22 effective channels; drift-guard
   44/44 ALL CLEAR. Standing posture: LZ used as Channel 5 sanity check,
   NOT as sigma/m constraint.
+  Current record (v40.64, saved 2026-11-15): LSB core check shipped as Channel 14
+  (NGC 5963 core size, production upper bound) at both 0.2 and 0.1 cm^2/g arms -
+  ladder 13 channels, sigma/m_0 0.130 -> 0.089 (0.2 arm) / 0.078 (0.1 arm);
+  15-layer release gate 15/15 PASS on commit c0adf38 (pytest 3701 passed / 25
+  skipped / 40 deselected, drift 120/120 ALL CLEAR); save tag
+  v40.64-LSBChannelRound5-FrontPageRefresh-2026-11-15.
   Pre-regeneration historical values (superseded by 2026-11-12 Born-factor correction): v0.7 log Z = -163.29 +/- 0.085 (nlive=2000), tension T39 vs Yukawa a = 0.60 (below 1.0 threshold), MAP m_chi = 770 GeV, sigma/m_0 = 0.27 cm^2/g; v0.8 (post-T88.E) log Z = -164.87 +/- 0.084 (nlive=2000), MAP m_chi = 770 GeV, sigma/m_0 = 0.06 cm^2/g. These pre-regeneration values appeared in earlier versions of this citation file and are preserved for audit traceability.
   Earlier closed rounds: T71.4 (3 v0.6 items in parallel: hier-sparc
   +0.10 log Z, bullet_sens +1.74 log Z, CHANNEL_STATUS dict); T71.3
@@ -54,8 +61,8 @@ message: >-
   2026-11-01 (60 days after the LZ announcement).
 title: "sidm-composite-dm-mediator"
 type: software
-version: 0.4-prelim+v19.2-C-milestone-R71
-date-released: 2026-10-01
+version: 0.4-prelim+v40.64-LSBChannelRound5-FrontPageRefresh-2026-11-15
+date-released: 2026-11-15
 authors:
   - family-names: Lam
     given-names: K.
