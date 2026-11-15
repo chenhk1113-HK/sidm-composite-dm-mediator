@@ -49,7 +49,33 @@ def test_gate_no_longer_hard_codes_ignore_strings():
     assert '--ignore=v0.3-prelim' not in src, (
         "hand-written --ignore= strings bypass GATE_IGNORED_TESTS and are the F18 defect class"
     )
-    assert "--ignore={rel}" in src, "pytest args must be built from GATE_IGNORED_TESTS"
+    # 2026-11-15 (finding F36/F38): the pytest selection moved from an inline literal in
+    # the gate to scripts/gate_pytest_selection.py, shared with the README badge guard.
+    # This guard asserted a TEXTUAL pattern inside the gate file only, so the refactor
+    # broke it while the invariant it protects stayed intact -- the same "pattern stopped
+    # matching the artifact" class as F36. A textual search over scripts/*.py also matches
+    # prose that merely mentions `--ignore=`, which is how the first fix failed. The check
+    # is now behavioural: call the builder and inspect what it returns.
+    assert "gate_pytest_args" in src, (
+        "the gate must build its pytest layer through gate_pytest_args(), so the gate and "
+        "the README badge guard cannot measure the suite with different filters (F36)"
+    )
+    spec = importlib.util.spec_from_file_location(
+        "gate_pytest_selection_under_test", REPO / "scripts" / "gate_pytest_selection.py"
+    )
+    selection = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(selection)
+    built = selection.gate_pytest_args(
+        ["v0.3-prelim/tests/test_a.py", "v0.3-prelim/tests/test_b.py"]
+    )
+    assert built.count("--ignore=v0.3-prelim/tests/test_a.py") == 1
+    assert built.count("--ignore=v0.3-prelim/tests/test_b.py") == 1
+    assert " ".join(selection.gate_pytest_args()).count("--ignore=") == 0, (
+        "an empty exclusion list must emit no --ignore= argument at all"
+    )
+    assert built.index("-k") < len(built) - 1 and built[-1] == selection.GATE_PYTEST_K_FILTER, (
+        "the -k filter must be the shared constant, not a per-caller literal"
+    )
 
 
 def test_every_exclusion_has_its_in_file_marker():

@@ -65,6 +65,7 @@ from paths import REFERENCE_PYTHON  # noqa: E402
 # other's numbers, which is exactly how the guard went blind.
 from gate_pytest_selection import gate_pytest_args  # noqa: E402
 import argparse
+import os
 import re
 import subprocess
 import sys
@@ -244,6 +245,20 @@ def main():
     print("=" * 70)
     print(f"Repo: {REPO}")
     print(f"Python: {VENV_PYTHON}")
+
+    # Inclusion proof for the front-page badge guard (finding F36): the gate is a
+    # subprocess, so a guard test that sees GATE_RUN_ID in its environment was collected
+    # and executed *inside* the certified run -- which is what the badge's test count
+    # claims to include. Proof by execution, not by reading a config file.
+    try:
+        _head = subprocess.run(
+            ["git", "-C", str(REPO), "rev-parse", "--short", "HEAD"],
+            capture_output=True, text=True, timeout=30, encoding="utf-8",
+            errors="replace",
+        ).stdout.strip()
+    except Exception:
+        _head = "unknown"
+    os.environ["GATE_RUN_ID"] = f"gate-{_head or 'unknown'}"
 
     def record(name, ok, tail=""):
         results.append((name, "PASS" if ok else "FAIL", tail))

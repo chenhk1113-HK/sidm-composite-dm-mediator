@@ -66,6 +66,7 @@
       "scripts/fH_pairing_registry.py",
       "scripts/fix_47_71.py",
       "scripts/fix_markup.py",
+      "scripts/gate_pytest_selection.py",
       "scripts/generate_a15.py",
       "scripts/generate_test_mapping.py",
       "scripts/layer2_f_H_from_concerto.py",
@@ -2363,7 +2364,7 @@
     "other": []
   },
   "counts": {
-    "live_clean": 432,
+    "live_clean": 433,
     "live_prose_only": 4,
     "pinned_source": 3,
     "pinned_exception": 3,

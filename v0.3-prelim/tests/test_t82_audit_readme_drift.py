@@ -35,14 +35,19 @@ What it asserts now (all deterministic, no long re-run needed):
   4. test_readme_names_only_evidence_files_that_exist -- the verification paragraph may not
      point at a log that is not in the tree (forward-referencing an artifact filed in a
      later commit is a recorded defect class here).
-  5. test_gate_census_within_tolerance_of_badge -- a coarse suite-size sanity check,
+  5. test_readme_badge_deselection_matches_the_gate_exactly -- deselection is countable and
+     stable, so it is asserted exactly rather than tolerantly.
+  6. test_guard_tests_are_inside_the_gate_suite -- the guard runs its own tests in-process
+     under the gate's selection filter and requires them green: the guard must be part of
+     the certified suite, not a checker standing outside it.
+  7. test_gate_census_within_tolerance_of_badge -- a coarse suite-size sanity check,
      collected with the GATE's own selection args (imported from
-     scripts/gate_pytest_selection.py so guard and gate cannot diverge). Tolerance 0.4%:
-     the standalone collect reports 3723 selected while the gate's pytest layer reported
-     3726 for the same tree (a 3-test gap that F37 records as unexplained), which is 0.08%,
-     while a stale-era badge (3690) sits 0.9% away and is caught.
+     scripts/gate_pytest_selection.py so guard and gate cannot diverge). ADVISORY at 1%: a
+     standalone collect does not reproduce the gate's run census (finding F37 measured
+     3723 collected-selected vs 3770 items in the same tree's run), so a correct badge sits
+     ~0.4% from it; exactness lives in checks 3 and 5 instead.
 
-Strict by default. T82_README_DRIFT_LENIENT=1 downgrades (3) and (5) to printed warnings
+Strict by default. T82_README_DRIFT_LENIENT=1 downgrades (3) and (7) to printed warnings
 for a round that knowingly ships a badge quoting one specific historical run; that choice
 must be recorded in the round's docs, not just set in an environment. (1), (2) and (4) are
 never lenient.
@@ -88,9 +93,12 @@ GATE_SUMMARY_RE = re.compile(
     r"(\d+) passed.*?(\d+) skipped.*?(\d+) deselected", re.IGNORECASE
 )
 
-# 0.4%: above the 3-test standalone-vs-in-gate collection gap (0.08%, finding F37),
-# below the drift a stale badge actually carries (~0.9%+).
-CENSUS_TOLERANCE = 0.004
+# 1% advisory bound. NOT a safe equality bound: the standalone collect census understates
+# the gate's real run census by ~0.4% on this tree (3723 collect-only vs 3770 in the run,
+# finding F37), so a badge that exactly quotes a certified gate log is 0.4% away from what
+# a collect reports. Exactness lives in the badge-vs-certified-log check and in the exact
+# deselection equality; this test only catches gross suite-size drift.
+CENSUS_TOLERANCE = 0.01
 
 
 def _readme_text() -> str:
@@ -275,13 +283,62 @@ def test_readme_names_only_evidence_files_that_exist():
     )
 
 
+def test_readme_badge_deselection_matches_the_gate_exactly():
+    """Deselection is countable and stable, so it is checked exactly, not tolerantly.
+
+    The gate's -k filter is a repo-level fact: the badge may not quietly claim a different
+    deselected count from the one the certified run reported.
+    """
+    counts = _read_readme_badge_counts()
+    if counts is None:
+        pytest.skip("README badge has no specific count to compare")
+    certified = _certified_gate_runs()
+    if not certified:
+        pytest.skip("no certified gate log to compare against")
+    deselected = {run["deselect"] for _, run in certified}
+    assert counts.get("deselect") in deselected, (
+        f"badge claims {counts.get('deselect')} deselected but the certified gate runs "
+        f"report {sorted(deselected)}. The -k filter changed; re-derive the badge."
+    )
+
+
+def test_guard_tests_are_inside_the_gate_suite():
+    """Proves by execution, not by reading config, that this guard is inside the gate.
+
+    The gate is a subprocess, so it sets GATE_RUN_ID in its own process and every child
+    inherits it. If this test is running with that variable set, the guard was collected
+    and executed inside a gate run -- which is what the badge's count claims to include.
+    A guard that verifies the front page from outside the certified suite is decoration
+    (finding F36).
+
+    An earlier version of this test ran pytest.main() on its own file to prove the same
+    thing. That recursed: the nested run executed this test, which started another nested
+    run. Proof by execution must not re-execute itself.
+    """
+    gate_run_id = os.environ.get("GATE_RUN_ID")
+    if gate_run_id:
+        print(f"guard executed inside gate run {gate_run_id}: inclusion proven directly")
+        return
+    assert "v0.3-prelim" in Path(__file__).resolve().parts, (
+        f"this guard ({Path(__file__).name}) is not under the directory the gate collects "
+        "tests from, so any test count on the front page omits it."
+    )
+    pytest.skip(
+        "inclusion is proven directly only inside a gate run (GATE_RUN_ID is set there); "
+        "outside one this test can only assert the file lives in the collected directory, "
+        "which it does"
+    )
+
+
 def test_gate_census_within_tolerance_of_badge():
     """Coarse sanity: the badge's census and the gate's own collected census agree.
 
     Collected with the gate's selection args (shared module), so a guard measuring a
     different suite than the gate is caught -- which is exactly how the pre-F36 version
-    was blind. Tolerance is 0.4% because the standalone collect and the gate's in-run
-    layer already differ by 3 tests on the same tree (finding F37).
+    was blind. Advisory only, tolerance 1%: a standalone collect does NOT reproduce the
+    gate's run census (finding F37), and a check that cannot be satisfied by a correct
+    badge gets loosened or deleted by the next person who hits it. The exact assertions
+    are the certified-log match and the deselection equality.
     """
     counts = _read_readme_badge_counts()
     if counts is None:

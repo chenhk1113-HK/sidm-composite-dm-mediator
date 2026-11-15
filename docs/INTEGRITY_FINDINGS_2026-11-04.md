@@ -1733,38 +1733,72 @@ the guard. If a check says "the artifact does not contain what I am looking for,
 that by looking at the artifact — and if the artifact does contain it, the check is
 broken, not the artifact. Make the silent-skip mode assertable.
 
-## F37 — the gate's pytest layer and a standalone collect of the same tree count three tests apart (FOUND 2026-11-15, OPEN)
+## F37 — a standalone pytest collect does not reproduce the gate's own run census, and a pass→skip flip moved across a prose-only commit (FOUND 2026-11-15, OPEN)
 
-**What was measured.** On the same commit, with the same selection arguments and the same
-interpreter: `pytest v0.3-prelim/tests/ -k "<gate filter>" --collect-only` reports
-**3763 collected / 40 deselected = 3723 selected**, while the gate's own pytest layer
-reports **3701 passed + 25 skipped = 3726 selected** (and 3700 + 26 = 3726 on the next
-tree). The gap is 3 tests, 0.08%, and it is stable across runs.
+**What was measured, all on this host with the same interpreter and the same selection
+arguments.**
 
-**What is NOT the cause.** Not the two `--ignore` flags — `GATE_IGNORED_TESTS` is empty
-and the gate prints `gate-ignored test files: 0`. Not the `-k` filter — both sides apply
-it, and both report 40 deselected.
+| tree | gate's pytest layer | standalone `--collect-only` | total-item gap |
+|---|---|---|---|
+| `3c50e70` | 3700 passed + 26 skipped + 40 deselected = **3766** | 3763 collected (initially read as 3723 selected) | **3** |
+| `0ed9e55` | 2 failed + 3705 passed + 25 skipped + 40 deselected = **3772** | 3763 + 7 = **3770** | **2** |
+
+The gap is small, stable, and had never been noticed. `GATE_IGNORED_TESTS` is empty (the
+gate prints `gate-ignored test files: 0`), and both sides report exactly 40 deselected, so
+it is not an exclusion difference.
+
+**What is NOT the cause.** Not `--ignore` flags, not the `-k` filter, not the interpreter
+(the gate runs `VENV_PYTHON = .venv-sidm-bench/Scripts/python.exe`, the same interpreter a
+manual run uses).
 
 **What has not been established.** Whether the difference comes from collection context
-(rootdir/conftest resolution differs between a bare invocation and the gate's
-subprocess) or from items the gate's run materialises that a bare collect does not. No
-claim is made here; the two numbers are simply not equal, and no one had noticed.
+(rootdir/conftest resolution in the gate's subprocess) or from items a run materialises
+that a collect does not. No mechanism is claimed here. The honest statement is that two
+counts of "the same suite" on the same commit differ by 2-3 items and nobody knows why.
 
-**Why it is recorded rather than tolerated silently.** A badge guard that asserts
-*exact* equality between the front-page number and a standalone collect would fail on
-this 0.08% gap and would then be "fixed" by loosening the assertion or editing the
-badge — i.e. the guard would be broken to fit the measurement. The census check
-therefore carries an explicit 0.4% tolerance, chosen above this known gap and below the
-drift a stale badge actually carries (~0.9%+), and the tolerance is stated in the guard's
-source with this finding as its justification. The badge's own numbers are still checked
-for exact equality — against the certified gate log, which is what the badge claims to
-quote (F36).
+**Why recording it changed the guard's design.** The badge guard's first version asserted
+that the badge's census equal a standalone collect. On `0ed9e55` the badge quoting the
+certified run exactly (3705 + 25 = 3730) sits **1 item / 0.03%** from a collect that
+reports 3729 selected — and quoting `3c50e70` exactly (3726) sits 3 items away. A check
+that a *correct* badge can fail gets loosened, skipped, or deleted by the next person who
+hits it, which is how guards die. So exactness was moved to the two comparisons that are
+actually stable — the badge against a certified gate log, and the badge's deselection
+count against the certified runs — and the census comparison was demoted to an advisory
+1% bound, with this finding named in the guard's source as the reason the bound exists.
 
-**Consequence for pass/skip arithmetic.** The pass and skip counts separately are not a
-stable invariant: 3701/25 on `c0adf38` and 3700/26 on `3c50e70` for a commit that changed
-only prose. A test moved from pass to skip between two green runs. The selected total is
-identical, so no gate layer noticed. Any future claim of the form "N tests pass" must
-name the tree it was measured on.
+**Second observation, same finding.** 3701 passed / 25 skipped on `c0adf38` against 3700 /
+26 on `3c50e70`. The commit between them changed only `VERSION` and markdown prose, yet one
+test moved from pass to skip and the selected total was unchanged. No layer noticed, because
+no layer asserts a per-test outcome history. Which test, and why, is not identified. Any
+claim of the form "N tests pass" must name the tree it was measured on.
 
-**Status.** OPEN. Attribution needs the collected-item lists diffed between the two
-invocation paths — cheap to do, not yet done. It does not block any claim in the paper.
+**Status.** OPEN. Closing it means diffing collected-item identifiers between the gate's
+invocation path and a bare one — cheap, not yet done. It blocks no claim in the paper.
+
+## F38 — a guard that greps source text broke when the code moved, and its first fix broke again on prose (FOUND AND FIXED 2026-11-15)
+
+**What happened.** `test_gate_ignore_list_markers.py::test_gate_no_longer_hard_codes_ignore_strings`
+asserted that the literal string `--ignore={rel}` appears in `scripts/verify_release_gate.py`.
+The F36 fix moved the pytest-argument construction into `scripts/gate_pytest_selection.py`
+so the gate and the badge guard share one selection. The invariant the guard protects —
+exclusions must come from `GATE_IGNORED_TESTS`, never from hand-written file names — stayed
+completely intact. The guard went red anyway, because it was asserting a **spelling** in one
+file rather than the behaviour.
+
+**The second failure.** The first repair replaced the single-file grep with a glob over
+`scripts/*.py` searching for any file containing `--ignore=`. That matched the gate's own
+historical comment `# Before 2026-11-05 the pytest layer carried 15 hard-coded \`--ignore=\`
+strings` — prose describing the old defect — and the guard failed on a documentation
+sentence. Two consecutive failures from the same habit: checking text instead of behaviour.
+
+**The fix.** The assertion is now behavioural: import `gate_pytest_selection`, call
+`gate_pytest_args(["...test_a.py", "...test_b.py"])`, and require the returned argument list
+to contain exactly those two `--ignore=` flags, to contain none when the exclusion list is
+empty, and to end with the shared `-k` constant. Plus one structural check that the gate
+actually calls `gate_pytest_args()`. Refactor the builder and the test fails because the
+behaviour changed, not because a string moved.
+
+**Rule taken from it.** A guard that asserts a textual pattern in a specific file is a guard
+against **editing that file**, not against the defect it names. When a check breaks on a
+refactor that preserves the invariant, the check was testing the wrong thing. Prefer
+calling the thing over grepping for the thing.

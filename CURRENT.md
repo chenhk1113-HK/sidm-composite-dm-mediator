@@ -63,13 +63,21 @@ tree. Strictness was additionally opt-in and nothing set it, and its collect rec
   test suite" with different filters cannot see drift in each other's numbers.
 * **Verified by falsification, not just by passing:** against a copy of the tree whose README claims **3,799
   passed**, the new guard fails and prints the certified logs; the old guard passed that same forgery silently.
-  Against the real tree it parses 3701 / 25 / 40 and matches two certified logs (6 passed).
-* **New open finding (F37):** the gate's pytest layer and a standalone collect of the *same* commit with the
-  *same* args differ by **3 tests** (3726 selected vs 3723; stable across runs, `GATE_IGNORED_TESTS` is empty).
-  Unattributed, and recorded rather than absorbed: a guard asserting exact equality would have to be loosened to
-  fit the measurement, so the census check states a 0.4% tolerance in source with F37 as its justification. Also
-  noted: 3701/25 on `c0adf38` vs 3700/26 on `3c50e70` — one test moved from pass to skip across a prose-only
-  commit, with the selected total unchanged.
+  Against the real tree it parses 3701 / 25 / 40 and matches two certified logs.
+* **Exactness lives where it is actually stable.** A standalone `--collect-only` does not reproduce the gate's run
+  census, so the census comparison was demoted to an advisory 1% bound; the exact assertions are the badge against
+  a certified 15/15 gate log, and the badge's deselection count against the certified runs. A guard a *correct*
+  badge can fail is a guard that gets deleted the next time someone hits it.
+* **New open finding (F37):** the gate's pytest layer and a standalone collect of the *same* commit with the *same*
+  selection args and interpreter differ by **2-3 items** (3766 vs 3763 on `3c50e70`; 3772 vs 3770 on `0ed9e55`),
+  with `GATE_IGNORED_TESTS` empty and 40 deselected on both sides. Mechanism unidentified, and recorded rather than
+  absorbed. Also recorded: 3701/25 on `c0adf38` vs 3700/26 on `3c50e70` — a test moved pass→skip across a
+  prose-only commit and no layer noticed.
+* **Second guard found broken (F38, fixed):** `test_gate_ignore_list_markers.py` asserted that the literal string
+  `--ignore={rel}` appears in the gate file. Moving the selection into the shared module broke it while the
+  invariant it protects stayed intact; the first repair then failed on a *prose comment* that mentioned
+  `--ignore=`. Both are now behavioural: the test imports the builder, calls it, and inspects the arguments it
+  returns. A guard that greps a specific file is a guard against editing that file, not against its named defect.
 * **No VERSION change.** No physics, no refit, no channel. A guard repair is a verification-asset change, and its
   evidence is a green full-gate run on the commit that carries it.
 
