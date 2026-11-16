@@ -1,19 +1,19 @@
 {
-  "generated_at": "2026-11-16T05:11:05Z",
-  "git_tree_sha": "ce8cac63931bbe747017472a7a8a29899e2f56c7",
+  "generated_at": "2026-11-16T05:34:39Z",
+  "git_tree_sha": "8b9f7c5b5338ef582c2e13fd1b503365b306e9c0",
   "selection": {
     "target": "v0.3-prelim/tests/",
     "k_filter": "not T132 and not T131 and not T133 and not T134 and not T135 and not T220"
   },
   "collect_only": {
     "without_k": {
-      "nodeids": 3842,
+      "nodeids": 3843,
       "collection_level_skips": 3,
-      "summary_line": "3842 tests collected"
+      "summary_line": "3843 tests collected"
     },
     "with_gate_k": {
-      "nodeids_selected": 3802,
-      "nodeids_total": 3842,
+      "nodeids_selected": 3803,
+      "nodeids_total": 3843,
       "deselected": 40,
       "collection_level_skips": 3,
       "collection_skip_sites": [
@@ -30,7 +30,7 @@
           "where": "v0.3-prelim\\tests\\test_phase47_50.py:6:"
         }
       ],
-      "summary_line": "3802/3842 tests collected (40 deselected)"
+      "summary_line": "3803/3843 tests collected (40 deselected)"
     }
   },
   "deselection_attribution": {
@@ -73,10 +73,10 @@
   },
   "reconciliation": {
     "run_summary_items": 3749,
-    "expected_run_items": 3805,
-    "expected_from": "3802 selected nodeids + 3 module-level collection skips",
+    "expected_run_items": 3806,
+    "expected_from": "3803 selected nodeids + 3 module-level collection skips",
     "module_level_skips": 3,
-    "residual": -56,
+    "residual": -57,
     "deselected_matches_log": true,
     "log_certifies_current_tree": false,
     "cross_check_status": "log certifies a different tree; residual is informational"
@@ -93,9 +93,34 @@
     "caveat": "a detached worktree starts without the gitignored gate inputs, so modules that skip at import skip there too; the numbers describe that commit's code, not the original run's data state",
     "changed_test_paths": {
       "status": 0,
-      "added": [],
+      "added": [
+        "scripts/downsample_for_reference.py",
+        "scripts/fetch_fermi_mcdaniel.py",
+        "scripts/figshare_24058650_pins.json",
+        "scripts/galstreams_pins.py",
+        "scripts/pytest_census_scan.py",
+        "scripts/verify_reference.py",
+        "v0.3-prelim/tests/test_fermi_figshare_pins.py",
+        "v0.3-prelim/tests/test_galstreams_vendored_pins.py",
+        "v0.3-prelim/tests/test_gate_pytest_census.py",
+        "v0.3-prelim/tests/test_gitignored_scope_scripts.py"
+      ],
       "removed": [],
-      "modified": []
+      "modified": [
+        "scripts/bootstrap_gate_inputs.py",
+        "scripts/fetch_external_data.sh",
+        "scripts/verify_release_gate.py",
+        "tests/test_reference_chains.py",
+        "v0.3-prelim/tests/test_bootstrap_gate_inputs.py"
+      ]
+    },
+    "input_dependent_gap": 11,
+    "decomposition": {
+      "added_selected_nodeids_since_certified_commit": 70,
+      "module_level_skip_change": -2,
+      "input_dependent_gap_clean_checkout_vs_run": 11,
+      "identity": "residual == input_dependent_gap - added_selected - skip_change",
+      "identity_holds": true
     }
   }
 }

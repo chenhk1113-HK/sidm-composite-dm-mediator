@@ -138,8 +138,10 @@ def test_a_declared_producer_is_not_flagged():
 
 def test_migration_repointed_every_tracked_reference():
     """A moved script whose references still name the old path is a half-finished migration."""
+    # The pattern is assembled at runtime on purpose: a literal copy of the old path in this file
+    # would be the single hit this guard reports, i.e. the guard would flag itself forever.
     r = subprocess.run(["git", "-C", str(REPO), "grep", "-n", "-I",
-                        "outputs/downsample_for_reference.py", "--", ":!outputs",
+                        "outputs/" "downsample_for_reference.py", "--", ":!outputs",
                         ":!archive", ":!CHANGELOG.md", ":!docs/INTEGRITY_FINDINGS_2026-11-04.md"],
                        capture_output=True, text=True, encoding="utf-8", errors="replace")
     stale = [line for line in (r.stdout or "").splitlines() if line.strip()]

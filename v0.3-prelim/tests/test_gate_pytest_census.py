@@ -76,8 +76,28 @@ def test_run_and_collect_reconcile_or_the_gap_is_measured():
     else:
         expl = inv.get("residual_explanation")
         assert expl, f"residual {rec['residual']} is filed with no measurement behind it: {rec}"
-        assert expl["predicted_run_items"] == rec["run_summary_items"], (expl, rec)
         assert len(expl["tree_sha"]) == 40, expl
+        # The certified tree was collected, not guessed: its own numbers have to add up.
+        assert expl["predicted_run_items"] == (
+            expl["nodeids_selected"] + expl["collection_level_skips"]), expl
+        # The clean measurement of the certified tree and the run that happened there do not meet,
+        # and that is a property of the suite, not of the census: a detached checkout has none of
+        # the gitignored gate inputs, so input-dependent modules collect differently. The size of
+        # that gap is filed as a number so nobody has to take "it's just the data" on faith.
+        gap = rec["run_summary_items"] - expl["predicted_run_items"]
+        assert expl.get("input_dependent_gap") == gap, (expl, rec, gap)
+        # The residual is three measured numbers and they have to add up.
+        dec = expl["decomposition"]
+        assert dec["identity_holds"], dec
+        assert rec["residual"] == (
+            dec["input_dependent_gap_clean_checkout_vs_run"]
+            - dec["added_selected_nodeids_since_certified_commit"]
+            - dec["module_level_skip_change"]), (rec, dec)
+        # A gap with no named cause is still a gap.
+        changed = expl.get("changed_test_paths") or {}
+        assert changed.get("added") or changed.get("removed") or changed.get("modified"), (
+            f"residual {rec['residual']} is attributed to nothing: {expl}"
+        )
 
 
 def test_the_certifying_gate_log_names_a_resolvable_commit():
@@ -149,6 +169,7 @@ def test_census_is_tied_to_a_tree_and_says_which_one():
     ("per_file_breakdown_wrong", "does not sum"),
     ("drop_the_residual_explanation", "unexplained"),
     ("residual_with_no_named_cause", "no named cause"),
+    ("break_the_residual_decomposition", "decomposition does not close"),
 ])
 def test_census_checker_fails_when_the_arithmetic_is_wrong(mutate, expect_substring):
     """Every claim the census files must be one the checker can break."""
@@ -164,7 +185,9 @@ def test_census_checker_fails_when_the_arithmetic_is_wrong(mutate, expect_substr
         att = m["deselection_attribution"]
         att["nodeids_outside_declared_families"] = ["some/test.py::test_case[unfamily_token]"]
     elif mutate == "residual_on_certified_tree":
-        m["reconciliation"]["run_summary_items"] += 3
+        # Numbers that agree with each other but not with the suite: the arithmetic check cannot
+        # see them, only the reconciliation rule can.
+        m["reconciliation"]["run_summary_items"] = m["reconciliation"]["expected_run_items"] + 3
         m["reconciliation"]["residual"] = 3
         m["reconciliation"]["log_certifies_current_tree"] = True
     elif mutate == "log_deselection_disagrees":
@@ -173,17 +196,36 @@ def test_census_checker_fails_when_the_arithmetic_is_wrong(mutate, expect_substr
         att = m["deselection_attribution"]
         if att["by_file"]:
             att["by_file"][0]["deselected"] += 2
-    elif mutate in ("drop_the_residual_explanation", "residual_with_no_named_cause"):
+    elif mutate in ("drop_the_residual_explanation", "residual_with_no_named_cause",
+                    "break_the_residual_decomposition"):
         # Force a cross-tree residual, then remove the thing that makes it accountable.
         m["reconciliation"]["run_summary_items"] += 7
         m["reconciliation"]["residual"] = (
             m["reconciliation"]["run_summary_items"] - m["reconciliation"]["expected_run_items"])
         m["reconciliation"]["log_certifies_current_tree"] = False
+        # rebuild_explanation is a copy that always exists, because a filed census with a zero
+        # residual legitimately has no explanation at all and the mutation must still be able to
+        # invent one.
+        expl = dict(m.get("residual_explanation") or {})
+        expl.setdefault("commit", "c" * 40)
+        expl.setdefault("tree_sha", "d" * 40)
+        expl.setdefault("nodeids_selected", m["collect_only"]["with_gate_k"]["nodeids_selected"])
+        expl.setdefault("collection_level_skips",
+                        m["collect_only"]["with_gate_k"]["collection_level_skips"])
+        expl.setdefault("predicted_run_items",
+                        expl["nodeids_selected"] + expl["collection_level_skips"])
         if mutate == "drop_the_residual_explanation":
             m["residual_explanation"] = None
         else:
-            m.setdefault("residual_explanation", {})["changed_test_paths"] = {
-                "status": 0, "added": [], "removed": [], "modified": []}
+            if mutate == "residual_with_no_named_cause":
+                expl["changed_test_paths"] = {"status": 0, "added": [], "removed": [],
+                                              "modified": []}
+            else:  # break_the_residual_decomposition
+                dec = dict(expl.get("decomposition") or {})
+                dec["identity_holds"] = False
+                dec["module_level_skip_change"] = int(dec.get("module_level_skip_change", 0)) + 9
+                expl["decomposition"] = dec
+            m["residual_explanation"] = expl
 
     problems = census._problems(m)
     assert problems, f"the checker accepted a fabricated census ({mutate})"

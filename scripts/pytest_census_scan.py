@@ -310,6 +310,28 @@ def build(gate_log: Path | None = None) -> dict:
         if residual_explanation:
             residual_explanation["changed_test_paths"] = _changed_test_paths(
                 run_counts["log_commit"])
+            # The certified run and a clean measurement of the certified tree do not meet: the
+            # worktree has none of the gitignored gate inputs, so input-dependent modules collect
+            # differently. The gap is reported, never absorbed into the arithmetic.
+            gap = (reconciliation["run_summary_items"]
+                   - residual_explanation["predicted_run_items"])
+            residual_explanation["input_dependent_gap"] = gap
+            added_selected = (gated["collected_selected"]
+                              - residual_explanation["nodeids_selected"])
+            skip_change = (gated["collection_skip_total"]
+                           - residual_explanation["collection_level_skips"])
+            # The residual is now three measured numbers, not a story: how many test items were
+            # added since the certified commit, how the module-level skip count moved, and how
+            # many items a clean checkout of the certified commit cannot collect because its
+            # inputs are gitignored (finding F39's residue, quantified).
+            residual_explanation["decomposition"] = {
+                "added_selected_nodeids_since_certified_commit": added_selected,
+                "module_level_skip_change": skip_change,
+                "input_dependent_gap_clean_checkout_vs_run": gap,
+                "identity": "residual == input_dependent_gap - added_selected - skip_change",
+                "identity_holds": (
+                    reconciliation["residual"] == gap - added_selected - skip_change),
+            }
 
     return {
         "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
@@ -393,6 +415,11 @@ def _problems(inv: dict) -> list[str]:
                 f"filed residual {rec['residual']} != recomputed "
                 f"{rec['run_summary_items']} - {rec['expected_run_items']} = {recomputed}"
             )
+        if recomputed != 0 and rec.get("log_certifies_current_tree"):
+            problems.append(
+                f"gate run does not reconcile on this tree: run reports {rec['run_summary_items']} "
+                f"items, collect predicts {rec['expected_run_items']} ({rec['expected_from']})"
+            )
         if recomputed != 0 and not rec.get("log_certifies_current_tree"):
             expl = inv.get("residual_explanation")
             if not expl:
@@ -400,6 +427,11 @@ def _problems(inv: dict) -> list[str]:
                     f"residual {recomputed} is unexplained: the filed gate log certifies a "
                     "different tree and nothing measured that tree (re-run "
                     "scripts/pytest_census_scan.py)"
+                )
+            elif not (expl.get("decomposition") or {}).get("identity_holds"):
+                problems.append(
+                    f"residual {recomputed} decomposition does not close: "
+                    f"{expl.get('decomposition')}"
                 )
             else:
                 # The residual is only "accounted for" when the census measured the certified tree

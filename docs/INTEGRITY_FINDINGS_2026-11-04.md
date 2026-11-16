@@ -1889,7 +1889,7 @@ would have given: a bisect locates a change, it does not establish a mechanism.
 pass→skip flip, and finding F39 below. Any claim of the form "N tests pass" must name the tree
 **and** the selection it was measured on.
 
-## F39 — the test suite depends on files that git does not track, so "green" is not reproducible from a clone (FOUND 2026-11-15, BOOTSTRAP SHIPPED + CENSUS ACCOUNTED 2026-11-16; ONE RESIDUE OPEN)
+## F39 — the test suite depends on files that git does not track, so "green" is not reproducible from a clone (FOUND 2026-11-15, BOOTSTRAP SHIPPED 2026-11-16, GALSTREAMS VENDORED 2026-11-16; RESIDUE NOW MEASURED, NOT OPEN)
 
 An unfiltered full-suite run in a **git worktree** of `bab9bfa` reported
 `10 failed, 3641 passed, 112 skipped in 1104.12 s`. The same tests pass in the working copy:
@@ -2025,10 +2025,80 @@ as `dSphs.csv` before the md5 check could reject it. The pinned md5
 (`1627630e27c73cded88370a9344c66a2`) still matches the verified copy on the authoring machine, so the
 project's cited data is intact and traceable to figshare DOI `10.6084/m9.figshare.24058650.v2`; what
 is broken is a fresh clone's ability to re-verify it over the network. `scripts/fetch_external_data.sh`
-now uses `curl -f` (HTTP errors fail instead of being saved as data), sniffs for an HTML body, and
-enforces the pinned byte size that the script already parsed and never checked.
+was rewritten as a wrapper over `scripts/fetch_fermi_mcdaniel.py` (re-pin round, 2026-11-16): HTTP errors
+fail instead of being saved as data, an HTML body is rejected before it can ever be written to a `.csv`, and
+both the size and the hash come from figshare's own `computed_md5` in the article metadata API
+(`scripts/figshare_24058650_pins.json`) rather than from a number remembered inside a shell script. The old
+script parsed a byte size and never checked it; the new one checks size and md5 against the depositor's
+record and treats figshare's HTTP 202 queue response as a failure rather than as an empty download.
 
 **Rule.** A tool inside a gitignored directory is invisible to a clone. Any path a test, doc or error
 message tells a reader to run must live in a tracked path, and audit scopes should be defined so they
 overlap the ignore rules — the CG-16 audit covered `scripts/`, `tests/` and `v0.3-prelim/tests/` and
 therefore never looked inside the directories where these two tools actually lived.
+
+## F42 — the gate log that every front page cites certified a tree nobody could name (FOUND AND FIXED 2026-11-16)
+
+`docs/evidence/gate_run_f39_bootstrap_20261116.txt` opened with:
+
+> Commit under certification: `<HEAD at run time; this file is filed in the commit that follows>`
+
+The placeholder was never filled in. `README.md`, `CURRENT.md`, `EXTRACT.md` and `CITATION.cff` all point at
+that file as the proof that the 15-layer gate is green on the current head, and the badge's 3724 is quoted
+from it. A certification that names no commit is a claim about an unknown tree: the 3724 could not be tied to
+the tests that exist today, and no reader could re-derive it.
+
+**How it was found.** Not by looking at the log — by the F37 census (`scripts/pytest_census_scan.py`) refusing
+to reconcile. The filed run reports 3749 items, the current tree collects to 3805, and the log offered no
+commit to compare against. A tool that actually computes something is the only thing that catches a claim that
+was never connected to reality (same class as findings F36, F38 and F40).
+
+**Fix, three parts.** (1) The log header now names `2ac96b87623a8706b1b8e1ce9d7c7d78abdaa7a2` and its tree
+`02383aaaca3e36431375c5e8b3cdb6bae01dfbbc`, with the honest caveat printed beside it: the run executed on the
+working copy that commit records *minus this evidence file*, which cannot exist before the run it records has
+finished. (2) `scripts/verify_release_gate.py` now prints `Commit under certification`, `Tree under
+certification` and `Working tree dirty at run start` before any layer runs, so an anonymous gate log is no
+longer producible by accident. (3) `test_the_certifying_gate_log_names_a_resolvable_commit` fails when a
+census cross-checks a log with no commit line; the falsification is deleting the line.
+
+## F43 — the census tool hardcoded the very vocabulary it exists to police (FOUND AND FIXED 2026-11-16)
+
+`scripts/pytest_census_scan.py` carried `FAMILY_TOKENS = ("t131", ... "t220")` as a literal tuple while the
+filter it mirrors lives in `scripts/gate_pytest_selection.py`. That tuple decides which deselections get
+labelled "outside the declared -k families". Edit the filter without editing the tuple and the census either
+ignores a newly-deselected family or invents a violation — wrong in whichever direction the drift went, and
+silent about it.
+
+**Fix.** `FAMILY_TOKENS` is parsed out of `GATE_PYTEST_K_FILTER` with an identifier-shaped regex and the guard
+`test_census_family_vocabulary_cannot_drift_from_the_gate_filter` compares both sides from the same source of
+truth. The filter is an *exclusion* filter (`not T132 and not T131 ...`), which is why tokens are parsed rather
+than split on `or`.
+
+## F37-close — the census is a measurement now, and the residual closes arithmetically (2026-11-16)
+
+Taken on commit `6d705a4` (tree `8b9f7c5`), cross-checked against the amended log for `2ac96b8`.
+
+| quantity | value | how it was obtained |
+|---|---|---|
+| nodeids, full collect | 3842 | `pytest v0.3-prelim/tests --collect-only` |
+| nodeids selected by the gate filter | 3802 | same collect with the gate `-k` filter |
+| deselected | 40 | set difference of the two nodeid lists |
+| deselections outside a declared family | 0 | attribution 21 T132 + 11 T131 + 4 T133 + 4 parametrized-module instances |
+| module-level collection skips | 3 | named sites, not just a count |
+| predicted run items | 3805 | 3802 + 3 |
+| items the certified log reported | 3749 | 3724 passed + 25 skipped + 0 failed |
+| residual | −56 | 3749 − 3805 |
+
+**The decomposition, which is the actual pin.** The certified commit was collected on its own in a detached
+`git worktree`: 3773 nodeids, 3733 selected, 40 deselected, 5 module-level skips, predicting 3738 run items.
+
+* `added_selected_nodeids_since_certified_commit = 3802 − 3733 = 69` — the four new guard files, named by
+  `git diff --name-status 2ac96b8 HEAD`: 10 paths added, 5 modified, 0 removed.
+* `module_level_skip_change = 3 − 5 = −2`.
+* `input_dependent_gap_clean_checkout_vs_run = 3749 − 3738 = 11` — **11 test items exist in a populated working
+  copy that a clean checkout of the same commit cannot collect**, because their inputs are gitignored. Finding
+  F39's residue, stated as a number instead of a worry.
+
+Identity filed in `pytest_census_inventory.json` and re-derived by the guard:
+`residual = gap − added − skip_change`, i.e. `11 − 69 − (−2) = −56`. The guard suite fails if the identity is
+broken, if the explanation is dropped, or if the cause is unnamed.
