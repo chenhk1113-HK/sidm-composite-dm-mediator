@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-16T07:22:16Z",
-  "git_tree_sha": "7a0c2edd77fa78ef49c28392975fe1d39469f97d",
+  "generated_at": "2026-11-16T07:51:22Z",
+  "git_tree_sha": "b1300fb881faa77196c59a1d5559c3d6a4472c2a",
   "selection": {
     "target": "v0.3-prelim/tests/",
     "k_filter": "not T132 and not T131 and not T133 and not T134 and not T135 and not T220"
@@ -78,8 +78,8 @@
     "module_level_skips": 3,
     "residual": 0,
     "deselected_matches_log": true,
-    "log_certifies_current_tree": true,
-    "cross_check_status": "log certifies this exact tree"
+    "log_certifies_current_tree": false,
+    "cross_check_status": "log certifies a different tree; residual is informational"
   },
   "residual_explanation": null
 }

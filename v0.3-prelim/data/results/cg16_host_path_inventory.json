@@ -1502,7 +1502,7 @@
       },
       {
         "path": "CHANGELOG.md",
-        "host_path_lines": 2
+        "host_path_lines": 3
       },
       {
         "path": "CONTRIBUTING.md",
@@ -1850,6 +1850,10 @@
       },
       {
         "path": "docs/evidence/gate_run_vendoring_census_20261116.txt",
+        "host_path_lines": 3
+      },
+      {
+        "path": "docs/evidence/gate_run_vendoring_census_transition_20261116.txt",
         "host_path_lines": 3
       },
       {
@@ -2479,7 +2483,7 @@
     "pinned_source": 3,
     "pinned_exception": 3,
     "historical_frozen_code": 242,
-    "docs_prose": 169,
+    "docs_prose": 170,
     "data_artifact": 75,
     "other": 0
   },
