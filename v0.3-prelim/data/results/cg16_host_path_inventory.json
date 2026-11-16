@@ -60,15 +60,19 @@
       "scripts/compare_reviews.py",
       "scripts/constants.py",
       "scripts/doc_version.py",
+      "scripts/downsample_for_reference.py",
       "scripts/drift_guard.py",
       "scripts/dual_review.py",
       "scripts/elbert2015_c_tau_prescription.py",
       "scripts/epsilon_lz_check.py",
       "scripts/fH_pairing_registry.py",
       "scripts/fetch_external_data.sh",
+      "scripts/fetch_fermi_mcdaniel.py",
       "scripts/fetch_sparc.py",
+      "scripts/figshare_24058650_pins.json",
       "scripts/fix_47_71.py",
       "scripts/fix_markup.py",
+      "scripts/galstreams_pins.py",
       "scripts/gate_pytest_selection.py",
       "scripts/generate_a15.py",
       "scripts/generate_test_mapping.py",
@@ -82,6 +86,7 @@
       "scripts/pdf_rencode_maps.py",
       "scripts/plot_sigma_m_v.py",
       "scripts/pre-tag-hook.sh",
+      "scripts/pytest_census_scan.py",
       "scripts/r5_local_review.py",
       "scripts/recheck_cloud9_highsigma_20261103.py",
       "scripts/regenerate_t88ce_chain.py",
@@ -177,6 +182,7 @@
       "scripts/verify_carveout.py",
       "scripts/verify_gate_crash_mutation_proof.py",
       "scripts/verify_numbers_in_paper.py",
+      "scripts/verify_reference.py",
       "scripts/verify_release_gate.py",
       "scripts/walk_paper_tables.py",
       "tests/test_batch_utils.py",
@@ -234,8 +240,12 @@
       "v0.3-prelim/tests/test_euclid_q1_subhalo_real_data.py",
       "v0.3-prelim/tests/test_fH_pairing_integrity.py",
       "v0.3-prelim/tests/test_fH_pairing_registry.py",
+      "v0.3-prelim/tests/test_fermi_figshare_pins.py",
+      "v0.3-prelim/tests/test_galstreams_vendored_pins.py",
       "v0.3-prelim/tests/test_gate_ignore_list_markers.py",
+      "v0.3-prelim/tests/test_gate_pytest_census.py",
       "v0.3-prelim/tests/test_gate_summary_contract.py",
+      "v0.3-prelim/tests/test_gitignored_scope_scripts.py",
       "v0.3-prelim/tests/test_gravothermal_rho_sidm_source_form.py",
       "v0.3-prelim/tests/test_gravothermal_tau_fit_range.py",
       "v0.3-prelim/tests/test_hierarchy_chain_pairing.py",
@@ -512,6 +522,58 @@
       }
     ],
     "historical_frozen_code": [
+      {
+        "path": "archive/outputs_scripts_2026-11/_peek_npz.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "archive/outputs_scripts_2026-11/build_audit_pdf.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "archive/outputs_scripts_2026-11/build_review_bundle_pdf.py",
+        "host_path_lines": 4
+      },
+      {
+        "path": "archive/outputs_scripts_2026-11/bulk_rename_paths.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "archive/outputs_scripts_2026-11/debug_audit.py",
+        "host_path_lines": 2
+      },
+      {
+        "path": "archive/outputs_scripts_2026-11/debug_boltzmann.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "archive/outputs_scripts_2026-11/diagnose_per_galaxy.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "archive/outputs_scripts_2026-11/diagnose_sparc_v3.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "archive/outputs_scripts_2026-11/diagnose_ts_sign.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "archive/outputs_scripts_2026-11/inspect_mcdaniel.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "archive/outputs_scripts_2026-11/inspect_sparc_grid.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "archive/outputs_scripts_2026-11/smoke_test_r11.py",
+        "host_path_lines": 1
+      },
+      {
+        "path": "archive/outputs_scripts_2026-11/v05_smoke_test.py",
+        "host_path_lines": 1
+      },
       {
         "path": "build_codebase_pdf.py",
         "host_path_lines": 1
@@ -1373,10 +1435,6 @@
         "host_path_lines": 2
       },
       {
-        "path": "v0.3-prelim/code/t95_v25_multi_stream_real_galstreams.py",
-        "host_path_lines": 1
-      },
-      {
         "path": "v0.3-prelim/code/t9_prior_variation.py",
         "host_path_lines": 1
       },
@@ -1461,6 +1519,26 @@
       {
         "path": "Snakefile",
         "host_path_lines": 1
+      },
+      {
+        "path": "archive/outputs_scripts_2026-11/README.md",
+        "host_path_lines": 1
+      },
+      {
+        "path": "archive/outputs_scripts_2026-11/h3_h4_master.sh",
+        "host_path_lines": 9
+      },
+      {
+        "path": "archive/outputs_scripts_2026-11/h3_h4_smoke.sh",
+        "host_path_lines": 4
+      },
+      {
+        "path": "archive/outputs_scripts_2026-11/nlive2000_master.sh",
+        "host_path_lines": 3
+      },
+      {
+        "path": "archive/outputs_scripts_2026-11/v05_master.sh",
+        "host_path_lines": 3
       },
       {
         "path": "check_julia.sh",
@@ -1768,6 +1846,10 @@
       },
       {
         "path": "docs/evidence/gate_run_repair_final_20261115.txt",
+        "host_path_lines": 3
+      },
+      {
+        "path": "docs/evidence/gate_run_vendoring_census_20261116.txt",
         "host_path_lines": 3
       },
       {
@@ -2392,12 +2474,12 @@
     "other": []
   },
   "counts": {
-    "live_clean": 437,
+    "live_clean": 447,
     "live_prose_only": 4,
     "pinned_source": 3,
     "pinned_exception": 3,
-    "historical_frozen_code": 230,
-    "docs_prose": 163,
+    "historical_frozen_code": 242,
+    "docs_prose": 169,
     "data_artifact": 75,
     "other": 0
   },

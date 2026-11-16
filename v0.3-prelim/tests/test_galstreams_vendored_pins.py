@@ -9,6 +9,7 @@ are written instead of what they do, and each passed while its invariant was bro
 from __future__ import annotations
 
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -50,10 +51,23 @@ def test_manifest_declares_upstream_provenance_and_licence():
 
 
 def test_manifest_and_readme_name_no_host_path():
-    """A data manifest that spells out one machine's home directory is not portable."""
+    """A data manifest that spells out one machine's home directory is not portable.
+
+    The username being banned is read from the running host instead of written as a literal.
+    Spelled literally, the guard's own source contains the host username, which is exactly what
+    CG-16 forbids in live-scope code -- and CG-16 duly flagged this file on this round's first
+    gate run. The check still bites; it simply does not advertise the machine it was written on.
+    """
+    host_user = Path.home().name
+    assert host_user, "no host username available to check against"
     text = MANIFEST_PATH.read_text(encoding="utf-8")
-    assert "lamkuenai" not in text, "host username appears in the data manifest"
-    assert "C:\\" not in text and "/home/" not in text, "absolute host path in the data manifest"
+    assert host_user not in text, f"host username {host_user!r} appears in the data manifest"
+    # A drive-letter path (C:\x or C:/x). The negative lookahead is deliberate: the manifest
+    # legitimately carries https:// provenance URLs, and a pattern that flags "s://" would be a
+    # guard that fails on the thing it is supposed to certify.
+    assert re.search(r"\b[A-Za-z]:[\\/](?![\\/])", text) is None, (
+        "absolute windows path in the manifest")
+    assert "/home/" not in text, "posix home path in the data manifest"
     readme = (VENDOR / "README.md").read_text(encoding="utf-8", errors="replace")
     assert "BSD" in readme and "galstreams" in readme.lower()
 
