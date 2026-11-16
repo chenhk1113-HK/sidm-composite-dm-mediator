@@ -1,15 +1,16 @@
-wrote C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\v0.3-prelim\data\results\cg16_host_path_inventory.json
 {
-  "live_clean": 447,
-  "live_prose_only": 4,
-  "pinned_source": 3,
-  "pinned_exception": 3,
-  "historical_frozen_code": 242,
-  "docs_prose": 172,
-  "data_artifact": 74,
-  "other": 0
-}
-docs/**",
+  "decision": {
+    "live_scope": [
+      "scripts/",
+      "tests/",
+      "v0.3-prelim/tests/",
+      "config.py"
+    ],
+    "live_rule": "no host absolute path in code; scripts/paths.py is the single source",
+    "frozen_scope": [
+      "v0.3-prelim/code/**",
+      "v0.3-prelim/data/**",
+      "docs/**",
       "*.md"
     ],
     "frozen_rule": "inventoried, deliberately not rewritten (artefacts already exist; re-pointing reads risks silent re-computation)"
@@ -2206,6 +2207,10 @@ docs/**",
         "host_path_lines": 1
       },
       {
+        "path": "v0.3-prelim/data/results/cg16_host_path_inventory.json",
+        "host_path_lines": 8
+      },
+      {
         "path": "v0.3-prelim/data/results/kiss_sidm_canonical_simulation_N1e5.json",
         "host_path_lines": 1
       },
@@ -2487,7 +2492,7 @@ docs/**",
     "pinned_exception": 3,
     "historical_frozen_code": 242,
     "docs_prose": 172,
-    "data_artifact": 74,
+    "data_artifact": 75,
     "other": 0
   },
   "patterns": [
