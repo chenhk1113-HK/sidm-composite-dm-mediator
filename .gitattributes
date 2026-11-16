@@ -87,3 +87,8 @@ dist/ export-ignore
 build/ export-ignore
 __pycache__/ export-ignore
 *.pyc export-ignore
+
+# Vendored third-party scientific data (finding F39): byte-exact, never re-normalised.
+# Pins live in v0.3-prelim/data/external_data/galstreams/MANIFEST.json; verify with
+# python scripts/galstreams_pins.py --verify
+v0.3-prelim/data/external_data/galstreams/tracks/*.ecsv text eol=lf

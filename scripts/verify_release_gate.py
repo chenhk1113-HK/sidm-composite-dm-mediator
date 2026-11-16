@@ -246,6 +246,34 @@ def main():
     print(f"Repo: {REPO}")
     print(f"Python: {VENV_PYTHON}")
 
+    # Certification provenance (finding F37). A gate log that names no tree certifies nothing:
+    # it is a claim about some tree, and no later census can reconcile against it. Stamp the exact
+    # commit and tree the run is about to execute on, BEFORE any layer runs, so even a mid-run
+    # crash leaves a header that ties the evidence to a checkout. The dirty flag is printed too,
+    # because "certified HEAD" and "certified working copy" are different claims and a reader is
+    # entitled to know which one was made.
+    def _git_rev(*args: str) -> str:
+        try:
+            return subprocess.run(
+                ["git", "-C", str(REPO), "rev-parse", *args],
+                capture_output=True, text=True, timeout=30,
+                encoding="utf-8", errors="replace",
+            ).stdout.strip()
+        except Exception:
+            return "unknown"
+
+    print(f"Commit under certification: {_git_rev('HEAD')}")
+    print(f"Tree under certification:  {_git_rev('HEAD^{tree}')}")
+    try:
+        _dirty = bool(subprocess.run(
+            ["git", "-C", str(REPO), "status", "--porcelain"],
+            capture_output=True, text=True, timeout=60,
+            encoding="utf-8", errors="replace",
+        ).stdout.strip())
+    except Exception:
+        _dirty = True
+    print(f"Working tree dirty at run start: {'yes' if _dirty else 'no'}")
+
     # Inclusion proof for the front-page badge guard (finding F36): the gate is a
     # subprocess, so a guard test that sees GATE_RUN_ID in its environment was collected
     # and executed *inside* the certified run -- which is what the badge's test count

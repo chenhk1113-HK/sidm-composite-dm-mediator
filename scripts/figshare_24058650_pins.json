@@ -1,0 +1,86 @@
+{
+  "article_id": 24058650,
+  "doi": "10.6084/m9.figshare.24058650.v2",
+  "title": "Legacy Analysis of Dark Matter Annihilation from the Milky Way Dwarf Spheroidal Galaxies with 14 Years of Fermi-LAT Data: Data Products",
+  "license": "CC BY 4.0 (per the figshare article and docs/REVIEWER_AUDIT_R11.md G11)",
+  "citation": "McDaniel, G. et al. 2024 (arXiv:2311.04982); data deposit figshare 24058650.v2",
+  "metadata_api": "https://api.figshare.com/v2/articles/24058650",
+  "retrieved_at": "2026-11-16T03:10:12Z",
+  "authority": "Every size and md5 below is figshare's own computed_md5 / size for this article, read from the metadata API, not copied from a download or a report. The metadata endpoint answers 200 even when the download endpoint rate-limits a client with 403, so the pin can be re-derived (scripts/fetch_fermi_mcdaniel.py --repin) on a machine that cannot fetch the data.",
+  "why_repinned": "Before 2026-11-16 the hash table was a literal inside scripts/fetch_external_data.sh, hand-copied, and the size column was parsed but never enforced; a clone-side 403 error page was written as dSphs.csv (146 bytes) before any check could reject it. The pins now live here, once, with their source recorded, and the fetcher refuses a body whose bytes do not match this file.",
+  "fetch_total_bytes": 5286740,
+  "files": [
+    {
+      "file_id": 42263853,
+      "name": "dSphs.tar.gz",
+      "size": 4320998,
+      "computed_md5": "53ece3239910abec1934432c621c54b0",
+      "download_url": "https://ndownloader.figshare.com/files/42263853",
+      "fetched_by_this_project": true
+    },
+    {
+      "file_id": 42263856,
+      "name": "dSphs_weighted.tar.gz",
+      "size": 4323316,
+      "computed_md5": "fa59bbfc9823dbb9645c35558ebf579f",
+      "download_url": "https://ndownloader.figshare.com/files/42263856",
+      "fetched_by_this_project": false
+    },
+    {
+      "file_id": 42263949,
+      "name": "schema.png",
+      "size": 60624,
+      "computed_md5": "a87655a6ec0a855945370b8d425fb097",
+      "download_url": "https://ndownloader.figshare.com/files/42263949",
+      "fetched_by_this_project": false
+    },
+    {
+      "file_id": 42264324,
+      "name": "blank_fields.tar",
+      "size": 4466841600,
+      "computed_md5": "14210df9f32fa3e842f7c3b10fcf5ffe",
+      "download_url": "https://ndownloader.figshare.com/files/42264324",
+      "fetched_by_this_project": false
+    },
+    {
+      "file_id": 42264603,
+      "name": "blank_fields_weighted.tar",
+      "size": 4466841600,
+      "computed_md5": "059ed4488fa82694eea492cfd9537d1c",
+      "download_url": "https://ndownloader.figshare.com/files/42264603",
+      "fetched_by_this_project": false
+    },
+    {
+      "file_id": 42768949,
+      "name": "basic_data_usage.html",
+      "size": 961845,
+      "computed_md5": "ab1c7009473e6f456004d28c89f5d172",
+      "download_url": "https://ndownloader.figshare.com/files/42768949",
+      "fetched_by_this_project": true
+    },
+    {
+      "file_id": 42768952,
+      "name": "basic_data_usage.ipynb",
+      "size": 279138,
+      "computed_md5": "e60c1e0d3ec5504d2c43a8471aff4611",
+      "download_url": "https://ndownloader.figshare.com/files/42768952",
+      "fetched_by_this_project": false
+    },
+    {
+      "file_id": 43067845,
+      "name": "blank_fields.csv",
+      "size": 84651,
+      "computed_md5": "434e408219acea2cfe06b279c19dc3dc",
+      "download_url": "https://ndownloader.figshare.com/files/43067845",
+      "fetched_by_this_project": false
+    },
+    {
+      "file_id": 44477168,
+      "name": "dSphs.csv",
+      "size": 3897,
+      "computed_md5": "1627630e27c73cded88370a9344c66a2",
+      "download_url": "https://ndownloader.figshare.com/files/44477168",
+      "fetched_by_this_project": true
+    }
+  ]
+}

@@ -2,7 +2,15 @@
 15-LAYER RELEASE GATE — F39/F41 CLONE-REPRODUCIBILITY ROUND
 ======================================================================
 Repo: C:\Users\lamkuenai\projects\sidm-composite-dm-mediator
-Commit under certification: <HEAD at run time; this file is filed in the commit that follows>
+Commit under certification: 2ac96b87623a8706b1b8e1ce9d7c7d78abdaa7a2
+Tree under certification:  02383aaaca3e36431375c5e8b3cdb6bae01dfbbc
+  Amended 2026-11-16. This line was a placeholder when the log was filed, which left the
+  certification attached to no tree at all: any census taken on any tree would fail to reconcile
+  against this run, and that is exactly what the F37 guard tripped over. The run executed on the
+  working copy that commit 2ac96b8 records, minus this evidence file -- the log could not exist
+  before the run it records had finished. That one-file difference is disclosed here rather than
+  smoothed over. A certification log that names no commit is not evidence of a green gate; it is
+  a claim about some tree.
 Python: C:\Users\lamkuenai\projects\sidm-composite-dm-mediator\.venv-sidm-bench\Scripts\python.exe
 Date: 2026-11-16
 

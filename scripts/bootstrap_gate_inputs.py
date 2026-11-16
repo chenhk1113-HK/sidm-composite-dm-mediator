@@ -74,6 +74,10 @@ GALSTREAMS_CURATED = REPO / "v0.3-prelim/outputs/t95/multi_stream_real_galstream
 # and the point of declaring it here is that a clone on ANOTHER machine can set the variable and
 # discover whether its own machine has the catalog at all.
 GALSTREAMS_ROOT = Path(os.environ.get("DM_SIDM_GALSTREAMS_ROOT", str(Path.home() / "galstreams/galstreams/tracks")))
+# Vendored inside the repository since 2026-11-16 (the F39 fix): the 251 catalog files t95_v25
+# actually opens, pinned by md5 in MANIFEST.json. GALSTREAMS_ROOT above stays as the override
+# for a machine that has the full upstream catalog and prefers it.
+GALSTREAMS_VENDORED = REPO / "v0.3-prelim/data/external_data/galstreams"
 
 MANIFEST: list[GateInput] = [
     GateInput(
@@ -143,21 +147,30 @@ MANIFEST: list[GateInput] = [
         targets=[GALSTREAMS_CURATED],
         build=[PY, "v0.3-prelim/code/t95_v25_multi_stream_real_galstreams.py"],
         consumed_by=["v0.3-prelim/tests (phase7d stream-map script run)"],
-        note=("Only regenerable if the galstreams catalog is reachable -- see galstreams_tracks. "
-              "Without it the producer writes nothing and the dependent test fails for a missing "
-              "input rather than for a code fault."),
+        note=("Rebuildable from the vendored catalog alone (see galstreams_tracks): verified on "
+              "2026-11-16 by running t95_v25 inside a scratch clone that contained only the "
+              "vendored 251 files, which reproduced the certified artifact exactly -- 123 streams, "
+              "10 with gap data, combined logliks -12.03806858128687 / -17.90277000395646 / "
+              "-15.43116172161774."),
     ),
     GateInput(
         name="galstreams_tracks",
-        kind=KIND_HOST_PINNED,
-        targets=[GALSTREAMS_ROOT],
-        build=None,
-        note=("t95_v25 reads track.st.*.ecsv from a hard-coded host path outside the repository "
-              "(C:/Users/<user>/galstreams/galstreams/tracks, inventoried as FROZEN under CG-16). "
-              "The catalog is not vendored, pip install galstreams is not in the project venv, and "
-              "no tracked script downloads it. This is the part of F39 a bootstrap cannot close: "
-              "a fresh clone of this repository cannot run the stream-map chain at all until the "
-              "catalog is either vendored into v0.3-prelim/data/external/ or a fetcher is added."),
+        kind=KIND_FETCH,
+        targets=[GALSTREAMS_VENDORED / "MANIFEST.json", GALSTREAMS_VENDORED / "tracks"],
+        build=[PY, "scripts/galstreams_pins.py", "--fetch"],
+        needs_network=True,
+        consumed_by=["v0.3-prelim/code/t95_v25_multi_stream_real_galstreams.py",
+                     "v0.3-prelim/code/t95_v11_gaia_cross_match.py",
+                     "v0.3-prelim/tests/test_t95_v25_multi_stream_real_galstreams.py"],
+        note=("CLOSED 2026-11-16 (was the part of F39 a bootstrap could not close). t95_v25 read "
+              "track.st.*.ecsv from a host directory outside the repository. The 251 files it "
+              "actually opens -- measured by instrumenting pandas.read_csv in a scratch clone, not "
+              "guessed -- are now tracked under v0.3-prelim/data/external_data/galstreams/ with an "
+              "md5 pin per file, upstream provenance (github.com/cmateu/galstreams @ 6a304c05, "
+              "v1.2, Mateu 2023 MNRAS 520 5225) and the BSD-3-Clause licence text. Pins are the LF "
+              "(git-canonical) form because this repository normalises text to LF; a CRLF pin would "
+              "have matched only the machine that made it. --install-from-host plus "
+              "$DM_SIDM_GALSTREAMS_ROOT still work for a full local catalog."),
     ),
     GateInput(
         name="producer_posteriors",
@@ -178,6 +191,31 @@ MANIFEST: list[GateInput] = [
 def _present(target: Path) -> bool:
     try:
         return target.exists()
+    except OSError:
+        return False
+
+
+def producer_script(gi: GateInput) -> str | None:
+    """The .py/.sh that the build argv actually runs.
+
+    build[-1] is usually a flag ('--fetch'), so reading the producer from the last argument
+    silently skips the check for any entry whose command has options. The F41 defect was a
+    producer that existed only inside a gitignored directory, so this returns the path the
+    integrity check then verifies BOTH on disk and in git's index.
+    """
+    if not gi.build:
+        return None
+    for arg in reversed(gi.build):
+        if arg.endswith((".py", ".sh")):
+            return arg
+    return None
+
+
+def _git_tracked(rel: str) -> bool:
+    try:
+        r = subprocess.run(["git", "-C", str(REPO), "ls-files", "--", rel],
+                           capture_output=True, text=True, encoding="utf-8", errors="replace")
+        return bool((r.stdout or "").strip())
     except OSError:
         return False
 
@@ -238,14 +276,24 @@ def require() -> int:
     for gi in MANIFEST:
         if gi.kind == KIND_HOST_PINNED:
             continue
-        if gi.build is None:
-            if not gi.long_run:
-                problems.append(f"{gi.name}: kind {gi.kind} declares no producer")
-            continue
-        producer = gi.build[-1]
-        if producer.endswith(".py") or producer.endswith(".sh"):
-            if not (REPO / producer).exists():
-                problems.append(f"{gi.name}: declared producer {producer} does not exist")
+        if gi.kind == KIND_LONG_RUN and not gi.long_run:
+            problems.append(f"{gi.name}: kind LONG_RUN but long_run is False (the run mode would "
+                            f"try to rebuild a minutes-to-hours producer)")
+        if gi.kind == KIND_HOST_PINNED and gi.build is not None:
+            problems.append(f"{gi.name}: kind HOST_PINNED claims a producer {gi.build} for data "
+                            "that is declared to live outside the repository")
+        script = producer_script(gi)
+        if gi.build is not None and script is None:
+            problems.append(f"{gi.name}: build argv {gi.build} names no .py/.sh producer")
+        elif script is not None:
+            if not (REPO / script).exists():
+                problems.append(f"{gi.name}: declared producer {script} does not exist")
+            elif not _git_tracked(script):
+                problems.append(f"{gi.name}: producer {script} exists but is not tracked in git "
+                                "(the F41 failure mode: the tool the suite tells you to run is "
+                                "gitignored)")
+        elif gi.build is None and not gi.long_run and gi.kind != KIND_HOST_PINNED:
+            problems.append(f"{gi.name}: kind {gi.kind} declares no producer")
         for t in gi.targets:
             if not _git_ignored(t) and not _present(t):
                 problems.append(f"{gi.name}: target {t} is neither git-ignored nor present")

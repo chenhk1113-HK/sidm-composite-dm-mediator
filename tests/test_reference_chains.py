@@ -9,7 +9,7 @@ without re-running dynesty. These tests verify:
   4. Total size under the 500 KB budget
 
 If these tests fail, regenerate via:
-  python outputs/downsample_for_reference.py
+  python scripts/downsample_for_reference.py
 (then sync from WSL via the sync_to_wsl.sh pre-commit hook).
 """
 import json
@@ -50,7 +50,7 @@ class TestReferenceDataExists:
     """All expected reference files present."""
 
     def test_reference_dir_exists(self):
-        assert REF_DIR.exists(), f"data/reference/ missing — run outputs/downsample_for_reference.py"
+        assert REF_DIR.exists(), f"data/reference/ missing — run scripts/downsample_for_reference.py"
         assert REF_DIR.is_dir()
 
     def test_manifest_exists(self):

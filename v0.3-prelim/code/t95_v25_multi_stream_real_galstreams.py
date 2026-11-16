@@ -37,6 +37,7 @@ STATUS: SHIPPED 2026-09-07
 from __future__ import annotations
 
 import json
+import os
 import sys
 from pathlib import Path
 from typing import Optional
@@ -51,7 +52,14 @@ _PROJECT_ROOT = Path(__file__).resolve().parents[1]
 # ============================================================================
 # galstreams data path
 # ============================================================================
-GALSTREAMS_ROOT = Path("C:/Users/lamkuenai/galstreams/galstreams/tracks")
+# Vendored copy of the catalog files this script actually opens: 251 files
+# (127 track.st.*.summary.ecsv + 124 full tracks), pinned by md5 in
+# data/external_data/galstreams/MANIFEST.json, upstream github.com/cmateu/galstreams
+# at commit 6a304c05 (BSD-3-Clause; see LICENSE.galstreams). Until 2026-11-16 this line
+# spelled out a host directory, which is why a fresh clone could not rebuild this
+# artifact (finding F39). $DM_SIDM_GALSTREAMS_ROOT still overrides it for a full catalog.
+_VENDORED_GALSTREAMS = Path(__file__).resolve().parents[1] / "data/external_data/galstreams/tracks"
+GALSTREAMS_ROOT = Path(os.environ.get("DM_SIDM_GALSTREAMS_ROOT") or _VENDORED_GALSTREAMS)
 
 
 # ============================================================================

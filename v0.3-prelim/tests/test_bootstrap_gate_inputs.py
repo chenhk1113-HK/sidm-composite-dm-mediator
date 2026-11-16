@@ -49,10 +49,17 @@ def test_declared_producers_exist_and_targets_are_ignored():
         if gi.kind == boot.KIND_HOST_PINNED:
             continue
         assert gi.build is not None or gi.long_run, f"{gi.name} has no producer and is not long-running"
-        if gi.build:
-            producer_path = REPO / gi.build[-1]
-            if not producer_path.exists():
-                problems.append(f"{gi.name}: producer {gi.build[-1]} does not exist")
+        if not gi.build:
+            continue
+        script = boot.producer_script(gi)
+        if script is None:
+            problems.append(f"{gi.name}: build argv {gi.build} names no .py/.sh producer")
+            continue
+        producer_path = REPO / script
+        if not producer_path.exists():
+            problems.append(f"{gi.name}: producer {script} does not exist")
+        elif not boot._git_tracked(script):
+            problems.append(f"{gi.name}: producer {script} is not tracked in git (F41 class)")
     assert not problems, problems
 
 
@@ -90,13 +97,78 @@ def test_fabricated_target_outside_git_ignore_is_caught():
         boot.MANIFEST = original
 
 
-def test_host_pinned_inputs_admit_they_are_not_reproducible():
-    """The honest half of F39: some inputs no bootstrap can rebuild. The manifest must say so."""
+def test_inputs_outside_the_bootstrap_admit_it():
+    """The honest half of F39: some inputs the gate cannot rebuild. The manifest must say so.
+
+    Category membership is a fact, not a constant: galstreams was HOST_PINNED until it was
+    vendored on 2026-11-16, and the clone run showed the remaining non-rebuildable class is the
+    long-running producers (87 of the 112 clone skips were producer-missing). What must not
+    change is that a declared non-rebuildable input states why, and does not claim a producer.
+    """
     pinned = [gi for gi in boot.MANIFEST if gi.kind == boot.KIND_HOST_PINNED]
-    assert pinned, "the manifest claims every input is rebuildable -- the clone run disproved that"
+    long_run = [gi for gi in boot.MANIFEST if gi.kind == boot.KIND_LONG_RUN]
+    assert pinned or long_run, (
+        "the manifest claims every gate input is rebuildable from a clone -- the 53806dd clone "
+        "run (10 failed / 112 skipped) disproved that"
+    )
     for gi in pinned:
         assert gi.build is None, f"{gi.name} claims a producer for data outside the repository"
         assert "not" in gi.note.lower(), f"{gi.name} does not state that it is not reproducible"
+    for gi in long_run:
+        assert gi.long_run, f"{gi.name} is declared LONG_RUN but long_run is False"
+        assert len(gi.note) > 60, f"{gi.name} is long-running with no explanation of the cost"
+
+
+def test_long_run_entry_that_lies_about_being_long_run_is_caught():
+    """Falsification: a LONG_RUN entry without long_run=True must fail --require."""
+    liar = boot.GateInput(
+        name="falsification_long_run_liar",
+        kind=boot.KIND_LONG_RUN,
+        targets=[REPO / "v0.3-prelim/outputs/definitely_not_produced.json"],
+        build=[sys.executable, "scripts/bootstrap_gate_inputs.py"],
+        long_run=False,
+        note="injected by test: declared LONG_RUN but not flagged long_run",
+    )
+    original = boot.MANIFEST
+    try:
+        boot.MANIFEST = list(original) + [liar]
+        assert boot.require() == 1, "the checker accepted a LONG_RUN entry that denied being long"
+    finally:
+        boot.MANIFEST = original
+
+
+def test_producer_that_is_not_tracked_in_git_is_caught():
+    """Falsification of the exact F41 defect: a fetcher that exists on disk but is gitignored.
+
+    The real F41 was scripts the suite tells you to run -- fetch_external_data.sh,
+    fetch_sparc.py -- living inside outputs/ and data/external/, both gitignored. A clone has
+    neither the input nor the tool. Here the fixture is a genuine untracked file in the real
+    gitignored outputs/ directory, so the check runs against a case that exists.
+    """
+    fixture = REPO / "outputs" / "hermes_falsification_fetcher.py"
+    fixture.parent.mkdir(parents=True, exist_ok=True)
+    fixture.write_text("# fixture for test_producer_that_is_not_tracked_in_git_is_caught\n",
+                       encoding="utf-8")
+    untracked = boot.GateInput(
+        name="falsification_untracked_fetcher",
+        kind=boot.KIND_FETCH,
+        targets=[REPO / "v0.3-prelim/outputs/definitely_not_produced.json"],
+        build=[sys.executable, "outputs/hermes_falsification_fetcher.py"],
+        needs_network=True,
+        note="injected by test: producer exists on disk but only inside a gitignored directory",
+    )
+    original = boot.MANIFEST
+    try:
+        assert fixture.exists()
+        script = boot.producer_script(untracked)
+        assert script == "outputs/hermes_falsification_fetcher.py"
+        assert not boot._git_tracked(script), "the fixture is tracked, so it would prove nothing"
+        boot.MANIFEST = [untracked]
+        rc = boot.require()
+        assert rc == 1, "an untracked producer passed the manifest integrity check"
+    finally:
+        boot.MANIFEST = original
+        fixture.unlink(missing_ok=True)
 
 
 def test_guard_required_paper_has_a_tracked_fetcher():

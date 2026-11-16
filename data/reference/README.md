@@ -67,7 +67,7 @@ a_grid = grid["a_grid"]              # (30,)
 
 ```bash
 # From a fresh clone, with WSL wimpy venv active:
-python outputs/downsample_for_reference.py
+python scripts/downsample_for_reference.py
 ```
 
 This is idempotent — running it again produces the same files (seed=42).
@@ -89,8 +89,8 @@ This is idempotent — running it again produces the same files (seed=42).
 
 ## See also
 
-- `outputs/downsample_for_reference.py` — the generator script
-- `outputs/verify_reference.py` — integrity check script
+- `scripts/downsample_for_reference.py` — the generator script
+- `scripts/verify_reference.py` — integrity check script
 - `tests/test_reference_chains.py` — 16-test pytest suite
 - `v0.3-prelim/docs/REVIEWER_AUDIT_R13.md` — original M2 deferral
 - `MODEL_ASSUMPTIONS_AND_LIMITATIONS.md` §8 — why these aren't in `outputs/`

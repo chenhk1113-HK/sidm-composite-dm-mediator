@@ -1,0 +1,101 @@
+{
+  "generated_at": "2026-11-16T05:11:05Z",
+  "git_tree_sha": "ce8cac63931bbe747017472a7a8a29899e2f56c7",
+  "selection": {
+    "target": "v0.3-prelim/tests/",
+    "k_filter": "not T132 and not T131 and not T133 and not T134 and not T135 and not T220"
+  },
+  "collect_only": {
+    "without_k": {
+      "nodeids": 3842,
+      "collection_level_skips": 3,
+      "summary_line": "3842 tests collected"
+    },
+    "with_gate_k": {
+      "nodeids_selected": 3802,
+      "nodeids_total": 3842,
+      "deselected": 40,
+      "collection_level_skips": 3,
+      "collection_skip_sites": [
+        {
+          "count": 1,
+          "where": "v0.3-prelim\\tests\\test_phase42_summary.py:6:"
+        },
+        {
+          "count": 1,
+          "where": "v0.3-prelim\\tests\\test_phase46_three_items.py:6:"
+        },
+        {
+          "count": 1,
+          "where": "v0.3-prelim\\tests\\test_phase47_50.py:6:"
+        }
+      ],
+      "summary_line": "3802/3842 tests collected (40 deselected)"
+    }
+  },
+  "deselection_attribution": {
+    "deselected_nodeid_count": 40,
+    "by_file": [
+      {
+        "file": "v0.3-prelim/tests/test_T132_eft_target_map_sanity.py",
+        "deselected": 21
+      },
+      {
+        "file": "v0.3-prelim/tests/test_T131_chu_pwave_verification.py",
+        "deselected": 11
+      },
+      {
+        "file": "v0.3-prelim/tests/test_T133_hidden_u1_slope_audit.py",
+        "deselected": 4
+      },
+      {
+        "file": "v0.3-prelim/tests/test_module_parse_and_pairing_names_bound.py",
+        "deselected": 4
+      }
+    ],
+    "nodeids_outside_declared_families": [],
+    "gate_k_filter_added_nodeids": []
+  },
+  "identity": {
+    "total_equals_selected_plus_deselected": true,
+    "nodeid_diff_equals_deselected": true,
+    "no_nodeid_added_by_k_filter": true,
+    "all_ok": true
+  },
+  "gate_run_cross_check": {
+    "log_path": "docs\\evidence\\gate_run_f39_bootstrap_20261116.txt",
+    "passed": 3724,
+    "skipped": 25,
+    "failed": 0,
+    "deselected": 40,
+    "log_commit": "2ac96b8",
+    "log_tree_sha": "02383aaaca3e36431375c5e8b3cdb6bae01dfbbc"
+  },
+  "reconciliation": {
+    "run_summary_items": 3749,
+    "expected_run_items": 3805,
+    "expected_from": "3802 selected nodeids + 3 module-level collection skips",
+    "module_level_skips": 3,
+    "residual": -56,
+    "deselected_matches_log": true,
+    "log_certifies_current_tree": false,
+    "cross_check_status": "log certifies a different tree; residual is informational"
+  },
+  "residual_explanation": {
+    "commit": "2ac96b8",
+    "tree_sha": "02383aaaca3e36431375c5e8b3cdb6bae01dfbbc",
+    "nodeids_total": 3773,
+    "nodeids_selected": 3733,
+    "deselected": 40,
+    "collection_level_skips": 5,
+    "predicted_run_items": 3738,
+    "how": "pytest v0.3-prelim/tests/ --collect-only -rs -k '<gate filter>' in a detached git worktree at 2ac96b8",
+    "caveat": "a detached worktree starts without the gitignored gate inputs, so modules that skip at import skip there too; the numbers describe that commit's code, not the original run's data state",
+    "changed_test_paths": {
+      "status": 0,
+      "added": [],
+      "removed": [],
+      "modified": []
+    }
+  }
+}
