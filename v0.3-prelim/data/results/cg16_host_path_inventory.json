@@ -2208,7 +2208,7 @@
       },
       {
         "path": "v0.3-prelim/data/results/cg16_host_path_inventory.json",
-        "host_path_lines": 8
+        "host_path_lines": 7
       },
       {
         "path": "v0.3-prelim/data/results/kiss_sidm_canonical_simulation_N1e5.json",
