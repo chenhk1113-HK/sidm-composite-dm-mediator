@@ -2102,3 +2102,14 @@ Taken on commit `6d705a4` (tree `8b9f7c5`), cross-checked against the amended lo
 Identity filed in `pytest_census_inventory.json` and re-derived by the guard:
 `residual = gap − added − skip_change`, i.e. `11 − 69 − (−2) = −56`. The guard suite fails if the identity is
 broken, if the explanation is dropped, or if the cause is unnamed.
+
+**Final measurement, on the tree that carries the badge (2026-11-16).** Taken on `ce7ce4a` (tree
+`7a0c2edd77fa78ef49c28392975fe1d39469f97d`) against this round's own gate log, which certifies exactly that tree:
+3843 nodeids collected, 3803 selected by the gate filter, 40 deselected, 3 module-level collection skips, predicting
+**3806** run items; the run reported 3781 passed + 25 skipped + 0 failed = **3806**, so `residual = 0` and
+`log_certifies_current_tree: true`. The −56 above and the 0 here are the same instrument at two commits, and the
+distance between them is the decomposition the guard enforces (`11 − 69 − (−2)`). Re-running the cross-check reproduced
+the recorded worktree figures exactly (3773 nodeids, 3733 selected, 40 deselected at `2ac96b8`), and exposed a defect in
+the tool itself: `pytest_census_scan.py` accepted an unknown `--worktree` flag and silently printed the current-tree
+census as if the cross-check had happened. Unknown flags now exit 2 — a tool that reports a measurement it never took is
+the F36 class again, one layer down.

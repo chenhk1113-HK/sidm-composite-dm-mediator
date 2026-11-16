@@ -456,6 +456,14 @@ def _problems(inv: dict) -> list[str]:
 
 
 def main() -> int:
+    # Unknown flags used to be ignored silently, which let a mistyped invocation look like a
+    # successful cross-check. Reject them instead.
+    known = {"--check", "--gate-log"}
+    unknown = [a for a in sys.argv[1:] if a.startswith("-") and a not in known]
+    if unknown:
+        print(f"unknown flag(s): {', '.join(unknown)}")
+        print(f"supported: --check, --gate-log <path>  (no flags = scan the current tree)")
+        return 2
     check = "--check" in sys.argv
     gate_log = None
     if "--gate-log" in sys.argv:

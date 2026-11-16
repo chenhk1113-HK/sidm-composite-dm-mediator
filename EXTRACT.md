@@ -9,8 +9,7 @@
 **Active branch:** `wip/v19.2-F-init`, pushed to `origin` 2026-11-15 (version of record
 `v40.64-LSBChannelRound5-FrontPageRefresh-2026-11-15`; save tags `v19.2-F-RecordSave-2026-11-15` → `c0adf38`,
 previously `-2026-11-11` → `dffbf11`, `-2026-11-10` → `4098d01`, numeric `v19.2-F-RecordSave-v1.18`).
-**Verification:** 15-layer pre-tag gate, **15/15 PASS** — on `2ac96b8` (clone-reproducibility round) pytest 3724
-passed / 25 skipped / 40 deselected, drift 120/120 ALL CLEAR (`docs/evidence/gate_run_f39_bootstrap_20261116.txt`);
+**Verification:** 15-layer pre-tag gate, **15/15 PASS** — on `ce7ce4a` (tree `7a0c2ed`, data-vendoring and census round) pytest 3781 passed / 25 skipped / 40 deselected in 1558.05 s, drift 120/120 ALL CLEAR (`docs/evidence/gate_run_vendoring_census_transition_20261116.txt`; the run used the census guard's documented `T82_README_DRIFT_LENIENT=1` escape for badge re-derivation, and a strict re-run of the re-pointed tree is filed beside it); that round's red run on `6b9c603` is filed as `docs/evidence/gate_run_vendoring_census_20261116.txt`; the previous certification is `docs/evidence/gate_run_f39_bootstrap_20261116.txt`;
 previous certification on `37a00f7` (badge-guard repair round) 3709 / 25 / 40 (`gate_run_repair_final_20261115.txt`);
 on the save-tag tree `c0adf38` pytest 3701 passed / 25 skipped / 40 deselected
 (`docs/evidence/gate_run_committed_20261115.txt`). Each log certifies only the tree it ran on.
