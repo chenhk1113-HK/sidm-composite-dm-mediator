@@ -10,9 +10,16 @@ applies to every script in a gitignored directory: they exist on one machine, ar
 git, are lost in a clone, and cannot be reviewed. `git grep` across tracked files named none of
 these twenty, so they were neither referenced nor reproducible -- the worst of both.
 
-**What "archived" means here.** Not deleted: the scripts are kept verbatim for the record of how
-conclusions were reached, and they remain runnable by anyone who wants to reproduce a past
-diagnostic. They are **not** gate producers, **not** imported by any test, and their hard-coded
+**What "archived" means here.** Not deleted: the scripts are kept for the record of how conclusions
+were reached, and they remain runnable by anyone who wants to reproduce a past diagnostic. **One
+exception, disclosed:** `verify_remote.py` hardcoded a GitHub token, which was replaced with
+`REDACTED-2026-11-16` on 2026-11-16 when the file came under review (finding F45,
+`docs/INTEGRITY_FINDINGS_2026-11-04.md`). The token was never pushed to any remote; the owner was
+asked to revoke it. Every other file is verbatim.
+
+**A guard now covers this.** `v0.3-prelim/tests/test_gitignored_scope_scripts.py` scans every
+tracked source/config/text file for credential-shaped literals, so a secret cannot ride into tracked
+scope again on the back of a migration. They are **not** gate producers, **not** imported by any test, and their hard-coded
 host paths (`/home/lamkuenai/...`) were deliberately left as-is because `archive/` is outside the
 CG-16 live scope (`scripts/`, `tests/`, `v0.3-prelim/tests/`, `config.py`). Do not import from
 here; do not treat anything in here as current code.

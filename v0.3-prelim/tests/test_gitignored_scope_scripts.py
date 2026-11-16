@@ -14,6 +14,7 @@ detection to fire -- a guard that never fails is not a guard.
 """
 from __future__ import annotations
 
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -146,3 +147,87 @@ def test_migration_repointed_every_tracked_reference():
                        capture_output=True, text=True, encoding="utf-8", errors="replace")
     stale = [line for line in (r.stdout or "").splitlines() if line.strip()]
     assert not stale, f"tracked files still point at the pre-migration path:\n" + "\n".join(stale)
+
+
+# -------------------------------------------------------------------------------------------
+# F45: the other thing a gitignored tool carries that a data audit never looks for.
+#
+# Moving outputs/ scripts into tracked scope (the F41 fix) also moved a hardcoded GitHub token
+# into git. It was caught by GitHub's push protection when the round was pushed -- outside the
+# repo's own checks -- and it had never been scanned before precisely because the file lived in a
+# directory git never looked at. The token was NOT published (the push was refused); it was
+# redacted from the working tree on 2026-11-16 and the owner was told to rotate it.
+#
+# Scope, stated honestly: this guard scans the CURRENT tracked tree. It cannot see a credential
+# that already sits in historical commits; at the time of writing the redacted token still exists
+# in the blobs of commits 6d705a4..HEAD~ (unpushed at redaction time). Removing it from history
+# means rewriting commit shas, which would invalidate every gate-log header and census citation
+# that names them -- a larger integrity cost than the residue, so the residue is disclosed rather
+# than silently rewritten.
+# -------------------------------------------------------------------------------------------
+
+CREDENTIAL_PATTERNS = {
+    "GitHub classic PAT": rb"ghp_[A-Za-z0-9]{36,40}",
+    "GitHub fine-grained PAT": rb"github_pat_[A-Za-z0-9_]{30,}",
+    "GitHub OAuth token": rb"gho_[A-Za-z0-9]{36,}",
+    "GitHub server-to-server token": rb"ghs_[A-Za-z0-9]{36,}",
+    "AWS access key id": rb"AKIA[0-9A-Z]{16}",
+    "Private key block": rb"-----BEGIN [A-Z ]*PRIVATE KEY-----",
+    "Slack token": rb"xox[abpr]-[A-Za-z0-9-]{10,}",
+}
+SCANNABLE_SUFFIXES = (".py", ".sh", ".md", ".json", ".yaml", ".yml", ".txt", ".cff",
+                      ".ipynb", ".ps1", ".cmd", ".bat", ".ini", ".cfg", ".toml")
+MAX_SCAN_BYTES = 4_000_000
+
+
+def _tracked_scannable_files():
+    r = subprocess.run(["git", "-C", str(REPO), "ls-files", "-z"],
+                       capture_output=True, text=True, encoding="utf-8", errors="replace")
+    paths = [p for p in (r.stdout or "").split("\0") if p]
+    return [REPO / p for p in paths if Path(p).suffix.lower() in SCANNABLE_SUFFIXES]
+
+
+def _scan_for_credentials(files):
+    """Return (path, label, byte offset) for every credential-shaped literal in `files`."""
+    hits = []
+    for f in files:
+        try:
+            data = f.read_bytes()
+        except OSError:
+            continue
+        if len(data) > MAX_SCAN_BYTES:
+            continue
+        for label, pat in CREDENTIAL_PATTERNS.items():
+            m = re.search(pat, data)
+            if m:
+                try:
+                    shown = str(f.relative_to(REPO))
+                except ValueError:  # a falsification file outside the repo
+                    shown = str(f)
+                hits.append((shown, label, m.start()))
+    return hits
+
+
+def test_no_tracked_file_carries_a_credential_shaped_literal():
+    files = _tracked_scannable_files()
+    assert len(files) > 200, f"the scan covered only {len(files)} files; the file list is wrong"
+    hits = _scan_for_credentials(files)
+    assert not hits, (
+        "a credential-shaped literal is in tracked scope (F45 class). Offenders are named by "
+        "path, pattern label and byte offset -- the literal itself is never printed:\n"
+        + "\n".join(f"  {p}: {label} at byte {off}" for p, label, off in hits)
+    )
+
+
+def test_a_hardcoded_token_in_a_script_is_detected(tmp_path):
+    """Falsification: fabricate the defect in a throwaway file and require the scan to fire."""
+    fake = tmp_path / "verify_remote.py"
+    fake.write_bytes(b'headers={"Authorization": "token ' + b"ghp_" + b"X" * 36 + b'"}\n')
+    hits = _scan_for_credentials([fake])
+    assert len(hits) == 1, f"the fabricated token was not detected: {hits}"
+    assert hits[0][1] == "GitHub classic PAT", hits
+
+    # ...and the redacted placeholder must not be reported, or the guard would flag its own fix.
+    clean = tmp_path / "clean.py"
+    clean.write_text('headers={"Authorization": "token REDACTED-2026-11-16"}\n', encoding="utf-8")
+    assert not _scan_for_credentials([clean]), "the guard flags its own redaction placeholder"

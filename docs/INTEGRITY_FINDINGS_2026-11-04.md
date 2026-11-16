@@ -2157,3 +2157,57 @@ F37-close note): a tool that reports a measurement it never took is F36's class 
 selected by the gate filter, 40 deselected, 3 module-level collection skips, predicting 3811 run items;
 the green log reports 3806; residual −5, cross-tree, explained by its decomposition. The guard suite for
 this file: **20 passed**.
+
+## F45 — an archived gitignored script carried a live GitHub token into tracked scope (FOUND 2026-11-16, REMEDIATED IN-TREE, HISTORY RESIDUE DISCLOSED)
+
+**What happened.** The F41 migration moved twenty uncited scripts from `outputs/` (gitignored
+wholesale) into `archive/outputs_scripts_2026-11/` (tracked) in commit `6d705a4`. One of them,
+`verify_remote.py`, hardcoded an `Authorization: token <40-character GitHub classic PAT>` header at
+line 4 — a credential for this very repository. GitHub's push protection (rule GH013) refused the
+push of `78d3317..7d89e90` and named the location: commit `6d705a4`,
+`archive/outputs_scripts_2026-11/verify_remote.py:4`. The token is not reproduced in this document.
+
+**What was verified rather than assumed.** `git log --oneline -S"ghp_" origin/wip/v19.2-F-init` is
+empty, and `git ls-remote origin` still reports `78d3317` as the branch head: the credential was
+**never published**, and the refusal happened before any remote write. A working-tree
+`grep -rniE "token|api_key|password|secret|Bearer"` over the archive directory returned exactly one
+source hit plus one `__pycache__` byte-compiled copy (untracked, deleted). The same scan across
+tracked files at `HEAD` returned the same single file.
+
+**Why the repo's own checks never saw it.** Precisely the F41 mechanism with a different payload:
+`outputs/` was invisible to git, so the script was never scanned, never reviewed and never travelled.
+F41's cost was a tool a clone lacked; F45's would have been a published credential. The detection
+came from a control outside the repository, which is why the guard below was added rather than the
+incident being closed as "GitHub caught it".
+
+**Remediation applied in-tree.**
+- The literal in `archive/outputs_scripts_2026-11/verify_remote.py` was replaced with
+  `REDACTED-2026-11-16`, with a header comment saying what was removed and why; the script still
+  compiles (`py_compile` clean) and is kept as provenance of a one-off remote-README check.
+- The untracked `__pycache__/verify_remote.cpython-311.pyc` sitting beside it — which contained the
+  same secret in compiled form — was deleted.
+- New guard: `test_no_tracked_file_carries_a_credential_shaped_literal` in
+  `v0.3-prelim/tests/test_gitignored_scope_scripts.py` scans every tracked `.py/.sh/.md/.json/.yaml/
+  .yml/.txt/.cff/.ipynb/.ps1/.cmd/.bat/.ini/.cfg/.toml` file up to 4 MB for seven credential shapes
+  (GitHub classic / fine-grained / OAuth / server-to-server tokens, AWS key id, private-key block,
+  Slack token) and reports offenders by **path, pattern label and byte offset only** — the literal is
+  never printed, so the guard cannot itself leak what it finds. Falsified both ways: a fabricated
+  `ghp_`-shaped literal in a throwaway file is detected and classified, and the redaction placeholder
+  is not reported (a guard that flags its own fix is useless).
+- Owner action required, outside the repo: **rotate/revoke that token** at
+  github.com/settings/tokens. Its scopes, expiry and how long it sat on disk are unknown, and it was
+  readable by anything with access to this working copy.
+
+**Residue disclosed, deliberately not rewritten.** The token still exists in the blobs of the
+commits created in this round (`6d705a4` onward), none of which were pushed. Erasing it from history
+means rewriting those commit shas, and every certification citation in this repository names them by
+sha: the gate log headers (`Commit under certification:`), the census guard's
+`test_the_certifying_gate_log_names_a_resolvable_commit`, the CHANGELOG round entries and the
+front-page certification chains. Rewriting would break the audit trail it is meant to protect, so the
+residue is recorded here and the decision was put to the owner: revoke then allow the push through
+GitHub's per-push override (a dead credential stays in history), or rewrite the unpushed commits and
+re-issue every citation, or keep the round local. No option was taken silently.
+
+**Rule added.** When a file moves from an ignored scope into tracked scope, its **contents** enter
+review for the first time. A migration of tools must therefore include a credential scan of what is
+being migrated, not only a path audit of where it lives.
