@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-16T09:03:44Z",
-  "git_tree_sha": "9c77d559c9dbc4e91da73aad0f0aebac2fce97d6",
+  "generated_at": "2026-11-16T10:00:52Z",
+  "git_tree_sha": "1aedc15d4faf383d1e2f1a0530616dbcc29b8aed",
   "selection": {
     "target": "v0.3-prelim/tests/",
     "k_filter": "not T132 and not T131 and not T133 and not T134 and not T135 and not T220"
@@ -63,51 +63,24 @@
     "all_ok": true
   },
   "gate_run_cross_check": {
-    "log_path": "docs\\evidence\\gate_run_vendoring_census_transition_20261116.txt",
-    "passed": 3781,
-    "skipped": 25,
+    "log_path": "docs\\evidence\\gate_run_vendoring_census_final_20261116.txt",
+    "passed": 3787,
+    "skipped": 24,
     "failed": 0,
     "deselected": 40,
-    "log_commit": "ce7ce4a413eb22fa550d948499b3d5bbd5b35c5e",
-    "log_tree_sha": "7a0c2edd77fa78ef49c28392975fe1d39469f97d",
+    "log_commit": "d9dd72997ce1077a960868414955d6f28dc1639d",
+    "log_tree_sha": "ac8b6bee8d6406058830432020d1c5012ec9df6f",
     "log_verdict": "green"
   },
   "reconciliation": {
-    "run_summary_items": 3806,
+    "run_summary_items": 3811,
     "expected_run_items": 3811,
     "expected_from": "3808 selected nodeids + 3 module-level collection skips",
     "module_level_skips": 3,
-    "residual": -5,
+    "residual": 0,
     "deselected_matches_log": true,
     "log_certifies_current_tree": false,
     "cross_check_status": "log certifies a different tree; residual is informational"
   },
-  "residual_explanation": {
-    "commit": "ce7ce4a413eb22fa550d948499b3d5bbd5b35c5e",
-    "tree_sha": "7a0c2edd77fa78ef49c28392975fe1d39469f97d",
-    "nodeids_total": 3830,
-    "nodeids_selected": 3790,
-    "deselected": 40,
-    "collection_level_skips": 5,
-    "predicted_run_items": 3795,
-    "how": "pytest v0.3-prelim/tests/ --collect-only -rs -k '<gate filter>' in a detached git worktree at ce7ce4a413eb22fa550d948499b3d5bbd5b35c5e",
-    "caveat": "a detached worktree starts without the gitignored gate inputs, so modules that skip at import skip there too; the numbers describe that commit's code, not the original run's data state",
-    "changed_test_paths": {
-      "status": 0,
-      "added": [],
-      "removed": [],
-      "modified": [
-        "scripts/pytest_census_scan.py",
-        "v0.3-prelim/tests/test_gate_pytest_census.py"
-      ]
-    },
-    "input_dependent_gap": 11,
-    "decomposition": {
-      "added_selected_nodeids_since_certified_commit": 18,
-      "module_level_skip_change": -2,
-      "input_dependent_gap_clean_checkout_vs_run": 11,
-      "identity": "residual == input_dependent_gap - added_selected - skip_change",
-      "identity_holds": true
-    }
-  }
+  "residual_explanation": null
 }
