@@ -144,7 +144,17 @@ def _latest_gate_log() -> Path | None:
         # last.
         return (m.group(1) if m else "00000000", mtime, p.name)
 
-    return max(logs, key=key)
+    def green(p: Path) -> bool:
+        try:
+            return "GATE PASSED: all" in p.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            return False
+
+    # A red run's pytest summary is not a certification. Choosing the newest log regardless of its
+    # verdict would let a failed run become the census's ground truth, so green logs win; if no
+    # green log exists the newest one is still reported, and _problems() then fails the census
+    # rather than reconciling against a run the gate itself declared failed.
+    return max([p for p in logs if green(p)] or logs, key=key)
 
 
 def _log_commit(log_text: str) -> str | None:
@@ -154,11 +164,25 @@ def _log_commit(log_text: str) -> str | None:
     census taken on a different tree, so the absence is reported rather than guessed.
     """
     head = "\n".join(log_text.splitlines()[:40])
-    candidates = COMMIT_TOKEN_RE.findall(head)
-    for token in reversed(candidates):
-        if _tree_of(token):
+    for token in COMMIT_TOKEN_RE.findall(head):
+        if _is_commit(token):
             return token
     return None
+
+
+def _is_commit(token: str) -> bool:
+    """Is this token a commit? A gate log header carries a commit AND a tree on adjacent lines.
+
+    Asking "does this resolve to something with a tree?" cannot tell them apart -- a tree object
+    peels to itself -- so the header's Tree line used to be returned as the commit, which silently
+    killed the residual-explanation path (git diff against a tree sha yields nothing, so a real gap
+    got filed as "unexplained").
+    """
+    proc = subprocess.run(
+        ["git", "cat-file", "-t", token], cwd=REPO,
+        capture_output=True, text=True, encoding="utf-8", errors="replace",
+    )
+    return proc.returncode == 0 and proc.stdout.strip() == "commit"
 
 
 def _tree_of(commit: str) -> str | None:
@@ -266,6 +290,7 @@ def build(gate_log: Path | None = None) -> dict:
                 "deselected": int(m.group("deselected") or 0),
                 "log_commit": log_commit,
                 "log_tree_sha": _tree_of(log_commit) if log_commit else None,
+                "log_verdict": "green" if "GATE PASSED: all" in text else "red",
             }
 
     tree_sha = subprocess.run(
@@ -444,6 +469,22 @@ def _problems(inv: dict) -> list[str]:
                         f"paths changed between {expl.get('commit')} and HEAD"
                     )
         if run is not None:
+            if run.get("log_verdict") == "red":
+                problems.append(
+                    f"the census cross-checks against a RED gate log ({run.get('log_path')}): a "
+                    "certification must be a run the gate declared passed"
+                )
+            # The status string is itself a claim about the comparison, so it must agree with the
+            # flag it describes. A cross-tree zero presented as a certification is the exact
+            # laundering this guard exists to prevent.
+            status = (rec.get("cross_check_status") or "").strip()
+            if not status:
+                problems.append("a cross-check against a gate log with no stated status is not auditable")
+            elif bool(rec.get("log_certifies_current_tree")) != ("certifies this exact tree" in status):
+                problems.append(
+                    f"cross_check_status ({status!r}) contradicts log_certifies_current_tree="
+                    f"{rec.get('log_certifies_current_tree')}"
+                )
             # Recompute the agreement instead of trusting the stored boolean: a stored flag is a
             # claim about a comparison, and a claim a mutation cannot break is not a check.
             live = inv["collect_only"]["with_gate_k"]["deselected"]

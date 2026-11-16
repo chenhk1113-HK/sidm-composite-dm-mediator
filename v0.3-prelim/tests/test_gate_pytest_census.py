@@ -74,6 +74,16 @@ def test_run_and_collect_reconcile_or_the_gap_is_measured():
     if rec["log_certifies_current_tree"]:
         assert rec["residual"] == 0, rec
     else:
+        if rec["residual"] == 0:
+            # Cross-tree and numerically equal: there is no gap, so demanding an explanation would
+            # assert a shape rather than a property (the defect that made this test fail on
+            # d8f1845). What must still hold is that the zero is labelled as what it is -- a
+            # comparison against a log that ran somewhere else -- and that a real run is behind it.
+            assert inv.get("gate_run_cross_check"), (
+                f"a zero residual with no gate log behind it is not a measurement: {rec}")
+            assert "certifies this exact tree" not in rec["cross_check_status"], (
+                f"a cross-tree zero is being presented as a certification: {rec['cross_check_status']}")
+            return
         expl = inv.get("residual_explanation")
         assert expl, f"residual {rec['residual']} is filed with no measurement behind it: {rec}"
         assert len(expl["tree_sha"]) == 40, expl
@@ -100,6 +110,26 @@ def test_run_and_collect_reconcile_or_the_gap_is_measured():
         )
 
 
+def test_log_header_parser_returns_the_commit_not_the_tree():
+    """The gate log header names a commit and a tree on adjacent lines; the parser must not confuse them.
+
+    Falsified on the live headers: taking the tree as the commit makes `git diff` return nothing,
+    and a real census gap is then filed as having no cause.
+    """
+    log = _inventory().get("gate_run_cross_check") or {}
+    commit = log.get("log_commit")
+    assert commit, "the cross-checked gate log names no resolvable commit"
+    assert census._is_commit(commit), f"log_commit {commit} is not a commit object"
+    assert not census._is_commit(log["log_tree_sha"]), "a tree sha must not parse as a commit"
+    # Both header tokens live in the same 40-line window; the parser has to pick the commit one.
+    text = Path(log["log_path"]).read_text(encoding="utf-8", errors="replace")
+    head_tokens = census.COMMIT_TOKEN_RE.findall("\n".join(text.splitlines()[:40]))
+    assert commit in head_tokens
+    trees = [t for t in head_tokens if not census._is_commit(t)]
+    assert trees, "expected the header to also carry a tree sha"
+    assert census._log_commit(text) == commit
+
+
 def test_the_certifying_gate_log_names_a_resolvable_commit():
     """An evidence log attached to no tree cannot certify anything (found by this guard)."""
     inv = _inventory()
@@ -110,6 +140,18 @@ def test_the_certifying_gate_log_names_a_resolvable_commit():
         "to the log header"
     )
     assert log.get("log_tree_sha") and len(log["log_tree_sha"]) == 40, log
+
+
+def test_the_cross_checked_log_is_a_green_certification():
+    """The census's ground truth has to be a run the gate declared passed.
+
+    A red run produces a perfectly well-formed pytest summary line; reconciling against one would
+    make a failed build the reference the suite is measured against.
+    """
+    log = _inventory().get("gate_run_cross_check") or {}
+    assert log, "no gate log named by the census"
+    assert log.get("log_verdict") == "green", (
+        f"the census is cross-checked against a {log.get('log_verdict')} run: {log.get('log_path')}")
 
 
 def test_module_level_skip_sites_are_named_not_just_counted():
@@ -170,6 +212,9 @@ def test_census_is_tied_to_a_tree_and_says_which_one():
     ("drop_the_residual_explanation", "unexplained"),
     ("residual_with_no_named_cause", "no named cause"),
     ("break_the_residual_decomposition", "decomposition does not close"),
+    ("launder_a_cross_tree_zero_as_certification", "contradicts log_certifies_current_tree"),
+    ("drop_the_cross_check_status", "no stated status"),
+    ("cross_check_against_a_red_log", "RED gate log"),
 ])
 def test_census_checker_fails_when_the_arithmetic_is_wrong(mutate, expect_substring):
     """Every claim the census files must be one the checker can break."""
@@ -196,14 +241,21 @@ def test_census_checker_fails_when_the_arithmetic_is_wrong(mutate, expect_substr
         att = m["deselection_attribution"]
         if att["by_file"]:
             att["by_file"][0]["deselected"] += 2
+    elif mutate == "cross_check_against_a_red_log":
+        # Only the log's verdict is forged; the arithmetic is left intact, so this case cannot
+        # hide behind the residual branch.
+        m["gate_run_cross_check"]["log_verdict"] = "red"
+    elif mutate == "_no_such_mutation_sentinel":  # unreachable: keeps the chain shape explicit
+        raise AssertionError("sentinel")
     elif mutate in ("drop_the_residual_explanation", "residual_with_no_named_cause",
-                    "break_the_residual_decomposition"):
+                    "break_the_residual_decomposition",
+                    "launder_a_cross_tree_zero_as_certification", "drop_the_cross_check_status"):
         # Force a cross-tree residual, then remove the thing that makes it accountable.
         m["reconciliation"]["run_summary_items"] += 7
         m["reconciliation"]["residual"] = (
             m["reconciliation"]["run_summary_items"] - m["reconciliation"]["expected_run_items"])
         m["reconciliation"]["log_certifies_current_tree"] = False
-        # rebuild_explanation is a copy that always exists, because a filed census with a zero
+        # expl is a copy that always exists, because a filed census with a zero
         # residual legitimately has no explanation at all and the mutation must still be able to
         # invent one.
         expl = dict(m.get("residual_explanation") or {})
@@ -220,12 +272,40 @@ def test_census_checker_fails_when_the_arithmetic_is_wrong(mutate, expect_substr
             if mutate == "residual_with_no_named_cause":
                 expl["changed_test_paths"] = {"status": 0, "added": [], "removed": [],
                                               "modified": []}
-            else:  # break_the_residual_decomposition
+                # Supply a decomposition that closes. Without it the checker reports the
+                # decomposition problem and stops, so this case would test a different branch
+                # than the one it claims to test -- a falsification that falsifies nothing.
+                gap = m["reconciliation"]["residual"]
+                expl["decomposition"] = {
+                    "input_dependent_gap_clean_checkout_vs_run": gap,
+                    "added_selected_nodeids_since_certified_commit": 0,
+                    "module_level_skip_change": 0,
+                    "identity_holds": True,
+                }
+            elif mutate == "break_the_residual_decomposition":
                 dec = dict(expl.get("decomposition") or {})
                 dec["identity_holds"] = False
                 dec["module_level_skip_change"] = int(dec.get("module_level_skip_change", 0)) + 9
                 expl["decomposition"] = dec
+            elif mutate == "launder_a_cross_tree_zero_as_certification":
+                # The arithmetic is untouched; only the LABEL on the comparison is forged: a log
+                # that ran on another tree is described as certifying this one.
+                rec = m["reconciliation"]
+                rec["log_certifies_current_tree"] = False
+                rec["cross_check_status"] = "log certifies this exact tree"
+            elif mutate == "drop_the_cross_check_status":
+                m["reconciliation"]["cross_check_status"] = ""
+            else:
+                raise AssertionError(
+                    f"mutation {mutate!r} is in the parametrize table but has no body: it would "
+                    "fabricate nothing and the falsification would test nothing")
             m["residual_explanation"] = expl
+
+    else:
+        raise AssertionError(
+            f"mutation {mutate!r} appears in the parametrize table but has no body: it fabricates "
+            "nothing, so the falsification would prove nothing (last round's defect, reproduced "
+            "here rather than rediscovered)")
 
     problems = census._problems(m)
     assert problems, f"the checker accepted a fabricated census ({mutate})"

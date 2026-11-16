@@ -2113,3 +2113,47 @@ the recorded worktree figures exactly (3773 nodeids, 3733 selected, 40 deselecte
 the tool itself: `pytest_census_scan.py` accepted an unknown `--worktree` flag and silently printed the current-tree
 census as if the cross-check had happened. Unknown flags now exit 2 — a tool that reports a measurement it never took is
 the F36 class again, one layer down.
+
+## F44 — the census guard asserted a shape instead of a property, and read the log header's tree as its commit (FOUND AND FIXED 2026-11-16)
+
+The strict certification run on `d8f1845` went red on two tests, both inside the census guard
+written earlier the same day (`docs/evidence/gate_run_vendoring_census_strict_red_20261116.txt`:
+2 failed / 3779 passed / 25 skipped / 40 deselected in 1462.03 s; all fourteen other layers green).
+Nothing was wrong with the suite.
+
+**Defect 1 — an assertion on the presence of a field.** The guard said, in effect: *if the gate log
+certifies a different tree, a `residual_explanation` must exist*. On `d8f1845` the cross-tree residual
+was exactly **0**, so there was no gap and the scanner correctly filed no explanation — and the guard
+failed a census that had nothing wrong with it. A zero gap needs no explanation; what must hold is that
+the zero is **labelled** as a comparison against a log that ran elsewhere. Now: residual 0 cross-tree
+⇒ a gate log must be named and the status string must not claim it certifies this tree; residual non-zero
+cross-tree ⇒ the full measured decomposition with a named cause, unchanged.
+
+**Defect 2 — a parser that could not tell a commit from a tree.** `_log_commit` scanned the header for
+40-hex tokens *in reverse* and accepted the first one where `git rev-parse --verify <tok>^{tree}`
+succeeded. A gate log header carries `Commit under certification:` and `Tree under certification:` on
+adjacent lines, and **a tree object peels to itself**, so the Tree line was returned as the commit.
+Every consumer downstream silently degraded: `git diff <tree-sha> HEAD` yields nothing, so the residual
+explanation was never built and a real gap was filed as "residual −4 is unexplained". Fixed by typing the
+token (`git cat-file -t`) and requiring `commit`, scanning in header order, and adding a test that runs
+the parser on the live log header and asserts the returned token is commit-typed while the tree token is
+not.
+
+**Defect 3 — a falsification case that fabricated nothing.** A mutation added to the parametrize table
+had no body in the mutation chain, so the fabricated census was identical to the real one: the checker
+correctly reported nothing and the test failed with "the checker accepted a fabricated census". This is
+the same defect as last round's never-executed mutation case, found the same way (by running it). The
+chain now ends in `else: raise AssertionError("mutation ... has no body")`, so an unimplemented case is
+loud instead of silently vacuous.
+
+**Three rules the fixes added.** (i) A census may only cross-check against a **green** gate log: the
+scanner prefers one, and a red one is itself a checker failure — a failed run's pytest summary is
+well-formed and would otherwise become the suite's ground truth. (ii) The `cross_check_status` string is
+a claim about the comparison and must agree with the flag it describes; laundering a cross-tree zero as
+a certification is caught, and both rules have mutation cases. (iii) Unknown CLI flags exit 2 (see the
+F37-close note): a tool that reports a measurement it never took is F36's class one layer down.
+
+**Live census state after the fixes** (`d8f1845` + these guard fixes): 3848 nodeids collected, 3808
+selected by the gate filter, 40 deselected, 3 module-level collection skips, predicting 3811 run items;
+the green log reports 3806; residual −5, cross-tree, explained by its decomposition. The guard suite for
+this file: **20 passed**.
