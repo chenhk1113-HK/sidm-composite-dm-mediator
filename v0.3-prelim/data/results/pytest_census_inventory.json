@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-16T08:51:37Z",
-  "git_tree_sha": "d1497be565e54089e5886927f8b67e90fa0fb86f",
+  "generated_at": "2026-11-16T09:03:44Z",
+  "git_tree_sha": "9c77d559c9dbc4e91da73aad0f0aebac2fce97d6",
   "selection": {
     "target": "v0.3-prelim/tests/",
     "k_filter": "not T132 and not T131 and not T133 and not T134 and not T135 and not T220"
@@ -97,7 +97,8 @@
       "added": [],
       "removed": [],
       "modified": [
-        "scripts/pytest_census_scan.py"
+        "scripts/pytest_census_scan.py",
+        "v0.3-prelim/tests/test_gate_pytest_census.py"
       ]
     },
     "input_dependent_gap": 11,
