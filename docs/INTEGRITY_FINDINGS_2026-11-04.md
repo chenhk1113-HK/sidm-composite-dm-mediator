@@ -2158,7 +2158,7 @@ selected by the gate filter, 40 deselected, 3 module-level collection skips, pre
 the green log reports 3806; residual −5, cross-tree, explained by its decomposition. The guard suite for
 this file: **20 passed**.
 
-## F45 — an archived gitignored script carried a live GitHub token into tracked scope (FOUND 2026-11-16, REMEDIATED IN-TREE, HISTORY RESIDUE DISCLOSED)
+## F45 — an archived gitignored script carried a live GitHub token into tracked scope (FOUND 2026-11-16, REMEDIATED IN-TREE, PUBLISHED 2026-11-17 WITH THE RESIDUE STILL DISCLOSED)
 
 **What happened.** The F41 migration moved twenty uncited scripts from `outputs/` (gitignored
 wholesale) into `archive/outputs_scripts_2026-11/` (tracked) in commit `6d705a4`. One of them,
@@ -2199,14 +2199,46 @@ incident being closed as "GitHub caught it".
   readable by anything with access to this working copy.
 
 **Residue disclosed, deliberately not rewritten.** The token still exists in the blobs of the
-commits created in this round (`6d705a4` onward), none of which were pushed. Erasing it from history
-means rewriting those commit shas, and every certification citation in this repository names them by
-sha: the gate log headers (`Commit under certification:`), the census guard's
+commits created in this round (`6d705a4` onward). Erasing it from history means rewriting those
+commit shas, and every certification citation in this repository names them by sha: the gate log
+headers (`Commit under certification:`), the census guard's
 `test_the_certifying_gate_log_names_a_resolvable_commit`, the CHANGELOG round entries and the
 front-page certification chains. Rewriting would break the audit trail it is meant to protect, so the
-residue is recorded here and the decision was put to the owner: revoke then allow the push through
-GitHub's per-push override (a dead credential stays in history), or rewrite the unpushed commits and
-re-issue every citation, or keep the round local. No option was taken silently.
+residue was recorded here and the decision was put to the owner: revoke then allow the push through
+GitHub's per-push override (a dead credential stays in history), or rewrite the commits and re-issue
+every citation, or keep the round local. No option was taken silently.
+
+**Resolution (2026-11-17). The owner chose revoke-then-override.** The credential was revoked and
+replaced outside this repository, and the owner opened the override URL GitHub returned on the
+refused push, in their own browser, as the same account that performed the push. No credential was
+handled by the agent at any point: the agent never read the literal into a command, never wrote one
+to any file here, and never stored one in memory. Push authentication for this repository is an SSH
+key, not a token, which is why the credential was never needed to publish.
+
+- Refused push before the override: `GH013`, one location only — commit `6d705a4`,
+  `archive/outputs_scripts_2026-11/verify_remote.py:4`. GitHub scanned all twelve commits of the
+  round and named that one line; the credential guard's fabricated decoy passed the same scan.
+- Branch push: `78d3317..49379dd`. The `..` form is the proof it was a fast-forward, not a force
+  push, so no branch protection had to be bypassed.
+- Tag push: `[new tag] DataVendoringAndCensus-2026-11-16`.
+- Remote read-back: branch `49379dd026f4d59920b82345896b46add5b85b7b`; tag object
+  `e6a8891e80c7c997644f599cd802cd57695b8584`, peeling to the same commit; `git diff
+  DataVendoringAndCensus-2026-11-16 HEAD` is empty, so the published tree is the certified one.
+- Published README verified against GitHub's own raw copy at the tag: both hash
+  `e625bac667267aeda1b4a725a9c915982cfcc84a13f6d5b704aff567466518ef`.
+- What is now public and what is not: the revoked credential's literal is readable in the blobs
+  reachable from `6d705a4` (it was removed at `9e7ae65`). It cannot be used. Nothing else in this
+  round's history carries a credential-shaped literal.
+- On-disk residue: `outputs/__pycache__/verify_remote.cpython-312.pyc`, the last copy of the literal
+  outside git, was deleted on 2026-11-17. A tracked-tree scan (`git grep -E 'ghp_[A-Za-z0-9]{20,}'`)
+  returns zero matches.
+
+**What this cost, stated plainly.** The cheaper option in GitHub's own guidance — revoke the secret,
+leave the history alone ("that may be sufficient... going through the extra steps to rewrite the
+history may not be warranted") — was taken. The price is permanent: a dead credential is visible to
+anyone who clones this repository, and GitHub keeps cached views of those commits. The alternative
+would have cost 12 new commit shas, 34 re-pointed citations in 7 files, a superseded set of gate logs
+and a fresh 15-layer certification run.
 
 **Rule added.** When a file moves from an ignored scope into tracked scope, its **contents** enter
 review for the first time. A migration of tools must therefore include a credential scan of what is
