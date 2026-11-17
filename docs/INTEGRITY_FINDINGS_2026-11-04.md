@@ -2243,3 +2243,81 @@ and a fresh 15-layer certification run.
 **Rule added.** When a file moves from an ignored scope into tracked scope, its **contents** enter
 review for the first time. A migration of tools must therefore include a credential scan of what is
 being migrated, not only a path audit of where it lives.
+
+## F46 — a parked wall-time estimate was never a measurement, and the thing it describes is a numerical bug (FOUND AND MEASURED 2026-11-17)
+
+**The claim.** `CHANGELOG.md:1284` reads "10⁴ particle run (minor rec #5.4) — wall time 7 days,
+beyond laptop", and the line above parks "Run to 100 Myr (rec #6) — blocked by laptop ceiling". Both
+have been cited as reasons not to do the work since the v18.4x round. **No wall time for any long 10⁴
+run exists anywhere in the repository**: the only two 10⁴ attempts recorded on 2026-09-26 reached
+t = 8.67 Myr and t = 2.46 Myr and died (`v0.3-prelim/docs/T215_KISS_SIDM_CLOUD9_GRAVOTHERMAL_2026-09-26.md:22-23`).
+The 7-day figure is therefore an estimate that was never attached to a run, and it was doing the work
+of a measurement — deciding what the project would not attempt.
+
+**What measurement says (11 configurations, this laptop, WSL2, Julia 1.11.9, one thread; full table
+in `docs/evidence/T215_WALLTIME_LADDER_2026-11-17.md`).**
+
+| fact | measured |
+|---|---|
+| 10⁴ particles, 5 Myr, 11 snapshots | **completed in 205.5 s** |
+| 10⁴ particles, target 20 Myr, 21 snapshots | **assertion at 12.7 Myr after 207.4 s** |
+| 10⁴ particles, target 100 Myr, 101 snapshots | **assertion at the same 12.7 Myr after 134.2 s** |
+| 10⁴ particles, coarse (4–5 Myr) or zero snapshots | survives the assert, costs **258–460 s per simulated Myr** |
+| 3 000 particles, 100 Myr, 21 snapshots | **completed in 3070.6 s (51.2 min)** — upper bound, another run shared the CPU |
+
+**The mechanism, read out of the upstream source rather than inferred.** `KiSS-SIDM`
+`src/DSMC.jl/src/time_step.jl:60-70` asserts, immediately after writing a snapshot, that the current
+time equals the snapshot time just passed — **exact float equality**, `t == snapshot_times[idx_next - 1]`.
+The integrator's time step is adaptive, so a step that lands past a scheduled snapshot time makes the
+equality false and the assertion fires. Two configurations with different snapshot spacing failed at
+the same simulated time (≈12.7 Myr, 13 snapshots written), which is what a state-dependent overshoot
+looks like and not what a wall-clock limit looks like. **This is a fourth numerical failure class in
+KiSS-SIDM v0.0.1**, alongside the three the project already recorded (CURRENT.md:640-644), and it
+supplies the mechanism the 2026-09-26 report could only label "died silently".
+
+**The cost number is not a constant, which is the deeper defect in the original claim.** Wall cost per
+simulated Myr ranged 1–460 s/Myr across configurations of the same N, tracking which `dt` the solver
+settled into (1.7e-3 with sub-Myr snapshot spacing; 1.4e-5–5.0e-5 with coarse or no snapshots). Any
+single-number wall-time estimate for this code, in either direction, is unsupported.
+
+**What replaces the parked items.** "10⁴ run, 7 days" → superseded: at 10⁴ the run meets a
+numerical wall at ≈12.7 Myr in 134–207 s, and the configurations that avoid it need hours-to-days of
+CPU with no guarantee of completion. "Run to 100 Myr, blocked by laptop ceiling" → measured and
+partly closed: it completes at 3 000 particles in 51 min. Extending reach further is the Tier 3 code
+modification the project already named (subcycling, freeze refinement; CURRENT.md:638) plus fixing the
+upstream assert — not a compute purchase and not a surrogate model.
+
+**Also corrected, by the same measurement pass:** a claim in this agent's own working notes that a
+three-step snapshot-count experiment "all passed". The artifacts do not support it — one of those runs
+has an output directory and a start marker, no exit marker and no result row, because it was terminated
+by the operator. It is recorded here as an unsupported note, not a result.
+
+## F47 — "3 000 particles" was ~2 600 particles: every tracked T215 runner samples with replacement (FOUND AND MEASURED 2026-11-17)
+
+**The defect.** 21 tracked T215 runners pick tracers with `idx = sort(rand(rng, 1:n_total, n_tracer))`
+(`t215_safe.jl:62`, `t215_p.jl:43`, `t215_r.jl:39`, …). In Julia that draws **with replacement**.
+Measured on this host at seed 42: 3 000 draws from 10 000 give **2 623 distinct, 377 duplicated**
+(theoretical expectation 2 591.9); 1 000 draws give 947 distinct.
+
+**Size of the consequence.** The headline T215e Poisson error bars (2.88× ± 0.18× at r = 500 pc,
+`CHANGELOG.md:1277`) are understated by √(3000/2623) = **1.070, i.e. ≈7%**; the honest quote is ±0.19×.
+No standing claim changes verdict at that size — T215 is closed as a methods-only contribution with no
+quantitative t_core (CURRENT.md:620) — so the correction is to the disclosure, not to the conclusion.
+The sampling is also multinomial rather than a simple random sample: some initial conditions are
+counted twice, others never.
+
+**The reproducibility half of the finding.** The generator of the headline snapshot series is not in
+the repository. `v0.3-prelim/data/snapshots_t215e/` (11 files), `t215_analyze_t215e.jl` and
+`t215_analyze_v2.jl` are tracked; `git ls-files | grep t215e` finds **no runner**. Whether that
+generator used the with-replacement idiom cannot be established from the repository, so the headline
+series can be re-analysed but **cannot be re-generated**. The 60 Myr run in that round is recorded as
+~10 min of wall time (`v0.3-prelim/docs/archive/t215/T215E_60MYR_BREAKTHROUGH_2026-09-26.md:100`) with
+no script to reproduce it.
+
+**Rules this produces.** (1) A sampling idiom is part of a result's provenance: a run labelled with a
+particle count must state whether that count is distinct particles or draws, and
+`rand(rng, 1:n, k)` must not be used where distinct tracers are intended — use `randperm` or
+`Random.randperm(rng, n)[1:k]`. (2) An artifact that a paper section quotes needs its producer tracked;
+snapshots without a runner are data without a derivation. (3) An estimate quoted with a cost attached
+("7 days", "beyond laptop") is a claim about the machine, and like any other claim it either gets
+measured or gets labelled as an estimate at the moment it is written.
