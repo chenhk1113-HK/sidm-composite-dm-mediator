@@ -47,8 +47,9 @@ message: >-
   Current record (v40.64, saved 2026-11-15): LSB core check shipped as Channel 14
   (NGC 5963 core size, production upper bound) at both 0.2 and 0.1 cm^2/g arms -
   ladder 13 channels, sigma/m_0 0.130 -> 0.089 (0.2 arm) / 0.078 (0.1 arm);
-  15-layer release gate 15/15 PASS on commit d9dd729 tree ac8b6be (pytest 3787 passed /
-  24 skipped / 40 deselected in 1304.03 s, drift 120/120 ALL CLEAR, no leniency flag set, log gate_run_vendoring_census_final_20261116.txt;
+  15-layer release gate 15/15 PASS on commit cbcdba1 tree f4d4584 (pytest 3789 passed /
+  24 skipped / 40 deselected in 1358.85 s, drift 120/120 ALL CLEAR, no leniency flag set, log gate_run_t215_measurement_20261117.txt;
+  previous certification d9dd729 tree ac8b6be at 3787 / 24 / 40 in 1304.03 s, gate_run_vendoring_census_final_20261116.txt;
   the badge re-derivation run on ce7ce4a (3781 / 25 / 40 in 1558.05 s, with the census guard's
   documented T82_README_DRIFT_LENIENT=1 escape) is gate_run_vendoring_census_transition_20261116.txt; the round's two red runs on 6b9c603
   and d8f1845 are filed as gate_run_vendoring_census_20261116.txt and gate_run_vendoring_census_strict_red_20261116.txt; the previous certification is gate_run_f39_bootstrap_20261116.txt;
