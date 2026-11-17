@@ -1853,6 +1853,10 @@
         "host_path_lines": 3
       },
       {
+        "path": "docs/evidence/gate_run_t215_measurement_20261117.txt",
+        "host_path_lines": 3
+      },
+      {
         "path": "docs/evidence/gate_run_vendoring_census_20261116.txt",
         "host_path_lines": 3
       },
@@ -2495,7 +2499,7 @@
     "pinned_source": 3,
     "pinned_exception": 3,
     "historical_frozen_code": 242,
-    "docs_prose": 173,
+    "docs_prose": 174,
     "data_artifact": 75,
     "other": 0
   },
