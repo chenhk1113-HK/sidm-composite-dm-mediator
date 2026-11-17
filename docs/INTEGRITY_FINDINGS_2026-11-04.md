@@ -2321,3 +2321,36 @@ particle count must state whether that count is distinct particles or draws, and
 snapshots without a runner are data without a derivation. (3) An estimate quoted with a cost attached
 ("7 days", "beyond laptop") is a claim about the machine, and like any other claim it either gets
 measured or gets labelled as an estimate at the moment it is written.
+
+## F48 — the certification tag quoted a tree hash typed from notes instead of read back from git (FOUND 2026-11-17, DISCLOSED; the published tag was deliberately NOT rewritten)
+
+**The defect.** The message of the annotated tag `T215WallTimeMeasurementAndLocalDensityReference-2026-11-17`
+(tag object `920a2736369493277dff7dcdfb71925d076c1acb`, pointing at commit `9ed2ab7`) states that the strict
+15-layer gate ran on commit `cbcdba1` "tree `f4d458443b6c5995b5c844990b20d6a974b7127b`". The tree of `cbcdba1` is
+`f4d45844da2d1a2f7bfde6df9a49b5327da982fe`. The hash written into the tag resolves to no object in this repository
+(`git cat-file -t f4d458443b6c5995b5c844990b20d6a974b7127b` → `fatal: git cat-file: could not get object info`,
+exit 128), while the correct one returns `tree` (exit 0).
+
+**What it breaks and what it does not.** The commit sha `cbcdba1`, every count in the same sentence (3789 passed /
+24 skipped / 40 deselected in 1358.85 s, drift 120/120), the census arithmetic, and the tag's target commit are all
+correct. The four front pages quote only the short prefix `f4d4584`, which matches the real tree, and the gate log
+itself carries the correct commit/tree pair on its own header lines. So the damage is confined to one certification
+artifact: a sentence whose identifier cannot be resolved, which is the same failure class as F42 (a log that
+certified no tree) — a citation that was typed rather than read back.
+
+**Why it happened.** The tag message was composed from working notes, and those notes carried a full hash from an
+earlier draft. The value was never read back from `git rev-parse cbcdba1^{tree}` in the same turn as the write, and
+the round was cut and pushed before that was caught.
+
+**Decision taken.** The tag had already been pushed when the error was found. The published ref was left untouched —
+no tag rewrite, no force-push, nothing invalidated for anything that had already fetched it — and the error is
+disclosed here rather than quietly corrected. The corrected text exists locally and can replace the tag message at
+the owner's call.
+
+**Rules this produces.** (1) An object id inside a certification sentence is a citation, and it gets read back with
+`git rev-parse <commit>^{tree}` or `git cat-file -t <hash>` in the same turn it is written — never recalled.
+(2) In prose, prefer the short prefix (`tree f4d4584`) unless the full hash came from the output of the command being
+cited. (3) Open item for a future round, owner-gated: a falsifiable guard that pulls every 40-hex object id out of
+annotated-tag messages and front-page certification sentences and asserts each one resolves via `git cat-file -t` to
+the type the sentence claims. That guard would have caught this one; it changes the pytest census, so it belongs in a
+round that re-runs the gate rather than being bolted onto a closed one.

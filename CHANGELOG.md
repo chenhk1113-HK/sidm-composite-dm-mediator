@@ -18,6 +18,15 @@
 
 **Verification.** Before certification: `python -m py_compile` clean on both files that received provenance comments; registry §7.13, the KB index and `download_papers.sh` each checked to contain the new entry; the CG-16 inventory regenerated after staging (`docs_prose` 172 → 173) and `--check` passes; the six doc-touching test files pass 54 / 1 skipped and the quick release gate passes 99 / 1 skipped. Certification: the full 15-layer gate ran on `cbcdba1` (tree `f4d4584`) with `T82_README_DRIFT_LENIENT` unset and no other relaxation — **15/15 PASS, pytest 3789 passed / 24 skipped / 40 deselected in 1358.85 s, drift 120/120 ALL CLEAR**, log `docs/evidence/gate_run_t215_measurement_20261117.txt`. No test file was added or edited by this round, so the badge triple moved 3787 → 3789 for one traceable reason: the two credential-shape tests committed at `49379dd` postdate the previous certified commit. The census reconciles on the certified tree with **residual 0** (3850 nodeids collected, 3810 selected, 40 deselected, 3 module-level skips → 3813 predicted, 3813 measured). The front pages were re-pointed to this log in the docs-closure commit that follows it; that commit is certified by fast guards rather than by a fresh log, because a log certifies only the tree it ran on.
 
+**Correction found after the push (finding F48, 2026-11-17, disclosed rather than silently fixed).** The annotated
+tag cut for this round quotes the certified tree as `f4d458443b6c5995b5c844990b20d6a974b7127b`; the tree of
+`cbcdba1` is `f4d45844da2d1a2f7bfde6df9a49b5327da982fe`, and the hash in the tag resolves to no object
+(`git cat-file -t` → exit 128). The hash was typed from working notes instead of read back. Every count, the commit
+sha, the census arithmetic and the tag's target are correct, and the front pages use only the short prefix
+`f4d4584`, which matches the real tree. The tag had already been pushed, so the published ref was left untouched and
+the error is recorded in `docs/INTEGRITY_FINDINGS_2026-11-04.md` (F48) instead of rewritten; replacing the tag message
+is the owner's call.
+
 
 
 ## [DataVendoringAndCensus-2026-11-16] - The stream catalog is now inside the repository; 22 scripts were living in gitignored directories; the F37 census closes arithmetically; and the gate log every front page cites had certified no tree at all (F42, new) (no VERSION change)
