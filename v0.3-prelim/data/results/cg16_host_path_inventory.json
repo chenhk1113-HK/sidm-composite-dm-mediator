@@ -1502,7 +1502,7 @@
       },
       {
         "path": "CHANGELOG.md",
-        "host_path_lines": 3
+        "host_path_lines": 4
       },
       {
         "path": "CONTRIBUTING.md",
@@ -1807,6 +1807,10 @@
       {
         "path": "docs/dual_review_5loop/superseded/SIDM_ROUND5_CHANGED_CODE_v1.2_2026-10-26.md",
         "host_path_lines": 1
+      },
+      {
+        "path": "docs/evidence/T215_WALLTIME_LADDER_2026-11-17.md",
+        "host_path_lines": 6
       },
       {
         "path": "docs/evidence/clone_run_53806dd_20261115.txt",
@@ -2491,7 +2495,7 @@
     "pinned_source": 3,
     "pinned_exception": 3,
     "historical_frozen_code": 242,
-    "docs_prose": 172,
+    "docs_prose": 173,
     "data_artifact": 75,
     "other": 0
   },
