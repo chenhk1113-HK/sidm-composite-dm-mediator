@@ -33,6 +33,10 @@ This is a knowledge base for the v19.2-F project's paper references. It is organ
 
 ## Verified papers (full text downloaded + key values verified)
 
+**2026-11-17 — `kaggle.docx` intake (registry §7.13).** 1 paper added, held in `to_verify/`.
+
+- [[2305.13358_lim_2025_normalizing_flows_gaia_dr3|Lim, Putney, Buckley & Shih 2025]] — Mapping Dark Matter in the Milky Way using Normalizing Flows and Gaia DR3, JCAP 01 (2025) 021, DOI 10.1088/1475-7516/2025/01/021. Abstract **and Table 2** read from the local PDF. Source of the local-density band: **0.32 ± 0.18 GeV/cm³ direct at the Sun**, **0.47 ± 0.05 GeV/cm³ only after imposing spherical symmetry** to average 15 points. Gives a citable band for the `rho_sun = 0.4 GeV/cm³` assumption this repo uses uncited (`t196_v18_lz_event_rate.py:68`, `dampe_cre_forward_model.py:105`). **Not a SIDM reference:** `self interacting`, `SIDM` and `stream` each occur 0 times in the PDF text, and the title is "…and Gaia DR3", not "…and Galactic Streams".
+
 **2026-11-13 — LSB core-check intake (registry §7.12).** 2 papers added, 1 promoted to full-text verified.
 
 - [[astro-ph_0506345_sanchezsalcedo_2005_ngc5963|Sánchez-Salcedo, Melnick & Vega 2005]] — Dark matter in NGC 5963, ApJ 626, 173. **Full text read from the downloaded PDF.** Source of the usable LSB bound: `sigma_0 <~ 0.2 cm^2 g^-1` at 95% CL (`<~0.1` tighter fit, `<~0.08` from the core-collapse / halo-lifetime test), quoted at **v_0 = 100 km/s — the same V_REF convention this project uses**. Implemented as `loglike_lsb_ngc5963_core()`.

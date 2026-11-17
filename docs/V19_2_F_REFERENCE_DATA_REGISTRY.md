@@ -843,3 +843,26 @@ Applying these requires paper edits (reference list plus the sentences that name
 3. `2403.11403` has no journal reference at all — label as a preprint if used.
 4. **CLOSED 2026-11-09:** see D6 — the NFW 1996 mean-vs-critical convention claim was searched against the 1996 text, found unsupported, and dropped. Nothing in the paper needs it.
 5. Numbers quoted from `9508025_nfw_1996` are abstract-level only.
+
+## 7.13 LOCAL DARK MATTER DENSITY REFERENCE (2026-11-17 — the user's "kaggle.docx", option 4)
+
+KB entry: `docs/papers/to_verify/2305.13358_lim_2025_normalizing_flows_gaia_dr3.md` (arXiv:2305.13358v3, JCAP 01 (2025) 021, Lim, Putney, Buckley & Shih). PDF downloaded, 4,792,852 bytes, sha256 `91cbb702…d37e`.
+
+### Canonical numbers (read from Table 2 of the local PDF)
+
+| Quantity | Value | Source | Status |
+|---|---|---|---|
+| ρ_DM at the Solar location, **direct/unaveraged** | **0.32 ± 0.18 GeV/cm³** (= 0.83 ± 0.47 × 10⁻² M☉ pc⁻³) | Table 2 | VERIFIED (read from PDF) |
+| ρ_DM averaged at the Solar radius, **spherical symmetry imposed** | **0.47 ± 0.05 GeV/cm³** (= 1.23 ± 0.13 × 10⁻² M☉ pc⁻³) | Abstract; §1; Table 2 | VERIFIED (read from PDF) |
+| ρ_total / ρ_b at the Solar location | 2.34 ± 0.08 / 2.03 ± 0.16 GeV/cm³ | Table 2 | VERIFIED (read from PDF) |
+| Consistency of the 15 independent Solar-radius measurements | χ² = 1.38 (consistent with constant) | Table 2 caption + text | VERIFIED |
+| Repo unit-conversion cross-check | 1 M☉ pc⁻³ = 38.01 GeV cm⁻³ → 1.23e-2 → 0.4675 ≈ 0.47 ✓; 0.83e-2 → 0.3155 ≈ 0.32 ✓ | computed 2026-11-17 | VERIFIED (internal consistency of the paper's two columns) |
+
+### Finding recorded this round — `ρ_⊙ = 0.4 GeV/cm³` is used uncited
+
+`v0.3-prelim/code/t196_v18_lz_event_rate.py:68` and `v0.3-prelim/code/dampe_cre_forward_model.py:105` both set `ρ_⊙ = 0.4 GeV/cm³` labelled "standard value" with **no reference**. arXiv:2305.13358 supplies a citable modern band, and 0.4 lies inside **both** published values. **No value was changed and no channel was re-run** — a switch to 0.47 would scale direct-detection rates by +18% (rate ∝ ρ_DM) and requires a physics-change approval, which was not given.
+
+### Two citation rules set by this intake
+
+1. **For a Sun-local rate, cite 0.32 ± 0.18, not 0.47 ± 0.05.** The 0.47 is only obtained after imposing spherical symmetry to average 15 measurements — an assumption the authors flag, and their own text says the systematic errors on the MAF-derived accelerations are "too large to draw confident conclusions".
+2. **This paper is NOT a SIDM reference.** Text search of the downloaded PDF: `self interacting` 0, `self interaction` 0, `SIDM` 0, `stream` 0. It constrains the Milky Way mass density under collisionless equilibrium. It provides no σ/m constraint, uses no stellar streams, and its title is "…and Gaia DR3" — the "…and Galactic Streams" title given in `kaggle.docx` is a citation error.

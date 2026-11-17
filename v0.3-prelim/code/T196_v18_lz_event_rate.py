@@ -65,6 +65,10 @@ GeV_to_g = 1.602e-24
 M_target_GeV = M_active / GeV_to_g  # in GeV
 
 # rho_DM
+# Assumed local dark-matter density; not derived in this script. Provenance added 2026-11-17:
+# registry section 7.13 records arXiv:2305.13358 (Lim+ 2025, JCAP 01 021) measuring
+# 0.32 +/- 0.18 GeV/cm^3 directly at the Solar location and 0.47 +/- 0.05 GeV/cm^3 averaged
+# over the Solar radius. 0.4 lies inside both intervals; neither is used as an input here.
 rho_DM = 0.4  # GeV/cm³
 
 # Form factor (LZ low-q regime: F² ≈ 1)

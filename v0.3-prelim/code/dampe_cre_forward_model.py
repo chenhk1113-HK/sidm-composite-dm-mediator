@@ -102,6 +102,11 @@ from dampe_cre_spectrum import (
 
 
 # Physical constants
+# RHO_SUN: assumed local dark-matter density, not derived here. Provenance added 2026-11-17:
+# registry section 7.13 records arXiv:2305.13358 (Lim+ 2025, JCAP 01 021) — 0.32 +/- 0.18 GeV/cm^3
+# direct at the Solar location, 0.47 +/- 0.05 GeV/cm^3 averaged over the Solar radius with spherical
+# symmetry imposed. 0.4 lies inside both intervals; the forward model is linear in RHO_SUN, so the
+# direct measurement would scale this model's rate by 0.80 and the averaged one by 1.18.
 RHO_SUN_GEV_PER_CM3 = 0.4           # Local dark-matter density [GeV/cm³]
 C_CM_PER_S = 2.998e10               # Speed of light [cm/s]
 ME_GEV = 0.000511                   # Electron mass [GeV] (for kinematic checks)

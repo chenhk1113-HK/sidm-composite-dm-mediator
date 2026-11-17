@@ -119,6 +119,22 @@ for pair in "2605.05588|2605.05588_kitazawa_2026_lsb_cores.pdf" "2509.24270|2509
   fi
 done
 
+# --- 2026-11-17 (option-4 intake from kaggle.docx): local DM density reference ---
+# Cited-candidate only. Gives a citable band for the uncited rho_sun = 0.4 GeV/cm^3
+# assumption in t196_v18_lz_event_rate.py:68 and dampe_cre_forward_model.py:105.
+# No SIDM content (self-interacting/SIDM: 0 occurrences in the PDF text).
+cd "$ROOT/docs/papers/to_verify"
+for pair in "2305.13358|2305.13358_lim_2025_normalizing_flows_gaia_dr3.pdf"; do
+  url_id="${pair%%|*}"; out="${pair##*|}"
+  if [ -f "$out" ]; then
+    echo "  [skip] $out already exists"
+  else
+    curl -sL "https://arxiv.org/pdf/${url_id}" -o "$out"
+    echo "  Downloaded ${url_id} -> $out ($(stat -c%s "$out" 2>/dev/null || stat -f%z "$out") bytes)"
+  fi
+done
+cd "$ROOT"
+
 echo ""
 echo "=== Done ==="
 ls -la "$ROOT/docs/papers/verified/"*.pdf "$ROOT/docs/papers/to_verify/"*.pdf 2>&1 | wc -l
