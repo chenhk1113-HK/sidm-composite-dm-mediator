@@ -10,11 +10,13 @@
 
 **4. Two stale statements corrected in place, in the same pass.** F48's heading said the published tag "was deliberately NOT rewritten" — it was re-cut on the owner's order, at 2026-11-18 00:27 +0800 in commit `9b81620` — and its decision paragraph dated that execution 2026-11-17, which is the day the decision was taken, not the minute it landed. F48's rule (3) is now marked closed by F49. A date that is off by a day in a certification record is the same failure class as a hash typed from notes: a citation written from memory instead of read back.
 
-**5. Census effect, stated before it happens.** 21 test functions, selected by the gate filter as 34 collected
-instances (measured: selected nodeids 3797 → 3831 between `cbcdba1` and this tree), which moves the badge triple to
-the run that certifies this tree; the badge and the certification lines on the front pages are re-pointed by the
-evidence commit that files that run's log, because a log certifies only the tree it ran on. Full record in
-`docs/INTEGRITY_FINDINGS_2026-11-04.md` (F49, and F48's closed open item).
+**5. Census effect, measured rather than predicted.** The guard adds 21 test functions, collected as 21 items:
+selected nodeids measured 3810 → 3831 on the working copy, and the gate run on this tree measures **3810 passed / 24
+skipped / 40 deselected** in 1290.99 s against 3831 selected + 3 module-level skips predicted — residual **0**, log
+certifying this exact tree. An earlier draft of this entry and of F49 stated "34 collected instances", read from the
+census tool's detached-worktree cross-check at `cbcdba1`, which sits 13 items below the working copy because a clean
+checkout lacks the gitignored gate inputs. Corrected against the direct measurement, and disclosed here instead of
+silently rewritten (see F49's cost paragraph).
 
 ## [T215WallTimeMeasurementAndLocalDensityReference-2026-11-17] - A parked "7 days, beyond laptop" wall-time estimate was measured and replaced by a named upstream numerical bug; and every T215 runner turned out to sample its particles with replacement (F46, F47) (no VERSION change)
 

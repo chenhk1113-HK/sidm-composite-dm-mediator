@@ -2413,10 +2413,17 @@ messages, fewer than 3 gate logs, fewer than all 6 front pages, or fewer than 20
 that at least one real tag cites a tree and at least one real "tree of … is …" claim exists. A guard whose pattern
 cannot match its artifact self-skips and reports nothing — that is F36, and it is what these assertions are for.
 
-**Cost, stated.** 21 test functions, which the gate's `-k` filter selects as **34 collected instances** (the mutation
-and exemption cases are parametrized): selected nodeids measured 3797 → 3831 between the certified tree `cbcdba1`
-and this one, and the census tool decomposes the −21 gap to the log's 3813 run items exactly (input-dependent gap 11
-on a clean checkout − 34 added selected + 2 skip change). The guard shells out to git about 150 times — one
-`git cat-file --batch-check` call resolves every cited object type, plus one `git cat-file tag` per annotated tag —
-and runs in 12 s standalone. A batch output whose line count disagrees with its input falls back to one call per
-token rather than guessing the pairing, because a silently mis-paired census is the defect this file exists to catch.
+**Cost, stated, with one number corrected after measurement.** 21 test functions, collected as **21 items** (the
+mutation and exemption cases loop inside their functions rather than parametrizing): selected nodeids measured
+**3810 → 3831** on the working copy between the certified tree `cbcdba1` and this one, and the gate run measures
+**3810 passed / 24 skipped / 40 deselected** against 3831 + 3 module-level skips predicted, residual **0**. An
+earlier draft of this paragraph claimed 34 added instances; that figure came from the census tool's **detached
+worktree** cross-check at `cbcdba1` (3797 selected), which is 13 lower than the working copy's 3810 because a clean
+checkout lacks the gitignored gate inputs — a contaminated baseline, not a measurement of this tree. The tool's own
+decomposition identity still holds exactly (residual −21 = input-dependent gap 11 − 34 added selected + 2 skip
+change), and the correction is recorded here rather than quietly rewritten: it is F48's rule in miniature — a number
+taken from the nearest available output instead of the one that describes the thing being claimed. The guard shells
+out to git about 150 times — one `git cat-file --batch-check` call resolves every cited object type, plus one
+`git cat-file tag` per annotated tag — and runs in 12 s standalone. A batch output whose line count disagrees with its
+input falls back to one call per token rather than guessing the pairing, because a silently mis-paired census is the
+defect this file exists to catch.

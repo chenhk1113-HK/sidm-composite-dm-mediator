@@ -1838,6 +1838,10 @@
         "host_path_lines": 5
       },
       {
+        "path": "docs/evidence/gate_run_f49_hash_guard_20261118.txt",
+        "host_path_lines": 3
+      },
+      {
         "path": "docs/evidence/gate_run_failed_ast_guard_20261115.txt",
         "host_path_lines": 3
       },
@@ -2500,7 +2504,7 @@
     "pinned_source": 3,
     "pinned_exception": 3,
     "historical_frozen_code": 242,
-    "docs_prose": 174,
+    "docs_prose": 175,
     "data_artifact": 75,
     "other": 0
   },
