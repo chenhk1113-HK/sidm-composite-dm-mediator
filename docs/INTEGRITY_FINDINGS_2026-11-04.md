@@ -2342,10 +2342,16 @@ certified no tree) — a citation that was typed rather than read back.
 earlier draft. The value was never read back from `git rev-parse cbcdba1^{tree}` in the same turn as the write, and
 the round was cut and pushed before that was caught.
 
-**Decision taken.** The tag had already been pushed when the error was found. The published ref was left untouched —
-no tag rewrite, no force-push, nothing invalidated for anything that had already fetched it — and the error is
-disclosed here rather than quietly corrected. The corrected text exists locally and can replace the tag message at
-the owner's call.
+**Decision taken (owner's call, executed 2026-11-17).** The error was found after the tag had already been pushed.
+The owner chose to re-cut the tag rather than leave a wrong hash inside a certification artifact. The annotated tag
+was recreated locally from the corrected text and **only the tag ref** was force-updated on the remote
+(`+ 920a273...25895ed T215WallTimeMeasurementAndLocalDensityReference-2026-11-17 ... (forced update)`). Tag object
+`920a2736369493277dff7dcdfb71925d076c1acb` is superseded by `25895edda7b645b78e83d440f07e82d9d7c8ab02`; the tag's
+target commit `9ed2ab73fdfb6d758cd935624ac529e0b3c6793d` is unchanged and the branch head was not touched by that
+push. Anyone who fetched the tag before the update holds the superseded object and must re-fetch it (`git fetch
+origin tag T215WallTimeMeasurementAndLocalDensityReference-2026-11-17 --force`); the tree hash it should now read is
+`f4d45844da2d1a2f7bfde6df9a49b5327da982fe`. The interim state in which the published ref was deliberately left
+untouched pending the owner's decision is recorded rather than smoothed over.
 
 **Rules this produces.** (1) An object id inside a certification sentence is a citation, and it gets read back with
 `git rev-parse <commit>^{tree}` or `git cat-file -t <hash>` in the same turn it is written — never recalled.

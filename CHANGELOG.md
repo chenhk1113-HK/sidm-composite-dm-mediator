@@ -23,9 +23,10 @@ tag cut for this round quotes the certified tree as `f4d458443b6c5995b5c844990b2
 `cbcdba1` is `f4d45844da2d1a2f7bfde6df9a49b5327da982fe`, and the hash in the tag resolves to no object
 (`git cat-file -t` → exit 128). The hash was typed from working notes instead of read back. Every count, the commit
 sha, the census arithmetic and the tag's target are correct, and the front pages use only the short prefix
-`f4d4584`, which matches the real tree. The tag had already been pushed, so the published ref was left untouched and
-the error is recorded in `docs/INTEGRITY_FINDINGS_2026-11-04.md` (F48) instead of rewritten; replacing the tag message
-is the owner's call.
+`f4d4584`, which matches the real tree. The owner chose to re-cut the tag rather than leave a wrong hash in a
+certification artifact: the annotated tag was recreated and **only the tag ref** was force-updated
+(`+ 920a273...25895ed ... (forced update)`), so tag object `920a273…` is superseded by `25895ed…` at the same target
+commit `9ed2ab7`, and the branch head was not touched. Full record in `docs/INTEGRITY_FINDINGS_2026-11-04.md` (F48).
 
 
 
