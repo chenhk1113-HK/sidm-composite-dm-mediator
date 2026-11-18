@@ -10,7 +10,11 @@
 
 **4. Two stale statements corrected in place, in the same pass.** F48's heading said the published tag "was deliberately NOT rewritten" — it was re-cut on the owner's order, at 2026-11-18 00:27 +0800 in commit `9b81620` — and its decision paragraph dated that execution 2026-11-17, which is the day the decision was taken, not the minute it landed. F48's rule (3) is now marked closed by F49. A date that is off by a day in a certification record is the same failure class as a hash typed from notes: a citation written from memory instead of read back.
 
-**5. Census effect, stated before it happens.** 21 new test items land in the suite, which moves the badge triple to the run that certifies this tree; the badge and the certification lines on the front pages are re-pointed by the evidence commit that files that run's log, because a log certifies only the tree it ran on. Full record in `docs/INTEGRITY_FINDINGS_2026-11-04.md` (F49, and F48's closed open item).
+**5. Census effect, stated before it happens.** 21 test functions, selected by the gate filter as 34 collected
+instances (measured: selected nodeids 3797 → 3831 between `cbcdba1` and this tree), which moves the badge triple to
+the run that certifies this tree; the badge and the certification lines on the front pages are re-pointed by the
+evidence commit that files that run's log, because a log certifies only the tree it ran on. Full record in
+`docs/INTEGRITY_FINDINGS_2026-11-04.md` (F49, and F48's closed open item).
 
 ## [T215WallTimeMeasurementAndLocalDensityReference-2026-11-17] - A parked "7 days, beyond laptop" wall-time estimate was measured and replaced by a named upstream numerical bug; and every T215 runner turned out to sample its particles with replacement (F46, F47) (no VERSION change)
 

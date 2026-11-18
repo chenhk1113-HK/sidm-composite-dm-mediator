@@ -25,8 +25,9 @@ pages state it.
   sentence claims, and to pair (a log's tree line is its commit's tree; a tag citing a tree names a commit whose tree
   it is; a prose "tree of X is Y" states the real pair). Zero violations on this tree. Its mutation cases reproduce
   F48 verbatim and flag it. Two stale statements were corrected in the same pass: F48's heading (the published tag
-  **was** re-cut, 2026-11-18 00:27 +0800, commit `9b81620`) and its decision date. The 21 new test items move the
-  badge to this round's gate run; the certification line below is re-pointed when that run's log is filed.
+  **was** re-cut, 2026-11-18 00:27 +0800, commit `9b81620`) and its decision date. The 21 test functions (34
+  gate-filtered collected instances) move the badge to this round's gate run; the certification line below is
+  re-pointed when that run's log is filed.
 
 * **Save tags:** `v19.2-F-RecordSave-2026-11-15` (annotated, cut 2026-11-15) → `c0adf38`, the tree certified
   green by the full 15-layer gate. `v40.64-LSBChannelRound5-FrontPageRefresh-2026-11-15` → the commit carrying

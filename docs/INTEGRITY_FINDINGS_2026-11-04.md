@@ -2413,8 +2413,10 @@ messages, fewer than 3 gate logs, fewer than all 6 front pages, or fewer than 20
 that at least one real tag cites a tree and at least one real "tree of … is …" claim exists. A guard whose pattern
 cannot match its artifact self-skips and reports nothing — that is F36, and it is what these assertions are for.
 
-**Cost, stated.** 21 new test items, which moves the badge triple to the run that certifies this tree. The guard
-shells out to git about 150 times — one `git cat-file --batch-check` call resolves every cited object type, plus one
-`git cat-file tag` per annotated tag — and runs in 12 s standalone. A batch output whose line count disagrees with
-its input falls back to one call per token rather than guessing the pairing, because a silently mis-paired census is
-the defect this file exists to catch.
+**Cost, stated.** 21 test functions, which the gate's `-k` filter selects as **34 collected instances** (the mutation
+and exemption cases are parametrized): selected nodeids measured 3797 → 3831 between the certified tree `cbcdba1`
+and this one, and the census tool decomposes the −21 gap to the log's 3813 run items exactly (input-dependent gap 11
+on a clean checkout − 34 added selected + 2 skip change). The guard shells out to git about 150 times — one
+`git cat-file --batch-check` call resolves every cited object type, plus one `git cat-file tag` per annotated tag —
+and runs in 12 s standalone. A batch output whose line count disagrees with its input falls back to one call per
+token rather than guessing the pairing, because a silently mis-paired census is the defect this file exists to catch.
