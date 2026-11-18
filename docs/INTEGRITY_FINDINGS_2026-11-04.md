@@ -2322,7 +2322,7 @@ snapshots without a runner are data without a derivation. (3) An estimate quoted
 ("7 days", "beyond laptop") is a claim about the machine, and like any other claim it either gets
 measured or gets labelled as an estimate at the moment it is written.
 
-## F48 — the certification tag quoted a tree hash typed from notes instead of read back from git (FOUND 2026-11-17, DISCLOSED; the published tag was deliberately NOT rewritten)
+## F48 — the certification tag quoted a tree hash typed from notes instead of read back from git (FOUND 2026-11-17, DISCLOSED; the published tag was re-cut on the owner's order, 2026-11-18)
 
 **The defect.** The message of the annotated tag `T215WallTimeMeasurementAndLocalDensityReference-2026-11-17`
 (tag object `920a2736369493277dff7dcdfb71925d076c1acb`, pointing at commit `9ed2ab7`) states that the strict
@@ -2342,7 +2342,8 @@ certified no tree) — a citation that was typed rather than read back.
 earlier draft. The value was never read back from `git rev-parse cbcdba1^{tree}` in the same turn as the write, and
 the round was cut and pushed before that was caught.
 
-**Decision taken (owner's call, executed 2026-11-17).** The error was found after the tag had already been pushed.
+**Decision taken (owner's call 2026-11-17, executed 2026-11-18 00:27 +0800 at commit `9b81620`).** The error was
+found after the tag had already been pushed.
 The owner chose to re-cut the tag rather than leave a wrong hash inside a certification artifact. The annotated tag
 was recreated locally from the corrected text and **only the tag ref** was force-updated on the remote
 (`+ 920a273...25895ed T215WallTimeMeasurementAndLocalDensityReference-2026-11-17 ... (forced update)`). Tag object
@@ -2356,7 +2357,64 @@ untouched pending the owner's decision is recorded rather than smoothed over.
 **Rules this produces.** (1) An object id inside a certification sentence is a citation, and it gets read back with
 `git rev-parse <commit>^{tree}` or `git cat-file -t <hash>` in the same turn it is written — never recalled.
 (2) In prose, prefer the short prefix (`tree f4d4584`) unless the full hash came from the output of the command being
-cited. (3) Open item for a future round, owner-gated: a falsifiable guard that pulls every 40-hex object id out of
-annotated-tag messages and front-page certification sentences and asserts each one resolves via `git cat-file -t` to
-the type the sentence claims. That guard would have caught this one; it changes the pytest census, so it belongs in a
-round that re-runs the gate rather than being bolted onto a closed one.
+cited. (3) Open item for a future round, owner-gated — CLOSED by F49 (2026-11-18, owner order "add the guard and
+rerun full gate"): a falsifiable guard now pulls every 40-hex object id out of annotated-tag messages, filed gate
+logs and front pages and asserts each one resolves via `git cat-file -t` to the type the sentence claims. It caught
+this one when re-run against the original tag sentence (see F49's mutation case).
+
+## F49 — no gate layer ever read a tag message, so the F48 class had no guard (FOUND 2026-11-18, GUARDED)
+
+**What was actually open.** F48 named its own fix and did not build it. The reason the error survived a 15/15 green
+gate is structural: none of the 15 layers opens an annotated tag message. A certification artifact quoting an
+identifier that resolves to no object was therefore outside the certified surface entirely, and every other F42-class
+defect (a log that certified no tree, a parser that read a tree as a commit) sat in the same unguarded class.
+
+**The guard.** `v0.3-prelim/tests/test_certification_hash_citations.py` (21 tests) scans three families of
+certification artifact — every annotated tag message on the branch (126 of them), every filed gate log
+(`docs/evidence/gate_run*.txt`), and the six front pages — and holds three rules:
+
+1. **Resolves.** Every 40-hex token is a git object. One that resolves to nothing is a violation unless the enclosing
+   block (contiguous non-blank lines) shows it is being quoted as an error, or names the external repository it
+   belongs to. The exemption is per block, so an unresolved hash cannot hide in an unrelated certification sentence.
+2. **Right type.** A token introduced by a label — `tree <hash>`, `commit <hash>`, `tag object <hash>`,
+   `blob <hash>` — must resolve to exactly that type. This is F44's parser confusion caught on the citation side.
+3. **Pairs.** A gate log's `Tree under certification:` line must be the tree of its own
+   `Commit under certification:` line. A tag message that cites a tree must name at least one commit whose tree it
+   is (its own target counts). Prose of the form "the tree of `<sha>` is `<sha>`" must state the true pair.
+
+**Exemptions are declared and each is tested, not inferred.** Three are live on this tree. (a) The blocks that
+quote the F48 phantom hash: a block may carry an unresolvable hash only if it says so — it must contain a
+resolution-failure marker (`cat-file`, `no object`, `exit 128`, `wrong`, `erroneous`, …), and a test asserts every
+occurrence of that hash sits in such a block, so the disclosure cannot be copy-pasted into a sentence that relies on
+it. (b) An external pin: the suite records a WIMpy_NREFT commit sha that is a real commit in another repository, and
+the block naming it must also name the repository (`github.com/`, `git+https`, `direct_url.json`). (c) The nine gate
+logs filed before F42 started stamping a commit and tree into the log header, declared as `PRE_F42_GATE_LOGS`;
+a test asserts that declared set equals the measured set of headerless logs in **both** directions, so a new log that
+omits its header goes red and an exemption that no longer matches a real headerless log goes red too.
+
+**Measured on the tree it was written on.** Zero violations across the corpus. Both tree citations that exist in tag
+messages pass rule 3 on the real data: `DataVendoringAndCensus-2026-11-16` cites `tree ac8b6be` and names
+`d9dd729`, whose tree it is; `T215WallTimeMeasurementAndLocalDensityReference-2026-11-17` cites
+`tree f4d45844da2d` and names `cbcdba1`, whose tree it is. All five post-F42 gate logs pair their own commit and
+tree.
+
+**Falsified both ways, including against its own origin.** Mutation cases: the F48 sentence reproduced verbatim (real
+commit sha, phantom tree hash, nothing calling it broken) is flagged `unresolved-citation`, and the corrected
+sentence passes; a real tree labelled `commit` and a real commit labelled `tree` are both flagged
+`type-mismatch`; a real-but-wrong tree in a "tree of `<sha>` is `<sha>`" claim is flagged while the true pair
+passes; a tag citing a tree no named commit owns is flagged while a tag citing its own target's tree passes; a gate
+log whose tree line is not its commit's tree is flagged, and so is one that drops the tree line; a bogus hash in one
+block and a type mismatch in another are both reported, not just the first. A sha256 (64 hex), an md5 (32 hex) and a
+39-hex typo produce no finding at all — the citation pattern requires non-hex on both sides, so a longer hex run is
+skipped whole and cannot be mistaken for a git object id.
+
+**The inert-guard class is blocked by construction.** The corpus test fails if the scan sees fewer than 20 tag
+messages, fewer than 3 gate logs, fewer than all 6 front pages, or fewer than 20 citations; rule 3's branches assert
+that at least one real tag cites a tree and at least one real "tree of … is …" claim exists. A guard whose pattern
+cannot match its artifact self-skips and reports nothing — that is F36, and it is what these assertions are for.
+
+**Cost, stated.** 21 new test items, which moves the badge triple to the run that certifies this tree. The guard
+shells out to git about 150 times — one `git cat-file --batch-check` call resolves every cited object type, plus one
+`git cat-file tag` per annotated tag — and runs in 12 s standalone. A batch output whose line count disagrees with
+its input falls back to one call per token rather than guessing the pairing, because a silently mis-paired census is
+the defect this file exists to catch.

@@ -17,6 +17,17 @@ pages state it.
 
 * **VERSION advanced:** token `v40.64-LSBChannelRound5-FrontPageRefresh-2026-11-15` appended, making this the
   numeric version of record (`v19.2-F-RecordSave-v1.18` and the dated saves no longer head the line).
+* **Round 2026-11-18 (`CertificationHashGuard-2026-11-18`, no VERSION change):** finding F49 closes the structural
+  gap F48 named but did not build. No gate layer reads an annotated tag message, which is why a certification tag
+  quoting an identifier that resolves to no object could sit behind a 15/15 green gate. New guard
+  `v0.3-prelim/tests/test_certification_hash_citations.py` (21 tests) scans 126 annotated tag messages, 14 filed gate
+  logs and 6 front pages and requires every 40-hex citation to resolve via `git cat-file -t`, to match the type the
+  sentence claims, and to pair (a log's tree line is its commit's tree; a tag citing a tree names a commit whose tree
+  it is; a prose "tree of X is Y" states the real pair). Zero violations on this tree. Its mutation cases reproduce
+  F48 verbatim and flag it. Two stale statements were corrected in the same pass: F48's heading (the published tag
+  **was** re-cut, 2026-11-18 00:27 +0800, commit `9b81620`) and its decision date. The 21 new test items move the
+  badge to this round's gate run; the certification line below is re-pointed when that run's log is filed.
+
 * **Save tags:** `v19.2-F-RecordSave-2026-11-15` (annotated, cut 2026-11-15) → `c0adf38`, the tree certified
   green by the full 15-layer gate. `v40.64-LSBChannelRound5-FrontPageRefresh-2026-11-15` → the commit carrying
   this VERSION token, which is also what certifies the current version line as a save point:
